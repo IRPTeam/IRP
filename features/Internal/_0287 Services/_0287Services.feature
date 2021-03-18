@@ -390,7 +390,7 @@ Scenario: _029106 create a Purchase invoice for service and product (based on Pu
 			| ''                                      | 'Receipt'     | '*'         | '300'                  | 'Main Company'   | '$$PurchaseInvoice029106$$' | 'Ferron BP'                 | 'Company Ferron BP' | 'Vendor Ferron, TRY'  | 'TRY'                          | 'en description is empty'      | 'No'                   | ''                             | ''                     |
 			| ''                                      | 'Receipt'     | '*'         | '300'                  | 'Main Company'   | '$$PurchaseInvoice029106$$' | 'Ferron BP'                 | 'Company Ferron BP' | 'Vendor Ferron, TRY'  | 'TRY'                          | 'Local currency'               | 'No'                   | ''                             | ''                     |
 			| ''                                      | 'Receipt'     | '*'         | '300'                  | 'Main Company'   | '$$PurchaseInvoice029106$$' | 'Ferron BP'                 | 'Company Ferron BP' | 'Vendor Ferron, TRY'  | 'TRY'                          | 'TRY'                          | 'No'                   | ''                             | ''                     |
-		Given I open hyperlink "e1cib/list/AccumulationRegister.GoodsInTransitIncoming"
+		Given I open hyperlink "e1cib/list/AccumulationRegister.R4031B_GoodsInTransitIncoming"
 		And "List" table does not contain lines
 			| 'Recorder'                  | 'Item key' |
 			| '$$PurchaseInvoice029106$$' | 'Interner' |

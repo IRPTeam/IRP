@@ -145,62 +145,6 @@ Scenario: _029604 create Unbundling on a product with a specification (specifica
 	And I close all client application windows
 
 
-Scenario: _029607 check Bundling posting (store use Shipment confirmation and Goods receipt) by register GoodsInTransitOutgoing
-	Given I open hyperlink "e1cib/list/AccumulationRegister.GoodsInTransitOutgoing"
-	And "List" table contains lines
-		| 'Quantity' | 'Recorder'              | 'Shipment basis'        | 'Store'    | 'Item key'  |
-		| '2,000'    | '$$Unbundling0029604$$' | '$$Unbundling0029604$$' | 'Store 02' | 'Boots/S-8' |
-	And I close all client application windows
-
-Scenario: _029608 check Bundling posting (store use Shipment confirmation and Goods receipt) by register GoodsInTransitIncoming
-	Given I open hyperlink "e1cib/list/AccumulationRegister.GoodsInTransitIncoming"
-	And "List" table contains lines
-		| 'Quantity' | 'Recorder'              | 'Receipt basis'         | 'Store'    | 'Item key' |
-		| '2,000'    | '$$Unbundling0029604$$' | '$$Unbundling0029604$$' | 'Store 02' | '36/18SD'  |
-		| '2,000'    | '$$Unbundling0029604$$' | '$$Unbundling0029604$$' | 'Store 02' | '37/18SD'  |
-		| '2,000'    | '$$Unbundling0029604$$' | '$$Unbundling0029604$$' | 'Store 02' | '38/18SD'  |
-		| '2,000'    | '$$Unbundling0029604$$' | '$$Unbundling0029604$$' | 'Store 02' | '39/18SD'  |
-	And I close all client application windows
-
-Scenario: _029609 create Goods receipt and Shipment confirmation based on Unbundling
-	Given I open hyperlink "e1cib/list/Document.Unbundling"
-	* Create Goods receipt and Shipment confirmation
-		And I go to line in "List" table
-			| Company      | Item key bundle | Number |
-			| Main Company | Boots/S-8       | 2      |
-		And I click the button named "FormDocumentShipmentConfirmationGenerateShipmentConfirmation"		
-		Then the form attribute named "Company" became equal to "Main Company"
-		And I click the button named "FormPost"
-		And I delete "$$NumberShipmentConfirmation0029609$$" variable
-		And I delete "$$ShipmentConfirmation0029609$$" variable
-		And I save the value of "Number" field as "$$NumberShipmentConfirmation0029609$$"
-		And I save the window as "$$ShipmentConfirmation0029609$$"
-		And I click the button named "FormPostAndClose"
-		And Delay 5
-		And I click the button named "FormDocumentGoodsReceiptGenerateGoodsReceipt"
-		Then the form attribute named "Company" became equal to "Main Company"
-		And I click the button named "FormPost"
-		And I delete "$$NumberGoodsReceipt0029609$$" variable
-		And I delete "$$GoodsReceipt0029609$$" variable
-		And I save the value of "Number" field as "$$NumberGoodsReceipt0029609$$"
-		And I save the window as "$$GoodsReceipt0029609$$"
-		And I click the button named "FormPostAndClose"
-		And Delay 5
-		And I close all client application windows
-	* Check movements
-		Given I open hyperlink "e1cib/list/AccumulationRegister.GoodsInTransitOutgoing"
-		And "List" table contains lines
-			| 'Quantity' | 'Recorder'                        | 'Shipment basis'        | 'Store'    | 'Item key'  |
-			| '2,000'    | '$$ShipmentConfirmation0029609$$' | '$$Unbundling0029604$$' | 'Store 02' | 'Boots/S-8' |
-		And I close all client application windows
-		Given I open hyperlink "e1cib/list/AccumulationRegister.GoodsInTransitIncoming"
-		And "List" table contains lines
-		| 'Quantity' | 'Recorder'                | 'Receipt basis'         | 'Store'    | 'Item key' |
-		| '2,000'    | '$$GoodsReceipt0029609$$' | '$$Unbundling0029604$$' | 'Store 02' | '36/18SD'  |
-		| '2,000'    | '$$GoodsReceipt0029609$$' | '$$Unbundling0029604$$' | 'Store 02' | '37/18SD'  |
-		| '2,000'    | '$$GoodsReceipt0029609$$' | '$$Unbundling0029604$$' | 'Store 02' | '38/18SD'  |
-		| '2,000'    | '$$GoodsReceipt0029609$$' | '$$Unbundling0029604$$' | 'Store 02' | '39/18SD'  |
-		And I close all client application windows
 
 
 Scenario: _029610 create Unbundling (+check movements) for bundl which was created independently

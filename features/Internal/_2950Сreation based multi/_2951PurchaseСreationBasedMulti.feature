@@ -1520,7 +1520,7 @@ Scenario: _090316 create Goods receipt for several Purchase order with different
 		And I save the window as "$$GoodsReceipt0903N146$$"
 	And I click the button named "FormPostAndClose"
 	* Check creation
-		Given I open hyperlink "e1cib/list/AccumulationRegister.GoodsInTransitIncoming"
+		Given I open hyperlink "e1cib/list/AccumulationRegister.R4031B_GoodsInTransitIncoming"
 		And "List" table contains lines
 		| 'Quantity' | 'Receipt basis'       | 'Store'    | 'Item key'  |
 		| '20,000'   | '$$PurchaseOrder0903N146$$' | 'Store 03' | 'M/White'   |
@@ -1683,7 +1683,7 @@ Scenario: _090317 create Goods receipt for several Purchase order with different
 			And I save the window as "$$GoodsReceipt0903N148$$"
 	And I click the button named "FormPostAndClose"
 	* Check creation
-		Given I open hyperlink "e1cib/list/AccumulationRegister.GoodsInTransitIncoming"
+		Given I open hyperlink "e1cib/list/AccumulationRegister.R4031B_GoodsInTransitIncoming"
 		And "List" table contains lines
 		| 'Quantity' | 'Receipt basis'       | 'Store'    | 'Item key'  |
 		| '20,000'   | '$$PurchaseOrder0903N148$$' | 'Store 02' | 'M/White'   |

@@ -3833,13 +3833,13 @@ EndProcedure
 
 Procedure LinkUnlinkDocumentRows(Object, FillingValues) Export
 	
-	// таблицы в которых есть связанные документы (будут очищены при отвязке строки)
+	// Tables with linked documents, will be cleaning on unlink
 	TableNames_LinkedDocuments = GetTableNames_LinkedDocuments();
 	
-	// реквизиты таб. части ItemList котрые хранят данные о связанных документах
+	// ItemList attributes with refs to linked documents
 	AttributeNames_LinkedDocuments = GetAttributeNames_LinkedDocuments();
 	
-	// таблицы которые обновлются при привязке документа (будут заполнены при привязке строки)
+	// Refreshable tables on unlink documents
 	TableNames_Refreshable = GetTableNames_Refreshable();
 	
 	FillingValue = GetFillingValue(FillingValues);

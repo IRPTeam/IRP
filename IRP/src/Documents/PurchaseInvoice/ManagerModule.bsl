@@ -2532,123 +2532,142 @@ EndFunction
 
 Function ItemList()
 	Return
-		"SELECT
-		|	GoodsReceipts.Key,
-		|	GoodsReceipts.GoodsReceipt
-		|INTO GoodsReceipts
-		|FROM
-		|	Document.PurchaseInvoice.GoodsReceipts AS GoodsReceipts
-		|WHERE
-		|	GoodsReceipts.Ref = &Ref
-		|GROUP BY
-		|	GoodsReceipts.Key,
-		|	GoodsReceipts.GoodsReceipt
-		|;
-		|
-		|////////////////////////////////////////////////////////////////////////////////
-		|SELECT
-		|	PurchaseInvoiceItemList.Ref.Date AS Period,
-		|	PurchaseInvoiceItemList.Ref AS Invoice,
-		|	PurchaseInvoiceItemList.Key AS RowKey,
-		|	PurchaseInvoiceItemList.ItemKey,
-		|	PurchaseInvoiceItemList.Ref.Company AS Company,
-		|	PurchaseInvoiceItemList.Ref.Currency,
-		|	PurchaseInvoiceSpecialOffers.Offer AS SpecialOffer,
-		|	PurchaseInvoiceSpecialOffers.Amount AS OffersAmount
-		|INTO OffersInfo
-		|FROM
-		|	Document.PurchaseInvoice.ItemList AS PurchaseInvoiceItemList
-		|		INNER JOIN Document.PurchaseInvoice.SpecialOffers AS PurchaseInvoiceSpecialOffers
-		|		ON PurchaseInvoiceItemList.Key = PurchaseInvoiceSpecialOffers.Key
-		|WHERE
-		|	PurchaseInvoiceItemList.Ref = &Ref
-		|	AND PurchaseInvoiceSpecialOffers.Ref = &Ref
-		|;
-		|
-		|////////////////////////////////////////////////////////////////////////////////
-		|SELECT
-		|	PurchaseInvoiceItemList.Ref.Company AS Company,
-		|	PurchaseInvoiceItemList.Store AS Store,
-		|	PurchaseInvoiceItemList.UseGoodsReceipt AS UseGoodsReceipt,
-		|	NOT PurchaseInvoiceItemList.PurchaseOrder = VALUE(Document.PurchaseOrder.EmptyRef) AS PurchaseOrderExists,
-		|	NOT PurchaseInvoiceItemList.SalesOrder = VALUE(Document.SalesOrder.EmptyRef) AS SalesOrderExists,
-		|	NOT PurchaseInvoiceItemList.InternalSupplyRequest = VALUE(Document.InternalSupplyRequest.EmptyRef) AS
-		|		InternalSupplyRequestExists,
-		|	NOT GoodsReceipts.Key IS NULL AS GoodsReceiptExists,
-		|	PurchaseInvoiceItemList.ItemKey AS ItemKey,
-		|	PurchaseInvoiceItemList.PurchaseOrder AS PurchaseOrder,
-		|	PurchaseInvoiceItemList.SalesOrder AS SalesOrder,
-		|	PurchaseInvoiceItemList.InternalSupplyRequest,
-		|	PurchaseInvoiceItemList.Ref AS Invoice,
-		|	PurchaseInvoiceItemList.Quantity AS UnitQuantity,
-		|	PurchaseInvoiceItemList.QuantityInBaseUnit AS Quantity,
-		|	PurchaseInvoiceItemList.TotalAmount AS Amount,
-		|	PurchaseInvoiceItemList.Ref.Partner AS Partner,
-		|	PurchaseInvoiceItemList.Ref.LegalName AS LegalName,
-		|	CASE
-		|		WHEN PurchaseInvoiceItemList.Ref.Agreement.Kind = VALUE(Enum.AgreementKinds.Regular)
-		|		AND PurchaseInvoiceItemList.Ref.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByStandardAgreement)
-		|			THEN PurchaseInvoiceItemList.Ref.Agreement.StandardAgreement
-		|		ELSE PurchaseInvoiceItemList.Ref.Agreement
-		|	END AS Agreement,
-		|	CASE
-		|		WHEN PurchaseInvoiceItemList.Ref.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
-		|			THEN PurchaseInvoiceItemList.Ref
-		|		ELSE UNDEFINED
-		|	END AS BasisDocument,
-		|	ISNULL(PurchaseInvoiceItemList.Ref.Currency, VALUE(Catalog.Currencies.EmptyRef)) AS Currency,
-		|	PurchaseInvoiceItemList.Unit AS Unit,
-		|	PurchaseInvoiceItemList.ItemKey.Item AS Item,
-		|	PurchaseInvoiceItemList.Ref.Date AS Period,
-		|	PurchaseInvoiceItemList.Key AS RowKey,
-		|	PurchaseInvoiceItemList.AdditionalAnalytic AS AdditionalAnalytic,
-		|	PurchaseInvoiceItemList.BusinessUnit AS BusinessUnit,
-		|	PurchaseInvoiceItemList.ExpenseType AS ExpenseType,
-		|	PurchaseInvoiceItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS IsService,
-		|	PurchaseInvoiceItemList.DeliveryDate AS DeliveryDate,
-		|	PurchaseInvoiceItemList.NetAmount AS NetAmount,
-		|	GoodsReceipts.GoodsReceipt
-		|INTO ItemList
-		|FROM
-		|	Document.PurchaseInvoice.ItemList AS PurchaseInvoiceItemList
-		|		LEFT JOIN GoodsReceipts AS GoodsReceipts
-		|		ON PurchaseInvoiceItemList.Key = GoodsReceipts.Key
-		|WHERE
-		|	PurchaseInvoiceItemList.Ref = &Ref
-		|;
-		|
-		|////////////////////////////////////////////////////////////////////////////////
-		|SELECT
-		|	PurchaseInvoiceGoodsReceipts.Key,
-		|	PurchaseInvoiceGoodsReceipts.GoodsReceipt,
-		|	PurchaseInvoiceGoodsReceipts.Quantity
-		|INTO GoodReceiptInfo
-		|FROM
-		|	Document.PurchaseInvoice.GoodsReceipts AS PurchaseInvoiceGoodsReceipts
-		|WHERE
-		|	PurchaseInvoiceGoodsReceipts.Ref = &Ref
-		|;
-		|
-		|////////////////////////////////////////////////////////////////////////////////
-		|SELECT
-		|	PurchaseInvoiceTaxList.Ref.Date AS Period,
-		|	PurchaseInvoiceTaxList.Ref.Company AS Company,
-		|	PurchaseInvoiceTaxList.Tax AS Tax,
-		|	PurchaseInvoiceTaxList.TaxRate AS TaxRate,
-		|	CASE
-		|		WHEN PurchaseInvoiceTaxList.ManualAmount = 0
-		|			THEN PurchaseInvoiceTaxList.Amount
-		|		ELSE PurchaseInvoiceTaxList.ManualAmount
-		|	END AS TaxAmount,
-		|	PurchaseInvoiceItemList.NetAmount AS TaxableAmount
-		|INTO Taxes
-		|FROM
-		|	Document.PurchaseInvoice.ItemList AS PurchaseInvoiceItemList
-		|		LEFT JOIN Document.PurchaseInvoice.TaxList AS PurchaseInvoiceTaxList
-		|		ON PurchaseInvoiceItemList.Key = PurchaseInvoiceTaxList.Key
-		|WHERE
-		|	PurchaseInvoiceItemList.Ref = &Ref
-		|	AND PurchaseInvoiceTaxList.Ref = &Ref";
+	"SELECT
+	|	RowIDInfo.Ref AS Ref,
+	|	RowIDInfo.Key AS Key,
+	|	MAX(RowIDInfo.RowID) AS RowID
+	|INTO TableRowIDInfo
+	|FROM
+	|	Document.PurchaseInvoice.RowIDInfo AS RowIDInfo
+	|WHERE
+	|	RowIDInfo.Ref = &Ref
+	|GROUP BY
+	|	RowIDInfo.Ref,
+	|	RowIDInfo.Key
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	GoodsReceipts.Key,
+	|	GoodsReceipts.GoodsReceipt
+	|INTO GoodsReceipts
+	|FROM
+	|	Document.PurchaseInvoice.GoodsReceipts AS GoodsReceipts
+	|WHERE
+	|	GoodsReceipts.Ref = &Ref
+	|GROUP BY
+	|	GoodsReceipts.Key,
+	|	GoodsReceipts.GoodsReceipt
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	PurchaseInvoiceItemList.Ref.Date AS Period,
+	|	PurchaseInvoiceItemList.Ref AS Invoice,
+	|	TableRowIDInfo.RowID AS RowKey,
+	|	PurchaseInvoiceItemList.ItemKey,
+	|	PurchaseInvoiceItemList.Ref.Company AS Company,
+	|	PurchaseInvoiceItemList.Ref.Currency,
+	|	PurchaseInvoiceSpecialOffers.Offer AS SpecialOffer,
+	|	PurchaseInvoiceSpecialOffers.Amount AS OffersAmount
+	|INTO OffersInfo
+	|FROM
+	|	Document.PurchaseInvoice.ItemList AS PurchaseInvoiceItemList
+	|		INNER JOIN Document.PurchaseInvoice.SpecialOffers AS PurchaseInvoiceSpecialOffers
+	|		ON PurchaseInvoiceItemList.Key = PurchaseInvoiceSpecialOffers.Key
+	|		INNER JOIN TableRowIDInfo AS TableRowIDInfo
+	|		ON PurchaseInvoiceItemList.Key = TableRowIDInfo.Key
+	|WHERE
+	|	PurchaseInvoiceItemList.Ref = &Ref
+	|	AND PurchaseInvoiceSpecialOffers.Ref = &Ref
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	PurchaseInvoiceItemList.Ref.Company AS Company,
+	|	PurchaseInvoiceItemList.Store AS Store,
+	|	PurchaseInvoiceItemList.UseGoodsReceipt AS UseGoodsReceipt,
+	|	NOT PurchaseInvoiceItemList.PurchaseOrder = VALUE(Document.PurchaseOrder.EmptyRef) AS PurchaseOrderExists,
+	|	NOT PurchaseInvoiceItemList.SalesOrder = VALUE(Document.SalesOrder.EmptyRef) AS SalesOrderExists,
+	|	NOT PurchaseInvoiceItemList.InternalSupplyRequest = VALUE(Document.InternalSupplyRequest.EmptyRef) AS
+	|		InternalSupplyRequestExists,
+	|	NOT GoodsReceipts.Key IS NULL AS GoodsReceiptExists,
+	|	PurchaseInvoiceItemList.ItemKey AS ItemKey,
+	|	PurchaseInvoiceItemList.PurchaseOrder AS PurchaseOrder,
+	|	PurchaseInvoiceItemList.SalesOrder AS SalesOrder,
+	|	PurchaseInvoiceItemList.InternalSupplyRequest,
+	|	PurchaseInvoiceItemList.Ref AS Invoice,
+	|	PurchaseInvoiceItemList.Quantity AS UnitQuantity,
+	|	PurchaseInvoiceItemList.QuantityInBaseUnit AS Quantity,
+	|	PurchaseInvoiceItemList.TotalAmount AS Amount,
+	|	PurchaseInvoiceItemList.Ref.Partner AS Partner,
+	|	PurchaseInvoiceItemList.Ref.LegalName AS LegalName,
+	|	CASE
+	|		WHEN PurchaseInvoiceItemList.Ref.Agreement.Kind = VALUE(Enum.AgreementKinds.Regular)
+	|		AND PurchaseInvoiceItemList.Ref.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByStandardAgreement)
+	|			THEN PurchaseInvoiceItemList.Ref.Agreement.StandardAgreement
+	|		ELSE PurchaseInvoiceItemList.Ref.Agreement
+	|	END AS Agreement,
+	|	CASE
+	|		WHEN PurchaseInvoiceItemList.Ref.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
+	|			THEN PurchaseInvoiceItemList.Ref
+	|		ELSE UNDEFINED
+	|	END AS BasisDocument,
+	|	ISNULL(PurchaseInvoiceItemList.Ref.Currency, VALUE(Catalog.Currencies.EmptyRef)) AS Currency,
+	|	PurchaseInvoiceItemList.Unit AS Unit,
+	|	PurchaseInvoiceItemList.ItemKey.Item AS Item,
+	|	PurchaseInvoiceItemList.Ref.Date AS Period,
+	|	TableRowIDInfo.RowID AS RowKey,
+	|	PurchaseInvoiceItemList.AdditionalAnalytic AS AdditionalAnalytic,
+	|	PurchaseInvoiceItemList.BusinessUnit AS BusinessUnit,
+	|	PurchaseInvoiceItemList.ExpenseType AS ExpenseType,
+	|	PurchaseInvoiceItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS IsService,
+	|	PurchaseInvoiceItemList.DeliveryDate AS DeliveryDate,
+	|	PurchaseInvoiceItemList.NetAmount AS NetAmount,
+	|	GoodsReceipts.GoodsReceipt
+	|INTO ItemList
+	|FROM
+	|	Document.PurchaseInvoice.ItemList AS PurchaseInvoiceItemList
+	|		LEFT JOIN GoodsReceipts AS GoodsReceipts
+	|		ON PurchaseInvoiceItemList.Key = GoodsReceipts.Key
+	|		LEFT JOIN TableRowIDInfo AS TableRowIDInfo
+	|		ON PurchaseInvoiceItemList.Key = TableRowIDInfo.Key
+	|WHERE
+	|	PurchaseInvoiceItemList.Ref = &Ref
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	PurchaseInvoiceGoodsReceipts.Key,
+	|	PurchaseInvoiceGoodsReceipts.GoodsReceipt,
+	|	PurchaseInvoiceGoodsReceipts.Quantity
+	|INTO GoodReceiptInfo
+	|FROM
+	|	Document.PurchaseInvoice.GoodsReceipts AS PurchaseInvoiceGoodsReceipts
+	|WHERE
+	|	PurchaseInvoiceGoodsReceipts.Ref = &Ref
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	PurchaseInvoiceTaxList.Ref.Date AS Period,
+	|	PurchaseInvoiceTaxList.Ref.Company AS Company,
+	|	PurchaseInvoiceTaxList.Tax AS Tax,
+	|	PurchaseInvoiceTaxList.TaxRate AS TaxRate,
+	|	CASE
+	|		WHEN PurchaseInvoiceTaxList.ManualAmount = 0
+	|			THEN PurchaseInvoiceTaxList.Amount
+	|		ELSE PurchaseInvoiceTaxList.ManualAmount
+	|	END AS TaxAmount,
+	|	PurchaseInvoiceItemList.NetAmount AS TaxableAmount
+	|INTO Taxes
+	|FROM
+	|	Document.PurchaseInvoice.ItemList AS PurchaseInvoiceItemList
+	|		LEFT JOIN Document.PurchaseInvoice.TaxList AS PurchaseInvoiceTaxList
+	|		ON PurchaseInvoiceItemList.Key = PurchaseInvoiceTaxList.Key
+	|WHERE
+	|	PurchaseInvoiceItemList.Ref = &Ref
+	|	AND PurchaseInvoiceTaxList.Ref = &Ref";
 EndFunction
 
 Function VendorsTransactions()

@@ -968,6 +968,21 @@ EndFunction
 Function ItemList()
 	Return
 		"SELECT
+		|	RowIDInfo.Ref AS Ref,
+		|	RowIDInfo.Key AS Key,
+		|	MAX(RowIDInfo.RowID) AS RowID
+		|INTO TableRowIDInfo
+		|FROM
+		|	Document.GoodsReceipt.RowIDInfo AS RowIDInfo
+		|WHERE
+		|	RowIDInfo.Ref = &Ref
+		|GROUP BY
+		|	RowIDInfo.Ref,
+		|	RowIDInfo.Key
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
 		|	ItemList.Ref.Company AS Company,
 		|	ItemList.Store AS Store,
 		|	ItemList.ItemKey AS ItemKey,
@@ -977,31 +992,36 @@ Function ItemList()
 		|	ItemList.Unit,
 		|	ItemList.Ref.Date AS Period,
 		|	ItemList.Ref AS GoodsReceipt,
-		|	ItemList.Key AS RowKey,
+		|	TableRowIDInfo.RowID AS RowKey,
 		|	ItemList.SalesOrder AS SalesOrder,
-		|	NOT ItemList.SalesOrder = Value(Document.SalesOrder.EmptyRef) AS SalesOrderExists,
+		|	NOT ItemList.SalesOrder = VALUE(Document.SalesOrder.EmptyRef) AS SalesOrderExists,
 		|	ItemList.SalesInvoice AS SalesInvoice,
-		|	NOT ItemList.SalesInvoice = Value(Document.SalesInvoice.EmptyRef) AS SalesInvoiceExists,
+		|	NOT ItemList.SalesInvoice = VALUE(Document.SalesInvoice.EmptyRef) AS SalesInvoiceExists,
 		|	ItemList.PurchaseOrder AS PurchaseOrder,
-		|	NOT ItemList.PurchaseOrder = Value(Document.PurchaseOrder.EmptyRef) AS PurchaseOrderExists,
+		|	NOT ItemList.PurchaseOrder = VALUE(Document.PurchaseOrder.EmptyRef) AS PurchaseOrderExists,
 		|	ItemList.PurchaseInvoice AS PurchaseInvoice,
-		|	NOT ItemList.PurchaseInvoice = Value(Document.PurchaseInvoice.EmptyRef) AS PurchaseInvoiceExists,
+		|	NOT ItemList.PurchaseInvoice = VALUE(Document.PurchaseInvoice.EmptyRef) AS PurchaseInvoiceExists,
 		|	ItemList.InternalSupplyRequest AS InternalSupplyRequest,
-		|	NOT ItemList.InternalSupplyRequest = Value(Document.InternalSupplyRequest.EmptyRef) AS InternalSupplyRequestExists,
+		|	NOT ItemList.InternalSupplyRequest = VALUE(Document.InternalSupplyRequest.EmptyRef) AS InternalSupplyRequestExists,
 		|	ItemList.InventoryTransferOrder AS InventoryTransferOrder,
-		|	NOT ItemList.InventoryTransferOrder = Value(Document.InventoryTransferOrder.EmptyRef) AS InventoryTransferOrderExists,
+		|	NOT ItemList.InventoryTransferOrder = VALUE(Document.InventoryTransferOrder.EmptyRef) AS
+		|		InventoryTransferOrderExists,
 		|	ItemList.InventoryTransfer AS InventoryTransfer,
-		|	NOT ItemList.InventoryTransfer = Value(Document.InventoryTransfer.EmptyRef) AS InventoryTransferExists,
+		|	NOT ItemList.InventoryTransfer = VALUE(Document.InventoryTransfer.EmptyRef) AS InventoryTransferExists,
 		|	ItemList.SalesReturn AS SalesReturn,
-		|	NOT ItemList.SalesReturn = Value(Document.SalesReturn.EmptyRef) AS SalesReturnExists,
+		|	NOT ItemList.SalesReturn = VALUE(Document.SalesReturn.EmptyRef) AS SalesReturnExists,
 		|	ItemList.SalesReturnOrder AS SalesReturnOrder,
-		|	NOT ItemList.SalesReturnOrder = Value(Document.SalesReturnOrder.EmptyRef) AS SalesReturnOrderExists,
+		|	NOT ItemList.SalesReturnOrder = VALUE(Document.SalesReturnOrder.EmptyRef) AS SalesReturnOrderExists,
 		|	ItemList.Ref.TransactionType = VALUE(Enum.GoodsReceiptTransactionTypes.Purchase) AS IsTransaction_Purchase,
-		|	ItemList.Ref.TransactionType = VALUE(Enum.GoodsReceiptTransactionTypes.ReturnFromCustomer) AS IsTransaction_ReturnFromCustomer,
-		|	ItemList.Ref.TransactionType = VALUE(Enum.GoodsReceiptTransactionTypes.InventoryTransfer) AS IsTransaction_InventoryTransfer
+		|	ItemList.Ref.TransactionType = VALUE(Enum.GoodsReceiptTransactionTypes.ReturnFromCustomer) AS
+		|		IsTransaction_ReturnFromCustomer,
+		|	ItemList.Ref.TransactionType = VALUE(Enum.GoodsReceiptTransactionTypes.InventoryTransfer) AS
+		|		IsTransaction_InventoryTransfer
 		|INTO ItemList
 		|FROM
 		|	Document.GoodsReceipt.ItemList AS ItemList
+		|		LEFT JOIN TableRowIDInfo AS TableRowIDInfo
+		|		ON ItemList.Key = TableRowIDInfo.Key
 		|WHERE
 		|	ItemList.Ref = &Ref";
 EndFunction

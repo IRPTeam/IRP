@@ -1725,7 +1725,7 @@ Scenario:_800048 check remaining stock control when unpost/change Inventory tran
 		And I click the button named "FormPost"
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
-		Then I wait that in user messages the "Line No. [1] [High shoes 39/19SD] R4011B_FreeStocks remaining: 80 . Required: 48 . Lacking: 32 ." substring will appear in 10 seconds
+		Then I wait that in user messages the "Line No. [2] [High shoes 39/19SD] R4011B_FreeStocks remaining: 80 . Required: 48 . Lacking: 32 ." substring will appear in 10 seconds
 	* Delete string and try to post
 		And I go to line in "ItemList" table
 			| 'Item'       | 'Item key' |
@@ -1787,7 +1787,7 @@ Scenario:_800050 check remaining stock control when unpost/change Opening entry
 		And I click the button named "FormPost"
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
-		Then I wait that in user messages the "Line No. [11] [Bag ODS] R4011B_FreeStocks remaining: 20 . Required: 8 . Lacking: 12 ." substring will appear in 10 seconds
+		Then I wait that in user messages the "Line No. [13] [Bag ODS] R4011B_FreeStocks remaining: 20 . Required: 8 . Lacking: 12 ." substring will appear in 10 seconds
 		And I close all client application windows
 	* Trying to delete string in the Opening entry (less than is posted SI)
 		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
@@ -1804,7 +1804,7 @@ Scenario:_800050 check remaining stock control when unpost/change Opening entry
 		And I click the button named "FormPost"
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
-		Then I wait that in user messages the "Line No. [11] [Bag ODS] R4011B_FreeStocks remaining: 20 . Required: 0 . Lacking: 20 ." substring will appear in 10 seconds
+		Then I wait that in user messages the "Line No. [] [Bag ODS] R4011B_FreeStocks remaining: 20 . Required: 0 . Lacking: 20 ." substring will appear in 10 seconds
 		And I close all client application windows
 	* Add one more string and check posting
 		Given I open hyperlink "e1cib/list/Document.OpeningEntry"

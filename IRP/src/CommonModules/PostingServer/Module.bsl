@@ -1000,16 +1000,30 @@ Function GetLineNumberAndRowKeyFromItemList(Ref, FullTableName) Export
 EndFunction
 
 Function GetLineNumberAndItemKeyFromItemList(Ref, FullTableName) Export
+	ArrayOfNameParts = StrSplit(FullTableName, ".");
+	DocumentName = ArrayOfNameParts[1];
+	TabularSectionName = ArrayOfNameParts[2];
+	
+	IsStoreInTabularSection = 
+	Metadata.Documents[DocumentName].TabularSections[TabularSectionName].Attributes.Find("Store") <> Undefined;
+	
 	Query = New Query();
 	Query.Text = 
 	"SELECT
 	|	ItemList.ItemKey AS ItemKey,
+	|	%1
 	|	ItemList.LineNumber AS LineNumber
 	|FROM
-	|	%1 AS ItemList
+	|	%2 AS ItemList
 	|WHERE
 	|	ItemList.Ref = &Ref";
-	Query.Text = StrTemplate(Query.Text, FullTableName);
+	QueryStoreField = "";
+	If IsStoreInTabularSection Then
+		QueryStoreField = "ItemList.Store AS Store,";
+	Else
+		QueryStoreField = "VALUE(Catalog.Stores.EmptyRef) AS Store,"
+	EndIf;
+	Query.Text = StrTemplate(Query.Text, QueryStoreField, FullTableName);
 	Query.SetParameter("Ref", Ref);
 	QueryResult = Query.Execute();
 	ItemList_InDocument = QueryResult.Unload();
@@ -1185,15 +1199,23 @@ Procedure CheckBalance_AfterWrite(Ref, Cancel, Parameters, TableNameWithItemKeys
 		If Unposting Then
 			Records_InDocument = Parameters.Object.RegisterRecords.R4011B_FreeStocks.Unload();
 		Else
-			Records_InDocument = GetQueryTableByName("R4011B_FreeStocks", Parameters, True);
+			Records_InDocument = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "R4011B_FreeStocks");
+			If Records_InDocument = Undefined Then
+				Records_InDocument = GetQueryTableByName("R4011B_FreeStocks", Parameters, True);
+			EndIf;
 		EndIf;	
 		
 		If Not Records_InDocument.Columns.Count() Then
 			Records_InDocument = PostingServer.CreateTable(Metadata.AccumulationRegisters.R4011B_FreeStocks);
 		EndIf;
-				
+		
+		Exists_R4011B_FreeStocks = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "Exists_R4011B_FreeStocks");
+		If Exists_R4011B_FreeStocks = Undefined Then
+			Exists_R4011B_FreeStocks = GetQueryTableByName("Exists_R4011B_FreeStocks", Parameters, True);
+		EndIf;
+		
 		If Not Cancel And Not AccReg.R4011B_FreeStocks.CheckBalance(Ref, LineNumberAndItemKeyFromItemList, Records_InDocument, 
-			                                                    GetQueryTableByName("Exists_R4011B_FreeStocks", Parameters, True), 
+			                                                    Exists_R4011B_FreeStocks, 
 			                                                    RecordType,  Unposting, AddInfo) Then
 			Cancel = True;
 		EndIf;
@@ -1205,15 +1227,23 @@ Procedure CheckBalance_AfterWrite(Ref, Cancel, Parameters, TableNameWithItemKeys
 		If Unposting Then
 			Records_InDocument = Parameters.Object.RegisterRecords.R4010B_ActualStocks.Unload();
 		Else
-			Records_InDocument = GetQueryTableByName("R4010B_ActualStocks", Parameters, True);
+			Records_InDocument = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "R4010B_ActualStocks");
+			If Records_InDocument = Undefined Then
+				Records_InDocument = GetQueryTableByName("R4010B_ActualStocks", Parameters, True);
+			EndIf;
 		EndIf;
 	
 		If Not Records_InDocument.Columns.Count() Then
 			Records_InDocument = PostingServer.CreateTable(Metadata.AccumulationRegisters.R4010B_ActualStocks);
 		EndIf;
-			
+		
+		Exists_R4010B_ActualStocks = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "Exists_R4010B_ActualStocks");
+		If Exists_R4010B_ActualStocks = Undefined Then
+			Exists_R4010B_ActualStocks = GetQueryTableByName("Exists_R4010B_ActualStocks", Parameters, True);
+		EndIf;
+		
 		If Not Cancel And Not AccReg.R4010B_ActualStocks.CheckBalance(Ref, LineNumberAndItemKeyFromItemList, Records_InDocument, 
-			                                                      GetQueryTableByName("R4010B_ActualStocks", Parameters, True), 
+			                                                      Exists_R4010B_ActualStocks, 
 			                                                      RecordType, Unposting, AddInfo) Then
 			Cancel = True;
 		EndIf;
@@ -1272,6 +1302,7 @@ Function CheckBalance_ExecuteQuery(Ref, Parameters, Tables, RecordType, Unpostin
 	Query.Text =
 	"SELECT
 	|	ItemList.ItemKey,
+	|	ItemList.Store,
 	|	ItemList.LineNumber
 	|INTO ItemList
 	|FROM
@@ -1356,6 +1387,7 @@ Function CheckBalance_ExecuteQuery(Ref, Parameters, Tables, RecordType, Unpostin
 	|SELECT
 	|	Records_All_Grouped.ItemKey.Item AS Item,
 	|	Records_All_Grouped.ItemKey,
+	|	Records_All_Grouped.Store,
 	|	ISNULL(BalanceRegister.QuantityBalance, 0) AS QuantityBalance,
 	|	Records_All_Grouped.Quantity AS Quantity,
 	|	-ISNULL(BalanceRegister.QuantityBalance, 0) AS LackOfBalance,
@@ -1388,6 +1420,12 @@ Function CheckBalance_ExecuteQuery(Ref, Parameters, Tables, RecordType, Unpostin
 	|	Lack AS Lack
 	|		LEFT JOIN ItemList AS ItemList
 	|		ON Lack.ItemKey = ItemList.ItemKey
+	|		AND CASE 
+	|			WHEN NOT ItemList.Store.Ref IS NULL THEN 
+	|				Lack.Store = ItemList.Store 
+	|			ELSE 
+	|				TRUE 
+	|		END
 	|GROUP BY
 	|	Lack.Item,
 	|	Lack.ItemKey,

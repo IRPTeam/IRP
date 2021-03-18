@@ -103,20 +103,6 @@ Scenario: _029502 check the automatic creation of the Bundle specification
 
 
 
-Scenario: _029505 check the absence posting of Bundling (store does not use Shipment confirmation and Goods receipt) by register GoodsInTransitIncoming
-	Given I open hyperlink "e1cib/list/AccumulationRegister.GoodsInTransitIncoming"
-	And "List" table does not contain lines
-		| 'Recorder'                 |
-		| '$$Bundling0029501$$'              |
-	And I close all client application windows
-
-Scenario: _029506 check the absence posting of Bundling (store does not use Shipment confirmation and Goods receipt) by register GoodsInTransitOutgoing
-	Given I open hyperlink "e1cib/list/AccumulationRegister.GoodsInTransitOutgoing"
-	And "List" table does not contain lines
-		| 'Recorder'                 |
-		| '$$Bundling0029501$$'              |
-	And I close all client application windows
-
 Scenario: _029507 create Bundling ( Store use Shipment confirmation and Goods receipt)
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Document.Bundling"
@@ -196,47 +182,6 @@ Scenario: _029508 check the automatic creation of an additional specification fo
 
 
 
-Scenario: _029511 check Bundling posting (store use Shipment confirmation and Goods receipt) by register GoodsInTransitIncoming
-	Given I open hyperlink "e1cib/list/AccumulationRegister.GoodsInTransitIncoming"
-	And "List" table contains lines
-		| 'Quantity' | 'Recorder'            | 'Receipt basis'       | 'Store'    | 'Item key'                            |
-		| '7,000'    | '$$Bundling0029507$$' | '$$Bundling0029507$$' | 'Store 02' | 'Scarf + Dress/Dress+Trousers' |
-	And I close all client application windows
-
-Scenario: _029512 check Bundling posting (store use Shipment confirmation and Goods receipt) by register GoodsInTransitOutgoing
-	Given I open hyperlink "e1cib/list/AccumulationRegister.GoodsInTransitOutgoing"
-	And "List" table contains lines
-	| 'Quantity' | 'Recorder'            | 'Shipment basis'      | 'Store'    | 'Item key'  |
-	| '14,000'   | '$$Bundling0029507$$' | '$$Bundling0029507$$' | 'Store 02' | 'XS/Blue'   |
-	| '14,000'   | '$$Bundling0029507$$' | '$$Bundling0029507$$' | 'Store 02' | '36/Yellow' |
-	And I close all client application windows
-
-Scenario: _029513 create Shipment confirmation and Goods receipt based on Bundling
-	Given I open hyperlink "e1cib/list/Document.Bundling"
-	And I go to line in "List" table
-		| 'Item bundle'          | 'Number' |
-		| 'Scarf + Dress' | '$$NumberBundling0029507$$'      |
-	And I select current line in "List" table
-	And I click the button named "FormDocumentGoodsReceiptGenerateGoodsReceipt"
-	Then the form attribute named "Company" became equal to "Main Company"
-	And I click the button named "FormPost"
-	And I delete "$$NumberGoodsReceipt0029513$$" variable
-	And I delete "$$GoodsReceipt0029513$$" variable
-	And I save the value of "Number" field as "$$NumberGoodsReceipt0029513$$"
-	And I save the window as "$$GoodsReceipt0029513$$"
-	And I click the button named "FormPostAndClose"
-	And Delay 5
-	And I click the button named "FormDocumentShipmentConfirmationGenerate"
-	And I click "Ok" button	
-	Then the form attribute named "Company" became equal to "Main Company"
-	And I click the button named "FormPost"
-	And I delete "$$NumberShipmentConfirmation0029513$$" variable
-	And I delete "$$ShipmentConfirmation0029513$$" variable
-	And I save the value of "Number" field as "$$NumberShipmentConfirmation0029513$$"
-	And I save the window as "$$ShipmentConfirmation0029513$$"
-	And I click the button named "FormPostAndClose"
-	And Delay 5
-	And I close current window
 
 
 Scenario: _029515 check automatic creation of ItemKey by bundles

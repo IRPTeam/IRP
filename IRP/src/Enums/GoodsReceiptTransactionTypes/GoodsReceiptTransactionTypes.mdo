@@ -33,11 +33,4 @@
       <value>Return from customer</value>
     </synonym>
   </enumValues>
-  <enumValues uuid="04751515-cc6c-4fde-844a-046117162885">
-    <name>Bundling</name>
-    <synonym>
-      <key>en</key>
-      <value>Bundling</value>
-    </synonym>
-  </enumValues>
 </mdclass:Enum>

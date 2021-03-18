@@ -22,6 +22,10 @@ Procedure OnReadAtServer(Object, Form, CurrentObject) Export
 	DocumentsClientServer.ChangeTitleGroupTitle(CurrentObject, Form);
 EndProcedure
 
+Function CalculateQuantityInBaseUnit(Item, Unit, Quantity) Export
+	Return Catalogs.Units.Convert(Unit, Item.Unit, Quantity);
+EndFunction
+
 #EndRegion
 
 #Region GroupTitle

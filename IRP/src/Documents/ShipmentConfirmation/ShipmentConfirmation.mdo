@@ -525,8 +525,6 @@
     <group>FormCommandBarCreateBasedOn</group>
     <commandParameterType>
       <types>DocumentRef.PurchaseReturn</types>
-      <types>DocumentRef.Unbundling</types>
-      <types>DocumentRef.Bundling</types>
     </commandParameterType>
     <parameterUseMode>Multiple</parameterUseMode>
     <representation>Auto</representation>

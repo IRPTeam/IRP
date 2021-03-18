@@ -3049,7 +3049,7 @@ Procedure ShowRowKey(Form) Export
 	|ResultsTreeBasis, ResultsTreeBasisUnit, ResultsTreeQuantityInBaseUnit, ResultsTreeKey,
 	|ResultsTreeRowID, ResultsTreeRowRef, ResultsTreeBasisKey, ResultsTreeCurrentStep,
 	|LinkedBasises,
-	|ItemListQuantityInBaseUnit";
+	|ItemListQuantityInBaseUnit, QuantityInBaseUnit";
 	
 	ArrayOfItemNames = StrSplit(ItemNames, ",");
 	For Each ItemName In ArrayOfItemNames Do

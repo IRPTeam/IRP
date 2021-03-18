@@ -3,8 +3,7 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 		Return;
 	EndIf;	
 
-	If TransactionType = PredefinedValue("Enum.ShipmentConfirmationTransactionTypes.Bundling")
-			OR TransactionType = PredefinedValue("Enum.ShipmentConfirmationTransactionTypes.InventoryTransfer") Then
+	If TransactionType = Enums.ShipmentConfirmationTransactionTypes.InventoryTransfer Then
 		Partner = Undefined;
 		LegalName = Undefined;
 	EndIf;
@@ -35,28 +34,16 @@ Procedure UndoPosting(Cancel)
 EndProcedure
 
 Procedure Filling(FillingData, FillingText, StandardProcessing)
-	
 	If TypeOf(FillingData) = Type("Structure") Then
-		If FillingData.Property("BasedOn") And FillingData.BasedOn = "Bundling" Then
-			TransactionType = Enums.ShipmentConfirmationTransactionTypes.Bundling;
-			Filling_BasedOn(FillingData);
-		ElsIf FillingData.Property("BasedOn") And FillingData.BasedOn = "PurchaseReturn" Then
+		If FillingData.Property("BasedOn") And FillingData.BasedOn = "PurchaseReturn" Then
 			TransactionType = Enums.ShipmentConfirmationTransactionTypes.ReturnToVendor;
-			Filling_BasedOn(FillingData);
-		ElsIf FillingData.Property("BasedOn") And FillingData.BasedOn = "Unbundling" Then
-			TransactionType = Enums.ShipmentConfirmationTransactionTypes.Bundling;
-			Filling_BasedOn(FillingData);
+			FillPropertyValues(ThisObject, FillingData, "Company, Partner, LegalName");
+			RowIDInfoServer.AddLinkedDocumentRows(ThisObject, FillingData);			
 		Else
 			FillPropertyValues(ThisObject, FillingData, RowIDInfoServer.GetSeperatorColumns(ThisObject.Metadata()));
 			RowIDInfoServer.AddLinkedDocumentRows(ThisObject, FillingData);	
 		EndIf;
-	EndIf;
-	
-EndProcedure
-
-Procedure Filling_BasedOn(FillingData)
-	FillPropertyValues(ThisObject, FillingData, "Company, Partner, LegalName");
-	RowIDInfoServer.AddLinkedDocumentRows(ThisObject, FillingData);
+	EndIf;	
 EndProcedure
 
 Procedure FillCheckProcessing(Cancel, CheckedAttributes)

@@ -2017,6 +2017,7 @@
     <items xsi:type="form:Button">
       <name>FormShowRowKey</name>
       <id>164</id>
+      <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
         <common>true</common>

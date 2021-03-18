@@ -26,7 +26,7 @@ Procedure OnReadAtServer(Object, Form, CurrentObject) Export
 EndProcedure
 
 Function CalculateQuantityInBaseUnit(ItemKey, Unit, Quantity) Export
-	Return Catalogs.Units.ConvertQuantityToQuantityInBaseUnit(ItemKey, Unit, Quantity);
+	Return Catalogs.Units.ConvertQuantityToQuantityInBaseUnit(ItemKey, Unit, Quantity).QuantityInBaseUnit;
 EndFunction
 
 #EndRegion

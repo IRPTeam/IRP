@@ -2454,6 +2454,8 @@ Procedure TableOnStartEdit(Object, Form, DataPath, Item, NewRow, Clone, AddInfo 
 		CurrentData.DeliveryDate = Form.CurrentDeliveryDate;
 	EndIf;
 	
+	CalculationStringsClientServer.CalculateItemsRow(Object, CurrentData, New Structure("CalculateQuantityInBaseUnit"));
+	
 	UserSettingsClient.TableOnStartEdit(Object, Form, DataPath, Item, NewRow, Clone);
 EndProcedure
 

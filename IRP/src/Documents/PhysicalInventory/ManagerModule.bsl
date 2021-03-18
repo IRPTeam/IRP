@@ -271,16 +271,16 @@ Function GetItemListWithFillingExpCount(Ref, Store, ItemList = Undefined) Export
 	Else
 		Query.Text = GetQueryTextFillExpCount_ByItemList();
 		
-		AccReg = Metadata.AccumulationRegisters.StockBalance;
+		AccReg = Metadata.AccumulationRegisters.R4010B_ActualStocks;
 		
 		ItemListTyped = New ValueTable();
-		ItemListTyped.Columns.Add("Key", New TypeDescription(Metadata.DefinedTypes.typeRowID.Type));
-		ItemListTyped.Columns.Add("LineNumber", New TypeDescription("Number"));
-		ItemListTyped.Columns.Add("Store", AccReg.Dimensions.Store.Type);
-		ItemListTyped.Columns.Add("ItemKey", AccReg.Dimensions.ItemKey.Type);
-		ItemListTyped.Columns.Add("Unit", New TypeDescription("CatalogRef.Units"));
-		ItemListTyped.Columns.Add("PhysCount", New TypeDescription(Metadata.DefinedTypes.typeQuantity.Type));
-		ItemListTyped.Columns.Add("ResponsiblePerson", New TypeDescription("CatalogRef.Partners"));
+		ItemListTyped.Columns.Add("Key"               , New TypeDescription(Metadata.DefinedTypes.typeRowID.Type));
+		ItemListTyped.Columns.Add("LineNumber"        , New TypeDescription("Number"));
+		ItemListTyped.Columns.Add("Store"             , AccReg.Dimensions.Store.Type);
+		ItemListTyped.Columns.Add("ItemKey"           , AccReg.Dimensions.ItemKey.Type);
+		ItemListTyped.Columns.Add("Unit"              , New TypeDescription("CatalogRef.Units"));
+		ItemListTyped.Columns.Add("PhysCount"         , New TypeDescription(Metadata.DefinedTypes.typeQuantity.Type));
+		ItemListTyped.Columns.Add("ResponsiblePerson" , New TypeDescription("CatalogRef.Partners"));
 		For Each Row In ItemList Do
 			FillPropertyValues(ItemListTyped.Add(), Row);
 		EndDo;

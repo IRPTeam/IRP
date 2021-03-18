@@ -437,9 +437,6 @@
     <mdObject>InformationRegister.AddProperties</mdObject>
   </content>
   <content>
-    <mdObject>AccumulationRegister.StockReservation</mdObject>
-  </content>
-  <content>
     <mdObject>Document.Unbundling</mdObject>
   </content>
   <content>
@@ -703,9 +700,6 @@
   </content>
   <content>
     <mdObject>Catalog.Companies</mdObject>
-  </content>
-  <content>
-    <mdObject>AccumulationRegister.StockBalance</mdObject>
   </content>
   <content>
     <mdObject>Catalog.TaxAnalytics</mdObject>

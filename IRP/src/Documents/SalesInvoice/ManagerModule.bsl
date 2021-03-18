@@ -1115,7 +1115,7 @@ Function ItemList()
 	|	MAX(RowIDInfo.RowID) AS RowID
 	|INTO TableRowIDInfo
 	|FROM
-	|	Document.GoodsReceipt.RowIDInfo AS RowIDInfo
+	|	Document.SalesInvoice.RowIDInfo AS RowIDInfo
 	|WHERE
 	|	RowIDInfo.Ref = &Ref
 	|GROUP BY

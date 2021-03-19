@@ -215,7 +215,7 @@ Function BundleContents()
 	Return
 	"SELECT
 	|	Header.Period AS Period,
-	|	ItemList.Quantity / Header.Quantity AS Quantity,
+	|	SUM(ItemList.Quantity / Header.Quantity) AS Quantity,
 	|	ItemList.ItemKey AS ItemKey,
 	|	Header.ItemKey AS ItemKeyBundle
 	|INTO BundleContents
@@ -224,7 +224,11 @@ Function BundleContents()
 	|		LEFT JOIN ItemList AS ItemList
 	|		ON TRUE
 	|WHERE
-	|	TRUE";
+	|	TRUE
+	|GROUP BY
+	|	Header.Period,
+	|	ItemList.ItemKey,
+	|	Header.ItemKey";
 EndFunction
 
 Function R4011B_FreeStocks()

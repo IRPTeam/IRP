@@ -822,6 +822,9 @@ Scenario: _2990009 check for updates Update Exp Count
 	And I close all client application windows
 
 Scenario: _2990010 create Physical inventory and Physical count by location with distribution to responsible employees
+	And I execute 1C:Enterprise script at server
+		| "Documents.StockAdjustmentAsWriteOff.FindByNumber($$NumberStockAdjustmentAsWriteOff2990007$$).GetObject().Write(DocumentWriteMode.UndoPosting);" |
+		| "Documents.StockAdjustmentAsSurplus.FindByNumber($$NumberStockAdjustmentAsSurplus2990006$$).GetObject().Write(DocumentWriteMode.UndoPosting);" |
 	* Open document form
 		Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
 		And I click the button named "FormCreate"

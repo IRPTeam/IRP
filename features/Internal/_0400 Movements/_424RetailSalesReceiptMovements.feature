@@ -107,3 +107,34 @@ Scenario: _042402 check Retail sales receipt movements by the Register  "R4011 F
 			| ''                                                   | 'Expense'     | '15.03.2021 16:01:04' | '2'         | 'Store 01'   | '38/Yellow' |
 			| ''                                                   | 'Expense'     | '15.03.2021 16:01:04' | '12'        | 'Store 01'   | '36/18SD'   |
 		And I close all client application windows
+
+
+Scenario: _042430 Retail sales receipt clear posting
+	And I close all client application windows
+	* Select Retail sales receipt
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '201' |
+	* Clear posting
+		And in the table "List" I click the button named "ListContextMenuUndoPosting"
+		Then user message window does not contain messages
+		And I click "Registrations report" button
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Retail sales receipt 201 dated 15.03.2021 16:01:04' |
+			| 'Document registrations records'                    |
+		And I close current window
+	* Post Retail sales receipt
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '201' |
+		And in the table "List" I click the button named "ListContextMenuPost"		
+		Then user message window does not contain messages
+		And I click "Registrations report" button
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document contains values
+			| 'R4011 Free stocks' |
+			| 'R4010 Actual stocks' |
+		And I close all client application windows

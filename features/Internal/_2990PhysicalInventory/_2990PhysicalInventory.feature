@@ -367,7 +367,7 @@ Scenario: _2990003 create Stock adjustment as write off
 		Then the form attribute named "Store" became equal to "Store 01"	
 		And I close all client application windows
 
-Scenario: _2990004 create Physical inventory (store use GR and SC)
+Scenario: _2990004 create Physical inventory and check Row Id info tab
 	* Open document form
 		Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
 		And I click the button named "FormCreate"
@@ -405,6 +405,23 @@ Scenario: _2990004 create Physical inventory (store use GR and SC)
 		And I delete "$$PhysicalInventory2990004$$" variable
 		And I save the value of "Number" field as "$$NumberPhysicalInventory2990004$$"
 		And I save the window as "$$PhysicalInventory2990004$$"
+		And I click "Show row key" button
+		And I go to line in "ItemList" table
+			| '#' |
+			| '1' |
+		And I activate "Key" field in "ItemList" table
+		And I save the current field value as "$$Rov1PhysicalInventory2990004$$"
+		And I go to line in "ItemList" table
+			| '#' |
+			| '2' |
+		And I activate "Key" field in "ItemList" table
+		And I save the current field value as "$$Rov2PhysicalInventory2990004$$"
+	* Check row id info tab
+		And I move to "Row ID Info" tab
+		And "RowIDInfo" table became equal
+			| '#' | 'Key'                              | 'Basis' | 'Row ID'                           | 'Next step'                     | 'Q'     | 'Basis key' | 'Current step' | 'Row ref'                          |
+			| '1' | '$$Rov1PhysicalInventory2990004$$' | ''      | '$$Rov1PhysicalInventory2990004$$' | 'Stock adjustment as surplus'   | '5,000' | ''          | ''             | '$$Rov1PhysicalInventory2990004$$' |
+			| '2' | '$$Rov2PhysicalInventory2990004$$' | ''      | '$$Rov2PhysicalInventory2990004$$' | 'Stock adjustment as write off' | '2,000' | ''          | ''             | '$$Rov2PhysicalInventory2990004$$' |	
 		And I close all client application windows
 	
 
@@ -449,81 +466,202 @@ Scenario: _2990005 create Physical inventory (store does not use GR and SC)
 		And I save the window as "$$PhysicalInventory2990005$$"
 		And I close all client application windows
 
-Scenario: _2990006 create Stock adjustment as surplus based on Physical inventory
+Scenario: _2990006 create Stock adjustment as surplus based on Physical inventory (link/unlink)
 	* Open document form
-		Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
-		And I go to line in "List" table
-			| 'Number' |
-			| '$$NumberPhysicalInventory2990004$$'    |
+		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsSurplus"
+		And I click the button named "FormCreate"
 	* Create a document StockAdjustmentAsSurplus and check filling in
-		And I click the button named "FormDocumentStockAdjustmentAsSurplusGenerate"
-		And I click "Ok" button	
 		And I click Select button of "Company" field
 		And I go to line in "List" table
 			| 'Description'  |
 			| 'Main Company' |
 		And I select current line in "List" table
-		And I click choice button of "Business unit" attribute in "ItemList" table
+		And I click Select button of "Store" field
 		And I go to line in "List" table
-			| 'Description'          |
-			| 'Logistics department' |
+			| 'Description'  |
+			| 'Store 05' |
 		And I select current line in "List" table
-		And I click choice button of "Revenue type" attribute in "ItemList" table
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Delivery'    |
-		And I select current line in "List" table
-		And I finish line editing in "ItemList" table
-	* Check filling in
-		And "ItemList" table contains lines
-		| 'Item'  | 'Quantity' | 'Item key' | 'Business unit'        | 'Unit' | 'Revenue type' | 'Basis document'        |
-		| 'Dress' | '5,000'    | 'S/Yellow' | 'Logistics department' | 'pcs'  | 'Delivery'     | '$$PhysicalInventory2990004$$' |
-		Then the number of "ItemList" table lines is "меньше или равно" 1
-	* Posting the document and check movements
-		And I click the button named "FormPost"
-		And I delete "$$NumberStockAdjustmentAsSurplus2990006$$" variable
-		And I delete "$$StockAdjustmentAsSurplus$$" variable
-		And I save the value of "Number" field as "$$NumberStockAdjustmentAsSurplus2990006$$"
+	* Filling ItemList tab and check link/unlink line
+		* Add item from Physical inventory
+			And I click "AddBasisDocuments" button
+			And I go to line in "BasisesTree" table
+				| 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
+				| '5,000'    | 'Dress, S/Yellow'  | 'pcs'  | 'No'  |
+			And I change "Use" checkbox in "BasisesTree" table
+			And I finish line editing in "BasisesTree" table
+			And I click "Ok" button
+			And "ItemList" table contains lines
+				| 'Item'  | 'Quantity' | 'Item key' | 'Business unit' | 'Unit' | 'Revenue type' | 'Basis document'               |
+				| 'Dress' | '5,000'    | 'S/Yellow' | ''              | 'pcs'  | ''             | '$$PhysicalInventory2990004$$' |
+			And I select current line in "ItemList" table
+			And I click choice button of the attribute named "ItemListBusinessUnit" in "ItemList" table
+			And I go to line in "List" table
+				| 'Description'          |
+				| 'Logistics department' |
+			And I select current line in "List" table
+			And I activate "Revenue type" field in "ItemList" table
+			And I click choice button of "Revenue type" attribute in "ItemList" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Revenue'     |
+			And I select current line in "List" table	
+			And I click the button named "FormPost"
+			And I delete "$$NumberStockAdjustmentAsSurplus2990006$$" variable
+			And I delete "$$StockAdjustmentAsSurplus2990006$$" variable
+			And I save the window as "$$StockAdjustmentAsSurplus2990006$$"
+			And I save the value of "Number" field as "$$NumberStockAdjustmentAsSurplus2990006$$"
+		* Check Row ID info tab
+			And I click "Show row key" button
+			And I go to line in "ItemList" table
+				| '#' |
+				| '1' |
+			And I activate "Key" field in "ItemList" table
+			And I save the current field value as "$$Rov1StockAdjustmentAsSurplus2990006$$"
+			And I move to "Row ID Info" tab
+			And "RowIDInfo" table became equal
+				| '#' | 'Key'                                     | 'Basis'                        | 'Row ID'                           | 'Next step' | 'Q'     | 'Basis key'                        | 'Current step'                | 'Row ref'                          |
+				| '1' | '$$Rov1StockAdjustmentAsSurplus2990006$$' | '$$PhysicalInventory2990004$$' | '$$Rov1PhysicalInventory2990004$$' | ''          | '5,000' | '$$Rov1PhysicalInventory2990004$$' | 'Stock adjustment as surplus' | '$$Rov1PhysicalInventory2990004$$' |
+		* Unlink line and check Row ID info tab
+			And I click "LinkUnlinkBasisDocuments" button
+			And I activate field named "ItemListRowsRowPresentation" in "ItemListRows" table
+			And I go to line in "ResultsTree" table
+				| 'Quantity' | 'Row presentation' | 'Unit' |
+				| '5,000'    | 'Dress, S/Yellow'  | 'pcs'  |
+			And I click "Unlink" button
+			And I click "Ok" button
+			And "ItemList" table contains lines
+				| 'Item'  | 'Quantity' | 'Item key' | 'Business unit'        | 'Unit' | 'Revenue type' | 'Basis document' |
+				| 'Dress' | '5,000'    | 'S/Yellow' | 'Logistics department' | 'pcs'  | 'Revenue'      | ''               |
+			And I click the button named "FormPost"
+			And "RowIDInfo" table became equal
+				| '#' | 'Key'                                     | 'Basis' | 'Row ID'                                  | 'Next step' | 'Q'     | 'Basis key' | 'Current step' | 'Row ref'                                 |
+				| '1' | '$$Rov1StockAdjustmentAsSurplus2990006$$' | ''      | '$$Rov1StockAdjustmentAsSurplus2990006$$' | ''          | '5,000' | ''          | ''             | '$$Rov1StockAdjustmentAsSurplus2990006$$' |
+		* Link line and check Row ID info tab
+			And I move to "Items" tab
+			And I click "LinkUnlinkBasisDocuments" button
+			And I go to line in "BasisesTree" table
+				| 'Quantity' | 'Row presentation' | 'Unit' |
+				| '5,000'    | 'Dress, S/Yellow'  | 'pcs'  |
+			And I click "Link" button
+			And I click "Ok" button
+			And "ItemList" table contains lines
+				| 'Item'  | 'Quantity' | 'Item key' | 'Business unit' | 'Unit' | 'Revenue type' | 'Basis document'               |
+				| 'Dress' | '5,000'    | 'S/Yellow' | ''              | 'pcs'  | ''             | '$$PhysicalInventory2990004$$' |
+			And I select current line in "ItemList" table
+			And I click choice button of the attribute named "ItemListBusinessUnit" in "ItemList" table
+			And I go to line in "List" table
+				| 'Description'          |
+				| 'Logistics department' |
+			And I select current line in "List" table
+			And I activate "Revenue type" field in "ItemList" table
+			And I click choice button of "Revenue type" attribute in "ItemList" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Revenue'     |
+			And I select current line in "List" table
+			And "RowIDInfo" table became equal
+				| '#' | 'Key'                                     | 'Basis'                        | 'Row ID'                           | 'Next step' | 'Q'     | 'Basis key'                        | 'Current step'                | 'Row ref'                          |
+				| '1' | '$$Rov1StockAdjustmentAsSurplus2990006$$' | '$$PhysicalInventory2990004$$' | '$$Rov1PhysicalInventory2990004$$' | ''          | '5,000' | '$$Rov1PhysicalInventory2990004$$' | 'Stock adjustment as surplus' | '$$Rov1PhysicalInventory2990004$$' |
 		And I close all client application windows
 	
 	
 
 Scenario: _2990007 create Stock adjustment as write off based on Physical inventory
 	* Open document form
-		Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
-		And I go to line in "List" table
-			| 'Number' |
-			| '$$NumberPhysicalInventory2990004$$'    |
-	* Create a document StockAdjustmentAsWriteOff and check filling in
-		And I click the button named "FormDocumentStockAdjustmentAsWriteOffGenerate"
-		And I click "Ok" button	
+		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsWriteOff"
+		And I click the button named "FormCreate"
+	* Create a document StockAdjustmentAsSurplus and check filling in
 		And I click Select button of "Company" field
 		And I go to line in "List" table
 			| 'Description'  |
 			| 'Main Company' |
 		And I select current line in "List" table
-		And I click choice button of "Business unit" attribute in "ItemList" table
+		And I click Select button of "Store" field
 		And I go to line in "List" table
-			| 'Description'          |
-			| 'Logistics department' |
+			| 'Description'  |
+			| 'Store 05' |
 		And I select current line in "List" table
-		And I click choice button of "Expense type" attribute in "ItemList" table
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Delivery'    |
-		And I select current line in "List" table
-		And I finish line editing in "ItemList" table
-	* Check filling in
-		And "ItemList" table contains lines
-		| 'Item'  | 'Quantity' | 'Item key' | 'Business unit'        | 'Unit' | 'Expense type' | 'Basis document'        |
-		| 'Dress' | '2,000'    | 'XS/Blue'  | 'Logistics department' | 'pcs'  | 'Delivery'     | '$$PhysicalInventory2990004$$' |
-		Then the number of "ItemList" table lines is "меньше или равно" 1
-	* Posting the document and check movements
-		And I click the button named "FormPost"
-		And I delete "$$NumberStockAdjustmentAsWriteOff2990007$$" variable
-		And I delete "$$StockAdjustmentAsWriteOff2990007$$" variable
-		And I save the value of "Number" field as "$$NumberStockAdjustmentAsWriteOff2990007$$"
-		And I save the window as "$$StockAdjustmentAsWriteOff2990007$$"
+	* Filling ItemList tab and check link/unlink line
+		* Add item from Physical inventory
+			And I click "AddBasisDocuments" button
+			And I go to line in "BasisesTree" table
+				| 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
+				| '2,000'    | 'Dress, XS/Blue'  | 'pcs'  | 'No'  |
+			And I change "Use" checkbox in "BasisesTree" table
+			And I finish line editing in "BasisesTree" table
+			And I click "Ok" button
+			And "ItemList" table contains lines
+				| 'Item'  | 'Quantity' | 'Item key' | 'Business unit' | 'Unit' | 'Expense type' | 'Basis document'               |
+				| 'Dress' | '2,000'    | 'XS/Blue'  | ''              | 'pcs'  | ''             | '$$PhysicalInventory2990004$$' |
+			And I select current line in "ItemList" table
+			And I click choice button of the attribute named "ItemListBusinessUnit" in "ItemList" table
+			And I go to line in "List" table
+				| 'Description'          |
+				| 'Logistics department' |
+			And I select current line in "List" table
+			And I activate "Expense type" field in "ItemList" table
+			And I click choice button of "Expense type" attribute in "ItemList" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Expense'     |
+			And I select current line in "List" table	
+			And I click the button named "FormPost"
+			And I delete "$$NumberStockAdjustmentAsWriteOff2990007$$" variable
+			And I delete "$$StockAdjustmentAsWriteOff2990007$$" variable
+			And I save the window as "$$StockAdjustmentAsWriteOff2990007$$"
+			And I save the value of "Number" field as "$$NumberStockAdjustmentAsWriteOff2990007$$"
+		* Check Row ID info tab
+			And I click "Show row key" button
+			And I go to line in "ItemList" table
+				| '#' |
+				| '1' |
+			And I activate "Key" field in "ItemList" table
+			And I save the current field value as "$$Rov1StockAdjustmentAsWriteOff2990007$$"
+			And I move to "Row ID Info" tab
+			And "RowIDInfo" table became equal
+				| '#' | 'Key'                                      | 'Basis'                        | 'Row ID'                           | 'Next step' | 'Q'     | 'Basis key'                        | 'Current step'                | 'Row ref'                          |
+				| '1' | '$$Rov1StockAdjustmentAsWriteOff2990007$$' | '$$PhysicalInventory2990004$$' | '$$Rov2PhysicalInventory2990004$$' | ''          | '2,000' | '$$Rov2PhysicalInventory2990004$$' | 'Stock adjustment as write off' | '$$Rov2PhysicalInventory2990004$$' |
+		* Unlink line and check Row ID info tab
+			And I click "LinkUnlinkBasisDocuments" button
+			And I activate field named "ItemListRowsRowPresentation" in "ItemListRows" table
+			And I go to line in "ResultsTree" table
+				| 'Quantity' | 'Row presentation' | 'Unit' |
+				| '2,000'    | 'Dress, XS/Blue'  | 'pcs'  |
+			And I click "Unlink" button
+			And I click "Ok" button
+			And "ItemList" table contains lines
+				| 'Item'  | 'Quantity' | 'Item key'       | 'Business unit'        | 'Unit' | 'Expense type' | 'Basis document' |
+				| 'Dress' | '2,000'    | 'XS/Blue'        | 'Logistics department' | 'pcs'  | 'Expense'      | ''               |
+			And I click the button named "FormPost"
+			And "RowIDInfo" table became equal
+				| '#' | 'Key'                                      | 'Basis' | 'Row ID'                                   | 'Next step' | 'Q'     | 'Basis key' | 'Current step' | 'Row ref'                                  |
+				| '1' | '$$Rov1StockAdjustmentAsWriteOff2990007$$' | ''      | '$$Rov1StockAdjustmentAsWriteOff2990007$$' | ''          | '2,000' | ''          | ''             | '$$Rov1StockAdjustmentAsWriteOff2990007$$' |
+		* Link line and check Row ID info tab
+			And I move to "Items" tab
+			And I click "LinkUnlinkBasisDocuments" button
+			And I go to line in "BasisesTree" table
+				| 'Quantity' | 'Row presentation' | 'Unit' |
+				| '2,000'    | 'Dress, XS/Blue'  | 'pcs'  |
+			And I click "Link" button
+			And I click "Ok" button
+			And "ItemList" table contains lines
+				| 'Item'  | 'Quantity' | 'Item key' | 'Business unit' | 'Unit' | 'Expense type' | 'Basis document'               |
+				| 'Dress' | '2,000'    | 'XS/Blue'  | ''              | 'pcs'  | ''             | '$$PhysicalInventory2990004$$' |
+			And I select current line in "ItemList" table
+			And I click choice button of the attribute named "ItemListBusinessUnit" in "ItemList" table
+			And I go to line in "List" table
+				| 'Description'          |
+				| 'Logistics department' |
+			And I select current line in "List" table
+			And I activate "Expense type" field in "ItemList" table
+			And I click choice button of "Expense type" attribute in "ItemList" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Expense'     |
+			And I select current line in "List" table
+			And "RowIDInfo" table became equal
+				| '#' | 'Key'                                      | 'Basis'                        | 'Row ID'                           | 'Next step' | 'Q'     | 'Basis key'                        | 'Current step'                | 'Row ref'                          |
+				| '1' | '$$Rov1StockAdjustmentAsWriteOff2990007$$' | '$$PhysicalInventory2990004$$' | '$$Rov2PhysicalInventory2990004$$' | ''          | '2,000' | '$$Rov2PhysicalInventory2990004$$' | 'Stock adjustment as write off' | '$$Rov2PhysicalInventory2990004$$' |
 		And I close all client application windows
 
 Scenario: _2990008 create Stock adjustment as surplus and Stock adjustment as write off based on Physical inventory on a partial quantity
@@ -684,6 +822,9 @@ Scenario: _2990009 check for updates Update Exp Count
 	And I close all client application windows
 
 Scenario: _2990010 create Physical inventory and Physical count by location with distribution to responsible employees
+	And I execute 1C:Enterprise script at server
+		| "Documents.StockAdjustmentAsWriteOff.FindByNumber($$NumberStockAdjustmentAsWriteOff2990007$$).GetObject().Write(DocumentWriteMode.UndoPosting);" |
+		| "Documents.StockAdjustmentAsSurplus.FindByNumber($$NumberStockAdjustmentAsSurplus2990006$$).GetObject().Write(DocumentWriteMode.UndoPosting);" |
 	* Open document form
 		Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
 		And I click the button named "FormCreate"

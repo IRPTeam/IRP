@@ -513,7 +513,7 @@ Scenario: _041318 check Sales return movements by the Register  "R2012 Invoice c
 			| Register  "R2012 Invoice closing of sales orders" |	
 	And I close all client application windows
 
-Scenario: _041318 check Sales return movements by the Register  "R2012 Invoice closing of sales orders" (with SRO)
+Scenario: _041319 check Sales return movements by the Register  "R2012 Invoice closing of sales orders" (with SRO)
 	And I close all client application windows
 	* Select Sales return
 		Given I open hyperlink "e1cib/list/Document.SalesReturn"
@@ -535,3 +535,39 @@ Scenario: _041318 check Sales return movements by the Register  "R2012 Invoice c
 			| ''                                                  | 'Expense'     | '12.03.2021 09:20:35' | '10'        | '3 325'  | '2 817,8'    | 'Main Company' | 'Sales return order 102 dated 12.03.2021 09:19:54' | 'TRY'      | '36/Red'   | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' |
 			| ''                                                  | 'Expense'     | '12.03.2021 09:20:35' | '24'        | '15 960' | '13 525,42'  | 'Main Company' | 'Sales return order 102 dated 12.03.2021 09:19:54' | 'TRY'      | '37/18SD'  | 'f06154aa-5906-4824-9983-19e2bc9ccb96' |
 	And I close all client application windows
+
+
+Scenario: _041330 Sales return clear posting
+	And I close all client application windows
+	* Select Sales return
+		Given I open hyperlink "e1cib/list/Document.SalesReturn"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '103' |
+	* Clear posting
+		And in the table "List" I click the button named "ListContextMenuUndoPosting"
+		Then user message window does not contain messages
+		And I click "Registrations report" button
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Sales return 103 dated 12.03.2021 08:59:52' |
+			| 'Document registrations records'                    |
+		And I close current window
+	* Post Sales return
+		Given I open hyperlink "e1cib/list/Document.SalesReturn"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '103' |
+		And in the table "List" I click the button named "ListContextMenuPost"		
+		Then user message window does not contain messages
+		And I click "Registrations report" button
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document contains values
+			| 'R2031 Shipment invoicing' |
+			| 'R5010 Reconciliation statement' |
+			| 'R2002 Sales returns' |
+			| 'R4050 Stock inventory' |
+			| 'R2021 Customer transactions' |
+			| 'R4031 Goods in transit (incoming)' |
+			| 'R2040 Taxes incoming' |
+		And I close all client application windows

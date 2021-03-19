@@ -482,3 +482,42 @@ Scenario: _041617 check Purchase return movements by the Register  "R1031 Receip
 			| ''                                              | ''            | ''                    | 'Quantity'  | 'Company'      | 'Store'    | 'Basis'                                         | 'Item key' |
 			| ''                                              | 'Receipt'     | '14.03.2021 18:53:34' | '5'         | 'Main Company' | 'Store 02' | 'Purchase return 231 dated 14.03.2021 18:53:34' | 'S/Yellow' |	
 	And I close all client application windows
+
+
+Scenario: _041630 Purchase return clear posting
+	And I close all client application windows
+	* Select Purchase return
+		Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '231' |
+	* Clear posting
+		And in the table "List" I click the button named "ListContextMenuUndoPosting"
+		Then user message window does not contain messages
+		And I click "Registrations report" button
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Purchase return 231 dated 14.03.2021 18:53:34' |
+			| 'Document registrations records'                    |
+		And I close current window
+	* Post Purchase return
+		Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '231' |
+		And in the table "List" I click the button named "ListContextMenuPost"		
+		Then user message window does not contain messages
+		And I click "Registrations report" button
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document contains values
+			| 'R1002 Purchase returns' |
+			| 'R1021 Vendors transactions' |
+			| 'R1005 Special offers of purchases' |
+			| 'R5010 Reconciliation statement' |
+			| 'R4010 Actual stocks' |
+			| 'R4050 Stock inventory' |
+			| 'R4011 Free stocks' |
+			| 'R4032 Goods in transit (outgoing)' |
+			| 'R1040 Taxes outgoing' |
+			| 'R1012 Invoice closing of purchase orders' |
+		And I close all client application windows

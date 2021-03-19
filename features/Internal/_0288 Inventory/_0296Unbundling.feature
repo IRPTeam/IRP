@@ -253,7 +253,7 @@ Scenario: _029611 create Unbundling (+check movements) for bundl (there is a Bun
 				| 'Skittles + Chewing gum/Skittles+Chewing gum'       | 'Main Company' |
 		And I close all client application windows
 
-Scenario: _029612 create Unbundling (Store use Goods receipt and does not use Shipment confirmation)
+Scenario: _029612 create Unbundling
 	* Opening the creation form Unbundling
 		Given I open hyperlink "e1cib/list/Document.Unbundling"
 		And I click the button named "FormCreate"
@@ -286,78 +286,12 @@ Scenario: _029612 create Unbundling (Store use Goods receipt and does not use Sh
 		And I select current line in "List" table
 		And I move to "Item list" tab
 		And in the table "ItemList" I click "By specification" button
-	* Check movements
+	* Post unbundling
 		And I click the button named "FormPost"
 		And I delete "$$NumberUnbundling0029612$$" variable
 		And I delete "$$Unbundling0029612$$" variable
 		And I save the value of "Number" field as "$$NumberUnbundling0029612$$"
 		And I save the window as "$$Unbundling0029612$$"
-		And Delay 5
-		And I click "Registrations report" button
-		And I select "Goods in transit incoming" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| '$$Unbundling0029612$$'                 | ''            | ''       | ''          | ''           | ''                      | ''         | ''        |
-			| 'Document registrations records'        | ''            | ''       | ''          | ''           | ''                      | ''         | ''        |
-			| 'Register  "Goods in transit incoming"' | ''            | ''       | ''          | ''           | ''                      | ''         | ''        |
-			| ''                                      | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''                      | ''         | ''        |
-			| ''                                      | ''            | ''       | 'Quantity'  | 'Store'      | 'Receipt basis'         | 'Item key' | 'Row key' |
-			| ''                                      | 'Receipt'     | '*'      | '2'         | 'Store 07'   | '$$Unbundling0029612$$' | 'XS/Blue'  | '*'       |
-			| ''                                      | 'Receipt'     | '*'      | '2'         | 'Store 07'   | '$$Unbundling0029612$$' | '36/Red'   | '*'       |
-		
-		And I close all client application windows
-	
-Scenario: _029613 create Unbundling (Store use Shipment confirmation and does not use Goods receipt)
-	* Opening the creation form
-		Given I open hyperlink "e1cib/list/Document.Unbundling"
-		And I click the button named "FormCreate"
-	* Filling in details
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| Description  |
-			| Main Company |
-		And I select current line in "List" table
-		And I click Select button of "Item bundle" field
-		And I go to line in "List" table
-			| Description |
-			| Bound Dress+Shirt       |
-		And I select current line in "List" table
-		And I click Select button of "Item key bundle" field
-		And I go to line in "List" table
-			| Item              | Item key  |
-			| Bound Dress+Shirt | Bound Dress+Shirt/Dress+Shirt |
-		And I select current line in "List" table
-		And I click Choice button of the field named "Unit"
-		And I go to line in "List" table
-			| Description |
-			| pcs      |
-		And I select current line in "List" table
-		And I input "2,000" text in the field named "Quantity"
-		And I click Select button of "Store" field
-		And I go to line in "List" table
-			| Description |
-			| Store 08  |
-		And I select current line in "List" table
-		And I move to "Item list" tab
-		And in the table "ItemList" I click "By specification" button
-	* Check movements
-		And I click the button named "FormPost"
-		And I delete "$$NumberUnbundling0029613$$" variable
-		And I delete "$$Unbundling0029613$$" variable
-		And I save the value of "Number" field as "$$NumberUnbundling0029613$$"
-		And I save the window as "$$Unbundling0029613$$"
-		And Delay 5
-		And I click "Registrations report" button
-		And I select "Goods in transit outgoing" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| '$$Unbundling0029613$$'                 | ''            | ''       | ''          | ''           | ''                      | ''                              | ''        |
-			| 'Document registrations records'        | ''            | ''       | ''          | ''           | ''                      | ''                              | ''        |
-			| 'Register  "Goods in transit outgoing"' | ''            | ''       | ''          | ''           | ''                      | ''                              | ''        |
-			| ''                                      | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''                      | ''                              | ''        |
-			| ''                                      | ''            | ''       | 'Quantity'  | 'Store'      | 'Shipment basis'        | 'Item key'                      | 'Row key' |
-			| ''                                      | 'Receipt'     | '*'      | '2'         | 'Store 08'   | '$$Unbundling0029613$$' | 'Bound Dress+Shirt/Dress+Shirt' | '*'       |
-	
 		And I close all client application windows
 
 

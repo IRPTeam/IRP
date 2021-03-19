@@ -454,14 +454,6 @@ Scenario: _029519 create Bundling (Store use Goods receipt, does not use Shipmen
 		| ''                               | ''       | 'Quantity'  | 'Item key bundle'                             | 'Item key'   | '' | '' | '' |
 		| ''                               | '*'      | '2'         | 'Skittles + Chewing gum/Skittles+Chewing gum' | 'Mint/Mango' | '' | '' | '' |
 		| ''                               | '*'      | '2'         | 'Skittles + Chewing gum/Skittles+Chewing gum' | 'Fruit'      | '' | '' | '' |
-		And I select "Goods in transit incoming" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Goods in transit incoming"' | ''            | ''       | ''          | ''           | ''                    | ''                                            | ''        |
-		| ''                                      | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''                    | ''                                            | ''        |
-		| ''                                      | ''            | ''       | 'Quantity'  | 'Store'      | 'Receipt basis'       | 'Item key'                                    | 'Row key' |
-		| ''                                      | 'Receipt'     | '*'      | '7'         | 'Store 07'   | '$$Bundling0029519$$' | 'Skittles + Chewing gum/Skittles+Chewing gum' | '*'       |
-		
 		And I close all client application windows
 
 Scenario: _029520 create Bundling (Store use Shipment confirmation, does not use Goods receipt)
@@ -539,15 +531,7 @@ Scenario: _029520 create Bundling (Store use Shipment confirmation, does not use
 			| ''                               | ''       | 'Quantity'  | 'Item key bundle'                             | 'Item key'   | '' | '' | '' |
 			| ''                               | '*'      | '2'         | 'Skittles + Chewing gum/Skittles+Chewing gum' | 'Mint/Mango' | '' | '' | '' |
 			| ''                               | '*'      | '2'         | 'Skittles + Chewing gum/Skittles+Chewing gum' | 'Fruit'      | '' | '' | '' |
-		And I select "Goods in transit outgoing" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Goods in transit outgoing"' | ''            | ''       | ''          | ''           | ''                    | ''           | ''        |
-			| ''                                      | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''                    | ''           | ''        |
-			| ''                                      | ''            | ''       | 'Quantity'  | 'Store'      | 'Shipment basis'      | 'Item key'   | 'Row key' |
-			| ''                                      | 'Receipt'     | '*'      | '14'        | 'Store 08'   | '$$Bundling0029520$$' | 'Mint/Mango' | '*'       |
-			| ''                                      | 'Receipt'     | '*'      | '14'        | 'Store 08'   | '$$Bundling0029520$$' | 'Fruit'      | '*'       |
-		
+	
 		And I close all client application windows
 
 

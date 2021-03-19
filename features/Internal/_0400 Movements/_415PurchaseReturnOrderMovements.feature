@@ -153,3 +153,34 @@ Scenario: _041502 check Purchase return order movements by the Register "R1012 I
 			| ''                                                     | 'Receipt'     | '14.03.2021 18:52:33' | '2'         | '270'    | '228,81'     | 'Main Company' | 'Purchase return order 231 dated 14.03.2021 18:52:33' | 'TRY'      | 'Interner'  | '1b90516b-b3ac-4ca5-bb47-44477975f242' |
 			| ''                                                     | 'Receipt'     | '14.03.2021 18:52:33' | '5'         | '450'    | '381,36'     | 'Main Company' | 'Purchase return order 231 dated 14.03.2021 18:52:33' | 'TRY'      | 'S/Yellow'  | '4fcbb4cf-3824-47fb-89b5-50d151315d4d' |
 	And I close all client application windows
+
+
+Scenario: _041530 Purchase return order clear posting
+	And I close all client application windows
+	* Select Purchase return order
+		Given I open hyperlink "e1cib/list/Document.PurchaseReturnOrder"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '231' |
+	* Clear posting
+		And in the table "List" I click the button named "ListContextMenuUndoPosting"
+		Then user message window does not contain messages
+		And I click "Registrations report" button
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Purchase return order 231 dated 14.03.2021 18:52:33' |
+			| 'Document registrations records'                    |
+		And I close current window
+	* Post Purchase return order
+		Given I open hyperlink "e1cib/list/Document.PurchaseReturnOrder"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '231' |
+		And in the table "List" I click the button named "ListContextMenuPost"		
+		Then user message window does not contain messages
+		And I click "Registrations report" button
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document contains values
+			| 'R1012 Invoice closing of purchase orders' |
+			| 'R1010 Purchase orders' |
+		And I close all client application windows

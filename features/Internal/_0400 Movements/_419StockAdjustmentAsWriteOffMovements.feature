@@ -66,7 +66,7 @@ Scenario: _041900 preparation (StockAdjustmentAsWriteOff)
 			| "Documents.StockAdjustmentAsWriteOff.FindByNumber(201).GetObject().Write(DocumentWriteMode.Posting);" |
 	
 
-Scenario: _041901 check SStockAdjustmentAsWriteOff movements by the Register  "R4010 Actual stocks"
+Scenario: _041901 check Stock adjustment as write off movements by the Register  "R4010 Actual stocks"
 	* Select Stock adjustment as write off
 		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsWriteOff"
 		And I go to line in "List" table
@@ -86,7 +86,7 @@ Scenario: _041901 check SStockAdjustmentAsWriteOff movements by the Register  "R
 			| ''                                                            | 'Expense'     | '15.03.2021 15:29:14' | '8'         | 'Store 01'   | 'M/White'   |	
 		And I close all client application windows
 
-Scenario: _041902 check Stock adjustment as surplus movements by the Register  "R4011 Free stocks"
+Scenario: _041902 check Stock adjustment as write off movements by the Register  "R4011 Free stocks"
 	* Select Stock adjustment as write off
 		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsWriteOff"
 		And I go to line in "List" table
@@ -104,4 +104,35 @@ Scenario: _041902 check Stock adjustment as surplus movements by the Register  "
 			| ''                                                            | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key'  |
 			| ''                                                            | 'Expense'     | '15.03.2021 15:29:14' | '2'         | 'Store 01'   | '38/Yellow' |
 			| ''                                                            | 'Expense'     | '15.03.2021 15:29:14' | '8'         | 'Store 01'   | 'M/White'   |	
+		And I close all client application windows
+
+
+Scenario: _041930 Stock adjustment as write off clear posting
+	And I close all client application windows
+	* Select Stock adjustment as write off
+		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsWriteOff"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '201' |
+	* Clear posting
+		And in the table "List" I click the button named "ListContextMenuUndoPosting"
+		Then user message window does not contain messages
+		And I click "Registrations report" button
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Stock adjustment as write-off 201 dated 15.03.2021 15:29:14' |
+			| 'Document registrations records'                    |
+		And I close current window
+	* Post Stock adjustment as write off
+		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsWriteOff"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '201' |
+		And in the table "List" I click the button named "ListContextMenuPost"		
+		Then user message window does not contain messages
+		And I click "Registrations report" button
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document contains values
+			| 'R4011 Free stocks' |
+			| 'R4010 Actual stocks' |
 		And I close all client application windows

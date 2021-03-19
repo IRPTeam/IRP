@@ -62,12 +62,10 @@ EndProcedure
 Procedure FillItemListBySpecificationAtServer()
 	Object.ItemList.Clear();
 	TableOfItemKeys = Catalogs.ItemKeys.GetTableBySpecification(Object.ItemKeyBundle);
-	For Each TableOfItemKeysRow In TableOfItemKeys Do
-		NewRowItemKey = Object.ItemList.Add();
-		NewRowItemKey.Key = New UUID();
-		NewRowItemKey.ItemKey = TableOfItemKeysRow.ItemKey;
-		NewRowItemKey.Unit = TableOfItemKeysRow.Unit;
-		NewRowItemKey.Quantity = TableOfItemKeysRow.Quantity;
+	For Each Row In TableOfItemKeys Do
+		NewRow = Object.ItemList.Add();
+		NewRow.Key = New UUID();
+		FillPropertyValues(NewRow, Row);
 	EndDo;
 	DocumentsServer.FillItemList(Object, ThisObject);
 EndProcedure
@@ -81,12 +79,10 @@ EndProcedure
 Procedure FillItemListByBundleContentAtServer()
 	Object.ItemList.Clear();
 	TableOfItemKeys = Catalogs.ItemKeys.GetTableByBundleContent(Object.ItemKeyBundle);
-	For Each TableOfItemKeysRow In TableOfItemKeys Do
-		NewRowItemKey = Object.ItemList.Add();
-		NewRowItemKey.Key = New UUID();
-		NewRowItemKey.ItemKey = TableOfItemKeysRow.ItemKey;
-		NewRowItemKey.Unit = TableOfItemKeysRow.Unit;
-		NewRowItemKey.Quantity = TableOfItemKeysRow.Quantity;
+	For Each Row In TableOfItemKeys Do
+		NewRow = Object.ItemList.Add();
+		NewRow.Key = New UUID();
+		FillPropertyValues(NewRow, Row);
 	EndDo;
 	DocumentsServer.FillItemList(Object, ThisObject);
 EndProcedure
@@ -221,6 +217,11 @@ EndProcedure
 &AtClient
 Procedure SearchByBarcode(Command, Barcode = "")
 	DocUnbundlingClient.SearchByBarcode(Barcode, Object, ThisObject);
+EndProcedure
+
+&AtClient
+Procedure ShowRowKey(Command)
+	DocumentsClient.ShowRowKey(ThisObject);
 EndProcedure
 
 #Region GroupTitleDecorations

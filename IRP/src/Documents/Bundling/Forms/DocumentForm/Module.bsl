@@ -199,6 +199,11 @@ Procedure OpenPickupItems(Command)
 	DocBundlingClient.OpenPickupItems(Object, ThisObject, Command);
 EndProcedure
 
+&AtClient
+Procedure ShowRowKey(Command)
+	DocumentsClient.ShowRowKey(ThisObject);
+EndProcedure
+
 #Region AddAttributes
 
 &AtClient

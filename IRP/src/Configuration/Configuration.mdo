@@ -774,8 +774,6 @@
   <accumulationRegisters>AccumulationRegister.ShipmentOrders</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.StockAdjustmentAsSurplus</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.StockAdjustmentAsWriteOff</accumulationRegisters>
-  <accumulationRegisters>AccumulationRegister.StockBalance</accumulationRegisters>
-  <accumulationRegisters>AccumulationRegister.StockReservation</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.TaxesTurnovers</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.TransferOrderBalance</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.T10000B_RowIDMovements</accumulationRegisters>

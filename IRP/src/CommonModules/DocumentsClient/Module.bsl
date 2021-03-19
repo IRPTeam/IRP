@@ -2454,6 +2454,8 @@ Procedure TableOnStartEdit(Object, Form, DataPath, Item, NewRow, Clone, AddInfo 
 		CurrentData.DeliveryDate = Form.CurrentDeliveryDate;
 	EndIf;
 	
+	CalculationStringsClientServer.CalculateItemsRow(Object, CurrentData, New Structure("CalculateQuantityInBaseUnit"));
+	
 	UserSettingsClient.TableOnStartEdit(Object, Form, DataPath, Item, NewRow, Clone);
 EndProcedure
 
@@ -3049,7 +3051,7 @@ Procedure ShowRowKey(Form) Export
 	|ResultsTreeBasis, ResultsTreeBasisUnit, ResultsTreeQuantityInBaseUnit, ResultsTreeKey,
 	|ResultsTreeRowID, ResultsTreeRowRef, ResultsTreeBasisKey, ResultsTreeCurrentStep,
 	|LinkedBasises,
-	|ItemListQuantityInBaseUnit";
+	|ItemListQuantityInBaseUnit, QuantityInBaseUnit";
 	
 	ArrayOfItemNames = StrSplit(ItemNames, ",");
 	For Each ItemName In ArrayOfItemNames Do

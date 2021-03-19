@@ -351,6 +351,7 @@ Function GetTableByBundleContent(ItemKeyBundle, AddInfo = Undefined) Export
 		|	BundleContentsSliceLast.ItemKeyBundle,
 		|	BundleContentsSliceLast.ItemKey,
 		|	BundleContentsSliceLast.Quantity,
+		|	BundleContentsSliceLast.Quantity AS QuantityInBaseUnit,
 		|	CASE
 		|		WHEN BundleContentsSliceLast.ItemKey.Unit <> VALUE(Catalog.Units.EmptyRef)
 		|			THEN BundleContentsSliceLast.ItemKey.Unit
@@ -366,10 +367,11 @@ EndFunction
 
 Function GetTableBySpecification(ItemKeyBundle, AddInfo = Undefined) Export
 	ResultTable = New ValueTable();
-	ResultTable.Columns.Add("ItemKeyBundle", New TypeDescription("CatalogRef.ItemKeys"));
-	ResultTable.Columns.Add("ItemKey", New TypeDescription("CatalogRef.ItemKeys"));
-	ResultTable.Columns.Add("Quantity", New TypeDescription("Number"));
-	ResultTable.Columns.Add("Unit", New TypeDescription("CatalogRef.Units"));
+	ResultTable.Columns.Add("ItemKeyBundle"      , New TypeDescription("CatalogRef.ItemKeys"));
+	ResultTable.Columns.Add("ItemKey"            , New TypeDescription("CatalogRef.ItemKeys"));
+	ResultTable.Columns.Add("Quantity"           , New TypeDescription("Number"));
+	ResultTable.Columns.Add("QuantityInBaseUnit" , New TypeDescription("Number"));	
+	ResultTable.Columns.Add("Unit"               , New TypeDescription("CatalogRef.Units"));
 	
 	Query = New Query();
 	Query.Text =
@@ -407,9 +409,7 @@ Function GetTableBySpecification(ItemKeyBundle, AddInfo = Undefined) Export
 		Item = TableOfProperties[0].Item;
 		TableOfProperties.GroupBy("Attribute, Value");
 		
-		ArrayOfItemKeys = FindOrCreateRefByProperties(TableOfProperties
-				, Item
-				, AddInfo);
+		ArrayOfItemKeys = FindOrCreateRefByProperties(TableOfProperties, Item, AddInfo);
 		
 		ItemKey = Undefined;
 		If Not ArrayOfItemKeys.Count() Then
@@ -419,9 +419,10 @@ Function GetTableBySpecification(ItemKeyBundle, AddInfo = Undefined) Export
 		ItemKey = ArrayOfItemKeys[0];
 		
 		NewRowResultTable = ResultTable.Add();
-		NewRowResultTable.ItemKeyBundle = ItemKeyBundle;
-		NewRowResultTable.ItemKey = ItemKey;
-		NewRowResultTable.Quantity = Quantity;
+		NewRowResultTable.ItemKeyBundle      = ItemKeyBundle;
+		NewRowResultTable.ItemKey            = ItemKey;
+		NewRowResultTable.Quantity           = Quantity;
+		NewRowResultTable.QuantityInBaseUnit = Quantity;		
 		NewRowResultTable.Unit = ?(ValueIsFilled(ItemKey.Unit), ItemKey.Unit, ItemKey.Item.Unit);
 	EndDo;
 	

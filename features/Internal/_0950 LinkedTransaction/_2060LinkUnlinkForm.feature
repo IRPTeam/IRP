@@ -228,6 +228,38 @@ Scenario: _2060002 check link/unlink form in the SC
 			| 'Dress' | 'M/White'  | 'Sales invoice 103 dated 05.03.2021 12:59:44' |
 			| 'Boots' | '37/18SD'  | 'Sales invoice 101 dated 05.03.2021 12:56:38' |
 			| 'Boots' | '37/18SD'  | 'Sales invoice 101 dated 05.03.2021 12:56:38' |
+	* Delete string, add it again, change unit
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' | 'Quantity' | 'Store'    |
+			| 'Boots' | '37/18SD'  | '2,000'    | 'Store 02' |
+		And in the table "ItemList" I click the button named "ItemListContextMenuDelete"
+		And I click "AddBasisDocuments" button
+		And I go to line in "BasisesTree" table
+			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
+			| 'TRY'      | '648,15' | '2,000'    | 'Boots, 37/18SD'   | 'pcs'  | 'No'  |
+		And I change "Use" checkbox in "BasisesTree" table
+		And I finish line editing in "BasisesTree" table
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'  | 'Item key' | 'Sales invoice'                               |
+			| 'Dress' | 'M/White'  | 'Sales invoice 103 dated 05.03.2021 12:59:44' |
+			| 'Boots' | '37/18SD'  | 'Sales invoice 101 dated 05.03.2021 12:56:38' |
+			| 'Boots' | '37/18SD'  | 'Sales invoice 101 dated 05.03.2021 12:56:38' |
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' | 'Quantity' | 'Store'    |
+			| 'Boots' | '37/18SD'  | '2,000'    | 'Store 02' |
+		And I activate "Unit" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click choice button of "Unit" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Boots (12 pcs)' |
+		And I select current line in "List" table
+		And "RowIDInfo" table contains lines
+			| '#' | 'Basis'                                       | 'Next step' | 'Q'     | 'Current step' |
+			| '1' | 'Sales invoice 103 dated 05.03.2021 12:59:44' | ''          | '8,000' | 'SC'           |
+			| '2' | 'Sales invoice 101 dated 05.03.2021 12:56:38' | ''          | '2,000' | 'SC'           |
+			| '3' | 'Sales invoice 103 dated 05.03.2021 12:59:44' | ''          | '24,000' | 'SC'           |
 		And I close all client application windows
 		
 		

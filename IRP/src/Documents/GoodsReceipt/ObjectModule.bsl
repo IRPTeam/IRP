@@ -4,11 +4,7 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 		Return;
 	EndIf;	
 	
-	If DataExchange.Load = True Then
-		Return;
-	EndIf;
-	If TransactionType = PredefinedValue("Enum.GoodsReceiptTransactionTypes.Bundling")
-			OR TransactionType = PredefinedValue("Enum.GoodsReceiptTransactionTypes.InventoryTransfer") Then
+	If TransactionType = Enums.GoodsReceiptTransactionTypes.InventoryTransfer Then
 		Partner = Undefined;
 		LegalName = Undefined;
 	EndIf;
@@ -39,34 +35,16 @@ Procedure UndoPosting(Cancel)
 EndProcedure
 
 Procedure Filling(FillingData, FillingText, StandardProcessing)
-	
 	If TypeOf(FillingData) = Type("Structure") Then
-		If FillingData.Property("BasedOn") And FillingData.BasedOn = "Bundling" Then
-			TransactionType = Enums.GoodsReceiptTransactionTypes.Bundling;
-			Filling_BasedOn(FillingData);
-		ElsIf FillingData.Property("BasedOn") And FillingData.BasedOn = "SalesReturn" Then
+		If FillingData.Property("BasedOn") And FillingData.BasedOn = "SalesReturn" Then
 			TransactionType = Enums.GoodsReceiptTransactionTypes.ReturnFromCustomer;
-			Filling_BasedOn(FillingData);
-		ElsIf FillingData.Property("BasedOn") And FillingData.BasedOn = "Unbundling" Then
-			TransactionType = Enums.GoodsReceiptTransactionTypes.Bundling;
-			Filling_BasedOn(FillingData);
+			FillPropertyValues(ThisObject, FillingData, "Company, Partner, LegalName");
+			RowIDInfoServer.AddLinkedDocumentRows(ThisObject, FillingData);
 		Else
 			FillPropertyValues(ThisObject, FillingData, RowIDInfoServer.GetSeperatorColumns(ThisObject.Metadata()));
 			RowIDInfoServer.AddLinkedDocumentRows(ThisObject, FillingData);
 		EndIf;
 	EndIf;
-	
-EndProcedure
-
-Procedure Filling_BasedOn(FillingData)
-	FillPropertyValues(ThisObject, FillingData, "Company, Partner, LegalName");
-	For Each Row In FillingData.ItemList Do
-		NewRow = ThisObject.ItemList.Add();
-		FillPropertyValues(NewRow, Row);
-		If Not ValueIsFilled(NewRow.Key) Then
-			NewRow.Key = New UUID();
-		EndIf;
-	EndDo;
 EndProcedure
 
 Procedure FillCheckProcessing(Cancel, CheckedAttributes)

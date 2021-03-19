@@ -902,6 +902,9 @@ Function UpdateUnit(Object, ItemRow, AddInfo = Undefined)
 EndFunction
 
 Procedure CalculateQuantityInBaseUnit(Object, ItemRow, AddInfo = Undefined)
+	If Not CommonFunctionsClientServer.ObjectHasProperty(ItemRow, "QuantityInBaseUnit") Then
+		Return;
+	EndIf;
 	UnitFactor = GetItemInfo.GetUnitFactor(ItemRow.ItemKey, ItemRow.Unit);
 	ItemRow.QuantityInBaseUnit = ItemRow.Quantity * UnitFactor;	
 EndProcedure

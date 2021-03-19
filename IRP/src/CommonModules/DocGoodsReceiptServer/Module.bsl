@@ -97,7 +97,6 @@ Procedure FillTransactionTypeChoiceList(Form)
 	Form.Items.TransactionType.ChoiceList.Add(Enums.GoodsReceiptTransactionTypes.Purchase, Metadata.Enums.GoodsReceiptTransactionTypes.EnumValues.Purchase.Synonym);
 	Form.Items.TransactionType.ChoiceList.Add(Enums.GoodsReceiptTransactionTypes.ReturnFromCustomer, Metadata.Enums.GoodsReceiptTransactionTypes.EnumValues.ReturnFromCustomer.Synonym);
 	Form.Items.TransactionType.ChoiceList.Add(Enums.GoodsReceiptTransactionTypes.InventoryTransfer, Metadata.Enums.GoodsReceiptTransactionTypes.EnumValues.InventoryTransfer.Synonym);
-	Form.Items.TransactionType.ChoiceList.Add(Enums.GoodsReceiptTransactionTypes.Bundling, Metadata.Enums.GoodsReceiptTransactionTypes.EnumValues.Bundling.Synonym);
 	
 EndProcedure
 

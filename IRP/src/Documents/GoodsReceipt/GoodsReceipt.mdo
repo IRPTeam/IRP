@@ -570,9 +570,7 @@
     </synonym>
     <group>FormCommandBarCreateBasedOn</group>
     <commandParameterType>
-      <types>DocumentRef.Unbundling</types>
       <types>DocumentRef.SalesReturn</types>
-      <types>DocumentRef.Bundling</types>
     </commandParameterType>
     <parameterUseMode>Multiple</parameterUseMode>
     <representation>Auto</representation>

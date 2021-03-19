@@ -1522,7 +1522,7 @@ Scenario: _090316 create Goods receipt for several Purchase order with different
 	* Check creation
 		Given I open hyperlink "e1cib/list/AccumulationRegister.R4031B_GoodsInTransitIncoming"
 		And "List" table contains lines
-		| 'Quantity' | 'Receipt basis'       | 'Store'    | 'Item key'  |
+		| 'Quantity' | 'Basis'       | 'Store'    | 'Item key'  |
 		| '20,000'   | '$$PurchaseOrder0903N146$$' | 'Store 03' | 'M/White'   |
 		| '20,000'   | '$$PurchaseOrder0903N146$$' | 'Store 03' | 'L/Green'   |
 		| '30,000'   | '$$PurchaseOrder0903N146$$' | 'Store 03' | '36/Yellow' |
@@ -1685,7 +1685,7 @@ Scenario: _090317 create Goods receipt for several Purchase order with different
 	* Check creation
 		Given I open hyperlink "e1cib/list/AccumulationRegister.R4031B_GoodsInTransitIncoming"
 		And "List" table contains lines
-		| 'Quantity' | 'Receipt basis'       | 'Store'    | 'Item key'  |
+		| 'Quantity' | 'Basis'       | 'Store'    | 'Item key'  |
 		| '20,000'   | '$$PurchaseOrder0903N148$$' | 'Store 02' | 'M/White'   |
 		| '20,000'   | '$$PurchaseOrder0903N148$$' | 'Store 02' | 'L/Green'   |
 		| '30,000'   | '$$PurchaseOrder0903N148$$' | 'Store 02' | '36/Yellow' |

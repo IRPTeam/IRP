@@ -61,7 +61,39 @@ Scenario: _028900 preparation (Goods receipt)
 	And I execute 1C:Enterprise script at server
 		| "Documents.PurchaseOrder.FindByNumber(102).GetObject().Write(DocumentWriteMode.Posting);" |
 		| "Documents.PurchaseInvoice.FindByNumber(102).GetObject().Write(DocumentWriteMode.Posting);" |
-	
+	When Create document PurchaseInvoice objects (linked)
+	And I execute 1C:Enterprise script at server
+		| "Documents.PurchaseInvoice.FindByNumber(102).GetObject().Write(DocumentWriteMode.Posting);" |
+		| "Documents.PurchaseInvoice.FindByNumber(101).GetObject().Write(DocumentWriteMode.Posting);" |
+	* Save PI numbers
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '101' |
+		And I select current line in "List" table	
+		And I delete "$$PurchaseInvoice2040005$$" variable
+		And I delete "$$NumberPurchaseInvoice2040005$$" variable
+		And I save the window as "$$PurchaseInvoice2040005$$"
+		And I save the value of "Number" field as "$$NumberPurchaseInvoice2040005$$"
+		And I close current window
+		And I go to line in "List" table
+			| 'Number'    |
+			| '102' |
+		And I select current line in "List" table	
+		And I delete "$$PurchaseInvoice20400051$$" variable
+		And I delete "$$NumberPurchaseInvoice20400051$$" variable
+		And I save the window as "$$PurchaseInvoice20400051$$"
+		And I save the value of "Number" field as "$$NumberPurchaseInvoice20400051$$"
+		And I close all client application windows
+	* Check or create InventoryTransfer021030
+		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
+		If "List" table does not contain lines Then
+				| "Number" |
+				| "$$NumberInventoryTransfer021030$$" |	
+			When create InventoryTransfer021030
+		And I close all client application windows
+		
+
 
 Scenario: _028901 create document Goods Receipt based on Purchase invoice (with PO, PI>PO)
 	* Select PI
@@ -140,7 +172,206 @@ Scenario: _028902 create document Goods Receipt based on Purchase order (with PI
 		And I click the button named "FormPostAndClose"
 		And I close all client application windows
 
+Scenario: _028905 create document Goods Receipt based on Inventory transfer
+	* Add items from basis documents
+		* Open form for create GR
+			Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
+			And I click the button named "FormCreate"
+		* Filling in the main details of the document
+			And I click Select button of "Company" field
+			And I go to line in "List" table
+				| 'Description'  |
+				| 'Main Company' | 
+			And I select current line in "List" table
+			And I click Select button of "Store" field
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Store 03'  |
+			And I select current line in "List" table
+			And I select "Inventory transfer" exact value from "Transaction type" drop-down list
+		* Select items from basis documents
+			And I click the button named "AddBasisDocuments"
+			And I go to line in "BasisesTree" table
+				| 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
+				| '3,000'    | 'Dress, L/Green'   | 'pcs'  | 'No'  |
+			And I change "Use" checkbox in "BasisesTree" table
+			And I finish line editing in "BasisesTree" table
+			And I click "Ok" button
+			And I click "Show row key" button				
+		* Check Item tab and RowID tab
+			And "ItemList" table contains lines
+				| 'Store'    | '#' | 'Quantity in base unit' | 'Item'  | 'Inventory transfer'          | 'Item key' | 'Quantity' | 'Sales invoice' | 'Unit' | 'Receipt basis'                                  | 'Purchase invoice' | 'Currency' | 'Sales return order' | 'Sales order' | 'Purchase order' | 'Inventory transfer order' | 'Sales return' |
+				| 'Store 03' | '1' | '3,000'                 | 'Dress' | '$$InventoryTransfer021030$$' | 'L/Green'  | '3,000'    | ''              | 'pcs'  | 'Inventory transfer 1 dated 22.03.2021 12:52:41' | ''                 | ''         | ''                   | ''            | ''               | ''                         | ''             |
+			And "RowIDInfo" table contains lines
+				| 'Basis'                       | 'Next step' | 'Q'     | 'Current step'     |
+				| '$$InventoryTransfer021030$$' | ''          | '3,000' | 'GR' |
+		And I close all client application windows
+	* Create document Goods Receipt based on Inventory transfer (Create button)
+		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
+		And I go to line in "List" table
+			| 'Number'                           |
+			| '$$NumberInventoryTransfer021030$$' |
+		And I click the button named "FormDocumentGoodsReceiptGenerate"
+		And I click "Ok" button	
+		And Delay 1
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "TransactionType" became equal to "Inventory transfer"
+		Then the form attribute named "Store" became equal to "Store 03"
+		And "ItemList" table contains lines
+			| '#' | 'Item'  | 'Inventory transfer'          | 'Item key' | 'Quantity' | 'Sales invoice' | 'Unit' | 'Store'    | 'Receipt basis'               |
+			| '1' | 'Dress' | '$$InventoryTransfer021030$$' | 'L/Green'  | '3,000'    | ''              | 'pcs'  | 'Store 03' | '$$InventoryTransfer021030$$' |
+		And I click "Show row key" button
+		And I go to line in "ItemList" table
+			| '#' |
+			| '1' |
+		And I activate "Key" field in "ItemList" table
+		And I save the current field value as "$$Rov1GoodsReceipt028905$$"	
+		And I move to "Row ID Info" tab
+		And "RowIDInfo" table contains lines
+			| '#' | 'Key'                         | 'Basis'                       | 'Row ID' | 'Next step' | 'Q'     | 'Basis key' | 'Current step' | 'Row ref' |
+			| '1' | '$$Rov1GoodsReceipt028905$$' | '$$InventoryTransfer021030$$' | '*'      | ''          | '3,000' | '*'         | 'GR'           | '*'       |
+		Then the number of "RowIDInfo" table lines is "равно" "1"
+		And I click the button named "FormPost"
+		And I delete "$$NumberGoodsReceipt028905$$" variable
+		And I delete "$$GoodsReceipt028905$$" variable
+		And I save the value of "Number" field as "$$NumberGoodsReceipt028905$$"
+		And I save the window as "$$GoodsReceipt028905$$"
+		And I click the button named "FormPostAndClose"
+		
 
+
+Scenario: _028930 check link/unlink form in the GR
+	* Open form for create GR
+		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
+		And I click the button named "FormCreate"
+	* Filling in the main details of the document
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Main Company' | 
+		And I select current line in "List" table
+		And I click Select button of "Store" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Store 02'  |
+		And I select current line in "List" table
+		And I select "Purchase" exact value from "Transaction type" drop-down list
+		And I click Select button of "Partner" field
+		And I click "List" button
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Crystal'     |
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Company Adel'     |
+		And I select current line in "List" table
+	* Select items from basis documents
+		And I click the button named "AddBasisDocuments"
+		And I expand current line in "BasisesTree" table
+		And I go to line in "BasisesTree" table
+			| 'Currency' | 'Price'    | 'Quantity' | 'Row presentation' | 'Unit'           | 'Use' |
+			| 'TRY'      | '8 400,00' | '2,000'    | 'Boots, 36/18SD'   | 'Boots (12 pcs)' | 'No'  |
+		And I change "Use" checkbox in "BasisesTree" table
+		And I finish line editing in "BasisesTree" table
+		And I go to line in "BasisesTree" table
+			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
+			| 'TRY'      | '520,00' | '10,000'    | 'Dress, M/White'   | 'pcs'  | 'No'  |
+		And I change "Use" checkbox in "BasisesTree" table
+		And I finish line editing in "BasisesTree" table
+		And I go to line in "BasisesTree" table
+			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
+			| 'TRY'      | '400,00' | '15,000'    | 'Trousers, 36/Yellow'   | 'pcs'  | 'No'  |
+		And I change "Use" checkbox in "BasisesTree" table
+		And I finish line editing in "BasisesTree" table
+		And I click "Ok" button
+		And I click "Show row key" button
+	* Check RowIDInfo
+		And "RowIDInfo" table contains lines
+		| '#' | 'Basis'                                          | 'Next step' | 'Q'      | 'Current step' |
+		| '1' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' | ''          | '10,000' | 'GR'           |
+		| '2' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' | ''          | '15,000' | 'GR'           |
+		| '3' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' | ''          | '24,000' | 'GR'           |
+	* Unlink line
+		And I click the button named "LinkUnlinkBasisDocuments"
+		And I go to line in "ItemListRows" table
+			| '#' | 'Quantity' | 'Row presentation' | 'Store'    | 'Unit'           |
+			| '3' | '2,000'    | 'Boots, 36/18SD'   | 'Store 02' | 'Boots (12 pcs)' |
+		And I expand a line in "ResultsTree" table
+			| 'Row presentation'                           |
+			| 'Purchase invoice 101 dated 05.03.2021 12:14:08' |
+		And I activate field named "ItemListRowsRowPresentation" in "ItemListRows" table
+		And I go to line in "ResultsTree" table
+			| 'Currency' | 'Price'    | 'Quantity' | 'Row presentation' | 'Unit' |
+			| 'TRY'      | '8 400,00' | '2,000'    | 'Boots, 36/18SD'   | 'Boots (12 pcs)'  |
+		And I click "Unlink" button
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'     | 'Item key'  | 'Purchase invoice'                           |
+			| 'Dress'    | 'M/White'   | 'Purchase invoice 101 dated 05.03.2021 12:14:08' |
+			| 'Trousers' | '36/Yellow' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' |
+			| 'Boots'    | '36/18SD'   | ''                                           |
+	* Link line
+		And I click the button named "LinkUnlinkBasisDocuments"
+		And I expand a line in "ResultsTree" table
+			| 'Row presentation'                           |
+			| 'Purchase invoice 101 dated 05.03.2021 12:14:08' |
+		And I go to line in "ItemListRows" table
+			| '#' | 'Quantity' | 'Row presentation' | 'Store'    | 'Unit'           |
+			| '3' | '2,000'    | 'Boots, 36/18SD'   | 'Store 02' | 'Boots (12 pcs)' |
+		And I expand a line in "BasisesTree" table
+			| 'Row presentation'                           |
+			| 'Purchase invoice 101 dated 05.03.2021 12:14:08' |
+		And I activate field named "ItemListRowsRowPresentation" in "ItemListRows" table
+		And I go to line in "BasisesTree" table
+			| 'Currency' | 'Price'    | 'Quantity' | 'Row presentation' | 'Unit'           |
+			| 'TRY'      | '8 400,00' | '2,000'    | 'Boots, 36/18SD'   | 'Boots (12 pcs)' |
+		And I click "Link" button
+		And I click "Ok" button
+		And "RowIDInfo" table contains lines
+			| '#' | 'Basis'                                          | 'Next step' | 'Q'      | 'Current step' |
+			| '1' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' | ''          | '10,000' | 'GR'           |
+			| '2' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' | ''          | '15,000' | 'GR'           |
+			| '3' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' | ''          | '24,000' | 'GR'           |
+		And "ItemList" table contains lines
+			| 'Item'     | 'Item key'  | 'Purchase invoice'                           |
+			| 'Dress'    | 'M/White'   | 'Purchase invoice 101 dated 05.03.2021 12:14:08' |
+			| 'Trousers' | '36/Yellow' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' |
+			| 'Boots'    | '36/18SD'   | 'Purchase invoice 101 dated 05.03.2021 12:14:08' |
+	* Delete string, add it again, change unit
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' | 'Quantity' | 'Store'    |
+			| 'Boots' | '36/18SD'  | '2,000'    | 'Store 02' |
+		And in the table "ItemList" I click the button named "ItemListContextMenuDelete"
+		And I click the button named "AddBasisDocuments"
+		And I go to line in "BasisesTree" table
+			| 'Currency' | 'Price'    | 'Quantity' | 'Row presentation' | 'Unit'           | 'Use' |
+			| 'TRY'      | '8 400,00' | '2,000'    | 'Boots, 36/18SD'   | 'Boots (12 pcs)' | 'No'  |
+		And I change "Use" checkbox in "BasisesTree" table
+		And I finish line editing in "BasisesTree" table
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'     | 'Item key'  | 'Purchase invoice'                               |
+			| 'Dress'    | 'M/White'   | 'Purchase invoice 101 dated 05.03.2021 12:14:08' |
+			| 'Trousers' | '36/Yellow' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' |
+			| 'Boots'    | '36/18SD'   | 'Purchase invoice 101 dated 05.03.2021 12:14:08' |
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' | 'Quantity' | 'Store'    |
+			| 'Boots' | '36/18SD'  | '2,000'    | 'Store 02' |
+		And I activate "Unit" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click choice button of "Unit" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'pcs' |
+		And I select current line in "List" table
+		And "RowIDInfo" table contains lines
+			| 'Basis'                                          | 'Next step' | 'Q'      |
+			| 'Purchase invoice 101 dated 05.03.2021 12:14:08' | ''          | '10,000' |
+			| 'Purchase invoice 101 dated 05.03.2021 12:14:08' | ''          | '15,000' |
+			| 'Purchase invoice 101 dated 05.03.2021 12:14:08' | ''          | '2,000'  |
+		And I close all client application windows
 
 Scenario: _300507 check connection to GoodsReceipt report "Related documents"
 	Given I open hyperlink "e1cib/list/Document.GoodsReceipt"

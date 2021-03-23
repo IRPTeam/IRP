@@ -1311,10 +1311,10 @@ Scenario: _0154095 check store, company, tabular part input by search in line in
 		| 'Business unit'        | 'Revenue type' |
 		| 'Logistics department' | 'Fuel'         |
 	* Change revenue type
-		And I select "rev" from "Expense type" drop-down list by string in "ItemList" table
+		And I select "rev" from "Revenue type" drop-down list by string in "ItemList" table
 		And "ItemList" table contains lines
 			| 'Business unit'        | 'Revenue type' |
-			| 'Logistics department' | 'Expense'         |
+			| 'Logistics department' | 'Revenue'         |
 		And I close all client application windows
 
 
@@ -1632,7 +1632,7 @@ Scenario: _01540112 check item and item key input by search in line in a documen
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrderClosing"
 		And I click the button named "FormCreate"
 	* Item and item key input by search in line
-		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click the button named "Add"		
 		And I select "boo" from "Item" drop-down list by string in "ItemList" table
 		And I activate "Item key" field in "ItemList" table
 		And I select "36" from "Item key" drop-down list by string in "ItemList" table
@@ -1640,7 +1640,7 @@ Scenario: _01540112 check item and item key input by search in line in a documen
 		And "ItemList" table contains lines
 		| 'Item'     | 'Item key'  |
 		| 'Boots'    | '36/18SD' |
-		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click the button named "Add"
 		And I input "J22001" text in "Item" field of "ItemList" table		
 		And drop-down list "Item" is equal to:
 		| (J22001) Jacket J22001 |

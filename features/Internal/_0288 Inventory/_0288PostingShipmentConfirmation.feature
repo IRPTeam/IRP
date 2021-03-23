@@ -381,7 +381,7 @@ Scenario: _028810 create document Shipment confirmation based on Inventory trans
 		* Check Item tab and RowID tab
 			And "ItemList" table contains lines
 				| 'Store'    | '#' | 'Quantity in base unit' | 'Item'  | 'Inventory transfer'          | 'Item key' | 'Quantity' | 'Sales invoice' | 'Unit' | 'Shipment basis'                                  |
-				| 'Store 02' | '1' | '3,000'                 | 'Dress' | '$$InventoryTransfer021030$$' | 'L/Green'  | '3,000'    | ''              | 'pcs'  | 'Inventory transfer 1 dated 22.03.2021 12:52:41' |
+				| 'Store 02' | '1' | '3,000'                 | 'Dress' | '$$InventoryTransfer021030$$' | 'L/Green'  | '3,000'    | ''              | 'pcs'  | '$$InventoryTransfer021030$$' |
 			And "RowIDInfo" table contains lines
 				| 'Basis'                       | 'Next step' | 'Q'     | 'Current step'     |
 				| '$$InventoryTransfer021030$$' | ''          | '3,000' | 'SC' |

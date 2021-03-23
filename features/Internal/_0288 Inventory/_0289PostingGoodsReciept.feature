@@ -64,7 +64,11 @@ Scenario: _028900 preparation (Goods receipt)
 	When Create document PurchaseInvoice objects (linked)
 	And I execute 1C:Enterprise script at server
 		| "Documents.PurchaseInvoice.FindByNumber(102).GetObject().Write(DocumentWriteMode.Posting);" |
-		| "Documents.PurchaseInvoice.FindByNumber(101).GetObject().Write(DocumentWriteMode.Posting);" |
+	Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+	And I go to line in "List" table
+			| 'Number'    | 'Partner'    |
+			| '102' | 'Astar'|
+	And in the table "List" I click the button named "ListContextMenuPost"		
 	* Save PI numbers
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		And I go to line in "List" table
@@ -77,8 +81,8 @@ Scenario: _028900 preparation (Goods receipt)
 		And I save the value of "Number" field as "$$NumberPurchaseInvoice2040005$$"
 		And I close current window
 		And I go to line in "List" table
-			| 'Number'    |
-			| '102' |
+			| 'Number'    | 'Partner'    |
+			| '102' | 'Astar'|
 		And I select current line in "List" table	
 		And I delete "$$PurchaseInvoice20400051$$" variable
 		And I delete "$$NumberPurchaseInvoice20400051$$" variable
@@ -99,8 +103,8 @@ Scenario: _028901 create document Goods Receipt based on Purchase invoice (with 
 	* Select PI
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		And I go to line in "List" table
-			| 'Number'  |
-			| '102'      |
+			| 'Number'  | 'Partner'|
+			| '102'      | 'Ferron BP' |
 		And I click the button named "FormDocumentGoodsReceiptGenerate"	
 		And "BasisesTree" table contains lines
 			| 'Row presentation'                               | 'Use'                                            | 'Quantity' | 'Unit'           | 'Price'  | 'Currency' |
@@ -201,7 +205,7 @@ Scenario: _028905 create document Goods Receipt based on Inventory transfer
 		* Check Item tab and RowID tab
 			And "ItemList" table contains lines
 				| 'Store'    | '#' | 'Quantity in base unit' | 'Item'  | 'Inventory transfer'          | 'Item key' | 'Quantity' | 'Sales invoice' | 'Unit' | 'Receipt basis'                                  | 'Purchase invoice' | 'Currency' | 'Sales return order' | 'Sales order' | 'Purchase order' | 'Inventory transfer order' | 'Sales return' |
-				| 'Store 03' | '1' | '3,000'                 | 'Dress' | '$$InventoryTransfer021030$$' | 'L/Green'  | '3,000'    | ''              | 'pcs'  | 'Inventory transfer 1 dated 22.03.2021 12:52:41' | ''                 | ''         | ''                   | ''            | ''               | ''                         | ''             |
+				| 'Store 03' | '1' | '3,000'                 | 'Dress' | '$$InventoryTransfer021030$$' | 'L/Green'  | '3,000'    | ''              | 'pcs'  | '$$InventoryTransfer021030$$' | ''                 | ''         | ''                   | ''            | ''               | ''                         | ''             |
 			And "RowIDInfo" table contains lines
 				| 'Basis'                       | 'Next step' | 'Q'     | 'Current step'     |
 				| '$$InventoryTransfer021030$$' | ''          | '3,000' | 'GR' |

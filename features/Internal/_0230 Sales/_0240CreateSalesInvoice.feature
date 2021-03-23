@@ -361,7 +361,7 @@ Scenario: _024004 create SI using form link/unlink
 	* Check RowIDInfo
 		And "RowIDInfo" table contains lines
 		| '#' | 'Basis'                                              | 'Next step' | 'Q'      | 'Current step' |
-		| '1' | 'Sales order 16*'                                    | ''          | '10,000' | 'SI&SC'        |
+		| '1' | 'Sales order 15 dated 01.02.2021 19:50:45'           | ''          | '10,000' | 'SI&SC'        |
 		| '2' | 'Shipment confirmation 17 dated 25.02.2021 16:28:54' | ''          | '10,000' | 'SI'           |
 		| '3' | 'Shipment confirmation 15 dated 25.02.2021 14:13:30' | ''          | '7,000'  | 'SI'           |
 	* Unlink line
@@ -378,12 +378,12 @@ Scenario: _024004 create SI using form link/unlink
 		And I click "Save" button	
 		And "RowIDInfo" table contains lines
 			| '#' | 'Basis'                                              | 'Next step' | 'Q'      | 'Current step' |
-			| '1' | 'Sales order 16*'                                    | 'SC'        | '10,000' | 'SI&SC'        |
+			| '1' | 'Sales order 15 dated 01.02.2021 19:50:45'           | 'SC'        | '10,000' | 'SI&SC'        |
 			| '2' | 'Shipment confirmation 17 dated 25.02.2021 16:28:54' | ''          | '10,000' | 'SI'           |
 			| '3' | ''                                                   | 'SC'        | '7,000'  | ''             |
 		And "ItemList" table contains lines
 			| 'Item'  | 'Item key' | 'Sales order'                              |
-			| 'Dress' | 'XS/Blue'  | 'Sales order 16*'                          |
+			| 'Dress' | 'XS/Blue'  | 'Sales order 15 dated 01.02.2021 19:50:45' |
 			| 'Dress' | 'S/Yellow' | ''                                         |
 			| 'Shirt' | '36/Red'   | ''                                         |
 	* Link line
@@ -399,12 +399,12 @@ Scenario: _024004 create SI using form link/unlink
 		And I click "Ok" button
 		And "RowIDInfo" table contains lines
 			| '#' | 'Basis'                                              | 'Next step' | 'Q'      | 'Current step' |
-			| '1' | 'Sales order 16*'                                    | ''          | '10,000' | 'SI&SC'        |
+			| '1' | 'Sales order 15 dated 01.02.2021 19:50:45'           | ''          | '10,000' | 'SI&SC'        |
 			| '2' | 'Shipment confirmation 17 dated 25.02.2021 16:28:54' | ''          | '10,000' | 'SI'           |
 			| '3' | 'Shipment confirmation 15 dated 25.02.2021 14:13:30' | ''          | '7,000'  | 'SI'           |
 		And "ItemList" table contains lines
 			| 'Item'  | 'Item key' | 'Sales order'                              |
-			| 'Dress' | 'XS/Blue'  | 'Sales order 16*'                          |
+			| 'Dress' | 'XS/Blue'  | 'Sales order 15 dated 01.02.2021 19:50:45' |
 			| 'Dress' | 'S/Yellow' | ''                                         |
 			| 'Shirt' | '36/Red'   | 'Sales order 15 dated 01.02.2021 19:50:45' |
 	* Delete string, add it again, change unit

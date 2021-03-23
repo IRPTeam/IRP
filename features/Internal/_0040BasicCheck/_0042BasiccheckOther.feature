@@ -561,34 +561,12 @@ Scenario: Open object form "ShipmentOrders"
 	And I close current window
 
 	
-Scenario: Open list form "StockAdjustmentAsSurplus" 
 
-	Given I open "StockAdjustmentAsSurplus" accumulation register list form 
-	If the warning is displayed then
-		Then I raise "Failed to open information register form StockAdjustmentAsSurplus" exception
-	And I close current window
-
-Scenario: Open object form "StockAdjustmentAsSurplus"
-
-	Given I open "StockAdjustmentAsSurplus" accumulation register default form
-	If the warning is displayed then
-		Then I raise "Failed to open information register form StockAdjustmentAsSurplus" exception
-	And I close current window
 
 	
-Scenario: Open list form "StockAdjustmentAsWriteOff" 
 
-	Given I open "StockAdjustmentAsWriteOff" accumulation register list form 
-	If the warning is displayed then
-		Then I raise "Failed to open information register form StockAdjustmentAsWriteOff" exception
-	And I close current window
 
-Scenario: Open object form "StockAdjustmentAsWriteOff"
 
-	Given I open "StockAdjustmentAsWriteOff" accumulation register default form
-	If the warning is displayed then
-		Then I raise "Failed to open information register form StockAdjustmentAsWriteOff" exception
-	And I close current window
 
 	
 Scenario: Open list form "TaxesTurnovers" 
@@ -606,19 +584,6 @@ Scenario: Open object form "TaxesTurnovers"
 	And I close current window
 
 	
-Scenario: Open list form "TransferOrderBalance" 
-
-	Given I open "TransferOrderBalance" accumulation register list form 
-	If the warning is displayed then
-		Then I raise "Failed to open information register form TransferOrderBalance" exception
-	And I close current window
-
-Scenario: Open object form "TransferOrderBalance"
-
-	Given I open "TransferOrderBalance" accumulation register default form
-	If the warning is displayed then
-		Then I raise "Failed to open information register form TransferOrderBalance" exception
-	And I close current window
 
 
 

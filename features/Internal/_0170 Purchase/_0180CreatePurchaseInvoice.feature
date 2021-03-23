@@ -60,6 +60,12 @@ Scenario: _018000 preparation
 		When Create document GoodsReceipt objects (creation based on, without PO and PI)
 		And I execute 1C:Enterprise script at server
 			| "Documents.GoodsReceipt.FindByNumber(12).GetObject().Write(DocumentWriteMode.Posting);" |
+		When Create document SalesOrder objects (SC before SI, creation based on)
+		And I execute 1C:Enterprise script at server
+			| "Documents.SalesOrder.FindByNumber(15).GetObject().Write(DocumentWriteMode.Posting);" |
+		When Create document InternalSupplyRequest objects (check movements)
+		And I execute 1C:Enterprise script at server
+			| "Documents.InternalSupplyRequest.FindByNumber(117).GetObject().Write(DocumentWriteMode.Posting);" |
 
 
 
@@ -337,9 +343,159 @@ Scenario: _018004 create PI based on GR without PO
 			| ''         | ''          | 'Goods receipt 12 dated 02.03.2021 12:16:02' | ''        | '24,000' | '24,000' |
 		And I close all client application windows
 
+Scenario: _018005 create Purchase invoice based on Internal supply request
+	And I close all client application windows
+	* Add items from basis documents
+		* Open form for create PI
+			Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+			And I click the button named "FormCreate"
+		* Filling in the main details of the document
+			And I click Select button of "Company" field
+			And I go to line in "List" table
+				| 'Description'  |
+				| 'Main Company' | 
+			And I select current line in "List" table
+			And I click Select button of "Partner" field
+			And I go to line in "List" table
+				| 'Description'  |
+				| 'Ferron BP' | 
+			And I select current line in "List" table
+			And I click Select button of "Partner term" field
+			And I go to line in "List" table
+				| 'Description'  |
+				| 'Vendor Ferron, TRY' | 
+			And I select current line in "List" table
+			And I click Select button of "Store" field
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Store 02'  |
+			And I select current line in "List" table
+		* Select items from basis documents
+			And I click the button named "AddBasisDocuments"
+			And I go to line in "BasisesTree" table
+				| 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
+				| '50,000'    | 'Dress, XS/Blue'   | 'pcs'  | 'No'  |
+			And I change "Use" checkbox in "BasisesTree" table
+			And I finish line editing in "BasisesTree" table
+			And I go to line in "BasisesTree" table
+				| 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
+				| '10,000'    | 'Dress, S/Yellow'   | 'pcs'  | 'No'  |
+			And I change "Use" checkbox in "BasisesTree" table
+			And I click "Ok" button
+			And I click "Show row key" button
+			* Set Use GR checkbox
+				And I go to line in "ItemList" table
+					| 'Item'  | 'Item key' |
+					| 'Dress' | 'S/Yellow' |
+				And I set "Use goods receipt" checkbox in "ItemList" table
+				And I finish line editing in "ItemList" table
+				And I go to line in "ItemList" table
+					| 'Item'  | 'Item key' |
+					| 'Dress' | 'XS/Blue'  |
+				And I set "Use goods receipt" checkbox in "ItemList" table
+				And I finish line editing in "ItemList" table					
+			And I click "Save" button							
+		* Check Item tab and RowID tab
+			And "ItemList" table contains lines
+				| 'Store'    | 'Internal supply request'                               | 'Quantity in base unit' | 'Business unit' | 'Price type' | 'Item'  | 'Item key' | 'Dont calculate row' | 'Q'      | 'Unit' | 'Tax amount' | 'Price' | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Expense type' | 'Detail' | 'Sales order' | 'Purchase order' | 'Delivery date' |
+				| 'Store 02' | 'Internal supply request 117 dated 12.02.2021 14:39:38' | '10,000'                | ''              | ''           | 'Dress' | 'S/Yellow' | 'No'                 | '10,000' | 'pcs'  | ''           | ''      | ''    | ''              | ''           | ''             | ''             | ''       | ''            | ''               | ''              |
+				| 'Store 02' | 'Internal supply request 117 dated 12.02.2021 14:39:38' | '50,000'                | ''              | ''           | 'Dress' | 'XS/Blue'  | 'No'                 | '50,000' | 'pcs'  | ''           | ''      | ''    | ''              | ''           | ''             | ''             | ''       | ''            | ''               | ''              |
+			And "RowIDInfo" table contains lines
+				| 'Basis'                                                 | 'Next step' | 'Q'      | 'Current step' |
+				| 'Internal supply request 117 dated 12.02.2021 14:39:38' | 'GR'          | '10,000' | 'ITO&PO&PI'    |
+				| 'Internal supply request 117 dated 12.02.2021 14:39:38' | 'GR'          | '50,000' | 'ITO&PO&PI'    |
+			Then the number of "RowIDInfo" table lines is "равно" "2"	
+		And I close all client application windows
+	* Create PI based on ISR (Create button)
+		Given I open hyperlink "e1cib/list/Document.InternalSupplyRequest"
+		And I go to line in "List" table
+			| 'Number'                           |
+			| '117' |
+		And I select current line in "List" table
+		And I click "Show row key" button
+		And I go to line in "ItemList" table
+			| '#' |
+			| '1' |
+		And I activate "Key" field in "ItemList" table
+		And I save the current field value as "$$Rov1InternalSupplyRequestr017006$$"
+		And I go to line in "ItemList" table
+			| '#' |
+			| '2' |
+		And I activate "Key" field in "ItemList" table
+		And I save the current field value as "$$Rov2InternalSupplyRequestr017006$$"
+		And I click the button named "FormDocumentPurchaseInvoiceGenerate"
+		And I click "Ok" button	
+		And Delay 1
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Store" became equal to "Store 02"
+		And I click "Show row key" button	
+		And "ItemList" table contains lines
+			| 'Store'    | 'Internal supply request'                               | 'Quantity in base unit' | 'Business unit' | 'Price type' | 'Item'  | 'Item key' | 'Dont calculate row' | 'Q'      | 'Unit' | 'Tax amount' | 'Price' | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Expense type' | 'Detail' | 'Sales order' | 'Purchase order' | 'Delivery date' |
+			| 'Store 02' | 'Internal supply request 117 dated 12.02.2021 14:39:38' | '10,000'                | ''              | ''           | 'Dress' | 'S/Yellow' | 'No'                 | '10,000' | 'pcs'  | ''           | ''      | ''    | ''              | ''           | ''             | ''             | ''       | ''            | ''               | ''              |
+			| 'Store 02' | 'Internal supply request 117 dated 12.02.2021 14:39:38' | '50,000'                | ''              | ''           | 'Dress' | 'XS/Blue'  | 'No'                 | '50,000' | 'pcs'  | ''           | ''      | ''    | ''              | ''           | ''             | ''             | ''       | ''            | ''               | ''              |
+		And I go to line in "ItemList" table
+			| '#' |
+			| '1' |
+		And I activate "Key" field in "ItemList" table
+		And I delete "$$Rov1PurchaseInvoice018005$$" variable
+		And I save the current field value as "$$Rov1PurchaseInvoice018005$$"
+		And I go to line in "ItemList" table
+			| '#' |
+			| '2' |
+		And I activate "Key" field in "ItemList" table
+		And I delete "$$Rov2PurchaseInvoice018005$$" variable
+		And I save the current field value as "$$Rov2PurchaseInvoice018005$$"
+		* Set Use GR checkbox
+			And I go to line in "ItemList" table
+				| 'Item'  | 'Item key' |
+				| 'Dress' | 'S/Yellow' |
+			And I set "Use goods receipt" checkbox in "ItemList" table
+			And I finish line editing in "ItemList" table
+			And I go to line in "ItemList" table
+				| 'Item'  | 'Item key' |
+				| 'Dress' | 'XS/Blue'  |
+			And I set "Use goods receipt" checkbox in "ItemList" table
+			And I finish line editing in "ItemList" table	
+		And I click "Save" button	
+		And I move to "Row ID Info" tab
+		And "RowIDInfo" table contains lines
+			| '#' | 'Key'                         | 'Basis'                                                 | 'Row ID'                               | 'Next step' | 'Q'      | 'Basis key'                            | 'Current step' | 'Row ref'                              |
+			| '1' | '$$Rov1PurchaseInvoice018005$$' | 'Internal supply request 117 dated 12.02.2021 14:39:38' | '$$Rov1InternalSupplyRequestr017006$$' | 'GR'     | '10,000' | '$$Rov1InternalSupplyRequestr017006$$' | 'ITO&PO&PI'    | '$$Rov1InternalSupplyRequestr017006$$' |
+			| '2' | '$$Rov2PurchaseInvoice018005$$' | 'Internal supply request 117 dated 12.02.2021 14:39:38' | '$$Rov2InternalSupplyRequestr017006$$' | 'GR'     | '50,000' | '$$Rov2InternalSupplyRequestr017006$$' | 'ITO&PO&PI'    | '$$Rov2InternalSupplyRequestr017006$$' |
+		Then the number of "RowIDInfo" table lines is "равно" "2"
+		* Filling in the main details of the document
+			And I click Select button of "Company" field
+			And I go to line in "List" table
+				| 'Description'  |
+				| 'Main Company' | 
+			And I select current line in "List" table
+			And I click Select button of "Partner" field
+			And I go to line in "List" table
+				| 'Description'  |
+				| 'Ferron BP' | 
+			And I select current line in "List" table
+			And I click Select button of "Partner term" field
+			And I go to line in "List" table
+				| 'Description'  |
+				| 'Vendor Ferron, TRY' | 
+			And I select current line in "List" table
+			And I click "OK" button					
+		And I delete "$$NumberPurchaseInvoice018005$$" variable
+		And I delete "$$PurchaseInvoice018005$$" variable
+		And I save the value of "Number" field as "$$NumberPurchaseInvoice018005$$"
+		And I save the window as "$$PurchaseInvoice018005$$"
+		And I click the button named "FormWrite"
+		And I close current window		
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And "List" table contains lines
+			| 'Number'                |
+			| '$$NumberPurchaseInvoice018005$$' |
+		And I close all client application windows
+		
 
 
 Scenario: _018012 Purchase invoice creation without PO
+	And I close all client application windows
 	* Creating Purchase Invoice without Purchase order	
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		And I click the button named "FormCreate"
@@ -414,6 +570,137 @@ Scenario: _018012 Purchase invoice creation without PO
 		And I click the button named "FormPostAndClose"
 	
 
+Scenario: _018013 create PI using form link/unlink
+	* Open PI form
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I click the button named "FormCreate"
+	* Filling in the details
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Ferron BP'   |
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
+			| 'Description'       |
+			| 'Company Ferron BP' |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description'           |
+			| 'Vendor Ferron, TRY' |
+		And I select current line in "List" table
+		And I click Select button of "Store" field
+		And I go to line in "List" table
+			| 'Description'           |
+			| 'Store 02' |
+		And I select current line in "List" table
+	* Select items from basis documents
+		And I click the button named "AddBasisDocuments"		
+		And I go to line in "BasisesTree" table
+			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
+			| 'TRY'      | '150,00' | '2,000'   | 'Service, Interner'   | 'pcs'  | 'No'  |
+		And I change "Use" checkbox in "BasisesTree" table
+		And I finish line editing in "BasisesTree" table
+		And I go to line in "BasisesTree" table
+			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
+			| 'TRY'      | '100,00' | '5,000'    | 'Dress, S/Yellow'  | 'pcs'  | 'No'  |
+		And I change "Use" checkbox in "BasisesTree" table
+		And I finish line editing in "BasisesTree" table
+		And I go to line in "BasisesTree" table
+			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
+			| 'TRY'      | '8 400,00' | '2,000'    | 'Boots, 37/18SD'  | 'Boots (12 pcs)'  | 'No'  |
+		And I change "Use" checkbox in "BasisesTree" table
+		And I finish line editing in "BasisesTree" table
+		And I click "Ok" button
+		And I click "Show row key" button
+	* Check RowIDInfo
+		And "RowIDInfo" table contains lines
+		| '#' | 'Basis'                                        | 'Next step' | 'Q'      | 'Current step' |
+		| '1' | 'Sales order 15 dated 01.02.2021 19:50:45'     | ''          | '24,000' | 'PO&PI'        |
+		| '2' | 'Purchase order 217 dated 12.02.2021 12:45:05' | ''          | '5,000'  | 'PI&GR'        |
+		| '3' | 'Purchase order 217 dated 12.02.2021 12:45:05' | ''          | '2,000'  | 'PI'           |
+		Then the number of "RowIDInfo" table lines is "равно" "3"
+	* Unlink line
+		And I click the button named "LinkUnlinkBasisDocuments"
+		Then "Link / unlink document row" window is opened
+		And I go to line in "ItemListRows" table
+			| '#' | 'Quantity' | 'Row presentation' | 'Store'    | 'Unit' |
+			| '3' | '2,000'    | 'Service, Interner'   | 'Store 02' | 'pcs'  |
+		And I go to line in "ResultsTree" table
+			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' |
+			| 'TRY'      | '150,00' | '2,000'    | 'Service, Interner'    | 'pcs'  |
+		And I click "Unlink" button
+		And I click "Ok" button
+		And I click "Save" button	
+		And "RowIDInfo" table contains lines
+			| '#' | 'Basis'                                        | 'Next step' | 'Q'      | 'Current step' |
+			| '1' | 'Sales order 15 dated 01.02.2021 19:50:45'     | 'GR'        | '24,000' | 'PO&PI'        |
+			| '2' | 'Purchase order 217 dated 12.02.2021 12:45:05' | 'GR'        | '5,000'  | 'PI&GR'        |
+			| '3' | ''                                             | ''          | '2,000'  | ''             |
+		Then the number of "RowIDInfo" table lines is "равно" "3"
+		And "ItemList" table contains lines
+			| 'Item'    | 'Item key' | 'Sales order'                              | 'Purchase order'                               |
+			| 'Boots'   | '37/18SD'  | 'Sales order 15 dated 01.02.2021 19:50:45' | ''                                             |
+			| 'Dress'   | 'S/Yellow' | ''                                         | 'Purchase order 217 dated 12.02.2021 12:45:05' |
+			| 'Service' | 'Interner' | ''                                         | ''                                             |
+	* Link line
+		And I click the button named "LinkUnlinkBasisDocuments"
+		And I go to line in "ItemListRows" table
+			| '#' | 'Quantity' | 'Row presentation'  | 'Store'    | 'Unit' |
+			| '3' | '2,000'    | 'Service, Interner' | 'Store 02' | 'pcs'  |
+		And I activate field named "ItemListRowsRowPresentation" in "ItemListRows" table
+		And I go to line in "BasisesTree" table
+			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation'  | 'Unit' |
+			| 'TRY'      | '150,00' | '2,000'    | 'Service, Interner' | 'pcs'  |
+		And I click "Link" button
+		And I click "Ok" button
+		And "RowIDInfo" table contains lines
+			| '#' | 'Basis'                                        | 'Next step' | 'Q'      | 'Current step' |
+			| '1' | 'Sales order 15 dated 01.02.2021 19:50:45'     | ''          | '24,000' | 'PO&PI'        |
+			| '2' | 'Purchase order 217 dated 12.02.2021 12:45:05' | ''          | '5,000'  | 'PI&GR'        |
+			| '3' | 'Purchase order 217 dated 12.02.2021 12:45:05' | ''          | '2,000'  | 'PI'           |
+		Then the number of "RowIDInfo" table lines is "равно" "3"
+		And "ItemList" table contains lines
+			| 'Item'    | 'Item key' | 'Sales order'                              | 'Purchase order'                               |
+			| 'Boots'   | '37/18SD'  | 'Sales order 15 dated 01.02.2021 19:50:45' | ''                                             |
+			| 'Dress'   | 'S/Yellow' | ''                                         | 'Purchase order 217 dated 12.02.2021 12:45:05' |
+			| 'Service' | 'Interner' | ''                                         | 'Purchase order 217 dated 12.02.2021 12:45:05' |
+	* Delete string, add it again, change unit
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' | 'Sales order'                              |
+			| 'Boots' | '37/18SD'  | 'Sales order 15 dated 01.02.2021 19:50:45' |
+		And in the table "ItemList" I click the button named "ItemListContextMenuDelete"
+		And I click the button named "AddBasisDocuments"
+		And I go to line in "BasisesTree" table
+			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
+			| 'TRY'      | '8 400,00' | '2,000'    | 'Boots, 37/18SD'  | 'Boots (12 pcs)'  | 'No'  |
+		And I change "Use" checkbox in "BasisesTree" table
+		And I finish line editing in "BasisesTree" table
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'    | 'Item key' | 'Sales order'                              | 'Purchase order'                               |
+			| 'Boots'   | '37/18SD'  | 'Sales order 15 dated 01.02.2021 19:50:45' | ''                                             |
+			| 'Dress'   | 'S/Yellow' | ''                                         | 'Purchase order 217 dated 12.02.2021 12:45:05' |
+			| 'Service' | 'Interner' | ''                                         | 'Purchase order 217 dated 12.02.2021 12:45:05' |
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' | 'Q'      | 'Store'    |
+			| 'Dress' | 'S/Yellow'  | '5,000' | 'Store 02' |
+		And I activate "Unit" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click choice button of "Unit" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'box Dress (8 pcs)' |
+		And I select current line in "List" table
+		And "RowIDInfo" table contains lines
+			| 'Basis'                                        | 'Next step' | 'Q'      | 'Current step' |
+			| 'Sales order 15 dated 01.02.2021 19:50:45'     | ''          | '24,000' | 'PO&PI'        |
+			| 'Purchase order 217 dated 12.02.2021 12:45:05' | ''          | '40,000' | 'PI&GR'        |
+			| 'Purchase order 217 dated 12.02.2021 12:45:05' | ''          | '2,000'  | 'PI'           |
+		Then the number of "RowIDInfo" table lines is "равно" "3"
+		And I click "Save" button
+		And I close all client application windows
 
 
 

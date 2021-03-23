@@ -397,5 +397,150 @@ Scenario: _02104808 check filling in fields Use GR and Use SC from Store in the 
 		And I close all client application windows
 
 
+Scenario: _02104809 create IT using form link/unlink
+	* Open IT form
+		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
+		And I click the button named "FormCreate"
+	* Filling in the details
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Main Company'    |
+		And I select current line in "List" table
+		And I click Select button of "Store sender" field
+		And I go to line in "List" table
+			| 'Description'       |
+			| 'Store 02' |
+		And I select current line in "List" table
+		And I click Select button of "Store receiver" field
+		And I go to line in "List" table
+			| 'Description'           |
+			| 'Store 03' |
+		And I select current line in "List" table
+	* Select items from basis documents
+		And I click the button named "AddBasisDocuments"
+		And I go to line in "BasisesTree" table
+			| 'Currency' | 'Price' | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
+			| ''         | ''      | '5,000'    | 'Shirt, 38/Black'  | 'pcs'  | 'No'  |
+		And I change "Use" checkbox in "BasisesTree" table
+		And I finish line editing in "BasisesTree" table
+		And I go to line in "BasisesTree" table
+			| 'Currency' | 'Price' | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
+			| ''         | ''      | '20,000'   | 'Dress, L/Green'   | 'pcs'  | 'No'  |
+		And I change "Use" checkbox in "BasisesTree" table
+		And I finish line editing in "BasisesTree" table
+		And I go to line in "BasisesTree" table
+			| 'Currency' | 'Price' | 'Quantity' | 'Row presentation' | 'Unit'           | 'Use' |
+			| ''         | ''      | '3,000'    | 'Boots, 36/18SD'   | 'Boots (12 pcs)' | 'No'  |
+		And I change "Use" checkbox in "BasisesTree" table
+		And I finish line editing in "BasisesTree" table
+		And I click "Ok" button
+		And I click "Show row key" button
+	* Check RowIDInfo
+		And "RowIDInfo" table contains lines
+		| '#' | 'Basis'                                                 | 'Next step' | 'Q'      | 'Current step' |
+		| '1' | 'Inventory transfer order 17 dated 02.03.2021 13:34:27' | ''          | '20,000' | 'IT'        |
+		| '2' | 'Inventory transfer order 18 dated 02.03.2021 13:54:52' | ''          | '36,000' | 'IT'           |
+		| '3' | 'Inventory transfer order 18 dated 02.03.2021 13:54:52' | ''          | '5,000'  | 'IT'           |
+	* Unlink line
+		And I click the button named "LinkUnlinkBasisDocuments"
+		Then "Link / unlink document row" window is opened
+		And I go to line in "ItemListRows" table
+			| '#' | 'Quantity' | 'Row presentation' | 'Store' | 'Unit' |
+			| '3' | '5,000'    | 'Shirt, 38/Black'  | ''      | 'pcs'  |
+		And I go to line in "ResultsTree" table
+			| 'Currency' | 'Price' | 'Quantity' | 'Row presentation' | 'Unit' |
+			| ''         | ''      | '5,000'    | 'Shirt, 38/Black'  | 'pcs'  |
+		And I click "Unlink" button
+		And I click "Ok" button
+		And I click "Save" button	
+		And "RowIDInfo" table became equal
+			| '#' | 'Basis'                                                 | 'Next step' | 'Q'      | 'Current step' |
+			| '1' | 'Inventory transfer order 17 dated 02.03.2021 13:34:27' | ''          | '20,000' | 'IT'           |
+			| '2' | 'Inventory transfer order 18 dated 02.03.2021 13:54:52' | ''          | '36,000' | 'IT'           |
+			| '3' | ''                                                      | ''          | '5,000'  | ''             |
+			| '4' | ''                                                      | 'SC'        | '5,000'  | ''             |
+			| '5' | 'Inventory transfer order 18 dated 02.03.2021 13:54:52' | 'SC'        | '36,000' | ''             |
+			| '6' | 'Inventory transfer order 17 dated 02.03.2021 13:34:27' | 'SC'        | '20,000' | ''             |
+			| '7' | ''                                                      | 'GR'        | '5,000'  | ''             |
+			| '8' | 'Inventory transfer order 18 dated 02.03.2021 13:54:52' | 'GR'        | '36,000' | ''             |
+			| '9' | 'Inventory transfer order 17 dated 02.03.2021 13:34:27' | 'GR'        | '20,000' | ''             |	
+		Then the number of "RowIDInfo" table lines is "равно" "9"		
+		And "ItemList" table contains lines
+			| 'Item'  | 'Item key' | 'Inventory transfer order'                              |
+			| 'Dress' | 'L/Green'  | 'Inventory transfer order 17 dated 02.03.2021 13:34:27' |
+			| 'Boots' | '36/18SD'  | 'Inventory transfer order 18 dated 02.03.2021 13:54:52' |
+			| 'Shirt' | '38/Black' | ''                                                      |
+	* Link line
+		And I click the button named "LinkUnlinkBasisDocuments"
+		And I go to line in "ItemListRows" table
+			| '#' | 'Quantity' | 'Row presentation' | 'Store' | 'Unit' |
+			| '3' | '5,000'    | 'Shirt, 38/Black'  | ''      | 'pcs'  |
+		And I go to line in "BasisesTree" table
+			| 'Quantity' | 'Row presentation' | 'Unit' |
+			| '5,000'    | 'Shirt, 38/Black'  | 'pcs'  |
+		And I click "Link" button
+		And I click "Ok" button
+		And I click "Save" button
+		And "RowIDInfo" table contains lines
+			| 'Basis'                                                 | 'Next step' | 'Q'      | 'Current step' |
+			| 'Inventory transfer order 17 dated 02.03.2021 13:34:27' | ''          | '20,000' | 'IT'           |
+			| 'Inventory transfer order 18 dated 02.03.2021 13:54:52' | ''          | '36,000' | 'IT'           |
+			| 'Inventory transfer order 18 dated 02.03.2021 13:54:52' | ''          | '5,000'  | 'IT'           |
+			| 'Inventory transfer order 18 dated 02.03.2021 13:54:52' | 'SC'        | '5,000'  | ''             |
+			| 'Inventory transfer order 18 dated 02.03.2021 13:54:52' | 'SC'        | '36,000' | ''             |
+			| 'Inventory transfer order 17 dated 02.03.2021 13:34:27' | 'SC'        | '20,000' | ''             |
+			| 'Inventory transfer order 18 dated 02.03.2021 13:54:52' | 'GR'        | '5,000'  | ''             |
+			| 'Inventory transfer order 18 dated 02.03.2021 13:54:52' | 'GR'        | '36,000' | ''             |
+			| 'Inventory transfer order 17 dated 02.03.2021 13:34:27' | 'GR'        | '20,000' | ''             |
+		Then the number of "RowIDInfo" table lines is "равно" "9"		
+		And "ItemList" table contains lines
+			| 'Item'  | 'Item key' | 'Inventory transfer order'                                           |
+			| 'Dress' | 'L/Green'  | 'Inventory transfer order 17 dated 02.03.2021 13:34:27' |
+			| 'Boots' | '36/18SD'  | 'Inventory transfer order 18 dated 02.03.2021 13:54:52' |
+			| 'Shirt' | '38/Black' | 'Inventory transfer order 18 dated 02.03.2021 13:54:52' |
+	* Delete string, add it again, change unit
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' |
+			| 'Dress' | 'L/Green'  |
+		And in the table "ItemList" I click the button named "ItemListContextMenuDelete"
+		And I click the button named "AddBasisDocuments"
+		And I go to line in "BasisesTree" table
+			| 'Currency' | 'Price' | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
+			| ''         | ''      | '20,000'   | 'Dress, L/Green'   | 'pcs'  | 'No'  |
+		And I change "Use" checkbox in "BasisesTree" table
+		And I finish line editing in "BasisesTree" table
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'  | 'Item key' | 'Inventory transfer order'                                           |
+			| 'Dress' | 'L/Green'  | 'Inventory transfer order 17 dated 02.03.2021 13:34:27' |
+			| 'Boots' | '36/18SD'  | 'Inventory transfer order 18 dated 02.03.2021 13:54:52' |
+			| 'Shirt' | '38/Black' | 'Inventory transfer order 18 dated 02.03.2021 13:54:52' |
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' |
+			| 'Dress' | 'L/Green'  |
+		And I activate "Unit" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click choice button of "Unit" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'box Dress (8 pcs)' |
+		And I select current line in "List" table
+		And I click "Save" button
+		And "RowIDInfo" table contains lines
+			| 'Basis'                                                 | 'Next step' | 'Q'       | 'Current step' |
+			| 'Inventory transfer order 17 dated 02.03.2021 13:34:27' | ''          | '160,000' | 'IT'           |
+			| 'Inventory transfer order 18 dated 02.03.2021 13:54:52' | ''          | '36,000'  | 'IT'           |
+			| 'Inventory transfer order 18 dated 02.03.2021 13:54:52' | ''          | '5,000'   | 'IT'           |
+			| 'Inventory transfer order 18 dated 02.03.2021 13:54:52' | 'SC'        | '5,000'   | ''             |
+			| 'Inventory transfer order 18 dated 02.03.2021 13:54:52' | 'SC'        | '36,000'  | ''             |
+			| 'Inventory transfer order 17 dated 02.03.2021 13:34:27' | 'SC'        | '160,000' | ''             |
+			| 'Inventory transfer order 18 dated 02.03.2021 13:54:52' | 'GR'        | '5,000'   | ''             |
+			| 'Inventory transfer order 18 dated 02.03.2021 13:54:52' | 'GR'        | '36,000'  | ''             |
+			| 'Inventory transfer order 17 dated 02.03.2021 13:34:27' | 'GR'        | '160,000' | ''             |
+		Then the number of "RowIDInfo" table lines is "равно" "9"
+		And I close all client application windows
+
+
 Scenario: _999999 close TestClient session
 	And I close TestClient session

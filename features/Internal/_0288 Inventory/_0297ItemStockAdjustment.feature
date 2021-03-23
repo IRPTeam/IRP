@@ -26,6 +26,7 @@ Scenario: _0297000 preparation
 		When Create catalog AddAttributeAndPropertyValues objects
 		When Create catalog Companies objects (Main company)
 		When Create catalog Stores objects
+		When Create catalog Companies objects (own Second company)
 		When update ItemKeys
 
 Scenario: _0297001 create Item stock adjustment
@@ -92,6 +93,21 @@ Scenario: _0297001 create Item stock adjustment
 		And I activate "Quantity" field in "ItemList" table
 		And I input "3,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
+	* Change Company
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Second Company' |
+		And I select current line in "List" table
+		Then the form attribute named "Company" became equal to "Second Company"
+		Then the field named "DecorationGroupTitleUncollapsedLabel" value does not contain "*   Company: Second Company   Store: Store 02   " text
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Main Company' |
+		And I select current line in "List" table
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the field named "DecorationGroupTitleUncollapsedLabel" value does not contain "*   Company: Main Company   Store: Store 02   " text
 	* Post
 		And I click the button named "FormPost"
 		And I delete "$$ItemStockAdjustment0297001$$" variable
@@ -101,119 +117,3 @@ Scenario: _0297001 create Item stock adjustment
 		And I save the value of "Number" field as "$$NumberItemStockAdjustment0297001$$"
 		And I save the value of "Date" field as "$$DateItemStockAdjustment0297001$$"
 		And I close current window
-
-Scenario: _0297002 check Item stock adjustment movements in the register R4010 Actual stocks
-	* Select document
-		Given I open hyperlink 'e1cib/list/Document.ItemStockAdjustment'
-		And I go to line in "List" table
-			| 'Number'  |
-			| '$$NumberItemStockAdjustment0297001$$' |
-		And I click "Registrations report" button
-	* Check movements
-		And I select "R4010 Actual stocks" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| '$$ItemStockAdjustment0297001$$'  | ''            | ''                                   | ''          | ''           | ''         | ''                  |
-			| 'Document registrations records'  | ''            | ''                                   | ''          | ''           | ''         | ''                  |
-			| 'Register  "R4010 Actual stocks"' | ''            | ''                                   | ''          | ''           | ''         | ''                  |
-			| ''                                | 'Record type' | 'Period'                             | 'Resources' | 'Dimensions' | ''         | ''                  |
-			| ''                                | ''            | ''                                   | 'Quantity'  | 'Store'      | 'Item key' | 'Serial lot number' |
-			| ''                                | 'Receipt'     | '$$DateItemStockAdjustment0297001$$' | '16'        | 'Store 02'   | 'XS/Blue'  | ''                  |
-			| ''                                | 'Expense'     | '$$DateItemStockAdjustment0297001$$' | '16'        | 'Store 02'   | 'M/White'  | ''                  |
-			| ''                                | 'Receipt'     | '$$DateItemStockAdjustment0297001$$' | '3'         | 'Store 02'   | '36/Yellow'| ''                  |
-			| ''                                | 'Expense'     | '$$DateItemStockAdjustment0297001$$' | '3'         | 'Store 02'   | '38/Yellow'| ''                  |
-		And I close all client application windows
-		
-Scenario: _0297003 check Item stock adjustment movements in the register R4050 Stock inventory
-	* Select document
-		Given I open hyperlink 'e1cib/list/Document.ItemStockAdjustment'
-		And I go to line in "List" table
-			| 'Number'  |
-			| '$$NumberItemStockAdjustment0297001$$' |
-		And I click "Registrations report" button
-	* Check movements
-		And I select "R4050 Stock inventory" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| '$$ItemStockAdjustment0297001$$'    | ''            | ''                                   | ''          | ''             | ''         | ''          |
-			| 'Document registrations records'    | ''            | ''                                   | ''          | ''             | ''         | ''          |
-			| 'Register  "R4050 Stock inventory"' | ''            | ''                                   | ''          | ''             | ''         | ''          |
-			| ''                                  | 'Record type' | 'Period'                             | 'Resources' | 'Dimensions'   | ''         | ''          |
-			| ''                                  | ''            | ''                                   | 'Quantity'  | 'Company'      | 'Store'    | 'Item key'  |
-			| ''                                  | 'Receipt'     | '$$DateItemStockAdjustment0297001$$' | '16'        | 'Main Company' | 'Store 02' | 'XS/Blue'   |
-			| ''                                  | 'Receipt'     | '$$DateItemStockAdjustment0297001$$' | '3'         | 'Main Company' | 'Store 02' | '36/Yellow' |
-			| ''                                  | 'Expense'     | '$$DateItemStockAdjustment0297001$$' | '16'        | 'Main Company' | 'Store 02' | 'M/White'   |
-			| ''                                  | 'Expense'     | '$$DateItemStockAdjustment0297001$$' | '3'         | 'Main Company' | 'Store 02' | '38/Yellow' |
-		And I close all client application windows
-
-	
-Scenario: _0297004 check Item stock adjustment movements in the register R4011 Free stocks
-	* Select document
-		Given I open hyperlink 'e1cib/list/Document.ItemStockAdjustment'
-		And I go to line in "List" table
-			| 'Number'  |
-			| '$$NumberItemStockAdjustment0297001$$' |
-		And I click "Registrations report" button
-	* Check movements
-		And I select "R4011 Free stocks" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| '$$ItemStockAdjustment0297001$$' | ''            | ''                                   | ''          | ''           | ''          | ''                  |
-			| 'Document registrations records' | ''            | ''                                   | ''          | ''           | ''          | ''                  |
-			| 'Register  "R4011 Free stocks"'  | ''            | ''                                   | ''          | ''           | ''          | ''                  |
-			| ''                               | 'Record type' | 'Period'                             | 'Resources' | 'Dimensions' | ''          | ''                  |
-			| ''                               | ''            | ''                                   | 'Quantity'  | 'Store'      | 'Item key'  | 'Serial lot number' |
-			| ''                               | 'Receipt'     | '$$DateItemStockAdjustment0297001$$' | '16'        | 'Store 02'   | 'XS/Blue'   | ''                  |
-			| ''                               | 'Receipt'     | '$$DateItemStockAdjustment0297001$$' | '3'         | 'Store 02'   | '36/Yellow' | ''                  |
-			| ''                               | 'Expense'     | '$$DateItemStockAdjustment0297001$$' | '16'        | 'Store 02'   | 'M/White'   | ''                  |
-			| ''                               | 'Expense'     | '$$DateItemStockAdjustment0297001$$' | '3'         | 'Store 02'   | '38/Yellow' | ''                  |
-		And I close all client application windows
-				
-Scenario: _0297005 check Item stock adjustment movements in the register R4052 Stock adjustment (Surplus)
-	* Select document
-		Given I open hyperlink 'e1cib/list/Document.ItemStockAdjustment'
-		And I go to line in "List" table
-			| 'Number'  |
-			| '$$NumberItemStockAdjustment0297001$$' |
-		And I click "Registrations report" button
-	* Check movements
-		And I select "R4052 Stock adjustment (Surplus)" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| '$$ItemStockAdjustment0297001$$'               | ''                                   | ''          | ''           | ''      | ''          |
-			| 'Document registrations records'               | ''                                   | ''          | ''           | ''      | ''          |
-			| 'Register  "R4052 Stock adjustment (Surplus)"' | ''                                   | ''          | ''           | ''      | ''          |
-			| ''                                             | 'Period'                             | 'Resources' | 'Dimensions' | ''      | ''          |
-			| ''                                             | ''                                   | 'Quantity'  | 'Store'      | 'Basis' | 'Item key'  |
-			| ''                                             | '$$DateItemStockAdjustment0297001$$' | '16'        | 'Store 02'   | ''      | 'M/White'   |
-			| ''                                             | '$$DateItemStockAdjustment0297001$$' | '3'         | 'Store 02'   | ''      | '38/Yellow' |
-		And I close all client application windows
-
-Scenario: _0297006 check Item stock adjustment movements in the register R4051 Stock adjustment (Write off)
-	* Select document
-		Given I open hyperlink 'e1cib/list/Document.ItemStockAdjustment'
-		And I go to line in "List" table
-			| 'Number'  |
-			| '$$NumberItemStockAdjustment0297001$$' |
-		And I click "Registrations report" button
-	* Check movements
-		And I select "R4051 Stock adjustment (Write off)" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| '$$ItemStockAdjustment0297001$$'                 | ''                                   | ''          | ''           | ''      | ''          |
-			| 'Document registrations records'                 | ''                                   | ''          | ''           | ''      | ''          |
-			| 'Register  "R4051 Stock adjustment (Write off)"' | ''                                   | ''          | ''           | ''      | ''          |
-			| ''                                               | 'Period'                             | 'Resources' | 'Dimensions' | ''      | ''          |
-			| ''                                               | ''                                   | 'Quantity'  | 'Store'      | 'Basis' | 'Item key'  |
-			| ''                                               | '$$DateItemStockAdjustment0297001$$' | '16'        | 'Store 02'   | ''      | 'XS/Blue'   |
-			| ''                                               | '$$DateItemStockAdjustment0297001$$' | '3'         | 'Store 02'   | ''      | '36/Yellow' |
-		And I close all client application windows
-		
-
-				
-		
-			
-
-	
-		
-

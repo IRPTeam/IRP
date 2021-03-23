@@ -35,7 +35,10 @@ Scenario: _020000 preparation
 		When Create catalog TaxRates objects
 		When Create catalog Taxes objects	
 		When update ItemKeys
-	When Create information register TaxSettings records
+		When Create information register TaxSettings records
+		When Create document InternalSupplyRequest objects (check movements)
+		And I execute 1C:Enterprise script at server
+			| "Documents.InternalSupplyRequest.FindByNumber(117).GetObject().Write(DocumentWriteMode.Posting);" |
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then

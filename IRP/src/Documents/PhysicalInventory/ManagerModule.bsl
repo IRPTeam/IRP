@@ -1,126 +1,11 @@
 #Region Posting
 
 Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	AccReg = Metadata.AccumulationRegisters;
-	Tables = New Structure();
-	Tables.Insert("StockAdjustmentAsWriteOff" , PostingServer.CreateTable(AccReg.StockAdjustmentAsWriteOff));
-	Tables.Insert("StockAdjustmentAsSurplus"  , PostingServer.CreateTable(AccReg.StockAdjustmentAsSurplus));
-	
 	ObjectStatusesServer.WriteStatusToRegister(Ref, Ref.Status);
-	StatusInfo = ObjectStatusesServer.GetLastStatusInfo(Ref);
-	
-	If Not StatusInfo.Posting Then
-#Region NewRegistersPosting
-		QueryArray = GetQueryTextsSecondaryTables();
-		Parameters.Insert("QueryParameters", GetAdditionalQueryParamenters(Ref));
-		PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
-#EndRegion
-		Return Tables;
-	EndIf;
-	
-	QueryItemList = New Query();
-	QueryItemList.Text = GetQueryTextPhysicalInventoryItemList();
-	QueryItemList.SetParameter("Ref", Ref);
-	QueryResultsItemList = QueryItemList.Execute();
-	QueryTableItemList = QueryResultsItemList.Unload();
-	
-	PostingServer.CalculateQuantityByUnit(QueryTableItemList);
-
-	Query = New Query();
-	Query.Text = GetQueryTextQueryTable();
-	Query.SetParameter("QueryTable", QueryTableItemList);
-	QueryResults = Query.ExecuteBatch();
-		
-	Tables.StockAdjustmentAsWriteOff = QueryResults[1].Unload();
-	Tables.StockAdjustmentAsSurplus  = QueryResults[2].Unload();
-	
-#Region NewRegistersPosting		
 	QueryArray = GetQueryTextsSecondaryTables();
 	Parameters.Insert("QueryParameters", GetAdditionalQueryParamenters(Ref));
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
-#EndRegion	
-	
-	Parameters.IsReposting = False;
-	
-	Return Tables;
-EndFunction
-	
-Function GetQueryTextPhysicalInventoryItemList()
-	Return
-		"SELECT
-		|	PhysicalInventoryItemList.Ref AS BasisDocument,
-		|	PhysicalInventoryItemList.Ref.Store AS Store,
-		|	PhysicalInventoryItemList.ItemKey AS ItemKey,
-		|	PhysicalInventoryItemList.Difference AS Quantity,
-		|	PhysicalInventoryItemList.Ref.Date AS Period,
-		|	0 AS BasisQuantity,
-		|	PhysicalInventoryItemList.Unit,
-		|	PhysicalInventoryItemList.ItemKey.Item.Unit AS ItemUnit,
-		|	PhysicalInventoryItemList.ItemKey.Unit AS ItemKeyUnit,
-		|	VALUE(Catalog.Units.EmptyRef) AS BasisUnit,
-		|	PhysicalInventoryItemList.ItemKey.Item AS Item
-		|FROM
-		|	Document.PhysicalInventory.ItemList AS PhysicalInventoryItemList
-		|WHERE
-		|	PhysicalInventoryItemList.Ref = &Ref
-		|	AND PhysicalInventoryItemList.Difference <> 0";
-EndFunction
-
-Function GetQueryTextQueryTable()
-	Return
-		"SELECT
-		|	QueryTable.BasisDocument AS BasisDocument,
-		|	QueryTable.Store AS Store,
-		|	QueryTable.ItemKey AS ItemKey,
-		|	CASE
-		|		WHEN QueryTable.BasisQuantity > 0
-		|			THEN QueryTable.BasisQuantity
-		|		ELSE 0
-		|	END AS SurplusQuantity,
-		|	-CASE
-		|		WHEN QueryTable.BasisQuantity < 0
-		|			THEN QueryTable.BasisQuantity
-		|		ELSE 0
-		|	END AS WriteOffQuantity,
-		|	QueryTable.Period AS Period
-		|INTO tmp
-		|FROM
-		|	&QueryTable AS QueryTable
-		|;
-		|//[1]//////////////////////////////////////////////////////////////////////////////
-		|SELECT
-		|	tmp.Store AS Store,
-		|	tmp.ItemKey AS ItemKey,
-		|	tmp.BasisDocument AS BasisDocument,
-		|	SUM(tmp.WriteOffQuantity) AS Quantity,
-		|	tmp.Period
-		|FROM
-		|	tmp AS tmp
-		|GROUP BY
-		|	tmp.Store,
-		|	tmp.ItemKey,
-		|	tmp.BasisDocument,
-		|	tmp.Period
-		|HAVING
-		|	SUM(tmp.WriteOffQuantity) <> 0
-		|;
-		|
-		|//[2]//////////////////////////////////////////////////////////////////////////////
-		|SELECT
-		|	tmp.Store AS Store,
-		|	tmp.ItemKey AS ItemKey,
-		|	tmp.BasisDocument AS BasisDocument,
-		|	SUM(tmp.SurplusQuantity) AS Quantity,
-		|	tmp.Period
-		|FROM
-		|	tmp AS tmp
-		|GROUP BY
-		|	tmp.Store,
-		|	tmp.ItemKey,
-		|	tmp.BasisDocument,
-		|	tmp.Period
-		|HAVING
-		|	SUM(tmp.SurplusQuantity) <> 0";
+	Return New Structure();
 EndFunction
 
 Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
@@ -129,33 +14,15 @@ Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo 
 EndFunction
 
 Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-#Region NewRegisterPosting
 	Tables = Parameters.DocumentDataTables;	
 	QueryArray = GetQueryTextsMasterTables();
 	PostingServer.SetRegisters(Tables, Ref);
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
-#EndRegion
 EndProcedure
 
 Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 	PostingDataTables = New Map();
-		
-	// StockAdjustmentAsWriteOff
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.StockAdjustmentAsWriteOff,
-		New Structure("RecordType, RecordSet",
-			AccumulationRecordType.Receipt,
-			Parameters.DocumentDataTables.StockAdjustmentAsWriteOff));
-	
-	// StockAdjustmentAsSurplus
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.StockAdjustmentAsSurplus,
-		New Structure("RecordType, RecordSet",
-			AccumulationRecordType.Receipt,
-			Parameters.DocumentDataTables.StockAdjustmentAsSurplus));
-
-#Region NewRegistersPosting
 	PostingServer.SetPostingDataTables(PostingDataTables, Parameters);
-#EndRegion	
-	
 	Return PostingDataTables;
 EndFunction
 
@@ -177,10 +44,8 @@ Function UndopostingGetLockDataSource(Ref, Cancel, Parameters, AddInfo = Undefin
 EndFunction
 
 Procedure UndopostingCheckBeforeWrite(Ref, Cancel, Parameters, AddInfo = Undefined) Export
-#Region NewRegistersPosting
 	QueryArray = GetQueryTextsMasterTables();
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
-#EndRegion
 EndProcedure
 
 Procedure UndopostingCheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined) Export
@@ -386,8 +251,6 @@ Function GetQueryTextFillExpCount_ByItemList()
 	|	LineNumber";
 EndFunction
 
-#Region NewRegistersPosting
-
 Function GetInformationAboutMovements(Ref) Export
 	Str = New Structure;
 	Str.Insert("QueryParamenters", GetAdditionalQueryParamenters(Ref));
@@ -416,6 +279,8 @@ Function GetQueryTextsMasterTables()
 	QueryArray = New Array;
 	QueryArray.Add(R4011B_FreeStocks());
 	QueryArray.Add(R4010B_ActualStocks());
+	QueryArray.Add(R4052T_StockAdjustmentAsSurplus());
+	QueryArray.Add(R4051T_StockAdjustmentAsWriteOff());
 	Return QueryArray;
 EndFunction
 
@@ -425,6 +290,7 @@ Function ItemList()
 		|	ItemList.Ref.Date AS Period,
 		|	ItemList.Ref.Store AS Store,
 		|	ItemList.ItemKey AS ItemKey,
+		|	ItemList.Ref AS Basis,
 		|	CASE
 		|		WHEN ItemList.Difference > 0
 		|			THEN ItemList.Difference
@@ -493,4 +359,26 @@ Function R4010B_ActualStocks()
 		|	ItemList.WriteOffQuantity <> 0";
 EndFunction
 
-#EndRegion
+Function R4052T_StockAdjustmentAsSurplus()
+	Return
+		"SELECT
+		|	ItemList.SurplusQuantity AS Quantity,
+		|	*
+		|INTO R4052T_StockAdjustmentAsSurplus
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	ItemList.SurplusQuantity <> 0";
+EndFunction
+
+Function R4051T_StockAdjustmentAsWriteOff()
+	Return
+		"SELECT
+		|	ItemList.WriteOffQuantity AS Quantity,
+		|	*
+		|INTO R4051T_StockAdjustmentAsWriteOff
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	ItemList.WriteOffQuantity <> 0";	
+EndFunction

@@ -1,164 +1,10 @@
 #Region Posting
 
 Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	
-	AccReg = Metadata.AccumulationRegisters;
-	Tables = New Structure();
-	Tables.Insert("TransferOrderBalance"     , PostingServer.CreateTable(AccReg.TransferOrderBalance));
-	Tables.Insert("GoodsInTransitIncoming"   , PostingServer.CreateTable(AccReg.GoodsInTransitIncoming));
-	Tables.Insert("GoodsInTransitOutgoing"   , PostingServer.CreateTable(AccReg.GoodsInTransitOutgoing));
-		
-	QueryItemList = New Query();
-	QueryItemList.Text = GetQueryTextInventoryTransferItemList();
-	QueryItemList.SetParameter("Ref", Ref);
-	QueryResultsItemList = QueryItemList.Execute();
-	QueryTableItemList = QueryResultsItemList.Unload();
-	
-	PostingServer.CalculateQuantityByUnit(QueryTableItemList);
-	
-	Query = New Query();
-	Query.Text = GetQueryTextQueryTable();
-	Query.SetParameter("QueryTable", QueryTableItemList);
-	QueryResults = Query.ExecuteBatch();
-	
-	Tables.TransferOrderBalance     = QueryResults[1].Unload();
-	Tables.GoodsInTransitIncoming   = QueryResults[2].Unload();
-	Tables.GoodsInTransitOutgoing   = QueryResults[3].Unload();
-	
-	Header = New Structure();
-	Header.Insert("StoreReceiverUseGoodsReceipt", Ref.StoreReceiver.UseGoodsReceipt);
-	Header.Insert("StoreSenderUseShipmentConfirmation", Ref.StoreSender.UseShipmentConfirmation);
-	
-	Tables.Insert("Header", Header);
-	
-	Parameters.IsReposting = False;
-
-#Region NewRegistersPosting	
 	QueryArray = GetQueryTextsSecondaryTables();
 	Parameters.Insert("QueryParameters", GetAdditionalQueryParamenters(Ref));
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
-#EndRegion	
-	
-	Return Tables;
-EndFunction
-
-Function GetQueryTextInventoryTransferItemList()
-	Return
-	"SELECT
-	|	RowIDInfo.Ref AS Ref,
-	|	RowIDInfo.Key AS Key,
-	|	MAX(RowIDInfo.RowID) AS RowID
-	|INTO RowIDInfo
-	|FROM
-	|	Document.InventoryTransfer.RowIDInfo AS RowIDInfo
-	|WHERE
-	|	RowIDInfo.Ref = &Ref
-	|GROUP BY
-	|	RowIDInfo.Ref,
-	|	RowIDInfo.Key
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	InventoryTransferItemList.Ref.Company AS Company,
-	|	InventoryTransferItemList.Ref.StoreSender AS StoreSender,
-	|	InventoryTransferItemList.Ref.StoreReceiver AS StoreReceiver,
-	|	InventoryTransferItemList.Ref.StoreTransit AS StoreTransit,
-	|	InventoryTransferItemList.InventoryTransferOrder AS Order,
-	|	InventoryTransferItemList.ItemKey AS ItemKey,
-	|	InventoryTransferItemList.Quantity AS Quantity,
-	|	0 AS BasisQuantity,
-	|	InventoryTransferItemList.Unit,
-	|	RowIDInfo.RowID AS RowKey,
-	|	InventoryTransferItemList.ItemKey.Item.Unit AS ItemUnit,
-	|	InventoryTransferItemList.ItemKey.Unit AS ItemKeyUnit,
-	|	VALUE(Catalog.Units.EmptyRef) AS BasisUnit,
-	|	InventoryTransferItemList.ItemKey.Item AS Item,
-	|	InventoryTransferItemList.Ref.Date AS Period,
-	|	InventoryTransferItemList.Ref AS ReceiptBasis,
-	|	InventoryTransferItemList.Ref AS ShipmentBasis
-	|FROM
-	|	Document.InventoryTransfer.ItemList AS InventoryTransferItemList
-	|		LEFT JOIN RowIDInfo AS RowIDInfo
-	|		ON InventoryTransferItemList.Key = RowIDInfo.Key
-	|WHERE
-	|	InventoryTransferItemList.Ref = &Ref";
-EndFunction
-
-Function GetQueryTextQueryTable()
-	Return
-	"SELECT
-		|	QueryTable.Company AS Company,
-		|	QueryTable.StoreSender AS StoreSender,
-		|	QueryTable.StoreReceiver AS StoreReceiver,
-		|	QueryTable.StoreTransit AS StoreTransit,
-		|	QueryTable.Order AS Order,
-		|	QueryTable.ItemKey AS ItemKey,
-		|	QueryTable.RowKey AS RowKey,
-		|	QueryTable.BasisQuantity AS Quantity,
-		|	QueryTable.BasisUnit AS Unit,
-		|	QueryTable.Period AS Period,
-		|	QueryTable.ReceiptBasis AS ReceiptBasis,
-		|	QueryTable.ShipmentBasis AS ShipmentBasis
-		|INTO tmp
-		|FROM
-		|	&QueryTable AS QueryTable
-		|;
-		|
-		|// 1 - OrderBalance//////////////////////////////////////////////////////////////////////////////
-		|SELECT
-		|	tmp.StoreSender,
-		|	tmp.StoreReceiver,
-		|	tmp.Order,
-		|	tmp.ItemKey,
-		|	tmp.RowKey,
-		|	SUM(tmp.Quantity) AS Quantity,
-		|	tmp.Period
-		|FROM
-		|	tmp AS tmp
-		|WHERE
-		|	tmp.Order <> VALUE(Document.InventoryTransferOrder.EmptyRef)
-		|GROUP BY
-		|	tmp.StoreSender,
-		|	tmp.StoreReceiver,
-		|	tmp.Order,
-		|	tmp.ItemKey,
-		|	tmp.RowKey,
-		|	tmp.Period
-		|;
-		|// 2 - GoodsInTransitIncoming//////////////////////////////////////////////////////////////////////////////
-		|SELECT
-		|	tmp.StoreReceiver AS Store,
-		|	tmp.ItemKey,
-		|	SUM(Quantity) AS Quantity,
-		|	tmp.Period,
-		|	tmp.ReceiptBasis,
-		|   tmp.RowKey
-		|FROM
-		|	tmp AS tmp
-		|GROUP BY
-		|	tmp.StoreReceiver,
-		|	tmp.ItemKey,
-		|	tmp.Period,
-		|	tmp.ReceiptBasis,
-		|   tmp.RowKey
-		|;
-		|// 3 - GoodsInTransitOutgoing //////////////////////////////////////////////////////////////////////////////
-		|SELECT
-		|	tmp.StoreSender AS Store,
-		|	tmp.ItemKey,
-		|	SUM(Quantity) AS Quantity,
-		|	tmp.Period,
-		|	tmp.ShipmentBasis,
-		|   tmp.RowKey
-		|FROM
-		|	tmp AS tmp
-		|GROUP BY
-		|	tmp.StoreSender,
-		|	tmp.ItemKey,
-		|	tmp.Period,
-		|	tmp.ShipmentBasis,
-		|   tmp.RowKey";
+	Return New Structure();
 EndFunction
 
 Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
@@ -167,66 +13,15 @@ Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo 
 EndFunction
 
 Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-#Region NewRegisterPosting
 	Tables = Parameters.DocumentDataTables;
 	QueryArray = GetQueryTextsMasterTables();		
 	PostingServer.SetRegisters(Tables, Ref);
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
-#EndRegion
 EndProcedure
 
 Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 	PostingDataTables = New Map();
-	
-	// TransferOrderBalance 
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.TransferOrderBalance,
-		New Structure("RecordType, RecordSet, WriteInTransaction",
-			AccumulationRecordType.Expense,
-			Parameters.DocumentDataTables.TransferOrderBalance,
-			Parameters.IsReposting));
-	
-	If Parameters.DocumentDataTables.Header.StoreReceiverUseGoodsReceipt
-		And Parameters.DocumentDataTables.Header.StoreSenderUseShipmentConfirmation Then
-				
-		// GoodsInTransitIncoming (Receiver) GoodsInTransitIncoming [Receipt]
-		PostingDataTables.Insert(Parameters.Object.RegisterRecords.GoodsInTransitIncoming,
-			New Structure("RecordType, RecordSet, WriteInTransaction",
-				AccumulationRecordType.Receipt,
-				Parameters.DocumentDataTables.GoodsInTransitIncoming,
-				Parameters.IsReposting));
-		
-		// GoodsInTransitOutgoing (Sender) GoodsInTransitOutgoing [Receipt]
-		PostingDataTables.Insert(Parameters.Object.RegisterRecords.GoodsInTransitOutgoing,
-			New Structure("RecordType, RecordSet, WriteInTransaction",
-				AccumulationRecordType.Receipt,
-				Parameters.DocumentDataTables.GoodsInTransitOutgoing,
-				Parameters.IsReposting));
-		
-	ElsIf Parameters.DocumentDataTables.Header.StoreReceiverUseGoodsReceipt
-		And Not Parameters.DocumentDataTables.Header.StoreSenderUseShipmentConfirmation Then
-				
-		// GoodsInTransitIncoming (Receiver) GoodsInTransitIncoming [Receipt]
-		PostingDataTables.Insert(Parameters.Object.RegisterRecords.GoodsInTransitIncoming,
-			New Structure("RecordType, RecordSet, WriteInTransaction",
-				AccumulationRecordType.Receipt,
-				Parameters.DocumentDataTables.GoodsInTransitIncoming,
-				Parameters.IsReposting));
-				
-	ElsIf Not Parameters.DocumentDataTables.Header.StoreReceiverUseGoodsReceipt
-		And Parameters.DocumentDataTables.Header.StoreSenderUseShipmentConfirmation Then
-				
-		// GoodsInTransitOutgoing (Sender) GoodsInTransitOutgoing [Receipt] 
-		PostingDataTables.Insert(Parameters.Object.RegisterRecords.GoodsInTransitOutgoing,
-			New Structure("RecordType, RecordSet, WriteInTransaction",
-				AccumulationRecordType.Receipt,
-				Parameters.DocumentDataTables.GoodsInTransitOutgoing,
-				Parameters.IsReposting));			
-	EndIf;
-	
-#Region NewRegistersPosting
 	PostingServer.SetPostingDataTables(PostingDataTables, Parameters);
-#EndRegion
-
 	Return PostingDataTables;
 EndFunction
 
@@ -248,10 +43,8 @@ Function UndopostingGetLockDataSource(Ref, Cancel, Parameters, AddInfo = Undefin
 EndFunction
 
 Procedure UndopostingCheckBeforeWrite(Ref, Cancel, Parameters, AddInfo = Undefined) Export
-#Region NewRegistersPosting
 	QueryArray = GetQueryTextsMasterTables();
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
-#EndRegion
 EndProcedure
 
 Procedure UndopostingCheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined) Export
@@ -298,8 +91,6 @@ Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
 EndProcedure
 
 #EndRegion
-
-#Region NewRegistersPosting
 
 Function GetInformationAboutMovements(Ref) Export
 	Str = New Structure;
@@ -573,6 +364,4 @@ Function R4050B_StockInventory()
 		|WHERE
 		|	TRUE";
 EndFunction
-	
-#EndRegion	
 

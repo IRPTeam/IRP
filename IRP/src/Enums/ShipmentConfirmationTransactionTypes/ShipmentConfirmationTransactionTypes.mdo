@@ -33,11 +33,4 @@
       <value>Return to vendor</value>
     </synonym>
   </enumValues>
-  <enumValues uuid="2468a5c3-3e79-46ee-b493-c8ffbef31762">
-    <name>Bundling</name>
-    <synonym>
-      <key>en</key>
-      <value>Bundling</value>
-    </synonym>
-  </enumValues>
 </mdclass:Enum>

@@ -548,7 +548,10 @@ Function GetNextStep_SC(Source, ItemList, Row)
 	NextStep = Catalogs.MovementRules.EmptyRef();
 	If Source.TransactionType = Enums.ShipmentConfirmationTransactionTypes.Sales
 		And Not ValueIsFilled(ItemList.SalesInvoice) Then
-		NextStep = Catalogs.MovementRules.SI;
+			NextStep = Catalogs.MovementRules.SI;
+	ElsIf Source.TransactionType = Enums.ShipmentConfirmationTransactionTypes.ReturnToVendor
+		And Not ValueIsFilled(ItemList.PurchaseReturn) Then
+			NextStep = Catalogs.MovementRules.PR;
 	EndIf;
 	Return NextStep;
 EndFunction	
@@ -574,9 +577,12 @@ EndFunction
 
 Function GetNextStep_GR(Source, ItemList, Row)
 	NextStep = Catalogs.MovementRules.EmptyRef();
-	If Source.TransactionType = Enums.GoodsReceiptTransactionTypes.Purchase
+	If Source.TransactionType = Enums.GoodsReceiptTransactionTypes.Purchase 
 		And Not ValueIsFilled(ItemList.PurchaseInvoice) Then
-		NextStep = Catalogs.MovementRules.PI;
+			NextStep = Catalogs.MovementRules.PI;
+	ElsIf Source.TransactionType = Enums.GoodsReceiptTransactionTypes.ReturnFromCustomer
+		And Not ValueIsFilled(ItemList.SalesReturn) Then
+			NextStep = Catalogs.MovementRules.SR;
 	EndIf;
 	Return NextStep;
 EndFunction	

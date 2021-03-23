@@ -82,7 +82,6 @@
   <registerRecords>AccumulationRegister.R1031B_ReceiptInvoicing</registerRecords>
   <registerRecords>AccumulationRegister.R1040B_TaxesOutgoing</registerRecords>
   <registerRecords>AccumulationRegister.TaxesTurnovers</registerRecords>
-  <registerRecords>AccumulationRegister.GoodsInTransitIncoming</registerRecords>
   <registerRecords>AccumulationRegister.R1012B_PurchaseOrdersInvoiceClosing</registerRecords>
   <registerRecords>AccumulationRegister.AccountsStatement</registerRecords>
   <registerRecords>AccumulationRegister.R4035B_IncomingStocks</registerRecords>

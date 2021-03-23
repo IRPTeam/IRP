@@ -190,6 +190,20 @@
         <value>18</value>
       </code>
     </items>
+    <items id="aae53970-400b-4533-b40f-ce66a6d9e48d">
+      <name>SR</name>
+      <description>SR</description>
+      <code xsi:type="core:StringValue">
+        <value>19</value>
+      </code>
+    </items>
+    <items id="f252d2bd-c4ea-408b-83aa-7dee67b04282">
+      <name>PR</name>
+      <description>PR</description>
+      <code xsi:type="core:StringValue">
+        <value>20</value>
+      </code>
+    </items>
   </predefined>
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>

@@ -6,7 +6,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Tables = New Structure();
 	Tables.Insert("OrderBalance"                          , PostingServer.CreateTable(AccReg.OrderBalance));
 	Tables.Insert("PurchaseTurnovers"                     , PostingServer.CreateTable(AccReg.PurchaseTurnovers));
-	Tables.Insert("GoodsInTransitOutgoing"                , PostingServer.CreateTable(AccReg.GoodsInTransitOutgoing));
+//	Tables.Insert("GoodsInTransitOutgoing"                , PostingServer.CreateTable(AccReg.GoodsInTransitOutgoing));
 	Tables.Insert("PartnerArTransactions"                 , PostingServer.CreateTable(AccReg.PartnerArTransactions));
 	Tables.Insert("AdvanceFromCustomers_Lock"             , PostingServer.CreateTable(AccReg.AdvanceFromCustomers));
 	Tables.Insert("PartnerArTransactions_OffsetOfAdvance" , PostingServer.CreateTable(AccReg.AdvanceFromCustomers));
@@ -21,12 +21,12 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	
 	Tables.OrderBalance               = QueryResults[2].Unload();
 	Tables.PurchaseTurnovers          = QueryResults[3].Unload();
-	Tables.GoodsInTransitOutgoing     = QueryResults[4].Unload();
-	Tables.PartnerArTransactions      = QueryResults[5].Unload();
-	Tables.AdvanceFromCustomers_Lock  = QueryResults[6].Unload();
-	Tables.ReconciliationStatement    = QueryResults[7].Unload();
-	Tables.PurchaseReturnTurnovers    = QueryResults[8].Unload();
-	Tables.RevenuesTurnovers          = QueryResults[9].Unload();
+//	Tables.GoodsInTransitOutgoing     = QueryResults[4].Unload();
+	Tables.PartnerArTransactions      = QueryResults[4].Unload();
+	Tables.AdvanceFromCustomers_Lock  = QueryResults[5].Unload();
+	Tables.ReconciliationStatement    = QueryResults[6].Unload();
+	Tables.PurchaseReturnTurnovers    = QueryResults[7].Unload();
+	Tables.RevenuesTurnovers          = QueryResults[8].Unload();
 	
 #Region NewRegistersPosting		
 	QueryArray = GetQueryTextsSecondaryTables();
@@ -145,30 +145,30 @@ Function GetQueryTextQueryTable()
 		|	tmp.RowKey
 		|;
 		|
-		|// 4. ItemList_GoodsInTransitOutgoing //////////////////////////////////////////////////////////////////////////////
-		|SELECT
-		|	tmp.Company,
-		|	tmp.Store,
-		|	tmp.ItemKey,
-		|	SUM(tmp.Quantity) AS Quantity,
-		|	tmp.Period,
-		|	tmp.ShipmentBasis,
-		|	tmp.RowKey
-		|FROM
-		|	tmp AS tmp
-		|WHERE
-		|	tmp.UseShipmentConfirmation
-		|	AND Not tmp.IsService
-		|GROUP BY
-		|	tmp.Company,
-		|	tmp.Store,
-		|	tmp.ItemKey,
-		|	tmp.Period,
-		|	tmp.ShipmentBasis,
-		|	tmp.RowKey
-		|;
+//		|// 4. ItemList_GoodsInTransitOutgoing //////////////////////////////////////////////////////////////////////////////
+//		|SELECT
+//		|	tmp.Company,
+//		|	tmp.Store,
+//		|	tmp.ItemKey,
+//		|	SUM(tmp.Quantity) AS Quantity,
+//		|	tmp.Period,
+//		|	tmp.ShipmentBasis,
+//		|	tmp.RowKey
+//		|FROM
+//		|	tmp AS tmp
+//		|WHERE
+//		|	tmp.UseShipmentConfirmation
+//		|	AND Not tmp.IsService
+//		|GROUP BY
+//		|	tmp.Company,
+//		|	tmp.Store,
+//		|	tmp.ItemKey,
+//		|	tmp.Period,
+//		|	tmp.ShipmentBasis,
+//		|	tmp.RowKey
+//		|;
 		|
-		|// 5. ItemList_PartnerArTransactions //////////////////////////////////////////////////////////////////////////////
+		|// 4. ItemList_PartnerArTransactions //////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company AS Company,
 		|	tmp.BasisDocument AS BasisDocument,
@@ -190,7 +190,7 @@ Function GetQueryTextQueryTable()
 		|	tmp.Period
 		|;
 		|
-		|// 6. ItemList_AdvanceFromCustomers_Lock //////////////////////////////////////////////////////////////////////////////
+		|// 5. ItemList_AdvanceFromCustomers_Lock //////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company AS Company,
 		|	tmp.BasisDocument AS BasisDocument,
@@ -212,7 +212,7 @@ Function GetQueryTextQueryTable()
 		|	tmp.Period
 		|;
 		|
-		|// 7. ReconciliationStatement //////////////////////////////////////////////////////////////////////////////
+		|// 6. ReconciliationStatement //////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company AS Company,
 		|	tmp.LegalName AS LegalName,
@@ -228,7 +228,7 @@ Function GetQueryTextQueryTable()
 		|	tmp.Period
 		|;
 		|
-		|// 8. PurchaseReturnTurnovers //////////////////////////////////////////////////////////////////////////////
+		|// 7. PurchaseReturnTurnovers //////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company,
 		|	tmp.PurchaseInvoice AS PurchaseInvoice,
@@ -248,7 +248,7 @@ Function GetQueryTextQueryTable()
 		|	tmp.Period,
 		|	tmp.RowKey
 		|;
-		|// 9. RevenuesTurnovers  //////////////////////////////////////////////////////////////////////////////
+		|// 8. RevenuesTurnovers  //////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Period AS Period,
 		|	tmp.Company AS Company,
@@ -352,11 +352,11 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords.PurchaseReturnTurnovers,
 		New Structure("RecordSet", Parameters.DocumentDataTables.PurchaseReturnTurnovers));
 		
-	// GoodsInTransitOutgoing
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.GoodsInTransitOutgoing,
-		New Structure("RecordType, RecordSet",
-			AccumulationRecordType.Receipt,
-			Parameters.DocumentDataTables.GoodsInTransitOutgoing));
+//	// GoodsInTransitOutgoing
+//	PostingDataTables.Insert(Parameters.Object.RegisterRecords.GoodsInTransitOutgoing,
+//		New Structure("RecordType, RecordSet",
+//			AccumulationRecordType.Receipt,
+//			Parameters.DocumentDataTables.GoodsInTransitOutgoing));
 	
 	// PartnerArTransactions
 	// PartnerArTransactions [Receipt]  

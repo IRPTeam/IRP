@@ -5,7 +5,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	AccReg = Metadata.AccumulationRegisters;
 	Tables = New Structure();
 	Tables.Insert("OrderBalance"                          , PostingServer.CreateTable(AccReg.OrderBalance));
-	Tables.Insert("GoodsInTransitIncoming"                , PostingServer.CreateTable(AccReg.GoodsInTransitIncoming));
+//	Tables.Insert("GoodsInTransitIncoming"                , PostingServer.CreateTable(AccReg.GoodsInTransitIncoming));
 	Tables.Insert("PartnerApTransactions"                 , PostingServer.CreateTable(AccReg.PartnerApTransactions));
 	Tables.Insert("AdvanceToSuppliers_Lock"               , PostingServer.CreateTable(AccReg.AdvanceToSuppliers));
 	Tables.Insert("PartnerApTransactions_OffsetOfAdvance" , PostingServer.CreateTable(AccReg.AdvanceToSuppliers));
@@ -28,13 +28,13 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	QueryTableSalesTurnovers = QueryResultSalesTurnovers.Unload();
 	
 	Tables.OrderBalance                     = QueryResults[2].Unload();
-	Tables.GoodsInTransitIncoming           = QueryResults[3].Unload();
-	Tables.PartnerApTransactions            = QueryResults[4].Unload();
-	Tables.AdvanceToSuppliers_Lock          = QueryResults[5].Unload();
-	Tables.ReconciliationStatement          = QueryResults[6].Unload();
-	Tables.SalesReturnTurnovers             = QueryResults[7].Unload();
-	Tables.PartnerArTransactions            = QueryResults[8].Unload();
-	Tables.ExpensesTurnovers	            = QueryResults[9].Unload();
+//	Tables.GoodsInTransitIncoming           = QueryResults[3].Unload();
+	Tables.PartnerApTransactions            = QueryResults[3].Unload();
+	Tables.AdvanceToSuppliers_Lock          = QueryResults[4].Unload();
+	Tables.ReconciliationStatement          = QueryResults[5].Unload();
+	Tables.SalesReturnTurnovers             = QueryResults[6].Unload();
+	Tables.PartnerArTransactions            = QueryResults[7].Unload();
+	Tables.ExpensesTurnovers	            = QueryResults[8].Unload();
 	
 	Tables.SalesTurnovers = QueryTableSalesTurnovers;
 	
@@ -212,24 +212,24 @@ Function GetQueryTextQueryTable()
 	|WHERE
 	|	tmp.Order <> VALUE(Document.SalesReturnOrder.EmptyRef)
 	|;
-	|// 3. GoodsInTransitIncoming //////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	tmp.Company,
-	|	tmp.Store,
-	|	tmp.ItemKey,
-	|	tmp.ReceiptBasis,
-	|	tmp.Quantity AS Quantity,
-	|	tmp.Unit AS Unit,
-	|	tmp.Period,
-	|	tmp.RowKey
-	|FROM
-	|	tmp AS tmp
-	|WHERE
-	|	tmp.UseGoodsReceipt
-	|	AND Not tmp.IsService
-	|	AND NOT tmp.GoodsReceiptExists
-	|;
-	|// 4. PartnerApTransactions //////////////////////////////////////////////////////////////////////////////
+//	|// 3. GoodsInTransitIncoming //////////////////////////////////////////////////////////////////////////////
+//	|SELECT
+//	|	tmp.Company,
+//	|	tmp.Store,
+//	|	tmp.ItemKey,
+//	|	tmp.ReceiptBasis,
+//	|	tmp.Quantity AS Quantity,
+//	|	tmp.Unit AS Unit,
+//	|	tmp.Period,
+//	|	tmp.RowKey
+//	|FROM
+//	|	tmp AS tmp
+//	|WHERE
+//	|	tmp.UseGoodsReceipt
+//	|	AND Not tmp.IsService
+//	|	AND NOT tmp.GoodsReceiptExists
+//	|;
+	|// 3. PartnerApTransactions //////////////////////////////////////////////////////////////////////////////
 	|SELECT
 	|	tmp.Company AS Company,
 	|	tmp.BasisDocument AS BasisDocument,
@@ -250,7 +250,7 @@ Function GetQueryTextQueryTable()
 	|	tmp.Currency,
 	|	tmp.Period
 	|;
-	|// 5. AdvanceToSuppliers_Lock //////////////////////////////////////////////////////////////////////////////
+	|// 4. AdvanceToSuppliers_Lock //////////////////////////////////////////////////////////////////////////////
 	|SELECT
 	|	tmp.Company AS Company,
 	|	tmp.BasisDocument AS BasisDocument,
@@ -271,7 +271,7 @@ Function GetQueryTextQueryTable()
 	|	tmp.Currency,
 	|	tmp.Period
 	|;
-	|// 6. ReconciliationStatement //////////////////////////////////////////////////////////////////////////////
+	|// 5. ReconciliationStatement //////////////////////////////////////////////////////////////////////////////
 	|SELECT
 	|	tmp.Company AS Company,
 	|	tmp.LegalName AS LegalName,
@@ -286,7 +286,7 @@ Function GetQueryTextQueryTable()
 	|	tmp.Currency,
 	|	tmp.Period
 	|;
-	|// 7. SalesReturnTurnovers //////////////////////////////////////////////////////////////////////////////
+	|// 6. SalesReturnTurnovers //////////////////////////////////////////////////////////////////////////////
 	|SELECT
 	|	tmp.Company,
 	|	tmp.Currency,
@@ -306,7 +306,7 @@ Function GetQueryTextQueryTable()
 	|	tmp.SalesInvoice,
 	|	tmp.RowKey
 	|;
-	|// 8. PartnerArTransactions //////////////////////////////////////////////////////////////////////////////
+	|// 7. PartnerArTransactions //////////////////////////////////////////////////////////////////////////////
 	|SELECT
 	|	tmp.Company AS Company,
 	|	tmp.AgingSalesInvoice AS BasisDocument,
@@ -329,7 +329,7 @@ Function GetQueryTextQueryTable()
 	|	tmp.Currency,
 	|	tmp.Period
 	|;
-	|// 9. ExpensesTurnovers //////////////////////////////////////////////////////////////////////////////
+	|// 8. ExpensesTurnovers //////////////////////////////////////////////////////////////////////////////
 	|SELECT
 	|	tmp.Company AS Company,
 	|	tmp.BusinessUnit AS BusinessUnit,
@@ -444,12 +444,12 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 			Parameters.DocumentDataTables.SalesReturnTurnovers,
 			Parameters.IsReposting));
 	
-	// GoodsInTransitIncoming
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.GoodsInTransitIncoming,
-		New Structure("RecordType, RecordSet, WriteInTransaction",
-			AccumulationRecordType.Receipt,
-			Parameters.DocumentDataTables.GoodsInTransitIncoming,
-			Parameters.IsReposting));
+//	// GoodsInTransitIncoming
+//	PostingDataTables.Insert(Parameters.Object.RegisterRecords.GoodsInTransitIncoming,
+//		New Structure("RecordType, RecordSet, WriteInTransaction",
+//			AccumulationRecordType.Receipt,
+//			Parameters.DocumentDataTables.GoodsInTransitIncoming,
+//			Parameters.IsReposting));
 	
 	// AccountsStatement
 	ArrayOfTables = New Array();

@@ -467,6 +467,7 @@ Scenario: _018013 create PI using form link/unlink
 		| '1' | 'Sales order 15 dated 01.02.2021 19:50:45'     | ''          | '24,000' | 'PO&PI'        |
 		| '2' | 'Purchase order 217 dated 12.02.2021 12:45:05' | ''          | '5,000'  | 'PI&GR'        |
 		| '3' | 'Purchase order 217 dated 12.02.2021 12:45:05' | ''          | '2,000'  | 'PI'           |
+		Then the number of "RowIDInfo" table lines is "равно" "3"
 	* Unlink line
 		And I click the button named "LinkUnlinkBasisDocuments"
 		Then "Link / unlink document row" window is opened
@@ -484,6 +485,7 @@ Scenario: _018013 create PI using form link/unlink
 			| '1' | 'Sales order 15 dated 01.02.2021 19:50:45'     | 'GR'        | '24,000' | 'PO&PI'        |
 			| '2' | 'Purchase order 217 dated 12.02.2021 12:45:05' | 'GR'        | '5,000'  | 'PI&GR'        |
 			| '3' | ''                                             | ''          | '2,000'  | ''             |
+		Then the number of "RowIDInfo" table lines is "равно" "3"
 		And "ItemList" table contains lines
 			| 'Item'    | 'Item key' | 'Sales order'                              | 'Purchase order'                               |
 			| 'Boots'   | '37/18SD'  | 'Sales order 15 dated 01.02.2021 19:50:45' | ''                                             |
@@ -505,6 +507,7 @@ Scenario: _018013 create PI using form link/unlink
 			| '1' | 'Sales order 15 dated 01.02.2021 19:50:45'     | ''          | '24,000' | 'PO&PI'        |
 			| '2' | 'Purchase order 217 dated 12.02.2021 12:45:05' | ''          | '5,000'  | 'PI&GR'        |
 			| '3' | 'Purchase order 217 dated 12.02.2021 12:45:05' | ''          | '2,000'  | 'PI'           |
+		Then the number of "RowIDInfo" table lines is "равно" "3"
 		And "ItemList" table contains lines
 			| 'Item'    | 'Item key' | 'Sales order'                              | 'Purchase order'                               |
 			| 'Boots'   | '37/18SD'  | 'Sales order 15 dated 01.02.2021 19:50:45' | ''                                             |
@@ -542,6 +545,7 @@ Scenario: _018013 create PI using form link/unlink
 			| 'Sales order 15 dated 01.02.2021 19:50:45'     | ''          | '24,000' | 'PO&PI'        |
 			| 'Purchase order 217 dated 12.02.2021 12:45:05' | ''          | '40,000' | 'PI&GR'        |
 			| 'Purchase order 217 dated 12.02.2021 12:45:05' | ''          | '2,000'  | 'PI'           |
+		Then the number of "RowIDInfo" table lines is "равно" "3"
 		And I click "Save" button
 		And I close all client application windows
 

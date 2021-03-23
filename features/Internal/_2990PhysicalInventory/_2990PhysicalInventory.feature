@@ -521,6 +521,7 @@ Scenario: _2990006 create Stock adjustment as surplus based on Physical inventor
 			And "RowIDInfo" table became equal
 				| '#' | 'Key'                                     | 'Basis'                        | 'Row ID'                           | 'Next step' | 'Q'     | 'Basis key'                        | 'Current step'                | 'Row ref'                          |
 				| '1' | '$$Rov1StockAdjustmentAsSurplus2990006$$' | '$$PhysicalInventory2990004$$' | '$$Rov1PhysicalInventory2990004$$' | ''          | '5,000' | '$$Rov1PhysicalInventory2990004$$' | 'Stock adjustment as surplus' | '$$Rov1PhysicalInventory2990004$$' |
+			Then the number of "RowIDInfo" table lines is "равно" "1"
 		* Unlink line and check Row ID info tab
 			And I click "LinkUnlinkBasisDocuments" button
 			And I activate field named "ItemListRowsRowPresentation" in "ItemListRows" table
@@ -536,6 +537,7 @@ Scenario: _2990006 create Stock adjustment as surplus based on Physical inventor
 			And "RowIDInfo" table became equal
 				| '#' | 'Key'                                     | 'Basis' | 'Row ID'                                  | 'Next step' | 'Q'     | 'Basis key' | 'Current step' | 'Row ref'                                 |
 				| '1' | '$$Rov1StockAdjustmentAsSurplus2990006$$' | ''      | '$$Rov1StockAdjustmentAsSurplus2990006$$' | ''          | '5,000' | ''          | ''             | '$$Rov1StockAdjustmentAsSurplus2990006$$' |
+			Then the number of "RowIDInfo" table lines is "равно" "1"
 		* Link line and check Row ID info tab
 			And I move to "Items" tab
 			And I click "LinkUnlinkBasisDocuments" button
@@ -562,6 +564,7 @@ Scenario: _2990006 create Stock adjustment as surplus based on Physical inventor
 			And "RowIDInfo" table became equal
 				| '#' | 'Key'                                     | 'Basis'                        | 'Row ID'                           | 'Next step' | 'Q'     | 'Basis key'                        | 'Current step'                | 'Row ref'                          |
 				| '1' | '$$Rov1StockAdjustmentAsSurplus2990006$$' | '$$PhysicalInventory2990004$$' | '$$Rov1PhysicalInventory2990004$$' | ''          | '5,000' | '$$Rov1PhysicalInventory2990004$$' | 'Stock adjustment as surplus' | '$$Rov1PhysicalInventory2990004$$' |
+			Then the number of "RowIDInfo" table lines is "равно" "1"
 		And I close all client application windows
 	
 	
@@ -621,6 +624,7 @@ Scenario: _2990007 create Stock adjustment as write off based on Physical invent
 			And "RowIDInfo" table became equal
 				| '#' | 'Key'                                      | 'Basis'                        | 'Row ID'                           | 'Next step' | 'Q'     | 'Basis key'                        | 'Current step'                | 'Row ref'                          |
 				| '1' | '$$Rov1StockAdjustmentAsWriteOff2990007$$' | '$$PhysicalInventory2990004$$' | '$$Rov2PhysicalInventory2990004$$' | ''          | '2,000' | '$$Rov2PhysicalInventory2990004$$' | 'Stock adjustment as write off' | '$$Rov2PhysicalInventory2990004$$' |
+			Then the number of "RowIDInfo" table lines is "равно" "1"
 		* Unlink line and check Row ID info tab
 			And I click "LinkUnlinkBasisDocuments" button
 			And I activate field named "ItemListRowsRowPresentation" in "ItemListRows" table
@@ -636,6 +640,7 @@ Scenario: _2990007 create Stock adjustment as write off based on Physical invent
 			And "RowIDInfo" table became equal
 				| '#' | 'Key'                                      | 'Basis' | 'Row ID'                                   | 'Next step' | 'Q'     | 'Basis key' | 'Current step' | 'Row ref'                                  |
 				| '1' | '$$Rov1StockAdjustmentAsWriteOff2990007$$' | ''      | '$$Rov1StockAdjustmentAsWriteOff2990007$$' | ''          | '2,000' | ''          | ''             | '$$Rov1StockAdjustmentAsWriteOff2990007$$' |
+			Then the number of "RowIDInfo" table lines is "равно" "1"
 		* Link line and check Row ID info tab
 			And I move to "Items" tab
 			And I click "LinkUnlinkBasisDocuments" button
@@ -662,6 +667,7 @@ Scenario: _2990007 create Stock adjustment as write off based on Physical invent
 			And "RowIDInfo" table became equal
 				| '#' | 'Key'                                      | 'Basis'                        | 'Row ID'                           | 'Next step' | 'Q'     | 'Basis key'                        | 'Current step'                | 'Row ref'                          |
 				| '1' | '$$Rov1StockAdjustmentAsWriteOff2990007$$' | '$$PhysicalInventory2990004$$' | '$$Rov2PhysicalInventory2990004$$' | ''          | '2,000' | '$$Rov2PhysicalInventory2990004$$' | 'Stock adjustment as write off' | '$$Rov2PhysicalInventory2990004$$' |
+			Then the number of "RowIDInfo" table lines is "равно" "1"
 		And I close all client application windows
 
 Scenario: _2990008 create Stock adjustment as surplus and Stock adjustment as write off based on Physical inventory on a partial quantity

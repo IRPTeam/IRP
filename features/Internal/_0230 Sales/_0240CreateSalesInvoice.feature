@@ -364,6 +364,7 @@ Scenario: _024004 create SI using form link/unlink
 		| '1' | 'Sales order 15 dated 01.02.2021 19:50:45'           | ''          | '10,000' | 'SI&SC'        |
 		| '2' | 'Shipment confirmation 17 dated 25.02.2021 16:28:54' | ''          | '10,000' | 'SI'           |
 		| '3' | 'Shipment confirmation 15 dated 25.02.2021 14:13:30' | ''          | '7,000'  | 'SI'           |
+		Then the number of "RowIDInfo" table lines is "равно" "3"
 	* Unlink line
 		And I click the button named "ItemListLinkUnlinkBasisDocuments"
 		Then "Link / unlink document row" window is opened
@@ -381,6 +382,7 @@ Scenario: _024004 create SI using form link/unlink
 			| '1' | 'Sales order 15 dated 01.02.2021 19:50:45'           | 'SC'        | '10,000' | 'SI&SC'        |
 			| '2' | 'Shipment confirmation 17 dated 25.02.2021 16:28:54' | ''          | '10,000' | 'SI'           |
 			| '3' | ''                                                   | 'SC'        | '7,000'  | ''             |
+		Then the number of "RowIDInfo" table lines is "равно" "3"
 		And "ItemList" table contains lines
 			| 'Item'  | 'Item key' | 'Sales order'                              |
 			| 'Dress' | 'XS/Blue'  | 'Sales order 15 dated 01.02.2021 19:50:45' |
@@ -402,6 +404,7 @@ Scenario: _024004 create SI using form link/unlink
 			| '1' | 'Sales order 15 dated 01.02.2021 19:50:45'           | ''          | '10,000' | 'SI&SC'        |
 			| '2' | 'Shipment confirmation 17 dated 25.02.2021 16:28:54' | ''          | '10,000' | 'SI'           |
 			| '3' | 'Shipment confirmation 15 dated 25.02.2021 14:13:30' | ''          | '7,000'  | 'SI'           |
+		Then the number of "RowIDInfo" table lines is "равно" "3"
 		And "ItemList" table contains lines
 			| 'Item'  | 'Item key' | 'Sales order'                              |
 			| 'Dress' | 'XS/Blue'  | 'Sales order 15 dated 01.02.2021 19:50:45' |
@@ -439,6 +442,7 @@ Scenario: _024004 create SI using form link/unlink
 			| 'Sales order 15 dated 01.02.2021 19:50:45'           | ''          | '80,000' | 'SI&SC'        |
 			| 'Shipment confirmation 17 dated 25.02.2021 16:28:54' | ''          | '10,000' | 'SI'           |
 			| 'Shipment confirmation 15 dated 25.02.2021 14:13:30' | ''          | '7,000'  | 'SI'           |
+		Then the number of "RowIDInfo" table lines is "равно" "3"
 		And I click "Save" button
 		And I close all client application windows
 

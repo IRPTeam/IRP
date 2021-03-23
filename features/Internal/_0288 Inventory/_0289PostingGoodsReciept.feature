@@ -297,6 +297,7 @@ Scenario: _028930 check link/unlink form in the GR
 		| '1' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' | ''          | '10,000' | 'GR'           |
 		| '2' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' | ''          | '15,000' | 'GR'           |
 		| '3' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' | ''          | '24,000' | 'GR'           |
+		Then the number of "RowIDInfo" table lines is "равно" "3"
 	* Unlink line
 		And I click the button named "LinkUnlinkBasisDocuments"
 		And I go to line in "ItemListRows" table
@@ -338,6 +339,7 @@ Scenario: _028930 check link/unlink form in the GR
 			| '1' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' | ''          | '10,000' | 'GR'           |
 			| '2' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' | ''          | '15,000' | 'GR'           |
 			| '3' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' | ''          | '24,000' | 'GR'           |
+		Then the number of "RowIDInfo" table lines is "равно" "3"
 		And "ItemList" table contains lines
 			| 'Item'     | 'Item key'  | 'Purchase invoice'                           |
 			| 'Dress'    | 'M/White'   | 'Purchase invoice 101 dated 05.03.2021 12:14:08' |
@@ -375,6 +377,7 @@ Scenario: _028930 check link/unlink form in the GR
 			| 'Purchase invoice 101 dated 05.03.2021 12:14:08' | ''          | '10,000' |
 			| 'Purchase invoice 101 dated 05.03.2021 12:14:08' | ''          | '15,000' |
 			| 'Purchase invoice 101 dated 05.03.2021 12:14:08' | ''          | '2,000'  |
+		Then the number of "RowIDInfo" table lines is "равно" "3"
 		And I close all client application windows
 
 Scenario: _300507 check connection to GoodsReceipt report "Related documents"

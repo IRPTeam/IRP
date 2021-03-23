@@ -6,7 +6,6 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Tables = New Structure();
 	Tables.Insert("OrderBalance"                          , PostingServer.CreateTable(AccReg.OrderBalance));
 	Tables.Insert("SalesTurnovers"                        , PostingServer.CreateTable(AccReg.SalesTurnovers));
-//	Tables.Insert("GoodsInTransitOutgoing"                , PostingServer.CreateTable(AccReg.GoodsInTransitOutgoing));
 	Tables.Insert("ShipmentOrders"                        , PostingServer.CreateTable(AccReg.ShipmentOrders));
 	Tables.Insert("PartnerArTransactions"                 , PostingServer.CreateTable(AccReg.PartnerArTransactions));
 	Tables.Insert("AdvanceFromCustomers_Lock"             , PostingServer.CreateTable(AccReg.AdvanceFromCustomers));
@@ -20,15 +19,11 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Tables.Insert("Aging_Expense"                         , PostingServer.CreateTable(AccReg.Aging));
 	
 	Tables.Insert("OrderBalance_Exists"           , PostingServer.CreateTable(AccReg.OrderBalance));
-//	Tables.Insert("GoodsInTransitOutgoing_Exists" , PostingServer.CreateTable(AccReg.GoodsInTransitOutgoing));
 	Tables.Insert("ShipmentOrders_Exists"         , PostingServer.CreateTable(AccReg.ShipmentOrders));
 	
 	Tables.OrderBalance_Exists =
 	AccumulationRegisters.OrderBalance.GetExistsRecords(Ref, AccumulationRecordType.Expense, AddInfo);
-	
-//	Tables.GoodsInTransitOutgoing_Exists =
-//	AccumulationRegisters.GoodsInTransitOutgoing.GetExistsRecords(Ref, AccumulationRecordType.Receipt, AddInfo);
-	
+		
 	Tables.ShipmentOrders_Exists =
 	AccumulationRegisters.ShipmentOrders.GetExistsRecords(Ref, AccumulationRecordType.Expense, AddInfo); 
 	
@@ -63,7 +58,6 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	QueryResult = Query.ExecuteBatch();
 	
 	Tables.OrderBalance                         = QueryResult[1].Unload();
-//	Tables.GoodsInTransitOutgoing               = QueryResult[2].Unload();
 	Tables.ShipmentOrders                       = QueryResult[2].Unload();
 	Tables.PartnerArTransactions                = QueryResult[3].Unload();
 	Tables.AdvanceFromCustomers_Lock            = QueryResult[4].Unload();
@@ -421,34 +415,6 @@ Function GetQueryTextQueryTable()
 		|	tmp.SalesOrder <> VALUE(Document.SalesOrder.EmptyRef)
 		|;
 		|
-//		|//[2]//////////////////////////////////////////////////////////////////////////////
-//		|SELECT
-//		|	tmp.Company AS Company,
-//		|	tmp.Store AS Store,
-//		|	tmp.ItemKey AS ItemKey,
-//		|	ISNULL(ShipmentConfirmations.Quantity, tmp.Quantity) AS Quantity,
-//		|	tmp.Period AS Period,
-//		|	CASE
-//		|		WHEN tmp.ShipmentConfirmationBeforeSalesInvoice
-//		|		AND
-//		|		NOT tmp.UseSalesOrder
-//		|			THEN ISNULL(ShipmentConfirmations.ShipmentConfirmation, VALUE(Document.ShipmentConfirmation.EmptyRef))
-//		|		ELSE tmp.ShipmentBasis
-//		|	END AS ShipmentBasis,
-//		|	tmp.RowKey AS RowKey
-//		|FROM
-//		|	tmp AS tmp
-//		|	LEFT JOIN Document.SalesInvoice.ShipmentConfirmations AS ShipmentConfirmations
-//		|	ON tmp.Key = ShipmentConfirmations.Key
-//		|	AND tmp.SalesInvoice = ShipmentConfirmations.Ref
-//		|WHERE
-//		|	tmp.UseShipmentConfirmation
-//		|	AND (NOT tmp.ShipmentConfirmationBeforeSalesInvoice
-//		|	OR
-//		|	NOT tmp.UseSalesOrder)
-//		|	AND
-//		|	NOT tmp.IsService
-//		|;
 		|//[2]//////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.SalesOrder AS Order,
@@ -757,14 +723,7 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 	// SalesTurnovers
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords.SalesTurnovers,
 		New Structure("RecordSet", Parameters.DocumentDataTables.SalesTurnovers));
-	
-//	// GoodsInTransitOutgoing
-//	PostingDataTables.Insert(Parameters.Object.RegisterRecords.GoodsInTransitOutgoing,
-//		New Structure("RecordType, RecordSet, WriteInTransaction",
-//			AccumulationRecordType.Receipt,
-//			Parameters.DocumentDataTables.GoodsInTransitOutgoing,
-//			True));
-		
+			
 	// ShipmentOrders
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords.ShipmentOrders,
 		New Structure("RecordType, RecordSet, WriteInTransaction",

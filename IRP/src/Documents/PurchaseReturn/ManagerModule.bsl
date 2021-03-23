@@ -6,7 +6,6 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Tables = New Structure();
 	Tables.Insert("OrderBalance"                          , PostingServer.CreateTable(AccReg.OrderBalance));
 	Tables.Insert("PurchaseTurnovers"                     , PostingServer.CreateTable(AccReg.PurchaseTurnovers));
-//	Tables.Insert("GoodsInTransitOutgoing"                , PostingServer.CreateTable(AccReg.GoodsInTransitOutgoing));
 	Tables.Insert("PartnerArTransactions"                 , PostingServer.CreateTable(AccReg.PartnerArTransactions));
 	Tables.Insert("AdvanceFromCustomers_Lock"             , PostingServer.CreateTable(AccReg.AdvanceFromCustomers));
 	Tables.Insert("PartnerArTransactions_OffsetOfAdvance" , PostingServer.CreateTable(AccReg.AdvanceFromCustomers));
@@ -21,7 +20,6 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	
 	Tables.OrderBalance               = QueryResults[2].Unload();
 	Tables.PurchaseTurnovers          = QueryResults[3].Unload();
-//	Tables.GoodsInTransitOutgoing     = QueryResults[4].Unload();
 	Tables.PartnerArTransactions      = QueryResults[4].Unload();
 	Tables.AdvanceFromCustomers_Lock  = QueryResults[5].Unload();
 	Tables.ReconciliationStatement    = QueryResults[6].Unload();
@@ -145,28 +143,6 @@ Function GetQueryTextQueryTable()
 		|	tmp.RowKey
 		|;
 		|
-//		|// 4. ItemList_GoodsInTransitOutgoing //////////////////////////////////////////////////////////////////////////////
-//		|SELECT
-//		|	tmp.Company,
-//		|	tmp.Store,
-//		|	tmp.ItemKey,
-//		|	SUM(tmp.Quantity) AS Quantity,
-//		|	tmp.Period,
-//		|	tmp.ShipmentBasis,
-//		|	tmp.RowKey
-//		|FROM
-//		|	tmp AS tmp
-//		|WHERE
-//		|	tmp.UseShipmentConfirmation
-//		|	AND Not tmp.IsService
-//		|GROUP BY
-//		|	tmp.Company,
-//		|	tmp.Store,
-//		|	tmp.ItemKey,
-//		|	tmp.Period,
-//		|	tmp.ShipmentBasis,
-//		|	tmp.RowKey
-//		|;
 		|
 		|// 4. ItemList_PartnerArTransactions //////////////////////////////////////////////////////////////////////////////
 		|SELECT
@@ -351,13 +327,7 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 	// PurchaseReturnTurnovers
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords.PurchaseReturnTurnovers,
 		New Structure("RecordSet", Parameters.DocumentDataTables.PurchaseReturnTurnovers));
-		
-//	// GoodsInTransitOutgoing
-//	PostingDataTables.Insert(Parameters.Object.RegisterRecords.GoodsInTransitOutgoing,
-//		New Structure("RecordType, RecordSet",
-//			AccumulationRecordType.Receipt,
-//			Parameters.DocumentDataTables.GoodsInTransitOutgoing));
-	
+			
 	// PartnerArTransactions
 	// PartnerArTransactions [Receipt]  
 	// PartnerArTransactions_OffsetOfAdvance [Expense]
@@ -538,6 +508,21 @@ EndFunction
 Function ItemList()
 	Return
 		"SELECT
+		|	RowIDInfo.Ref AS Ref,
+		|	RowIDInfo.Key AS Key,
+		|	MAX(RowIDInfo.RowID) AS RowID
+		|INTO TableRowIDInfo
+		|FROM
+		|	Document.PurchaseReturn.RowIDInfo AS RowIDInfo
+		|WHERE
+		|	RowIDInfo.Ref = &Ref
+		|GROUP BY
+		|	RowIDInfo.Ref,
+		|	RowIDInfo.Key
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////	
+		|SELECT
 		|	ShipmentConfirmations.Key,
 		|	ShipmentConfirmations.ShipmentConfirmation
 		|INTO ShipmentConfirmations
@@ -585,7 +570,7 @@ Function ItemList()
 		|			THEN PurchaseReturnItemList.Ref
 		|		ELSE PurchaseReturnItemList.PurchaseInvoice
 		|	END AS SalesInvoice,
-		|	PurchaseReturnItemList.Key AS RowKey,
+		|	TableRowIDInfo.RowID AS RowKey,
 		|	PurchaseReturnItemList.Key,
 		|	PurchaseReturnItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS IsService,
 		|	PurchaseReturnItemList.NetAmount,
@@ -596,6 +581,8 @@ Function ItemList()
 		|	Document.PurchaseReturn.ItemList AS PurchaseReturnItemList
 		|		LEFT JOIN ShipmentConfirmations AS ShipmentConfirmations
 		|		ON PurchaseReturnItemList.Key = ShipmentConfirmations.Key
+		|		LEFT JOIN TableRowIDInfo AS TableRowIDInfo
+		|		ON PurchaseReturnItemList.Key = TableRowIDInfo.Key
 		|WHERE
 		|	PurchaseReturnItemList.Ref = &Ref";
 EndFunction

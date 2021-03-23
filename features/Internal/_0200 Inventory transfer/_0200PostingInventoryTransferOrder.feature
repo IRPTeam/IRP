@@ -296,6 +296,118 @@ Scenario: _020013 check movements by status and status history of an Inventory T
 			| '$$InventoryTransferOrder020013$$' |
 			And I close current window
 
+
+
+Scenario: _020014 create ITO based on Internal supply request
+	And I close all client application windows
+	* Add items from basis documents
+		* Open form for create ITO
+			Given I open hyperlink "e1cib/list/Document.InventoryTransferOrder"
+			And I click the button named "FormCreate"
+		* Filling in the main details of the document
+			And I click Select button of "Company" field
+			And I go to line in "List" table
+				| 'Description'  |
+				| 'Main Company' | 
+			And I select current line in "List" table
+			And I click Select button of "Store sender" field
+			And I go to line in "List" table
+				| 'Description'  |
+				| 'Store 01' | 
+			And I select current line in "List" table
+			And I click Select button of "Store receiver" field
+			And I go to line in "List" table
+				| 'Description'  |
+				| 'Store 02' | 
+			And I select current line in "List" table
+		* Select items from basis documents
+			And I click the button named "AddBasisDocuments"
+			And I go to line in "BasisesTree" table
+				| 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
+				| '50,000'    | 'Dress, XS/Blue'   | 'pcs'  | 'No'  |
+			And I change "Use" checkbox in "BasisesTree" table
+			And I finish line editing in "BasisesTree" table
+			And I go to line in "BasisesTree" table
+				| 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
+				| '10,000'    | 'Dress, S/Yellow'   | 'pcs'  | 'No'  |
+			And I change "Use" checkbox in "BasisesTree" table
+			And I click "Ok" button
+			And I click "Show row key" button				
+			And I click "Save" button							
+		* Check Item tab and RowID tab
+			And "ItemList" table contains lines
+				| 'Internal supply request'                               | '#' | 'Quantity in base unit' | 'Item'  | 'Item key' | 'Quantity' | 'Unit' | 'Purchase order' |
+				| 'Internal supply request 117 dated 12.02.2021 14:39:38' | '1' | '10,000'                | 'Dress' | 'S/Yellow' | '10,000'   | 'pcs'  | ''               |
+				| 'Internal supply request 117 dated 12.02.2021 14:39:38' | '2' | '50,000'                | 'Dress' | 'XS/Blue'  | '50,000'   | 'pcs'  | ''               |
+			And "RowIDInfo" table contains lines
+				| 'Basis'                                                 | 'Next step' | 'Q'      | 'Current step' |
+				| 'Internal supply request 117 dated 12.02.2021 14:39:38' | 'IT'          | '10,000' | 'ITO&PO&PI'    |
+				| 'Internal supply request 117 dated 12.02.2021 14:39:38' | 'IT'          | '50,000' | 'ITO&PO&PI'    |
+			Then the number of "RowIDInfo" table lines is "равно" "2"	
+		And I close all client application windows
+	* Create ITO based on ISR (Create button)
+		Given I open hyperlink "e1cib/list/Document.InternalSupplyRequest"
+		And I go to line in "List" table
+			| 'Number'                           |
+			| '117' |
+		And I select current line in "List" table
+		And I click "Show row key" button
+		And I go to line in "ItemList" table
+			| '#' |
+			| '1' |
+		And I activate "Key" field in "ItemList" table
+		And I save the current field value as "$$Rov1InternalSupplyRequestr017006$$"
+		And I go to line in "ItemList" table
+			| '#' |
+			| '2' |
+		And I activate "Key" field in "ItemList" table
+		And I save the current field value as "$$Rov2InternalSupplyRequestr017006$$"
+		And I click the button named "FormDocumentInventoryTransferOrderGenerate"
+		And I click "Ok" button	
+		And Delay 1
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "StoreReceiver" became equal to "Store 02"
+		And I click Select button of "Store sender" field
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Store 01' | 
+		And I select current line in "List" table
+		And I click "Show row key" button	
+		And "ItemList" table contains lines
+			| 'Internal supply request'                               | '#' | 'Quantity in base unit' | 'Item'  | 'Item key' | 'Quantity' | 'Unit' | 'Purchase order' |
+			| 'Internal supply request 117 dated 12.02.2021 14:39:38' | '1' | '10,000'                | 'Dress' | 'S/Yellow' | '10,000'   | 'pcs'  | ''               |
+			| 'Internal supply request 117 dated 12.02.2021 14:39:38' | '2' | '50,000'                | 'Dress' | 'XS/Blue'  | '50,000'   | 'pcs'  | ''               |
+		And I go to line in "ItemList" table
+			| '#' |
+			| '1' |
+		And I activate "Key" field in "ItemList" table
+		And I delete "$$Rov1InventoryTransferOrder020014$$" variable
+		And I save the current field value as "$$Rov1InventoryTransferOrder020014$$"
+		And I go to line in "ItemList" table
+			| '#' |
+			| '2' |
+		And I activate "Key" field in "ItemList" table
+		And I delete "$$Rov2InventoryTransferOrder020014$$" variable
+		And I save the current field value as "$$Rov2InventoryTransferOrder020014$$"
+		And I click "Save" button	
+		And I move to "Row ID Info" tab
+		And "RowIDInfo" table contains lines
+			| '#' | 'Key'                                  | 'Basis'                                                 | 'Row ID'                               | 'Next step' | 'Q'      | 'Basis key'                            | 'Current step' | 'Row ref'                              |
+			| '1' | '$$Rov1InventoryTransferOrder020014$$' | 'Internal supply request 117 dated 12.02.2021 14:39:38' | '$$Rov1InternalSupplyRequestr017006$$' | 'IT'        | '10,000' | '$$Rov1InternalSupplyRequestr017006$$' | 'ITO&PO&PI'    | '$$Rov1InternalSupplyRequestr017006$$' |
+			| '2' | '$$Rov2InventoryTransferOrder020014$$' | 'Internal supply request 117 dated 12.02.2021 14:39:38' | '$$Rov2InternalSupplyRequestr017006$$' | 'IT'        | '50,000' | '$$Rov2InternalSupplyRequestr017006$$' | 'ITO&PO&PI'    | '$$Rov2InternalSupplyRequestr017006$$' |
+		Then the number of "RowIDInfo" table lines is "равно" "2"			
+		And I click the button named "FormPost"
+		And I delete "$$NumberInventoryTransferOrder020014$$" variable
+		And I delete "$$InventoryTransferOrder020014$$" variable
+		And I save the value of "Number" field as "$$NumberInventoryTransferOrder020014$$"
+		And I save the window as "$$InventoryTransferOrder020014$$"
+		And I click the button named "FormPostAndClose"
+		Given I open hyperlink "e1cib/list/Document.InventoryTransferOrder"
+		And "List" table contains lines
+			| 'Number'                |
+			| '$$NumberInventoryTransferOrder020014$$' |
+		And I close all client application windows
+
 	
 
 

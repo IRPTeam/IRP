@@ -386,7 +386,7 @@ Scenario: _028810 create document Shipment confirmation based on Inventory trans
 				| 'Basis'                       | 'Next step' | 'Q'     | 'Current step'     |
 				| '$$InventoryTransfer021030$$' | ''          | '3,000' | 'SC' |
 		And I close all client application windows
-	* Create document Goods Receipt based on Inventory transfer (Create button)
+	* Create SC based on Inventory transfer (Create button)
 		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
 		And I go to line in "List" table
 			| 'Number'                           |

@@ -18,13 +18,13 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Query.Text = GetQueryTextQueryTable();
 	QueryResults = Query.ExecuteBatch();
 	
-	Tables.OrderBalance               = QueryResults[2].Unload();
-	Tables.PurchaseTurnovers          = QueryResults[3].Unload();
-	Tables.PartnerArTransactions      = QueryResults[4].Unload();
-	Tables.AdvanceFromCustomers_Lock  = QueryResults[5].Unload();
-	Tables.ReconciliationStatement    = QueryResults[6].Unload();
-	Tables.PurchaseReturnTurnovers    = QueryResults[7].Unload();
-	Tables.RevenuesTurnovers          = QueryResults[8].Unload();
+	Tables.OrderBalance               = QueryResults[3].Unload();
+	Tables.PurchaseTurnovers          = QueryResults[4].Unload();
+	Tables.PartnerArTransactions      = QueryResults[5].Unload();
+	Tables.AdvanceFromCustomers_Lock  = QueryResults[6].Unload();
+	Tables.ReconciliationStatement    = QueryResults[7].Unload();
+	Tables.PurchaseReturnTurnovers    = QueryResults[8].Unload();
+	Tables.RevenuesTurnovers          = QueryResults[9].Unload();
 	
 #Region NewRegistersPosting		
 	QueryArray = GetQueryTextsSecondaryTables();
@@ -37,6 +37,21 @@ EndFunction
 Function GetQueryTextQueryTable()
 	Return
 		"SELECT
+		|	RowIDInfo.Ref AS Ref,
+		|	RowIDInfo.Key AS Key,
+		|	MAX(RowIDInfo.RowID) AS RowID
+		|INTO RowIDInfo
+		|FROM
+		|	Document.PurchaseReturn.RowIDInfo AS RowIDInfo
+		|WHERE
+		|	RowIDInfo.Ref = &Ref
+		|GROUP BY
+		|	RowIDInfo.Ref,
+		|	RowIDInfo.Key
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////	
+		|SELECT
 		|	PurchaseReturnShipmentConfirmations.Key
 		|INTO ShipmentConfirmations
 		|FROM
@@ -76,7 +91,7 @@ Function GetQueryTextQueryTable()
 		|			THEN PurchaseReturnItemList.Ref
 		|		ELSE UNDEFINED
 		|	END AS BasisDocument,
-		|	PurchaseReturnItemList.Key AS RowKey,
+		|	RowIDInfo.RowID AS RowKey,
 		|	PurchaseReturnItemList.NetAmount AS NetAmount,
 		|	CASE
 		|		WHEN PurchaseReturnItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service)
@@ -93,11 +108,13 @@ Function GetQueryTextQueryTable()
 		|	Document.PurchaseReturn.ItemList AS PurchaseReturnItemList
 		|		LEFT JOIN ShipmentConfirmations AS ShipmentConfirmations
 		|		ON PurchaseReturnItemList.Key = ShipmentConfirmations.Key
+		|		LEFT JOIN RowIDInfo AS RowIDInfo
+		|		ON PurchaseReturnItemList.Key = RowIDInfo.Key
 		|WHERE
 		|	PurchaseReturnItemList.Ref = &Ref
 		|;
 		|
-		|// 2. ItemList_OrderBalance //////////////////////////////////////////////////////////////////////////////
+		|// 3. ItemList_OrderBalance //////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company,
 		|	tmp.Store,
@@ -119,7 +136,7 @@ Function GetQueryTextQueryTable()
 		|	tmp.RowKey
 		|;
 		|
-		|// 3. ItemList_PurchaseTurnovers //////////////////////////////////////////////////////////////////////////////
+		|// 4. ItemList_PurchaseTurnovers //////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company,
 		|	tmp.PurchaseInvoice AS PurchaseInvoice,
@@ -144,7 +161,7 @@ Function GetQueryTextQueryTable()
 		|;
 		|
 		|
-		|// 4. ItemList_PartnerArTransactions //////////////////////////////////////////////////////////////////////////////
+		|// 5. ItemList_PartnerArTransactions //////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company AS Company,
 		|	tmp.BasisDocument AS BasisDocument,
@@ -166,7 +183,7 @@ Function GetQueryTextQueryTable()
 		|	tmp.Period
 		|;
 		|
-		|// 5. ItemList_AdvanceFromCustomers_Lock //////////////////////////////////////////////////////////////////////////////
+		|// 6. ItemList_AdvanceFromCustomers_Lock //////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company AS Company,
 		|	tmp.BasisDocument AS BasisDocument,
@@ -188,7 +205,7 @@ Function GetQueryTextQueryTable()
 		|	tmp.Period
 		|;
 		|
-		|// 6. ReconciliationStatement //////////////////////////////////////////////////////////////////////////////
+		|// 7. ReconciliationStatement //////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company AS Company,
 		|	tmp.LegalName AS LegalName,
@@ -204,7 +221,7 @@ Function GetQueryTextQueryTable()
 		|	tmp.Period
 		|;
 		|
-		|// 7. PurchaseReturnTurnovers //////////////////////////////////////////////////////////////////////////////
+		|// 8. PurchaseReturnTurnovers //////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company,
 		|	tmp.PurchaseInvoice AS PurchaseInvoice,
@@ -224,7 +241,7 @@ Function GetQueryTextQueryTable()
 		|	tmp.Period,
 		|	tmp.RowKey
 		|;
-		|// 8. RevenuesTurnovers  //////////////////////////////////////////////////////////////////////////////
+		|// 9. RevenuesTurnovers  //////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Period AS Period,
 		|	tmp.Company AS Company,

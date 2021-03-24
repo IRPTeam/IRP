@@ -2948,31 +2948,48 @@ Function GetBasisesFor_PR(FilterValues)
 	
 	// ???
 	//FilterSets.PI_ForPR = True;
-	//FilterSets.PRO_ForPR = True;
+	FilterSets.PRO_ForPR = True;
 	
 	Return GetBasisesTable(StepArray, FilterValues, FilterSets);
 EndFunction
 
 Function GetBasisesFor_PRO(FilterValues)
-
+	StepArray = New Array;
+	StepArray.Add(Catalogs.MovementRules.PRO);
+	StepArray.Add(Catalogs.MovementRules.PRO_PR);
+	FilterSets = GetAvailableFilterSets();
+	
+	// ???
+	//FilterSets.PI_ForPRO = True;
+	
+	Return GetBasisesTable(StepArray, FilterValues, FilterSets);
 EndFunction
 
 Function GetBasisesFor_SR(FilterValues)
 	StepArray = New Array;
 	StepArray.Add(Catalogs.MovementRules.SR);
+	StepArray.Add(Catalogs.MovementRules.SRO_SR);
 	
 	FilterSets = GetAvailableFilterSets();
 	FilterSets.GR_ForSR = True;
 	
 	// ???
 	//FilterSets.SI_ForSR = True;
-	//FilterSets.SRO_ForSR = True;
+	FilterSets.SRO_ForSR = True;
 	
 	Return GetBasisesTable(StepArray, FilterValues, FilterSets);
 EndFunction
 
 Function GetBasisesFor_SRO(FilterValues)
-
+	StepArray = New Array;
+	StepArray.Add(Catalogs.MovementRules.SRO);
+	StepArray.Add(Catalogs.MovementRules.SRO_SR);
+	FilterSets = GetAvailableFilterSets();
+	
+	// ???
+	//FilterSets.SI_ForSRO = True;
+	
+	Return GetBasisesTable(StepArray, FilterValues, FilterSets);
 EndFunction
 
 #EndRegion
@@ -3009,6 +3026,8 @@ Function GetAvailableFilterSets()
 	Result.Insert("GR_ForSR", False);
 	Result.Insert("PR_ForSC", False);
 	Result.Insert("SR_ForGR", False);
+	Result.Insert("PRO_ForPR", False);
+	Result.Insert("SRO_ForSR", False);
 	
 	Return Result;
 EndFunction
@@ -3113,6 +3132,16 @@ Procedure EnableRequiredFilterSets(FilterSets, Query, QueryArray)
 	If FilterSets.SR_ForGR Then
 		ApplyFIlterSet_SR_ForGR(Query);
 		QueryArray.Add(GetDataByFilterSet_SR_ForGR());
+	EndIf;
+	
+	If FilterSets.PRO_ForPR Then
+		ApplyFilterSet_PRO_ForPR(Query);
+		QueryArray.Add(GetDataByFilterSet_PRO_ForPR());
+	EndIf;
+	
+	If FilterSets.SRO_ForSR Then
+		ApplyFilterSet_SRO_ForSR(Query);
+		QueryArray.Add(GetDataByFilterSet_SRO_ForSR());
 	EndIf;
 	
 EndProcedure
@@ -4077,6 +4106,130 @@ Procedure ApplyFilterSet_SR_ForGR(Query)
 	Query.Execute();
 EndProcedure
 
+Procedure ApplyFilterSet_PRO_ForPR(Query)
+	Query.Text = 
+	"SELECT
+	|	RowIDMovements.RowID,
+	|	RowIDMovements.Step,
+	|	RowIDMovements.Basis,
+	|	RowIDMovements.RowRef,
+	|	RowIDMovements.QuantityBalance AS Quantity
+	|INTO RowIDMovements_PRO_ForPR
+	|FROM
+	|	AccumulationRegister.T10000B_RowIDMovements.Balance(&Period, Step IN (&StepArray)
+	|	AND (Basis IN (&Basises)
+	|	OR RowRef.Basis IN (&Basises)
+	|	OR RowRef IN
+	|		(SELECT
+	|			RowRef.Ref AS Ref
+	|		FROM
+	|			Catalog.RowIDs AS RowRef
+	|		WHERE
+	|			CASE
+	|				WHEN &Filter_Company
+	|					THEN RowRef.Company = &Company
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Partner
+	|					THEN RowRef.Partner = &Partner
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_LegalName
+	|					THEN RowRef.LegalName = &LegalName
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Agreement
+	|					THEN RowRef.Agreement = &Agreement
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Currency
+	|					THEN RowRef.Currency = &Currency
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_PriceIncludeTax
+	|					THEN RowRef.PriceIncludeTax = &PriceIncludeTax
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_ItemKey
+	|					THEN RowRef.ItemKey = &ItemKey
+	|				ELSE TRUE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Store
+	|					THEN RowRef.Store = &Store
+	|				ELSE TRUE
+	|			END))) AS RowIDMovements";
+	Query.Execute();
+EndProcedure	
+
+Procedure ApplyFilterSet_SRO_ForSR(Query)
+	Query.Text = 
+	"SELECT
+	|	RowIDMovements.RowID,
+	|	RowIDMovements.Step,
+	|	RowIDMovements.Basis,
+	|	RowIDMovements.RowRef,
+	|	RowIDMovements.QuantityBalance AS Quantity
+	|INTO RowIDMovements_SRO_ForSR
+	|FROM
+	|	AccumulationRegister.T10000B_RowIDMovements.Balance(&Period, Step IN (&StepArray)
+	|	AND (Basis IN (&Basises)
+	|	OR RowRef.Basis IN (&Basises)
+	|	OR RowRef IN
+	|		(SELECT
+	|			RowRef.Ref AS Ref
+	|		FROM
+	|			Catalog.RowIDs AS RowRef
+	|		WHERE
+	|			CASE
+	|				WHEN &Filter_Company
+	|					THEN RowRef.Company = &Company
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Partner
+	|					THEN RowRef.Partner = &Partner
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_LegalName
+	|					THEN RowRef.LegalName = &LegalName
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Agreement
+	|					THEN RowRef.Agreement = &Agreement
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Currency
+	|					THEN RowRef.Currency = &Currency
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_PriceIncludeTax
+	|					THEN RowRef.PriceIncludeTax = &PriceIncludeTax
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_ItemKey
+	|					THEN RowRef.ItemKey = &ItemKey
+	|				ELSE TRUE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Store
+	|					THEN RowRef.Store = &Store
+	|				ELSE TRUE
+	|			END))) AS RowIDMovements";
+	Query.Execute();
+EndProcedure	
+
 #Region GetDataByFilterSet
 
 Function GetDataByFilterSet_SO_ForSI()
@@ -4659,6 +4812,64 @@ Function GetDataByFilterSet_SR_ForGR()
 	|		AND RowIDMovements.Basis = RowIDInfo.Ref";
 EndFunction
 
+Function GetDataByFilterSet_PRO_ForPR()
+	Return
+	"SELECT
+	|	Doc.ItemKey,
+	|	Doc.ItemKey.Item,
+	|	Doc.Store,
+	|	Doc.Ref,
+	|	Doc.Key,
+	|	Doc.Key,
+	|	CASE
+	|		WHEN Doc.ItemKey.Unit.Ref IS NULL
+	|			THEN Doc.ItemKey.Item.Unit
+	|		ELSE Doc.ItemKey.Unit
+	|	END,
+	|	RowIDMovements.Quantity,
+	|	RowIDMovements.RowRef,
+	|	RowIDMovements.RowID,
+	|	RowIDMovements.Step,
+	|	Doc.LineNumber
+	|FROM
+	|	Document.PurchaseReturnOrder.ItemList AS Doc
+	|		INNER JOIN Document.PurchaseReturnOrder.RowIDInfo AS RowIDInfo
+	|		ON Doc.Ref = RowIDInfo.Ref
+	|		AND Doc.Key = RowIDInfo.Key
+	|		INNER JOIN RowIDMovements_PRO_ForPR AS RowIDMovements
+	|		ON RowIDMovements.RowID = RowIDInfo.RowID
+	|		AND RowIDMovements.Basis = RowIDInfo.Ref";
+EndFunction
+
+Function GetDataByFilterSet_SRO_ForSR()
+	Return
+	"SELECT
+	|	Doc.ItemKey,
+	|	Doc.ItemKey.Item,
+	|	Doc.Store,
+	|	Doc.Ref,
+	|	Doc.Key,
+	|	Doc.Key,
+	|	CASE
+	|		WHEN Doc.ItemKey.Unit.Ref IS NULL
+	|			THEN Doc.ItemKey.Item.Unit
+	|		ELSE Doc.ItemKey.Unit
+	|	END,
+	|	RowIDMovements.Quantity,
+	|	RowIDMovements.RowRef,
+	|	RowIDMovements.RowID,
+	|	RowIDMovements.Step,
+	|	Doc.LineNumber
+	|FROM
+	|	Document.SalesReturnOrder.ItemList AS Doc
+	|		INNER JOIN Document.SalesReturnOrder.RowIDInfo AS RowIDInfo
+	|		ON Doc.Ref = RowIDInfo.Ref
+	|		AND Doc.Key = RowIDInfo.Key
+	|		INNER JOIN RowIDMovements_SRO_ForSR AS RowIDMovements
+	|		ON RowIDMovements.RowID = RowIDInfo.RowID
+	|		AND RowIDMovements.Basis = RowIDInfo.Ref";
+EndFunction
+
 #EndRegion
 
 #EndRegion
@@ -5147,6 +5358,10 @@ Function GetAttributeNames_LinkedDocuments()
 	NamesArray.Add("InventoryTransfer");
 	NamesArray.Add("PhysicalInventory");
 	NamesArray.Add("BasisDocument");
+	NamesArray.Add("PurchaseReturn");
+	NamesArray.Add("PurchaseReturnOrder");
+	NamesArray.Add("SalesReturn");
+	NamesArray.Add("SalesReturnOrder");
 	Return NamesArray;
 EndFunction
 

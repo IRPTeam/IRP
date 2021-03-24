@@ -2942,7 +2942,7 @@ EndFunction
 Function GetBasisesFor_PR(FilterValues)
 	StepArray = New Array;
 	StepArray.Add(Catalogs.MovementRules.PR);
-	
+	StepArray.Add(Catalogs.MovementRules.PRO_PR);
 	FilterSets = GetAvailableFilterSets();
 	FilterSets.SC_ForPR = True;
 	

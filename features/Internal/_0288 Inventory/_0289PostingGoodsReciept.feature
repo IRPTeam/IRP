@@ -79,6 +79,7 @@ Scenario: _028900 preparation (Goods receipt)
 	When Create document PurchaseInvoice objects (linked)
 	And I execute 1C:Enterprise script at server
 		| "Documents.PurchaseInvoice.FindByNumber(102).GetObject().Write(DocumentWriteMode.Posting);" |
+		| "Documents.PurchaseInvoice.FindByNumber(101).GetObject().Write(DocumentWriteMode.Posting);" |
 	Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 	And I go to line in "List" table
 			| 'Number'    | 'Partner'    |

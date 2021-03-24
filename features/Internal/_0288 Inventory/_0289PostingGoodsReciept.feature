@@ -61,7 +61,21 @@ Scenario: _028900 preparation (Goods receipt)
 	And I execute 1C:Enterprise script at server
 		| "Documents.PurchaseOrder.FindByNumber(102).GetObject().Write(DocumentWriteMode.Posting);" |
 		| "Documents.PurchaseInvoice.FindByNumber(102).GetObject().Write(DocumentWriteMode.Posting);" |
-	
+	When Create document SalesReturn objects (creation based on)
+	And I execute 1C:Enterprise script at server
+		| "Documents.SalesReturn.FindByNumber(351).GetObject().Write(DocumentWriteMode.Posting);" |
+		| "Documents.SalesReturn.FindByNumber(353).GetObject().Write(DocumentWriteMode.Posting);" |
+		| "Documents.SalesReturn.FindByNumber(354).GetObject().Write(DocumentWriteMode.Posting);" |
+	When Create document SalesOrder and SalesInvoice objects (creation based on, SI >SO)
+	And I execute 1C:Enterprise script at server
+			| "Documents.SalesOrder.FindByNumber(32).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.SalesInvoice.FindByNumber(32).GetObject().Write(DocumentWriteMode.Posting);" |
+	When Create document SalesReturnOrder objects (creation based on)
+	And I execute 1C:Enterprise script at server
+			| "Documents.SalesReturnOrder.FindByNumber(32).GetObject().Write(DocumentWriteMode.Posting);" |
+	When Create document SalesReturn objects (creation based on, number32)
+	And I execute 1C:Enterprise script at server
+			| "Documents.SalesReturn.FindByNumber(32).GetObject().Write(DocumentWriteMode.Posting);" |
 
 Scenario: _028901 create document Goods Receipt based on Purchase invoice (with PO, PI>PO)
 	* Select PI
@@ -140,6 +154,153 @@ Scenario: _028902 create document Goods Receipt based on Purchase order (with PI
 		And I click the button named "FormPostAndClose"
 		And I close all client application windows
 
+
+
+
+Scenario: _028903 create document Goods Receipt based on Sales return (Create button)
+	* Select SR
+		Given I open hyperlink "e1cib/list/Document.SalesReturn"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '32'      |
+		And I click the button named "FormDocumentGoodsReceiptGenerate"	
+		And "BasisesTree" table contains lines
+			| 'Row presentation'                          | 'Use'                                       | 'Quantity' | 'Unit'           | 'Price'    | 'Currency' |
+			| 'Sales return 32 dated 24.03.2021 14:27:53' | 'Sales return 32 dated 24.03.2021 14:27:53' | ''         | ''               | ''         | ''         |
+			| 'Dress, XS/Blue'                            | 'Yes'                                       | '1,000'    | 'pcs'            | '520,00'   | 'TRY'      |
+			| 'Boots, 37/18SD'                            | 'Yes'                                       | '2,000'    | 'Boots (12 pcs)' | '8 400,00' | 'TRY'      |
+		Then the number of "BasisesTree" table lines is "равно" "3"
+		And I click "Ok" button
+	* Create GR and check filling in
+		And "ItemList" table contains lines
+			| 'Item'  | 'Inventory transfer' | 'Item key' | 'Store'    | 'Internal supply request' | 'Quantity' | 'Sales invoice'                              | 'Unit'           | 'Receipt basis'                             | 'Purchase invoice' | 'Currency' | 'Sales return order'                              | 'Sales order' | 'Purchase order' | 'Inventory transfer order' | 'Sales return'                              |
+			| 'Dress' | ''                   | 'XS/Blue'  | 'Store 02' | ''                        | '1,000'    | 'Sales invoice 32 dated 04.03.2021 16:32:23' | 'pcs'            | 'Sales return 32 dated 24.03.2021 14:27:53' | ''                 | 'TRY'      | 'Sales return order 32 dated 23.03.2021 15:23:31' | ''            | ''               | ''                         | 'Sales return 32 dated 24.03.2021 14:27:53' |
+			| 'Boots' | ''                   | '37/18SD'  | 'Store 02' | ''                        | '2,000'    | 'Sales invoice 32 dated 04.03.2021 16:32:23' | 'Boots (12 pcs)' | 'Sales return 32 dated 24.03.2021 14:27:53' | ''                 | 'TRY'      | 'Sales return order 32 dated 23.03.2021 15:23:31' | ''            | ''               | ''                         | 'Sales return 32 dated 24.03.2021 14:27:53' |
+		Then the number of "ItemList" table lines is "равно" "2"
+	* Check RowId info
+		And I click "Show row key" button	
+		And I go to line in "ItemList" table
+		| '#' |
+		| '1' |
+		And I activate "Key" field in "ItemList" table
+		And I delete "$$Rov1GoodsReceipt028903$$" variable
+		And I save the current field value as "$$Rov1GoodsReceipt028903$$"
+		And I go to line in "ItemList" table
+		| '#' |
+		| '2' |
+		And I activate "Key" field in "ItemList" table
+		And I delete "$$Rov2GoodsReceipt028903$$" variable
+		And I save the current field value as "$$Rov2GoodsReceipt028903$$"		
+		And "RowIDInfo" table contains lines
+			| '#' | 'Key'                        | 'Basis'                                     | 'Row ID' | 'Next step' | 'Q'      | 'Basis key' | 'Current step' | 'Row ref' |
+			| '1' | '$$Rov1GoodsReceipt028903$$' | 'Sales return 32 dated 24.03.2021 14:27:53' | '*'      | ''          | '1,000'  | '*'         | 'GR'           | '*'       |
+			| '2' | '$$Rov2GoodsReceipt028903$$' | 'Sales return 32 dated 24.03.2021 14:27:53' | '*'      | ''          | '24,000' | '*'         | 'GR'           | '*'       |
+		Then the number of "RowIDInfo" table lines is "равно" "2"
+		And I click the button named "FormPost"
+		And I delete "$$NumberGoodsReceipt028901$$" variable
+		And I delete "$$GoodsReceipt028901$$" variable
+		And I save the value of "Number" field as "$$NumberGoodsReceipt028901$$"
+		And I save the window as "$$GoodsReceipt028901$$"
+		And I click the button named "FormPostAndClose"
+		And I close all client application windows
+
+
+Scenario: _028931 check link/unlink form in the GR (Sales return)
+	* Open form for create GR
+		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
+		And I click the button named "FormCreate"
+	* Filling in the main details of the document
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Main Company' | 
+		And I select current line in "List" table
+		And I click Select button of "Store" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Store 02'  |
+		And I select current line in "List" table
+		And I select "Return from customer" exact value from "Transaction type" drop-down list
+		And I click Select button of "Partner" field
+		And I click "List" button
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Ferron BP'     |
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Company Ferron BP'     |
+		And I select current line in "List" table
+	* Select items from basis documents
+		And I click the button named "AddBasisDocuments"		
+		And "BasisesTree" table became equal
+			| 'Row presentation'                           | 'Use'                                        | 'Quantity' | 'Unit'                   | 'Price'    | 'Currency' |
+			| 'Sales return 351 dated 24.03.2021 14:04:08' | 'Sales return 351 dated 24.03.2021 14:04:08' | ''         | ''                       | ''         | ''         |
+			| 'High shoes, 39/19SD'                        | 'No'                                         | '10,000'   | 'High shoes box (8 pcs)' | '4 000,00' | 'TRY'      |
+			| 'Bag, ODS'                                   | 'No'                                         | '20,000'   | 'pcs'                    | '200,00'   | 'TRY'      |
+			| 'High shoes, 39/19SD'                        | 'No'                                         | '10,000'   | 'High shoes box (8 pcs)' | '4 000,00' | 'TRY'      |
+			| 'Sales return 353 dated 24.03.2021 14:10:41' | 'Sales return 353 dated 24.03.2021 14:10:41' | ''         | ''                       | ''         | ''         |
+			| 'High shoes, 39/19SD'                        | 'No'                                         | '10,000'   | 'High shoes box (8 pcs)' | '4 000,00' | 'TRY'      |
+			| 'Bag, ODS'                                   | 'No'                                         | '20,000'   | 'pcs'                    | '200,00'   | 'TRY'      |
+			| 'High shoes, 39/19SD'                        | 'No'                                         | '10,000'   | 'High shoes box (8 pcs)' | '4 000,00' | 'TRY'      |
+		And I go to line in "BasisesTree" table
+			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
+			| 'TRY'      | '4 000,00' | '10,000'   | 'High shoes, 39/19SD'         | 'High shoes box (8 pcs)'  | 'No'  |
+		And I change "Use" checkbox in "BasisesTree" table
+		And I finish line editing in "BasisesTree" table
+		And I go to line in "BasisesTree" table
+			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
+			| 'TRY'      | '200,00' | '20,000'   | 'Bag, ODS'         | 'pcs'  | 'No'  |
+		And I change "Use" checkbox in "BasisesTree" table
+		And I finish line editing in "BasisesTree" table
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| '#' | 'Item'       | 'Item key' | 'Store'    | 'Quantity' | 'Unit'                   | 'Receipt basis'                              | 'Purchase invoice' | 'Currency' | 'Sales return order' | 'Purchase order' | 'Inventory transfer order' | 'Sales return'                               |
+			| '1' | 'High shoes' | '39/19SD'  | 'Store 03' | '10,000'   | 'High shoes box (8 pcs)' | 'Sales return 351 dated 24.03.2021 14:04:08' | ''                 | ''         | ''                   | ''               | ''                         | 'Sales return 351 dated 24.03.2021 14:04:08' |
+			| '2' | 'Bag'        | 'ODS'      | 'Store 03' | '20,000'   | 'pcs'                    | 'Sales return 351 dated 24.03.2021 14:04:08' | ''                 | ''         | ''                   | ''               | ''                         | 'Sales return 351 dated 24.03.2021 14:04:08' |
+	* Unlink line and link it again
+		And I click the button named "LinkUnlinkBasisDocuments"
+		And I go to line in "ItemListRows" table
+			| '#' | 'Quantity' | 'Row presentation' | 'Store'    | 'Unit' |
+			| '2' | '20,000'   | 'Bag, ODS'         | 'Store 03' | 'pcs'  |
+		And I expand a line in "ResultsTree" table
+			| 'Row presentation'                           |
+			| 'Sales return 351 dated 24.03.2021 14:04:08' |
+		And I activate field named "ItemListRowsRowPresentation" in "ItemListRows" table
+		And I go to line in "ResultsTree" table
+			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' |
+			| 'TRY'      | '200,00' | '20,000'   | 'Bag, ODS'         | 'pcs'  |
+		And I click "Unlink" button
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| '#' | 'Item'       | 'Item key' | 'Store'    | 'Quantity' | 'Unit'                   | 'Receipt basis'                              | 'Purchase invoice' | 'Currency' | 'Sales return order' | 'Purchase order' | 'Inventory transfer order' | 'Sales return'                               |
+			| '1' | 'High shoes' | '39/19SD'  | 'Store 03' | '10,000'   | 'High shoes box (8 pcs)' | 'Sales return 351 dated 24.03.2021 14:04:08' | ''                 | ''         | ''                   | ''               | ''                         | 'Sales return 351 dated 24.03.2021 14:04:08' |
+			| '2' | 'Bag'        | 'ODS'      | 'Store 03' | '20,000'   | 'pcs'                    | ''                                           | ''                 | ''         | ''                   | ''               | ''                         | ''                                           |
+		And I click the button named "LinkUnlinkBasisDocuments"
+		And I expand a line in "ResultsTree" table
+			| 'Row presentation'                           |
+			| 'Sales return 351 dated 24.03.2021 14:04:08' |
+		And I go to line in "ItemListRows" table
+			| '#' | 'Quantity' | 'Row presentation' | 'Store'    | 'Unit' |
+			| '2' | '20,000'   | 'Bag, ODS'         | 'Store 03' | 'pcs'  |
+		And I expand a line in "BasisesTree" table
+			| 'Row presentation'                           |
+			| 'Sales return 351 dated 24.03.2021 14:04:08' |
+		And I activate field named "ItemListRowsRowPresentation" in "ItemListRows" table
+		And I go to line in "BasisesTree" table
+			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' |
+			| 'TRY'      | '200,00' | '20,000'   | 'Bag, ODS'         | 'pcs'  |
+		And I click "Link" button
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| '#' | 'Item'       | 'Item key' | 'Store'    | 'Quantity' | 'Unit'                   | 'Receipt basis'                              | 'Purchase invoice' | 'Currency' | 'Sales return order' | 'Purchase order' | 'Inventory transfer order' | 'Sales return'                               |
+			| '1' | 'High shoes' | '39/19SD'  | 'Store 03' | '10,000'   | 'High shoes box (8 pcs)' | 'Sales return 351 dated 24.03.2021 14:04:08' | ''                 | ''         | ''                   | ''               | ''                         | 'Sales return 351 dated 24.03.2021 14:04:08' |
+			| '2' | 'Bag'        | 'ODS'      | 'Store 03' | '20,000'   | 'pcs'                    | 'Sales return 351 dated 24.03.2021 14:04:08' | ''                 | ''         | ''                   | ''               | ''                         | 'Sales return 351 dated 24.03.2021 14:04:08' |
+		And I close all client application windows
+		
+		
+				
 
 
 Scenario: _300507 check connection to GoodsReceipt report "Related documents"

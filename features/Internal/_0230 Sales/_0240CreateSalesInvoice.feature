@@ -314,42 +314,139 @@ Scenario: _024003 copy SI (based on SO) and check filling in Row Id info table (
 		And I close all client application windows			
 		
 
-Scenario: _024004 create SI based on 2 SC with SO (SC>SO + new string)
-	* Select SC
-		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
+Scenario: _024004 create SI using form link/unlink
+	* Open SI form
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I click the button named "FormCreate"
+	* Filling in the details
+		And I click Select button of "Partner" field
 		And I go to line in "List" table
-			| 'Number'  |
-			| '15'      |
-		And I move one line down in "List" table and select line
-		And I click the button named "FormDocumentSalesInvoiceGenerate"
-		And "BasisesTree" table contains lines
-			| 'Row presentation'                                   | 'Use'                                                | 'Quantity' | 'Unit' | 'Price'  | 'Currency' |
-			| 'Sales order 15 dated 01.02.2021 19:50:45'           | 'Sales order 15 dated 01.02.2021 19:50:45'           | ''         | ''     | ''       | ''         |
-			| 'Shipment confirmation 15 dated 25.02.2021 14:13:30' | 'Shipment confirmation 15 dated 25.02.2021 14:13:30' | ''         | ''     | ''       | ''         |
-			| 'Dress, XS/Blue'                                     | 'Yes'                                                | '1,000'    | 'pcs'  | '520,00' | 'TRY'      |
-			| 'Shirt, 36/Red'                                      | 'Yes'                                                | '7,000'    | 'pcs'  | '350,00' | 'TRY'      |
-			| 'Dress, XS/Blue'                                     | 'Yes'                                                | '2,000'    | 'pcs'  | '500,00' | 'TRY'      |
-			| 'Shipment confirmation 16 dated 25.02.2021 14:14:14' | 'Shipment confirmation 16 dated 25.02.2021 14:14:14' | ''         | ''     | ''       | ''         |
-			| 'Shirt, 36/Red'                                      | 'Yes'                                                | '3,000'    | 'pcs'  | '350,00' | 'TRY'      |
-			| 'Shipment confirmation 15 dated 25.02.2021 14:13:30' | 'Shipment confirmation 15 dated 25.02.2021 14:13:30' | ''         | ''     | ''       | ''         |
-			| 'Shirt, 38/Black'                                    | 'Yes'                                                | '2,000'    | 'pcs'  | ''       | ''         |
-		Then the number of "BasisesTree" table lines is "равно" "9"
-	* Create SI
+			| 'Description' |
+			| 'Ferron BP'   |
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
+			| 'Description'       |
+			| 'Company Ferron BP' |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description'           |
+			| 'Basic Partner terms, TRY' |
+		And I select current line in "List" table
+		And I click Select button of "Store" field
+		And I go to line in "List" table
+			| 'Description'           |
+			| 'Store 02' |
+		And I select current line in "List" table
+	* Select items from basis documents
+		And I click the button named "ItemListAddBasisDocuments"
+		And I go to line in "BasisesTree" table
+			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
+			| 'TRY'      | '350,00' | '7,000'    | 'Shirt, 36/Red'   | 'pcs'  | 'No'  |
+		And I change "Use" checkbox in "BasisesTree" table
+		And I finish line editing in "BasisesTree" table
+		And I go to line in "BasisesTree" table
+			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
+			| 'TRY'      | '520,00' | '10,000'   | 'Dress, XS/Blue'   | 'pcs'  | 'No'  |
+		And I change "Use" checkbox in "BasisesTree" table
+		And I finish line editing in "BasisesTree" table
+		And I go to line in "BasisesTree" table
+			| 'Currency' | 'Price' | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
+			| ''         | ''      | '10,000'   | 'Dress, S/Yellow'  | 'pcs'  | 'No'  |
+		And I change "Use" checkbox in "BasisesTree" table
+		And I finish line editing in "BasisesTree" table
 		And I click "Ok" button
-		Then the form attribute named "Partner" became equal to "Ferron BP"
-		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
-		Then the form attribute named "Agreement" became equal to "Basic Partner terms, TRY"
-		Then the form attribute named "Company" became equal to "Main Company"
-		Then the form attribute named "Store" became equal to "Store 02"
-		Then the form attribute named "PriceIncludeTax" became equal to "Yes"
+		And I click "Show row key" button
+	* Check RowIDInfo
+		And "RowIDInfo" table contains lines
+		| '#' | 'Basis'                                              | 'Next step' | 'Q'      | 'Current step' |
+		| '1' | 'Sales order 15 dated 01.02.2021 19:50:45'           | ''          | '10,000' | 'SI&SC'        |
+		| '2' | 'Shipment confirmation 17 dated 25.02.2021 16:28:54' | ''          | '10,000' | 'SI'           |
+		| '3' | 'Shipment confirmation 15 dated 25.02.2021 14:13:30' | ''          | '7,000'  | 'SI'           |
+		Then the number of "RowIDInfo" table lines is "равно" "3"
+	* Unlink line
+		And I click the button named "ItemListLinkUnlinkBasisDocuments"
+		Then "Link / unlink document row" window is opened
+		And I go to line in "ItemListRows" table
+			| '#' | 'Quantity' | 'Row presentation' | 'Store'    | 'Unit' |
+			| '3' | '7,000'    | 'Shirt, 36/Red'   | 'Store 02' | 'pcs'  |
+		And I go to line in "ResultsTree" table
+			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' |
+			| 'TRY'      | '350,00' | '7,000'    | 'Shirt, 36/Red'    | 'pcs'  |
+		And I click "Unlink" button
+		And I click "Ok" button
+		And I click "Save" button	
+		And "RowIDInfo" table contains lines
+			| '#' | 'Basis'                                              | 'Next step' | 'Q'      | 'Current step' |
+			| '1' | 'Sales order 15 dated 01.02.2021 19:50:45'           | 'SC'        | '10,000' | 'SI&SC'        |
+			| '2' | 'Shipment confirmation 17 dated 25.02.2021 16:28:54' | ''          | '10,000' | 'SI'           |
+			| '3' | ''                                                   | 'SC'        | '7,000'  | ''             |
+		Then the number of "RowIDInfo" table lines is "равно" "3"
 		And "ItemList" table contains lines
-			| 'Business unit'           | 'Price type'              | 'Item'  | 'Item key' | 'Dont calculate row' | 'Serial lot numbers' | 'Q'      | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Delivery date' | 'Use shipment confirmation' | 'Detail' | 'Sales order'                              | 'Revenue type' |
-			| ''                        | 'Basic Price Types'       | 'Shirt' | '38/Black' | 'No'                 | ''                   | '2,000'  | 'pcs'  | '106,78'     | '350,00' | '18%' | ''              | '593,22'     | '700,00'       | ''                    | 'Store 02' | ''              | 'Yes'                       | ''       | ''                                         | ''             |
-			| 'Distribution department' | 'Basic Price Types'       | 'Dress' | 'XS/Blue'  | 'No'                 | ''                   | '1,000'  | 'pcs'  | '75,36'      | '520,00' | '18%' | '26,00'         | '418,64'     | '494,00'       | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | 'Sales order 15 dated 01.02.2021 19:50:45' | 'Revenue'      |
-			| 'Distribution department' | 'Basic Price Types'       | 'Shirt' | '36/Red'   | 'No'                 | ''                   | '10,000' | 'pcs'  | '507,20'     | '350,00' | '18%' | '175,00'        | '2 817,80'   | '3 325,00'     | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | 'Sales order 15 dated 01.02.2021 19:50:45' | 'Revenue'      |
-			| 'Distribution department' | 'en description is empty' | 'Dress' | 'XS/Blue'  | 'No'                 | ''                   | '2,000'  | 'pcs'  | '152,54'     | '500,00' | '18%' | ''              | '847,46'     | '1 000,00'     | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | 'Sales order 15 dated 01.02.2021 19:50:45' | 'Revenue'      |
-		Then the number of "ItemList" table lines is "равно" "4"
+			| 'Item'  | 'Item key' | 'Sales order'                              |
+			| 'Dress' | 'XS/Blue'  | 'Sales order 15 dated 01.02.2021 19:50:45' |
+			| 'Dress' | 'S/Yellow' | ''                                         |
+			| 'Shirt' | '36/Red'   | ''                                         |
+	* Link line
+		And I click the button named "ItemListLinkUnlinkBasisDocuments"
+		And I go to line in "ItemListRows" table
+			| '#' | 'Quantity' | 'Row presentation' | 'Store'    | 'Unit' |
+			| '3' | '7,000'    | 'Shirt, 36/Red'   | 'Store 02' | 'pcs'  |
+		And I activate field named "ItemListRowsRowPresentation" in "ItemListRows" table
+		And I go to line in "BasisesTree" table
+			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' |
+			| 'TRY'      | '350,00' | '7,000'    | 'Shirt, 36/Red'    | 'pcs'  |
+		And I click "Link" button
+		And I click "Ok" button
+		And "RowIDInfo" table contains lines
+			| '#' | 'Basis'                                              | 'Next step' | 'Q'      | 'Current step' |
+			| '1' | 'Sales order 15 dated 01.02.2021 19:50:45'           | ''          | '10,000' | 'SI&SC'        |
+			| '2' | 'Shipment confirmation 17 dated 25.02.2021 16:28:54' | ''          | '10,000' | 'SI'           |
+			| '3' | 'Shipment confirmation 15 dated 25.02.2021 14:13:30' | ''          | '7,000'  | 'SI'           |
+		Then the number of "RowIDInfo" table lines is "равно" "3"
+		And "ItemList" table contains lines
+			| 'Item'  | 'Item key' | 'Sales order'                              |
+			| 'Dress' | 'XS/Blue'  | 'Sales order 15 dated 01.02.2021 19:50:45' |
+			| 'Dress' | 'S/Yellow' | ''                                         |
+			| 'Shirt' | '36/Red'   | 'Sales order 15 dated 01.02.2021 19:50:45' |
+	* Delete string, add it again, change unit
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' |
+			| 'Dress' | 'XS/Blue'  |
+		And in the table "ItemList" I click the button named "ItemListContextMenuDelete"
+		And I click the button named "ItemListAddBasisDocuments"
+		And I go to line in "BasisesTree" table
+			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
+			| 'TRY'      | '520,00' | '10,000'   | 'Dress, XS/Blue'   | 'pcs'  | 'No'  |
+		And I change "Use" checkbox in "BasisesTree" table
+		And I finish line editing in "BasisesTree" table
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'  | 'Item key' | 'Sales order'                              |
+			| 'Dress' | 'XS/Blue'  | 'Sales order 15 dated 01.02.2021 19:50:45' |
+			| 'Dress' | 'S/Yellow' | ''                                         |
+			| 'Shirt' | '36/Red'   | 'Sales order 15 dated 01.02.2021 19:50:45' |
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' | 'Q'      | 'Store'    |
+			| 'Dress' | 'XS/Blue'  | '10,000' | 'Store 02' |
+		And I activate "Unit" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click choice button of "Unit" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'box Dress (8 pcs)' |
+		And I select current line in "List" table
+		And "RowIDInfo" table contains lines
+			| 'Basis'                                              | 'Next step' | 'Q'      | 'Current step' |
+			| 'Sales order 15 dated 01.02.2021 19:50:45'           | ''          | '80,000' | 'SI&SC'        |
+			| 'Shipment confirmation 17 dated 25.02.2021 16:28:54' | ''          | '10,000' | 'SI'           |
+			| 'Shipment confirmation 15 dated 25.02.2021 14:13:30' | ''          | '7,000'  | 'SI'           |
+		Then the number of "RowIDInfo" table lines is "равно" "3"
+		And I click "Save" button
 		And I close all client application windows
+
+
 		
 Scenario: _024005 create SI based on SO with 2 SC (SC>SO + new string + string from SO without SC)
 	* Select SO
@@ -369,7 +466,7 @@ Scenario: _024005 create SI based on SO with 2 SC (SC>SO + new string + string f
 			| 'Dress, XS/Blue'                                     | 'Yes'                                                | '2,000'    | 'pcs'  | '500,00' | 'TRY'      |
 			| 'Shipment confirmation 16 dated 25.02.2021 14:14:14' | 'Shipment confirmation 16 dated 25.02.2021 14:14:14' | ''         | ''     | ''       | ''         |
 			| 'Shirt, 36/Red'                                      | 'Yes'                                                | '3,000'    | 'pcs'  | '350,00' | 'TRY'      |	
-	* Select items for SI and check creation
+	* Select items for SI
 		And I go to line in "BasisesTree" table
 			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
 			| 'TRY'      | '520,00' | '10,000'   | 'Dress, XS/Blue'   | 'pcs'  | 'Yes' |
@@ -389,7 +486,7 @@ Scenario: _024005 create SI based on SO with 2 SC (SC>SO + new string + string f
 			| '4' | 'Distribution department' | 'en description is empty' | 'Dress'   | 'XS/Blue'  | 'No'                 | ''                   | '2,000'  | 'pcs'  | '152,54'     | '500,00' | '18%' | ''              | '847,46'     | '1 000,00'     | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | 'Sales order 15 dated 01.02.2021 19:50:45' | 'Revenue'      |
 		Then the number of "ItemList" table lines is "равно" "4"
 		And I close current window
-	* Create SI for all items from SO and check creation
+	* Create SI for all items from SO
 		And I go to line in "List" table
 			| 'Number'  |
 			| '15'      |
@@ -431,7 +528,7 @@ Scenario: _024006 create SI based on 2 SO with SC
 			| 'Shirt, 36/Red'                                      | 'Yes'                                                | '3,000'    | 'pcs'  | '350,00' | 'TRY'      |
 		Then the number of "BasisesTree" table lines is "равно" "12"
 		And I click "Ok" button
-	* Create SI and check creation
+	* Create SI
 		And "ItemList" table contains lines
 			| '#' | 'Business unit'           | 'Price type'              | 'Item'    | 'Item key' | 'Dont calculate row' | 'Serial lot numbers' | 'Q'      | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Delivery date' | 'Use shipment confirmation' | 'Detail' | 'Sales order'                              | 'Revenue type' |
 			| '1' | 'Distribution department' | 'Basic Price Types'       | 'Shirt'   | '36/Red'   | 'No'                 | ''                   | '5,000'  | 'pcs'  | '253,60'     | '350,00' | '18%' | '87,50'         | '1 408,90'   | '1 662,50'     | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | 'Sales order 3 dated 27.01.2021 19:50:45'  | 'Revenue'      |
@@ -442,6 +539,27 @@ Scenario: _024006 create SI based on 2 SO with SC
 			| '6' | 'Distribution department' | 'Basic Price Types'       | 'Shirt'   | '36/Red'   | 'No'                 | ''                   | '10,000' | 'pcs'  | '507,20'     | '350,00' | '18%' | '175,00'        | '2 817,80'   | '3 325,00'     | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | 'Sales order 15 dated 01.02.2021 19:50:45' | 'Revenue'      |
 			| '7' | 'Distribution department' | 'en description is empty' | 'Dress'   | 'XS/Blue'  | 'No'                 | ''                   | '2,000'  | 'pcs'  | '152,54'     | '500,00' | '18%' | ''              | '847,46'     | '1 000,00'     | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | 'Sales order 15 dated 01.02.2021 19:50:45' | 'Revenue'      |
 		Then the number of "ItemList" table lines is "равно" "7"
+	* Change quantity and check Row ID
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' | 'Price'  | 'Q'     | 'Unit' |
+			| 'Dress' | 'XS/Blue'  | '500,00' | '2,000' | 'pcs'  |
+		And I select current line in "ItemList" table
+		And I click choice button of "Unit" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description'       |
+			| 'box Dress (8 pcs)' |
+		And I select current line in "List" table
+		And I click "Show row key" button
+		And "RowIDInfo" table became equal
+			| 'Basis'                                              | 'Next step' | 'Q'      | 'Current step' |
+			| 'Sales order 3 dated 27.01.2021 19:50:45'            | ''          | '5,000'  | 'SI&SC'        |
+			| 'Sales order 3 dated 27.01.2021 19:50:45'            | ''          | '1,000'  | 'SI'           |
+			| 'Sales order 15 dated 01.02.2021 19:50:45'           | ''          | '1,000'  | 'SI'           |
+			| 'Sales order 15 dated 01.02.2021 19:50:45'           | ''          | '10,000' | 'SI&SC'        |
+			| 'Shipment confirmation 15 dated 25.02.2021 14:13:30' | ''          | '1,000'  | 'SI'           |
+			| 'Shipment confirmation 15 dated 25.02.2021 14:13:30' | ''          | '7,000'  | 'SI'           |
+			| 'Shipment confirmation 16 dated 25.02.2021 14:14:14' | ''          | '3,000'  | 'SI'           |
+			| 'Shipment confirmation 15 dated 25.02.2021 14:13:30' | ''          | '16,000' | 'SI'           |
 		And I close all client application windows
 
 Scenario: _024007 create SI based on SC	without SO
@@ -459,7 +577,7 @@ Scenario: _024007 create SI based on SC	without SO
 			| 'Dress, L/Green'                                     | 'Yes'                                                | '8,000'    | 'pcs'  | ''      | ''         |
 		Then the number of "BasisesTree" table lines is "равно" "4"
 		And I click "Ok" button
-	* Create SI and check creation
+	* Create SI
 		And "ItemList" table contains lines
 			| '#' | 'Business unit' | 'Price type' | 'Item'  | 'Item key' | 'Dont calculate row' | 'Serial lot numbers' | 'Q'      | 'Unit' | 'Tax amount' | 'Price' | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Delivery date' | 'Use shipment confirmation' | 'Detail' | 'Sales order' | 'Revenue type' |
 			| '1' | ''              | ''           | 'Dress' | 'S/Yellow' | 'No'                 | ''                   | '15,000' | 'pcs'  | ''           | ''      | ''    | ''              | ''           | ''             | ''                    | 'Store 01' | ''              | 'Yes'                       | ''       | ''            | ''             |

@@ -105,3 +105,34 @@ Scenario: _041702 check Physical inventory movements by the Register  "R4011 Fre
 			| ''                                                 | 'Receipt'     | '15.03.2021 15:29:31' | '5'         | 'Store 06'   | '36/Yellow' |
 			| ''                                                 | 'Expense'     | '15.03.2021 15:29:31' | '2'         | 'Store 06'   | 'XS/Blue'   |	
 		And I close all client application windows
+
+
+Scenario: _041730 Physical inventory clear posting
+	And I close all client application windows
+	* Select Physical inventory
+		Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '201' |
+	* Clear posting
+		And in the table "List" I click the button named "ListContextMenuUndoPosting"
+		Then user message window does not contain messages
+		And I click "Registrations report" button
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Physical inventory 201 dated 15.03.2021 15:29:31' |
+			| 'Document registrations records'                    |
+		And I close current window
+	* Post Physical inventory
+		Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '201' |
+		And in the table "List" I click the button named "ListContextMenuPost"		
+		Then user message window does not contain messages
+		And I click "Registrations report" button
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document contains values
+			| 'R4011 Free stocks' |
+			| 'R4010 Actual stocks' |
+		And I close all client application windows

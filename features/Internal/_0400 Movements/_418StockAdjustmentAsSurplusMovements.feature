@@ -67,7 +67,7 @@ Scenario: _041800 preparation (StockAdjustmentAsSurplus)
 	
 
 Scenario: _041801 check Stock adjustment as surplus movements by the Register  "R4010 Actual stocks"
-	* Select Physical inventory
+	* Select Stock adjustment as surplus
 		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsSurplus"
 		And I go to line in "List" table
 			| 'Number'  |
@@ -108,4 +108,35 @@ Scenario: _041802 check Stock adjustment as surplus movements by the Register  "
 			| ''                                                          | 'Receipt'     | '01.03.2021 12:00:00' | '7'         | 'Store 05'   | '36/Red'   |
 			| ''                                                          | 'Receipt'     | '01.03.2021 12:00:00' | '8'         | 'Store 05'   | 'XS/Blue'  |
 			| ''                                                          | 'Receipt'     | '01.03.2021 12:00:00' | '8'         | 'Store 05'   | 'M/White'  |
+		And I close all client application windows
+
+
+Scenario: _041830 Stock adjustment as surplus clear posting
+	And I close all client application windows
+	* Select Stock adjustment as surplus
+		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsSurplus"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '201' |
+	* Clear posting
+		And in the table "List" I click the button named "ListContextMenuUndoPosting"
+		Then user message window does not contain messages
+		And I click "Registrations report" button
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Stock adjustment as surplus 201 dated 01.03.2021 12:00:00' |
+			| 'Document registrations records'                    |
+		And I close current window
+	* Post Stock adjustment as surplus
+		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsSurplus"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '201' |
+		And in the table "List" I click the button named "ListContextMenuPost"		
+		Then user message window does not contain messages
+		And I click "Registrations report" button
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document contains values
+			| 'R4011 Free stocks' |
+			| 'R4010 Actual stocks' |
 		And I close all client application windows

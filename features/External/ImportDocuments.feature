@@ -662,9 +662,9 @@ Scenario: Create document Bundling objects
 		
 
 	And I refill object tabular section "ItemList":
-		| 'Ref'                                                               | 'Key'                                  | 'ItemKey'                                                          | 'Unit'                                                          | 'Quantity' |
-		| 'e1cib/data/Document.Bundling?ref=aa78120ed92fbced11eaf11c9f09fc94' | '488459c7-c0b3-4e87-b9ca-cc763c935342' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c5fc' | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | '1'        |
-		| 'e1cib/data/Document.Bundling?ref=aa78120ed92fbced11eaf11c9f09fc94' | '78680487-c320-4232-afb3-058cacb55b88' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c602' | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | '1'        |
+		| 'Ref'                                                               | 'Key'                                  | 'ItemKey'                                                          | 'Unit'                                                          | 'Quantity' | 'QuantityInBaseUnit' |
+		| 'e1cib/data/Document.Bundling?ref=aa78120ed92fbced11eaf11c9f09fc94' | '488459c7-c0b3-4e87-b9ca-cc763c935342' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c5fc' | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | '1'        | '1'        |
+		| 'e1cib/data/Document.Bundling?ref=aa78120ed92fbced11eaf11c9f09fc94' | '78680487-c320-4232-afb3-058cacb55b88' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c602' | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | '1'        | '1'        |
 
 Scenario: Create document ChequeBondTransaction objects
 
@@ -774,11 +774,11 @@ Scenario: Create document Unbundling objects
 		
 
 	And I refill object tabular section "ItemList":
-		| 'Ref'                                                                 | 'Key'                                  | 'ItemKey'                                                          | 'Unit'                                                          | 'Quantity' |
-		| 'e1cib/data/Document.Unbundling?ref=aa78120ed92fbced11eaf11df09c894b' | '2379a2d7-1f61-4f7d-9424-33ce31c97c06' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c5fb' | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | '1'        |
-		| 'e1cib/data/Document.Unbundling?ref=aa78120ed92fbced11eaf11df09c894b' | '776a0d92-078c-4236-bc89-a27877331722' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c5fc' | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | '1'        |
-		| 'e1cib/data/Document.Unbundling?ref=aa78120ed92fbced11eaf11df09c894b' | '100877b7-5772-4487-aa3b-27be07f95a37' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf11df09c894a' | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | '2'        |
-		| 'e1cib/data/Document.Unbundling?ref=aa78120ed92fbced11eaf11df09c894b' | '0da85fa0-30c7-4966-addd-de6a2d000b95' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c5fe' | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | '2'        |
+		| 'Ref'                                                                 | 'Key'                                  | 'ItemKey'                                                          | 'Unit'                                                          | 'Quantity' | 'QuantityInBaseUnit' |
+		| 'e1cib/data/Document.Unbundling?ref=aa78120ed92fbced11eaf11df09c894b' | '2379a2d7-1f61-4f7d-9424-33ce31c97c06' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c5fb' | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | '1'        | '1'        |
+		| 'e1cib/data/Document.Unbundling?ref=aa78120ed92fbced11eaf11df09c894b' | '776a0d92-078c-4236-bc89-a27877331722' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c5fc' | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | '1'        | '1'        |
+		| 'e1cib/data/Document.Unbundling?ref=aa78120ed92fbced11eaf11df09c894b' | '100877b7-5772-4487-aa3b-27be07f95a37' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf11df09c894a' | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | '2'        | '2'        |
+		| 'e1cib/data/Document.Unbundling?ref=aa78120ed92fbced11eaf11df09c894b' | '0da85fa0-30c7-4966-addd-de6a2d000b95' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c5fe' | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | '2'        | '2'        |
 
 
 Scenario: Create document OpeningEntry objects (stock)

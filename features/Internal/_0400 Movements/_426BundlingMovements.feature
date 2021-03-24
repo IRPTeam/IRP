@@ -2,10 +2,10 @@
 @tree
 @Positive
 @Movements
-@MovementsRetailReturnReceipt
+@MovementsBundling
 
 
-Feature: check Retail return receipt movements
+Feature: check Bundling movements
 
 
 
@@ -14,7 +14,7 @@ Background:
 
 
 
-Scenario: _042500 preparation (RetailReturnReceipt)
+Scenario: _042600 preparation (Bundling)
 	When set True value to the constant
 	And I close TestClient session
 	Given I open new TestClient session or connect the existing one
@@ -60,79 +60,76 @@ Scenario: _042500 preparation (RetailReturnReceipt)
 		When Create information register Taxes records (VAT)
 	* Tax settings
 		When filling in Tax settings for company
-	* Load RetailSalesReceipt
-		When Create document RetailSalesReceipt objects (check movements)
+		When Create document Bundling objects
 		And I execute 1C:Enterprise script at server
-			| "Documents.RetailSalesReceipt.FindByNumber(201).GetObject().Write(DocumentWriteMode.Posting);" |
-	* Load RetailReturnReceipt
-		When Create document RetailReturnReceipt objects (check movements)
-		And I execute 1C:Enterprise script at server
-			| "Documents.RetailReturnReceipt.FindByNumber(201).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.Bundling.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |
+
 	
 
-Scenario: _042501 check Retail return receipt movements by the Register  "R4010 Actual stocks"
-	* Select Retail return receipt
-		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
+Scenario: _042601 check Bundling movements by the Register  "R4010 Actual stocks"
+	* Select Bundling
+		Given I open hyperlink "e1cib/list/Document.Bundling"
 		And I go to line in "List" table
 			| 'Number'  |
-			| '201' |
+			| '1' |
 	* Check movements by the Register  "R4010 Actual stocks"
 		And I click "Registrations report" button
 		And I select "R4010 Actual stocks" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Retail return receipt 201 dated 15.03.2021 16:01:25' | ''            | ''                    | ''          | ''           | ''          |
-			| 'Document registrations records'                      | ''            | ''                    | ''          | ''           | ''          |
-			| 'Register  "R4010 Actual stocks"'                     | ''            | ''                    | ''          | ''           | ''          |
-			| ''                                                    | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''          |
-			| ''                                                    | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key'  |
-			| ''                                                    | 'Receipt'     | '15.03.2021 16:01:25' | '1'         | 'Store 01'   | 'XS/Blue'   |
-			| ''                                                    | 'Receipt'     | '15.03.2021 16:01:25' | '2'         | 'Store 01'   | '38/Yellow' |
-			| ''                                                    | 'Receipt'     | '15.03.2021 16:01:25' | '12'        | 'Store 01'   | '36/18SD'   |
+			| 'Bundling 1 dated 07.09.2020 18:20:57' | ''            | ''                    | ''          | ''           | ''                              |
+			| 'Document registrations records'       | ''            | ''                    | ''          | ''           | ''                              |
+			| 'Register  "R4010 Actual stocks"'      | ''            | ''                    | ''          | ''           | ''                              |
+			| ''                                     | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''                              |
+			| ''                                     | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key'                      |
+			| ''                                     | 'Receipt'     | '07.09.2020 18:20:57' | '10'        | 'Store 01'   | 'Bound Dress+Shirt/Dress+Shirt' |
+			| ''                                     | 'Expense'     | '07.09.2020 18:20:57' | '10'        | 'Store 01'   | 'XS/Blue'                       |
+			| ''                                     | 'Expense'     | '07.09.2020 18:20:57' | '10'        | 'Store 01'   | '36/Red'                        |
 		And I close all client application windows
 
-Scenario: _042502 check Retail return receipt movements by the Register  "R4011 Free stocks"
-	* Select Retail return receipt
-		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
+Scenario: _042602 check Bundling movements by the Register  "R4011 Free stocks"
+	* Select Bundling
+		Given I open hyperlink "e1cib/list/Document.Bundling"
 		And I go to line in "List" table
 			| 'Number'  |
-			| '201' |
+			| '1' |
 	* Check movements by the Register  "R4011 Free stocks"
 		And I click "Registrations report" button
 		And I select "R4011 Free stocks" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Retail return receipt 201 dated 15.03.2021 16:01:25' | ''            | ''                    | ''          | ''           | ''          |
-			| 'Document registrations records'                      | ''            | ''                    | ''          | ''           | ''          |
-			| 'Register  "R4011 Free stocks"'                       | ''            | ''                    | ''          | ''           | ''          |
-			| ''                                                    | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''          |
-			| ''                                                    | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key'  |
-			| ''                                                    | 'Receipt'     | '15.03.2021 16:01:25' | '1'         | 'Store 01'   | 'XS/Blue'   |
-			| ''                                                    | 'Receipt'     | '15.03.2021 16:01:25' | '2'         | 'Store 01'   | '38/Yellow' |
-			| ''                                                    | 'Receipt'     | '15.03.2021 16:01:25' | '12'        | 'Store 01'   | '36/18SD'   |
+			| 'Bundling 1 dated 07.09.2020 18:20:57' | ''            | ''                    | ''          | ''           | ''                              |
+			| 'Document registrations records'       | ''            | ''                    | ''          | ''           | ''                              |
+			| 'Register  "R4011 Free stocks"'        | ''            | ''                    | ''          | ''           | ''                              |
+			| ''                                     | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''                              |
+			| ''                                     | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key'                      |
+			| ''                                     | 'Receipt'     | '07.09.2020 18:20:57' | '10'        | 'Store 01'   | 'Bound Dress+Shirt/Dress+Shirt' |
+			| ''                                     | 'Expense'     | '07.09.2020 18:20:57' | '10'        | 'Store 01'   | 'XS/Blue'                       |
+			| ''                                     | 'Expense'     | '07.09.2020 18:20:57' | '10'        | 'Store 01'   | '36/Red'                        |		
 		And I close all client application windows
 
-Scenario: _042530 Retail return receipt clear posting
+
+Scenario: _042630 Bundling clear posting
 	And I close all client application windows
-	* Select Retail return receipt
-		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
+	* Select Bundling
+		Given I open hyperlink "e1cib/list/Document.Bundling"
 		And I go to line in "List" table
 			| 'Number'  |
-			| '201' |
+			| '1' |
 	* Clear posting
 		And in the table "List" I click the button named "ListContextMenuUndoPosting"
 		Then user message window does not contain messages
 		And I click "Registrations report" button
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Retail return receipt 201 dated 15.03.2021 16:01:25' |
+			| 'Bundling 1 dated 07.09.2020 18:20:57' |
 			| 'Document registrations records'                    |
 		And I close current window
-	* Post Retail return receipt
-		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
+	* Post Bundling
+		Given I open hyperlink "e1cib/list/Document.Bundling"
 		And I go to line in "List" table
 			| 'Number'  |
-			| '201' |
+			| '1' |
 		And in the table "List" I click the button named "ListContextMenuPost"		
 		Then user message window does not contain messages
 		And I click "Registrations report" button

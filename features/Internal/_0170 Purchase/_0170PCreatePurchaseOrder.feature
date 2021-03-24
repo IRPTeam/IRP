@@ -43,6 +43,9 @@ Scenario: _017000 preparation
 		When Create catalog IntegrationSettings objects
 		When Create information register CurrencyRates records
 		When update ItemKeys
+		When Create document InternalSupplyRequest objects (check movements)
+		And I execute 1C:Enterprise script at server
+			| "Documents.InternalSupplyRequest.FindByNumber(117).GetObject().Write(DocumentWriteMode.Posting);" |
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
@@ -361,6 +364,132 @@ Scenario: _017005 check movements by status and status history of a Purchase Ord
 			| '$$PurchaseOrder017005$$' | 'Store 01' | '$$PurchaseOrder017005$$' |
 		And I close current window
 
+Scenario: _017006 create Purchase order based on Internal supply request
+	* Add items from basis documents
+		* Open form for create PO
+			Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
+			And I click the button named "FormCreate"
+		* Filling in the main details of the document
+			And I click Select button of "Company" field
+			And I go to line in "List" table
+				| 'Description'  |
+				| 'Main Company' | 
+			And I select current line in "List" table
+			And I click Select button of "Partner" field
+			And I go to line in "List" table
+				| 'Description'  |
+				| 'Ferron BP' | 
+			And I select current line in "List" table
+			And I click Select button of "Partner term" field
+			And I go to line in "List" table
+				| 'Description'  |
+				| 'Vendor Ferron, TRY' | 
+			And I select current line in "List" table
+			And I click Select button of "Store" field
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Store 02'  |
+			And I select current line in "List" table
+		* Select items from basis documents
+			And I click the button named "AddBasisDocuments"
+			And I go to line in "BasisesTree" table
+				| 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
+				| '50,000'    | 'Dress, XS/Blue'   | 'pcs'  | 'No'  |
+			And I change "Use" checkbox in "BasisesTree" table
+			And I finish line editing in "BasisesTree" table
+			And I go to line in "BasisesTree" table
+				| 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
+				| '10,000'    | 'Dress, S/Yellow'   | 'pcs'  | 'No'  |
+			And I change "Use" checkbox in "BasisesTree" table
+			And I click "Ok" button
+			And I click "Show row key" button
+			And I click "Save" button							
+		* Check Item tab and RowID tab
+			And "ItemList" table contains lines
+				| 'Store'    | 'Internal supply request'                               | 'Quantity in base unit' | 'Business unit' | 'Price type' | 'Item'  | 'Item key' | 'Dont calculate row' | 'Q'      | 'Unit' | 'Tax amount' | 'Price' | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Expense type' | 'Detail' | 'Sales order' | 'Cancel' | 'Purchase basis' | 'Delivery date' | 'Cancel reason' |
+				| 'Store 02' | 'Internal supply request 117 dated 12.02.2021 14:39:38' | '10,000'                | ''              | ''           | 'Dress' | 'S/Yellow' | 'No'                 | '10,000' | 'pcs'  | ''           | ''      | ''    | ''              | ''           | ''             | ''             | ''       | ''            | 'No'     | ''               | ''              | ''              |
+				| 'Store 02' | 'Internal supply request 117 dated 12.02.2021 14:39:38' | '50,000'                | ''              | ''           | 'Dress' | 'XS/Blue'  | 'No'                 | '50,000' | 'pcs'  | ''           | ''      | ''    | ''              | ''           | ''             | ''             | ''       | ''            | 'No'     | ''               | ''              | ''              |
+			And "RowIDInfo" table contains lines
+				| 'Basis'                                                 | 'Next step' | 'Q'      | 'Current step' |
+				| 'Internal supply request 117 dated 12.02.2021 14:39:38' | 'PI&GR'          | '10,000' | 'ITO&PO&PI'    |
+				| 'Internal supply request 117 dated 12.02.2021 14:39:38' | 'PI&GR'          | '50,000' | 'ITO&PO&PI'    |
+			Then the number of "RowIDInfo" table lines is "равно" "2"	
+		And I close all client application windows
+	* Create PO based on ISR (Create button)
+		Given I open hyperlink "e1cib/list/Document.InternalSupplyRequest"
+		And I go to line in "List" table
+			| 'Number'                           |
+			| '117' |
+		And I select current line in "List" table
+		And I click "Show row key" button
+		And I go to line in "ItemList" table
+			| '#' |
+			| '1' |
+		And I activate "Key" field in "ItemList" table
+		And I save the current field value as "$$Rov1InternalSupplyRequestr017006$$"
+		And I go to line in "ItemList" table
+			| '#' |
+			| '2' |
+		And I activate "Key" field in "ItemList" table
+		And I save the current field value as "$$Rov2InternalSupplyRequestr017006$$"
+		And I click the button named "FormDocumentPurchaseOrderGenerate"
+		And I click "Ok" button	
+		And Delay 1
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Store" became equal to "Store 02"
+		And I click "Show row key" button	
+		And "ItemList" table contains lines
+			| 'Store'    | 'Internal supply request'                               | 'Quantity in base unit' | 'Business unit' | 'Price type' | 'Item'  | 'Item key' | 'Dont calculate row' | 'Q'      | 'Unit' | 'Tax amount' | 'Price' | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Expense type' | 'Detail' | 'Sales order' | 'Cancel' | 'Purchase basis' | 'Delivery date' | 'Cancel reason' |
+			| 'Store 02' | 'Internal supply request 117 dated 12.02.2021 14:39:38' | '10,000'                | ''              | ''           | 'Dress' | 'S/Yellow' | 'No'                 | '10,000' | 'pcs'  | ''           | ''      | ''    | ''              | ''           | ''             | ''             | ''       | ''            | 'No'     | ''               | ''              | ''              |
+			| 'Store 02' | 'Internal supply request 117 dated 12.02.2021 14:39:38' | '50,000'                | ''              | ''           | 'Dress' | 'XS/Blue'  | 'No'                 | '50,000' | 'pcs'  | ''           | ''      | ''    | ''              | ''           | ''             | ''             | ''       | ''            | 'No'     | ''               | ''              | ''              |
+		And I go to line in "ItemList" table
+			| '#' |
+			| '1' |
+		And I activate "Key" field in "ItemList" table
+		And I delete "$$Rov1PurchaseOrder017006$$" variable
+		And I save the current field value as "$$Rov1PurchaseOrder017006$$"
+		And I go to line in "ItemList" table
+			| '#' |
+			| '2' |
+		And I activate "Key" field in "ItemList" table
+		And I delete "$$Rov2PurchaseOrder017006$$" variable
+		And I save the current field value as "$$Rov2PurchaseOrder017006$$"
+		And I click "Save" button	
+		And I move to "Row ID Info" tab
+		And "RowIDInfo" table contains lines
+			| '#' | 'Key'                         | 'Basis'                                                 | 'Row ID'                               | 'Next step' | 'Q'      | 'Basis key'                            | 'Current step' | 'Row ref'                              |
+			| '1' | '$$Rov1PurchaseOrder017006$$' | 'Internal supply request 117 dated 12.02.2021 14:39:38' | '$$Rov1InternalSupplyRequestr017006$$' | 'PI&GR'     | '10,000' | '$$Rov1InternalSupplyRequestr017006$$' | 'ITO&PO&PI'    | '$$Rov1InternalSupplyRequestr017006$$' |
+			| '2' | '$$Rov2PurchaseOrder017006$$' | 'Internal supply request 117 dated 12.02.2021 14:39:38' | '$$Rov2InternalSupplyRequestr017006$$' | 'PI&GR'     | '50,000' | '$$Rov2InternalSupplyRequestr017006$$' | 'ITO&PO&PI'    | '$$Rov2InternalSupplyRequestr017006$$' |
+		Then the number of "RowIDInfo" table lines is "равно" "2"
+		* Filling in the main details of the document
+			And I click Select button of "Company" field
+			And I go to line in "List" table
+				| 'Description'  |
+				| 'Main Company' | 
+			And I select current line in "List" table
+			And I click Select button of "Partner" field
+			And I go to line in "List" table
+				| 'Description'  |
+				| 'Ferron BP' | 
+			And I select current line in "List" table
+			And I click Select button of "Partner term" field
+			And I go to line in "List" table
+				| 'Description'  |
+				| 'Vendor Ferron, TRY' | 
+			And I select current line in "List" table
+			And I click "OK" button					
+		And I click the button named "FormPost"
+		And I delete "$$NumberPurchaseOrder017006$$" variable
+		And I delete "$$PurchaseOrder017006$$" variable
+		And I save the value of "Number" field as "$$NumberPurchaseOrder017006$$"
+		And I save the window as "$$PurchaseOrder017006$$"
+		And I click the button named "FormPostAndClose"
+		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
+		And "List" table contains lines
+			| 'Number'                |
+			| '$$NumberPurchaseOrder017006$$' |
+		And I close all client application windows
+		
 
 
 Scenario: _017011 check totals in the document Purchase Order
@@ -775,49 +904,6 @@ Scenario: _019906 post a document previously marked for deletion and check of mo
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button
 		And in the table "List" I click the button named "ListContextMenuPost"
-	* Check registry entries (Order Balance)
-		Given I open hyperlink "e1cib/list/AccumulationRegister.OrderBalance"
-		And "List" table contains lines
-			| 'Quantity' | 'Recorder'                | 'Store'    | 'Order'                   | 'Item key'  |
-			| '250,000'  | '$$PurchaseOrder019901$$' | 'Store 03' | '$$PurchaseOrder019901$$' | 'S/Yellow'  |
-			| '200,000'  | '$$PurchaseOrder019901$$' | 'Store 03' | '$$PurchaseOrder019901$$' | 'XS/Blue'   |
-			| '200,000'  | '$$PurchaseOrder019901$$' | 'Store 03' | '$$PurchaseOrder019901$$' | 'M/White'   |
-			| '200,000'  | '$$PurchaseOrder019901$$' | 'Store 03' | '$$PurchaseOrder019901$$' | 'XL/Green'  |
-			| '200,000'  | '$$PurchaseOrder019901$$' | 'Store 03' | '$$PurchaseOrder019901$$' | '36/Yellow' |
-			| '200,000'  | '$$PurchaseOrder019901$$' | 'Store 03' | '$$PurchaseOrder019901$$' | '38/Yellow' |
-			| '200,000'  | '$$PurchaseOrder019901$$' | 'Store 03' | '$$PurchaseOrder019901$$' | '36/Red'    |
-			| '200,000'  | '$$PurchaseOrder019901$$' | 'Store 03' | '$$PurchaseOrder019901$$' | '38/Black'  |
-			| '200,000'  | '$$PurchaseOrder019901$$' | 'Store 03' | '$$PurchaseOrder019901$$' | '36/18SD'   |
-			| '200,000'  | '$$PurchaseOrder019901$$' | 'Store 03' | '$$PurchaseOrder019901$$' | '37/18SD'   |
-			| '200,000'  | '$$PurchaseOrder019901$$' | 'Store 03' | '$$PurchaseOrder019901$$' | '38/18SD'   |
-			| '100,000'  | '$$PurchaseOrder019901$$' | 'Store 03' | '$$PurchaseOrder019901$$' | '39/18SD'   |
-			| '80,000'   | '$$PurchaseOrder019901$$' | 'Store 03' | '$$PurchaseOrder019901$$' | '39/19SD'   |
-		And I close current window
-
-
-Scenario: _019907 clear posting document Purchase Order and check cancellation of movements
-	* Clear posting document Purchase Order
-		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
-		And I go to line in "List" table
-		| 'Number'    |
-		| '$$NumberPurchaseOrder019901$$' |
-		And in the table "List" I click the button named "ListContextMenuUndoPosting"
-		And I close current window
-	* Check registry entries (Order Balance)
-		And Delay 5
-		Given I open hyperlink "e1cib/list/AccumulationRegister.OrderBalance"
-		And "List" table does not contain lines
-			| 'Quantity' | 'Recorder'          |
-			| '250,000'  | '$$PurchaseOrder019901$$' |
-			| '200,000'  | '$$PurchaseOrder019901$$' |
-		And I close current window
-	* Post a document with previously cleared movements
-		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
-		And I go to line in "List" table
-		| 'Number'    |
-		| '$$NumberPurchaseOrder019901$$' |
-		And in the table "List" I click the button named "ListContextMenuPost"
-		And I close current window
 	* Check registry entries (Order Balance)
 		Given I open hyperlink "e1cib/list/AccumulationRegister.OrderBalance"
 		And "List" table contains lines

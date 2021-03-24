@@ -50,6 +50,7 @@ Scenario: _028800 preparation (Shipment confirmation)
 		When Create catalog TaxRates objects
 		When Create catalog Taxes objects
 		When update ItemKeys
+		When Create catalog Partners objects
 		When Create catalog BusinessUnits objects
 		When Create catalog ExpenseAndRevenueTypes objects
 	* Add plugin for taxes calculation
@@ -138,7 +139,40 @@ Scenario: _028800 preparation (Shipment confirmation)
 		And I execute 1C:Enterprise script at server
 			| "Documents.SalesOrder.FindByNumber(32).GetObject().Write(DocumentWriteMode.Posting);" |
 			| "Documents.SalesInvoice.FindByNumber(32).GetObject().Write(DocumentWriteMode.Posting);" |
-				
+	When Create document SalesInvoice objects (linked)
+	And I execute 1C:Enterprise script at server
+			| "Documents.SalesInvoice.FindByNumber(102).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.SalesInvoice.FindByNumber(101).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.SalesInvoice.FindByNumber(103).GetObject().Write(DocumentWriteMode.Posting);" |
+	* Save SI numbers
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '101' |
+		And I select current line in "List" table	
+		And I delete "$$SalesInvoice20400022$$" variable
+		And I delete "$$NumberSalesInvoice20400022$$" variable
+		And I save the window as "$$SalesInvoice20400022$$"
+		And I save the value of "Number" field as "$$NumberSalesInvoice20400022$$"
+		And I close current window
+		And I go to line in "List" table
+			| 'Number'    |
+			| '102' |
+		And I select current line in "List" table	
+		And I delete "$$SalesInvoice2040002$$" variable
+		And I delete "$$NumberSalesInvoice2040002$$" variable
+		And I save the window as "$$SalesInvoice2040002$$"
+		And I save the value of "Number" field as "$$NumberSalesInvoice2040002$$"
+		And I close current window
+		And I go to line in "List" table
+			| 'Number'    |
+			| '103' |
+		And I select current line in "List" table	
+		And I delete "$$SalesInvoice20400021$$" variable
+		And I delete "$$NumberSalesInvoice20400021$$" variable
+		And I save the window as "$$SalesInvoice20400021$$"
+		And I save the value of "Number" field as "$$NumberSalesInvoice20400021$$"
+		And I close all client application windows	
 		
 
 
@@ -318,45 +352,215 @@ Scenario: _028807 create document Shipment confirmation based on Purchase return
 
 
 
-Scenario: _028809 check Shipment confirmation posting (based on Purchase return) by register GoodsInTransitOutgoing
-	Given I open hyperlink "e1cib/list/AccumulationRegister.GoodsInTransitOutgoing"
-	And "List" table contains lines
-		| 'Quantity' | 'Recorder'                 | 'Shipment basis'     | 'Line number' | 'Store'    | 'Item key' |
-		| '10,000'   | '$$ShipmentConfirmation0028807$$' | '$$PurchaseReturn022314$$' | '1'           | 'Store 02' | 'L/Green'  |
-
-Scenario: _028810 create document Shipment confirmation  based on Inventory transfer
-	Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
-	And I go to line in "List" table
-		| 'Number'                           |
-		| '$$NumberInventoryTransfer021030$$' |
-	And I click the button named "FormDocumentShipmentConfirmationGenerate"
-	And I click "Ok" button	
-	And Delay 1
-	Then the form attribute named "Company" became equal to "Main Company"
-	Then the form attribute named "TransactionType" became equal to "Inventory transfer"
-	Then the form attribute named "Store" became equal to "Store 02"
-	And "ItemList" table contains lines
-		| '#' | 'Item'  | 'Inventory transfer'          | 'Item key' | 'Quantity' | 'Sales invoice' | 'Unit' | 'Store'    | 'Shipment basis'              | 'Sales order' | 'Inventory transfer order' | 'Purchase return order' | 'Purchase return' |
-		| '1' | 'Dress' | '$$InventoryTransfer021030$$' | 'L/Green'  | '3,000'    | ''              | 'pcs'  | 'Store 02' | '$$InventoryTransfer021030$$' | ''            | ''                         | ''                      | ''                |
-	And I click "Show row key" button
-	And I go to line in "ItemList" table
-		| '#' |
-		| '1' |
-	And I activate "Key" field in "ItemList" table
-	And I save the current field value as "$$Rov1ShipmentConfirmation028810$$"	
-	And I move to "Row ID Info" tab
-	And "RowIDInfo" table contains lines
-		| '#' | 'Key'                                | 'Basis'                       | 'Row ID' | 'Next step' | 'Q'     | 'Basis key' | 'Current step' | 'Row ref' |
-		| '1' | '$$Rov1ShipmentConfirmation028810$$' | '$$InventoryTransfer021030$$' | '*'      | ''          | '3,000' | '*'         | 'SC'           | '*'       |	
-	Then the number of "RowIDInfo" table lines is "равно" "1"
-	And I click the button named "FormPost"
-	And I delete "$$NumberShipmentConfirmation028810$$" variable
-	And I delete "$$ShipmentConfirmation0028810$$" variable
-	And I save the value of "Number" field as "$$NumberShipmentConfirmation028810$$"
-	And I save the window as "$$ShipmentConfirmation0028810$$"
-	And I click the button named "FormPostAndClose"
+Scenario: _028810 create document Shipment confirmation based on Inventory transfer
+	* Add items from basis documents
+		* Open form for create SC
+			Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
+			And I click the button named "FormCreate"
+		* Filling in the main details of the document
+			And I click Select button of "Company" field
+			And I go to line in "List" table
+				| 'Description'  |
+				| 'Main Company' | 
+			And I select current line in "List" table
+			And I click Select button of "Store" field
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Store 02'  |
+			And I select current line in "List" table
+			And I select "Inventory transfer" exact value from "Transaction type" drop-down list
+		* Select items from basis documents
+			And I click the button named "AddBasisDocuments"
+			And I go to line in "BasisesTree" table
+				| 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
+				| '3,000'    | 'Dress, L/Green'   | 'pcs'  | 'No'  |
+			And I change "Use" checkbox in "BasisesTree" table
+			And I finish line editing in "BasisesTree" table
+			And I click "Ok" button
+			And I click "Show row key" button				
+		* Check Item tab and RowID tab
+			And "ItemList" table contains lines
+				| 'Store'    | '#' | 'Quantity in base unit' | 'Item'  | 'Inventory transfer'          | 'Item key' | 'Quantity' | 'Sales invoice' | 'Unit' | 'Shipment basis'                                  |
+				| 'Store 02' | '1' | '3,000'                 | 'Dress' | '$$InventoryTransfer021030$$' | 'L/Green'  | '3,000'    | ''              | 'pcs'  | '$$InventoryTransfer021030$$' |
+			And "RowIDInfo" table contains lines
+				| 'Basis'                       | 'Next step' | 'Q'     | 'Current step'     |
+				| '$$InventoryTransfer021030$$' | ''          | '3,000' | 'SC' |
+		And I close all client application windows
+	* Create SC based on Inventory transfer (Create button)
+		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
+		And I go to line in "List" table
+			| 'Number'                           |
+			| '$$NumberInventoryTransfer021030$$' |
+		And I click the button named "FormDocumentShipmentConfirmationGenerate"
+		And I click "Ok" button	
+		And Delay 1
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "TransactionType" became equal to "Inventory transfer"
+		Then the form attribute named "Store" became equal to "Store 02"
+		And "ItemList" table contains lines
+			| '#' | 'Item'  | 'Inventory transfer'          | 'Item key' | 'Quantity' | 'Sales invoice' | 'Unit' | 'Store'    | 'Shipment basis'              | 'Sales order' | 'Inventory transfer order' | 'Purchase return order' | 'Purchase return' |
+			| '1' | 'Dress' | '$$InventoryTransfer021030$$' | 'L/Green'  | '3,000'    | ''              | 'pcs'  | 'Store 02' | '$$InventoryTransfer021030$$' | ''            | ''                         | ''                      | ''                |
+		And I click "Show row key" button
+		And I go to line in "ItemList" table
+			| '#' |
+			| '1' |
+		And I activate "Key" field in "ItemList" table
+		And I save the current field value as "$$Rov1ShipmentConfirmation028810$$"	
+		And I move to "Row ID Info" tab
+		And "RowIDInfo" table contains lines
+			| '#' | 'Key'                                | 'Basis'                       | 'Row ID' | 'Next step' | 'Q'     | 'Basis key' | 'Current step' | 'Row ref' |
+			| '1' | '$$Rov1ShipmentConfirmation028810$$' | '$$InventoryTransfer021030$$' | '*'      | ''          | '3,000' | '*'         | 'SC'           | '*'       |	
+		Then the number of "RowIDInfo" table lines is "равно" "1"
+		And I click the button named "FormPost"
+		And I delete "$$NumberShipmentConfirmation028810$$" variable
+		And I delete "$$ShipmentConfirmation0028810$$" variable
+		And I save the value of "Number" field as "$$NumberShipmentConfirmation028810$$"
+		And I save the window as "$$ShipmentConfirmation0028810$$"
+		And I click the button named "FormPostAndClose"
 	
 
+Scenario: _028830 check link/unlink form in the SC
+	* Open form for create SC
+		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
+		And I click the button named "FormCreate"
+	* Filling in the main details of the document
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| Description  |
+			| Main Company | 
+		And I select current line in "List" table
+		And I click Select button of "Store" field
+		And I go to line in "List" table
+			| Description |
+			| Store 01  |
+		And I select current line in "List" table
+		And I select "Sales" exact value from "Transaction type" drop-down list
+		And I click Select button of "Partner" field
+		And I click "List" button
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Crystal'     |
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Company Adel'     |
+		And I select current line in "List" table
+	* Select items from basis documents
+		And I click "AddBasisDocuments" button
+		And I expand current line in "BasisesTree" table
+		And I expand a line in "BasisesTree" table
+			| 'Row presentation'                            | 'Use'                                         |
+			| 'Sales invoice 102 dated 05.03.2021 12:57:59' | 'Sales invoice 102 dated 05.03.2021 12:57:59' |
+		And I expand a line in "BasisesTree" table
+			| 'Row presentation'                            | 'Use'                                         |
+			| 'Sales invoice 103 dated 05.03.2021 12:59:44' | 'Sales invoice 103 dated 05.03.2021 12:59:44' |
+		And I go to line in "BasisesTree" table
+			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
+			| 'TRY'      | '700,00' | '2,000'    | 'Boots, 37/18SD'   | 'pcs'  | 'No'  |
+		And I change "Use" checkbox in "BasisesTree" table
+		And I finish line editing in "BasisesTree" table
+		And I go to line in "BasisesTree" table
+			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
+			| 'TRY'      | '440,68' | '8,000'    | 'Dress, M/White'   | 'pcs'  | 'No'  |
+		And I change "Use" checkbox in "BasisesTree" table
+		And I finish line editing in "BasisesTree" table
+		And I go to line in "BasisesTree" table
+			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
+			| 'TRY'      | '648,15' | '2,000'    | 'Boots, 37/18SD'   | 'pcs'  | 'No'  |
+		And I change "Use" checkbox in "BasisesTree" table
+		And I finish line editing in "BasisesTree" table
+		And I click "Ok" button
+		And I click "Show row key" button
+	* Check RowIDInfo
+		And "RowIDInfo" table contains lines
+		| '#' | 'Basis'                                       | 'Next step' | 'Q'     | 'Current step' |
+		| '1' | 'Sales invoice 103 dated 05.03.2021 12:59:44' | ''          | '8,000' | 'SC'           |
+		| '2' | 'Sales invoice 101 dated 05.03.2021 12:56:38' | ''          | '2,000' | 'SC'           |
+		| '3' | 'Sales invoice 103 dated 05.03.2021 12:59:44' | ''          | '2,000' | 'SC'           |
+	* Unlink line
+		And I click "LinkUnlinkBasisDocuments" button
+		Then "Link / unlink document row" window is opened
+		And I expand a line in "ResultsTree" table
+			| 'Row presentation'                            |
+			| 'Sales invoice 103 dated 05.03.2021 12:59:44' |
+		And I go to line in "ItemListRows" table
+			| '#' | 'Quantity' | 'Row presentation' | 'Store'    | 'Unit' |
+			| '3' | '2,000'    | 'Boots, 37/18SD'   | 'Store 02' | 'pcs'  |
+		And I expand a line in "ResultsTree" table
+			| 'Row presentation'                            |
+			| 'Sales invoice 103 dated 05.03.2021 12:59:44' |
+		And I activate field named "ItemListRowsRowPresentation" in "ItemListRows" table
+		And I go to line in "ResultsTree" table
+			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' |
+			| 'TRY'      | '648,15' | '2,000'    | 'Boots, 37/18SD'   | 'pcs'  |
+		And I click "Unlink" button
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'  | 'Item key' | 'Sales invoice'                               |
+			| 'Dress' | 'M/White'  | 'Sales invoice 103 dated 05.03.2021 12:59:44' |
+			| 'Boots' | '37/18SD'  | 'Sales invoice 101 dated 05.03.2021 12:56:38' |
+			| 'Boots' | '37/18SD'  | ''                                            |
+	* Link line
+		And I click "LinkUnlinkBasisDocuments" button
+		And I expand a line in "ResultsTree" table
+			| 'Row presentation'                            |
+			| 'Sales invoice 103 dated 05.03.2021 12:59:44' |
+		And I go to line in "ItemListRows" table
+			| '#' | 'Quantity' | 'Row presentation' | 'Store'    | 'Unit' |
+			| '3' | '2,000'    | 'Boots, 37/18SD'   | 'Store 02' | 'pcs'  |
+		And I expand a line in "BasisesTree" table
+			| 'Row presentation'                            |
+			| 'Sales invoice 103 dated 05.03.2021 12:59:44' |
+		And I activate field named "ItemListRowsRowPresentation" in "ItemListRows" table
+		And I go to line in "BasisesTree" table
+			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' |
+			| 'TRY'      | '648,15' | '2,000'    | 'Boots, 37/18SD'   | 'pcs'  |
+		And I click "Link" button
+		And I click "Ok" button
+		And "RowIDInfo" table contains lines
+			| '#' | 'Basis'                                       | 'Next step' | 'Q'     | 'Current step' |
+			| '1' | 'Sales invoice 103 dated 05.03.2021 12:59:44' | ''          | '8,000' | 'SC'           |
+			| '2' | 'Sales invoice 101 dated 05.03.2021 12:56:38' | ''          | '2,000' | 'SC'           |
+			| '3' | 'Sales invoice 103 dated 05.03.2021 12:59:44' | ''          | '2,000' | 'SC'           |
+		And "ItemList" table contains lines
+			| 'Item'  | 'Item key' | 'Sales invoice'                               |
+			| 'Dress' | 'M/White'  | 'Sales invoice 103 dated 05.03.2021 12:59:44' |
+			| 'Boots' | '37/18SD'  | 'Sales invoice 101 dated 05.03.2021 12:56:38' |
+			| 'Boots' | '37/18SD'  | 'Sales invoice 101 dated 05.03.2021 12:56:38' |
+	* Delete string, add it again, change unit
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' | 'Quantity' | 'Store'    |
+			| 'Boots' | '37/18SD'  | '2,000'    | 'Store 02' |
+		And in the table "ItemList" I click the button named "ItemListContextMenuDelete"
+		And I click "AddBasisDocuments" button
+		And I go to line in "BasisesTree" table
+			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
+			| 'TRY'      | '648,15' | '2,000'    | 'Boots, 37/18SD'   | 'pcs'  | 'No'  |
+		And I change "Use" checkbox in "BasisesTree" table
+		And I finish line editing in "BasisesTree" table
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'  | 'Item key' | 'Sales invoice'                               |
+			| 'Dress' | 'M/White'  | 'Sales invoice 103 dated 05.03.2021 12:59:44' |
+			| 'Boots' | '37/18SD'  | 'Sales invoice 101 dated 05.03.2021 12:56:38' |
+			| 'Boots' | '37/18SD'  | 'Sales invoice 101 dated 05.03.2021 12:56:38' |
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' | 'Quantity' | 'Store'    |
+			| 'Boots' | '37/18SD'  | '2,000'    | 'Store 02' |
+		And I activate "Unit" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click choice button of "Unit" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Boots (12 pcs)' |
+		And I select current line in "List" table
+		And "RowIDInfo" table contains lines
+			| '#' | 'Basis'                                       | 'Next step' | 'Q'     | 'Current step' |
+			| '1' | 'Sales invoice 103 dated 05.03.2021 12:59:44' | ''          | '8,000' | 'SC'           |
+			| '2' | 'Sales invoice 101 dated 05.03.2021 12:56:38' | ''          | '2,000' | 'SC'           |
+			| '3' | 'Sales invoice 103 dated 05.03.2021 12:59:44' | ''          | '24,000' | 'SC'           |
+		And I close all client application windows
 
 
 

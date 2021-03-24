@@ -178,6 +178,7 @@ Scenario: _2060002 check link/unlink form in the SC
 		| '1' | 'Sales invoice 103 dated 05.03.2021 12:59:44' | ''          | '8,000' | 'SC'           |
 		| '2' | 'Sales invoice 101 dated 05.03.2021 12:56:38' | ''          | '2,000' | 'SC'           |
 		| '3' | 'Sales invoice 103 dated 05.03.2021 12:59:44' | ''          | '2,000' | 'SC'           |
+		Then the number of "RowIDInfo" table lines is "равно" "3"
 	* Unlink line
 		And I click "LinkUnlinkBasisDocuments" button
 		Then "Link / unlink document row" window is opened
@@ -223,6 +224,7 @@ Scenario: _2060002 check link/unlink form in the SC
 			| '1' | 'Sales invoice 103 dated 05.03.2021 12:59:44' | ''          | '8,000' | 'SC'           |
 			| '2' | 'Sales invoice 101 dated 05.03.2021 12:56:38' | ''          | '2,000' | 'SC'           |
 			| '3' | 'Sales invoice 103 dated 05.03.2021 12:59:44' | ''          | '2,000' | 'SC'           |
+		Then the number of "RowIDInfo" table lines is "равно" "3"
 		And "ItemList" table contains lines
 			| 'Item'  | 'Item key' | 'Sales invoice'                               |
 			| 'Dress' | 'M/White'  | 'Sales invoice 103 dated 05.03.2021 12:59:44' |
@@ -259,7 +261,8 @@ Scenario: _2060002 check link/unlink form in the SC
 			| '#' | 'Basis'                                       | 'Next step' | 'Q'     | 'Current step' |
 			| '1' | 'Sales invoice 103 dated 05.03.2021 12:59:44' | ''          | '8,000' | 'SC'           |
 			| '2' | 'Sales invoice 101 dated 05.03.2021 12:56:38' | ''          | '2,000' | 'SC'           |
-			| '3' | 'Sales invoice 103 dated 05.03.2021 12:59:44' | ''          | '24,000' | 'SC'           |
+			| '3' | 'Sales invoice 103 dated 05.03.2021 12:59:44' | ''          | '24,000' | 'SC'          |
+		Then the number of "RowIDInfo" table lines is "равно" "3"
 		And I close all client application windows
 		
 		

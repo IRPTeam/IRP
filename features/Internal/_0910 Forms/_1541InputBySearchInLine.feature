@@ -667,6 +667,22 @@ Scenario: _0154070 check partner, legal name, Partner term, company and store in
 		Then the form attribute named "Agreement" became equal to "Vendor Ferron, TRY"
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Store" became equal to "Store 01"
+	* Expense type input by search in line
+		And I click the button named "Add"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Service'     |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And I select "exp" from "Expense type" drop-down list by string in "ItemList" table
+		And "ItemList" table contains lines
+			| 'Expense type' |
+			| 'Expense'         |
+		And I select "sof" from "Expense type" drop-down list by string in "ItemList" table
+		And "ItemList" table contains lines
+			| 'Expense type' |
+			| 'Software'         |
 	And I close all client application windows
 
 Scenario: _0154071 check partner, legal name, Partner term, company and store input by search in line in a document Purchase invoice (in english)
@@ -690,6 +706,22 @@ Scenario: _0154071 check partner, legal name, Partner term, company and store in
 		Then the form attribute named "Agreement" became equal to "Vendor Ferron, TRY"
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Store" became equal to "Store 01"
+	* Expense type input by search in line
+		And I click the button named "Add"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Service'     |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And I select "exp" from "Expense type" drop-down list by string in "ItemList" table
+		And "ItemList" table contains lines
+			| 'Expense type' |
+			| 'Expense'         |
+		And I select "sof" from "Expense type" drop-down list by string in "ItemList" table
+		And "ItemList" table contains lines
+			| 'Expense type' |
+			| 'Software'         |
 	And I close all client application windows
 
 Scenario: _0154072 check partner, legal name, Partner term, company and store input by search in line in a document Purchase return (in english)
@@ -1247,6 +1279,11 @@ Scenario: _0154094 check store, company, tabular part input by search in line in
 		And "ItemList" table contains lines
 		| 'Business unit'        | 'Expense type' |
 		| 'Logistics department' | 'Fuel'         |
+	* Change expense type
+		And I select "exp" from "Expense type" drop-down list by string in "ItemList" table
+		And "ItemList" table contains lines
+			| 'Business unit'        | 'Expense type' |
+			| 'Logistics department' | 'Expense'         |
 		And I close all client application windows
 
 
@@ -1273,6 +1310,11 @@ Scenario: _0154095 check store, company, tabular part input by search in line in
 		And "ItemList" table contains lines
 		| 'Business unit'        | 'Revenue type' |
 		| 'Logistics department' | 'Fuel'         |
+	* Change revenue type
+		And I select "rev" from "Revenue type" drop-down list by string in "ItemList" table
+		And "ItemList" table contains lines
+			| 'Business unit'        | 'Revenue type' |
+			| 'Logistics department' | 'Revenue'         |
 		And I close all client application windows
 
 
@@ -1543,6 +1585,71 @@ Scenario: _01540110 check item and item key input by search in line in a documen
 		| 'Item'     |
 		| 'Jacket J22001'    |
 		And I close all client application windows
+
+Scenario: _01540111 check partner, legal name, Partner term, company and store input by search in line in a document Purchase order closing (in english)
+	And I close all client application windows
+	* Open a creation form Purchase order closing
+		Given I open hyperlink "e1cib/list/Document.PurchaseOrderClosing"
+		And I click the button named "FormCreate"
+	* Partner input by search in line
+		And I select from "Partner" drop-down list by "fer" string
+	* Legal name input by search in line
+		And I select from "Legal name" drop-down list by "com" string
+	* Partner term input by search in line
+		And I select from "Partner term" drop-down list by "TRY" string
+	* Company input by search in line
+		And I select from "Company" drop-down list by "main" string
+	* Store input by search in line
+		And I select from the drop-down list named "Store" by "01" string
+	* Check entered values
+		Then the form attribute named "Partner" became equal to "Ferron BP"
+		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
+		Then the form attribute named "Agreement" became equal to "Vendor Ferron, TRY"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Store" became equal to "Store 01"
+	* Expense type input by search in line
+		And I click the button named "Add"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Service'     |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And I select "exp" from "Expense type" drop-down list by string in "ItemList" table
+		And "ItemList" table contains lines
+			| 'Expense type' |
+			| 'Expense'         |
+		And I select "sof" from "Expense type" drop-down list by string in "ItemList" table
+		And "ItemList" table contains lines
+			| 'Expense type' |
+			| 'Software'         |
+	And I close all client application windows
+
+
+Scenario: _01540112 check item and item key input by search in line in a document Purchase order closing (in english)
+	And I close all client application windows
+	* Open a creation form Purchase order closing
+		Given I open hyperlink "e1cib/list/Document.PurchaseOrderClosing"
+		And I click the button named "FormCreate"
+	* Item and item key input by search in line
+		And I click the button named "Add"		
+		And I select "boo" from "Item" drop-down list by string in "ItemList" table
+		And I activate "Item key" field in "ItemList" table
+		And I select "36" from "Item key" drop-down list by string in "ItemList" table
+	* Check entered values
+		And "ItemList" table contains lines
+		| 'Item'     | 'Item key'  |
+		| 'Boots'    | '36/18SD' |
+		And I click the button named "Add"
+		And I input "J22001" text in "Item" field of "ItemList" table		
+		And drop-down list "Item" is equal to:
+		| (J22001) Jacket J22001 |
+		And I select "(J22001) Jacket J22001" exact value from "Item" drop-down list in "ItemList" table
+		And "ItemList" table contains lines
+		| 'Item'     |
+		| 'Jacket J22001'    |
+		And I close all client application windows
+
 
 Scenario: _999999 close TestClient session
 	And I close TestClient session

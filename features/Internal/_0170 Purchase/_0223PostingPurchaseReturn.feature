@@ -92,128 +92,151 @@ Scenario: _022300 preparation
 
 
 
-Scenario: _022301 create document Purchase return, store use Shipment confirmation, based on Purchase return order
-	Given I open hyperlink "e1cib/list/Document.PurchaseReturnOrder"
-	And I go to line in "List" table
-		| 'Number' |
-		| '$$NumberPurchaseReturnOrder022001$$'      |
-	And I select current line in "List" table
-	And I click the button named "FormDocumentPurchaseReturnGeneratePurchaseReturn"
-	* Check filling details
-		Then the form attribute named "Partner" became equal to "Ferron BP"
-		Then the form attribute named "Agreement" became equal to "Vendor Ferron, USD"
-		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
-		Then the form attribute named "Company" became equal to "Main Company"
-	* Select store
-		And I click Select button of "Store" field
-		Then "Stores" window is opened
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 02'  |
-		And I select current line in "List" table
-	* Check the addition of the store to the tabular part
-		And I move to "Item list" tab
-		And "ItemList" table contains lines
-		| 'Item'  | 'Item key' | 'Purchase invoice'    | 'Store'    | 'Unit' | 'Q'     |
-		| 'Dress' | 'L/Green'  | '$$PurchaseInvoice018006$$' | 'Store 02' | 'pcs' | '2,000' |
-	And I click the button named "FormPost"
-	And I delete "$$NumberPurchaseReturn022301$$" variable
-	And I delete "$$PurchaseReturn022301$$" variable
-	And I save the value of "Number" field as "$$NumberPurchaseReturn022301$$"
-	And I save the window as "$$PurchaseReturn022301$$"
-	And I click the button named "FormPostAndClose"
 
 
 
 
-
-
-Scenario: _022309 create document Purchase retur, store use Shipment confirmation, based on Purchase return order
-	Given I open hyperlink "e1cib/list/Document.PurchaseReturnOrder"
-	And I go to line in "List" table
-		| 'Number' |
-		| '$$NumberPurchaseReturnOrder022006$$'      |
-	And I select current line in "List" table
-	And I click the button named "FormDocumentPurchaseReturnGeneratePurchaseReturn"
-	* Check filling in
-		Then the form attribute named "Partner" became equal to "Ferron BP"
-		Then the form attribute named "Agreement" became equal to "Vendor Ferron, TRY"
-		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
-		Then the form attribute named "Description" became equal to "Click to enter description"
-		Then the form attribute named "Company" became equal to "Main Company"
-	* Select store
-		And I click Select button of "Store" field
-		Then "Stores" window is opened
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 01'  |
-		And I select current line in "List" table
-	And I click the button named "FormPost"
-	And I delete "$$NumberPurchaseReturn022309$$" variable
-	And I delete "$$PurchaseReturn022309$$" variable
-	And I save the value of "Number" field as "$$NumberPurchaseReturn022309$$"
-	And I save the window as "$$PurchaseReturn022309$$"
-	And I close current window
-
-
-Scenario: _022314 create document Purchase return, store use Shipment confirmation, without Purchase return order
+Scenario: _022305 create document Purchase return without Purchase return order
 	When create PurchaseReturn022314
 	Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
 	And I go to line in "List" table
 		| 'Number' |
 		| '$$NumberPurchaseReturn022314$$'      |
 	And I select current line in "List" table
-	* Check that the amount from the receipt minus the previous returns is pulled into the return
-		And "ItemList" table contains lines
-			| 'Purchase return order' | 'Item'  | 'Item key' | 'Purchase invoice'          | 'Unit' | 'Q'       |
-			| ''                      | 'Dress' | 'L/Green'  | '$$PurchaseInvoice018006$$' | 'pcs'  | '498,000' |
-		And I activate "Q" field in "ItemList" table
-		And I select current line in "ItemList" table
-		And I input "10,000" text in "Q" field of "ItemList" table
-		And I finish line editing in "ItemList" table
-		And I click the button named "FormPostAndClose"
-
-
-Scenario: _022322 create document Purchase return, store does not use Shipment confirmation, without Purchase return order
-	Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
-	And I go to line in "List" table
-		| 'Number' |
-		| '$$NumberPurchaseInvoice018001$$'      |
-	And I select current line in "List" table
-	And I click the button named "FormDocumentPurchaseReturnGeneratePurchaseReturn"
-	* Check filling details
-		Then the form attribute named "Partner" became equal to "Ferron BP"
-		Then the form attribute named "Agreement" became equal to "Vendor Ferron, TRY"
-		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
-		Then the form attribute named "Company" became equal to "Main Company"
-	And I go to line in "ItemList" table
-		| 'Item'     | 'Item key' | 'Q'|
-		| 'Trousers' | '36/Yellow'| '8,000'|
+	And "ItemList" table contains lines
+		| 'Purchase return order' | 'Item'  | 'Item key' | 'Purchase invoice'          | 'Unit' | 'Q'       |
+		| ''                      | 'Dress' | 'L/Green'  | '$$PurchaseInvoice018006$$' | 'pcs'  | '500,000' |
 	And I activate "Q" field in "ItemList" table
 	And I select current line in "ItemList" table
-	And Delay 2
-	And I input "7,000" text in "Q" field of "ItemList" table
+	And I input "10,000" text in "Q" field of "ItemList" table
 	And I finish line editing in "ItemList" table
-	And I go to line in "ItemList" table
-		| 'Item'  | 'Item key' | 'Unit' |
-		| 'Dress' | 'S/Yellow'  | 'pcs'  |
-	And I delete a line in "ItemList" table
-	And I go to line in "ItemList" table
-		| 'Item'  |
-		| 'Boots' |
-	And I delete a line in "ItemList" table
-	And I go to line in "ItemList" table
-		| 'Item'     | 'Item key' | 'Q'|
-		| 'Trousers' | '36/Yellow'| '2,000'|
-	And I delete a line in "ItemList" table
-	And I click the button named "FormPost"
-	And I delete "$$NumberPurchaseReturn022322$$" variable
-	And I delete "$$PurchaseReturn022322$$" variable
-	And I save the value of "Number" field as "$$NumberPurchaseReturn022322$$"
-	And I save the window as "$$PurchaseReturn022322$$"
 	And I click the button named "FormPostAndClose"
-	// 4
-	And I close current window
+
+
+
+
+
+Scenario: _022310 create Purchase return based on Purchase return order
+	* Save Purchase return order Row id
+		Given I open hyperlink "e1cib/list/Document.PurchaseReturnOrder"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '$$NumberPurchaseReturnOrder022006$$' | 
+		And I select current line in "List" table
+		And I click "Show row key" button	
+		And I go to line in "ItemList" table
+			| '#' |
+			| '1' |
+		And I activate "Key" field in "ItemList" table
+		And I delete "$$Rov1PurchaseReturnOrder022310$$" variable
+		And I save the current field value as "$$Rov1PurchaseReturnOrder022310$$"
+		And I close all client application windows
+	* Add items from basis documents
+		* Open form for create Purchase return
+			Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
+			And I click the button named "FormCreate"
+		* Filling in the main details of the document
+			And I click Select button of "Company" field
+			And I go to line in "List" table
+				| 'Description'  |
+				| 'Main Company' | 
+			And I select current line in "List" table
+			And I click Select button of "Store" field
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Store 02'  |
+			And I select current line in "List" table
+			And I click Select button of "Partner" field
+			And I go to line in "List" table
+				| 'Description'  |
+				| 'Ferron BP' | 
+			And I select current line in "List" table
+			And I click Select button of "Legal name" field
+			And I go to line in "List" table
+				| 'Description'  |
+				| 'Company Ferron BP' | 
+			And I select current line in "List" table
+			And I click Select button of "Partner term" field
+			And I go to line in "List" table
+				| 'Description'  |
+				| 'Vendor Ferron, TRY' | 
+			And I select current line in "List" table
+		* Select items from basis documents
+			And I click the button named "AddBasisDocuments"
+			And "BasisesTree" table contains lines
+				| 'Row presentation'              | 'Use'                           | 'Quantity' | 'Unit' | 'Price'  | 'Currency' |
+				| '$$PurchaseReturnOrder022006$$' | '$$PurchaseReturnOrder022006$$' | ''         | ''     | ''       | ''         |
+				| 'Trousers, 36/Yellow'           | 'No'                            | '3,000'    | 'pcs'  | '250,00' | 'TRY'      |
+			Then the number of "BasisesTree" table lines is "равно" "2"
+			And I go to line in "BasisesTree" table
+				| 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
+				| '3,000'    | 'Trousers, 36/Yellow'   | 'pcs'  | 'No'  |
+			And I change "Use" checkbox in "BasisesTree" table
+			And I finish line editing in "BasisesTree" table
+			And I click "Ok" button
+			And I click "Show row key" button
+			And I go to line in "ItemList" table
+				| '#' |
+				| '1' |
+			And I activate "Key" field in "ItemList" table
+			And I delete "$$Rov1PurchaseReturn22310$$" variable	
+			And I save the current field value as "$$Rov1PurchaseReturn22310$$"			
+		* Check Item tab and RowID tab
+			And "ItemList" table contains lines
+				| 'Store'    | 'Purchase invoice'          | '#' | 'Quantity in base unit' | 'Item'     | 'Item key'  | 'Q'     | 'Unit' | 'Purchase return order'         |
+				| 'Store 01' | '$$PurchaseInvoice018001$$' | '1' | '3,000'                 | 'Trousers' | '36/Yellow' | '3,000' | 'pcs'  | '$$PurchaseReturnOrder022006$$' |
+			And "RowIDInfo" table contains lines
+				| '#' | 'Key'                         | 'Basis'                         | 'Row ID'                            | 'Next step' | 'Q'     | 'Basis key'                         | 'Current step' | 'Row ref'                           |
+				| '1' | '$$Rov1PurchaseReturn22310$$' | '$$PurchaseReturnOrder022006$$' | '$$Rov1PurchaseReturnOrder022310$$' | ''          | '3,000' | '$$Rov1PurchaseReturnOrder022310$$' | 'PR'           | '$$Rov1PurchaseReturnOrder022310$$' |
+			* Set checkbox Use SC and check RowID tab
+				And I move to "Item list" tab
+				And I activate "Use shipment confirmation" field in "ItemList" table
+				And I set "Use shipment confirmation" checkbox in "ItemList" table
+				And I finish line editing in "ItemList" table
+				And I click "Save" button
+				And "RowIDInfo" table contains lines
+					| '#' | 'Key'                         | 'Basis'                         | 'Row ID'                            | 'Next step' | 'Q'     | 'Basis key'                         | 'Current step' | 'Row ref'                           |
+					| '1' | '$$Rov1PurchaseReturn22310$$' | '$$PurchaseReturnOrder022006$$' | '$$Rov1PurchaseReturnOrder022310$$' | 'SC'        | '3,000' | '$$Rov1PurchaseReturnOrder022310$$' | 'PR'           | '$$Rov1PurchaseReturnOrder022310$$' |
+		And I close all client application windows
+	* Create Purchase return based on Purchase return order(Create button)
+		Given I open hyperlink "e1cib/list/Document.PurchaseReturnOrder"
+		And I go to line in "List" table
+			| 'Number'                           |
+			| '$$NumberPurchaseReturnOrder022006$$' |
+		And I click the button named "FormDocumentPurchaseReturnGenerate"
+		And I click "Ok" button	
+		And Delay 1
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Store" became equal to "Store 01"
+		Then the form attribute named "Partner" became equal to "Ferron BP"
+		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
+		Then the form attribute named "Agreement" became equal to "Vendor Ferron, TRY"
+		* Change quantity
+			And I activate "Q" field in "ItemList" table
+			And I select current line in "ItemList" table
+			And I input "2,000" text in "Q" field of "ItemList" table
+			And I finish line editing in "ItemList" table			
+		And I click "Show row key" button	
+		And "ItemList" table contains lines
+			| 'Store'    | 'Purchase invoice'          | '#' | 'Quantity in base unit' | 'Item'     | 'Item key'  | 'Q'     | 'Unit' | 'Purchase return order'         |
+			| 'Store 01' | '$$PurchaseInvoice018001$$' | '1' | '2,000'                 | 'Trousers' | '36/Yellow' | '2,000' | 'pcs'  | '$$PurchaseReturnOrder022006$$' |
+		And I go to line in "ItemList" table
+			| '#' |
+			| '1' |
+		And I activate "Key" field in "ItemList" table
+		And I delete "$$Rov1PurchaseReturn22310$$" variable
+		And I save the current field value as "$$Rov1PurchaseReturn22310$$"	
+		And I move to "Row ID Info" tab
+		And "RowIDInfo" table contains lines
+			| '#' | 'Key'                         | 'Basis'                         | 'Row ID'                            | 'Next step' | 'Q'     | 'Basis key'                         | 'Current step' | 'Row ref'                           |
+			| '1' | '$$Rov1PurchaseReturn22310$$' | '$$PurchaseReturnOrder022006$$' | '$$Rov1PurchaseReturnOrder022310$$' | ''          | '2,000' | '$$Rov1PurchaseReturnOrder022310$$' | 'PR'           | '$$Rov1PurchaseReturnOrder022310$$' |
+		Then the number of "RowIDInfo" table lines is "равно" "1"
+		And I click the button named "FormPost"
+		And I delete "$$NumberPurchaseReturn22310$$" variable
+		And I delete "$$PurchaseReturn22310$$" variable
+		And I save the value of "Number" field as "$$NumberPurchaseReturn22310$$"
+		And I save the window as "$$PurchaseReturn22310$$"
+		And I click the button named "FormPostAndClose"
 
 
 Scenario: _022335 check totals in the document Purchase return

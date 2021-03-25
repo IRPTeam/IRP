@@ -45,6 +45,7 @@ Scenario: _028500 preparation (create document Sales return)
 		When Create information register TaxSettings records
 		When Create information register PricesByItemKeys records
 		When Create catalog IntegrationSettings objects
+		When Create catalog ExpenseAndRevenueTypes objects 
 		When Create information register CurrencyRates records
 		When update ItemKeys
 	* Add plugin for taxes calculation
@@ -54,6 +55,7 @@ Scenario: _028500 preparation (create document Sales return)
 				| "TaxCalculateVAT_TR" |
 			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
+		When Create catalog BusinessUnits objects
 	* Tax settings
 		When filling in Tax settings for company
 		When Create document SalesInvoice objects (linked)
@@ -68,7 +70,12 @@ Scenario: _028500 preparation (create document Sales return)
 		When Create document SalesReturnOrder objects (creation based on)
 		And I execute 1C:Enterprise script at server
 			| "Documents.SalesReturnOrder.FindByNumber(32).GetObject().Write(DocumentWriteMode.Posting);" |
-		
+		When Create document SalesReturnOrder objects (creation based on, without SI)
+		And I execute 1C:Enterprise script at server
+			| "Documents.SalesReturnOrder.FindByNumber(105).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.SalesReturnOrder.FindByNumber(106).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.SalesReturnOrder.FindByNumber(107).GetObject().Write(DocumentWriteMode.Posting);" |
+
 
 Scenario: _028501 create document Sales return based on SI (without SRO)
 	And I close all client application windows
@@ -264,26 +271,177 @@ Scenario: _028501 create document Sales return based on SI (without SRO)
 
 
 Scenario: _028515 create document Sales return based on SRO 
-	Given I open hyperlink "e1cib/list/Document.SalesReturnOrder"
-	And I go to line in "List" table
-		| 'Number' |
-		| '32'      |
-	And I select current line in "List" table
-	And I click the button named "FormDocumentSalesReturnGenerateSalesReturn"
-	* Check the details
-		Then the form attribute named "Partner" became equal to "Ferron BP"
-		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
-		Then the form attribute named "Agreement" became equal to "Basic Partner terms, without VAT"
+	* Save Sales return order Row id
+		Given I open hyperlink "e1cib/list/Document.SalesReturnOrder"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '105' | 
+		And I select current line in "List" table
+		And I click "Show row key" button	
+		And I go to line in "ItemList" table
+			| '#' |
+			| '1' |
+		And I activate "Key" field in "ItemList" table
+		And I delete "$$Rov1SalesReturnOrder028515$$" variable
+		And I save the current field value as "$$Rov1SalesReturnOrder028515$$"
+		And I go to line in "ItemList" table
+			| '#' |
+			| '2' |
+		And I activate "Key" field in "ItemList" table
+		And I delete "$$Rov2SalesReturnOrder028515$$" variable
+		And I save the current field value as "$$Rov2SalesReturnOrder028515$$"
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.SalesReturnOrder"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '106' | 
+		And I select current line in "List" table
+		And I click "Show row key" button	
+		And I go to line in "ItemList" table
+			| '#' |
+			| '1' |
+		And I activate "Key" field in "ItemList" table
+		And I delete "$$Rov3SalesReturnOrder028515$$" variable
+		And I save the current field value as "$$Rov3SalesReturnOrder028515$$"
+		And I go to line in "ItemList" table
+			| '#' |
+			| '2' |
+		And I activate "Key" field in "ItemList" table
+		And I delete "$$Rov4SalesReturnOrder028515$$" variable
+		And I save the current field value as "$$Rov4SalesReturnOrder028515$$"
+		And I close all client application windows
+	* Add items from basis documents
+		* Open form for create Sales return
+			Given I open hyperlink "e1cib/list/Document.SalesReturn"
+			And I click the button named "FormCreate"
+		* Filling in the main details of the document
+			And I click Select button of "Company" field
+			And I go to line in "List" table
+				| 'Description'  |
+				| 'Main Company' | 
+			And I select current line in "List" table
+			And I click Select button of "Store" field
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Store 02'  |
+			And I select current line in "List" table
+			And I click Select button of "Partner" field
+			And I go to line in "List" table
+				| 'Description'  |
+				| 'Kalipso' | 
+			And I select current line in "List" table
+			And I click Select button of "Legal name" field
+			And I go to line in "List" table
+				| 'Description'  |
+				| 'Company Kalipso' | 
+			And I select current line in "List" table
+			And I click Select button of "Partner term" field
+			And I go to line in "List" table
+				| 'Description'  |
+				| 'Basic Partner terms, TRY' | 
+			And I select current line in "List" table
+		* Select items from basis documents
+			And I click the button named "AddBasisDocuments"
+			And "BasisesTree" table contains lines
+				| 'Row presentation'                                 | 'Use'                                              | 'Quantity' | 'Unit'           | 'Price'    | 'Currency' |
+				| 'Sales return order 105 dated 25.03.2021 12:09:40' | 'Sales return order 105 dated 25.03.2021 12:09:40' | ''         | ''               | ''         | ''         |
+				| 'Dress, XS/Blue'                                   | 'No'                                               | '1,000'    | 'pcs'            | '520,00'   | 'TRY'      |
+				| 'Boots, 37/18SD'                                   | 'No'                                               | '3,000'    | 'Boots (12 pcs)' | '8 400,00' | 'TRY'      |
+				| 'Sales return order 106 dated 25.03.2021 12:10:03' | 'Sales return order 106 dated 25.03.2021 12:10:03' | ''         | ''               | ''         | ''         |
+				| 'Dress, XS/Blue'                                   | 'No'                                               | '12,000'   | 'pcs'            | '520,00'   | 'TRY'      |
+				| 'Boots, 37/18SD'                                   | 'No'                                               | '11,000'   | 'Boots (12 pcs)' | '8 400,00' | 'TRY'      |
+			Then the number of "BasisesTree" table lines is "равно" "6"
+			And I go to line in "BasisesTree" table
+				| 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
+				| '12,000'    | 'Dress, XS/Blue'   | 'pcs'  | 'No'  |
+			And I change "Use" checkbox in "BasisesTree" table
+			And I finish line editing in "BasisesTree" table
+			And I go to line in "BasisesTree" table
+				| 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
+				| '1,000'    | 'Dress, XS/Blue'   | 'pcs'  | 'No'  |
+			And I change "Use" checkbox in "BasisesTree" table
+			And I finish line editing in "BasisesTree" table
+			And I click "Ok" button
+			And I click "Show row key" button
+			And I go to line in "ItemList" table
+				| '#' |
+				| '1' |
+			And I activate "Key" field in "ItemList" table
+			And I delete "$$Rov1SalesReturn028515$$" variable	
+			And I save the current field value as "$$Rov1SalesReturn028515$$"	
+			And I go to line in "ItemList" table
+				| '#' |
+				| '2' |
+			And I activate "Key" field in "ItemList" table
+			And I delete "$$Rov2SalesReturn028515$$" variable	
+			And I save the current field value as "$$Rov2SalesReturn028515$$"			
+		* Check Item tab and RowID tab
+			And "ItemList" table contains lines
+				| 'Key'                       | 'Store'    | 'Additional analytic' | 'Quantity in base unit' | '#' | 'Business unit'           | 'Item'  | 'Item key' | 'Dont calculate row' | 'Serial lot numbers' | 'Q'      | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Use goods receipt' | 'Total amount' | 'Sales return order'                               | 'Sales invoice' | 'Expense type' |
+				| '$$Rov1SalesReturn028515$$' | 'Store 02' | ''                    | '1,000'                 | '1' | 'Distribution department' | 'Dress' | 'XS/Blue'  | 'No'                 | ''                   | '1,000'  | 'pcs'  | '79,32'      | '520,00' | '18%' | ''              | '440,68'     | 'No'                | '520,00'       | 'Sales return order 105 dated 25.03.2021 12:09:40' | ''              | 'Expense'      |
+				| '$$Rov2SalesReturn028515$$' | 'Store 02' | ''                    | '12,000'                | '2' | 'Distribution department' | 'Dress' | 'XS/Blue'  | 'No'                 | ''                   | '12,000' | 'pcs'  | '951,86'     | '520,00' | '18%' | ''              | '5 288,14'   | 'No'                | '6 240,00'     | 'Sales return order 106 dated 25.03.2021 12:10:03' | ''              | ''             |
+			And "RowIDInfo" table contains lines
+				| '#' | 'Key'                       | 'Basis'                                            | 'Row ID'                         | 'Next step' | 'Q'      | 'Basis key'                      | 'Current step' | 'Row ref'                        |
+				| '1' | '$$Rov1SalesReturn028515$$' | 'Sales return order 105 dated 25.03.2021 12:09:40' | '$$Rov1SalesReturnOrder028515$$' | ''          | '1,000'  | '$$Rov1SalesReturnOrder028515$$' | 'SR'           | '$$Rov1SalesReturnOrder028515$$' |
+				| '2' | '$$Rov2SalesReturn028515$$' | 'Sales return order 106 dated 25.03.2021 12:10:03' | '$$Rov3SalesReturnOrder028515$$' | ''          | '12,000' | '$$Rov3SalesReturnOrder028515$$' | 'SR'           | '$$Rov3SalesReturnOrder028515$$' |
+			Then the number of "RowIDInfo" table lines is "равно" "2"
+			* Set checkbox Use GR and check RowID tab
+				And I move to "Item list" tab
+				And I go to line in "ItemList" table
+					| '#' |
+					| '1' |
+				And I activate "Use goods receipt" field in "ItemList" table
+				And I set "Use goods receipt" checkbox in "ItemList" table
+				And I finish line editing in "ItemList" table
+				And I click "Save" button
+				And "RowIDInfo" table contains lines
+					| '#' | 'Key'                       | 'Basis'                                            | 'Row ID'                         | 'Next step' | 'Q'      | 'Basis key'                      | 'Current step' | 'Row ref'                        |
+					| '1' | '$$Rov1SalesReturn028515$$' | 'Sales return order 105 dated 25.03.2021 12:09:40' | '$$Rov1SalesReturnOrder028515$$' | 'GR'        | '1,000'  | '$$Rov1SalesReturnOrder028515$$' | 'SR'           | '$$Rov1SalesReturnOrder028515$$' |
+					| '2' | '$$Rov2SalesReturn028515$$' | 'Sales return order 106 dated 25.03.2021 12:10:03' | '$$Rov3SalesReturnOrder028515$$' | ''          | '12,000' | '$$Rov3SalesReturnOrder028515$$' | 'SR'           | '$$Rov3SalesReturnOrder028515$$' |
+				Then the number of "RowIDInfo" table lines is "равно" "2"
+		And I close all client application windows
+	* Create Sales return based on Sales return order(Create button)
+		Given I open hyperlink "e1cib/list/Document.SalesReturnOrder"
+		And I go to line in "List" table
+			| 'Number'                           |
+			| '105' |
+		And I click the button named "FormDocumentSalesReturnGenerate"
+		And I click "Ok" button	
+		And Delay 1
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Store" became equal to "Store 02"
-	And I input "466,10" text in "Price" field of "ItemList" table
-	And I click the button named "FormPost"
-	And I delete "$$NumberSalesReturn028515$$" variable
-	And I delete "$$SalesReturn028515$$" variable
-	And I save the value of "Number" field as "$$NumberSalesReturn028515$$"
-	And I save the window as "$$SalesReturn028515$$"
-	And I click the button named "FormPostAndClose"
-	And I close current window
+		Then the form attribute named "Partner" became equal to "Kalipso"
+		Then the form attribute named "LegalName" became equal to "Company Kalipso"
+		Then the form attribute named "Agreement" became equal to "Basic Partner terms, TRY"		
+		And I click "Show row key" button	
+		And "ItemList" table contains lines
+			| 'Store'    | 'Additional analytic' | 'Quantity in base unit' | '#' | 'Business unit'           | 'Item'  | 'Item key' | 'Dont calculate row' | 'Serial lot numbers' | 'Q'     | 'Unit'           | 'Tax amount' | 'Price'    | 'VAT' | 'Offers amount' | 'Net amount' | 'Use goods receipt' | 'Total amount' | 'Sales return order'                               | 'Sales invoice' | 'Expense type' |
+			| 'Store 02' | ''                    | '1,000'                 | '1' | 'Distribution department' | 'Dress' | 'XS/Blue'  | 'No'                 | ''                   | '1,000' | 'pcs'            | '79,32'      | '520,00'   | '18%' | ''              | '440,68'     | 'No'                | '520,00'       | 'Sales return order 105 dated 25.03.2021 12:09:40' | ''              | 'Expense'      |
+			| 'Store 02' | ''                    | '36,000'                | '2' | 'Distribution department' | 'Boots' | '37/18SD'  | 'No'                 | ''                   | '3,000' | 'Boots (12 pcs)' | '3 844,07'   | '8 400,00' | '18%' | ''              | '21 355,93'  | 'No'                | '25 200,00'    | 'Sales return order 105 dated 25.03.2021 12:09:40' | ''              | 'Expense'      |
+		And I go to line in "ItemList" table
+			| '#' |
+			| '1' |
+		And I activate "Key" field in "ItemList" table
+		And I delete "$$Rov1SalesReturn028515$$" variable
+		And I save the current field value as "$$Rov1SalesReturn028515$$"	
+		And I go to line in "ItemList" table
+			| '#' |
+			| '2' |
+		And I activate "Key" field in "ItemList" table
+		And I delete "$$Rov2SalesReturn028515$$" variable
+		And I save the current field value as "$$Rov2SalesReturn028515$$"	
+		And I move to "Row ID Info" tab
+		And "RowIDInfo" table contains lines
+			| '#' | 'Key'                       | 'Basis'                                            | 'Row ID'                         | 'Next step' | 'Q'      | 'Basis key'                      | 'Current step' | 'Row ref'                        |
+			| '1' | '$$Rov1SalesReturn028515$$' | 'Sales return order 105 dated 25.03.2021 12:09:40' | '$$Rov1SalesReturnOrder028515$$' | ''          | '1,000'  | '$$Rov1SalesReturnOrder028515$$' | 'SR'           | '$$Rov1SalesReturnOrder028515$$' |
+			| '2' | '$$Rov2SalesReturn028515$$' | 'Sales return order 105 dated 25.03.2021 12:09:40' | '$$Rov2SalesReturnOrder028515$$' | ''          | '36,000' | '$$Rov2SalesReturnOrder028515$$' | 'SR'           | '$$Rov2SalesReturnOrder028515$$' |
+		Then the number of "RowIDInfo" table lines is "равно" "2"
+		And I click the button named "FormPost"
+		And I delete "$$NumberSalesReturn028515$$" variable
+		And I delete "$$SalesReturn028515$$" variable
+		And I save the value of "Number" field as "$$NumberSalesReturn028515$$"
+		And I save the window as "$$SalesReturn028515$$"
+		And I click the button named "FormPostAndClose"
 
 
 

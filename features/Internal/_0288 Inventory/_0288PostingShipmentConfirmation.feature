@@ -81,6 +81,7 @@ Scenario: _028800 preparation (Shipment confirmation)
 				| "$$NumberSalesInvoice024025$$" |					
 			When create SalesInvoice024025
 	* Check or create PurchaseOrder017003
+		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		If "List" table does not contain lines Then
 				| "Number" |
 				| "$$NumberPurchaseOrder017003$$" |
@@ -345,25 +346,6 @@ Scenario: _028806 create document Shipment confirmation based on SI (with SO, SI
 		And I close all client application windows
 
 
-Scenario: _028807 create document Shipment confirmation based on Purchase return
-	Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
-	And I go to line in "List" table
-		| 'Number' |
-		| '$$NumberPurchaseReturn022314$$'      |
-	And I select current line in "List" table
-	And I click "Shipment confirmation" button
-	Then the form attribute named "Company" became equal to "Main Company"
-	Then the form attribute named "Store" became equal to "Store 02"
-	And "ItemList" table contains lines
-		| 'Item'  | 'Quantity' | 'Item key' | 'Unit' | 'Shipment basis'                              |
-		| 'Dress' | '10,000'    | 'L/Green'  | 'pcs'  | '$$PurchaseReturn022314$$' |
-	And I click the button named "FormPost"
-	And I delete "$$NumberShipmentConfirmation028807$$" variable
-	And I delete "$$ShipmentConfirmation0028807$$" variable
-	And I save the value of "Number" field as "$$NumberShipmentConfirmation028807$$"
-	And I save the window as "$$ShipmentConfirmation0028807$$"
-	And I click the button named "FormPostAndClose"
-	And I close current window
 
 
 
@@ -463,7 +445,7 @@ Scenario: _028815 create document Shipment confirmation based on Purchase return
 			And I select current line in "List" table
 		* Select items from basis documents
 			And I click the button named "AddBasisDocuments"
-			And "BasisesTree" table became equal
+			And "BasisesTree" table contains lines
 				| 'Row presentation'                             | 'Use'                                          | 'Quantity' | 'Unit'           | 'Price'  | 'Currency' |
 				| 'Purchase return 32 dated 24.03.2021 15:15:22' | 'Purchase return 32 dated 24.03.2021 15:15:22' | ''         | ''               | ''       | ''         |
 				| 'Dress, XS/Blue'                               | 'No'                                           | '1,000'    | 'pcs'            | '200,00' | 'TRY'      |

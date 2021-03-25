@@ -57,40 +57,56 @@ Scenario: _028000 preparation (Sales return order)
 		When Create catalog ExpenseAndRevenueTypes objects
 	* Tax settings
 		When filling in Tax settings for company
-	* Check or create SalesOrder023001
-		Given I open hyperlink "e1cib/list/Document.SalesOrder"
-		If "List" table does not contain lines Then
-				| "Number" |
-				| "$$NumberSalesOrder023001$$" |
-			When create SalesOrder023001
-	* Check or create SalesOrder023005
-		Given I open hyperlink "e1cib/list/Document.SalesOrder"
-		If "List" table does not contain lines Then
-				| "Number" |
-				| "$$NumberSalesOrder023005$$" |
-			When create SalesOrder023005
-	* Check or create SalesInvoice024001 based on SalesOrder023001
-		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
-		If "List" table does not contain lines Then
-				| "Number" |
-				| "$$NumberSalesInvoice024001$$" |
-			When create SalesInvoice024001
-	* Create SalesInvoice024008 based on SalesOrder023005
-			When create SalesInvoice024008
+	When Create document SalesOrder and SalesInvoice objects (creation based on, SI >SO)
+	And I execute 1C:Enterprise script at server
+		| "Documents.SalesOrder.FindByNumber(32).GetObject().Write(DocumentWriteMode.Posting);" |
+		| "Documents.SalesInvoice.FindByNumber(32).GetObject().Write(DocumentWriteMode.Posting);" |
+	
 
-Scenario: _028001 create document Sales return order, store use Goods receipt, based on Sales invoice + check status
-	When create SalesReturnOrder028001
+Scenario: _028001 create document Sales return order based on SI (button Create)
+	* Create Sales return order
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I go to line in "List" table
+				| 'Number'                       | 'Partner'   |
+				| '32' | 'Ferron BP' |
+		And I select current line in "List" table
+		And I click the button named "FormDocumentSalesReturnOrderGenerateSalesReturnOrder"
+		* Check the details
+			Then the form attribute named "Partner" became equal to "Ferron BP"
+			Then the form attribute named "LegalName" became equal to "Company Ferron BP"
+			Then the form attribute named "Agreement" became equal to "Basic Partner terms, TRY"
+			Then the form attribute named "Description" became equal to "Click to enter description"
+			Then the form attribute named "Company" became equal to "Main Company"
+			Then the form attribute named "Store" became equal to "Store 02"
+		And I select "Approved" exact value from "Status" drop-down list
+	* Check items tab
+		And "ItemList" table became equal
+			| 'Business unit'           | '#' | 'Item'    | 'Dont calculate row' | 'Q'      | 'Unit'           | 'Tax amount' | 'Price'    | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Sales invoice'                              | 'Expense type' | 'Item key' | 'Cancel' | 'Cancel reason' |
+			| 'Distribution department' | '1' | 'Dress'   | 'No'                 | '1,000'  | 'pcs'            | '75,36'      | '520,00'   | '18%' | '26,00'         | '418,64'     | '494,00'       | ''                    | 'Store 02' | 'Sales invoice 32 dated 04.03.2021 16:32:23' | ''             | 'XS/Blue'  | 'No'     | ''              |
+			| 'Distribution department' | '2' | 'Shirt'   | 'No'                 | '12,000' | 'pcs'            | '640,68'     | '350,00'   | '18%' | ''              | '3 559,32'   | '4 200,00'     | ''                    | 'Store 02' | 'Sales invoice 32 dated 04.03.2021 16:32:23' | ''             | '36/Red'   | 'No'     | ''              |
+			| 'Distribution department' | '3' | 'Boots'   | 'No'                 | '2,000'  | 'Boots (12 pcs)' | '2 434,58'   | '8 400,00' | '18%' | '840,00'        | '13 525,42'  | '15 960,00'    | ''                    | 'Store 02' | 'Sales invoice 32 dated 04.03.2021 16:32:23' | ''             | '37/18SD'  | 'No'     | ''              |
+			| 'Front office'            | '4' | 'Service' | 'No'                 | '1,000'  | 'pcs'            | '14,49'      | '100,00'   | '18%' | '5,00'          | '80,51'      | '95,00'        | ''                    | 'Store 02' | 'Sales invoice 32 dated 04.03.2021 16:32:23' | ''             | 'Interner' | 'No'     | ''              |
+			| ''                        | '5' | 'Shirt'   | 'No'                 | '2,000'  | 'pcs'            | '106,78'     | '350,00'   | '18%' | ''              | '593,22'     | '700,00'       | ''                    | 'Store 02' | 'Sales invoice 32 dated 04.03.2021 16:32:23' | ''             | '38/Black' | 'No'     | ''              |
+		Then the form attribute named "PriceIncludeTax" became equal to "Yes"
+		Then the form attribute named "Manager" became equal to "Region 1"
+		And the editing text of form attribute named "ItemListTotalOffersAmount" became equal to "871,00"
+		Then the form attribute named "ItemListTotalNetAmount" became equal to "18 177,11"
+		Then the form attribute named "ItemListTotalTaxAmount" became equal to "3 271,89"
+		Then the form attribute named "ItemListTotalTotalAmount" became equal to "21 449"
+		And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "21 449,00"
+		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
+		And I click the button named "FormPost"
+		And I delete "$$SalesReturnOrder028001$$" variable
+		And I delete "$$NumberSalesReturnOrder028001$$" variable
+		And I save the window as "$$SalesReturnOrder028001$$"
+		And I save the value of "Number" field as "$$NumberSalesReturnOrder028001$$"
+		And I click the button named "FormPostAndClose"
 	* Check for no movements in the registers
-		Given I open hyperlink "e1cib/list/AccumulationRegister.OrderBalance"
+		Given I open hyperlink "e1cib/list/AccumulationRegister.R2012B_SalesOrdersInvoiceClosing"
 		And "List" table contains lines
-			| 'Quantity' | 'Recorder'                   | 'Store'    | 'Order'                      | 'Item key' |
-			| '1,000'    | '$$SalesReturnOrder028001$$' | 'Store 02' | '$$SalesReturnOrder028001$$' | 'L/Green'  |
+			| 'Quantity' | 'Recorder'                   | 'Order'                      | 'Item key' |
+			| '2,000'    | '$$SalesReturnOrder028001$$' | '$$SalesReturnOrder028001$$' | '38/Black'  |
 		And I close current window
-		Given I open hyperlink "e1cib/list/AccumulationRegister.SalesTurnovers"
-		And "List" table contains lines
-			| 'Quantity' | 'Recorder'              | 'Sales invoice'    | 'Item key' |
-			| '-1,000'   | '$$SalesReturnOrder028001$$' | '$$SalesInvoice024008$$' | 'L/Green'  |
-		And I close all client application windows
 	* And I set Wait status
 		Given I open hyperlink "e1cib/list/Document.SalesReturnOrder"
 		And I go to line in "List" table
@@ -102,6 +118,12 @@ Scenario: _028001 create document Sales return order, store use Goods receipt, b
 		And I select "Wait" exact value from "Status" drop-down list
 		And Delay 2
 		And I click the button named "FormPost"
+		* Check for no movements in the registers
+			Given I open hyperlink "e1cib/list/AccumulationRegister.R2012B_SalesOrdersInvoiceClosing"
+			And "List" table does not contain lines
+				| 'Quantity' | 'Recorder'                   | 'Order'                      | 'Item key' |
+				| '2,000'    | '$$SalesReturnOrder028001$$' | '$$SalesReturnOrder028001$$' | '38/Black'  |
+			And I close current window
 		And Delay 2
 		And I select "Approved" exact value from "Status" drop-down list
 		And I click the button named "FormPost"
@@ -115,18 +137,6 @@ Scenario: _028001 create document Sales return order, store use Goods receipt, b
 		And I click the button named "FormPostAndClose"
 
 
-
-Scenario: _028004 create document Sales return order, store does not use Goods receipt, based on Sales invoice
-	When create SalesReturnOrder028004
-	* And I set Approved status
-		Given I open hyperlink "e1cib/list/Document.SalesReturnOrder"
-		And I go to line in "List" table
-			| 'Number' |
-			| '$$NumberSalesReturnOrder028001$$'      |
-		And I select current line in "List" table
-		And I click "Decoration group title collapsed picture" hyperlink
-		And I select "Approved" exact value from "Status" drop-down list
-		And I click the button named "FormPostAndClose"
 
 
 

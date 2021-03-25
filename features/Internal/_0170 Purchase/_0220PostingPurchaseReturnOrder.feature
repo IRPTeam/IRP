@@ -153,57 +153,6 @@ Scenario: _022001 create document Purchase return order, store use Shipment conf
 		And I click the button named "FormPostAndClose"
 
 
-Scenario: _022006 create document Purchase return order, store does not use Shipment confirmation, based on Purchase invoice
-	Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
-	And I go to line in "List" table
-		| 'Number' |
-		| '$$NumberPurchaseInvoice018001$$'      |
-	And I select current line in "List" table
-	And I click the button named "FormDocumentPurchaseReturnOrderGeneratePurchaseReturnOrder"
-	* Check filling details
-		Then the form attribute named "Partner" became equal to "Ferron BP"
-		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
-		Then the form attribute named "Agreement" became equal to "Vendor Ferron, TRY"
-		Then the form attribute named "Description" became equal to "Click to enter description"
-		Then the form attribute named "Company" became equal to "Main Company"
-	* Filling in the main details of the document
-		And I click Select button of "Store" field
-		Then "Stores" window is opened
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 01'  |
-		And I select current line in "List" table
-		And I click "OK" button	
-	And I select "Approved" exact value from "Status" drop-down list
-	And I move to "Item list" tab
-	And I go to line in "ItemList" table
-		| 'Item'     | 'Item key'  | 'Unit' |
-		| 'Trousers'    | '36/Yellow'   | 'pcs' |
-	And I select current line in "ItemList" table
-	And Delay 2
-	And I input "3,000" text in "Q" field of "ItemList" table
-	And Delay 2
-	And I finish line editing in "ItemList" table
-	And I go to line in "ItemList" table
-		| 'Item'     | 'Item key'  | 'Unit' |
-		| 'Dress'    | 'S/Yellow'   | 'pcs' |
-	And Delay 2
-	And I delete a line in "ItemList" table
-	And I go to line in "ItemList" table
-		| 'Item'        | 'Item key'    | 'Q'      |
-		| 'Trousers'    | '36/Yellow'   | '8,000'  |
-	And I delete a line in "ItemList" table
-	And I go to line in "ItemList" table
-		| 'Item'     | 
-		| 'Boots'    |
-	And I delete a line in "ItemList" table
-	And I click the button named "FormPost"
-	And I delete "$$NumberPurchaseReturnOrder022006$$" variable
-	And I delete "$$PurchaseReturnOrder022006$$" variable
-	And I save the value of "Number" field as "$$NumberPurchaseReturnOrder022006$$"
-	And I save the window as "$$PurchaseReturnOrder022006$$"
-	And I click the button named "FormPostAndClose"
-	And I close current window
 
 
 

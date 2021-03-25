@@ -88,7 +88,7 @@ Scenario: _022300 preparation
 		If "List" table does not contain lines Then
 				| "Number" |
 				| "$$NumberPurchaseReturnOrder022006$$" |
-			When create PurchaseReturnOrder022006 based on PurchaseInvoice018001 (PurchaseReturn022301)
+			When create PurchaseReturnOrder022006 based on PurchaseInvoice018001 (PurchaseOrder017001)
 	
 Scenario: _022301 create Purchase return without bases document
 	* Opening a form to create Purchase return
@@ -357,6 +357,7 @@ Scenario: _022305 create document Purchase return without Purchase return order
 
 
 Scenario: _022310 create Purchase return based on Purchase return order
+	And I close all client application windows
 	* Save Purchase return order Row id
 		Given I open hyperlink "e1cib/list/Document.PurchaseReturnOrder"
 		And I go to line in "List" table
@@ -487,9 +488,9 @@ Scenario: _022335 check totals in the document Purchase return
 		| '$$NumberPurchaseReturn022301$$'     |
 		And I select current line in "List" table
 	* Check totals in the document Purchase return
-		And the editing text of form attribute named "ItemListTotalTaxAmount" became equal to "27 561,36"
-		And the editing text of form attribute named "ItemListTotalNetAmount" became equal to "153 118,64"
-		And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "180 680,00"
+		Then the form attribute named "ItemListTotalNetAmount" became equal to "116 101,69"
+		Then the form attribute named "ItemListTotalTaxAmount" became equal to "20 898,31"
+		And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "137 000,00"
 
 
 
@@ -498,7 +499,7 @@ Scenario: _300509 check connection to PurchaseReturn report "Related documents"
 	* Form report Related documents
 		And I go to line in "List" table
 		| 'Number' |
-		| '$$NumberPurchaseReturn022301$$'      |
+		| '$$NumberPurchaseReturn22310$$'      |
 		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
 		And Delay 1
 	Then "Related documents" window is opened

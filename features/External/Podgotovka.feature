@@ -512,13 +512,6 @@ Scenario: create PurchaseReturnOrder022006 based on PurchaseInvoice018001 (Purch
 		Then the form attribute named "Agreement" became equal to "Vendor Ferron, TRY"
 		Then the form attribute named "Description" became equal to "Click to enter description"
 		Then the form attribute named "Company" became equal to "Main Company"
-	* Filling in the main details of the document
-		And I click Select button of "Store" field
-		Then "Stores" window is opened
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 01'  |
-		And I select current line in "List" table
 	And I select "Approved" exact value from "Status" drop-down list
 	And I move to "Item list" tab
 	And I go to line in "ItemList" table

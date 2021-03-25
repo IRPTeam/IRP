@@ -313,7 +313,7 @@ Scenario: _022304 copy PR and check filling in Row Id info table
 			| 'Local currency'     | 'Legal'        | 'TRY'           | 'TRY'      | '1'                 | '1'            | '137 000'   |
 			| 'Reporting currency' | 'Reporting'    | 'TRY'           | 'USD'      | '0,1712'            | '1'            | '23 454,40' |
 		Then the form attribute named "BusinessUnit" became equal to ""
-		Then the form attribute named "Autor" became equal to "en description is empty"
+		Then the form attribute named "Author" became equal to "en description is empty"
 		Then the form attribute named "PriceIncludeTax" became equal to "Yes"
 		Then the form attribute named "Currency" became equal to "TRY"
 		Then the form attribute named "ItemListTotalNetAmount" became equal to "116 101,69"

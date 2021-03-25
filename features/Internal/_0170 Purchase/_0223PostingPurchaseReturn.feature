@@ -82,6 +82,7 @@ Scenario: _022300 preparation
 				| "Number" |
 				| "$$NumberPurchaseReturnOrder022001$$" |
 			When create PurchaseReturnOrder022001 based on PurchaseInvoice018006 (PurchaseOrder017003)
+		And I close all client application windows
 	* Check or create PurchaseReturnOrder022006
 		Given I open hyperlink "e1cib/list/Document.PurchaseReturnOrder"
 		If "List" table does not contain lines Then

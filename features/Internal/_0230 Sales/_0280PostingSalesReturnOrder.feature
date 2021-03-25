@@ -88,11 +88,9 @@ Scenario: _028001 create document Sales return order based on SI (button Create)
 			| 'Front office'            | '4' | 'Service' | 'No'                 | '1,000'  | 'pcs'            | '14,49'      | '100,00'   | '18%' | '5,00'          | '80,51'      | '95,00'        | ''                    | 'Store 02' | 'Sales invoice 32 dated 04.03.2021 16:32:23' | ''             | 'Interner' | 'No'     | ''              |
 			| ''                        | '5' | 'Shirt'   | 'No'                 | '2,000'  | 'pcs'            | '106,78'     | '350,00'   | '18%' | ''              | '593,22'     | '700,00'       | ''                    | 'Store 02' | 'Sales invoice 32 dated 04.03.2021 16:32:23' | ''             | '38/Black' | 'No'     | ''              |
 		Then the form attribute named "PriceIncludeTax" became equal to "Yes"
-		Then the form attribute named "Manager" became equal to "Region 1"
 		And the editing text of form attribute named "ItemListTotalOffersAmount" became equal to "871,00"
 		Then the form attribute named "ItemListTotalNetAmount" became equal to "18 177,11"
 		Then the form attribute named "ItemListTotalTaxAmount" became equal to "3 271,89"
-		Then the form attribute named "ItemListTotalTotalAmount" became equal to "21 449"
 		And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "21 449,00"
 		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
 		And I click the button named "FormPost"
@@ -148,9 +146,10 @@ Scenario: _028012 check totals in the document Sales return order
 		| '$$NumberSalesReturnOrder028001$$'      |
 		And I select current line in "List" table
 	* Check totals in the document Sales return order
-		Then the form attribute named "ItemListTotalNetAmount" became equal to "466,10"
-		Then the form attribute named "ItemListTotalTaxAmount" became equal to "83,90"
-		Then the form attribute named "ItemListTotalTotalAmount" became equal to "550,00"
+		And the editing text of form attribute named "ItemListTotalOffersAmount" became equal to "871,00"
+		Then the form attribute named "ItemListTotalNetAmount" became equal to "18 177,11"
+		Then the form attribute named "ItemListTotalTaxAmount" became equal to "3 271,89"
+		And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "21 449,00"
 		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
 
 

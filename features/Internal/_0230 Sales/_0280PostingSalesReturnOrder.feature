@@ -135,6 +135,248 @@ Scenario: _028001 create document Sales return order based on SI (button Create)
 		And I click the button named "FormPostAndClose"
 
 
+Scenario: _028009 create Sales return order without bases document
+	* Opening a form to create Sales return order
+		Given I open hyperlink "e1cib/list/Document.SalesReturnOrder"
+		And I click the button named "FormCreate"
+		And I select "Approved" exact value from "Status" drop-down list
+	* Filling in vendor information
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Ferron BP'   |
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I activate "Description" field in "List" table
+		And I go to line in "List" table
+			| 'Description'       |
+			| 'Company Ferron BP' |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description'        |
+			| 'Basic Partner terms, TRY' |
+		And I select current line in "List" table
+		And I click Select button of "Store" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Store 01'  |
+		And I select current line in "List" table
+	* Filling in items table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Dress'       |
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Item key' |
+			| 'M/White'  |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Dress'       |
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		Then "Item keys" window is opened
+		And I go to line in "List" table
+			| 'Item key' |
+			| 'L/Green'  |
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of "Item" attribute in "ItemList" table
+		Then "Items" window is opened
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Trousers'    |
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| '#' | 'Item'  | 'Item key' | 'Unit' |
+			| '1' | 'Dress' | 'M/White' | 'pcs' |
+		And I activate "Q" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "100" text in "Q" field of "ItemList" table
+		And I input "200" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| '#' | 'Item'  | 'Item key' | 'Unit' |
+			| '2' | 'Dress' | 'L/Green'  | 'pcs' |
+		And I select current line in "ItemList" table
+		And I input "200" text in "Q" field of "ItemList" table
+		And I input "210" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| '#' | 'Item'     | 'Item key' | 'Unit' |
+			| '3' | 'Trousers' | '36/Yellow'   | 'pcs' |
+		And I select current line in "ItemList" table
+		And I input "300" text in "Q" field of "ItemList" table
+		And I input "250" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And "ItemList" table contains lines
+			| 'Item'     | 'Q'       | 'Item key'  | 'Store'    | 'Unit' |
+			| 'Dress'    | '100,000' | 'M/White'   | 'Store 01' | 'pcs'  |
+			| 'Dress'    | '200,000' | 'L/Green'   | 'Store 01' | 'pcs'  |
+			| 'Trousers' | '300,000' | '36/Yellow' | 'Store 01' | 'pcs'  |
+	* Post document
+		And I click the button named "FormPost"
+		And I delete "$$NumberSalesReturnOrder028009$$" variable
+		And I delete "$$SalesReturnOrder028009$$" variable
+		And I save the value of "Number" field as "$$NumberSalesReturnOrder028009$$"
+		And I save the window as "$$SalesReturnOrder028009$$"
+		And I click the button named "FormPostAndClose"
+
+Scenario: _028010 check filling in Row Id info table in the SRO
+	* Select SRO
+		Given I open hyperlink "e1cib/list/Document.SalesReturnOrder"
+		And I go to line in "List" table
+			| 'Number'                     |
+			| '$$NumberSalesReturnOrder028009$$' |
+		And I select current line in "List" table
+		And I click "Show row key" button
+		And I go to line in "ItemList" table
+			| '#' |
+			| '1' |
+		And I activate "Key" field in "ItemList" table
+		And I save the current field value as "$$Rov1SalesReturnOrder028009$$"
+		And I go to line in "ItemList" table
+			| '#' |
+			| '2' |
+		And I activate "Key" field in "ItemList" table
+		And I save the current field value as "$$Rov2SalesReturnOrder028009$$"
+		And I go to line in "ItemList" table
+			| '#' |
+			| '3' |
+		And I activate "Key" field in "ItemList" table
+		And I save the current field value as "$$Rov3SalesReturnOrder028009$$"
+	* Check Row Id info table
+		And I move to "Row ID Info" tab
+		And "RowIDInfo" table contains lines
+			| 'Key'                            | 'Basis' | 'Row ID'                         | 'Next step' | 'Q'       | 'Basis key' | 'Current step' | 'Row ref'                        |
+			| '$$Rov1SalesReturnOrder028009$$' | ''      | '$$Rov1SalesReturnOrder028009$$' | 'SR'        | '100,000' | ''          | ''             | '$$Rov1SalesReturnOrder028009$$' |
+			| '$$Rov2SalesReturnOrder028009$$' | ''      | '$$Rov2SalesReturnOrder028009$$' | 'SR'        | '200,000' | ''          | ''             | '$$Rov2SalesReturnOrder028009$$' |
+			| '$$Rov3SalesReturnOrder028009$$' | ''      | '$$Rov3SalesReturnOrder028009$$' | 'SR'        | '300,000' | ''          | ''             | '$$Rov3SalesReturnOrder028009$$' |
+		Then the number of "RowIDInfo" table lines is "равно" "3"
+	* Copy string and check Row ID Info tab
+		And I move to "Item list" tab
+		And I go to line in "ItemList" table
+			| '#' | 'Item'  | 'Item key' | 'Q'     |
+			| '2' | 'Dress' | 'L/Green'  | '200,000' |
+		And in the table "ItemList" I click the button named "ItemListContextMenuCopy"
+		And I activate field named "ItemListQuantity" in "ItemList" table
+		And I input "208,000" text in the field named "ItemListQuantity" of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| '#' |
+			| '4' |
+		And I activate "Key" field in "ItemList" table
+		And I save the current field value as "$$Rov4SalesReturnOrder028009$$"
+		And I move to "Row ID Info" tab
+		And I click the button named "FormPost"
+		And I move to "Row ID Info" tab
+		And "RowIDInfo" table contains lines
+			| 'Key'                            | 'Basis' | 'Row ID'                         | 'Next step' | 'Q'       | 'Basis key' | 'Current step' | 'Row ref'                        |
+			| '$$Rov1SalesReturnOrder028009$$' | ''      | '$$Rov1SalesReturnOrder028009$$' | 'SR'        | '100,000' | ''          | ''             | '$$Rov1SalesReturnOrder028009$$' |
+			| '$$Rov2SalesReturnOrder028009$$' | ''      | '$$Rov2SalesReturnOrder028009$$' | 'SR'        | '200,000' | ''          | ''             | '$$Rov2SalesReturnOrder028009$$' |
+			| '$$Rov3SalesReturnOrder028009$$' | ''      | '$$Rov3SalesReturnOrder028009$$' | 'SR'        | '300,000' | ''          | ''             | '$$Rov3SalesReturnOrder028009$$' |
+			| '$$Rov4SalesReturnOrder028009$$' | ''      | '$$Rov4SalesReturnOrder028009$$' | 'SR'        | '208,000' | ''          | ''             | '$$Rov4SalesReturnOrder028009$$' |
+		Then the number of "RowIDInfo" table lines is "равно" "4"
+		And "RowIDInfo" table does not contain lines
+			| 'Key'                            | 'Basis' | 'Row ID'                         | 'Next step' | 'Q'       | 'Basis key' | 'Current step' | 'Row ref'                        |
+			| '$$Rov2SalesReturnOrder028009$$' | ''      | '$$Rov2SalesReturnOrder028009$$' | ''          | '208,000' | ''          | ''             | '$$Rov2SalesReturnOrder028009$$' |
+	* Delete string and check Row ID Info tab
+		And I move to "Item list" tab
+		And I go to line in "ItemList" table
+			| '#' | 'Item'  | 'Item key' | 'Q'       |
+			| '4' | 'Dress' | 'L/Green'  | '208,000' |
+		And in the table "ItemList" I click the button named "ItemListContextMenuDelete"
+		And I move to "Row ID Info" tab
+		And I click the button named "FormPost"
+		And "RowIDInfo" table contains lines
+			| 'Key'                            | 'Basis' | 'Row ID'                         | 'Next step' | 'Q'       | 'Basis key' | 'Current step' | 'Row ref'                        |
+			| '$$Rov1SalesReturnOrder028009$$' | ''      | '$$Rov1SalesReturnOrder028009$$' | 'SR'        | '100,000' | ''          | ''             | '$$Rov1SalesReturnOrder028009$$' |
+			| '$$Rov2SalesReturnOrder028009$$' | ''      | '$$Rov2SalesReturnOrder028009$$' | 'SR'        | '200,000' | ''          | ''             | '$$Rov2SalesReturnOrder028009$$' |
+			| '$$Rov3SalesReturnOrder028009$$' | ''      | '$$Rov3SalesReturnOrder028009$$' | 'SR'        | '300,000' | ''          | ''             | '$$Rov3SalesReturnOrder028009$$' |
+		Then the number of "RowIDInfo" table lines is "равно" "3"
+	* Change quantity and check  Row ID Info tab
+		And I move to "Item list" tab
+		And I go to line in "ItemList" table
+			| '#' | 'Item'  | 'Item key' | 'Q'     |
+			| '2' | 'Dress' | 'L/Green'  | '200,000' |
+		And I activate "Q" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "7,000" text in "Q" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click the button named "FormPost"
+		And "RowIDInfo" table contains lines
+			| 'Key'                            | 'Basis' | 'Row ID'                         | 'Next step' | 'Q'       | 'Basis key' | 'Current step' | 'Row ref'                        |
+			| '$$Rov1SalesReturnOrder028009$$' | ''      | '$$Rov1SalesReturnOrder028009$$' | 'SR'        | '100,000' | ''          | ''             | '$$Rov1SalesReturnOrder028009$$' |
+			| '$$Rov2SalesReturnOrder028009$$' | ''      | '$$Rov2SalesReturnOrder028009$$' | 'SR'        | '7,000'   | ''          | ''             | '$$Rov2SalesReturnOrder028009$$' |
+			| '$$Rov3SalesReturnOrder028009$$' | ''      | '$$Rov3SalesReturnOrder028009$$' | 'SR'        | '300,000' | ''          | ''             | '$$Rov3SalesReturnOrder028009$$' |
+		Then the number of "RowIDInfo" table lines is "равно" "3"
+		And I move to "Item list" tab
+		And I go to line in "ItemList" table
+			| '#' | 'Item'  | 'Item key' | 'Q'     |
+			| '2' | 'Dress' | 'L/Green'  | '7,000' |
+		And I activate "Q" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "200,000" text in "Q" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click the button named "FormPostAndClose"
+		
+	
+Scenario: _028011 copy SRO and check filling in Row Id info table
+	* Copy SRO
+		Given I open hyperlink "e1cib/list/Document.SalesReturnOrder"
+		And I go to line in "List" table
+			| 'Number'                     |
+			| '$$NumberSalesReturnOrder028009$$' |
+		And in the table "List" I click the button named "ListContextMenuCopy"
+	* Check copy info
+		Then the form attribute named "Partner" became equal to "Ferron BP"
+		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
+		Then the form attribute named "Agreement" became equal to "Basic Partner terms, TRY"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Store" became equal to "Store 01"
+		And "ItemList" table became equal
+			| '#' | 'Business unit' | 'Item'     | 'Item key'  | 'Dont calculate row' | 'Q'       | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Expense type' | 'Net amount' |
+			| '1' | ''              | 'Dress'    | 'M/White'   | 'No'                 | '100,000' | 'pcs'  | '3 050,85'   | '200,00' | '18%' | ''              | '20 000,00'    | ''                    | 'Store 01' | ''             | '16 949,15'  |
+			| '2' | ''              | 'Dress'    | 'L/Green'   | 'No'                 | '200,000' | 'pcs'  | '6 406,78'   | '210,00' | '18%' | ''              | '42 000,00'    | ''                    | 'Store 01' | ''             | '35 593,22'  |
+			| '3' | ''              | 'Trousers' | '36/Yellow' | 'No'                 | '300,000' | 'pcs'  | '11 440,68'  | '250,00' | '18%' | ''              | '75 000,00'    | ''                    | 'Store 01' | ''             | '63 559,32'  |
+		And "ObjectCurrencies" table became equal
+			| 'Movement type'      | 'Type'         | 'Currency from' | 'Currency' | 'Rate presentation' | 'Multiplicity' | 'Amount'    |
+			| 'TRY'                | 'Partner term' | 'TRY'           | 'TRY'      | '1'                 | '1'            | '137 000'   |
+			| 'Local currency'     | 'Legal'        | 'TRY'           | 'TRY'      | '1'                 | '1'            | '137 000'   |
+			| 'Reporting currency' | 'Reporting'    | 'TRY'           | 'USD'      | '0,1712'            | '1'            | '23 454,40' |
+		Then the form attribute named "BusinessUnit" became equal to ""
+		Then the form attribute named "PriceIncludeTax" became equal to "Yes"
+		Then the form attribute named "Currency" became equal to "TRY"
+		Then the form attribute named "ItemListTotalNetAmount" became equal to "116 101,69"
+		Then the form attribute named "ItemListTotalTaxAmount" became equal to "20 898,31"
+		And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "137 000,00"
+		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
+	* Post SRO and check Row ID Info tab
+		And I click the button named "FormPost"
+		And I click "Show row key" button
+		And I move to "Row ID Info" tab
+		And "RowIDInfo" table does not contain lines
+			| 'Key'                            | 'Basis' | 'Row ID'                         | 'Next step' | 'Q'       | 'Basis key' | 'Current step' | 'Row ref'                        |
+			| '$$Rov1SalesReturnOrder028009$$' | ''      | '$$Rov1SalesReturnOrder028009$$' | 'SR'        | '100,000' | ''          | ''             | '$$Rov1SalesReturnOrder028009$$' |
+			| '$$Rov2SalesReturnOrder028009$$' | ''      | '$$Rov2SalesReturnOrder028009$$' | 'SR'        | '200,000' | ''          | ''             | '$$Rov2SalesReturnOrder028009$$' |
+			| '$$Rov3SalesReturnOrder028009$$' | ''      | '$$Rov3SalesReturnOrder028009$$' | 'SR'        | '300,000' | ''          | ''             | '$$Rov3SalesReturnOrder028009$$' |
+		Then the number of "RowIDInfo" table lines is "равно" "3"
+		And I close all client application windows
+
 
 
 

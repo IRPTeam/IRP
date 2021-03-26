@@ -52,12 +52,12 @@ Scenario: _022300 preparation
 		When Create information register Taxes records (VAT)
 	* Tax settings
 		When filling in Tax settings for company
-	* Check or create PurchaseReturn022301
+	* Check or create PurchaseOrder017001
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		If "List" table does not contain lines Then
 				| "Number" |
-				| "$$NumberPurchaseReturn022301$$" |
-			When create PurchaseReturnOrder022006 based on PurchaseInvoice018001 (PurchaseOrder017001)
+				| "$$NumberPurchaseOrder017001$$" |
+			When create PurchaseOrder017001
 	* Check or create PurchaseOrder017003
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		If "List" table does not contain lines Then
@@ -69,7 +69,7 @@ Scenario: _022300 preparation
 		If "List" table does not contain lines Then
 				| "Number" |
 				| "$$NumberPurchaseInvoice018001$$" |
-			When create PurchaseInvoice018001 based on PurchaseReturn022301
+			When create PurchaseInvoice018001 based on PurchaseOrder017001
 	* Check or create PurchaseInvoice018006
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		If "List" table does not contain lines Then
@@ -88,7 +88,7 @@ Scenario: _022300 preparation
 		If "List" table does not contain lines Then
 				| "Number" |
 				| "$$NumberPurchaseReturnOrder022006$$" |
-			When create PurchaseReturnOrder022006 based on PurchaseInvoice018001 (PurchaseOrder017001)
+			When create PurchaseReturnOrder022006 based on PurchaseInvoice018001
 	
 Scenario: _022301 create Purchase return without bases document
 	* Opening a form to create Purchase return
@@ -202,16 +202,19 @@ Scenario: _022303 check filling in Row Id info table in the PR
 			| '#' |
 			| '1' |
 		And I activate "Key" field in "ItemList" table
+		And I delete "$$Rov1PurchaseReturn022301$$" variable
 		And I save the current field value as "$$Rov1PurchaseReturn022301$$"
 		And I go to line in "ItemList" table
 			| '#' |
 			| '2' |
 		And I activate "Key" field in "ItemList" table
+		And I delete "$$Rov2PurchaseReturn022301$$" variable
 		And I save the current field value as "$$Rov2PurchaseReturn022301$$"
 		And I go to line in "ItemList" table
 			| '#' |
 			| '3' |
 		And I activate "Key" field in "ItemList" table
+		And I delete "$$Rov3PurchaseReturn022301$$" variable
 		And I save the current field value as "$$Rov3PurchaseReturn022301$$"
 	* Check Row Id info table
 		And I move to "Row ID Info" tab
@@ -234,6 +237,7 @@ Scenario: _022303 check filling in Row Id info table in the PR
 			| '#' |
 			| '4' |
 		And I activate "Key" field in "ItemList" table
+		And I delete "$$Rov4PurchaseReturn022301$$" variable
 		And I save the current field value as "$$Rov4PurchaseReturn022301$$"
 		And I move to "Row ID Info" tab
 		And I click the button named "FormPost"
@@ -499,7 +503,7 @@ Scenario: _300509 check connection to PurchaseReturn report "Related documents"
 	* Form report Related documents
 		And I go to line in "List" table
 		| 'Number' |
-		| '$$NumberPurchaseReturn22310$$'      |
+		| '$$NumberPurchaseReturn022301$$'      |
 		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
 		And Delay 1
 	Then "Related documents" window is opened

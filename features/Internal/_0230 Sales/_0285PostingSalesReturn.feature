@@ -695,12 +695,12 @@ Scenario: _028534 check totals in the document Sales return
 	* Select Sales Return
 		And I go to line in "List" table
 		| 'Number' |
-		| '$$NumberSalesReturn028501$$'     |
+		| '$$NumberSalesReturn028509$$'     |
 		And I select current line in "List" table
 	* Check totals in the document Sales return
-		Then the form attribute named "ItemListTotalNetAmount" became equal to "466,10"
-		Then the form attribute named "ItemListTotalTaxAmount" became equal to "83,90"
-		Then the form attribute named "ItemListTotalTotalAmount" became equal to "550,00"
+		Then the form attribute named "ItemListTotalNetAmount" became equal to "116 101,69"
+		Then the form attribute named "ItemListTotalTaxAmount" became equal to "20 898,31"
+		And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "137 000,00"
 
 
 
@@ -708,8 +708,8 @@ Scenario: _300511 check connection to SalesReturn report "Related documents"
 	Given I open hyperlink "e1cib/list/Document.SalesReturn"
 	* Form report Related documents
 		And I go to line in "List" table
-		| Number |
-		| $$NumberSalesReturn028508$$      |
+		| 'Number' |
+		| '$$NumberSalesReturn028509$$'      |
 		And I click the button named "FormFilterCriterionRelatedDocumentsRelatedDocuments"
 		And Delay 1
 	Then "Related documents" window is opened

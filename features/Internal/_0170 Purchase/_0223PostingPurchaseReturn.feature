@@ -57,7 +57,7 @@ Scenario: _022300 preparation
 		If "List" table does not contain lines Then
 				| "Number" |
 				| "$$NumberPurchaseReturn022301$$" |
-			When create PurchaseReturn022301
+			When create PurchaseReturnOrder022006 based on PurchaseInvoice018001 (PurchaseOrder017001)
 	* Check or create PurchaseOrder017003
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		If "List" table does not contain lines Then

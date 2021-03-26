@@ -182,29 +182,7 @@ Scenario: _029901 create Sales order without reserve and check its movements (SO
 			| ''                                  | '$$DateSalesOrder029901$$' | '40'        | '14 000'   | 'Main Company' | '$$SalesOrder029901$$' | 'TRY'      | '38/Black'  | '*'       | 'Local currency'               | 'No'                   |
 			| ''                                  | '$$DateSalesOrder029901$$' | '40'        | '14 000'   | 'Main Company' | '$$SalesOrder029901$$' | 'TRY'      | '38/Black'  | '*'       | 'TRY'                          | 'No'                   |
 			| ''                                  | '$$DateSalesOrder029901$$' | '40'        | '14 000'   | 'Main Company' | '$$SalesOrder029901$$' | 'TRY'      | '38/Black'  | '*'       | 'en description is empty'      | 'No'                   |
-	* Check SO movements Register  "Register  "Register  "Order balance")
-		And I select "Order balance" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| '$$SalesOrder029901$$'           | ''            | ''                         | ''          | ''           | ''                     | ''          | ''        |
-			| 'Document registrations records' | ''            | ''                         | ''          | ''           | ''                     | ''          | ''        |
-			| 'Register  "Order balance"'      | ''            | ''                         | ''          | ''           | ''                     | ''          | ''        |
-			| ''                               | 'Record type' | 'Period'                   | 'Resources' | 'Dimensions' | ''                     | ''          | ''        |
-			| ''                               | ''            | ''                         | 'Quantity'  | 'Store'      | 'Order'                | 'Item key'  | 'Row key' |
-			| ''                               | 'Receipt'     | '$$DateSalesOrder029901$$' | '31'        | 'Store 01'   | '$$SalesOrder029901$$' | '38/Yellow' | '*'       |
-			| ''                               | 'Receipt'     | '$$DateSalesOrder029901$$' | '40'        | 'Store 01'   | '$$SalesOrder029901$$' | '38/Black'  | '*'       |
-
-	* Check SO movements Register  "Register  "Register  "Shipment confirmation schedule")
-		And I select "Shipment confirmation schedule" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| '$$SalesOrder029901$$'                       | ''            | ''                         | ''          | ''             | ''                     | ''         | ''          | ''        | ''              |
-			| 'Document registrations records'             | ''            | ''                         | ''          | ''             | ''                     | ''         | ''          | ''        | ''              |
-			| 'Register  "Shipment confirmation schedule"' | ''            | ''                         | ''          | ''             | ''                     | ''         | ''          | ''        | ''              |
-			| ''                                           | 'Record type' | 'Period'                   | 'Resources' | 'Dimensions'   | ''                     | ''         | ''          | ''        | 'Attributes'    |
-			| ''                                           | ''            | ''                         | 'Quantity'  | 'Company'      | 'Order'                | 'Store'    | 'Item key'  | 'Row key' | 'Delivery date' |
-			| ''                                           | 'Receipt'     | '$$DateSalesOrder029901$$' | '31'        | 'Main Company' | '$$SalesOrder029901$$' | 'Store 01' | '38/Yellow' | '*'       | '*'             |
-			| ''                                           | 'Receipt'     | '$$DateSalesOrder029901$$' | '40'        | 'Main Company' | '$$SalesOrder029901$$' | 'Store 01' | '38/Black'  | '*'       | '*'             |
+	
 
 	And I close all client application windows
 
@@ -542,29 +520,7 @@ Scenario: _029903 create Sales order without reserve and check its movements (SO
 			| ''                                  | '$$DateSalesOrder029903$$' | '40'        | '14 000'   | 'Main Company' | '$$SalesOrder029903$$' | 'TRY'      | '38/Black'  | '*'       | 'Local currency'               | 'No'                   |
 			| ''                                  | '$$DateSalesOrder029903$$' | '40'        | '14 000'   | 'Main Company' | '$$SalesOrder029903$$' | 'TRY'      | '38/Black'  | '*'       | 'TRY'                          | 'No'                   |
 			| ''                                  | '$$DateSalesOrder029903$$' | '40'        | '14 000'   | 'Main Company' | '$$SalesOrder029903$$' | 'TRY'      | '38/Black'  | '*'       | 'en description is empty'      | 'No'                   |
-	* Check SO movements Register  "Register  "Register  "Order balance")
-		And I select "Order balance" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| '$$SalesOrder029903$$'           | ''            | ''                         | ''          | ''           | ''                     | ''          | ''        |
-			| 'Document registrations records' | ''            | ''                         | ''          | ''           | ''                     | ''          | ''        |
-			| 'Register  "Order balance"'      | ''            | ''                         | ''          | ''           | ''                     | ''          | ''        |
-			| ''                               | 'Record type' | 'Period'                   | 'Resources' | 'Dimensions' | ''                     | ''          | ''        |
-			| ''                               | ''            | ''                         | 'Quantity'  | 'Store'      | 'Order'                | 'Item key'  | 'Row key' |
-			| ''                               | 'Receipt'     | '$$DateSalesOrder029903$$' | '31'        | 'Store 02'   | '$$SalesOrder029903$$' | '38/Yellow' | '*'       |
-			| ''                               | 'Receipt'     | '$$DateSalesOrder029903$$' | '40'        | 'Store 02'   | '$$SalesOrder029903$$' | '38/Black'  | '*'       |
-
-	* Check SO movements Register  "Register  "Register  "Shipment confirmation schedule")
-		And I select "Shipment confirmation schedule" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| '$$SalesOrder029903$$'                       | ''            | ''                         | ''          | ''             | ''                     | ''         | ''          | ''        | ''              |
-			| 'Document registrations records'             | ''            | ''                         | ''          | ''             | ''                     | ''         | ''          | ''        | ''              |
-			| 'Register  "Shipment confirmation schedule"' | ''            | ''                         | ''          | ''             | ''                     | ''         | ''          | ''        | ''              |
-			| ''                                           | 'Record type' | 'Period'                   | 'Resources' | 'Dimensions'   | ''                     | ''         | ''          | ''        | 'Attributes'    |
-			| ''                                           | ''            | ''                         | 'Quantity'  | 'Company'      | 'Order'                | 'Store'    | 'Item key'  | 'Row key' | 'Delivery date' |
-			| ''                                           | 'Receipt'     | '$$DateSalesOrder029903$$' | '31'        | 'Main Company' | '$$SalesOrder029903$$' | 'Store 02' | '38/Yellow' | '*'       | '*'             |
-			| ''                                           | 'Receipt'     | '$$DateSalesOrder029903$$' | '40'        | 'Main Company' | '$$SalesOrder029903$$' | 'Store 02' | '38/Black'  | '*'       | '*'             |
+	
 	
 		And I close all client application windows		
 
@@ -596,18 +552,7 @@ Scenario: _029904 create Shipment confirmation for SO without reserve and check 
 			| ''                                | ''            | ''                                   | 'Quantity'  | 'Store'      | 'Item key'  | 'Serial lot number' |
 			| ''                                | 'Expense'     | '$$DateShipmentConfirmation029903$$' | '31'        | 'Store 02'   | '38/Yellow' | ''                  |
 			| ''                                | 'Expense'     | '$$DateShipmentConfirmation029903$$' | '40'        | 'Store 02'   | '38/Black'  | ''                  |
-		* Check SC movements Register  "Register  "Goods in transit outgoing")
-			And I select "Goods in transit outgoing" exact value from "Register" drop-down list
-			And I click "Generate report" button
-			And "ResultTable" spreadsheet document contains lines:
-			| '$$ShipmentConfirmation029903$$'        | ''            | ''                                   | ''          | ''           | ''                     | ''          | ''        |
-			| 'Document registrations records'        | ''            | ''                                   | ''          | ''           | ''                     | ''          | ''        |
-			| 'Register  "Goods in transit outgoing"' | ''            | ''                                   | ''          | ''           | ''                     | ''          | ''        |
-			| ''                                      | 'Record type' | 'Period'                             | 'Resources' | 'Dimensions' | ''                     | ''          | ''        |
-			| ''                                      | ''            | ''                                   | 'Quantity'  | 'Store'      | 'Shipment basis'       | 'Item key'  | 'Row key' |
-			| ''                                      | 'Expense'     | '$$DateShipmentConfirmation029903$$' | '31'        | 'Store 02'   | '$$SalesOrder029903$$' | '38/Yellow' | '*'       |
-			| ''                                      | 'Expense'     | '$$DateShipmentConfirmation029903$$' | '40'        | 'Store 02'   | '$$SalesOrder029903$$' | '38/Black'  | '*'       |
-
+	
 	
 		* Check SC movements Register  "R2031 Shipment invoicing"
 			And I select "R2031 Shipment invoicing" exact value from "Register" drop-down list

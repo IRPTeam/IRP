@@ -499,7 +499,7 @@ Scenario: create PurchaseReturnOrder022001 based on PurchaseInvoice018006 (Purch
 	And I save the window as "$$PurchaseReturnOrder022001$$"
 	And I click the button named "FormPostAndClose"
 	
-Scenario: create PurchaseReturnOrder022006 based on PurchaseInvoice018001 (PurchaseOrder017001)
+Scenario: create PurchaseReturnOrder022006 based on PurchaseInvoice018001
 	Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 	And I go to line in "List" table
 		| 'Number' |

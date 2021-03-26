@@ -64,11 +64,7 @@ Scenario: _022300 preparation
 				| "Number" |
 				| "$$NumberPurchaseOrder017003$$" |
 			When create PurchaseOrder017003
-	* Check or create PurchaseInvoice018001
-		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
-		If "List" table does not contain lines Then
-				| "Number" |
-				| "$$NumberPurchaseInvoice018001$$" |
+	* Create PurchaseInvoice018001
 			When create PurchaseInvoice018001 based on PurchaseOrder017001
 	* Check or create PurchaseInvoice018006
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
@@ -412,7 +408,6 @@ Scenario: _022310 create Purchase return based on Purchase return order
 				| 'Row presentation'              | 'Use'                           | 'Quantity' | 'Unit' | 'Price'  | 'Currency' |
 				| '$$PurchaseReturnOrder022006$$' | '$$PurchaseReturnOrder022006$$' | ''         | ''     | ''       | ''         |
 				| 'Trousers, 36/Yellow'           | 'No'                            | '3,000'    | 'pcs'  | '250,00' | 'TRY'      |
-			Then the number of "BasisesTree" table lines is "равно" "2"
 			And I go to line in "BasisesTree" table
 				| 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
 				| '3,000'    | 'Trousers, 36/Yellow'   | 'pcs'  | 'No'  |

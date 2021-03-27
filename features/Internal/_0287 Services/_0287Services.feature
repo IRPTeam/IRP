@@ -714,6 +714,7 @@ Scenario: _029140 create PurchaseReturn for service and product (based on $$Purc
 		| 'Number' |
 		| '$$NumberPurchaseInvoice029106$$'       |	
 	And I click the button named "FormDocumentPurchaseReturnGenerate"
+	And I click "Ok" button	
 	And I click the button named "FormPost"
 	And I delete "$$NumberPurchaseReturn029140$$" variable
 	And I delete "$$PurchaseReturn029140$$" variable
@@ -798,6 +799,7 @@ Scenario: _029141 create Purchase return order and Purchase return for service a
 		| 'Number' |
 		| '$$NumberPurchaseInvoice029106$$'       |	
 	And I click the button named "FormDocumentPurchaseReturnOrderGenerate"
+	And I click "Ok" button	
 	And I select "Approved" exact value from "Status" drop-down list
 	And I click the button named "FormPost"
 	And I delete "$$NumberPurchaseReturnOrder029141$$" variable
@@ -832,6 +834,7 @@ Scenario: _029141 create Purchase return order and Purchase return for service a
 		| 'Number' |
 		| '$$NumberPurchaseReturnOrder029141$$'       |	
 	And I click the button named "FormDocumentPurchaseReturnGenerate"
+	And I click "Ok" button	
 	And I click the button named "FormPost"
 	And I delete "$$NumberPurchaseReturn029141$$" variable
 	And I delete "$$PurchaseReturn029141$$" variable

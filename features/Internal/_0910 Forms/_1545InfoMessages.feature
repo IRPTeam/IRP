@@ -105,10 +105,12 @@ Scenario: _154505 message when trying to create Sales returm order based on Sale
 			And I click the button named "FormPostAndClose"
 	* Check the message output when creating Sales return order or Sales return again
 			And I click the button named "FormDocumentSalesReturnOrderGenerate"
+			And I click "Ok" button	
 			Then warning message containing text 'There are no products to return in the "Sales invoice" document. All products are already returned.' appears
 			And I click "OK" button
 			Then "Sales invoice * dated *" window is opened
 			And I click the button named "FormDocumentSalesReturnGenerate"
+			And I click "Ok" button	
 			Then warning message containing text 'There are no products to return in the "Sales invoice" document. All products are already returned.' appears
 			And I click "OK" button
 			And I close all client application windows

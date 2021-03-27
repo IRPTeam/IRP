@@ -322,6 +322,7 @@ Scenario: _034030 check discount recalculation when change quantity in the Purch
 				| 'Number' |
 				| '$$NumberPurchaseInvoice034001$$'  |
 			And I click the button named "FormDocumentPurchaseReturnOrderGenerate"
+			And I click "Ok" button	
 			And the editing text of form attribute named "ItemListTotalOffersAmount" became equal to "13 700,00"
 			Then the form attribute named "ItemListTotalNetAmount" became equal to "104 491,53"
 			Then the form attribute named "ItemListTotalTaxAmount" became equal to "18 808,47"
@@ -363,6 +364,7 @@ Scenario: _034031 check discount recalculation when change quantity in the Purch
 				| 'Number' |
 				| '$$NumberPurchaseInvoice034001$$'  |
 			And I click the button named "FormDocumentPurchaseReturnGenerate"
+			And I click "Ok" button	
 			And the editing text of form attribute named "ItemListTotalOffersAmount" became equal to "13 700,00"
 			Then the form attribute named "ItemListTotalNetAmount" became equal to "104 491,53"
 			Then the form attribute named "ItemListTotalTaxAmount" became equal to "18 808,47"

@@ -84,7 +84,7 @@ Scenario: _028501 create document Sales return based on SI (without SRO)
 		| 'Number' | 'Partner' |
 		| '101'    | 'Crystal' |
 	And I select current line in "List" table
-	And I click the button named "FormDocumentSalesReturnGenerateSalesReturn"
+	And I click the button named "FormDocumentSalesReturnGenerate"
 	* Check the details
 		Then the form attribute named "Partner" became equal to "Crystal"
 		Then the form attribute named "LegalName" became equal to "Company Adel"

@@ -775,7 +775,7 @@ Scenario: _092005 check serial lot number in the Sales return
 		And I go to line in "List" table
 			|'Number'|
 			|'$$NumberSalesInvoice092004$$'|
-		And I click the button named "FormDocumentSalesReturnGenerateSalesReturn"
+		And I click the button named "FormDocumentSalesReturnGenerate"
 	* Check filling in serial lot number
 		And "ItemList" table contains lines
 			| 'Serial lot numbers'             | 'Price'  | 'Item'     | 'Item key'  | 'Q'     | 'Unit' | 'Sales invoice'          |
@@ -1554,7 +1554,7 @@ Scenario: _0920072 check filling in serial lot number in the PurchaseReturn	from
 			| 'Number'     |
 			| '29' |
 		And in the table "List" I click the button named "ListContextMenuPost"
-		And I click the button named "FormDocumentPurchaseReturnGeneratePurchaseReturn"
+		And I click the button named "FormDocumentPurchaseReturnGenerate"
 	* Check filling in serial lot number from Purchase invoice
 		And "ItemList" table contains lines
 			| 'Item'     | 'Item key'  | 'Serial lot numbers' | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Purchase invoice'                              | 'Purchase return order' | 'Total amount' | 'Store'    |

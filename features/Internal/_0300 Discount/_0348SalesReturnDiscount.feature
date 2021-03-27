@@ -57,7 +57,7 @@ Scenario: _034802 check discount recalculation when change quantity in the SaLes
 			And I go to line in "List" table
 				| 'Number' |
 				| '$$NumberSalesInvoice024025$$'  |
-			And I click the button named "FormDocumentSalesReturnOrderGenerateSalesReturnOrder"
+			And I click the button named "FormDocumentSalesReturnOrderGenerate"
 			And the editing text of form attribute named "ItemListTotalOffersAmount" became equal to "1 100,00"
 			Then the form attribute named "ItemListTotalNetAmount" became equal to "8 389,83"
 			Then the form attribute named "ItemListTotalTaxAmount" became equal to "1 510,17"
@@ -88,7 +88,7 @@ Scenario: _034803 check discount recalculation when change quantity in the SaLes
 			And I go to line in "List" table
 				| 'Number' |
 				| '$$NumberSalesInvoice024025$$'  |
-			And I click the button named "FormDocumentSalesReturnGenerateSalesReturn"
+			And I click the button named "FormDocumentSalesReturnGenerate"
 			And the editing text of form attribute named "ItemListTotalOffersAmount" became equal to "1 100,00"
 			Then the form attribute named "ItemListTotalNetAmount" became equal to "8 389,83"
 			Then the form attribute named "ItemListTotalTaxAmount" became equal to "1 510,17"

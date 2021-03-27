@@ -101,6 +101,7 @@ Scenario: _154505 message when trying to create Sales returm order based on Sale
 			And I save the window as "$$SalesInvoice154501$$"
 	* Create Sales return order based on Sales invoice
 			And I click the button named "FormDocumentSalesReturnOrderGenerate"
+			And I click "Ok" button	
 			And I select "Approved" exact value from "Status" drop-down list
 			And I click the button named "FormPostAndClose"
 	* Check the message output when creating Sales return order or Sales return again
@@ -108,11 +109,11 @@ Scenario: _154505 message when trying to create Sales returm order based on Sale
 			And I click "Ok" button	
 			Then warning message containing text 'There are no products to return in the "Sales invoice" document. All products are already returned.' appears
 			And I click "OK" button
-			Then "Sales invoice * dated *" window is opened
-			And I click the button named "FormDocumentSalesReturnGenerate"
-			And I click "Ok" button	
-			Then warning message containing text 'There are no products to return in the "Sales invoice" document. All products are already returned.' appears
-			And I click "OK" button
+			// Then "Sales invoice * dated *" window is opened
+			// And I click the button named "FormDocumentSalesReturnGenerate"
+			// And I click "Ok" button	
+			// Then warning message containing text 'There are no products to return in the "Sales invoice" document. All products are already returned.' appears
+			// And I click "OK" button
 			And I close all client application windows
 
 Scenario: _154507 message when trying to create Purchase return order and Purchase return based on Purchase invoice document if all products have already been returned.
@@ -181,10 +182,10 @@ Scenario: _154507 message when trying to create Purchase return order and Purcha
 			And I click the button named "FormDocumentPurchaseReturnOrderGenerate"
 			Then warning message containing text 'There are no products to return in the "Purchase invoice" document. All products are already returned.' appears
 			And I click "OK" button
-			Then "Purchase invoice * dated *" window is opened
-			And I click the button named "FormDocumentPurchaseReturnGenerate"
-			Then warning message containing text 'There are no products to return in the "Purchase invoice" document. All products are already returned.' appears
-			And I click "OK" button
+			// Then "Purchase invoice * dated *" window is opened
+			// And I click the button named "FormDocumentPurchaseReturnGenerate"
+			// Then warning message containing text 'There are no products to return in the "Purchase invoice" document. All products are already returned.' appears
+			// And I click "OK" button
 			And I close all client application windows
 
 Scenario: _154509 message when trying to re-create Sales invoice based on Shipment confirmation

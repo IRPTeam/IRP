@@ -70,7 +70,8 @@ Scenario: _028001 create document Sales return order based on SI (button Create)
 				| 'Number'                       | 'Partner'   |
 				| '32' | 'Ferron BP' |
 		And I select current line in "List" table
-		And I click the button named "FormDocumentSalesReturnOrderGenerateSalesReturnOrder"
+		And I click the button named "FormDocumentSalesReturnOrderGenerate"
+		And I click "Ok" button		
 		* Check the details
 			Then the form attribute named "Partner" became equal to "Ferron BP"
 			Then the form attribute named "LegalName" became equal to "Company Ferron BP"

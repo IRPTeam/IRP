@@ -93,8 +93,9 @@ Scenario: _028501 create document Sales return based on SI (without SRO)
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Agreement" became equal to "Basic Partner terms, TRY"
 		Then the form attribute named "Store" became equal to "Store 01"
-		Then the form attribute named "BusinessUnit" became equal to "Distribution department"
+		// Then the form attribute named "BusinessUnit" became equal to "Distribution department"
 	* Check items tab
+		And "ItemList" table contains lines
 		| '#' | 'Business unit'           | 'Item'  | 'Item key' | 'Dont calculate row' | 'Serial lot numbers' | 'Q'     | 'Unit'           | 'Tax amount' | 'Price'    | 'VAT' | 'Offers amount' | 'Net amount' | 'Use goods receipt' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Sales return order' | 'Sales invoice'                               | 'Expense type' |
 		| '1' | 'Distribution department' | 'Shirt' | '38/Black' | 'No'                 | ''                   | '2,000' | 'pcs'            | '113,71'     | '350,00'   | '18%' | ''              | '586,29'     | 'No'                | '700,00'       | ''                    | 'Store 01' | ''                   | 'Sales invoice 101 dated 05.03.2021 12:56:38' | ''             |
 		| '2' | 'Distribution department' | 'Boots' | '36/18SD'  | 'No'                 | ''                   | '2,000' | 'Boots (12 pcs)' | '2 729,05'   | '8 400,00' | '18%' | ''              | '14 070,95'  | 'No'                | '16 800,00'    | ''                    | 'Store 01' | ''                   | 'Sales invoice 101 dated 05.03.2021 12:56:38' | ''             |
@@ -592,7 +593,7 @@ Scenario: _028515 create document Sales return based on SRO
 				| 'Sales return order 106 dated 25.03.2021 12:10:03' | 'Sales return order 106 dated 25.03.2021 12:10:03' | ''         | ''               | ''         | ''         |
 				| 'Dress, XS/Blue'                                   | 'No'                                               | '12,000'   | 'pcs'            | '520,00'   | 'TRY'      |
 				| 'Boots, 37/18SD'                                   | 'No'                                               | '11,000'   | 'Boots (12 pcs)' | '8 400,00' | 'TRY'      |
-			Then the number of "BasisesTree" table lines is "равно" "6"
+			// Then the number of "BasisesTree" table lines is "равно" "6"
 			And I go to line in "BasisesTree" table
 				| 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
 				| '12,000'    | 'Dress, XS/Blue'   | 'pcs'  | 'No'  |

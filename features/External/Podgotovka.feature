@@ -1128,7 +1128,7 @@ Scenario: create PurchaseReturn022314
 		| 'Number' |
 		| '$$NumberPurchaseInvoice018006$$'      |
 	And I select current line in "List" table
-	And I click the button named "FormDocumentPurchaseReturnGeneratePurchaseReturn"
+	And I click the button named "FormDocumentPurchaseReturnGenerate"
 	* Check filling details
 		Then the form attribute named "Partner" became equal to "Ferron BP"
 		Then the form attribute named "Agreement" became equal to "Vendor Ferron, USD"

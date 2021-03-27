@@ -5739,13 +5739,13 @@ Scenario: _0154151 check function DontCalculateRow in the Purchase invoice
 			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "4 744,00"
 			And I click the button named "FormPost"
 		* Check filling the recalculation check box when creating Purchase return / Purchase return order bases on Purchase invoice
-			And I click "Purchase return order" button
+			And I click the button named "FormDocumentPurchaseReturnOrderGenerate"
 			And "ItemList" table contains lines
 			| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' |
 			| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'Yes'                | '152,00'     | '800,00'     |
 			| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '419,49'     | '2 330,51'   |
 			And I close current window
-			And I click "Purchase return" button
+			And I click the button named "FormDocumentPurchaseReturnGenerate"
 			And "ItemList" table contains lines
 			| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' |
 			| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'Yes'                | '152,00'     | '800,00'     |
@@ -6085,7 +6085,7 @@ Scenario: _0154153 check function DontCalculateRow in the Purchase return order
 			And I select "Approved" exact value from "Status" drop-down list				
 			And I click the button named "FormPost"
 	* Check filling the recalculation check box when creating Purchase return bases on Purchase return order
-		And I click "Purchase return" button
+		And I click the button named "FormDocumentPurchaseReturnGenerate"
 		And "ItemList" table contains lines
 		| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' |
 		| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'Yes'                | '152,00'     | '800,00'     |
@@ -6468,13 +6468,13 @@ Scenario: _0154155 check function DontCalculateRow in the Sales invoice
 			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "4 691,80"
 			And I click the button named "FormPost"
 	* Check filling the recalculation check box when creating Sales return / Sales return order bases on Sales invoice
-		And I click "Sales return" button
+		And I click the button named "FormDocumentSalesReturnGenerate"
 		And "ItemList" table contains lines
 			| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
 			| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'Yes'              	| '129,00'     | '671,00'     | '800,50'       |
 			| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '522,50'     | '2 750,00'   | '3 272,50'     |
 		And I close current window
-		And I click "Sales return order" button
+		And I click the button named "FormDocumentSalesReturnOrderGenerate"
 		And "ItemList" table contains lines
 			| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
 			| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'Yes'              	| '129,00'     | '671,00'     | '800,50'       |
@@ -6821,7 +6821,7 @@ Scenario: _0154157 check function DontCalculateRow in the Sales return order
 			And I select "Approved" exact value from "Status" drop-down list
 			And I click the button named "FormPost"
 	* Check filling the recalculation check box when creating Sales return on Sales return order
-		And I click "Sales return" button
+		And I click the button named "FormDocumentSalesReturnGenerate"
 		And "ItemList" table contains lines
 			| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
 			| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'Yes'                | '152,00'     | '800,00'     | '954,00'       |

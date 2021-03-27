@@ -100,15 +100,15 @@ Scenario: _154505 message when trying to create Sales returm order based on Sale
 			And I save the value of "Number" field as "$$NumberSalesInvoice154501$$"
 			And I save the window as "$$SalesInvoice154501$$"
 	* Create Sales return order based on Sales invoice
-			And I click "Sales return order" button
+			And I click the button named "FormDocumentSalesReturnOrderGenerate"
 			And I select "Approved" exact value from "Status" drop-down list
 			And I click the button named "FormPostAndClose"
 	* Check the message output when creating Sales return order or Sales return again
-			And I click "Sales return order" button
+			And I click the button named "FormDocumentSalesReturnOrderGenerate"
 			Then warning message containing text 'There are no products to return in the "Sales invoice" document. All products are already returned.' appears
 			And I click "OK" button
 			Then "Sales invoice * dated *" window is opened
-			And I click "Sales return" button
+			And I click the button named "FormDocumentSalesReturnGenerate"
 			Then warning message containing text 'There are no products to return in the "Sales invoice" document. All products are already returned.' appears
 			And I click "OK" button
 			And I close all client application windows
@@ -173,14 +173,14 @@ Scenario: _154507 message when trying to create Purchase return order and Purcha
 			And I save the value of "Number" field as "$$NumberPurchaseInvoice154502$$"
 			And I save the window as "$$PurchaseInvoice154502$$"
 	* Create Purchase return based on Purchase invoice
-			And I click "Purchase return" button
+			And I click the button named "FormDocumentPurchaseReturnGenerate"
 			And I click the button named "FormPostAndClose"
 	* Check the message output when Purchase return or Purchase return order is created again
-			And I click "Purchase return order" button
+			And I click the button named "FormDocumentPurchaseReturnOrderGenerate"
 			Then warning message containing text 'There are no products to return in the "Purchase invoice" document. All products are already returned.' appears
 			And I click "OK" button
 			Then "Purchase invoice * dated *" window is opened
-			And I click "Purchase return" button
+			And I click the button named "FormDocumentPurchaseReturnGenerate"
 			Then warning message containing text 'There are no products to return in the "Purchase invoice" document. All products are already returned.' appears
 			And I click "OK" button
 			And I close all client application windows

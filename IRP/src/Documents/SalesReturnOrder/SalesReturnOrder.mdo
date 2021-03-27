@@ -112,6 +112,7 @@
   <registerRecords>AccumulationRegister.OrderBalance</registerRecords>
   <registerRecords>AccumulationRegister.R2010T_SalesOrders</registerRecords>
   <registerRecords>AccumulationRegister.R2012B_SalesOrdersInvoiceClosing</registerRecords>
+  <registerRecords>AccumulationRegister.T10000T_RowIDMovements</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -1035,11 +1036,11 @@
       <dataHistory>Use</dataHistory>
     </attributes>
   </tabularSections>
-  <commands uuid="c60c9102-88f8-489a-a9a5-f3f3dd8f0f76">
-    <name>GenerateSalesReturnOrder</name>
+  <commands uuid="b66ca40f-2224-4906-87d7-33c06fde52b5">
+    <name>Generate</name>
     <synonym>
       <key>en</key>
-      <value>Sales return order</value>
+      <value>(new) Sales return order</value>
     </synonym>
     <group>FormCommandBarCreateBasedOn</group>
     <commandParameterType>
@@ -1047,6 +1048,5 @@
     </commandParameterType>
     <parameterUseMode>Multiple</parameterUseMode>
     <representation>Auto</representation>
-    <shortcut></shortcut>
   </commands>
 </mdclass:Document>

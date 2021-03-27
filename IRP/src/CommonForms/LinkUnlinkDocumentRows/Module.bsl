@@ -3,8 +3,12 @@
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	ThisObject.MainFilter = Parameters.Filter;
 	
+	ResultsTableTmp = ThisObject.ResultsTable.Unload().CopyColumns();
 	For Each RowIdInfo In Parameters.TablesInfo.RowIDInfoRows Do
-		NewRow = ThisObject.ResultsTable.Add();
+		If Not ValueIsFilled(RowIdInfo.CurrentStep) Then
+			Continue;
+		EndIf;
+		NewRow = ResultsTableTmp.Add();
 		FillPropertyValues(NewRow, RowIdInfo);
 		For Each RowItemList In Parameters.TablesInfo.ItemListRows Do
 			If RowIdInfo.Key = RowItemList.Key Then
@@ -14,6 +18,12 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 			EndIf;
 		EndDo;
 	EndDo;
+	ArrayOfColumns = New Array();
+	For Each Column In ResultsTableTmp.Columns Do
+		ArrayOfColumns.Add(Column.Name);
+	EndDo;
+	ResultsTableTmp.GroupBy(StrConcat(ArrayOfColumns, ","));
+	ThisObject.ResultsTable.Load(ResultsTableTmp);
 	
 	FillItemListRows(Parameters.TablesInfo.ItemListRows);
 	FillResultsTree(Parameters.SelectedRowInfo.SelectedRow);

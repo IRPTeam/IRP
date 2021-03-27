@@ -128,6 +128,7 @@
   <registerRecords>AccumulationRegister.R5010B_ReconciliationStatement</registerRecords>
   <registerRecords>AccumulationRegister.R4032B_GoodsInTransitOutgoing</registerRecords>
   <registerRecords>AccumulationRegister.T10000B_RowIDMovements</registerRecords>
+  <registerRecords>AccumulationRegister.T10000T_RowIDMovements</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -1223,22 +1224,6 @@
       <dataHistory>Use</dataHistory>
     </attributes>
   </tabularSections>
-  <commands uuid="5d7fe07b-4c48-4b3f-88e6-db41ed5c7076">
-    <name>GeneratePurchaseReturn</name>
-    <synonym>
-      <key>en</key>
-      <value>Purchase return</value>
-    </synonym>
-    <group>FormCommandBarCreateBasedOn</group>
-    <commandParameterType>
-      <types>DocumentRef.PurchaseInvoice</types>
-      <types>DocumentRef.PurchaseReturnOrder</types>
-      <types>DocumentRef.ShipmentConfirmation</types>
-    </commandParameterType>
-    <parameterUseMode>Multiple</parameterUseMode>
-    <representation>Auto</representation>
-    <shortcut></shortcut>
-  </commands>
   <commands uuid="d53c1c62-7a81-4f9c-ab47-6e66a1567e9b">
     <name>Generate</name>
     <synonym>
@@ -1249,6 +1234,7 @@
     <commandParameterType>
       <types>DocumentRef.ShipmentConfirmation</types>
       <types>DocumentRef.PurchaseReturnOrder</types>
+      <types>DocumentRef.PurchaseInvoice</types>
     </commandParameterType>
     <parameterUseMode>Multiple</parameterUseMode>
     <representation>Auto</representation>

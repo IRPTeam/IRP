@@ -16163,20 +16163,6 @@
 		</right>
 	</object>
 	<object>
-		<name>Document.PurchaseReturn.Command.GeneratePurchaseReturn</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.PurchaseReturnOrder.Command.GeneratePurchaseReturnOrder</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
 		<name>Document.RetailReturnReceipt.Command.GenerateSalesReturn</name>
 		<right>
 			<name>View</name>
@@ -16185,20 +16171,6 @@
 	</object>
 	<object>
 		<name>Document.SalesOrderClosing.Command.GenerateSalesOrderClosing</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.SalesReturn.Command.GenerateSalesReturn</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.SalesReturnOrder.Command.GenerateSalesReturnOrder</name>
 		<right>
 			<name>View</name>
 			<value>true</value>

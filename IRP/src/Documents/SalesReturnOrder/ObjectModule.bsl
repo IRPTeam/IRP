@@ -30,30 +30,8 @@ Procedure Filling(FillingData, FillingText, StandardProcessing)
 	If TypeOf(FillingData) = Type("Structure") Then
 		FillPropertyValues(ThisObject, FillingData, RowIDInfoServer.GetSeperatorColumns(ThisObject.Metadata()));
 		RowIDInfoServer.AddLinkedDocumentRows(ThisObject, FillingData);
-		
-//		If FillingData.Property("BasedOn") And FillingData.BasedOn = "SalesInvoice" Then
-//			Filling_BasedOnSalesInvoice(FillingData);
-//		EndIf;
 	EndIf;
 EndProcedure
-
-//Procedure Filling_BasedOnSalesInvoice(FillingData)
-//	FillPropertyValues(ThisObject, FillingData,
-//		"Company, Partner, LegalName, Agreement, Currency, PriceIncludeTax, ManagerSegment");
-//	
-//	For Each Row In FillingData.ItemList Do
-//		NewRow = ThisObject.ItemList.Add();
-//		FillPropertyValues(NewRow, Row);
-//	EndDo;
-//	For Each Row In FillingData.TaxList Do
-//		NewRow = ThisObject.TaxList.Add();
-//		FillPropertyValues(NewRow, Row);
-//	EndDo;
-//	For Each Row In FillingData.SpecialOffers Do
-//		NewRow = ThisObject.SpecialOffers.Add();
-//		FillPropertyValues(NewRow, Row);
-//	EndDo;
-//EndProcedure
 
 Procedure OnCopy(CopiedObject)
 	

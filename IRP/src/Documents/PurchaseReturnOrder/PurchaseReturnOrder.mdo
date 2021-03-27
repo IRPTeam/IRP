@@ -112,6 +112,7 @@
   <registerRecords>AccumulationRegister.OrderBalance</registerRecords>
   <registerRecords>AccumulationRegister.R1010T_PurchaseOrders</registerRecords>
   <registerRecords>AccumulationRegister.R1012B_PurchaseOrdersInvoiceClosing</registerRecords>
+  <registerRecords>AccumulationRegister.T10000T_RowIDMovements</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -1031,11 +1032,11 @@
       <dataHistory>Use</dataHistory>
     </attributes>
   </tabularSections>
-  <commands uuid="0908249f-b99d-4f56-9d1a-75ec85b97668">
-    <name>GeneratePurchaseReturnOrder</name>
+  <commands uuid="896e1831-ff54-4fc0-89fe-7b474a6ad43b">
+    <name>Generate</name>
     <synonym>
       <key>en</key>
-      <value>Purchase return order</value>
+      <value>(new) Purchase return order</value>
     </synonym>
     <group>FormCommandBarCreateBasedOn</group>
     <commandParameterType>
@@ -1043,6 +1044,5 @@
     </commandParameterType>
     <parameterUseMode>Multiple</parameterUseMode>
     <representation>Auto</representation>
-    <shortcut></shortcut>
   </commands>
 </mdclass:Document>

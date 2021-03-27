@@ -10,7 +10,95 @@ Procedure Posting_RowID(Source, Cancel, PostingMode) Export
 			Return;
 		EndIf;
 	EndIf;
+
+	Posting_T10000B_RowIDMovements(Source, Cancel, PostingMode);
 	
+	If Is(Source).SI Or Is(Source).PI Then
+		Posting_T10000T_RowIDMovements_Invoice(Source, Cancel, PostingMode);
+	EndIf;
+
+	If Is(Source).SR Or Is(Source).SRO 
+		Or Is(Source).PR Or Is(Source).PRO Then
+		Posting_T10000T_RowIDMovements_Return(Source, Cancel, PostingMode);
+	EndIf;
+EndProcedure
+
+Procedure Posting_T10000T_RowIDMovements_Return(Source, Cancel, PostingMode)
+	Query = New Query();
+	Query.Text =
+	"SELECT
+	|	RowIDInfo.Ref.Date AS Period,
+	|	RowIDInfo.Ref AS Recorder,
+	|	RowIDInfo.RowID,
+	|	RowIDInfo.CurrentStep AS Step,
+	|	- RowIDInfo.Quantity AS Quantity,
+	|	RowIDInfo.Basis AS Basis,
+	|	RowIDInfo.RowRef
+	|FROM
+	|	Document." + Source.Metadata().Name + ".RowIDInfo AS RowIDInfo
+	|WHERE
+	|	RowIDInfo.Ref = &Ref
+	|	AND RowIDInfo.CurrentStep = &CurrentStep
+	|GROUP BY
+	|	RowIDInfo.Ref.Date,
+	|	RowIDInfo.Ref,
+	|	RowIDInfo.RowID,
+	|	RowIDInfo.CurrentStep,
+	|	RowIDInfo.Quantity,
+	|	RowIDInfo.Basis,
+	|	RowIDInfo.RowRef";
+	Query.SetParameter("Ref", Source.Ref);
+	
+	CurrentStep = Undefined;
+	If Is(Source).SR Or Is(Source).SRO Then
+		CurrentStep = Catalogs.MovementRules.SRO_SR;
+	ElsIf Is(Source).PR Or Is(Source).PRO Then
+		CurrentStep = Catalogs.MovementRules.PRO_PR;
+	EndIf;
+	
+	Query.SetParameter("CurrentStep", CurrentStep);
+	
+	QueryResult = Query.Execute().Unload();
+	Source.RegisterRecords.T10000T_RowIDMovements.Load(QueryResult);
+EndProcedure
+
+Procedure Posting_T10000T_RowIDMovements_Invoice(Source, Cancel, PostingMode)
+	Query = New Query();
+	Query.Text =
+	"SELECT
+	|	RowIDInfo.Ref.Date AS Period,
+	|	RowIDInfo.Ref AS Recorder,
+	|	RowIDInfo.RowID,
+	|	&NextStep AS Step,
+	|	RowIDInfo.Quantity,
+	|	RowIDInfo.Ref AS Basis,
+	|	RowIDInfo.RowRef
+	|FROM
+	|	Document." + Source.Metadata().Name + ".RowIDInfo AS RowIDInfo
+	|WHERE
+	|	RowIDInfo.Ref = &Ref
+	|GROUP BY
+	|	RowIDInfo.Ref.Date,
+	|	RowIDInfo.Ref,
+	|	RowIDInfo.RowID,
+	|	RowIDInfo.Quantity,
+	|	RowIDInfo.RowRef";
+	Query.SetParameter("Ref", Source.Ref);
+	
+	NextStep = Undefined;
+	If Is(Source).SI Then
+		NextStep = Catalogs.MovementRules.SRO_SR;
+	ElsIf Is(Source).PI Then
+		NextStep = Catalogs.MovementRules.PRO_PR;
+	EndIf;
+	
+	Query.SetParameter("NextStep", NextStep);
+	
+	QueryResult = Query.Execute().Unload();
+	Source.RegisterRecords.T10000T_RowIDMovements.Load(QueryResult);
+EndProcedure
+
+Procedure Posting_T10000B_RowIDMovements(Source, Cancel, PostingMode)	
 	Query = New Query;
 	Query.Text =
 		"SELECT
@@ -2945,10 +3033,8 @@ Function GetBasisesFor_PR(FilterValues)
 	StepArray.Add(Catalogs.MovementRules.PRO_PR);
 	FilterSets = GetAvailableFilterSets();
 	FilterSets.SC_ForPR = True;
-	
-	// ???
-	//FilterSets.PI_ForPR = True;
 	FilterSets.PRO_ForPR = True;
+	FilterSets.PI_ForPR_ForPRO = True;
 	
 	Return GetBasisesTable(StepArray, FilterValues, FilterSets);
 EndFunction
@@ -2958,9 +3044,7 @@ Function GetBasisesFor_PRO(FilterValues)
 	StepArray.Add(Catalogs.MovementRules.PRO);
 	StepArray.Add(Catalogs.MovementRules.PRO_PR);
 	FilterSets = GetAvailableFilterSets();
-	
-	// ???
-	//FilterSets.PI_ForPRO = True;
+	FilterSets.PI_ForPR_ForPRO = True;
 	
 	Return GetBasisesTable(StepArray, FilterValues, FilterSets);
 EndFunction
@@ -2972,10 +3056,8 @@ Function GetBasisesFor_SR(FilterValues)
 	
 	FilterSets = GetAvailableFilterSets();
 	FilterSets.GR_ForSR = True;
-	
-	// ???
-	//FilterSets.SI_ForSR = True;
 	FilterSets.SRO_ForSR = True;
+	FilterSets.SI_ForSR_ForSRO = True;
 	
 	Return GetBasisesTable(StepArray, FilterValues, FilterSets);
 EndFunction
@@ -2985,9 +3067,7 @@ Function GetBasisesFor_SRO(FilterValues)
 	StepArray.Add(Catalogs.MovementRules.SRO);
 	StepArray.Add(Catalogs.MovementRules.SRO_SR);
 	FilterSets = GetAvailableFilterSets();
-	
-	// ???
-	//FilterSets.SI_ForSRO = True;
+	FilterSets.SI_ForSR_ForSRO = True;
 	
 	Return GetBasisesTable(StepArray, FilterValues, FilterSets);
 EndFunction
@@ -3028,6 +3108,8 @@ Function GetAvailableFilterSets()
 	Result.Insert("SR_ForGR", False);
 	Result.Insert("PRO_ForPR", False);
 	Result.Insert("SRO_ForSR", False);
+	Result.Insert("SI_ForSR_ForSRO", False);
+	Result.Insert("PI_ForPR_ForPRO", False);
 	
 	Return Result;
 EndFunction
@@ -3144,6 +3226,15 @@ Procedure EnableRequiredFilterSets(FilterSets, Query, QueryArray)
 		QueryArray.Add(GetDataByFilterSet_SRO_ForSR());
 	EndIf;
 	
+	If FilterSets.SI_ForSR_ForSRO Then
+		ApplyFilterSet_SI_ForSR_ForSRO(Query);
+		QueryArray.Add(GetDataByFilterSet_SI_ForSR_ForSRO());
+	EndIf;
+	
+	If FilterSets.PI_ForPR_ForPRO Then
+		ApplyFilterSet_PI_ForPR_ForPRO(Query);
+		QueryArray.Add(GetDataByFilterSet_PI_ForPR_ForPRO());
+	EndIf;
 EndProcedure
 
 #Region ApplyFilterSets
@@ -3680,7 +3771,7 @@ Procedure ApplyFilterSet_PI_ForGR(Query)
 	|			END
 	|			AND CASE
 	|				WHEN &Filter_TransactionType
-	|					THEN RowRef.TransactionTypeSC = &TransactionType
+	|					THEN RowRef.TransactionTypeGR = &TransactionType
 	|				ELSE FALSE
 	|			END
 	|			AND CASE
@@ -4227,6 +4318,132 @@ Procedure ApplyFilterSet_SRO_ForSR(Query)
 	|					THEN RowRef.Store = &Store
 	|				ELSE TRUE
 	|			END))) AS RowIDMovements";
+	Query.Execute();
+EndProcedure	
+
+Procedure ApplyFilterSet_SI_ForSR_ForSRO(Query)
+	Query.Text = 
+	"SELECT
+	|	RowIDMovements.RowID,
+	|	RowIDMovements.Step,
+	|	RowIDMovements.Basis,
+	|	RowIDMovements.RowRef,
+	|	RowIDMovements.QuantityTurnover AS Quantity
+	|INTO RowIDMovements_SI_ForSR_ForSRO
+	|FROM
+	|	AccumulationRegister.T10000T_RowIDMovements.Turnovers(, &Period,, Step IN (&StepArray)
+	|	AND (Basis IN (&Basises)
+	|	OR RowRef IN
+	|		(SELECT
+	|			RowRef.Ref AS Ref
+	|		FROM
+	|			Catalog.RowIDs AS RowRef
+	|		WHERE
+	|			CASE
+	|				WHEN &Filter_Company
+	|					THEN RowRef.Company = &Company
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Partner
+	|					THEN RowRef.Partner = &Partner
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_LegalName
+	|					THEN RowRef.LegalName = &LegalName
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Agreement
+	|					THEN RowRef.Agreement = &Agreement
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Currency
+	|					THEN RowRef.Currency = &Currency
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_PriceIncludeTax
+	|					THEN RowRef.PriceIncludeTax = &PriceIncludeTax
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_ItemKey
+	|					THEN RowRef.ItemKey = &ItemKey
+	|				ELSE TRUE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Store
+	|					THEN RowRef.Store = &Store
+	|				ELSE TRUE
+	|			END))) AS RowIDMovements
+	|WHERE
+	|	RowIDMovements.QuantityTurnover > 0";
+	Query.Execute();
+EndProcedure	
+
+Procedure ApplyFilterSet_PI_ForPR_ForPRO(Query)
+	Query.Text = 
+	"SELECT
+	|	RowIDMovements.RowID,
+	|	RowIDMovements.Step,
+	|	RowIDMovements.Basis,
+	|	RowIDMovements.RowRef,
+	|	RowIDMovements.QuantityTurnover AS Quantity
+	|INTO RowIDMovements_PI_ForPR_ForPRO
+	|FROM
+	|	AccumulationRegister.T10000T_RowIDMovements.Turnovers(, &Period,, Step IN (&StepArray)
+	|	AND (Basis IN (&Basises)
+	|	OR RowRef IN
+	|		(SELECT
+	|			RowRef.Ref AS Ref
+	|		FROM
+	|			Catalog.RowIDs AS RowRef
+	|		WHERE
+	|			CASE
+	|				WHEN &Filter_Company
+	|					THEN RowRef.Company = &Company
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Partner
+	|					THEN RowRef.Partner = &Partner
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_LegalName
+	|					THEN RowRef.LegalName = &LegalName
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Agreement
+	|					THEN RowRef.Agreement = &Agreement
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Currency
+	|					THEN RowRef.Currency = &Currency
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_PriceIncludeTax
+	|					THEN RowRef.PriceIncludeTax = &PriceIncludeTax
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_ItemKey
+	|					THEN RowRef.ItemKey = &ItemKey
+	|				ELSE TRUE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Store
+	|					THEN RowRef.Store = &Store
+	|				ELSE TRUE
+	|			END))) AS RowIDMovements
+	|WHERE
+	|	RowIDMovements.QuantityTurnover > 0";
 	Query.Execute();
 EndProcedure	
 
@@ -4866,6 +5083,64 @@ Function GetDataByFilterSet_SRO_ForSR()
 	|		ON Doc.Ref = RowIDInfo.Ref
 	|		AND Doc.Key = RowIDInfo.Key
 	|		INNER JOIN RowIDMovements_SRO_ForSR AS RowIDMovements
+	|		ON RowIDMovements.RowID = RowIDInfo.RowID
+	|		AND RowIDMovements.Basis = RowIDInfo.Ref";
+EndFunction
+
+Function GetDataByFilterSet_SI_ForSR_ForSRO()
+	Return
+	"SELECT 
+	|	Doc.ItemKey,
+	|	Doc.ItemKey.Item,
+	|	Doc.Store,
+	|	Doc.Ref,
+	|	Doc.Key,
+	|	Doc.Key,
+	|	CASE
+	|		WHEN Doc.ItemKey.Unit.Ref IS NULL
+	|			THEN Doc.ItemKey.Item.Unit
+	|		ELSE Doc.ItemKey.Unit
+	|	END AS BasisUnit,
+	|	RowIDMovements.Quantity,
+	|	RowIDMovements.RowRef,
+	|	RowIDMovements.RowID,
+	|	RowIDMovements.Step,
+	|	Doc.LineNumber
+	|FROM
+	|	Document.SalesInvoice.ItemList AS Doc
+	|		INNER JOIN Document.SalesInvoice.RowIDInfo AS RowIDInfo
+	|		ON Doc.Ref = RowIDInfo.Ref
+	|		AND Doc.Key = RowIDInfo.Key
+	|		INNER JOIN RowIDMovements_SI_ForSR_ForSRO AS RowIDMovements
+	|		ON RowIDMovements.RowID = RowIDInfo.RowID
+	|		AND RowIDMovements.Basis = RowIDInfo.Ref";
+EndFunction
+
+Function GetDataByFilterSet_PI_ForPR_ForPRO()
+	Return
+	"SELECT 
+	|	Doc.ItemKey,
+	|	Doc.ItemKey.Item,
+	|	Doc.Store,
+	|	Doc.Ref,
+	|	Doc.Key,
+	|	Doc.Key,
+	|	CASE
+	|		WHEN Doc.ItemKey.Unit.Ref IS NULL
+	|			THEN Doc.ItemKey.Item.Unit
+	|		ELSE Doc.ItemKey.Unit
+	|	END AS BasisUnit,
+	|	RowIDMovements.Quantity,
+	|	RowIDMovements.RowRef,
+	|	RowIDMovements.RowID,
+	|	RowIDMovements.Step,
+	|	Doc.LineNumber
+	|FROM
+	|	Document.PurchaseInvoice.ItemList AS Doc
+	|		INNER JOIN Document.PurchaseInvoice.RowIDInfo AS RowIDInfo
+	|		ON Doc.Ref = RowIDInfo.Ref
+	|		AND Doc.Key = RowIDInfo.Key
+	|		INNER JOIN RowIDMovements_PI_ForPR_ForPRO AS RowIDMovements
 	|		ON RowIDMovements.RowID = RowIDInfo.RowID
 	|		AND RowIDMovements.Basis = RowIDInfo.Ref";
 EndFunction

@@ -772,6 +772,7 @@
   <accumulationRegisters>AccumulationRegister.ShipmentOrders</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.TaxesTurnovers</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.T10000B_RowIDMovements</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.T10000T_RowIDMovements</accumulationRegisters>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.AddAttributeAndProperty</chartsOfCharacteristicTypes>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.CustomUserSettings</chartsOfCharacteristicTypes>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.IDInfoTypes</chartsOfCharacteristicTypes>

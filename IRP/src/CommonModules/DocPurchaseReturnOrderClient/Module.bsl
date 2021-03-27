@@ -81,6 +81,7 @@ Procedure ItemListOnChange(Object, Form, Item = Undefined, CalculationSettings =
 		EndIf;
 	EndDo;
 	CurrenciesClient.CalculateAmount(Object, Form);
+	RowIDInfoClient.UpdateQuantity(Object, Form);
 EndProcedure
 
 Procedure ItemListOnActivateRow(Object, Form, Item) Export

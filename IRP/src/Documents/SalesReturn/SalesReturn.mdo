@@ -129,6 +129,7 @@
   <registerRecords>AccumulationRegister.R2021B_CustomersTransactions</registerRecords>
   <registerRecords>AccumulationRegister.R5010B_ReconciliationStatement</registerRecords>
   <registerRecords>AccumulationRegister.T10000B_RowIDMovements</registerRecords>
+  <registerRecords>AccumulationRegister.T10000T_RowIDMovements</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -1210,22 +1211,6 @@
       <dataHistory>Use</dataHistory>
     </attributes>
   </tabularSections>
-  <commands uuid="cd8f3107-f812-4508-aad4-160931a20bba">
-    <name>GenerateSalesReturn</name>
-    <synonym>
-      <key>en</key>
-      <value>Sales return</value>
-    </synonym>
-    <group>FormCommandBarCreateBasedOn</group>
-    <commandParameterType>
-      <types>DocumentRef.SalesReturnOrder</types>
-      <types>DocumentRef.SalesInvoice</types>
-      <types>DocumentRef.GoodsReceipt</types>
-    </commandParameterType>
-    <parameterUseMode>Multiple</parameterUseMode>
-    <representation>Auto</representation>
-    <shortcut></shortcut>
-  </commands>
   <commands uuid="06f3887f-381e-4674-9946-3a40bff7527b">
     <name>Generate</name>
     <synonym>
@@ -1236,6 +1221,7 @@
     <commandParameterType>
       <types>DocumentRef.GoodsReceipt</types>
       <types>DocumentRef.SalesReturnOrder</types>
+      <types>DocumentRef.SalesInvoice</types>
     </commandParameterType>
     <parameterUseMode>Multiple</parameterUseMode>
     <representation>Auto</representation>

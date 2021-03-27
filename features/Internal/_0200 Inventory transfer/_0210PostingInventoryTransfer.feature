@@ -421,12 +421,12 @@ Scenario: _02104809 create IT using form link/unlink
 		And I click the button named "AddBasisDocuments"
 		And I go to line in "BasisesTree" table
 			| 'Currency' | 'Price' | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
-			| ''         | ''      | '5,000'    | 'Shirt, 38/Black'  | 'pcs'  | 'No'  |
+			| ''         | ''      | '20,000'   | 'Dress, L/Green'   | 'pcs'  | 'No'  |
 		And I change "Use" checkbox in "BasisesTree" table
 		And I finish line editing in "BasisesTree" table
 		And I go to line in "BasisesTree" table
 			| 'Currency' | 'Price' | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
-			| ''         | ''      | '20,000'   | 'Dress, L/Green'   | 'pcs'  | 'No'  |
+			| ''         | ''      | '5,000'    | 'Shirt, 38/Black'  | 'pcs'  | 'No'  |
 		And I change "Use" checkbox in "BasisesTree" table
 		And I finish line editing in "BasisesTree" table
 		And I go to line in "BasisesTree" table

@@ -53,6 +53,7 @@ Scenario: _028000 preparation (Sales return order)
 				| "TaxCalculateVAT_TR" |
 			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
+		When Create catalog Partners objects
 		When Create catalog BusinessUnits objects
 		When Create catalog ExpenseAndRevenueTypes objects
 	* Tax settings
@@ -61,7 +62,11 @@ Scenario: _028000 preparation (Sales return order)
 	And I execute 1C:Enterprise script at server
 		| "Documents.SalesOrder.FindByNumber(32).GetObject().Write(DocumentWriteMode.Posting);" |
 		| "Documents.SalesInvoice.FindByNumber(32).GetObject().Write(DocumentWriteMode.Posting);" |
-	
+	When Create document SalesInvoice objects (linked)
+	And I execute 1C:Enterprise script at server
+		| "Documents.SalesInvoice.FindByNumber(101).GetObject().Write(DocumentWriteMode.Posting);" |
+		| "Documents.SalesInvoice.FindByNumber(102).GetObject().Write(DocumentWriteMode.Posting);" |
+		| "Documents.SalesInvoice.FindByNumber(103).GetObject().Write(DocumentWriteMode.Posting);" |
 
 Scenario: _028001 create document Sales return order based on SI (button Create)
 	* Create Sales return order
@@ -396,6 +401,139 @@ Scenario: _028012 check totals in the document Sales return order
 		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
 
 
+
+Scenario: _028013 create SRO using form link/unlink
+	* Open SRO form
+		Given I open hyperlink "e1cib/list/Document.SalesReturnOrder"
+		And I click the button named "FormCreate"
+	* Filling in the details
+		And I click Select button of "Partner" field
+		And I click "List" button
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Crystal'     |
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
+			| 'Description'       |
+			| 'Company Adel' |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description'           |
+			| 'Basic Partner terms, TRY' |
+		And I select current line in "List" table
+		And I click Select button of "Store" field
+		And I go to line in "List" table
+			| 'Description'           |
+			| 'Store 01' |
+		And I select current line in "List" table
+	* Select items from basis documents
+		And I click the button named "ItemListAddBasisDocuments"
+		And I go to line in "BasisesTree" table
+			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
+			| 'TRY'      | '350,00' | '2,000'    | 'Shirt, 38/Black'  | 'pcs'  | 'No'  |
+		And I change "Use" checkbox in "BasisesTree" table
+		And I finish line editing in "BasisesTree" table
+		And I go to line in "BasisesTree" table
+			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
+			| 'TRY'      | '520,00' | '4,000'    | 'Dress, M/White'   | 'pcs'  | 'No'  |
+		And I change "Use" checkbox in "BasisesTree" table
+		And I finish line editing in "BasisesTree" table
+		And I go to line in "BasisesTree" table
+			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
+			| 'TRY'      | '700,00' | '1,000'    | 'Boots, 37/18SD'   | 'pcs'  | 'No'  |
+		And I change "Use" checkbox in "BasisesTree" table
+		And I finish line editing in "BasisesTree" table
+		And I click "Ok" button
+		And I click "Show row key" button
+	* Check RowIDInfo
+		And "RowIDInfo" table contains lines
+		| '#' | 'Basis'                                       | 'Next step' | 'Q'     | 'Current step' |
+		| '1' | 'Sales invoice 101 dated 05.03.2021 12:56:38' | ''          | '2,000' | 'SRO&SR'       |
+		| '2' | 'Sales invoice 102 dated 05.03.2021 12:57:59' | ''          | '1,000' | 'SRO&SR'       |
+		| '3' | 'Sales invoice 101 dated 05.03.2021 12:56:38' | ''          | '4,000' | 'SRO&SR'       |
+		Then the number of "RowIDInfo" table lines is "равно" "3"
+	* Unlink line
+		And I click the button named "ItemListLinkUnlinkBasisDocuments"
+		Then "Link / unlink document row" window is opened
+		And I go to line in "ItemListRows" table
+			| '#' | 'Quantity' | 'Row presentation' | 'Store'    | 'Unit' |
+			| '1' | '2,000'    | 'Shirt, 38/Black'   | 'Store 01' | 'pcs'  |
+		And I go to line in "ResultsTree" table
+			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' |
+			| 'TRY'      | '350,00' | '2,000'    | 'Shirt, 38/Black'    | 'pcs'  |
+		And I click "Unlink" button
+		And I click "Ok" button
+		And I click "Save" button	
+		And "RowIDInfo" table contains lines
+			| '#' | 'Basis'                                       | 'Next step' | 'Q'     | 'Current step' |
+			| '1' | 'Sales invoice 102 dated 05.03.2021 12:57:59' | 'SR'        | '1,000' | 'SRO&SR'       |
+			| '2' | 'Sales invoice 101 dated 05.03.2021 12:56:38' | 'SR'        | '4,000' | 'SRO&SR'       |
+			| '3' | ''                                            | 'SR'        | '2,000' | ''             |
+		Then the number of "RowIDInfo" table lines is "равно" "3"
+		And "ItemList" table contains lines
+			| 'Item'  | 'Item key' | 'Sales invoice'                               |
+			| 'Shirt' | '38/Black' | ''                                            |
+			| 'Dress' | 'M/White'  | 'Sales invoice 101 dated 05.03.2021 12:56:38' |
+			| 'Boots' | '37/18SD'  | 'Sales invoice 102 dated 05.03.2021 12:57:59' |
+	* Link line
+		And I click the button named "ItemListLinkUnlinkBasisDocuments"
+		And I go to line in "ItemListRows" table
+			| '#' | 'Quantity' | 'Row presentation' | 'Store'    | 'Unit' |
+			| '1' | '2,000'    | 'Shirt, 38/Black'   | 'Store 01' | 'pcs'  |
+		And I activate field named "ItemListRowsRowPresentation" in "ItemListRows" table
+		And I go to line in "BasisesTree" table
+			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' |
+			| 'TRY'      | '350,00' | '2,000'    | 'Shirt, 38/Black'    | 'pcs'  |
+		And I click "Link" button
+		And I click "Ok" button
+		And "RowIDInfo" table contains lines
+			| '#' | 'Basis'                                       | 'Next step' | 'Q'     | 'Current step' |
+			| '1' | 'Sales invoice 102 dated 05.03.2021 12:57:59' | ''          | '1,000' | 'SRO&SR'       |
+			| '2' | 'Sales invoice 101 dated 05.03.2021 12:56:38' | ''          | '2,000' | 'SRO&SR'       |
+			| '3' | 'Sales invoice 101 dated 05.03.2021 12:56:38' | ''          | '4,000' | 'SRO&SR'       |
+		Then the number of "RowIDInfo" table lines is "равно" "3"
+		And "ItemList" table contains lines
+			| 'Item'  | 'Item key' | 'Sales invoice'                               |
+			| 'Shirt' | '38/Black' | 'Sales invoice 101 dated 05.03.2021 12:56:38' |
+			| 'Dress' | 'M/White'  | 'Sales invoice 101 dated 05.03.2021 12:56:38' |
+			| 'Boots' | '37/18SD'  | 'Sales invoice 102 dated 05.03.2021 12:57:59' |
+	* Delete string, add it again, change unit
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' |
+			| 'Dress' | 'M/White'  |
+		And in the table "ItemList" I click the button named "ItemListContextMenuDelete"
+		And I click the button named "ItemListAddBasisDocuments"
+		And I go to line in "BasisesTree" table
+			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
+			| 'TRY'      | '520,00' | '4,000'   | 'Dress, M/White'   | 'pcs'  | 'No'  |
+		And I change "Use" checkbox in "BasisesTree" table
+		And I finish line editing in "BasisesTree" table
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'  | 'Item key' | 'Sales invoice'                               |
+			| 'Shirt' | '38/Black' | 'Sales invoice 101 dated 05.03.2021 12:56:38' |
+			| 'Dress' | 'M/White'  | 'Sales invoice 101 dated 05.03.2021 12:56:38' |
+			| 'Boots' | '37/18SD'  | 'Sales invoice 102 dated 05.03.2021 12:57:59' |
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' | 'Q'      | 'Store'    |
+			| 'Dress' | 'M/White'  | '4,000' | 'Store 01' |
+		And I activate "Unit" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click choice button of "Unit" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'box Dress (8 pcs)' |
+		And I select current line in "List" table
+		And "RowIDInfo" table contains lines
+			| '#' | 'Basis'                                       | 'Next step' | 'Q'     | 'Current step' |
+			| '1' | 'Sales invoice 102 dated 05.03.2021 12:57:59' | ''          | '1,000' | 'SRO&SR'       |
+			| '2' | 'Sales invoice 101 dated 05.03.2021 12:56:38' | ''          | '2,000' | 'SRO&SR'       |
+			| '3' | 'Sales invoice 101 dated 05.03.2021 12:56:38' | ''          | '32,000' | 'SRO&SR'       |
+		Then the number of "RowIDInfo" table lines is "равно" "3"
+		And I click "Save" button
+		And I close all client application windows
 
 
 Scenario: _300510 check connection to SalesReturnOrder report "Related documents"

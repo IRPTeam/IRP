@@ -89,6 +89,7 @@ Scenario: _022001 create document Purchase return order, store use Shipment conf
 		| '$$NumberPurchaseInvoice018006$$'      |
 	And I select current line in "List" table
 	And I click the button named "FormDocumentPurchaseReturnOrderGenerate"
+	And I click "Ok" button
 	* Check filling in
 		Then the form attribute named "Partner" became equal to "Ferron BP"
 		Then the form attribute named "LegalName" became equal to "Company Ferron BP"

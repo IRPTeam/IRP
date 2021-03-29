@@ -239,7 +239,7 @@ Scenario: _028402 check link/unlink when add items to Sales return from GR
 		And I click Select button of "Partner term" field
 		And I go to line in "List" table
 			| 'Description' |
-			| 'Basic Partner terms, TRY'     |
+			| 'Basic Partner terms, without VAT'     |
 		And I select current line in "List" table
 		And I click Choice button of the field named "Store"
 		And I go to line in "List" table

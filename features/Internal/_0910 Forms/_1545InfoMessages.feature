@@ -58,135 +58,135 @@ Scenario: _154500 preparation (information messages)
 
 
 
-Scenario: _154505 message when trying to create Sales returm order based on Sales invoice when all products have already been returned
-	* Create Sales invoice
-		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
-		And I click the button named "FormCreate"
-		* Filling in customer info
-			And I click Select button of "Partner" field
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Kalipso'     |
-			And I select current line in "List" table
-			And I click Select button of "Partner term" field
-			And I select current line in "List" table
-		* Select Store
-			And I click Select button of "Store" field
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Store 01'  |
-			And I select current line in "List" table
-			And I click Select button of "Legal name" field
-			And I select current line in "List" table
-		* Filling in items tab
-			And in the table "ItemList" I click the button named "ItemListAdd"
-			And I click choice button of "Item" attribute in "ItemList" table
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Dress'  |
-			And I select current line in "List" table
-			And I activate "Item key" field in "ItemList" table
-			And I click choice button of "Item key" attribute in "ItemList" table
-			And I go to line in "List" table
-				| 'Item key' |
-				| 'L/Green'  |
-			And I select current line in "List" table
-			And I activate "Q" field in "ItemList" table
-			And I input "1,000" text in "Q" field of "ItemList" table
-			And I finish line editing in "ItemList" table
-			And I click the button named "FormPost"
-			And I delete "$$NumberSalesInvoice154501$$" variable
-			And I delete "$$SalesInvoice154501$$" variable
-			And I save the value of "Number" field as "$$NumberSalesInvoice154501$$"
-			And I save the window as "$$SalesInvoice154501$$"
-	* Create Sales return order based on Sales invoice
-			And I click the button named "FormDocumentSalesReturnOrderGenerate"
-			And I click "Ok" button	
-			And I select "Approved" exact value from "Status" drop-down list
-			And I click the button named "FormPostAndClose"
-	* Check the message output when creating Sales return order or Sales return again
-			And I click the button named "FormDocumentSalesReturnOrderGenerate"
-			And I click "Ok" button	
-			Then warning message containing text 'There are no products to return in the "Sales invoice" document. All products are already returned.' appears
-			And I click "OK" button
-			// Then "Sales invoice * dated *" window is opened
-			// And I click the button named "FormDocumentSalesReturnGenerate"
-			// And I click "Ok" button	
-			// Then warning message containing text 'There are no products to return in the "Sales invoice" document. All products are already returned.' appears
-			// And I click "OK" button
-			And I close all client application windows
+# Scenario: _154505 message when trying to create Sales returm order based on Sales invoice when all products have already been returned
+# 	* Create Sales invoice
+# 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+# 		And I click the button named "FormCreate"
+# 		* Filling in customer info
+# 			And I click Select button of "Partner" field
+# 			And I go to line in "List" table
+# 				| 'Description' |
+# 				| 'Kalipso'     |
+# 			And I select current line in "List" table
+# 			And I click Select button of "Partner term" field
+# 			And I select current line in "List" table
+# 		* Select Store
+# 			And I click Select button of "Store" field
+# 			And I go to line in "List" table
+# 				| 'Description' |
+# 				| 'Store 01'  |
+# 			And I select current line in "List" table
+# 			And I click Select button of "Legal name" field
+# 			And I select current line in "List" table
+# 		* Filling in items tab
+# 			And in the table "ItemList" I click the button named "ItemListAdd"
+# 			And I click choice button of "Item" attribute in "ItemList" table
+# 			And I go to line in "List" table
+# 				| 'Description' |
+# 				| 'Dress'  |
+# 			And I select current line in "List" table
+# 			And I activate "Item key" field in "ItemList" table
+# 			And I click choice button of "Item key" attribute in "ItemList" table
+# 			And I go to line in "List" table
+# 				| 'Item key' |
+# 				| 'L/Green'  |
+# 			And I select current line in "List" table
+# 			And I activate "Q" field in "ItemList" table
+# 			And I input "1,000" text in "Q" field of "ItemList" table
+# 			And I finish line editing in "ItemList" table
+# 			And I click the button named "FormPost"
+# 			And I delete "$$NumberSalesInvoice154501$$" variable
+# 			And I delete "$$SalesInvoice154501$$" variable
+# 			And I save the value of "Number" field as "$$NumberSalesInvoice154501$$"
+# 			And I save the window as "$$SalesInvoice154501$$"
+# 	* Create Sales return order based on Sales invoice
+# 			And I click the button named "FormDocumentSalesReturnOrderGenerate"
+# 			And I click "Ok" button	
+# 			And I select "Approved" exact value from "Status" drop-down list
+# 			And I click the button named "FormPostAndClose"
+# 	* Check the message output when creating Sales return order or Sales return again
+# 			And I click the button named "FormDocumentSalesReturnOrderGenerate"
+# 			And I click "Ok" button	
+# 			Then warning message containing text 'There are no products to return in the "Sales invoice" document. All products are already returned.' appears
+# 			And I click "OK" button
+# 			// Then "Sales invoice * dated *" window is opened
+# 			// And I click the button named "FormDocumentSalesReturnGenerate"
+# 			// And I click "Ok" button	
+# 			// Then warning message containing text 'There are no products to return in the "Sales invoice" document. All products are already returned.' appears
+# 			// And I click "OK" button
+# 			And I close all client application windows
 
-Scenario: _154507 message when trying to create Purchase return order and Purchase return based on Purchase invoice document if all products have already been returned.
-	* Create Purchase invoice
-		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
-		And I click the button named "FormCreate"
-		* Filling in the necessary details
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| Description  |
-				| Main Company |
-			And I select current line in "List" table
-		* Filling in vendor's info
-			And I click Select button of "Partner" field
-			And I go to line in "List" table
-				| Description |
-				| Ferron BP   |
-			And I select current line in "List" table
-			And I click Select button of "Legal name" field
-			And I activate "Description" field in "List" table
-			And I go to line in "List" table
-				| Description       |
-				| Company Ferron BP |
-			And I select current line in "List" table
-			And I click Select button of "Partner term" field
-			And I go to line in "List" table
-				| Description        |
-				| Vendor Ferron, USD |
-			And I select current line in "List" table
-			And I click Select button of "Store" field
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Store 02'  |
-			And I select current line in "List" table
-		* Filling in items table
-			And I click the button named "Add"
-			And I click choice button of "Item" attribute in "ItemList" table
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Dress'  |
-			And I select current line in "List" table
-			And I activate "Item key" field in "ItemList" table
-			And I click choice button of "Item key" attribute in "ItemList" table
-			Then "Item keys" window is opened
-			And I go to line in "List" table
-				| 'Item key' |
-				| 'L/Green'  |
-			And I select current line in "List" table
-			And I finish line editing in "ItemList" table
-			And I go to line in "ItemList" table
-				| '#' | 'Item'  | 'Item key' | 'Unit' |
-				| '1' | 'Dress' | 'L/Green'  | 'pcs' |
-			And I select current line in "ItemList" table
-			And I input "1,000" text in "Q" field of "ItemList" table
-			And I input "40,00" text in "Price" field of "ItemList" table
-			And I finish line editing in "ItemList" table
-			And I click the button named "FormPost"
-			And I delete "$$NumberPurchaseInvoice154502$$" variable
-			And I delete "$$PurchaseInvoice154502$$" variable
-			And I save the value of "Number" field as "$$NumberPurchaseInvoice154502$$"
-			And I save the window as "$$PurchaseInvoice154502$$"
-	* Create Purchase return based on Purchase invoice
-			And I click the button named "FormDocumentPurchaseReturnGenerate"
-			And I click the button named "FormPostAndClose"
-	* Check the message output when Purchase return or Purchase return order is created again
-			And I click the button named "FormDocumentPurchaseReturnOrderGenerate"
-			Then warning message containing text 'There are no products to return in the "Purchase invoice" document. All products are already returned.' appears
-			And I click "OK" button
-			// Then "Purchase invoice * dated *" window is opened
-			// And I click the button named "FormDocumentPurchaseReturnGenerate"
-			// Then warning message containing text 'There are no products to return in the "Purchase invoice" document. All products are already returned.' appears
-			// And I click "OK" button
-			And I close all client application windows
+# Scenario: _154507 message when trying to create Purchase return order and Purchase return based on Purchase invoice document if all products have already been returned.
+# 	* Create Purchase invoice
+# 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+# 		And I click the button named "FormCreate"
+# 		* Filling in the necessary details
+# 			And I click Select button of "Company" field
+# 			And I go to line in "List" table
+# 				| Description  |
+# 				| Main Company |
+# 			And I select current line in "List" table
+# 		* Filling in vendor's info
+# 			And I click Select button of "Partner" field
+# 			And I go to line in "List" table
+# 				| Description |
+# 				| Ferron BP   |
+# 			And I select current line in "List" table
+# 			And I click Select button of "Legal name" field
+# 			And I activate "Description" field in "List" table
+# 			And I go to line in "List" table
+# 				| Description       |
+# 				| Company Ferron BP |
+# 			And I select current line in "List" table
+# 			And I click Select button of "Partner term" field
+# 			And I go to line in "List" table
+# 				| Description        |
+# 				| Vendor Ferron, USD |
+# 			And I select current line in "List" table
+# 			And I click Select button of "Store" field
+# 			And I go to line in "List" table
+# 				| 'Description' |
+# 				| 'Store 02'  |
+# 			And I select current line in "List" table
+# 		* Filling in items table
+# 			And I click the button named "Add"
+# 			And I click choice button of "Item" attribute in "ItemList" table
+# 			And I go to line in "List" table
+# 				| 'Description' |
+# 				| 'Dress'  |
+# 			And I select current line in "List" table
+# 			And I activate "Item key" field in "ItemList" table
+# 			And I click choice button of "Item key" attribute in "ItemList" table
+# 			Then "Item keys" window is opened
+# 			And I go to line in "List" table
+# 				| 'Item key' |
+# 				| 'L/Green'  |
+# 			And I select current line in "List" table
+# 			And I finish line editing in "ItemList" table
+# 			And I go to line in "ItemList" table
+# 				| '#' | 'Item'  | 'Item key' | 'Unit' |
+# 				| '1' | 'Dress' | 'L/Green'  | 'pcs' |
+# 			And I select current line in "ItemList" table
+# 			And I input "1,000" text in "Q" field of "ItemList" table
+# 			And I input "40,00" text in "Price" field of "ItemList" table
+# 			And I finish line editing in "ItemList" table
+# 			And I click the button named "FormPost"
+# 			And I delete "$$NumberPurchaseInvoice154502$$" variable
+# 			And I delete "$$PurchaseInvoice154502$$" variable
+# 			And I save the value of "Number" field as "$$NumberPurchaseInvoice154502$$"
+# 			And I save the window as "$$PurchaseInvoice154502$$"
+# 	* Create Purchase return based on Purchase invoice
+# 			And I click the button named "FormDocumentPurchaseReturnGenerate"
+# 			And I click the button named "FormPostAndClose"
+# 	* Check the message output when Purchase return or Purchase return order is created again
+# 			And I click the button named "FormDocumentPurchaseReturnOrderGenerate"
+# 			Then warning message containing text 'There are no products to return in the "Purchase invoice" document. All products are already returned.' appears
+# 			And I click "OK" button
+# 			// Then "Purchase invoice * dated *" window is opened
+# 			// And I click the button named "FormDocumentPurchaseReturnGenerate"
+# 			// Then warning message containing text 'There are no products to return in the "Purchase invoice" document. All products are already returned.' appears
+# 			// And I click "OK" button
+# 			And I close all client application windows
 
 Scenario: _154509 message when trying to re-create Sales invoice based on Shipment confirmation
 	* Create Sales order

@@ -1402,21 +1402,36 @@ Function ExtractData_FromSI(BasisesTable, DataReceiver)
 		|	Document.SalesInvoice.SpecialOffers AS SpecialOffers
 		|		INNER JOIN BasisesTable AS BasisesTable
 		|		ON BasisesTable.Basis = SpecialOffers.Ref
-		|		AND BasisesTable.BasisKey = SpecialOffers.Key";
+		|		AND BasisesTable.BasisKey = SpecialOffers.Key
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT DISTINCT
+		|	UNDEFINED AS Ref,
+		|	BasisesTable.Key,
+		|	SerialLotNumbers.SerialLotNumber,
+		|	SerialLotNumbers.Quantity
+		|FROM
+		|	Document.SalesInvoice.SerialLotNumbers AS SerialLotNumbers
+		|		INNER JOIN BasisesTable AS BasisesTable
+		|		ON BasisesTable.Basis = SerialLotNumbers.Ref
+		|		AND BasisesTable.BasisKey = SerialLotNumbers.Key";
 		
 	Query.SetParameter("BasisesTable", BasisesTable);
 	QueryResults = Query.ExecuteBatch();
 	
-	TableRowIDInfo     = QueryResults[1].Unload();
-	TableItemList      = QueryResults[2].Unload();	
-	TableTaxList       = QueryResults[3].Unload();
-	TableSpecialOffers = QueryResults[4].Unload();
+	TableRowIDInfo        = QueryResults[1].Unload();
+	TableItemList         = QueryResults[2].Unload();	
+	TableTaxList          = QueryResults[3].Unload();
+	TableSpecialOffers    = QueryResults[4].Unload();
+	TableSerialLotNumbers = QueryResults[5].Unload();
 		
 	Tables = New Structure();
-	Tables.Insert("ItemList"      , TableItemList);
-	Tables.Insert("RowIDInfo"     , TableRowIDInfo);
-	Tables.Insert("TaxList"       , TableTaxList);
-	Tables.Insert("SpecialOffers" , TableSpecialOffers);
+	Tables.Insert("ItemList"         , TableItemList);
+	Tables.Insert("RowIDInfo"        , TableRowIDInfo);
+	Tables.Insert("TaxList"          , TableTaxList);
+	Tables.Insert("SpecialOffers"    , TableSpecialOffers);
+	Tables.Insert("SerialLotNumbers" , TableSerialLotNumbers);
 	
 	AddTables(Tables);
 	
@@ -1886,21 +1901,36 @@ Function ExtractData_FromPI(BasisesTable, DataReceiver)
 		|	Document.PurchaseInvoice.SpecialOffers AS SpecialOffers
 		|		INNER JOIN BasisesTable AS BasisesTable
 		|		ON BasisesTable.Basis = SpecialOffers.Ref
-		|		AND BasisesTable.BasisKey = SpecialOffers.Key";
+		|		AND BasisesTable.BasisKey = SpecialOffers.Key
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT DISTINCT
+		|	UNDEFINED AS Ref,
+		|	BasisesTable.Key,
+		|	SerialLotNumbers.SerialLotNumber,
+		|	SerialLotNumbers.Quantity
+		|FROM
+		|	Document.PurchaseInvoice.SerialLotNumbers AS SerialLotNumbers
+		|		INNER JOIN BasisesTable AS BasisesTable
+		|		ON BasisesTable.Basis = SerialLotNumbers.Ref
+		|		AND BasisesTable.BasisKey = SerialLotNumbers.Key";
 
 	Query.SetParameter("BasisesTable", BasisesTable);
 	QueryResults = Query.ExecuteBatch();
 
-	TableRowIDInfo     = QueryResults[1].Unload();	
-	TableItemList      = QueryResults[2].Unload();	
-	TableTaxList       = QueryResults[3].Unload();
-	TableSpecialOffers = QueryResults[4].Unload();
-		
+	TableRowIDInfo        = QueryResults[1].Unload();	
+	TableItemList         = QueryResults[2].Unload();	
+	TableTaxList          = QueryResults[3].Unload();
+	TableSpecialOffers    = QueryResults[4].Unload();
+	TableSerialLotNumbers = QueryResults[5].Unload();
+	
 	Tables = New Structure();
-	Tables.Insert("ItemList"      , TableItemList);
-	Tables.Insert("RowIDInfo"     , TableRowIDInfo);
-	Tables.Insert("TaxList"       , TableTaxList);
-	Tables.Insert("SpecialOffers" , TableSpecialOffers);
+	Tables.Insert("ItemList"         , TableItemList);
+	Tables.Insert("RowIDInfo"        , TableRowIDInfo);
+	Tables.Insert("TaxList"          , TableTaxList);
+	Tables.Insert("SpecialOffers"    , TableSpecialOffers);
+	Tables.Insert("SerialLotNumbers" , TableSerialLotNumbers);
 
 	AddTables(Tables);
 
@@ -2706,6 +2736,11 @@ Procedure AddTables(Tables)
 	If Not Tables.Property("GoodsReceipts") Then
 		Tables.Insert("GoodsReceipts", GetEmptyTable_GoodsReceipts());
 	EndIf;
+	
+	If Not Tables.Property("SerialLotNumbers") Then
+		Tables.Insert("SerialLotNumbers", GetEmptyTable_SerialLotNumbers());
+	EndIf;
+	
 EndProcedure
 
 Function AddColumnsToItemList(TableItemList)
@@ -5592,6 +5627,8 @@ Function JoinAllExtractedData(ArrayOfData)
 	Tables.Insert("SpecialOffers"         , GetEmptyTable_SpecialOffers());
 	Tables.Insert("ShipmentConfirmations" , GetEmptyTable_ShipmentConfirmations());
 	Tables.Insert("GoodsReceipts"         , GetEmptyTable_GoodsReceipts());
+	Tables.Insert("SerialLotNumbers"      , GetEmptyTable_SerialLotNumbers());
+	
 	For Each Data In ArrayOfData Do
 		For Each Table In Tables Do
 			If Data.Property(Table.Key) Then
@@ -5609,6 +5646,7 @@ Function GetTableNames_Refreshable()
 	NamesArray.Add("SpecialOffers");
 	NamesArray.Add("ShipmentConfirmations");
 	NamesArray.Add("GoodsReceipts");
+	NamesArray.Add("SerialLotNumbers");
 	Return NamesArray;
 EndFunction
 
@@ -5799,6 +5837,22 @@ EndFunction
 
 Function GetEmptyTable_GoodsReceipts()
 	Return GetEmptyTable(GetColumnNames_GoodsReceipts() + ", " + GetColumnNamesSum_GoodsReceipts());
+EndFunction
+
+#EndRegion
+
+#Region EmptyTables_SerialLotNumbers
+
+Function GetColumnNames_SerialLotNumbers()
+	Return "Ref, Key, SerialLotNumber";
+EndFunction
+
+Function GetColumnNamesSum_SerialLotNumbers()
+	Return "Quantity";
+EndFunction
+
+Function GetEmptyTable_SerialLotNumbers()
+	Return GetEmptyTable(GetColumnNames_SerialLotNumbers() + ", " + GetColumnNamesSum_SerialLotNumbers());
 EndFunction
 
 #EndRegion

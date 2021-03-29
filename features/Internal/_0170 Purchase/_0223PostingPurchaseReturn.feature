@@ -345,7 +345,7 @@ Scenario: _022305 create document Purchase return without Purchase return order
 	And I select current line in "List" table
 	And "ItemList" table contains lines
 		| 'Purchase return order' | 'Item'  | 'Item key' | 'Purchase invoice'          | 'Unit' | 'Q'       |
-		| ''                      | 'Dress' | 'L/Green'  | '$$PurchaseInvoice018006$$' | 'pcs'  | '500,000' |
+		| ''                      | 'Dress' | 'L/Green'  | '$$PurchaseInvoice018006$$' | 'pcs'  | '498,000' |
 	And I activate "Q" field in "ItemList" table
 	And I select current line in "ItemList" table
 	And I input "10,000" text in "Q" field of "ItemList" table
@@ -426,8 +426,8 @@ Scenario: _022310 create Purchase return based on Purchase return order
 				| 'Store'    | 'Purchase invoice'          | '#' | 'Quantity in base unit' | 'Item'     | 'Item key'  | 'Q'     | 'Unit' | 'Purchase return order'         |
 				| 'Store 01' | '$$PurchaseInvoice018001$$' | '1' | '3,000'                 | 'Trousers' | '36/Yellow' | '3,000' | 'pcs'  | '$$PurchaseReturnOrder022006$$' |
 			And "RowIDInfo" table contains lines
-				| '#' | 'Key'                         | 'Basis'                         | 'Row ID'                            | 'Next step' | 'Q'     | 'Basis key'                         | 'Current step' | 'Row ref'                           |
-				| '1' | '$$Rov1PurchaseReturn22310$$' | '$$PurchaseReturnOrder022006$$' | '$$Rov1PurchaseReturnOrder022310$$' | ''          | '3,000' | '$$Rov1PurchaseReturnOrder022310$$' | 'PR'           | '$$Rov1PurchaseReturnOrder022310$$' |
+				| '#' | 'Key'                         | 'Basis'                         | 'Row ID' | 'Next step' | 'Q'     | 'Basis key'                         | 'Current step' | 'Row ref' |
+				| '1' | '$$Rov1PurchaseReturn22310$$' | '$$PurchaseReturnOrder022006$$' | '*'      | ''          | '3,000' | '$$Rov1PurchaseReturnOrder022310$$' | 'PR'           | '*'       |
 			* Set checkbox Use SC and check RowID tab
 				And I move to "Item list" tab
 				And I activate "Use shipment confirmation" field in "ItemList" table
@@ -435,8 +435,8 @@ Scenario: _022310 create Purchase return based on Purchase return order
 				And I finish line editing in "ItemList" table
 				And I click "Save" button
 				And "RowIDInfo" table contains lines
-					| '#' | 'Key'                         | 'Basis'                         | 'Row ID'                            | 'Next step' | 'Q'     | 'Basis key'                         | 'Current step' | 'Row ref'                           |
-					| '1' | '$$Rov1PurchaseReturn22310$$' | '$$PurchaseReturnOrder022006$$' | '$$Rov1PurchaseReturnOrder022310$$' | 'SC'        | '3,000' | '$$Rov1PurchaseReturnOrder022310$$' | 'PR'           | '$$Rov1PurchaseReturnOrder022310$$' |
+					| '#' | 'Key'                         | 'Basis'                         | 'Row ID' | 'Next step' | 'Q'     | 'Basis key'                         | 'Current step' | 'Row ref' |
+					| '1' | '$$Rov1PurchaseReturn22310$$' | '$$PurchaseReturnOrder022006$$' | '*'      | 'SC'        | '3,000' | '$$Rov1PurchaseReturnOrder022310$$' | 'PR'           | '*'       |
 		And I close all client application windows
 	* Create Purchase return based on Purchase return order(Create button)
 		Given I open hyperlink "e1cib/list/Document.PurchaseReturnOrder"
@@ -468,8 +468,8 @@ Scenario: _022310 create Purchase return based on Purchase return order
 		And I save the current field value as "$$Rov1PurchaseReturn22310$$"	
 		And I move to "Row ID Info" tab
 		And "RowIDInfo" table contains lines
-			| '#' | 'Key'                         | 'Basis'                         | 'Row ID'                            | 'Next step' | 'Q'     | 'Basis key'                         | 'Current step' | 'Row ref'                           |
-			| '1' | '$$Rov1PurchaseReturn22310$$' | '$$PurchaseReturnOrder022006$$' | '$$Rov1PurchaseReturnOrder022310$$' | ''          | '2,000' | '$$Rov1PurchaseReturnOrder022310$$' | 'PR'           | '$$Rov1PurchaseReturnOrder022310$$' |
+			| '#' | 'Key'                         | 'Basis'                         | 'Row ID' | 'Next step' | 'Q'     | 'Basis key'                         | 'Current step' | 'Row ref' |
+			| '1' | '$$Rov1PurchaseReturn22310$$' | '$$PurchaseReturnOrder022006$$' | '*'      | ''          | '2,000' | '$$Rov1PurchaseReturnOrder022310$$' | 'PR'           | '*'       |
 		Then the number of "RowIDInfo" table lines is "равно" "1"
 		And I click the button named "FormPost"
 		And I delete "$$NumberPurchaseReturn22310$$" variable

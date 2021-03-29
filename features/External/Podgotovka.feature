@@ -466,7 +466,8 @@ Scenario: create PurchaseReturnOrder022001 based on PurchaseInvoice018006 (Purch
 		| 'Number' |
 		| '$$NumberPurchaseInvoice018006$$'      |
 	And I select current line in "List" table
-	And I click the button named "FormDocumentPurchaseReturnOrderGeneratePurchaseReturnOrder"
+	And I click the button named "FormDocumentPurchaseReturnOrderGenerate"
+	And I click "Ok" button
 	* Check filling in
 		Then the form attribute named "Partner" became equal to "Ferron BP"
 		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
@@ -505,7 +506,8 @@ Scenario: create PurchaseReturnOrder022006 based on PurchaseInvoice018001
 		| 'Number' |
 		| '$$NumberPurchaseInvoice018001$$'      |
 	And I select current line in "List" table
-	And I click the button named "FormDocumentPurchaseReturnOrderGeneratePurchaseReturnOrder"
+	And I click the button named "FormDocumentPurchaseReturnOrderGenerate"
+	And I click "Ok" button
 	* Check filling details
 		Then the form attribute named "Partner" became equal to "Ferron BP"
 		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
@@ -994,7 +996,8 @@ Scenario: create SalesReturnOrder028004
 			| 'Number' | 'Partner'     |
 			| '$$NumberSalesInvoice024001$$'      |  'Ferron BP' |
 		And I select current line in "List" table
-		And I click the button named "FormDocumentSalesReturnOrderGenerateSalesReturnOrder"
+		And I click the button named "FormDocumentSalesReturnOrderGenerate"
+		And I click "Ok" button
 		* Check the details
 			Then the form attribute named "Partner" became equal to "Ferron BP"
 			Then the form attribute named "LegalName" became equal to "Company Ferron BP"
@@ -1038,7 +1041,8 @@ Scenario: create SalesReturnOrder028001
 		| 'Number'                       | 'Partner'   |
 		| '$$NumberSalesInvoice024008$$' | 'Ferron BP' |
 	And I select current line in "List" table
-	And I click the button named "FormDocumentSalesReturnOrderGenerateSalesReturnOrder"
+	And I click the button named "FormDocumentSalesReturnOrderGenerate"
+	And I click "Ok" button
 	* Check the details
 		Then the form attribute named "Partner" became equal to "Ferron BP"
 		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
@@ -1128,7 +1132,8 @@ Scenario: create PurchaseReturn022314
 		| 'Number' |
 		| '$$NumberPurchaseInvoice018006$$'      |
 	And I select current line in "List" table
-	And I click the button named "FormDocumentPurchaseReturnGeneratePurchaseReturn"
+	And I click the button named "FormDocumentPurchaseReturnGenerate"
+	And I click "Ok" button
 	* Check filling details
 		Then the form attribute named "Partner" became equal to "Ferron BP"
 		Then the form attribute named "Agreement" became equal to "Vendor Ferron, USD"

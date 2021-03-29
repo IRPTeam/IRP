@@ -1215,7 +1215,7 @@
     <name>Generate</name>
     <synonym>
       <key>en</key>
-      <value>(new) Sales return</value>
+      <value>Sales return</value>
     </synonym>
     <group>FormCommandBarCreateBasedOn</group>
     <commandParameterType>

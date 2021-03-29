@@ -1228,7 +1228,7 @@
     <name>Generate</name>
     <synonym>
       <key>en</key>
-      <value>(new) Purchase return</value>
+      <value>Purchase return</value>
     </synonym>
     <group>FormCommandBarCreateBasedOn</group>
     <commandParameterType>

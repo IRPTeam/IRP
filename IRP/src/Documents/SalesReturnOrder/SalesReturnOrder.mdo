@@ -1040,7 +1040,7 @@
     <name>Generate</name>
     <synonym>
       <key>en</key>
-      <value>(new) Sales return order</value>
+      <value>Sales return order</value>
     </synonym>
     <group>FormCommandBarCreateBasedOn</group>
     <commandParameterType>

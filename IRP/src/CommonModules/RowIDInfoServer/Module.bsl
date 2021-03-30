@@ -10,7 +10,95 @@ Procedure Posting_RowID(Source, Cancel, PostingMode) Export
 			Return;
 		EndIf;
 	EndIf;
+
+	Posting_T10000B_RowIDMovements(Source, Cancel, PostingMode);
 	
+	If Is(Source).SI Or Is(Source).PI Then
+		Posting_T10000T_RowIDMovements_Invoice(Source, Cancel, PostingMode);
+	EndIf;
+
+	If Is(Source).SR Or Is(Source).SRO 
+		Or Is(Source).PR Or Is(Source).PRO Then
+		Posting_T10000T_RowIDMovements_Return(Source, Cancel, PostingMode);
+	EndIf;
+EndProcedure
+
+Procedure Posting_T10000T_RowIDMovements_Return(Source, Cancel, PostingMode)
+	Query = New Query();
+	Query.Text =
+	"SELECT
+	|	RowIDInfo.Ref.Date AS Period,
+	|	RowIDInfo.Ref AS Recorder,
+	|	RowIDInfo.RowID,
+	|	RowIDInfo.CurrentStep AS Step,
+	|	- RowIDInfo.Quantity AS Quantity,
+	|	RowIDInfo.Basis AS Basis,
+	|	RowIDInfo.RowRef
+	|FROM
+	|	Document." + Source.Metadata().Name + ".RowIDInfo AS RowIDInfo
+	|WHERE
+	|	RowIDInfo.Ref = &Ref
+	|	AND RowIDInfo.CurrentStep = &CurrentStep
+	|GROUP BY
+	|	RowIDInfo.Ref.Date,
+	|	RowIDInfo.Ref,
+	|	RowIDInfo.RowID,
+	|	RowIDInfo.CurrentStep,
+	|	RowIDInfo.Quantity,
+	|	RowIDInfo.Basis,
+	|	RowIDInfo.RowRef";
+	Query.SetParameter("Ref", Source.Ref);
+	
+	CurrentStep = Undefined;
+	If Is(Source).SR Or Is(Source).SRO Then
+		CurrentStep = Catalogs.MovementRules.SRO_SR;
+	ElsIf Is(Source).PR Or Is(Source).PRO Then
+		CurrentStep = Catalogs.MovementRules.PRO_PR;
+	EndIf;
+	
+	Query.SetParameter("CurrentStep", CurrentStep);
+	
+	QueryResult = Query.Execute().Unload();
+	Source.RegisterRecords.T10000T_RowIDMovements.Load(QueryResult);
+EndProcedure
+
+Procedure Posting_T10000T_RowIDMovements_Invoice(Source, Cancel, PostingMode)
+	Query = New Query();
+	Query.Text =
+	"SELECT
+	|	RowIDInfo.Ref.Date AS Period,
+	|	RowIDInfo.Ref AS Recorder,
+	|	RowIDInfo.RowID,
+	|	&NextStep AS Step,
+	|	RowIDInfo.Quantity,
+	|	RowIDInfo.Ref AS Basis,
+	|	RowIDInfo.RowRef
+	|FROM
+	|	Document." + Source.Metadata().Name + ".RowIDInfo AS RowIDInfo
+	|WHERE
+	|	RowIDInfo.Ref = &Ref
+	|GROUP BY
+	|	RowIDInfo.Ref.Date,
+	|	RowIDInfo.Ref,
+	|	RowIDInfo.RowID,
+	|	RowIDInfo.Quantity,
+	|	RowIDInfo.RowRef";
+	Query.SetParameter("Ref", Source.Ref);
+	
+	NextStep = Undefined;
+	If Is(Source).SI Then
+		NextStep = Catalogs.MovementRules.SRO_SR;
+	ElsIf Is(Source).PI Then
+		NextStep = Catalogs.MovementRules.PRO_PR;
+	EndIf;
+	
+	Query.SetParameter("NextStep", NextStep);
+	
+	QueryResult = Query.Execute().Unload();
+	Source.RegisterRecords.T10000T_RowIDMovements.Load(QueryResult);
+EndProcedure
+
+Procedure Posting_T10000B_RowIDMovements(Source, Cancel, PostingMode)	
 	Query = New Query;
 	Query.Text =
 		"SELECT
@@ -113,7 +201,15 @@ Procedure BeforeWrite_RowID(Source, Cancel, WriteMode, PostingMode) Export
 	ElsIf Is(Source).StockAdjustmentAsSurplus Then
 		FillRowID_StockAdjustmentAsSurplus(Source);
 	ElsIf Is(Source).StockAdjustmentAsWriteOff Then
-		FillRowID_StockAdjustmentAsWriteOff(Source);		
+		FillRowID_StockAdjustmentAsWriteOff(Source);
+	ElsIf Is(Source).PR Then
+		FillRowID_PR(Source);
+	ElsIf Is(Source).PRO Then
+		FillRowID_PRO(Source);
+	ElsIf Is(Source).SR Then
+		FillRowID_SR(Source);
+	ElsIf Is(Source).SRO Then
+		FillRowID_SRO(Source);			
 	EndIf;
 EndProcedure
 
@@ -298,7 +394,7 @@ Procedure FillRowID_PI(Source)
 		FillPropertyValues(NewRow, Row.Key);
 		NewRow.CurrentStep = Undefined;
 		NewRow.NextStep    = Catalogs.MovementRules.SI_SC;
-		NewRow.Quantity    =Row.Value;
+		NewRow.Quantity    = Row.Value;
 	EndDo;
 EndProcedure
 
@@ -517,6 +613,90 @@ Procedure FillRowID_StockAdjustmentAsWriteOff(Source)
 	EndDo;
 EndProcedure
 
+Procedure FillRowID_PR(Source)
+	For Each RowItemList In Source.ItemList Do	
+		Row = Undefined;
+		IDInfoRows = Source.RowIDInfo.FindRows(New Structure("Key", RowItemList.Key));
+		If IDInfoRows.Count() = 0 Then
+			Row = Source.RowIDInfo.Add();
+			FillRowID(Source, Row, RowItemList);
+			Row.NextStep = GetNextStep_PR(Source, RowItemList, Row);
+		Else
+			For Each Row In IDInfoRows Do
+				If ValueIsFilled(Row.RowRef) And Row.RowRef.Basis <> Source.Ref Then
+					Row.NextStep = GetNextStep_PR(Source, RowItemList, Row);
+				 	Continue;
+				EndIf;
+				FillRowID(Source, Row, RowItemList);
+				Row.NextStep = GetNextStep_PR(Source, RowItemList, Row);
+			EndDo;
+		EndIf;
+	EndDo;
+EndProcedure
+
+Procedure FillRowID_PRO(Source)
+	For Each RowItemList In Source.ItemList Do	
+		Row = Undefined;
+		IDInfoRows = Source.RowIDInfo.FindRows(New Structure("Key", RowItemList.Key));
+		If IDInfoRows.Count() = 0 Then
+			Row = Source.RowIDInfo.Add();
+			FillRowID(Source, Row, RowItemList);
+			Row.NextStep = GetNextStep_PRO(Source, RowItemList, Row);
+		Else
+			For Each Row In IDInfoRows Do
+				If ValueIsFilled(Row.RowRef) And Row.RowRef.Basis <> Source.Ref Then
+					Row.NextStep = GetNextStep_PRO(Source, RowItemList, Row);
+				 	Continue;
+				EndIf;
+				FillRowID(Source, Row, RowItemList);
+				Row.NextStep = GetNextStep_PRO(Source, RowItemList, Row);
+			EndDo;
+		EndIf;
+	EndDo;
+EndProcedure
+
+Procedure FillRowID_SR(Source)
+	For Each RowItemList In Source.ItemList Do	
+		Row = Undefined;
+		IDInfoRows = Source.RowIDInfo.FindRows(New Structure("Key", RowItemList.Key));
+		If IDInfoRows.Count() = 0 Then
+			Row = Source.RowIDInfo.Add();
+			FillRowID(Source, Row, RowItemList);
+			Row.NextStep = GetNextStep_SR(Source, RowItemList, Row);
+		Else
+			For Each Row In IDInfoRows Do
+				If ValueIsFilled(Row.RowRef) And Row.RowRef.Basis <> Source.Ref Then
+					Row.NextStep = GetNextStep_SR(Source, RowItemList, Row);
+				 	Continue;
+				EndIf;
+				FillRowID(Source, Row, RowItemList);
+				Row.NextStep = GetNextStep_SR(Source, RowItemList, Row);
+			EndDo;
+		EndIf;
+	EndDo;
+EndProcedure
+
+Procedure FillRowID_SRO(Source)
+	For Each RowItemList In Source.ItemList Do	
+		Row = Undefined;
+		IDInfoRows = Source.RowIDInfo.FindRows(New Structure("Key", RowItemList.Key));
+		If IDInfoRows.Count() = 0 Then
+			Row = Source.RowIDInfo.Add();
+			FillRowID(Source, Row, RowItemList);
+			Row.NextStep = GetNextStep_SRO(Source, RowItemList, Row);
+		Else
+			For Each Row In IDInfoRows Do
+				If ValueIsFilled(Row.RowRef) And Row.RowRef.Basis <> Source.Ref Then
+					Row.NextStep = GetNextStep_SRO(Source, RowItemList, Row);
+				 	Continue;
+				EndIf;
+				FillRowID(Source, Row, RowItemList);
+				Row.NextStep = GetNextStep_SRO(Source, RowItemList, Row);
+			EndDo;
+		EndIf;
+	EndDo;
+EndProcedure
+
 #EndRegion
 
 #Region GetNextStep
@@ -548,7 +728,10 @@ Function GetNextStep_SC(Source, ItemList, Row)
 	NextStep = Catalogs.MovementRules.EmptyRef();
 	If Source.TransactionType = Enums.ShipmentConfirmationTransactionTypes.Sales
 		And Not ValueIsFilled(ItemList.SalesInvoice) Then
-		NextStep = Catalogs.MovementRules.SI;
+			NextStep = Catalogs.MovementRules.SI;
+	ElsIf Source.TransactionType = Enums.ShipmentConfirmationTransactionTypes.ReturnToVendor
+		And Not ValueIsFilled(ItemList.PurchaseReturn) Then
+			NextStep = Catalogs.MovementRules.PR;
 	EndIf;
 	Return NextStep;
 EndFunction	
@@ -574,9 +757,12 @@ EndFunction
 
 Function GetNextStep_GR(Source, ItemList, Row)
 	NextStep = Catalogs.MovementRules.EmptyRef();
-	If Source.TransactionType = Enums.GoodsReceiptTransactionTypes.Purchase
+	If Source.TransactionType = Enums.GoodsReceiptTransactionTypes.Purchase 
 		And Not ValueIsFilled(ItemList.PurchaseInvoice) Then
-		NextStep = Catalogs.MovementRules.PI;
+			NextStep = Catalogs.MovementRules.PI;
+	ElsIf Source.TransactionType = Enums.GoodsReceiptTransactionTypes.ReturnFromCustomer
+		And Not ValueIsFilled(ItemList.SalesReturn) Then
+			NextStep = Catalogs.MovementRules.SR;
 	EndIf;
 	Return NextStep;
 EndFunction	
@@ -611,6 +797,34 @@ EndFunction
 
 Function GetNextStep_StockAdjustmentAsWriteOff(Source, RowItemList, Row)
 	Return Undefined;
+EndFunction
+
+Function GetNextStep_PR(Source, RowItemList, Row)
+	NextStep = Catalogs.MovementRules.EmptyRef();
+	If RowItemList.UseShipmentConfirmation
+		And Not Source.ShipmentConfirmations.FindRows(New Structure("Key", RowItemList.Key)).Count() Then
+			NextStep = Catalogs.MovementRules.SC;
+	EndIf;
+	Return NextStep;
+EndFunction	
+
+Function GetNextStep_PRO(Source, RowItemList, Row)
+	NextStep = Catalogs.MovementRules.PR;
+	Return NextStep;
+EndFunction
+
+Function GetNextStep_SR(Source, RowItemList, Row)
+	NextStep = Catalogs.MovementRules.EmptyRef();
+	If RowItemList.UseGoodsReceipt
+		And Not Source.GoodsReceipts.FindRows(New Structure("Key", RowItemList.Key)).Count() Then
+			NextStep = Catalogs.MovementRules.GR;
+	EndIf;
+	Return NextStep;
+EndFunction	
+
+Function GetNextStep_SRO(Source, RowItemList, Row)
+	NextStep = Catalogs.MovementRules.SR;
+	Return NextStep;
 EndFunction
 
 #EndRegion
@@ -666,6 +880,10 @@ Procedure UpdateRowIDCatalog(Source, Row, RowItemList, RowRefObject)
 		RowRefObject.TransactionTypeSC = Source.TransactionType;
 	ElsIf Is(Source).GR Then
 		RowRefObject.TransactionTypeGR = Source.TransactionType;
+	ElsIf Is(Source).PR Then
+		RowRefObject.TransactionTypeSC = Enums.ShipmentConfirmationTransactionTypes.ReturnToVendor;
+	ElsIf Is(Source).SR Then
+		RowRefObject.TransactionTypeGR = Enums.GoodsReceiptTransactionTypes.ReturnFromCustomer;
 	EndIf;
 	
 	RowRefObject.Write();
@@ -728,6 +946,14 @@ Function ExtractData(BasisesTable, DataReceiver) Export
 			FillTablesFrom_ISR(Tables, DataReceiver, Row);
 		ElsIf Is(Row.Basis).PhysicalInventory Then
 			FillTablesFrom_PhysicalInventory(Tables, DataReceiver, Row);
+		ElsIf Is(Row.Basis).PR Then
+			FillTablesFrom_PR(Tables, DataReceiver, Row);
+		ElsIf Is(Row.Basis).PRO Then
+			FillTablesFrom_PRO(Tables, DataReceiver, Row);
+		ElsIf Is(Row.Basis).SR Then
+			FillTablesFrom_SR(Tables, DataReceiver, Row);
+		ElsIf Is(Row.Basis).SRO Then
+			FillTablesFrom_SRO(Tables, DataReceiver, Row);
 		EndIf;
 	EndDo;
 	
@@ -752,6 +978,11 @@ Function CreateTablesForExtractData(EmptyTable)
 	Tables.Insert("FromITO"                        , EmptyTable.Copy());
 	Tables.Insert("FromIT"                         , EmptyTable.Copy());
 	Tables.Insert("FromPhysicalInventory"          , EmptyTable.Copy());
+	Tables.Insert("FromPR"                         , EmptyTable.Copy());
+	Tables.Insert("FromPRO"                        , EmptyTable.Copy());
+	Tables.Insert("FromSR"                         , EmptyTable.Copy());
+	Tables.Insert("FromSRO"                        , EmptyTable.Copy());
+	
 	Return Tables;
 EndFunction
 
@@ -849,6 +1080,22 @@ Procedure FillTablesFrom_PhysicalInventory(Tables, DataReceiver, RowBasisesTable
 	FillPropertyValues(Tables.FromPhysicalInventory.Add(), RowBasisesTable);
 EndProcedure
 
+Procedure FillTablesFrom_PR(Tables, DataReceiver, RowBasisesTable)
+	FillPropertyValues(Tables.FromPR.Add(), RowBasisesTable);
+EndProcedure
+
+Procedure FillTablesFrom_PRO(Tables, DataReceiver, RowBasisesTable)
+	FillPropertyValues(Tables.FromPRO.Add(), RowBasisesTable);
+EndProcedure
+
+Procedure FillTablesFrom_SR(Tables, DataReceiver, RowBasisesTable)
+	FillPropertyValues(Tables.FromSR.Add(), RowBasisesTable);
+EndProcedure
+
+Procedure FillTablesFrom_SRO(Tables, DataReceiver, RowBasisesTable)
+	FillPropertyValues(Tables.FromSRO.Add(), RowBasisesTable);
+EndProcedure
+
 #EndRegion
 
 #Region ExtractDataFrom
@@ -918,6 +1165,22 @@ Function ExtractDataByTables(Tables, DataReceiver)
 	
 	If Tables.FromPhysicalInventory.Count() Then
 		ExtractedData.Add(ExtractData_FromPhysicalInventory(Tables.FromPhysicalInventory, DataReceiver));
+	EndIf;
+	
+	If Tables.FromPR.Count() Then
+		ExtractedData.Add(ExtractData_FromPR(Tables.FromPR, DataReceiver));
+	EndIf;
+	
+	If Tables.FromPRO.Count() Then
+		ExtractedData.Add(ExtractData_FromPRO(Tables.FromPRO, DataReceiver));
+	EndIf;
+	
+	If Tables.FromSR.Count() Then
+		ExtractedData.Add(ExtractData_FromSR(Tables.FromSR, DataReceiver));
+	EndIf;
+	
+	If Tables.FromSRO.Count() Then
+		ExtractedData.Add(ExtractData_FromSRO(Tables.FromSRO, DataReceiver));
 	EndIf;
 	
 	Return ExtractedData;
@@ -1139,21 +1402,36 @@ Function ExtractData_FromSI(BasisesTable, DataReceiver)
 		|	Document.SalesInvoice.SpecialOffers AS SpecialOffers
 		|		INNER JOIN BasisesTable AS BasisesTable
 		|		ON BasisesTable.Basis = SpecialOffers.Ref
-		|		AND BasisesTable.BasisKey = SpecialOffers.Key";
+		|		AND BasisesTable.BasisKey = SpecialOffers.Key
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT DISTINCT
+		|	UNDEFINED AS Ref,
+		|	BasisesTable.Key,
+		|	SerialLotNumbers.SerialLotNumber,
+		|	SerialLotNumbers.Quantity
+		|FROM
+		|	Document.SalesInvoice.SerialLotNumbers AS SerialLotNumbers
+		|		INNER JOIN BasisesTable AS BasisesTable
+		|		ON BasisesTable.Basis = SerialLotNumbers.Ref
+		|		AND BasisesTable.BasisKey = SerialLotNumbers.Key";
 		
 	Query.SetParameter("BasisesTable", BasisesTable);
 	QueryResults = Query.ExecuteBatch();
 	
-	TableRowIDInfo     = QueryResults[1].Unload();
-	TableItemList      = QueryResults[2].Unload();	
-	TableTaxList       = QueryResults[3].Unload();
-	TableSpecialOffers = QueryResults[4].Unload();
+	TableRowIDInfo        = QueryResults[1].Unload();
+	TableItemList         = QueryResults[2].Unload();	
+	TableTaxList          = QueryResults[3].Unload();
+	TableSpecialOffers    = QueryResults[4].Unload();
+	TableSerialLotNumbers = QueryResults[5].Unload();
 		
 	Tables = New Structure();
-	Tables.Insert("ItemList"      , TableItemList);
-	Tables.Insert("RowIDInfo"     , TableRowIDInfo);
-	Tables.Insert("TaxList"       , TableTaxList);
-	Tables.Insert("SpecialOffers" , TableSpecialOffers);
+	Tables.Insert("ItemList"         , TableItemList);
+	Tables.Insert("RowIDInfo"        , TableRowIDInfo);
+	Tables.Insert("TaxList"          , TableTaxList);
+	Tables.Insert("SpecialOffers"    , TableSpecialOffers);
+	Tables.Insert("SerialLotNumbers" , TableSerialLotNumbers);
 	
 	AddTables(Tables);
 	
@@ -1623,21 +1901,36 @@ Function ExtractData_FromPI(BasisesTable, DataReceiver)
 		|	Document.PurchaseInvoice.SpecialOffers AS SpecialOffers
 		|		INNER JOIN BasisesTable AS BasisesTable
 		|		ON BasisesTable.Basis = SpecialOffers.Ref
-		|		AND BasisesTable.BasisKey = SpecialOffers.Key";
+		|		AND BasisesTable.BasisKey = SpecialOffers.Key
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT DISTINCT
+		|	UNDEFINED AS Ref,
+		|	BasisesTable.Key,
+		|	SerialLotNumbers.SerialLotNumber,
+		|	SerialLotNumbers.Quantity
+		|FROM
+		|	Document.PurchaseInvoice.SerialLotNumbers AS SerialLotNumbers
+		|		INNER JOIN BasisesTable AS BasisesTable
+		|		ON BasisesTable.Basis = SerialLotNumbers.Ref
+		|		AND BasisesTable.BasisKey = SerialLotNumbers.Key";
 
 	Query.SetParameter("BasisesTable", BasisesTable);
 	QueryResults = Query.ExecuteBatch();
 
-	TableRowIDInfo     = QueryResults[1].Unload();	
-	TableItemList      = QueryResults[2].Unload();	
-	TableTaxList       = QueryResults[3].Unload();
-	TableSpecialOffers = QueryResults[4].Unload();
-		
+	TableRowIDInfo        = QueryResults[1].Unload();	
+	TableItemList         = QueryResults[2].Unload();	
+	TableTaxList          = QueryResults[3].Unload();
+	TableSpecialOffers    = QueryResults[4].Unload();
+	TableSerialLotNumbers = QueryResults[5].Unload();
+	
 	Tables = New Structure();
-	Tables.Insert("ItemList"      , TableItemList);
-	Tables.Insert("RowIDInfo"     , TableRowIDInfo);
-	Tables.Insert("TaxList"       , TableTaxList);
-	Tables.Insert("SpecialOffers" , TableSpecialOffers);
+	Tables.Insert("ItemList"         , TableItemList);
+	Tables.Insert("RowIDInfo"        , TableRowIDInfo);
+	Tables.Insert("TaxList"          , TableTaxList);
+	Tables.Insert("SpecialOffers"    , TableSpecialOffers);
+	Tables.Insert("SerialLotNumbers" , TableSerialLotNumbers);
 
 	AddTables(Tables);
 
@@ -2024,6 +2317,401 @@ Function ExtractData_FromPhysicalInventory(BasisesTable, DataReceiver)
 	Return Tables;
 EndFunction
 
+Function ExtractData_FromPR(BasisesTable, DataReceiver)
+	Query = New Query(GetQueryText_BasisesTable());
+	Query.Text = Query.Text +
+		"SELECT ALLOWED
+		|	""PurchaseReturn"" AS BasedOn,
+		|	UNDEFINED AS Ref,
+		|	ItemList.Ref AS PurchaseReturn,
+		|	ItemList.Ref AS ShipmentBasis,
+		|	ItemList.PurchaseInvoice AS PurchaseInvoice,
+		|	ItemList.PurchaseReturnOrder AS PurchaseReturnOrder,
+		|	ItemList.Ref.Partner AS Partner,
+		|	ItemList.Ref.LegalName AS LegalName,
+		|	ItemList.Ref.PriceIncludeTax AS PriceIncludeTax,
+		|	ItemList.Ref.Agreement AS Agreement,
+		|	ItemList.Ref.ManagerSegment AS ManagerSegment,
+		|	ItemList.Ref.Currency AS Currency,
+		|	ItemList.Ref.Company AS Company,
+		|	ItemList.ItemKey AS ItemKey,
+		|	ItemList.ItemKey.Item AS Item,
+		|	ItemList.Store AS Store,
+		|	ItemList.PriceType AS PriceType,
+		|	ItemList.DontCalculateRow AS DontCalculateRow,
+		|	ItemList.BusinessUnit AS BusinessUnit,
+		|	ItemList.RevenueType AS RevenueType,
+		|	ItemList.AdditionalAnalytic AS AdditionalAnalytic,
+		|	ItemLIst.ReturnReason AS ReturnReason,
+		|	ItemList.Store.UseShipmentConfirmation
+		|	AND NOT ItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS UseShipmentConfirmation,
+		|	VALUE(Enum.ShipmentConfirmationTransactionTypes.ReturnToVendor) AS TransactionType,
+		|	0 AS Quantity,
+		|	ISNULL(ItemList.QuantityInBaseUnit, 0) AS OriginalQuantity,
+		|	ISNULL(ItemList.Price, 0) AS Price,
+		|	ISNULL(ItemList.TaxAmount, 0) AS TaxAmount,
+		|	ISNULL(ItemList.TotalAmount, 0) AS TotalAmount,
+		|	ISNULL(ItemList.NetAmount, 0) AS NetAmount,
+		|	ISNULL(ItemList.OffersAmount, 0) AS OffersAmount,
+		|	ItemList.LineNumber AS LineNumber,
+		|	ItemList.Key AS PurchaseReturnItemListKey,
+		|	BasisesTable.Key,
+		|	BasisesTable.Unit AS Unit,
+		|	BasisesTable.BasisUnit AS BasisUnit,
+		|	BasisesTable.QuantityInBaseUnit AS QuantityInBaseUnit
+		|FROM
+		|	BasisesTable AS BasisesTable
+		|		LEFT JOIN Document.PurchaseReturn.ItemList AS ItemList
+		|		ON BasisesTable.Basis = ItemList.Ref
+		|		AND BasisesTable.BasisKey = ItemList.Key
+		|ORDER BY
+		|	ItemList.LineNumber
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT DISTINCT
+		|	UNDEFINED AS Ref,
+		|	BasisesTable.Key,
+		|	TaxList.Tax,
+		|	TaxList.Analytics,
+		|	TaxList.TaxRate,
+		|	TaxList.Amount,
+		|	TaxList.IncludeToTotalAmount,
+		|	TaxList.ManualAmount
+		|FROM
+		|	Document.PurchaseReturn.TaxList AS TaxList
+		|		INNER JOIN BasisesTable AS BasisesTable
+		|		ON BasisesTable.BasisKey = TaxList.Key
+		|		AND BasisesTable.Basis = TaxList.Ref
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT DISTINCT
+		|	UNDEFINED AS Ref,
+		|	BasisesTable.Key,
+		|	SpecialOffers.Offer,
+		|	SpecialOffers.Amount,
+		|	0 AS Percent
+		|FROM
+		|	Document.PurchaseReturn.SpecialOffers AS SpecialOffers
+		|		INNER JOIN BasisesTable AS BasisesTable
+		|		ON BasisesTable.Basis = SpecialOffers.Ref
+		|		AND BasisesTable.BasisKey = SpecialOffers.Key";
+		
+	Query.SetParameter("BasisesTable", BasisesTable);
+	QueryResults = Query.ExecuteBatch();
+	
+	TableRowIDInfo     = QueryResults[1].Unload();
+	TableItemList      = QueryResults[2].Unload();	
+	TableTaxList       = QueryResults[3].Unload();
+	TableSpecialOffers = QueryResults[4].Unload();
+		
+	Tables = New Structure();
+	Tables.Insert("ItemList"      , TableItemList);
+	Tables.Insert("RowIDInfo"     , TableRowIDInfo);
+	Tables.Insert("TaxList"       , TableTaxList);
+	Tables.Insert("SpecialOffers" , TableSpecialOffers);
+	
+	AddTables(Tables);
+	
+	RecalculateAmounts(Tables);
+		
+	Return Tables;
+EndFunction
+
+Function ExtractData_FromPRO(BasisesTable, DataReceiver)
+	Query = New Query(GetQueryText_BasisesTable());
+	Query.Text = Query.Text +
+		"SELECT ALLOWED
+		|	""PurchaseReturnOrder"" AS BasedOn,
+		|	UNDEFINED AS Ref,
+		|	ItemList.Ref AS PurchaseReturnOrder,
+		|	ItemList.PurchaseInvoice AS PurchaseInvoice,
+		|	ItemList.Ref.Partner AS Partner,
+		|	ItemList.Ref.LegalName AS LegalName,
+		|	ItemList.Ref.PriceIncludeTax AS PriceIncludeTax,
+		|	ItemList.Ref.Agreement AS Agreement,
+		|	ItemList.Ref.ManagerSegment AS ManagerSegment,
+		|	ItemList.Ref.Currency AS Currency,
+		|	ItemList.Ref.Company AS Company,
+		|	ItemList.ItemKey AS ItemKey,
+		|	ItemList.ItemKey.Item AS Item,
+		|	ItemList.Store AS Store,
+		|	ItemList.PriceType AS PriceType,
+		|	ItemList.DontCalculateRow AS DontCalculateRow,
+		|	ItemList.BusinessUnit AS BusinessUnit,
+		|	ItemList.RevenueType AS RevenueType,
+		|	ItemList.AdditionalAnalytic AS AdditionalAnalytic,
+		|	0 AS Quantity,
+		|	ISNULL(ItemList.QuantityInBaseUnit, 0) AS OriginalQuantity,
+		|	ISNULL(ItemList.Price, 0) AS Price,
+		|	ISNULL(ItemList.TaxAmount, 0) AS TaxAmount,
+		|	ISNULL(ItemList.TotalAmount, 0) AS TotalAmount,
+		|	ISNULL(ItemList.NetAmount, 0) AS NetAmount,
+		|	ISNULL(ItemList.OffersAmount, 0) AS OffersAmount,
+		|	ItemList.LineNumber AS LineNumber,
+		|	ItemList.Key AS PurchaseReturnOrderItemListKey,
+		|	BasisesTable.Key,
+		|	BasisesTable.Unit AS Unit,
+		|	BasisesTable.BasisUnit AS BasisUnit,
+		|	BasisesTable.QuantityInBaseUnit AS QuantityInBaseUnit
+		|FROM
+		|	BasisesTable AS BasisesTable
+		|		LEFT JOIN Document.PurchaseReturnOrder.ItemList AS ItemList
+		|		ON BasisesTable.Basis = ItemList.Ref
+		|		AND BasisesTable.BasisKey = ItemList.Key
+		|ORDER BY
+		|	ItemList.LineNumber
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT DISTINCT
+		|	UNDEFINED AS Ref,
+		|	BasisesTable.Key,
+		|	TaxList.Tax,
+		|	TaxList.Analytics,
+		|	TaxList.TaxRate,
+		|	TaxList.Amount,
+		|	TaxList.IncludeToTotalAmount,
+		|	TaxList.ManualAmount
+		|FROM
+		|	Document.PurchaseReturnOrder.TaxList AS TaxList
+		|		INNER JOIN BasisesTable AS BasisesTable
+		|		ON BasisesTable.BasisKey = TaxList.Key
+		|		AND BasisesTable.Basis = TaxList.Ref
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT DISTINCT
+		|	UNDEFINED AS Ref,
+		|	BasisesTable.Key,
+		|	SpecialOffers.Offer,
+		|	SpecialOffers.Amount,
+		|	0 AS Percent
+		|FROM
+		|	Document.PurchaseReturnOrder.SpecialOffers AS SpecialOffers
+		|		INNER JOIN BasisesTable AS BasisesTable
+		|		ON BasisesTable.Basis = SpecialOffers.Ref
+		|		AND BasisesTable.BasisKey = SpecialOffers.Key";
+		
+	Query.SetParameter("BasisesTable", BasisesTable);
+	QueryResults = Query.ExecuteBatch();
+	
+	TableRowIDInfo     = QueryResults[1].Unload();
+	TableItemList      = QueryResults[2].Unload();	
+	TableTaxList       = QueryResults[3].Unload();
+	TableSpecialOffers = QueryResults[4].Unload();
+		
+	Tables = New Structure();
+	Tables.Insert("ItemList"      , TableItemList);
+	Tables.Insert("RowIDInfo"     , TableRowIDInfo);
+	Tables.Insert("TaxList"       , TableTaxList);
+	Tables.Insert("SpecialOffers" , TableSpecialOffers);
+	
+	AddTables(Tables);
+	
+	RecalculateAmounts(Tables);
+		
+	Return Tables;
+EndFunction
+
+Function ExtractData_FromSR(BasisesTable, DataReceiver)
+	Query = New Query(GetQueryText_BasisesTable());
+	Query.Text = Query.Text +
+		"SELECT ALLOWED
+		|	""SalesReturn"" AS BasedOn,
+		|	UNDEFINED AS Ref,
+		|	ItemList.Ref AS SalesReturn,
+		|	ItemList.Ref AS ReceiptBasis,
+		|	ItemList.SalesInvoice AS SalesInvoice,
+		|	ItemList.SalesReturnOrder AS SalesReturnOrder,
+		|	ItemList.Ref.Partner AS Partner,
+		|	ItemList.Ref.LegalName AS LegalName,
+		|	ItemList.Ref.PriceIncludeTax AS PriceIncludeTax,
+		|	ItemList.Ref.Agreement AS Agreement,
+		|	ItemList.Ref.ManagerSegment AS ManagerSegment,
+		|	ItemList.Ref.Currency AS Currency,
+		|	ItemList.Ref.Company AS Company,
+		|	ItemList.ItemKey AS ItemKey,
+		|	ItemList.ItemKey.Item AS Item,
+		|	ItemList.Store AS Store,
+		|	ItemList.PriceType AS PriceType,
+		|	ItemList.DontCalculateRow AS DontCalculateRow,
+		|	ItemList.BusinessUnit AS BusinessUnit,
+		|	ItemList.ExpenseType AS ExpenseType,
+		|	ItemList.AdditionalAnalytic AS AdditionalAnalytic,
+		|	ItemList.Store.UseGoodsReceipt
+		|	AND NOT ItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS UseGoodsReceipt,
+		|	VALUE(Enum.GoodsReceiptTransactionTypes.ReturnFromCustomer) AS TransactionType,
+		|	0 AS Quantity,
+		|	ISNULL(ItemList.QuantityInBaseUnit, 0) AS OriginalQuantity,
+		|	ISNULL(ItemList.Price, 0) AS Price,
+		|	ISNULL(ItemList.TaxAmount, 0) AS TaxAmount,
+		|	ISNULL(ItemList.TotalAmount, 0) AS TotalAmount,
+		|	ISNULL(ItemList.NetAmount, 0) AS NetAmount,
+		|	ISNULL(ItemList.OffersAmount, 0) AS OffersAmount,
+		|	ItemList.LineNumber AS LineNumber,
+		|	ItemList.Key AS SalesReturntemListKey,
+		|	BasisesTable.Key,
+		|	BasisesTable.Unit AS Unit,
+		|	BasisesTable.BasisUnit AS BasisUnit,
+		|	BasisesTable.QuantityInBaseUnit AS QuantityInBaseUnit
+		|FROM
+		|	BasisesTable AS BasisesTable
+		|		LEFT JOIN Document.SalesReturn.ItemList AS ItemList
+		|		ON BasisesTable.Basis = ItemList.Ref
+		|		AND BasisesTable.BasisKey = ItemList.Key
+		|ORDER BY
+		|	ItemList.LineNumber
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT DISTINCT
+		|	UNDEFINED AS Ref,
+		|	BasisesTable.Key,
+		|	TaxList.Tax,
+		|	TaxList.Analytics,
+		|	TaxList.TaxRate,
+		|	TaxList.Amount,
+		|	TaxList.IncludeToTotalAmount,
+		|	TaxList.ManualAmount
+		|FROM
+		|	Document.SalesReturn.TaxList AS TaxList
+		|		INNER JOIN BasisesTable AS BasisesTable
+		|		ON BasisesTable.BasisKey = TaxList.Key
+		|		AND BasisesTable.Basis = TaxList.Ref
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT DISTINCT
+		|	UNDEFINED AS Ref,
+		|	BasisesTable.Key,
+		|	SpecialOffers.Offer,
+		|	SpecialOffers.Amount,
+		|	0 AS Percent
+		|FROM
+		|	Document.SalesReturn.SpecialOffers AS SpecialOffers
+		|		INNER JOIN BasisesTable AS BasisesTable
+		|		ON BasisesTable.Basis = SpecialOffers.Ref
+		|		AND BasisesTable.BasisKey = SpecialOffers.Key";
+		
+	Query.SetParameter("BasisesTable", BasisesTable);
+	QueryResults = Query.ExecuteBatch();
+	
+	TableRowIDInfo     = QueryResults[1].Unload();
+	TableItemList      = QueryResults[2].Unload();	
+	TableTaxList       = QueryResults[3].Unload();
+	TableSpecialOffers = QueryResults[4].Unload();
+		
+	Tables = New Structure();
+	Tables.Insert("ItemList"      , TableItemList);
+	Tables.Insert("RowIDInfo"     , TableRowIDInfo);
+	Tables.Insert("TaxList"       , TableTaxList);
+	Tables.Insert("SpecialOffers" , TableSpecialOffers);
+	
+	AddTables(Tables);
+	
+	RecalculateAmounts(Tables);
+		
+	Return Tables;
+EndFunction
+
+Function ExtractData_FromSRO(BasisesTable, DataReceiver)
+	Query = New Query(GetQueryText_BasisesTable());
+	Query.Text = Query.Text +
+		"SELECT ALLOWED
+		|	""SalesReturnOrder"" AS BasedOn,
+		|	UNDEFINED AS Ref,
+		|	ItemList.Ref AS SalesReturnOrder,
+		|	ItemList.SalesInvoice AS SalesInvoice,
+		|	ItemList.Ref.Partner AS Partner,
+		|	ItemList.Ref.LegalName AS LegalName,
+		|	ItemList.Ref.PriceIncludeTax AS PriceIncludeTax,
+		|	ItemList.Ref.Agreement AS Agreement,
+		|	ItemList.Ref.ManagerSegment AS ManagerSegment,
+		|	ItemList.Ref.Currency AS Currency,
+		|	ItemList.Ref.Company AS Company,
+		|	ItemList.ItemKey AS ItemKey,
+		|	ItemList.ItemKey.Item AS Item,
+		|	ItemList.Store AS Store,
+		|	ItemList.PriceType AS PriceType,
+		|	ItemList.DontCalculateRow AS DontCalculateRow,
+		|	ItemList.BusinessUnit AS BusinessUnit,
+		|	ItemList.ExpenseType AS ExpenseType,
+		|	ItemList.AdditionalAnalytic AS AdditionalAnalytic,
+		|	0 AS Quantity,
+		|	ISNULL(ItemList.QuantityInBaseUnit, 0) AS OriginalQuantity,
+		|	ISNULL(ItemList.Price, 0) AS Price,
+		|	ISNULL(ItemList.TaxAmount, 0) AS TaxAmount,
+		|	ISNULL(ItemList.TotalAmount, 0) AS TotalAmount,
+		|	ISNULL(ItemList.NetAmount, 0) AS NetAmount,
+		|	ISNULL(ItemList.OffersAmount, 0) AS OffersAmount,
+		|	ItemList.LineNumber AS LineNumber,
+		|	ItemList.Key AS SalesReturnOrderItemListKey,
+		|	BasisesTable.Key,
+		|	BasisesTable.Unit AS Unit,
+		|	BasisesTable.BasisUnit AS BasisUnit,
+		|	BasisesTable.QuantityInBaseUnit AS QuantityInBaseUnit
+		|FROM
+		|	BasisesTable AS BasisesTable
+		|		LEFT JOIN Document.SalesReturnOrder.ItemList AS ItemList
+		|		ON BasisesTable.Basis = ItemList.Ref
+		|		AND BasisesTable.BasisKey = ItemList.Key
+		|ORDER BY
+		|	ItemList.LineNumber
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT DISTINCT
+		|	UNDEFINED AS Ref,
+		|	BasisesTable.Key,
+		|	TaxList.Tax,
+		|	TaxList.Analytics,
+		|	TaxList.TaxRate,
+		|	TaxList.Amount,
+		|	TaxList.IncludeToTotalAmount,
+		|	TaxList.ManualAmount
+		|FROM
+		|	Document.SalesReturnOrder.TaxList AS TaxList
+		|		INNER JOIN BasisesTable AS BasisesTable
+		|		ON BasisesTable.BasisKey = TaxList.Key
+		|		AND BasisesTable.Basis = TaxList.Ref
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT DISTINCT
+		|	UNDEFINED AS Ref,
+		|	BasisesTable.Key,
+		|	SpecialOffers.Offer,
+		|	SpecialOffers.Amount,
+		|	0 AS Percent
+		|FROM
+		|	Document.SalesReturnOrder.SpecialOffers AS SpecialOffers
+		|		INNER JOIN BasisesTable AS BasisesTable
+		|		ON BasisesTable.Basis = SpecialOffers.Ref
+		|		AND BasisesTable.BasisKey = SpecialOffers.Key";
+		
+	Query.SetParameter("BasisesTable", BasisesTable);
+	QueryResults = Query.ExecuteBatch();
+	
+	TableRowIDInfo     = QueryResults[1].Unload();
+	TableItemList      = QueryResults[2].Unload();	
+	TableTaxList       = QueryResults[3].Unload();
+	TableSpecialOffers = QueryResults[4].Unload();
+		
+	Tables = New Structure();
+	Tables.Insert("ItemList"      , TableItemList);
+	Tables.Insert("RowIDInfo"     , TableRowIDInfo);
+	Tables.Insert("TaxList"       , TableTaxList);
+	Tables.Insert("SpecialOffers" , TableSpecialOffers);
+	
+	AddTables(Tables);
+	
+	RecalculateAmounts(Tables);
+		
+	Return Tables;
+EndFunction
+
 #EndRegion
 
 Procedure AddTables(Tables)
@@ -2048,6 +2736,11 @@ Procedure AddTables(Tables)
 	If Not Tables.Property("GoodsReceipts") Then
 		Tables.Insert("GoodsReceipts", GetEmptyTable_GoodsReceipts());
 	EndIf;
+	
+	If Not Tables.Property("SerialLotNumbers") Then
+		Tables.Insert("SerialLotNumbers", GetEmptyTable_SerialLotNumbers());
+	EndIf;
+	
 EndProcedure
 
 Function AddColumnsToItemList(TableItemList)
@@ -2239,7 +2932,15 @@ Function GetBasises(Ref, FilterValues) Export
 	ElsIf Is(Ref).StockAdjustmentAsSurplus Then
 		Return GetBasisesFor_StockAdjustmentAsSurplus(FilterValues);	
 	ElsIf Is(Ref).StockAdjustmentAsWriteOff Then
-		Return GetBasisesFor_StockAdjustmentAsWriteOff(FilterValues);					
+		Return GetBasisesFor_StockAdjustmentAsWriteOff(FilterValues);
+	ElsIf Is(Ref).PR Then
+		Return GetBasisesFor_PR(FilterValues);
+	ElsIf Is(Ref).PRO Then
+		Return GetBasisesFor_PRO(FilterValues);
+	ElsIf Is(Ref).SR Then
+		Return GetBasisesFor_SR(FilterValues);
+	ElsIf Is(Ref).SRO Then
+		Return GetBasisesFor_SRO(FilterValues);
 	EndIf;
 EndFunction
 
@@ -2273,6 +2974,7 @@ Function GetBasisesFor_SC(FilterValues)
 	FilterSets.PI_ForSI_ForSC = True;
 	
 	FilterSets.IT_ForSC = True;
+	FilterSets.PR_ForSC = True;
 	
 	Return GetBasisesTable(StepArray, FilterValues, FilterSets);
 EndFunction
@@ -2315,6 +3017,7 @@ Function GetBasisesFor_GR(FilterValues)
 	FilterSets.PI_ForGR = True;
 	
 	FilterSets.IT_ForGR = True;
+	FilterSets.SR_ForGR = True;
 	
 	Return GetBasisesTable(StepArray, FilterValues, FilterSets);
 EndFunction
@@ -2359,6 +3062,51 @@ Function GetBasisesFor_StockAdjustmentAsWriteOff(FilterValues)
 	Return GetBasisesTable(StepArray, FilterValues, FilterSets);
 EndFunction
 
+Function GetBasisesFor_PR(FilterValues)
+	StepArray = New Array;
+	StepArray.Add(Catalogs.MovementRules.PR);
+	StepArray.Add(Catalogs.MovementRules.PRO_PR);
+	FilterSets = GetAvailableFilterSets();
+	FilterSets.SC_ForPR = True;
+	FilterSets.PRO_ForPR = True;
+	FilterSets.PI_ForPR_ForPRO = True;
+	
+	Return GetBasisesTable(StepArray, FilterValues, FilterSets);
+EndFunction
+
+Function GetBasisesFor_PRO(FilterValues)
+	StepArray = New Array;
+	StepArray.Add(Catalogs.MovementRules.PRO);
+	StepArray.Add(Catalogs.MovementRules.PRO_PR);
+	FilterSets = GetAvailableFilterSets();
+	FilterSets.PI_ForPR_ForPRO = True;
+	
+	Return GetBasisesTable(StepArray, FilterValues, FilterSets);
+EndFunction
+
+Function GetBasisesFor_SR(FilterValues)
+	StepArray = New Array;
+	StepArray.Add(Catalogs.MovementRules.SR);
+	StepArray.Add(Catalogs.MovementRules.SRO_SR);
+	
+	FilterSets = GetAvailableFilterSets();
+	FilterSets.GR_ForSR = True;
+	FilterSets.SRO_ForSR = True;
+	FilterSets.SI_ForSR_ForSRO = True;
+	
+	Return GetBasisesTable(StepArray, FilterValues, FilterSets);
+EndFunction
+
+Function GetBasisesFor_SRO(FilterValues)
+	StepArray = New Array;
+	StepArray.Add(Catalogs.MovementRules.SRO);
+	StepArray.Add(Catalogs.MovementRules.SRO_SR);
+	FilterSets = GetAvailableFilterSets();
+	FilterSets.SI_ForSR_ForSRO = True;
+	
+	Return GetBasisesTable(StepArray, FilterValues, FilterSets);
+EndFunction
+
 #EndRegion
 
 #Region FIlterSets
@@ -2388,6 +3136,16 @@ Function GetAvailableFilterSets()
 	Result.Insert("ISR_ForITO_ForPO_ForPI", False);
 	
 	Result.Insert("PhysicalInventory_ForSurplus_ForWriteOff", False);
+	
+	Result.Insert("SC_ForPR", False);
+	Result.Insert("GR_ForSR", False);
+	Result.Insert("PR_ForSC", False);
+	Result.Insert("SR_ForGR", False);
+	Result.Insert("PRO_ForPR", False);
+	Result.Insert("SRO_ForSR", False);
+	Result.Insert("SI_ForSR_ForSRO", False);
+	Result.Insert("PI_ForPR_ForPRO", False);
+	
 	Return Result;
 EndFunction
 
@@ -2471,6 +3229,46 @@ Procedure EnableRequiredFilterSets(FilterSets, Query, QueryArray)
 	If FilterSets.PhysicalInventory_ForSurplus_ForWriteOff Then
 		ApplyFilterSet_PhysicalInventory_ForSurplus_ForWriteOff(Query);
 		QueryArray.Add(GetDataByFilterSet_PhysicalInventory_ForSurplus_ForWriteOff());
+	EndIf;
+	
+	If FilterSets.SC_ForPR Then
+		ApplyFilterSet_SC_ForPR(Query);
+		QueryArray.Add(GetDataByFilterSet_SC_ForPR());
+	EndIf;
+	
+	If FilterSets.GR_ForSR Then
+		ApplyFilterSet_GR_ForSR(Query);
+		QueryArray.Add(GetDataByFilterSet_GR_ForSR());
+	EndIf;
+	
+	If FilterSets.PR_ForSC Then
+		ApplyFilterSet_PR_ForSC(Query);
+		QueryArray.Add(GetDataByFilterSet_PR_ForSC());
+	EndIf;
+	
+	If FilterSets.SR_ForGR Then
+		ApplyFIlterSet_SR_ForGR(Query);
+		QueryArray.Add(GetDataByFilterSet_SR_ForGR());
+	EndIf;
+	
+	If FilterSets.PRO_ForPR Then
+		ApplyFilterSet_PRO_ForPR(Query);
+		QueryArray.Add(GetDataByFilterSet_PRO_ForPR());
+	EndIf;
+	
+	If FilterSets.SRO_ForSR Then
+		ApplyFilterSet_SRO_ForSR(Query);
+		QueryArray.Add(GetDataByFilterSet_SRO_ForSR());
+	EndIf;
+	
+	If FilterSets.SI_ForSR_ForSRO Then
+		ApplyFilterSet_SI_ForSR_ForSRO(Query);
+		QueryArray.Add(GetDataByFilterSet_SI_ForSR_ForSRO());
+	EndIf;
+	
+	If FilterSets.PI_ForPR_ForPRO Then
+		ApplyFilterSet_PI_ForPR_ForPRO(Query);
+		QueryArray.Add(GetDataByFilterSet_PI_ForPR_ForPRO());
 	EndIf;
 EndProcedure
 
@@ -3008,7 +3806,7 @@ Procedure ApplyFilterSet_PI_ForGR(Query)
 	|			END
 	|			AND CASE
 	|				WHEN &Filter_TransactionType
-	|					THEN RowRef.TransactionTypeSC = &TransactionType
+	|					THEN RowRef.TransactionTypeGR = &TransactionType
 	|				ELSE FALSE
 	|			END
 	|			AND CASE
@@ -3223,6 +4021,464 @@ Procedure ApplyFilterSet_PhysicalInventory_ForSurplus_ForWriteOff(Query)
 	|					THEN RowRef.Store = &Store
 	|				ELSE FALSE
 	|			END))) AS RowIDMovements";
+	Query.Execute();
+EndProcedure	
+
+Procedure ApplyFilterSet_SC_ForPR(Query)
+	Query.Text = 
+	"SELECT
+	|	RowIDMovements.RowID,
+	|	RowIDMovements.Step,
+	|	RowIDMovements.Basis,
+	|	RowIDMovements.RowRef,
+	|	RowIDMovements.QuantityBalance AS Quantity
+	|INTO RowIDMovements_SC_ForPR
+	|FROM
+	|	AccumulationRegister.T10000B_RowIDMovements.Balance(&Period, Step IN (&StepArray)
+	|	AND (Basis IN (&Basises)
+	|	OR RowRef.Basis IN (&Basises)
+	|	OR RowRef IN
+	|		(SELECT
+	|			RowRef.Ref AS Ref
+	|		FROM
+	|			Catalog.RowIDs AS RowRef
+	|		WHERE
+	|			CASE
+	|				WHEN &Filter_Company
+	|					THEN RowRef.Company = &Company
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Partner
+	|					THEN RowRef.Partner = &Partner
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_LegalName
+	|					THEN RowRef.LegalName = &LegalName
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_TransactionType
+	|					THEN RowRef.TransactionTypeSC = &TransactionType
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_ItemKey
+	|					THEN RowRef.ItemKey = &ItemKey
+	|				ELSE TRUE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Store
+	|					THEN RowRef.Store = &Store
+	|				ELSE TRUE
+	|			END))) AS RowIDMovements";
+	Query.Execute();
+EndProcedure
+
+Procedure ApplyFilterSet_GR_ForSR(Query)
+	Query.Text = 
+	"SELECT
+	|	RowIDMovements.RowID,
+	|	RowIDMovements.Step,
+	|	RowIDMovements.Basis,
+	|	RowIDMovements.RowRef,
+	|	RowIDMovements.QuantityBalance AS Quantity
+	|INTO RowIDMovements_GR_ForSR
+	|FROM
+	|	AccumulationRegister.T10000B_RowIDMovements.Balance(&Period, Step IN (&StepArray)
+	|	AND (Basis IN (&Basises)
+	|	OR RowRef.Basis IN (&Basises)
+	|	OR RowRef IN
+	|		(SELECT
+	|			RowRef.Ref AS Ref
+	|		FROM
+	|			Catalog.RowIDs AS RowRef
+	|		WHERE
+	|			CASE
+	|				WHEN &Filter_Company
+	|					THEN RowRef.Company = &Company
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Partner
+	|					THEN RowRef.Partner = &Partner
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_LegalName
+	|					THEN RowRef.LegalName = &LegalName
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_TransactionType
+	|					THEN RowRef.TransactionTypeGR = &TransactionType
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_ItemKey
+	|					THEN RowRef.ItemKey = &ItemKey
+	|				ELSE TRUE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Store
+	|					THEN RowRef.Store = &Store
+	|				ELSE TRUE
+	|			END))) AS RowIDMovements";
+	Query.Execute();
+EndProcedure
+
+Procedure ApplyFilterSet_PR_ForSC(Query)
+	Query.Text = 
+	"SELECT
+	|	RowIDMovements.RowID,
+	|	RowIDMovements.Step,
+	|	RowIDMovements.Basis,
+	|	RowIDMovements.RowRef,
+	|	RowIDMovements.QuantityBalance AS Quantity
+	|INTO RowIDMovements_PR_ForSC
+	|FROM
+	|	AccumulationRegister.T10000B_RowIDMovements.Balance(&Period, Step IN (&StepArray)
+	|	AND (Basis IN (&Basises)
+	|	OR RowRef.Basis IN (&Basises)
+	|	OR RowRef IN
+	|		(SELECT
+	|			RowRef.Ref AS Ref
+	|		FROM
+	|			Catalog.RowIDs AS RowRef
+	|		WHERE
+	|			CASE
+	|				WHEN &Filter_Company
+	|					THEN RowRef.Company = &Company
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Partner
+	|					THEN RowRef.Partner = &Partner
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_LegalName
+	|					THEN RowRef.LegalName = &LegalName
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_TransactionType
+	|					THEN RowRef.TransactionTypeSC = &TransactionType
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_ItemKey
+	|					THEN RowRef.ItemKey = &ItemKey
+	|				ELSE TRUE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Store
+	|					THEN RowRef.Store = &Store
+	|				ELSE TRUE
+	|			END))) AS RowIDMovements";
+	Query.Execute();
+EndProcedure
+
+Procedure ApplyFilterSet_SR_ForGR(Query)
+	Query.Text = 
+	"SELECT
+	|	RowIDMovements.RowID,
+	|	RowIDMovements.Step,
+	|	RowIDMovements.Basis,
+	|	RowIDMovements.RowRef,
+	|	RowIDMovements.QuantityBalance AS Quantity
+	|INTO RowIDMovements_SR_ForGR
+	|FROM
+	|	AccumulationRegister.T10000B_RowIDMovements.Balance(&Period, Step IN (&StepArray)
+	|	AND (Basis IN (&Basises)
+	|	OR RowRef.Basis IN (&Basises)
+	|	OR RowRef IN
+	|		(SELECT
+	|			RowRef.Ref AS Ref
+	|		FROM
+	|			Catalog.RowIDs AS RowRef
+	|		WHERE
+	|			CASE
+	|				WHEN &Filter_Company
+	|					THEN RowRef.Company = &Company
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Partner
+	|					THEN RowRef.Partner = &Partner
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_LegalName
+	|					THEN RowRef.LegalName = &LegalName
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_TransactionType
+	|					THEN RowRef.TransactionTypeGR = &TransactionType
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_ItemKey
+	|					THEN RowRef.ItemKey = &ItemKey
+	|				ELSE TRUE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Store
+	|					THEN RowRef.Store = &Store
+	|				ELSE TRUE
+	|			END))) AS RowIDMovements";
+	Query.Execute();
+EndProcedure
+
+Procedure ApplyFilterSet_PRO_ForPR(Query)
+	Query.Text = 
+	"SELECT
+	|	RowIDMovements.RowID,
+	|	RowIDMovements.Step,
+	|	RowIDMovements.Basis,
+	|	RowIDMovements.RowRef,
+	|	RowIDMovements.QuantityBalance AS Quantity
+	|INTO RowIDMovements_PRO_ForPR
+	|FROM
+	|	AccumulationRegister.T10000B_RowIDMovements.Balance(&Period, Step IN (&StepArray)
+	|	AND (Basis IN (&Basises)
+	|	OR RowRef.Basis IN (&Basises)
+	|	OR RowRef IN
+	|		(SELECT
+	|			RowRef.Ref AS Ref
+	|		FROM
+	|			Catalog.RowIDs AS RowRef
+	|		WHERE
+	|			CASE
+	|				WHEN &Filter_Company
+	|					THEN RowRef.Company = &Company
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Partner
+	|					THEN RowRef.Partner = &Partner
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_LegalName
+	|					THEN RowRef.LegalName = &LegalName
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Agreement
+	|					THEN RowRef.Agreement = &Agreement
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Currency
+	|					THEN RowRef.Currency = &Currency
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_PriceIncludeTax
+	|					THEN RowRef.PriceIncludeTax = &PriceIncludeTax
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_ItemKey
+	|					THEN RowRef.ItemKey = &ItemKey
+	|				ELSE TRUE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Store
+	|					THEN RowRef.Store = &Store
+	|				ELSE TRUE
+	|			END))) AS RowIDMovements";
+	Query.Execute();
+EndProcedure	
+
+Procedure ApplyFilterSet_SRO_ForSR(Query)
+	Query.Text = 
+	"SELECT
+	|	RowIDMovements.RowID,
+	|	RowIDMovements.Step,
+	|	RowIDMovements.Basis,
+	|	RowIDMovements.RowRef,
+	|	RowIDMovements.QuantityBalance AS Quantity
+	|INTO RowIDMovements_SRO_ForSR
+	|FROM
+	|	AccumulationRegister.T10000B_RowIDMovements.Balance(&Period, Step IN (&StepArray)
+	|	AND (Basis IN (&Basises)
+	|	OR RowRef.Basis IN (&Basises)
+	|	OR RowRef IN
+	|		(SELECT
+	|			RowRef.Ref AS Ref
+	|		FROM
+	|			Catalog.RowIDs AS RowRef
+	|		WHERE
+	|			CASE
+	|				WHEN &Filter_Company
+	|					THEN RowRef.Company = &Company
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Partner
+	|					THEN RowRef.Partner = &Partner
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_LegalName
+	|					THEN RowRef.LegalName = &LegalName
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Agreement
+	|					THEN RowRef.Agreement = &Agreement
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Currency
+	|					THEN RowRef.Currency = &Currency
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_PriceIncludeTax
+	|					THEN RowRef.PriceIncludeTax = &PriceIncludeTax
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_ItemKey
+	|					THEN RowRef.ItemKey = &ItemKey
+	|				ELSE TRUE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Store
+	|					THEN RowRef.Store = &Store
+	|				ELSE TRUE
+	|			END))) AS RowIDMovements";
+	Query.Execute();
+EndProcedure	
+
+Procedure ApplyFilterSet_SI_ForSR_ForSRO(Query)
+	Query.Text = 
+	"SELECT
+	|	RowIDMovements.RowID,
+	|	RowIDMovements.Step,
+	|	RowIDMovements.Basis,
+	|	RowIDMovements.RowRef,
+	|	RowIDMovements.QuantityTurnover AS Quantity
+	|INTO RowIDMovements_SI_ForSR_ForSRO
+	|FROM
+	|	AccumulationRegister.T10000T_RowIDMovements.Turnovers(, &Period,, Step IN (&StepArray)
+	|	AND (Basis IN (&Basises)
+	|	OR RowRef IN
+	|		(SELECT
+	|			RowRef.Ref AS Ref
+	|		FROM
+	|			Catalog.RowIDs AS RowRef
+	|		WHERE
+	|			CASE
+	|				WHEN &Filter_Company
+	|					THEN RowRef.Company = &Company
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Partner
+	|					THEN RowRef.Partner = &Partner
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_LegalName
+	|					THEN RowRef.LegalName = &LegalName
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Agreement
+	|					THEN RowRef.Agreement = &Agreement
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Currency
+	|					THEN RowRef.Currency = &Currency
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_PriceIncludeTax
+	|					THEN RowRef.PriceIncludeTax = &PriceIncludeTax
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_ItemKey
+	|					THEN RowRef.ItemKey = &ItemKey
+	|				ELSE TRUE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Store
+	|					THEN RowRef.Store = &Store
+	|				ELSE TRUE
+	|			END))) AS RowIDMovements
+	|WHERE
+	|	RowIDMovements.QuantityTurnover > 0";
+	Query.Execute();
+EndProcedure	
+
+Procedure ApplyFilterSet_PI_ForPR_ForPRO(Query)
+	Query.Text = 
+	"SELECT
+	|	RowIDMovements.RowID,
+	|	RowIDMovements.Step,
+	|	RowIDMovements.Basis,
+	|	RowIDMovements.RowRef,
+	|	RowIDMovements.QuantityTurnover AS Quantity
+	|INTO RowIDMovements_PI_ForPR_ForPRO
+	|FROM
+	|	AccumulationRegister.T10000T_RowIDMovements.Turnovers(, &Period,, Step IN (&StepArray)
+	|	AND (Basis IN (&Basises)
+	|	OR RowRef IN
+	|		(SELECT
+	|			RowRef.Ref AS Ref
+	|		FROM
+	|			Catalog.RowIDs AS RowRef
+	|		WHERE
+	|			CASE
+	|				WHEN &Filter_Company
+	|					THEN RowRef.Company = &Company
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Partner
+	|					THEN RowRef.Partner = &Partner
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_LegalName
+	|					THEN RowRef.LegalName = &LegalName
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Agreement
+	|					THEN RowRef.Agreement = &Agreement
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Currency
+	|					THEN RowRef.Currency = &Currency
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_PriceIncludeTax
+	|					THEN RowRef.PriceIncludeTax = &PriceIncludeTax
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_ItemKey
+	|					THEN RowRef.ItemKey = &ItemKey
+	|				ELSE TRUE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Store
+	|					THEN RowRef.Store = &Store
+	|				ELSE TRUE
+	|			END))) AS RowIDMovements
+	|WHERE
+	|	RowIDMovements.QuantityTurnover > 0";
 	Query.Execute();
 EndProcedure	
 
@@ -3692,6 +4948,238 @@ Function GetDataByFilterSet_PhysicalInventory_ForSurplus_ForWriteOff()
 	|		AND RowIDMovements.Basis = RowIDInfo.Ref";
 EndFunction
 
+Function GetDataByFilterSet_SC_ForPR()
+	Return
+	"SELECT
+	|	Doc.ItemKey,
+	|	Doc.ItemKey.Item,
+	|	Doc.Store,
+	|	Doc.Ref,
+	|	Doc.Key,
+	|	Doc.Key,
+	|	CASE
+	|		WHEN Doc.ItemKey.Unit.Ref IS NULL
+	|			THEN Doc.ItemKey.Item.Unit
+	|		ELSE Doc.ItemKey.Unit
+	|	END,
+	|	RowIDMovements.Quantity,
+	|	RowIDMovements.RowRef,
+	|	RowIDMovements.RowID,
+	|	RowIDMovements.Step,
+	|	Doc.LineNumber
+	|FROM
+	|	Document.ShipmentConfirmation.ItemList AS Doc
+	|		INNER JOIN Document.ShipmentConfirmation.RowIDInfo AS RowIDInfo
+	|		ON Doc.Ref = RowIDInfo.Ref
+	|		AND Doc.Key = RowIDInfo.Key
+	|		INNER JOIN RowIDMovements_SC_ForPR AS RowIDMovements
+	|		ON RowIDMovements.RowID = RowIDInfo.RowID
+	|		AND RowIDMovements.Basis = RowIDInfo.Ref";
+EndFunction
+
+Function GetDataByFilterSet_GR_ForSR()
+	Return
+	"SELECT
+	|	Doc.ItemKey,
+	|	Doc.ItemKey.Item,
+	|	Doc.Store,
+	|	Doc.Ref,
+	|	Doc.Key,
+	|	Doc.Key,
+	|	CASE
+	|		WHEN Doc.ItemKey.Unit.Ref IS NULL
+	|			THEN Doc.ItemKey.Item.Unit
+	|		ELSE Doc.ItemKey.Unit
+	|	END,
+	|	RowIDMovements.Quantity,
+	|	RowIDMovements.RowRef,
+	|	RowIDMovements.RowID,
+	|	RowIDMovements.Step,
+	|	Doc.LineNumber
+	|FROM
+	|	Document.GoodsReceipt.ItemList AS Doc
+	|		INNER JOIN Document.GoodsReceipt.RowIDInfo AS RowIDInfo
+	|		ON Doc.Ref = RowIDInfo.Ref
+	|		AND Doc.Key = RowIDInfo.Key
+	|		INNER JOIN RowIDMovements_GR_ForSR AS RowIDMovements
+	|		ON RowIDMovements.RowID = RowIDInfo.RowID
+	|		AND RowIDMovements.Basis = RowIDInfo.Ref";
+EndFunction
+
+Function GetDataByFilterSet_PR_ForSC()
+	Return
+	"SELECT
+	|	Doc.ItemKey,
+	|	Doc.ItemKey.Item,
+	|	Doc.Store,
+	|	Doc.Ref,
+	|	Doc.Key,
+	|	Doc.Key,
+	|	CASE
+	|		WHEN Doc.ItemKey.Unit.Ref IS NULL
+	|			THEN Doc.ItemKey.Item.Unit
+	|		ELSE Doc.ItemKey.Unit
+	|	END,
+	|	RowIDMovements.Quantity,
+	|	RowIDMovements.RowRef,
+	|	RowIDMovements.RowID,
+	|	RowIDMovements.Step,
+	|	Doc.LineNumber
+	|FROM
+	|	Document.PurchaseReturn.ItemList AS Doc
+	|		INNER JOIN Document.PurchaseReturn.RowIDInfo AS RowIDInfo
+	|		ON Doc.Ref = RowIDInfo.Ref
+	|		AND Doc.Key = RowIDInfo.Key
+	|		INNER JOIN RowIDMovements_PR_ForSC AS RowIDMovements
+	|		ON RowIDMovements.RowID = RowIDInfo.RowID
+	|		AND RowIDMovements.Basis = RowIDInfo.Ref";
+EndFunction
+
+Function GetDataByFilterSet_SR_ForGR()
+	Return
+	"SELECT
+	|	Doc.ItemKey,
+	|	Doc.ItemKey.Item,
+	|	Doc.Store,
+	|	Doc.Ref,
+	|	Doc.Key,
+	|	Doc.Key,
+	|	CASE
+	|		WHEN Doc.ItemKey.Unit.Ref IS NULL
+	|			THEN Doc.ItemKey.Item.Unit
+	|		ELSE Doc.ItemKey.Unit
+	|	END,
+	|	RowIDMovements.Quantity,
+	|	RowIDMovements.RowRef,
+	|	RowIDMovements.RowID,
+	|	RowIDMovements.Step,
+	|	Doc.LineNumber
+	|FROM
+	|	Document.SalesReturn.ItemList AS Doc
+	|		INNER JOIN Document.SalesReturn.RowIDInfo AS RowIDInfo
+	|		ON Doc.Ref = RowIDInfo.Ref
+	|		AND Doc.Key = RowIDInfo.Key
+	|		INNER JOIN RowIDMovements_SR_ForGR AS RowIDMovements
+	|		ON RowIDMovements.RowID = RowIDInfo.RowID
+	|		AND RowIDMovements.Basis = RowIDInfo.Ref";
+EndFunction
+
+Function GetDataByFilterSet_PRO_ForPR()
+	Return
+	"SELECT
+	|	Doc.ItemKey,
+	|	Doc.ItemKey.Item,
+	|	Doc.Store,
+	|	Doc.Ref,
+	|	Doc.Key,
+	|	Doc.Key,
+	|	CASE
+	|		WHEN Doc.ItemKey.Unit.Ref IS NULL
+	|			THEN Doc.ItemKey.Item.Unit
+	|		ELSE Doc.ItemKey.Unit
+	|	END,
+	|	RowIDMovements.Quantity,
+	|	RowIDMovements.RowRef,
+	|	RowIDMovements.RowID,
+	|	RowIDMovements.Step,
+	|	Doc.LineNumber
+	|FROM
+	|	Document.PurchaseReturnOrder.ItemList AS Doc
+	|		INNER JOIN Document.PurchaseReturnOrder.RowIDInfo AS RowIDInfo
+	|		ON Doc.Ref = RowIDInfo.Ref
+	|		AND Doc.Key = RowIDInfo.Key
+	|		INNER JOIN RowIDMovements_PRO_ForPR AS RowIDMovements
+	|		ON RowIDMovements.RowID = RowIDInfo.RowID
+	|		AND RowIDMovements.Basis = RowIDInfo.Ref";
+EndFunction
+
+Function GetDataByFilterSet_SRO_ForSR()
+	Return
+	"SELECT
+	|	Doc.ItemKey,
+	|	Doc.ItemKey.Item,
+	|	Doc.Store,
+	|	Doc.Ref,
+	|	Doc.Key,
+	|	Doc.Key,
+	|	CASE
+	|		WHEN Doc.ItemKey.Unit.Ref IS NULL
+	|			THEN Doc.ItemKey.Item.Unit
+	|		ELSE Doc.ItemKey.Unit
+	|	END,
+	|	RowIDMovements.Quantity,
+	|	RowIDMovements.RowRef,
+	|	RowIDMovements.RowID,
+	|	RowIDMovements.Step,
+	|	Doc.LineNumber
+	|FROM
+	|	Document.SalesReturnOrder.ItemList AS Doc
+	|		INNER JOIN Document.SalesReturnOrder.RowIDInfo AS RowIDInfo
+	|		ON Doc.Ref = RowIDInfo.Ref
+	|		AND Doc.Key = RowIDInfo.Key
+	|		INNER JOIN RowIDMovements_SRO_ForSR AS RowIDMovements
+	|		ON RowIDMovements.RowID = RowIDInfo.RowID
+	|		AND RowIDMovements.Basis = RowIDInfo.Ref";
+EndFunction
+
+Function GetDataByFilterSet_SI_ForSR_ForSRO()
+	Return
+	"SELECT 
+	|	Doc.ItemKey,
+	|	Doc.ItemKey.Item,
+	|	Doc.Store,
+	|	Doc.Ref,
+	|	Doc.Key,
+	|	Doc.Key,
+	|	CASE
+	|		WHEN Doc.ItemKey.Unit.Ref IS NULL
+	|			THEN Doc.ItemKey.Item.Unit
+	|		ELSE Doc.ItemKey.Unit
+	|	END AS BasisUnit,
+	|	RowIDMovements.Quantity,
+	|	RowIDMovements.RowRef,
+	|	RowIDMovements.RowID,
+	|	RowIDMovements.Step,
+	|	Doc.LineNumber
+	|FROM
+	|	Document.SalesInvoice.ItemList AS Doc
+	|		INNER JOIN Document.SalesInvoice.RowIDInfo AS RowIDInfo
+	|		ON Doc.Ref = RowIDInfo.Ref
+	|		AND Doc.Key = RowIDInfo.Key
+	|		INNER JOIN RowIDMovements_SI_ForSR_ForSRO AS RowIDMovements
+	|		ON RowIDMovements.RowID = RowIDInfo.RowID
+	|		AND RowIDMovements.Basis = RowIDInfo.Ref";
+EndFunction
+
+Function GetDataByFilterSet_PI_ForPR_ForPRO()
+	Return
+	"SELECT 
+	|	Doc.ItemKey,
+	|	Doc.ItemKey.Item,
+	|	Doc.Store,
+	|	Doc.Ref,
+	|	Doc.Key,
+	|	Doc.Key,
+	|	CASE
+	|		WHEN Doc.ItemKey.Unit.Ref IS NULL
+	|			THEN Doc.ItemKey.Item.Unit
+	|		ELSE Doc.ItemKey.Unit
+	|	END AS BasisUnit,
+	|	RowIDMovements.Quantity,
+	|	RowIDMovements.RowRef,
+	|	RowIDMovements.RowID,
+	|	RowIDMovements.Step,
+	|	Doc.LineNumber
+	|FROM
+	|	Document.PurchaseInvoice.ItemList AS Doc
+	|		INNER JOIN Document.PurchaseInvoice.RowIDInfo AS RowIDInfo
+	|		ON Doc.Ref = RowIDInfo.Ref
+	|		AND Doc.Key = RowIDInfo.Key
+	|		INNER JOIN RowIDMovements_PI_ForPR_ForPRO AS RowIDMovements
+	|		ON RowIDMovements.RowID = RowIDInfo.RowID
+	|		AND RowIDMovements.Basis = RowIDInfo.Ref";
+EndFunction
+
 #EndRegion
 
 #EndRegion
@@ -4045,7 +5533,15 @@ Function GetSeperatorColumns(DocReceiverMetadata) Export
 	ElsIf DocReceiverMetadata = Metadata.Documents.StockAdjustmentAsSurplus Then
 		Return "Store";
 	ElsIf DocReceiverMetadata = Metadata.Documents.StockAdjustmentAsWriteOff Then
-		Return "Store";		 	
+		Return "Store";
+	ElsIf DocReceiverMetadata = Metadata.Documents.SalesReturn Then
+		Return "Company, Partner, LegalName, Agreement, Currency, PriceIncludeTax";
+	ElsIf DocReceiverMetadata = Metadata.Documents.PurchaseReturn Then
+		Return "Company, Partner, LegalName, Agreement, Currency, PriceIncludeTax";
+	ElsIf DocReceiverMetadata = Metadata.Documents.SalesReturnOrder Then
+		Return "Company, Partner, LegalName, Agreement, Currency, PriceIncludeTax";
+	ElsIf DocReceiverMetadata = Metadata.Documents.PurchaseReturnOrder Then
+		Return "Company, Partner, LegalName, Agreement, Currency, PriceIncludeTax";
 	EndIf;
 EndFunction	
 
@@ -4131,6 +5627,8 @@ Function JoinAllExtractedData(ArrayOfData)
 	Tables.Insert("SpecialOffers"         , GetEmptyTable_SpecialOffers());
 	Tables.Insert("ShipmentConfirmations" , GetEmptyTable_ShipmentConfirmations());
 	Tables.Insert("GoodsReceipts"         , GetEmptyTable_GoodsReceipts());
+	Tables.Insert("SerialLotNumbers"      , GetEmptyTable_SerialLotNumbers());
+	
 	For Each Data In ArrayOfData Do
 		For Each Table In Tables Do
 			If Data.Property(Table.Key) Then
@@ -4148,6 +5646,7 @@ Function GetTableNames_Refreshable()
 	NamesArray.Add("SpecialOffers");
 	NamesArray.Add("ShipmentConfirmations");
 	NamesArray.Add("GoodsReceipts");
+	NamesArray.Add("SerialLotNumbers");
 	Return NamesArray;
 EndFunction
 
@@ -4172,6 +5671,10 @@ Function GetAttributeNames_LinkedDocuments()
 	NamesArray.Add("InventoryTransfer");
 	NamesArray.Add("PhysicalInventory");
 	NamesArray.Add("BasisDocument");
+	NamesArray.Add("PurchaseReturn");
+	NamesArray.Add("PurchaseReturnOrder");
+	NamesArray.Add("SalesReturn");
+	NamesArray.Add("SalesReturnOrder");
 	Return NamesArray;
 EndFunction
 
@@ -4241,7 +5744,11 @@ Function GetColumnNames_ItemList()
 	|StoreSender,
 	|StoreReceiver,
 	|PhysicalInventory,
-	|BasisDocument";
+	|BasisDocument,
+	|PurchaseReturn,
+	|PurchaseReturnOrder,
+	|SalesReturn,
+	|SalesReturnOrder";
 EndFunction
 
 Function GetEmptyTable_ItemList()
@@ -4330,6 +5837,22 @@ EndFunction
 
 Function GetEmptyTable_GoodsReceipts()
 	Return GetEmptyTable(GetColumnNames_GoodsReceipts() + ", " + GetColumnNamesSum_GoodsReceipts());
+EndFunction
+
+#EndRegion
+
+#Region EmptyTables_SerialLotNumbers
+
+Function GetColumnNames_SerialLotNumbers()
+	Return "Ref, Key, SerialLotNumber";
+EndFunction
+
+Function GetColumnNamesSum_SerialLotNumbers()
+	Return "Quantity";
+EndFunction
+
+Function GetEmptyTable_SerialLotNumbers()
+	Return GetEmptyTable(GetColumnNames_SerialLotNumbers() + ", " + GetColumnNamesSum_SerialLotNumbers());
 EndFunction
 
 #EndRegion
@@ -4525,7 +6048,15 @@ Function GetBasisesInfo(Basis, BasisKey, RowID)
 	ElsIf Is(Basis).ISR Then
 		Query.Text = GetBasisesInfoQueryText_ISR();
 	ElsIf Is(Basis).PhysicalInventory Then
-		Query.Text = GetBasisesInfoQueryText_PhysicalInventory();						
+		Query.Text = GetBasisesInfoQueryText_PhysicalInventory();
+	ElsIf Is(Basis).PR Then
+		Query.Text = GetBasisesInfoQueryText_PR();
+	ElsIf Is(Basis).PRO Then
+		Query.Text = GetBasisesInfoQueryText_PRO();
+	ElsIf Is(Basis).SR Then
+		Query.Text = GetBasisesInfoQueryText_SR();
+	ElsIf Is(Basis).SRO Then
+		Query.Text = GetBasisesInfoQueryText_SRO();								
 	EndIf;
 	
 	Query.SetParameter("Basis"    , Basis);
@@ -4780,6 +6311,102 @@ Function GetBasisesInfoQueryText_PhysicalInventory()
 	|		AND RowIDInfo.RowID = &RowID";
 EndFunction
 
+Function GetBasisesInfoQueryText_PR()
+	Return
+	"SELECT
+	|	RowIDInfo.Ref AS Basis,
+	|	RowIDInfo.RowRef AS RowRef,
+	|	RowIDInfo.BasisKey AS BasisKey,
+	|	RowIDInfo.RowID AS RowID,
+	|	RowIDInfo.Basis AS ParentBasis,
+	|	ItemList.Key AS Key,
+	|	ItemList.Price AS Price,
+	|	ItemList.Ref.Currency AS Currency,
+	|	ItemList.Unit AS Unit
+	|FROM
+	|	Document.PurchaseReturn.ItemList AS ItemList
+	|		INNER JOIN Document.PurchaseReturn.RowIDInfo AS RowIDInfo
+	|		ON RowIDInfo.Ref = &Basis
+	|		AND ItemList.Ref = &Basis
+	|		AND RowIDInfo.Key = &BasisKey
+	|		AND ItemList.Key = &BasisKey
+	|		AND RowIDInfo.Key = ItemList.Key
+	|		AND RowIDInfo.Ref = ItemList.Ref
+	|		AND RowIDInfo.RowID = &RowID";
+EndFunction
+
+Function GetBasisesInfoQueryText_PRO()
+	Return
+	"SELECT
+	|	RowIDInfo.Ref AS Basis,
+	|	RowIDInfo.RowRef AS RowRef,
+	|	RowIDInfo.BasisKey AS BasisKey,
+	|	RowIDInfo.RowID AS RowID,
+	|	RowIDInfo.Basis AS ParentBasis,
+	|	ItemList.Key AS Key,
+	|	ItemList.Price AS Price,
+	|	ItemList.Ref.Currency AS Currency,
+	|	ItemList.Unit AS Unit
+	|FROM
+	|	Document.PurchaseReturnOrder.ItemList AS ItemList
+	|		INNER JOIN Document.PurchaseReturnOrder.RowIDInfo AS RowIDInfo
+	|		ON RowIDInfo.Ref = &Basis
+	|		AND ItemList.Ref = &Basis
+	|		AND RowIDInfo.Key = &BasisKey
+	|		AND ItemList.Key = &BasisKey
+	|		AND RowIDInfo.Key = ItemList.Key
+	|		AND RowIDInfo.Ref = ItemList.Ref
+	|		AND RowIDInfo.RowID = &RowID";
+EndFunction
+
+Function GetBasisesInfoQueryText_SR()
+	Return
+	"SELECT
+	|	RowIDInfo.Ref AS Basis,
+	|	RowIDInfo.RowRef AS RowRef,
+	|	RowIDInfo.BasisKey AS BasisKey,
+	|	RowIDInfo.RowID AS RowID,
+	|	RowIDInfo.Basis AS ParentBasis,
+	|	ItemList.Key AS Key,
+	|	ItemList.Price AS Price,
+	|	ItemList.Ref.Currency AS Currency,
+	|	ItemList.Unit AS Unit
+	|FROM
+	|	Document.SalesReturn.ItemList AS ItemList
+	|		INNER JOIN Document.SalesReturn.RowIDInfo AS RowIDInfo
+	|		ON RowIDInfo.Ref = &Basis
+	|		AND ItemList.Ref = &Basis
+	|		AND RowIDInfo.Key = &BasisKey
+	|		AND ItemList.Key = &BasisKey
+	|		AND RowIDInfo.Key = ItemList.Key
+	|		AND RowIDInfo.Ref = ItemList.Ref
+	|		AND RowIDInfo.RowID = &RowID";
+EndFunction
+
+Function GetBasisesInfoQueryText_SRO()
+	Return
+	"SELECT
+	|	RowIDInfo.Ref AS Basis,
+	|	RowIDInfo.RowRef AS RowRef,
+	|	RowIDInfo.BasisKey AS BasisKey,
+	|	RowIDInfo.RowID AS RowID,
+	|	RowIDInfo.Basis AS ParentBasis,
+	|	ItemList.Key AS Key,
+	|	ItemList.Price AS Price,
+	|	ItemList.Ref.Currency AS Currency,
+	|	ItemList.Unit AS Unit
+	|FROM
+	|	Document.SalesReturnOrder.ItemList AS ItemList
+	|		INNER JOIN Document.SalesReturnOrder.RowIDInfo AS RowIDInfo
+	|		ON RowIDInfo.Ref = &Basis
+	|		AND ItemList.Ref = &Basis
+	|		AND RowIDInfo.Key = &BasisKey
+	|		AND ItemList.Key = &BasisKey
+	|		AND RowIDInfo.Key = ItemList.Key
+	|		AND RowIDInfo.Ref = ItemList.Ref
+	|		AND RowIDInfo.RowID = &RowID";
+EndFunction
+
 #EndRegion
 
 #Region Service
@@ -4811,6 +6438,14 @@ Function Is(Source)
 	                  Or TypeOf = Type("DocumentRef.StockAdjustmentAsSurplus"));
 	Result.Insert("StockAdjustmentAsWriteOff", TypeOf = Type("DocumentObject.StockAdjustmentAsWriteOff")      
 	                  Or TypeOf = Type("DocumentRef.StockAdjustmentAsWriteOff"));
+	Result.Insert("PR", TypeOf  = Type("DocumentObject.PurchaseReturn")      
+	                  Or TypeOf = Type("DocumentRef.PurchaseReturn"));
+	Result.Insert("PRO", TypeOf = Type("DocumentObject.PurchaseReturnOrder")      
+	                  Or TypeOf = Type("DocumentRef.PurchaseReturnOrder"));
+	Result.Insert("SR", TypeOf  = Type("DocumentObject.SalesReturn")      
+	                  Or TypeOf = Type("DocumentRef.SalesReturn"));
+	Result.Insert("SRO", TypeOf = Type("DocumentObject.SalesReturnOrder")      
+	                  Or TypeOf = Type("DocumentRef.SalesReturnOrder"));
 	
 	Return Result;
 EndFunction

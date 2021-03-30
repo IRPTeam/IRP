@@ -3087,10 +3087,6 @@ EndProcedure
 #Region ShipmentConfirationsGoodsReceiptd
 
 Procedure SetLockedRowsForItemListByTradeDocuments(Object, Form, TableName) Export
-	If Not Object[TableName].Count() Then
-		Return;
-	EndIf;
-	
 	For Each Row In Object.ItemList Do
 		Row.LockedRow = Object[TableName].FindRows(New Structure("Key", Row.Key)).Count() > 0;
 	EndDo;

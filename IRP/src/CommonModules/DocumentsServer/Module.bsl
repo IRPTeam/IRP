@@ -697,7 +697,7 @@ EndFunction
 
 #Region SpecialOffersInReturns
 
-Procedure FillSpecialOffersCache(Object, Form, BasisDocumentName, AddInfo = Undefined) Export
+Procedure FillSpecialOffersCacheRetail(Object, Form, BasisDocumentName, AddInfo = Undefined) Export
 	Form.SpecialOffersCache.Clear();
 	Query = New Query();
 	Query.Text = 
@@ -729,6 +729,60 @@ Procedure FillSpecialOffersCache(Object, Form, BasisDocumentName, AddInfo = Unde
 	QueryResult = Query.Execute();
 	Form.SpecialOffersCache.Load(QueryResult.Unload());
 EndProcedure
+
+Procedure FillSpecialOffersCache(Object, Form, BasisDocumentName, AddInfo = Undefined) Export
+	Form.SpecialOffersCache.Clear();
+	Query = New Query();
+	Query.TempTablesManager = New TempTablesManager();
+	Query.Text = 
+	"SELECT
+	|	ItemList.Key,
+	|	ItemList.%1
+	|INTO _tmpItemList
+	|FROM
+	|	&ItemList AS ItemList
+	|;
+	|Select
+	|	RowIDInfo.Key AS Key,
+	|	RowIDInfo.Basis AS Basis,
+	|	RowIDInfo.BasisKey AS BasisKey
+	|INTO tmpRowIDInfo
+	|FROM
+	|	&RowIDInfo AS RowIDInfo
+	|;
+	|Select
+	|	RowIDInfo.BasisKey AS BasisKey,
+	|	_tmpItemList.Key AS Key,
+	|	_tmpItemList.%1
+	|INTO tmpItemList
+	|from _tmpItemList AS _tmpItemList
+	|inner join tmpRowIDInfo AS RowIDInfo 
+	|	ON _tmpItemList.%1 = RowIDInfo.Basis
+	|	AND _tmpItemList.Key = RowIDInfo.Key
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	tmpItemList.Key,
+	|	BasisDocumentSpecialOffers.Offer,
+	|	BasisDocumentSpecialOffers.Amount,
+	|	BasisDocumentItemList.Quantity
+	|FROM
+	|	tmpItemList AS tmpItemList
+	|		INNER JOIN Document.%1.SpecialOffers AS BasisDocumentSpecialOffers
+	|		ON BasisDocumentSpecialOffers.Ref = tmpItemList.%1
+	|		AND BasisDocumentSpecialOffers.Key = tmpItemList.BasisKey
+	|		INNER JOIN Document.%1.ItemList AS BasisDocumentItemList
+	|		ON BasisDocumentItemList.Ref = tmpItemList.%1
+	|		AND BasisDocumentItemList.Key = tmpItemList.BasisKey";
+	Query.Text = StrTemplate(Query.Text, BasisDocumentName);
+	Query.SetParameter("ItemList", Object.ItemList.Unload());
+	Query.SetParameter("RowIDInfo", Object.RowIDInfo.Unload()); 
+	QueryResult = Query.Execute();
+	Form.SpecialOffersCache.Load(QueryResult.Unload());
+EndProcedure
+
+
 
 #EndRegion
 

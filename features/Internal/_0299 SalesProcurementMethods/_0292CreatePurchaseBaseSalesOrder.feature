@@ -476,65 +476,6 @@ Scenario: _029201 create Purchase order based on Sales order (Shipment confirmat
 		And I save the value of "Number" field as "$$NumberSalesOrder029201$$"
 		And I save the window as "$$SalesOrder029201$$"
 		And I click the button named "FormPostAndClose"
-	* Check movements
-		Given I open hyperlink "e1cib/list/Document.SalesOrder"
-		And I go to line in "List" table
-		| 'Number' |
-		| '$$NumberSalesOrder029201$$'    |
-		And I click "Registrations report" button
-
-		And I select "Order procurement" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Order procurement"' | ''            | ''       | ''          | ''             | ''                     | ''         | ''          | ''        | '' | '' |
-		| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                     | ''         | ''          | ''        | '' | '' |
-		| ''                              | ''            | ''       | 'Quantity'  | 'Company'      | 'Order'                | 'Store'    | 'Item key'  | 'Row key' | '' | '' |
-		| ''                              | 'Receipt'     | '*'      | '5'         | 'Main Company' | '$$SalesOrder029201$$' | 'Store 01' | 'XS/Blue'   | '*'       | '' | '' |
-		| ''                              | 'Receipt'     | '*'      | '10'        | 'Main Company' | '$$SalesOrder029201$$' | 'Store 01' | '38/Yellow' | '*'       | '' | '' |
-		And I select "Shipment orders" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Shipment orders"' | ''            | ''       | ''          | ''                     | ''                      | ''         | ''        | '' | '' | '' |
-		| ''                            | 'Record type' | 'Period' | 'Resources' | 'Dimensions'           | ''                      | ''         | ''        | '' | '' | '' |
-		| ''                            | ''            | ''       | 'Quantity'  | 'Order'                | 'Shipment confirmation' | 'Item key' | 'Row key' | '' | '' | '' |
-		| ''                            | 'Receipt'     | '*'      | '1'         | '$$SalesOrder029201$$' | '$$SalesOrder029201$$'  | '36/18SD'  | '*'       | '' | '' | '' |
-		And I select "Sales order turnovers" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Sales order turnovers"' | ''       | ''          | ''       | ''             | ''                     | ''         | ''          | ''        | ''                             | ''                     |
-		| ''                                  | 'Period' | 'Resources' | ''       | 'Dimensions'   | ''                     | ''         | ''          | ''        | ''                             | 'Attributes'           |
-		| ''                                  | ''       | 'Quantity'  | 'Amount' | 'Company'      | 'Sales order'          | 'Currency' | 'Item key'  | 'Row key' | 'Multi currency movement type' | 'Deferred calculation' |
-		| ''                                  | '*'      | '1'         | '119,84' | 'Main Company' | '$$SalesOrder029201$$' | 'USD'      | '36/18SD'   | '*'       | 'Reporting currency'           | 'No'                   |
-		| ''                                  | '*'      | '1'         | '700'    | 'Main Company' | '$$SalesOrder029201$$' | 'TRY'      | '36/18SD'   | '*'       | 'en description is empty'      | 'No'                   |
-		| ''                                  | '*'      | '1'         | '700'    | 'Main Company' | '$$SalesOrder029201$$' | 'TRY'      | '36/18SD'   | '*'       | 'Local currency'               | 'No'                   |
-		| ''                                  | '*'      | '1'         | '700'    | 'Main Company' | '$$SalesOrder029201$$' | 'TRY'      | '36/18SD'   | '*'       | 'TRY'                          | 'No'                   |
-		| ''                                  | '*'      | '5'         | '445,12' | 'Main Company' | '$$SalesOrder029201$$' | 'USD'      | 'XS/Blue'   | '*'       | 'Reporting currency'           | 'No'                   |
-		| ''                                  | '*'      | '5'         | '2 600'  | 'Main Company' | '$$SalesOrder029201$$' | 'TRY'      | 'XS/Blue'   | '*'       | 'en description is empty'      | 'No'                   |
-		| ''                                  | '*'      | '5'         | '2 600'  | 'Main Company' | '$$SalesOrder029201$$' | 'TRY'      | 'XS/Blue'   | '*'       | 'Local currency'               | 'No'                   |
-		| ''                                  | '*'      | '5'         | '2 600'  | 'Main Company' | '$$SalesOrder029201$$' | 'TRY'      | 'XS/Blue'   | '*'       | 'TRY'                          | 'No'                   |
-		| ''                                  | '*'      | '10'        | '684,8'  | 'Main Company' | '$$SalesOrder029201$$' | 'USD'      | '38/Yellow' | '*'       | 'Reporting currency'           | 'No'                   |
-		| ''                                  | '*'      | '10'        | '4 000'  | 'Main Company' | '$$SalesOrder029201$$' | 'TRY'      | '38/Yellow' | '*'       | 'en description is empty'      | 'No'                   |
-		| ''                                  | '*'      | '10'        | '4 000'  | 'Main Company' | '$$SalesOrder029201$$' | 'TRY'      | '38/Yellow' | '*'       | 'Local currency'               | 'No'                   |
-		| ''                                  | '*'      | '10'        | '4 000'  | 'Main Company' | '$$SalesOrder029201$$' | 'TRY'      | '38/Yellow' | '*'       | 'TRY'                          | 'No'                   |
-		And I select "Order balance" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Order balance"' | ''            | ''       | ''          | ''           | ''                     | ''          | ''        | '' | '' | '' |
-		| ''                          | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''                     | ''          | ''        | '' | '' | '' |
-		| ''                          | ''            | ''       | 'Quantity'  | 'Store'      | 'Order'                | 'Item key'  | 'Row key' | '' | '' | '' |
-		| ''                          | 'Receipt'     | '*'      | '1'         | 'Store 01'   | '$$SalesOrder029201$$' | '36/18SD'   | '*'       | '' | '' | '' |
-		| ''                          | 'Receipt'     | '*'      | '5'         | 'Store 01'   | '$$SalesOrder029201$$' | 'XS/Blue'   | '*'       | '' | '' | '' |
-		| ''                          | 'Receipt'     | '*'      | '10'        | 'Store 01'   | '$$SalesOrder029201$$' | '38/Yellow' | '*'       | '' | '' | '' |
-		And I select "Shipment confirmation schedule" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Shipment confirmation schedule"' | ''            | ''          | ''          | ''                     | ''                      | ''          | ''          | ''        | ''                             | ''                     |
-		| ''                                           | 'Record type' | 'Period'    | 'Resources' | 'Dimensions'           | ''                      | ''          | ''          | ''        | 'Attributes'                   | ''                     |
-		| ''                                           | ''            | ''          | 'Quantity'  | 'Company'              | 'Order'                 | 'Store'     | 'Item key'  | 'Row key' | 'Delivery date'                | ''                     |
-		| ''                                           | 'Receipt'     | '*'         | '1'         | 'Main Company'         | '$$SalesOrder029201$$'  | 'Store 01'  | '36/18SD'   | '*'       | '*'                            | ''                     |
-		| ''                                           | 'Receipt'     | '*'         | '5'         | 'Main Company'         | '$$SalesOrder029201$$'  | 'Store 01'  | 'XS/Blue'   | '*'       | '*'                            | ''                     |
-		| ''                                           | 'Receipt'     | '*'         | '10'        | 'Main Company'         | '$$SalesOrder029201$$'  | 'Store 01'  | '38/Yellow' | '*'       | '*'                            | ''                     |
-		| ''                                           | 'Expense'     | '*'         | '1'         | 'Main Company'         | '$$SalesOrder029201$$'  | 'Store 01'  | '36/18SD'   | '*'       | '*'                            | ''                     |
 		And I close all client application windows
 	* Create one more Sales order
 		When create an order for Ferron BP Basic Partner term, TRY (Dress -10 and Trousers - 5)
@@ -590,58 +531,6 @@ Scenario: _029201 create Purchase order based on Sales order (Shipment confirmat
 			And I save the value of "Number" field as "$$NumberSalesOrder0292012$$"
 			And I save the window as "$$SalesOrder0292012$$"
 			And I click the button named "FormPostAndClose"
-	* Check movements
-		Given I open hyperlink "e1cib/list/Document.SalesOrder"
-		And I go to line in "List" table
-		| 'Number' |
-		| '$$NumberSalesOrder0292012$$'    |
-		And I click "Registrations report" button
-
-		And I select "Order procurement" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Order procurement"' | ''            | ''       | ''          | ''             | ''                      | ''         | ''          | ''        | '' | '' |
-		| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                      | ''         | ''          | ''        | '' | '' |
-		| ''                              | ''            | ''       | 'Quantity'  | 'Company'      | 'Order'                 | 'Store'    | 'Item key'  | 'Row key' | '' | '' |
-		| ''                              | 'Receipt'     | '*'      | '5'         | 'Main Company' | '$$SalesOrder0292012$$' | 'Store 02' | '36/Yellow' | '*'       | '' | '' |
-		| ''                              | 'Receipt'     | '*'      | '10'        | 'Main Company' | '$$SalesOrder0292012$$' | 'Store 02' | 'XS/Blue'   | '*'       | '' | '' |
-		| ''                              | 'Receipt'     | '*'      | '10'        | 'Main Company' | '$$SalesOrder0292012$$' | 'Store 02' | '38/Yellow' | '*'       | '' | '' |
-		And I select "Sales order turnovers" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Sales order turnovers"' | ''       | ''          | ''       | ''             | ''                      | ''         | ''          | ''        | ''                             | ''                     |
-		| ''                                  | 'Period' | 'Resources' | ''       | 'Dimensions'   | ''                      | ''         | ''          | ''        | ''                             | 'Attributes'           |
-		| ''                                  | ''       | 'Quantity'  | 'Amount' | 'Company'      | 'Sales order'           | 'Currency' | 'Item key'  | 'Row key' | 'Multi currency movement type' | 'Deferred calculation' |
-		| ''                                  | '*'      | '5'         | '342,4'  | 'Main Company' | '$$SalesOrder0292012$$' | 'USD'      | '36/Yellow' | '*'       | 'Reporting currency'           | 'No'                   |
-		| ''                                  | '*'      | '5'         | '2 000'  | 'Main Company' | '$$SalesOrder0292012$$' | 'TRY'      | '36/Yellow' | '*'       | 'en description is empty'      | 'No'                   |
-		| ''                                  | '*'      | '5'         | '2 000'  | 'Main Company' | '$$SalesOrder0292012$$' | 'TRY'      | '36/Yellow' | '*'       | 'Local currency'               | 'No'                   |
-		| ''                                  | '*'      | '5'         | '2 000'  | 'Main Company' | '$$SalesOrder0292012$$' | 'TRY'      | '36/Yellow' | '*'       | 'TRY'                          | 'No'                   |
-		| ''                                  | '*'      | '10'        | '684,8'  | 'Main Company' | '$$SalesOrder0292012$$' | 'USD'      | '38/Yellow' | '*'       | 'Reporting currency'           | 'No'                   |
-		| ''                                  | '*'      | '10'        | '890,24' | 'Main Company' | '$$SalesOrder0292012$$' | 'USD'      | 'XS/Blue'   | '*'       | 'Reporting currency'           | 'No'                   |
-		| ''                                  | '*'      | '10'        | '4 000'  | 'Main Company' | '$$SalesOrder0292012$$' | 'TRY'      | '38/Yellow' | '*'       | 'en description is empty'      | 'No'                   |
-		| ''                                  | '*'      | '10'        | '4 000'  | 'Main Company' | '$$SalesOrder0292012$$' | 'TRY'      | '38/Yellow' | '*'       | 'Local currency'               | 'No'                   |
-		| ''                                  | '*'      | '10'        | '4 000'  | 'Main Company' | '$$SalesOrder0292012$$' | 'TRY'      | '38/Yellow' | '*'       | 'TRY'                          | 'No'                   |
-		| ''                                  | '*'      | '10'        | '5 200'  | 'Main Company' | '$$SalesOrder0292012$$' | 'TRY'      | 'XS/Blue'   | '*'       | 'en description is empty'      | 'No'                   |
-		| ''                                  | '*'      | '10'        | '5 200'  | 'Main Company' | '$$SalesOrder0292012$$' | 'TRY'      | 'XS/Blue'   | '*'       | 'Local currency'               | 'No'                   |
-		| ''                                  | '*'      | '10'        | '5 200'  | 'Main Company' | '$$SalesOrder0292012$$' | 'TRY'      | 'XS/Blue'   | '*'       | 'TRY'                          | 'No'                   |
-		And I select "Order balance" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Order balance"' | ''            | ''       | ''          | ''           | ''                      | ''          | ''        | '' | '' | '' |
-		| ''                          | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''                      | ''          | ''        | '' | '' | '' |
-		| ''                          | ''            | ''       | 'Quantity'  | 'Store'      | 'Order'                 | 'Item key'  | 'Row key' | '' | '' | '' |
-		| ''                          | 'Receipt'     | '*'      | '5'         | 'Store 02'   | '$$SalesOrder0292012$$' | '36/Yellow' | '*'       | '' | '' | '' |
-		| ''                          | 'Receipt'     | '*'      | '10'        | 'Store 02'   | '$$SalesOrder0292012$$' | 'XS/Blue'   | '*'       | '' | '' | '' |
-		| ''                          | 'Receipt'     | '*'      | '10'        | 'Store 02'   | '$$SalesOrder0292012$$' | '38/Yellow' | '*'       | '' | '' | '' |
-		And I select "Shipment confirmation schedule" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Shipment confirmation schedule"' | ''            | ''          | ''          | ''             | ''                      | ''          | ''          | ''        | ''                             | ''                     |
-		| ''                                           | 'Record type' | 'Period'    | 'Resources' | 'Dimensions'   | ''                      | ''          | ''          | ''        | 'Attributes'                   | ''                     |
-		| ''                                           | ''            | ''          | 'Quantity'  | 'Company'      | 'Order'                 | 'Store'     | 'Item key'  | 'Row key' | 'Delivery date'                | ''                     |
-		| ''                                           | 'Receipt'     | '*'         | '5'         | 'Main Company' | '$$SalesOrder0292012$$' | 'Store 02'  | '36/Yellow' | '*'       | '*'                            | ''                     |
-		| ''                                           | 'Receipt'     | '*'         | '10'        | 'Main Company' | '$$SalesOrder0292012$$' | 'Store 02'  | 'XS/Blue'   | '*'       | '*'                            | ''                     |
-		| ''                                           | 'Receipt'     | '*'         | '10'        | 'Main Company' | '$$SalesOrder0292012$$' | 'Store 02'  | '38/Yellow' | '*'       | '*'                            | ''                     |
 		And I close all client application windows
 	* Create one Purchase order based on two Sales orders
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
@@ -722,66 +611,7 @@ Scenario: _029201 create Purchase order based on Sales order (Shipment confirmat
 		And I save the value of "Number" field as "$$NumberPurchaseOrder0292012$$"
 		And I save the window as "$$PurchaseOrder0292012$$"
 	And I click the button named "FormPostAndClose"
-	* Check movements Purchase order
-		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
-		And I go to line in "List" table
-		| 'Number' |
-		| '$$NumberPurchaseOrder0292012$$'    |
-		And I click "Registrations report" button
-		And I select "Order procurement" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Order procurement"' | ''            | ''       | ''          | ''             | ''                      | ''         | ''          | ''        | '' |
-		| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                      | ''         | ''          | ''        | '' |
-		| ''                              | ''            | ''       | 'Quantity'  | 'Company'      | 'Order'                 | 'Store'    | 'Item key'  | 'Row key' | '' |
-		| ''                              | 'Expense'     | '*'      | '5'         | 'Main Company' | '$$SalesOrder029201$$'  | 'Store 01' | 'XS/Blue'   | '*'       | '' |
-		| ''                              | 'Expense'     | '*'      | '5'         | 'Main Company' | '$$SalesOrder0292012$$' | 'Store 02' | '36/Yellow' | '*'       | '' |
-		| ''                              | 'Expense'     | '*'      | '10'        | 'Main Company' | '$$SalesOrder029201$$'  | 'Store 01' | '38/Yellow' | '*'       | '' |
-		| ''                              | 'Expense'     | '*'      | '10'        | 'Main Company' | '$$SalesOrder0292012$$' | 'Store 02' | 'XS/Blue'   | '*'       | '' |
-		| ''                              | 'Expense'     | '*'      | '10'        | 'Main Company' | '$$SalesOrder0292012$$' | 'Store 02' | '38/Yellow' | '*'       | '' |
-		And I select "Goods in transit incoming" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Goods in transit incoming"' | ''            | ''       | ''          | ''           | ''                         | ''          | ''        | '' | '' |
-		| ''                                      | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''                         | ''          | ''        | '' | '' |
-		| ''                                      | ''            | ''       | 'Quantity'  | 'Store'      | 'Receipt basis'            | 'Item key'  | 'Row key' | '' | '' |
-		| ''                                      | 'Receipt'     | '*'      | '5'         | 'Store 02'   | '$$PurchaseOrder0292012$$' | '36/Yellow' | '*'       | '' | '' |
-		| ''                                      | 'Receipt'     | '*'      | '10'        | 'Store 02'   | '$$PurchaseOrder0292012$$' | 'XS/Blue'   | '*'       | '' | '' |
-		| ''                                      | 'Receipt'     | '*'      | '10'        | 'Store 02'   | '$$PurchaseOrder0292012$$' | '38/Yellow' | '*'       | '' | '' |
-		And I select "Receipt orders" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Receipt orders"' | ''            | ''       | ''          | ''                         | ''                         | ''          | ''        | '' | '' |
-		| ''                           | 'Record type' | 'Period' | 'Resources' | 'Dimensions'               | ''                         | ''          | ''        | '' | '' |
-		| ''                           | ''            | ''       | 'Quantity'  | 'Order'                    | 'Goods receipt'            | 'Item key'  | 'Row key' | '' | '' |
-		| ''                           | 'Receipt'     | '*'      | '5'         | '$$PurchaseOrder0292012$$' | '$$PurchaseOrder0292012$$' | 'XS/Blue'   | '*'       | '' | '' |
-		| ''                           | 'Receipt'     | '*'      | '10'        | '$$PurchaseOrder0292012$$' | '$$PurchaseOrder0292012$$' | '38/Yellow' | '*'       | '' | '' |
-		And I select "Goods receipt schedule" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Goods receipt schedule"' | ''            | ''       | ''          | ''             | ''                         | ''         | ''          | ''        | ''              |
-		| ''                                   | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                         | ''         | ''          | ''        | 'Attributes'    |
-		| ''                                   | ''            | ''       | 'Quantity'  | 'Company'      | 'Order'                    | 'Store'    | 'Item key'  | 'Row key' | 'Delivery date' |
-		| ''                                   | 'Receipt'     | '*'      | '5'         | 'Main Company' | '$$PurchaseOrder0292012$$' | 'Store 01' | 'XS/Blue'   | '*'       | '*'             |
-		| ''                                   | 'Receipt'     | '*'      | '5'         | 'Main Company' | '$$PurchaseOrder0292012$$' | 'Store 02' | '36/Yellow' | '*'       | '*'             |
-		| ''                                   | 'Receipt'     | '*'      | '10'        | 'Main Company' | '$$PurchaseOrder0292012$$' | 'Store 01' | '38/Yellow' | '*'       | '*'             |
-		| ''                                   | 'Receipt'     | '*'      | '10'        | 'Main Company' | '$$PurchaseOrder0292012$$' | 'Store 02' | 'XS/Blue'   | '*'       | '*'             |
-		| ''                                   | 'Receipt'     | '*'      | '10'        | 'Main Company' | '$$PurchaseOrder0292012$$' | 'Store 02' | '38/Yellow' | '*'       | '*'             |
-		| ''                                   | 'Expense'     | '*'      | '5'         | 'Main Company' | '$$PurchaseOrder0292012$$' | 'Store 01' | 'XS/Blue'   | '*'       | '*'             |
-		| ''                                   | 'Expense'     | '*'      | '10'        | 'Main Company' | '$$PurchaseOrder0292012$$' | 'Store 01' | '38/Yellow' | '*'       | '*'             |
-		And I select "Order balance" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Order balance"' | ''            | ''       | ''          | ''           | ''                         | ''          | ''        | '' | '' |
-		| ''                          | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''                         | ''          | ''        | '' | '' |
-		| ''                          | ''            | ''       | 'Quantity'  | 'Store'      | 'Order'                    | 'Item key'  | 'Row key' | '' | '' |
-		| ''                          | 'Receipt'     | '*'      | '5'         | 'Store 01'   | '$$PurchaseOrder0292012$$' | 'XS/Blue'   | '*'       | '' | '' |
-		| ''                          | 'Receipt'     | '*'      | '5'         | 'Store 02'   | '$$PurchaseOrder0292012$$' | '36/Yellow' | '*'       | '' | '' |
-		| ''                          | 'Receipt'     | '*'      | '10'        | 'Store 01'   | '$$PurchaseOrder0292012$$' | '38/Yellow' | '*'       | '' | '' |
-		| ''                          | 'Receipt'     | '*'      | '10'        | 'Store 02'   | '$$PurchaseOrder0292012$$' | 'XS/Blue'   | '*'       | '' | '' |
-		| ''                          | 'Receipt'     | '*'      | '10'        | 'Store 02'   | '$$PurchaseOrder0292012$$' | '38/Yellow' | '*'       | '' | '' |
-
-		And I close all client application windows
+	And I close all client application windows
 
 Scenario: _029202 create Goods receipt based on Purchase order that based on Sales order (Goods receipt before Purchase invoice)
 	* Create Goods receipt
@@ -846,68 +676,6 @@ Scenario: _029203 check movements if there is an additional line in the Purchase
 		And I select current line in "List" table
 		And I finish line editing in "ItemList" table
 		And I click the button named "FormPostAndClose"
-		* Check movements
-			Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
-			And I go to line in "List" table
-			| 'Number' |
-			| '$$NumberPurchaseOrder0292012$$'    |
-			And I click "Registrations report" button
-			And I select "Order procurement" exact value from "Register" drop-down list
-			And I click "Generate report" button
-			And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Order procurement"' | ''            | ''       | ''          | ''             | ''                      | ''         | ''          | ''        | '' |
-			| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                      | ''         | ''          | ''        | '' |
-			| ''                              | ''            | ''       | 'Quantity'  | 'Company'      | 'Order'                 | 'Store'    | 'Item key'  | 'Row key' | '' |
-			| ''                              | 'Expense'     | '*'      | '5'         | 'Main Company' | '$$SalesOrder029201$$'  | 'Store 01' | 'XS/Blue'   | '*'       | '' |
-			| ''                              | 'Expense'     | '*'      | '5'         | 'Main Company' | '$$SalesOrder0292012$$' | 'Store 02' | '36/Yellow' | '*'       | '' |
-			| ''                              | 'Expense'     | '*'      | '10'        | 'Main Company' | '$$SalesOrder029201$$'  | 'Store 01' | '38/Yellow' | '*'       | '' |
-			| ''                              | 'Expense'     | '*'      | '10'        | 'Main Company' | '$$SalesOrder0292012$$' | 'Store 02' | 'XS/Blue'   | '*'       | '' |
-			| ''                              | 'Expense'     | '*'      | '10'        | 'Main Company' | '$$SalesOrder0292012$$' | 'Store 02' | '38/Yellow' | '*'       | '' |
-			And I select "Goods in transit incoming" exact value from "Register" drop-down list
-			And I click "Generate report" button
-			And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Goods in transit incoming"' | ''            | ''       | ''          | ''           | ''                         | ''          | ''        | '' | '' |
-			| ''                                      | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''                         | ''          | ''        | '' | '' |
-			| ''                                      | ''            | ''       | 'Quantity'  | 'Store'      | 'Receipt basis'            | 'Item key'  | 'Row key' | '' | '' |
-			| ''                                      | 'Receipt'     | '*'      | '5'         | 'Store 02'   | '$$PurchaseOrder0292012$$' | '36/Yellow' | '*'       | '' | '' |
-			| ''                                      | 'Receipt'     | '*'      | '10'        | 'Store 02'   | '$$PurchaseOrder0292012$$' | 'XS/Blue'   | '*'       | '' | '' |
-			| ''                                      | 'Receipt'     | '*'      | '10'        | 'Store 02'   | '$$PurchaseOrder0292012$$' | '38/Yellow' | '*'       | '' | '' |
-			| ''                                      | 'Receipt'     | '*'      | '50'        | 'Store 02'   | '$$PurchaseOrder0292012$$' | 'M/White'   | '*'       | '' | '' |
-			And I select "Receipt orders" exact value from "Register" drop-down list
-			And I click "Generate report" button
-			And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Receipt orders"' | ''            | ''       | ''          | ''                         | ''                         | ''          | ''        | '' | '' |
-			| ''                           | 'Record type' | 'Period' | 'Resources' | 'Dimensions'               | ''                         | ''          | ''        | '' | '' |
-			| ''                           | ''            | ''       | 'Quantity'  | 'Order'                    | 'Goods receipt'            | 'Item key'  | 'Row key' | '' | '' |
-			| ''                           | 'Receipt'     | '*'      | '5'         | '$$PurchaseOrder0292012$$' | '$$PurchaseOrder0292012$$' | 'XS/Blue'   | '*'       | '' | '' |
-			| ''                           | 'Receipt'     | '*'      | '10'        | '$$PurchaseOrder0292012$$' | '$$PurchaseOrder0292012$$' | '38/Yellow' | '*'       | '' | '' |
-			And I select "Goods receipt schedule" exact value from "Register" drop-down list
-			And I click "Generate report" button
-			And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Goods receipt schedule"' | ''            | ''       | ''          | ''             | ''                         | ''         | ''          | ''        | ''              |
-			| ''                                   | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                         | ''         | ''          | ''        | 'Attributes'    |
-			| ''                                   | ''            | ''       | 'Quantity'  | 'Company'      | 'Order'                    | 'Store'    | 'Item key'  | 'Row key' | 'Delivery date' |
-			| ''                                   | 'Receipt'     | '*'      | '5'         | 'Main Company' | '$$PurchaseOrder0292012$$' | 'Store 01' | 'XS/Blue'   | '*'       | '*'             |
-			| ''                                   | 'Receipt'     | '*'      | '5'         | 'Main Company' | '$$PurchaseOrder0292012$$' | 'Store 02' | '36/Yellow' | '*'       | '*'             |
-			| ''                                   | 'Receipt'     | '*'      | '10'        | 'Main Company' | '$$PurchaseOrder0292012$$' | 'Store 01' | '38/Yellow' | '*'       | '*'             |
-			| ''                                   | 'Receipt'     | '*'      | '10'        | 'Main Company' | '$$PurchaseOrder0292012$$' | 'Store 02' | 'XS/Blue'   | '*'       | '*'             |
-			| ''                                   | 'Receipt'     | '*'      | '10'        | 'Main Company' | '$$PurchaseOrder0292012$$' | 'Store 02' | '38/Yellow' | '*'       | '*'             |
-			| ''                                   | 'Receipt'     | '*'      | '50'        | 'Main Company' | '$$PurchaseOrder0292012$$' | 'Store 02' | 'M/White'   | '*'       | '*'             |
-			| ''                                   | 'Expense'     | '*'      | '5'         | 'Main Company' | '$$PurchaseOrder0292012$$' | 'Store 01' | 'XS/Blue'   | '*'       | '*'             |
-			| ''                                   | 'Expense'     | '*'      | '10'        | 'Main Company' | '$$PurchaseOrder0292012$$' | 'Store 01' | '38/Yellow' | '*'       | '*'             |
-			And I select "Order balance" exact value from "Register" drop-down list
-			And I click "Generate report" button
-			And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Order balance"' | ''            | ''       | ''          | ''           | ''                         | ''          | ''        | '' | '' |
-			| ''                          | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''                         | ''          | ''        | '' | '' |
-			| ''                          | ''            | ''       | 'Quantity'  | 'Store'      | 'Order'                    | 'Item key'  | 'Row key' | '' | '' |
-			| ''                          | 'Receipt'     | '*'      | '5'         | 'Store 01'   | '$$PurchaseOrder0292012$$' | 'XS/Blue'   | '*'       | '' | '' |
-			| ''                          | 'Receipt'     | '*'      | '5'         | 'Store 02'   | '$$PurchaseOrder0292012$$' | '36/Yellow' | '*'       | '' | '' |
-			| ''                          | 'Receipt'     | '*'      | '10'        | 'Store 01'   | '$$PurchaseOrder0292012$$' | '38/Yellow' | '*'       | '' | '' |
-			| ''                          | 'Receipt'     | '*'      | '10'        | 'Store 02'   | '$$PurchaseOrder0292012$$' | 'XS/Blue'   | '*'       | '' | '' |
-			| ''                          | 'Receipt'     | '*'      | '10'        | 'Store 02'   | '$$PurchaseOrder0292012$$' | '38/Yellow' | '*'       | '' | '' |
-			| ''                          | 'Receipt'     | '*'      | '50'        | 'Store 02'   | '$$PurchaseOrder0292012$$' | 'M/White'   | '*'       | '' | '' |
-		
 	* Create GoodsReceipt 457
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And I go to line in "List" table

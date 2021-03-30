@@ -466,7 +466,8 @@ Scenario: create PurchaseReturnOrder022001 based on PurchaseInvoice018006 (Purch
 		| 'Number' |
 		| '$$NumberPurchaseInvoice018006$$'      |
 	And I select current line in "List" table
-	And I click the button named "FormDocumentPurchaseReturnOrderGeneratePurchaseReturnOrder"
+	And I click the button named "FormDocumentPurchaseReturnOrderGenerate"
+	And I click "Ok" button
 	* Check filling in
 		Then the form attribute named "Partner" became equal to "Ferron BP"
 		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
@@ -499,26 +500,20 @@ Scenario: create PurchaseReturnOrder022001 based on PurchaseInvoice018006 (Purch
 	And I save the window as "$$PurchaseReturnOrder022001$$"
 	And I click the button named "FormPostAndClose"
 	
-Scenario: create PurchaseReturnOrder022006 based on PurchaseInvoice018001 (PurchaseOrder017001)
+Scenario: create PurchaseReturnOrder022006 based on PurchaseInvoice018001
 	Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 	And I go to line in "List" table
 		| 'Number' |
 		| '$$NumberPurchaseInvoice018001$$'      |
 	And I select current line in "List" table
-	And I click the button named "FormDocumentPurchaseReturnOrderGeneratePurchaseReturnOrder"
+	And I click the button named "FormDocumentPurchaseReturnOrderGenerate"
+	And I click "Ok" button
 	* Check filling details
 		Then the form attribute named "Partner" became equal to "Ferron BP"
 		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
 		Then the form attribute named "Agreement" became equal to "Vendor Ferron, TRY"
 		Then the form attribute named "Description" became equal to "Click to enter description"
 		Then the form attribute named "Company" became equal to "Main Company"
-	* Filling in the main details of the document
-		And I click Select button of "Store" field
-		Then "Stores" window is opened
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 01'  |
-		And I select current line in "List" table
 	And I select "Approved" exact value from "Status" drop-down list
 	And I move to "Item list" tab
 	And I go to line in "ItemList" table
@@ -1001,7 +996,8 @@ Scenario: create SalesReturnOrder028004
 			| 'Number' | 'Partner'     |
 			| '$$NumberSalesInvoice024001$$'      |  'Ferron BP' |
 		And I select current line in "List" table
-		And I click the button named "FormDocumentSalesReturnOrderGenerateSalesReturnOrder"
+		And I click the button named "FormDocumentSalesReturnOrderGenerate"
+		And I click "Ok" button
 		* Check the details
 			Then the form attribute named "Partner" became equal to "Ferron BP"
 			Then the form attribute named "LegalName" became equal to "Company Ferron BP"
@@ -1045,7 +1041,8 @@ Scenario: create SalesReturnOrder028001
 		| 'Number'                       | 'Partner'   |
 		| '$$NumberSalesInvoice024008$$' | 'Ferron BP' |
 	And I select current line in "List" table
-	And I click the button named "FormDocumentSalesReturnOrderGenerateSalesReturnOrder"
+	And I click the button named "FormDocumentSalesReturnOrderGenerate"
+	And I click "Ok" button
 	* Check the details
 		Then the form attribute named "Partner" became equal to "Ferron BP"
 		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
@@ -1135,7 +1132,8 @@ Scenario: create PurchaseReturn022314
 		| 'Number' |
 		| '$$NumberPurchaseInvoice018006$$'      |
 	And I select current line in "List" table
-	And I click the button named "FormDocumentPurchaseReturnGeneratePurchaseReturn"
+	And I click the button named "FormDocumentPurchaseReturnGenerate"
+	And I click "Ok" button
 	* Check filling details
 		Then the form attribute named "Partner" became equal to "Ferron BP"
 		Then the form attribute named "Agreement" became equal to "Vendor Ferron, USD"

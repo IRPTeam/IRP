@@ -138,23 +138,8 @@ Scenario: _060202 create Sales invoice with Ar details by Partner terms and chec
 			| ''                               | 'Record type' | 'Period' | 'Resources'            | ''               | ''                       | ''               | 'Dimensions'   | ''                | ''                | ''               | ''         | '' | '' |
 			| ''                               | ''            | ''       | 'Advance to suppliers' | 'Transaction AP' | 'Advance from customers' | 'Transaction AR' | 'Company'      | 'Partner'         | 'Legal name'      | 'Basis document' | 'Currency' | '' | '' |
 			| ''                               | 'Receipt'     | '*'      | ''                     | ''               | ''                       | '11 000'         | 'Main Company' | 'Partner Kalipso' | 'Company Kalipso' | ''               | 'TRY'      | '' | '' |
-			And I select "Sales turnovers" exact value from "Register" drop-down list
-			And I click "Generate report" button
-			And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Sales turnovers"' | ''       | ''          | ''        | ''           | ''              | ''             | ''                       | ''         | ''         | ''        | ''                             | ''                  | ''                     |
-			| ''                            | 'Period' | 'Resources' | ''        | ''           | ''              | 'Dimensions'   | ''                       | ''         | ''         | ''        | ''                             | ''                  | 'Attributes'           |
-			| ''                            | ''       | 'Quantity'  | 'Amount'  | 'Net amount' | 'Offers amount' | 'Company'      | 'Sales invoice'          | 'Currency' | 'Item key' | 'Row key' | 'Multi currency movement type' | 'Serial lot number' | 'Deferred calculation' |
-			| ''                            | '*'      | '20'        | '1 883,2' | '1 595,93'   | ''              | 'Main Company' | '$$SalesInvoice060202$$' | 'USD'      | 'L/Green'  | '*'       | 'Reporting currency'           | ''                  | 'No'                   |
-			| ''                            | '*'      | '20'        | '11 000'  | '9 322,03'   | ''              | 'Main Company' | '$$SalesInvoice060202$$' | 'TRY'      | 'L/Green'  | '*'       | 'Local currency'               | ''                  | 'No'                   |
-			| ''                            | '*'      | '20'        | '11 000'  | '9 322,03'   | ''              | 'Main Company' | '$$SalesInvoice060202$$' | 'TRY'      | 'L/Green'  | '*'       | 'TRY'                          | ''                  | 'No'                   |
-			| ''                            | '*'      | '20'        | '11 000'  | '9 322,03'   | ''              | 'Main Company' | '$$SalesInvoice060202$$' | 'TRY'      | 'L/Green'  | '*'       | 'en description is empty'      | ''                  | 'No'                   |
-			And I select "Reconciliation statement" exact value from "Register" drop-down list
-			And I click "Generate report" button
-			And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Reconciliation statement"' | ''            | ''       | ''          | ''             | ''                | ''         | '' | '' | '' | '' | '' | '' | '' |
-			| ''                                     | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                | ''         | '' | '' | '' | '' | '' | '' | '' |
-			| ''                                     | ''            | ''       | 'Amount'    | 'Company'      | 'Legal name'      | 'Currency' | '' | '' | '' | '' | '' | '' | '' |
-			| ''                                     | 'Receipt'     | '*'      | '11 000'    | 'Main Company' | 'Company Kalipso' | 'TRY'      | '' | '' | '' | '' | '' | '' | '' |
+		
+		
 			And I select "Revenues turnovers" exact value from "Register" drop-down list
 			And I click "Generate report" button
 			And "ResultTable" spreadsheet document contains lines:
@@ -235,13 +220,7 @@ Scenario: _060203 create Cash receipt (partner term with Ar details by partner t
 			| ''                                    | 'Expense'     | '*'      | '11 000'    | 'Main Company' | ''               | 'Partner Kalipso' | 'Company Kalipso' | 'Partner Kalipso Customer' | 'TRY'      | 'Local currency'               | 'No'                   |
 			| ''                                    | 'Expense'     | '*'      | '11 000'    | 'Main Company' | ''               | 'Partner Kalipso' | 'Company Kalipso' | 'Partner Kalipso Customer' | 'TRY'      | 'TRY'                          | 'No'                   |
 			| ''                                    | 'Expense'     | '*'      | '11 000'    | 'Main Company' | ''               | 'Partner Kalipso' | 'Company Kalipso' | 'Partner Kalipso Customer' | 'TRY'      | 'en description is empty'      | 'No'                   |
-		And I select "Reconciliation statement" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Reconciliation statement"' | ''            | ''       | ''          | ''             | ''                | ''         | '' | '' | '' | '' | '' |
-			| ''                                     | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                | ''         | '' | '' | '' | '' | '' |
-			| ''                                     | ''            | ''       | 'Amount'    | 'Company'      | 'Legal name'      | 'Currency' | '' | '' | '' | '' | '' |
-			| ''                                     | 'Expense'     | '*'      | '11 000'    | 'Main Company' | 'Company Kalipso' | 'TRY'      | '' | '' | '' | '' | '' |
+	
 		And I select "Account balance" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
@@ -315,13 +294,7 @@ Scenario: _0602031 create Bank receipt (partner term with Ar details by partner 
 			| ''                                    | 'Expense'     | '*'      | '11 000'    | 'Main Company' | ''               | 'Partner Kalipso' | 'Company Kalipso' | 'Partner Kalipso Customer' | 'TRY'      | 'Local currency'               | 'No'                   |
 			| ''                                    | 'Expense'     | '*'      | '11 000'    | 'Main Company' | ''               | 'Partner Kalipso' | 'Company Kalipso' | 'Partner Kalipso Customer' | 'TRY'      | 'TRY'                          | 'No'                   |
 			| ''                                    | 'Expense'     | '*'      | '11 000'    | 'Main Company' | ''               | 'Partner Kalipso' | 'Company Kalipso' | 'Partner Kalipso Customer' | 'TRY'      | 'en description is empty'      | 'No'                   |
-		And I select "Reconciliation statement" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Reconciliation statement"' | ''            | ''       | ''          | ''             | ''                | ''         | '' | '' | '' | '' | '' |
-			| ''                                     | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                | ''         | '' | '' | '' | '' | '' |
-			| ''                                     | ''            | ''       | 'Amount'    | 'Company'      | 'Legal name'      | 'Currency' | '' | '' | '' | '' | '' |
-			| ''                                     | 'Expense'     | '*'      | '11 000'    | 'Main Company' | 'Company Kalipso' | 'TRY'      | '' | '' | '' | '' | '' |
+	
 		And I select "Account balance" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
@@ -393,13 +366,7 @@ Scenario: _060204 check the offset of the advance for Sales invoice with the typ
 			| ''                               | 'Record type' | 'Period' | 'Resources'            | ''               | ''                       | ''               | 'Dimensions'   | ''                | ''                | ''               | ''         |
 			| ''                               | ''            | ''       | 'Advance to suppliers' | 'Transaction AP' | 'Advance from customers' | 'Transaction AR' | 'Company'      | 'Partner'         | 'Legal name'      | 'Basis document' | 'Currency' |
 			| ''                               | 'Receipt'     | '*'      | ''                     | ''               | '12 000'                 | ''               | 'Main Company' | 'Partner Kalipso' | 'Company Kalipso' | ''               | 'TRY'      |
-		And I select "Reconciliation statement" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Reconciliation statement"' | ''            | ''       | ''          | ''             | ''                | ''         | '' | '' | '' | '' | '' |
-			| ''                                     | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                | ''         | '' | '' | '' | '' | '' |
-			| ''                                     | ''            | ''       | 'Amount'    | 'Company'      | 'Legal name'      | 'Currency' | '' | '' | '' | '' | '' |
-			| ''                                     | 'Expense'     | '*'      | '12 000'    | 'Main Company' | 'Company Kalipso' | 'TRY'      | '' | '' | '' | '' | '' |
+	
 		And I select "Advance from customers" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
@@ -492,23 +459,8 @@ Scenario: _060204 check the offset of the advance for Sales invoice with the typ
 			| ''                               | 'Receipt'     | '*'      | ''                     | ''               | ''                       | '11 000'         | 'Main Company' | 'Partner Kalipso' | 'Company Kalipso' | ''               | 'TRY'      | '' | '' |
 			| ''                               | 'Expense'     | '*'      | ''                     | ''               | ''                       | '11 000'         | 'Main Company' | 'Partner Kalipso' | 'Company Kalipso' | ''               | 'TRY'      | '' | '' |
 			| ''                               | 'Expense'     | '*'      | ''                     | ''               | '11 000'                 | ''               | 'Main Company' | 'Partner Kalipso' | 'Company Kalipso' | ''               | 'TRY'      | '' | '' |
-		And I select "Sales turnovers" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Sales turnovers"' | ''       | ''          | ''        | ''           | ''              | ''             | ''                       | ''         | ''         | ''        | ''                             | ''                  | ''                     |
-			| ''                            | 'Period' | 'Resources' | ''        | ''           | ''              | 'Dimensions'   | ''                       | ''         | ''         | ''        | ''                             | ''                  | 'Attributes'           |
-			| ''                            | ''       | 'Quantity'  | 'Amount'  | 'Net amount' | 'Offers amount' | 'Company'      | 'Sales invoice'          | 'Currency' | 'Item key' | 'Row key' | 'Multi currency movement type' | 'Serial lot number' | 'Deferred calculation' |
-			| ''                            | '*'      | '20'        | '1 883,2' | '1 595,93'   | ''              | 'Main Company' | '$$SalesInvoice060204$$' | 'USD'      | 'L/Green'  | '*'       | 'Reporting currency'           | ''                  | 'No'                   |
-			| ''                            | '*'      | '20'        | '11 000'  | '9 322,03'   | ''              | 'Main Company' | '$$SalesInvoice060204$$' | 'TRY'      | 'L/Green'  | '*'       | 'Local currency'               | ''                  | 'No'                   |
-			| ''                            | '*'      | '20'        | '11 000'  | '9 322,03'   | ''              | 'Main Company' | '$$SalesInvoice060204$$' | 'TRY'      | 'L/Green'  | '*'       | 'TRY'                          | ''                  | 'No'                   |
-			| ''                            | '*'      | '20'        | '11 000'  | '9 322,03'   | ''              | 'Main Company' | '$$SalesInvoice060204$$' | 'TRY'      | 'L/Green'  | '*'       | 'en description is empty'      | ''                  | 'No'                   |
-		And I select "Reconciliation statement" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Reconciliation statement"' | ''            | ''       | ''          | ''             | ''                | ''         | '' | '' | '' | '' | '' | '' | '' |
-			| ''                                     | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                | ''         | '' | '' | '' | '' | '' | '' | '' |
-			| ''                                     | ''            | ''       | 'Amount'    | 'Company'      | 'Legal name'      | 'Currency' | '' | '' | '' | '' | '' | '' | '' |
-			| ''                                     | 'Receipt'     | '*'      | '11 000'    | 'Main Company' | 'Company Kalipso' | 'TRY'      | '' | '' | '' | '' | '' | '' | '' |
+	
+	
 		And I select "Revenues turnovers" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
@@ -599,16 +551,7 @@ Scenario: _060205 create Purchase invoice with Ap details by Partner terms and c
 	* Check Purchase Invoice movements 
 		And I click "Registrations report" button
 
-		And I select "Purchase turnovers" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Purchase turnovers"' | ''       | ''          | ''        | ''           | ''             | ''                          | ''         | ''         | ''        | ''                             | ''                     | '' | '' |
-		| ''                               | 'Period' | 'Resources' | ''        | ''           | 'Dimensions'   | ''                          | ''         | ''         | ''        | ''                             | 'Attributes'           | '' | '' |
-		| ''                               | ''       | 'Quantity'  | 'Amount'  | 'Net amount' | 'Company'      | 'Purchase invoice'          | 'Currency' | 'Item key' | 'Row key' | 'Multi currency movement type' | 'Deferred calculation' | '' | '' |
-		| ''                               | '*'      | '20'        | '1 883,2' | '1 595,93'   | 'Main Company' | '$$PurchaseInvoice060205$$' | 'USD'      | 'L/Green'  | '*'       | 'Reporting currency'           | 'No'                   | '' | '' |
-		| ''                               | '*'      | '20'        | '11 000'  | '9 322,03'   | 'Main Company' | '$$PurchaseInvoice060205$$' | 'TRY'      | 'L/Green'  | '*'       | 'Local currency'               | 'No'                   | '' | '' |
-		| ''                               | '*'      | '20'        | '11 000'  | '9 322,03'   | 'Main Company' | '$$PurchaseInvoice060205$$' | 'TRY'      | 'L/Green'  | '*'       | 'TRY'                          | 'No'                   | '' | '' |
-		| ''                               | '*'      | '20'        | '11 000'  | '9 322,03'   | 'Main Company' | '$$PurchaseInvoice060205$$' | 'TRY'      | 'L/Green'  | '*'       | 'en description is empty'      | 'No'                   | '' | '' |
+	
 		And I select "Accounts statement" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
@@ -616,13 +559,7 @@ Scenario: _060205 create Purchase invoice with Ap details by Partner terms and c
 		| ''                               | 'Record type' | 'Period' | 'Resources'            | ''               | ''                       | ''               | 'Dimensions'   | ''                 | ''                  | ''               | ''         | '' | '' |
 		| ''                               | ''            | ''       | 'Advance to suppliers' | 'Transaction AP' | 'Advance from customers' | 'Transaction AR' | 'Company'      | 'Partner'          | 'Legal name'        | 'Basis document' | 'Currency' | '' | '' |
 		| ''                               | 'Receipt'     | '*'      | ''                     | '11 000'         | ''                       | ''               | 'Main Company' | 'Partner Ferron 1' | 'Company Ferron BP' | ''               | 'TRY'      | '' | '' |
-		And I select "Reconciliation statement" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Reconciliation statement"' | ''            | ''       | ''          | ''             | ''                  | ''         | '' | '' | '' | '' | '' | '' | '' |
-		| ''                                     | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                  | ''         | '' | '' | '' | '' | '' | '' | '' |
-		| ''                                     | ''            | ''       | 'Amount'    | 'Company'      | 'Legal name'        | 'Currency' | '' | '' | '' | '' | '' | '' | '' |
-		| ''                                     | 'Expense'     | '*'      | '11 000'    | 'Main Company' | 'Company Ferron BP' | 'TRY'      | '' | '' | '' | '' | '' | '' | '' |
+	
 		And I select "Goods receipt schedule" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
@@ -691,15 +628,7 @@ Scenario: _060206 create Cash payment (partner term with Ap details by partner t
 			| 'Number'  |
 			| '$$NumberCashPayment060206$$' |
 		And I click "Registrations report" button
-		And I select "Reconciliation statement" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| '$$CashPayment060206$$'                | ''            | ''       | ''          | ''             | ''                  | ''         | '' | '' | '' | '' | '' |
-			| 'Document registrations records'       | ''            | ''       | ''          | ''             | ''                  | ''         | '' | '' | '' | '' | '' |
-			| 'Register  "Reconciliation statement"' | ''            | ''       | ''          | ''             | ''                  | ''         | '' | '' | '' | '' | '' |
-			| ''                                     | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                  | ''         | '' | '' | '' | '' | '' |
-			| ''                                     | ''            | ''       | 'Amount'    | 'Company'      | 'Legal name'        | 'Currency' | '' | '' | '' | '' | '' |
-			| ''                                     | 'Receipt'     | '*'      | '11 000'    | 'Main Company' | 'Company Ferron BP' | 'TRY'      | '' | '' | '' | '' | '' |
+	
 		And I select "Partner AP transactions" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
@@ -775,13 +704,7 @@ Scenario: _060207 check the offset of the advance for Purchase invoice with the 
 			| ''                               | 'Record type' | 'Period' | 'Resources'            | ''               | ''                       | ''               | 'Dimensions'   | ''                 | ''                  | ''               | ''         |
 			| ''                               | ''            | ''       | 'Advance to suppliers' | 'Transaction AP' | 'Advance from customers' | 'Transaction AR' | 'Company'      | 'Partner'          | 'Legal name'        | 'Basis document' | 'Currency' |
 			| ''                               | 'Receipt'     | '*'      | '12 000'               | ''               | ''                       | ''               | 'Main Company' | 'Partner Ferron 1' | 'Company Ferron BP' | ''               | 'TRY'      |
-		And I select "Reconciliation statement" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Reconciliation statement"' | ''            | ''       | ''          | ''             | ''                  | ''         | '' | '' | '' | '' | '' |
-			| ''                                     | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                  | ''         | '' | '' | '' | '' | '' |
-			| ''                                     | ''            | ''       | 'Amount'    | 'Company'      | 'Legal name'        | 'Currency' | '' | '' | '' | '' | '' |
-			| ''                                     | 'Receipt'     | '*'      | '12 000'    | 'Main Company' | 'Company Ferron BP' | 'TRY'      | '' | '' | '' | '' | '' |
+	
 		And I select "Advance to suppliers" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
@@ -851,16 +774,7 @@ Scenario: _060207 check the offset of the advance for Purchase invoice with the 
 			And I save the window as "$$PurchaseInvoice060207$$"
 	* Check movements PurchaseInvoice by register PartnerApTransactions
 		And I click "Registrations report" button
-		And I select "Purchase turnovers" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Purchase turnovers"' | ''       | ''          | ''        | ''           | ''             | ''                          | ''         | ''         | ''        | ''                             | ''                     | '' | '' |
-		| ''                               | 'Period' | 'Resources' | ''        | ''           | 'Dimensions'   | ''                          | ''         | ''         | ''        | ''                             | 'Attributes'           | '' | '' |
-		| ''                               | ''       | 'Quantity'  | 'Amount'  | 'Net amount' | 'Company'      | 'Purchase invoice'          | 'Currency' | 'Item key' | 'Row key' | 'Multi currency movement type' | 'Deferred calculation' | '' | '' |
-		| ''                               | '*'      | '20'        | '1 883,2' | '1 595,93'   | 'Main Company' | '$$PurchaseInvoice060207$$' | 'USD'      | 'L/Green'  | '*'       | 'Reporting currency'           | 'No'                   | '' | '' |
-		| ''                               | '*'      | '20'        | '11 000'  | '9 322,03'   | 'Main Company' | '$$PurchaseInvoice060207$$' | 'TRY'      | 'L/Green'  | '*'       | 'Local currency'               | 'No'                   | '' | '' |
-		| ''                               | '*'      | '20'        | '11 000'  | '9 322,03'   | 'Main Company' | '$$PurchaseInvoice060207$$' | 'TRY'      | 'L/Green'  | '*'       | 'TRY'                          | 'No'                   | '' | '' |
-		| ''                               | '*'      | '20'        | '11 000'  | '9 322,03'   | 'Main Company' | '$$PurchaseInvoice060207$$' | 'TRY'      | 'L/Green'  | '*'       | 'en description is empty'      | 'No'                   | '' | '' |
+	
 		And I select "Accounts statement" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
@@ -870,13 +784,7 @@ Scenario: _060207 check the offset of the advance for Purchase invoice with the 
 		| ''                               | 'Receipt'     | '*'      | ''                     | '11 000'         | ''                       | ''               | 'Main Company' | 'Partner Ferron 1' | 'Company Ferron BP' | ''               | 'TRY'      | '' | '' |
 		| ''                               | 'Expense'     | '*'      | ''                     | '11 000'         | ''                       | ''               | 'Main Company' | 'Partner Ferron 1' | 'Company Ferron BP' | ''               | 'TRY'      | '' | '' |
 		| ''                               | 'Expense'     | '*'      | '11 000'               | ''               | ''                       | ''               | 'Main Company' | 'Partner Ferron 1' | 'Company Ferron BP' | ''               | 'TRY'      | '' | '' |
-		And I select "Reconciliation statement" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Reconciliation statement"' | ''            | ''       | ''          | ''             | ''                  | ''         | '' | '' | '' | '' | '' | '' | '' |
-		| ''                                     | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                  | ''         | '' | '' | '' | '' | '' | '' | '' |
-		| ''                                     | ''            | ''       | 'Amount'    | 'Company'      | 'Legal name'        | 'Currency' | '' | '' | '' | '' | '' | '' | '' |
-		| ''                                     | 'Expense'     | '*'      | '11 000'    | 'Main Company' | 'Company Ferron BP' | 'TRY'      | '' | '' | '' | '' | '' | '' | '' |
+	
 		And I select "Advance to suppliers" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
@@ -954,15 +862,7 @@ Scenario: _060208 create Bank payment (partner term with Ap details by partner t
 			| 'Number'  |
 			| '$$NumberBankPayment060208$$' |
 		And I click "Registrations report" button
-		And I select "Reconciliation statement" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| '$$BankPayment060208$$'                | ''            | ''       | ''          | ''             | ''                  | ''         | '' | '' | '' | '' | '' |
-			| 'Document registrations records'       | ''            | ''       | ''          | ''             | ''                  | ''         | '' | '' | '' | '' | '' |
-			| 'Register  "Reconciliation statement"' | ''            | ''       | ''          | ''             | ''                  | ''         | '' | '' | '' | '' | '' |
-			| ''                                     | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                  | ''         | '' | '' | '' | '' | '' |
-			| ''                                     | ''            | ''       | 'Amount'    | 'Company'      | 'Legal name'        | 'Currency' | '' | '' | '' | '' | '' |
-			| ''                                     | 'Receipt'     | '*'      | '11 000'    | 'Main Company' | 'Company Ferron BP' | 'TRY'      | '' | '' | '' | '' | '' |
+	
 		And I select "Partner AP transactions" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:

@@ -125,15 +125,10 @@ Scenario: _022001 create document Purchase return order, store use Shipment conf
 	And I close current window
 	And I close current window
 	* Check for no movements in the registers
-		Given I open hyperlink "e1cib/list/AccumulationRegister.OrderBalance"
+		Given I open hyperlink "e1cib/list/AccumulationRegister.R1001T_Purchases"
 		And "List" table does not contain lines
-			| 'Quantity' | 'Recorder'                      | 'Line number' | 'Store'    | 'Order'                         | 'Item key' |
-			| '2,000'    | '$$PurchaseReturnOrder022001$$' | '1'           | 'Store 02' | '$$PurchaseReturnOrder022001$$' | 'L/Green'  |
-		And I close current window
-		Given I open hyperlink "e1cib/list/AccumulationRegister.PurchaseTurnovers"
-		And "List" table does not contain lines
-			| 'Quantity' | 'Recorder'                      | 'Line number' | 'Purchase invoice'          | 'Item key' |
-			| '-2,000'   | '$$PurchaseReturnOrder022001$$' | '1'           | '$$PurchaseInvoice018006$$' | 'L/Green'  |
+			| 'Quantity' | 'Recorder'                      | 'Line number' | 'Invoice'          | 'Item key' |
+			| '2,000'   | '$$PurchaseReturnOrder022001$$' | '1'           | '$$PurchaseInvoice018006$$' | 'L/Green'  |
 		And I close current window
 	* Set Approved status
 		Given I open hyperlink "e1cib/list/Document.PurchaseReturnOrder"

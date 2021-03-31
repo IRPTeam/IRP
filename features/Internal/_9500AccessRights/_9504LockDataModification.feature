@@ -559,7 +559,7 @@ Scenario: 950409 create rules for information register (with recorder)
 			Given I open hyperlink 'e1cib/list/InformationRegister.LockDataModificationRules'
 			And I go to line in "List" table
 				| 'Type'               |
-				| 'AccumulationRegister.SalesOrderTurnovers' |
+				| 'AccumulationRegister.R2010T_SalesOrders' |
 			And in the table "List" I click the button named "ListContextMenuDelete"
 			Then "1C:Enterprise" window is opened
 			And I click "Yes" button

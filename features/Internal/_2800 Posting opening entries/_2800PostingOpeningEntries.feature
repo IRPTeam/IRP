@@ -641,14 +641,7 @@ Scenario: _400003 opening entry advance balance
 		| ''                               | ''            | ''       | 'Advance to suppliers' | 'Transaction AP' | 'Advance from customers' | 'Transaction AR' | 'Company'      | 'Partner'   | 'Legal name'        | 'Basis document' | 'Currency' |
 		| ''                               | 'Receipt'     | '*'      | ''                     | ''               | '100'                    | ''               | 'Main Company' | 'Kalipso'   | 'Company Kalipso'   | ''               | 'TRY'      |
 		| ''                               | 'Receipt'     | '*'      | '100'                  | ''               | ''                       | ''               | 'Main Company' | 'Ferron BP' | 'Company Ferron BP' | ''               | 'TRY'      |
-		And I select "Reconciliation statement" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Reconciliation statement"' | ''            | ''       | ''          | ''             | ''                  | ''         | '' | '' | '' | '' | '' |
-		| ''                                     | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                  | ''         | '' | '' | '' | '' | '' |
-		| ''                                     | ''            | ''       | 'Amount'    | 'Company'      | 'Legal name'        | 'Currency' | '' | '' | '' | '' | '' |
-		| ''                                     | 'Receipt'     | '*'      | '100'       | 'Main Company' | 'Company Ferron BP' | 'TRY'      | '' | '' | '' | '' | '' |
-		| ''                                     | 'Expense'     | '*'      | '100'       | 'Main Company' | 'Company Kalipso'   | 'TRY'      | '' | '' | '' | '' | '' |
+	
 		And I select "Advance from customers" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
@@ -759,13 +752,7 @@ Scenario: _400004 opening entry AP balance by partner terms (vendors)
 			| ''                               | 'Record type' | 'Period' | 'Resources'            | ''               | ''                       | ''               | 'Dimensions'   | ''        | ''           | ''               | ''         |
 			| ''                               | ''            | ''       | 'Advance to suppliers' | 'Transaction AP' | 'Advance from customers' | 'Transaction AR' | 'Company'      | 'Partner' | 'Legal name' | 'Basis document' | 'Currency' |
 			| ''                               | 'Receipt'     | '*'      | ''                     | '100'            | ''                       | ''               | 'Main Company' | 'DFC'     | 'DFC'        | ''               | 'TRY'      |
-			And I select "Reconciliation statement" exact value from "Register" drop-down list
-			And I click "Generate report" button
-			And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Reconciliation statement"' | ''            | ''       | ''          | ''             | ''           | ''         | '' | '' | '' | '' | '' |
-			| ''                                     | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''           | ''         | '' | '' | '' | '' | '' |
-			| ''                                     | ''            | ''       | 'Amount'    | 'Company'      | 'Legal name' | 'Currency' | '' | '' | '' | '' | '' |
-			| ''                                     | 'Expense'     | '*'      | '100'       | 'Main Company' | 'DFC'        | 'TRY'      | '' | '' | '' | '' | '' |
+		
 			And I select "Partner AP transactions" exact value from "Register" drop-down list
 			And I click "Generate report" button
 			And "ResultTable" spreadsheet document contains lines:
@@ -878,13 +865,7 @@ Scenario: _400005 opening entry AR balance by partner terms (customers)
 			| ''                               | 'Record type' | 'Period' | 'Resources'            | ''               | ''                       | ''               | 'Dimensions'   | ''        | ''           | ''               | ''         |
 			| ''                               | ''            | ''       | 'Advance to suppliers' | 'Transaction AP' | 'Advance from customers' | 'Transaction AR' | 'Company'      | 'Partner' | 'Legal name' | 'Basis document' | 'Currency' |
 			| ''                               | 'Receipt'     | '*'      | ''                     | ''               | ''                       | '100'            | 'Main Company' | 'DFC'     | 'DFC'        | ''               | 'TRY'      |
-		And I select "Reconciliation statement" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Reconciliation statement"' | ''            | ''       | ''                     | ''               | ''                       | ''               | ''             | ''                              | ''           | ''                             | ''                     |
-			| ''                                     | 'Record type' | 'Period' | 'Resources'            | 'Dimensions'     | ''                       | ''               | ''             | ''                              | ''           | ''                             | ''                     |
-			| ''                                     | ''            | ''       | 'Amount'               | 'Company'        | 'Legal name'             | 'Currency'       | ''             | ''                              | ''           | ''                             | ''                     |
-			| ''                                     | 'Receipt'     | '*'      | '100'                  | 'Main Company'   | 'DFC'                    | 'TRY'            | ''             | ''                              | ''           | ''                             | ''                     |
+	
 
 
 
@@ -1163,14 +1144,7 @@ Scenario: _400009 check the entry of the Ap/Ar balance by documents
 			| ''                               | ''            | ''                           | 'Advance to suppliers' | 'Transaction AP' | 'Advance from customers' | 'Transaction AR' | 'Company'      | 'Partner' | 'Legal name' | 'Basis document'         | 'Currency' |
 			| ''                               | 'Receipt'     | '$$DateOpeningEntry400009$$' | ''                     | ''               | ''                       | '200'            | 'Main Company' | 'DFC'     | 'DFC'        | '$$OpeningEntry400009$$' | 'TRY'      |
 			| ''                               | 'Receipt'     | '$$DateOpeningEntry400009$$' | ''                     | '100'            | ''                       | ''               | 'Main Company' | 'DFC'     | 'DFC'        | '$$OpeningEntry400009$$' | 'TRY'      |
-		And I select "Reconciliation statement" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Reconciliation statement"' | ''            | ''                           | ''          | ''             | ''           | ''         | '' | '' | '' | '' | '' |
-			| ''                                     | 'Record type' | 'Period'                     | 'Resources' | 'Dimensions'   | ''           | ''         | '' | '' | '' | '' | '' |
-			| ''                                     | ''            | ''                           | 'Amount'    | 'Company'      | 'Legal name' | 'Currency' | '' | '' | '' | '' | '' |
-			| ''                                     | 'Receipt'     | '$$DateOpeningEntry400009$$' | '200'       | 'Main Company' | 'DFC'        | 'TRY'      | '' | '' | '' | '' | '' |
-			| ''                                     | 'Expense'     | '$$DateOpeningEntry400009$$' | '100'       | 'Main Company' | 'DFC'        | 'TRY'      | '' | '' | '' | '' | '' |
+	
 		And I select "Partner AP transactions" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:

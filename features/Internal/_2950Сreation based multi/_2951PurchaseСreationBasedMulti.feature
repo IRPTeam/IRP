@@ -2104,26 +2104,7 @@ Scenario: _090323 create one Purchase order - several Goods receipt - one Purcha
 		And I save the window as "$$PurchaseInvoice090323$$"
 	* Check movements
 		And I click "Registrations report" button
-		And I select "Purchase turnovers" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| '$$PurchaseInvoice090323$$'      | ''       | ''          | ''         | ''           | ''             | ''                          | ''         | ''          | ''        | ''                             | ''                     | '' | '' |
-		| 'Document registrations records' | ''       | ''          | ''         | ''           | ''             | ''                          | ''         | ''          | ''        | ''                             | ''                     | '' | '' |
-		| 'Register  "Purchase turnovers"' | ''       | ''          | ''         | ''           | ''             | ''                          | ''         | ''          | ''        | ''                             | ''                     | '' | '' |
-		| ''                               | 'Period' | 'Resources' | ''         | ''           | 'Dimensions'   | ''                          | ''         | ''          | ''        | ''                             | 'Attributes'           | '' | '' |
-		| ''                               | ''       | 'Quantity'  | 'Amount'   | 'Net amount' | 'Company'      | 'Purchase invoice'          | 'Currency' | 'Item key'  | 'Row key' | 'Multi currency movement type' | 'Deferred calculation' | '' | '' |
-		| ''                               | '*'      | '20'        | '684,8'    | '580,34'     | 'Main Company' | '$$PurchaseInvoice090323$$' | 'USD'      | 'M/White'   | '*'       | 'Reporting currency'           | 'No'                   | '' | '' |
-		| ''                               | '*'      | '20'        | '719,04'   | '609,36'     | 'Main Company' | '$$PurchaseInvoice090323$$' | 'USD'      | 'L/Green'   | '*'       | 'Reporting currency'           | 'No'                   | '' | '' |
-		| ''                               | '*'      | '20'        | '4 000'    | '3 389,83'   | 'Main Company' | '$$PurchaseInvoice090323$$' | 'TRY'      | 'M/White'   | '*'       | 'Local currency'               | 'No'                   | '' | '' |
-		| ''                               | '*'      | '20'        | '4 000'    | '3 389,83'   | 'Main Company' | '$$PurchaseInvoice090323$$' | 'TRY'      | 'M/White'   | '*'       | 'TRY'                          | 'No'                   | '' | '' |
-		| ''                               | '*'      | '20'        | '4 000'    | '3 389,83'   | 'Main Company' | '$$PurchaseInvoice090323$$' | 'TRY'      | 'M/White'   | '*'       | 'en description is empty'      | 'No'                   | '' | '' |
-		| ''                               | '*'      | '20'        | '4 200'    | '3 559,32'   | 'Main Company' | '$$PurchaseInvoice090323$$' | 'TRY'      | 'L/Green'   | '*'       | 'Local currency'               | 'No'                   | '' | '' |
-		| ''                               | '*'      | '20'        | '4 200'    | '3 559,32'   | 'Main Company' | '$$PurchaseInvoice090323$$' | 'TRY'      | 'L/Green'   | '*'       | 'TRY'                          | 'No'                   | '' | '' |
-		| ''                               | '*'      | '20'        | '4 200'    | '3 559,32'   | 'Main Company' | '$$PurchaseInvoice090323$$' | 'TRY'      | 'L/Green'   | '*'       | 'en description is empty'      | 'No'                   | '' | '' |
-		| ''                               | '*'      | '30'        | '1 078,56' | '914,03'     | 'Main Company' | '$$PurchaseInvoice090323$$' | 'USD'      | '36/Yellow' | '*'       | 'Reporting currency'           | 'No'                   | '' | '' |
-		| ''                               | '*'      | '30'        | '6 300'    | '5 338,98'   | 'Main Company' | '$$PurchaseInvoice090323$$' | 'TRY'      | '36/Yellow' | '*'       | 'Local currency'               | 'No'                   | '' | '' |
-		| ''                               | '*'      | '30'        | '6 300'    | '5 338,98'   | 'Main Company' | '$$PurchaseInvoice090323$$' | 'TRY'      | '36/Yellow' | '*'       | 'TRY'                          | 'No'                   | '' | '' |
-		| ''                               | '*'      | '30'        | '6 300'    | '5 338,98'   | 'Main Company' | '$$PurchaseInvoice090323$$' | 'TRY'      | '36/Yellow' | '*'       | 'en description is empty'      | 'No'                   | '' | '' |
+	
 		And I select "Accounts statement" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
@@ -2131,13 +2112,7 @@ Scenario: _090323 create one Purchase order - several Goods receipt - one Purcha
 		| ''                               | 'Record type' | 'Period' | 'Resources'            | ''               | ''                       | ''               | 'Dimensions'   | ''          | ''                  | ''                          | ''         | '' | '' |
 		| ''                               | ''            | ''       | 'Advance to suppliers' | 'Transaction AP' | 'Advance from customers' | 'Transaction AR' | 'Company'      | 'Partner'   | 'Legal name'        | 'Basis document'            | 'Currency' | '' | '' |
 		| ''                               | 'Receipt'     | '*'      | ''                     | '14 500'         | ''                       | ''               | 'Main Company' | 'Ferron BP' | 'Company Ferron BP' | '$$PurchaseInvoice090323$$' | 'TRY'      | '' | '' |
-		And I select "Reconciliation statement" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Reconciliation statement"' | ''            | ''       | ''          | ''             | ''                  | ''         | '' | '' | '' | '' | '' | '' | '' |
-		| ''                                     | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                  | ''         | '' | '' | '' | '' | '' | '' | '' |
-		| ''                                     | ''            | ''       | 'Amount'    | 'Company'      | 'Legal name'        | 'Currency' | '' | '' | '' | '' | '' | '' | '' |
-		| ''                                     | 'Expense'     | '*'      | '14 500'    | 'Main Company' | 'Company Ferron BP' | 'TRY'      | '' | '' | '' | '' | '' | '' | '' |
+	
 	
 		And I select "Partner AP transactions" exact value from "Register" drop-down list
 		And I click "Generate report" button

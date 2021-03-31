@@ -89,7 +89,7 @@ Procedure FillAtServer()
 		"SELECT
 		|	ReconciliationStatementBalance.AmountBalance AS OpeningBalance
 		|FROM
-		|	AccumulationRegister.ReconciliationStatement.Balance(BEGINOFPERIOD(&StartDate, DAY), Company = &Company
+		|	AccumulationRegister.R5010B_ReconciliationStatement.Balance(BEGINOFPERIOD(&StartDate, DAY), Company = &Company
 		|	AND LegalName = &LegalName
 		|	AND Currency = &Currency) AS ReconciliationStatementBalance
 		|;

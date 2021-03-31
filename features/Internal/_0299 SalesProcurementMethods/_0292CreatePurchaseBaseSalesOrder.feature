@@ -56,946 +56,717 @@ Scenario: _029200 preparation (create Purchase order based on a Sales order)
 		When Create information register Taxes records (VAT)
 	* Tax settings
 		When filling in Tax settings for company
-	* Create Sales order 501
-		* Open form for create order
-			Given I open hyperlink "e1cib/list/Document.SalesOrder"
-			And I click the button named "FormCreate"
-		* Filling the document heading
-			And I click Select button of "Partner" field
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Lomaniti'   |
-			And I select current line in "List" table
-			And I click Select button of "Legal name" field
-			And I go to line in "List" table
-				| 'Description'       |
-				| 'Company Lomaniti' |
-			And I select current line in "List" table
-			And I click Select button of "Partner term" field
-			And I go to line in "List" table
-				| 'Description'                   |
-				| 'Basic Partner terms, without VAT' |
-			And I select current line in "List" table
-		* Filling items tab
-			And in the table "ItemList" I click the button named "ItemListAdd"
-			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Trousers'    |
-			And I select current line in "List" table
-			And I activate field named "ItemListItemKey" in "ItemList" table
-			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
-			And I go to line in "List" table
-				| 'Item'     | 'Item key'  |
-				| 'Trousers' | '38/Yellow' |
-			And I select current line in "List" table
-			And I move to "Item list" tab
-			And I activate "Q" field in "ItemList" table
-			And I select current line in "ItemList" table
-			And I input "5,000" text in "Q" field of "ItemList" table
-			And I select "Purchase" exact value from "Procurement method" drop-down list in "ItemList" table
-			And I finish line editing in "ItemList" table
-			And in the table "ItemList" I click the button named "ItemListAdd"
-			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Shirt'       |
-			And I select current line in "List" table
-			And I activate field named "ItemListItemKey" in "ItemList" table
-			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
-			And I go to line in "List" table
-				| 'Item'  | 'Item key' |
-				| 'Shirt' | '38/Black' |
-			And I select current line in "List" table
-			And I activate "Q" field in "ItemList" table
-			And I input "2,000" text in "Q" field of "ItemList" table
-			And I select "Purchase" exact value from "Procurement method" drop-down list in "ItemList" table
-			And I finish line editing in "ItemList" table
-			And I set checkbox "Shipment confirmations before sales invoice"
-			And I input end of the current month date in "Delivery date" field
-			And I click the button named "FormPost"
-			And I delete "$$NumberSalesOrder0292001$$" variable
-			And I delete "$$SalesOrder0292001$$" variable
-			And I save the value of "Number" field as "$$NumberSalesOrder0292001$$"
-			And I save the window as "$$SalesOrder0292001$$"
-			And I click the button named "FormPostAndClose"
-	* Create Sales order 502
-		* Open form for create order
-			Given I open hyperlink "e1cib/list/Document.SalesOrder"
-			And I click the button named "FormCreate"
-		* Filling the document heading
-			And I click Select button of "Partner" field
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Lomaniti'   |
-			And I select current line in "List" table
-			And I click Select button of "Legal name" field
-			And I go to line in "List" table
-				| 'Description'       |
-				| 'Company Lomaniti' |
-			And I select current line in "List" table
-			And I click Select button of "Partner term" field
-			And I go to line in "List" table
-				| 'Description'                   |
-				| 'Basic Partner terms, TRY' |
-			And I select current line in "List" table
-		* Filling items tab
-			And in the table "ItemList" I click the button named "ItemListAdd"
-			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Trousers'    |
-			And I select current line in "List" table
-			And I activate field named "ItemListItemKey" in "ItemList" table
-			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
-			And I go to line in "List" table
-				| 'Item'     | 'Item key'  |
-				| 'Trousers' | '38/Yellow' |
-			And I select current line in "List" table
-			And I move to "Item list" tab
-			And I activate "Q" field in "ItemList" table
-			And I select current line in "ItemList" table
-			And I input "8,000" text in "Q" field of "ItemList" table
-			And I select "Purchase" exact value from "Procurement method" drop-down list in "ItemList" table
-			And I finish line editing in "ItemList" table
-			And in the table "ItemList" I click the button named "ItemListAdd"
-			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Shirt'       |
-			And I select current line in "List" table
-			And I activate field named "ItemListItemKey" in "ItemList" table
-			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
-			And I go to line in "List" table
-				| 'Item'  | 'Item key' |
-				| 'Shirt' | '38/Black' |
-			And I select current line in "List" table
-			And I activate "Q" field in "ItemList" table
-			And I input "11,000" text in "Q" field of "ItemList" table
-			And I select "Purchase" exact value from "Procurement method" drop-down list in "ItemList" table
-			And I finish line editing in "ItemList" table
-			And I input end of the current month date in "Delivery date" field
-		* Save number
-			And I click the button named "FormPost"
-			And I delete "$$NumberSalesOrder0292002$$" variable
-			And I delete "$$SalesOrder0292002$$" variable
-			And I save the value of "Number" field as "$$NumberSalesOrder0292002$$"
-			And I save the window as "$$SalesOrder0292002$$"
-			And I click the button named "FormPostAndClose"
-	* Create Sales order 503
-		* Open form for create order
-			Given I open hyperlink "e1cib/list/Document.SalesOrder"
-			And I click the button named "FormCreate"
-		* Filling the document heading
-			And I click Select button of "Partner" field
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Lomaniti'   |
-			And I select current line in "List" table
-			And I click Select button of "Legal name" field
-			And I go to line in "List" table
-				| 'Description'       |
-				| 'Company Lomaniti' |
-			And I select current line in "List" table
-			And I click Select button of "Partner term" field
-			And I go to line in "List" table
-				| 'Description'                   |
-				| 'Basic Partner terms, without VAT' |
-			And I select current line in "List" table
-		* Filling items tab
-			And in the table "ItemList" I click the button named "ItemListAdd"
-			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Trousers'    |
-			And I select current line in "List" table
-			And I activate field named "ItemListItemKey" in "ItemList" table
-			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
-			And I go to line in "List" table
-				| 'Item'     | 'Item key'  |
-				| 'Trousers' | '38/Yellow' |
-			And I select current line in "List" table
-			And I move to "Item list" tab
-			And I activate "Q" field in "ItemList" table
-			And I select current line in "ItemList" table
-			And I input "12,000" text in "Q" field of "ItemList" table
-			And I select "Purchase" exact value from "Procurement method" drop-down list in "ItemList" table
-			And I finish line editing in "ItemList" table
-			And in the table "ItemList" I click the button named "ItemListAdd"
-			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Shirt'       |
-			And I select current line in "List" table
-			And I activate field named "ItemListItemKey" in "ItemList" table
-			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
-			And I go to line in "List" table
-				| 'Item'  | 'Item key' |
-				| 'Shirt' | '38/Black' |
-			And I select current line in "List" table
-			And I activate "Q" field in "ItemList" table
-			And I input "7,000" text in "Q" field of "ItemList" table
-			And I select "Purchase" exact value from "Procurement method" drop-down list in "ItemList" table
-			And I finish line editing in "ItemList" table
-			And I input end of the current month date in "Delivery date" field
-		* Save number
-			And I move to "Other" tab
-			And I set checkbox "Shipment confirmations before sales invoice"
-			And I click the button named "FormPost"
-			And I delete "$$NumberSalesOrder0292003$$" variable
-			And I delete "$$SalesOrder0292003$$" variable
-			And I save the value of "Number" field as "$$NumberSalesOrder0292003$$"
-			And I save the window as "$$SalesOrder0292003$$"
-			And I click the button named "FormPostAndClose"
-	* Create Sales order 504
-		* Open form for create order
-			Given I open hyperlink "e1cib/list/Document.SalesOrder"
-			And I click the button named "FormCreate"
-		* Filling the document heading
-			And I click Select button of "Partner" field
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Lomaniti'   |
-			And I select current line in "List" table
-			And I click Select button of "Legal name" field
-			And I go to line in "List" table
-				| 'Description'       |
-				| 'Company Lomaniti' |
-			And I select current line in "List" table
-			And I click Select button of "Partner term" field
-			And I go to line in "List" table
-				| 'Description'                   |
-				| 'Basic Partner terms, without VAT' |
-			And I select current line in "List" table
-		* Filling items tab
-			And in the table "ItemList" I click the button named "ItemListAdd"
-			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Trousers'    |
-			And I select current line in "List" table
-			And I activate field named "ItemListItemKey" in "ItemList" table
-			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
-			And I go to line in "List" table
-				| 'Item'     | 'Item key'  |
-				| 'Trousers' | '38/Yellow' |
-			And I select current line in "List" table
-			And I move to "Item list" tab
-			And I activate "Q" field in "ItemList" table
-			And I select current line in "ItemList" table
-			And I input "7,000" text in "Q" field of "ItemList" table
-			And I select "Purchase" exact value from "Procurement method" drop-down list in "ItemList" table
-			And I finish line editing in "ItemList" table
-			And in the table "ItemList" I click the button named "ItemListAdd"
-			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Shirt'       |
-			And I select current line in "List" table
-			And I activate field named "ItemListItemKey" in "ItemList" table
-			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
-			And I go to line in "List" table
-				| 'Item'  | 'Item key' |
-				| 'Shirt' | '38/Black' |
-			And I select current line in "List" table
-			And I activate "Q" field in "ItemList" table
-			And I input "2,000" text in "Q" field of "ItemList" table
-			And I select "Purchase" exact value from "Procurement method" drop-down list in "ItemList" table
-			And I finish line editing in "ItemList" table
-			And I input end of the current month date in "Delivery date" field
-		* Save number
-			And I move to "Other" tab
-			And I set checkbox "Shipment confirmations before sales invoice"
-			And I click the button named "FormPost"
-			And I delete "$$NumberSalesOrder0292004$$" variable
-			And I delete "$$SalesOrder0292004$$" variable
-			And I save the value of "Number" field as "$$NumberSalesOrder0292004$$"
-			And I save the window as "$$SalesOrder0292004$$"
-			And I click the button named "FormPostAndClose"
-	* Create Sales order 505
-		* Open form for create order
-			Given I open hyperlink "e1cib/list/Document.SalesOrder"
-			And I click the button named "FormCreate"
-		* Filling the document heading
-			And I click Select button of "Partner" field
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Lomaniti'   |
-			And I select current line in "List" table
-			And I click Select button of "Legal name" field
-			And I go to line in "List" table
-				| 'Description'       |
-				| 'Company Lomaniti' |
-			And I select current line in "List" table
-			And I click Select button of "Partner term" field
-			And I go to line in "List" table
-				| 'Description'           |
-				| 'Basic Partner terms, TRY' |
-			And I select current line in "List" table
-		* Filling items tab
-			And in the table "ItemList" I click the button named "ItemListAdd"
-			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Trousers'    |
-			And I select current line in "List" table
-			And I activate field named "ItemListItemKey" in "ItemList" table
-			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
-			And I go to line in "List" table
-				| 'Item'     | 'Item key'  |
-				| 'Trousers' | '38/Yellow' |
-			And I select current line in "List" table
-			And I move to "Item list" tab
-			And I activate "Q" field in "ItemList" table
-			And I select current line in "ItemList" table
-			And I input "31,000" text in "Q" field of "ItemList" table
-			And I select "Purchase" exact value from "Procurement method" drop-down list in "ItemList" table
-			And I finish line editing in "ItemList" table
-			And in the table "ItemList" I click the button named "ItemListAdd"
-			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Shirt'       |
-			And I select current line in "List" table
-			And I activate field named "ItemListItemKey" in "ItemList" table
-			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
-			And I go to line in "List" table
-				| 'Item'  | 'Item key' |
-				| 'Shirt' | '38/Black' |
-			And I select current line in "List" table
-			And I activate "Q" field in "ItemList" table
-			And I input "40,000" text in "Q" field of "ItemList" table
-			And I select "Purchase" exact value from "Procurement method" drop-down list in "ItemList" table
-			And I finish line editing in "ItemList" table
-			And I input end of the current month date in "Delivery date" field
-		* Save number
-			And I click the button named "FormPost"
-			And I delete "$$NumberSalesOrder0292005$$" variable
-			And I delete "$$SalesOrder0292005$$" variable
-			And I save the value of "Number" field as "$$NumberSalesOrder0292005$$"
-			And I save the window as "$$SalesOrder0292005$$"
-			And I click the button named "FormPostAndClose"
+	When Create document SalesOrder objects (check SalesOrderProcurement)
+	And I execute 1C:Enterprise script at server
+		| "Documents.SalesOrder.FindByNumber(501).GetObject().Write(DocumentWriteMode.Posting);" |
+		| "Documents.SalesOrder.FindByNumber(502).GetObject().Write(DocumentWriteMode.Posting);" |
+		| "Documents.SalesOrder.FindByNumber(503).GetObject().Write(DocumentWriteMode.Posting);" |
 
-
-
-#  Sales order - Purchase order - Goods receipt - Purchase invoice - Shipment confirmation - Sales invoice
-Scenario: _029201 create Purchase order based on Sales order (Shipment confirmation before Sales invoice)
-	Given I open hyperlink "e1cib/list/Document.SalesOrder"
-	And I click the button named "FormCreate"
-	And I click Select button of "Partner" field
-	And I go to line in "List" table
-			| 'Description'             |
-			| 'Lomaniti' |
-	And I select current line in "List" table
-	And I click Select button of "Partner term" field
-	And I go to line in "List" table
-			| 'Description'                     |
-			| 'Basic Partner terms, TRY' |
-	And I select current line in "List" table
-	And I click Select button of "Legal name" field
-	And I go to line in "List" table
-			| 'Description' |
-			| 'Company Lomaniti'  |
-	And I select current line in "List" table
-	* Adding items to sales order
-		And in the table "ItemList" I click the button named "ItemListAdd"
-		And I click choice button of "Item" attribute in "ItemList" table
-		Then "Items" window is opened
-		And I go to line in "List" table
-			| 'Description'                     |
-			| 'Dress' |
-		And I select current line in "List" table
-		And I activate "Item key" field in "ItemList" table
-		And I click choice button of "Item key" attribute in "ItemList" table
-		Then "Item keys" window is opened
-		And I go to line in "List" table
-			| 'Item key' |
-			| 'XS/Blue'  |
-		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "5,000" text in "Q" field of "ItemList" table
-		And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
-		And I finish line editing in "ItemList" table
-		And in the table "ItemList" I click the button named "ItemListAdd"
-		And I click choice button of "Item" attribute in "ItemList" table
-		Then "Items" window is opened
-		And I go to line in "List" table
-			| 'Description'                     |
-			| 'Boots' |
-		And I select current line in "List" table
-		And I activate "Item key" field in "ItemList" table
-		And I click choice button of "Item key" attribute in "ItemList" table
-		Then "Item keys" window is opened
-		And I go to line in "List" table
-			| 'Item key' |
-			| '36/18SD'  |
-		And I select current line in "List" table
-		And I activate "Q" field in "ItemList" table
-		And I input "1,000" text in "Q" field of "ItemList" table
-		And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
-		And I finish line editing in "ItemList" table
-	And I click the button named "FormPost"
-	* Change the procurement method by rows and add a new row
-		And I go to line in "ItemList" table
-			| Item  |
-			| Dress |
-		And I activate "Procurement method" field in "ItemList" table
-		And I select current line in "ItemList" table
-		And I select "Purchase" exact value from "Procurement method" drop-down list in "ItemList" table
-		And I finish line editing in "ItemList" table
-		And I go to line in "ItemList" table
-			| Item  |
-			| Boots |
-		And in the table "ItemList" I click the button named "ItemListAdd"
-		And I click choice button of "Item" attribute in "ItemList" table
-		And I go to line in "List" table
-			| Description |
-			| Trousers    |
-		And I select current line in "List" table
-		And I activate "Item key" field in "ItemList" table
-		And I click choice button of "Item key" attribute in "ItemList" table
-		And I go to line in "List" table
-			| Item     | Item key  |
-			| Trousers | 38/Yellow |
-		And I select current line in "List" table
-		And I activate "Procurement method" field in "ItemList" table
-		And I select "Purchase" exact value from "Procurement method" drop-down list in "ItemList" table
-		And I move to the next attribute
-		And I activate "Q" field in "ItemList" table
-		And I input "10,000" text in "Q" field of "ItemList" table
-		And I finish line editing in "ItemList" table
-	* Change of document number 455
-		And I move to "Other" tab
-		And I expand "More" group
-		And I set checkbox "Shipment confirmations before sales invoice"
-		And I input end of the current month date in "Delivery date" field
-	* Post Sales order
-		And I click the button named "FormPost"
-		And I delete "$$NumberSalesOrder029201$$" variable
-		And I delete "$$SalesOrder029201$$" variable
-		And I save the value of "Number" field as "$$NumberSalesOrder029201$$"
-		And I save the window as "$$SalesOrder029201$$"
-		And I click the button named "FormPostAndClose"
-	* Check movements
+Scenario: _029201 create Purchase order based on Sales order
+	* Create Purchase order based on Sales order
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I go to line in "List" table
-		| 'Number' |
-		| '$$NumberSalesOrder029201$$'    |
-		And I click "Registrations report" button
-
-		And I select "Order procurement" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Order procurement"' | ''            | ''       | ''          | ''             | ''                     | ''         | ''          | ''        | '' | '' |
-		| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                     | ''         | ''          | ''        | '' | '' |
-		| ''                              | ''            | ''       | 'Quantity'  | 'Company'      | 'Order'                | 'Store'    | 'Item key'  | 'Row key' | '' | '' |
-		| ''                              | 'Receipt'     | '*'      | '5'         | 'Main Company' | '$$SalesOrder029201$$' | 'Store 01' | 'XS/Blue'   | '*'       | '' | '' |
-		| ''                              | 'Receipt'     | '*'      | '10'        | 'Main Company' | '$$SalesOrder029201$$' | 'Store 01' | '38/Yellow' | '*'       | '' | '' |
-		And I select "Shipment orders" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Shipment orders"' | ''            | ''       | ''          | ''                     | ''                      | ''         | ''        | '' | '' | '' |
-		| ''                            | 'Record type' | 'Period' | 'Resources' | 'Dimensions'           | ''                      | ''         | ''        | '' | '' | '' |
-		| ''                            | ''            | ''       | 'Quantity'  | 'Order'                | 'Shipment confirmation' | 'Item key' | 'Row key' | '' | '' | '' |
-		| ''                            | 'Receipt'     | '*'      | '1'         | '$$SalesOrder029201$$' | '$$SalesOrder029201$$'  | '36/18SD'  | '*'       | '' | '' | '' |
-		And I select "Sales order turnovers" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Sales order turnovers"' | ''       | ''          | ''       | ''             | ''                     | ''         | ''          | ''        | ''                             | ''                     |
-		| ''                                  | 'Period' | 'Resources' | ''       | 'Dimensions'   | ''                     | ''         | ''          | ''        | ''                             | 'Attributes'           |
-		| ''                                  | ''       | 'Quantity'  | 'Amount' | 'Company'      | 'Sales order'          | 'Currency' | 'Item key'  | 'Row key' | 'Multi currency movement type' | 'Deferred calculation' |
-		| ''                                  | '*'      | '1'         | '119,84' | 'Main Company' | '$$SalesOrder029201$$' | 'USD'      | '36/18SD'   | '*'       | 'Reporting currency'           | 'No'                   |
-		| ''                                  | '*'      | '1'         | '700'    | 'Main Company' | '$$SalesOrder029201$$' | 'TRY'      | '36/18SD'   | '*'       | 'en description is empty'      | 'No'                   |
-		| ''                                  | '*'      | '1'         | '700'    | 'Main Company' | '$$SalesOrder029201$$' | 'TRY'      | '36/18SD'   | '*'       | 'Local currency'               | 'No'                   |
-		| ''                                  | '*'      | '1'         | '700'    | 'Main Company' | '$$SalesOrder029201$$' | 'TRY'      | '36/18SD'   | '*'       | 'TRY'                          | 'No'                   |
-		| ''                                  | '*'      | '5'         | '445,12' | 'Main Company' | '$$SalesOrder029201$$' | 'USD'      | 'XS/Blue'   | '*'       | 'Reporting currency'           | 'No'                   |
-		| ''                                  | '*'      | '5'         | '2 600'  | 'Main Company' | '$$SalesOrder029201$$' | 'TRY'      | 'XS/Blue'   | '*'       | 'en description is empty'      | 'No'                   |
-		| ''                                  | '*'      | '5'         | '2 600'  | 'Main Company' | '$$SalesOrder029201$$' | 'TRY'      | 'XS/Blue'   | '*'       | 'Local currency'               | 'No'                   |
-		| ''                                  | '*'      | '5'         | '2 600'  | 'Main Company' | '$$SalesOrder029201$$' | 'TRY'      | 'XS/Blue'   | '*'       | 'TRY'                          | 'No'                   |
-		| ''                                  | '*'      | '10'        | '684,8'  | 'Main Company' | '$$SalesOrder029201$$' | 'USD'      | '38/Yellow' | '*'       | 'Reporting currency'           | 'No'                   |
-		| ''                                  | '*'      | '10'        | '4 000'  | 'Main Company' | '$$SalesOrder029201$$' | 'TRY'      | '38/Yellow' | '*'       | 'en description is empty'      | 'No'                   |
-		| ''                                  | '*'      | '10'        | '4 000'  | 'Main Company' | '$$SalesOrder029201$$' | 'TRY'      | '38/Yellow' | '*'       | 'Local currency'               | 'No'                   |
-		| ''                                  | '*'      | '10'        | '4 000'  | 'Main Company' | '$$SalesOrder029201$$' | 'TRY'      | '38/Yellow' | '*'       | 'TRY'                          | 'No'                   |
-		And I select "Order balance" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Order balance"' | ''            | ''       | ''          | ''           | ''                     | ''          | ''        | '' | '' | '' |
-		| ''                          | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''                     | ''          | ''        | '' | '' | '' |
-		| ''                          | ''            | ''       | 'Quantity'  | 'Store'      | 'Order'                | 'Item key'  | 'Row key' | '' | '' | '' |
-		| ''                          | 'Receipt'     | '*'      | '1'         | 'Store 01'   | '$$SalesOrder029201$$' | '36/18SD'   | '*'       | '' | '' | '' |
-		| ''                          | 'Receipt'     | '*'      | '5'         | 'Store 01'   | '$$SalesOrder029201$$' | 'XS/Blue'   | '*'       | '' | '' | '' |
-		| ''                          | 'Receipt'     | '*'      | '10'        | 'Store 01'   | '$$SalesOrder029201$$' | '38/Yellow' | '*'       | '' | '' | '' |
-		And I select "Shipment confirmation schedule" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Shipment confirmation schedule"' | ''            | ''          | ''          | ''                     | ''                      | ''          | ''          | ''        | ''                             | ''                     |
-		| ''                                           | 'Record type' | 'Period'    | 'Resources' | 'Dimensions'           | ''                      | ''          | ''          | ''        | 'Attributes'                   | ''                     |
-		| ''                                           | ''            | ''          | 'Quantity'  | 'Company'              | 'Order'                 | 'Store'     | 'Item key'  | 'Row key' | 'Delivery date'                | ''                     |
-		| ''                                           | 'Receipt'     | '*'         | '1'         | 'Main Company'         | '$$SalesOrder029201$$'  | 'Store 01'  | '36/18SD'   | '*'       | '*'                            | ''                     |
-		| ''                                           | 'Receipt'     | '*'         | '5'         | 'Main Company'         | '$$SalesOrder029201$$'  | 'Store 01'  | 'XS/Blue'   | '*'       | '*'                            | ''                     |
-		| ''                                           | 'Receipt'     | '*'         | '10'        | 'Main Company'         | '$$SalesOrder029201$$'  | 'Store 01'  | '38/Yellow' | '*'       | '*'                            | ''                     |
-		| ''                                           | 'Expense'     | '*'         | '1'         | 'Main Company'         | '$$SalesOrder029201$$'  | 'Store 01'  | '36/18SD'   | '*'       | '*'                            | ''                     |
-		And I close all client application windows
-	* Create one more Sales order
-		When create an order for Ferron BP Basic Partner term, TRY (Dress -10 and Trousers - 5)
-		* Change of store to the one with Shipment confirmation
-			And I click Choice button of the field named "Store"
-			And I go to line in "List" table
-				| Description |
-				| Store 02    |
-			And I select current line in "List" table
-			Then "Update item list info" window is opened
-			Then the form attribute named "Stores" became equal to "Yes"
-			And I click "OK" button
-	* Change the procurement method by rows and add a new row
-			And I go to line in "ItemList" table
-				| Item  |
-				| Dress |
-			And I activate "Procurement method" field in "ItemList" table
-			And I select current line in "ItemList" table
-			And I select "Purchase" exact value from "Procurement method" drop-down list in "ItemList" table
-			And I finish line editing in "ItemList" table
-			And I go to line in "ItemList" table
-				| Item  | 
-				| Trousers |
-			And I activate "Procurement method" field in "ItemList" table
-			And I select current line in "ItemList" table
-			And I select "Purchase" exact value from "Procurement method" drop-down list in "ItemList" table
-			And in the table "ItemList" I click the button named "ItemListAdd"
-			And I click choice button of "Item" attribute in "ItemList" table
-			And I go to line in "List" table
-				| Description |
-				| Trousers    |
-			And I select current line in "List" table
-			And I activate "Item key" field in "ItemList" table
-			And I click choice button of "Item key" attribute in "ItemList" table
-			And I go to line in "List" table
-				| Item     | Item key  |
-				| Trousers | 38/Yellow |
-			And I select current line in "List" table
-			And I activate "Procurement method" field in "ItemList" table
-			And I select "Purchase" exact value from "Procurement method" drop-down list in "ItemList" table
-			And I move to the next attribute
-			And I activate "Q" field in "ItemList" table
-			And I input "10,000" text in "Q" field of "ItemList" table
-			And I finish line editing in "ItemList" table
-	* Change of document number 456
-			And I move to "Other" tab
-			And I expand "More" group
-			And I set checkbox "Shipment confirmations before sales invoice"
-	* Post Sales order
-			And I click the button named "FormPost"
-			And I delete "$$NumberSalesOrder0292012$$" variable
-			And I delete "$$SalesOrder0292012$$" variable
-			And I save the value of "Number" field as "$$NumberSalesOrder0292012$$"
-			And I save the window as "$$SalesOrder0292012$$"
-			And I click the button named "FormPostAndClose"
-	* Check movements
-		Given I open hyperlink "e1cib/list/Document.SalesOrder"
-		And I go to line in "List" table
-		| 'Number' |
-		| '$$NumberSalesOrder0292012$$'    |
-		And I click "Registrations report" button
-
-		And I select "Order procurement" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Order procurement"' | ''            | ''       | ''          | ''             | ''                      | ''         | ''          | ''        | '' | '' |
-		| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                      | ''         | ''          | ''        | '' | '' |
-		| ''                              | ''            | ''       | 'Quantity'  | 'Company'      | 'Order'                 | 'Store'    | 'Item key'  | 'Row key' | '' | '' |
-		| ''                              | 'Receipt'     | '*'      | '5'         | 'Main Company' | '$$SalesOrder0292012$$' | 'Store 02' | '36/Yellow' | '*'       | '' | '' |
-		| ''                              | 'Receipt'     | '*'      | '10'        | 'Main Company' | '$$SalesOrder0292012$$' | 'Store 02' | 'XS/Blue'   | '*'       | '' | '' |
-		| ''                              | 'Receipt'     | '*'      | '10'        | 'Main Company' | '$$SalesOrder0292012$$' | 'Store 02' | '38/Yellow' | '*'       | '' | '' |
-		And I select "Sales order turnovers" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Sales order turnovers"' | ''       | ''          | ''       | ''             | ''                      | ''         | ''          | ''        | ''                             | ''                     |
-		| ''                                  | 'Period' | 'Resources' | ''       | 'Dimensions'   | ''                      | ''         | ''          | ''        | ''                             | 'Attributes'           |
-		| ''                                  | ''       | 'Quantity'  | 'Amount' | 'Company'      | 'Sales order'           | 'Currency' | 'Item key'  | 'Row key' | 'Multi currency movement type' | 'Deferred calculation' |
-		| ''                                  | '*'      | '5'         | '342,4'  | 'Main Company' | '$$SalesOrder0292012$$' | 'USD'      | '36/Yellow' | '*'       | 'Reporting currency'           | 'No'                   |
-		| ''                                  | '*'      | '5'         | '2 000'  | 'Main Company' | '$$SalesOrder0292012$$' | 'TRY'      | '36/Yellow' | '*'       | 'en description is empty'      | 'No'                   |
-		| ''                                  | '*'      | '5'         | '2 000'  | 'Main Company' | '$$SalesOrder0292012$$' | 'TRY'      | '36/Yellow' | '*'       | 'Local currency'               | 'No'                   |
-		| ''                                  | '*'      | '5'         | '2 000'  | 'Main Company' | '$$SalesOrder0292012$$' | 'TRY'      | '36/Yellow' | '*'       | 'TRY'                          | 'No'                   |
-		| ''                                  | '*'      | '10'        | '684,8'  | 'Main Company' | '$$SalesOrder0292012$$' | 'USD'      | '38/Yellow' | '*'       | 'Reporting currency'           | 'No'                   |
-		| ''                                  | '*'      | '10'        | '890,24' | 'Main Company' | '$$SalesOrder0292012$$' | 'USD'      | 'XS/Blue'   | '*'       | 'Reporting currency'           | 'No'                   |
-		| ''                                  | '*'      | '10'        | '4 000'  | 'Main Company' | '$$SalesOrder0292012$$' | 'TRY'      | '38/Yellow' | '*'       | 'en description is empty'      | 'No'                   |
-		| ''                                  | '*'      | '10'        | '4 000'  | 'Main Company' | '$$SalesOrder0292012$$' | 'TRY'      | '38/Yellow' | '*'       | 'Local currency'               | 'No'                   |
-		| ''                                  | '*'      | '10'        | '4 000'  | 'Main Company' | '$$SalesOrder0292012$$' | 'TRY'      | '38/Yellow' | '*'       | 'TRY'                          | 'No'                   |
-		| ''                                  | '*'      | '10'        | '5 200'  | 'Main Company' | '$$SalesOrder0292012$$' | 'TRY'      | 'XS/Blue'   | '*'       | 'en description is empty'      | 'No'                   |
-		| ''                                  | '*'      | '10'        | '5 200'  | 'Main Company' | '$$SalesOrder0292012$$' | 'TRY'      | 'XS/Blue'   | '*'       | 'Local currency'               | 'No'                   |
-		| ''                                  | '*'      | '10'        | '5 200'  | 'Main Company' | '$$SalesOrder0292012$$' | 'TRY'      | 'XS/Blue'   | '*'       | 'TRY'                          | 'No'                   |
-		And I select "Order balance" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Order balance"' | ''            | ''       | ''          | ''           | ''                      | ''          | ''        | '' | '' | '' |
-		| ''                          | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''                      | ''          | ''        | '' | '' | '' |
-		| ''                          | ''            | ''       | 'Quantity'  | 'Store'      | 'Order'                 | 'Item key'  | 'Row key' | '' | '' | '' |
-		| ''                          | 'Receipt'     | '*'      | '5'         | 'Store 02'   | '$$SalesOrder0292012$$' | '36/Yellow' | '*'       | '' | '' | '' |
-		| ''                          | 'Receipt'     | '*'      | '10'        | 'Store 02'   | '$$SalesOrder0292012$$' | 'XS/Blue'   | '*'       | '' | '' | '' |
-		| ''                          | 'Receipt'     | '*'      | '10'        | 'Store 02'   | '$$SalesOrder0292012$$' | '38/Yellow' | '*'       | '' | '' | '' |
-		And I select "Shipment confirmation schedule" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Shipment confirmation schedule"' | ''            | ''          | ''          | ''             | ''                      | ''          | ''          | ''        | ''                             | ''                     |
-		| ''                                           | 'Record type' | 'Period'    | 'Resources' | 'Dimensions'   | ''                      | ''          | ''          | ''        | 'Attributes'                   | ''                     |
-		| ''                                           | ''            | ''          | 'Quantity'  | 'Company'      | 'Order'                 | 'Store'     | 'Item key'  | 'Row key' | 'Delivery date'                | ''                     |
-		| ''                                           | 'Receipt'     | '*'         | '5'         | 'Main Company' | '$$SalesOrder0292012$$' | 'Store 02'  | '36/Yellow' | '*'       | '*'                            | ''                     |
-		| ''                                           | 'Receipt'     | '*'         | '10'        | 'Main Company' | '$$SalesOrder0292012$$' | 'Store 02'  | 'XS/Blue'   | '*'       | '*'                            | ''                     |
-		| ''                                           | 'Receipt'     | '*'         | '10'        | 'Main Company' | '$$SalesOrder0292012$$' | 'Store 02'  | '38/Yellow' | '*'       | '*'                            | ''                     |
-		And I close all client application windows
-	* Create one Purchase order based on two Sales orders
-		Given I open hyperlink "e1cib/list/Document.SalesOrder"
-		And I go to line in "List" table
-		| 'Number'                     | 'Partner'  |
-		| '$$NumberSalesOrder029201$$' | 'Lomaniti' |
+			| 'Number'                     |
+			| '501' |
 		And I move one line down in "List" table and select line
 		And I click the button named "FormDocumentPurchaseOrderGenerate"
+		And "BasisesTree" table contains lines
+			| 'Row presentation'                          | 'Use'                                       | 'Quantity' | 'Unit' | 'Price'  | 'Currency' |
+			| 'Sales order 501 dated 30.03.2021 11:56:21' | 'Sales order 501 dated 30.03.2021 11:56:21' | ''         | ''     | ''       | ''         |
+			| 'Trousers, 38/Yellow'                       | 'Yes'                                       | '5,000'    | 'pcs'  | '338,98' | 'TRY'      |
+			| 'Shirt, 38/Black'                           | 'Yes'                                       | '2,000'    | 'pcs'  | '296,61' | 'TRY'      |
+			| 'Sales order 502 dated 30.03.2021 11:56:28' | 'Sales order 502 dated 30.03.2021 11:56:28' | ''         | ''     | ''       | ''         |
+			| 'Trousers, 38/Yellow'                       | 'Yes'                                       | '8,000'    | 'pcs'  | '400,00' | 'TRY'      |
+			| 'Shirt, 38/Black'                           | 'Yes'                                       | '11,000'   | 'pcs'  | '350,00' | 'TRY'      |
+			| 'Dress, M/White'                            | 'Yes'                                       | '8,000'    | 'pcs'  | '520,00' | 'TRY'      |
+		Then the number of "BasisesTree" table lines is "равно" "7"
 		And I click "Ok" button
-	* Check filling of the tabular part of the Purchase order
-		And "ItemList" table contains lines
-		| 'Item'     | 'Item key'  | 'Store'    | 'Unit' | 'Q'      | 'Purchase basis'   |
-		| 'Dress'    | 'XS/Blue'   | 'Store 01' | 'pcs'  | '5,000'  | '$$SalesOrder029201$$' |
-		| 'Trousers' | '38/Yellow' | 'Store 01' | 'pcs'  | '10,000' | '$$SalesOrder029201$$' |
-		| 'Dress'    | 'XS/Blue'   | 'Store 02' | 'pcs'  | '10,000' | '$$SalesOrder0292012$$' |
-		| 'Trousers' | '36/Yellow' | 'Store 02' | 'pcs'  | '5,000'  | '$$SalesOrder0292012$$' |
-		| 'Trousers' | '38/Yellow' | 'Store 02' | 'pcs'  | '10,000' | '$$SalesOrder0292012$$' |
-	* Filling in vendors and prices
+	* Filling in main info
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
-			| Description |
-			| Ferron BP   |
-		And I select current line in "List" table
-		And I click Select button of "Legal name" field
-		And I go to line in "List" table
-			| Description |
-			| Company Ferron BP   |
+			| 'Description'                     |
+			| 'Ferron BP' |
 		And I select current line in "List" table
 		And I click Select button of "Partner term" field
 		And I go to line in "List" table
-			| Description        |
-			| Vendor Ferron, TRY |
+			| 'Description'        |
+			| 'Vendor Ferron, USD' |
 		And I select current line in "List" table
-		# message on price changes
-		And I remove checkbox "Do you want to replace filled price types with price type Vendor price, TRY?"
-		And I remove checkbox "Do you want to update filled prices?"
+		Then "Update item list info" window is opened
 		And I click "OK" button
-		# message on price changes
+		And I activate "Price" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "10,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| 'Item'     | 'Item key'  | 'Price type'        | 'Q'     |
+			| 'Trousers' | '38/Yellow' | 'Vendor price, USD' | '8,000' |
+		And I select current line in "ItemList" table
+		And I input "15,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' | 'Price type'        | 'Q'     |
+			| 'Shirt' | '38/Black' | 'Vendor price, USD' | '2,000' |
+		And I select current line in "ItemList" table
+		And I input "20,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' | 'Price type'        | 'Q'      |
+			| 'Shirt' | '38/Black' | 'Vendor price, USD' | '11,000' |
+		And I select current line in "ItemList" table
+		And I input "20,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' | 'Price type'        | 'Q'     |
+			| 'Dress' | 'M/White'  | 'Vendor price, USD' | '8,000' |
+		And I select current line in "ItemList" table
+		And I input "21,00" text in "Price" field of "ItemList" table
+		And I input "15,00" text in "Q" field of "ItemList" table
+		And I finish line editing in "ItemList" table
 		And I select "Approved" exact value from "Status" drop-down list
-		And I go to line in "ItemList" table
-			| 'Item'  | 'Item key' | 'Store'    |
-			| 'Dress' | 'XS/Blue'  | 'Store 01' |
-		And I select current line in "ItemList" table
-		And I input "200,00" text in "Price" field of "ItemList" table
-		And I finish line editing in "ItemList" table
-		And I go to line in "ItemList" table
-			| 'Item'     | 'Item key'   | 'Store'    |
-			| 'Trousers' | '38/Yellow'  | 'Store 01' |
-		And I select current line in "ItemList" table
-		And I input "180,00" text in "Price" field of "ItemList" table
-		And I finish line editing in "ItemList" table
-		And I go to line in "ItemList" table
-			| 'Item'  | 'Item key' | 'Store'    |
-			| 'Dress' | 'XS/Blue'  | 'Store 02' |
-		And I select current line in "ItemList" table
-		And I input "200,00" text in "Price" field of "ItemList" table
-		And I finish line editing in "ItemList" table
-		And I go to line in "ItemList" table
-			| 'Item'     | 'Item key'   | 'Store'    |
-			| 'Trousers' | '36/Yellow'  | 'Store 02' |
-		And I select current line in "ItemList" table
-		And I input "180,00" text in "Price" field of "ItemList" table
-		And I finish line editing in "ItemList" table
-		And I go to line in "ItemList" table
-			| 'Item'     | 'Item key'   | 'Store'    |
-			| 'Trousers' | '38/Yellow'  | 'Store 02' |
-		And I select current line in "ItemList" table
-		And I input "180,00" text in "Price" field of "ItemList" table
-		And I finish line editing in "ItemList" table
-	* Change of document number - 456
-		And I move to "Other" tab
-		And I expand "More" group
-		And I set checkbox "Goods receipt before purchase invoice"
-		And I input end of the current month date in "Delivery date" field
-		And I click the button named "FormPost"
-		And I delete "$$NumberPurchaseOrder0292012$$" variable
-		And I delete "$$PurchaseOrder0292012$$" variable
-		And I save the value of "Number" field as "$$NumberPurchaseOrder0292012$$"
-		And I save the window as "$$PurchaseOrder0292012$$"
-	And I click the button named "FormPostAndClose"
-	* Check movements Purchase order
-		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
-		And I go to line in "List" table
-		| 'Number' |
-		| '$$NumberPurchaseOrder0292012$$'    |
-		And I click "Registrations report" button
-		And I select "Order procurement" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Order procurement"' | ''            | ''       | ''          | ''             | ''                      | ''         | ''          | ''        | '' |
-		| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                      | ''         | ''          | ''        | '' |
-		| ''                              | ''            | ''       | 'Quantity'  | 'Company'      | 'Order'                 | 'Store'    | 'Item key'  | 'Row key' | '' |
-		| ''                              | 'Expense'     | '*'      | '5'         | 'Main Company' | '$$SalesOrder029201$$'  | 'Store 01' | 'XS/Blue'   | '*'       | '' |
-		| ''                              | 'Expense'     | '*'      | '5'         | 'Main Company' | '$$SalesOrder0292012$$' | 'Store 02' | '36/Yellow' | '*'       | '' |
-		| ''                              | 'Expense'     | '*'      | '10'        | 'Main Company' | '$$SalesOrder029201$$'  | 'Store 01' | '38/Yellow' | '*'       | '' |
-		| ''                              | 'Expense'     | '*'      | '10'        | 'Main Company' | '$$SalesOrder0292012$$' | 'Store 02' | 'XS/Blue'   | '*'       | '' |
-		| ''                              | 'Expense'     | '*'      | '10'        | 'Main Company' | '$$SalesOrder0292012$$' | 'Store 02' | '38/Yellow' | '*'       | '' |
-		And I select "Goods in transit incoming" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Goods in transit incoming"' | ''            | ''       | ''          | ''           | ''                         | ''          | ''        | '' | '' |
-		| ''                                      | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''                         | ''          | ''        | '' | '' |
-		| ''                                      | ''            | ''       | 'Quantity'  | 'Store'      | 'Receipt basis'            | 'Item key'  | 'Row key' | '' | '' |
-		| ''                                      | 'Receipt'     | '*'      | '5'         | 'Store 02'   | '$$PurchaseOrder0292012$$' | '36/Yellow' | '*'       | '' | '' |
-		| ''                                      | 'Receipt'     | '*'      | '10'        | 'Store 02'   | '$$PurchaseOrder0292012$$' | 'XS/Blue'   | '*'       | '' | '' |
-		| ''                                      | 'Receipt'     | '*'      | '10'        | 'Store 02'   | '$$PurchaseOrder0292012$$' | '38/Yellow' | '*'       | '' | '' |
-		And I select "Receipt orders" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Receipt orders"' | ''            | ''       | ''          | ''                         | ''                         | ''          | ''        | '' | '' |
-		| ''                           | 'Record type' | 'Period' | 'Resources' | 'Dimensions'               | ''                         | ''          | ''        | '' | '' |
-		| ''                           | ''            | ''       | 'Quantity'  | 'Order'                    | 'Goods receipt'            | 'Item key'  | 'Row key' | '' | '' |
-		| ''                           | 'Receipt'     | '*'      | '5'         | '$$PurchaseOrder0292012$$' | '$$PurchaseOrder0292012$$' | 'XS/Blue'   | '*'       | '' | '' |
-		| ''                           | 'Receipt'     | '*'      | '10'        | '$$PurchaseOrder0292012$$' | '$$PurchaseOrder0292012$$' | '38/Yellow' | '*'       | '' | '' |
-		And I select "Goods receipt schedule" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Goods receipt schedule"' | ''            | ''       | ''          | ''             | ''                         | ''         | ''          | ''        | ''              |
-		| ''                                   | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                         | ''         | ''          | ''        | 'Attributes'    |
-		| ''                                   | ''            | ''       | 'Quantity'  | 'Company'      | 'Order'                    | 'Store'    | 'Item key'  | 'Row key' | 'Delivery date' |
-		| ''                                   | 'Receipt'     | '*'      | '5'         | 'Main Company' | '$$PurchaseOrder0292012$$' | 'Store 01' | 'XS/Blue'   | '*'       | '*'             |
-		| ''                                   | 'Receipt'     | '*'      | '5'         | 'Main Company' | '$$PurchaseOrder0292012$$' | 'Store 02' | '36/Yellow' | '*'       | '*'             |
-		| ''                                   | 'Receipt'     | '*'      | '10'        | 'Main Company' | '$$PurchaseOrder0292012$$' | 'Store 01' | '38/Yellow' | '*'       | '*'             |
-		| ''                                   | 'Receipt'     | '*'      | '10'        | 'Main Company' | '$$PurchaseOrder0292012$$' | 'Store 02' | 'XS/Blue'   | '*'       | '*'             |
-		| ''                                   | 'Receipt'     | '*'      | '10'        | 'Main Company' | '$$PurchaseOrder0292012$$' | 'Store 02' | '38/Yellow' | '*'       | '*'             |
-		| ''                                   | 'Expense'     | '*'      | '5'         | 'Main Company' | '$$PurchaseOrder0292012$$' | 'Store 01' | 'XS/Blue'   | '*'       | '*'             |
-		| ''                                   | 'Expense'     | '*'      | '10'        | 'Main Company' | '$$PurchaseOrder0292012$$' | 'Store 01' | '38/Yellow' | '*'       | '*'             |
-		And I select "Order balance" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Order balance"' | ''            | ''       | ''          | ''           | ''                         | ''          | ''        | '' | '' |
-		| ''                          | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''                         | ''          | ''        | '' | '' |
-		| ''                          | ''            | ''       | 'Quantity'  | 'Store'      | 'Order'                    | 'Item key'  | 'Row key' | '' | '' |
-		| ''                          | 'Receipt'     | '*'      | '5'         | 'Store 01'   | '$$PurchaseOrder0292012$$' | 'XS/Blue'   | '*'       | '' | '' |
-		| ''                          | 'Receipt'     | '*'      | '5'         | 'Store 02'   | '$$PurchaseOrder0292012$$' | '36/Yellow' | '*'       | '' | '' |
-		| ''                          | 'Receipt'     | '*'      | '10'        | 'Store 01'   | '$$PurchaseOrder0292012$$' | '38/Yellow' | '*'       | '' | '' |
-		| ''                          | 'Receipt'     | '*'      | '10'        | 'Store 02'   | '$$PurchaseOrder0292012$$' | 'XS/Blue'   | '*'       | '' | '' |
-		| ''                          | 'Receipt'     | '*'      | '10'        | 'Store 02'   | '$$PurchaseOrder0292012$$' | '38/Yellow' | '*'       | '' | '' |
-
-		And I close all client application windows
-
-Scenario: _029202 create Goods receipt based on Purchase order that based on Sales order (Goods receipt before Purchase invoice)
-	* Create Goods receipt
-		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
-		And I go to line in "List" table
-			| 'Number' |
-			| '$$NumberPurchaseOrder0292012$$'    |
-		And I click the button named "FormDocumentGoodsReceiptGenerate"
+	* Add items from SO 503
+		And I click "AddBasisDocuments" button
+		And I go to line in "BasisesTree" table
+			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
+			| 'TRY'      | '520,00' | '10,000'   | 'Dress, XS/Blue'   | 'pcs'  | 'No'  |
+		And I change "Use" checkbox in "BasisesTree" table
+		And I finish line editing in "BasisesTree" table
+		And I go to line in "BasisesTree" table
+			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation'    | 'Unit' | 'Use' |
+			| 'TRY'      | '400,00' | '5,000'    | 'Trousers, 36/Yellow' | 'pcs'  | 'No'  |
+		And I change "Use" checkbox in "BasisesTree" table
+		And I finish line editing in "BasisesTree" table
+		And I go to line in "BasisesTree" table
+			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation'    | 'Unit' | 'Use' |
+			| 'TRY'      | '400,00' | '10,000'   | 'Trousers, 38/Yellow' | 'pcs'  | 'No'  |
+		And I change "Use" checkbox in "BasisesTree" table
+		And I finish line editing in "BasisesTree" table
 		And I click "Ok" button
-	* Check filling of the tabular part
-		And "ItemList" table contains lines
-			| 'Item'     | 'Quantity' | 'Item key'  | 'Unit' | 'Sales order'           | 'Store'    | 'Receipt basis'            |
-			| 'Dress'    | '5,000'    | 'XS/Blue'   | 'pcs'  | '$$SalesOrder029201$$'  | 'Store 01' | '$$PurchaseOrder0292012$$' |
-			| 'Trousers' | '5,000'    | '36/Yellow' | 'pcs'  | '$$SalesOrder0292012$$' | 'Store 02' | '$$PurchaseOrder0292012$$' |
-			| 'Trousers' | '10,000'   | '38/Yellow' | 'pcs'  | '$$SalesOrder0292012$$' | 'Store 02' | '$$PurchaseOrder0292012$$' |
-			| 'Dress'    | '10,000'   | 'XS/Blue'   | 'pcs'  | '$$SalesOrder0292012$$' | 'Store 02' | '$$PurchaseOrder0292012$$' |
-			| 'Trousers' | '10,000'   | '38/Yellow' | 'pcs'  | '$$SalesOrder029201$$'  | 'Store 01' | '$$PurchaseOrder0292012$$' |
-			| 'Trousers' | '10,000'   | '38/Yellow' | 'pcs'  | '$$SalesOrder0292012$$' | 'Store 02' | '$$PurchaseOrder0292012$$' |
-		And I click the button named "FormPost"
-		And I delete "$$NumberGoodsReceipt0292022$$" variable
-		And I delete "$$GoodsReceipt029202$$" variable
-		And I save the value of "Number" field as "$$NumberGoodsReceipt0292022$$"
-		And I save the window as "$$GoodsReceipt029202$$"
-		And I click the button named "FormPostAndClose"
-	And I close all client application windows
-
-Scenario: _029203 check movements if there is an additional line in the Purchase order that is not in the Sales order (Goods receipt before Purchase invoice)
-	* Mark for deletion Goods receipt 456
-		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
-		And I go to line in "List" table
-			| 'Number' |
-			| '$$NumberGoodsReceipt0292022$$'    |
-		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
-		Then "1C:Enterprise" window is opened
-		And I click "Yes" button
-		And I close all client application windows
-	* Adding one more line to Purchase order 456 which is not in the Sales order
-		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
-		And I go to line in "List" table
-			| 'Number' |
-			| '$$NumberPurchaseOrder0292012$$'    |
-		And I select current line in "List" table
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' | 'Q'      |
+			| 'Dress' | 'XS/Blue'  | '10,000' |
+		And I select current line in "ItemList" table
+		And I input "17,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| 'Item'     | 'Item key'  | 'Q'     |
+			| 'Trousers' | '36/Yellow' | '5,000' |
+		And I select current line in "ItemList" table
+		And I input "18,00" text in "Price" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| 'Item'     | 'Item key'  | 'Q'      |
+			| 'Trousers' | '38/Yellow' | '10,000' |
+		And I select current line in "ItemList" table
+		And I input "20,00" text in "Price" field of "ItemList" table
+		And I input "20,00" text in "Q" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+	* Add one more item
 		And I click the button named "Add"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |
-			| 'Dress'  |
+			| 'High shoes'  |
 		And I select current line in "List" table
 		And I activate "Item key" field in "ItemList" table
 		And I click choice button of "Item key" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Item key' |
-			| 'M/White'  |
+			| 'Item'       | 'Item key' |
+			| 'High shoes' | '37/19SD'  |
 		And I select current line in "List" table
-		And I finish line editing in "ItemList" table
-		And I input "50" text in "Q" field of "ItemList" table
-		And I input "210" text in "Price" field of "ItemList" table
-		And I click choice button of "Store" attribute in "ItemList" table
+		And I activate "Unit" field in "ItemList" table
+		And I click choice button of "Unit" attribute in "ItemList" table
 		And I go to line in "List" table
-			| Description |
-			| Store 02    |
+			| 'Description'            |
+			| 'High shoes box (8 pcs)' |
 		And I select current line in "List" table
+		And I activate field named "ItemListQuantity" in "ItemList" table
+		And I input "5,000" text in the field named "ItemListQuantity" of "ItemList" table
+		And I activate "Price" field in "ItemList" table
+		And I input "14,00" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
+		And I click "Show row key" button
+		And I go to line in "ItemList" table
+			| '#' |
+			| '1' |
+		And I activate "Key" field in "ItemList" table
+		And I delete "$$Rov1PurchaseOrder029201$$" variable
+		And I save the current field value as "$$Rov1PurchaseOrder029201$$"	
+		And I go to line in "ItemList" table
+			| '#' |
+			| '2' |
+		And I activate "Key" field in "ItemList" table
+		And I delete "$$Rov2PurchaseOrder029201$$" variable
+		And I save the current field value as "$$Rov2PurchaseOrder029201$$"	
+		And I go to line in "ItemList" table
+			| '#' |
+			| '3' |
+		And I activate "Key" field in "ItemList" table
+		And I delete "$$Rov3PurchaseOrder029201$$" variable
+		And I save the current field value as "$$Rov3PurchaseOrder029201$$"	
+		And I go to line in "ItemList" table
+			| '#' |
+			| '4' |
+		And I activate "Key" field in "ItemList" table
+		And I delete "$$Rov4PurchaseOrder029201$$" variable
+		And I save the current field value as "$$Rov4PurchaseOrder029201$$"	
+		And I go to line in "ItemList" table
+			| '#' |
+			| '5' |
+		And I activate "Key" field in "ItemList" table
+		And I delete "$$Rov5PurchaseOrder029201$$" variable
+		And I save the current field value as "$$Rov5PurchaseOrder029201$$"	
+		And I go to line in "ItemList" table
+			| '#' |
+			| '6' |
+		And I activate "Key" field in "ItemList" table
+		And I delete "$$Rov6PurchaseOrder029201$$" variable
+		And I save the current field value as "$$Rov6PurchaseOrder029201$$"	
+		And I go to line in "ItemList" table
+			| '#' |
+			| '7' |
+		And I activate "Key" field in "ItemList" table
+		And I delete "$$Rov7PurchaseOrder029201$$" variable
+		And I save the current field value as "$$Rov7PurchaseOrder029201$$"	
+		And I go to line in "ItemList" table
+			| '#' |
+			| '8' |
+		And I activate "Key" field in "ItemList" table
+		And I delete "$$Rov8PurchaseOrder029201$$" variable
+		And I save the current field value as "$$Rov8PurchaseOrder029201$$"
+		And I go to line in "ItemList" table
+			| '#' |
+			| '9' |
+		And I activate "Key" field in "ItemList" table
+		And I delete "$$Rov9PurchaseOrder029201$$" variable
+		And I save the current field value as "$$Rov9PurchaseOrder029201$$"		
+	* Check Row ID tab
+		And I click the button named "FormPost"
+		And "ItemList" table contains lines
+			| 'Item'       | 'Item key'  | 'Q'      | 'Unit'                   | 'Tax amount' | 'Price' | 'VAT' | 'Net amount' | 'Total amount' | 'Sales order'                               | 'Purchase basis'                            |
+			| 'Trousers'   | '38/Yellow' | '5,000'  | 'pcs'                    | '7,63'       | '10,00' | '18%' | '42,37'      | '50,00'        | 'Sales order 501 dated 30.03.2021 11:56:21' | 'Sales order 501 dated 30.03.2021 11:56:21' |
+			| 'Trousers'   | '38/Yellow' | '8,000'  | 'pcs'                    | '18,31'      | '15,00' | '18%' | '101,69'     | '120,00'       | 'Sales order 502 dated 30.03.2021 11:56:28' | 'Sales order 502 dated 30.03.2021 11:56:28' |
+			| 'Shirt'      | '38/Black'  | '2,000'  | 'pcs'                    | '6,10'       | '20,00' | '18%' | '33,90'      | '40,00'        | 'Sales order 501 dated 30.03.2021 11:56:21' | 'Sales order 501 dated 30.03.2021 11:56:21' |
+			| 'Shirt'      | '38/Black'  | '11,000' | 'pcs'                    | '33,56'      | '20,00' | '18%' | '186,44'     | '220,00'       | 'Sales order 502 dated 30.03.2021 11:56:28' | 'Sales order 502 dated 30.03.2021 11:56:28' |
+			| 'Dress'      | 'M/White'   | '15,000' | 'pcs'                    | '48,05'      | '21,00' | '18%' | '266,95'     | '315,00'       | 'Sales order 502 dated 30.03.2021 11:56:28' | 'Sales order 502 dated 30.03.2021 11:56:28' |
+			| 'Dress'      | 'XS/Blue'   | '10,000' | 'pcs'                    | '25,93'      | '17,00' | '18%' | '144,07'     | '170,00'       | 'Sales order 503 dated 30.03.2021 11:57:06' | 'Sales order 503 dated 30.03.2021 11:57:06' |
+			| 'Trousers'   | '36/Yellow' | '5,000'  | 'pcs'                    | '13,73'      | '18,00' | '18%' | '76,27'      | '90,00'        | 'Sales order 503 dated 30.03.2021 11:57:06' | 'Sales order 503 dated 30.03.2021 11:57:06' |
+			| 'Trousers'   | '38/Yellow' | '20,000' | 'pcs'                    | '61,02'      | '20,00' | '18%' | '338,98'     | '400,00'       | 'Sales order 503 dated 30.03.2021 11:57:06' | 'Sales order 503 dated 30.03.2021 11:57:06' |
+			| 'High shoes' | '37/19SD'   | '5,000'  | 'High shoes box (8 pcs)' | '85,42'      | '14,00' | '18%' | '474,58'     | '560,00'       | ''                                          | ''                                          |
+		And "RowIDInfo" table contains lines
+			| 'Key' | 'Basis'                                     | 'Row ID'                               | 'Next step' | 'Q'      | 'Basis key'                            | 'Current step' | 'Row ref'                              |
+			| '*'   | 'Sales order 501 dated 30.03.2021 11:56:21' | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' | 'PI&GR'     | '5,000'  | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' | 'PO&PI'        | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' |
+			| '*'   | 'Sales order 502 dated 30.03.2021 11:56:28' | '653068c5-a3a6-4d27-9e5e-1fc8102f7d91' | 'PI&GR'     | '8,000'  | '653068c5-a3a6-4d27-9e5e-1fc8102f7d91' | 'PO&PI'        | '653068c5-a3a6-4d27-9e5e-1fc8102f7d91' |
+			| '*'   | 'Sales order 501 dated 30.03.2021 11:56:21' | '3cddf099-4bbf-4c9c-807a-bb2388f83e42' | 'PI&GR'     | '2,000'  | '3cddf099-4bbf-4c9c-807a-bb2388f83e42' | 'PO&PI'        | '3cddf099-4bbf-4c9c-807a-bb2388f83e42' |
+			| '*'   | 'Sales order 502 dated 30.03.2021 11:56:28' | '647c0486-7e3c-49c1-aca2-7ffcc3246b18' | 'PI&GR'     | '11,000' | '647c0486-7e3c-49c1-aca2-7ffcc3246b18' | 'PO&PI'        | '647c0486-7e3c-49c1-aca2-7ffcc3246b18' |
+			| '*'   | 'Sales order 502 dated 30.03.2021 11:56:28' | '4a003d08-12af-4c34-98d5-5cdeb84616de' | 'PI&GR'     | '15,000' | '4a003d08-12af-4c34-98d5-5cdeb84616de' | 'PO&PI'        | '4a003d08-12af-4c34-98d5-5cdeb84616de' |
+			| '*'   | 'Sales order 503 dated 30.03.2021 11:57:06' | '323ed282-6c37-4443-b3b5-6abd5531e1b7' | 'PI&GR'     | '10,000' | '323ed282-6c37-4443-b3b5-6abd5531e1b7' | 'PO&PI'        | '323ed282-6c37-4443-b3b5-6abd5531e1b7' |
+			| '*'   | 'Sales order 503 dated 30.03.2021 11:57:06' | '40d4db8e-5a7c-4d0f-878c-4f054b2a01cf' | 'PI&GR'     | '5,000'  | '40d4db8e-5a7c-4d0f-878c-4f054b2a01cf' | 'PO&PI'        | '40d4db8e-5a7c-4d0f-878c-4f054b2a01cf' |
+			| '*'   | 'Sales order 503 dated 30.03.2021 11:57:06' | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28' | 'PI&GR'     | '20,000' | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28' | 'PO&PI'        | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28' |
+			| '*'   | ''                                          | '$$Rov9PurchaseOrder029201$$'          | 'PI&GR'     | '40,000' | ''                                     | ''             | '$$Rov9PurchaseOrder029201$$'          |
+		Then the number of "RowIDInfo" table lines is "равно" "9"
+
+		And I delete "$$NumberPurchaseOrder029201$$" variable
+		And I delete "$$PurchaseOrder029201$$" variable
+		And I save the value of "Number" field as "$$NumberPurchaseOrder029201$$"
+		And I save the window as "$$PurchaseOrder029201$$"
 		And I click the button named "FormPostAndClose"
-		* Check movements
+
+Scenario: _029202 create PI and GR based on PO that based on SO
+	* Create PI-GR
+		* Select PO
 			Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 			And I go to line in "List" table
 			| 'Number' |
-			| '$$NumberPurchaseOrder0292012$$'    |
-			And I click "Registrations report" button
-			And I select "Order procurement" exact value from "Register" drop-down list
-			And I click "Generate report" button
-			And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Order procurement"' | ''            | ''       | ''          | ''             | ''                      | ''         | ''          | ''        | '' |
-			| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                      | ''         | ''          | ''        | '' |
-			| ''                              | ''            | ''       | 'Quantity'  | 'Company'      | 'Order'                 | 'Store'    | 'Item key'  | 'Row key' | '' |
-			| ''                              | 'Expense'     | '*'      | '5'         | 'Main Company' | '$$SalesOrder029201$$'  | 'Store 01' | 'XS/Blue'   | '*'       | '' |
-			| ''                              | 'Expense'     | '*'      | '5'         | 'Main Company' | '$$SalesOrder0292012$$' | 'Store 02' | '36/Yellow' | '*'       | '' |
-			| ''                              | 'Expense'     | '*'      | '10'        | 'Main Company' | '$$SalesOrder029201$$'  | 'Store 01' | '38/Yellow' | '*'       | '' |
-			| ''                              | 'Expense'     | '*'      | '10'        | 'Main Company' | '$$SalesOrder0292012$$' | 'Store 02' | 'XS/Blue'   | '*'       | '' |
-			| ''                              | 'Expense'     | '*'      | '10'        | 'Main Company' | '$$SalesOrder0292012$$' | 'Store 02' | '38/Yellow' | '*'       | '' |
-			And I select "Goods in transit incoming" exact value from "Register" drop-down list
-			And I click "Generate report" button
-			And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Goods in transit incoming"' | ''            | ''       | ''          | ''           | ''                         | ''          | ''        | '' | '' |
-			| ''                                      | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''                         | ''          | ''        | '' | '' |
-			| ''                                      | ''            | ''       | 'Quantity'  | 'Store'      | 'Receipt basis'            | 'Item key'  | 'Row key' | '' | '' |
-			| ''                                      | 'Receipt'     | '*'      | '5'         | 'Store 02'   | '$$PurchaseOrder0292012$$' | '36/Yellow' | '*'       | '' | '' |
-			| ''                                      | 'Receipt'     | '*'      | '10'        | 'Store 02'   | '$$PurchaseOrder0292012$$' | 'XS/Blue'   | '*'       | '' | '' |
-			| ''                                      | 'Receipt'     | '*'      | '10'        | 'Store 02'   | '$$PurchaseOrder0292012$$' | '38/Yellow' | '*'       | '' | '' |
-			| ''                                      | 'Receipt'     | '*'      | '50'        | 'Store 02'   | '$$PurchaseOrder0292012$$' | 'M/White'   | '*'       | '' | '' |
-			And I select "Receipt orders" exact value from "Register" drop-down list
-			And I click "Generate report" button
-			And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Receipt orders"' | ''            | ''       | ''          | ''                         | ''                         | ''          | ''        | '' | '' |
-			| ''                           | 'Record type' | 'Period' | 'Resources' | 'Dimensions'               | ''                         | ''          | ''        | '' | '' |
-			| ''                           | ''            | ''       | 'Quantity'  | 'Order'                    | 'Goods receipt'            | 'Item key'  | 'Row key' | '' | '' |
-			| ''                           | 'Receipt'     | '*'      | '5'         | '$$PurchaseOrder0292012$$' | '$$PurchaseOrder0292012$$' | 'XS/Blue'   | '*'       | '' | '' |
-			| ''                           | 'Receipt'     | '*'      | '10'        | '$$PurchaseOrder0292012$$' | '$$PurchaseOrder0292012$$' | '38/Yellow' | '*'       | '' | '' |
-			And I select "Goods receipt schedule" exact value from "Register" drop-down list
-			And I click "Generate report" button
-			And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Goods receipt schedule"' | ''            | ''       | ''          | ''             | ''                         | ''         | ''          | ''        | ''              |
-			| ''                                   | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                         | ''         | ''          | ''        | 'Attributes'    |
-			| ''                                   | ''            | ''       | 'Quantity'  | 'Company'      | 'Order'                    | 'Store'    | 'Item key'  | 'Row key' | 'Delivery date' |
-			| ''                                   | 'Receipt'     | '*'      | '5'         | 'Main Company' | '$$PurchaseOrder0292012$$' | 'Store 01' | 'XS/Blue'   | '*'       | '*'             |
-			| ''                                   | 'Receipt'     | '*'      | '5'         | 'Main Company' | '$$PurchaseOrder0292012$$' | 'Store 02' | '36/Yellow' | '*'       | '*'             |
-			| ''                                   | 'Receipt'     | '*'      | '10'        | 'Main Company' | '$$PurchaseOrder0292012$$' | 'Store 01' | '38/Yellow' | '*'       | '*'             |
-			| ''                                   | 'Receipt'     | '*'      | '10'        | 'Main Company' | '$$PurchaseOrder0292012$$' | 'Store 02' | 'XS/Blue'   | '*'       | '*'             |
-			| ''                                   | 'Receipt'     | '*'      | '10'        | 'Main Company' | '$$PurchaseOrder0292012$$' | 'Store 02' | '38/Yellow' | '*'       | '*'             |
-			| ''                                   | 'Receipt'     | '*'      | '50'        | 'Main Company' | '$$PurchaseOrder0292012$$' | 'Store 02' | 'M/White'   | '*'       | '*'             |
-			| ''                                   | 'Expense'     | '*'      | '5'         | 'Main Company' | '$$PurchaseOrder0292012$$' | 'Store 01' | 'XS/Blue'   | '*'       | '*'             |
-			| ''                                   | 'Expense'     | '*'      | '10'        | 'Main Company' | '$$PurchaseOrder0292012$$' | 'Store 01' | '38/Yellow' | '*'       | '*'             |
-			And I select "Order balance" exact value from "Register" drop-down list
-			And I click "Generate report" button
-			And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Order balance"' | ''            | ''       | ''          | ''           | ''                         | ''          | ''        | '' | '' |
-			| ''                          | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''                         | ''          | ''        | '' | '' |
-			| ''                          | ''            | ''       | 'Quantity'  | 'Store'      | 'Order'                    | 'Item key'  | 'Row key' | '' | '' |
-			| ''                          | 'Receipt'     | '*'      | '5'         | 'Store 01'   | '$$PurchaseOrder0292012$$' | 'XS/Blue'   | '*'       | '' | '' |
-			| ''                          | 'Receipt'     | '*'      | '5'         | 'Store 02'   | '$$PurchaseOrder0292012$$' | '36/Yellow' | '*'       | '' | '' |
-			| ''                          | 'Receipt'     | '*'      | '10'        | 'Store 01'   | '$$PurchaseOrder0292012$$' | '38/Yellow' | '*'       | '' | '' |
-			| ''                          | 'Receipt'     | '*'      | '10'        | 'Store 02'   | '$$PurchaseOrder0292012$$' | 'XS/Blue'   | '*'       | '' | '' |
-			| ''                          | 'Receipt'     | '*'      | '10'        | 'Store 02'   | '$$PurchaseOrder0292012$$' | '38/Yellow' | '*'       | '' | '' |
-			| ''                          | 'Receipt'     | '*'      | '50'        | 'Store 02'   | '$$PurchaseOrder0292012$$' | 'M/White'   | '*'       | '' | '' |
-		
-	* Create GoodsReceipt 457
-		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
-		And I go to line in "List" table
-			| 'Number' |
-			| '$$NumberPurchaseOrder0292012$$'    |
-		And I click the button named "FormDocumentGoodsReceiptGenerate"
-		And I click "Ok" button	
-	* Check filling of the tabular part of Goods receipt
+			| '$$NumberPurchaseOrder029201$$'      |
+		* Create PI
+			And I click the button named "FormDocumentPurchaseInvoiceGenerate"
+			And I go to line in "BasisesTree" table
+				| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation'    | 'Unit' | 'Use' |
+				| 'TRY'      | '400,00' | '20,000'   | 'Trousers, 38/Yellow' | 'pcs'  | 'Yes' |
+			And I change "Use" checkbox in "BasisesTree" table
+			And I finish line editing in "BasisesTree" table
+			And I click "Ok" button
 			And "ItemList" table contains lines
-			| 'Item'     | 'Quantity' | 'Item key'  | 'Unit' | 'Sales order'      | 'Store'    | 'Receipt basis'       |
-			| 'Dress'    | '10,000'   | 'XS/Blue'   | 'pcs'  | '$$SalesOrder0292012$$' | 'Store 02' | '$$PurchaseOrder0292012$$' |
-			| 'Dress'    | '50,000'   | 'M/White'   | 'pcs'  | ''                 | 'Store 02' | '$$PurchaseOrder0292012$$' |
-			| 'Trousers' | '5,000'    | '36/Yellow' | 'pcs'  | '$$SalesOrder0292012$$' | 'Store 02' | '$$PurchaseOrder0292012$$' |
-			| 'Trousers' | '10,000'   | '38/Yellow' | 'pcs'  | '$$SalesOrder0292012$$' | 'Store 02' | '$$PurchaseOrder0292012$$' |
-		And I click the button named "FormPost"
-		And I delete "$$NumberGoodsReceipt029203$$" variable
-		And I delete "$$GoodsReceipt029203$$" variable
-		And I save the value of "Number" field as "$$NumberGoodsReceipt029203$$"
-		And I save the window as "$$GoodsReceipt029203$$"
-		And I click the button named "FormPostAndClose"
-	And I close all client application windows
-
-Scenario: _029204 create Purchase invoice based on Purchase order that based on Sales order (Goods receipt before Purchase invoice)
-	* Create Purchase invoice based on Purchase order
-		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
-		And I go to line in "List" table
+				| '#' | 'Business unit' | 'Price type'              | 'Item'       | 'Item key'  | 'Dont calculate row' | 'Tax amount' | 'Unit'                   | 'Serial lot numbers' | 'Q'      | 'Price' | 'VAT' | 'Offers amount' | 'Total amount' | 'Additional analytic' | 'Internal supply request' | 'Store'    | 'Delivery date' | 'Expense type' | 'Purchase order'                             | 'Detail' | 'Sales order'                               | 'Net amount' | 'Use goods receipt' |
+				| '1' | ''              | 'en description is empty' | 'Trousers'   | '38/Yellow' | 'No'                 | '7,63'       | 'pcs'                    | ''                   | '5,000'  | '10,00' | '18%' | ''              | '50,00'        | ''                    | ''                        | 'Store 02' | ''              | ''             | '$$PurchaseOrder029201$$' | ''       | 'Sales order 501 dated 30.03.2021 11:56:21' | '42,37'      | 'Yes'               |
+				| '2' | ''              | 'en description is empty' | 'Trousers'   | '38/Yellow' | 'No'                 | '18,31'      | 'pcs'                    | ''                   | '8,000'  | '15,00' | '18%' | ''              | '120,00'       | ''                    | ''                        | 'Store 01' | ''              | ''             | '$$PurchaseOrder029201$$' | ''       | 'Sales order 502 dated 30.03.2021 11:56:28' | '101,69'     | 'No'                |
+				| '3' | ''              | 'en description is empty' | 'Shirt'      | '38/Black'  | 'No'                 | '6,10'       | 'pcs'                    | ''                   | '2,000'  | '20,00' | '18%' | ''              | '40,00'        | ''                    | ''                        | 'Store 02' | ''              | ''             | '$$PurchaseOrder029201$$' | ''       | 'Sales order 501 dated 30.03.2021 11:56:21' | '33,90'      | 'Yes'               |
+				| '4' | ''              | 'en description is empty' | 'Shirt'      | '38/Black'  | 'No'                 | '33,56'      | 'pcs'                    | ''                   | '11,000' | '20,00' | '18%' | ''              | '220,00'       | ''                    | ''                        | 'Store 01' | ''              | ''             | '$$PurchaseOrder029201$$' | ''       | 'Sales order 502 dated 30.03.2021 11:56:28' | '186,44'     | 'No'                |
+				| '5' | ''              | 'en description is empty' | 'Dress'      | 'M/White'   | 'No'                 | '48,05'      | 'pcs'                    | ''                   | '15,000' | '21,00' | '18%' | ''              | '315,00'       | ''                    | ''                        | 'Store 01' | ''              | ''             | '$$PurchaseOrder029201$$' | ''       | 'Sales order 502 dated 30.03.2021 11:56:28' | '266,95'     | 'No'                |
+				| '6' | ''              | 'en description is empty' | 'Dress'      | 'XS/Blue'   | 'No'                 | '25,93'      | 'pcs'                    | ''                   | '10,000' | '17,00' | '18%' | ''              | '170,00'       | ''                    | ''                        | 'Store 02' | ''              | ''             | '$$PurchaseOrder029201$$' | ''       | 'Sales order 503 dated 30.03.2021 11:57:06' | '144,07'     | 'Yes'               |
+				| '7' | ''              | 'en description is empty' | 'Trousers'   | '36/Yellow' | 'No'                 | '13,73'      | 'pcs'                    | ''                   | '5,000'  | '18,00' | '18%' | ''              | '90,00'        | ''                    | ''                        | 'Store 02' | ''              | ''             | '$$PurchaseOrder029201$$' | ''       | 'Sales order 503 dated 30.03.2021 11:57:06' | '76,27'      | 'Yes'               |
+				| '8' | ''              | 'en description is empty' | 'High shoes' | '37/19SD'   | 'No'                 | '85,42'      | 'High shoes box (8 pcs)' | ''                   | '5,000'  | '14,00' | '18%' | ''              | '560,00'       | ''                    | ''                        | 'Store 02' | ''              | ''             | '$$PurchaseOrder029201$$' | ''       | ''                                          | '474,58'     | 'Yes'               |
+			And I go to line in "ItemList" table
+				| 'Item'     | 'Item key'  | 'Price' | 'Q'     |
+				| 'Trousers' | '38/Yellow' | '10,00' | '5,000' |
+			And I select current line in "ItemList" table
+			And I input "4,000" text in the field named "ItemListQuantity" of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And I go to line in "ItemList" table
+				| 'Item'  | 'Item key'  | 'Price' | 'Q'     |
+				| 'Dress' | 'M/White' | '21,00' | '15,000' |
+			And I set "Use goods receipt" checkbox in "ItemList" table
+			And I finish line editing in "ItemList" table			
+			And I go to line in "ItemList" table
+				| 'Item'     | 'Item key'  | 'Price' | 'Q'     |
+				| 'Shirt' | '38/Black' | '20,00' | '2,000' |
+			And I select current line in "ItemList" table
+			And I input "3,000" text in the field named "ItemListQuantity" of "ItemList" table
+			And I click "Post" button
+			And I click "Show row key" button
+			And "RowIDInfo" table contains lines
+				| 'Key' | 'Basis'                   | 'Row ID'                               | 'Next step' | 'Q'      | 'Basis key'                   | 'Current step' | 'Row ref'                              |
+				| '*'   | '$$PurchaseOrder029201$$' | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' | 'GR'        | '4,000'  | '$$Rov1PurchaseOrder029201$$' | 'PI&GR'        | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' |
+				| '*'   | '$$PurchaseOrder029201$$' | '653068c5-a3a6-4d27-9e5e-1fc8102f7d91' | ''          | '8,000'  | '$$Rov2PurchaseOrder029201$$' | 'PI&GR'        | '653068c5-a3a6-4d27-9e5e-1fc8102f7d91' |
+				| '*'   | '$$PurchaseOrder029201$$' | '3cddf099-4bbf-4c9c-807a-bb2388f83e42' | 'GR'        | '3,000'  | '$$Rov3PurchaseOrder029201$$' | 'PI&GR'        | '3cddf099-4bbf-4c9c-807a-bb2388f83e42' |
+				| '*'   | '$$PurchaseOrder029201$$' | '647c0486-7e3c-49c1-aca2-7ffcc3246b18' | ''          | '11,000' | '$$Rov4PurchaseOrder029201$$' | 'PI&GR'        | '647c0486-7e3c-49c1-aca2-7ffcc3246b18' |
+				| '*'   | '$$PurchaseOrder029201$$' | '4a003d08-12af-4c34-98d5-5cdeb84616de' | 'GR'        | '15,000' | '$$Rov5PurchaseOrder029201$$' | 'PI&GR'        | '4a003d08-12af-4c34-98d5-5cdeb84616de' |
+				| '*'   | '$$PurchaseOrder029201$$' | '323ed282-6c37-4443-b3b5-6abd5531e1b7' | 'GR'        | '10,000' | '$$Rov6PurchaseOrder029201$$' | 'PI&GR'        | '323ed282-6c37-4443-b3b5-6abd5531e1b7' |
+				| '*'   | '$$PurchaseOrder029201$$' | '40d4db8e-5a7c-4d0f-878c-4f054b2a01cf' | 'GR'        | '5,000'  | '$$Rov7PurchaseOrder029201$$' | 'PI&GR'        | '40d4db8e-5a7c-4d0f-878c-4f054b2a01cf' |
+				| '*'   | '$$PurchaseOrder029201$$' | '$$Rov9PurchaseOrder029201$$'          | 'GR'        | '40,000' | '$$Rov9PurchaseOrder029201$$' | 'PI&GR'        | '$$Rov9PurchaseOrder029201$$'          |
+				| '*'   | '$$PurchaseOrder029201$$' | '647c0486-7e3c-49c1-aca2-7ffcc3246b18' | 'SI&SC'     | '11,000' | '$$Rov4PurchaseOrder029201$$' | ''             | '647c0486-7e3c-49c1-aca2-7ffcc3246b18' |
+				| '*'   | '$$PurchaseOrder029201$$' | '653068c5-a3a6-4d27-9e5e-1fc8102f7d91' | 'SI&SC'     | '8,000'  | '$$Rov2PurchaseOrder029201$$' | ''             | '653068c5-a3a6-4d27-9e5e-1fc8102f7d91' |
+			Then the number of "RowIDInfo" table lines is "равно" "10"
+			And I go to line in "ItemList" table
+				| '#' |
+				| '1' |
+			And I activate "Key" field in "ItemList" table
+			And I delete "$$Rov1PurchaseInvoice0292021$$" variable
+			And I save the current field value as "$$Rov1PurchaseInvoice0292021$$"	
+			And I go to line in "ItemList" table
+				| '#' |
+				| '2' |
+			And I activate "Key" field in "ItemList" table
+			And I delete "$$Rov2PurchaseInvoice0292021$$" variable
+			And I save the current field value as "$$Rov2PurchaseInvoice0292021$$"	
+			And I go to line in "ItemList" table
+				| '#' |
+				| '3' |
+			And I activate "Key" field in "ItemList" table
+			And I delete "$$Rov3PurchaseInvoice0292021$$" variable
+			And I save the current field value as "$$Rov3PurchaseInvoice0292021$$"	
+			And I go to line in "ItemList" table
+				| '#' |
+				| '4' |
+			And I activate "Key" field in "ItemList" table
+			And I delete "$$Rov4PurchaseInvoice0292021$$" variable
+			And I save the current field value as "$$Rov4PurchaseInvoice0292021$$"	
+			And I go to line in "ItemList" table
+				| '#' |
+				| '5' |
+			And I activate "Key" field in "ItemList" table
+			And I delete "$$Rov5PurchaseInvoice0292021$$" variable
+			And I save the current field value as "$$Rov5PurchaseInvoice0292021$$"	
+			And I go to line in "ItemList" table
+				| '#' |
+				| '6' |
+			And I activate "Key" field in "ItemList" table
+			And I delete "$$Rov6PurchaseInvoice0292021$$" variable
+			And I save the current field value as "$$Rov6PurchaseInvoice0292021$$"	
+			And I go to line in "ItemList" table
+				| '#' |
+				| '7' |
+			And I activate "Key" field in "ItemList" table
+			And I delete "$$Rov7PurchaseInvoice0292021$$" variable
+			And I save the current field value as "$$Rov7PurchaseInvoice0292021$$"	
+			And I go to line in "ItemList" table
+				| '#' |
+				| '8' |
+			And I activate "Key" field in "ItemList" table
+			And I delete "$$Rov8PurchaseInvoice0292021$$" variable
+			And I save the current field value as "$$Rov8PurchaseInvoice0292021$$"
+			And I delete "$$NumberPurchaseInvoice0292021$$" variable
+			And I delete "$$PurchaseInvoice0292021$$" variable
+			And I save the value of "Number" field as "$$NumberPurchaseInvoice0292021$$"
+			And I save the window as "$$PurchaseInvoice0292021$$"
+		* Create GR
+			And I click the button named "FormDocumentGoodsReceiptGenerate"
+			And I click "Ok" button
+			And I click "Show row key" button
+			And I go to line in "ItemList" table
+				| '#' |
+				| '1' |
+			And I activate "Key" field in "ItemList" table
+			And I delete "$$Rov1GoodsReceipt0292021$$" variable
+			And I save the current field value as "$$Rov1GoodsReceipt0292021$$"	
+			And I go to line in "ItemList" table
+				| '#' |
+				| '2' |
+			And I activate "Key" field in "ItemList" table
+			And I delete "$$Rov2GoodsReceipt0292021$$" variable
+			And I save the current field value as "$$Rov2GoodsReceipt0292021$$"	
+			And I go to line in "ItemList" table
+				| '#' |
+				| '3' |
+			And I activate "Key" field in "ItemList" table
+			And I delete "$$Rov3GoodsReceipt0292021$$" variable
+			And I save the current field value as "$$Rov3GoodsReceipt0292021$$"	
+			And I go to line in "ItemList" table
+				| '#' |
+				| '4' |
+			And I activate "Key" field in "ItemList" table
+			And I delete "$$Rov4GoodsReceipt0292021$$" variable
+			And I save the current field value as "$$Rov4GoodsReceipt0292021$$"	
+			And I go to line in "ItemList" table
+				| '#' |
+				| '5' |
+			And I activate "Key" field in "ItemList" table
+			And I delete "$$Rov5GoodsReceipt0292021$$" variable
+			And I save the current field value as "$$Rov5GoodsReceipt0292021$$"	
+			And I go to line in "ItemList" table
+				| '#' |
+				| '6' |
+			And I activate "Key" field in "ItemList" table
+			And I delete "$$Rov6GoodsReceipt0292021$$" variable
+			And I save the current field value as "$$Rov6GoodsReceipt0292021$$"	
+			And "RowIDInfo" table contains lines
+				| '#' | 'Key' | 'Basis'                      | 'Row ID'                               | 'Next step' | 'Q'      | 'Basis key'                      | 'Current step' | 'Row ref'                              |
+				| '1' | '*'   | '$$PurchaseInvoice0292021$$' | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' | ''          | '4,000'  | '$$Rov1PurchaseInvoice0292021$$' | 'GR'           | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' |
+				| '2' | '*'   | '$$PurchaseInvoice0292021$$' | '3cddf099-4bbf-4c9c-807a-bb2388f83e42' | ''          | '3,000'  | '$$Rov3PurchaseInvoice0292021$$' | 'GR'           | '3cddf099-4bbf-4c9c-807a-bb2388f83e42' |
+				| '3' | '*'   | '$$PurchaseInvoice0292021$$' | '4a003d08-12af-4c34-98d5-5cdeb84616de' | ''          | '15,000' | '$$Rov5PurchaseInvoice0292021$$' | 'GR'           | '4a003d08-12af-4c34-98d5-5cdeb84616de' |
+				| '4' | '*'   | '$$PurchaseInvoice0292021$$' | '323ed282-6c37-4443-b3b5-6abd5531e1b7' | ''          | '10,000' | '$$Rov6PurchaseInvoice0292021$$' | 'GR'           | '323ed282-6c37-4443-b3b5-6abd5531e1b7' |
+				| '5' | '*'   | '$$PurchaseInvoice0292021$$' | '40d4db8e-5a7c-4d0f-878c-4f054b2a01cf' | ''          | '5,000'  | '$$Rov7PurchaseInvoice0292021$$' | 'GR'           | '40d4db8e-5a7c-4d0f-878c-4f054b2a01cf' |
+				| '6' | '*'   | '$$PurchaseInvoice0292021$$' | '$$Rov9PurchaseOrder029201$$'          | ''          | '40,000' | '$$Rov8PurchaseInvoice0292021$$' | 'GR'           | '$$Rov9PurchaseOrder029201$$'          |
+			Then the number of "RowIDInfo" table lines is "равно" "6"
+			And I click "Post" button
+			And I delete "$$NumberGoodsReceipt0292021$$" variable
+			And I delete "$$GoodsReceipt0292021$$" variable
+			And I save the value of "Number" field as "$$NumberGoodsReceipt0292021$$"
+			And I save the window as "$$GoodsReceipt0292021$$"
+			And I click the button named "FormPostAndClose"
+	* Create GR-PI
+		* Select PO
+			Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
+			And I go to line in "List" table
 			| 'Number' |
-			| '$$NumberGoodsReceipt029203$$'   |
-		And I click the button named "FormDocumentPurchaseInvoiceGenerate"			
-		And I click "OK" button
-	* Check filling of the tabular part
-		And "ItemList" table contains lines
-		| 'Net amount' | 'Item'     | 'Price'  | 'Item key'  | 'Q'      | 'Tax amount' | 'Unit' | 'Total amount' | 'Store'    | 'Purchase order'           | 'Sales order'           |
-		| '762,71'     | 'Trousers' | '180,00' | '36/Yellow' | '5,000'  | '137,29'     | 'pcs'  | '900,00'       | 'Store 02' | '$$PurchaseOrder0292012$$' | '$$SalesOrder0292012$$' |
-		| '1 694,92'   | 'Dress'    | '200,00' | 'XS/Blue'   | '10,000' | '305,08'     | 'pcs'  | '2 000,00'     | 'Store 02' | '$$PurchaseOrder0292012$$' | '$$SalesOrder0292012$$' |
-		| '8 898,31'   | 'Dress'    | '210,00' | 'M/White'   | '50,000' | '1 601,69'   | 'pcs'  | '10 500,00'    | 'Store 02' | '$$PurchaseOrder0292012$$' | ''                      |
-		| '1 525,42'   | 'Trousers' | '180,00' | '38/Yellow' | '10,000' | '274,58'     | 'pcs'  | '1 800,00'     | 'Store 02' | '$$PurchaseOrder0292012$$' | '$$SalesOrder0292012$$' |
-		| '1 525,42'   | 'Trousers' | '180,00' | '38/Yellow' | '10,000' | '274,58'     | 'pcs'  | '1 800,00'     | 'Store 01' | '$$PurchaseOrder0292012$$' | '$$SalesOrder029201$$'  |
-		| '847,46'     | 'Dress'    | '200,00' | 'XS/Blue'   | '5,000'  | '152,54'     | 'pcs'  | '1 000,00'     | 'Store 01' | '$$PurchaseOrder0292012$$' | '$$SalesOrder029201$$'  |
-		And I click the button named "FormPost"
-		And I delete "$$NumberPurchaseInvoice029204$$" variable
-		And I delete "$$PurchaseInvoice029204$$" variable
-		And I save the value of "Number" field as "$$NumberPurchaseInvoice029204$$"
-		And I save the window as "$$PurchaseInvoice029204$$"
-		And I click the button named "FormPostAndClose"
-		And I close all client application windows
+			| '$$NumberPurchaseOrder029201$$'      |
+		* Create GR
+			And I click the button named "FormDocumentGoodsReceiptGenerate"
+			And "BasisesTree" table contains lines
+				| 'Row presentation'                          | 'Use'                                       | 'Quantity' | 'Unit' | 'Price'  | 'Currency' |
+				| 'Sales order 501 dated 30.03.2021 11:56:21' | 'Sales order 501 dated 30.03.2021 11:56:21' | ''         | ''     | ''       | ''         |
+				| '$$PurchaseOrder029201$$'                   | '$$PurchaseOrder029201$$'                   | ''         | ''     | ''       | ''         |
+				| 'Trousers, 38/Yellow'                       | 'Yes'                                       | '1,000'    | 'pcs'  | '338,98' | 'TRY'      |
+				| 'Sales order 503 dated 30.03.2021 11:57:06' | 'Sales order 503 dated 30.03.2021 11:57:06' | ''         | ''     | ''       | ''         |
+				| '$$PurchaseOrder029201$$'                   | '$$PurchaseOrder029201$$'                   | ''         | ''     | ''       | ''         |
+				| 'Trousers, 38/Yellow'                       | 'Yes'                                       | '20,000'   | 'pcs'  | '400,00' | 'TRY'      |
+			Then the number of "BasisesTree" table lines is "равно" "6"
+			And I click "Ok" button
+			And "ItemList" table contains lines
+				| '#' | 'Item'     | 'Inventory transfer' | 'Item key'  | 'Store'    | 'Internal supply request' | 'Quantity' | 'Sales invoice' | 'Unit' | 'Receipt basis'           | 'Purchase invoice' | 'Currency' | 'Sales return order' | 'Sales order'                               | 'Purchase order'          | 'Inventory transfer order' | 'Sales return' |
+				| '1' | 'Trousers' | ''                   | '38/Yellow' | 'Store 02' | ''                        | '1,000'    | ''              | 'pcs'  | '$$PurchaseOrder029201$$' | ''                 | 'USD'      | ''                   | 'Sales order 501 dated 30.03.2021 11:56:21' | '$$PurchaseOrder029201$$' | ''                         | ''             |
+				| '2' | 'Trousers' | ''                   | '38/Yellow' | 'Store 02' | ''                        | '20,000'   | ''              | 'pcs'  | '$$PurchaseOrder029201$$' | ''                 | 'USD'      | ''                   | 'Sales order 503 dated 30.03.2021 11:57:06' | '$$PurchaseOrder029201$$' | ''                         | ''             |
+			And I click "Show row key" button
+			And "RowIDInfo" table contains lines
+				| '#' | 'Key' | 'Basis'                   | 'Row ID'                               | 'Next step' | 'Q'      | 'Basis key'                   | 'Current step' | 'Row ref'                              |
+				| '1' | '*'   | '$$PurchaseOrder029201$$' | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' | ''          | '1,000'  | '$$Rov1PurchaseOrder029201$$' | 'PI&GR'        | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' |
+				| '2' | '*'   | '$$PurchaseOrder029201$$' | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28' | ''          | '20,000' | '$$Rov8PurchaseOrder029201$$' | 'PI&GR'        | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28' |
+			And I go to line in "ItemList" table
+				| '#' |
+				| '1' |
+			And I activate "Key" field in "ItemList" table
+			And I delete "$$Rov1GoodsReceipt0292022$$" variable
+			And I save the current field value as "$$Rov1GoodsReceipt0292022$$"	
+			And I go to line in "ItemList" table
+				| '#' |
+				| '2' |
+			And I activate "Key" field in "ItemList" table
+			And I delete "$$Rov2GoodsReceipt0292022$$" variable
+			And I save the current field value as "$$Rov2GoodsReceipt0292022$$"	
+			And I click the button named "FormPost"
+			And I delete "$$NumberGoodsReceipt0292022$$" variable
+			And I delete "$$GoodsReceipt0292022$$" variable
+			And I save the value of "Number" field as "$$NumberGoodsReceipt0292022$$"
+			And I save the window as "$$GoodsReceipt0292022$$"
+		* Create PI
+			And I click the button named "FormDocumentPurchaseInvoiceGenerate"
+			And "BasisesTree" table contains lines
+				| 'Row presentation'                          | 'Use'                                       | 'Quantity' | 'Unit' | 'Price'  | 'Currency' |
+				| 'Sales order 501 dated 30.03.2021 11:56:21' | 'Sales order 501 dated 30.03.2021 11:56:21' | ''         | ''     | ''       | ''         |
+				| '$$PurchaseOrder029201$$'                   | '$$PurchaseOrder029201$$'                   | ''         | ''     | ''       | ''         |
+				| '$$GoodsReceipt0292022$$'                   | '$$GoodsReceipt0292022$$'                   | ''         | ''     | ''       | ''         |
+				| 'Trousers, 38/Yellow'                       | 'Yes'                                       | '1,000'    | 'pcs'  | '338,98' | 'TRY'      |
+				| 'Sales order 503 dated 30.03.2021 11:57:06' | 'Sales order 503 dated 30.03.2021 11:57:06' | ''         | ''     | ''       | ''         |
+				| '$$PurchaseOrder029201$$'                   | '$$PurchaseOrder029201$$'                   | ''         | ''     | ''       | ''         |
+				| '$$GoodsReceipt0292022$$'                   | '$$GoodsReceipt0292022$$'                   | ''         | ''     | ''       | ''         |
+				| 'Trousers, 38/Yellow'                       | 'Yes'                                       | '20,000'   | 'pcs'  | '400,00' | 'TRY'      |
+			Then the number of "BasisesTree" table lines is "равно" "8"
+			And I click "Ok" button
+			And "ItemList" table contains lines
+				| '#' | 'Business unit' | 'Price type'              | 'Item'     | 'Item key'  | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers' | 'Q'      | 'Price' | 'VAT' | 'Offers amount' | 'Total amount' | 'Additional analytic' | 'Internal supply request' | 'Store'    | 'Delivery date' | 'Expense type' | 'Purchase order'                             | 'Detail' | 'Sales order'                               | 'Net amount' | 'Use goods receipt' |
+				| '1' | ''              | 'en description is empty' | 'Trousers' | '38/Yellow' | 'No'                 | '1,53'       | 'pcs'  | ''                   | '1,000'  | '10,00' | '18%' | ''              | '10,00'        | ''                    | ''                        | 'Store 02' | ''              | ''             | '$$PurchaseOrder029201$$' | ''       | 'Sales order 501 dated 30.03.2021 11:56:21' | '8,47'       | 'Yes'               |
+				| '2' | ''              | 'en description is empty' | 'Trousers' | '38/Yellow' | 'No'                 | '61,02'      | 'pcs'  | ''                   | '20,000' | '20,00' | '18%' | ''              | '400,00'       | ''                    | ''                        | 'Store 02' | ''              | ''             | '$$PurchaseOrder029201$$' | ''       | 'Sales order 503 dated 30.03.2021 11:57:06' | '338,98'     | 'Yes'               |
+			And "GoodsReceiptsTree" table contains lines
+				| 'Item'     | 'Item key'  | 'Goods receipt'           | 'Invoice' | 'GR'     | 'Q'      |
+				| 'Trousers' | '38/Yellow' | ''                        | '1,000'   | '1,000'  | '1,000'  |
+				| ''         | ''          | '$$GoodsReceipt0292022$$' | ''        | '1,000'  | '1,000'  |
+				| 'Trousers' | '38/Yellow' | ''                        | '20,000'  | '20,000' | '20,000' |
+				| ''         | ''          | '$$GoodsReceipt0292022$$' | ''        | '20,000' | '20,000' |
+			And I click "Show row key" button
+			And "RowIDInfo" table contains lines
+				| '#' | 'Key' | 'Basis'                   | 'Row ID'                               | 'Next step' | 'Q'      | 'Basis key'                   | 'Current step' | 'Row ref'                              |
+				| '1' | '*'   | '$$GoodsReceipt0292022$$' | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' | ''          | '1,000'  | '$$Rov1GoodsReceipt0292022$$' | 'PI'           | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' |
+				| '2' | '*'   | '$$GoodsReceipt0292022$$' | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28' | ''          | '20,000' | '$$Rov2GoodsReceipt0292022$$' | 'PI'           | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28' |
+			And I click the button named "FormPost"
+			And I delete "$$NumberPurchaseInvoice0292022$$" variable
+			And I delete "$$PurchaseInvoice0292022$$" variable
+			And I save the value of "Number" field as "$$NumberPurchaseInvoice0292022$$"
+			And I save the window as "$$PurchaseInvoice0292022$$"
+			And I close all client application windows
+			
 
-Scenario: _029205 create Shipment confirmation based on Sales order, procurement method - purchase (Shipment confirmation before Sales invoice, store use Shipment confirmation)
-	* Create Shipment confirmation based on Sales order
+Scenario: _029203 create SI-SC based on SO (with procurement method - purchase)
+	* Select SO
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I go to line in "List" table
-			| 'Number' |
-			| '$$NumberSalesOrder0292012$$'  |
+		| 'Number' |
+		| '502'      |
+	* Create SI
+		And I click the button named "FormDocumentSalesInvoiceGenerate"
+		And I click "Ok" button
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' |
+			| 'Dress' | 'M/White'  |
+		And I delete a line in "ItemList" table
+		And I click "Show row key" button
+		And I go to line in "ItemList" table
+			| '#' |
+			| '1' |
+		And I activate "Key" field in "ItemList" table
+		And I delete "$$Rov1SalesInvoice029203$$" variable
+		And I save the current field value as "$$Rov1SalesInvoice029203$$"	
+		And I go to line in "ItemList" table
+			| '#' |
+			| '2' |
+		And I activate "Key" field in "ItemList" table
+		And I delete "$$Rov2SalesInvoice029203$$" variable
+		And I save the current field value as "$$Rov2SalesInvoice029203$$"	
+		And I go to line in "ItemList" table
+			| '#' |
+			| '3' |
+		And I activate "Key" field in "ItemList" table
+		And I delete "$$Rov3SalesInvoice029203$$" variable
+		And I save the current field value as "$$Rov3SalesInvoice029203$$"	
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' |
+			| 'Shirt' | '38/Black'  |
+		And I activate "Use shipment confirmation" field in "ItemList" table
+		And I set "Use shipment confirmation" checkbox in "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click the button named "FormPost"
+		* Check ItemList tab
+			And "ItemList" table contains lines
+				| 'Key'                        | 'Store'    | 'Additional analytic' | 'Quantity in base unit' | '#' | 'Business unit' | 'Price type'              | 'Item'     | 'Item key'  | 'Dont calculate row' | 'Serial lot numbers' | 'Q'      | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Delivery date' | 'Use shipment confirmation' | 'Detail' | 'Sales order'                               | 'Revenue type' |
+				| '$$Rov1SalesInvoice029203$$' | 'Store 01' | ''                    | '2,000'                 | '1' | ''              | 'en description is empty' | 'Service'  | 'Interner'  | 'No'                 | ''                   | '2,000'  | 'pcs'  | '30,51'      | '100,00' | '18%' | ''              | '169,49'     | '200,00'       | '31.03.2021'    | 'No'                        | ''       | 'Sales order 502 dated 30.03.2021 11:56:28' | ''             |
+				| '$$Rov2SalesInvoice029203$$' | 'Store 01' | ''                    | '8,000'                 | '2' | ''              | 'Basic Price Types'       | 'Trousers' | '38/Yellow' | 'No'                 | ''                   | '8,000'  | 'pcs'  | '488,14'     | '400,00' | '18%' | ''              | '2 711,86'   | '3 200,00'     | '31.03.2021'    | 'No'                        | ''       | 'Sales order 502 dated 30.03.2021 11:56:28' | ''             |
+				| '$$Rov3SalesInvoice029203$$' | 'Store 01' | ''                    | '11,000'                | '3' | ''              | 'Basic Price Types'       | 'Shirt'    | '38/Black'  | 'No'                 | ''                   | '11,000' | 'pcs'  | '587,29'     | '350,00' | '18%' | ''              | '3 262,71'   | '3 850,00'     | '31.03.2021'    | 'Yes'                       | ''       | 'Sales order 502 dated 30.03.2021 11:56:28' | ''             |
+			Then the number of "ItemList" table lines is "равно" "3"
+		* Check RowIDInfo tab
+			And "RowIDInfo" table contains lines
+				| '#' | 'Key'                        | 'Basis'                                     | 'Row ID'                               | 'Next step' | 'Q'      | 'Basis key'                            | 'Current step' | 'Row ref'                              |
+				| '1' | '$$Rov1SalesInvoice029203$$' | 'Sales order 502 dated 30.03.2021 11:56:28' | '1b08fb3c-845d-4912-9cc0-e07de99cb5c7' | ''          | '2,000'  | '1b08fb3c-845d-4912-9cc0-e07de99cb5c7' | 'SI'           | '1b08fb3c-845d-4912-9cc0-e07de99cb5c7' |
+				| '2' | '$$Rov2SalesInvoice029203$$' | '$$PurchaseInvoice0292021$$'                | '653068c5-a3a6-4d27-9e5e-1fc8102f7d91' | ''          | '8,000'  | '$$Rov2PurchaseInvoice0292021$$'       | 'SI&SC'        | '653068c5-a3a6-4d27-9e5e-1fc8102f7d91' |
+				| '3' | '$$Rov3SalesInvoice029203$$' | '$$PurchaseInvoice0292021$$'                | '647c0486-7e3c-49c1-aca2-7ffcc3246b18' | 'SC'        | '11,000' | '$$Rov4PurchaseInvoice0292021$$'       | 'SI&SC'        | '647c0486-7e3c-49c1-aca2-7ffcc3246b18' |
+			Then the number of "RowIDInfo" table lines is "равно" "3"
+		And I delete "$$NumberSalesInvoice029203$$" variable
+		And I delete "$$SalesInvoice029203$$" variable
+		And I save the value of "Number" field as "$$NumberSalesInvoice029203$$"
+		And I save the window as "$$SalesInvoice029203$$"
+	* Create SC
+		And I click the button named "FormDocumentShipmentConfirmationGenerate"
+		And I click "Ok" button
+		And I click "Show row key" button
+		And I go to line in "ItemList" table
+			| '#' |
+			| '1' |
+		And I activate "Key" field in "ItemList" table
+		And I delete "$$Rov1ShipmentConfirmation029203$$" variable
+		And I save the current field value as "$$Rov1ShipmentConfirmation029203$$"
+		And "ItemList" table contains lines
+			| 'Key'                                | 'Store'    | 'Shipment basis'         | '#' | 'Quantity in base unit' | 'Item'  | 'Inventory transfer' | 'Item key' | 'Quantity' | 'Sales invoice'          | 'Unit' | 'Sales order'                               | 'Inventory transfer order' | 'Purchase return order' | 'Purchase return' |
+			| '$$Rov1ShipmentConfirmation029203$$' | 'Store 01' | '$$SalesInvoice029203$$' | '1' | '11,000'                | 'Shirt' | ''                   | '38/Black' | '11,000'   | '$$SalesInvoice029203$$' | 'pcs'  | 'Sales order 502 dated 30.03.2021 11:56:28' | ''                         | ''                      | ''                |
+		Then the number of "ItemList" table lines is "равно" "1"	
+		And "RowIDInfo" table became equal
+			| '#' | 'Key'                                | 'Basis'                  | 'Row ID'                               | 'Next step' | 'Q'      | 'Basis key'                  | 'Current step' | 'Row ref'                              |
+			| '1' | '$$Rov1ShipmentConfirmation029203$$' | '$$SalesInvoice029203$$' | '647c0486-7e3c-49c1-aca2-7ffcc3246b18' | ''          | '11,000' | '$$Rov3SalesInvoice029203$$' | 'SC'           | '647c0486-7e3c-49c1-aca2-7ffcc3246b18' |
+		Then the number of "RowIDInfo" table lines is "равно" "1"
+		And I click the button named "FormPost"	
+		And I delete "$$NumberShipmentConfirmation029203$$" variable
+		And I delete "$$ShipmentConfirmation0292033$$" variable
+		And I save the value of "Number" field as "$$NumberShipmentConfirmation029203$$"
+		And I save the window as "$$ShipmentConfirmation029203$$"
+		And I close all client application windows
+		
+		
+
+Scenario: _029204 create SC-SI based on SO (with procurement method - purchase)
+	* Select SO
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I go to line in "List" table
+		| 'Number' |
+		| '502'      |
+	* Create SC
 		And I click the button named "FormDocumentShipmentConfirmationGenerate"
 		And I click "Ok" button	
-	* Check filling of the tabular part
+		And I click "Show row key" button
+		And I go to line in "ItemList" table
+			| '#' |
+			| '1' |
+		And I activate "Key" field in "ItemList" table
+		And I delete "$$Rov1ShipmentConfirmation029204$$" variable
+		And I save the current field value as "$$Rov1ShipmentConfirmation029204$$"	
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' |
+			| 'Dress' | 'M/White'  |
+		And I activate "Quantity" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "5,000" text in "Quantity" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click the button named "FormPost"	
 		And "ItemList" table contains lines
-		| 'Item'     | 'Quantity' | 'Item key'  | 'Unit' | 'Store'    | 'Shipment basis'        |
-		| 'Dress'    | '10,000'   | 'XS/Blue'   | 'pcs'  | 'Store 02' | '$$SalesOrder0292012$$' |
-		| 'Trousers' | '5,000'    | '36/Yellow' | 'pcs'  | 'Store 02' | '$$SalesOrder0292012$$' |
-		| 'Trousers' | '10,000'   | '38/Yellow' | 'pcs'  | 'Store 02' | '$$SalesOrder0292012$$' |
-	* Change of document number
-		And I click the button named "FormPost"
-		And I delete "$$NumberShipmentConfirmation029205$$" variable
-		And I delete "$$ShipmentConfirmation029205$$" variable
-		And I save the value of "Number" field as "$$NumberShipmentConfirmation029205$$"
-		And I save the window as "$$ShipmentConfirmation029205$$"
-		And I click the button named "FormPost"
+			| 'Key'                                | 'Store'    | 'Shipment basis'                            | '#' | 'Quantity in base unit' | 'Item'  | 'Inventory transfer' | 'Item key' | 'Quantity' | 'Sales invoice' | 'Unit' | 'Sales order'                               | 'Inventory transfer order' | 'Purchase return order' | 'Purchase return' |
+			| '$$Rov1ShipmentConfirmation029204$$' | 'Store 01' | 'Sales order 502 dated 30.03.2021 11:56:28' | '1' | '5,000'                 | 'Dress' | ''                   | 'M/White'  | '5,000'    | ''              | 'pcs'  | 'Sales order 502 dated 30.03.2021 11:56:28' | ''                         | ''                      | ''                |
+		Then the number of "ItemList" table lines is "равно" "1"
+		And "RowIDInfo" table contains lines
+			| '#' | 'Key'                                | 'Basis'                   | 'Row ID'                               | 'Next step' | 'Q'     | 'Basis key'                   | 'Current step' | 'Row ref'                              |
+			| '1' | '$$Rov1ShipmentConfirmation029204$$' | '$$GoodsReceipt0292021$$' | '4a003d08-12af-4c34-98d5-5cdeb84616de' | 'SI'        | '5,000' | '$$Rov3GoodsReceipt0292021$$' | 'SI&SC'        | '4a003d08-12af-4c34-98d5-5cdeb84616de' |
+		Then the number of "RowIDInfo" table lines is "равно" "1"
+		And I delete "$$NumberShipmentConfirmation029204$$" variable
+		And I delete "$$ShipmentConfirmation029204$$" variable
+		And I save the value of "Number" field as "$$NumberShipmentConfirmation029204$$"
+		And I save the window as "$$ShipmentConfirmation029204$$"
+	* Create SI
+		And I click the button named "FormDocumentSalesInvoiceGenerate"
+		And I click "Ok" button	
+		And I click "Show row key" button
+		And I go to line in "ItemList" table
+			| '#' |
+			| '1' |
+		And I activate "Key" field in "ItemList" table
+		And I delete "$$Rov1SalesInvoice029204$$" variable
+		And I save the current field value as "$$Rov1SalesInvoice029204$$"	
+		And I click the button named "FormPost"	
+		And "ItemList" table contains lines
+			| 'Key'                                  | 'Store'    | 'Additional analytic' | 'Quantity in base unit' | '#' | 'Business unit' | 'Price type'        | 'Item'  | 'Item key' | 'Dont calculate row' | 'Serial lot numbers' | 'Q'     | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Delivery date' | 'Use shipment confirmation' | 'Detail' | 'Sales order'                               | 'Revenue type' |
+			| '$$Rov1SalesInvoice029204$$' | 'Store 01' | ''                    | '5,000'                 | '1' | ''              | 'Basic Price Types' | 'Dress' | 'M/White'  | 'No'                 | ''                   | '5,000' | 'pcs'  | '396,61'     | '520,00' | '18%' | ''              | '2 203,39'   | '2 600,00'     | '31.03.2021'    | 'Yes'                       | ''       | 'Sales order 502 dated 30.03.2021 11:56:28' | ''             |
+		Then the number of "ItemList" table lines is "равно" "1"
+		And "ShipmentConfirmationsTree" table became equal
+			| 'Key'                        | 'Basis key'                          | 'Item'  | 'Shipment confirmation'          | 'Item key' | 'Invoice' | 'SC'    | 'Q'     |
+			| '$$Rov1SalesInvoice029204$$' | ''                                   | 'Dress' | ''                               | 'M/White'  | '5,000'   | '5,000' | '5,000' |
+			| '$$Rov1SalesInvoice029204$$' | '$$Rov1ShipmentConfirmation029204$$' | ''      | '$$ShipmentConfirmation029204$$' | ''         | ''        | '5,000' | '5,000' |
+		And "RowIDInfo" table became equal
+			| '#' | 'Key'                        | 'Basis'                          | 'Row ID'                               | 'Next step' | 'Q'     | 'Basis key'                          | 'Current step' | 'Row ref'                              |
+			| '1' | '$$Rov1SalesInvoice029204$$' | '$$ShipmentConfirmation029204$$' | '4a003d08-12af-4c34-98d5-5cdeb84616de' | ''          | '5,000' | '$$Rov1ShipmentConfirmation029204$$' | 'SI'           | '4a003d08-12af-4c34-98d5-5cdeb84616de' |
 		And I close all client application windows
 
-Scenario: _029206 create Sales invoice based on Sales order, procurement method - purchase (Shipment confirmation before Sales invoice, store use Shipment confirmation)
-	* Create Sales invoice based on Sales order
-		Given I open hyperlink "e1cib/list/Document.SalesOrder"
-		And I go to line in "List" table
-			| Number |
-			| $$NumberSalesOrder0292012$$   |
-		And I click the button named "FormDocumentSalesInvoiceGenerate"
-		And I click "OK" button
-	* Check filling of the tabular part
-		And "ItemList" table contains lines
-		| 'Item'     | 'Price'  | 'Item key'  | 'Q'      |'Tax amount' | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
-		| 'Dress'    | '520,00' | 'XS/Blue'   | '10,000' |'793,22'     | 'pcs'  | '4 406,78'   | '5 200,00'     | 'Store 02' |
-		| 'Trousers' | '400,00' | '36/Yellow' | '5,000'  |'305,08'     | 'pcs'  | '1 694,92'   | '2 000,00'     | 'Store 02' |
-		| 'Trousers' | '400,00' | '38/Yellow' | '10,000' |'610,17'     | 'pcs'  | '3 389,83'   | '4 000,00'     | 'Store 02' |
-		And I click the button named "FormPost"
-		And I delete "$$NumberSalesInvoice0292012$$" variable
-		And I delete "$$SalesInvoice0292012$$" variable
-		And I save the value of "Number" field as "$$NumberSalesInvoice0292012$$"
-		And I save the window as "$$SalesInvoice0292012$$"
-		And I close all client application windows
+// rewrite when the scheme is worked out
+
+Scenario: _029205 check movements in the register T10000B_RowIDMovements
+	Given I open hyperlink "e1cib/list/AccumulationRegister.T10000B_RowIDMovements"
+	And "List" table contains lines
+		| 'Recorder'                                  | 'Row ID'                               | 'Step'  | 'Basis'                                     | 'Row ref'                              | 'Quantity' |
+		| 'Sales order 501 dated 30.03.2021 11:56:21' | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' | 'PO&PI' | 'Sales order 501 dated 30.03.2021 11:56:21' | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' | '5,000'    |
+		| 'Sales order 501 dated 30.03.2021 11:56:21' | '3cddf099-4bbf-4c9c-807a-bb2388f83e42' | 'PO&PI' | 'Sales order 501 dated 30.03.2021 11:56:21' | '3cddf099-4bbf-4c9c-807a-bb2388f83e42' | '2,000'    |
+		| 'Sales order 501 dated 30.03.2021 11:56:21' | 'b5b69355-5373-4cd3-9ed7-d08af7501bc7' | 'SI'    | 'Sales order 501 dated 30.03.2021 11:56:21' | 'b5b69355-5373-4cd3-9ed7-d08af7501bc7' | '1,000'    |
+		| 'Sales order 501 dated 30.03.2021 11:56:21' | '2e0968f4-d293-4faa-abe0-d25c849e9c32' | 'SI&SC' | 'Sales order 501 dated 30.03.2021 11:56:21' | '2e0968f4-d293-4faa-abe0-d25c849e9c32' | '5,000'    |
+		| 'Sales order 501 dated 30.03.2021 11:56:21' | '2659612d-158f-49a2-bbf4-46c70f05eb9d' | 'SI&SC' | 'Sales order 501 dated 30.03.2021 11:56:21' | '2659612d-158f-49a2-bbf4-46c70f05eb9d' | '10,000'   |
+		| 'Sales order 502 dated 30.03.2021 11:56:28' | '653068c5-a3a6-4d27-9e5e-1fc8102f7d91' | 'PO&PI' | 'Sales order 502 dated 30.03.2021 11:56:28' | '653068c5-a3a6-4d27-9e5e-1fc8102f7d91' | '8,000'    |
+		| 'Sales order 502 dated 30.03.2021 11:56:28' | '647c0486-7e3c-49c1-aca2-7ffcc3246b18' | 'PO&PI' | 'Sales order 502 dated 30.03.2021 11:56:28' | '647c0486-7e3c-49c1-aca2-7ffcc3246b18' | '11,000'   |
+		| 'Sales order 502 dated 30.03.2021 11:56:28' | '4a003d08-12af-4c34-98d5-5cdeb84616de' | 'PO&PI' | 'Sales order 502 dated 30.03.2021 11:56:28' | '4a003d08-12af-4c34-98d5-5cdeb84616de' | '8,000'    |
+		| 'Sales order 502 dated 30.03.2021 11:56:28' | '1b08fb3c-845d-4912-9cc0-e07de99cb5c7' | 'SI'    | 'Sales order 502 dated 30.03.2021 11:56:28' | '1b08fb3c-845d-4912-9cc0-e07de99cb5c7' | '2,000'    |
+		| 'Sales order 503 dated 30.03.2021 11:57:06' | '323ed282-6c37-4443-b3b5-6abd5531e1b7' | 'PO&PI' | 'Sales order 503 dated 30.03.2021 11:57:06' | '323ed282-6c37-4443-b3b5-6abd5531e1b7' | '10,000'   |
+		| 'Sales order 503 dated 30.03.2021 11:57:06' | '40d4db8e-5a7c-4d0f-878c-4f054b2a01cf' | 'PO&PI' | 'Sales order 503 dated 30.03.2021 11:57:06' | '40d4db8e-5a7c-4d0f-878c-4f054b2a01cf' | '5,000'    |
+		| 'Sales order 503 dated 30.03.2021 11:57:06' | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28' | 'PO&PI' | 'Sales order 503 dated 30.03.2021 11:57:06' | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28' | '10,000'   |
+		| '$$PurchaseOrder029201$$'                   | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' | 'PO&PI' | 'Sales order 501 dated 30.03.2021 11:56:21' | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' | '5,000'    |
+		| '$$PurchaseOrder029201$$'                   | '653068c5-a3a6-4d27-9e5e-1fc8102f7d91' | 'PO&PI' | 'Sales order 502 dated 30.03.2021 11:56:28' | '653068c5-a3a6-4d27-9e5e-1fc8102f7d91' | '8,000'    |
+		| '$$PurchaseOrder029201$$'                   | '3cddf099-4bbf-4c9c-807a-bb2388f83e42' | 'PO&PI' | 'Sales order 501 dated 30.03.2021 11:56:21' | '3cddf099-4bbf-4c9c-807a-bb2388f83e42' | '2,000'    |
+		| '$$PurchaseOrder029201$$'                   | '647c0486-7e3c-49c1-aca2-7ffcc3246b18' | 'PO&PI' | 'Sales order 502 dated 30.03.2021 11:56:28' | '647c0486-7e3c-49c1-aca2-7ffcc3246b18' | '11,000'   |
+		| '$$PurchaseOrder029201$$'                   | '4a003d08-12af-4c34-98d5-5cdeb84616de' | 'PO&PI' | 'Sales order 502 dated 30.03.2021 11:56:28' | '4a003d08-12af-4c34-98d5-5cdeb84616de' | '8,000'    |
+		| '$$PurchaseOrder029201$$'                   | '323ed282-6c37-4443-b3b5-6abd5531e1b7' | 'PO&PI' | 'Sales order 503 dated 30.03.2021 11:57:06' | '323ed282-6c37-4443-b3b5-6abd5531e1b7' | '10,000'   |
+		| '$$PurchaseOrder029201$$'                   | '40d4db8e-5a7c-4d0f-878c-4f054b2a01cf' | 'PO&PI' | 'Sales order 503 dated 30.03.2021 11:57:06' | '40d4db8e-5a7c-4d0f-878c-4f054b2a01cf' | '5,000'    |
+		| '$$PurchaseOrder029201$$'                   | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28' | 'PO&PI' | 'Sales order 503 dated 30.03.2021 11:57:06' | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28' | '10,000'   |
+		| '$$PurchaseOrder029201$$'                   | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' | 'PI&GR' | '$$PurchaseOrder029201$$'                   | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' | '5,000'    |
+		| '$$PurchaseOrder029201$$'                   | '653068c5-a3a6-4d27-9e5e-1fc8102f7d91' | 'PI&GR' | '$$PurchaseOrder029201$$'                   | '653068c5-a3a6-4d27-9e5e-1fc8102f7d91' | '8,000'    |
+		| '$$PurchaseOrder029201$$'                   | '3cddf099-4bbf-4c9c-807a-bb2388f83e42' | 'PI&GR' | '$$PurchaseOrder029201$$'                   | '3cddf099-4bbf-4c9c-807a-bb2388f83e42' | '2,000'    |
+		| '$$PurchaseOrder029201$$'                   | '647c0486-7e3c-49c1-aca2-7ffcc3246b18' | 'PI&GR' | '$$PurchaseOrder029201$$'                   | '647c0486-7e3c-49c1-aca2-7ffcc3246b18' | '11,000'   |
+		| '$$PurchaseOrder029201$$'                   | '4a003d08-12af-4c34-98d5-5cdeb84616de' | 'PI&GR' | '$$PurchaseOrder029201$$'                   | '4a003d08-12af-4c34-98d5-5cdeb84616de' | '15,000'   |
+		| '$$PurchaseOrder029201$$'                   | '323ed282-6c37-4443-b3b5-6abd5531e1b7' | 'PI&GR' | '$$PurchaseOrder029201$$'                   | '323ed282-6c37-4443-b3b5-6abd5531e1b7' | '10,000'   |
+		| '$$PurchaseOrder029201$$'                   | '40d4db8e-5a7c-4d0f-878c-4f054b2a01cf' | 'PI&GR' | '$$PurchaseOrder029201$$'                   | '40d4db8e-5a7c-4d0f-878c-4f054b2a01cf' | '5,000'    |
+		| '$$PurchaseOrder029201$$'                   | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28' | 'PI&GR' | '$$PurchaseOrder029201$$'                   | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28' | '20,000'   |
+		| '$$PurchaseOrder029201$$'                   | '$$Rov9PurchaseOrder029201$$'          | 'PI&GR' | '$$PurchaseOrder029201$$'                   | '$$Rov9PurchaseOrder029201$$'          | '40,000'   |
+		| '$$PurchaseInvoice0292021$$'                | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' | 'PI&GR' | '$$PurchaseOrder029201$$'                   | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' | '4,000'    |
+		| '$$PurchaseInvoice0292021$$'                | '653068c5-a3a6-4d27-9e5e-1fc8102f7d91' | 'PI&GR' | '$$PurchaseOrder029201$$'                   | '653068c5-a3a6-4d27-9e5e-1fc8102f7d91' | '8,000'    |
+		| '$$PurchaseInvoice0292021$$'                | '3cddf099-4bbf-4c9c-807a-bb2388f83e42' | 'PI&GR' | '$$PurchaseOrder029201$$'                   | '3cddf099-4bbf-4c9c-807a-bb2388f83e42' | '2,000'    |
+		| '$$PurchaseInvoice0292021$$'                | '647c0486-7e3c-49c1-aca2-7ffcc3246b18' | 'PI&GR' | '$$PurchaseOrder029201$$'                   | '647c0486-7e3c-49c1-aca2-7ffcc3246b18' | '11,000'   |
+		| '$$PurchaseInvoice0292021$$'                | '4a003d08-12af-4c34-98d5-5cdeb84616de' | 'PI&GR' | '$$PurchaseOrder029201$$'                   | '4a003d08-12af-4c34-98d5-5cdeb84616de' | '15,000'   |
+		| '$$PurchaseInvoice0292021$$'                | '323ed282-6c37-4443-b3b5-6abd5531e1b7' | 'PI&GR' | '$$PurchaseOrder029201$$'                   | '323ed282-6c37-4443-b3b5-6abd5531e1b7' | '10,000'   |
+		| '$$PurchaseInvoice0292021$$'                | '40d4db8e-5a7c-4d0f-878c-4f054b2a01cf' | 'PI&GR' | '$$PurchaseOrder029201$$'                   | '40d4db8e-5a7c-4d0f-878c-4f054b2a01cf' | '5,000'    |
+		| '$$PurchaseInvoice0292021$$'                | '$$Rov9PurchaseOrder029201$$'          | 'PI&GR' | '$$PurchaseOrder029201$$'                   | '$$Rov9PurchaseOrder029201$$'          | '40,000'   |
+		| '$$PurchaseInvoice0292021$$'                | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' | 'GR'    | '$$PurchaseInvoice0292021$$'                | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' | '4,000'    |
+		| '$$PurchaseInvoice0292021$$'                | '3cddf099-4bbf-4c9c-807a-bb2388f83e42' | 'GR'    | '$$PurchaseInvoice0292021$$'                | '3cddf099-4bbf-4c9c-807a-bb2388f83e42' | '3,000'    |
+		| '$$PurchaseInvoice0292021$$'                | '4a003d08-12af-4c34-98d5-5cdeb84616de' | 'GR'    | '$$PurchaseInvoice0292021$$'                | '4a003d08-12af-4c34-98d5-5cdeb84616de' | '15,000'   |
+		| '$$PurchaseInvoice0292021$$'                | '323ed282-6c37-4443-b3b5-6abd5531e1b7' | 'GR'    | '$$PurchaseInvoice0292021$$'                | '323ed282-6c37-4443-b3b5-6abd5531e1b7' | '10,000'   |
+		| '$$PurchaseInvoice0292021$$'                | '40d4db8e-5a7c-4d0f-878c-4f054b2a01cf' | 'GR'    | '$$PurchaseInvoice0292021$$'                | '40d4db8e-5a7c-4d0f-878c-4f054b2a01cf' | '5,000'    |
+		| '$$PurchaseInvoice0292021$$'                | '$$Rov9PurchaseOrder029201$$'          | 'GR'    | '$$PurchaseInvoice0292021$$'                | '$$Rov9PurchaseOrder029201$$'          | '40,000'   |
+		| '$$PurchaseInvoice0292021$$'                | '647c0486-7e3c-49c1-aca2-7ffcc3246b18' | 'SI&SC' | '$$PurchaseInvoice0292021$$'                | '647c0486-7e3c-49c1-aca2-7ffcc3246b18' | '11,000'   |
+		| '$$PurchaseInvoice0292021$$'                | '653068c5-a3a6-4d27-9e5e-1fc8102f7d91' | 'SI&SC' | '$$PurchaseInvoice0292021$$'                | '653068c5-a3a6-4d27-9e5e-1fc8102f7d91' | '8,000'    |
+		| '$$GoodsReceipt0292021$$'                   | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' | 'GR'    | '$$PurchaseInvoice0292021$$'                | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' | '4,000'    |
+		| '$$GoodsReceipt0292021$$'                   | '3cddf099-4bbf-4c9c-807a-bb2388f83e42' | 'GR'    | '$$PurchaseInvoice0292021$$'                | '3cddf099-4bbf-4c9c-807a-bb2388f83e42' | '3,000'    |
+		| '$$GoodsReceipt0292021$$'                   | '4a003d08-12af-4c34-98d5-5cdeb84616de' | 'GR'    | '$$PurchaseInvoice0292021$$'                | '4a003d08-12af-4c34-98d5-5cdeb84616de' | '15,000'   |
+		| '$$GoodsReceipt0292021$$'                   | '323ed282-6c37-4443-b3b5-6abd5531e1b7' | 'GR'    | '$$PurchaseInvoice0292021$$'                | '323ed282-6c37-4443-b3b5-6abd5531e1b7' | '10,000'   |
+		| '$$GoodsReceipt0292021$$'                   | '40d4db8e-5a7c-4d0f-878c-4f054b2a01cf' | 'GR'    | '$$PurchaseInvoice0292021$$'                | '40d4db8e-5a7c-4d0f-878c-4f054b2a01cf' | '5,000'    |
+		| '$$GoodsReceipt0292021$$'                   | '$$Rov9PurchaseOrder029201$$'          | 'GR'    | '$$PurchaseInvoice0292021$$'                | '$$Rov9PurchaseOrder029201$$'          | '40,000'   |
+		| '$$GoodsReceipt0292021$$'                   | '40d4db8e-5a7c-4d0f-878c-4f054b2a01cf' | 'SI&SC' | '$$GoodsReceipt0292021$$'                   | '40d4db8e-5a7c-4d0f-878c-4f054b2a01cf' | '5,000'    |
+		| '$$GoodsReceipt0292021$$'                   | '323ed282-6c37-4443-b3b5-6abd5531e1b7' | 'SI&SC' | '$$GoodsReceipt0292021$$'                   | '323ed282-6c37-4443-b3b5-6abd5531e1b7' | '10,000'   |
+		| '$$GoodsReceipt0292021$$'                   | '4a003d08-12af-4c34-98d5-5cdeb84616de' | 'SI&SC' | '$$GoodsReceipt0292021$$'                   | '4a003d08-12af-4c34-98d5-5cdeb84616de' | '15,000'   |
+		| '$$GoodsReceipt0292021$$'                   | '3cddf099-4bbf-4c9c-807a-bb2388f83e42' | 'SI&SC' | '$$GoodsReceipt0292021$$'                   | '3cddf099-4bbf-4c9c-807a-bb2388f83e42' | '3,000'    |
+		| '$$GoodsReceipt0292021$$'                   | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' | 'SI&SC' | '$$GoodsReceipt0292021$$'                   | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' | '4,000'    |
+		| '$$GoodsReceipt0292022$$'                   | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' | 'PI&GR' | '$$PurchaseOrder029201$$'                   | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' | '1,000'    |
+		| '$$GoodsReceipt0292022$$'                   | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28' | 'PI&GR' | '$$PurchaseOrder029201$$'                   | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28' | '20,000'   |
+		| '$$GoodsReceipt0292022$$'                   | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' | 'PI'    | '$$GoodsReceipt0292022$$'                   | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' | '1,000'    |
+		| '$$GoodsReceipt0292022$$'                   | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28' | 'PI'    | '$$GoodsReceipt0292022$$'                   | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28' | '20,000'   |
+		| '$$GoodsReceipt0292022$$'                   | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28' | 'SI&SC' | '$$GoodsReceipt0292022$$'                   | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28' | '20,000'   |
+		| '$$GoodsReceipt0292022$$'                   | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' | 'SI&SC' | '$$GoodsReceipt0292022$$'                   | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' | '1,000'    |
+		| '$$PurchaseInvoice0292022$$'                | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' | 'PI'    | '$$GoodsReceipt0292022$$'                   | '6e8fe2b7-0bac-4b1e-92be-9a51ae0740b0' | '1,000'    |
+		| '$$PurchaseInvoice0292022$$'                | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28' | 'PI'    | '$$GoodsReceipt0292022$$'                   | 'b07db6dd-4d01-469c-a8e8-ccfb69c27f28' | '20,000'   |
+		| '$$SalesInvoice029203$$'                    | '1b08fb3c-845d-4912-9cc0-e07de99cb5c7' | 'SI'    | 'Sales order 502 dated 30.03.2021 11:56:28' | '1b08fb3c-845d-4912-9cc0-e07de99cb5c7' | '2,000'    |
+		| '$$SalesInvoice029203$$'                    | '653068c5-a3a6-4d27-9e5e-1fc8102f7d91' | 'SI&SC' | '$$PurchaseInvoice0292021$$'                | '653068c5-a3a6-4d27-9e5e-1fc8102f7d91' | '8,000'    |
+		| '$$SalesInvoice029203$$'                    | '647c0486-7e3c-49c1-aca2-7ffcc3246b18' | 'SI&SC' | '$$PurchaseInvoice0292021$$'                | '647c0486-7e3c-49c1-aca2-7ffcc3246b18' | '11,000'   |
+		| '$$SalesInvoice029203$$'                    | '647c0486-7e3c-49c1-aca2-7ffcc3246b18' | 'SC'    | '$$SalesInvoice029203$$'                    | '647c0486-7e3c-49c1-aca2-7ffcc3246b18' | '11,000'   |
+		| '$$ShipmentConfirmation029203$$'            | '647c0486-7e3c-49c1-aca2-7ffcc3246b18' | 'SC'    | '$$SalesInvoice029203$$'                    | '647c0486-7e3c-49c1-aca2-7ffcc3246b18' | '11,000'   |
+		| '$$ShipmentConfirmation029204$$'            | '4a003d08-12af-4c34-98d5-5cdeb84616de' | 'SI&SC' | '$$GoodsReceipt0292021$$'                   | '4a003d08-12af-4c34-98d5-5cdeb84616de' | '5,000'    |
+		| '$$ShipmentConfirmation029204$$'            | '4a003d08-12af-4c34-98d5-5cdeb84616de' | 'SI'    | '$$ShipmentConfirmation029204$$'            | '4a003d08-12af-4c34-98d5-5cdeb84616de' | '5,000'    |
+	Then the number of "List" table lines is "равно" "72"
+	And I close all client application windows
+	
+
+
+
+		
+					
+
+		
+				
+	
+
+
+
+			
+						
+
+			
+						
+						
+
+
+		
+				
+
+
+		
+				
+	
+		
+				
 

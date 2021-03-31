@@ -187,7 +187,7 @@ Scenario: _029103 create a Purchase order for service
 		And I click the button named "FormPost"
 
 
-Scenario: _029104 create a Purchase invoice for service (based on Purchase order)
+Scenario: _029104 create a Purchase invoice for service 
 	Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 	And I go to line in "List" table
 		| 'Number' |
@@ -205,22 +205,12 @@ Scenario: _029104 create a Purchase invoice for service (based on Purchase order
 	And I save the value of "Number" field as "$$NumberPurchaseInvoice029104$$"
 	And I save the window as "$$PurchaseInvoice029104$$"
 	And I click the button named "FormPost"
-	* Check movements
-		Given I open hyperlink "e1cib/list/AccumulationRegister.PurchaseTurnovers"
+	* Check creation
 		And "List" table contains lines
-		| 'Currency' | 'Quantity' | 'Recorder'                  | 'Row key' | 'Company'      | 'Purchase invoice'          | 'Item key' | 'Amount'   |
-		| 'TRY'      | '1,000'    | '$$PurchaseInvoice029104$$' | '*'       | 'Main Company' | '$$PurchaseInvoice029104$$' | 'Interner' | '1 000,00' |
+			| 'Number' |
+			| '$$NumberPurchaseInvoice029104$$'      |
 		And I close all client application windows
-		Given I open hyperlink "e1cib/list/AccumulationRegister.ExpensesTurnovers"
-		And "List" table contains lines
-		| 'Currency' | 'Recorder'                  | 'Company'      | 'Business unit' | 'Item key' | 'Amount'   | 'Expense type'             |
-		| 'TRY'      | '$$PurchaseInvoice029104$$' | 'Main Company' | 'Front office'  | 'Interner' | '1 000,00' | 'Telephone communications' |
-		And I close all client application windows
-		Given I open hyperlink "e1cib/list/AccumulationRegister.PartnerApTransactions"
-		And "List" table contains lines
-		| 'Currency' | 'Recorder'                  | 'Legal name'        | 'Basis document'            | 'Company'      | 'Amount'   | 'Partner term'       | 'Partner'   |
-		| 'TRY'      | '$$PurchaseInvoice029104$$' | 'Company Ferron BP' | '$$PurchaseInvoice029104$$' | 'Main Company' | '1 000,00' | 'Vendor Ferron, TRY' | 'Ferron BP' |
-		And I close all client application windows
+		
 	
 	
 	
@@ -333,20 +323,7 @@ Scenario: _029106 create a Purchase invoice for service and product (based on Pu
 			And I click the button named "FormPost"
 		* Check document movements using a report
 			And I click "Registrations report" button
-			And I select "Purchase turnovers" exact value from "Register" drop-down list
-			And I click "Generate report" button
-			And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Purchase turnovers"' | ''       | ''          | ''       | ''           | ''             | ''                          | ''         | ''         | ''        | ''                             | ''                     | '' | '' |
-			| ''                               | 'Period' | 'Resources' | ''       | ''           | 'Dimensions'   | ''                          | ''         | ''         | ''        | ''                             | 'Attributes'           | '' | '' |
-			| ''                               | ''       | 'Quantity'  | 'Amount' | 'Net amount' | 'Company'      | 'Purchase invoice'          | 'Currency' | 'Item key' | 'Row key' | 'Multi currency movement type' | 'Deferred calculation' | '' | '' |
-			| ''                               | '*'      | '1'         | '17,12'  | '14,51'      | 'Main Company' | '$$PurchaseInvoice029106$$' | 'USD'      | 'Interner' | '*'       | 'Reporting currency'           | 'No'                   | '' | '' |
-			| ''                               | '*'      | '1'         | '34,24'  | '29,02'      | 'Main Company' | '$$PurchaseInvoice029106$$' | 'USD'      | 'Router'   | '*'       | 'Reporting currency'           | 'No'                   | '' | '' |
-			| ''                               | '*'      | '1'         | '100'    | '84,75'      | 'Main Company' | '$$PurchaseInvoice029106$$' | 'TRY'      | 'Interner' | '*'       | 'en description is empty'      | 'No'                   | '' | '' |
-			| ''                               | '*'      | '1'         | '100'    | '84,75'      | 'Main Company' | '$$PurchaseInvoice029106$$' | 'TRY'      | 'Interner' | '*'       | 'Local currency'               | 'No'                   | '' | '' |
-			| ''                               | '*'      | '1'         | '100'    | '84,75'      | 'Main Company' | '$$PurchaseInvoice029106$$' | 'TRY'      | 'Interner' | '*'       | 'TRY'                          | 'No'                   | '' | '' |
-			| ''                               | '*'      | '1'         | '200'    | '169,49'     | 'Main Company' | '$$PurchaseInvoice029106$$' | 'TRY'      | 'Router'   | '*'       | 'en description is empty'      | 'No'                   | '' | '' |
-			| ''                               | '*'      | '1'         | '200'    | '169,49'     | 'Main Company' | '$$PurchaseInvoice029106$$' | 'TRY'      | 'Router'   | '*'       | 'Local currency'               | 'No'                   | '' | '' |
-			| ''                               | '*'      | '1'         | '200'    | '169,49'     | 'Main Company' | '$$PurchaseInvoice029106$$' | 'TRY'      | 'Router'   | '*'       | 'TRY'                          | 'No'                   | '' | '' |
+		
 			And I select "Expenses turnovers" exact value from "Register" drop-down list
 			And I click "Generate report" button
 			And "ResultTable" spreadsheet document contains lines:
@@ -364,13 +341,7 @@ Scenario: _029106 create a Purchase invoice for service and product (based on Pu
 			| ''                               | 'Record type' | 'Period' | 'Resources'            | ''               | ''                       | ''               | 'Dimensions'   | ''          | ''                  | ''                          | ''         | '' | '' |
 			| ''                               | ''            | ''       | 'Advance to suppliers' | 'Transaction AP' | 'Advance from customers' | 'Transaction AR' | 'Company'      | 'Partner'   | 'Legal name'        | 'Basis document'            | 'Currency' | '' | '' |
 			| ''                               | 'Receipt'     | '*'      | ''                     | '300'            | ''                       | ''               | 'Main Company' | 'Ferron BP' | 'Company Ferron BP' | '$$PurchaseInvoice029106$$' | 'TRY'      | '' | '' |
-			And I select "Reconciliation statement" exact value from "Register" drop-down list
-			And I click "Generate report" button
-			And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Reconciliation statement"' | ''            | ''       | ''          | ''             | ''                  | ''         | '' | '' | '' | '' | '' | '' | '' |
-			| ''                                     | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                  | ''         | '' | '' | '' | '' | '' | '' | '' |
-			| ''                                     | ''            | ''       | 'Amount'    | 'Company'      | 'Legal name'        | 'Currency' | '' | '' | '' | '' | '' | '' | '' |
-			| ''                                     | 'Expense'     | '*'      | '300'       | 'Main Company' | 'Company Ferron BP' | 'TRY'      | '' | '' | '' | '' | '' | '' | '' |
+		
 			And I select "Goods receipt schedule" exact value from "Register" drop-down list
 			And I click "Generate report" button
 			And "ResultTable" spreadsheet document contains lines:
@@ -533,27 +504,8 @@ Scenario: _029115 create a Sales invoice for service and product (Store does not
 			| ''                               | 'Record type' | 'Period' | 'Resources'            | ''               | ''                       | ''               | 'Dimensions'   | ''          | ''                  | ''                       | ''         | '' | '' |
 			| ''                               | ''            | ''       | 'Advance to suppliers' | 'Transaction AP' | 'Advance from customers' | 'Transaction AR' | 'Company'      | 'Partner'   | 'Legal name'        | 'Basis document'         | 'Currency' | '' | '' |
 			| ''                               | 'Receipt'     | '*'      | ''                     | ''               | ''                       | '7 100'          | 'Main Company' | 'Ferron BP' | 'Company Ferron BP' | '$$SalesInvoice029115$$' | 'TRY'      | '' | '' |
-		And I select "Sales turnovers" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Sales turnovers"' | ''       | ''          | ''        | ''           | ''              | ''             | ''                       | ''         | ''         | ''        | ''                             | ''                  | ''                     |
-			| ''                            | 'Period' | 'Resources' | ''        | ''           | ''              | 'Dimensions'   | ''                       | ''         | ''         | ''        | ''                             | ''                  | 'Attributes'           |
-			| ''                            | ''       | 'Quantity'  | 'Amount'  | 'Net amount' | 'Offers amount' | 'Company'      | 'Sales invoice'          | 'Currency' | 'Item key' | 'Row key' | 'Multi currency movement type' | 'Serial lot number' | 'Deferred calculation' |
-			| ''                            | '*'      | '1'         | '17,12'   | '14,51'      | ''              | 'Main Company' | '$$SalesInvoice029115$$' | 'USD'      | 'Rent'     | '*'       | 'Reporting currency'           | ''                  | 'No'                   |
-			| ''                            | '*'      | '1'         | '100'     | '84,75'      | ''              | 'Main Company' | '$$SalesInvoice029115$$' | 'TRY'      | 'Rent'     | '*'       | 'Local currency'               | ''                  | 'No'                   |
-			| ''                            | '*'      | '1'         | '100'     | '84,75'      | ''              | 'Main Company' | '$$SalesInvoice029115$$' | 'TRY'      | 'Rent'     | '*'       | 'TRY'                          | ''                  | 'No'                   |
-			| ''                            | '*'      | '1'         | '100'     | '84,75'      | ''              | 'Main Company' | '$$SalesInvoice029115$$' | 'TRY'      | 'Rent'     | '*'       | 'en description is empty'      | ''                  | 'No'                   |
-			| ''                            | '*'      | '10'        | '1 198,4' | '1 015,59'   | ''              | 'Main Company' | '$$SalesInvoice029115$$' | 'USD'      | 'Table'    | '*'       | 'Reporting currency'           | ''                  | 'No'                   |
-			| ''                            | '*'      | '10'        | '7 000'   | '5 932,2'    | ''              | 'Main Company' | '$$SalesInvoice029115$$' | 'TRY'      | 'Table'    | '*'       | 'Local currency'               | ''                  | 'No'                   |
-			| ''                            | '*'      | '10'        | '7 000'   | '5 932,2'    | ''              | 'Main Company' | '$$SalesInvoice029115$$' | 'TRY'      | 'Table'    | '*'       | 'TRY'                          | ''                  | 'No'                   |
-			| ''                            | '*'      | '10'        | '7 000'   | '5 932,2'    | ''              | 'Main Company' | '$$SalesInvoice029115$$' | 'TRY'      | 'Table'    | '*'       | 'en description is empty'      | ''                  | 'No'                   |
-		And I select "Reconciliation statement" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Reconciliation statement"' | ''            | ''       | ''          | ''             | ''                  | ''         | '' | '' | '' | '' | '' | '' | '' |
-			| ''                                     | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                  | ''         | '' | '' | '' | '' | '' | '' | '' |
-			| ''                                     | ''            | ''       | 'Amount'    | 'Company'      | 'Legal name'        | 'Currency' | '' | '' | '' | '' | '' | '' | '' |
-			| ''                                     | 'Receipt'     | '*'      | '7 100'     | 'Main Company' | 'Company Ferron BP' | 'TRY'      | '' | '' | '' | '' | '' | '' | '' |
+	
+		
 		And I select "Revenues turnovers" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
@@ -673,20 +625,7 @@ Scenario: _029130 create Retail sales receipt for service and product
 			| ''                            | '*'      | '30,51'     | '30,51'         | '169,49'     | '$$RetailSalesReceipt029130$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'Local currency'               | 'No'                   |
 			| ''                            | '*'      | '30,51'     | '30,51'         | '169,49'     | '$$RetailSalesReceipt029130$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'TRY'                          | 'No'                   |
 			| ''                            | '*'      | '30,51'     | '30,51'         | '169,49'     | '$$RetailSalesReceipt029130$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'en description is empty'      | 'No'                   |
-		And I select "Sales turnovers" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Sales turnovers"' | ''       | ''          | ''       | ''           | ''              | ''             | ''                             | ''         | ''         | ''        | ''                             | ''                  | ''                     |
-			| ''                            | 'Period' | 'Resources' | ''       | ''           | ''              | 'Dimensions'   | ''                             | ''         | ''         | ''        | ''                             | ''                  | 'Attributes'           |
-			| ''                            | ''       | 'Quantity'  | 'Amount' | 'Net amount' | 'Offers amount' | 'Company'      | 'Sales invoice'                | 'Currency' | 'Item key' | 'Row key' | 'Multi currency movement type' | 'Serial lot number' | 'Deferred calculation' |
-			| ''                            | '*'      | '1'         | '8,56'   | '7,25'       | ''              | 'Main Company' | '$$RetailSalesReceipt029130$$' | 'USD'      | 'Interner' | '*'       | 'Reporting currency'           | ''                  | 'No'                   |
-			| ''                            | '*'      | '1'         | '34,24'  | '29,02'      | ''              | 'Main Company' | '$$RetailSalesReceipt029130$$' | 'USD'      | 'Table'    | '*'       | 'Reporting currency'           | ''                  | 'No'                   |
-			| ''                            | '*'      | '1'         | '50'     | '42,37'      | ''              | 'Main Company' | '$$RetailSalesReceipt029130$$' | 'TRY'      | 'Interner' | '*'       | 'Local currency'               | ''                  | 'No'                   |
-			| ''                            | '*'      | '1'         | '50'     | '42,37'      | ''              | 'Main Company' | '$$RetailSalesReceipt029130$$' | 'TRY'      | 'Interner' | '*'       | 'TRY'                          | ''                  | 'No'                   |
-			| ''                            | '*'      | '1'         | '50'     | '42,37'      | ''              | 'Main Company' | '$$RetailSalesReceipt029130$$' | 'TRY'      | 'Interner' | '*'       | 'en description is empty'      | ''                  | 'No'                   |
-			| ''                            | '*'      | '1'         | '200'    | '169,49'     | ''              | 'Main Company' | '$$RetailSalesReceipt029130$$' | 'TRY'      | 'Table'    | '*'       | 'Local currency'               | ''                  | 'No'                   |
-			| ''                            | '*'      | '1'         | '200'    | '169,49'     | ''              | 'Main Company' | '$$RetailSalesReceipt029130$$' | 'TRY'      | 'Table'    | '*'       | 'TRY'                          | ''                  | 'No'                   |
-			| ''                            | '*'      | '1'         | '200'    | '169,49'     | ''              | 'Main Company' | '$$RetailSalesReceipt029130$$' | 'TRY'      | 'Table'    | '*'       | 'en description is empty'      | ''                  | 'No'                   |
+	
 		And I select "Revenues turnovers" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
@@ -733,35 +672,6 @@ Scenario: _029140 create PurchaseReturn for service and product (based on $$Purc
 		| ''                                    | 'Receipt'     | '*'      | '300'       | 'Main Company' | '$$PurchaseReturn029140$$' | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'TRY'      | 'Local currency'               | 'No'                   |
 		| ''                                    | 'Receipt'     | '*'      | '300'       | 'Main Company' | '$$PurchaseReturn029140$$' | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'TRY'      | 'TRY'                          | 'No'                   |
 		| ''                                    | 'Receipt'     | '*'      | '300'       | 'Main Company' | '$$PurchaseReturn029140$$' | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'TRY'      | 'en description is empty'      | 'No'                   |
-	And I select "Purchase return turnovers" exact value from "Register" drop-down list
-	And I click "Generate report" button
-	And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Purchase return turnovers"' | ''       | ''          | ''       | ''             | ''                          | ''         | ''         | ''        | ''                             | ''                     | '' |
-		| ''                                      | 'Period' | 'Resources' | ''       | 'Dimensions'   | ''                          | ''         | ''         | ''        | ''                             | 'Attributes'           | '' |
-		| ''                                      | ''       | 'Quantity'  | 'Amount' | 'Company'      | 'Purchase invoice'          | 'Currency' | 'Item key' | 'Row key' | 'Multi currency movement type' | 'Deferred calculation' | '' |
-		| ''                                      | '*'      | '-1'        | '-200'   | 'Main Company' | '$$PurchaseInvoice029106$$' | 'TRY'      | 'Router'   | '*'       | 'Local currency'               | 'No'                   | '' |
-		| ''                                      | '*'      | '-1'        | '-200'   | 'Main Company' | '$$PurchaseInvoice029106$$' | 'TRY'      | 'Router'   | '*'       | 'TRY'                          | 'No'                   | '' |
-		| ''                                      | '*'      | '-1'        | '-200'   | 'Main Company' | '$$PurchaseInvoice029106$$' | 'TRY'      | 'Router'   | '*'       | 'en description is empty'      | 'No'                   | '' |
-		| ''                                      | '*'      | '-1'        | '-100'   | 'Main Company' | '$$PurchaseInvoice029106$$' | 'TRY'      | 'Interner' | '*'       | 'Local currency'               | 'No'                   | '' |
-		| ''                                      | '*'      | '-1'        | '-100'   | 'Main Company' | '$$PurchaseInvoice029106$$' | 'TRY'      | 'Interner' | '*'       | 'TRY'                          | 'No'                   | '' |
-		| ''                                      | '*'      | '-1'        | '-100'   | 'Main Company' | '$$PurchaseInvoice029106$$' | 'TRY'      | 'Interner' | '*'       | 'en description is empty'      | 'No'                   | '' |
-		| ''                                      | '*'      | '-1'        | '-34,24' | 'Main Company' | '$$PurchaseInvoice029106$$' | 'USD'      | 'Router'   | '*'       | 'Reporting currency'           | 'No'                   | '' |
-		| ''                                      | '*'      | '-1'        | '-17,12' | 'Main Company' | '$$PurchaseInvoice029106$$' | 'USD'      | 'Interner' | '*'       | 'Reporting currency'           | 'No'                   | '' |
-	
-	And I select "Purchase turnovers" exact value from "Register" drop-down list
-	And I click "Generate report" button
-	And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Purchase turnovers"' | ''       | ''          | ''       | ''           | ''             | ''                          | ''         | ''         | ''        | ''                             | ''                     |
-		| ''                               | 'Period' | 'Resources' | ''       | ''           | 'Dimensions'   | ''                          | ''         | ''         | ''        | ''                             | 'Attributes'           |
-		| ''                               | ''       | 'Quantity'  | 'Amount' | 'Net amount' | 'Company'      | 'Purchase invoice'          | 'Currency' | 'Item key' | 'Row key' | 'Multi currency movement type' | 'Deferred calculation' |
-		| ''                               | '*'      | '-1'        | '-200'   | '-169,49'    | 'Main Company' | '$$PurchaseInvoice029106$$' | 'TRY'      | 'Router'   | '*'       | 'Local currency'               | 'No'                   |
-		| ''                               | '*'      | '-1'        | '-200'   | '-169,49'    | 'Main Company' | '$$PurchaseInvoice029106$$' | 'TRY'      | 'Router'   | '*'       | 'TRY'                          | 'No'                   |
-		| ''                               | '*'      | '-1'        | '-200'   | '-169,49'    | 'Main Company' | '$$PurchaseInvoice029106$$' | 'TRY'      | 'Router'   | '*'       | 'en description is empty'      | 'No'                   |
-		| ''                               | '*'      | '-1'        | '-100'   | '-84,75'     | 'Main Company' | '$$PurchaseInvoice029106$$' | 'TRY'      | 'Interner' | '*'       | 'Local currency'               | 'No'                   |
-		| ''                               | '*'      | '-1'        | '-100'   | '-84,75'     | 'Main Company' | '$$PurchaseInvoice029106$$' | 'TRY'      | 'Interner' | '*'       | 'TRY'                          | 'No'                   |
-		| ''                               | '*'      | '-1'        | '-100'   | '-84,75'     | 'Main Company' | '$$PurchaseInvoice029106$$' | 'TRY'      | 'Interner' | '*'       | 'en description is empty'      | 'No'                   |
-		| ''                               | '*'      | '-1'        | '-34,24' | '-29,02'     | 'Main Company' | '$$PurchaseInvoice029106$$' | 'USD'      | 'Router'   | '*'       | 'Reporting currency'           | 'No'                   |
-		| ''                               | '*'      | '-1'        | '-17,12' | '-14,51'     | 'Main Company' | '$$PurchaseInvoice029106$$' | 'USD'      | 'Interner' | '*'       | 'Reporting currency'           | 'No'                   |
 	And I select "Accounts statement" exact value from "Register" drop-down list
 	And I click "Generate report" button
 	And "ResultTable" spreadsheet document contains lines:
@@ -769,13 +679,6 @@ Scenario: _029140 create PurchaseReturn for service and product (based on $$Purc
 		| ''                               | 'Record type' | 'Period' | 'Resources'            | ''               | ''                       | ''               | 'Dimensions'   | ''          | ''                  | ''                         | ''         |
 		| ''                               | ''            | ''       | 'Advance to suppliers' | 'Transaction AP' | 'Advance from customers' | 'Transaction AR' | 'Company'      | 'Partner'   | 'Legal name'        | 'Basis document'           | 'Currency' |
 		| ''                               | 'Receipt'     | '*'      | ''                     | '-300'           | ''                       | ''               | 'Main Company' | 'Ferron BP' | 'Company Ferron BP' | '$$PurchaseReturn029140$$' | 'TRY'      |
-	And I select "Reconciliation statement" exact value from "Register" drop-down list
-	And I click "Generate report" button
-	And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Reconciliation statement"'  | ''            | ''          | ''                     | ''               | ''                          | ''                          | ''                  | ''                   | ''                             | ''                             | ''                     |
-		| ''                                      | 'Record type' | 'Period'    | 'Resources'            | 'Dimensions'     | ''                          | ''                          | ''                  | ''                   | ''                             | ''                             | ''                     |
-		| ''                                      | ''            | ''          | 'Amount'               | 'Company'        | 'Legal name'                | 'Currency'                  | ''                  | ''                   | ''                             | ''                             | ''                     |
-		| ''                                      | 'Receipt'     | '*'         | '300'                  | 'Main Company'   | 'Company Ferron BP'         | 'TRY'                       | ''                  | ''                   | ''                             | ''                             | ''                     |
 	Given I open hyperlink "e1cib/list/AccumulationRegister.R4011B_FreeStocks"
 	And "List" table does not contain lines
 		| 'Recorder'                     | 'Item key' |
@@ -807,22 +710,7 @@ Scenario: _029141 create Purchase return order and Purchase return for service a
 	And I save the value of "Number" field as "$$NumberPurchaseReturnOrder029141$$"
 	And I save the window as "$$PurchaseReturnOrder029141$$"
 	And I click "Registrations report" button
-	And I select "Purchase turnovers" exact value from "Register" drop-down list
-	And I click "Generate report" button
-	And "ResultTable" spreadsheet document contains lines:
-		| '$$PurchaseReturnOrder029141$$'  | ''       | ''          | ''       | ''           | ''             | ''                          | ''         | ''         | ''        | ''                             | ''                     |
-		| 'Document registrations records' | ''       | ''          | ''       | ''           | ''             | ''                          | ''         | ''         | ''        | ''                             | ''                     |
-		| 'Register  "Purchase turnovers"' | ''       | ''          | ''       | ''           | ''             | ''                          | ''         | ''         | ''        | ''                             | ''                     |
-		| ''                               | 'Period' | 'Resources' | ''       | ''           | 'Dimensions'   | ''                          | ''         | ''         | ''        | ''                             | 'Attributes'           |
-		| ''                               | ''       | 'Quantity'  | 'Amount' | 'Net amount' | 'Company'      | 'Purchase invoice'          | 'Currency' | 'Item key' | 'Row key' | 'Multi currency movement type' | 'Deferred calculation' |
-		| ''                               | '*'      | '-1'        | '-200'   | '-169,49'    | 'Main Company' | '$$PurchaseInvoice029106$$' | 'TRY'      | 'Router'   | '*'       | 'Local currency'               | 'No'                   |
-		| ''                               | '*'      | '-1'        | '-200'   | '-169,49'    | 'Main Company' | '$$PurchaseInvoice029106$$' | 'TRY'      | 'Router'   | '*'       | 'TRY'                          | 'No'                   |
-		| ''                               | '*'      | '-1'        | '-200'   | '-169,49'    | 'Main Company' | '$$PurchaseInvoice029106$$' | 'TRY'      | 'Router'   | '*'       | 'en description is empty'      | 'No'                   |
-		| ''                               | '*'      | '-1'        | '-100'   | '-84,75'     | 'Main Company' | '$$PurchaseInvoice029106$$' | 'TRY'      | 'Interner' | '*'       | 'Local currency'               | 'No'                   |
-		| ''                               | '*'      | '-1'        | '-100'   | '-84,75'     | 'Main Company' | '$$PurchaseInvoice029106$$' | 'TRY'      | 'Interner' | '*'       | 'TRY'                          | 'No'                   |
-		| ''                               | '*'      | '-1'        | '-100'   | '-84,75'     | 'Main Company' | '$$PurchaseInvoice029106$$' | 'TRY'      | 'Interner' | '*'       | 'en description is empty'      | 'No'                   |
-		| ''                               | '*'      | '-1'        | '-34,24' | '-29,02'     | 'Main Company' | '$$PurchaseInvoice029106$$' | 'USD'      | 'Router'   | '*'       | 'Reporting currency'           | 'No'                   |
-		| ''                               | '*'      | '-1'        | '-17,12' | '-14,51'     | 'Main Company' | '$$PurchaseInvoice029106$$' | 'USD'      | 'Interner' | '*'       | 'Reporting currency'           | 'No'                   |
+
 	
 	Given I open hyperlink "e1cib/list/AccumulationRegister.R4011B_FreeStocks"
 	And "List" table does not contain lines
@@ -876,13 +764,7 @@ Scenario: _029141 create Purchase return order and Purchase return for service a
 		| ''                               | 'Record type' | 'Period' | 'Resources'            | ''               | ''                       | ''               | 'Dimensions'   | ''          | ''                  | ''                         | ''         |
 		| ''                               | ''            | ''       | 'Advance to suppliers' | 'Transaction AP' | 'Advance from customers' | 'Transaction AR' | 'Company'      | 'Partner'   | 'Legal name'        | 'Basis document'           | 'Currency' |
 		| ''                               | 'Receipt'     | '*'      | ''                     | '-300'           | ''                       | ''               | 'Main Company' | 'Ferron BP' | 'Company Ferron BP' | '$$PurchaseReturn029141$$' | 'TRY'      |
-	And I select "Reconciliation statement" exact value from "Register" drop-down list
-	And I click "Generate report" button
-	And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Reconciliation statement"' | ''            | ''       | ''          | ''             | ''                  | ''         | '' | '' | '' | '' | '' |
-		| ''                                     | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                  | ''         | '' | '' | '' | '' | '' |
-		| ''                                     | ''            | ''       | 'Amount'    | 'Company'      | 'Legal name'        | 'Currency' | '' | '' | '' | '' | '' |
-		| ''                                     | 'Receipt'     | '*'      | '300'       | 'Main Company' | 'Company Ferron BP' | 'TRY'      | '' | '' | '' | '' | '' |
+
 
 	And I close all client application windows
 	
@@ -965,20 +847,7 @@ Scenario: _029142 create Purchase return for service and product without Purchas
 			| ''                                      | '*'      | '-1'        | '-34,24' | 'Main Company' | ''                 | 'USD'      | 'Table'    | '*'       | 'Reporting currency'           | 'No'                   | '' |
 			| ''                                      | '*'      | '-1'        | '-8,56'  | 'Main Company' | ''                 | 'USD'      | 'Interner' | '*'       | 'Reporting currency'           | 'No'                   | '' |
 	
-		And I select "Purchase turnovers" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Purchase turnovers"' | ''       | ''          | ''       | ''           | ''             | ''                 | ''         | ''         | ''        | ''                             | ''                     |
-			| ''                               | 'Period' | 'Resources' | ''       | ''           | 'Dimensions'   | ''                 | ''         | ''         | ''        | ''                             | 'Attributes'           |
-			| ''                               | ''       | 'Quantity'  | 'Amount' | 'Net amount' | 'Company'      | 'Purchase invoice' | 'Currency' | 'Item key' | 'Row key' | 'Multi currency movement type' | 'Deferred calculation' |
-			| ''                               | '*'      | '-1'        | '-200'   | '-169,49'    | 'Main Company' | ''                 | 'TRY'      | 'Table'    | '*'       | 'Local currency'               | 'No'                   |
-			| ''                               | '*'      | '-1'        | '-200'   | '-169,49'    | 'Main Company' | ''                 | 'TRY'      | 'Table'    | '*'       | 'TRY'                          | 'No'                   |
-			| ''                               | '*'      | '-1'        | '-200'   | '-169,49'    | 'Main Company' | ''                 | 'TRY'      | 'Table'    | '*'       | 'en description is empty'      | 'No'                   |
-			| ''                               | '*'      | '-1'        | '-50'    | '-42,37'     | 'Main Company' | ''                 | 'TRY'      | 'Interner' | '*'       | 'Local currency'               | 'No'                   |
-			| ''                               | '*'      | '-1'        | '-50'    | '-42,37'     | 'Main Company' | ''                 | 'TRY'      | 'Interner' | '*'       | 'TRY'                          | 'No'                   |
-			| ''                               | '*'      | '-1'        | '-50'    | '-42,37'     | 'Main Company' | ''                 | 'TRY'      | 'Interner' | '*'       | 'en description is empty'      | 'No'                   |
-			| ''                               | '*'      | '-1'        | '-34,24' | '-29,02'     | 'Main Company' | ''                 | 'USD'      | 'Table'    | '*'       | 'Reporting currency'           | 'No'                   |
-			| ''                               | '*'      | '-1'        | '-8,56'  | '-7,25'      | 'Main Company' | ''                 | 'USD'      | 'Interner' | '*'       | 'Reporting currency'           | 'No'                   |
+	
 		And I select "Accounts statement" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
@@ -986,13 +855,7 @@ Scenario: _029142 create Purchase return for service and product without Purchas
 			| ''                               | 'Record type' | 'Period' | 'Resources'            | ''               | ''                       | ''               | 'Dimensions'   | ''          | ''                  | ''                         | ''         |
 			| ''                               | ''            | ''       | 'Advance to suppliers' | 'Transaction AP' | 'Advance from customers' | 'Transaction AR' | 'Company'      | 'Partner'   | 'Legal name'        | 'Basis document'           | 'Currency' |
 			| ''                               | 'Receipt'     | '*'      | ''                     | '-250'           | ''                       | ''               | 'Main Company' | 'Ferron BP' | 'Company Ferron BP' | '$$PurchaseReturn029142$$' | 'TRY'      |
-		And I select "Reconciliation statement" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Reconciliation statement"'  | ''            | ''          | ''                     | ''               | ''                         | ''                 | ''                  | ''                   | ''                             | ''                             | ''                     |
-			| ''                                      | 'Record type' | 'Period'    | 'Resources'            | 'Dimensions'     | ''                         | ''                 | ''                  | ''                   | ''                             | ''                             | ''                     |
-			| ''                                      | ''            | ''          | 'Amount'               | 'Company'        | 'Legal name'               | 'Currency'         | ''                  | ''                   | ''                             | ''                             | ''                     |
-			| ''                                      | 'Receipt'     | '*'         | '250'                  | 'Main Company'   | 'Company Ferron BP'        | 'TRY'              | ''                  | ''                   | ''                             | ''                             | ''                     |
+	
 		Given I open hyperlink "e1cib/list/AccumulationRegister.R4011B_FreeStocks"
 		And "List" table does not contain lines
 			| 'Recorder'                     | 'Item key' |
@@ -1045,20 +908,7 @@ Scenario: _029150 create Retail return receipt for service and product
 			| ''                        | 'Record type' | 'Period' | 'Resources' | ''           | 'Dimensions'   | ''              | ''             | ''             | ''                 | '' | '' | '' | '' |
 			| ''                        | ''            | ''       | 'Amount'    | 'Commission' | 'Company'      | 'Business unit' | 'Payment type' | 'Account'      | 'Payment terminal' | '' | '' | '' | '' |
 			| ''                        | 'Receipt'     | '*'      | '-450'      | ''           | 'Main Company' | ''              | 'Cash'         | 'Cash desk №4' | ''                 | '' | '' | '' | '' |
-		And I select "Sales turnovers" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Sales turnovers"' | ''       | ''          | ''       | ''           | ''              | ''             | ''                             | ''         | ''         | ''        | ''                             | ''                  | ''                     |
-			| ''                            | 'Period' | 'Resources' | ''       | ''           | ''              | 'Dimensions'   | ''                             | ''         | ''         | ''        | ''                             | ''                  | 'Attributes'           |
-			| ''                            | ''       | 'Quantity'  | 'Amount' | 'Net amount' | 'Offers amount' | 'Company'      | 'Sales invoice'                | 'Currency' | 'Item key' | 'Row key' | 'Multi currency movement type' | 'Serial lot number' | 'Deferred calculation' |
-			| ''                            | '*'      | '-1'        | '-200'   | '-169,49'    | ''              | 'Main Company' | '$$RetailSalesReceipt029130$$' | 'TRY'      | 'Table'    | '*'       | 'Local currency'               | ''                  | 'No'                   |
-			| ''                            | '*'      | '-1'        | '-200'   | '-169,49'    | ''              | 'Main Company' | '$$RetailSalesReceipt029130$$' | 'TRY'      | 'Table'    | '*'       | 'TRY'                          | ''                  | 'No'                   |
-			| ''                            | '*'      | '-1'        | '-200'   | '-169,49'    | ''              | 'Main Company' | '$$RetailSalesReceipt029130$$' | 'TRY'      | 'Table'    | '*'       | 'en description is empty'      | ''                  | 'No'                   |
-			| ''                            | '*'      | '-1'        | '-50'    | '-42,37'     | ''              | 'Main Company' | '$$RetailSalesReceipt029130$$' | 'TRY'      | 'Interner' | '*'       | 'Local currency'               | ''                  | 'No'                   |
-			| ''                            | '*'      | '-1'        | '-50'    | '-42,37'     | ''              | 'Main Company' | '$$RetailSalesReceipt029130$$' | 'TRY'      | 'Interner' | '*'       | 'TRY'                          | ''                  | 'No'                   |
-			| ''                            | '*'      | '-1'        | '-50'    | '-42,37'     | ''              | 'Main Company' | '$$RetailSalesReceipt029130$$' | 'TRY'      | 'Interner' | '*'       | 'en description is empty'      | ''                  | 'No'                   |
-			| ''                            | '*'      | '-1'        | '-34,24' | '-29,02'     | ''              | 'Main Company' | '$$RetailSalesReceipt029130$$' | 'USD'      | 'Table'    | '*'       | 'Reporting currency'           | ''                  | 'No'                   |
-			| ''                            | '*'      | '-1'        | '-8,56'  | '-7,25'      | ''              | 'Main Company' | '$$RetailSalesReceipt029130$$' | 'USD'      | 'Interner' | '*'       | 'Reporting currency'           | ''                  | 'No'                   |
+	
 		And I select "Account balance" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
@@ -1163,20 +1013,7 @@ Scenario: _029150 create Retail return receipt for service and product
 				| ''                        | 'Record type' | 'Period' | 'Resources' | ''           | 'Dimensions'   | ''              | ''             | ''             | ''                 | '' | '' | '' | '' |
 				| ''                        | ''            | ''       | 'Amount'    | 'Commission' | 'Company'      | 'Business unit' | 'Payment type' | 'Account'      | 'Payment terminal' | '' | '' | '' | '' |
 				| ''                        | 'Receipt'     | '*'      | '-250'      | ''           | 'Main Company' | ''              | 'Cash'         | 'Cash desk №4' | ''                 | '' | '' | '' | '' |
-			And I select "Sales turnovers" exact value from "Register" drop-down list
-			And I click "Generate report" button
-			And "ResultTable" spreadsheet document contains lines:
-				| 'Register  "Sales turnovers"' | ''       | ''          | ''       | ''           | ''              | ''             | ''                              | ''         | ''         | ''        | ''                             | ''                  | ''                     |
-				| ''                            | 'Period' | 'Resources' | ''       | ''           | ''              | 'Dimensions'   | ''                              | ''         | ''         | ''        | ''                             | ''                  | 'Attributes'           |
-				| ''                            | ''       | 'Quantity'  | 'Amount' | 'Net amount' | 'Offers amount' | 'Company'      | 'Sales invoice'                 | 'Currency' | 'Item key' | 'Row key' | 'Multi currency movement type' | 'Serial lot number' | 'Deferred calculation' |
-				| ''                            | '*'      | '-1'        | '-200'   | '-169,49'    | ''              | 'Main Company' | '$$RetailReturnReceipt029150$$' | 'TRY'      | 'Table'    | '*'       | 'Local currency'               | ''                  | 'No'                   |
-				| ''                            | '*'      | '-1'        | '-200'   | '-169,49'    | ''              | 'Main Company' | '$$RetailReturnReceipt029150$$' | 'TRY'      | 'Table'    | '*'       | 'TRY'                          | ''                  | 'No'                   |
-				| ''                            | '*'      | '-1'        | '-200'   | '-169,49'    | ''              | 'Main Company' | '$$RetailReturnReceipt029150$$' | 'TRY'      | 'Table'    | '*'       | 'en description is empty'      | ''                  | 'No'                   |
-				| ''                            | '*'      | '-1'        | '-50'    | '-42,37'     | ''              | 'Main Company' | '$$RetailReturnReceipt029150$$' | 'TRY'      | 'Interner' | '*'       | 'Local currency'               | ''                  | 'No'                   |
-				| ''                            | '*'      | '-1'        | '-50'    | '-42,37'     | ''              | 'Main Company' | '$$RetailReturnReceipt029150$$' | 'TRY'      | 'Interner' | '*'       | 'TRY'                          | ''                  | 'No'                   |
-				| ''                            | '*'      | '-1'        | '-50'    | '-42,37'     | ''              | 'Main Company' | '$$RetailReturnReceipt029150$$' | 'TRY'      | 'Interner' | '*'       | 'en description is empty'      | ''                  | 'No'                   |
-				| ''                            | '*'      | '-1'        | '-34,24' | '-29,02'     | ''              | 'Main Company' | '$$RetailReturnReceipt029150$$' | 'USD'      | 'Table'    | '*'       | 'Reporting currency'           | ''                  | 'No'                   |
-				| ''                            | '*'      | '-1'        | '-8,56'  | '-7,25'      | ''              | 'Main Company' | '$$RetailReturnReceipt029150$$' | 'USD'      | 'Interner' | '*'       | 'Reporting currency'           | ''                  | 'No'                   |
+		
 			And I select "Account balance" exact value from "Register" drop-down list
 			And I click "Generate report" button
 			And "ResultTable" spreadsheet document contains lines:

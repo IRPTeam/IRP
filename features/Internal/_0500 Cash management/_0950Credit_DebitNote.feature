@@ -290,13 +290,7 @@ Scenario: _095002 check movements of the document Dedit Note (write off debts to
 			| ''                               | 'Record type' | 'Period'                  | 'Resources'            | ''               | ''                       | ''               | 'Dimensions'   | ''        | ''              | ''                          | ''         |
 			| ''                               | ''            | ''                        | 'Advance to suppliers' | 'Transaction AP' | 'Advance from customers' | 'Transaction AR' | 'Company'      | 'Partner' | 'Legal name'    | 'Basis document'            | 'Currency' |
 			| ''                               | 'Receipt'     | '$$DeditNoteDate095002$$' | ''                     | '-1 000'         | ''                       | ''               | 'Main Company' | 'Maxim'   | 'Company Maxim' | '$$PurchaseInvoice095001$$' | 'TRY'      |
-		And I select "Reconciliation statement" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Reconciliation statement"' | ''            | ''                        | ''          | ''             | ''              | ''         | '' | '' | '' | '' | '' |
-			| ''                                     | 'Record type' | 'Period'                  | 'Resources' | 'Dimensions'   | ''              | ''         | '' | '' | '' | '' | '' |
-			| ''                                     | ''            | ''                        | 'Amount'    | 'Company'      | 'Legal name'    | 'Currency' | '' | '' | '' | '' | '' |
-			| ''                                     | 'Receipt'     | '$$DeditNoteDate095002$$' | '1 000'     | 'Main Company' | 'Company Maxim' | 'TRY'      | '' | '' | '' | '' | '' |
+	
 		And I select "Revenues turnovers" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
@@ -416,13 +410,7 @@ Scenario: _095003 check movements of the document Credit Note (increase in debt 
 			| ''                               | 'Record type' | 'Period'                   | 'Resources'            | ''               | ''                       | ''               | 'Dimensions'   | ''        | ''              | ''                          | ''         |
 			| ''                               | ''            | ''                         | 'Advance to suppliers' | 'Transaction AP' | 'Advance from customers' | 'Transaction AR' | 'Company'      | 'Partner' | 'Legal name'    | 'Basis document'            | 'Currency' |
 			| ''                               | 'Receipt'     | '$$CreditNoteDate095003$$' | ''                     | '100'            | ''                       | ''               | 'Main Company' | 'Maxim'   | 'Company Maxim' | '$$PurchaseInvoice095001$$' | 'TRY'      |
-		And I select "Reconciliation statement" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Reconciliation statement"' | ''            | ''                         | ''          | ''             | ''              | ''         | '' | '' | '' | '' | '' |
-			| ''                                     | 'Record type' | 'Period'                   | 'Resources' | 'Dimensions'   | ''              | ''         | '' | '' | '' | '' | '' |
-			| ''                                     | ''            | ''                         | 'Amount'    | 'Company'      | 'Legal name'    | 'Currency' | '' | '' | '' | '' | '' |
-			| ''                                     | 'Expense'     | '$$CreditNoteDate095003$$' | '100'       | 'Main Company' | 'Company Maxim' | 'TRY'      | '' | '' | '' | '' | '' |
+	
 		And I select "Partner AP transactions" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
@@ -541,13 +529,7 @@ Scenario: _095004 check movements of the document Credit Note (write off custome
 		| ''                               | 'Record type' | 'Period'                   | 'Resources'            | ''               | ''                       | ''               | 'Dimensions'   | ''        | ''              | ''                       | ''         |
 		| ''                               | ''            | ''                         | 'Advance to suppliers' | 'Transaction AP' | 'Advance from customers' | 'Transaction AR' | 'Company'      | 'Partner' | 'Legal name'    | 'Basis document'         | 'Currency' |
 		| ''                               | 'Receipt'     | '$$CreditNoteDate095004$$' | ''                     | ''               | ''                       | '-1 000'         | 'Main Company' | 'Lunch'   | 'Company Lunch' | '$$SalesInvoice095001$$' | 'TRY'      |
-		And I select "Reconciliation statement" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Reconciliation statement"' | ''            | ''                         | ''          | ''             | ''              | ''         | '' | '' | '' | '' | '' |
-		| ''                                     | 'Record type' | 'Period'                   | 'Resources' | 'Dimensions'   | ''              | ''         | '' | '' | '' | '' | '' |
-		| ''                                     | ''            | ''                         | 'Amount'    | 'Company'      | 'Legal name'    | 'Currency' | '' | '' | '' | '' | '' |
-		| ''                                     | 'Expense'     | '$$CreditNoteDate095004$$' | '1 000'     | 'Main Company' | 'Company Lunch' | 'TRY'      | '' | '' | '' | '' | '' |
+	
 	And I close all client application windows
 
 
@@ -647,13 +629,7 @@ Scenario: _095005 check movements of the document Debit Note (increase in custom
 		| ''                               | 'Record type' | 'Period'                  | 'Resources'            | ''               | ''                       | ''               | 'Dimensions'   | ''        | ''              | ''                       | ''         |
 		| ''                               | ''            | ''                        | 'Advance to suppliers' | 'Transaction AP' | 'Advance from customers' | 'Transaction AR' | 'Company'      | 'Partner' | 'Legal name'    | 'Basis document'         | 'Currency' |
 		| ''                               | 'Receipt'     | '$$DeditNoteDate095005$$' | ''                     | ''               | ''                       | '100'            | 'Main Company' | 'Lunch'   | 'Company Lunch' | '$$SalesInvoice095001$$' | 'TRY'      |
-		And I select "Reconciliation statement" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Reconciliation statement"' | ''            | ''                        | ''          | ''             | ''              | ''         | '' | '' | '' | '' | '' |
-		| ''                                     | 'Record type' | 'Period'                  | 'Resources' | 'Dimensions'   | ''              | ''         | '' | '' | '' | '' | '' |
-		| ''                                     | ''            | ''                        | 'Amount'    | 'Company'      | 'Legal name'    | 'Currency' | '' | '' | '' | '' | '' |
-		| ''                                     | 'Receipt'     | '$$DeditNoteDate095005$$' | '100'       | 'Main Company' | 'Company Lunch' | 'TRY'      | '' | '' | '' | '' | '' |
+	
 		And I select "Revenues turnovers" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:

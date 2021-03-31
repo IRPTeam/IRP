@@ -386,24 +386,7 @@ Scenario: _0154135 create document Retail Sales Receipt
 				| ''                            | '*'      | '106,78'    | '106,78'        | '593,22'     | '$$RetailSalesReceipt015413$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'Local currency'               | 'No'                   |
 				| ''                            | '*'      | '106,78'    | '106,78'        | '593,22'     | '$$RetailSalesReceipt015413$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'TRY'                          | 'No'                   |
 				| ''                            | '*'      | '106,78'    | '106,78'        | '593,22'     | '$$RetailSalesReceipt015413$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'en description is empty'      | 'No'                   |
-			And I select "Sales turnovers" exact value from "Register" drop-down list
-			And I click "Generate report" button
-			And "ResultTable" spreadsheet document contains lines:
-				| 'Register  "Sales turnovers"' | ''       | ''          | ''       | ''           | ''              | ''             | ''                             | ''         | ''         | ''        | ''                             | ''                  | ''                     |
-				| ''                            | 'Period' | 'Resources' | ''       | ''           | ''              | 'Dimensions'   | ''                             | ''         | ''         | ''        | ''                             | ''                  | 'Attributes'           |
-				| ''                            | ''       | 'Quantity'  | 'Amount' | 'Net amount' | 'Offers amount' | 'Company'      | 'Sales invoice'                | 'Currency' | 'Item key' | 'Row key' | 'Multi currency movement type' | 'Serial lot number' | 'Deferred calculation' |
-				| ''                            | '*'      | '1'         | '89,02'  | '75,44'      | ''              | 'Main Company' | '$$RetailSalesReceipt015413$$' | 'USD'      | 'XS/Blue'  | '*'       | 'Reporting currency'           | ''                  | 'No'                   |
-				| ''                            | '*'      | '1'         | '94,16'  | '79,8'       | ''              | 'Main Company' | '$$RetailSalesReceipt015413$$' | 'USD'      | 'L/Green'  | '*'       | 'Reporting currency'           | ''                  | 'No'                   |
-				| ''                            | '*'      | '1'         | '520'    | '440,68'     | ''              | 'Main Company' | '$$RetailSalesReceipt015413$$' | 'TRY'      | 'XS/Blue'  | '*'       | 'Local currency'               | ''                  | 'No'                   |
-				| ''                            | '*'      | '1'         | '520'    | '440,68'     | ''              | 'Main Company' | '$$RetailSalesReceipt015413$$' | 'TRY'      | 'XS/Blue'  | '*'       | 'TRY'                          | ''                  | 'No'                   |
-				| ''                            | '*'      | '1'         | '520'    | '440,68'     | ''              | 'Main Company' | '$$RetailSalesReceipt015413$$' | 'TRY'      | 'XS/Blue'  | '*'       | 'en description is empty'      | ''                  | 'No'                   |
-				| ''                            | '*'      | '1'         | '550'    | '466,1'      | ''              | 'Main Company' | '$$RetailSalesReceipt015413$$' | 'TRY'      | 'L/Green'  | '*'       | 'Local currency'               | ''                  | 'No'                   |
-				| ''                            | '*'      | '1'         | '550'    | '466,1'      | ''              | 'Main Company' | '$$RetailSalesReceipt015413$$' | 'TRY'      | 'L/Green'  | '*'       | 'TRY'                          | ''                  | 'No'                   |
-				| ''                            | '*'      | '1'         | '550'    | '466,1'      | ''              | 'Main Company' | '$$RetailSalesReceipt015413$$' | 'TRY'      | 'L/Green'  | '*'       | 'en description is empty'      | ''                  | 'No'                   |
-				| ''                            | '*'      | '2'         | '119,84' | '101,56'     | ''              | 'Main Company' | '$$RetailSalesReceipt015413$$' | 'USD'      | '38/Black' | '*'       | 'Reporting currency'           | ''                  | 'No'                   |
-				| ''                            | '*'      | '2'         | '700'    | '593,22'     | ''              | 'Main Company' | '$$RetailSalesReceipt015413$$' | 'TRY'      | '38/Black' | '*'       | 'Local currency'               | ''                  | 'No'                   |
-				| ''                            | '*'      | '2'         | '700'    | '593,22'     | ''              | 'Main Company' | '$$RetailSalesReceipt015413$$' | 'TRY'      | '38/Black' | '*'       | 'TRY'                          | ''                  | 'No'                   |
-				| ''                            | '*'      | '2'         | '700'    | '593,22'     | ''              | 'Main Company' | '$$RetailSalesReceipt015413$$' | 'TRY'      | '38/Black' | '*'       | 'en description is empty'      | ''                  | 'No'                   |
+		
 			And I select "Revenues turnovers" exact value from "Register" drop-down list
 			And I click "Generate report" button
 			And "ResultTable" spreadsheet document contains lines:
@@ -545,20 +528,7 @@ Scenario: _0154136 create document Retail Return Receipt based on RetailSalesRec
 			| ''                        | 'Record type' | 'Period' | 'Resources' | ''           | 'Dimensions'   | ''              | ''             | ''             | ''                    | '' | '' | '' | '' |
 			| ''                        | ''            | ''       | 'Amount'    | 'Commission' | 'Company'      | 'Business unit' | 'Payment type' | 'Account'      | 'Payment terminal'    | '' | '' | '' | '' |
 			| ''                        | 'Receipt'     | '*'      | '-900'      | '9'          | 'Main Company' | 'Shop 01'       | 'Card 01'      | 'Transit Main' | 'Payment terminal 01' | '' | '' | '' | '' |
-		And I select "Sales turnovers" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Sales turnovers"' | ''       | ''          | ''       | ''           | ''              | ''             | ''                             | ''         | ''         | ''        | ''                             | ''                  | ''                     |
-			| ''                            | 'Period' | 'Resources' | ''       | ''           | ''              | 'Dimensions'   | ''                             | ''         | ''         | ''        | ''                             | ''                  | 'Attributes'           |
-			| ''                            | ''       | 'Quantity'  | 'Amount' | 'Net amount' | 'Offers amount' | 'Company'      | 'Sales invoice'                | 'Currency' | 'Item key' | 'Row key' | 'Multi currency movement type' | 'Serial lot number' | 'Deferred calculation' |
-			| ''                            | '*'      | '-1'        | '-550'   | '-466,1'     | ''              | 'Main Company' | '$$RetailSalesReceipt015413$$' | 'TRY'      | 'L/Green'  | '*'       | 'Local currency'               | ''                  | 'No'                   |
-			| ''                            | '*'      | '-1'        | '-550'   | '-466,1'     | ''              | 'Main Company' | '$$RetailSalesReceipt015413$$' | 'TRY'      | 'L/Green'  | '*'       | 'TRY'                          | ''                  | 'No'                   |
-			| ''                            | '*'      | '-1'        | '-550'   | '-466,1'     | ''              | 'Main Company' | '$$RetailSalesReceipt015413$$' | 'TRY'      | 'L/Green'  | '*'       | 'en description is empty'      | ''                  | 'No'                   |
-			| ''                            | '*'      | '-1'        | '-350'   | '-296,61'    | ''              | 'Main Company' | '$$RetailSalesReceipt015413$$' | 'TRY'      | '38/Black' | '*'       | 'Local currency'               | ''                  | 'No'                   |
-			| ''                            | '*'      | '-1'        | '-350'   | '-296,61'    | ''              | 'Main Company' | '$$RetailSalesReceipt015413$$' | 'TRY'      | '38/Black' | '*'       | 'TRY'                          | ''                  | 'No'                   |
-			| ''                            | '*'      | '-1'        | '-350'   | '-296,61'    | ''              | 'Main Company' | '$$RetailSalesReceipt015413$$' | 'TRY'      | '38/Black' | '*'       | 'en description is empty'      | ''                  | 'No'                   |
-			| ''                            | '*'      | '-1'        | '-94,16' | '-79,8'      | ''              | 'Main Company' | '$$RetailSalesReceipt015413$$' | 'USD'      | 'L/Green'  | '*'       | 'Reporting currency'           | ''                  | 'No'                   |
-			| ''                            | '*'      | '-1'        | '-59,92' | '-50,78'     | ''              | 'Main Company' | '$$RetailSalesReceipt015413$$' | 'USD'      | '38/Black' | '*'       | 'Reporting currency'           | ''                  | 'No'                   |
+	
 		And I select "Account balance" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:

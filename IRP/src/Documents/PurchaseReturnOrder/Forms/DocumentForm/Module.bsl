@@ -427,3 +427,62 @@ Procedure GeneratedFormCommandActionByNameServer(CommandName) Export
 EndProcedure
 
 #EndRegion
+
+#Region LinkedDocuments
+
+&AtClient
+Function GetLinkedDocumentsFilter()
+	Filter = New Structure();
+	Filter.Insert("Company"           , Object.Company);
+	Filter.Insert("Partner"           , Object.Partner);
+	Filter.Insert("LegalName"         , Object.LegalName);
+	Filter.Insert("Agreement"         , Object.Agreement);
+	Filter.Insert("Currency"          , Object.Currency);
+	Filter.Insert("PriceIncludeTax"   , Object.PriceIncludeTax);
+	Filter.Insert("Ref"               , Object.Ref);
+	Return Filter;
+EndFunction
+
+&AtClient
+Procedure LinkUnlinkBasisDocuments(Command)
+	FormParameters = New Structure();
+	FormParameters.Insert("Filter"           , GetLinkedDocumentsFilter());
+	FormParameters.Insert("SelectedRowInfo"  , RowIDInfoClient.GetSelectedRowInfo(Items.ItemList.CurrentData));
+	FormParameters.Insert("TablesInfo"       , RowIDInfoClient.GetTablesInfo(Object));
+	OpenForm("CommonForm.LinkUnlinkDocumentRows"
+		, FormParameters, , , ,
+		, New NotifyDescription("AddOrLinkUnlinkDocumentRowsContinue", ThisObject)
+		, FormWindowOpeningMode.LockOwnerWindow);
+EndProcedure
+
+&AtClient
+Procedure AddBasisDocuments(Command)	
+	FormParameters = New Structure();
+	FormParameters.Insert("Filter"           , GetLinkedDocumentsFilter());
+	FormParameters.Insert("TablesInfo"       , RowIDInfoClient.GetTablesInfo(Object));
+	OpenForm("CommonForm.AddLinkedDocumentRows"
+		, FormParameters, , , ,
+		, New NotifyDescription("AddOrLinkUnlinkDocumentRowsContinue", ThisObject)
+		, FormWindowOpeningMode.LockOwnerWindow);
+EndProcedure
+
+
+&AtClient
+Procedure AddOrLinkUnlinkDocumentRowsContinue(Result, AdditionalParameters) Export
+	If Result = Undefined Then
+		Return;
+	EndIf;
+	AddOrLinkUnlinkDocumentRowsContinueAtServer(Result);
+	Taxes_CreateFormControls();
+EndProcedure
+
+&AtServer
+Procedure AddOrLinkUnlinkDocumentRowsContinueAtServer(Result)
+	If Result.Operation = "LinkUnlinkDocumentRows" Then
+		RowIDInfoServer.LinkUnlinkDocumentRows(Object, Result.FillingValues);
+	ElsIf Result.Operation = "AddLinkedDocumentRows" Then
+		RowIDInfoServer.AddLinkedDocumentRows(Object, Result.FillingValues);
+	EndIf;
+EndProcedure
+
+#EndRegion

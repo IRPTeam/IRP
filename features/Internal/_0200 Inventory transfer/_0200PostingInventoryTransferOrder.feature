@@ -241,7 +241,7 @@ Scenario: _020013 check movements by status and status history of an Inventory T
 		And I click the button named "FormPostAndClose"
 		And I close current window
 		* Check that there is no movement in Wait status
-			Given I open hyperlink "e1cib/list/AccumulationRegister.TransferOrderBalance"
+			Given I open hyperlink "e1cib/list/AccumulationRegister.R4020T_StockTransferOrders"
 			And "List" table does not contain lines
 				| 'Recorder'                    |
 				| '$$InventoryTransferOrder020013$$' |
@@ -256,7 +256,7 @@ Scenario: _020013 check movements by status and status history of an Inventory T
 			And I select "Approved" exact value from "Status" drop-down list
 			And I click the button named "FormPostAndClose"
 			And I close all client application windows
-			Given I open hyperlink "e1cib/list/AccumulationRegister.TransferOrderBalance"
+			Given I open hyperlink "e1cib/list/AccumulationRegister.R4020T_StockTransferOrders"
 			And "List" table contains lines
 				| 'Recorder'                    |
 				| '$$InventoryTransferOrder020013$$' |
@@ -271,7 +271,7 @@ Scenario: _020013 check movements by status and status history of an Inventory T
 			And I select "Send" exact value from "Status" drop-down list
 			And I click the button named "FormPostAndClose"
 			And I close current window
-			Given I open hyperlink "e1cib/list/AccumulationRegister.TransferOrderBalance"
+			Given I open hyperlink "e1cib/list/AccumulationRegister.R4020T_StockTransferOrders"
 			And "List" table contains lines
 				| 'Recorder'                    |
 				| '$$InventoryTransferOrder020013$$' |
@@ -293,7 +293,7 @@ Scenario: _020013 check movements by status and status history of an Inventory T
 				| '$$InventoryTransferOrder020013$$' | 'Receive'  |
 			And I close current window
 			And I click the button named "FormPostAndClose"
-			Given I open hyperlink "e1cib/list/AccumulationRegister.TransferOrderBalance"
+			Given I open hyperlink "e1cib/list/AccumulationRegister.R4020T_StockTransferOrders"
 			And "List" table contains lines
 			| 'Recorder'                    |
 			| '$$InventoryTransferOrder020013$$' |

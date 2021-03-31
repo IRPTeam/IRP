@@ -105,7 +105,6 @@ Procedure FillTransactionTypeChoiceList(Form)
 	Form.Items.TransactionType.ChoiceList.Add(Enums.ShipmentConfirmationTransactionTypes.Sales, Metadata.Enums.ShipmentConfirmationTransactionTypes.EnumValues.Sales.Synonym);
 	Form.Items.TransactionType.ChoiceList.Add(Enums.ShipmentConfirmationTransactionTypes.ReturnToVendor, Metadata.Enums.ShipmentConfirmationTransactionTypes.EnumValues.ReturnToVendor.Synonym);
 	Form.Items.TransactionType.ChoiceList.Add(Enums.ShipmentConfirmationTransactionTypes.InventoryTransfer, Metadata.Enums.ShipmentConfirmationTransactionTypes.EnumValues.InventoryTransfer.Synonym);
-	Form.Items.TransactionType.ChoiceList.Add(Enums.ShipmentConfirmationTransactionTypes.Bundling, Metadata.Enums.ShipmentConfirmationTransactionTypes.EnumValues.Bundling.Synonym);
 EndProcedure
 
 Function SalesInvoiceIsExists(ShipmentConfirmationRef)

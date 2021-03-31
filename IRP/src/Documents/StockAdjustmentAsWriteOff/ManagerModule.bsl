@@ -4,7 +4,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	AccReg = Metadata.AccumulationRegisters;
 	Tables = New Structure();
 	Tables.Insert("ExpensesTurnovers"         , PostingServer.CreateTable(AccReg.ExpensesTurnovers));
-	Tables.Insert("StockAdjustmentAsWriteOff" , PostingServer.CreateTable(AccReg.StockAdjustmentAsWriteOff));
+//	Tables.Insert("StockAdjustmentAsWriteOff" , PostingServer.CreateTable(AccReg.StockAdjustmentAsWriteOff));
 	
 	QueryItemList = New Query();
 	QueryItemList.Text = GetQueryTextInventoryWriteOffItemList();
@@ -20,7 +20,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	QueryResults = Query.ExecuteBatch();
 		
 	Tables.ExpensesTurnovers = QueryResults[1].Unload();
-	Tables.StockAdjustmentAsWriteOff = QueryResults[2].Unload();
+//	Tables.StockAdjustmentAsWriteOff = QueryResults[2].Unload();
 	
 	Parameters.IsReposting = False;
 	
@@ -88,24 +88,25 @@ Function GetQueryTextQueryTable()
 		|	tmp.BusinessUnit,
 		|	tmp.ExpenseType,
 		|	tmp.ItemKey,
-		|	tmp.Period;
-		|//[2]//////////////////////////////////////////////////////////////////////////////
-		|SELECT
-		|	tmp.Store AS Store,
-		|	tmp.BasisDocument AS BasisDocument,
-		|	tmp.ItemKey AS ItemKey,
-		|	SUM(tmp.Quantity) AS Quantity,
-		|	tmp.Period
-		|FROM
-		|	tmp AS tmp
-		|WHERE
-		|	tmp.HaveBasisDocument
-		|GROUP BY
-		|	tmp.Store,
-		|	tmp.BasisDocument,
-		|	tmp.ItemKey,
-		|	tmp.Period;
-		|";
+		|	tmp.Period";
+		
+//		|//[2]//////////////////////////////////////////////////////////////////////////////
+//		|SELECT
+//		|	tmp.Store AS Store,
+//		|	tmp.BasisDocument AS BasisDocument,
+//		|	tmp.ItemKey AS ItemKey,
+//		|	SUM(tmp.Quantity) AS Quantity,
+//		|	tmp.Period
+//		|FROM
+//		|	tmp AS tmp
+//		|WHERE
+//		|	tmp.HaveBasisDocument
+//		|GROUP BY
+//		|	tmp.Store,
+//		|	tmp.BasisDocument,
+//		|	tmp.ItemKey,
+//		|	tmp.Period;
+//		|";
 EndFunction
 
 Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
@@ -129,11 +130,11 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords.ExpensesTurnovers,
 		New Structure("RecordSet", Parameters.DocumentDataTables.ExpensesTurnovers));
 	
-	// StockAdjustmentAsWriteOff
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.StockAdjustmentAsWriteOff,
-		New Structure("RecordType, RecordSet",
-			AccumulationRecordType.Expense,
-			Parameters.DocumentDataTables.StockAdjustmentAsWriteOff));
+//	// StockAdjustmentAsWriteOff
+//	PostingDataTables.Insert(Parameters.Object.RegisterRecords.StockAdjustmentAsWriteOff,
+//		New Structure("RecordType, RecordSet",
+//			AccumulationRecordType.Expense,
+//			Parameters.DocumentDataTables.StockAdjustmentAsWriteOff));
 			
 #Region NewRegistersPosting
 	PostingServer.SetPostingDataTables(PostingDataTables, Parameters);
@@ -220,7 +221,8 @@ Function GetQueryTextsMasterTables()
 	QueryArray = New Array;
 	QueryArray.Add(R4011B_FreeStocks());
 	QueryArray.Add(R4010B_ActualStocks());
-	QueryArray.Add(R4014B_SerialLotNumber());	
+	QueryArray.Add(R4014B_SerialLotNumber());
+	QueryArray.Add(R4051T_StockAdjustmentAsWriteOff());	
 	Return QueryArray;
 EndFunction
 
@@ -233,6 +235,7 @@ Function ItemList()
 		|	ItemList.ItemKey AS ItemKey,
 		|	NOT ItemList.PhysicalInventory.Ref IS NULL AS PhysicalInventoryExists,
 		|	ItemList.PhysicalInventory AS PhysicalInventory,
+		|	ItemList.Ref AS Basis,
 		|	ItemList.QuantityInBaseUnit AS Quantity
 		|INTO ItemList
 		|FROM
@@ -296,5 +299,16 @@ Function R4010B_ActualStocks()
 		|WHERE
 		|	NOT ItemList.PhysicalInventoryExists";
 EndFunction
+
+Function R4051T_StockAdjustmentAsWriteOff()
+	Return
+		"SELECT
+		|	*
+		|INTO R4051T_StockAdjustmentAsWriteOff
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	NOT ItemList.PhysicalInventoryExists";
+EndFunction	
 
 #EndRegion

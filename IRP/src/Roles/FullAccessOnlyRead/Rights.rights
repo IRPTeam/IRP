@@ -710,17 +710,6 @@
 		</right>
 	</object>
 	<object>
-		<name>AccumulationRegister.StockAdjustmentAsSurplus</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
 		<name>Catalog.CurrencyMovementSets</name>
 		<right>
 			<name>Read</name>
@@ -749,17 +738,6 @@
 	</object>
 	<object>
 		<name>CommonAttribute.Volume</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>AccumulationRegister.TransferOrderBalance</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -1393,17 +1371,6 @@
 	</object>
 	<object>
 		<name>Report.PriceInfo.Command.OpenPriceInfo</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>AccumulationRegister.GoodsInTransitOutgoing</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -2766,17 +2733,6 @@
 		</right>
 	</object>
 	<object>
-		<name>AccumulationRegister.GoodsInTransitIncoming</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
 		<name>CommonAttribute.Author</name>
 		<right>
 			<name>View</name>
@@ -4093,17 +4049,6 @@
 	</object>
 	<object>
 		<name>CommonAttribute.Width</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>AccumulationRegister.StockAdjustmentAsWriteOff</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
 		<right>
 			<name>View</name>
 			<value>true</value>

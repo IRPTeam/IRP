@@ -1067,13 +1067,11 @@ Scenario: _012015 check row key when cloning a string in Sales invoice
 		And I save the current field value as "Rov2"		
 		And I display "Rov1" variable value
 		And I display "Rov2" variable value
-		Given I open hyperlink "e1cib/list/AccumulationRegister.GoodsInTransitOutgoing"
-		And I go to line in "List" table
-		| 'Row key' |
-		| '$Rov1$'    |
-		And I activate "Row key" field in "List" table
-		And in the table "List" I click the button named "ListContextMenuFindByCurrentValue"
-		Then the number of "List" table lines is "меньше или равно" 1
+		And "ItemList" table does not contain lines
+			| 'Key' | '#' |
+			| 'Rov1'  | '2' |
+		And I close all client application windows
+		
 
 Scenario: _012016 check row key when cloning a string in Purchase order
 	And I close all client application windows
@@ -1135,13 +1133,10 @@ Scenario: _012016 check row key when cloning a string in Purchase order
 		And I save the current field value as "Rov2"		
 		And I display "Rov1" variable value
 		And I display "Rov2" variable value
-		Given I open hyperlink "e1cib/list/AccumulationRegister.GoodsReceiptSchedule"
-		And I go to line in "List" table
-		| 'Row key' |
-		| '$Rov1$'    |
-		And I activate "Row key" field in "List" table
-		And in the table "List" I click the button named "ListContextMenuFindByCurrentValue"
-		Then the number of "List" table lines is "меньше или равно" 1
+		And "ItemList" table does not contain lines
+			| 'Key' | '#' |
+			| 'Rov1'  | '2' |
+		And I close all client application windows
 
 Scenario: _012017 check row key when cloning a string in Shipment confirmation
 	And I close all client application windows
@@ -1202,13 +1197,10 @@ Scenario: _012017 check row key when cloning a string in Shipment confirmation
 		And I save the current field value as "Rov2"		
 		And I display "Rov1" variable value
 		And I display "Rov2" variable value
-		Given I open hyperlink "e1cib/list/AccumulationRegister.GoodsInTransitOutgoing"
-		And I go to line in "List" table
-		| 'Row key' |
-		| '$Rov1$'    |
-		And I activate "Row key" field in "List" table
-		And in the table "List" I click the button named "ListContextMenuFindByCurrentValue"
-		Then the number of "List" table lines is "меньше или равно" 1
+		And "ItemList" table does not contain lines
+			| 'Key' | '#' |
+			| 'Rov1'  | '2' |
+		And I close all client application windows
 
 
 Scenario: _012020 check row key when cloning a string in Internal supply request
@@ -1263,13 +1255,9 @@ Scenario: _012020 check row key when cloning a string in Internal supply request
 		And I save the current field value as "$$$$RovISR2$$$$"		
 		And I display "$$$$RovISR1$$$$" variable value
 		And I display "$$$$RovISR2$$$$" variable value
-		Given I open hyperlink "e1cib/list/AccumulationRegister.OrderBalance""
-		And I go to line in "List" table
-		| 'Row key' |
-		| '$$$$RovISR1$$$$'    |
-		And I activate "Row key" field in "List" table
-		And in the table "List" I click the button named "ListContextMenuFindByCurrentValue"
-		Then the number of "List" table lines is "меньше или равно" 1
+		And "ItemList" table does not contain lines
+			| 'Key' | '#' |
+			| '$$$$RovISR1$$$$'  | '2' |
 		And I close all client application windows
 	* Copy ISR and check row key
 		Given I open hyperlink "e1cib/list/Document.InternalSupplyRequest"
@@ -1344,13 +1332,10 @@ Scenario: _012021 check row key when cloning a string in Purchase invoice
 		And I save the current field value as "Rov2"		
 		And I display "Rov1" variable value
 		And I display "Rov2" variable value
-		Given I open hyperlink "e1cib/list/AccumulationRegister.GoodsReceiptSchedule"
-		And I go to line in "List" table
-		| 'Row key' |
-		| '$Rov1$'    |
-		And I activate "Row key" field in "List" table
-		And in the table "List" I click the button named "ListContextMenuFindByCurrentValue"
-		Then the number of "List" table lines is "меньше или равно" 1		
+		And "ItemList" table does not contain lines
+			| 'Key' | '#' |
+			| 'Rov1'  | '2' |
+		And I close all client application windows	
 
 
 

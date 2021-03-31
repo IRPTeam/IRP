@@ -6,7 +6,6 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Tables = New Structure();
 	Tables.Insert("OrderBalance"                          , PostingServer.CreateTable(AccReg.OrderBalance));
 	Tables.Insert("SalesTurnovers"                        , PostingServer.CreateTable(AccReg.SalesTurnovers));
-	Tables.Insert("GoodsInTransitOutgoing"                , PostingServer.CreateTable(AccReg.GoodsInTransitOutgoing));
 	Tables.Insert("ShipmentOrders"                        , PostingServer.CreateTable(AccReg.ShipmentOrders));
 	Tables.Insert("PartnerArTransactions"                 , PostingServer.CreateTable(AccReg.PartnerArTransactions));
 	Tables.Insert("AdvanceFromCustomers_Lock"             , PostingServer.CreateTable(AccReg.AdvanceFromCustomers));
@@ -20,15 +19,11 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Tables.Insert("Aging_Expense"                         , PostingServer.CreateTable(AccReg.Aging));
 	
 	Tables.Insert("OrderBalance_Exists"           , PostingServer.CreateTable(AccReg.OrderBalance));
-	Tables.Insert("GoodsInTransitOutgoing_Exists" , PostingServer.CreateTable(AccReg.GoodsInTransitOutgoing));
 	Tables.Insert("ShipmentOrders_Exists"         , PostingServer.CreateTable(AccReg.ShipmentOrders));
 	
 	Tables.OrderBalance_Exists =
 	AccumulationRegisters.OrderBalance.GetExistsRecords(Ref, AccumulationRecordType.Expense, AddInfo);
-	
-	Tables.GoodsInTransitOutgoing_Exists =
-	AccumulationRegisters.GoodsInTransitOutgoing.GetExistsRecords(Ref, AccumulationRecordType.Receipt, AddInfo);
-	
+		
 	Tables.ShipmentOrders_Exists =
 	AccumulationRegisters.ShipmentOrders.GetExistsRecords(Ref, AccumulationRecordType.Expense, AddInfo); 
 	
@@ -63,14 +58,13 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	QueryResult = Query.ExecuteBatch();
 	
 	Tables.OrderBalance                         = QueryResult[1].Unload();
-	Tables.GoodsInTransitOutgoing               = QueryResult[2].Unload();
-	Tables.ShipmentOrders                       = QueryResult[3].Unload();
-	Tables.PartnerArTransactions                = QueryResult[4].Unload();
-	Tables.AdvanceFromCustomers_Lock            = QueryResult[5].Unload();
-	Tables.ShipmentConfirmationSchedule_Expense = QueryResult[6].Unload();
-	Tables.ShipmentConfirmationSchedule_Receipt = QueryResult[7].Unload();
-	Tables.ReconciliationStatement              = QueryResult[8].Unload();
-	Tables.RevenuesTurnovers                    = QueryResult[9].Unload();
+	Tables.ShipmentOrders                       = QueryResult[2].Unload();
+	Tables.PartnerArTransactions                = QueryResult[3].Unload();
+	Tables.AdvanceFromCustomers_Lock            = QueryResult[4].Unload();
+	Tables.ShipmentConfirmationSchedule_Expense = QueryResult[5].Unload();
+	Tables.ShipmentConfirmationSchedule_Receipt = QueryResult[6].Unload();
+	Tables.ReconciliationStatement              = QueryResult[7].Unload();
+	Tables.RevenuesTurnovers                    = QueryResult[8].Unload();
 	
 	Tables.TaxesTurnovers = QueryTableTaxList;
 	Tables.SalesTurnovers = QueryTableSalesTurnovers;
@@ -423,34 +417,6 @@ Function GetQueryTextQueryTable()
 		|
 		|//[2]//////////////////////////////////////////////////////////////////////////////
 		|SELECT
-		|	tmp.Company AS Company,
-		|	tmp.Store AS Store,
-		|	tmp.ItemKey AS ItemKey,
-		|	ISNULL(ShipmentConfirmations.Quantity, tmp.Quantity) AS Quantity,
-		|	tmp.Period AS Period,
-		|	CASE
-		|		WHEN tmp.ShipmentConfirmationBeforeSalesInvoice
-		|		AND
-		|		NOT tmp.UseSalesOrder
-		|			THEN ISNULL(ShipmentConfirmations.ShipmentConfirmation, VALUE(Document.ShipmentConfirmation.EmptyRef))
-		|		ELSE tmp.ShipmentBasis
-		|	END AS ShipmentBasis,
-		|	tmp.RowKey AS RowKey
-		|FROM
-		|	tmp AS tmp
-		|	LEFT JOIN Document.SalesInvoice.ShipmentConfirmations AS ShipmentConfirmations
-		|	ON tmp.Key = ShipmentConfirmations.Key
-		|	AND tmp.SalesInvoice = ShipmentConfirmations.Ref
-		|WHERE
-		|	tmp.UseShipmentConfirmation
-		|	AND (NOT tmp.ShipmentConfirmationBeforeSalesInvoice
-		|	OR
-		|	NOT tmp.UseSalesOrder)
-		|	AND
-		|	NOT tmp.IsService
-		|;
-		|//[3]//////////////////////////////////////////////////////////////////////////////
-		|SELECT
 		|	tmp.SalesOrder AS Order,
 		|	ISNULL(ShipmentConfirmations.ShipmentConfirmation, VALUE(Document.ShipmentConfirmation.EmptyRef)) AS ShipmentConfirmation,
 		|	tmp.ItemKey AS ItemKey,
@@ -467,7 +433,7 @@ Function GetQueryTextQueryTable()
 		|	AND tmp.UseSalesOrder
 		|;
 		|
-		|//[4]//////////////////////////////////////////////////////////////////////////////
+		|//[3]//////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company AS Company,
 		|	tmp.BasisDocument AS BasisDocument,
@@ -489,7 +455,7 @@ Function GetQueryTextQueryTable()
 		|	tmp.Period
 		|;
 		|
-		|//[5]//////////////////////////////////////////////////////////////////////////////
+		|//[4]//////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company AS Company,
 		|	tmp.BasisDocument AS BasisDocument,
@@ -511,7 +477,7 @@ Function GetQueryTextQueryTable()
 		|	tmp.Period
 		|;
 		|
-		|//[6]//////////////////////////////////////////////////////////////////////////////
+		|//[5]//////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company AS Company,
 		|	tmp.SalesOrder AS Order,
@@ -581,7 +547,7 @@ Function GetQueryTextQueryTable()
 		|	AND tmp.DeliveryDate <> DATETIME(1, 1, 1)
 		|;
 		|
-		|//[7]//////////////////////////////////////////////////////////////////////////////
+		|//[6]//////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company AS Company,
 		|	tmp.SalesInvoice AS Order,
@@ -624,7 +590,7 @@ Function GetQueryTextQueryTable()
 		|		AND ShipmentConfirmationSchedule.RecordType = VALUE(AccumulationRecordType.Receipt)
 		|;
 		|
-		|//[8]//////////////////////////////////////////////////////////////////////////////
+		|//[7]//////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company AS Company,
 		|	tmp.LegalName AS LegalName,
@@ -640,7 +606,7 @@ Function GetQueryTextQueryTable()
 		|	tmp.Period
 		|;
 		|
-		|//[9]//////////////////////////////////////////////////////////////////////////////
+		|//[8]//////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Period AS Period,
 		|	tmp.Company AS Company,
@@ -757,14 +723,7 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 	// SalesTurnovers
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords.SalesTurnovers,
 		New Structure("RecordSet", Parameters.DocumentDataTables.SalesTurnovers));
-	
-	// GoodsInTransitOutgoing
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.GoodsInTransitOutgoing,
-		New Structure("RecordType, RecordSet, WriteInTransaction",
-			AccumulationRecordType.Receipt,
-			Parameters.DocumentDataTables.GoodsInTransitOutgoing,
-			True));
-		
+			
 	// ShipmentOrders
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords.ShipmentOrders,
 		New Structure("RecordType, RecordSet, WriteInTransaction",
@@ -940,12 +899,12 @@ Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
 	PostingServer.CheckBalance_AfterWrite(Ref, Cancel, Parameters, "Document.SalesInvoice.ItemList", AddInfo);
 		
 	LineNumberAndRowKeyFromItemList = PostingServer.GetLineNumberAndRowKeyFromItemList(Ref, "Document.SalesInvoice.ItemList");
-	If Not Cancel And Not AccReg.GoodsInTransitOutgoing.CheckBalance(Ref, LineNumberAndRowKeyFromItemList,
-	                                                                 Parameters.DocumentDataTables.GoodsInTransitOutgoing,
-	                                                                 Parameters.DocumentDataTables.GoodsInTransitOutgoing_Exists,
-	                                                                 AccumulationRecordType.Receipt, Unposting, AddInfo) Then
-		Cancel = True;
-	EndIf;
+//	If Not Cancel And Not AccReg.GoodsInTransitOutgoing.CheckBalance(Ref, LineNumberAndRowKeyFromItemList,
+//	                                                                 Parameters.DocumentDataTables.GoodsInTransitOutgoing,
+//	                                                                 Parameters.DocumentDataTables.GoodsInTransitOutgoing_Exists,
+//	                                                                 AccumulationRecordType.Receipt, Unposting, AddInfo) Then
+//		Cancel = True;
+//	EndIf;
 	
 	If Not Cancel And Not AccReg.OrderBalance.CheckBalance(Ref, LineNumberAndRowKeyFromItemList,
 	                                                       Parameters.DocumentDataTables.OrderBalance,

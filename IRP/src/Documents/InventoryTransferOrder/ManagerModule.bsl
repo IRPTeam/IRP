@@ -4,7 +4,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	
 	AccReg = Metadata.AccumulationRegisters;
 	Tables = New Structure();
-	Tables.Insert("TransferOrderBalance"         , PostingServer.CreateTable(AccReg.TransferOrderBalance));
+//	Tables.Insert("TransferOrderBalance"         , PostingServer.CreateTable(AccReg.TransferOrderBalance));
 	Tables.Insert("OrderBalance"                 , PostingServer.CreateTable(AccReg.OrderBalance));
 		
 	ObjectStatusesServer.WriteStatusToRegister(Ref, Ref.Status);
@@ -89,21 +89,21 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	&QueryTable AS QueryTable
 		|;
 		|
+//		|//[1]//////////////////////////////////////////////////////////////////////////////
+//		|SELECT
+//		|	tmp.Company,
+//		|	tmp.StoreSender AS StoreSender,
+//		|	tmp.StoreReceiver AS StoreReceiver,
+//		|	tmp.Order AS Order,
+//		|	tmp.ItemKey,
+//		|	tmp.RowKey,
+//		|	tmp.Quantity AS Quantity,
+//		|	tmp.Unit AS Unit,
+//		|	tmp.Period
+//		|FROM
+//		|	tmp AS tmp
+//		|;
 		|//[1]//////////////////////////////////////////////////////////////////////////////
-		|SELECT
-		|	tmp.Company,
-		|	tmp.StoreSender AS StoreSender,
-		|	tmp.StoreReceiver AS StoreReceiver,
-		|	tmp.Order AS Order,
-		|	tmp.ItemKey,
-		|	tmp.RowKey,
-		|	tmp.Quantity AS Quantity,
-		|	tmp.Unit AS Unit,
-		|	tmp.Period
-		|FROM
-		|	tmp AS tmp
-		|;
-		|//[2]//////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.StoreReceiver AS Store,
 		|	tmp.ItemKey,
@@ -121,8 +121,8 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	
 	QueryResults = Query.ExecuteBatch();
 	
-	Tables.TransferOrderBalance         = QueryResults[1].Unload();
-	Tables.OrderBalance                 = QueryResults[2].Unload();
+//	Tables.TransferOrderBalance         = QueryResults[1].Unload();
+	Tables.OrderBalance                 = QueryResults[1].Unload();
 	
 	Parameters.IsReposting = False;
 	
@@ -152,12 +152,12 @@ EndProcedure
 Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 	PostingDataTables = New Map();
 	
-	// TransferOrderBalance
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.TransferOrderBalance,
-		New Structure("RecordType, RecordSet, WriteInTransaction",
-			AccumulationRecordType.Receipt,
-			Parameters.DocumentDataTables.TransferOrderBalance,
-			Parameters.IsReposting));
+//	// TransferOrderBalance
+//	PostingDataTables.Insert(Parameters.Object.RegisterRecords.TransferOrderBalance,
+//		New Structure("RecordType, RecordSet, WriteInTransaction",
+//			AccumulationRecordType.Receipt,
+//			Parameters.DocumentDataTables.TransferOrderBalance,
+//			Parameters.IsReposting));
 	
 	// OrderBalance
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords.OrderBalance,

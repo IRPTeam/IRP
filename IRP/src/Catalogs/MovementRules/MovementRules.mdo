@@ -190,6 +190,48 @@
         <value>18</value>
       </code>
     </items>
+    <items id="aae53970-400b-4533-b40f-ce66a6d9e48d">
+      <name>SR</name>
+      <description>SR</description>
+      <code xsi:type="core:StringValue">
+        <value>19</value>
+      </code>
+    </items>
+    <items id="f252d2bd-c4ea-408b-83aa-7dee67b04282">
+      <name>PR</name>
+      <description>PR</description>
+      <code xsi:type="core:StringValue">
+        <value>20</value>
+      </code>
+    </items>
+    <items id="57b04b53-76e2-4376-a2ae-9106de03f610">
+      <name>PRO</name>
+      <description>PRO</description>
+      <code xsi:type="core:StringValue">
+        <value>21</value>
+      </code>
+    </items>
+    <items id="ffffa50f-3fd7-4e6e-a34c-baa83d15bbce">
+      <name>SRO</name>
+      <description>SRO</description>
+      <code xsi:type="core:StringValue">
+        <value>22</value>
+      </code>
+    </items>
+    <items id="438e0e7b-84d6-440e-8cce-b983e23a6c34">
+      <name>SRO_SR</name>
+      <description>SRO&amp;SR</description>
+      <code xsi:type="core:StringValue">
+        <value>23</value>
+      </code>
+    </items>
+    <items id="824369d2-ae80-4dfd-90e1-051bea3f6424">
+      <name>PRO_PR</name>
+      <description>PRO&amp;PR</description>
+      <code xsi:type="core:StringValue">
+        <value>24</value>
+      </code>
+    </items>
   </predefined>
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>

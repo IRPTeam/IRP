@@ -116,16 +116,10 @@
     <mdObject>AccumulationRegister.R1001T_Purchases</mdObject>
   </content>
   <content>
-    <mdObject>AccumulationRegister.StockAdjustmentAsSurplus</mdObject>
-  </content>
-  <content>
     <mdObject>Catalog.CurrencyMovementSets</mdObject>
   </content>
   <content>
     <mdObject>AccumulationRegister.R1005T_PurchaseSpecialOffers</mdObject>
-  </content>
-  <content>
-    <mdObject>AccumulationRegister.TransferOrderBalance</mdObject>
   </content>
   <content>
     <mdObject>AccumulationRegister.PurchaseReturnTurnovers</mdObject>
@@ -201,9 +195,6 @@
   </content>
   <content>
     <mdObject>Catalog.TaxRates</mdObject>
-  </content>
-  <content>
-    <mdObject>AccumulationRegister.GoodsInTransitOutgoing</mdObject>
   </content>
   <content>
     <mdObject>Document.RetailReturnReceipt</mdObject>
@@ -396,9 +387,6 @@
   </content>
   <content>
     <mdObject>AccumulationRegister.TaxesTurnovers</mdObject>
-  </content>
-  <content>
-    <mdObject>AccumulationRegister.GoodsInTransitIncoming</mdObject>
   </content>
   <content>
     <mdObject>Catalog.DataAreas</mdObject>
@@ -594,9 +582,6 @@
   </content>
   <content>
     <mdObject>Document.InventoryTransferOrder</mdObject>
-  </content>
-  <content>
-    <mdObject>AccumulationRegister.StockAdjustmentAsWriteOff</mdObject>
   </content>
   <content>
     <mdObject>Catalog.PriceTypes</mdObject>

@@ -56,7 +56,6 @@
   <realTimePosting>Deny</realTimePosting>
   <registerRecords>AccumulationRegister.T10000B_RowIDMovements</registerRecords>
   <registerRecords>AccumulationRegister.R4010B_ActualStocks</registerRecords>
-  <registerRecords>AccumulationRegister.GoodsInTransitOutgoing</registerRecords>
   <registerRecords>AccumulationRegister.R4022B_StockTransferOrdersShipment</registerRecords>
   <registerRecords>AccumulationRegister.R2011B_SalesOrdersShipment</registerRecords>
   <registerRecords>AccumulationRegister.R4011B_FreeStocks</registerRecords>
@@ -516,20 +515,6 @@
       <dataHistory>Use</dataHistory>
     </attributes>
   </tabularSections>
-  <commands uuid="ee505248-867e-49a2-ab6b-efc12c78befc">
-    <name>GenerateShipmentConfirmation</name>
-    <synonym>
-      <key>en</key>
-      <value>Shipment confirmation</value>
-    </synonym>
-    <group>FormCommandBarCreateBasedOn</group>
-    <commandParameterType>
-      <types>DocumentRef.PurchaseReturn</types>
-    </commandParameterType>
-    <parameterUseMode>Multiple</parameterUseMode>
-    <representation>Auto</representation>
-    <shortcut></shortcut>
-  </commands>
   <commands uuid="c7df6d13-1d5e-44f0-8ab1-91615427c7bf">
     <name>Generate</name>
     <synonym>
@@ -541,6 +526,7 @@
       <types>DocumentRef.SalesOrder</types>
       <types>DocumentRef.SalesInvoice</types>
       <types>DocumentRef.InventoryTransfer</types>
+      <types>DocumentRef.PurchaseReturn</types>
     </commandParameterType>
     <parameterUseMode>Multiple</parameterUseMode>
     <modifiesData>true</modifiesData>

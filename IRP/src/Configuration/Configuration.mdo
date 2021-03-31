@@ -703,7 +703,6 @@
   <accumulationRegisters>AccumulationRegister.PartnerArTransactions</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.PlaningCashTransactions</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.PurchaseReturnTurnovers</accumulationRegisters>
-  <accumulationRegisters>AccumulationRegister.PurchaseTurnovers</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1001T_Purchases</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1002T_PurchaseReturns</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1005T_PurchaseSpecialOffers</accumulationRegisters>
@@ -761,11 +760,9 @@
   <accumulationRegisters>AccumulationRegister.R5022T_Expenses</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R5041B_TaxesPayable</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.ReceiptOrders</accumulationRegisters>
-  <accumulationRegisters>AccumulationRegister.ReconciliationStatement</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.RetailCash</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.RetailSales</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.RevenuesTurnovers</accumulationRegisters>
-  <accumulationRegisters>AccumulationRegister.SalesOrderTurnovers</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.SalesReturnTurnovers</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.SalesTurnovers</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.ShipmentConfirmationSchedule</accumulationRegisters>

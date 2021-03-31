@@ -6,7 +6,6 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Tables.Insert("PartnerApTransactions"       , PostingServer.CreateTable(AccReg.PartnerApTransactions));
 	Tables.Insert("PartnerArTransactions"       , PostingServer.CreateTable(AccReg.PartnerArTransactions));
 	Tables.Insert("ExpensesTurnovers"           , PostingServer.CreateTable(AccReg.ExpensesTurnovers));
-	Tables.Insert("ReconciliationStatement"     , PostingServer.CreateTable(AccReg.ReconciliationStatement));
 	Tables.Insert("Aging_Expense"               , PostingServer.CreateTable(AccReg.Aging));
 	Tables.Insert("PartnerArTransactions_Aging" , PostingServer.CreateTable(AccReg.PartnerArTransactions));
 	
@@ -95,21 +94,6 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|//[4]//////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company AS Company,
-		|	tmp.LegalName AS LegalName,
-		|	tmp.Currency AS Currency,
-		|	SUM(tmp.Amount) AS Amount,
-		|	tmp.Period AS Period
-		|FROM
-		|	tmp AS tmp
-		|GROUP BY
-		|	tmp.Company,
-		|	tmp.LegalName,
-		|	tmp.Currency,
-		|	tmp.Period
-		|;
-		|//[5]//////////////////////////////////////////////////////////////////////////////
-		|SELECT
-		|	tmp.Company AS Company,
 		|	tmp.BasisDocument AS BasisDocument,
 		|	tmp.Partner AS Partner,
 		|	tmp.LegalName AS LegalName,
@@ -132,8 +116,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Tables.PartnerApTransactions       = QueryResults[1].Unload();
 	Tables.ExpensesTurnovers           = QueryResults[2].Unload();
 	Tables.PartnerArTransactions       = QueryResults[3].Unload();
-	Tables.ReconciliationStatement     = QueryResults[4].Unload();
-	Tables.PartnerArTransactions_Aging = QueryResults[5].Unload();
+	Tables.PartnerArTransactions_Aging = QueryResults[4].Unload();
 	
 	Return Tables;
 EndFunction
@@ -154,9 +137,6 @@ Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	ExpensesTurnovers = AccumulationRegisters.ExpensesTurnovers.GetLockFields(DocumentDataTables.ExpensesTurnovers);
 	DataMapWithLockFields.Insert(ExpensesTurnovers.RegisterName, ExpensesTurnovers.LockInfo);
 	
-	// ReconciliationStatement
-	ReconciliationStatement = AccumulationRegisters.ReconciliationStatement.GetLockFields(DocumentDataTables.ReconciliationStatement);
-	DataMapWithLockFields.Insert(ReconciliationStatement.RegisterName, ReconciliationStatement.LockInfo);
 	
 	Return DataMapWithLockFields;
 EndFunction
@@ -225,11 +205,6 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 			AccumulationRecordType.Receipt,
 			Parameters.DocumentDataTables.PartnerArTransactions));
 		
-	// ReconciliationStatement	
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.ReconciliationStatement,
-		New Structure("RecordType, RecordSet",
-			AccumulationRecordType.Expense,
-			Parameters.DocumentDataTables.ReconciliationStatement));
 	
 	// Aging
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords.Aging,

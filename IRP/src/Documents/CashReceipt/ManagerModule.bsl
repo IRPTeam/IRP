@@ -8,7 +8,6 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Tables.Insert("PlaningCashTransactions"               , PostingServer.CreateTable(AccReg.PlaningCashTransactions));
 	Tables.Insert("CashInTransit"                         , PostingServer.CreateTable(AccReg.CashInTransit));
 	Tables.Insert("AdvanceFromCustomers"                  , PostingServer.CreateTable(AccReg.AdvanceFromCustomers));
-	Tables.Insert("ReconciliationStatement"               , PostingServer.CreateTable(AccReg.ReconciliationStatement));
 	Tables.Insert("CashAdvance"                           , PostingServer.CreateTable(AccReg.CashAdvance));
 	Tables.Insert("PartnerArTransactions_OffsetOfAdvance" , PostingServer.CreateTable(AccReg.PartnerArTransactions));
 	Tables.Insert("Aging_Expense"                         , PostingServer.CreateTable(AccReg.Aging));
@@ -32,8 +31,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Tables.PlaningCashTransactions = QueryResults[3].Unload();
 	Tables.CashInTransit = QueryResults[4].Unload();
 	Tables.AdvanceFromCustomers = QueryResults[5].Unload();
-	Tables.ReconciliationStatement = QueryResults[6].Unload();
-	Tables.CashAdvance = QueryResults[7].Unload();
+	Tables.CashAdvance = QueryResults[6].Unload();
 	
 	Return Tables;
 EndFunction
@@ -285,27 +283,7 @@ Function GetQueryTextQueryTable()
 		|	tmp.Key
 		|;
 		|
-		|//[6]//////////////////////////////////////////////////////////////////////////////
-		|SELECT
-		|	tmp.Company AS Company,
-		|	tmp.Payer AS LegalName,
-		|	tmp.Currency AS Currency,
-		|	SUM(tmp.Amount) AS Amount,
-		|	tmp.Period
-		|FROM
-		|	tmp AS tmp
-		|WHERE
-		|	NOT tmp.IsMoneyTransfer
-		|	AND
-		|	NOT tmp.IsMoneyExchange
-		|GROUP BY
-		|	tmp.Company,
-		|	tmp.Payer,
-		|	tmp.Currency,
-		|	tmp.Period
-		|;
-		|
-		|//[7]////////////////////////////////////////////////////////////////////////////////////
+		|//[6]////////////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company AS Company,
 		|	tmp.Partner AS Partner,
@@ -352,10 +330,6 @@ Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	AccumulationRegisters.AdvanceFromCustomers.GetLockFields(DocumentDataTables.AdvanceFromCustomers);
 	DataMapWithLockFields.Insert(AdvanceFromCustomers.RegisterName, AdvanceFromCustomers.LockInfo);
 	
-	// ReconciliationStatement
-	ReconciliationStatement = 
-	AccumulationRegisters.ReconciliationStatement.GetLockFields(DocumentDataTables.ReconciliationStatement);
-	DataMapWithLockFields.Insert(ReconciliationStatement.RegisterName, ReconciliationStatement.LockInfo);
 	
 	// CashAdvance
 	CashAdvance = 
@@ -527,11 +501,6 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 			"RecordType, Period, Company, Partner, LegalName, Currency, ReceiptDocument, Amount, Key"),
 			Parameters.IsReposting));
 	
-	// ReconciliationStatement
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.ReconciliationStatement,
-		New Structure("RecordType, RecordSet",
-			AccumulationRecordType.Expense,
-			Parameters.DocumentDataTables.ReconciliationStatement));
 	
 	// CashAdvance
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords.CashAdvance,

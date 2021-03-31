@@ -5,11 +5,9 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	AccReg = Metadata.AccumulationRegisters;
 	Tables = New Structure();
 	Tables.Insert("OrderBalance"                          , PostingServer.CreateTable(AccReg.OrderBalance));
-	Tables.Insert("PurchaseTurnovers"                     , PostingServer.CreateTable(AccReg.PurchaseTurnovers));
 	Tables.Insert("PartnerArTransactions"                 , PostingServer.CreateTable(AccReg.PartnerArTransactions));
 	Tables.Insert("AdvanceFromCustomers_Lock"             , PostingServer.CreateTable(AccReg.AdvanceFromCustomers));
 	Tables.Insert("PartnerArTransactions_OffsetOfAdvance" , PostingServer.CreateTable(AccReg.AdvanceFromCustomers));
-	Tables.Insert("ReconciliationStatement"               , PostingServer.CreateTable(AccReg.ReconciliationStatement));
 	Tables.Insert("PurchaseReturnTurnovers"               , PostingServer.CreateTable(AccReg.PurchaseReturnTurnovers));
 	Tables.Insert("RevenuesTurnovers"                     , PostingServer.CreateTable(AccReg.RevenuesTurnovers));	
 	
@@ -19,12 +17,10 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	QueryResults = Query.ExecuteBatch();
 	
 	Tables.OrderBalance               = QueryResults[3].Unload();
-	Tables.PurchaseTurnovers          = QueryResults[4].Unload();
-	Tables.PartnerArTransactions      = QueryResults[5].Unload();
-	Tables.AdvanceFromCustomers_Lock  = QueryResults[6].Unload();
-	Tables.ReconciliationStatement    = QueryResults[7].Unload();
-	Tables.PurchaseReturnTurnovers    = QueryResults[8].Unload();
-	Tables.RevenuesTurnovers          = QueryResults[9].Unload();
+	Tables.PartnerArTransactions      = QueryResults[4].Unload();
+	Tables.AdvanceFromCustomers_Lock  = QueryResults[5].Unload();
+	Tables.PurchaseReturnTurnovers    = QueryResults[6].Unload();
+	Tables.RevenuesTurnovers          = QueryResults[7].Unload();
 	
 #Region NewRegistersPosting		
 	QueryArray = GetQueryTextsSecondaryTables();
@@ -50,7 +46,7 @@ Function GetQueryTextQueryTable()
 		|	RowIDInfo.Key
 		|;
 		|
-		|////////////////////////////////////////////////////////////////////////////////	
+		|//1//////////////////////////////////////////////////////////////////////////////	
 		|SELECT
 		|	PurchaseReturnShipmentConfirmations.Key
 		|INTO ShipmentConfirmations
@@ -62,7 +58,7 @@ Function GetQueryTextQueryTable()
 		|	PurchaseReturnShipmentConfirmations.Key
 		|;
 		|
-		|////////////////////////////////////////////////////////////////////////////////
+		|//2//////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	PurchaseReturnItemList.Ref.Company AS Company,
 		|	PurchaseReturnItemList.Store AS Store,
@@ -136,32 +132,8 @@ Function GetQueryTextQueryTable()
 		|	tmp.RowKey
 		|;
 		|
-		|// 4. ItemList_PurchaseTurnovers //////////////////////////////////////////////////////////////////////////////
-		|SELECT
-		|	tmp.Company,
-		|	tmp.PurchaseInvoice AS PurchaseInvoice,
-		|	tmp.Currency,
-		|	tmp.ItemKey,
-		|	-SUM(tmp.Quantity) AS Quantity,
-		|	-SUM(tmp.Amount) AS Amount,
-		|	-SUM(tmp.NetAmount) AS NetAmount,
-		|	tmp.Period,
-		|	tmp.RowKey
-		|FROM
-		|	tmp AS tmp
-		|WHERE
-		|	tmp.PurchaseReturnOrder = VALUE(Document.PurchaseReturnOrder.EmptyRef)
-		|GROUP BY
-		|	tmp.Company,
-		|	tmp.PurchaseInvoice,
-		|	tmp.Currency,
-		|	tmp.ItemKey,
-		|	tmp.Period,
-		|	tmp.RowKey
-		|;
 		|
-		|
-		|// 5. ItemList_PartnerArTransactions //////////////////////////////////////////////////////////////////////////////
+		|// 4. ItemList_PartnerArTransactions //////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company AS Company,
 		|	tmp.BasisDocument AS BasisDocument,
@@ -183,7 +155,7 @@ Function GetQueryTextQueryTable()
 		|	tmp.Period
 		|;
 		|
-		|// 6. ItemList_AdvanceFromCustomers_Lock //////////////////////////////////////////////////////////////////////////////
+		|// 5. ItemList_AdvanceFromCustomers_Lock //////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company AS Company,
 		|	tmp.BasisDocument AS BasisDocument,
@@ -205,23 +177,7 @@ Function GetQueryTextQueryTable()
 		|	tmp.Period
 		|;
 		|
-		|// 7. ReconciliationStatement //////////////////////////////////////////////////////////////////////////////
-		|SELECT
-		|	tmp.Company AS Company,
-		|	tmp.LegalName AS LegalName,
-		|	tmp.Currency AS Currency,
-		|	SUM(tmp.Amount) AS Amount,
-		|	tmp.Period
-		|FROM
-		|	tmp AS tmp
-		|GROUP BY
-		|	tmp.Company,
-		|	tmp.LegalName,
-		|	tmp.Currency,
-		|	tmp.Period
-		|;
-		|
-		|// 8. PurchaseReturnTurnovers //////////////////////////////////////////////////////////////////////////////
+		|// 6. PurchaseReturnTurnovers //////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company,
 		|	tmp.PurchaseInvoice AS PurchaseInvoice,
@@ -241,7 +197,7 @@ Function GetQueryTextQueryTable()
 		|	tmp.Period,
 		|	tmp.RowKey
 		|;
-		|// 9. RevenuesTurnovers  //////////////////////////////////////////////////////////////////////////////
+		|// 7. RevenuesTurnovers  //////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Period AS Period,
 		|	tmp.Company AS Company,
@@ -336,11 +292,7 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 		New Structure("RecordType, RecordSet",
 			AccumulationRecordType.Expense,
 			Parameters.DocumentDataTables.OrderBalance));
-	
-	// PurchaseTurnovers
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.PurchaseTurnovers,
-		New Structure("RecordSet", Parameters.DocumentDataTables.PurchaseTurnovers));
-	
+		
 	// PurchaseReturnTurnovers
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords.PurchaseReturnTurnovers,
 		New Structure("RecordSet", Parameters.DocumentDataTables.PurchaseReturnTurnovers));
@@ -416,11 +368,6 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 				|TransactionAR, AdvanceFromCustomers"),
 			Parameters.IsReposting));
 	
-	// ReconciliationStatement
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.ReconciliationStatement,
-		New Structure("RecordType, RecordSet",
-			AccumulationRecordType.Receipt,
-			Parameters.DocumentDataTables.ReconciliationStatement));
 			
 	// RevenuesTurnovers
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords.RevenuesTurnovers,

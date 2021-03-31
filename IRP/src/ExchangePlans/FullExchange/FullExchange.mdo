@@ -311,9 +311,6 @@
     <mdObject>Document.ChequeBondTransaction</mdObject>
   </content>
   <content>
-    <mdObject>AccumulationRegister.PurchaseTurnovers</mdObject>
-  </content>
-  <content>
     <mdObject>AccumulationRegister.ExpensesTurnovers</mdObject>
   </content>
   <content>
@@ -471,9 +468,6 @@
   </content>
   <content>
     <mdObject>Catalog.ExternalDataProc</mdObject>
-  </content>
-  <content>
-    <mdObject>AccumulationRegister.ReconciliationStatement</mdObject>
   </content>
   <content>
     <mdObject>Document.OutgoingPaymentOrder</mdObject>
@@ -676,9 +670,6 @@
   </content>
   <content>
     <mdObject>InformationRegister.TaxSettings</mdObject>
-  </content>
-  <content>
-    <mdObject>AccumulationRegister.SalesOrderTurnovers</mdObject>
   </content>
   <content>
     <mdObject>AccumulationRegister.OrderBalance</mdObject>

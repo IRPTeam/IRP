@@ -6,7 +6,6 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Tables = New Structure();
 	Tables.Insert("OrderBalance"                          , PostingServer.CreateTable(AccReg.OrderBalance));
 	Tables.Insert("PartnerApTransactions"                 , PostingServer.CreateTable(AccReg.PartnerApTransactions));
-	Tables.Insert("PurchaseTurnovers"                     , PostingServer.CreateTable(AccReg.PurchaseTurnovers));
 	Tables.Insert("AdvanceToSuppliers_Lock"               , PostingServer.CreateTable(AccReg.AdvanceToSuppliers));
 	Tables.Insert("PartnerApTransactions_OffsetOfAdvance" , PostingServer.CreateTable(AccReg.AdvanceToSuppliers));
 	Tables.Insert("ReceiptOrders"                         , PostingServer.CreateTable(AccReg.ReceiptOrders));
@@ -14,7 +13,6 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Tables.Insert("GoodsReceiptSchedule_Expense"          , PostingServer.CreateTable(AccReg.GoodsReceiptSchedule));
 	Tables.Insert("GoodsReceiptSchedule_Receipt"          , PostingServer.CreateTable(AccReg.GoodsReceiptSchedule));
 	Tables.Insert("OrderProcurement"                      , PostingServer.CreateTable(AccReg.OrderProcurement));
-	Tables.Insert("ReconciliationStatement"               , PostingServer.CreateTable(AccReg.ReconciliationStatement));
 	Tables.Insert("TaxesTurnovers"                        , PostingServer.CreateTable(AccReg.TaxesTurnovers));
 	
 	Tables.Insert("OrderBalance_Exists"           , PostingServer.CreateTable(AccReg.OrderBalance));
@@ -396,22 +394,8 @@ Procedure GetTables_Common(Tables, TableName, Parameters)
 		|	tmp.Period
 		|;
 		|
-		|//[1]//////////////////////////////////////////////////////////////////////////////
-		|SELECT
-		|	tmp.Company,
-		|	tmp.PurchaseInvoice,
-		|	tmp.Currency,
-		|	tmp.ItemKey,
-		|	tmp.Quantity AS Quantity,
-		|	tmp.Amount AS Amount,
-		|	tmp.NetAmount AS NetAmount,
-		|	tmp.Period,
-		|	tmp.RowKey
-		|FROM
-		|	tmp AS tmp
-		|;
 		|
-		|//[2]//////////////////////////////////////////////////////////////////////////////
+		|//[1]//////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company AS Company,
 		|	CASE
@@ -438,22 +422,6 @@ Procedure GetTables_Common(Tables, TableName, Parameters)
 		|	tmp.LegalName,
 		|	tmp.Agreement,
 		|	tmp.Currency,
-		|	tmp.Period
-		|;
-		|
-		|//[3]//////////////////////////////////////////////////////////////////////////////
-		|SELECT
-		|	tmp.Company AS Company,
-		|	tmp.LegalName AS LegalName,
-		|	tmp.Currency AS Currency,
-		|	SUM(tmp.Amount) AS Amount,
-		|	tmp.Period
-		|FROM
-		|	tmp AS tmp
-		|GROUP BY
-		|	tmp.Company,
-		|	tmp.LegalName,
-		|	tmp.Currency,
 		|	tmp.Period";
 	Query.Text = StrReplace(Query.Text, "tmp", TableName);
 	#EndRegion
@@ -461,10 +429,8 @@ Procedure GetTables_Common(Tables, TableName, Parameters)
 	QueryResults = Query.ExecuteBatch();
 	
 	Tables.PartnerApTransactions                 = QueryResults[0].Unload();
-	Tables.PurchaseTurnovers                     = QueryResults[1].Unload();
-	Tables.AdvanceToSuppliers_Lock               = QueryResults[2].Unload();
+	Tables.AdvanceToSuppliers_Lock               = QueryResults[1].Unload();
 	Tables.PartnerApTransactions_OffsetOfAdvance = New ValueTable();
-	Tables.ReconciliationStatement               = QueryResults[3].Unload();
 EndProcedure
 
 #Region Table_tmp_1
@@ -2121,13 +2087,7 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 			AccumulationRecordType.Expense,
 			Parameters.DocumentDataTables.OrderBalance,
 			True));
-		
-	// PurchaseTurnovers
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.PurchaseTurnovers,
-		New Structure("RecordSet, WriteInTransaction",
-			Parameters.DocumentDataTables.PurchaseTurnovers,
-			Parameters.IsReposting));
-		
+				
 	// AccountsStatement
 	ArrayOfTables = New Array();
 	Table1 = Parameters.DocumentDataTables.PartnerApTransactions.Copy();
@@ -2227,13 +2187,7 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 			AccumulationRecordType.Expense,
 			Parameters.DocumentDataTables.OrderProcurement,
 			True));
-	
-	// ReconciliationStatement
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.ReconciliationStatement,
-		New Structure("RecordType, RecordSet",
-			AccumulationRecordType.Expense,
-			Parameters.DocumentDataTables.ReconciliationStatement));
-	
+		
 	// TaxesTurnovers
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords.TaxesTurnovers,
 		New Structure("RecordSet", Parameters.DocumentDataTables.TaxesTurnovers));

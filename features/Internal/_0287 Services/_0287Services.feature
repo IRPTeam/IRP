@@ -186,6 +186,7 @@ Scenario: _029103 create a Purchase order for service
 		And I save the window as "$$PurchaseOrder029103$$"
 		And I click the button named "FormPostAndClose"
 		* Check creation
+			Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 			And "List" table contains lines
 				| 'Number' |
 				| '$$NumberPurchaseOrder029103$$'      |
@@ -211,6 +212,7 @@ Scenario: _029104 create a Purchase invoice for service
 	And I save the window as "$$PurchaseInvoice029104$$"
 	And I click the button named "FormPostAndClose"
 	* Check creation
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		And "List" table contains lines
 			| 'Number' |
 			| '$$NumberPurchaseInvoice029104$$'      |

@@ -156,7 +156,7 @@ Scenario: _016501 create document Internal Supply Request
 	
 
 
-Scenario: _016503 check the Company filter in the Internal Supply Request document.
+Scenario: _016503 check the Company filter in the Internal Supply Request document
 	* Opening the creation form Internal Supply Request
 		And I close all client application windows
 		Given I open hyperlink "e1cib/list/Document.InternalSupplyRequest"

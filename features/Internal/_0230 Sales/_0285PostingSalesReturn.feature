@@ -108,6 +108,12 @@ Scenario: _028501 create document Sales return based on SI (without SRO)
 	And I save the window as "$$SalesReturn028501$$"
 	And I click the button named "FormPostAndClose"
 	And I close current window
+	* Check creation
+		Given I open hyperlink "e1cib/list/Document.SalesReturn"
+		And "List" table contains lines
+			| 'Number'                |
+			| '$$NumberSalesReturn028501$$' |
+		And I close all client application windows
 
 
 
@@ -371,6 +377,12 @@ Scenario: _028509 create Sales return without bases document
 		And I save the value of "Number" field as "$$NumberSalesReturn028509$$"
 		And I save the window as "$$SalesReturn028509$$"
 		And I click the button named "FormPostAndClose"
+	* Check creation
+		Given I open hyperlink "e1cib/list/Document.SalesReturn"
+		And "List" table contains lines
+			| 'Number'                |
+			| '$$NumberSalesReturn028509$$' |
+		And I close all client application windows
 
 Scenario: _028510 check filling in Row Id info table in the SR
 	* Select SR
@@ -685,6 +697,12 @@ Scenario: _028515 create document Sales return based on SRO
 		And I save the value of "Number" field as "$$NumberSalesReturn028515$$"
 		And I save the window as "$$SalesReturn028515$$"
 		And I click the button named "FormPostAndClose"
+	* Check creation
+		Given I open hyperlink "e1cib/list/Document.SalesReturn"
+		And "List" table contains lines
+			| 'Number'                |
+			| '$$NumberSalesReturn028515$$' |
+		And I close all client application windows
 
 
 

@@ -131,6 +131,12 @@ Scenario: _018001 create document Purchase Invoice based on order (partial quant
 		And I save the window as "$$PurchaseInvoice018001$$"
 		And I save the value of "Number" field as "$$NumberPurchaseInvoice018001$$"
 		And I click the button named "FormPostAndClose"
+	* Check creation
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And "List" table contains lines
+			| 'Number'  |
+			| '$$NumberPurchaseInvoice018001$$' |
+		And I close all client application windows
 
 	
 
@@ -568,6 +574,12 @@ Scenario: _018012 Purchase invoice creation without PO
 		And I save the value of "Number" field as "$$NumberPurchaseInvoice018012$$"
 		And I save the window as "$$PurchaseInvoice018012$$"
 		And I click the button named "FormPostAndClose"
+	* Check creation
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And "List" table contains lines
+			| 'Number'  |
+			| '$$NumberPurchaseInvoice018012$$' |
+		And I close all client application windows
 	
 
 Scenario: _018013 create PI using form link/unlink

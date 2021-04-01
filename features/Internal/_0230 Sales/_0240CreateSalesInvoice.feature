@@ -150,6 +150,12 @@ Scenario: _024001 create document Sales Invoice based on sales order (partial qu
 		And I save the window as "$$SalesInvoice024008$$"
 		And I save the value of "Number" field as "$$NumberSalesInvoice024008$$"
 		And I click the button named "FormPostAndClose"
+	* Check creation
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And "List" table contains lines
+			| 'Number'                |
+			| '$$NumberSalesInvoice024008$$' |
+		And I close all client application windows
   
 		
 

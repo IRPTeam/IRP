@@ -69,7 +69,11 @@ Scenario: _023000 preparation (Sales order)
 
 Scenario: _023001 create document Sales order
 	When create SalesOrder023001
-
+	Given I open hyperlink "e1cib/list/Document.SalesOrder"
+	And "List" table contains lines
+		| 'Number'                |
+		| '$$NumberSalesOrder023001$$' |
+	And I close all client application windows
 
 Scenario: _023002 check filling in Row Id info table in the SO
 	* Select SO

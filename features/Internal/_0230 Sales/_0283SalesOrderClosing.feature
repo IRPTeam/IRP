@@ -119,6 +119,12 @@ Scenario: _0230001 create and check filling Sales order closing (SO not shipped)
 		And I click Open button of "Sales order" field
 		Then the form attribute named "ClosingOrder" became equal to "$$SalesOrderClosing0230001$$"
 		And I close all client application windows
+	* Check creation
+		Given I open hyperlink "e1cib/list/Document.SalesOrderClosing"
+		And "List" table contains lines
+			| 'Number'                |
+			| '$$NumberSalesOrderClosing0230001$$' |
+		And I close all client application windows
 	
 
 Scenario: _0230002 create and check filling Sales order closing (SO partially shipped)

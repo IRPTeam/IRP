@@ -293,6 +293,12 @@ Scenario: _029612 create Unbundling
 		And I save the value of "Number" field as "$$NumberUnbundling0029612$$"
 		And I save the window as "$$Unbundling0029612$$"
 		And I close all client application windows
+	* Check creation
+		Given I open hyperlink "e1cib/list/Document.Unbundling"
+		And "List" table contains lines
+			| 'Number'                |
+			| '$$NumberUnbundling0029612$$' |
+		And I close all client application windows
 
 
 

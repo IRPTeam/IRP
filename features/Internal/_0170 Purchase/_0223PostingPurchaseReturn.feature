@@ -185,6 +185,12 @@ Scenario: _022301 create Purchase return without bases document
 		And I save the value of "Number" field as "$$NumberPurchaseReturn022301$$"
 		And I save the window as "$$PurchaseReturn022301$$"
 		And I click the button named "FormPostAndClose"
+	* Check creation
+		Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
+		And "List" table contains lines
+			| 'Number'  |
+			| '$$NumberPurchaseReturn022301$$' |
+		And I close all client application windows
 
 Scenario: _022303 check filling in Row Id info table in the PR
 	* Select PR
@@ -351,6 +357,12 @@ Scenario: _022305 create document Purchase return without Purchase return order
 	And I input "10,000" text in "Q" field of "ItemList" table
 	And I finish line editing in "ItemList" table
 	And I click the button named "FormPostAndClose"
+	* Check creation
+		Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
+		And "List" table contains lines
+			| 'Number'  |
+			| '$$NumberPurchaseReturn022314$$' |
+		And I close all client application windows
 
 
 
@@ -477,6 +489,12 @@ Scenario: _022310 create Purchase return based on Purchase return order
 		And I save the value of "Number" field as "$$NumberPurchaseReturn22310$$"
 		And I save the window as "$$PurchaseReturn22310$$"
 		And I click the button named "FormPostAndClose"
+	* Check creation
+		Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
+		And "List" table contains lines
+			| 'Number'  |
+			| '$$NumberPurchaseReturn22310$$' |
+		And I close all client application windows
 
 
 Scenario: _022335 check totals in the document Purchase return

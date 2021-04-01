@@ -308,11 +308,11 @@ Scenario: _017005 check movements by status and status history of a Purchase Ord
 		And I save the value of "Date" field as "$$DatePurchaseOrderWait017005$$"
 		And I click the button named "FormPostAndClose"
 		And I close current window
-	* Check the absence of movements Purchase Order N101 by register Order Balance
-		Given I open hyperlink "e1cib/list/AccumulationRegister.OrderBalance"
+	* Check the absence of movements Purchase Order N101 by register PurchaseOrders
+		Given I open hyperlink "e1cib/list/AccumulationRegister.R1010T_PurchaseOrders"
 		And "List" table does not contain lines
-			| 'Recorder'                | 'Store'    | 'Order'                   |
-			| '$$PurchaseOrder017005$$' | 'Store 01' | '$$PurchaseOrder017005$$' |
+			| 'Recorder'                | 'Order'                   |
+			| '$$PurchaseOrder017005$$' | '$$PurchaseOrder017005$$' |
 		And I close all client application windows
 	* Setting the status by Purchase Order №101 'Approved'
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
@@ -335,10 +335,10 @@ Scenario: _017005 check movements by status and status history of a Purchase Ord
 		And I click the button named "FormPostAndClose"
 		And I close current window
 	* Check document movements after the status is set to Approved
-		Given I open hyperlink "e1cib/list/AccumulationRegister.OrderBalance"
+		Given I open hyperlink "e1cib/list/AccumulationRegister.R1010T_PurchaseOrders"
 		And "List" table contains lines
-			| 'Recorder'                | 'Store'    | 'Order'                   |
-			| '$$PurchaseOrder017005$$' | 'Store 01' | '$$PurchaseOrder017005$$' |
+			| 'Recorder'                | 'Order'                   |
+			| '$$PurchaseOrder017005$$' | '$$PurchaseOrder017005$$' |
 		And I close current window
 	* Check for cancelled movements when the Approved status is changed to Wait
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
@@ -358,10 +358,10 @@ Scenario: _017005 check movements by status and status history of a Purchase Ord
 		And I close current window
 		And I click the button named "FormPostAndClose"
 		And I close current window
-		Given I open hyperlink "e1cib/list/AccumulationRegister.OrderBalance"
+		Given I open hyperlink "e1cib/list/AccumulationRegister.R1010T_PurchaseOrders"
 		And "List" table does not contain lines
-			| 'Recorder'                | 'Store'    | 'Order'                   |
-			| '$$PurchaseOrder017005$$' | 'Store 01' | '$$PurchaseOrder017005$$' |
+			| 'Recorder'                | 'Order'                   |
+			| '$$PurchaseOrder017005$$' | '$$PurchaseOrder017005$$' |
 		And I close current window
 
 Scenario: _017006 create Purchase order based on Internal supply request
@@ -701,22 +701,22 @@ Scenario: _019901 check changes in movements on a Purchase Order document when q
 		And I delete "$$PurchaseOrder019901$$" variable
 		And I save the value of "Number" field as "$$NumberPurchaseOrder019901$$"
 		And I save the window as "$$PurchaseOrder019901$$"
-	* Check registry entries (Order Balance)
-		Given I open hyperlink "e1cib/list/AccumulationRegister.OrderBalance"
+	* Check registry entries 
+		Given I open hyperlink "e1cib/list/AccumulationRegister.R1010T_PurchaseOrders"
 		And "List" table contains lines
-			| 'Quantity' | 'Recorder'                | 'Store'    | 'Order'                   | 'Item key'  |
-			| '200,000'  | '$$PurchaseOrder019901$$' | 'Store 03' | '$$PurchaseOrder019901$$' | 'S/Yellow'  |
-			| '200,000'  | '$$PurchaseOrder019901$$' | 'Store 03' | '$$PurchaseOrder019901$$' | 'XS/Blue'   |
-			| '200,000'  | '$$PurchaseOrder019901$$' | 'Store 03' | '$$PurchaseOrder019901$$' | 'M/White'   |
-			| '200,000'  | '$$PurchaseOrder019901$$' | 'Store 03' | '$$PurchaseOrder019901$$' | 'XL/Green'  |
-			| '200,000'  | '$$PurchaseOrder019901$$' | 'Store 03' | '$$PurchaseOrder019901$$' | '36/Yellow' |
-			| '200,000'  | '$$PurchaseOrder019901$$' | 'Store 03' | '$$PurchaseOrder019901$$' | '38/Yellow' |
-			| '200,000'  | '$$PurchaseOrder019901$$' | 'Store 03' | '$$PurchaseOrder019901$$' | '36/Red'    |
-			| '200,000'  | '$$PurchaseOrder019901$$' | 'Store 03' | '$$PurchaseOrder019901$$' | '38/Black'  |
-			| '200,000'  | '$$PurchaseOrder019901$$' | 'Store 03' | '$$PurchaseOrder019901$$' | '36/18SD'   |
-			| '200,000'  | '$$PurchaseOrder019901$$' | 'Store 03' | '$$PurchaseOrder019901$$' | '37/18SD'   |
-			| '200,000'  | '$$PurchaseOrder019901$$' | 'Store 03' | '$$PurchaseOrder019901$$' | '38/18SD'   |
-			| '200,000'  | '$$PurchaseOrder019901$$' | 'Store 03' | '$$PurchaseOrder019901$$' | '39/18SD'   |
+			| 'Quantity' | 'Recorder'                | 'Order'                   | 'Item key'  |
+			| '200,000'  | '$$PurchaseOrder019901$$' | '$$PurchaseOrder019901$$' | 'S/Yellow'  |
+			| '200,000'  | '$$PurchaseOrder019901$$' | '$$PurchaseOrder019901$$' | 'XS/Blue'   |
+			| '200,000'  | '$$PurchaseOrder019901$$' | '$$PurchaseOrder019901$$' | 'M/White'   |
+			| '200,000'  | '$$PurchaseOrder019901$$' | '$$PurchaseOrder019901$$' | 'XL/Green'  |
+			| '200,000'  | '$$PurchaseOrder019901$$' | '$$PurchaseOrder019901$$' | '36/Yellow' |
+			| '200,000'  | '$$PurchaseOrder019901$$' | '$$PurchaseOrder019901$$' | '38/Yellow' |
+			| '200,000'  | '$$PurchaseOrder019901$$' | '$$PurchaseOrder019901$$' | '36/Red'    |
+			| '200,000'  | '$$PurchaseOrder019901$$' | '$$PurchaseOrder019901$$' | '38/Black'  |
+			| '200,000'  | '$$PurchaseOrder019901$$' | '$$PurchaseOrder019901$$' | '36/18SD'   |
+			| '200,000'  | '$$PurchaseOrder019901$$' | '$$PurchaseOrder019901$$' | '37/18SD'   |
+			| '200,000'  | '$$PurchaseOrder019901$$' | '$$PurchaseOrder019901$$' | '38/18SD'   |
+			| '200,000'  | '$$PurchaseOrder019901$$' | '$$PurchaseOrder019901$$' | '39/18SD'   |
 		And I close all client application windows
 	* Changing the quantity by Item Dress 'S/Yellow' by 250 pcs
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
@@ -814,13 +814,13 @@ Scenario: _019903 add line in Purchase order and chek movements changes
 		And I input "Store 03" text in "Store" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I click the button named "FormPostAndClose"
-	* Check registry entries (Order Balance)
-		Given I open hyperlink "e1cib/list/AccumulationRegister.OrderBalance"
+	* Check registry entries 
+		Given I open hyperlink "e1cib/list/AccumulationRegister.R1010T_PurchaseOrders"
 		And Delay 2
 		And "List" table contains lines
-			| 'Quantity' | 'Recorder'                | 'Store'    | 'Order'                   | 'Item key' |
-			| '100,000'  | '$$PurchaseOrder019901$$' | 'Store 03' | '$$PurchaseOrder019901$$' | '39/18SD'  |
-			| '50,000'   | '$$PurchaseOrder019901$$' | 'Store 03' | '$$PurchaseOrder019901$$' | '39/19SD'  |
+			| 'Quantity' | 'Recorder'                | 'Order'                   | 'Item key' |
+			| '100,000'  | '$$PurchaseOrder019901$$' | '$$PurchaseOrder019901$$' | '39/18SD'  |
+			| '50,000'   | '$$PurchaseOrder019901$$' | '$$PurchaseOrder019901$$' | '39/19SD'  |
 	
 Scenario: _019904 add package in Purchase order and chek movements (conversion to storage unit)
 	* Add package in the order
@@ -860,73 +860,13 @@ Scenario: _019904 add package in Purchase order and chek movements (conversion t
 		And I input "Store 03" text in "Store" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I click the button named "FormPostAndClose"
-	* Check registry entries (Order Balance)
+	* Check registry entries R1010T_PurchaseOrders
 	# Packages are converted into pcs.
-		Given I open hyperlink "e1cib/list/AccumulationRegister.OrderBalance"
+		Given I open hyperlink "e1cib/list/AccumulationRegister.R1010T_PurchaseOrders"
 		And "List" table contains lines
-			| 'Quantity' | 'Recorder'          | 'Line number' | 'Store'    | 'Order'             | 'Item key'  |
-			| '80,000'   | '$$PurchaseOrder019901$$' | '13'          | 'Store 03' | '$$PurchaseOrder019901$$' | '39/19SD'   |
+			| 'Quantity' | 'Recorder'                | 'Line number' | 'Order'             | 'Item key'  |
+			| '80,000'   | '$$PurchaseOrder019901$$' | '13'          | '$$PurchaseOrder019901$$' | '39/19SD'   |
 	
-Scenario: _019905 mark for deletion document Purchase Order and check cancellation of movements
-	* Mark for deletion document Purchase Order
-		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
-		And I go to line in "List" table
-		| 'Number'    |
-		| '$$NumberPurchaseOrder019901$$' |
-		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
-		Then "1C:Enterprise" window is opened
-		And I click "Yes" button
-	* Check registry entries (Order Balance)
-		Given I open hyperlink "e1cib/list/AccumulationRegister.OrderBalance"
-		And "List" table does not contain lines
-			| 'Quantity' | 'Recorder'                | 'Store'    | 'Order'                   | 'Item key'  |
-			| '250,000'  | '$$PurchaseOrder019901$$' | 'Store 03' | '$$PurchaseOrder019901$$' | 'S/Yellow'  |
-			| '200,000'  | '$$PurchaseOrder019901$$' | 'Store 03' | '$$PurchaseOrder019901$$' | 'XS/Blue'   |
-			| '200,000'  | '$$PurchaseOrder019901$$' | 'Store 03' | '$$PurchaseOrder019901$$' | 'M/White'   |
-			| '200,000'  | '$$PurchaseOrder019901$$' | 'Store 03' | '$$PurchaseOrder019901$$' | 'XL/Green'  |
-			| '200,000'  | '$$PurchaseOrder019901$$' | 'Store 03' | '$$PurchaseOrder019901$$' | '36/Yellow' |
-			| '200,000'  | '$$PurchaseOrder019901$$' | 'Store 03' | '$$PurchaseOrder019901$$' | '38/Yellow' |
-			| '200,000'  | '$$PurchaseOrder019901$$' | 'Store 03' | '$$PurchaseOrder019901$$' | '36/Red'    |
-			| '200,000'  | '$$PurchaseOrder019901$$' | 'Store 03' | '$$PurchaseOrder019901$$' | '38/Black'  |
-			| '200,000'  | '$$PurchaseOrder019901$$' | 'Store 03' | '$$PurchaseOrder019901$$' | '36/18SD'   |
-			| '200,000'  | '$$PurchaseOrder019901$$' | 'Store 03' | '$$PurchaseOrder019901$$' | '37/18SD'   |
-			| '200,000'  | '$$PurchaseOrder019901$$' | 'Store 03' | '$$PurchaseOrder019901$$' | '38/18SD'   |
-			| '100,000'  | '$$PurchaseOrder019901$$' | 'Store 03' | '$$PurchaseOrder019901$$' | '39/18SD'   |
-			| '80,000'   | '$$PurchaseOrder019901$$' | 'Store 03' | '$$PurchaseOrder019901$$' | '39/19SD'   |
-
-Scenario: _019906 post a document previously marked for deletion and check of movements
-	* Post a document previously marked for deletion
-		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
-		And I go to line in "List" table
-		| 'Number'    |
-		| '$$NumberPurchaseOrder019901$$' |
-		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
-		Then "1C:Enterprise" window is opened
-		And I click "Yes" button
-		And in the table "List" I click the button named "ListContextMenuPost"
-	* Check registry entries (Order Balance)
-		Given I open hyperlink "e1cib/list/AccumulationRegister.OrderBalance"
-		And "List" table contains lines
-			| 'Quantity' | 'Recorder'                | 'Store'    | 'Order'                   | 'Item key'  |
-			| '250,000'  | '$$PurchaseOrder019901$$' | 'Store 03' | '$$PurchaseOrder019901$$' | 'S/Yellow'  |
-			| '200,000'  | '$$PurchaseOrder019901$$' | 'Store 03' | '$$PurchaseOrder019901$$' | 'XS/Blue'   |
-			| '200,000'  | '$$PurchaseOrder019901$$' | 'Store 03' | '$$PurchaseOrder019901$$' | 'M/White'   |
-			| '200,000'  | '$$PurchaseOrder019901$$' | 'Store 03' | '$$PurchaseOrder019901$$' | 'XL/Green'  |
-			| '200,000'  | '$$PurchaseOrder019901$$' | 'Store 03' | '$$PurchaseOrder019901$$' | '36/Yellow' |
-			| '200,000'  | '$$PurchaseOrder019901$$' | 'Store 03' | '$$PurchaseOrder019901$$' | '38/Yellow' |
-			| '200,000'  | '$$PurchaseOrder019901$$' | 'Store 03' | '$$PurchaseOrder019901$$' | '36/Red'    |
-			| '200,000'  | '$$PurchaseOrder019901$$' | 'Store 03' | '$$PurchaseOrder019901$$' | '38/Black'  |
-			| '200,000'  | '$$PurchaseOrder019901$$' | 'Store 03' | '$$PurchaseOrder019901$$' | '36/18SD'   |
-			| '200,000'  | '$$PurchaseOrder019901$$' | 'Store 03' | '$$PurchaseOrder019901$$' | '37/18SD'   |
-			| '200,000'  | '$$PurchaseOrder019901$$' | 'Store 03' | '$$PurchaseOrder019901$$' | '38/18SD'   |
-			| '100,000'  | '$$PurchaseOrder019901$$' | 'Store 03' | '$$PurchaseOrder019901$$' | '39/18SD'   |
-			| '80,000'   | '$$PurchaseOrder019901$$' | 'Store 03' | '$$PurchaseOrder019901$$' | '39/19SD'   |
-		And I close current window
-
-
-
-
-
 
 
 

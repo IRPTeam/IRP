@@ -306,7 +306,6 @@ Scenario: _017005 check movements by status and status history of a Purchase Ord
 		And I save the value of "Number" field as "$$NumberPurchaseOrder017005$$"
 		And I save the window as "$$PurchaseOrder017005$$"
 		And I save the value of "Date" field as "$$DatePurchaseOrderWait017005$$"
-		And I click the button named "FormPostAndClose"
 		And I close current window
 	* Check the absence of movements Purchase Order N101 by register Order Balance
 		Given I open hyperlink "e1cib/list/AccumulationRegister.OrderBalance"

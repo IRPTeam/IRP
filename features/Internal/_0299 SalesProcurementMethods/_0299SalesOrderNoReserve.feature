@@ -165,25 +165,7 @@ Scenario: _029901 create Sales order without reserve and check its movements (SO
 			| ''                                                  | ''            | ''                         | 'Quantity'  | 'Amount' | 'Net amount' | 'Company'      | 'Order'                | 'Currency' | 'Item key'  | 'Row key' |
 			| ''                                                  | 'Receipt'     | '$$DateSalesOrder029901$$' | '31'        | '12 400' | '10 508,47'  | 'Main Company' | '$$SalesOrder029901$$' | 'TRY'      | '38/Yellow' | '*'       |
 			| ''                                                  | 'Receipt'     | '$$DateSalesOrder029901$$' | '40'        | '14 000' | '11 864,41'  | 'Main Company' | '$$SalesOrder029901$$' | 'TRY'      | '38/Black'  | '*'       |
-	* Check SO movements Register  "Register  "Sales order turnovers")
-		And I select "Sales order turnovers" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| '$$SalesOrder029901$$'              | ''                         | ''          | ''         | ''             | ''                     | ''         | ''          | ''        | ''                             | ''                     |
-			| 'Document registrations records'    | ''                         | ''          | ''         | ''             | ''                     | ''         | ''          | ''        | ''                             | ''                     |
-			| 'Register  "Sales order turnovers"' | ''                         | ''          | ''         | ''             | ''                     | ''         | ''          | ''        | ''                             | ''                     |
-			| ''                                  | 'Period'                   | 'Resources' | ''         | 'Dimensions'   | ''                     | ''         | ''          | ''        | ''                             | 'Attributes'           |
-			| ''                                  | ''                         | 'Quantity'  | 'Amount'   | 'Company'      | 'Sales order'          | 'Currency' | 'Item key'  | 'Row key' | 'Multi currency movement type' | 'Deferred calculation' |
-			| ''                                  | '$$DateSalesOrder029901$$' | '31'        | '2 122,88' | 'Main Company' | '$$SalesOrder029901$$' | 'USD'      | '38/Yellow' | '*'       | 'Reporting currency'           | 'No'                   |
-			| ''                                  | '$$DateSalesOrder029901$$' | '31'        | '12 400'   | 'Main Company' | '$$SalesOrder029901$$' | 'TRY'      | '38/Yellow' | '*'       | 'Local currency'               | 'No'                   |
-			| ''                                  | '$$DateSalesOrder029901$$' | '31'        | '12 400'   | 'Main Company' | '$$SalesOrder029901$$' | 'TRY'      | '38/Yellow' | '*'       | 'TRY'                          | 'No'                   |
-			| ''                                  | '$$DateSalesOrder029901$$' | '31'        | '12 400'   | 'Main Company' | '$$SalesOrder029901$$' | 'TRY'      | '38/Yellow' | '*'       | 'en description is empty'      | 'No'                   |
-			| ''                                  | '$$DateSalesOrder029901$$' | '40'        | '2 396,8'  | 'Main Company' | '$$SalesOrder029901$$' | 'USD'      | '38/Black'  | '*'       | 'Reporting currency'           | 'No'                   |
-			| ''                                  | '$$DateSalesOrder029901$$' | '40'        | '14 000'   | 'Main Company' | '$$SalesOrder029901$$' | 'TRY'      | '38/Black'  | '*'       | 'Local currency'               | 'No'                   |
-			| ''                                  | '$$DateSalesOrder029901$$' | '40'        | '14 000'   | 'Main Company' | '$$SalesOrder029901$$' | 'TRY'      | '38/Black'  | '*'       | 'TRY'                          | 'No'                   |
-			| ''                                  | '$$DateSalesOrder029901$$' | '40'        | '14 000'   | 'Main Company' | '$$SalesOrder029901$$' | 'TRY'      | '38/Black'  | '*'       | 'en description is empty'      | 'No'                   |
 	
-
 	And I close all client application windows
 
 Scenario: _029902 create SI for SO without reserve and check its movements (SO-SI)
@@ -488,24 +470,6 @@ Scenario: _029903 create Sales order without reserve and check its movements (SO
 			| ''                                                  | ''            | ''                         | 'Quantity'  | 'Amount' | 'Net amount' | 'Company'      | 'Order'                | 'Currency' | 'Item key'  | 'Row key' |
 			| ''                                                  | 'Receipt'     | '$$DateSalesOrder029903$$' | '31'        | '12 400' | '10 508,47'  | 'Main Company' | '$$SalesOrder029903$$' | 'TRY'      | '38/Yellow' | '*'       |
 			| ''                                                  | 'Receipt'     | '$$DateSalesOrder029903$$' | '40'        | '14 000' | '11 864,41'  | 'Main Company' | '$$SalesOrder029903$$' | 'TRY'      | '38/Black'  | '*'       |
-	* Check SO movements Register  "Register  "Sales order turnovers")
-		And I select "Sales order turnovers" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| '$$SalesOrder029903$$'              | ''                         | ''          | ''         | ''             | ''                     | ''         | ''          | ''        | ''                             | ''                     |
-			| 'Document registrations records'    | ''                         | ''          | ''         | ''             | ''                     | ''         | ''          | ''        | ''                             | ''                     |
-			| 'Register  "Sales order turnovers"' | ''                         | ''          | ''         | ''             | ''                     | ''         | ''          | ''        | ''                             | ''                     |
-			| ''                                  | 'Period'                   | 'Resources' | ''         | 'Dimensions'   | ''                     | ''         | ''          | ''        | ''                             | 'Attributes'           |
-			| ''                                  | ''                         | 'Quantity'  | 'Amount'   | 'Company'      | 'Sales order'          | 'Currency' | 'Item key'  | 'Row key' | 'Multi currency movement type' | 'Deferred calculation' |
-			| ''                                  | '$$DateSalesOrder029903$$' | '31'        | '2 122,88' | 'Main Company' | '$$SalesOrder029903$$' | 'USD'      | '38/Yellow' | '*'       | 'Reporting currency'           | 'No'                   |
-			| ''                                  | '$$DateSalesOrder029903$$' | '31'        | '12 400'   | 'Main Company' | '$$SalesOrder029903$$' | 'TRY'      | '38/Yellow' | '*'       | 'Local currency'               | 'No'                   |
-			| ''                                  | '$$DateSalesOrder029903$$' | '31'        | '12 400'   | 'Main Company' | '$$SalesOrder029903$$' | 'TRY'      | '38/Yellow' | '*'       | 'TRY'                          | 'No'                   |
-			| ''                                  | '$$DateSalesOrder029903$$' | '31'        | '12 400'   | 'Main Company' | '$$SalesOrder029903$$' | 'TRY'      | '38/Yellow' | '*'       | 'en description is empty'      | 'No'                   |
-			| ''                                  | '$$DateSalesOrder029903$$' | '40'        | '2 396,8'  | 'Main Company' | '$$SalesOrder029903$$' | 'USD'      | '38/Black'  | '*'       | 'Reporting currency'           | 'No'                   |
-			| ''                                  | '$$DateSalesOrder029903$$' | '40'        | '14 000'   | 'Main Company' | '$$SalesOrder029903$$' | 'TRY'      | '38/Black'  | '*'       | 'Local currency'               | 'No'                   |
-			| ''                                  | '$$DateSalesOrder029903$$' | '40'        | '14 000'   | 'Main Company' | '$$SalesOrder029903$$' | 'TRY'      | '38/Black'  | '*'       | 'TRY'                          | 'No'                   |
-			| ''                                  | '$$DateSalesOrder029903$$' | '40'        | '14 000'   | 'Main Company' | '$$SalesOrder029903$$' | 'TRY'      | '38/Black'  | '*'       | 'en description is empty'      | 'No'                   |
-	
 	
 		And I close all client application windows		
 

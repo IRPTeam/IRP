@@ -184,7 +184,13 @@ Scenario: _029103 create a Purchase order for service
 		And I delete "$$PurchaseOrder029103$$" variable
 		And I save the value of "Number" field as "$$NumberPurchaseOrder029103$$"
 		And I save the window as "$$PurchaseOrder029103$$"
-		And I click the button named "FormPost"
+		And I click the button named "FormPostAndClose"
+		* Check creation
+			Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
+			And "List" table contains lines
+				| 'Number' |
+				| '$$NumberPurchaseOrder029103$$'      |
+		And I close all client application windows
 
 
 Scenario: _029104 create a Purchase invoice for service 
@@ -204,8 +210,9 @@ Scenario: _029104 create a Purchase invoice for service
 	And I delete "$$PurchaseInvoice029104$$" variable
 	And I save the value of "Number" field as "$$NumberPurchaseInvoice029104$$"
 	And I save the window as "$$PurchaseInvoice029104$$"
-	And I click the button named "FormPost"
+	And I click the button named "FormPostAndClose"
 	* Check creation
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		And "List" table contains lines
 			| 'Number' |
 			| '$$NumberPurchaseInvoice029104$$'      |

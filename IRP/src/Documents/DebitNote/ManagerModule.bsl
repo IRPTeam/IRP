@@ -117,30 +117,28 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Tables.RevenuesTurnovers         = QueryResults[3].Unload();
 	Tables.AdvanceFromCustomers_Lock = QueryResults[4].Unload();
 	
+#Region NewRegistersPosting	
+	QueryArray = GetQueryTextsSecondaryTables();
+	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
+#EndRegion	
+
 	Return Tables;
 EndFunction
 
 Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	DocumentDataTables = Parameters.DocumentDataTables;
 	DataMapWithLockFields = New Map();
-	
-	// PartnerApTransactions
-	PartnerApTransactions = AccumulationRegisters.PartnerApTransactions.GetLockFields(DocumentDataTables.PartnerApTransactions);
-	DataMapWithLockFields.Insert(PartnerApTransactions.RegisterName, PartnerApTransactions.LockInfo);
-	
-	// PartnerArTransactions
-	PartnerArTransactions = AccumulationRegisters.PartnerArTransactions.GetLockFields(DocumentDataTables.PartnerArTransactions);
-	DataMapWithLockFields.Insert(PartnerArTransactions.RegisterName, PartnerArTransactions.LockInfo);
-	
-	// RevenuesTurnovers
-	RevenuesTurnovers = AccumulationRegisters.RevenuesTurnovers.GetLockFields(DocumentDataTables.RevenuesTurnovers);
-	DataMapWithLockFields.Insert(RevenuesTurnovers.RegisterName, RevenuesTurnovers.LockInfo);
-	
-	
 	Return DataMapWithLockFields;
 EndFunction
 
 Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
+
+#Region NewRegistersPosting
+	Tables = Parameters.DocumentDataTables;	
+	QueryArray = GetQueryTextsMasterTables();
+	PostingServer.SetRegisters(Tables, Ref);
+	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
+#EndRegion
+	
 	// Advance from customers
 	Parameters.DocumentDataTables.PartnerArTransactions_OffsetOfAdvance =
 		AccumulationRegisters.AdvanceFromCustomers.GetTableAdvanceFromCustomers_OffsetOfAdvance(Parameters.Object.RegisterRecords
@@ -280,7 +278,11 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 		New Structure("RecordType, RecordSet",
 			AccumulationRecordType.Expense,
 			Parameters.DocumentDataTables.PartnerArTransactions_OffsetOfAdvance));
-	
+
+#Region NewRegistersPosting	
+	PostingServer.SetPostingDataTables(PostingDataTables, Parameters);
+#EndRegion
+
 	Return PostingDataTables;
 EndFunction
 
@@ -327,14 +329,39 @@ EndFunction
 
 Function GetQueryTextsSecondaryTables()
 	QueryArray = New Array;
-
+	QueryArray.Add(Transactions());
 	Return QueryArray;
 EndFunction
 
 Function GetQueryTextsMasterTables()
 	QueryArray = New Array;
-
+	QueryArray.Add(R5010B_ReconciliationStatement());
 	Return QueryArray;
+EndFunction
+
+Function Transactions()
+	Return
+	"SELECT
+	|	DebitNoteTransactions.Ref.Date AS Period,
+	|	DebitNoteTransactions.Ref.Company AS Company,
+	|	DebitNoteTransactions.LegalName,
+	|	DebitNoteTransactions.Currency,
+	|	DebitNoteTransactions.Amount
+	|INTO Transactions
+	|FROM
+	|	Document.DebitNote.Transactions AS DebitNoteTransactions
+	|WHERE
+	|	DebitNoteTransactions.Ref = &Ref";	
+EndFunction
+
+Function R5010B_ReconciliationStatement()
+	Return
+	"SELECT
+	|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+	|	*
+	|INTO R5010B_ReconciliationStatement
+	|FROM
+	|	Transactions";	
 EndFunction
 
 #EndRegion

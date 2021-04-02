@@ -297,29 +297,6 @@ Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	DocumentDataTables = Parameters.DocumentDataTables;
 	DataMapWithLockFields = New Map();
 	
-	// PartnerApTransactions
-	PartnerApTransactions = 
-	AccumulationRegisters.PartnerApTransactions.GetLockFields(DocumentDataTables.PartnerApTransactions);
-	DataMapWithLockFields.Insert(PartnerApTransactions.RegisterName, PartnerApTransactions.LockInfo);
-	
-	// AccountBalance
-	AccountBalance = AccumulationRegisters.AccountBalance.GetLockFields(DocumentDataTables.AccountBalance_Expense);
-	DataMapWithLockFields.Insert(AccountBalance.RegisterName, AccountBalance.LockInfo);
-	
-	// PlaningCashTransactions
-	PlaningCashTransactions = 
-	AccumulationRegisters.PlaningCashTransactions.GetLockFields(DocumentDataTables.PlaningCashTransactions);
-	DataMapWithLockFields.Insert(PlaningCashTransactions.RegisterName, PlaningCashTransactions.LockInfo);
-	
-	// CashInTransit
-	CashInTransit = AccumulationRegisters.CashInTransit.GetLockFields(DocumentDataTables.CashInTransit);
-	DataMapWithLockFields.Insert(CashInTransit.RegisterName, CashInTransit.LockInfo);
-	
-	// AdvanceToSuppliers
-	AdvanceToSuppliers = AccumulationRegisters.AdvanceToSuppliers.GetLockFields(DocumentDataTables.AdvanceToSuppliers);
-	DataMapWithLockFields.Insert(AdvanceToSuppliers.RegisterName, AdvanceToSuppliers.LockInfo);
-	
-	
 #Region NewRegistersPosting
 	PostingServer.SetLockDataSource(DataMapWithLockFields, 
 		AccumulationRegisters.R1021B_VendorsTransactions, 

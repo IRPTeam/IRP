@@ -31,7 +31,12 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Tables.CashInTransit = QueryResults[4].Unload();
 	Tables.AdvanceToSuppliers = QueryResults[5].Unload();
 	Tables.CashAdvance = QueryResults[6].Unload();
-	
+
+#Region NewRegistersPosting	
+	QueryArray = GetQueryTextsSecondaryTables();
+	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
+#EndRegion	
+
 	Return Tables;
 EndFunction
 
@@ -298,41 +303,19 @@ Function GetQueryTextQueryTable()
 EndFunction
 
 Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	DocumentDataTables = Parameters.DocumentDataTables;
 	DataMapWithLockFields = New Map();
-	
-	// PartnerApTransactions
-	PartnerApTransactions = 
-	AccumulationRegisters.PartnerApTransactions.GetLockFields(DocumentDataTables.PartnerApTransactions);
-	DataMapWithLockFields.Insert(PartnerApTransactions.RegisterName, PartnerApTransactions.LockInfo);
-	
-	// AccountBalance
-	AccountBalance = AccumulationRegisters.AccountBalance.GetLockFields(DocumentDataTables.AccountBalance);
-	DataMapWithLockFields.Insert(AccountBalance.RegisterName, AccountBalance.LockInfo);
-	
-	// PlaningCashTransactions
-	PlaningCashTransactions = 
-	AccumulationRegisters.PlaningCashTransactions.GetLockFields(DocumentDataTables.PlaningCashTransactions);
-	DataMapWithLockFields.Insert(PlaningCashTransactions.RegisterName, PlaningCashTransactions.LockInfo);
-	
-	// CashInTransit
-	CashInTransit = AccumulationRegisters.CashInTransit.GetLockFields(DocumentDataTables.CashInTransit);
-	DataMapWithLockFields.Insert(CashInTransit.RegisterName, CashInTransit.LockInfo);
-	
-	// AdvanceToSuppliers
-	AdvanceToSuppliers = AccumulationRegisters.AdvanceToSuppliers.GetLockFields(DocumentDataTables.AdvanceToSuppliers);
-	DataMapWithLockFields.Insert(AdvanceToSuppliers.RegisterName, AdvanceToSuppliers.LockInfo);
-	
-	
-	// CashAdvance
-	CashAdvance = 
-	AccumulationRegisters.CashAdvance.GetLockFields(DocumentDataTables.CashAdvance);
-	DataMapWithLockFields.Insert(CashAdvance.RegisterName, CashAdvance.LockInfo);
-	
 	Return DataMapWithLockFields;
 EndFunction
 
 Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
+	
+#Region NewRegistersPosting
+	Tables = Parameters.DocumentDataTables;	
+	QueryArray = GetQueryTextsMasterTables();
+	PostingServer.SetRegisters(Tables, Ref);
+	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
+#EndRegion
+	
 	// Advance to suppliers
 	Parameters.DocumentDataTables.PartnerApTransactions_OffsetOfAdvance =
 	AccumulationRegisters.PartnerApTransactions.GetTablePartnerApTransactions_OffsetOfAdvance(
@@ -495,6 +478,10 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 			AccumulationRecordType.Receipt,
 			Parameters.DocumentDataTables.CashAdvance));
 	
+#Region NewRegistersPosting	
+	PostingServer.SetPostingDataTables(PostingDataTables, Parameters);
+#EndRegion
+	
 	Return PostingDataTables;
 EndFunction
 
@@ -595,14 +582,39 @@ EndFunction
 
 Function GetQueryTextsSecondaryTables()
 	QueryArray = New Array;
-
+	QueryArray.Add(PaymentList());
 	Return QueryArray;
 EndFunction
 
 Function GetQueryTextsMasterTables()
 	QueryArray = New Array;
-
+	QueryArray.Add(R5010B_ReconciliationStatement());
 	Return QueryArray;
+EndFunction
+
+Function PaymentList()
+	Return
+	"SELECT
+	|	PaymentList.Ref.Date AS Period,
+	|	PaymentList.Ref.Company AS Company,
+	|	PaymentList.Payee AS LegalName,
+	|	PaymentList.Ref.Currency AS Currency,
+	|	PaymentList.Amount
+	|INTO PaymentList
+	|FROM
+	|	Document.CashPayment.PaymentList AS PaymentList
+	|WHERE
+	|	PaymentList.Ref = &Ref";	
+EndFunction
+
+Function R5010B_ReconciliationStatement()
+	Return
+	"SELECT
+	|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+	|	*
+	|INTO R5010B_ReconciliationStatement
+	|FROM
+	|	PaymentList";	
 EndFunction
 
 #EndRegion

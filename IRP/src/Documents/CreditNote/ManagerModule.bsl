@@ -118,30 +118,28 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Tables.PartnerArTransactions       = QueryResults[3].Unload();
 	Tables.PartnerArTransactions_Aging = QueryResults[4].Unload();
 	
+#Region NewRegistersPosting	
+	QueryArray = GetQueryTextsSecondaryTables();
+	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
+#EndRegion	
+	
 	Return Tables;
 EndFunction
 
 Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	DocumentDataTables = Parameters.DocumentDataTables;
 	DataMapWithLockFields = New Map();
-	
-	// PartnerApTransactions
-	PartnerApTransactions = AccumulationRegisters.PartnerApTransactions.GetLockFields(DocumentDataTables.PartnerApTransactions);
-	DataMapWithLockFields.Insert(PartnerApTransactions.RegisterName, PartnerApTransactions.LockInfo);
-	
-	// PartnerArTransactions
-	PartnerArTransactions = AccumulationRegisters.PartnerArTransactions.GetLockFields(DocumentDataTables.PartnerArTransactions);
-	DataMapWithLockFields.Insert(PartnerArTransactions.RegisterName, PartnerArTransactions.LockInfo);
-	
-	// ExpensesTurnovers
-	ExpensesTurnovers = AccumulationRegisters.ExpensesTurnovers.GetLockFields(DocumentDataTables.ExpensesTurnovers);
-	DataMapWithLockFields.Insert(ExpensesTurnovers.RegisterName, ExpensesTurnovers.LockInfo);
-	
-	
 	Return DataMapWithLockFields;
 EndFunction
 
 Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
+
+#Region NewRegistersPosting
+	Tables = Parameters.DocumentDataTables;	
+	QueryArray = GetQueryTextsMasterTables();
+	PostingServer.SetRegisters(Tables, Ref);
+	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
+#EndRegion
+
 	// Aging expense
 	Parameters.DocumentDataTables.Aging_Expense = 
 		AccumulationRegisters.Aging.GetTableAging_Expense_OnMoneyReceipt(
@@ -211,7 +209,11 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 		New Structure("RecordType, RecordSet",
 			AccumulationRecordType.Expense,
 			Parameters.DocumentDataTables.Aging_Expense));
-	
+
+#Region NewRegistersPosting	
+	PostingServer.SetPostingDataTables(PostingDataTables, Parameters);
+#EndRegion
+
 	Return PostingDataTables;
 EndFunction
 
@@ -258,14 +260,39 @@ EndFunction
 
 Function GetQueryTextsSecondaryTables()
 	QueryArray = New Array;
-
+	QueryArray.Add(Transactions());
 	Return QueryArray;
 EndFunction
 
 Function GetQueryTextsMasterTables()
 	QueryArray = New Array;
-
+	QueryArray.Add(R5010B_ReconciliationStatement());
 	Return QueryArray;
+EndFunction
+
+Function Transactions()
+	Return
+	"SELECT
+	|	CreditNoteTransactions.Ref.Date AS Period,
+	|	CreditNoteTransactions.Ref.Company AS Company,
+	|	CreditNoteTransactions.LegalName,
+	|	CreditNoteTransactions.Currency,
+	|	CreditNoteTransactions.Amount
+	|INTO Transactions
+	|FROM
+	|	Document.CreditNote.Transactions AS CreditNoteTransactions
+	|WHERE
+	|	CreditNoteTransactions.Ref = &Ref";	
+EndFunction
+
+Function R5010B_ReconciliationStatement()
+	Return
+	"SELECT
+	|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+	|	*
+	|INTO R5010B_ReconciliationStatement
+	|FROM
+	|	Transactions";	
 EndFunction
 
 #EndRegion

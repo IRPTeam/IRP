@@ -151,6 +151,7 @@ Scenario: _028901 create document Goods Receipt based on Purchase invoice (with 
 			| '4' | '*'   | 'Purchase invoice 102 dated 03.03.2021 09:25:04' | 'e3824d62-3c37-47e7-8d3e-81f29986e69f' | ''          | '2,000'  | 'e3824d62-3c37-47e7-8d3e-81f29986e69f' | 'GR'           | 'e3824d62-3c37-47e7-8d3e-81f29986e69f' |
 		Then the number of "RowIDInfo" table lines is "равно" "4"
 		And I close all client application windows
+	
 
 
 Scenario: _028902 create document Goods Receipt based on Purchase order (with PI, PI>PO)
@@ -190,6 +191,12 @@ Scenario: _028902 create document Goods Receipt based on Purchase order (with PI
 		And I save the value of "Number" field as "$$NumberGoodsReceipt028901$$"
 		And I save the window as "$$GoodsReceipt028901$$"
 		And I click the button named "FormPostAndClose"
+		And I close all client application windows
+	* Check creation
+		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
+		And "List" table contains lines
+			| 'Number'                |
+			| '$$NumberGoodsReceipt028901$$' |
 		And I close all client application windows
 
 Scenario: _028905 create document Goods Receipt based on Inventory transfer

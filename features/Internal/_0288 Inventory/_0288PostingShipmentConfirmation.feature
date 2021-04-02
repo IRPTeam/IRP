@@ -220,6 +220,12 @@ Scenario: _028801 create document Shipment confirmation based on SI (with SO)
 	And I save the window as "$$ShipmentConfirmation0028801$$"
 	And I click the button named "FormPostAndClose"
 	And I close current window
+	* Check creation
+		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
+		And "List" table contains lines
+			| 'Number'                |
+			| '$$NumberShipmentConfirmation028801$$' |
+		And I close all client application windows
 	
 
 Scenario: _028804 create document Shipment confirmation based on SI (without SO)
@@ -244,6 +250,12 @@ Scenario: _028804 create document Shipment confirmation based on SI (without SO)
 	And I save the window as "$$ShipmentConfirmation0028804$$"
 	And I click the button named "FormPostAndClose"
 	And I close current window
+	* Check creation
+		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
+		And "List" table contains lines
+			| 'Number'                |
+			| '$$NumberShipmentConfirmation028804$$' |
+		And I close all client application windows
 
 Scenario: _028805 create document Shipment confirmation based on 2 SO
 	* Select SO
@@ -414,6 +426,12 @@ Scenario: _028810 create document Shipment confirmation based on Inventory trans
 		And I save the value of "Number" field as "$$NumberShipmentConfirmation028810$$"
 		And I save the window as "$$ShipmentConfirmation0028810$$"
 		And I click the button named "FormPostAndClose"
+	* Check creation
+		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
+		And "List" table contains lines
+			| 'Number'                |
+			| '$$NumberShipmentConfirmation028810$$' |
+		And I close all client application windows
 	
 
 Scenario: _028815 create document Shipment confirmation based on Purchase return
@@ -507,6 +525,12 @@ Scenario: _028815 create document Shipment confirmation based on Purchase return
 		And I save the value of "Number" field as "$$NumberShipmentConfirmation028810$$"
 		And I save the window as "$$ShipmentConfirmation0028810$$"
 		And I click the button named "FormPostAndClose"
+	* Check creation
+		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
+		And "List" table contains lines
+			| 'Number'                |
+			| '$$NumberShipmentConfirmation028810$$' |
+		And I close all client application windows
 
 Scenario: _028830 check link/unlink form in the SC
 	* Open form for create SC

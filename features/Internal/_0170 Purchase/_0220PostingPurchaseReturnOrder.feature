@@ -152,6 +152,12 @@ Scenario: _022001 create document Purchase return order, store use Shipment conf
 			| '$$PurchaseReturnOrder022001$$' | 'Approved' |
 		And I close current window
 		And I click the button named "FormPostAndClose"
+	* Check creation
+		Given I open hyperlink "e1cib/list/Document.PurchaseReturnOrder"
+		And "List" table contains lines
+			| 'Number'  |
+			| '$$NumberPurchaseReturnOrder022001$$' |
+		And I close all client application windows
 
 
 
@@ -255,6 +261,12 @@ Scenario: _022009 create Purchase return order without bases document
 		And I save the value of "Number" field as "$$NumberPurchaseReturnOrder022009$$"
 		And I save the window as "$$PurchaseReturnOrder022009$$"
 		And I click the button named "FormPostAndClose"
+	* Check creation
+		Given I open hyperlink "e1cib/list/Document.PurchaseReturnOrder"
+		And "List" table contains lines
+			| 'Number'  |
+			| '$$NumberPurchaseReturnOrder022009$$' |
+		And I close all client application windows
 
 Scenario: _022010 check filling in Row Id info table in the PRO
 	* Select PRO

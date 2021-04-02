@@ -241,6 +241,13 @@ Scenario: _028009 create Sales return order without bases document
 		And I save the value of "Number" field as "$$NumberSalesReturnOrder028009$$"
 		And I save the window as "$$SalesReturnOrder028009$$"
 		And I click the button named "FormPostAndClose"
+	* Check creation
+		Given I open hyperlink "e1cib/list/Document.SalesReturnOrder"
+		And "List" table contains lines
+			| 'Number'                |
+			| '$$NumberSalesReturnOrder028009$$' |
+		And I close all client application windows
+		
 
 Scenario: _028010 check filling in Row Id info table in the SRO
 	* Select SRO

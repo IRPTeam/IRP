@@ -116,6 +116,12 @@ Scenario: _0242001 create planned receipt reservation
 		And I delete "$$PlannedReceiptReservation0242001$$" variable
 		And I save the value of "Number" field as "$$NumberPlannedReceiptReservation0242001$$"
 		And I save the window as "$$PlannedReceiptReservation0242001$$"
+	* Check creation
+		Given I open hyperlink "e1cib/list/Document.PlannedReceiptReservation"
+		And "List" table contains lines
+			| 'Number'                |
+			| '$$NumberPlannedReceiptReservation0242001$$' |
+		And I close all client application windows
 				
 
 				

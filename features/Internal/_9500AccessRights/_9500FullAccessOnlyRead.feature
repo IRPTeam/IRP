@@ -450,7 +450,7 @@ Scenario: 950013 check role Full access only read (Items and item key)
 		And I select current line in "List" table
 		If the warning is displayed then 
 			Then I raise "Failed to open" exception			
-		And I close all client application windows	
+	
 
 Scenario: 950014 check role Full access only read (Item units)
 		And I close all client application windows

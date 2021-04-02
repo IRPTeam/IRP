@@ -864,8 +864,8 @@ Scenario: _019904 add package in Purchase order and chek movements (conversion t
 	# Packages are converted into pcs.
 		Given I open hyperlink "e1cib/list/AccumulationRegister.R1010T_PurchaseOrders"
 		And "List" table contains lines
-			| 'Quantity' | 'Recorder'                | 'Line number' | 'Order'             | 'Item key'  |
-			| '80,000'   | '$$PurchaseOrder019901$$' | '13'          | '$$PurchaseOrder019901$$' | '39/19SD'   |
+			| 'Quantity' | 'Recorder'                | 'Order'                   | 'Item key'  |
+			| '80,000'   | '$$PurchaseOrder019901$$' | '$$PurchaseOrder019901$$' | '39/19SD'   |
 	
 
 

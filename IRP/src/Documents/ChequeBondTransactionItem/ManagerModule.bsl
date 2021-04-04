@@ -7,7 +7,6 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	
 	Tables.Insert("AdvanceFromCustomers", PostingServer.CreateTable(AccReg.AdvanceFromCustomers));
 	Tables.Insert("AdvanceToSuppliers", PostingServer.CreateTable(AccReg.AdvanceToSuppliers));
-	Tables.Insert("ReconciliationStatement", PostingServer.CreateTable(AccReg.ReconciliationStatement));
 	Tables.Insert("AccountBalance", PostingServer.CreateTable(AccReg.AccountBalance));
 	Tables.Insert("PartnerArTransactions", PostingServer.CreateTable(AccReg.PartnerArTransactions));
 	Tables.Insert("PartnerApTransactions", PostingServer.CreateTable(AccReg.PartnerApTransactions));
@@ -16,8 +15,6 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	
 	Tables.Insert("AdvanceFromCustomers_IncomingCheque", PostingServer.CreateTable(AccReg.AdvanceFromCustomers));
 	Tables.Insert("AdvanceToSuppliers_OutgoingCheque", PostingServer.CreateTable(AccReg.AdvanceToSuppliers));
-	Tables.Insert("ReconciliationStatement_IncomingCheque", PostingServer.CreateTable(AccReg.ReconciliationStatement));
-	Tables.Insert("ReconciliationStatement_OutgoingCheque", PostingServer.CreateTable(AccReg.ReconciliationStatement));
 	Tables.Insert("AccountBalance_IncomingCheque", PostingServer.CreateTable(AccReg.AccountBalance));
 	Tables.Insert("AccountBalance_OutgoingCheque", PostingServer.CreateTable(AccReg.AccountBalance));
 	Tables.Insert("PartnerArTransactions_IncomingCheque", PostingServer.CreateTable(AccReg.PartnerArTransactions));
@@ -29,8 +26,6 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	
 	Tables.Insert("AdvanceFromCustomers_Correction_IncomingCheque", PostingServer.CreateTable(AccReg.AdvanceFromCustomers));
 	Tables.Insert("AdvanceToSuppliers_Correction_OutgoingCheque", PostingServer.CreateTable(AccReg.AdvanceToSuppliers));
-	Tables.Insert("ReconciliationStatement_Correction_IncomingCheque", PostingServer.CreateTable(AccReg.ReconciliationStatement));
-	Tables.Insert("ReconciliationStatement_Correction_OutgoingCheque", PostingServer.CreateTable(AccReg.ReconciliationStatement));
 	Tables.Insert("AccountBalance_Correction_IncomingCheque", PostingServer.CreateTable(AccReg.AccountBalance));
 	Tables.Insert("AccountBalance_Correction_OutgoingCheque", PostingServer.CreateTable(AccReg.AccountBalance));
 	Tables.Insert("PartnerArTransactions_Correction_IncomingCheque", PostingServer.CreateTable(AccReg.PartnerArTransactions));
@@ -43,8 +38,6 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	
 	Tables.Insert("AdvanceFromCustomers_Reversal_IncomingCheque", PostingServer.CreateTable(AccReg.AdvanceFromCustomers));
 	Tables.Insert("AdvanceToSuppliers_Reversal_OutgoingCheque", PostingServer.CreateTable(AccReg.AdvanceToSuppliers));
-	Tables.Insert("ReconciliationStatement_Reversal_IncomingCheque", PostingServer.CreateTable(AccReg.ReconciliationStatement));
-	Tables.Insert("ReconciliationStatement_Reversal_OutgoingCheque", PostingServer.CreateTable(AccReg.ReconciliationStatement));
 	Tables.Insert("AccountBalance_Reversal_IncomingCheque", PostingServer.CreateTable(AccReg.AccountBalance));
 	Tables.Insert("AccountBalance_Reversal_OutgoingCheque", PostingServer.CreateTable(AccReg.AccountBalance));
 	Tables.Insert("PartnerArTransactions_Reversal_IncomingCheque", PostingServer.CreateTable(AccReg.PartnerArTransactions));
@@ -297,43 +290,8 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	MAX(tmp.Amount) - SUM(ISNULL(tmp_paymentlist.Amount, 0)) <> 0
 		|;
 		|
-		|//[4] ReconciliationStatement_IncomingCheque //////////////////////////////////////////////////////////////////////////////
-		|SELECT
-		|	tmp.Company,
-		|	tmp.LegalName,
-		|	tmp.Currency,
-		|	tmp.Period AS Period,
-		|	SUM(tmp.Amount) AS Amount
-		|FROM
-		|	tmp AS tmp
-		|WHERE
-		|	tmp.IncomingCheque
-		|GROUP BY
-		|	tmp.Company,
-		|	tmp.LegalName,
-		|	tmp.Currency,
-		|	tmp.Period
-		|;
-		|//////////////////////////////////////////////////////
-		|//[5] ReconciliationStatement_OutgoingCheque
-		|SELECT
-		|	tmp.Company,
-		|	tmp.LegalName,
-		|	tmp.Currency,
-		|	tmp.Period AS Period,
-		|	SUM(tmp.Amount) AS Amount
-		|FROM
-		|	tmp AS tmp
-		|WHERE
-		|	tmp.OutgoingCheque
-		|GROUP BY
-		|	tmp.Company,
-		|	tmp.LegalName,
-		|	tmp.Currency,
-		|	tmp.Period	
-		|;
 		|
-		|//[6] AccountBalance_IncomingCheque//////////////////////////////////////////////////////////////////////////////
+		|//[4] AccountBalance_IncomingCheque//////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company,
 		|	tmp.Account,
@@ -352,7 +310,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|;
 		|
 		|//////////////////////////////////////////////////////
-		|//[7] AccountBalance_OutgoingCheque
+		|//[5] AccountBalance_OutgoingCheque
 		|SELECT
 		|	tmp.Company,
 		|	tmp.Account,
@@ -369,7 +327,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	tmp.Currency,
 		|	tmp.Period
 		|;
-		|//[8] PartnerArTransactions_IncomingCheque//////////////////////////////////////////////////////////////////////////////
+		|//[6] PartnerArTransactions_IncomingCheque//////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company,
 		|	tmp_paymentlist.PartnerArBasisDocument AS BasisDocument,
@@ -395,7 +353,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|HAVING CASE WHEN NOT tmp.IsAdvance THEN SUM(tmp.Amount) ELSE SUM(tmp_paymentlist.Amount) END <> 0
 		|;
 		|/////////////////////////////////////////////////////////////////////////////////////////
-		|//[9] PartnerApTransactions_OutgoingCheque
+		|//[7] PartnerApTransactions_OutgoingCheque
 		|SELECT
 		|	tmp.Company,
 		|	tmp_paymentlist.PartnerApBasisDocument AS BasisDocument,
@@ -421,7 +379,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|HAVING CASE WHEN NOT tmp.IsAdvance THEN SUM(tmp.Amount) ELSE SUM(tmp_paymentlist.Amount) END <> 0
 		|;	
 		|
-		|//[10] AdvanceFromCustomers_Correction_IncomingCheque //////////////////////////////////////////////////////////////////////////////
+		|//[8] AdvanceFromCustomers_Correction_IncomingCheque //////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company,
 		|	tmp.Partner,
@@ -445,7 +403,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	tmp.Period
 		|;
 		|//////////////////////////////////////////////////////////////////////////
-		|//[11] AdvanceToSuppliers_Correction_OutgoingCheque
+		|//[9] AdvanceToSuppliers_Correction_OutgoingCheque
 		|SELECT
 		|	tmp.Company,
 		|	tmp.Partner,
@@ -470,44 +428,9 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|;	
 		|
 		|
-		|//[12] ReconciliationStatement_Correction_IncomingCheque//////////////////////////////////////////////////////////////////////////////
-		|SELECT
-		|	tmp.Company,
-		|	tmp.LegalName,
-		|	tmp.Currency,
-		|	tmp.Period AS Period,
-		|	-SUM(tmp.Amount) AS Amount
-		|FROM
-		|	tmp AS tmp
-		|WHERE
-		|	tmp.IncomingCheque
-		|GROUP BY
-		|	tmp.Company,
-		|	tmp.LegalName,
-		|	tmp.Currency,
-		|	tmp.Period
-		|;
-		|////////////////////////////////////////////////////////////////////////////////
-		|//[13] ReconciliationStatement_Correction_OutgoingCheque
-		|SELECT
-		|	tmp.Company,
-		|	tmp.LegalName,
-		|	tmp.Currency,
-		|	tmp.Period AS Period,
-		|	-SUM(tmp.Amount) AS Amount
-		|FROM
-		|	tmp AS tmp
-		|WHERE
-		|	tmp.OutgoingCheque
-		|GROUP BY
-		|	tmp.Company,
-		|	tmp.LegalName,
-		|	tmp.Currency,
-		|	tmp.Period
-		|;
 		|
 		|
-		|//[14] AccountBalance_Correction_IncomingCheque//////////////////////////////////////////////////////////////////////////////
+		|//[12] AccountBalance_Correction_IncomingCheque//////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company,
 		|	tmp.Account,
@@ -525,7 +448,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	tmp.Period
 		|;
 		|///////////////////////////////////////////////////////////////////
-		|//[15] AccountBalance_Correction_OutgoingCheque
+		|//[13] AccountBalance_Correction_OutgoingCheque
 		|SELECT
 		|	tmp.Company,
 		|	tmp.Account,
@@ -543,7 +466,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	tmp.Period
 		|;
 		|
-		|//[16] PartnerArTransactions_Correction_IncomingCheque//////////////////////////////////////////////////////////////////////////////
+		|//[14] PartnerArTransactions_Correction_IncomingCheque//////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company,
 		|	tmp_paymentlist.PartnerArBasisDocument AS BasisDocument,
@@ -569,7 +492,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|HAVING CASE WHEN NOT tmp.IsAdvance THEN -SUM(tmp.Amount) ELSE -SUM(tmp_paymentlist.Amount) END <> 0
 		|;
 		|///////////////////////////////////////////////////////////////////////////
-		|//[17] PartnerApTransactions_Correction_OutgoingCheque
+		|//[15] PartnerApTransactions_Correction_OutgoingCheque
 		|SELECT
 		|	tmp.Company,
 		|	tmp_paymentlist.PartnerApBasisDocument AS BasisDocument,
@@ -595,7 +518,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|HAVING CASE WHEN NOT tmp.IsAdvance THEN -SUM(tmp.Amount) ELSE -SUM(tmp_paymentlist.Amount) END <> 0
 		|;
 		|
-		|//[18] PlaningCashTransactions_IncomingCheque//////////////////////////////////////////////////////////////////////////////
+		|//[16] PlaningCashTransactions_IncomingCheque//////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company,
 		|	tmp.Partner,
@@ -621,7 +544,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	VALUE(Enum.CashFlowDirections.Incoming)
 		|;
 		|///////////////////////////////////////////////////////////////////////////////
-		|//[19] PlaningCashTransactions_OutgoingCheque
+		|//[17] PlaningCashTransactions_OutgoingCheque
 		|SELECT
 		|	tmp.Company,
 		|	tmp.Partner,
@@ -647,7 +570,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	VALUE(Enum.CashFlowDirections.Outgoing)
 		|;
 		|
-		|//[20] PlaningCashTransactions_Correction_IncomingCheque//////////////////////////////////////////////////////////////////////////////
+		|//[18] PlaningCashTransactions_Correction_IncomingCheque//////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company,
 		|	tmp.Partner,
@@ -673,7 +596,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	VALUE(Enum.CashFlowDirections.Incoming)
 		|;
 		|/////////////////////////////////////////////////////////////////////
-		|//[21] PlaningCashTransactions_Correction_OutgoingCheque
+		|//[19] PlaningCashTransactions_Correction_OutgoingCheque
 		|
 		|SELECT
 		|	tmp.Company,
@@ -698,7 +621,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	tmp.PaymentDocument,
 		|	tmp.Period,
 		|	VALUE(Enum.CashFlowDirections.Outgoing);
-		|//[22] ChequeBondBalance_Incoming
+		|//[20] ChequeBondBalance_Incoming
 		|SELECT
 		|	tmp.Company,
 		|	tmp.Cheque,
@@ -718,7 +641,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	tmp.LegalName,
 		|	tmp.Currency,
 		|	tmp.Period;
-		|//[23] ChequeBondBalance_Correction_Incoming
+		|//[21] ChequeBondBalance_Correction_Incoming
 		|SELECT
 		|	tmp.Company,
 		|	tmp.Cheque,
@@ -738,7 +661,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	tmp.LegalName,
 		|	tmp.Currency,
 		|	tmp.Period;
-		|//[24] ChequeBondBalance_Outgoing
+		|//[22] ChequeBondBalance_Outgoing
 		|SELECT
 		|	tmp.Company,
 		|	tmp.Cheque,
@@ -758,7 +681,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	tmp.LegalName,
 		|	tmp.Currency,
 		|	tmp.Period;
-		|//[25] ChequeBondBalance_Correction_Outgoing
+		|//[23] ChequeBondBalance_Correction_Outgoing
 		|SELECT
 		|	tmp.Company,
 		|	tmp.Cheque,
@@ -791,76 +714,64 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	NeedPosting(StatusInfo, QueryResults[2].Unload(), "Advanced", "Posting");
 	Tables.AdvanceToSuppliers_OutgoingCheque = 
 	NeedPosting(StatusInfo, QueryResults[3].Unload(), "Advanced", "Posting");
-	Tables.ReconciliationStatement_IncomingCheque = 
-	NeedPosting(StatusInfo, QueryResults[4].Unload(), "ReconciliationStatement", "Posting");
-	Tables.ReconciliationStatement_OutgoingCheque = 
-	NeedPosting(StatusInfo, QueryResults[5].Unload(), "ReconciliationStatement", "Posting");
 	Tables.AccountBalance_IncomingCheque = 
-	NeedPosting(StatusInfo, QueryResults[6].Unload(), "AccountBalance", "Posting");
+	NeedPosting(StatusInfo, QueryResults[4].Unload(), "AccountBalance", "Posting");
 	Tables.AccountBalance_OutgoingCheque = 
-	NeedPosting(StatusInfo, QueryResults[7].Unload(), "AccountBalance", "Posting");
+	NeedPosting(StatusInfo, QueryResults[5].Unload(), "AccountBalance", "Posting");
 	Tables.PartnerArTransactions_IncomingCheque = 
-	NeedPosting(StatusInfo, QueryResults[8].Unload(), "PartnerAccountTransactions", "Posting");
+	NeedPosting(StatusInfo, QueryResults[6].Unload(), "PartnerAccountTransactions", "Posting");
 	Tables.PartnerApTransactions_OutgoingCheque = 
-	NeedPosting(StatusInfo, QueryResults[9].Unload(), "PartnerAccountTransactions", "Posting");
+	NeedPosting(StatusInfo, QueryResults[7].Unload(), "PartnerAccountTransactions", "Posting");
 	Tables.PlaningCashTransactions_IncomingCheque = 
-	NeedPosting(StatusInfo, QueryResults[18].Unload(), "PlaningCashTransactions", "Posting");
+	NeedPosting(StatusInfo, QueryResults[14].Unload(), "PlaningCashTransactions", "Posting");
 	Tables.PlaningCashTransactions_OutgoingCheque = 
-	NeedPosting(StatusInfo, QueryResults[19].Unload(), "PlaningCashTransactions", "Posting");
+	NeedPosting(StatusInfo, QueryResults[15].Unload(), "PlaningCashTransactions", "Posting");
 	Tables.ChequeBondBalance_IncomingCheque = 
-	NeedPosting(StatusInfo, QueryResults[22].Unload(), "ChequeBondBalance", "Posting");
+	NeedPosting(StatusInfo, QueryResults[18].Unload(), "ChequeBondBalance", "Posting");
 	Tables.ChequeBondBalance_OutgoingCheque = 
-	NeedPosting(StatusInfo, QueryResults[24].Unload(), "ChequeBondBalance", "Posting");
+	NeedPosting(StatusInfo, QueryResults[20].Unload(), "ChequeBondBalance", "Posting");
 	
 	Tables.AdvanceFromCustomers_Correction_IncomingCheque = 
-	NeedPosting(StatusInfo, QueryResults[10].Unload(), "Advanced", "Correction");
+	NeedPosting(StatusInfo, QueryResults[8].Unload(), "Advanced", "Correction");
 	Tables.AdvanceToSuppliers_Correction_OutgoingCheque = 
-	NeedPosting(StatusInfo, QueryResults[11].Unload(), "Advanced", "Correction");
-	Tables.ReconciliationStatement_Correction_IncomingCheque = 
-	NeedPosting(StatusInfo, QueryResults[12].Unload(), "ReconciliationStatement", "Correction");
-	Tables.ReconciliationStatement_Correction_OutgoingCheque = 
-	NeedPosting(StatusInfo, QueryResults[13].Unload(), "ReconciliationStatement", "Correction");
+	NeedPosting(StatusInfo, QueryResults[9].Unload(), "Advanced", "Correction");
 	Tables.AccountBalance_Correction_IncomingCheque = 
-	NeedPosting(StatusInfo, QueryResults[14].Unload(), "AccountBalance", "Correction");
+	NeedPosting(StatusInfo, QueryResults[10].Unload(), "AccountBalance", "Correction");
 	Tables.AccountBalance_Correction_OutgoingCheque = 
-	NeedPosting(StatusInfo, QueryResults[15].Unload(), "AccountBalance", "Correction");
+	NeedPosting(StatusInfo, QueryResults[11].Unload(), "AccountBalance", "Correction");
 	Tables.PartnerArTransactions_Correction_IncomingCheque = 
-	NeedPosting(StatusInfo, QueryResults[16].Unload(), "PartnerAccountTransactions", "Correction");
+	NeedPosting(StatusInfo, QueryResults[12].Unload(), "PartnerAccountTransactions", "Correction");
 	Tables.PartnerApTransactions_Correction_OutgoingCheque = 
-	NeedPosting(StatusInfo, QueryResults[17].Unload(), "PartnerAccountTransactions", "Correction");
+	NeedPosting(StatusInfo, QueryResults[13].Unload(), "PartnerAccountTransactions", "Correction");
 	Tables.PlaningCashTransactions_Correction_IncomingCheque = 
-	NeedPosting(StatusInfo, QueryResults[20].Unload(), "PlaningCashTransactions", "Correction");
+	NeedPosting(StatusInfo, QueryResults[16].Unload(), "PlaningCashTransactions", "Correction");
 	Tables.PlaningCashTransactions_Correction_OutgoingCheque = 
-	NeedPosting(StatusInfo, QueryResults[21].Unload(), "PlaningCashTransactions", "Correction");
+	NeedPosting(StatusInfo, QueryResults[17].Unload(), "PlaningCashTransactions", "Correction");
 	Tables.ChequeBondBalance_Correction_IncomingCheque = 
-	NeedPosting(StatusInfo, QueryResults[23].Unload(), "ChequeBondBalance", "Correction");
+	NeedPosting(StatusInfo, QueryResults[19].Unload(), "ChequeBondBalance", "Correction");
 	Tables.ChequeBondBalance_Correction_OutgoingCheque = 
-	NeedPosting(StatusInfo, QueryResults[25].Unload(), "ChequeBondBalance", "Correction");
+	NeedPosting(StatusInfo, QueryResults[21].Unload(), "ChequeBondBalance", "Correction");
 	
 	Tables.AdvanceFromCustomers_Reversal_IncomingCheque = 
 	NeedPosting(StatusInfo, QueryResults[2].Unload(), "Advanced", "Reversal");
 	Tables.AdvanceToSuppliers_Reversal_OutgoingCheque = 
 	NeedPosting(StatusInfo, QueryResults[3].Unload(), "Advanced", "Reversal");
-	Tables.ReconciliationStatement_Reversal_IncomingCheque = 
-	NeedPosting(StatusInfo, QueryResults[4].Unload(), "ReconciliationStatement", "Reversal");
-	Tables.ReconciliationStatement_Reversal_OutgoingCheque = 
-	NeedPosting(StatusInfo, QueryResults[5].Unload(), "ReconciliationStatement", "Reversal");
 	Tables.AccountBalance_Reversal_IncomingCheque = 
-	NeedPosting(StatusInfo, QueryResults[6].Unload(), "AccountBalance", "Reversal");
+	NeedPosting(StatusInfo, QueryResults[4].Unload(), "AccountBalance", "Reversal");
 	Tables.AccountBalance_Reversal_OutgoingCheque = 
-	NeedPosting(StatusInfo, QueryResults[7].Unload(), "AccountBalance", "Reversal");
+	NeedPosting(StatusInfo, QueryResults[5].Unload(), "AccountBalance", "Reversal");
 	Tables.PartnerArTransactions_Reversal_IncomingCheque = 
-	NeedPosting(StatusInfo, QueryResults[8].Unload(), "PartnerAccountTransactions", "Reversal");
+	NeedPosting(StatusInfo, QueryResults[6].Unload(), "PartnerAccountTransactions", "Reversal");
 	Tables.PartnerApTransactions_Reversal_OutgoingCheque = 
-	NeedPosting(StatusInfo, QueryResults[9].Unload(), "PartnerAccountTransactions", "Reversal");
+	NeedPosting(StatusInfo, QueryResults[7].Unload(), "PartnerAccountTransactions", "Reversal");
 	Tables.PlaningCashTransactions_Reversal_IncomingCheque = 
-	NeedPosting(StatusInfo, QueryResults[18].Unload(), "PlaningCashTransactions", "Reversal");
+	NeedPosting(StatusInfo, QueryResults[14].Unload(), "PlaningCashTransactions", "Reversal");
 	Tables.PlaningCashTransactions_Reversal_OutgoingCheque = 
-	NeedPosting(StatusInfo, QueryResults[19].Unload(), "PlaningCashTransactions", "Reversal");
+	NeedPosting(StatusInfo, QueryResults[15].Unload(), "PlaningCashTransactions", "Reversal");
 	Tables.ChequeBondBalance_Reversal_IncomingCheque = 
-	NeedPosting(StatusInfo, QueryResults[22].Unload(), "ChequeBondBalance", "Reversal");
+	NeedPosting(StatusInfo, QueryResults[18].Unload(), "ChequeBondBalance", "Reversal");
 	Tables.ChequeBondBalance_Reversal_OutgoingCheque = 
-	NeedPosting(StatusInfo, QueryResults[24].Unload(), "ChequeBondBalance", "Reversal");
+	NeedPosting(StatusInfo, QueryResults[20].Unload(), "ChequeBondBalance", "Reversal");
 	
 	// AdvanceFromCustomers
 	// AdvanceFromCustomers_IncomingCheque [Receipt]  
@@ -906,46 +817,6 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Tables.AdvanceToSuppliers = 
 	PostingServer.JoinTables(ArrayOfTables, "RecordType, Period, Company, Partner, LegalName, Currency, PaymentDocument, Amount");
 	
-	// ReconciliationStatement
-	// ReconciliationStatement_IncomingCheque [Expense]  
-	// ReconciliationStatement_Correction_IncomingCheque [Expense]
-	// ReconciliationStatement_OutgoingCheque [Receipt]  
-	// ReconciliationStatement_Correction_OutgoingCheque [Receipt]
-	// ReconciliationStatement_Reversal_IncomingCheque [Receipt]
-	// ReconciliationStatement_Reversal_OutgoingCheque [Expense]
-	ArrayOfTables = New Array();
-	Table1 = Tables.ReconciliationStatement_IncomingCheque.Copy();
-	Table1.Columns.Add("RecordType", New TypeDescription("AccumulationRecordType"));
-	Table1.FillValues(AccumulationRecordType.Expense, "RecordType");
-	ArrayOfTables.Add(Table1);
-	
-	Table2 = Tables.ReconciliationStatement_Correction_IncomingCheque.Copy();
-	Table2.Columns.Add("RecordType", New TypeDescription("AccumulationRecordType"));
-	Table2.FillValues(AccumulationRecordType.Expense, "RecordType");
-	ArrayOfTables.Add(Table2);
-	
-	Table3 = Tables.ReconciliationStatement_OutgoingCheque.Copy();
-	Table3.Columns.Add("RecordType", New TypeDescription("AccumulationRecordType"));
-	Table3.FillValues(AccumulationRecordType.Receipt, "RecordType");
-	ArrayOfTables.Add(Table3);
-	
-	Table4 = Tables.ReconciliationStatement_Correction_OutgoingCheque.Copy();
-	Table4.Columns.Add("RecordType", New TypeDescription("AccumulationRecordType"));
-	Table4.FillValues(AccumulationRecordType.Receipt, "RecordType");
-	ArrayOfTables.Add(Table4);
-	
-	Table5 = Tables.ReconciliationStatement_Reversal_IncomingCheque.Copy();
-	Table5.Columns.Add("RecordType", New TypeDescription("AccumulationRecordType"));
-	Table5.FillValues(AccumulationRecordType.Receipt, "RecordType");
-	ArrayOfTables.Add(Table5);
-	
-	Table6 = Tables.ReconciliationStatement_Reversal_OutgoingCheque.Copy();
-	Table6.Columns.Add("RecordType", New TypeDescription("AccumulationRecordType"));
-	Table6.FillValues(AccumulationRecordType.Expense, "RecordType");
-	ArrayOfTables.Add(Table6);
-	
-	Tables.ReconciliationStatement = 
-	PostingServer.JoinTables(ArrayOfTables, "RecordType, Period, Company, LegalName, Currency, Amount");
 	
 	// AccountBalance
 	// AccountBalance_IncomingCheque [Receipt]  
@@ -1123,13 +994,6 @@ Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	DataMapWithLockFields.Insert("AccumulationRegister.AdvanceToSuppliers",
 		New Structure("Fields, Data", Fields, DocumentDataTables.AdvanceToSuppliers));
 	
-	// ReconciliationStatement
-	Fields = New Map();
-	Fields.Insert("Company", "Company");
-	Fields.Insert("LegalName", "LegalName");
-	Fields.Insert("Currency", "Currency");
-	DataMapWithLockFields.Insert("AccumulationRegister.ReconciliationStatement",
-		New Structure("Fields, Data", Fields, DocumentDataTables.ReconciliationStatement));
 	
 	// AccountBalance
 	Fields = New Map();
@@ -1356,12 +1220,6 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords.AdvanceToSuppliers,
 		New Structure("RecordSet, WriteInTransaction",
 			Parameters.DocumentDataTables.AdvanceToSuppliers,
-			Parameters.IsReposting));
-	
-	// ReconciliationStatement
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.ReconciliationStatement,
-		New Structure("RecordSet, WriteInTransaction",
-			Parameters.DocumentDataTables.ReconciliationStatement,
 			Parameters.IsReposting));
 	
 	// AccountBalance

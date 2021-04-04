@@ -5,7 +5,6 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	AccReg = Metadata.AccumulationRegisters;
 	Tables = New Structure();
 	Tables.Insert("OrderBalance"      , PostingServer.CreateTable(AccReg.OrderBalance));
-	Tables.Insert("PurchaseTurnovers" , PostingServer.CreateTable(AccReg.PurchaseTurnovers));
 	
 	ObjectStatusesServer.WriteStatusToRegister(Ref, Ref.Status);
 	StatusInfo = ObjectStatusesServer.GetLastStatusInfo(Ref);
@@ -118,35 +117,12 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	tmp.ItemKey,
 		|	tmp.Unit,
 		|	tmp.Period,
-		|	tmp.RowKey
-		|;
-		|
-		|// 2. PurchaseTurnovers//////////////////////////////////////////////////////////////////////////////
-		|SELECT
-		|	tmp.Company,
-		|	tmp.PurchaseInvoice,
-		|	tmp.Currency,
-		|	tmp.ItemKey,
-		|	-SUM(tmp.Quantity) AS Quantity,
-		|	-SUM(Amount) AS Amount,
-		|	-SUM(NetAmount) AS NetAmount,
-		|	tmp.Period,
-		|	tmp.RowKey
-		|FROM
-		|	tmp AS tmp
-		|GROUP BY
-		|	tmp.Company,
-		|	tmp.PurchaseInvoice,
-		|	tmp.Currency,
-		|	tmp.ItemKey,
-		|	tmp.Period,
 		|	tmp.RowKey";
 	
 	Query.SetParameter("QueryTable", QueryTable);
 	QueryResults = Query.ExecuteBatch();
 	
 	Tables.OrderBalance      = QueryResults[1].Unload();
-	Tables.PurchaseTurnovers = QueryResults[2].Unload();
 	
 #Region NewRegistersPosting
 	QueryArray = GetQueryTextsSecondaryTables();
@@ -181,11 +157,6 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 			Parameters.DocumentDataTables.OrderBalance,
 			Parameters.IsReposting));
 	
-	// PurchaseTurnuvers			   
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.PurchaseTurnovers,
-		New Structure("RecordSet, WriteInTransaction",
-			Parameters.DocumentDataTables.PurchaseTurnovers,
-			Parameters.IsReposting));
 	
 #Region NewRegistersPosting
 	PostingServer.SetPostingDataTables(PostingDataTables, Parameters);

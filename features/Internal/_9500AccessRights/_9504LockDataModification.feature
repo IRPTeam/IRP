@@ -439,7 +439,7 @@ Scenario: 950409 create rules for information register (with recorder)
 	Given I open hyperlink 'e1cib/list/InformationRegister.LockDataModificationRules'
 	* Create rule for Order balance (=)
 		And I click the button named "FormCreate"
-		And I select "Sales order turnovers" exact value from "Type" drop-down list
+		And I select "R2010 Sales orders" exact value from "Type" drop-down list
 		And I select "Item key" exact value from "Attribute" drop-down list
 		And I select "=" exact value from "Comparison type" drop-down list
 		And I click Select button of "Value" field
@@ -559,7 +559,7 @@ Scenario: 950409 create rules for information register (with recorder)
 			Given I open hyperlink 'e1cib/list/InformationRegister.LockDataModificationRules'
 			And I go to line in "List" table
 				| 'Type'               |
-				| 'AccumulationRegister.SalesOrderTurnovers' |
+				| 'AccumulationRegister.R2010T_SalesOrders' |
 			And in the table "List" I click the button named "ListContextMenuDelete"
 			Then "1C:Enterprise" window is opened
 			And I click "Yes" button

@@ -8,7 +8,6 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Tables.Insert("PlaningCashTransactions"               , PostingServer.CreateTable(AccReg.PlaningCashTransactions));
 	Tables.Insert("CashInTransit"                         , PostingServer.CreateTable(AccReg.CashInTransit));
 	Tables.Insert("AdvanceFromCustomers"                  , PostingServer.CreateTable(AccReg.AdvanceFromCustomers));
-	Tables.Insert("ReconciliationStatement"               , PostingServer.CreateTable(AccReg.ReconciliationStatement));
 	Tables.Insert("AccountBalance_Expense"                , PostingServer.CreateTable(AccReg.AccountBalance));
 	Tables.Insert("CashInTransit_POS"                     , PostingServer.CreateTable(AccReg.CashInTransit));
 	Tables.Insert("ExpensesTurnovers"                     , PostingServer.CreateTable(AccReg.ExpensesTurnovers));
@@ -35,11 +34,10 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Tables.PlaningCashTransactions    = QueryResults[3].Unload();
 	Tables.CashInTransit              = QueryResults[4].Unload();
 	Tables.AdvanceFromCustomers       = QueryResults[5].Unload();
-	Tables.ReconciliationStatement    = QueryResults[6].Unload();
-	Tables.AccountBalance_Expense     = QueryResults[7].Unload();
-	Tables.CashInTransit_POS          = QueryResults[8].Unload();
-	Tables.ExpensesTurnovers          = QueryResults[9].Unload();
-	Tables.AccountBalance_Commission  = QueryResults[10].Unload();
+	Tables.AccountBalance_Expense     = QueryResults[6].Unload();
+	Tables.CashInTransit_POS          = QueryResults[7].Unload();
+	Tables.ExpensesTurnovers          = QueryResults[8].Unload();
+	Tables.AccountBalance_Commission  = QueryResults[9].Unload();
 
 #Region NewRegistersPosting	
 	QueryArray = GetQueryTextsSecondaryTables();
@@ -268,29 +266,8 @@ Function GetQueryTextQueryTable()
 		|	AND tmp.IsAdvance
 		|;
 		|
-		|//[6]//////////////////////////////////////////////////////////////////////////////
-		|SELECT
-		|	tmp.Company AS Company,
-		|	tmp.Payer AS LegalName,
-		|	tmp.Currency AS Currency,
-		|	SUM(tmp.Amount) AS Amount,
-		|	tmp.Period
-		|FROM
-		|	tmp AS tmp
-		|WHERE
-		|	NOT tmp.IsMoneyTransfer
-		|	AND
-		|	NOT tmp.IsMoneyExchange
-		|	AND
-		|	NOT tmp.TransferFromPOS
-		|GROUP BY
-		|	tmp.Company,
-		|	tmp.Payer,
-		|	tmp.Currency,
-		|	tmp.Period	
-		|;
 		|
-		|//[7]//////////////////////////////////////////////////////////////////////////////
+		|//[6]//////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company AS Company,
 		|	tmp.TransitAccount AS Account,
@@ -311,7 +288,7 @@ Function GetQueryTextQueryTable()
 		|WHERE
 		|	tmp.IsMoneyExchange
 		|;
-		|//[8]//////////////////////////////////////////////////////////////////////////////
+		|//[7]//////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company AS Company,
 		|	tmp.PlaningTransactionBasis AS BasisDocument,
@@ -326,7 +303,7 @@ Function GetQueryTextQueryTable()
 		|WHERE
 		|	tmp.TransferFromPOS
 		|;
-		|//[9]//////////////////////////////////////////////////////////////////////////////
+		|//[8]//////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company AS Company,
 		|	tmp.BusinessUnit AS BusinessUnit,
@@ -341,7 +318,7 @@ Function GetQueryTextQueryTable()
 		|WHERE
 		|	tmp.Commission <> 0
 		|;
-		|//[10]//////////////////////////////////////////////////////////////////////////////
+		|//[9]//////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company AS Company,
 		|	tmp.Account AS Account,
@@ -383,10 +360,6 @@ Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	AccumulationRegisters.AdvanceFromCustomers.GetLockFields(DocumentDataTables.AdvanceFromCustomers);
 	DataMapWithLockFields.Insert(AdvanceFromCustomers.RegisterName, AdvanceFromCustomers.LockInfo);
 	
-	// ReconciliationStatement
-	ReconciliationStatement = 
-	AccumulationRegisters.ReconciliationStatement.GetLockFields(DocumentDataTables.ReconciliationStatement);
-	DataMapWithLockFields.Insert(ReconciliationStatement.RegisterName, ReconciliationStatement.LockInfo);
 	
 #Region NewRegistersPosting
 	PostingServer.SetLockDataSource(DataMapWithLockFields, 
@@ -603,11 +576,6 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 			"RecordType, Period, Company, Partner, LegalName, Currency, ReceiptDocument, Amount, Key"),
 			Parameters.IsReposting));
 	
-	// ReconciliationStatement
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.ReconciliationStatement,
-		New Structure("RecordType, RecordSet",
-			AccumulationRecordType.Expense,
-			Parameters.DocumentDataTables.ReconciliationStatement));
 	
 	// ExpensesTurnovers
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords.ExpensesTurnovers,

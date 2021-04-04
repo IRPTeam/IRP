@@ -89,7 +89,7 @@ Procedure FillAtServer()
 		"SELECT
 		|	ReconciliationStatementBalance.AmountBalance AS OpeningBalance
 		|FROM
-		|	AccumulationRegister.ReconciliationStatement.Balance(BEGINOFPERIOD(&StartDate, DAY), Company = &Company
+		|	AccumulationRegister.R5010B_ReconciliationStatement.Balance(BEGINOFPERIOD(&StartDate, DAY), Company = &Company
 		|	AND LegalName = &LegalName
 		|	AND Currency = &Currency) AS ReconciliationStatementBalance
 		|;
@@ -98,7 +98,7 @@ Procedure FillAtServer()
 		|SELECT
 		|	ReconciliationStatementBalance.AmountBalance AS ClosingBalance
 		|FROM
-		|	AccumulationRegister.ReconciliationStatement.Balance(ENDOFPERIOD(&EndDate, DAY), Company = &Company
+		|	AccumulationRegister.R5010B_ReconciliationStatement.Balance(ENDOFPERIOD(&EndDate, DAY), Company = &Company
 		|	AND LegalName = &LegalName
 		|	AND Currency = &Currency) AS ReconciliationStatementBalance
 		|;
@@ -110,8 +110,8 @@ Procedure FillAtServer()
 		|	ReconciliationStatementTurnovers.AmountReceipt AS Debit,
 		|	ReconciliationStatementTurnovers.AmountExpense AS Credit
 		|FROM
-		|	AccumulationRegister.ReconciliationStatement.Turnovers(BEGINOFPERIOD(&StartDate, DAY), ENDOFPERIOD(&EndDate, DAY),
-		|		Recorder, Company = &Company
+		|	AccumulationRegister.R5010B_ReconciliationStatement.Turnovers(BEGINOFPERIOD(&StartDate, DAY), ENDOFPERIOD(&EndDate,
+		|		DAY), Recorder, Company = &Company
 		|	AND LegalName = &LegalName
 		|	AND Currency = &Currency) AS ReconciliationStatementTurnovers";
 	Query.SetParameter("StartDate", Object.BeginPeriod);

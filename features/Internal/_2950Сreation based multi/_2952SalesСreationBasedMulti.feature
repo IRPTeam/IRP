@@ -1039,24 +1039,7 @@ Scenario: _090408 create one Sales order - several Shipment confirmation - one S
 		| ''                               | 'Record type' | 'Period' | 'Resources'            | ''               | ''                       | ''               | 'Dimensions'   | ''          | ''                  | ''                        | ''         | '' | '' |
 		| ''                               | ''            | ''       | 'Advance to suppliers' | 'Transaction AP' | 'Advance from customers' | 'Transaction AR' | 'Company'      | 'Partner'   | 'Legal name'        | 'Basis document'          | 'Currency' | '' | '' |
 		| ''                               | 'Receipt'     | '*'      | ''                     | ''               | ''                       | '33 400'         | 'Main Company' | 'Ferron BP' | 'Company Ferron BP' | '$$SalesInvoice0904083$$' | 'TRY'      | '' | '' |
-		And I select "Sales turnovers" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Sales turnovers"' | ''       | ''          | ''         | ''           | ''              | ''             | ''                        | ''         | ''          | ''        | ''                             | ''                  | ''                     |
-		| ''                            | 'Period' | 'Resources' | ''         | ''           | ''              | 'Dimensions'   | ''                        | ''         | ''          | ''        | ''                             | ''                  | 'Attributes'           |
-		| ''                            | ''       | 'Quantity'  | 'Amount'   | 'Net amount' | 'Offers amount' | 'Company'      | 'Sales invoice'           | 'Currency' | 'Item key'  | 'Row key' | 'Multi currency movement type' | 'Serial lot number' | 'Deferred calculation' |
-		| ''                            | '*'      | '20'        | '1 780,48' | '1 491,25'   | ''              | 'Main Company' | '$$SalesInvoice0904083$$' | 'USD'      | 'M/White'   | '*'       | 'Reporting currency'           | ''                  | 'No'                   |
-		| ''                            | '*'      | '20'        | '1 883,2'  | '1 577,29'   | ''              | 'Main Company' | '$$SalesInvoice0904083$$' | 'USD'      | 'L/Green'   | '*'       | 'Reporting currency'           | ''                  | 'No'                   |
-		| ''                            | '*'      | '20'        | '10 400'   | '8 710,59'   | ''              | 'Main Company' | '$$SalesInvoice0904083$$' | 'TRY'      | 'M/White'   | '*'       | 'Local currency'               | ''                  | 'No'                   |
-		| ''                            | '*'      | '20'        | '10 400'   | '8 710,59'   | ''              | 'Main Company' | '$$SalesInvoice0904083$$' | 'TRY'      | 'M/White'   | '*'       | 'TRY'                          | ''                  | 'No'                   |
-		| ''                            | '*'      | '20'        | '10 400'   | '8 710,59'   | ''              | 'Main Company' | '$$SalesInvoice0904083$$' | 'TRY'      | 'M/White'   | '*'       | 'en description is empty'      | ''                  | 'No'                   |
-		| ''                            | '*'      | '20'        | '11 000'   | '9 213,12'   | ''              | 'Main Company' | '$$SalesInvoice0904083$$' | 'TRY'      | 'L/Green'   | '*'       | 'Local currency'               | ''                  | 'No'                   |
-		| ''                            | '*'      | '20'        | '11 000'   | '9 213,12'   | ''              | 'Main Company' | '$$SalesInvoice0904083$$' | 'TRY'      | 'L/Green'   | '*'       | 'TRY'                          | ''                  | 'No'                   |
-		| ''                            | '*'      | '20'        | '11 000'   | '9 213,12'   | ''              | 'Main Company' | '$$SalesInvoice0904083$$' | 'TRY'      | 'L/Green'   | '*'       | 'en description is empty'      | ''                  | 'No'                   |
-		| ''                            | '*'      | '30'        | '2 054,4'  | '1 720,68'   | ''              | 'Main Company' | '$$SalesInvoice0904083$$' | 'USD'      | '36/Yellow' | '*'       | 'Reporting currency'           | ''                  | 'No'                   |
-		| ''                            | '*'      | '30'        | '12 000'   | '10 050,68'  | ''              | 'Main Company' | '$$SalesInvoice0904083$$' | 'TRY'      | '36/Yellow' | '*'       | 'Local currency'               | ''                  | 'No'                   |
-		| ''                            | '*'      | '30'        | '12 000'   | '10 050,68'  | ''              | 'Main Company' | '$$SalesInvoice0904083$$' | 'TRY'      | '36/Yellow' | '*'       | 'TRY'                          | ''                  | 'No'                   |
-		| ''                            | '*'      | '30'        | '12 000'   | '10 050,68'  | ''              | 'Main Company' | '$$SalesInvoice0904083$$' | 'TRY'      | '36/Yellow' | '*'       | 'en description is empty'      | ''                  | 'No'                   |
+	
 		And I select "Shipment orders" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
@@ -1072,13 +1055,7 @@ Scenario: _090408 create one Sales order - several Shipment confirmation - one S
 		| ''                            | 'Expense'     | '*'      | '8'         | '$$SalesOrder090408$$' | '$$ShipmentConfirmation0904083$$' | '36/Yellow' | '*'       | '' | '' | '' | '' | '' | '' |
 		| ''                            | 'Expense'     | '*'      | '10'        | '$$SalesOrder090408$$' | '$$ShipmentConfirmation0904081$$' | '36/Yellow' | '*'       | '' | '' | '' | '' | '' | '' |
 		| ''                            | 'Expense'     | '*'      | '12'        | '$$SalesOrder090408$$' | '$$ShipmentConfirmation0904082$$' | '36/Yellow' | '*'       | '' | '' | '' | '' | '' | '' |
-		And I select "Reconciliation statement" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Reconciliation statement"' | ''            | ''       | ''          | ''             | ''                  | ''         | '' | '' | '' | '' | '' | '' | '' |
-		| ''                                     | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                  | ''         | '' | '' | '' | '' | '' | '' | '' |
-		| ''                                     | ''            | ''       | 'Amount'    | 'Company'      | 'Legal name'        | 'Currency' | '' | '' | '' | '' | '' | '' | '' |
-		| ''                                     | 'Receipt'     | '*'      | '33 400'    | 'Main Company' | 'Company Ferron BP' | 'TRY'      | '' | '' | '' | '' | '' | '' | '' |
+	
 		And I select "Revenues turnovers" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:

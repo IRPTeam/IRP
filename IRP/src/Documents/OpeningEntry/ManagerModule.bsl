@@ -8,8 +8,6 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Tables.Insert("AdvanceToSuppliers"              , PostingServer.CreateTable(AccReg.AdvanceToSuppliers));
 	Tables.Insert("PartnerArTransactions"           , PostingServer.CreateTable(AccReg.PartnerArTransactions));
 	Tables.Insert("PartnerApTransactions"           , PostingServer.CreateTable(AccReg.PartnerApTransactions));
-	Tables.Insert("ReconciliationStatement_Expense" , PostingServer.CreateTable(AccReg.ReconciliationStatement));
-	Tables.Insert("ReconciliationStatement_Receipt" , PostingServer.CreateTable(AccReg.ReconciliationStatement));
 	Tables.Insert("Aging"                           , PostingServer.CreateTable(AccReg.Aging));
 		
 	Query = New Query();
@@ -28,7 +26,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	OpeningEntryAccountBalance.Ref = &Ref
 		|;
 		|
-		|//[2]//////////////////////////////////////////////////////////////////////////////
+		|//[1]//////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	OpeningEntryAdvanceFromCustomers.Ref.Company,
 		|	OpeningEntryAdvanceFromCustomers.Partner,
@@ -44,7 +42,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	OpeningEntryAdvanceFromCustomers.Ref = &Ref
 		|;
 		|
-		|//[3]//////////////////////////////////////////////////////////////////////////////
+		|//[2]//////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	OpeningEntryAdvanceToSuppliers.Ref.Company,
 		|	OpeningEntryAdvanceToSuppliers.Partner,
@@ -60,7 +58,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	OpeningEntryAdvanceToSuppliers.Ref = &Ref
 		|;
 		|
-		|//[4]//////////////////////////////////////////////////////////////////////////////
+		|//[3]//////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	OpeningEntryAccountReceivableByDocuments.Key,
 		|	OpeningEntryAccountReceivableByDocuments.Ref.Date AS Period,
@@ -106,7 +104,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	OpeningEntryAccountReceivableByAgreements.Ref = &Ref
 		|;
 		|
-		|//[5]//////////////////////////////////////////////////////////////////////////////
+		|//[4]//////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	OpeningEntryAccountPayableByDocuments.Ref.Date AS Period,
 		|	OpeningEntryAccountPayableByDocuments.Key,
@@ -151,115 +149,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|WHERE
 		|	OpeningEntryAccountPayableByAgreements.Ref = &Ref
 		|;
-		|
-		|//[6]//////////////////////////////////////////////////////////////////////////////
-		|SELECT
-		|	OpeningEntryAdvanceFromCustomers.Ref.Date AS Period,
-		|	OpeningEntryAdvanceFromCustomers.Ref.Company,
-		|	OpeningEntryAdvanceFromCustomers.LegalName,
-		|	OpeningEntryAdvanceFromCustomers.Currency,
-		|	SUM(OpeningEntryAdvanceFromCustomers.Amount) AS Amount
-		|FROM
-		|	Document.OpeningEntry.AdvanceFromCustomers AS OpeningEntryAdvanceFromCustomers
-		|WHERE
-		|	OpeningEntryAdvanceFromCustomers.Ref = &Ref
-		|GROUP BY
-		|	OpeningEntryAdvanceFromCustomers.Ref.Date,
-		|	OpeningEntryAdvanceFromCustomers.Ref.Company,
-		|	OpeningEntryAdvanceFromCustomers.LegalName,
-		|	OpeningEntryAdvanceFromCustomers.Currency
-		|
-		|UNION ALL
-		|
-		|SELECT
-		|	OpeningEntryAccountPayableByAgreements.Ref.Date,
-		|	OpeningEntryAccountPayableByAgreements.Ref.Company,
-		|	OpeningEntryAccountPayableByAgreements.LegalName,
-		|	OpeningEntryAccountPayableByAgreements.Currency,
-		|	SUM(OpeningEntryAccountPayableByAgreements.Amount) AS Amount
-		|FROM
-		|	Document.OpeningEntry.AccountPayableByAgreements AS OpeningEntryAccountPayableByAgreements
-		|WHERE
-		|	OpeningEntryAccountPayableByAgreements.Ref = &Ref
-		|GROUP BY
-		|	OpeningEntryAccountPayableByAgreements.Ref.Date,
-		|	OpeningEntryAccountPayableByAgreements.Ref.Company,
-		|	OpeningEntryAccountPayableByAgreements.LegalName,
-		|	OpeningEntryAccountPayableByAgreements.Currency
-		|
-		|UNION ALL
-		|
-		|SELECT
-		|	OpeningEntryAccountPayableByDocuments.Ref.Date,
-		|	OpeningEntryAccountPayableByDocuments.Ref.Company,
-		|	OpeningEntryAccountPayableByDocuments.LegalName,
-		|	OpeningEntryAccountPayableByDocuments.Currency,
-		|	SUM(OpeningEntryAccountPayableByDocuments.Amount) AS Amount
-		|FROM
-		|	Document.OpeningEntry.AccountPayableByDocuments AS OpeningEntryAccountPayableByDocuments
-		|WHERE
-		|	OpeningEntryAccountPayableByDocuments.Ref = &Ref
-		|GROUP BY
-		|	OpeningEntryAccountPayableByDocuments.Ref.Date,
-		|	OpeningEntryAccountPayableByDocuments.Ref.Company,
-		|	OpeningEntryAccountPayableByDocuments.LegalName,
-		|	OpeningEntryAccountPayableByDocuments.Currency
-		|;
-		|
-		|//[7]//////////////////////////////////////////////////////////////////////////////
-		|SELECT
-		|	OpeningEntryAdvanceToSuppliers.Ref.Date AS Period,
-		|	OpeningEntryAdvanceToSuppliers.Ref.Company,
-		|	OpeningEntryAdvanceToSuppliers.LegalName,
-		|	OpeningEntryAdvanceToSuppliers.Currency,
-		|	SUM(OpeningEntryAdvanceToSuppliers.Amount) AS Amount
-		|FROM
-		|	Document.OpeningEntry.AdvanceToSuppliers AS OpeningEntryAdvanceToSuppliers
-		|WHERE
-		|	OpeningEntryAdvanceToSuppliers.Ref = &Ref
-		|GROUP BY
-		|	OpeningEntryAdvanceToSuppliers.Ref.Date,
-		|	OpeningEntryAdvanceToSuppliers.Ref.Company,
-		|	OpeningEntryAdvanceToSuppliers.LegalName,
-		|	OpeningEntryAdvanceToSuppliers.Currency
-		|
-		|UNION ALL
-		|
-		|SELECT
-		|	OpeningEntryAccountReceivableByAgreements.Ref.Date,
-		|	OpeningEntryAccountReceivableByAgreements.Ref.Company,
-		|	OpeningEntryAccountReceivableByAgreements.LegalName,
-		|	OpeningEntryAccountReceivableByAgreements.Currency,
-		|	SUM(OpeningEntryAccountReceivableByAgreements.Amount) AS Amount
-		|FROM
-		|	Document.OpeningEntry.AccountReceivableByAgreements AS OpeningEntryAccountReceivableByAgreements
-		|WHERE
-		|	OpeningEntryAccountReceivableByAgreements.Ref = &Ref
-		|GROUP BY
-		|	OpeningEntryAccountReceivableByAgreements.Ref.Date,
-		|	OpeningEntryAccountReceivableByAgreements.Ref.Company,
-		|	OpeningEntryAccountReceivableByAgreements.LegalName,
-		|	OpeningEntryAccountReceivableByAgreements.Currency
-		|
-		|UNION ALL
-		|
-		|SELECT
-		|	OpeningEntryAccountReceivableByDocuments.Ref.Date,
-		|	OpeningEntryAccountReceivableByDocuments.Ref.Company,
-		|	OpeningEntryAccountReceivableByDocuments.LegalName,
-		|	OpeningEntryAccountReceivableByDocuments.Currency,
-		|	SUM(OpeningEntryAccountReceivableByDocuments.Amount) AS Amount
-		|FROM
-		|	Document.OpeningEntry.AccountReceivableByDocuments AS OpeningEntryAccountReceivableByDocuments
-		|WHERE
-		|	OpeningEntryAccountReceivableByDocuments.Ref = &Ref
-		|GROUP BY
-		|	OpeningEntryAccountReceivableByDocuments.Ref.Date,
-		|	OpeningEntryAccountReceivableByDocuments.Ref.Company,
-		|	OpeningEntryAccountReceivableByDocuments.LegalName,
-		|	OpeningEntryAccountReceivableByDocuments.Currency
-		|;
-		|//[8]//////////////////////////////////////////////////////////////////////////
+		|//[5]//////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	OpeningEntryPaymentTerms.Ref.Date AS Period,
 		|	OpeningEntryAccountReceivableByDocuments.Ref.Company AS Company,
@@ -286,9 +176,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Tables.AdvanceToSuppliers              = QueryResults[2].Unload();
 	Tables.PartnerArTransactions           = QueryResults[3].Unload();
 	Tables.PartnerApTransactions           = QueryResults[4].Unload();
-	Tables.ReconciliationStatement_Expense = QueryResults[5].Unload();
-	Tables.ReconciliationStatement_Receipt = QueryResults[6].Unload();
-	Tables.Aging                           = QueryResults[7].Unload();
+	Tables.Aging                           = QueryResults[5].Unload();
 	
 #Region NewRegistersPosting		
 	QueryArray = GetQueryTextsSecondaryTables();
@@ -444,24 +332,6 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 		New Structure("RecordType, RecordSet",
 			AccumulationRecordType.Receipt,
 			Parameters.DocumentDataTables.PartnerApTransactions));
-
-	// ReconciliationStatement
-	ArrayOfTables = New Array();
-	Table1 = Parameters.DocumentDataTables.ReconciliationStatement_Expense.Copy();
-	Table1.Columns.Add("RecordType", New TypeDescription("AccumulationRecordType"));
-	Table1.FillValues(AccumulationRecordType.Expense, "RecordType");
-	ArrayOfTables.Add(Table1);
-	
-	Table2 = Parameters.DocumentDataTables.ReconciliationStatement_Receipt.Copy();
-	Table2.Columns.Add("RecordType", New TypeDescription("AccumulationRecordType"));
-	Table2.FillValues(AccumulationRecordType.Receipt, "RecordType");
-	ArrayOfTables.Add(Table2);
-	
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.ReconciliationStatement,
-		New Structure("RecordSet, WriteInTransaction",
-			PostingServer.JoinTables(ArrayOfTables,
-				"RecordType, Period, Company, LegalName, Currency, Amount"),
-			Parameters.IsReposting));
 
 	// Aging
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords.Aging,

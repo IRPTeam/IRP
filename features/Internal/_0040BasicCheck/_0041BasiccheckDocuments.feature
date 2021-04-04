@@ -499,10 +499,6 @@ Scenario: Open object form "PurchaseReturnOrder"
 	And I close current window
 
 
-
-
-	
-	
 Scenario: Open list form "ReconciliationStatement" 
 	And I close all client application windows
 	Given I open "ReconciliationStatement" document default form
@@ -517,7 +513,7 @@ Scenario: Open object form "ReconciliationStatement"
 		Then I raise "Failed to open document form ReconciliationStatement" exception
 	And I close current window
 
-
+	
 
 
 	

@@ -426,19 +426,7 @@ Scenario: Open object form "PurchaseReturnTurnovers"
 	And I close current window
 
 	
-Scenario: Open list form "PurchaseTurnovers" 
 
-	Given I open "PurchaseTurnovers" accumulation register list form 
-	If the warning is displayed then
-		Then I raise "Failed to open information register form PurchaseTurnovers" exception
-	And I close current window
-
-Scenario: Open object form "PurchaseTurnovers"
-
-	Given I open "PurchaseTurnovers" accumulation register default form
-	If the warning is displayed then
-		Then I raise "Failed to open information register form PurchaseTurnovers" exception
-	And I close current window
 
 	
 Scenario: Open list form "ReceiptOrders" 
@@ -455,20 +443,6 @@ Scenario: Open object form "ReceiptOrders"
 		Then I raise "Failed to open information register form ReceiptOrders" exception
 	And I close current window
 
-	
-Scenario: Open list form "ReconciliationStatement" 
-
-	Given I open "ReconciliationStatement" accumulation register list form 
-	If the warning is displayed then
-		Then I raise "Failed to open information register form ReconciliationStatement" exception
-	And I close current window
-
-Scenario: Open object form "ReconciliationStatement"
-
-	Given I open "ReconciliationStatement" accumulation register default form
-	If the warning is displayed then
-		Then I raise "Failed to open information register form ReconciliationStatement" exception
-	And I close current window 
 
 	
 Scenario: Open list form "RevenuesTurnovers" 
@@ -486,19 +460,6 @@ Scenario: Open object form "RevenuesTurnovers"
 	And I close current window
 
 	
-Scenario: Open list form "SalesOrderTurnovers" 
-
-	Given I open "SalesOrderTurnovers" accumulation register list form 
-	If the warning is displayed then
-		Then I raise "Failed to open information register form SalesOrderTurnovers" exception
-	And I close current window
-
-Scenario: Open object form "SalesOrderTurnovers"
-
-	Given I open "SalesOrderTurnovers" accumulation register default form
-	If the warning is displayed then
-		Then I raise "Failed to open information register form SalesOrderTurnovers" exception
-	And I close current window
 
 	
 Scenario: Open list form "SalesReturnTurnovers" 

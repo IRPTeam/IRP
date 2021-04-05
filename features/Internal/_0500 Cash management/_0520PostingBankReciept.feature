@@ -391,12 +391,13 @@ Scenario: _050002  check Bank receipt movements with transaction type Payment fr
 		And I select "R3010 Cash on hand" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "R3010 Cash on hand"' | ''            | ''       | ''          | ''             | ''                  | ''         | ''                             | ''                     | '' | '' | '' |
-		| ''                            | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                  | ''         | ''                             | 'Attributes'           | '' | '' | '' |
-		| ''                            | ''            | ''       | 'Amount'    | 'Company'      | 'Account'           | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' | '' | '' | '' |
-		| ''                            | 'Receipt'     | '*'      | '17,12'     | 'Main Company' | 'Bank account, TRY' | 'USD'      | 'Reporting currency'           | 'No'                   | '' | '' | '' |
-		| ''                            | 'Receipt'     | '*'      | '100'       | 'Main Company' | 'Bank account, TRY' | 'TRY'      | 'en description is empty'      | 'No'                   | '' | '' | '' |
-		| ''                            | 'Receipt'     | '*'      | '100'       | 'Main Company' | 'Bank account, TRY' | 'TRY'      | 'Local currency'               | 'No'                   | '' | '' | '' |
+			| 'Register  "R3010 Cash on hand"' | ''            | ''       | ''          | ''             | ''                  | ''         | ''                             | ''              | ''                     |
+			| ''                               | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                  | ''         | ''                             | ''              | 'Attributes'           |
+			| ''                               | ''            | ''       | 'Amount'    | 'Company'      | 'Account'           | 'Currency' | 'Multi currency movement type' | 'Movement type' | 'Deferred calculation' |
+			| ''                               | 'Receipt'     | '*'      | '17,12'     | 'Main Company' | 'Bank account, TRY' | 'USD'      | 'Reporting currency'           | ''              | 'No'                   |
+			| ''                               | 'Receipt'     | '*'      | '100'       | 'Main Company' | 'Bank account, TRY' | 'TRY'      | 'Local currency'               | ''              | 'No'                   |
+			| ''                               | 'Receipt'     | '*'      | '100'       | 'Main Company' | 'Bank account, TRY' | 'TRY'      | 'TRY'                          | ''              | 'No'                   |
+			| ''                               | 'Receipt'     | '*'      | '100'       | 'Main Company' | 'Bank account, TRY' | 'TRY'      | 'en description is empty'      | ''              | 'No'                   |
 		And I close all client application windows
 	* Clear movements Bank receipt 1 and check that there is no movement on the registers
 		* Clear movements
@@ -451,12 +452,13 @@ Scenario: _050002  check Bank receipt movements with transaction type Payment fr
 			And I select "R3010 Cash on hand" exact value from "Register" drop-down list
 			And I click "Generate report" button
 			And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "R3010 Cash on hand"' | ''            | ''       | ''          | ''             | ''                  | ''         | ''                             | ''                     | '' | '' | '' |
-			| ''                            | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                  | ''         | ''                             | 'Attributes'           | '' | '' | '' |
-			| ''                            | ''            | ''       | 'Amount'    | 'Company'      | 'Account'           | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' | '' | '' | '' |
-			| ''                            | 'Receipt'     | '*'      | '17,12'     | 'Main Company' | 'Bank account, TRY' | 'USD'      | 'Reporting currency'           | 'No'                   | '' | '' | '' |
-			| ''                            | 'Receipt'     | '*'      | '100'       | 'Main Company' | 'Bank account, TRY' | 'TRY'      | 'en description is empty'      | 'No'                   | '' | '' | '' |
-			| ''                            | 'Receipt'     | '*'      | '100'       | 'Main Company' | 'Bank account, TRY' | 'TRY'      | 'Local currency'               | 'No'                   | '' | '' | '' |
+				| 'Register  "R3010 Cash on hand"' | ''            | ''       | ''          | ''             | ''                  | ''         | ''                             | ''              | ''                     |
+				| ''                               | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                  | ''         | ''                             | ''              | 'Attributes'           |
+				| ''                               | ''            | ''       | 'Amount'    | 'Company'      | 'Account'           | 'Currency' | 'Multi currency movement type' | 'Movement type' | 'Deferred calculation' |
+				| ''                               | 'Receipt'     | '*'      | '17,12'     | 'Main Company' | 'Bank account, TRY' | 'USD'      | 'Reporting currency'           | ''              | 'No'                   |
+				| ''                               | 'Receipt'     | '*'      | '100'       | 'Main Company' | 'Bank account, TRY' | 'TRY'      | 'Local currency'               | ''              | 'No'                   |
+				| ''                               | 'Receipt'     | '*'      | '100'       | 'Main Company' | 'Bank account, TRY' | 'TRY'      | 'TRY'                          | ''              | 'No'                   |
+				| ''                               | 'Receipt'     | '*'      | '100'       | 'Main Company' | 'Bank account, TRY' | 'TRY'      | 'en description is empty'      | ''              | 'No'                   |
 			And I close all client application windows
 
 # Filters

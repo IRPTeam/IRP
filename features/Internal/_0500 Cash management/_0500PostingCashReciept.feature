@@ -378,12 +378,13 @@ Scenario: _050002 check Cash receipt movements with transaction type Payment fro
 		And I select "R3010 Cash on hand" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "R3010 Cash on hand"'          | ''            | ''       | ''          | ''                | ''                     | ''             | ''                         | ''                      | ''         | ''                         | ''                     |
-			| ''                                     | 'Record type' | 'Period' | 'Resources' | 'Dimensions'      | ''                     | ''             | ''                         | 'Attributes'            | ''         | ''                         | ''                     |
-			| ''                                     | ''            | ''       | 'Amount'    | 'Company'         | 'Account'              | 'Currency'     | 'Multi currency movement type'   | 'Deferred calculation'  | ''         | ''                         | ''                     |
-			| ''                                     | 'Receipt'     | '*'      | '17,12'     | 'Main Company'    | 'Cash desk №1'         | 'USD'          | 'Reporting currency'       | 'No'                    | ''         | ''                         | ''                     |
-			| ''                                     | 'Receipt'     | '*'      | '100'       | 'Main Company'    | 'Cash desk №1'         | 'TRY'          | 'en description is empty' | 'No'                    | ''         | ''                         | ''                     |
-			| ''                                     | 'Receipt'     | '*'      | '100'       | 'Main Company'    | 'Cash desk №1'         | 'TRY'          | 'Local currency'           | 'No'                    | ''         | ''                         | ''                     |
+			| 'Register  "R3010 Cash on hand"' | ''            | ''       | ''          | ''             | ''             | ''         | ''                             | ''              | ''                     |
+			| ''                               | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''             | ''         | ''                             | ''              | 'Attributes'           |
+			| ''                               | ''            | ''       | 'Amount'    | 'Company'      | 'Account'      | 'Currency' | 'Multi currency movement type' | 'Movement type' | 'Deferred calculation' |
+			| ''                               | 'Receipt'     | '*'      | '17,12'     | 'Main Company' | 'Cash desk №1' | 'USD'      | 'Reporting currency'           | ''              | 'No'                   |
+			| ''                               | 'Receipt'     | '*'      | '100'       | 'Main Company' | 'Cash desk №1' | 'TRY'      | 'Local currency'               | ''              | 'No'                   |
+			| ''                               | 'Receipt'     | '*'      | '100'       | 'Main Company' | 'Cash desk №1' | 'TRY'      | 'TRY'                          | ''              | 'No'                   |
+			| ''                               | 'Receipt'     | '*'      | '100'       | 'Main Company' | 'Cash desk №1' | 'TRY'      | 'en description is empty'      | ''              | 'No'                   |
 		And I close all client application windows
 	* Clear movements Cash receipt 1 and check that there is no movement on the registers
 		* Clear movements
@@ -438,12 +439,13 @@ Scenario: _050002 check Cash receipt movements with transaction type Payment fro
 		And I select "R3010 Cash on hand" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "R3010 Cash on hand"' | ''            | ''       | ''          | ''             | ''             | ''         | ''                             | ''                     | '' | '' | '' |
-			| ''                            | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''             | ''         | ''                             | 'Attributes'           | '' | '' | '' |
-			| ''                            | ''            | ''       | 'Amount'    | 'Company'      | 'Account'      | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' | '' | '' | '' |
-			| ''                            | 'Receipt'     | '*'      | '17,12'     | 'Main Company' | 'Cash desk №1' | 'USD'      | 'Reporting currency'           | 'No'                   | '' | '' | '' |
-			| ''                            | 'Receipt'     | '*'      | '100'       | 'Main Company' | 'Cash desk №1' | 'TRY'      | 'en description is empty'      | 'No'                   | '' | '' | '' |
-			| ''                            | 'Receipt'     | '*'      | '100'       | 'Main Company' | 'Cash desk №1' | 'TRY'      | 'Local currency'               | 'No'                   | '' | '' | '' |
+			| 'Register  "R3010 Cash on hand"' | ''            | ''       | ''          | ''             | ''             | ''         | ''                             | ''              | ''                     |
+			| ''                               | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''             | ''         | ''                             | ''              | 'Attributes'           |
+			| ''                               | ''            | ''       | 'Amount'    | 'Company'      | 'Account'      | 'Currency' | 'Multi currency movement type' | 'Movement type' | 'Deferred calculation' |
+			| ''                               | 'Receipt'     | '*'      | '17,12'     | 'Main Company' | 'Cash desk №1' | 'USD'      | 'Reporting currency'           | ''              | 'No'                   |
+			| ''                               | 'Receipt'     | '*'      | '100'       | 'Main Company' | 'Cash desk №1' | 'TRY'      | 'Local currency'               | ''              | 'No'                   |
+			| ''                               | 'Receipt'     | '*'      | '100'       | 'Main Company' | 'Cash desk №1' | 'TRY'      | 'TRY'                          | ''              | 'No'                   |
+			| ''                               | 'Receipt'     | '*'      | '100'       | 'Main Company' | 'Cash desk №1' | 'TRY'      | 'en description is empty'      | ''              | 'No'                   |
 		And I close all client application windows
 
 

@@ -364,12 +364,13 @@ Scenario: _050002 check Bank payment movements with transaction type Payment to 
 		And I select "R3010 Cash on hand" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "R3010 Cash on hand"'          | ''            | ''       | ''                     | ''               | ''                          | ''               | ''                             | ''                     | ''                  | ''                             | ''                     |
-			| ''                                     | 'Record type' | 'Period' | 'Resources'            | 'Dimensions'     | ''                          | ''               | ''                             | 'Attributes'           | ''                  | ''                             | ''                     |
-			| ''                                     | ''            | ''       | 'Amount'               | 'Company'        | 'Account'                   | 'Currency'       | 'Multi currency movement type' | 'Deferred calculation' | ''                  | ''                             | ''                     |
-			| ''                                     | 'Expense'     | '*'      | '171,2'               | 'Main Company'   | 'Bank account, TRY'         | 'USD'            | 'Reporting currency'           | 'No'                   | ''                  | ''                             | ''                     |
-			| ''                                     | 'Expense'     | '*'      | '1 000'                | 'Main Company'   | 'Bank account, TRY'         | 'TRY'            | 'en description is empty'      | 'No'                   | ''                  | ''                             | ''                     |
-			| ''                                     | 'Expense'     | '*'      | '1 000'                | 'Main Company'   | 'Bank account, TRY'         | 'TRY'            | 'Local currency'               | 'No'                   | ''                  | ''                             | ''                     |
+			| 'Register  "R3010 Cash on hand"' | ''            | ''       | ''          | ''             | ''                  | ''         | ''                             | ''              | ''                     |
+			| ''                               | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                  | ''         | ''                             | ''              | 'Attributes'           |
+			| ''                               | ''            | ''       | 'Amount'    | 'Company'      | 'Account'           | 'Currency' | 'Multi currency movement type' | 'Movement type' | 'Deferred calculation' |
+			| ''                               | 'Expense'     | '*'      | '171,2'     | 'Main Company' | 'Bank account, TRY' | 'USD'      | 'Reporting currency'           | ''              | 'No'                   |
+			| ''                               | 'Expense'     | '*'      | '1 000'     | 'Main Company' | 'Bank account, TRY' | 'TRY'      | 'Local currency'               | ''              | 'No'                   |
+			| ''                               | 'Expense'     | '*'      | '1 000'     | 'Main Company' | 'Bank account, TRY' | 'TRY'      | 'TRY'                          | ''              | 'No'                   |
+			| ''                               | 'Expense'     | '*'      | '1 000'     | 'Main Company' | 'Bank account, TRY' | 'TRY'      | 'en description is empty'      | ''              | 'No'                   |
 		And I close all client application windows
 	* Clear movements Bank payment 1 and check that there is no movement on the registers
 		* Clear movements
@@ -424,13 +425,14 @@ Scenario: _050002 check Bank payment movements with transaction type Payment to 
 		And I select "R3010 Cash on hand" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "R3010 Cash on hand"'          | ''            | ''       | ''                     | ''               | ''                          | ''               | ''                             | ''                     | ''                  | ''                             | ''                     |
-			| ''                                     | 'Record type' | 'Period' | 'Resources'            | 'Dimensions'     | ''                          | ''               | ''                             | 'Attributes'           | ''                  | ''                             | ''                     |
-			| ''                                     | ''            | ''       | 'Amount'               | 'Company'        | 'Account'                   | 'Currency'       | 'Multi currency movement type' | 'Deferred calculation' | ''                  | ''                             | ''                     |
-			| ''                                     | 'Expense'     | '*'      | '171,2'               | 'Main Company'   | 'Bank account, TRY'         | 'USD'            | 'Reporting currency'           | 'No'                   | ''                  | ''                             | ''                     |
-			| ''                                     | 'Expense'     | '*'      | '1 000'                | 'Main Company'   | 'Bank account, TRY'         | 'TRY'            | 'en description is empty'      | 'No'                   | ''                  | ''                             | ''                     |
-			| ''                                     | 'Expense'     | '*'      | '1 000'                | 'Main Company'   | 'Bank account, TRY'         | 'TRY'            | 'Local currency'               | 'No'                   | ''                  | ''                             | ''                     |
-			And I close all client application windows
+			| 'Register  "R3010 Cash on hand"' | ''            | ''       | ''          | ''             | ''                  | ''         | ''                             | ''              | ''                     |
+			| ''                               | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                  | ''         | ''                             | ''              | 'Attributes'           |
+			| ''                               | ''            | ''       | 'Amount'    | 'Company'      | 'Account'           | 'Currency' | 'Multi currency movement type' | 'Movement type' | 'Deferred calculation' |
+			| ''                               | 'Expense'     | '*'      | '171,2'     | 'Main Company' | 'Bank account, TRY' | 'USD'      | 'Reporting currency'           | ''              | 'No'                   |
+			| ''                               | 'Expense'     | '*'      | '1 000'     | 'Main Company' | 'Bank account, TRY' | 'TRY'      | 'Local currency'               | ''              | 'No'                   |
+			| ''                               | 'Expense'     | '*'      | '1 000'     | 'Main Company' | 'Bank account, TRY' | 'TRY'      | 'TRY'                          | ''              | 'No'                   |
+			| ''                               | 'Expense'     | '*'      | '1 000'     | 'Main Company' | 'Bank account, TRY' | 'TRY'      | 'en description is empty'      | ''              | 'No'                   |
+		And I close all client application windows
 
 # Filters
 

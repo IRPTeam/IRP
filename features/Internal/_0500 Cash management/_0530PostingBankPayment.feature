@@ -361,10 +361,10 @@ Scenario: _050002 check Bank payment movements with transaction type Payment to 
 			| ''                                    | 'Expense'     | '*'      | '1 000'     | 'Main Company' | '$$PurchaseInvoice018001$$' | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'TRY'      | 'en description is empty'      | 'No'                   |
 			| ''                                    | 'Expense'     | '*'      | '1 000'     | 'Main Company' | '$$PurchaseInvoice018001$$' | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'TRY'      | 'Local currency'               | 'No'                   |
 			| ''                                    | 'Expense'     | '*'      | '1 000'     | 'Main Company' | '$$PurchaseInvoice018001$$' | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'TRY'      | 'TRY'                          | 'No'                   |
-		And I select "Account balance" exact value from "Register" drop-down list
+		And I select "R3010 Cash on hand" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Account balance"'          | ''            | ''       | ''                     | ''               | ''                          | ''               | ''                             | ''                     | ''                  | ''                             | ''                     |
+			| 'Register  "R3010 Cash on hand"'          | ''            | ''       | ''                     | ''               | ''                          | ''               | ''                             | ''                     | ''                  | ''                             | ''                     |
 			| ''                                     | 'Record type' | 'Period' | 'Resources'            | 'Dimensions'     | ''                          | ''               | ''                             | 'Attributes'           | ''                  | ''                             | ''                     |
 			| ''                                     | ''            | ''       | 'Amount'               | 'Company'        | 'Account'                   | 'Currency'       | 'Multi currency movement type' | 'Deferred calculation' | ''                  | ''                             | ''                     |
 			| ''                                     | 'Expense'     | '*'      | '171,2'               | 'Main Company'   | 'Bank account, TRY'         | 'USD'            | 'Reporting currency'           | 'No'                   | ''                  | ''                             | ''                     |
@@ -383,7 +383,7 @@ Scenario: _050002 check Bank payment movements with transaction type Payment to 
 			And "List" table does not contain lines
 				| 'Recorder'           |
 				| '$$BankPayment0530011$$' |
-			Given I open hyperlink "e1cib/list/AccumulationRegister.AccountBalance"
+			Given I open hyperlink "e1cib/list/AccumulationRegister.R3010B_CashOnHand"
 			And "List" table does not contain lines
 				| 'Recorder'           |
 				| '$$BankPayment0530011$$' |
@@ -421,10 +421,10 @@ Scenario: _050002 check Bank payment movements with transaction type Payment to 
 			| ''                                    | 'Expense'     | '*'      | '1 000'     | 'Main Company' | '$$PurchaseInvoice018001$$' | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'TRY'      | 'en description is empty'      | 'No'                   |
 			| ''                                    | 'Expense'     | '*'      | '1 000'     | 'Main Company' | '$$PurchaseInvoice018001$$' | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'TRY'      | 'Local currency'               | 'No'                   |
 			| ''                                    | 'Expense'     | '*'      | '1 000'     | 'Main Company' | '$$PurchaseInvoice018001$$' | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'TRY'      | 'TRY'                          | 'No'                   |
-		And I select "Account balance" exact value from "Register" drop-down list
+		And I select "R3010 Cash on hand" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Account balance"'          | ''            | ''       | ''                     | ''               | ''                          | ''               | ''                             | ''                     | ''                  | ''                             | ''                     |
+			| 'Register  "R3010 Cash on hand"'          | ''            | ''       | ''                     | ''               | ''                          | ''               | ''                             | ''                     | ''                  | ''                             | ''                     |
 			| ''                                     | 'Record type' | 'Period' | 'Resources'            | 'Dimensions'     | ''                          | ''               | ''                             | 'Attributes'           | ''                  | ''                             | ''                     |
 			| ''                                     | ''            | ''       | 'Amount'               | 'Company'        | 'Account'                   | 'Currency'       | 'Multi currency movement type' | 'Deferred calculation' | ''                  | ''                             | ''                     |
 			| ''                                     | 'Expense'     | '*'      | '171,2'               | 'Main Company'   | 'Bank account, TRY'         | 'USD'            | 'Reporting currency'           | 'No'                   | ''                  | ''                             | ''                     |

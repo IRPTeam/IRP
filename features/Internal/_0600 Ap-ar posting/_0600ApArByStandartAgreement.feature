@@ -216,10 +216,10 @@ Scenario: _060003 create Cash receipt with the type of settlements under standar
 			| ''                                    | 'Expense'     | '*'      | '11 000'    | 'Main Company' | ''               | 'Nicoletta' | 'Company Nicoletta' | 'Standard (Customer)' | 'TRY'      | 'TRY'                          | 'No'                   |
 			| ''                                    | 'Expense'     | '*'      | '11 000'    | 'Main Company' | ''               | 'Nicoletta' | 'Company Nicoletta' | 'Standard (Customer)' | 'TRY'      | 'en description is empty'      | 'No'                   |
 	
-		And I select "Account balance" exact value from "Register" drop-down list
+		And I select "R3010 Cash on hand" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Account balance"'          | ''            | ''       | ''                     | ''               | ''                       | ''               | ''                             | ''                     | ''                  | ''                             | ''                     |
+			| 'Register  "R3010 Cash on hand"'          | ''            | ''       | ''                     | ''               | ''                       | ''               | ''                             | ''                     | ''                  | ''                             | ''                     |
 			| ''                                     | 'Record type' | 'Period' | 'Resources'            | 'Dimensions'     | ''                       | ''               | ''                             | 'Attributes'           | ''                  | ''                             | ''                     |
 			| ''                                     | ''            | ''       | 'Amount'               | 'Company'        | 'Account'                | 'Currency'       | 'Multi currency movement type' | 'Deferred calculation' | ''                  | ''                             | ''                     |
 			| ''                                     | 'Receipt'     | '*'      | '1 883,2'             | 'Main Company'   | 'Cash desk №2'           | 'USD'            | 'Reporting currency'           | 'No'                   | ''                  | ''                             | ''                     |
@@ -290,10 +290,10 @@ Scenario: _0600031 create Bank receipt with the type of settlements under standa
 			| ''                                    | 'Expense'     | '*'      | '11 000'    | 'Main Company' | ''               | 'Nicoletta' | 'Company Nicoletta' | 'Standard (Customer)' | 'TRY'      | 'TRY'                          | 'No'                   |
 			| ''                                    | 'Expense'     | '*'      | '11 000'    | 'Main Company' | ''               | 'Nicoletta' | 'Company Nicoletta' | 'Standard (Customer)' | 'TRY'      | 'en description is empty'      | 'No'                   |
 	
-		And I select "Account balance" exact value from "Register" drop-down list
+		And I select "R3010 Cash on hand" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Account balance"'          | ''            | ''       | ''                     | ''               | ''                       | ''               | ''                             | ''                     | ''                  | ''                             | ''                     |
+			| 'Register  "R3010 Cash on hand"'          | ''            | ''       | ''                     | ''               | ''                       | ''               | ''                             | ''                     | ''                  | ''                             | ''                     |
 			| ''                                     | 'Record type' | 'Period' | 'Resources'            | 'Dimensions'     | ''                       | ''               | ''                             | 'Attributes'           | ''                  | ''                             | ''                     |
 			| ''                                     | ''            | ''       | 'Amount'               | 'Company'        | 'Account'                | 'Currency'       | 'Multi currency movement type' | 'Deferred calculation' | ''                  | ''                             | ''                     |
 			| ''                                     | 'Receipt'     | '*'      | '1 883,2'             | 'Main Company'   | 'Bank account, TRY'      | 'USD'            | 'Reporting currency'           | 'No'                   | ''                  | ''                             | ''                     |
@@ -371,10 +371,10 @@ Scenario: _060004 check the offset of the advance for Sales invoice with the typ
 			| ''                                   | 'Receipt'     | '*'      | '2 054,4'   | 'Main Company' | 'Nicoletta' | 'Company Nicoletta' | 'USD'      | '$$BankReceipt060004$$' | 'Reporting currency'           | 'No'                   | '' |
 			| ''                                   | 'Receipt'     | '*'      | '12 000'    | 'Main Company' | 'Nicoletta' | 'Company Nicoletta' | 'TRY'      | '$$BankReceipt060004$$' | 'Local currency'               | 'No'                   | '' |
 			| ''                                   | 'Receipt'     | '*'      | '12 000'    | 'Main Company' | 'Nicoletta' | 'Company Nicoletta' | 'TRY'      | '$$BankReceipt060004$$' | 'en description is empty'      | 'No'                   | '' |
-		And I select "Account balance" exact value from "Register" drop-down list
+		And I select "R3010 Cash on hand" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Account balance"'          | ''            | ''       | ''                     | ''               | ''                       | ''                  | ''                             | ''                      | ''                             | ''                     | ''         |
+			| 'Register  "R3010 Cash on hand"'          | ''            | ''       | ''                     | ''               | ''                       | ''                  | ''                             | ''                      | ''                             | ''                     | ''         |
 			| ''                                     | 'Record type' | 'Period' | 'Resources'            | 'Dimensions'     | ''                       | ''                  | ''                             | 'Attributes'            | ''                             | ''                     | ''         |
 			| ''                                     | ''            | ''       | 'Amount'               | 'Company'        | 'Account'                | 'Currency'          | 'Multi currency movement type' | 'Deferred calculation'  | ''                             | ''                     | ''         |
 			| ''                                     | 'Receipt'     | '*'      | '2 054,4'             | 'Main Company'   | 'Bank account, TRY'      | 'USD'               | 'Reporting currency'           | 'No'                    | ''                             | ''                     | ''         |
@@ -614,10 +614,10 @@ Scenario: _060006 create Cash payment with the type of settlements under standar
 			| ''                                    | 'Expense'     | '*'      | '11 000'    | 'Main Company' | ''               | 'Veritas' | 'Company Veritas ' | 'Standard (Vendor)' | 'TRY'      | 'Local currency'               | 'No'                   |
 			| ''                                    | 'Expense'     | '*'      | '11 000'    | 'Main Company' | ''               | 'Veritas' | 'Company Veritas ' | 'Standard (Vendor)' | 'TRY'      | 'TRY'                          | 'No'                   |
 			| ''                                    | 'Expense'     | '*'      | '11 000'    | 'Main Company' | ''               | 'Veritas' | 'Company Veritas ' | 'Standard (Vendor)' | 'TRY'      | 'en description is empty'      | 'No'                   |
-		And I select "Account balance" exact value from "Register" drop-down list
+		And I select "R3010 Cash on hand" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Account balance"'          | ''            | ''       | ''                     | ''               | ''                       | ''               | ''                             | ''                     | ''                 | ''                             | ''                     |
+			| 'Register  "R3010 Cash on hand"'          | ''            | ''       | ''                     | ''               | ''                       | ''               | ''                             | ''                     | ''                 | ''                             | ''                     |
 			| ''                                     | 'Record type' | 'Period' | 'Resources'            | 'Dimensions'     | ''                       | ''               | ''                             | 'Attributes'           | ''                 | ''                             | ''                     |
 			| ''                                     | ''            | ''       | 'Amount'               | 'Company'        | 'Account'                | 'Currency'       | 'Multi currency movement type' | 'Deferred calculation' | ''                 | ''                             | ''                     |
 			| ''                                     | 'Expense'     | '*'      | '1 883,2'             | 'Main Company'   | 'Cash desk №2'           | 'USD'            | 'Reporting currency'           | 'No'                   | ''                 | ''                             | ''                     |
@@ -689,10 +689,10 @@ Scenario: _060007 check the offset of Purchase invoice advance with the type of 
 			| ''                                 | 'Receipt'     | '*'      | '2 054,4'   | 'Main Company' | 'Veritas' | 'Company Veritas ' | 'USD'      | '$$BankPayment060007$$' | 'Reporting currency'           | 'No'                   | '' |
 			| ''                                 | 'Receipt'     | '*'      | '12 000'    | 'Main Company' | 'Veritas' | 'Company Veritas ' | 'TRY'      | '$$BankPayment060007$$' | 'Local currency'               | 'No'                   | '' |
 			| ''                                 | 'Receipt'     | '*'      | '12 000'    | 'Main Company' | 'Veritas' | 'Company Veritas ' | 'TRY'      | '$$BankPayment060007$$' | 'en description is empty'      | 'No'                   | '' |
-		And I select "Account balance" exact value from "Register" drop-down list
+		And I select "R3010 Cash on hand" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Account balance"'          | ''            | ''       | ''                     | ''               | ''                       | ''                 | ''                             | ''                      | ''                             | ''                     | ''         |
+			| 'Register  "R3010 Cash on hand"'          | ''            | ''       | ''                     | ''               | ''                       | ''                 | ''                             | ''                      | ''                             | ''                     | ''         |
 			| ''                                     | 'Record type' | 'Period' | 'Resources'            | 'Dimensions'     | ''                       | ''                 | ''                             | 'Attributes'            | ''                             | ''                     | ''         |
 			| ''                                     | ''            | ''       | 'Amount'               | 'Company'        | 'Account'                | 'Currency'         | 'Multi currency movement type' | 'Deferred calculation'  | ''                             | ''                     | ''         |
 			| ''                                     | 'Expense'     | '*'      | '2 054,4'             | 'Main Company'   | 'Bank account, TRY'      | 'USD'              | 'Reporting currency'           | 'No'                    | ''                             | ''                     | ''         |
@@ -833,10 +833,10 @@ Scenario: _060008 create Bank payment with the type of settlements under standar
 			| ''                                    | 'Expense'     | '*'      | '11 000'    | 'Main Company' | ''               | 'Veritas' | 'Company Veritas ' | 'Standard (Vendor)' | 'TRY'      | 'Local currency'               | 'No'                   |
 			| ''                                    | 'Expense'     | '*'      | '11 000'    | 'Main Company' | ''               | 'Veritas' | 'Company Veritas ' | 'Standard (Vendor)' | 'TRY'      | 'TRY'                          | 'No'                   |
 			| ''                                    | 'Expense'     | '*'      | '11 000'    | 'Main Company' | ''               | 'Veritas' | 'Company Veritas ' | 'Standard (Vendor)' | 'TRY'      | 'en description is empty'      | 'No'                   |
-		And I select "Account balance" exact value from "Register" drop-down list
+		And I select "R3010 Cash on hand" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Account balance"'          | ''            | ''       | ''                     | ''               | ''                       | ''               | ''                             | ''                     | ''                 | ''                             | ''                     |
+			| 'Register  "R3010 Cash on hand"'          | ''            | ''       | ''                     | ''               | ''                       | ''               | ''                             | ''                     | ''                 | ''                             | ''                     |
 			| ''                                     | 'Record type' | 'Period' | 'Resources'            | 'Dimensions'     | ''                       | ''               | ''                             | 'Attributes'           | ''                 | ''                             | ''                     |
 			| ''                                     | ''            | ''       | 'Amount'               | 'Company'        | 'Account'                | 'Currency'       | 'Multi currency movement type' | 'Deferred calculation' | ''                 | ''                             | ''                     |
 			| ''                                     | 'Expense'     | '*'      | '1 883,2'             | 'Main Company'   | 'Bank account, TRY'      | 'USD'            | 'Reporting currency'           | 'No'                   | ''                 | ''                             | ''                     |

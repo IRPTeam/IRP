@@ -312,7 +312,7 @@ Scenario: _054005 create Cash receipt and Cash payment based on Cash transfer or
 		| 'USD'      | '$$CashPayment054005$$'       | '$$CashTransferOrder054004$$' | 'Main Company' | 'Cash desk №2' | 'Outgoing'            | ''        | ''           | '-200,00'   |
 		| 'TRY'      | '$$CashReceipt054005$$'       | '$$CashTransferOrder054004$$' | 'Main Company' | 'Cash desk №1' | 'Incoming'            | ''        | ''           | '-1 150,00' |
 	* Check Cash payment and Cash receipt movements by register AccountBalance
-		Given I open hyperlink "e1cib/list/AccumulationRegister.AccountBalance"
+		Given I open hyperlink "e1cib/list/AccumulationRegister.R3010B_CashOnHand"
 		And "List" table contains lines
 		| 'Currency' | 'Recorder'              | 'Company'      | 'Account'      | 'Amount'   |
 		| 'TRY'      | '$$CashReceipt054005$$' | 'Main Company' | 'Cash desk №1' | '1 150,00' |

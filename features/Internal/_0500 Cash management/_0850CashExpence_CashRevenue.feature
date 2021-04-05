@@ -146,7 +146,7 @@ Scenario: _085002 check movements of the document Cash revenue
 		| ''                               | '*'           | '100'       | 'Main Company'  | 'Accountants office' | 'Fuel'              | ''         | 'TRY'                          | ''                     | 'en description is empty'      | 'No'                   | ''         | ''                             | ''                     |
 		| ''                               | '*'           | '100'       | 'Main Company'  | 'Accountants office' | 'Fuel'              | ''         | 'TRY'                          | ''                     | 'Local currency'               | 'No'                   | ''         | ''                             | ''                     |
 		| ''                               | ''            | ''          | ''              | ''                   | ''                  | ''         | ''                             | ''                     | ''                             | ''                     | ''         | ''                             | ''                     |
-		| 'Register  "Account balance"'    | ''            | ''          | ''              | ''                   | ''                  | ''         | ''                             | ''                     | ''                             | ''                     | ''         | ''                             | ''                     |
+		| 'Register  "R3010 Cash on hand"'    | ''            | ''          | ''              | ''                   | ''                  | ''         | ''                             | ''                     | ''                             | ''                     | ''         | ''                             | ''                     |
 		| ''                               | 'Record type' | 'Period'    | 'Resources'     | 'Dimensions'         | ''                  | ''         | ''                             | 'Attributes'           | ''                             | ''                     | ''         | ''                             | ''                     |
 		| ''                               | ''            | ''          | 'Amount'        | 'Company'            | 'Account'           | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' | ''                             | ''                     | ''         | ''                             | ''                     |
 		| ''                               | 'Receipt'     | '*'         | '20,2'          | 'Main Company'       | 'Bank account, TRY' | 'USD'      | 'Reporting currency'           | 'No'                   | ''                             | ''                     | ''         | ''                             | ''                     |
@@ -169,7 +169,7 @@ Scenario: _085002 check movements of the document Cash revenue
 			And "List" table does not contain lines
 			| 'Recorder'        |
 			| '$$CashRevenue1$$' |
-			Given I open hyperlink "e1cib/list/AccumulationRegister.AccountBalance"
+			Given I open hyperlink "e1cib/list/AccumulationRegister.R3010B_CashOnHand"
 			And "List" table does not contain lines
 			| 'Recorder'        |
 			| '$$CashRevenue1$$' |
@@ -203,10 +203,10 @@ Scenario: _085002 check movements of the document Cash revenue
 			| ''                               | '*'      | '17,12'     | 'Main Company' | 'Accountants office' | 'Fuel'         | ''         | 'USD'      | ''                    | 'Reporting currency'           | 'No'                   | '' | '' | '' |
 			| ''                               | '*'      | '100'       | 'Main Company' | 'Accountants office' | 'Fuel'         | ''         | 'TRY'      | ''                    | 'en description is empty'      | 'No'                   | '' | '' | '' |
 			| ''                               | '*'      | '100'       | 'Main Company' | 'Accountants office' | 'Fuel'         | ''         | 'TRY'      | ''                    | 'Local currency'               | 'No'                   | '' | '' | '' |
-			And I select "Account balance" exact value from "Register" drop-down list
+			And I select "R3010 Cash on hand" exact value from "Register" drop-down list
 			And I click "Generate report" button
 			And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Account balance"'    | ''            | ''          | ''              | ''                   | ''                  | ''         | ''                             | ''                     | ''                             | ''                     | ''         | ''                             | ''                     |
+			| 'Register  "R3010 Cash on hand"'    | ''            | ''          | ''              | ''                   | ''                  | ''         | ''                             | ''                     | ''                             | ''                     | ''         | ''                             | ''                     |
 			| ''                               | 'Record type' | 'Period'    | 'Resources'     | 'Dimensions'         | ''                  | ''         | ''                             | 'Attributes'           | ''                             | ''                     | ''         | ''                             | ''                     |
 			| ''                               | ''            | ''          | 'Amount'        | 'Company'            | 'Account'           | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' | ''                             | ''                     | ''         | ''                             | ''                     |
 			| ''                               | 'Receipt'     | '*'         | '20,2'         | 'Main Company'       | 'Bank account, TRY' | 'USD'      | 'Reporting currency'           | 'No'                   | ''                             | ''                     | ''         | ''                             | ''                     |
@@ -361,10 +361,10 @@ Scenario: _085006 check movements of the document Cash expense
 		| ''                            | '*'      | '3,08'      | '3,08'          | '17,12'      | '$$CashExpense1$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'USD'      | 'Reporting currency'           | 'No'                   |
 		| ''                            | '*'      | '18'        | '18'            | '100'        | '$$CashExpense1$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'en description is empty'      | 'No'                   |
 		| ''                            | '*'      | '18'        | '18'            | '100'        | '$$CashExpense1$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'Local currency'               | 'No'                   |
-		And I select "Account balance" exact value from "Register" drop-down list
+		And I select "R3010 Cash on hand" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Account balance"' | ''            | ''       | ''          | ''             | ''                  | ''         | ''                             | ''                     | '' | '' | '' | '' | '' |
+		| 'Register  "R3010 Cash on hand"' | ''            | ''       | ''          | ''             | ''                  | ''         | ''                             | ''                     | '' | '' | '' | '' | '' |
 		| ''                            | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                  | ''         | ''                             | 'Attributes'           | '' | '' | '' | '' | '' |
 		| ''                            | ''            | ''       | 'Amount'    | 'Company'      | 'Account'           | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' | '' | '' | '' | '' | '' |
 		| ''                            | 'Expense'     | '*'      | '20,2'      | 'Main Company' | 'Bank account, TRY' | 'USD'      | 'Reporting currency'           | 'No'                   | '' | '' | '' | '' | '' |
@@ -387,7 +387,7 @@ Scenario: _085006 check movements of the document Cash expense
 			And "List" table does not contain lines
 				| 'Recorder'        |
 				| '$$CashExpense1$$' |
-			Given I open hyperlink "e1cib/list/AccumulationRegister.AccountBalance"
+			Given I open hyperlink "e1cib/list/AccumulationRegister.R3010B_CashOnHand"
 			And "List" table does not contain lines
 				| 'Recorder'        |
 				| '$$CashExpense1$$' |
@@ -421,10 +421,10 @@ Scenario: _085006 check movements of the document Cash expense
 			| ''                            | '*'      | '3,08'      | '3,08'          | '17,12'      | '$$CashExpense1$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'USD'      | 'Reporting currency'           | 'No'                   |
 			| ''                            | '*'      | '18'        | '18'            | '100'        | '$$CashExpense1$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'en description is empty'      | 'No'                   |
 			| ''                            | '*'      | '18'        | '18'            | '100'        | '$$CashExpense1$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'Local currency'               | 'No'                   |
-			And I select "Account balance" exact value from "Register" drop-down list
+			And I select "R3010 Cash on hand" exact value from "Register" drop-down list
 			And I click "Generate report" button
 			And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Account balance"' | ''            | ''       | ''          | ''             | ''                  | ''         | ''                             | ''                     | '' | '' | '' | '' | '' |
+			| 'Register  "R3010 Cash on hand"' | ''            | ''       | ''          | ''             | ''                  | ''         | ''                             | ''                     | '' | '' | '' | '' | '' |
 			| ''                            | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                  | ''         | ''                             | 'Attributes'           | '' | '' | '' | '' | '' |
 			| ''                            | ''            | ''       | 'Amount'    | 'Company'      | 'Account'           | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' | '' | '' | '' | '' | '' |
 			| ''                            | 'Expense'     | '*'      | '20,2'      | 'Main Company' | 'Bank account, TRY' | 'USD'      | 'Reporting currency'           | 'No'                   | '' | '' | '' | '' | '' |

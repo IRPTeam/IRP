@@ -628,6 +628,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R1021B_VendorsTransactions());
 	QueryArray.Add(R1020B_AdvancesToVendors());
 	QueryArray.Add(R5010B_ReconciliationStatement());
+	QueryArray.Add(R3010B_CashOnHand());
 	Return QueryArray;
 EndFunction
 
@@ -702,7 +703,13 @@ Function PaymentList()
 		|	BankPaymentPaymentList.BusinessUnit AS BusinessUnit,
 		|	BankPaymentPaymentList.ExpenseType AS ExpenseType,
 		|	BankPaymentPaymentList.AdditionalAnalytic AS AdditionalAnalytic,
-		|	BankPaymentPaymentList.Commission AS Commission
+		|	BankPaymentPaymentList.Commission AS Commission,
+		|   BankPaymentPaymentList.Ref.TransactionType
+		|   = VALUE(Enum.OutgoingPaymentTransactionTypes.PaymentToVendor) AS IsPaymentToVendor,
+		|	BankPaymentPaymentList.Ref.TransactionType
+		|   = VALUE(Enum.OutgoingPaymentTransactionTypes.CurrencyExchange) AS IsCurrencyExchange,
+		|	BankPaymentPaymentList.Ref.TransactionType
+		|   = VALUE(Enum.OutgoingPaymentTransactionTypes.CashTransferOrder) AS IsCashTransferOrder
 		|INTO PaymentList
 		|FROM
 		|	Document.BankPayment.PaymentList AS BankPaymentPaymentList
@@ -858,6 +865,33 @@ Function R5010B_ReconciliationStatement()
 		|	PaymentList.Currency,
 		|	PaymentList.Period,
 		|	VALUE(AccumulationRecordType.Receipt)";
+EndFunction
+
+Function R3010B_CashOnHand()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	PaymentList.Period,
+		|	PaymentList.Company,
+		|	PaymentList.Account,
+		|	PaymentList.Currency,
+		|	PaymentList.ExpenseType AS MovementType,
+		|	SUM(PaymentList.Amount) AS Amount,
+		|	PaymentList.Period
+		|INTO R3010B_CashOnHand
+		|FROM
+		|	PaymentList AS PaymentList
+		|WHERE
+		|	PaymentList.IsPaymentToVendor
+		|	OR PaymentList.IsCurrencyExchange
+		|	OR PaymentList.IsCashTransferOrder
+		|GROUP BY
+		|	VALUE(AccumulationRecordType.Expense),
+		|	PaymentList.Period,
+		|	PaymentList.Company,
+		|	PaymentList.Account,
+		|	PaymentList.Currency,
+		|	PaymentList.ExpenseType";	
 EndFunction
 
 #EndRegion

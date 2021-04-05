@@ -630,6 +630,8 @@ EndFunction
 Function GetQueryTextsMasterTables()
 	QueryArray = New Array;
 	QueryArray.Add(R5010B_ReconciliationStatement());
+	QueryArray.Add(R3010B_CashOnHand());
+	QueryArray.Add(R3015B_CashAdvance());
 	Return QueryArray;
 EndFunction
 
@@ -640,7 +642,18 @@ Function PaymentList()
 	|	PaymentList.Ref.Company AS Company,
 	|	PaymentList.Payer AS LegalName,
 	|	PaymentList.Ref.Currency AS Currency,
-	|	PaymentList.Amount
+	|	PaymentList.CashAccount AS CashAccount,
+	|	PaymentList.BasisDocument AS Basis,
+	|	PaymentList.Partner.Employee AS IsEmployee,
+	|	PaymentList.Amount,
+	|	BankPaymentPaymentList.Ref.TransactionType
+	|   = VALUE(Enum.IncomingPaymentTransactionType.PaymentFromCustomer) AS IsPaymentFromCustomer,
+	|	BankPaymentPaymentList.Ref.TransactionType
+	|   = VALUE(Enum.IncomingPaymentTransactionType.CurrencyExchange) AS IsCurrencyExchange,
+	|	BankPaymentPaymentList.Ref.TransactionType
+	|   = VALUE(Enum.IncomingPaymentTransactionType.CashTransferOrder) AS IsCashTransferOrder,
+	|	BankPaymentPaymentList.Ref.TransactionType
+	|   = VALUE(Enum.IncomingPaymentTransactionType.TransferFromPOS) AS IsTransferFromPOS
 	|INTO PaymentList
 	|FROM
 	|	Document.CashReceipt.PaymentList AS PaymentList
@@ -656,6 +669,52 @@ Function R5010B_ReconciliationStatement()
 	|INTO R5010B_ReconciliationStatement
 	|FROM
 	|	PaymentList";	
+EndFunction
+
+Function R3010B_CashOnHand()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	PaymentList.Period,
+		|	PaymentList.Company,
+		|	PaymentList.CashAccount AS Account,
+		|	PaymentList.Currency,
+		|	SUM(PaymentList.Amount) AS Amount
+		|INTO R3010B_CashOnHand
+		|FROM
+		|	PaymentList AS PaymentList
+		|WHERE
+		|	PaymentList.IsPaymentFromCustomer
+		|	OR PaymentList.IsCashTransferOrder
+		|GROUP BY
+		|	VALUE(AccumulationRecordType.Receipt),
+		|	PaymentList.Period,
+		|	PaymentList.Company,
+		|	PaymentList.CashAccount,
+		|	PaymentList.Currency";	
+EndFunction
+
+Function R3015B_CashAdvance()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	PaymentList.Period,
+		|	PaymentList.Company,
+		|	PaymentList.Currency,
+		|	PaymentList.Basis,
+		|	SUM(PaymentList.Amount) AS Amount
+		|INTO R3015B_CashAdvance
+		|FROM
+		|	PaymentList AS PaymentList
+		|WHERE
+		|	PaymentList.IsCurrencyExchange
+		|	AND PaymentList.IsEmployee
+		|GROUP BY
+		|	VALUE(AccumulationRecordType.Expense),
+		|	PaymentList.Period,
+		|	PaymentList.Company,
+		|	PaymentList.Currency,
+		|	PaymentList.Basis";	
 EndFunction
 
 #EndRegion

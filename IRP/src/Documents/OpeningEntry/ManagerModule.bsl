@@ -412,7 +412,9 @@ Function GetQueryTextsMasterTables()
 	QueryArray = New Array;
 	QueryArray.Add(R4010B_ActualStocks());
 	QueryArray.Add(R4011B_FreeStocks());
-	QueryArray.Add(R4014B_SerialLotNumber());	
+	QueryArray.Add(R4014B_SerialLotNumber());
+//	QueryArray.Add(R3010B_CashOnHand());
+//	QueryArray.Add(R3015B_CashAdvance());	
 	Return QueryArray;
 EndFunction
 

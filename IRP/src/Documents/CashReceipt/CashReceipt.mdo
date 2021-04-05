@@ -76,6 +76,8 @@
   <registerRecords>AccumulationRegister.PartnerApTransactions</registerRecords>
   <registerRecords>AccumulationRegister.AccountBalance</registerRecords>
   <registerRecords>AccumulationRegister.R5010B_ReconciliationStatement</registerRecords>
+  <registerRecords>AccumulationRegister.R3010B_CashOnHand</registerRecords>
+  <registerRecords>AccumulationRegister.R3015B_CashAdvance</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>

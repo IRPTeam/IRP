@@ -738,6 +738,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R2020B_AdvancesFromCustomers());
 	QueryArray.Add(R5011B_PartnersAging());
 	QueryArray.Add(R5010B_ReconciliationStatement());
+	QueryArray.Add(R3010B_CashOnHand());
 	Return QueryArray;
 EndFunction
 
@@ -819,7 +820,15 @@ Function PaymentList()
 		|	BankReceiptPaymentList.BusinessUnit AS BusinessUnit,
 		|	BankReceiptPaymentList.ExpenseType AS ExpenseType,
 		|	BankReceiptPaymentList.AdditionalAnalytic AS AdditionalAnalytic,
-		|	BankReceiptPaymentList.Commission AS Commission
+		|	BankReceiptPaymentList.Commission AS Commission,
+		|	BankPaymentPaymentList.Ref.TransactionType
+		|   = VALUE(Enum.IncomingPaymentTransactionType.PaymentFromCustomer) AS IsPaymentFromCustomer,
+		|	BankPaymentPaymentList.Ref.TransactionType
+		|   = VALUE(Enum.IncomingPaymentTransactionType.CurrencyExchange) AS IsCurrencyExchange,
+		|	BankPaymentPaymentList.Ref.TransactionType
+		|   = VALUE(Enum.IncomingPaymentTransactionType.CashTransferOrder) AS IsCashTransferOrder,
+		|	BankPaymentPaymentList.Ref.TransactionType
+		|   = VALUE(Enum.IncomingPaymentTransactionType.TransferFromPOS) AS IsTransferFromPOS
 		|INTO PaymentList
 		|FROM
 		|	Document.BankReceipt.PaymentList AS BankReceiptPaymentList
@@ -992,6 +1001,34 @@ Function R5010B_ReconciliationStatement()
 		|	PaymentList.Payer,
 		|	PaymentList.Currency,
 		|	PaymentList.Period";	
+EndFunction
+
+Function R3010B_CashOnHand()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	PaymentList.Period,
+		|	PaymentList.Company,
+		|	PaymentList.Account,
+		|	PaymentList.Currency,
+		|	PaymentList.ExpenseType AS MovementType,
+		|	SUM(PaymentList.Amount) AS Amount,
+		|	PaymentList.Period
+		|INTO R3010B_CashOnHand
+		|FROM
+		|	PaymentList AS PaymentList
+		|WHERE
+		|	PaymentList.IsPaymentFromCustomer
+		|	OR PaymentList.IsCurrencyExchange
+		|	OR PaymentList.IsCashTransferOrder
+		|	OR PaymentList.IsTransferFromPOS
+		|GROUP BY
+		|	VALUE(AccumulationRecordType.Expense),
+		|	PaymentList.Period,
+		|	PaymentList.Company,
+		|	PaymentList.Account,
+		|	PaymentList.Currency,
+		|	PaymentList.ExpenseType";	
 EndFunction
 
 #EndRegion

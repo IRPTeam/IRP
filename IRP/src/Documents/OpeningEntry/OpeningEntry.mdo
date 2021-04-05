@@ -65,6 +65,8 @@
   <registerRecords>AccumulationRegister.PartnerApTransactions</registerRecords>
   <registerRecords>AccumulationRegister.AccountBalance</registerRecords>
   <registerRecords>AccumulationRegister.R4014B_SerialLotNumber</registerRecords>
+  <registerRecords>AccumulationRegister.R3010B_CashOnHand</registerRecords>
+  <registerRecords>AccumulationRegister.R3015B_CashAdvance</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>

@@ -821,13 +821,13 @@ Function PaymentList()
 		|	BankReceiptPaymentList.ExpenseType AS ExpenseType,
 		|	BankReceiptPaymentList.AdditionalAnalytic AS AdditionalAnalytic,
 		|	BankReceiptPaymentList.Commission AS Commission,
-		|	BankPaymentPaymentList.Ref.TransactionType
+		|	BankReceiptPaymentList.Ref.TransactionType
 		|   = VALUE(Enum.IncomingPaymentTransactionType.PaymentFromCustomer) AS IsPaymentFromCustomer,
-		|	BankPaymentPaymentList.Ref.TransactionType
+		|	BankReceiptPaymentList.Ref.TransactionType
 		|   = VALUE(Enum.IncomingPaymentTransactionType.CurrencyExchange) AS IsCurrencyExchange,
-		|	BankPaymentPaymentList.Ref.TransactionType
+		|	BankReceiptPaymentList.Ref.TransactionType
 		|   = VALUE(Enum.IncomingPaymentTransactionType.CashTransferOrder) AS IsCashTransferOrder,
-		|	BankPaymentPaymentList.Ref.TransactionType
+		|	BankReceiptPaymentList.Ref.TransactionType
 		|   = VALUE(Enum.IncomingPaymentTransactionType.TransferFromPOS) AS IsTransferFromPOS
 		|INTO PaymentList
 		|FROM

@@ -601,15 +601,15 @@ Function PaymentList()
 	|	PaymentList.Ref.Company AS Company,
 	|	PaymentList.Payee AS LegalName,
 	|	PaymentList.Ref.Currency AS Currency,
-	|	PaymentList.CashAccount AS CashAccount,
+	|	PaymentList.Ref.CashAccount AS CashAccount,
 	|	PaymentList.BasisDocument AS Basis,
 	|	PaymentList.Partner.Employee AS IsEmployee,
 	|	PaymentList.Amount,
-	|	BankPaymentPaymentList.Ref.TransactionType
+	|	PaymentList.Ref.TransactionType
 	|   = VALUE(Enum.OutgoingPaymentTransactionTypes.PaymentToVendor) AS IsPaymentToVendor,
-	|	BankPaymentPaymentList.Ref.TransactionType
+	|	PaymentList.Ref.TransactionType
 	|   = VALUE(Enum.OutgoingPaymentTransactionTypes.CurrencyExchange) AS IsCurrencyExchange,
-	|	BankPaymentPaymentList.Ref.TransactionType
+	|	PaymentList.Ref.TransactionType
 	|   = VALUE(Enum.OutgoingPaymentTransactionTypes.CashTransferOrder) AS IsCashTransferOrder
 	|INTO PaymentList
 	|FROM

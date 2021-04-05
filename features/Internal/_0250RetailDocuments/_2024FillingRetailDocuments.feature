@@ -405,10 +405,10 @@ Scenario: _0154135 create document Retail Sales Receipt
 				| ''                               | '*'      | '593,22'    | 'Main Company' | 'Shop 01'       | ''             | '38/Black' | 'TRY'      | ''                    | 'Local currency'               | 'No'                   | '' | '' | '' |
 				| ''                               | '*'      | '593,22'    | 'Main Company' | 'Shop 01'       | ''             | '38/Black' | 'TRY'      | ''                    | 'TRY'                          | 'No'                   | '' | '' | '' |
 				| ''                               | '*'      | '593,22'    | 'Main Company' | 'Shop 01'       | ''             | '38/Black' | 'TRY'      | ''                    | 'en description is empty'      | 'No'                   | '' | '' | '' |
-			And I select "Account balance" exact value from "Register" drop-down list
+			And I select "R3010 Cash on hand" exact value from "Register" drop-down list
 			And I click "Generate report" button
 			And "ResultTable" spreadsheet document contains lines:
-				| 'Register  "Account balance"' | ''            | ''       | ''          | ''             | ''             | ''         | ''                             | ''                     | '' | '' | '' | '' | '' |
+				| 'Register  "R3010 Cash on hand"' | ''            | ''       | ''          | ''             | ''             | ''         | ''                             | ''                     | '' | '' | '' | '' | '' |
 				| ''                            | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''             | ''         | ''                             | 'Attributes'           | '' | '' | '' | '' | '' |
 				| ''                            | ''            | ''       | 'Amount'    | 'Company'      | 'Account'      | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' | '' | '' | '' | '' | '' |
 				| ''                            | 'Receipt'     | '*'      | '220,85'    | 'Main Company' | 'Transit Main' | 'USD'      | 'Reporting currency'           | 'No'                   | '' | '' | '' | '' | '' |
@@ -529,10 +529,10 @@ Scenario: _0154136 create document Retail Return Receipt based on RetailSalesRec
 			| ''                        | ''            | ''       | 'Amount'    | 'Commission' | 'Company'      | 'Business unit' | 'Payment type' | 'Account'      | 'Payment terminal'    | '' | '' | '' | '' |
 			| ''                        | 'Receipt'     | '*'      | '-900'      | '9'          | 'Main Company' | 'Shop 01'       | 'Card 01'      | 'Transit Main' | 'Payment terminal 01' | '' | '' | '' | '' |
 	
-		And I select "Account balance" exact value from "Register" drop-down list
+		And I select "R3010 Cash on hand" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Account balance"' | ''            | ''       | ''          | ''             | ''             | ''         | ''                             | ''                     | '' | '' | '' | '' | '' |
+			| 'Register  "R3010 Cash on hand"' | ''            | ''       | ''          | ''             | ''             | ''         | ''                             | ''                     | '' | '' | '' | '' | '' |
 			| ''                            | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''             | ''         | ''                             | 'Attributes'           | '' | '' | '' | '' | '' |
 			| ''                            | ''            | ''       | 'Amount'    | 'Company'      | 'Account'      | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' | '' | '' | '' | '' | '' |
 			| ''                            | 'Expense'     | '*'      | '154,08'    | 'Main Company' | 'Transit Main' | 'USD'      | 'Reporting currency'           | 'No'                   | '' | '' | '' | '' | '' |
@@ -2072,10 +2072,10 @@ Scenario:  _0154149 create Cash statement
 			| ''                            | 'Receipt'     | '$$DateCashStatement01541491$$' | '68,48'     | 'Main Company' | '$$CashStatement01541491$$' | 'Transit Main' | 'Bank account, TRY' | 'USD'      | 'Reporting currency'           | 'No'                   | '' |
 			| ''                            | 'Receipt'     | '$$DateCashStatement01541491$$' | '400'       | 'Main Company' | '$$CashStatement01541491$$' | 'Transit Main' | 'Bank account, TRY' | 'TRY'      | 'Local currency'               | 'No'                   | '' |
 			| ''                            | 'Receipt'     | '$$DateCashStatement01541491$$' | '400'       | 'Main Company' | '$$CashStatement01541491$$' | 'Transit Main' | 'Bank account, TRY' | 'TRY'      | 'en description is empty'      | 'No'                   | '' |
-		And I select "Account balance" exact value from "Register" drop-down list
+		And I select "R3010 Cash on hand" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Account balance"'           | ''                              | ''                              | ''             | ''                          | ''                          | ''             | ''                             | ''                     | ''                             | ''                             | ''                     |
+			| 'Register  "R3010 Cash on hand"'           | ''                              | ''                              | ''             | ''                          | ''                          | ''             | ''                             | ''                     | ''                             | ''                             | ''                     |
 			| ''                                      | 'Record type'                   | 'Period'                        | 'Resources'    | 'Dimensions'                | ''                          | ''             | ''                             | 'Attributes'           | ''                             | ''                             | ''                     |
 			| ''                                      | ''                              | ''                              | 'Amount'       | 'Company'                   | 'Account'                   | 'Currency'     | 'Multi currency movement type' | 'Deferred calculation' | ''                             | ''                             | ''                     |
 			| ''                                      | 'Expense'                       | '$$DateCashStatement01541491$$' | '68,48'        | 'Main Company'              | 'Transit Main'              | 'USD'          | 'Reporting currency'           | 'No'                   | ''                             | ''                             | ''                     |

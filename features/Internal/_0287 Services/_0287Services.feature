@@ -916,10 +916,10 @@ Scenario: _029150 create Retail return receipt for service and product
 			| ''                        | ''            | ''       | 'Amount'    | 'Commission' | 'Company'      | 'Business unit' | 'Payment type' | 'Account'      | 'Payment terminal' | '' | '' | '' | '' |
 			| ''                        | 'Receipt'     | '*'      | '-450'      | ''           | 'Main Company' | ''              | 'Cash'         | 'Cash desk №4' | ''                 | '' | '' | '' | '' |
 	
-		And I select "Account balance" exact value from "Register" drop-down list
+		And I select "R3010 Cash on hand" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Account balance"' | ''            | ''       | ''          | ''             | ''             | ''         | ''                             | ''                     | '' | '' | '' | '' | '' |
+			| 'Register  "R3010 Cash on hand"' | ''            | ''       | ''          | ''             | ''             | ''         | ''                             | ''                     | '' | '' | '' | '' | '' |
 			| ''                            | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''             | ''         | ''                             | 'Attributes'           | '' | '' | '' | '' | '' |
 			| ''                            | ''            | ''       | 'Amount'    | 'Company'      | 'Account'      | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' | '' | '' | '' | '' | '' |
 			| ''                            | 'Expense'     | '*'      | '77,04'     | 'Main Company' | 'Cash desk №4' | 'USD'      | 'Reporting currency'           | 'No'                   | '' | '' | '' | '' | '' |
@@ -1021,10 +1021,10 @@ Scenario: _029150 create Retail return receipt for service and product
 				| ''                        | ''            | ''       | 'Amount'    | 'Commission' | 'Company'      | 'Business unit' | 'Payment type' | 'Account'      | 'Payment terminal' | '' | '' | '' | '' |
 				| ''                        | 'Receipt'     | '*'      | '-250'      | ''           | 'Main Company' | ''              | 'Cash'         | 'Cash desk №4' | ''                 | '' | '' | '' | '' |
 		
-			And I select "Account balance" exact value from "Register" drop-down list
+			And I select "R3010 Cash on hand" exact value from "Register" drop-down list
 			And I click "Generate report" button
 			And "ResultTable" spreadsheet document contains lines:
-				| 'Register  "Account balance"' | ''            | ''       | ''          | ''             | ''             | ''         | ''                             | ''                     | '' | '' | '' | '' | '' |
+				| 'Register  "R3010 Cash on hand"' | ''            | ''       | ''          | ''             | ''             | ''         | ''                             | ''                     | '' | '' | '' | '' | '' |
 				| ''                            | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''             | ''         | ''                             | 'Attributes'           | '' | '' | '' | '' | '' |
 				| ''                            | ''            | ''       | 'Amount'    | 'Company'      | 'Account'      | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' | '' | '' | '' | '' | '' |
 				| ''                            | 'Expense'     | '*'      | '42,8'      | 'Main Company' | 'Cash desk №4' | 'USD'      | 'Reporting currency'           | 'No'                   | '' | '' | '' | '' | '' |

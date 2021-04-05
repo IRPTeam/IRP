@@ -237,7 +237,7 @@ Scenario: _400001 opening entry account balance
 		And I click the button named "FormPostAndClose"
 		And Delay 5
 		* Check movements
-			Given I open hyperlink "e1cib/list/AccumulationRegister.AccountBalance"
+			Given I open hyperlink "e1cib/list/AccumulationRegister.R3010B_CashOnHand"
 			And "List" table contains lines
 			| 'Currency' | 'Recorder'               | 'Company'      | 'Account'           | 'Multi currency movement type' | 'Amount'    |
 			| 'TRY'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Cash desk №1'      | 'Local currency'               | '1 000,00'  |
@@ -267,7 +267,7 @@ Scenario: _400001 opening entry account balance
 			| '$$NumberOpeningEntry400001$$'      |
 			And in the table "List" I click the button named "ListContextMenuUndoPosting"
 		* Check clearing movements
-			Given I open hyperlink "e1cib/list/AccumulationRegister.AccountBalance"
+			Given I open hyperlink "e1cib/list/AccumulationRegister.R3010B_CashOnHand"
 			And "List" table does not contain lines
 			| 'Currency' | 'Recorder'               | 'Company'      | 'Account'           | 'Multi currency movement type' | 'Amount'    |
 			| 'TRY'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Cash desk №1'      | 'Local currency'               | '1 000,00'  |
@@ -297,7 +297,7 @@ Scenario: _400001 opening entry account balance
 			| '$$NumberOpeningEntry400001$$'      |
 			And in the table "List" I click the button named "ListContextMenuPost"
 		* Check movements
-			Given I open hyperlink "e1cib/list/AccumulationRegister.AccountBalance"
+			Given I open hyperlink "e1cib/list/AccumulationRegister.R3010B_CashOnHand"
 			And "List" table contains lines
 			| 'Currency' | 'Recorder'               | 'Company'      | 'Account'           | 'Multi currency movement type' | 'Amount'    |
 			| 'TRY'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Cash desk №1'      | 'Local currency'               | '1 000,00'  |

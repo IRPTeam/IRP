@@ -642,17 +642,17 @@ Function PaymentList()
 	|	PaymentList.Ref.Company AS Company,
 	|	PaymentList.Payer AS LegalName,
 	|	PaymentList.Ref.Currency AS Currency,
-	|	PaymentList.CashAccount AS CashAccount,
+	|	PaymentList.Ref.CashAccount AS CashAccount,
 	|	PaymentList.BasisDocument AS Basis,
 	|	PaymentList.Partner.Employee AS IsEmployee,
 	|	PaymentList.Amount,
-	|	BankPaymentPaymentList.Ref.TransactionType
+	|	PaymentList.Ref.TransactionType
 	|   = VALUE(Enum.IncomingPaymentTransactionType.PaymentFromCustomer) AS IsPaymentFromCustomer,
-	|	BankPaymentPaymentList.Ref.TransactionType
+	|	PaymentList.Ref.TransactionType
 	|   = VALUE(Enum.IncomingPaymentTransactionType.CurrencyExchange) AS IsCurrencyExchange,
-	|	BankPaymentPaymentList.Ref.TransactionType
+	|	PaymentList.Ref.TransactionType
 	|   = VALUE(Enum.IncomingPaymentTransactionType.CashTransferOrder) AS IsCashTransferOrder,
-	|	BankPaymentPaymentList.Ref.TransactionType
+	|	PaymentList.Ref.TransactionType
 	|   = VALUE(Enum.IncomingPaymentTransactionType.TransferFromPOS) AS IsTransferFromPOS
 	|INTO PaymentList
 	|FROM

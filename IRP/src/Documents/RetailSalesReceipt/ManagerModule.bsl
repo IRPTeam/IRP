@@ -530,6 +530,7 @@ EndFunction
 Function GetQueryTextsSecondaryTables()
 	QueryArray = New Array;
 	QueryArray.Add(ItemList());
+	QueryArray.Add(Payments());
 	QueryArray.Add(PostingServer.Exists_R4011B_FreeStocks());
 	QueryArray.Add(PostingServer.Exists_R4010B_ActualStocks());	
 	Return QueryArray;
@@ -539,6 +540,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray = New Array;
 	QueryArray.Add(R4011B_FreeStocks());
 	QueryArray.Add(R4010B_ActualStocks());	
+	QueryArray.Add(R3010B_CashOnHand());
 	Return QueryArray;
 EndFunction
 
@@ -578,6 +580,44 @@ Function ItemList()
 		|WHERE
 		|	ItemList.Ref = &Ref";
 EndFunction
+
+Function Payments()
+	Return
+	"SELECT
+	|	Payments.Ref.Date AS Period,
+	|	Payments.Ref.Company AS Company,
+	|	Payments.Account AS Account,
+	|	Payments.Ref.Currency AS Currency,
+	|	Payments.Amount AS Amount
+	|INTO Payments
+	|FROM
+	|	Document.RetailSalesReceipt.Payments AS Payments
+	|WHERE
+	|	Payments.Ref = &Ref";
+EndFunction
+
+Function R3010B_CashOnHand()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	Payments.Period,
+		|	Payments.Company,
+		|	Payments.Account,
+		|	Payments.Currency,
+		|	SUM(Payments.Amount) AS Amount
+		|INTO R3010B_CashOnHand
+		|FROM
+		|	Payments AS Payments
+		|WHERE
+		|	TRUE
+		|GROUP BY
+		|	VALUE(AccumulationRecordType.Receipt),
+		|	Payments.Period,
+		|	Payments.Company,
+		|	Payments.Account,
+		|	Payments.Currency";	
+EndFunction
+
 
 Function R4011B_FreeStocks()
 	Return

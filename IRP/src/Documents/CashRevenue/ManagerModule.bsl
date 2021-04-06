@@ -151,6 +151,11 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Tables.RevenuesTurnovers = QueryResult[2].Unload();
 	Tables.TaxesTurnovers = QueryResult[3].Unload();
 	Tables.AccountBalance = QueryResult[4].Unload();
+
+#Region NewRegistersPosting	
+	QueryArray = GetQueryTextsSecondaryTables();
+	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
+#EndRegion	
 	
 	Return Tables;
 EndFunction
@@ -192,7 +197,12 @@ Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo 
 EndFunction
 
 Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	Return;
+#Region NewRegistersPosting
+	Tables = Parameters.DocumentDataTables;	
+	QueryArray = GetQueryTextsMasterTables();
+	PostingServer.SetRegisters(Tables, Ref);
+	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
+#EndRegion
 EndProcedure
 
 Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
@@ -211,6 +221,10 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 		New Structure("RecordType, RecordSet",
 			AccumulationRecordType.Receipt,
 			Parameters.DocumentDataTables.AccountBalance));
+
+#Region NewRegistersPosting	
+	PostingServer.SetPostingDataTables(PostingDataTables, Parameters);
+#EndRegion
 	
 	Return PostingDataTables;
 EndFunction
@@ -258,14 +272,60 @@ EndFunction
 
 Function GetQueryTextsSecondaryTables()
 	QueryArray = New Array;
-
+	QueryArray.Add(PaymentList());
 	Return QueryArray;
 EndFunction
 
 Function GetQueryTextsMasterTables()
 	QueryArray = New Array;
-
+	QueryArray.Add(R3010B_CashOnHand());
 	Return QueryArray;
+EndFunction
+
+Function PaymentList()
+	Return
+		"SELECT
+		|	PaymentList.Ref.Date AS Period,
+		|	PaymentList.Ref.Company AS Company,
+		|	PaymentList.Ref.Account AS Account,
+		|	PaymentList.Currency AS Currency,
+		|	PaymentList.RevenueType AS RevenueType,
+		|	SUM(PaymentList.NetAmount) AS Amount
+		|INTO PaymentList
+		|FROM
+		|	Document.CashRevenue.PaymentList AS PaymentList
+		|WHERE
+		|	PaymentList.Ref = &Ref
+		|GROUP BY
+		|	PaymentList.Ref.Company,
+		|	PaymentList.Ref.Account,
+		|	PaymentList.Ref.Date,
+		|	PaymentList.Currency,
+		|	PaymentList.RevenueType";
+EndFunction
+
+Function R3010B_CashOnHand()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	PaymentList.Period,
+		|	PaymentList.Company,
+		|	PaymentList.Account,
+		|	PaymentList.Currency,
+		|	PaymentList.RevenueType AS MovementType,
+		|	SUM(PaymentList.Amount) AS Amount
+		|INTO R3010B_CashOnHand
+		|FROM
+		|	PaymentList AS PaymentList
+		|WHERE
+		|	TRUE
+		|GROUP BY
+		|	VALUE(AccumulationRecordType.Receipt),
+		|	PaymentList.Period,
+		|	PaymentList.Company,
+		|	PaymentList.Account,
+		|	PaymentList.Currency,
+		|	PaymentList.RevenueType";	
 EndFunction
 
 #EndRegion

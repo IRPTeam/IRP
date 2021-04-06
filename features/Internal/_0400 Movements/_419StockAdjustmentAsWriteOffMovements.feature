@@ -107,7 +107,7 @@ Scenario: _041902 check Stock adjustment as write off movements by the Register 
 		And I close all client application windows
 
 
-Scenario: _041930 Stock adjustment as write off clear posting
+Scenario: _041930 Stock adjustment as write off clear posting/mark for deletion
 	And I close all client application windows
 	* Select Stock adjustment as write off
 		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsWriteOff"
@@ -129,6 +129,38 @@ Scenario: _041930 Stock adjustment as write off clear posting
 			| 'Number'  |
 			| '201' |
 		And in the table "List" I click the button named "ListContextMenuPost"		
+		Then user message window does not contain messages
+		And I click "Registrations report" button
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document contains values
+			| 'R4011 Free stocks' |
+			| 'R4010 Actual stocks' |
+		And I close all client application windows
+	* Mark for deletion
+		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsWriteOff"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '201' |
+		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		Then user message window does not contain messages
+		And I click "Registrations report" button
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Stock adjustment as write-off 201 dated 15.03.2021 15:29:14' |
+			| 'Document registrations records'                    |
+		And I close current window
+	* Unmark for deletion and post document
+		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsWriteOff"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '201' |
+		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button				
+		Then user message window does not contain messages
+		And in the table "List" I click the button named "ListContextMenuPost"	
 		Then user message window does not contain messages
 		And I click "Registrations report" button
 		And I click "Generate report" button

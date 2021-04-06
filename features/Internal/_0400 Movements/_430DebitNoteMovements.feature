@@ -142,7 +142,7 @@ Scenario: _043001 check Debit note movements by the Register "R5010 Reconciliati
 	And I close all client application windows
 
 
-Scenario: _043030 Debit note clear posting
+Scenario: _043030 Debit note clear posting/mark for deletion
 	And I close all client application windows
 	* Select Debit note
 		Given I open hyperlink "e1cib/list/Document.DebitNote"
@@ -164,6 +164,37 @@ Scenario: _043030 Debit note clear posting
 			| 'Number'  |
 			| '1' |
 		And in the table "List" I click the button named "ListContextMenuPost"		
+		Then user message window does not contain messages
+		And I click "Registrations report" button
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document contains values
+			| 'R5010 Reconciliation statement' |
+		And I close all client application windows
+	* Mark for deletion
+		Given I open hyperlink "e1cib/list/Document.DebitNote"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '1' |
+		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		Then user message window does not contain messages
+		And I click "Registrations report" button
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit note 1 dated 05.04.2021 09:30:36' |
+			| 'Document registrations records'                    |
+		And I close current window
+	* Unmark for deletion and post document
+		Given I open hyperlink "e1cib/list/Document.DebitNote"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '1' |
+		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button				
+		Then user message window does not contain messages
+		And in the table "List" I click the button named "ListContextMenuPost"	
 		Then user message window does not contain messages
 		And I click "Registrations report" button
 		And I click "Generate report" button

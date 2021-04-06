@@ -109,7 +109,7 @@ Scenario: _042602 check Bundling movements by the Register  "R4011 Free stocks"
 		And I close all client application windows
 
 
-Scenario: _042630 Bundling clear posting
+Scenario: _042630 Bundling clear posting/mark for deletion
 	And I close all client application windows
 	* Select Bundling
 		Given I open hyperlink "e1cib/list/Document.Bundling"
@@ -131,6 +131,38 @@ Scenario: _042630 Bundling clear posting
 			| 'Number'  |
 			| '1' |
 		And in the table "List" I click the button named "ListContextMenuPost"		
+		Then user message window does not contain messages
+		And I click "Registrations report" button
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document contains values
+			| 'R4011 Free stocks' |
+			| 'R4010 Actual stocks' |
+		And I close all client application windows
+	* Mark for deletion
+		Given I open hyperlink "e1cib/list/Document.Bundling"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '1' |
+		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		Then user message window does not contain messages
+		And I click "Registrations report" button
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Bundling 1 dated 07.09.2020 18:20:57' |
+			| 'Document registrations records'                    |
+		And I close current window
+	* Unmark for deletion and post document
+		Given I open hyperlink "e1cib/list/Document.Bundling"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '1' |
+		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button				
+		Then user message window does not contain messages
+		And in the table "List" I click the button named "ListContextMenuPost"	
 		Then user message window does not contain messages
 		And I click "Registrations report" button
 		And I click "Generate report" button

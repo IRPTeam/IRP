@@ -75,3 +75,86 @@ Scenario: _044000 preparation (Cash expense)
 		And I close all client application windows
 		
 
+
+Scenario: _044001 check Cash expense movements by the Register "R3010 Cash on hand"
+	* Select Cash expense
+		Given I open hyperlink "e1cib/list/Document.CashExpense"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '1' |
+	* Check movements by the Register  "R3010 Cash on hand" 
+		And I click "Registrations report" button
+		And I select "R3010 Cash on hand" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Cash expense 1 dated 07.09.2020 19:25:17' | ''            | ''                    | ''          | ''             | ''                  | ''         | ''                             | ''              | ''                     |
+			| 'Document registrations records'           | ''            | ''                    | ''          | ''             | ''                  | ''         | ''                             | ''              | ''                     |
+			| 'Register  "R3010 Cash on hand"'           | ''            | ''                    | ''          | ''             | ''                  | ''         | ''                             | ''              | ''                     |
+			| ''                                         | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                  | ''         | ''                             | ''              | 'Attributes'           |
+			| ''                                         | ''            | ''                    | 'Amount'    | 'Company'      | 'Account'           | 'Currency' | 'Multi currency movement type' | 'Movement type' | 'Deferred calculation' |
+			| ''                                         | 'Expense'     | '07.09.2020 19:25:17' | '100'       | 'Main Company' | 'Bank account, TRY' | 'TRY'      | 'Local currency'               | 'Fuel'          | 'No'                   |
+			| ''                                         | 'Expense'     | '07.09.2020 19:25:17' | '100'       | 'Main Company' | 'Bank account, TRY' | 'TRY'      | 'en description is empty'      | 'Fuel'          | 'No'                   |
+			| ''                                         | 'Expense'     | '07.09.2020 19:25:17' | '584'       | 'Main Company' | 'Bank account, TRY' | 'USD'      | 'Reporting currency'           | 'Fuel'          | 'No'                   |
+	And I close all client application windows
+
+
+Scenario: _044030 Cash expense clear posting/mark for deletion
+	And I close all client application windows
+	* Select Cash expense
+		Given I open hyperlink "e1cib/list/Document.CashExpense"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '1' |
+	* Clear posting
+		And in the table "List" I click the button named "ListContextMenuUndoPosting"
+		Then user message window does not contain messages
+		And I click "Registrations report" button
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Cash expense 1 dated 07.09.2020 19:25:17' |
+			| 'Document registrations records'                    |
+		And I close current window
+	* Post Cash expense
+		Given I open hyperlink "e1cib/list/Document.CashExpense"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '1' |
+		And in the table "List" I click the button named "ListContextMenuPost"		
+		Then user message window does not contain messages
+		And I click "Registrations report" button
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document contains values
+			| 'R3010 Cash on hand' |
+		And I close all client application windows
+	* Mark for deletion
+		Given I open hyperlink "e1cib/list/Document.CashExpense"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '1' |
+		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		Then user message window does not contain messages
+		And I click "Registrations report" button
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Cash expense 1 dated 07.09.2020 19:25:17' |
+			| 'Document registrations records'                    |
+		And I close current window
+	* Unmark for deletion and post document
+		Given I open hyperlink "e1cib/list/Document.CashExpense"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '1' |
+		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button				
+		Then user message window does not contain messages
+		And in the table "List" I click the button named "ListContextMenuPost"	
+		Then user message window does not contain messages
+		And I click "Registrations report" button
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document contains values
+			| 'R3010 Cash on hand' |
+		And I close all client application windows		
+

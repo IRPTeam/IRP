@@ -454,7 +454,7 @@ Scenario: _0402426 check Inventory transfer movements by the Register  "R4022 Sh
 			| 'Register  "R4022 Shipment of stock transfer orders"'                     |	
 		And I close all client application windows
 
-Scenario: _0402439 Inventory transfer clear posting
+Scenario: _0402439 Inventory transfer clear posting/mark for deletion
 	* Select Inventory transfer
 		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
 		And I go to line in "List" table
@@ -475,6 +475,37 @@ Scenario: _0402439 Inventory transfer clear posting
 			| 'Number'  |
 			| '21' |
 		And in the table "List" I click the button named "ListContextMenuPost"		
+		Then user message window does not contain messages
+		And I click "Registrations report" button
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document contains values
+			| 'R4050 Stock inventory' |
+		And I close all client application windows
+	* Mark for deletion
+		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '21' |
+		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		Then user message window does not contain messages
+		And I click "Registrations report" button
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Inventory transfer 21 dated 01.03.2021 09:54:36' |
+			| 'Document registrations records'                    |
+		And I close current window
+	* Unmark for deletion and post document
+		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '21' |
+		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button				
+		Then user message window does not contain messages
+		And in the table "List" I click the button named "ListContextMenuPost"	
 		Then user message window does not contain messages
 		And I click "Registrations report" button
 		And I click "Generate report" button

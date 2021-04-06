@@ -320,7 +320,7 @@ Scenario: _040167 check Sales order closing movements by the Register  "R2012 In
 
 		And I close all client application windows
 
-Scenario: _040169 Sales order closing clear posting
+Scenario: _040169 Sales order closing clear posting/mark for deletion
 	* Select Sales order closing
 		Given I open hyperlink "e1cib/list/Document.SalesOrderClosing"
 		And I go to line in "List" table
@@ -341,6 +341,40 @@ Scenario: _040169 Sales order closing clear posting
 			| 'Number'  |
 			| '1' |
 		And in the table "List" I click the button named "ListContextMenuPost"		
+		Then user message window does not contain messages
+		And I click "Registrations report" button
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document contains values
+			| 'R2010 Sales orders' |
+			| 'R4011 Free stocks' |
+			| 'R4012 Stock Reservation' |
+			| 'R2012 Invoice closing of sales orders' |
+		And I close all client application windows
+	* Mark for deletion
+		Given I open hyperlink "e1cib/list/Document.SalesOrderClosing"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '1' |
+		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		Then user message window does not contain messages
+		And I click "Registrations report" button
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Sales order closing 1 dated 28.01.2021 14:46:50' |
+			| 'Document registrations records'                    |
+		And I close current window
+	* Unmark for deletion and post document
+		Given I open hyperlink "e1cib/list/Document.SalesOrderClosing"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '1' |
+		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button				
+		Then user message window does not contain messages
+		And in the table "List" I click the button named "ListContextMenuPost"	
 		Then user message window does not contain messages
 		And I click "Registrations report" button
 		And I click "Generate report" button

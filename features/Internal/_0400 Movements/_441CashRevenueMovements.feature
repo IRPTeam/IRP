@@ -73,3 +73,86 @@ Scenario: _044100 preparation (Cash revenue)
 		And I execute 1C:Enterprise script at server
 			| "Documents.CashRevenue.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I close all client application windows
+
+
+Scenario: _044101 check Cash revenue movements by the Register "R3010 Cash on hand"
+	* Select Cash revenue
+		Given I open hyperlink "e1cib/list/Document.CashRevenue"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '1' |
+	* Check movements by the Register  "R3010 Cash on hand" 
+		And I click "Registrations report" button
+		And I select "R3010 Cash on hand" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Cash revenue 1 dated 07.09.2020 19:24:49' | ''            | ''                    | ''          | ''             | ''                  | ''         | ''                             | ''              | ''                     |
+			| 'Document registrations records'           | ''            | ''                    | ''          | ''             | ''                  | ''         | ''                             | ''              | ''                     |
+			| 'Register  "R3010 Cash on hand"'           | ''            | ''                    | ''          | ''             | ''                  | ''         | ''                             | ''              | ''                     |
+			| ''                                         | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                  | ''         | ''                             | ''              | 'Attributes'           |
+			| ''                                         | ''            | ''                    | 'Amount'    | 'Company'      | 'Account'           | 'Currency' | 'Multi currency movement type' | 'Movement type' | 'Deferred calculation' |
+			| ''                                         | 'Receipt'     | '07.09.2020 19:24:49' | '100'       | 'Main Company' | 'Bank account, TRY' | 'TRY'      | 'Local currency'               | 'Fuel'          | 'No'                   |
+			| ''                                         | 'Receipt'     | '07.09.2020 19:24:49' | '100'       | 'Main Company' | 'Bank account, TRY' | 'TRY'      | 'en description is empty'      | 'Fuel'          | 'No'                   |
+			| ''                                         | 'Receipt'     | '07.09.2020 19:24:49' | '584'       | 'Main Company' | 'Bank account, TRY' | 'USD'      | 'Reporting currency'           | 'Fuel'          | 'No'                   |
+	And I close all client application windows
+
+
+Scenario: _044130 Cash revenue clear posting/mark for deletion
+	And I close all client application windows
+	* Select Cash revenue
+		Given I open hyperlink "e1cib/list/Document.CashRevenue"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '1' |
+	* Clear posting
+		And in the table "List" I click the button named "ListContextMenuUndoPosting"
+		Then user message window does not contain messages
+		And I click "Registrations report" button
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Cash revenue 1 dated 07.09.2020 19:24:49' |
+			| 'Document registrations records'                    |
+		And I close current window
+	* Post Cash revenue
+		Given I open hyperlink "e1cib/list/Document.CashRevenue"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '1' |
+		And in the table "List" I click the button named "ListContextMenuPost"		
+		Then user message window does not contain messages
+		And I click "Registrations report" button
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document contains values
+			| 'R3010 Cash on hand' |
+		And I close all client application windows
+	* Mark for deletion
+		Given I open hyperlink "e1cib/list/Document.CashRevenue"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '1' |
+		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		Then user message window does not contain messages
+		And I click "Registrations report" button
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Cash revenue 1 dated 07.09.2020 19:24:49' |
+			| 'Document registrations records'                    |
+		And I close current window
+	* Unmark for deletion and post document
+		Given I open hyperlink "e1cib/list/Document.CashRevenue"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '1' |
+		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button				
+		Then user message window does not contain messages
+		And in the table "List" I click the button named "ListContextMenuPost"	
+		Then user message window does not contain messages
+		And I click "Registrations report" button
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document contains values
+			| 'R3010 Cash on hand' |
+		And I close all client application windows		

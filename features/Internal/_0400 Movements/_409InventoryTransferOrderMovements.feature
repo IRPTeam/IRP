@@ -292,7 +292,7 @@ Scenario: _040358 check Inventory transfer order movements by the Register  "R40
 		And I close all client application windows
 
 
-Scenario: _0403589 Inventory transfer order clear posting
+Scenario: _0403589 Inventory transfer order clear posting/mark for deletion
 	* Select Inventory transfer order
 		Given I open hyperlink "e1cib/list/Document.InventoryTransferOrder"
 		And I go to line in "List" table
@@ -313,6 +313,39 @@ Scenario: _0403589 Inventory transfer order clear posting
 			| 'Number'  |
 			| '21' |
 		And in the table "List" I click the button named "ListContextMenuPost"		
+		Then user message window does not contain messages
+		And I click "Registrations report" button
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document contains values
+			| 'R4011 Free stocks' |
+			| 'R4012 Stock Reservation' |
+			| 'R4020 Stock transfer orders' |
+		And I close all client application windows
+	* Mark for deletion
+		Given I open hyperlink "e1cib/list/Document.InventoryTransferOrder"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '21' |
+		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		Then user message window does not contain messages
+		And I click "Registrations report" button
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Inventory transfer order 21 dated 16.02.2021 16:14:02' |
+			| 'Document registrations records'                    |
+		And I close current window
+	* Unmark for deletion and post document
+		Given I open hyperlink "e1cib/list/Document.InventoryTransferOrder"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '21' |
+		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button				
+		Then user message window does not contain messages
+		And in the table "List" I click the button named "ListContextMenuPost"	
 		Then user message window does not contain messages
 		And I click "Registrations report" button
 		And I click "Generate report" button

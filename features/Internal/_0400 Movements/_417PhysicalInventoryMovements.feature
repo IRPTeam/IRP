@@ -107,7 +107,7 @@ Scenario: _041702 check Physical inventory movements by the Register  "R4011 Fre
 		And I close all client application windows
 
 
-Scenario: _041730 Physical inventory clear posting
+Scenario: _041730 Physical inventory clear posting/mark for deletion
 	And I close all client application windows
 	* Select Physical inventory
 		Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
@@ -129,6 +129,38 @@ Scenario: _041730 Physical inventory clear posting
 			| 'Number'  |
 			| '201' |
 		And in the table "List" I click the button named "ListContextMenuPost"		
+		Then user message window does not contain messages
+		And I click "Registrations report" button
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document contains values
+			| 'R4011 Free stocks' |
+			| 'R4010 Actual stocks' |
+		And I close all client application windows
+	* Mark for deletion
+		Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '201' |
+		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		Then user message window does not contain messages
+		And I click "Registrations report" button
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Physical inventory 201 dated 15.03.2021 15:29:31' |
+			| 'Document registrations records'                    |
+		And I close current window
+	* Unmark for deletion and post document
+		Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '201' |
+		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button				
+		Then user message window does not contain messages
+		And in the table "List" I click the button named "ListContextMenuPost"	
 		Then user message window does not contain messages
 		And I click "Registrations report" button
 		And I click "Generate report" button

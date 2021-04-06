@@ -141,3 +141,65 @@ Scenario: _042902 check Opening entry movements by the Register  "R4011 Free sto
 			| ''                                          | 'Receipt'     | '07.09.2020 21:26:35' | '500'       | 'Store 01'   | 'XS/Blue'   |
 			| ''                                          | 'Receipt'     | '07.09.2020 21:26:35' | '500'       | 'Store 01'   | 'L/Green'   |
 		And I close all client application windows
+
+Scenario: _042930 Opening entry clear posting/mark for deletion
+	And I close all client application windows
+	* Select Opening entry
+		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '2' |
+	* Clear posting
+		And in the table "List" I click the button named "ListContextMenuUndoPosting"
+		Then user message window does not contain messages
+		And I click "Registrations report" button
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Opening entry 2 dated 07.09.2020 21:26:35' |
+			| 'Document registrations records'                    |
+		And I close current window
+	* Post Opening entry
+		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '2' |
+		And in the table "List" I click the button named "ListContextMenuPost"		
+		Then user message window does not contain messages
+		And I click "Registrations report" button
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document contains values
+			| 'R4011 Free stocks' |
+			| 'R4010 Actual stocks' |
+		And I close all client application windows
+	* Mark for deletion
+		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '2' |
+		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		Then user message window does not contain messages
+		And I click "Registrations report" button
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Opening entry 2 dated 07.09.2020 21:26:35' |
+			| 'Document registrations records'                    |
+		And I close current window
+	* Unmark for deletion and post document
+		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '2' |
+		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button				
+		Then user message window does not contain messages
+		And in the table "List" I click the button named "ListContextMenuPost"	
+		Then user message window does not contain messages
+		And I click "Registrations report" button
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document contains values
+			| 'R4011 Free stocks' |
+			| 'R4010 Actual stocks' |
+		And I close all client application windows

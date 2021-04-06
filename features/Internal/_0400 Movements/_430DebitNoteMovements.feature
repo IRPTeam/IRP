@@ -158,7 +158,7 @@ Scenario: _043030 Debit note clear posting
 			| 'Debit note 1 dated 05.04.2021 09:30:36' |
 			| 'Document registrations records'                    |
 		And I close current window
-	* Post Sales return
+	* Post Debit note
 		Given I open hyperlink "e1cib/list/Document.DebitNote"
 		And I go to line in "List" table
 			| 'Number'  |

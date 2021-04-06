@@ -83,8 +83,8 @@ Scenario: _043500 preparation (Cash payment)
 			| '116' |
 			When Create document PurchaseInvoice objects (check movements)
 			And I execute 1C:Enterprise script at server
-				| "Documents.PurchaseOrder.FindByNumber(115).GetObject().Write(DocumentWriteMode.Posting);" |
-				| "Documents.PurchaseOrder.FindByNumber(116).GetObject().Write(DocumentWriteMode.Posting);" |
+				| "Documents.PurchaseInvoice.FindByNumber(115).GetObject().Write(DocumentWriteMode.Posting);" |
+				| "Documents.PurchaseInvoice.FindByNumber(116).GetObject().Write(DocumentWriteMode.Posting);" |
 		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
 		If "List" table does not contain lines Then
 			| 'Number'  |
@@ -109,4 +109,75 @@ Scenario: _043500 preparation (Cash payment)
 			| "Documents.CashPayment.FindByNumber(2).GetObject().Write(DocumentWriteMode.Posting);" |
 			| "Documents.CashPayment.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I close all client application windows
-		
+
+
+Scenario: _043501 check Cash payment movements by the Register "R3010 Cash on hand"
+	* Select Cash payment
+		Given I open hyperlink "e1cib/list/Document.CashPayment"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '2' |
+	* Check movements by the Register  "R3010 Cash on hand" 
+		And I click "Registrations report" button
+		And I select "R3010 Cash on hand" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Cash payment 2 dated 05.04.2021 12:40:18' | ''            | ''                    | ''          | ''             | ''             | ''         | ''                             | ''              | ''                     |
+			| 'Document registrations records'           | ''            | ''                    | ''          | ''             | ''             | ''         | ''                             | ''              | ''                     |
+			| 'Register  "R3010 Cash on hand"'           | ''            | ''                    | ''          | ''             | ''             | ''         | ''                             | ''              | ''                     |
+			| ''                                         | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''         | ''                             | ''              | 'Attributes'           |
+			| ''                                         | ''            | ''                    | 'Amount'    | 'Company'      | 'Account'      | 'Currency' | 'Multi currency movement type' | 'Movement type' | 'Deferred calculation' |
+			| ''                                         | 'Expense'     | '05.04.2021 12:40:18' | '500'       | 'Main Company' | 'Cash desk №1' | 'USD'      | 'Reporting currency'           | ''              | 'No'                   |
+			| ''                                         | 'Expense'     | '05.04.2021 12:40:18' | '500'       | 'Main Company' | 'Cash desk №1' | 'USD'      | 'en description is empty'      | ''              | 'No'                   |
+			| ''                                         | 'Expense'     | '05.04.2021 12:40:18' | '2 813,75'  | 'Main Company' | 'Cash desk №1' | 'TRY'      | 'Local currency'               | ''              | 'No'                   |
+	And I close all client application windows
+
+	
+Scenario: _043502 check Cash payment movements by the Register "R5010 Reconciliation statement" (payment to vendor)
+	* Select Cash payment
+		Given I open hyperlink "e1cib/list/Document.CashPayment"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '1' |
+	* Check movements by the Register  "R5010 Reconciliation statement" 
+		And I click "Registrations report" button
+		And I select "R5010 Reconciliation statement" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Cash payment 1 dated 05.04.2021 12:40:00'   | ''            | ''                    | ''          | ''           | ''             | ''                  |
+			| 'Document registrations records'             | ''            | ''                    | ''          | ''           | ''             | ''                  |
+			| 'Register  "R5010 Reconciliation statement"' | ''            | ''                    | ''          | ''           | ''             | ''                  |
+			| ''                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''             | ''                  |
+			| ''                                           | ''            | ''                    | 'Amount'    | 'Currency'   | 'Company'      | 'Legal name'        |
+			| ''                                           | 'Receipt'     | '05.04.2021 12:40:00' | '1 000'     | 'TRY'        | 'Main Company' | 'Company Ferron BP' |
+	And I close all client application windows
+
+
+Scenario: _043530 Cash payment clear posting
+	And I close all client application windows
+	* Select Cash payment
+		Given I open hyperlink "e1cib/list/Document.CashPayment"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '2' |
+	* Clear posting
+		And in the table "List" I click the button named "ListContextMenuUndoPosting"
+		Then user message window does not contain messages
+		And I click "Registrations report" button
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Cash payment 2 dated 05.04.2021 12:40:18' |
+			| 'Document registrations records'                    |
+		And I close current window
+	* Post Cash payment
+		Given I open hyperlink "e1cib/list/Document.CashPayment"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '2' |
+		And in the table "List" I click the button named "ListContextMenuPost"		
+		Then user message window does not contain messages
+		And I click "Registrations report" button
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document contains values
+			| 'R3010 Cash on hand' |
+		And I close all client application windows	

@@ -375,80 +375,8 @@ Scenario: _050002 check Cash receipt movements with transaction type Payment fro
 			| ''                               | ''            | ''       | 'Advance to suppliers' | 'Transaction AP' | 'Advance from customers' | 'Transaction AR' | 'Company'      | 'Partner'   | 'Legal name'        | 'Basis document'         | 'Currency' |
 			| ''                               | 'Expense'     | '*'      | ''                     | ''               | ''                       | '100'            | 'Main Company' | 'Ferron BP' | 'Company Ferron BP' | '$$SalesInvoice024001$$' | 'TRY'      |
 	
-		And I select "R3010 Cash on hand" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "R3010 Cash on hand"' | ''            | ''       | ''          | ''             | ''             | ''         | ''                             | ''              | ''                     |
-			| ''                               | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''             | ''         | ''                             | ''              | 'Attributes'           |
-			| ''                               | ''            | ''       | 'Amount'    | 'Company'      | 'Account'      | 'Currency' | 'Multi currency movement type' | 'Movement type' | 'Deferred calculation' |
-			| ''                               | 'Receipt'     | '*'      | '17,12'     | 'Main Company' | 'Cash desk №1' | 'USD'      | 'Reporting currency'           | ''              | 'No'                   |
-			| ''                               | 'Receipt'     | '*'      | '100'       | 'Main Company' | 'Cash desk №1' | 'TRY'      | 'Local currency'               | ''              | 'No'                   |
-			| ''                               | 'Receipt'     | '*'      | '100'       | 'Main Company' | 'Cash desk №1' | 'TRY'      | 'TRY'                          | ''              | 'No'                   |
-			| ''                               | 'Receipt'     | '*'      | '100'       | 'Main Company' | 'Cash desk №1' | 'TRY'      | 'en description is empty'      | ''              | 'No'                   |
 		And I close all client application windows
-	* Clear movements Cash receipt 1 and check that there is no movement on the registers
-		* Clear movements
-			Given I open hyperlink "e1cib/list/Document.CashReceipt"
-			And I go to line in "List" table
-				| 'Number' |
-				| '$$NumberCashReceipt0500011$$'      |
-			And in the table "List" I click the button named "ListContextMenuUndoPosting"
-		* Check that there is no movement on the registers
-			Given I open hyperlink "e1cib/list/AccumulationRegister.PartnerArTransactions"
-			And "List" table does not contain lines
-				| 'Recorder'           |
-				| '$$CashReceipt0500011$$' |
-			Given I open hyperlink "e1cib/list/AccumulationRegister.R3010B_CashOnHand"
-			And "List" table does not contain lines
-				| 'Recorder'           |
-				| '$$CashReceipt0500011$$' |
-			Given I open hyperlink "e1cib/list/AccumulationRegister.R5010B_ReconciliationStatement"
-			And "List" table does not contain lines
-				| 'Recorder'           |
-				| '$$CashReceipt0500011$$' |
-			And I close all client application windows
-	* Re-posting the document and checking movements on the registers
-		* Posting the document
-			Given I open hyperlink "e1cib/list/Document.CashReceipt"
-			And I go to line in "List" table
-				| 'Number' |
-				| '$$NumberCashReceipt0500011$$'      |
-			And in the table "List" I click the button named "ListContextMenuPost"
-		* Check movements
-			And I click "Registrations report" button
-			And I select "Partner AR transactions" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| '$$CashReceipt0500011$$'              | ''            | ''       | ''          | ''             | ''                       | ''          | ''                  | ''                         | ''         | ''                             | ''                     |
-			| 'Document registrations records'      | ''            | ''       | ''          | ''             | ''                       | ''          | ''                  | ''                         | ''         | ''                             | ''                     |
-			| 'Register  "Partner AR transactions"' | ''            | ''       | ''          | ''             | ''                       | ''          | ''                  | ''                         | ''         | ''                             | ''                     |
-			| ''                                    | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                       | ''          | ''                  | ''                         | ''         | ''                             | 'Attributes'           |
-			| ''                                    | ''            | ''       | 'Amount'    | 'Company'      | 'Basis document'         | 'Partner'   | 'Legal name'        | 'Partner term'             | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
-			| ''                                    | 'Expense'     | '*'      | '17,12'     | 'Main Company' | '$$SalesInvoice024001$$' | 'Ferron BP' | 'Company Ferron BP' | 'Basic Partner terms, TRY' | 'USD'      | 'Reporting currency'           | 'No'                   |
-			| ''                                    | 'Expense'     | '*'      | '100'       | 'Main Company' | '$$SalesInvoice024001$$' | 'Ferron BP' | 'Company Ferron BP' | 'Basic Partner terms, TRY' | 'TRY'      | 'en description is empty'      | 'No'                   |
-			| ''                                    | 'Expense'     | '*'      | '100'       | 'Main Company' | '$$SalesInvoice024001$$' | 'Ferron BP' | 'Company Ferron BP' | 'Basic Partner terms, TRY' | 'TRY'      | 'Local currency'               | 'No'                   |
-			| ''                                    | 'Expense'     | '*'      | '100'       | 'Main Company' | '$$SalesInvoice024001$$' | 'Ferron BP' | 'Company Ferron BP' | 'Basic Partner terms, TRY' | 'TRY'      | 'TRY'                          | 'No'                   |
-		And I select "Accounts statement" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Accounts statement"' | ''            | ''       | ''                     | ''               | ''                       | ''               | ''             | ''          | ''                  | ''                       | ''         |
-			| ''                               | 'Record type' | 'Period' | 'Resources'            | ''               | ''                       | ''               | 'Dimensions'   | ''          | ''                  | ''                       | ''         |
-			| ''                               | ''            | ''       | 'Advance to suppliers' | 'Transaction AP' | 'Advance from customers' | 'Transaction AR' | 'Company'      | 'Partner'   | 'Legal name'        | 'Basis document'         | 'Currency' |
-			| ''                               | 'Expense'     | '*'      | ''                     | ''               | ''                       | '100'            | 'Main Company' | 'Ferron BP' | 'Company Ferron BP' | '$$SalesInvoice024001$$' | 'TRY'      |
 	
-		And I select "R3010 Cash on hand" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "R3010 Cash on hand"' | ''            | ''       | ''          | ''             | ''             | ''         | ''                             | ''              | ''                     |
-			| ''                               | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''             | ''         | ''                             | ''              | 'Attributes'           |
-			| ''                               | ''            | ''       | 'Amount'    | 'Company'      | 'Account'      | 'Currency' | 'Multi currency movement type' | 'Movement type' | 'Deferred calculation' |
-			| ''                               | 'Receipt'     | '*'      | '17,12'     | 'Main Company' | 'Cash desk №1' | 'USD'      | 'Reporting currency'           | ''              | 'No'                   |
-			| ''                               | 'Receipt'     | '*'      | '100'       | 'Main Company' | 'Cash desk №1' | 'TRY'      | 'Local currency'               | ''              | 'No'                   |
-			| ''                               | 'Receipt'     | '*'      | '100'       | 'Main Company' | 'Cash desk №1' | 'TRY'      | 'TRY'                          | ''              | 'No'                   |
-			| ''                               | 'Receipt'     | '*'      | '100'       | 'Main Company' | 'Cash desk №1' | 'TRY'      | 'en description is empty'      | ''              | 'No'                   |
-		And I close all client application windows
-
-
 
 
 # Filters

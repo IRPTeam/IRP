@@ -84,8 +84,8 @@ Scenario: _043100 preparation (Credit note)
 			| '116' |
 			When Create document PurchaseInvoice objects (check movements)
 			And I execute 1C:Enterprise script at server
-				| "Documents.PurchaseOrder.FindByNumber(115).GetObject().Write(DocumentWriteMode.Posting);" |
-				| "Documents.PurchaseOrder.FindByNumber(116).GetObject().Write(DocumentWriteMode.Posting);" |
+				| "Documents.PurchaseInvoice.FindByNumber(115).GetObject().Write(DocumentWriteMode.Posting);" |
+				| "Documents.PurchaseInvoice.FindByNumber(116).GetObject().Write(DocumentWriteMode.Posting);" |
 		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
 		If "List" table does not contain lines Then
 			| 'Number'  |
@@ -137,7 +137,7 @@ Scenario: _043130 Credit note clear posting
 			| 'Credit note 1 dated 05.04.2021 09:30:47' |
 			| 'Document registrations records'                    |
 		And I close current window
-	* Post Sales return
+	* Post Credit note
 		Given I open hyperlink "e1cib/list/Document.CreditNote"
 		And I go to line in "List" table
 			| 'Number'  |

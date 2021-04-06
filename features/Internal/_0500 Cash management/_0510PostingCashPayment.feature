@@ -347,76 +347,9 @@ Scenario: _050002 check Cash payment movements with transaction type Payment to 
 		| ''                                    | 'Expense'     | '*'      | '1 000'     | 'Main Company' | '$$PurchaseInvoice018001$$' | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'TRY'      | 'en description is empty'      | 'No'                   |
 		| ''                                    | 'Expense'     | '*'      | '1 000'     | 'Main Company' | '$$PurchaseInvoice018001$$' | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'TRY'      | 'Local currency'               | 'No'                   |
 		| ''                                    | 'Expense'     | '*'      | '1 000'     | 'Main Company' | '$$PurchaseInvoice018001$$' | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'TRY'      | 'TRY'                          | 'No'                   |
-		And I select "R3010 Cash on hand" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "R3010 Cash on hand"'          | ''            | ''       | ''                     | ''               | ''                          | ''               | ''                             | ''                     | ''                  | ''                             | ''                     |
-		| ''                                     | 'Record type' | 'Period' | 'Resources'            | 'Dimensions'     | ''                          | ''               | ''                             | 'Attributes'           | ''                  | ''                             | ''                     |
-		| ''                                     | ''            | ''       | 'Amount'               | 'Company'        | 'Account'                   | 'Currency'       | 'Multi currency movement type' | 'Deferred calculation' | ''                  | ''                             | ''                     |
-		| ''                                     | 'Expense'     | '*'      | '171,2'               | 'Main Company'   | 'Cash desk №1'              | 'USD'            | 'Reporting currency'           | 'No'                   | ''                  | ''                             | ''                     |
-		| ''                                     | 'Expense'     | '*'      | '1 000'                | 'Main Company'   | 'Cash desk №1'              | 'TRY'            | 'en description is empty'      | 'No'                   | ''                  | ''                             | ''                     |
-		| ''                                     | 'Expense'     | '*'      | '1 000'                | 'Main Company'   | 'Cash desk №1'              | 'TRY'            | 'Local currency'               | 'No'                   | ''                  | ''                             | ''                     |
+		
 		And I close all client application windows
-	* Clear movements Cash payment 1 and check that there is no movement on the registers
-		* Clear movements
-			Given I open hyperlink "e1cib/list/Document.CashPayment"
-			And I go to line in "List" table
-				| 'Number' |
-				| '$$NumberCashPayment0510011$$'      |
-			And in the table "List" I click the button named "ListContextMenuUndoPosting"
-		* Check that there is no movement on the registers
-			Given I open hyperlink "e1cib/list/AccumulationRegister.PartnerApTransactions"
-			And "List" table does not contain lines
-				| 'Recorder'           |
-				| '$$CashPayment0510011$$' |
-			Given I open hyperlink "e1cib/list/AccumulationRegister.R3010B_CashOnHand"
-			And "List" table does not contain lines
-				| 'Recorder'           |
-				| '$$CashPayment0510011$$' |
-			Given I open hyperlink "e1cib/list/AccumulationRegister.R5010B_ReconciliationStatement"
-			And "List" table does not contain lines
-				| 'Recorder'           |
-				| '$$CashPayment0510011$$' |
-			And I close all client application windows
-	* * Re-posting the document and checking movements on the registers
-		* Posting the document
-			Given I open hyperlink "e1cib/list/Document.CashPayment"
-			And I go to line in "List" table
-				| 'Number' |
-				| '$$NumberCashPayment0510011$$'      |
-			And in the table "List" I click the button named "ListContextMenuPost"
-		* Check movements
-			And I click "Registrations report" button
-			And I select "Accounts statement" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| '$$CashPayment0510011$$'         | ''            | ''       | ''                     | ''               | ''                       | ''               | ''             | ''          | ''                  | ''                          | ''         |
-		| 'Document registrations records' | ''            | ''       | ''                     | ''               | ''                       | ''               | ''             | ''          | ''                  | ''                          | ''         |
-		| 'Register  "Accounts statement"' | ''            | ''       | ''                     | ''               | ''                       | ''               | ''             | ''          | ''                  | ''                          | ''         |
-		| ''                               | 'Record type' | 'Period' | 'Resources'            | ''               | ''                       | ''               | 'Dimensions'   | ''          | ''                  | ''                          | ''         |
-		| ''                               | ''            | ''       | 'Advance to suppliers' | 'Transaction AP' | 'Advance from customers' | 'Transaction AR' | 'Company'      | 'Partner'   | 'Legal name'        | 'Basis document'            | 'Currency' |
-		| ''                               | 'Expense'     | '*'      | ''                     | '1 000'          | ''                       | ''               | 'Main Company' | 'Ferron BP' | 'Company Ferron BP' | '$$PurchaseInvoice018001$$' | 'TRY'      |
 	
-		And I select "Partner AP transactions" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Partner AP transactions"' | ''            | ''       | ''          | ''             | ''                          | ''          | ''                  | ''                   | ''         | ''                             | ''                     |
-		| ''                                    | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                          | ''          | ''                  | ''                   | ''         | ''                             | 'Attributes'           |
-		| ''                                    | ''            | ''       | 'Amount'    | 'Company'      | 'Basis document'            | 'Partner'   | 'Legal name'        | 'Partner term'       | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
-		| ''                                    | 'Expense'     | '*'      | '171,2'     | 'Main Company' | '$$PurchaseInvoice018001$$' | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'USD'      | 'Reporting currency'           | 'No'                   |
-		| ''                                    | 'Expense'     | '*'      | '1 000'     | 'Main Company' | '$$PurchaseInvoice018001$$' | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'TRY'      | 'en description is empty'      | 'No'                   |
-		| ''                                    | 'Expense'     | '*'      | '1 000'     | 'Main Company' | '$$PurchaseInvoice018001$$' | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'TRY'      | 'Local currency'               | 'No'                   |
-		| ''                                    | 'Expense'     | '*'      | '1 000'     | 'Main Company' | '$$PurchaseInvoice018001$$' | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'TRY'      | 'TRY'                          | 'No'                   |
-		And I select "R3010 Cash on hand" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "R3010 Cash on hand"'          | ''            | ''       | ''                     | ''               | ''                          | ''               | ''                             | ''                     | ''                  | ''                             | ''                     |
-		| ''                                     | 'Record type' | 'Period' | 'Resources'            | 'Dimensions'     | ''                          | ''               | ''                             | 'Attributes'           | ''                  | ''                             | ''                     |
-		| ''                                     | ''            | ''       | 'Amount'               | 'Company'        | 'Account'                   | 'Currency'       | 'Multi currency movement type' | 'Deferred calculation' | ''                  | ''                             | ''                     |
-		| ''                                     | 'Expense'     | '*'      | '171,2'               | 'Main Company'   | 'Cash desk №1'              | 'USD'            | 'Reporting currency'           | 'No'                   | ''                  | ''                             | ''                     |
-		| ''                                     | 'Expense'     | '*'      | '1 000'                | 'Main Company'   | 'Cash desk №1'              | 'TRY'            | 'en description is empty'      | 'No'                   | ''                  | ''                             | ''                     |
-		| ''                                     | 'Expense'     | '*'      | '1 000'                | 'Main Company'   | 'Cash desk №1'              | 'TRY'            | 'Local currency'               | 'No'                   | ''                  | ''                             | ''                     |
-			And I close all client application windows
 
 # Filters
 

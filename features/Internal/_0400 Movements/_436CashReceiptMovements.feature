@@ -122,4 +122,76 @@ Scenario: _043600 preparation (Cash receipt)
 			| "Documents.CashReceipt.FindByNumber(2).GetObject().Write(DocumentWriteMode.Posting);" |
 			| "Documents.CashReceipt.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I close all client application windows
-		
+
+
+
+Scenario: _043601 check Cash receipt movements by the Register "R3010 Cash on hand"
+	* Select Cash receipt
+		Given I open hyperlink "e1cib/list/Document.CashReceipt"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '2' |
+	* Check movements by the Register  "R3010 Cash on hand" 
+		And I click "Registrations report" button
+		And I select "R3010 Cash on hand" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Cash receipt 2 dated 05.04.2021 14:34:09' | ''            | ''                    | ''          | ''             | ''             | ''         | ''                             | ''              | ''                     |
+			| 'Document registrations records'           | ''            | ''                    | ''          | ''             | ''             | ''         | ''                             | ''              | ''                     |
+			| 'Register  "R3010 Cash on hand"'           | ''            | ''                    | ''          | ''             | ''             | ''         | ''                             | ''              | ''                     |
+			| ''                                         | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''         | ''                             | ''              | 'Attributes'           |
+			| ''                                         | ''            | ''                    | 'Amount'    | 'Company'      | 'Account'      | 'Currency' | 'Multi currency movement type' | 'Movement type' | 'Deferred calculation' |
+			| ''                                         | 'Receipt'     | '05.04.2021 14:34:09' | '500'       | 'Main Company' | 'Cash desk №2' | 'USD'      | 'Reporting currency'           | ''              | 'No'                   |
+			| ''                                         | 'Receipt'     | '05.04.2021 14:34:09' | '500'       | 'Main Company' | 'Cash desk №2' | 'USD'      | 'en description is empty'      | ''              | 'No'                   |
+			| ''                                         | 'Receipt'     | '05.04.2021 14:34:09' | '2 813,75'  | 'Main Company' | 'Cash desk №2' | 'TRY'      | 'Local currency'               | ''              | 'No'                   |
+	And I close all client application windows
+
+	
+Scenario: _043602 check Cash receipt movements by the Register "R5010 Reconciliation statement" (payment to vendor)
+	* Select Cash receipt
+		Given I open hyperlink "e1cib/list/Document.CashReceipt"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '1' |
+	* Check movements by the Register  "R5010 Reconciliation statement" 
+		And I click "Registrations report" button
+		And I select "R5010 Reconciliation statement" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Cash receipt 1 dated 05.04.2021 14:33:49'   | ''            | ''                    | ''          | ''           | ''             | ''                  |
+			| 'Document registrations records'             | ''            | ''                    | ''          | ''           | ''             | ''                  |
+			| 'Register  "R5010 Reconciliation statement"' | ''            | ''                    | ''          | ''           | ''             | ''                  |
+			| ''                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''             | ''                  |
+			| ''                                           | ''            | ''                    | 'Amount'    | 'Currency'   | 'Company'      | 'Legal name'        |
+			| ''                                           | 'Expense'     | '05.04.2021 14:33:49' | '800'       | 'TRY'        | 'Main Company' | 'Company Ferron BP' |
+	And I close all client application windows
+
+
+Scenario: _043630 Cash receipt clear posting
+	And I close all client application windows
+	* Select Cash receipt
+		Given I open hyperlink "e1cib/list/Document.CashReceipt"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '2' |
+	* Clear posting
+		And in the table "List" I click the button named "ListContextMenuUndoPosting"
+		Then user message window does not contain messages
+		And I click "Registrations report" button
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Cash receipt 2 dated 05.04.2021 14:34:09' |
+			| 'Document registrations records'                    |
+		And I close current window
+	* Post Cash receipt
+		Given I open hyperlink "e1cib/list/Document.CashReceipt"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '2' |
+		And in the table "List" I click the button named "ListContextMenuPost"		
+		Then user message window does not contain messages
+		And I click "Registrations report" button
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document contains values
+			| 'R3010 Cash on hand' |
+		And I close all client application windows	

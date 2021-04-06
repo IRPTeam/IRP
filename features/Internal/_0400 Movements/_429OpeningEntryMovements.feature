@@ -81,3 +81,63 @@ Scenario: _042900 preparation (Opening entry)
 		And I close all client application windows
 		
 
+
+Scenario: _042901 check Opening entry movements by the Register  "R4010 Actual stocks"
+	And I close all client application windows
+	* Select Opening entry
+		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '2' |
+	* Check movements by the Register  "R4010 Actual stocks" 
+		And I click "Registrations report" button
+		And I select "R4010 Actual stocks" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Opening entry 2 dated 07.09.2020 21:26:35' | ''            | ''                    | ''          | ''           | ''          |
+			| 'Document registrations records'            | ''            | ''                    | ''          | ''           | ''          |
+			| 'Register  "R4010 Actual stocks"'           | ''            | ''                    | ''          | ''           | ''          |
+			| ''                                          | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''          |
+			| ''                                          | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key'  |
+			| ''                                          | 'Receipt'     | '07.09.2020 21:26:35' | '100'       | 'Store 01'   | '38/Yellow' |
+			| ''                                          | 'Receipt'     | '07.09.2020 21:26:35' | '100'       | 'Store 01'   | '36/Red'    |
+			| ''                                          | 'Receipt'     | '07.09.2020 21:26:35' | '100'       | 'Store 02'   | 'L/Green'   |
+			| ''                                          | 'Receipt'     | '07.09.2020 21:26:35' | '100'       | 'Store 02'   | '38/Yellow' |
+			| ''                                          | 'Receipt'     | '07.09.2020 21:26:35' | '100'       | 'Store 02'   | '36/Red'    |
+			| ''                                          | 'Receipt'     | '07.09.2020 21:26:35' | '200'       | 'Store 02'   | '36/18SD'   |
+			| ''                                          | 'Receipt'     | '07.09.2020 21:26:35' | '300'       | 'Store 01'   | '36/18SD'   |
+			| ''                                          | 'Receipt'     | '07.09.2020 21:26:35' | '400'       | 'Store 01'   | 'XS/Blue'   |
+			| ''                                          | 'Receipt'     | '07.09.2020 21:26:35' | '400'       | 'Store 02'   | 'S/Yellow'  |
+			| ''                                          | 'Receipt'     | '07.09.2020 21:26:35' | '500'       | 'Store 01'   | 'XS/Blue'   |
+			| ''                                          | 'Receipt'     | '07.09.2020 21:26:35' | '500'       | 'Store 01'   | 'L/Green'   |
+		And I close all client application windows
+
+Scenario: _042902 check Opening entry movements by the Register  "R4011 Free stocks"
+	And I close all client application windows
+	* Select Opening entry
+		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '2' |
+	* Check movements by the Register  "R4011 Free stocks" 
+		And I click "Registrations report" button
+		And I select "R4011 Free stocks" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Opening entry 2 dated 07.09.2020 21:26:35' | ''            | ''                    | ''          | ''           | ''          |
+			| 'Document registrations records'            | ''            | ''                    | ''          | ''           | ''          |
+			| 'Register  "R4011 Free stocks"'             | ''            | ''                    | ''          | ''           | ''          |
+			| ''                                          | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''          |
+			| ''                                          | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key'  |
+			| ''                                          | 'Receipt'     | '07.09.2020 21:26:35' | '100'       | 'Store 01'   | '38/Yellow' |
+			| ''                                          | 'Receipt'     | '07.09.2020 21:26:35' | '100'       | 'Store 01'   | '36/Red'    |
+			| ''                                          | 'Receipt'     | '07.09.2020 21:26:35' | '100'       | 'Store 02'   | 'L/Green'   |
+			| ''                                          | 'Receipt'     | '07.09.2020 21:26:35' | '100'       | 'Store 02'   | '38/Yellow' |
+			| ''                                          | 'Receipt'     | '07.09.2020 21:26:35' | '100'       | 'Store 02'   | '36/Red'    |
+			| ''                                          | 'Receipt'     | '07.09.2020 21:26:35' | '200'       | 'Store 02'   | '36/18SD'   |
+			| ''                                          | 'Receipt'     | '07.09.2020 21:26:35' | '300'       | 'Store 01'   | '36/18SD'   |
+			| ''                                          | 'Receipt'     | '07.09.2020 21:26:35' | '400'       | 'Store 01'   | 'XS/Blue'   |
+			| ''                                          | 'Receipt'     | '07.09.2020 21:26:35' | '400'       | 'Store 02'   | 'S/Yellow'  |
+			| ''                                          | 'Receipt'     | '07.09.2020 21:26:35' | '500'       | 'Store 01'   | 'XS/Blue'   |
+			| ''                                          | 'Receipt'     | '07.09.2020 21:26:35' | '500'       | 'Store 01'   | 'L/Green'   |
+		And I close all client application windows

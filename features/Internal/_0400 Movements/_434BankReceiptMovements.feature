@@ -125,3 +125,103 @@ Scenario: _043400 preparation (Bank receipt)
 		And I close all client application windows
 		
 		
+
+Scenario: _043401 check Bank receipt movements by the Register "R3010 Cash on hand"
+	* Select Bank receipt
+		Given I open hyperlink "e1cib/list/Document.BankReceipt"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '2' |
+	* Check movements by the Register  "R3010 Cash on hand" 
+		And I click "Registrations report" button
+		And I select "R3010 Cash on hand" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Bank receipt 2 dated 05.04.2021 14:27:40' | ''            | ''                    | ''          | ''             | ''                    | ''         | ''                             | ''              | ''                     |
+			| 'Document registrations records'           | ''            | ''                    | ''          | ''             | ''                    | ''         | ''                             | ''              | ''                     |
+			| 'Register  "R3010 Cash on hand"'           | ''            | ''                    | ''          | ''             | ''                    | ''         | ''                             | ''              | ''                     |
+			| ''                                         | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                    | ''         | ''                             | ''              | 'Attributes'           |
+			| ''                                         | ''            | ''                    | 'Amount'    | 'Company'      | 'Account'             | 'Currency' | 'Multi currency movement type' | 'Movement type' | 'Deferred calculation' |
+			| ''                                         | 'Receipt'     | '05.04.2021 14:27:40' | '500'       | 'Main Company' | 'Bank account 2, EUR' | 'EUR'      | 'en description is empty'      | 'Expense'       | 'No'                   |
+			| ''                                         | 'Receipt'     | '05.04.2021 14:27:40' | '550'       | 'Main Company' | 'Bank account 2, EUR' | 'USD'      | 'Reporting currency'           | 'Expense'       | 'No'                   |
+			| ''                                         | 'Receipt'     | '05.04.2021 14:27:40' | '2 500'     | 'Main Company' | 'Bank account 2, EUR' | 'TRY'      | 'Local currency'               | 'Expense'       | 'No'                   |
+	And I close all client application windows
+
+	
+Scenario: _043402 check Bank receipt movements by the Register "R5010 Reconciliation statement" (payment to vendor)
+	* Select Bank receipt
+		Given I open hyperlink "e1cib/list/Document.BankReceipt"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '1' |
+	* Check movements by the Register  "R5010 Reconciliation statement" 
+		And I click "Registrations report" button
+		And I select "R5010 Reconciliation statement" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Bank receipt 1 dated 07.09.2020 19:14:59'   | ''            | ''                    | ''          | ''           | ''             | ''                  |
+			| 'Document registrations records'             | ''            | ''                    | ''          | ''           | ''             | ''                  |
+			| 'Register  "R5010 Reconciliation statement"' | ''            | ''                    | ''          | ''           | ''             | ''                  |
+			| ''                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''             | ''                  |
+			| ''                                           | ''            | ''                    | 'Amount'    | 'Currency'   | 'Company'      | 'Legal name'        |
+			| ''                                           | 'Expense'     | '07.09.2020 19:14:59' | '100'       | 'TRY'        | 'Main Company' | 'Company Ferron BP' |
+	And I close all client application windows
+
+Scenario: _043403 check Bank receipt movements by the Register "R5010 Reconciliation statement" (cash transfer, currency exchange)
+	And I close all client application windows
+	* Select Bank receipt (cash transfer)
+		Given I open hyperlink "e1cib/list/Document.BankReceipt"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '2' |
+	* Check movements by the Register  "R5010 Reconciliation statement" 
+		And I click "Registrations report" button
+		And I select "R5010 Reconciliation statement" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document does not contain values
+			| 'Register  "R5010 Reconciliation statement'   |                  
+	And I close all client application windows
+	* Select Bank receipt (currency exchange)
+		Given I open hyperlink "e1cib/list/Document.BankReceipt"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '3' |
+	* Check movements by the Register  "R5010 Reconciliation statement" 
+		And I click "Registrations report" button
+		And I select "R5010 Reconciliation statement" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document does not contain values
+			| 'Register  "R5010 Reconciliation statement'   |                  
+	And I close all client application windows
+
+
+
+Scenario: _043430 Bank receipt clear posting
+	And I close all client application windows
+	* Select Bank receipt
+		Given I open hyperlink "e1cib/list/Document.BankReceipt"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '2' |
+	* Clear posting
+		And in the table "List" I click the button named "ListContextMenuUndoPosting"
+		Then user message window does not contain messages
+		And I click "Registrations report" button
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Bank receipt 2 dated 05.04.2021 14:27:40' |
+			| 'Document registrations records'                    |
+		And I close current window
+	* Post Bank receipt
+		Given I open hyperlink "e1cib/list/Document.BankReceipt"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '2' |
+		And in the table "List" I click the button named "ListContextMenuPost"		
+		Then user message window does not contain messages
+		And I click "Registrations report" button
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document contains values
+			| 'R3010 Cash on hand' |
+		And I close all client application windows
+		

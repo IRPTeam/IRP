@@ -29,6 +29,12 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Tables.AccountBalance = AccountBalance;
 	Tables.PlaningCashTransactions = PlaningCashTransactions;
 	Tables.CashInTransit = CashInTransit;
+	
+#Region NewRegistersPosting	
+	QueryArray = GetQueryTextsSecondaryTables();
+	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
+#EndRegion	
+	
 	Return Tables;
 EndFunction
 
@@ -121,7 +127,12 @@ Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo 
 EndFunction
 
 Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	Return;
+#Region NewRegistersPosting
+	Tables = Parameters.DocumentDataTables;	
+	QueryArray = GetQueryTextsMasterTables();
+	PostingServer.SetRegisters(Tables, Ref);
+	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
+#EndRegion
 EndProcedure
 
 Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
@@ -143,7 +154,12 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords.PlaningCashTransactions,
 		New Structure("RecordType, RecordSet",
 			AccumulationRecordType.Expense,
-			Parameters.DocumentDataTables.PlaningCashTransactions));	
+			Parameters.DocumentDataTables.PlaningCashTransactions));
+			
+#Region NewRegistersPosting	
+	PostingServer.SetPostingDataTables(PostingDataTables, Parameters);
+#EndRegion
+	
 	Return PostingDataTables;
 EndFunction
 
@@ -198,14 +214,52 @@ EndFunction
 
 Function GetQueryTextsSecondaryTables()
 	QueryArray = New Array;
-
+	QueryArray.Add(PaymentList());
 	Return QueryArray;
 EndFunction
 
 Function GetQueryTextsMasterTables()
 	QueryArray = New Array;
-
+	QueryArray.Add(R3010B_CashOnHand());
 	Return QueryArray;
+EndFunction
+
+Function PaymentList()
+	Return
+	"SELECT
+	|	PaymentList.Ref.Date AS Period,
+	|	PaymentList.Ref.Company AS Company,
+	|	PaymentList.Account,
+	|	PaymentList.Currency,
+	|	PaymentList.Amount,
+	|	PaymentList.Account.Type = VALUE(Enum.CashAccountTypes.POS) AS IsAccountPOS
+	|INTO PaymentList
+	|FROM
+	|	Document.CashStatement.PaymentList AS PaymentList
+	|WHERE
+	|	PaymentList.Ref = &Ref"
+EndFunction
+
+Function R3010B_CashOnHand()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	PaymentList.Period,
+		|	PaymentList.Company,
+		|	PaymentList.Account,
+		|	PaymentList.Currency,
+		|	SUM(PaymentList.Amount) AS Amount
+		|INTO R3010B_CashOnHand
+		|FROM
+		|	PaymentList AS PaymentList
+		|WHERE
+		|	PaymentList.IsAccountPOS
+		|GROUP BY
+		|	VALUE(AccumulationRecordType.Expense),
+		|	PaymentList.Period,
+		|	PaymentList.Company,
+		|	PaymentList.Currency,
+		|	PaymentList.Account";	
 EndFunction
 
 #EndRegion

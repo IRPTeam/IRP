@@ -27,11 +27,11 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	QueryResults = Query.ExecuteBatch();
 		
 	Tables.PartnerArTransactions      = QueryResults[1].Unload();
-	Tables.PlaningCashTransactions    = QueryResults[3].Unload();
-	Tables.CashInTransit              = QueryResults[4].Unload();
-	Tables.AdvanceFromCustomers       = QueryResults[5].Unload();
-	Tables.CashInTransit_POS          = QueryResults[7].Unload();
-	Tables.ExpensesTurnovers          = QueryResults[8].Unload();
+	Tables.PlaningCashTransactions    = QueryResults[2].Unload();
+	Tables.CashInTransit              = QueryResults[3].Unload();
+	Tables.AdvanceFromCustomers       = QueryResults[4].Unload();
+	Tables.CashInTransit_POS          = QueryResults[5].Unload();
+	Tables.ExpensesTurnovers          = QueryResults[6].Unload();
 
 #Region NewRegistersPosting	
 	QueryArray = GetQueryTextsSecondaryTables();

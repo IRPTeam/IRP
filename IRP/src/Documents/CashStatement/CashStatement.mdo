@@ -56,7 +56,6 @@
   <realTimePosting>Deny</realTimePosting>
   <registerRecords>AccumulationRegister.PlaningCashTransactions</registerRecords>
   <registerRecords>AccumulationRegister.CashInTransit</registerRecords>
-  <registerRecords>AccumulationRegister.AccountBalance</registerRecords>
   <registerRecords>AccumulationRegister.R3010B_CashOnHand</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>

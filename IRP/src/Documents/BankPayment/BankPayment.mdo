@@ -79,7 +79,6 @@
   <registerRecords>AccumulationRegister.CashInTransit</registerRecords>
   <registerRecords>AccumulationRegister.AdvanceToSuppliers</registerRecords>
   <registerRecords>AccumulationRegister.PartnerApTransactions</registerRecords>
-  <registerRecords>AccumulationRegister.AccountBalance</registerRecords>
   <registerRecords>AccumulationRegister.R3010B_CashOnHand</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>

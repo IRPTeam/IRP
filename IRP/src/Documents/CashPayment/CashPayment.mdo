@@ -66,13 +66,11 @@
   <defaultListForm>Document.CashPayment.Form.ListForm</defaultListForm>
   <defaultChoiceForm>Document.CashPayment.Form.ChoiceForm</defaultChoiceForm>
   <realTimePosting>Deny</realTimePosting>
-  <registerRecords>AccumulationRegister.CashAdvance</registerRecords>
   <registerRecords>AccumulationRegister.PlaningCashTransactions</registerRecords>
   <registerRecords>AccumulationRegister.AccountsStatement</registerRecords>
   <registerRecords>AccumulationRegister.CashInTransit</registerRecords>
   <registerRecords>AccumulationRegister.AdvanceToSuppliers</registerRecords>
   <registerRecords>AccumulationRegister.PartnerApTransactions</registerRecords>
-  <registerRecords>AccumulationRegister.AccountBalance</registerRecords>
   <registerRecords>AccumulationRegister.R5010B_ReconciliationStatement</registerRecords>
   <registerRecords>AccumulationRegister.R3010B_CashOnHand</registerRecords>
   <registerRecords>AccumulationRegister.R3015B_CashAdvance</registerRecords>

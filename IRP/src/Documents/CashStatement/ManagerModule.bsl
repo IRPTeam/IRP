@@ -4,15 +4,8 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	
 	AccReg = Metadata.AccumulationRegisters;
 	Tables = New Structure();
-	Tables.Insert("AccountBalance", PostingServer.CreateTable(AccReg.AccountBalance));
 	Tables.Insert("PlaningCashTransactions", PostingServer.CreateTable(AccReg.PlaningCashTransactions));
 	Tables.Insert("CashInTransit", PostingServer.CreateTable(AccReg.CashInTransit));
-
-	Query_AccountBalance = New Query();
-	Query_AccountBalance.Text = GetQueryText_CashStatement_AccountBalance();
-	Query_AccountBalance.SetParameter("Ref", Ref);
-	QueryResult_AccountBalance = Query_AccountBalance.Execute();
-	AccountBalance = QueryResult_AccountBalance.Unload();
 
 	Query_PlaningCashTransactions = New Query();
 	Query_PlaningCashTransactions.Text = GetQueryText_CashStatement_PlaningCashTransactions();
@@ -26,7 +19,6 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	QueryResult_CashInTransit = Query_CashInTransit.Execute();
 	CashInTransit = QueryResult_CashInTransit.Unload();
 
-	Tables.AccountBalance = AccountBalance;
 	Tables.PlaningCashTransactions = PlaningCashTransactions;
 	Tables.CashInTransit = CashInTransit;
 	
@@ -37,27 +29,6 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	
 	Return Tables;
 EndFunction
-
-Function GetQueryText_CashStatement_AccountBalance()
-	Return "SELECT
-	|	Table.Ref.Company AS Company,
-	|	Table.Account.Currency AS Currency,
-	|	Table.Account,
-	|	SUM(Table.Amount) AS Amount,
-	|	Table.Ref.Date AS Period,
-	|	Table.Key
-	|FROM
-	|	Document.CashStatement.PaymentList AS Table
-	|WHERE
-	|	Table.Ref = &Ref
-	|	AND Table.Account.Type = VALUE(Enum.CashAccountTypes.POS)
-	|GROUP BY
-	|	Table.Ref.Company,
-	|	Table.Account.Currency,
-	|	Table.Account,
-	|	Table.Ref.Date,
-	|	Table.Key";
-EndFunction	
 
 Function GetQueryText_CashStatement_PlaningCashTransactions()
 	Return "SELECT
@@ -109,20 +80,7 @@ Function GetQueryText_CashStatement_CashInTransit()
 EndFunction
 
 Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	DocumentDataTables = Parameters.DocumentDataTables;
 	DataMapWithLockFields = New Map();
-		
-	// AccountBalance
-	AccountBalance = AccumulationRegisters.AccountBalance.GetLockFields(DocumentDataTables.AccountBalance);
-	DataMapWithLockFields.Insert(AccountBalance.RegisterName, AccountBalance.LockInfo);
-	
-	// CashInTransit
-	CashInTransit = AccumulationRegisters.CashInTransit.GetLockFields(DocumentDataTables.CashInTransit);
-	DataMapWithLockFields.Insert(CashInTransit.RegisterName, CashInTransit.LockInfo);
-	
-	// PlaningCashTransactions
-	PlaningCashTransactions = AccumulationRegisters.PlaningCashTransactions.GetLockFields(DocumentDataTables.PlaningCashTransactions);
-	DataMapWithLockFields.Insert(PlaningCashTransactions.RegisterName, PlaningCashTransactions.LockInfo);
 	Return DataMapWithLockFields;
 EndFunction
 
@@ -137,13 +95,7 @@ EndProcedure
 
 Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 	PostingDataTables = New Map();
-			
-	// AccountBalance
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.AccountBalance,
-		New Structure("RecordType, RecordSet",
-			AccumulationRecordType.Expense,
-			Parameters.DocumentDataTables.AccountBalance));
-			
+						
 	// CashInTransit
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords.CashInTransit,
 		New Structure("RecordType, RecordSet",
@@ -244,22 +196,12 @@ Function R3010B_CashOnHand()
 	Return
 		"SELECT
 		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		|	PaymentList.Period,
-		|	PaymentList.Company,
-		|	PaymentList.Account,
-		|	PaymentList.Currency,
-		|	SUM(PaymentList.Amount) AS Amount
+		|	*
 		|INTO R3010B_CashOnHand
 		|FROM
 		|	PaymentList AS PaymentList
 		|WHERE
-		|	PaymentList.IsAccountPOS
-		|GROUP BY
-		|	VALUE(AccumulationRecordType.Expense),
-		|	PaymentList.Period,
-		|	PaymentList.Company,
-		|	PaymentList.Currency,
-		|	PaymentList.Account";	
+		|	PaymentList.IsAccountPOS";
 EndFunction
 
 #EndRegion

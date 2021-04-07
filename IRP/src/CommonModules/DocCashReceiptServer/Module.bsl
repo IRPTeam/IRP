@@ -142,14 +142,14 @@ Function GetDocumentTable_CashTransferOrder_QueryText() Export
 	|	END) AS PlaningCashTransactionsTurnovers
 	|		INNER JOIN Document.CashTransferOrder AS Doc
 	|		ON PlaningCashTransactionsTurnovers.BasisDocument = Doc.Ref
-	|		INNER JOIN AccumulationRegister.CashAdvance.Balance(&EndOfDate,
+	|		INNER JOIN AccumulationRegister.R3015B_CashAdvance.Balance(&EndOfDate,
 	|			CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
 	|		AND CASE
 	|			WHEN &UseArrayOfBasisDocuments
-	|				THEN BasisDocument IN (&ArrayOfBasisDocuments)
+	|				THEN Basis IN (&ArrayOfBasisDocuments)
 	|			ELSE TRUE
 	|		END) AS CashAdvanceBalance
-	|		ON PlaningCashTransactionsTurnovers.BasisDocument = CashAdvanceBalance.BasisDocument
+	|		ON PlaningCashTransactionsTurnovers.BasisDocument = CashAdvanceBalance.Basis
 	|WHERE
 	|	PlaningCashTransactionsTurnovers.Account.Type = VALUE(Enum.CashAccountTypes.Cash)
 	|	AND PlaningCashTransactionsTurnovers.AmountTurnover > 0
@@ -195,6 +195,7 @@ Function GetDocumentTable_CashTransferOrder_QueryText() Export
 	|	AND PlaningCashTransactionsTurnovers.AmountTurnover > 0
 	|	AND Doc.SendCurrency = Doc.ReceiveCurrency
 	|;
+	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
 	|	tmp.BasedOn AS BasedOn,

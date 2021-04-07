@@ -692,7 +692,6 @@
   <accumulationRegisters>AccumulationRegister.AdvanceFromCustomers</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.AdvanceToSuppliers</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.Aging</accumulationRegisters>
-  <accumulationRegisters>AccumulationRegister.CashAdvance</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.CashInTransit</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.ChequeBondBalance</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.ExpensesTurnovers</accumulationRegisters>

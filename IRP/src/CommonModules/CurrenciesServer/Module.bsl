@@ -150,7 +150,7 @@ Function IsUseCurrencyJoin(Parameters, ItemOfPostingInfo)
 	TypeOfRecordSetsArray.Add(Type("AccumulationRegisterRecordSet.AccountBalance"));
 	TypeOfRecordSetsArray.Add(Type("AccumulationRegisterRecordSet.PartnerApTransactions"));
 	TypeOfRecordSetsArray.Add(Type("AccumulationRegisterRecordSet.PartnerArTransactions"));
-	TypeOfRecordSetsArray.Add(Type("AccumulationRegisterRecordSet.CashAdvance"));
+	TypeOfRecordSetsArray.Add(Type("AccumulationRegisterRecordSet.R3015B_CashAdvance"));
 	TypeOfRecordSetsArray.Add(Type("AccumulationRegisterRecordSet.R2021B_CustomersTransactions"));
 	TypeOfRecordSetsArray.Add(Type("AccumulationRegisterRecordSet.R1021B_VendorsTransactions"));
 	

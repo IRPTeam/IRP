@@ -4,11 +4,9 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	AccReg = Metadata.AccumulationRegisters;
 	Tables = New Structure();
 	Tables.Insert("PartnerArTransactions"                 , PostingServer.CreateTable(AccReg.PartnerArTransactions));
-	Tables.Insert("AccountBalance"                        , PostingServer.CreateTable(AccReg.AccountBalance));
 	Tables.Insert("PlaningCashTransactions"               , PostingServer.CreateTable(AccReg.PlaningCashTransactions));
 	Tables.Insert("CashInTransit"                         , PostingServer.CreateTable(AccReg.CashInTransit));
 	Tables.Insert("AdvanceFromCustomers"                  , PostingServer.CreateTable(AccReg.AdvanceFromCustomers));
-	Tables.Insert("CashAdvance"                           , PostingServer.CreateTable(AccReg.CashAdvance));
 	Tables.Insert("PartnerArTransactions_OffsetOfAdvance" , PostingServer.CreateTable(AccReg.PartnerArTransactions));
 	Tables.Insert("Aging_Expense"                         , PostingServer.CreateTable(AccReg.Aging));
 	
@@ -27,11 +25,9 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	QueryResults = Query.ExecuteBatch();
 	
 	Tables.PartnerArTransactions = QueryResults[1].Unload();
-	Tables.AccountBalance = QueryResults[2].Unload();
-	Tables.PlaningCashTransactions = QueryResults[3].Unload();
-	Tables.CashInTransit = QueryResults[4].Unload();
-	Tables.AdvanceFromCustomers = QueryResults[5].Unload();
-	Tables.CashAdvance = QueryResults[6].Unload();
+	Tables.PlaningCashTransactions = QueryResults[2].Unload();
+	Tables.CashInTransit = QueryResults[3].Unload();
+	Tables.AdvanceFromCustomers = QueryResults[4].Unload();
 
 #Region NewRegistersPosting	
 	QueryArray = GetQueryTextsSecondaryTables();
@@ -178,24 +174,6 @@ Function GetQueryTextQueryTable()
 		|	tmp.Company AS Company,
 		|	tmp.CashAccount AS Account,
 		|	tmp.Currency AS Currency,
-		|	SUM(tmp.Amount) AS Amount,
-		|	tmp.Period,
-		|	tmp.Key
-		|FROM
-		|	tmp AS tmp
-		|GROUP BY
-		|	tmp.Company,
-		|	tmp.CashAccount,
-		|	tmp.Currency,
-		|	tmp.Period,
-		|	tmp.Key
-		|;
-		|
-		|//[3]//////////////////////////////////////////////////////////////////////////////
-		|SELECT
-		|	tmp.Company AS Company,
-		|	tmp.CashAccount AS Account,
-		|	tmp.Currency AS Currency,
 		|	tmp.PlaningTransactionBasis AS BasisDocument,
 		|	VALUE(Enum.CashFlowDirections.Incoming) AS CashFlowDirection,
 		|	CASE
@@ -235,7 +213,7 @@ Function GetQueryTextQueryTable()
 		|	tmp.Key
 		|;
 		|
-		|//[4]//////////////////////////////////////////////////////////////////////////////
+		|//[3]//////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company AS Company,
 		|	tmp.PlaningTransactionBasis AS BasisDocument,
@@ -259,7 +237,7 @@ Function GetQueryTextQueryTable()
 		|	tmp.Key
 		|;
 		|
-		|//[5]//////////////////////////////////////////////////////////////////////////////
+		|//[4]//////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company AS Company,
 		|	tmp.Partner AS Partner,
@@ -285,27 +263,7 @@ Function GetQueryTextQueryTable()
 		|	tmp.Period,
 		|	tmp.BasisDocument,
 		|	tmp.ReceiptDocument,
-		|	tmp.Key
-		|;
-		|
-		|//[6]////////////////////////////////////////////////////////////////////////////////////
-		|SELECT
-		|	tmp.Company AS Company,
-		|	tmp.Partner AS Partner,
-		|	tmp.CurrencyExchange AS Currency,
-		|	SUM(tmp.AmountExchange) AS Amount,
-		|	tmp.Period,
-		|	tmp.PlaningTransactionBasis AS BasisDocument
-		|FROM
-		|	tmp AS tmp
-		|WHERE
-		|	tmp.IsMoneyExchange
-		|GROUP BY
-		|	tmp.Company,
-		|	tmp.Partner,
-		|	tmp.CurrencyExchange,
-		|	tmp.Period,
-		|	tmp.PlaningTransactionBasis";
+		|	tmp.Key";
 EndFunction
 
 Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
@@ -448,13 +406,7 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 			PostingServer.JoinTables(ArrayOfTables,
 			"RecordType, Period, Company, BasisDocument, Partner, LegalName, Agreement, Currency, Amount"),
 			Parameters.IsReposting));
-	
-	// AccountBalance
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.AccountBalance,
-		New Structure("RecordType, RecordSet",
-			AccumulationRecordType.Receipt,
-			Parameters.DocumentDataTables.AccountBalance));
-	
+		
 	// PlaningCashTransactions
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords.PlaningCashTransactions,
 		New Structure("RecordSet", Parameters.DocumentDataTables.PlaningCashTransactions));
@@ -482,13 +434,6 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 			PostingServer.JoinTables(ArrayOfTables,
 			"RecordType, Period, Company, Partner, LegalName, Currency, ReceiptDocument, Amount, Key"),
 			Parameters.IsReposting));
-	
-	
-	// CashAdvance
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.CashAdvance,
-		New Structure("RecordType, RecordSet",
-			AccumulationRecordType.Expense,
-			Parameters.DocumentDataTables.CashAdvance));
 	
 	// Aging
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords.Aging,
@@ -675,46 +620,27 @@ Function R3010B_CashOnHand()
 	Return
 		"SELECT
 		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		|	PaymentList.Period,
-		|	PaymentList.Company,
 		|	PaymentList.CashAccount AS Account,
-		|	PaymentList.Currency,
-		|	SUM(PaymentList.Amount) AS Amount
+		|	*
 		|INTO R3010B_CashOnHand
 		|FROM
 		|	PaymentList AS PaymentList
 		|WHERE
 		|	PaymentList.IsPaymentFromCustomer
-		|	OR PaymentList.IsCashTransferOrder
-		|GROUP BY
-		|	VALUE(AccumulationRecordType.Receipt),
-		|	PaymentList.Period,
-		|	PaymentList.Company,
-		|	PaymentList.CashAccount,
-		|	PaymentList.Currency";	
+		|	OR PaymentList.IsCashTransferOrder";
 EndFunction
 
 Function R3015B_CashAdvance()
 	Return
 		"SELECT
 		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		|	PaymentList.Period,
-		|	PaymentList.Company,
-		|	PaymentList.Currency,
-		|	PaymentList.Basis,
-		|	SUM(PaymentList.Amount) AS Amount
+		|	*
 		|INTO R3015B_CashAdvance
 		|FROM
 		|	PaymentList AS PaymentList
 		|WHERE
 		|	PaymentList.IsCurrencyExchange
-		|	AND PaymentList.IsEmployee
-		|GROUP BY
-		|	VALUE(AccumulationRecordType.Expense),
-		|	PaymentList.Period,
-		|	PaymentList.Company,
-		|	PaymentList.Currency,
-		|	PaymentList.Basis";	
+		|	AND PaymentList.IsEmployee";
 EndFunction
 
 #EndRegion

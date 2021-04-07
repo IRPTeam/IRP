@@ -309,15 +309,7 @@ Scenario: _1000009 create Cash receipt and check Aging register movements
 		| ''                               | ''            | ''                           | 'Advance to suppliers' | 'Transaction AP' | 'Advance from customers' | 'Transaction AR' | 'Company'      | 'Partner' | 'Legal name'      | 'Basis document'          | 'Currency' |
 		| ''                               | 'Expense'     | '$$DateCashReceipt1000009$$' | ''                     | ''               | ''                       | '550'            | 'Main Company' | 'Kalipso' | 'Company Kalipso' | '$$SalesInvoice0240162$$' | 'TRY'      |
 	
-		And I select "R3010 Cash on hand" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "R3010 Cash on hand"'          | ''            | ''                           | ''                     | ''               | ''                       | ''                                 | ''                             | ''                                 | ''                | ''                             | ''                     |
-		| ''                                     | 'Record type' | 'Period'                     | 'Resources'            | 'Dimensions'     | ''                       | ''                                 | ''                             | 'Attributes'                       | ''                | ''                             | ''                     |
-		| ''                                     | ''            | ''                           | 'Amount'               | 'Company'        | 'Account'                | 'Currency'                         | 'Multi currency movement type' | 'Deferred calculation'             | ''                | ''                             | ''                     |
-		| ''                                     | 'Receipt'     | '$$DateCashReceipt1000009$$' | '94,16'                | 'Main Company'   | 'Cash desk №2'           | 'USD'                              | 'Reporting currency'           | 'No'                               | ''                | ''                             | ''                     |
-		| ''                                     | 'Receipt'     | '$$DateCashReceipt1000009$$' | '550'                  | 'Main Company'   | 'Cash desk №2'           | 'TRY'                              | 'Local currency'               | 'No'                               | ''                | ''                             | ''                     |
-		| ''                                     | 'Receipt'     | '$$DateCashReceipt1000009$$' | '550'                  | 'Main Company'   | 'Cash desk №2'           | 'TRY'                              | 'en description is empty'      | 'No'                               | ''                | ''                             | ''                     |
+	
 		And I close all client application windows
 
 Scenario: _1000015 create Bank receipt and check Aging register movements
@@ -400,15 +392,7 @@ Scenario: _1000015 create Bank receipt and check Aging register movements
 		| ''                               | ''            | ''                           | 'Advance to suppliers' | 'Transaction AP' | 'Advance from customers' | 'Transaction AR' | 'Company'      | 'Partner' | 'Legal name'      | 'Basis document'          | 'Currency' |
 		| ''                               | 'Expense'     | '$$DateBankReceipt1000015$$' | ''                     | ''               | ''                       | '200'            | 'Main Company' | 'Kalipso' | 'Company Kalipso' | ' $$SalesInvoice024016$$' | 'TRY'      |
 	
-		And I select "R3010 Cash on hand" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "R3010 Cash on hand"'          | ''            | ''                           | ''                     | ''               | ''                       | ''                                 | ''                             | ''                                 | ''                | ''                             | ''                     |
-		| ''                                     | 'Record type' | 'Period'                     | 'Resources'            | 'Dimensions'     | ''                       | ''                                 | ''                             | 'Attributes'                       | ''                | ''                             | ''                     |
-		| ''                                     | ''            | ''                           | 'Amount'               | 'Company'        | 'Account'                | 'Currency'                         | 'Multi currency movement type' | 'Deferred calculation'             | ''                | ''                             | ''                     |
-		| ''                                     | 'Receipt'     | '$$DateBankReceipt1000015$$' | '34,24'                | 'Main Company'   | 'Bank account, TRY'      | 'USD'                              | 'Reporting currency'           | 'No'                               | ''                | ''                             | ''                     |
-		| ''                                     | 'Receipt'     | '$$DateBankReceipt1000015$$' | '200'                  | 'Main Company'   | 'Bank account, TRY'      | 'TRY'                              | 'Local currency'               | 'No'                               | ''                | ''                             | ''                     |
-		| ''                                     | 'Receipt'     | '$$DateBankReceipt1000015$$' | '200'                  | 'Main Company'   | 'Bank account, TRY'      | 'TRY'                              | 'en description is empty'      | 'No'                               | ''                | ''                             | ''                     |
+		
 		And I close all client application windows
 
 
@@ -656,15 +640,7 @@ Scenario: _1000050 check the offset of Sales invoice advance (type of settlement
 				| ''                                   | 'Expense'     | '$$DateBankReceipt1000050$$' | '13,7'      | 'Main Company' | 'Kalipso' | 'Company Kalipso' | 'USD'      | '$$BankReceipt1000050$$' | 'Reporting currency'           | 'No'                   | '' |
 				| ''                                   | 'Expense'     | '$$DateBankReceipt1000050$$' | '80'        | 'Main Company' | 'Kalipso' | 'Company Kalipso' | 'TRY'      | '$$BankReceipt1000050$$' | 'Local currency'               | 'No'                   | '' |
 				| ''                                   | 'Expense'     | '$$DateBankReceipt1000050$$' | '80'        | 'Main Company' | 'Kalipso' | 'Company Kalipso' | 'TRY'      | '$$BankReceipt1000050$$' | 'en description is empty'      | 'No'                   | '' |
-			And I select "R3010 Cash on hand" exact value from "Register" drop-down list
-			And I click "Generate report" button
-			And "ResultTable" spreadsheet document contains lines:
-				| 'Register  "R3010 Cash on hand"'          | ''            | ''                           | ''                     | ''               | ''                       | ''                                 | ''                             | ''                                 | ''                             | ''                             | ''                     |
-				| ''                                     | 'Record type' | 'Period'                     | 'Resources'            | 'Dimensions'     | ''                       | ''                                 | ''                             | 'Attributes'                       | ''                             | ''                             | ''                     |
-				| ''                                     | ''            | ''                           | 'Amount'               | 'Company'        | 'Account'                | 'Currency'                         | 'Multi currency movement type' | 'Deferred calculation'             | ''                             | ''                             | ''                     |
-				| ''                                     | 'Receipt'     | '$$DateBankReceipt1000050$$' | '13,7'                 | 'Main Company'   | 'Bank account, TRY'      | 'USD'                              | 'Reporting currency'           | 'No'                               | ''                             | ''                             | ''                     |
-				| ''                                     | 'Receipt'     | '$$DateBankReceipt1000050$$' | '80'                   | 'Main Company'   | 'Bank account, TRY'      | 'TRY'                              | 'Local currency'               | 'No'                               | ''                             | ''                             | ''                     |
-				| ''                                     | 'Receipt'     | '$$DateBankReceipt1000050$$' | '80'                   | 'Main Company'   | 'Bank account, TRY'      | 'TRY'                              | 'en description is empty'      | 'No'                               | ''                             | ''                             | ''                     |
+			
 			And I close all client application windows
 		* Create Cash receipt
 			Given I open hyperlink "e1cib/list/Document.CashReceipt"

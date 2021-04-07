@@ -221,15 +221,7 @@ Scenario: _060203 create Cash receipt (partner term with Ar details by partner t
 			| ''                                    | 'Expense'     | '*'      | '11 000'    | 'Main Company' | ''               | 'Partner Kalipso' | 'Company Kalipso' | 'Partner Kalipso Customer' | 'TRY'      | 'TRY'                          | 'No'                   |
 			| ''                                    | 'Expense'     | '*'      | '11 000'    | 'Main Company' | ''               | 'Partner Kalipso' | 'Company Kalipso' | 'Partner Kalipso Customer' | 'TRY'      | 'en description is empty'      | 'No'                   |
 	
-		And I select "R3010 Cash on hand" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "R3010 Cash on hand"'          | ''            | ''       | ''                     | ''               | ''                       | ''               | ''                             | ''                     | ''                  | ''                             | ''                     |
-			| ''                                     | 'Record type' | 'Period' | 'Resources'            | 'Dimensions'     | ''                       | ''               | ''                             | 'Attributes'           | ''                  | ''                             | ''                     |
-			| ''                                     | ''            | ''       | 'Amount'               | 'Company'        | 'Account'                | 'Currency'       | 'Multi currency movement type' | 'Deferred calculation' | ''                  | ''                             | ''                     |
-			| ''                                     | 'Receipt'     | '*'      | '1 883,2'             | 'Main Company'   | 'Cash desk №2'           | 'USD'            | 'Reporting currency'           | 'No'                   | ''                  | ''                             | ''                     |
-			| ''                                     | 'Receipt'     | '*'      | '11 000'               | 'Main Company'   | 'Cash desk №2'           | 'TRY'            | 'Local currency'               | 'No'                   | ''                  | ''                             | ''                     |
-			| ''                                     | 'Receipt'     | '*'      | '11 000'               | 'Main Company'   | 'Cash desk №2'           | 'TRY'            | 'en description is empty'      | 'No'                   | ''                  | ''                             | ''                     |
+		
 		And I select "Accounts statement" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
@@ -295,15 +287,7 @@ Scenario: _0602031 create Bank receipt (partner term with Ar details by partner 
 			| ''                                    | 'Expense'     | '*'      | '11 000'    | 'Main Company' | ''               | 'Partner Kalipso' | 'Company Kalipso' | 'Partner Kalipso Customer' | 'TRY'      | 'TRY'                          | 'No'                   |
 			| ''                                    | 'Expense'     | '*'      | '11 000'    | 'Main Company' | ''               | 'Partner Kalipso' | 'Company Kalipso' | 'Partner Kalipso Customer' | 'TRY'      | 'en description is empty'      | 'No'                   |
 	
-		And I select "R3010 Cash on hand" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "R3010 Cash on hand"'          | ''            | ''       | ''                     | ''               | ''                       | ''               | ''                             | ''                     | ''                  | ''                             | ''                     |
-			| ''                                     | 'Record type' | 'Period' | 'Resources'            | 'Dimensions'     | ''                       | ''               | ''                             | 'Attributes'           | ''                  | ''                             | ''                     |
-			| ''                                     | ''            | ''       | 'Amount'               | 'Company'        | 'Account'                | 'Currency'       | 'Multi currency movement type' | 'Deferred calculation' | ''                  | ''                             | ''                     |
-			| ''                                     | 'Receipt'     | '*'      | '1 883,2'             | 'Main Company'   | 'Bank account, TRY'      | 'USD'            | 'Reporting currency'           | 'No'                   | ''                  | ''                             | ''                     |
-			| ''                                     | 'Receipt'     | '*'      | '11 000'               | 'Main Company'   | 'Bank account, TRY'      | 'TRY'            | 'Local currency'               | 'No'                   | ''                  | ''                             | ''                     |
-			| ''                                     | 'Receipt'     | '*'      | '11 000'               | 'Main Company'   | 'Bank account, TRY'      | 'TRY'            | 'en description is empty'      | 'No'                   | ''                  | ''                             | ''                     |
+		
 		And I select "Accounts statement" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
@@ -376,15 +360,7 @@ Scenario: _060204 check the offset of the advance for Sales invoice with the typ
 			| ''                                   | 'Receipt'     | '*'      | '2 054,4'   | 'Main Company' | 'Partner Kalipso' | 'Company Kalipso' | 'USD'      | '$$BankReceipt060204$$' | 'Reporting currency'           | 'No'                   | '' |
 			| ''                                   | 'Receipt'     | '*'      | '12 000'    | 'Main Company' | 'Partner Kalipso' | 'Company Kalipso' | 'TRY'      | '$$BankReceipt060204$$' | 'Local currency'               | 'No'                   | '' |
 			| ''                                   | 'Receipt'     | '*'      | '12 000'    | 'Main Company' | 'Partner Kalipso' | 'Company Kalipso' | 'TRY'      | '$$BankReceipt060204$$' | 'en description is empty'      | 'No'                   | '' |
-		And I select "R3010 Cash on hand" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "R3010 Cash on hand"'          | ''            | ''       | ''                     | ''               | ''                       | ''                | ''                             | ''                      | ''                             | ''                     | ''         |
-			| ''                                     | 'Record type' | 'Period' | 'Resources'            | 'Dimensions'     | ''                       | ''                | ''                             | 'Attributes'            | ''                             | ''                     | ''         |
-			| ''                                     | ''            | ''       | 'Amount'               | 'Company'        | 'Account'                | 'Currency'        | 'Multi currency movement type' | 'Deferred calculation'  | ''                             | ''                     | ''         |
-			| ''                                     | 'Receipt'     | '*'      | '2 054,4'             | 'Main Company'   | 'Bank account, TRY'      | 'USD'             | 'Reporting currency'           | 'No'                    | ''                             | ''                     | ''         |
-			| ''                                     | 'Receipt'     | '*'      | '12 000'               | 'Main Company'   | 'Bank account, TRY'      | 'TRY'             | 'Local currency'               | 'No'                    | ''                             | ''                     | ''         |
-			| ''                                     | 'Receipt'     | '*'      | '12 000'               | 'Main Company'   | 'Bank account, TRY'      | 'TRY'             | 'en description is empty'      | 'No'                    | ''                             | ''                     | ''         |
+		
 		And I close all client application windows
 	* Create Sales invoice
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
@@ -639,15 +615,7 @@ Scenario: _060206 create Cash payment (partner term with Ap details by partner t
 			| ''                                    | 'Expense'     | '*'      | '11 000'    | 'Main Company' | ''               | 'Partner Ferron 1' | 'Company Ferron BP' | 'Vendor Ferron 1' | 'TRY'      | 'Local currency'               | 'No'                   |
 			| ''                                    | 'Expense'     | '*'      | '11 000'    | 'Main Company' | ''               | 'Partner Ferron 1' | 'Company Ferron BP' | 'Vendor Ferron 1' | 'TRY'      | 'TRY'                          | 'No'                   |
 			| ''                                    | 'Expense'     | '*'      | '11 000'    | 'Main Company' | ''               | 'Partner Ferron 1' | 'Company Ferron BP' | 'Vendor Ferron 1' | 'TRY'      | 'en description is empty'      | 'No'                   |
-		And I select "R3010 Cash on hand" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "R3010 Cash on hand"'          | ''            | ''       | ''                     | ''               | ''                       | ''                 | ''                             | ''                     | ''                  | ''                             | ''                     |
-			| ''                                     | 'Record type' | 'Period' | 'Resources'            | 'Dimensions'     | ''                       | ''                 | ''                             | 'Attributes'           | ''                  | ''                             | ''                     |
-			| ''                                     | ''            | ''       | 'Amount'               | 'Company'        | 'Account'                | 'Currency'         | 'Multi currency movement type' | 'Deferred calculation' | ''                  | ''                             | ''                     |
-			| ''                                     | 'Expense'     | '*'      | '1 883,2'             | 'Main Company'   | 'Cash desk №2'           | 'USD'              | 'Reporting currency'           | 'No'                   | ''                  | ''                             | ''                     |
-			| ''                                     | 'Expense'     | '*'      | '11 000'               | 'Main Company'   | 'Cash desk №2'           | 'TRY'              | 'Local currency'               | 'No'                   | ''                  | ''                             | ''                     |
-			| ''                                     | 'Expense'     | '*'      | '11 000'               | 'Main Company'   | 'Cash desk №2'           | 'TRY'              | 'en description is empty'      | 'No'                   | ''                  | ''                             | ''                     |
+		
 		And I select "Accounts statement" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
@@ -714,15 +682,7 @@ Scenario: _060207 check the offset of the advance for Purchase invoice with the 
 			| ''                                 | 'Receipt'     | '*'      | '2 054,4'   | 'Main Company' | 'Partner Ferron 1' | 'Company Ferron BP' | 'USD'      | '$$BankPayment060007$$' | 'Reporting currency'           | 'No'                   | '' |
 			| ''                                 | 'Receipt'     | '*'      | '12 000'    | 'Main Company' | 'Partner Ferron 1' | 'Company Ferron BP' | 'TRY'      | '$$BankPayment060007$$' | 'Local currency'               | 'No'                   | '' |
 			| ''                                 | 'Receipt'     | '*'      | '12 000'    | 'Main Company' | 'Partner Ferron 1' | 'Company Ferron BP' | 'TRY'      | '$$BankPayment060007$$' | 'en description is empty'      | 'No'                   | '' |
-		And I select "R3010 Cash on hand" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "R3010 Cash on hand"'          | ''            | ''       | ''                     | ''               | ''                       | ''                 | ''                             | ''                      | ''                             | ''                     | ''         |
-			| ''                                     | 'Record type' | 'Period' | 'Resources'            | 'Dimensions'     | ''                       | ''                 | ''                             | 'Attributes'            | ''                             | ''                     | ''         |
-			| ''                                     | ''            | ''       | 'Amount'               | 'Company'        | 'Account'                | 'Currency'         | 'Multi currency movement type' | 'Deferred calculation'  | ''                             | ''                     | ''         |
-			| ''                                     | 'Expense'     | '*'      | '2 054,4'             | 'Main Company'   | 'Bank account, TRY'      | 'USD'              | 'Reporting currency'           | 'No'                    | ''                             | ''                     | ''         |
-			| ''                                     | 'Expense'     | '*'      | '12 000'               | 'Main Company'   | 'Bank account, TRY'      | 'TRY'              | 'Local currency'               | 'No'                    | ''                             | ''                     | ''         |
-			| ''                                     | 'Expense'     | '*'      | '12 000'               | 'Main Company'   | 'Bank account, TRY'      | 'TRY'              | 'en description is empty'      | 'No'                    | ''                             | ''                     | ''         |
+		
 		And I close all client application windows
 	* Create Purchase Invoice
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
@@ -873,15 +833,7 @@ Scenario: _060208 create Bank payment (partner term with Ap details by partner t
 			| ''                                    | 'Expense'     | '*'      | '11 000'    | 'Main Company' | ''               | 'Partner Ferron 1' | 'Company Ferron BP' | 'Vendor Ferron 1' | 'TRY'      | 'Local currency'               | 'No'                   |
 			| ''                                    | 'Expense'     | '*'      | '11 000'    | 'Main Company' | ''               | 'Partner Ferron 1' | 'Company Ferron BP' | 'Vendor Ferron 1' | 'TRY'      | 'TRY'                          | 'No'                   |
 			| ''                                    | 'Expense'     | '*'      | '11 000'    | 'Main Company' | ''               | 'Partner Ferron 1' | 'Company Ferron BP' | 'Vendor Ferron 1' | 'TRY'      | 'en description is empty'      | 'No'                   |
-		And I select "R3010 Cash on hand" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "R3010 Cash on hand"'          | ''            | ''       | ''                     | ''               | ''                       | ''                 | ''                             | ''                     | ''                  | ''                             | ''                     |
-			| ''                                     | 'Record type' | 'Period' | 'Resources'            | 'Dimensions'     | ''                       | ''                 | ''                             | 'Attributes'           | ''                  | ''                             | ''                     |
-			| ''                                     | ''            | ''       | 'Amount'               | 'Company'        | 'Account'                | 'Currency'         | 'Multi currency movement type' | 'Deferred calculation' | ''                  | ''                             | ''                     |
-			| ''                                     | 'Expense'     | '*'      | '1 883,2'             | 'Main Company'   | 'Bank account, TRY'      | 'USD'              | 'Reporting currency'           | 'No'                   | ''                  | ''                             | ''                     |
-			| ''                                     | 'Expense'     | '*'      | '11 000'               | 'Main Company'   | 'Bank account, TRY'      | 'TRY'              | 'Local currency'               | 'No'                   | ''                  | ''                             | ''                     |
-			| ''                                     | 'Expense'     | '*'      | '11 000'               | 'Main Company'   | 'Bank account, TRY'      | 'TRY'              | 'en description is empty'      | 'No'                   | ''                  | ''                             | ''                     |
+		
 		And I select "Accounts statement" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:

@@ -121,14 +121,14 @@ Scenario: _043301 check Bank payment movements by the Register "R3010 Cash on ha
 		And I select "R3010 Cash on hand" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Bank payment 2 dated 05.04.2021 12:28:47' | ''            | ''                    | ''          | ''             | ''                  | ''         | ''                             | ''              | ''                     |
-			| 'Document registrations records'           | ''            | ''                    | ''          | ''             | ''                  | ''         | ''                             | ''              | ''                     |
-			| 'Register  "R3010 Cash on hand"'           | ''            | ''                    | ''          | ''             | ''                  | ''         | ''                             | ''              | ''                     |
-			| ''                                         | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                  | ''         | ''                             | ''              | 'Attributes'           |
-			| ''                                         | ''            | ''                    | 'Amount'    | 'Company'      | 'Account'           | 'Currency' | 'Multi currency movement type' | 'Movement type' | 'Deferred calculation' |
-			| ''                                         | 'Expense'     | '05.04.2021 12:28:47' | '500'       | 'Main Company' | 'Bank account, EUR' | 'EUR'      | 'en description is empty'      | 'Expense'       | 'No'                   |
-			| ''                                         | 'Expense'     | '05.04.2021 12:28:47' | '550'       | 'Main Company' | 'Bank account, EUR' | 'USD'      | 'Reporting currency'           | 'Expense'       | 'No'                   |
-			| ''                                         | 'Expense'     | '05.04.2021 12:28:47' | '2 500'     | 'Main Company' | 'Bank account, EUR' | 'TRY'      | 'Local currency'               | 'Expense'       | 'No'                   |
+			| 'Bank payment 2 dated 05.04.2021 12:28:47' | ''            | ''                    | ''          | ''             | ''                  | ''         | ''                             | ''                     |
+			| 'Document registrations records'           | ''            | ''                    | ''          | ''             | ''                  | ''         | ''                             | ''                     |
+			| 'Register  "R3010 Cash on hand"'           | ''            | ''                    | ''          | ''             | ''                  | ''         | ''                             | ''                     |
+			| ''                                         | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                  | ''         | ''                             | 'Attributes'           |
+			| ''                                         | ''            | ''                    | 'Amount'    | 'Company'      | 'Account'           | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
+			| ''                                         | 'Expense'     | '05.04.2021 12:28:47' | '500'       | 'Main Company' | 'Bank account, EUR' | 'EUR'      | 'en description is empty'      | 'No'                   |
+			| ''                                         | 'Expense'     | '05.04.2021 12:28:47' | '550'       | 'Main Company' | 'Bank account, EUR' | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                         | 'Expense'     | '05.04.2021 12:28:47' | '2 500'     | 'Main Company' | 'Bank account, EUR' | 'TRY'      | 'Local currency'               | 'No'                   |
 	And I close all client application windows
 
 	

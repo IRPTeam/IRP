@@ -87,14 +87,14 @@ Scenario: _044001 check Cash expense movements by the Register "R3010 Cash on ha
 		And I select "R3010 Cash on hand" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Cash expense 1 dated 07.09.2020 19:25:17' | ''            | ''                    | ''          | ''             | ''                  | ''         | ''                             | ''              | ''                     |
-			| 'Document registrations records'           | ''            | ''                    | ''          | ''             | ''                  | ''         | ''                             | ''              | ''                     |
-			| 'Register  "R3010 Cash on hand"'           | ''            | ''                    | ''          | ''             | ''                  | ''         | ''                             | ''              | ''                     |
-			| ''                                         | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                  | ''         | ''                             | ''              | 'Attributes'           |
-			| ''                                         | ''            | ''                    | 'Amount'    | 'Company'      | 'Account'           | 'Currency' | 'Multi currency movement type' | 'Movement type' | 'Deferred calculation' |
-			| ''                                         | 'Expense'     | '07.09.2020 19:25:17' | '100'       | 'Main Company' | 'Bank account, TRY' | 'TRY'      | 'Local currency'               | 'Fuel'          | 'No'                   |
-			| ''                                         | 'Expense'     | '07.09.2020 19:25:17' | '100'       | 'Main Company' | 'Bank account, TRY' | 'TRY'      | 'en description is empty'      | 'Fuel'          | 'No'                   |
-			| ''                                         | 'Expense'     | '07.09.2020 19:25:17' | '584'       | 'Main Company' | 'Bank account, TRY' | 'USD'      | 'Reporting currency'           | 'Fuel'          | 'No'                   |
+			| 'Cash expense 1 dated 07.09.2020 19:25:17' | ''            | ''                    | ''          | ''             | ''                  | ''         | ''                             | ''                     |
+			| 'Document registrations records'           | ''            | ''                    | ''          | ''             | ''                  | ''         | ''                             | ''                     |
+			| 'Register  "R3010 Cash on hand"'           | ''            | ''                    | ''          | ''             | ''                  | ''         | ''                             | ''                     |
+			| ''                                         | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                  | ''         | ''                             | 'Attributes'           |
+			| ''                                         | ''            | ''                    | 'Amount'    | 'Company'      | 'Account'           | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
+			| ''                                         | 'Expense'     | '07.09.2020 19:25:17' | '100'       | 'Main Company' | 'Bank account, TRY' | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                         | 'Expense'     | '07.09.2020 19:25:17' | '100'       | 'Main Company' | 'Bank account, TRY' | 'TRY'      | 'en description is empty'      | 'No'                   |
+			| ''                                         | 'Expense'     | '07.09.2020 19:25:17' | '584'       | 'Main Company' | 'Bank account, TRY' | 'USD'      | 'Reporting currency'           | 'No'                   |
 	And I close all client application windows
 
 

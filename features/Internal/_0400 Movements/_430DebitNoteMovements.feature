@@ -116,11 +116,11 @@ Scenario: _043000 preparation (Debit note)
 			And I execute 1C:Enterprise script at server
 					| "Documents.SalesReturn.FindByNumber(101).GetObject().Write(DocumentWriteMode.Posting);" |
 					| "Documents.SalesReturn.FindByNumber(104).GetObject().Write(DocumentWriteMode.Posting);" |
-			When Create document DebitNote objects (check movements)
-			And I execute 1C:Enterprise script at server
-				| "Documents.DebitNote.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |
-				| "Documents.DebitNote.FindByNumber(2).GetObject().Write(DocumentWriteMode.Posting);" |
-			And I close all client application windows
+		When Create document DebitNote objects (check movements)
+		And I execute 1C:Enterprise script at server
+			| "Documents.DebitNote.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.DebitNote.FindByNumber(2).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I close all client application windows
 		
 Scenario: _043001 check Debit note movements by the Register "R5010 Reconciliation statement"
 	* Select Debit note

@@ -149,6 +149,7 @@ Scenario: _043401 check Bank receipt movements by the Register "R3010 Cash on ha
 
 	
 Scenario: _043402 check Bank receipt movements by the Register "R5010 Reconciliation statement" (payment to vendor)
+	And I close all client application windows
 	* Select Bank receipt
 		Given I open hyperlink "e1cib/list/Document.BankReceipt"
 		And I go to line in "List" table

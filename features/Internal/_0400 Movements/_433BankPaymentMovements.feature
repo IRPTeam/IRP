@@ -133,6 +133,7 @@ Scenario: _043301 check Bank payment movements by the Register "R3010 Cash on ha
 
 	
 Scenario: _043302 check Bank payment movements by the Register "R5010 Reconciliation statement" (payment to vendor)
+	And I close all client application windows
 	* Select Bank payment
 		Given I open hyperlink "e1cib/list/Document.BankPayment"
 		And I go to line in "List" table

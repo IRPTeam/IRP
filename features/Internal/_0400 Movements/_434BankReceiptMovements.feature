@@ -153,8 +153,8 @@ Scenario: _043402 check Bank receipt movements by the Register "R5010 Reconcilia
 	* Select Bank receipt
 		Given I open hyperlink "e1cib/list/Document.BankReceipt"
 		And I go to line in "List" table
-			| 'Number'  |
-			| '1' |
+			| 'Number'  | 'Date'               |
+			| '1'       |'07.09.2020 19:14:59' |
 	* Check movements by the Register  "R5010 Reconciliation statement" 
 		And I click "Registrations report" button
 		And I select "R5010 Reconciliation statement" exact value from "Register" drop-down list

@@ -748,7 +748,7 @@ Scenario: _0401017 check Purchase invoice movements by the Register  "R4031 Good
 			| ''                                               | 'Receipt'     | '12.02.2021 15:13:56' | '10'        | 'Store 02'   | 'Goods receipt 115 dated 12.02.2021 15:10:35' | 'S/Yellow'  |
 		And I close all client application windows
 
-Scenario: _0401019 Purchase invoice clear posting
+Scenario: _0401019 Purchase invoice clear posting/mark for deletion
 	* Select Purchase invoice
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		And I go to line in "List" table
@@ -769,6 +769,39 @@ Scenario: _0401019 Purchase invoice clear posting
 			| 'Number'  |
 			| '115' |
 		And in the table "List" I click the button named "ListContextMenuPost"		
+		Then user message window does not contain messages
+		And I click "Registrations report" button
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document contains values
+			| 'R1001 Purchases' |
+			| 'R1021 Vendors transactions' |
+			| 'R4050 Stock inventory' |
+		And I close all client application windows
+	* Mark for deletion
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '115' |
+		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		Then user message window does not contain messages
+		And I click "Registrations report" button
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Purchase invoice 115 dated 12.02.2021 15:13:56' |
+			| 'Document registrations records'                    |
+		And I close current window
+	* Unmark for deletion and post document
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '115' |
+		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button				
+		Then user message window does not contain messages
+		And in the table "List" I click the button named "ListContextMenuPost"	
 		Then user message window does not contain messages
 		And I click "Registrations report" button
 		And I click "Generate report" button

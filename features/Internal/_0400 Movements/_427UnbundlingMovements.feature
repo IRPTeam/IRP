@@ -112,7 +112,7 @@ Scenario: _042702 check Unbundling movements by the Register  "R4011 Free stocks
 			| ''                                       | 'Expense'     | '07.09.2020 18:23:12' | '2'         | 'Store 01'   | 'Dress/A-8' |
 		And I close all client application windows
 			
-Scenario: _042730 Unbundling clear posting
+Scenario: _042730 Unbundling clear posting/mark for deletion
 	And I close all client application windows
 	* Select Unbundling
 		Given I open hyperlink "e1cib/list/Document.Unbundling"
@@ -128,12 +128,44 @@ Scenario: _042730 Unbundling clear posting
 			| 'Unbundling 1 dated 07.09.2020 18:23:12' |
 			| 'Document registrations records'                    |
 		And I close current window
-	* Post Bundling
-		Given I open hyperlink "e1cib/list/Document.Bundling"
+	* Post UnBundling
+		Given I open hyperlink "e1cib/list/Document.Unbundling"
 		And I go to line in "List" table
 			| 'Number'  |
 			| '1' |
 		And in the table "List" I click the button named "ListContextMenuPost"		
+		Then user message window does not contain messages
+		And I click "Registrations report" button
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document contains values
+			| 'R4011 Free stocks' |
+			| 'R4010 Actual stocks' |
+		And I close all client application windows
+	* Mark for deletion
+		Given I open hyperlink "e1cib/list/Document.Unbundling"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '1' |
+		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		Then user message window does not contain messages
+		And I click "Registrations report" button
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Unbundling 1 dated 07.09.2020 18:23:12' |
+			| 'Document registrations records'                    |
+		And I close current window
+	* Unmark for deletion and post document
+		Given I open hyperlink "e1cib/list/Document.Unbundling"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '1' |
+		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button				
+		Then user message window does not contain messages
+		And in the table "List" I click the button named "ListContextMenuPost"	
 		Then user message window does not contain messages
 		And I click "Registrations report" button
 		And I click "Generate report" button

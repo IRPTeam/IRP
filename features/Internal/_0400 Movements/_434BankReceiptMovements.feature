@@ -149,6 +149,7 @@ Scenario: _043401 check Bank receipt movements by the Register "R3010 Cash on ha
 
 	
 Scenario: _043402 check Bank receipt movements by the Register "R5010 Reconciliation statement" (payment to vendor)
+	And I close all client application windows
 	* Select Bank receipt
 		Given I open hyperlink "e1cib/list/Document.BankReceipt"
 		And I go to line in "List" table
@@ -196,7 +197,7 @@ Scenario: _043403 check Bank receipt movements by the Register "R5010 Reconcilia
 
 
 
-Scenario: _043430 Bank receipt clear posting
+Scenario: _043430 Bank receipt clear posting/mark for deletion
 	And I close all client application windows
 	* Select Bank receipt
 		Given I open hyperlink "e1cib/list/Document.BankReceipt"
@@ -224,4 +225,34 @@ Scenario: _043430 Bank receipt clear posting
 		Then "ResultTable" spreadsheet document contains values
 			| 'R3010 Cash on hand' |
 		And I close all client application windows
-		
+	* Mark for deletion
+		Given I open hyperlink "e1cib/list/Document.BankReceipt"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '2' |
+		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		Then user message window does not contain messages
+		And I click "Registrations report" button
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Bank receipt 2 dated 05.04.2021 14:27:40' |
+			| 'Document registrations records'                    |
+		And I close current window
+	* Unmark for deletion and post document
+		Given I open hyperlink "e1cib/list/Document.BankReceipt"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '2' |
+		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button				
+		Then user message window does not contain messages
+		And in the table "List" I click the button named "ListContextMenuPost"	
+		Then user message window does not contain messages
+		And I click "Registrations report" button
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document contains values
+			| 'R3010 Cash on hand' |
+		And I close all client application windows	

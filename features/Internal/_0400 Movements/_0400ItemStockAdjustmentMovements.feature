@@ -201,7 +201,7 @@ Scenario: _040007 check item stock adjustment movements by the Register  "R4051 
 			| ''                                                  | '27.01.2021 19:04:15' | '16'        | 'Store 02'   | ''      | 'XS/Blue'   |
 		And I close all client application windows	
 
-Scenario: _040012 item stock adjustment clear posting
+Scenario: _040012 item stock adjustment clear posting/mark for deletion
 	* Select item stock adjustment
 		Given I open hyperlink "e1cib/list/Document.ItemStockAdjustment"
 		And I go to line in "List" table
@@ -231,6 +231,45 @@ Scenario: _040012 item stock adjustment clear posting
 			| 'R4050 Stock inventory' |
 			| 'R4010 Actual stocks' |
 		And I close all client application windows
+	* Mark for deletion
+		Given I open hyperlink "e1cib/list/Document.ItemStockAdjustment"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '1' |
+		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		Then user message window does not contain messages
+		And I click "Registrations report" button
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Item stock adjustment 1 dated 27.01.2021 19:04:15' |
+			| 'Document registrations records'                    |
+		And I close current window
+	* Unmark for deletion and post item stock adjustment
+		Given I open hyperlink "e1cib/list/Document.ItemStockAdjustment"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '1' |
+		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button				
+		Then user message window does not contain messages
+		And in the table "List" I click the button named "ListContextMenuPost"	
+		Then user message window does not contain messages
+		And I click "Registrations report" button
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document contains values
+			| 'R4052 Stock adjustment (Surplus)' |
+			| 'R4011 Free stocks' |
+			| 'R4050 Stock inventory' |
+			| 'R4010 Actual stocks' |
+		And I close all client application windows
+
+		
+				
+
+
 		
 
 

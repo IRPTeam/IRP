@@ -58,6 +58,10 @@ Scenario: _042500 preparation (RetailReturnReceipt)
 				| "TaxCalculateVAT_TR" |
 			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
+		When Create catalog BankTerms objects
+		When Create catalog PaymentTerminals objects
+		When Create catalog PaymentTypes objects
+		When Create catalog Workstations objects
 	* Tax settings
 		When filling in Tax settings for company
 	* Load RetailSalesReceipt
@@ -68,7 +72,8 @@ Scenario: _042500 preparation (RetailReturnReceipt)
 		When Create document RetailReturnReceipt objects (check movements)
 		And I execute 1C:Enterprise script at server
 			| "Documents.RetailReturnReceipt.FindByNumber(201).GetObject().Write(DocumentWriteMode.Posting);" |
-	
+
+
 
 Scenario: _042501 check Retail return receipt movements by the Register  "R4010 Actual stocks"
 	* Select Retail return receipt
@@ -111,6 +116,28 @@ Scenario: _042502 check Retail return receipt movements by the Register  "R4011 
 			| ''                                                    | 'Receipt'     | '15.03.2021 16:01:25' | '2'         | 'Store 01'   | '38/Yellow' |
 			| ''                                                    | 'Receipt'     | '15.03.2021 16:01:25' | '12'        | 'Store 01'   | '36/18SD'   |
 		And I close all client application windows
+
+Scenario: _042503 check Retail return receipt movements by the Register  "R3010 Cash on hand"
+	* Select Retail return receipt
+		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '201' |
+	* Check movements by the Register  "R3010 Cash on hand"
+		And I click "Registrations report" button
+		And I select "R3010 Cash on hand" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Retail return receipt 201 dated 15.03.2021 16:01:25' | ''            | ''                    | ''          | ''             | ''             | ''         | ''                             | ''                     |
+			| 'Document registrations records'                      | ''            | ''                    | ''          | ''             | ''             | ''         | ''                             | ''                     |
+			| 'Register  "R3010 Cash on hand"'                      | ''            | ''                    | ''          | ''             | ''             | ''         | ''                             | ''                     |
+			| ''                                                    | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''         | ''                             | 'Attributes'           |
+			| ''                                                    | ''            | ''                    | 'Amount'    | 'Company'      | 'Account'      | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
+			| ''                                                    | 'Expense'     | '15.03.2021 16:01:25' | '1 664,06'  | 'Main Company' | 'Cash desk №4' | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                                    | 'Expense'     | '15.03.2021 16:01:25' | '9 720'     | 'Main Company' | 'Cash desk №4' | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                                    | 'Expense'     | '15.03.2021 16:01:25' | '9 720'     | 'Main Company' | 'Cash desk №4' | 'TRY'      | 'en description is empty'      | 'No'                   |
+		And I close all client application windows
+
 
 Scenario: _042530 Retail return receipt clear posting/mark for deletion
 	And I close all client application windows

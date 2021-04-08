@@ -142,6 +142,104 @@ Scenario: _042902 check Opening entry movements by the Register  "R4011 Free sto
 			| ''                                          | 'Receipt'     | '07.09.2020 21:26:35' | '500'       | 'Store 01'   | 'L/Green'   |
 		And I close all client application windows
 
+
+Scenario: _042903 check Opening entry movements by the Register  "R3010 Cash on hand"
+	And I close all client application windows
+	* Select Opening entry
+		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '1' |
+	* Check movements by the Register  "R3010 Cash on hand" 
+		And I click "Registrations report" button
+		And I select "R3010 Cash on hand" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Opening entry 1 dated 07.04.2021 20:30:14' | ''            | ''                    | ''          | ''             | ''                  | ''         | ''                             | ''                     |
+			| 'Document registrations records'            | ''            | ''                    | ''          | ''             | ''                  | ''         | ''                             | ''                     |
+			| 'Register  "R3010 Cash on hand"'            | ''            | ''                    | ''          | ''             | ''                  | ''         | ''                             | ''                     |
+			| ''                                          | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                  | ''         | ''                             | 'Attributes'           |
+			| ''                                          | ''            | ''                    | 'Amount'    | 'Company'      | 'Account'           | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
+			| ''                                          | 'Receipt'     | '07.04.2021 20:30:14' | '171,2'     | 'Main Company' | 'Cash desk №1'      | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                          | 'Receipt'     | '07.04.2021 20:30:14' | '171,2'     | 'Main Company' | 'Cash desk №1'      | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                          | 'Receipt'     | '07.04.2021 20:30:14' | '171,2'     | 'Main Company' | 'Cash desk №2'      | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                          | 'Receipt'     | '07.04.2021 20:30:14' | '171,2'     | 'Main Company' | 'Cash desk №2'      | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                          | 'Receipt'     | '07.04.2021 20:30:14' | '171,2'     | 'Main Company' | 'Cash desk №3'      | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                          | 'Receipt'     | '07.04.2021 20:30:14' | '171,2'     | 'Main Company' | 'Cash desk №3'      | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                          | 'Receipt'     | '07.04.2021 20:30:14' | '856'       | 'Main Company' | 'Bank account, USD' | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                          | 'Receipt'     | '07.04.2021 20:30:14' | '856'       | 'Main Company' | 'Bank account, USD' | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                          | 'Receipt'     | '07.04.2021 20:30:14' | '1 000'     | 'Main Company' | 'Cash desk №1'      | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                          | 'Receipt'     | '07.04.2021 20:30:14' | '1 000'     | 'Main Company' | 'Cash desk №1'      | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                          | 'Receipt'     | '07.04.2021 20:30:14' | '1 000'     | 'Main Company' | 'Cash desk №1'      | 'TRY'      | 'en description is empty'      | 'No'                   |
+			| ''                                          | 'Receipt'     | '07.04.2021 20:30:14' | '1 000'     | 'Main Company' | 'Cash desk №1'      | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                          | 'Receipt'     | '07.04.2021 20:30:14' | '1 000'     | 'Main Company' | 'Cash desk №1'      | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                          | 'Receipt'     | '07.04.2021 20:30:14' | '1 000'     | 'Main Company' | 'Cash desk №2'      | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                          | 'Receipt'     | '07.04.2021 20:30:14' | '1 000'     | 'Main Company' | 'Cash desk №2'      | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                          | 'Receipt'     | '07.04.2021 20:30:14' | '1 000'     | 'Main Company' | 'Cash desk №2'      | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                          | 'Receipt'     | '07.04.2021 20:30:14' | '1 000'     | 'Main Company' | 'Cash desk №2'      | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                          | 'Receipt'     | '07.04.2021 20:30:14' | '1 000'     | 'Main Company' | 'Cash desk №2'      | 'USD'      | 'en description is empty'      | 'No'                   |
+			| ''                                          | 'Receipt'     | '07.04.2021 20:30:14' | '1 000'     | 'Main Company' | 'Cash desk №3'      | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                          | 'Receipt'     | '07.04.2021 20:30:14' | '1 000'     | 'Main Company' | 'Cash desk №3'      | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                          | 'Receipt'     | '07.04.2021 20:30:14' | '1 000'     | 'Main Company' | 'Cash desk №3'      | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                          | 'Receipt'     | '07.04.2021 20:30:14' | '1 000'     | 'Main Company' | 'Cash desk №3'      | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                          | 'Receipt'     | '07.04.2021 20:30:14' | '1 000'     | 'Main Company' | 'Cash desk №3'      | 'EUR'      | 'en description is empty'      | 'No'                   |
+			| ''                                          | 'Receipt'     | '07.04.2021 20:30:14' | '1 100'     | 'Main Company' | 'Cash desk №1'      | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                          | 'Receipt'     | '07.04.2021 20:30:14' | '1 100'     | 'Main Company' | 'Cash desk №1'      | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                          | 'Receipt'     | '07.04.2021 20:30:14' | '1 100'     | 'Main Company' | 'Cash desk №2'      | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                          | 'Receipt'     | '07.04.2021 20:30:14' | '1 100'     | 'Main Company' | 'Cash desk №2'      | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                          | 'Receipt'     | '07.04.2021 20:30:14' | '1 100'     | 'Main Company' | 'Cash desk №3'      | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                          | 'Receipt'     | '07.04.2021 20:30:14' | '1 100'     | 'Main Company' | 'Cash desk №3'      | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                          | 'Receipt'     | '07.04.2021 20:30:14' | '1 369,6'   | 'Main Company' | 'Bank account, EUR' | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                          | 'Receipt'     | '07.04.2021 20:30:14' | '1 369,6'   | 'Main Company' | 'Bank account, EUR' | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                          | 'Receipt'     | '07.04.2021 20:30:14' | '1 712'     | 'Main Company' | 'Bank account, TRY' | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                          | 'Receipt'     | '07.04.2021 20:30:14' | '1 712'     | 'Main Company' | 'Bank account, TRY' | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                          | 'Receipt'     | '07.04.2021 20:30:14' | '5 000'     | 'Main Company' | 'Bank account, USD' | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                          | 'Receipt'     | '07.04.2021 20:30:14' | '5 000'     | 'Main Company' | 'Bank account, USD' | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                          | 'Receipt'     | '07.04.2021 20:30:14' | '5 000'     | 'Main Company' | 'Bank account, USD' | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                          | 'Receipt'     | '07.04.2021 20:30:14' | '5 000'     | 'Main Company' | 'Bank account, USD' | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                          | 'Receipt'     | '07.04.2021 20:30:14' | '5 000'     | 'Main Company' | 'Bank account, USD' | 'USD'      | 'en description is empty'      | 'No'                   |
+			| ''                                          | 'Receipt'     | '07.04.2021 20:30:14' | '5 500'     | 'Main Company' | 'Bank account, USD' | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                          | 'Receipt'     | '07.04.2021 20:30:14' | '5 500'     | 'Main Company' | 'Bank account, USD' | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                          | 'Receipt'     | '07.04.2021 20:30:14' | '5 627,5'   | 'Main Company' | 'Cash desk №1'      | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                          | 'Receipt'     | '07.04.2021 20:30:14' | '5 627,5'   | 'Main Company' | 'Cash desk №2'      | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                          | 'Receipt'     | '07.04.2021 20:30:14' | '5 627,5'   | 'Main Company' | 'Cash desk №3'      | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                          | 'Receipt'     | '07.04.2021 20:30:14' | '5 688,3'   | 'Main Company' | 'Cash desk №1'      | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                          | 'Receipt'     | '07.04.2021 20:30:14' | '5 688,3'   | 'Main Company' | 'Cash desk №1'      | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                          | 'Receipt'     | '07.04.2021 20:30:14' | '5 688,3'   | 'Main Company' | 'Cash desk №1'      | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                          | 'Receipt'     | '07.04.2021 20:30:14' | '5 688,3'   | 'Main Company' | 'Cash desk №2'      | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                          | 'Receipt'     | '07.04.2021 20:30:14' | '5 688,3'   | 'Main Company' | 'Cash desk №2'      | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                          | 'Receipt'     | '07.04.2021 20:30:14' | '5 688,3'   | 'Main Company' | 'Cash desk №2'      | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                          | 'Receipt'     | '07.04.2021 20:30:14' | '5 688,3'   | 'Main Company' | 'Cash desk №3'      | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                          | 'Receipt'     | '07.04.2021 20:30:14' | '5 688,3'   | 'Main Company' | 'Cash desk №3'      | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                          | 'Receipt'     | '07.04.2021 20:30:14' | '5 688,3'   | 'Main Company' | 'Cash desk №3'      | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                          | 'Receipt'     | '07.04.2021 20:30:14' | '8 000'     | 'Main Company' | 'Bank account, EUR' | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                          | 'Receipt'     | '07.04.2021 20:30:14' | '8 000'     | 'Main Company' | 'Bank account, EUR' | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                          | 'Receipt'     | '07.04.2021 20:30:14' | '8 000'     | 'Main Company' | 'Bank account, EUR' | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                          | 'Receipt'     | '07.04.2021 20:30:14' | '8 000'     | 'Main Company' | 'Bank account, EUR' | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                          | 'Receipt'     | '07.04.2021 20:30:14' | '8 000'     | 'Main Company' | 'Bank account, EUR' | 'EUR'      | 'en description is empty'      | 'No'                   |
+			| ''                                          | 'Receipt'     | '07.04.2021 20:30:14' | '8 800'     | 'Main Company' | 'Bank account, EUR' | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                          | 'Receipt'     | '07.04.2021 20:30:14' | '8 800'     | 'Main Company' | 'Bank account, EUR' | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                          | 'Receipt'     | '07.04.2021 20:30:14' | '10 000'    | 'Main Company' | 'Bank account, TRY' | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                          | 'Receipt'     | '07.04.2021 20:30:14' | '10 000'    | 'Main Company' | 'Bank account, TRY' | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                          | 'Receipt'     | '07.04.2021 20:30:14' | '10 000'    | 'Main Company' | 'Bank account, TRY' | 'TRY'      | 'en description is empty'      | 'No'                   |
+			| ''                                          | 'Receipt'     | '07.04.2021 20:30:14' | '10 000'    | 'Main Company' | 'Bank account, TRY' | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                          | 'Receipt'     | '07.04.2021 20:30:14' | '10 000'    | 'Main Company' | 'Bank account, TRY' | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                          | 'Receipt'     | '07.04.2021 20:30:14' | '11 000'    | 'Main Company' | 'Bank account, TRY' | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                          | 'Receipt'     | '07.04.2021 20:30:14' | '11 000'    | 'Main Company' | 'Bank account, TRY' | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                          | 'Receipt'     | '07.04.2021 20:30:14' | '28 137,5'  | 'Main Company' | 'Bank account, USD' | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                          | 'Receipt'     | '07.04.2021 20:30:14' | '28 441,5'  | 'Main Company' | 'Bank account, USD' | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                          | 'Receipt'     | '07.04.2021 20:30:14' | '28 441,5'  | 'Main Company' | 'Bank account, USD' | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                          | 'Receipt'     | '07.04.2021 20:30:14' | '28 441,5'  | 'Main Company' | 'Bank account, USD' | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                          | 'Receipt'     | '07.04.2021 20:30:14' | '45 020'    | 'Main Company' | 'Bank account, EUR' | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                          | 'Receipt'     | '07.04.2021 20:30:14' | '45 506,4'  | 'Main Company' | 'Bank account, EUR' | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                          | 'Receipt'     | '07.04.2021 20:30:14' | '45 506,4'  | 'Main Company' | 'Bank account, EUR' | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                          | 'Receipt'     | '07.04.2021 20:30:14' | '45 506,4'  | 'Main Company' | 'Bank account, EUR' | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                          | 'Receipt'     | '07.04.2021 20:30:14' | '56 275'    | 'Main Company' | 'Bank account, TRY' | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                          | 'Receipt'     | '07.04.2021 20:30:14' | '56 883'    | 'Main Company' | 'Bank account, TRY' | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                          | 'Receipt'     | '07.04.2021 20:30:14' | '56 883'    | 'Main Company' | 'Bank account, TRY' | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                          | 'Receipt'     | '07.04.2021 20:30:14' | '56 883'    | 'Main Company' | 'Bank account, TRY' | 'TRY'      | 'Local currency'               | 'No'                   |
+		And I close all client application windows
+
 Scenario: _042930 Opening entry clear posting/mark for deletion
 	And I close all client application windows
 	* Select Opening entry

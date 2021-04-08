@@ -405,18 +405,6 @@ Scenario: _0154135 create document Retail Sales Receipt
 				| ''                               | '*'      | '593,22'    | 'Main Company' | 'Shop 01'       | ''             | '38/Black' | 'TRY'      | ''                    | 'Local currency'               | 'No'                   | '' | '' | '' |
 				| ''                               | '*'      | '593,22'    | 'Main Company' | 'Shop 01'       | ''             | '38/Black' | 'TRY'      | ''                    | 'TRY'                          | 'No'                   | '' | '' | '' |
 				| ''                               | '*'      | '593,22'    | 'Main Company' | 'Shop 01'       | ''             | '38/Black' | 'TRY'      | ''                    | 'en description is empty'      | 'No'                   | '' | '' | '' |
-			And I select "R3010 Cash on hand" exact value from "Register" drop-down list
-			And I click "Generate report" button
-			And "ResultTable" spreadsheet document contains lines:
-				| '$$RetailSalesReceipt015413$$'   | ''            | ''       | ''          | ''             | ''             | ''         | ''                             | ''              | ''                     |
-				| 'Document registrations records' | ''            | ''       | ''          | ''             | ''             | ''         | ''                             | ''              | ''                     |
-				| 'Register  "R3010 Cash on hand"' | ''            | ''       | ''          | ''             | ''             | ''         | ''                             | ''              | ''                     |
-				| ''                               | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''             | ''         | ''                             | ''              | 'Attributes'           |
-				| ''                               | ''            | ''       | 'Amount'    | 'Company'      | 'Account'      | 'Currency' | 'Multi currency movement type' | 'Movement type' | 'Deferred calculation' |
-				| ''                               | 'Receipt'     | '*'      | '220,85'    | 'Main Company' | 'Transit Main' | 'USD'      | 'Reporting currency'           | ''              | 'No'                   |
-				| ''                               | 'Receipt'     | '*'      | '1 290'     | 'Main Company' | 'Transit Main' | 'TRY'      | 'Local currency'               | ''              | 'No'                   |
-				| ''                               | 'Receipt'     | '*'      | '1 290'     | 'Main Company' | 'Transit Main' | 'TRY'      | 'TRY'                          | ''              | 'No'                   |
-				| ''                               | 'Receipt'     | '*'      | '1 290'     | 'Main Company' | 'Transit Main' | 'TRY'      | 'en description is empty'      | ''              | 'No'                   |
 			And I close all client application windows
 
 			
@@ -532,17 +520,8 @@ Scenario: _0154136 create document Retail Return Receipt based on RetailSalesRec
 			| ''                        | ''            | ''       | 'Amount'    | 'Commission' | 'Company'      | 'Business unit' | 'Payment type' | 'Account'      | 'Payment terminal'    | '' | '' | '' | '' |
 			| ''                        | 'Receipt'     | '*'      | '-900'      | '9'          | 'Main Company' | 'Shop 01'       | 'Card 01'      | 'Transit Main' | 'Payment terminal 01' | '' | '' | '' | '' |
 	
-		And I select "R3010 Cash on hand" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| 'Document registrations records' | ''            | ''       | ''          | ''             | ''             | ''         | ''                             | ''              | ''                     |
-			| 'Register  "R3010 Cash on hand"' | ''            | ''       | ''          | ''             | ''             | ''         | ''                             | ''              | ''                     |
-			| ''                               | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''             | ''         | ''                             | ''              | 'Attributes'           |
-			| ''                               | ''            | ''       | 'Amount'    | 'Company'      | 'Account'      | 'Currency' | 'Multi currency movement type' | 'Movement type' | 'Deferred calculation' |
-			| ''                               | 'Expense'     | '*'      | '154,08'    | 'Main Company' | 'Transit Main' | 'USD'      | 'Reporting currency'           | ''              | 'No'                   |
-			| ''                               | 'Expense'     | '*'      | '900'       | 'Main Company' | 'Transit Main' | 'TRY'      | 'Local currency'               | ''              | 'No'                   |
-			| ''                               | 'Expense'     | '*'      | '900'       | 'Main Company' | 'Transit Main' | 'TRY'      | 'TRY'                          | ''              | 'No'                   |
-			| ''                               | 'Expense'     | '*'      | '900'       | 'Main Company' | 'Transit Main' | 'TRY'      | 'en description is empty'      | ''              | 'No'                   |
+		And I close all client application windows
+		
 
 
 

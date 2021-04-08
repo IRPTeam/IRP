@@ -486,6 +486,7 @@ Scenario: _400002 opening entry inventory balance
 		And I save the window as "$$OpeningEntry400002$$"
 		And I close all client application windows
 	* Check creation
+		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
 		And "List" table contains lines
 			| 'Number' |
 			|  '$$NumberOpeningEntry400002$$'    |

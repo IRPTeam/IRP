@@ -589,16 +589,16 @@ Function PaymentList()
 	|	PaymentList.Ref.Currency AS Currency,
 	|	PaymentList.Ref.CashAccount AS CashAccount,
 	|	PaymentList.BasisDocument AS Basis,
+	|	PaymentList.PlaningTransactionBasis AS PlaningTransactionBasis,
 	|	PaymentList.Partner.Employee AS IsEmployee,
 	|	PaymentList.Amount,
-	|	PaymentList.Ref.TransactionType
-	|   = VALUE(Enum.IncomingPaymentTransactionType.PaymentFromCustomer) AS IsPaymentFromCustomer,
-	|	PaymentList.Ref.TransactionType
-	|   = VALUE(Enum.IncomingPaymentTransactionType.CurrencyExchange) AS IsCurrencyExchange,
-	|	PaymentList.Ref.TransactionType
-	|   = VALUE(Enum.IncomingPaymentTransactionType.CashTransferOrder) AS IsCashTransferOrder,
-	|	PaymentList.Ref.TransactionType
-	|   = VALUE(Enum.IncomingPaymentTransactionType.TransferFromPOS) AS IsTransferFromPOS
+	|	PaymentList.Ref.TransactionType = VALUE(Enum.IncomingPaymentTransactionType.PaymentFromCustomer) AS
+	|		IsPaymentFromCustomer,
+	|	PaymentList.Ref.TransactionType = VALUE(Enum.IncomingPaymentTransactionType.CurrencyExchange) AS IsCurrencyExchange,
+	|	PaymentList.Ref.TransactionType = VALUE(Enum.IncomingPaymentTransactionType.CashTransferOrder) AS
+	|		IsCashTransferOrder,
+	|	PaymentList.Ref.TransactionType = VALUE(Enum.IncomingPaymentTransactionType.TransferFromPOS) AS IsTransferFromPOS,
+	|	PaymentList.Partner
 	|INTO PaymentList
 	|FROM
 	|	Document.CashReceipt.PaymentList AS PaymentList
@@ -634,6 +634,7 @@ Function R3015B_CashAdvance()
 	Return
 		"SELECT
 		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	PaymentList.PlaningTransactionBasis AS Basis,
 		|	*
 		|INTO R3015B_CashAdvance
 		|FROM

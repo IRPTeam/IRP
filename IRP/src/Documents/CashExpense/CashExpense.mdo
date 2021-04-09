@@ -68,7 +68,7 @@
   <realTimePosting>Deny</realTimePosting>
   <registerRecords>AccumulationRegister.ExpensesTurnovers</registerRecords>
   <registerRecords>AccumulationRegister.TaxesTurnovers</registerRecords>
-  <registerRecords>AccumulationRegister.AccountBalance</registerRecords>
+  <registerRecords>AccumulationRegister.R3010B_CashOnHand</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>

@@ -537,7 +537,7 @@ Scenario: _041319 check Sales return movements by the Register  "R2012 Invoice c
 	And I close all client application windows
 
 
-Scenario: _041330 Sales return clear posting
+Scenario: _041330 Sales return clear posting/mark for deletion
 	And I close all client application windows
 	* Select Sales return
 		Given I open hyperlink "e1cib/list/Document.SalesReturn"
@@ -559,6 +559,43 @@ Scenario: _041330 Sales return clear posting
 			| 'Number'  |
 			| '103' |
 		And in the table "List" I click the button named "ListContextMenuPost"		
+		Then user message window does not contain messages
+		And I click "Registrations report" button
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document contains values
+			| 'R2031 Shipment invoicing' |
+			| 'R5010 Reconciliation statement' |
+			| 'R2002 Sales returns' |
+			| 'R4050 Stock inventory' |
+			| 'R2021 Customer transactions' |
+			| 'R4031 Goods in transit (incoming)' |
+			| 'R2040 Taxes incoming' |
+		And I close all client application windows
+	* Mark for deletion
+		Given I open hyperlink "e1cib/list/Document.SalesReturn"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '103' |
+		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		Then user message window does not contain messages
+		And I click "Registrations report" button
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Sales return 103 dated 12.03.2021 08:59:52' |
+			| 'Document registrations records'                    |
+		And I close current window
+	* Unmark for deletion and post document
+		Given I open hyperlink "e1cib/list/Document.SalesReturn"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '103' |
+		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button				
+		Then user message window does not contain messages
+		And in the table "List" I click the button named "ListContextMenuPost"	
 		Then user message window does not contain messages
 		And I click "Registrations report" button
 		And I click "Generate report" button

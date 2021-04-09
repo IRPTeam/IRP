@@ -311,12 +311,6 @@ Scenario: _054005 create Cash receipt and Cash payment based on Cash transfer or
 		| 'TRY'      | '$$CashTransferOrder054004$$' | '$$CashTransferOrder054004$$' | 'Main Company' | 'Cash desk №1' | 'Incoming'            | ''        | ''           | '1 150,00'  |
 		| 'USD'      | '$$CashPayment054005$$'       | '$$CashTransferOrder054004$$' | 'Main Company' | 'Cash desk №2' | 'Outgoing'            | ''        | ''           | '-200,00'   |
 		| 'TRY'      | '$$CashReceipt054005$$'       | '$$CashTransferOrder054004$$' | 'Main Company' | 'Cash desk №1' | 'Incoming'            | ''        | ''           | '-1 150,00' |
-	* Check Cash payment and Cash receipt movements by register AccountBalance
-		Given I open hyperlink "e1cib/list/AccumulationRegister.AccountBalance"
-		And "List" table contains lines
-		| 'Currency' | 'Recorder'              | 'Company'      | 'Account'      | 'Amount'   |
-		| 'TRY'      | '$$CashReceipt054005$$' | 'Main Company' | 'Cash desk №1' | '1 150,00' |
-		| 'USD'      | '$$CashPayment054005$$' | 'Main Company' | 'Cash desk №2' | '200,00'   |
 		And I close all client application windows
 
 	

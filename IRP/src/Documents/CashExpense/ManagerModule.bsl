@@ -6,7 +6,6 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Tables = New Structure();
 	Tables.Insert("TaxesTurnovers", PostingServer.CreateTable(AccReg.TaxesTurnovers));
 	Tables.Insert("ExpensesTurnovers", PostingServer.CreateTable(AccReg.ExpensesTurnovers));
-	Tables.Insert("AccountBalance", PostingServer.CreateTable(AccReg.AccountBalance));
 	
 	QueryPaymentList = New Query();
 	QueryPaymentList.Text =
@@ -129,77 +128,35 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	tmp_taxlist.Currency AS Currency,
 		|	tmp_taxlist.Key AS Key
 		|FROM
-		|	tmp_taxlist AS tmp_taxlist
-		|;
-		|
-		|//[4]//////////////////////////////////////////////////////////////////////////////
-		|SELECT
-		|	tmp_paymentlist.Company AS Company,
-		|	tmp_paymentlist.Period AS Period,
-		|	tmp_paymentlist.Account AS Account,
-		|	tmp_paymentlist.Currency AS Currency,
-		|	tmp_paymentlist.AdditionalAnalytic AS AdditionalAnalytic,
-		|	SUM(tmp_paymentlist.TotalAmount) AS Amount,
-		|	tmp_paymentlist.Key AS Key
-		|FROM
-		|	tmp_paymentlist AS tmp_paymentlist
-		|
-		|GROUP BY
-		|	tmp_paymentlist.Company,
-		|	tmp_paymentlist.Period,
-		|	tmp_paymentlist.Account,
-		|	tmp_paymentlist.AdditionalAnalytic,
-		|	tmp_paymentlist.Currency,
-		|	tmp_paymentlist.Key";
+		|	tmp_taxlist AS tmp_taxlist";
 	Query.SetParameter("PaymentList", QueryTablePaymentList);
 	Query.SetParameter("TaxList", QueryTableTaxList);
 	QueryResult = Query.ExecuteBatch();
 	
 	Tables.ExpensesTurnovers = QueryResult[2].Unload();
 	Tables.TaxesTurnovers = QueryResult[3].Unload();
-	Tables.AccountBalance = QueryResult[4].Unload();
 	
+#Region NewRegistersPosting	
+	QueryArray = GetQueryTextsSecondaryTables();
+	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
+#EndRegion	
+
 	Return Tables;
 EndFunction
 
 Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	DocumentDataTables = Parameters.DocumentDataTables;
-	DataMapWithLockFields = New Map();
-	
-	// ExpensesTurnovers
-	Fields = New Map();
-	Fields.Insert("Company", "Company");
-	Fields.Insert("BusinessUnit", "BusinessUnit");
-	Fields.Insert("ExpenseType", "ExpenseType");
-	Fields.Insert("Currency", "Currency");
-	Fields.Insert("AdditionalAnalytic", "AdditionalAnalytic");
-	DataMapWithLockFields.Insert("AccumulationRegister.ExpensesTurnovers",
-		New Structure("Fields, Data", Fields, DocumentDataTables.ExpensesTurnovers));
-	
-	// TaxesTurnovers
-	Fields = New Map();
-	Fields.Insert("Document", "Document");
-	Fields.Insert("Tax", "Tax");
-	Fields.Insert("Analytics", "Analytics");
-	Fields.Insert("TaxRate", "TaxRate");
-	Fields.Insert("IncludeToTotalAmount", "IncludeToTotalAmount");
-	Fields.Insert("RowKey", "RowKey");
-	DataMapWithLockFields.Insert("AccumulationRegister.TaxesTurnovers",
-		New Structure("Fields, Data", Fields, DocumentDataTables.TaxesTurnovers));
-	
-	// AccountBalance
-	Fields = New Map();
-	Fields.Insert("Company", "Company");
-	Fields.Insert("Account", "Account");
-	Fields.Insert("Currency", "Currency");
-	DataMapWithLockFields.Insert("AccumulationRegister.AccountBalance",
-		New Structure("Fields, Data", Fields, DocumentDataTables.AccountBalance));
-	
+	DataMapWithLockFields = New Map();	
 	Return DataMapWithLockFields;
 EndFunction
 
 Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	Return;
+#Region NewRegistersPosting
+	Tables = Parameters.DocumentDataTables;	
+	QueryArray = GetQueryTextsMasterTables();
+	PostingServer.SetRegisters(Tables, Ref);
+	Tables.R3010B_CashOnHand.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
+#EndRegion
 EndProcedure
 
 Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
@@ -213,11 +170,9 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords.TaxesTurnovers,
 		New Structure("RecordSet", Parameters.DocumentDataTables.TaxesTurnovers));
 	
-	// AccountBalance
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.AccountBalance,
-		New Structure("RecordType, RecordSet",
-			AccumulationRecordType.Expense,
-			Parameters.DocumentDataTables.AccountBalance));
+#Region NewRegistersPosting	
+	PostingServer.SetPostingDataTables(PostingDataTables, Parameters);
+#EndRegion
 	
 	Return PostingDataTables;
 EndFunction
@@ -265,14 +220,43 @@ EndFunction
 
 Function GetQueryTextsSecondaryTables()
 	QueryArray = New Array;
-
+	QueryArray.Add(PaymentList());
 	Return QueryArray;
 EndFunction
 
 Function GetQueryTextsMasterTables()
 	QueryArray = New Array;
-
+	QueryArray.Add(R3010B_CashOnHand());
 	Return QueryArray;
+EndFunction
+
+Function PaymentList()
+	Return
+		"SELECT
+		|	PaymentList.Ref.Date AS Period,
+		|	PaymentList.Ref.Company AS Company,
+		|	PaymentList.Ref.Account AS Account,
+		|	PaymentList.Currency AS Currency,
+		|	PaymentList.ExpenseType AS ExpenseType,
+		|	PaymentList.NetAmount AS Amount,
+		|	PaymentList.Key
+		|INTO PaymentList
+		|FROM
+		|	Document.CashExpense.PaymentList AS PaymentList
+		|WHERE
+		|	PaymentList.Ref = &Ref";
+EndFunction
+
+Function R3010B_CashOnHand()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	*
+		|INTO R3010B_CashOnHand
+		|FROM
+		|	PaymentList AS PaymentList
+		|WHERE
+		|	TRUE";
 EndFunction
 
 #EndRegion

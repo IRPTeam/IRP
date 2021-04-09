@@ -236,89 +236,10 @@ Scenario: _400001 opening entry account balance
 		And I save the window as "$$OpeningEntry400001$$"
 		And I click the button named "FormPostAndClose"
 		And Delay 5
-		* Check movements
-			Given I open hyperlink "e1cib/list/AccumulationRegister.AccountBalance"
-			And "List" table contains lines
-			| 'Currency' | 'Recorder'               | 'Company'      | 'Account'           | 'Multi currency movement type' | 'Amount'    |
-			| 'TRY'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Cash desk №1'      | 'Local currency'               | '1 000,00'  |
-			| 'USD'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Cash desk №1'      | 'Reporting currency'           | '171,20'    |
-			| 'TRY'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Cash desk №2'      | 'Local currency'               | '5 627,50'  |
-			| 'USD'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Cash desk №2'      | 'Reporting currency'           | '1 000,00'  |
-			| 'TRY'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Cash desk №3'      | 'Local currency'               | '5 688,30'  |
-			| 'USD'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Cash desk №3'      | 'Reporting currency'           | '1 100,00'  |
-			| 'TRY'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Bank account, TRY' | 'Local currency'               | '10 000,00' |
-			| 'USD'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Bank account, TRY' | 'Reporting currency'           | '1 712,00'  |
-			| 'TRY'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Bank account, USD' | 'Local currency'               | '28 441,50' |
-			| 'USD'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Bank account, USD' | 'Reporting currency'           | '5 000,00'  |
-			| 'TRY'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Bank account, EUR' | 'Local currency'               | '45 506,40' |
-			| 'USD'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Bank account, EUR' | 'Reporting currency'           | '8 800,00'  |
-			| 'TRY'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Cash desk №1'      | '*'                            | '1 000,00'  |
-			| 'USD'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Cash desk №2'      | '*'                            | '1 000,00'  |
-			| 'EUR'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Cash desk №3'      | '*'                            | '1 000,00'  |
-			| 'TRY'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Bank account, TRY' | '*'                            | '10 000,00' |
-			| 'USD'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Bank account, USD' | '*'                            | '5 000,00'  |
-			| 'EUR'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Bank account, EUR' | '*'                            | '8 000,00'  |
-			And I close all client application windows
-	* Clear movements and  check movement reversal
-		* Clear movements
-			Given I open hyperlink "e1cib/list/Document.OpeningEntry"
-			And I go to line in "List" table
+	* Check creation
+		And "List" table contains lines
 			| 'Number' |
-			| '$$NumberOpeningEntry400001$$'      |
-			And in the table "List" I click the button named "ListContextMenuUndoPosting"
-		* Check clearing movements
-			Given I open hyperlink "e1cib/list/AccumulationRegister.AccountBalance"
-			And "List" table does not contain lines
-			| 'Currency' | 'Recorder'               | 'Company'      | 'Account'           | 'Multi currency movement type' | 'Amount'    |
-			| 'TRY'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Cash desk №1'      | 'Local currency'               | '1 000,00'  |
-			| 'USD'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Cash desk №1'      | 'Reporting currency'           | '171,20'    |
-			| 'TRY'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Cash desk №2'      | 'Local currency'               | '5 627,50'  |
-			| 'USD'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Cash desk №2'      | 'Reporting currency'           | '1 000,00'  |
-			| 'TRY'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Cash desk №3'      | 'Local currency'               | '5 688,30'  |
-			| 'USD'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Cash desk №3'      | 'Reporting currency'           | '1 100,00'  |
-			| 'TRY'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Bank account, TRY' | 'Local currency'               | '10 000,00' |
-			| 'USD'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Bank account, TRY' | 'Reporting currency'           | '1 712,00'  |
-			| 'TRY'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Bank account, USD' | 'Local currency'               | '28 441,50' |
-			| 'USD'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Bank account, USD' | 'Reporting currency'           | '5 000,00'  |
-			| 'TRY'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Bank account, EUR' | 'Local currency'               | '45 506,40' |
-			| 'USD'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Bank account, EUR' | 'Reporting currency'           | '8 800,00'  |
-			| 'TRY'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Cash desk №1'      | '*'                            | '1 000,00'  |
-			| 'USD'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Cash desk №2'      | '*'                            | '1 000,00'  |
-			| 'EUR'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Cash desk №3'      | '*'                            | '1 000,00'  |
-			| 'TRY'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Bank account, TRY' | '*'                            | '10 000,00' |
-			| 'USD'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Bank account, USD' | '*'                            | '5 000,00'  |
-			| 'EUR'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Bank account, EUR' | '*'                            | '8 000,00'  |
-			And I close all client application windows
-	* Posting the document back and check movements
-		* Post document
-			Given I open hyperlink "e1cib/list/Document.OpeningEntry"
-			And I go to line in "List" table
-			| 'Number' |
-			| '$$NumberOpeningEntry400001$$'      |
-			And in the table "List" I click the button named "ListContextMenuPost"
-		* Check movements
-			Given I open hyperlink "e1cib/list/AccumulationRegister.AccountBalance"
-			And "List" table contains lines
-			| 'Currency' | 'Recorder'               | 'Company'      | 'Account'           | 'Multi currency movement type' | 'Amount'    |
-			| 'TRY'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Cash desk №1'      | 'Local currency'               | '1 000,00'  |
-			| 'USD'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Cash desk №1'      | 'Reporting currency'           | '171,20'    |
-			| 'TRY'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Cash desk №2'      | 'Local currency'               | '5 627,50'  |
-			| 'USD'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Cash desk №2'      | 'Reporting currency'           | '1 000,00'  |
-			| 'TRY'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Cash desk №3'      | 'Local currency'               | '5 688,30'  |
-			| 'USD'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Cash desk №3'      | 'Reporting currency'           | '1 100,00'  |
-			| 'TRY'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Bank account, TRY' | 'Local currency'               | '10 000,00' |
-			| 'USD'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Bank account, TRY' | 'Reporting currency'           | '1 712,00'  |
-			| 'TRY'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Bank account, USD' | 'Local currency'               | '28 441,50' |
-			| 'USD'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Bank account, USD' | 'Reporting currency'           | '5 000,00'  |
-			| 'TRY'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Bank account, EUR' | 'Local currency'               | '45 506,40' |
-			| 'USD'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Bank account, EUR' | 'Reporting currency'           | '8 800,00'  |
-			| 'TRY'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Cash desk №1'      | '*'                            | '1 000,00'  |
-			| 'USD'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Cash desk №2'      | '*'                            | '1 000,00'  |
-			| 'EUR'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Cash desk №3'      | '*'                            | '1 000,00'  |
-			| 'TRY'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Bank account, TRY' | '*'                            | '10 000,00' |
-			| 'USD'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Bank account, USD' | '*'                            | '5 000,00'  |
-			| 'EUR'      | '$$OpeningEntry400001$$' | 'Main Company' | 'Bank account, EUR' | '*'                            | '8 000,00'  |
-			And I close all client application windows
+			|  '$$NumberOpeningEntry400001$$'    |
 
 
 
@@ -564,6 +485,11 @@ Scenario: _400002 opening entry inventory balance
 		And I save the value of "Number" field as "$$NumberOpeningEntry400002$$"
 		And I save the window as "$$OpeningEntry400002$$"
 		And I close all client application windows
+	* Check creation
+		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
+		And "List" table contains lines
+			| 'Number' |
+			|  '$$NumberOpeningEntry400002$$'    |
 	
 
 Scenario: _400003 opening entry advance balance

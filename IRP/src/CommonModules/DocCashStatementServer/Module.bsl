@@ -51,25 +51,21 @@ Procedure FillTransactions(Object, AddInfo = Undefined) Export
 	Query = New Query;
 	Query.Text =
 		"SELECT
-		|	AccountBalanceTurnovers.Recorder AS Document,
-		|	SUM(AccountBalanceTurnovers.AmountExpense) AS Expense,
-		|	SUM(AccountBalanceTurnovers.AmountReceipt) AS Receipt
+		|	R3010B_CashOnHandTurnovers.Recorder AS Document,
+		|	SUM(R3010B_CashOnHandTurnovers.AmountExpense) AS Expense,
+		|	SUM(R3010B_CashOnHandTurnovers.AmountReceipt) AS Receipt
 		|FROM
-		|	AccumulationRegister.AccountBalance.Turnovers(
-		|			&BegOfPeriod,
-		|			&EndOfPeriod,
-		|			Record,
-		|			Account.BusinessUnit = &BusinessUnit
-		|				AND Company = &Company) AS AccountBalanceTurnovers
+		|	AccumulationRegister.R3010B_CashOnHand.Turnovers(&BegOfPeriod, &EndOfPeriod, Record,
+		|		Account.BusinessUnit = &BusinessUnit
+		|	AND Company = &Company) AS R3010B_CashOnHandTurnovers
 		|WHERE
-		|	AccountBalanceTurnovers.Account.Type = VALUE(Enum.CashAccountTypes.Cash)
-		|	AND AccountBalanceTurnovers.CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
-		|
+		|	R3010B_CashOnHandTurnovers.Account.Type = VALUE(Enum.CashAccountTypes.Cash)
+		|	AND
+		|		R3010B_CashOnHandTurnovers.CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
 		|GROUP BY
-		|	AccountBalanceTurnovers.Recorder
-		|
+		|	R3010B_CashOnHandTurnovers.Recorder
 		|ORDER BY
-		|	AccountBalanceTurnovers.Recorder.Date";	
+		|	R3010B_CashOnHandTurnovers.Recorder.Date";	
 		
 	Query.SetParameter("BegOfPeriod", Object.BegOfPeriod);
 	Query.SetParameter("EndOfPeriod", Object.EndOfPeriod);

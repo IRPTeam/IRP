@@ -210,19 +210,6 @@ Scenario: Open information register form "BusinessUnitBankTerms"
 
 
 
-Scenario: Open list form "AccountBalance" 
-
-	Given I open "AccountBalance" accumulation register list form 
-	If the warning is displayed then
-		Then I raise "Failed to open information register form AccountBalance" exception
-	And I close current window
-
-Scenario: Open object form "AccountBalance"
-
-	Given I open "AccountBalance" accumulation register default form
-	If the warning is displayed then
-		Then I raise "Failed to open information register form AccountBalance" exception
-	And I close current window
 
 	
 Scenario: Open list form "AccountsStatement" 
@@ -270,19 +257,7 @@ Scenario: Open object form "AdvanceToSuppliers"
 	And I close current window
 
 	
-Scenario: Open list form "CashAdvance" 
 
-	Given I open "CashAdvance" accumulation register list form 
-	If the warning is displayed then
-		Then I raise "Failed to open information register form CashAdvance" exception
-	And I close current window
-
-Scenario: Open object form "CashAdvance"
-
-	Given I open "CashAdvance" accumulation register default form
-	If the warning is displayed then
-		Then I raise "Failed to open information register form CashAdvance" exception
-	And I close current window
 
 	
 Scenario: Open list form "CashInTransit" 
@@ -443,6 +418,8 @@ Scenario: Open object form "ReceiptOrders"
 		Then I raise "Failed to open information register form ReceiptOrders" exception
 	And I close current window
 
+	
+
 
 	
 Scenario: Open list form "RevenuesTurnovers" 
@@ -460,6 +437,7 @@ Scenario: Open object form "RevenuesTurnovers"
 	And I close current window
 
 	
+
 
 	
 Scenario: Open list form "SalesReturnTurnovers" 

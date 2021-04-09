@@ -2,11 +2,9 @@
 @tree
 @Positive
 @Movements
-@MovementsUnbundling
+@MovementsCashRevenue
 
-
-Feature: check Unbundling movements
-
+Feature: check Cash revenue movements
 
 
 Background:
@@ -14,7 +12,7 @@ Background:
 
 
 
-Scenario: _042700 preparation (Unbundling)
+Scenario: _044100 preparation (Cash revenue)
 	When set True value to the constant
 	And I close TestClient session
 	Given I open new TestClient session or connect the existing one
@@ -51,6 +49,8 @@ Scenario: _042700 preparation (Unbundling)
 		When Create catalog Companies objects (second company Ferron BP)
 		When Create catalog PartnersBankAccounts objects
 		When update ItemKeys
+		When Create catalog SerialLotNumbers objects
+		When Create catalog CashAccounts objects
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
@@ -60,62 +60,47 @@ Scenario: _042700 preparation (Unbundling)
 		When Create information register Taxes records (VAT)
 	* Tax settings
 		When filling in Tax settings for company
-		When Create document Unbundling objects
+	When Create Document discount
+	* Add plugin for discount
+		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
+		If "List" table does not contain lines Then
+				| "Description" |
+				| "DocumentDiscount" |
+			When add Plugin for document discount
+			When Create catalog CancelReturnReasons objects
+	* Load documents
+		When Create document CashRevenue objects
 		And I execute 1C:Enterprise script at server
-			| "Documents.Unbundling.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.CashRevenue.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I close all client application windows
 
-	
 
-Scenario: _042701 check Unbundling movements by the Register  "R4010 Actual stocks"
-	* Select Unbundling
-		Given I open hyperlink "e1cib/list/Document.Unbundling"
+Scenario: _044101 check Cash revenue movements by the Register "R3010 Cash on hand"
+	* Select Cash revenue
+		Given I open hyperlink "e1cib/list/Document.CashRevenue"
 		And I go to line in "List" table
 			| 'Number'  |
 			| '1' |
-	* Check movements by the Register  "R4010 Actual stocks"
+	* Check movements by the Register  "R3010 Cash on hand" 
 		And I click "Registrations report" button
-		And I select "R4010 Actual stocks" exact value from "Register" drop-down list
+		And I select "R3010 Cash on hand" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Unbundling 1 dated 07.09.2020 18:23:12' | ''            | ''                    | ''          | ''           | ''          |
-			| 'Document registrations records'         | ''            | ''                    | ''          | ''           | ''          |
-			| 'Register  "R4010 Actual stocks"'        | ''            | ''                    | ''          | ''           | ''          |
-			| ''                                       | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''          |
-			| ''                                       | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key'  |
-			| ''                                       | 'Receipt'     | '07.09.2020 18:23:12' | '2'         | 'Store 01'   | 'S/Yellow'  |
-			| ''                                       | 'Receipt'     | '07.09.2020 18:23:12' | '2'         | 'Store 01'   | 'XS/Blue'   |
-			| ''                                       | 'Receipt'     | '07.09.2020 18:23:12' | '4'         | 'Store 01'   | 'L/Green'   |
-			| ''                                       | 'Receipt'     | '07.09.2020 18:23:12' | '4'         | 'Store 01'   | 'M/Brown'   |
-			| ''                                       | 'Expense'     | '07.09.2020 18:23:12' | '2'         | 'Store 01'   | 'Dress/A-8' |	
-		And I close all client application windows
-
-Scenario: _042702 check Unbundling movements by the Register  "R4011 Free stocks"
-	* Select Unbundling
-		Given I open hyperlink "e1cib/list/Document.Unbundling"
-		And I go to line in "List" table
-			| 'Number'  |
-			| '1' |
-	* Check movements by the Register  "R4011 Free stocks"
-		And I click "Registrations report" button
-		And I select "R4011 Free stocks" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		Then "ResultTable" spreadsheet document is equal
-			| 'Unbundling 1 dated 07.09.2020 18:23:12' | ''            | ''                    | ''          | ''           | ''          |
-			| 'Document registrations records'         | ''            | ''                    | ''          | ''           | ''          |
-			| 'Register  "R4011 Free stocks"'          | ''            | ''                    | ''          | ''           | ''          |
-			| ''                                       | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''          |
-			| ''                                       | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key'  |
-			| ''                                       | 'Receipt'     | '07.09.2020 18:23:12' | '2'         | 'Store 01'   | 'S/Yellow'  |
-			| ''                                       | 'Receipt'     | '07.09.2020 18:23:12' | '2'         | 'Store 01'   | 'XS/Blue'   |
-			| ''                                       | 'Receipt'     | '07.09.2020 18:23:12' | '4'         | 'Store 01'   | 'L/Green'   |
-			| ''                                       | 'Receipt'     | '07.09.2020 18:23:12' | '4'         | 'Store 01'   | 'M/Brown'   |
-			| ''                                       | 'Expense'     | '07.09.2020 18:23:12' | '2'         | 'Store 01'   | 'Dress/A-8' |
-		And I close all client application windows
-			
-Scenario: _042730 Unbundling clear posting/mark for deletion
+			| 'Cash revenue 1 dated 07.09.2020 19:24:49' | ''            | ''                    | ''          | ''             | ''                  | ''         | ''                             | ''                     |
+			| 'Document registrations records'           | ''            | ''                    | ''          | ''             | ''                  | ''         | ''                             | ''                     |
+			| 'Register  "R3010 Cash on hand"'           | ''            | ''                    | ''          | ''             | ''                  | ''         | ''                             | ''                     |
+			| ''                                         | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                  | ''         | ''                             | 'Attributes'           |
+			| ''                                         | ''            | ''                    | 'Amount'    | 'Company'      | 'Account'           | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
+			| ''                                         | 'Receipt'     | '07.09.2020 19:24:49' | '100'       | 'Main Company' | 'Bank account, TRY' | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                         | 'Receipt'     | '07.09.2020 19:24:49' | '100'       | 'Main Company' | 'Bank account, TRY' | 'TRY'      | 'en description is empty'      | 'No'                   |
+			| ''                                         | 'Receipt'     | '07.09.2020 19:24:49' | '584'       | 'Main Company' | 'Bank account, TRY' | 'USD'      | 'Reporting currency'           | 'No'                   |
 	And I close all client application windows
-	* Select Unbundling
-		Given I open hyperlink "e1cib/list/Document.Unbundling"
+
+
+Scenario: _044130 Cash revenue clear posting/mark for deletion
+	And I close all client application windows
+	* Select Cash revenue
+		Given I open hyperlink "e1cib/list/Document.CashRevenue"
 		And I go to line in "List" table
 			| 'Number'  |
 			| '1' |
@@ -125,11 +110,11 @@ Scenario: _042730 Unbundling clear posting/mark for deletion
 		And I click "Registrations report" button
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Unbundling 1 dated 07.09.2020 18:23:12' |
+			| 'Cash revenue 1 dated 07.09.2020 19:24:49' |
 			| 'Document registrations records'                    |
 		And I close current window
-	* Post UnBundling
-		Given I open hyperlink "e1cib/list/Document.Unbundling"
+	* Post Cash revenue
+		Given I open hyperlink "e1cib/list/Document.CashRevenue"
 		And I go to line in "List" table
 			| 'Number'  |
 			| '1' |
@@ -138,11 +123,10 @@ Scenario: _042730 Unbundling clear posting/mark for deletion
 		And I click "Registrations report" button
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document contains values
-			| 'R4011 Free stocks' |
-			| 'R4010 Actual stocks' |
+			| 'R3010 Cash on hand' |
 		And I close all client application windows
 	* Mark for deletion
-		Given I open hyperlink "e1cib/list/Document.Unbundling"
+		Given I open hyperlink "e1cib/list/Document.CashRevenue"
 		And I go to line in "List" table
 			| 'Number'  |
 			| '1' |
@@ -153,11 +137,11 @@ Scenario: _042730 Unbundling clear posting/mark for deletion
 		And I click "Registrations report" button
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Unbundling 1 dated 07.09.2020 18:23:12' |
+			| 'Cash revenue 1 dated 07.09.2020 19:24:49' |
 			| 'Document registrations records'                    |
 		And I close current window
 	* Unmark for deletion and post document
-		Given I open hyperlink "e1cib/list/Document.Unbundling"
+		Given I open hyperlink "e1cib/list/Document.CashRevenue"
 		And I go to line in "List" table
 			| 'Number'  |
 			| '1' |
@@ -170,6 +154,5 @@ Scenario: _042730 Unbundling clear posting/mark for deletion
 		And I click "Registrations report" button
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document contains values
-			| 'R4011 Free stocks' |
-			| 'R4010 Actual stocks' |
-		And I close all client application windows
+			| 'R3010 Cash on hand' |
+		And I close all client application windows		

@@ -361,76 +361,9 @@ Scenario: _050002 check Bank payment movements with transaction type Payment to 
 			| ''                                    | 'Expense'     | '*'      | '1 000'     | 'Main Company' | '$$PurchaseInvoice018001$$' | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'TRY'      | 'en description is empty'      | 'No'                   |
 			| ''                                    | 'Expense'     | '*'      | '1 000'     | 'Main Company' | '$$PurchaseInvoice018001$$' | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'TRY'      | 'Local currency'               | 'No'                   |
 			| ''                                    | 'Expense'     | '*'      | '1 000'     | 'Main Company' | '$$PurchaseInvoice018001$$' | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'TRY'      | 'TRY'                          | 'No'                   |
-		And I select "Account balance" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Account balance"'          | ''            | ''       | ''                     | ''               | ''                          | ''               | ''                             | ''                     | ''                  | ''                             | ''                     |
-			| ''                                     | 'Record type' | 'Period' | 'Resources'            | 'Dimensions'     | ''                          | ''               | ''                             | 'Attributes'           | ''                  | ''                             | ''                     |
-			| ''                                     | ''            | ''       | 'Amount'               | 'Company'        | 'Account'                   | 'Currency'       | 'Multi currency movement type' | 'Deferred calculation' | ''                  | ''                             | ''                     |
-			| ''                                     | 'Expense'     | '*'      | '171,2'               | 'Main Company'   | 'Bank account, TRY'         | 'USD'            | 'Reporting currency'           | 'No'                   | ''                  | ''                             | ''                     |
-			| ''                                     | 'Expense'     | '*'      | '1 000'                | 'Main Company'   | 'Bank account, TRY'         | 'TRY'            | 'en description is empty'      | 'No'                   | ''                  | ''                             | ''                     |
-			| ''                                     | 'Expense'     | '*'      | '1 000'                | 'Main Company'   | 'Bank account, TRY'         | 'TRY'            | 'Local currency'               | 'No'                   | ''                  | ''                             | ''                     |
-		And I close all client application windows
-	* Clear movements Bank payment 1 and check that there is no movement on the registers
-		* Clear movements
-			Given I open hyperlink "e1cib/list/Document.BankPayment"
-			And I go to line in "List" table
-				| 'Number' |
-				| '$$NumberBankPayment0530011$$'      |
-			And in the table "List" I click the button named "ListContextMenuUndoPosting"
-		* Check that there is no movement on the registers
-			Given I open hyperlink "e1cib/list/AccumulationRegister.PartnerArTransactions"
-			And "List" table does not contain lines
-				| 'Recorder'           |
-				| '$$BankPayment0530011$$' |
-			Given I open hyperlink "e1cib/list/AccumulationRegister.AccountBalance"
-			And "List" table does not contain lines
-				| 'Recorder'           |
-				| '$$BankPayment0530011$$' |
-			Given I open hyperlink "e1cib/list/AccumulationRegister.R5010B_ReconciliationStatement"
-			And "List" table does not contain lines
-				| 'Recorder'           |
-				| '$$BankPayment0530011$$' |
-			And I close all client application windows
-	* * Re-posting the document and checking movements on the registers
-		* Posting the document
-			Given I open hyperlink "e1cib/list/Document.BankPayment"
-			And I go to line in "List" table
-				| 'Number' |
-				| '$$NumberBankPayment0530011$$'      |
-			And in the table "List" I click the button named "ListContextMenuPost"
-		* Check movements
-			And I click "Registrations report" button
-			And I select "Accounts statement" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| '$$BankPayment0530011$$'         | ''            | ''       | ''                     | ''               | ''                       | ''               | ''             | ''          | ''                  | ''                          | ''         |
-			| 'Document registrations records' | ''            | ''       | ''                     | ''               | ''                       | ''               | ''             | ''          | ''                  | ''                          | ''         |
-			| 'Register  "Accounts statement"' | ''            | ''       | ''                     | ''               | ''                       | ''               | ''             | ''          | ''                  | ''                          | ''         |
-			| ''                               | 'Record type' | 'Period' | 'Resources'            | ''               | ''                       | ''               | 'Dimensions'   | ''          | ''                  | ''                          | ''         |
-			| ''                               | ''            | ''       | 'Advance to suppliers' | 'Transaction AP' | 'Advance from customers' | 'Transaction AR' | 'Company'      | 'Partner'   | 'Legal name'        | 'Basis document'            | 'Currency' |
-			| ''                               | 'Expense'     | '*'      | ''                     | '1 000'          | ''                       | ''               | 'Main Company' | 'Ferron BP' | 'Company Ferron BP' | '$$PurchaseInvoice018001$$' | 'TRY'      |
 	
-		And I select "Partner AP transactions" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Partner AP transactions"' | ''            | ''       | ''          | ''             | ''                          | ''          | ''                  | ''                   | ''         | ''                             | ''                     |
-			| ''                                    | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                          | ''          | ''                  | ''                   | ''         | ''                             | 'Attributes'           |
-			| ''                                    | ''            | ''       | 'Amount'    | 'Company'      | 'Basis document'            | 'Partner'   | 'Legal name'        | 'Partner term'       | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
-			| ''                                    | 'Expense'     | '*'      | '171,2'     | 'Main Company' | '$$PurchaseInvoice018001$$' | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'USD'      | 'Reporting currency'           | 'No'                   |
-			| ''                                    | 'Expense'     | '*'      | '1 000'     | 'Main Company' | '$$PurchaseInvoice018001$$' | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'TRY'      | 'en description is empty'      | 'No'                   |
-			| ''                                    | 'Expense'     | '*'      | '1 000'     | 'Main Company' | '$$PurchaseInvoice018001$$' | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'TRY'      | 'Local currency'               | 'No'                   |
-			| ''                                    | 'Expense'     | '*'      | '1 000'     | 'Main Company' | '$$PurchaseInvoice018001$$' | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'TRY'      | 'TRY'                          | 'No'                   |
-		And I select "Account balance" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Account balance"'          | ''            | ''       | ''                     | ''               | ''                          | ''               | ''                             | ''                     | ''                  | ''                             | ''                     |
-			| ''                                     | 'Record type' | 'Period' | 'Resources'            | 'Dimensions'     | ''                          | ''               | ''                             | 'Attributes'           | ''                  | ''                             | ''                     |
-			| ''                                     | ''            | ''       | 'Amount'               | 'Company'        | 'Account'                   | 'Currency'       | 'Multi currency movement type' | 'Deferred calculation' | ''                  | ''                             | ''                     |
-			| ''                                     | 'Expense'     | '*'      | '171,2'               | 'Main Company'   | 'Bank account, TRY'         | 'USD'            | 'Reporting currency'           | 'No'                   | ''                  | ''                             | ''                     |
-			| ''                                     | 'Expense'     | '*'      | '1 000'                | 'Main Company'   | 'Bank account, TRY'         | 'TRY'            | 'en description is empty'      | 'No'                   | ''                  | ''                             | ''                     |
-			| ''                                     | 'Expense'     | '*'      | '1 000'                | 'Main Company'   | 'Bank account, TRY'         | 'TRY'            | 'Local currency'               | 'No'                   | ''                  | ''                             | ''                     |
-			And I close all client application windows
+		And I close all client application windows
+	
 
 # Filters
 

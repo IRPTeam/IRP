@@ -1727,3 +1727,11 @@ Scenario: Create catalog CancelReturnReasons objects
 	And I check or create catalog "CancelReturnReasons" objects:
 		| 'Ref'                                                                         | 'DeletionMark' | 'Code'         | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' |
 		| 'e1cib/data/Catalog.CancelReturnReasons?ref=b76197e183b782dc11eb60d037e266d0' | 'False'           | '000000000001' | 'not available'  | ''                 | ''               | ''               |
+
+
+Scenario: Create catalog Workstations objects
+
+	And I check or create catalog "Workstations" objects:
+		| 'Ref'                                                                  | 'DeletionMark' | 'Code'         | 'Description'    | 'CashAccount'                                                          | 'PrintTemplate' | 'UniqueID'  |
+		| 'e1cib/data/Catalog.Workstations?ref=b762b13668d0905011eb97c8502ea899' | 'False'        | '000000000001' | 'Workstation 01' | 'e1cib/data/Catalog.CashAccounts?ref=aa78120ed92fbced11eaf113ba6c1869' | ''              | 'TeamAgent' |
+

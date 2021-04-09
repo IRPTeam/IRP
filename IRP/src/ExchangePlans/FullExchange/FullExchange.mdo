@@ -92,9 +92,6 @@
     <mdObject>InformationRegister.PricesByItems</mdObject>
   </content>
   <content>
-    <mdObject>AccumulationRegister.CashAdvance</mdObject>
-  </content>
-  <content>
     <mdObject>InformationRegister.IntegrationInfo</mdObject>
   </content>
   <content>

@@ -51,6 +51,10 @@ Scenario: _042400 preparation (RetailSalesReceipt)
 		When Create catalog Companies objects (second company Ferron BP)
 		When Create catalog PartnersBankAccounts objects
 		When update ItemKeys
+		When Create catalog BankTerms objects
+		When Create catalog PaymentTerminals objects
+		When Create catalog PaymentTypes objects
+		When Create catalog Workstations objects
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
@@ -108,8 +112,28 @@ Scenario: _042402 check Retail sales receipt movements by the Register  "R4011 F
 			| ''                                                   | 'Expense'     | '15.03.2021 16:01:04' | '12'        | 'Store 01'   | '36/18SD'   |
 		And I close all client application windows
 
+Scenario: _042403 check Retail sales receipt movements by the Register  "R3010 Cash on hand"
+	* Select Retail sales receipt
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '201' |
+	* Check movements by the Register  "R3010 Cash on hand"
+		And I click "Registrations report" button
+		And I select "R3010 Cash on hand" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Retail sales receipt 201 dated 15.03.2021 16:01:04' | ''            | ''                    | ''          | ''             | ''             | ''         | ''                             | ''                     |
+			| 'Document registrations records'                     | ''            | ''                    | ''          | ''             | ''             | ''         | ''                             | ''                     |
+			| 'Register  "R3010 Cash on hand"'                     | ''            | ''                    | ''          | ''             | ''             | ''         | ''                             | ''                     |
+			| ''                                                   | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''         | ''                             | 'Attributes'           |
+			| ''                                                   | ''            | ''                    | 'Amount'    | 'Company'      | 'Account'      | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
+			| ''                                                   | 'Receipt'     | '15.03.2021 16:01:04' | '1 664,06'  | 'Main Company' | 'Cash desk №4' | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                                   | 'Receipt'     | '15.03.2021 16:01:04' | '9 720'     | 'Main Company' | 'Cash desk №4' | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                                   | 'Receipt'     | '15.03.2021 16:01:04' | '9 720'     | 'Main Company' | 'Cash desk №4' | 'TRY'      | 'en description is empty'      | 'No'                   |
+		And I close all client application windows
 
-Scenario: _042430 Retail sales receipt clear posting
+Scenario: _042430 Retail sales receipt clear posting/mark for deletion
 	And I close all client application windows
 	* Select Retail sales receipt
 		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
@@ -131,6 +155,38 @@ Scenario: _042430 Retail sales receipt clear posting
 			| 'Number'  |
 			| '201' |
 		And in the table "List" I click the button named "ListContextMenuPost"		
+		Then user message window does not contain messages
+		And I click "Registrations report" button
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document contains values
+			| 'R4011 Free stocks' |
+			| 'R4010 Actual stocks' |
+		And I close all client application windows
+	* Mark for deletion
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '201' |
+		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		Then user message window does not contain messages
+		And I click "Registrations report" button
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Retail sales receipt 201 dated 15.03.2021 16:01:04' |
+			| 'Document registrations records'                    |
+		And I close current window
+	* Unmark for deletion and post document
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '201' |
+		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button				
+		Then user message window does not contain messages
+		And in the table "List" I click the button named "ListContextMenuPost"	
 		Then user message window does not contain messages
 		And I click "Registrations report" button
 		And I click "Generate report" button

@@ -2,10 +2,9 @@
 @tree
 @Positive
 @Movements
-@MovementsUnbundling
+@MovementsCreditNote
 
-
-Feature: check Unbundling movements
+Feature: check Credit note movements
 
 
 
@@ -14,7 +13,7 @@ Background:
 
 
 
-Scenario: _042700 preparation (Unbundling)
+Scenario: _043100 preparation (Credit note)
 	When set True value to the constant
 	And I close TestClient session
 	Given I open new TestClient session or connect the existing one
@@ -51,6 +50,8 @@ Scenario: _042700 preparation (Unbundling)
 		When Create catalog Companies objects (second company Ferron BP)
 		When Create catalog PartnersBankAccounts objects
 		When update ItemKeys
+		When Create catalog SerialLotNumbers objects
+		When Create catalog CashAccounts objects
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
@@ -60,62 +61,70 @@ Scenario: _042700 preparation (Unbundling)
 		When Create information register Taxes records (VAT)
 	* Tax settings
 		When filling in Tax settings for company
-		When Create document Unbundling objects
+	When Create Document discount
+	* Add plugin for discount
+		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
+		If "List" table does not contain lines Then
+				| "Description" |
+				| "DocumentDiscount" |
+			When add Plugin for document discount
+			When Create catalog CancelReturnReasons objects
+	* Load documents
+		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
+		If "List" table does not contain lines Then
+			| 'Number'  |
+			| '115' |
+			When Create document PurchaseOrder objects (check movements, GR before PI, Use receipt sheduling)
+			And I execute 1C:Enterprise script at server
+				| "Documents.PurchaseOrder.FindByNumber(115).GetObject().Write(DocumentWriteMode.Posting);" |
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		If "List" table does not contain lines Then
+			| 'Number'  |
+			| '115' |
+			| '116' |
+			When Create document PurchaseInvoice objects (check movements)
+			And I execute 1C:Enterprise script at server
+				| "Documents.PurchaseInvoice.FindByNumber(115).GetObject().Write(DocumentWriteMode.Posting);" |
+				| "Documents.PurchaseInvoice.FindByNumber(116).GetObject().Write(DocumentWriteMode.Posting);" |
+		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
+		If "List" table does not contain lines Then
+			| 'Number'  |
+			| '115' |
+			| '116' |
+			When Create document GoodsReceipt objects (check movements)
+			And I execute 1C:Enterprise script at server
+				| "Documents.GoodsReceipt.FindByNumber(115).GetObject().Write(DocumentWriteMode.Posting);" |
+				| "Documents.GoodsReceipt.FindByNumber(116).GetObject().Write(DocumentWriteMode.Posting);" |
+		When Create document CreditNote objects (check movements)
 		And I execute 1C:Enterprise script at server
-			| "Documents.Unbundling.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |
+				| "Documents.CreditNote.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |
+				| "Documents.CreditNote.FindByNumber(2).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I close all client application windows
 
 	
-
-Scenario: _042701 check Unbundling movements by the Register  "R4010 Actual stocks"
-	* Select Unbundling
-		Given I open hyperlink "e1cib/list/Document.Unbundling"
+Scenario: _043101 check Credit note movements by the Register "R5010 Reconciliation statement"
+	* Select Credit note
+		Given I open hyperlink "e1cib/list/Document.CreditNote"
 		And I go to line in "List" table
 			| 'Number'  |
 			| '1' |
-	* Check movements by the Register  "R4010 Actual stocks"
+	* Check movements by the Register  "R5010 Reconciliation statement" 
 		And I click "Registrations report" button
-		And I select "R4010 Actual stocks" exact value from "Register" drop-down list
+		And I select "R5010 Reconciliation statement" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Unbundling 1 dated 07.09.2020 18:23:12' | ''            | ''                    | ''          | ''           | ''          |
-			| 'Document registrations records'         | ''            | ''                    | ''          | ''           | ''          |
-			| 'Register  "R4010 Actual stocks"'        | ''            | ''                    | ''          | ''           | ''          |
-			| ''                                       | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''          |
-			| ''                                       | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key'  |
-			| ''                                       | 'Receipt'     | '07.09.2020 18:23:12' | '2'         | 'Store 01'   | 'S/Yellow'  |
-			| ''                                       | 'Receipt'     | '07.09.2020 18:23:12' | '2'         | 'Store 01'   | 'XS/Blue'   |
-			| ''                                       | 'Receipt'     | '07.09.2020 18:23:12' | '4'         | 'Store 01'   | 'L/Green'   |
-			| ''                                       | 'Receipt'     | '07.09.2020 18:23:12' | '4'         | 'Store 01'   | 'M/Brown'   |
-			| ''                                       | 'Expense'     | '07.09.2020 18:23:12' | '2'         | 'Store 01'   | 'Dress/A-8' |	
+			| 'Credit note 1 dated 05.04.2021 09:30:47'    | ''            | ''                    | ''          | ''           | ''             | ''                  |
+			| 'Document registrations records'             | ''            | ''                    | ''          | ''           | ''             | ''                  |
+			| 'Register  "R5010 Reconciliation statement"' | ''            | ''                    | ''          | ''           | ''             | ''                  |
+			| ''                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''             | ''                  |
+			| ''                                           | ''            | ''                    | 'Amount'    | 'Currency'   | 'Company'      | 'Legal name'        |
+			| ''                                           | 'Expense'     | '05.04.2021 09:30:47' | '500'       | 'TRY'        | 'Main Company' | 'Company Ferron BP' |
 		And I close all client application windows
 
-Scenario: _042702 check Unbundling movements by the Register  "R4011 Free stocks"
-	* Select Unbundling
-		Given I open hyperlink "e1cib/list/Document.Unbundling"
-		And I go to line in "List" table
-			| 'Number'  |
-			| '1' |
-	* Check movements by the Register  "R4011 Free stocks"
-		And I click "Registrations report" button
-		And I select "R4011 Free stocks" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		Then "ResultTable" spreadsheet document is equal
-			| 'Unbundling 1 dated 07.09.2020 18:23:12' | ''            | ''                    | ''          | ''           | ''          |
-			| 'Document registrations records'         | ''            | ''                    | ''          | ''           | ''          |
-			| 'Register  "R4011 Free stocks"'          | ''            | ''                    | ''          | ''           | ''          |
-			| ''                                       | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''          |
-			| ''                                       | ''            | ''                    | 'Quantity'  | 'Store'      | 'Item key'  |
-			| ''                                       | 'Receipt'     | '07.09.2020 18:23:12' | '2'         | 'Store 01'   | 'S/Yellow'  |
-			| ''                                       | 'Receipt'     | '07.09.2020 18:23:12' | '2'         | 'Store 01'   | 'XS/Blue'   |
-			| ''                                       | 'Receipt'     | '07.09.2020 18:23:12' | '4'         | 'Store 01'   | 'L/Green'   |
-			| ''                                       | 'Receipt'     | '07.09.2020 18:23:12' | '4'         | 'Store 01'   | 'M/Brown'   |
-			| ''                                       | 'Expense'     | '07.09.2020 18:23:12' | '2'         | 'Store 01'   | 'Dress/A-8' |
-		And I close all client application windows
-			
-Scenario: _042730 Unbundling clear posting/mark for deletion
+Scenario: _043130 Credit note clear posting/mark for deletion
 	And I close all client application windows
-	* Select Unbundling
-		Given I open hyperlink "e1cib/list/Document.Unbundling"
+	* Select Credit note
+		Given I open hyperlink "e1cib/list/Document.CreditNote"
 		And I go to line in "List" table
 			| 'Number'  |
 			| '1' |
@@ -125,11 +134,11 @@ Scenario: _042730 Unbundling clear posting/mark for deletion
 		And I click "Registrations report" button
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Unbundling 1 dated 07.09.2020 18:23:12' |
+			| 'Credit note 1 dated 05.04.2021 09:30:47' |
 			| 'Document registrations records'                    |
 		And I close current window
-	* Post UnBundling
-		Given I open hyperlink "e1cib/list/Document.Unbundling"
+	* Post Credit note
+		Given I open hyperlink "e1cib/list/Document.CreditNote"
 		And I go to line in "List" table
 			| 'Number'  |
 			| '1' |
@@ -138,11 +147,10 @@ Scenario: _042730 Unbundling clear posting/mark for deletion
 		And I click "Registrations report" button
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document contains values
-			| 'R4011 Free stocks' |
-			| 'R4010 Actual stocks' |
+			| 'R5010 Reconciliation statement' |
 		And I close all client application windows
 	* Mark for deletion
-		Given I open hyperlink "e1cib/list/Document.Unbundling"
+		Given I open hyperlink "e1cib/list/Document.CreditNote"
 		And I go to line in "List" table
 			| 'Number'  |
 			| '1' |
@@ -153,11 +161,11 @@ Scenario: _042730 Unbundling clear posting/mark for deletion
 		And I click "Registrations report" button
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Unbundling 1 dated 07.09.2020 18:23:12' |
+			| 'Credit note 1 dated 05.04.2021 09:30:47' |
 			| 'Document registrations records'                    |
 		And I close current window
 	* Unmark for deletion and post document
-		Given I open hyperlink "e1cib/list/Document.Unbundling"
+		Given I open hyperlink "e1cib/list/Document.CreditNote"
 		And I go to line in "List" table
 			| 'Number'  |
 			| '1' |
@@ -170,6 +178,5 @@ Scenario: _042730 Unbundling clear posting/mark for deletion
 		And I click "Registrations report" button
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document contains values
-			| 'R4011 Free stocks' |
-			| 'R4010 Actual stocks' |
+			| 'R5010 Reconciliation statement' |
 		And I close all client application windows

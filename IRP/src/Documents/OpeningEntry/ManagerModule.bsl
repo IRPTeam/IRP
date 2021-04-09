@@ -3,7 +3,6 @@
 Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 	Tables = New Structure();
 	AccReg = Metadata.AccumulationRegisters;
-	Tables.Insert("AccountBalance"                  , PostingServer.CreateTable(AccReg.AccountBalance));
 	Tables.Insert("AdvanceFromCustomers"            , PostingServer.CreateTable(AccReg.AdvanceFromCustomers));
 	Tables.Insert("AdvanceToSuppliers"              , PostingServer.CreateTable(AccReg.AdvanceToSuppliers));
 	Tables.Insert("PartnerArTransactions"           , PostingServer.CreateTable(AccReg.PartnerArTransactions));
@@ -13,20 +12,6 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Query = New Query();
 	Query.Text =
 		"//[0]//////////////////////////////////////////////////////////////////////////////
-		|SELECT
-		|	OpeningEntryAccountBalance.Ref.Company,
-		|	OpeningEntryAccountBalance.Account,
-		|	OpeningEntryAccountBalance.Currency,
-		|	OpeningEntryAccountBalance.Amount AS Amount,
-		|	OpeningEntryAccountBalance.Ref.Date AS Period,
-		|	OpeningEntryAccountBalance.Key
-		|FROM
-		|	Document.OpeningEntry.AccountBalance AS OpeningEntryAccountBalance
-		|WHERE
-		|	OpeningEntryAccountBalance.Ref = &Ref
-		|;
-		|
-		|//[1]//////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	OpeningEntryAdvanceFromCustomers.Ref.Company,
 		|	OpeningEntryAdvanceFromCustomers.Partner,
@@ -42,7 +27,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	OpeningEntryAdvanceFromCustomers.Ref = &Ref
 		|;
 		|
-		|//[2]//////////////////////////////////////////////////////////////////////////////
+		|//[1]//////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	OpeningEntryAdvanceToSuppliers.Ref.Company,
 		|	OpeningEntryAdvanceToSuppliers.Partner,
@@ -58,7 +43,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	OpeningEntryAdvanceToSuppliers.Ref = &Ref
 		|;
 		|
-		|//[3]//////////////////////////////////////////////////////////////////////////////
+		|//[2]//////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	OpeningEntryAccountReceivableByDocuments.Key,
 		|	OpeningEntryAccountReceivableByDocuments.Ref.Date AS Period,
@@ -104,7 +89,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	OpeningEntryAccountReceivableByAgreements.Ref = &Ref
 		|;
 		|
-		|//[4]//////////////////////////////////////////////////////////////////////////////
+		|//[3]//////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	OpeningEntryAccountPayableByDocuments.Ref.Date AS Period,
 		|	OpeningEntryAccountPayableByDocuments.Key,
@@ -149,7 +134,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|WHERE
 		|	OpeningEntryAccountPayableByAgreements.Ref = &Ref
 		|;
-		|//[5]//////////////////////////////////////////////////////////////////////////
+		|//[4]//////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	OpeningEntryPaymentTerms.Ref.Date AS Period,
 		|	OpeningEntryAccountReceivableByDocuments.Ref.Company AS Company,
@@ -171,12 +156,11 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Query.SetParameter("Ref", Ref);
 	QueryResults = Query.ExecuteBatch();
 
-	Tables.AccountBalance                  = QueryResults[0].Unload();
-	Tables.AdvanceFromCustomers            = QueryResults[1].Unload();
-	Tables.AdvanceToSuppliers              = QueryResults[2].Unload();
-	Tables.PartnerArTransactions           = QueryResults[3].Unload();
-	Tables.PartnerApTransactions           = QueryResults[4].Unload();
-	Tables.Aging                           = QueryResults[5].Unload();
+	Tables.AdvanceFromCustomers            = QueryResults[0].Unload();
+	Tables.AdvanceToSuppliers              = QueryResults[1].Unload();
+	Tables.PartnerArTransactions           = QueryResults[2].Unload();
+	Tables.PartnerApTransactions           = QueryResults[3].Unload();
+	Tables.Aging                           = QueryResults[4].Unload();
 	
 #Region NewRegistersPosting		
 	QueryArray = GetQueryTextsSecondaryTables();
@@ -196,6 +180,7 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	Tables = Parameters.DocumentDataTables;	
 	QueryArray = GetQueryTextsMasterTables();
 	PostingServer.SetRegisters(Tables, Ref);
+	Tables.R3010B_CashOnHand.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
 #EndRegion
 EndProcedure
@@ -314,13 +299,7 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 		New Structure("RecordType, RecordSet",
 			AccumulationRecordType.Receipt,
 			Parameters.DocumentDataTables.AdvanceToSuppliers));
-	
-	// AccountBalance
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.AccountBalance,
-		New Structure("RecordType, RecordSet",
-			AccumulationRecordType.Receipt,
-			Parameters.DocumentDataTables.AccountBalance));
-		
+			
 	// PartnerArTransactions		
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords.PartnerArTransactions,
 		New Structure("RecordType, RecordSet",
@@ -403,6 +382,7 @@ EndFunction
 Function GetQueryTextsSecondaryTables()
 	QueryArray = New Array;
 	QueryArray.Add(ItemList());
+	QueryArray.Add(AccauntBalance());
 	QueryArray.Add(PostingServer.Exists_R4010B_ActualStocks());
 	QueryArray.Add(PostingServer.Exists_R4011B_FreeStocks());
 	Return QueryArray;
@@ -412,7 +392,9 @@ Function GetQueryTextsMasterTables()
 	QueryArray = New Array;
 	QueryArray.Add(R4010B_ActualStocks());
 	QueryArray.Add(R4011B_FreeStocks());
-	QueryArray.Add(R4014B_SerialLotNumber());	
+	QueryArray.Add(R4014B_SerialLotNumber());
+	QueryArray.Add(R3010B_CashOnHand());
+//	QueryArray.Add(R3015B_CashAdvance());	
 	Return QueryArray;
 EndFunction
 
@@ -435,6 +417,22 @@ Function ItemList()
 		|	OpeningEntryInventory.Ref = &Ref";
 EndFunction
 
+Function AccauntBalance()
+	Return
+		"SELECT
+		|	AccountBalance.Ref.Company,
+		|	AccountBalance.Account,
+		|	AccountBalance.Currency,
+		|	AccountBalance.Amount AS Amount,
+		|	AccountBalance.Ref.Date AS Period,
+		|	AccountBalance.Key
+		|INTO AccauntBalance
+		|FROM
+		|	Document.OpeningEntry.AccountBalance AS AccountBalance
+		|WHERE
+		|	AccountBalance.Ref = &Ref";
+EndFunction	
+	
 Function R4010B_ActualStocks()
 	Return
 		"SELECT 
@@ -472,6 +470,18 @@ Function R4014B_SerialLotNumber()
 		|WHERE 
 		|	QueryTable.isSerialLotNumberSet";
 
+EndFunction
+
+Function R3010B_CashOnHand()
+	Return
+		"SELECT 
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	*
+		|INTO R3010B_CashOnHand
+		|FROM
+		|	AccauntBalance AS AccauntBalance
+		|WHERE 
+		|	TRUE";
 EndFunction
 
 #EndRegion

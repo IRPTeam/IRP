@@ -146,73 +146,8 @@ Scenario: _085002 check movements of the document Cash revenue
 		| ''                               | '*'           | '100'       | 'Main Company'  | 'Accountants office' | 'Fuel'              | ''         | 'TRY'                          | ''                     | 'en description is empty'      | 'No'                   | ''         | ''                             | ''                     |
 		| ''                               | '*'           | '100'       | 'Main Company'  | 'Accountants office' | 'Fuel'              | ''         | 'TRY'                          | ''                     | 'Local currency'               | 'No'                   | ''         | ''                             | ''                     |
 		| ''                               | ''            | ''          | ''              | ''                   | ''                  | ''         | ''                             | ''                     | ''                             | ''                     | ''         | ''                             | ''                     |
-		| 'Register  "Account balance"'    | ''            | ''          | ''              | ''                   | ''                  | ''         | ''                             | ''                     | ''                             | ''                     | ''         | ''                             | ''                     |
-		| ''                               | 'Record type' | 'Period'    | 'Resources'     | 'Dimensions'         | ''                  | ''         | ''                             | 'Attributes'           | ''                             | ''                     | ''         | ''                             | ''                     |
-		| ''                               | ''            | ''          | 'Amount'        | 'Company'            | 'Account'           | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' | ''                             | ''                     | ''         | ''                             | ''                     |
-		| ''                               | 'Receipt'     | '*'         | '20,2'          | 'Main Company'       | 'Bank account, TRY' | 'USD'      | 'Reporting currency'           | 'No'                   | ''                             | ''                     | ''         | ''                             | ''                     |
-		| ''                               | 'Receipt'     | '*'         | '118'           | 'Main Company'       | 'Bank account, TRY' | 'TRY'      | 'en description is empty'      | 'No'                   | ''                             | ''                     | ''         | ''                             | ''                     |
-		| ''                               | 'Receipt'     | '*'         | '118'           | 'Main Company'       | 'Bank account, TRY' | 'TRY'      | 'Local currency'               | 'No'                   | ''                             | ''                     | ''         | ''                             | ''                     |
 		And I close all client application windows
-	* Clear movements and check that there is no movement on the registers
-		* Clear movements Cash revenue 1
-			Given I open hyperlink "e1cib/list/Document.CashRevenue"
-			And I go to line in "List" table
-				| 'Account'           | 'Company'      | 'Number' |
-				| 'Bank account, TRY' | 'Main Company' | '1'      |
-			And in the table "List" I click the button named "ListContextMenuUndoPosting"
-		* Check that there is no movement on the registers
-			Given I open hyperlink "e1cib/list/AccumulationRegister.TaxesTurnovers"
-			And "List" table does not contain lines
-			| 'Recorder'        |
-			| '$$CashRevenue1$$' |
-			Given I open hyperlink "e1cib/list/AccumulationRegister.RevenuesTurnovers"
-			And "List" table does not contain lines
-			| 'Recorder'        |
-			| '$$CashRevenue1$$' |
-			Given I open hyperlink "e1cib/list/AccumulationRegister.AccountBalance"
-			And "List" table does not contain lines
-			| 'Recorder'        |
-			| '$$CashRevenue1$$' |
-			And I close all client application windows
-	* Re-posting the document and checking movements on the registers
-		* Post document
-			Given I open hyperlink "e1cib/list/Document.CashRevenue"
-			And I go to line in "List" table
-				| 'Account'           | 'Company'      | 'Number' |
-				| 'Bank account, TRY' | 'Main Company' | '1'      |
-			And in the table "List" I click the button named "ListContextMenuPost"
-		* Check movements
-			And I click "Registrations report" button
-			And I select "Taxes turnovers" exact value from "Register" drop-down list
-			And I click "Generate report" button
-			And "ResultTable" spreadsheet document contains lines:
-			| '$$CashRevenue1$$'               | ''       | ''          | ''              | ''           | ''                 | ''    | ''          | ''         | ''                        | ''        | ''         | ''                             | ''                     |
-			| 'Document registrations records' | ''       | ''          | ''              | ''           | ''                 | ''    | ''          | ''         | ''                        | ''        | ''         | ''                             | ''                     |
-			| 'Register  "Taxes turnovers"'    | ''       | ''          | ''              | ''           | ''                 | ''    | ''          | ''         | ''                        | ''        | ''         | ''                             | ''                     |
-			| ''                               | 'Period' | 'Resources' | ''              | ''           | 'Dimensions'       | ''    | ''          | ''         | ''                        | ''        | ''         | ''                             | 'Attributes'           |
-			| ''                               | ''       | 'Amount'    | 'Manual amount' | 'Net amount' | 'Document'         | 'Tax' | 'Analytics' | 'Tax rate' | 'Include to total amount' | 'Row key' | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
-			| ''                               | '*'      | '3,08'      | '3,08'          | '17,12'      | '$$CashRevenue1$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'USD'      | 'Reporting currency'           | 'No'                   |
-			| ''                               | '*'      | '18'        | '18'            | '100'        | '$$CashRevenue1$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'en description is empty'      | 'No'                   |
-			| ''                               | '*'      | '18'        | '18'            | '100'        | '$$CashRevenue1$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'Local currency'               | 'No'                   |
-			And I select "Revenues turnovers" exact value from "Register" drop-down list
-			And I click "Generate report" button
-			And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Revenues turnovers"' | ''       | ''          | ''             | ''                   | ''             | ''         | ''         | ''                    | ''                             | ''                     | '' | '' | '' |
-			| ''                               | 'Period' | 'Resources' | 'Dimensions'   | ''                   | ''             | ''         | ''         | ''                    | ''                             | 'Attributes'           | '' | '' | '' |
-			| ''                               | ''       | 'Amount'    | 'Company'      | 'Business unit'      | 'Revenue type' | 'Item key' | 'Currency' | 'Additional analytic' | 'Multi currency movement type' | 'Deferred calculation' | '' | '' | '' |
-			| ''                               | '*'      | '17,12'     | 'Main Company' | 'Accountants office' | 'Fuel'         | ''         | 'USD'      | ''                    | 'Reporting currency'           | 'No'                   | '' | '' | '' |
-			| ''                               | '*'      | '100'       | 'Main Company' | 'Accountants office' | 'Fuel'         | ''         | 'TRY'      | ''                    | 'en description is empty'      | 'No'                   | '' | '' | '' |
-			| ''                               | '*'      | '100'       | 'Main Company' | 'Accountants office' | 'Fuel'         | ''         | 'TRY'      | ''                    | 'Local currency'               | 'No'                   | '' | '' | '' |
-			And I select "Account balance" exact value from "Register" drop-down list
-			And I click "Generate report" button
-			And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Account balance"'    | ''            | ''          | ''              | ''                   | ''                  | ''         | ''                             | ''                     | ''                             | ''                     | ''         | ''                             | ''                     |
-			| ''                               | 'Record type' | 'Period'    | 'Resources'     | 'Dimensions'         | ''                  | ''         | ''                             | 'Attributes'           | ''                             | ''                     | ''         | ''                             | ''                     |
-			| ''                               | ''            | ''          | 'Amount'        | 'Company'            | 'Account'           | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' | ''                             | ''                     | ''         | ''                             | ''                     |
-			| ''                               | 'Receipt'     | '*'         | '20,2'         | 'Main Company'       | 'Bank account, TRY' | 'USD'      | 'Reporting currency'           | 'No'                   | ''                             | ''                     | ''         | ''                             | ''                     |
-			| ''                               | 'Receipt'     | '*'         | '118'           | 'Main Company'       | 'Bank account, TRY' | 'TRY'      | 'en description is empty'      | 'No'                   | ''                             | ''                     | ''         | ''                             | ''                     |
-			| ''                               | 'Receipt'     | '*'         | '118'           | 'Main Company'       | 'Bank account, TRY' | 'TRY'      | 'Local currency'               | 'No'                   | ''                             | ''                     | ''         | ''                             | ''                     |
-			And I close all client application windows
+	
 
 
 
@@ -361,76 +296,8 @@ Scenario: _085006 check movements of the document Cash expense
 		| ''                            | '*'      | '3,08'      | '3,08'          | '17,12'      | '$$CashExpense1$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'USD'      | 'Reporting currency'           | 'No'                   |
 		| ''                            | '*'      | '18'        | '18'            | '100'        | '$$CashExpense1$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'en description is empty'      | 'No'                   |
 		| ''                            | '*'      | '18'        | '18'            | '100'        | '$$CashExpense1$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'Local currency'               | 'No'                   |
-		And I select "Account balance" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Account balance"' | ''            | ''       | ''          | ''             | ''                  | ''         | ''                             | ''                     | '' | '' | '' | '' | '' |
-		| ''                            | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                  | ''         | ''                             | 'Attributes'           | '' | '' | '' | '' | '' |
-		| ''                            | ''            | ''       | 'Amount'    | 'Company'      | 'Account'           | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' | '' | '' | '' | '' | '' |
-		| ''                            | 'Expense'     | '*'      | '20,2'      | 'Main Company' | 'Bank account, TRY' | 'USD'      | 'Reporting currency'           | 'No'                   | '' | '' | '' | '' | '' |
-		| ''                            | 'Expense'     | '*'      | '118'       | 'Main Company' | 'Bank account, TRY' | 'TRY'      | 'en description is empty'      | 'No'                   | '' | '' | '' | '' | '' |
-		| ''                            | 'Expense'     | '*'      | '118'       | 'Main Company' | 'Bank account, TRY' | 'TRY'      | 'Local currency'               | 'No'                   | '' | '' | '' | '' | '' |
 		And I close all client application windows
-	* Clear movements and check that there is no movement on the registers
-		* Clear movements Cash expense 1
-			Given I open hyperlink "e1cib/list/Document.CashExpense"
-			And I go to line in "List" table
-				| 'Account'           | 'Company'      | 'Number' |
-				| 'Bank account, TRY' | 'Main Company' | '1'      |
-			And in the table "List" I click the button named "ListContextMenuUndoPosting"
-		* Check that there is no movement on the registers
-			Given I open hyperlink "e1cib/list/AccumulationRegister.TaxesTurnovers"
-			And "List" table does not contain lines
-				| 'Recorder'        |
-				| '$$CashExpense1$$' |
-			Given I open hyperlink "e1cib/list/AccumulationRegister.RevenuesTurnovers"
-			And "List" table does not contain lines
-				| 'Recorder'        |
-				| '$$CashExpense1$$' |
-			Given I open hyperlink "e1cib/list/AccumulationRegister.AccountBalance"
-			And "List" table does not contain lines
-				| 'Recorder'        |
-				| '$$CashExpense1$$' |
-			And I close all client application windows
-	* Posting the document back and check movements
-		* Post document
-			Given I open hyperlink "e1cib/list/Document.CashExpense"
-			And I go to line in "List" table
-				| 'Account'           | 'Company'      | 'Number' |
-				| 'Bank account, TRY' | 'Main Company' | '1'      |
-			And in the table "List" I click the button named "ListContextMenuPost"
-		* Check movements
-			And I click "Registrations report" button
-			And I select "Expenses turnovers" exact value from "Register" drop-down list
-			And I click "Generate report" button
-			And "ResultTable" spreadsheet document contains lines:
-			| '$$CashExpense1$$'               | ''       | ''          | ''             | ''                   | ''             | ''         | ''         | ''                    | ''                             | ''                     | '' | '' | '' |
-			| 'Document registrations records' | ''       | ''          | ''             | ''                   | ''             | ''         | ''         | ''                    | ''                             | ''                     | '' | '' | '' |
-			| 'Register  "Expenses turnovers"' | ''       | ''          | ''             | ''                   | ''             | ''         | ''         | ''                    | ''                             | ''                     | '' | '' | '' |
-			| ''                               | 'Period' | 'Resources' | 'Dimensions'   | ''                   | ''             | ''         | ''         | ''                    | ''                             | 'Attributes'           | '' | '' | '' |
-			| ''                               | ''       | 'Amount'    | 'Company'      | 'Business unit'      | 'Expense type' | 'Item key' | 'Currency' | 'Additional analytic' | 'Multi currency movement type' | 'Deferred calculation' | '' | '' | '' |
-			| ''                               | '*'      | '17,12'     | 'Main Company' | 'Accountants office' | 'Fuel'         | ''         | 'USD'      | ''                    | 'Reporting currency'           | 'No'                   | '' | '' | '' |
-			| ''                               | '*'      | '100'       | 'Main Company' | 'Accountants office' | 'Fuel'         | ''         | 'TRY'      | ''                    | 'en description is empty'      | 'No'                   | '' | '' | '' |
-			| ''                               | '*'      | '100'       | 'Main Company' | 'Accountants office' | 'Fuel'         | ''         | 'TRY'      | ''                    | 'Local currency'               | 'No'                   | '' | '' | '' |
-			And I select "Taxes turnovers" exact value from "Register" drop-down list
-			And I click "Generate report" button
-			And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Taxes turnovers"' | ''       | ''          | ''              | ''           | ''                 | ''    | ''          | ''         | ''                        | ''        | ''         | ''                             | ''                     |
-			| ''                            | 'Period' | 'Resources' | ''              | ''           | 'Dimensions'       | ''    | ''          | ''         | ''                        | ''        | ''         | ''                             | 'Attributes'           |
-			| ''                            | ''       | 'Amount'    | 'Manual amount' | 'Net amount' | 'Document'         | 'Tax' | 'Analytics' | 'Tax rate' | 'Include to total amount' | 'Row key' | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
-			| ''                            | '*'      | '3,08'      | '3,08'          | '17,12'      | '$$CashExpense1$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'USD'      | 'Reporting currency'           | 'No'                   |
-			| ''                            | '*'      | '18'        | '18'            | '100'        | '$$CashExpense1$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'en description is empty'      | 'No'                   |
-			| ''                            | '*'      | '18'        | '18'            | '100'        | '$$CashExpense1$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'Local currency'               | 'No'                   |
-			And I select "Account balance" exact value from "Register" drop-down list
-			And I click "Generate report" button
-			And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Account balance"' | ''            | ''       | ''          | ''             | ''                  | ''         | ''                             | ''                     | '' | '' | '' | '' | '' |
-			| ''                            | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                  | ''         | ''                             | 'Attributes'           | '' | '' | '' | '' | '' |
-			| ''                            | ''            | ''       | 'Amount'    | 'Company'      | 'Account'           | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' | '' | '' | '' | '' | '' |
-			| ''                            | 'Expense'     | '*'      | '20,2'      | 'Main Company' | 'Bank account, TRY' | 'USD'      | 'Reporting currency'           | 'No'                   | '' | '' | '' | '' | '' |
-			| ''                            | 'Expense'     | '*'      | '118'       | 'Main Company' | 'Bank account, TRY' | 'TRY'      | 'en description is empty'      | 'No'                   | '' | '' | '' | '' | '' |
-			| ''                            | 'Expense'     | '*'      | '118'       | 'Main Company' | 'Bank account, TRY' | 'TRY'      | 'Local currency'               | 'No'                   | '' | '' | '' | '' | '' |
-			And I close all client application windows
+	
 
 
 

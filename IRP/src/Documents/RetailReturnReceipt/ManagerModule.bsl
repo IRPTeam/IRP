@@ -5,7 +5,6 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Tables = New Structure();
 	Tables.Insert("SalesTurnovers"       , PostingServer.CreateTable(AccReg.SalesTurnovers));
 	Tables.Insert("SalesReturnTurnovers" , PostingServer.CreateTable(AccReg.SalesReturnTurnovers));
-	Tables.Insert("AccountBalance"       , PostingServer.CreateTable(AccReg.AccountBalance));
 	Tables.Insert("RetailSales"          , PostingServer.CreateTable(AccReg.RetailSales));
 	Tables.Insert("RetailCash"           , PostingServer.CreateTable(AccReg.RetailCash));
 	
@@ -19,14 +18,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	QueryResults = Query.ExecuteBatch();
 	
 	Tables.Insert("SalesReturnTurnovers", QueryResults[1].Unload());
-	
-	QueryPaymentList = New Query();
-	QueryPaymentList.Text = GetQueryTextRetailReturnReceiptPaymentList();
-	QueryPaymentList.SetParameter("Ref", Ref);
-	QueryResultPaymentList = QueryPaymentList.Execute();
-	QueryTablePaymentList = QueryResultPaymentList.Unload();
-	Tables.Insert("AccountBalance", QueryTablePaymentList);
-	
+		
 	QuerySalesTurnovers = New Query();
 	QuerySalesTurnovers.Text = GetQueryTextRetailReturnReceiptSalesTurnovers();
 	QuerySalesTurnovers.SetParameter("Ref", Ref);
@@ -358,24 +350,6 @@ Function GetQueryTextRetailReturnReceiptSalesTurnovers()
 	|	tmp AS tmp";
 EndFunction	
 
-Function GetQueryTextRetailReturnReceiptPaymentList()
-	Return "SELECT
-	|	RetailReturnReceiptPayments.Ref.Company,
-	|	RetailReturnReceiptPayments.Ref.Currency,
-	|	RetailReturnReceiptPayments.Account,
-	|	SUM(RetailReturnReceiptPayments.Amount) AS Amount,
-	|	RetailReturnReceiptPayments.Ref.Date AS Period
-	|FROM
-	|	Document.RetailReturnReceipt.Payments AS RetailReturnReceiptPayments
-	|WHERE
-	|	RetailReturnReceiptPayments.Ref = &Ref
-	|GROUP BY
-	|	RetailReturnReceiptPayments.Ref.Company,
-	|	RetailReturnReceiptPayments.Ref.Currency,
-	|	RetailReturnReceiptPayments.Account,
-	|	RetailReturnReceiptPayments.Ref.Date";
-EndFunction	
-
 Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 	DataMapWithLockFields = New Map();
 	Return DataMapWithLockFields;
@@ -407,11 +381,6 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 			Parameters.DocumentDataTables.SalesReturnTurnovers,
 			Parameters.IsReposting));
 		
-	// AccountBalance
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.AccountBalance,
-		New Structure("RecordType, RecordSet",
-			AccumulationRecordType.Expense,
-			Parameters.DocumentDataTables.AccountBalance));
 			
 	// RetailSales
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords.RetailSales,
@@ -485,6 +454,7 @@ EndFunction
 Function GetQueryTextsSecondaryTables()
 	QueryArray = New Array;
 	QueryArray.Add(ItemList());
+	QueryArray.Add(Payments());
 	QueryArray.Add(PostingServer.Exists_R4011B_FreeStocks());
 	QueryArray.Add(PostingServer.Exists_R4010B_ActualStocks());	
 	Return QueryArray;
@@ -494,6 +464,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray = New Array;
 	QueryArray.Add(R4011B_FreeStocks());
 	QueryArray.Add(R4010B_ActualStocks());
+	QueryArray.Add(R3010B_CashOnHand());
 	Return QueryArray;
 EndFunction
 
@@ -528,6 +499,33 @@ Function ItemList()
 	|	Document.RetailReturnReceipt.ItemList AS ItemList
 	|WHERE
 	|	ItemList.Ref = &Ref";
+EndFunction
+
+Function Payments()
+	Return
+	"SELECT
+	|	Payments.Ref.Date AS Period,
+	|	Payments.Ref.Company AS Company,
+	|	Payments.Account AS Account,
+	|	Payments.Ref.Currency AS Currency,
+	|	Payments.Amount AS Amount
+	|INTO Payments
+	|FROM
+	|	Document.RetailReturnReceipt.Payments AS Payments
+	|WHERE
+	|	Payments.Ref = &Ref";
+EndFunction
+
+Function R3010B_CashOnHand()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	*
+		|INTO R3010B_CashOnHand
+		|FROM
+		|	Payments AS Payments
+		|WHERE
+		|	TRUE";
 EndFunction
 
 Function R4011B_FreeStocks()

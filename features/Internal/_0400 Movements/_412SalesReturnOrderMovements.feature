@@ -167,7 +167,7 @@ Scenario: _041201 check Sales return order movements by the Register  "R2012 Inv
 	And I close all client application windows
 
 
-Scenario: _041220 Sales return order clear posting
+Scenario: _041220 Sales return order clear posting/mark for deletion
 	* Select Sales return order
 		Given I open hyperlink "e1cib/list/Document.SalesReturnOrder"
 		And I go to line in "List" table
@@ -188,6 +188,38 @@ Scenario: _041220 Sales return order clear posting
 			| 'Number'  |
 			| '102' |
 		And in the table "List" I click the button named "ListContextMenuPost"		
+		Then user message window does not contain messages
+		And I click "Registrations report" button
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document contains values
+			| 'R2012 Invoice closing of sales orders' |
+			| 'R2010 Sales orders' |
+		And I close all client application windows
+	* Mark for deletion
+		Given I open hyperlink "e1cib/list/Document.SalesReturnOrder"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '102' |
+		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		Then user message window does not contain messages
+		And I click "Registrations report" button
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Sales return order 102 dated 12.03.2021 09:19:54' |
+			| 'Document registrations records'                    |
+		And I close current window
+	* Unmark for deletion and post document
+		Given I open hyperlink "e1cib/list/Document.SalesReturnOrder"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '102' |
+		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button				
+		Then user message window does not contain messages
+		And in the table "List" I click the button named "ListContextMenuPost"	
 		Then user message window does not contain messages
 		And I click "Registrations report" button
 		And I click "Generate report" button

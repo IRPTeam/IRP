@@ -424,7 +424,8 @@ Function AccauntBalance()
 		|	AccountBalance.Account,
 		|	AccountBalance.Currency,
 		|	AccountBalance.Amount AS Amount,
-		|	AccountBalance.Ref.Date AS Period
+		|	AccountBalance.Ref.Date AS Period,
+		|	AccountBalance.Key
 		|INTO AccauntBalance
 		|FROM
 		|	Document.OpeningEntry.AccountBalance AS AccountBalance

@@ -82,22 +82,22 @@ EndFunction
 Function JoinDocumentsStructure(ArrayOfTables)
 	
 	ValueTable = New ValueTable();
-	ValueTable.Columns.Add("BasedOn", New TypeDescription("String"));
-	ValueTable.Columns.Add("Company", New TypeDescription("CatalogRef.Companies"));
-	ValueTable.Columns.Add("Account", New TypeDescription("CatalogRef.CashAccounts"));
-	ValueTable.Columns.Add("Currency", New TypeDescription("CatalogRef.Currencies"));
-	ValueTable.Columns.Add("CurrencyExchange", New TypeDescription("CatalogRef.Currencies"));
-	ValueTable.Columns.Add("TransactionType", New TypeDescription("EnumRef.IncomingPaymentTransactionType"));
+	ValueTable.Columns.Add("BasedOn"          , New TypeDescription("String"));
+	ValueTable.Columns.Add("Company"          , New TypeDescription("CatalogRef.Companies"));
+	ValueTable.Columns.Add("Account"          , New TypeDescription("CatalogRef.CashAccounts"));
+	ValueTable.Columns.Add("Currency"         , New TypeDescription("CatalogRef.Currencies"));
+	ValueTable.Columns.Add("CurrencyExchange" , New TypeDescription("CatalogRef.Currencies"));
+	ValueTable.Columns.Add("TransactionType"  , New TypeDescription("EnumRef.IncomingPaymentTransactionType"));
 	
-	ValueTable.Columns.Add("BasisDocument", New TypeDescription(Metadata.DefinedTypes.typeArTransactionBasises.Type));
-	ValueTable.Columns.Add("Agreement", New TypeDescription("CatalogRef.Agreements"));
-	ValueTable.Columns.Add("Partner", New TypeDescription("CatalogRef.Partners"));
-	ValueTable.Columns.Add("Amount", New TypeDescription(Metadata.DefinedTypes.typeAmount.Type));
-	ValueTable.Columns.Add("Payer", New TypeDescription("CatalogRef.Companies"));
+	ValueTable.Columns.Add("BasisDocument"    , New TypeDescription(Metadata.DefinedTypes.typeArTransactionBasises.Type));
+	ValueTable.Columns.Add("Agreement"        , New TypeDescription("CatalogRef.Agreements"));
+	ValueTable.Columns.Add("Partner"          , New TypeDescription("CatalogRef.Partners"));
+	ValueTable.Columns.Add("Amount"           , New TypeDescription(Metadata.DefinedTypes.typeAmount.Type));
+	ValueTable.Columns.Add("Payer"            , New TypeDescription("CatalogRef.Companies"));
 	ValueTable.Columns.Add("PlaningTransactionBasis"
 		, New TypeDescription(Metadata.DefinedTypes.typePlaningTransactionBasises.Type));
-	ValueTable.Columns.Add("TransitAccount", New TypeDescription("CatalogRef.CashAccounts"));
-	ValueTable.Columns.Add("AmountExchange", New TypeDescription(Metadata.DefinedTypes.typeAmount.Type));
+	ValueTable.Columns.Add("TransitAccount"   , New TypeDescription("CatalogRef.CashAccounts"));
+	ValueTable.Columns.Add("AmountExchange"   , New TypeDescription(Metadata.DefinedTypes.typeAmount.Type));
 	
 	For Each Table In ArrayOfTables Do
 		For Each Row In Table Do
@@ -113,33 +113,33 @@ Function JoinDocumentsStructure(ArrayOfTables)
 	For Each Row In ValueTableCopy Do
 		Result = New Structure();
 		Result.Insert("BasedOn", Row.BasedOn);
-		Result.Insert("TransactionType", Row.TransactionType);
-		Result.Insert("Company", Row.Company);
-		Result.Insert("Account", Row.Account);
-		Result.Insert("TransitAccount", Row.TransitAccount);
-		Result.Insert("Currency", Row.Currency);
-		Result.Insert("CurrencyExchange", Row.CurrencyExchange);
-		Result.Insert("PaymentList", New Array());
+		Result.Insert("TransactionType"  , Row.TransactionType);
+		Result.Insert("Company"          , Row.Company);
+		Result.Insert("Account"          , Row.Account);
+		Result.Insert("TransitAccount"   , Row.TransitAccount);
+		Result.Insert("Currency"         , Row.Currency);
+		Result.Insert("CurrencyExchange" , Row.CurrencyExchange);
+		Result.Insert("PaymentList"      , New Array());
 		
 		Filter = New Structure();
-		Filter.Insert("BasedOn", Row.BasedOn);
-		Filter.Insert("TransactionType", Row.TransactionType);
-		Filter.Insert("Company", Row.Company);
-		Filter.Insert("Account", Row.Account);
-		Filter.Insert("TransitAccount", Row.TransitAccount);
-		Filter.Insert("Currency", Row.Currency);
-		Filter.Insert("CurrencyExchange", Row.CurrencyExchange);
+		Filter.Insert("BasedOn"          , Row.BasedOn);
+		Filter.Insert("TransactionType"  , Row.TransactionType);
+		Filter.Insert("Company"          , Row.Company);
+		Filter.Insert("Account"          , Row.Account);
+		Filter.Insert("TransitAccount"   , Row.TransitAccount);
+		Filter.Insert("Currency"         , Row.Currency);
+		Filter.Insert("CurrencyExchange" , Row.CurrencyExchange);
 		
 		PaymentList = ValueTable.Copy(Filter);
 		For Each RowPaymentList In PaymentList Do
 			NewRow = New Structure();
-			NewRow.Insert("BasisDocument", RowPaymentList.BasisDocument);
-			NewRow.Insert("Agreement", RowPaymentList.Agreement);
-			NewRow.Insert("Partner", RowPaymentList.Partner);
-			NewRow.Insert("Payer", RowPaymentList.Payer);
-			NewRow.Insert("Amount", RowPaymentList.Amount);
-			NewRow.Insert("AmountExchange", RowPaymentList.AmountExchange);
-			NewRow.Insert("PlaningTransactionBasis", RowPaymentList.PlaningTransactionBasis);
+			NewRow.Insert("BasisDocument"           , RowPaymentList.BasisDocument);
+			NewRow.Insert("Agreement"               , RowPaymentList.Agreement);
+			NewRow.Insert("Partner"                 , RowPaymentList.Partner);
+			NewRow.Insert("Payer"                   , RowPaymentList.Payer);
+			NewRow.Insert("Amount"                  , RowPaymentList.Amount);
+			NewRow.Insert("AmountExchange"          , RowPaymentList.AmountExchange);
+			NewRow.Insert("PlaningTransactionBasis" , RowPaymentList.PlaningTransactionBasis);
 			
 			Result.PaymentList.Add(NewRow);
 		EndDo;

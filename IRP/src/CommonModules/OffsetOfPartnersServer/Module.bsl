@@ -12,6 +12,7 @@
 //	*TransactionDocument
 //	*Agreement
 //	*DocumentAmount
+//	*IgnoreAdvances
 //
 // Aging
 //  *Period
@@ -46,7 +47,7 @@
 //  *Agreement
 //  *Amount
 Procedure Customers_OnTransaction(Parameters) Export	
-	AdvancesOnTransaction(Parameters, "R2020B_AdvancesFromCustomers" , "CustomersTransactions");
+	AdvancesOnTransaction(Parameters, "R2020B_AdvancesFromCustomers" , "CustomersTransactions", "OffsetOfAdvanceFromCustomers");
 
 #Region Aging
 	
@@ -63,17 +64,17 @@ Procedure Customers_OnTransaction(Parameters) Export
 	|	Aging.PaymentDate,
 	|	Aging.Currency,
 	|	Aging.Amount AS DueAmount,
-	|	OffsetOfAdvance.Amount AS Amount_OffsetOfAdvance,
-	|	OffsetOfAdvance.AdvancesDocument,
+	|	OffsetOfAdvanceFromCustomers.Amount AS Amount_OffsetOfAdvance,
+	|	OffsetOfAdvanceFromCustomers.AdvancesDocument,
 	|	0 AS Amount
 	|FROM
 	|	Aging AS Aging
-	|		INNER JOIN OffsetOfAdvance AS OffsetOfAdvance
-	|		ON Aging.Company = OffsetOfAdvance.Company
-	|		AND Aging.Partner = OffsetOfAdvance.Partner
-	|		AND Aging.Agreement = OffsetOfAdvance.Agreement
-	|		AND Aging.Invoice = OffsetOfAdvance.TransactionDocument
-	|		AND Aging.Currency = OffsetOfAdvance.Currency
+	|		INNER JOIN OffsetOfAdvanceFromCustomers AS OffsetOfAdvanceFromCustomers
+	|		ON Aging.Company = OffsetOfAdvanceFromCustomers.Company
+	|		AND Aging.Partner = OffsetOfAdvanceFromCustomers.Partner
+	|		AND Aging.Agreement = OffsetOfAdvanceFromCustomers.Agreement
+	|		AND Aging.Invoice = OffsetOfAdvanceFromCustomers.TransactionDocument
+	|		AND Aging.Currency = OffsetOfAdvanceFromCustomers.Currency
 	|ORDER BY
 	|	PaymentDate";
 	
@@ -182,7 +183,7 @@ EndProcedure
 //  *Agreement
 //  *Amount
 Procedure Vendors_OnTransaction(Parameters) Export
-	AdvancesOnTransaction(Parameters, "R1020B_AdvancesToVendors", "VendorsTransactions");
+	AdvancesOnTransaction(Parameters, "R1020B_AdvancesToVendors", "VendorsTransactions", "OffsetOfAdvanceToVendors");
 EndProcedure
 
 Procedure Vendors_OnTransaction_Unposting(Parameters) Export
@@ -207,7 +208,7 @@ Procedure Vendors_OnTransaction_Unposting(Parameters) Export
 	Query.Execute();	
 EndProcedure	
 
-Procedure AdvancesOnTransaction(Parameters, RegisterName, TransactionsTableName)
+Procedure AdvancesOnTransaction(Parameters, RegisterName, TransactionsTableName, OffsetOfAdvanceTableName)
 	Query = New Query();
 	Query.TempTablesManager = Parameters.TempTablesManager;
 	Query.Text = StrTemplate(GetQueryTextAdvancesOnTransaction(), RegisterName, TransactionsTableName);
@@ -215,7 +216,7 @@ Procedure AdvancesOnTransaction(Parameters, RegisterName, TransactionsTableName)
 	QueryResult = Query.Execute();	
 	AdvancesTable = QueryResult.Unload();
 	OffsetOfAdvance = DistributeAdvancesTableOnTransaction(AdvancesTable);
-	PutAdvancesTableToTempTables(Query, OffsetOfAdvance);
+	PutAdvancesTableToTempTables(Query, OffsetOfAdvance, OffsetOfAdvanceTableName);
 EndProcedure
 
 Function GetQueryTextAdvancesOnTransaction()
@@ -250,6 +251,8 @@ Function GetQueryTextAdvancesOnTransaction()
 		|		AND Advances.LegalName = Transactions.LegalName
 		|		AND Advances.Currency = Transactions.Currency
 		|		AND Advances.CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
+		|WHERE
+		|	NOT Transactions.IgnoreAdvances
 		|GROUP BY
 		|	Transactions.Period,
 		|	Transactions.Company,
@@ -320,6 +323,7 @@ EndFunction
 //  *DocumentAmount
 //  *ReceiptDocument
 //  *Key
+//  *IgnoreAdvances
 //	
 // CustomersTransactions
 //  *Period
@@ -356,7 +360,7 @@ EndFunction
 //  *Amount
 Procedure Customers_OnMoneyMovements(Parameters) Export
 		
-AdvancesOnMoneyMovements(Parameters, "R2021B_CustomersTransactions", "AdvancesFromCustomers", "CustomersTransactions");
+AdvancesOnMoneyMovements(Parameters, "R2021B_CustomersTransactions", "AdvancesFromCustomers", "CustomersTransactions", "OffsetOfAdvanceFromCustomers");
 		
 #Region Aging
 
@@ -365,14 +369,14 @@ AdvancesOnMoneyMovements(Parameters, "R2021B_CustomersTransactions", "AdvancesFr
 
 	Query.Text = 
 	"SELECT
-	|	OffsetOfAdvance.Company,
-	|	OffsetOfAdvance.Partner,
-	|	OffsetOfAdvance.Agreement,
-	|	OffsetOfAdvance.TransactionDocument AS Invoice,
-	|	OffsetOfAdvance.Currency
+	|	OffsetOfAdvanceFromCustomers.Company,
+	|	OffsetOfAdvanceFromCustomers.Partner,
+	|	OffsetOfAdvanceFromCustomers.Agreement,
+	|	OffsetOfAdvanceFromCustomers.TransactionDocument AS Invoice,
+	|	OffsetOfAdvanceFromCustomers.Currency
 	|INTO R5011B_PartnersAging_OffsetOfAging_Lock
 	|FROM
-	|	OffsetOfAdvance AS OffsetOfAdvance
+	|	OffsetOfAdvanceFromCustomers AS OffsetOfAdvanceFromCustomers
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
@@ -392,16 +396,16 @@ AdvancesOnMoneyMovements(Parameters, "R2021B_CustomersTransactions", "AdvancesFr
 	|UNION ALL
 	|
 	|SELECT
-	|	OffsetOfAdvance.Period,
-	|	OffsetOfAdvance.Company,
-	|	OffsetOfAdvance.TransactionDocument,
-	|	OffsetOfAdvance.Partner,
-	|	OffsetOfAdvance.LegalName,
-	|	OffsetOfAdvance.Agreement,
-	|	OffsetOfAdvance.Currency,
-	|	OffsetOfAdvance.Amount
+	|	OffsetOfAdvanceFromCustomers.Period,
+	|	OffsetOfAdvanceFromCustomers.Company,
+	|	OffsetOfAdvanceFromCustomers.TransactionDocument,
+	|	OffsetOfAdvanceFromCustomers.Partner,
+	|	OffsetOfAdvanceFromCustomers.LegalName,
+	|	OffsetOfAdvanceFromCustomers.Agreement,
+	|	OffsetOfAdvanceFromCustomers.Currency,
+	|	OffsetOfAdvanceFromCustomers.Amount
 	|FROM
-	|	OffsetOfAdvance AS OffsetOfAdvance
+	|	OffsetOfAdvanceFromCustomers AS OffsetOfAdvanceFromCustomers
 	|;
 	|
 	|
@@ -563,10 +567,10 @@ EndProcedure
 //  *Agreement
 //  *Amount
 Procedure Vendors_OnMoneyMovements(Parameters) Export
-	AdvancesOnMoneyMovements(Parameters, "R1021B_VendorsTransactions", "AdvancesToVendors", "VendorsTransactions");
+	AdvancesOnMoneyMovements(Parameters, "R1021B_VendorsTransactions", "AdvancesToVendors", "VendorsTransactions", "OffsetOfAdvanceToVendors");
 EndProcedure
 
-Procedure AdvancesOnMoneyMovements(Parameters, RegisterName, AdvancesTableName, TransactionsTableName)
+Procedure AdvancesOnMoneyMovements(Parameters, RegisterName, AdvancesTableName, TransactionsTableName, OffsetOfAdvanceTableName)
 	Query = New Query();
 	Query.TempTablesManager = Parameters.TempTablesManager;
 	Query.Text = StrTemplate(GetQueryTextAdvancesOnMoneyMovements(), RegisterName, AdvancesTableName);
@@ -710,7 +714,7 @@ Procedure AdvancesOnMoneyMovements(Parameters, RegisterName, AdvancesTableName, 
 	EndDo;
 	
 	OffsetOfAdvance = DistributeAgingTableOnMoneyMovement(AgingBalanceTable);
-	PutAdvancesTableToTempTables(Query, OffsetOfAdvance);	
+	PutAdvancesTableToTempTables(Query, OffsetOfAdvance, OffsetOfAdvanceTableName);	
 EndProcedure	
 
 Function GetQueryTextAdvancesOnMoneyMovements()
@@ -745,6 +749,8 @@ Function GetQueryTextAdvancesOnMoneyMovements()
 	|		AND Advances.Partner = Transactions.Partner
 	|		AND Advances.LegalName = Transactions.LegalName
 	|		AND Advances.Currency = Transactions.Currency
+	|WHERE
+	|	NOT Advances.IgnoreAdvances
 	|GROUP BY
 	|	Advances.Period,
 	|	Advances.Company,
@@ -807,7 +813,7 @@ Function DistributeAgingTableOnMoneyMovement(AgingBalanceTable)
 	Return OffsetOfAdvance;
 EndFunction
 
-Procedure PutAdvancesTableToTempTables(Query, OffsetOfAdvance)
+Procedure PutAdvancesTableToTempTables(Query, OffsetOfAdvance, OffsetOfAdvanceTableName)
 	Query.Text = 
 	"SELECT
 	|	OffsetOfAdvance.Period,
@@ -820,9 +826,10 @@ Procedure PutAdvancesTableToTempTables(Query, OffsetOfAdvance)
 	|	OffsetOfAdvance.Agreement,
 	|	OffsetOfAdvance.Amount AS Amount,
 	|	OffsetOfAdvance.Key
-	|INTO OffsetOfAdvance
+	|INTO %1
 	|FROM
 	|	&OffsetOfAdvance AS OffsetOfAdvance";
+	Query.Text = StrTemplate(Query.Text, OffsetOfAdvanceTableName);
 	Query.SetParameter("OffsetOfAdvance", OffsetOfAdvance);
 	Query.Execute();
 EndProcedure	

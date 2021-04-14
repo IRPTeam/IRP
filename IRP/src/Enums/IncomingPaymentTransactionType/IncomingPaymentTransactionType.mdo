@@ -40,4 +40,11 @@
       <value>Transfer from POS</value>
     </synonym>
   </enumValues>
+  <enumValues uuid="1a1d3e1d-0f45-414d-81c8-1eefbe5a5c97">
+    <name>ReturnFromVendor</name>
+    <synonym>
+      <key>en</key>
+      <value>Return from vendor</value>
+    </synonym>
+  </enumValues>
 </mdclass:Enum>

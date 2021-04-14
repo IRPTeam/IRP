@@ -3,17 +3,17 @@
 Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 	AccReg = Metadata.AccumulationRegisters;
 	Tables = New Structure();
-	Tables.Insert("PartnerArTransactions"                 , PostingServer.CreateTable(AccReg.PartnerArTransactions));
+//	Tables.Insert("PartnerArTransactions"                 , PostingServer.CreateTable(AccReg.PartnerArTransactions));
 	Tables.Insert("PlaningCashTransactions"               , PostingServer.CreateTable(AccReg.PlaningCashTransactions));
 	Tables.Insert("CashInTransit"                         , PostingServer.CreateTable(AccReg.CashInTransit));
-	Tables.Insert("AdvanceFromCustomers"                  , PostingServer.CreateTable(AccReg.AdvanceFromCustomers));
+//	Tables.Insert("AdvanceFromCustomers"                  , PostingServer.CreateTable(AccReg.AdvanceFromCustomers));
 	Tables.Insert("CashInTransit_POS"                     , PostingServer.CreateTable(AccReg.CashInTransit));
 	Tables.Insert("ExpensesTurnovers"                     , PostingServer.CreateTable(AccReg.ExpensesTurnovers));
-	Tables.Insert("PartnerArTransactions_OffsetOfAdvance" , PostingServer.CreateTable(AccReg.PartnerArTransactions));
-	Tables.Insert("Aging_Expense"                         , PostingServer.CreateTable(AccReg.Aging));
+//	Tables.Insert("PartnerArTransactions_OffsetOfAdvance" , PostingServer.CreateTable(AccReg.PartnerArTransactions));
+//	Tables.Insert("Aging_Expense"                         , PostingServer.CreateTable(AccReg.Aging));
 	
-	Tables.AdvanceFromCustomers.Columns.Add("Key", New TypeDescription(Metadata.DefinedTypes.typeRowID.Type));
-	Tables.PartnerArTransactions.Columns.Add("Key", New TypeDescription(Metadata.DefinedTypes.typeRowID.Type));
+//	Tables.AdvanceFromCustomers.Columns.Add("Key", New TypeDescription(Metadata.DefinedTypes.typeRowID.Type));
+//	Tables.PartnerArTransactions.Columns.Add("Key", New TypeDescription(Metadata.DefinedTypes.typeRowID.Type));
 	
 	QueryPaymentList = New Query();
 	QueryPaymentList.Text = GetQueryTextBankReceiptPaymentList();
@@ -26,12 +26,12 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Query.SetParameter("QueryTable", QueryTablePaymentList);
 	QueryResults = Query.ExecuteBatch();
 		
-	Tables.PartnerArTransactions      = QueryResults[1].Unload();
-	Tables.PlaningCashTransactions    = QueryResults[2].Unload();
-	Tables.CashInTransit              = QueryResults[3].Unload();
-	Tables.AdvanceFromCustomers       = QueryResults[4].Unload();
-	Tables.CashInTransit_POS          = QueryResults[5].Unload();
-	Tables.ExpensesTurnovers          = QueryResults[6].Unload();
+//	Tables.PartnerArTransactions      = QueryResults[1].Unload();
+	Tables.PlaningCashTransactions    = QueryResults[1].Unload();
+	Tables.CashInTransit              = QueryResults[2].Unload();
+//	Tables.AdvanceFromCustomers       = QueryResults[4].Unload();
+	Tables.CashInTransit_POS          = QueryResults[3].Unload();
+	Tables.ExpensesTurnovers          = QueryResults[4].Unload();
 
 #Region NewRegistersPosting	
 	QueryArray = GetQueryTextsSecondaryTables();
@@ -164,28 +164,28 @@ Function GetQueryTextQueryTable()
 		|	&QueryTable AS QueryTable
 		|;
 		|
+//		|//[1]//////////////////////////////////////////////////////////////////////////////
+//		|SELECT
+//		|	tmp.Company AS Company,
+//		|	tmp.BasisDocument AS BasisDocument,
+//		|	tmp.Partner AS Partner,
+//		|	tmp.Payer AS LegalName,
+//		|	tmp.Agreement AS Agreement,
+//		|	tmp.Currency AS Currency,
+//		|	tmp.Amount AS Amount,
+//		|	tmp.Period,
+//		|	tmp.Key
+//		|FROM
+//		|	tmp AS tmp
+//		|WHERE
+//		|	NOT tmp.IsMoneyTransfer
+//		|	AND
+//		|	NOT tmp.IsAdvance
+//		|	AND
+//		|	NOT tmp.IsMoneyExchange
+//		|;
+//		|
 		|//[1]//////////////////////////////////////////////////////////////////////////////
-		|SELECT
-		|	tmp.Company AS Company,
-		|	tmp.BasisDocument AS BasisDocument,
-		|	tmp.Partner AS Partner,
-		|	tmp.Payer AS LegalName,
-		|	tmp.Agreement AS Agreement,
-		|	tmp.Currency AS Currency,
-		|	tmp.Amount AS Amount,
-		|	tmp.Period,
-		|	tmp.Key
-		|FROM
-		|	tmp AS tmp
-		|WHERE
-		|	NOT tmp.IsMoneyTransfer
-		|	AND
-		|	NOT tmp.IsAdvance
-		|	AND
-		|	NOT tmp.IsMoneyExchange
-		|;
-		|
-		|//[2]//////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company AS Company,
 		|	tmp.Account AS Account,
@@ -211,7 +211,7 @@ Function GetQueryTextQueryTable()
 		|	NOT tmp.PlaningTransactionBasis.Date IS NULL
 		|;
 		|
-		|//[3]//////////////////////////////////////////////////////////////////////////////
+		|//[2]//////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company AS Company,
 		|	tmp.PlaningTransactionBasis AS BasisDocument,
@@ -227,29 +227,29 @@ Function GetQueryTextQueryTable()
 		|	tmp.IsMoneyTransfer
 		|;
 		|
-		|//[4]//////////////////////////////////////////////////////////////////////////////
-		|SELECT
-		|	tmp.Company AS Company,
-		|	tmp.Partner AS Partner,
-		|	tmp.Payer AS LegalName,
-		|	tmp.Currency AS Currency,
-		|	tmp.Amount AS Amount,
-		|	tmp.Period,
-		|	tmp.ReceiptDocument,
-		|	tmp.Key
-		|FROM
-		|	tmp AS tmp
-		|WHERE
-		|	NOT tmp.IsMoneyTransfer
-		|	AND
-		|	NOT tmp.IsMoneyExchange
-		|	AND
-		|	NOT tmp.TransferFromPOS
-		|	AND tmp.IsAdvance
-		|;
+//		|//[4]//////////////////////////////////////////////////////////////////////////////
+//		|SELECT
+//		|	tmp.Company AS Company,
+//		|	tmp.Partner AS Partner,
+//		|	tmp.Payer AS LegalName,
+//		|	tmp.Currency AS Currency,
+//		|	tmp.Amount AS Amount,
+//		|	tmp.Period,
+//		|	tmp.ReceiptDocument,
+//		|	tmp.Key
+//		|FROM
+//		|	tmp AS tmp
+//		|WHERE
+//		|	NOT tmp.IsMoneyTransfer
+//		|	AND
+//		|	NOT tmp.IsMoneyExchange
+//		|	AND
+//		|	NOT tmp.TransferFromPOS
+//		|	AND tmp.IsAdvance
+//		|;
 		|
 		|
-		|//[5]//////////////////////////////////////////////////////////////////////////////
+		|//[3]//////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company AS Company,
 		|	tmp.PlaningTransactionBasis AS BasisDocument,
@@ -264,7 +264,7 @@ Function GetQueryTextQueryTable()
 		|WHERE
 		|	tmp.TransferFromPOS
 		|;
-		|//[6]//////////////////////////////////////////////////////////////////////////////
+		|//[4]//////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company AS Company,
 		|	tmp.BusinessUnit AS BusinessUnit,
@@ -309,132 +309,132 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
 #EndRegion
 	
-	// Advance from customers
-	Parameters.DocumentDataTables.PartnerArTransactions_OffsetOfAdvance =
-	AccumulationRegisters.PartnerArTransactions.GetTablePartnerArTransactions_OffsetOfAdvance(
-		Parameters.Object.RegisterRecords,
-		Parameters.PointInTime,
-		Parameters.DocumentDataTables.AdvanceFromCustomers,
-		Parameters.DocumentDataTables.PartnerArTransactions);
+//	// Advance from customers
+//	Parameters.DocumentDataTables.PartnerArTransactions_OffsetOfAdvance =
+//	AccumulationRegisters.PartnerArTransactions.GetTablePartnerArTransactions_OffsetOfAdvance(
+//		Parameters.Object.RegisterRecords,
+//		Parameters.PointInTime,
+//		Parameters.DocumentDataTables.AdvanceFromCustomers,
+//		Parameters.DocumentDataTables.PartnerArTransactions);
 			
-	// Aging expense
-	Parameters.DocumentDataTables.Aging_Expense = 
-		AccumulationRegisters.Aging.GetTableAging_Expense_OnMoneyReceipt(
-		Parameters.PointInTime,
-		Parameters.DocumentDataTables.PartnerArTransactions,
-		Parameters.DocumentDataTables.PartnerArTransactions_OffsetOfAdvance);
+//	// Aging expense
+//	Parameters.DocumentDataTables.Aging_Expense = 
+//		AccumulationRegisters.Aging.GetTableAging_Expense_OnMoneyReceipt(
+//		Parameters.PointInTime,
+//		Parameters.DocumentDataTables.PartnerArTransactions,
+//		Parameters.DocumentDataTables.PartnerArTransactions_OffsetOfAdvance);
 EndProcedure
 
 Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 	PostingDataTables = New Map();
 	
-	// PartnerArTransactions
-	ArrayOfTables = New Array();
-	Table1 = Parameters.DocumentDataTables.PartnerArTransactions.Copy();
-	Table1.Columns.Add("RecordType", New TypeDescription("AccumulationRecordType"));
-	Table1.FillValues(AccumulationRecordType.Expense, "RecordType");
-	ArrayOfTables.Add(Table1);
-	
-	Table2 = Parameters.DocumentDataTables.PartnerArTransactions_OffsetOfAdvance.Copy();
-	Table2.Columns.Add("RecordType", New TypeDescription("AccumulationRecordType"));
-	Table2.FillValues(AccumulationRecordType.Expense, "RecordType");
-	ArrayOfTables.Add(Table2);
-	
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.PartnerArTransactions,
-		New Structure("RecordSet, WriteInTransaction",
-			PostingServer.JoinTables(ArrayOfTables,
-			"RecordType, Period, Company, BasisDocument, Partner, LegalName, Agreement, Currency, Amount"),
-			Parameters.IsReposting));
+//	// PartnerArTransactions
+//	ArrayOfTables = New Array();
+//	Table1 = Parameters.DocumentDataTables.PartnerArTransactions.Copy();
+//	Table1.Columns.Add("RecordType", New TypeDescription("AccumulationRecordType"));
+//	Table1.FillValues(AccumulationRecordType.Expense, "RecordType");
+//	ArrayOfTables.Add(Table1);
+//	
+//	Table2 = Parameters.DocumentDataTables.PartnerArTransactions_OffsetOfAdvance.Copy();
+//	Table2.Columns.Add("RecordType", New TypeDescription("AccumulationRecordType"));
+//	Table2.FillValues(AccumulationRecordType.Expense, "RecordType");
+//	ArrayOfTables.Add(Table2);
+//	
+//	PostingDataTables.Insert(Parameters.Object.RegisterRecords.PartnerArTransactions,
+//		New Structure("RecordSet, WriteInTransaction",
+//			PostingServer.JoinTables(ArrayOfTables,
+//			"RecordType, Period, Company, BasisDocument, Partner, LegalName, Agreement, Currency, Amount"),
+//			Parameters.IsReposting));
 		
-	// AccountsStatement
-	ArrayOfTables = New Array();
-	Table1 = Parameters.DocumentDataTables.PartnerArTransactions.CopyColumns();
-	Table1.Columns.Amount.Name = "TransactionAP";
-	PostingServer.AddColumnsToAccountsStatementTable(Table1);
-	For Each Row In Parameters.DocumentDataTables.PartnerArTransactions Do
-		If Row.Agreement.Type = Enums.AgreementTypes.Vendor Then
-			NewRow = Table1.Add(); 
-			FillPropertyValues(NewRow, Row);
-			NewRow.TransactionAP = - Row.Amount;
-		EndIf;
-	EndDo;
-	Table1.FillValues(AccumulationRecordType.Expense, "RecordType");	
-	ArrayOfTables.Add(Table1);
-	
-	Table2 = Parameters.DocumentDataTables.AdvanceFromCustomers.CopyColumns();
-	Table2.Columns.Amount.Name = "AdvanceToSuppliers";
-	PostingServer.AddColumnsToAccountsStatementTable(Table2);
-	For Each Row In Parameters.DocumentDataTables.AdvanceFromCustomers Do
-		If Row.Partner.Vendor 
-			And PostingServer.OffsetOfAdvanceByVendorAgreement(
-				Parameters.DocumentDataTables.PartnerArTransactions_OffsetOfAdvance) Then
-			NewRow = Table2.Add();
-			FillPropertyValues(NewRow, Row);
-			NewRow.AdvanceToSuppliers = - Row.Amount;
-		EndIf;
-	EndDo;
-	Table2.FillValues(AccumulationRecordType.Receipt, "RecordType");
-	ArrayOfTables.Add(Table2);
-	
-	Table3 = Parameters.DocumentDataTables.AdvanceFromCustomers.CopyColumns();
-	Table3.Columns.Amount.Name = "AdvanceFromCustomers";
-	PostingServer.AddColumnsToAccountsStatementTable(Table3);
-	For Each Row In Parameters.DocumentDataTables.AdvanceFromCustomers Do
-		If Row.Partner.Customer Then
-			NewRow = Table3.Add();
-			FillPropertyValues(NewRow, Row);
-			NewRow.AdvanceFromCustomers = Row.Amount;
-		EndIf;
-	EndDo;
-	Table3.FillValues(AccumulationRecordType.Receipt, "RecordType");
-	ArrayOfTables.Add(Table3);
-	
-	Table4 = Parameters.DocumentDataTables.PartnerArTransactions.CopyColumns();
-	Table4.Columns.Amount.Name = "TransactionAR";
-	PostingServer.AddColumnsToAccountsStatementTable(Table4);
-	For Each Row In Parameters.DocumentDataTables.PartnerArTransactions Do
-		If Row.Agreement.Type = Enums.AgreementTypes.Customer Then
-			NewRow = Table4.Add(); 
-			FillPropertyValues(NewRow, Row);
-			NewRow.TransactionAR = Row.Amount;
-		EndIf;
-	EndDo;
-	Table4.FillValues(AccumulationRecordType.Expense, "RecordType");
-	ArrayOfTables.Add(Table4);
-	
-	Table5 = Parameters.DocumentDataTables.PartnerArTransactions_OffsetOfAdvance.CopyColumns();
-	Table5.Columns.Amount.Name = "AdvanceFromCustomers";
-	PostingServer.AddColumnsToAccountsStatementTable(Table5);
-	For Each Row In Parameters.DocumentDataTables.PartnerArTransactions_OffsetOfAdvance Do
-		If Row.Partner.Customer Then
-			NewRow = Table5.Add();
-			FillPropertyValues(NewRow, Row);
-			NewRow.AdvanceFromCustomers = Row.Amount;
-		EndIf;
-	EndDo;
-	Table5.FillValues(AccumulationRecordType.Expense, "RecordType");
-	ArrayOfTables.Add(Table5);
-	
-	Table6 = Parameters.DocumentDataTables.PartnerArTransactions_OffsetOfAdvance.CopyColumns();
-	Table6.Columns.Amount.Name = "TransactionAR";
-	PostingServer.AddColumnsToAccountsStatementTable(Table6);
-	For Each Row In Parameters.DocumentDataTables.PartnerArTransactions_OffsetOfAdvance Do
-		If Row.Agreement.Type = Enums.AgreementTypes.Customer Then
-			NewRow = Table6.Add(); 
-			FillPropertyValues(NewRow, Row);
-			NewRow.TransactionAR = Row.Amount;
-		EndIf;
-	EndDo;
-	Table6.FillValues(AccumulationRecordType.Expense, "RecordType");
-	ArrayOfTables.Add(Table6);
-	
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.AccountsStatement,
-		New Structure("RecordSet, WriteInTransaction",
-			PostingServer.JoinTables(ArrayOfTables,
-				"RecordType, Period, Company, Partner, LegalName, BasisDocument, Currency, 
-				|TransactionAP, AdvanceToSuppliers,
-				|TransactionAR, AdvanceFromCustomers"),
-			Parameters.IsReposting));
+//	// AccountsStatement
+//	ArrayOfTables = New Array();
+//	Table1 = Parameters.DocumentDataTables.PartnerArTransactions.CopyColumns();
+//	Table1.Columns.Amount.Name = "TransactionAP";
+//	PostingServer.AddColumnsToAccountsStatementTable(Table1);
+//	For Each Row In Parameters.DocumentDataTables.PartnerArTransactions Do
+//		If Row.Agreement.Type = Enums.AgreementTypes.Vendor Then
+//			NewRow = Table1.Add(); 
+//			FillPropertyValues(NewRow, Row);
+//			NewRow.TransactionAP = - Row.Amount;
+//		EndIf;
+//	EndDo;
+//	Table1.FillValues(AccumulationRecordType.Expense, "RecordType");	
+//	ArrayOfTables.Add(Table1);
+//	
+//	Table2 = Parameters.DocumentDataTables.AdvanceFromCustomers.CopyColumns();
+//	Table2.Columns.Amount.Name = "AdvanceToSuppliers";
+//	PostingServer.AddColumnsToAccountsStatementTable(Table2);
+//	For Each Row In Parameters.DocumentDataTables.AdvanceFromCustomers Do
+//		If Row.Partner.Vendor 
+//			And PostingServer.OffsetOfAdvanceByVendorAgreement(
+//				Parameters.DocumentDataTables.PartnerArTransactions_OffsetOfAdvance) Then
+//			NewRow = Table2.Add();
+//			FillPropertyValues(NewRow, Row);
+//			NewRow.AdvanceToSuppliers = - Row.Amount;
+//		EndIf;
+//	EndDo;
+//	Table2.FillValues(AccumulationRecordType.Receipt, "RecordType");
+//	ArrayOfTables.Add(Table2);
+//	
+//	Table3 = Parameters.DocumentDataTables.AdvanceFromCustomers.CopyColumns();
+//	Table3.Columns.Amount.Name = "AdvanceFromCustomers";
+//	PostingServer.AddColumnsToAccountsStatementTable(Table3);
+//	For Each Row In Parameters.DocumentDataTables.AdvanceFromCustomers Do
+//		If Row.Partner.Customer Then
+//			NewRow = Table3.Add();
+//			FillPropertyValues(NewRow, Row);
+//			NewRow.AdvanceFromCustomers = Row.Amount;
+//		EndIf;
+//	EndDo;
+//	Table3.FillValues(AccumulationRecordType.Receipt, "RecordType");
+//	ArrayOfTables.Add(Table3);
+//	
+//	Table4 = Parameters.DocumentDataTables.PartnerArTransactions.CopyColumns();
+//	Table4.Columns.Amount.Name = "TransactionAR";
+//	PostingServer.AddColumnsToAccountsStatementTable(Table4);
+//	For Each Row In Parameters.DocumentDataTables.PartnerArTransactions Do
+//		If Row.Agreement.Type = Enums.AgreementTypes.Customer Then
+//			NewRow = Table4.Add(); 
+//			FillPropertyValues(NewRow, Row);
+//			NewRow.TransactionAR = Row.Amount;
+//		EndIf;
+//	EndDo;
+//	Table4.FillValues(AccumulationRecordType.Expense, "RecordType");
+//	ArrayOfTables.Add(Table4);
+//	
+//	Table5 = Parameters.DocumentDataTables.PartnerArTransactions_OffsetOfAdvance.CopyColumns();
+//	Table5.Columns.Amount.Name = "AdvanceFromCustomers";
+//	PostingServer.AddColumnsToAccountsStatementTable(Table5);
+//	For Each Row In Parameters.DocumentDataTables.PartnerArTransactions_OffsetOfAdvance Do
+//		If Row.Partner.Customer Then
+//			NewRow = Table5.Add();
+//			FillPropertyValues(NewRow, Row);
+//			NewRow.AdvanceFromCustomers = Row.Amount;
+//		EndIf;
+//	EndDo;
+//	Table5.FillValues(AccumulationRecordType.Expense, "RecordType");
+//	ArrayOfTables.Add(Table5);
+//	
+//	Table6 = Parameters.DocumentDataTables.PartnerArTransactions_OffsetOfAdvance.CopyColumns();
+//	Table6.Columns.Amount.Name = "TransactionAR";
+//	PostingServer.AddColumnsToAccountsStatementTable(Table6);
+//	For Each Row In Parameters.DocumentDataTables.PartnerArTransactions_OffsetOfAdvance Do
+//		If Row.Agreement.Type = Enums.AgreementTypes.Customer Then
+//			NewRow = Table6.Add(); 
+//			FillPropertyValues(NewRow, Row);
+//			NewRow.TransactionAR = Row.Amount;
+//		EndIf;
+//	EndDo;
+//	Table6.FillValues(AccumulationRecordType.Expense, "RecordType");
+//	ArrayOfTables.Add(Table6);
+//	
+//	PostingDataTables.Insert(Parameters.Object.RegisterRecords.AccountsStatement,
+//		New Structure("RecordSet, WriteInTransaction",
+//			PostingServer.JoinTables(ArrayOfTables,
+//				"RecordType, Period, Company, Partner, LegalName, BasisDocument, Currency, 
+//				|TransactionAP, AdvanceToSuppliers,
+//				|TransactionAR, AdvanceFromCustomers"),
+//			Parameters.IsReposting));
 	
 	// PlaningCashTransactions
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords.PlaningCashTransactions,
@@ -458,34 +458,34 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 				"RecordType, Period, Company, BasisDocument, FromAccount, ToAccount, Currency, Amount, Key"),
 			Parameters.IsReposting));
 	
-	// AdvanceFromCustomers
-	ArrayOfTables = New Array();
-	Table1 = Parameters.DocumentDataTables.AdvanceFromCustomers.Copy();
-	Table1.Columns.Add("RecordType", New TypeDescription("AccumulationRecordType"));
-	Table1.FillValues(AccumulationRecordType.Receipt, "RecordType");
-	ArrayOfTables.Add(Table1);
-	
-	Table2 = Parameters.DocumentDataTables.PartnerArTransactions_OffsetOfAdvance.Copy();
-	Table2.Columns.Add("RecordType", New TypeDescription("AccumulationRecordType"));
-	Table2.FillValues(AccumulationRecordType.Expense, "RecordType");
-	ArrayOfTables.Add(Table2);
-	
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.AdvanceFromCustomers,
-		New Structure("RecordSet, WriteInTransaction",
-			PostingServer.JoinTables(ArrayOfTables,
-			"RecordType, Period, Company, Partner, LegalName, Currency, ReceiptDocument, Amount, Key"),
-			Parameters.IsReposting));
+//	// AdvanceFromCustomers
+//	ArrayOfTables = New Array();
+//	Table1 = Parameters.DocumentDataTables.AdvanceFromCustomers.Copy();
+//	Table1.Columns.Add("RecordType", New TypeDescription("AccumulationRecordType"));
+//	Table1.FillValues(AccumulationRecordType.Receipt, "RecordType");
+//	ArrayOfTables.Add(Table1);
+//	
+//	Table2 = Parameters.DocumentDataTables.PartnerArTransactions_OffsetOfAdvance.Copy();
+//	Table2.Columns.Add("RecordType", New TypeDescription("AccumulationRecordType"));
+//	Table2.FillValues(AccumulationRecordType.Expense, "RecordType");
+//	ArrayOfTables.Add(Table2);
+//	
+//	PostingDataTables.Insert(Parameters.Object.RegisterRecords.AdvanceFromCustomers,
+//		New Structure("RecordSet, WriteInTransaction",
+//			PostingServer.JoinTables(ArrayOfTables,
+//			"RecordType, Period, Company, Partner, LegalName, Currency, ReceiptDocument, Amount, Key"),
+//			Parameters.IsReposting));
 	
 	
 	// ExpensesTurnovers
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords.ExpensesTurnovers,
 		New Structure("RecordSet", Parameters.DocumentDataTables.ExpensesTurnovers));
 	
-	// Aging
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.Aging,
-		New Structure("RecordType, RecordSet",
-			AccumulationRecordType.Expense,
-			Parameters.DocumentDataTables.Aging_Expense));
+//	// Aging
+//	PostingDataTables.Insert(Parameters.Object.RegisterRecords.Aging,
+//		New Structure("RecordType, RecordSet",
+//			AccumulationRecordType.Expense,
+//			Parameters.DocumentDataTables.Aging_Expense));
 
 #Region NewRegistersPosting
 	PostingServer.SetPostingDataTables(PostingDataTables, Parameters);
@@ -728,7 +728,10 @@ Function PaymentList()
 		|	BankReceiptPaymentList.Ref.TransactionType
 		|   = VALUE(Enum.IncomingPaymentTransactionType.CashTransferOrder) AS IsCashTransferOrder,
 		|	BankReceiptPaymentList.Ref.TransactionType
-		|   = VALUE(Enum.IncomingPaymentTransactionType.TransferFromPOS) AS IsTransferFromPOS
+		|   = VALUE(Enum.IncomingPaymentTransactionType.TransferFromPOS) AS IsTransferFromPOS,
+		|   BankReceiptPaymentList.Ref.TransactionType
+		|   = VALUE(Enum.IncomingPaymentTransactionType.ReturnFromVendor) AS IsReturnFromVendor,
+		|	BankReceiptPaymentList.Ref.IgnoreAdvances AS IgnoreAdvances
 		|INTO PaymentList
 		|FROM
 		|	Document.BankReceipt.PaymentList AS BankReceiptPaymentList
@@ -746,14 +749,16 @@ Function AdvancesFromCustomers()
 		|	PaymentList.Currency,
 		|	PaymentList.Amount AS DocumentAmount,
 		|	PaymentList.Basis AS AdvancesDocument,
-		|	PaymentList.Key
+		|	PaymentList.Key,
+		|	PaymentList.IgnoreAdvances
 		|INTO AdvancesFromCustomers
 		|FROM
 		|	PaymentList AS PaymentList
 		|WHERE
-		|	NOT PaymentList.IsMoneyTransfer
-		|	AND NOT PaymentList.IsMoneyExchange
-		|	AND NOT PaymentList.TransferFromPOS
+		|	PaymentList.IsPaymentFromCustomer
+		//|	NOT PaymentList.IsMoneyTransfer
+		//|	AND NOT PaymentList.IsMoneyExchange
+		//|	AND NOT PaymentList.TransferFromPOS
 		|	AND PaymentList.IsAdvance";
 EndFunction
 
@@ -773,9 +778,11 @@ Function CustomersTransactions()
 		|FROM
 		|	PaymentList AS PaymentList
 		|WHERE
-		|	NOT PaymentList.IsMoneyTransfer
-		|	AND NOT PaymentList.IsAdvance
-		|	AND NOT PaymentList.IsMoneyExchange";
+		|	PaymentList.IsPaymentFromCustomer
+		|	AND NOT PaymentList.IsAdvance";
+		//|	NOT PaymentList.IsMoneyTransfer
+		//|	AND NOT PaymentList.IsAdvance
+		//|	AND NOT PaymentList.IsMoneyExchange";
 EndFunction
 
 Function R2021B_CustomersTransactions()
@@ -792,32 +799,33 @@ Function R2021B_CustomersTransactions()
 		|	CustomersTransactions.Key,
 		|	CustomersTransactions.Amount AS Amount
 		|INTO R2021B_CustomersTransactions
-		|
+		|	FROM CustomersTransactions
 		|UNION ALL
 		|
 		|SELECT
 		|	VALUE(AccumulationRecordType.Expense),
-		|	OffsetOfAdvance.Period,
-		|	OffsetOfAdvance.Company,
-		|	OffsetOfAdvance.Partner,
-		|	OffsetOfAdvance.LegalName,
-		|	OffsetOfAdvance.Currency,
-		|	OffsetOfAdvance.Agreement,
-		|	OffsetOfAdvance.TransactionDocument,
-		|	OffsetOfAdvance.Key,
-		|	SUM(OffsetOfAdvance.Amount) AS Amount
+		|	OffsetOfAdvanceFromCustomers.Period,
+		|	OffsetOfAdvanceFromCustomers.Company,
+		|	OffsetOfAdvanceFromCustomers.Partner,
+		|	OffsetOfAdvanceFromCustomers.LegalName,
+		|	OffsetOfAdvanceFromCustomers.Currency,
+		|	OffsetOfAdvanceFromCustomers.Agreement,
+		|	OffsetOfAdvanceFromCustomers.TransactionDocument,
+		|	OffsetOfAdvanceFromCustomers.Key,
+		//|	SUM(OffsetOfAdvanceFromCustomers.Amount) AS Amount
+		|	OffsetOfAdvanceFromCustomers.Amount
 		|FROM
-		|	OffsetOfAdvance AS OffsetOfAdvance
-		|GROUP BY
-		|	VALUE(AccumulationRecordType.Expense),
-		|	OffsetOfAdvance.Period,
-		|	OffsetOfAdvance.Company,
-		|	OffsetOfAdvance.Partner,
-		|	OffsetOfAdvance.LegalName,
-		|	OffsetOfAdvance.Currency,
-		|	OffsetOfAdvance.Agreement,
-		|	OffsetOfAdvance.TransactionDocument,
-		|	OffsetOfAdvance.Key";
+		|	OffsetOfAdvanceFromCustomers AS OffsetOfAdvanceFromCustomers";
+//		|GROUP BY
+//		|	VALUE(AccumulationRecordType.Expense),
+//		|	OffsetOfAdvance.Period,
+//		|	OffsetOfAdvance.Company,
+//		|	OffsetOfAdvance.Partner,
+//		|	OffsetOfAdvance.LegalName,
+//		|	OffsetOfAdvance.Currency,
+//		|	OffsetOfAdvance.Agreement,
+//		|	OffsetOfAdvance.TransactionDocument,
+//		|	OffsetOfAdvance.Key";
 EndFunction	
 
 Function R2020B_AdvancesFromCustomers()
@@ -840,25 +848,26 @@ Function R2020B_AdvancesFromCustomers()
 		|
 		|SELECT
 		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		|	OffsetOfAdvance.Period,
-		|	OffsetOfAdvance.Company,
-		|	OffsetOfAdvance.Partner,
-		|	OffsetOfAdvance.LegalName,
-		|	OffsetOfAdvance.Currency,
-		|	OffsetOfAdvance.AdvancesDocument AS Basis,
-		|	SUM(OffsetOfAdvance.Amount) AS Amount,
-		|	OffsetOfAdvance.Key
+		|	OffsetOfAdvanceFromCustomers.Period,
+		|	OffsetOfAdvanceFromCustomers.Company,
+		|	OffsetOfAdvanceFromCustomers.Partner,
+		|	OffsetOfAdvanceFromCustomers.LegalName,
+		|	OffsetOfAdvanceFromCustomers.Currency,
+		|	OffsetOfAdvanceFromCustomers.AdvancesDocument AS Basis,
+		//|	SUM(OffsetOfAdvance.Amount) AS Amount,
+		|	OffsetOfAdvanceFromCustomers.Amount,
+		|	OffsetOfAdvanceFromCustomers.Key
 		|FROM
-		|	OffsetOfAdvance AS OffsetOfAdvance
-		|GROUP BY
-		|	VALUE(AccumulationRecordType.Expense),
-		|	OffsetOfAdvance.Period,
-		|	OffsetOfAdvance.Company,
-		|	OffsetOfAdvance.Partner,
-		|	OffsetOfAdvance.LegalName,
-		|	OffsetOfAdvance.Currency,
-		|	OffsetOfAdvance.AdvancesDocument,
-		|	OffsetOfAdvance.Key";
+		|	OffsetOfAdvanceFromCustomers AS OffsetOfAdvanceFromCustomers";
+//		|GROUP BY
+//		|	VALUE(AccumulationRecordType.Expense),
+//		|	OffsetOfAdvance.Period,
+//		|	OffsetOfAdvance.Company,
+//		|	OffsetOfAdvance.Partner,
+//		|	OffsetOfAdvance.LegalName,
+//		|	OffsetOfAdvance.Currency,
+//		|	OffsetOfAdvance.AdvancesDocument,
+//		|	OffsetOfAdvance.Key";
 EndFunction
 
 Function R5011B_PartnersAging()

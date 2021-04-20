@@ -350,45 +350,8 @@ Scenario: _052001 create Bank receipt (independently)
 			| '$$NumberBankReceipt0520013$$'    |	
 	
 
-Scenario: _052002 check Bank receipt movements by register PartnerArTransactions
-	Given I open hyperlink "e1cib/list/AccumulationRegister.PartnerArTransactions"
-	And "List" table contains lines
-		| 'Currency' | 'Recorder'               | 'Legal name'        | 'Basis document'         | 'Company'      | 'Amount' | 'Partner term'             | 'Partner'   |
-		| 'TRY'      | '$$BankReceipt0520011$$' | 'Company Ferron BP' | '$$SalesInvoice024001$$' | 'Main Company' | '100,00' | 'Basic Partner terms, TRY' | 'Ferron BP' |
-		| 'USD'      | '$$BankReceipt0520012$$' | 'Company Ferron BP' | '$$SalesInvoice024001$$' | 'Main Company' | '100,00' | 'Basic Partner terms, TRY' | 'Ferron BP' |
-		| 'EUR'      | '$$BankReceipt0520013$$' | 'Company Ferron BP' | 'Sales invoice 234*'     | 'Main Company' | '50,00'  | '*'                        | 'Ferron BP' |
-	And I close all client application windows
 
 
-Scenario: _050002  check Bank receipt movements with transaction type Payment from customer
-	* Open Bank receipt 1
-		Given I open hyperlink "e1cib/list/Document.BankReceipt"
-		And I go to line in "List" table
-			| 'Number' |
-			| '$$NumberBankReceipt0520011$$'      |
-	* Check movements Bank receipt 1
-		And I click "Registrations report" button
-		And I select "Partner AR transactions" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| '$$BankReceipt0520011$$'              | ''            | ''       | ''          | ''             | ''                       | ''          | ''                  | ''                         | ''         | ''                             | ''                     |
-		| 'Document registrations records'      | ''            | ''       | ''          | ''             | ''                       | ''          | ''                  | ''                         | ''         | ''                             | ''                     |
-		| 'Register  "Partner AR transactions"' | ''            | ''       | ''          | ''             | ''                       | ''          | ''                  | ''                         | ''         | ''                             | ''                     |
-		| ''                                    | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                       | ''          | ''                  | ''                         | ''         | ''                             | 'Attributes'           |
-		| ''                                    | ''            | ''       | 'Amount'    | 'Company'      | 'Basis document'         | 'Partner'   | 'Legal name'        | 'Partner term'             | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
-		| ''                                    | 'Expense'     | '*'      | '17,12'     | 'Main Company' | '$$SalesInvoice024001$$' | 'Ferron BP' | 'Company Ferron BP' | 'Basic Partner terms, TRY' | 'USD'      | 'Reporting currency'           | 'No'                   |
-		| ''                                    | 'Expense'     | '*'      | '100'       | 'Main Company' | '$$SalesInvoice024001$$' | 'Ferron BP' | 'Company Ferron BP' | 'Basic Partner terms, TRY' | 'TRY'      | 'en description is empty'      | 'No'                   |
-		| ''                                    | 'Expense'     | '*'      | '100'       | 'Main Company' | '$$SalesInvoice024001$$' | 'Ferron BP' | 'Company Ferron BP' | 'Basic Partner terms, TRY' | 'TRY'      | 'Local currency'               | 'No'                   |
-		| ''                                    | 'Expense'     | '*'      | '100'       | 'Main Company' | '$$SalesInvoice024001$$' | 'Ferron BP' | 'Company Ferron BP' | 'Basic Partner terms, TRY' | 'TRY'      | 'TRY'                          | 'No'                   |
-		And I select "Accounts statement" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Accounts statement"' | ''            | ''       | ''                     | ''               | ''                       | ''               | ''             | ''          | ''                  | ''                       | ''         |
-		| ''                               | 'Record type' | 'Period' | 'Resources'            | ''               | ''                       | ''               | 'Dimensions'   | ''          | ''                  | ''                       | ''         |
-		| ''                               | ''            | ''       | 'Advance to suppliers' | 'Transaction AP' | 'Advance from customers' | 'Transaction AR' | 'Company'      | 'Partner'   | 'Legal name'        | 'Basis document'         | 'Currency' |
-		| ''                               | 'Expense'     | '*'      | ''                     | ''               | ''                       | '100'            | 'Main Company' | 'Ferron BP' | 'Company Ferron BP' | '$$SalesInvoice024001$$' | 'TRY'      |
-
-		And I close all client application windows
 	
 
 # Filters

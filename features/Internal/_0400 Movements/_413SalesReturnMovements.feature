@@ -72,7 +72,7 @@ Scenario: _041300 preparation (Sales return)
 	* Load Bank receipt
 		When Create document BankReceipt objects (check movements, advance)
 		And I execute 1C:Enterprise script at server
- 			| "Documents.BankReceipt.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |
+ 			| "Documents.BankReceipt.FindByNumber(11).GetObject().Write(DocumentWriteMode.Posting);" |
 	* Load SO
 			When Create document SalesOrder objects (check movements, SC before SI, Use shipment sheduling)
 			When Create document SalesOrder objects (check movements, SC before SI, not Use shipment sheduling)

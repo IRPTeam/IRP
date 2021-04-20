@@ -358,7 +358,10 @@ EndFunction
 
 Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 #Region NewRegisterPosting
-	Tables = Parameters.DocumentDataTables;	
+	Tables = Parameters.DocumentDataTables;
+	
+	OffsetOfPartnersServer.Customers_OnReturn(Parameters);
+		
 	QueryArray = GetQueryTextsMasterTables();
 	PostingServer.SetRegisters(Tables, Ref);
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
@@ -554,6 +557,8 @@ EndFunction
 
 Procedure UndopostingCheckBeforeWrite(Ref, Cancel, Parameters, AddInfo = Undefined) Export
 #Region NewRegisterPosting
+	OffsetOfPartnersServer.Customers_OnReturn_Unposting(Parameters);
+	
 	QueryArray = GetQueryTextsMasterTables();
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
 #EndRegion	
@@ -609,6 +614,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R2005T_SalesSpecialOffers());
 	QueryArray.Add(R2012B_SalesOrdersInvoiceClosing());
 	QueryArray.Add(R2021B_CustomersTransactions());
+	QueryArray.Add(R2020B_AdvancesFromCustomers());
 	QueryArray.Add(R2031B_ShipmentInvoicing());
 	QueryArray.Add(R2040B_TaxesIncoming());
 	QueryArray.Add(R4010B_ActualStocks());
@@ -664,6 +670,8 @@ Function ItemList()
 		|			THEN ItemList.Ref
 		|		ELSE UNDEFINED
 		|	END AS BasisDocument,
+		|	ItemList.Ref AS AdvanceBasis,
+		|	ItemList.Ref.DueAsAdvance AS DueAsAdvance,
 		|	ItemList.QuantityInBaseUnit AS Quantity,
 		|	ItemList.TotalAmount AS Amount,
 		|	ItemList.Ref.Partner AS Partner,
@@ -784,8 +792,10 @@ Function CustomersTransactions()
 		|	ItemList.LegalName,
 		|	ItemList.Partner,
 		|	ItemList.BasisDocument AS TransactionDocument,
+		|	ItemList.AdvanceBasis,
+		|	ItemList.DueAsAdvance,
 		|	ItemList.Agreement,
-		|	SUM(ItemList.Amount) AS Amount
+		|	SUM(ItemList.Amount) AS DocumentAmount
 		|INTO CustomersTransactions
 		|FROM
 		|	ItemList AS ItemList
@@ -795,6 +805,8 @@ Function CustomersTransactions()
 		|	ItemList.LegalName,
 		|	ItemList.Partner,
 		|	ItemList.BasisDocument,
+		|	ItemList.AdvanceBasis,
+		|	ItemList.DueAsAdvance,
 		|	ItemList.Agreement,
 		|	ItemList.Currency";
 EndFunction
@@ -845,19 +857,41 @@ Function R2021B_CustomersTransactions()
 		|	CustomersTransactions.Partner,
 		|	CustomersTransactions.Agreement,
 		|	CustomersTransactions.TransactionDocument AS Basis,
-		|	- SUM(CustomersTransactions.Amount) AS Amount
+		|	- CustomersTransactions.DocumentAmount AS Amount
 		|INTO R2021B_CustomersTransactions
 		|FROM
 		|	CustomersTransactions AS CustomersTransactions
-		|GROUP BY
-		|	CustomersTransactions.Period,
-		|	CustomersTransactions.Company,
-		|	CustomersTransactions.Currency,
-		|	CustomersTransactions.LegalName,
-		|	CustomersTransactions.Partner,
-		|	CustomersTransactions.Agreement,
-		|	CustomersTransactions.TransactionDocument,
-		|	VALUE(AccumulationRecordType.Receipt)";
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	DueAsAdvanceFromCustomers.Period,
+		|	DueAsAdvanceFromCustomers.Company,
+		|	DueAsAdvanceFromCustomers.Currency,
+		|	DueAsAdvanceFromCustomers.LegalName,
+		|	DueAsAdvanceFromCustomers.Partner,
+		|	DueAsAdvanceFromCustomers.Agreement,
+		|	DueAsAdvanceFromCustomers.TransactionDocument,
+		|	DueAsAdvanceFromCustomers.Amount
+		|FROM
+		|	DueAsAdvanceFromCustomers AS DueAsAdvanceFromCustomers";
+EndFunction
+
+Function R2020B_AdvancesFromCustomers()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	DueAsAdvanceFromCustomers.Period,
+		|	DueAsAdvanceFromCustomers.Company,
+		|	DueAsAdvanceFromCustomers.Currency,
+		|	DueAsAdvanceFromCustomers.LegalName,
+		|	DueAsAdvanceFromCustomers.Partner,
+		|	DueAsAdvanceFromCustomers.AdvanceBasis AS Basis,
+		|	 - DueAsAdvanceFromCustomers.Amount AS Amount
+		|INTO R2020B_AdvancesFromCustomers
+		|FROM
+		|	DueAsAdvanceFromCustomers AS DueAsAdvanceFromCustomers";
 EndFunction
 
 Function R2031B_ShipmentInvoicing()

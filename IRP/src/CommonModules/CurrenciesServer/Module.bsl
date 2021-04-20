@@ -35,13 +35,15 @@ Procedure PreparePostingDataTables(Parameters, CurrencyTable, AddInfo = Undefine
 				Or TypeOf(Parameters.Object.Ref) = Type("DocumentRef.BankReceipt") Then
 				DocumentCondition = True;
 				Name_LegalName = "Payer";
-				RegisterType = Type("AccumulationRegisterRecordSet.PartnerArTransactions");
+				//RegisterType = Type("AccumulationRegisterRecordSet.PartnerArTransactions");
+				RegisterType = Type("AccumulationRegisterRecordSet.R2021B_CustomersTransactions");
 			EndIf;
 			If TypeOf(Parameters.Object.Ref) = Type("DocumentRef.CashPayment")
 				Or TypeOf(Parameters.Object.Ref) = Type("DocumentRef.BankPayment") Then
 				DocumentCondition = True;
 				Name_LegalName = "Payee";
-				RegisterType = Type("AccumulationRegisterRecordSet.PartnerApTransactions");
+				//RegisterType = Type("AccumulationRegisterRecordSet.PartnerApTransactions");
+				RegisterType = Type("AccumulationRegisterRecordSet.R1021B_VendorsTransactions");
 			EndIf;
 			If DocumentCondition Then
 				TableOfAgreementMovementTypes = New ValueTable();

@@ -642,7 +642,7 @@ Function ItemList()
 		|	RowIDInfo.Key
 		|;
 		|
-		|////////////////////////////////////////////////////////////////////////////////	
+		|////////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	GoodsReceipts.Key,
 		|	GoodsReceipts.GoodsReceipt
@@ -667,7 +667,11 @@ Function ItemList()
 		|	ItemList.Ref AS SalesReturn,
 		|	CASE
 		|		WHEN ItemList.Ref.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
-		|			THEN ItemList.Ref
+		|			THEN CASE
+		|				WHEN ItemList.SalesInvoice.Ref IS NULL
+		|					THEN ItemList.Ref
+		|				ELSE ItemList.SalesInvoice
+		|			END
 		|		ELSE UNDEFINED
 		|	END AS BasisDocument,
 		|	ItemList.Ref AS AdvanceBasis,

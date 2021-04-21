@@ -82,7 +82,7 @@ Procedure PreparePostingDataTables(Parameters, CurrencyTable, AddInfo = Undefine
 									EndIf;
 								EndIf;
 								If Not ValueIsFilled(RowPaymentList.BasisDocument) 
-									Or RowPaymentList.BasisDocument = RowRecordSet.BasisDocument Then
+									Or RowPaymentList.BasisDocument = RowRecordSet.Basis Then
 									BasisDocumentCondition = True;
 								EndIf;
 								If PartnerAndLegalNameCondition And AgreementCondition And BasisDocumentCondition Then

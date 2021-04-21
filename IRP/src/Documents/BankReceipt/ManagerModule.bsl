@@ -303,7 +303,7 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	QueryArray = GetQueryTextsMasterTables();
 		
 	PostingServer.SetRegisters(Tables, Ref);
-	//Tables.R2020B_AdvancesFromCustomers.Columns.Add("Key", New TypeDescription(Metadata.DefinedTypes.typeRowID.Type));
+	Tables.R2020B_AdvancesFromCustomers.Columns.Add("Key", New TypeDescription(Metadata.DefinedTypes.typeRowID.Type));
 	//Tables.R2021B_CustomersTransactions.Columns.Add("Key", New TypeDescription(Metadata.DefinedTypes.typeRowID.Type));
 	
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);

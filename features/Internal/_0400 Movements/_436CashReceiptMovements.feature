@@ -141,9 +141,9 @@ Scenario: _043601 check Cash receipt movements by the Register "R3010 Cash on ha
 			| 'Register  "R3010 Cash on hand"'           | ''            | ''                    | ''          | ''             | ''             | ''         | ''                             | ''                     |
 			| ''                                         | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''         | ''                             | 'Attributes'           |
 			| ''                                         | ''            | ''                    | 'Amount'    | 'Company'      | 'Account'      | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
-			| ''                                         | 'Receipt'     | '05.04.2021 14:34:09' | '500'       | 'Main Company' | 'Cash desk №2' | 'USD'      | 'Reporting currency'           | 'No'                   |
-			| ''                                         | 'Receipt'     | '05.04.2021 14:34:09' | '500'       | 'Main Company' | 'Cash desk №2' | 'USD'      | 'en description is empty'      | 'No'                   |
-			| ''                                         | 'Receipt'     | '05.04.2021 14:34:09' | '2 813,75'  | 'Main Company' | 'Cash desk №2' | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                         | 'Receipt'     | '05.04.2021 14:34:09' | '100'       | 'Main Company' | 'Cash desk №2' | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                         | 'Receipt'     | '05.04.2021 14:34:09' | '100'       | 'Main Company' | 'Cash desk №2' | 'USD'      | 'en description is empty'      | 'No'                   |
+			| ''                                         | 'Receipt'     | '05.04.2021 14:34:09' | '17,12'     | 'Main Company' | 'Cash desk №2' | 'TRY'      | 'Local currency'               | 'No'                   |
 	And I close all client application windows
 
 	
@@ -163,7 +163,32 @@ Scenario: _043602 check Cash receipt movements by the Register "R5010 Reconcilia
 			| 'Register  "R5010 Reconciliation statement"' | ''            | ''                    | ''          | ''           | ''             | ''                  |
 			| ''                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''             | ''                  |
 			| ''                                           | ''            | ''                    | 'Amount'    | 'Currency'   | 'Company'      | 'Legal name'        |
-			| ''                                           | 'Expense'     | '05.04.2021 14:33:49' | '800'       | 'TRY'        | 'Main Company' | 'Company Ferron BP' |
+			| ''                                           | 'Expense'     | '05.04.2021 14:33:49' | '100'       | 'TRY'        | 'Main Company' | 'Company Ferron BP' |
+	And I close all client application windows
+
+
+
+Scenario: _043610 check Cash receipt movements by the Register "R2021 Customer transactions" (SI-CR, basis document exist, checkbox Ignore advance - False)
+	And I close all client application windows
+	* Select Bank receipt (payment from customer)
+		Given I open hyperlink "e1cib/list/Document.CashReceipt"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '1' |
+	* Check movements by the Register  "R2021 Customer transactions" 
+		And I click "Registrations report" button
+		And I select "R2021 Customer transactions" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Cash receipt 1 dated 05.04.2021 14:33:49' | ''            | ''                    | ''          | ''             | ''                             | ''         | ''                  | ''          | ''                         | ''                                          | ''                     |
+			| 'Document registrations records'           | ''            | ''                    | ''          | ''             | ''                             | ''         | ''                  | ''          | ''                         | ''                                          | ''                     |
+			| 'Register  "R2021 Customer transactions"'  | ''            | ''                    | ''          | ''             | ''                             | ''         | ''                  | ''          | ''                         | ''                                          | ''                     |
+			| ''                                         | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                             | ''         | ''                  | ''          | ''                         | ''                                          | 'Attributes'           |
+			| ''                                         | ''            | ''                    | 'Amount'    | 'Company'      | 'Multi currency movement type' | 'Currency' | 'Legal name'        | 'Partner'   | 'Agreement'                | 'Basis'                                     | 'Deferred calculation' |
+			| ''                                         | 'Expense'     | '05.04.2021 14:33:49' | '100'       | 'Main Company' | 'Local currency'               | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'No'                   |
+			| ''                                         | 'Expense'     | '05.04.2021 14:33:49' | '100'       | 'Main Company' | 'TRY'                          | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'No'                   |
+			| ''                                         | 'Expense'     | '05.04.2021 14:33:49' | '100'       | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'No'                   |
+			| ''                                         | 'Expense'     | '05.04.2021 14:33:49' | '17,12'       | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'No'                   |       
 	And I close all client application windows
 
 

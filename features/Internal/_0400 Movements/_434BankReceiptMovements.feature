@@ -123,6 +123,7 @@ Scenario: _043400 preparation (Bank receipt)
 			And I execute 1C:Enterprise script at server
 				| "Documents.SalesReturn.FindByNumber(101).GetObject().Write(DocumentWriteMode.Posting);" |
 				| "Documents.SalesReturn.FindByNumber(104).GetObject().Write(DocumentWriteMode.Posting);" |
+				| "Documents.SalesReturn.FindByNumber(105).GetObject().Write(DocumentWriteMode.Posting);" |
 	* Load Bank receipt
 		When Create document BankReceipt objects
 		When Create document BankReceipt objects (exchange and transfer)
@@ -133,8 +134,9 @@ Scenario: _043400 preparation (Bank receipt)
 			| "Documents.BankReceipt.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);" |
 			| "Documents.BankReceipt.FindByNumber(4).GetObject().Write(DocumentWriteMode.Posting);" |
 			| "Documents.BankReceipt.FindByNumber(5).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.BankReceipt.FindByNumber(6).GetObject().Write(DocumentWriteMode.Posting);" |
 		Given I open hyperlink "e1cib/list/Document.BankReceipt"
-		If "List" table does not contain lines Then
+		If "List" table contains lines Then
 				| 'Number'  |
 				| '11' |
 				And I execute 1C:Enterprise script at server
@@ -256,10 +258,10 @@ Scenario: _043411 check Bank receipt movements by the Register "R2021 Customer t
 			| ''                                         | 'Expense'     | '15.04.2021 10:21:22' | '4 519,68'  | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Company Lomaniti' | 'Lomaniti' | 'Basic Partner terms, TRY' | 'Sales invoice 6 dated 17.02.2021 10:43:29' | 'No'                   |
 			| ''                                         | 'Expense'     | '15.04.2021 10:21:22' | '26 400'    | 'Main Company' | 'Local currency'               | 'TRY'      | 'Company Lomaniti' | 'Lomaniti' | 'Basic Partner terms, TRY' | 'Sales invoice 5 dated 17.02.2021 10:33:31' | 'No'                   |
 			| ''                                         | 'Expense'     | '15.04.2021 10:21:22' | '26 400'    | 'Main Company' | 'Local currency'               | 'TRY'      | 'Company Lomaniti' | 'Lomaniti' | 'Basic Partner terms, TRY' | 'Sales invoice 6 dated 17.02.2021 10:43:29' | 'No'                   |
-			| ''                                         | 'Expense'     | '15.04.2021 10:21:22' | '26 400'    | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Company Lomaniti' | 'Lomaniti' | 'Basic Partner terms, TRY' | 'Sales invoice 5 dated 17.02.2021 10:33:31' | 'No'                   |
-			| ''                                         | 'Expense'     | '15.04.2021 10:21:22' | '26 400'    | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Company Lomaniti' | 'Lomaniti' | 'Basic Partner terms, TRY' | 'Sales invoice 6 dated 17.02.2021 10:43:29' | 'No'                   |
 			| ''                                         | 'Expense'     | '15.04.2021 10:21:22' | '26 400'    | 'Main Company' | 'TRY'                          | 'TRY'      | 'Company Lomaniti' | 'Lomaniti' | 'Basic Partner terms, TRY' | 'Sales invoice 5 dated 17.02.2021 10:33:31' | 'No'                   |
 			| ''                                         | 'Expense'     | '15.04.2021 10:21:22' | '26 400'    | 'Main Company' | 'TRY'                          | 'TRY'      | 'Company Lomaniti' | 'Lomaniti' | 'Basic Partner terms, TRY' | 'Sales invoice 6 dated 17.02.2021 10:43:29' | 'No'                   |
+			| ''                                         | 'Expense'     | '15.04.2021 10:21:22' | '26 400'    | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Company Lomaniti' | 'Lomaniti' | 'Basic Partner terms, TRY' | 'Sales invoice 5 dated 17.02.2021 10:33:31' | 'No'                   |
+			| ''                                         | 'Expense'     | '15.04.2021 10:21:22' | '26 400'    | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Company Lomaniti' | 'Lomaniti' | 'Basic Partner terms, TRY' | 'Sales invoice 6 dated 17.02.2021 10:43:29' | 'No'                   |
 	And I close all client application windows
 
 Scenario: _043412 check Bank receipt movements by the Register "R2020 Advances from customer" (SI-BR, advance, checkbox Ignore advance - False)
@@ -329,6 +331,75 @@ Scenario: _043414 check Bank receipt movements by the Register "R2020 Advances f
 			| ''                                         | 'Receipt'     | '15.04.2021 10:14:37' | '140 687,5' | 'Main Company' | 'Local currency'               | 'TRY'      | 'Company Kalipso' | 'Kalipso' | 'Bank receipt 4 dated 15.04.2021 10:14:37' | 'No'                   |
 	And I close all client application windows
 
+Scenario: _043416 check Bank receipt movements by the Register "R2020 Advances from customer" (SI-SR-BR, advance, checkbox Ignore advance - False, BR>SI)
+	And I close all client application windows
+	* Select Bank receipt (payment from customer)
+		Given I open hyperlink "e1cib/list/Document.BankReceipt"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '6' |
+	* Check movements by the Register  "R2020 Advances from customer" 
+		And I click "Registrations report" button
+		And I select "R2020 Advances from customer" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Bank receipt 6 dated 21.04.2021 13:09:56' | ''            | ''                    | ''           | ''             | ''                             | ''         | ''                | ''        | ''                                         | ''                     |
+			| 'Document registrations records'           | ''            | ''                    | ''           | ''             | ''                             | ''         | ''                | ''        | ''                                         | ''                     |
+			| 'Register  "R2020 Advances from customer"' | ''            | ''                    | ''           | ''             | ''                             | ''         | ''                | ''        | ''                                         | ''                     |
+			| ''                                         | 'Record type' | 'Period'              | 'Resources'  | 'Dimensions'   | ''                             | ''         | ''                | ''        | ''                                         | 'Attributes'           |
+			| ''                                         | ''            | ''                    | 'Amount'     | 'Company'      | 'Multi currency movement type' | 'Currency' | 'Legal name'      | 'Partner' | 'Basis'                                    | 'Deferred calculation' |
+			| ''                                         | 'Receipt'     | '21.04.2021 13:09:56' | '25 000'     | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Company Kalipso' | 'Kalipso' | 'Bank receipt 6 dated 21.04.2021 13:09:56' | 'No'                   |
+			| ''                                         | 'Receipt'     | '21.04.2021 13:09:56' | '25 000'     | 'Main Company' | 'en description is empty'      | 'USD'      | 'Company Kalipso' | 'Kalipso' | 'Bank receipt 6 dated 21.04.2021 13:09:56' | 'No'                   |
+			| ''                                         | 'Receipt'     | '21.04.2021 13:09:56' | '140 687,5'  | 'Main Company' | 'Local currency'               | 'TRY'      | 'Company Kalipso' | 'Kalipso' | 'Bank receipt 6 dated 21.04.2021 13:09:56' | 'No'                   |
+			| ''                                         | 'Expense'     | '21.04.2021 13:09:56' | '20 049'     | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Company Kalipso' | 'Kalipso' | 'Bank receipt 6 dated 21.04.2021 13:09:56' | 'No'                   |
+			| ''                                         | 'Expense'     | '21.04.2021 13:09:56' | '20 049'     | 'Main Company' | 'en description is empty'      | 'USD'      | 'Company Kalipso' | 'Kalipso' | 'Bank receipt 6 dated 21.04.2021 13:09:56' | 'No'                   |
+			| ''                                         | 'Expense'     | '21.04.2021 13:09:56' | '112 825,75' | 'Main Company' | 'Local currency'               | 'TRY'      | 'Company Kalipso' | 'Kalipso' | 'Bank receipt 6 dated 21.04.2021 13:09:56' | 'No'                   |
+	And I close all client application windows
+
+
+
+Scenario: _043418 check Bank receipt movements by the Register "R2021 Customer transactions" (SI-SR-BR, advance, checkbox Ignore advance - False, BR>SI)
+	And I close all client application windows
+	* Select Bank receipt (payment from customer)
+		Given I open hyperlink "e1cib/list/Document.BankReceipt"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '6' |
+	* Check movements by the Register  "R2021 Customer transactions" 
+		And I click "Registrations report" button
+		And I select "R2021 Customer transactions" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Bank receipt 6 dated 21.04.2021 13:09:56' | ''            | ''                    | ''           | ''             | ''                             | ''         | ''                | ''        | ''                          | ''                                          | ''                     |
+			| 'Document registrations records'           | ''            | ''                    | ''           | ''             | ''                             | ''         | ''                | ''        | ''                          | ''                                          | ''                     |
+			| 'Register  "R2021 Customer transactions"'  | ''            | ''                    | ''           | ''             | ''                             | ''         | ''                | ''        | ''                          | ''                                          | ''                     |
+			| ''                                         | 'Record type' | 'Period'              | 'Resources'  | 'Dimensions'   | ''                             | ''         | ''                | ''        | ''                          | ''                                          | 'Attributes'           |
+			| ''                                         | ''            | ''                    | 'Amount'     | 'Company'      | 'Multi currency movement type' | 'Currency' | 'Legal name'      | 'Partner' | 'Agreement'                 | 'Basis'                                     | 'Deferred calculation' |
+			| ''                                         | 'Expense'     | '21.04.2021 13:09:56' | '20 049'     | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Company Kalipso' | 'Kalipso' | 'Personal Partner terms, $' | 'Sales invoice 4 dated 16.02.2021 10:59:49' | 'No'                   |
+			| ''                                         | 'Expense'     | '21.04.2021 13:09:56' | '20 049'     | 'Main Company' | 'USD'                          | 'USD'      | 'Company Kalipso' | 'Kalipso' | 'Personal Partner terms, $' | 'Sales invoice 4 dated 16.02.2021 10:59:49' | 'No'                   |
+			| ''                                         | 'Expense'     | '21.04.2021 13:09:56' | '20 049'     | 'Main Company' | 'en description is empty'      | 'USD'      | 'Company Kalipso' | 'Kalipso' | 'Personal Partner terms, $' | 'Sales invoice 4 dated 16.02.2021 10:59:49' | 'No'                   |
+			| ''                                         | 'Expense'     | '21.04.2021 13:09:56' | '112 825,75' | 'Main Company' | 'Local currency'               | 'TRY'      | 'Company Kalipso' | 'Kalipso' | 'Personal Partner terms, $' | 'Sales invoice 4 dated 16.02.2021 10:59:49' | 'No'                   |
+	And I close all client application windows
+
+Scenario: _043420 check Bank receipt movements by the Register "R5011 Partners aging" (SI-SR-BR, advance, checkbox Ignore advance - False, BR>SI)
+	And I close all client application windows
+	* Select Bank receipt (payment from customer)
+		Given I open hyperlink "e1cib/list/Document.BankReceipt"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '6' |
+	* Check movements by the Register  "R5011 Partners aging" 
+		And I click "Registrations report" button
+		And I select "R5011 Partners aging" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Bank receipt 6 dated 21.04.2021 13:09:56' | ''            | ''                    | ''          | ''             | ''         | ''                          | ''        | ''                                          | ''                    |
+			| 'Document registrations records'           | ''            | ''                    | ''          | ''             | ''         | ''                          | ''        | ''                                          | ''                    |
+			| 'Register  "R5011 Partners aging"'         | ''            | ''                    | ''          | ''             | ''         | ''                          | ''        | ''                                          | ''                    |
+			| ''                                         | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''         | ''                          | ''        | ''                                          | ''                    |
+			| ''                                         | ''            | ''                    | 'Amount'    | 'Company'      | 'Currency' | 'Agreement'                 | 'Partner' | 'Invoice'                                   | 'Payment date'        |
+			| ''                                         | 'Expense'     | '21.04.2021 13:09:56' | '20 049'    | 'Main Company' | 'USD'      | 'Personal Partner terms, $' | 'Kalipso' | 'Sales invoice 4 dated 16.02.2021 10:59:49' | '23.02.2021 00:00:00' |
+	And I close all client application windows
 
 Scenario: _043430 Bank receipt clear posting/mark for deletion
 	And I close all client application windows

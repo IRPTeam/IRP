@@ -66,7 +66,7 @@ Scenario: _043400 preparation (StressTesting)
 	When Create document PhysicalInventory objects (stress testing, 1000 strings)
 	When Create document PhysicalInventory objects (stress testing, 100strings)
 	When Create document SalesInvoice objects (stress testing, 1000 strings)
-
+	When Create document SalesInvoice objects (stress testing, 100strings)	
 
 
 Scenario: _9900001 post Physical inventory (1000 strings)
@@ -116,6 +116,96 @@ Scenario: _9900006 open Sales invoice (1000 strings)
 	And I go to line in "List" table
 		| 'Number'  |
 		| '1' |
+	And I select current line in "List" table
+	And I wait "Sales invoice 1 dated 22.04.2021 14:25:08" window opening in "50" seconds
+	And I close all client application windows
+
+Scenario: _9900007 change Sales invoice (1000 strings)
+	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+	And I go to line in "List" table
+		| 'Number'  |
+		| '1' |
+	And I select current line in "List" table
+	And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
+	And I click Select button of "Company" field
+	And I go to line in "List" table
+		| 'Description'    |
+		| 'Second Company' |
+	And I select current line in "List" table
+	And I click Select button of "Company" field
+	And I go to line in "List" table
+		| 'Description'    |
+		| 'Main Company' |
+	And I select current line in "List" table	
+	And I close all client application windows
+
+
+Scenario: _9900008 calculate offer Sales invoice (1000 strings)
+	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+	And I go to line in "List" table
+		| 'Number'  |
+		| '1' |
+	And I select current line in "List" table
+	And in the table "ItemList" I click "% Offers" button
+	And I activate "%" field in "Offers" table
+	And I select current line in "Offers" table
+	And I input "10,00" text in "Percent" field
+	And I click "Ok" button
+	And in the table "Offers" I click "OK" button
+	And "ItemList" table contains lines
+		| 'Offers amount'    |
+		| '3,00' |
+	And I close all client application windows
+
+Scenario: _9900010 post Sales invoice (100 strings)
+	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+	And I go to line in "List" table
+		| 'Number'  |
+		| '2' |
+	And in the table "List" I click the button named "ListContextMenuPost"
+	And I close all client application windows	
+
+Scenario: _9900011 open Sales invoice (100 strings)
+	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+	And I go to line in "List" table
+		| 'Number'  |
+		| '2' |
 	And in the table "List" I click the button named "ListContextMenuPost"
 	And I close all client application windows
 
+Scenario: _9900012 change Sales invoice (100 strings)
+	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+	And I go to line in "List" table
+		| 'Number'  |
+		| '2' |
+	And I select current line in "List" table
+	And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
+	And I click Select button of "Company" field
+	And I go to line in "List" table
+		| 'Description'    |
+		| 'Second Company' |
+	And I select current line in "List" table
+	And I click Select button of "Company" field
+	And I go to line in "List" table
+		| 'Description'    |
+		| 'Main Company' |
+	And I select current line in "List" table	
+	And I close all client application windows
+
+
+Scenario: _9900013 calculate offer Sales invoice (100 strings)
+	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+	And I go to line in "List" table
+		| 'Number'  |
+		| '2' |
+	And I select current line in "List" table
+	And in the table "ItemList" I click "% Offers" button
+	And I activate "%" field in "Offers" table
+	And I select current line in "Offers" table
+	And I input "10,00" text in "Percent" field
+	And I click "Ok" button
+	And in the table "Offers" I click "OK" button
+	And "ItemList" table contains lines
+		| 'Offers amount'    |
+		| '3,00' |
+	And I close all client application windows

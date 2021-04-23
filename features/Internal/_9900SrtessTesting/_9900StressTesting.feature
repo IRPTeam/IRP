@@ -157,6 +157,19 @@ Scenario: _9900008 calculate offer Sales invoice (1000 strings)
 		| '3,00' |
 	And I close all client application windows
 
+Scenario: _9900009 create Shipment confirmation based on Sales invoice (1000 strings)
+	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+	And I go to line in "List" table
+		| 'Number'  |
+		| '1' |
+	And I select current line in "List" table
+	* Open link form
+		And I click "Shipment confirmation" button
+		Then "Add linked document rows" window is opened
+	* Auto filling SC
+		And I click "Ok" button	
+	And I close all client application windows
+
 Scenario: _9900010 post Sales invoice (100 strings)
 	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 	And I go to line in "List" table
@@ -208,4 +221,17 @@ Scenario: _9900013 calculate offer Sales invoice (100 strings)
 	And "ItemList" table contains lines
 		| 'Offers amount'    |
 		| '3,00' |
+	And I close all client application windows
+
+Scenario: _9900014 create Shipment confirmation based on Sales invoice (100 strings)
+	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+	And I go to line in "List" table
+		| 'Number'  |
+		| '2' |
+	And I select current line in "List" table
+	* Open link form
+		And I click "Shipment confirmation" button
+		Then "Add linked document rows" window is opened
+	* Auto filling SC
+		And I click "Ok" button	
 	And I close all client application windows

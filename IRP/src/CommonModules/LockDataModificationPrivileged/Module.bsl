@@ -106,19 +106,25 @@ Function SourceIsLocked(Val SourceParams)
 EndFunction
 
 Function CalculateRuleByObject(SourceParams, AddInfo = Undefined)
+	
+	AccessGroups = UsersEvent.GetAccessGroupsByUser();
+	AccessGroups.Add(Catalogs.AccessGroups.EmptyRef());
+	
 	Query = New Query;
 	Query.Text =
 		"SELECT
 		|	LockDataModificationRules.Attribute,
 		|	LockDataModificationRules.ComparisonType,
 		|	LockDataModificationRules.Value,
-		|	LockDataModificationRules.LockDataModificationReasons
+		|	LockDataModificationRules.LockDataModificationReasons,
+		|	LockDataModificationRules.SetValueAsCode
 		|FROM
 		|	InformationRegister.LockDataModificationRules AS LockDataModificationRules
 		|WHERE
 		|	LockDataModificationRules.Type = &MetadataName
-		|	AND Not LockDataModificationRules.DisableRule";
-	
+		|	AND Not LockDataModificationRules.DisableRule
+		|	AND LockDataModificationRules.AccessGroup IN (&AccessGroup)";
+	Query.SetParameter("AccessGroup", AccessGroups);
 	Query.SetParameter("MetadataName", SourceParams.MetadataName);
 	
 	QueryResult = Query.Execute();
@@ -128,6 +134,10 @@ Function CalculateRuleByObject(SourceParams, AddInfo = Undefined)
 	VT = QueryResult.Unload();
 	For Each Row In VT Do
 		Row.Attribute = StrSplit(Row.Attribute, ".")[1];
+		
+		If Row.SetValueAsCode Then
+			Row.Value = Eval(Row.Value);
+		EndIf;
 	EndDo;
 	
 	Return VT;

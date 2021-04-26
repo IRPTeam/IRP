@@ -30,7 +30,7 @@ Procedure TypeOnChangeAtServer()
 		Record.Attribute = Undefined;
 		Return;
 	EndIf;
-	MetadataType = Enums.MetadataTypes[StrSplit(Record.Type,".")[0]];
+	MetadataType = Enums.MetadataTypes[StrSplit(Record.Type, ".")[0]];
 	MetaItem = Metadata.FindByFullName(Record.Type);
 	If MetadataInfo.hasAttributes(MetadataType) Then
 		AddChild(MetaItem, Items.Attribute.ChoiceList, "Attributes");
@@ -51,7 +51,7 @@ Procedure TypeOnChangeAtServer()
 	For Each CmAttribute In Metadata.CommonAttributes Do
 		If CmAttribute.Content.Contains(Metadata.FindByFullName(Record.Type)) Then
 			Items.Attribute.ChoiceList.Add("CommonAttribute." + CmAttribute.Name, 
-				?(IsBlankString(CmAttribute.Synonym), CmAttribute.Name, CmAttribute.Synonym), , PictureLib.Attribute);
+				?(IsBlankString(CmAttribute.Synonym), CmAttribute.Name, CmAttribute.Synonym), , PictureLib.CommonAttributes);
 		EndIf;
 	EndDo;
 EndProcedure
@@ -64,7 +64,7 @@ Procedure AddChild(MetaItem, AttributeChoiceList, DataType)
 	EndIf;
 
 	For Each AddChild In MetaItem[DataType] Do
-		AttributeChoiceList.Add(DataType + "." + AddChild.Name, ?(IsBlankString(AddChild.Synonym), AddChild.Name, AddChild.Synonym));
+		AttributeChoiceList.Add(DataType + "." + AddChild.Name, ?(IsBlankString(AddChild.Synonym), AddChild.Name, AddChild.Synonym), , PictureLib[DataType]);
 	EndDo;
 	
 EndProcedure
@@ -80,10 +80,25 @@ Procedure AttributeOnChangeAtServer()
 		Record.Value = Undefined;
 		Return;
 	EndIf;
-	If StrSplit(Record.Attribute, ".")[0] = "CommonAttribute" Then
-		Items.Value.TypeRestriction = Metadata.FindByFullName(Record.Attribute).Type;
+	
+	If Record.SetValueAsCode Then
+		Items.Value.TypeRestriction = New TypeDescription("String");
+		Items.Value.InputHint = String(R().S_032);
 	Else
-		Items.Value.TypeRestriction = Metadata.FindByFullName(Record.Type)
-				[StrSplit(Record.Attribute, ".")[0]][StrSplit(Record.Attribute, ".")[1]].Type;
+		If StrSplit(Record.Attribute, ".")[0] = "CommonAttribute" Then
+			Items.Value.TypeRestriction = Metadata.FindByFullName(Record.Attribute).Type;
+		Else
+			Items.Value.TypeRestriction = Metadata.FindByFullName(Record.Type)
+					[StrSplit(Record.Attribute, ".")[0]][StrSplit(Record.Attribute, ".")[1]].Type;
+		EndIf;
+		Items.Value.InputHint = String(Items.Value.TypeRestriction);
 	EndIf;
+	
 EndProcedure
+
+
+&AtClient
+Procedure SetValueAsCodeOnChange(Item)
+	AttributeOnChangeAtServer();
+EndProcedure
+

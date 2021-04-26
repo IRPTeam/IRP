@@ -68,13 +68,12 @@
       <types>AnyRef</types>
       <numberQualifiers>
         <precision>10</precision>
+        <scale>5</scale>
       </numberQualifiers>
       <stringQualifiers>
-        <length>10</length>
+        <length>100</length>
       </stringQualifiers>
-      <dateQualifiers>
-        <dateFractions>Date</dateFractions>
-      </dateQualifiers>
+      <dateQualifiers/>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
@@ -130,6 +129,21 @@
     <dataHistory>Use</dataHistory>
     <fillValue xsi:type="core:UndefinedValue"/>
   </resources>
+  <resources uuid="5995d0eb-d8fa-42d3-8901-36cd8197eb08">
+    <name>SetValueAsCode</name>
+    <synonym>
+      <key>en</key>
+      <value>Set value as code</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </resources>
   <dimensions uuid="cb658524-33b9-4877-9676-a60c1664d0dd">
     <name>Type</name>
     <synonym>
@@ -150,6 +164,18 @@
     <dataHistory>Use</dataHistory>
     <fillValue xsi:type="core:UndefinedValue"/>
     <mainFilter>true</mainFilter>
+  </dimensions>
+  <dimensions uuid="9c90ca64-b10a-4f24-911e-c14f48aa745b">
+    <name>AccessGroup</name>
+    <synonym>
+      <key>en</key>
+      <value>User access groups</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.AccessGroups</types>
+    </type>
+    <createOnInput>DontUse</createOnInput>
+    <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
   </dimensions>
   <forms uuid="ab616530-682b-4442-9ec3-2e901d198407">
     <name>RecordForm</name>

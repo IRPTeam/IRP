@@ -2135,7 +2135,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R4035B_IncomingStocks());
 	QueryArray.Add(R4036B_IncomingStocksRequested());
 	QueryArray.Add(R5010B_ReconciliationStatement());
-
+	QueryArray.Add(T1001I_PartnerTransactions());
 	Return QueryArray;
 EndFunction
 
@@ -2233,6 +2233,8 @@ Function ItemList()
 	|	PurchaseInvoiceItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS IsService,
 	|	PurchaseInvoiceItemList.DeliveryDate AS DeliveryDate,
 	|	PurchaseInvoiceItemList.NetAmount AS NetAmount,
+	|	PurchaseInvoiceItemList.Ref.IgnoreAdvances AS IgnoreAdvances,
+	|	PurchaseInvoiceItemList.Key,
 	|	GoodsReceipts.GoodsReceipt
 	|INTO ItemList
 	|FROM
@@ -2400,6 +2402,26 @@ Function R1021B_VendorsTransactions()
 		|	ItemList.Period,
 		|	VALUE(AccumulationRecordType.Receipt)";
 EndFunction
+
+Function T1001I_PartnerTransactions()
+	Return
+		"SELECT
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Currency,
+		|	ItemList.LegalName,
+		|	ItemList.Partner,
+		|	ItemList.Agreement,
+		|	ItemList.BasisDocument AS TransactionDocument,
+		|	TRUE AS IsVendorTransaction,
+		|	ItemList.Amount,
+		|	ItemList.Key
+		|INTO T1001I_PartnerTransactions
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	NOT ItemList.IgnoreAdvances";
+EndFunction		
 
 Function R1031B_ReceiptInvoicing()
 	Return

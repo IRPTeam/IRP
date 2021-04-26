@@ -388,7 +388,7 @@ Procedure AdvancesOnTransaction(Parameters, RegisterName, TransactionsTableName,
 	Query = New Query();
 	Query.TempTablesManager = Parameters.TempTablesManager;
 	Query.Text = StrTemplate(GetQueryTextAdvancesOnTransaction(), RegisterName, TransactionsTableName);
-	Query.SetParameter("Period", New Boundary(Parameters.PointInTime, BoundaryType.Excluding));
+	Query.SetParameter("Period", New Boundary(Parameters.RecorderPointInTime, BoundaryType.Excluding));
 	QueryResult = Query.Execute();	
 	AdvancesTable = QueryResult.Unload();
 	OffsetOfAdvance = DistributeAdvancesTableOnTransaction(AdvancesTable);

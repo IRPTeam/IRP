@@ -42,6 +42,19 @@
     <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
   </attributes>
+  <attributes uuid="f5642121-0002-40b7-917e-aeb4e6273e03">
+    <name>OffsetOfAdvance</name>
+    <synonym>
+      <key>en</key>
+      <value>Offset of advance</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+  </attributes>
   <dimensions uuid="08e8d685-ae15-4d63-9b9c-ca0a6d88e70c">
     <name>Company</name>
     <synonym>

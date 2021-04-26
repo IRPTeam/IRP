@@ -63,46 +63,12 @@ Scenario: _043400 preparation (StressTesting)
 				| "DocumentDiscount" |
 			When add Plugin for document discount
 			When Create catalog CancelReturnReasons objects
-	When Create document PhysicalInventory objects (stress testing, 1000 strings)
-	When Create document PhysicalInventory objects (stress testing, 100strings)
 	When Create document SalesInvoice objects (stress testing, 1000 strings)
 	When Create document SalesInvoice objects (stress testing, 100strings)	
 	When Create document PurchaseInvoice objects (stress testing, 1000 strings)
 	When Create document PurchaseInvoice objects (stress testing, 100strings)
-	
-Scenario: _9900001 post Physical inventory (1000 strings)
-	Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
-	And I go to line in "List" table
-		| 'Number'  |
-		| '1' |
-	And in the table "List" I click the button named "ListContextMenuPost"
-	And I close all client application windows
 
-Scenario: _9900002 post Physical inventory (100 strings)
-	Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
-	And I go to line in "List" table
-		| 'Number'  |
-		| '2' |
-	And in the table "List" I click the button named "ListContextMenuPost"
-	And I close all client application windows	
 
-Scenario: _9900003 open Physical inventory (1000 strings)
-	Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
-	And I go to line in "List" table
-		| 'Number'  |
-		| '1' |
-	And I select current line in "List" table
-	And I wait "Physical inventory 1 dated 22.04.2021 12:42:15" window opening in "50" seconds
-	And I close all client application windows
-
-Scenario: _9900004 open Physical inventory (100 strings)
-	Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
-	And I go to line in "List" table
-		| 'Number'  |
-		| '2' |
-	And I select current line in "List" table
-	And I wait "Physical inventory 2 dated 23.04.2021 12:42:15" window opening in "50" seconds
-	And I close all client application windows
 
 Scenario: _9900005 post Sales invoice (1000 strings)
 	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
@@ -360,7 +326,7 @@ Scenario: _9900044 calculate offer Purchase invoice (100 strings)
 	And I close all client application windows
 
 Scenario: _9900045 create Goods receipt based on Purchase invoice (100 strings)
-	Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+	Given I open hyperlink "ecib/list/Document.PurchaseInvoice"
 	And I go to line in "List" table
 		| 'Number'  |
 		| '2' |

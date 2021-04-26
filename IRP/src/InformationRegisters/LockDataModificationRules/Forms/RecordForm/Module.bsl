@@ -49,8 +49,8 @@ Procedure TypeOnChangeAtServer()
 	EndIf;
 
 	For Each CmAttribute In Metadata.CommonAttributes Do
-		If CmAttribute.Content.Contains(Record.Type) Then
-			Items.Attribute.ChoiceList.Add("CommonAttributes." + CmAttribute.Name, 
+		If CmAttribute.Content.Contains(Metadata.FindByFullName(Record.Type)) Then
+			Items.Attribute.ChoiceList.Add("CommonAttribute." + CmAttribute.Name, 
 				?(IsBlankString(CmAttribute.Synonym), CmAttribute.Name, CmAttribute.Synonym), , PictureLib.Attribute);
 		EndIf;
 	EndDo;
@@ -80,7 +80,7 @@ Procedure AttributeOnChangeAtServer()
 		Record.Value = Undefined;
 		Return;
 	EndIf;
-	If StrSplit(Record.Attribute, ".")[0] = "CommonAttributes" Then
+	If StrSplit(Record.Attribute, ".")[0] = "CommonAttribute" Then
 		Items.Value.TypeRestriction = Metadata.FindByFullName(Record.Attribute).Type;
 	Else
 		Items.Value.TypeRestriction = Metadata.FindByFullName(Record.Type)

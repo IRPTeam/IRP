@@ -840,8 +840,8 @@ Scenario: _0401331 check Sales invoice movements by the Register  "R2021 Custome
 	* Check movements by the Register  "R2021 Customer transactions"
 		And I click "Registrations report" button
 		And I select "R2021 Customer transactions" exact value from "Register" drop-down list
-		Then "ResultTable" spreadsheet document is equal
 		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
 			| 'Sales invoice 9 dated 15.04.2021 14:53:05' | ''            | ''                    | ''          | ''             | ''                             | ''         | ''           | ''        | ''                 | ''                                          | ''                     |
 			| 'Document registrations records'            | ''            | ''                    | ''          | ''             | ''                             | ''         | ''           | ''        | ''                 | ''                                          | ''                     |
 			| 'Register  "R2021 Customer transactions"'   | ''            | ''                    | ''          | ''             | ''                             | ''         | ''           | ''        | ''                 | ''                                          | ''                     |
@@ -862,8 +862,8 @@ Scenario: _0401332 check Sales invoice movements by the Register  "R2021 Custome
 	* Check movements by the Register  "R2021 Customer transactions"
 		And I click "Registrations report" button
 		And I select "R2021 Customer transactions" exact value from "Register" drop-down list
-		Then "ResultTable" spreadsheet document is equal
 		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
 			| 'Sales invoice 4 dated 16.02.2021 10:59:49' | ''            | ''                    | ''           | ''             | ''                             | ''         | ''                | ''        | ''                          | ''                                          | ''                     |
 			| 'Document registrations records'            | ''            | ''                    | ''           | ''             | ''                             | ''         | ''                | ''        | ''                          | ''                                          | ''                     |
 			| 'Register  "R2021 Customer transactions"'   | ''            | ''                    | ''           | ''             | ''                             | ''         | ''                | ''        | ''                          | ''                                          | ''                     |

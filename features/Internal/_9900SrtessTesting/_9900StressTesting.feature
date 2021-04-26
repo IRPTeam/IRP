@@ -67,8 +67,9 @@ Scenario: _043400 preparation (StressTesting)
 	When Create document PhysicalInventory objects (stress testing, 100strings)
 	When Create document SalesInvoice objects (stress testing, 1000 strings)
 	When Create document SalesInvoice objects (stress testing, 100strings)	
-
-
+	When Create document PurchaseInvoice objects (stress testing, 1000 strings)
+	When Create document PurchaseInvoice objects (stress testing, 100strings)
+	
 Scenario: _9900001 post Physical inventory (1000 strings)
 	Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
 	And I go to line in "List" table
@@ -235,3 +236,138 @@ Scenario: _9900014 create Shipment confirmation based on Sales invoice (100 stri
 	* Auto filling SC
 		And I click "Ok" button	
 	And I close all client application windows
+
+Scenario: _9900030 open Purchase invoice (1000 strings)
+	Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+	And I go to line in "List" table
+		| 'Number'  |
+		| '1' |
+	And I select current line in "List" table
+	And I wait "Purchase invoice 1 dated 26.04.2021 10:34:49" window opening in "50" seconds
+	And I close all client application windows
+
+Scenario: _9900031 post Purchase invoice (1000 strings)
+	Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+	And I go to line in "List" table
+		| 'Number'  |
+		| '1' |
+	And in the table "List" I click the button named "ListContextMenuPost"
+	And I close all client application windows
+
+Scenario: _9900032 change Purchase invoice (1000 strings)
+	Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+	And I go to line in "List" table
+		| 'Number'  |
+		| '1' |
+	And I select current line in "List" table
+	And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
+	And I click Select button of "Company" field
+	And I go to line in "List" table
+		| 'Description'    |
+		| 'Second Company' |
+	And I select current line in "List" table
+	And I click Select button of "Company" field
+	And I go to line in "List" table
+		| 'Description'    |
+		| 'Main Company' |
+	And I select current line in "List" table	
+	And I close all client application windows
+
+
+Scenario: _9900033 calculate offer Purchase invoice (1000 strings)
+	Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+	And I go to line in "List" table
+		| 'Number'  |
+		| '1' |
+	And I select current line in "List" table
+	And I click "% Offers" button
+	And I activate "%" field in "Offers" table
+	And I select current line in "Offers" table
+	And I input "10,00" text in "Percent" field
+	And I click "Ok" button
+	And in the table "Offers" I click "OK" button
+	And "ItemList" table contains lines
+		| 'Offers amount'    |
+		| '1,00' |
+	And I close all client application windows
+
+Scenario: _9900034 create Goods receipt based on Purchase invoice (1000 strings)
+	Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+	And I go to line in "List" table
+		| 'Number'  |
+		| '1' |
+	And I select current line in "List" table
+	* Open link form
+		And I click "Goods receipt" button
+		Then "Add linked document rows" window is opened
+	* Auto filling GR
+		And I click "Ok" button	
+	And I close all client application windows	
+
+
+Scenario: _9900041 open Purchase invoice (100 strings)
+	Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+	And I go to line in "List" table
+		| 'Number'  |
+		| '2' |
+	And I select current line in "List" table
+	And I wait "Purchase invoice 2 dated 26.04.2021 10:34:50" window opening in "50" seconds
+	And I close all client application windows
+
+Scenario: _9900042 post Purchase invoice (100 strings)
+	Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+	And I go to line in "List" table
+		| 'Number'  |
+		| '2' |
+	And in the table "List" I click the button named "ListContextMenuPost"
+	And I close all client application windows
+
+Scenario: _9900043 change Purchase invoice (100 strings)
+	Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+	And I go to line in "List" table
+		| 'Number'  |
+		| '2' |
+	And I select current line in "List" table
+	And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
+	And I click Select button of "Company" field
+	And I go to line in "List" table
+		| 'Description'    |
+		| 'Second Company' |
+	And I select current line in "List" table
+	And I click Select button of "Company" field
+	And I go to line in "List" table
+		| 'Description'    |
+		| 'Main Company' |
+	And I select current line in "List" table	
+	And I close all client application windows
+
+
+Scenario: _9900044 calculate offer Purchase invoice (100 strings)
+	Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+	And I go to line in "List" table
+		| 'Number'  |
+		| '2' |
+	And I select current line in "List" table
+	And I click "% Offers" button
+	And I activate "%" field in "Offers" table
+	And I select current line in "Offers" table
+	And I input "10,00" text in "Percent" field
+	And I click "Ok" button
+	And in the table "Offers" I click "OK" button
+	And "ItemList" table contains lines
+		| 'Offers amount'    |
+		| '1,00' |
+	And I close all client application windows
+
+Scenario: _9900045 create Goods receipt based on Purchase invoice (100 strings)
+	Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+	And I go to line in "List" table
+		| 'Number'  |
+		| '2' |
+	And I select current line in "List" table
+	* Open link form
+		And I click "Goods receipt" button
+		Then "Add linked document rows" window is opened
+	* Auto filling GR
+		And I click "Ok" button	
+	And I close all client application windows	

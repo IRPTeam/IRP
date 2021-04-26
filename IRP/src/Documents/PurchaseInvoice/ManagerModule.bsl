@@ -5,9 +5,6 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	AccReg = Metadata.AccumulationRegisters;
 	Tables = New Structure();
 	Tables.Insert("OrderBalance"                          , PostingServer.CreateTable(AccReg.OrderBalance));
-	Tables.Insert("PartnerApTransactions"                 , PostingServer.CreateTable(AccReg.PartnerApTransactions));
-	Tables.Insert("AdvanceToSuppliers_Lock"               , PostingServer.CreateTable(AccReg.AdvanceToSuppliers));
-	Tables.Insert("PartnerApTransactions_OffsetOfAdvance" , PostingServer.CreateTable(AccReg.AdvanceToSuppliers));
 	Tables.Insert("ReceiptOrders"                         , PostingServer.CreateTable(AccReg.ReceiptOrders));
 	Tables.Insert("ExpensesTurnovers"                     , PostingServer.CreateTable(AccReg.ExpensesTurnovers));
 	Tables.Insert("GoodsReceiptSchedule_Expense"          , PostingServer.CreateTable(AccReg.GoodsReceiptSchedule));
@@ -221,8 +218,6 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Query.SetParameter("QueryTable", QueryTable);
 	Query.Execute();
 	
-	GetTables_Common(Tables, "tmp", Parameters);
-	
 	Query = New Query();
 	Query.TempTablesManager = Parameters.TempTablesManager;
 	Query.Text =
@@ -357,81 +352,6 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	
 	Return Tables;
 EndFunction
-
-Procedure GetTables_Common(Tables, TableName, Parameters)
-	// tmp
-	Query = New Query();
-	Query.TempTablesManager = Parameters.TempTablesManager;
-	#Region QueryText
-	Query.Text =
-		// [0]
-		"SELECT
-		|	tmp.Company AS Company,
-		|	CASE
-		|		WHEN tmp.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
-		|			THEN tmp.PurchaseInvoice
-		|		ELSE UNDEFINED
-		|	END AS BasisDocument,
-		|	tmp.Partner AS Partner,
-		|	tmp.LegalName AS LegalName,
-		|	tmp.Agreement AS Agreement,
-		|	tmp.Currency AS Currency,
-		|	SUM(tmp.Amount) AS Amount,
-		|	tmp.Period
-		|FROM
-		|	tmp AS tmp
-		|GROUP BY
-		|	tmp.Company,
-		|	CASE
-		|		WHEN tmp.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
-		|			THEN tmp.PurchaseInvoice
-		|		ELSE UNDEFINED
-		|	END,
-		|	tmp.Partner,
-		|	tmp.LegalName,
-		|	tmp.Agreement,
-		|	tmp.Currency,
-		|	tmp.Period
-		|;
-		|
-		|
-		|//[1]//////////////////////////////////////////////////////////////////////////////
-		|SELECT
-		|	tmp.Company AS Company,
-		|	CASE
-		|		WHEN tmp.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
-		|			THEN tmp.PurchaseInvoice
-		|		ELSE UNDEFINED
-		|	END AS BasisDocument,
-		|	tmp.Partner AS Partner,
-		|	tmp.LegalName AS LegalName,
-		|	tmp.Agreement AS Agreement,
-		|	tmp.Currency AS Currency,
-		|	SUM(tmp.Amount) AS DocumentAmount,
-		|	tmp.Period
-		|FROM
-		|	tmp AS tmp
-		|GROUP BY
-		|	tmp.Company,
-		|	CASE
-		|		WHEN tmp.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
-		|			THEN tmp.PurchaseInvoice
-		|		ELSE UNDEFINED
-		|	END,
-		|	tmp.Partner,
-		|	tmp.LegalName,
-		|	tmp.Agreement,
-		|	tmp.Currency,
-		|	tmp.Period";
-	Query.Text = StrReplace(Query.Text, "tmp", TableName);
-	#EndRegion
-	
-	QueryResults = Query.ExecuteBatch();
-	
-	Tables.PartnerApTransactions                 = QueryResults[0].Unload();
-	Tables.AdvanceToSuppliers_Lock               = QueryResults[1].Unload();
-	Tables.PartnerApTransactions_OffsetOfAdvance = New ValueTable();
-EndProcedure
 
 #Region Table_tmp_1
 
@@ -2017,8 +1937,6 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 #Region NewRegisterPosting
 	Tables = Parameters.DocumentDataTables;
 	
-	OffsetOfPartnersServer.Vendors_OnTransaction(Parameters);
-	
 	Parameters.Insert("ConsiderStocksRequested", True);
 	IncomingStocksServer.ClosureIncomingStocks(Parameters);
 	
@@ -2026,56 +1944,6 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	PostingServer.SetRegisters(Tables, Ref);
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
 #EndRegion
-	
-	// Advance to suppliers
-	Parameters.DocumentDataTables.PartnerApTransactions_OffsetOfAdvance =
-		AccumulationRegisters.AdvanceToSuppliers.GetTableAdvanceToSuppliers_OffsetOfAdvance(Parameters.Object.RegisterRecords
-			, Parameters.PointInTime
-			, Parameters.DocumentDataTables.AdvanceToSuppliers_Lock);
-			
-	If Parameters.DocumentDataTables.PartnerApTransactions_OffsetOfAdvance.Count() Then
-    	Query = New Query();
-    	Query.Text = 
-    	"SELECT
-    	|	tmp.Company,
-    	|	tmp.Partner,
-    	|	tmp.LegalName,
-    	|	tmp.BasisDocument,
-    	|	tmp.Currency,
-    	|	tmp.Amount
-    	|INTO tmp
-    	|FROM
-    	|	&QueryTable AS tmp
-    	|;
-    	|////////////////////////////////////////////////////////////////////////////////
-    	|SELECT
-    	|	AccountsStatementBalance.Company,
-    	|	AccountsStatementBalance.Partner,
-    	|	AccountsStatementBalance.LegalName,
-    	|	AccountsStatementBalance.Currency,
-    	|	&Period AS Period,
-    	|	AccountsStatementBalance.AdvanceFromCustomersBalance AS AdvanceFromCustomersBalance,
-    	|	-tmp.Amount AS AdvanceFromCustomers
-    	|FROM
-    	|	AccumulationRegister.AccountsStatement.Balance(&PointInTime, (Company, Partner, LegalName, Currency) IN
-    	|		(SELECT
-    	|			tmp.Company,
-    	|			tmp.Partner,
-    	|			tmp.LegalName,
-    	|			tmp.Currency
-    	|		FROM
-    	|			tmp AS tmp)) AS AccountsStatementBalance
-    	|		INNER JOIN tmp AS tmp
-    	|		ON AccountsStatementBalance.Company = tmp.Company
-    	|		AND AccountsStatementBalance.Partner = tmp.Partner
-    	|		AND AccountsStatementBalance.LegalName = tmp.LegalName
-    	|		AND AccountsStatementBalance.Currency = tmp.Currency";
-    	Query.SetParameter("QueryTable", Parameters.DocumentDataTables.PartnerApTransactions_OffsetOfAdvance);
-    	Query.SetParameter("PointInTime", Parameters.PointInTime);
-    	Query.SetParameter("Period", Parameters.Object.Date);
-    	Parameters.DocumentDataTables.Insert("PartnerApTransactions_OffsetOfAdvance_AccountStatement",
-    	Query.Execute().Unload());
-    EndIf;
 EndProcedure
 
 Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
@@ -2087,68 +1955,6 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 			AccumulationRecordType.Expense,
 			Parameters.DocumentDataTables.OrderBalance,
 			True));
-				
-	// AccountsStatement
-	ArrayOfTables = New Array();
-	Table1 = Parameters.DocumentDataTables.PartnerApTransactions.Copy();
-	Table1.Columns.Amount.Name = "TransactionAP";
-	PostingServer.AddColumnsToAccountsStatementTable(Table1);
-	Table1.FillValues(AccumulationRecordType.Receipt, "RecordType");
-	ArrayOfTables.Add(Table1);
-	
-	Table2 = Parameters.DocumentDataTables.PartnerApTransactions_OffsetOfAdvance.Copy();
-	Table2.Columns.Amount.Name = "TransactionAP";
-	PostingServer.AddColumnsToAccountsStatementTable(Table2);
-	Table2.FillValues(AccumulationRecordType.Expense, "RecordType");
-	ArrayOfTables.Add(Table2);
-	
-	Table3 = Parameters.DocumentDataTables.PartnerApTransactions_OffsetOfAdvance.Copy();
-	Table3.Columns.Amount.Name = "AdvanceToSuppliers";
-	PostingServer.AddColumnsToAccountsStatementTable(Table3);
-	Table3.FillValues(AccumulationRecordType.Expense, "RecordType");
-	ArrayOfTables.Add(Table3);
-	
-	If Parameters.DocumentDataTables.Property("PartnerApTransactions_OffsetOfAdvance_AccountStatement") Then
-		Table4 = Parameters.DocumentDataTables.PartnerApTransactions_OffsetOfAdvance_AccountStatement.Copy();
-		PostingServer.AddColumnsToAccountsStatementTable(Table4);
-		Table4.FillValues(AccumulationRecordType.Expense, "RecordType");
-		ArrayOfTables.Add(Table4);
-	EndIf;
-	
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.AccountsStatement,
-		New Structure("RecordSet, WriteInTransaction",
-			PostingServer.JoinTables(ArrayOfTables,
-				"RecordType, Period, Company, Partner, LegalName, BasisDocument, Currency,
-				| TransactionAP, AdvanceToSuppliers,
-				| TransactionAR, AdvanceFromCustomers"),
-			Parameters.IsReposting));	
-	
-	// PartnerApTransactions
-	// PartnerApTransactions [Receipt]  
-	// PartnerApTransactions_OffsetOfAdvance [Expense]
-	ArrayOfTables = New Array();
-	Table1 = Parameters.DocumentDataTables.PartnerApTransactions.Copy();
-	Table1.Columns.Add("RecordType", New TypeDescription("AccumulationRecordType"));
-	Table1.FillValues(AccumulationRecordType.Receipt, "RecordType");
-	ArrayOfTables.Add(Table1);
-	
-	Table2 = Parameters.DocumentDataTables.PartnerApTransactions_OffsetOfAdvance.Copy();
-	Table2.Columns.Add("RecordType", New TypeDescription("AccumulationRecordType"));
-	Table2.FillValues(AccumulationRecordType.Expense, "RecordType");
-	ArrayOfTables.Add(Table2);
-	
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.PartnerApTransactions,
-		New Structure("RecordSet, WriteInTransaction",
-			PostingServer.JoinTables(ArrayOfTables,
-				"RecordType, Period, Company, BasisDocument, Partner, 
-				|LegalName, Agreement, Currency, Amount"),
-			Parameters.IsReposting));
-	
-	// AdvanceToSuppliers
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.AdvanceToSuppliers,
-		New Structure("RecordType, RecordSet",
-			AccumulationRecordType.Expense,
-			Parameters.DocumentDataTables.PartnerApTransactions_OffsetOfAdvance));
 	
 	// ReceiptOrders
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords.ReceiptOrders,
@@ -2217,7 +2023,6 @@ EndFunction
 
 Procedure UndopostingCheckBeforeWrite(Ref, Cancel, Parameters, AddInfo = Undefined) Export
 #Region NewRegisterPosting
-	OffsetOfPartnersServer.Vendors_OnTransaction_Unposting(Parameters);
 	IncomingStocksServer.ClosureIncomingStocks_Unposting(Parameters);
 	
 	QueryArray = GetQueryTextsMasterTables();
@@ -2247,13 +2052,6 @@ Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
 	                                                       AccumulationRecordType.Expense, Unposting, AddInfo) Then
 		Cancel = True;
 	EndIf;
-	
-//	If Not Cancel And Not AccReg.GoodsInTransitIncoming.CheckBalance(Ref, LineNumberAndRowKeyFromItemList,
-//	                                                                 Parameters.DocumentDataTables.GoodsInTransitIncoming,
-//	                                                                 Parameters.DocumentDataTables.GoodsInTransitIncoming_Exists,
-//	                                                                 AccumulationRecordType.Receipt, Unposting, AddInfo) Then
-//		Cancel = True;
-//	EndIf;
 	
 	If Not Cancel And Not AccReg.OrderProcurement.CheckBalance(Ref, LineNumberAndRowKeyFromItemList,
 	                                                           Parameters.DocumentDataTables.OrderProcurement,
@@ -2306,7 +2104,6 @@ EndFunction
 Function GetQueryTextsSecondaryTables()
 	QueryArray = New Array;
 	QueryArray.Add(ItemList());
-	QueryArray.Add(VendorsTransactions());
 	QueryArray.Add(SerialLotNumbers());
 	QueryArray.Add(IncomingStocksReal());
 	QueryArray.Add(PostingServer.Exists_R4011B_FreeStocks());
@@ -2482,30 +2279,6 @@ Function ItemList()
 	|	AND PurchaseInvoiceTaxList.Ref = &Ref";
 EndFunction
 
-Function VendorsTransactions()
-	Return
-		"SELECT
-		|	ItemList.Period,
-		|	ItemList.Company AS Company,
-		|	ItemList.Currency AS Currency,
-		|	ItemList.LegalName AS LegalName,
-		|	ItemList.Partner AS Partner,
-		|	ItemList.BasisDocument TransactionDocument,
-		|	ItemList.Agreement AS Agreement,
-		|	SUM(ItemList.Amount) AS DocumentAmount
-		|INTO VendorsTransactions
-		|FROM
-		|	ItemList AS ItemList
-		|GROUP BY
-		|	ItemList.Company,
-		|	ItemList.BasisDocument,
-		|	ItemList.Partner,
-		|	ItemList.LegalName,
-		|	ItemList.Agreement,
-		|	ItemList.Currency,
-		|	ItemList.Period";
-EndFunction
-
 Function SerialLotNumbers()
 	Return
 		"SELECT
@@ -2594,76 +2367,38 @@ EndFunction
 
 Function R1020B_AdvancesToVendors()
 	Return
-		"SELECT
-		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		|	OffsetOfAdvance.Period,
-		|	OffsetOfAdvance.Company,
-		|	OffsetOfAdvance.Currency,
-		|	OffsetOfAdvance.LegalName,
-		|	OffsetOfAdvance.Partner,
-		|	OffsetOfAdvance.AdvancesDocument AS Basis,
-		|	SUM(OffsetOfAdvance.Amount)
+		"SELECT *
 		|INTO R1020B_AdvancesToVendors
 		|FROM
-		|	OffsetOfAdvance AS OffsetOfAdvance
-		|GROUP BY
-		|	OffsetOfAdvance.Period,
-		|	OffsetOfAdvance.Company,
-		|	OffsetOfAdvance.Currency,
-		|	OffsetOfAdvance.LegalName,
-		|	OffsetOfAdvance.Partner,
-		|	OffsetOfAdvance.AdvancesDocument,
-		|	VALUE(AccumulationRecordType.Expense)";
-EndFunction
+		|	ItemList AS ItemList
+		|WHERE
+		|	FALSE";
+	EndFunction
 
 Function R1021B_VendorsTransactions()
 	Return
 		"SELECT
 		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		|	VendorsTransactions.Period,
-		|	VendorsTransactions.Company,
-		|	VendorsTransactions.Currency,
-		|	VendorsTransactions.LegalName,
-		|	VendorsTransactions.Partner,
-		|	VendorsTransactions.Agreement,
-		|	VendorsTransactions.TransactionDocument AS Basis,
-		|	SUM(VendorsTransactions.DocumentAmount) AS Amount
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Currency,
+		|	ItemList.LegalName,
+		|	ItemList.Partner,
+		|	ItemList.Agreement,
+		|	ItemList.BasisDocument AS Basis,
+		|	SUM(ItemList.Amount) AS Amount
 		|INTO R1021B_VendorsTransactions
 		|FROM
-		|	VendorsTransactions AS VendorsTransactions
+		|	ItemList AS ItemList
 		|GROUP BY
-		|	VendorsTransactions.Period,
-		|	VendorsTransactions.Company,
-		|	VendorsTransactions.Currency,
-		|	VendorsTransactions.LegalName,
-		|	VendorsTransactions.Partner,
-		|	VendorsTransactions.Agreement,
-		|	VendorsTransactions.TransactionDocument,
-		|	VALUE(AccumulationRecordType.Receipt)
-		|
-		|UNION ALL
-		|
-		|SELECT
-		|	VALUE(AccumulationRecordType.Expense),
-		|	OffsetOfAdvance.Period,
-		|	OffsetOfAdvance.Company,
-		|	OffsetOfAdvance.Currency,
-		|	OffsetOfAdvance.LegalName,
-		|	OffsetOfAdvance.Partner,
-		|	OffsetOfAdvance.Agreement,
-		|	OffsetOfAdvance.TransactionDocument,
-		|	SUM(OffsetOfAdvance.Amount)
-		|FROM
-		|	OffsetOfAdvance AS OffsetOfAdvance
-		|GROUP BY
-		|	OffsetOfAdvance.Period,
-		|	OffsetOfAdvance.Company,
-		|	OffsetOfAdvance.Currency,
-		|	OffsetOfAdvance.LegalName,
-		|	OffsetOfAdvance.Partner,
-		|	OffsetOfAdvance.Agreement,
-		|	OffsetOfAdvance.TransactionDocument,
-		|	VALUE(AccumulationRecordType.Expense)";
+		|	ItemList.Agreement,
+		|	ItemList.BasisDocument,
+		|	ItemList.Company,
+		|	ItemList.Currency,
+		|	ItemList.LegalName,
+		|	ItemList.Partner,
+		|	ItemList.Period,
+		|	VALUE(AccumulationRecordType.Receipt)";
 EndFunction
 
 Function R1031B_ReceiptInvoicing()

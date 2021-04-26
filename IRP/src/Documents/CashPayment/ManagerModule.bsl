@@ -3,14 +3,8 @@
 Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 	AccReg = Metadata.AccumulationRegisters;
 	Tables = New Structure();
-	Tables.Insert("PartnerApTransactions"                 , PostingServer.CreateTable(AccReg.PartnerApTransactions));
 	Tables.Insert("PlaningCashTransactions"               , PostingServer.CreateTable(AccReg.PlaningCashTransactions));
 	Tables.Insert("CashInTransit"                         , PostingServer.CreateTable(AccReg.CashInTransit));
-	Tables.Insert("AdvanceToSuppliers"                    , PostingServer.CreateTable(AccReg.AdvanceToSuppliers));
-	Tables.Insert("PartnerApTransactions_OffsetOfAdvance" , PostingServer.CreateTable(AccReg.PartnerApTransactions));
-	
-	Tables.AdvanceToSuppliers.Columns.Add("Key", New TypeDescription(Metadata.DefinedTypes.typeRowID.Type));
-	Tables.PartnerApTransactions.Columns.Add("Key", New TypeDescription(Metadata.DefinedTypes.typeRowID.Type));
 	
 	QueryPaymentList = New Query();
 	QueryPaymentList.Text = GetQueryTextCashPaymentPaymentList();
@@ -23,10 +17,8 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Query.SetParameter("QueryTable", QueryTablePaymentList);
 	QueryResults = Query.ExecuteBatch();
 	
-	Tables.PartnerApTransactions = QueryResults[1].Unload();
-	Tables.PlaningCashTransactions = QueryResults[2].Unload();
-	Tables.CashInTransit = QueryResults[3].Unload();
-	Tables.AdvanceToSuppliers = QueryResults[4].Unload();
+	Tables.PlaningCashTransactions  = QueryResults[1].Unload();
+	Tables.CashInTransit            = QueryResults[2].Unload();
 
 #Region NewRegistersPosting	
 	QueryArray = GetQueryTextsSecondaryTables();
@@ -137,36 +129,6 @@ Function GetQueryTextQueryTable()
 		|//[1]//////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company AS Company,
-		|	tmp.BasisDocument AS BasisDocument,
-		|	tmp.Partner AS Partner,
-		|	tmp.Payee AS LegalName,
-		|	tmp.Agreement AS Agreement,
-		|	tmp.Currency AS Currency,
-		|	SUM(tmp.Amount) AS Amount,
-		|	tmp.Period,
-		|	tmp.Key
-		|FROM
-		|	tmp AS tmp
-		|WHERE
-		|	NOT tmp.IsMoneyTransfer
-		|	AND
-		|	NOT tmp.IsAdvance
-		|	AND
-		|	NOT tmp.IsMoneyExchange
-		|GROUP BY
-		|	tmp.Company,
-		|	tmp.Partner,
-		|	tmp.Payee,
-		|	tmp.Agreement,
-		|	tmp.Currency,
-		|	tmp.Period,
-		|	tmp.BasisDocument,
-		|	tmp.Key
-		|;
-		|
-		|//[2]//////////////////////////////////////////////////////////////////////////////
-		|SELECT
-		|	tmp.Company AS Company,
 		|	tmp.CashAccount AS Account,
 		|	tmp.Currency AS Currency,
 		|	tmp.PlaningTransactionBasis AS BasisDocument,
@@ -208,7 +170,7 @@ Function GetQueryTextQueryTable()
 		|	tmp.Key
 		|;
 		|
-		|//[3]//////////////////////////////////////////////////////////////////////////////
+		|//[2]//////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company AS Company,
 		|	tmp.PlaningTransactionBasis AS BasisDocument,
@@ -229,34 +191,6 @@ Function GetQueryTextQueryTable()
 		|	tmp.ToAccount,
 		|	tmp.Currency,
 		|	tmp.Period,
-		|	tmp.Key
-		|;
-		|
-		|//[4]//////////////////////////////////////////////////////////////////////////////
-		|SELECT
-		|	tmp.Company AS Company,
-		|	tmp.Partner AS Partner,
-		|	tmp.Payee AS LegalName,
-		|	tmp.Currency AS Currency,
-		|	SUM(tmp.Amount) AS Amount,
-		|	tmp.Period,
-		|	tmp.PaymentDocument,
-		|	tmp.Key
-		|FROM
-		|	tmp AS tmp
-		|WHERE
-		|	NOT tmp.IsMoneyTransfer
-		|	AND
-		|	NOT tmp.IsMoneyExchange
-		|	AND tmp.IsAdvance
-		|GROUP BY
-		|	tmp.Company,
-		|	tmp.Partner,
-		|	tmp.Payee,
-		|	tmp.Currency,
-		|	tmp.Period,
-		|	tmp.BasisDocument,
-		|	tmp.PaymentDocument,
 		|	tmp.Key";
 EndFunction
 
@@ -266,134 +200,16 @@ Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo 
 EndFunction
 
 Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	
 #Region NewRegistersPosting
 	Tables = Parameters.DocumentDataTables;	
 	QueryArray = GetQueryTextsMasterTables();
 	PostingServer.SetRegisters(Tables, Ref);
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
 #EndRegion
-	
-	// Advance to suppliers
-	Parameters.DocumentDataTables.PartnerApTransactions_OffsetOfAdvance =
-	AccumulationRegisters.PartnerApTransactions.GetTablePartnerApTransactions_OffsetOfAdvance(
-		Parameters.Object.RegisterRecords,
-		Parameters.PointInTime,
-		Parameters.DocumentDataTables.AdvanceToSuppliers,
-		Parameters.DocumentDataTables.PartnerApTransactions);
 EndProcedure
 
 Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 	PostingDataTables = New Map();
-	
-	// AccountsStatement
-	ArrayOfTables = New Array();
-	Table1 = Parameters.DocumentDataTables.PartnerApTransactions.CopyColumns();
-	Table1.Columns.Amount.Name = "TransactionAP";
-	PostingServer.AddColumnsToAccountsStatementTable(Table1);
-	For Each Row In Parameters.DocumentDataTables.PartnerApTransactions Do
-		If Row.Agreement.Type = Enums.AgreementTypes.Vendor Then
-			NewRow = Table1.Add();
-			FillPropertyValues(NewRow, Row);
-			NewRow.TransactionAP = Row.Amount;
-		EndIf;
-	EndDo;
-	Table1.FillValues(AccumulationRecordType.Expense, "RecordType");
-	ArrayOfTables.Add(Table1);
-	
-	Table2 = Parameters.DocumentDataTables.AdvanceToSuppliers.CopyColumns();
-	Table2.Columns.Amount.Name = "AdvanceToSuppliers";
-	PostingServer.AddColumnsToAccountsStatementTable(Table2);
-	For Each Row In Parameters.DocumentDataTables.AdvanceToSuppliers Do
-		If Row.Partner.Vendor Then
-			NewRow = Table2.Add();
-			FillPropertyValues(NewRow, Row);
-			NewRow.AdvanceToSuppliers = Row.Amount;
-		EndIf;
-	EndDo;
-	Table2.FillValues(AccumulationRecordType.Receipt, "RecordType");
-	ArrayOfTables.Add(Table2);
-	
-	Table3 = Parameters.DocumentDataTables.PartnerApTransactions.CopyColumns();
-	Table3.Columns.Amount.Name = "TransactionAR";
-	PostingServer.AddColumnsToAccountsStatementTable(Table3);
-	For Each Row In Parameters.DocumentDataTables.PartnerApTransactions Do
-		If Row.Agreement.Type = Enums.AgreementTypes.Customer Then
-			NewRow = Table3.Add();
-			FillPropertyValues(NewRow, Row);
-			NewRow.TransactionAR = - Row.Amount;
-		EndIf;
-	EndDo;
-	Table3.FillValues(AccumulationRecordType.Expense, "RecordType");
-	ArrayOfTables.Add(Table3);
-	
-	Table4 = Parameters.DocumentDataTables.AdvanceToSuppliers.CopyColumns();
-	Table4.Columns.Amount.Name = "AdvanceFromCustomers";
-	PostingServer.AddColumnsToAccountsStatementTable(Table4);
-	For Each Row In Parameters.DocumentDataTables.AdvanceToSuppliers Do
-		If Row.Partner.Customer 
-			And PostingServer.OffsetOfAdvanceByCustomerAgreement(
-				Parameters.DocumentDataTables.PartnerApTransactions_OffsetOfAdvance) Then
-			NewRow = Table4.Add();
-			FillPropertyValues(NewRow, Row);
-			NewRow.AdvanceFromCustomers = - Row.Amount;
-		EndIf;
-	EndDo;
-	Table4.FillValues(AccumulationRecordType.Receipt, "RecordType");
-	ArrayOfTables.Add(Table4);
-	
-	Table5 = Parameters.DocumentDataTables.PartnerApTransactions_OffsetOfAdvance.CopyColumns();
-	Table5.Columns.Amount.Name = "AdvanceToSuppliers";
-	PostingServer.AddColumnsToAccountsStatementTable(Table5);
-	For Each Row In Parameters.DocumentDataTables.PartnerApTransactions_OffsetOfAdvance Do
-		If Row.Partner.Vendor Then
-			NewRow = Table5.Add();
-			FillPropertyValues(NewRow, Row);
-			NewRow.AdvanceToSuppliers = Row.Amount;
-		EndIf;
-	EndDo;
-	Table5.FillValues(AccumulationRecordType.Expense, "RecordType");
-	ArrayOfTables.Add(Table5);
-	
-	Table6 = Parameters.DocumentDataTables.PartnerApTransactions_OffsetOfAdvance.CopyColumns();
-	Table6.Columns.Amount.Name = "TransactionAP";
-	PostingServer.AddColumnsToAccountsStatementTable(Table6);
-	For Each Row In Parameters.DocumentDataTables.PartnerApTransactions_OffsetOfAdvance Do
-		If Row.Agreement.Type = Enums.AgreementTypes.Vendor Then
-			NewRow = Table6.Add(); 
-			FillPropertyValues(NewRow, Row);
-			NewRow.TransactionAP = Row.Amount;
-		EndIf;
-	EndDo;
-	Table6.FillValues(AccumulationRecordType.Expense, "RecordType");
-	ArrayOfTables.Add(Table6);
-	
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.AccountsStatement,
-		New Structure("RecordSet, WriteInTransaction",
-			PostingServer.JoinTables(ArrayOfTables,
-				"RecordType, Period, Company, Partner, LegalName, BasisDocument, Currency, 
-				|TransactionAP, AdvanceToSuppliers,
-				|TransactionAR, AdvanceFromCustomers"),
-			Parameters.IsReposting));
-			
-	// PartnerApTransactions
-	ArrayOfTables = New Array();
-	Table1 = Parameters.DocumentDataTables.PartnerApTransactions.Copy();
-	Table1.Columns.Add("RecordType", New TypeDescription("AccumulationRecordType"));
-	Table1.FillValues(AccumulationRecordType.Expense, "RecordType");
-	ArrayOfTables.Add(Table1);
-	
-	Table2 = Parameters.DocumentDataTables.PartnerApTransactions_OffsetOfAdvance.Copy();
-	Table2.Columns.Add("RecordType", New TypeDescription("AccumulationRecordType"));
-	Table2.FillValues(AccumulationRecordType.Expense, "RecordType");
-	ArrayOfTables.Add(Table2);
-	
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.PartnerApTransactions,
-		New Structure("RecordSet, WriteInTransaction",
-			PostingServer.JoinTables(ArrayOfTables,
-			"RecordType, Period, Company, BasisDocument, Partner, LegalName, Agreement, Currency, Amount"),
-			Parameters.IsReposting));
-		
 	// PlaningCashTransactions
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords.PlaningCashTransactions,
 		New Structure("RecordSet", Parameters.DocumentDataTables.PlaningCashTransactions));
@@ -404,25 +220,6 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 		New Structure("RecordType, RecordSet",
 			AccumulationRecordType.Receipt,
 			Parameters.DocumentDataTables.CashInTransit));
-	
-	// AdvanceToSuppliers
-	ArrayOfTables = New Array();
-	Table1 = Parameters.DocumentDataTables.AdvanceToSuppliers.Copy();
-	Table1.Columns.Add("RecordType", New TypeDescription("AccumulationRecordType"));
-	Table1.FillValues(AccumulationRecordType.Receipt, "RecordType");
-	ArrayOfTables.Add(Table1);
-	
-	Table2 = Parameters.DocumentDataTables.PartnerApTransactions_OffsetOfAdvance.Copy();
-	Table2.Columns.Add("RecordType", New TypeDescription("AccumulationRecordType"));
-	Table2.FillValues(AccumulationRecordType.Expense, "RecordType");
-	ArrayOfTables.Add(Table2);
-	
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.AdvanceToSuppliers,
-		New Structure("RecordSet, WriteInTransaction",
-			PostingServer.JoinTables(ArrayOfTables,
-			"RecordType, Period, Company, Partner, LegalName, Currency, PaymentDocument, Amount, Key"),
-			Parameters.IsReposting));
-	
 	
 #Region NewRegistersPosting	
 	PostingServer.SetPostingDataTables(PostingDataTables, Parameters);
@@ -511,6 +308,7 @@ Procedure FillAttributesByType(TransactionType, ArrayAll, ArrayByType) Export
 	EndIf;
 	
 EndProcedure
+
 #Region NewRegistersPosting
 Function GetInformationAboutMovements(Ref) Export
 	Str = New Structure;
@@ -537,6 +335,10 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R5010B_ReconciliationStatement());
 	QueryArray.Add(R3010B_CashOnHand());
 	QueryArray.Add(R3015B_CashAdvance());
+	QueryArray.Add(R1021B_VendorsTransactions());
+	QueryArray.Add(R1020B_AdvancesToVendors());
+	QueryArray.Add(R2021B_CustomersTransactions());
+	QueryArray.Add(R2020B_AdvancesFromCustomers());
 	Return QueryArray;
 EndFunction
 
@@ -547,8 +349,33 @@ Function PaymentList()
 	|	PaymentList.Ref.Company AS Company,
 	|	PaymentList.Payee AS LegalName,
 	|	PaymentList.Ref.Currency AS Currency,
+	|	PaymentList.Agreement AS Agreement,
 	|	PaymentList.Ref.CashAccount AS CashAccount,
+	|	PaymentList.Key AS Key,
 	|	PaymentList.BasisDocument AS Basis,
+	|	CASE
+	|		WHEN PaymentList.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
+	|			THEN CASE
+	|				WHEN VALUETYPE(PaymentList.PlaningTransactionBasis) = TYPE(Document.CashTransferOrder)
+	|				AND NOT PaymentList.PlaningTransactionBasis.Date IS NULL
+	|				AND PaymentList.PlaningTransactionBasis.SendCurrency <> PaymentList.PlaningTransactionBasis.ReceiveCurrency
+	|					THEN PaymentList.PlaningTransactionBasis
+	|				ELSE PaymentList.BasisDocument
+	|			END
+	|		ELSE UNDEFINED
+	|	END AS TransactionDocument,
+	|	CASE
+	|		WHEN PaymentList.Agreement = VALUE(Catalog.Agreements.EmptyRef)
+	|			THEN TRUE
+	|		ELSE FALSE
+	|	END
+	|	AND NOT CASE
+	|		WHEN VALUETYPE(PaymentList.PlaningTransactionBasis) = TYPE(Document.CashTransferOrder)
+	|		AND NOT PaymentList.PlaningTransactionBasis.Date IS NULL
+	|		AND PaymentList.PlaningTransactionBasis.SendCurrency <> PaymentList.PlaningTransactionBasis.ReceiveCurrency
+	|			THEN TRUE
+	|		ELSE FALSE
+	|	END AS IsAdvance,
 	|	PaymentList.PlaningTransactionBasis AS PlaningTransactionBasis,
 	|	PaymentList.Partner.Employee AS IsEmployee,
 	|	PaymentList.Amount,
@@ -556,12 +383,95 @@ Function PaymentList()
 	|	PaymentList.Ref.TransactionType = VALUE(Enum.OutgoingPaymentTransactionTypes.CurrencyExchange) AS IsCurrencyExchange,
 	|	PaymentList.Ref.TransactionType = VALUE(Enum.OutgoingPaymentTransactionTypes.CashTransferOrder) AS
 	|		IsCashTransferOrder,
+	|	PaymentList.Ref.TransactionType = VALUE(Enum.OutgoingPaymentTransactionTypes.ReturnToCustomer) AS IsReturnToCustomer,
 	|	PaymentList.Partner
 	|INTO PaymentList
 	|FROM
 	|	Document.CashPayment.PaymentList AS PaymentList
 	|WHERE
 	|	PaymentList.Ref = &Ref";	
+EndFunction
+
+Function R1021B_VendorsTransactions()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	PaymentList.Period,
+		|	PaymentList.Company,
+		|	PaymentList.Partner,
+		|	PaymentList.LegalName,
+		|	PaymentList.Currency,
+		|	PaymentList.Agreement,
+		|	PaymentList.TransactionDocument AS Basis,
+		|	PaymentList.Key,
+		|	PaymentList.Amount
+		|INTO R1021B_VendorsTransactions
+		|FROM
+		|	PaymentList AS PaymentList
+		|WHERE
+		|	PaymentList.IsPaymentToVendor
+		|	AND NOT PaymentList.IsAdvance";
+EndFunction	
+
+Function R2021B_CustomersTransactions()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	PaymentList.Period,
+		|	PaymentList.Company,
+		|	PaymentList.Partner,
+		|	PaymentList.LegalName,
+		|	PaymentList.Currency,
+		|	PaymentList.Agreement,
+		|	PaymentList.TransactionDocument AS Basis,
+		|	PaymentList.Key,
+		|	PaymentList.Amount
+		|INTO R2021B_CustomersTransactions
+		|FROM
+		|	PaymentList AS PaymentList
+		|WHERE
+		|	PaymentList.IsReturnToCustomer
+		|	AND NOT PaymentList.IsAdvance";	
+EndFunction
+
+Function R1020B_AdvancesToVendors()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	PaymentList.Period,
+		|	PaymentList.Company,
+		|	PaymentList.Partner,
+		|	PaymentList.LegalName,
+		|	PaymentList.Currency,
+		|	PaymentList.Basis,
+		|	PaymentList.Amount,
+		|	PaymentList.Key
+		|INTO R1020B_AdvancesToVendors
+		|FROM
+		|	PaymentList AS PaymentList
+		|WHERE
+		|	PaymentList.IsPaymentToVendor
+		|	AND PaymentList.IsAdvance";	
+EndFunction
+
+Function R2020B_AdvancesFromCustomers()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	PaymentList.Period,
+		|	PaymentList.Company,
+		|	PaymentList.Partner,
+		|	PaymentList.LegalName,
+		|	PaymentList.Currency,
+		|	PaymentList.Basis,
+		|	PaymentList.Amount,
+		|	PaymentList.Key
+		|INTO R2020B_AdvancesFromCustomers
+		|FROM
+		|	PaymentList AS PaymentList
+		|WHERE
+		|	PaymentList.IsReturnToCustomer
+		|	AND PaymentList.IsAdvance";	
 EndFunction
 
 Function R5010B_ReconciliationStatement()

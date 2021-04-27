@@ -1,22 +1,27 @@
 
 Procedure PreparePostingDataTables(Parameters, CurrencyTable, AddInfo = Undefined) Export
 	ArrayOfPostingInfo = New Array();
-	For Each PostingInfo In Parameters.PostingDataTables Do
-		RecordSetMetadata = PostingInfo.Key.Metadata();
-		If Parameters.Property("MultiCurrencyExcludePostingDataTables") 
-			And Parameters.MultiCurrencyExcludePostingDataTables.Find(RecordSetMetadata) <> Undefined Then
-				Continue;
-		EndIf;
-		
-		If Metadata.AccumulationRegisters.Contains(RecordSetMetadata)
-			Or Metadata.InformationRegisters.Contains(RecordSetMetadata) Then
-			Dimension = RecordSetMetadata.Dimensions.Find("CurrencyMovementType");
-			// Register supported multicurrency
-			If Dimension <> Undefined Then
-				ArrayOfPostingInfo.Add(PostingInfo);
+	If Parameters.Property("ArrayOfPostingInfo") Then
+		ArrayOfPostingInfo = Parameters.ArrayOfPostingInfo;
+	Else
+		For Each PostingInfo In Parameters.PostingDataTables Do
+			RecordSetMetadata = PostingInfo.Key.Metadata();
+			If Parameters.Property("MultiCurrencyExcludePostingDataTables") 
+				And Parameters.MultiCurrencyExcludePostingDataTables.Find(RecordSetMetadata) <> Undefined Then
+					Continue;
 			EndIf;
-		EndIf;
-	EndDo;
+		
+			If Metadata.AccumulationRegisters.Contains(RecordSetMetadata)
+				Or Metadata.InformationRegisters.Contains(RecordSetMetadata) Then
+				Dimension = RecordSetMetadata.Dimensions.Find("CurrencyMovementType");
+				// Register supported multicurrency
+				If Dimension <> Undefined Then
+					ArrayOfPostingInfo.Add(PostingInfo);
+				EndIf;
+			EndIf;
+		EndDo;
+	EndIf;
+	
 	If ArrayOfPostingInfo.Count() And Parameters.Object.Metadata().TabularSections.Find("Currencies") <> Undefined Then
 		TempTableManager = New TempTablesManager();
 		Query = New Query();
@@ -35,14 +40,12 @@ Procedure PreparePostingDataTables(Parameters, CurrencyTable, AddInfo = Undefine
 				Or TypeOf(Parameters.Object.Ref) = Type("DocumentRef.BankReceipt") Then
 				DocumentCondition = True;
 				Name_LegalName = "Payer";
-				//RegisterType = Type("AccumulationRegisterRecordSet.PartnerArTransactions");
 				RegisterType = Type("AccumulationRegisterRecordSet.R2021B_CustomersTransactions");
 			EndIf;
 			If TypeOf(Parameters.Object.Ref) = Type("DocumentRef.CashPayment")
 				Or TypeOf(Parameters.Object.Ref) = Type("DocumentRef.BankPayment") Then
 				DocumentCondition = True;
 				Name_LegalName = "Payee";
-				//RegisterType = Type("AccumulationRegisterRecordSet.PartnerApTransactions");
 				RegisterType = Type("AccumulationRegisterRecordSet.R1021B_VendorsTransactions");
 			EndIf;
 			If DocumentCondition Then
@@ -134,8 +137,8 @@ EndProcedure
 
 Function IsUseAgreementMovementType(ItemOfPostingInfo)
 	UseAgreementMovementType = True;
-	If TypeOf(ItemOfPostingInfo.Key) = Type("AccumulationRegisterRecordSet.AdvanceFromCustomers")
-		Or TypeOf(ItemOfPostingInfo.Key) = Type("AccumulationRegisterRecordSet.AdvanceToSuppliers") 
+	If TypeOf(ItemOfPostingInfo.Key) = Type("AccumulationRegisterRecordSet.AdvanceFromCustomers") // for delete
+		Or TypeOf(ItemOfPostingInfo.Key) = Type("AccumulationRegisterRecordSet.AdvanceToSuppliers") // for delete
 		Or TypeOf(ItemOfPostingInfo.Key) = Type("AccumulationRegisterRecordSet.R3010B_CashOnHand") 
 		Or TypeOf(ItemOfPostingInfo.Key) = Type("AccumulationRegisterRecordSet.R2020B_AdvancesFromCustomers") 
 		Or TypeOf(ItemOfPostingInfo.Key) = Type("AccumulationRegisterRecordSet.R1020B_AdvancesToVendors") Then
@@ -150,25 +153,25 @@ Function IsUseCurrencyJoin(Parameters, ItemOfPostingInfo)
 	TypeOfRecordSetsArray = New Array();
 	TypeOfRecordSetsArray.Add(Type("AccumulationRegisterRecordSet.PlaningCashTransactions"));
 	TypeOfRecordSetsArray.Add(Type("AccumulationRegisterRecordSet.R3010B_CashOnHand"));
-	TypeOfRecordSetsArray.Add(Type("AccumulationRegisterRecordSet.PartnerApTransactions"));
-	TypeOfRecordSetsArray.Add(Type("AccumulationRegisterRecordSet.PartnerArTransactions"));
+	TypeOfRecordSetsArray.Add(Type("AccumulationRegisterRecordSet.PartnerApTransactions")); // for delete
+	TypeOfRecordSetsArray.Add(Type("AccumulationRegisterRecordSet.PartnerArTransactions")); // for delete
 	TypeOfRecordSetsArray.Add(Type("AccumulationRegisterRecordSet.R3015B_CashAdvance"));
 	TypeOfRecordSetsArray.Add(Type("AccumulationRegisterRecordSet.R2021B_CustomersTransactions"));
 	TypeOfRecordSetsArray.Add(Type("AccumulationRegisterRecordSet.R1021B_VendorsTransactions"));
 	
 	FilterByDocument = False;
 	
-	If (TypeOf(Parameters.Object) = Type("DocumentObject.BankReceipt") 
-		And Parameters.Object.TransactionType = Enums.IncomingPaymentTransactionType.CurrencyExchange) Then
+	If (TypeOf(Parameters.Object) = Type("DocumentObject.BankReceipt") Or TypeOf(Parameters.Object) = Type("DocumentRef.BankReceipt"))
+		And Parameters.Object.TransactionType = Enums.IncomingPaymentTransactionType.CurrencyExchange Then
 		FilterByDocument = True;
 	EndIf;
 	
-	If (TypeOf(Parameters.Object) = Type("DocumentObject.CashReceipt") 
-		And Parameters.Object.TransactionType = Enums.IncomingPaymentTransactionType.CurrencyExchange) Then
+	If (TypeOf(Parameters.Object) = Type("DocumentObject.CashReceipt") Or TypeOf(Parameters.Object) = Type("DocumentRef.CashReceipt"))
+		And Parameters.Object.TransactionType = Enums.IncomingPaymentTransactionType.CurrencyExchange Then
 		FilterByDocument = True;
 	EndIf;
 	
-	If TypeOf(Parameters.Object) = Type("DocumentObject.InvoiceMatch") Then
+	If TypeOf(Parameters.Object) = Type("DocumentObject.InvoiceMatch") Or TypeOf(Parameters.Object) = Type("DocumentRef.InvoiceMatch") Then
 		FilterByDocument = True;
 	EndIf;
 	

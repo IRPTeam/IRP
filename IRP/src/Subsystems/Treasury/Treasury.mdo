@@ -11,7 +11,7 @@
     <picture>CommonPicture.Finance</picture>
   </picture>
   <content>Catalog.CashAccounts</content>
-  <content>Document.OffsetOfAdvance</content>
+  <content>Document.VendorsAdvancesClosing</content>
   <subsystems>Bank</subsystems>
   <subsystems>Cash</subsystems>
   <subsystems>CashTransactions</subsystems>

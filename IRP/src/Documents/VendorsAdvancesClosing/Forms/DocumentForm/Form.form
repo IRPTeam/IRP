@@ -273,7 +273,7 @@
     <name>Object</name>
     <id>1</id>
     <valueType>
-      <types>DocumentObject.OffsetOfAdvance</types>
+      <types>DocumentObject.VendorsAdvancesClosing</types>
     </valueType>
     <view>
       <common>true</common>

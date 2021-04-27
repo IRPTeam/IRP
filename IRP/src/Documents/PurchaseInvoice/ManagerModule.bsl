@@ -2157,16 +2157,16 @@ Function ItemList()
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
-	|	GoodsReceipts.Key,
-	|	GoodsReceipts.GoodsReceipt
+	|	GoodsReceipts.Key
+//	|	GoodsReceipts.GoodsReceipt
 	|INTO GoodsReceipts
 	|FROM
 	|	Document.PurchaseInvoice.GoodsReceipts AS GoodsReceipts
 	|WHERE
 	|	GoodsReceipts.Ref = &Ref
 	|GROUP BY
-	|	GoodsReceipts.Key,
-	|	GoodsReceipts.GoodsReceipt
+	|	GoodsReceipts.Key
+//	|	GoodsReceipts.GoodsReceipt
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
@@ -2234,8 +2234,8 @@ Function ItemList()
 	|	PurchaseInvoiceItemList.DeliveryDate AS DeliveryDate,
 	|	PurchaseInvoiceItemList.NetAmount AS NetAmount,
 	|	PurchaseInvoiceItemList.Ref.IgnoreAdvances AS IgnoreAdvances,
-	|	PurchaseInvoiceItemList.Key,
-	|	GoodsReceipts.GoodsReceipt
+	|	PurchaseInvoiceItemList.Key
+//	|	GoodsReceipts.GoodsReceipt
 	|INTO ItemList
 	|FROM
 	|	Document.PurchaseInvoice.ItemList AS PurchaseInvoiceItemList
@@ -2369,13 +2369,16 @@ EndFunction
 
 Function R1020B_AdvancesToVendors()
 	Return
-		"SELECT *
+		"SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	OffsetOfAdvances.AdvancesDocument AS Basis,
+		|	*
 		|INTO R1020B_AdvancesToVendors
 		|FROM
-		|	ItemList AS ItemList
+		|	InformationRegister.T1000I_OffsetOfAdvances AS OffsetOfAdvances
 		|WHERE
-		|	FALSE";
-	EndFunction
+		|	OffsetOfAdvances.Document = &Ref";
+EndFunction
 
 Function R1021B_VendorsTransactions()
 	Return
@@ -2400,7 +2403,24 @@ Function R1021B_VendorsTransactions()
 		|	ItemList.LegalName,
 		|	ItemList.Partner,
 		|	ItemList.Period,
-		|	VALUE(AccumulationRecordType.Receipt)";
+		|	VALUE(AccumulationRecordType.Receipt)
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	OffsetOfAdvances.Period,
+		|	OffsetOfAdvances.Company,
+		|	OffsetOfAdvances.Currency,
+		|	OffsetOfAdvances.LegalName,
+		|	OffsetOfAdvances.Partner,
+		|	OffsetOfAdvances.Agreement,
+		|	OffsetOfAdvances.TransactionDocument,
+		|	OffsetOfAdvances.Amount
+		|FROM
+		|	InformationRegister.T1000I_OffsetOfAdvances AS OffsetOfAdvances
+		|WHERE
+		|	OffsetOfAdvances.Document = &Ref";
 EndFunction
 
 Function T1001I_PartnerTransactions()
@@ -2463,7 +2483,7 @@ Function R1031B_ReceiptInvoicing()
 		|FROM
 		|	ItemList AS ItemList
 		|		INNER JOIN GoodReceiptInfo AS GoodsReceipts
-		|		ON ItemList.RowKey = GoodsReceipts.Key
+		|		ON ItemList.Key = GoodsReceipts.Key
 		|WHERE
 		|	TRUE";
 
@@ -2592,13 +2612,20 @@ Function R4031B_GoodsInTransitIncoming()
 		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
 		|	CASE
 		|		WHEN ItemList.GoodsReceiptExists
-		|			Then ItemList.GoodsReceipt
+		|			Then GoodsReceipts.GoodsReceipt
 		|		Else ItemList.Invoice
 		|	End AS Basis,
+		|	CASE 
+		|		WHEN ItemList.GoodsReceiptExists
+		|			Then GoodsReceipts.Quantity
+		|		Else ItemList.Quantity
+		|	End AS Quantity,
 		|	*
 		|INTO R4031B_GoodsInTransitIncoming
 		|FROM
 		|	ItemList AS ItemList
+		|		INNER JOIN GoodReceiptInfo AS GoodsReceipts
+		|		ON ItemList.Key = GoodsReceipts.Key
 		|WHERE
 		|	NOT ItemList.IsService
 		|	AND (ItemList.UseGoodsReceipt

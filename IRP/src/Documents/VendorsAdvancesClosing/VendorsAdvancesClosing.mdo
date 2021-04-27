@@ -7,13 +7,13 @@
     <listType typeId="a230cf68-b394-4da8-ad9d-b09d370be760" valueTypeId="637515a1-cb1f-47a1-bbbd-5f0bd04bb050"/>
     <managerType typeId="ead75c26-56c2-4db5-b321-a2d1c111e363" valueTypeId="1fe36189-9120-447b-9a52-509b43647e62"/>
   </producedTypes>
-  <name>OffsetOfAdvance</name>
+  <name>VendorsAdvancesClosing</name>
   <synonym>
     <key>en</key>
-    <value>Offset of advance</value>
+    <value>Vendors advances closing</value>
   </synonym>
   <useStandardCommands>true</useStandardCommands>
-  <inputByString>Document.OffsetOfAdvance.StandardAttribute.Number</inputByString>
+  <inputByString>Document.VendorsAdvancesClosing.StandardAttribute.Number</inputByString>
   <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
   <createOnInput>Use</createOnInput>
   <dataLockControlMode>Managed</dataLockControlMode>
@@ -22,9 +22,9 @@
   <numberAllowedLength>Variable</numberAllowedLength>
   <checkUnique>true</checkUnique>
   <autonumbering>true</autonumbering>
-  <defaultObjectForm>Document.OffsetOfAdvance.Form.DocumentForm</defaultObjectForm>
-  <defaultListForm>Document.OffsetOfAdvance.Form.ListForm</defaultListForm>
-  <defaultChoiceForm>Document.OffsetOfAdvance.Form.ChoiceForm</defaultChoiceForm>
+  <defaultObjectForm>Document.VendorsAdvancesClosing.Form.DocumentForm</defaultObjectForm>
+  <defaultListForm>Document.VendorsAdvancesClosing.Form.ListForm</defaultListForm>
+  <defaultChoiceForm>Document.VendorsAdvancesClosing.Form.ChoiceForm</defaultChoiceForm>
   <realTimePosting>Deny</realTimePosting>
   <registerRecords>InformationRegister.T1000I_OffsetOfAdvances</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>

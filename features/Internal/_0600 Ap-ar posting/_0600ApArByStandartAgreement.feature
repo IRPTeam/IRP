@@ -264,34 +264,18 @@ Scenario: _060005 create Purchase invoice with the type of settlements under sta
 			And I save the window as "$$PurchaseInvoice060005$$"
 	* Check Purchase Invoice movements 
 		And I click "Registrations report" button
-	
-		And I select "Accounts statement" exact value from "Register" drop-down list
+		And I select "R1021 Vendors transactions" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Accounts statement"' | ''            | ''       | ''                     | ''               | ''                       | ''               | ''             | ''        | ''                 | ''               | ''         | '' | '' |
-		| ''                               | 'Record type' | 'Period' | 'Resources'            | ''               | ''                       | ''               | 'Dimensions'   | ''        | ''                 | ''               | ''         | '' | '' |
-		| ''                               | ''            | ''       | 'Advance to suppliers' | 'Transaction AP' | 'Advance from customers' | 'Transaction AR' | 'Company'      | 'Partner' | 'Legal name'       | 'Basis document' | 'Currency' | '' | '' |
-		| ''                               | 'Receipt'     | '*'      | ''                     | '11 000'         | ''                       | ''               | 'Main Company' | 'Veritas' | 'Company Veritas ' | ''               | 'TRY'      | '' | '' |
-	
-		And I select "Goods receipt schedule" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Goods receipt schedule"' | ''            | ''       | ''          | ''             | ''                          | ''         | ''         | ''        | ''              | '' | '' | '' | '' |
-		| ''                                   | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                          | ''         | ''         | ''        | 'Attributes'    | '' | '' | '' | '' |
-		| ''                                   | ''            | ''       | 'Quantity'  | 'Company'      | 'Order'                     | 'Store'    | 'Item key' | 'Row key' | 'Delivery date' | '' | '' | '' | '' |
-		| ''                                   | 'Receipt'     | '*'      | '20'        | 'Main Company' | '$$PurchaseInvoice060005$$' | 'Store 01' | 'L/Green'  | '*'       | '*'             | '' | '' | '' | '' |
-		| ''                                   | 'Expense'     | '*'      | '20'        | 'Main Company' | '$$PurchaseInvoice060005$$' | 'Store 01' | 'L/Green'  | '*'       | '*'             | '' | '' | '' | '' |
-		And I select "Partner AP transactions" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Partner AP transactions"' | ''            | ''       | ''          | ''             | ''               | ''        | ''                 | ''                  | ''         | ''                             | ''                     | '' | '' |
-		| ''                                    | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''               | ''        | ''                 | ''                  | ''         | ''                             | 'Attributes'           | '' | '' |
-		| ''                                    | ''            | ''       | 'Amount'    | 'Company'      | 'Basis document' | 'Partner' | 'Legal name'       | 'Partner term'      | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' | '' | '' |
-		| ''                                    | 'Receipt'     | '*'      | '1 883,2'   | 'Main Company' | ''               | 'Veritas' | 'Company Veritas ' | 'Standard (Vendor)' | 'USD'      | 'Reporting currency'           | 'No'                   | '' | '' |
-		| ''                                    | 'Receipt'     | '*'      | '11 000'    | 'Main Company' | ''               | 'Veritas' | 'Company Veritas ' | 'Standard (Vendor)' | 'TRY'      | 'Local currency'               | 'No'                   | '' | '' |
-		| ''                                    | 'Receipt'     | '*'      | '11 000'    | 'Main Company' | ''               | 'Veritas' | 'Company Veritas ' | 'Standard (Vendor)' | 'TRY'      | 'TRY'                          | 'No'                   | '' | '' |
-		| ''                                    | 'Receipt'     | '*'      | '11 000'    | 'Main Company' | ''               | 'Veritas' | 'Company Veritas ' | 'Standard (Vendor)' | 'TRY'      | 'en description is empty'      | 'No'                   | '' | '' |
-		
+			| '$$PurchaseInvoice060005$$'              | ''            | ''       | ''          | ''             | ''                             | ''         | ''                 | ''        | ''                  | ''      | ''                     | ''                  |
+			| 'Document registrations records'         | ''            | ''       | ''          | ''             | ''                             | ''         | ''                 | ''        | ''                  | ''      | ''                     | ''                  |
+			| 'Register  "R1021 Vendors transactions"' | ''            | ''       | ''          | ''             | ''                             | ''         | ''                 | ''        | ''                  | ''      | ''                     | ''                  |
+			| ''                                       | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                             | ''         | ''                 | ''        | ''                  | ''      | 'Attributes'           | ''                  |
+			| ''                                       | ''            | ''       | 'Amount'    | 'Company'      | 'Multi currency movement type' | 'Currency' | 'Legal name'       | 'Partner' | 'Agreement'         | 'Basis' | 'Deferred calculation' | 'Offset of advance' |
+			| ''                                       | 'Receipt'     | '*'      | '1 883,2'   | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Company Veritas ' | 'Veritas' | 'Standard (Vendor)' | ''      | 'No'                   | 'No'                |
+			| ''                                       | 'Receipt'     | '*'      | '11 000'    | 'Main Company' | 'Local currency'               | 'TRY'      | 'Company Veritas ' | 'Veritas' | 'Standard (Vendor)' | ''      | 'No'                   | 'No'                |
+			| ''                                       | 'Receipt'     | '*'      | '11 000'    | 'Main Company' | 'TRY'                          | 'TRY'      | 'Company Veritas ' | 'Veritas' | 'Standard (Vendor)' | ''      | 'No'                   | 'No'                |
+			| ''                                       | 'Receipt'     | '*'      | '11 000'    | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Company Veritas ' | 'Veritas' | 'Standard (Vendor)' | ''      | 'No'                   | 'No'                |
 		And I close all client application windows
 	
 Scenario: _060006 create Cash payment with the type of settlements under standard contracts and check its movements
@@ -341,165 +325,20 @@ Scenario: _060006 create Cash payment with the type of settlements under standar
 			| 'Number'  |
 			| '$$NumberCashPayment060006$$' |
 		And I click "Registrations report" button
-	
-		And I select "Partner AP transactions" exact value from "Register" drop-down list
+		And I select "R1021 Vendors transactions" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Partner AP transactions"' | ''            | ''       | ''          | ''             | ''               | ''        | ''                 | ''                  | ''         | ''                             | ''                     |
-			| ''                                    | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''               | ''        | ''                 | ''                  | ''         | ''                             | 'Attributes'           |
-			| ''                                    | ''            | ''       | 'Amount'    | 'Company'      | 'Basis document' | 'Partner' | 'Legal name'       | 'Partner term'      | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
-			| ''                                    | 'Expense'     | '*'      | '1 883,2'   | 'Main Company' | ''               | 'Veritas' | 'Company Veritas ' | 'Standard (Vendor)' | 'USD'      | 'Reporting currency'           | 'No'                   |
-			| ''                                    | 'Expense'     | '*'      | '11 000'    | 'Main Company' | ''               | 'Veritas' | 'Company Veritas ' | 'Standard (Vendor)' | 'TRY'      | 'Local currency'               | 'No'                   |
-			| ''                                    | 'Expense'     | '*'      | '11 000'    | 'Main Company' | ''               | 'Veritas' | 'Company Veritas ' | 'Standard (Vendor)' | 'TRY'      | 'TRY'                          | 'No'                   |
-			| ''                                    | 'Expense'     | '*'      | '11 000'    | 'Main Company' | ''               | 'Veritas' | 'Company Veritas ' | 'Standard (Vendor)' | 'TRY'      | 'en description is empty'      | 'No'                   |
-		
-		And I select "Accounts statement" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Accounts statement"' | ''            | ''       | ''                     | ''               | ''                       | ''               | ''             | ''        | ''                 | ''               | ''         |
-			| ''                               | 'Record type' | 'Period' | 'Resources'            | ''               | ''                       | ''               | 'Dimensions'   | ''        | ''                 | ''               | ''         |
-			| ''                               | ''            | ''       | 'Advance to suppliers' | 'Transaction AP' | 'Advance from customers' | 'Transaction AR' | 'Company'      | 'Partner' | 'Legal name'       | 'Basis document' | 'Currency' |
-			| ''                               | 'Expense'     | '*'      | ''                     | '11 000'         | ''                       | ''               | 'Main Company' | 'Veritas' | 'Company Veritas ' | ''               | 'TRY'      |
+			| '$$CashPayment060006$$'                  | ''            | ''       | ''          | ''             | ''                             | ''         | ''                 | ''        | ''                                           | ''      | ''                     | ''                  |
+			| 'Document registrations records'         | ''            | ''       | ''          | ''             | ''                             | ''         | ''                 | ''        | ''                                           | ''      | ''                     | ''                  |
+			| 'Register  "R1021 Vendors transactions"' | ''            | ''       | ''          | ''             | ''                             | ''         | ''                 | ''        | ''                                           | ''      | ''                     | ''                  |
+			| ''                                       | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                             | ''         | ''                 | ''        | ''                                           | ''      | 'Attributes'           | ''                  |
+			| ''                                       | ''            | ''       | 'Amount'    | 'Company'      | 'Multi currency movement type' | 'Currency' | 'Legal name'       | 'Partner' | 'Agreement'                                  | 'Basis' | 'Deferred calculation' | 'Offset of advance' |
+			| ''                                       | 'Expense'     | '*'      | '1 883,2'   | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Company Veritas ' | 'Veritas' | 'Posting by Standard Partner term (Veritas)' | ''      | 'No'                   | 'No'                |
+			| ''                                       | 'Expense'     | '*'      | '11 000'    | 'Main Company' | 'Local currency'               | 'TRY'      | 'Company Veritas ' | 'Veritas' | 'Posting by Standard Partner term (Veritas)' | ''      | 'No'                   | 'No'                |
+			| ''                                       | 'Expense'     | '*'      | '11 000'    | 'Main Company' | 'TRY'                          | 'TRY'      | 'Company Veritas ' | 'Veritas' | 'Posting by Standard Partner term (Veritas)' | ''      | 'No'                   | 'No'                |
+			| ''                                       | 'Expense'     | '*'      | '11 000'    | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Company Veritas ' | 'Veritas' | 'Posting by Standard Partner term (Veritas)' | ''      | 'No'                   | 'No'                |
 		And I close all client application windows
 
-Scenario: _060007 check the offset of Purchase invoice advance with the type of settlement under standard contracts and check its movements
-	* Create Bank payment
-		Given I open hyperlink "e1cib/list/Document.BankPayment"
-		And I click the button named "FormCreate"
-		* Select company
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| 'Description'  |
-				| 'Main Company' |
-			And I select current line in "List" table
-		* Filling in the details of the document
-			And I click Select button of "Account" field
-			And I go to line in "List" table
-				| 'Description'  |
-				| 'Bank account, TRY' |
-			And I select current line in "List" table
-		* Filling in the tabular part
-			And in the table "PaymentList" I click the button named "PaymentListAdd"
-			And I click choice button of "Partner" attribute in "PaymentList" table
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Veritas'   |
-			And I select current line in "List" table
-			And I click Clear button of "Partner term" field
-			And I activate field named "PaymentListAmount" in "PaymentList" table
-			And I input "12 000,00" text in the field named "PaymentListAmount" of "PaymentList" table
-			And I finish line editing in "PaymentList" table
-		And I click the button named "FormPost"
-		And I delete "$$NumberBankPayment060007$$" variable
-		And I delete "$$BankPayment060007$$" variable
-		And I save the value of "Number" field as "$$NumberBankPayment060007$$"
-		And I save the window as "$$BankPayment060007$$"
-		And I click the button named "FormPostAndClose"
-	* Check Bank Payment movements
-		And I go to line in "List" table
-			| 'Number'  |
-			| '$$NumberBankPayment060007$$' |
-		And I click "Registrations report" button
-		And I select "Accounts statement" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| '$$BankPayment060007$$'          | ''            | ''       | ''                     | ''               | ''                       | ''               | ''             | ''        | ''                 | ''               | ''         |
-			| 'Document registrations records' | ''            | ''       | ''                     | ''               | ''                       | ''               | ''             | ''        | ''                 | ''               | ''         |
-			| 'Register  "Accounts statement"' | ''            | ''       | ''                     | ''               | ''                       | ''               | ''             | ''        | ''                 | ''               | ''         |
-			| ''                               | 'Record type' | 'Period' | 'Resources'            | ''               | ''                       | ''               | 'Dimensions'   | ''        | ''                 | ''               | ''         |
-			| ''                               | ''            | ''       | 'Advance to suppliers' | 'Transaction AP' | 'Advance from customers' | 'Transaction AR' | 'Company'      | 'Partner' | 'Legal name'       | 'Basis document' | 'Currency' |
-			| ''                               | 'Receipt'     | '*'      | '12 000'               | ''               | ''                       | ''               | 'Main Company' | 'Veritas' | 'Company Veritas ' | ''               | 'TRY'      |
-	
-		And I select "Advance to suppliers" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Advance to suppliers"' | ''            | ''       | ''          | ''             | ''        | ''                 | ''         | ''                      | ''                             | ''                     | '' |
-			| ''                                 | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''        | ''                 | ''         | ''                      | ''                             | 'Attributes'           | '' |
-			| ''                                 | ''            | ''       | 'Amount'    | 'Company'      | 'Partner' | 'Legal name'       | 'Currency' | 'Payment document'      | 'Multi currency movement type' | 'Deferred calculation' | '' |
-			| ''                                 | 'Receipt'     | '*'      | '2 054,4'   | 'Main Company' | 'Veritas' | 'Company Veritas ' | 'USD'      | '$$BankPayment060007$$' | 'Reporting currency'           | 'No'                   | '' |
-			| ''                                 | 'Receipt'     | '*'      | '12 000'    | 'Main Company' | 'Veritas' | 'Company Veritas ' | 'TRY'      | '$$BankPayment060007$$' | 'Local currency'               | 'No'                   | '' |
-			| ''                                 | 'Receipt'     | '*'      | '12 000'    | 'Main Company' | 'Veritas' | 'Company Veritas ' | 'TRY'      | '$$BankPayment060007$$' | 'en description is empty'      | 'No'                   | '' |
-		
-		And I close all client application windows
-	* Create Purchase Invoice
-		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
-		And I click the button named "FormCreate"
-		* Filling in customer info
-			And I click Select button of "Partner" field
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Veritas'     |
-			And I select current line in "List" table
-		* Adding items to Purchase Invoice
-			And I move to "Item list" tab
-			And I click the button named "Add"
-			And I click choice button of "Item" attribute in "ItemList" table
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Dress'     |
-			And I select current line in "List" table
-			And I activate "Item key" field in "ItemList" table
-			And I click choice button of "Item key" attribute in "ItemList" table
-			And I go to line in "List" table
-				| 'Item key' |
-				| 'L/Green'  |
-			And I select current line in "List" table
-			And I activate "Q" field in "ItemList" table
-			And I input "20,000" text in "Q" field of "ItemList" table
-			And I finish line editing in "ItemList" table
-			And I input "550,00" text in "Price" field of "ItemList" table
-			And I input end of the current month date in "Delivery date" field
-			And I click the button named "FormPost"
-			And I delete "$$NumberPurchaseInvoice060007$$" variable
-			And I delete "$$PurchaseInvoice060007$$" variable
-			And I save the value of "Number" field as "$$NumberPurchaseInvoice060007$$"
-			And I save the window as "$$PurchaseInvoice060007$$"
-	* Check movements PurchaseInvoice by register PartnerApTransactions
-		And I click "Registrations report" button
-	
-		And I select "Accounts statement" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Accounts statement"' | ''            | ''       | ''                     | ''               | ''                       | ''               | ''             | ''        | ''                 | ''               | ''         | '' | '' |
-		| ''                               | 'Record type' | 'Period' | 'Resources'            | ''               | ''                       | ''               | 'Dimensions'   | ''        | ''                 | ''               | ''         | '' | '' |
-		| ''                               | ''            | ''       | 'Advance to suppliers' | 'Transaction AP' | 'Advance from customers' | 'Transaction AR' | 'Company'      | 'Partner' | 'Legal name'       | 'Basis document' | 'Currency' | '' | '' |
-		| ''                               | 'Receipt'     | '*'      | ''                     | '11 000'         | ''                       | ''               | 'Main Company' | 'Veritas' | 'Company Veritas ' | ''               | 'TRY'      | '' | '' |
-		| ''                               | 'Expense'     | '*'      | ''                     | '11 000'         | ''                       | ''               | 'Main Company' | 'Veritas' | 'Company Veritas ' | ''               | 'TRY'      | '' | '' |
-		| ''                               | 'Expense'     | '*'      | '11 000'               | ''               | ''                       | ''               | 'Main Company' | 'Veritas' | 'Company Veritas ' | ''               | 'TRY'      | '' | '' |
-	
-		And I select "Advance to suppliers" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Advance to suppliers"' | ''            | ''       | ''          | ''             | ''        | ''                 | ''         | ''                      | ''                             | ''                     | '' | '' | '' |
-		| ''                                 | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''        | ''                 | ''         | ''                      | ''                             | 'Attributes'           | '' | '' | '' |
-		| ''                                 | ''            | ''       | 'Amount'    | 'Company'      | 'Partner' | 'Legal name'       | 'Currency' | 'Payment document'      | 'Multi currency movement type' | 'Deferred calculation' | '' | '' | '' |
-		| ''                                 | 'Expense'     | '*'      | '1 883,2'   | 'Main Company' | 'Veritas' | 'Company Veritas ' | 'USD'      | '$$BankPayment060007$$' | 'Reporting currency'           | 'No'                   | '' | '' | '' |
-		| ''                                 | 'Expense'     | '*'      | '11 000'    | 'Main Company' | 'Veritas' | 'Company Veritas ' | 'TRY'      | '$$BankPayment060007$$' | 'Local currency'               | 'No'                   | '' | '' | '' |
-		| ''                                 | 'Expense'     | '*'      | '11 000'    | 'Main Company' | 'Veritas' | 'Company Veritas ' | 'TRY'      | '$$BankPayment060007$$' | 'en description is empty'      | 'No'                   | '' | '' | '' |
-		And I select "Goods receipt schedule" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Goods receipt schedule"' | ''            | ''       | ''          | ''             | ''                          | ''         | ''         | ''        | ''              | '' | '' | '' | '' |
-		| ''                                   | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                          | ''         | ''         | ''        | 'Attributes'    | '' | '' | '' | '' |
-		| ''                                   | ''            | ''       | 'Quantity'  | 'Company'      | 'Order'                     | 'Store'    | 'Item key' | 'Row key' | 'Delivery date' | '' | '' | '' | '' |
-		| ''                                   | 'Receipt'     | '*'      | '20'        | 'Main Company' | '$$PurchaseInvoice060007$$' | 'Store 01' | 'L/Green'  | '*'       | '*'             | '' | '' | '' | '' |
-		| ''                                   | 'Expense'     | '*'      | '20'        | 'Main Company' | '$$PurchaseInvoice060007$$' | 'Store 01' | 'L/Green'  | '*'       | '*'             | '' | '' | '' | '' |
-		And I select "Partner AP transactions" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Partner AP transactions"' | ''            | ''       | ''          | ''             | ''               | ''        | ''                 | ''                  | ''         | ''                             | ''                     | '' | '' |
-		| ''                                    | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''               | ''        | ''                 | ''                  | ''         | ''                             | 'Attributes'           | '' | '' |
-		| ''                                    | ''            | ''       | 'Amount'    | 'Company'      | 'Basis document' | 'Partner' | 'Legal name'       | 'Partner term'      | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' | '' | '' |
-		| ''                                    | 'Receipt'     | '*'      | '1 883,2'   | 'Main Company' | ''               | 'Veritas' | 'Company Veritas ' | 'Standard (Vendor)' | 'USD'      | 'Reporting currency'           | 'No'                   | '' | '' |
-		| ''                                    | 'Receipt'     | '*'      | '11 000'    | 'Main Company' | ''               | 'Veritas' | 'Company Veritas ' | 'Standard (Vendor)' | 'TRY'      | 'Local currency'               | 'No'                   | '' | '' |
-		| ''                                    | 'Receipt'     | '*'      | '11 000'    | 'Main Company' | ''               | 'Veritas' | 'Company Veritas ' | 'Standard (Vendor)' | 'TRY'      | 'TRY'                          | 'No'                   | '' | '' |
-		| ''                                    | 'Receipt'     | '*'      | '11 000'    | 'Main Company' | ''               | 'Veritas' | 'Company Veritas ' | 'Standard (Vendor)' | 'TRY'      | 'en description is empty'      | 'No'                   | '' | '' |
-		| ''                                    | 'Expense'     | '*'      | '1 883,2'   | 'Main Company' | ''               | 'Veritas' | 'Company Veritas ' | 'Standard (Vendor)' | 'USD'      | 'Reporting currency'           | 'No'                   | '' | '' |
-		| ''                                    | 'Expense'     | '*'      | '11 000'    | 'Main Company' | ''               | 'Veritas' | 'Company Veritas ' | 'Standard (Vendor)' | 'TRY'      | 'Local currency'               | 'No'                   | '' | '' |
-		| ''                                    | 'Expense'     | '*'      | '11 000'    | 'Main Company' | ''               | 'Veritas' | 'Company Veritas ' | 'Standard (Vendor)' | 'TRY'      | 'TRY'                          | 'No'                   | '' | '' |
-		| ''                                    | 'Expense'     | '*'      | '11 000'    | 'Main Company' | ''               | 'Veritas' | 'Company Veritas ' | 'Standard (Vendor)' | 'TRY'      | 'en description is empty'      | 'No'                   | '' | '' |
-		
-	And I close all client application windows
 	
 
 Scenario: _060008 create Bank payment with the type of settlements under standard contracts and check its movements
@@ -544,25 +383,18 @@ Scenario: _060008 create Bank payment with the type of settlements under standar
 			| 'Number'  |
 			| '$$NumberBankPayment060008$$' |
 		And I click "Registrations report" button
-	
-		And I select "Partner AP transactions" exact value from "Register" drop-down list
+		And I select "R1021 Vendors transactions" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Partner AP transactions"' | ''            | ''       | ''          | ''             | ''               | ''        | ''                 | ''                  | ''         | ''                             | ''                     |
-			| ''                                    | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''               | ''        | ''                 | ''                  | ''         | ''                             | 'Attributes'           |
-			| ''                                    | ''            | ''       | 'Amount'    | 'Company'      | 'Basis document' | 'Partner' | 'Legal name'       | 'Partner term'      | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
-			| ''                                    | 'Expense'     | '*'      | '1 883,2'   | 'Main Company' | ''               | 'Veritas' | 'Company Veritas ' | 'Standard (Vendor)' | 'USD'      | 'Reporting currency'           | 'No'                   |
-			| ''                                    | 'Expense'     | '*'      | '11 000'    | 'Main Company' | ''               | 'Veritas' | 'Company Veritas ' | 'Standard (Vendor)' | 'TRY'      | 'Local currency'               | 'No'                   |
-			| ''                                    | 'Expense'     | '*'      | '11 000'    | 'Main Company' | ''               | 'Veritas' | 'Company Veritas ' | 'Standard (Vendor)' | 'TRY'      | 'TRY'                          | 'No'                   |
-			| ''                                    | 'Expense'     | '*'      | '11 000'    | 'Main Company' | ''               | 'Veritas' | 'Company Veritas ' | 'Standard (Vendor)' | 'TRY'      | 'en description is empty'      | 'No'                   |
-		
-		And I select "Accounts statement" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Accounts statement"' | ''            | ''       | ''                     | ''               | ''                       | ''               | ''             | ''        | ''                 | ''               | ''         |
-			| ''                               | 'Record type' | 'Period' | 'Resources'            | ''               | ''                       | ''               | 'Dimensions'   | ''        | ''                 | ''               | ''         |
-			| ''                               | ''            | ''       | 'Advance to suppliers' | 'Transaction AP' | 'Advance from customers' | 'Transaction AR' | 'Company'      | 'Partner' | 'Legal name'       | 'Basis document' | 'Currency' |
-			| ''                               | 'Expense'     | '*'      | ''                     | '11 000'         | ''                       | ''               | 'Main Company' | 'Veritas' | 'Company Veritas ' | ''               | 'TRY'      |
+			| '$$BankPayment060008$$'                  | ''            | ''       | ''          | ''             | ''                             | ''         | ''                 | ''        | ''                  | ''      | ''                     | ''                  |
+			| 'Document registrations records'         | ''            | ''       | ''          | ''             | ''                             | ''         | ''                 | ''        | ''                  | ''      | ''                     | ''                  |
+			| 'Register  "R1021 Vendors transactions"' | ''            | ''       | ''          | ''             | ''                             | ''         | ''                 | ''        | ''                  | ''      | ''                     | ''                  |
+			| ''                                       | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                             | ''         | ''                 | ''        | ''                  | ''      | 'Attributes'           | ''                  |
+			| ''                                       | ''            | ''       | 'Amount'    | 'Company'      | 'Multi currency movement type' | 'Currency' | 'Legal name'       | 'Partner' | 'Agreement'         | 'Basis' | 'Deferred calculation' | 'Offset of advance' |
+			| ''                                       | 'Expense'     | '*'      | '1 883,2'   | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Company Veritas ' | 'Veritas' | 'Standard (Vendor)' | ''      | 'No'                   | 'No'                |
+			| ''                                       | 'Expense'     | '*'      | '11 000'    | 'Main Company' | 'Local currency'               | 'TRY'      | 'Company Veritas ' | 'Veritas' | 'Standard (Vendor)' | ''      | 'No'                   | 'No'                |
+			| ''                                       | 'Expense'     | '*'      | '11 000'    | 'Main Company' | 'TRY'                          | 'TRY'      | 'Company Veritas ' | 'Veritas' | 'Standard (Vendor)' | ''      | 'No'                   | 'No'                |
+			| ''                                       | 'Expense'     | '*'      | '11 000'    | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Company Veritas ' | 'Veritas' | 'Standard (Vendor)' | ''      | 'No'                   | 'No'                |
 		And I close all client application windows
 
 Scenario: _999999 close TestClient session

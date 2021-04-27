@@ -171,49 +171,30 @@ Function CreateFilterByParameters(Ref, Parameters, TableName,
 	+ QueryText_OpeningEntryTableName2
 	+ " ;
 	|SELECT ALLOWED
-	//|	CustomersTransactions.BasisDocument AS Ref,
-	|	CustomersTransactions.Basis AS Ref,
-	|	CustomersTransactions.Company AS Company,
-	|	CustomersTransactions.Partner AS Partner,
-	|	CustomersTransactions.LegalName AS LegalName,
-	|	CustomersTransactions.Agreement AS Agreement,
-	|	CustomersTransactions.Currency AS Currency,
-	|	CustomersTransactions.AmountBalance AS DocumentAmount
-	|FROM
-//	|	AccumulationRegister.PartnerApTransactions.Balance(&Period,
-	|	AccumulationRegister.R2021B_CustomersTransactions.Balance(&Period,
-	|		CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
-//	|	AND (BasisDocument, Company, Partner, LegalName, Agreement, Currency) IN
-	|	AND (Basis, Company, Partner, LegalName, Agreement, Currency) IN
-	|		(SELECT
-	|			Doc.Ref,
-	|			Doc.Company,
-	|			Doc.Partner,
-	|			Doc.LegalName,
-	|			Doc.Agreement,
-	|			Doc.Currency
-	|		FROM
-	|			Doc AS Doc)) AS CustomersTransactions
-	|//------
-	|WHERE
-	|	CustomersTransactions.AmountBalance > 0
-	|
-	|";
-//	|
-//	|UNION ALL
-//	|
-//	|SELECT
-//	|	AR.BasisDocument,
-//	|	AR.Company,
-//	|	AR.Partner,
-//	|	AR.LegalName,
-//	|	AR.Agreement,
-//	|	AR.Currency,
-//	|	AR.AmountBalance
+	|	Doc.Ref,
+	|	Doc.Company,
+	|	Doc.Partner,
+	|	Doc.LegalName,
+	|	Doc.Agreement,
+	|	Doc.Currency,
+	|	0 AS DocumentAmount
+	|FROM Doc AS Doc";
+
+//	|SELECT ALLOWED
+//	//|	CustomersTransactions.BasisDocument AS Ref,
+//	|	CustomersTransactions.Basis AS Ref,
+//	|	CustomersTransactions.Company AS Company,
+//	|	CustomersTransactions.Partner AS Partner,
+//	|	CustomersTransactions.LegalName AS LegalName,
+//	|	CustomersTransactions.Agreement AS Agreement,
+//	|	CustomersTransactions.Currency AS Currency,
+//	|	CustomersTransactions.AmountBalance AS DocumentAmount
 //	|FROM
-//	|	AccumulationRegister.PartnerArTransactions.Balance(&Period,
+////	|	AccumulationRegister.PartnerApTransactions.Balance(&Period,
+//	|	AccumulationRegister.R2021B_CustomersTransactions.Balance(&Period,
 //	|		CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
-//	|	AND (BasisDocument, Company, Partner, LegalName, Agreement, Currency) IN
+////	|	AND (BasisDocument, Company, Partner, LegalName, Agreement, Currency) IN
+//	|	AND (Basis, Company, Partner, LegalName, Agreement, Currency) IN
 //	|		(SELECT
 //	|			Doc.Ref,
 //	|			Doc.Company,
@@ -222,7 +203,36 @@ Function CreateFilterByParameters(Ref, Parameters, TableName,
 //	|			Doc.Agreement,
 //	|			Doc.Currency
 //	|		FROM
-//	|			Doc AS Doc)) AS AR";
+//	|			Doc AS Doc)) AS CustomersTransactions
+//	|//------
+//	|WHERE
+//	|	CustomersTransactions.AmountBalance > 0
+//	|
+//	|";
+////	|
+////	|UNION ALL
+////	|
+////	|SELECT
+////	|	AR.BasisDocument,
+////	|	AR.Company,
+////	|	AR.Partner,
+////	|	AR.LegalName,
+////	|	AR.Agreement,
+////	|	AR.Currency,
+////	|	AR.AmountBalance
+////	|FROM
+////	|	AccumulationRegister.PartnerArTransactions.Balance(&Period,
+////	|		CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
+////	|	AND (BasisDocument, Company, Partner, LegalName, Agreement, Currency) IN
+////	|		(SELECT
+////	|			Doc.Ref,
+////	|			Doc.Company,
+////	|			Doc.Partner,
+////	|			Doc.LegalName,
+////	|			Doc.Agreement,
+////	|			Doc.Currency
+////	|		FROM
+////	|			Doc AS Doc)) AS AR";
 	
 	FilterStructure = New Structure();
 	FilterStructure.Insert("QueryText", QueryText);

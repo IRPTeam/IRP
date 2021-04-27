@@ -378,7 +378,6 @@
         <key>en</key>
         <value>Amount</value>
       </title>
-      <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
         <common>true</common>

@@ -323,47 +323,7 @@ Scenario: _053001 create Bank payment (independently)
 				| 'Number' |
 				| '$$NumberBankPayment0530013$$'    |
 
-Scenario: _053002 check Bank payment movements by register PartnerApTransactions
-		Given I open hyperlink "e1cib/list/AccumulationRegister.PartnerApTransactions"
-		And "List" table contains lines
-			| 'Currency' | 'Recorder'               | 'Legal name'        | 'Basis document'            | 'Company'      | 'Amount'   | 'Partner term'       | 'Partner'   |
-			| 'TRY'      | '$$BankPayment0530011$$' | 'Company Ferron BP' | '$$PurchaseInvoice018001$$' | 'Main Company' | '1 000,00' | 'Vendor Ferron, TRY' | 'Ferron BP' |
-			| 'USD'      | '$$BankPayment0530012$$' | 'Company Ferron BP' | '$$PurchaseInvoice018001$$' | 'Main Company' | '20,00'    | 'Vendor Ferron, TRY' | 'Ferron BP' |
-			| 'EUR'      | '$$BankPayment0530013$$' | 'Company Ferron BP' | '*'                         | 'Main Company' | '150,00'   | 'Vendor Ferron, USD' | 'Ferron BP' |
-		And I close all client application windows
 
-
-Scenario: _050002 check Bank payment movements with transaction type Payment to the vendor
-	* Open Bank payment 1
-		Given I open hyperlink "e1cib/list/Document.BankPayment"
-		And I go to line in "List" table
-			| 'Number' |
-			| '$$NumberBankPayment0530011$$'      |
-	* Check movements Bank payment 1
-		And I click "Registrations report" button
-		And I select "Accounts statement" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| '$$BankPayment0530011$$'         | ''            | ''       | ''                     | ''               | ''                       | ''               | ''             | ''          | ''                  | ''                          | ''         |
-			| 'Document registrations records' | ''            | ''       | ''                     | ''               | ''                       | ''               | ''             | ''          | ''                  | ''                          | ''         |
-			| 'Register  "Accounts statement"' | ''            | ''       | ''                     | ''               | ''                       | ''               | ''             | ''          | ''                  | ''                          | ''         |
-			| ''                               | 'Record type' | 'Period' | 'Resources'            | ''               | ''                       | ''               | 'Dimensions'   | ''          | ''                  | ''                          | ''         |
-			| ''                               | ''            | ''       | 'Advance to suppliers' | 'Transaction AP' | 'Advance from customers' | 'Transaction AR' | 'Company'      | 'Partner'   | 'Legal name'        | 'Basis document'            | 'Currency' |
-			| ''                               | 'Expense'     | '*'      | ''                     | '1 000'          | ''                       | ''               | 'Main Company' | 'Ferron BP' | 'Company Ferron BP' | '$$PurchaseInvoice018001$$' | 'TRY'      |
-	
-		And I select "Partner AP transactions" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Partner AP transactions"' | ''            | ''       | ''          | ''             | ''                          | ''          | ''                  | ''                   | ''         | ''                             | ''                     |
-			| ''                                    | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                          | ''          | ''                  | ''                   | ''         | ''                             | 'Attributes'           |
-			| ''                                    | ''            | ''       | 'Amount'    | 'Company'      | 'Basis document'            | 'Partner'   | 'Legal name'        | 'Partner term'       | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
-			| ''                                    | 'Expense'     | '*'      | '171,2'     | 'Main Company' | '$$PurchaseInvoice018001$$' | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'USD'      | 'Reporting currency'           | 'No'                   |
-			| ''                                    | 'Expense'     | '*'      | '1 000'     | 'Main Company' | '$$PurchaseInvoice018001$$' | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'TRY'      | 'en description is empty'      | 'No'                   |
-			| ''                                    | 'Expense'     | '*'      | '1 000'     | 'Main Company' | '$$PurchaseInvoice018001$$' | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'TRY'      | 'Local currency'               | 'No'                   |
-			| ''                                    | 'Expense'     | '*'      | '1 000'     | 'Main Company' | '$$PurchaseInvoice018001$$' | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'TRY'      | 'TRY'                          | 'No'                   |
-	
-		And I close all client application windows
-	
 
 # Filters
 

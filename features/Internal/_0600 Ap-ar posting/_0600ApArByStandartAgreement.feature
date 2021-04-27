@@ -103,18 +103,7 @@ Scenario: _060002 create Sales invoice with the type of settlements under standa
 				| 'Number' |
 				| '$$NumberSalesInvoice060002$$'  |
 			And I click "Registrations report" button
-			And I select "Partner AR transactions" exact value from "Register" drop-down list
-			And I click "Generate report" button
-			And "ResultTable" spreadsheet document contains lines:
-			| '$$SalesInvoice060002$$'              | ''            | ''       | ''          | ''             | ''               | ''          | ''                  | ''                    | ''         | ''                             | ''                     | '' | '' |
-			| 'Document registrations records'      | ''            | ''       | ''          | ''             | ''               | ''          | ''                  | ''                    | ''         | ''                             | ''                     | '' | '' |
-			| 'Register  "Partner AR transactions"' | ''            | ''       | ''          | ''             | ''               | ''          | ''                  | ''                    | ''         | ''                             | ''                     | '' | '' |
-			| ''                                    | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''               | ''          | ''                  | ''                    | ''         | ''                             | 'Attributes'           | '' | '' |
-			| ''                                    | ''            | ''       | 'Amount'    | 'Company'      | 'Basis document' | 'Partner'   | 'Legal name'        | 'Partner term'        | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' | '' | '' |
-			| ''                                    | 'Receipt'     | '*'      | '1 883,2'   | 'Main Company' | ''               | 'Nicoletta' | 'Company Nicoletta' | 'Standard (Customer)' | 'USD'      | 'Reporting currency'           | 'No'                   | '' | '' |
-			| ''                                    | 'Receipt'     | '*'      | '11 000'    | 'Main Company' | ''               | 'Nicoletta' | 'Company Nicoletta' | 'Standard (Customer)' | 'TRY'      | 'Local currency'               | 'No'                   | '' | '' |
-			| ''                                    | 'Receipt'     | '*'      | '11 000'    | 'Main Company' | ''               | 'Nicoletta' | 'Company Nicoletta' | 'Standard (Customer)' | 'TRY'      | 'TRY'                          | 'No'                   | '' | '' |
-			| ''                                    | 'Receipt'     | '*'      | '11 000'    | 'Main Company' | ''               | 'Nicoletta' | 'Company Nicoletta' | 'Standard (Customer)' | 'TRY'      | 'en description is empty'      | 'No'                   | '' | '' |
+			
 			And I select "Taxes turnovers" exact value from "Register" drop-down list
 			And I click "Generate report" button
 			And "ResultTable" spreadsheet document contains lines:
@@ -125,15 +114,7 @@ Scenario: _060002 create Sales invoice with the type of settlements under standa
 			| ''                            | '*'      | '1 677,97'  | '1 677,97'      | '9 322,03'   | '$$SalesInvoice060002$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'Local currency'               | 'No'                   |
 			| ''                            | '*'      | '1 677,97'  | '1 677,97'      | '9 322,03'   | '$$SalesInvoice060002$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'TRY'                          | 'No'                   |
 			| ''                            | '*'      | '1 677,97'  | '1 677,97'      | '9 322,03'   | '$$SalesInvoice060002$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'en description is empty'      | 'No'                   |
-			And I select "Accounts statement" exact value from "Register" drop-down list
-			And I click "Generate report" button
-			And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Accounts statement"' | ''            | ''       | ''                     | ''               | ''                       | ''               | ''             | ''          | ''                  | ''               | ''         | '' | '' |
-			| ''                               | 'Record type' | 'Period' | 'Resources'            | ''               | ''                       | ''               | 'Dimensions'   | ''          | ''                  | ''               | ''         | '' | '' |
-			| ''                               | ''            | ''       | 'Advance to suppliers' | 'Transaction AP' | 'Advance from customers' | 'Transaction AR' | 'Company'      | 'Partner'   | 'Legal name'        | 'Basis document' | 'Currency' | '' | '' |
-			| ''                               | 'Receipt'     | '*'      | ''                     | ''               | ''                       | '11 000'         | 'Main Company' | 'Nicoletta' | 'Company Nicoletta' | ''               | 'TRY'      | '' | '' |
-		
-		
+			
 			And I select "Revenues turnovers" exact value from "Register" drop-down list
 			And I click "Generate report" button
 			And "ResultTable" spreadsheet document contains lines:
@@ -145,14 +126,7 @@ Scenario: _060002 create Sales invoice with the type of settlements under standa
 			| ''                               | '*'      | '9 322,03'  | 'Main Company' | ''              | ''             | 'L/Green'  | 'TRY'      | ''                    | 'TRY'                          | 'No'                   | '' | '' | '' |
 			| ''                               | '*'      | '9 322,03'  | 'Main Company' | ''              | ''             | 'L/Green'  | 'TRY'      | ''                    | 'en description is empty'      | 'No'                   | '' | '' | '' |
 			
-			And I select "Shipment confirmation schedule" exact value from "Register" drop-down list
-			And I click "Generate report" button
-			And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Shipment confirmation schedule"' | ''            | ''          | ''                     | ''               | ''                       | ''               | ''                       | ''                    | ''                             | ''                             | ''                             | ''                             | ''                     |
-			| ''                                           | 'Record type' | 'Period'    | 'Resources'            | 'Dimensions'     | ''                       | ''               | ''                       | ''                    | 'Attributes'                   | ''                             | ''                             | ''                             | ''                     |
-			| ''                                           | ''            | ''          | 'Quantity'             | 'Company'        | 'Order'                  | 'Store'          | 'Item key'               | 'Row key'             | 'Delivery date'                | ''                             | ''                             | ''                             | ''                     |
-			| ''                                           | 'Receipt'     | '*'         | '20'                   | 'Main Company'   | '$$SalesInvoice060002$$' | 'Store 01'       | 'L/Green'                | '*'                   | '*'                            | ''                             | ''                             | ''                             | ''                     |
-			| ''                                           | 'Expense'     | '*'         | '20'                   | 'Main Company'   | '$$SalesInvoice060002$$' | 'Store 01'       | 'L/Green'                | '*'                   | '*'                            | ''                             | ''                             | ''                             | ''                     |
+			
 	And I close all client application windows
 
 Scenario: _060003 create Cash receipt with the type of settlements under standard Partner terms and check its movements
@@ -198,31 +172,10 @@ Scenario: _060003 create Cash receipt with the type of settlements under standar
 		And I save the value of "Number" field as "$$NumberCashReceipt060003$$"
 		And I save the window as "$$CashReceipt060003$$"
 		And I click the button named "FormPostAndClose"
-	* Check movements
+	* Check creation
 		And I go to line in "List" table
 			| 'Number' |
 			| '$$NumberCashReceipt060003$$'  |
-		And I click "Registrations report" button
-		And I select "Partner AR transactions" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| '$$CashReceipt060003$$'               | ''            | ''       | ''          | ''             | ''               | ''          | ''                  | ''                    | ''         | ''                             | ''                     |
-			| 'Document registrations records'      | ''            | ''       | ''          | ''             | ''               | ''          | ''                  | ''                    | ''         | ''                             | ''                     |
-			| 'Register  "Partner AR transactions"' | ''            | ''       | ''          | ''             | ''               | ''          | ''                  | ''                    | ''         | ''                             | ''                     |
-			| ''                                    | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''               | ''          | ''                  | ''                    | ''         | ''                             | 'Attributes'           |
-			| ''                                    | ''            | ''       | 'Amount'    | 'Company'      | 'Basis document' | 'Partner'   | 'Legal name'        | 'Partner term'        | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
-			| ''                                    | 'Expense'     | '*'      | '1 883,2'   | 'Main Company' | ''               | 'Nicoletta' | 'Company Nicoletta' | 'Standard (Customer)' | 'USD'      | 'Reporting currency'           | 'No'                   |
-			| ''                                    | 'Expense'     | '*'      | '11 000'    | 'Main Company' | ''               | 'Nicoletta' | 'Company Nicoletta' | 'Standard (Customer)' | 'TRY'      | 'Local currency'               | 'No'                   |
-			| ''                                    | 'Expense'     | '*'      | '11 000'    | 'Main Company' | ''               | 'Nicoletta' | 'Company Nicoletta' | 'Standard (Customer)' | 'TRY'      | 'TRY'                          | 'No'                   |
-			| ''                                    | 'Expense'     | '*'      | '11 000'    | 'Main Company' | ''               | 'Nicoletta' | 'Company Nicoletta' | 'Standard (Customer)' | 'TRY'      | 'en description is empty'      | 'No'                   |
-	
-		And I select "Accounts statement" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Accounts statement"'       | ''            | ''       | ''                     | ''               | ''                       | ''               | ''                             | ''                     | ''                  | ''                             | ''                     |
-			| ''                                     | 'Record type' | 'Period' | 'Resources'            | ''               | ''                       | ''               | 'Dimensions'                   | ''                     | ''                  | ''                             | ''                     |
-			| ''                                     | ''            | ''       | 'Advance to suppliers' | 'Transaction AP' | 'Advance from customers' | 'Transaction AR' | 'Company'                      | 'Partner'              | 'Legal name'        | 'Basis document'               | 'Currency'             |
-			| ''                                     | 'Expense'     | '*'      | ''                     | ''               | ''                       | '11 000'         | 'Main Company'                 | 'Nicoletta'            | 'Company Nicoletta' | ''                             | 'TRY'                  |
 		And I close all client application windows
 
 Scenario: _0600031 create Bank receipt with the type of settlements under standard Partner terms and check its movements
@@ -263,200 +216,12 @@ Scenario: _0600031 create Bank receipt with the type of settlements under standa
 		And I save the value of "Number" field as "$$NumberBankReceipt0600031$$"
 		And I save the window as "$$BankReceipt0600031$$"
 		And I click the button named "FormPostAndClose"
-	* Check movements
+	* Check creation
 		And I go to line in "List" table
 			| 'Number' |
 			| '$$NumberBankReceipt0600031$$'  |
-		And I click "Registrations report" button
-		And I select "Partner AR transactions" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| '$$BankReceipt0600031$$'              | ''            | ''       | ''          | ''             | ''               | ''          | ''                  | ''                    | ''         | ''                             | ''                     |
-			| 'Document registrations records'      | ''            | ''       | ''          | ''             | ''               | ''          | ''                  | ''                    | ''         | ''                             | ''                     |
-			| 'Register  "Partner AR transactions"' | ''            | ''       | ''          | ''             | ''               | ''          | ''                  | ''                    | ''         | ''                             | ''                     |
-			| ''                                    | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''               | ''          | ''                  | ''                    | ''         | ''                             | 'Attributes'           |
-			| ''                                    | ''            | ''       | 'Amount'    | 'Company'      | 'Basis document' | 'Partner'   | 'Legal name'        | 'Partner term'        | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
-			| ''                                    | 'Expense'     | '*'      | '1 883,2'   | 'Main Company' | ''               | 'Nicoletta' | 'Company Nicoletta' | 'Standard (Customer)' | 'USD'      | 'Reporting currency'           | 'No'                   |
-			| ''                                    | 'Expense'     | '*'      | '11 000'    | 'Main Company' | ''               | 'Nicoletta' | 'Company Nicoletta' | 'Standard (Customer)' | 'TRY'      | 'Local currency'               | 'No'                   |
-			| ''                                    | 'Expense'     | '*'      | '11 000'    | 'Main Company' | ''               | 'Nicoletta' | 'Company Nicoletta' | 'Standard (Customer)' | 'TRY'      | 'TRY'                          | 'No'                   |
-			| ''                                    | 'Expense'     | '*'      | '11 000'    | 'Main Company' | ''               | 'Nicoletta' | 'Company Nicoletta' | 'Standard (Customer)' | 'TRY'      | 'en description is empty'      | 'No'                   |
-	
-		And I select "Accounts statement" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Accounts statement"'       | ''            | ''       | ''                     | ''               | ''                       | ''               | ''                             | ''                     | ''                  | ''                             | ''                     |
-			| ''                                     | 'Record type' | 'Period' | 'Resources'            | ''               | ''                       | ''               | 'Dimensions'                   | ''                     | ''                  | ''                             | ''                     |
-			| ''                                     | ''            | ''       | 'Advance to suppliers' | 'Transaction AP' | 'Advance from customers' | 'Transaction AR' | 'Company'                      | 'Partner'              | 'Legal name'        | 'Basis document'               | 'Currency'             |
-			| ''                                     | 'Expense'     | '*'      | ''                     | ''               | ''                       | '11 000'         | 'Main Company'                 | 'Nicoletta'            | 'Company Nicoletta' | ''                             | 'TRY'                  |
 		And I close all client application windows
 
-Scenario: _060004 check the offset of the advance for Sales invoice with the type of settlement under standard Partner terms and check its movements
-	And I delete "$$NumberSalesInvoice060004$$" variable
-	And I delete "$$SalesInvoice060004$$" variable
-	And I delete "$$NumberBankReceipt060004$$" variable
-	And I delete "$$BankReceipt060004$$" variable
-	* Create Bank receipt №602
-		Given I open hyperlink "e1cib/list/Document.BankReceipt"
-		And I click the button named "FormCreate"
-		* Select company
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| Description  |
-				| Main Company |
-			And I select current line in "List" table
-		* Filling in the details of the document
-			And I click Select button of "Account" field
-			And I go to line in "List" table
-				| 'Description'  |
-				| 'Bank account, TRY' |
-			And I select current line in "List" table
-		* Filling in the tabular part
-			And in the table "PaymentList" I click the button named "PaymentListAdd"
-			And I click choice button of "Partner" attribute in "PaymentList" table
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Nicoletta'   |
-			And I select current line in "List" table
-			And I activate field named "PaymentListAmount" in "PaymentList" table
-			And I input "12 000,00" text in the field named "PaymentListAmount" of "PaymentList" table
-			And I finish line editing in "PaymentList" table
-			And I select current line in "PaymentList" table
-			And I click Clear button of "Partner term" field
-			And I finish line editing in "PaymentList" table
-		And I click the button named "FormPost"
-		And I delete "$$NumberBankReceipt060004$$" variable
-		And I delete "$$BankReceipt060004$$" variable
-		And I save the value of "Number" field as "$$NumberBankReceipt060004$$"
-		And I save the window as "$$BankReceipt060004$$"
-		And I click the button named "FormPostAndClose"
-	* Check Bank Receipt movements 
-		And I go to line in "List" table
-			| 'Number'  |
-			| '$$NumberBankReceipt060004$$' |
-		And I click "Registrations report" button
-		And I select "Accounts statement" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| '$$BankReceipt060004$$'          | ''            | ''       | ''                     | ''               | ''                       | ''               | ''             | ''          | ''                  | ''               | ''         |
-			| 'Document registrations records' | ''            | ''       | ''                     | ''               | ''                       | ''               | ''             | ''          | ''                  | ''               | ''         |
-			| 'Register  "Accounts statement"' | ''            | ''       | ''                     | ''               | ''                       | ''               | ''             | ''          | ''                  | ''               | ''         |
-			| ''                               | 'Record type' | 'Period' | 'Resources'            | ''               | ''                       | ''               | 'Dimensions'   | ''          | ''                  | ''               | ''         |
-			| ''                               | ''            | ''       | 'Advance to suppliers' | 'Transaction AP' | 'Advance from customers' | 'Transaction AR' | 'Company'      | 'Partner'   | 'Legal name'        | 'Basis document' | 'Currency' |
-			| ''                               | 'Receipt'     | '*'      | ''                     | ''               | '12 000'                 | ''               | 'Main Company' | 'Nicoletta' | 'Company Nicoletta' | ''               | 'TRY'      |
-	
-		And I select "Advance from customers" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Advance from customers"' | ''            | ''       | ''          | ''             | ''          | ''                  | ''         | ''                      | ''                             | ''                     | '' |
-			| ''                                   | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''          | ''                  | ''         | ''                      | ''                             | 'Attributes'           | '' |
-			| ''                                   | ''            | ''       | 'Amount'    | 'Company'      | 'Partner'   | 'Legal name'        | 'Currency' | 'Receipt document'      | 'Multi currency movement type' | 'Deferred calculation' | '' |
-			| ''                                   | 'Receipt'     | '*'      | '2 054,4'   | 'Main Company' | 'Nicoletta' | 'Company Nicoletta' | 'USD'      | '$$BankReceipt060004$$' | 'Reporting currency'           | 'No'                   | '' |
-			| ''                                   | 'Receipt'     | '*'      | '12 000'    | 'Main Company' | 'Nicoletta' | 'Company Nicoletta' | 'TRY'      | '$$BankReceipt060004$$' | 'Local currency'               | 'No'                   | '' |
-			| ''                                   | 'Receipt'     | '*'      | '12 000'    | 'Main Company' | 'Nicoletta' | 'Company Nicoletta' | 'TRY'      | '$$BankReceipt060004$$' | 'en description is empty'      | 'No'                   | '' |
-		And I close all client application windows
-	* Create Sales invoice with the type of settlements under standard Partner terms
-		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
-		And I click the button named "FormCreate"
-		* Filling in customer info
-			And I click Select button of "Partner" field
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Nicoletta'     |
-			And I select current line in "List" table
-		* Adding items to Sales Invoice
-			And in the table "ItemList" I click the button named "ItemListAdd"
-			And I click choice button of "Item" attribute in "ItemList" table
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Dress'  |
-			And I select current line in "List" table
-			And I activate "Item key" field in "ItemList" table
-			And I click choice button of "Item key" attribute in "ItemList" table
-			And I go to line in "List" table
-				| 'Item key' |
-				| 'L/Green'  |
-			And I select current line in "List" table
-			And I activate "Q" field in "ItemList" table
-			And I input "20,000" text in "Q" field of "ItemList" table
-			And I finish line editing in "ItemList" table
-			And I input end of the current month date in "Delivery date" field
-			And I click the button named "FormPost"
-			And I delete "$$NumberSalesInvoice060004$$" variable
-			And I delete "$$SalesInvoice060004$$" variable
-			And I save the value of "Number" field as "$$NumberSalesInvoice060004$$"
-			And I save the window as "$$SalesInvoice060004$$"
-			And I click the button named "FormPostAndClose"
-	* Check SalesInvoice movements
-		And I go to line in "List" table
-			| 'Number'  |
-			| '$$NumberSalesInvoice060004$$' |
-		And I click "Registrations report" button
-		And I select "Partner AR transactions" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| '$$SalesInvoice060004$$'              | ''            | ''       | ''          | ''             | ''               | ''          | ''                  | ''                    | ''         | ''                             | ''                     | '' | '' |
-			| 'Document registrations records'      | ''            | ''       | ''          | ''             | ''               | ''          | ''                  | ''                    | ''         | ''                             | ''                     | '' | '' |
-			| 'Register  "Partner AR transactions"' | ''            | ''       | ''          | ''             | ''               | ''          | ''                  | ''                    | ''         | ''                             | ''                     | '' | '' |
-			| ''                                    | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''               | ''          | ''                  | ''                    | ''         | ''                             | 'Attributes'           | '' | '' |
-			| ''                                    | ''            | ''       | 'Amount'    | 'Company'      | 'Basis document' | 'Partner'   | 'Legal name'        | 'Partner term'        | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' | '' | '' |
-			| ''                                    | 'Receipt'     | '*'      | '1 883,2'   | 'Main Company' | ''               | 'Nicoletta' | 'Company Nicoletta' | 'Standard (Customer)' | 'USD'      | 'Reporting currency'           | 'No'                   | '' | '' |
-			| ''                                    | 'Receipt'     | '*'      | '11 000'    | 'Main Company' | ''               | 'Nicoletta' | 'Company Nicoletta' | 'Standard (Customer)' | 'TRY'      | 'Local currency'               | 'No'                   | '' | '' |
-			| ''                                    | 'Receipt'     | '*'      | '11 000'    | 'Main Company' | ''               | 'Nicoletta' | 'Company Nicoletta' | 'Standard (Customer)' | 'TRY'      | 'TRY'                          | 'No'                   | '' | '' |
-			| ''                                    | 'Receipt'     | '*'      | '11 000'    | 'Main Company' | ''               | 'Nicoletta' | 'Company Nicoletta' | 'Standard (Customer)' | 'TRY'      | 'en description is empty'      | 'No'                   | '' | '' |
-			| ''                                    | 'Expense'     | '*'      | '1 883,2'   | 'Main Company' | ''               | 'Nicoletta' | 'Company Nicoletta' | 'Standard (Customer)' | 'USD'      | 'Reporting currency'           | 'No'                   | '' | '' |
-			| ''                                    | 'Expense'     | '*'      | '11 000'    | 'Main Company' | ''               | 'Nicoletta' | 'Company Nicoletta' | 'Standard (Customer)' | 'TRY'      | 'Local currency'               | 'No'                   | '' | '' |
-			| ''                                    | 'Expense'     | '*'      | '11 000'    | 'Main Company' | ''               | 'Nicoletta' | 'Company Nicoletta' | 'Standard (Customer)' | 'TRY'      | 'TRY'                          | 'No'                   | '' | '' |
-			| ''                                    | 'Expense'     | '*'      | '11 000'    | 'Main Company' | ''               | 'Nicoletta' | 'Company Nicoletta' | 'Standard (Customer)' | 'TRY'      | 'en description is empty'      | 'No'                   | '' | '' |
-		And I select "Taxes turnovers" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Taxes turnovers"' | ''       | ''          | ''              | ''           | ''                       | ''    | ''          | ''         | ''                        | ''        | ''         | ''                             | ''                     |
-			| ''                            | 'Period' | 'Resources' | ''              | ''           | 'Dimensions'             | ''    | ''          | ''         | ''                        | ''        | ''         | ''                             | 'Attributes'           |
-			| ''                            | ''       | 'Amount'    | 'Manual amount' | 'Net amount' | 'Document'               | 'Tax' | 'Analytics' | 'Tax rate' | 'Include to total amount' | 'Row key' | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
-			| ''                            | '*'      | '287,27'    | '287,27'        | '1 595,93'   | '$$SalesInvoice060004$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'USD'      | 'Reporting currency'           | 'No'                   |
-			| ''                            | '*'      | '1 677,97'  | '1 677,97'      | '9 322,03'   | '$$SalesInvoice060004$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'Local currency'               | 'No'                   |
-			| ''                            | '*'      | '1 677,97'  | '1 677,97'      | '9 322,03'   | '$$SalesInvoice060004$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'TRY'                          | 'No'                   |
-			| ''                            | '*'      | '1 677,97'  | '1 677,97'      | '9 322,03'   | '$$SalesInvoice060004$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'en description is empty'      | 'No'                   |
-		And I select "Accounts statement" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Accounts statement"' | ''            | ''       | ''                     | ''               | ''                       | ''               | ''             | ''          | ''                  | ''               | ''         | '' | '' |
-			| ''                               | 'Record type' | 'Period' | 'Resources'            | ''               | ''                       | ''               | 'Dimensions'   | ''          | ''                  | ''               | ''         | '' | '' |
-			| ''                               | ''            | ''       | 'Advance to suppliers' | 'Transaction AP' | 'Advance from customers' | 'Transaction AR' | 'Company'      | 'Partner'   | 'Legal name'        | 'Basis document' | 'Currency' | '' | '' |
-			| ''                               | 'Receipt'     | '*'      | ''                     | ''               | ''                       | '11 000'         | 'Main Company' | 'Nicoletta' | 'Company Nicoletta' | ''               | 'TRY'      | '' | '' |
-			| ''                               | 'Expense'     | '*'      | ''                     | ''               | ''                       | '11 000'         | 'Main Company' | 'Nicoletta' | 'Company Nicoletta' | ''               | 'TRY'      | '' | '' |
-			| ''                               | 'Expense'     | '*'      | ''                     | ''               | '11 000'                 | ''               | 'Main Company' | 'Nicoletta' | 'Company Nicoletta' | ''               | 'TRY'      | '' | '' |
-	
-	
-		And I select "Revenues turnovers" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Revenues turnovers"' | ''       | ''          | ''             | ''              | ''             | ''         | ''         | ''                    | ''                             | ''                     | '' | '' | '' |
-			| ''                               | 'Period' | 'Resources' | 'Dimensions'   | ''              | ''             | ''         | ''         | ''                    | ''                             | 'Attributes'           | '' | '' | '' |
-			| ''                               | ''       | 'Amount'    | 'Company'      | 'Business unit' | 'Revenue type' | 'Item key' | 'Currency' | 'Additional analytic' | 'Multi currency movement type' | 'Deferred calculation' | '' | '' | '' |
-			| ''                               | '*'      | '1 595,93'  | 'Main Company' | ''              | ''             | 'L/Green'  | 'USD'      | ''                    | 'Reporting currency'           | 'No'                   | '' | '' | '' |
-			| ''                               | '*'      | '9 322,03'  | 'Main Company' | ''              | ''             | 'L/Green'  | 'TRY'      | ''                    | 'Local currency'               | 'No'                   | '' | '' | '' |
-			| ''                               | '*'      | '9 322,03'  | 'Main Company' | ''              | ''             | 'L/Green'  | 'TRY'      | ''                    | 'TRY'                          | 'No'                   | '' | '' | '' |
-			| ''                               | '*'      | '9 322,03'  | 'Main Company' | ''              | ''             | 'L/Green'  | 'TRY'      | ''                    | 'en description is empty'      | 'No'                   | '' | '' | '' |
-		And I select "Advance from customers" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Advance from customers"' | ''            | ''       | ''          | ''             | ''          | ''                  | ''         | ''                      | ''                             | ''                     | '' | '' | '' |
-			| ''                                   | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''          | ''                  | ''         | ''                      | ''                             | 'Attributes'           | '' | '' | '' |
-			| ''                                   | ''            | ''       | 'Amount'    | 'Company'      | 'Partner'   | 'Legal name'        | 'Currency' | 'Receipt document'      | 'Multi currency movement type' | 'Deferred calculation' | '' | '' | '' |
-			| ''                                   | 'Expense'     | '*'      | '1 883,2'   | 'Main Company' | 'Nicoletta' | 'Company Nicoletta' | 'USD'      | '$$BankReceipt060004$$' | 'Reporting currency'           | 'No'                   | '' | '' | '' |
-			| ''                                   | 'Expense'     | '*'      | '11 000'    | 'Main Company' | 'Nicoletta' | 'Company Nicoletta' | 'TRY'      | '$$BankReceipt060004$$' | 'Local currency'               | 'No'                   | '' | '' | '' |
-			| ''                                   | 'Expense'     | '*'      | '11 000'    | 'Main Company' | 'Nicoletta' | 'Company Nicoletta' | 'TRY'      | '$$BankReceipt060004$$' | 'en description is empty'      | 'No'                   | '' | '' | '' |
-		
-		And I select "Shipment confirmation schedule" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Shipment confirmation schedule"' | ''            | ''          | ''                     | ''               | ''                       | ''                  | ''                       | ''                      | ''                             | ''                             | ''                             | ''                             | ''                     |
-			| ''                                           | 'Record type' | 'Period'    | 'Resources'            | 'Dimensions'     | ''                       | ''                  | ''                       | ''                      | 'Attributes'                   | ''                             | ''                             | ''                             | ''                     |
-			| ''                                           | ''            | ''          | 'Quantity'             | 'Company'        | 'Order'                  | 'Store'             | 'Item key'               | 'Row key'               | 'Delivery date'                | ''                             | ''                             | ''                             | ''                     |
-			| ''                                           | 'Receipt'     | '*'         | '20'                   | 'Main Company'   | '$$SalesInvoice060004$$' | 'Store 01'          | 'L/Green'                | '*'                     | '*'                            | ''                             | ''                             | ''                             | ''                     |
-			| ''                                           | 'Expense'     | '*'         | '20'                   | 'Main Company'   | '$$SalesInvoice060004$$' | 'Store 01'          | 'L/Green'                | '*'                     | '*'                            | ''                             | ''                             | ''                             | ''                     |
-		And I close all client application windows
 
 
 Scenario: _060005 create Purchase invoice with the type of settlements under standard contracts and check its movements

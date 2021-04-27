@@ -299,7 +299,7 @@ Scenario: 950407 create rules for accumulation register
 		And I click "Save and close" button
 	* Create rule for Partner AR transactions (in)
 		And I click the button named "FormCreate"
-		And I select "Partner AR transactions" exact value from "Type" drop-down list
+		And I select "R2021 Customer transactions" exact value from "Type" drop-down list
 		And I select "Partner" exact value from "Attribute" drop-down list
 		And I select "IN" exact value from "Comparison type" drop-down list
 		And I click Select button of "Value" field
@@ -409,7 +409,7 @@ Scenario: 950407 create rules for accumulation register
 		And I click "Yes" button
 		And I go to line in "List" table
 			| 'Type'               |
-			| 'AccumulationRegister.PartnerArTransactions' |
+			| 'AccumulationRegister.R2021B_CustomersTransactions' |
 		And in the table "List" I click the button named "ListContextMenuDelete"
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button

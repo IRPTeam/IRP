@@ -401,6 +401,5 @@ Scenario: _0401573 Sales order clear posting/mark for deletion
 			| 'R4011 Free stocks' |
 			| 'Register  "R2011 Shipment of sales orders' |
 		And I close all client application windows
-		When Create catalog Items objects (stress testing)
 
 		

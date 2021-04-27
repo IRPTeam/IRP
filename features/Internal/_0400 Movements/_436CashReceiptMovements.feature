@@ -121,6 +121,10 @@ Scenario: _043600 preparation (Cash receipt)
 			| "Documents.CashReceipt.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |
 			| "Documents.CashReceipt.FindByNumber(2).GetObject().Write(DocumentWriteMode.Posting);" |
 			| "Documents.CashReceipt.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);" |
+		When Create document CashReceipt objects (advance)
+		And I execute 1C:Enterprise script at server
+			| "Documents.CashReceipt.FindByNumber(4).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.CashReceipt.FindByNumber(5).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I close all client application windows
 
 
@@ -141,9 +145,9 @@ Scenario: _043601 check Cash receipt movements by the Register "R3010 Cash on ha
 			| 'Register  "R3010 Cash on hand"'           | ''            | ''                    | ''          | ''             | ''             | ''         | ''                             | ''                     |
 			| ''                                         | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''         | ''                             | 'Attributes'           |
 			| ''                                         | ''            | ''                    | 'Amount'    | 'Company'      | 'Account'      | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
-			| ''                                         | 'Receipt'     | '05.04.2021 14:34:09' | '100'       | 'Main Company' | 'Cash desk №2' | 'USD'      | 'Reporting currency'           | 'No'                   |
-			| ''                                         | 'Receipt'     | '05.04.2021 14:34:09' | '100'       | 'Main Company' | 'Cash desk №2' | 'USD'      | 'en description is empty'      | 'No'                   |
-			| ''                                         | 'Receipt'     | '05.04.2021 14:34:09' | '17,12'     | 'Main Company' | 'Cash desk №2' | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                         | 'Receipt'     | '05.04.2021 14:34:09' | '500'       | 'Main Company' | 'Cash desk №2' | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                         | 'Receipt'     | '05.04.2021 14:34:09' | '500'       | 'Main Company' | 'Cash desk №2' | 'USD'      | 'en description is empty'      | 'No'                   |
+			| ''                                         | 'Receipt'     | '05.04.2021 14:34:09' | '2 813,75'  | 'Main Company' | 'Cash desk №2' | 'TRY'      | 'Local currency'               | 'No'                   |
 	And I close all client application windows
 
 	
@@ -168,7 +172,7 @@ Scenario: _043602 check Cash receipt movements by the Register "R5010 Reconcilia
 
 
 
-Scenario: _043610 check Cash receipt movements by the Register "R2021 Customer transactions" (SI-CR, basis document exist, checkbox Ignore advance - False)
+Scenario: _043610 check Cash receipt movements by the Register "R2021 Customer transactions" (basis document exist)
 	And I close all client application windows
 	* Select Bank receipt (payment from customer)
 		Given I open hyperlink "e1cib/list/Document.CashReceipt"
@@ -191,6 +195,59 @@ Scenario: _043610 check Cash receipt movements by the Register "R2021 Customer t
 			| ''                                         | 'Expense'     | '05.04.2021 14:33:49' | '17,12'       | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'No'                   |       
 	And I close all client application windows
 
+Scenario: _043611 check absence Cash receipt movements by the Register "R2021 Customer transactions" (without basis document)
+	And I close all client application windows
+	* Select Bank receipt (payment from customer)
+		Given I open hyperlink "e1cib/list/Document.CashReceipt"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '4' |
+	* Check movements by the Register  "R2021 Customer transactions" 
+		And I click "Registrations report" button
+		And I select "R2021 Customer transactions" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document does not contain values
+			| 'Register  "R2021 Customer transactions'   |     
+	And I close all client application windows
+
+Scenario: _043612 check Cash receipt movements by the Register "R2020 Advances from customer" (without basis document)
+	And I close all client application windows
+	* Select Bank receipt (payment from customer)
+		Given I open hyperlink "e1cib/list/Document.CashReceipt"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '4' |
+	* Check movements by the Register  "R2020 Advances from customer" 
+		And I click "Registrations report" button
+		And I select "R2020 Advances from customer" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Cash receipt 4 dated 27.04.2021 11:31:10' | ''            | ''                    | ''          | ''             | ''                             | ''         | ''                  | ''          | ''      | ''                     | ''                  |
+			| 'Document registrations records'           | ''            | ''                    | ''          | ''             | ''                             | ''         | ''                  | ''          | ''      | ''                     | ''                  |
+			| 'Register  "R2020 Advances from customer"' | ''            | ''                    | ''          | ''             | ''                             | ''         | ''                  | ''          | ''      | ''                     | ''                  |
+			| ''                                         | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                             | ''         | ''                  | ''          | ''      | 'Attributes'           | ''                  |
+			| ''                                         | ''            | ''                    | 'Amount'    | 'Company'      | 'Multi currency movement type' | 'Currency' | 'Legal name'        | 'Partner'   | 'Basis' | 'Deferred calculation' | 'Offset of advance' |
+			| ''                                         | 'Receipt'     | '27.04.2021 11:31:10' | '171,2'     | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Company Ferron BP' | 'Ferron BP' | ''      | 'No'                   | 'No'                |
+			| ''                                         | 'Receipt'     | '27.04.2021 11:31:10' | '1 000'     | 'Main Company' | 'Local currency'               | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | ''      | 'No'                   | 'No'                |
+			| ''                                         | 'Receipt'     | '27.04.2021 11:31:10' | '1 000'     | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | ''      | 'No'                   | 'No'                |
+	And I close all client application windows
+
+
+
+Scenario: _043613 check absence Cash receipt movements by the Register "R2020 Advances from customer" (with basis document)
+	And I close all client application windows
+	* Select Bank receipt (payment from customer)
+		Given I open hyperlink "e1cib/list/Document.CashReceipt"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '1' |
+	* Check movements by the Register  "R2020 Advances from customer" 
+		And I click "Registrations report" button
+		And I select "R2020 Advances from customer" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document does not contain values
+			| 'Register  "R2020 Advances from customer'   |     
+	And I close all client application windows
 
 Scenario: _043630 Cash receipt clear posting/mark for deletion
 	And I close all client application windows

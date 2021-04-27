@@ -138,8 +138,8 @@ Scenario: 950405 create rules for documents
 		Given I open hyperlink 'e1cib/list/InformationRegister.LockDataModificationRules'
 		And "List" table contains lines
 		| 'Type'                  | 'Attribute'               | 'Comparison type' | 'Table name' | 'Value'                            | 'Disable rule' | 'Lock data modification reasons' |
-		| 'Document.SalesInvoice' | 'Attributes.Agreement'    | 'IN'              | ''           | 'Basic Partner terms, without VAT' | 'No'          | 'Doc lock'                       |
-		| 'Document.SalesOrder'   | 'StandardAttributes.Date' | '<='              | ''           | '08.10.2020'                       | 'No'           | 'Doc lock'                       |
+		| 'Document.SalesInvoice' | 'Attributes.Agreement'    | 'IN'              | ''           | 'Basic Partner terms, without VAT' | 'No'           | 'Doc lock'                       |
+		| 'Document.SalesOrder'   | 'StandardAttributes.Date' | '<='              | ''           | '08.10.2020 00:00:00'              | 'No'           | 'Doc lock'                       |
 		And I close all client application windows
 	* Check rules (=)
 		* Modification

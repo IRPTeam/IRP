@@ -3,7 +3,6 @@
 
 Function GetQueryFilters(AccReg, ArrayOfBasisDocuments)
 	Filter_ByDocuments = New ValueTable();
-	//Filter_ByDocuments.Columns.Add("BasisDocument" , New TypeDescription(AccReg.Dimensions.BasisDocument.Type));
 	Filter_ByDocuments.Columns.Add("BasisDocument" , New TypeDescription(AccReg.Dimensions.Basis.Type));
 	
 	Filter_ByAgreements = New ValueTable();
@@ -93,7 +92,6 @@ EndProcedure
 
 Function GetDocumentTable_PurchaseInvoice_ForPayment(ArrayOfBasisDocuments, AddInfo = Undefined) Export
 
-	//Filters = GetQueryFilters(Metadata.AccumulationRegisters.PartnerApTransactions, ArrayOfBasisDocuments);
 	Filters = GetQueryFilters(Metadata.AccumulationRegisters.R1021B_VendorsTransactions, ArrayOfBasisDocuments);
 	
 	TempTableManager = New TempTablesManager();

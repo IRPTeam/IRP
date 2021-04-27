@@ -224,9 +224,6 @@
     <mdObject>AccumulationRegister.R4022B_StockTransferOrdersShipment</mdObject>
   </content>
   <content>
-    <mdObject>AccumulationRegister.Aging</mdObject>
-  </content>
-  <content>
     <mdObject>Document.PhysicalInventory</mdObject>
   </content>
   <content>

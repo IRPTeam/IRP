@@ -2414,13 +2414,22 @@ Function T1001I_PartnerTransactions()
 		|	ItemList.Agreement,
 		|	ItemList.BasisDocument AS TransactionDocument,
 		|	TRUE AS IsVendorTransaction,
-		|	ItemList.Amount,
+		|	SUM(ItemList.Amount) AS Amount,
 		|	ItemList.Key
 		|INTO T1001I_PartnerTransactions
 		|FROM
 		|	ItemList AS ItemList
 		|WHERE
-		|	NOT ItemList.IgnoreAdvances";
+		|	NOT ItemList.IgnoreAdvances
+		|GROUP BY
+		|	ItemList.Agreement,
+		|	ItemList.BasisDocument,
+		|	ItemList.Company,
+		|	ItemList.Currency,
+		|	ItemList.Key,
+		|	ItemList.LegalName,
+		|	ItemList.Partner,
+		|	ItemList.Period";
 EndFunction		
 
 Function R1031B_ReceiptInvoicing()

@@ -613,6 +613,19 @@
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
+    <attributes uuid="f0e5fecd-3ad2-494f-b9ba-8b4ad287f326">
+      <name>ReturnReason</name>
+      <synonym>
+        <key>en</key>
+        <value>Return reason</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.CancelReturnReasons</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
   </tabularSections>
   <tabularSections uuid="f7fdf31f-fafd-4287-9cec-2e46be7ee60e">
     <producedTypes>

@@ -100,6 +100,9 @@ Function T1000I_OffsetOfAdvances()
 EndFunction
 
 Function OffsetOfAdvances(Parameters)
+	If Parameters = Undefined Then
+		Return OffsetOfAdvancesQueryText();
+	EndIf;
 	// clear old records
 	Query = New Query();
 	Query.Text = 
@@ -169,6 +172,11 @@ Function OffsetOfAdvances(Parameters)
 	Query.SetParameter("OffsetOfAdvanceFull", OffsetOfAdvanceFull);
 	Query.Execute(); 
 	
+	
+	Return OffsetOfAdvancesQueryText();
+EndFunction
+
+Function OffsetOfAdvancesQueryText()
 	Return 
 		"SELECT *
 		|INTO OffsetOfAdvancesEmpty
@@ -176,7 +184,7 @@ Function OffsetOfAdvances(Parameters)
 		|	Document.OffsetOfAdvance AS OffsetOfAdvance
 		|WHERE
 		|	FALSE";
-EndFunction
+EndFunction	
 
 Procedure ClearRegister(RegisterName, RecordersTable)
 	For Each Row In RecordersTable Do

@@ -405,7 +405,7 @@ Scenario: _090005 create a document Cheque bond transaction (Cheque bond from pa
 			| 'TRY'      | 'Bank account, TRY' |
 		And I select current line in "List" table
 		And I finish line editing in "ChequeBonds" table
-	* Add bases dpcuments
+	* Add bases documents
 		And in the table "PaymentList" I click "Fill" button
 		And I select current line in "DocumentsList" table
 		And I activate "Amount balance" field in "PickedDocuments" table

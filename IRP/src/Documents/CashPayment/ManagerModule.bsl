@@ -291,7 +291,8 @@ Procedure FillAttributesByType(TransactionType, ArrayAll, ArrayByType) Export
 		ArrayByType.Add("PaymentList.Partner");
 		ArrayByType.Add("PaymentList.PlaningTransactionBasis");
 		ArrayByType.Add("PaymentList.Amount");
-	Else // TransactionType PaymentToVendor
+	ElsIf TransactionType = Enums.OutgoingPaymentTransactionTypes.PaymentToVendor 
+		Or TransactionType = Enums.OutgoingPaymentTransactionTypes.ReturnToCustomer  Then
 		ArrayByType.Add("CashAccount");
 		ArrayByType.Add("Company");
 		ArrayByType.Add("Currency");
@@ -304,6 +305,13 @@ Procedure FillAttributesByType(TransactionType, ArrayAll, ArrayByType) Export
 		ArrayByType.Add("PaymentList.Agreement");
 		ArrayByType.Add("PaymentList.Payee");
 		ArrayByType.Add("PaymentList.PlaningTransactionBasis");
+		ArrayByType.Add("PaymentList.Amount");
+		
+	Else 
+		ArrayByType.Add("Company");
+		ArrayByType.Add("Currency");
+		ArrayByType.Add("TransactionType");
+		
 		ArrayByType.Add("PaymentList.Amount");
 	EndIf;
 	
@@ -457,7 +465,7 @@ EndFunction
 Function R2020B_AdvancesFromCustomers()
 	Return
 		"SELECT
-		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
 		|	PaymentList.Period,
 		|	PaymentList.Company,
 		|	PaymentList.Partner,

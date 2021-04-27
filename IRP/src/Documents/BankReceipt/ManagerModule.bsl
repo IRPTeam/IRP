@@ -354,7 +354,8 @@ Procedure FillAttributesByType(TransactionType, ArrayAll, ArrayByType) Export
 		ArrayByType.Add("PaymentList.Amount");
 		ArrayByType.Add("PaymentList.AmountExchange");
 		
-	ElsIf TransactionType = Enums.IncomingPaymentTransactionType.PaymentFromCustomer Then
+	ElsIf TransactionType = Enums.IncomingPaymentTransactionType.PaymentFromCustomer
+	 	Or TransactionType = Enums.IncomingPaymentTransactionType.ReturnFromVendor  Then
 		ArrayByType.Add("Account");
 		ArrayByType.Add("Company");
 		ArrayByType.Add("Currency");
@@ -369,22 +370,11 @@ Procedure FillAttributesByType(TransactionType, ArrayAll, ArrayByType) Export
 		ArrayByType.Add("PaymentList.Amount");
 		ArrayByType.Add("PaymentList.Agreement");
 	Else // empty
-		ArrayByType.Add("Account");
 		ArrayByType.Add("Company");
 		ArrayByType.Add("Currency");
 		ArrayByType.Add("TransactionType");
-		ArrayByType.Add("CurrencyExchange");
-		ArrayByType.Add("Payer");
-		ArrayByType.Add("TransitAccount");
-		ArrayByType.Add("Description");
 		
-		ArrayByType.Add("PaymentList.BasisDocument");
-		ArrayByType.Add("PaymentList.Partner");
-		ArrayByType.Add("PaymentList.Payer");
-		ArrayByType.Add("PaymentList.PlaningTransactionBasis");
 		ArrayByType.Add("PaymentList.Amount");
-		ArrayByType.Add("PaymentList.AmountExchange");
-		
 	EndIf;
 	
 EndProcedure
@@ -574,7 +564,7 @@ EndFunction
 Function R1020B_AdvancesToVendors()
 	Return
 		"SELECT
-		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
 		|	PaymentList.Period,
 		|	PaymentList.Company,
 		|	PaymentList.Partner,

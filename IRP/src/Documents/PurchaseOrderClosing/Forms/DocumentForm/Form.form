@@ -5664,6 +5664,10 @@
     </action>
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
+  <commandInterface>
+    <navigationPanel/>
+    <commandBar/>
+  </commandInterface>
   <extInfo xsi:type="form:DocumentFormExtInfo">
     <handlers>
       <event>AfterWrite</event>

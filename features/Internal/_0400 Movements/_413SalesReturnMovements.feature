@@ -273,15 +273,15 @@ Scenario: _041306 check Sales return movements by the Register  "R2021 Customer 
 		And I select "R2021 Customer transactions" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales return 101 dated 12.03.2021 08:44:18' | ''            | ''                    | ''          | ''             | ''                             | ''         | ''                  | ''          | ''                         | ''                                           | ''                     |
-			| 'Document registrations records'             | ''            | ''                    | ''          | ''             | ''                             | ''         | ''                  | ''          | ''                         | ''                                           | ''                     |
-			| 'Register  "R2021 Customer transactions"'    | ''            | ''                    | ''          | ''             | ''                             | ''         | ''                  | ''          | ''                         | ''                                           | ''                     |
-			| ''                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                             | ''         | ''                  | ''          | ''                         | ''                                           | 'Attributes'           |
-			| ''                                           | ''            | ''                    | 'Amount'    | 'Company'      | 'Multi currency movement type' | 'Currency' | 'Legal name'        | 'Partner'   | 'Agreement'                | 'Basis'                                      | 'Deferred calculation' |
-			| ''                                           | 'Receipt'     | '12.03.2021 08:44:18' | '-1 254'    | 'Main Company' | 'Local currency'               | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Sales return 101 dated 12.03.2021 08:44:18' | 'No'                   |
-			| ''                                           | 'Receipt'     | '12.03.2021 08:44:18' | '-1 254'    | 'Main Company' | 'TRY'                          | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Sales return 101 dated 12.03.2021 08:44:18' | 'No'                   |
-			| ''                                           | 'Receipt'     | '12.03.2021 08:44:18' | '-1 254'    | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Sales return 101 dated 12.03.2021 08:44:18' | 'No'                   |
-			| ''                                           | 'Receipt'     | '12.03.2021 08:44:18' | '-214,68'   | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Sales return 101 dated 12.03.2021 08:44:18' | 'No'                   |	
+			| 'Sales return 101 dated 12.03.2021 08:44:18' | ''            | ''                    | ''          | ''             | ''                             | ''         | ''                  | ''          | ''                         | ''                                          | ''                     | ''                  |
+			| 'Document registrations records'             | ''            | ''                    | ''          | ''             | ''                             | ''         | ''                  | ''          | ''                         | ''                                          | ''                     | ''                  |
+			| 'Register  "R2021 Customer transactions"'    | ''            | ''                    | ''          | ''             | ''                             | ''         | ''                  | ''          | ''                         | ''                                          | ''                     | ''                  |
+			| ''                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                             | ''         | ''                  | ''          | ''                         | ''                                          | 'Attributes'           | ''                  |
+			| ''                                           | ''            | ''                    | 'Amount'    | 'Company'      | 'Multi currency movement type' | 'Currency' | 'Legal name'        | 'Partner'   | 'Agreement'                | 'Basis'                                     | 'Deferred calculation' | 'Offset of advance' |
+			| ''                                           | 'Receipt'     | '12.03.2021 08:44:18' | '-1 254'    | 'Main Company' | 'Local currency'               | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'No'                   | 'No'                |
+			| ''                                           | 'Receipt'     | '12.03.2021 08:44:18' | '-1 254'    | 'Main Company' | 'TRY'                          | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'No'                   | 'No'                |
+			| ''                                           | 'Receipt'     | '12.03.2021 08:44:18' | '-1 254'    | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'No'                   | 'No'                |
+			| ''                                           | 'Receipt'     | '12.03.2021 08:44:18' | '-214,68'   | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'No'                   | 'No'                |
 	And I close all client application windows
 
 Scenario: _041307 check Sales return movements by the Register  "R2040 Taxes incoming"
@@ -324,19 +324,6 @@ Scenario: _041308 check Sales return movements by the Register  "R4014 Serial lo
 			| ''                                           | 'Receipt'     | '12.03.2021 09:49:05' | '10'        | 'Main Company' | '36/Red'   | '0512'              |		
 	And I close all client application windows
 
-Scenario: _041309 check Sales return movements by the Register  "R5011 Partners aging"
-	* Select Sales return
-		Given I open hyperlink "e1cib/list/Document.SalesReturn"
-		And I go to line in "List" table
-			| 'Number'  |
-			| '105' |
-	* Check movements by the Register  "R5011 Partners aging"
-		And I click "Registrations report" button
-		And I select "R5011 Partners aging" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		Then "ResultTable" spreadsheet document contains values
-			| 'Register  "R5011 Partners aging"'       |
-	And I close all client application windows
 
 Scenario: _041310 check Sales return movements by the Register  "R4010 Actual stocks" (not use GR)
 	And I close all client application windows
@@ -549,7 +536,7 @@ Scenario: _041319 check Sales return movements by the Register  "R2012 Invoice c
 			| ''                                                  | 'Expense'     | '12.03.2021 09:20:35' | '24'        | '15 960' | '13 525,42'  | 'Main Company' | 'Sales return order 102 dated 12.03.2021 09:19:54' | 'TRY'      | '37/18SD'  | 'f06154aa-5906-4824-9983-19e2bc9ccb96' |
 	And I close all client application windows
 
-Scenario: _041321 check Sales return movements by the Register  "R2021 Customer transactions" (Due as advance - True, SI-BR, SR more than due)
+Scenario: _041321 check Sales return movements by the Register  "R2021 Customer transactions" (Due as advance - True)
 	And I close all client application windows
 	* Select Sales return
 		Given I open hyperlink "e1cib/list/Document.SalesReturn"
@@ -561,45 +548,20 @@ Scenario: _041321 check Sales return movements by the Register  "R2021 Customer 
 		And I select "R2021 Customer transactions" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales return 106 dated 21.04.2021 14:19:47' | ''            | ''                    | ''          | ''             | ''                             | ''         | ''              | ''        | ''                         | ''                                           | ''                     |
-			| 'Document registrations records'             | ''            | ''                    | ''          | ''             | ''                             | ''         | ''              | ''        | ''                         | ''                                           | ''                     |
-			| 'Register  "R2021 Customer transactions"'    | ''            | ''                    | ''          | ''             | ''                             | ''         | ''              | ''        | ''                         | ''                                           | ''                     |
-			| ''                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                             | ''         | ''              | ''        | ''                         | ''                                           | 'Attributes'           |
-			| ''                                           | ''            | ''                    | 'Amount'    | 'Company'      | 'Multi currency movement type' | 'Currency' | 'Legal name'    | 'Partner' | 'Agreement'                | 'Basis'                                      | 'Deferred calculation' |
-			| ''                                           | 'Receipt'     | '21.04.2021 14:19:47' | '-9 360'    | 'Main Company' | 'Local currency'               | 'TRY'      | 'Company Lunch' | 'Lunch'   | 'Basic Partner terms, TRY' | 'Sales invoice 10 dated 21.04.2021 14:10:58' | 'No'                   |
-			| ''                                           | 'Receipt'     | '21.04.2021 14:19:47' | '-9 360'    | 'Main Company' | 'TRY'                          | 'TRY'      | 'Company Lunch' | 'Lunch'   | 'Basic Partner terms, TRY' | 'Sales invoice 10 dated 21.04.2021 14:10:58' | 'No'                   |
-			| ''                                           | 'Receipt'     | '21.04.2021 14:19:47' | '-9 360'    | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Company Lunch' | 'Lunch'   | 'Basic Partner terms, TRY' | 'Sales invoice 10 dated 21.04.2021 14:10:58' | 'No'                   |
-			| ''                                           | 'Receipt'     | '21.04.2021 14:19:47' | '-1 602,43' | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Company Lunch' | 'Lunch'   | 'Basic Partner terms, TRY' | 'Sales invoice 10 dated 21.04.2021 14:10:58' | 'No'                   |
-			| ''                                           | 'Expense'     | '21.04.2021 14:19:47' | '-3 360'    | 'Main Company' | 'Local currency'               | 'TRY'      | 'Company Lunch' | 'Lunch'   | 'Basic Partner terms, TRY' | 'Sales invoice 10 dated 21.04.2021 14:10:58' | 'No'                   |
-			| ''                                           | 'Expense'     | '21.04.2021 14:19:47' | '-3 360'    | 'Main Company' | 'TRY'                          | 'TRY'      | 'Company Lunch' | 'Lunch'   | 'Basic Partner terms, TRY' | 'Sales invoice 10 dated 21.04.2021 14:10:58' | 'No'                   |
-			| ''                                           | 'Expense'     | '21.04.2021 14:19:47' | '-3 360'    | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Company Lunch' | 'Lunch'   | 'Basic Partner terms, TRY' | 'Sales invoice 10 dated 21.04.2021 14:10:58' | 'No'                   |
-			| ''                                           | 'Expense'     | '21.04.2021 14:19:47' | '-575,23'   | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Company Lunch' | 'Lunch'   | 'Basic Partner terms, TRY' | 'Sales invoice 10 dated 21.04.2021 14:10:58' | 'No'                   |
+			| 'Sales return 106 dated 21.04.2021 14:19:47' | ''            | ''                    | ''          | ''             | ''                             | ''         | ''              | ''        | ''                         | ''                                            | ''                     | ''                  |
+			| 'Document registrations records'             | ''            | ''                    | ''          | ''             | ''                             | ''         | ''              | ''        | ''                         | ''                                            | ''                     | ''                  |
+			| 'Register  "R2021 Customer transactions"'    | ''            | ''                    | ''          | ''             | ''                             | ''         | ''              | ''        | ''                         | ''                                            | ''                     | ''                  |
+			| ''                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                             | ''         | ''              | ''        | ''                         | ''                                            | 'Attributes'           | ''                  |
+			| ''                                           | ''            | ''                    | 'Amount'    | 'Company'      | 'Multi currency movement type' | 'Currency' | 'Legal name'    | 'Partner' | 'Agreement'                | 'Basis'                                       | 'Deferred calculation' | 'Offset of advance' |
+			| ''                                           | 'Receipt'     | '21.04.2021 14:19:47' | '-9 360'    | 'Main Company' | 'Local currency'               | 'TRY'      | 'Company Lunch' | 'Lunch'   | 'Basic Partner terms, TRY' | 'Sales invoice 101 dated 21.04.2021 14:10:58' | 'No'                   | 'No'                |
+			| ''                                           | 'Receipt'     | '21.04.2021 14:19:47' | '-9 360'    | 'Main Company' | 'TRY'                          | 'TRY'      | 'Company Lunch' | 'Lunch'   | 'Basic Partner terms, TRY' | 'Sales invoice 101 dated 21.04.2021 14:10:58' | 'No'                   | 'No'                |
+			| ''                                           | 'Receipt'     | '21.04.2021 14:19:47' | '-9 360'    | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Company Lunch' | 'Lunch'   | 'Basic Partner terms, TRY' | 'Sales invoice 101 dated 21.04.2021 14:10:58' | 'No'                   | 'No'                |
+			| ''                                           | 'Receipt'     | '21.04.2021 14:19:47' | '-1 602,43' | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Company Lunch' | 'Lunch'   | 'Basic Partner terms, TRY' | 'Sales invoice 101 dated 21.04.2021 14:10:58' | 'No'                   | 'No'                |
 	And I close all client application windows
 
 
-Scenario: _041322 check Sales return movements by the Register  "R2020 Advances from customer" (Due as advance - True, SI-BR, SR more than due)
-	And I close all client application windows
-	* Select Sales return
-		Given I open hyperlink "e1cib/list/Document.SalesReturn"
-		And I go to line in "List" table
-			| 'Number'  |
-			| '106' |
-	* Check movements by the Register  "R2020 Advances from customer"
-		And I click "Registrations report" button
-		And I select "R2020 Advances from customer" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		Then "ResultTable" spreadsheet document is equal
-			| 'Sales return 106 dated 21.04.2021 14:19:47' | ''            | ''                    | ''          | ''             | ''                             | ''         | ''              | ''        | ''                                           | ''                     |
-			| 'Document registrations records'             | ''            | ''                    | ''          | ''             | ''                             | ''         | ''              | ''        | ''                                           | ''                     |
-			| 'Register  "R2020 Advances from customer"'   | ''            | ''                    | ''          | ''             | ''                             | ''         | ''              | ''        | ''                                           | ''                     |
-			| ''                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                             | ''         | ''              | ''        | ''                                           | 'Attributes'           |
-			| ''                                           | ''            | ''                    | 'Amount'    | 'Company'      | 'Multi currency movement type' | 'Currency' | 'Legal name'    | 'Partner' | 'Basis'                                      | 'Deferred calculation' |
-			| ''                                           | 'Receipt'     | '21.04.2021 14:19:47' | '575,23'    | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Company Lunch' | 'Lunch'   | 'Sales return 106 dated 21.04.2021 14:19:47' | 'No'                   |
-			| ''                                           | 'Receipt'     | '21.04.2021 14:19:47' | '3 360'     | 'Main Company' | 'Local currency'               | 'TRY'      | 'Company Lunch' | 'Lunch'   | 'Sales return 106 dated 21.04.2021 14:19:47' | 'No'                   |
-			| ''                                           | 'Receipt'     | '21.04.2021 14:19:47' | '3 360'     | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Company Lunch' | 'Lunch'   | 'Sales return 106 dated 21.04.2021 14:19:47' | 'No'                   |
-	And I close all client application windows
 
-Scenario: _041323 check Sales return movements by the Register  "R2021 Customer transactions" (Due as advance - False, SI-BR, SR more than due)
+Scenario: _041323 check Sales return movements by the Register  "R2021 Customer transactions" (Due as advance - False)
 	And I close all client application windows
 	* Select Sales return
 		Given I open hyperlink "e1cib/list/Document.SalesReturn"
@@ -611,108 +573,95 @@ Scenario: _041323 check Sales return movements by the Register  "R2021 Customer 
 		And I select "R2021 Customer transactions" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales return 107 dated 21.04.2021 14:24:43' | ''            | ''                    | ''          | ''             | ''                             | ''         | ''              | ''        | ''                         | ''                                           | ''                     |
-			| 'Document registrations records'             | ''            | ''                    | ''          | ''             | ''                             | ''         | ''              | ''        | ''                         | ''                                           | ''                     |
-			| 'Register  "R2021 Customer transactions"'    | ''            | ''                    | ''          | ''             | ''                             | ''         | ''              | ''        | ''                         | ''                                           | ''                     |
-			| ''                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                             | ''         | ''              | ''        | ''                         | ''                                           | 'Attributes'           |
-			| ''                                           | ''            | ''                    | 'Amount'    | 'Company'      | 'Multi currency movement type' | 'Currency' | 'Legal name'    | 'Partner' | 'Agreement'                | 'Basis'                                      | 'Deferred calculation' |
-			| ''                                           | 'Receipt'     | '21.04.2021 14:24:43' | '-520'      | 'Main Company' | 'Local currency'               | 'TRY'      | 'Company Lunch' | 'Lunch'   | 'Basic Partner terms, TRY' | 'Sales invoice 10 dated 21.04.2021 14:10:58' | 'No'                   |
-			| ''                                           | 'Receipt'     | '21.04.2021 14:24:43' | '-520'      | 'Main Company' | 'TRY'                          | 'TRY'      | 'Company Lunch' | 'Lunch'   | 'Basic Partner terms, TRY' | 'Sales invoice 10 dated 21.04.2021 14:10:58' | 'No'                   |
-			| ''                                           | 'Receipt'     | '21.04.2021 14:24:43' | '-520'      | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Company Lunch' | 'Lunch'   | 'Basic Partner terms, TRY' | 'Sales invoice 10 dated 21.04.2021 14:10:58' | 'No'                   |
-			| ''                                           | 'Receipt'     | '21.04.2021 14:24:43' | '-89,02'    | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Company Lunch' | 'Lunch'   | 'Basic Partner terms, TRY' | 'Sales invoice 10 dated 21.04.2021 14:10:58' | 'No'                   |
+			| 'Sales return 107 dated 21.04.2021 14:24:43' | ''            | ''                    | ''          | ''             | ''                             | ''         | ''              | ''        | ''                         | ''                                            | ''                     | ''                  |
+			| 'Document registrations records'             | ''            | ''                    | ''          | ''             | ''                             | ''         | ''              | ''        | ''                         | ''                                            | ''                     | ''                  |
+			| 'Register  "R2021 Customer transactions"'    | ''            | ''                    | ''          | ''             | ''                             | ''         | ''              | ''        | ''                         | ''                                            | ''                     | ''                  |
+			| ''                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                             | ''         | ''              | ''        | ''                         | ''                                            | 'Attributes'           | ''                  |
+			| ''                                           | ''            | ''                    | 'Amount'    | 'Company'      | 'Multi currency movement type' | 'Currency' | 'Legal name'    | 'Partner' | 'Agreement'                | 'Basis'                                       | 'Deferred calculation' | 'Offset of advance' |
+			| ''                                           | 'Receipt'     | '21.04.2021 14:24:43' | '-520'      | 'Main Company' | 'Local currency'               | 'TRY'      | 'Company Lunch' | 'Lunch'   | 'Basic Partner terms, TRY' | 'Sales invoice 101 dated 21.04.2021 14:10:58' | 'No'                   | 'No'                |
+			| ''                                           | 'Receipt'     | '21.04.2021 14:24:43' | '-520'      | 'Main Company' | 'TRY'                          | 'TRY'      | 'Company Lunch' | 'Lunch'   | 'Basic Partner terms, TRY' | 'Sales invoice 101 dated 21.04.2021 14:10:58' | 'No'                   | 'No'                |
+			| ''                                           | 'Receipt'     | '21.04.2021 14:24:43' | '-520'      | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Company Lunch' | 'Lunch'   | 'Basic Partner terms, TRY' | 'Sales invoice 101 dated 21.04.2021 14:10:58' | 'No'                   | 'No'                |
+			| ''                                           | 'Receipt'     | '21.04.2021 14:24:43' | '-89,02'    | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Company Lunch' | 'Lunch'   | 'Basic Partner terms, TRY' | 'Sales invoice 101 dated 21.04.2021 14:10:58' | 'No'                   | 'No'                |
 	And I close all client application windows
 
 
-Scenario: _041324 check Sales return movements by the Register  "R2020 Advances from customer" (Due as advance - False, SI-BR, SR less than due)
-	And I close all client application windows
-	* Select Sales return
-		Given I open hyperlink "e1cib/list/Document.SalesReturn"
-		And I go to line in "List" table
-			| 'Number'  |
-			| '107' |
-	* Check movements by the Register  "R2020 Advances from customer"
-		And I click "Registrations report" button
-		And I select "R2020 Advances from customer" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document does not contain values
-			| Register  "R2020 Advances from customer" |
-	And I close all client application windows
 
-Scenario: _041325 check Sales return movements by the Register  "R2021 Customer transactions" (Due as advance - False, SI-BR, SR more than due)
-	And I close all client application windows
-	* Select Sales return
-		Given I open hyperlink "e1cib/list/Document.SalesReturn"
-		And I go to line in "List" table
-			| 'Number'  |
-			| '108' |
-	* Check movements by the Register  "R2021 Customer transactions"
-		And I click "Registrations report" button
-		And I select "R2021 Customer transactions" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document does not contain values
-			| Register  "R2020 Advances from customer" |
-	And I close all client application windows
 
-Scenario: _041326 check Sales return movements by the Register  "R2021 Customer transactions" (Due as advance - False, SI-BR, SR more than due)
-	And I close all client application windows
-	* Select Sales return
-		Given I open hyperlink "e1cib/list/Document.SalesReturn"
-		And I go to line in "List" table
-			| 'Number'  |
-			| '108' |
-	* Check movements by the Register  "R2021 Customer transactions"
-		And I click "Registrations report" button
-		And I select "R2021 Customer transactions" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		Then "ResultTable" spreadsheet document is equal
-			| 'Sales return 108 dated 21.04.2021 14:28:53' | ''            | ''                    | ''          | ''             | ''                             | ''         | ''              | ''        | ''                         | ''                                           | ''                     |
-			| 'Document registrations records'             | ''            | ''                    | ''          | ''             | ''                             | ''         | ''              | ''        | ''                         | ''                                           | ''                     |
-			| 'Register  "R2021 Customer transactions"'    | ''            | ''                    | ''          | ''             | ''                             | ''         | ''              | ''        | ''                         | ''                                           | ''                     |
-			| ''                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                             | ''         | ''              | ''        | ''                         | ''                                           | 'Attributes'           |
-			| ''                                           | ''            | ''                    | 'Amount'    | 'Company'      | 'Multi currency movement type' | 'Currency' | 'Legal name'    | 'Partner' | 'Agreement'                | 'Basis'                                      | 'Deferred calculation' |
-			| ''                                           | 'Receipt'     | '21.04.2021 14:28:53' | '-1 040'    | 'Main Company' | 'Local currency'               | 'TRY'      | 'Company Maxim' | 'Maxim'   | 'Basic Partner terms, TRY' | 'Sales invoice 11 dated 21.04.2021 14:11:32' | 'No'                   |
-			| ''                                           | 'Receipt'     | '21.04.2021 14:28:53' | '-1 040'    | 'Main Company' | 'TRY'                          | 'TRY'      | 'Company Maxim' | 'Maxim'   | 'Basic Partner terms, TRY' | 'Sales invoice 11 dated 21.04.2021 14:11:32' | 'No'                   |
-			| ''                                           | 'Receipt'     | '21.04.2021 14:28:53' | '-1 040'    | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Company Maxim' | 'Maxim'   | 'Basic Partner terms, TRY' | 'Sales invoice 11 dated 21.04.2021 14:11:32' | 'No'                   |
-			| ''                                           | 'Receipt'     | '21.04.2021 14:28:53' | '-178,05'   | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Company Maxim' | 'Maxim'   | 'Basic Partner terms, TRY' | 'Sales invoice 11 dated 21.04.2021 14:11:32' | 'No'                   |
-	And I close all client application windows
+// Scenario: _041325 check Sales return movements by the Register  "R2021 Customer transactions" (Due as advance - False, SI-BR, SR more than due)
+// 	And I close all client application windows
+// 	* Select Sales return
+// 		Given I open hyperlink "e1cib/list/Document.SalesReturn"
+// 		And I go to line in "List" table
+// 			| 'Number'  |
+// 			| '108' |
+// 	* Check movements by the Register  "R2021 Customer transactions"
+// 		And I click "Registrations report" button
+// 		And I select "R2021 Customer transactions" exact value from "Register" drop-down list
+// 		And I click "Generate report" button
+// 		And "ResultTable" spreadsheet document does not contain values
+// 			| Register  "R2020 Advances from customer" |
+// 	And I close all client application windows
 
-Scenario: _041327 check Sales return movements by the Register  "R2021 Customer transactions" (Due as advance - True, SI-BR, SR more than due)
-	And I close all client application windows
-	* Select Sales return
-		Given I open hyperlink "e1cib/list/Document.SalesReturn"
-		And I go to line in "List" table
-			| 'Number'  |
-			| '109' |
-	* Check movements by the Register  "R2021 Customer transactions"
-		And I click "Registrations report" button
-		And I select "R2021 Customer transactions" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document does not contain values
-			| Register  "R2020 Advances from customer" |
-	And I close all client application windows
+// Scenario: _041326 check Sales return movements by the Register  "R2021 Customer transactions" (Due as advance - False, SI-BR, SR more than due)
+// 	And I close all client application windows
+// 	* Select Sales return
+// 		Given I open hyperlink "e1cib/list/Document.SalesReturn"
+// 		And I go to line in "List" table
+// 			| 'Number'  |
+// 			| '108' |
+// 	* Check movements by the Register  "R2021 Customer transactions"
+// 		And I click "Registrations report" button
+// 		And I select "R2021 Customer transactions" exact value from "Register" drop-down list
+// 		And I click "Generate report" button
+// 		Then "ResultTable" spreadsheet document is equal
+// 			| 'Sales return 108 dated 21.04.2021 14:28:53' | ''            | ''                    | ''          | ''             | ''                             | ''         | ''              | ''        | ''                         | ''                                           | ''                     |
+// 			| 'Document registrations records'             | ''            | ''                    | ''          | ''             | ''                             | ''         | ''              | ''        | ''                         | ''                                           | ''                     |
+// 			| 'Register  "R2021 Customer transactions"'    | ''            | ''                    | ''          | ''             | ''                             | ''         | ''              | ''        | ''                         | ''                                           | ''                     |
+// 			| ''                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                             | ''         | ''              | ''        | ''                         | ''                                           | 'Attributes'           |
+// 			| ''                                           | ''            | ''                    | 'Amount'    | 'Company'      | 'Multi currency movement type' | 'Currency' | 'Legal name'    | 'Partner' | 'Agreement'                | 'Basis'                                      | 'Deferred calculation' |
+// 			| ''                                           | 'Receipt'     | '21.04.2021 14:28:53' | '-1 040'    | 'Main Company' | 'Local currency'               | 'TRY'      | 'Company Maxim' | 'Maxim'   | 'Basic Partner terms, TRY' | 'Sales invoice 11 dated 21.04.2021 14:11:32' | 'No'                   |
+// 			| ''                                           | 'Receipt'     | '21.04.2021 14:28:53' | '-1 040'    | 'Main Company' | 'TRY'                          | 'TRY'      | 'Company Maxim' | 'Maxim'   | 'Basic Partner terms, TRY' | 'Sales invoice 11 dated 21.04.2021 14:11:32' | 'No'                   |
+// 			| ''                                           | 'Receipt'     | '21.04.2021 14:28:53' | '-1 040'    | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Company Maxim' | 'Maxim'   | 'Basic Partner terms, TRY' | 'Sales invoice 11 dated 21.04.2021 14:11:32' | 'No'                   |
+// 			| ''                                           | 'Receipt'     | '21.04.2021 14:28:53' | '-178,05'   | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Company Maxim' | 'Maxim'   | 'Basic Partner terms, TRY' | 'Sales invoice 11 dated 21.04.2021 14:11:32' | 'No'                   |
+// 	And I close all client application windows
 
-Scenario: _041328 check Sales return movements by the Register  "R2021 Customer transactions" (Due as advance - False, SI-BR, SR more than due)
-	And I close all client application windows
-	* Select Sales return
-		Given I open hyperlink "e1cib/list/Document.SalesReturn"
-		And I go to line in "List" table
-			| 'Number'  |
-			| '109' |
-	* Check movements by the Register  "R2021 Customer transactions"
-		And I click "Registrations report" button
-		And I select "R2021 Customer transactions" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		Then "ResultTable" spreadsheet document is equal
-			| 'Sales return 109 dated 21.04.2021 14:29:22' | ''            | ''                    | ''          | ''             | ''                             | ''         | ''              | ''        | ''                         | ''                                           | ''                     |
-			| 'Document registrations records'             | ''            | ''                    | ''          | ''             | ''                             | ''         | ''              | ''        | ''                         | ''                                           | ''                     |
-			| 'Register  "R2021 Customer transactions"'    | ''            | ''                    | ''          | ''             | ''                             | ''         | ''              | ''        | ''                         | ''                                           | ''                     |
-			| ''                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                             | ''         | ''              | ''        | ''                         | ''                                           | 'Attributes'           |
-			| ''                                           | ''            | ''                    | 'Amount'    | 'Company'      | 'Multi currency movement type' | 'Currency' | 'Legal name'    | 'Partner' | 'Agreement'                | 'Basis'                                      | 'Deferred calculation' |
-			| ''                                           | 'Receipt'     | '21.04.2021 14:29:22' | '-520'      | 'Main Company' | 'Local currency'               | 'TRY'      | 'Company Maxim' | 'Maxim'   | 'Basic Partner terms, TRY' | 'Sales invoice 11 dated 21.04.2021 14:11:32' | 'No'                   |
-			| ''                                           | 'Receipt'     | '21.04.2021 14:29:22' | '-520'      | 'Main Company' | 'TRY'                          | 'TRY'      | 'Company Maxim' | 'Maxim'   | 'Basic Partner terms, TRY' | 'Sales invoice 11 dated 21.04.2021 14:11:32' | 'No'                   |
-			| ''                                           | 'Receipt'     | '21.04.2021 14:29:22' | '-520'      | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Company Maxim' | 'Maxim'   | 'Basic Partner terms, TRY' | 'Sales invoice 11 dated 21.04.2021 14:11:32' | 'No'                   |
-			| ''                                           | 'Receipt'     | '21.04.2021 14:29:22' | '-89,02'    | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Company Maxim' | 'Maxim'   | 'Basic Partner terms, TRY' | 'Sales invoice 11 dated 21.04.2021 14:11:32' | 'No'                   |
-	And I close all client application windows
+// Scenario: _041327 check Sales return movements by the Register  "R2021 Customer transactions" (Due as advance - True, SI-BR, SR more than due)
+// 	And I close all client application windows
+// 	* Select Sales return
+// 		Given I open hyperlink "e1cib/list/Document.SalesReturn"
+// 		And I go to line in "List" table
+// 			| 'Number'  |
+// 			| '109' |
+// 	* Check movements by the Register  "R2021 Customer transactions"
+// 		And I click "Registrations report" button
+// 		And I select "R2021 Customer transactions" exact value from "Register" drop-down list
+// 		And I click "Generate report" button
+// 		And "ResultTable" spreadsheet document does not contain values
+// 			| Register  "R2020 Advances from customer" |
+// 	And I close all client application windows
+
+// Scenario: _041328 check Sales return movements by the Register  "R2021 Customer transactions" (Due as advance - False, SI-BR, SR more than due)
+// 	And I close all client application windows
+// 	* Select Sales return
+// 		Given I open hyperlink "e1cib/list/Document.SalesReturn"
+// 		And I go to line in "List" table
+// 			| 'Number'  |
+// 			| '109' |
+// 	* Check movements by the Register  "R2021 Customer transactions"
+// 		And I click "Registrations report" button
+// 		And I select "R2021 Customer transactions" exact value from "Register" drop-down list
+// 		And I click "Generate report" button
+// 		Then "ResultTable" spreadsheet document is equal
+// 			| 'Sales return 109 dated 21.04.2021 14:29:22' | ''            | ''                    | ''          | ''             | ''                             | ''         | ''              | ''        | ''                         | ''                                           | ''                     |
+// 			| 'Document registrations records'             | ''            | ''                    | ''          | ''             | ''                             | ''         | ''              | ''        | ''                         | ''                                           | ''                     |
+// 			| 'Register  "R2021 Customer transactions"'    | ''            | ''                    | ''          | ''             | ''                             | ''         | ''              | ''        | ''                         | ''                                           | ''                     |
+// 			| ''                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                             | ''         | ''              | ''        | ''                         | ''                                           | 'Attributes'           |
+// 			| ''                                           | ''            | ''                    | 'Amount'    | 'Company'      | 'Multi currency movement type' | 'Currency' | 'Legal name'    | 'Partner' | 'Agreement'                | 'Basis'                                      | 'Deferred calculation' |
+// 			| ''                                           | 'Receipt'     | '21.04.2021 14:29:22' | '-520'      | 'Main Company' | 'Local currency'               | 'TRY'      | 'Company Maxim' | 'Maxim'   | 'Basic Partner terms, TRY' | 'Sales invoice 11 dated 21.04.2021 14:11:32' | 'No'                   |
+// 			| ''                                           | 'Receipt'     | '21.04.2021 14:29:22' | '-520'      | 'Main Company' | 'TRY'                          | 'TRY'      | 'Company Maxim' | 'Maxim'   | 'Basic Partner terms, TRY' | 'Sales invoice 11 dated 21.04.2021 14:11:32' | 'No'                   |
+// 			| ''                                           | 'Receipt'     | '21.04.2021 14:29:22' | '-520'      | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Company Maxim' | 'Maxim'   | 'Basic Partner terms, TRY' | 'Sales invoice 11 dated 21.04.2021 14:11:32' | 'No'                   |
+// 			| ''                                           | 'Receipt'     | '21.04.2021 14:29:22' | '-89,02'    | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Company Maxim' | 'Maxim'   | 'Basic Partner terms, TRY' | 'Sales invoice 11 dated 21.04.2021 14:11:32' | 'No'                   |
+// 	And I close all client application windows
 
 
 Scenario: _041330 Sales return clear posting/mark for deletion

@@ -76,12 +76,6 @@ Scenario: _040130 preparation (Sales invoice)
 				| "DocumentDiscount" |
 			When add Plugin for document discount
 			When Create catalog CancelReturnReasons objects
-	* Load Bank receipt
-		When Create document BankReceipt objects (check movements, advance)
-		When Create document BankReceipt objects (advance, BR-SI)
-		And I execute 1C:Enterprise script at server
- 			| "Documents.BankReceipt.FindByNumber(11).GetObject().Write(DocumentWriteMode.Posting);" |
-			| "Documents.BankReceipt.FindByNumber(12).GetObject().Write(DocumentWriteMode.Posting);" |
 	* Load SO
 			When Create document SalesOrder objects (check movements, SC before SI, Use shipment sheduling)
 			When Create document SalesOrder objects (check movements, SC before SI, not Use shipment sheduling)
@@ -279,16 +273,15 @@ Scenario: _040137 check Sales invoice movements by the Register  "R2021 Customer
 		And I select "R2021 Customer transactions" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales invoice 1 dated 28.01.2021 18:48:53' | ''            | ''                    | ''          | ''             | ''                             | ''         | ''                  | ''          | ''                         | ''                                          | ''                     |
-			| 'Document registrations records'            | ''            | ''                    | ''          | ''             | ''                             | ''         | ''                  | ''          | ''                         | ''                                          | ''                     |
-			| 'Register  "R2021 Customer transactions"'   | ''            | ''                    | ''          | ''             | ''                             | ''         | ''                  | ''          | ''                         | ''                                          | ''                     |
-			| ''                                          | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                             | ''         | ''                  | ''          | ''                         | ''                                          | 'Attributes'           |
-			| ''                                          | ''            | ''                    | 'Amount'    | 'Company'      | 'Multi currency movement type' | 'Currency' | 'Legal name'        | 'Partner'   | 'Agreement'                | 'Basis'                                     | 'Deferred calculation' |
-			| ''                                          | 'Receipt'     | '28.01.2021 18:48:53' | '670,08'    | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'No'                   |
-			| ''                                          | 'Receipt'     | '28.01.2021 18:48:53' | '3 914'     | 'Main Company' | 'Local currency'               | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'No'                   |
-			| ''                                          | 'Receipt'     | '28.01.2021 18:48:53' | '3 914'     | 'Main Company' | 'TRY'                          | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'No'                   |
-			| ''                                          | 'Receipt'     | '28.01.2021 18:48:53' | '3 914'     | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'No'                   |
-			
+			| 'Sales invoice 1 dated 28.01.2021 18:48:53' | ''            | ''                    | ''          | ''             | ''                             | ''         | ''                  | ''          | ''                         | ''                                          | ''                     | ''                  |
+			| 'Document registrations records'            | ''            | ''                    | ''          | ''             | ''                             | ''         | ''                  | ''          | ''                         | ''                                          | ''                     | ''                  |
+			| 'Register  "R2021 Customer transactions"'   | ''            | ''                    | ''          | ''             | ''                             | ''         | ''                  | ''          | ''                         | ''                                          | ''                     | ''                  |
+			| ''                                          | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                             | ''         | ''                  | ''          | ''                         | ''                                          | 'Attributes'           | ''                  |
+			| ''                                          | ''            | ''                    | 'Amount'    | 'Company'      | 'Multi currency movement type' | 'Currency' | 'Legal name'        | 'Partner'   | 'Agreement'                | 'Basis'                                     | 'Deferred calculation' | 'Offset of advance' |
+			| ''                                          | 'Receipt'     | '28.01.2021 18:48:53' | '670,08'    | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'No'                   | 'No'                |
+			| ''                                          | 'Receipt'     | '28.01.2021 18:48:53' | '3 914'     | 'Main Company' | 'Local currency'               | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'No'                   | 'No'                |
+			| ''                                          | 'Receipt'     | '28.01.2021 18:48:53' | '3 914'     | 'Main Company' | 'TRY'                          | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'No'                   | 'No'                |
+			| ''                                          | 'Receipt'     | '28.01.2021 18:48:53' | '3 914'     | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'No'                   | 'No'                |	
 		And I close all client application windows
 		
 Scenario: _040138 check Sales invoice movements by the Register  "R4011 Free stocks" SO-SC-SI (use SC)
@@ -632,7 +625,7 @@ Scenario: _0401385 check Sales invoice movements by the Register  "R4032 Goods i
 
 //4
 
-Scenario: _0401314 check Sales invoice movements by the Register  "R5011 Partners aging" (use Aging)
+Scenario: _0401314 check Sales invoice movements by the Register  "R5011 Partners aging" (use Aging, Receipt)
 	* Select Sales invoice
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 		And I go to line in "List" table
@@ -649,7 +642,6 @@ Scenario: _0401314 check Sales invoice movements by the Register  "R5011 Partner
 			| ''                                          | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''         | ''                          | ''        | ''                                          | ''                    |
 			| ''                                          | ''            | ''                    | 'Amount'    | 'Company'      | 'Currency' | 'Agreement'                 | 'Partner' | 'Invoice'                                   | 'Payment date'        |
 			| ''                                          | 'Receipt'     | '16.02.2021 10:59:49' | '23 374'    | 'Main Company' | 'USD'      | 'Personal Partner terms, $' | 'Kalipso' | 'Sales invoice 4 dated 16.02.2021 10:59:49' | '23.02.2021 00:00:00' |
-			| ''                                          | 'Expense'     | '16.02.2021 10:59:49' | '10 000'    | 'Main Company' | 'USD'      | 'Personal Partner terms, $' | 'Kalipso' | 'Sales invoice 4 dated 16.02.2021 10:59:49' | '23.02.2021 00:00:00' |
 		And I close all client application windows 
 
 
@@ -672,26 +664,26 @@ Scenario: _0401315 check Sales invoice movements by the Register  "R4014 Serial 
 			| ''                                          | 'Expense'     | '16.02.2021 10:59:49' | '10'        | 'Main Company' | '36/Red'   | '0512'              |
 		And I close all client application windows 
 
-Scenario: _0401316 check Sales invoice movements by the Register  "R2020 Advances from customer" (with advance, BR-SI, Ignore advance - False)
-	* Select Sales invoice
-		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
-		And I go to line in "List" table
-			| 'Number'  |
-			| '4' |
-	* Check movements by the Register  "R2020 Advances from customer"
-		And I click "Registrations report" button
-		And I select "R2020 Advances from customer" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		Then "ResultTable" spreadsheet document is equal
-			| 'Sales invoice 4 dated 16.02.2021 10:59:49' | ''            | ''                    | ''          | ''             | ''                             | ''         | ''                | ''        | ''                                         | ''                     |
-			| 'Document registrations records'            | ''            | ''                    | ''          | ''             | ''                             | ''         | ''                | ''        | ''                                         | ''                     |
-			| 'Register  "R2020 Advances from customer"'  | ''            | ''                    | ''          | ''             | ''                             | ''         | ''                | ''        | ''                                         | ''                     |
-			| ''                                          | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                             | ''         | ''                | ''        | ''                                         | 'Attributes'           |
-			| ''                                          | ''            | ''                    | 'Amount'    | 'Company'      | 'Multi currency movement type' | 'Currency' | 'Legal name'      | 'Partner' | 'Basis'                                    | 'Deferred calculation' |
-			| ''                                          | 'Expense'     | '16.02.2021 10:59:49' | '10 000'    | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Company Kalipso' | 'Kalipso' | 'Bank receipt 11 dated 15.02.2021 11:20:08' | 'No'                   |
-			| ''                                          | 'Expense'     | '16.02.2021 10:59:49' | '10 000'    | 'Main Company' | 'en description is empty'      | 'USD'      | 'Company Kalipso' | 'Kalipso' | 'Bank receipt 11 dated 15.02.2021 11:20:08' | 'No'                   |
-			| ''                                          | 'Expense'     | '16.02.2021 10:59:49' | '56 275'    | 'Main Company' | 'Local currency'               | 'TRY'      | 'Company Kalipso' | 'Kalipso' | 'Bank receipt 11 dated 15.02.2021 11:20:08' | 'No'                   |
-		And I close all client application windows 
+// Scenario: _0401316 check Sales invoice movements by the Register  "R2020 Advances from customer" (with advance, BR-SI, Ignore advance - False)
+// 	* Select Sales invoice
+// 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+// 		And I go to line in "List" table
+// 			| 'Number'  |
+// 			| '4' |
+// 	* Check movements by the Register  "R2020 Advances from customer"
+// 		And I click "Registrations report" button
+// 		And I select "R2020 Advances from customer" exact value from "Register" drop-down list
+// 		And I click "Generate report" button
+// 		Then "ResultTable" spreadsheet document is equal
+// 			| 'Sales invoice 4 dated 16.02.2021 10:59:49' | ''            | ''                    | ''          | ''             | ''                             | ''         | ''                | ''        | ''                                         | ''                     |
+// 			| 'Document registrations records'            | ''            | ''                    | ''          | ''             | ''                             | ''         | ''                | ''        | ''                                         | ''                     |
+// 			| 'Register  "R2020 Advances from customer"'  | ''            | ''                    | ''          | ''             | ''                             | ''         | ''                | ''        | ''                                         | ''                     |
+// 			| ''                                          | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                             | ''         | ''                | ''        | ''                                         | 'Attributes'           |
+// 			| ''                                          | ''            | ''                    | 'Amount'    | 'Company'      | 'Multi currency movement type' | 'Currency' | 'Legal name'      | 'Partner' | 'Basis'                                    | 'Deferred calculation' |
+// 			| ''                                          | 'Expense'     | '16.02.2021 10:59:49' | '10 000'    | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Company Kalipso' | 'Kalipso' | 'Bank receipt 11 dated 15.02.2021 11:20:08' | 'No'                   |
+// 			| ''                                          | 'Expense'     | '16.02.2021 10:59:49' | '10 000'    | 'Main Company' | 'en description is empty'      | 'USD'      | 'Company Kalipso' | 'Kalipso' | 'Bank receipt 11 dated 15.02.2021 11:20:08' | 'No'                   |
+// 			| ''                                          | 'Expense'     | '16.02.2021 10:59:49' | '56 275'    | 'Main Company' | 'Local currency'               | 'TRY'      | 'Company Kalipso' | 'Kalipso' | 'Bank receipt 11 dated 15.02.2021 11:20:08' | 'No'                   |
+// 		And I close all client application windows 
 
 Scenario: _0401320 check Sales invoice movements by the Register  "R4012 Stock Reservation" (without SO, use SC)
 	* Select Sales invoice
@@ -817,67 +809,67 @@ Scenario: _0401327 check Sales invoice movements by the Register  "R4032 Goods i
 			| ''                                              | 'Receipt'     | '18.02.2021 10:48:46' | '15'        | 'Store 02'   | 'Sales invoice 8 dated 18.02.2021 10:48:46' | 'XS/Blue'  |
 		And I close all client application windows
 
-Scenario: _0401328 check Sales invoice movements by the Register  "R2020 Advances from customer" (with advance, BR-SI, Ignore advance - True)
-	* Select Sales invoice
-		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
-		And I go to line in "List" table
-			| 'Number'  |
-			| '9' |
-	* Check movements by the Register  "R2020 Advances from customer"
-		And I click "Registrations report" button
-		And I select "R2020 Advances from customer" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document does not contain values
-			| 'Register  "R2020 Advances from customer"'             |
-		And I close all client application windows 
+// Scenario: _0401328 check Sales invoice movements by the Register  "R2020 Advances from customer" (with advance, BR-SI, Ignore advance - True)
+// 	* Select Sales invoice
+// 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+// 		And I go to line in "List" table
+// 			| 'Number'  |
+// 			| '9' |
+// 	* Check movements by the Register  "R2020 Advances from customer"
+// 		And I click "Registrations report" button
+// 		And I select "R2020 Advances from customer" exact value from "Register" drop-down list
+// 		And I click "Generate report" button
+// 		And "ResultTable" spreadsheet document does not contain values
+// 			| 'Register  "R2020 Advances from customer"'             |
+// 		And I close all client application windows 
 
-Scenario: _0401331 check Sales invoice movements by the Register  "R2021 Customer transactions" (with advance, BR-SI, Ignore advance - True)
-	* Select Sales invoice
-		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
-		And I go to line in "List" table
-			| 'Number'  |
-			| '9' |
-	* Check movements by the Register  "R2021 Customer transactions"
-		And I click "Registrations report" button
-		And I select "R2021 Customer transactions" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		Then "ResultTable" spreadsheet document is equal
-			| 'Sales invoice 9 dated 15.04.2021 14:53:05' | ''            | ''                    | ''          | ''             | ''                             | ''         | ''           | ''        | ''                 | ''                                          | ''                     |
-			| 'Document registrations records'            | ''            | ''                    | ''          | ''             | ''                             | ''         | ''           | ''        | ''                 | ''                                          | ''                     |
-			| 'Register  "R2021 Customer transactions"'   | ''            | ''                    | ''          | ''             | ''                             | ''         | ''           | ''        | ''                 | ''                                          | ''                     |
-			| ''                                          | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                             | ''         | ''           | ''        | ''                 | ''                                          | 'Attributes'           |
-			| ''                                          | ''            | ''                    | 'Amount'    | 'Company'      | 'Multi currency movement type' | 'Currency' | 'Legal name' | 'Partner' | 'Agreement'        | 'Basis'                                     | 'Deferred calculation' |
-			| ''                                          | 'Receipt'     | '15.04.2021 14:53:05' | '202,02'    | 'Main Company' | 'Reporting currency'           | 'USD'      | 'DFC'        | 'DFC'     | 'Partner term DFC' | 'Sales invoice 9 dated 15.04.2021 14:53:05' | 'No'                   |
-			| ''                                          | 'Receipt'     | '15.04.2021 14:53:05' | '1 180'     | 'Main Company' | 'Local currency'               | 'TRY'      | 'DFC'        | 'DFC'     | 'Partner term DFC' | 'Sales invoice 9 dated 15.04.2021 14:53:05' | 'No'                   |
-			| ''                                          | 'Receipt'     | '15.04.2021 14:53:05' | '1 180'     | 'Main Company' | 'TRY'                          | 'TRY'      | 'DFC'        | 'DFC'     | 'Partner term DFC' | 'Sales invoice 9 dated 15.04.2021 14:53:05' | 'No'                   |
-			| ''                                          | 'Receipt'     | '15.04.2021 14:53:05' | '1 180'     | 'Main Company' | 'en description is empty'      | 'TRY'      | 'DFC'        | 'DFC'     | 'Partner term DFC' | 'Sales invoice 9 dated 15.04.2021 14:53:05' | 'No'                   |
-		And I close all client application windows 
+// Scenario: _0401331 check Sales invoice movements by the Register  "R2021 Customer transactions" (with advance, BR-SI, Ignore advance - True)
+// 	* Select Sales invoice
+// 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+// 		And I go to line in "List" table
+// 			| 'Number'  |
+// 			| '9' |
+// 	* Check movements by the Register  "R2021 Customer transactions"
+// 		And I click "Registrations report" button
+// 		And I select "R2021 Customer transactions" exact value from "Register" drop-down list
+// 		And I click "Generate report" button
+// 		Then "ResultTable" spreadsheet document is equal
+// 			| 'Sales invoice 9 dated 15.04.2021 14:53:05' | ''            | ''                    | ''          | ''             | ''                             | ''         | ''           | ''        | ''                 | ''                                          | ''                     |
+// 			| 'Document registrations records'            | ''            | ''                    | ''          | ''             | ''                             | ''         | ''           | ''        | ''                 | ''                                          | ''                     |
+// 			| 'Register  "R2021 Customer transactions"'   | ''            | ''                    | ''          | ''             | ''                             | ''         | ''           | ''        | ''                 | ''                                          | ''                     |
+// 			| ''                                          | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                             | ''         | ''           | ''        | ''                 | ''                                          | 'Attributes'           |
+// 			| ''                                          | ''            | ''                    | 'Amount'    | 'Company'      | 'Multi currency movement type' | 'Currency' | 'Legal name' | 'Partner' | 'Agreement'        | 'Basis'                                     | 'Deferred calculation' |
+// 			| ''                                          | 'Receipt'     | '15.04.2021 14:53:05' | '202,02'    | 'Main Company' | 'Reporting currency'           | 'USD'      | 'DFC'        | 'DFC'     | 'Partner term DFC' | 'Sales invoice 9 dated 15.04.2021 14:53:05' | 'No'                   |
+// 			| ''                                          | 'Receipt'     | '15.04.2021 14:53:05' | '1 180'     | 'Main Company' | 'Local currency'               | 'TRY'      | 'DFC'        | 'DFC'     | 'Partner term DFC' | 'Sales invoice 9 dated 15.04.2021 14:53:05' | 'No'                   |
+// 			| ''                                          | 'Receipt'     | '15.04.2021 14:53:05' | '1 180'     | 'Main Company' | 'TRY'                          | 'TRY'      | 'DFC'        | 'DFC'     | 'Partner term DFC' | 'Sales invoice 9 dated 15.04.2021 14:53:05' | 'No'                   |
+// 			| ''                                          | 'Receipt'     | '15.04.2021 14:53:05' | '1 180'     | 'Main Company' | 'en description is empty'      | 'TRY'      | 'DFC'        | 'DFC'     | 'Partner term DFC' | 'Sales invoice 9 dated 15.04.2021 14:53:05' | 'No'                   |
+// 		And I close all client application windows 
 
-Scenario: _0401332 check Sales invoice movements by the Register  "R2021 Customer transactions" (with advance, BR-SI, Ignore advance - False)
-	* Select Sales invoice
-		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
-		And I go to line in "List" table
-			| 'Number'  |
-			| '4' |
-	* Check movements by the Register  "R2021 Customer transactions"
-		And I click "Registrations report" button
-		And I select "R2021 Customer transactions" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		Then "ResultTable" spreadsheet document is equal
-			| 'Sales invoice 4 dated 16.02.2021 10:59:49' | ''            | ''                    | ''           | ''             | ''                             | ''         | ''                | ''        | ''                          | ''                                          | ''                     |
-			| 'Document registrations records'            | ''            | ''                    | ''           | ''             | ''                             | ''         | ''                | ''        | ''                          | ''                                          | ''                     |
-			| 'Register  "R2021 Customer transactions"'   | ''            | ''                    | ''           | ''             | ''                             | ''         | ''                | ''        | ''                          | ''                                          | ''                     |
-			| ''                                          | 'Record type' | 'Period'              | 'Resources'  | 'Dimensions'   | ''                             | ''         | ''                | ''        | ''                          | ''                                          | 'Attributes'           |
-			| ''                                          | ''            | ''                    | 'Amount'     | 'Company'      | 'Multi currency movement type' | 'Currency' | 'Legal name'      | 'Partner' | 'Agreement'                 | 'Basis'                                     | 'Deferred calculation' |
-			| ''                                          | 'Receipt'     | '16.02.2021 10:59:49' | '23 374'     | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Company Kalipso' | 'Kalipso' | 'Personal Partner terms, $' | 'Sales invoice 4 dated 16.02.2021 10:59:49' | 'No'                   |
-			| ''                                          | 'Receipt'     | '16.02.2021 10:59:49' | '23 374'     | 'Main Company' | 'USD'                          | 'USD'      | 'Company Kalipso' | 'Kalipso' | 'Personal Partner terms, $' | 'Sales invoice 4 dated 16.02.2021 10:59:49' | 'No'                   |
-			| ''                                          | 'Receipt'     | '16.02.2021 10:59:49' | '23 374'     | 'Main Company' | 'en description is empty'      | 'USD'      | 'Company Kalipso' | 'Kalipso' | 'Personal Partner terms, $' | 'Sales invoice 4 dated 16.02.2021 10:59:49' | 'No'                   |
-			| ''                                          | 'Receipt'     | '16.02.2021 10:59:49' | '131 537,19' | 'Main Company' | 'Local currency'               | 'TRY'      | 'Company Kalipso' | 'Kalipso' | 'Personal Partner terms, $' | 'Sales invoice 4 dated 16.02.2021 10:59:49' | 'No'                   |
-			| ''                                          | 'Expense'     | '16.02.2021 10:59:49' | '10 000'     | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Company Kalipso' | 'Kalipso' | 'Personal Partner terms, $' | 'Sales invoice 4 dated 16.02.2021 10:59:49' | 'No'                   |
-			| ''                                          | 'Expense'     | '16.02.2021 10:59:49' | '10 000'     | 'Main Company' | 'USD'                          | 'USD'      | 'Company Kalipso' | 'Kalipso' | 'Personal Partner terms, $' | 'Sales invoice 4 dated 16.02.2021 10:59:49' | 'No'                   |
-			| ''                                          | 'Expense'     | '16.02.2021 10:59:49' | '10 000'     | 'Main Company' | 'en description is empty'      | 'USD'      | 'Company Kalipso' | 'Kalipso' | 'Personal Partner terms, $' | 'Sales invoice 4 dated 16.02.2021 10:59:49' | 'No'                   |
-			| ''                                          | 'Expense'     | '16.02.2021 10:59:49' | '56 275'     | 'Main Company' | 'Local currency'               | 'TRY'      | 'Company Kalipso' | 'Kalipso' | 'Personal Partner terms, $' | 'Sales invoice 4 dated 16.02.2021 10:59:49' | 'No'                   |
-		And I close all client application windows 
+// Scenario: _0401332 check Sales invoice movements by the Register  "R2021 Customer transactions" (with advance, BR-SI, Ignore advance - False)
+// 	* Select Sales invoice
+// 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+// 		And I go to line in "List" table
+// 			| 'Number'  |
+// 			| '4' |
+// 	* Check movements by the Register  "R2021 Customer transactions"
+// 		And I click "Registrations report" button
+// 		And I select "R2021 Customer transactions" exact value from "Register" drop-down list
+// 		And I click "Generate report" button
+// 		Then "ResultTable" spreadsheet document is equal
+// 			| 'Sales invoice 4 dated 16.02.2021 10:59:49' | ''            | ''                    | ''           | ''             | ''                             | ''         | ''                | ''        | ''                          | ''                                          | ''                     |
+// 			| 'Document registrations records'            | ''            | ''                    | ''           | ''             | ''                             | ''         | ''                | ''        | ''                          | ''                                          | ''                     |
+// 			| 'Register  "R2021 Customer transactions"'   | ''            | ''                    | ''           | ''             | ''                             | ''         | ''                | ''        | ''                          | ''                                          | ''                     |
+// 			| ''                                          | 'Record type' | 'Period'              | 'Resources'  | 'Dimensions'   | ''                             | ''         | ''                | ''        | ''                          | ''                                          | 'Attributes'           |
+// 			| ''                                          | ''            | ''                    | 'Amount'     | 'Company'      | 'Multi currency movement type' | 'Currency' | 'Legal name'      | 'Partner' | 'Agreement'                 | 'Basis'                                     | 'Deferred calculation' |
+// 			| ''                                          | 'Receipt'     | '16.02.2021 10:59:49' | '23 374'     | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Company Kalipso' | 'Kalipso' | 'Personal Partner terms, $' | 'Sales invoice 4 dated 16.02.2021 10:59:49' | 'No'                   |
+// 			| ''                                          | 'Receipt'     | '16.02.2021 10:59:49' | '23 374'     | 'Main Company' | 'USD'                          | 'USD'      | 'Company Kalipso' | 'Kalipso' | 'Personal Partner terms, $' | 'Sales invoice 4 dated 16.02.2021 10:59:49' | 'No'                   |
+// 			| ''                                          | 'Receipt'     | '16.02.2021 10:59:49' | '23 374'     | 'Main Company' | 'en description is empty'      | 'USD'      | 'Company Kalipso' | 'Kalipso' | 'Personal Partner terms, $' | 'Sales invoice 4 dated 16.02.2021 10:59:49' | 'No'                   |
+// 			| ''                                          | 'Receipt'     | '16.02.2021 10:59:49' | '131 537,19' | 'Main Company' | 'Local currency'               | 'TRY'      | 'Company Kalipso' | 'Kalipso' | 'Personal Partner terms, $' | 'Sales invoice 4 dated 16.02.2021 10:59:49' | 'No'                   |
+// 			| ''                                          | 'Expense'     | '16.02.2021 10:59:49' | '10 000'     | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Company Kalipso' | 'Kalipso' | 'Personal Partner terms, $' | 'Sales invoice 4 dated 16.02.2021 10:59:49' | 'No'                   |
+// 			| ''                                          | 'Expense'     | '16.02.2021 10:59:49' | '10 000'     | 'Main Company' | 'USD'                          | 'USD'      | 'Company Kalipso' | 'Kalipso' | 'Personal Partner terms, $' | 'Sales invoice 4 dated 16.02.2021 10:59:49' | 'No'                   |
+// 			| ''                                          | 'Expense'     | '16.02.2021 10:59:49' | '10 000'     | 'Main Company' | 'en description is empty'      | 'USD'      | 'Company Kalipso' | 'Kalipso' | 'Personal Partner terms, $' | 'Sales invoice 4 dated 16.02.2021 10:59:49' | 'No'                   |
+// 			| ''                                          | 'Expense'     | '16.02.2021 10:59:49' | '56 275'     | 'Main Company' | 'Local currency'               | 'TRY'      | 'Company Kalipso' | 'Kalipso' | 'Personal Partner terms, $' | 'Sales invoice 4 dated 16.02.2021 10:59:49' | 'No'                   |
+// 		And I close all client application windows 
 
 
 Scenario: _0401429 Sales invoice clear posting/mark for deletion

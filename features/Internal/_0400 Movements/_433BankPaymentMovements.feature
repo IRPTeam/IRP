@@ -76,6 +76,9 @@ Scenario: _043300 preparation (Bank payment)
 			When Create document PurchaseOrder objects (check movements, GR before PI, Use receipt sheduling)
 			And I execute 1C:Enterprise script at server
 				| "Documents.PurchaseOrder.FindByNumber(115).GetObject().Write(DocumentWriteMode.Posting);" |
+		When Create document PurchaseInvoice objects
+		And I execute 1C:Enterprise script at server
+			| "Documents.PurchaseInvoice.FindByNumber(12).GetObject().Write(DocumentWriteMode.Posting);" |
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		If "List" table does not contain lines Then
 			| 'Number'  |
@@ -179,7 +182,81 @@ Scenario: _043303 check Bank payment movements by the Register "R5010 Reconcilia
 			| 'Register  "R5010 Reconciliation statement'   |                  
 	And I close all client application windows
 
+	
+Scenario: _043304 check Bank payment movements by the Register "R1021 Vendors transactions" (payment to vendor, basis document exist)
+	And I close all client application windows
+	* Select Bank payment
+		Given I open hyperlink "e1cib/list/Document.BankPayment"
+		And I go to line in "List" table
+			| 'Number'  |'Date'               |
+			| '1'       |'07.09.2020 19:16:43'|
+	* Check movements by the Register  "R1021 Vendors transactions" 
+		And I click "Registrations report" button
+		And I select "R1021 Vendors transactions" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Bank payment 1 dated 07.09.2020 19:16:43' | ''            | ''                    | ''          | ''             | ''                             | ''         | ''                  | ''          | ''                   | ''                                              | ''                     | ''                  |
+			| 'Document registrations records'           | ''            | ''                    | ''          | ''             | ''                             | ''         | ''                  | ''          | ''                   | ''                                              | ''                     | ''                  |
+			| 'Register  "R1021 Vendors transactions"'   | ''            | ''                    | ''          | ''             | ''                             | ''         | ''                  | ''          | ''                   | ''                                              | ''                     | ''                  |
+			| ''                                         | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                             | ''         | ''                  | ''          | ''                   | ''                                              | 'Attributes'           | ''                  |
+			| ''                                         | ''            | ''                    | 'Amount'    | 'Company'      | 'Multi currency movement type' | 'Currency' | 'Legal name'        | 'Partner'   | 'Agreement'          | 'Basis'                                         | 'Deferred calculation' | 'Offset of advance' |
+			| ''                                         | 'Expense'     | '07.09.2020 19:16:43' | '1 000'     | 'Main Company' | 'Local currency'               | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Purchase invoice 12 dated 07.09.2020 17:53:38' | 'No'                   | 'No'                |
+			| ''                                         | 'Expense'     | '07.09.2020 19:16:43' | '1 000'     | 'Main Company' | 'TRY'                          | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Purchase invoice 12 dated 07.09.2020 17:53:38' | 'No'                   | 'No'                |
+			| ''                                         | 'Expense'     | '07.09.2020 19:16:43' | '1 000'     | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Purchase invoice 12 dated 07.09.2020 17:53:38' | 'No'                   | 'No'                |
+			| ''                                         | 'Expense'     | '07.09.2020 19:16:43' | '5 840'     | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Company Ferron BP' | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Purchase invoice 12 dated 07.09.2020 17:53:38' | 'No'                   | 'No'                |
+	And I close all client application windows
 
+Scenario: _043305 check absence Bank payment movements by the Register "R1021 Vendors transactions" (payment to vendor, without basis document)
+	And I close all client application windows
+	* Select Bank payment
+		Given I open hyperlink "e1cib/list/Document.BankPayment"
+		And I go to line in "List" table
+			| 'Number'  |'Date'               |
+			| '1'       |'12.02.2021 11:24:13'|
+	* Check movements by the Register  "R1021 Vendors transactions" 
+		And I click "Registrations report" button
+		And I select "R1021 Vendors transactions" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document does not contain values
+			| 'R1021 Vendors transactions'   | 
+	And I close all client application windows
+
+Scenario: _043306 check Bank payment movements by the Register "R1020 Advances to vendors" (payment to vendor, without basis document )
+	And I close all client application windows
+	* Select Bank payment
+		Given I open hyperlink "e1cib/list/Document.BankPayment"
+		And I go to line in "List" table
+			| 'Number'  |'Date'               |
+			| '1'       |'12.02.2021 11:24:13'|
+	* Check movements by the Register  "R1020 Advances to vendors" 
+		And I click "Registrations report" button
+		And I select "R1020 Advances to vendors" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Bank payment 1 dated 12.02.2021 11:24:13' | ''            | ''                    | ''          | ''             | ''                             | ''         | ''                  | ''          | ''                                         | ''                     | ''                  |
+			| 'Document registrations records'           | ''            | ''                    | ''          | ''             | ''                             | ''         | ''                  | ''          | ''                                         | ''                     | ''                  |
+			| 'Register  "R1020 Advances to vendors"'    | ''            | ''                    | ''          | ''             | ''                             | ''         | ''                  | ''          | ''                                         | ''                     | ''                  |
+			| ''                                         | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                             | ''         | ''                  | ''          | ''                                         | 'Attributes'           | ''                  |
+			| ''                                         | ''            | ''                    | 'Amount'    | 'Company'      | 'Multi currency movement type' | 'Currency' | 'Legal name'        | 'Partner'   | 'Basis'                                    | 'Deferred calculation' | 'Offset of advance' |
+			| ''                                         | 'Receipt'     | '12.02.2021 11:24:13' | '342,4'     | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Company Ferron BP' | 'Ferron BP' | 'Bank payment 1 dated 12.02.2021 11:24:13' | 'No'                   | 'No'                |
+			| ''                                         | 'Receipt'     | '12.02.2021 11:24:13' | '2 000'     | 'Main Company' | 'Local currency'               | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Bank payment 1 dated 12.02.2021 11:24:13' | 'No'                   | 'No'                |
+			| ''                                         | 'Receipt'     | '12.02.2021 11:24:13' | '2 000'     | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Bank payment 1 dated 12.02.2021 11:24:13' | 'No'                   | 'No'                |
+	And I close all client application windows
+
+Scenario: _043307 check absence Bank payment movements by the Register "R1020 Advances to vendors" (payment to vendor, without basis document)
+	And I close all client application windows
+	* Select Bank payment
+		Given I open hyperlink "e1cib/list/Document.BankPayment"
+		And I go to line in "List" table
+			| 'Number'  |'Date'               |
+			| '1'       |'07.09.2020 19:16:43'|
+	* Check movements by the Register  "R1020 Advances to vendors" 
+		And I click "Registrations report" button
+		And I select "R1020 Advances to vendors" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document does not contain values
+			| 'R1020 Advances to vendors'   | 
+	And I close all client application windows
 
 Scenario: _043330 Bank payment clear posting/mark for deletion
 	And I close all client application windows

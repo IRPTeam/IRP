@@ -185,7 +185,10 @@ Function GetPurchaseOrderForClosing(PurchaseOrder, AddInfo = Undefined) Export
 		|		ELSE -1 * PurchaseOrdersInvoiceClosing.NetAmountBalance
 		|	END AS NetAmount,
 		|	ItemList.TaxAmount AS TaxAmount,
-		|	ItemList.OffersAmount AS OffersAmount
+		|	ItemList.OffersAmount AS OffersAmount,
+		|	ItemList.ExpenseType,
+		|	ItemList.SalesOrder,
+		|	ItemList.InternalSupplyRequest
 		|INTO ItemList
 		|FROM
 		|	Document.PurchaseOrder.ItemList AS ItemList

@@ -132,6 +132,9 @@ Function CalculateRuleByObject(SourceParams, AddInfo = Undefined)
 		Return Undefined;
 	EndIf;
 	VT = QueryResult.Unload();
+	If Not SafeMode() Then 
+		SetSafeMode(True);
+	EndIf;
 	For Each Row In VT Do
 		Row.Attribute = StrSplit(Row.Attribute, ".")[1];
 		

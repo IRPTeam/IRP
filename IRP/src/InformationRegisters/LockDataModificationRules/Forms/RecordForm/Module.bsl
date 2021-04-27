@@ -96,9 +96,7 @@ Procedure AttributeOnChangeAtServer()
 	
 EndProcedure
 
-
 &AtClient
 Procedure SetValueAsCodeOnChange(Item)
 	AttributeOnChangeAtServer();
 EndProcedure
-

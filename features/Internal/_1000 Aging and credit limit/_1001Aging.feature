@@ -284,23 +284,7 @@ Scenario: _1000009 create Cash receipt and check Aging register movements
 		And I click "Registrations report" button
 		And I select "Partner AR transactions" exact value from "Register" drop-down list
 		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| '$$CashReceipt1000009$$'              | ''            | ''                           | ''          | ''             | ''                        | ''        | ''                | ''                                 | ''         | ''                             | ''                     |
-		| 'Document registrations records'      | ''            | ''                           | ''          | ''             | ''                        | ''        | ''                | ''                                 | ''         | ''                             | ''                     |
-		| 'Register  "Partner AR transactions"' | ''            | ''                           | ''          | ''             | ''                        | ''        | ''                | ''                                 | ''         | ''                             | ''                     |
-		| ''                                    | 'Record type' | 'Period'                     | 'Resources' | 'Dimensions'   | ''                        | ''        | ''                | ''                                 | ''         | ''                             | 'Attributes'           |
-		| ''                                    | ''            | ''                           | 'Amount'    | 'Company'      | 'Basis document'          | 'Partner' | 'Legal name'      | 'Partner term'                     | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
-		| ''                                    | 'Expense'     | '$$DateCashReceipt1000009$$' | '94,16'     | 'Main Company' | '$$SalesInvoice0240162$$' | 'Kalipso' | 'Company Kalipso' | 'Basic Partner terms, without VAT' | 'USD'      | 'Reporting currency'           | 'No'                   |
-		| ''                                    | 'Expense'     | '$$DateCashReceipt1000009$$' | '550'       | 'Main Company' | '$$SalesInvoice0240162$$' | 'Kalipso' | 'Company Kalipso' | 'Basic Partner terms, without VAT' | 'TRY'      | 'Local currency'               | 'No'                   |
-		| ''                                    | 'Expense'     | '$$DateCashReceipt1000009$$' | '550'       | 'Main Company' | '$$SalesInvoice0240162$$' | 'Kalipso' | 'Company Kalipso' | 'Basic Partner terms, without VAT' | 'TRY'      | 'TRY'                          | 'No'                   |
-		| ''                                    | 'Expense'     | '$$DateCashReceipt1000009$$' | '550'       | 'Main Company' | '$$SalesInvoice0240162$$' | 'Kalipso' | 'Company Kalipso' | 'Basic Partner terms, without VAT' | 'TRY'      | 'en description is empty'      | 'No'                   |
-		And I select "Aging" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Aging"' | ''            | ''                           | ''          | ''             | ''        | ''                                 | ''                        | ''                    | ''         | '' | '' |
-		| ''                  | 'Record type' | 'Period'                     | 'Resources' | 'Dimensions'   | ''        | ''                                 | ''                        | ''                    | ''         | '' | '' |
-		| ''                  | ''            | ''                           | 'Amount'    | 'Company'      | 'Partner' | 'Agreement'                        | 'Invoice'                 | 'Payment date'        | 'Currency' | '' | '' |
-		| ''                  | 'Expense'     | '$$DateCashReceipt1000009$$' | '550'       | 'Main Company' | 'Kalipso' | 'Basic Partner terms, without VAT' | '$$SalesInvoice0240162$$' | '05.11.2020 00:00:00' | 'TRY'      | '' | '' |
+		
 		And I select "Accounts statement" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
@@ -367,23 +351,7 @@ Scenario: _1000015 create Bank receipt and check Aging register movements
 		And I click "Registrations report" button
 		And I select "Partner AR transactions" exact value from "Register" drop-down list
 		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| '$$BankReceipt1000015$$'              | ''            | ''                           | ''          | ''             | ''                       | ''        | ''                | ''                                 | ''         | ''                             | ''                     |
-		| 'Document registrations records'      | ''            | ''                           | ''          | ''             | ''                       | ''        | ''                | ''                                 | ''         | ''                             | ''                     |
-		| 'Register  "Partner AR transactions"' | ''            | ''                           | ''          | ''             | ''                       | ''        | ''                | ''                                 | ''         | ''                             | ''                     |
-		| ''                                    | 'Record type' | 'Period'                     | 'Resources' | 'Dimensions'   | ''                       | ''        | ''                | ''                                 | ''         | ''                             | 'Attributes'           |
-		| ''                                    | ''            | ''                           | 'Amount'    | 'Company'      | 'Basis document'         | 'Partner' | 'Legal name'      | 'Partner term'                     | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
-		| ''                                    | 'Expense'     | '$$DateBankReceipt1000015$$' | '34,24'     | 'Main Company' | '$$SalesInvoice024016$$' | 'Kalipso' | 'Company Kalipso' | 'Basic Partner terms, without VAT' | 'USD'      | 'Reporting currency'           | 'No'                   |
-		| ''                                    | 'Expense'     | '$$DateBankReceipt1000015$$' | '200'       | 'Main Company' | '$$SalesInvoice024016$$' | 'Kalipso' | 'Company Kalipso' | 'Basic Partner terms, without VAT' | 'TRY'      | 'Local currency'               | 'No'                   |
-		| ''                                    | 'Expense'     | '$$DateBankReceipt1000015$$' | '200'       | 'Main Company' | '$$SalesInvoice024016$$' | 'Kalipso' | 'Company Kalipso' | 'Basic Partner terms, without VAT' | 'TRY'      | 'TRY'                          | 'No'                   |
-		| ''                                    | 'Expense'     | '$$DateBankReceipt1000015$$' | '200'       | 'Main Company' | '$$SalesInvoice024016$$' | 'Kalipso' | 'Company Kalipso' | 'Basic Partner terms, without VAT' | 'TRY'      | 'en description is empty'      | 'No'                   |
-		And I select "Aging" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Aging"' | ''            | ''                           | ''          | ''             | ''        | ''                                 | ''                       | ''             | ''         | '' | '' |
-		| ''                  | 'Record type' | 'Period'                     | 'Resources' | 'Dimensions'   | ''        | ''                                 | ''                       | ''             | ''         | '' | '' |
-		| ''                  | ''            | ''                           | 'Amount'    | 'Company'      | 'Partner' | 'Agreement'                        | 'Invoice'                | 'Payment date' | 'Currency' | '' | '' |
-		| ''                  | 'Expense'     | '$$DateBankReceipt1000015$$' | '200'       | 'Main Company' | 'Kalipso' | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$' | '*'            | 'TRY'      | '' | '' |
+		
 		And I select "Accounts statement" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
@@ -443,23 +411,7 @@ Scenario: _1000020 create Credit note and check Aging register movements
 		And I click "Registrations report" button
 		And I select "Partner AR transactions" exact value from "Register" drop-down list
 		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:	
-		| '$$CreditNote1000020$$'               | ''            | ''                          | ''          | ''             | ''                       | ''        | ''                | ''                                 | ''         | ''                             | ''                     |
-		| 'Document registrations records'      | ''            | ''                          | ''          | ''             | ''                       | ''        | ''                | ''                                 | ''         | ''                             | ''                     |
-		| 'Register  "Partner AR transactions"' | ''            | ''                          | ''          | ''             | ''                       | ''        | ''                | ''                                 | ''         | ''                             | ''                     |
-		| ''                                    | 'Record type' | 'Period'                    | 'Resources' | 'Dimensions'   | ''                       | ''        | ''                | ''                                 | ''         | ''                             | 'Attributes'           |
-		| ''                                    | ''            | ''                          | 'Amount'    | 'Company'      | 'Basis document'         | 'Partner' | 'Legal name'      | 'Partner term'                     | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
-		| ''                                    | 'Receipt'     | '$$CreditNoteDate1000020$$' | '-100'      | 'Main Company' | '$$SalesInvoice024016$$' | 'Kalipso' | 'Company Kalipso' | 'Basic Partner terms, without VAT' | 'TRY'      | 'Local currency'               | 'No'                   |
-		| ''                                    | 'Receipt'     | '$$CreditNoteDate1000020$$' | '-100'      | 'Main Company' | '$$SalesInvoice024016$$' | 'Kalipso' | 'Company Kalipso' | 'Basic Partner terms, without VAT' | 'TRY'      | 'TRY'                          | 'No'                   |
-		| ''                                    | 'Receipt'     | '$$CreditNoteDate1000020$$' | '-100'      | 'Main Company' | '$$SalesInvoice024016$$' | 'Kalipso' | 'Company Kalipso' | 'Basic Partner terms, without VAT' | 'TRY'      | 'en description is empty'      | 'No'                   |
-		| ''                                    | 'Receipt'     | '$$CreditNoteDate1000020$$' | '-17,12'    | 'Main Company' | '$$SalesInvoice024016$$' | 'Kalipso' | 'Company Kalipso' | 'Basic Partner terms, without VAT' | 'USD'      | 'Reporting currency'           | 'No'                   |
-		And I select "Aging" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:	
-		| 'Register  "Aging"' | ''            | ''                          | ''          | ''             | ''        | ''                                 | ''                       | ''             | ''         | '' | '' |
-		| ''                  | 'Record type' | 'Period'                    | 'Resources' | 'Dimensions'   | ''        | ''                                 | ''                       | ''             | ''         | '' | '' |
-		| ''                  | ''            | ''                          | 'Amount'    | 'Company'      | 'Partner' | 'Agreement'                        | 'Invoice'                | 'Payment date' | 'Currency' | '' | '' |
-		| ''                  | 'Expense'     | '$$CreditNoteDate1000020$$' | '100'       | 'Main Company' | 'Kalipso' | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$' | '*'            | 'TRY'      | '' | '' |
+		
 		And I select "Expenses turnovers" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:

@@ -42,6 +42,7 @@ Scenario: _300520 preparation (check post/unpost/mark for deletion from report R
 		When update ItemKeys
 
 Scenario: _300521 check post/unpost/mark for deletion from report "Related documents"
+	And I close all client application windows
 	* Preparation
 		* Create Sales order
 			Given I open hyperlink "e1cib/list/Document.SalesOrder"

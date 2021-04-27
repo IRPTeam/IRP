@@ -45,7 +45,6 @@
   <levelCount>2</levelCount>
   <foldersOnTop>true</foldersOnTop>
   <codeLength>12</codeLength>
-  <codeType>String</codeType>
   <codeAllowedLength>Variable</codeAllowedLength>
   <checkUnique>true</checkUnique>
   <autonumbering>true</autonumbering>
@@ -53,6 +52,8 @@
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>
   <defaultObjectForm>Catalog.LockDataModificationReasons.Form.ItemForm</defaultObjectForm>
+  <defaultListForm>Catalog.LockDataModificationReasons.Form.ListForm</defaultListForm>
+  <defaultChoiceForm>Catalog.LockDataModificationReasons.Form.ChoiceForm</defaultChoiceForm>
   <tabularSections uuid="bdfb54d6-07fc-48d4-ac55-cb4f3cfaa8ae">
     <producedTypes>
       <objectType typeId="85b44ead-7878-4913-86f5-02ccbd3c51c2" valueTypeId="257e0d4e-1a4e-419a-b6db-fa8f614db850"/>
@@ -97,6 +98,24 @@
     <synonym>
       <key>en</key>
       <value>Item form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="f8eacb63-f562-4b80-a42f-2369c8ee2bbe">
+    <name>ListForm</name>
+    <synonym>
+      <key>en</key>
+      <value>List form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="f96e7e6a-693e-42fc-9878-9e6a806e7071">
+    <name>ChoiceForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Choice form</value>
     </synonym>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>

@@ -8,15 +8,15 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing, Form, Parameters) Export
 				Form.List.Parameters.SetParameterValue(QueryParameter.Key, QueryParameter.Value);
 			EndIf;
 		EndDo;
-//		Ref = CustomFilter.QueryParameters.Ref;
-//		Period = EndOfDay(CurrentSessionDate());
-//		If ValueIsFilled(Ref) Then 
-//			If Ref.Posted Then
-//				Period = New Boundary(Ref.PointInTime(), BoundaryType.Excluding);
-//			Else
-//				Period = EndOfDay(Ref.Date);
-//			EndIf;
-//		EndIf;
-//		Form.List.Parameters.SetParameterValue("Period", Period);
+		Ref = CustomFilter.QueryParameters.Ref;
+		Period = EndOfDay(CurrentSessionDate());
+		If ValueIsFilled(Ref) Then 
+			If Ref.Posted Then
+				Period = New Boundary(Ref.PointInTime(), BoundaryType.Excluding);
+			Else
+				Period = EndOfDay(Ref.Date);
+			EndIf;
+		EndIf;
+		Form.List.Parameters.SetParameterValue("Period", Period);
 	EndIf;
 EndProcedure

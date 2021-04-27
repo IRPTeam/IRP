@@ -22,7 +22,10 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	ProcSettings = FormAttributeToValue("Object").ExternalDataProcSettings.Get();
 	ThisObject.AddressResult = PutToTempStorage(ProcSettings, ThisObject.UUID);
 	SetVisible();
-	
+	DocumentNameChoiceList = TaxesServer.GetDocumentsWithTax();
+	For Each DocumentName In DocumentNameChoiceList Do 
+		Items.UseDocumentsDocumentName.ChoiceList.Add(DocumentName.Value, DocumentName.Presentation);
+	EndDo;
 	ExtensionServer.AddAttributesFromExtensions(ThisObject, Object.Ref, Items.GroupMainPages);
 EndProcedure
 

@@ -536,10 +536,10 @@ Scenario: _095005 create document Debit Note (increase in customers debt)
 		And I save the value of "Date" field as "$$DeditNoteDate095005$$"
 		And I save the value of "Number" field as "$$DeditNoteNumber095005$$"
 		And I close all client application windows
-		Given I open hyperlink "e1cib/list/Document.DeditNote"
+		Given I open hyperlink "e1cib/list/Document.DebitNote"
 		And "List" table contains lines
 			| 'Number'                |'Date'                |
-			| '$$$$DeditNoteNumber095005$$$$' | '$$DeditNoteDate095005$$' |
+			| '$$DeditNoteNumber095005$$' | '$$DeditNoteDate095005$$' |
 		And I close all client application windows
 
 

@@ -285,7 +285,7 @@ Scenario: _095002 create document Dedit Note (write off debts to the vendor)
 		Given I open hyperlink "e1cib/list/Document.DebitNote"
 		And "List" table contains lines
 			| 'Number'                |'Date'                |
-			| '$$NumberDeditNoteDate095002$$' | '$$DeditNoteDate095002$$' |
+			| '$$NumberDeditNote095002$$' | '$$DeditNoteDate095002$$' |
 		And I close all client application windows
 
 
@@ -457,7 +457,7 @@ Scenario: _095004 check movements of the document Credit Note (write off custome
 		And I close all client application windows
 
 
-Scenario: _095005 check movements of the document Debit Note (increase in customers debt)
+Scenario: _095005 create document Debit Note (increase in customers debt)
 	* Create document
 		Given I open hyperlink "e1cib/list/Document.DebitNote"
 		And I click the button named "FormCreate"
@@ -531,13 +531,15 @@ Scenario: _095005 check movements of the document Debit Note (increase in custom
 		And I click the button named "FormPost"
 		And I delete "$$DeditNote095005$$" variable
 		And I delete "$$DeditNoteDate095005$$" variable
+		And I delete "$$DeditNoteDate095005$$" variable
 		And I save the window as "$$DeditNote095005$$"
 		And I save the value of "Date" field as "$$DeditNoteDate095005$$"
+		And I save the value of "Number" field as "$$DeditNoteNumber095005$$"
 		And I close all client application windows
 		Given I open hyperlink "e1cib/list/Document.DeditNote"
 		And "List" table contains lines
 			| 'Number'                |'Date'                |
-			| '$$NumberDeditNoteDate095005$$' | '$$DeditNoteDate095005$$' |
+			| '$$$$DeditNoteNumber095005$$$$' | '$$DeditNoteDate095005$$' |
 		And I close all client application windows
 
 

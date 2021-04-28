@@ -1020,7 +1020,7 @@ Scenario: _090408 create one Sales order - several Shipment confirmation - one S
 		And I save the value of "Number" field as "$$NumberSalesInvoice0904083$$"
 		And I save the window as "$$SalesInvoice0904083$$"	
 		And I click "Registrations report" button
-		And I select "Partner AR transactions" exact value from "Register" drop-down list
+		And I select "R2021 Customer transactions" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
 		| '$$SalesInvoice0904083$$'             | ''            | ''       | ''          | ''             | ''                        | ''          | ''                  | ''                         | ''         | ''                             | ''                     | '' | '' |

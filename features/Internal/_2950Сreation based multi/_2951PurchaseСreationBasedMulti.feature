@@ -2114,7 +2114,7 @@ Scenario: _090323 create one Purchase order - several Goods receipt - one Purcha
 		| ''                               | 'Receipt'     | '*'      | ''                     | '14 500'         | ''                       | ''               | 'Main Company' | 'Ferron BP' | 'Company Ferron BP' | '$$PurchaseInvoice090323$$' | 'TRY'      | '' | '' |
 	
 	
-		And I select "Partner AP transactions" exact value from "Register" drop-down list
+		And I select "R1021 Vendors transactions" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
 		| 'Register  "Partner AP transactions"' | ''            | ''       | ''          | ''             | ''                          | ''          | ''                  | ''                   | ''         | ''                             | ''                     | '' | '' |

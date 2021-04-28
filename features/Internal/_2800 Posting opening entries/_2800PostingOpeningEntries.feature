@@ -679,7 +679,7 @@ Scenario: _400004 opening entry AP balance by partner terms (vendors)
 			| ''                               | ''            | ''       | 'Advance to suppliers' | 'Transaction AP' | 'Advance from customers' | 'Transaction AR' | 'Company'      | 'Partner' | 'Legal name' | 'Basis document' | 'Currency' |
 			| ''                               | 'Receipt'     | '*'      | ''                     | '100'            | ''                       | ''               | 'Main Company' | 'DFC'     | 'DFC'        | ''               | 'TRY'      |
 		
-			And I select "Partner AP transactions" exact value from "Register" drop-down list
+			And I select "R1021 Vendors transactions" exact value from "Register" drop-down list
 			And I click "Generate report" button
 			And "ResultTable" spreadsheet document contains lines:
 			| 'Register  "Partner AP transactions"'  | ''            | ''       | ''                     | ''               | ''                       | ''               | ''             | ''                            | ''           | ''                             | ''                     |
@@ -772,7 +772,7 @@ Scenario: _400005 opening entry AR balance by partner terms (customers)
 		And Delay 5
 	* Check movements
 		And I click "Registrations report" button
-		And I select "Partner AR transactions" exact value from "Register" drop-down list
+		And I select "R2021 Customer transactions" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
 			| '$$OpeningEntry400005$$'              | ''            | ''       | ''          | ''             | ''               | ''        | ''           | ''                              | ''         | ''                             | ''                     |
@@ -1050,7 +1050,7 @@ Scenario: _400009 check the entry of the Ap/Ar balance by documents
 		And I save the value of the field named "Date" as "$$DateOpeningEntry400009$$"
 		And I save the window as "$$OpeningEntry400009$$"
 		And I click "Registrations report" button
-		And I select "Partner AR transactions" exact value from "Register" drop-down list
+		And I select "R2021 Customer transactions" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
 			| '$$OpeningEntry400009$$'              | ''            | ''                           | ''          | ''             | ''                       | ''        | ''           | ''                 | ''         | ''                             | ''                     |
@@ -1071,7 +1071,7 @@ Scenario: _400009 check the entry of the Ap/Ar balance by documents
 			| ''                               | 'Receipt'     | '$$DateOpeningEntry400009$$' | ''                     | ''               | ''                       | '200'            | 'Main Company' | 'DFC'     | 'DFC'        | '$$OpeningEntry400009$$' | 'TRY'      |
 			| ''                               | 'Receipt'     | '$$DateOpeningEntry400009$$' | ''                     | '100'            | ''                       | ''               | 'Main Company' | 'DFC'     | 'DFC'        | '$$OpeningEntry400009$$' | 'TRY'      |
 	
-		And I select "Partner AP transactions" exact value from "Register" drop-down list
+		And I select "R1021 Vendors transactions" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
 			| 'Register  "Partner AP transactions"'       | ''            | ''                    | ''                     | ''               | ''                                          | ''               | ''             | ''                        | ''           | ''                                          | ''                     |

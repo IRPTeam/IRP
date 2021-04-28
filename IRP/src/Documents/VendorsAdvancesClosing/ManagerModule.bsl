@@ -34,6 +34,7 @@ EndProcedure
 #Region Undoposting
 
 Function UndopostingGetDocumentDataTables(Ref, Cancel, Parameters, AddInfo = Undefined) Export
+	Parameters.Insert("Unposting", True);
 	Return PostingGetDocumentDataTables(Ref, Cancel, Undefined, Parameters, AddInfo);
 EndFunction
 
@@ -43,8 +44,7 @@ Function UndopostingGetLockDataSource(Ref, Cancel, Parameters, AddInfo = Undefin
 EndFunction
 
 Procedure UndopostingCheckBeforeWrite(Ref, Cancel, Parameters, AddInfo = Undefined) Export
-	QueryArray = GetQueryTextsMasterTables();
-	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
+	Return;
 EndProcedure
 
 Procedure UndopostingCheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined) Export
@@ -103,6 +103,12 @@ Function OffsetOfAdvances(Parameters)
 	If Parameters = Undefined Then
 		Return VendorsAdvancesClosingQueryText();
 	EndIf;
+	
+	If Parameters.Property("Unposting") And Parameters.Unposting Then
+		ClearSelfRecords(Parameters.Object.Ref);
+		Return VendorsAdvancesClosingQueryText();
+	Endif;
+	
 	// clear old records for Vendors
 	Query = New Query();
 	Query.Text = 
@@ -194,6 +200,64 @@ Procedure ClearRegister(RegisterName, RecordersTable)
 		RecordSet = AccumulationRegisters[RegisterName].CreateRecordSet();
 		RecordSet.Filter.Recorder.Set(Row.Recorder);		
 		RecordSet.Clear();
+		RecordSet.Write();
+	EndDo;
+EndProcedure
+
+Procedure ClearSelfRecords(Ref)
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	R1020B_AdvancesToVendors.Recorder
+	|FROM
+	|	AccumulationRegister.R1020B_AdvancesToVendors AS R1020B_AdvancesToVendors
+	|WHERE
+	|	R1020B_AdvancesToVendors.VendorsAdvancesClosing = &VendorsAdvancesClosing
+	|GROUP BY
+	|	R1020B_AdvancesToVendors.Recorder
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	R1021B_VendorsTransactions.Recorder
+	|FROM
+	|	AccumulationRegister.R1021B_VendorsTransactions AS R1021B_VendorsTransactions
+	|WHERE
+	|	R1021B_VendorsTransactions.VendorsAdvancesClosing = &VendorsAdvancesClosing
+	|GROUP BY
+	|	R1021B_VendorsTransactions.Recorder";
+	Query.SetParameter("VendorsAdvancesClosing", Ref);
+	QueryResults = Query.ExecuteBatch();
+	
+	For Each Row In QueryResults[0].Unload() Do
+		RecordSet = AccumulationRegisters.R1020B_AdvancesToVendors.CreateRecordSet();
+		RecordSet.Filter.Recorder.Set(Row.Recorder);
+		RecordSet.Read();
+		ArrayForDelete = New Array();
+		For Each Record In RecordSet Do
+			If Record.VendorsAdvancesClosing = Ref Then
+				ArrayForDelete.Add(Record);
+			EndIf;
+		EndDo;
+		For Each ItemForDelete In ArrayForDelete Do
+			RecordSet.Delete(ItemForDelete);
+		EndDo;
+		RecordSet.Write();
+	EndDo;
+	
+	For Each Row In QueryResults[1].Unload() Do
+		RecordSet = AccumulationRegisters.R1021B_VendorsTransactions.CreateRecordSet();
+		RecordSet.Filter.Recorder.Set(Row.Recorder);
+		RecordSet.Read();
+		ArrayForDelete = New Array();
+		For Each Record In RecordSet Do
+			If Record.VendorsAdvancesClosing = Ref Then
+				ArrayForDelete.Add(Record);
+			EndIf;
+		EndDo;
+		For Each ItemForDelete In ArrayForDelete Do
+			RecordSet.Delete(ItemForDelete);
+		EndDo;
 		RecordSet.Write();
 	EndDo;
 EndProcedure
@@ -319,7 +383,7 @@ Procedure Write_VendorsTransactions(Recorder, Parameters, OffsetOfAdvanceFull)
 			NewRow_Advances.Basis           = Row.AdvancesDocument;
 			NewRow_Advances.Amount          = Row.Amount;
 			//NewRow_Advances.Key             = Row.Key;
-			NewRow_Advances.OffsetOfAdvance = True;
+			NewRow_Advances.VendorsAdvancesClosing = Parameters.Object.Ref;
 		EndIf;
 		
 		NewRow_Transactions = TableTransactions.Add();
@@ -340,7 +404,9 @@ Procedure Write_VendorsTransactions(Recorder, Parameters, OffsetOfAdvanceFull)
 		NewRow_Transactions.Basis           = Row.TransactionDocument;
 		NewRow_Transactions.Amount          = Row.Amount;
 		//NewRow_Transactions.Key             = Row.Key;
-		NewRow_Transactions.OffsetOfAdvance = True;
+		If Row.IsOffsetOfAdvance Then
+			NewRow_Transactions.VendorsAdvancesClosing = Parameters.Object.Ref;
+		EndIf; 
 	EndDo;
 	
 	// Currency calculation

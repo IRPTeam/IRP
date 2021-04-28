@@ -2372,6 +2372,7 @@ Function R1020B_AdvancesToVendors()
 		"SELECT
 		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
 		|	OffsetOfAdvances.AdvancesDocument AS Basis,
+		|	OffsetOfAdvances.Recorder AS VendorsAdvancesClosing,
 		|	*
 		|INTO R1020B_AdvancesToVendors
 		|FROM
@@ -2391,7 +2392,8 @@ Function R1021B_VendorsTransactions()
 		|	ItemList.Partner,
 		|	ItemList.Agreement,
 		|	ItemList.BasisDocument AS Basis,
-		|	SUM(ItemList.Amount) AS Amount
+		|	SUM(ItemList.Amount) AS Amount,
+		|	UNDEFINED AS VendorsAdvancesClosing
 		|INTO R1021B_VendorsTransactions
 		|FROM
 		|	ItemList AS ItemList
@@ -2416,7 +2418,8 @@ Function R1021B_VendorsTransactions()
 		|	OffsetOfAdvances.Partner,
 		|	OffsetOfAdvances.Agreement,
 		|	OffsetOfAdvances.TransactionDocument,
-		|	OffsetOfAdvances.Amount
+		|	OffsetOfAdvances.Amount,
+		|	OffsetOfAdvances.Recorder
 		|FROM
 		|	InformationRegister.T1000I_OffsetOfAdvances AS OffsetOfAdvances
 		|WHERE

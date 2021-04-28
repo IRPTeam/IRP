@@ -43,13 +43,13 @@
     <fullTextSearch>Use</fullTextSearch>
   </attributes>
   <attributes uuid="3f773c87-3f42-4d2c-8d87-07c4a41b4daa">
-    <name>OffsetOfAdvance</name>
+    <name>VendorsAdvancesClosing</name>
     <synonym>
       <key>en</key>
-      <value>Offset of advance</value>
+      <value>Vendors advances closing</value>
     </synonym>
     <type>
-      <types>Boolean</types>
+      <types>DocumentRef.VendorsAdvancesClosing</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

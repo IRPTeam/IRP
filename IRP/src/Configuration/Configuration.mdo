@@ -690,6 +690,7 @@
   <informationRegisters>InformationRegister.UserSettings</informationRegisters>
   <informationRegisters>InformationRegister.T1000I_OffsetOfAdvances</informationRegisters>
   <informationRegisters>InformationRegister.T1001I_PartnerTransactions</informationRegisters>
+  <informationRegisters>InformationRegister.T1002I_PartnerAdvances</informationRegisters>
   <accumulationRegisters>AccumulationRegister.AccountBalance</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.AccountsStatement</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.AdvanceFromCustomers</accumulationRegisters>

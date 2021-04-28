@@ -416,7 +416,7 @@ Scenario: _2050007 check the movements of the Invoice match document with the cl
 		And I save the window as "$$InvoiceMatch2050007$$"
 		And I save the value of "Number" field as "$$NumberInvoiceMatch2050007$$"
 		And I click "Registrations report" button
-		And I select "Partner AR transactions" exact value from "Register" drop-down list
+		And I select "R2021 Customer transactions" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
 		| '$$InvoiceMatch2050007$$'             | ''            | ''       | ''          | ''             | ''                         | ''        | ''             | ''                         | ''         | ''                             | ''                     |
@@ -453,7 +453,7 @@ Scenario: _2050008 check of movements in case of cancellation and re-post of Inv
 			| '$$NumberInvoiceMatch2050007$$'     |
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And I click "Registrations report" button
-		And I select "Partner AR transactions" exact value from "Register" drop-down list
+		And I select "R2021 Customer transactions" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
 		| '$$InvoiceMatch2050007$$'             | ''            | ''       | ''          | ''             | ''                         | ''        | ''             | ''                         | ''         | ''                             | ''                     |

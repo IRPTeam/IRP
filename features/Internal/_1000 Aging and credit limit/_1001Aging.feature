@@ -183,7 +183,7 @@ Scenario: _1000003 create Sales invoice and check Aging tab
 					| 'Number' |
 					| '$$NumberSalesInvoice024016$$'|
 			And I click "Registrations report" button
-			And I select "Partner AR transactions" exact value from "Register" drop-down list
+			And I select "R2021 Customer transactions" exact value from "Register" drop-down list
 			And I click "Generate report" button
 			And "ResultTable" spreadsheet document contains lines:
 				| '$$SalesInvoice0240162$$'             | ''            | ''                            | ''          | ''             | ''                        | ''        | ''                | ''                                 | ''         | ''                             | ''                     | '' | '' |
@@ -282,7 +282,7 @@ Scenario: _1000009 create Cash receipt and check Aging register movements
 			| 'Number' |
 			| '$$NumberCashReceipt1000009$$'  |
 		And I click "Registrations report" button
-		And I select "Partner AR transactions" exact value from "Register" drop-down list
+		And I select "R2021 Customer transactions" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		
 		And I select "Accounts statement" exact value from "Register" drop-down list
@@ -349,7 +349,7 @@ Scenario: _1000015 create Bank receipt and check Aging register movements
 			| 'Number' |
 			| '$$NumberBankReceipt1000015$$'  |
 		And I click "Registrations report" button
-		And I select "Partner AR transactions" exact value from "Register" drop-down list
+		And I select "R2021 Customer transactions" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		
 		And I select "Accounts statement" exact value from "Register" drop-down list
@@ -409,7 +409,7 @@ Scenario: _1000020 create Credit note and check Aging register movements
 		And I save the window as "$$CreditNote1000020$$"
 		And I save the value of "Date" field as "$$CreditNoteDate1000020$$"
 		And I click "Registrations report" button
-		And I select "Partner AR transactions" exact value from "Register" drop-down list
+		And I select "R2021 Customer transactions" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		
 		And I select "Expenses turnovers" exact value from "Register" drop-down list
@@ -551,7 +551,7 @@ Scenario: _1000050 check the offset of Sales invoice advance (type of settlement
 				| 'Number' |
 				| '$$NumberBankReceipt1000050$$'  |
 			And I click "Registrations report" button
-			And I select "Partner AR transactions" exact value from "Register" drop-down list
+			And I select "R2021 Customer transactions" exact value from "Register" drop-down list
 			And I click "Generate report" button
 			And "ResultTable" spreadsheet document contains lines:
 				| '$$BankReceipt1000050$$'              | ''            | ''                           | ''          | ''             | ''                       | ''        | ''                | ''                                 | ''         | ''                             | ''                     |
@@ -631,7 +631,7 @@ Scenario: _1000050 check the offset of Sales invoice advance (type of settlement
 				| 'Number' |
 				| '$$NumberCashReceipt1000050$$'  |
 			And I click "Registrations report" button
-			And I select "Partner AR transactions" exact value from "Register" drop-down list
+			And I select "R2021 Customer transactions" exact value from "Register" drop-down list
 			And I click "Generate report" button
 			And "ResultTable" spreadsheet document contains lines:
 				| '$$CashReceipt1000050$$'              | ''            | ''                           | ''          | ''             | ''                       | ''        | ''                | ''                                 | ''         | ''                             | ''                     |
@@ -712,7 +712,7 @@ Scenario: _1000050 check the offset of Sales invoice advance (type of settlement
 				| 'Number' |
 				| '$$NumberBankReceipt10000501$$'  |
 			And I click "Registrations report" button
-			And I select "Partner AR transactions" exact value from "Register" drop-down list
+			And I select "R2021 Customer transactions" exact value from "Register" drop-down list
 			And I click "Generate report" button
 			And "ResultTable" spreadsheet document contains lines:
 				| '$$BankReceipt10000501$$'             | ''            | ''                            | ''          | ''             | ''                       | ''        | ''                | ''                                 | ''         | ''                             | ''                     |
@@ -775,7 +775,7 @@ Scenario: _1000050 check the offset of Sales invoice advance (type of settlement
 				| 'Number' |
 				| '$$NumberSalesInvoice0240164$$'  |
 			And I click "Registrations report" button
-			And I select "Partner AR transactions" exact value from "Register" drop-down list
+			And I select "R2021 Customer transactions" exact value from "Register" drop-down list
 			And I click "Generate report" button
 			And "ResultTable" spreadsheet document contains lines:
 				| '$$SalesInvoice0240164$$'             | ''            | ''                            | ''          | ''             | ''                        | ''        | ''                | ''                                 | ''         | ''                             | ''                     | '' | '' |
@@ -886,7 +886,7 @@ Scenario: _1000050 check the offset of Sales invoice advance (type of settlement
 				| 'Number' |
 				| '$$NumberCashReceipt10000505$$'  |
 			And I click "Registrations report" button
-			And I select "Partner AR transactions" exact value from "Register" drop-down list
+			And I select "R2021 Customer transactions" exact value from "Register" drop-down list
 			And I click "Generate report" button
 			And "ResultTable" spreadsheet document contains lines:
 				| '$$CashReceipt10000505$$'             | ''            | ''                            | ''          | ''             | ''                        | ''        | ''                | ''                                 | ''         | ''                             | ''                     |
@@ -949,7 +949,7 @@ Scenario: _1000050 check the offset of Sales invoice advance (type of settlement
 				| 'Number' |
 				| '$$NumberSalesInvoice0240165$$'  |
 			And I click "Registrations report" button
-			And I select "Partner AR transactions" exact value from "Register" drop-down list
+			And I select "R2021 Customer transactions" exact value from "Register" drop-down list
 			And I click "Generate report" button
 			And "ResultTable" spreadsheet document contains lines:
 				| '$$SalesInvoice0240165$$'             | ''            | ''                            | ''          | ''             | ''                        | ''        | ''                | ''                                 | ''         | ''                             | ''                     | '' | '' |

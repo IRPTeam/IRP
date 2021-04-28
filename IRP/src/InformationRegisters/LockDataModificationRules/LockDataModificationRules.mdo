@@ -16,7 +16,6 @@
   </synonym>
   <useStandardCommands>true</useStandardCommands>
   <editType>InDialog</editType>
-  <defaultRecordForm>InformationRegister.LockDataModificationRules.Form.RecordForm</defaultRecordForm>
   <dataLockControlMode>Managed</dataLockControlMode>
   <resources uuid="bb15699f-b1d9-4f67-a1e7-fa780d9c4a3d">
     <name>Attribute</name>
@@ -114,21 +113,6 @@
     <dataHistory>Use</dataHistory>
     <fillValue xsi:type="core:UndefinedValue"/>
   </resources>
-  <resources uuid="a1c1e5e3-5334-4c57-a84c-53b4cfbc5b41">
-    <name>LockDataModificationReasons</name>
-    <synonym>
-      <key>en</key>
-      <value>Lock data modification reasons</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.LockDataModificationReasons</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </resources>
   <resources uuid="5995d0eb-d8fa-42d3-8901-36cd8197eb08">
     <name>SetValueAsCode</name>
     <synonym>
@@ -144,6 +128,21 @@
     <dataHistory>Use</dataHistory>
     <fillValue xsi:type="core:UndefinedValue"/>
   </resources>
+  <dimensions uuid="bc6ae060-a359-4fea-87a5-0458924f3c20">
+    <name>LockDataModificationReasons</name>
+    <synonym>
+      <key>en</key>
+      <value>Lock data modification reasons</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.LockDataModificationReasons</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </dimensions>
   <dimensions uuid="cb658524-33b9-4877-9676-a60c1664d0dd">
     <name>Type</name>
     <synonym>
@@ -165,17 +164,24 @@
     <fillValue xsi:type="core:UndefinedValue"/>
     <mainFilter>true</mainFilter>
   </dimensions>
-  <dimensions uuid="9c90ca64-b10a-4f24-911e-c14f48aa745b">
-    <name>AccessGroup</name>
+  <dimensions uuid="638d8dd1-a252-4dba-857b-b63d84927ad2">
+    <name>Number</name>
     <synonym>
       <key>en</key>
-      <value>User access groups</value>
+      <value>Number</value>
     </synonym>
     <type>
-      <types>CatalogRef.AccessGroups</types>
+      <types>Number</types>
+      <numberQualifiers>
+        <precision>3</precision>
+      </numberQualifiers>
     </type>
-    <createOnInput>DontUse</createOnInput>
-    <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
   </dimensions>
   <forms uuid="ab616530-682b-4442-9ec3-2e901d198407">
     <name>RecordForm</name>

@@ -1,7 +1,7 @@
 ﻿#language: en
 @tree
 @Positive
-@CashManagement
+
 
 Feature: cheque bond transaction
 

@@ -308,27 +308,27 @@ EndProcedure
 //  *DocumentAmount
 //  *AdvancesDocument
 //  *Key
-Procedure Create_AdvancesToVendors(Recorder, Parameters)
-	Query = New Query();
-	Query.TempTablesManager = Parameters.TempTablesManager;
-	Query.Text = 
-	"SELECT
-	|	PartnerAdvances.Period,
-	|	PartnerAdvances.Company,
-	|	PartnerAdvances.Currency,
-	|	PartnerAdvances.Partner,
-	|	PartnerAdvances.LegalName,
-	|	PartnerAdvances.AdvancesDocument,
-	|	PartnerAdvances.Amount AS DocumentAmount,
-	|	PartnerAdvances.Key
-	|INTO AdvancesToVendors
-	|FROM
-	|	InformationRegister.T1002I_PartnerAdvances AS PartnerAdvances
-	|WHERE
-	|	PartnerAdvances.Recorder = &Recorder";
-	Query.SetParameter("Recorder", Recorder);
-	Query.Execute();
-EndProcedure
+//Procedure Create_AdvancesToVendors(Recorder, Parameters)
+//	Query = New Query();
+//	Query.TempTablesManager = Parameters.TempTablesManager;
+//	Query.Text = 
+//	"SELECT
+//	|	PartnerAdvances.Period,
+//	|	PartnerAdvances.Company,
+//	|	PartnerAdvances.Currency,
+//	|	PartnerAdvances.Partner,
+//	|	PartnerAdvances.LegalName,
+//	|	PartnerAdvances.AdvancesDocument,
+//	|	PartnerAdvances.Amount AS DocumentAmount,
+//	|	PartnerAdvances.Key
+//	|INTO AdvancesToVendors
+//	|FROM
+//	|	InformationRegister.T1002I_PartnerAdvances AS PartnerAdvances
+//	|WHERE
+//	|	PartnerAdvances.Recorder = &Recorder";
+//	Query.SetParameter("Recorder", Recorder);
+//	Query.Execute();
+//EndProcedure
 
 Procedure Drop_VendorsTransactions(Parameters)
 	Query = New Query();
@@ -337,12 +337,12 @@ Procedure Drop_VendorsTransactions(Parameters)
 	Query.Execute();
 EndProcedure
 
-Procedure Drop_AdvancesToVendors(Parameters)
-	Query = New Query();
-	Query.TempTablesManager = Parameters.TempTablesManager;
-	Query.Text = "DROP AdvancesToVendors";
-	Query.Execute();	
-EndProcedure
+//Procedure Drop_AdvancesToVendors(Parameters)
+//	Query = New Query();
+//	Query.TempTablesManager = Parameters.TempTablesManager;
+//	Query.Text = "DROP AdvancesToVendors";
+//	Query.Execute();	
+//EndProcedure
 
 // OffsetOfAdvance
 //  *Period

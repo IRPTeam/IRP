@@ -444,7 +444,7 @@ Scenario: _2050008 check of movements in case of cancellation and re-post of Inv
 	* Check for no movement
 		And I click "Registrations report" button
 		And "ResultTable" spreadsheet document does not contain values
-		| Register  "Partner AR transactions" |
+		| Register  "R2021 Customer transactions" |
 		And I close current window
 	* Re-post and check movements
 		Given I open hyperlink "e1cib/list/Document.InvoiceMatch"
@@ -458,7 +458,7 @@ Scenario: _2050008 check of movements in case of cancellation and re-post of Inv
 		And "ResultTable" spreadsheet document contains lines:
 		| '$$InvoiceMatch2050007$$'             | ''            | ''       | ''          | ''             | ''                         | ''        | ''             | ''                         | ''         | ''                             | ''                     |
 		| 'Document registrations records'      | ''            | ''       | ''          | ''             | ''                         | ''        | ''             | ''                         | ''         | ''                             | ''                     |
-		| 'Register  "Partner AR transactions"' | ''            | ''       | ''          | ''             | ''                         | ''        | ''             | ''                         | ''         | ''                             | ''                     |
+		| 'Register  "R2021 Customer transactions"' | ''            | ''       | ''          | ''             | ''                         | ''        | ''             | ''                         | ''         | ''                             | ''                     |
 		| ''                                    | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                         | ''        | ''             | ''                         | ''         | ''                             | 'Attributes'           |
 		| ''                                    | ''            | ''       | 'Amount'    | 'Company'      | 'Basis document'           | 'Partner' | 'Legal name'   | 'Partner term'             | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
 		| ''                                    | 'Expense'     | '*'      | '-2 000'    | 'Main Company' | '$$SalesInvoice2040002$$'  | 'Crystal' | 'Company Adel' | 'Basic Partner terms, TRY' | 'TRY'      | 'en description is empty'      | 'No'                   |

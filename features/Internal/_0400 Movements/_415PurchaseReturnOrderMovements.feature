@@ -67,7 +67,7 @@ Scenario: _041500 preparation (Purchase return order)
 	* Load Bank payment
 	When Create document BankPayment objects (check movements, advance)
 	And I execute 1C:Enterprise script at server
-			| "Documents.BankPayment.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |	
+			| "Documents.BankPayment.FindByNumber(10).GetObject().Write(DocumentWriteMode.Posting);" |	
 	* Load PO
 	When Create document PurchaseOrder objects (check movements, GR before PI, Use receipt sheduling)
 	When Create document PurchaseOrder objects (check movements, GR before PI, not Use receipt sheduling)

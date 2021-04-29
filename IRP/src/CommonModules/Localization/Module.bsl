@@ -235,6 +235,8 @@ Function Strings(Lang) Export
 	
 	Strings.Insert("Error_065", NStr("en = 'Item key is not unique.'", Lang));
 	Strings.Insert("Error_066", NStr("en = 'Specification is not unique.'", Lang));
+	Strings.Insert("Error_067", NStr("en = 'Fill Users or Group tables.'", Lang));
+
 
 	// %1 - 12
 	// %2 - Boots

@@ -67,7 +67,7 @@ Scenario: _04096 preparation (Purchase invoice)
 	* Load Bank payment
 	When Create document BankPayment objects (check movements, advance)
 	And I execute 1C:Enterprise script at server
-			| "Documents.BankPayment.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |	
+			| "Documents.BankPayment.FindByNumber(10).GetObject().Write(DocumentWriteMode.Posting);" |	
 	* Load PO
 	When Create document PurchaseOrder objects (check movements, GR before PI, Use receipt sheduling)
 	When Create document PurchaseOrder objects (check movements, GR before PI, not Use receipt sheduling)
@@ -138,7 +138,7 @@ Scenario: _04097 check Purchase invoice movements by the Register  "R1021 Vendor
 			| 'Document registrations records'                 | ''            | ''                    | ''          | ''             | ''                             | ''         | ''                  | ''          | ''                   | ''                                               | ''                     | ''                  |
 			| 'Register  "R1021 Vendors transactions"'         | ''            | ''                    | ''          | ''             | ''                             | ''         | ''                  | ''          | ''                   | ''                                               | ''                     | ''                  |
 			| ''                                               | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                             | ''         | ''                  | ''          | ''                   | ''                                               | 'Attributes'           | ''                  |
-			| ''                                               | ''            | ''                    | 'Amount'    | 'Company'      | 'Multi currency movement type' | 'Currency' | 'Legal name'        | 'Partner'   | 'Agreement'          | 'Basis'                                          | 'Deferred calculation' | 'Offset of advance' |
+			| ''                                               | ''            | ''                    | 'Amount'    | 'Company'      | 'Multi currency movement type' | 'Currency' | 'Legal name'        | 'Partner'   | 'Agreement'          | 'Basis'                                          | 'Deferred calculation' | 'Vendors advances closing' |
 			| ''                                               | 'Receipt'     | '12.02.2021 15:13:56' | '393,76'    | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Company Ferron BP' | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Purchase invoice 115 dated 12.02.2021 15:13:56' | 'No'                   | 'No'                |
 			| ''                                               | 'Receipt'     | '12.02.2021 15:13:56' | '2 300'     | 'Main Company' | 'Local currency'               | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Purchase invoice 115 dated 12.02.2021 15:13:56' | 'No'                   | 'No'                |
 			| ''                                               | 'Receipt'     | '12.02.2021 15:13:56' | '2 300'     | 'Main Company' | 'TRY'                          | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Purchase invoice 115 dated 12.02.2021 15:13:56' | 'No'                   | 'No'                |

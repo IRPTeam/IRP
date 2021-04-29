@@ -555,41 +555,15 @@ Scenario: _400003 opening entry advance balance
 		And I delete "$$OpeningEntry400003$$" variable
 		And I save the value of "Number" field as "$$NumberOpeningEntry400003$$"
 		And I save the window as "$$OpeningEntry400003$$"
-	* Check movements
-		And I click "Registrations report" button
-		And I select "Accounts statement" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| '$$OpeningEntry400003$$'         | ''            | ''       | ''                     | ''               | ''                       | ''               | ''             | ''          | ''                  | ''               | ''         |
-		| 'Document registrations records' | ''            | ''       | ''                     | ''               | ''                       | ''               | ''             | ''          | ''                  | ''               | ''         |
-		| 'Register  "Accounts statement"' | ''            | ''       | ''                     | ''               | ''                       | ''               | ''             | ''          | ''                  | ''               | ''         |
-		| ''                               | 'Record type' | 'Period' | 'Resources'            | ''               | ''                       | ''               | 'Dimensions'   | ''          | ''                  | ''               | ''         |
-		| ''                               | ''            | ''       | 'Advance to suppliers' | 'Transaction AP' | 'Advance from customers' | 'Transaction AR' | 'Company'      | 'Partner'   | 'Legal name'        | 'Basis document' | 'Currency' |
-		| ''                               | 'Receipt'     | '*'      | ''                     | ''               | '100'                    | ''               | 'Main Company' | 'Kalipso'   | 'Company Kalipso'   | ''               | 'TRY'      |
-		| ''                               | 'Receipt'     | '*'      | '100'                  | ''               | ''                       | ''               | 'Main Company' | 'Ferron BP' | 'Company Ferron BP' | ''               | 'TRY'      |
-	
-		And I select "Advance from customers" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Advance from customers"' | ''            | ''       | ''          | ''             | ''        | ''                | ''         | ''                       | ''                             | ''                     | '' |
-		| ''                                   | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''        | ''                | ''         | ''                       | ''                             | 'Attributes'           | '' |
-		| ''                                   | ''            | ''       | 'Amount'    | 'Company'      | 'Partner' | 'Legal name'      | 'Currency' | 'Receipt document'       | 'Multi currency movement type' | 'Deferred calculation' | '' |
-		| ''                                   | 'Receipt'     | '*'      | '17,12'     | 'Main Company' | 'Kalipso' | 'Company Kalipso' | 'USD'      | '$$OpeningEntry400003$$' | 'Reporting currency'           | 'No'                   | '' |
-		| ''                                   | 'Receipt'     | '*'      | '100'       | 'Main Company' | 'Kalipso' | 'Company Kalipso' | 'TRY'      | '$$OpeningEntry400003$$' | 'en description is empty'      | 'No'                   | '' |
-		| ''                                   | 'Receipt'     | '*'      | '100'       | 'Main Company' | 'Kalipso' | 'Company Kalipso' | 'TRY'      | '$$OpeningEntry400003$$' | 'Local currency'               | 'No'                   | '' |
-		And I select "Advance to suppliers" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Advance to suppliers"'     | ''            | ''       | ''                     | ''               | ''                       | ''                  | ''             | ''                       | ''                             | ''                     | ''         |
-		| ''                                     | 'Record type' | 'Period' | 'Resources'            | 'Dimensions'     | ''                       | ''                  | ''             | ''                       | ''                             | 'Attributes'           | ''         |
-		| ''                                     | ''            | ''       | 'Amount'               | 'Company'        | 'Partner'                | 'Legal name'        | 'Currency'     | 'Payment document'       | 'Multi currency movement type' | 'Deferred calculation' | ''         |
-		| ''                                     | 'Receipt'     | '*'      | '17,12'                | 'Main Company'   | 'Ferron BP'              | 'Company Ferron BP' | 'USD'          | '$$OpeningEntry400003$$' | 'Reporting currency'           | 'No'                   | ''         |
-		| ''                                     | 'Receipt'     | '*'      | '100'                  | 'Main Company'   | 'Ferron BP'              | 'Company Ferron BP' | 'TRY'          | '$$OpeningEntry400003$$' | 'en description is empty'      | 'No'                   | ''         |
-		| ''                                     | 'Receipt'     | '*'      | '100'                  | 'Main Company'   | 'Ferron BP'              | 'Company Ferron BP' | 'TRY'          | '$$OpeningEntry400003$$' | 'Local currency'               | 'No'                   | ''         |
+	* Check creation
+		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
+		And "List" table contains lines
+			| 'Number' |
+			|  '$$NumberOpeningEntry400003$$'    |
 		And I close all client application windows
 
 
-Scenario: _400004 opening entry AP balance by partner terms (vendors)
+Scenario: _400004 opening entry Vendors transaction by partner terms (vendors)
 	* Open document form opening entry
 		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
 		And I click the button named "FormCreate"
@@ -667,32 +641,15 @@ Scenario: _400004 opening entry AP balance by partner terms (vendors)
 		And I save the window as "$$OpeningEntry400004$$"
 		And I click the button named "FormPostAndClose"
 		And Delay 5
-		* Check movements
-			And I click "Registrations report" button
-			And I select "Accounts statement" exact value from "Register" drop-down list
-			And I click "Generate report" button
-			And "ResultTable" spreadsheet document contains lines:
-			| '$$OpeningEntry400004$$'         | ''            | ''       | ''                     | ''               | ''                       | ''               | ''             | ''        | ''           | ''               | ''         |
-			| 'Document registrations records' | ''            | ''       | ''                     | ''               | ''                       | ''               | ''             | ''        | ''           | ''               | ''         |
-			| 'Register  "Accounts statement"' | ''            | ''       | ''                     | ''               | ''                       | ''               | ''             | ''        | ''           | ''               | ''         |
-			| ''                               | 'Record type' | 'Period' | 'Resources'            | ''               | ''                       | ''               | 'Dimensions'   | ''        | ''           | ''               | ''         |
-			| ''                               | ''            | ''       | 'Advance to suppliers' | 'Transaction AP' | 'Advance from customers' | 'Transaction AR' | 'Company'      | 'Partner' | 'Legal name' | 'Basis document' | 'Currency' |
-			| ''                               | 'Receipt'     | '*'      | ''                     | '100'            | ''                       | ''               | 'Main Company' | 'DFC'     | 'DFC'        | ''               | 'TRY'      |
-		
-			And I select "R1021 Vendors transactions" exact value from "Register" drop-down list
-			And I click "Generate report" button
-			And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Partner AP transactions"'  | ''            | ''       | ''                     | ''               | ''                       | ''               | ''             | ''                            | ''           | ''                             | ''                     |
-			| ''                                     | 'Record type' | 'Period' | 'Resources'            | 'Dimensions'     | ''                       | ''               | ''             | ''                            | ''           | ''                             | 'Attributes'           |
-			| ''                                     | ''            | ''       | 'Amount'               | 'Company'        | 'Basis document'         | 'Partner'        | 'Legal name'   | 'Partner term'                | 'Currency'   | 'Multi currency movement type' | 'Deferred calculation' |
-			| ''                                     | 'Receipt'     | '*'      | '17,12'                | 'Main Company'   | ''                       | 'DFC'            | 'DFC'          | 'DFC Vendor by Partner terms' | 'USD'        | 'Reporting currency'           | 'No'                   |
-			| ''                                     | 'Receipt'     | '*'      | '100'                  | 'Main Company'   | ''                       | 'DFC'            | 'DFC'          | 'DFC Vendor by Partner terms' | 'TRY'        | 'en description is empty'      | 'No'                   |
-			| ''                                     | 'Receipt'     | '*'      | '100'                  | 'Main Company'   | ''                       | 'DFC'            | 'DFC'          | 'DFC Vendor by Partner terms' | 'TRY'        | 'Local currency'               | 'No'                   |
-			| ''                                     | 'Receipt'     | '*'      | '100'                  | 'Main Company'   | ''                       | 'DFC'            | 'DFC'          | 'DFC Vendor by Partner terms' | 'TRY'        | 'TRY'                          | 'No'                   |
-
+	* Check creation
+		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
+		And "List" table contains lines
+			| 'Number' |
+			|  '$$NumberOpeningEntry400004$$'    |
+		And I close all client application windows
 
 	
-Scenario: _400005 opening entry AR balance by partner terms (customers)
+Scenario: _400005 opening entry Customers transactions by partner terms (customers)
 	* Open document form opening entry
 		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
 		And I click the button named "FormCreate"
@@ -770,32 +727,16 @@ Scenario: _400005 opening entry AR balance by partner terms (customers)
 		And I save the window as "$$OpeningEntry400005$$"
 		And I click the button named "FormPostAndClose"
 		And Delay 5
-	* Check movements
-		And I click "Registrations report" button
-		And I select "R2021 Customer transactions" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| '$$OpeningEntry400005$$'              | ''            | ''       | ''          | ''             | ''               | ''        | ''           | ''                              | ''         | ''                             | ''                     |
-			| 'Document registrations records'      | ''            | ''       | ''          | ''             | ''               | ''        | ''           | ''                              | ''         | ''                             | ''                     |
-			| 'Register  "Partner AR transactions"' | ''            | ''       | ''          | ''             | ''               | ''        | ''           | ''                              | ''         | ''                             | ''                     |
-			| ''                                    | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''               | ''        | ''           | ''                              | ''         | ''                             | 'Attributes'           |
-			| ''                                    | ''            | ''       | 'Amount'    | 'Company'      | 'Basis document' | 'Partner' | 'Legal name' | 'Partner term'                  | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
-			| ''                                    | 'Receipt'     | '*'      | '17,12'     | 'Main Company' | ''               | 'DFC'     | 'DFC'        | 'DFC Customer by Partner terms' | 'USD'      | 'Reporting currency'           | 'No'                   |
-			| ''                                    | 'Receipt'     | '*'      | '100'       | 'Main Company' | ''               | 'DFC'     | 'DFC'        | 'DFC Customer by Partner terms' | 'TRY'      | 'en description is empty'      | 'No'                   |
-			| ''                                    | 'Receipt'     | '*'      | '100'       | 'Main Company' | ''               | 'DFC'     | 'DFC'        | 'DFC Customer by Partner terms' | 'TRY'      | 'Local currency'               | 'No'                   |
-			| ''                                    | 'Receipt'     | '*'      | '100'       | 'Main Company' | ''               | 'DFC'     | 'DFC'        | 'DFC Customer by Partner terms' | 'TRY'      | 'TRY'                          | 'No'                   |
-		And I select "Accounts statement" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Accounts statement"' | ''            | ''       | ''                     | ''               | ''                       | ''               | ''             | ''        | ''           | ''               | ''         |
-			| ''                               | 'Record type' | 'Period' | 'Resources'            | ''               | ''                       | ''               | 'Dimensions'   | ''        | ''           | ''               | ''         |
-			| ''                               | ''            | ''       | 'Advance to suppliers' | 'Transaction AP' | 'Advance from customers' | 'Transaction AR' | 'Company'      | 'Partner' | 'Legal name' | 'Basis document' | 'Currency' |
-			| ''                               | 'Receipt'     | '*'      | ''                     | ''               | ''                       | '100'            | 'Main Company' | 'DFC'     | 'DFC'        | ''               | 'TRY'      |
-	
+	* Check creation
+		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
+		And "List" table contains lines
+			| 'Number' |
+			|  '$$NumberOpeningEntry400005$$'    |
+		And I close all client application windows
 
 
 
-Scenario: _400008 check the entry of the account balance, inventory balance, Ap/Ar balance, advance in one document
+Scenario: _400008 check the entry of the account balance, inventory balance, customers and vendors transactions, advance in one document
 	* Open document form opening entry
 		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
 		And I click the button named "FormCreate"
@@ -979,9 +920,17 @@ Scenario: _400008 check the entry of the account balance, inventory balance, Ap/
 			And I delete "$$OpeningEntry400008$$" variable
 			And I save the value of "Number" field as "$$NumberOpeningEntry400008$$"
 			And I save the window as "$$OpeningEntry400008$$"
+		* Check creation
+			Given I open hyperlink "e1cib/list/Document.OpeningEntry"
+			And "List" table contains lines
+				| 'Number' |
+				|  '$$NumberOpeningEntry400008$$'    |
+			And I close all client application windows
+
+		
 
 
-Scenario: _400009 check the entry of the Ap/Ar balance by documents
+Scenario: _400009 check the entry of the Vendors/Customers transactions by documents
 	* Open document form opening entry
 		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
 		And I click the button named "FormCreate"
@@ -1049,39 +998,13 @@ Scenario: _400009 check the entry of the Ap/Ar balance by documents
 		And I save the value of "Number" field as "$$NumberOpeningEntry400009$$"
 		And I save the value of the field named "Date" as "$$DateOpeningEntry400009$$"
 		And I save the window as "$$OpeningEntry400009$$"
-		And I click "Registrations report" button
-		And I select "R2021 Customer transactions" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| '$$OpeningEntry400009$$'              | ''            | ''                           | ''          | ''             | ''                       | ''        | ''           | ''                 | ''         | ''                             | ''                     |
-			| 'Document registrations records'      | ''            | ''                           | ''          | ''             | ''                       | ''        | ''           | ''                 | ''         | ''                             | ''                     |
-			| 'Register  "Partner AR transactions"' | ''            | ''                           | ''          | ''             | ''                       | ''        | ''           | ''                 | ''         | ''                             | ''                     |
-			| ''                                    | 'Record type' | 'Period'                     | 'Resources' | 'Dimensions'   | ''                       | ''        | ''           | ''                 | ''         | ''                             | 'Attributes'           |
-			| ''                                    | ''            | ''                           | 'Amount'    | 'Company'      | 'Basis document'         | 'Partner' | 'Legal name' | 'Partner term'     | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
-			| ''                                    | 'Receipt'     | '$$DateOpeningEntry400009$$' | '34,24'     | 'Main Company' | '$$OpeningEntry400009$$' | 'DFC'     | 'DFC'        | 'Partner term DFC' | 'USD'      | 'Reporting currency'           | 'No'                   |
-			| ''                                    | 'Receipt'     | '$$DateOpeningEntry400009$$' | '200'       | 'Main Company' | '$$OpeningEntry400009$$' | 'DFC'     | 'DFC'        | 'Partner term DFC' | 'TRY'      | 'Local currency'               | 'No'                   |
-			| ''                                    | 'Receipt'     | '$$DateOpeningEntry400009$$' | '200'       | 'Main Company' | '$$OpeningEntry400009$$' | 'DFC'     | 'DFC'        | 'Partner term DFC' | 'TRY'      | 'TRY'                          | 'No'                   |
-			| ''                                    | 'Receipt'     | '$$DateOpeningEntry400009$$' | '200'       | 'Main Company' | '$$OpeningEntry400009$$' | 'DFC'     | 'DFC'        | 'Partner term DFC' | 'TRY'      | 'en description is empty'      | 'No'                   |
-		And I select "Accounts statement" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Accounts statement"' | ''            | ''                           | ''                     | ''               | ''                       | ''               | ''             | ''        | ''           | ''                       | ''         |
-			| ''                               | 'Record type' | 'Period'                     | 'Resources'            | ''               | ''                       | ''               | 'Dimensions'   | ''        | ''           | ''                       | ''         |
-			| ''                               | ''            | ''                           | 'Advance to suppliers' | 'Transaction AP' | 'Advance from customers' | 'Transaction AR' | 'Company'      | 'Partner' | 'Legal name' | 'Basis document'         | 'Currency' |
-			| ''                               | 'Receipt'     | '$$DateOpeningEntry400009$$' | ''                     | ''               | ''                       | '200'            | 'Main Company' | 'DFC'     | 'DFC'        | '$$OpeningEntry400009$$' | 'TRY'      |
-			| ''                               | 'Receipt'     | '$$DateOpeningEntry400009$$' | ''                     | '100'            | ''                       | ''               | 'Main Company' | 'DFC'     | 'DFC'        | '$$OpeningEntry400009$$' | 'TRY'      |
-	
-		And I select "R1021 Vendors transactions" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Partner AP transactions"'       | ''            | ''                    | ''                     | ''               | ''                                          | ''               | ''             | ''                        | ''           | ''                                          | ''                     |
-			| ''                                          | 'Record type' | 'Period'              | 'Resources'            | 'Dimensions'     | ''                                          | ''               | ''             | ''                        | ''           | ''                                          | 'Attributes'           |
-			| ''                                          | ''            | ''                    | 'Amount'               | 'Company'        | 'Basis document'                            | 'Partner'        | 'Legal name'   | 'Partner term'            | 'Currency'   | 'Multi currency movement type'              | 'Deferred calculation' |
-			| ''                                          | 'Receipt'     | '$$DateOpeningEntry400009$$' | '17,12'                | 'Main Company'   | '$$OpeningEntry400009$$' | 'DFC'            | 'DFC'          | 'Partner term vendor DFC' | 'USD'        | 'Reporting currency'                        | 'No'                   |
-			| ''                                          | 'Receipt'     | '$$DateOpeningEntry400009$$' | '100'                  | 'Main Company'   | '$$OpeningEntry400009$$' | 'DFC'            | 'DFC'          | 'Partner term vendor DFC' | 'TRY'        | 'Local currency'                            | 'No'                   |
-			| ''                                          | 'Receipt'     | '$$DateOpeningEntry400009$$' | '100'                  | 'Main Company'   | '$$OpeningEntry400009$$' | 'DFC'            | 'DFC'          | 'Partner term vendor DFC' | 'TRY'        | 'TRY'                                       | 'No'                   |
-			| ''                                          | 'Receipt'     | '$$DateOpeningEntry400009$$' | '100'                  | 'Main Company'   | '$$OpeningEntry400009$$' | 'DFC'            | 'DFC'          | 'Partner term vendor DFC' | 'TRY'        | 'en description is empty'                   | 'No'                   |
+	* Check creation
+		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
+		And "List" table contains lines
+			| 'Number' |
+			|  '$$NumberOpeningEntry400009$$'    |
 		And I close all client application windows
+
 		
 	
 Scenario: _999999 close TestClient session

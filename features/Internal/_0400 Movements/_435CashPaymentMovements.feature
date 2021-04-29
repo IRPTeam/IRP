@@ -168,9 +168,9 @@ Scenario: _043503 check Cash payment movements by the Register "R1020 Advances t
 			| 'Register  "R1020 Advances to vendors"'    | ''            | ''                    | ''          | ''             | ''                             | ''         | ''                  | ''          | ''      | ''                     | ''                  |
 			| ''                                         | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                             | ''         | ''                  | ''          | ''      | 'Attributes'           | ''                  |
 			| ''                                         | ''            | ''                    | 'Amount'    | 'Company'      | 'Multi currency movement type' | 'Currency' | 'Legal name'        | 'Partner'   | 'Basis' | 'Deferred calculation' | 'Vendors advances closing' |
-			| ''                                         | 'Receipt'     | '05.04.2021 12:40:00' | '171,2'     | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Company Ferron BP' | 'Ferron BP' | ''      | 'No'                   | 'No'                |
-			| ''                                         | 'Receipt'     | '05.04.2021 12:40:00' | '1 000'     | 'Main Company' | 'Local currency'               | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | ''      | 'No'                   | 'No'                |
-			| ''                                         | 'Receipt'     | '05.04.2021 12:40:00' | '1 000'     | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | ''      | 'No'                   | 'No'                |
+			| ''                                         | 'Receipt'     | '05.04.2021 12:40:00' | '171,2'     | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Company Ferron BP' | 'Ferron BP' | ''      | 'No'                   | ''                |
+			| ''                                         | 'Receipt'     | '05.04.2021 12:40:00' | '1 000'     | 'Main Company' | 'Local currency'               | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | ''      | 'No'                   | ''                |
+			| ''                                         | 'Receipt'     | '05.04.2021 12:40:00' | '1 000'     | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | ''      | 'No'                   | ''                |
 	And I close all client application windows
 
 Scenario: _043530 Cash payment clear posting/mark for deletion

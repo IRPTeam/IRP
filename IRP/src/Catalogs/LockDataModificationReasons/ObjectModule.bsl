@@ -26,7 +26,7 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 	EndIf;
 	
 	If Not ForAllUsers Then
-		If Not UserList.Count() AND Not AccessGroupList Then
+		If Not UserList.Count() AND Not AccessGroupList.Count() Then
 			CommonFunctionsClientServer.ShowUsersMessage(R().Error_067);
 			Cancel = True;
 		EndIf;
@@ -39,12 +39,12 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 		EndIf;
 		If IsBlankString(ComparisonType) Then
 			CommonFunctionsClientServer.ShowUsersMessage(
-				StrTemplate(R().Error_010, ThisObject.Metadata().ComparisonType.ComparisonType.Synonym), "Object.ComparisonType");
+				StrTemplate(R().Error_010, ThisObject.Metadata().Attributes.ComparisonType.Synonym), "Object.ComparisonType");
 			Cancel = True;
 		EndIf;
 		If SetValueAsCode AND IsBlankString(Value) Then
 			CommonFunctionsClientServer.ShowUsersMessage(
-				StrTemplate(R().Error_010, ThisObject.Metadata().ComparisonType.Value.Synonym), "Object.Value");
+				StrTemplate(R().Error_010, ThisObject.Metadata().Attributes.Value.Synonym), "Object.Value");
 			Cancel = True;
 		EndIf;		
 	Else

@@ -616,10 +616,6 @@
               <segments>Object.RuleList.Type</segments>
             </paths>
           </dataPath>
-          <handlers>
-            <event>OnChange</event>
-            <name>RuleListTypeOnChange</name>
-          </handlers>
           <extendedTooltip>
             <name>RuleListTypeExtendedTooltip</name>
             <id>25</id>
@@ -941,18 +937,6 @@
           <horizontalAlign>Left</horizontalAlign>
           <autoFill>true</autoFill>
         </autoCommandBar>
-        <handlers>
-          <event>OnStartEdit</event>
-          <name>RuleListOnStartEdit</name>
-        </handlers>
-        <handlers>
-          <event>BeforeRowChange</event>
-          <name>RuleListBeforeRowChange</name>
-        </handlers>
-        <handlers>
-          <event>OnChange</event>
-          <name>RuleListOnChange</name>
-        </handlers>
         <searchStringAddition>
           <visible>true</visible>
           <enabled>true</enabled>

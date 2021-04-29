@@ -354,6 +354,8 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R1020B_AdvancesToVendors());
 	QueryArray.Add(R2021B_CustomersTransactions());
 	QueryArray.Add(R2020B_AdvancesFromCustomers());
+	QueryArray.Add(T1002I_PartnerAdvances());
+	QueryArray.Add(T1001I_PartnerTransactions());
 	Return QueryArray;
 EndFunction
 
@@ -419,13 +421,33 @@ Function R1021B_VendorsTransactions()
 		|	PaymentList.Agreement,
 		|	PaymentList.TransactionDocument AS Basis,
 		|	PaymentList.Key,
-		|	PaymentList.Amount
+		|	PaymentList.Amount,
+		|	UNDEFINED AS VendorsAdvancesClosing
 		|INTO R1021B_VendorsTransactions
 		|FROM
 		|	PaymentList AS PaymentList
 		|WHERE
 		|	PaymentList.IsPaymentToVendor
-		|	AND NOT PaymentList.IsAdvance";
+		|	AND NOT PaymentList.IsAdvance
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	OffsetOfAdvances.Period,
+		|	OffsetOfAdvances.Company,
+		|	OffsetOfAdvances.Partner,
+		|	OffsetOfAdvances.LegalName,
+		|	OffsetOfAdvances.Currency,
+		|	OffsetOfAdvances.Agreement,
+		|	OffsetOfAdvances.TransactionDocument,
+		|	OffsetOfAdvances.Key,
+		|	OffsetOfAdvances.Amount,
+		|	OffsetOfAdvances.Recorder
+		|FROM
+		|	InformationRegister.T1000I_OffsetOfAdvances AS OffsetOfAdvances
+		|WHERE
+		|	OffsetOfAdvances.Document = &Ref";
 EndFunction	
 
 Function R2021B_CustomersTransactions()
@@ -460,13 +482,32 @@ Function R1020B_AdvancesToVendors()
 		|	PaymentList.Currency,
 		|	PaymentList.Basis,
 		|	PaymentList.Amount,
-		|	PaymentList.Key
+		|	PaymentList.Key,
+		|	UNDEFINED AS VendorsAdvancesClosing
 		|INTO R1020B_AdvancesToVendors
 		|FROM
 		|	PaymentList AS PaymentList
 		|WHERE
 		|	PaymentList.IsPaymentToVendor
-		|	AND PaymentList.IsAdvance";	
+		|	AND PaymentList.IsAdvance
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Expense),
+		|	OffsetOfAdvances.Period,
+		|	OffsetOfAdvances.Company,
+		|	OffsetOfAdvances.Partner,
+		|	OffsetOfAdvances.LegalName,
+		|	OffsetOfAdvances.Currency,
+		|	OffsetOfAdvances.AdvancesDocument,
+		|	OffsetOfAdvances.Amount,
+		|	OffsetOfAdvances.Key,
+		|	OffsetOfAdvances.Recorder
+		|FROM
+		|	InformationRegister.T1000I_OffsetOfAdvances AS OffsetOfAdvances
+		|WHERE
+		|	OffsetOfAdvances.Document = &Ref";
 EndFunction
 
 Function R2020B_AdvancesFromCustomers()
@@ -487,6 +528,47 @@ Function R2020B_AdvancesFromCustomers()
 		|WHERE
 		|	PaymentList.IsReturnToCustomer
 		|	AND PaymentList.IsAdvance";	
+EndFunction
+
+Function T1002I_PartnerAdvances()
+	Return
+		"SELECT
+		|	PaymentList.Period,
+		|	PaymentList.Company,
+		|	PaymentList.Partner,
+		|	PaymentList.LegalName,
+		|	PaymentList.Currency,
+		|	PaymentList.Basis AS AdvancesDocument,
+		|	PaymentList.Amount,
+		|	PaymentList.Key,
+		|	TRUE AS IsVendorAdvance
+		|INTO T1002I_PartnerAdvances
+		|FROM
+		|	PaymentList AS PaymentList
+		|WHERE
+		|	PaymentList.IsPaymentToVendor
+		|	AND PaymentList.IsAdvance";	
+EndFunction
+
+Function T1001I_PartnerTransactions()
+	Return
+		"SELECT
+		|	PaymentList.Period,
+		|	PaymentList.Company,
+		|	PaymentList.Partner,
+		|	PaymentList.LegalName,
+		|	PaymentList.Currency,
+		|	PaymentList.Agreement,
+		|	PaymentList.TransactionDocument,
+		|	PaymentList.Key,
+		|	PaymentList.Amount,
+		|	TRUE AS IsPaymentToVendor
+		|INTO T1001I_PartnerTransactions
+		|FROM
+		|	PaymentList AS PaymentList
+		|WHERE
+		|	PaymentList.IsPaymentToVendor
+		|	AND NOT PaymentList.IsAdvance";
 EndFunction
 
 Function R5010B_ReconciliationStatement()

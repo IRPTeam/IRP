@@ -750,7 +750,7 @@ Procedure AdvancesOnMoneyMovements(Parameters, RegisterName, AdvancesTableName, 
 	Query = New Query();
 	Query.TempTablesManager = Parameters.TempTablesManager;
 	Query.Text = StrTemplate(GetQueryTextAdvancesOnMoneyMovements(), RegisterName, AdvancesTableName);
-	Query.SetParameter("Period", New Boundary(Parameters.PointInTime, BoundaryType.Excluding));
+	Query.SetParameter("Period", New Boundary(Parameters.RecorderPointInTime, BoundaryType.Excluding));
 		
 	QueryResult = Query.Execute();
 	TransactionsBalanceTable = QueryResult.Unload();
@@ -854,6 +854,9 @@ Procedure AdvancesOnMoneyMovements(Parameters, RegisterName, AdvancesTableName, 
 	AgingBalanceResult = Query.Execute();
 	AgingBalanceTable = AgingBalanceResult.Unload();
 		
+	Query.Text = "DROP TransactionsBalanceTable";
+	Query.Execute();	
+		
 	FilterFields = 
 		"Period,
 		|Company,
@@ -925,8 +928,8 @@ Function GetQueryTextAdvancesOnMoneyMovements()
 	|		AND Advances.Partner = Transactions.Partner
 	|		AND Advances.LegalName = Transactions.LegalName
 	|		AND Advances.Currency = Transactions.Currency
-	|WHERE
-	|	NOT Advances.IgnoreAdvances
+//	|WHERE
+//	|	NOT Advances.IgnoreAdvances
 	|GROUP BY
 	|	Advances.Period,
 	|	Advances.Company,

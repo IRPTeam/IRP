@@ -113,6 +113,22 @@
     <fillValue xsi:type="core:UndefinedValue"/>
     <mainFilter>true</mainFilter>
   </dimensions>
+  <dimensions uuid="41181326-c13b-47f9-85c5-d832c8e3ceec">
+    <name>IsPaymentToVendor</name>
+    <synonym>
+      <key>en</key>
+      <value>Is payment to vendor</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
   <dimensions uuid="2587026b-b39f-4f3a-aa7b-e6047954e7c1">
     <name>TransactionDocument</name>
     <synonym>

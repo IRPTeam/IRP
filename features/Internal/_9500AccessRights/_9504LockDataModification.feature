@@ -63,6 +63,29 @@ Scenario: 950400 preparation
 		And I input "4" text in "REP_Attribute1" field
 		And I click "Save and close" button
 		And I close all client application windows
+	* Load SI and change it date
+		When Create document SalesInvoice objects (stock control)
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I go to line in "List" table
+			| 'Number' |
+			| '251'    |
+		And I select current line in "List" table
+		And I save "CurrentDate() - 6 * 24 * 60 * 60" in "$$$$Date1$$$$" variable
+		And I input "$$$$Date1$$$$" variable value in "Date" field
+		And I move to the next attribute
+		Then "Update item list info" window is opened
+		And I change checkbox "Do you want to replace filled price types with price type Basic Price Types?"
+		And I change checkbox "Do you want to update filled prices?"
+		And I click "OK" button	
+		And I click "Post and close" button
+		
+				
+		
+				
+
+
+			
+ 		
 		
 		
 				
@@ -117,8 +140,8 @@ Scenario: 950405 create rules for documents
 		And I input "08.10.2020" text in "Value" field
 		And I click Select button of "Lock data modification reasons" field
 		And I go to line in "List" table
-			| 'Code'         |
-			| '000000000001' |
+			| 'Reference'     |
+			| 'Doc lock'      |
 		And I click the button named "FormChoose"
 		And I click "Save and close" button
 	* Create rule for SI (in)
@@ -129,8 +152,8 @@ Scenario: 950405 create rules for documents
 		And I input "Basic Partner terms, without VAT" text in "Value" field
 		And I click Select button of "Lock data modification reasons" field
 		And I go to line in "List" table
-			| 'Code'         |
-			| '000000000001' |
+			| 'Reference'     |
+			| 'Doc lock'      |
 		And I click the button named "FormChoose"
 		And I click "Save and close" button
 		And I close all client application windows
@@ -256,7 +279,42 @@ Scenario: 950405 create rules for documents
 		And I click "Yes" button
 		And I close all client application windows	
 		
+
+
+Scenario: 950405 create rules for documents (number of days from the current date)
+	Given I open hyperlink 'e1cib/list/InformationRegister.LockDataModificationRules'
+	* Create rule for SI (>=)
+		And I click the button named "FormCreate"
+		And I select "Sales invoice" exact value from "Type" drop-down list
+		And I select "Date" exact value from "Attribute" drop-down list
+		And I select ">=" exact value from "Comparison type" drop-down list
+		And I set checkbox "Set value as code"
+		And I input "BegOfDay(CurrentSessionDate()) - 7 * 24 * 60 * 60" text in "Value" field
+		And I click Select button of "Lock data modification reasons" field
+		And I go to line in "List" table
+			| 'Reference'     |
+			| 'Doc lock'      |
+		And I click the button named "FormChoose"
+		And I click "Save and close" button
+	* Check lock data
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I go to line in "List" table
+			| 'Number' |
+			| '251'    |
+		And I select current line in "List" table
+		And I click "Post and close" button
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+		Given Recent TestClient message contains "Data lock reasons:*" string by template
+		Given Recent TestClient message contains "*Doc lock" string by template
+		And I close current window
+		
 				
+		
+				
+
+
+					
 
 
 
@@ -293,8 +351,8 @@ Scenario: 950407 create rules for accumulation register
 		And I select current line in "List" table
 		And I click Select button of "Lock data modification reasons" field
 		And I go to line in "List" table
-			| 'Code'         |
-			| '000000000002' |
+			| 'Reference'     |
+			| 'Register lock' |
 		And I click the button named "FormChoose"
 		And I click "Save and close" button
 	* Create rule for Partner AR transactions (in)
@@ -309,8 +367,8 @@ Scenario: 950407 create rules for accumulation register
 		And I select current line in "List" table
 		And I click Select button of "Lock data modification reasons" field
 		And I go to line in "List" table
-			| 'Code'         |
-			| '000000000002' |
+			| 'Reference'     |
+			| 'Register lock' |
 		And I click the button named "FormChoose"
 		And I click "Save and close" button
 	* Check rules (=)
@@ -449,8 +507,8 @@ Scenario: 950409 create rules for information register (with recorder)
 		And I select current line in "List" table
 		And I click Select button of "Lock data modification reasons" field
 		And I go to line in "List" table
-			| 'Code'         |
-			| '000000000002' |
+			| 'Reference'     |
+			| 'Register lock' |
 		And I click the button named "FormChoose"
 		And I click "Save and close" button
 	* Create rule for Prices by item keys (in)
@@ -465,8 +523,8 @@ Scenario: 950409 create rules for information register (with recorder)
 		And I select current line in "List" table
 		And I click Select button of "Lock data modification reasons" field
 		And I go to line in "List" table
-			| 'Code'         |
-			| '000000000002' |
+			| 'Reference'     |
+			| 'Register lock' |
 		And I click the button named "FormChoose"
 		And I click "Save and close" button
 	* Check rules (=)
@@ -584,8 +642,8 @@ Scenario: 950411 create rules for catalog (<)
 		And I input "10003" text in "Value" field
 		And I click Select button of "Lock data modification reasons" field
 		And I go to line in "List" table
-			| 'Code'         |
-			| '000000000003' |
+			| 'Reference'     |
+			| 'Catalog lock'  |
 		And I click the button named "FormChoose"
 		And I click "Save and close" button	
 	* Check rule
@@ -690,8 +748,8 @@ Scenario: 950412 create rules for catalog (<=)
 		And I input "10003" text in "Value" field
 		And I click Select button of "Lock data modification reasons" field
 		And I go to line in "List" table
-			| 'Code'         |
-			| '000000000003' |
+			| 'Reference'     |
+			| 'Catalog lock'  |
 		And I click the button named "FormChoose"
 		And I click "Save and close" button	
 	* Check rule
@@ -802,8 +860,8 @@ Scenario: 950413 create rules for catalog (>)
 		And I input "10002" text in "Value" field
 		And I click Select button of "Lock data modification reasons" field
 		And I go to line in "List" table
-			| 'Code'         |
-			| '000000000003' |
+			| 'Reference'     |
+			| 'Catalog lock'  |
 		And I click the button named "FormChoose"
 		And I click "Save and close" button	
 	* Check rule
@@ -905,8 +963,8 @@ Scenario: 950414 create rules for catalog (>=)
 		And I input "10002" text in "Value" field
 		And I click Select button of "Lock data modification reasons" field
 		And I go to line in "List" table
-			| 'Code'         |
-			| '000000000003' |
+			| 'Reference'     |
+			| 'Catalog lock'  |
 		And I click the button named "FormChoose"
 		And I click "Save and close" button	
 	* Check rule
@@ -1017,8 +1075,8 @@ Scenario: 950415 create rules for catalog (=)
 		And I input "Clothes" text in "Value" field
 		And I click Select button of "Lock data modification reasons" field
 		And I go to line in "List" table
-			| 'Code'         |
-			| '000000000003' |
+			| 'Reference'     |
+			| 'Catalog lock'  |
 		And I click the button named "FormChoose"
 		And I click "Save and close" button	
 	* Check rule
@@ -1111,8 +1169,8 @@ Scenario: 950416 create rules for catalog (<>)
 		And I input "Clothes" text in "Value" field
 		And I click Select button of "Lock data modification reasons" field
 		And I go to line in "List" table
-			| 'Code'         |
-			| '000000000003' |
+			| 'Reference'     |
+			| 'Catalog lock'  |
 		And I click the button named "FormChoose"
 		And I click "Save and close" button	
 	* Check rule
@@ -1205,8 +1263,8 @@ Scenario: 950417 create rules for catalog (IN HIERARCHY)
 		And I input "Ferron BP" text in "Value" field
 		And I click Select button of "Lock data modification reasons" field
 		And I go to line in "List" table
-			| 'Code'         |
-			| '000000000003' |
+			| 'Reference'     |
+			| 'Catalog lock'  |
 		And I click the button named "FormChoose"
 		And I click "Save and close" button	
 	* Check rule
@@ -1303,8 +1361,8 @@ Scenario: 950418 create rules for catalog (IN)
 		And I click the button named "FormChoose"
 		And I click Select button of "Lock data modification reasons" field
 		And I go to line in "List" table
-			| 'Code'         |
-			| '000000000003' |
+			| 'Reference'     |
+			| 'Catalog lock'  |
 		And I click the button named "FormChoose"
 		And I click "Save and close" button	
 	* Check rule
@@ -1397,8 +1455,8 @@ Scenario: 950420 create rules for information register (without recorder)
 		And I select current line in "List" table	
 		And I click Select button of "Lock data modification reasons" field
 		And I go to line in "List" table
-			| 'Code'         |
-			| '000000000002' |
+			| 'Reference'     |
+			| 'Register lock' |
 		And I click the button named "FormChoose"
 		And I click "Save and close" button
 	* Create rule for Company taxes (in)
@@ -1413,8 +1471,8 @@ Scenario: 950420 create rules for information register (without recorder)
 		And I select current line in "List" table		
 		And I click Select button of "Lock data modification reasons" field
 		And I go to line in "List" table
-			| 'Code'         |
-			| '000000000002' |
+			| 'Reference'     |
+			| 'Register lock' |
 		And I click the button named "FormChoose"
 		And I click "Save and close" button
 	* Check rules (=)
@@ -1592,8 +1650,8 @@ Scenario: 950430 create rules for attribute from extension
 		And I input "4" text in "Value" field
 		And I click Select button of "Lock data modification reasons" field
 		And I go to line in "List" table
-			| 'Code'         |
-			| '000000000003' |
+			| 'Reference'     |
+			| 'Register lock' |
 		And I click the button named "FormChoose"
 		And I click "Save and close" button
 	* Check rules
@@ -1682,10 +1740,10 @@ Scenario: 950480 check access to the Lock data modification for user with role F
 	Given I open hyperlink 'e1cib/list/Catalog.LockDataModificationReasons'
 	And "List" table contains lines
 		| 'ENG'           |
-			| 'Doc lock'      |
-			| 'Register lock' |
-		And I close TestClient session
-		And I connect "Этот клиент" profile of TestClient
+		| 'Doc lock'      |
+		| 'Register lock' |
+	And I close TestClient session
+	And I connect "Этот клиент" profile of TestClient
 			
 
 

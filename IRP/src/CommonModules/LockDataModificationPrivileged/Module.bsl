@@ -228,15 +228,13 @@ Function ModifyDataIsLocked_ByTable(SourceParams, Rules, CheckCurrent, AddInfo =
 	EndDo;
 	Query.Text = "SELECT DISTINCT " + Chars.LF + StrConcat(Fields, "," + Chars.LF) + Chars.LF +
 				 " From " + MetadataName + " AS Table 
-				 |WHERE " + StrConcat(Text, " OR ");
+				 |WHERE " + StrConcat(Text, " AND ");
 	
 	QueryResult = Query.Execute();
 	If QueryResult.IsEmpty() Then
 		Return False;
 	EndIf;
-	ShowInfoAboutLock(QueryResult);
-	Return True;
-
+	Return ShowInfoAboutLock(QueryResult);
 EndFunction
 
 Function DataIsLocked_ByRef(SourceParams, Rules, CheckCurrent, AddInfo = Undefined)
@@ -274,12 +272,11 @@ Function DataIsLocked_ByRef(SourceParams, Rules, CheckCurrent, AddInfo = Undefin
 	If QueryResult.IsEmpty() Then
 		Return False;
 	EndIf;
-	ShowInfoAboutLock(QueryResult);
-	Return True;
+	Return ShowInfoAboutLock(QueryResult);
 EndFunction
 
 
-Procedure ShowInfoAboutLock(QueryResult)
+Function ShowInfoAboutLock(QueryResult)
 
 	Reasons = New Array;
 	ReasonsTable = QueryResult.Unload();
@@ -290,9 +287,12 @@ Procedure ShowInfoAboutLock(QueryResult)
 		EndIf;
 		Reasons.Add(ReasonsTable[0][Column.Name]);
 	EndDo;
-	
-	CommonFunctionsClientServer.ShowUsersMessage(StrConcat(Reasons, Chars.LF));
-EndProcedure
+	If Reasons.Count() > 1 Then
+		CommonFunctionsClientServer.ShowUsersMessage(StrConcat(Reasons, Chars.LF));
+		Return True;
+	EndIf;
+	Return False;
+EndFunction
 
 // Save rule settings.
 // 

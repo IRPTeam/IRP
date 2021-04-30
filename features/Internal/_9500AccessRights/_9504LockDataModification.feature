@@ -109,6 +109,21 @@ Scenario: 950400 preparation
 		And I change checkbox "Do you want to update filled prices?"
 		And I click "OK" button	
 		And I click "Post and close" button
+	* Load SO and change it date
+		When Create document SalesOrder objects
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I go to line in "List" table
+			| 'Number' |
+			| '1'    |
+		And I select current line in "List" table
+		And I save "CurrentDate() - 9 * 24 * 60 * 60" in "$$$$Date1$$$$" variable
+		And I input "$$$$Date1$$$$" variable value in "Date" field
+		And I move to the next attribute
+		And I click "Post and close" button
+	* Load SO and change it date
+		When Create document PurchaseOrder objects
+		And I close all client application windows
+		
 		
 
 Scenario: 950403 check function option UseLockDataModification
@@ -330,6 +345,7 @@ Scenario: 950406 create rules for documents (number of days from the current dat
 	* Change user and check lock data (user without locks)
 		And I close TestClient session
 		Then I connect launched Test client "Этот клиент"
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 		And I go to line in "List" table
 			| 'Number' |
 			| '251'    |
@@ -408,6 +424,7 @@ Scenario: 9504061 create rules for documents (number of days from the current da
 	* Change user and check lock data (user without locks)
 		And I close TestClient session
 		Then I connect launched Test client "Этот клиент"
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 		And I go to line in "List" table
 			| 'Number' |
 			| '251'    |
@@ -415,23 +432,69 @@ Scenario: 9504061 create rules for documents (number of days from the current da
 		And I click "Post and close" button
 		Then user message window does not contain messages
 
-// Scenario: 9504062 create rules for documents (number of days from the current date for all objects)
-// 	Then I connect launched Test client "Этот клиент"
-// 	Given I open hyperlink 'e1cib/list/Catalog.LockDataModificationReasons'
-// 	If "List" table contains lines Then
-// 			| 'Reference'            |
-// 			| 'number of days from the current date for User group' |
-// 		And I go to line in "List" table
-// 			| 'Reference'      |
-// 			| 'number of days from the current date for User' |
-// 		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
-// 		Then "1C:Enterprise" window is opened
-// 		And I click "Yes" button
-// 	* Create rule for all objects
-// 		And I click the button named "FormCreate"
-// 		And I input "number of days from the current date for all objects" text in "ENG" field
-// 		And I set checkbox "Set one rule for all objects"
-// 		And I set checkbox "For all users"
+Scenario: 9504062 create rules for documents (number of days from the current date for all objects)
+	And I close TestClient session
+	And I connect "Этот клиент" profile of TestClient
+	Given I open hyperlink 'e1cib/list/Catalog.LockDataModificationReasons'
+	If "List" table contains lines Then
+			| 'Reference'            |
+			| 'number of days from the current date for User group' |
+		And I go to line in "List" table
+			| 'Reference'      |
+			| 'number of days from the current date for User group' |
+		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+	* Create rule for all objects
+		And I click the button named "FormCreate"
+		And I input "number of days from the current date for all objects" text in "ENG" field
+		And I set checkbox "Set one rule for all objects"
+		And I set checkbox "For all users"
+		Then "Lock data modification reasons (create) *" window is opened
+		And in the table "RuleList" I click the button named "RuleListAdd"
+		And I select "Sales order" exact value from "Type" drop-down list in "RuleList" table
+		And I move to the next attribute
+		And I finish line editing in "RuleList" table
+		And in the table "RuleList" I click the button named "RuleListAdd"
+		And I select "Sales invoice" exact value from "Type" drop-down list in "RuleList" table
+		And I move to the next attribute
+		And I finish line editing in "RuleList" table
+		And I select "Date" exact value from the drop-down list named "Attribute"
+		And I select "<=" exact value from the drop-down list named "ComparisonType"
+		And I set checkbox named "SetValueAsCode"
+		And I input "BegOfDay(CurrentSessionDate()) - 7 * 24 * 60 * 60" text in the field named "Value"
+		And I click "Save and close" button
+	* Check lock data
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I go to line in "List" table
+			| 'Number' |
+			| '251'    |
+		And I select current line in "List" table
+		And I click "Post and close" button
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+		Given Recent TestClient message contains "*number of days from the current date for all objects" string by template
+		And I close current window
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I go to line in "List" table
+			| 'Number' |
+			| '1'    |
+		And I select current line in "List" table
+		And I click "Post and close" button
+		Then "1C:Enterprise" window is opened
+		And I click "OK" button
+		Given Recent TestClient message contains "*number of days from the current date for all objects" string by template
+		And I close current window
+		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
+		And I go to line in "List" table
+			| 'Number' |
+			| '1'    |
+		And I select current line in "List" table
+		And I click "Post and close" button
+		Then user message window does not contain messages
+				
+		
+				
 
 Scenario: 950407 create rules for accumulation register
 	And I close TestClient session
@@ -455,6 +518,16 @@ Scenario: 950407 create rules for accumulation register
 					| '1' |
 				And in the table "List" I click the button named "ListContextMenuCopy"
 				And I click "Post and close" button
+		Given I open hyperlink 'e1cib/list/Catalog.LockDataModificationReasons'
+		If "List" table contains lines Then
+				| 'Reference'            |
+				| 'number of days from the current date for all objects' |
+			And I go to line in "List" table
+				| 'Reference'      |
+				| 'number of days from the current date for all objects' |
+			And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
+			Then "1C:Enterprise" window is opened
+			And I click "Yes" button
 	Given I open hyperlink 'e1cib/list/Catalog.LockDataModificationReasons'
 	* Create rule for R4011 Free stocks (=)
 		And I click the button named "FormCreate"

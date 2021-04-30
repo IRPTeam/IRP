@@ -194,12 +194,12 @@ Function GetAccessGroupsByUser(User = Undefined) Export
 	Query = New Query;
 	Query.Text =
 		"SELECT DISTINCT
-		|	AccessGroupsUsers.User
+		|	AccessGroupsUsers.Ref
 		|FROM
 		|	Catalog.AccessGroups.Users AS AccessGroupsUsers
 		|WHERE
 		|	AccessGroupsUsers.User = &User";
 	Query.Parameters.Insert("User", User);
-	Users = Query.Execute().Unload().UnloadColumn("User");
+	Users = Query.Execute().Unload().UnloadColumn("Ref");
 	Return Users
 EndFunction

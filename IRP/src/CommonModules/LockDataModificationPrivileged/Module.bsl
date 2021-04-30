@@ -108,7 +108,6 @@ EndFunction
 Function CalculateRuleByObject(SourceParams, AddInfo = Undefined)
 	
 	AccessGroups = UsersEvent.GetAccessGroupsByUser();
-	AccessGroups.Add(Catalogs.AccessGroups.EmptyRef());
 	
 	Query = New Query;
 	Query.Text =

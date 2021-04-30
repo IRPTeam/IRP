@@ -10,6 +10,7 @@ Background:
 	Given I launch TestClient opening script or connect the existing one
 
 Scenario: 950400 preparation
+	And I close TestClient session
 	And I connect "Этот клиент" profile of TestClient
 	Given I open hyperlink 'e1cib/list/Document.PriceList'
 	And I go to line in "List" table
@@ -111,15 +112,6 @@ Scenario: 950400 preparation
 		And I click "Post and close" button
 	* Load SO and change it date
 		When Create document SalesOrder objects
-		Given I open hyperlink "e1cib/list/Document.SalesOrder"
-		And I go to line in "List" table
-			| 'Number' |
-			| '1'    |
-		And I select current line in "List" table
-		And I save "CurrentDate() - 9 * 24 * 60 * 60" in "$$$$Date1$$$$" variable
-		And I input "$$$$Date1$$$$" variable value in "Date" field
-		And I move to the next attribute
-		And I click "Post and close" button
 	* Load SO and change it date
 		When Create document PurchaseOrder objects
 		And I close all client application windows
@@ -139,7 +131,6 @@ Scenario: 950403 check function option UseLockDataModification
 	
 
 Scenario: 950405 create reasons for documents with different comparison type
-	And I close all client application windows
 	Given I open hyperlink 'e1cib/list/Catalog.LockDataModificationReasons'
 	* Create rule for SO (<=)
 		And I click the button named "FormCreate"

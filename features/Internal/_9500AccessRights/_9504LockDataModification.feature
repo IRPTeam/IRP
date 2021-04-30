@@ -315,7 +315,7 @@ Scenario: 950406 create rules for documents (number of days from the current dat
 		And I input "BegOfDay(CurrentSessionDate()) - 7 * 24 * 60 * 60" text in the field named "RuleListValue" of "RuleList" table
 		And I finish line editing in "RuleList" table
 		And I click "Save and close" button
-		And I connect "TestAdmin" TestClient using "ABrown" login and "" password
+		And I connect "TestAdmin1" TestClient using "ABrown" login and "" password
 	* Check lock data
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 		And I go to line in "List" table
@@ -395,7 +395,7 @@ Scenario: 9504061 create rules for documents (number of days from the current da
 		And I input "BegOfDay(CurrentSessionDate()) - 7 * 24 * 60 * 60" text in the field named "RuleListValue" of "RuleList" table
 		And I finish line editing in "RuleList" table
 		And I click "Save and close" button
-		And I connect "TestAdmin" TestClient using "ABrown" login and "" password
+		And I connect "TestAdmin1" TestClient using "ABrown" login and "" password
 	* Check lock data
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 		And I go to line in "List" table

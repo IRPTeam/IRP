@@ -112,7 +112,7 @@ Scenario: 950400 preparation
 		And I click "Post and close" button
 	* Load SO and change it date
 		When Create document SalesOrder objects
-	* Load SO and change it date
+	* Load PO
 		When Create document PurchaseOrder objects
 		And I close all client application windows
 		
@@ -278,6 +278,7 @@ Scenario: 950405 create reasons for documents with different comparison type
 
 
 Scenario: 950406 create rules for documents (number of days from the current date for User)
+	And I connect "Этот клиент" profile of TestClient
 	* Preparation
 		Given I open hyperlink 'e1cib/list/Document.SalesInvoice'
 		If "List" table does not contain lines Then
@@ -347,6 +348,7 @@ Scenario: 950406 create rules for documents (number of days from the current dat
 
 
 Scenario: 9504061 create rules for documents (number of days from the current date for User group)
+	And I connect "Этот клиент" profile of TestClient
 	* Preparation
 		Given I open hyperlink 'e1cib/list/Document.SalesInvoice'
 		If "List" table does not contain lines Then

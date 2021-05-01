@@ -3,5 +3,5 @@ Function CurrentAreaStatus() Export
 EndFunction
 
 Function isAreaActive() Export
-	Saas.isAreaActive();
+	Return Saas.isAreaActive();
 EndFunction

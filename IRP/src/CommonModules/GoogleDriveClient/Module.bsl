@@ -1,4 +1,4 @@
-Function Auth(Form) Export
+Procedure Auth(Form) Export
 	ConnectionSetting = IntegrationClientServer.ConnectionSetting(Form.Object.UniqueID);
 	GoogleDriveServer.FillTokenInfo(ConnectionSetting.Value);
 	AddInfo = New Structure;
@@ -8,7 +8,7 @@ Function Auth(Form) Export
 	Params = New Structure("HTML, Type, SrcUUID, AddInfo", ConnectionSetting.Value.oauth2, "GoogleDrive", Form.UUID, AddInfo);
 	OpenForm("CommonForm.HTMLField", Params, Form, , , , , FormWindowOpeningMode.LockOwnerWindow);
 
-EndFunction 
+EndProcedure 
 
 Procedure OnHTMLComplete(Document, UUID, AddInfo) Export 
 	Code = Undefined;

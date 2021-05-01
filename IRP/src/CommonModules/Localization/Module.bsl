@@ -74,6 +74,7 @@ Function Strings(Lang) Export
 	Strings.Insert("S_029", NStr("en = 'Not supporting web client'", Lang));
 	Strings.Insert("S_030", NStr("en = 'Cashback'", Lang));
 	Strings.Insert("S_031", NStr("en = 'or'", Lang));
+	Strings.Insert("S_032", NStr("en = 'Add code, ex: CurrentSessionDate()'", Lang));
 	#EndRegion
 	
 	#Region Service
@@ -234,6 +235,8 @@ Function Strings(Lang) Export
 	
 	Strings.Insert("Error_065", NStr("en = 'Item key is not unique.'", Lang));
 	Strings.Insert("Error_066", NStr("en = 'Specification is not unique.'", Lang));
+	Strings.Insert("Error_067", NStr("en = 'Fill Users or Group tables.'", Lang));
+
 
 	// %1 - 12
 	// %2 - Boots

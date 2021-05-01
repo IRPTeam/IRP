@@ -36,7 +36,7 @@ Procedure CreateUser(UserObject) Export
 		User.Roles.Clear();
 		If Not Saas.isSaasMode() Then
 			For Each Row In Metadata.DefaultRoles Do
-				User.Roles.Add(Row);
+				User.Roles.Add(Metadata.Roles[Row.Name]);
 			EndDo;
 		Else
 			User.Roles.Add(Metadata.Roles.FullAccessInArea);

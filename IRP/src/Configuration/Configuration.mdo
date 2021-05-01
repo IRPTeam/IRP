@@ -155,6 +155,13 @@
   <commonPictures>CommonPicture.Store</commonPictures>
   <commonPictures>CommonPicture.Total</commonPictures>
   <commonPictures>CommonPicture.IconCollection4</commonPictures>
+  <commonPictures>CommonPicture.CommonAttributes</commonPictures>
+  <commonPictures>CommonPicture.Attributes</commonPictures>
+  <commonPictures>CommonPicture.Dimensions</commonPictures>
+  <commonPictures>CommonPicture.StandardAttributes</commonPictures>
+  <commonPictures>CommonPicture.SessionParameter</commonPictures>
+  <commonPictures>CommonPicture.AccountingFlags</commonPictures>
+  <commonPictures>CommonPicture.Recalculations</commonPictures>
   <sessionParameters>SessionParameter.ClientType</sessionParameters>
   <sessionParameters>SessionParameter.ConnectedAddDataProc</sessionParameters>
   <sessionParameters>SessionParameter.ConnectionSettings</sessionParameters>

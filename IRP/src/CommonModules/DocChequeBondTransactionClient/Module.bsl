@@ -286,7 +286,7 @@ Procedure FillDocumentsEnd(Result, AdditionalParameters) Export
 	CurrentData = AdditionalParameters.Form.Items.ChequeBonds.CurrentData;
 	
 	FilterString = "Key, PartnerArBasisDocument, PartnerApBasisDocument";
-	FilterStructure = New Structure(FilterStructure);
+	FilterStructure = New Structure(FilterString);
 	DeleteRows = Object.PaymentList.FindRows(New Structure("Key", CurrentData.Key));
 	
 	For Each Row In DeleteRows Do

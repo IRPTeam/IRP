@@ -1523,6 +1523,11 @@ Scenario: _0154105 check filling in and refilling Purchase order
 				| 'Dress'    | 'L/Green'  |
 			And I activate "Cancel" field in "ItemList" table
 			And I set "Cancel" checkbox in "ItemList" table
+			And I click choice button of "Cancel reason" attribute in "ItemList" table
+			And I go to line in "List" table
+				| 'Description'     |
+				| 'not available'    |
+			And I select current line in "List" table	
 			And I finish line editing in "ItemList" table
 			And I click "Post" button
 			Then the form attribute named "ItemListTotalNetAmount" became equal to "1 220,00"
@@ -5351,6 +5356,11 @@ Scenario: _0154141 check filling in and refilling Purchase order closing
 				| 'Dress'    | 'L/Green'  |
 			And I activate "Cancel" field in "ItemList" table
 			And I set "Cancel" checkbox in "ItemList" table
+			And I click choice button of "Cancel reason" attribute in "ItemList" table
+			And I go to line in "List" table
+				| 'Description'     |
+				| 'not available'    |
+			And I select current line in "List" table	
 			And I finish line editing in "ItemList" table
 			And I click "Post" button
 			Then the form attribute named "ItemListTotalNetAmount" became equal to "1 220,00"

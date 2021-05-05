@@ -117,73 +117,74 @@ Function OffsetOfAdvances(Parameters)
 	Query = New Query();
 	Query.Text = 
 	"SELECT
-	|	PartnerTransactions.Recorder
+	|	PartnerTransactions.Recorder AS Recorder,
+	|	PartnerTransactions.Recorder.Date AS RecorderDate,
+	|	TRUE AS IsVendorTransaction,
+	|	FALSE AS IsVendorAdvance
+	|INTO tmp
 	|FROM
 	|	InformationRegister.T1001I_PartnerTransactions AS PartnerTransactions
 	|WHERE
 	|	PartnerTransactions.Period BETWEEN BEGINOFPERIOD(&BeginOfPeriod, DAY) AND ENDOFPERIOD(&EndOfPeriod, DAY)
 	|	AND PartnerTransactions.IsVendorTransaction
-	|GROUP BY
-	|	PartnerTransactions.Recorder
-	|ORDER BY
-	|	PartnerTransactions.Recorder.Date";
-	Query.SetParameter("BeginOfPeriod", Parameters.Object.BeginOfPeriod);
-	Query.SetParameter("EndOfPeriod"  , Parameters.Object.EndOfPeriod);
-	
-	QueryTable = Query.Execute().Unload();
-	For Each Row In QueryTable Do
-		Parameters.Insert("RecorderPointInTime", Row.Recorder.PointInTime());
-		Create_VendorsTransactions(Row.Recorder, Parameters);
-		OffsetOfPartnersServer.Vendors_OnTransaction(Parameters);
-		Write_AdvancesAndTransactions(Row.Recorder, Parameters, OffsetOfAdvanceFull);
-		Drop_VendorsTransactions(Parameters);
-		Drop_OffsetOfAdvanceToVendors(Parameters);
-	EndDo;
-	
-//	// VendorAdvances
-	Query = New Query();
-	Query.Text = 
-	"SELECT
-	|	PartnerAdvances.Recorder
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	PartnerAdvances.Recorder,
+	|	PartnerAdvances.Recorder.Date,
+	|	FALSE,
+	|	TRUE
 	|FROM
 	|	InformationRegister.T1002I_PartnerAdvances AS PartnerAdvances
 	|WHERE
 	|	PartnerAdvances.Period BETWEEN BEGINOFPERIOD(&BeginOfPeriod, DAY) AND ENDOFPERIOD(&EndOfPeriod, DAY)
 	|	AND PartnerAdvances.IsVendorAdvance
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	tmp.Recorder,
+	|	tmp.IsVendorTransaction,
+	|	tmp.IsVendorAdvance
+	|FROM
+	|	tmp AS tmp
 	|GROUP BY
-	|	PartnerAdvances.Recorder
+	|	tmp.Recorder,
+	|	tmp.IsVendorTransaction,
+	|	tmp.IsVendorAdvance,
+	|	tmp.RecorderDate
 	|ORDER BY
-	|	PartnerAdvances.Recorder.Date";
+	|	tmp.RecorderDate";
 	Query.SetParameter("BeginOfPeriod", Parameters.Object.BeginOfPeriod);
 	Query.SetParameter("EndOfPeriod"  , Parameters.Object.EndOfPeriod);
 	
 	QueryTable = Query.Execute().Unload();
 	For Each Row In QueryTable Do
 		Parameters.Insert("RecorderPointInTime", Row.Recorder.PointInTime());
-		Create_AdvancesToVendors(Row.Recorder, Parameters);
-		Create_PaymentToVendors(Row.Recorder, Parameters);
-		OffsetOfPartnersServer.Vendors_OnMoneyMovements(Parameters);
-		Write_AdvancesAndTransactions(Row.Recorder, Parameters, OffsetOfAdvanceFull, True);
-		Drop_VendorsTransactions(Parameters);
-		Drop_AdvancesToVendors(Parameters);
-		Drop_OffsetOfAdvanceToVendors(Parameters);
+		If Row.IsVendorTransaction Then
+			Create_VendorsTransactions(Row.Recorder, Parameters);
+			OffsetOfPartnersServer.Vendors_OnTransaction(Parameters);
+			Write_AdvancesAndTransactions(Row.Recorder, Parameters, OffsetOfAdvanceFull);
+			Drop_VendorsTransactions(Parameters);
+			Drop_OffsetOfAdvanceToVendors(Parameters);
+		EndIf;
+		
+		If Row.IsVendorAdvance Then
+			Create_AdvancesToVendors(Row.Recorder, Parameters);
+			Create_PaymentToVendors(Row.Recorder, Parameters);
+			OffsetOfPartnersServer.Vendors_OnMoneyMovements(Parameters);
+			Write_AdvancesAndTransactions(Row.Recorder, Parameters, OffsetOfAdvanceFull, True);
+			Drop_VendorsTransactions(Parameters);
+			Drop_AdvancesToVendors(Parameters);
+			Drop_OffsetOfAdvanceToVendors(Parameters);
+		EndIf;
 	EndDo;
-	
+		
 	Query = New Query();
 	Query.TempTablesManager = Parameters.TempTablesManager;
 	Query.Text = 
 	"SELECT *
-//	|	OffsetOfAdvanceFull.Period,
-//	|	OffsetOfAdvanceFull.Document,
-//	|	OffsetOfAdvanceFull.Company,
-//	|	OffsetOfAdvanceFull.Currency,
-//	|	OffsetOfAdvanceFull.Partner,
-//	|	OffsetOfAdvanceFull.LegalName,
-//	|	OffsetOfAdvanceFull.TransactionDocument,
-//	|	OffsetOfAdvanceFull.AdvancesDocument,
-//	|	OffsetOfAdvanceFull.Agreement,
-//	|	OffsetOfAdvanceFull.Amount,
-//	|	OffsetOfAdvanceFull.Key
 	|INTO OffsetOfAdvances 
 	|	FROM &OffsetOfAdvanceFull AS OffsetOfAdvanceFull";
 	Query.SetParameter("OffsetOfAdvanceFull", OffsetOfAdvanceFull);

@@ -158,7 +158,7 @@ Scenario: _1002002 create VendorsAdvancesClosing
 	And I click "Post and close" button
 
 Scenario: _1002003 check PI closing by advance
-	Given I open hyperlink "e1cib/list/Document.VendorsAdvancesClosing"
+	Given I open hyperlink "e1cib/list/AccumulationRegister.R1021B_VendorsTransactions"
 	And "List" table contains lines
 		| 'Period'              | 'Recorder'                                       | 'Currency' | 'Company'      | 'Partner'   | 'Amount'   | 'Multi currency movement type' | 'Legal name'        | 'Agreement'          | 'Basis'                                          | 'Deferred calculation' | 'Vendors advances closing'                             |
 		| '12.02.2021 15:12:15' | 'Purchase invoice 117 dated 12.02.2021 15:12:15' | 'TRY'      | 'Main Company' | 'Ferron BP' | '4 470,00' | 'TRY'                          | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'Purchase invoice 117 dated 12.02.2021 15:12:15' | 'No'                   | ''                                                     |
@@ -201,7 +201,6 @@ Scenario: _1002003 check PI closing by advance
 		| '15.03.2021 12:00:00' | 'Cash payment 24 dated 15.03.2021 12:00:00'      | 'TRY'      | 'Main Company' | 'Ferron BP' | '2 070,00' | 'Local currency'               | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'Purchase invoice 118 dated 12.02.2021 16:08:41' | 'No'                   | ''                                                     |
 		| '15.03.2021 12:00:00' | 'Cash payment 24 dated 15.03.2021 12:00:00'      | 'USD'      | 'Main Company' | 'Ferron BP' | '354,38'   | 'Reporting currency'           | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'Purchase invoice 118 dated 12.02.2021 16:08:41' | 'No'                   | ''                                                     |
 		| '15.03.2021 12:00:00' | 'Cash payment 24 dated 15.03.2021 12:00:00'      | 'TRY'      | 'Main Company' | 'Ferron BP' | '2 070,00' | 'en description is empty'      | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'Purchase invoice 118 dated 12.02.2021 16:08:41' | 'No'                   | ''                                                     |
-	Then the number of "List" table lines is "равно" "40"
 	Given I open hyperlink "e1cib/list/AccumulationRegister.R1020B_AdvancesToVendors"
 	And "List" table contains lines
 		| 'Period'              | 'Recorder'                                       | 'Currency' | 'Company'      | 'Partner'   | 'Amount'   | 'Multi currency movement type' | 'Legal name'        | 'Basis'                                     | 'Deferred calculation' | 'Vendors advances closing'                             |
@@ -259,7 +258,8 @@ Scenario: _1002003 check PI closing by advance
 		| '30.04.2021 12:00:00' | 'Bank payment 14 dated 30.04.2021 12:00:00'      | 'TRY'      | 'Main Company' | 'Ferron BP' | '2 251,00' | 'Local currency'               | 'Company Ferron BP' | 'Bank payment 14 dated 30.04.2021 12:00:00' | 'No'                   | ''                                                     |
 		| '30.04.2021 12:00:00' | 'Bank payment 14 dated 30.04.2021 12:00:00'      | 'USD'      | 'Main Company' | 'Ferron BP' | '400,00'   | 'Reporting currency'           | 'Company Ferron BP' | 'Bank payment 14 dated 30.04.2021 12:00:00' | 'No'                   | ''                                                     |
 		| '30.04.2021 12:00:00' | 'Bank payment 14 dated 30.04.2021 12:00:00'      | 'USD'      | 'Main Company' | 'Ferron BP' | '400,00'   | 'en description is empty'      | 'Company Ferron BP' | 'Bank payment 14 dated 30.04.2021 12:00:00' | 'No'                   | ''                                                     |
-	Then the number of "List" table lines is "равно" "54"
+	And I close all client application windows
+	
 
 Scenario: _1002004 check PI movements when unpost document and post it back (closing by advance)
 	* Check movements

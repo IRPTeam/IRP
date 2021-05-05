@@ -180,6 +180,7 @@ Scenario: _042903 check Opening entry movements by the Register  "R3010 Cash on 
 			| ''                                          | 'Receipt'     | '07.09.2020 21:26:04' | '58 400'    | 'Main Company' | 'Bank account, TRY' | 'USD'      | 'Reporting currency'           | 'No'                   |
 		And I close all client application windows
 
+
 Scenario: _042905 check Opening entry movements by the Register  "R1020 Advances to vendors" 
 	And I close all client application windows
 	* Select Opening entry
@@ -288,15 +289,15 @@ Scenario: _042909 check Opening entry movements by the Register  "R2021 Customer
 		And I select "R2021 Customer transactions" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Opening entry 9 dated 07.09.2020 21:27:57' | ''            | ''                    | ''          | ''             | ''                             | ''         | ''           | ''        | ''                        | ''                                          | ''                     | ''                         |
-			| 'Document registrations records'            | ''            | ''                    | ''          | ''             | ''                             | ''         | ''           | ''        | ''                        | ''                                          | ''                     | ''                         |
-			| 'Register  "R1021 Vendors transactions"'    | ''            | ''                    | ''          | ''             | ''                             | ''         | ''           | ''        | ''                        | ''                                          | ''                     | ''                         |
-			| ''                                          | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                             | ''         | ''           | ''        | ''                        | ''                                          | 'Attributes'           | ''                         |
-			| ''                                          | ''            | ''                    | 'Amount'    | 'Company'      | 'Multi currency movement type' | 'Currency' | 'Legal name' | 'Partner' | 'Agreement'               | 'Basis'                                     | 'Deferred calculation' | 'Vendors advances closing' |
-			| ''                                          | 'Receipt'     | '07.09.2020 21:27:57' | '100'       | 'Main Company' | 'Local currency'               | 'TRY'      | 'DFC'        | 'DFC'     | 'Partner term vendor DFC' | 'Opening entry 9 dated 07.09.2020 21:27:57' | 'No'                   | ''                         |
-			| ''                                          | 'Receipt'     | '07.09.2020 21:27:57' | '100'       | 'Main Company' | 'TRY'                          | 'TRY'      | 'DFC'        | 'DFC'     | 'Partner term vendor DFC' | 'Opening entry 9 dated 07.09.2020 21:27:57' | 'No'                   | ''                         |
-			| ''                                          | 'Receipt'     | '07.09.2020 21:27:57' | '100'       | 'Main Company' | 'en description is empty'      | 'TRY'      | 'DFC'        | 'DFC'     | 'Partner term vendor DFC' | 'Opening entry 9 dated 07.09.2020 21:27:57' | 'No'                   | ''                         |
-			| ''                                          | 'Receipt'     | '07.09.2020 21:27:57' | '584'       | 'Main Company' | 'Reporting currency'           | 'USD'      | 'DFC'        | 'DFC'     | 'Partner term vendor DFC' | 'Opening entry 9 dated 07.09.2020 21:27:57' | 'No'                   | ''                         |
+			| 'Opening entry 9 dated 07.09.2020 21:27:57' | ''            | ''                    | ''          | ''             | ''                             | ''         | ''           | ''        | ''                 | ''                                          | ''                     | ''                  |
+			| 'Document registrations records'            | ''            | ''                    | ''          | ''             | ''                             | ''         | ''           | ''        | ''                 | ''                                          | ''                     | ''                  |
+			| 'Register  "R2021 Customer transactions"'   | ''            | ''                    | ''          | ''             | ''                             | ''         | ''           | ''        | ''                 | ''                                          | ''                     | ''                  |
+			| ''                                          | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                             | ''         | ''           | ''        | ''                 | ''                                          | 'Attributes'           | ''                  |
+			| ''                                          | ''            | ''                    | 'Amount'    | 'Company'      | 'Multi currency movement type' | 'Currency' | 'Legal name' | 'Partner' | 'Agreement'        | 'Basis'                                     | 'Deferred calculation' | 'Offset of advance' |
+			| ''                                          | 'Receipt'     | '07.09.2020 21:27:57' | '34'        | 'Main Company' | 'Reporting currency'           | 'USD'      | 'DFC'        | 'DFC'     | 'Partner term DFC' | 'Opening entry 9 dated 07.09.2020 21:27:57' | 'No'                   | 'No'                |
+			| ''                                          | 'Receipt'     | '07.09.2020 21:27:57' | '200'       | 'Main Company' | 'Local currency'               | 'TRY'      | 'DFC'        | 'DFC'     | 'Partner term DFC' | 'Opening entry 9 dated 07.09.2020 21:27:57' | 'No'                   | 'No'                |
+			| ''                                          | 'Receipt'     | '07.09.2020 21:27:57' | '200'       | 'Main Company' | 'TRY'                          | 'TRY'      | 'DFC'        | 'DFC'     | 'Partner term DFC' | 'Opening entry 9 dated 07.09.2020 21:27:57' | 'No'                   | 'No'                |
+			| ''                                          | 'Receipt'     | '07.09.2020 21:27:57' | '200'       | 'Main Company' | 'en description is empty'      | 'TRY'      | 'DFC'        | 'DFC'     | 'Partner term DFC' | 'Opening entry 9 dated 07.09.2020 21:27:57' | 'No'                   | 'No'                |
 		And I close all client application windows
 
 Scenario: _042910 check Opening entry movements by the Register  "R2021 Customer transactions" by partner term 
@@ -321,6 +322,7 @@ Scenario: _042910 check Opening entry movements by the Register  "R2021 Customer
 			| ''                                          | 'Receipt'     | '07.09.2020 21:27:18' | '100'       | 'Main Company' | 'en description is empty'      | 'TRY'      | 'DFC'        | 'DFC'     | 'DFC Customer by Partner terms' | ''      | 'No'                   | 'No'                |
 			| ''                                          | 'Receipt'     | '07.09.2020 21:27:18' | '584'       | 'Main Company' | 'Reporting currency'           | 'USD'      | 'DFC'        | 'DFC'     | 'DFC Customer by Partner terms' | ''      | 'No'                   | 'No'                |
 		And I close all client application windows
+
 
 
 Scenario: _042930 Opening entry clear posting/mark for deletion

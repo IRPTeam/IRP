@@ -928,8 +928,6 @@ Function GetQueryTextAdvancesOnMoneyMovements()
 	|		AND Advances.Partner = Transactions.Partner
 	|		AND Advances.LegalName = Transactions.LegalName
 	|		AND Advances.Currency = Transactions.Currency
-//	|WHERE
-//	|	NOT Advances.IgnoreAdvances
 	|GROUP BY
 	|	Advances.Period,
 	|	Advances.Company,

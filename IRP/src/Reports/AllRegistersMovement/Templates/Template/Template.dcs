@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <DataCompositionSchema xmlns="http://v8.1c.ru/8.1/data-composition-system/schema" xmlns:dcscom="http://v8.1c.ru/8.1/data-composition-system/common" xmlns:dcscor="http://v8.1c.ru/8.1/data-composition-system/core" xmlns:dcsset="http://v8.1c.ru/8.1/data-composition-system/settings" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:v8ui="http://v8.1c.ru/8.1/data/ui" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<dataSource>
 		<name>DataSource1</name>
@@ -64,7 +64,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Register name</v8:content>
+					<v8:content>5A7C63CF-C684-7FC8-8879-9650109C037C</v8:content>
 				</v8:item>
 			</title>
 			<availableValue>
@@ -72,7 +72,7 @@
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>R1001T_Purchases</v8:content>
+						<v8:content>1C91633F-816D-E9AF-F855-5F8C91C38CFC</v8:content>
 					</v8:item>
 				</presentation>
 			</availableValue>
@@ -81,7 +81,7 @@
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>R1002T_PurchaseReturns</v8:content>
+						<v8:content>C0173EEA-F681-8F24-401B-B7E3B520F0B5</v8:content>
 					</v8:item>
 				</presentation>
 			</availableValue>
@@ -90,7 +90,7 @@
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>R1005T_PurchaseSpecialOffers</v8:content>
+						<v8:content>05D2FA66-738C-FDA5-5DB1-10747FC215C7</v8:content>
 					</v8:item>
 				</presentation>
 			</availableValue>
@@ -99,7 +99,7 @@
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>R1010T_PurchaseOrders</v8:content>
+						<v8:content>E411A2EC-2CB3-F7FB-B9CF-F4D3534D57E7</v8:content>
 					</v8:item>
 				</presentation>
 			</availableValue>
@@ -108,7 +108,7 @@
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>R1011B_PurchaseOrdersReceipt</v8:content>
+						<v8:content>5DF1C5F4-287B-17BD-DB73-32876268B52A</v8:content>
 					</v8:item>
 				</presentation>
 			</availableValue>
@@ -117,7 +117,7 @@
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>R1012B_PurchaseOrdersInvoiceClosing</v8:content>
+						<v8:content>16B55065-D536-7EBF-F7E8-8217E3FD8307</v8:content>
 					</v8:item>
 				</presentation>
 			</availableValue>
@@ -126,7 +126,7 @@
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>R1014T_CanceledPurchaseOrders</v8:content>
+						<v8:content>2706DA6C-0356-7A36-6BED-D887D41C8A07</v8:content>
 					</v8:item>
 				</presentation>
 			</availableValue>
@@ -135,7 +135,7 @@
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>R1020B_AdvancesToVendors</v8:content>
+						<v8:content>FB585BB2-3EA5-D39C-C60E-ECF06EA25F7D</v8:content>
 					</v8:item>
 				</presentation>
 			</availableValue>
@@ -144,7 +144,7 @@
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>R1021B_VendorsTransactions</v8:content>
+						<v8:content>1CD8DC87-DC01-DC83-3A95-5DF3ED632889</v8:content>
 					</v8:item>
 				</presentation>
 			</availableValue>
@@ -153,7 +153,7 @@
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>R1031B_ReceiptInvoicing</v8:content>
+						<v8:content>B188B21A-019F-456B-B46F-F546B658B57C</v8:content>
 					</v8:item>
 				</presentation>
 			</availableValue>
@@ -162,7 +162,7 @@
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>R1040B_TaxesOutgoing</v8:content>
+						<v8:content>F2FE4222-34EA-7E9B-BABF-F5DAA18EC1E7</v8:content>
 					</v8:item>
 				</presentation>
 			</availableValue>
@@ -171,7 +171,7 @@
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>R2001T_Sales</v8:content>
+						<v8:content>B1F82863-2D27-268D-D2FF-F13B15C0D075</v8:content>
 					</v8:item>
 				</presentation>
 			</availableValue>
@@ -180,7 +180,7 @@
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>R2002T_SalesReturns</v8:content>
+						<v8:content>0CF58567-4CF9-770F-F6EC-C91857EC1940</v8:content>
 					</v8:item>
 				</presentation>
 			</availableValue>
@@ -189,7 +189,7 @@
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>R2005T_SalesSpecialOffers</v8:content>
+						<v8:content>55BA685F-50D3-6CDA-AC2A-AADFDACDDFC7</v8:content>
 					</v8:item>
 				</presentation>
 			</availableValue>
@@ -198,7 +198,7 @@
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>R2010T_SalesOrders</v8:content>
+						<v8:content>D1AFDE55-8AD1-45A4-4972-22DBE93B470A</v8:content>
 					</v8:item>
 				</presentation>
 			</availableValue>
@@ -207,7 +207,7 @@
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>R2011B_SalesOrdersShipment</v8:content>
+						<v8:content>5B3DA1D8-5483-0700-0833-31AFA121319D</v8:content>
 					</v8:item>
 				</presentation>
 			</availableValue>
@@ -216,7 +216,7 @@
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>R2012B_SalesOrdersInvoiceClosing</v8:content>
+						<v8:content>599F93A7-5C6A-E73B-B8A9-92330891BBAE</v8:content>
 					</v8:item>
 				</presentation>
 			</availableValue>
@@ -225,7 +225,7 @@
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>R2013T_SalesOrdersProcurement</v8:content>
+						<v8:content>16EA55CE-EBA8-881B-BCC4-4865ABB87826</v8:content>
 					</v8:item>
 				</presentation>
 			</availableValue>
@@ -234,7 +234,7 @@
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>R2014T_CanceledSalesOrders</v8:content>
+						<v8:content>8FBFC472-5020-A5FC-C852-2D0DEB207B54</v8:content>
 					</v8:item>
 				</presentation>
 			</availableValue>
@@ -243,7 +243,7 @@
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>R2020B_AdvancesFromCustomers</v8:content>
+						<v8:content>2046E00C-07E3-5D16-67F9-9DCE3843A9C8</v8:content>
 					</v8:item>
 				</presentation>
 			</availableValue>
@@ -252,7 +252,7 @@
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>R2021B_CustomersTransactions</v8:content>
+						<v8:content>0BA9082A-36D8-27D5-52C8-8AB44578FE88</v8:content>
 					</v8:item>
 				</presentation>
 			</availableValue>
@@ -261,7 +261,7 @@
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>R2031B_ShipmentInvoicing</v8:content>
+						<v8:content>7C90B206-B12D-20C1-1997-7CD3E5913ABF</v8:content>
 					</v8:item>
 				</presentation>
 			</availableValue>
@@ -270,7 +270,7 @@
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>R2040B_TaxesIncoming</v8:content>
+						<v8:content>6A642757-51C6-B9A2-2F3E-E464D0DAC2BF</v8:content>
 					</v8:item>
 				</presentation>
 			</availableValue>
@@ -279,7 +279,7 @@
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>R3010B_CashOnHand</v8:content>
+						<v8:content>8F61DF52-4520-3A74-4E93-3E723D23B6EB</v8:content>
 					</v8:item>
 				</presentation>
 			</availableValue>
@@ -288,7 +288,7 @@
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>R3011T_CashMovements</v8:content>
+						<v8:content>B6DE8F14-B807-A802-2562-22DE6F39DE35</v8:content>
 					</v8:item>
 				</presentation>
 			</availableValue>
@@ -297,7 +297,7 @@
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>R3015B_CashAdvance</v8:content>
+						<v8:content>BDA51C49-BABA-5293-31AA-A18013E2B1E1</v8:content>
 					</v8:item>
 				</presentation>
 			</availableValue>
@@ -306,7 +306,7 @@
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>R3016B_ChequeAndBonds</v8:content>
+						<v8:content>1731847C-A997-E859-919D-D2C0E3C4954A</v8:content>
 					</v8:item>
 				</presentation>
 			</availableValue>
@@ -315,7 +315,7 @@
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>R3021B_CashInTransitIncoming</v8:content>
+						<v8:content>818E4524-31DC-8920-0907-7481D8A509F3</v8:content>
 					</v8:item>
 				</presentation>
 			</availableValue>
@@ -324,7 +324,7 @@
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>R3022B_CashInTransitOutgoing</v8:content>
+						<v8:content>EA9A124F-0941-A328-8611-19D393433CF8</v8:content>
 					</v8:item>
 				</presentation>
 			</availableValue>
@@ -333,7 +333,7 @@
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>R3033B_CashPlanningIncoming</v8:content>
+						<v8:content>A27DB7FF-8A17-27AD-D061-191D6186DC65</v8:content>
 					</v8:item>
 				</presentation>
 			</availableValue>
@@ -342,7 +342,7 @@
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>R3034B_CashPlanningOutgoing</v8:content>
+						<v8:content>8729D5F4-CDD5-4386-680B-B6DC4A937D7E</v8:content>
 					</v8:item>
 				</presentation>
 			</availableValue>
@@ -351,7 +351,7 @@
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>R4010B_ActualStocks</v8:content>
+						<v8:content>60F8FB06-36AC-2F26-6328-8A074C2B13C5</v8:content>
 					</v8:item>
 				</presentation>
 			</availableValue>
@@ -360,7 +360,7 @@
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>R4011B_FreeStocks</v8:content>
+						<v8:content>EF666DDF-9172-8D69-916C-C2B2997AFE37</v8:content>
 					</v8:item>
 				</presentation>
 			</availableValue>
@@ -369,7 +369,7 @@
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>R4012B_StockReservation</v8:content>
+						<v8:content>EA55523B-00F2-BA7F-FF71-1F040416A24D</v8:content>
 					</v8:item>
 				</presentation>
 			</availableValue>
@@ -378,7 +378,7 @@
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>R4013B_StockReservationPlanning</v8:content>
+						<v8:content>BEE15DB6-B810-0B44-489A-ACD5B5E64FB1</v8:content>
 					</v8:item>
 				</presentation>
 			</availableValue>
@@ -387,7 +387,7 @@
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>R4014B_SerialLotNumber</v8:content>
+						<v8:content>7C86885F-7C3C-174D-D680-0BCF4B087E24</v8:content>
 					</v8:item>
 				</presentation>
 			</availableValue>
@@ -396,7 +396,7 @@
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>R4015T_InternalSupplyRequests</v8:content>
+						<v8:content>98EB1E0C-BD98-CA90-0D31-1F0741DE13FD</v8:content>
 					</v8:item>
 				</presentation>
 			</availableValue>
@@ -405,7 +405,7 @@
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>R4016B_InternalSupplyRequestOrdering</v8:content>
+						<v8:content>30B0679E-1B8F-207B-B054-417CE186A230</v8:content>
 					</v8:item>
 				</presentation>
 			</availableValue>
@@ -414,7 +414,7 @@
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>R4017B_InternalSupplyRequestProcurement</v8:content>
+						<v8:content>0E8A4CA9-2618-66C5-5D59-9B466CC382B0___</v8:content>
 					</v8:item>
 				</presentation>
 			</availableValue>
@@ -423,7 +423,7 @@
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>R4020T_StockTransferOrders</v8:content>
+						<v8:content>3C1F89D9-A4C6-C494-4DB7-786F0BFC29B0</v8:content>
 					</v8:item>
 				</presentation>
 			</availableValue>
@@ -432,7 +432,7 @@
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>R4021B_StockTransferOrdersReceipt</v8:content>
+						<v8:content>41F1C56C-52A4-AF53-3812-2FC9BB9A6BB8</v8:content>
 					</v8:item>
 				</presentation>
 			</availableValue>
@@ -441,7 +441,7 @@
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>R4022B_StockTransferOrdersShipment</v8:content>
+						<v8:content>A130E29D-D244-6BB9-9290-0B30DCA60E4E</v8:content>
 					</v8:item>
 				</presentation>
 			</availableValue>
@@ -450,7 +450,7 @@
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>R4031B_GoodsInTransitIncoming</v8:content>
+						<v8:content>D38A4B7B-7665-DEAA-A9F9-9D456CC49ECE</v8:content>
 					</v8:item>
 				</presentation>
 			</availableValue>
@@ -459,7 +459,7 @@
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>R4032B_GoodsInTransitOutgoing</v8:content>
+						<v8:content>CC7B6043-969C-E27C-C12F-F8D72345A393</v8:content>
 					</v8:item>
 				</presentation>
 			</availableValue>
@@ -468,7 +468,7 @@
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>R4033B_GoodsReceiptSchedule</v8:content>
+						<v8:content>C916C04D-AC30-6C83-3ECE-EB125C8005BD</v8:content>
 					</v8:item>
 				</presentation>
 			</availableValue>
@@ -477,7 +477,7 @@
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>R4034B_GoodsShipmentSchedule</v8:content>
+						<v8:content>DED45231-6A15-EBF7-7E7F-F98D4ED0B5C9</v8:content>
 					</v8:item>
 				</presentation>
 			</availableValue>
@@ -486,7 +486,7 @@
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>R4035B_IncomingStocks</v8:content>
+						<v8:content>CBDC96F4-CD1D-5B5F-FA38-8085859C9085</v8:content>
 					</v8:item>
 				</presentation>
 			</availableValue>
@@ -495,7 +495,7 @@
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>R4036B_IncomingStocksRequested</v8:content>
+						<v8:content>B1DF268A-E47F-1F5D-D55C-CEB41C770697</v8:content>
 					</v8:item>
 				</presentation>
 			</availableValue>
@@ -504,7 +504,7 @@
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>R4050B_StockInventory</v8:content>
+						<v8:content>632AF77A-AC63-3062-2750-0EE1DAED14D0</v8:content>
 					</v8:item>
 				</presentation>
 			</availableValue>
@@ -513,7 +513,7 @@
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>R4051T_StockAdjustmentAsWriteOff</v8:content>
+						<v8:content>03ABAA40-92DB-06F6-639E-E9034DA4E739</v8:content>
 					</v8:item>
 				</presentation>
 			</availableValue>
@@ -522,7 +522,7 @@
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>R4052T_StockAdjustmentAsSurplus</v8:content>
+						<v8:content>2057B14B-6AF8-7720-052B-BE179FEAD478</v8:content>
 					</v8:item>
 				</presentation>
 			</availableValue>
@@ -531,7 +531,7 @@
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>R5010B_ReconciliationStatement</v8:content>
+						<v8:content>E85B49DF-42AD-B138-8EC5-5B4920BF8033</v8:content>
 					</v8:item>
 				</presentation>
 			</availableValue>
@@ -540,7 +540,7 @@
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>R5011B_PartnersAging</v8:content>
+						<v8:content>8620E733-7F9C-EE4D-D05B-B06CA75714AC</v8:content>
 					</v8:item>
 				</presentation>
 			</availableValue>
@@ -549,7 +549,7 @@
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>R5021T_Revenues</v8:content>
+						<v8:content>F9C4ECB8-C3C4-F173-39B2-2E04D4444186</v8:content>
 					</v8:item>
 				</presentation>
 			</availableValue>
@@ -558,7 +558,7 @@
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>R5022T_Expenses</v8:content>
+						<v8:content>45255BCD-6681-DA98-86D0-0988F9B568E9</v8:content>
 					</v8:item>
 				</presentation>
 			</availableValue>
@@ -567,7 +567,7 @@
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>R5041B_TaxesPayable</v8:content>
+						<v8:content>AA28626A-99FC-3E6E-E932-2C357606D725</v8:content>
 					</v8:item>
 				</presentation>
 			</availableValue>
@@ -744,7 +744,7 @@
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>Register name</v8:content>
+						<v8:content>70BEDC5A-8129-63D5-5EC8-8D7C6E5C9724</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -823,7 +823,7 @@
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>Register name</v8:content>
+						<v8:content>44CAC97A-8FD3-9434-4969-9CBB60C0F964</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -942,7 +942,7 @@
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>Register name</v8:content>
+						<v8:content>4F69533A-6902-C259-9D1E-E5EA8C9AC921</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -985,7 +985,7 @@
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>Register name</v8:content>
+						<v8:content>921F5C53-E4AB-0F98-8B86-6B7E7664DA88</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -1044,7 +1044,7 @@
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>Register name</v8:content>
+						<v8:content>381E4A7B-77EC-39F3-3425-5AD9D8D03864</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -1103,7 +1103,7 @@
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>Register name</v8:content>
+						<v8:content>F84C45C2-B840-2FE3-39AA-A3121F25CD51</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -1182,7 +1182,7 @@
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>Register name</v8:content>
+						<v8:content>7FC12859-6C0E-CC60-055B-BA472EB2376A</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -1229,7 +1229,7 @@
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>Register name</v8:content>
+						<v8:content>3719F042-67F4-CC96-660B-B558F45B0E77</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -1316,7 +1316,7 @@
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>Register name</v8:content>
+						<v8:content>D2B81863-6482-9E63-3033-3424E957A5D1</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -1363,7 +1363,7 @@
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>Register name</v8:content>
+						<v8:content>58588BB5-0E76-F24A-A579-99EAC29F228D</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -1406,7 +1406,7 @@
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>Register name</v8:content>
+						<v8:content>B7368DC5-A509-777F-F7BE-ED821F05C921</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -1469,7 +1469,7 @@
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>Register name</v8:content>
+						<v8:content>CB871E80-6971-1086-6DDC-CFDFE0F5A86F</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -1520,7 +1520,7 @@
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>Register name</v8:content>
+						<v8:content>6227C720-5CE2-D4A0-029F-FDF60481B5F7</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -1619,7 +1619,7 @@
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>Register name</v8:content>
+						<v8:content>1AB06478-A3BB-937E-EAAA-AFB139FB5620</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -1730,7 +1730,7 @@
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>Register name</v8:content>
+						<v8:content>5DA8DE2A-D7FC-B3F9-9A5A-AD1E78639BEE</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -1757,7 +1757,7 @@
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>Register name</v8:content>
+						<v8:content>EA6938BE-0662-D6EB-B162-20846A399145</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -1800,7 +1800,7 @@
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>Register name</v8:content>
+						<v8:content>406591AF-B04E-A0D3-374D-DF2ADC02A43C</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -1879,7 +1879,7 @@
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>Register name</v8:content>
+						<v8:content>1172AF82-9083-14CA-A967-71F6A4F58910</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -1958,7 +1958,7 @@
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>Register name</v8:content>
+						<v8:content>F78CC64F-B61C-719F-F29A-AF3CFB5CDCA4</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -2005,7 +2005,7 @@
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>Register name</v8:content>
+						<v8:content>63E33A5B-884E-D289-9EBB-B3D97F8B9F27</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -2068,7 +2068,7 @@
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>Register name</v8:content>
+						<v8:content>F3DC98CE-F7B3-9B99-95C7-7C2CC26FDCFD</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -2139,7 +2139,7 @@
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>Register name</v8:content>
+						<v8:content>CD2DFC86-957F-FCA4-43E3-3F86979FE6B7</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -2214,7 +2214,7 @@
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>Register name</v8:content>
+						<v8:content>02DA4038-B393-F5FA-AD36-6BBC04489435</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -2257,7 +2257,7 @@
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>Register name</v8:content>
+						<v8:content>45B146C4-23DF-B363-32FD-D74E81DABB40</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -2300,7 +2300,7 @@
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>Register name</v8:content>
+						<v8:content>58B2E854-B9A4-C523-3C24-4C4B92E01FAA</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -2343,7 +2343,7 @@
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>Register name</v8:content>
+						<v8:content>6043BD5F-6D15-7407-773B-B7723CCF4C0A</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -2422,7 +2422,7 @@
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>Register name</v8:content>
+						<v8:content>8A6BF22E-B5EA-44FF-F7DE-EF90244BAFAF</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -2505,7 +2505,7 @@
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>Register name</v8:content>
+						<v8:content>708A7373-B086-89D6-63B9-9B566F05D913</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -2532,7 +2532,7 @@
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>Register name</v8:content>
+						<v8:content>0700E96E-42C1-DBBC-CEC0-0EADFF669124</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -2587,7 +2587,7 @@
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>Register name</v8:content>
+						<v8:content>6D7D58B5-B5B5-4C73-3387-73B1981B8526</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -2678,7 +2678,7 @@
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>Register name</v8:content>
+						<v8:content>F3D5E47A-15F4-BE68-806A-A9C249F7B0E0</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -2729,7 +2729,7 @@
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>Register name</v8:content>
+						<v8:content>4EF1EFC6-0377-8AF3-3AB4-4F01DB86BF2F</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -2768,7 +2768,7 @@
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>Register name</v8:content>
+						<v8:content>8D0B680A-1975-97DF-FB45-541182BCCF92</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -2807,7 +2807,7 @@
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>Register name</v8:content>
+						<v8:content>52F65963-E695-226D-D4B9-921F31D656F8</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -2870,7 +2870,7 @@
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>Register name</v8:content>
+						<v8:content>44FEE6C1-0D2B-0F13-3725-5F3F0BE07D2C</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -2921,7 +2921,7 @@
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>Register name</v8:content>
+						<v8:content>D3D16666-602E-A511-1712-2E3AD031D509</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -2960,7 +2960,7 @@
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>Register name</v8:content>
+						<v8:content>CB5AA2FE-08E0-F845-56B9-91C610F90CA0</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -3007,7 +3007,7 @@
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>Register name</v8:content>
+						<v8:content>49785B92-300A-E45B-B412-2D7AAA0FA508</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -3050,7 +3050,7 @@
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>Register name</v8:content>
+						<v8:content>028AF3D9-F587-393E-E8F3-3AFCE0861FFA</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -3113,7 +3113,7 @@
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>Register name</v8:content>
+						<v8:content>DC0705D2-82AE-A8AF-FEE4-45A5F493BD38</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -3148,7 +3148,7 @@
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>Register name</v8:content>
+						<v8:content>F6296FF9-8DCB-7A92-2771-1E50A2688D84</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -3203,7 +3203,7 @@
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>Register name</v8:content>
+						<v8:content>16A1C8BA-6CE4-7A81-1A5F-F987C99679E2</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -3266,7 +3266,7 @@
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>Register name</v8:content>
+						<v8:content>6F18DCA9-3631-2F79-9B0E-E465B70B4900</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -3309,7 +3309,7 @@
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>Register name</v8:content>
+						<v8:content>A98FE22B-B52D-5D71-12F6-6EC23045944F</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -3372,7 +3372,7 @@
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>Register name</v8:content>
+						<v8:content>F3DEB1EA-63F2-C346-68C6-6C358E7D411F</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -3435,7 +3435,7 @@
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>Register name</v8:content>
+						<v8:content>7E2A9302-CC2B-1D9C-C76C-C59ABAC5750D</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -3470,7 +3470,7 @@
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>Register name</v8:content>
+						<v8:content>796750FB-D72E-44EB-B04B-B86F2B7A051D</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -3505,7 +3505,7 @@
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>Register name</v8:content>
+						<v8:content>683B878C-105B-F062-2575-5952AFE55D04</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -3576,7 +3576,7 @@
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>Register name</v8:content>
+						<v8:content>955CE239-FA52-8F12-2EC8-806294322A3B</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -3623,7 +3623,7 @@
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>Register name</v8:content>
+						<v8:content>819D12CD-9810-15DB-BD00-0CBB78B47C80</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -3678,7 +3678,7 @@
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>Register name</v8:content>
+						<v8:content>4892E18E-D9BD-D2C0-0C49-911E9C0C9C13</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -3697,7 +3697,7 @@
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>Register name</v8:content>
+						<v8:content>C87BC582-FA11-126B-B2AF-F99E609B04DC</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -3772,7 +3772,7 @@
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>Register name</v8:content>
+						<v8:content>0D5E6606-25E7-DC51-1691-1A239B123ED8</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -3847,7 +3847,7 @@
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>Register name</v8:content>
+						<v8:content>4858A384-6DDF-908E-E39F-F1E237CBE945</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -3862,7 +3862,7 @@
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>Register name</v8:content>
+						<v8:content>6043BD5F-6D15-7407-773B-B7723CCF4C0A</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -3893,7 +3893,7 @@
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
 						<v8:lang>en</v8:lang>
-						<v8:content>Register name</v8:content>
+						<v8:content>885AD6D1-7ED4-FA14-4C65-59BD858BFA0C</v8:content>
 					</v8:item>
 				</title>
 			</field>

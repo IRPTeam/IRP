@@ -1,12 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="228f5926-3406-4e2c-bcb9-421d33c1b877">
-  <name>GoogleDriveClientServer</name>
-  <synonym>
-    <key>en</key>
-    <value>Google drive client server</value>
-  </synonym>
-  <clientManagedApplication>true</clientManagedApplication>
-  <server>true</server>
-  <externalConnection>true</externalConnection>
-  <clientOrdinaryApplication>true</clientOrdinaryApplication>
+ <name>GoogleDriveClientServer</name>
+ <synonym>
+  <key>en</key>
+  <value>5F772379-CC82-FFC3-3A7E-E2334C00BB71</value>
+ </synonym>
+ <clientManagedApplication>true</clientManagedApplication>
+ <server>true</server>
+ <externalConnection>true</externalConnection>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
 </mdclass:CommonModule>

@@ -1,4 +1,4 @@
-#Region ItemCompany
+﻿#Region ItemCompany
 
 Procedure CompanyOnChange(Object, Form, Item) Export
 	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);

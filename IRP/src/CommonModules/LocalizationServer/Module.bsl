@@ -1,4 +1,4 @@
-Function Strings(LangCode = "") Export
+﻿Function Strings(LangCode = "") Export
 	If IsBlankString(LangCode) Then
 		LangCode = Metadata.DefaultLanguage.LanguageCode;
 	EndIf;

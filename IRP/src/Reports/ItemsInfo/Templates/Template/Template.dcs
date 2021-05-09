@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <DataCompositionSchema xmlns="http://v8.1c.ru/8.1/data-composition-system/schema" xmlns:dcscom="http://v8.1c.ru/8.1/data-composition-system/common" xmlns:dcscor="http://v8.1c.ru/8.1/data-composition-system/core" xmlns:dcsset="http://v8.1c.ru/8.1/data-composition-system/settings" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:v8ui="http://v8.1c.ru/8.1/data/ui" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<dataSource>
 		<name>DataSource1</name>
@@ -27,7 +27,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Item key</v8:content>
+					<v8:content>36160082-CA82-781F-FCC4-4217A4D4D98F</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -48,7 +48,7 @@ FROM
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>Item</v8:content>
+				<v8:content>5522DC0C-ACF5-71FA-A182-2E2A98A2B01C</v8:content>
 			</v8:item>
 		</title>
 		<valueType/>
@@ -59,7 +59,7 @@ FROM
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>Barcodes</v8:content>
+				<v8:content>5030F7BB-88CE-4716-6ACB-B6046D5FC322</v8:content>
 			</v8:item>
 		</title>
 		<valueType/>

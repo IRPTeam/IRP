@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="b0c077c7-46c6-4473-9a59-22a7aa57f03d">
-  <name>FillingFromClassifiers</name>
-  <synonym>
-    <key>en</key>
-    <value>Filling from classifiers</value>
-  </synonym>
-  <server>true</server>
-  <serverCall>true</serverCall>
+ <name>FillingFromClassifiers</name>
+ <synonym>
+  <key>en</key>
+  <value>01318A65-1D2F-F2C5-5F3A-A8B0DDF99BE1</value>
+ </synonym>
+ <server>true</server>
+ <serverCall>true</serverCall>
 </mdclass:CommonModule>

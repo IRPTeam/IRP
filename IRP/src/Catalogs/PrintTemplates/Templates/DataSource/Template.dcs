@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <DataCompositionSchema xmlns="http://v8.1c.ru/8.1/data-composition-system/schema" xmlns:dcscom="http://v8.1c.ru/8.1/data-composition-system/common" xmlns:dcscor="http://v8.1c.ru/8.1/data-composition-system/core" xmlns:dcsset="http://v8.1c.ru/8.1/data-composition-system/settings" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:v8ui="http://v8.1c.ru/8.1/data/ui" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<dataSource>
 		<name>DataSource1</name>
@@ -20,7 +20,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Item key</v8:content>
+					<v8:content>39F30E9D-4AB5-CD0A-A34D-D7EE183E49D9</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -34,7 +34,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Barcode picture</v8:content>
+					<v8:content>B693D0EF-AB90-8C90-0A2C-C7017ADACCC1</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -44,7 +44,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>QR picture</v8:content>
+					<v8:content>DBE8855A-FC96-841C-CAF5-5B5504355F9A</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -54,7 +54,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Picture</v8:content>
+					<v8:content>9BC3F9DF-3FB0-EA6B-BC93-300CA54B5974</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -64,7 +64,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Item key picture</v8:content>
+					<v8:content>8F1715DF-70E3-F305-51C4-4CC0EC6A4F67</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -74,7 +74,7 @@
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Item picture</v8:content>
+					<v8:content>5463EC04-B942-E796-6085-56C3146176FB</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -128,7 +128,7 @@ FROM
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
 				<v8:lang>en</v8:lang>
-				<v8:content>Period</v8:content>
+				<v8:content>7DE33AB9-31F1-1B58-8E68-855137DD4E00</v8:content>
 			</v8:item>
 		</title>
 		<valueType>

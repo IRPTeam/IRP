@@ -1,4 +1,4 @@
-&AtServer
+﻿&AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	If Parameters.DataMap = Undefined Then
 		Cancel = True;

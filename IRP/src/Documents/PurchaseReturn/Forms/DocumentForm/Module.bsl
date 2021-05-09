@@ -1,4 +1,4 @@
-#Region FormEvents
+﻿#Region FormEvents
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	DocPurchaseReturnServer.OnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);

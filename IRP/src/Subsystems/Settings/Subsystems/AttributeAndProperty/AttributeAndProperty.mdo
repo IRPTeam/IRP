@@ -1,14 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="775ee133-a770-44d8-aace-aae057c1c3ff">
-  <name>AttributeAndProperty</name>
-  <synonym>
-    <key>en</key>
-    <value>Attribute and property</value>
-  </synonym>
-  <includeHelpInContents>true</includeHelpInContents>
-  <includeInCommandInterface>true</includeInCommandInterface>
-  <content>Catalog.AddAttributeAndPropertySets</content>
-  <content>Catalog.AddAttributeAndPropertyValues</content>
-  <content>ChartOfCharacteristicTypes.AddAttributeAndProperty</content>
-  <parentSubsystem>Subsystem.Settings</parentSubsystem>
+ <name>AttributeAndProperty</name>
+ <synonym>
+  <key>en</key>
+  <value>5F130CEA-FB34-FC99-9822-23CC2F0F2E4D</value>
+ </synonym>
+ <includeHelpInContents>true</includeHelpInContents>
+ <includeInCommandInterface>true</includeInCommandInterface>
+ <content>Catalog.AddAttributeAndPropertySets</content>
+ <content>Catalog.AddAttributeAndPropertyValues</content>
+ <content>ChartOfCharacteristicTypes.AddAttributeAndProperty</content>
+ <parentSubsystem>Subsystem.Settings</parentSubsystem>
 </mdclass:Subsystem>

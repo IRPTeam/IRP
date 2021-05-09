@@ -1,41 +1,41 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:DataProcessor xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="e84a930d-2bc0-4f17-ba3c-ef985c981fac">
-  <producedTypes>
-    <objectType typeId="42817543-272e-41a1-beb8-64f72d7ed0a3" valueTypeId="025c8a08-e279-4d07-91f0-78f633303c4a"/>
-    <managerType typeId="c2a9110d-2ec6-4a14-ae37-6de11606c31a" valueTypeId="87d9bfcd-adc3-4118-845b-fc55b2327ab0"/>
-  </producedTypes>
-  <name>Procurement</name>
+ <producedTypes>
+  <objectType typeId="42817543-272e-41a1-beb8-64f72d7ed0a3" valueTypeId="025c8a08-e279-4d07-91f0-78f633303c4a"/>
+  <managerType typeId="c2a9110d-2ec6-4a14-ae37-6de11606c31a" valueTypeId="87d9bfcd-adc3-4118-845b-fc55b2327ab0"/>
+ </producedTypes>
+ <name>Procurement</name>
+ <synonym>
+  <key>en</key>
+  <value>698933FA-4520-1C1D-D75D-D1A6FDA7CA05</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <defaultForm>DataProcessor.Procurement.Form.Form</defaultForm>
+ <forms uuid="967b7891-91c8-4e5e-a038-49554bf53fb5">
+  <name>Form</name>
   <synonym>
-    <key>en</key>
-    <value>Procurement</value>
+   <key>en</key>
+   <value>4DB0AB28-C66D-3FAB-B028-87863A7F5782</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <defaultForm>DataProcessor.Procurement.Form.Form</defaultForm>
-  <forms uuid="967b7891-91c8-4e5e-a038-49554bf53fb5">
-    <name>Form</name>
-    <synonym>
-      <key>en</key>
-      <value>Form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="3409247c-15f1-4cbf-ba7e-a77d497553de">
-    <name>FormCreateOrders</name>
-    <synonym>
-      <key>en</key>
-      <value>Form create orders</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="1d9bcace-e258-4334-ba78-7b7730deb967">
-    <name>FormSelectInternalSupplyRequest</name>
-    <synonym>
-      <key>en</key>
-      <value>Select internal supply request</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="3409247c-15f1-4cbf-ba7e-a77d497553de">
+  <name>FormCreateOrders</name>
+  <synonym>
+   <key>en</key>
+   <value>B2F0ADD7-68D6-D426-6347-77CC35E960E0</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="1d9bcace-e258-4334-ba78-7b7730deb967">
+  <name>FormSelectInternalSupplyRequest</name>
+  <synonym>
+   <key>en</key>
+   <value>4824BE09-6C9C-8766-6877-72DF4DB3602A</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:DataProcessor>

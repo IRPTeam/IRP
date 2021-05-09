@@ -1,4 +1,4 @@
-
+﻿
 Procedure OnCreateAtServer(Form, Cancel, StandardProcessing) Export
 	NewCommand = Form.Commands.Add("CreateFromClassifier");
 	NewCommand.Action = "CreateFromClassifier";

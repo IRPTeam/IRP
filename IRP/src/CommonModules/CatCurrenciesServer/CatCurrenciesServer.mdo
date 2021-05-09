@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="d3f8e6cb-110b-4ece-b4cf-d6d067ef0a16">
-  <name>CatCurrenciesServer</name>
-  <synonym>
-    <key>en</key>
-    <value>Cat currencies server</value>
-  </synonym>
-  <server>true</server>
-  <serverCall>true</serverCall>
+ <name>CatCurrenciesServer</name>
+ <synonym>
+  <key>en</key>
+  <value>830664F7-42EE-2917-7C1A-ACA745D70528</value>
+ </synonym>
+ <server>true</server>
+ <serverCall>true</serverCall>
 </mdclass:CommonModule>

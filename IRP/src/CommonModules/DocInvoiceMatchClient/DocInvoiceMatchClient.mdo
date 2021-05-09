@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="f6b59fab-eb4d-4a3f-aa10-84316597d8e3">
-  <name>DocInvoiceMatchClient</name>
-  <synonym>
-    <key>en</key>
-    <value>Doc invoice match client</value>
-  </synonym>
-  <clientManagedApplication>true</clientManagedApplication>
-  <clientOrdinaryApplication>true</clientOrdinaryApplication>
+ <name>DocInvoiceMatchClient</name>
+ <synonym>
+  <key>en</key>
+  <value>4EFAD333-95A2-5DFC-C8F0-02B36D3FA9E1</value>
+ </synonym>
+ <clientManagedApplication>true</clientManagedApplication>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
 </mdclass:CommonModule>

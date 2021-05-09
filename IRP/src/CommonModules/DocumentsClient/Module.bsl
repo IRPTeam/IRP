@@ -1,4 +1,4 @@
-#Region FormEvents
+﻿#Region FormEvents
 
 Procedure OnOpen(Object, Form, Cancel) Export
 	Return;

@@ -1,4 +1,4 @@
-Function MD5ByBinaryData(TmpAddress) Export
+﻿Function MD5ByBinaryData(TmpAddress) Export
 	BinaryData = GetFromTempStorage(TmpAddress);
 	Hash = New DataHashing(HashFunction.MD5);
 	Hash.Append(BinaryData);

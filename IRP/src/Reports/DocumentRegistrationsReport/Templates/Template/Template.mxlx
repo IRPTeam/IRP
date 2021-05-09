@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <document xmlns="http://v8.1c.ru/8.2/data/spreadsheet" xmlns:style="http://v8.1c.ru/8.1/data/ui/style" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:v8ui="http://v8.1c.ru/8.1/data/ui" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<languageSettings>
 		<currentLanguage>en</currentLanguage>
@@ -28,7 +28,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Register [RegisterType] "[RegisterName]"</v8:content>
+							<v8:content>5B6F85C4-D32F-37A6-6A99-94F81ED6BA11____[RegisterType],[RegisterName]</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -52,7 +52,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>[Document]</v8:content>
+							<v8:content>4ABED6EE-1642-0531-111E-E930A18E18D5[Document]</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -69,7 +69,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Document registrations records</v8:content>
+							<v8:content>52CF5E0A-EBE6-7F4F-F085-58562407900A</v8:content>
 						</v8:item>
 					</tl>
 				</c>
@@ -92,7 +92,7 @@
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>[Document]</v8:content>
+							<v8:content>2D7749F1-D644-B689-938B-BE51CE14F716[Document]</v8:content>
 						</v8:item>
 					</tl>
 				</c>

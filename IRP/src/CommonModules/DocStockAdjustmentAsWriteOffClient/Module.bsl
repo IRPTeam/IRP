@@ -1,4 +1,4 @@
-Procedure OnOpen(Object, Form, Cancel, AddInfo = Undefined) Export
+﻿Procedure OnOpen(Object, Form, Cancel, AddInfo = Undefined) Export
 	DocumentsClient.SetTextOfDescriptionAtForm(Object, Form);
 	SerialLotNumberClient.UpdateSerialLotNumbersPresentation(Object, AddInfo);
 	SerialLotNumberClient.UpdateSerialLotNumbersTree(Object, Form);	

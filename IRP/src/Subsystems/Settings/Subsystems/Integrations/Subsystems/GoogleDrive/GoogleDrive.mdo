@@ -1,14 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="88854141-2d16-4664-b627-3a448476c142">
-  <name>GoogleDrive</name>
-  <synonym>
-    <key>en</key>
-    <value>Google drive</value>
-  </synonym>
-  <includeHelpInContents>true</includeHelpInContents>
-  <includeInCommandInterface>true</includeInCommandInterface>
-  <content>CommonModule.GoogleDriveClientServer</content>
-  <content>CommonForm.HTMLField</content>
-  <content>InformationRegister.IntegrationInfo</content>
-  <parentSubsystem>Subsystem.Settings.Subsystem.Integrations</parentSubsystem>
+ <name>GoogleDrive</name>
+ <synonym>
+  <key>en</key>
+  <value>D52F6B72-C300-B1C8-8F4A-AEB20F9B00E9</value>
+ </synonym>
+ <includeHelpInContents>true</includeHelpInContents>
+ <includeInCommandInterface>true</includeInCommandInterface>
+ <content>CommonModule.GoogleDriveClientServer</content>
+ <content>CommonForm.HTMLField</content>
+ <content>InformationRegister.IntegrationInfo</content>
+ <parentSubsystem>Subsystem.Settings.Subsystem.Integrations</parentSubsystem>
 </mdclass:Subsystem>

@@ -1,4 +1,4 @@
-#Region WriteDataToCatalog
+﻿#Region WriteDataToCatalog
 
 Function FindCatalogItem(Deep, Parent, Level, Value, Country, IDInfoType)
 	Result = New Structure("Success, Ref", False, Undefined);

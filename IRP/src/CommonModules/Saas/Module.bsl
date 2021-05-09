@@ -1,4 +1,4 @@
-Function SeparationUsed() Export
+﻿Function SeparationUsed() Export
 	Return Constants.SaasMode.Get();
 EndFunction
 

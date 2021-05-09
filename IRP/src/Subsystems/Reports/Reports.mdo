@@ -1,18 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Subsystem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="51decc4f-0bfb-4857-8b07-221caee1cafc">
-  <name>Reports</name>
-  <synonym>
-    <key>en</key>
-    <value>Reports</value>
-  </synonym>
-  <includeHelpInContents>true</includeHelpInContents>
-  <includeInCommandInterface>true</includeInCommandInterface>
-  <picture xsi:type="core:PictureRef">
-    <picture>CommonPicture.Reports</picture>
-  </picture>
-  <content>Report.ItemsInfo</content>
-  <subsystems>Sales</subsystems>
-  <subsystems>Purchase</subsystems>
-  <subsystems>Inventory</subsystems>
-  <subsystems>Finance</subsystems>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Subsystem xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="51decc4f-0bfb-4857-8b07-221caee1cafc">
+ <name>Reports</name>
+ <synonym>
+  <key>en</key>
+  <value>9600EA0C-B80E-AD44-49D1-1D43D5878A25</value>
+ </synonym>
+ <includeHelpInContents>true</includeHelpInContents>
+ <includeInCommandInterface>true</includeInCommandInterface>
+ <picture xsi:type="core:PictureRef">
+  <picture>CommonPicture.Reports</picture>
+ </picture>
+ <content>Report.ItemsInfo</content>
+ <subsystems>Sales</subsystems>
+ <subsystems>Purchase</subsystems>
+ <subsystems>Inventory</subsystems>
+ <subsystems>Finance</subsystems>
 </mdclass:Subsystem>

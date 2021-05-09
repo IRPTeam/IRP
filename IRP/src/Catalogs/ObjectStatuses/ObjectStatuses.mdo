@@ -1,408 +1,408 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="f35d8dc7-17eb-4938-bce1-d09c94a76937">
-  <producedTypes>
-    <objectType typeId="84f703f4-2397-4338-9597-d7bafc0d24da" valueTypeId="c7a54c6a-452e-48d8-b102-62f906bf4c3e"/>
-    <refType typeId="7f7e6117-25fa-411a-851b-54150be73458" valueTypeId="a76adb50-482e-4625-a3e9-d8b03eb77898"/>
-    <selectionType typeId="05eb808b-cee4-4627-bb7b-bed43be4a75a" valueTypeId="163067c4-bb97-46ae-b829-96f30bd23e7a"/>
-    <listType typeId="42804dbf-ac9b-43bb-bd78-a0ab9425d296" valueTypeId="c968079e-4cc1-4b38-91e4-5cf5d4e45a8d"/>
-    <managerType typeId="18c41632-1cf5-4aa4-8dc5-059f11f147cd" valueTypeId="aad1e0bd-aa1e-41c3-b69a-772af5cafebd"/>
-  </producedTypes>
-  <name>ObjectStatuses</name>
-  <synonym>
-    <key>en</key>
-    <value>Objects statuses</value>
-  </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>PredefinedDataName</name>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>Predefined</name>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>Ref</name>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>DeletionMark</name>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>IsFolder</name>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>Owner</name>
-    <fillFromFillingValue>true</fillFromFillingValue>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>Parent</name>
-    <synonym>
-      <key>en</key>
-      <value>Object</value>
-    </synonym>
-    <fillFromFillingValue>true</fillFromFillingValue>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>Description</name>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <standardAttributes>
-    <dataHistory>Use</dataHistory>
-    <name>Code</name>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-  </standardAttributes>
-  <createOnInput>DontUse</createOnInput>
-  <dataLockControlMode>Managed</dataLockControlMode>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Catalog xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="f35d8dc7-17eb-4938-bce1-d09c94a76937">
+ <producedTypes>
+  <objectType typeId="84f703f4-2397-4338-9597-d7bafc0d24da" valueTypeId="c7a54c6a-452e-48d8-b102-62f906bf4c3e"/>
+  <refType typeId="7f7e6117-25fa-411a-851b-54150be73458" valueTypeId="a76adb50-482e-4625-a3e9-d8b03eb77898"/>
+  <selectionType typeId="05eb808b-cee4-4627-bb7b-bed43be4a75a" valueTypeId="163067c4-bb97-46ae-b829-96f30bd23e7a"/>
+  <listType typeId="42804dbf-ac9b-43bb-bd78-a0ab9425d296" valueTypeId="c968079e-4cc1-4b38-91e4-5cf5d4e45a8d"/>
+  <managerType typeId="18c41632-1cf5-4aa4-8dc5-059f11f147cd" valueTypeId="aad1e0bd-aa1e-41c3-b69a-772af5cafebd"/>
+ </producedTypes>
+ <name>ObjectStatuses</name>
+ <synonym>
+  <key>en</key>
+  <value>631A92EC-39E6-DC00-0F4A-AED4DE952166</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>PredefinedDataName</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
-  <objectPresentation>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>Predefined</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>Ref</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>DeletionMark</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>IsFolder</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>Owner</name>
+  <fillFromFillingValue>true</fillFromFillingValue>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>Parent</name>
+  <synonym>
+   <key>en</key>
+   <value>23C522B3-5FC5-3CDD-D326-658F2CCA8B43</value>
+  </synonym>
+  <fillFromFillingValue>true</fillFromFillingValue>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>Description</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <standardAttributes>
+  <dataHistory>Use</dataHistory>
+  <name>Code</name>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+ </standardAttributes>
+ <createOnInput>DontUse</createOnInput>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>en</key>
+  <value>F5640E2D-F435-E01C-C0F5-537CB7838FB7</value>
+ </objectPresentation>
+ <hierarchical>true</hierarchical>
+ <limitLevelCount>true</limitLevelCount>
+ <levelCount>3</levelCount>
+ <foldersOnTop>true</foldersOnTop>
+ <codeLength>12</codeLength>
+ <codeAllowedLength>Variable</codeAllowedLength>
+ <checkUnique>true</checkUnique>
+ <autonumbering>true</autonumbering>
+ <defaultPresentation>AsDescription</defaultPresentation>
+ <predefined>
+  <items id="e171ffad-e13a-4e2e-9319-9037bec5904d">
+   <name>SalesOrder</name>
+   <description>Sales order</description>
+   <code xsi:type="core:NumberValue">
+    <value>0</value>
+   </code>
+   <isFolder>true</isFolder>
+  </items>
+  <items id="72d5c9d9-a3f0-42c2-87f0-169d621fae5e">
+   <name>SalesReturnOrder</name>
+   <description>Sales return order</description>
+   <code xsi:type="core:NumberValue">
+    <value>0</value>
+   </code>
+   <isFolder>true</isFolder>
+  </items>
+  <items id="2a12c8b2-ef6e-485d-9e7b-11932d60003b">
+   <name>PurchaseOrder</name>
+   <description>Purchase order</description>
+   <code xsi:type="core:NumberValue">
+    <value>0</value>
+   </code>
+   <isFolder>true</isFolder>
+  </items>
+  <items id="a8559087-bcb5-408a-b346-99a24f2cc035">
+   <name>PurchaseReturnOrder</name>
+   <description>Purchase return order</description>
+   <code xsi:type="core:NumberValue">
+    <value>0</value>
+   </code>
+   <isFolder>true</isFolder>
+  </items>
+  <items id="4bca0f62-13eb-4af1-ba7b-7de74bfc953a">
+   <name>InventoryTransferOrder</name>
+   <description>Inventory transfer order</description>
+   <code xsi:type="core:NumberValue">
+    <value>0</value>
+   </code>
+   <isFolder>true</isFolder>
+  </items>
+  <items id="d16d1352-b5bc-4397-af42-16678054bcea">
+   <name>OutgoingPaymentOrder</name>
+   <description>Outgoing payment order</description>
+   <code xsi:type="core:NumberValue">
+    <value>0</value>
+   </code>
+   <isFolder>true</isFolder>
+  </items>
+  <items id="e904823b-2419-48d9-9136-b230e4da8a3b">
+   <name>ReconciliationStatement</name>
+   <description>Reconciliation statement</description>
+   <code xsi:type="core:NumberValue">
+    <value>0</value>
+   </code>
+   <isFolder>true</isFolder>
+  </items>
+  <items id="57f69d45-7158-4ea7-b56f-124bf07bcd08">
+   <name>ChequeBondTransaction</name>
+   <description>Cheque bond transaction</description>
+   <code xsi:type="core:NumberValue">
+    <value>0</value>
+   </code>
+   <isFolder>true</isFolder>
+   <content id="cd0763f2-0f2f-4bb4-a9b9-5b957c7f6453">
+    <name>ChequeBondIncoming</name>
+    <description>Cheque bond incoming</description>
+    <code xsi:type="core:NumberValue">
+     <value>0</value>
+    </code>
+    <isFolder>true</isFolder>
+   </content>
+   <content id="43cae9dd-81ce-47e6-a490-558af2eb55c3">
+    <name>ChequeBondOutgoing</name>
+    <description>Cheque bond outgoing</description>
+    <code xsi:type="core:NumberValue">
+     <value>0</value>
+    </code>
+    <isFolder>true</isFolder>
+   </content>
+  </items>
+  <items id="748479bd-dbd2-459d-ac53-92c750c6505d">
+   <name>PhysicalCountByLocation</name>
+   <description>Physical count by location</description>
+   <code xsi:type="core:NumberValue">
+    <value>0</value>
+   </code>
+   <isFolder>true</isFolder>
+   <content id="94db2442-3d9d-4627-ae9e-5d83003e1aec">
+    <name>Complete</name>
+    <description>Complete</description>
+    <code xsi:type="core:NumberValue">
+     <value>0</value>
+    </code>
+   </content>
+  </items>
+  <items id="83a9eeaa-a8f6-4fa4-9496-74fd8b74d65a">
+   <name>PhysicalInventory</name>
+   <description>Physical inventory</description>
+   <code xsi:type="core:NumberValue">
+    <value>0</value>
+   </code>
+   <isFolder>true</isFolder>
+  </items>
+ </predefined>
+ <editType>InDialog</editType>
+ <quickChoice>true</quickChoice>
+ <choiceMode>QuickChoice</choiceMode>
+ <defaultObjectForm>Catalog.ObjectStatuses.Form.ItemForm</defaultObjectForm>
+ <defaultFolderForm>Catalog.ObjectStatuses.Form.GroupForm</defaultFolderForm>
+ <defaultListForm>Catalog.ObjectStatuses.Form.ListForm</defaultListForm>
+ <defaultChoiceForm>Catalog.ObjectStatuses.Form.ChoiceForm</defaultChoiceForm>
+ <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+ <attributes uuid="2fcc43d5-489e-4b83-a634-2af9a1f4c676">
+  <name>SetByDefault</name>
+  <synonym>
+   <key>en</key>
+   <value>909688B7-EBF3-E10B-B2C6-6F45DCBB6867</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="31a6a12e-7f2d-4b1b-98f4-bca102f78a63">
+  <name>Posting</name>
+  <synonym>
+   <key>en</key>
+   <value>B7AA0326-29A8-27AC-C5DE-EDD7A8D6834F</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="fc7aa160-7127-4dd8-93c3-fc26aca72c2c">
+  <name>PostingAdvanced</name>
+  <synonym>
+   <key>en</key>
+   <value>10471563-F6DA-35C1-1FCF-FB0F8E57E9B4</value>
+  </synonym>
+  <type>
+   <types>EnumRef.DocumentPostingTypes</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="01d56ddf-0a29-4e0c-8e1a-6ca933e72f76">
+  <name>PostingPartnerAccountTransactions</name>
+  <synonym>
+   <key>en</key>
+   <value>F40203E6-CBA4-DF32-276F-FE1BDE090B9F</value>
+  </synonym>
+  <type>
+   <types>EnumRef.DocumentPostingTypes</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="6d5543dd-c949-43d1-889e-6e311b71ec39">
+  <name>PostingReconciliationStatement</name>
+  <synonym>
+   <key>en</key>
+   <value>97DB25DE-34D3-01E8-8D81-150F6F999CA7</value>
+  </synonym>
+  <type>
+   <types>EnumRef.DocumentPostingTypes</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="873b5a60-9573-42ee-8b9a-d1c9219be063">
+  <name>PostingAccountBalance</name>
+  <synonym>
+   <key>en</key>
+   <value>ADAB17EB-35B1-4B58-8279-95FA15946757</value>
+  </synonym>
+  <type>
+   <types>EnumRef.DocumentPostingTypes</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="f5474a62-d3ce-45e4-bd52-fec140f80e16">
+  <name>PostingPlaningCashTransactions</name>
+  <synonym>
+   <key>en</key>
+   <value>F933F6F2-6004-527A-A835-5661506AD57D</value>
+  </synonym>
+  <type>
+   <types>EnumRef.DocumentPostingTypes</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="7bf501ae-779e-484c-90c1-6db7c9e33e5e">
+  <name>PostingChequeBondBalance</name>
+  <synonym>
+   <key>en</key>
+   <value>8184DA81-7ECE-D1CA-ADCB-BF3EB674D209</value>
+  </synonym>
+  <type>
+   <types>EnumRef.DocumentPostingTypes</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <tabularSections uuid="41596e8a-eee2-42e8-bfbf-281e1176d952">
+  <producedTypes>
+   <objectType typeId="cd2e02a5-bbbd-4d01-bbbf-99a19de4f276" valueTypeId="0a0472ba-8eb3-49d8-a1b5-be07fb68acdd"/>
+   <rowType typeId="07043e89-8bea-4ff7-b8ac-161a2ff44996" valueTypeId="7617db38-a330-415d-a5b4-eb109e549382"/>
+  </producedTypes>
+  <name>NextPossibleStatuses</name>
+  <synonym>
+   <key>en</key>
+   <value>ABC4AC60-4696-946B-B7DF-F41A4871E817</value>
+  </synonym>
+  <attributes uuid="1787d1b7-e818-4ffc-8059-56acd4b34f1e">
+   <name>Status</name>
+   <synonym>
     <key>en</key>
-    <value>Objects status</value>
-  </objectPresentation>
-  <hierarchical>true</hierarchical>
-  <limitLevelCount>true</limitLevelCount>
-  <levelCount>3</levelCount>
-  <foldersOnTop>true</foldersOnTop>
-  <codeLength>12</codeLength>
-  <codeAllowedLength>Variable</codeAllowedLength>
-  <checkUnique>true</checkUnique>
-  <autonumbering>true</autonumbering>
-  <defaultPresentation>AsDescription</defaultPresentation>
-  <predefined>
-    <items id="e171ffad-e13a-4e2e-9319-9037bec5904d">
-      <name>SalesOrder</name>
-      <description>Sales order</description>
-      <code xsi:type="core:NumberValue">
-        <value>0</value>
-      </code>
-      <isFolder>true</isFolder>
-    </items>
-    <items id="72d5c9d9-a3f0-42c2-87f0-169d621fae5e">
-      <name>SalesReturnOrder</name>
-      <description>Sales return order</description>
-      <code xsi:type="core:NumberValue">
-        <value>0</value>
-      </code>
-      <isFolder>true</isFolder>
-    </items>
-    <items id="2a12c8b2-ef6e-485d-9e7b-11932d60003b">
-      <name>PurchaseOrder</name>
-      <description>Purchase order</description>
-      <code xsi:type="core:NumberValue">
-        <value>0</value>
-      </code>
-      <isFolder>true</isFolder>
-    </items>
-    <items id="a8559087-bcb5-408a-b346-99a24f2cc035">
-      <name>PurchaseReturnOrder</name>
-      <description>Purchase return order</description>
-      <code xsi:type="core:NumberValue">
-        <value>0</value>
-      </code>
-      <isFolder>true</isFolder>
-    </items>
-    <items id="4bca0f62-13eb-4af1-ba7b-7de74bfc953a">
-      <name>InventoryTransferOrder</name>
-      <description>Inventory transfer order</description>
-      <code xsi:type="core:NumberValue">
-        <value>0</value>
-      </code>
-      <isFolder>true</isFolder>
-    </items>
-    <items id="d16d1352-b5bc-4397-af42-16678054bcea">
-      <name>OutgoingPaymentOrder</name>
-      <description>Outgoing payment order</description>
-      <code xsi:type="core:NumberValue">
-        <value>0</value>
-      </code>
-      <isFolder>true</isFolder>
-    </items>
-    <items id="e904823b-2419-48d9-9136-b230e4da8a3b">
-      <name>ReconciliationStatement</name>
-      <description>Reconciliation statement</description>
-      <code xsi:type="core:NumberValue">
-        <value>0</value>
-      </code>
-      <isFolder>true</isFolder>
-    </items>
-    <items id="57f69d45-7158-4ea7-b56f-124bf07bcd08">
-      <name>ChequeBondTransaction</name>
-      <description>Cheque bond transaction</description>
-      <code xsi:type="core:NumberValue">
-        <value>0</value>
-      </code>
-      <isFolder>true</isFolder>
-      <content id="cd0763f2-0f2f-4bb4-a9b9-5b957c7f6453">
-        <name>ChequeBondIncoming</name>
-        <description>Cheque bond incoming</description>
-        <code xsi:type="core:NumberValue">
-          <value>0</value>
-        </code>
-        <isFolder>true</isFolder>
-      </content>
-      <content id="43cae9dd-81ce-47e6-a490-558af2eb55c3">
-        <name>ChequeBondOutgoing</name>
-        <description>Cheque bond outgoing</description>
-        <code xsi:type="core:NumberValue">
-          <value>0</value>
-        </code>
-        <isFolder>true</isFolder>
-      </content>
-    </items>
-    <items id="748479bd-dbd2-459d-ac53-92c750c6505d">
-      <name>PhysicalCountByLocation</name>
-      <description>Physical count by location</description>
-      <code xsi:type="core:NumberValue">
-        <value>0</value>
-      </code>
-      <isFolder>true</isFolder>
-      <content id="94db2442-3d9d-4627-ae9e-5d83003e1aec">
-        <name>Complete</name>
-        <description>Complete</description>
-        <code xsi:type="core:NumberValue">
-          <value>0</value>
-        </code>
-      </content>
-    </items>
-    <items id="83a9eeaa-a8f6-4fa4-9496-74fd8b74d65a">
-      <name>PhysicalInventory</name>
-      <description>Physical inventory</description>
-      <code xsi:type="core:NumberValue">
-        <value>0</value>
-      </code>
-      <isFolder>true</isFolder>
-    </items>
-  </predefined>
-  <editType>InDialog</editType>
-  <quickChoice>true</quickChoice>
-  <choiceMode>QuickChoice</choiceMode>
-  <defaultObjectForm>Catalog.ObjectStatuses.Form.ItemForm</defaultObjectForm>
-  <defaultFolderForm>Catalog.ObjectStatuses.Form.GroupForm</defaultFolderForm>
-  <defaultListForm>Catalog.ObjectStatuses.Form.ListForm</defaultListForm>
-  <defaultChoiceForm>Catalog.ObjectStatuses.Form.ChoiceForm</defaultChoiceForm>
-  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
-  <attributes uuid="2fcc43d5-489e-4b83-a634-2af9a1f4c676">
-    <name>SetByDefault</name>
-    <synonym>
-      <key>en</key>
-      <value>Set by default</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+    <value>AA9C2E69-C4FE-0337-7AF6-63C67EE02749</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.ObjectStatuses</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="31a6a12e-7f2d-4b1b-98f4-bca102f78a63">
-    <name>Posting</name>
-    <synonym>
-      <key>en</key>
-      <value>Posting</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="fc7aa160-7127-4dd8-93c3-fc26aca72c2c">
-    <name>PostingAdvanced</name>
-    <synonym>
-      <key>en</key>
-      <value>Advanced</value>
-    </synonym>
-    <type>
-      <types>EnumRef.DocumentPostingTypes</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="01d56ddf-0a29-4e0c-8e1a-6ca933e72f76">
-    <name>PostingPartnerAccountTransactions</name>
-    <synonym>
-      <key>en</key>
-      <value>Partner account transactions</value>
-    </synonym>
-    <type>
-      <types>EnumRef.DocumentPostingTypes</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="6d5543dd-c949-43d1-889e-6e311b71ec39">
-    <name>PostingReconciliationStatement</name>
-    <synonym>
-      <key>en</key>
-      <value>Reconciliation statement</value>
-    </synonym>
-    <type>
-      <types>EnumRef.DocumentPostingTypes</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="873b5a60-9573-42ee-8b9a-d1c9219be063">
-    <name>PostingAccountBalance</name>
-    <synonym>
-      <key>en</key>
-      <value>Account balance</value>
-    </synonym>
-    <type>
-      <types>EnumRef.DocumentPostingTypes</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="f5474a62-d3ce-45e4-bd52-fec140f80e16">
-    <name>PostingPlaningCashTransactions</name>
-    <synonym>
-      <key>en</key>
-      <value>Planning cash transactions</value>
-    </synonym>
-    <type>
-      <types>EnumRef.DocumentPostingTypes</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="7bf501ae-779e-484c-90c1-6db7c9e33e5e">
-    <name>PostingChequeBondBalance</name>
-    <synonym>
-      <key>en</key>
-      <value>Posting cheque bond balance</value>
-    </synonym>
-    <type>
-      <types>EnumRef.DocumentPostingTypes</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <tabularSections uuid="41596e8a-eee2-42e8-bfbf-281e1176d952">
-    <producedTypes>
-      <objectType typeId="cd2e02a5-bbbd-4d01-bbbf-99a19de4f276" valueTypeId="0a0472ba-8eb3-49d8-a1b5-be07fb68acdd"/>
-      <rowType typeId="07043e89-8bea-4ff7-b8ac-161a2ff44996" valueTypeId="7617db38-a330-415d-a5b4-eb109e549382"/>
-    </producedTypes>
-    <name>NextPossibleStatuses</name>
-    <synonym>
-      <key>en</key>
-      <value>Next possible statuses</value>
-    </synonym>
-    <attributes uuid="1787d1b7-e818-4ffc-8059-56acd4b34f1e">
-      <name>Status</name>
-      <synonym>
-        <key>en</key>
-        <value>Status</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.ObjectStatuses</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-  </tabularSections>
-  <forms uuid="65420be6-a4f9-47e1-b911-63d0c2e2c8f9">
-    <name>ItemForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Item form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="3a481351-84ab-45b2-ba05-538f6facd794">
-    <name>ListForm</name>
-    <synonym>
-      <key>en</key>
-      <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="11d323fb-ea58-4d49-bb16-b4eb36d457c0">
-    <name>GroupForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Group form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="000993b6-5857-4338-93a8-33327b5c475d">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
+ </tabularSections>
+ <forms uuid="65420be6-a4f9-47e1-b911-63d0c2e2c8f9">
+  <name>ItemForm</name>
+  <synonym>
+   <key>en</key>
+   <value>23EEC6D2-5331-573E-E436-6FE23A9419A3</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="3a481351-84ab-45b2-ba05-538f6facd794">
+  <name>ListForm</name>
+  <synonym>
+   <key>en</key>
+   <value>10C26E09-3F0F-D9ED-D24B-B5FAC166AAD9</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="11d323fb-ea58-4d49-bb16-b4eb36d457c0">
+  <name>GroupForm</name>
+  <synonym>
+   <key>en</key>
+   <value>1AF8B576-ED0E-DDB1-1F8A-AF2C8BF7E19F</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="000993b6-5857-4338-93a8-33327b5c475d">
+  <name>ChoiceForm</name>
+  <synonym>
+   <key>en</key>
+   <value>5653374B-D3BF-C4E5-5695-5E75FE44CFDF</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:Catalog>

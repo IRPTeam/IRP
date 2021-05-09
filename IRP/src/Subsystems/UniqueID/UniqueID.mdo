@@ -1,12 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="76ed2b52-bf96-47bd-8d06-e51607c9c51d">
-  <name>UniqueID</name>
-  <synonym>
-    <key>en</key>
-    <value>Unique ID</value>
-  </synonym>
-  <content>CommonModule.UniqueID</content>
-  <content>CommonAttribute.UniqueID</content>
-  <content>EventSubscription.BeforeWrite_CheckUniqueID</content>
-  <content>DefinedType.UseUniqueID</content>
+ <name>UniqueID</name>
+ <synonym>
+  <key>en</key>
+  <value>2899690C-6E31-2FAC-C9C4-48AF7A54D551</value>
+ </synonym>
+ <content>CommonModule.UniqueID</content>
+ <content>CommonAttribute.UniqueID</content>
+ <content>EventSubscription.BeforeWrite_CheckUniqueID</content>
+ <content>DefinedType.UseUniqueID</content>
 </mdclass:Subsystem>

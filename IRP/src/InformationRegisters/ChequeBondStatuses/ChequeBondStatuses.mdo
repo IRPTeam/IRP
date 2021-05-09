@@ -1,67 +1,67 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:InformationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="ed86b021-bfaf-4df5-a8dd-de56217c962e">
-  <producedTypes>
-    <selectionType typeId="c2601aab-ad37-4ab2-9a8a-c56131989932" valueTypeId="ec16d4a4-faaf-4014-8469-1a3514fa0b6f"/>
-    <listType typeId="59761c43-a846-4a54-89f9-affeaf05cf7c" valueTypeId="1a0e4b17-712b-4040-b9a7-4e1bc5ebc1fa"/>
-    <managerType typeId="088f24f6-e51b-4e33-877e-6f040d761a05" valueTypeId="daf6597a-2f36-4714-8e53-aebd7bceac10"/>
-    <recordSetType typeId="2150feaf-690e-4239-b0a7-314e0bf1bf1e" valueTypeId="b993b56a-8ed0-4757-a897-60a8544f0d32"/>
-    <recordKeyType typeId="b32ea6df-0205-434e-a737-22261677caa7" valueTypeId="1c89b19e-0d19-4ad0-a773-e4122078c9b4"/>
-    <recordType typeId="b661d3c8-5c09-429f-a808-64804bc8681c" valueTypeId="dea87d5b-f46a-4038-819b-9a750dd971a4"/>
-    <recordManagerType typeId="a191c486-ff4c-4f64-aa9b-466a02f79ea6" valueTypeId="0556db64-31a9-467f-9274-0b27484b7649"/>
-  </producedTypes>
-  <name>ChequeBondStatuses</name>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:InformationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="ed86b021-bfaf-4df5-a8dd-de56217c962e">
+ <producedTypes>
+  <selectionType typeId="c2601aab-ad37-4ab2-9a8a-c56131989932" valueTypeId="ec16d4a4-faaf-4014-8469-1a3514fa0b6f"/>
+  <listType typeId="59761c43-a846-4a54-89f9-affeaf05cf7c" valueTypeId="1a0e4b17-712b-4040-b9a7-4e1bc5ebc1fa"/>
+  <managerType typeId="088f24f6-e51b-4e33-877e-6f040d761a05" valueTypeId="daf6597a-2f36-4714-8e53-aebd7bceac10"/>
+  <recordSetType typeId="2150feaf-690e-4239-b0a7-314e0bf1bf1e" valueTypeId="b993b56a-8ed0-4757-a897-60a8544f0d32"/>
+  <recordKeyType typeId="b32ea6df-0205-434e-a737-22261677caa7" valueTypeId="1c89b19e-0d19-4ad0-a773-e4122078c9b4"/>
+  <recordType typeId="b661d3c8-5c09-429f-a808-64804bc8681c" valueTypeId="dea87d5b-f46a-4038-819b-9a750dd971a4"/>
+  <recordManagerType typeId="a191c486-ff4c-4f64-aa9b-466a02f79ea6" valueTypeId="0556db64-31a9-467f-9274-0b27484b7649"/>
+ </producedTypes>
+ <name>ChequeBondStatuses</name>
+ <synonym>
+  <key>en</key>
+  <value>742E99BD-EE17-01EF-FE10-0B6E4E9F83D9</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <informationRegisterPeriodicity>RecorderPosition</informationRegisterPeriodicity>
+ <writeMode>RecorderSubordinate</writeMode>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <resources uuid="3e9855ed-c2e2-4592-a630-75ef8b66aca0">
+  <name>Status</name>
   <synonym>
-    <key>en</key>
-    <value>Cheque bond statuses</value>
+   <key>en</key>
+   <value>5FD9749A-8F11-D455-59B1-1D77E54798FC</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <informationRegisterPeriodicity>RecorderPosition</informationRegisterPeriodicity>
-  <writeMode>RecorderSubordinate</writeMode>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <resources uuid="3e9855ed-c2e2-4592-a630-75ef8b66aca0">
-    <name>Status</name>
-    <synonym>
-      <key>en</key>
-      <value>Status</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.ObjectStatuses</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </resources>
-  <attributes uuid="684e30c1-ff73-46e8-8f98-52c0bb7b80de">
-    <name>Author</name>
-    <synonym>
-      <key>en</key>
-      <value>Author</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Partners</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </attributes>
-  <dimensions uuid="10d75f85-8206-4463-9d3d-8cbf34f93c03">
-    <name>Cheque</name>
-    <synonym>
-      <key>en</key>
-      <value>Cheque</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.ChequeBonds</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <mainFilter>true</mainFilter>
-  </dimensions>
+  <type>
+   <types>CatalogRef.ObjectStatuses</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <attributes uuid="684e30c1-ff73-46e8-8f98-52c0bb7b80de">
+  <name>Author</name>
+  <synonym>
+   <key>en</key>
+   <value>AA3751A3-B8FE-5D5D-D56B-B5DE1F049C3D</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Partners</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </attributes>
+ <dimensions uuid="10d75f85-8206-4463-9d3d-8cbf34f93c03">
+  <name>Cheque</name>
+  <synonym>
+   <key>en</key>
+   <value>D2A75D72-C823-9F9B-B954-4CF5C07EB168</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.ChequeBonds</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
 </mdclass:InformationRegister>

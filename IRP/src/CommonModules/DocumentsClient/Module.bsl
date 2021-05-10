@@ -2287,6 +2287,39 @@ Procedure ItemListUnitOnChange(Object, Form, Module, Item = Undefined, Settings 
 	ItemListCalculateRowsAmounts(Object, Form, Settings, Undefined, AddInfo);
 EndProcedure
 
+Procedure ItemListPackageUnitOnChange(Object, Form, Module, Item = Undefined, Settings = Undefined, AddInfo = Undefined) Export
+	
+	CommonFunctionsClientServer.DeleteFromAddInfo(AddInfo, "ServerData");
+	ItemListUnitSettings = Module.ItemListUnitSettings(Object, Form);
+	If ItemListUnitSettings.Property("PutServerDataToAddInfo") And ItemListUnitSettings.PutServerDataToAddInfo Then
+		Module.ItemListUnitOnChangePutServerDataToAddInfo(Object, Form, AddInfo);
+	EndIf;
+	ItemListUnitSettings = Module.ItemListUnitSettings(Object, Form, AddInfo);
+		
+	CurrentRow = Form.Items.ItemList.CurrentData;
+	If CurrentRow = Undefined Then
+		Return;
+	EndIf;
+	
+	// If Item was changed we have to clear itemkey
+	If Settings = Undefined Then
+		Settings = GetSettingsStructure(Module);
+	EndIf;
+	
+	Settings.Insert("ObjectAttributes", ItemListUnitSettings.ObjectAttributes);
+
+	Settings.Insert("Rows", New Array());
+	Settings.Rows.Add(CurrentRow);
+	Settings.CalculateSettings = New Structure("CalculateQuantityInPackageUnit");
+	
+	CalculationStringsClientServer.DoTableActions(Object, Form, Settings, ItemListUnitSettings.Actions);
+	
+	If Item = Undefined Then
+		Return;
+	EndIf;
+
+EndProcedure
+
 Procedure ItemListPriceTypeOnChange(Object, Form, Module, Item = Undefined, Settings = Undefined, AddInfo = Undefined) Export
 	
 	CommonFunctionsClientServer.DeleteFromAddInfo(AddInfo, "ServerData");

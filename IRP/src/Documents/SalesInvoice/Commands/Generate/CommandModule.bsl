@@ -2,8 +2,8 @@
 &AtClient
 Procedure CommandProcessing(CommandParameter, CommandExecuteParameters)	
 	FormParameters = New Structure();
-	FormParameters.Insert("Filter"              , 
-	New Structure("Basises, Ref", CommandParameter, PredefinedValue("Document.SalesInvoice.EmptyRef")));
+	Filter = New Structure("Basises, Ref", CommandParameter, PredefinedValue("Document.SalesInvoice.EmptyRef"));
+	FormParameters.Insert("Filter"              , Filter);
 	FormParameters.Insert("TablesInfo"          , RowIDInfoClient.GetTablesInfo());
 	FormParameters.Insert("SetAllCheckedOnOpen" , True);
 

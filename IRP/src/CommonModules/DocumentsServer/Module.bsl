@@ -588,6 +588,7 @@ Function PrepareServerData(Parameters) Export
 	
 	If Parameters.Property("GetItemUnitInfo") Then
 		Result.Insert("ItemUnitInfo" , GetItemInfo.ItemUnitInfo(Parameters.GetItemUnitInfo.ItemKey));
+		Result.Insert("ItemPackageUnitInfo" , GetItemInfo.ItemPackageUnitInfo(Parameters.GetItemUnitInfo.ItemKey));
 	EndIf;
 	
 	If Parameters.Property("GetItemKeysWithSerialLotNumbers") Then
@@ -861,20 +862,17 @@ Function SerializeArrayOfFilters(ArrayOfFilters) Export
 	Return CommonFunctionsServer.SerializeXMLUseXDTO(ArrayOfFilters);
 EndFunction
 
-Procedure RecalculateQuantityInTable(Table,
-		UnitQuantityName = "QuantityUnit") Export
+Procedure RecalculateQuantityInTable(Table,	UnitQuantityName = "QuantityUnit") Export
 	For Each Row In Table Do
 		RecalculateQuantityInRow(Row, UnitQuantityName);
 	EndDo;
 EndProcedure
 
-Procedure RecalculateQuantityInRow(Row,
-		UnitQuantityName = "QuantityUnit") Export
+Procedure RecalculateQuantityInRow(Row,	UnitQuantityName = "QuantityUnit") Export
 	ItemKeyUnit = CatItemsServer.GetItemKeyUnit(Row.ItemKey);
 	UnitFactorFrom = Catalogs.Units.GetUnitFactor(Row[UnitQuantityName], ItemKeyUnit);
 	UnitFactorTo = Catalogs.Units.GetUnitFactor(Row.Unit, ItemKeyUnit);
-	Row.Quantity = ?(UnitFactorTo = 0, 0, Row.Quantity * UnitFactorFrom
-			/ UnitFactorTo);
+	Row.Quantity = ?(UnitFactorTo = 0, 0, Row.Quantity * UnitFactorFrom	/ UnitFactorTo);
 EndProcedure
 
 #EndRegion

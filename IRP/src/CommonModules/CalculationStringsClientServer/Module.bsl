@@ -204,6 +204,10 @@ Procedure CalculateItemsRow(Object, ItemRow, Actions, ArrayOfTaxInfo = Undefined
 		CalculateQuantityInBaseUnit(Object, ItemRow, AddInfo);
 	EndIf;
 	
+	If Actions.Property("CalculateQuantityInPackageUnitUnit") Then
+		CalculateQuantityInPackageUnit(Object, ItemRow, AddInfo);
+	EndIf;
+		
 	If Actions.Property("ChangePriceType") Then
 		ChangePriceType(Object, ItemRow, Actions.ChangePriceType, AddInfo);
 	EndIf;
@@ -907,8 +911,26 @@ Procedure CalculateQuantityInBaseUnit(Object, ItemRow, AddInfo = Undefined)
 	EndIf;
 	UnitFactor = GetItemInfo.GetUnitFactor(ItemRow.ItemKey, ItemRow.Unit);
 	ItemRow.QuantityInBaseUnit = ItemRow.Quantity * UnitFactor;	
+	
+	If ItemRow.Property("QuantityInPackageUnit") Then
+		CalculateQuantityInPackageUnit(Object, ItemRow, AddInfo);
+	EndIf;
+	
 EndProcedure
 
+Procedure CalculateQuantityInPackageUnit(Object, ItemRow, AddInfo = Undefined)
+	If Not CommonFunctionsClientServer.ObjectHasProperty(ItemRow, "QuantityInPackageUnit") Then
+		Return;
+	EndIf;
+
+	UnitFactor = GetItemInfo.GetUnitFactor(ItemRow.ItemKey, ItemRow.PackageUnit);
+	If UnitFactor AND Not ItemRow.PackageUnit.isEmpty() Then
+		ItemRow.QuantityInPackageUnit = ItemRow.QuantityInBaseUnit / UnitFactor;
+	Else
+		ItemRow.QuantityInPackageUnit = 1;
+	EndIf;
+
+EndProcedure
 Procedure UpdateRowUnit(Object, Form, Settings, AddInfo = Undefined)
 	
 	If Settings.Rows.Count() = 0 Then
@@ -925,6 +947,16 @@ Procedure UpdateRowUnit(Object, Form, Settings, AddInfo = Undefined)
 		UnitInfo = ServerData.ItemUnitInfo;
 	EndIf;
 	CurrentRow.Unit = UnitInfo.Unit;
+	
+	If CurrentRow.Property("PackageUnit") Then
+		If ServerData = Undefined Then
+			UnitInfo = GetItemInfo.ItemPackageUnitInfo(CurrentRow.ItemKey);
+		Else
+			UnitInfo = ServerData.ItemPackageUnitInfo;
+		EndIf;
+		
+		CurrentRow.PackageUnit = UnitInfo.PackageUnit;
+	EndIf;
 	
 EndProcedure
 

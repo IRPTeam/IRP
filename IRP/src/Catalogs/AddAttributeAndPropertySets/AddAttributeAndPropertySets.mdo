@@ -602,6 +602,13 @@
         <value>82</value>
       </code>
     </items>
+    <items id="1342e47e-5c34-4944-85d9-3ac6f8d8027d">
+      <name>Catalog_UnitsOfMeasurement</name>
+      <description>Catalog Units of measurement</description>
+      <code xsi:type="core:NumberValue">
+        <value>83</value>
+      </code>
+    </items>
   </predefined>
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>

@@ -100,6 +100,22 @@
     <fillValue xsi:type="core:UndefinedValue"/>
     <mainFilter>true</mainFilter>
   </dimensions>
+  <dimensions uuid="77f0abc2-3146-41b2-bcbe-bb7e163120d2">
+    <name>IsCustomerAdvance</name>
+    <synonym>
+      <key>en</key>
+      <value>Is customer advance</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
   <dimensions uuid="7e95ab6a-78af-494b-8a1d-d85b8227fb5c">
     <name>AdvancesDocument</name>
     <synonym>
@@ -109,6 +125,8 @@
     <type>
       <types>DocumentRef.BankPayment</types>
       <types>DocumentRef.CashPayment</types>
+      <types>DocumentRef.CashReceipt</types>
+      <types>DocumentRef.BankReceipt</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

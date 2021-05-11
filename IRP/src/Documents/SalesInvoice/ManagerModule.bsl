@@ -683,7 +683,6 @@ Function GetQueryTextsSecondaryTables()
 	QueryArray = New Array;
 	QueryArray.Add(ItemList());
 	QueryArray.Add(OffersInfo());
-	QueryArray.Add(ShipmentConfirmationsInfo());
 	QueryArray.Add(Taxes());
 	QueryArray.Add(SerialLotNumbers());
 	QueryArray.Add(PostingServer.Exists_R4010B_ActualStocks());
@@ -711,6 +710,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R2020B_AdvancesFromCustomers());//**2
 	QueryArray.Add(R5011B_PartnersAging());//**3
 	QueryArray.Add(R5010B_ReconciliationStatement());
+	QueryArray.Add(T1001I_PartnerTransactions());
 	Return QueryArray;
 EndFunction
 
@@ -732,16 +732,14 @@ Function ItemList()
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
-	|	ShipmentConfirmations.Key AS Key,
-	|	ShipmentConfirmations.ShipmentConfirmation
+	|	ShipmentConfirmations.Key AS Key
 	|INTO ShipmentConfirmations
 	|FROM
 	|	Document.SalesInvoice.ShipmentConfirmations AS ShipmentConfirmations
 	|WHERE
 	|	ShipmentConfirmations.Ref = &Ref
 	|GROUP BY
-	|	ShipmentConfirmations.Key,
-	|	ShipmentConfirmations.ShipmentConfirmation
+	|	ShipmentConfirmations.Key
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
@@ -749,7 +747,6 @@ Function ItemList()
 	|	SalesInvoiceItemList.Ref.Company AS Company,
 	|	SalesInvoiceItemList.Store AS Store,
 	|	NOT ShipmentConfirmations.Key IS NULL AS ShipmentConfirmationExists,
-	|	ShipmentConfirmations.ShipmentConfirmation,
 	|	SalesInvoiceItemList.Ref AS Invoice,
 	|	SalesInvoiceItemList.ItemKey AS ItemKey,
 	|	SalesInvoiceItemList.Quantity AS UnitQuantity,
@@ -782,7 +779,8 @@ Function ItemList()
 	|	SalesInvoiceItemList.NetAmount AS NetAmount,
 	|	SalesInvoiceItemList.OffersAmount AS OffersAmount,
 	|	SalesInvoiceItemList.UseShipmentConfirmation AS UseShipmentConfirmation,
-	|	SalesInvoiceItemList.Ref.IgnoreAdvances AS IgnoreAdvances
+	|	SalesInvoiceItemList.Ref.IgnoreAdvances AS IgnoreAdvances,
+	|	SalesInvoiceItemList.Key
 	|INTO ItemList
 	|FROM
 	|	Document.SalesInvoice.ItemList AS SalesInvoiceItemList
@@ -791,7 +789,20 @@ Function ItemList()
 	|		LEFT JOIN TableRowIDInfo AS TableRowIDInfo
 	|		ON SalesInvoiceItemList.Key = TableRowIDInfo.Key
 	|WHERE
-	|	SalesInvoiceItemList.Ref = &Ref";
+	|	SalesInvoiceItemList.Ref = &Ref
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	SalesInvoiceShipmentConfirmations.Key,
+	|	SalesInvoiceShipmentConfirmations.ShipmentConfirmation,
+	|	SalesInvoiceShipmentConfirmations.Quantity
+	|INTO ShipmentConfirmationsInfo
+	|FROM
+	|	Document.SalesInvoice.ShipmentConfirmations AS SalesInvoiceShipmentConfirmations
+	|WHERE
+	|	SalesInvoiceShipmentConfirmations.Ref = &Ref
+	|";
 EndFunction
 
 Function OffersInfo()
@@ -816,20 +827,6 @@ Function OffersInfo()
 		|		AND SalesInvoiceSpecialOffers.Ref = &Ref
 		|		INNER JOIN TableRowIDInfo AS TableRowIDInfo
 		|		ON SalesInvoiceItemList.Key = TableRowIDInfo.Key";
-EndFunction
-
-Function ShipmentConfirmationsInfo()
-	Return
-		"SELECT
-		|	SalesInvoiceShipmentConfirmations.Key,
-		|	SalesInvoiceShipmentConfirmations.ShipmentConfirmation,
-		|	SalesInvoiceShipmentConfirmations.Quantity,
-		|	SalesInvoiceShipmentConfirmations.QuantityInShipmentConfirmation
-		|INTO ShipmentConfirmationsInfo
-		|FROM
-		|	Document.SalesInvoice.ShipmentConfirmations AS SalesInvoiceShipmentConfirmations
-		|WHERE
-		|	SalesInvoiceShipmentConfirmations.Ref = &Ref";
 EndFunction
 
 Function Taxes()
@@ -969,7 +966,7 @@ Function R2031B_ShipmentInvoicing()
 		|FROM
 		|	ItemList AS ItemList
 		|		INNER JOIN ShipmentConfirmationsInfo AS ShipmentConfirmations
-		|		ON ItemList.RowKey = ShipmentConfirmations.Key
+		|		ON ItemList.Key = ShipmentConfirmations.Key
 		|WHERE
 		|	TRUE";
 
@@ -1158,13 +1155,20 @@ Function R4032B_GoodsInTransitOutgoing()
 		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
 		|	CASE
 		|		WHEN ItemList.ShipmentConfirmationExists
-		|			Then ItemList.ShipmentConfirmation
+		|			Then ShipmentConfirmations.ShipmentConfirmation
 		|		Else ItemList.Invoice
 		|	End AS Basis,
+		|	CASE 
+		|		WHEN ItemList.ShipmentConfirmationExists
+		|			Then ShipmentConfirmations.Quantity
+		|		Else ItemList.Quantity
+		|	End AS Quantity,
 		|	*
 		|INTO R4032B_GoodsInTransitOutgoing
 		|FROM
 		|	ItemList AS ItemList
+		|		INNER JOIN ShipmentConfirmationsInfo AS ShipmentConfirmations
+		|		ON ItemList.Key = ShipmentConfirmations.Key
 		|WHERE
 		|	NOT ItemList.IsService
 		|	AND (ItemList.UseShipmentConfirmation
@@ -1219,12 +1223,16 @@ EndFunction
 
 Function R2020B_AdvancesFromCustomers()
 	Return
-		"SELECT *
+		"SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	OffsetOfAdvances.AdvancesDocument AS Basis,
+		|	OffsetOfAdvances.Recorder AS CustomersAdvancesClosing,
+		|	*
 		|INTO R2020B_AdvancesFromCustomers
 		|FROM
-		|	ItemList AS ItemList
+		|	InformationRegister.T1000I_OffsetOfAdvances AS OffsetOfAdvances
 		|WHERE
-		|	FALSE";
+		|	OffsetOfAdvances.Document = &Ref";
 EndFunction
 
 Function R2021B_CustomersTransactions()
@@ -1238,7 +1246,8 @@ Function R2021B_CustomersTransactions()
 		|	ItemList.Partner,
 		|	ItemList.Agreement,
 		|	ItemList.Basis,
-		|	SUM(ItemList.Amount) AS Amount
+		|	SUM(ItemList.Amount) AS Amount,
+		|	UNDEFINED AS CustomersAdvancesClosing
 		|INTO R2021B_CustomersTransactions
 		|FROM
 		|	ItemList AS ItemList
@@ -1250,8 +1259,55 @@ Function R2021B_CustomersTransactions()
 		|	ItemList.LegalName,
 		|	ItemList.Partner,
 		|	ItemList.Period,
-		|	VALUE(AccumulationRecordType.Receipt)";
+		|	VALUE(AccumulationRecordType.Receipt)
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	OffsetOfAdvances.Period,
+		|	OffsetOfAdvances.Company,
+		|	OffsetOfAdvances.Currency,
+		|	OffsetOfAdvances.LegalName,
+		|	OffsetOfAdvances.Partner,
+		|	OffsetOfAdvances.Agreement,
+		|	OffsetOfAdvances.TransactionDocument,
+		|	OffsetOfAdvances.Amount,
+		|	OffsetOfAdvances.Recorder
+		|FROM
+		|	InformationRegister.T1000I_OffsetOfAdvances AS OffsetOfAdvances
+		|WHERE
+		|	OffsetOfAdvances.Document = &Ref";
 EndFunction
+
+Function T1001I_PartnerTransactions()
+	Return
+		"SELECT
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Currency,
+		|	ItemList.LegalName,
+		|	ItemList.Partner,
+		|	ItemList.Agreement,
+		|	ItemList.Basis AS TransactionDocument,
+		|	TRUE AS IsCustomerTransaction,
+		|	SUM(ItemList.Amount) AS Amount,
+		|	ItemList.Key
+		|INTO T1001I_PartnerTransactions
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	NOT ItemList.IgnoreAdvances
+		|GROUP BY
+		|	ItemList.Agreement,
+		|	ItemList.Basis,
+		|	ItemList.Company,
+		|	ItemList.Currency,
+		|	ItemList.Key,
+		|	ItemList.LegalName,
+		|	ItemList.Partner,
+		|	ItemList.Period";
+EndFunction		
 
 Function R5011B_PartnersAging()
 	Return 

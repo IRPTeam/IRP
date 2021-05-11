@@ -225,6 +225,9 @@ EndProcedure
 Procedure Customers_OnTransaction(Parameters) Export	
 	AdvancesOnTransaction(Parameters, "R2020B_AdvancesFromCustomers" , "CustomersTransactions", "OffsetOfAdvanceFromCustomers");
 
+	// temporarily disabled 
+	Return;
+	
 #Region Aging
 	
 	Query = New Query();
@@ -537,6 +540,9 @@ EndFunction
 Procedure Customers_OnMoneyMovements(Parameters) Export
 		
 AdvancesOnMoneyMovements(Parameters, "R2021B_CustomersTransactions", "AdvancesFromCustomers", "CustomersTransactions", "OffsetOfAdvanceFromCustomers");
+	
+	// temporarily disabled 
+	Return;
 		
 #Region Aging
 

@@ -2158,7 +2158,6 @@ Function ItemList()
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
 	|	GoodsReceipts.Key
-//	|	GoodsReceipts.GoodsReceipt
 	|INTO GoodsReceipts
 	|FROM
 	|	Document.PurchaseInvoice.GoodsReceipts AS GoodsReceipts
@@ -2166,7 +2165,6 @@ Function ItemList()
 	|	GoodsReceipts.Ref = &Ref
 	|GROUP BY
 	|	GoodsReceipts.Key
-//	|	GoodsReceipts.GoodsReceipt
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
@@ -2235,7 +2233,6 @@ Function ItemList()
 	|	PurchaseInvoiceItemList.NetAmount AS NetAmount,
 	|	PurchaseInvoiceItemList.Ref.IgnoreAdvances AS IgnoreAdvances,
 	|	PurchaseInvoiceItemList.Key
-//	|	GoodsReceipts.GoodsReceipt
 	|INTO ItemList
 	|FROM
 	|	Document.PurchaseInvoice.ItemList AS PurchaseInvoiceItemList

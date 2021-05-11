@@ -44,6 +44,9 @@
       <types>DocumentRef.PurchaseInvoice</types>
       <types>DocumentRef.BankPayment</types>
       <types>DocumentRef.CashPayment</types>
+      <types>DocumentRef.BankReceipt</types>
+      <types>DocumentRef.CashReceipt</types>
+      <types>DocumentRef.SalesInvoice</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

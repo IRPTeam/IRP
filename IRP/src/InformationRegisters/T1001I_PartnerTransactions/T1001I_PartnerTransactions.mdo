@@ -113,11 +113,43 @@
     <fillValue xsi:type="core:UndefinedValue"/>
     <mainFilter>true</mainFilter>
   </dimensions>
+  <dimensions uuid="9e1425df-c01d-49e9-a520-ee5f11920e4d">
+    <name>IsCustomerTransaction</name>
+    <synonym>
+      <key>en</key>
+      <value>Is customer transaction</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
   <dimensions uuid="41181326-c13b-47f9-85c5-d832c8e3ceec">
     <name>IsPaymentToVendor</name>
     <synonym>
       <key>en</key>
       <value>Is payment to vendor</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+  <dimensions uuid="308b0714-78b4-4c7d-8ebe-7d571982b389">
+    <name>IsPaymentFromCustomer</name>
+    <synonym>
+      <key>en</key>
+      <value>Is payment from customer</value>
     </synonym>
     <type>
       <types>Boolean</types>

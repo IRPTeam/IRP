@@ -54,13 +54,7 @@ Scenario: Open information register form "BundleContents"
 
 
 
-	
-Scenario: Open information register form "ChequeBondStatuses" 
 
-	Given I open "ChequeBondStatuses" information register default form 
-	If the warning is displayed then
-		Then I raise "Failed to open information register form  ChequeBondStatuses" exception
-	And I close current window
 
 
 	
@@ -274,20 +268,7 @@ Scenario: Open object form "CashInTransit"
 		Then I raise "Failed to open information register form CashInTransit" exception
 	And I close current window
 
-	
-Scenario: Open list form "ChequeBondBalance" 
 
-	Given I open "ChequeBondBalance" accumulation register list form 
-	If the warning is displayed then
-		Then I raise "Failed to open information register form ChequeBondBalance" exception
-	And I close current window
-
-Scenario: Open object form "ChequeBondBalance"
-
-	Given I open "ChequeBondBalance" accumulation register default form
-	If the warning is displayed then
-		Then I raise "Failed to open information register form ChequeBondBalance" exception
-	And I close current window
 
 	
 Scenario: Open list form "ExpensesTurnovers" 
@@ -801,12 +782,7 @@ Scenario: Open object form "R3015B_CashAdvance"
 		Then I raise "Failed to open information register form R3015B_CashAdvance" exception
 	And I close current window
 
-Scenario: Open object form "R3016B_ChequeAndBonds"
 
-	Given I open "R3016B_ChequeAndBonds" accumulation register default form
-	If the warning is displayed then
-		Then I raise "Failed to open information register form R3016B_ChequeAndBonds" exception
-	And I close current window
 
 Scenario: Open object form "R3021B_CashInTransitIncoming"
 

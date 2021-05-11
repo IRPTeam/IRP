@@ -57,7 +57,6 @@ When Create catalog BusinessUnits objects (test data base)
 When Create catalog CancelReturnReasons objects (test data base)
 When Create catalog CashStatementStatuses objects (test data base)
 When Create catalog CashAccounts objects (test data base)
-When Create catalog ChequeBonds objects (test data base)	
 When Create catalog Companies objects (test data base)
 When Create catalog ConfigurationMetadata objects (test data base)
 When Create catalog IDInfoSets objects (test data base)
@@ -120,8 +119,6 @@ When Create document CashPayment objects (test data base)
 When Create document CashReceipt objects (test data base)
 When Create document CashRevenue objects (test data base)
 When Create document CashTransferOrder objects (test data base)
-When Create document ChequeBondTransaction objects (test data base)
-When Create document ChequeBondTransactionItem objects (test data base)
 When Create document CreditNote objects (test data base)
 When Create document DebitNote objects (test data base)
 When Create document GoodsReceipt objects (test data base)
@@ -158,7 +155,6 @@ When Create chart of characteristic types CustomUserSettings objects (test data 
 When Create chart of characteristic types CurrencyMovementType objects (test data base)
 When Create information register BundleContents records (test data base)
 When Create information register BusinessUnitBankTerms records (test data base)
-When Create information register ChequeBondStatuses records (test data base)
 When Create information register CurrencyRates records (test data base)
 When Create information register Barcodes records (test data base)
 When Create information register PartnerSegments records (test data base)
@@ -320,11 +316,6 @@ When Create information register UserSettings records (test data base)
  		And Delay "3"
 * Posting ReconciliationStatement
 		Given I open hyperlink "e1cib/list/Document.ReconciliationStatement"
-		Then I select all lines of "List" table
-		And in the table "List" I click the button named "ListContextMenuPost"
- 		And Delay "3"
-* Posting ChequeBondTransaction
-		Given I open hyperlink "e1cib/list/Document.ChequeBondTransaction"
 		Then I select all lines of "List" table
 		And in the table "List" I click the button named "ListContextMenuPost"
  		And Delay "3"

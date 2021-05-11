@@ -49,7 +49,6 @@ Scenario: _0154000 preparation
 		When Create catalog IntegrationSettings objects
 		When Create information register CurrencyRates records
 		When Create catalog CashAccounts objects
-		When Create catalog ChequeBonds objects
 		When Create catalog SerialLotNumbers objects
 		When Create catalog PaymentTerminals objects
 		When Create catalog RetailCustomers objects

@@ -165,23 +165,6 @@ Scenario: Open object form "CashTransferOrder"
 
 
 
-	
-	
-Scenario: Open list form "ChequeBondTransaction" 
-	And I close all client application windows
-	Given I open "ChequeBondTransaction" document default form
-	If the warning is displayed then
-		Then I raise "Failed to open document form ChequeBondTransaction" exception
-	And I close current window
-
-Scenario: Open object form "ChequeBondTransaction"
-	And I close all client application windows
-	Given I open "ChequeBondTransaction" document main form
-	If the warning is displayed then
-		Then I raise "Failed to open document form ChequeBondTransaction" exception
-	And I close current window
-
-
 
 
 	

@@ -158,19 +158,20 @@ Scenario: _043503 check Cash payment movements by the Register "R1020 Advances t
 		And I go to line in "List" table
 			| 'Number'  |
 			| '1' |
+		And I select current line in "List" table
 	* Check movements by the Register  "R1020 Advances to vendors" 
 		And I click "Registrations report" button
 		And I select "R1020 Advances to vendors" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Cash payment 1 dated 05.04.2021 12:40:00' | ''            | ''                    | ''          | ''             | ''                             | ''         | ''                  | ''          | ''      | ''                     | ''                  |
-			| 'Document registrations records'           | ''            | ''                    | ''          | ''             | ''                             | ''         | ''                  | ''          | ''      | ''                     | ''                  |
-			| 'Register  "R1020 Advances to vendors"'    | ''            | ''                    | ''          | ''             | ''                             | ''         | ''                  | ''          | ''      | ''                     | ''                  |
-			| ''                                         | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                             | ''         | ''                  | ''          | ''      | 'Attributes'           | ''                  |
-			| ''                                         | ''            | ''                    | 'Amount'    | 'Company'      | 'Multi currency movement type' | 'Currency' | 'Legal name'        | 'Partner'   | 'Basis' | 'Deferred calculation' | 'Vendors advances closing' |
-			| ''                                         | 'Receipt'     | '05.04.2021 12:40:00' | '171,2'     | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Company Ferron BP' | 'Ferron BP' | ''      | 'No'                   | ''                |
-			| ''                                         | 'Receipt'     | '05.04.2021 12:40:00' | '1 000'     | 'Main Company' | 'Local currency'               | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | ''      | 'No'                   | ''                |
-			| ''                                         | 'Receipt'     | '05.04.2021 12:40:00' | '1 000'     | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | ''      | 'No'                   | ''                |
+			| 'Cash payment 1 dated 05.04.2021 12:40:00' | ''            | ''                    | ''          | ''             | ''                             | ''         | ''                  | ''          | ''                                         | ''                     | ''                         |
+			| 'Document registrations records'           | ''            | ''                    | ''          | ''             | ''                             | ''         | ''                  | ''          | ''                                         | ''                     | ''                         |
+			| 'Register  "R1020 Advances to vendors"'    | ''            | ''                    | ''          | ''             | ''                             | ''         | ''                  | ''          | ''                                         | ''                     | ''                         |
+			| ''                                         | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                             | ''         | ''                  | ''          | ''                                         | 'Attributes'           | ''                         |
+			| ''                                         | ''            | ''                    | 'Amount'    | 'Company'      | 'Multi currency movement type' | 'Currency' | 'Legal name'        | 'Partner'   | 'Basis'                                    | 'Deferred calculation' | 'Vendors advances closing' |
+			| ''                                         | 'Receipt'     | '05.04.2021 12:40:00' | '171,2'     | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Company Ferron BP' | 'Ferron BP' | 'Cash payment 1 dated 05.04.2021 12:40:00' | 'No'                   | ''                         |
+			| ''                                         | 'Receipt'     | '05.04.2021 12:40:00' | '1 000'     | 'Main Company' | 'Local currency'               | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Cash payment 1 dated 05.04.2021 12:40:00' | 'No'                   | ''                         |
+			| ''                                         | 'Receipt'     | '05.04.2021 12:40:00' | '1 000'     | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Cash payment 1 dated 05.04.2021 12:40:00' | 'No'                   | ''                         |
 	And I close all client application windows
 
 Scenario: _043530 Cash payment clear posting/mark for deletion

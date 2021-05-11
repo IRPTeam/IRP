@@ -411,65 +411,65 @@ Scenario: _2050007 check the movements of the Invoice match document with the cl
 		And I finish line editing in "Transactions" table
 	* Check movements
 		And I click the button named "FormPost"
-		And I delete "$$InvoiceMatch2050007$$" variable
-		And I delete "$$NumberInvoiceMatch2050007$$" variable
-		And I save the window as "$$InvoiceMatch2050007$$"
-		And I save the value of "Number" field as "$$NumberInvoiceMatch2050007$$"
-		And I click "Registrations report" button
-		And I select "R2021 Customer transactions" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| '$$InvoiceMatch2050007$$'             | ''            | ''       | ''          | ''             | ''                         | ''        | ''             | ''                         | ''         | ''                             | ''                     |
-		| 'Document registrations records'      | ''            | ''       | ''          | ''             | ''                         | ''        | ''             | ''                         | ''         | ''                             | ''                     |
-		| 'Register  "Partner AR transactions"' | ''            | ''       | ''          | ''             | ''                         | ''        | ''             | ''                         | ''         | ''                             | ''                     |
-		| ''                                    | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                         | ''        | ''             | ''                         | ''         | ''                             | 'Attributes'           |
-		| ''                                    | ''            | ''       | 'Amount'    | 'Company'      | 'Basis document'           | 'Partner' | 'Legal name'   | 'Partner term'             | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
-		| ''                                    | 'Expense'     | '*'      | '-2 000'    | 'Main Company' | '$$SalesInvoice2040002$$'  | 'Crystal' | 'Company Adel' | 'Basic Partner terms, TRY' | 'TRY'      | 'en description is empty'      | 'No'                   |
-		| ''                                    | 'Expense'     | '*'      | '-2 000'    | 'Main Company' | '$$SalesInvoice2040002$$'  | 'Crystal' | 'Company Adel' | 'Basic Partner terms, TRY' | 'TRY'      | 'Local currency'               | 'No'                   |
-		| ''                                    | 'Expense'     | '*'      | '-2 000'    | 'Main Company' | '$$SalesInvoice2040002$$'  | 'Crystal' | 'Company Adel' | 'Basic Partner terms, TRY' | 'TRY'      | 'TRY'                          | 'No'                   |
-		| ''                                    | 'Expense'     | '*'      | '-342,4'   | 'Main Company' | '$$SalesInvoice2040002$$'  | 'Crystal' | 'Company Adel' | 'Basic Partner terms, TRY' | 'USD'      | 'Reporting currency'           | 'No'                   |
-		| ''                                    | 'Expense'     | '*'      | '342,4'    | 'Main Company' | '$$SalesInvoice20400022$$' | 'Crystal' | 'Company Adel' | 'Basic Partner terms, TRY' | 'USD'      | 'Reporting currency'           | 'No'                   |
-		| ''                                    | 'Expense'     | '*'      | '2 000'     | 'Main Company' | '$$SalesInvoice20400022$$' | 'Crystal' | 'Company Adel' | 'Basic Partner terms, TRY' | 'TRY'      | 'en description is empty'      | 'No'                   |
-		| ''                                    | 'Expense'     | '*'      | '2 000'     | 'Main Company' | '$$SalesInvoice20400022$$' | 'Crystal' | 'Company Adel' | 'Basic Partner terms, TRY' | 'TRY'      | 'Local currency'               | 'No'                   |
-		| ''                                    | 'Expense'     | '*'      | '2 000'     | 'Main Company' | '$$SalesInvoice20400022$$' | 'Crystal' | 'Company Adel' | 'Basic Partner terms, TRY' | 'TRY'      | 'TRY'                          | 'No'                   |
-		And I close all client application windows
+		# And I delete "$$InvoiceMatch2050007$$" variable
+		# And I delete "$$NumberInvoiceMatch2050007$$" variable
+		# And I save the window as "$$InvoiceMatch2050007$$"
+		# And I save the value of "Number" field as "$$NumberInvoiceMatch2050007$$"
+		# And I click "Registrations report" button
+		# And I select "R2021 Customer transactions" exact value from "Register" drop-down list
+		# And I click "Generate report" button
+		# And "ResultTable" spreadsheet document contains lines:
+		# | '$$InvoiceMatch2050007$$'             | ''            | ''       | ''          | ''             | ''                         | ''        | ''             | ''                         | ''         | ''                             | ''                     |
+		# | 'Document registrations records'      | ''            | ''       | ''          | ''             | ''                         | ''        | ''             | ''                         | ''         | ''                             | ''                     |
+		# | 'Register  "Partner AR transactions"' | ''            | ''       | ''          | ''             | ''                         | ''        | ''             | ''                         | ''         | ''                             | ''                     |
+		# | ''                                    | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                         | ''        | ''             | ''                         | ''         | ''                             | 'Attributes'           |
+		# | ''                                    | ''            | ''       | 'Amount'    | 'Company'      | 'Basis document'           | 'Partner' | 'Legal name'   | 'Partner term'             | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
+		# | ''                                    | 'Expense'     | '*'      | '-2 000'    | 'Main Company' | '$$SalesInvoice2040002$$'  | 'Crystal' | 'Company Adel' | 'Basic Partner terms, TRY' | 'TRY'      | 'en description is empty'      | 'No'                   |
+		# | ''                                    | 'Expense'     | '*'      | '-2 000'    | 'Main Company' | '$$SalesInvoice2040002$$'  | 'Crystal' | 'Company Adel' | 'Basic Partner terms, TRY' | 'TRY'      | 'Local currency'               | 'No'                   |
+		# | ''                                    | 'Expense'     | '*'      | '-2 000'    | 'Main Company' | '$$SalesInvoice2040002$$'  | 'Crystal' | 'Company Adel' | 'Basic Partner terms, TRY' | 'TRY'      | 'TRY'                          | 'No'                   |
+		# | ''                                    | 'Expense'     | '*'      | '-342,4'   | 'Main Company' | '$$SalesInvoice2040002$$'  | 'Crystal' | 'Company Adel' | 'Basic Partner terms, TRY' | 'USD'      | 'Reporting currency'           | 'No'                   |
+		# | ''                                    | 'Expense'     | '*'      | '342,4'    | 'Main Company' | '$$SalesInvoice20400022$$' | 'Crystal' | 'Company Adel' | 'Basic Partner terms, TRY' | 'USD'      | 'Reporting currency'           | 'No'                   |
+		# | ''                                    | 'Expense'     | '*'      | '2 000'     | 'Main Company' | '$$SalesInvoice20400022$$' | 'Crystal' | 'Company Adel' | 'Basic Partner terms, TRY' | 'TRY'      | 'en description is empty'      | 'No'                   |
+		# | ''                                    | 'Expense'     | '*'      | '2 000'     | 'Main Company' | '$$SalesInvoice20400022$$' | 'Crystal' | 'Company Adel' | 'Basic Partner terms, TRY' | 'TRY'      | 'Local currency'               | 'No'                   |
+		# | ''                                    | 'Expense'     | '*'      | '2 000'     | 'Main Company' | '$$SalesInvoice20400022$$' | 'Crystal' | 'Company Adel' | 'Basic Partner terms, TRY' | 'TRY'      | 'TRY'                          | 'No'                   |
+		# And I close all client application windows
 
-Scenario: _2050008 check of movements in case of cancellation and re-post of Invoice match №3
-	* Select Invoice match
-		Given I open hyperlink "e1cib/list/Document.InvoiceMatch"
-		And I go to line in "List" table
-			| 'Number' |
-			| '$$NumberInvoiceMatch2050007$$'     |
-		And in the table "List" I click the button named "ListContextMenuUndoPosting"
-	* Check for no movement
-		And I click "Registrations report" button
-		And "ResultTable" spreadsheet document does not contain values
-		| Register  "R2021 Customer transactions" |
-		And I close current window
-	* Re-post and check movements
-		Given I open hyperlink "e1cib/list/Document.InvoiceMatch"
-		And I go to line in "List" table
-			| 'Number' |
-			| '$$NumberInvoiceMatch2050007$$'     |
-		And in the table "List" I click the button named "ListContextMenuPost"
-		And I click "Registrations report" button
-		And I select "R2021 Customer transactions" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| '$$InvoiceMatch2050007$$'             | ''            | ''       | ''          | ''             | ''                         | ''        | ''             | ''                         | ''         | ''                             | ''                     |
-		| 'Document registrations records'      | ''            | ''       | ''          | ''             | ''                         | ''        | ''             | ''                         | ''         | ''                             | ''                     |
-		| 'Register  "R2021 Customer transactions"' | ''            | ''       | ''          | ''             | ''                         | ''        | ''             | ''                         | ''         | ''                             | ''                     |
-		| ''                                    | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                         | ''        | ''             | ''                         | ''         | ''                             | 'Attributes'           |
-		| ''                                    | ''            | ''       | 'Amount'    | 'Company'      | 'Basis document'           | 'Partner' | 'Legal name'   | 'Partner term'             | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
-		| ''                                    | 'Expense'     | '*'      | '-2 000'    | 'Main Company' | '$$SalesInvoice2040002$$'  | 'Crystal' | 'Company Adel' | 'Basic Partner terms, TRY' | 'TRY'      | 'en description is empty'      | 'No'                   |
-		| ''                                    | 'Expense'     | '*'      | '-2 000'    | 'Main Company' | '$$SalesInvoice2040002$$'  | 'Crystal' | 'Company Adel' | 'Basic Partner terms, TRY' | 'TRY'      | 'Local currency'               | 'No'                   |
-		| ''                                    | 'Expense'     | '*'      | '-2 000'    | 'Main Company' | '$$SalesInvoice2040002$$'  | 'Crystal' | 'Company Adel' | 'Basic Partner terms, TRY' | 'TRY'      | 'TRY'                          | 'No'                   |
-		| ''                                    | 'Expense'     | '*'      | '-342,4'   | 'Main Company' | '$$SalesInvoice2040002$$'  | 'Crystal' | 'Company Adel' | 'Basic Partner terms, TRY' | 'USD'      | 'Reporting currency'           | 'No'                   |
-		| ''                                    | 'Expense'     | '*'      | '342,4'    | 'Main Company' | '$$SalesInvoice20400022$$' | 'Crystal' | 'Company Adel' | 'Basic Partner terms, TRY' | 'USD'      | 'Reporting currency'           | 'No'                   |
-		| ''                                    | 'Expense'     | '*'      | '2 000'     | 'Main Company' | '$$SalesInvoice20400022$$' | 'Crystal' | 'Company Adel' | 'Basic Partner terms, TRY' | 'TRY'      | 'en description is empty'      | 'No'                   |
-		| ''                                    | 'Expense'     | '*'      | '2 000'     | 'Main Company' | '$$SalesInvoice20400022$$' | 'Crystal' | 'Company Adel' | 'Basic Partner terms, TRY' | 'TRY'      | 'Local currency'               | 'No'                   |
-		| ''                                    | 'Expense'     | '*'      | '2 000'     | 'Main Company' | '$$SalesInvoice20400022$$' | 'Crystal' | 'Company Adel' | 'Basic Partner terms, TRY' | 'TRY'      | 'TRY'                          | 'No'                   |
-		And I close all client application windows
+# Scenario: _2050008 check of movements in case of cancellation and re-post of Invoice match №3
+# 	* Select Invoice match
+# 		Given I open hyperlink "e1cib/list/Document.InvoiceMatch"
+# 		And I go to line in "List" table
+# 			| 'Number' |
+# 			| '$$NumberInvoiceMatch2050007$$'     |
+# 		And in the table "List" I click the button named "ListContextMenuUndoPosting"
+# 	* Check for no movement
+# 		And I click "Registrations report" button
+# 		And "ResultTable" spreadsheet document does not contain values
+# 		| Register  "R2021 Customer transactions" |
+# 		And I close current window
+# 	* Re-post and check movements
+# 		Given I open hyperlink "e1cib/list/Document.InvoiceMatch"
+# 		And I go to line in "List" table
+# 			| 'Number' |
+# 			| '$$NumberInvoiceMatch2050007$$'     |
+# 		And in the table "List" I click the button named "ListContextMenuPost"
+# 		And I click "Registrations report" button
+# 		And I select "R2021 Customer transactions" exact value from "Register" drop-down list
+# 		And I click "Generate report" button
+# 		And "ResultTable" spreadsheet document contains lines:
+# 		| '$$InvoiceMatch2050007$$'             | ''            | ''       | ''          | ''             | ''                         | ''        | ''             | ''                         | ''         | ''                             | ''                     |
+# 		| 'Document registrations records'      | ''            | ''       | ''          | ''             | ''                         | ''        | ''             | ''                         | ''         | ''                             | ''                     |
+# 		| 'Register  "R2021 Customer transactions"' | ''            | ''       | ''          | ''             | ''                         | ''        | ''             | ''                         | ''         | ''                             | ''                     |
+# 		| ''                                    | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                         | ''        | ''             | ''                         | ''         | ''                             | 'Attributes'           |
+# 		| ''                                    | ''            | ''       | 'Amount'    | 'Company'      | 'Basis document'           | 'Partner' | 'Legal name'   | 'Partner term'             | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
+# 		| ''                                    | 'Expense'     | '*'      | '-2 000'    | 'Main Company' | '$$SalesInvoice2040002$$'  | 'Crystal' | 'Company Adel' | 'Basic Partner terms, TRY' | 'TRY'      | 'en description is empty'      | 'No'                   |
+# 		| ''                                    | 'Expense'     | '*'      | '-2 000'    | 'Main Company' | '$$SalesInvoice2040002$$'  | 'Crystal' | 'Company Adel' | 'Basic Partner terms, TRY' | 'TRY'      | 'Local currency'               | 'No'                   |
+# 		| ''                                    | 'Expense'     | '*'      | '-2 000'    | 'Main Company' | '$$SalesInvoice2040002$$'  | 'Crystal' | 'Company Adel' | 'Basic Partner terms, TRY' | 'TRY'      | 'TRY'                          | 'No'                   |
+# 		| ''                                    | 'Expense'     | '*'      | '-342,4'   | 'Main Company' | '$$SalesInvoice2040002$$'  | 'Crystal' | 'Company Adel' | 'Basic Partner terms, TRY' | 'USD'      | 'Reporting currency'           | 'No'                   |
+# 		| ''                                    | 'Expense'     | '*'      | '342,4'    | 'Main Company' | '$$SalesInvoice20400022$$' | 'Crystal' | 'Company Adel' | 'Basic Partner terms, TRY' | 'USD'      | 'Reporting currency'           | 'No'                   |
+# 		| ''                                    | 'Expense'     | '*'      | '2 000'     | 'Main Company' | '$$SalesInvoice20400022$$' | 'Crystal' | 'Company Adel' | 'Basic Partner terms, TRY' | 'TRY'      | 'en description is empty'      | 'No'                   |
+# 		| ''                                    | 'Expense'     | '*'      | '2 000'     | 'Main Company' | '$$SalesInvoice20400022$$' | 'Crystal' | 'Company Adel' | 'Basic Partner terms, TRY' | 'TRY'      | 'Local currency'               | 'No'                   |
+# 		| ''                                    | 'Expense'     | '*'      | '2 000'     | 'Main Company' | '$$SalesInvoice20400022$$' | 'Crystal' | 'Company Adel' | 'Basic Partner terms, TRY' | 'TRY'      | 'TRY'                          | 'No'                   |
+# 		And I close all client application windows
 
 Scenario: _2050008 check the availability of Purchase return and Sales return choices in the Invoice match document
 	* Open a creation form Invoice match

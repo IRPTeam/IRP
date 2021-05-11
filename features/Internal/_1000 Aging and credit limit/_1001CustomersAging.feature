@@ -149,7 +149,7 @@ Scenario: _1000003 create Sales invoice and check Aging tab
 				| 'Post-shipment credit' | '*'          | '14'               | '100,00'                | '550,00' |
 		* Check payment date calculation
 			And I move to "Other" tab
-			And I input "20.10.2020 00:00:00" text in "Date" field
+			And I input "$$DateSalesInvoice0240162$$" text in "Date" field
 			And I move to "Aging" tab
 			Then "Update item list info" window is opened
 			And I click "OK" button
@@ -186,22 +186,24 @@ Scenario: _1000003 create Sales invoice and check Aging tab
 			And I select "R2021 Customer transactions" exact value from "Register" drop-down list
 			And I click "Generate report" button
 			And "ResultTable" spreadsheet document contains lines:
-				| '$$SalesInvoice0240162$$'             | ''            | ''                            | ''          | ''             | ''                        | ''        | ''                | ''                                 | ''         | ''                             | ''                     | '' | '' |
-				| 'Document registrations records'      | ''            | ''                            | ''          | ''             | ''                        | ''        | ''                | ''                                 | ''         | ''                             | ''                     | '' | '' |
-				| 'Register  "Partner AR transactions"' | ''            | ''                            | ''          | ''             | ''                        | ''        | ''                | ''                                 | ''         | ''                             | ''                     | '' | '' |
-				| ''                                    | 'Record type' | 'Period'                      | 'Resources' | 'Dimensions'   | ''                        | ''        | ''                | ''                                 | ''         | ''                             | 'Attributes'           | '' | '' |
-				| ''                                    | ''            | ''                            | 'Amount'    | 'Company'      | 'Basis document'          | 'Partner' | 'Legal name'      | 'Partner term'                     | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' | '' | '' |
-				| ''                                    | 'Receipt'     | '$$DateSalesInvoice0240162$$' | '94,16'     | 'Main Company' | '$$SalesInvoice0240162$$' | 'Kalipso' | 'Company Kalipso' | 'Basic Partner terms, without VAT' | 'USD'      | 'Reporting currency'           | 'No'                   | '' | '' |
-				| ''                                    | 'Receipt'     | '$$DateSalesInvoice0240162$$' | '550'       | 'Main Company' | '$$SalesInvoice0240162$$' | 'Kalipso' | 'Company Kalipso' | 'Basic Partner terms, without VAT' | 'TRY'      | 'Local currency'               | 'No'                   | '' | '' |
-				| ''                                    | 'Receipt'     | '$$DateSalesInvoice0240162$$' | '550'       | 'Main Company' | '$$SalesInvoice0240162$$' | 'Kalipso' | 'Company Kalipso' | 'Basic Partner terms, without VAT' | 'TRY'      | 'TRY'                          | 'No'                   | '' | '' |
-				| ''                                    | 'Receipt'     | '$$DateSalesInvoice0240162$$' | '550'       | 'Main Company' | '$$SalesInvoice0240162$$' | 'Kalipso' | 'Company Kalipso' | 'Basic Partner terms, without VAT' | 'TRY'      | 'en description is empty'      | 'No'                   | '' | '' |
-			And I select "Aging" exact value from "Register" drop-down list
+				| '$$SalesInvoice0240162$$'                 | ''            | ''                            | ''          | ''             | ''                             | ''         | ''                | ''        | ''                                 | ''                        | ''                     | ''                  |
+				| 'Document registrations records'          | ''            | ''                            | ''          | ''             | ''                             | ''         | ''                | ''        | ''                                 | ''                        | ''                     | ''                  |
+				| 'Register  "R2021 Customer transactions"' | ''            | ''                            | ''          | ''             | ''                             | ''         | ''                | ''        | ''                                 | ''                        | ''                     | ''                  |
+				| ''                                        | 'Record type' | 'Period'                      | 'Resources' | 'Dimensions'   | ''                             | ''         | ''                | ''        | ''                                 | ''                        | 'Attributes'           | ''                  |
+				| ''                                        | ''            | ''                            | 'Amount'    | 'Company'      | 'Multi currency movement type' | 'Currency' | 'Legal name'      | 'Partner' | 'Agreement'                        | 'Basis'                   | 'Deferred calculation' | 'Offset of advance' |
+				| ''                                        | 'Receipt'     | '$$DateSalesInvoice0240162$$' | '94,16'     | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Company Kalipso' | 'Kalipso' | 'Basic Partner terms, without VAT' | '$$SalesInvoice0240162$$' | 'No'                   | 'No'                |
+				| ''                                        | 'Receipt'     | '$$DateSalesInvoice0240162$$' | '550'       | 'Main Company' | 'Local currency'               | 'TRY'      | 'Company Kalipso' | 'Kalipso' | 'Basic Partner terms, without VAT' | '$$SalesInvoice0240162$$' | 'No'                   | 'No'                |
+				| ''                                        | 'Receipt'     | '$$DateSalesInvoice0240162$$' | '550'       | 'Main Company' | 'TRY'                          | 'TRY'      | 'Company Kalipso' | 'Kalipso' | 'Basic Partner terms, without VAT' | '$$SalesInvoice0240162$$' | 'No'                   | 'No'                |
+				| ''                                        | 'Receipt'     | '$$DateSalesInvoice0240162$$' | '550'       | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Company Kalipso' | 'Kalipso' | 'Basic Partner terms, without VAT' | '$$SalesInvoice0240162$$' | 'No'                   | 'No'                |	
+			And I select "R5011 Partners aging" exact value from "Register" drop-down list
 			And I click "Generate report" button
 			And "ResultTable" spreadsheet document contains lines:
-				| 'Register  "Aging"' | ''            | ''                            | ''          | ''             | ''        | ''                                 | ''                        | ''                    | ''         | '' | '' | '' | '' |
-				| ''                  | 'Record type' | 'Period'                      | 'Resources' | 'Dimensions'   | ''        | ''                                 | ''                        | ''                    | ''         | '' | '' | '' | '' |
-				| ''                  | ''            | ''                            | 'Amount'    | 'Company'      | 'Partner' | 'Agreement'                        | 'Invoice'                 | 'Payment date'        | 'Currency' | '' | '' | '' | '' |
-				| ''                  | 'Receipt'     | '$$DateSalesInvoice0240162$$' | '550'       | 'Main Company' | 'Kalipso' | 'Basic Partner terms, without VAT' | '$$SalesInvoice0240162$$' | '05.11.2020 00:00:00' | 'TRY'      | '' | '' | '' | '' |
+				| '$$SalesInvoice0240162$$'          | ''            | ''                            | ''          | ''             | ''         | ''                                 | ''        | ''                        | ''                    |
+				| 'Document registrations records'   | ''            | ''                            | ''          | ''             | ''         | ''                                 | ''        | ''                        | ''                    |
+				| 'Register  "R5011 Partners aging"' | ''            | ''                            | ''          | ''             | ''         | ''                                 | ''        | ''                        | ''                    |
+				| ''                                 | 'Record type' | 'Period'                      | 'Resources' | 'Dimensions'   | ''         | ''                                 | ''        | ''                        | ''                    |
+				| ''                                 | ''            | ''                            | 'Amount'    | 'Company'      | 'Currency' | 'Agreement'                        | 'Partner' | 'Invoice'                 | 'Payment date'        |
+				| ''                                 | 'Receipt'     | '$$DateSalesInvoice0240162$$' | '550'       | 'Main Company' | 'TRY'      | 'Basic Partner terms, without VAT' | 'Kalipso' | '$$SalesInvoice0240162$$' | '05.11.2020 00:00:00' |
 			And I close all client application windows
 	* Create second test SI
 		When create SalesInvoice024016 (Shipment confirmation does not used)
@@ -217,7 +219,7 @@ Scenario: _1000003 create Sales invoice and check Aging tab
 		And I save the value of "PaymentTermsDate" field of "PaymentTerms" table as "$$DatePaymentTermsSalesInvoice0240161$$"
 		And I click the button named "FormPostAndClose"
 	* Check Aging movements
-		Given I open hyperlink "e1cib/list/AccumulationRegister.Aging"
+		Given I open hyperlink "e1cib/list/AccumulationRegister.R5011B_PartnersAging"
 		And "List" table contains lines
 		| 'Period'                      | 'Recorder'                | 'Currency' | 'Company'      | 'Partner' | 'Amount' | 'Agreement'                        | 'Invoice'                 | 'Payment date'                            |
 		| '$$DateSalesInvoice024016$$'  | '$$SalesInvoice024016$$'  | 'TRY'      | 'Main Company' | 'Kalipso' | '550,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '$$DatePaymentTermsSalesInvoice0240161$$' |

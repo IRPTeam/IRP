@@ -179,20 +179,25 @@ Scenario: _043610 check Cash receipt movements by the Register "R2021 Customer t
 		And I go to line in "List" table
 			| 'Number'  |
 			| '1' |
+		And I select current line in "List" table
+		And I select current line in "PaymentList" table
+		And I click choice button of "Partner term" attribute in "PaymentList" table
+		And I select current line in "List" table
+		And I click "Post" button	
 	* Check movements by the Register  "R2021 Customer transactions" 
 		And I click "Registrations report" button
 		And I select "R2021 Customer transactions" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Cash receipt 1 dated 05.04.2021 14:33:49' | ''            | ''                    | ''          | ''             | ''                             | ''         | ''                  | ''          | ''                         | ''                                          | ''                     |
-			| 'Document registrations records'           | ''            | ''                    | ''          | ''             | ''                             | ''         | ''                  | ''          | ''                         | ''                                          | ''                     |
-			| 'Register  "R2021 Customer transactions"'  | ''            | ''                    | ''          | ''             | ''                             | ''         | ''                  | ''          | ''                         | ''                                          | ''                     |
-			| ''                                         | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                             | ''         | ''                  | ''          | ''                         | ''                                          | 'Attributes'           |
-			| ''                                         | ''            | ''                    | 'Amount'    | 'Company'      | 'Multi currency movement type' | 'Currency' | 'Legal name'        | 'Partner'   | 'Agreement'                | 'Basis'                                     | 'Deferred calculation' |
-			| ''                                         | 'Expense'     | '05.04.2021 14:33:49' | '100'       | 'Main Company' | 'Local currency'               | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'No'                   |
-			| ''                                         | 'Expense'     | '05.04.2021 14:33:49' | '100'       | 'Main Company' | 'TRY'                          | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'No'                   |
-			| ''                                         | 'Expense'     | '05.04.2021 14:33:49' | '100'       | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'No'                   |
-			| ''                                         | 'Expense'     | '05.04.2021 14:33:49' | '17,12'       | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'No'                   |       
+			| 'Cash receipt 1 dated 05.04.2021 14:33:49' | ''            | ''                    | ''          | ''             | ''                             | ''         | ''                  | ''          | ''                         | ''                                          | ''                     | ''                  |
+			| 'Document registrations records'           | ''            | ''                    | ''          | ''             | ''                             | ''         | ''                  | ''          | ''                         | ''                                          | ''                     | ''                  |
+			| 'Register  "R2021 Customer transactions"'  | ''            | ''                    | ''          | ''             | ''                             | ''         | ''                  | ''          | ''                         | ''                                          | ''                     | ''                  |
+			| ''                                         | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                             | ''         | ''                  | ''          | ''                         | ''                                          | 'Attributes'           | ''                  |
+			| ''                                         | ''            | ''                    | 'Amount'    | 'Company'      | 'Multi currency movement type' | 'Currency' | 'Legal name'        | 'Partner'   | 'Agreement'                | 'Basis'                                     | 'Deferred calculation' | 'Offset of advance' |
+			| ''                                         | 'Expense'     | '05.04.2021 14:33:49' | '17,12'     | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'No'                   | 'No'                |
+			| ''                                         | 'Expense'     | '05.04.2021 14:33:49' | '100'       | 'Main Company' | 'Local currency'               | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'No'                   | 'No'                |
+			| ''                                         | 'Expense'     | '05.04.2021 14:33:49' | '100'       | 'Main Company' | 'TRY'                          | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'No'                   | 'No'                |
+			| ''                                         | 'Expense'     | '05.04.2021 14:33:49' | '100'       | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'No'                   | 'No'                |
 	And I close all client application windows
 
 Scenario: _043611 check absence Cash receipt movements by the Register "R2021 Customer transactions" (without basis document)
@@ -217,19 +222,20 @@ Scenario: _043612 check Cash receipt movements by the Register "R2020 Advances f
 		And I go to line in "List" table
 			| 'Number'  |
 			| '4' |
+		And I select current line in "List" table	
 	* Check movements by the Register  "R2020 Advances from customer" 
 		And I click "Registrations report" button
 		And I select "R2020 Advances from customer" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Cash receipt 4 dated 27.04.2021 11:31:10' | ''            | ''                    | ''          | ''             | ''                             | ''         | ''                  | ''          | ''      | ''                     | ''                  |
-			| 'Document registrations records'           | ''            | ''                    | ''          | ''             | ''                             | ''         | ''                  | ''          | ''      | ''                     | ''                  |
-			| 'Register  "R2020 Advances from customer"' | ''            | ''                    | ''          | ''             | ''                             | ''         | ''                  | ''          | ''      | ''                     | ''                  |
-			| ''                                         | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                             | ''         | ''                  | ''          | ''      | 'Attributes'           | ''                  |
-			| ''                                         | ''            | ''                    | 'Amount'    | 'Company'      | 'Multi currency movement type' | 'Currency' | 'Legal name'        | 'Partner'   | 'Basis' | 'Deferred calculation' | 'Offset of advance' |
-			| ''                                         | 'Receipt'     | '27.04.2021 11:31:10' | '171,2'     | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Company Ferron BP' | 'Ferron BP' | ''      | 'No'                   | 'No'                |
-			| ''                                         | 'Receipt'     | '27.04.2021 11:31:10' | '1 000'     | 'Main Company' | 'Local currency'               | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | ''      | 'No'                   | 'No'                |
-			| ''                                         | 'Receipt'     | '27.04.2021 11:31:10' | '1 000'     | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | ''      | 'No'                   | 'No'                |
+			| 'Cash receipt 4 dated 27.04.2021 11:31:10' | ''            | ''                    | ''          | ''             | ''                             | ''         | ''                  | ''          | ''                                         | ''                     | ''                  |
+			| 'Document registrations records'           | ''            | ''                    | ''          | ''             | ''                             | ''         | ''                  | ''          | ''                                         | ''                     | ''                  |
+			| 'Register  "R2020 Advances from customer"' | ''            | ''                    | ''          | ''             | ''                             | ''         | ''                  | ''          | ''                                         | ''                     | ''                  |
+			| ''                                         | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                             | ''         | ''                  | ''          | ''                                         | 'Attributes'           | ''                  |
+			| ''                                         | ''            | ''                    | 'Amount'    | 'Company'      | 'Multi currency movement type' | 'Currency' | 'Legal name'        | 'Partner'   | 'Basis'                                    | 'Deferred calculation' | 'Offset of advance' |
+			| ''                                         | 'Receipt'     | '27.04.2021 11:31:10' | '171,2'     | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Company Ferron BP' | 'Ferron BP' | 'Cash receipt 4 dated 27.04.2021 11:31:10' | 'No'                   | 'No'                |
+			| ''                                         | 'Receipt'     | '27.04.2021 11:31:10' | '1 000'     | 'Main Company' | 'Local currency'               | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Cash receipt 4 dated 27.04.2021 11:31:10' | 'No'                   | 'No'                |
+			| ''                                         | 'Receipt'     | '27.04.2021 11:31:10' | '1 000'     | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Cash receipt 4 dated 27.04.2021 11:31:10' | 'No'                   | 'No'                |
 	And I close all client application windows
 
 

@@ -19,7 +19,6 @@ Scenario: 950000 preparation (role Full access only read)
 	When Create catalog Agreements objects
 	When Create catalog BusinessUnits objects
 	When Create catalog CashAccounts objects
-	When Create catalog ChequeBonds objects
 	When Create catalog Companies objects (Main company)
 	When Create catalog Companies objects (partners company)
 	When Create catalog Countries objects
@@ -111,8 +110,6 @@ Scenario: 950000 preparation (role Full access only read)
 	When Create document OpeningEntry objects
 	When Create document OutgoingPaymentOrder objects
 	When Create document Bundling objects
-	When Create document ChequeBondTransaction objects
-	When Create document ChequeBondTransactionItem objects
 	When Create document PhysicalCountByLocation objects
 	When Create document PhysicalInventory objects
 	When Create document ReconciliationStatement objects
@@ -684,16 +681,7 @@ Scenario: 950034 check role Full access only read (Tax rate settings)
 			Then I raise "Failed to open" exception
 		And I close all client application windows	
 
-Scenario: 950035 check role Full access only read (Cheque bonds)
-		And I close all client application windows
-		And In the command interface I select "Treasury" "Cheque bonds"		
-		And I go to line in "List" table
-			| 'Cheque No' |
-			| 'Own cheque 2'     |
-		And I select current line in "List" table
-		If the warning is displayed then 
-			Then I raise "Failed to open" exception
-		And I close all client application windows
+
 
 
 Scenario: 950037 check role Full access only read (Item segments)
@@ -933,13 +921,6 @@ Scenario: 950064 check role Full access only read (Invoice matches)
 			Then I raise "Failed to open" exception
 		And I close all client application windows
 
-Scenario: 950065 check role Full access only read (Cheque bond transactions)
-		And I close all client application windows
-		And In the command interface I select "Treasury" "Cheque bond transactions"	
-		And I select current line in "List" table
-		If the warning is displayed then 
-			Then I raise "Failed to open" exception
-		And I close all client application windows
 
 Scenario: 950066 check role Full access only read (Inventory transfers)
 		And I close all client application windows

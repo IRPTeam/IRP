@@ -20,7 +20,6 @@ Scenario: 950100 Basic role
 	When Create catalog Agreements objects
 	When Create catalog BusinessUnits objects
 	When Create catalog CashAccounts objects
-	When Create catalog ChequeBonds objects
 	When Create catalog Companies objects (Main company)
 	When Create catalog Companies objects (partners company)
 	When Create catalog Countries objects
@@ -111,8 +110,6 @@ Scenario: 950100 Basic role
 	When Create document OpeningEntry objects
 	When Create document OutgoingPaymentOrder objects
 	When Create document Bundling objects
-	When Create document ChequeBondTransaction objects
-	When Create document ChequeBondTransactionItem objects
 	When Create document PhysicalCountByLocation objects
 	When Create document PhysicalInventory objects
 	When Create document ReconciliationStatement objects

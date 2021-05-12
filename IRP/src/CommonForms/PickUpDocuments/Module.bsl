@@ -237,7 +237,7 @@ EndProcedure
 
 &AtClient
 Procedure PickedDocumentsSelection(Item, RowSelected, Field, StandardProcessing)
-	DocChequeBondTransactionClient.ShowApArDocument(ThisObject, Item, RowSelected, Field, StandardProcessing);
+	Return;
 EndProcedure
 
 #EndRegion

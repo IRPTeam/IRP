@@ -86,12 +86,12 @@ EndProcedure
 
 &AtClient
 Procedure StatusSelectionStartChoice(Item, ChoiceData, StandardProcessing)
-	DocChequeBondTransactionClient.StatusStartChoice(Sourse, ThisObject, Item, ChoiceData, StandardProcessing);
+	Return;
 EndProcedure
 
 &AtClient
 Procedure StatusSelectionEditTextChange(Item, Text, StandardProcessing)
-	DocChequeBondTransactionClient.StatusEditTextChange(Sourse, ThisObject, Item, Text, StandardProcessing);
+	Return;
 EndProcedure
 
 #EndRegion

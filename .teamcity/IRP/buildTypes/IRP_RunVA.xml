@@ -270,7 +270,9 @@ $VanessaRun = {
     'vanessashutdown': $CloseVA,
     'videcreate': false,
     'setvariablevaluesinstepsallurereport': true,
-    'createlogs': true
+    'createlogs': true,
+    'attachadditionaldatawhencomparingvaluewithreferenceallure': true,
+    'savemxlashtmlinallure': true
 }"
     #Write-Output "$text"
     $a = $text | ConvertFrom-Json

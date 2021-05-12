@@ -37,6 +37,7 @@ Procedure StatusEditTextChange(Object,
 	Item.ChoiceParameters = New FixedArray(ArrayOfChoiceParameters);
 EndProcedure
 
-Function GetAvailableStatusesByCheque(ChequeBondTransactionRef, ChequeRef) Export
-	Return ObjectStatusesServer.GetAvailableStatusesByCheque(ChequeBondTransactionRef, ChequeRef);
-EndFunction
+//Function GetAvailableStatusesByCheque(ChequeBondTransactionRef, ChequeRef) Export
+//	Return ObjectStatusesServer.GetAvailableStatusesByCheque(ChequeBondTransactionRef, ChequeRef);
+//EndFunction
+

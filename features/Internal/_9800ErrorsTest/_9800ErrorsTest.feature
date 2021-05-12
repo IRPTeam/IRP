@@ -143,9 +143,6 @@ Scenario: _9805 check partner, legal name, Partner term, company and store input
 		Then the form attribute named "Store" became equal to "Store 01"
 
 
-Scenario: _9806 check Sales subsystem
-	When in sections panel I select "Sales - A/R"
-
 Scenario: _9808 check All registers movements
 	Given I open hyperlink "e1cib/app/Report.AllRegistersMovement"
 	And I remove checkbox named "SettingsComposerUserSettingsItem0Use"
@@ -157,6 +154,8 @@ Scenario: _9809 check Items info
 	And I click "Run report" button
 	And "Result" spreadsheet document contains "ErrorTest9809" template lines by template	
 	
-		
+
+Scenario: _9850 check Sales subsystem
+	When in sections panel I select "Sales - A/R"
 
 

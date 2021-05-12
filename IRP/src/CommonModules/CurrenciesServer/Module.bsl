@@ -137,9 +137,7 @@ EndProcedure
 
 Function IsUseAgreementMovementType(ItemOfPostingInfo)
 	UseAgreementMovementType = True;
-	If TypeOf(ItemOfPostingInfo.Key) = Type("AccumulationRegisterRecordSet.AdvanceFromCustomers") // for delete
-		Or TypeOf(ItemOfPostingInfo.Key) = Type("AccumulationRegisterRecordSet.AdvanceToSuppliers") // for delete
-		Or TypeOf(ItemOfPostingInfo.Key) = Type("AccumulationRegisterRecordSet.R3010B_CashOnHand") 
+	If TypeOf(ItemOfPostingInfo.Key) = Type("AccumulationRegisterRecordSet.R3010B_CashOnHand") 
 		Or TypeOf(ItemOfPostingInfo.Key) = Type("AccumulationRegisterRecordSet.R2020B_AdvancesFromCustomers") 
 		Or TypeOf(ItemOfPostingInfo.Key) = Type("AccumulationRegisterRecordSet.R1020B_AdvancesToVendors") Then
 		UseAgreementMovementType = False;
@@ -153,8 +151,6 @@ Function IsUseCurrencyJoin(Parameters, ItemOfPostingInfo)
 	TypeOfRecordSetsArray = New Array();
 	TypeOfRecordSetsArray.Add(Type("AccumulationRegisterRecordSet.PlaningCashTransactions"));
 	TypeOfRecordSetsArray.Add(Type("AccumulationRegisterRecordSet.R3010B_CashOnHand"));
-	TypeOfRecordSetsArray.Add(Type("AccumulationRegisterRecordSet.PartnerApTransactions")); // for delete
-	TypeOfRecordSetsArray.Add(Type("AccumulationRegisterRecordSet.PartnerArTransactions")); // for delete
 	TypeOfRecordSetsArray.Add(Type("AccumulationRegisterRecordSet.R3015B_CashAdvance"));
 	TypeOfRecordSetsArray.Add(Type("AccumulationRegisterRecordSet.R2021B_CustomersTransactions"));
 	TypeOfRecordSetsArray.Add(Type("AccumulationRegisterRecordSet.R1021B_VendorsTransactions"));

@@ -1477,23 +1477,6 @@ FROM
     </edit>
   </attributes>
   <attributes>
-    <name>Sourse</name>
-    <title>
-      <key>en</key>
-      <value>Source</value>
-    </title>
-    <id>7</id>
-    <valueType>
-      <types>DocumentRef.ChequeBondTransaction</types>
-    </valueType>
-    <view>
-      <common>true</common>
-    </view>
-    <edit>
-      <common>true</common>
-    </edit>
-  </attributes>
-  <attributes>
     <name>StatusCheck</name>
     <title>
       <key>en</key>

@@ -260,13 +260,6 @@
         <value>46</value>
       </code>
     </items>
-    <items id="81ea25f6-8b13-4e90-8dfa-b2ba20b26a83">
-      <name>Document_ChequeBondTransaction</name>
-      <description>Document Cheque bond transaction</description>
-      <code xsi:type="core:NumberValue">
-        <value>47</value>
-      </code>
-    </items>
     <items id="d165f449-9d6e-49bb-aac3-2d86efda2eae">
       <name>Document_GoodsReceipt</name>
       <description>Document Goods receipt</description>

@@ -239,7 +239,6 @@ Procedure FillDescriptionOfPredefinedCatalogs() Export
     AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Document_CashReceipt, 					"Description_A028");
     AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Document_CashRevenue, 					"Description_A029");
     AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Document_CashTransferOrder, 			"Description_A030");
-    AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Document_ChequeBondTransaction, 		"Description_A031");
     AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Document_GoodsReceipt, 				"Description_A032");
     AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Document_IncomingPaymentOrder, 		"Description_A033");
     AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Document_InventoryTransfer, 			"Description_A034");

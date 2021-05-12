@@ -108,13 +108,6 @@
 		</right>
 	</object>
 	<object>
-		<name>Document.ChequeBondTransactionItem</name>
-		<right>
-			<name>InteractiveDelete</name>
-			<value>false</value>
-		</right>
-	</object>
-	<object>
 		<name>Document.Labeling</name>
 		<right>
 			<name>InteractiveDelete</name>
@@ -635,13 +628,6 @@
 	</object>
 	<object>
 		<name>ExchangePlan.FullExchange</name>
-		<right>
-			<name>InteractiveDelete</name>
-			<value>false</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.ChequeBondTransaction</name>
 		<right>
 			<name>InteractiveDelete</name>
 			<value>false</value>

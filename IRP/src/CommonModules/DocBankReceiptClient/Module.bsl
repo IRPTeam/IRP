@@ -44,7 +44,6 @@ Procedure SetAvailability(Object, Form) Export
 		ArrayTypes.Add(Type("DocumentRef.CashTransferOrder"));
 		ArrayTypes.Add(Type("DocumentRef.IncomingPaymentOrder"));
 		ArrayTypes.Add(Type("DocumentRef.OutgoingPaymentOrder"));
-		ArrayTypes.Add(Type("DocumentRef.ChequeBondTransactionItem"));
 		Form.Items.PaymentListPlaningTransactionBasis.TypeRestriction = New TypeDescription(ArrayTypes);
 	EndIf;
 EndProcedure

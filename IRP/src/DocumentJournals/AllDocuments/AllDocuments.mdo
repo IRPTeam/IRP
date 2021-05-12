@@ -20,8 +20,6 @@
   <registeredDocuments>Document.CashReceipt</registeredDocuments>
   <registeredDocuments>Document.CashRevenue</registeredDocuments>
   <registeredDocuments>Document.CashTransferOrder</registeredDocuments>
-  <registeredDocuments>Document.ChequeBondTransaction</registeredDocuments>
-  <registeredDocuments>Document.ChequeBondTransactionItem</registeredDocuments>
   <registeredDocuments>Document.GoodsReceipt</registeredDocuments>
   <registeredDocuments>Document.IncomingPaymentOrder</registeredDocuments>
   <registeredDocuments>Document.InternalSupplyRequest</registeredDocuments>

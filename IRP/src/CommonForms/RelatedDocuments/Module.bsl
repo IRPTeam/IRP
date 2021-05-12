@@ -369,9 +369,6 @@ Procedure SetDocumentStatus(Row)
 	Else
 		Row.DocumentStatus = 2;
 	EndIf;
-	If TypeOf(Row.Ref) = Type("DocumentRef.ChequeBondTransactionItem") Then
-		Row.DocumentStatus = Row.DocumentStatus + 3;
-	EndIf;
 EndProcedure
 
 &AtServer

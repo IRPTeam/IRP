@@ -45,7 +45,6 @@
       <types>DocumentRef.InvoiceMatch</types>
       <types>DocumentRef.BankReceipt</types>
       <types>DocumentRef.PurchaseReturn</types>
-      <types>DocumentRef.ChequeBondTransaction</types>
       <types>DocumentRef.ManualRegisterEntry</types>
       <types>DocumentRef.PurchaseReturnOrder</types>
       <types>DocumentRef.BankPayment</types>

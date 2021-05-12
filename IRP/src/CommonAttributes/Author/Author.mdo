@@ -71,10 +71,6 @@
     <use>Use</use>
   </content>
   <content>
-    <metadata>Document.ChequeBondTransaction</metadata>
-    <use>Use</use>
-  </content>
-  <content>
     <metadata>Document.CashRevenue</metadata>
     <use>Use</use>
   </content>

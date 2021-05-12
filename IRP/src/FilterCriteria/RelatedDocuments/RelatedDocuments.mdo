@@ -21,11 +21,6 @@
   <content>Document.CashPayment.TabularSection.PaymentList.Attribute.PlaningTransactionBasis</content>
   <content>Document.CashReceipt.TabularSection.PaymentList.Attribute.BasisDocument</content>
   <content>Document.CashReceipt.TabularSection.PaymentList.Attribute.PlaningTransactionBasis</content>
-  <content>Document.ChequeBondTransaction.TabularSection.PaymentList.Attribute.PartnerArBasisDocument</content>
-  <content>Document.ChequeBondTransaction.TabularSection.PaymentList.Attribute.PartnerApBasisDocument</content>
-  <content>Document.ChequeBondTransactionItem.Attribute.ChequeBondTransaction</content>
-  <content>Document.ChequeBondTransactionItem.TabularSection.PaymentList.Attribute.PartnerArBasisDocument</content>
-  <content>Document.ChequeBondTransactionItem.TabularSection.PaymentList.Attribute.PartnerApBasisDocument</content>
   <content>Document.GoodsReceipt.TabularSection.ItemList.Attribute.ReceiptBasis</content>
   <content>Document.GoodsReceipt.TabularSection.ItemList.Attribute.SalesOrder</content>
   <content>Document.InventoryTransfer.TabularSection.ItemList.Attribute.InventoryTransferOrder</content>
@@ -105,7 +100,6 @@
       <types>DocumentRef.InvoiceMatch</types>
       <types>DocumentRef.BankReceipt</types>
       <types>DocumentRef.PurchaseReturn</types>
-      <types>DocumentRef.ChequeBondTransaction</types>
       <types>DocumentRef.PurchaseReturnOrder</types>
       <types>DocumentRef.Labeling</types>
       <types>DocumentRef.BankPayment</types>

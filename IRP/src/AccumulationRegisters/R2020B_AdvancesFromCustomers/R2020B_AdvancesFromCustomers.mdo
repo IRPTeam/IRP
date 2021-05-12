@@ -135,7 +135,6 @@
       <types>DocumentRef.BankReceipt</types>
       <types>DocumentRef.CashReceipt</types>
       <types>DocumentRef.OpeningEntry</types>
-      <types>DocumentRef.ChequeBondTransactionItem</types>
       <types>DocumentRef.SalesReturn</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>

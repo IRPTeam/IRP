@@ -18,10 +18,6 @@
     <use>Use</use>
   </content>
   <content>
-    <metadata>Document.ChequeBondTransactionItem</metadata>
-    <use>Use</use>
-  </content>
-  <content>
     <metadata>Document.Labeling</metadata>
     <use>Use</use>
   </content>
@@ -67,10 +63,6 @@
   </content>
   <content>
     <metadata>Document.SalesInvoice</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Document.ChequeBondTransaction</metadata>
     <use>Use</use>
   </content>
   <content>

@@ -236,8 +236,6 @@
   <commonModules>CommonModule.DocCashStatementServer</commonModules>
   <commonModules>CommonModule.DocCashTransferOrderClient</commonModules>
   <commonModules>CommonModule.DocCashTransferOrderServer</commonModules>
-  <commonModules>CommonModule.DocChequeBondTransactionClient</commonModules>
-  <commonModules>CommonModule.DocChequeBondTransactionServer</commonModules>
   <commonModules>CommonModule.DocCreditDebitNoteClient</commonModules>
   <commonModules>CommonModule.DocCreditDebitNoteClientServer</commonModules>
   <commonModules>CommonModule.DocCreditDebitNoteServer</commonModules>
@@ -569,8 +567,6 @@
   <documents>Document.CashRevenue</documents>
   <documents>Document.CashStatement</documents>
   <documents>Document.CashTransferOrder</documents>
-  <documents>Document.ChequeBondTransaction</documents>
-  <documents>Document.ChequeBondTransactionItem</documents>
   <documents>Document.CreditNote</documents>
   <documents>Document.DebitNote</documents>
   <documents>Document.GoodsReceipt</documents>
@@ -669,7 +665,6 @@
   <informationRegisters>InformationRegister.BarcodeScanInfoCheck</informationRegisters>
   <informationRegisters>InformationRegister.BundleContents</informationRegisters>
   <informationRegisters>InformationRegister.BusinessUnitBankTerms</informationRegisters>
-  <informationRegisters>InformationRegister.ChequeBondStatuses</informationRegisters>
   <informationRegisters>InformationRegister.CreatedProcurementOrders</informationRegisters>
   <informationRegisters>InformationRegister.CurrencyRates</informationRegisters>
   <informationRegisters>InformationRegister.DataMappingTable</informationRegisters>
@@ -692,18 +687,11 @@
   <informationRegisters>InformationRegister.T1000I_OffsetOfAdvances</informationRegisters>
   <informationRegisters>InformationRegister.T1001I_PartnerTransactions</informationRegisters>
   <informationRegisters>InformationRegister.T1002I_PartnerAdvances</informationRegisters>
-  <accumulationRegisters>AccumulationRegister.AccountBalance</accumulationRegisters>
-  <accumulationRegisters>AccumulationRegister.AccountsStatement</accumulationRegisters>
-  <accumulationRegisters>AccumulationRegister.AdvanceFromCustomers</accumulationRegisters>
-  <accumulationRegisters>AccumulationRegister.AdvanceToSuppliers</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.CashInTransit</accumulationRegisters>
-  <accumulationRegisters>AccumulationRegister.ChequeBondBalance</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.ExpensesTurnovers</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.GoodsReceiptSchedule</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.OrderBalance</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.OrderProcurement</accumulationRegisters>
-  <accumulationRegisters>AccumulationRegister.PartnerApTransactions</accumulationRegisters>
-  <accumulationRegisters>AccumulationRegister.PartnerArTransactions</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.PlaningCashTransactions</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.PurchaseReturnTurnovers</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1001T_Purchases</accumulationRegisters>

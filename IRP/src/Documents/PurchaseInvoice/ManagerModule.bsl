@@ -2624,7 +2624,7 @@ Function R4031B_GoodsInTransitIncoming()
 		|INTO R4031B_GoodsInTransitIncoming
 		|FROM
 		|	ItemList AS ItemList
-		|		INNER JOIN GoodReceiptInfo AS GoodsReceipts
+		|		LEFT JOIN GoodReceiptInfo AS GoodsReceipts
 		|		ON ItemList.Key = GoodsReceipts.Key
 		|WHERE
 		|	NOT ItemList.IsService

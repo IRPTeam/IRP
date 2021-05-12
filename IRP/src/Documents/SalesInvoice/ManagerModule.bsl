@@ -1167,7 +1167,7 @@ Function R4032B_GoodsInTransitOutgoing()
 		|INTO R4032B_GoodsInTransitOutgoing
 		|FROM
 		|	ItemList AS ItemList
-		|		INNER JOIN ShipmentConfirmationsInfo AS ShipmentConfirmations
+		|		LEFT JOIN ShipmentConfirmationsInfo AS ShipmentConfirmations
 		|		ON ItemList.Key = ShipmentConfirmations.Key
 		|WHERE
 		|	NOT ItemList.IsService

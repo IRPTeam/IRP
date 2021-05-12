@@ -169,7 +169,7 @@ Procedure BeginConnectEquipment(HardwareParameters) Export
 
 			If ConnectionNotify <> Undefined Then
 				ErrorDescription = R().Eq_003;
-				ResultData = New Structure("Result, ErrorDescription, ConnectParameters", True, ErrorDescription,
+				ResultData = New Structure("Result, ErrorDescription, ConnectParameters", Result, ErrorDescription,
 					Device.ConnectParameters);
 				ExecuteNotifyProcessing(ConnectionNotify, ResultData);
 			EndIf;

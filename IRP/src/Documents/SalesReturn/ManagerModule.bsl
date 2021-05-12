@@ -687,7 +687,8 @@ Function ItemList()
 		|	NOT GoodsReceipts.Key IS NULL AS GoodsReceiptExists,
 		|	GoodsReceipts.GoodsReceipt,
 		|	ItemList.NetAmount,
-		|	ItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS IsService
+		|	ItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS IsService,
+		|	ItemList.ReturnReason
 		|INTO ItemList
 		|FROM
 		|	Document.SalesReturn.ItemList AS ItemList

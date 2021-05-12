@@ -1,5 +1,5 @@
 Procedure OnOpen(Object, Form, Cancel, AddInfo = Undefined) Export
-	
+	Return;
 EndProcedure
 
 #Region Item

@@ -145,3 +145,18 @@ Scenario: _9805 check partner, legal name, Partner term, company and store input
 
 Scenario: _9806 check Sales subsystem
 	When in sections panel I select "Sales - A/R"
+
+Scenario: _9808 check All registers movements
+	Given I open hyperlink "e1cib/app/Report.AllRegistersMovement"
+	And I remove checkbox named "SettingsComposerUserSettingsItem0Use"
+	And I click "Run report" button
+	And "Result" spreadsheet document contains "ErrorTest9808" template lines by template
+	
+Scenario: _9809 check Items info
+	Given I open hyperlink "e1cib/app/Report.ItemsInfo"
+	And I click "Run report" button
+	And "Result" spreadsheet document contains "ErrorTest9809" template lines by template	
+	
+		
+
+

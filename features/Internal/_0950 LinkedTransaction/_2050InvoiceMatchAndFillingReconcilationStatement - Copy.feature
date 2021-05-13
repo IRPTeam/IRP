@@ -349,68 +349,68 @@ Scenario: 2050002 check filling in Reconcilation statement
 
 
 
-Scenario: _2050007 check the movements of the Invoice match document with the client when transferring the amount from document to document
-	* Open a creation form Invoice match
-		Given I open hyperlink "e1cib/list/Document.InvoiceMatch"
-		And I click the button named "FormCreate"
-	* Filling the document header
-		And I select "With customer" exact value from "Operation type" drop-down list
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' |
-		And I select current line in "List" table
-		And I click Choice button of the field named "PartnerArTransactionsBasisDocument"
-		And I go to line in "" table
-			| 'Column1'       |
-			| 'Sales invoice' |
-		And I select current line in "" table
-		And I go to line in "List" table
-			| 'Number' | 'Partner' |
-			| '$$NumberSalesInvoice20400022$$'  | 'Crystal' |
-		And I activate "Partner" field in "List" table
-		And I select current line in "List" table
-	* Filling in the tabular part Transaction
-		And in the table "Transactions" I click the button named "TransactionsAdd"
-		And I click choice button of the attribute named "TransactionsPartnerArTransactionsBasisDocument" in "Transactions" table
-		And I go to line in "" table
-			| ''              |
-			| 'Sales invoice' |
-		And I select current line in "" table
-		And I go to line in "List" table
-			| 'Number' |
-			| '$$NumberSalesInvoice2040002$$'  |
-		And I select current line in "List" table
-		And I activate field named "TransactionsPartner" in "Transactions" table
-		And I click choice button of the attribute named "TransactionsPartner" in "Transactions" table
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Crystal'     |
-		And I select current line in "List" table
-		And I activate field named "TransactionsLegalName" in "Transactions" table
-		And I click choice button of the attribute named "TransactionsLegalName" in "Transactions" table
-		And I select current line in "List" table
-		And I activate field named "TransactionsAgreement" in "Transactions" table
-		And I click choice button of the attribute named "TransactionsAgreement" in "Transactions" table
-		And I go to line in "List" table
-			| 'AP/AR posting detail' | 'Description'           | 'Kind'    |
-			| 'By documents'         | 'Basic Partner terms, TRY' | 'Regular' |
-		And I select current line in "List" table
-		And I activate field named "TransactionsCurrency" in "Transactions" table
-		And I click choice button of the attribute named "TransactionsCurrency" in "Transactions" table
-		And I go to line in "List" table
-			| 'Code' | 'Description'  |
-			| 'TRY'  | 'Turkish lira' |
-		And I select current line in "List" table
-		And I activate field named "TransactionsAmount" in "Transactions" table
-		And I input "2 000,00" text in the field named "TransactionsAmount" of "Transactions" table
-		And I finish line editing in "Transactions" table
-		And I activate field named "TransactionsClosingAmount" in "Transactions" table
-		And I select current line in "Transactions" table
-		And I input "2 000,00" text in the field named "TransactionsClosingAmount" of "Transactions" table
-		And I finish line editing in "Transactions" table
-	* Check movements
-		And I click the button named "FormPost"
+# Scenario: _2050007 check the movements of the Invoice match document with the client when transferring the amount from document to document
+# 	* Open a creation form Invoice match
+# 		Given I open hyperlink "e1cib/list/Document.InvoiceMatch"
+# 		And I click the button named "FormCreate"
+# 	* Filling the document header
+# 		And I select "With customer" exact value from "Operation type" drop-down list
+# 		And I click Select button of "Company" field
+# 		And I go to line in "List" table
+# 			| 'Description'  |
+# 			| 'Main Company' |
+# 		And I select current line in "List" table
+# 		And I click Choice button of the field named "PartnerArTransactionsBasisDocument"
+# 		And I go to line in "" table
+# 			| 'Column1'       |
+# 			| 'Sales invoice' |
+# 		And I select current line in "" table
+# 		And I go to line in "List" table
+# 			| 'Number' | 'Partner' |
+# 			| '$$NumberSalesInvoice20400022$$'  | 'Crystal' |
+# 		And I activate "Partner" field in "List" table
+# 		And I select current line in "List" table
+# 	* Filling in the tabular part Transaction
+# 		And in the table "Transactions" I click the button named "TransactionsAdd"
+# 		And I click choice button of the attribute named "TransactionsPartnerArTransactionsBasisDocument" in "Transactions" table
+# 		And I go to line in "" table
+# 			| ''              |
+# 			| 'Sales invoice' |
+# 		And I select current line in "" table
+# 		And I go to line in "List" table
+# 			| 'Number' |
+# 			| '$$NumberSalesInvoice2040002$$'  |
+# 		And I select current line in "List" table
+# 		And I activate field named "TransactionsPartner" in "Transactions" table
+# 		And I click choice button of the attribute named "TransactionsPartner" in "Transactions" table
+# 		And I go to line in "List" table
+# 			| 'Description' |
+# 			| 'Crystal'     |
+# 		And I select current line in "List" table
+# 		And I activate field named "TransactionsLegalName" in "Transactions" table
+# 		And I click choice button of the attribute named "TransactionsLegalName" in "Transactions" table
+# 		And I select current line in "List" table
+# 		And I activate field named "TransactionsAgreement" in "Transactions" table
+# 		And I click choice button of the attribute named "TransactionsAgreement" in "Transactions" table
+# 		And I go to line in "List" table
+# 			| 'AP/AR posting detail' | 'Description'           | 'Kind'    |
+# 			| 'By documents'         | 'Basic Partner terms, TRY' | 'Regular' |
+# 		And I select current line in "List" table
+# 		And I activate field named "TransactionsCurrency" in "Transactions" table
+# 		And I click choice button of the attribute named "TransactionsCurrency" in "Transactions" table
+# 		And I go to line in "List" table
+# 			| 'Code' | 'Description'  |
+# 			| 'TRY'  | 'Turkish lira' |
+# 		And I select current line in "List" table
+# 		And I activate field named "TransactionsAmount" in "Transactions" table
+# 		And I input "2 000,00" text in the field named "TransactionsAmount" of "Transactions" table
+# 		And I finish line editing in "Transactions" table
+# 		And I activate field named "TransactionsClosingAmount" in "Transactions" table
+# 		And I select current line in "Transactions" table
+# 		And I input "2 000,00" text in the field named "TransactionsClosingAmount" of "Transactions" table
+# 		And I finish line editing in "Transactions" table
+# 	* Check movements
+# 		And I click the button named "FormPost"
 		# And I delete "$$InvoiceMatch2050007$$" variable
 		# And I delete "$$NumberInvoiceMatch2050007$$" variable
 		# And I save the window as "$$InvoiceMatch2050007$$"
@@ -471,45 +471,45 @@ Scenario: _2050007 check the movements of the Invoice match document with the cl
 # 		| ''                                    | 'Expense'     | '*'      | '2 000'     | 'Main Company' | '$$SalesInvoice20400022$$' | 'Crystal' | 'Company Adel' | 'Basic Partner terms, TRY' | 'TRY'      | 'TRY'                          | 'No'                   |
 # 		And I close all client application windows
 
-Scenario: _2050008 check the availability of Purchase return and Sales return choices in the Invoice match document
-	* Open a creation form Invoice match
-		Given I open hyperlink "e1cib/list/Document.InvoiceMatch"
-		And I click the button named "FormCreate"
-	* Filling the document header (transaction type - with customer)
-		And I select "With customer" exact value from "Operation type" drop-down list
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' |
-		And I select current line in "List" table
-		And I click Choice button of the field named "PartnerArTransactionsBasisDocument"
-		And I go to line in "" table
-			| 'Column1'       |
-			| 'Purchase return' |
-		And I select current line in "" table
-		And I go to line in "List" table
-			| 'Number' | 'Partner' |
-			| '$$NumberPurchaseReturn300301$$'      | 'Ferron BP' |
-		And I select current line in "List" table
-		Then the form attribute named "PartnerArTransactionsBasisDocument" became equal to "$$PurchaseReturn300301$$" template
-	* Filling the document header (transaction type - with vendor)
-		And I select "With vendor" exact value from "Operation type" drop-down list
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' |
-		And I select current line in "List" table
-		And I click Choice button of the field named "PartnerApTransactionsBasisDocument"
-		And I go to line in "" table
-			| 'Column1'       |
-			| 'Sales return' |
-		And I select current line in "" table
-		And I go to line in "List" table
-			| 'Number' | 'Partner' |
-			| '$$NumberSalesReturn30001$$'      | 'Kalipso' |
-		And I select current line in "List" table
-		Then the form attribute named "PartnerApTransactionsBasisDocument" became equal to "$$SalesReturn30001$$" template
-	And I close all client application windows
+# Scenario: _2050008 check the availability of Purchase return and Sales return choices in the Invoice match document
+# 	* Open a creation form Invoice match
+# 		Given I open hyperlink "e1cib/list/Document.InvoiceMatch"
+# 		And I click the button named "FormCreate"
+# 	* Filling the document header (transaction type - with customer)
+# 		And I select "With customer" exact value from "Operation type" drop-down list
+# 		And I click Select button of "Company" field
+# 		And I go to line in "List" table
+# 			| 'Description'  |
+# 			| 'Main Company' |
+# 		And I select current line in "List" table
+# 		And I click Choice button of the field named "PartnerArTransactionsBasisDocument"
+# 		And I go to line in "" table
+# 			| 'Column1'       |
+# 			| 'Purchase return' |
+# 		And I select current line in "" table
+# 		And I go to line in "List" table
+# 			| 'Number' | 'Partner' |
+# 			| '$$NumberPurchaseReturn300301$$'      | 'Ferron BP' |
+# 		And I select current line in "List" table
+# 		Then the form attribute named "PartnerArTransactionsBasisDocument" became equal to "$$PurchaseReturn300301$$" template
+# 	* Filling the document header (transaction type - with vendor)
+# 		And I select "With vendor" exact value from "Operation type" drop-down list
+# 		And I click Select button of "Company" field
+# 		And I go to line in "List" table
+# 			| 'Description'  |
+# 			| 'Main Company' |
+# 		And I select current line in "List" table
+# 		And I click Choice button of the field named "PartnerApTransactionsBasisDocument"
+# 		And I go to line in "" table
+# 			| 'Column1'       |
+# 			| 'Sales return' |
+# 		And I select current line in "" table
+# 		And I go to line in "List" table
+# 			| 'Number' | 'Partner' |
+# 			| '$$NumberSalesReturn30001$$'      | 'Kalipso' |
+# 		And I select current line in "List" table
+# 		Then the form attribute named "PartnerApTransactionsBasisDocument" became equal to "$$SalesReturn30001$$" template
+# 	And I close all client application windows
 
 Scenario: _999999 close TestClient session
 	And I close TestClient session

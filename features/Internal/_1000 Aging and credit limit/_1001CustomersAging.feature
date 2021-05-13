@@ -149,13 +149,13 @@ Scenario: _1000003 create Sales invoice and check Aging tab
 				| 'Post-shipment credit' | '*'          | '14'               | '100,00'                | '550,00' |
 		* Check payment date calculation
 			And I move to "Other" tab
-			And I input "$$DateSalesInvoice0240162$$" text in "Date" field
+			And I input "03.11.2020" text in "Date" field
 			And I move to "Aging" tab
 			Then "Update item list info" window is opened
 			And I click "OK" button
 			And "PaymentTerms" table contains lines
 				| 'Calculation type'     | 'Date'         | 'Due period, days' | 'Proportion of payment' | 'Amount' |
-				| 'Post-shipment credit' | '03.11.2020'   | '14'               | '100,00'                | '550,00' |
+				| 'Post-shipment credit' | '17.11.2020'   | '14'               | '100,00'                | '550,00' |
 		* Manualy change payment date
 			And I move to "Aging" tab
 			And I select current line in "PaymentTerms" table
@@ -163,14 +163,14 @@ Scenario: _1000003 create Sales invoice and check Aging tab
 			And I finish line editing in "PaymentTerms" table
 			And "PaymentTerms" table contains lines
 				| 'Calculation type'     | 'Date'         | 'Due period, days' | 'Proportion of payment' | 'Amount' |
-				| 'Post-shipment credit' | '04.11.2020'   | '15'               | '100,00'                | '550,00' |
+				| 'Post-shipment credit' | '04.11.2020'   | '1'               | '100,00'                | '550,00' |
 		* Manualy change 'Due period, days'
 			And I select current line in "PaymentTerms" table
 			And I input "16" text in "Due period, days" field of "PaymentTerms" table
 			And I finish line editing in "PaymentTerms" table
 			And "PaymentTerms" table contains lines
 				| 'Calculation type'     | 'Date'         | 'Due period, days' | 'Proportion of payment' | 'Amount' |
-				| 'Post-shipment credit' | '05.11.2020'   | '16'               | '100,00'                | '550,00' |
+				| 'Post-shipment credit' | '19.11.2020'   | '16'               | '100,00'                | '550,00' |
 			And I click the button named "FormPost"
 			And I delete "$$SalesInvoice0240162$$" variable
 			And I delete "$$DateSalesInvoice0240162$$" variable
@@ -191,10 +191,10 @@ Scenario: _1000003 create Sales invoice and check Aging tab
 				| 'Register  "R2021 Customer transactions"' | ''            | ''                            | ''          | ''             | ''                             | ''         | ''                | ''        | ''                                 | ''                        | ''                     | ''                  |
 				| ''                                        | 'Record type' | 'Period'                      | 'Resources' | 'Dimensions'   | ''                             | ''         | ''                | ''        | ''                                 | ''                        | 'Attributes'           | ''                  |
 				| ''                                        | ''            | ''                            | 'Amount'    | 'Company'      | 'Multi currency movement type' | 'Currency' | 'Legal name'      | 'Partner' | 'Agreement'                        | 'Basis'                   | 'Deferred calculation' | 'Customers advances closing' |
-				| ''                                        | 'Receipt'     | '$$DateSalesInvoice0240162$$' | '94,16'     | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Company Kalipso' | 'Kalipso' | 'Basic Partner terms, without VAT' | '$$SalesInvoice0240162$$' | 'No'                   | 'No'                |
-				| ''                                        | 'Receipt'     | '$$DateSalesInvoice0240162$$' | '550'       | 'Main Company' | 'Local currency'               | 'TRY'      | 'Company Kalipso' | 'Kalipso' | 'Basic Partner terms, without VAT' | '$$SalesInvoice0240162$$' | 'No'                   | 'No'                |
-				| ''                                        | 'Receipt'     | '$$DateSalesInvoice0240162$$' | '550'       | 'Main Company' | 'TRY'                          | 'TRY'      | 'Company Kalipso' | 'Kalipso' | 'Basic Partner terms, without VAT' | '$$SalesInvoice0240162$$' | 'No'                   | 'No'                |
-				| ''                                        | 'Receipt'     | '$$DateSalesInvoice0240162$$' | '550'       | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Company Kalipso' | 'Kalipso' | 'Basic Partner terms, without VAT' | '$$SalesInvoice0240162$$' | 'No'                   | 'No'                |	
+				| ''                                        | 'Receipt'     | '$$DateSalesInvoice0240162$$' | '94,16'     | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Company Kalipso' | 'Kalipso' | 'Basic Partner terms, without VAT' | '$$SalesInvoice0240162$$' | 'No'                   | ''                |
+				| ''                                        | 'Receipt'     | '$$DateSalesInvoice0240162$$' | '550'       | 'Main Company' | 'Local currency'               | 'TRY'      | 'Company Kalipso' | 'Kalipso' | 'Basic Partner terms, without VAT' | '$$SalesInvoice0240162$$' | 'No'                   | ''                |
+				| ''                                        | 'Receipt'     | '$$DateSalesInvoice0240162$$' | '550'       | 'Main Company' | 'TRY'                          | 'TRY'      | 'Company Kalipso' | 'Kalipso' | 'Basic Partner terms, without VAT' | '$$SalesInvoice0240162$$' | 'No'                   | ''                |
+				| ''                                        | 'Receipt'     | '$$DateSalesInvoice0240162$$' | '550'       | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Company Kalipso' | 'Kalipso' | 'Basic Partner terms, without VAT' | '$$SalesInvoice0240162$$' | 'No'                   | ''                |	
 			And I select "R5011 Partners aging" exact value from "Register" drop-down list
 			And I click "Generate report" button
 			And "ResultTable" spreadsheet document contains lines:
@@ -203,7 +203,7 @@ Scenario: _1000003 create Sales invoice and check Aging tab
 				| 'Register  "R5011 Partners aging"' | ''            | ''                            | ''          | ''             | ''         | ''                                 | ''        | ''                        | ''                    |
 				| ''                                 | 'Record type' | 'Period'                      | 'Resources' | 'Dimensions'   | ''         | ''                                 | ''        | ''                        | ''                    |
 				| ''                                 | ''            | ''                            | 'Amount'    | 'Company'      | 'Currency' | 'Agreement'                        | 'Partner' | 'Invoice'                 | 'Payment date'        |
-				| ''                                 | 'Receipt'     | '$$DateSalesInvoice0240162$$' | '550'       | 'Main Company' | 'TRY'      | 'Basic Partner terms, without VAT' | 'Kalipso' | '$$SalesInvoice0240162$$' | '05.11.2020 00:00:00' |
+				| ''                                 | 'Receipt'     | '$$DateSalesInvoice0240162$$' | '550'       | 'Main Company' | 'TRY'      | 'Basic Partner terms, without VAT' | 'Kalipso' | '$$SalesInvoice0240162$$' | '19.11.2020 00:00:00' |
 			And I close all client application windows
 	* Create second test SI
 		When create SalesInvoice024016 (Shipment confirmation does not used)
@@ -223,7 +223,7 @@ Scenario: _1000003 create Sales invoice and check Aging tab
 		And "List" table contains lines
 		| 'Period'                      | 'Recorder'                | 'Currency' | 'Company'      | 'Partner' | 'Amount' | 'Agreement'                        | 'Invoice'                 | 'Payment date'                            |
 		| '$$DateSalesInvoice024016$$'  | '$$SalesInvoice024016$$'  | 'TRY'      | 'Main Company' | 'Kalipso' | '550,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '$$DatePaymentTermsSalesInvoice0240161$$' |
-		| '$$DateSalesInvoice0240162$$' | '$$SalesInvoice0240162$$' | 'TRY'      | 'Main Company' | 'Kalipso' | '550,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice0240162$$' | '05.11.2020'                              |
+		| '$$DateSalesInvoice0240162$$' | '$$SalesInvoice0240162$$' | 'TRY'      | 'Main Company' | 'Kalipso' | '550,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice0240162$$' | '19.11.2020'                              |
 		And I close all client application windows
 		
 # Scenario: _1000009 create Cash receipt and check Aging register movements

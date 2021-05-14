@@ -155,6 +155,13 @@
   <commonPictures>CommonPicture.Store</commonPictures>
   <commonPictures>CommonPicture.Total</commonPictures>
   <commonPictures>CommonPicture.IconCollection4</commonPictures>
+  <commonPictures>CommonPicture.CommonAttributes</commonPictures>
+  <commonPictures>CommonPicture.Attributes</commonPictures>
+  <commonPictures>CommonPicture.Dimensions</commonPictures>
+  <commonPictures>CommonPicture.StandardAttributes</commonPictures>
+  <commonPictures>CommonPicture.SessionParameter</commonPictures>
+  <commonPictures>CommonPicture.AccountingFlags</commonPictures>
+  <commonPictures>CommonPicture.Recalculations</commonPictures>
   <sessionParameters>SessionParameter.ClientType</sessionParameters>
   <sessionParameters>SessionParameter.ConnectedAddDataProc</sessionParameters>
   <sessionParameters>SessionParameter.ConnectionSettings</sessionParameters>
@@ -313,9 +320,6 @@
   <commonModules>CommonModule.FormItemsSize</commonModules>
   <commonModules>CommonModule.FormItemsSizeReuse</commonModules>
   <commonModules>CommonModule.GetItemInfo</commonModules>
-  <commonModules>CommonModule.GoogleDriveClient</commonModules>
-  <commonModules>CommonModule.GoogleDriveClientServer</commonModules>
-  <commonModules>CommonModule.GoogleDriveServer</commonModules>
   <commonModules>CommonModule.HardwareClient</commonModules>
   <commonModules>CommonModule.HardwareServer</commonModules>
   <commonModules>CommonModule.IDInfoClient</commonModules>

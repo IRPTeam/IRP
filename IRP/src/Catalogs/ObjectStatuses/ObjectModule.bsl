@@ -83,5 +83,5 @@ Procedure Filling(FillingData, FillingText, StandardProcessing)
 EndProcedure
 
 Procedure OnCopy(CopiedObject)
-	UniqueID = "";
+	CopiedObject.UniqueID = Undefined;
 EndProcedure

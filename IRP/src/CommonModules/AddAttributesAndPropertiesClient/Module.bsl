@@ -25,7 +25,6 @@ Procedure SetRequiredAtAllSetsEnd(Result, AddionalParameters) Export
 		Return;
 	EndIf;		
 	Object = AddionalParameters.Object;
-	Form = AddionalParameters.Form;
 	AddAttributesAndPropertiesServer.SetRequiredAtAllSets(Object.Ref, Result);
 EndProcedure
 

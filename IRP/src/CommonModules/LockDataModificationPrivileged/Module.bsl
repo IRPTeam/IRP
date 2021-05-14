@@ -106,19 +106,56 @@ Function SourceIsLocked(Val SourceParams)
 EndFunction
 
 Function CalculateRuleByObject(SourceParams, AddInfo = Undefined)
+	
+	AccessGroups = UsersEvent.GetAccessGroupsByUser();
+	
 	Query = New Query;
 	Query.Text =
-		"SELECT
+		"SELECT DISTINCT
+		|	UserList.Ref AS LockDataModificationReason
+		|INTO LockDataModificationReasonVT
+		|FROM
+		|	Catalog.LockDataModificationReasons.UserList AS UserList
+		|WHERE
+		|	UserList.User = &User
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	AccessGroupList.Ref
+		|FROM
+		|	Catalog.LockDataModificationReasons.AccessGroupList AS AccessGroupList
+		|WHERE
+		|	AccessGroupList.AccessGroup IN (&AccessGroup)
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	LockDataModificationReasons.Ref
+		|FROM
+		|	Catalog.LockDataModificationReasons AS LockDataModificationReasons
+		|WHERE
+		|	LockDataModificationReasons.ForAllUsers
+		|;
+		|
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
 		|	LockDataModificationRules.Attribute,
 		|	LockDataModificationRules.ComparisonType,
 		|	LockDataModificationRules.Value,
-		|	LockDataModificationRules.LockDataModificationReasons
+		|	LockDataModificationRules.LockDataModificationReasons,
+		|	LockDataModificationRules.SetValueAsCode
 		|FROM
 		|	InformationRegister.LockDataModificationRules AS LockDataModificationRules
+		|		INNER JOIN LockDataModificationReasonVT AS LockDataModificationReasonVT
+		|		ON LockDataModificationRules.LockDataModificationReasons = LockDataModificationReasonVT.LockDataModificationReason
 		|WHERE
 		|	LockDataModificationRules.Type = &MetadataName
-		|	AND Not LockDataModificationRules.DisableRule";
-	
+		|	AND Not LockDataModificationRules.DisableRule
+		|	AND Not LockDataModificationRules.LockDataModificationReasons.DeletionMark
+		|	AND Not LockDataModificationRules.LockDataModificationReasons.DisableRule";
+	Query.SetParameter("AccessGroup", AccessGroups);
+	Query.SetParameter("User", SessionParameters.CurrentUser);
 	Query.SetParameter("MetadataName", SourceParams.MetadataName);
 	
 	QueryResult = Query.Execute();
@@ -126,8 +163,15 @@ Function CalculateRuleByObject(SourceParams, AddInfo = Undefined)
 		Return Undefined;
 	EndIf;
 	VT = QueryResult.Unload();
+	If Not SafeMode() Then 
+		SetSafeMode(True);
+	EndIf;
 	For Each Row In VT Do
 		Row.Attribute = StrSplit(Row.Attribute, ".")[1];
+		
+		If Row.SetValueAsCode Then
+			Row.Value = Eval(Row.Value);
+		EndIf;
 	EndDo;
 	
 	Return VT;
@@ -172,7 +216,6 @@ Function ModifyDataIsLocked_ByTable(SourceParams, Rules, CheckCurrent, AddInfo =
 		Query.Execute();
 	EndIf;
 	
-	
 	For Index = 0 To Rules.Count() - 1 Do
 		Text.Add("Table." + Rules[Index].Attribute + " " + Rules[Index].ComparisonType + " (" + "&Param" + Index + ")");
 		Fields.Add("CASE WHEN Table." + Rules[Index].Attribute + " " + Rules[Index].ComparisonType + " (" + "&Param" + Index + ")
@@ -190,9 +233,7 @@ Function ModifyDataIsLocked_ByTable(SourceParams, Rules, CheckCurrent, AddInfo =
 	If QueryResult.IsEmpty() Then
 		Return False;
 	EndIf;
-	ShowInfoAboutLock(QueryResult);
-	Return True;
-
+	Return ShowInfoAboutLock(QueryResult);
 EndFunction
 
 Function DataIsLocked_ByRef(SourceParams, Rules, CheckCurrent, AddInfo = Undefined)
@@ -211,7 +252,7 @@ Function DataIsLocked_ByRef(SourceParams, Rules, CheckCurrent, AddInfo = Undefin
 	EndDo;
 	
 	Query.Text = "SELECT DISTINCT " + Chars.LF + StrConcat(Fields, "," + Chars.LF) + Chars.LF +
-				 "WHERE " + StrConcat(Filter, " AND" + Chars.LF);
+				 "WHERE " + StrConcat(Filter, " OR" + Chars.LF);
 	
 	For Index = 0 To Rules.Count() - 1 Do
 		If CheckCurrent Then
@@ -230,12 +271,11 @@ Function DataIsLocked_ByRef(SourceParams, Rules, CheckCurrent, AddInfo = Undefin
 	If QueryResult.IsEmpty() Then
 		Return False;
 	EndIf;
-	ShowInfoAboutLock(QueryResult);
-	Return True;
+	Return ShowInfoAboutLock(QueryResult);
 EndFunction
 
 
-Procedure ShowInfoAboutLock(QueryResult)
+Function ShowInfoAboutLock(QueryResult)
 
 	Reasons = New Array;
 	ReasonsTable = QueryResult.Unload();
@@ -246,9 +286,35 @@ Procedure ShowInfoAboutLock(QueryResult)
 		EndIf;
 		Reasons.Add(ReasonsTable[0][Column.Name]);
 	EndDo;
-	
-	CommonFunctionsClientServer.ShowUsersMessage(StrConcat(Reasons, Chars.LF));
-EndProcedure
+	If Reasons.Count() > 1 Then
+		CommonFunctionsClientServer.ShowUsersMessage(StrConcat(Reasons, Chars.LF));
+		Return True;
+	EndIf;
+	Return False;
+EndFunction
 
+// Save rule settings.
+// 
+// Parameters:
+//  RuleObject  - CatalogObject.LockDataModificationReasons - Rule object
+Procedure SaveRuleSettings(RuleObject) Export
+	Reg = InformationRegisters.LockDataModificationRules.CreateRecordSet();
+	Reg.Filter.LockDataModificationReasons.Set(RuleObject.Ref);
+	
+	For Each Row In RuleObject.RuleList Do
+		NewRow = Reg.Add();
+		NewRow.LockDataModificationReasons = RuleObject.Ref;
+		FillPropertyValues(NewRow, Row);
+		NewRow.Number = Row.LineNumber;
+		If RuleObject.SetOneRuleForAllObjects Then
+			FillPropertyValues(NewRow, RuleObject);
+		Else
+			If RuleObject.DisableRule Then
+				NewRow.DisableRule = True;
+			EndIf;
+		EndIf;
+	EndDo;
+	Reg.Write();
+EndProcedure
 
 #EndRegion

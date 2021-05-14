@@ -8,9 +8,7 @@ EndProcedure
 
 &AtClient
 Procedure HTMLDocumentComplete(Item)
-	If Type = "GoogleDrive" Then
-		GoogleDriveClient.OnHTMLComplete(Item.Document, SrcUUID, GetFromTempStorage(AddInfoAddress));	
-	EndIf;
+	Return;
 EndProcedure
 
 &AtClient

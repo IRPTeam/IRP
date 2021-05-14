@@ -64,12 +64,12 @@
       <value>Order</value>
     </synonym>
     <type>
+      <types>DocumentRef.PurchaseReturn</types>
       <types>DocumentRef.PurchaseReturnOrder</types>
       <types>DocumentRef.SalesOrder</types>
       <types>DocumentRef.InventoryTransferOrder</types>
-      <types>DocumentRef.SalesInvoice</types>
-      <types>DocumentRef.PurchaseReturn</types>
       <types>DocumentRef.InventoryTransfer</types>
+      <types>DocumentRef.SalesInvoice</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

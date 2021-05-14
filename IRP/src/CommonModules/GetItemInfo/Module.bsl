@@ -670,15 +670,6 @@ Function ItemUnitInfo(ItemKey) Export
 	Return New Structure("Unit", Undefined);
 EndFunction
 
-Function ItemPackageUnitInfo(ItemKey) Export
-	If ValueIsFilled(ItemKey) Then
-		If ValueIsFilled(ItemKey.Item.PackageUnit) Then
-			Return New Structure("PackageUnit", ItemKey.Item.PackageUnit);
-		EndIf;
-	EndIf;
-	Return New Structure("PackageUnit", Undefined);
-EndFunction
-
 Function GetUnitFactor(ItemKey, Unit) Export
 	Return Catalogs.Units.GetUnitFactor(Unit, ItemKey.Item.Unit);
 EndFunction

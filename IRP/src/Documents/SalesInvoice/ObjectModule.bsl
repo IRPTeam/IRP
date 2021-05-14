@@ -53,11 +53,6 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 		ItemKeyRow.Insert("Unit"        , ?(ValueIsFilled(Row.ItemKey.Unit), Row.ItemKey.Unit, Row.ItemKey.Item.Unit));
 		ItemKeyRow.Insert("Quantity"    , Row.Quantity);
 		
-		If Row.PackageUnit.IsEmpty() And Not Row.ItemKey.Item.PackageUnit.IsEmpty() Then
-			Row.PackageUnit = Row.ItemKey.Item.PackageUnit;
-			CalculationStringsClientServer.CalculateItemsRow(ThisObject, Row, New Structure("CalculateQuantityInPackageUnitUnit"));
-		EndIf;		
-		
 		DocumentsServer.RecalculateQuantityInRow(ItemKeyRow);
 		
 		ArrayOfRows = ThisObject.ShipmentConfirmations.FindRows(New Structure("Key", ItemKeyRow.Key));

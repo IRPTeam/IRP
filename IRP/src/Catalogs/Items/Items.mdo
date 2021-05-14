@@ -146,21 +146,6 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
-  <attributes uuid="b9f25625-c9db-4be3-a1b3-b3555be379bd">
-    <name>PackageUnit</name>
-    <synonym>
-      <key>en</key>
-      <value>Package unit</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Units</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
   <tabularSections uuid="e3609755-5008-429d-a577-246046f74702">
     <producedTypes>
       <objectType typeId="9654fef5-89da-4b6c-964f-8875a75a6d50" valueTypeId="15da890f-647a-418a-8809-add8417164e9"/>

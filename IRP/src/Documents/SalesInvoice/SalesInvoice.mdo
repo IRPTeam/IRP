@@ -585,33 +585,6 @@
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
-    <attributes uuid="f67783f9-8351-4543-b4f0-dde17ec242d3">
-      <name>PackageUnit</name>
-      <synonym>
-        <key>en</key>
-        <value>Package unit</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.Units</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="d3c8a099-bf38-47bf-98f8-413d897a52b4">
-      <name>QuantityInPackageUnit</name>
-      <synonym>
-        <key>en</key>
-        <value>Quantity in package unit</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeQuantity</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-    </attributes>
   </tabularSections>
   <tabularSections uuid="eca9e13b-9cae-4ae4-bdea-a85980615377">
     <producedTypes>

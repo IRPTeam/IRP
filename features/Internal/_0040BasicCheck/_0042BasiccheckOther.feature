@@ -206,51 +206,8 @@ Scenario: Open information register form "BusinessUnitBankTerms"
 
 
 	
-Scenario: Open list form "AccountsStatement" 
 
-	Given I open "AccountsStatement" accumulation register list form 
-	If the warning is displayed then
-		Then I raise "Failed to open information register form AccountsStatement" exception
-	And I close current window
 
-Scenario: Open object form "AccountsStatement"
-
-	Given I open "AccountsStatement" accumulation register default form 
-	If the warning is displayed then
-		Then I raise "Failed to open information register form AccountsStatement" exception
-	And I close current window
-
-	
-Scenario: Open list form "AdvanceFromCustomers" 
-
-	Given I open "AdvanceFromCustomers" accumulation register list form 
-	If the warning is displayed then
-		Then I raise "Failed to open information register form AdvanceFromCustomers" exception
-	And I close current window
-
-Scenario: Open object form "AdvanceFromCustomers"
-
-	Given I open "AdvanceFromCustomers" accumulation register default form
-	If the warning is displayed then
-		Then I raise "Failed to open information register form AdvanceFromCustomers" exception
-	And I close current window
-
-	
-Scenario: Open list form "AdvanceToSuppliers" 
-
-	Given I open "AdvanceToSuppliers" accumulation register list form 
-	If the warning is displayed then
-		Then I raise "Failed to open information register form AdvanceToSuppliers" exception
-	And I close current window
-
-Scenario: Open object form "AdvanceToSuppliers"
-
-	Given I open "AdvanceToSuppliers" accumulation register default form
-	If the warning is displayed then
-		Then I raise "Failed to open information register form AdvanceToSuppliers" exception
-	And I close current window
-
-	
 
 
 	
@@ -321,35 +278,6 @@ Scenario: Open object form "OrderProcurement"
 	And I close current window
 
 	
-	
-Scenario: Open list form "PartnerApTransactions" 
-
-	Given I open "PartnerApTransactions" accumulation register list form 
-	If the warning is displayed then
-		Then I raise "Failed to open information register form PartnerApTransactions" exception
-	And I close current window
-
-Scenario: Open object form "PartnerApTransactions"
-
-	Given I open "PartnerApTransactions" accumulation register default form
-	If the warning is displayed then
-		Then I raise "Failed to open information register form PartnerApTransactions" exception
-	And I close current window
-
-	
-Scenario: Open list form "PartnerArTransactions" 
-
-	Given I open "PartnerArTransactions" accumulation register list form
-	If the warning is displayed then
-		Then I raise "Failed to open information register form PartnerArTransactions" exception
-	And I close current window
-
-Scenario: Open object form "PartnerArTransactions"
-
-	Given I open "PartnerArTransactions" accumulation register default form
-	If the warning is displayed then
-		Then I raise "Failed to open information register form PartnerArTransactions" exception
-	And I close current window
 
 	
 Scenario: Open list form "PlaningCashTransactions" 

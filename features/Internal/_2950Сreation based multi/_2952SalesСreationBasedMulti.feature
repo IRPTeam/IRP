@@ -1020,7 +1020,7 @@ Scenario: _090408 create one Sales order - several Shipment confirmation - one S
 		And I delete "$$DateSalesInvoice0904083$$" variable
 		And I save the value of "Number" field as "$$NumberSalesInvoice0904083$$"
 		And I save the window as "$$SalesInvoice0904083$$"
-		And I save the value of "Date" field as "$$DateSalesInvoice0904083$$"	
+		And I save the value of the field named "Date" as "$$DateSalesInvoice0904083$$"	
 		And I click "Registrations report" button
 		And I select "R2021 Customer transactions" exact value from "Register" drop-down list
 		And I click "Generate report" button
@@ -1030,8 +1030,8 @@ Scenario: _090408 create one Sales order - several Shipment confirmation - one S
 			| 'Register  "R2021 Customer transactions"' | ''            | ''                            | ''          | ''             | ''                             | ''         | ''                  | ''          | ''                         | ''                        | ''                     | ''                  |
 			| ''                                        | 'Record type' | 'Period'                      | 'Resources' | 'Dimensions'   | ''                             | ''         | ''                  | ''          | ''                         | ''                        | 'Attributes'           | ''                  |
 			| ''                                        | ''            | ''                            | 'Amount'    | 'Company'      | 'Multi currency movement type' | 'Currency' | 'Legal name'        | 'Partner'   | 'Agreement'                | 'Basis'                   | 'Deferred calculation' | 'Customers advances closing' |
-			| ''                                        | 'Receipt'     | '$$DateSalesInvoice0904083$$' | '5 719,17'  | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | '$$SalesInvoice0904083$$' | 'No'                   | 'No'                |
-			| ''                                        | 'Receipt'     | '$$DateSalesInvoice0904083$$' | '33 400'    | 'Main Company' | 'Local currency'               | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | '$$SalesInvoice0904083$$' | 'No'                   | 'No'                |
-			| ''                                        | 'Receipt'     | '$$DateSalesInvoice0904083$$' | '33 400'    | 'Main Company' | 'TRY'                          | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | '$$SalesInvoice0904083$$' | 'No'                   | 'No'                |
-			| ''                                        | 'Receipt'     | '$$DateSalesInvoice0904083$$' | '33 400'    | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | '$$SalesInvoice0904083$$' | 'No'                   | 'No'                |
+			| ''                                        | 'Receipt'     | '$$DateSalesInvoice0904083$$' | '5 718,08'  | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | '$$SalesInvoice0904083$$' | 'No'                   | ''                |
+			| ''                                        | 'Receipt'     | '$$DateSalesInvoice0904083$$' | '33 400'    | 'Main Company' | 'Local currency'               | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | '$$SalesInvoice0904083$$' | 'No'                   | ''                |
+			| ''                                        | 'Receipt'     | '$$DateSalesInvoice0904083$$' | '33 400'    | 'Main Company' | 'TRY'                          | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | '$$SalesInvoice0904083$$' | 'No'                   | ''                |
+			| ''                                        | 'Receipt'     | '$$DateSalesInvoice0904083$$' | '33 400'    | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | '$$SalesInvoice0904083$$' | 'No'                   | ''                |
 		And I close all client application windows

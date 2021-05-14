@@ -1414,9 +1414,6 @@ Scenario: auto filling Configuration metadata catalog
 		| 'Cash transfer order'            |
 		| 'Cash/Bank accounts'             |
 		| 'Catalogs'                       |
-		| 'Cheque bond transaction'        |
-		| 'Cheque bond transaction item'   |
-		| 'Cheque bonds'                   |
 		| 'Companies'                      |
 		| 'Configuration metadata'         |
 		| 'Contact info sets'              |

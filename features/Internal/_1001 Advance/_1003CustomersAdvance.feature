@@ -181,11 +181,13 @@ Scenario: _1003002 create CustomersAdvancesClosing
 			| 'Number'                                   | 'Date'                | 'Company'      | 'Begin of period' | 'End of period' |
 			| '$$NumberCustomersAdvancesClosing12012021$$' | '12.01.2021 12:00:00' | 'Main Company' | '12.01.2021'      | '12.01.2021'    |
 			| '$$NumberCustomersAdvancesClosing27012021$$' | '27.01.2021 12:00:00' | 'Main Company' | '27.01.2021'      | '27.01.2021'    |
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"		
 		And I close all client application windows
 		
 	
 
-Scenario: _1002003 check PI closing by advance (Ap-Ar by documents, payment first)
+Scenario: _1003003 check SI closing by advance (Ap-Ar by documents, payment first)
 	Given I open hyperlink "e1cib/list/AccumulationRegister.R2021B_CustomersTransactions"
 	And "List" table contains lines
 		| 'Period'              | 'Recorder'                                  | 'Currency' | 'Customers advances closing'                             | 'Company'      | 'Partner'   | 'Amount'    | 'Multi currency movement type' | 'Legal name'        | 'Agreement'                | 'Basis'                                     | 'Deferred calculation' |

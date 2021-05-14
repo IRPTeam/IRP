@@ -100,28 +100,34 @@ Scenario: _1002000 preparation (vendors advances closing)
 			| "Documents.CashPayment.FindByNumber(22).GetObject().Write(DocumentWriteMode.Posting);" |
 			| "Documents.CashPayment.FindByNumber(23).GetObject().Write(DocumentWriteMode.Posting);" |	
 			| "Documents.CashPayment.FindByNumber(24).GetObject().Write(DocumentWriteMode.Posting);" |	
-		And I close all client application windows
-		
+		When Create document PurchaseInvoice objects (advance)
+		And I execute 1C:Enterprise script at server
+			| "Documents.PurchaseInvoice.FindByNumber(121).GetObject().Write(DocumentWriteMode.Posting);" |	
+			| "Documents.PurchaseInvoice.FindByNumber(122).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.PurchaseInvoice.FindByNumber(123).GetObject().Write(DocumentWriteMode.Posting);" |	
+			| "Documents.PurchaseInvoice.FindByNumber(124).GetObject().Write(DocumentWriteMode.Posting);" |	
+			| "Documents.PurchaseInvoice.FindByNumber(125).GetObject().Write(DocumentWriteMode.Posting);" |	
+			| "Documents.PurchaseInvoice.FindByNumber(126).GetObject().Write(DocumentWriteMode.Posting);" |	
+			| "Documents.PurchaseInvoice.FindByNumber(127).GetObject().Write(DocumentWriteMode.Posting);" |	
+			| "Documents.PurchaseInvoice.FindByNumber(120).GetObject().Write(DocumentWriteMode.Posting);" |	
+		When Create document PurchaseReturn objects (advance)
+		And I execute 1C:Enterprise script at server
+			| "Documents.PurchaseReturn.FindByNumber(11).GetObject().Write(DocumentWriteMode.Posting);" |	
+			| "Documents.PurchaseReturn.FindByNumber(21).GetObject().Write(DocumentWriteMode.Posting);" |
+		When Create document DebitNote objects (advance)
+		And I execute 1C:Enterprise script at server
+			| "Documents. DebitNote.FindByNumber(21).GetObject().Write(DocumentWriteMode.Posting);" |
+		When Create document CreditNote objects (vendor, advance)
+		And I execute 1C:Enterprise script at server
+			| "Documents. CreditNote.FindByNumber(11).GetObject().Write(DocumentWriteMode.Posting);" |	
+		When Create document VendorsAdvancesClosing objects
+		And I execute 1C:Enterprise script at server
+			| "Documents.VendorsAdvancesClosing.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.VendorsAdvancesClosing.FindByNumber(4).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I close all client application windows			
 
 Scenario: _1002002 create VendorsAdvancesClosing
 	Given I open hyperlink "e1cib/list/Document.VendorsAdvancesClosing"
-	And I click the button named "FormCreate"
-	And I input "12.02.2021 22:00:00" text in "Date" field
-	And I click Select button of "Company" field
-	And I go to line in "List" table
-		| 'Description'  |
-		| 'Main Company' |
-	And I select current line in "List" table
-	And I click Select button of "Begin of period" field
-	And I input "12.02.2021" text in "Begin of period" field
-	And I input "12.02.2021" text in "End of period" field
-	And I delete "$$NumberVendorsAdvancesClosing12022021$$" variable
-	And I delete "$VendorsAdvancesClosing12022021$$" variable
-	And I delete "$$DateVendorsAdvancesClosing12022021$$" variable
-	And I save the value of "Number" field as "$$NumberVendorsAdvancesClosing12022021$$"
-	And I save the window as "$$VendorsAdvancesClosing12022021$$"
-	And I save the value of the field named "Date" as "$$DateVendorsAdvancesClosing12022021$$"
-	And I click "Post and close" button
 	And I click the button named "FormCreate"
 	And I input "11.02.2021 12:00:00" text in "Date" field
 	And I click Select button of "Company" field
@@ -156,8 +162,17 @@ Scenario: _1002002 create VendorsAdvancesClosing
 	And I save the window as "$$VendorsAdvancesClosing15032021$$"
 	And I save the value of the field named "Date" as "$$DateVendorsAdvancesClosing15032021$$"
 	And I click "Post and close" button
+	* Check creation
+		Given I open hyperlink "e1cib/list/Document.VendorsAdvancesClosing"
+		And "List" table contains lines
+			| 'Number'                                   | 'Date'                | 'Company'      | 'Begin of period' | 'End of period' |
+			| '$$NumberVendorsAdvancesClosing11022021$$' | '11.02.2021 12:00:00' | 'Main Company' | '11.02.2021'      | '11.02.2021'    |
+			| '$$NumberVendorsAdvancesClosing15032021$$' | '15.03.2021 12:00:00' | 'Main Company' | '15.03.2021'      | '15.03.2021'    |
+		And I close all client application windows
+		
+	
 
-Scenario: _1002003 check PI closing by advance
+Scenario: _1002003 check PI closing by advance (Ap-Ar by documents, payment first)
 	Given I open hyperlink "e1cib/list/AccumulationRegister.R1021B_VendorsTransactions"
 	And "List" table contains lines
 		| 'Period'              | 'Recorder'                                       | 'Currency' | 'Company'      | 'Partner'   | 'Amount'   | 'Multi currency movement type' | 'Legal name'        | 'Agreement'          | 'Basis'                                          | 'Deferred calculation' | 'Vendors advances closing'                             |
@@ -337,9 +352,190 @@ Scenario: _1002004 check PI movements when unpost document and post it back (clo
 			| ''                                               | 'Expense'     | '12.02.2021 15:12:15' | '2 000'     | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Purchase invoice 117 dated 12.02.2021 15:12:15' | 'No'                   | 'Vendors advances closing 1 dated 12.02.2021 22:00:00' |
 		And I close all client application windows
 
+Scenario: _1002008 check PI closing by advance (Ap-Ar by partner term, payment first)
+	Given I open hyperlink "e1cib/list/AccumulationRegister.R1021B_VendorsTransactions"
+	And "List" table contains lines
+		| 'Period'              | 'Recorder'                                       | 'Line number' | 'Currency' | 'Company'      | 'Partner' | 'Amount' | 'Multi currency movement type' | 'Legal name' | 'Agreement'                   | 'Basis' | 'Deferred calculation' | 'Vendors advances closing'                             |
+		| '12.02.2021 15:00:00' | 'Cash payment 21 dated 12.02.2021 15:00:00'      | '1'           | 'TRY'      | 'Main Company' | 'DFC'     | '100,00' | 'TRY'                          | 'DFC'        | 'DFC Vendor by Partner terms' | ''      | 'No'                   | ''                                                     |
+		| '12.02.2021 15:00:00' | 'Cash payment 21 dated 12.02.2021 15:00:00'      | '2'           | 'TRY'      | 'Main Company' | 'DFC'     | '100,00' | 'Local currency'               | 'DFC'        | 'DFC Vendor by Partner terms' | ''      | 'No'                   | ''                                                     |
+		| '12.02.2021 15:00:00' | 'Cash payment 21 dated 12.02.2021 15:00:00'      | '3'           | 'USD'      | 'Main Company' | 'DFC'     | '17,12'  | 'Reporting currency'           | 'DFC'        | 'DFC Vendor by Partner terms' | ''      | 'No'                   | ''                                                     |
+		| '12.02.2021 15:00:00' | 'Cash payment 21 dated 12.02.2021 15:00:00'      | '4'           | 'TRY'      | 'Main Company' | 'DFC'     | '100,00' | 'en description is empty'      | 'DFC'        | 'DFC Vendor by Partner terms' | ''      | 'No'                   | ''                                                     |
+		| '12.02.2021 15:40:00' | 'Purchase invoice 120 dated 12.02.2021 15:40:00' | '1'           | 'TRY'      | 'Main Company' | 'DFC'     | '170,00' | 'TRY'                          | 'DFC'        | 'DFC Vendor by Partner terms' | ''      | 'No'                   | ''                                                     |
+		| '12.02.2021 15:40:00' | 'Purchase invoice 120 dated 12.02.2021 15:40:00' | '2'           | 'TRY'      | 'Main Company' | 'DFC'     | '170,00' | 'Local currency'               | 'DFC'        | 'DFC Vendor by Partner terms' | ''      | 'No'                   | ''                                                     |
+		| '12.02.2021 15:40:00' | 'Purchase invoice 120 dated 12.02.2021 15:40:00' | '3'           | 'USD'      | 'Main Company' | 'DFC'     | '29,10'  | 'Reporting currency'           | 'DFC'        | 'DFC Vendor by Partner terms' | ''      | 'No'                   | ''                                                     |
+		| '12.02.2021 15:40:00' | 'Purchase invoice 120 dated 12.02.2021 15:40:00' | '4'           | 'TRY'      | 'Main Company' | 'DFC'     | '170,00' | 'en description is empty'      | 'DFC'        | 'DFC Vendor by Partner terms' | ''      | 'No'                   | ''                                                     |
+		| '15.03.2021 12:00:01' | 'Purchase invoice 122 dated 15.03.2021 12:00:01' | '1'           | 'TRY'      | 'Main Company' | 'DFC'     | '110,00' | 'TRY'                          | 'DFC'        | 'DFC Vendor by Partner terms' | ''      | 'No'                   | ''                                                     |
+		| '15.03.2021 12:00:01' | 'Purchase invoice 122 dated 15.03.2021 12:00:01' | '2'           | 'TRY'      | 'Main Company' | 'DFC'     | '110,00' | 'Local currency'               | 'DFC'        | 'DFC Vendor by Partner terms' | ''      | 'No'                   | ''                                                     |
+		| '15.03.2021 12:00:01' | 'Purchase invoice 122 dated 15.03.2021 12:00:01' | '3'           | 'USD'      | 'Main Company' | 'DFC'     | '18,83'  | 'Reporting currency'           | 'DFC'        | 'DFC Vendor by Partner terms' | ''      | 'No'                   | ''                                                     |
+		| '15.03.2021 12:00:01' | 'Purchase invoice 122 dated 15.03.2021 12:00:01' | '4'           | 'TRY'      | 'Main Company' | 'DFC'     | '110,00' | 'en description is empty'      | 'DFC'        | 'DFC Vendor by Partner terms' | ''      | 'No'                   | ''                                                     |
+		| '15.03.2021 19:00:00' | 'Purchase invoice 123 dated 15.03.2021 19:00:00' | '1'           | 'TRY'      | 'Main Company' | 'DFC'     | '190,00' | 'TRY'                          | 'DFC'        | 'DFC Vendor by Partner terms' | ''      | 'No'                   | ''                                                     |
+		| '15.03.2021 19:00:00' | 'Purchase invoice 123 dated 15.03.2021 19:00:00' | '2'           | 'TRY'      | 'Main Company' | 'DFC'     | '190,00' | 'Local currency'               | 'DFC'        | 'DFC Vendor by Partner terms' | ''      | 'No'                   | ''                                                     |
+		| '15.03.2021 19:00:00' | 'Purchase invoice 123 dated 15.03.2021 19:00:00' | '3'           | 'USD'      | 'Main Company' | 'DFC'     | '32,53'  | 'Reporting currency'           | 'DFC'        | 'DFC Vendor by Partner terms' | ''      | 'No'                   | ''                                                     |
+		| '15.03.2021 19:00:00' | 'Purchase invoice 123 dated 15.03.2021 19:00:00' | '4'           | 'TRY'      | 'Main Company' | 'DFC'     | '190,00' | 'en description is empty'      | 'DFC'        | 'DFC Vendor by Partner terms' | ''      | 'No'                   | ''                                                     |
+		| '28.04.2021 16:38:07' | 'Bank payment 12 dated 28.04.2021 16:38:07'      | '1'           | 'TRY'      | 'Main Company' | 'DFC'     | '80,00'  | 'Local currency'               | 'DFC'        | 'DFC Vendor by Partner terms' | ''      | 'No'                   | 'Vendors advances closing 4 dated 28.04.2021 22:00:00' |
+		| '28.04.2021 16:38:07' | 'Bank payment 12 dated 28.04.2021 16:38:07'      | '2'           | 'USD'      | 'Main Company' | 'DFC'     | '13,70'  | 'Reporting currency'           | 'DFC'        | 'DFC Vendor by Partner terms' | ''      | 'No'                   | 'Vendors advances closing 4 dated 28.04.2021 22:00:00' |
+		| '28.04.2021 16:38:07' | 'Bank payment 12 dated 28.04.2021 16:38:07'      | '3'           | 'TRY'      | 'Main Company' | 'DFC'     | '80,00'  | 'TRY'                          | 'DFC'        | 'DFC Vendor by Partner terms' | ''      | 'No'                   | 'Vendors advances closing 4 dated 28.04.2021 22:00:00' |
+		| '28.04.2021 16:38:07' | 'Bank payment 12 dated 28.04.2021 16:38:07'      | '4'           | 'TRY'      | 'Main Company' | 'DFC'     | '200,00' | 'Local currency'               | 'DFC'        | 'DFC Vendor by Partner terms' | ''      | 'No'                   | 'Vendors advances closing 4 dated 28.04.2021 22:00:00' |
+		| '28.04.2021 16:38:07' | 'Bank payment 12 dated 28.04.2021 16:38:07'      | '5'           | 'USD'      | 'Main Company' | 'DFC'     | '34,24'  | 'Reporting currency'           | 'DFC'        | 'DFC Vendor by Partner terms' | ''      | 'No'                   | 'Vendors advances closing 4 dated 28.04.2021 22:00:00' |
+		| '28.04.2021 16:38:07' | 'Bank payment 12 dated 28.04.2021 16:38:07'      | '6'           | 'TRY'      | 'Main Company' | 'DFC'     | '200,00' | 'TRY'                          | 'DFC'        | 'DFC Vendor by Partner terms' | ''      | 'No'                   | 'Vendors advances closing 4 dated 28.04.2021 22:00:00' |
+		| '28.04.2021 16:38:07' | 'Bank payment 12 dated 28.04.2021 16:38:07'      | '7'           | 'TRY'      | 'Main Company' | 'DFC'     | '80,00'  | 'en description is empty'      | 'DFC'        | 'DFC Vendor by Partner terms' | ''      | 'No'                   | 'Vendors advances closing 4 dated 28.04.2021 22:00:00' |
+		| '28.04.2021 16:38:07' | 'Bank payment 12 dated 28.04.2021 16:38:07'      | '8'           | 'TRY'      | 'Main Company' | 'DFC'     | '200,00' | 'en description is empty'      | 'DFC'        | 'DFC Vendor by Partner terms' | ''      | 'No'                   | 'Vendors advances closing 4 dated 28.04.2021 22:00:00' |
+		| '28.04.2021 16:40:12' | 'Bank payment 15 dated 28.04.2021 16:40:12'      | '5'           | 'TRY'      | 'Main Company' | 'DFC'     | '90,00'  | 'Local currency'               | 'DFC'        | 'DFC Vendor by Partner terms' | ''      | 'No'                   | 'Vendors advances closing 4 dated 28.04.2021 22:00:00' |
+		| '28.04.2021 16:40:12' | 'Bank payment 15 dated 28.04.2021 16:40:12'      | '6'           | 'USD'      | 'Main Company' | 'DFC'     | '15,41'  | 'Reporting currency'           | 'DFC'        | 'DFC Vendor by Partner terms' | ''      | 'No'                   | 'Vendors advances closing 4 dated 28.04.2021 22:00:00' |
+		| '28.04.2021 16:40:12' | 'Bank payment 15 dated 28.04.2021 16:40:12'      | '7'           | 'TRY'      | 'Main Company' | 'DFC'     | '90,00'  | 'TRY'                          | 'DFC'        | 'DFC Vendor by Partner terms' | ''      | 'No'                   | 'Vendors advances closing 4 dated 28.04.2021 22:00:00' |
+		| '28.04.2021 16:40:12' | 'Bank payment 15 dated 28.04.2021 16:40:12'      | '14'          | 'TRY'      | 'Main Company' | 'DFC'     | '90,00'  | 'en description is empty'      | 'DFC'        | 'DFC Vendor by Partner terms' | ''      | 'No'                   | 'Vendors advances closing 4 dated 28.04.2021 22:00:00' |
+		| '28.04.2021 16:40:13' | 'Purchase invoice 124 dated 28.04.2021 16:40:13' | '1'           | 'TRY'      | 'Main Company' | 'DFC'     | '200,00' | 'TRY'                          | 'DFC'        | 'DFC Vendor by Partner terms' | ''      | 'No'                   | ''                                                     |
+		| '28.04.2021 16:40:13' | 'Purchase invoice 124 dated 28.04.2021 16:40:13' | '2'           | 'TRY'      | 'Main Company' | 'DFC'     | '200,00' | 'Local currency'               | 'DFC'        | 'DFC Vendor by Partner terms' | ''      | 'No'                   | ''                                                     |
+		| '28.04.2021 16:40:13' | 'Purchase invoice 124 dated 28.04.2021 16:40:13' | '3'           | 'USD'      | 'Main Company' | 'DFC'     | '34,24'  | 'Reporting currency'           | 'DFC'        | 'DFC Vendor by Partner terms' | ''      | 'No'                   | ''                                                     |
+		| '28.04.2021 16:40:13' | 'Purchase invoice 124 dated 28.04.2021 16:40:13' | '4'           | 'TRY'      | 'Main Company' | 'DFC'     | '200,00' | 'en description is empty'      | 'DFC'        | 'DFC Vendor by Partner terms' | ''      | 'No'                   | ''                                                     |
+		| '28.04.2021 16:40:13' | 'Purchase invoice 124 dated 28.04.2021 16:40:13' | '5'           | 'TRY'      | 'Main Company' | 'DFC'     | '200,00' | 'TRY'                          | 'DFC'        | 'DFC Vendor by Partner terms' | ''      | 'No'                   | 'Vendors advances closing 4 dated 28.04.2021 22:00:00' |
+		| '28.04.2021 16:40:13' | 'Purchase invoice 124 dated 28.04.2021 16:40:13' | '6'           | 'TRY'      | 'Main Company' | 'DFC'     | '200,00' | 'Local currency'               | 'DFC'        | 'DFC Vendor by Partner terms' | ''      | 'No'                   | 'Vendors advances closing 4 dated 28.04.2021 22:00:00' |
+		| '28.04.2021 16:40:13' | 'Purchase invoice 124 dated 28.04.2021 16:40:13' | '7'           | 'USD'      | 'Main Company' | 'DFC'     | '34,24'  | 'Reporting currency'           | 'DFC'        | 'DFC Vendor by Partner terms' | ''      | 'No'                   | 'Vendors advances closing 4 dated 28.04.2021 22:00:00' |
+		| '28.04.2021 16:40:13' | 'Purchase invoice 124 dated 28.04.2021 16:40:13' | '8'           | 'TRY'      | 'Main Company' | 'DFC'     | '200,00' | 'en description is empty'      | 'DFC'        | 'DFC Vendor by Partner terms' | ''      | 'No'                   | 'Vendors advances closing 4 dated 28.04.2021 22:00:00' |
+		| '28.04.2021 21:50:00' | 'Debit note 21 dated 28.04.2021 21:50:00'        | '1'           | 'TRY'      | 'Main Company' | 'DFC'     | '-90,00' | 'TRY'                          | 'DFC'        | 'DFC Vendor by Partner terms' | ''      | 'No'                   | ''                                                     |
+		| '28.04.2021 21:50:00' | 'Debit note 21 dated 28.04.2021 21:50:00'        | '2'           | 'TRY'      | 'Main Company' | 'DFC'     | '-90,00' | 'Local currency'               | 'DFC'        | 'DFC Vendor by Partner terms' | ''      | 'No'                   | ''                                                     |
+		| '28.04.2021 21:50:00' | 'Debit note 21 dated 28.04.2021 21:50:00'        | '3'           | 'USD'      | 'Main Company' | 'DFC'     | '-15,41' | 'Reporting currency'           | 'DFC'        | 'DFC Vendor by Partner terms' | ''      | 'No'                   | ''                                                     |
+		| '28.04.2021 21:50:00' | 'Debit note 21 dated 28.04.2021 21:50:00'        | '4'           | 'TRY'      | 'Main Company' | 'DFC'     | '-90,00' | 'en description is empty'      | 'DFC'        | 'DFC Vendor by Partner terms' | ''      | 'No'                   | ''                                                     |
+	Given I open hyperlink "e1cib/list/AccumulationRegister.R1020B_AdvancesToVendors"
+	And "List" table contains lines
+		| 'Period'              | 'Recorder'                                       | 'Line number' | 'Currency' | 'Company'      | 'Partner' | 'Amount' | 'Multi currency movement type' | 'Legal name' | 'Basis'                                     | 'Deferred calculation' | 'Vendors advances closing'                             |
+		| '28.04.2021 16:38:07' | 'Bank payment 12 dated 28.04.2021 16:38:07'      | '3'           | 'TRY'      | 'Main Company' | 'DFC'     | '80,00'  | 'Local currency'               | 'DFC'        | 'Bank payment 12 dated 28.04.2021 16:38:07' | 'No'                   | ''                                                     |
+		| '28.04.2021 16:38:07' | 'Bank payment 12 dated 28.04.2021 16:38:07'      | '4'           | 'USD'      | 'Main Company' | 'DFC'     | '13,70'  | 'Reporting currency'           | 'DFC'        | 'Bank payment 12 dated 28.04.2021 16:38:07' | 'No'                   | ''                                                     |
+		| '28.04.2021 16:38:07' | 'Bank payment 12 dated 28.04.2021 16:38:07'      | '7'           | 'TRY'      | 'Main Company' | 'DFC'     | '200,00' | 'Local currency'               | 'DFC'        | 'Bank payment 12 dated 28.04.2021 16:38:07' | 'No'                   | ''                                                     |
+		| '28.04.2021 16:38:07' | 'Bank payment 12 dated 28.04.2021 16:38:07'      | '8'           | 'USD'      | 'Main Company' | 'DFC'     | '34,24'  | 'Reporting currency'           | 'DFC'        | 'Bank payment 12 dated 28.04.2021 16:38:07' | 'No'                   | ''                                                     |
+		| '28.04.2021 16:38:07' | 'Bank payment 12 dated 28.04.2021 16:38:07'      | '10'          | 'TRY'      | 'Main Company' | 'DFC'     | '80,00'  | 'en description is empty'      | 'DFC'        | 'Bank payment 12 dated 28.04.2021 16:38:07' | 'No'                   | ''                                                     |
+		| '28.04.2021 16:38:07' | 'Bank payment 12 dated 28.04.2021 16:38:07'      | '12'          | 'TRY'      | 'Main Company' | 'DFC'     | '200,00' | 'en description is empty'      | 'DFC'        | 'Bank payment 12 dated 28.04.2021 16:38:07' | 'No'                   | ''                                                     |
+		| '28.04.2021 16:38:07' | 'Bank payment 12 dated 28.04.2021 16:38:07'      | '13'          | 'TRY'      | 'Main Company' | 'DFC'     | '80,00'  | 'Local currency'               | 'DFC'        | 'Bank payment 12 dated 28.04.2021 16:38:07' | 'No'                   | 'Vendors advances closing 4 dated 28.04.2021 22:00:00' |
+		| '28.04.2021 16:38:07' | 'Bank payment 12 dated 28.04.2021 16:38:07'      | '14'          | 'USD'      | 'Main Company' | 'DFC'     | '13,70'  | 'Reporting currency'           | 'DFC'        | 'Bank payment 12 dated 28.04.2021 16:38:07' | 'No'                   | 'Vendors advances closing 4 dated 28.04.2021 22:00:00' |
+		| '28.04.2021 16:38:07' | 'Bank payment 12 dated 28.04.2021 16:38:07'      | '15'          | 'TRY'      | 'Main Company' | 'DFC'     | '200,00' | 'Local currency'               | 'DFC'        | 'Bank payment 12 dated 28.04.2021 16:38:07' | 'No'                   | 'Vendors advances closing 4 dated 28.04.2021 22:00:00' |
+		| '28.04.2021 16:38:07' | 'Bank payment 12 dated 28.04.2021 16:38:07'      | '16'          | 'USD'      | 'Main Company' | 'DFC'     | '34,24'  | 'Reporting currency'           | 'DFC'        | 'Bank payment 12 dated 28.04.2021 16:38:07' | 'No'                   | 'Vendors advances closing 4 dated 28.04.2021 22:00:00' |
+		| '28.04.2021 16:38:07' | 'Bank payment 12 dated 28.04.2021 16:38:07'      | '17'          | 'TRY'      | 'Main Company' | 'DFC'     | '80,00'  | 'en description is empty'      | 'DFC'        | 'Bank payment 12 dated 28.04.2021 16:38:07' | 'No'                   | 'Vendors advances closing 4 dated 28.04.2021 22:00:00' |
+		| '28.04.2021 16:38:07' | 'Bank payment 12 dated 28.04.2021 16:38:07'      | '18'          | 'TRY'      | 'Main Company' | 'DFC'     | '200,00' | 'en description is empty'      | 'DFC'        | 'Bank payment 12 dated 28.04.2021 16:38:07' | 'No'                   | 'Vendors advances closing 4 dated 28.04.2021 22:00:00' |
+		| '28.04.2021 16:40:12' | 'Bank payment 15 dated 28.04.2021 16:40:12'      | '5'           | 'TRY'      | 'Main Company' | 'DFC'     | '300,00' | 'Local currency'               | 'DFC'        | 'Bank payment 15 dated 28.04.2021 16:40:12' | 'No'                   | ''                                                     |
+		| '28.04.2021 16:40:12' | 'Bank payment 15 dated 28.04.2021 16:40:12'      | '6'           | 'USD'      | 'Main Company' | 'DFC'     | '51,36'  | 'Reporting currency'           | 'DFC'        | 'Bank payment 15 dated 28.04.2021 16:40:12' | 'No'                   | ''                                                     |
+		| '28.04.2021 16:40:12' | 'Bank payment 15 dated 28.04.2021 16:40:12'      | '11'          | 'TRY'      | 'Main Company' | 'DFC'     | '300,00' | 'en description is empty'      | 'DFC'        | 'Bank payment 15 dated 28.04.2021 16:40:12' | 'No'                   | ''                                                     |
+		| '28.04.2021 16:40:12' | 'Bank payment 15 dated 28.04.2021 16:40:12'      | '13'          | 'TRY'      | 'Main Company' | 'DFC'     | '90,00'  | 'Local currency'               | 'DFC'        | 'Bank payment 15 dated 28.04.2021 16:40:12' | 'No'                   | 'Vendors advances closing 4 dated 28.04.2021 22:00:00' |
+		| '28.04.2021 16:40:12' | 'Bank payment 15 dated 28.04.2021 16:40:12'      | '14'          | 'USD'      | 'Main Company' | 'DFC'     | '15,41'  | 'Reporting currency'           | 'DFC'        | 'Bank payment 15 dated 28.04.2021 16:40:12' | 'No'                   | 'Vendors advances closing 4 dated 28.04.2021 22:00:00' |
+		| '28.04.2021 16:40:12' | 'Bank payment 15 dated 28.04.2021 16:40:12'      | '19'          | 'TRY'      | 'Main Company' | 'DFC'     | '90,00'  | 'en description is empty'      | 'DFC'        | 'Bank payment 15 dated 28.04.2021 16:40:12' | 'No'                   | 'Vendors advances closing 4 dated 28.04.2021 22:00:00' |
+		| '28.04.2021 16:40:13' | 'Purchase invoice 124 dated 28.04.2021 16:40:13' | '1'           | 'TRY'      | 'Main Company' | 'DFC'     | '200,00' | 'Local currency'               | 'DFC'        | 'Bank payment 15 dated 28.04.2021 16:40:12' | 'No'                   | 'Vendors advances closing 4 dated 28.04.2021 22:00:00' |
+		| '28.04.2021 16:40:13' | 'Purchase invoice 124 dated 28.04.2021 16:40:13' | '2'           | 'USD'      | 'Main Company' | 'DFC'     | '34,24'  | 'Reporting currency'           | 'DFC'        | 'Bank payment 15 dated 28.04.2021 16:40:12' | 'No'                   | 'Vendors advances closing 4 dated 28.04.2021 22:00:00' |
+		| '28.04.2021 16:40:13' | 'Purchase invoice 124 dated 28.04.2021 16:40:13' | '3'           | 'TRY'      | 'Main Company' | 'DFC'     | '200,00' | 'en description is empty'      | 'DFC'        | 'Bank payment 15 dated 28.04.2021 16:40:12' | 'No'                   | 'Vendors advances closing 4 dated 28.04.2021 22:00:00' |
+	And I close all client application windows
+
 	
+Scenario: _1002012 check PI closing by advance (Ap-Ar by documents, invoice first)
+	Given I open hyperlink "e1cib/list/AccumulationRegister.R1021B_VendorsTransactions"
+	And "List" table contains lines	
+		| 'Period'              | 'Recorder'                                       | 'Line number' | 'Currency' | 'Company'      | 'Partner' | 'Amount'  | 'Multi currency movement type' | 'Legal name'    | 'Agreement'          | 'Basis'                                          | 'Deferred calculation' | 'Vendors advances closing'                             |
+		| '12.02.2021 12:00:00' | 'Purchase invoice 125 dated 12.02.2021 12:00:00' | '1'           | 'TRY'      | 'Main Company' | 'Maxim'   | '100,00'  | 'TRY'                          | 'Company Maxim' | 'Partner term Maxim' | 'Purchase invoice 125 dated 12.02.2021 12:00:00' | 'No'                   | ''                                                     |
+		| '12.02.2021 12:00:00' | 'Purchase invoice 125 dated 12.02.2021 12:00:00' | '2'           | 'TRY'      | 'Main Company' | 'Maxim'   | '100,00'  | 'Local currency'               | 'Company Maxim' | 'Partner term Maxim' | 'Purchase invoice 125 dated 12.02.2021 12:00:00' | 'No'                   | ''                                                     |
+		| '12.02.2021 12:00:00' | 'Purchase invoice 125 dated 12.02.2021 12:00:00' | '3'           | 'USD'      | 'Main Company' | 'Maxim'   | '17,12'   | 'Reporting currency'           | 'Company Maxim' | 'Partner term Maxim' | 'Purchase invoice 125 dated 12.02.2021 12:00:00' | 'No'                   | ''                                                     |
+		| '12.02.2021 12:00:00' | 'Purchase invoice 125 dated 12.02.2021 12:00:00' | '4'           | 'TRY'      | 'Main Company' | 'Maxim'   | '100,00'  | 'en description is empty'      | 'Company Maxim' | 'Partner term Maxim' | 'Purchase invoice 125 dated 12.02.2021 12:00:00' | 'No'                   | ''                                                     |
+		| '15.03.2021 12:00:00' | 'Purchase invoice 126 dated 15.03.2021 12:00:00' | '1'           | 'TRY'      | 'Main Company' | 'Maxim'   | '190,00'  | 'TRY'                          | 'Company Maxim' | 'Partner term Maxim' | 'Purchase invoice 126 dated 15.03.2021 12:00:00' | 'No'                   | ''                                                     |
+		| '15.03.2021 12:00:00' | 'Purchase invoice 126 dated 15.03.2021 12:00:00' | '2'           | 'TRY'      | 'Main Company' | 'Maxim'   | '190,00'  | 'Local currency'               | 'Company Maxim' | 'Partner term Maxim' | 'Purchase invoice 126 dated 15.03.2021 12:00:00' | 'No'                   | ''                                                     |
+		| '15.03.2021 12:00:00' | 'Purchase invoice 126 dated 15.03.2021 12:00:00' | '3'           | 'USD'      | 'Main Company' | 'Maxim'   | '32,53'   | 'Reporting currency'           | 'Company Maxim' | 'Partner term Maxim' | 'Purchase invoice 126 dated 15.03.2021 12:00:00' | 'No'                   | ''                                                     |
+		| '15.03.2021 12:00:00' | 'Purchase invoice 126 dated 15.03.2021 12:00:00' | '4'           | 'TRY'      | 'Main Company' | 'Maxim'   | '190,00'  | 'en description is empty'      | 'Company Maxim' | 'Partner term Maxim' | 'Purchase invoice 126 dated 15.03.2021 12:00:00' | 'No'                   | ''                                                     |
+		| '28.04.2021 16:40:12' | 'Bank payment 15 dated 28.04.2021 16:40:12'      | '1'           | 'TRY'      | 'Main Company' | 'Maxim'   | '90,00'   | 'TRY'                          | 'Company Maxim' | 'Partner term Maxim' | 'Purchase invoice 125 dated 12.02.2021 12:00:00' | 'No'                   | ''                                                     |
+		| '28.04.2021 16:40:12' | 'Bank payment 15 dated 28.04.2021 16:40:12'      | '2'           | 'TRY'      | 'Main Company' | 'Maxim'   | '90,00'   | 'Local currency'               | 'Company Maxim' | 'Partner term Maxim' | 'Purchase invoice 125 dated 12.02.2021 12:00:00' | 'No'                   | ''                                                     |
+		| '28.04.2021 16:40:12' | 'Bank payment 15 dated 28.04.2021 16:40:12'      | '3'           | 'USD'      | 'Main Company' | 'Maxim'   | '15,41'   | 'Reporting currency'           | 'Company Maxim' | 'Partner term Maxim' | 'Purchase invoice 125 dated 12.02.2021 12:00:00' | 'No'                   | ''                                                     |
+		| '28.04.2021 16:40:12' | 'Bank payment 15 dated 28.04.2021 16:40:12'      | '4'           | 'TRY'      | 'Main Company' | 'Maxim'   | '90,00'   | 'en description is empty'      | 'Company Maxim' | 'Partner term Maxim' | 'Purchase invoice 125 dated 12.02.2021 12:00:00' | 'No'                   | ''                                                     |
+		| '28.04.2021 16:40:12' | 'Bank payment 15 dated 28.04.2021 16:40:12'      | '8'           | 'TRY'      | 'Main Company' | 'Maxim'   | '10,00'   | 'TRY'                          | 'Company Maxim' | 'Partner term Maxim' | 'Purchase invoice 125 dated 12.02.2021 12:00:00' | 'No'                   | 'Vendors advances closing 4 dated 28.04.2021 22:00:00' |
+		| '28.04.2021 16:40:12' | 'Bank payment 15 dated 28.04.2021 16:40:12'      | '9'           | 'TRY'      | 'Main Company' | 'Maxim'   | '10,00'   | 'Local currency'               | 'Company Maxim' | 'Partner term Maxim' | 'Purchase invoice 125 dated 12.02.2021 12:00:00' | 'No'                   | 'Vendors advances closing 4 dated 28.04.2021 22:00:00' |
+		| '28.04.2021 16:40:12' | 'Bank payment 15 dated 28.04.2021 16:40:12'      | '10'          | 'USD'      | 'Main Company' | 'Maxim'   | '1,71'    | 'Reporting currency'           | 'Company Maxim' | 'Partner term Maxim' | 'Purchase invoice 125 dated 12.02.2021 12:00:00' | 'No'                   | 'Vendors advances closing 4 dated 28.04.2021 22:00:00' |
+		| '28.04.2021 16:40:12' | 'Bank payment 15 dated 28.04.2021 16:40:12'      | '11'          | 'TRY'      | 'Main Company' | 'Maxim'   | '190,00'  | 'Local currency'               | 'Company Maxim' | 'Partner term Maxim' | 'Purchase invoice 126 dated 15.03.2021 12:00:00' | 'No'                   | 'Vendors advances closing 4 dated 28.04.2021 22:00:00' |
+		| '28.04.2021 16:40:12' | 'Bank payment 15 dated 28.04.2021 16:40:12'      | '12'          | 'USD'      | 'Main Company' | 'Maxim'   | '32,53'   | 'Reporting currency'           | 'Company Maxim' | 'Partner term Maxim' | 'Purchase invoice 126 dated 15.03.2021 12:00:00' | 'No'                   | 'Vendors advances closing 4 dated 28.04.2021 22:00:00' |
+		| '28.04.2021 16:40:12' | 'Bank payment 15 dated 28.04.2021 16:40:12'      | '13'          | 'TRY'      | 'Main Company' | 'Maxim'   | '190,00'  | 'TRY'                          | 'Company Maxim' | 'Partner term Maxim' | 'Purchase invoice 126 dated 15.03.2021 12:00:00' | 'No'                   | 'Vendors advances closing 4 dated 28.04.2021 22:00:00' |
+		| '28.04.2021 16:40:12' | 'Bank payment 15 dated 28.04.2021 16:40:12'      | '15'          | 'TRY'      | 'Main Company' | 'Maxim'   | '10,00'   | 'en description is empty'      | 'Company Maxim' | 'Partner term Maxim' | 'Purchase invoice 125 dated 12.02.2021 12:00:00' | 'No'                   | 'Vendors advances closing 4 dated 28.04.2021 22:00:00' |
+		| '28.04.2021 16:40:12' | 'Bank payment 15 dated 28.04.2021 16:40:12'      | '16'          | 'TRY'      | 'Main Company' | 'Maxim'   | '190,00'  | 'en description is empty'      | 'Company Maxim' | 'Partner term Maxim' | 'Purchase invoice 126 dated 15.03.2021 12:00:00' | 'No'                   | 'Vendors advances closing 4 dated 28.04.2021 22:00:00' |
+		| '28.04.2021 21:50:01' | 'Purchase invoice 127 dated 28.04.2021 21:50:01' | '1'           | 'TRY'      | 'Main Company' | 'Maxim'   | '100,00'  | 'TRY'                          | 'Company Maxim' | 'Partner term Maxim' | 'Purchase invoice 127 dated 28.04.2021 21:50:01' | 'No'                   | ''                                                     |
+		| '28.04.2021 21:50:01' | 'Purchase invoice 127 dated 28.04.2021 21:50:01' | '2'           | 'TRY'      | 'Main Company' | 'Maxim'   | '100,00'  | 'Local currency'               | 'Company Maxim' | 'Partner term Maxim' | 'Purchase invoice 127 dated 28.04.2021 21:50:01' | 'No'                   | ''                                                     |
+		| '28.04.2021 21:50:01' | 'Purchase invoice 127 dated 28.04.2021 21:50:01' | '3'           | 'USD'      | 'Main Company' | 'Maxim'   | '17,12'   | 'Reporting currency'           | 'Company Maxim' | 'Partner term Maxim' | 'Purchase invoice 127 dated 28.04.2021 21:50:01' | 'No'                   | ''                                                     |
+		| '28.04.2021 21:50:01' | 'Purchase invoice 127 dated 28.04.2021 21:50:01' | '4'           | 'TRY'      | 'Main Company' | 'Maxim'   | '100,00'  | 'en description is empty'      | 'Company Maxim' | 'Partner term Maxim' | 'Purchase invoice 127 dated 28.04.2021 21:50:01' | 'No'                   | ''                                                     |
+		| '28.04.2021 21:50:02' | 'Purchase return 21 dated 28.04.2021 21:50:02'   | '1'           | 'TRY'      | 'Main Company' | 'Maxim'   | '-100,00' | 'TRY'                          | 'Company Maxim' | 'Partner term Maxim' | 'Purchase invoice 127 dated 28.04.2021 21:50:01' | 'No'                   | ''                                                     |
+		| '28.04.2021 21:50:02' | 'Purchase return 21 dated 28.04.2021 21:50:02'   | '2'           | 'TRY'      | 'Main Company' | 'Maxim'   | '-100,00' | 'Local currency'               | 'Company Maxim' | 'Partner term Maxim' | 'Purchase invoice 127 dated 28.04.2021 21:50:01' | 'No'                   | ''                                                     |
+		| '28.04.2021 21:50:02' | 'Purchase return 21 dated 28.04.2021 21:50:02'   | '3'           | 'USD'      | 'Main Company' | 'Maxim'   | '-17,12'  | 'Reporting currency'           | 'Company Maxim' | 'Partner term Maxim' | 'Purchase invoice 127 dated 28.04.2021 21:50:01' | 'No'                   | ''                                                     |
+		| '28.04.2021 21:50:02' | 'Purchase return 21 dated 28.04.2021 21:50:02'   | '4'           | 'TRY'      | 'Main Company' | 'Maxim'   | '-100,00' | 'en description is empty'      | 'Company Maxim' | 'Partner term Maxim' | 'Purchase invoice 127 dated 28.04.2021 21:50:01' | 'No'                   | ''                                                     |
+	Given I open hyperlink "e1cib/list/AccumulationRegister.R1020B_AdvancesToVendors"
+	And "List" table contains lines
+		| 'Period'              | 'Recorder'                                  | 'Line number' | 'Currency' | 'Company'      | 'Partner' | 'Amount' | 'Multi currency movement type' | 'Legal name'    | 'Basis'                                     | 'Deferred calculation' | 'Vendors advances closing'                             |
+		| '28.04.2021 16:40:12' | 'Bank payment 15 dated 28.04.2021 16:40:12' | '12'          | 'TRY'      | 'Main Company' | 'Maxim'   | '200,00' | 'en description is empty'      | 'Company Maxim' | 'Bank payment 15 dated 28.04.2021 16:40:12' | 'No'                   | ''                                                     |
+		| '28.04.2021 16:40:12' | 'Bank payment 15 dated 28.04.2021 16:40:12' | '20'          | 'TRY'      | 'Main Company' | 'Maxim'   | '10,00'  | 'en description is empty'      | 'Company Maxim' | 'Bank payment 15 dated 28.04.2021 16:40:12' | 'No'                   | 'Vendors advances closing 4 dated 28.04.2021 22:00:00' |
+		| '28.04.2021 16:40:12' | 'Bank payment 15 dated 28.04.2021 16:40:12' | '21'          | 'TRY'      | 'Main Company' | 'Maxim'   | '190,00' | 'en description is empty'      | 'Company Maxim' | 'Bank payment 15 dated 28.04.2021 16:40:12' | 'No'                   | 'Vendors advances closing 4 dated 28.04.2021 22:00:00' |
+		| '30.04.2021 12:00:00' | 'Bank payment 14 dated 30.04.2021 12:00:00' | '6'           | 'USD'      | 'Main Company' | 'Maxim'   | '10,00'  | 'en description is empty'      | 'Company Maxim' | 'Bank payment 14 dated 30.04.2021 12:00:00' | 'No'                   | ''                                                     |
+	And I close all client application windows
+	
+	
+Scenario: _1002014 check PI closing by advance (Ap-Ar by partner term, invoice first)
+	Given I open hyperlink "e1cib/list/AccumulationRegister.R1021B_VendorsTransactions"
+	And "List" table contains lines	
+		| 'Period'              | 'Recorder'                                       | 'Line number' | 'Currency' | 'Company'      | 'Partner' | 'Amount'    | 'Multi currency movement type' | 'Legal name'   | 'Agreement'   | 'Basis' | 'Deferred calculation' | 'Vendors advances closing'                             |
+		| '12.02.2021 10:21:24' | 'Purchase return 11 dated 12.02.2021 10:21:24'   | '1'           | 'USD'      | 'Main Company' | 'Adel'    | '-190,00'   | 'USD'                          | 'Company Adel' | 'Vendor, USD' | ''      | 'No'                   | ''                                                     |
+		| '12.02.2021 10:21:24' | 'Purchase return 11 dated 12.02.2021 10:21:24'   | '2'           | 'TRY'      | 'Main Company' | 'Adel'    | '-1 069,23' | 'Local currency'               | 'Company Adel' | 'Vendor, USD' | ''      | 'No'                   | ''                                                     |
+		| '12.02.2021 10:21:24' | 'Purchase return 11 dated 12.02.2021 10:21:24'   | '3'           | 'USD'      | 'Main Company' | 'Adel'    | '-190,00'   | 'Reporting currency'           | 'Company Adel' | 'Vendor, USD' | ''      | 'No'                   | ''                                                     |
+		| '12.02.2021 10:21:24' | 'Purchase return 11 dated 12.02.2021 10:21:24'   | '4'           | 'USD'      | 'Main Company' | 'Adel'    | '-190,00'   | 'en description is empty'      | 'Company Adel' | 'Vendor, USD' | ''      | 'No'                   | ''                                                     |
+		| '12.02.2021 14:00:00' | 'Credit note 11 dated 12.02.2021 14:00:00'       | '1'           | 'USD'      | 'Main Company' | 'Adel'    | '170,00'    | 'USD'                          | 'Company Adel' | 'Vendor, USD' | ''      | 'No'                   | ''                                                     |
+		| '12.02.2021 14:00:00' | 'Credit note 11 dated 12.02.2021 14:00:00'       | '2'           | 'TRY'      | 'Main Company' | 'Adel'    | '956,68'    | 'Local currency'               | 'Company Adel' | 'Vendor, USD' | ''      | 'No'                   | ''                                                     |
+		| '12.02.2021 14:00:00' | 'Credit note 11 dated 12.02.2021 14:00:00'       | '3'           | 'USD'      | 'Main Company' | 'Adel'    | '170,00'    | 'Reporting currency'           | 'Company Adel' | 'Vendor, USD' | ''      | 'No'                   | ''                                                     |
+		| '12.02.2021 14:00:00' | 'Credit note 11 dated 12.02.2021 14:00:00'       | '4'           | 'USD'      | 'Main Company' | 'Adel'    | '170,00'    | 'en description is empty'      | 'Company Adel' | 'Vendor, USD' | ''      | 'No'                   | ''                                                     |
+		| '12.02.2021 15:40:00' | 'Purchase invoice 121 dated 12.02.2021 15:40:00' | '1'           | 'USD'      | 'Main Company' | 'Adel'    | '170,00'    | 'USD'                          | 'Company Adel' | 'Vendor, USD' | ''      | 'No'                   | ''                                                     |
+		| '12.02.2021 15:40:00' | 'Purchase invoice 121 dated 12.02.2021 15:40:00' | '2'           | 'TRY'      | 'Main Company' | 'Adel'    | '956,68'    | 'Local currency'               | 'Company Adel' | 'Vendor, USD' | ''      | 'No'                   | ''                                                     |
+		| '12.02.2021 15:40:00' | 'Purchase invoice 121 dated 12.02.2021 15:40:00' | '3'           | 'USD'      | 'Main Company' | 'Adel'    | '170,00'    | 'Reporting currency'           | 'Company Adel' | 'Vendor, USD' | ''      | 'No'                   | ''                                                     |
+		| '12.02.2021 15:40:00' | 'Purchase invoice 121 dated 12.02.2021 15:40:00' | '4'           | 'USD'      | 'Main Company' | 'Adel'    | '170,00'    | 'en description is empty'      | 'Company Adel' | 'Vendor, USD' | ''      | 'No'                   | ''                                                     |
+		| '28.04.2021 16:38:55' | 'Bank payment 13 dated 28.04.2021 16:38:55'      | '1'           | 'TRY'      | 'Main Company' | 'Adel'    | '844,13'    | 'Local currency'               | 'Company Adel' | 'Vendor, USD' | ''      | 'No'                   | 'Vendors advances closing 4 dated 28.04.2021 22:00:00' |
+		| '28.04.2021 16:38:55' | 'Bank payment 13 dated 28.04.2021 16:38:55'      | '2'           | 'USD'      | 'Main Company' | 'Adel'    | '150,00'    | 'Reporting currency'           | 'Company Adel' | 'Vendor, USD' | ''      | 'No'                   | 'Vendors advances closing 4 dated 28.04.2021 22:00:00' |
+		| '28.04.2021 16:38:55' | 'Bank payment 13 dated 28.04.2021 16:38:55'      | '3'           | 'USD'      | 'Main Company' | 'Adel'    | '150,00'    | 'USD'                          | 'Company Adel' | 'Vendor, USD' | ''      | 'No'                   | 'Vendors advances closing 4 dated 28.04.2021 22:00:00' |
+		| '28.04.2021 16:38:55' | 'Bank payment 13 dated 28.04.2021 16:38:55'      | '4'           | 'USD'      | 'Main Company' | 'Adel'    | '150,00'    | 'en description is empty'      | 'Company Adel' | 'Vendor, USD' | ''      | 'No'                   | 'Vendors advances closing 4 dated 28.04.2021 22:00:00' |
+	Given I open hyperlink "e1cib/list/AccumulationRegister.R1020B_AdvancesToVendors"
+	And "List" table contains lines
+		| 'Period'              | 'Recorder'                                  | 'Line number' | 'Currency' | 'Company'      | 'Partner' | 'Amount'   | 'Multi currency movement type' | 'Legal name'   | 'Basis'                                     | 'Deferred calculation' | 'Vendors advances closing'                             |
+		| '28.04.2021 16:38:07' | 'Bank payment 12 dated 28.04.2021 16:38:07' | '5'           | 'TRY'      | 'Main Company' | 'Adel'    | '200,00'   | 'Local currency'               | 'Company Adel' | 'Bank payment 12 dated 28.04.2021 16:38:07' | 'No'                   | ''                                                     |
+		| '28.04.2021 16:38:07' | 'Bank payment 12 dated 28.04.2021 16:38:07' | '6'           | 'USD'      | 'Main Company' | 'Adel'    | '34,24'    | 'Reporting currency'           | 'Company Adel' | 'Bank payment 12 dated 28.04.2021 16:38:07' | 'No'                   | ''                                                     |
+		| '28.04.2021 16:38:07' | 'Bank payment 12 dated 28.04.2021 16:38:07' | '11'          | 'TRY'      | 'Main Company' | 'Adel'    | '200,00'   | 'en description is empty'      | 'Company Adel' | 'Bank payment 12 dated 28.04.2021 16:38:07' | 'No'                   | ''                                                     |
+		| '28.04.2021 16:38:55' | 'Bank payment 13 dated 28.04.2021 16:38:55' | '3'           | 'TRY'      | 'Main Company' | 'Adel'    | '1 125,50' | 'Local currency'               | 'Company Adel' | 'Bank payment 13 dated 28.04.2021 16:38:55' | 'No'                   | ''                                                     |
+		| '28.04.2021 16:38:55' | 'Bank payment 13 dated 28.04.2021 16:38:55' | '4'           | 'USD'      | 'Main Company' | 'Adel'    | '200,00'   | 'Reporting currency'           | 'Company Adel' | 'Bank payment 13 dated 28.04.2021 16:38:55' | 'No'                   | ''                                                     |
+		| '28.04.2021 16:38:55' | 'Bank payment 13 dated 28.04.2021 16:38:55' | '6'           | 'USD'      | 'Main Company' | 'Adel'    | '200,00'   | 'en description is empty'      | 'Company Adel' | 'Bank payment 13 dated 28.04.2021 16:38:55' | 'No'                   | ''                                                     |
+		| '28.04.2021 16:38:55' | 'Bank payment 13 dated 28.04.2021 16:38:55' | '7'           | 'TRY'      | 'Main Company' | 'Adel'    | '844,13'   | 'Local currency'               | 'Company Adel' | 'Bank payment 13 dated 28.04.2021 16:38:55' | 'No'                   | 'Vendors advances closing 4 dated 28.04.2021 22:00:00' |
+		| '28.04.2021 16:38:55' | 'Bank payment 13 dated 28.04.2021 16:38:55' | '8'           | 'USD'      | 'Main Company' | 'Adel'    | '150,00'   | 'Reporting currency'           | 'Company Adel' | 'Bank payment 13 dated 28.04.2021 16:38:55' | 'No'                   | 'Vendors advances closing 4 dated 28.04.2021 22:00:00' |
+		| '28.04.2021 16:38:55' | 'Bank payment 13 dated 28.04.2021 16:38:55' | '9'           | 'USD'      | 'Main Company' | 'Adel'    | '150,00'   | 'en description is empty'      | 'Company Adel' | 'Bank payment 13 dated 28.04.2021 16:38:55' | 'No'                   | 'Vendors advances closing 4 dated 28.04.2021 22:00:00' |
+	And I close all client application windows
+
+Scenario: _1002052 check VendorsAdvancesClosing movements when unpost document and post it back
+	And I close all client application windows
+	Given I open hyperlink "e1cib/list/Document.VendorsAdvancesClosing"
+	And I go to line in "List" table
+		| 'Number' |
+		| '4'      |
+	* Unpost
+		And in the table "List" I click the button named "ListContextMenuUndoPosting"
+		Given I open hyperlink "e1cib/list/AccumulationRegister.R1020B_AdvancesToVendors"
+		And "List" table does not contain lines
+			| 'Vendors advances closing'                             |
+			| 'Vendors advances closing 4 dated 28.04.2021 22:00:00' |
+		And I close current window
+		Given I open hyperlink "e1cib/list/AccumulationRegister.R1021B_VendorsTransactions"
+		And "List" table does not contain lines
+			| 'Vendors advances closing'                             |
+			| 'Vendors advances closing 4 dated 28.04.2021 22:00:00' |
+		And I close current window
+	* Post VendorsAdvancesClosing
+		Given I open hyperlink "e1cib/list/Document.VendorsAdvancesClosing"
+		And I go to line in "List" table
+			| 'Number' |
+			| '4'      |
+		And in the table "List" I click the button named "ListContextMenuPost"
+		Given I open hyperlink "e1cib/list/AccumulationRegister.R1020B_AdvancesToVendors"
+		And "List" table contains lines
+			| 'Vendors advances closing'                             |
+			| 'Vendors advances closing 4 dated 28.04.2021 22:00:00' |
+		And I close current window
+		Given I open hyperlink "e1cib/list/AccumulationRegister.R1021B_VendorsTransactions"
+		And "List" table contains lines
+			| 'Vendors advances closing'                             |
+			| 'Vendors advances closing 4 dated 28.04.2021 22:00:00' |
+		And I close all client application windows
 		
-	
+		
+				
 	
 
 

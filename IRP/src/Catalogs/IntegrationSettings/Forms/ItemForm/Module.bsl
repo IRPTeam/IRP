@@ -25,36 +25,20 @@ EndProcedure
 
 &AtClient
 Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefined) Export
-	If EventName = "GoogleDriveToken" AND Source = UUID Then
-		
-		TestRow = Object.ConnectionSetting.FindRows(New Structure("Key", "AddressPath"));
-		If TestRow.Count() Then
-			Object.ConnectionSetting.Delete(TestRow[0]);
-		EndIf;
-		FindRows = Object.ConnectionSetting.FindRows(New Structure("Key", "refresh_token"));
-		If FindRows.Count() Then
-			Row = FindRows[0];
-		Else
-			Row = Object.ConnectionSetting.Add();
-		EndIf;
-		Row.Key = "refresh_token";
-		Row.Value = Parameter.refresh_token;
-		
-		Modified = True;
-	EndIf;
+	Return;
 EndProcedure
 
 &AtClient
 Procedure TestConnection(Command)
+	TestConnectionCall();
+EndProcedure
+
+&AtClient
+Procedure TestConnectionCall()
 	If Object.IntegrationType = PredefinedValue("Enum.IntegrationType.LocalFileStorage") Then
 		TestRow = Object.ConnectionSetting.FindRows(New Structure("Key", "AddressPath"));
 		IntegrationServer.SaveFileToFileStorage(TestRow[0].Value, "Test.png", PictureLib.DataHistory.GetBinaryData());	
 		CommonFunctionsClientServer.ShowUsersMessage(R().InfoMessage_005);
-	ElsIf Object.IntegrationType = PredefinedValue("Enum.IntegrationType.GoogleDrive") Then 
-		CurrentActiveToken = GoogleDriveServer.CurrentActiveToken(Object.Ref);
-		If ValueIsFilled(CurrentActiveToken) Then
-			CommonFunctionsClientServer.ShowUsersMessage(R().InfoMessage_005);
-		EndIf;	
 	ElsIf Object.IntegrationType = PredefinedValue("Enum.IntegrationType.Email") Then 
 		ConnectionSetting = IntegrationServer.ConnectionSettingTemplate(Object.IntegrationType);
 		For Each Str In Object.ConnectionSetting Do
@@ -75,7 +59,7 @@ Procedure TestConnection(Command)
 		#Else
 		CommonFunctionsClientServer.ShowUsersMessage(R().S_029);
 		#EndIf
-	Else
+	ElsIf Not ExtensionCall_TestConnectionCall() Then
 		ConnectionSetting = IntegrationServer.ConnectionSettingTemplate();
 		For Each Str In Object.ConnectionSetting Do
 			FillPropertyValues(ConnectionSetting, New Structure(Str.Key, Str.Value));
@@ -91,11 +75,17 @@ Procedure TestConnection(Command)
 	EndIf;
 EndProcedure
 
+Function ExtensionCall_TestConnectionCall()
+	Return False;
+EndFunction
+
 &AtClient
 Procedure Login(Command)
-	If Object.IntegrationType = PredefinedValue("Enum.IntegrationType.GoogleDrive") Then
-		GoogleDriveClient.Auth(ThisObject);
-	EndIf;
+	ExtensionCall_Login();
+EndProcedure
+
+Procedure ExtensionCall_Login()
+	Return;
 EndProcedure
 
 &AtServer
@@ -126,7 +116,6 @@ Procedure SetVisible()
 	EndIf;
 	Items.ExternalDataProc.Visible = VisibleExternalDataProc;
 	Items.ExternalDataProcSettings.Visible = VisibleExternalDataProc;
-	Items.ConnectionSettingLogin.Visible = Object.IntegrationType = Enums.IntegrationType.GoogleDrive;
 EndProcedure
 
 &AtClient

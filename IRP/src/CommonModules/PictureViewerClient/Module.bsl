@@ -115,19 +115,18 @@ Function UploadPicture(File, Volume) Export
 	If Not ConnectionSettings.Success Then
 		Raise ConnectionSettings.Message;
 	EndIf;
+	Parameters = New Structure;
+	Parameters.Insert("ConnectionSettings", ConnectionSettings);
+	Parameters.Insert("RequestBody", RequestBody);
+	Parameters.Insert("FileID", FileID);
+	
 	
 	If ConnectionSettings.Value.IntegrationType = PredefinedValue("Enum.IntegrationType.LocalFileStorage") Then
 		IntegrationServer.SaveFileToFileStorage(ConnectionSettings.Value.AddressPath, FileID + "." + FileInfo.Extension, RequestBody);
 		FileInfo.Success = True;
 		FileInfo.URI = FileID + "." + FileInfo.Extension;
-		
-	ElsIf ConnectionSettings.Value.IntegrationType = PredefinedValue("Enum.IntegrationType.GoogleDrive") Then
-		Name = FileID + "." + FileInfo.Extension;
-		
-		FileInfo.URI = GoogleDriveClientServer.SendToDrive(ConnectionSettings.Value.IntegrationSettingsRef, Name, RequestBody);	
-		FileInfo.Success = True;
 			
-	Else
+	ElsIf Not ExtensionCall_UploadPicture(FileInfo, Parameters) Then 
 		ConnectionSettings.Value.QueryType = "POST";
 		ResourceParameters = New Structure();
 		ResourceParameters.Insert("filename", FileID + "." + FileInfo.Extension);
@@ -142,6 +141,10 @@ Function UploadPicture(File, Volume) Export
 		EndIf;	
 	EndIf;
 	Return FileInfo;
+EndFunction
+
+Function ExtensionCall_UploadPicture(FileInfo, Parameters)
+	Return False
 EndFunction
 
 Function GetMainPictureAndPutToTempStorage(FileRef, UUID) Export

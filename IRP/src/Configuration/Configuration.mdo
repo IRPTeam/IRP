@@ -322,9 +322,6 @@
   <commonModules>CommonModule.FormItemsSize</commonModules>
   <commonModules>CommonModule.FormItemsSizeReuse</commonModules>
   <commonModules>CommonModule.GetItemInfo</commonModules>
-  <commonModules>CommonModule.GoogleDriveClient</commonModules>
-  <commonModules>CommonModule.GoogleDriveClientServer</commonModules>
-  <commonModules>CommonModule.GoogleDriveServer</commonModules>
   <commonModules>CommonModule.HardwareClient</commonModules>
   <commonModules>CommonModule.HardwareServer</commonModules>
   <commonModules>CommonModule.IDInfoClient</commonModules>

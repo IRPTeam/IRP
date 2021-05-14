@@ -7476,13 +7476,6 @@
 		</right>
 	</object>
 	<object>
-		<name>Subsystem.Settings.Subsystem.Integrations.Subsystem.GoogleDrive</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
 		<name>Subsystem.Inventory.Subsystem.Items</name>
 		<right>
 			<name>View</name>

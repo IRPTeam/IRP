@@ -295,8 +295,6 @@ Function Strings(Lang) Export
 	// %1 - 12 
 	Strings.Insert("Error_083", NStr("en = 'Location with number `%1` not found.'", Lang));
 	
-	Strings.Insert("Error_084", NStr("en = 'Error to get picture from Google drive'", Lang));
-	
 	// %1 - 1000
 	// %2 - 300
 	// %3 - 350

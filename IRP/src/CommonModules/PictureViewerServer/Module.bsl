@@ -25,9 +25,6 @@ Function GetPictureURL(RefStructure) Export
 	Result.PictureURL = GetVolumeURLByIntegrationSettings(RefStructure.GETIntegrationSettings, RefStructure.URI);
 	Result.isLocalPictureURL = RefStructure.isLocalPictureURL;
 	Result.IntegrationSettings = RefStructure.GETIntegrationSettings;
-	If RefStructure.GETIntegrationSettings.IntegrationType = Enums.IntegrationType.GoogleDrive Then
-		Result.ProcessingModule = "GoogleDriveClientServer";
-	EndIf;
 
 	Return Result;
 EndFunction
@@ -221,10 +218,8 @@ Function GetVolumeURLByIntegrationSettings(IntegrationSettings, URI) Export
 	FullURL = "";
 
 	If IntegrationSettings.IntegrationType = Enums.IntegrationType.LocalFileStorage Then
-		FullURL = ConnectionSettings.Value.AddressPath;
-	ElsIf IntegrationSettings.IntegrationType = Enums.IntegrationType.GoogleDrive Then
-		Return URI;
-	Else	
+		FullURL = ConnectionSettings.Value.AddressPath + "/" + URI;
+	ElsIf Not ExtensionCall_GetVolumeURLByIntegrationSettings(FullURL, IntegrationSettings, URI) Then	
 	
 		If ConnectionSettings.Value.Property("SecureConnection") And ConnectionSettings.Value.SecureConnection = True Then
 			FullURL = "https://";
@@ -255,12 +250,15 @@ Function GetVolumeURLByIntegrationSettings(IntegrationSettings, URI) Export
 					ArrayOfNewSegments.Add(Segment);
 				EndIf;
 			EndDo;
-			FullURL = FullURL + "/" + StrConcat(ArrayOfNewSegments, "/");
+			FullURL = FullURL + "/" + StrConcat(ArrayOfNewSegments, "/") + "/" + URI;
 		EndIf;
 	EndIf;
-	FullURL = FullURL + "/" + URI;
-	
+
 	Return FullURL;
+EndFunction
+
+Function ExtensionCall_GetVolumeURLByIntegrationSettings(FullURL, IntegrationSettings, URI)
+	Return False;
 EndFunction
 
 Function IsPictureFile(Volume) Export

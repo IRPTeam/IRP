@@ -12,6 +12,5 @@
   <content>InformationRegister.ExternalCommands</content>
   <content>Catalog.DataMappingItems</content>
   <content>InformationRegister.DataMappingTable</content>
-  <subsystems>GoogleDrive</subsystems>
   <parentSubsystem>Subsystem.Settings</parentSubsystem>
 </mdclass:Subsystem>

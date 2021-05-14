@@ -6,7 +6,5 @@
     <value>Lock data modification privileged</value>
   </synonym>
   <server>true</server>
-  <externalConnection>true</externalConnection>
-  <clientOrdinaryApplication>true</clientOrdinaryApplication>
   <privileged>true</privileged>
 </mdclass:CommonModule>

@@ -440,6 +440,9 @@
     <mdObject>Document.Bundling</mdObject>
   </content>
   <content>
+    <mdObject>Document.PurchaseOrderClosing</mdObject>
+  </content>
+  <content>
     <mdObject>Constant.UseLockDataModification</mdObject>
   </content>
   <content>
@@ -587,6 +590,9 @@
     <mdObject>Document.PurchaseOrder</mdObject>
   </content>
   <content>
+    <mdObject>Document.PlannedReceiptReservation</mdObject>
+  </content>
+  <content>
     <mdObject>AccumulationRegister.GoodsReceiptSchedule</mdObject>
   </content>
   <content>
@@ -685,12 +691,6 @@
   </content>
   <content>
     <mdObject>ChartOfCharacteristicTypes.IDInfoTypes</mdObject>
-  </content>
-  <content>
-    <mdObject>Document.PlannedReceiptReservation</mdObject>
-  </content>
-  <content>
-    <mdObject>Document.PurchaseOrderClosing</mdObject>
   </content>
   <defaultPresentation>AsDescription</defaultPresentation>
   <editType>InDialog</editType>

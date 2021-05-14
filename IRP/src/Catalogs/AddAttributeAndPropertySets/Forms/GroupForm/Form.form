@@ -92,8 +92,10 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:DataPath">
-      <segments>Object.Parent</segments>
+    <dataPath xsi:type="form:MultiLanguageDataPath">
+      <paths xsi:type="form:DataPath">
+        <segments>Object.Parent</segments>
+      </paths>
     </dataPath>
     <extendedTooltip>
       <name>ParentExtendedTooltip</name>

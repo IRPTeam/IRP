@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<form:Form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:form="http://g5.1c.ru/v8/dt/form" xmlns:schema="http://g5.1c.ru/v8/dt/data-composition-system/schema">
+<form:Form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:form="http://g5.1c.ru/v8/dt/form">
   <items xsi:type="form:FormGroup">
     <name>ListSettingsComposerUserSettings</name>
     <id>1</id>
@@ -416,8 +416,10 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>List.Store</segments>
+      <dataPath xsi:type="form:MultiLanguageDataPath">
+        <paths xsi:type="form:DataPath">
+          <segments>List.Store</segments>
+        </paths>
       </dataPath>
       <extendedTooltip>
         <name>StoreExtendedTooltip</name>
@@ -839,203 +841,6 @@ GROUP BY
       <customQuery>true</customQuery>
       <autoSaveUserSettings>true</autoSaveUserSettings>
       <getInvisibleFieldPresentations>true</getInvisibleFieldPresentations>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>Ref</dataPath>
-        <field>Ref</field>
-        <role>
-          <accountTypeExpression></accountTypeExpression>
-          <balanceGroupName></balanceGroupName>
-          <accountField></accountField>
-        </role>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>DeletionMark</dataPath>
-        <field>DeletionMark</field>
-        <role>
-          <accountTypeExpression></accountTypeExpression>
-          <balanceGroupName></balanceGroupName>
-          <accountField></accountField>
-        </role>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>Number</dataPath>
-        <field>Number</field>
-        <role>
-          <accountTypeExpression></accountTypeExpression>
-          <balanceGroupName></balanceGroupName>
-          <accountField></accountField>
-        </role>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>Date</dataPath>
-        <field>Date</field>
-        <role>
-          <accountTypeExpression></accountTypeExpression>
-          <balanceGroupName></balanceGroupName>
-          <accountField></accountField>
-        </role>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>Posted</dataPath>
-        <field>Posted</field>
-        <role>
-          <accountTypeExpression></accountTypeExpression>
-          <balanceGroupName></balanceGroupName>
-          <accountField></accountField>
-        </role>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>Agreement</dataPath>
-        <field>Agreement</field>
-        <role>
-          <accountTypeExpression></accountTypeExpression>
-          <balanceGroupName></balanceGroupName>
-          <accountField></accountField>
-        </role>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>Company</dataPath>
-        <field>Company</field>
-        <role>
-          <accountTypeExpression></accountTypeExpression>
-          <balanceGroupName></balanceGroupName>
-          <accountField></accountField>
-        </role>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>Currency</dataPath>
-        <field>Currency</field>
-        <role>
-          <accountTypeExpression></accountTypeExpression>
-          <balanceGroupName></balanceGroupName>
-          <accountField></accountField>
-        </role>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>GoodsReceiptBeforePurchaseInvoice</dataPath>
-        <field>GoodsReceiptBeforePurchaseInvoice</field>
-        <role>
-          <accountTypeExpression></accountTypeExpression>
-          <balanceGroupName></balanceGroupName>
-          <accountField></accountField>
-        </role>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>LegalName</dataPath>
-        <field>LegalName</field>
-        <role>
-          <accountTypeExpression></accountTypeExpression>
-          <balanceGroupName></balanceGroupName>
-          <accountField></accountField>
-        </role>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>Partner</dataPath>
-        <field>Partner</field>
-        <role>
-          <accountTypeExpression></accountTypeExpression>
-          <balanceGroupName></balanceGroupName>
-          <accountField></accountField>
-        </role>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>PriceIncludeTax</dataPath>
-        <field>PriceIncludeTax</field>
-        <role>
-          <accountTypeExpression></accountTypeExpression>
-          <balanceGroupName></balanceGroupName>
-          <accountField></accountField>
-        </role>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>PartnerBankAccount</dataPath>
-        <field>PartnerBankAccount</field>
-        <role>
-          <accountTypeExpression></accountTypeExpression>
-          <balanceGroupName></balanceGroupName>
-          <accountField></accountField>
-        </role>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>UseItemsReceiptScheduling</dataPath>
-        <field>UseItemsReceiptScheduling</field>
-        <role>
-          <accountTypeExpression></accountTypeExpression>
-          <balanceGroupName></balanceGroupName>
-          <accountField></accountField>
-        </role>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>CloseOrder</dataPath>
-        <field>CloseOrder</field>
-        <role>
-          <accountTypeExpression></accountTypeExpression>
-          <balanceGroupName></balanceGroupName>
-          <accountField></accountField>
-        </role>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>PurchaseOrder</dataPath>
-        <field>PurchaseOrder</field>
-        <role>
-          <accountTypeExpression></accountTypeExpression>
-          <balanceGroupName></balanceGroupName>
-          <accountField></accountField>
-        </role>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>Author</dataPath>
-        <field>Author</field>
-        <role>
-          <accountTypeExpression></accountTypeExpression>
-          <balanceGroupName></balanceGroupName>
-          <accountField></accountField>
-        </role>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>BusinessUnit</dataPath>
-        <field>BusinessUnit</field>
-        <role>
-          <accountTypeExpression></accountTypeExpression>
-          <balanceGroupName></balanceGroupName>
-          <accountField></accountField>
-        </role>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>Description</dataPath>
-        <field>Description</field>
-        <role>
-          <accountTypeExpression></accountTypeExpression>
-          <balanceGroupName></balanceGroupName>
-          <accountField></accountField>
-        </role>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>DocumentAmount</dataPath>
-        <field>DocumentAmount</field>
-        <role>
-          <accountTypeExpression></accountTypeExpression>
-          <balanceGroupName></balanceGroupName>
-          <accountField></accountField>
-        </role>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>Store</dataPath>
-        <field>Store</field>
-        <title>
-          <localValue>
-            <content>
-              <key>en</key>
-              <value>Store</value>
-            </content>
-          </localValue>
-        </title>
-        <role>
-          <accountTypeExpression></accountTypeExpression>
-          <balanceGroupName></balanceGroupName>
-          <accountField></accountField>
-        </role>
-      </fields>
     </extInfo>
   </attributes>
   <commandInterface>

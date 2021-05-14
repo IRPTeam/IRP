@@ -2353,8 +2353,10 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:DataPath">
-          <segments>Object.DocNumber</segments>
+        <dataPath xsi:type="form:MultiLanguageDataPath">
+          <paths xsi:type="form:DataPath">
+            <segments>Object.DocNumber</segments>
+          </paths>
         </dataPath>
         <extendedTooltip>
           <name>DocNumberExtendedTooltip</name>

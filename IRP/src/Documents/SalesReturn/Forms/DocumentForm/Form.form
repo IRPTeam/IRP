@@ -1202,8 +1202,10 @@
             <userVisible>
               <common>true</common>
             </userVisible>
-            <dataPath xsi:type="form:DataPath">
-              <segments>Object.ItemList.LockedRow</segments>
+            <dataPath xsi:type="form:MultiLanguageDataPath">
+              <paths xsi:type="form:DataPath">
+                <segments>Object.ItemList.LockedRow</segments>
+              </paths>
             </dataPath>
             <titleLocation>None</titleLocation>
             <extendedTooltip>
@@ -1574,8 +1576,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>Object.ItemList.QuantityInBaseUnit</segments>
+          <dataPath xsi:type="form:MultiLanguageDataPath">
+            <paths xsi:type="form:DataPath">
+              <segments>Object.ItemList.QuantityInBaseUnit</segments>
+            </paths>
           </dataPath>
           <extendedTooltip>
             <name>ItemListQuantityInBaseUnitExtendedTooltip</name>
@@ -2016,8 +2020,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>Object.ItemList.UseGoodsReceipt</segments>
+          <dataPath xsi:type="form:MultiLanguageDataPath">
+            <paths xsi:type="form:DataPath">
+              <segments>Object.ItemList.UseGoodsReceipt</segments>
+            </paths>
           </dataPath>
           <extendedTooltip>
             <name>ItemListUseGoodsReceiptExtendedTooltip</name>
@@ -2219,8 +2225,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>Object.ItemList.BusinessUnit</segments>
+          <dataPath xsi:type="form:MultiLanguageDataPath">
+            <paths xsi:type="form:DataPath">
+              <segments>Object.ItemList.BusinessUnit</segments>
+            </paths>
           </dataPath>
           <extendedTooltip>
             <name>ItemListBusinessUnitExtendedTooltip</name>
@@ -2269,8 +2277,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>Object.ItemList.ReturnReason</segments>
+          <dataPath xsi:type="form:MultiLanguageDataPath">
+            <paths xsi:type="form:DataPath">
+              <segments>Object.ItemList.ReturnReason</segments>
+            </paths>
           </dataPath>
           <extendedTooltip>
             <name>ItemListReturnReasonExtendedTooltip</name>
@@ -2319,8 +2329,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>Object.ItemList.ExpenseType</segments>
+          <dataPath xsi:type="form:MultiLanguageDataPath">
+            <paths xsi:type="form:DataPath">
+              <segments>Object.ItemList.ExpenseType</segments>
+            </paths>
           </dataPath>
           <extendedTooltip>
             <name>ItemListExpenseTypeExtendedTooltip</name>
@@ -2369,8 +2381,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>Object.ItemList.AdditionalAnalytic</segments>
+          <dataPath xsi:type="form:MultiLanguageDataPath">
+            <paths xsi:type="form:DataPath">
+              <segments>Object.ItemList.AdditionalAnalytic</segments>
+            </paths>
           </dataPath>
           <extendedTooltip>
             <name>ItemListAdditionalAnalyticExtendedTooltip</name>
@@ -4203,8 +4217,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>GoodsReceiptsTree.Key</segments>
+          <dataPath xsi:type="form:MultiLanguageDataPath">
+            <paths xsi:type="form:DataPath">
+              <segments>GoodsReceiptsTree.Key</segments>
+            </paths>
           </dataPath>
           <extendedTooltip>
             <name>GoodsReceiptsTreeKeyExtendedTooltip</name>
@@ -4252,8 +4268,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>GoodsReceiptsTree.BasisKey</segments>
+          <dataPath xsi:type="form:MultiLanguageDataPath">
+            <paths xsi:type="form:DataPath">
+              <segments>GoodsReceiptsTree.BasisKey</segments>
+            </paths>
           </dataPath>
           <extendedTooltip>
             <name>GoodsReceiptsTreeBasisKeyExtendedTooltip</name>
@@ -4305,8 +4323,10 @@
             <userVisible>
               <common>true</common>
             </userVisible>
-            <dataPath xsi:type="form:DataPath">
-              <segments>GoodsReceiptsTree.PictureItem</segments>
+            <dataPath xsi:type="form:MultiLanguageDataPath">
+              <paths xsi:type="form:DataPath">
+                <segments>GoodsReceiptsTree.PictureItem</segments>
+              </paths>
             </dataPath>
             <titleLocation>None</titleLocation>
             <extendedTooltip>
@@ -4359,9 +4379,6 @@
               <common>true</common>
             </userVisible>
             <dataPath xsi:type="form:MultiLanguageDataPath">
-              <paths xsi:type="form:DataPath">
-                <segments>GoodsReceiptsTree.Item</segments>
-              </paths>
               <paths xsi:type="form:DataPath">
                 <segments>GoodsReceiptsTree.Item</segments>
               </paths>
@@ -4449,9 +4466,6 @@
             <paths xsi:type="form:DataPath">
               <segments>GoodsReceiptsTree.ItemKey</segments>
             </paths>
-            <paths xsi:type="form:DataPath">
-              <segments>GoodsReceiptsTree.ItemKey</segments>
-            </paths>
           </dataPath>
           <titleLocation>None</titleLocation>
           <extendedTooltip>
@@ -4505,8 +4519,10 @@
             <userVisible>
               <common>true</common>
             </userVisible>
-            <dataPath xsi:type="form:DataPath">
-              <segments>GoodsReceiptsTree.PictureDocument</segments>
+            <dataPath xsi:type="form:MultiLanguageDataPath">
+              <paths xsi:type="form:DataPath">
+                <segments>GoodsReceiptsTree.PictureDocument</segments>
+              </paths>
             </dataPath>
             <titleLocation>None</titleLocation>
             <extendedTooltip>
@@ -4559,9 +4575,6 @@
               <common>true</common>
             </userVisible>
             <dataPath xsi:type="form:MultiLanguageDataPath">
-              <paths xsi:type="form:DataPath">
-                <segments>GoodsReceiptsTree.GoodsReceipt</segments>
-              </paths>
               <paths xsi:type="form:DataPath">
                 <segments>GoodsReceiptsTree.GoodsReceipt</segments>
               </paths>
@@ -4649,9 +4662,6 @@
             <paths xsi:type="form:DataPath">
               <segments>GoodsReceiptsTree.QuantityInInvoice</segments>
             </paths>
-            <paths xsi:type="form:DataPath">
-              <segments>GoodsReceiptsTree.QuantityInInvoice</segments>
-            </paths>
           </dataPath>
           <extendedTooltip>
             <name>GoodsReceiptsTreeQuantityInInvoiceExtendedTooltip</name>
@@ -4706,9 +4716,6 @@
             <common>true</common>
           </userVisible>
           <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>GoodsReceiptsTree.QuantityInGoodsReceipt</segments>
-            </paths>
             <paths xsi:type="form:DataPath">
               <segments>GoodsReceiptsTree.QuantityInGoodsReceipt</segments>
             </paths>
@@ -4772,9 +4779,6 @@
               <paths xsi:type="form:DataPath">
                 <segments>GoodsReceiptsTree.Quantity</segments>
               </paths>
-              <paths xsi:type="form:DataPath">
-                <segments>GoodsReceiptsTree.Quantity</segments>
-              </paths>
             </dataPath>
             <handlers>
               <event>OnChange</event>
@@ -4828,9 +4832,6 @@
               <common>true</common>
             </userVisible>
             <dataPath xsi:type="form:MultiLanguageDataPath">
-              <paths xsi:type="form:DataPath">
-                <segments>GoodsReceiptsTree.PictureEdit</segments>
-              </paths>
               <paths xsi:type="form:DataPath">
                 <segments>GoodsReceiptsTree.PictureEdit</segments>
               </paths>
@@ -5489,9 +5490,6 @@
             <paths xsi:type="form:DataPath">
               <segments>Object.RowIDInfo.LineNumber</segments>
             </paths>
-            <paths xsi:type="form:DataPath">
-              <segments>Object.RowIDInfo.НомерСтроки</segments>
-            </paths>
           </dataPath>
           <extendedTooltip>
             <name>RowIDInfoLineNumberExtendedTooltip</name>
@@ -5541,9 +5539,6 @@
             <common>true</common>
           </userVisible>
           <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.RowIDInfo.Key</segments>
-            </paths>
             <paths xsi:type="form:DataPath">
               <segments>Object.RowIDInfo.Key</segments>
             </paths>
@@ -5599,9 +5594,6 @@
             <paths xsi:type="form:DataPath">
               <segments>Object.RowIDInfo.RowID</segments>
             </paths>
-            <paths xsi:type="form:DataPath">
-              <segments>Object.RowIDInfo.RowID</segments>
-            </paths>
           </dataPath>
           <extendedTooltip>
             <name>RowIDInfoRowIDExtendedTooltip</name>
@@ -5651,9 +5643,6 @@
             <common>true</common>
           </userVisible>
           <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.RowIDInfo.Quantity</segments>
-            </paths>
             <paths xsi:type="form:DataPath">
               <segments>Object.RowIDInfo.Quantity</segments>
             </paths>
@@ -5709,9 +5698,6 @@
             <paths xsi:type="form:DataPath">
               <segments>Object.RowIDInfo.BasisKey</segments>
             </paths>
-            <paths xsi:type="form:DataPath">
-              <segments>Object.RowIDInfo.BasisKey</segments>
-            </paths>
           </dataPath>
           <extendedTooltip>
             <name>RowIDInfoBasisKeyExtendedTooltip</name>
@@ -5761,9 +5747,6 @@
             <common>true</common>
           </userVisible>
           <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.RowIDInfo.Basis</segments>
-            </paths>
             <paths xsi:type="form:DataPath">
               <segments>Object.RowIDInfo.Basis</segments>
             </paths>
@@ -5819,9 +5802,6 @@
             <paths xsi:type="form:DataPath">
               <segments>Object.RowIDInfo.CurrentStep</segments>
             </paths>
-            <paths xsi:type="form:DataPath">
-              <segments>Object.RowIDInfo.CurrentStep</segments>
-            </paths>
           </dataPath>
           <extendedTooltip>
             <name>RowIDInfoCurrentStepExtendedTooltip</name>
@@ -5874,9 +5854,6 @@
             <paths xsi:type="form:DataPath">
               <segments>Object.RowIDInfo.NextStep</segments>
             </paths>
-            <paths xsi:type="form:DataPath">
-              <segments>Object.RowIDInfo.NextStep</segments>
-            </paths>
           </dataPath>
           <extendedTooltip>
             <name>RowIDInfoNextStepExtendedTooltip</name>
@@ -5926,9 +5903,6 @@
             <common>true</common>
           </userVisible>
           <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.RowIDInfo.RowRef</segments>
-            </paths>
             <paths xsi:type="form:DataPath">
               <segments>Object.RowIDInfo.RowRef</segments>
             </paths>
@@ -6139,6 +6113,7 @@
         <horizontalStretch>true</horizontalStretch>
         <verticalStretch>true</verticalStretch>
         <fileDragMode>AsFileRef</fileDragMode>
+        <rowFilter xsi:type="core:UndefinedValue"/>
       </items>
       <visible>true</visible>
       <enabled>true</enabled>

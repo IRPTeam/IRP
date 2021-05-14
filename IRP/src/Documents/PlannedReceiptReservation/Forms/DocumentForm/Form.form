@@ -374,8 +374,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>Object.Store</segments>
+          <dataPath xsi:type="form:MultiLanguageDataPath">
+            <paths xsi:type="form:DataPath">
+              <segments>Object.Store</segments>
+            </paths>
           </dataPath>
           <handlers>
             <event>OnChange</event>
@@ -428,8 +430,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>Object.Requester</segments>
+          <dataPath xsi:type="form:MultiLanguageDataPath">
+            <paths xsi:type="form:DataPath">
+              <segments>Object.Requester</segments>
+            </paths>
           </dataPath>
           <extendedTooltip>
             <name>RequesterExtendedTooltip</name>
@@ -961,8 +965,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>Object.ItemList.Store</segments>
+          <dataPath xsi:type="form:MultiLanguageDataPath">
+            <paths xsi:type="form:DataPath">
+              <segments>Object.ItemList.Store</segments>
+            </paths>
           </dataPath>
           <extendedTooltip>
             <name>ItemListStoreExtendedTooltip</name>
@@ -1066,8 +1072,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>Object.ItemList.QuantityInBaseUnit</segments>
+          <dataPath xsi:type="form:MultiLanguageDataPath">
+            <paths xsi:type="form:DataPath">
+              <segments>Object.ItemList.QuantityInBaseUnit</segments>
+            </paths>
           </dataPath>
           <extendedTooltip>
             <name>ItemListQuantityInBaseUnitExtendedTooltip</name>
@@ -1116,8 +1124,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>Object.ItemList.IncomingDocument</segments>
+          <dataPath xsi:type="form:MultiLanguageDataPath">
+            <paths xsi:type="form:DataPath">
+              <segments>Object.ItemList.IncomingDocument</segments>
+            </paths>
           </dataPath>
           <extendedTooltip>
             <name>ItemListIncomingDocumentExtendedTooltip</name>
@@ -1483,8 +1493,10 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:DataPath">
-          <segments>Object.Author</segments>
+        <dataPath xsi:type="form:MultiLanguageDataPath">
+          <paths xsi:type="form:DataPath">
+            <segments>Object.Author</segments>
+          </paths>
         </dataPath>
         <extendedTooltip>
           <name>AuthorExtendedTooltip</name>

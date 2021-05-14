@@ -55,8 +55,8 @@
   <defaultChoiceForm>Document.CashStatement.Form.ChoiceForm</defaultChoiceForm>
   <realTimePosting>Deny</realTimePosting>
   <registerRecords>AccumulationRegister.PlaningCashTransactions</registerRecords>
-  <registerRecords>AccumulationRegister.CashInTransit</registerRecords>
   <registerRecords>AccumulationRegister.R3010B_CashOnHand</registerRecords>
+  <registerRecords>AccumulationRegister.CashInTransit</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>

@@ -51,7 +51,6 @@ FROM
 				<v8:content>Item</v8:content>
 			</v8:item>
 		</title>
-		<valueType/>
 	</calculatedField>
 	<calculatedField>
 		<dataPath>Barcodes</dataPath>
@@ -62,7 +61,6 @@ FROM
 				<v8:content>Barcodes</v8:content>
 			</v8:item>
 		</title>
-		<valueType/>
 	</calculatedField>
 	<totalField>
 		<dataPath>Barcodes</dataPath>
@@ -98,6 +96,8 @@ FROM
 						<dcsset:field>Item</dcsset:field>
 						<dcsset:groupType>Items</dcsset:groupType>
 						<dcsset:periodAdditionType>None</dcsset:periodAdditionType>
+						<dcsset:periodAdditionBegin xsi:type="xs:dateTime">0001-01-01T00:00:00</dcsset:periodAdditionBegin>
+						<dcsset:periodAdditionEnd xsi:type="xs:dateTime">0001-01-01T00:00:00</dcsset:periodAdditionEnd>
 					</dcsset:item>
 				</dcsset:groupItems>
 				<dcsset:order>
@@ -112,6 +112,8 @@ FROM
 							<dcsset:field>ItemKey</dcsset:field>
 							<dcsset:groupType>Items</dcsset:groupType>
 							<dcsset:periodAdditionType>None</dcsset:periodAdditionType>
+							<dcsset:periodAdditionBegin xsi:type="xs:dateTime">0001-01-01T00:00:00</dcsset:periodAdditionBegin>
+							<dcsset:periodAdditionEnd xsi:type="xs:dateTime">0001-01-01T00:00:00</dcsset:periodAdditionEnd>
 						</dcsset:item>
 					</dcsset:groupItems>
 					<dcsset:order>

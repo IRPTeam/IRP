@@ -700,8 +700,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>Object.QuantityInBaseUnit</segments>
+          <dataPath xsi:type="form:MultiLanguageDataPath">
+            <paths xsi:type="form:DataPath">
+              <segments>Object.QuantityInBaseUnit</segments>
+            </paths>
           </dataPath>
           <extendedTooltip>
             <name>QuantityInBaseUnitExtendedTooltip</name>
@@ -918,8 +920,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>Object.ItemList.Key</segments>
+          <dataPath xsi:type="form:MultiLanguageDataPath">
+            <paths xsi:type="form:DataPath">
+              <segments>Object.ItemList.Key</segments>
+            </paths>
           </dataPath>
           <extendedTooltip>
             <name>ItemListKeyExtendedTooltip</name>
@@ -1197,8 +1201,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>Object.ItemList.QuantityInBaseUnit</segments>
+          <dataPath xsi:type="form:MultiLanguageDataPath">
+            <paths xsi:type="form:DataPath">
+              <segments>Object.ItemList.QuantityInBaseUnit</segments>
+            </paths>
           </dataPath>
           <extendedTooltip>
             <name>ItemListQuantityInBaseUnitExtendedTooltip</name>

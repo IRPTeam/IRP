@@ -85,7 +85,9 @@
   <registerRecords>AccumulationRegister.AccountsStatement</registerRecords>
   <registerRecords>AccumulationRegister.R4035B_IncomingStocks</registerRecords>
   <registerRecords>AccumulationRegister.R4012B_StockReservation</registerRecords>
+  <registerRecords>AccumulationRegister.R4031B_GoodsInTransitIncoming</registerRecords>
   <registerRecords>AccumulationRegister.R2013T_SalesOrdersProcurement</registerRecords>
+  <registerRecords>AccumulationRegister.T10000T_RowIDMovements</registerRecords>
   <registerRecords>AccumulationRegister.ReceiptOrders</registerRecords>
   <registerRecords>AccumulationRegister.AdvanceToSuppliers</registerRecords>
   <registerRecords>AccumulationRegister.GoodsReceiptSchedule</registerRecords>
@@ -94,8 +96,6 @@
   <registerRecords>AccumulationRegister.R4014B_SerialLotNumber</registerRecords>
   <registerRecords>AccumulationRegister.R1011B_PurchaseOrdersReceipt</registerRecords>
   <registerRecords>AccumulationRegister.OrderBalance</registerRecords>
-  <registerRecords>AccumulationRegister.R4031B_GoodsInTransitIncoming</registerRecords>
-  <registerRecords>AccumulationRegister.T10000T_RowIDMovements</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -1191,12 +1191,13 @@
     </synonym>
     <group>FormCommandBarCreateBasedOn</group>
     <commandParameterType>
-      <types>DocumentRef.PurchaseOrder</types>
-      <types>DocumentRef.GoodsReceipt</types>
-      <types>DocumentRef.SalesOrder</types>
       <types>DocumentRef.InternalSupplyRequest</types>
+      <types>DocumentRef.PurchaseOrder</types>
+      <types>DocumentRef.SalesOrder</types>
+      <types>DocumentRef.GoodsReceipt</types>
     </commandParameterType>
     <parameterUseMode>Multiple</parameterUseMode>
     <representation>Auto</representation>
+    <shortcut></shortcut>
   </commands>
 </mdclass:Document>

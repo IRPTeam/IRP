@@ -804,8 +804,10 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>Object.PurchaseOrder</segments>
+      <dataPath xsi:type="form:MultiLanguageDataPath">
+        <paths xsi:type="form:DataPath">
+          <segments>Object.PurchaseOrder</segments>
+        </paths>
       </dataPath>
       <extendedTooltip>
         <name>PurchaseOrderExtendedTooltip</name>
@@ -1505,8 +1507,10 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:DataPath">
-            <segments>Object.ItemList.QuantityInBaseUnit</segments>
+          <dataPath xsi:type="form:MultiLanguageDataPath">
+            <paths xsi:type="form:DataPath">
+              <segments>Object.ItemList.QuantityInBaseUnit</segments>
+            </paths>
           </dataPath>
           <extendedTooltip>
             <name>ItemListQuantityInBaseUnitExtendedTooltip</name>
@@ -5212,6 +5216,45 @@
     <savedData>true</savedData>
     <additionalColumns>
       <tablePath xsi:type="form:DataPath">
+        <segments>Object.Currencies</segments>
+      </tablePath>
+      <columns>
+        <name>RatePresentation</name>
+        <title>
+          <key>en</key>
+          <value>Rate presentation</value>
+        </title>
+        <id>138</id>
+        <valueType>
+          <types>DefinedType.typeCurrencyRate</types>
+        </valueType>
+        <view>
+          <common>true</common>
+        </view>
+        <edit>
+          <common>true</common>
+        </edit>
+      </columns>
+      <columns>
+        <name>IsVisible</name>
+        <title>
+          <key>en</key>
+          <value>Is visible</value>
+        </title>
+        <id>139</id>
+        <valueType>
+          <types>Boolean</types>
+        </valueType>
+        <view>
+          <common>true</common>
+        </view>
+        <edit>
+          <common>true</common>
+        </edit>
+      </columns>
+    </additionalColumns>
+    <additionalColumns>
+      <tablePath xsi:type="form:DataPath">
         <segments>Object.ItemList</segments>
       </tablePath>
       <columns>
@@ -5241,45 +5284,6 @@
         <valueType>
           <types>String</types>
           <stringQualifiers/>
-        </valueType>
-        <view>
-          <common>true</common>
-        </view>
-        <edit>
-          <common>true</common>
-        </edit>
-      </columns>
-    </additionalColumns>
-    <additionalColumns>
-      <tablePath xsi:type="form:DataPath">
-        <segments>Object.Currencies</segments>
-      </tablePath>
-      <columns>
-        <name>RatePresentation</name>
-        <title>
-          <key>en</key>
-          <value>Rate presentation</value>
-        </title>
-        <id>138</id>
-        <valueType>
-          <types>DefinedType.typeCurrencyRate</types>
-        </valueType>
-        <view>
-          <common>true</common>
-        </view>
-        <edit>
-          <common>true</common>
-        </edit>
-      </columns>
-      <columns>
-        <name>IsVisible</name>
-        <title>
-          <key>en</key>
-          <value>Is visible</value>
-        </title>
-        <id>139</id>
-        <valueType>
-          <types>Boolean</types>
         </valueType>
         <view>
           <common>true</common>

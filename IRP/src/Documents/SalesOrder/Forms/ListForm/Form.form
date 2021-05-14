@@ -164,8 +164,10 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>List.Closed</segments>
+      <dataPath xsi:type="form:MultiLanguageDataPath">
+        <paths xsi:type="form:DataPath">
+          <segments>List.Closed</segments>
+        </paths>
       </dataPath>
       <extendedTooltip>
         <name>ClosedExtendedTooltip</name>
@@ -484,8 +486,10 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>List.Store</segments>
+      <dataPath xsi:type="form:MultiLanguageDataPath">
+        <paths xsi:type="form:DataPath">
+          <segments>List.Store</segments>
+        </paths>
       </dataPath>
       <extendedTooltip>
         <name>StoreExtendedTooltip</name>
@@ -642,8 +646,10 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>List.ClosingOrder</segments>
+      <dataPath xsi:type="form:MultiLanguageDataPath">
+        <paths xsi:type="form:DataPath">
+          <segments>List.ClosingOrder</segments>
+        </paths>
       </dataPath>
       <extendedTooltip>
         <name>ClosingOrderExtendedTooltip</name>

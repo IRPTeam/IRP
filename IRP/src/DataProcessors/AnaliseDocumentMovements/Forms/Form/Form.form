@@ -11,8 +11,10 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>ShowAllRegisters</segments>
+      <dataPath xsi:type="form:MultiLanguageDataPath">
+        <paths xsi:type="form:DataPath">
+          <segments>ShowAllRegisters</segments>
+        </paths>
       </dataPath>
       <extendedTooltip>
         <name>ShowAllRegistersExtendedTooltip</name>
@@ -101,8 +103,8 @@
       </dataPath>
       <titleLocation>None</titleLocation>
       <excludedCommands>Add</excludedCommands>
-      <excludedCommands>Copy</excludedCommands>
       <excludedCommands>Change</excludedCommands>
+      <excludedCommands>Copy</excludedCommands>
       <excludedCommands>Delete</excludedCommands>
       <excludedCommands>EndEdit</excludedCommands>
       <items xsi:type="form:FormField">
@@ -116,9 +118,6 @@
         <dataPath xsi:type="form:MultiLanguageDataPath">
           <paths xsi:type="form:DataPath">
             <segments>Object.Info.LineNumber</segments>
-          </paths>
-          <paths xsi:type="form:DataPath">
-            <segments>Object.Info.НомерСтроки</segments>
           </paths>
         </dataPath>
         <extendedTooltip>
@@ -169,9 +168,6 @@
           <common>true</common>
         </userVisible>
         <dataPath xsi:type="form:MultiLanguageDataPath">
-          <paths xsi:type="form:DataPath">
-            <segments>Object.Info.Document</segments>
-          </paths>
           <paths xsi:type="form:DataPath">
             <segments>Object.Info.Document</segments>
           </paths>
@@ -227,9 +223,6 @@
           <paths xsi:type="form:DataPath">
             <segments>Object.Info.Register</segments>
           </paths>
-          <paths xsi:type="form:DataPath">
-            <segments>Object.Info.Register</segments>
-          </paths>
         </dataPath>
         <extendedTooltip>
           <name>InfoRegisterExtendedTooltip</name>
@@ -282,9 +275,6 @@
           <paths xsi:type="form:DataPath">
             <segments>Object.Info.Recorder</segments>
           </paths>
-          <paths xsi:type="form:DataPath">
-            <segments>Object.Info.Recorder</segments>
-          </paths>
         </dataPath>
         <extendedTooltip>
           <name>InfoRecorderExtendedTooltip</name>
@@ -327,9 +317,6 @@
           <common>true</common>
         </userVisible>
         <dataPath xsi:type="form:MultiLanguageDataPath">
-          <paths xsi:type="form:DataPath">
-            <segments>Object.Info.Conditions</segments>
-          </paths>
           <paths xsi:type="form:DataPath">
             <segments>Object.Info.Conditions</segments>
           </paths>
@@ -385,9 +372,6 @@
           <paths xsi:type="form:DataPath">
             <segments>Object.Info.Query</segments>
           </paths>
-          <paths xsi:type="form:DataPath">
-            <segments>Object.Info.Query</segments>
-          </paths>
         </dataPath>
         <extendedTooltip>
           <name>InfoQueryExtendedTooltip</name>
@@ -440,9 +424,6 @@
           <paths xsi:type="form:DataPath">
             <segments>Object.Info.Parameters</segments>
           </paths>
-          <paths xsi:type="form:DataPath">
-            <segments>Object.Info.Parameters</segments>
-          </paths>
         </dataPath>
         <extendedTooltip>
           <name>InfoParametersExtendedTooltip</name>
@@ -491,8 +472,10 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:DataPath">
-          <segments>Object.Info.Receipt</segments>
+        <dataPath xsi:type="form:MultiLanguageDataPath">
+          <paths xsi:type="form:DataPath">
+            <segments>Object.Info.Receipt</segments>
+          </paths>
         </dataPath>
         <extendedTooltip>
           <name>InfoReceiptExtendedTooltip</name>
@@ -534,8 +517,10 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:DataPath">
-          <segments>Object.Info.Expense</segments>
+        <dataPath xsi:type="form:MultiLanguageDataPath">
+          <paths xsi:type="form:DataPath">
+            <segments>Object.Info.Expense</segments>
+          </paths>
         </dataPath>
         <extendedTooltip>
           <name>InfoExpenseExtendedTooltip</name>
@@ -798,6 +783,7 @@
       <horizontalStretch>true</horizontalStretch>
       <verticalStretch>true</verticalStretch>
       <fileDragMode>AsFileRef</fileDragMode>
+      <rowFilter xsi:type="core:UndefinedValue"/>
     </items>
     <items xsi:type="form:FormGroup">
       <name>Group2</name>
@@ -810,8 +796,10 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:DataPath">
-          <segments>Items.Info.CurrentData.Query</segments>
+        <dataPath xsi:type="form:MultiLanguageDataPath">
+          <paths xsi:type="form:DataPath">
+            <segments>Items.Info.CurrentData.Query</segments>
+          </paths>
         </dataPath>
         <extendedTooltip>
           <name>InfoQuery1ExtendedTooltip</name>
@@ -860,8 +848,10 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:DataPath">
-          <segments>Items.Info.CurrentData.Conditions</segments>
+        <dataPath xsi:type="form:MultiLanguageDataPath">
+          <paths xsi:type="form:DataPath">
+            <segments>Items.Info.CurrentData.Conditions</segments>
+          </paths>
         </dataPath>
         <extendedTooltip>
           <name>InfoConditions1ExtendedTooltip</name>
@@ -910,8 +900,10 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:DataPath">
-          <segments>Items.Info.CurrentData.Parameters</segments>
+        <dataPath xsi:type="form:MultiLanguageDataPath">
+          <paths xsi:type="form:DataPath">
+            <segments>Items.Info.CurrentData.Parameters</segments>
+          </paths>
         </dataPath>
         <extendedTooltip>
           <name>InfoParameters1ExtendedTooltip</name>

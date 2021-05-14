@@ -61,6 +61,7 @@
     <types>DocumentRef.Bundling</types>
     <types>DocumentRef.RetailSalesReceipt</types>
     <types>CatalogRef.Items</types>
+    <types>DocumentRef.PlannedReceiptReservation</types>
     <types>CatalogRef.BankTerms</types>
     <types>CatalogRef.SerialLotNumbers</types>
     <types>CatalogRef.Agreements</types>
@@ -71,6 +72,7 @@
     <types>CatalogRef.SpecialOfferTypes</types>
     <types>DocumentRef.InventoryTransferOrder</types>
     <types>CatalogRef.CashStatementStatuses</types>
+    <types>DocumentRef.PurchaseOrderClosing</types>
     <types>DocumentRef.SalesOrderClosing</types>
     <types>CatalogRef.PriceKeys</types>
     <types>CatalogRef.Specifications</types>
@@ -86,7 +88,5 @@
     <types>CatalogRef.ChequeBonds</types>
     <types>CatalogRef.BusinessUnits</types>
     <types>DocumentRef.CashExpense</types>
-    <types>DocumentRef.PlannedReceiptReservation</types>
-    <types>DocumentRef.PurchaseOrderClosing</types>
   </type>
 </mdclass:DefinedType>

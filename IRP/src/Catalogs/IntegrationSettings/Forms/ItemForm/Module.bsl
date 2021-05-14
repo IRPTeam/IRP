@@ -75,6 +75,7 @@ Procedure TestConnectionCall()
 	EndIf;
 EndProcedure
 
+&AtClient
 Function ExtensionCall_TestConnectionCall()
 	Return False;
 EndFunction
@@ -84,6 +85,7 @@ Procedure Login(Command)
 	ExtensionCall_Login();
 EndProcedure
 
+&AtClient
 Procedure ExtensionCall_Login()
 	Return;
 EndProcedure

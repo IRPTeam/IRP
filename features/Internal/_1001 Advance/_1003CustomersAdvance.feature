@@ -1,7 +1,7 @@
 ﻿#language: en
 @tree
 @Positive
-@AgingAndCreditLimit
+@Advance
 
 Feature: customers advances closing
 

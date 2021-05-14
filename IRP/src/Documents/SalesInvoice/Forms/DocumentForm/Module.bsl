@@ -203,11 +203,6 @@ Procedure ItemListUnitOnChange(Item, AddInfo = Undefined) Export
 EndProcedure
 
 &AtClient
-Procedure ItemListPackageUnitOnChange(Item)
-	DocSalesInvoiceClient.ItemListPackageUnitOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
 Procedure ItemListQuantityOnChange(Item, AddInfo = Undefined) Export
 	DocSalesInvoiceClient.ItemListQuantityOnChange(Object, ThisObject, Item);
 EndProcedure

@@ -284,10 +284,6 @@ Procedure ItemListUnitOnChange(Object, Form, Item, AddInfo = Undefined) Export
 		"ShipmentConfirmations", "ShipmentConfirmationsTree", "QuantityInShipmentConfirmation");
 EndProcedure
 
-Procedure ItemListPackageUnitOnChange(Object, Form, Item, AddInfo = Undefined) Export
-	DocumentsClient.ItemListUnitOnChange(Object, Form, ThisObject, Item, Undefined, AddInfo);
-EndProcedure
-
 Procedure ItemListUnitOnChangePutServerDataToAddInfo(Object, Form, AddInfo = Undefined) Export
 	DocumentsClient.ItemListUnitOnChangePutServerDataToAddInfo(Object, Form, AddInfo);
 EndProcedure

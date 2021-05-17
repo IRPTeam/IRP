@@ -523,13 +523,14 @@
     </synonym>
     <group>FormCommandBarCreateBasedOn</group>
     <commandParameterType>
-      <types>DocumentRef.SalesOrder</types>
-      <types>DocumentRef.SalesInvoice</types>
-      <types>DocumentRef.InventoryTransfer</types>
       <types>DocumentRef.PurchaseReturn</types>
+      <types>DocumentRef.SalesOrder</types>
+      <types>DocumentRef.InventoryTransfer</types>
+      <types>DocumentRef.SalesInvoice</types>
     </commandParameterType>
     <parameterUseMode>Multiple</parameterUseMode>
     <modifiesData>true</modifiesData>
     <representation>Auto</representation>
+    <shortcut></shortcut>
   </commands>
 </mdclass:Document>

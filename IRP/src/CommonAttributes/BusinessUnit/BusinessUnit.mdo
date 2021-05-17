@@ -86,6 +86,10 @@
     <use>Use</use>
   </content>
   <content>
+    <metadata>Document.PurchaseOrderClosing</metadata>
+    <use>Use</use>
+  </content>
+  <content>
     <metadata>Document.OutgoingPaymentOrder</metadata>
     <use>Use</use>
   </content>
@@ -167,10 +171,6 @@
   </content>
   <content>
     <metadata>Document.CashStatement</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Document.PurchaseOrderClosing</metadata>
     <use>Use</use>
   </content>
   <autoUse>DontUse</autoUse>

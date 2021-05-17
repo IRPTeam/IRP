@@ -30,15 +30,7 @@ Function ConnectionSettingTemplate(IntegrationType = Undefined, AddInfo = Undefi
 		ConnectionSetting.Insert("SenderName", "IRP Team");
 		ConnectionSetting.Insert("FromAddress", "noreply@irpteam.com");
 		ConnectionSetting.Insert("DisplayName", "IRP NO REPLY");
-	ElsIf IntegrationType = Enums.IntegrationType.GoogleDrive Then
-		ConnectionSetting.Insert("client_id", "xxxxxxxxxxxxxx.apps.googleusercontent.com");
-		ConnectionSetting.Insert("client_secret", "");
-		ConnectionSetting.Insert("key", "");
-		ConnectionSetting.Insert("redirect_uri", "http://localhost");
-		ConnectionSetting.Insert("refresh_token", "");
-		ConnectionSetting.Insert("folderID", "");
-		ConnectionSetting.Insert("LocalGoogleDrivePath", "");
-	Else
+	ElsIf Not ExtensionCall_ConnectionSettingTemplate(IntegrationType, ConnectionSetting, AddInfo) Then
 		ConnectionSetting.Insert("QueryType", "POST");
 		ConnectionSetting.Insert("ResourceAddress", "");
 		ConnectionSetting.Insert("Ip", "localhost");
@@ -52,6 +44,10 @@ Function ConnectionSettingTemplate(IntegrationType = Undefined, AddInfo = Undefi
 		ConnectionSetting.Insert("Headers", New Map());
 	EndIf;
 	Return ConnectionSetting;
+EndFunction
+
+Function ExtensionCall_ConnectionSettingTemplate(IntegrationType, ConnectionSetting, AddInfo)
+	Return False;
 EndFunction
 
 Function InfoRegSettingsStructure() Export

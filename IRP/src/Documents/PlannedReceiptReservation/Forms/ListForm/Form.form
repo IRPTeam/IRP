@@ -203,8 +203,10 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>List.Store</segments>
+      <dataPath xsi:type="form:MultiLanguageDataPath">
+        <paths xsi:type="form:DataPath">
+          <segments>List.Store</segments>
+        </paths>
       </dataPath>
       <extendedTooltip>
         <name>StoreExtendedTooltip</name>
@@ -253,8 +255,10 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>List.StoreOutgoing</segments>
+      <dataPath xsi:type="form:MultiLanguageDataPath">
+        <paths xsi:type="form:DataPath">
+          <segments>List.StoreOutgoing</segments>
+        </paths>
       </dataPath>
       <extendedTooltip>
         <name>StoreOutgoingExtendedTooltip</name>
@@ -303,8 +307,10 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>List.Requester</segments>
+      <dataPath xsi:type="form:MultiLanguageDataPath">
+        <paths xsi:type="form:DataPath">
+          <segments>List.Requester</segments>
+        </paths>
       </dataPath>
       <extendedTooltip>
         <name>RequesterExtendedTooltip</name>

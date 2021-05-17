@@ -40,13 +40,6 @@
       <value>Local file storage</value>
     </synonym>
   </enumValues>
-  <enumValues uuid="3c9cf365-ea93-4378-a226-ae46804d2ddb">
-    <name>GoogleDrive</name>
-    <synonym>
-      <key>en</key>
-      <value>Google drive</value>
-    </synonym>
-  </enumValues>
   <enumValues uuid="01d8ba4c-e1e7-4c4b-8f88-49dd92b8029b">
     <name>Email</name>
     <synonym>

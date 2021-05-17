@@ -750,3 +750,12 @@ Procedure CreateTaxTree(Object, Form, Parameters) Export
 	EndDo;
 EndProcedure
 
+Function GetDocumentsWithTax() Export
+	List = New ValueList();
+	For Each Document In Metadata.Documents Do
+		If Not Document.TabularSections.Find("TaxList") = Undefined Then
+			List.Add(Document.Name, Document.Synonym);
+		EndIf;
+	EndDo;
+	Return List;
+EndFunction

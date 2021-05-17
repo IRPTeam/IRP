@@ -346,6 +346,13 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.PlannedReceiptReservation.Attribute.Company</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.ReconciliationStatement</name>
 		<right>
 			<name>Read</name>
@@ -667,6 +674,17 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.PurchaseOrderClosing</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.DebitNote.TabularSection.Transactions.Attribute.BusinessUnit</name>
 		<right>
 			<name>View</name>
@@ -964,6 +982,17 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.PlannedReceiptReservation</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.RetailSalesReceipt.Attribute.LegalName</name>
 		<right>
 			<name>View</name>
@@ -1091,35 +1120,6 @@
 	</object>
 	<object>
 		<name>Document.IncomingPaymentOrder.Attribute.Account</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.PlannedReceiptReservation</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.PlannedReceiptReservation.Attribute.Company</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.PurchaseOrderClosing</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
 		<right>
 			<name>View</name>
 			<value>true</value>

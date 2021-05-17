@@ -93,4 +93,13 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 	If DocumentsServer.CheckItemListStores(ThisObject) Then
 		Cancel = True;	
 	EndIf;
+	
+	For RowIndex = 0 To (ThisObject.ItemList.Count() - 1) Do
+		Row = ThisObject.ItemList[RowIndex];
+		If Row.Cancel And Row.CancelReason.IsEmpty() Then
+			CommonFunctionsClientServer.ShowUsersMessage(R().Error_093, "Object.ItemList[" + RowIndex
+				+ "].CancelReason", "Object.ItemList");
+			Cancel = True;
+		EndIf;
+	EndDo;
 EndProcedure

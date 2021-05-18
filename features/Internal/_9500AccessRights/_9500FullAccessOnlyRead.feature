@@ -604,12 +604,7 @@ Scenario: 950025 check role Full access only read (Plugins)
 			Then I raise "Failed to open" exception
 		And I close all client application windows
 
-Scenario: 950026 check role Full access only read (Integration additional information)
-		And I close all client application windows
-		And In the command interface I select "Settings" "Integration additional information"		
-		If the warning is displayed then 
-			Then I raise "Failed to open" exception
-		And I close all client application windows
+
 
 
 Scenario: 950027 check role Full access only read (Workstations)

@@ -881,6 +881,11 @@ Procedure AdvancesOnMoneyMovements(Parameters, RegisterName, AdvancesTableName, 
 		If NeedWriteOff = 0 Then
 			Continue;
 		EndIf;
+		
+		If ValueIsFilled(Row.TransactionDocument) And Row.TransactionDocument.IgnoreAdvances Then
+			Continue;
+		EndIf;
+		
 		Filter = New Structure(FilterFields);
 		FillPropertyValues(Filter, Row);
 		ArrayOfRows = AgingBalanceTable.FindRows(Filter);
@@ -977,6 +982,11 @@ Function DistributeAgingTableOnMoneyMovement(AgingBalanceTable)
 			If Not ItemOfArray.BalanceAmount > 0 Then
 				Continue;
 			EndIf;
+			
+			If ValueIsFilled(ItemOfArray.TransactionDocument) And ItemOfArray.TransactionDocument.IgnoreAdvances Then
+				Continue;
+			EndIf;
+			
 			CanWriteOff = Min(ItemOfArray.BalanceAmount, NeedWriteOff);
 			NeedWriteOff = NeedWriteOff - CanWriteOff;
 			ItemOfArray.BalanceAmount = ItemOfArray.BalanceAmount - CanWriteOff;
@@ -1034,3 +1044,36 @@ Procedure PutAgingTableToTempTables(Query, OffsetOfAging)
 	Query.SetParameter("OffsetOfAging", OffsetOfAging);
 	Query.Execute();
 EndProcedure
+
+Procedure CheckCreditLimit(Ref, Cancel) Export
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	R2021B_CustomersTransactionsBalance.AmountBalance
+	|FROM
+	|	AccumulationRegister.R2021B_CustomersTransactions.Balance(&Period,
+	|		CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
+	|	AND Partner = &Partner
+	|	AND Agreement = &Agreement) AS R2021B_CustomersTransactionsBalance";
+	Query.SetParameter("Period"    , New Boundary(Ref.PointInTime(), BoundaryType.Excluding));
+	Query.SetParameter("Partner"   , Ref.Partner);
+	Query.SetParameter("Agreement" , Ref.Agreement);
+	
+	QuerySelection = Query.Execute().Select();
+	If QuerySelection.Next() Then
+		
+		CreditLimitAmount = Ref.Agreement.CreditLimitAmount;
+		
+		If (QuerySelection.AmountBalance + Ref.DocumentAmount)  > CreditLimitAmount Then
+			Cancel = True;
+			Message = StrTemplate(R().Error_085, 
+				CreditLimitAmount, 
+				QuerySelection.AmountBalance, 
+				Ref.DocumentAmount,
+				(QuerySelection.AmountBalance + Ref.DocumentAmount) - CreditLimitAmount,
+				Ref.Currency);
+			CommonFunctionsClientServer.ShowUsersMessage(Message);
+		EndIf;
+	EndIf;
+EndProcedure
+

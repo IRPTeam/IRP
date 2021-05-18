@@ -633,8 +633,17 @@ EndProcedure
 #Region CheckAfterWrite
 
 Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
+	
 	Unposting = ?(Parameters.Property("Unposting"), Parameters.Unposting, False);
 	AccReg = AccumulationRegisters;
+	
+	If Not Unposting And Ref.Agreement.UseCreditLimit Then
+		OffsetOfPartnersServer.CheckCreditLimit(Ref, Cancel);
+	EndIf;
+	
+	If Cancel Then
+		Return;
+	EndIf;
 	
 	Parameters.Insert("RecordType", AccumulationRecordType.Expense);
 	PostingServer.CheckBalance_AfterWrite(Ref, Cancel, Parameters, "Document.SalesInvoice.ItemList", AddInfo);

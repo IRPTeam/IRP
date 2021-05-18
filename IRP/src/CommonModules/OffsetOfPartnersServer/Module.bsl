@@ -881,6 +881,11 @@ Procedure AdvancesOnMoneyMovements(Parameters, RegisterName, AdvancesTableName, 
 		If NeedWriteOff = 0 Then
 			Continue;
 		EndIf;
+		
+		If ValueIsFilled(Row.TransactionDocument) And Row.TransactionDocument.IgnoreAdvances Then
+			Continue;
+		EndIf;
+		
 		Filter = New Structure(FilterFields);
 		FillPropertyValues(Filter, Row);
 		ArrayOfRows = AgingBalanceTable.FindRows(Filter);
@@ -977,6 +982,11 @@ Function DistributeAgingTableOnMoneyMovement(AgingBalanceTable)
 			If Not ItemOfArray.BalanceAmount > 0 Then
 				Continue;
 			EndIf;
+			
+			If ValueIsFilled(ItemOfArray.TransactionDocument) And ItemOfArray.TransactionDocument.IgnoreAdvances Then
+				Continue;
+			EndIf;
+			
 			CanWriteOff = Min(ItemOfArray.BalanceAmount, NeedWriteOff);
 			NeedWriteOff = NeedWriteOff - CanWriteOff;
 			ItemOfArray.BalanceAmount = ItemOfArray.BalanceAmount - CanWriteOff;

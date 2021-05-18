@@ -1068,7 +1068,7 @@ Procedure CheckCreditLimit(Ref, Cancel) Export
 			Cancel = True;
 			Message = StrTemplate(R().Error_085, 
 				CreditLimitAmount, 
-				QuerySelection.AmountBalance, 
+				CreditLimitAmount - QuerySelection.AmountBalance, 
 				Ref.DocumentAmount,
 				(QuerySelection.AmountBalance + Ref.DocumentAmount) - CreditLimitAmount,
 				Ref.Currency);

@@ -170,18 +170,19 @@ Function CreateFilterByParameters(Ref, Parameters, TableName,
 	+ QueryText_OpeningEntryTableName1 
 	+ QueryText_OpeningEntryTableName2
 	+ " ;
+
 	|SELECT ALLOWED
-	|	AP.BasisDocument AS Ref,
-	|	AP.Company AS Company,
-	|	AP.Partner AS Partner,
-	|	AP.LegalName AS LegalName,
-	|	AP.Agreement AS Agreement,
-	|	AP.Currency AS Currency,
-	|	AP.AmountBalance AS DocumentAmount
+	|	CustomersTransactions.Basis AS Ref,
+	|	CustomersTransactions.Company AS Company,
+	|	CustomersTransactions.Partner AS Partner,
+	|	CustomersTransactions.LegalName AS LegalName,
+	|	CustomersTransactions.Agreement AS Agreement,
+	|	CustomersTransactions.Currency AS Currency,
+	|	CustomersTransactions.AmountBalance AS DocumentAmount
 	|FROM
-	|	AccumulationRegister.PartnerApTransactions.Balance(&Period,
+	|	AccumulationRegister.R2021B_CustomersTransactions.Balance(&Period,
 	|		CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
-	|	AND (BasisDocument, Company, Partner, LegalName, Agreement, Currency) IN
+	|	AND (Basis, Company, Partner, LegalName, Agreement, Currency) IN
 	|		(SELECT
 	|			Doc.Ref,
 	|			Doc.Company,
@@ -190,22 +191,26 @@ Function CreateFilterByParameters(Ref, Parameters, TableName,
 	|			Doc.Agreement,
 	|			Doc.Currency
 	|		FROM
-	|			Doc AS Doc)) AS AP
+	|			Doc AS Doc)) AS CustomersTransactions
+	|WHERE
+	|	CustomersTransactions.AmountBalance > 0
+	|
+	|
 	|
 	|UNION ALL
 	|
 	|SELECT
-	|	AR.BasisDocument,
-	|	AR.Company,
-	|	AR.Partner,
-	|	AR.LegalName,
-	|	AR.Agreement,
-	|	AR.Currency,
-	|	AR.AmountBalance
+	|	VendorsTransactions.Basis,
+	|	VendorsTransactions.Company,
+	|	VendorsTransactions.Partner,
+	|	VendorsTransactions.LegalName,
+	|	VendorsTransactions.Agreement,
+	|	VendorsTransactions.Currency,
+	|	VendorsTransactions.AmountBalance
 	|FROM
-	|	AccumulationRegister.PartnerArTransactions.Balance(&Period,
+	|	AccumulationRegister.R1021B_VendorsTransactions.Balance(&Period,
 	|		CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
-	|	AND (BasisDocument, Company, Partner, LegalName, Agreement, Currency) IN
+	|	AND (Basis, Company, Partner, LegalName, Agreement, Currency) IN
 	|		(SELECT
 	|			Doc.Ref,
 	|			Doc.Company,
@@ -214,7 +219,9 @@ Function CreateFilterByParameters(Ref, Parameters, TableName,
 	|			Doc.Agreement,
 	|			Doc.Currency
 	|		FROM
-	|			Doc AS Doc)) AS AR";
+	|			Doc AS Doc)) AS VendorsTransactions
+	|WHERE
+	|	VendorsTransactions.AmountBalance > 0";
 	
 	FilterStructure = New Structure();
 	FilterStructure.Insert("QueryText", QueryText);

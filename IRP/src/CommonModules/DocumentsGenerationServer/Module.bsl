@@ -3,29 +3,29 @@
 
 Function GetQueryFilters(AccReg, ArrayOfBasisDocuments)
 	Filter_ByDocuments = New ValueTable();
-	Filter_ByDocuments.Columns.Add("BasisDocument" , New TypeDescription(AccReg.Dimensions.BasisDocument.Type));
+	Filter_ByDocuments.Columns.Add("BasisDocument" , New TypeDescription(AccReg.Dimensions.Basis.Type));
 	
 	Filter_ByAgreements = New ValueTable();
-	Filter_ByAgreements.Columns.Add("Company", New TypeDescription(AccReg.Dimensions.Company.Type));
-	Filter_ByAgreements.Columns.Add("Currency", New TypeDescription(AccReg.Dimensions.Currency.Type));
-	Filter_ByAgreements.Columns.Add("Agreement", New TypeDescription(AccReg.Dimensions.Agreement.Type));
-	Filter_ByAgreements.Columns.Add("Partner", New TypeDescription(AccReg.Dimensions.Partner.Type));
-	Filter_ByAgreements.Columns.Add("LegalName", New TypeDescription(AccReg.Dimensions.LegalName.Type));
+	Filter_ByAgreements.Columns.Add("Company"   , New TypeDescription(AccReg.Dimensions.Company.Type));
+	Filter_ByAgreements.Columns.Add("Currency"  , New TypeDescription(AccReg.Dimensions.Currency.Type));
+	Filter_ByAgreements.Columns.Add("Agreement" , New TypeDescription(AccReg.Dimensions.Agreement.Type));
+	Filter_ByAgreements.Columns.Add("Partner"   , New TypeDescription(AccReg.Dimensions.Partner.Type));
+	Filter_ByAgreements.Columns.Add("LegalName" , New TypeDescription(AccReg.Dimensions.LegalName.Type));
 	
 	Filter_ByStandardAgreement = New ValueTable();
-	Filter_ByStandardAgreement.Columns.Add("Company", New TypeDescription(AccReg.Dimensions.Company.Type));
-	Filter_ByStandardAgreement.Columns.Add("Currency", New TypeDescription(AccReg.Dimensions.Currency.Type));
-	Filter_ByStandardAgreement.Columns.Add("Agreement", New TypeDescription(AccReg.Dimensions.Agreement.Type));
-	Filter_ByStandardAgreement.Columns.Add("Partner", New TypeDescription(AccReg.Dimensions.Partner.Type));
-	Filter_ByStandardAgreement.Columns.Add("LegalName", New TypeDescription(AccReg.Dimensions.LegalName.Type));
+	Filter_ByStandardAgreement.Columns.Add("Company"   , New TypeDescription(AccReg.Dimensions.Company.Type));
+	Filter_ByStandardAgreement.Columns.Add("Currency"  , New TypeDescription(AccReg.Dimensions.Currency.Type));
+	Filter_ByStandardAgreement.Columns.Add("Agreement" , New TypeDescription(AccReg.Dimensions.Agreement.Type));
+	Filter_ByStandardAgreement.Columns.Add("Partner"   , New TypeDescription(AccReg.Dimensions.Partner.Type));
+	Filter_ByStandardAgreement.Columns.Add("LegalName" , New TypeDescription(AccReg.Dimensions.LegalName.Type));
 	
 	For Each BasisDocument In ArrayOfBasisDocuments Do
 		InvoiceData = New Structure();
 		
-		InvoiceData.Insert("Company", BasisDocument.Company);
-		InvoiceData.Insert("Currency", BasisDocument.Currency);
-		InvoiceData.Insert("Partner", BasisDocument.Partner);
-		InvoiceData.Insert("LegalName", BasisDocument.LegalName);
+		InvoiceData.Insert("Company"   , BasisDocument.Company);
+		InvoiceData.Insert("Currency"  , BasisDocument.Currency);
+		InvoiceData.Insert("Partner"   , BasisDocument.Partner);
+		InvoiceData.Insert("LegalName" , BasisDocument.LegalName);
 		
 		NewRow = Undefined;
 		If ValueIsFilled(BasisDocument.Agreement) Then
@@ -44,9 +44,9 @@ Function GetQueryFilters(AccReg, ArrayOfBasisDocuments)
 	EndDo;
 	
 	Result = New Structure();
-	Result.Insert("Filter_ByDocuments", Filter_ByDocuments);
-	Result.Insert("Filter_ByAgreements", Filter_ByAgreements);
-	Result.Insert("Filter_ByStandardAgreement", Filter_ByStandardAgreement);
+	Result.Insert("Filter_ByDocuments"         , Filter_ByDocuments);
+	Result.Insert("Filter_ByAgreements"        , Filter_ByAgreements);
+	Result.Insert("Filter_ByStandardAgreement" , Filter_ByStandardAgreement);
 	Return Result;
 EndFunction
 
@@ -92,7 +92,7 @@ EndProcedure
 
 Function GetDocumentTable_PurchaseInvoice_ForPayment(ArrayOfBasisDocuments, AddInfo = Undefined) Export
 
-	Filters = GetQueryFilters(Metadata.AccumulationRegisters.PartnerApTransactions, ArrayOfBasisDocuments);
+	Filters = GetQueryFilters(Metadata.AccumulationRegisters.R1021B_VendorsTransactions, ArrayOfBasisDocuments);
 	
 	TempTableManager = New TempTablesManager();
 	PutQueryFiltersToTempTables(TempTableManager, Filters);
@@ -103,15 +103,15 @@ Function GetDocumentTable_PurchaseInvoice_ForPayment(ArrayOfBasisDocuments, AddI
 		"SELECT
 		|	""PurchaseInvoice"" AS BasedOn,
 		|	VALUE(Enum.OutgoingPaymentTransactionTypes.PaymentToVendor) AS TransactionType,
-		|	PartnerTransactionsBalance.Company AS Company,
-		|	PartnerTransactionsBalance.Currency AS Currency,
-		|	PartnerTransactionsBalance.Partner AS Partner,
-		|	PartnerTransactionsBalance.Agreement AS StandardAgreement,
+		|	R1021B_VendorsTransactions.Company AS Company,
+		|	R1021B_VendorsTransactions.Currency AS Currency,
+		|	R1021B_VendorsTransactions.Partner AS Partner,
+		|	R1021B_VendorsTransactions.Agreement AS StandardAgreement,
 		|	VALUE(Catalog.Agreements.EmptyRef) AS Agreement,
-		|	PartnerTransactionsBalance.LegalName AS LegalName,
-		|	PartnerTransactionsBalance.AmountBalance AS Amount
+		|	R1021B_VendorsTransactions.LegalName AS LegalName,
+		|	R1021B_VendorsTransactions.AmountBalance AS Amount
 		|FROM
-		|	AccumulationRegister.PartnerApTransactions.Balance(, (Company, Currency, Agreement, Partner, LegalName) IN
+		|	AccumulationRegister.R1021B_VendorsTransactions.Balance(, (Company, Currency, Agreement, Partner, LegalName) IN
 		|		(SELECT
 		|			tmp.Company,
 		|			tmp.Currency,
@@ -121,9 +121,9 @@ Function GetDocumentTable_PurchaseInvoice_ForPayment(ArrayOfBasisDocuments, AddI
 		|		FROM
 		|			Filter_ByStandardAgreement AS tmp)
 		|	AND CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)) AS
-		|		PartnerTransactionsBalance
+		|		R1021B_VendorsTransactions
 		|WHERE
-		|	PartnerTransactionsBalance.AmountBalance > 0";
+		|	R1021B_VendorsTransactions.AmountBalance > 0";
 	
 	// get default agreement by partner for standard agreement
 	QueryResult = Query.Execute();
@@ -159,23 +159,23 @@ Function GetDocumentTable_PurchaseInvoice_ForPayment(ArrayOfBasisDocuments, AddI
 		|SELECT
 		|	""PurchaseInvoice"" AS BasedOn,
 		|	VALUE(Enum.OutgoingPaymentTransactionTypes.PaymentToVendor) AS TransactionType,
-		|	PartnerTransactionsBalance.Company,
-		|	PartnerTransactionsBalance.Currency,
-		|	PartnerTransactionsBalance.BasisDocument,
-		|	PartnerTransactionsBalance.Partner,
-		|	PartnerTransactionsBalance.Agreement,
-		|	PartnerTransactionsBalance.LegalName AS Payee,
-		|	PartnerTransactionsBalance.AmountBalance AS Amount
+		|	R1021B_VendorsTransactions.Company,
+		|	R1021B_VendorsTransactions.Currency,
+		|	R1021B_VendorsTransactions.Basis AS BasisDocument,
+		|	R1021B_VendorsTransactions.Partner,
+		|	R1021B_VendorsTransactions.Agreement,
+		|	R1021B_VendorsTransactions.LegalName AS Payee,
+		|	R1021B_VendorsTransactions.AmountBalance AS Amount
 		|FROM
-		|	AccumulationRegister.PartnerApTransactions.Balance(, BasisDocument IN
+		|	AccumulationRegister.R1021B_VendorsTransactions.Balance(, Basis IN
 		|		(SELECT
 		|			tmp.BasisDocument
 		|		FROM
 		|			Filter_ByDocuments AS tmp)
 		|	AND CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)) AS
-		|		PartnerTransactionsBalance
+		|		R1021B_VendorsTransactions
 		|WHERE
-		|	PartnerTransactionsBalance.AmountBalance > 0
+		|	R1021B_VendorsTransactions.AmountBalance > 0
 		|
 		|UNION ALL
 		|
@@ -190,7 +190,7 @@ Function GetDocumentTable_PurchaseInvoice_ForPayment(ArrayOfBasisDocuments, AddI
 		|	PartnerTransactionsBalance.LegalName,
 		|	PartnerTransactionsBalance.AmountBalance
 		|FROM
-		|	AccumulationRegister.PartnerApTransactions.Balance(, (Company, Currency, Agreement, Partner, LegalName) IN
+		|	AccumulationRegister.R1021B_VendorsTransactions.Balance(, (Company, Currency, Agreement, Partner, LegalName) IN
 		|		(SELECT
 		|			tmp.Company,
 		|			tmp.Currency,
@@ -226,7 +226,7 @@ EndFunction
 
 Function GetDocumentTable_SalesInvoice_ForReceipt(ArrayOfBasisDocuments, AddInfo = Undefined) Export
 	
-	Filters = GetQueryFilters(Metadata.AccumulationRegisters.PartnerArTransactions, ArrayOfBasisDocuments);
+	Filters = GetQueryFilters(Metadata.AccumulationRegisters.R2021B_CustomersTransactions, ArrayOfBasisDocuments);
 	
 	TempTableManager = New TempTablesManager();
 	PutQueryFiltersToTempTables(TempTableManager, Filters);
@@ -237,15 +237,15 @@ Function GetDocumentTable_SalesInvoice_ForReceipt(ArrayOfBasisDocuments, AddInfo
 		"SELECT
 		|	""SalesInvoice"" AS BasedOn,
 		|	VALUE(Enum.IncomingPaymentTransactionType.PaymentFromCustomer) AS TransactionType,
-		|	PartnerTransactionsBalance.Company AS Company,
-		|	PartnerTransactionsBalance.Currency AS Currency,
-		|	PartnerTransactionsBalance.Partner AS Partner,
-		|	PartnerTransactionsBalance.Agreement AS StandardAgreement,
+		|	R2021B_CustomersTransactionsBalance.Company AS Company,
+		|	R2021B_CustomersTransactionsBalance.Currency AS Currency,
+		|	R2021B_CustomersTransactionsBalance.Partner AS Partner,
+		|	R2021B_CustomersTransactionsBalance.Agreement AS StandardAgreement,
 		|	VALUE(Catalog.Agreements.EmptyRef) AS Agreement,
-		|	PartnerTransactionsBalance.LegalName AS LegalName,
-		|	PartnerTransactionsBalance.AmountBalance AS Amount
+		|	R2021B_CustomersTransactionsBalance.LegalName AS LegalName,
+		|	R2021B_CustomersTransactionsBalance.AmountBalance AS Amount
 		|FROM
-		|	AccumulationRegister.PartnerArTransactions.Balance(, (Company, Currency, Agreement, Partner, LegalName) IN
+		|	AccumulationRegister.R2021B_CustomersTransactions.Balance(, (Company, Currency, Agreement, Partner, LegalName) IN
 		|		(SELECT
 		|			tmp.Company,
 		|			tmp.Currency,
@@ -255,9 +255,9 @@ Function GetDocumentTable_SalesInvoice_ForReceipt(ArrayOfBasisDocuments, AddInfo
 		|		FROM
 		|			Filter_ByStandardAgreement AS tmp)
 		|	AND CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)) AS
-		|		PartnerTransactionsBalance
+		|		R2021B_CustomersTransactionsBalance
 		|WHERE
-		|	PartnerTransactionsBalance.AmountBalance > 0";
+		|	R2021B_CustomersTransactionsBalance.AmountBalance > 0";
 	
 	// get default agreement by partner for standard agreement
 	QueryResult = Query.Execute();
@@ -294,38 +294,38 @@ Function GetDocumentTable_SalesInvoice_ForReceipt(ArrayOfBasisDocuments, AddInfo
 		|SELECT
 		|	""SalesInvoice"" AS BasedOn,
 		|	VALUE(Enum.IncomingPaymentTransactionType.PaymentFromCustomer) AS TransactionType,
-		|	PartnerTransactionsBalance.Company,
-		|	PartnerTransactionsBalance.Currency,
-		|	PartnerTransactionsBalance.BasisDocument,
-		|	PartnerTransactionsBalance.Partner,
-		|	PartnerTransactionsBalance.Agreement,
-		|	PartnerTransactionsBalance.LegalName AS Payer,
-		|	PartnerTransactionsBalance.AmountBalance AS Amount
+		|	R2021B_CustomersTransactionsBalance.Company,
+		|	R2021B_CustomersTransactionsBalance.Currency,
+		|	R2021B_CustomersTransactionsBalance.Basis AS BasisDocument,
+		|	R2021B_CustomersTransactionsBalance.Partner,
+		|	R2021B_CustomersTransactionsBalance.Agreement,
+		|	R2021B_CustomersTransactionsBalance.LegalName AS Payer,
+		|	R2021B_CustomersTransactionsBalance.AmountBalance AS Amount
 		|FROM
-		|	AccumulationRegister.PartnerArTransactions.Balance(, BasisDocument IN
+		|	AccumulationRegister.R2021B_CustomersTransactions.Balance(, Basis IN
 		|		(SELECT
 		|			tmp.BasisDocument
 		|		FROM
 		|			Filter_ByDocuments AS tmp)
 		|	AND CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)) AS
-		|		PartnerTransactionsBalance
+		|		R2021B_CustomersTransactionsBalance
 		|WHERE
-		|	PartnerTransactionsBalance.AmountBalance > 0
+		|	R2021B_CustomersTransactionsBalance.AmountBalance > 0
 		|
 		|UNION ALL
 		|
 		|SELECT
 		|	""SalesInvoice"",
 		|	VALUE(Enum.IncomingPaymentTransactionType.PaymentFromCustomer),
-		|	PartnerTransactionsBalance.Company,
-		|	PartnerTransactionsBalance.Currency,
+		|	R2021B_CustomersTransactionsBalance.Company,
+		|	R2021B_CustomersTransactionsBalance.Currency,
 		|	UNDEFINED,
-		|	PartnerTransactionsBalance.Partner,
-		|	PartnerTransactionsBalance.Agreement,
-		|	PartnerTransactionsBalance.LegalName,
-		|	PartnerTransactionsBalance.AmountBalance
+		|	R2021B_CustomersTransactionsBalance.Partner,
+		|	R2021B_CustomersTransactionsBalance.Agreement,
+		|	R2021B_CustomersTransactionsBalance.LegalName,
+		|	R2021B_CustomersTransactionsBalance.AmountBalance
 		|FROM
-		|	AccumulationRegister.PartnerArTransactions.Balance(, (Company, Currency, Agreement, Partner, LegalName) IN
+		|	AccumulationRegister.R2021B_CustomersTransactions.Balance(, (Company, Currency, Agreement, Partner, LegalName) IN
 		|		(SELECT
 		|			tmp.Company,
 		|			tmp.Currency,
@@ -335,9 +335,9 @@ Function GetDocumentTable_SalesInvoice_ForReceipt(ArrayOfBasisDocuments, AddInfo
 		|		FROM
 		|			Filter_ByAgreements AS tmp)
 		|	AND CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)) AS
-		|		PartnerTransactionsBalance
+		|		R2021B_CustomersTransactionsBalance
 		|WHERE
-		|	PartnerTransactionsBalance.AmountBalance > 0
+		|	R2021B_CustomersTransactionsBalance.AmountBalance > 0
 		|
 		|UNION ALL
 		|

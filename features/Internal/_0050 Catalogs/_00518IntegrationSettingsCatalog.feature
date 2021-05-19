@@ -134,12 +134,6 @@ Scenario: _005012 filling in the "Integration settings" catalog
 			| '11' | 'Headers'             | 'Map'              |
 		Then the form attribute named "ExternalDataProc" became equal to ""
 		And I click "Save and close" button
-	* Create setting with integration type Google drive (without connection)
-		Given I open hyperlink "e1cib/list/Catalog.IntegrationSettings"
-		And I click the button named "FormCreate"
-		And I input "Google drive" text in "Description" field
-		And I select "Google drive" exact value from "Integration type" drop-down list
-		And I click "Save and close" button
 	* Create setting with integration type Other (without connection)
 		Given I open hyperlink "e1cib/list/Catalog.IntegrationSettings"
 		And I click the button named "FormCreate"
@@ -163,7 +157,6 @@ Scenario: _005012 filling in the "Integration settings" catalog
 			| 'Description'     |
 			| 'Bank UA'         |
 			| 'FILE STORAGE'    |
-			| 'Google drive'    |
 			| 'LOCAL STORAGE'   |
 			| 'Other'           |
 		And I close all client application windows

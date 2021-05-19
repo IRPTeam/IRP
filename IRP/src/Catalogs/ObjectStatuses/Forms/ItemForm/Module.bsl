@@ -1,8 +1,7 @@
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	LocalizationEvents.CreateMainFormItemDescription(ThisObject, "GroupDescriptions");
-	SetVisible();
-	ExtensionServer.AddAttributesFromExtensions(ThisObject, Object.Ref, Items.GroupPagesCheque);
+	ExtensionServer.AddAttributesFromExtensions(ThisObject, Object.Ref);
 EndProcedure
 
 &AtClient
@@ -12,7 +11,7 @@ EndProcedure
 
 &AtClient
 Procedure ParentOnChange(Item)
-	SetVisible();
+	Return;
 EndProcedure
 
 &AtClient
@@ -34,15 +33,6 @@ Procedure NextPossibleStatusesStatusEditTextChange(Item, Text, StandardProcessin
 	                                          Item,
 	                                          Text,
 	                                          StandardProcessing);
-EndProcedure
-
-&AtServer
-Procedure SetVisible()
-	IsIncomingCheque = (Object.Parent = Catalogs.ObjectStatuses.ChequeBondIncoming)
-		Or (Object.Parent = Catalogs.ObjectStatuses.ChequeBondOutgoing);
-	
-	Items.GroupPagesCheque.Visible = IsIncomingCheque;
-	Items.Posting.Visible = Not IsIncomingCheque;
 EndProcedure
 
 &AtClient

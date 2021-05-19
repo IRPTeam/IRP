@@ -53,9 +53,6 @@
     <mdObject>Document.SalesOrder</mdObject>
   </content>
   <content>
-    <mdObject>Document.ChequeBondTransactionItem</mdObject>
-  </content>
-  <content>
     <mdObject>Document.Labeling</mdObject>
   </content>
   <content>
@@ -63,9 +60,6 @@
   </content>
   <content>
     <mdObject>AccumulationRegister.R2005T_SalesSpecialOffers</mdObject>
-  </content>
-  <content>
-    <mdObject>AccumulationRegister.PartnerArTransactions</mdObject>
   </content>
   <content>
     <mdObject>Catalog.PaymentSchedules</mdObject>
@@ -224,9 +218,6 @@
     <mdObject>AccumulationRegister.R4022B_StockTransferOrdersShipment</mdObject>
   </content>
   <content>
-    <mdObject>AccumulationRegister.Aging</mdObject>
-  </content>
-  <content>
     <mdObject>Document.PhysicalInventory</mdObject>
   </content>
   <content>
@@ -303,9 +294,6 @@
   </content>
   <content>
     <mdObject>Catalog.Stores</mdObject>
-  </content>
-  <content>
-    <mdObject>Document.ChequeBondTransaction</mdObject>
   </content>
   <content>
     <mdObject>AccumulationRegister.ExpensesTurnovers</mdObject>
@@ -395,9 +383,6 @@
     <mdObject>InformationRegister.DataMappingTable</mdObject>
   </content>
   <content>
-    <mdObject>AccumulationRegister.AccountsStatement</mdObject>
-  </content>
-  <content>
     <mdObject>InformationRegister.PricesByProperties</mdObject>
   </content>
   <content>
@@ -420,9 +405,6 @@
   </content>
   <content>
     <mdObject>Document.Unbundling</mdObject>
-  </content>
-  <content>
-    <mdObject>AccumulationRegister.ChequeBondBalance</mdObject>
   </content>
   <content>
     <mdObject>Catalog.BusinessUnits</mdObject>
@@ -530,9 +512,6 @@
     <mdObject>AccumulationRegister.R4016B_InternalSupplyRequestOrdering</mdObject>
   </content>
   <content>
-    <mdObject>AccumulationRegister.AdvanceFromCustomers</mdObject>
-  </content>
-  <content>
     <mdObject>Catalog.ChequeBonds</mdObject>
   </content>
   <content>
@@ -564,9 +543,6 @@
   </content>
   <content>
     <mdObject>Document.PurchaseInvoice</mdObject>
-  </content>
-  <content>
-    <mdObject>AccumulationRegister.AdvanceToSuppliers</mdObject>
   </content>
   <content>
     <mdObject>Catalog.IDInfoAddresses</mdObject>
@@ -621,15 +597,6 @@
   </content>
   <content>
     <mdObject>AccumulationRegister.R4036B_IncomingStocksRequested</mdObject>
-  </content>
-  <content>
-    <mdObject>AccumulationRegister.PartnerApTransactions</mdObject>
-  </content>
-  <content>
-    <mdObject>AccumulationRegister.AccountBalance</mdObject>
-  </content>
-  <content>
-    <mdObject>InformationRegister.ChequeBondStatuses</mdObject>
   </content>
   <content>
     <mdObject>InformationRegister.UserSettings</mdObject>

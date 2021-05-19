@@ -121,6 +121,82 @@ Scenario: _043101 check Credit note movements by the Register "R5010 Reconciliat
 			| ''                                           | 'Expense'     | '05.04.2021 09:30:47' | '500'       | 'TRY'        | 'Main Company' | 'Company Ferron BP' |
 		And I close all client application windows
 
+Scenario: _043102 check Credit note movements by the Register "R2021 Customer transactions" (with customer)
+	* Select Credit note
+		Given I open hyperlink "e1cib/list/Document.CreditNote"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '2' |
+	* Check movements by the Register  "R2021 Customer transactions" 
+		And I click "Registrations report" button
+		And I select "R2021 Customer transactions" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Credit note 2 dated 05.04.2021 09:30:58' | ''            | ''                    | ''          | ''             | ''                             | ''         | ''                  | ''          | ''                         | ''                                          | ''                     | ''                  |
+			| 'Document registrations records'          | ''            | ''                    | ''          | ''             | ''                             | ''         | ''                  | ''          | ''                         | ''                                          | ''                     | ''                  |
+			| 'Register  "R2021 Customer transactions"' | ''            | ''                    | ''          | ''             | ''                             | ''         | ''                  | ''          | ''                         | ''                                          | ''                     | ''                  |
+			| ''                                        | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                             | ''         | ''                  | ''          | ''                         | ''                                          | 'Attributes'           | ''                  |
+			| ''                                        | ''            | ''                    | 'Amount'    | 'Company'      | 'Multi currency movement type' | 'Currency' | 'Legal name'        | 'Partner'   | 'Agreement'                | 'Basis'                                     | 'Deferred calculation' | 'Customers advances closing' |
+			| ''                                        | 'Receipt'     | '05.04.2021 09:30:58' | '-700'      | 'Main Company' | 'Local currency'               | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Sales invoice 3 dated 28.01.2021 18:50:57' | 'No'                   | ''                |
+			| ''                                        | 'Receipt'     | '05.04.2021 09:30:58' | '-700'      | 'Main Company' | 'TRY'                          | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Sales invoice 3 dated 28.01.2021 18:50:57' | 'No'                   | ''                |
+			| ''                                        | 'Receipt'     | '05.04.2021 09:30:58' | '-700'      | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Sales invoice 3 dated 28.01.2021 18:50:57' | 'No'                   | ''                |
+			| ''                                        | 'Receipt'     | '05.04.2021 09:30:58' | '-119,84'   | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Sales invoice 3 dated 28.01.2021 18:50:57' | 'No'                   | ''                |
+		And I close all client application windows
+
+
+
+Scenario: _043103 check absence Credit note movements by the Register "R1021 Vendors transactions" (with customer)
+	* Select Credit note
+		Given I open hyperlink "e1cib/list/Document.CreditNote"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '2' |
+	* Check movements by the Register  "R1021 Vendors transactions" 
+		And I click "Registrations report" button
+		And I select "R1021 Vendors transactions" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document does not contain values
+			| 'Register  "R1021 Vendors transactions'   |           
+	And I close all client application windows
+
+Scenario: _043104 check Credit note movements by the Register "R1021 Vendors transactions" (with vendor)
+	* Select Credit note
+		Given I open hyperlink "e1cib/list/Document.CreditNote"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '1' |
+	* Check movements by the Register  "R1021 Vendors transactions" 
+		And I click "Registrations report" button
+		And I select "R1021 Vendors transactions" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Credit note 1 dated 05.04.2021 09:30:47' | ''            | ''                    | ''          | ''             | ''                             | ''         | ''                  | ''          | ''                   | ''                                               | ''                     | ''                  |
+			| 'Document registrations records'          | ''            | ''                    | ''          | ''             | ''                             | ''         | ''                  | ''          | ''                   | ''                                               | ''                     | ''                  |
+			| 'Register  "R1021 Vendors transactions"'  | ''            | ''                    | ''          | ''             | ''                             | ''         | ''                  | ''          | ''                   | ''                                               | ''                     | ''                  |
+			| ''                                        | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                             | ''         | ''                  | ''          | ''                   | ''                                               | 'Attributes'           | ''                  |
+			| ''                                        | ''            | ''                    | 'Amount'    | 'Company'      | 'Multi currency movement type' | 'Currency' | 'Legal name'        | 'Partner'   | 'Agreement'          | 'Basis'                                          | 'Deferred calculation' | 'Vendors advances closing' |
+			| ''                                        | 'Receipt'     | '05.04.2021 09:30:47' | '85,6'      | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Company Ferron BP' | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Purchase invoice 116 dated 12.02.2021 15:13:37' | 'No'                   | ''                |
+			| ''                                        | 'Receipt'     | '05.04.2021 09:30:47' | '500'       | 'Main Company' | 'Local currency'               | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Purchase invoice 116 dated 12.02.2021 15:13:37' | 'No'                   | ''                |
+			| ''                                        | 'Receipt'     | '05.04.2021 09:30:47' | '500'       | 'Main Company' | 'TRY'                          | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Purchase invoice 116 dated 12.02.2021 15:13:37' | 'No'                   | ''                |
+			| ''                                        | 'Receipt'     | '05.04.2021 09:30:47' | '500'       | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Purchase invoice 116 dated 12.02.2021 15:13:37' | 'No'                   | ''                |
+		And I close all client application windows
+
+
+Scenario: _043105 check absence Credit note movements by the Register "R2021 Customer transactions" (with vendor)
+	* Select Credit note
+		Given I open hyperlink "e1cib/list/Document.CreditNote"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '1' |
+	* Check movements by the Register  "R2021 Customer transactions" 
+		And I click "Registrations report" button
+		And I select "R2021 Customer transactions" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document does not contain values
+			| 'Register  "R2021 Customer transactions'   |           
+	And I close all client application windows
+
+
 Scenario: _043130 Credit note clear posting/mark for deletion
 	And I close all client application windows
 	* Select Credit note

@@ -50,7 +50,6 @@ Scenario: _0154000 preparation
 		When Create catalog IntegrationSettings objects
 		When Create information register CurrencyRates records
 		When Create catalog CashAccounts objects
-		When Create catalog ChequeBonds objects
 		When Create catalog SerialLotNumbers objects
 		When Create catalog PaymentTerminals objects
 		When Create catalog RetailCustomers objects
@@ -1206,27 +1205,7 @@ Scenario: _0154090 check company, account, currency input by search in line in O
 		And I close all client application windows
 
 
-Scenario: _0154091 check company, account, currency input by search in line in ChequeBondTransaction (in english)
-	And I close all client application windows
-	* Open a creation form ChequeBondTransaction
-		Given I open hyperlink "e1cib/list/Document.ChequeBondTransaction"
-		And I click the button named "FormCreate"
-	* Company input by search in line
-		And I select from "Company" drop-down list by "main" string
-	* Currency input by search in line
-		And I select from "Currency" drop-down list by "lir" string
-	* Filling the tabular part by searching the value by line (partner and legal name)
-		And in the table "ChequeBonds" I click the button named "ChequeBondsAdd"
-		And I activate "Partner" field in "ChequeBonds" table
-		And I select "fer" from "Partner" drop-down list by string in "ChequeBonds" table
-		And I select "se" from "Legal name" drop-down list by string in "ChequeBonds" table
-	* Check filling in
-		Then the form attribute named "Company" became equal to "Main Company"
-		Then the form attribute named "Currency" became equal to "TRY"
-		And "ChequeBonds" table contains lines
-		| 'Legal name'               | 'Partner'   |
-		| 'Second Company Ferron BP' | 'Ferron BP' |
-		And I close all client application windows
+
 
 
 Scenario: _0154092 check store, responsible person input by search in line in PhysicalCountByLocation (in english)

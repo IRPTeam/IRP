@@ -42,6 +42,7 @@ Scenario: _300520 preparation (check post/unpost/mark for deletion from report R
 		When update ItemKeys
 
 Scenario: _300521 check post/unpost/mark for deletion from report "Related documents"
+	And I close all client application windows
 	* Preparation
 		* Create Sales order
 			Given I open hyperlink "e1cib/list/Document.SalesOrder"
@@ -117,7 +118,7 @@ Scenario: _300521 check post/unpost/mark for deletion from report "Related docum
 		* Check unpost Sales invoice from report Related documents
 			And I go to the last line in "DocumentsTree" table
 			And in the table "DocumentsTree" I click the button named "DocumentsTreeUnpost"
-			Given I open hyperlink "e1cib/list/AccumulationRegister.PartnerArTransactions"
+			Given I open hyperlink "e1cib/list/AccumulationRegister.R2021B_CustomersTransactions"
 			And Delay 10
 			And "List" table does not contain lines
 			| 'Recorder'             |
@@ -126,7 +127,7 @@ Scenario: _300521 check post/unpost/mark for deletion from report "Related docum
 			When in opened panel I select "Related documents"
 			And I go to the last line in "DocumentsTree" table
 			And in the table "DocumentsTree" I click the button named "DocumentsTreePost"
-			Given I open hyperlink "e1cib/list/AccumulationRegister.PartnerArTransactions"
+			Given I open hyperlink "e1cib/list/AccumulationRegister.R2021B_CustomersTransactions"
 			And I click "Refresh" button
 			And Delay 10
 			And "List" table contains lines

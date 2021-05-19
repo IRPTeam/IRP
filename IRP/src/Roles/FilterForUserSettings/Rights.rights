@@ -482,17 +482,6 @@
 		</right>
 	</object>
 	<object>
-		<name>Document.ChequeBondTransaction</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
 		<name>Document.OpeningEntry.TabularSection.Inventory</name>
 		<right>
 			<name>View</name>
@@ -551,13 +540,6 @@
 			<name>Read</name>
 			<value>true</value>
 		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.ChequeBondTransaction.Attribute.Currency</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -854,13 +836,6 @@
 	</object>
 	<object>
 		<name>Document.SalesInvoice.TabularSection.ItemList</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.ChequeBondTransaction.Attribute.Company</name>
 		<right>
 			<name>View</name>
 			<value>true</value>

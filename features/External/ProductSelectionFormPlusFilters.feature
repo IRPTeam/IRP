@@ -1002,27 +1002,7 @@ Scenario: check the filter by my own company in Reconcilation statement
 			|'Then the form attribute named "LegalName" became equal to 'Company Kalipso''|
 	And I close all client application windows
 
-Scenario: check the filter by my own company in Cheque bond transaction
-	* Check visual filter
-		And I click Select button of "Company" field
-		And "List" table became equal
-			| 'Description'    |
-			| 'Main Company'   |
-			| 'Second Company' |
-		And I select current line in "List" table
-		Then the form attribute named "Company" became equal to "Main Company"
-	* Check the filter by string input
-		And Delay 2
-		And I input "Company Kalipso" text in "Company" field
-		And Delay 2
-		And I click Select button of "Currency" field
-		And "List" table does not contain lines
-			| Description  |
-			| Company Kalipso |
-		And I click the button named "FormChoose"
-		When I Check the steps for Exception
-			|'Then the form attribute named "LegalName" became equal to 'Company Kalipso''|
-	And I close all client application windows
+
 
 Scenario: check the filter by my own company in Opening entry/Item stock adjustment
 	And I click the button named "FormCreate"

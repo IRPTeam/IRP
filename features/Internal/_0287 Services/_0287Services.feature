@@ -341,33 +341,7 @@ Scenario: _029106 create a Purchase invoice for service and product (based on Pu
 			| ''                               | '*'      | '100'       | 'Main Company' | 'Front office'  | 'Telephone communications' | 'Interner' | 'TRY'      | ''                    | 'en description is empty'      | 'No'                   | '' | '' | '' |
 			| ''                               | '*'      | '100'       | 'Main Company' | 'Front office'  | 'Telephone communications' | 'Interner' | 'TRY'      | ''                    | 'Local currency'               | 'No'                   | '' | '' | '' |
 			| ''                               | '*'      | '100'       | 'Main Company' | 'Front office'  | 'Telephone communications' | 'Interner' | 'TRY'      | ''                    | 'TRY'                          | 'No'                   | '' | '' | '' |
-			And I select "Accounts statement" exact value from "Register" drop-down list
-			And I click "Generate report" button
-			And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Accounts statement"' | ''            | ''       | ''                     | ''               | ''                       | ''               | ''             | ''          | ''                  | ''                          | ''         | '' | '' |
-			| ''                               | 'Record type' | 'Period' | 'Resources'            | ''               | ''                       | ''               | 'Dimensions'   | ''          | ''                  | ''                          | ''         | '' | '' |
-			| ''                               | ''            | ''       | 'Advance to suppliers' | 'Transaction AP' | 'Advance from customers' | 'Transaction AR' | 'Company'      | 'Partner'   | 'Legal name'        | 'Basis document'            | 'Currency' | '' | '' |
-			| ''                               | 'Receipt'     | '*'      | ''                     | '300'            | ''                       | ''               | 'Main Company' | 'Ferron BP' | 'Company Ferron BP' | '$$PurchaseInvoice029106$$' | 'TRY'      | '' | '' |
-		
-			And I select "Goods receipt schedule" exact value from "Register" drop-down list
-			And I click "Generate report" button
-			And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Goods receipt schedule"' | ''            | ''       | ''          | ''             | ''                          | ''         | ''         | ''        | ''              | '' | '' | '' | '' |
-			| ''                                   | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                          | ''         | ''         | ''        | 'Attributes'    | '' | '' | '' | '' |
-			| ''                                   | ''            | ''       | 'Quantity'  | 'Company'      | 'Order'                     | 'Store'    | 'Item key' | 'Row key' | 'Delivery date' | '' | '' | '' | '' |
-			| ''                                   | 'Receipt'     | '*'      | '1'         | 'Main Company' | '$$PurchaseInvoice029106$$' | ''         | 'Interner' | '*'       | '*'             | '' | '' | '' | '' |
-			| ''                                   | 'Receipt'     | '*'      | '1'         | 'Main Company' | '$$PurchaseInvoice029106$$' | 'Store 02' | 'Router'   | '*'       | '*'             | '' | '' | '' | '' |
-			| ''                                   | 'Expense'     | '*'      | '1'         | 'Main Company' | '$$PurchaseInvoice029106$$' | ''         | 'Interner' | '*'       | '*'             | '' | '' | '' | '' |
-			And I select "Partner AP transactions" exact value from "Register" drop-down list
-			And I click "Generate report" button
-			And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Partner AP transactions"'   | ''            | ''          | ''                     | ''               | ''                          | ''                          | ''                  | ''                    | ''                             | ''                             | ''                     | ''                             | ''                     |
-			| ''                                      | 'Record type' | 'Period'    | 'Resources'            | 'Dimensions'     | ''                          | ''                          | ''                  | ''                    | ''                             | ''                             | 'Attributes'           | ''                             | ''                     |
-			| ''                                      | ''            | ''          | 'Amount'               | 'Company'        | 'Basis document'            | 'Partner'                   | 'Legal name'        | 'Partner term'        | 'Currency'                     | 'Multi currency movement type' | 'Deferred calculation' | ''                             | ''                     |
-			| ''                                      | 'Receipt'     | '*'         | '51,36'                | 'Main Company'   | '$$PurchaseInvoice029106$$' | 'Ferron BP'                 | 'Company Ferron BP' | 'Vendor Ferron, TRY'  | 'USD'                          | 'Reporting currency'           | 'No'                   | ''                             | ''                     |
-			| ''                                      | 'Receipt'     | '*'         | '300'                  | 'Main Company'   | '$$PurchaseInvoice029106$$' | 'Ferron BP'                 | 'Company Ferron BP' | 'Vendor Ferron, TRY'  | 'TRY'                          | 'en description is empty'      | 'No'                   | ''                             | ''                     |
-			| ''                                      | 'Receipt'     | '*'         | '300'                  | 'Main Company'   | '$$PurchaseInvoice029106$$' | 'Ferron BP'                 | 'Company Ferron BP' | 'Vendor Ferron, TRY'  | 'TRY'                          | 'Local currency'               | 'No'                   | ''                             | ''                     |
-			| ''                                      | 'Receipt'     | '*'         | '300'                  | 'Main Company'   | '$$PurchaseInvoice029106$$' | 'Ferron BP'                 | 'Company Ferron BP' | 'Vendor Ferron, TRY'  | 'TRY'                          | 'TRY'                          | 'No'                   | ''                             | ''                     |
+			
 		Given I open hyperlink "e1cib/list/AccumulationRegister.R4031B_GoodsInTransitIncoming"
 		And "List" table does not contain lines
 			| 'Recorder'                  | 'Item key' |
@@ -477,18 +451,7 @@ Scenario: _029115 create a Sales invoice for service and product (Store does not
 		And I save the window as "$$SalesInvoice029115$$"
 	* Check movements
 		And I click "Registrations report" button
-		And I select "Partner AR transactions" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| '$$SalesInvoice029115$$'              | ''            | ''       | ''          | ''             | ''                       | ''          | ''                  | ''                         | ''         | ''                             | ''                     | '' | '' |
-			| 'Document registrations records'      | ''            | ''       | ''          | ''             | ''                       | ''          | ''                  | ''                         | ''         | ''                             | ''                     | '' | '' |
-			| 'Register  "Partner AR transactions"' | ''            | ''       | ''          | ''             | ''                       | ''          | ''                  | ''                         | ''         | ''                             | ''                     | '' | '' |
-			| ''                                    | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                       | ''          | ''                  | ''                         | ''         | ''                             | 'Attributes'           | '' | '' |
-			| ''                                    | ''            | ''       | 'Amount'    | 'Company'      | 'Basis document'         | 'Partner'   | 'Legal name'        | 'Partner term'             | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' | '' | '' |
-			| ''                                    | 'Receipt'     | '*'      | '1 215,52'  | 'Main Company' | '$$SalesInvoice029115$$' | 'Ferron BP' | 'Company Ferron BP' | 'Basic Partner terms, TRY' | 'USD'      | 'Reporting currency'           | 'No'                   | '' | '' |
-			| ''                                    | 'Receipt'     | '*'      | '7 100'     | 'Main Company' | '$$SalesInvoice029115$$' | 'Ferron BP' | 'Company Ferron BP' | 'Basic Partner terms, TRY' | 'TRY'      | 'Local currency'               | 'No'                   | '' | '' |
-			| ''                                    | 'Receipt'     | '*'      | '7 100'     | 'Main Company' | '$$SalesInvoice029115$$' | 'Ferron BP' | 'Company Ferron BP' | 'Basic Partner terms, TRY' | 'TRY'      | 'TRY'                          | 'No'                   | '' | '' |
-			| ''                                    | 'Receipt'     | '*'      | '7 100'     | 'Main Company' | '$$SalesInvoice029115$$' | 'Ferron BP' | 'Company Ferron BP' | 'Basic Partner terms, TRY' | 'TRY'      | 'en description is empty'      | 'No'                   | '' | '' |
+		
 
 		And I select "Taxes turnovers" exact value from "Register" drop-down list
 		And I click "Generate report" button
@@ -504,13 +467,7 @@ Scenario: _029115 create a Sales invoice for service and product (Store does not
 			| ''                            | '*'      | '1 067,8'   | '1 067,8'       | '5 932,2'    | '$$SalesInvoice029115$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'Local currency'               | 'No'                   |
 			| ''                            | '*'      | '1 067,8'   | '1 067,8'       | '5 932,2'    | '$$SalesInvoice029115$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'TRY'                          | 'No'                   |
 			| ''                            | '*'      | '1 067,8'   | '1 067,8'       | '5 932,2'    | '$$SalesInvoice029115$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'en description is empty'      | 'No'                   |
-		And I select "Accounts statement" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Accounts statement"' | ''            | ''       | ''                     | ''               | ''                       | ''               | ''             | ''          | ''                  | ''                       | ''         | '' | '' |
-			| ''                               | 'Record type' | 'Period' | 'Resources'            | ''               | ''                       | ''               | 'Dimensions'   | ''          | ''                  | ''                       | ''         | '' | '' |
-			| ''                               | ''            | ''       | 'Advance to suppliers' | 'Transaction AP' | 'Advance from customers' | 'Transaction AR' | 'Company'      | 'Partner'   | 'Legal name'        | 'Basis document'         | 'Currency' | '' | '' |
-			| ''                               | 'Receipt'     | '*'      | ''                     | ''               | ''                       | '7 100'          | 'Main Company' | 'Ferron BP' | 'Company Ferron BP' | '$$SalesInvoice029115$$' | 'TRY'      | '' | '' |
+		
 	
 		
 		And I select "Revenues turnovers" exact value from "Register" drop-down list
@@ -666,31 +623,14 @@ Scenario: _029140 create PurchaseReturn for service and product (based on $$Purc
 	And I delete "$$PurchaseReturn029140$$" variable
 	And I save the value of "Number" field as "$$NumberPurchaseReturn029140$$"
 	And I save the window as "$$PurchaseReturn029140$$"
-	And I click "Registrations report" button
-	And I select "Partner AR transactions" exact value from "Register" drop-down list
-	And I click "Generate report" button
-	And "ResultTable" spreadsheet document contains lines:
-		| '$$PurchaseReturn029140$$'            | ''            | ''       | ''          | ''             | ''                         | ''          | ''                  | ''                   | ''         | ''                             | ''                     |
-		| 'Document registrations records'      | ''            | ''       | ''          | ''             | ''                         | ''          | ''                  | ''                   | ''         | ''                             | ''                     |
-		| 'Register  "Partner AR transactions"' | ''            | ''       | ''          | ''             | ''                         | ''          | ''                  | ''                   | ''         | ''                             | ''                     |
-		| ''                                    | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                         | ''          | ''                  | ''                   | ''         | ''                             | 'Attributes'           |
-		| ''                                    | ''            | ''       | 'Amount'    | 'Company'      | 'Basis document'           | 'Partner'   | 'Legal name'        | 'Partner term'       | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
-		| ''                                    | 'Receipt'     | '*'      | '51,36'     | 'Main Company' | '$$PurchaseReturn029140$$' | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'USD'      | 'Reporting currency'           | 'No'                   |
-		| ''                                    | 'Receipt'     | '*'      | '300'       | 'Main Company' | '$$PurchaseReturn029140$$' | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'TRY'      | 'Local currency'               | 'No'                   |
-		| ''                                    | 'Receipt'     | '*'      | '300'       | 'Main Company' | '$$PurchaseReturn029140$$' | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'TRY'      | 'TRY'                          | 'No'                   |
-		| ''                                    | 'Receipt'     | '*'      | '300'       | 'Main Company' | '$$PurchaseReturn029140$$' | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'TRY'      | 'en description is empty'      | 'No'                   |
-	And I select "Accounts statement" exact value from "Register" drop-down list
-	And I click "Generate report" button
-	And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Accounts statement"' | ''            | ''       | ''                     | ''               | ''                       | ''               | ''             | ''          | ''                  | ''                         | ''         |
-		| ''                               | 'Record type' | 'Period' | 'Resources'            | ''               | ''                       | ''               | 'Dimensions'   | ''          | ''                  | ''                         | ''         |
-		| ''                               | ''            | ''       | 'Advance to suppliers' | 'Transaction AP' | 'Advance from customers' | 'Transaction AR' | 'Company'      | 'Partner'   | 'Legal name'        | 'Basis document'           | 'Currency' |
-		| ''                               | 'Receipt'     | '*'      | ''                     | '-300'           | ''                       | ''               | 'Main Company' | 'Ferron BP' | 'Company Ferron BP' | '$$PurchaseReturn029140$$' | 'TRY'      |
-	Given I open hyperlink "e1cib/list/AccumulationRegister.R4011B_FreeStocks"
-	And "List" table does not contain lines
-		| 'Recorder'                     | 'Item key' |
-		| '$$PurchaseReturn029140$$' | 'Interner' |
 	And I close all client application windows
+	* Check creation
+		Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
+		And "List" table contains lines
+			| 'Number' |
+			| '$$NumberPurchaseReturn029140$$'      |
+		And I close all client application windows
+
 	
 	
 				
@@ -718,11 +658,7 @@ Scenario: _029141 create Purchase return order and Purchase return for service a
 	And I save the window as "$$PurchaseReturnOrder029141$$"
 	And I click "Registrations report" button
 
-	
-	Given I open hyperlink "e1cib/list/AccumulationRegister.R4011B_FreeStocks"
-	And "List" table does not contain lines
-		| 'Recorder'                     | 'Item key' |
-		| '$$PurchaseReturnOrder029141$$' | 'Interner' |
+
 	
 	Given I open hyperlink "e1cib/list/Document.PurchaseReturnOrder"
 	And I go to line in "List" table
@@ -736,18 +672,7 @@ Scenario: _029141 create Purchase return order and Purchase return for service a
 	And I save the value of "Number" field as "$$NumberPurchaseReturn029141$$"
 	And I save the window as "$$PurchaseReturn029141$$"
 	And I click "Registrations report" button
-	And I select "Partner AR transactions" exact value from "Register" drop-down list
-	And I click "Generate report" button
-	And "ResultTable" spreadsheet document contains lines:
-		| '$$PurchaseReturn029141$$'            | ''            | ''       | ''          | ''             | ''                         | ''          | ''                  | ''                   | ''         | ''                             | ''                     |
-		| 'Document registrations records'      | ''            | ''       | ''          | ''             | ''                         | ''          | ''                  | ''                   | ''         | ''                             | ''                     |
-		| 'Register  "Partner AR transactions"' | ''            | ''       | ''          | ''             | ''                         | ''          | ''                  | ''                   | ''         | ''                             | ''                     |
-		| ''                                    | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                         | ''          | ''                  | ''                   | ''         | ''                             | 'Attributes'           |
-		| ''                                    | ''            | ''       | 'Amount'    | 'Company'      | 'Basis document'           | 'Partner'   | 'Legal name'        | 'Partner term'       | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
-		| ''                                    | 'Receipt'     | '*'      | '51,36'     | 'Main Company' | '$$PurchaseReturn029141$$' | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'USD'      | 'Reporting currency'           | 'No'                   |
-		| ''                                    | 'Receipt'     | '*'      | '300'       | 'Main Company' | '$$PurchaseReturn029141$$' | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'TRY'      | 'Local currency'               | 'No'                   |
-		| ''                                    | 'Receipt'     | '*'      | '300'       | 'Main Company' | '$$PurchaseReturn029141$$' | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'TRY'      | 'TRY'                          | 'No'                   |
-		| ''                                    | 'Receipt'     | '*'      | '300'       | 'Main Company' | '$$PurchaseReturn029141$$' | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'TRY'      | 'en description is empty'      | 'No'                   |
+	
 	And I select "Purchase return turnovers" exact value from "Register" drop-down list
 	And I click "Generate report" button
 	And "ResultTable" spreadsheet document contains lines:
@@ -762,16 +687,6 @@ Scenario: _029141 create Purchase return order and Purchase return for service a
 		| ''                                      | '*'      | '-1'        | '-100'   | 'Main Company' | '$$PurchaseInvoice029106$$' | 'TRY'      | 'Interner' | '*'       | 'en description is empty'      | 'No'                   | '' |
 		| ''                                      | '*'      | '-1'        | '-34,24' | 'Main Company' | '$$PurchaseInvoice029106$$' | 'USD'      | 'Router'   | '*'       | 'Reporting currency'           | 'No'                   | '' |
 		| ''                                      | '*'      | '-1'        | '-17,12' | 'Main Company' | '$$PurchaseInvoice029106$$' | 'USD'      | 'Interner' | '*'       | 'Reporting currency'           | 'No'                   | '' |
-	
-
-	And I select "Accounts statement" exact value from "Register" drop-down list
-	And I click "Generate report" button
-	And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Accounts statement"' | ''            | ''       | ''                     | ''               | ''                       | ''               | ''             | ''          | ''                  | ''                         | ''         |
-		| ''                               | 'Record type' | 'Period' | 'Resources'            | ''               | ''                       | ''               | 'Dimensions'   | ''          | ''                  | ''                         | ''         |
-		| ''                               | ''            | ''       | 'Advance to suppliers' | 'Transaction AP' | 'Advance from customers' | 'Transaction AR' | 'Company'      | 'Partner'   | 'Legal name'        | 'Basis document'           | 'Currency' |
-		| ''                               | 'Receipt'     | '*'      | ''                     | '-300'           | ''                       | ''               | 'Main Company' | 'Ferron BP' | 'Company Ferron BP' | '$$PurchaseReturn029141$$' | 'TRY'      |
-
 
 	And I close all client application windows
 	
@@ -827,18 +742,7 @@ Scenario: _029142 create Purchase return for service and product without Purchas
 		And I save the value of "Number" field as "$$NumberPurchaseReturn029142$$"
 		And I save the window as "$$PurchaseReturn029142$$"
 		And I click "Registrations report" button
-		And I select "Partner AR transactions" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| '$$PurchaseReturn029142$$'            | ''            | ''       | ''          | ''             | ''                         | ''          | ''                  | ''                   | ''         | ''                             | ''                     |
-			| 'Document registrations records'      | ''            | ''       | ''          | ''             | ''                         | ''          | ''                  | ''                   | ''         | ''                             | ''                     |
-			| 'Register  "Partner AR transactions"' | ''            | ''       | ''          | ''             | ''                         | ''          | ''                  | ''                   | ''         | ''                             | ''                     |
-			| ''                                    | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                         | ''          | ''                  | ''                   | ''         | ''                             | 'Attributes'           |
-			| ''                                    | ''            | ''       | 'Amount'    | 'Company'      | 'Basis document'           | 'Partner'   | 'Legal name'        | 'Partner term'       | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
-			| ''                                    | 'Receipt'     | '*'      | '42,8'      | 'Main Company' | '$$PurchaseReturn029142$$' | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'USD'      | 'Reporting currency'           | 'No'                   |
-			| ''                                    | 'Receipt'     | '*'      | '250'       | 'Main Company' | '$$PurchaseReturn029142$$' | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'TRY'      | 'Local currency'               | 'No'                   |
-			| ''                                    | 'Receipt'     | '*'      | '250'       | 'Main Company' | '$$PurchaseReturn029142$$' | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'TRY'      | 'TRY'                          | 'No'                   |
-			| ''                                    | 'Receipt'     | '*'      | '250'       | 'Main Company' | '$$PurchaseReturn029142$$' | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'TRY'      | 'en description is empty'      | 'No'                   |
+		
 		And I select "Purchase return turnovers" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
@@ -855,13 +759,6 @@ Scenario: _029142 create Purchase return for service and product without Purchas
 			| ''                                      | '*'      | '-1'        | '-8,56'  | 'Main Company' | ''                 | 'USD'      | 'Interner' | '*'       | 'Reporting currency'           | 'No'                   | '' |
 	
 	
-		And I select "Accounts statement" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Accounts statement"' | ''            | ''       | ''                     | ''               | ''                       | ''               | ''             | ''          | ''                  | ''                         | ''         |
-			| ''                               | 'Record type' | 'Period' | 'Resources'            | ''               | ''                       | ''               | 'Dimensions'   | ''          | ''                  | ''                         | ''         |
-			| ''                               | ''            | ''       | 'Advance to suppliers' | 'Transaction AP' | 'Advance from customers' | 'Transaction AR' | 'Company'      | 'Partner'   | 'Legal name'        | 'Basis document'           | 'Currency' |
-			| ''                               | 'Receipt'     | '*'      | ''                     | '-250'           | ''                       | ''               | 'Main Company' | 'Ferron BP' | 'Company Ferron BP' | '$$PurchaseReturn029142$$' | 'TRY'      |
 	
 		Given I open hyperlink "e1cib/list/AccumulationRegister.R4011B_FreeStocks"
 		And "List" table does not contain lines

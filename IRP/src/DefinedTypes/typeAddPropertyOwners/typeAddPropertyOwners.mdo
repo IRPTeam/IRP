@@ -29,7 +29,6 @@
     <types>DocumentRef.BankReceipt</types>
     <types>CatalogRef.UserGroups</types>
     <types>DocumentRef.PurchaseReturn</types>
-    <types>DocumentRef.ChequeBondTransaction</types>
     <types>CatalogRef.PartnerSegments</types>
     <types>DocumentRef.ManualRegisterEntry</types>
     <types>CatalogRef.ItemSegments</types>

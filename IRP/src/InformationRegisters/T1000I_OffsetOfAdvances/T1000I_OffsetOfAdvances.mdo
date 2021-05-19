@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:InformationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="2aea421f-876a-4db7-b20f-59e7234dbcd4">
+  <producedTypes>
+    <selectionType typeId="cea34eb3-4bd4-4098-b3e5-01d7f333fd44" valueTypeId="098cc9a4-34cb-4017-ae8b-478d6fabb7b4"/>
+    <listType typeId="648e6087-904e-4a02-8257-293e858b78b7" valueTypeId="1f937821-da5d-4190-b548-6d4550b334a3"/>
+    <managerType typeId="71451f7a-9196-45bd-bec0-8ddee826532e" valueTypeId="958539cd-ece2-46af-b9d6-35a25d3c65a7"/>
+    <recordSetType typeId="58c6f909-6e87-416b-8ec9-40efe620cbb7" valueTypeId="d64d34e7-4740-41dd-8973-ea6dff1e9691"/>
+    <recordKeyType typeId="b880e531-2eb8-418a-b5a7-4a4a014b7809" valueTypeId="cc44e7b8-a7b7-447e-855c-b35e6a50b1b1"/>
+    <recordType typeId="1d3c6b4d-1a30-48ce-bd49-99e569bdcef9" valueTypeId="f7a6597f-52eb-40f8-bbe6-5088bd7a975d"/>
+    <recordManagerType typeId="e5f08f91-64fe-4c08-98cd-c16f2df88260" valueTypeId="d4b1398a-b5e7-4c1a-af5e-68c4e8d64a87"/>
+  </producedTypes>
+  <name>T1000I_OffsetOfAdvances</name>
+  <synonym>
+    <key>en</key>
+    <value>T1000I Offset of advances</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <editType>InDialog</editType>
+  <informationRegisterPeriodicity>RecorderPosition</informationRegisterPeriodicity>
+  <writeMode>RecorderSubordinate</writeMode>
+  <dataLockControlMode>Managed</dataLockControlMode>
+  <resources uuid="580e721d-032f-40a3-982e-edab43cce854">
+    <name>Amount</name>
+    <synonym>
+      <key>en</key>
+      <value>Amount</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeAmount</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </resources>
+  <dimensions uuid="0bb2c99f-8fc5-41ed-a352-121e3036938a">
+    <name>Document</name>
+    <synonym>
+      <key>en</key>
+      <value>Document</value>
+    </synonym>
+    <type>
+      <types>DocumentRef.PurchaseInvoice</types>
+      <types>DocumentRef.BankPayment</types>
+      <types>DocumentRef.CashPayment</types>
+      <types>DocumentRef.BankReceipt</types>
+      <types>DocumentRef.CashReceipt</types>
+      <types>DocumentRef.SalesInvoice</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+  <dimensions uuid="722b8b9c-3389-450d-a2f0-374def583199">
+    <name>Company</name>
+    <synonym>
+      <key>en</key>
+      <value>Company</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Companies</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+  <dimensions uuid="99ee3abe-9119-423d-add6-a38fd45f660d">
+    <name>Currency</name>
+    <synonym>
+      <key>en</key>
+      <value>Currency</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Currencies</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+  <dimensions uuid="fe606ef9-384e-4516-ae82-d7b9fef6da94">
+    <name>Partner</name>
+    <synonym>
+      <key>en</key>
+      <value>Partner</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Partners</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+  <dimensions uuid="e7482194-2e24-4450-83a2-3c5fddde33f9">
+    <name>LegalName</name>
+    <synonym>
+      <key>en</key>
+      <value>Legal name</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Companies</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+  <dimensions uuid="1f291bd8-0fc6-4a10-98be-3bb772217fa2">
+    <name>TransactionDocument</name>
+    <synonym>
+      <key>en</key>
+      <value>Transaction document</value>
+    </synonym>
+    <type>
+      <types>DocumentRef.CashTransferOrder</types>
+      <types>DocumentRef.OpeningEntry</types>
+      <types>DocumentRef.PurchaseInvoice</types>
+      <types>DocumentRef.SalesInvoice</types>
+      <types>DocumentRef.SalesReturn</types>
+      <types>DocumentRef.PurchaseReturn</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+  <dimensions uuid="a5fd0f9a-b667-4b0c-a964-4ebe6e98fe62">
+    <name>AdvancesDocument</name>
+    <synonym>
+      <key>en</key>
+      <value>Advances document</value>
+    </synonym>
+    <type>
+      <types>DocumentRef.BankReceipt</types>
+      <types>DocumentRef.CashReceipt</types>
+      <types>DocumentRef.BankPayment</types>
+      <types>DocumentRef.CashPayment</types>
+      <types>DocumentRef.PurchaseReturn</types>
+      <types>DocumentRef.SalesReturn</types>
+      <types>DocumentRef.OpeningEntry</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+  <dimensions uuid="04a290af-cfb5-45e1-8fd9-08be47d9cfe7">
+    <name>Agreement</name>
+    <synonym>
+      <key>en</key>
+      <value>Agreement</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Agreements</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+  <dimensions uuid="7e2d9dbe-98ac-471d-b752-1c79271194f3">
+    <name>Key</name>
+    <synonym>
+      <key>en</key>
+      <value>Key</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeRowID</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+</mdclass:InformationRegister>

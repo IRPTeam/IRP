@@ -141,6 +141,79 @@ Scenario: _043001 check Debit note movements by the Register "R5010 Reconciliati
 			| ''                                           | 'Receipt'     | '05.04.2021 09:30:36' | '2 300'     | 'TRY'        | 'Main Company' | 'Company Ferron BP' |
 	And I close all client application windows
 
+Scenario: _043002 check Debit note movements by the Register "R2021 Customer transactions" (with customer)
+	* Select Debit note
+		Given I open hyperlink "e1cib/list/Document.DebitNote"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '2' |
+	* Check movements by the Register  "R2021 Customer transactions" 
+		And I click "Registrations report" button
+		And I select "R2021 Customer transactions" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit note 2 dated 05.04.2021 09:31:09'  | ''            | ''                    | ''          | ''             | ''                             | ''         | ''                  | ''          | ''                         | ''                                          | ''                     | ''                  |
+			| 'Document registrations records'          | ''            | ''                    | ''          | ''             | ''                             | ''         | ''                  | ''          | ''                         | ''                                          | ''                     | ''                  |
+			| 'Register  "R2021 Customer transactions"' | ''            | ''                    | ''          | ''             | ''                             | ''         | ''                  | ''          | ''                         | ''                                          | ''                     | ''                  |
+			| ''                                        | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                             | ''         | ''                  | ''          | ''                         | ''                                          | 'Attributes'           | ''                  |
+			| ''                                        | ''            | ''                    | 'Amount'    | 'Company'      | 'Multi currency movement type' | 'Currency' | 'Legal name'        | 'Partner'   | 'Agreement'                | 'Basis'                                     | 'Deferred calculation' | 'Customers advances closing' |
+			| ''                                        | 'Receipt'     | '05.04.2021 09:31:09' | '17,12'     | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'No'                   | ''                |
+			| ''                                        | 'Receipt'     | '05.04.2021 09:31:09' | '100'       | 'Main Company' | 'Local currency'               | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'No'                   | ''                |
+			| ''                                        | 'Receipt'     | '05.04.2021 09:31:09' | '100'       | 'Main Company' | 'TRY'                          | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'No'                   | ''                |
+			| ''                                        | 'Receipt'     | '05.04.2021 09:31:09' | '100'       | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'No'                   | ''                |
+	And I close all client application windows
+	
+
+Scenario: _043003 check absence Debit note movements by the Register "R1021 Vendors transactions" (with customer)
+	* Select Debit note
+		Given I open hyperlink "e1cib/list/Document.DebitNote"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '2' |
+	* Check movements by the Register  "R1021 Vendors transactions" 
+		And I click "Registrations report" button
+		And I select "R1021 Vendors transactions" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document does not contain values
+			| 'Register  "R1021 Vendors transactions'   |           
+	And I close all client application windows
+
+
+Scenario: _043004 check Debit note movements by the Register "R1021 Vendors transactions" (with vendor)
+	* Select Debit note
+		Given I open hyperlink "e1cib/list/Document.DebitNote"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '1' |
+	* Check movements by the Register  "R1021 Vendors transactions" 
+		And I click "Registrations report" button
+		And I select "R1021 Vendors transactions" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit note 1 dated 05.04.2021 09:30:36' | ''            | ''                    | ''          | ''             | ''                             | ''         | ''                  | ''          | ''                   | ''                                               | ''                     | ''                  |
+			| 'Document registrations records'         | ''            | ''                    | ''          | ''             | ''                             | ''         | ''                  | ''          | ''                   | ''                                               | ''                     | ''                  |
+			| 'Register  "R1021 Vendors transactions"' | ''            | ''                    | ''          | ''             | ''                             | ''         | ''                  | ''          | ''                   | ''                                               | ''                     | ''                  |
+			| ''                                       | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                             | ''         | ''                  | ''          | ''                   | ''                                               | 'Attributes'           | ''                  |
+			| ''                                       | ''            | ''                    | 'Amount'    | 'Company'      | 'Multi currency movement type' | 'Currency' | 'Legal name'        | 'Partner'   | 'Agreement'          | 'Basis'                                          | 'Deferred calculation' | 'Vendors advances closing' |
+			| ''                                       | 'Receipt'     | '05.04.2021 09:30:36' | '-2 300'    | 'Main Company' | 'Local currency'               | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Purchase invoice 115 dated 12.02.2021 15:13:56' | 'No'                   | ''                |
+			| ''                                       | 'Receipt'     | '05.04.2021 09:30:36' | '-2 300'    | 'Main Company' | 'TRY'                          | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Purchase invoice 115 dated 12.02.2021 15:13:56' | 'No'                   | ''                |
+			| ''                                       | 'Receipt'     | '05.04.2021 09:30:36' | '-2 300'    | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Purchase invoice 115 dated 12.02.2021 15:13:56' | 'No'                   | ''                |
+			| ''                                       | 'Receipt'     | '05.04.2021 09:30:36' | '-393,76'   | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Company Ferron BP' | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Purchase invoice 115 dated 12.02.2021 15:13:56' | 'No'                   | ''                |
+	And I close all client application windows
+
+Scenario: _043005 check absence Debit note movements by the Register "R2021 Customer transactions" (with vendor)
+	* Select Debit note
+		Given I open hyperlink "e1cib/list/Document.DebitNote"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '1' |
+	* Check movements by the Register  "R2021 Customer transactions" 
+		And I click "Registrations report" button
+		And I select "R2021 Customer transactions" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document does not contain values
+			| 'Register  "R2021 Customer transactions'   |           
+	And I close all client application windows
 
 Scenario: _043030 Debit note clear posting/mark for deletion
 	And I close all client application windows

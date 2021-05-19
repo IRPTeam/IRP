@@ -124,20 +124,7 @@ Scenario: Open object form "CashAccounts"
 	And I close current window
 
 
-	
-Scenario: Open list form "ChequeBonds" 
-	And I close all client application windows
-	Given I open "ChequeBonds" catalog default form
-	If the warning is displayed then
-		Then I raise "Failed to open catalog form ChequeBonds" exception
-	And I close current window
 
-Scenario: Open object form "ChequeBonds"
-	And I close all client application windows
-	Given I open "ChequeBonds" reference main form
-	If the warning is displayed then
-		Then I raise "Failed to open catalog form ChequeBonds" exception
-	And I close current window
 
 	
 Scenario: Open list form "Companies" 

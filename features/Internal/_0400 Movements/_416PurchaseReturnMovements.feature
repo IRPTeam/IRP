@@ -67,7 +67,7 @@ Scenario: _041600 preparation (Purchase return)
 	* Load Bank payment
 	When Create document BankPayment objects (check movements, advance)
 	And I execute 1C:Enterprise script at server
-			| "Documents.BankPayment.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |	
+			| "Documents.BankPayment.FindByNumber(10).GetObject().Write(DocumentWriteMode.Posting);" |	
 	* Load PO
 	When Create document PurchaseOrder objects (check movements, GR before PI, Use receipt sheduling)
 	When Create document PurchaseOrder objects (check movements, GR before PI, not Use receipt sheduling)
@@ -151,15 +151,15 @@ Scenario: _041602 check Purchase return movements by the Register  "R1021 Vendor
 		And I select "R1021 Vendors transactions" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Purchase return 231 dated 14.03.2021 18:53:34' | ''            | ''                    | ''          | ''             | ''                             | ''         | ''                  | ''          | ''                   | ''                                              | ''                     |
-			| 'Document registrations records'                | ''            | ''                    | ''          | ''             | ''                             | ''         | ''                  | ''          | ''                   | ''                                              | ''                     |
-			| 'Register  "R1021 Vendors transactions"'        | ''            | ''                    | ''          | ''             | ''                             | ''         | ''                  | ''          | ''                   | ''                                              | ''                     |
-			| ''                                              | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                             | ''         | ''                  | ''          | ''                   | ''                                              | 'Attributes'           |
-			| ''                                              | ''            | ''                    | 'Amount'    | 'Company'      | 'Multi currency movement type' | 'Currency' | 'Legal name'        | 'Partner'   | 'Agreement'          | 'Basis'                                         | 'Deferred calculation' |
-			| ''                                              | 'Receipt'     | '14.03.2021 18:53:34' | '-900'      | 'Main Company' | 'Local currency'               | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Purchase return 231 dated 14.03.2021 18:53:34' | 'No'                   |
-			| ''                                              | 'Receipt'     | '14.03.2021 18:53:34' | '-900'      | 'Main Company' | 'TRY'                          | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Purchase return 231 dated 14.03.2021 18:53:34' | 'No'                   |
-			| ''                                              | 'Receipt'     | '14.03.2021 18:53:34' | '-900'      | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Purchase return 231 dated 14.03.2021 18:53:34' | 'No'                   |
-			| ''                                              | 'Receipt'     | '14.03.2021 18:53:34' | '-154,08'   | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Company Ferron BP' | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Purchase return 231 dated 14.03.2021 18:53:34' | 'No'                   |
+			| 'Purchase return 231 dated 14.03.2021 18:53:34' | ''            | ''                    | ''          | ''             | ''                             | ''         | ''                  | ''          | ''                   | ''                                               | ''                     | ''                  |
+			| 'Document registrations records'                | ''            | ''                    | ''          | ''             | ''                             | ''         | ''                  | ''          | ''                   | ''                                               | ''                     | ''                  |
+			| 'Register  "R1021 Vendors transactions"'        | ''            | ''                    | ''          | ''             | ''                             | ''         | ''                  | ''          | ''                   | ''                                               | ''                     | ''                  |
+			| ''                                              | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                             | ''         | ''                  | ''          | ''                   | ''                                               | 'Attributes'           | ''                  |
+			| ''                                              | ''            | ''                    | 'Amount'    | 'Company'      | 'Multi currency movement type' | 'Currency' | 'Legal name'        | 'Partner'   | 'Agreement'          | 'Basis'                                          | 'Deferred calculation' | 'Vendors advances closing' |
+			| ''                                              | 'Receipt'     | '14.03.2021 18:53:34' | '-900'      | 'Main Company' | 'Local currency'               | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Purchase invoice 117 dated 12.02.2021 15:12:15' | 'No'                   | ''                |
+			| ''                                              | 'Receipt'     | '14.03.2021 18:53:34' | '-900'      | 'Main Company' | 'TRY'                          | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Purchase invoice 117 dated 12.02.2021 15:12:15' | 'No'                   | ''                |
+			| ''                                              | 'Receipt'     | '14.03.2021 18:53:34' | '-900'      | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Purchase invoice 117 dated 12.02.2021 15:12:15' | 'No'                   | ''                |
+			| ''                                              | 'Receipt'     | '14.03.2021 18:53:34' | '-154,08'   | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Company Ferron BP' | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Purchase invoice 117 dated 12.02.2021 15:12:15' | 'No'                   | ''                |
 	And I close all client application windows
 
 Scenario: _041603 check Purchase return movements by the Register  "R1005 Special offers of purchases" (with special offer)

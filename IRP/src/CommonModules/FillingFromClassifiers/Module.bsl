@@ -239,7 +239,6 @@ Procedure FillDescriptionOfPredefinedCatalogs() Export
     AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Document_CashReceipt, 					"Description_A028");
     AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Document_CashRevenue, 					"Description_A029");
     AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Document_CashTransferOrder, 			"Description_A030");
-    AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Document_ChequeBondTransaction, 		"Description_A031");
     AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Document_GoodsReceipt, 				"Description_A032");
     AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Document_IncomingPaymentOrder, 		"Description_A033");
     AddRowToDescriptionList (ValueTable, LocalCodes, Obj.Document_InventoryTransfer, 			"Description_A034");
@@ -268,9 +267,6 @@ Procedure FillDescriptionOfPredefinedCatalogs() Export
 	AddRowToDescriptionList (ValueTable, LocalCodes, Catalogs.PriceTypes.ManualPriceType, "Description_A057");
 	
 	Obj = Catalogs.ObjectStatuses;
-	AddRowToDescriptionList (ValueTable, LocalCodes, Obj.ChequeBondTransaction, 	"Description_A031"); 
-	AddRowToDescriptionList (ValueTable, LocalCodes, Obj.ChequeBondIncoming, 		"Description_A058"); 
-	AddRowToDescriptionList (ValueTable, LocalCodes, Obj.ChequeBondOutgoing, 		"Description_A059"); 
 	AddRowToDescriptionList (ValueTable, LocalCodes, Obj.InventoryTransferOrder, 	"Description_A035");
 	AddRowToDescriptionList (ValueTable, LocalCodes, Obj.OutgoingPaymentOrder, 		"Description_A039");
 	AddRowToDescriptionList (ValueTable, LocalCodes, Obj.PhysicalCountByLocation, 	"Description_A040");

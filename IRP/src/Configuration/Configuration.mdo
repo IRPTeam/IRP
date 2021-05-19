@@ -243,8 +243,6 @@
   <commonModules>CommonModule.DocCashStatementServer</commonModules>
   <commonModules>CommonModule.DocCashTransferOrderClient</commonModules>
   <commonModules>CommonModule.DocCashTransferOrderServer</commonModules>
-  <commonModules>CommonModule.DocChequeBondTransactionClient</commonModules>
-  <commonModules>CommonModule.DocChequeBondTransactionServer</commonModules>
   <commonModules>CommonModule.DocCreditDebitNoteClient</commonModules>
   <commonModules>CommonModule.DocCreditDebitNoteClientServer</commonModules>
   <commonModules>CommonModule.DocCreditDebitNoteServer</commonModules>
@@ -573,8 +571,6 @@
   <documents>Document.CashRevenue</documents>
   <documents>Document.CashStatement</documents>
   <documents>Document.CashTransferOrder</documents>
-  <documents>Document.ChequeBondTransaction</documents>
-  <documents>Document.ChequeBondTransactionItem</documents>
   <documents>Document.CreditNote</documents>
   <documents>Document.DebitNote</documents>
   <documents>Document.GoodsReceipt</documents>
@@ -609,6 +605,8 @@
   <documents>Document.StockAdjustmentAsSurplus</documents>
   <documents>Document.StockAdjustmentAsWriteOff</documents>
   <documents>Document.Unbundling</documents>
+  <documents>Document.VendorsAdvancesClosing</documents>
+  <documents>Document.CustomersAdvancesClosing</documents>
   <documentJournals>DocumentJournal.DocumentsForIncomingPayment</documentJournals>
   <documentJournals>DocumentJournal.DocumentsForOutgoingPayment</documentJournals>
   <documentJournals>DocumentJournal.DocumentsForCreditDebitNote</documentJournals>
@@ -671,7 +669,6 @@
   <informationRegisters>InformationRegister.BarcodeScanInfoCheck</informationRegisters>
   <informationRegisters>InformationRegister.BundleContents</informationRegisters>
   <informationRegisters>InformationRegister.BusinessUnitBankTerms</informationRegisters>
-  <informationRegisters>InformationRegister.ChequeBondStatuses</informationRegisters>
   <informationRegisters>InformationRegister.CreatedProcurementOrders</informationRegisters>
   <informationRegisters>InformationRegister.CurrencyRates</informationRegisters>
   <informationRegisters>InformationRegister.DataMappingTable</informationRegisters>
@@ -691,19 +688,14 @@
   <informationRegisters>InformationRegister.Taxes</informationRegisters>
   <informationRegisters>InformationRegister.TaxSettings</informationRegisters>
   <informationRegisters>InformationRegister.UserSettings</informationRegisters>
-  <accumulationRegisters>AccumulationRegister.AccountBalance</accumulationRegisters>
-  <accumulationRegisters>AccumulationRegister.AccountsStatement</accumulationRegisters>
-  <accumulationRegisters>AccumulationRegister.AdvanceFromCustomers</accumulationRegisters>
-  <accumulationRegisters>AccumulationRegister.AdvanceToSuppliers</accumulationRegisters>
-  <accumulationRegisters>AccumulationRegister.Aging</accumulationRegisters>
+  <informationRegisters>InformationRegister.T1000I_OffsetOfAdvances</informationRegisters>
+  <informationRegisters>InformationRegister.T1001I_PartnerTransactions</informationRegisters>
+  <informationRegisters>InformationRegister.T1002I_PartnerAdvances</informationRegisters>
   <accumulationRegisters>AccumulationRegister.CashInTransit</accumulationRegisters>
-  <accumulationRegisters>AccumulationRegister.ChequeBondBalance</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.ExpensesTurnovers</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.GoodsReceiptSchedule</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.OrderBalance</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.OrderProcurement</accumulationRegisters>
-  <accumulationRegisters>AccumulationRegister.PartnerApTransactions</accumulationRegisters>
-  <accumulationRegisters>AccumulationRegister.PartnerArTransactions</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.PlaningCashTransactions</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.PurchaseReturnTurnovers</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1001T_Purchases</accumulationRegisters>

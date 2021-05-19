@@ -637,11 +637,6 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:MultiLanguageDataPath">
-          <paths xsi:type="form:DataPath">
-            <segments>Object.PostingChequeBondBalance</segments>
-          </paths>
-        </dataPath>
         <titleLocation>Right</titleLocation>
         <extendedTooltip>
           <name>PostingChequeBondBalanceExtendedTooltip</name>
@@ -668,34 +663,10 @@
           </userVisible>
           <autoFill>true</autoFill>
         </contextMenu>
-        <type>RadioButtonField</type>
         <editMode>Enter</editMode>
         <showInHeader>true</showInHeader>
         <headerHorizontalAlign>Left</headerHorizontalAlign>
         <showInFooter>true</showInFooter>
-        <extInfo xsi:type="form:RadioButtonsFieldExtInfo">
-          <radioButtonsType>Tumbler</radioButtonsType>
-          <choiceList>
-            <value xsi:type="core:ReferenceValue">
-              <value>Enum.DocumentPostingTypes.EnumValue.Posting</value>
-            </value>
-          </choiceList>
-          <choiceList>
-            <value xsi:type="core:ReferenceValue">
-              <value>Enum.DocumentPostingTypes.EnumValue.Correction</value>
-            </value>
-          </choiceList>
-          <choiceList>
-            <value xsi:type="core:ReferenceValue">
-              <value>Enum.DocumentPostingTypes.EnumValue.Reversal</value>
-            </value>
-          </choiceList>
-          <choiceList>
-            <value xsi:type="core:ReferenceValue">
-              <value>Enum.DocumentPostingTypes.EnumValue.Nothing</value>
-            </value>
-          </choiceList>
-        </extInfo>
       </items>
       <items xsi:type="form:FormField">
         <name>PostingAdvanced</name>
@@ -705,11 +676,6 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:MultiLanguageDataPath">
-          <paths xsi:type="form:DataPath">
-            <segments>Object.PostingAdvanced</segments>
-          </paths>
-        </dataPath>
         <titleLocation>Right</titleLocation>
         <extendedTooltip>
           <name>PostingAdvancedExtendedTooltip</name>
@@ -736,34 +702,10 @@
           </userVisible>
           <autoFill>true</autoFill>
         </contextMenu>
-        <type>RadioButtonField</type>
         <editMode>Enter</editMode>
         <showInHeader>true</showInHeader>
         <headerHorizontalAlign>Left</headerHorizontalAlign>
         <showInFooter>true</showInFooter>
-        <extInfo xsi:type="form:RadioButtonsFieldExtInfo">
-          <radioButtonsType>Tumbler</radioButtonsType>
-          <choiceList>
-            <value xsi:type="core:ReferenceValue">
-              <value>Enum.DocumentPostingTypes.EnumValue.Posting</value>
-            </value>
-          </choiceList>
-          <choiceList>
-            <value xsi:type="core:ReferenceValue">
-              <value>Enum.DocumentPostingTypes.EnumValue.Correction</value>
-            </value>
-          </choiceList>
-          <choiceList>
-            <value xsi:type="core:ReferenceValue">
-              <value>Enum.DocumentPostingTypes.EnumValue.Reversal</value>
-            </value>
-          </choiceList>
-          <choiceList>
-            <value xsi:type="core:ReferenceValue">
-              <value>Enum.DocumentPostingTypes.EnumValue.Nothing</value>
-            </value>
-          </choiceList>
-        </extInfo>
       </items>
       <items xsi:type="form:FormField">
         <name>PostingPartnerAccountTransactions</name>
@@ -773,11 +715,6 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:MultiLanguageDataPath">
-          <paths xsi:type="form:DataPath">
-            <segments>Object.PostingPartnerAccountTransactions</segments>
-          </paths>
-        </dataPath>
         <titleLocation>Right</titleLocation>
         <extendedTooltip>
           <name>PostingPartnerAccountTransactionsExtendedTooltip</name>
@@ -804,34 +741,10 @@
           </userVisible>
           <autoFill>true</autoFill>
         </contextMenu>
-        <type>RadioButtonField</type>
         <editMode>Enter</editMode>
         <showInHeader>true</showInHeader>
         <headerHorizontalAlign>Left</headerHorizontalAlign>
         <showInFooter>true</showInFooter>
-        <extInfo xsi:type="form:RadioButtonsFieldExtInfo">
-          <radioButtonsType>Tumbler</radioButtonsType>
-          <choiceList>
-            <value xsi:type="core:ReferenceValue">
-              <value>Enum.DocumentPostingTypes.EnumValue.Posting</value>
-            </value>
-          </choiceList>
-          <choiceList>
-            <value xsi:type="core:ReferenceValue">
-              <value>Enum.DocumentPostingTypes.EnumValue.Correction</value>
-            </value>
-          </choiceList>
-          <choiceList>
-            <value xsi:type="core:ReferenceValue">
-              <value>Enum.DocumentPostingTypes.EnumValue.Reversal</value>
-            </value>
-          </choiceList>
-          <choiceList>
-            <value xsi:type="core:ReferenceValue">
-              <value>Enum.DocumentPostingTypes.EnumValue.Nothing</value>
-            </value>
-          </choiceList>
-        </extInfo>
       </items>
       <items xsi:type="form:FormField">
         <name>PostingReconciliationStatement</name>
@@ -841,11 +754,6 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:MultiLanguageDataPath">
-          <paths xsi:type="form:DataPath">
-            <segments>Object.PostingReconciliationStatement</segments>
-          </paths>
-        </dataPath>
         <titleLocation>Right</titleLocation>
         <extendedTooltip>
           <name>PostingReconciliationStatementExtendedTooltip</name>
@@ -872,34 +780,10 @@
           </userVisible>
           <autoFill>true</autoFill>
         </contextMenu>
-        <type>RadioButtonField</type>
         <editMode>Enter</editMode>
         <showInHeader>true</showInHeader>
         <headerHorizontalAlign>Left</headerHorizontalAlign>
         <showInFooter>true</showInFooter>
-        <extInfo xsi:type="form:RadioButtonsFieldExtInfo">
-          <radioButtonsType>Tumbler</radioButtonsType>
-          <choiceList>
-            <value xsi:type="core:ReferenceValue">
-              <value>Enum.DocumentPostingTypes.EnumValue.Posting</value>
-            </value>
-          </choiceList>
-          <choiceList>
-            <value xsi:type="core:ReferenceValue">
-              <value>Enum.DocumentPostingTypes.EnumValue.Correction</value>
-            </value>
-          </choiceList>
-          <choiceList>
-            <value xsi:type="core:ReferenceValue">
-              <value>Enum.DocumentPostingTypes.EnumValue.Reversal</value>
-            </value>
-          </choiceList>
-          <choiceList>
-            <value xsi:type="core:ReferenceValue">
-              <value>Enum.DocumentPostingTypes.EnumValue.Nothing</value>
-            </value>
-          </choiceList>
-        </extInfo>
       </items>
       <items xsi:type="form:FormField">
         <name>PostingAccountBalance</name>
@@ -909,11 +793,6 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:MultiLanguageDataPath">
-          <paths xsi:type="form:DataPath">
-            <segments>Object.PostingAccountBalance</segments>
-          </paths>
-        </dataPath>
         <titleLocation>Right</titleLocation>
         <extendedTooltip>
           <name>PostingAccountBalanceExtendedTooltip</name>
@@ -940,34 +819,10 @@
           </userVisible>
           <autoFill>true</autoFill>
         </contextMenu>
-        <type>RadioButtonField</type>
         <editMode>Enter</editMode>
         <showInHeader>true</showInHeader>
         <headerHorizontalAlign>Left</headerHorizontalAlign>
         <showInFooter>true</showInFooter>
-        <extInfo xsi:type="form:RadioButtonsFieldExtInfo">
-          <radioButtonsType>Tumbler</radioButtonsType>
-          <choiceList>
-            <value xsi:type="core:ReferenceValue">
-              <value>Enum.DocumentPostingTypes.EnumValue.Posting</value>
-            </value>
-          </choiceList>
-          <choiceList>
-            <value xsi:type="core:ReferenceValue">
-              <value>Enum.DocumentPostingTypes.EnumValue.Correction</value>
-            </value>
-          </choiceList>
-          <choiceList>
-            <value xsi:type="core:ReferenceValue">
-              <value>Enum.DocumentPostingTypes.EnumValue.Reversal</value>
-            </value>
-          </choiceList>
-          <choiceList>
-            <value xsi:type="core:ReferenceValue">
-              <value>Enum.DocumentPostingTypes.EnumValue.Nothing</value>
-            </value>
-          </choiceList>
-        </extInfo>
       </items>
       <items xsi:type="form:FormField">
         <name>PostingPlaningCashTransactions</name>
@@ -977,11 +832,6 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:MultiLanguageDataPath">
-          <paths xsi:type="form:DataPath">
-            <segments>Object.PostingPlaningCashTransactions</segments>
-          </paths>
-        </dataPath>
         <titleLocation>Right</titleLocation>
         <extendedTooltip>
           <name>PostingPlaningCashTransactionsExtendedTooltip</name>
@@ -1008,34 +858,10 @@
           </userVisible>
           <autoFill>true</autoFill>
         </contextMenu>
-        <type>RadioButtonField</type>
         <editMode>Enter</editMode>
         <showInHeader>true</showInHeader>
         <headerHorizontalAlign>Left</headerHorizontalAlign>
         <showInFooter>true</showInFooter>
-        <extInfo xsi:type="form:RadioButtonsFieldExtInfo">
-          <radioButtonsType>Tumbler</radioButtonsType>
-          <choiceList>
-            <value xsi:type="core:ReferenceValue">
-              <value>Enum.DocumentPostingTypes.EnumValue.Posting</value>
-            </value>
-          </choiceList>
-          <choiceList>
-            <value xsi:type="core:ReferenceValue">
-              <value>Enum.DocumentPostingTypes.EnumValue.Correction</value>
-            </value>
-          </choiceList>
-          <choiceList>
-            <value xsi:type="core:ReferenceValue">
-              <value>Enum.DocumentPostingTypes.EnumValue.Reversal</value>
-            </value>
-          </choiceList>
-          <choiceList>
-            <value xsi:type="core:ReferenceValue">
-              <value>Enum.DocumentPostingTypes.EnumValue.Nothing</value>
-            </value>
-          </choiceList>
-        </extInfo>
       </items>
       <visible>true</visible>
       <enabled>true</enabled>

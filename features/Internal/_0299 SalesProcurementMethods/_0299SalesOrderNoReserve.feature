@@ -185,19 +185,6 @@ Scenario: _029902 create SI for SO without reserve and check its movements (SO-S
 		And I save the value of the field named "Date" as "$$DateSalesInvoice029901$$"
 		And I save the window as "$$SalesInvoice029901$$"
 		And I click "Registrations report" button	
-	* Check SI movements (Register  "Partner AR transactions")
-		And I select "Partner AR transactions" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| '$$SalesInvoice029901$$'              | ''            | ''                           | ''          | ''             | ''                       | ''         | ''                 | ''                         | ''         | ''                             | ''                     |
-			| 'Document registrations records'      | ''            | ''                           | ''          | ''             | ''                       | ''         | ''                 | ''                         | ''         | ''                             | ''                     |
-			| 'Register  "Partner AR transactions"' | ''            | ''                           | ''          | ''             | ''                       | ''         | ''                 | ''                         | ''         | ''                             | ''                     |
-			| ''                                    | 'Record type' | 'Period'                     | 'Resources' | 'Dimensions'   | ''                       | ''         | ''                 | ''                         | ''         | ''                             | 'Attributes'           |
-			| ''                                    | ''            | ''                           | 'Amount'    | 'Company'      | 'Basis document'         | 'Partner'  | 'Legal name'       | 'Partner term'             | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
-			| ''                                    | 'Receipt'     | '$$DateSalesInvoice029901$$' | '4 519,68'  | 'Main Company' | '$$SalesInvoice029901$$' | 'Lomaniti' | 'Company Lomaniti' | 'Basic Partner terms, TRY' | 'USD'      | 'Reporting currency'           | 'No'                   |
-			| ''                                    | 'Receipt'     | '$$DateSalesInvoice029901$$' | '26 400'    | 'Main Company' | '$$SalesInvoice029901$$' | 'Lomaniti' | 'Company Lomaniti' | 'Basic Partner terms, TRY' | 'TRY'      | 'Local currency'               | 'No'                   |
-			| ''                                    | 'Receipt'     | '$$DateSalesInvoice029901$$' | '26 400'    | 'Main Company' | '$$SalesInvoice029901$$' | 'Lomaniti' | 'Company Lomaniti' | 'Basic Partner terms, TRY' | 'TRY'      | 'TRY'                          | 'No'                   |
-			| ''                                    | 'Receipt'     | '$$DateSalesInvoice029901$$' | '26 400'    | 'Main Company' | '$$SalesInvoice029901$$' | 'Lomaniti' | 'Company Lomaniti' | 'Basic Partner terms, TRY' | 'TRY'      | 'en description is empty'      | 'No'                   |
 	* Check SI movements (Register  "R5010 Reconciliation statement")
 		And I select "R5010 Reconciliation statement" exact value from "Register" drop-down list
 		And I click "Generate report" button
@@ -267,15 +254,15 @@ Scenario: _029902 create SI for SO without reserve and check its movements (SO-S
 		And I select "R2021 Customer transactions" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-		| '$$SalesInvoice029901$$'                  | ''            | ''                           | ''          | ''             | ''                             | ''         | ''                 | ''         | ''                         | ''                       | ''                     |
-		| 'Document registrations records'          | ''            | ''                           | ''          | ''             | ''                             | ''         | ''                 | ''         | ''                         | ''                       | ''                     |
-		| 'Register  "R2021 Customer transactions"' | ''            | ''                           | ''          | ''             | ''                             | ''         | ''                 | ''         | ''                         | ''                       | ''                     |
-		| ''                                        | 'Record type' | 'Period'                     | 'Resources' | 'Dimensions'   | ''                             | ''         | ''                 | ''         | ''                         | ''                       | 'Attributes'           |
-		| ''                                        | ''            | ''                           | 'Amount'    | 'Company'      | 'Multi currency movement type' | 'Currency' | 'Legal name'       | 'Partner'  | 'Agreement'                | 'Basis'                  | 'Deferred calculation' |
-		| ''                                        | 'Receipt'     | '$$DateSalesInvoice029901$$' | '4 519,68'  | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Company Lomaniti' | 'Lomaniti' | 'Basic Partner terms, TRY' | '$$SalesInvoice029901$$' | 'No'                   |
-		| ''                                        | 'Receipt'     | '$$DateSalesInvoice029901$$' | '26 400'    | 'Main Company' | 'Local currency'               | 'TRY'      | 'Company Lomaniti' | 'Lomaniti' | 'Basic Partner terms, TRY' | '$$SalesInvoice029901$$' | 'No'                   |
-		| ''                                        | 'Receipt'     | '$$DateSalesInvoice029901$$' | '26 400'    | 'Main Company' | 'TRY'                          | 'TRY'      | 'Company Lomaniti' | 'Lomaniti' | 'Basic Partner terms, TRY' | '$$SalesInvoice029901$$' | 'No'                   |
-		| ''                                        | 'Receipt'     | '$$DateSalesInvoice029901$$' | '26 400'    | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Company Lomaniti' | 'Lomaniti' | 'Basic Partner terms, TRY' | '$$SalesInvoice029901$$' | 'No'                   |
+		| '$$SalesInvoice029901$$'                  | ''            | ''                           | ''          | ''             | ''                             | ''         | ''                 | ''         | ''                         | ''                       | ''                     | ''                           |
+		| 'Document registrations records'          | ''            | ''                           | ''          | ''             | ''                             | ''         | ''                 | ''         | ''                         | ''                       | ''                     | ''                           |
+		| 'Register  "R2021 Customer transactions"' | ''            | ''                           | ''          | ''             | ''                             | ''         | ''                 | ''         | ''                         | ''                       | ''                     | ''                           |
+		| ''                                        | 'Record type' | 'Period'                     | 'Resources' | 'Dimensions'   | ''                             | ''         | ''                 | ''         | ''                         | ''                       | 'Attributes'           | ''                           |
+		| ''                                        | ''            | ''                           | 'Amount'    | 'Company'      | 'Multi currency movement type' | 'Currency' | 'Legal name'       | 'Partner'  | 'Agreement'                | 'Basis'                  | 'Deferred calculation' | 'Customers advances closing' |
+		| ''                                        | 'Receipt'     | '$$DateSalesInvoice029901$$' | '4 519,68'  | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Company Lomaniti' | 'Lomaniti' | 'Basic Partner terms, TRY' | '$$SalesInvoice029901$$' | 'No'                   | ''                           |
+		| ''                                        | 'Receipt'     | '$$DateSalesInvoice029901$$' | '26 400'    | 'Main Company' | 'Local currency'               | 'TRY'      | 'Company Lomaniti' | 'Lomaniti' | 'Basic Partner terms, TRY' | '$$SalesInvoice029901$$' | 'No'                   | ''                           |
+		| ''                                        | 'Receipt'     | '$$DateSalesInvoice029901$$' | '26 400'    | 'Main Company' | 'TRY'                          | 'TRY'      | 'Company Lomaniti' | 'Lomaniti' | 'Basic Partner terms, TRY' | '$$SalesInvoice029901$$' | 'No'                   | ''                           |
+		| ''                                        | 'Receipt'     | '$$DateSalesInvoice029901$$' | '26 400'    | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Company Lomaniti' | 'Lomaniti' | 'Basic Partner terms, TRY' | '$$SalesInvoice029901$$' | 'No'                   | ''                           |
 	* Check SI movements (Register  "Register  "Taxes turnovers")
 		And I select "Taxes turnovers" exact value from "Register" drop-down list
 		And I click "Generate report" button
@@ -294,17 +281,6 @@ Scenario: _029902 create SI for SO without reserve and check its movements (SO-S
 		| ''                               | '$$DateSalesInvoice029901$$' | '2 135,59'  | '2 135,59'      | '11 864,41'  | '$$SalesInvoice029901$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'TRY'                          | 'No'                   |
 		| ''                               | '$$DateSalesInvoice029901$$' | '2 135,59'  | '2 135,59'      | '11 864,41'  | '$$SalesInvoice029901$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'en description is empty'      | 'No'                   |
 
-	* Check SI movements (Register  "Accounts statement")
-		And I select "Accounts statement" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| '$$SalesInvoice029901$$'         | ''            | ''                           | ''                     | ''               | ''                       | ''               | ''             | ''         | ''                 | ''                     | ''         |
-		| 'Document registrations records' | ''            | ''                           | ''                     | ''               | ''                       | ''               | ''             | ''         | ''                 | ''                     | ''         |
-		| 'Register  "Accounts statement"' | ''            | ''                           | ''                     | ''               | ''                       | ''               | ''             | ''         | ''                 | ''                     | ''         |
-		| ''                               | 'Record type' | 'Period'                     | 'Resources'            | ''               | ''                       | ''               | 'Dimensions'   | ''         | ''                 | ''                     | ''         |
-		| ''                               | ''            | ''                           | 'Advance to suppliers' | 'Transaction AP' | 'Advance from customers' | 'Transaction AR' | 'Company'      | 'Partner'  | 'Legal name'       | 'Basis document'       | 'Currency' |
-		| ''                               | 'Receipt'     | '$$DateSalesInvoice029901$$' | ''                     | ''               | ''                       | '26 400'         | 'Main Company' | 'Lomaniti' | 'Company Lomaniti' | '$$SalesInvoice029901$$' | 'TRY'      |
-	* Check SI movements (Register  "Sales turnovers")
 	
 	* Check SI movements (Register  "R2040 Taxes incoming")
 		And I select "R2040 Taxes incoming" exact value from "Register" drop-down list
@@ -557,19 +533,6 @@ Scenario: _029905 create Sales ivoice for SO (SC first) without reserve and chec
 			And I save the window as "$$SalesInvoice029903$$"
 			And I save the value of the field named "Date" as "$$DateSalesInvoice029903$$"
 			And I click "Registrations report" button
-		* Check SI movements (Register  "Partner AR transactions")
-			And I select "Partner AR transactions" exact value from "Register" drop-down list
-			And I click "Generate report" button
-			And "ResultTable" spreadsheet document contains lines:
-				| '$$SalesInvoice029903$$'              | ''            | ''                           | ''          | ''             | ''                       | ''         | ''                 | ''                         | ''         | ''                             | ''                     |
-				| 'Document registrations records'      | ''            | ''                           | ''          | ''             | ''                       | ''         | ''                 | ''                         | ''         | ''                             | ''                     |
-				| 'Register  "Partner AR transactions"' | ''            | ''                           | ''          | ''             | ''                       | ''         | ''                 | ''                         | ''         | ''                             | ''                     |
-				| ''                                    | 'Record type' | 'Period'                     | 'Resources' | 'Dimensions'   | ''                       | ''         | ''                 | ''                         | ''         | ''                             | 'Attributes'           |
-				| ''                                    | ''            | ''                           | 'Amount'    | 'Company'      | 'Basis document'         | 'Partner'  | 'Legal name'       | 'Partner term'             | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
-				| ''                                    | 'Receipt'     | '$$DateSalesInvoice029903$$' | '4 519,68'  | 'Main Company' | '$$SalesInvoice029903$$' | 'Lomaniti' | 'Company Lomaniti' | 'Basic Partner terms, TRY' | 'USD'      | 'Reporting currency'           | 'No'                   |
-				| ''                                    | 'Receipt'     | '$$DateSalesInvoice029903$$' | '26 400'    | 'Main Company' | '$$SalesInvoice029903$$' | 'Lomaniti' | 'Company Lomaniti' | 'Basic Partner terms, TRY' | 'TRY'      | 'Local currency'               | 'No'                   |
-				| ''                                    | 'Receipt'     | '$$DateSalesInvoice029903$$' | '26 400'    | 'Main Company' | '$$SalesInvoice029903$$' | 'Lomaniti' | 'Company Lomaniti' | 'Basic Partner terms, TRY' | 'TRY'      | 'TRY'                          | 'No'                   |
-				| ''                                    | 'Receipt'     | '$$DateSalesInvoice029903$$' | '26 400'    | 'Main Company' | '$$SalesInvoice029903$$' | 'Lomaniti' | 'Company Lomaniti' | 'Basic Partner terms, TRY' | 'TRY'      | 'en description is empty'      | 'No'                   |
 		* Check SI movements (Register  "R5010 Reconciliation statement")
 			And I select "R5010 Reconciliation statement" exact value from "Register" drop-down list
 			And I click "Generate report" button
@@ -625,15 +588,15 @@ Scenario: _029905 create Sales ivoice for SO (SC first) without reserve and chec
 			And I select "R2021 Customer transactions" exact value from "Register" drop-down list
 			And I click "Generate report" button
 			And "ResultTable" spreadsheet document contains lines:
-			| '$$SalesInvoice029903$$'                  | ''            | ''                           | ''          | ''             | ''                             | ''         | ''                 | ''         | ''                         | ''                       | ''                     |
-			| 'Document registrations records'          | ''            | ''                           | ''          | ''             | ''                             | ''         | ''                 | ''         | ''                         | ''                       | ''                     |
-			| 'Register  "R2021 Customer transactions"' | ''            | ''                           | ''          | ''             | ''                             | ''         | ''                 | ''         | ''                         | ''                       | ''                     |
-			| ''                                        | 'Record type' | 'Period'                     | 'Resources' | 'Dimensions'   | ''                             | ''         | ''                 | ''         | ''                         | ''                       | 'Attributes'           |
-			| ''                                        | ''            | ''                           | 'Amount'    | 'Company'      | 'Multi currency movement type' | 'Currency' | 'Legal name'       | 'Partner'  | 'Agreement'                | 'Basis'                  | 'Deferred calculation' |
-			| ''                                        | 'Receipt'     | '$$DateSalesInvoice029903$$' | '4 519,68'  | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Company Lomaniti' | 'Lomaniti' | 'Basic Partner terms, TRY' | '$$SalesInvoice029903$$' | 'No'                   |
-			| ''                                        | 'Receipt'     | '$$DateSalesInvoice029903$$' | '26 400'    | 'Main Company' | 'Local currency'               | 'TRY'      | 'Company Lomaniti' | 'Lomaniti' | 'Basic Partner terms, TRY' | '$$SalesInvoice029903$$' | 'No'                   |
-			| ''                                        | 'Receipt'     | '$$DateSalesInvoice029903$$' | '26 400'    | 'Main Company' | 'TRY'                          | 'TRY'      | 'Company Lomaniti' | 'Lomaniti' | 'Basic Partner terms, TRY' | '$$SalesInvoice029903$$' | 'No'                   |
-			| ''                                        | 'Receipt'     | '$$DateSalesInvoice029903$$' | '26 400'    | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Company Lomaniti' | 'Lomaniti' | 'Basic Partner terms, TRY' | '$$SalesInvoice029903$$' | 'No'                   |
+			| '$$SalesInvoice029903$$'                  | ''            | ''                           | ''          | ''             | ''                             | ''         | ''                 | ''         | ''                         | ''                       | ''                     | ''                           |
+			| 'Document registrations records'          | ''            | ''                           | ''          | ''             | ''                             | ''         | ''                 | ''         | ''                         | ''                       | ''                     | ''                           |
+			| 'Register  "R2021 Customer transactions"' | ''            | ''                           | ''          | ''             | ''                             | ''         | ''                 | ''         | ''                         | ''                       | ''                     | ''                           |
+			| ''                                        | 'Record type' | 'Period'                     | 'Resources' | 'Dimensions'   | ''                             | ''         | ''                 | ''         | ''                         | ''                       | 'Attributes'           | ''                           |
+			| ''                                        | ''            | ''                           | 'Amount'    | 'Company'      | 'Multi currency movement type' | 'Currency' | 'Legal name'       | 'Partner'  | 'Agreement'                | 'Basis'                  | 'Deferred calculation' | 'Customers advances closing' |
+			| ''                                        | 'Receipt'     | '$$DateSalesInvoice029903$$' | '4 519,68'  | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Company Lomaniti' | 'Lomaniti' | 'Basic Partner terms, TRY' | '$$SalesInvoice029903$$' | 'No'                   | ''                           |
+			| ''                                        | 'Receipt'     | '$$DateSalesInvoice029903$$' | '26 400'    | 'Main Company' | 'Local currency'               | 'TRY'      | 'Company Lomaniti' | 'Lomaniti' | 'Basic Partner terms, TRY' | '$$SalesInvoice029903$$' | 'No'                   | ''                           |
+			| ''                                        | 'Receipt'     | '$$DateSalesInvoice029903$$' | '26 400'    | 'Main Company' | 'TRY'                          | 'TRY'      | 'Company Lomaniti' | 'Lomaniti' | 'Basic Partner terms, TRY' | '$$SalesInvoice029903$$' | 'No'                   | ''                           |
+			| ''                                        | 'Receipt'     | '$$DateSalesInvoice029903$$' | '26 400'    | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Company Lomaniti' | 'Lomaniti' | 'Basic Partner terms, TRY' | '$$SalesInvoice029903$$' | 'No'                   | ''                           |
 		* Check SI movements (Register  "Register  "Taxes turnovers")
 			And I select "Taxes turnovers" exact value from "Register" drop-down list
 			And I click "Generate report" button
@@ -652,18 +615,6 @@ Scenario: _029905 create Sales ivoice for SO (SC first) without reserve and chec
 			| ''                               | '$$DateSalesInvoice029903$$' | '2 135,59'  | '2 135,59'      | '11 864,41'  | '$$SalesInvoice029903$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'TRY'                          | 'No'                   |
 			| ''                               | '$$DateSalesInvoice029903$$' | '2 135,59'  | '2 135,59'      | '11 864,41'  | '$$SalesInvoice029903$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'en description is empty'      | 'No'                   |
 
-		* Check SI movements (Register  "Accounts statement")
-			And I select "Accounts statement" exact value from "Register" drop-down list
-			And I click "Generate report" button
-			And "ResultTable" spreadsheet document contains lines:
-			| '$$SalesInvoice029903$$'         | ''            | ''                           | ''                     | ''               | ''                       | ''               | ''             | ''         | ''                 | ''                     | ''         |
-			| 'Document registrations records' | ''            | ''                           | ''                     | ''               | ''                       | ''               | ''             | ''         | ''                 | ''                     | ''         |
-			| 'Register  "Accounts statement"' | ''            | ''                           | ''                     | ''               | ''                       | ''               | ''             | ''         | ''                 | ''                     | ''         |
-			| ''                               | 'Record type' | 'Period'                     | 'Resources'            | ''               | ''                       | ''               | 'Dimensions'   | ''         | ''                 | ''                     | ''         |
-			| ''                               | ''            | ''                           | 'Advance to suppliers' | 'Transaction AP' | 'Advance from customers' | 'Transaction AR' | 'Company'      | 'Partner'  | 'Legal name'       | 'Basis document'       | 'Currency' |
-			| ''                               | 'Receipt'     | '$$DateSalesInvoice029903$$' | ''                     | ''               | ''                       | '26 400'         | 'Main Company' | 'Lomaniti' | 'Company Lomaniti' | '$$SalesInvoice029903$$' | 'TRY'      |
-
-		
 		* Check SI movements (Register  "R2040 Taxes incoming")
 			And I select "R2040 Taxes incoming" exact value from "Register" drop-down list
 			And I click "Generate report" button

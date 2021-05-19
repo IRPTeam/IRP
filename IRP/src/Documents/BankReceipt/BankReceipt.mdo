@@ -66,19 +66,18 @@
   <defaultListForm>Document.BankReceipt.Form.ListForm</defaultListForm>
   <defaultChoiceForm>Document.BankReceipt.Form.ChoiceForm</defaultChoiceForm>
   <realTimePosting>Deny</realTimePosting>
-  <registerRecords>AccumulationRegister.PartnerArTransactions</registerRecords>
   <registerRecords>AccumulationRegister.R5010B_ReconciliationStatement</registerRecords>
-  <registerRecords>AccumulationRegister.Aging</registerRecords>
   <registerRecords>AccumulationRegister.ExpensesTurnovers</registerRecords>
   <registerRecords>AccumulationRegister.PlaningCashTransactions</registerRecords>
   <registerRecords>AccumulationRegister.R2021B_CustomersTransactions</registerRecords>
-  <registerRecords>AccumulationRegister.AccountsStatement</registerRecords>
-  <registerRecords>AccumulationRegister.R3010B_CashOnHand</registerRecords>
   <registerRecords>AccumulationRegister.R5011B_PartnersAging</registerRecords>
   <registerRecords>AccumulationRegister.R2020B_AdvancesFromCustomers</registerRecords>
   <registerRecords>AccumulationRegister.CashInTransit</registerRecords>
-  <registerRecords>AccumulationRegister.AdvanceFromCustomers</registerRecords>
-  <registerRecords>AccumulationRegister.PartnerApTransactions</registerRecords>
+  <registerRecords>AccumulationRegister.R3010B_CashOnHand</registerRecords>
+  <registerRecords>AccumulationRegister.R1021B_VendorsTransactions</registerRecords>
+  <registerRecords>AccumulationRegister.R1020B_AdvancesToVendors</registerRecords>
+  <registerRecords>InformationRegister.T1001I_PartnerTransactions</registerRecords>
+  <registerRecords>InformationRegister.T1002I_PartnerAdvances</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -194,6 +193,21 @@
     <fillValue xsi:type="core:StringValue">
       <value></value>
     </fillValue>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="5490cf8c-5a3e-4b85-986c-a746e0fa7936">
+    <name>IgnoreAdvances</name>
+    <synonym>
+      <key>en</key>
+      <value>Ignore advances</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>

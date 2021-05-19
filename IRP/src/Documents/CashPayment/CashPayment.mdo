@@ -66,14 +66,18 @@
   <defaultListForm>Document.CashPayment.Form.ListForm</defaultListForm>
   <defaultChoiceForm>Document.CashPayment.Form.ChoiceForm</defaultChoiceForm>
   <realTimePosting>Deny</realTimePosting>
-  <registerRecords>AccumulationRegister.R5010B_ReconciliationStatement</registerRecords>
   <registerRecords>AccumulationRegister.PlaningCashTransactions</registerRecords>
-  <registerRecords>AccumulationRegister.AccountsStatement</registerRecords>
-  <registerRecords>AccumulationRegister.R3010B_CashOnHand</registerRecords>
   <registerRecords>AccumulationRegister.CashInTransit</registerRecords>
+  <registerRecords>AccumulationRegister.R5010B_ReconciliationStatement</registerRecords>
+  <registerRecords>AccumulationRegister.R3010B_CashOnHand</registerRecords>
   <registerRecords>AccumulationRegister.R3015B_CashAdvance</registerRecords>
-  <registerRecords>AccumulationRegister.AdvanceToSuppliers</registerRecords>
-  <registerRecords>AccumulationRegister.PartnerApTransactions</registerRecords>
+  <registerRecords>AccumulationRegister.R1021B_VendorsTransactions</registerRecords>
+  <registerRecords>AccumulationRegister.R1020B_AdvancesToVendors</registerRecords>
+  <registerRecords>AccumulationRegister.R2020B_AdvancesFromCustomers</registerRecords>
+  <registerRecords>AccumulationRegister.R2021B_CustomersTransactions</registerRecords>
+  <registerRecords>AccumulationRegister.R5011B_PartnersAging</registerRecords>
+  <registerRecords>InformationRegister.T1002I_PartnerAdvances</registerRecords>
+  <registerRecords>InformationRegister.T1001I_PartnerTransactions</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -159,6 +163,21 @@
     <fillValue xsi:type="core:StringValue">
       <value></value>
     </fillValue>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="c1ae9f77-d958-44d8-86ac-dc17a333afa5">
+    <name>IgnoreAdvances</name>
+    <synonym>
+      <key>en</key>
+      <value>Ignore advances</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>

@@ -69,7 +69,6 @@ Procedure SetVisibilityAvailability() Export
 		ArrayTypes.Add(Type("DocumentRef.CashTransferOrder"));
 		ArrayTypes.Add(Type("DocumentRef.IncomingPaymentOrder"));
 		ArrayTypes.Add(Type("DocumentRef.OutgoingPaymentOrder"));
-		ArrayTypes.Add(Type("DocumentRef.ChequeBondTransactionItem"));
 		ThisObject.Items.PaymentListPlaningTransactionBasis.TypeRestriction = New TypeDescription(ArrayTypes);
 	EndIf;
 EndProcedure

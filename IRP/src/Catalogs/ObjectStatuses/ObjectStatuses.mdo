@@ -168,30 +168,6 @@
       </code>
       <isFolder>true</isFolder>
     </items>
-    <items id="57f69d45-7158-4ea7-b56f-124bf07bcd08">
-      <name>ChequeBondTransaction</name>
-      <description>Cheque bond transaction</description>
-      <code xsi:type="core:NumberValue">
-        <value>0</value>
-      </code>
-      <isFolder>true</isFolder>
-      <content id="cd0763f2-0f2f-4bb4-a9b9-5b957c7f6453">
-        <name>ChequeBondIncoming</name>
-        <description>Cheque bond incoming</description>
-        <code xsi:type="core:NumberValue">
-          <value>0</value>
-        </code>
-        <isFolder>true</isFolder>
-      </content>
-      <content id="43cae9dd-81ce-47e6-a490-558af2eb55c3">
-        <name>ChequeBondOutgoing</name>
-        <description>Cheque bond outgoing</description>
-        <code xsi:type="core:NumberValue">
-          <value>0</value>
-        </code>
-        <isFolder>true</isFolder>
-      </content>
-    </items>
     <items id="748479bd-dbd2-459d-ac53-92c750c6505d">
       <name>PhysicalCountByLocation</name>
       <description>Physical count by location</description>
@@ -247,96 +223,6 @@
     </synonym>
     <type>
       <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="fc7aa160-7127-4dd8-93c3-fc26aca72c2c">
-    <name>PostingAdvanced</name>
-    <synonym>
-      <key>en</key>
-      <value>Advanced</value>
-    </synonym>
-    <type>
-      <types>EnumRef.DocumentPostingTypes</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="01d56ddf-0a29-4e0c-8e1a-6ca933e72f76">
-    <name>PostingPartnerAccountTransactions</name>
-    <synonym>
-      <key>en</key>
-      <value>Partner account transactions</value>
-    </synonym>
-    <type>
-      <types>EnumRef.DocumentPostingTypes</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="6d5543dd-c949-43d1-889e-6e311b71ec39">
-    <name>PostingReconciliationStatement</name>
-    <synonym>
-      <key>en</key>
-      <value>Reconciliation statement</value>
-    </synonym>
-    <type>
-      <types>EnumRef.DocumentPostingTypes</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="873b5a60-9573-42ee-8b9a-d1c9219be063">
-    <name>PostingAccountBalance</name>
-    <synonym>
-      <key>en</key>
-      <value>Account balance</value>
-    </synonym>
-    <type>
-      <types>EnumRef.DocumentPostingTypes</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="f5474a62-d3ce-45e4-bd52-fec140f80e16">
-    <name>PostingPlaningCashTransactions</name>
-    <synonym>
-      <key>en</key>
-      <value>Planning cash transactions</value>
-    </synonym>
-    <type>
-      <types>EnumRef.DocumentPostingTypes</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="7bf501ae-779e-484c-90c1-6db7c9e33e5e">
-    <name>PostingChequeBondBalance</name>
-    <synonym>
-      <key>en</key>
-      <value>Posting cheque bond balance</value>
-    </synonym>
-    <type>
-      <types>EnumRef.DocumentPostingTypes</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

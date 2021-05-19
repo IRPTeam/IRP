@@ -3,6 +3,182 @@
 // 
 // -->Input tables:
 // 
+// CustomersTransactions**
+//	*Period
+//	*Company
+//	*Currency
+//	*Partner
+//	*LegalName
+//	*TransactionDocument
+//	*AdvanceBasis
+//	*Agreement
+//	*DocumentAmount
+//	*DueAsAdvance
+//
+//-------------------------------------------
+// Aging
+//  *Period
+//  *Company
+//  *Currency
+//  *Partner
+//  *Invoice
+//  *PaymentDate
+//  *Agreement
+//  *Amount
+//  
+// <--Output tables:
+//
+// DueAsAdvanceFromCustomers**
+//  *Period
+//  *Company
+//  *Currency
+//  *Partner
+//  *LegalName
+//  *TransactionDocument
+//  *Agreement
+//  *Amount
+//
+// OffsetOfAging
+//  *Period
+//  *Company
+//  *Currency
+//  *Partner
+//  *Invoice
+//  *PaymentDate
+//  *Agreement
+//  *Amount
+Procedure Customers_OnReturn(Parameters) Export
+	Query = New Query();
+	Query.TempTablesManager = Parameters.TempTablesManager;
+	Query.Text = 
+	"SELECT
+	|	Transactions.Period,
+	|	Transactions.Company,
+	|	Transactions.Currency,
+	|	Transactions.Partner,
+	|	Transactions.LegalName,
+	|	Transactions.TransactionDocument,
+	|	Transactions.AdvanceBasis,
+	|	Transactions.Agreement,
+	|	Transactions.DocumentAmount,
+	|	Transactions.DueAsAdvance
+	|INTO Transactions
+	|FROM
+	|	CustomersTransactions AS Transactions
+	|WHERE
+	|	Transactions.DueAsAdvance
+	|;
+	|
+	|
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	TransactionsBalance.Company,
+	|	TransactionsBalance.Currency,
+	|	TransactionsBalance.LegalName,
+	|	TransactionsBalance.Partner,
+	|	TransactionsBalance.Agreement,
+	|	SUM(TransactionsBalance.AmountBalance) - SUM(Transactions.DocumentAmount) AS Amount,
+	|	Transactions.Period,
+	|	Transactions.TransactionDocument,
+	|	Transactions.AdvanceBasis
+	|INTO TransactionsBalance
+	|FROM
+	|	AccumulationRegister.R2021B_CustomersTransactions.Balance(&Period, (Company, Currency, LegalName, Partner, Agreement,
+	|		CurrencyMovementType) IN
+	|		(SELECT
+	|			Transactions.Company,
+	|			Transactions.Currency,
+	|			Transactions.LegalName,
+	|			Transactions.Partner,
+	|			Transactions.Agreement,
+	|			VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
+	|		FROM
+	|			Transactions AS Transactions)) AS TransactionsBalance
+	|		INNER JOIN Transactions AS Transactions
+	|		ON TransactionsBalance.Company = Transactions.Company
+	|		AND TransactionsBalance.Partner = Transactions.Partner
+	|		AND TransactionsBalance.LegalName = Transactions.LegalName
+	|		AND TransactionsBalance.Agreement = Transactions.Agreement
+	|		AND TransactionsBalance.Currency = Transactions.Currency
+	|		AND Transactions.DueAsAdvance
+	|GROUP BY
+	|	TransactionsBalance.Company,
+	|	TransactionsBalance.Currency,
+	|	TransactionsBalance.LegalName,
+	|	TransactionsBalance.Partner,
+	|	TransactionsBalance.Agreement,
+	|	Transactions.Period,
+	|	Transactions.TransactionDocument,
+	|	Transactions.AdvanceBasis
+	|;
+	|
+	|
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	TransactionsBalance.Period,
+	|	TransactionsBalance.Company,
+	|	TransactionsBalance.Partner,
+	|	TransactionsBalance.LegalName,
+	|	TransactionsBalance.Agreement,
+	|	TransactionsBalance.Currency,
+	|	TransactionsBalance.TransactionDocument,
+	|	TransactionsBalance.AdvanceBasis,
+	|	TransactionsBalance.Amount
+	|INTO DueAsAdvanceFromCustomers
+	|FROM
+	|	TransactionsBalance AS TransactionsBalance
+	|WHERE
+	|	TransactionsBalance.Amount < 0";
+	Query.SetParameter("Period", New Boundary(Parameters.PointInTime, BoundaryType.Excluding));
+	Query.Execute();
+EndProcedure
+
+Procedure Customers_OnReturn_Unposting(Parameters) Export
+	Query = New Query();
+	Query.TempTablesManager = Parameters.TempTablesManager;
+	Query.Text = 
+	"SELECT
+	|	Table.Period,
+	|	Table.Company,
+	|	Table.Currency,
+	|	Table.Partner,
+	|	Table.LegalName,
+	|	Table.Basis AS TransactionDocument,
+	|	Table.Basis AS AdvancesDocument,
+	|	Table.Basis AS AdvanceBasis,
+	|	Table.Agreement,
+	|	Table.Amount
+	|INTO DueAsAdvanceFromCustomers
+	|FROM
+	|	AccumulationRegister.R2021B_CustomersTransactions AS Table
+	|WHERE
+	|	FALSE
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	Table.Period,
+	|	Table.Company,
+	|	Table.Currency,
+	|	Table.Partner,
+	|	Table.Invoice,
+	|	Table.PaymentDate,
+	|	Table.Agreement,
+	|	Table.Amount
+	|INTO OffsetOfAging
+	|FROM
+	|	AccumulationRegister.R5011B_PartnersAging AS Table
+	|WHERE
+	|	FALSE";
+	Query.Execute();	
+EndProcedure	
+
+// Parameters:
+// 
+// -->Input tables:
+// 
 // CustomersTransactions
 //	*Period
 //	*Company
@@ -12,6 +188,7 @@
 //	*TransactionDocument
 //	*Agreement
 //	*DocumentAmount
+//	*IgnoreAdvances
 //
 // Aging
 //  *Period
@@ -46,8 +223,11 @@
 //  *Agreement
 //  *Amount
 Procedure Customers_OnTransaction(Parameters) Export	
-	AdvancesOnTransaction(Parameters, "R2020B_AdvancesFromCustomers" , "CustomersTransactions");
+	AdvancesOnTransaction(Parameters, "R2020B_AdvancesFromCustomers" , "CustomersTransactions", "OffsetOfAdvanceFromCustomers");
 
+	// temporarily disabled 
+	Return;
+	
 #Region Aging
 	
 	Query = New Query();
@@ -63,17 +243,17 @@ Procedure Customers_OnTransaction(Parameters) Export
 	|	Aging.PaymentDate,
 	|	Aging.Currency,
 	|	Aging.Amount AS DueAmount,
-	|	OffsetOfAdvance.Amount AS Amount_OffsetOfAdvance,
-	|	OffsetOfAdvance.AdvancesDocument,
+	|	OffsetOfAdvanceFromCustomers.Amount AS Amount_OffsetOfAdvance,
+	|	OffsetOfAdvanceFromCustomers.AdvancesDocument,
 	|	0 AS Amount
 	|FROM
 	|	Aging AS Aging
-	|		INNER JOIN OffsetOfAdvance AS OffsetOfAdvance
-	|		ON Aging.Company = OffsetOfAdvance.Company
-	|		AND Aging.Partner = OffsetOfAdvance.Partner
-	|		AND Aging.Agreement = OffsetOfAdvance.Agreement
-	|		AND Aging.Invoice = OffsetOfAdvance.TransactionDocument
-	|		AND Aging.Currency = OffsetOfAdvance.Currency
+	|		INNER JOIN OffsetOfAdvanceFromCustomers AS OffsetOfAdvanceFromCustomers
+	|		ON Aging.Company = OffsetOfAdvanceFromCustomers.Company
+	|		AND Aging.Partner = OffsetOfAdvanceFromCustomers.Partner
+	|		AND Aging.Agreement = OffsetOfAdvanceFromCustomers.Agreement
+	|		AND Aging.Invoice = OffsetOfAdvanceFromCustomers.TransactionDocument
+	|		AND Aging.Currency = OffsetOfAdvanceFromCustomers.Currency
 	|ORDER BY
 	|	PaymentDate";
 	
@@ -129,7 +309,7 @@ Procedure Customers_OnTransaction_Unposting(Parameters) Export
 	|	Table.Basis AS AdvancesDocument,
 	|	Table.Agreement,
 	|	Table.Amount
-	|INTO OffsetOfAdvance
+	|INTO OffsetOfAdvanceFromCustomers
 	|FROM
 	|	AccumulationRegister.R2021B_CustomersTransactions AS Table
 	|WHERE
@@ -182,7 +362,7 @@ EndProcedure
 //  *Agreement
 //  *Amount
 Procedure Vendors_OnTransaction(Parameters) Export
-	AdvancesOnTransaction(Parameters, "R1020B_AdvancesToVendors", "VendorsTransactions");
+	AdvancesOnTransaction(Parameters, "R1020B_AdvancesToVendors", "VendorsTransactions", "OffsetOfAdvanceToVendors");
 EndProcedure
 
 Procedure Vendors_OnTransaction_Unposting(Parameters) Export
@@ -207,15 +387,15 @@ Procedure Vendors_OnTransaction_Unposting(Parameters) Export
 	Query.Execute();	
 EndProcedure	
 
-Procedure AdvancesOnTransaction(Parameters, RegisterName, TransactionsTableName)
+Procedure AdvancesOnTransaction(Parameters, RegisterName, TransactionsTableName, OffsetOfAdvanceTableName)
 	Query = New Query();
 	Query.TempTablesManager = Parameters.TempTablesManager;
 	Query.Text = StrTemplate(GetQueryTextAdvancesOnTransaction(), RegisterName, TransactionsTableName);
-	Query.SetParameter("Period", New Boundary(Parameters.PointInTime, BoundaryType.Excluding));
+	Query.SetParameter("Period", New Boundary(Parameters.RecorderPointInTime, BoundaryType.Excluding));
 	QueryResult = Query.Execute();	
 	AdvancesTable = QueryResult.Unload();
 	OffsetOfAdvance = DistributeAdvancesTableOnTransaction(AdvancesTable);
-	PutAdvancesTableToTempTables(Query, OffsetOfAdvance);
+	PutAdvancesTableToTempTables(Query, OffsetOfAdvance, OffsetOfAdvanceTableName);
 EndProcedure
 
 Function GetQueryTextAdvancesOnTransaction()
@@ -250,6 +430,8 @@ Function GetQueryTextAdvancesOnTransaction()
 		|		AND Advances.LegalName = Transactions.LegalName
 		|		AND Advances.Currency = Transactions.Currency
 		|		AND Advances.CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
+		|WHERE
+		|	NOT Transactions.IgnoreAdvances
 		|GROUP BY
 		|	Transactions.Period,
 		|	Transactions.Company,
@@ -320,6 +502,7 @@ EndFunction
 //  *DocumentAmount
 //  *ReceiptDocument
 //  *Key
+//  *IgnoreAdvances
 //	
 // CustomersTransactions
 //  *Period
@@ -356,7 +539,10 @@ EndFunction
 //  *Amount
 Procedure Customers_OnMoneyMovements(Parameters) Export
 		
-AdvancesOnMoneyMovements(Parameters, "R2021B_CustomersTransactions", "AdvancesFromCustomers", "CustomersTransactions");
+AdvancesOnMoneyMovements(Parameters, "R2021B_CustomersTransactions", "AdvancesFromCustomers", "CustomersTransactions", "OffsetOfAdvanceFromCustomers");
+	
+	// temporarily disabled 
+	Return;
 		
 #Region Aging
 
@@ -365,14 +551,14 @@ AdvancesOnMoneyMovements(Parameters, "R2021B_CustomersTransactions", "AdvancesFr
 
 	Query.Text = 
 	"SELECT
-	|	OffsetOfAdvance.Company,
-	|	OffsetOfAdvance.Partner,
-	|	OffsetOfAdvance.Agreement,
-	|	OffsetOfAdvance.TransactionDocument AS Invoice,
-	|	OffsetOfAdvance.Currency
+	|	OffsetOfAdvanceFromCustomers.Company,
+	|	OffsetOfAdvanceFromCustomers.Partner,
+	|	OffsetOfAdvanceFromCustomers.Agreement,
+	|	OffsetOfAdvanceFromCustomers.TransactionDocument AS Invoice,
+	|	OffsetOfAdvanceFromCustomers.Currency
 	|INTO R5011B_PartnersAging_OffsetOfAging_Lock
 	|FROM
-	|	OffsetOfAdvance AS OffsetOfAdvance
+	|	OffsetOfAdvanceFromCustomers AS OffsetOfAdvanceFromCustomers
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
@@ -392,16 +578,16 @@ AdvancesOnMoneyMovements(Parameters, "R2021B_CustomersTransactions", "AdvancesFr
 	|UNION ALL
 	|
 	|SELECT
-	|	OffsetOfAdvance.Period,
-	|	OffsetOfAdvance.Company,
-	|	OffsetOfAdvance.TransactionDocument,
-	|	OffsetOfAdvance.Partner,
-	|	OffsetOfAdvance.LegalName,
-	|	OffsetOfAdvance.Agreement,
-	|	OffsetOfAdvance.Currency,
-	|	OffsetOfAdvance.Amount
+	|	OffsetOfAdvanceFromCustomers.Period,
+	|	OffsetOfAdvanceFromCustomers.Company,
+	|	OffsetOfAdvanceFromCustomers.TransactionDocument,
+	|	OffsetOfAdvanceFromCustomers.Partner,
+	|	OffsetOfAdvanceFromCustomers.LegalName,
+	|	OffsetOfAdvanceFromCustomers.Agreement,
+	|	OffsetOfAdvanceFromCustomers.Currency,
+	|	OffsetOfAdvanceFromCustomers.Amount
 	|FROM
-	|	OffsetOfAdvance AS OffsetOfAdvance
+	|	OffsetOfAdvanceFromCustomers AS OffsetOfAdvanceFromCustomers
 	|;
 	|
 	|
@@ -563,14 +749,14 @@ EndProcedure
 //  *Agreement
 //  *Amount
 Procedure Vendors_OnMoneyMovements(Parameters) Export
-	AdvancesOnMoneyMovements(Parameters, "R1021B_VendorsTransactions", "AdvancesToVendors", "VendorsTransactions");
+	AdvancesOnMoneyMovements(Parameters, "R1021B_VendorsTransactions", "AdvancesToVendors", "VendorsTransactions", "OffsetOfAdvanceToVendors");
 EndProcedure
 
-Procedure AdvancesOnMoneyMovements(Parameters, RegisterName, AdvancesTableName, TransactionsTableName)
+Procedure AdvancesOnMoneyMovements(Parameters, RegisterName, AdvancesTableName, TransactionsTableName, OffsetOfAdvanceTableName)
 	Query = New Query();
 	Query.TempTablesManager = Parameters.TempTablesManager;
 	Query.Text = StrTemplate(GetQueryTextAdvancesOnMoneyMovements(), RegisterName, AdvancesTableName);
-	Query.SetParameter("Period", New Boundary(Parameters.PointInTime, BoundaryType.Excluding));
+	Query.SetParameter("Period", New Boundary(Parameters.RecorderPointInTime, BoundaryType.Excluding));
 		
 	QueryResult = Query.Execute();
 	TransactionsBalanceTable = QueryResult.Unload();
@@ -674,6 +860,9 @@ Procedure AdvancesOnMoneyMovements(Parameters, RegisterName, AdvancesTableName, 
 	AgingBalanceResult = Query.Execute();
 	AgingBalanceTable = AgingBalanceResult.Unload();
 		
+	Query.Text = "DROP TransactionsBalanceTable";
+	Query.Execute();	
+		
 	FilterFields = 
 		"Period,
 		|Company,
@@ -692,6 +881,11 @@ Procedure AdvancesOnMoneyMovements(Parameters, RegisterName, AdvancesTableName, 
 		If NeedWriteOff = 0 Then
 			Continue;
 		EndIf;
+		
+		If ValueIsFilled(Row.TransactionDocument) And Row.TransactionDocument.IgnoreAdvances Then
+			Continue;
+		EndIf;
+		
 		Filter = New Structure(FilterFields);
 		FillPropertyValues(Filter, Row);
 		ArrayOfRows = AgingBalanceTable.FindRows(Filter);
@@ -710,7 +904,7 @@ Procedure AdvancesOnMoneyMovements(Parameters, RegisterName, AdvancesTableName, 
 	EndDo;
 	
 	OffsetOfAdvance = DistributeAgingTableOnMoneyMovement(AgingBalanceTable);
-	PutAdvancesTableToTempTables(Query, OffsetOfAdvance);	
+	PutAdvancesTableToTempTables(Query, OffsetOfAdvance, OffsetOfAdvanceTableName);	
 EndProcedure	
 
 Function GetQueryTextAdvancesOnMoneyMovements()
@@ -788,6 +982,11 @@ Function DistributeAgingTableOnMoneyMovement(AgingBalanceTable)
 			If Not ItemOfArray.BalanceAmount > 0 Then
 				Continue;
 			EndIf;
+			
+			If ValueIsFilled(ItemOfArray.TransactionDocument) And ItemOfArray.TransactionDocument.IgnoreAdvances Then
+				Continue;
+			EndIf;
+			
 			CanWriteOff = Min(ItemOfArray.BalanceAmount, NeedWriteOff);
 			NeedWriteOff = NeedWriteOff - CanWriteOff;
 			ItemOfArray.BalanceAmount = ItemOfArray.BalanceAmount - CanWriteOff;
@@ -807,7 +1006,7 @@ Function DistributeAgingTableOnMoneyMovement(AgingBalanceTable)
 	Return OffsetOfAdvance;
 EndFunction
 
-Procedure PutAdvancesTableToTempTables(Query, OffsetOfAdvance)
+Procedure PutAdvancesTableToTempTables(Query, OffsetOfAdvance, OffsetOfAdvanceTableName)
 	Query.Text = 
 	"SELECT
 	|	OffsetOfAdvance.Period,
@@ -820,9 +1019,10 @@ Procedure PutAdvancesTableToTempTables(Query, OffsetOfAdvance)
 	|	OffsetOfAdvance.Agreement,
 	|	OffsetOfAdvance.Amount AS Amount,
 	|	OffsetOfAdvance.Key
-	|INTO OffsetOfAdvance
+	|INTO %1
 	|FROM
 	|	&OffsetOfAdvance AS OffsetOfAdvance";
+	Query.Text = StrTemplate(Query.Text, OffsetOfAdvanceTableName);
 	Query.SetParameter("OffsetOfAdvance", OffsetOfAdvance);
 	Query.Execute();
 EndProcedure	
@@ -844,3 +1044,36 @@ Procedure PutAgingTableToTempTables(Query, OffsetOfAging)
 	Query.SetParameter("OffsetOfAging", OffsetOfAging);
 	Query.Execute();
 EndProcedure
+
+Procedure CheckCreditLimit(Ref, Cancel) Export
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	R2021B_CustomersTransactionsBalance.AmountBalance
+	|FROM
+	|	AccumulationRegister.R2021B_CustomersTransactions.Balance(&Period,
+	|		CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
+	|	AND Partner = &Partner
+	|	AND Agreement = &Agreement) AS R2021B_CustomersTransactionsBalance";
+	Query.SetParameter("Period"    , New Boundary(Ref.PointInTime(), BoundaryType.Excluding));
+	Query.SetParameter("Partner"   , Ref.Partner);
+	Query.SetParameter("Agreement" , Ref.Agreement);
+	
+	QuerySelection = Query.Execute().Select();
+	If QuerySelection.Next() Then
+		
+		CreditLimitAmount = Ref.Agreement.CreditLimitAmount;
+		
+		If (QuerySelection.AmountBalance + Ref.DocumentAmount)  > CreditLimitAmount Then
+			Cancel = True;
+			Message = StrTemplate(R().Error_085, 
+				CreditLimitAmount, 
+				CreditLimitAmount - QuerySelection.AmountBalance, 
+				Ref.DocumentAmount,
+				(QuerySelection.AmountBalance + Ref.DocumentAmount) - CreditLimitAmount,
+				Ref.Currency);
+			CommonFunctionsClientServer.ShowUsersMessage(Message);
+		EndIf;
+	EndIf;
+EndProcedure
+

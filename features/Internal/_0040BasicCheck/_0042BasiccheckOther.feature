@@ -54,13 +54,7 @@ Scenario: Open information register form "BundleContents"
 
 
 
-	
-Scenario: Open information register form "ChequeBondStatuses" 
 
-	Given I open "ChequeBondStatuses" information register default form 
-	If the warning is displayed then
-		Then I raise "Failed to open information register form  ChequeBondStatuses" exception
-	And I close current window
 
 
 	
@@ -212,51 +206,8 @@ Scenario: Open information register form "BusinessUnitBankTerms"
 
 
 	
-Scenario: Open list form "AccountsStatement" 
 
-	Given I open "AccountsStatement" accumulation register list form 
-	If the warning is displayed then
-		Then I raise "Failed to open information register form AccountsStatement" exception
-	And I close current window
 
-Scenario: Open object form "AccountsStatement"
-
-	Given I open "AccountsStatement" accumulation register default form 
-	If the warning is displayed then
-		Then I raise "Failed to open information register form AccountsStatement" exception
-	And I close current window
-
-	
-Scenario: Open list form "AdvanceFromCustomers" 
-
-	Given I open "AdvanceFromCustomers" accumulation register list form 
-	If the warning is displayed then
-		Then I raise "Failed to open information register form AdvanceFromCustomers" exception
-	And I close current window
-
-Scenario: Open object form "AdvanceFromCustomers"
-
-	Given I open "AdvanceFromCustomers" accumulation register default form
-	If the warning is displayed then
-		Then I raise "Failed to open information register form AdvanceFromCustomers" exception
-	And I close current window
-
-	
-Scenario: Open list form "AdvanceToSuppliers" 
-
-	Given I open "AdvanceToSuppliers" accumulation register list form 
-	If the warning is displayed then
-		Then I raise "Failed to open information register form AdvanceToSuppliers" exception
-	And I close current window
-
-Scenario: Open object form "AdvanceToSuppliers"
-
-	Given I open "AdvanceToSuppliers" accumulation register default form
-	If the warning is displayed then
-		Then I raise "Failed to open information register form AdvanceToSuppliers" exception
-	And I close current window
-
-	
 
 
 	
@@ -274,20 +225,7 @@ Scenario: Open object form "CashInTransit"
 		Then I raise "Failed to open information register form CashInTransit" exception
 	And I close current window
 
-	
-Scenario: Open list form "ChequeBondBalance" 
 
-	Given I open "ChequeBondBalance" accumulation register list form 
-	If the warning is displayed then
-		Then I raise "Failed to open information register form ChequeBondBalance" exception
-	And I close current window
-
-Scenario: Open object form "ChequeBondBalance"
-
-	Given I open "ChequeBondBalance" accumulation register default form
-	If the warning is displayed then
-		Then I raise "Failed to open information register form ChequeBondBalance" exception
-	And I close current window
 
 	
 Scenario: Open list form "ExpensesTurnovers" 
@@ -340,35 +278,6 @@ Scenario: Open object form "OrderProcurement"
 	And I close current window
 
 	
-	
-Scenario: Open list form "PartnerApTransactions" 
-
-	Given I open "PartnerApTransactions" accumulation register list form 
-	If the warning is displayed then
-		Then I raise "Failed to open information register form PartnerApTransactions" exception
-	And I close current window
-
-Scenario: Open object form "PartnerApTransactions"
-
-	Given I open "PartnerApTransactions" accumulation register default form
-	If the warning is displayed then
-		Then I raise "Failed to open information register form PartnerApTransactions" exception
-	And I close current window
-
-	
-Scenario: Open list form "PartnerArTransactions" 
-
-	Given I open "PartnerArTransactions" accumulation register list form
-	If the warning is displayed then
-		Then I raise "Failed to open information register form PartnerArTransactions" exception
-	And I close current window
-
-Scenario: Open object form "PartnerArTransactions"
-
-	Given I open "PartnerArTransactions" accumulation register default form
-	If the warning is displayed then
-		Then I raise "Failed to open information register form PartnerArTransactions" exception
-	And I close current window
 
 	
 Scenario: Open list form "PlaningCashTransactions" 
@@ -801,12 +710,7 @@ Scenario: Open object form "R3015B_CashAdvance"
 		Then I raise "Failed to open information register form R3015B_CashAdvance" exception
 	And I close current window
 
-Scenario: Open object form "R3016B_ChequeAndBonds"
 
-	Given I open "R3016B_ChequeAndBonds" accumulation register default form
-	If the warning is displayed then
-		Then I raise "Failed to open information register form R3016B_ChequeAndBonds" exception
-	And I close current window
 
 Scenario: Open object form "R3021B_CashInTransitIncoming"
 
@@ -1012,10 +916,10 @@ Scenario: Open object form "Analise document movements"
 	And in the table "Info" I click "Fill movements" button
 	Then system warning window does not appear
 	And "Info" table contains lines
-		| 'Document'    | 'Register'                       | 'Recorder' | 'Conditions'                                                       | 'Query'                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | 'Parameters'        | 'Receipt' | 'Expense' |
-		| 'BankPayment' | 'R1021B_VendorsTransactions'     | 'Yes'      | 'Query Expense:\nQuery Expense:'                                   | 'SELECT\n    VALUE(AccumulationRecordType.Expense) AS RecordType,\n    VendorsTransactions.Period AS Period,\n    VendorsTransactions.Company AS Company,\n    VendorsTransactions.Partner AS Partner,\n    VendorsTransactions.LegalName AS LegalName,\n    VendorsTransactions.Currency AS Currency,\n    VendorsTransactions.Agreement AS Agreement,\n    VendorsTransactions.TransactionDocument AS Basis,\n    VendorsTransactions.Key AS Key,\n    VendorsTransactions.Amount AS Amount\nINTO R1021B_VendorsTransactions\nFROM\n    VendorsTransactions AS VendorsTransactions\n\nUNION ALL\n\nSELECT\n    VALUE(AccumulationRecordType.Expense),\n    OffsetOfAdvance.Period,\n    OffsetOfAdvance.Company,\n    OffsetOfAdvance.Partner,\n    OffsetOfAdvance.LegalName,\n    OffsetOfAdvance.Currency,\n    OffsetOfAdvance.Agreement,\n    OffsetOfAdvance.TransactionDocument,\n    OffsetOfAdvance.Key,\n    SUM(OffsetOfAdvance.Amount)\nFROM\n    OffsetOfAdvance AS OffsetOfAdvance\n\nGROUP BY\n    OffsetOfAdvance.Period,\n    OffsetOfAdvance.Company,\n    OffsetOfAdvance.Partner,\n    OffsetOfAdvance.LegalName,\n    OffsetOfAdvance.Currency,\n    OffsetOfAdvance.Agreement,\n    OffsetOfAdvance.TransactionDocument,\n    OffsetOfAdvance.Key' | 'Ref: Bank payment' | 'No'      | 'Yes'     |
-		| 'BankPayment' | 'R5010B_ReconciliationStatement' | 'Yes'      | 'NOT PaymentList.IsMoneyTransfer\nNOT PaymentList.IsMoneyExchange' | 'SELECT\n    VALUE(AccumulationRecordType.Receipt) AS RecordType,\n    PaymentList.Company AS Company,\n    PaymentList.Payee AS LegalName,\n    PaymentList.Currency AS Currency,\n    SUM(PaymentList.Amount) AS Amount,\n    PaymentList.Period AS Period\nINTO R5010B_ReconciliationStatement\nFROM\n    PaymentList AS PaymentList\nWHERE\n    NOT PaymentList.IsMoneyTransfer\n    AND NOT PaymentList.IsMoneyExchange\n\nGROUP BY\n    PaymentList.Company,\n    PaymentList.Payee,\n    PaymentList.Currency,\n    PaymentList.Period'                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             | 'Ref: Bank payment' | 'Yes'     | 'No'      |
-		| 'BankPayment' | 'R1020B_AdvancesToVendors'       | 'Yes'      | 'Query Receipt:\nQuery Expense:'                                   | 'SELECT\n    VALUE(AccumulationRecordType.Receipt) AS RecordType,\n    AdvancesToVendors.Period AS Period,\n    AdvancesToVendors.Company AS Company,\n    AdvancesToVendors.Partner AS Partner,\n    AdvancesToVendors.LegalName AS LegalName,\n    AdvancesToVendors.Currency AS Currency,\n    AdvancesToVendors.AdvancesDocument AS Basis,\n    AdvancesToVendors.DocumentAmount AS Amount,\n    AdvancesToVendors.Key AS Key\nINTO R1020B_AdvancesToVendors\nFROM\n    AdvancesToVendors AS AdvancesToVendors\n\nUNION ALL\n\nSELECT\n    VALUE(AccumulationRecordType.Expense),\n    OffsetOfAdvance.Period,\n    OffsetOfAdvance.Company,\n    OffsetOfAdvance.Partner,\n    OffsetOfAdvance.LegalName,\n    OffsetOfAdvance.Currency,\n    OffsetOfAdvance.AdvancesDocument,\n    SUM(OffsetOfAdvance.Amount),\n    OffsetOfAdvance.Key\nFROM\n    OffsetOfAdvance AS OffsetOfAdvance\n\nGROUP BY\n    OffsetOfAdvance.Period,\n    OffsetOfAdvance.Company,\n    OffsetOfAdvance.Partner,\n    OffsetOfAdvance.LegalName,\n    OffsetOfAdvance.Currency,\n    OffsetOfAdvance.AdvancesDocument,\n    OffsetOfAdvance.Key'                                                                                                                                         | 'Ref: Bank payment' | 'Yes'     | 'Yes'     |		
+		| 'Document'    | 'Register'                       | 
+		| 'BankPayment' | 'R1021B_VendorsTransactions'     | 
+		| 'BankPayment' | 'R5010B_ReconciliationStatement' | 
+		| 'BankPayment' | 'R1020B_AdvancesToVendors'       | 
 	And I close all client application windows
 
 Scenario: Open object form "All registers movement"

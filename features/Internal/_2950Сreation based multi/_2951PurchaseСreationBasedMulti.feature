@@ -2100,29 +2100,23 @@ Scenario: _090323 create one Purchase order - several Goods receipt - one Purcha
 		And I click the button named "FormPost"
 		And I delete "$$NumberPurchaseInvoice090323$$" variable
 		And I delete "$$PurchaseInvoice090323$$" variable
+		And I delete "$$DatePurchaseInvoice090323$$" variable
 		And I save the value of "Number" field as "$$NumberPurchaseInvoice090323$$"
+		And I save the value of "Date" field as "$$DatePurchaseInvoice090323$$"
 		And I save the window as "$$PurchaseInvoice090323$$"
 	* Check movements
-		And I click "Registrations report" button
-	
-		And I select "Accounts statement" exact value from "Register" drop-down list
+		And I click "Registrations report" button		
+		And I select "R1021 Vendors transactions" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Accounts statement"' | ''            | ''       | ''                     | ''               | ''                       | ''               | ''             | ''          | ''                  | ''                          | ''         | '' | '' |
-		| ''                               | 'Record type' | 'Period' | 'Resources'            | ''               | ''                       | ''               | 'Dimensions'   | ''          | ''                  | ''                          | ''         | '' | '' |
-		| ''                               | ''            | ''       | 'Advance to suppliers' | 'Transaction AP' | 'Advance from customers' | 'Transaction AR' | 'Company'      | 'Partner'   | 'Legal name'        | 'Basis document'            | 'Currency' | '' | '' |
-		| ''                               | 'Receipt'     | '*'      | ''                     | '14 500'         | ''                       | ''               | 'Main Company' | 'Ferron BP' | 'Company Ferron BP' | '$$PurchaseInvoice090323$$' | 'TRY'      | '' | '' |
-	
-	
-		And I select "Partner AP transactions" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Partner AP transactions"' | ''            | ''       | ''          | ''             | ''                          | ''          | ''                  | ''                   | ''         | ''                             | ''                     | '' | '' |
-		| ''                                    | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''                          | ''          | ''                  | ''                   | ''         | ''                             | 'Attributes'           | '' | '' |
-		| ''                                    | ''            | ''       | 'Amount'    | 'Company'      | 'Basis document'            | 'Partner'   | 'Legal name'        | 'Partner term'       | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' | '' | '' |
-		| ''                                    | 'Receipt'     | '*'      | '2 482,4'   | 'Main Company' | '$$PurchaseInvoice090323$$' | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'USD'      | 'Reporting currency'           | 'No'                   | '' | '' |
-		| ''                                    | 'Receipt'     | '*'      | '14 500'    | 'Main Company' | '$$PurchaseInvoice090323$$' | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'TRY'      | 'Local currency'               | 'No'                   | '' | '' |
-		| ''                                    | 'Receipt'     | '*'      | '14 500'    | 'Main Company' | '$$PurchaseInvoice090323$$' | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'TRY'      | 'TRY'                          | 'No'                   | '' | '' |
-		| ''                                    | 'Receipt'     | '*'      | '14 500'    | 'Main Company' | '$$PurchaseInvoice090323$$' | 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | 'TRY'      | 'en description is empty'      | 'No'                   | '' | '' |
-	
+			| '$$PurchaseInvoice090323$$'              | ''            | ''                              | ''          | ''             | ''                             | ''         | ''                  | ''          | ''                   | ''                          | ''                     | ''                         |
+			| 'Document registrations records'         | ''            | ''                              | ''          | ''             | ''                             | ''         | ''                  | ''          | ''                   | ''                          | ''                     | ''                         |
+			| 'Register  "R1021 Vendors transactions"' | ''            | ''                              | ''          | ''             | ''                             | ''         | ''                  | ''          | ''                   | ''                          | ''                     | ''                         |
+			| ''                                       | 'Record type' | 'Period'                        | 'Resources' | 'Dimensions'   | ''                             | ''         | ''                  | ''          | ''                   | ''                          | 'Attributes'           | ''                         |
+			| ''                                       | ''            | ''                              | 'Amount'    | 'Company'      | 'Multi currency movement type' | 'Currency' | 'Legal name'        | 'Partner'   | 'Agreement'          | 'Basis'                     | 'Deferred calculation' | 'Vendors advances closing' |
+			| ''                                       | 'Receipt'     | '$$DatePurchaseInvoice090323$$' | '2 482,4'   | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Company Ferron BP' | 'Ferron BP' | 'Vendor Ferron, TRY' | '$$PurchaseInvoice090323$$' | 'No'                   | ''                         |
+			| ''                                       | 'Receipt'     | '$$DatePurchaseInvoice090323$$' | '14 500'    | 'Main Company' | 'Local currency'               | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Vendor Ferron, TRY' | '$$PurchaseInvoice090323$$' | 'No'                   | ''                         |
+			| ''                                       | 'Receipt'     | '$$DatePurchaseInvoice090323$$' | '14 500'    | 'Main Company' | 'TRY'                          | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Vendor Ferron, TRY' | '$$PurchaseInvoice090323$$' | 'No'                   | ''                         |
+			| ''                                       | 'Receipt'     | '$$DatePurchaseInvoice090323$$' | '14 500'    | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Vendor Ferron, TRY' | '$$PurchaseInvoice090323$$' | 'No'                   | ''                         |
+
 		And I close all client application windows

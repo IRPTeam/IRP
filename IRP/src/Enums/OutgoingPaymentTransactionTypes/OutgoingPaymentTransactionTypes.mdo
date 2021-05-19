@@ -33,4 +33,11 @@
       <value>Cash transfer order</value>
     </synonym>
   </enumValues>
+  <enumValues uuid="cbad643a-3483-4601-a5cf-32596d724f30">
+    <name>ReturnToCustomer</name>
+    <synonym>
+      <key>en</key>
+      <value>Return to customer</value>
+    </synonym>
+  </enumValues>
 </mdclass:Enum>

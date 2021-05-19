@@ -116,6 +116,8 @@ Scenario: 950000 preparation (role Full access only read)
 	When Create document StockAdjustmentAsSurplus objects
 	When Create document StockAdjustmentAsWriteOff objects
 	When Create document Unbundling objects
+	When Create document VendorsAdvancesClosing objects
+	When Create document CustomersAdvancesClosing objects
 	When add test extension
 	* Set password for Sofia Borisova (Manager 3)
 			Given I open hyperlink "e1cib/list/Catalog.Users"
@@ -908,6 +910,14 @@ Scenario: 950063 check role Full access only read (Internal supply request)
 			Then I raise "Failed to open" exception
 		And I close all client application windows
 
+Scenario: 950065 check role Full access only read (Vendors advances closing)
+		And I close all client application windows
+		Given I open hyperlink 'e1cib/list/Document.VendorsAdvancesClosing'	
+		And I select current line in "List" table
+		If the warning is displayed then 
+			Then I raise "Failed to open" exception
+		And I close all client application windows
+
 # Scenario: 950064 check role Full access only read (Invoice matches)
 # 		And I close all client application windows
 # 		And In the command interface I select "Treasury" "Invoice matches"	
@@ -1063,6 +1073,15 @@ Scenario: 950081 check role Full access only read (Special offers)
 		If the warning is displayed then 
 			Then I raise "Failed to open" exception
 		And I close all client application windows	
+
+Scenario: 950082 check role Full access only read (Customers advances closing)
+		And I close all client application windows
+		Given I open hyperlink 'e1cib/list/Document.CustomersAdvancesClosing'	
+		And I select current line in "List" table
+		If the warning is displayed then 
+			Then I raise "Failed to open" exception
+		And I close all client application windows
+
 
 Scenario: _999999 close TestClient session
 		And I close TestClient session

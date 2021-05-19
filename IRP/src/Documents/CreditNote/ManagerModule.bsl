@@ -149,7 +149,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R1021B_VendorsTransactions());
 	QueryArray.Add(R1020B_AdvancesToVendors());
 	QueryArray.Add(R2020B_AdvancesFromCustomers());
-	QueryArray.Add(R5011B_PartnersAging());
+	QueryArray.Add(R5011B_CustomersAging());
 	Return QueryArray;
 EndFunction
 
@@ -238,12 +238,12 @@ Function R2020B_AdvancesFromCustomers()
 		|	FALSE";
 EndFunction
 
-Function R5011B_PartnersAging()
+Function R5011B_CustomersAging()
 	Return
 	"SELECT
 	|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
 	|	*
-	|INTO R5011B_PartnersAging
+	|INTO R5011B_CustomersAging
 	|FROM
 	|	Transactions AS Transactions
 	|WHERE

@@ -440,7 +440,7 @@
     <mdObject>AccumulationRegister.ShipmentOrders</mdObject>
   </content>
   <content>
-    <mdObject>AccumulationRegister.R5011B_PartnersAging</mdObject>
+    <mdObject>AccumulationRegister.R5011B_CustomersAging</mdObject>
   </content>
   <content>
     <mdObject>Catalog.ExpenseAndRevenueTypes</mdObject>

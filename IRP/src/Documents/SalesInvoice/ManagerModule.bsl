@@ -717,7 +717,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R4050B_StockInventory());
 	QueryArray.Add(R2021B_CustomersTransactions());//**1
 	QueryArray.Add(R2020B_AdvancesFromCustomers());//**2
-	QueryArray.Add(R5011B_PartnersAging());//**3
+	QueryArray.Add(R5011B_CustomersAging());//**3
 	QueryArray.Add(R5010B_ReconciliationStatement());
 	QueryArray.Add(T1001I_PartnerTransactions());
 	Return QueryArray;
@@ -1318,7 +1318,7 @@ Function T1001I_PartnerTransactions()
 		|	ItemList.Period";
 EndFunction		
 
-Function R5011B_PartnersAging()
+Function R5011B_CustomersAging()
 	Return 
 		"SELECT
 		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
@@ -1330,7 +1330,7 @@ Function R5011B_PartnersAging()
 		|	PaymentTerms.Ref AS Invoice,
 		|	PaymentTerms.Date AS PaymentDate,
 		|	SUM(PaymentTerms.Amount) AS Amount
-		|INTO R5011B_PartnersAging
+		|INTO R5011B_CustomersAging
 		|FROM
 		|	Document.SalesInvoice.PaymentTerms AS PaymentTerms
 		|WHERE

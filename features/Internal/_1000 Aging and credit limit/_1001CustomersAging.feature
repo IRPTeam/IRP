@@ -195,12 +195,12 @@ Scenario: _1000003 create Sales invoice and check Aging tab
 				| ''                                        | 'Receipt'     | '$$DateSalesInvoice0240162$$' | '550'       | 'Main Company' | 'Local currency'               | 'TRY'      | 'Company Kalipso' | 'Kalipso' | 'Basic Partner terms, without VAT' | '$$SalesInvoice0240162$$' | 'No'                   | ''                |
 				| ''                                        | 'Receipt'     | '$$DateSalesInvoice0240162$$' | '550'       | 'Main Company' | 'TRY'                          | 'TRY'      | 'Company Kalipso' | 'Kalipso' | 'Basic Partner terms, without VAT' | '$$SalesInvoice0240162$$' | 'No'                   | ''                |
 				| ''                                        | 'Receipt'     | '$$DateSalesInvoice0240162$$' | '550'       | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Company Kalipso' | 'Kalipso' | 'Basic Partner terms, without VAT' | '$$SalesInvoice0240162$$' | 'No'                   | ''                |	
-			And I select "R5011 Partners aging" exact value from "Register" drop-down list
+			And I select "R5011 Customers aging" exact value from "Register" drop-down list
 			And I click "Generate report" button
 			And "ResultTable" spreadsheet document contains lines:
 				| '$$SalesInvoice0240162$$'          | ''            | ''                            | ''          | ''             | ''         | ''                                 | ''        | ''                        | ''                    |
 				| 'Document registrations records'   | ''            | ''                            | ''          | ''             | ''         | ''                                 | ''        | ''                        | ''                    |
-				| 'Register  "R5011 Partners aging"' | ''            | ''                            | ''          | ''             | ''         | ''                                 | ''        | ''                        | ''                    |
+				| 'Register  "R5011 Customers aging"' | ''            | ''                            | ''          | ''             | ''         | ''                                 | ''        | ''                        | ''                    |
 				| ''                                 | 'Record type' | 'Period'                      | 'Resources' | 'Dimensions'   | ''         | ''                                 | ''        | ''                        | ''                    |
 				| ''                                 | ''            | ''                            | 'Amount'    | 'Company'      | 'Currency' | 'Agreement'                        | 'Partner' | 'Invoice'                 | 'Payment date'        |
 				| ''                                 | 'Receipt'     | '$$DateSalesInvoice0240162$$' | '550'       | 'Main Company' | 'TRY'      | 'Basic Partner terms, without VAT' | 'Kalipso' | '$$SalesInvoice0240162$$' | '19.11.2020 00:00:00' |
@@ -219,7 +219,7 @@ Scenario: _1000003 create Sales invoice and check Aging tab
 		And I save the value of "PaymentTermsDate" field of "PaymentTerms" table as "$$DatePaymentTermsSalesInvoice0240161$$"
 		And I click the button named "FormPostAndClose"
 	* Check Aging movements
-		Given I open hyperlink "e1cib/list/AccumulationRegister.R5011B_PartnersAging"
+		Given I open hyperlink "e1cib/list/AccumulationRegister.R5011B_CustomersAging"
 		And "List" table contains lines
 		| 'Period'                      | 'Recorder'                | 'Currency' | 'Company'      | 'Partner' | 'Amount' | 'Agreement'                        | 'Invoice'                 | 'Payment date'                            |
 		| '$$DateSalesInvoice024016$$'  | '$$SalesInvoice024016$$'  | 'TRY'      | 'Main Company' | 'Kalipso' | '550,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '$$DatePaymentTermsSalesInvoice0240161$$' |

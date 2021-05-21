@@ -636,12 +636,12 @@ Scenario: _0401314 check Sales invoice movements by the Register  "R5011 Custome
 		And I select "R5011 Customers aging" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales invoice 4 dated 16.02.2021 10:59:49' | ''            | ''                    | ''          | ''             | ''         | ''                          | ''        | ''                                          | ''                    |
-			| 'Document registrations records'            | ''            | ''                    | ''          | ''             | ''         | ''                          | ''        | ''                                          | ''                    |
-			| 'Register  "R5011 Customers aging"'          | ''            | ''                    | ''          | ''             | ''         | ''                          | ''        | ''                                          | ''                    |
-			| ''                                          | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''         | ''                          | ''        | ''                                          | ''                    |
-			| ''                                          | ''            | ''                    | 'Amount'    | 'Company'      | 'Currency' | 'Agreement'                 | 'Partner' | 'Invoice'                                   | 'Payment date'        |
-			| ''                                          | 'Receipt'     | '16.02.2021 10:59:49' | '23 374'    | 'Main Company' | 'USD'      | 'Personal Partner terms, $' | 'Kalipso' | 'Sales invoice 4 dated 16.02.2021 10:59:49' | '23.02.2021 00:00:00' |
+			| 'Sales invoice 4 dated 16.02.2021 10:59:49' | ''            | ''                    | ''          | ''             | ''         | ''                          | ''        | ''                                          | ''                    | ''              |
+			| 'Document registrations records'            | ''            | ''                    | ''          | ''             | ''         | ''                          | ''        | ''                                          | ''                    | ''              |
+			| 'Register  "R5011 Customers aging"'         | ''            | ''                    | ''          | ''             | ''         | ''                          | ''        | ''                                          | ''                    | ''              |
+			| ''                                          | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''         | ''                          | ''        | ''                                          | ''                    | 'Attributes'    |
+			| ''                                          | ''            | ''                    | 'Amount'    | 'Company'      | 'Currency' | 'Agreement'                 | 'Partner' | 'Invoice'                                   | 'Payment date'        | 'Aging closing' |
+			| ''                                          | 'Receipt'     | '16.02.2021 10:59:49' | '23 374'    | 'Main Company' | 'USD'      | 'Personal Partner terms, $' | 'Kalipso' | 'Sales invoice 4 dated 16.02.2021 10:59:49' | '23.02.2021 00:00:00' | ''              |
 		And I close all client application windows 
 
 

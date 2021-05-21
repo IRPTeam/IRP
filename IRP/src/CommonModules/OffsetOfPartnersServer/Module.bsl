@@ -623,10 +623,6 @@ AdvancesOnMoneyMovements(Parameters, "R2021B_CustomersTransactions", "AdvancesFr
 	EndIf;	
 	
 	Query.Text = 
-	"DROP R5011B_CustomersAging_OffsetOfAging_Lock";
-	Query.Execute();
-	
-	Query.Text = 
 	"SELECT
 	|	TransactionsGroupped.Period,
 	|	R5011B_CustomersAgingBalance.Company,
@@ -688,6 +684,12 @@ AdvancesOnMoneyMovements(Parameters, "R2021B_CustomersTransactions", "AdvancesFr
 	For Each ItemOfArray In ArrayForDelete Do
 		QueryTable.Delete(ItemOfArray);
 	EndDo;
+	
+	Query.Text = 
+	"DROP R5011B_CustomersAging_OffsetOfAging_Lock;
+	|DROP Transactions;
+	|DROP TransactionsGroupped";
+	Query.Execute();
 	
 	Query.Text =  
 	"SELECT

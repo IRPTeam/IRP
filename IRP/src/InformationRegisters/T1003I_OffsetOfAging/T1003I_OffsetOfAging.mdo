@@ -47,6 +47,7 @@
       <types>DocumentRef.BankReceipt</types>
       <types>DocumentRef.CashReceipt</types>
       <types>DocumentRef.SalesInvoice</types>
+      <types>DocumentRef.DebitNote</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

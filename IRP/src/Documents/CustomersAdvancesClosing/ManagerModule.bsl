@@ -132,32 +132,19 @@ Function OffsetOfAdvances(Parameters)
 	Query = New Query();
 	Query.Text = 
 	"SELECT
-	|	PartnerTransactions.Recorder AS Recorder,
-	|	PartnerTransactions.Recorder.Date AS RecorderDate,
-	|	TRUE AS IsCustomerTransaction,
-	|	FALSE AS IsCustomerAdvance,
-	|	FALSE AS IsPaymentFromCustomer
-	|INTO tmp
-	|FROM
-	|	InformationRegister.T1001I_PartnerTransactions AS PartnerTransactions
-	|WHERE
-	|	PartnerTransactions.Period BETWEEN BEGINOFPERIOD(&BeginOfPeriod, DAY) AND ENDOFPERIOD(&EndOfPeriod, DAY)
-	|	AND PartnerTransactions.IsCustomerTransaction  
-	|       
-	|
-	|UNION ALL
-	|
-	|SELECT
-	|	PartnerAdvances.Recorder,
-	|	PartnerAdvances.Recorder.Date,
-	|	FALSE,
-	|	TRUE,
-	|	FALSE
+	|	PartnerAdvances.Recorder AS Recorder,
+	|	PartnerAdvances.Recorder.Date AS RecorderDate,
+	|	FALSE AS IsCustomerTransaction,
+	|	TRUE AS IsCustomerAdvanceOrPayment
+	|INTO tmpPartnerAdvancesOrPayments
 	|FROM
 	|	InformationRegister.T1002I_PartnerAdvances AS PartnerAdvances
 	|WHERE
 	|	PartnerAdvances.Period BETWEEN BEGINOFPERIOD(&BeginOfPeriod, DAY) AND ENDOFPERIOD(&EndOfPeriod, DAY)
 	|	AND PartnerAdvances.IsCustomerAdvance
+	|GROUP BY
+	|	PartnerAdvances.Recorder,
+	|	PartnerAdvances.Recorder.Date
 	|
 	|UNION ALL
 	|
@@ -165,29 +152,49 @@ Function OffsetOfAdvances(Parameters)
 	|	PartnerTransactions.Recorder,
 	|	PartnerTransactions.Recorder.Date,
 	|	FALSE,
-	|	FALSE,
 	|	TRUE
 	|FROM
 	|	InformationRegister.T1001I_PartnerTransactions AS PartnerTransactions
 	|WHERE
 	|	PartnerTransactions.Period BETWEEN BEGINOFPERIOD(&BeginOfPeriod, DAY) AND ENDOFPERIOD(&EndOfPeriod, DAY)
-	|	AND PartnerTransactions.IsPaymentFromCustomer  
-	|		
+	|	AND PartnerTransactions.IsPaymentFromCustomer
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	PartnerTransactions.Recorder AS Recorder,
+	|	PartnerTransactions.Recorder.Date AS RecorderDate,
+	|	TRUE AS IsCustomerTransaction,
+	|	FALSE AS IsCustomerAdvanceOrPayment
+	|INTO tmp
+	|FROM
+	|	InformationRegister.T1001I_PartnerTransactions AS PartnerTransactions
+	|WHERE
+	|	PartnerTransactions.Period BETWEEN BEGINOFPERIOD(&BeginOfPeriod, DAY) AND ENDOFPERIOD(&EndOfPeriod, DAY)
+	|	AND PartnerTransactions.IsCustomerTransaction
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	tmpPartnerAdvancesOrPayments.Recorder,
+	|	tmpPartnerAdvancesOrPayments.RecorderDate,
+	|	tmpPartnerAdvancesOrPayments.IsCustomerTransaction,
+	|	tmpPartnerAdvancesOrPayments.IsCustomerAdvanceOrPayment
+	|FROM
+	|	tmpPartnerAdvancesOrPayments AS tmpPartnerAdvancesOrPayments
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
 	|	tmp.Recorder,
 	|	tmp.IsCustomerTransaction,
-	|	tmp.IsCustomerAdvance,
-	|	tmp.IsPaymentFromCustomer
+	|	tmp.IsCustomerAdvanceOrPayment
 	|FROM
 	|	tmp AS tmp
 	|GROUP BY
 	|	tmp.Recorder,
 	|	tmp.IsCustomerTransaction,
-	|	tmp.IsCustomerAdvance,
-	|	tmp.IsPaymentFromCustomer,
+	|	tmp.IsCustomerAdvanceOrPayment,
 	|	tmp.RecorderDate
 	|ORDER BY
 	|	tmp.RecorderDate";
@@ -210,7 +217,7 @@ Function OffsetOfAdvances(Parameters)
 			Drop_Table(Parameters, "OffsetOfAging");
 		EndIf;
 		
-		If Row.IsPaymentFromCustomer Then
+		If Row.IsCustomerAdvanceOrPayment Then
 			Create_AdvancesFromCustomers(Row.Recorder, Parameters);
 			Create_PaymentFromCustomers(Row.Recorder, Parameters);
 			OffsetOfPartnersServer.Customers_OnMoneyMovements(Parameters);
@@ -223,18 +230,18 @@ Function OffsetOfAdvances(Parameters)
 			Drop_Table(Parameters, "OffsetOfAging");
 		EndIf;
 
-		If Row.IsCustomerAdvance Then
-			Create_AdvancesFromCustomers(Row.Recorder, Parameters);
-			Create_PaymentFromCustomers(Row.Recorder, Parameters);
-			OffsetOfPartnersServer.Customers_OnMoneyMovements(Parameters);
-			Write_AdvancesAndTransactions(Row.Recorder, Parameters, OffsetOfAdvanceFull, True);
-			Write_PartnersAging(Row.Recorder, Parameters, OffsetOfAgingFull);
-			Drop_Table(Parameters, "CustomersTransactions");
-			Drop_Table(Parameters, "AdvancesFromCustomers");
-			
-			Drop_Table(Parameters, "OffsetOfAdvanceFromCustomers");
-			Drop_Table(Parameters, "OffsetOfAging");
-		EndIf;
+//		If Row.IsCustomerAdvance Then
+//			Create_AdvancesFromCustomers(Row.Recorder, Parameters);
+//			Create_PaymentFromCustomers(Row.Recorder, Parameters);
+//			OffsetOfPartnersServer.Customers_OnMoneyMovements(Parameters);
+//			Write_AdvancesAndTransactions(Row.Recorder, Parameters, OffsetOfAdvanceFull, True);
+//			Write_PartnersAging(Row.Recorder, Parameters, OffsetOfAgingFull);
+//			Drop_Table(Parameters, "CustomersTransactions");
+//			Drop_Table(Parameters, "AdvancesFromCustomers");
+//			
+//			Drop_Table(Parameters, "OffsetOfAdvanceFromCustomers");
+//			Drop_Table(Parameters, "OffsetOfAging");
+//		EndIf;
 		
 	EndDo;
 		
@@ -375,7 +382,12 @@ Procedure Create_CustomersTransactions(Recorder, Parameters)
 	|	PartnerTransactions.LegalName,
 	|	PartnerTransactions.TransactionDocument,
 	|	PartnerTransactions.Agreement,
-	|	SUM(PartnerTransactions.Amount) AS DocumentAmount
+	|	SUM(PartnerTransactions.Amount) AS DocumentAmount,
+	|	CASE
+	|		WHEN &IsDebitCreditNote
+	|			THEN PartnerTransactions.Key
+	|		ELSE """"
+	|	END AS Key
 	|INTO tmpCustomersTransactions
 	|FROM
 	|	InformationRegister.T1001I_PartnerTransactions AS PartnerTransactions
@@ -389,7 +401,12 @@ Procedure Create_CustomersTransactions(Recorder, Parameters)
 	|	PartnerTransactions.LegalName,
 	|	PartnerTransactions.Partner,
 	|	PartnerTransactions.Period,
-	|	PartnerTransactions.TransactionDocument
+	|	PartnerTransactions.TransactionDocument,
+	|	CASE
+	|		WHEN &IsDebitCreditNote
+	|			THEN PartnerTransactions.Key
+	|		ELSE """"
+	|	END
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
@@ -401,9 +418,10 @@ Procedure Create_CustomersTransactions(Recorder, Parameters)
 	|	tmpCustomersTransactions.LegalName,
 	|	tmpCustomersTransactions.Agreement,
 	|	tmpCustomersTransactions.TransactionDocument,
+	|	tmpCustomersTransactions.Key,
 	|	R2021B_CustomersTransactionsBalance.AmountBalance AS DocumentAmount,
 	|	FALSE AS IgnoreAdvances
-	|	INTO CustomersTransactions
+	|INTO CustomersTransactions
 	|FROM
 	|	AccumulationRegister.R2021B_CustomersTransactions.Balance(&Period, (Company, Currency, LegalName, Partner, Agreement,
 	|		Basis) IN
@@ -426,9 +444,12 @@ Procedure Create_CustomersTransactions(Recorder, Parameters)
 	|		AND R2021B_CustomersTransactionsBalance.Agreement = tmpCustomersTransactions.Agreement
 	|		AND R2021B_CustomersTransactionsBalance.Basis = tmpCustomersTransactions.TransactionDocument
 	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
 	|DROP tmpCustomersTransactions";
 	Query.SetParameter("Period", New Boundary(Parameters.RecorderPointInTime, BoundaryType.Including));	
 	Query.SetParameter("Recorder", Recorder);
+	Query.SetParameter("IsDebitCreditNote", OffsetOfPartnersServer.IsDebitCreditNote(Recorder));
 	Query.Execute(); 
 EndProcedure
 
@@ -544,7 +565,7 @@ EndProcedure
 //  *AdvancesDocument
 //  *Agreement
 //  *Amount
-Procedure Write_AdvancesAndTransactions(Recorder, Parameters, OffsetOfAdvanceFull, UseKeyInAdvance = False)
+Procedure Write_AdvancesAndTransactions(Recorder, Parameters, OffsetOfAdvanceFull, UseKeyForAdvance = False)
 	Query = New Query();
 	Query.TempTablesManager = Parameters.TempTablesManager;
 	Query.Text = 
@@ -574,14 +595,20 @@ Procedure Write_AdvancesAndTransactions(Recorder, Parameters, OffsetOfAdvanceFul
 	TableAdvances = RecordSet_AdvancesFromCustomers.UnloadColumns();
 	TableAdvances.Columns.Delete(TableAdvances.Columns.PointInTime);
 	
-	If UseKeyInAdvance Then
-		TableAdvances.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
-	EndIf;
 	
 	RecordSet_CustomersTransactions = AccumulationRegisters.R2021B_CustomersTransactions.CreateRecordSet();
 	RecordSet_CustomersTransactions.Filter.Recorder.Set(Recorder);
 	TableTransactions = RecordSet_CustomersTransactions.UnloadColumns();
 	TableTransactions.Columns.Delete(TableTransactions.Columns.PointInTime);
+	
+	IsDebitCreditNote = OffsetOfPartnersServer.IsDebitCreditNote(Recorder); 
+	If IsDebitCreditNote Then
+		TableTransactions.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	EndIf;
+	
+	If IsDebitCreditNote Or UseKeyForAdvance Then
+		TableAdvances.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	EndIf;
 	
 	For Each Row In QueryTable Do
 				

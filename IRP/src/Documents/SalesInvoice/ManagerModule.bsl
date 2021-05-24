@@ -715,9 +715,9 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R4032B_GoodsInTransitOutgoing());
 	QueryArray.Add(R4034B_GoodsShipmentSchedule());
 	QueryArray.Add(R4050B_StockInventory());
-	QueryArray.Add(R2021B_CustomersTransactions());//**1
-	QueryArray.Add(R2020B_AdvancesFromCustomers());//**2
-	QueryArray.Add(R5011B_CustomersAging());//**3
+	QueryArray.Add(R2021B_CustomersTransactions());
+	QueryArray.Add(R2020B_AdvancesFromCustomers());
+	QueryArray.Add(R5011B_CustomersAging());
 	QueryArray.Add(R5010B_ReconciliationStatement());
 	QueryArray.Add(T1001I_PartnerTransactions());
 	Return QueryArray;

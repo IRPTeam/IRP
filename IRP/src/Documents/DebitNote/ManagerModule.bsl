@@ -149,6 +149,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R1020B_AdvancesToVendors());
 	QueryArray.Add(R2020B_AdvancesFromCustomers());
 	QueryArray.Add(R5011B_CustomersAging());
+	QueryArray.Add(T1001I_PartnerTransactions());
 	Return QueryArray;
 EndFunction
 
@@ -189,8 +190,48 @@ Function R2021B_CustomersTransactions()
 		|	Transactions.Agreement,
 		|	Transactions.BasisDocument AS Basis,
 		|	Transactions.Key,
-		|	Transactions.Amount
+		|	Transactions.Amount,
+		|	UNDEFINED AS CustomersAdvancesClosing
 		|INTO R2021B_CustomersTransactions
+		|FROM
+		|	Transactions AS Transactions
+		|WHERE
+		|	Transactions.IsCustomer
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Expense),
+		|	OffsetOfAdvances.Period,
+		|	OffsetOfAdvances.Company,
+		|	OffsetOfAdvances.Currency,
+		|	OffsetOfAdvances.LegalName,
+		|	OffsetOfAdvances.Partner,
+		|	OffsetOfAdvances.Agreement,
+		|	OffsetOfAdvances.TransactionDocument,
+		|	OffsetOfAdvances.Key,
+		|	OffsetOfAdvances.Amount,
+		|	OffsetOfAdvances.Recorder
+		|FROM
+		|	InformationRegister.T1000I_OffsetOfAdvances AS OffsetOfAdvances
+		|WHERE
+		|	OffsetOfAdvances.Document = &Ref";
+EndFunction
+
+Function T1001I_PartnerTransactions()
+	Return
+		"SELECT
+		|	Transactions.Period AS Period,
+		|	Transactions.Company,
+		|	Transactions.Currency,
+		|	Transactions.LegalName,
+		|	Transactions.Partner,
+		|	Transactions.Agreement,
+		|	Transactions.BasisDocument AS TransactionDocument,
+		|	Transactions.Key,
+		|	Transactions.Amount,
+		|	TRUE AS IsCustomerTransaction
+		|INTO T1001I_PartnerTransactions
 		|FROM
 		|	Transactions AS Transactions
 		|WHERE
@@ -229,12 +270,16 @@ EndFunction
 
 Function R2020B_AdvancesFromCustomers()
 	Return
-		"SELECT *
+		"SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	OffsetOfAdvances.AdvancesDocument AS Basis,
+		|	OffsetOfAdvances.Recorder AS CustomersAdvancesClosing,
+		|	*
 		|INTO R2020B_AdvancesFromCustomers
 		|FROM
-		|	Transactions AS Transactions
+		|	InformationRegister.T1000I_OffsetOfAdvances AS OffsetOfAdvances
 		|WHERE
-		|	FALSE";
+		|	OffsetOfAdvances.Document = &Ref";
 EndFunction
 
 Function R5011B_CustomersAging()

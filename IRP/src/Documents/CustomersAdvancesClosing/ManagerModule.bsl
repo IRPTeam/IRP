@@ -135,13 +135,15 @@ Function OffsetOfAdvances(Parameters)
 	|	PartnerTransactions.Recorder AS Recorder,
 	|	PartnerTransactions.Recorder.Date AS RecorderDate,
 	|	TRUE AS IsCustomerTransaction,
-	|	FALSE AS IsCustomerAdvance
+	|	FALSE AS IsCustomerAdvance,
+	|	FALSE AS IsPaymentFromCustomer
 	|INTO tmp
 	|FROM
 	|	InformationRegister.T1001I_PartnerTransactions AS PartnerTransactions
 	|WHERE
 	|	PartnerTransactions.Period BETWEEN BEGINOFPERIOD(&BeginOfPeriod, DAY) AND ENDOFPERIOD(&EndOfPeriod, DAY)
-	|	AND PartnerTransactions.IsCustomerTransaction
+	|	AND PartnerTransactions.IsCustomerTransaction  
+	|       
 	|
 	|UNION ALL
 	|
@@ -149,25 +151,43 @@ Function OffsetOfAdvances(Parameters)
 	|	PartnerAdvances.Recorder,
 	|	PartnerAdvances.Recorder.Date,
 	|	FALSE,
-	|	TRUE
+	|	TRUE,
+	|	FALSE
 	|FROM
 	|	InformationRegister.T1002I_PartnerAdvances AS PartnerAdvances
 	|WHERE
 	|	PartnerAdvances.Period BETWEEN BEGINOFPERIOD(&BeginOfPeriod, DAY) AND ENDOFPERIOD(&EndOfPeriod, DAY)
 	|	AND PartnerAdvances.IsCustomerAdvance
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	PartnerTransactions.Recorder,
+	|	PartnerTransactions.Recorder.Date,
+	|	FALSE,
+	|	FALSE,
+	|	TRUE
+	|FROM
+	|	InformationRegister.T1001I_PartnerTransactions AS PartnerTransactions
+	|WHERE
+	|	PartnerTransactions.Period BETWEEN BEGINOFPERIOD(&BeginOfPeriod, DAY) AND ENDOFPERIOD(&EndOfPeriod, DAY)
+	|	AND PartnerTransactions.IsPaymentFromCustomer  
+	|		
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
 	|	tmp.Recorder,
 	|	tmp.IsCustomerTransaction,
-	|	tmp.IsCustomerAdvance
+	|	tmp.IsCustomerAdvance,
+	|	tmp.IsPaymentFromCustomer
 	|FROM
 	|	tmp AS tmp
 	|GROUP BY
 	|	tmp.Recorder,
 	|	tmp.IsCustomerTransaction,
 	|	tmp.IsCustomerAdvance,
+	|	tmp.IsPaymentFromCustomer,
 	|	tmp.RecorderDate
 	|ORDER BY
 	|	tmp.RecorderDate";
@@ -189,7 +209,20 @@ Function OffsetOfAdvances(Parameters)
 			Drop_Table(Parameters, "OffsetOfAdvanceFromCustomers");
 			Drop_Table(Parameters, "OffsetOfAging");
 		EndIf;
-				
+		
+		If Row.IsPaymentFromCustomer Then
+			Create_AdvancesFromCustomers(Row.Recorder, Parameters);
+			Create_PaymentFromCustomers(Row.Recorder, Parameters);
+			OffsetOfPartnersServer.Customers_OnMoneyMovements(Parameters);
+			Write_AdvancesAndTransactions(Row.Recorder, Parameters, OffsetOfAdvanceFull, True);
+			Write_PartnersAging(Row.Recorder, Parameters, OffsetOfAgingFull);
+			Drop_Table(Parameters, "CustomersTransactions");
+			Drop_Table(Parameters, "AdvancesFromCustomers");
+			
+			Drop_Table(Parameters, "OffsetOfAdvanceFromCustomers");
+			Drop_Table(Parameters, "OffsetOfAging");
+		EndIf;
+
 		If Row.IsCustomerAdvance Then
 			Create_AdvancesFromCustomers(Row.Recorder, Parameters);
 			Create_PaymentFromCustomers(Row.Recorder, Parameters);
@@ -202,6 +235,7 @@ Function OffsetOfAdvances(Parameters)
 			Drop_Table(Parameters, "OffsetOfAdvanceFromCustomers");
 			Drop_Table(Parameters, "OffsetOfAging");
 		EndIf;
+		
 	EndDo;
 		
 	Query = New Query();

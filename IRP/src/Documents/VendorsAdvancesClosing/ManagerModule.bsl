@@ -283,6 +283,7 @@ Procedure Create_VendorsTransactions(Recorder, Parameters)
 	|	PartnerTransactions.LegalName,
 	|	PartnerTransactions.TransactionDocument,
 	|	PartnerTransactions.Agreement,
+	|	"""" AS Key,
 	|	SUM(PartnerTransactions.Amount) AS DocumentAmount
 	|INTO tmpVendorsTransactions
 	|FROM
@@ -309,6 +310,7 @@ Procedure Create_VendorsTransactions(Recorder, Parameters)
 	|	tmpVendorsTransactions.LegalName,
 	|	tmpVendorsTransactions.Agreement,
 	|	tmpVendorsTransactions.TransactionDocument,
+	|	tmpVendorsTransactions.Key,
 	|	R1021B_VendorsTransactionsBalance.AmountBalance AS DocumentAmount,
 	|	FALSE AS IgnoreAdvances
 	|	INTO VendorsTransactions

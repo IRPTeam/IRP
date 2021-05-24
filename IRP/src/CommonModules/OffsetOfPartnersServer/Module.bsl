@@ -409,7 +409,8 @@ Function GetQueryTextAdvancesOnTransaction()
 		|	Advances.Basis AS AdvancesDocument,
 		|	SUM(Advances.AmountBalance) AS BalanceAmount,
 		|	0 AS Amount,
-		|	"""" AS Key
+		//|	"""" AS Key
+		|	Transactions.Key AS Key
 		|FROM
 		|	AccumulationRegister.%1.Balance(&Period, (Company, Partner, LegalName, Currency,
 		|		CurrencyMovementType) IN
@@ -437,6 +438,7 @@ Function GetQueryTextAdvancesOnTransaction()
 		|	Transactions.Currency,
 		|	Transactions.TransactionDocument,
 		|	Transactions.Agreement,
+		|	Transactions.Key,
 		|	Advances.Basis,
 		|	VALUE(AccumulationRecordType.Expense)
 		|ORDER BY
@@ -457,7 +459,8 @@ Function DistributeAdvancesTableOnTransaction(AdvancesTable)
 		|Currency,  
 		|TransactionDocument, 
 		|Agreement,
-		|DocumentAmount, 
+		|DocumentAmount,
+		|Key, 
 		|Amount"; 
 	AdvancesTable_Groupped.GroupBy(FilterFields);
 	For Each Row In AdvancesTable_Groupped Do
@@ -1077,3 +1080,9 @@ Procedure CheckCreditLimit(Ref, Cancel) Export
 	EndIf;
 EndProcedure
 
+Function IsDebitCreditNote(Ref) Export
+	Return
+	 	TypeOf(Ref) = Type("DocumentRef.DebitNote")
+		Or TypeOf(Ref) = Type("DocumentRef.CreditNote");
+EndFunction
+	

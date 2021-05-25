@@ -1704,3 +1704,15 @@ Scenario: Create catalog Workstations objects
 		| 'Ref'                                                                  | 'DeletionMark' | 'Code'         | 'Description'    | 'CashAccount'                                                          | 'PrintTemplate' | 'UniqueID'  |
 		| 'e1cib/data/Catalog.Workstations?ref=b762b13668d0905011eb97c8502ea899' | 'False'        | '000000000001' | 'Workstation 01' | 'e1cib/data/Catalog.CashAccounts?ref=aa78120ed92fbced11eaf113ba6c1869' | ''              | 'TeamAgent' |
 
+
+Scenario: Create catalog PaymentSchedules objects
+
+	And I check or create catalog "PaymentSchedules" objects:
+		| 'Ref'                                                                      | 'DeletionMark' | 'Code' | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' |
+		| 'e1cib/data/Catalog.PaymentSchedules?ref=b768fb7fcb8cb62f11ebba1d08549f51' | 'False'        | '1'    | '7 days'         | ''                 | ''               | ''               |
+		| 'e1cib/data/Catalog.PaymentSchedules?ref=b768fb7fcb8cb62f11ebba1d08549f52' | 'False'        | '2'    | '14 days'        | ''                 | ''               | ''               |
+
+	And I refill object tabular section "StagesOfPayment":
+		| 'Ref'                                                                      | 'CalculationType'                          | 'ProportionOfPayment' | 'DuePeriod' |
+		| 'e1cib/data/Catalog.PaymentSchedules?ref=b768fb7fcb8cb62f11ebba1d08549f51' | 'Enum.CalculationTypes.PostShipmentCredit' | '100'                 | '7'         |
+		| 'e1cib/data/Catalog.PaymentSchedules?ref=b768fb7fcb8cb62f11ebba1d08549f52' | 'Enum.CalculationTypes.PostShipmentCredit' | '100'                 | '14'        |

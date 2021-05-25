@@ -81,21 +81,6 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
-  <attributes uuid="312c7d2e-e424-47ca-a319-5bca45761b34">
-    <name>IgnoreAdvances</name>
-    <synonym>
-      <key>en</key>
-      <value>Ignore advances</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
   <attributes uuid="9e0eaa24-3f2a-40c6-acd8-10a60e0917ec">
     <name>DueAsAdvance</name>
     <synonym>

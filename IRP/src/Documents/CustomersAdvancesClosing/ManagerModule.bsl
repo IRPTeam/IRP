@@ -229,19 +229,6 @@ Function OffsetOfAdvances(Parameters)
 			Drop_Table(Parameters, "OffsetOfAdvanceFromCustomers");
 			Drop_Table(Parameters, "OffsetOfAging");
 		EndIf;
-
-//		If Row.IsCustomerAdvance Then
-//			Create_AdvancesFromCustomers(Row.Recorder, Parameters);
-//			Create_PaymentFromCustomers(Row.Recorder, Parameters);
-//			OffsetOfPartnersServer.Customers_OnMoneyMovements(Parameters);
-//			Write_AdvancesAndTransactions(Row.Recorder, Parameters, OffsetOfAdvanceFull, True);
-//			Write_PartnersAging(Row.Recorder, Parameters, OffsetOfAgingFull);
-//			Drop_Table(Parameters, "CustomersTransactions");
-//			Drop_Table(Parameters, "AdvancesFromCustomers");
-//			
-//			Drop_Table(Parameters, "OffsetOfAdvanceFromCustomers");
-//			Drop_Table(Parameters, "OffsetOfAging");
-//		EndIf;
 		
 	EndDo;
 		

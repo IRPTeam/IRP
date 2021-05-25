@@ -1329,7 +1329,8 @@ Function R5011B_CustomersAging()
 		|	PaymentTerms.Ref.Partner AS Partner,
 		|	PaymentTerms.Ref AS Invoice,
 		|	PaymentTerms.Date AS PaymentDate,
-		|	SUM(PaymentTerms.Amount) AS Amount
+		|	SUM(PaymentTerms.Amount) AS Amount,
+		|	UNDEFINED AS AgingClosing
 		|INTO R5011B_CustomersAging
 		|FROM
 		|	Document.SalesInvoice.PaymentTerms AS PaymentTerms
@@ -1343,7 +1344,25 @@ Function R5011B_CustomersAging()
 		|	PaymentTerms.Ref.Currency,
 		|	PaymentTerms.Ref.Date,
 		|	PaymentTerms.Ref.Partner,
-		|	VALUE(AccumulationRecordType.Receipt)";
+		|	VALUE(AccumulationRecordType.Receipt)
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Expense),
+		|	OffsetOfAging.Period,
+		|	OffsetOfAging.Company,
+		|	OffsetOfAging.Currency,
+		|	OffsetOfAging.Agreement,
+		|	OffsetOfAging.Partner,
+		|	OffsetOfAging.Invoice,
+		|	OffsetOfAging.PaymentDate,
+		|	OffsetOfAging.Amount,
+		|	OffsetOfAging.Recorder
+		|FROM
+		|	InformationRegister.T1003I_OffsetOfAging AS OffsetOfAging
+		|WHERE
+		|	OffsetOfAging.Document = &Ref";
 EndFunction
 
 Function R5010B_ReconciliationStatement()

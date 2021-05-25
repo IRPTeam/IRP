@@ -235,13 +235,91 @@ Function OffsetOfAdvances(Parameters)
 	Query = New Query();
 	Query.TempTablesManager = Parameters.TempTablesManager;
 	Query.Text = 
-	"SELECT *
-	|INTO OffsetOfAdvances 
-	|	FROM &OffsetOfAdvanceFull AS OffsetOfAdvanceFull
+	"SELECT
+	|	OffsetOfAdvanceFull.Period,
+	|	OffsetOfAdvanceFull.Document,
+	|	OffsetOfAdvanceFull.Company,
+	|	OffsetOfAdvanceFull.Currency,
+	|	OffsetOfAdvanceFull.Partner,
+	|	OffsetOfAdvanceFull.LegalName,
+	|	OffsetOfAdvanceFull.TransactionDocument,
+	|	OffsetOfAdvanceFull.AdvancesDocument,
+	|	OffsetOfAdvanceFull.Agreement,
+	|	OffsetOfAdvanceFull.Key,
+	|	OffsetOfAdvanceFull.Amount
+	|INTO tmpOffsetOfAdvances
+	|FROM
+	|	&OffsetOfAdvanceFull AS OffsetOfAdvanceFull
 	|;
-	|SELECT *
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	OffsetOfAgingFull.Period,
+	|	OffsetOfAgingFull.Document,
+	|	OffsetOfAgingFull.Company,
+	|	OffsetOfAgingFull.Currency,
+	|	OffsetOfAgingFull.Partner,
+	|	OffsetOfAgingFull.Agreement,
+	|	OffsetOfAgingFull.Invoice,
+	|	OffsetOfAgingFull.PaymentDate,
+	|	OffsetOfAgingFull.Amount
+	|INTO tmpOffsetOfAging
+	|FROM
+	|	&OffsetOfAgingFull AS OffsetOfAgingFull
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	tmpOffsetOfAdvances.Period,
+	|	tmpOffsetOfAdvances.Document,
+	|	tmpOffsetOfAdvances.Company,
+	|	tmpOffsetOfAdvances.Currency,
+	|	tmpOffsetOfAdvances.Partner,
+	|	tmpOffsetOfAdvances.LegalName,
+	|	tmpOffsetOfAdvances.TransactionDocument,
+	|	tmpOffsetOfAdvances.AdvancesDocument,
+	|	tmpOffsetOfAdvances.Agreement,
+	|	tmpOffsetOfAdvances.Key,
+	|	SUM(tmpOffsetOfAdvances.Amount) AS Amount
+	|INTO OffsetOfAdvances
+	|FROM
+	|	tmpOffsetOfAdvances AS tmpOffsetOfAdvances
+	|GROUP BY
+	|	tmpOffsetOfAdvances.Period,
+	|	tmpOffsetOfAdvances.Document,
+	|	tmpOffsetOfAdvances.Company,
+	|	tmpOffsetOfAdvances.Currency,
+	|	tmpOffsetOfAdvances.Partner,
+	|	tmpOffsetOfAdvances.LegalName,
+	|	tmpOffsetOfAdvances.TransactionDocument,
+	|	tmpOffsetOfAdvances.AdvancesDocument,
+	|	tmpOffsetOfAdvances.Agreement,
+	|	tmpOffsetOfAdvances.Key
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	tmpOffsetOfAging.Period,
+	|	tmpOffsetOfAging.Document,
+	|	tmpOffsetOfAging.Company,
+	|	tmpOffsetOfAging.Currency,
+	|	tmpOffsetOfAging.Partner,
+	|	tmpOffsetOfAging.Agreement,
+	|	tmpOffsetOfAging.Invoice,
+	|	tmpOffsetOfAging.PaymentDate,
+	|	SUM(tmpOffsetOfAging.Amount) AS Amount
 	|INTO OffsetOfAging
-	|	FROM &OffsetOfAgingFull AS OffsetOfAgingFull";
+	|FROM
+	|	tmpOffsetOfAging AS tmpOffsetOfAging
+	|GROUP BY
+	|	tmpOffsetOfAging.Period,
+	|	tmpOffsetOfAging.Document,
+	|	tmpOffsetOfAging.Company,
+	|	tmpOffsetOfAging.Currency,
+	|	tmpOffsetOfAging.Partner,
+	|	tmpOffsetOfAging.Agreement,
+	|	tmpOffsetOfAging.Invoice,
+	|	tmpOffsetOfAging.PaymentDate";
 	
 	Query.SetParameter("OffsetOfAdvanceFull", OffsetOfAdvanceFull);
 	Query.SetParameter("OffsetOfAgingFull", OffsetOfAgingFull);

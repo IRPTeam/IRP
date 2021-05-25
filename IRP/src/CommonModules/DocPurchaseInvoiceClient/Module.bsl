@@ -44,6 +44,12 @@ Procedure OnOpen(Object, Form, Cancel, AddInfo = Undefined) Export
 			If AgreementSettings.Property("PutServerDataToAddInfo") And AgreementSettings.PutServerDataToAddInfo Then
 				AgreementOnChangePutServerDataToAddInfo(Object, Form, AddInfo);
 			EndIf;
+			AgreementSettings = AgreementSettings(Object, Form, AddInfo);	
+			AgreementSettings.Actions = New Structure("ChangePaymentTerm", "ChangePaymentTerm");
+			
+			Settings = New Structure("AgreementSettings", AgreementSettings);
+			DocumentsClient.AgreementOnChange(Object, Form, ThisObject, Undefined, Settings, AddInfo);
+			
 			CalculateSettings = New Structure("CalculateSpecialOffers, CalculateNetAmount, CalculateTax, CalculateTotalAmount");
 			PriceDate = CalculationStringsClientServer.GetPriceDateByRefAndDate(Object.Ref, Object.Date);
 			CalculateSettings.Insert("ChangePriceType", New Structure("Period, PriceType", PriceDate, ServerData.AgreementInfo.PriceType));	
@@ -463,6 +469,27 @@ EndProcedure
 
 #EndRegion
 
+#Region PaymentTermsItemsEvents
+
+Procedure PaymentTermsDateOnChange(Object, Form, Item, AddInfo = Undefined) Export
+	CurrentData = Form.Items.PaymentTerms.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	SecondsInOneDay = 86400;
+	If ValueIsFilled(Object.Date) And ValueIsFilled(CurrentData.Date) Then
+		CurrentData.DuePeriod = (CurrentData.Date - Object.Date) / SecondsInOneDay;
+	Else
+		CurrentData.DuePeriod = 0;
+	EndIf;
+EndProcedure
+
+Procedure PaymentTermsOnChange(Object, Form, Item, AddInfo = Undefined) Export
+	DocumentsClient.CalculatePaymentTermDateAndAmount(Object, Form, AddInfo);
+EndProcedure
+
+#EndRegion
+
 #Region ItemPartner
 
 Procedure PartnerOnChange(Object, Form, Item, AddInfo = Undefined) Export
@@ -541,6 +568,7 @@ Function AgreementSettings(Object, Form, AddInfo = Undefined) Export
 	Actions.Insert("ChangePriceIncludeTax"	, "ChangePriceIncludeTax");
 	Actions.Insert("ChangeStore"			, "ChangeStore");
 	Actions.Insert("ChangeDeliveryDate"		, "ChangeDeliveryDate");
+	Actions.Insert("ChangePaymentTerm"		, "ChangePaymentTerm");
 	Actions.Insert("ChangeTaxRates"		    , "ChangeTaxRates");
 	
 	Settings.Actions = Actions;

@@ -2121,6 +2121,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R1012B_PurchaseOrdersInvoiceClosing());
 	QueryArray.Add(R1020B_AdvancesToVendors());
 	QueryArray.Add(R1021B_VendorsTransactions());
+	QueryArray.Add(R5012B_VendorsAging());
 	QueryArray.Add(R1031B_ReceiptInvoicing());
 	QueryArray.Add(R1040B_TaxesOutgoing());
 	QueryArray.Add(R2013T_SalesOrdersProcurement());
@@ -2421,6 +2422,53 @@ Function R1021B_VendorsTransactions()
 		|	InformationRegister.T1000I_OffsetOfAdvances AS OffsetOfAdvances
 		|WHERE
 		|	OffsetOfAdvances.Document = &Ref";
+EndFunction
+
+Function R5012B_VendorsAging()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	PaymentTerms.Ref.Date AS Period,
+		|	PaymentTerms.Ref.Company AS Company,
+		|	PaymentTerms.Ref.Currency AS Currency,
+		|	PaymentTerms.Ref.Agreement AS Agreement,
+		|	PaymentTerms.Ref.Partner AS Partner,
+		|	PaymentTerms.Ref AS Invoice,
+		|	PaymentTerms.Date AS PaymentDate,
+		|	SUM(PaymentTerms.Amount) AS Amount,
+		|	UNDEFINED AS AgingClosing
+		|INTO R5012B_VendorsAging
+		|FROM
+		|	Document.PurchaseInvoice.PaymentTerms AS PaymentTerms
+		|WHERE
+		|	PaymentTerms.Ref = &Ref
+		|GROUP BY
+		|	PaymentTerms.Date,
+		|	PaymentTerms.Ref,
+		|	PaymentTerms.Ref.Agreement,
+		|	PaymentTerms.Ref.Company,
+		|	PaymentTerms.Ref.Currency,
+		|	PaymentTerms.Ref.Date,
+		|	PaymentTerms.Ref.Partner,
+		|	VALUE(AccumulationRecordType.Receipt)
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Expense),
+		|	OffsetOfAging.Period,
+		|	OffsetOfAging.Company,
+		|	OffsetOfAging.Currency,
+		|	OffsetOfAging.Agreement,
+		|	OffsetOfAging.Partner,
+		|	OffsetOfAging.Invoice,
+		|	OffsetOfAging.PaymentDate,
+		|	OffsetOfAging.Amount,
+		|	OffsetOfAging.Recorder
+		|FROM
+		|	InformationRegister.T1003I_OffsetOfAging AS OffsetOfAging
+		|WHERE
+		|	OffsetOfAging.Document = &Ref";
 EndFunction
 
 Function T1001I_PartnerTransactions()

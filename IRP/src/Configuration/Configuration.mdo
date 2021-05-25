@@ -752,6 +752,7 @@
   <accumulationRegisters>AccumulationRegister.R4052T_StockAdjustmentAsSurplus</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R5010B_ReconciliationStatement</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R5011B_CustomersAging</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R5012B_VendorsAging</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R5021T_Revenues</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R5022T_Expenses</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R5041B_TaxesPayable</accumulationRegisters>

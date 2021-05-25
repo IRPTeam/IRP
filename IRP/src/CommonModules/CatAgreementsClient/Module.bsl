@@ -98,7 +98,6 @@ Procedure TypeOnChange(Object, Form, Item) Export
 	If Object.Type <> PredefinedValue("Enum.AgreementTypes.Customer") Then
 		Object.UseCreditLimit = False;
 		Object.CreditLimitAmount = 0;
-		Object.PaymentTerm = Undefined;
 	EndIf;
 	CatAgreementsClientServer.SetVisible(Object, Form);
 EndProcedure

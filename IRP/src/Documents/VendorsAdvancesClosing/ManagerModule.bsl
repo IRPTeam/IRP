@@ -85,6 +85,7 @@ EndFunction
 Function GetQueryTextsMasterTables()
 	QueryArray = New Array;
 	QueryArray.Add(T1000I_OffsetOfAdvances());
+	QueryArray.Add(T1003I_OffsetOfAging());
 	Return QueryArray;
 EndFunction
 
@@ -95,6 +96,17 @@ Function T1000I_OffsetOfAdvances()
 		|INTO T1000I_OffsetOfAdvances
 		|FROM
 		|	OffsetOfAdvances
+		|WHERE
+		|	TRUE";
+EndFunction
+
+Function T1003I_OffsetOfAging()
+	Return
+		"SELECT
+		|	*
+		|INTO T1003I_OffsetOfAging
+		|FROM
+		|	OffsetOfAging
 		|WHERE
 		|	TRUE";
 EndFunction
@@ -113,14 +125,47 @@ Function OffsetOfAdvances(Parameters)
 	OffsetOfAdvanceFull = InformationRegisters.T1000I_OffsetOfAdvances.CreateRecordSet().UnloadColumns();
 	OffsetOfAdvanceFull.Columns.Delete(OffsetOfAdvanceFull.Columns.PointInTime);
 	
+	OffsetOfAgingFull = InformationRegisters.T1003I_OffsetOfAging.CreateRecordSet().UnloadColumns();
+	OffsetOfAgingFull.Columns.Delete(OffsetOfAgingFull.Columns.PointInTime);
+	
 	// VendorsTransactions
 	Query = New Query();
 	Query.Text = 
 	"SELECT
+	|	PartnerAdvances.Recorder AS Recorder,
+	|	PartnerAdvances.Recorder.Date AS RecorderDate,
+	|	FALSE AS IsVendorTransaction,
+	|	TRUE AS IsVendorAdvanceOrPayment
+	|INTO tmpPartnerAdvancesOrPayments
+	|FROM
+	|	InformationRegister.T1002I_PartnerAdvances AS PartnerAdvances
+	|WHERE
+	|	PartnerAdvances.Period BETWEEN BEGINOFPERIOD(&BeginOfPeriod, DAY) AND ENDOFPERIOD(&EndOfPeriod, DAY)
+	|	AND PartnerAdvances.IsVendorAdvance
+	|GROUP BY
+	|	PartnerAdvances.Recorder,
+	|	PartnerAdvances.Recorder.Date
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	PartnerTransactions.Recorder,
+	|	PartnerTransactions.Recorder.Date,
+	|	FALSE,
+	|	TRUE
+	|FROM
+	|	InformationRegister.T1001I_PartnerTransactions AS PartnerTransactions
+	|WHERE
+	|	PartnerTransactions.Period BETWEEN BEGINOFPERIOD(&BeginOfPeriod, DAY) AND ENDOFPERIOD(&EndOfPeriod, DAY)
+	|	AND PartnerTransactions.IsPaymentToVendor
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
 	|	PartnerTransactions.Recorder AS Recorder,
 	|	PartnerTransactions.Recorder.Date AS RecorderDate,
 	|	TRUE AS IsVendorTransaction,
-	|	FALSE AS IsVendorAdvance
+	|	FALSE AS IsVendorAdvanceOrPayment
 	|INTO tmp
 	|FROM
 	|	InformationRegister.T1001I_PartnerTransactions AS PartnerTransactions
@@ -131,28 +176,25 @@ Function OffsetOfAdvances(Parameters)
 	|UNION ALL
 	|
 	|SELECT
-	|	PartnerAdvances.Recorder,
-	|	PartnerAdvances.Recorder.Date,
-	|	FALSE,
-	|	TRUE
+	|	tmpPartnerAdvancesOrPayments.Recorder,
+	|	tmpPartnerAdvancesOrPayments.RecorderDate,
+	|	tmpPartnerAdvancesOrPayments.IsVendorTransaction,
+	|	tmpPartnerAdvancesOrPayments.IsVendorAdvanceOrPayment
 	|FROM
-	|	InformationRegister.T1002I_PartnerAdvances AS PartnerAdvances
-	|WHERE
-	|	PartnerAdvances.Period BETWEEN BEGINOFPERIOD(&BeginOfPeriod, DAY) AND ENDOFPERIOD(&EndOfPeriod, DAY)
-	|	AND PartnerAdvances.IsVendorAdvance
+	|	tmpPartnerAdvancesOrPayments AS tmpPartnerAdvancesOrPayments
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
 	|	tmp.Recorder,
 	|	tmp.IsVendorTransaction,
-	|	tmp.IsVendorAdvance
+	|	tmp.IsVendorAdvanceOrPayment
 	|FROM
 	|	tmp AS tmp
 	|GROUP BY
 	|	tmp.Recorder,
 	|	tmp.IsVendorTransaction,
-	|	tmp.IsVendorAdvance,
+	|	tmp.IsVendorAdvanceOrPayment,
 	|	tmp.RecorderDate
 	|ORDER BY
 	|	tmp.RecorderDate";
@@ -164,30 +206,123 @@ Function OffsetOfAdvances(Parameters)
 		Parameters.Insert("RecorderPointInTime", Row.Recorder.PointInTime());
 		If Row.IsVendorTransaction Then
 			Create_VendorsTransactions(Row.Recorder, Parameters);
+			Create_VendorsAging(Row.Recorder, Parameters);
 			OffsetOfPartnersServer.Vendors_OnTransaction(Parameters);
 			Write_AdvancesAndTransactions(Row.Recorder, Parameters, OffsetOfAdvanceFull);
-			Drop_VendorsTransactions(Parameters);
-			Drop_OffsetOfAdvanceToVendors(Parameters);
+			Write_PartnersAging(Row.Recorder, Parameters, OffsetOfAgingFull);
+			Drop_Table(Parameters, "VendorsTransactions");
+			Drop_Table(Parameters, "Aging");
+			
+			Drop_Table(Parameters, "OffsetOfAdvanceToVendors");
+			Drop_Table(Parameters, "OffsetOfAging");
 		EndIf;
 		
-		If Row.IsVendorAdvance Then
+		If Row.IsVendorAdvanceOrPayment Then
 			Create_AdvancesToVendors(Row.Recorder, Parameters);
 			Create_PaymentToVendors(Row.Recorder, Parameters);
 			OffsetOfPartnersServer.Vendors_OnMoneyMovements(Parameters);
 			Write_AdvancesAndTransactions(Row.Recorder, Parameters, OffsetOfAdvanceFull, True);
-			Drop_VendorsTransactions(Parameters);
-			Drop_AdvancesToVendors(Parameters);
-			Drop_OffsetOfAdvanceToVendors(Parameters);
+			Write_PartnersAging(Row.Recorder, Parameters, OffsetOfAgingFull);
+			Drop_Table(Parameters, "VendorsTransactions");
+			Drop_Table(Parameters, "AdvancesToVendors");
+			
+			Drop_Table(Parameters, "OffsetOfAdvanceToVendors");
+			Drop_Table(Parameters, "OffsetOfAging");
 		EndIf;
 	EndDo;
 		
 	Query = New Query();
 	Query.TempTablesManager = Parameters.TempTablesManager;
 	Query.Text = 
-	"SELECT *
-	|INTO OffsetOfAdvances 
-	|	FROM &OffsetOfAdvanceFull AS OffsetOfAdvanceFull";
+	"SELECT
+	|	OffsetOfAdvanceFull.Period,
+	|	OffsetOfAdvanceFull.Document,
+	|	OffsetOfAdvanceFull.Company,
+	|	OffsetOfAdvanceFull.Currency,
+	|	OffsetOfAdvanceFull.Partner,
+	|	OffsetOfAdvanceFull.LegalName,
+	|	OffsetOfAdvanceFull.TransactionDocument,
+	|	OffsetOfAdvanceFull.AdvancesDocument,
+	|	OffsetOfAdvanceFull.Agreement,
+	|	OffsetOfAdvanceFull.Key,
+	|	OffsetOfAdvanceFull.Amount
+	|INTO tmpOffsetOfAdvances
+	|FROM
+	|	&OffsetOfAdvanceFull AS OffsetOfAdvanceFull
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	OffsetOfAgingFull.Period,
+	|	OffsetOfAgingFull.Document,
+	|	OffsetOfAgingFull.Company,
+	|	OffsetOfAgingFull.Currency,
+	|	OffsetOfAgingFull.Partner,
+	|	OffsetOfAgingFull.Agreement,
+	|	OffsetOfAgingFull.Invoice,
+	|	OffsetOfAgingFull.PaymentDate,
+	|	OffsetOfAgingFull.Amount
+	|INTO tmpOffsetOfAging
+	|FROM
+	|	&OffsetOfAgingFull AS OffsetOfAgingFull
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	tmpOffsetOfAdvances.Period,
+	|	tmpOffsetOfAdvances.Document,
+	|	tmpOffsetOfAdvances.Company,
+	|	tmpOffsetOfAdvances.Currency,
+	|	tmpOffsetOfAdvances.Partner,
+	|	tmpOffsetOfAdvances.LegalName,
+	|	tmpOffsetOfAdvances.TransactionDocument,
+	|	tmpOffsetOfAdvances.AdvancesDocument,
+	|	tmpOffsetOfAdvances.Agreement,
+	|	tmpOffsetOfAdvances.Key,
+	|	SUM(tmpOffsetOfAdvances.Amount) AS Amount
+	|INTO OffsetOfAdvances
+	|FROM
+	|	tmpOffsetOfAdvances AS tmpOffsetOfAdvances
+	|GROUP BY
+	|	tmpOffsetOfAdvances.Period,
+	|	tmpOffsetOfAdvances.Document,
+	|	tmpOffsetOfAdvances.Company,
+	|	tmpOffsetOfAdvances.Currency,
+	|	tmpOffsetOfAdvances.Partner,
+	|	tmpOffsetOfAdvances.LegalName,
+	|	tmpOffsetOfAdvances.TransactionDocument,
+	|	tmpOffsetOfAdvances.AdvancesDocument,
+	|	tmpOffsetOfAdvances.Agreement,
+	|	tmpOffsetOfAdvances.Key
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	tmpOffsetOfAging.Period,
+	|	tmpOffsetOfAging.Document,
+	|	tmpOffsetOfAging.Company,
+	|	tmpOffsetOfAging.Currency,
+	|	tmpOffsetOfAging.Partner,
+	|	tmpOffsetOfAging.Agreement,
+	|	tmpOffsetOfAging.Invoice,
+	|	tmpOffsetOfAging.PaymentDate,
+	|	SUM(tmpOffsetOfAging.Amount) AS Amount
+	|INTO OffsetOfAging
+	|FROM
+	|	tmpOffsetOfAging AS tmpOffsetOfAging
+	|GROUP BY
+	|	tmpOffsetOfAging.Period,
+	|	tmpOffsetOfAging.Document,
+	|	tmpOffsetOfAging.Company,
+	|	tmpOffsetOfAging.Currency,
+	|	tmpOffsetOfAging.Partner,
+	|	tmpOffsetOfAging.Agreement,
+	|	tmpOffsetOfAging.Invoice,
+	|	tmpOffsetOfAging.PaymentDate";
+	
 	Query.SetParameter("OffsetOfAdvanceFull", OffsetOfAdvanceFull);
+	Query.SetParameter("OffsetOfAgingFull", OffsetOfAgingFull);
+	
 	Query.Execute(); 
 	
 	Return VendorsAdvancesClosingQueryText();
@@ -211,7 +346,7 @@ Procedure ClearSelfRecords(Ref)
 	|FROM
 	|	AccumulationRegister.R1020B_AdvancesToVendors AS R1020B_AdvancesToVendors
 	|WHERE
-	|	R1020B_AdvancesToVendors.VendorsAdvancesClosing = &VendorsAdvancesClosing
+	|	R1020B_AdvancesToVendors.VendorsAdvancesClosing = &Ref
 	|GROUP BY
 	|	R1020B_AdvancesToVendors.Recorder
 	|;
@@ -222,10 +357,22 @@ Procedure ClearSelfRecords(Ref)
 	|FROM
 	|	AccumulationRegister.R1021B_VendorsTransactions AS R1021B_VendorsTransactions
 	|WHERE
-	|	R1021B_VendorsTransactions.VendorsAdvancesClosing = &VendorsAdvancesClosing
+	|	R1021B_VendorsTransactions.VendorsAdvancesClosing = &Ref
 	|GROUP BY
-	|	R1021B_VendorsTransactions.Recorder";
-	Query.SetParameter("VendorsAdvancesClosing", Ref);
+	|	R1021B_VendorsTransactions.Recorder
+	|;
+	|
+	|///////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	R5012B_VendorsAging.Recorder
+	|FROM
+	|	AccumulationRegister.R5012B_VendorsAging AS R5012B_VendorsAging
+	|WHERE
+	|	R5012B_VendorsAging.AgingClosing = &Ref
+	|GROUP BY
+	|	R5012B_VendorsAging.Recorder";
+	
+	Query.SetParameter("Ref", Ref);
 	QueryResults = Query.ExecuteBatch();
 	
 	For Each Row In QueryResults[0].Unload() Do
@@ -259,6 +406,22 @@ Procedure ClearSelfRecords(Ref)
 		EndDo;
 		RecordSet.Write();
 	EndDo;
+	
+	For Each Row In QueryResults[2].Unload() Do
+		RecordSet = AccumulationRegisters.R5012B_VendorsAging.CreateRecordSet();
+		RecordSet.Filter.Recorder.Set(Row.Recorder);
+		RecordSet.Read();
+		ArrayForDelete = New Array();
+		For Each Record In RecordSet Do
+			If Record.AgingClosing = Ref Then
+				ArrayForDelete.Add(Record);
+			EndIf;
+		EndDo;
+		For Each ItemForDelete In ArrayForDelete Do
+			RecordSet.Delete(ItemForDelete);
+		EndDo;
+		RecordSet.Write();
+	EndDo;
 EndProcedure
 
 // VendorsTransactions
@@ -283,8 +446,12 @@ Procedure Create_VendorsTransactions(Recorder, Parameters)
 	|	PartnerTransactions.LegalName,
 	|	PartnerTransactions.TransactionDocument,
 	|	PartnerTransactions.Agreement,
-	|	"""" AS Key,
-	|	SUM(PartnerTransactions.Amount) AS DocumentAmount
+	|	SUM(PartnerTransactions.Amount) AS DocumentAmount,
+	|	CASE
+	|		WHEN &IsDebitCreditNote
+	|			THEN PartnerTransactions.Key
+	|		ELSE """"
+	|	END AS Key
 	|INTO tmpVendorsTransactions
 	|FROM
 	|	InformationRegister.T1001I_PartnerTransactions AS PartnerTransactions
@@ -298,7 +465,12 @@ Procedure Create_VendorsTransactions(Recorder, Parameters)
 	|	PartnerTransactions.LegalName,
 	|	PartnerTransactions.Partner,
 	|	PartnerTransactions.Period,
-	|	PartnerTransactions.TransactionDocument
+	|	PartnerTransactions.TransactionDocument,
+	|	CASE
+	|		WHEN &IsDebitCreditNote
+	|			THEN PartnerTransactions.Key
+	|		ELSE """"
+	|	END
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
@@ -339,7 +511,40 @@ Procedure Create_VendorsTransactions(Recorder, Parameters)
 	|DROP tmpVendorsTransactions";
 	Query.SetParameter("Period", New Boundary(Parameters.RecorderPointInTime, BoundaryType.Including));	
 	Query.SetParameter("Recorder", Recorder);
+	Query.SetParameter("IsDebitCreditNote", OffsetOfPartnersServer.IsDebitCreditNote(Recorder));
 	Query.Execute(); 
+EndProcedure
+
+// Aging
+//  *Period
+//  *Company
+//  *Currency
+//  *Partner
+//  *Invoice
+//  *PaymentDate
+//  *Agreement
+//  *Amount
+Procedure Create_VendorsAging(Recorder, Parameters)
+	Query = New Query();
+	Query.TempTablesManager = Parameters.TempTablesManager;
+	Query.Text = 
+	"SELECT
+	|	R5012B_VendorsAging.Period,
+	|	R5012B_VendorsAging.Company,
+	|	R5012B_VendorsAging.Currency,
+	|	R5012B_VendorsAging.Partner,
+	|	R5012B_VendorsAging.Invoice,
+	|	R5012B_VendorsAging.PaymentDate,
+	|	R5012B_VendorsAging.Agreement,
+	|	R5012B_VendorsAging.Amount
+	|INTO Aging
+	|FROM
+	|	AccumulationRegister.R5012B_VendorsAging AS R5012B_VendorsAging
+	|WHERE
+	|	R5012B_VendorsAging.RecordType = VALUE(AccumulationRecordType.Receipt)
+	|	AND R5012B_VendorsAging.Recorder = &Recorder";
+	Query.SetParameter("Recorder", Recorder);
+	Query.Execute();
 EndProcedure
 
 Procedure Create_PaymentToVendors(Recorder, Parameters)
@@ -405,24 +610,10 @@ Procedure Create_AdvancesToVendors(Recorder, Parameters)
 	Query.Execute();
 EndProcedure
 
-Procedure Drop_VendorsTransactions(Parameters)
+Procedure Drop_Table(Parameters, TableName)
 	Query = New Query();
 	Query.TempTablesManager = Parameters.TempTablesManager;
-	Query.Text = "DROP VendorsTransactions";
-	Query.Execute();
-EndProcedure
-
-Procedure Drop_AdvancesToVendors(Parameters)
-	Query = New Query();
-	Query.TempTablesManager = Parameters.TempTablesManager;
-	Query.Text = "DROP AdvancesToVendors";
-	Query.Execute();	
-EndProcedure
-
-Procedure Drop_OffsetOfAdvanceToVendors(Parameters)
-	Query = New Query();
-	Query.TempTablesManager = Parameters.TempTablesManager;
-	Query.Text = "DROP OffsetOfAdvanceToVendors";
+	Query.Text = "DROP " + TableName;
 	Query.Execute();
 EndProcedure
 
@@ -436,7 +627,7 @@ EndProcedure
 //  *AdvancesDocument
 //  *Agreement
 //  *Amount
-Procedure Write_AdvancesAndTransactions(Recorder, Parameters, OffsetOfAdvanceFull, UseKeyInAdvance = False)
+Procedure Write_AdvancesAndTransactions(Recorder, Parameters, OffsetOfAdvanceFull, UseKeyForAdvance = False)
 	Query = New Query();
 	Query.TempTablesManager = Parameters.TempTablesManager;
 	Query.Text = 
@@ -466,17 +657,21 @@ Procedure Write_AdvancesAndTransactions(Recorder, Parameters, OffsetOfAdvanceFul
 	TableAdvances = RecordSet_AdvancesToVendors.UnloadColumns();
 	TableAdvances.Columns.Delete(TableAdvances.Columns.PointInTime);
 	
-	If UseKeyInAdvance Then
-		TableAdvances.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
-	EndIf;
-	
+		
 	RecordSet_VendorsTransactions = AccumulationRegisters.R1021B_VendorsTransactions.CreateRecordSet();
 	RecordSet_VendorsTransactions.Filter.Recorder.Set(Recorder);
 	TableTransactions = RecordSet_VendorsTransactions.UnloadColumns();
 	TableTransactions.Columns.Delete(TableTransactions.Columns.PointInTime);
 	
-//	//TableTransactions.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
-
+	IsDebitCreditNote = OffsetOfPartnersServer.IsDebitCreditNote(Recorder); 
+	If IsDebitCreditNote Then
+		TableTransactions.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	EndIf;
+	
+	If IsDebitCreditNote Or UseKeyForAdvance Then
+		TableAdvances.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	EndIf;
+	
 	For Each Row In QueryTable Do
 				
 		FillPropertyValues(OffsetOfAdvanceFull.Add(), Row);
@@ -532,4 +727,57 @@ Procedure Write_AdvancesAndTransactions(Recorder, Parameters, OffsetOfAdvanceFul
 	EndDo;
 EndProcedure
 
-
+// OffsetOfAging
+//  *Period
+//  *Company
+//  *Currency
+//  *Partner
+//  *Invoice
+//  *PaymentDate
+//  *Agreement
+//  *Amount
+Procedure Write_PartnersAging(Recorder, Parameters, OffsetOfAgingFull)
+	Query = New Query();
+	Query.TempTablesManager = Parameters.TempTablesManager;
+	Query.Text = 
+	"SELECT
+	|	OffsetOfAging.Period,
+	|	OffsetOfAging.Company,
+	|	OffsetOfAging.Currency,
+	|	OffsetOfAging.Partner,
+	|	OffsetOfAging.Invoice,
+	|	OffsetOfAging.PaymentDate,
+	|	OffsetOfAging.Agreement,
+	|	OffsetOfAging.Amount,
+	|	&AgingClosing AS AgingClosing,
+	|	&Document AS Document,
+	|	&Document AS Recorder
+	|FROM
+	|	OffsetOfAging AS OffsetOfAging";
+	Query.SetParameter("AgingClosing", Parameters.Object.Ref);
+	Query.SetParameter("Document", Recorder);
+	
+	QueryTable = Query.Execute().Unload();
+	
+	RecordSet_Aging = AccumulationRegisters.R5012B_VendorsAging.CreateRecordSet();
+	RecordSet_Aging.Filter.Recorder.Set(Recorder);
+	TableAging = RecordSet_Aging.UnloadColumns();
+	TableAging.Columns.Delete(TableAging.Columns.PointInTime);
+		
+	For Each Row In QueryTable Do
+				
+		FillPropertyValues(OffsetOfAgingFull.Add(), Row);
+		
+		NewRow_Advances = TableAging.Add();
+		FillPropertyValues(NewRow_Advances, Row);
+		NewRow_Advances.RecordType = AccumulationRecordType.Expense;
+	
+	EndDo;
+	
+	RecordSet_Aging.Read();
+	For Each Row In TableAging Do
+		FillPropertyValues(RecordSet_Aging.Add(), Row);
+	EndDo;
+	RecordSet_Aging.SetActive(True);
+	RecordSet_Aging.Write();
+EndProcedure

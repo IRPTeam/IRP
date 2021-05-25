@@ -6,6 +6,7 @@ Procedure SetVisible(Object, Form) Export
 	ApArByDocuments          = Object.ApArPostingDetail = PredefinedValue("Enum.ApArPostingDetail.ByDocuments");
 	
 	IsCustomer = Object.Type = PredefinedValue("Enum.AgreementTypes.Customer");
+	IsVendor   = Object.Type = PredefinedValue("Enum.AgreementTypes.Vendor");
 	
 	Form.Items.ItemSegment.Visible = IsCustomer And Not IsStandard;	
 	
@@ -19,5 +20,5 @@ Procedure SetVisible(Object, Form) Export
 	Form.Items.UseCreditLimit.ReadOnly = Not IsCustomer  Or IsStandard;
 	Form.Items.CreditLimitAmount.Visible            = Object.UseCreditLimit And IsCustomer And Not IsStandard;
 	Form.Items.CurrencyMovementTypeCurrency.Visible = Object.UseCreditLimit And IsCustomer And Not IsStandard;
-	Form.Items.PaymentTerm.Visible = ApArByDocuments And IsCustomer And Not IsStandard;
+	Form.Items.PaymentTerm.Visible = ApArByDocuments And (IsCustomer Or IsVendor) And Not IsStandard;
 EndProcedure

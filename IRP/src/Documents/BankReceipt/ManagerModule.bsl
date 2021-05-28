@@ -632,7 +632,7 @@ EndFunction
 Function R5011B_CustomersAging()
 	Return
 		"SELECT
-		|	VALUE(AccumulationRecordType.Expense),
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
 		|	OffsetOfAging.Period,
 		|	OffsetOfAging.Company,
 		|	OffsetOfAging.Partner,

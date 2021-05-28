@@ -338,6 +338,9 @@ Function FormItems_Unclassified_CallChainHandler(Object, Form, ActionHandler, Ad
 	ElsIf Upper(ActionHandler) = Upper("AccountReceivableByDocumentsOnActivateRow") Then
 		Form.AccountReceivableByDocumentsOnActivateRow(P1, AddInfo);
 		Return True;
+	ElsIf Upper(ActionHandler) = Upper("AccountPayableByDocumentsOnActivateRow") Then
+		Form.AccountPayableByDocumentsOnActivateRow(P1, AddInfo);
+		Return True;		
 	ElsIf Upper(ActionHandler) = Upper("AccountReceivableByDocumentsAfterDeleteRow") Then
 		Form.AccountReceivableByDocumentsAfterDeleteRow(P1, AddInfo);
 		Return True;

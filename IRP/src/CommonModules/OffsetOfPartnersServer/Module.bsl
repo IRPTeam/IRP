@@ -1140,7 +1140,9 @@ Procedure AdvancesOnMoneyMovements(Parameters, RegisterName, AdvancesTableName, 
 			Continue;
 		EndIf;
 		
-		If ValueIsFilled(Row.TransactionDocument) And Row.TransactionDocument.IgnoreAdvances Then
+		If ValueIsFilled(Row.TransactionDocument)
+		 And CommonFunctionsClientServer.ObjectHasProperty(Row.TransactionDocument, "IgnoreAdvances")
+		 And Row.TransactionDocument.IgnoreAdvances Then
 			Continue;
 		EndIf;
 		
@@ -1241,7 +1243,9 @@ Function DistributeAgingTableOnMoneyMovement(AgingBalanceTable)
 				Continue;
 			EndIf;
 			
-			If ValueIsFilled(ItemOfArray.TransactionDocument) And ItemOfArray.TransactionDocument.IgnoreAdvances Then
+			If ValueIsFilled(ItemOfArray.TransactionDocument) 
+				And CommonFunctionsClientServer.ObjectHasProperty(ItemOfArray.TransactionDocument, "IgnoreAdvances")
+				And ItemOfArray.TransactionDocument.IgnoreAdvances Then
 				Continue;
 			EndIf;
 			

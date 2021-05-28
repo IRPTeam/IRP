@@ -217,18 +217,44 @@
 	<item>
 		<selection>
 			<item>
-				<field>PaymentTermsCalculationType</field>
+				<field>CustomersPaymentTermsCalculationType</field>
 			</item>
 			<item>
-				<field>PaymentTermsDate</field>
+				<field>CustomersPaymentTermsDate</field>
 			</item>
 			<item>
-				<field>PaymentTermsAmount</field>
+				<field>CustomersPaymentTermsAmount</field>
 			</item>
 		</selection>
 		<filter>
 			<item xsi:type="FilterItemComparison">
-				<left xsi:type="dcscor:Field">Object.PaymentTerms.IsVisible</left>
+				<left xsi:type="dcscor:Field">Object.CustomersPaymentTerms.IsVisible</left>
+				<comparisonType>Equal</comparisonType>
+				<right xsi:type="xs:boolean">false</right>
+			</item>
+		</filter>
+		<appearance>
+			<dcscor:item xsi:type="SettingsParameterValue">
+				<dcscor:parameter>Visible</dcscor:parameter>
+				<dcscor:value xsi:type="xs:boolean">false</dcscor:value>
+			</dcscor:item>
+		</appearance>
+	</item>
+	<item>
+		<selection>
+			<item>
+				<field>VendorsPaymentTermsCalculationType</field>
+			</item>
+			<item>
+				<field>VendorsPaymentTermsDate</field>
+			</item>
+			<item>
+				<field>VendorsPaymentTermsAmount</field>
+			</item>
+		</selection>
+		<filter>
+			<item xsi:type="FilterItemComparison">
+				<left xsi:type="dcscor:Field">Object.VendorsPaymentTerms.IsVisible</left>
 				<comparisonType>Equal</comparisonType>
 				<right xsi:type="xs:boolean">false</right>
 			</item>

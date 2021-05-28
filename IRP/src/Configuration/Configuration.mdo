@@ -708,6 +708,7 @@
   <accumulationRegisters>AccumulationRegister.R1014T_CanceledPurchaseOrders</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1020B_AdvancesToVendors</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1021B_VendorsTransactions</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R1022B_VendorsPaymentPlanning</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1031B_ReceiptInvoicing</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1040B_TaxesOutgoing</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R2001T_Sales</accumulationRegisters>
@@ -720,6 +721,7 @@
   <accumulationRegisters>AccumulationRegister.R2014T_CanceledSalesOrders</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R2020B_AdvancesFromCustomers</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R2021B_CustomersTransactions</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R2022B_CustomersPaymentPlanning</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R2031B_ShipmentInvoicing</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R2040B_TaxesIncoming</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R3010B_CashOnHand</accumulationRegisters>

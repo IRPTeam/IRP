@@ -487,6 +487,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R4016B_InternalSupplyRequestOrdering());
 	QueryArray.Add(R4033B_GoodsReceiptSchedule());
 	QueryArray.Add(R4035B_IncomingStocks());
+	QueryArray.Add(R1022B_VendorsPaymentPlanning());
 	Return QueryArray;	
 EndFunction	
 
@@ -662,6 +663,33 @@ Function R4035B_IncomingStocks()
 		|	AND NOT QueryTable.IsService
 		|	AND NOT QueryTable.IsCanceled";
 EndFunction	
+
+Function R1022B_VendorsPaymentPlanning()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	PurchaseOrderPaymentTerms.Ref.Date AS Period,
+		|	PurchaseOrderPaymentTerms.Ref.Company AS Company,
+		|	PurchaseOrderPaymentTerms.Ref AS Basis,
+		|	PurchaseOrderPaymentTerms.Ref.LegalName AS LegalName,
+		|	PurchaseOrderPaymentTerms.Ref.Partner AS Partner,
+		|	PurchaseOrderPaymentTerms.Ref.Agreement AS Agreement,
+		|	SUM(PurchaseOrderPaymentTerms.Amount) AS Amount
+		|INTO R1022B_VendorsPaymentPlanning
+		|FROM
+		|	Document.PurchaseOrder.PaymentTerms AS PurchaseOrderPaymentTerms
+		|WHERE
+		|	PurchaseOrderPaymentTerms.Ref = &Ref
+		|	AND PurchaseOrderPaymentTerms.CalculationType = VALUE(Enum.CalculationTypes.Prepaid)
+		|	AND &StatusInfoPosting
+		|GROUP BY
+		|	PurchaseOrderPaymentTerms.Ref.Date,
+		|	PurchaseOrderPaymentTerms.Ref.Company,
+		|	PurchaseOrderPaymentTerms.Ref,
+		|	PurchaseOrderPaymentTerms.Ref.LegalName,
+		|	PurchaseOrderPaymentTerms.Ref.Partner,
+		|	PurchaseOrderPaymentTerms.Ref.Agreement";
+EndFunction
 
 Function Exists_R4035B_IncomingStocks()
 	Return

@@ -1389,6 +1389,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R4012B_StockReservation());
 	QueryArray.Add(R4013B_StockReservationPlanning());
 	QueryArray.Add(R4034B_GoodsShipmentSchedule());
+	QueryArray.Add(R2022B_CustomersPaymentPlanning());
 	Return QueryArray;	
 EndFunction	
 
@@ -1549,6 +1550,34 @@ Function R4034B_GoodsShipmentSchedule()
 		|	AND NOT ItemList.IsService
 		|	AND NOT ItemList.DeliveryDate = DATETIME(1, 1, 1)
 		|	AND ItemList.UseItemsShipmentScheduling";
+EndFunction
+
+Function R2022B_CustomersPaymentPlanning()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	SalesOrderPaymentTerms.Ref.Date AS Period,
+		|	SalesOrderPaymentTerms.Ref.Company AS Company,
+		|	SalesOrderPaymentTerms.Ref AS Basis,
+		|	SalesOrderPaymentTerms.Ref.LegalName AS LegalName,
+		|	SalesOrderPaymentTerms.Ref.Partner AS Partner,
+		|	SalesOrderPaymentTerms.Ref.Agreement AS Agreement,
+		|	SUM(SalesOrderPaymentTerms.Amount) AS Amount
+		|INTO R2022B_CustomersPaymentPlanning
+		|FROM
+		|	Document.SalesOrder.PaymentTerms AS SalesOrderPaymentTerms
+		|WHERE
+		|	SalesOrderPaymentTerms.Ref = &Ref
+		|	AND SalesOrderPaymentTerms.CalculationType = VALUE(Enum.CalculationTypes.Prepaid)
+		|	AND &StatusInfoPosting
+		|GROUP BY
+		|	SalesOrderPaymentTerms.Ref.Date,
+		|	SalesOrderPaymentTerms.Ref.Company,
+		|	SalesOrderPaymentTerms.Ref,
+		|	SalesOrderPaymentTerms.Ref.LegalName,
+		|	SalesOrderPaymentTerms.Ref.Partner,
+		|	SalesOrderPaymentTerms.Ref.Agreement,
+		|	VALUE(AccumulationRecordType.Receipt)";
 EndFunction
 
 #EndRegion

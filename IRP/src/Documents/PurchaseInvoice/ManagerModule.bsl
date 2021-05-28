@@ -2136,6 +2136,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R4035B_IncomingStocks());
 	QueryArray.Add(R4036B_IncomingStocksRequested());
 	QueryArray.Add(R5010B_ReconciliationStatement());
+	QueryArray.Add(R1022B_VendorsPaymentPlanning());
 	QueryArray.Add(T1001I_PartnerTransactions());
 	Return QueryArray;
 EndFunction
@@ -2763,6 +2764,33 @@ Function R4036B_IncomingStocksRequested()
 		|WHERE
 		|	TRUE";
 EndFunction	
+
+Function R1022B_VendorsPaymentPlanning()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	PurchaseInvoicePaymentTerms.Ref.Date AS Period,
+		|	PurchaseInvoicePaymentTerms.Ref.Company AS Company,
+		|	PurchaseInvoicePaymentTerms.Ref AS Basis,
+		|	PurchaseInvoicePaymentTerms.Ref.LegalName AS LegalName,
+		|	PurchaseInvoicePaymentTerms.Ref.Partner AS Partner,
+		|	PurchaseInvoicePaymentTerms.Ref.Agreement AS Agreement,
+		|	SUM(PurchaseInvoicePaymentTerms.Amount) AS Amount
+		|INTO R1022B_VendorsPaymentPlanning
+		|FROM
+		|	Document.PurchaseInvoice.PaymentTerms AS PurchaseInvoicePaymentTerms
+		|WHERE
+		|	PurchaseInvoicePaymentTerms.Ref = &Ref
+		|	AND PurchaseInvoicePaymentTerms.CalculationType = VALUE(Enum.CalculationTypes.PostShipmentCredit)
+		|GROUP BY
+		|	PurchaseInvoicePaymentTerms.Ref.Date,
+		|	PurchaseInvoicePaymentTerms.Ref.Company,
+		|	PurchaseInvoicePaymentTerms.Ref,
+		|	PurchaseInvoicePaymentTerms.Ref.LegalName,
+		|	PurchaseInvoicePaymentTerms.Ref.Partner,
+		|	PurchaseInvoicePaymentTerms.Ref.Agreement,
+		|	VALUE(AccumulationRecordType.Receipt)";
+EndFunction
 
 Function Exists_R4036B_IncomingStocksRequested()
 	Return

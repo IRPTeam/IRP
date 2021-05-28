@@ -720,6 +720,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R5011B_CustomersAging());
 	QueryArray.Add(R5010B_ReconciliationStatement());
 	QueryArray.Add(T1001I_PartnerTransactions());
+	QueryArray.Add(R2022B_CustomersPaymentPlanning());
 	Return QueryArray;
 EndFunction
 
@@ -1382,6 +1383,33 @@ Function R5010B_ReconciliationStatement()
 		|	ItemList.LegalName,
 		|	ItemList.Currency,
 		|	ItemList.Period";
+EndFunction
+
+Function R2022B_CustomersPaymentPlanning()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	SalesInvoicePaymentTerms.Ref.Date AS Period,
+		|	SalesInvoicePaymentTerms.Ref.Company AS Company,
+		|	SalesInvoicePaymentTerms.Ref AS Basis,
+		|	SalesInvoicePaymentTerms.Ref.LegalName AS LegalName,
+		|	SalesInvoicePaymentTerms.Ref.Partner AS Partner,
+		|	SalesInvoicePaymentTerms.Ref.Agreement AS Agreement,
+		|	SUM(SalesInvoicePaymentTerms.Amount) AS Amount
+		|INTO R2022B_CustomersPaymentPlanning
+		|FROM
+		|	Document.SalesInvoice.PaymentTerms AS SalesInvoicePaymentTerms
+		|WHERE
+		|	SalesInvoicePaymentTerms.Ref = &Ref
+		|	AND SalesInvoicePaymentTerms.CalculationType = VALUE(Enum.CalculationTypes.PostShipmentCredit)
+		|GROUP BY
+		|	SalesInvoicePaymentTerms.Ref.Date,
+		|	SalesInvoicePaymentTerms.Ref.Company,
+		|	SalesInvoicePaymentTerms.Ref,
+		|	SalesInvoicePaymentTerms.Ref.LegalName,
+		|	SalesInvoicePaymentTerms.Ref.Partner,
+		|	SalesInvoicePaymentTerms.Ref.Agreement,
+		|	VALUE(AccumulationRecordType.Receipt)";
 EndFunction
 
 #EndRegion

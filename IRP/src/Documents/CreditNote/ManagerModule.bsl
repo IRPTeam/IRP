@@ -150,6 +150,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R1020B_AdvancesToVendors());
 	QueryArray.Add(R2020B_AdvancesFromCustomers());
 	QueryArray.Add(R5012B_VendorsAging());
+	QueryArray.Add(R5011B_CustomersAging());
 	QueryArray.Add(T1001I_PartnerTransactions());
 	Return QueryArray;
 EndFunction
@@ -310,6 +311,26 @@ Function R5012B_VendorsAging()
 		|	OffsetOfAging.Document = &Ref";
 EndFunction
 
+Function R5011B_CustomersAging()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	OffsetOfAging.Period,
+		|	OffsetOfAging.Company,
+		|	OffsetOfAging.Partner,
+		|	OffsetOfAging.Agreement,
+		|	OffsetOfAging.Currency,
+		|	OffsetOfAging.Invoice,
+		|	OffsetOfAging.PaymentDate,
+		|	OffsetOfAging.Amount,
+		|	OffsetOfAging.Recorder AS AgingClosing
+		|INTO R5011B_CustomersAging
+		|FROM
+		|	InformationRegister.T1003I_OffsetOfAging AS OffsetOfAging
+		|WHERE
+		|	OffsetOfAging.Document = &Ref";
+EndFunction
+
 Function R5010B_ReconciliationStatement()
 	Return
 	"SELECT
@@ -332,12 +353,32 @@ Function T1001I_PartnerTransactions()
 		|	Transactions.BasisDocument AS TransactionDocument,
 		|	Transactions.Key,
 		|	Transactions.Amount,
-		|	TRUE AS IsVendorTransaction
+		|	TRUE AS IsVendorTransaction,
+		|	FALSE AS IsPaymentFromCustomer
 		|INTO T1001I_PartnerTransactions
 		|FROM
 		|	Transactions AS Transactions
 		|WHERE
-		|	Transactions.IsVendor";
+		|	Transactions.IsVendor
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	Transactions.Period,
+		|	Transactions.Company,
+		|	Transactions.Currency,
+		|	Transactions.LegalName,
+		|	Transactions.Partner,
+		|	Transactions.Agreement,
+		|	Transactions.BasisDocument,
+		|	Transactions.Key,
+		|	Transactions.Amount,
+		|	FALSE,
+		|	TRUE
+		|FROM
+		|	Transactions AS Transactions
+		|WHERE
+		|	Transactions.IsCustomer";
 EndFunction
 
 #EndRegion

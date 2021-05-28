@@ -149,6 +149,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R1020B_AdvancesToVendors());
 	QueryArray.Add(R2020B_AdvancesFromCustomers());
 	QueryArray.Add(R5011B_CustomersAging());
+	QueryArray.Add(R5012B_VendorsAging());
 	QueryArray.Add(T1001I_PartnerTransactions());
 	Return QueryArray;
 EndFunction
@@ -230,12 +231,32 @@ Function T1001I_PartnerTransactions()
 		|	Transactions.BasisDocument AS TransactionDocument,
 		|	Transactions.Key,
 		|	Transactions.Amount,
-		|	TRUE AS IsCustomerTransaction
+		|	TRUE AS IsCustomerTransaction,
+		|	FALSE AS IsPaymentToVendor
 		|INTO T1001I_PartnerTransactions
 		|FROM
 		|	Transactions AS Transactions
 		|WHERE
-		|	Transactions.IsCustomer";
+		|	Transactions.IsCustomer
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	Transactions.Period,
+		|	Transactions.Company,
+		|	Transactions.Currency,
+		|	Transactions.LegalName,
+		|	Transactions.Partner,
+		|	Transactions.Agreement,
+		|	Transactions.BasisDocument,
+		|	Transactions.Key,
+		|	Transactions.Amount,
+		|	FALSE,
+		|	TRUE
+		|FROM
+		|	Transactions AS Transactions
+		|WHERE
+		|	Transactions.IsVendor";
 EndFunction
 
 Function R1021B_VendorsTransactions()
@@ -323,6 +344,26 @@ Function R5011B_CustomersAging()
 		|	OffsetOfAging.Invoice,
 		|	OffsetOfAging.Amount,
 		|	OffsetOfAging.Recorder
+		|FROM
+		|	InformationRegister.T1003I_OffsetOfAging AS OffsetOfAging
+		|WHERE
+		|	OffsetOfAging.Document = &Ref";
+EndFunction
+
+Function R5012B_VendorsAging()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	OffsetOfAging.Period,
+		|	OffsetOfAging.Company,
+		|	OffsetOfAging.Partner,
+		|	OffsetOfAging.Agreement,
+		|	OffsetOfAging.Currency,
+		|	OffsetOfAging.Invoice,
+		|	OffsetOfAging.PaymentDate,
+		|	OffsetOfAging.Amount,
+		|	OffsetOfAging.Recorder AS AgingClosing
+		|INTO R5012B_VendorsAging
 		|FROM
 		|	InformationRegister.T1003I_OffsetOfAging AS OffsetOfAging
 		|WHERE

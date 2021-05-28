@@ -9,10 +9,14 @@ EndProcedure
 &AtClient
 Procedure AfterWrite(WriteParameters, AddInfo = Undefined) Export
 	CurrentData =  Items.AccountReceivableByDocuments.CurrentData;
-	If CurrentData = Undefined Then
-		Return;
+	If CurrentData <> Undefined Then
+		SetVisibleCustomersPaymentTerms(Object, ThisObject, CurrentData);
 	EndIf;
-	SetVisible(Object, ThisObject, CurrentData);
+
+	CurrentData =  Items.AccountPayableByDocuments.CurrentData;
+	If CurrentData <> Undefined Then
+		SetVisibleVendorsPaymentTerms(Object, ThisObject, CurrentData);
+	EndIf;	
 EndProcedure
 
 &AtServer
@@ -32,7 +36,8 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	LibraryLoader.RegisterLibrary(Object, ThisObject, Currencies_GetDeclaration(Object, ThisObject));	
 	DocOpeningEntryServer.OnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
 	If Parameters.Key.IsEmpty() Then
-		SetVisible(Object, ThisObject);
+		SetVisibleCustomersPaymentTerms(Object, ThisObject);
+		SetVisibleVendorsPaymentTerms(Object, ThisObject);
 	EndIf;
 EndProcedure
 
@@ -112,7 +117,8 @@ EndProcedure
 Procedure OnReadAtServer(CurrentObject) Export
 	DocOpeningEntryServer.OnReadAtServer(Object, ThisObject, CurrentObject);
 	FillItemList();
-	SetVisible(Object, ThisObject);
+	SetVisibleCustomersPaymentTerms(Object, ThisObject);
+	SetVisibleVendorsPaymentTerms(Object, ThisObject);
 EndProcedure
 
 &AtClient
@@ -894,13 +900,25 @@ EndProcedure
 #EndRegion
 
 &AtClient
-Procedure PaymentTermsBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
+Procedure CustomersPaymentTermsBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
 	Cancel = True;
 	CurrentData = Items.AccountReceivableByDocuments.CurrentData;
 	If CurrentData = Undefined Then
 		Return;
 	EndIf;
-	NewRow = Object.PaymentTerms.Add();
+	NewRow = Object.CustomersPaymentTerms.Add();
+	NewRow.Key = CurrentData.Key;
+	NewRow.IsVisible = True;
+EndProcedure
+
+&AtClient
+Procedure VendorsPaymentTermsBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
+	Cancel = True;
+	CurrentData = Items.AccountPayableByDocuments.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	NewRow = Object.VendorsPaymentTerms.Add();
 	NewRow.Key = CurrentData.Key;
 	NewRow.IsVisible = True;
 EndProcedure
@@ -908,13 +926,26 @@ EndProcedure
 &AtClient
 Procedure AccountReceivableByDocumentsAfterDeleteRow(Item, AddInfo = Undefined) Export
 	ArrayForDelete = New Array();
-	For Each Row In Object.PaymentTerms Do
+	For Each Row In Object.CustomersPaymentTerms Do
 		If Not Object.AccountReceivableByDocuments.FindRows(New Structure("Key", Row.Key)).Count() Then
 			ArrayForDelete.Add(Row);
 		EndIf;
 	EndDo;
 	For Each ItemForDelete In ArrayForDelete Do
-		Object.PaymentTerms.Delete(ItemForDelete);
+		Object.CustomersPaymentTerms.Delete(ItemForDelete);
+	EndDo;
+EndProcedure
+
+&AtClient
+Procedure AccountPayableByDocumentsAfterDeleteRow(Item, AddInfo = Undefined) Export
+	ArrayForDelete = New Array();
+	For Each Row In Object.VendorsPaymentTerms Do
+		If Not Object.AccountPayableByDocuments.FindRows(New Structure("Key", Row.Key)).Count() Then
+			ArrayForDelete.Add(Row);
+		EndIf;
+	EndDo;
+	For Each ItemForDelete In ArrayForDelete Do
+		Object.VendorsPaymentTerms.Delete(ItemForDelete);
 	EndDo;
 EndProcedure
 
@@ -924,16 +955,36 @@ Procedure AccountReceivableByDocumentsOnActivateRow(Item, AddInfo = Undefined) E
 	If CurrentData = Undefined Then
 		Return;
 	EndIf;
-	SetVisible(Object, ThisObject, CurrentData);
+	SetVisibleCustomersPaymentTerms(Object, ThisObject, CurrentData);
+EndProcedure
+
+&AtClient
+Procedure AccountPayableByDocumentsOnActivateRow(Item, AddInfo = Undefined) Export
+	CurrentData =  Items.AccountPayableByDocuments.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	SetVisibleVendorsPaymentTerms(Object, ThisObject, CurrentData);	
 EndProcedure
 
 &AtClientAtServerNoContext
-Procedure SetVisible(Object, Form, CurrentData = Undefined)
-	For Each Row In Object.PaymentTerms Do
+Procedure SetVisibleCustomersPaymentTerms(Object, Form, CurrentData = Undefined)
+	For Each Row In Object.CustomersPaymentTerms Do
 		If CurrentData = Undefined Then
 			Row.IsVisible = False;
 		Else
-			Row.IsVisible = Row.Key = CurrentData.Key;
+			Row.IsVisible = True;//Row.Key = CurrentData.Key;
+		EndIf;
+	EndDo;
+EndProcedure
+
+&AtClientAtServerNoContext
+Procedure SetVisibleVendorsPaymentTerms(Object, Form, CurrentData = Undefined)
+	For Each Row In Object.VendorsPaymentTerms Do
+		If CurrentData = Undefined Then
+			Row.IsVisible = False;
+		Else
+			Row.IsVisible = True;//Row.Key = CurrentData.Key;
 		EndIf;
 	EndDo;
 EndProcedure

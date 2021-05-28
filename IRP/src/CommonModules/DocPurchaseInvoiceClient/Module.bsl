@@ -90,7 +90,7 @@ Procedure OnOpen(Object, Form, Cancel, AddInfo = Undefined) Export
 EndProcedure
 
 Procedure NotificationProcessing(Object, Form, EventName, Parameter, Source, AddInfo = Undefined) Export
-	Return;
+	DocumentsClient.CalculatePaymentTermDateAndAmount(Object, Form, AddInfo);
 EndProcedure
 
 Procedure AfterWriteAtClient(Object, Form, WriteParameters, AddInfo = Undefined) Export
@@ -797,6 +797,7 @@ Function DateSettings(Object, Form, AddInfo = Undefined) Export
 	Actions = New Structure();
 	Actions.Insert("ChangeAgreement"	, "ChangeAgreement");
 	Actions.Insert("ChangeDeliveryDate"	, "ChangeDeliveryDate");
+	Actions.Insert("UpdatePaymentTerm"  , "UpdatePaymentTerm");
 	
 	Settings.Insert("Actions", Actions);
 	

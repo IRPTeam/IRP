@@ -4,6 +4,18 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 EndProcedure
 
 &AtClient
+Procedure ShowAllOnChange(Item)
+	ShowAllOnChangeAtServer();
+EndProcedure
+
+&AtServer
+Procedure ShowAllOnChangeAtServer()
+	If ThisObject.List.Parameters.Items.Find("ShowAll") <> Undefined Then
+		ThisObject.List.Parameters.SetParameterValue("ShowAll", ThisObject.ShowAll);
+	EndIf;
+EndProcedure
+
+&AtClient
 Procedure CommandSelect(Command)
 	Close(GetSelectedData());
 EndProcedure

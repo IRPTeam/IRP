@@ -93,7 +93,11 @@ Scenario: _1000000 preparation (payment terms)
 		And I input "03.11.2020" text in "End of period" field
 		And I click the button named "FormPostAndClose"
 		And I close all client application windows
-
+	* Load Opening entry, Bank receipt
+		When Create document OpeningEntry objects (aging)
+		When Create document BankReceipt objects (aging, Opening entry)
+		And I close all client application windows
+		
 
 Scenario: _1000001 filling in payment terms
 	Given I open hyperlink "e1cib/list/Catalog.PaymentSchedules"
@@ -334,7 +338,7 @@ Scenario: _1000009 create Cash receipt and check Aging register movements
 
 
 
-	Scenario: _1000015 create Bank receipt and check Aging register movements
+Scenario: _1000015 create Bank receipt and check Aging register movements
 		* Create Bank receipt
 			Given I open hyperlink "e1cib/list/Document.BankReceipt"
 			And I click the button named "FormCreate"
@@ -374,6 +378,13 @@ Scenario: _1000009 create Cash receipt and check Aging register movements
 				And I activate field named "PaymentListAmount" in "PaymentList" table
 				And I input "200,00" text in the field named "PaymentListAmount" of "PaymentList" table
 				And I finish line editing in "PaymentList" table
+				And in the table "PaymentList" I click the button named "PaymentListAdd"
+				And I click choice button of "Partner" attribute in "PaymentList" table
+				And I go to line in "List" table
+					| 'Description' |
+					| 'Kalipso'   |
+				And I select current line in "List" table
+				And I input "250,00" text in the field named "PaymentListAmount" of "PaymentList" table
 			And I click the button named "FormPost"
 			And I delete "$$NumberBankReceipt1000015$$" variable
 			And I delete "$$BankReceipt1000015$$" variable
@@ -412,7 +423,7 @@ Scenario: _1000009 create Cash receipt and check Aging register movements
 				| '$$DateSalesInvoice0240162$$' | '$$SalesInvoice0240162$$' | 'TRY'      | 'Main Company' | 'Kalipso' | '550,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice0240162$$' | '19.11.2020'                              | ''                                                       |
 				| '$$DateSalesInvoice024016$$'  | '$$SalesInvoice024016$$'  | 'TRY'      | 'Main Company' | 'Kalipso' | '550,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '$$DatePaymentTermsSalesInvoice0240161$$' | ''                                                       |
 				| '$$DateCashReceipt1000009$$'  | '$$CashReceipt1000009$$'  | 'TRY'      | 'Main Company' | 'Kalipso' | '550,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice0240162$$' | '19.11.2020'                              | 'Customers advances closing 4 dated 21.04.2021 12:00:00' |
-				| '$$DateBankReceipt1000015$$'  | '$$BankReceipt1000015$$'  | 'TRY'      | 'Main Company' | 'Kalipso' | '200,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '$$DatePaymentTermsSalesInvoice0240161$$' | 'Customers advances closing 4 dated 21.04.2021 12:00:00' |
+				| '$$DateBankReceipt1000015$$'  | '$$BankReceipt1000015$$'  | 'TRY'      | 'Main Company' | 'Kalipso' | '450,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '$$DatePaymentTermsSalesInvoice0240161$$' | 'Customers advances closing 4 dated 21.04.2021 12:00:00' |
 			Then the number of "List" table lines is "равно" "4"
 			And I close all client application windows
 
@@ -447,13 +458,14 @@ Scenario: _1000020 create Credit note and check Aging register movements
 		And in "Transactions" table I move to the next cell
 		* Check the selection of basis documents for the specified partner
 			And delay 2
+			And I set checkbox "Show all"			
 			And I go to line in "List" table
 				| 'Document' |
 				| '$$SalesInvoice024016$$'  |
 			And I select current line in "List" table
 			And I click the button named "FormCommandSelect" 
 			And I activate field named "TransactionsAmount" in "Transactions" table
-			And I input "100,00" text in the field named "TransactionsAmount" of "Transactions" table
+			And I input "150,00" text in the field named "TransactionsAmount" of "Transactions" table
 			And I finish line editing in "Transactions" table
 			And I click the button named "FormPost"
 			And I delete "$$CreditNote1000020$$" variable
@@ -485,8 +497,8 @@ Scenario: _1000020 create Credit note and check Aging register movements
 				| '$$DateSalesInvoice0240162$$' | '$$SalesInvoice0240162$$' | 'TRY'      | 'Main Company' | 'Kalipso' | '550,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice0240162$$' | '19.11.2020'                              | ''                                                       |
 				| '$$DateSalesInvoice024016$$'  | '$$SalesInvoice024016$$'  | 'TRY'      | 'Main Company' | 'Kalipso' | '550,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '$$DatePaymentTermsSalesInvoice0240161$$' | ''                                                       |
 				| '$$DateCashReceipt1000009$$'  | '$$CashReceipt1000009$$'  | 'TRY'      | 'Main Company' | 'Kalipso' | '550,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice0240162$$' | '19.11.2020'                              | 'Customers advances closing 4 dated 21.04.2021 12:00:00' |
-				| '$$DateBankReceipt1000015$$'  | '$$BankReceipt1000015$$'  | 'TRY'      | 'Main Company' | 'Kalipso' | '200,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '$$DatePaymentTermsSalesInvoice0240161$$' | 'Customers advances closing 4 dated 21.04.2021 12:00:00' |
-				| '$$CreditNoteDate1000020$$'   | '$$CreditNote1000020$$'   | 'TRY'      | 'Main Company' | 'Kalipso' | '100,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '$$DatePaymentTermsSalesInvoice0240161$$' | 'Customers advances closing 4 dated 21.04.2021 12:00:00' |
+				| '$$DateBankReceipt1000015$$'  | '$$BankReceipt1000015$$'  | 'TRY'      | 'Main Company' | 'Kalipso' | '450,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '$$DatePaymentTermsSalesInvoice0240161$$' | 'Customers advances closing 4 dated 21.04.2021 12:00:00' |
+				| '$$CreditNoteDate1000020$$'   | '$$CreditNote1000020$$'   | 'TRY'      | 'Main Company' | 'Kalipso' | '150,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '$$DatePaymentTermsSalesInvoice0240161$$' | 'Customers advances closing 4 dated 21.04.2021 12:00:00' |
 			Then the number of "List" table lines is "равно" "5"
 	And I close all client application windows
 			
@@ -521,6 +533,7 @@ Scenario: _1000030 create Debit note and check Aging register movements
 		And in "Transactions" table I move to the next cell
 		* Check the selection of basis documents for the specified partner
 			And delay 2
+			And I set checkbox "Show all"			
 			And I go to line in "List" table
 				| 'Document' |
 				| '$$SalesInvoice024016$$'  |
@@ -539,8 +552,12 @@ Scenario: _1000030 create Debit note and check Aging register movements
 		And I select "R5011 Customers aging" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| '$$DebitNote1000030$$' |
-			| 'Document registrations records'           |
+			| '$$DebitNote1000030$$'              | ''            | ''                         | ''          | ''             | ''         | ''                                 | ''        | ''                       | ''             | ''              |
+			| 'Document registrations records'    | ''            | ''                         | ''          | ''             | ''         | ''                                 | ''        | ''                       | ''             | ''              |
+			| 'Register  "R5011 Customers aging"' | ''            | ''                         | ''          | ''             | ''         | ''                                 | ''        | ''                       | ''             | ''              |
+			| ''                                  | 'Record type' | 'Period'                   | 'Resources' | 'Dimensions'   | ''         | ''                                 | ''        | ''                       | ''             | 'Attributes'    |
+			| ''                                  | ''            | ''                         | 'Amount'    | 'Company'      | 'Currency' | 'Agreement'                        | 'Partner' | 'Invoice'                | 'Payment date' | 'Aging closing' |
+			| ''                                  | 'Receipt'     | '$$DebitNoteDate1000030$$' | '50'        | 'Main Company' | 'TRY'      | 'Basic Partner terms, without VAT' | 'Kalipso' | '$$SalesInvoice024016$$' | '*'            | ''              |
 		And I close all client application windows
 	* Post customers advance closing document
 		Given I open hyperlink 'e1cib/list/Document.CustomersAdvancesClosing'
@@ -559,9 +576,9 @@ Scenario: _1000030 create Debit note and check Aging register movements
 			| '$$DateSalesInvoice0240162$$' | '$$SalesInvoice0240162$$' | 'TRY'      | 'Main Company' | 'Kalipso' | '550,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice0240162$$' | '19.11.2020'                              | ''                                                       |
 			| '$$DateSalesInvoice024016$$'  | '$$SalesInvoice024016$$'  | 'TRY'      | 'Main Company' | 'Kalipso' | '550,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '$$DatePaymentTermsSalesInvoice0240161$$' | ''                                                       |
 			| '$$DateCashReceipt1000009$$'  | '$$CashReceipt1000009$$'  | 'TRY'      | 'Main Company' | 'Kalipso' | '550,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice0240162$$' | '19.11.2020'                              | 'Customers advances closing 4 dated 21.04.2021 12:00:00' |
-			| '$$DateBankReceipt1000015$$'  | '$$BankReceipt1000015$$'  | 'TRY'      | 'Main Company' | 'Kalipso' | '200,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '$$DatePaymentTermsSalesInvoice0240161$$' | 'Customers advances closing 4 dated 21.04.2021 12:00:00' |
-			| '$$DateCreditNote1000020$$'   | '$$CreditNote1000020$$'   | 'TRY'      | 'Main Company' | 'Kalipso' | '100,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '$$DatePaymentTermsSalesInvoice0240161$$' | 'Customers advances closing 4 dated 21.04.2021 12:00:00' |
-			| '$$DebitNoteDate1000030$$'    | '$$DebitNote1000030$$'    | 'TRY'      | 'Main Company' | 'Kalipso' | '50,00'  | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '$$DatePaymentTermsSalesInvoice0240161$$' | 'Customers advances closing 4 dated 21.04.2021 12:00:00' |
+			| '$$DateBankReceipt1000015$$'  | '$$BankReceipt1000015$$'  | 'TRY'      | 'Main Company' | 'Kalipso' | '450,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '$$DatePaymentTermsSalesInvoice0240161$$' | 'Customers advances closing 4 dated 21.04.2021 12:00:00' |
+			| '$$DateCreditNote1000020$$'   | '$$CreditNote1000020$$'   | 'TRY'      | 'Main Company' | 'Kalipso' | '150,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '$$DatePaymentTermsSalesInvoice0240161$$' | 'Customers advances closing 4 dated 21.04.2021 12:00:00' |
+			| '$$DebitNoteDate1000030$$'    | '$$DebitNote1000030$$'    | 'TRY'      | 'Main Company' | 'Kalipso' | '50,00'  | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '*'                                       | 'Customers advances closing 4 dated 21.04.2021 12:00:00' |
 		Then the number of "List" table lines is "равно" "6"
 	And I close all client application windows
 				
@@ -769,4 +786,18 @@ Scenario: _1000050 check the offset of Sales invoice advance (type of settlement
 			And in the table "List" I click the button named "ListContextMenuPost"	
 		* Check movements
 			Given I open hyperlink 'e1cib/list/AccumulationRegister.R5011B_CustomersAging'
+			And "List" table contains lines
+				| 'Period'                      | 'Recorder'                | 'Currency' | 'Company'      | 'Partner' | 'Amount' | 'Agreement'                        | 'Invoice'                 | 'Payment date' | 'Aging closing'                                          |
+				| '$$DateSalesInvoice0240164$$' | '$$SalesInvoice0240164$$' | 'TRY'      | 'Main Company' | 'Kalipso' | '550,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice0240164$$' | '*'            | ''                                                       |
+				| '$$DateSalesInvoice0240164$$' | '$$SalesInvoice0240164$$' | 'TRY'      | 'Main Company' | 'Kalipso' | '550,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice0240164$$' | '*'            | 'Customers advances closing 4 dated 21.04.2021 12:00:00' |
+				| '$$DateSalesInvoice0240165$$' | '$$SalesInvoice0240165$$' | 'TRY'      | 'Main Company' | 'Kalipso' | '550,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice0240165$$' | '*'            | ''                                                       |
+				| '$$DateSalesInvoice0240165$$' | '$$SalesInvoice0240165$$' | 'TRY'      | 'Main Company' | 'Kalipso' | '550,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice0240165$$' | '*'            | 'Customers advances closing 4 dated 21.04.2021 12:00:00' |
 			And I close all client application windows	
+
+Scenario: _1000060 create Opening entry and check Aging register movements
+	* Post Opening entry
+		And I execute 1C:Enterprise script at server
+			| "Documents.OpeningEntry.FindByNumber(111).GetObject().Write(DocumentWriteMode.Posting);" |
+	* Post Bank receipt and check aging
+		And I execute 1C:Enterprise script at server
+			| "Documents.BankReceipt.FindByNumber(111).GetObject().Write(DocumentWriteMode.Posting);" |

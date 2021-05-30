@@ -49,6 +49,7 @@
       <types>DocumentRef.SalesInvoice</types>
       <types>DocumentRef.DebitNote</types>
       <types>DocumentRef.CreditNote</types>
+      <types>DocumentRef.OpeningEntry</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
@@ -156,6 +157,8 @@
       <types>DocumentRef.PurchaseReturn</types>
       <types>DocumentRef.SalesReturn</types>
       <types>DocumentRef.OpeningEntry</types>
+      <types>DocumentRef.CreditNote</types>
+      <types>DocumentRef.DebitNote</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
@@ -188,6 +191,22 @@
     </synonym>
     <type>
       <types>DefinedType.typeRowID</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+  <dimensions uuid="23ef4df9-951d-41d8-83c2-583c8b7c205b">
+    <name>DueAsAdvance</name>
+    <synonym>
+      <key>en</key>
+      <value>Due as advance</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

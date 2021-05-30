@@ -14,17 +14,6 @@
 //	*Agreement
 //	*DocumentAmount
 //	*DueAsAdvance
-//
-//-------------------------------------------
-// Aging
-//  *Period
-//  *Company
-//  *Currency
-//  *Partner
-//  *Invoice
-//  *PaymentDate
-//  *Agreement
-//  *Amount
 //  
 // <--Output tables:
 //
@@ -37,17 +26,7 @@
 //  *TransactionDocument
 //  *Agreement
 //  *Amount
-//
-// OffsetOfAging
-//  *Period
-//  *Company
-//  *Currency
-//  *Partner
-//  *Invoice
-//  *PaymentDate
-//  *Agreement
-//  *Amount
-Procedure Customers_OnReturn(Parameters) Export
+Procedure Customers_DueAsAdvance(Parameters) Export
 	Query = New Query();
 	Query.TempTablesManager = Parameters.TempTablesManager;
 	Query.Text = 
@@ -58,15 +37,18 @@ Procedure Customers_OnReturn(Parameters) Export
 	|	Transactions.Partner,
 	|	Transactions.LegalName,
 	|	Transactions.TransactionDocument,
-	|	Transactions.AdvanceBasis,
+//	|	Transactions.AdvanceBasis,
+	|	&Recorder AS AdvancesDocument,
+	|
 	|	Transactions.Agreement,
-	|	Transactions.DocumentAmount,
-	|	Transactions.DueAsAdvance
+//	|	Transactions.DocumentAmount
+	|	Transactions.Amount
+//	|	Transactions.DueAsAdvance
 	|INTO Transactions
 	|FROM
 	|	CustomersTransactions AS Transactions
-	|WHERE
-	|	Transactions.DueAsAdvance
+//	|WHERE
+//	|	Transactions.DueAsAdvance
 	|;
 	|
 	|
@@ -78,10 +60,11 @@ Procedure Customers_OnReturn(Parameters) Export
 	|	TransactionsBalance.LegalName,
 	|	TransactionsBalance.Partner,
 	|	TransactionsBalance.Agreement,
-	|	SUM(TransactionsBalance.AmountBalance) - SUM(Transactions.DocumentAmount) AS Amount,
+//	|	SUM(TransactionsBalance.AmountBalance) - SUM(Transactions.DocumentAmount) AS Amount,
+	|	SUM(TransactionsBalance.AmountBalance) AS Amount,
 	|	Transactions.Period,
 	|	Transactions.TransactionDocument,
-	|	Transactions.AdvanceBasis
+	|	Transactions.AdvancesDocument
 	|INTO TransactionsBalance
 	|FROM
 	|	AccumulationRegister.R2021B_CustomersTransactions.Balance(&Period, (Company, Currency, LegalName, Partner, Agreement,
@@ -101,7 +84,7 @@ Procedure Customers_OnReturn(Parameters) Export
 	|		AND TransactionsBalance.LegalName = Transactions.LegalName
 	|		AND TransactionsBalance.Agreement = Transactions.Agreement
 	|		AND TransactionsBalance.Currency = Transactions.Currency
-	|		AND Transactions.DueAsAdvance
+//	|		AND Transactions.DueAsAdvance
 	|GROUP BY
 	|	TransactionsBalance.Company,
 	|	TransactionsBalance.Currency,
@@ -110,7 +93,7 @@ Procedure Customers_OnReturn(Parameters) Export
 	|	TransactionsBalance.Agreement,
 	|	Transactions.Period,
 	|	Transactions.TransactionDocument,
-	|	Transactions.AdvanceBasis
+	|	Transactions.AdvancesDocument
 	|;
 	|
 	|
@@ -124,14 +107,17 @@ Procedure Customers_OnReturn(Parameters) Export
 	|	TransactionsBalance.Agreement,
 	|	TransactionsBalance.Currency,
 	|	TransactionsBalance.TransactionDocument,
-	|	TransactionsBalance.AdvanceBasis,
+	|	TransactionsBalance.AdvancesDocument,
 	|	TransactionsBalance.Amount
 	|INTO DueAsAdvanceFromCustomers
 	|FROM
 	|	TransactionsBalance AS TransactionsBalance
 	|WHERE
 	|	TransactionsBalance.Amount < 0";
-	Query.SetParameter("Period", New Boundary(Parameters.PointInTime, BoundaryType.Excluding));
+	//Query.SetParameter("Period", New Boundary(Parameters.RecorderPointInTime, BoundaryType.Excluding));
+	Query.SetParameter("Period", New Boundary(Parameters.RecorderPointInTime, BoundaryType.Including));
+	Query.SetParameter("Recorder", Parameters.RecorderPointInTime.Ref);
+	
 	Query.Execute();
 EndProcedure
 
@@ -1140,7 +1126,9 @@ Procedure AdvancesOnMoneyMovements(Parameters, RegisterName, AdvancesTableName, 
 			Continue;
 		EndIf;
 		
-		If ValueIsFilled(Row.TransactionDocument) And Row.TransactionDocument.IgnoreAdvances Then
+		If ValueIsFilled(Row.TransactionDocument)
+		 And CommonFunctionsClientServer.ObjectHasProperty(Row.TransactionDocument, "IgnoreAdvances")
+		 And Row.TransactionDocument.IgnoreAdvances Then
 			Continue;
 		EndIf;
 		
@@ -1241,7 +1229,9 @@ Function DistributeAgingTableOnMoneyMovement(AgingBalanceTable)
 				Continue;
 			EndIf;
 			
-			If ValueIsFilled(ItemOfArray.TransactionDocument) And ItemOfArray.TransactionDocument.IgnoreAdvances Then
+			If ValueIsFilled(ItemOfArray.TransactionDocument) 
+				And CommonFunctionsClientServer.ObjectHasProperty(ItemOfArray.TransactionDocument, "IgnoreAdvances")
+				And ItemOfArray.TransactionDocument.IgnoreAdvances Then
 				Continue;
 			EndIf;
 			

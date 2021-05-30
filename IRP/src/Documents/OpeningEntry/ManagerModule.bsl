@@ -103,7 +103,8 @@ Function GetQueryTextsSecondaryTables()
 	QueryArray.Add(VendorsTransactions());
 	QueryArray.Add(AdvancesFromCustomers());
 	QueryArray.Add(CustomersTransactions());
-	QueryArray.Add(PartnersAging());
+	QueryArray.Add(CustomersAging());
+	QueryArray.Add(VendorsAging());
 	QueryArray.Add(PostingServer.Exists_R4010B_ActualStocks());
 	QueryArray.Add(PostingServer.Exists_R4011B_FreeStocks());
 	Return QueryArray;
@@ -120,6 +121,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R2020B_AdvancesFromCustomers());
 	QueryArray.Add(R2021B_CustomersTransactions());
 	QueryArray.Add(R5011B_CustomersAging());
+	QueryArray.Add(R5012B_VendorsAging());
 //	QueryArray.Add(R3015B_CashAdvance());	
 	Return QueryArray;
 EndFunction
@@ -291,26 +293,48 @@ Function CustomersTransactions()
 		|	OpeningEntryAccountReceivableByAgreements.Ref = &Ref";
 EndFunction
 
-Function PartnersAging()
+Function CustomersAging()
 	Return
 		"SELECT
-		|	OpeningEntryPaymentTerms.Ref.Date AS Period,
+		|	OpeningEntryCustomersPaymentTerms.Ref.Date AS Period,
 		|	OpeningEntryAccountReceivableByDocuments.Ref.Company AS Company,
 		|	OpeningEntryAccountReceivableByDocuments.Partner AS Partner,
 		|	OpeningEntryAccountReceivableByDocuments.Agreement AS Agreement,
 		|	OpeningEntryAccountReceivableByDocuments.Ref AS Invoice,
-		|	OpeningEntryPaymentTerms.Date AS PaymentDate,
+		|	OpeningEntryCustomersPaymentTerms.Date AS PaymentDate,
 		|	OpeningEntryAccountReceivableByDocuments.Currency AS Currency,
-		|	OpeningEntryPaymentTerms.Amount AS Amount
-		|INTO PartnersAging
+		|	OpeningEntryCustomersPaymentTerms.Amount AS Amount
+		|INTO CustomersAging
 		|FROM
-		|	Document.OpeningEntry.PaymentTerms AS OpeningEntryPaymentTerms
-		|	LEFT JOIN Document.OpeningEntry.AccountReceivableByDocuments AS OpeningEntryAccountReceivableByDocuments
-		|	ON OpeningEntryPaymentTerms.Key = OpeningEntryAccountReceivableByDocuments.Key
-		|	AND OpeningEntryPaymentTerms.Ref = OpeningEntryAccountReceivableByDocuments.Ref
-		|	AND OpeningEntryAccountReceivableByDocuments.Ref = &Ref
+		|	Document.OpeningEntry.CustomersPaymentTerms AS OpeningEntryCustomersPaymentTerms
+		|		LEFT JOIN Document.OpeningEntry.AccountReceivableByDocuments AS OpeningEntryAccountReceivableByDocuments
+		|		ON OpeningEntryCustomersPaymentTerms.Key = OpeningEntryAccountReceivableByDocuments.Key
+		|		AND OpeningEntryCustomersPaymentTerms.Ref = OpeningEntryAccountReceivableByDocuments.Ref
+		|		AND OpeningEntryAccountReceivableByDocuments.Ref = &Ref
 		|WHERE
-		|OpeningEntryPaymentTerms.Ref = &Ref";
+		|	OpeningEntryCustomersPaymentTerms.Ref = &Ref";
+EndFunction
+
+Function VendorsAging()
+	Return
+		"SELECT
+		|	OpeningEntryVendorsPaymentTerms.Ref.Date AS Period,
+		|	OpeningEntryAccountPayableByDocuments.Ref.Company AS Company,
+		|	OpeningEntryAccountPayableByDocuments.Partner AS Partner,
+		|	OpeningEntryAccountPayableByDocuments.Agreement AS Agreement,
+		|	OpeningEntryAccountPayableByDocuments.Ref AS Invoice,
+		|	OpeningEntryVendorsPaymentTerms.Date AS PaymentDate,
+		|	OpeningEntryAccountPayableByDocuments.Currency AS Currency,
+		|	OpeningEntryVendorsPaymentTerms.Amount AS Amount
+		|INTO VendorsAging
+		|FROM
+		|	Document.OpeningEntry.VendorsPaymentTerms AS OpeningEntryVendorsPaymentTerms
+		|		LEFT JOIN Document.OpeningEntry.AccountPayableByDocuments AS OpeningEntryAccountPayableByDocuments
+		|		ON OpeningEntryVendorsPaymentTerms.Key = OpeningEntryAccountPayableByDocuments.Key
+		|		AND OpeningEntryVendorsPaymentTerms.Ref = OpeningEntryAccountPayableByDocuments.Ref
+		|		AND OpeningEntryAccountPayableByDocuments.Ref = &Ref
+		|WHERE
+		|	OpeningEntryVendorsPaymentTerms.Ref = &Ref";
 EndFunction
 
 Function R1020B_AdvancesToVendors()
@@ -333,6 +357,19 @@ Function R1021B_VendorsTransactions()
 		|INTO R1021B_VendorsTransactions
 		|FROM
 		|	VendorsTransactions AS QueryTable
+		|WHERE 
+		|	TRUE";
+
+EndFunction
+
+Function R5012B_VendorsAging()
+	Return
+		"SELECT 
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	*
+		|INTO R5012B_VendorsAging
+		|FROM
+		|	VendorsAging AS QueryTable
 		|WHERE 
 		|	TRUE";
 
@@ -371,7 +408,7 @@ Function R5011B_CustomersAging()
 		|	*
 		|INTO R5011B_CustomersAging
 		|FROM
-		|	PartnersAging AS QueryTable
+		|	CustomersAging AS QueryTable
 		|WHERE 
 		|	TRUE";
 

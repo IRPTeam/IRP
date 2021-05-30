@@ -107,6 +107,8 @@ Function CreateFilterByParameters(Ref, Parameters, TableName,
 	ArrayOfConditions = New Array();
 	ArrayOfConditionsOpeningEntry = New Array();
 	
+	QueryParameters.Insert("ShowAll", False);
+	
 	If Parameters.Property("Type") Then
 		QueryParameters.Insert("Type", Parameters.Type);
 		ArrayOfConditions.Add(" AND Obj.Type = &Type");
@@ -179,6 +181,7 @@ Function CreateFilterByParameters(Ref, Parameters, TableName,
 	|	CustomersTransactions.Agreement AS Agreement,
 	|	CustomersTransactions.Currency AS Currency,
 	|	CustomersTransactions.AmountBalance AS DocumentAmount
+	|INTO DocWithBalance
 	|FROM
 	|	AccumulationRegister.R2021B_CustomersTransactions.Balance(&Period,
 	|		CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
@@ -221,7 +224,50 @@ Function CreateFilterByParameters(Ref, Parameters, TableName,
 	|		FROM
 	|			Doc AS Doc)) AS VendorsTransactions
 	|WHERE
-	|	VendorsTransactions.AmountBalance > 0";
+	|	VendorsTransactions.AmountBalance > 0
+	|;
+	|//////////////////////////////////////////////////////////////
+	|SELECT 
+	|	DocWithBalance.Ref,
+	|	DocWithBalance.Company,
+	|	DocWithBalance.Partner,
+	|	DocWithBalance.LegalName,
+	|	DocWithBalance.Agreement,
+	|	DocWithBalance.Currency,
+	|	DocWithBalance.DocumentAmount
+	|INTO AllDoc
+	|FROM DocWithBalance AS DocWithBalance
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	Doc.Ref,
+	|	Doc.Company,
+	|	Doc.Partner,
+	|	Doc.LegalName,
+	|	Doc.Agreement,
+	|	Doc.Currency,
+	|	0
+	|FROM Doc AS Doc
+	|	WHERE &ShowAll
+	|;
+	|/////////////////////////////////////////////////////
+	|SELECT
+	|	AllDoc.Ref,
+	|	AllDoc.Company,
+	|	AllDoc.Partner,
+	|	AllDoc.LegalName,
+	|	AllDoc.Agreement,
+	|	AllDoc.Currency,
+	|	SUM(AllDoc.DocumentAmount) AS DocumentAmount
+	|FROM AllDoc AS AllDoc
+	|GROUP BY
+	|	AllDoc.Ref,
+	|	AllDoc.Company,
+	|	AllDoc.Partner,
+	|	AllDoc.LegalName,
+	|	AllDoc.Agreement,
+	|	AllDoc.Currency";
 	
 	FilterStructure = New Structure();
 	FilterStructure.Insert("QueryText", QueryText);

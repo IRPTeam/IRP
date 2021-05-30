@@ -223,6 +223,17 @@ Function OffsetOfAdvances(Parameters)
 			OffsetOfPartnersServer.Customers_OnMoneyMovements(Parameters);
 			Write_AdvancesAndTransactions(Row.Recorder, Parameters, OffsetOfAdvanceFull, True);
 			Write_PartnersAging(Row.Recorder, Parameters, OffsetOfAgingFull);
+			
+			// Due as advance
+			If CommonFunctionsClientServer.ObjectHasProperty(Row.Recorder, "DueAsAdvance") 
+				And Row.Recorder.DueAsAdvance Then
+				OffsetOfPartnersServer.Customers_DueAsAdvance(Parameters);
+				Write_AdvancesAndTransactions_DueAsAdvance(Row.Recorder, Parameters, OffsetOfAdvanceFull);
+				Drop_Table(Parameters, "Transactions");
+				Drop_Table(Parameters, "TransactionsBalance");
+				Drop_Table(Parameters, "DueAsAdvanceFromCustomers");
+			EndIf;
+			
 			Drop_Table(Parameters, "CustomersTransactions");
 			Drop_Table(Parameters, "AdvancesFromCustomers");
 			
@@ -246,7 +257,8 @@ Function OffsetOfAdvances(Parameters)
 	|	OffsetOfAdvanceFull.AdvancesDocument,
 	|	OffsetOfAdvanceFull.Agreement,
 	|	OffsetOfAdvanceFull.Key,
-	|	OffsetOfAdvanceFull.Amount
+	|	OffsetOfAdvanceFull.Amount,
+	|	OffsetOfAdvanceFull.DueAsAdvance
 	|INTO tmpOffsetOfAdvances
 	|FROM
 	|	&OffsetOfAdvanceFull AS OffsetOfAdvanceFull
@@ -280,6 +292,7 @@ Function OffsetOfAdvances(Parameters)
 	|	tmpOffsetOfAdvances.AdvancesDocument,
 	|	tmpOffsetOfAdvances.Agreement,
 	|	tmpOffsetOfAdvances.Key,
+	|	tmpOffsetOfAdvances.DueAsAdvance,
 	|	SUM(tmpOffsetOfAdvances.Amount) AS Amount
 	|INTO OffsetOfAdvances
 	|FROM
@@ -294,7 +307,8 @@ Function OffsetOfAdvances(Parameters)
 	|	tmpOffsetOfAdvances.TransactionDocument,
 	|	tmpOffsetOfAdvances.AdvancesDocument,
 	|	tmpOffsetOfAdvances.Agreement,
-	|	tmpOffsetOfAdvances.Key
+	|	tmpOffsetOfAdvances.Key,
+	|	tmpOffsetOfAdvances.DueAsAdvance
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
@@ -618,6 +632,116 @@ Procedure Drop_Table(Parameters, TableName)
 	Query.TempTablesManager = Parameters.TempTablesManager;
 	Query.Text = "DROP " + TableName;
 	Query.Execute();
+EndProcedure
+
+// DueAsAdvanceFromCustomers
+//  *Period
+//  *Company
+//  *Partner
+//  *LegalName
+//  *Agreement
+//  *Currency
+//  *TransactionDocument
+//  *AdvancesDocument
+//  *Amount
+Procedure Write_AdvancesAndTransactions_DueAsAdvance(Recorder, Parameters, OffsetOfAdvanceFull)
+	Query = New Query();
+	Query.TempTablesManager = Parameters.TempTablesManager;
+	Query.Text = 
+	"SELECT
+	|	DueAsAdvanceFromCustomers.Period,
+	|	DueAsAdvanceFromCustomers.Company,
+	|	DueAsAdvanceFromCustomers.Partner,
+	|	DueAsAdvanceFromCustomers.LegalName,
+	|	DueAsAdvanceFromCustomers.Agreement,
+	|	DueAsAdvanceFromCustomers.Currency,
+	|	DueAsAdvanceFromCustomers.TransactionDocument,
+	|	DueAsAdvanceFromCustomers.AdvancesDocument,
+	|	DueAsAdvanceFromCustomers.Amount,
+	|	&CustomersAdvancesClosing AS CustomersAdvancesClosing,
+	|	&Document AS Document,
+	|	&Document AS Recorder,
+	|	TRUE AS DueAsAdvance
+	|FROM
+	|	DueAsAdvanceFromCustomers AS DueAsAdvanceFromCustomers";
+	Query.SetParameter("CustomersAdvancesClosing", Parameters.Object.Ref);
+	Query.SetParameter("Document", Recorder);
+	
+	QueryTable = Query.Execute().Unload();
+	
+	RecordSet_AdvancesFromCustomers = AccumulationRegisters.R2020B_AdvancesFromCustomers.CreateRecordSet();
+	RecordSet_AdvancesFromCustomers.Filter.Recorder.Set(Recorder);
+	TableAdvances = RecordSet_AdvancesFromCustomers.UnloadColumns();
+	TableAdvances.Columns.Delete(TableAdvances.Columns.PointInTime);
+	
+	
+	RecordSet_CustomersTransactions = AccumulationRegisters.R2021B_CustomersTransactions.CreateRecordSet();
+	RecordSet_CustomersTransactions.Filter.Recorder.Set(Recorder);
+	TableTransactions = RecordSet_CustomersTransactions.UnloadColumns();
+	TableTransactions.Columns.Delete(TableTransactions.Columns.PointInTime);
+	
+//	IsDebitCreditNote = OffsetOfPartnersServer.IsDebitCreditNote(Recorder); 
+//	If IsDebitCreditNote Then
+//		TableTransactions.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+//	EndIf;
+	
+//	If IsDebitCreditNote Or UseKeyForAdvance Then
+//		TableAdvances.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+//	EndIf;
+	
+	For Each Row In QueryTable Do
+				
+		FillPropertyValues(OffsetOfAdvanceFull.Add(), Row);
+		
+		NewRow_Advances = TableAdvances.Add();
+		FillPropertyValues(NewRow_Advances, Row);
+		NewRow_Advances.RecordType = AccumulationRecordType.Expense;
+		NewRow_Advances.Basis = Row.AdvancesDocument;
+			
+		NewRow_Transactions = TableTransactions.Add();
+		FillPropertyValues(NewRow_Transactions, Row);
+		NewRow_Transactions.RecordType = AccumulationRecordType.Expense;
+		NewRow_Transactions.Basis = Row.TransactionDocument;
+	
+	EndDo;
+	
+	// Currency calculation
+	CurrenciesParameters = New Structure();
+	
+	PostingDataTables = New Map();
+	
+	PostingDataTables.Insert(RecordSet_AdvancesFromCustomers,   New Structure("RecordSet", TableAdvances));
+	PostingDataTables.Insert(RecordSet_CustomersTransactions, New Structure("RecordSet", TableTransactions));
+	
+	ArrayOfPostingInfo = New Array();
+	For Each DataTable In PostingDataTables Do
+		ArrayOfPostingInfo.Add(DataTable);
+	EndDo;
+	
+	CurrenciesParameters.Insert("Object", Recorder);
+	CurrenciesParameters.Insert("ArrayOfPostingInfo", ArrayOfPostingInfo);
+	
+	CurrenciesServer.PreparePostingDataTables(CurrenciesParameters, Undefined);
+	
+	For Each ItemOfPostingInfo In ArrayOfPostingInfo Do
+		If TypeOf(ItemOfPostingInfo.Key) = Type("AccumulationRegisterRecordSet.R2020B_AdvancesFromCustomers") Then
+			RecordSet_AdvancesFromCustomers.Read();
+			For Each Row In ItemOfPostingInfo.Value.RecordSet Do
+				FillPropertyValues(RecordSet_AdvancesFromCustomers.Add(), Row);
+			EndDo;
+			RecordSet_AdvancesFromCustomers.SetActive(True);
+			RecordSet_AdvancesFromCustomers.Write();
+		EndIf;
+	
+		If TypeOf(ItemOfPostingInfo.Key) = Type("AccumulationRegisterRecordSet.R2021B_CustomersTransactions") Then
+			RecordSet_CustomersTransactions.Read();
+			For Each Row In ItemOfPostingInfo.Value.RecordSet Do
+				FillPropertyValues(RecordSet_CustomersTransactions.Add(), Row);
+			EndDo;
+			RecordSet_CustomersTransactions.SetActive(True);
+			RecordSet_CustomersTransactions.Write();
+		EndIf;
+	EndDo;
 EndProcedure
 
 // OffsetOfAdvance

@@ -142,6 +142,7 @@ Function OffsetOfAdvances(Parameters)
 	|WHERE
 	|	PartnerAdvances.Period BETWEEN BEGINOFPERIOD(&BeginOfPeriod, DAY) AND ENDOFPERIOD(&EndOfPeriod, DAY)
 	|	AND PartnerAdvances.IsCustomerAdvance
+	|	AND PartnerAdvances.Company = &Company
 	|GROUP BY
 	|	PartnerAdvances.Recorder,
 	|	PartnerAdvances.Recorder.Date
@@ -158,6 +159,7 @@ Function OffsetOfAdvances(Parameters)
 	|WHERE
 	|	PartnerTransactions.Period BETWEEN BEGINOFPERIOD(&BeginOfPeriod, DAY) AND ENDOFPERIOD(&EndOfPeriod, DAY)
 	|	AND PartnerTransactions.IsPaymentFromCustomer
+	|	AND PartnerTransactions.Company = &Company
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
@@ -172,6 +174,7 @@ Function OffsetOfAdvances(Parameters)
 	|WHERE
 	|	PartnerTransactions.Period BETWEEN BEGINOFPERIOD(&BeginOfPeriod, DAY) AND ENDOFPERIOD(&EndOfPeriod, DAY)
 	|	AND PartnerTransactions.IsCustomerTransaction
+	|	AND PartnerTransactions.Company = &Company
 	|
 	|UNION ALL
 	|
@@ -200,6 +203,7 @@ Function OffsetOfAdvances(Parameters)
 	|	tmp.RecorderDate";
 	Query.SetParameter("BeginOfPeriod", Parameters.Object.BeginOfPeriod);
 	Query.SetParameter("EndOfPeriod"  , Parameters.Object.EndOfPeriod);
+	Query.SetParameter("Company"      , Parameters.Object.Company);
 	
 	QueryTable = Query.Execute().Unload();
 	For Each Row In QueryTable Do

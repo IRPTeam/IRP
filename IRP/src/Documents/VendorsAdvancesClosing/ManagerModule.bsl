@@ -142,6 +142,7 @@ Function OffsetOfAdvances(Parameters)
 	|WHERE
 	|	PartnerAdvances.Period BETWEEN BEGINOFPERIOD(&BeginOfPeriod, DAY) AND ENDOFPERIOD(&EndOfPeriod, DAY)
 	|	AND PartnerAdvances.IsVendorAdvance
+	|	AND PartnerAdvances.Company = &Company
 	|GROUP BY
 	|	PartnerAdvances.Recorder,
 	|	PartnerAdvances.Recorder.Date
@@ -158,7 +159,9 @@ Function OffsetOfAdvances(Parameters)
 	|WHERE
 	|	PartnerTransactions.Period BETWEEN BEGINOFPERIOD(&BeginOfPeriod, DAY) AND ENDOFPERIOD(&EndOfPeriod, DAY)
 	|	AND PartnerTransactions.IsPaymentToVendor
+	|	AND PartnerTransactions.Company = &Company
 	|;
+	|
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
@@ -172,6 +175,7 @@ Function OffsetOfAdvances(Parameters)
 	|WHERE
 	|	PartnerTransactions.Period BETWEEN BEGINOFPERIOD(&BeginOfPeriod, DAY) AND ENDOFPERIOD(&EndOfPeriod, DAY)
 	|	AND PartnerTransactions.IsVendorTransaction
+	|	AND PartnerTransactions.Company = &Company
 	|
 	|UNION ALL
 	|
@@ -183,6 +187,7 @@ Function OffsetOfAdvances(Parameters)
 	|FROM
 	|	tmpPartnerAdvancesOrPayments AS tmpPartnerAdvancesOrPayments
 	|;
+	|
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
@@ -200,6 +205,7 @@ Function OffsetOfAdvances(Parameters)
 	|	tmp.RecorderDate";
 	Query.SetParameter("BeginOfPeriod", Parameters.Object.BeginOfPeriod);
 	Query.SetParameter("EndOfPeriod"  , Parameters.Object.EndOfPeriod);
+	Query.SetParameter("Company"      , Parameters.Object.Company);
 	
 	QueryTable = Query.Execute().Unload();
 	For Each Row In QueryTable Do

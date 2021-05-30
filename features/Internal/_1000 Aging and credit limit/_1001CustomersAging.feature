@@ -539,8 +539,12 @@ Scenario: _1000030 create Debit note and check Aging register movements
 		And I select "R5011 Customers aging" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| '$$DebitNote1000030$$' |
-			| 'Document registrations records'           |
+			| '$$DebitNote1000030$$'              | ''            | ''                         | ''          | ''             | ''         | ''                                 | ''        | ''                       | ''                    | ''              |
+			| 'Document registrations records'    | ''            | ''                         | ''          | ''             | ''         | ''                                 | ''        | ''                       | ''                    | ''              |
+			| 'Register  "R5011 Customers aging"' | ''            | ''                         | ''          | ''             | ''         | ''                                 | ''        | ''                       | ''                    | ''              |
+			| ''                                  | 'Record type' | 'Period'                   | 'Resources' | 'Dimensions'   | ''         | ''                                 | ''        | ''                       | ''                    | 'Attributes'    |
+			| ''                                  | ''            | ''                         | 'Amount'    | 'Company'      | 'Currency' | 'Agreement'                        | 'Partner' | 'Invoice'                | 'Payment date'        | 'Aging closing' |
+			| ''                                  | 'Receipt'     | '$$DebitNoteDate1000030$$' | '50'        | 'Main Company' | 'TRY'      | 'Basic Partner terms, without VAT' | 'Kalipso' | '$$SalesInvoice024016$$' | '30.05.2021 00:00:00' | ''              |
 		And I close all client application windows
 	* Post customers advance closing document
 		Given I open hyperlink 'e1cib/list/Document.CustomersAdvancesClosing'
@@ -560,8 +564,8 @@ Scenario: _1000030 create Debit note and check Aging register movements
 			| '$$DateSalesInvoice024016$$'  | '$$SalesInvoice024016$$'  | 'TRY'      | 'Main Company' | 'Kalipso' | '550,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '$$DatePaymentTermsSalesInvoice0240161$$' | ''                                                       |
 			| '$$DateCashReceipt1000009$$'  | '$$CashReceipt1000009$$'  | 'TRY'      | 'Main Company' | 'Kalipso' | '550,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice0240162$$' | '19.11.2020'                              | 'Customers advances closing 4 dated 21.04.2021 12:00:00' |
 			| '$$DateBankReceipt1000015$$'  | '$$BankReceipt1000015$$'  | 'TRY'      | 'Main Company' | 'Kalipso' | '200,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '$$DatePaymentTermsSalesInvoice0240161$$' | 'Customers advances closing 4 dated 21.04.2021 12:00:00' |
-			| '$$DateCreditNote1000020$$'   | '$$CreditNote1000020$$'   | 'TRY'      | 'Main Company' | 'Kalipso' | '100,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '$$DatePaymentTermsSalesInvoice0240161$$' | 'Customers advances closing 4 dated 21.04.2021 12:00:00' |
-			| '$$DebitNoteDate1000030$$'    | '$$DebitNote1000030$$'    | 'TRY'      | 'Main Company' | 'Kalipso' | '50,00'  | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '$$DatePaymentTermsSalesInvoice0240161$$' | 'Customers advances closing 4 dated 21.04.2021 12:00:00' |
+			| '$$CreditNoteDate1000020$$'   | '$$CreditNote1000020$$'   | 'TRY'      | 'Main Company' | 'Kalipso' | '100,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '$$DatePaymentTermsSalesInvoice0240161$$' | 'Customers advances closing 4 dated 21.04.2021 12:00:00' |
+			| '$$DebitNoteDate1000030$$'    | '$$DebitNote1000030$$'    | 'TRY'      | 'Main Company' | 'Kalipso' | '50,00'  | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '*'                                       | ''                                                       |
 		Then the number of "List" table lines is "равно" "6"
 	And I close all client application windows
 				
@@ -734,29 +738,29 @@ Scenario: _1000050 check the offset of Sales invoice advance (type of settlement
 					| '$$NumberSalesInvoice024016$$'|
 			And I select current line in "List" table
 			And I click the button named "FormPost"
-			And I delete "$$SalesInvoice0240165$$" variable
-			And I delete "$$DateSalesInvoice0240165$$" variable
-			And I delete "$$NumberSalesInvoice0240165$$" variable
-			And I save the window as "$$SalesInvoice0240165$$"
-			And I save the value of the field named "Date" as "$$DateSalesInvoice0240165$$"
-			And I save the value of the field named "Number" as "$$NumberSalesInvoice0240165$$"
+			And I delete "$$SalesInvoice0240175$$" variable
+			And I delete "$$DateSalesInvoice0240175$$" variable
+			And I delete "$$NumberSalesInvoice0240175$$" variable
+			And I save the window as "$$SalesInvoice0240175$$"
+			And I save the value of the field named "Date" as "$$DateSalesInvoice0240175$$"
+			And I save the value of the field named "Number" as "$$NumberSalesInvoice0240175$$"
 			And I click the button named "FormPostAndClose"
 		* Check movements
 			Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 			And I go to line in "List" table
 					| 'Number' |
-					| '$$NumberSalesInvoice0240165$$'|
+					| '$$NumberSalesInvoice0240175$$'|
 			And I select current line in "List" table	
 			And I click "Registrations report" button
 			And I select "R5011 Customers aging" exact value from "Register" drop-down list
 			And I click "Generate report" button		
 			And "ResultTable" spreadsheet document contains lines:	
-				| '$$SalesInvoice0240165$$'           | ''            | ''                            | ''          | ''             | ''         | ''                                 | ''        | ''                        | ''             | ''              |
+				| '$$SalesInvoice0240175$$'           | ''            | ''                            | ''          | ''             | ''         | ''                                 | ''        | ''                        | ''             | ''              |
 				| 'Document registrations records'    | ''            | ''                            | ''          | ''             | ''         | ''                                 | ''        | ''                        | ''             | ''              |
 				| 'Register  "R5011 Customers aging"' | ''            | ''                            | ''          | ''             | ''         | ''                                 | ''        | ''                        | ''             | ''              |
 				| ''                                  | 'Record type' | 'Period'                      | 'Resources' | 'Dimensions'   | ''         | ''                                 | ''        | ''                        | ''             | 'Attributes'    |
 				| ''                                  | ''            | ''                            | 'Amount'    | 'Company'      | 'Currency' | 'Agreement'                        | 'Partner' | 'Invoice'                 | 'Payment date' | 'Aging closing' |
-				| ''                                  | 'Receipt'     | '$$DateSalesInvoice0240165$$' | '550'       | 'Main Company' | 'TRY'      | 'Basic Partner terms, without VAT' | 'Kalipso' | '$$SalesInvoice0240165$$' | '*'            | ''              |
+				| ''                                  | 'Receipt'     | '$$DateSalesInvoice0240175$$' | '550'       | 'Main Company' | 'TRY'      | 'Basic Partner terms, without VAT' | 'Kalipso' | '$$SalesInvoice0240175$$' | '*'            | ''              |
 		* Post customers advance closing document
 			Given I open hyperlink 'e1cib/list/Document.CustomersAdvancesClosing'
 			And I go to line in "List" table
@@ -769,4 +773,15 @@ Scenario: _1000050 check the offset of Sales invoice advance (type of settlement
 			And in the table "List" I click the button named "ListContextMenuPost"	
 		* Check movements
 			Given I open hyperlink 'e1cib/list/AccumulationRegister.R5011B_CustomersAging'
+			And "List" table contains lines:
+				| 'Recorder'                | 'Currency' | 'Company'      | 'Partner' | 'Amount' | 'Agreement'                        | 'Invoice'                 | 'Payment date' | 'Aging closing'                                          |
+				| '$$BankReceipt1000050$$'  | 'TRY'      | 'Main Company' | 'Kalipso' | '50,00'  | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '*'            | 'Customers advances closing 4 dated 21.04.2021 12:00:00' |
+				| '$$BankReceipt1000050$$'  | 'TRY'      | 'Main Company' | 'Kalipso' | '30,00'  | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '*'            | 'Customers advances closing 4 dated 21.04.2021 12:00:00' |
+				| '$$CashReceipt1000050$$'  | 'TRY'      | 'Main Company' | 'Kalipso' | '50,00'  | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '*'            | 'Customers advances closing 4 dated 21.04.2021 12:00:00' |
+				| '$$BankReceipt10000501$$' | 'TRY'      | 'Main Company' | 'Kalipso' | '170,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '*'            | 'Customers advances closing 4 dated 21.04.2021 12:00:00' |
+				| '$$SalesInvoice0240164$$' | 'TRY'      | 'Main Company' | 'Kalipso' | '550,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice0240164$$' | '*'            | ''                                                       |
+				| '$$SalesInvoice0240164$$' | 'TRY'      | 'Main Company' | 'Kalipso' | '380,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice0240164$$' | '*'            | 'Customers advances closing 4 dated 21.04.2021 12:00:00' |
+				| '$$CashReceipt10000505$$' | 'TRY'      | 'Main Company' | 'Kalipso' | '170,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice0240164$$' | '*'            | 'Customers advances closing 4 dated 21.04.2021 12:00:00' |
+				| '$$SalesInvoice0240165$$' | 'TRY'      | 'Main Company' | 'Kalipso' | '550,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice0240175$$' | '*'            | ''                                                       |
+				| '$$SalesInvoice0240165$$' | 'TRY'      | 'Main Company' | 'Kalipso' | '380,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice0240175$$' | '*'            | 'Customers advances closing 4 dated 21.04.2021 12:00:00' |
 			And I close all client application windows	

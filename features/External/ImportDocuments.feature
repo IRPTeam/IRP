@@ -545,7 +545,7 @@ Scenario: Create document InvoiceMatch objects
 
 Scenario: Create document OpeningEntry objects
 
-	And I check or create document "OpeningEntry" objects:
+		And I check or create document "OpeningEntry" objects:
 		| 'Ref'                                                                   | 'DeletionMark' | 'Number' | 'Date'                | 'Posted' | 'Company'                                                           | 'Author'                                                        | 'BusinessUnit' | 'Description' |
 		| 'e1cib/data/Document.OpeningEntry?ref=aa78120ed92fbced11eaf13781d9226e' | 'False'        | '1'      | '07.09.2020 21:26:04' | 'True'   | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | ''             | ''            |
 		| 'e1cib/data/Document.OpeningEntry?ref=aa78120ed92fbced11eaf13781d9226f' | 'False'        | '2'      | '07.09.2020 21:26:35' | 'True'   | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | ''             | ''            |
@@ -581,6 +581,7 @@ Scenario: Create document OpeningEntry objects
 	And I refill object tabular section "AccountPayableByDocuments":
 		| 'Ref'                                                                   | 'Key'                                  | 'Partner'                                                          | 'LegalName'                                                         | 'Agreement'                                                          | 'Currency'                                                           | 'Amount' |
 		| 'e1cib/data/Document.OpeningEntry?ref=aa78120ed92fbced11eaf13781d92275' | '55694eca-32b1-48f9-b074-3481f64b5ac2' | 'e1cib/data/Catalog.Partners?ref=aa78120ed92fbced11eaf124a9ba086a' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf124a9ba086b' | 'e1cib/data/Catalog.Agreements?ref=aa78120ed92fbced11eaf12effe70fba' | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1855' | '100'    |
+		| 'e1cib/data/Document.OpeningEntry?ref=aa78120ed92fbced11eaf13781d92275' | 'c62ab6b1-5747-4be1-a3c9-5eb8bf509ede' | 'e1cib/data/Catalog.Partners?ref=aa78120ed92fbced11eaf126e999cc58' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf126e999cc59' | 'e1cib/data/Catalog.Agreements?ref=aa78120ed92fbced11eaf126e999cc5b' | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1855' | '200'    |
 
 	And I refill object tabular section "AccountReceivableByDocuments":
 		| 'Ref'                                                                   | 'Key'                                  | 'Partner'                                                          | 'LegalName'                                                         | 'Agreement'                                                          | 'Currency'                                                           | 'Amount' |
@@ -642,10 +643,18 @@ Scenario: Create document OpeningEntry objects
 		| 'e1cib/data/Document.OpeningEntry?ref=aa78120ed92fbced11eaf13781d92275' | 'c3a0a653-6043-498c-b2b1-1e875a0fb7fa' | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1855' | '1'      | '1'           | 'False'           | '1'            | 'e1cib/data/ChartOfCharacteristicTypes.CurrencyMovementType?ref=aa78120ed92fbced11eaf113ba6c185f' | '200'    |
 		| 'e1cib/data/Document.OpeningEntry?ref=aa78120ed92fbced11eaf13781d92275' | 'c3a0a653-6043-498c-b2b1-1e875a0fb7fa' | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1855' | '1'      | '1'           | 'False'           | '1'            | 'e1cib/data/ChartOfCharacteristicTypes.CurrencyMovementType?ref=aa78120ed92fbced11eaf113ba6c185d' | '200'    |
 		| 'e1cib/data/Document.OpeningEntry?ref=aa78120ed92fbced11eaf13781d92275' | 'c3a0a653-6043-498c-b2b1-1e875a0fb7fa' | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1855' | '0,17'   | '5,8824'      | 'False'           | '1'            | 'e1cib/data/ChartOfCharacteristicTypes.CurrencyMovementType?ref=aa78120ed92fbced11eaf113ba6c185e' | '34'     |
+		| 'e1cib/data/Document.OpeningEntry?ref=aa78120ed92fbced11eaf13781d92275' | 'c62ab6b1-5747-4be1-a3c9-5eb8bf509ede' | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1855' | '1'      | '1'           | 'False'           | '1'            | 'e1cib/data/ChartOfCharacteristicTypes.CurrencyMovementType?ref=aa78120ed92fbced11eaf113ba6c185f' | '200'    |
+		| 'e1cib/data/Document.OpeningEntry?ref=aa78120ed92fbced11eaf13781d92275' | 'c62ab6b1-5747-4be1-a3c9-5eb8bf509ede' | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1855' | '1'      | '1'           | 'False'           | '1'            | 'e1cib/data/ChartOfCharacteristicTypes.CurrencyMovementType?ref=aa78120ed92fbced11eaf113ba6c185d' | '200'    |
+		| 'e1cib/data/Document.OpeningEntry?ref=aa78120ed92fbced11eaf13781d92275' | 'c62ab6b1-5747-4be1-a3c9-5eb8bf509ede' | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1855' | '0,1712' | '5,8411'      | 'False'           | '1'            | 'e1cib/data/ChartOfCharacteristicTypes.CurrencyMovementType?ref=aa78120ed92fbced11eaf113ba6c185e' | '34,24'  |
 
-	And I refill object tabular section "PaymentTerms":
+	And I refill object tabular section "CustomersPaymentTerms":
 		| 'Ref'                                                                   | 'Key'                                  | 'CalculationType'                          | 'Date'                | 'Amount' |
 		| 'e1cib/data/Document.OpeningEntry?ref=aa78120ed92fbced11eaf13781d92275' | 'c3a0a653-6043-498c-b2b1-1e875a0fb7fa' | 'Enum.CalculationTypes.PostShipmentCredit' | '01.01.2022 00:00:00' | '200'    |
+
+	And I refill object tabular section "VendorsPaymentTerms":
+		| 'Ref'                                                                   | 'Key'                                  | 'CalculationType'                          | 'Date'                | 'Amount' |
+		| 'e1cib/data/Document.OpeningEntry?ref=aa78120ed92fbced11eaf13781d92275' | 'c62ab6b1-5747-4be1-a3c9-5eb8bf509ede' | 'Enum.CalculationTypes.PostShipmentCredit' | '01.06.2021 00:00:00' | '100'    |
+		| 'e1cib/data/Document.OpeningEntry?ref=aa78120ed92fbced11eaf13781d92275' | 'c62ab6b1-5747-4be1-a3c9-5eb8bf509ede' | 'Enum.CalculationTypes.PostShipmentCredit' | '05.06.2021 00:00:00' | '100'    |
 
 
 

@@ -77,10 +77,14 @@ Scenario: _040148 preparation (sales order movements)
 		When Create catalog CancelReturnReasons objects
 		When Create document SalesOrder objects (check movements, SC before SI, Use shipment sheduling)
 		When Create document SalesOrder objects (check movements, SC before SI, not Use shipment sheduling)
-
+		When Create document SalesOrder objects (with aging, prepaid)
+		When Create document SalesOrder objects (with aging, post-shipment credit)
 		And I execute 1C:Enterprise script at server
  			| "Documents.SalesOrder.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |	
 			| "Documents.SalesOrder.FindByNumber(2).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.SalesOrder.FindByNumber(112).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.SalesOrder.FindByNumber(113).GetObject().Write(DocumentWriteMode.Posting);" |
+		
 	# * Check query for sales order movements
 	# 	Given I open hyperlink "e1cib/app/DataProcessor.AnaliseDocumentMovements"
 	# 	And in the table "Info" I click "Fill movements" button
@@ -252,7 +256,6 @@ Scenario: _040155 check Sales order movements by the Register  "R2013 Procuremen
 			| ''                                              | 'Period'              | 'Resources'        | ''                    | ''                  | ''                 | ''                 | ''               | 'Dimensions'   | ''                                        | ''         |
 			| ''                                              | ''                    | 'Ordered quantity' | 'Re ordered quantity' | 'Purchase quantity' | 'Receipt quantity' | 'Shipped quantity' | 'Sales quantity' | 'Company'      | 'Order'                                   | 'Item key' |
 			| ''                                              | '27.01.2021 19:50:45' | '24'               | ''                    | ''                  | ''                 | ''                 | ''               | 'Main Company' | 'Sales order 1 dated 27.01.2021 19:50:45' | '37/18SD'  |
-	
 		And I close all client application windows
 		
 Scenario: _040156 check Sales order movements by the Register  "R4034 Scheduled goods shipments"
@@ -338,6 +341,55 @@ Scenario: _0401563 check Sales order movements by the Register  "R4011 Free stoc
 			| ''                                        | 'Expense'     | '27.01.2021 19:50:45' | '2'         | 'Store 02'   | 'XS/Blue'  |
 		And I close all client application windows
 
+Scenario: _0401568 check Sales order movements by the Register  "R2022 Customers payment planning" (prepaid)
+	* Select Sales order
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '112' |
+	* Check movements by the Register  "R2022 Customers payment planning" 
+		And I click "Registrations report" button
+		And I select "R2022 Customers payment planning" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Sales order 112 dated 30.05.2021 12:24:18'    | ''            | ''                    | ''          | ''             | ''                                          | ''                | ''        | ''                                 |
+			| 'Document registrations records'               | ''            | ''                    | ''          | ''             | ''                                          | ''                | ''        | ''                                 |
+			| 'Register  "R2022 Customers payment planning"' | ''            | ''                    | ''          | ''             | ''                                          | ''                | ''        | ''                                 |
+			| ''                                             | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                                          | ''                | ''        | ''                                 |
+			| ''                                             | ''            | ''                    | 'Amount'    | 'Company'      | 'Basis'                                     | 'Legal name'      | 'Partner' | 'Agreement'                        |
+			| ''                                             | 'Receipt'     | '30.05.2021 12:24:18' | '400'       | 'Main Company' | 'Sales order 112 dated 30.05.2021 12:24:18' | 'Company Kalipso' | 'Kalipso' | 'Basic Partner terms, without VAT' |
+		And I close all client application windows
+
+Scenario: _0401569 check that there is no Sales order movements by the Register  "R2022 Customers payment planning" (Post-shipment credit)
+	* Select Sales order
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '113' |
+	* Check movements by the Register  "R2022 Customers payment planning" 
+		And I click "Registrations report" button
+		And I select "R2022 Customers payment planning" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Sales order 113 dated 30.05.2021 12:32:01' |
+			| 'Document registrations records'            |
+		And I close all client application windows
+
+Scenario: _0401570 check there is no Sales order movements by the Register  "R2022 Customers payment planning" (without aging)
+	* Select Sales order
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '1' |
+	* Check movements by the Register  "R2022 Customers payment planning" 
+		And I click "Registrations report" button
+		And I select "R2022 Customers payment planning" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Sales order 1 dated 27.01.2021 19:50:45' |
+			| 'Document registrations records'          |
+		And I close all client application windows
 
 Scenario: _0401573 Sales order clear posting/mark for deletion
 	* Select Sales order closing

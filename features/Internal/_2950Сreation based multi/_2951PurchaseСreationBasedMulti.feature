@@ -2102,7 +2102,7 @@ Scenario: _090323 create one Purchase order - several Goods receipt - one Purcha
 		And I delete "$$PurchaseInvoice090323$$" variable
 		And I delete "$$DatePurchaseInvoice090323$$" variable
 		And I save the value of "Number" field as "$$NumberPurchaseInvoice090323$$"
-		And I save the value of "Date" field as "$$DatePurchaseInvoice090323$$"
+		And I save the value of the field named "Date" as "$$DatePurchaseInvoice090323$$"
 		And I save the window as "$$PurchaseInvoice090323$$"
 	* Check movements
 		And I click "Registrations report" button		

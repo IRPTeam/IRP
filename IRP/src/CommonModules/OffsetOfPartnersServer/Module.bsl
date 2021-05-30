@@ -3,7 +3,7 @@
 // 
 // -->Input tables:
 // 
-// CustomersTransactions**
+// CustomersTransactions
 //	*Period
 //	*Company
 //	*Currency
@@ -17,7 +17,7 @@
 //  
 // <--Output tables:
 //
-// DueAsAdvanceFromCustomers**
+// DueAsAdvanceFromCustomers
 //  *Period
 //  *Company
 //  *Currency
@@ -37,24 +37,14 @@ Procedure Customers_DueAsAdvance(Parameters) Export
 	|	Transactions.Partner,
 	|	Transactions.LegalName,
 	|	Transactions.TransactionDocument,
-//	|	Transactions.AdvanceBasis,
 	|	&Recorder AS AdvancesDocument,
-	|
 	|	Transactions.Agreement,
-//	|	Transactions.DocumentAmount
 	|	Transactions.Amount,
-	//--
 	|	Transactions.Key
-	//--
-//	|	Transactions.DueAsAdvance
 	|INTO Transactions
 	|FROM
 	|	CustomersTransactions AS Transactions
-//	|WHERE
-//	|	Transactions.DueAsAdvance
 	|;
-	|
-	|
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
@@ -63,31 +53,23 @@ Procedure Customers_DueAsAdvance(Parameters) Export
 	|	TransactionsBalance.LegalName,
 	|	TransactionsBalance.Partner,
 	|	TransactionsBalance.Agreement,
-//	|	SUM(TransactionsBalance.AmountBalance) - SUM(Transactions.DocumentAmount) AS Amount,
 	|	SUM(TransactionsBalance.AmountBalance) AS Amount,
 	|	SUM(Transactions.Amount) AS DocumentAmount,
 	|	Transactions.Period,
 	|	Transactions.TransactionDocument,
 	|	Transactions.AdvancesDocument,
-	//--
 	|	Transactions.Key
-	//--
 	|INTO TransactionsBalance
 	|FROM
 	|	AccumulationRegister.R2021B_CustomersTransactions.Balance(&Period, (Company, Currency, LegalName, Partner, Agreement,
-	//--	
-	|	Basis,
-	//--
-	|	CurrencyMovementType) IN
+	|		Basis, CurrencyMovementType) IN
 	|		(SELECT
 	|			Transactions.Company,
 	|			Transactions.Currency,
 	|			Transactions.LegalName,
 	|			Transactions.Partner,
 	|			Transactions.Agreement,
-	//--
 	|			Transactions.TransactionDocument,
-	//--
 	|			VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
 	|		FROM
 	|			Transactions AS Transactions)) AS TransactionsBalance
@@ -98,7 +80,6 @@ Procedure Customers_DueAsAdvance(Parameters) Export
 	|		AND TransactionsBalance.Agreement = Transactions.Agreement
 	|		AND TransactionsBalance.Currency = Transactions.Currency
 	|		AND TransactionsBalance.Basis = Transactions.TransactionDocument
-//	|		AND Transactions.DueAsAdvance
 	|GROUP BY
 	|	TransactionsBalance.Company,
 	|	TransactionsBalance.Currency,
@@ -111,8 +92,6 @@ Procedure Customers_DueAsAdvance(Parameters) Export
 	|	Transactions.Key
 	|;
 	|
-	|
-	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
 	|	TransactionsBalance.Period,
@@ -123,62 +102,22 @@ Procedure Customers_DueAsAdvance(Parameters) Export
 	|	TransactionsBalance.Currency,
 	|	TransactionsBalance.TransactionDocument,
 	|	TransactionsBalance.AdvancesDocument,
-	//|	TransactionsBalance.Amount,
-	|	case when TransactionsBalance.Amount > TransactionsBalance.DocumentAmount then
-	|	TransactionsBalance.DocumentAmount
-	|	else TransactionsBalance.Amount end as Amount,
+	|	CASE
+	|		WHEN TransactionsBalance.Amount > TransactionsBalance.DocumentAmount
+	|			THEN TransactionsBalance.DocumentAmount
+	|		ELSE TransactionsBalance.Amount
+	|	END AS Amount,
 	|	TransactionsBalance.Key
 	|INTO DueAsAdvanceFromCustomers
 	|FROM
 	|	TransactionsBalance AS TransactionsBalance
 	|WHERE
 	|	TransactionsBalance.Amount < 0";
-	//Query.SetParameter("Period", New Boundary(Parameters.RecorderPointInTime, BoundaryType.Excluding));
 	Query.SetParameter("Period", New Boundary(Parameters.RecorderPointInTime, BoundaryType.Including));
 	Query.SetParameter("Recorder", Parameters.RecorderPointInTime.Ref);
 	
 	Query.Execute();
 EndProcedure
-
-//Procedure Customers_OnReturn_Unposting(Parameters) Export
-//	Query = New Query();
-//	Query.TempTablesManager = Parameters.TempTablesManager;
-//	Query.Text = 
-//	"SELECT
-//	|	Table.Period,
-//	|	Table.Company,
-//	|	Table.Currency,
-//	|	Table.Partner,
-//	|	Table.LegalName,
-//	|	Table.Basis AS TransactionDocument,
-//	|	Table.Basis AS AdvancesDocument,
-//	|	Table.Basis AS AdvanceBasis,
-//	|	Table.Agreement,
-//	|	Table.Amount
-//	|INTO DueAsAdvanceFromCustomers
-//	|FROM
-//	|	AccumulationRegister.R2021B_CustomersTransactions AS Table
-//	|WHERE
-//	|	FALSE
-//	|;
-//	|
-//	|////////////////////////////////////////////////////////////////////////////////
-//	|SELECT
-//	|	Table.Period,
-//	|	Table.Company,
-//	|	Table.Currency,
-//	|	Table.Partner,
-//	|	Table.Invoice,
-//	|	Table.PaymentDate,
-//	|	Table.Agreement,
-//	|	Table.Amount
-//	|INTO OffsetOfAging
-//	|FROM
-//	|	AccumulationRegister.R5011B_CustomersAging AS Table
-//	|WHERE
-//	|	FALSE";
-//	Query.Execute();	
-//EndProcedure	
 
 // Parameters:
 // 
@@ -335,6 +274,126 @@ Procedure Customers_OnTransaction_Unposting(Parameters) Export
 	|	FALSE";
 	Query.Execute();	
 
+EndProcedure
+
+// Parameters:
+// 
+// -->Input tables:
+// 
+// VendorsTransactions
+//	*Period
+//	*Company
+//	*Currency
+//	*Partner
+//	*LegalName
+//	*TransactionDocument
+//	*AdvanceBasis
+//	*Agreement
+//	*DocumentAmount
+//	*DueAsAdvance
+//  
+// <--Output tables:
+//
+// DueAsAdvanceToVendors
+//  *Period
+//  *Company
+//  *Currency
+//  *Partner
+//  *LegalName
+//  *TransactionDocument
+//  *Agreement
+//  *Amount
+Procedure Vendors_DueAsAdvance(Parameters) Export
+	Query = New Query();
+	Query.TempTablesManager = Parameters.TempTablesManager;
+	Query.Text = 
+	"SELECT
+	|	Transactions.Period,
+	|	Transactions.Company,
+	|	Transactions.Currency,
+	|	Transactions.Partner,
+	|	Transactions.LegalName,
+	|	Transactions.TransactionDocument,
+	|	&Recorder AS AdvancesDocument,
+	|	Transactions.Agreement,
+	|	Transactions.Amount,
+	|	Transactions.Key
+	|INTO Transactions
+	|FROM
+	|	VendorsTransactions AS Transactions
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	TransactionsBalance.Company,
+	|	TransactionsBalance.Currency,
+	|	TransactionsBalance.LegalName,
+	|	TransactionsBalance.Partner,
+	|	TransactionsBalance.Agreement,
+	|	SUM(TransactionsBalance.AmountBalance) AS Amount,
+	|	SUM(Transactions.Amount) AS DocumentAmount,
+	|	Transactions.Period,
+	|	Transactions.TransactionDocument,
+	|	Transactions.AdvancesDocument,
+	|	Transactions.Key
+	|INTO TransactionsBalance
+	|FROM
+	|	AccumulationRegister.R1021B_VendorsTransactions.Balance(&Period, (Company, Currency, LegalName, Partner, Agreement,
+	|		Basis, CurrencyMovementType) IN
+	|		(SELECT
+	|			Transactions.Company,
+	|			Transactions.Currency,
+	|			Transactions.LegalName,
+	|			Transactions.Partner,
+	|			Transactions.Agreement,
+	|			Transactions.TransactionDocument,
+	|			VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
+	|		FROM
+	|			Transactions AS Transactions)) AS TransactionsBalance
+	|		INNER JOIN Transactions AS Transactions
+	|		ON TransactionsBalance.Company = Transactions.Company
+	|		AND TransactionsBalance.Partner = Transactions.Partner
+	|		AND TransactionsBalance.LegalName = Transactions.LegalName
+	|		AND TransactionsBalance.Agreement = Transactions.Agreement
+	|		AND TransactionsBalance.Currency = Transactions.Currency
+	|		AND TransactionsBalance.Basis = Transactions.TransactionDocument
+	|GROUP BY
+	|	TransactionsBalance.Company,
+	|	TransactionsBalance.Currency,
+	|	TransactionsBalance.LegalName,
+	|	TransactionsBalance.Partner,
+	|	TransactionsBalance.Agreement,
+	|	Transactions.Period,
+	|	Transactions.TransactionDocument,
+	|	Transactions.AdvancesDocument,
+	|	Transactions.Key
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	TransactionsBalance.Period,
+	|	TransactionsBalance.Company,
+	|	TransactionsBalance.Partner,
+	|	TransactionsBalance.LegalName,
+	|	TransactionsBalance.Agreement,
+	|	TransactionsBalance.Currency,
+	|	TransactionsBalance.TransactionDocument,
+	|	TransactionsBalance.AdvancesDocument,
+	|	CASE
+	|		WHEN TransactionsBalance.Amount > TransactionsBalance.DocumentAmount
+	|			THEN TransactionsBalance.DocumentAmount
+	|		ELSE TransactionsBalance.Amount
+	|	END AS Amount,
+	|	TransactionsBalance.Key
+	|INTO DueAsAdvanceToVendors
+	|FROM
+	|	TransactionsBalance AS TransactionsBalance
+	|WHERE
+	|	TransactionsBalance.Amount < 0";
+	Query.SetParameter("Period", New Boundary(Parameters.RecorderPointInTime, BoundaryType.Including));
+	Query.SetParameter("Recorder", Parameters.RecorderPointInTime.Ref);
+	
+	Query.Execute();
 EndProcedure
 
 // Parameters:

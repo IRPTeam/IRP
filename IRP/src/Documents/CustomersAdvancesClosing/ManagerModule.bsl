@@ -684,15 +684,6 @@ Procedure Write_AdvancesAndTransactions_DueAsAdvance(Recorder, Parameters, Offse
 	TableTransactions = RecordSet_CustomersTransactions.UnloadColumns();
 	TableTransactions.Columns.Delete(TableTransactions.Columns.PointInTime);
 	
-//	IsDebitCreditNote = OffsetOfPartnersServer.IsDebitCreditNote(Recorder); 
-//	If IsDebitCreditNote Then
-//		TableTransactions.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
-//	EndIf;
-	
-//	If IsDebitCreditNote Or UseKeyForAdvance Then
-//		TableAdvances.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
-//	EndIf;
-	
 	For Each Row In QueryTable Do
 				
 		FillPropertyValues(OffsetOfAdvanceFull.Add(), Row);

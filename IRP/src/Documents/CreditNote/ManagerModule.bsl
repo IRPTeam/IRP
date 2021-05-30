@@ -289,6 +289,7 @@ Function R2020B_AdvancesFromCustomers()
 		|	OffsetOfAdvances.Partner,
 		|	OffsetOfAdvances.AdvancesDocument AS Basis,
 		|	OffsetOfAdvances.Amount,
+		|	OffsetOfAdvances.Key,
 		|	OffsetOfAdvances.Recorder AS CustomersAdvancesClosing
 		|INTO R2020B_AdvancesFromCustomers
 		|FROM

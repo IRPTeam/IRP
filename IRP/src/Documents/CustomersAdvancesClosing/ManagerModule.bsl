@@ -577,7 +577,8 @@ Procedure Create_PaymentFromCustomers(Recorder, Parameters)
 	|	PartnerTransactions.TransactionDocument,
 	|	PartnerTransactions.Agreement,
 	|	SUM(PartnerTransactions.Amount) AS Amount,
-	|	FALSE AS IgnoreAdvances
+	|	FALSE AS IgnoreAdvances,
+	|	PartnerTransactions.Key
 	|INTO CustomersTransactions
 	|FROM
 	|	InformationRegister.T1001I_PartnerTransactions AS PartnerTransactions
@@ -591,7 +592,8 @@ Procedure Create_PaymentFromCustomers(Recorder, Parameters)
 	|	PartnerTransactions.LegalName,
 	|	PartnerTransactions.Partner,
 	|	PartnerTransactions.Period,
-	|	PartnerTransactions.TransactionDocument";
+	|	PartnerTransactions.TransactionDocument,
+	|	PartnerTransactions.Key";
 	Query.SetParameter("Recorder", Recorder);
 	Query.Execute(); 
 EndProcedure
@@ -643,6 +645,7 @@ EndProcedure
 //  *Currency
 //  *TransactionDocument
 //  *AdvancesDocument
+//  *Key
 //  *Amount
 Procedure Write_AdvancesAndTransactions_DueAsAdvance(Recorder, Parameters, OffsetOfAdvanceFull)
 	Query = New Query();
@@ -657,6 +660,7 @@ Procedure Write_AdvancesAndTransactions_DueAsAdvance(Recorder, Parameters, Offse
 	|	DueAsAdvanceFromCustomers.Currency,
 	|	DueAsAdvanceFromCustomers.TransactionDocument,
 	|	DueAsAdvanceFromCustomers.AdvancesDocument,
+	|	DueAsAdvanceFromCustomers.Key,
 	|	DueAsAdvanceFromCustomers.Amount,
 	|	&CustomersAdvancesClosing AS CustomersAdvancesClosing,
 	|	&Document AS Document,

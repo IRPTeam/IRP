@@ -142,6 +142,7 @@ Function OffsetOfAdvances(Parameters)
 	|WHERE
 	|	PartnerAdvances.Period BETWEEN BEGINOFPERIOD(&BeginOfPeriod, DAY) AND ENDOFPERIOD(&EndOfPeriod, DAY)
 	|	AND PartnerAdvances.IsVendorAdvance
+	|	AND PartnerAdvances.Company = &Company
 	|GROUP BY
 	|	PartnerAdvances.Recorder,
 	|	PartnerAdvances.Recorder.Date
@@ -158,7 +159,9 @@ Function OffsetOfAdvances(Parameters)
 	|WHERE
 	|	PartnerTransactions.Period BETWEEN BEGINOFPERIOD(&BeginOfPeriod, DAY) AND ENDOFPERIOD(&EndOfPeriod, DAY)
 	|	AND PartnerTransactions.IsPaymentToVendor
+	|	AND PartnerTransactions.Company = &Company
 	|;
+	|
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
@@ -172,6 +175,7 @@ Function OffsetOfAdvances(Parameters)
 	|WHERE
 	|	PartnerTransactions.Period BETWEEN BEGINOFPERIOD(&BeginOfPeriod, DAY) AND ENDOFPERIOD(&EndOfPeriod, DAY)
 	|	AND PartnerTransactions.IsVendorTransaction
+	|	AND PartnerTransactions.Company = &Company
 	|
 	|UNION ALL
 	|
@@ -183,6 +187,7 @@ Function OffsetOfAdvances(Parameters)
 	|FROM
 	|	tmpPartnerAdvancesOrPayments AS tmpPartnerAdvancesOrPayments
 	|;
+	|
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
@@ -200,6 +205,7 @@ Function OffsetOfAdvances(Parameters)
 	|	tmp.RecorderDate";
 	Query.SetParameter("BeginOfPeriod", Parameters.Object.BeginOfPeriod);
 	Query.SetParameter("EndOfPeriod"  , Parameters.Object.EndOfPeriod);
+	Query.SetParameter("Company"      , Parameters.Object.Company);
 	
 	QueryTable = Query.Execute().Unload();
 	For Each Row In QueryTable Do
@@ -223,6 +229,17 @@ Function OffsetOfAdvances(Parameters)
 			OffsetOfPartnersServer.Vendors_OnMoneyMovements(Parameters);
 			Write_AdvancesAndTransactions(Row.Recorder, Parameters, OffsetOfAdvanceFull, True);
 			Write_PartnersAging(Row.Recorder, Parameters, OffsetOfAgingFull);
+			
+			// Due as advance
+			If CommonFunctionsClientServer.ObjectHasProperty(Row.Recorder, "DueAsAdvance") 
+				And Row.Recorder.DueAsAdvance Then
+				OffsetOfPartnersServer.Vendors_DueAsAdvance(Parameters);
+				Write_AdvancesAndTransactions_DueAsAdvance(Row.Recorder, Parameters, OffsetOfAdvanceFull);
+				Drop_Table(Parameters, "Transactions");
+				Drop_Table(Parameters, "TransactionsBalance");
+				Drop_Table(Parameters, "DueAsAdvanceToVendors");
+			EndIf;
+			
 			Drop_Table(Parameters, "VendorsTransactions");
 			Drop_Table(Parameters, "AdvancesToVendors");
 			
@@ -245,7 +262,8 @@ Function OffsetOfAdvances(Parameters)
 	|	OffsetOfAdvanceFull.AdvancesDocument,
 	|	OffsetOfAdvanceFull.Agreement,
 	|	OffsetOfAdvanceFull.Key,
-	|	OffsetOfAdvanceFull.Amount
+	|	OffsetOfAdvanceFull.Amount,
+	|	OffsetOfAdvanceFull.DueAsAdvance
 	|INTO tmpOffsetOfAdvances
 	|FROM
 	|	&OffsetOfAdvanceFull AS OffsetOfAdvanceFull
@@ -279,6 +297,7 @@ Function OffsetOfAdvances(Parameters)
 	|	tmpOffsetOfAdvances.AdvancesDocument,
 	|	tmpOffsetOfAdvances.Agreement,
 	|	tmpOffsetOfAdvances.Key,
+	|	tmpOffsetOfAdvances.DueAsAdvance,
 	|	SUM(tmpOffsetOfAdvances.Amount) AS Amount
 	|INTO OffsetOfAdvances
 	|FROM
@@ -293,7 +312,8 @@ Function OffsetOfAdvances(Parameters)
 	|	tmpOffsetOfAdvances.TransactionDocument,
 	|	tmpOffsetOfAdvances.AdvancesDocument,
 	|	tmpOffsetOfAdvances.Agreement,
-	|	tmpOffsetOfAdvances.Key
+	|	tmpOffsetOfAdvances.Key,
+	|	tmpOffsetOfAdvances.DueAsAdvance
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
@@ -560,7 +580,8 @@ Procedure Create_PaymentToVendors(Recorder, Parameters)
 	|	PartnerTransactions.TransactionDocument,
 	|	PartnerTransactions.Agreement,
 	|	SUM(PartnerTransactions.Amount) AS Amount,
-	|	FALSE AS IgnoreAdvances
+	|	FALSE AS IgnoreAdvances,
+	|	PartnerTransactions.Key
 	|INTO VendorsTransactions
 	|FROM
 	|	InformationRegister.T1001I_PartnerTransactions AS PartnerTransactions
@@ -574,7 +595,8 @@ Procedure Create_PaymentToVendors(Recorder, Parameters)
 	|	PartnerTransactions.LegalName,
 	|	PartnerTransactions.Partner,
 	|	PartnerTransactions.Period,
-	|	PartnerTransactions.TransactionDocument";
+	|	PartnerTransactions.TransactionDocument,
+	|	PartnerTransactions.Key";
 	Query.SetParameter("Recorder", Recorder);
 	Query.Execute(); 
 EndProcedure
@@ -615,6 +637,109 @@ Procedure Drop_Table(Parameters, TableName)
 	Query.TempTablesManager = Parameters.TempTablesManager;
 	Query.Text = "DROP " + TableName;
 	Query.Execute();
+EndProcedure
+
+// DueAsAdvanceToVendors
+//  *Period
+//  *Company
+//  *Partner
+//  *LegalName
+//  *Agreement
+//  *Currency
+//  *TransactionDocument
+//  *AdvancesDocument
+//  *Key
+//  *Amount
+Procedure Write_AdvancesAndTransactions_DueAsAdvance(Recorder, Parameters, OffsetOfAdvanceFull)
+	Query = New Query();
+	Query.TempTablesManager = Parameters.TempTablesManager;
+	Query.Text = 
+	"SELECT
+	|	DueAsAdvanceToVendors.Period,
+	|	DueAsAdvanceToVendors.Company,
+	|	DueAsAdvanceToVendors.Partner,
+	|	DueAsAdvanceToVendors.LegalName,
+	|	DueAsAdvanceToVendors.Agreement,
+	|	DueAsAdvanceToVendors.Currency,
+	|	DueAsAdvanceToVendors.TransactionDocument,
+	|	DueAsAdvanceToVendors.AdvancesDocument,
+	|	DueAsAdvanceToVendors.Key,
+	|	DueAsAdvanceToVendors.Amount,
+	|	&VendorsAdvancesClosing AS VendorsAdvancesClosing,
+	|	&Document AS Document,
+	|	&Document AS Recorder,
+	|	TRUE AS DueAsAdvance
+	|FROM
+	|	DueAsAdvanceToVendors AS DueAsAdvanceToVendors";
+	Query.SetParameter("VendorsAdvancesClosing", Parameters.Object.Ref);
+	Query.SetParameter("Document", Recorder);
+	
+	QueryTable = Query.Execute().Unload();
+	
+	RecordSet_AdvancesToVendors = AccumulationRegisters.R1020B_AdvancesToVendors.CreateRecordSet();
+	RecordSet_AdvancesToVendors.Filter.Recorder.Set(Recorder);
+	TableAdvances = RecordSet_AdvancesToVendors.UnloadColumns();
+	TableAdvances.Columns.Delete(TableAdvances.Columns.PointInTime);
+	
+	
+	RecordSet_VendorsTransactions = AccumulationRegisters.R1021B_VendorsTransactions.CreateRecordSet();
+	RecordSet_VendorsTransactions.Filter.Recorder.Set(Recorder);
+	TableTransactions = RecordSet_VendorsTransactions.UnloadColumns();
+	TableTransactions.Columns.Delete(TableTransactions.Columns.PointInTime);
+	
+	For Each Row In QueryTable Do
+				
+		FillPropertyValues(OffsetOfAdvanceFull.Add(), Row);
+		
+		NewRow_Advances = TableAdvances.Add();
+		FillPropertyValues(NewRow_Advances, Row);
+		NewRow_Advances.RecordType = AccumulationRecordType.Expense;
+		NewRow_Advances.Basis = Row.AdvancesDocument;
+			
+		NewRow_Transactions = TableTransactions.Add();
+		FillPropertyValues(NewRow_Transactions, Row);
+		NewRow_Transactions.RecordType = AccumulationRecordType.Expense;
+		NewRow_Transactions.Basis = Row.TransactionDocument;
+	
+	EndDo;
+	
+	// Currency calculation
+	CurrenciesParameters = New Structure();
+	
+	PostingDataTables = New Map();
+	
+	PostingDataTables.Insert(RecordSet_AdvancesToVendors,   New Structure("RecordSet", TableAdvances));
+	PostingDataTables.Insert(RecordSet_VendorsTransactions, New Structure("RecordSet", TableTransactions));
+	
+	ArrayOfPostingInfo = New Array();
+	For Each DataTable In PostingDataTables Do
+		ArrayOfPostingInfo.Add(DataTable);
+	EndDo;
+	
+	CurrenciesParameters.Insert("Object", Recorder);
+	CurrenciesParameters.Insert("ArrayOfPostingInfo", ArrayOfPostingInfo);
+	
+	CurrenciesServer.PreparePostingDataTables(CurrenciesParameters, Undefined);
+	
+	For Each ItemOfPostingInfo In ArrayOfPostingInfo Do
+		If TypeOf(ItemOfPostingInfo.Key) = Type("AccumulationRegisterRecordSet.R1020B_AdvancesToVendors") Then
+			RecordSet_AdvancesToVendors.Read();
+			For Each Row In ItemOfPostingInfo.Value.RecordSet Do
+				FillPropertyValues(RecordSet_AdvancesToVendors.Add(), Row);
+			EndDo;
+			RecordSet_AdvancesToVendors.SetActive(True);
+			RecordSet_AdvancesToVendors.Write();
+		EndIf;
+	
+		If TypeOf(ItemOfPostingInfo.Key) = Type("AccumulationRegisterRecordSet.R1021B_VendorsTransactions") Then
+			RecordSet_VendorsTransactions.Read();
+			For Each Row In ItemOfPostingInfo.Value.RecordSet Do
+				FillPropertyValues(RecordSet_VendorsTransactions.Add(), Row);
+			EndDo;
+			RecordSet_VendorsTransactions.SetActive(True);
+			RecordSet_VendorsTransactions.Write();
+		EndIf;
+	EndDo;
 EndProcedure
 
 // OffsetOfAdvance

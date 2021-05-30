@@ -142,6 +142,7 @@ Function OffsetOfAdvances(Parameters)
 	|WHERE
 	|	PartnerAdvances.Period BETWEEN BEGINOFPERIOD(&BeginOfPeriod, DAY) AND ENDOFPERIOD(&EndOfPeriod, DAY)
 	|	AND PartnerAdvances.IsCustomerAdvance
+	|	AND PartnerAdvances.Company = &Company
 	|GROUP BY
 	|	PartnerAdvances.Recorder,
 	|	PartnerAdvances.Recorder.Date
@@ -158,6 +159,7 @@ Function OffsetOfAdvances(Parameters)
 	|WHERE
 	|	PartnerTransactions.Period BETWEEN BEGINOFPERIOD(&BeginOfPeriod, DAY) AND ENDOFPERIOD(&EndOfPeriod, DAY)
 	|	AND PartnerTransactions.IsPaymentFromCustomer
+	|	AND PartnerTransactions.Company = &Company
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
@@ -172,6 +174,7 @@ Function OffsetOfAdvances(Parameters)
 	|WHERE
 	|	PartnerTransactions.Period BETWEEN BEGINOFPERIOD(&BeginOfPeriod, DAY) AND ENDOFPERIOD(&EndOfPeriod, DAY)
 	|	AND PartnerTransactions.IsCustomerTransaction
+	|	AND PartnerTransactions.Company = &Company
 	|
 	|UNION ALL
 	|
@@ -200,6 +203,7 @@ Function OffsetOfAdvances(Parameters)
 	|	tmp.RecorderDate";
 	Query.SetParameter("BeginOfPeriod", Parameters.Object.BeginOfPeriod);
 	Query.SetParameter("EndOfPeriod"  , Parameters.Object.EndOfPeriod);
+	Query.SetParameter("Company"      , Parameters.Object.Company);
 	
 	QueryTable = Query.Execute().Unload();
 	For Each Row In QueryTable Do
@@ -577,7 +581,8 @@ Procedure Create_PaymentFromCustomers(Recorder, Parameters)
 	|	PartnerTransactions.TransactionDocument,
 	|	PartnerTransactions.Agreement,
 	|	SUM(PartnerTransactions.Amount) AS Amount,
-	|	FALSE AS IgnoreAdvances
+	|	FALSE AS IgnoreAdvances,
+	|	PartnerTransactions.Key
 	|INTO CustomersTransactions
 	|FROM
 	|	InformationRegister.T1001I_PartnerTransactions AS PartnerTransactions
@@ -591,7 +596,8 @@ Procedure Create_PaymentFromCustomers(Recorder, Parameters)
 	|	PartnerTransactions.LegalName,
 	|	PartnerTransactions.Partner,
 	|	PartnerTransactions.Period,
-	|	PartnerTransactions.TransactionDocument";
+	|	PartnerTransactions.TransactionDocument,
+	|	PartnerTransactions.Key";
 	Query.SetParameter("Recorder", Recorder);
 	Query.Execute(); 
 EndProcedure
@@ -643,6 +649,7 @@ EndProcedure
 //  *Currency
 //  *TransactionDocument
 //  *AdvancesDocument
+//  *Key
 //  *Amount
 Procedure Write_AdvancesAndTransactions_DueAsAdvance(Recorder, Parameters, OffsetOfAdvanceFull)
 	Query = New Query();
@@ -657,6 +664,7 @@ Procedure Write_AdvancesAndTransactions_DueAsAdvance(Recorder, Parameters, Offse
 	|	DueAsAdvanceFromCustomers.Currency,
 	|	DueAsAdvanceFromCustomers.TransactionDocument,
 	|	DueAsAdvanceFromCustomers.AdvancesDocument,
+	|	DueAsAdvanceFromCustomers.Key,
 	|	DueAsAdvanceFromCustomers.Amount,
 	|	&CustomersAdvancesClosing AS CustomersAdvancesClosing,
 	|	&Document AS Document,
@@ -679,15 +687,6 @@ Procedure Write_AdvancesAndTransactions_DueAsAdvance(Recorder, Parameters, Offse
 	RecordSet_CustomersTransactions.Filter.Recorder.Set(Recorder);
 	TableTransactions = RecordSet_CustomersTransactions.UnloadColumns();
 	TableTransactions.Columns.Delete(TableTransactions.Columns.PointInTime);
-	
-//	IsDebitCreditNote = OffsetOfPartnersServer.IsDebitCreditNote(Recorder); 
-//	If IsDebitCreditNote Then
-//		TableTransactions.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
-//	EndIf;
-	
-//	If IsDebitCreditNote Or UseKeyForAdvance Then
-//		TableAdvances.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
-//	EndIf;
 	
 	For Each Row In QueryTable Do
 				

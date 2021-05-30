@@ -124,7 +124,7 @@ Scenario: _028401 create GR with transaction type return from customer and creat
 		And I delete "$$DateGoodsReceipt028401$$" variable
 		And I save the window as "$$GoodsReceipt028401$$"
 		And I save the value of "Number" field as "$$NumberGoodsReceipt028401$$"
-		And I save the value of "Date" field as "$$DateGoodsReceipt028401$$"
+		And I save the value of the field named "Date" as  "$$DateGoodsReceipt028401$$"
 	* Check RowID tab
 		And I click "Show row key" button
 		And I go to line in "ItemList" table
@@ -198,7 +198,7 @@ Scenario: _028401 create GR with transaction type return from customer and creat
 		And I delete "$$DateSalesReturn028401$$" variable
 		And I save the window as "$$SalesReturn028401$$"
 		And I save the value of "Number" field as "$$NumberSalesReturn028401$$"
-		And I save the value of "Date" field as "$$DateSalesReturn028401$$"
+		And I save the value of the field named "Date" as  "$$DateSalesReturn028401$$"
 		And I close current window
 		
 

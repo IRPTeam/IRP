@@ -471,7 +471,7 @@ Scenario: _1000020 create Credit note and check Aging register movements
 			And I delete "$$CreditNote1000020$$" variable
 			And I delete "$$CreditNoteDate1000020$$" variable
 			And I save the window as "$$CreditNote1000020$$"
-			And I save the value of "Date" field as "$$CreditNoteDate1000020$$"
+			And I save the value of the field named "Date" as  "$$CreditNoteDate1000020$$"
 			And I click "Registrations report" button
 		* Check movements
 			And I select "R5011 Customers aging" exact value from "Register" drop-down list
@@ -498,7 +498,7 @@ Scenario: _1000020 create Credit note and check Aging register movements
 				| '$$DateSalesInvoice024016$$'  | '$$SalesInvoice024016$$'  | 'TRY'      | 'Main Company' | 'Kalipso' | '550,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '$$DatePaymentTermsSalesInvoice0240161$$' | ''                                                       |
 				| '$$DateCashReceipt1000009$$'  | '$$CashReceipt1000009$$'  | 'TRY'      | 'Main Company' | 'Kalipso' | '550,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice0240162$$' | '19.11.2020'                              | 'Customers advances closing 4 dated 21.04.2021 12:00:00' |
 				| '$$DateBankReceipt1000015$$'  | '$$BankReceipt1000015$$'  | 'TRY'      | 'Main Company' | 'Kalipso' | '450,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '$$DatePaymentTermsSalesInvoice0240161$$' | 'Customers advances closing 4 dated 21.04.2021 12:00:00' |
-				| '$$CreditNoteDate1000020$$'   | '$$CreditNote1000020$$'   | 'TRY'      | 'Main Company' | 'Kalipso' | '150,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '$$DatePaymentTermsSalesInvoice0240161$$' | 'Customers advances closing 4 dated 21.04.2021 12:00:00' |
+				| '$$CreditNoteDate1000020$$'   | '$$CreditNote1000020$$'   | 'TRY'      | 'Main Company' | 'Kalipso' | '100,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '$$DatePaymentTermsSalesInvoice0240161$$' | 'Customers advances closing 4 dated 21.04.2021 12:00:00' |
 			Then the number of "List" table lines is "равно" "5"
 	And I close all client application windows
 			
@@ -547,7 +547,7 @@ Scenario: _1000030 create Debit note and check Aging register movements
 		And I delete "$$DebitNote1000030$$" variable
 		And I delete "$$DebitNoteDate1000030$$" variable
 		And I save the window as "$$DebitNote1000030$$"
-		And I save the value of "Date" field as "$$DebitNoteDate1000030$$"
+		And I save the value of the field named "Date" as  "$$DebitNoteDate1000030$$"
 		And I click "Registrations report" button
 		And I select "R5011 Customers aging" exact value from "Register" drop-down list
 		And I click "Generate report" button
@@ -577,7 +577,7 @@ Scenario: _1000030 create Debit note and check Aging register movements
 			| '$$DateSalesInvoice024016$$'  | '$$SalesInvoice024016$$'  | 'TRY'      | 'Main Company' | 'Kalipso' | '550,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '$$DatePaymentTermsSalesInvoice0240161$$' | ''                                                       |
 			| '$$DateCashReceipt1000009$$'  | '$$CashReceipt1000009$$'  | 'TRY'      | 'Main Company' | 'Kalipso' | '550,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice0240162$$' | '19.11.2020'                              | 'Customers advances closing 4 dated 21.04.2021 12:00:00' |
 			| '$$DateBankReceipt1000015$$'  | '$$BankReceipt1000015$$'  | 'TRY'      | 'Main Company' | 'Kalipso' | '450,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '$$DatePaymentTermsSalesInvoice0240161$$' | 'Customers advances closing 4 dated 21.04.2021 12:00:00' |
-			| '$$DateCreditNote1000020$$'   | '$$CreditNote1000020$$'   | 'TRY'      | 'Main Company' | 'Kalipso' | '150,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '$$DatePaymentTermsSalesInvoice0240161$$' | 'Customers advances closing 4 dated 21.04.2021 12:00:00' |
+			| '$$CreditNoteDate1000020$$'   | '$$CreditNote1000020$$'   | 'TRY'      | 'Main Company' | 'Kalipso' | '100,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '$$DatePaymentTermsSalesInvoice0240161$$' | 'Customers advances closing 4 dated 21.04.2021 12:00:00' |
 			| '$$DebitNoteDate1000030$$'    | '$$DebitNote1000030$$'    | 'TRY'      | 'Main Company' | 'Kalipso' | '50,00'  | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '*'                                       | '' |
 		Then the number of "List" table lines is "равно" "6"
 	And I close all client application windows
@@ -788,13 +788,8 @@ Scenario: _1000050 check the offset of Sales invoice advance (type of settlement
 			Given I open hyperlink 'e1cib/list/AccumulationRegister.R5011B_CustomersAging'
 			And "List" table contains lines:
 				| 'Recorder'                | 'Currency' | 'Company'      | 'Partner' | 'Amount' | 'Agreement'                        | 'Invoice'                 | 'Payment date' | 'Aging closing'                                          |
-				| '$$BankReceipt1000050$$'  | 'TRY'      | 'Main Company' | 'Kalipso' | '50,00'  | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '*'            | 'Customers advances closing 4 dated 21.04.2021 12:00:00' |
-				| '$$BankReceipt1000050$$'  | 'TRY'      | 'Main Company' | 'Kalipso' | '30,00'  | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '*'            | 'Customers advances closing 4 dated 21.04.2021 12:00:00' |
-				| '$$CashReceipt1000050$$'  | 'TRY'      | 'Main Company' | 'Kalipso' | '50,00'  | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '*'            | 'Customers advances closing 4 dated 21.04.2021 12:00:00' |
-				| '$$BankReceipt10000501$$' | 'TRY'      | 'Main Company' | 'Kalipso' | '170,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '*'            | 'Customers advances closing 4 dated 21.04.2021 12:00:00' |
 				| '$$SalesInvoice0240164$$' | 'TRY'      | 'Main Company' | 'Kalipso' | '550,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice0240164$$' | '*'            | ''                                                       |
-				| '$$SalesInvoice0240164$$' | 'TRY'      | 'Main Company' | 'Kalipso' | '380,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice0240164$$' | '*'            | 'Customers advances closing 4 dated 21.04.2021 12:00:00' |
-				| '$$CashReceipt10000505$$' | 'TRY'      | 'Main Company' | 'Kalipso' | '170,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice0240164$$' | '*'            | 'Customers advances closing 4 dated 21.04.2021 12:00:00' |
-				| '$$SalesInvoice0240165$$' | 'TRY'      | 'Main Company' | 'Kalipso' | '550,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice0240175$$' | '*'            | ''                                                       |
-				| '$$SalesInvoice0240165$$' | 'TRY'      | 'Main Company' | 'Kalipso' | '380,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice0240175$$' | '*'            | 'Customers advances closing 4 dated 21.04.2021 12:00:00' |
+				| '$$SalesInvoice0240164$$' | 'TRY'      | 'Main Company' | 'Kalipso' | '550,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice0240164$$' | '*'            | 'Customers advances closing 4 dated 21.04.2021 12:00:00' |
+				| '$$SalesInvoice024016$$'  | 'TRY'      | 'Main Company' | 'Kalipso' | '550,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '*'            | ''                                                       |
+				| '$$SalesInvoice024016$$'  | 'TRY'      | 'Main Company' | 'Kalipso' | '550,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '*'            | 'Customers advances closing 4 dated 21.04.2021 12:00:00' |
 			And I close all client application windows	

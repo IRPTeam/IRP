@@ -2028,7 +2028,7 @@ Scenario:  _0154149 create Cash statement
 		And I click the button named "FormPost"
 		And I save the value of "Number" field as "$$NumberCashStatement01541491$$"
 		And I save the window as "$$CashStatement01541491$$"
-		And I save the value of "Date" field as "$$DateCashStatement01541491$$"
+		And I save the value of the field named "Date" as  "$$DateCashStatement01541491$$"
 		And I close current window
 		And "List" table contains lines
 				| 'Number'                        |

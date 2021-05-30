@@ -177,7 +177,7 @@ Scenario: _25003 check Sales order printing
 		And I delete "$$DateSalesOrder5003$$" variable
 		And I delete "$$SalesOrder25003$$" variable
 		And I save the value of "Number" field as "$$NumberSalesOrder5003$$"
-		And I save the value of "Date" field as "$$DateSalesOrder5003$$"
+		And I save the value of the field named "Date" as "$$DateSalesOrder5003$$"
 		And I save the window as "$$SalesOrder25003$$"
 		And I click the button named "FormPostAndClose"
 		And I go to line in "List" table

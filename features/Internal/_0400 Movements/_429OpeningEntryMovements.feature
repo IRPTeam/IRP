@@ -323,7 +323,46 @@ Scenario: _042910 check Opening entry movements by the Register  "R2021 Customer
 			| ''                                          | 'Receipt'     | '07.09.2020 21:27:18' | '584'       | 'Main Company' | 'Reporting currency'           | 'USD'      | 'DFC'        | 'DFC'     | 'DFC Customer by Partner terms' | ''      | 'No'                   | ''                |
 		And I close all client application windows
 
+Scenario: _042911 check Opening entry movements by the Register  "R5012 Vendors aging" by partner term 
+	And I close all client application windows
+	* Select Opening entry
+		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '9' |
+	* Check movements by the Register  "R5012 Vendors aging" 
+		And I click "Registrations report" button
+		And I select "R5012 Vendors aging" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Opening entry 9 dated 07.09.2020 21:27:57' | ''            | ''                    | ''          | ''             | ''         | ''                   | ''        | ''                                          | ''                    | ''              |
+			| 'Document registrations records'            | ''            | ''                    | ''          | ''             | ''         | ''                   | ''        | ''                                          | ''                    | ''              |
+			| 'Register  "R5012 Vendors aging"'           | ''            | ''                    | ''          | ''             | ''         | ''                   | ''        | ''                                          | ''                    | ''              |
+			| ''                                          | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''         | ''                   | ''        | ''                                          | ''                    | 'Attributes'    |
+			| ''                                          | ''            | ''                    | 'Amount'    | 'Company'      | 'Currency' | 'Agreement'          | 'Partner' | 'Invoice'                                   | 'Payment date'        | 'Aging closing' |
+			| ''                                          | 'Receipt'     | '07.09.2020 21:27:57' | '100'       | 'Main Company' | 'TRY'      | 'Partner term Maxim' | 'Maxim'   | 'Opening entry 9 dated 07.09.2020 21:27:57' | '01.06.2021 00:00:00' | ''              |
+			| ''                                          | 'Receipt'     | '07.09.2020 21:27:57' | '100'       | 'Main Company' | 'TRY'      | 'Partner term Maxim' | 'Maxim'   | 'Opening entry 9 dated 07.09.2020 21:27:57' | '05.06.2021 00:00:00' | ''              |
+		And I close all client application windows
 
+Scenario: _042912 check Opening entry movements by the Register  "R5011 Customers aging" by partner term 
+	And I close all client application windows
+	* Select Opening entry
+		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '9' |
+	* Check movements by the Register  "R5011 Customers aging" 
+		And I click "Registrations report" button
+		And I select "R5011 Customers aging" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Opening entry 9 dated 07.09.2020 21:27:57' | ''            | ''                    | ''          | ''             | ''         | ''                 | ''        | ''                                          | ''                    | ''              |
+			| 'Document registrations records'            | ''            | ''                    | ''          | ''             | ''         | ''                 | ''        | ''                                          | ''                    | ''              |
+			| 'Register  "R5011 Customers aging"'         | ''            | ''                    | ''          | ''             | ''         | ''                 | ''        | ''                                          | ''                    | ''              |
+			| ''                                          | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''         | ''                 | ''        | ''                                          | ''                    | 'Attributes'    |
+			| ''                                          | ''            | ''                    | 'Amount'    | 'Company'      | 'Currency' | 'Agreement'        | 'Partner' | 'Invoice'                                   | 'Payment date'        | 'Aging closing' |
+			| ''                                          | 'Receipt'     | '07.09.2020 21:27:57' | '200'       | 'Main Company' | 'TRY'      | 'Partner term DFC' | 'DFC'     | 'Opening entry 9 dated 07.09.2020 21:27:57' | '01.01.2022 00:00:00' | ''              |
+		And I close all client application windows
 
 Scenario: _042930 Opening entry clear posting/mark for deletion
 	And I close all client application windows

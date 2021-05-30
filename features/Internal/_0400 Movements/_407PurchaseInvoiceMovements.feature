@@ -78,7 +78,11 @@ Scenario: _04096 preparation (Purchase invoice)
 	And I execute 1C:Enterprise script at server
 			| "Documents.PurchaseOrder.FindByNumber(115).GetObject().Write(DocumentWriteMode.Posting);" |	
 			| "Documents.PurchaseOrder.FindByNumber(116).GetObject().Write(DocumentWriteMode.Posting);" |
-			| "Documents.PurchaseOrder.FindByNumber(117).GetObject().Write(DocumentWriteMode.Posting);" |	
+			| "Documents.PurchaseOrder.FindByNumber(117).GetObject().Write(DocumentWriteMode.Posting);" |
+	When Create document PurchaseOrder objects (with aging, prepaid, post-shipment credit)	
+	And I execute 1C:Enterprise script at server
+			| "Documents.PurchaseOrder.FindByNumber(323).GetObject().Write(DocumentWriteMode.Posting);" |	
+			| "Documents.PurchaseOrder.FindByNumber(324).GetObject().Write(DocumentWriteMode.Posting);" |	
 	* Load GR
 	When Create document GoodsReceipt objects (check movements)
 	And I execute 1C:Enterprise script at server
@@ -95,6 +99,10 @@ Scenario: _04096 preparation (Purchase invoice)
 		| "Documents.PurchaseInvoice.FindByNumber(117).GetObject().Write(DocumentWriteMode.Posting);" |	
 		| "Documents.PurchaseInvoice.FindByNumber(118).GetObject().Write(DocumentWriteMode.Posting);" |	
 		| "Documents.PurchaseInvoice.FindByNumber(119).GetObject().Write(DocumentWriteMode.Posting);" |	
+	When Create document PurchaseInvoice objects (with aging, prepaid, post-shipment credit)
+	And I execute 1C:Enterprise script at server
+		| "Documents.PurchaseInvoice.FindByNumber(323).GetObject().Write(DocumentWriteMode.Posting);" |	
+		| "Documents.PurchaseInvoice.FindByNumber(324).GetObject().Write(DocumentWriteMode.Posting);" |	
 	And I close all client application windows
 
 // 115
@@ -718,6 +726,93 @@ Scenario: _0401017 check Purchase invoice movements by the Register  "R4031 Good
 			| ''                                               | ''            | ''                    | 'Quantity'  | 'Store'      | 'Basis'                                       | 'Item key'  |
 			| ''                                               | 'Receipt'     | '12.02.2021 15:13:56' | '5'         | 'Store 02'   | 'Goods receipt 115 dated 12.02.2021 15:10:35' | '36/Yellow' |
 			| ''                                               | 'Receipt'     | '12.02.2021 15:13:56' | '10'        | 'Store 02'   | 'Goods receipt 115 dated 12.02.2021 15:10:35' | 'S/Yellow'  |
+		And I close all client application windows
+
+Scenario: _0401020 check there is no Purchase invoice movements by the Register  "R1022 Vendors payment planning" (with aging, Prepaid)
+	* Select Purchase invoice
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '323' |
+	* Check movements by the Register  "R1022 Vendors payment planning" 
+		And I click "Registrations report" button
+		And I select "R1022 Vendors payment planning" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Purchase invoice 323 dated 30.05.2021 15:08:40' |
+			| 'Document registrations records'                 |
+		And I close all client application windows
+
+Scenario: _0401021 check Purchase invoice movements by the Register  "R1022 Vendors payment planning" (with aging, Post-shipment credit)
+	* Select Purchase invoice
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '324' |
+	* Check movements by the Register  "R1022 Vendors payment planning" 
+		And I click "Registrations report" button
+		And I select "R1022 Vendors payment planning" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Purchase invoice 324 dated 30.05.2021 15:09:00' | ''            | ''                    | ''          | ''             | ''                                               | ''                  | ''          | ''                   |
+			| 'Document registrations records'                 | ''            | ''                    | ''          | ''             | ''                                               | ''                  | ''          | ''                   |
+			| 'Register  "R1022 Vendors payment planning"'     | ''            | ''                    | ''          | ''             | ''                                               | ''                  | ''          | ''                   |
+			| ''                                               | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                                               | ''                  | ''          | ''                   |
+			| ''                                               | ''            | ''                    | 'Amount'    | 'Company'      | 'Basis'                                          | 'Legal name'        | 'Partner'   | 'Agreement'          |
+			| ''                                               | 'Receipt'     | '30.05.2021 15:09:00' | '1 170'     | 'Main Company' | 'Purchase invoice 324 dated 30.05.2021 15:09:00' | 'Company Ferron BP' | 'Ferron BP' | 'Vendor Ferron, TRY' |
+		And I close all client application windows
+
+Scenario: _0401022 check there is no Purchase invoice movements by the Register  "R1022 Vendors payment planning" (without aging)
+	* Select Purchase invoice
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '117' |
+	* Check movements by the Register  "R1022 Vendors payment planning" 
+		And I click "Registrations report" button
+		And I select "R1022 Vendors payment planning" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Purchase invoice 117 dated 12.02.2021 15:12:15' |
+			| 'Document registrations records'                 |
+		And I close all client application windows
+
+Scenario: _0401023 check there is no Purchase invoice movements by the Register  "R5012 Vendors aging" (without aging)
+	* Select Purchase invoice
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '117' |
+	* Check movements by the Register  "R5012 Vendors aging" 
+		And I click "Registrations report" button
+		And I select "R5012 Vendors aging" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Purchase invoice 117 dated 12.02.2021 15:12:15' |
+			| 'Document registrations records'                 |
+		And I close all client application windows
+
+Scenario: _0401024 check Purchase invoice movements by the Register  "R5012 Vendors aging" (with aging)
+	* Select Purchase invoice
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '324' |
+	* Check movements by the Register  "R5012 Vendors aging" 
+		And I click "Registrations report" button
+		And I select "R5012 Vendors aging" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Purchase invoice 324 dated 30.05.2021 15:09:00' | ''            | ''                    | ''          | ''             | ''         | ''                   | ''          | ''                                               | ''                    | ''              |
+			| 'Document registrations records'                 | ''            | ''                    | ''          | ''             | ''         | ''                   | ''          | ''                                               | ''                    | ''              |
+			| 'Register  "R5012 Vendors aging"'                | ''            | ''                    | ''          | ''             | ''         | ''                   | ''          | ''                                               | ''                    | ''              |
+			| ''                                               | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''         | ''                   | ''          | ''                                               | ''                    | 'Attributes'    |
+			| ''                                               | ''            | ''                    | 'Amount'    | 'Company'      | 'Currency' | 'Agreement'          | 'Partner'   | 'Invoice'                                        | 'Payment date'        | 'Aging closing' |
+			| ''                                               | 'Receipt'     | '30.05.2021 15:09:00' | '1 170'     | 'Main Company' | 'TRY'      | 'Vendor Ferron, TRY' | 'Ferron BP' | 'Purchase invoice 324 dated 30.05.2021 15:09:00' | '07.06.2021 00:00:00' | ''              |
 		And I close all client application windows
 
 Scenario: _0401019 Purchase invoice clear posting/mark for deletion

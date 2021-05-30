@@ -85,8 +85,10 @@ Scenario: _040130 preparation (Sales invoice)
  			| "Documents.SalesOrder.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |	
 			| "Documents.SalesOrder.FindByNumber(2).GetObject().Write(DocumentWriteMode.Posting);" |
 			| "Documents.SalesOrder.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);" |
-			| "Documents.SalesOrder.FindByNumber(5).GetObject().Write(DocumentWriteMode.Posting);" |	
-	
+			| "Documents.SalesOrder.FindByNumber(5).GetObject().Write(DocumentWriteMode.Posting);" |
+		When Create document SalesOrder objects (with aging, prepaid)
+		And I execute 1C:Enterprise script at server
+ 			| "Documents.SalesOrder.FindByNumber(112).GetObject().Write(DocumentWriteMode.Posting);" |	
 	* Load SC
 		When Create document ShipmentConfirmation objects (check movements)
 		And I execute 1C:Enterprise script at server
@@ -96,6 +98,7 @@ Scenario: _040130 preparation (Sales invoice)
 			| "Documents.ShipmentConfirmation.FindByNumber(8).GetObject().Write(DocumentWriteMode.Posting);" |
 	* Load Sales invoice document
 		When Create document SalesInvoice objects (check movements)
+		When Create document SalesInvoice objects (with aging, prepaid)
 		And I execute 1C:Enterprise script at server
  			| "Documents.SalesInvoice.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |
 			| "Documents.SalesInvoice.FindByNumber(2).GetObject().Write(DocumentWriteMode.Posting);" |
@@ -103,6 +106,7 @@ Scenario: _040130 preparation (Sales invoice)
 			| "Documents.SalesInvoice.FindByNumber(4).GetObject().Write(DocumentWriteMode.Posting);" |
 			| "Documents.SalesInvoice.FindByNumber(5).GetObject().Write(DocumentWriteMode.Posting);" |
 			| "Documents.SalesInvoice.FindByNumber(8).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.SalesInvoice.FindByNumber(112).GetObject().Write(DocumentWriteMode.Posting);" |
 	// * Check query for sales invoice movements
 	// 	Given I open hyperlink "e1cib/app/DataProcessor.AnaliseDocumentMovements"
 	// 	And in the table "Info" I click "Fill movements" button
@@ -664,26 +668,59 @@ Scenario: _0401315 check Sales invoice movements by the Register  "R4014 Serial 
 			| ''                                          | 'Expense'     | '16.02.2021 10:59:49' | '10'        | 'Main Company' | '36/Red'   | '0512'              |
 		And I close all client application windows 
 
-// Scenario: _0401316 check Sales invoice movements by the Register  "R2020 Advances from customer" (with advance, BR-SI, Ignore advance - False)
-// 	* Select Sales invoice
-// 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
-// 		And I go to line in "List" table
-// 			| 'Number'  |
-// 			| '4' |
-// 	* Check movements by the Register  "R2020 Advances from customer"
-// 		And I click "Registrations report" button
-// 		And I select "R2020 Advances from customer" exact value from "Register" drop-down list
-// 		And I click "Generate report" button
-// 		Then "ResultTable" spreadsheet document is equal
-// 			| 'Sales invoice 4 dated 16.02.2021 10:59:49' | ''            | ''                    | ''          | ''             | ''                             | ''         | ''                | ''        | ''                                         | ''                     |
-// 			| 'Document registrations records'            | ''            | ''                    | ''          | ''             | ''                             | ''         | ''                | ''        | ''                                         | ''                     |
-// 			| 'Register  "R2020 Advances from customer"'  | ''            | ''                    | ''          | ''             | ''                             | ''         | ''                | ''        | ''                                         | ''                     |
-// 			| ''                                          | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                             | ''         | ''                | ''        | ''                                         | 'Attributes'           |
-// 			| ''                                          | ''            | ''                    | 'Amount'    | 'Company'      | 'Multi currency movement type' | 'Currency' | 'Legal name'      | 'Partner' | 'Basis'                                    | 'Deferred calculation' |
-// 			| ''                                          | 'Expense'     | '16.02.2021 10:59:49' | '10 000'    | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Company Kalipso' | 'Kalipso' | 'Bank receipt 11 dated 15.02.2021 11:20:08' | 'No'                   |
-// 			| ''                                          | 'Expense'     | '16.02.2021 10:59:49' | '10 000'    | 'Main Company' | 'en description is empty'      | 'USD'      | 'Company Kalipso' | 'Kalipso' | 'Bank receipt 11 dated 15.02.2021 11:20:08' | 'No'                   |
-// 			| ''                                          | 'Expense'     | '16.02.2021 10:59:49' | '56 275'    | 'Main Company' | 'Local currency'               | 'TRY'      | 'Company Kalipso' | 'Kalipso' | 'Bank receipt 11 dated 15.02.2021 11:20:08' | 'No'                   |
-// 		And I close all client application windows 
+Scenario: _0401316 check Sales invoice movements by the Register  "R2022 Customers payment planning" (use Aging, Receipt)
+	* Select Sales invoice
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '4' |
+	* Check movements by the Register  "R2022 Customers payment planning"
+		And I click "Registrations report" button
+		And I select "R2022 Customers payment planning" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Sales invoice 4 dated 16.02.2021 10:59:49'    | ''            | ''                    | ''          | ''             | ''                                          | ''                | ''        | ''                          |
+			| 'Document registrations records'               | ''            | ''                    | ''          | ''             | ''                                          | ''                | ''        | ''                          |
+			| 'Register  "R2022 Customers payment planning"' | ''            | ''                    | ''          | ''             | ''                                          | ''                | ''        | ''                          |
+			| ''                                             | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                                          | ''                | ''        | ''                          |
+			| ''                                             | ''            | ''                    | 'Amount'    | 'Company'      | 'Basis'                                     | 'Legal name'      | 'Partner' | 'Agreement'                 |
+			| ''                                             | 'Receipt'     | '16.02.2021 10:59:49' | '23 374'    | 'Main Company' | 'Sales invoice 4 dated 16.02.2021 10:59:49' | 'Company Kalipso' | 'Kalipso' | 'Personal Partner terms, $' |
+		And I close all client application windows 
+
+Scenario: _0401317 check there is no Sales invoice movements by the Register  "R2022 Customers payment planning" (without Aging)
+	* Select Sales invoice
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '3' |
+	* Check movements by the Register  "R2022 Customers payment planning"
+		And I click "Registrations report" button
+		And I select "R2022 Customers payment planning" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Sales invoice 3 dated 28.01.2021 18:50:57' |
+			| 'Document registrations records'            |
+		And I close all client application windows 
+
+Scenario: _0401318 check there is no Sales invoice movements by the Register  "R2022 Customers payment planning" (Aging - pre-paid)
+	* Select Sales invoice
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '112' |
+	* Check movements by the Register  "R2022 Customers payment planning"
+		And I click "Registrations report" button
+		And I select "R2022 Customers payment planning" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Sales invoice 112 dated 30.05.2021 12:48:26'  | ''            | ''                    | ''          | ''             | ''                                            | ''                | ''        | ''                                 |
+			| 'Document registrations records'               | ''            | ''                    | ''          | ''             | ''                                            | ''                | ''        | ''                                 |
+			| 'Register  "R2022 Customers payment planning"' | ''            | ''                    | ''          | ''             | ''                                            | ''                | ''        | ''                                 |
+			| ''                                             | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                                            | ''                | ''        | ''                                 |
+			| ''                                             | ''            | ''                    | 'Amount'    | 'Company'      | 'Basis'                                       | 'Legal name'      | 'Partner' | 'Agreement'                        |
+			| ''                                             | 'Receipt'     | '30.05.2021 12:48:26' | '400'       | 'Main Company' | 'Sales invoice 112 dated 30.05.2021 12:48:26' | 'Company Kalipso' | 'Kalipso' | 'Basic Partner terms, without VAT' |
+		And I close all client application windows 
+
 
 Scenario: _0401320 check Sales invoice movements by the Register  "R4012 Stock Reservation" (without SO, use SC)
 	* Select Sales invoice

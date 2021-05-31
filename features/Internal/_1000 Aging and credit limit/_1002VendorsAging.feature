@@ -75,6 +75,8 @@ Scenario: _1002000 preparation (vendors aging)
 		And I input "20.05.2021" text in "End of period" field
 		And I click the button named "FormPostAndClose"
 		And I close all client application windows
+	* Load PO
+		When Create document PurchaseOrder objects (with aging, prepaid, post-shipment credit)
 
 Scenario: _1002002 filling in payment terms in the Partner term
 	Given I open hyperlink "e1cib/list/Catalog.Agreements"
@@ -698,3 +700,55 @@ Scenario: _1020050 check the offset of Purchase invoice advance (type of settlem
 				| '$$DatePurchaseInvoice0240164$$' | '$$PurchaseInvoice0240164$$' | 'TRY'      | 'Main Company' | 'Ferron BP' | '4 000,00' | 'Vendor Ferron, TRY' | '$$PurchaseInvoice0240164$$' | '$$DatePaymentTermsPurchaseInvoiceAging$$' | ''                                                     |
 				| '$$DateCashPayment10000505$$'    | '$$CashPayment10000505$$'    | 'TRY'      | 'Main Company' | 'Ferron BP' | '4 000,00' | 'Vendor Ferron, TRY' | '$$PurchaseInvoice0240164$$' | '$$DatePaymentTermsPurchaseInvoiceAging$$' | 'Vendors advances closing 4 dated 28.04.2021 22:00:00' |
 			And I close all client application windows	
+
+Scenario: _1020040 check Purchase order Aging tab filling
+	* Select PO
+		Given I open hyperlink 'e1cib/list/Document.PurchaseOrder'
+		And I go to line in "List" table
+			| 'Number' |
+			| '323'  |
+		And I select current line in "List" table
+	* Change Aging tab
+		And I move to "Aging" tab
+		And I activate "Date" field in "PaymentTerms" table
+		And I select current line in "PaymentTerms" table
+		And I input "15.06.2021" text in "Date" field of "PaymentTerms" table
+		And I finish line editing in "PaymentTerms" table
+		And "PaymentTerms" table became equal
+			| '#' | 'Date'       | 'Amount'   | 'Calculation type' | 'Due period, days' | 'Proportion of payment' |
+			| '1' | '15.06.2021' | '1 170,00' | 'Prepaid'          | '16'               | '100,00'                |
+		And I activate "Due period, days" field in "PaymentTerms" table
+		And I select current line in "PaymentTerms" table
+		And I input "10" text in "Due period, days" field of "PaymentTerms" table
+		And I finish line editing in "PaymentTerms" table
+		And "PaymentTerms" table became equal
+			| '#' | 'Date'       | 'Amount'   | 'Calculation type' | 'Due period, days' | 'Proportion of payment' |
+			| '1' | '09.06.2021' | '1 170,00' | 'Prepaid'          | '10'               | '100,00'                |
+	* Change SO date and check aging tab
+		And I move to "Other" tab
+		And I input "31.05.2021 00:00:00" text in the field named "Date"
+		And I move to "Aging" tab
+		Then "Update item list info" window is opened
+		And I remove checkbox "Do you want to replace filled price types with price type Vendor price, TRY?"
+		And I remove checkbox "Do you want to update filled prices?"		
+		And I click "OK" button
+		And "PaymentTerms" table became equal
+			| '#' | 'Date'       | 'Amount'   | 'Calculation type' | 'Due period, days' | 'Proportion of payment' |
+			| '1' | '10.06.2021' | '1 170,00' | 'Prepaid'          | '10'               | '100,00'                |
+		And I close all client application windows
+
+Scenario: _1020041 check filling in Aging tab in the PI from PO
+	And I close all client application windows
+	*Select PO
+		Given I open hyperlink 'e1cib/list/Document.PurchaseOrder'
+		And I go to line in "List" table
+			| 'Number' |
+			| '323'  |
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And I click the button named "FormDocumentPurchaseInvoiceGenerate"
+		And I click "Ok" button
+	* Check filling in Aging tab in the SI
+		And "PaymentTerms" table became equal
+			| '#' | 'Date'       | 'Amount'   | 'Calculation type' | 'Due period, days' | 'Proportion of payment' |
+			| '1' | '07.06.2021' | '1 170,00' | 'Prepaid'          | '8'                | '100,00'                |
+		And I close all client application windows

@@ -96,6 +96,7 @@ Scenario: _1000000 preparation (payment terms)
 	* Load Opening entry, Bank receipt
 		When Create document OpeningEntry objects (aging)
 		When Create document BankReceipt objects (aging, Opening entry)
+		When Create document SalesOrder objects (with aging, post-shipment credit)
 		And I close all client application windows
 		
 
@@ -793,3 +794,70 @@ Scenario: _1000050 check the offset of Sales invoice advance (type of settlement
 				| '$$SalesInvoice024016$$'  | 'TRY'      | 'Main Company' | 'Kalipso' | '550,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '*'            | ''                                                       |
 				| '$$SalesInvoice024016$$'  | 'TRY'      | 'Main Company' | 'Kalipso' | '550,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '*'            | 'Customers advances closing 4 dated 21.04.2021 12:00:00' |
 			And I close all client application windows	
+
+Scenario: _1000040 check Sales order Aging tab filling
+	* Select SO
+		Given I open hyperlink 'e1cib/list/Document.SalesOrder'
+		And I go to line in "List" table
+			| 'Number' |
+			| '113'  |
+		And I select current line in "List" table
+	* Change Aging tab
+		And I move to "Aging" tab
+		And I activate "Date" field in "PaymentTerms" table
+		And I select current line in "PaymentTerms" table
+		And I input "15.06.2021" text in "Date" field of "PaymentTerms" table
+		And I finish line editing in "PaymentTerms" table
+		And "PaymentTerms" table became equal
+			| '#' | 'Date'       | 'Amount' | 'Calculation type'     | 'Due period, days' | 'Proportion of payment' |
+			| '1' | '14.06.2021' | '400,00' | 'Post-shipment credit' | '15'               | '100,00'                |
+		And I activate "Due period, days" field in "PaymentTerms" table
+		And I select current line in "PaymentTerms" table
+		And I input "10" text in "Due period, days" field of "PaymentTerms" table
+		And I finish line editing in "PaymentTerms" table
+		And "PaymentTerms" table became equal
+			| '#' | 'Date'       | 'Amount' | 'Calculation type'     | 'Due period, days' | 'Proportion of payment' |
+			| '1' | '09.06.2021' | '400,00' | 'Post-shipment credit' | '10'               | '100,00'                |
+	* Change SO date and check aging tab
+		And I move to "Other" tab
+		And I input "31.05.2021 00:00:00" text in the field named "Date"
+		And I move to "Aging" tab
+		Then "Update item list info" window is opened
+		And I click "OK" button
+		And "PaymentTerms" table became equal
+			| '#' | 'Date'       | 'Amount' | 'Calculation type'     | 'Due period, days' | 'Proportion of payment' |
+			| '1' | '10.06.2021' | '400,00' | 'Post-shipment credit' | '10'               | '100,00'                |
+		And I close all client application windows
+		
+
+Scenario: _1000041 check filling in Aging tab in the SI from SO
+	And I close all client application windows
+	*Select SO
+		Given I open hyperlink 'e1cib/list/Document.SalesOrder'
+		And I go to line in "List" table
+			| 'Number' |
+			| '113'  |
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And I click the button named "FormDocumentSalesInvoiceGenerate"
+		And I click "Ok" button
+	* Check filling in Aging tab in the SI
+		And "PaymentTerms" table became equal
+			| '#' | 'Date'       | 'Amount' | 'Calculation type' | 'Due period, days' | 'Proportion of payment' |
+			| '1' | '13.06.2021' | '400,00' | 'Prepaid'          | '14'               | '100,00'                |
+		And I close all client application windows
+
+		
+				
+		
+		
+
+
+		
+				
+
+		
+				
+
+
+		
+	

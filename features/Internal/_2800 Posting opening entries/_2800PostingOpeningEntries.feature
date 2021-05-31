@@ -930,17 +930,17 @@ Scenario: _400008 check the entry of the account balance, inventory balance, cus
 		
 
 
-Scenario: _400009 check the entry of the Vendors/Customers transactions by documents
+Scenario: _400009 check the entry of the Vendors/Customers transactions by documents (with payment terms)
 	* Open document form opening entry
 		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
 		And I click the button named "FormCreate"
 	* Filling in company info
 		And I click Select button of "Company" field
 		And I go to line in "List" table
-			| Description  |
-			| Main Company |
+			| 'Description'  |
+			| 'Main Company' |
 		And I select current line in "List" table
-	* Filling in AP by documents
+	* Filling in AP by documents first string
 		And I move to "Account payable" tab
 		And I move to the tab named "GroupAccountPayableByDocuments"
 		And in the table "AccountPayableByDocuments" I click the button named "AccountPayableByDocumentsAdd"
@@ -966,7 +966,74 @@ Scenario: _400009 check the entry of the Vendors/Customers transactions by docum
 		And I select current line in "List" table
 		And I input "100,00" text in the field named "AccountPayableByDocumentsAmount" of "AccountPayableByDocuments" table
 		And I finish line editing in "AccountPayableByDocuments" table
-	* Filling in AR by documents
+	* Filling in payment terms for first string
+		And in the table "VendorsPaymentTerms" I click the button named "VendorsPaymentTermsAdd"
+		And I activate field named "VendorsPaymentTermsCalculationType" in "VendorsPaymentTerms" table
+		And I select current line in "VendorsPaymentTerms" table
+		And I select "Post-shipment credit" exact value from the drop-down list named "VendorsPaymentTermsCalculationType" in "VendorsPaymentTerms" table
+		And I activate field named "VendorsPaymentTermsDate" in "VendorsPaymentTerms" table
+		And I input "30.12.2022" text in the field named "VendorsPaymentTermsDate" of "VendorsPaymentTerms" table
+		And I activate field named "VendorsPaymentTermsAmount" in "VendorsPaymentTerms" table
+		And I input "100,00" text in the field named "VendorsPaymentTermsAmount" of "VendorsPaymentTerms" table
+	* Filling in AP by documents second string
+		And in the table "AccountPayableByDocuments" I click the button named "AccountPayableByDocumentsAdd"
+		And I activate field named "AccountPayableByDocumentsPartner" in "AccountPayableByDocuments" table
+		And I click choice button of the attribute named "AccountPayableByDocumentsPartner" in "AccountPayableByDocuments" table
+		Then "Partners" window is opened
+		And I go to line in "List" table
+			| 'Description' |
+			| 'DFC'         |
+		And I activate "Description" field in "List" table
+		And I select current line in "List" table
+		And I finish line editing in "AccountPayableByDocuments" table
+		And I activate field named "AccountPayableByDocumentsAgreement" in "AccountPayableByDocuments" table
+		And I select current line in "AccountPayableByDocuments" table
+		And I click choice button of the attribute named "AccountPayableByDocumentsAgreement" in "AccountPayableByDocuments" table
+		And I activate "Description" field in "List" table
+		And I select current line in "List" table
+		And I activate field named "AccountPayableByDocumentsCurrency" in "AccountPayableByDocuments" table
+		And I click choice button of the attribute named "AccountPayableByDocumentsCurrency" in "AccountPayableByDocuments" table
+		Then "Currencies" window is opened
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Euro'        |
+		And I activate "Description" field in "List" table
+		And I select current line in "List" table
+		And I activate field named "AccountPayableByDocumentsAmount" in "AccountPayableByDocuments" table
+		And I input "200,00" text in the field named "AccountPayableByDocumentsAmount" of "AccountPayableByDocuments" table
+		And I finish line editing in "AccountPayableByDocuments" table
+		And in the table "VendorsPaymentTerms" I click the button named "VendorsPaymentTermsAdd"
+		And I go to the last line in "VendorsPaymentTerms" table
+		And I activate field named "VendorsPaymentTermsCalculationType" in "VendorsPaymentTerms" table
+		And I select current line in "VendorsPaymentTerms" table
+		And I select "Post-shipment credit" exact value from the drop-down list named "VendorsPaymentTermsCalculationType" in "VendorsPaymentTerms" table
+		And I activate field named "VendorsPaymentTermsDate" in "VendorsPaymentTerms" table
+		And I input "30.12.2021" text in the field named "VendorsPaymentTermsDate" of "VendorsPaymentTerms" table
+		And I activate field named "VendorsPaymentTermsAmount" in "VendorsPaymentTerms" table
+		And I input "200,00" text in the field named "VendorsPaymentTermsAmount" of "VendorsPaymentTerms" table
+		And I finish line editing in "VendorsPaymentTerms" table
+	* Check filling in
+		And I go to line in "AccountPayableByDocuments" table
+			| '#' |
+			| '1' |
+		And I activate "Key" field in "AccountPayableByDocuments" table
+		And I delete "$$Rov1OpeningEntry400009$$" variable
+		And I save the current field value as "$$Rov1OpeningEntry400009$$"
+		And I go to line in "AccountPayableByDocuments" table
+			| '#' |
+			| '2' |
+		And I activate "Key" field in "AccountPayableByDocuments" table
+		And I delete "$$Rov2OpeningEntry400009$$" variable
+		And I save the current field value as "$$Rov2OpeningEntry400009$$"
+		And "AccountPayableByDocuments" table contains lines
+			| 'Key'                        | '#' | 'Partner' | 'Amount' | 'Legal name' | 'Partner term'            | 'Currency' |
+			| '$$Rov1OpeningEntry400009$$' | '1' | 'DFC'     | '100,00' | 'DFC'        | 'Partner term vendor DFC' | 'TRY'      |
+			| '$$Rov2OpeningEntry400009$$' | '2' | 'DFC'     | '200,00' | 'DFC'        | 'Partner term vendor DFC' | 'EUR'      |
+		And "VendorsPaymentTerms" table contains lines
+			| 'Key'                        | 'Calculation type'     | 'Date'       | 'Amount' |
+			| '$$Rov1OpeningEntry400009$$' | 'Post-shipment credit' | '30.12.2022' | '100,00' |
+			| '$$Rov2OpeningEntry400009$$' | 'Post-shipment credit' | '30.12.2021' | '200,00' |
+	* Filling in AR by documents first string
 		And I move to "Account receivable" tab
 		And I move to the tab named "GroupAccountReceivableByDocuments"
 		And in the table "AccountReceivableByDocuments" I click the button named "AccountReceivableByDocumentsAdd"
@@ -990,7 +1057,72 @@ Scenario: _400009 check the entry of the Vendors/Customers transactions by docum
 		And I select current line in "List" table
 		And I input "200,00" text in the field named "AccountReceivableByDocumentsAmount" of "AccountReceivableByDocuments" table
 		And I finish line editing in "AccountReceivableByDocuments" table
-	* Post and check movements
+	* Filling in payment terms for first string
+		And in the table "CustomersPaymentTerms" I click the button named "CustomersPaymentTermsAdd"
+		And I activate field named "CustomersPaymentTermsCalculationType" in "CustomersPaymentTerms" table
+		And I select current line in "CustomersPaymentTerms" table
+		And I select "Post-shipment credit" exact value from the drop-down list named "CustomersPaymentTermsCalculationType" in "CustomersPaymentTerms" table
+		And I activate field named "CustomersPaymentTermsDate" in "CustomersPaymentTerms" table
+		And I input "31.12.2022" text in the field named "CustomersPaymentTermsDate" of "CustomersPaymentTerms" table
+		And I activate field named "CustomersPaymentTermsAmount" in "CustomersPaymentTerms" table
+		And I input "200,00" text in the field named "CustomersPaymentTermsAmount" of "CustomersPaymentTerms" table
+		And I finish line editing in "CustomersPaymentTerms" table
+	* Filling in AR by documents second string
+		And in the table "AccountReceivableByDocuments" I click the button named "AccountReceivableByDocumentsAdd"
+		And I activate field named "AccountReceivableByDocumentsPartner" in "AccountReceivableByDocuments" table
+		And I click choice button of the attribute named "AccountReceivableByDocumentsPartner" in "AccountReceivableByDocuments" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Lomaniti'    |
+		And I select current line in "List" table
+		And I finish line editing in "AccountReceivableByDocuments" table
+		And I activate field named "AccountReceivableByDocumentsAgreement" in "AccountReceivableByDocuments" table
+		And I select current line in "AccountReceivableByDocuments" table
+		And I click choice button of the attribute named "AccountReceivableByDocumentsAgreement" in "AccountReceivableByDocuments" table
+		And I activate "Description" field in "List" table
+		And I select current line in "List" table
+		And I activate field named "AccountReceivableByDocumentsCurrency" in "AccountReceivableByDocuments" table
+		And I click choice button of the attribute named "AccountReceivableByDocumentsCurrency" in "AccountReceivableByDocuments" table
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Turkish lira' |
+		And I select current line in "List" table
+		And I activate field named "AccountReceivableByDocumentsAmount" in "AccountReceivableByDocuments" table
+		And I input "100,00" text in the field named "AccountReceivableByDocumentsAmount" of "AccountReceivableByDocuments" table
+		And I finish line editing in "AccountReceivableByDocuments" table
+	* Filling in payment terms for second string
+		And in the table "CustomersPaymentTerms" I click the button named "CustomersPaymentTermsAdd"
+		And I go to the last line in "CustomersPaymentTerms" table
+		And I activate field named "CustomersPaymentTermsCalculationType" in "CustomersPaymentTerms" table
+		And I select current line in "CustomersPaymentTerms" table
+		And I select "Post-shipment credit" exact value from the drop-down list named "CustomersPaymentTermsCalculationType" in "CustomersPaymentTerms" table
+		And I activate field named "CustomersPaymentTermsDate" in "CustomersPaymentTerms" table
+		And I input "21.12.2021" text in the field named "CustomersPaymentTermsDate" of "CustomersPaymentTerms" table
+		And I activate field named "CustomersPaymentTermsAmount" in "CustomersPaymentTerms" table
+		And I input "100,00" text in the field named "CustomersPaymentTermsAmount" of "CustomersPaymentTerms" table
+		And I finish line editing in "CustomersPaymentTerms" table
+	* Check filling in
+		And I go to line in "AccountReceivableByDocuments" table
+			| '#' |
+			| '1' |
+		And I activate "Key" field in "AccountReceivableByDocuments" table
+		And I delete "$$Rov3OpeningEntry400009$$" variable
+		And I save the current field value as "$$Rov3OpeningEntry400009$$"
+		And I go to line in "AccountReceivableByDocuments" table
+			| '#' |
+			| '2' |
+		And I activate "Key" field in "AccountReceivableByDocuments" table
+		And I delete "$$Rov4OpeningEntry400009$$" variable
+		And I save the current field value as "$$Rov4OpeningEntry400009$$"
+		And "AccountReceivableByDocuments" table contains lines
+			| 'Key'                        | '#' | 'Partner'  | 'Amount' | 'Legal name'       | 'Partner term'             | 'Currency' |
+			| '$$Rov3OpeningEntry400009$$' | '1' | 'DFC'      | '200,00' | 'DFC'              | 'Partner term DFC'         | 'TRY'      |
+			| '$$Rov4OpeningEntry400009$$' | '2' | 'Lomaniti' | '100,00' | 'Company Lomaniti' | 'Basic Partner terms, TRY' | 'TRY'      |
+		And "CustomersPaymentTerms" table contains lines
+			| 'Key'                        | 'Calculation type'     | 'Date'       | 'Amount' |
+			| '$$Rov3OpeningEntry400009$$' | 'Post-shipment credit' | '31.12.2022' | '200,00' |
+			| '$$Rov4OpeningEntry400009$$' | 'Post-shipment credit' | '21.12.2021' | '100,00'  |
+	* Post 
 		And I click the button named "FormPost"
 		And I delete "$$NumberOpeningEntry400009$$" variable
 		And I delete "$$OpeningEntry400009$$" variable
@@ -998,6 +1130,24 @@ Scenario: _400009 check the entry of the Vendors/Customers transactions by docum
 		And I save the value of "Number" field as "$$NumberOpeningEntry400009$$"
 		And I save the value of the field named "Date" as "$$DateOpeningEntry400009$$"
 		And I save the window as "$$OpeningEntry400009$$"
+	* Check clearing of payment conditions when deleting a line (CustomersPaymentTerms)
+		And I go to line in "AccountReceivableByDocuments" table
+			| '#' | 'Amount' | 'Currency' | 'Key'                        | 'Legal name'       | 'Partner'  | 'Partner term'             |
+			| '2' | '100,00' | 'TRY'      | '$$Rov4OpeningEntry400009$$' | 'Company Lomaniti' | 'Lomaniti' | 'Basic Partner terms, TRY' |
+		And I delete a line in "AccountReceivableByDocuments" table
+		And "CustomersPaymentTerms" table does not contain lines
+			| 'Key'                        | 'Calculation type'     | 'Date'       | 'Amount' |
+			| '$$Rov4OpeningEntry400009$$' | 'Post-shipment credit' | '21.12.2021' | '100,00'  |
+	* Check clearing of payment conditions when deleting a line (VendorsPaymentTerms)
+		And I move to "Account payable" tab
+		And I go to line in "AccountPayableByDocuments" table
+			| '#' | 'Amount' | 'Currency' | 'Key'                        | 'Legal name' | 'Partner' | 'Partner term'            |
+			| '1' | '100,00' | 'TRY'      | '$$Rov1OpeningEntry400009$$' | 'DFC'        | 'DFC'     | 'Partner term vendor DFC' |
+		And I delete a line in "AccountPayableByDocuments" table
+		And "VendorsPaymentTerms" table does not contain lines
+			| 'Key'                        | 'Calculation type'     | 'Date'       | 'Amount' |
+			| '$$Rov1OpeningEntry400009$$' | 'Post-shipment credit' | '30.12.2022' | '100,00' |
+		And I click the button named "FormPostAndClose"		
 	* Check creation
 		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
 		And "List" table contains lines

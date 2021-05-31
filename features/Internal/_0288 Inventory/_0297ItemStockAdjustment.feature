@@ -115,7 +115,7 @@ Scenario: _0297001 create Item stock adjustment
 		And I delete "$$DateItemStockAdjustment0297001$$" variable
 		And I save the window as "$$ItemStockAdjustment0297001$$"
 		And I save the value of "Number" field as "$$NumberItemStockAdjustment0297001$$"
-		And I save the value of "Date" field as "$$DateItemStockAdjustment0297001$$"
+		And I save the value of the field named "Date" as  "$$DateItemStockAdjustment0297001$$"
 		And I close current window
 	* Check creation
 		Given I open hyperlink "e1cib/list/Document.ItemStockAdjustment"

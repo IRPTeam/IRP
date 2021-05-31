@@ -126,7 +126,7 @@ Scenario: _022501 create SC with transaction type return to vendor and create Pu
 		And I delete "$$DateShipmentConfirmation022501$$" variable
 		And I save the window as "$$ShipmentConfirmation022501$$"
 		And I save the value of "Number" field as "$$NumberShipmentConfirmation022501$$"
-		And I save the value of "Date" field as "$$DateShipmentConfirmation022501$$"
+		And I save the value of the field named "Date" as  "$$DateShipmentConfirmation022501$$"
 	* Check RowID tab
 		And I click "Show row key" button
 		And I go to line in "ItemList" table
@@ -205,7 +205,7 @@ Scenario: _022501 create SC with transaction type return to vendor and create Pu
 		And I delete "$$DatePurchaseReturn022501$$" variable
 		And I save the window as "$$PurchaseReturn022501$$"
 		And I save the value of "Number" field as "$$NumberPurchaseReturn022501$$"
-		And I save the value of "Date" field as "$$DatePurchaseReturn022501$$"
+		And I save the value of the field named "Date" as  "$$DatePurchaseReturn022501$$"
 		And I close current window
 
 

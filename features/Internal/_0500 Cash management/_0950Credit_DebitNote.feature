@@ -279,7 +279,7 @@ Scenario: _095002 create document Dedit Note (write off debts to the vendor)
 		And I delete "$$DeditNote095002$$" variable
 		And I delete "$$DeditNoteDate095002$$" variable
 		And I save the window as "$$DeditNote095002$$"
-		And I save the value of "Date" field as "$$DeditNoteDate095002$$"
+		And I save the value of the field named "Date" as  "$$DeditNoteDate095002$$"
 		And I save the value of "Number" field as "$$NumberDeditNote095002$$"
 		And I close all client application windows
 		Given I open hyperlink "e1cib/list/Document.DebitNote"
@@ -364,7 +364,7 @@ Scenario: _095003 check movements of the document Credit Note (increase in debt 
 		And I delete "$$CreditNote095003$$" variable
 		And I delete "$$CreditNoteDate095003$$" variable
 		And I save the window as "$$CreditNote095003$$"
-		And I save the value of "Date" field as "$$CreditNoteDate095003$$"
+		And I save the value of the field named "Date" as  "$$CreditNoteDate095003$$"
 		And I save the value of "Number" field as "$$NumberCreditNote095003$$"
 		And I close all client application windows
 		Given I open hyperlink "e1cib/list/Document.CreditNote"
@@ -447,7 +447,7 @@ Scenario: _095004 check movements of the document Credit Note (write off custome
 		And I delete "$$CreditNote095004$$" variable
 		And I delete "$$CreditNoteDate095004$$" variable
 		And I save the window as "$$CreditNote095004$$"
-		And I save the value of "Date" field as "$$CreditNoteDate095004$$"
+		And I save the value of the field named "Date" as  "$$CreditNoteDate095004$$"
 		And I save the value of "Number" field as "$$NumberCreditNote095004$$"
 		And I close all client application windows
 		Given I open hyperlink "e1cib/list/Document.CreditNote"
@@ -533,7 +533,7 @@ Scenario: _095005 create document Debit Note (increase in customers debt)
 		And I delete "$$DeditNoteDate095005$$" variable
 		And I delete "$$DeditNoteDate095005$$" variable
 		And I save the window as "$$DeditNote095005$$"
-		And I save the value of "Date" field as "$$DeditNoteDate095005$$"
+		And I save the value of the field named "Date" as  "$$DeditNoteDate095005$$"
 		And I save the value of "Number" field as "$$DeditNoteNumber095005$$"
 		And I close all client application windows
 		Given I open hyperlink "e1cib/list/Document.DebitNote"

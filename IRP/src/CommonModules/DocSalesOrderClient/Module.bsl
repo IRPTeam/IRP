@@ -445,16 +445,7 @@ EndProcedure
 #Region PaymentTermsItemsEvents
 
 Procedure PaymentTermsDateOnChange(Object, Form, Item, AddInfo = Undefined) Export
-	CurrentData = Form.Items.PaymentTerms.CurrentData;
-	If CurrentData = Undefined Then
-		Return;
-	EndIf;
-	SecondsInOneDay = 86400;
-	If ValueIsFilled(Object.Date) And ValueIsFilled(CurrentData.Date) Then
-		CurrentData.DuePeriod = (CurrentData.Date - Object.Date) / SecondsInOneDay;
-	Else
-		CurrentData.DuePeriod = 0;
-	EndIf;
+	DocumentsClient.CalculatePaymentTermDuePeriod(Object, Form, Item, AddInfo);
 EndProcedure
 
 Procedure PaymentTermsOnChange(Object, Form, Item, AddInfo = Undefined) Export

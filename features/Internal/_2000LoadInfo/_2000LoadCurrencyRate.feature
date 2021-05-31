@@ -121,6 +121,14 @@ Scenario: _020000 preparation (Loadinfo)
 			And I input "#KeyTcmbGovTr#" text in "Key" field
 			And I click "Ok" button
 			And I click "Save and close" button
+		* Check connection
+			Given I open hyperlink "e1cib/list/Catalog.IntegrationSettings"
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Bank UA'     |
+			And I select current line in "List" table
+			And in the table "ConnectionSetting" I click "Test" button
+			Given Recent TestClient message contains "Received response from bank.gov.ua:443 Status code: 200" string			
 		And I close all client application windows
 		
 			

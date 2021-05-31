@@ -1300,8 +1300,22 @@ Function ExtractData_FromSO(BasisesTable, DataReceiver)
 		|	Document.SalesOrder.SpecialOffers AS SpecialOffers
 		|		INNER JOIN BasisesTable AS BasisesTable
 		|		ON BasisesTable.Basis = SpecialOffers.Ref
-		|		AND BasisesTable.BasisKey = SpecialOffers.Key";
-
+		|		AND BasisesTable.BasisKey = SpecialOffers.Key
+		|;
+		|
+		|/////////////////////////////////////////////////////////////////////////////////
+		|SELECT DISTINCT
+		|	UNDEFINED AS Ref,
+		|	PaymentTerms.Date,
+		|	PaymentTerms.ProportionOfPayment,
+		|	PaymentTerms.DuePeriod,
+		|	PaymentTerms.Amount,
+		|	PaymentTerms.CalculationType
+		|FROM
+		|	Document.SalesOrder.PaymentTerms AS PaymentTerms
+		|	INNER JOIN BasisesTable AS BasisesTable
+		|	ON BasisesTable.Basis = PaymentTerms.Ref
+		|";
 	
 	Query.SetParameter("BasisesTable", BasisesTable);
 	QueryResults = Query.ExecuteBatch();
@@ -1310,12 +1324,14 @@ Function ExtractData_FromSO(BasisesTable, DataReceiver)
 	TableItemList      = QueryResults[2].Unload();	
 	TableTaxList       = QueryResults[3].Unload();
 	TableSpecialOffers = QueryResults[4].Unload();
+	TablePaymentTerms  = QueryResults[5].Unload();
 		
 	Tables = New Structure();
 	Tables.Insert("RowIDInfo"     , TableRowIDInfo);
 	Tables.Insert("ItemList"      , TableItemList);
 	Tables.Insert("TaxList"       , TableTaxList);
 	Tables.Insert("SpecialOffers" , TableSpecialOffers);
+	Tables.Insert("PaymentTerms"  , TablePaymentTerms);
 	
 	AddTables(Tables);
 	
@@ -1799,7 +1815,23 @@ Function ExtractData_FromPO(BasisesTable, DataReceiver)
 		|	Document.PurchaseOrder.SpecialOffers AS SpecialOffers
 		|		INNER JOIN BasisesTable AS BasisesTable
 		|		ON BasisesTable.Basis = SpecialOffers.Ref
-		|		AND BasisesTable.BasisKey = SpecialOffers.Key";
+		|		AND BasisesTable.BasisKey = SpecialOffers.Key
+		|
+		|;
+		|
+		|/////////////////////////////////////////////////////////////////////////////////
+		|SELECT DISTINCT
+		|	UNDEFINED AS Ref,
+		|	PaymentTerms.Date,
+		|	PaymentTerms.ProportionOfPayment,
+		|	PaymentTerms.DuePeriod,
+		|	PaymentTerms.Amount,
+		|	PaymentTerms.CalculationType
+		|FROM
+		|	Document.PurchaseOrder.PaymentTerms AS PaymentTerms
+		|	INNER JOIN BasisesTable AS BasisesTable
+		|	ON BasisesTable.Basis = PaymentTerms.Ref
+		|";
 
 	
 	Query.SetParameter("BasisesTable", BasisesTable);
@@ -1809,12 +1841,14 @@ Function ExtractData_FromPO(BasisesTable, DataReceiver)
 	TableItemList      = QueryResults[2].Unload();
 	TableTaxList       = QueryResults[3].Unload();
 	TableSpecialOffers = QueryResults[4].Unload();
+	TablePaymentTerms  = QueryResults[5].Unload();
 		
 	Tables = New Structure();
 	Tables.Insert("ItemList"      , TableItemList);
 	Tables.Insert("RowIDInfo"     , TableRowIDInfo);
 	Tables.Insert("TaxList"       , TableTaxList);
 	Tables.Insert("SpecialOffers" , TableSpecialOffers);
+	Tables.Insert("PaymentTerms"  , TablePaymentTerms);
 	
 	AddTables(Tables);
 	
@@ -5608,11 +5642,31 @@ Function ConvertDataToFillingValues(DocReceiverMetadata, ExtractedData) Export
 				If Not CommonFunctionsClientServer.ObjectHasProperty(Tables, TableName_Refreshable) Then
 					Continue;
 				EndIf;
+				// For tables with Key attribute
+				If Not CommonFunctionsClientServer.ObjectHasProperty(Tables[TableName_Refreshable].Columns, "Key") Then
+					Continue;
+				EndIf;
+				
 				For Each Row_DepTable In Tables[TableName_Refreshable].Copy(TableFilter) Do
 					FillingValues[TableName_Refreshable].Add(ValueTableRowToStructure(Tables[TableName_Refreshable].Columns, Row_DepTable));
 				EndDo;
 			EndDo;
 		EndDo;
+		
+		For Each TableName_Refreshable In TableNames_Refreshable Do
+			If Not CommonFunctionsClientServer.ObjectHasProperty(Tables, TableName_Refreshable) Then
+				Continue;
+			EndIf;
+			// For tables without Key attribute
+			If CommonFunctionsClientServer.ObjectHasProperty(Tables[TableName_Refreshable].Columns, "Key") Then
+				Continue;
+			EndIf;
+				
+			For Each Row_DepTable In Tables[TableName_Refreshable] Do //.Copy(TableFilter) Do
+				FillingValues[TableName_Refreshable].Add(ValueTableRowToStructure(Tables[TableName_Refreshable].Columns, Row_DepTable));
+			EndDo;
+		EndDo;
+		
 		FillingValues.Insert("BasedOn", True);
 		ArrayOfFillingValues.Add(FillingValues);
 	EndDo;	
@@ -5628,6 +5682,7 @@ Function JoinAllExtractedData(ArrayOfData)
 	Tables.Insert("ShipmentConfirmations" , GetEmptyTable_ShipmentConfirmations());
 	Tables.Insert("GoodsReceipts"         , GetEmptyTable_GoodsReceipts());
 	Tables.Insert("SerialLotNumbers"      , GetEmptyTable_SerialLotNumbers());
+	Tables.Insert("PaymentTerms"          , GetEmptyTable_PaymentTerms());
 	
 	For Each Data In ArrayOfData Do
 		For Each Table In Tables Do
@@ -5647,6 +5702,7 @@ Function GetTableNames_Refreshable()
 	NamesArray.Add("ShipmentConfirmations");
 	NamesArray.Add("GoodsReceipts");
 	NamesArray.Add("SerialLotNumbers");
+	NamesArray.Add("PaymentTerms");
 	Return NamesArray;
 EndFunction
 
@@ -5853,6 +5909,22 @@ EndFunction
 
 Function GetEmptyTable_SerialLotNumbers()
 	Return GetEmptyTable(GetColumnNames_SerialLotNumbers() + ", " + GetColumnNamesSum_SerialLotNumbers());
+EndFunction
+
+#EndRegion
+
+#Region EmptyTables_PaymentTerms
+
+Function GetColumnNames_PaymentTerms()
+	Return "Date, ProportionOfPayment, DuePeriod, CalculationType";
+EndFunction
+
+Function GetColumnNamesSum_PaymentTerms()
+	Return "Amount";
+EndFunction
+
+Function GetEmptyTable_PaymentTerms()
+	Return GetEmptyTable(GetColumnNames_PaymentTerms() + ", " + GetColumnNamesSum_PaymentTerms());
 EndFunction
 
 #EndRegion

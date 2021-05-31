@@ -127,6 +127,9 @@
       <types>DocumentRef.CashPayment</types>
       <types>DocumentRef.CashReceipt</types>
       <types>DocumentRef.BankReceipt</types>
+      <types>DocumentRef.OpeningEntry</types>
+      <types>DocumentRef.DebitNote</types>
+      <types>DocumentRef.CreditNote</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

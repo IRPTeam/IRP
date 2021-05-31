@@ -77,7 +77,11 @@ Scenario: _040115 preparation (Purchase order)
 		And I execute 1C:Enterprise script at server
 			| "Documents.PurchaseOrder.FindByNumber(115).GetObject().Write(DocumentWriteMode.Posting);" |	
 			| "Documents.PurchaseOrder.FindByNumber(116).GetObject().Write(DocumentWriteMode.Posting);" |
-			| "Documents.PurchaseOrder.FindByNumber(117).GetObject().Write(DocumentWriteMode.Posting);" |	
+			| "Documents.PurchaseOrder.FindByNumber(117).GetObject().Write(DocumentWriteMode.Posting);" |
+		When Create document PurchaseOrder objects (with aging, prepaid, post-shipment credit)	
+		And I execute 1C:Enterprise script at server
+			| "Documents.PurchaseOrder.FindByNumber(323).GetObject().Write(DocumentWriteMode.Posting);" |	
+			| "Documents.PurchaseOrder.FindByNumber(324).GetObject().Write(DocumentWriteMode.Posting);" |
 	# * Check query for Purchase order movements
 	# 	Given I open hyperlink "e1cib/app/DataProcessor.AnaliseDocumentMovements"
 	# 	And in the table "Info" I click "Fill movements" button
@@ -300,6 +304,57 @@ Scenario: _0401231 check Purchase order movements by the Register  "R4016 Orderi
 			| ''                                                       | 'Receipt'     | '12.02.2021 12:45:05' | '10'        | 'Main Company' | 'Store 02' | 'Internal supply request 117 dated 12.02.2021 14:39:38' | 'S/Yellow' |
 		And I close all client application windows
 
+Scenario: _0401236 check there is no Purchase order movements by the Register  "R1022 Vendors payment planning" (without aging)
+	* Select Purchase order
+		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '117' |
+	* Check movements by the Register  "R1022 Vendors payment planning" 
+		And I click "Registrations report" button
+		And I select "R1022 Vendors payment planning" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Purchase order 117 dated 12.02.2021 12:45:05' |
+			| 'Document registrations records'               |
+		And I close all client application windows
+
+
+Scenario: _0401237 check there is no Purchase order movements by the Register  "R1022 Vendors payment planning" (with aging, Post-shipment credit)
+	* Select Purchase order
+		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '324' |
+	* Check movements by the Register  "R1022 Vendors payment planning" 
+		And I click "Registrations report" button
+		And I select "R1022 Vendors payment planning" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Purchase order 324 dated 30.05.2021 12:56:02' |
+			| 'Document registrations records'               |
+		And I close all client application windows
+
+
+
+Scenario: _0401238 check Purchase order movements by the Register  "R1022 Vendors payment planning" (with aging, Prepaid)
+	* Select Purchase order
+		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '323' |
+	* Check movements by the Register  "R1022 Vendors payment planning" 
+		And I click "Registrations report" button
+		And I select "R1022 Vendors payment planning" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Purchase order 323 dated 30.05.2021 12:55:44' | ''            | ''                    | ''          | ''             | ''                                             | ''                  | ''          | ''                   |
+			| 'Document registrations records'               | ''            | ''                    | ''          | ''             | ''                                             | ''                  | ''          | ''                   |
+			| 'Register  "R1022 Vendors payment planning"'   | ''            | ''                    | ''          | ''             | ''                                             | ''                  | ''          | ''                   |
+			| ''                                             | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                                             | ''                  | ''          | ''                   |
+			| ''                                             | ''            | ''                    | 'Amount'    | 'Company'      | 'Basis'                                        | 'Legal name'        | 'Partner'   | 'Agreement'          |
+			| ''                                             | 'Receipt'     | '30.05.2021 12:55:44' | '1 170'     | 'Main Company' | 'Purchase order 323 dated 30.05.2021 12:55:44' | 'Company Ferron BP' | 'Ferron BP' | 'Vendor Ferron, TRY' |
+		And I close all client application windows
 
 Scenario: _0401239 Purchase order clear posting/mark for deletion
 	* Select Purchase order

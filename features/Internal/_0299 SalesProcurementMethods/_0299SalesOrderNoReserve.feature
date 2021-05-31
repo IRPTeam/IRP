@@ -119,7 +119,7 @@ Scenario: _029901 create Sales order without reserve and check its movements (SO
 		And I delete "$$DateSalesOrder029901$$" variable
 		And I save the value of "Number" field as "$$NumberSalesOrder029901$$"
 		And I save the window as "$$SalesOrder029901$$"
-		And I save the value of "Date" field as "$$DateSalesOrder029901$$"
+		And I save the value of the field named "Date" as "$$DateSalesOrder029901$$" 
 		And I click the button named "FormPostAndClose"
 		And I go to line in "List" table
 			| 'Number'  |
@@ -400,7 +400,7 @@ Scenario: _029903 create Sales order without reserve and check its movements (SO
 		And I delete "$$DateSalesOrder029903$$" variable
 		And I save the value of "Number" field as "$$NumberSalesOrder029903$$"
 		And I save the window as "$$SalesOrder029903$$"
-		And I save the value of "Date" field as "$$DateSalesOrder029903$$"
+		And I save the value of the field named "Date" as "$$DateSalesOrder029903$$" 
 		And I click the button named "FormPostAndClose"
 		And I go to line in "List" table
 			| 'Number'  |
@@ -464,7 +464,7 @@ Scenario: _029904 create Shipment confirmation for SO without reserve and check 
 			And I delete "$$DateShipmentConfirmation029903$$" variable
 			And I save the value of "Number" field as "$$NumberShipmentConfirmation029903$$"
 			And I save the window as "$$ShipmentConfirmation029903$$"
-			And I save the value of "Date" field as "$$DateShipmentConfirmation029903$$"
+			And I save the value of the field named "Date" as  "$$DateShipmentConfirmation029903$$"
 			And I click "Registrations report" button
 		* Check SC movements Register  "Register  "R4010 Actual stocks")
 			And I select "R4010 Actual stocks" exact value from "Register" drop-down list

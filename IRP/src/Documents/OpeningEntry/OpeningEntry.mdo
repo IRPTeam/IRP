@@ -60,11 +60,12 @@
   <registerRecords>AccumulationRegister.R4014B_SerialLotNumber</registerRecords>
   <registerRecords>AccumulationRegister.R3010B_CashOnHand</registerRecords>
   <registerRecords>AccumulationRegister.R3015B_CashAdvance</registerRecords>
-  <registerRecords>AccumulationRegister.R5011B_PartnersAging</registerRecords>
+  <registerRecords>AccumulationRegister.R5011B_CustomersAging</registerRecords>
   <registerRecords>AccumulationRegister.R1020B_AdvancesToVendors</registerRecords>
   <registerRecords>AccumulationRegister.R1021B_VendorsTransactions</registerRecords>
   <registerRecords>AccumulationRegister.R2020B_AdvancesFromCustomers</registerRecords>
   <registerRecords>AccumulationRegister.R2021B_CustomersTransactions</registerRecords>
+  <registerRecords>AccumulationRegister.R5012B_VendorsAging</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -1003,10 +1004,10 @@
       <objectType typeId="8e456be1-fedd-4f59-8b79-b6580d10af97" valueTypeId="5d455555-122b-492a-9abb-50631ecb62cb"/>
       <rowType typeId="6ec26f23-a138-4f99-bcb4-08e7852201a8" valueTypeId="f90252cf-f5bb-41dd-9c33-65774d2e772b"/>
     </producedTypes>
-    <name>PaymentTerms</name>
+    <name>CustomersPaymentTerms</name>
     <synonym>
       <key>en</key>
-      <value>Payment terms</value>
+      <value>Customers payment terms</value>
     </synonym>
     <attributes uuid="2e7cb06a-1337-4cd5-86e3-291d7fc3607c">
       <name>Key</name>
@@ -1054,6 +1055,77 @@
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
     <attributes uuid="53c8fc62-f58d-40a3-8c32-3be2d85c2490">
+      <name>Amount</name>
+      <synonym>
+        <key>en</key>
+        <value>Amount</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeAmount</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <fillChecking>ShowError</fillChecking>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
+  <tabularSections uuid="a2354ae0-9f4f-47bc-8806-cfdafb76570e">
+    <producedTypes>
+      <objectType typeId="f98d3296-b149-4db9-950a-7110c3f0e945" valueTypeId="2acda698-2ae5-44ff-b6bb-2529ba99792b"/>
+      <rowType typeId="9ab6d51d-a03d-4335-82a9-061b59264b69" valueTypeId="8e3aaf9d-aaed-439f-96bf-32e5e2fc8670"/>
+    </producedTypes>
+    <name>VendorsPaymentTerms</name>
+    <synonym>
+      <key>en</key>
+      <value>Vendors payment terms</value>
+    </synonym>
+    <attributes uuid="49227611-4c51-4a9c-adf7-6630001699e4">
+      <name>Key</name>
+      <synonym>
+        <key>en</key>
+        <value>Key</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeRowID</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="2916c3e9-b8fc-4242-a5b8-2008eb2fa069">
+      <name>CalculationType</name>
+      <synonym>
+        <key>en</key>
+        <value>Calculation type</value>
+      </synonym>
+      <type>
+        <types>EnumRef.CalculationTypes</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <fillChecking>ShowError</fillChecking>
+    </attributes>
+    <attributes uuid="ef82e295-0e9c-4fa9-ade7-1fc4b3c74612">
+      <name>Date</name>
+      <synonym>
+        <key>en</key>
+        <value>Date</value>
+      </synonym>
+      <type>
+        <types>Date</types>
+        <dateQualifiers>
+          <dateFractions>Date</dateFractions>
+        </dateQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <fillChecking>ShowError</fillChecking>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="78115d9a-1f02-4d5d-8684-bff0a0efd958">
       <name>Amount</name>
       <synonym>
         <key>en</key>

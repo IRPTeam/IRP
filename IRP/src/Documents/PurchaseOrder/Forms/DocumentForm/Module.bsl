@@ -301,6 +301,20 @@ EndProcedure
 
 #EndRegion
 
+#Region PaymentTermsItemsEvents
+
+&AtClient
+Procedure PaymentTermsDateOnChange(Item)
+	DocPurchaseOrderClient.PaymentTermsDateOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure PaymentTermsOnChange(Item)
+	DocPurchaseOrderClient.PaymentTermsOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
 #Region ItemPartner
 
 &AtClient

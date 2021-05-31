@@ -900,11 +900,11 @@ Scenario: Open object form "R5010B_ReconciliationStatement"
 		Then I raise "Failed to open information register form R5010B_ReconciliationStatement" exception
 	And I close current window
 
-Scenario: Open object form "R5011B_PartnersAging"
+Scenario: Open object form "R5011B_CustomersAging"
 
-	Given I open "R5011B_PartnersAging" accumulation register default form
+	Given I open "R5011B_CustomersAging" accumulation register default form
 	If the warning is displayed then
-		Then I raise "Failed to open information register form R5011B_PartnersAging" exception
+		Then I raise "Failed to open information register form R5011B_CustomersAging" exception
 	And I close current window
 
 Scenario: Open object form "R5021T_Revenues"

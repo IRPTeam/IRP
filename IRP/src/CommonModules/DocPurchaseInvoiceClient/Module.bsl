@@ -44,6 +44,12 @@ Procedure OnOpen(Object, Form, Cancel, AddInfo = Undefined) Export
 			If AgreementSettings.Property("PutServerDataToAddInfo") And AgreementSettings.PutServerDataToAddInfo Then
 				AgreementOnChangePutServerDataToAddInfo(Object, Form, AddInfo);
 			EndIf;
+			AgreementSettings = AgreementSettings(Object, Form, AddInfo);	
+			AgreementSettings.Actions = New Structure("ChangePaymentTerm", "ChangePaymentTerm");
+			
+			Settings = New Structure("AgreementSettings", AgreementSettings);
+			DocumentsClient.AgreementOnChange(Object, Form, ThisObject, Undefined, Settings, AddInfo);
+			
 			CalculateSettings = New Structure("CalculateSpecialOffers, CalculateNetAmount, CalculateTax, CalculateTotalAmount");
 			PriceDate = CalculationStringsClientServer.GetPriceDateByRefAndDate(Object.Ref, Object.Date);
 			CalculateSettings.Insert("ChangePriceType", New Structure("Period, PriceType", PriceDate, ServerData.AgreementInfo.PriceType));	
@@ -84,7 +90,7 @@ Procedure OnOpen(Object, Form, Cancel, AddInfo = Undefined) Export
 EndProcedure
 
 Procedure NotificationProcessing(Object, Form, EventName, Parameter, Source, AddInfo = Undefined) Export
-	Return;
+	DocumentsClient.CalculatePaymentTermDateAndAmount(Object, Form, AddInfo);
 EndProcedure
 
 Procedure AfterWriteAtClient(Object, Form, WriteParameters, AddInfo = Undefined) Export
@@ -463,6 +469,27 @@ EndProcedure
 
 #EndRegion
 
+#Region PaymentTermsItemsEvents
+
+Procedure PaymentTermsDateOnChange(Object, Form, Item, AddInfo = Undefined) Export
+	CurrentData = Form.Items.PaymentTerms.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	SecondsInOneDay = 86400;
+	If ValueIsFilled(Object.Date) And ValueIsFilled(CurrentData.Date) Then
+		CurrentData.DuePeriod = (CurrentData.Date - Object.Date) / SecondsInOneDay;
+	Else
+		CurrentData.DuePeriod = 0;
+	EndIf;
+EndProcedure
+
+Procedure PaymentTermsOnChange(Object, Form, Item, AddInfo = Undefined) Export
+	DocumentsClient.CalculatePaymentTermDateAndAmount(Object, Form, AddInfo);
+EndProcedure
+
+#EndRegion
+
 #Region ItemPartner
 
 Procedure PartnerOnChange(Object, Form, Item, AddInfo = Undefined) Export
@@ -541,6 +568,7 @@ Function AgreementSettings(Object, Form, AddInfo = Undefined) Export
 	Actions.Insert("ChangePriceIncludeTax"	, "ChangePriceIncludeTax");
 	Actions.Insert("ChangeStore"			, "ChangeStore");
 	Actions.Insert("ChangeDeliveryDate"		, "ChangeDeliveryDate");
+	Actions.Insert("ChangePaymentTerm"		, "ChangePaymentTerm");
 	Actions.Insert("ChangeTaxRates"		    , "ChangeTaxRates");
 	
 	Settings.Actions = Actions;
@@ -769,6 +797,7 @@ Function DateSettings(Object, Form, AddInfo = Undefined) Export
 	Actions = New Structure();
 	Actions.Insert("ChangeAgreement"	, "ChangeAgreement");
 	Actions.Insert("ChangeDeliveryDate"	, "ChangeDeliveryDate");
+	Actions.Insert("UpdatePaymentTerm"  , "UpdatePaymentTerm");
 	
 	Settings.Insert("Actions", Actions);
 	

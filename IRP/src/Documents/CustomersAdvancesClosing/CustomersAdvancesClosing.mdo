@@ -27,6 +27,7 @@
   <defaultChoiceForm>Document.CustomersAdvancesClosing.Form.ChoiceForm</defaultChoiceForm>
   <realTimePosting>Deny</realTimePosting>
   <registerRecords>InformationRegister.T1000I_OffsetOfAdvances</registerRecords>
+  <registerRecords>InformationRegister.T1003I_OffsetOfAging</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <attributes uuid="0c3fe97d-7a1f-4b9a-8063-5b8f338711fa">

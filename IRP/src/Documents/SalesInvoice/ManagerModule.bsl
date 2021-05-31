@@ -715,11 +715,12 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R4032B_GoodsInTransitOutgoing());
 	QueryArray.Add(R4034B_GoodsShipmentSchedule());
 	QueryArray.Add(R4050B_StockInventory());
-	QueryArray.Add(R2021B_CustomersTransactions());//**1
-	QueryArray.Add(R2020B_AdvancesFromCustomers());//**2
-	QueryArray.Add(R5011B_PartnersAging());//**3
+	QueryArray.Add(R2021B_CustomersTransactions());
+	QueryArray.Add(R2020B_AdvancesFromCustomers());
+	QueryArray.Add(R5011B_CustomersAging());
 	QueryArray.Add(R5010B_ReconciliationStatement());
 	QueryArray.Add(T1001I_PartnerTransactions());
+	QueryArray.Add(R2022B_CustomersPaymentPlanning());
 	Return QueryArray;
 EndFunction
 
@@ -1318,7 +1319,7 @@ Function T1001I_PartnerTransactions()
 		|	ItemList.Period";
 EndFunction		
 
-Function R5011B_PartnersAging()
+Function R5011B_CustomersAging()
 	Return 
 		"SELECT
 		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
@@ -1329,8 +1330,9 @@ Function R5011B_PartnersAging()
 		|	PaymentTerms.Ref.Partner AS Partner,
 		|	PaymentTerms.Ref AS Invoice,
 		|	PaymentTerms.Date AS PaymentDate,
-		|	SUM(PaymentTerms.Amount) AS Amount
-		|INTO R5011B_PartnersAging
+		|	SUM(PaymentTerms.Amount) AS Amount,
+		|	UNDEFINED AS AgingClosing
+		|INTO R5011B_CustomersAging
 		|FROM
 		|	Document.SalesInvoice.PaymentTerms AS PaymentTerms
 		|WHERE
@@ -1343,7 +1345,25 @@ Function R5011B_PartnersAging()
 		|	PaymentTerms.Ref.Currency,
 		|	PaymentTerms.Ref.Date,
 		|	PaymentTerms.Ref.Partner,
-		|	VALUE(AccumulationRecordType.Receipt)";
+		|	VALUE(AccumulationRecordType.Receipt)
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Expense),
+		|	OffsetOfAging.Period,
+		|	OffsetOfAging.Company,
+		|	OffsetOfAging.Currency,
+		|	OffsetOfAging.Agreement,
+		|	OffsetOfAging.Partner,
+		|	OffsetOfAging.Invoice,
+		|	OffsetOfAging.PaymentDate,
+		|	OffsetOfAging.Amount,
+		|	OffsetOfAging.Recorder
+		|FROM
+		|	InformationRegister.T1003I_OffsetOfAging AS OffsetOfAging
+		|WHERE
+		|	OffsetOfAging.Document = &Ref";
 EndFunction
 
 Function R5010B_ReconciliationStatement()
@@ -1363,6 +1383,33 @@ Function R5010B_ReconciliationStatement()
 		|	ItemList.LegalName,
 		|	ItemList.Currency,
 		|	ItemList.Period";
+EndFunction
+
+Function R2022B_CustomersPaymentPlanning()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	SalesInvoicePaymentTerms.Ref.Date AS Period,
+		|	SalesInvoicePaymentTerms.Ref.Company AS Company,
+		|	SalesInvoicePaymentTerms.Ref AS Basis,
+		|	SalesInvoicePaymentTerms.Ref.LegalName AS LegalName,
+		|	SalesInvoicePaymentTerms.Ref.Partner AS Partner,
+		|	SalesInvoicePaymentTerms.Ref.Agreement AS Agreement,
+		|	SUM(SalesInvoicePaymentTerms.Amount) AS Amount
+		|INTO R2022B_CustomersPaymentPlanning
+		|FROM
+		|	Document.SalesInvoice.PaymentTerms AS SalesInvoicePaymentTerms
+		|WHERE
+		|	SalesInvoicePaymentTerms.Ref = &Ref
+		|	AND SalesInvoicePaymentTerms.CalculationType = VALUE(Enum.CalculationTypes.PostShipmentCredit)
+		|GROUP BY
+		|	SalesInvoicePaymentTerms.Ref.Date,
+		|	SalesInvoicePaymentTerms.Ref.Company,
+		|	SalesInvoicePaymentTerms.Ref,
+		|	SalesInvoicePaymentTerms.Ref.LegalName,
+		|	SalesInvoicePaymentTerms.Ref.Partner,
+		|	SalesInvoicePaymentTerms.Ref.Agreement,
+		|	VALUE(AccumulationRecordType.Receipt)";
 EndFunction
 
 #EndRegion

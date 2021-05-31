@@ -14939,7 +14939,7 @@
 		</right>
 	</object>
 	<object>
-		<name>AccumulationRegister.R5011B_PartnersAging</name>
+		<name>AccumulationRegister.R5011B_CustomersAging</name>
 		<right>
 			<name>Read</name>
 			<value>true</value>

@@ -365,6 +365,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R1020B_AdvancesToVendors());
 	QueryArray.Add(T1002I_PartnerAdvances());
 	QueryArray.Add(T1001I_PartnerTransactions());
+	QueryArray.Add(R5011B_CustomersAging());
 	Return QueryArray;
 EndFunction
 
@@ -579,6 +580,26 @@ Function R1020B_AdvancesToVendors()
 		|WHERE
 		|	PaymentList.IsReturnFromVendor
 		|	AND PaymentList.IsAdvance";	
+EndFunction
+
+Function R5011B_CustomersAging()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	OffsetOfAging.Period,
+		|	OffsetOfAging.Company,
+		|	OffsetOfAging.Partner,
+		|	OffsetOfAging.Agreement,
+		|	OffsetOfAging.Currency,
+		|	OffsetOfAging.Invoice,
+		|	OffsetOfAging.PaymentDate,
+		|	OffsetOfAging.Amount,
+		|	OffsetOfAging.Recorder AS AgingClosing
+		|INTO R5011B_CustomersAging
+		|FROM
+		|	InformationRegister.T1003I_OffsetOfAging AS OffsetOfAging
+		|WHERE
+		|	OffsetOfAging.Document = &Ref";
 EndFunction
 
 Function T1002I_PartnerAdvances()

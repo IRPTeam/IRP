@@ -3789,7 +3789,7 @@
 				<field>PaymentDate</field>
 			</field>
 			<dataSource>DataSource1</dataSource>
-			<query>SELECT "R5011B_PartnersAging" AS RegisterName, * FROM AccumulationRegister.R5011B_PartnersAging</query>
+			<query>SELECT "R5011B_PartnersAging" AS RegisterName, * FROM AccumulationRegister.R5011B_CustomersAging</query>
 		</item>
 		<item xsi:type="DataSetQuery">
 			<name>R5021T_Revenues</name>

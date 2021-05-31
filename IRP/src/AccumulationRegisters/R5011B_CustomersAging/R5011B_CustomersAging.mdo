@@ -8,10 +8,10 @@
     <recordKeyType typeId="85c20467-91d6-4055-9084-cd2377241ea4" valueTypeId="52852120-2a81-48fa-9692-7a469165a761"/>
     <recordType typeId="5240f246-a22e-464e-a9c1-b91d42437f18" valueTypeId="1874a612-efb4-42b4-954b-3796c2136956"/>
   </producedTypes>
-  <name>R5011B_PartnersAging</name>
+  <name>R5011B_CustomersAging</name>
   <synonym>
     <key>en</key>
-    <value>R5011 Partners aging</value>
+    <value>R5011 Customers aging</value>
   </synonym>
   <useStandardCommands>true</useStandardCommands>
   <dataLockControlMode>Managed</dataLockControlMode>
@@ -29,6 +29,19 @@
     <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
   </resources>
+  <attributes uuid="dfce274b-b52e-4d5b-a5be-79816f85b550">
+    <name>AgingClosing</name>
+    <synonym>
+      <key>en</key>
+      <value>Aging closing</value>
+    </synonym>
+    <type>
+      <types>DocumentRef.CustomersAdvancesClosing</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+  </attributes>
   <dimensions uuid="d69e7da8-45e4-4882-97ae-eddbc6e36abd">
     <name>Company</name>
     <synonym>

@@ -86,32 +86,7 @@ Scenario: _045100 preparation (Incoming payment order)
 		And I execute 1C:Enterprise script at server
 			| "Documents.IncomingPaymentOrder.FindByNumber(113).GetObject().Write(DocumentWriteMode.Posting);" |
 	
-Scenario: _045101 check Incoming payment order movements by the Register "R3034 Cash planning (incoming)"
-	* Select Incoming payment order
-		Given I open hyperlink "e1cib/list/Document.IncomingPaymentOrder"
-		And I go to line in "List" table
-			| 'Number'  |
-			| '113' |
-	* Check movements by the Register  "R3034 Cash planning (outgoing)" 
-		And I click "Registrations report" button
-		And I select "R3033 Cash planning (incoming)" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		Then "ResultTable" spreadsheet document is equal
-			| 'Incoming payment order 113 dated 01.06.2021 10:53:53' | ''            | ''                    | ''          | ''             | ''                             | ''         | ''                  | ''                                            | ''              | ''                     |
-			| 'Document registrations records'                       | ''            | ''                    | ''          | ''             | ''                             | ''         | ''                  | ''                                            | ''              | ''                     |
-			| 'Register  "R3033 Cash planning (incoming)"'           | ''            | ''                    | ''          | ''             | ''                             | ''         | ''                  | ''                                            | ''              | ''                     |
-			| ''                                                     | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                             | ''         | ''                  | ''                                            | ''              | 'Attributes'           |
-			| ''                                                     | ''            | ''                    | 'Amount'    | 'Company'      | 'Multi currency movement type' | 'Currency' | 'Account'           | 'Basis'                                       | 'Movement type' | 'Deferred calculation' |
-			| ''                                                     | 'Receipt'     | '01.06.2021 10:53:53' | '34,24'     | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Bank account, TRY' | 'Sales order 112 dated 30.05.2021 12:24:18'   | 'Revenue'       | 'No'                   |
-			| ''                                                     | 'Receipt'     | '01.06.2021 10:53:53' | '68,48'     | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Bank account, TRY' | 'Sales invoice 113 dated 01.06.2021 10:37:58' | 'Revenue'       | 'No'                   |
-			| ''                                                     | 'Receipt'     | '01.06.2021 10:53:53' | '85,6'      | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Bank account, TRY' | ''                                            | ''              | 'No'                   |
-			| ''                                                     | 'Receipt'     | '01.06.2021 10:53:53' | '200'       | 'Main Company' | 'Local currency'               | 'TRY'      | 'Bank account, TRY' | 'Sales order 112 dated 30.05.2021 12:24:18'   | 'Revenue'       | 'No'                   |
-			| ''                                                     | 'Receipt'     | '01.06.2021 10:53:53' | '200'       | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Bank account, TRY' | 'Sales order 112 dated 30.05.2021 12:24:18'   | 'Revenue'       | 'No'                   |
-			| ''                                                     | 'Receipt'     | '01.06.2021 10:53:53' | '400'       | 'Main Company' | 'Local currency'               | 'TRY'      | 'Bank account, TRY' | 'Sales invoice 113 dated 01.06.2021 10:37:58' | 'Revenue'       | 'No'                   |
-			| ''                                                     | 'Receipt'     | '01.06.2021 10:53:53' | '400'       | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Bank account, TRY' | 'Sales invoice 113 dated 01.06.2021 10:37:58' | 'Revenue'       | 'No'                   |
-			| ''                                                     | 'Receipt'     | '01.06.2021 10:53:53' | '500'       | 'Main Company' | 'Local currency'               | 'TRY'      | 'Bank account, TRY' | ''                                            | ''              | 'No'                   |
-			| ''                                                     | 'Receipt'     | '01.06.2021 10:53:53' | '500'       | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Bank account, TRY' | ''                                            | ''              | 'No'                   |
-	And I close all client application windows
+
 
 Scenario: _045102 check Incoming payment order movements by the Register "R2022 Customers payment planning" (lines with basis)
 	* Select Incoming payment order

@@ -835,9 +835,7 @@ Scenario: Create document SalesInvoice objects (with aging, Post-shipment credit
 		| 'Ref'                                                                   | 'Date'                | 'ProportionOfPayment' | 'DuePeriod' | 'Amount' | 'CalculationType'                          |
 		| 'e1cib/data/Document.SalesInvoice?ref=b76ac729f215fa6f11ebc2a337849bda' | '15.06.2021 00:00:00' | '100'                 | '14'        | '400'    | 'Enum.CalculationTypes.PostShipmentCredit' |
 
-	And I refill object tabular section "RowIDInfo":
-		| 'Ref'                                                                   | 'Key'                                  | 'RowID'                                | 'Quantity' | 'Basis'                                                               | 'CurrentStep'                                    | 'NextStep'                                    | 'RowRef'                                                         | 'BasisKey'                             |
-		| 'e1cib/data/Document.SalesInvoice?ref=b76ac729f215fa6f11ebc2a337849bda' | 'd839cd0f-ca23-4337-9c0a-efc63aa49899' | 'a70c0689-5b65-4adf-b3a2-40fe5bebefcf' | '1'        | 'e1cib/data/Document.SalesOrder?ref=b76ac729f215fa6f11ebc128ac7daa5c' | 'e1cib/data/Catalog.MovementRules?refName=SI_SC' | 'e1cib/data/Catalog.MovementRules?refName=SC' | 'e1cib/data/Catalog.RowIDs?ref=b76ac729f215fa6f11ebc2a33925999f' | 'a70c0689-5b65-4adf-b3a2-40fe5bebefcf' |
+	
 
 
 

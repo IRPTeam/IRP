@@ -221,7 +221,9 @@ Function R1022B_VendorsPaymentPlanning()
 		|	PaymentList.Amount
 		|INTO R1022B_VendorsPaymentPlanning
 		|FROM 
-		|	PaymentList AS PaymentList";
+		|	PaymentList AS PaymentList
+		|WHERE
+		|	NOT PaymentList.Basis.Ref IS NULL";
 EndFunction
 
 Function R3034B_CashPlanningOutgoing()

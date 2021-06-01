@@ -105,7 +105,62 @@ Scenario: _045000 preparation (Outgoing payment order)
 			| "Documents.CashTransferOrder.FindByNumber(2).GetObject().Write(DocumentWriteMode.Posting);" |
 			| "Documents.CashTransferOrder.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);" |
 			| "Documents.CashTransferOrder.FindByNumber(4).GetObject().Write(DocumentWriteMode.Posting);" |
-	* Load Incoming payment order
-		When Create document OutgoingPaymentOrder objects
+		When Create document PurchaseOrder objects (with aging, prepaid, post-shipment credit)
 		And I execute 1C:Enterprise script at server
-			| "Documents.OutgoingPaymentOrder.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.PurchaseOrder.FindByNumber(323).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.PurchaseOrder.FindByNumber(324).GetObject().Write(DocumentWriteMode.Posting);" |
+		When Create document PurchaseInvoice objects (with aging, prepaid, post-shipment credit)
+		And I execute 1C:Enterprise script at server
+			| "Documents.PurchaseInvoice.FindByNumber(323).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.PurchaseInvoice.FindByNumber(324).GetObject().Write(DocumentWriteMode.Posting);" |
+	* Load OutgoingPaymentOrder
+		When Create document OutgoingPaymentOrder objects (Cash planning)
+		And I execute 1C:Enterprise script at server
+			| "Documents.OutgoingPaymentOrder.FindByNumber(323).GetObject().Write(DocumentWriteMode.Posting);" |
+	
+Scenario: _045001 check Outgoing payment order movements by the Register "R3034 Cash planning (outgoing)"
+	* Select Outgoing payment order
+		Given I open hyperlink "e1cib/list/Document.OutgoingPaymentOrder"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '323' |
+	* Check movements by the Register  "R3034 Cash planning (outgoing)" 
+		And I click "Registrations report" button
+		And I select "R3034 Cash planning (outgoing)" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Outgoing payment order 323 dated 07.09.2020 19:23:44' | ''            | ''                    | ''          | ''             | ''                             | ''         | ''                  | ''                                               | ''              | ''                     |
+			| 'Document registrations records'                       | ''            | ''                    | ''          | ''             | ''                             | ''         | ''                  | ''                                               | ''              | ''                     |
+			| 'Register  "R3034 Cash planning (outgoing)"'           | ''            | ''                    | ''          | ''             | ''                             | ''         | ''                  | ''                                               | ''              | ''                     |
+			| ''                                                     | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                             | ''         | ''                  | ''                                               | ''              | 'Attributes'           |
+			| ''                                                     | ''            | ''                    | 'Amount'    | 'Company'      | 'Multi currency movement type' | 'Currency' | 'Account'           | 'Basis'                                          | 'Movement type' | 'Deferred calculation' |
+			| ''                                                     | 'Receipt'     | '07.09.2020 19:23:44' | '85,6'      | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Bank account, TRY' | ''                                               | 'Expense'       | 'No'                   |
+			| ''                                                     | 'Receipt'     | '07.09.2020 19:23:44' | '154,08'    | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Bank account, TRY' | 'Purchase invoice 324 dated 30.05.2021 15:09:00' | 'Expense'       | 'No'                   |
+			| ''                                                     | 'Receipt'     | '07.09.2020 19:23:44' | '171,2'     | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Bank account, TRY' | 'Purchase order 323 dated 30.05.2021 12:55:44'   | 'Expense'       | 'No'                   |
+			| ''                                                     | 'Receipt'     | '07.09.2020 19:23:44' | '500'       | 'Main Company' | 'Local currency'               | 'TRY'      | 'Bank account, TRY' | ''                                               | 'Expense'       | 'No'                   |
+			| ''                                                     | 'Receipt'     | '07.09.2020 19:23:44' | '500'       | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Bank account, TRY' | ''                                               | 'Expense'       | 'No'                   |
+			| ''                                                     | 'Receipt'     | '07.09.2020 19:23:44' | '900'       | 'Main Company' | 'Local currency'               | 'TRY'      | 'Bank account, TRY' | 'Purchase invoice 324 dated 30.05.2021 15:09:00' | 'Expense'       | 'No'                   |
+			| ''                                                     | 'Receipt'     | '07.09.2020 19:23:44' | '900'       | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Bank account, TRY' | 'Purchase invoice 324 dated 30.05.2021 15:09:00' | 'Expense'       | 'No'                   |
+			| ''                                                     | 'Receipt'     | '07.09.2020 19:23:44' | '1 000'     | 'Main Company' | 'Local currency'               | 'TRY'      | 'Bank account, TRY' | 'Purchase order 323 dated 30.05.2021 12:55:44'   | 'Expense'       | 'No'                   |
+			| ''                                                     | 'Receipt'     | '07.09.2020 19:23:44' | '1 000'     | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Bank account, TRY' | 'Purchase order 323 dated 30.05.2021 12:55:44'   | 'Expense'       | 'No'                   |
+	And I close all client application windows
+
+Scenario: _045002 check Outgoing payment order movements by the Register "R1022 Vendors payment planning" (lines with basis)
+	* Select Outgoing payment order
+		Given I open hyperlink "e1cib/list/Document.OutgoingPaymentOrder"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '323' |
+	* Check movements by the Register  "R1022 Vendors payment planning" 
+		And I click "Registrations report" button
+		And I select "R1022 Vendors payment planning" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Outgoing payment order 323 dated 07.09.2020 19:23:44' | ''            | ''                    | ''          | ''             | ''                                               | ''                  | ''          | ''                   |
+			| 'Document registrations records'                       | ''            | ''                    | ''          | ''             | ''                                               | ''                  | ''          | ''                   |
+			| 'Register  "R1022 Vendors payment planning"'           | ''            | ''                    | ''          | ''             | ''                                               | ''                  | ''          | ''                   |
+			| ''                                                     | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                                               | ''                  | ''          | ''                   |
+			| ''                                                     | ''            | ''                    | 'Amount'    | 'Company'      | 'Basis'                                          | 'Legal name'        | 'Partner'   | 'Agreement'          |
+			| ''                                                     | 'Expense'     | '07.09.2020 19:23:44' | '900'       | 'Main Company' | 'Purchase invoice 324 dated 30.05.2021 15:09:00' | 'Company Ferron BP' | 'Ferron BP' | 'Vendor Ferron, TRY' |
+			| ''                                                     | 'Expense'     | '07.09.2020 19:23:44' | '1 000'     | 'Main Company' | 'Purchase order 323 dated 30.05.2021 12:55:44'   | 'Company Ferron BP' | 'Ferron BP' | 'Vendor Ferron, TRY' |
+	And I close all client application windows

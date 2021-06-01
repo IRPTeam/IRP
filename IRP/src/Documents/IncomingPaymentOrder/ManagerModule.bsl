@@ -201,7 +201,9 @@ Function R2022B_CustomersPaymentPlanning()
 		|	PaymentList.Amount
 		|INTO R2022B_CustomersPaymentPlanning
 		|FROM 
-		|	PaymentList AS PaymentList";
+		|	PaymentList AS PaymentList
+		|WHERE
+		|	NOT PaymentList.Basis.Ref IS NULL";
 EndFunction
 
 Function R3033B_CashPlanningIncoming()

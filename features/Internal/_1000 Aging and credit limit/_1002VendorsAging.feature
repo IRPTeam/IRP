@@ -483,8 +483,10 @@ Scenario: _1020030 create Debit note and check Aging register movements
 			And I select current line in "List" table
 			And I click the button named "FormCommandSelect" 
 			And I activate field named "TransactionsAmount" in "Transactions" table
-			And I input "50,00" text in the field named "TransactionsAmount" of "Transactions" table
+			And I input "3850,00" text in the field named "TransactionsAmount" of "Transactions" table
 			And I finish line editing in "Transactions" table
+			And I move to "Other" tab
+			And I set checkbox "Due as advance"	
 	* Check movements
 		And I click the button named "FormPost"
 		And I delete "$$DebitNote1020030$$" variable
@@ -517,8 +519,9 @@ Scenario: _1020030 create Debit note and check Aging register movements
 			| '$$DateCashPayment1002009$$'    | '$$CashPayment1002009$$'    | 'TRY'      | 'Main Company' | 'Ferron BP' | '4 000,00' | 'Vendor Ferron, TRY' | '$$PurchaseInvoiceAging1$$' | '*'                                        | 'Vendors advances closing 4 dated 28.04.2021 22:00:00' |
 			| '$$DateBankPayment1002015$$'    | '$$BankPayment1002015$$'    | 'TRY'      | 'Main Company' | 'Ferron BP' | '200,00'   | 'Vendor Ferron, TRY' | '$$PurchaseInvoiceAging$$'  | '$$DatePaymentTermsPurchaseInvoiceAging$$' | 'Vendors advances closing 4 dated 28.04.2021 22:00:00' |
 			| '$$CreditNoteDate1002020$$'     | '$$CreditNote1002020$$'     | 'TRY'      | 'Main Company' | 'Ferron BP' | '100,00'   | 'Vendor Ferron, TRY' | '$$PurchaseInvoiceAging$$'  | '*'                                        | ''                                                     |
-			| '$$DebitNoteDate1000030$$'      | '$$DebitNote1020030$$'      | 'TRY'      | 'Main Company' | 'Ferron BP' | '50,00'    | 'Vendor Ferron, TRY' | '$$PurchaseInvoiceAging$$'  | '*'                                        | 'Vendors advances closing 4 dated 28.04.2021 22:00:00' |
-		Then the number of "List" table lines is "равно" "6"
+			| '$$DebitNoteDate1000030$$'      | '$$DebitNote1020030$$'      | 'TRY'      | 'Main Company' | 'Ferron BP' | '100,00'   | 'Vendor Ferron, TRY' | '$$PurchaseInvoiceAging$$'  | '*'                                        | 'Vendors advances closing 4 dated 28.04.2021 22:00:00' |
+			| '$$DebitNoteDate1000030$$'      | '$$DebitNote1020030$$'      | 'TRY'      | 'Main Company' | 'Ferron BP' | '3 750,00' | 'Vendor Ferron, TRY' | '$$PurchaseInvoiceAging$$'  | '*'                                        | 'Vendors advances closing 4 dated 28.04.2021 22:00:00' |
+		Then the number of "List" table lines is "равно" "7"
 	And I close all client application windows
 				
 Scenario: _1020050 check the offset of Purchase invoice advance (type of settlement by documents)
@@ -698,7 +701,7 @@ Scenario: _1020050 check the offset of Purchase invoice advance (type of settlem
 			And "List" table contains lines:
 				| 'Period'                         | 'Recorder'                   | 'Currency' | 'Company'      | 'Partner'   | 'Amount'   | 'Agreement'          | 'Invoice'                    | 'Payment date'                             | 'Aging closing'                                        |
 				| '$$DatePurchaseInvoice0240164$$' | '$$PurchaseInvoice0240164$$' | 'TRY'      | 'Main Company' | 'Ferron BP' | '4 000,00' | 'Vendor Ferron, TRY' | '$$PurchaseInvoice0240164$$' | '$$DatePaymentTermsPurchaseInvoiceAging$$' | ''                                                     |
-				| '$$DateCashPayment10000505$$'    | '$$CashPayment10000505$$'    | 'TRY'      | 'Main Company' | 'Ferron BP' | '4 000,00' | 'Vendor Ferron, TRY' | '$$PurchaseInvoice0240164$$' | '$$DatePaymentTermsPurchaseInvoiceAging$$' | 'Vendors advances closing 4 dated 28.04.2021 22:00:00' |
+				| '$$DateCashPayment10000505$$'    | '$$CashPayment10000505$$'    | 'TRY'      | 'Main Company' | 'Ferron BP' | '3 370,00' | 'Vendor Ferron, TRY' | '$$PurchaseInvoice0240164$$' | '$$DatePaymentTermsPurchaseInvoiceAging$$' | 'Vendors advances closing 4 dated 28.04.2021 22:00:00' |
 			And I close all client application windows	
 
 Scenario: _1020040 check Purchase order Aging tab filling
@@ -724,7 +727,7 @@ Scenario: _1020040 check Purchase order Aging tab filling
 		And "PaymentTerms" table became equal
 			| '#' | 'Date'       | 'Amount'   | 'Calculation type' | 'Due period, days' | 'Proportion of payment' |
 			| '1' | '09.06.2021' | '1 170,00' | 'Prepaid'          | '10'               | '100,00'                |
-	* Change SO date and check aging tab
+	* Change PO date and check aging tab
 		And I move to "Other" tab
 		And I input "31.05.2021 00:00:00" text in the field named "Date"
 		And I move to "Aging" tab
@@ -737,18 +740,4 @@ Scenario: _1020040 check Purchase order Aging tab filling
 			| '1' | '10.06.2021' | '1 170,00' | 'Prepaid'          | '10'               | '100,00'                |
 		And I close all client application windows
 
-Scenario: _1020041 check filling in Aging tab in the PI from PO
-	And I close all client application windows
-	*Select PO
-		Given I open hyperlink 'e1cib/list/Document.PurchaseOrder'
-		And I go to line in "List" table
-			| 'Number' |
-			| '323'  |
-		And in the table "List" I click the button named "ListContextMenuPost"
-		And I click the button named "FormDocumentPurchaseInvoiceGenerate"
-		And I click "Ok" button
-	* Check filling in Aging tab in the SI
-		And "PaymentTerms" table became equal
-			| '#' | 'Date'       | 'Amount'   | 'Calculation type' | 'Due period, days' | 'Proportion of payment' |
-			| '1' | '07.06.2021' | '1 170,00' | 'Prepaid'          | '8'                | '100,00'                |
-		And I close all client application windows
+

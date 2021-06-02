@@ -468,6 +468,8 @@ Scenario: _1000020 create Credit note and check Aging register movements
 			And I activate field named "TransactionsAmount" in "Transactions" table
 			And I input "150,00" text in the field named "TransactionsAmount" of "Transactions" table
 			And I finish line editing in "Transactions" table
+			And I move to "Other" tab
+			And I set checkbox "Due as advance"			
 			And I click the button named "FormPost"
 			And I delete "$$CreditNote1000020$$" variable
 			And I delete "$$CreditNoteDate1000020$$" variable
@@ -579,8 +581,9 @@ Scenario: _1000030 create Debit note and check Aging register movements
 			| '$$DateCashReceipt1000009$$'  | '$$CashReceipt1000009$$'  | 'TRY'      | 'Main Company' | 'Kalipso' | '550,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice0240162$$' | '19.11.2020'                              | 'Customers advances closing 4 dated 21.04.2021 12:00:00' |
 			| '$$DateBankReceipt1000015$$'  | '$$BankReceipt1000015$$'  | 'TRY'      | 'Main Company' | 'Kalipso' | '450,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '$$DatePaymentTermsSalesInvoice0240161$$' | 'Customers advances closing 4 dated 21.04.2021 12:00:00' |
 			| '$$CreditNoteDate1000020$$'   | '$$CreditNote1000020$$'   | 'TRY'      | 'Main Company' | 'Kalipso' | '100,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '$$DatePaymentTermsSalesInvoice0240161$$' | 'Customers advances closing 4 dated 21.04.2021 12:00:00' |
-			| '$$DebitNoteDate1000030$$'    | '$$DebitNote1000030$$'    | 'TRY'      | 'Main Company' | 'Kalipso' | '50,00'  | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '*'                                       | '' |
-		Then the number of "List" table lines is "равно" "6"
+			| '$$DebitNoteDate1000030$$'    | '$$DebitNote1000030$$'    | 'TRY'      | 'Main Company' | 'Kalipso' | '50,00'  | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '*'                                       | ''                                                       |
+			| '$$DebitNoteDate1000030$$'    | '$$DebitNote1000030$$'    | 'TRY'      | 'Main Company' | 'Kalipso' | '50,00'  | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '*'                                       | 'Customers advances closing 4 dated 21.04.2021 12:00:00' |
+		Then the number of "List" table lines is "равно" "7"
 	And I close all client application windows
 				
 Scenario: _1000050 check the offset of Sales invoice advance (type of settlement by documents)
@@ -830,21 +833,6 @@ Scenario: _1000040 check Sales order Aging tab filling
 		And I close all client application windows
 		
 
-Scenario: _1000041 check filling in Aging tab in the SI from SO
-	And I close all client application windows
-	*Select SO
-		Given I open hyperlink 'e1cib/list/Document.SalesOrder'
-		And I go to line in "List" table
-			| 'Number' |
-			| '113'  |
-		And in the table "List" I click the button named "ListContextMenuPost"
-		And I click the button named "FormDocumentSalesInvoiceGenerate"
-		And I click "Ok" button
-	* Check filling in Aging tab in the SI
-		And "PaymentTerms" table became equal
-			| '#' | 'Date'       | 'Amount' | 'Calculation type' | 'Due period, days' | 'Proportion of payment' |
-			| '1' | '13.06.2021' | '400,00' | 'Prepaid'          | '14'               | '100,00'                |
-		And I close all client application windows
 
 		
 				

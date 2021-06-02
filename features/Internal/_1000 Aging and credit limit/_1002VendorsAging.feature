@@ -280,6 +280,11 @@ Scenario: _1002009 create Cash payment and check Aging register movements
 		And in the table "List" I click the button named "ListContextMenuPost"	
 	* Check movements
 		Given I open hyperlink 'e1cib/list/AccumulationRegister.R5012B_VendorsAging'
+		And I go to line in "List" table
+			| 'Partner' |
+			| 'Ferron BP'  |
+		And I activate "Partner" field in "List" table
+		And in the table "List" I click the button named "ListContextMenuFindByCurrentValue"
 		And "List" table contains lines
 			| 'Period'                        | 'Recorder'                  | 'Currency' | 'Company'      | 'Partner'   | 'Amount'   | 'Agreement'          | 'Invoice'                   | 'Payment date'                             | 'Aging closing'                                        |
 			| '$$DatePurchaseInvoiceAging1$$' | '$$PurchaseInvoiceAging1$$' | 'TRY'      | 'Main Company' | 'Ferron BP' | '4 000,00' | 'Vendor Ferron, TRY' | '$$PurchaseInvoiceAging1$$' | '*'                                        | ''                                                     |
@@ -293,6 +298,7 @@ Scenario: _1002009 create Cash payment and check Aging register movements
 
 	Scenario: _1002015 create Bank payment and check Aging register movements
 		* Create Bank payment
+			And I close all client application windows
 			Given I open hyperlink "e1cib/list/Document.BankPayment"
 			And I click the button named "FormCreate"
 			* Select company
@@ -364,6 +370,11 @@ Scenario: _1002009 create Cash payment and check Aging register movements
 			And in the table "List" I click the button named "ListContextMenuPost"	
 		* Check movements
 			Given I open hyperlink 'e1cib/list/AccumulationRegister.R5012B_VendorsAging'
+			And I go to line in "List" table
+				| 'Partner' |
+				| 'Ferron BP'  |
+			And I activate "Partner" field in "List" table
+			And in the table "List" I click the button named "ListContextMenuFindByCurrentValue"
 			And "List" table contains lines
 				| 'Period'                        | 'Recorder'                  | 'Currency' | 'Company'      | 'Partner'   | 'Amount'   | 'Agreement'          | 'Invoice'                   | 'Payment date'                             | 'Aging closing'                                        |
 				| '$$DatePurchaseInvoiceAging1$$' | '$$PurchaseInvoiceAging1$$' | 'TRY'      | 'Main Company' | 'Ferron BP' | '4 000,00' | 'Vendor Ferron, TRY' | '$$PurchaseInvoiceAging1$$' | '*'                                        | ''                                                     |
@@ -441,6 +452,11 @@ Scenario: _1002020 create Credit note and check Aging register movements
 			And in the table "List" I click the button named "ListContextMenuPost"	
 		* Check movements
 			Given I open hyperlink 'e1cib/list/AccumulationRegister.R5012B_VendorsAging'
+			And I go to line in "List" table
+				| 'Partner' |
+				| 'Ferron BP'  |
+			And I activate "Partner" field in "List" table
+			And in the table "List" I click the button named "ListContextMenuFindByCurrentValue"
 			And "List" table contains lines
 				| 'Period'                        | 'Recorder'                  | 'Currency' | 'Company'      | 'Partner'   | 'Amount'   | 'Agreement'          | 'Invoice'                   | 'Payment date'                             | 'Aging closing'                                        |
 				| '$$DatePurchaseInvoiceAging1$$' | '$$PurchaseInvoiceAging1$$' | 'TRY'      | 'Main Company' | 'Ferron BP' | '4 000,00' | 'Vendor Ferron, TRY' | '$$PurchaseInvoiceAging1$$' | '*'                                        | ''                                                     |
@@ -517,6 +533,11 @@ Scenario: _1020030 create Debit note and check Aging register movements
 		And in the table "List" I click the button named "ListContextMenuPost"	
 	* Check movements
 		Given I open hyperlink 'e1cib/list/AccumulationRegister.R5012B_VendorsAging'
+		And I go to line in "List" table
+			| 'Partner' |
+			| 'Ferron BP'  |
+		And I activate "Partner" field in "List" table
+		And in the table "List" I click the button named "ListContextMenuFindByCurrentValue"
 		And "List" table contains lines
 			| 'Period'                        | 'Recorder'                  | 'Currency' | 'Company'      | 'Partner'   | 'Amount'   | 'Agreement'          | 'Invoice'                   | 'Payment date'                             | 'Aging closing'                                        |
 			| '$$DatePurchaseInvoiceAging1$$' | '$$PurchaseInvoiceAging1$$' | 'TRY'      | 'Main Company' | 'Ferron BP' | '4 000,00' | 'Vendor Ferron, TRY' | '$$PurchaseInvoiceAging1$$' | '*'                                        | ''                                                     |

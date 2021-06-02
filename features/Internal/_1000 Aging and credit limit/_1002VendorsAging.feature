@@ -75,6 +75,13 @@ Scenario: _1002000 preparation (vendors aging)
 		And I input "20.05.2021" text in "End of period" field
 		And I click the button named "FormPostAndClose"
 		And I close all client application windows
+	* Load PO, PI, Bank payment, Opening entry
+		When Create document PurchaseOrder objects (with aging, prepaid, post-shipment credit)
+		When Create document PurchaseOrder objects (with aging, prepaid and post-shipment credit)
+		When Create document BankPayment objects (aging, Opening entry, Purchase order)
+		When Create document PurchaseInvoice objects (with aging, prepaid and post-shipment credit)
+		When Create document OpeningEntry objects (aging)
+
 
 Scenario: _1002002 filling in payment terms in the Partner term
 	Given I open hyperlink "e1cib/list/Catalog.Agreements"
@@ -273,6 +280,11 @@ Scenario: _1002009 create Cash payment and check Aging register movements
 		And in the table "List" I click the button named "ListContextMenuPost"	
 	* Check movements
 		Given I open hyperlink 'e1cib/list/AccumulationRegister.R5012B_VendorsAging'
+		And I go to line in "List" table
+			| 'Partner' |
+			| 'Ferron BP'  |
+		And I activate "Partner" field in "List" table
+		And in the table "List" I click the button named "ListContextMenuFindByCurrentValue"
 		And "List" table contains lines
 			| 'Period'                        | 'Recorder'                  | 'Currency' | 'Company'      | 'Partner'   | 'Amount'   | 'Agreement'          | 'Invoice'                   | 'Payment date'                             | 'Aging closing'                                        |
 			| '$$DatePurchaseInvoiceAging1$$' | '$$PurchaseInvoiceAging1$$' | 'TRY'      | 'Main Company' | 'Ferron BP' | '4 000,00' | 'Vendor Ferron, TRY' | '$$PurchaseInvoiceAging1$$' | '*'                                        | ''                                                     |
@@ -286,6 +298,7 @@ Scenario: _1002009 create Cash payment and check Aging register movements
 
 	Scenario: _1002015 create Bank payment and check Aging register movements
 		* Create Bank payment
+			And I close all client application windows
 			Given I open hyperlink "e1cib/list/Document.BankPayment"
 			And I click the button named "FormCreate"
 			* Select company
@@ -357,6 +370,11 @@ Scenario: _1002009 create Cash payment and check Aging register movements
 			And in the table "List" I click the button named "ListContextMenuPost"	
 		* Check movements
 			Given I open hyperlink 'e1cib/list/AccumulationRegister.R5012B_VendorsAging'
+			And I go to line in "List" table
+				| 'Partner' |
+				| 'Ferron BP'  |
+			And I activate "Partner" field in "List" table
+			And in the table "List" I click the button named "ListContextMenuFindByCurrentValue"
 			And "List" table contains lines
 				| 'Period'                        | 'Recorder'                  | 'Currency' | 'Company'      | 'Partner'   | 'Amount'   | 'Agreement'          | 'Invoice'                   | 'Payment date'                             | 'Aging closing'                                        |
 				| '$$DatePurchaseInvoiceAging1$$' | '$$PurchaseInvoiceAging1$$' | 'TRY'      | 'Main Company' | 'Ferron BP' | '4 000,00' | 'Vendor Ferron, TRY' | '$$PurchaseInvoiceAging1$$' | '*'                                        | ''                                                     |
@@ -434,6 +452,11 @@ Scenario: _1002020 create Credit note and check Aging register movements
 			And in the table "List" I click the button named "ListContextMenuPost"	
 		* Check movements
 			Given I open hyperlink 'e1cib/list/AccumulationRegister.R5012B_VendorsAging'
+			And I go to line in "List" table
+				| 'Partner' |
+				| 'Ferron BP'  |
+			And I activate "Partner" field in "List" table
+			And in the table "List" I click the button named "ListContextMenuFindByCurrentValue"
 			And "List" table contains lines
 				| 'Period'                        | 'Recorder'                  | 'Currency' | 'Company'      | 'Partner'   | 'Amount'   | 'Agreement'          | 'Invoice'                   | 'Payment date'                             | 'Aging closing'                                        |
 				| '$$DatePurchaseInvoiceAging1$$' | '$$PurchaseInvoiceAging1$$' | 'TRY'      | 'Main Company' | 'Ferron BP' | '4 000,00' | 'Vendor Ferron, TRY' | '$$PurchaseInvoiceAging1$$' | '*'                                        | ''                                                     |
@@ -481,8 +504,10 @@ Scenario: _1020030 create Debit note and check Aging register movements
 			And I select current line in "List" table
 			And I click the button named "FormCommandSelect" 
 			And I activate field named "TransactionsAmount" in "Transactions" table
-			And I input "50,00" text in the field named "TransactionsAmount" of "Transactions" table
+			And I input "3850,00" text in the field named "TransactionsAmount" of "Transactions" table
 			And I finish line editing in "Transactions" table
+			And I move to "Other" tab
+			And I set checkbox "Due as advance"	
 	* Check movements
 		And I click the button named "FormPost"
 		And I delete "$$DebitNote1020030$$" variable
@@ -508,6 +533,11 @@ Scenario: _1020030 create Debit note and check Aging register movements
 		And in the table "List" I click the button named "ListContextMenuPost"	
 	* Check movements
 		Given I open hyperlink 'e1cib/list/AccumulationRegister.R5012B_VendorsAging'
+		And I go to line in "List" table
+			| 'Partner' |
+			| 'Ferron BP'  |
+		And I activate "Partner" field in "List" table
+		And in the table "List" I click the button named "ListContextMenuFindByCurrentValue"
 		And "List" table contains lines
 			| 'Period'                        | 'Recorder'                  | 'Currency' | 'Company'      | 'Partner'   | 'Amount'   | 'Agreement'          | 'Invoice'                   | 'Payment date'                             | 'Aging closing'                                        |
 			| '$$DatePurchaseInvoiceAging1$$' | '$$PurchaseInvoiceAging1$$' | 'TRY'      | 'Main Company' | 'Ferron BP' | '4 000,00' | 'Vendor Ferron, TRY' | '$$PurchaseInvoiceAging1$$' | '*'                                        | ''                                                     |
@@ -515,8 +545,9 @@ Scenario: _1020030 create Debit note and check Aging register movements
 			| '$$DateCashPayment1002009$$'    | '$$CashPayment1002009$$'    | 'TRY'      | 'Main Company' | 'Ferron BP' | '4 000,00' | 'Vendor Ferron, TRY' | '$$PurchaseInvoiceAging1$$' | '*'                                        | 'Vendors advances closing 4 dated 28.04.2021 22:00:00' |
 			| '$$DateBankPayment1002015$$'    | '$$BankPayment1002015$$'    | 'TRY'      | 'Main Company' | 'Ferron BP' | '200,00'   | 'Vendor Ferron, TRY' | '$$PurchaseInvoiceAging$$'  | '$$DatePaymentTermsPurchaseInvoiceAging$$' | 'Vendors advances closing 4 dated 28.04.2021 22:00:00' |
 			| '$$CreditNoteDate1002020$$'     | '$$CreditNote1002020$$'     | 'TRY'      | 'Main Company' | 'Ferron BP' | '100,00'   | 'Vendor Ferron, TRY' | '$$PurchaseInvoiceAging$$'  | '*'                                        | ''                                                     |
-			| '$$DebitNoteDate1000030$$'      | '$$DebitNote1020030$$'      | 'TRY'      | 'Main Company' | 'Ferron BP' | '50,00'    | 'Vendor Ferron, TRY' | '$$PurchaseInvoiceAging$$'  | '*'                                        | 'Vendors advances closing 4 dated 28.04.2021 22:00:00' |
-		Then the number of "List" table lines is "равно" "6"
+			| '$$DebitNoteDate1000030$$'      | '$$DebitNote1020030$$'      | 'TRY'      | 'Main Company' | 'Ferron BP' | '100,00'   | 'Vendor Ferron, TRY' | '$$PurchaseInvoiceAging$$'  | '*'                                        | 'Vendors advances closing 4 dated 28.04.2021 22:00:00' |
+			| '$$DebitNoteDate1000030$$'      | '$$DebitNote1020030$$'      | 'TRY'      | 'Main Company' | 'Ferron BP' | '3 750,00' | 'Vendor Ferron, TRY' | '$$PurchaseInvoiceAging$$'  | '*'                                        | 'Vendors advances closing 4 dated 28.04.2021 22:00:00' |
+		Then the number of "List" table lines is "равно" "7"
 	And I close all client application windows
 				
 Scenario: _1020050 check the offset of Purchase invoice advance (type of settlement by documents)
@@ -696,5 +727,160 @@ Scenario: _1020050 check the offset of Purchase invoice advance (type of settlem
 			And "List" table contains lines:
 				| 'Period'                         | 'Recorder'                   | 'Currency' | 'Company'      | 'Partner'   | 'Amount'   | 'Agreement'          | 'Invoice'                    | 'Payment date'                             | 'Aging closing'                                        |
 				| '$$DatePurchaseInvoice0240164$$' | '$$PurchaseInvoice0240164$$' | 'TRY'      | 'Main Company' | 'Ferron BP' | '4 000,00' | 'Vendor Ferron, TRY' | '$$PurchaseInvoice0240164$$' | '$$DatePaymentTermsPurchaseInvoiceAging$$' | ''                                                     |
-				| '$$DateCashPayment10000505$$'    | '$$CashPayment10000505$$'    | 'TRY'      | 'Main Company' | 'Ferron BP' | '4 000,00' | 'Vendor Ferron, TRY' | '$$PurchaseInvoice0240164$$' | '$$DatePaymentTermsPurchaseInvoiceAging$$' | 'Vendors advances closing 4 dated 28.04.2021 22:00:00' |
+				| '$$DateCashPayment10000505$$'    | '$$CashPayment10000505$$'    | 'TRY'      | 'Main Company' | 'Ferron BP' | '3 370,00' | 'Vendor Ferron, TRY' | '$$PurchaseInvoice0240164$$' | '$$DatePaymentTermsPurchaseInvoiceAging$$' | 'Vendors advances closing 4 dated 28.04.2021 22:00:00' |
 			And I close all client application windows	
+
+Scenario: _1020040 check Purchase order Aging tab filling
+	* Select PO
+		Given I open hyperlink 'e1cib/list/Document.PurchaseOrder'
+		And I go to line in "List" table
+			| 'Number' |
+			| '323'  |
+		And I select current line in "List" table
+	* Change Aging tab
+		And I move to "Aging" tab
+		And I activate "Date" field in "PaymentTerms" table
+		And I select current line in "PaymentTerms" table
+		And I input "15.06.2021" text in "Date" field of "PaymentTerms" table
+		And I finish line editing in "PaymentTerms" table
+		And "PaymentTerms" table became equal
+			| '#' | 'Date'       | 'Amount'   | 'Calculation type' | 'Due period, days' | 'Proportion of payment' |
+			| '1' | '15.06.2021' | '1 170,00' | 'Prepaid'          | '16'               | '100,00'                |
+		And I activate "Due period, days" field in "PaymentTerms" table
+		And I select current line in "PaymentTerms" table
+		And I input "10" text in "Due period, days" field of "PaymentTerms" table
+		And I finish line editing in "PaymentTerms" table
+		And "PaymentTerms" table became equal
+			| '#' | 'Date'       | 'Amount'   | 'Calculation type' | 'Due period, days' | 'Proportion of payment' |
+			| '1' | '09.06.2021' | '1 170,00' | 'Prepaid'          | '10'               | '100,00'                |
+	* Change PO date and check aging tab
+		And I move to "Other" tab
+		And I input "31.05.2021 00:00:00" text in the field named "Date"
+		And I move to "Aging" tab
+		Then "Update item list info" window is opened
+		And I remove checkbox "Do you want to replace filled price types with price type Vendor price, TRY?"
+		And I remove checkbox "Do you want to update filled prices?"		
+		And I click "OK" button
+		And "PaymentTerms" table became equal
+			| '#' | 'Date'       | 'Amount'   | 'Calculation type' | 'Due period, days' | 'Proportion of payment' |
+			| '1' | '10.06.2021' | '1 170,00' | 'Prepaid'          | '10'               | '100,00'                |
+		And I close all client application windows
+
+
+Scenario: _1020041 check Purchase order Aging calculation (prepaid)
+	* Select PO
+		Given I open hyperlink 'e1cib/list/Document.PurchaseOrder'
+		And I go to line in "List" table
+			| 'Number' |
+			| '325'  |
+		And I select current line in "List" table
+	* Change document date
+		And I input current date in the field named "Date"
+		And I move to "Aging" tab
+		Then "Update item list info" window is opened
+		And I change checkbox "Do you want to replace filled price types with price type Vendor price, TRY?"
+		And I change checkbox "Do you want to update filled prices?"
+		And I click "OK" button
+	* Save aging date in the variables
+		And I go to line in "PaymentTerms" table
+			| '#' | 'Amount' | 'Calculation type' | 'Proportion of payment' |
+			| '1' | '440,00' | 'Prepaid'          | '40,00'                 |
+		And I activate "Date" field in "PaymentTerms" table
+		And I delete "$$PrepaidDatePurchaseOrder325$$" variable
+		And I save the current field value as "$$PrepaidDatePurchaseOrder325$$"
+		And I go to line in "PaymentTerms" table
+			| '#' | 'Amount' | 'Calculation type'     | 'Due period, days' | 'Proportion of payment' |
+			| '2' | '660,00' | 'Post-shipment credit' | '14'               | '60,00'                 |
+		And I activate "Date" field in "PaymentTerms" table
+		And I delete "$$PostShipmentCreditDatePurchaseOrder325$$" variable
+		And I save the current field value as "$$PostShipmentCreditDatePurchaseOrder325$$"
+		And I click the button named "FormPostAndClose"
+	* Post Bank payment
+		Given I open hyperlink 'e1cib/list/Document.BankPayment'
+		And I go to line in "List" table
+			| 'Number' |
+			| '325'  |
+		And I select current line in "List" table
+		And I input current date in the field named "Date"
+		And I click the button named "FormPost"
+		And I delete "$$BankPayment325$$" variable
+		And I delete "$$DateBankPayment325$$" variable
+		And I save the window as "$$BankPayment325$$"
+		And I save the value of the field named "Date" as "$$DateBankPayment325$$"
+		And I click the button named "FormPostAndClose"
+	* Post PI
+		Given I open hyperlink 'e1cib/list/Document.PurchaseInvoice'
+		And I go to line in "List" table
+			| 'Number' |
+			| '325'  |
+		And I select current line in "List" table
+	* Change document date
+		And I delete "$$PurchaseInvoice325$$" variable
+		And I delete "$$DatePurchaseInvoice325$$" variable
+		And I delete "$$NumberPurchaseInvoice325$$" variable
+		And I save the window as "$$PurchaseInvoice325$$"
+		And I save the value of the field named "Date" as "$$DatePurchaseInvoice325$$"
+		And I save the value of the field named "Number" as "$$NumberPurchaseInvoice325$$"
+		And I go to line in "PaymentTerms" table
+			| '#' | 'Amount' | 'Calculation type'     | 'Due period, days' | 'Proportion of payment' |
+			| '2' | '660,00' | 'Post-shipment credit' | '14'               | '60,00'                 |
+		And I activate "Date" field in "PaymentTerms" table
+		And I delete "$$PostShipmentCreditDatePurchaseInvoice325$$" variable
+		And I save the current field value as "$$PostShipmentCreditDatePurchaseInvoice325$$"
+		And I click the button named "FormPostAndClose"
+	* Post vendors advance closing document
+		Given I open hyperlink 'e1cib/list/Document.VendorsAdvancesClosing'
+		And I go to line in "List" table
+			| 'Number' |
+			| '4'  |
+		And in the table "List" I click the button named "ListContextMenuPost"	 
+	* Check aging movements
+		Given I open hyperlink 'e1cib/list/AccumulationRegister.R5012B_VendorsAging'
+		And I go to line in "List" table
+			| 'Partner' |
+			| 'Maxim'  |
+		And I activate "Partner" field in "List" table
+		And in the table "List" I click the button named "ListContextMenuFindByCurrentValue"			
+		And "List" table contains lines:
+			| 'Period'                     | 'Recorder'               | 'Currency' | 'Company'      | 'Partner' | 'Amount' | 'Agreement'          | 'Invoice'                | 'Payment date'                                 | 'Aging closing'                                        |
+			| '$$DatePurchaseInvoice325$$' | '$$PurchaseInvoice325$$' | 'TRY'      | 'Main Company' | 'Maxim'   | '440,00' | 'Partner term Maxim' | '$$PurchaseInvoice325$$' | '$$PrepaidDatePurchaseOrder325$$'              | ''                                                     |
+			| '$$DatePurchaseInvoice325$$' | '$$PurchaseInvoice325$$' | 'TRY'      | 'Main Company' | 'Maxim'   | '660,00' | 'Partner term Maxim' | '$$PurchaseInvoice325$$' | '$$PostShipmentCreditDatePurchaseInvoice325$$' | ''                                                     |
+			| '$$DateBankPayment325$$'     | '$$BankPayment325$$'     | 'TRY'      | 'Main Company' | 'Maxim'   | '440,00' | 'Partner term Maxim' | '$$PurchaseInvoice325$$' | '$$PrepaidDatePurchaseOrder325$$'              | 'Vendors advances closing 4 dated 28.04.2021 22:00:00' |
+		Then the number of "List" table lines is "равно" "3"
+		And I close all client application windows
+
+
+Scenario: _1020042 check Opening entry vendors Aging calculation (prepaid)
+	* Select and post Opening entry
+		Given I open hyperlink 'e1cib/list/Document.OpeningEntry'
+		And I go to line in "List" table
+			| 'Number' |
+			| '111'  |
+		And in the table "List" I click the button named "ListContextMenuPost"
+	* Post Bank payment
+		Given I open hyperlink 'e1cib/list/Document.BankPayment'
+		And I go to line in "List" table
+			| 'Number' |
+			| '325'  |
+		And in the table "List" I click the button named "ListContextMenuPost"
+	* Post vendors advance closing document
+		Given I open hyperlink 'e1cib/list/Document.CustomersAdvancesClosing'
+		And I go to line in "List" table
+			| 'Number' |
+			| '5'  | 
+		And in the table "List" I click the button named "ListContextMenuPost"
+	* Check aging movements
+		Given I open hyperlink 'e1cib/list/AccumulationRegister.R5011B_CustomersAging'	
+		And I go to line in "List" table
+			| 'Partner' |
+			| 'Astar'  |
+		And I activate "Partner" field in "List" table
+		And in the table "List" I click the button named "ListContextMenuFindByCurrentValue"
+		And "List" table contains lines:
+			| 'Period'              | 'Recorder'                                    | 'Currency' | 'Company'      | 'Partner' | 'Amount' | 'Agreement'                        | 'Invoice'                                     | 'Payment date' | 'Aging closing'                                          |
+			| '28.05.2021 15:13:52' | 'Opening entry 111 dated 28.05.2021 15:13:52' | 'TRY'      | 'Main Company' | 'Astar'   | '500,00' | 'Basic Partner terms, without VAT' | 'Opening entry 111 dated 28.05.2021 15:13:52' | '29.05.2021'   | ''                                                       |
+			| '28.05.2021 15:13:52' | 'Opening entry 111 dated 28.05.2021 15:13:52' | 'TRY'      | 'Main Company' | 'Astar'   | '500,00' | 'Basic Partner terms, without VAT' | 'Opening entry 111 dated 28.05.2021 15:13:52' | '06.07.2021'   | ''                                                       |
+			| '28.05.2021 15:22:24' | 'Bank receipt 111 dated 28.05.2021 15:22:24'  | 'TRY'      | 'Main Company' | 'Astar'   | '500,00' | 'Basic Partner terms, without VAT' | 'Opening entry 111 dated 28.05.2021 15:13:52' | '29.05.2021'   | 'Customers advances closing 5 dated 27.04.2021 12:00:00' |
+			| '28.05.2021 15:22:24' | 'Bank receipt 111 dated 28.05.2021 15:22:24'  | 'TRY'      | 'Main Company' | 'Astar'   | '110,00' | 'Basic Partner terms, without VAT' | 'Opening entry 111 dated 28.05.2021 15:13:52' | '06.07.2021'   | 'Customers advances closing 5 dated 27.04.2021 12:00:00' |
+		Then the number of "List" table lines is "равно" "4"
+		And I close all client application windows

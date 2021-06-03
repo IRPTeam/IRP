@@ -191,6 +191,14 @@
       </code>
       <isFolder>true</isFolder>
     </items>
+    <items id="e25ea91f-552c-4a7b-bf52-23e520acf75c">
+      <name>IncomingPaymentOrder</name>
+      <description>Incoming payment order</description>
+      <code xsi:type="core:NumberValue">
+        <value>1</value>
+      </code>
+      <isFolder>true</isFolder>
+    </items>
   </predefined>
   <editType>InDialog</editType>
   <quickChoice>true</quickChoice>

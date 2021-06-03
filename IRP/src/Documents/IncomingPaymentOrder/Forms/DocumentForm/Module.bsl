@@ -123,6 +123,11 @@ Procedure DateOnChange(Item, AddInfo = Undefined) Export
 EndProcedure
 
 &AtClient
+Procedure StatusOnChange(Item, AddInfo = Undefined) Export
+	DocIncomingPaymentOrderClient.StatusOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
 Procedure PlaningDateOnChange(Item, AddInfo = Undefined) Export
 	DocIncomingPaymentOrderClient.PlaningDateOnChange(Object, ThisObject, Item);
 EndProcedure

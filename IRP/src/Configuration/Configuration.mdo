@@ -697,7 +697,7 @@
   <accumulationRegisters>AccumulationRegister.GoodsReceiptSchedule</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.OrderBalance</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.OrderProcurement</accumulationRegisters>
-  <accumulationRegisters>AccumulationRegister.PlaningCashTransactions</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R3035T_CashPlanning</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.PurchaseReturnTurnovers</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1001T_Purchases</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1002T_PurchaseReturns</accumulationRegisters>
@@ -730,8 +730,6 @@
   <accumulationRegisters>AccumulationRegister.R3016B_ChequeAndBonds</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R3021B_CashInTransitIncoming</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R3022B_CashInTransitOutgoing</accumulationRegisters>
-  <accumulationRegisters>AccumulationRegister.R3033B_CashPlanningIncoming</accumulationRegisters>
-  <accumulationRegisters>AccumulationRegister.R3034B_CashPlanningOutgoing</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R4010B_ActualStocks</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R4011B_FreeStocks</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R4012B_StockReservation</accumulationRegisters>

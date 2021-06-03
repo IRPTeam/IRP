@@ -95,6 +95,7 @@ Function JoinDocumentsStructure(ArrayOfTables)
 	ValueTable.Columns.Add("Payee", New TypeDescription("CatalogRef.Companies"));
 	ValueTable.Columns.Add("PlaningTransactionBasis"
 		, New TypeDescription(Metadata.DefinedTypes.typePlaningTransactionBasises.Type));
+	ValueTable.Columns.Add("MovementType", New TypeDescription("CatalogRef.ExpenseAndRevenueTypes"));
 	
 	For Each Table In ArrayOfTables Do
 		For Each Row In Table Do
@@ -132,6 +133,7 @@ Function JoinDocumentsStructure(ArrayOfTables)
 			NewRow.Insert("Payee", RowPaymentList.Payee);
 			NewRow.Insert("Amount", RowPaymentList.Amount);
 			NewRow.Insert("PlaningTransactionBasis", RowPaymentList.PlaningTransactionBasis);
+			NewRow.Insert("MovementType", RowPaymentList.MovementType);
 			
 			Result.PaymentList.Add(NewRow);
 		EndDo;
@@ -166,21 +168,21 @@ Function GetDocumentTable_OutgoingPaymentOrder(ArrayOfBasisDocuments)
 		"SELECT ALLOWED
 		|	""OutgoingPaymentOrder"" AS BasedOn,
 		|	VALUE(Enum.OutgoingPaymentTransactionTypes.PaymentToVendor) AS TransactionType,
-		|	PlaningCashTransactionsTurnovers.Company AS Company,
-		|	PlaningCashTransactionsTurnovers.Account AS CashAccount,
-		|	PlaningCashTransactionsTurnovers.Currency AS Currency,
-		|	PlaningCashTransactionsTurnovers.Partner AS Partner,
-		|	PlaningCashTransactionsTurnovers.LegalName AS Payee,
-		|	PlaningCashTransactionsTurnovers.AmountTurnover AS Amount,
-		|	PlaningCashTransactionsTurnovers.BasisDocument AS PlaningTransactionBasis
+		|	R3035T_CashPlanningTurnovers.MovementType AS MovementType,
+		|	R3035T_CashPlanningTurnovers.Company AS Company,
+		|	R3035T_CashPlanningTurnovers.Account AS CashAccount,
+		|	R3035T_CashPlanningTurnovers.Currency AS Currency,
+		|	R3035T_CashPlanningTurnovers.Partner AS Partner,
+		|	R3035T_CashPlanningTurnovers.LegalName AS Payee,
+		|	R3035T_CashPlanningTurnovers.AmountTurnover AS Amount,
+		|	R3035T_CashPlanningTurnovers.BasisDocument AS PlaningTransactionBasis
 		|FROM
-		|	AccumulationRegister.PlaningCashTransactions.Turnovers(,,,
-		|		CashFlowDirection = VALUE(Enum.CashFlowDirections.Outgoing)
+		|	AccumulationRegister.R3035T_CashPlanning.Turnovers(,,, CashFlowDirection = VALUE(Enum.CashFlowDirections.Outgoing)
 		|	AND CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
-		|	AND BasisDocument IN (&ArrayOfBasisDocuments)) AS PlaningCashTransactionsTurnovers
+		|	AND BasisDocument IN (&ArrayOfBasisDocuments)) AS R3035T_CashPlanningTurnovers
 		|WHERE
-		|	PlaningCashTransactionsTurnovers.Account.Type = VALUE(Enum.CashAccountTypes.Cash)
-		|	AND PlaningCashTransactionsTurnovers.AmountTurnover > 0";
+		|	R3035T_CashPlanningTurnovers.Account.Type = VALUE(Enum.CashAccountTypes.Cash)
+		|	AND R3035T_CashPlanningTurnovers.AmountTurnover > 0";
 	Query.SetParameter("ArrayOfBasisDocuments", ArrayOfBasisDocuments);
 	QueryResult = Query.Execute();
 	Return QueryResult.Unload();

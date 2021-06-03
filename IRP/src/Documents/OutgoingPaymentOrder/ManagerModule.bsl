@@ -4,8 +4,6 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	
 	Tables = New Structure();
 	
-	Tables.Insert("PaymentList_PlaningCashTransactions", New ValueTable());
-	
 	ObjectStatusesServer.WriteStatusToRegister(Ref, Ref.Status);
 	StatusInfo = ObjectStatusesServer.GetLastStatusInfo(Ref);
 	Parameters.Insert("StatusInfo", StatusInfo);
@@ -17,77 +15,6 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	#EndRegion
 		Return Tables;
 	EndIf;
-	
-	
-	Query = New Query();
-	Query.Text =
-		"SELECT
-		|	OutgoingPaymentOrderPaymentList.Ref.Company AS Company,
-		|	OutgoingPaymentOrderPaymentList.Ref AS Ref,
-		|	OutgoingPaymentOrderPaymentList.Ref.Account AS Account,
-		|	OutgoingPaymentOrderPaymentList.Ref.Currency AS Currency,
-		|	OutgoingPaymentOrderPaymentList.Ref.PlaningDate AS PlaningDate,
-		|	OutgoingPaymentOrderPaymentList.Partner AS Partner,
-		|	OutgoingPaymentOrderPaymentList.Payee AS LegalName,
-		|	OutgoingPaymentOrderPaymentList.Amount AS Amount,
-		|	OutgoingPaymentOrderPaymentList.Key
-		|FROM
-		|	Document.OutgoingPaymentOrder.PaymentList AS OutgoingPaymentOrderPaymentList
-		|WHERE
-		|	OutgoingPaymentOrderPaymentList.Ref = &Ref";
-	
-	Query.SetParameter("Ref", Ref);
-	QueryResults = Query.Execute();
-	
-	QueryTable = QueryResults.Unload();
-	
-	Query = New Query();
-	Query.Text =
-		"SELECT
-		|	QueryTable.Company AS Company,
-		|	QueryTable.Partner AS Partner,
-		|	QueryTable.LegalName AS LegalName,
-		|	QueryTable.Ref AS BasisDocument,
-		|	QueryTable.Account AS Account,
-		|	QueryTable.Amount AS Amount,
-		|	QueryTable.Currency AS Currency,
-		|	QueryTable.PlaningDate AS PlaningDate,
-		|	QueryTable.Key
-		|INTO tmp
-		|FROM
-		|	&QueryTable AS QueryTable
-		|;
-		|
-		|////////////////////////////////////////////////////////////////////////////////
-		|SELECT
-		|	tmp.Company AS Company,
-		|	tmp.Partner AS Partner,
-		|	tmp.LegalName AS LegalName,
-		|	tmp.Account AS Account,
-		|	tmp.Amount AS Amount,
-		|	tmp.Currency AS Currency,
-		|	tmp.PlaningDate AS Period,
-		|	VALUE(Enum.CashFlowDirections.Outgoing) AS CashFlowDirection,
-		|	tmp.BasisDocument AS BasisDocument,
-		|	tmp.Key
-		|FROM
-		|	tmp AS tmp
-		|GROUP BY
-		|	tmp.Company,
-		|	tmp.Partner,
-		|	tmp.LegalName,
-		|	tmp.Account,
-		|	tmp.Amount,
-		|	tmp.Currency,
-		|	tmp.PlaningDate,
-		|	VALUE(Enum.CashFlowDirections.Outgoing),
-		|	tmp.BasisDocument,
-		|	tmp.Key";
-	
-	Query.SetParameter("QueryTable", QueryTable);
-	QueryResults = Query.ExecuteBatch();
-	
-	Tables.PaymentList_PlaningCashTransactions = QueryResults[1].Unload();
 	
 #Region NewRegistersPosting	
 	QueryArray = GetQueryTextsSecondaryTables();
@@ -109,7 +36,7 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	QueryArray = GetQueryTextsMasterTables();
 	PostingServer.SetRegisters(Tables, Ref);	
 	
-	Tables.R3034B_CashPlanningOutgoing.Columns.Add("Key" , Metadata.DefinedTypes.typeRowID.Type);
+	Tables.R3035T_CashPlanning.Columns.Add("Key" , Metadata.DefinedTypes.typeRowID.Type);
 	
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
 #EndRegion
@@ -118,10 +45,6 @@ EndProcedure
 Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 	PostingDataTables = New Map();
 	
-	// PlaningCashTransactions
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.PlaningCashTransactions,
-		New Structure("RecordSet", Parameters.DocumentDataTables.PaymentList_PlaningCashTransactions));
-
 #Region NewRegistersPosting	
 	PostingServer.SetPostingDataTables(PostingDataTables, Parameters);
 #EndRegion
@@ -181,7 +104,7 @@ EndFunction
 Function GetQueryTextsMasterTables()
 	QueryArray = New Array;
 	QueryArray.Add(R1022B_VendorsPaymentPlanning());
-	QueryArray.Add(R3034B_CashPlanningOutgoing());
+	QueryArray.Add(R3035T_CashPlanning());
 	Return QueryArray;
 EndFunction
 
@@ -189,7 +112,7 @@ Function PaymentList()
 	Return 
 		"SELECT
 		|	PaymentList.Ref.Date AS Date,
-		|	PaymentList.Ref.PlaningDate AS PalningDate,
+		|	PaymentList.Ref.PlaningDate AS PlaningDate,
 		|	PaymentList.Ref.Company AS Company,
 		|	PaymentList.Ref.Currency AS Currency,
 		|	PaymentList.Basis,
@@ -199,7 +122,8 @@ Function PaymentList()
 		|	PaymentList.Ref.Account AS Account,
 		|	PaymentList.MovementType,
 		|	PaymentList.Amount,
-		|	PaymentList.Key
+		|	PaymentList.Key,
+		|	PaymentList.Ref
 		|INTO PaymentList
 		|FROM
 		|	Document.OutgoingPaymentOrder.PaymentList AS PaymentList
@@ -226,21 +150,23 @@ Function R1022B_VendorsPaymentPlanning()
 		|	NOT PaymentList.Basis.Ref IS NULL";
 EndFunction
 
-Function R3034B_CashPlanningOutgoing()
+Function R3035T_CashPlanning()
 	Return
 		"SELECT
-		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		|	PaymentList.Date AS Period,
+		|	PaymentList.PlaningDate AS Period,
 		|	PaymentList.Company,
-		|	PaymentList.Currency,
+		|	PaymentList.Ref AS BasisDocument,
 		|	PaymentList.Account,
-		|	PaymentList.Basis,
+		|	PaymentList.Currency,
+		|	VALUE(Enum.CashFlowDirections.Outgoing) AS CashFlowDirection,
+		|	PaymentList.Partner,
+		|	PaymentList.LegalName,
 		|	PaymentList.MovementType,
 		|	PaymentList.Amount,
 		|	PaymentList.Key
-		|INTO R3034B_CashPlanningOutgoing
-		|FROM 
+		|INTO R3035T_CashPlanning
+		|FROM
 		|	PaymentList AS PaymentList";
-EndFunction		
+EndFunction
 
 #EndRegion

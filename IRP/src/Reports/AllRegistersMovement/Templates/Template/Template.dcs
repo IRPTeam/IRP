@@ -669,10 +669,6 @@
 			<field>ShippedQuantity</field>
 		</field>
 		<field xsi:type="DataSetFieldField">
-			<dataPath>MovementType</dataPath>
-			<field>MovementType</field>
-		</field>
-		<field xsi:type="DataSetFieldField">
 			<dataPath>Account</dataPath>
 			<field>Account</field>
 		</field>
@@ -731,6 +727,22 @@
 		<field xsi:type="DataSetFieldField">
 			<dataPath>BusinessUnit</dataPath>
 			<field>BusinessUnit</field>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>VendorsAdvancesClosing</dataPath>
+			<field>VendorsAdvancesClosing</field>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>CustomersAdvancesClosing</dataPath>
+			<field>CustomersAdvancesClosing</field>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>AgingClosing</dataPath>
+			<field>AgingClosing</field>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>ExpenseType</dataPath>
+			<field>ExpenseType</field>
 		</field>
 		<item xsi:type="DataSetQuery">
 			<name>R1001T_Purchases</name>
@@ -1265,6 +1277,10 @@
 				<dataPath>LineNumber</dataPath>
 				<field>LineNumber</field>
 			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>VendorsAdvancesClosing</dataPath>
+				<field>VendorsAdvancesClosing</field>
+			</field>
 			<dataSource>DataSource1</dataSource>
 			<query>SELECT "R1020B_AdvancesToVendors" AS RegisterName, * FROM AccumulationRegister.R1020B_AdvancesToVendors</query>
 		</item>
@@ -1332,6 +1348,10 @@
 				<dataPath>Company</dataPath>
 				<field>Company</field>
 			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>VendorsAdvancesClosing</dataPath>
+				<field>VendorsAdvancesClosing</field>
+			</field>
 			<dataSource>DataSource1</dataSource>
 			<query>SELECT "R1021B_VendorsTransactions" AS RegisterName, * FROM AccumulationRegister.R1021B_VendorsTransactions</query>
 		</item>
@@ -1378,6 +1398,10 @@
 			<field xsi:type="DataSetFieldField">
 				<dataPath>ItemKey</dataPath>
 				<field>ItemKey</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>Store</dataPath>
+				<field>Store</field>
 			</field>
 			<dataSource>DataSource1</dataSource>
 			<query>SELECT "R1031B_ReceiptInvoicing" AS RegisterName, * FROM AccumulationRegister.R1031B_ReceiptInvoicing</query>
@@ -2049,6 +2073,10 @@
 				<dataPath>Active</dataPath>
 				<field>Active</field>
 			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>CustomersAdvancesClosing</dataPath>
+				<field>CustomersAdvancesClosing</field>
+			</field>
 			<dataSource>DataSource1</dataSource>
 			<query>SELECT "R2020B_AdvancesFromCustomers" AS RegisterName, * FROM AccumulationRegister.R2020B_AdvancesFromCustomers</query>
 		</item>
@@ -2116,6 +2144,10 @@
 				<dataPath>CurrencyMovementType</dataPath>
 				<field>CurrencyMovementType</field>
 			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>CustomersAdvancesClosing</dataPath>
+				<field>CustomersAdvancesClosing</field>
+			</field>
 			<dataSource>DataSource1</dataSource>
 			<query>SELECT "R2021B_CustomersTransactions" AS RegisterName, * FROM AccumulationRegister.R2021B_CustomersTransactions</query>
 		</item>
@@ -2162,6 +2194,10 @@
 			<field xsi:type="DataSetFieldField">
 				<dataPath>Recorder</dataPath>
 				<field>Recorder</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>Store</dataPath>
+				<field>Store</field>
 			</field>
 			<dataSource>DataSource1</dataSource>
 			<query>SELECT "R2031B_ShipmentInvoicing" AS RegisterName, * FROM AccumulationRegister.R2031B_ShipmentInvoicing</query>
@@ -2230,10 +2266,6 @@
 			<field xsi:type="DataSetFieldField">
 				<dataPath>DeferredCalculation</dataPath>
 				<field>DeferredCalculation</field>
-			</field>
-			<field xsi:type="DataSetFieldField">
-				<dataPath>MovementType</dataPath>
-				<field>MovementType</field>
 			</field>
 			<field xsi:type="DataSetFieldField">
 				<dataPath>Active</dataPath>
@@ -2574,132 +2606,6 @@
 			</field>
 			<dataSource>DataSource1</dataSource>
 			<query>SELECT "R3022B_CashInTransitOutgoing" AS RegisterName, * FROM AccumulationRegister.R3022B_CashInTransitOutgoing</query>
-		</item>
-		<item xsi:type="DataSetQuery">
-			<name>R3033B_CashPlanningIncoming</name>
-			<field xsi:type="DataSetFieldField">
-				<dataPath>Active</dataPath>
-				<field>Active</field>
-			</field>
-			<field xsi:type="DataSetFieldField">
-				<dataPath>RegisterName</dataPath>
-				<field>RegisterName</field>
-				<title xsi:type="v8:LocalStringType">
-					<v8:item>
-						<v8:lang>en</v8:lang>
-						<v8:content>Register name</v8:content>
-					</v8:item>
-				</title>
-			</field>
-			<field xsi:type="DataSetFieldField">
-				<dataPath>Company</dataPath>
-				<field>Company</field>
-			</field>
-			<field xsi:type="DataSetFieldField">
-				<dataPath>Currency</dataPath>
-				<field>Currency</field>
-			</field>
-			<field xsi:type="DataSetFieldField">
-				<dataPath>CurrencyMovementType</dataPath>
-				<field>CurrencyMovementType</field>
-			</field>
-			<field xsi:type="DataSetFieldField">
-				<dataPath>Account</dataPath>
-				<field>Account</field>
-			</field>
-			<field xsi:type="DataSetFieldField">
-				<dataPath>DeferredCalculation</dataPath>
-				<field>DeferredCalculation</field>
-			</field>
-			<field xsi:type="DataSetFieldField">
-				<dataPath>MovementType</dataPath>
-				<field>MovementType</field>
-			</field>
-			<field xsi:type="DataSetFieldField">
-				<dataPath>LineNumber</dataPath>
-				<field>LineNumber</field>
-			</field>
-			<field xsi:type="DataSetFieldField">
-				<dataPath>Amount</dataPath>
-				<field>Amount</field>
-			</field>
-			<field xsi:type="DataSetFieldField">
-				<dataPath>Basis</dataPath>
-				<field>Basis</field>
-			</field>
-			<field xsi:type="DataSetFieldField">
-				<dataPath>Period</dataPath>
-				<field>Period</field>
-			</field>
-			<field xsi:type="DataSetFieldField">
-				<dataPath>Recorder</dataPath>
-				<field>Recorder</field>
-			</field>
-			<dataSource>DataSource1</dataSource>
-			<query>SELECT "R3033B_CashPlanningIncoming" AS RegisterName, * FROM AccumulationRegister.R3033B_CashPlanningIncoming</query>
-		</item>
-		<item xsi:type="DataSetQuery">
-			<name>R3034B_CashPlanningOutgoing</name>
-			<field xsi:type="DataSetFieldField">
-				<dataPath>Active</dataPath>
-				<field>Active</field>
-			</field>
-			<field xsi:type="DataSetFieldField">
-				<dataPath>Amount</dataPath>
-				<field>Amount</field>
-			</field>
-			<field xsi:type="DataSetFieldField">
-				<dataPath>Basis</dataPath>
-				<field>Basis</field>
-			</field>
-			<field xsi:type="DataSetFieldField">
-				<dataPath>Recorder</dataPath>
-				<field>Recorder</field>
-			</field>
-			<field xsi:type="DataSetFieldField">
-				<dataPath>LineNumber</dataPath>
-				<field>LineNumber</field>
-			</field>
-			<field xsi:type="DataSetFieldField">
-				<dataPath>Company</dataPath>
-				<field>Company</field>
-			</field>
-			<field xsi:type="DataSetFieldField">
-				<dataPath>MovementType</dataPath>
-				<field>MovementType</field>
-			</field>
-			<field xsi:type="DataSetFieldField">
-				<dataPath>Currency</dataPath>
-				<field>Currency</field>
-			</field>
-			<field xsi:type="DataSetFieldField">
-				<dataPath>RegisterName</dataPath>
-				<field>RegisterName</field>
-				<title xsi:type="v8:LocalStringType">
-					<v8:item>
-						<v8:lang>en</v8:lang>
-						<v8:content>Register name</v8:content>
-					</v8:item>
-				</title>
-			</field>
-			<field xsi:type="DataSetFieldField">
-				<dataPath>Period</dataPath>
-				<field>Period</field>
-			</field>
-			<field xsi:type="DataSetFieldField">
-				<dataPath>DeferredCalculation</dataPath>
-				<field>DeferredCalculation</field>
-			</field>
-			<field xsi:type="DataSetFieldField">
-				<dataPath>CurrencyMovementType</dataPath>
-				<field>CurrencyMovementType</field>
-			</field>
-			<field xsi:type="DataSetFieldField">
-				<dataPath>Account</dataPath>
-				<field>Account</field>
-			</field>
-			<dataSource>DataSource1</dataSource>
-			<query>SELECT "R3034B_CashPlanningOutgoing" AS RegisterName, * FROM AccumulationRegister.R3034B_CashPlanningOutgoing</query>
 		</item>
 		<item xsi:type="DataSetQuery">
 			<name>R4010B_ActualStocks</name>
@@ -3788,6 +3694,10 @@
 				<dataPath>PaymentDate</dataPath>
 				<field>PaymentDate</field>
 			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>AgingClosing</dataPath>
+				<field>AgingClosing</field>
+			</field>
 			<dataSource>DataSource1</dataSource>
 			<query>SELECT "R5011B_PartnersAging" AS RegisterName, * FROM AccumulationRegister.R5011B_CustomersAging</query>
 		</item>
@@ -3865,6 +3775,54 @@
 						<v8:content>Register name</v8:content>
 					</v8:item>
 				</title>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>LineNumber</dataPath>
+				<field>LineNumber</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>Active</dataPath>
+				<field>Active</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>ItemKey</dataPath>
+				<field>ItemKey</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>Currency</dataPath>
+				<field>Currency</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>Amount</dataPath>
+				<field>Amount</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>Company</dataPath>
+				<field>Company</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>Recorder</dataPath>
+				<field>Recorder</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>ExpenseType</dataPath>
+				<field>ExpenseType</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>CurrencyMovementType</dataPath>
+				<field>CurrencyMovementType</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>Period</dataPath>
+				<field>Period</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>AdditionalAnalytic</dataPath>
+				<field>AdditionalAnalytic</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>BusinessUnit</dataPath>
+				<field>BusinessUnit</field>
 			</field>
 			<dataSource>DataSource1</dataSource>
 			<query>SELECT "R5022T_Expenses" AS RegisterName, * FROM AccumulationRegister.R5022T_Expenses</query>

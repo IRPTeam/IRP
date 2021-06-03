@@ -46,32 +46,6 @@ Function GetAllStatusInfo(DocumentRef, AddInfo = Undefined) Export
 	Return ArrayOfStatusInfo;
 EndFunction
 
-//Function GetAllStatusInfoByCheque(ChequeRef, AddInfo = Undefined) Export
-//	Query = New Query();
-//	Query.Text = "SELECT
-//		|	ChequeBondStatuses.Period AS Period,
-//		|	ChequeBondStatuses.Status AS Status
-//		|FROM
-//		|	InformationRegister.ChequeBondStatuses AS ChequeBondStatuses
-//		|WHERE
-//		|	ChequeBondStatuses.Cheque = &Cheque
-//		|ORDER BY
-//		|	Period";
-//	Query.SetParameter("Cheque", ChequeRef);
-//	QueryResult = Query.Execute();
-//	ArrayOfStatusInfo = New Array();
-//	If QueryResult.IsEmpty() Then
-//		ArrayOfStatusInfo.Add(PutStatusInfoToStructure());
-//		Return ArrayOfStatusInfo;
-//	EndIf;
-//	QuerySelection = QueryResult.Select();
-//	While QuerySelection.Next() Do
-//		ArrayOfStatusInfo.Add(PutStatusInfoToStructure(QuerySelection));
-//	EndDo;
-//	Return ArrayOfStatusInfo;
-//	
-//EndFunction
-
 Function GetLastStatusInfo(DocumentRef, AddInfo = Undefined) Export
 	Query = New Query();
 	Query.Text = "SELECT
@@ -93,54 +67,6 @@ Function GetLastStatusInfo(DocumentRef, AddInfo = Undefined) Export
 	EndIf;
 EndFunction
 
-//Function GetAvailableStatusesByCheque(ChequeBondTransactionRef, ChequeRef) Export
-//	PointInTime = New Boundary(ServiceSystemServer.GetObjectAttribute(ChequeBondTransactionRef, "Date"), BoundaryType.Excluding);
-//	ArrayOfStatuses = New Array();
-//	StatusInfo = ObjectStatusesServer.GetLastStatusInfoByCheque(PointInTime, ChequeRef);
-//	If Not ValueIsFilled(StatusInfo.Status) Then
-//		ArrayOfStatuses.Add(ObjectStatusesServer.GetStatusByDefaultForCheque(ChequeRef));
-//	Else
-//		For Each Status In ObjectStatusesServer.GetNextPossibleStatuses(StatusInfo.Status) Do
-//			If ArrayOfStatuses.Find(Status) = Undefined Then
-//				ArrayOfStatuses.Add(Status);
-//			EndIf;
-//		EndDo;
-//		Return ArrayOfStatuses;
-//	EndIf;
-//	Return ArrayOfStatuses;
-//EndFunction
-
-//Function GetLastStatusInfoByCheque(PointInTime, ChequeRef, AddInfo = Undefined) Export
-//	Query = New Query();
-//	If PointInTime <> Undefined Then
-//		Query.Text = "SELECT
-//			|	ChequeBondStatusesSliceLast.Period,
-//			|	ChequeBondStatusesSliceLast.Cheque AS Object,
-//			|	ChequeBondStatusesSliceLast.Status,
-//			|	ChequeBondStatusesSliceLast.Author
-//			|FROM
-//			|	InformationRegister.ChequeBondStatuses.SliceLast(&PointInTime, Cheque = &Cheque) AS ChequeBondStatusesSliceLast";
-//		
-//	Else
-//		Query.Text = "SELECT
-//			|	ChequeBondStatusesSliceLast.Period,
-//			|	ChequeBondStatusesSliceLast.Cheque AS Object,
-//			|	ChequeBondStatusesSliceLast.Status,
-//			|	ChequeBondStatusesSliceLast.Author
-//			|FROM
-//			|	InformationRegister.ChequeBondStatuses.SliceLast(, Cheque = &Cheque) AS ChequeBondStatusesSliceLast";
-//	EndIf;
-//	Query.SetParameter("Cheque", ChequeRef);
-//	Query.SetParameter("PointInTime", PointInTime);
-//	QueryResult = Query.Execute();
-//	QuerySelection = QueryResult.Select();
-//	If QuerySelection.Next() Then
-//		Return PutStatusInfoToStructure(QuerySelection);
-//	Else
-//		Return PutStatusInfoToStructure();
-//	EndIf;
-//EndFunction
-
 Function PutStatusInfoToStructure(StatusInfo = Undefined)
 	Result = New Structure();
 	Result.Insert("Period", Date('0001-01-01'));
@@ -148,42 +74,12 @@ Function PutStatusInfoToStructure(StatusInfo = Undefined)
 	Result.Insert("Status", Catalogs.ObjectStatuses.EmptyRef());
 	Result.Insert("Author", Catalogs.Partners.EmptyRef());
 	Result.Insert("Posting", False);
-//	If StatusInfo = Undefined Then
-//		Result.Insert("Posting", CreatePostingStructure());
-//	Else
-//		Result.Insert("Posting", PutStatusPostingToStructure(StatusInfo.Status));
-//	EndIf;
 	
 	If StatusInfo <> Undefined Then
 		FillPropertyValues(Result, StatusInfo);
 	EndIf;
 	Return Result;
 EndFunction
-
-//Function PutStatusPostingToStructure(Status) Export
-//	Query = New Query();
-//	Query.Text = "SELECT
-//		|	ObjectStatuses.PostingAdvanced AS Advanced,
-//		|	ObjectStatuses.PostingPartnerAccountTransactions AS PartnerAccountTransactions,
-//		|	ObjectStatuses.PostingReconciliationStatement AS ReconciliationStatement,
-//		|	ObjectStatuses.PostingAccountBalance AS AccountBalance,
-//		|	ObjectStatuses.PostingPlaningCashTransactions AS PlaningCashTransactions,
-//		|	ObjectStatuses.PostingChequeBondBalance AS ChequeBondBalance
-//		|FROM
-//		|	Catalog.ObjectStatuses AS ObjectStatuses
-//		|WHERE
-//		|	ObjectStatuses.Ref = &Ref";
-//	Query.SetParameter("Ref", Status);
-//	QueryResult = Query.Execute();
-//	QuerySelection = QueryResult.Select();
-//	
-//	Posting = CreatePostingStructure();
-//	
-//	If QuerySelection.Next() Then
-//		FillPropertyValues(Posting, QuerySelection);
-//	EndIf;
-//	Return Posting;
-//EndFunction
 
 Function StatusHasPostingType(Status, PostingType) Export
 	
@@ -214,17 +110,6 @@ Function StatusHasPostingType(Status, PostingType) Export
 	
 EndFunction
 								
-//Function CreatePostingStructure()
-//	Result = New Structure();
-//	Result.Insert("Advanced", Enums.DocumentPostingTypes.Nothing);
-//	Result.Insert("PartnerAccountTransactions", Enums.DocumentPostingTypes.Nothing);
-//	Result.Insert("ReconciliationStatement", Enums.DocumentPostingTypes.Nothing);
-//	Result.Insert("AccountBalance", Enums.DocumentPostingTypes.Nothing);
-//	Result.Insert("PlaningCashTransactions", Enums.DocumentPostingTypes.Nothing);
-//	Result.Insert("ChequeBondBalance", Enums.DocumentPostingTypes.Nothing);
-//	Return Result;
-//EndFunction
-
 Function GetObjectStatusesInformationRegisterName(DocumentRef,
 		AddInfo = Undefined) Export
 	Return "ObjectStatuses";
@@ -268,31 +153,6 @@ Function GetStatusByDefault(DocumentRef, Val PredefinedDataName = "",
 		Return Catalogs.ObjectStatuses.EmptyRef();
 	EndIf;
 EndFunction
-
-//Function GetStatusByDefaultForCheque(ChequeRef) Export
-//	If ChequeRef.Type = Enums.ChequeBondTypes.PartnerCheque Then
-//		Return ObjectStatusesServer.GetStatusByDefault(ChequeRef, "ChequeBondIncoming");
-//	ElsIf ChequeRef.Type = Enums.ChequeBondTypes.OwnCheque Then
-//		Return ObjectStatusesServer.GetStatusByDefault(ChequeRef, "ChequeBondOutgoing");
-//	Else
-//		Return Undefined;
-//	EndIf;
-//EndFunction
-
-//Function GetNextPossibleStatuses(Status) Export
-//	Query = New Query();
-//	Query.Text = "SELECT
-//		|	ObjectStatusesNextPossibleStatuses.Status AS Status
-//		|FROM
-//		|	Catalog.ObjectStatuses.NextPossibleStatuses AS ObjectStatusesNextPossibleStatuses
-//		|WHERE
-//		|	ObjectStatusesNextPossibleStatuses.Ref = &Ref
-//		|GROUP BY
-//		|	ObjectStatusesNextPossibleStatuses.Status";
-//	Query.SetParameter("Ref", Status);
-//	QueryResult = Query.Execute();
-//	Return QueryResult.Unload().UnloadColumn("Status");
-//EndFunction
 
 Function GetObjectStatusesChoiceDataTable(SearchString, ArrayOfFilters,
 		AdditionalParameters) Export

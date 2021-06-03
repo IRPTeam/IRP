@@ -99,6 +99,7 @@ Function GetDocumentTable_CashTransferOrder(ArrayOfBasisDocuments, EndOfDate = U
 	|	tmp.Company AS Company,
 	|	tmp.CashAccount AS CashAccount,
 	|	tmp.Currency AS Currency,
+	|	tmp.MovementType AS MovementType,
 	|	tmp.Amount AS Amount,
 	|	tmp.PlaningTransactionBasis AS PlaningTransactionBasis,
 	|	tmp.Partner AS Partner
@@ -117,27 +118,28 @@ Function GetDocumentTable_CashTransferOrder_QueryText() Export
 	|			THEN VALUE(Enum.OutgoingPaymentTransactionTypes.CashTransferOrder)
 	|		ELSE VALUE(Enum.OutgoingPaymentTransactionTypes.CurrencyExchange)
 	|	END AS TransactionType,
-	|	PlaningCashTransactionsTurnovers.Company AS Company,
-	|	PlaningCashTransactionsTurnovers.Account AS CashAccount,
-	|	PlaningCashTransactionsTurnovers.Currency AS Currency,
-	|	PlaningCashTransactionsTurnovers.AmountTurnover AS Amount,
-	|	PlaningCashTransactionsTurnovers.BasisDocument AS PlaningTransactionBasis,
+	|	R3035T_CashPlanningTurnovers.Company AS Company,
+	|	R3035T_CashPlanningTurnovers.Account AS CashAccount,
+	|	R3035T_CashPlanningTurnovers.Currency AS Currency,
+	|	R3035T_CashPlanningTurnovers.MovementType AS MovementType,
+	|	R3035T_CashPlanningTurnovers.AmountTurnover AS Amount,
+	|	R3035T_CashPlanningTurnovers.BasisDocument AS PlaningTransactionBasis,
 	|	Doc.CashAdvanceHolder AS Partner
 	|INTO tmp_CashTransferOrder
 	|FROM
-	|	AccumulationRegister.PlaningCashTransactions.Turnovers(, &EndOfDate,,
+	|	AccumulationRegister.R3035T_CashPlanning.Turnovers(, &EndOfDate,,
 	|		CashFlowDirection = VALUE(Enum.CashFlowDirections.Outgoing)
 	|	AND CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
 	|	AND CASE
 	|		WHEN &UseArrayOfBasisDocuments
 	|			THEN BasisDocument IN (&ArrayOfBasisDocuments)
 	|		ELSE TRUE
-	|	END) AS PlaningCashTransactionsTurnovers
+	|	END) AS R3035T_CashPlanningTurnovers
 	|		INNER JOIN Document.CashTransferOrder AS Doc
-	|		ON PlaningCashTransactionsTurnovers.BasisDocument = Doc.Ref
+	|		ON R3035T_CashPlanningTurnovers.BasisDocument = Doc.Ref
 	|WHERE
-	|	PlaningCashTransactionsTurnovers.Account.Type = VALUE(Enum.CashAccountTypes.Cash)
-	|	AND PlaningCashTransactionsTurnovers.AmountTurnover > 0";
+	|	R3035T_CashPlanningTurnovers.Account.Type = VALUE(Enum.CashAccountTypes.Cash)
+	|	AND R3035T_CashPlanningTurnovers.AmountTurnover > 0";
 EndFunction
 
 Function GetDocumentTable_CashTransferOrder_ForClient(ArrayOfBasisDocuments, ObjectRef = Undefined) Export

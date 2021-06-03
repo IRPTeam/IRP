@@ -8,10 +8,10 @@
     <recordKeyType typeId="2cb48a23-24b1-4496-8ee3-a27ae4793621" valueTypeId="ea80df13-f612-4f56-964a-b2dfb393b571"/>
     <recordType typeId="bdae3a30-c493-48c9-b69c-c2df5c685521" valueTypeId="a784fd32-1dbf-4908-9af4-0baa496fbf1a"/>
   </producedTypes>
-  <name>PlaningCashTransactions</name>
+  <name>R3035T_CashPlanning</name>
   <synonym>
     <key>en</key>
-    <value>Planing cash transactions</value>
+    <value>R3035 Cash planning</value>
   </synonym>
   <useStandardCommands>true</useStandardCommands>
   <registerType>Turnovers</registerType>
@@ -149,6 +149,20 @@
     </synonym>
     <type>
       <types>ChartOfCharacteristicTypesRef.CurrencyMovementType</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
+  </dimensions>
+  <dimensions uuid="d06ca054-690c-44fe-9089-b11670d57039">
+    <name>MovementType</name>
+    <synonym>
+      <key>en</key>
+      <value>Movement type</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.ExpenseAndRevenueTypes</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

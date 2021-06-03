@@ -51,6 +51,7 @@ Scenario: _053000 preparation (Bank payment)
 		When Create information register CurrencyRates records
 		When Create catalog CashAccounts objects
 		When update ItemKeys
+		When Create catalog ExpenseAndRevenueTypes objects
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then

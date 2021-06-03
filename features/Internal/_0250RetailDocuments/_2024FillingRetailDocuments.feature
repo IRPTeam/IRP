@@ -59,6 +59,7 @@ Scenario: _0154100 preparation ( filling documents)
 			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
 		When Create information register UserSettings records (Retail document)
+		When Create catalog ExpenseAndRevenueTypes objects
 	* Tax settings
 		When filling in Tax settings for company
 	* Add sales tax
@@ -2022,6 +2023,27 @@ Scenario:  _0154149 create Cash statement
 				| 'Cash'         | 'Cash desk №4' | ''           | '1 450,00' |'TRY'        |
 				| 'Card 01'      | 'Transit Main' | '64,50'      | '400,00'   |'TRY'        |
 			Then the number of "PaymentList" table lines is "меньше или равно" 2 
+		* Filling in movement type
+			And I go to line in "PaymentList" table
+				| '#' | 'Account'      | 'Amount'   | 'Currency' | 'Payment type' |
+				| '2' | 'Cash desk №4' | '1 450,00' | 'TRY'      | 'Cash'         |
+			And I activate "Movement type" field in "PaymentList" table
+			And I select current line in "PaymentList" table
+			And I click choice button of "Movement type" attribute in "PaymentList" table
+			And I go to line in "List" table
+				| 'Description'     | 'Type'          |
+				| 'Movement type 1' | 'Cash movement' |	
+			And I select current line in "List" table	
+			And I finish line editing in "PaymentList" table
+			And I go to line in "PaymentList" table
+				| '#' | 'Account'      | 'Amount' | 'Commission' | 'Currency' | 'Payment type' |
+				| '1' | 'Transit Main' | '400,00' | '64,50'      | 'TRY'      | 'Card 01'      |
+			And I select current line in "PaymentList" table
+			And I click choice button of "Movement type" attribute in "PaymentList" table
+			And I go to line in "List" table
+				| 'Description'     | 'Type'          |
+				| 'Movement type 1' | 'Cash movement' |
+			And I select current line in "List" table				
 		And I delete "$$NumberCashStatement01541491$$" variable
 		And I delete "$$CashStatement01541491$$" variable
 		And I delete "$$DateCashStatement01541491$$" variable
@@ -2038,16 +2060,16 @@ Scenario:  _0154149 create Cash statement
 			| 'Number' |
 			| '$$NumberCashStatement01541491$$'  |
 		And I click "Registrations report" button
-		And I select "Planing cash transactions" exact value from "Register" drop-down list
+		And I select "R3035 Cash planning" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-			| 'Document registrations records'        | ''                              | ''          | ''             | ''                          | ''                  | ''         | ''                    | ''        | ''           | ''                             | ''                     |
-			| 'Register  "Planing cash transactions"' | ''                              | ''          | ''             | ''                          | ''                  | ''         | ''                    | ''        | ''           | ''                             | ''                     |
-			| ''                                      | 'Period'                        | 'Resources' | 'Dimensions'   | ''                          | ''                  | ''         | ''                    | ''        | ''           | ''                             | 'Attributes'           |
-			| ''                                      | ''                              | 'Amount'    | 'Company'      | 'Basis document'            | 'Account'           | 'Currency' | 'Cash flow direction' | 'Partner' | 'Legal name' | 'Multi currency movement type' | 'Deferred calculation' |
-			| ''                                      | '$$DateCashStatement01541491$$' | '68,48'     | 'Main Company' | '$$CashStatement01541491$$' | 'Bank account, TRY' | 'USD'      | 'Incoming'            | ''        | ''           | 'Reporting currency'           | 'No'                   |
-			| ''                                      | '$$DateCashStatement01541491$$' | '400'       | 'Main Company' | '$$CashStatement01541491$$' | 'Bank account, TRY' | 'TRY'      | 'Incoming'            | ''        | ''           | 'Local currency'               | 'No'                   |
-			| ''                                      | '$$DateCashStatement01541491$$' | '400'       | 'Main Company' | '$$CashStatement01541491$$' | 'Bank account, TRY' | 'TRY'      | 'Incoming'            | ''        | ''           | 'en description is empty'      | 'No'                   |
+			| 'Document registrations records'  | ''                              | ''          | ''             | ''                          | ''                  | ''         | ''                    | ''        | ''           | ''                             | ''                | ''                     |
+			| 'Register  "R3035 Cash planning"' | ''                              | ''          | ''             | ''                          | ''                  | ''         | ''                    | ''        | ''           | ''                             | ''                | ''                     |
+			| ''                                | 'Period'                        | 'Resources' | 'Dimensions'   | ''                          | ''                  | ''         | ''                    | ''        | ''           | ''                             | ''                | 'Attributes'           |
+			| ''                                | ''                              | 'Amount'    | 'Company'      | 'Basis document'            | 'Account'           | 'Currency' | 'Cash flow direction' | 'Partner' | 'Legal name' | 'Multi currency movement type' | 'Movement type'   | 'Deferred calculation' |
+			| ''                                | '$$DateCashStatement01541491$$' | '68,48'     | 'Main Company' | '$$CashStatement01541491$$' | 'Bank account, TRY' | 'USD'      | 'Incoming'            | ''        | ''           | 'Reporting currency'           | 'Movement type 1' | 'No'                   |
+			| ''                                | '$$DateCashStatement01541491$$' | '400'       | 'Main Company' | '$$CashStatement01541491$$' | 'Bank account, TRY' | 'TRY'      | 'Incoming'            | ''        | ''           | 'Local currency'               | 'Movement type 1' | 'No'                   |
+			| ''                                | '$$DateCashStatement01541491$$' | '400'       | 'Main Company' | '$$CashStatement01541491$$' | 'Bank account, TRY' | 'TRY'      | 'Incoming'            | ''        | ''           | 'en description is empty'      | 'Movement type 1' | 'No'                   |
 		And I select "Cash in transit" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:

@@ -107,3 +107,92 @@ Scenario: _045102 check Incoming payment order movements by the Register "R2022 
 			| ''                                                     | 'Expense'     | '01.06.2021 10:53:53' | '200'       | 'Main Company' | 'Sales order 112 dated 30.05.2021 12:24:18'   | 'Company Kalipso' | 'Kalipso' | 'Basic Partner terms, without VAT' |
 			| ''                                                     | 'Expense'     | '01.06.2021 10:53:53' | '400'       | 'Main Company' | 'Sales invoice 113 dated 01.06.2021 10:37:58' | 'Company Kalipso' | 'Kalipso' | 'Basic Partner terms, without VAT' |
 	And I close all client application windows
+
+Scenario: _045103 check Incoming payment order movements by the Register "R3035 Cash planning"
+	* Select Incoming payment order
+		Given I open hyperlink "e1cib/list/Document.IncomingPaymentOrder"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '113' |
+	* Check movements by the Register  "R3035 Cash planning" 
+		And I click "Registrations report" button
+		And I select "R3035 Cash planning" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Incoming payment order 113 dated 01.06.2021 10:53:53' | ''                    | ''          | ''             | ''                                                     | ''                  | ''         | ''                    | ''         | ''                 | ''                             | ''                | ''                     |
+			| 'Document registrations records'                       | ''                    | ''          | ''             | ''                                                     | ''                  | ''         | ''                    | ''         | ''                 | ''                             | ''                | ''                     |
+			| 'Register  "R3035 Cash planning"'                      | ''                    | ''          | ''             | ''                                                     | ''                  | ''         | ''                    | ''         | ''                 | ''                             | ''                | ''                     |
+			| ''                                                     | 'Period'              | 'Resources' | 'Dimensions'   | ''                                                     | ''                  | ''         | ''                    | ''         | ''                 | ''                             | ''                | 'Attributes'           |
+			| ''                                                     | ''                    | 'Amount'    | 'Company'      | 'Basis document'                                       | 'Account'           | 'Currency' | 'Cash flow direction' | 'Partner'  | 'Legal name'       | 'Multi currency movement type' | 'Movement type'   | 'Deferred calculation' |
+			| ''                                                     | '15.06.2021 00:00:00' | '34,24'     | 'Main Company' | 'Incoming payment order 113 dated 01.06.2021 10:53:53' | 'Bank account, TRY' | 'USD'      | 'Incoming'            | 'Kalipso'  | 'Company Kalipso'  | 'Reporting currency'           | 'Movement type 1' | 'No'                   |
+			| ''                                                     | '15.06.2021 00:00:00' | '68,48'     | 'Main Company' | 'Incoming payment order 113 dated 01.06.2021 10:53:53' | 'Bank account, TRY' | 'USD'      | 'Incoming'            | 'Kalipso'  | 'Company Kalipso'  | 'Reporting currency'           | 'Movement type 1' | 'No'                   |
+			| ''                                                     | '15.06.2021 00:00:00' | '85,6'      | 'Main Company' | 'Incoming payment order 113 dated 01.06.2021 10:53:53' | 'Bank account, TRY' | 'USD'      | 'Incoming'            | 'Lomaniti' | 'Company Lomaniti' | 'Reporting currency'           | 'Movement type 1' | 'No'                   |
+			| ''                                                     | '15.06.2021 00:00:00' | '200'       | 'Main Company' | 'Incoming payment order 113 dated 01.06.2021 10:53:53' | 'Bank account, TRY' | 'TRY'      | 'Incoming'            | 'Kalipso'  | 'Company Kalipso'  | 'Local currency'               | 'Movement type 1' | 'No'                   |
+			| ''                                                     | '15.06.2021 00:00:00' | '200'       | 'Main Company' | 'Incoming payment order 113 dated 01.06.2021 10:53:53' | 'Bank account, TRY' | 'TRY'      | 'Incoming'            | 'Kalipso'  | 'Company Kalipso'  | 'en description is empty'      | 'Movement type 1' | 'No'                   |
+			| ''                                                     | '15.06.2021 00:00:00' | '400'       | 'Main Company' | 'Incoming payment order 113 dated 01.06.2021 10:53:53' | 'Bank account, TRY' | 'TRY'      | 'Incoming'            | 'Kalipso'  | 'Company Kalipso'  | 'Local currency'               | 'Movement type 1' | 'No'                   |
+			| ''                                                     | '15.06.2021 00:00:00' | '400'       | 'Main Company' | 'Incoming payment order 113 dated 01.06.2021 10:53:53' | 'Bank account, TRY' | 'TRY'      | 'Incoming'            | 'Kalipso'  | 'Company Kalipso'  | 'en description is empty'      | 'Movement type 1' | 'No'                   |
+			| ''                                                     | '15.06.2021 00:00:00' | '500'       | 'Main Company' | 'Incoming payment order 113 dated 01.06.2021 10:53:53' | 'Bank account, TRY' | 'TRY'      | 'Incoming'            | 'Lomaniti' | 'Company Lomaniti' | 'Local currency'               | 'Movement type 1' | 'No'                   |
+			| ''                                                     | '15.06.2021 00:00:00' | '500'       | 'Main Company' | 'Incoming payment order 113 dated 01.06.2021 10:53:53' | 'Bank account, TRY' | 'TRY'      | 'Incoming'            | 'Lomaniti' | 'Company Lomaniti' | 'en description is empty'      | 'Movement type 1' | 'No'                   |
+	And I close all client application windows
+
+
+
+Scenario: _045112 Incoming payment order clear posting/mark for deletion
+	And I close all client application windows
+	* Select Outgoing payment order
+		Given I open hyperlink "e1cib/list/Document.IncomingPaymentOrder"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '113' |
+	* Clear posting
+		And in the table "List" I click the button named "ListContextMenuUndoPosting"
+		Then user message window does not contain messages
+		And I click "Registrations report" button
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Incoming payment order 113 dated 01.06.2021 10:53:53' |
+			| 'Document registrations records'                    |
+		And I close current window
+	* Post Outgoing payment order
+		Given I open hyperlink "e1cib/list/Document.IncomingPaymentOrder"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '113' |
+		And in the table "List" I click the button named "ListContextMenuPost"		
+		Then user message window does not contain messages
+		And I click "Registrations report" button
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document contains values
+			| 'R3035 Cash planning' |
+		And I close all client application windows
+	* Mark for deletion
+		Given I open hyperlink "e1cib/list/Document.IncomingPaymentOrder"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '113' |
+		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		Then user message window does not contain messages
+		And I click "Registrations report" button
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Incoming payment order 113 dated 01.06.2021 10:53:53' |
+			| 'Document registrations records'                    |
+		And I close current window
+	* Unmark for deletion and post document
+		Given I open hyperlink "e1cib/list/Document.IncomingPaymentOrder"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '113' |
+		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button				
+		Then user message window does not contain messages
+		And in the table "List" I click the button named "ListContextMenuPost"	
+		Then user message window does not contain messages
+		And I click "Registrations report" button
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document contains values
+			| 'R3035 Cash planning' |
+		And I close all client application windows		

@@ -113,7 +113,11 @@ Scenario: _043300 preparation (Bank payment)
 			| "Documents.BankPayment.FindByNumber(2).GetObject().Write(DocumentWriteMode.Posting);" |
 			| "Documents.BankPayment.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);" |
 			| "Documents.BankPayment.FindByNumber(10).GetObject().Write(DocumentWriteMode.Posting);" |
-
+		When Create document BankPayment objects (check cash planning, cash transfer order and OPO)
+		And I execute 1C:Enterprise script at server
+			| "Documents.BankPayment.FindByNumber(323).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.BankPayment.FindByNumber(324).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.BankPayment.FindByNumber(325).GetObject().Write(DocumentWriteMode.Posting);" |
 		
 Scenario: _043301 check Bank payment movements by the Register "R3010 Cash on hand"
 	* Select Bank payment

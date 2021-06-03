@@ -139,3 +139,92 @@ Scenario: _045002 check Outgoing payment order movements by the Register "R1022 
 			| ''                                                     | 'Expense'     | '07.09.2020 19:23:44' | '900'       | 'Main Company' | 'Purchase invoice 324 dated 30.05.2021 15:09:00' | 'Company Ferron BP' | 'Ferron BP' | 'Vendor Ferron, TRY' |
 			| ''                                                     | 'Expense'     | '07.09.2020 19:23:44' | '1 000'     | 'Main Company' | 'Purchase order 323 dated 30.05.2021 12:55:44'   | 'Company Ferron BP' | 'Ferron BP' | 'Vendor Ferron, TRY' |
 	And I close all client application windows
+
+Scenario: _045003 check Outgoing payment order movements by the Register "R3035 Cash planning"
+	* Select Outgoing payment order
+		Given I open hyperlink "e1cib/list/Document.OutgoingPaymentOrder"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '323' |
+	* Check movements by the Register  "R3035 Cash planning" 
+		And I click "Registrations report" button
+		And I select "R3035 Cash planning" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Outgoing payment order 323 dated 07.09.2020 19:23:44' | ''                    | ''          | ''             | ''                                                     | ''                  | ''         | ''                    | ''          | ''                  | ''                             | ''                | ''                     |
+			| 'Document registrations records'                       | ''                    | ''          | ''             | ''                                                     | ''                  | ''         | ''                    | ''          | ''                  | ''                             | ''                | ''                     |
+			| 'Register  "R3035 Cash planning"'                      | ''                    | ''          | ''             | ''                                                     | ''                  | ''         | ''                    | ''          | ''                  | ''                             | ''                | ''                     |
+			| ''                                                     | 'Period'              | 'Resources' | 'Dimensions'   | ''                                                     | ''                  | ''         | ''                    | ''          | ''                  | ''                             | ''                | 'Attributes'           |
+			| ''                                                     | ''                    | 'Amount'    | 'Company'      | 'Basis document'                                       | 'Account'           | 'Currency' | 'Cash flow direction' | 'Partner'   | 'Legal name'        | 'Multi currency movement type' | 'Movement type'   | 'Deferred calculation' |
+			| ''                                                     | '08.06.2021 00:00:00' | '85,6'      | 'Main Company' | 'Outgoing payment order 323 dated 07.09.2020 19:23:44' | 'Bank account, TRY' | 'USD'      | 'Outgoing'            | 'Kalipso'   | 'Company Kalipso'   | 'Reporting currency'           | 'Movement type 1' | 'No'                   |
+			| ''                                                     | '08.06.2021 00:00:00' | '154,08'    | 'Main Company' | 'Outgoing payment order 323 dated 07.09.2020 19:23:44' | 'Bank account, TRY' | 'USD'      | 'Outgoing'            | 'Ferron BP' | 'Company Ferron BP' | 'Reporting currency'           | 'Movement type 1' | 'No'                   |
+			| ''                                                     | '08.06.2021 00:00:00' | '171,2'     | 'Main Company' | 'Outgoing payment order 323 dated 07.09.2020 19:23:44' | 'Bank account, TRY' | 'USD'      | 'Outgoing'            | 'Ferron BP' | 'Company Ferron BP' | 'Reporting currency'           | 'Movement type 1' | 'No'                   |
+			| ''                                                     | '08.06.2021 00:00:00' | '500'       | 'Main Company' | 'Outgoing payment order 323 dated 07.09.2020 19:23:44' | 'Bank account, TRY' | 'TRY'      | 'Outgoing'            | 'Kalipso'   | 'Company Kalipso'   | 'Local currency'               | 'Movement type 1' | 'No'                   |
+			| ''                                                     | '08.06.2021 00:00:00' | '500'       | 'Main Company' | 'Outgoing payment order 323 dated 07.09.2020 19:23:44' | 'Bank account, TRY' | 'TRY'      | 'Outgoing'            | 'Kalipso'   | 'Company Kalipso'   | 'en description is empty'      | 'Movement type 1' | 'No'                   |
+			| ''                                                     | '08.06.2021 00:00:00' | '900'       | 'Main Company' | 'Outgoing payment order 323 dated 07.09.2020 19:23:44' | 'Bank account, TRY' | 'TRY'      | 'Outgoing'            | 'Ferron BP' | 'Company Ferron BP' | 'Local currency'               | 'Movement type 1' | 'No'                   |
+			| ''                                                     | '08.06.2021 00:00:00' | '900'       | 'Main Company' | 'Outgoing payment order 323 dated 07.09.2020 19:23:44' | 'Bank account, TRY' | 'TRY'      | 'Outgoing'            | 'Ferron BP' | 'Company Ferron BP' | 'en description is empty'      | 'Movement type 1' | 'No'                   |
+			| ''                                                     | '08.06.2021 00:00:00' | '1 000'     | 'Main Company' | 'Outgoing payment order 323 dated 07.09.2020 19:23:44' | 'Bank account, TRY' | 'TRY'      | 'Outgoing'            | 'Ferron BP' | 'Company Ferron BP' | 'Local currency'               | 'Movement type 1' | 'No'                   |
+			| ''                                                     | '08.06.2021 00:00:00' | '1 000'     | 'Main Company' | 'Outgoing payment order 323 dated 07.09.2020 19:23:44' | 'Bank account, TRY' | 'TRY'      | 'Outgoing'            | 'Ferron BP' | 'Company Ferron BP' | 'en description is empty'      | 'Movement type 1' | 'No'                   |
+	And I close all client application windows
+
+
+
+Scenario: _045012 Outgoing payment order clear posting/mark for deletion
+	And I close all client application windows
+	* Select Outgoing payment order
+		Given I open hyperlink "e1cib/list/Document.OutgoingPaymentOrder"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '323' |
+	* Clear posting
+		And in the table "List" I click the button named "ListContextMenuUndoPosting"
+		Then user message window does not contain messages
+		And I click "Registrations report" button
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Outgoing payment order 323 dated 07.09.2020 19:23:44' |
+			| 'Document registrations records'                    |
+		And I close current window
+	* Post Outgoing payment order
+		Given I open hyperlink "e1cib/list/Document.OutgoingPaymentOrder"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '323' |
+		And in the table "List" I click the button named "ListContextMenuPost"		
+		Then user message window does not contain messages
+		And I click "Registrations report" button
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document contains values
+			| 'R3035 Cash planning' |
+		And I close all client application windows
+	* Mark for deletion
+		Given I open hyperlink "e1cib/list/Document.OutgoingPaymentOrder"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '323' |
+		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button
+		Then user message window does not contain messages
+		And I click "Registrations report" button
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Outgoing payment order 323 dated 07.09.2020 19:23:44' |
+			| 'Document registrations records'                    |
+		And I close current window
+	* Unmark for deletion and post document
+		Given I open hyperlink "e1cib/list/Document.OutgoingPaymentOrder"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '323' |
+		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
+		Then "1C:Enterprise" window is opened
+		And I click "Yes" button				
+		Then user message window does not contain messages
+		And in the table "List" I click the button named "ListContextMenuPost"	
+		Then user message window does not contain messages
+		And I click "Registrations report" button
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document contains values
+			| 'R3035 Cash planning' |
+		And I close all client application windows		

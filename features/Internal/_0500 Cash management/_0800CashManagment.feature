@@ -84,7 +84,14 @@ Scenario: _080001 create Incoming payment order
 		And I select current line in "List" table
 		And I activate "Amount" field in "PaymentList" table
 		And I input "1 000,00" text in "Amount" field of "PaymentList" table
+		And I select current line in "PaymentList" table
+		And I click choice button of the attribute named "PaymentListMovementType" in "PaymentList" table
+		And I go to line in "List" table
+			| 'Description'     | 'Type'          |
+			| 'Movement type 1' | 'Cash movement' |
+		And I select current line in "List" table
 		And I finish line editing in "PaymentList" table
+		And I select "Approved" exact value from "Status" drop-down list							
 	And I click the button named "FormPost"
 	And I delete "$$NumberIncomingPaymentOrder080001$$" variable
 	And I delete "$$IncomingPaymentOrder080001$$" variable
@@ -96,77 +103,7 @@ Scenario: _080001 create Incoming payment order
 		| '$$NumberIncomingPaymentOrder080001$$' | 'Main Company' | 'Bank account, USD' | 'USD'      |
 	And I close all client application windows
 
-Scenario: _080002 check Incoming payment order movements
-	* Check movements
-		Given I open hyperlink "e1cib/list/AccumulationRegister.PlaningCashTransactions"
-		And "List" table contains lines
-			| 'Currency' | 'Recorder'                       | 'Basis document'                 | 'Company'      | 'Account'           | 'Cash flow direction' | 'Partner'  | 'Legal name'      | 'Amount'   |
-			| 'USD'      | '$$IncomingPaymentOrder080001$$' | '$$IncomingPaymentOrder080001$$' | 'Main Company' | 'Bank account, USD' | 'Incoming'            | 'Lomaniti' | 'Company Lomaniti' | '1 000,00' |
-		And I close all client application windows
-	* Clear movements and check that there is no movement on the registers
-		Given I open hyperlink "e1cib/list/Document.IncomingPaymentOrder"
-		And I go to line in "List" table
-			| 'Number' |
-			| '$$NumberIncomingPaymentOrder080001$$'      |
-		And in the table "List" I click the button named "ListContextMenuUndoPosting"
-		Given I open hyperlink "e1cib/list/AccumulationRegister.PlaningCashTransactions"
-		And "List" table does not contain lines
-			| 'Currency' | 'Recorder'                       | 'Basis document'                 | 'Company'      | 'Account'           | 'Cash flow direction' | 'Partner'  | 'Legal name'      | 'Amount'   |
-			| 'USD'      | '$$IncomingPaymentOrder080001$$' | '$$IncomingPaymentOrder080001$$' | 'Main Company' | 'Bank account, USD' | 'Incoming'            | 'Lomaniti' | 'Company Lomaniti' | '1 000,00' |
-		And I close all client application windows
-	* Re-posting the document and checking movements on the registers
-		Given I open hyperlink "e1cib/list/Document.IncomingPaymentOrder"
-		And I go to line in "List" table
-			| 'Number' |
-			| '$$NumberIncomingPaymentOrder080001$$'      |
-		And in the table "List" I click the button named "ListContextMenuPost"
-		Given I open hyperlink "e1cib/list/AccumulationRegister.PlaningCashTransactions"
-		And "List" table contains lines
-			| 'Currency' | 'Recorder'                  | 'Basis document'             | 'Company'      | 'Account'           | 'Cash flow direction' | 'Partner'   | 'Legal name'        | 'Amount'    |
-			| 'USD'      | '$$IncomingPaymentOrder080001$$' | '$$IncomingPaymentOrder080001$$'  | 'Main Company' | 'Bank account, USD' | 'Incoming'            | 'Lomaniti'  | 'Company Lomaniti'   | '1 000,00'  |
-		And I close all client application windows
-	
 
-Scenario: _080003 check connection to Incoming payment order of the Registration report
-	Given I open hyperlink "e1cib/list/Document.IncomingPaymentOrder"
-	* Check the report output for the selected document from the list
-		And I go to line in "List" table
-		| 'Number' |
-		| '$$NumberIncomingPaymentOrder080001$$'      |
-		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
-	* Check the report generation
-		And I select "Planing cash transactions" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| '$$IncomingPaymentOrder080001$$'             | ''       | ''          | ''             | ''                          | ''                  | ''         | ''                    | ''         | ''                | ''                         | ''                     |
-		| 'Document registrations records'        | ''       | ''          | ''             | ''                          | ''                  | ''         | ''                    | ''         | ''                | ''                         | ''                     |
-		| 'Register  "Planing cash transactions"' | ''       | ''          | ''             | ''                          | ''                  | ''         | ''                    | ''         | ''                | ''                         | ''                     |
-		| ''                                      | 'Period' | 'Resources' | 'Dimensions'   | ''                          | ''                  | ''         | ''                    | ''         | ''                | ''                         | 'Attributes'           |
-		| ''                                      | ''       | 'Amount'    | 'Company'      | 'Basis document'            | 'Account'           | 'Currency' | 'Cash flow direction' | 'Partner'  | 'Legal name'      | 'Multi currency movement type'   | 'Deferred calculation' |
-		| ''                                      | '*'      | '1 000'     | 'Main Company' | '$$IncomingPaymentOrder080001$$' | 'Bank account, USD' | 'USD'      | 'Incoming'            | 'Lomaniti' | 'Company Lomaniti' | 'en description is empty' | 'No'                   |
-		| ''                                      | '*'      | '1 000'     | 'Main Company' | '$$IncomingPaymentOrder080001$$' | 'Bank account, USD' | 'USD'      | 'Incoming'            | 'Lomaniti' | 'Company Lomaniti' | 'Reporting currency'       | 'No'                   |
-		| ''                                      | '*'      | '5 627,5'  | 'Main Company' | '$$IncomingPaymentOrder080001$$' | 'Bank account, USD' | 'TRY'      | 'Incoming'            | 'Lomaniti' | 'Company Lomaniti' | 'Local currency'           | 'No'                   |
-	And I close all client application windows
-	Given I open hyperlink "e1cib/list/Document.IncomingPaymentOrder"
-	* Check the report output from the selected document
-		And I go to line in "List" table
-		| 'Number' |
-		| '$$NumberIncomingPaymentOrder080001$$'      |
-		And I select current line in "List" table
-		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
-	* Check the report generation
-		And I select "Planing cash transactions" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| '$$IncomingPaymentOrder080001$$'        | ''       | ''          | ''             | ''                               | ''                  | ''         | ''                    | ''         | ''                | ''                             | ''                     |
-		| 'Document registrations records'        | ''       | ''          | ''             | ''                               | ''                  | ''         | ''                    | ''         | ''                | ''                             | ''                     |
-		| 'Register  "Planing cash transactions"' | ''       | ''          | ''             | ''                               | ''                  | ''         | ''                    | ''         | ''                | ''                             | ''                     |
-		| ''                                      | 'Period' | 'Resources' | 'Dimensions'   | ''                               | ''                  | ''         | ''                    | ''         | ''                | ''                             | 'Attributes'           |
-		| ''                                      | ''       | 'Amount'    | 'Company'      | 'Basis document'                 | 'Account'           | 'Currency' | 'Cash flow direction' | 'Partner'  | 'Legal name'      | 'Multi currency movement type' | 'Deferred calculation' |
-		| ''                                      | '*'      | '1 000'     | 'Main Company' | '$$IncomingPaymentOrder080001$$' | 'Bank account, USD' | 'USD'      | 'Incoming'            | 'Lomaniti' | 'Company Lomaniti' | 'en description is empty'      | 'No'                   |
-		| ''                                      | '*'      | '1 000'     | 'Main Company' | '$$IncomingPaymentOrder080001$$' | 'Bank account, USD' | 'USD'      | 'Incoming'            | 'Lomaniti' | 'Company Lomaniti' | 'Reporting currency'           | 'No'                   |
-		| ''                                      | '*'      | '5 627,5'  | 'Main Company' | '$$IncomingPaymentOrder080001$$' | 'Bank account, USD' | 'TRY'      | 'Incoming'            | 'Lomaniti' | 'Company Lomaniti' | 'Local currency'               | 'No'                   |
-	And I close all client application windows
 
 Scenario: _080004 check Description in IncomingPaymentOrder
 	Given I open hyperlink "e1cib/list/Document.IncomingPaymentOrder"
@@ -202,18 +139,19 @@ Scenario: _080005 create Bank receipt based on Incoming payment order
 		And I input "250,00" text in "Amount" field of "PaymentList" table
 		And I finish line editing in "PaymentList" table
 		And I click the button named "FormPost"
-		And I delete "$$NumberBankReceipt0800051$$" variable
+		And I delete "$$NumberBankReceipt0800052$$" variable
 		And I delete "$$BankReceipt0800051$$" variable
-		And I save the value of "Number" field as "$$NumberBankReceipt0800051$$"
+		And I save the value of "Number" field as "$$NumberBankReceipt0800052$$"
 		And I save the window as "$$BankReceipt0800051$$"
 		And I click the button named "FormPostAndClose"
-	* Check movements by register Planing cash transactions
-		Given I open hyperlink "e1cib/list/AccumulationRegister.PlaningCashTransactions"
+	* Check creation
+		Given I open hyperlink "e1cib/list/Document.BankReceipt"
 		And "List" table contains lines
-		| 'Currency' | 'Recorder'              | 'Basis document'                 | 'Company'      | 'Account'           | 'Cash flow direction' | 'Partner'  | 'Legal name' | 'Amount'  |
-		| 'USD'      | '$$BankReceipt080005$$' | '$$IncomingPaymentOrder080001$$' | 'Main Company' | 'Bank account, USD' | 'Incoming'            | 'Lomaniti' | '*'          | '-250,00' |
-		| 'USD'      | '$$BankReceipt0800051$$' | '$$IncomingPaymentOrder080001$$' | 'Main Company' | 'Bank account, USD' | 'Incoming'            | 'Lomaniti' | '*'          | '-250,00' |
-	
+			| 'Number' |
+			| '$$NumberBankReceipt0800051$$'      |
+			| '$$NumberBankReceipt0800052$$'      |	
+		And I close all client application windows
+
 
 Scenario: _080006 create Outgoing payment order
 	Given I open hyperlink "e1cib/list/Document.OutgoingPaymentOrder"
@@ -251,6 +189,13 @@ Scenario: _080006 create Outgoing payment order
 		And I select current line in "List" table
 		And I activate "Amount" field in "PaymentList" table
 		And I input "3 000,00" text in "Amount" field of "PaymentList" table
+		And I activate "Movement type" field in "PaymentList" table
+		And I select current line in "PaymentList" table
+		And I click choice button of "Movement type" attribute in "PaymentList" table
+		And I go to line in "List" table
+			| 'Description'     | 'Type'          |
+			| 'Movement type 1' | 'Cash movement' |
+		And I select current line in "List" table		
 		And I finish line editing in "PaymentList" table
 	And I click the button named "FormPost"
 	And I delete "$$NumberOutgoingPaymentOrder080006$$" variable
@@ -263,73 +208,7 @@ Scenario: _080006 create Outgoing payment order
 		| 1      |  Main Company |  Bank account, TRY | TRY      |
 	And I close all client application windows
 
-Scenario: _080007 check Outgoing payment order movements
-	* Check movements
-		Given I open hyperlink "e1cib/list/AccumulationRegister.PlaningCashTransactions"
-		And "List" table contains lines
-		| 'Currency' | 'Recorder'                       | 'Basis document'                 | 'Company'      | 'Account'           | 'Cash flow direction' | 'Partner'   | 'Legal name'        | 'Amount'   |
-		| 'TRY'      | '$$OutgoingPaymentOrder080006$$' | '$$OutgoingPaymentOrder080006$$' | 'Main Company' | 'Bank account, TRY' | 'Outgoing'            | 'Ferron BP' | 'Company Ferron BP' | '3 000,00' |
-		And I close all client application windows
-	* Clear movements and check that there is no movement on the registers
-		Given I open hyperlink "e1cib/list/Document.OutgoingPaymentOrder"
-		And I go to line in "List" table
-			| 'Number' |
-			| '$$NumberOutgoingPaymentOrder080006$$'      |
-		And in the table "List" I click the button named "ListContextMenuUndoPosting"
-		Given I open hyperlink "e1cib/list/AccumulationRegister.PlaningCashTransactions"
-		And "List" table does not contain lines
-			| 'Currency' | 'Recorder'                       | 'Basis document'                 | 'Company'      | 'Account'           | 'Cash flow direction' | 'Partner'   | 'Legal name'        | 'Amount'   |
-			| 'TRY'      | '$$OutgoingPaymentOrder080006$$' | '$$OutgoingPaymentOrder080006$$' | 'Main Company' | 'Bank account, TRY' | 'Outgoing'            | 'Ferron BP' | 'Company Ferron BP' | '3 000,00' |
-		And I close all client application windows
-	* * Re-posting the document and checking movements on the registers
-		Given I open hyperlink "e1cib/list/Document.OutgoingPaymentOrder"
-		And I go to line in "List" table
-			| 'Number' |
-			| '$$NumberOutgoingPaymentOrder080006$$'      |
-		And in the table "List" I click the button named "ListContextMenuPost"
-		Given I open hyperlink "e1cib/list/AccumulationRegister.PlaningCashTransactions"
-		And "List" table contains lines
-			| 'Currency' | 'Recorder'                       | 'Basis document'                 | 'Company'      | 'Account'           | 'Cash flow direction' | 'Partner'   | 'Legal name'        | 'Amount'   |
-			| 'TRY'      | '$$OutgoingPaymentOrder080006$$' | '$$OutgoingPaymentOrder080006$$' | 'Main Company' | 'Bank account, TRY' | 'Outgoing'            | 'Ferron BP' | 'Company Ferron BP' | '3 000,00' |
-		And I close all client application windows
-
 	
-Scenario: _080008 check connection to Outgoing payment order of the Registration report
-	Given I open hyperlink "e1cib/list/Document.OutgoingPaymentOrder"
-	* Check the report output for the selected document from the list
-		And I go to line in "List" table
-		| 'Number' |
-		| '$$NumberOutgoingPaymentOrder080006$$'      |
-		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
-	* Check the report generation
-		And "ResultTable" spreadsheet document contains lines:
-		| '$$OutgoingPaymentOrder080006$$'        | ''       | ''          | ''             | ''                               | ''                  | ''         | ''                    | ''          | ''                  | ''                             | ''                     |
-		| 'Document registrations records'        | ''       | ''          | ''             | ''                               | ''                  | ''         | ''                    | ''          | ''                  | ''                             | ''                     |
-		| 'Register  "Planing cash transactions"' | ''       | ''          | ''             | ''                               | ''                  | ''         | ''                    | ''          | ''                  | ''                             | ''                     |
-		| ''                                      | 'Period' | 'Resources' | 'Dimensions'   | ''                               | ''                  | ''         | ''                    | ''          | ''                  | ''                             | 'Attributes'           |
-		| ''                                      | ''       | 'Amount'    | 'Company'      | 'Basis document'                 | 'Account'           | 'Currency' | 'Cash flow direction' | 'Partner'   | 'Legal name'        | 'Multi currency movement type' | 'Deferred calculation' |
-		| ''                                      | '*'      | '513,6'     | 'Main Company' | '$$OutgoingPaymentOrder080006$$' | 'Bank account, TRY' | 'USD'      | 'Outgoing'            | 'Ferron BP' | 'Company Ferron BP' | 'Reporting currency'           | 'No'                   |
-		| ''                                      | '*'      | '3 000'     | 'Main Company' | '$$OutgoingPaymentOrder080006$$' | 'Bank account, TRY' | 'TRY'      | 'Outgoing'            | 'Ferron BP' | 'Company Ferron BP' | 'en description is empty'      | 'No'                   |
-		| ''                                      | '*'      | '3 000'     | 'Main Company' | '$$OutgoingPaymentOrder080006$$' | 'Bank account, TRY' | 'TRY'      | 'Outgoing'            | 'Ferron BP' | 'Company Ferron BP' | 'Local currency'               | 'No'                   |
-	And I close all client application windows
-	Given I open hyperlink "e1cib/list/Document.OutgoingPaymentOrder"
-	* Check the report output from the selected document
-		And I go to line in "List" table
-		| 'Number' |
-		| '$$NumberOutgoingPaymentOrder080006$$'      |
-		And I select current line in "List" table
-		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
-	* Check the report generation
-		And "ResultTable" spreadsheet document contains lines:
-		| '$$OutgoingPaymentOrder080006$$'        | ''       | ''          | ''             | ''                               | ''                  | ''         | ''                    | ''          | ''                  | ''                             | ''                     |
-		| 'Document registrations records'        | ''       | ''          | ''             | ''                               | ''                  | ''         | ''                    | ''          | ''                  | ''                             | ''                     |
-		| 'Register  "Planing cash transactions"' | ''       | ''          | ''             | ''                               | ''                  | ''         | ''                    | ''          | ''                  | ''                             | ''                     |
-		| ''                                      | 'Period' | 'Resources' | 'Dimensions'   | ''                               | ''                  | ''         | ''                    | ''          | ''                  | ''                             | 'Attributes'           |
-		| ''                                      | ''       | 'Amount'    | 'Company'      | 'Basis document'                 | 'Account'           | 'Currency' | 'Cash flow direction' | 'Partner'   | 'Legal name'        | 'Multi currency movement type' | 'Deferred calculation' |
-		| ''                                      | '*'      | '513,6'     | 'Main Company' | '$$OutgoingPaymentOrder080006$$' | 'Bank account, TRY' | 'USD'      | 'Outgoing'            | 'Ferron BP' | 'Company Ferron BP' | 'Reporting currency'           | 'No'                   |
-		| ''                                      | '*'      | '3 000'     | 'Main Company' | '$$OutgoingPaymentOrder080006$$' | 'Bank account, TRY' | 'TRY'      | 'Outgoing'            | 'Ferron BP' | 'Company Ferron BP' | 'en description is empty'      | 'No'                   |
-		| ''                                      | '*'      | '3 000'     | 'Main Company' | '$$OutgoingPaymentOrder080006$$' | 'Bank account, TRY' | 'TRY'      | 'Outgoing'            | 'Ferron BP' | 'Company Ferron BP' | 'Local currency'               | 'No'                   |
-	And I close all client application windows
 
 Scenario: _080009 check Description in Outgoing payment order
 	Given I open hyperlink "e1cib/list/Document.OutgoingPaymentOrder"
@@ -370,13 +249,15 @@ Scenario: _080010 create Bank payment based on Outgoing payment order
 		And I save the value of "Number" field as "$$NumberBankPayment08000102$$"
 		And I save the window as "$$BankPayment08000102$$"
 		And I click the button named "FormPostAndClose"
-	* Check movements by register Planing cash transactions
-		Given I open hyperlink "e1cib/list/AccumulationRegister.PlaningCashTransactions"
+	* Check creation
+		Given I open hyperlink "e1cib/list/Document.BankPayment"
 		And "List" table contains lines
-		| 'Currency' | 'Recorder'                | 'Basis document'                 | 'Company'      | 'Account'           | 'Cash flow direction' | 'Partner'   | 'Legal name'        | 'Amount'  |
-		| 'TRY'      | '$$BankPayment08000101$$' | '$$OutgoingPaymentOrder080006$$' | 'Main Company' | 'Bank account, TRY' | 'Outgoing'            | 'Ferron BP' | 'Company Ferron BP' | '-250,00' |
-		| 'TRY'      | '$$BankPayment08000102$$' | '$$OutgoingPaymentOrder080006$$' | 'Main Company' | 'Bank account, TRY' | 'Outgoing'            | 'Ferron BP' | 'Company Ferron BP' | '-250,00' |
+			| 'Number' |
+			| '$$NumberBankPayment08000102$$'      |
+			| '$$NumberBankPayment08000101$$'      |	
 		And I close all client application windows
+		
+	
 
 
 # Filters

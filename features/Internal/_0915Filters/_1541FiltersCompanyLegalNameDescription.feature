@@ -590,6 +590,19 @@ Scenario: _028071 check Description in the document SalesOrderClosing
 	When check Description
 
 
+Scenario: _028072 check filter by own companies in the document Vendors advances closing
+	* Open document form
+		Given I open hyperlink "e1cib/list/Document.VendorsAdvancesClosing"
+	* Check the filter for Own Company
+		When check the filter by my own company in Opening entry/Item stock adjustment
+
+Scenario: _028073 check filter by own companies in the document Customers advances closing
+	* Open document form
+		Given I open hyperlink "e1cib/list/Document.CustomersAdvancesClosing"
+	* Check the filter for Own Company
+		When check the filter by my own company in Opening entry/Item stock adjustment
+
+
 Scenario: _999999 close TestClient session
 	And I close TestClient session
 

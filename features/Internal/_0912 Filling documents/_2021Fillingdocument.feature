@@ -176,6 +176,17 @@ Scenario: _0154100 preparation ( filling documents)
 						| USD  | American dollar |
 					And I activate "Description" field in "List" table
 					And I select current line in "List" table
+				* Filling Movement type
+					And I click Select button of "Send movement type" field
+					And I go to line in "List" table
+						| 'Description'     | 'Type'          |
+						| 'Movement type 1' | 'Cash movement' |
+					And I select current line in "List" table
+					And I click Select button of "Receive movement type" field
+					And I go to line in "List" table
+						| 'Description'     | 'Type'          |
+						| 'Movement type 1' | 'Cash movement' |
+					And I select current line in "List" table					
 				And I click the button named "FormPost"
 				And I delete "$$NumberCashTransferOrder01541001$$" variable
 				And I delete "$$CashTransferOrder01541001$$" variable
@@ -231,6 +242,16 @@ Scenario: _0154100 preparation ( filling documents)
 						| 'Description' |
 						| 'Arina Brown' |
 					And I select current line in "List" table
+				* Filling Movement type
+					And I click Select button of "Send movement type" field
+					And I go to line in "List" table
+						| 'Description'     | 'Type'          |
+						| 'Movement type 1' | 'Cash movement' |
+					And I select current line in "List" table
+					And I click Select button of "Receive movement type" field
+					And I go to line in "List" table
+						| 'Description'     | 'Type'          |
+						| 'Movement type 1' | 'Cash movement' |
 				And I click the button named "FormPost"
 				And I delete "$$NumberCashTransferOrder01541002$$" variable
 				And I delete "$$CashTransferOrder01541002$$" variable
@@ -241,8 +262,8 @@ Scenario: _0154100 preparation ( filling documents)
 				* Check creation
 					Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
 					And "List" table contains lines
-					| Number | Sender       | Receiver     | Company      |
-					| $$NumberCashTransferOrder01541002$$      | Cash desk №2 | Cash desk №1 | Main Company |
+						| 'Number'                              | 'Company'      | 'Sender'       | 'Receiver'     |
+						| '$$NumberCashTransferOrder01541002$$' | 'Main Company' | 'Cash desk №2' | 'Cash desk №1' |
 				And I close all client application windows
 			And Delay 5
 		* Create Cashtransfer order for currency exchange (bank accounts)
@@ -271,6 +292,17 @@ Scenario: _0154100 preparation ( filling documents)
 						| Bank account, EUR |
 					And I select current line in "List" table
 					And I input "175,00" text in "Receive amount" field
+				* Filling Movement type
+					And I click Select button of "Send movement type" field
+					And I go to line in "List" table
+						| 'Description'     | 'Type'          |
+						| 'Movement type 1' | 'Cash movement' |
+					And I select current line in "List" table
+					And I click Select button of "Receive movement type" field
+					And I go to line in "List" table
+						| 'Description'     | 'Type'          |
+						| 'Movement type 1' | 'Cash movement' |
+					And I select current line in "List" table
 				And I click the button named "FormPost"
 				And I delete "$$NumberCashTransferOrder01541003$$" variable
 				And I delete "$$CashTransferOrder01541003$$" variable
@@ -312,6 +344,17 @@ Scenario: _0154100 preparation ( filling documents)
 							| Bank account, EUR |
 						And I select current line in "List" table
 						And I input "1150,00" text in "Receive amount" field
+					* Filling Movement type
+						And I click Select button of "Send movement type" field
+						And I go to line in "List" table
+							| 'Description'     | 'Type'          |
+							| 'Movement type 1' | 'Cash movement' |
+						And I select current line in "List" table
+						And I click Select button of "Receive movement type" field
+						And I go to line in "List" table
+							| 'Description'     | 'Type'          |
+							| 'Movement type 1' | 'Cash movement' |
+						And I select current line in "List" table
 					And I click the button named "FormPost"
 					And I delete "$$NumberCashTransferOrder01541004$$" variable
 					And I delete "$$CashTransferOrder01541004$$" variable

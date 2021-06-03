@@ -105,7 +105,37 @@ Scenario: _045000 preparation (Outgoing payment order)
 			| "Documents.CashTransferOrder.FindByNumber(2).GetObject().Write(DocumentWriteMode.Posting);" |
 			| "Documents.CashTransferOrder.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);" |
 			| "Documents.CashTransferOrder.FindByNumber(4).GetObject().Write(DocumentWriteMode.Posting);" |
-	* Load Incoming payment order
-		When Create document OutgoingPaymentOrder objects
+		When Create document PurchaseOrder objects (with aging, prepaid, post-shipment credit)
 		And I execute 1C:Enterprise script at server
-			| "Documents.OutgoingPaymentOrder.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.PurchaseOrder.FindByNumber(323).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.PurchaseOrder.FindByNumber(324).GetObject().Write(DocumentWriteMode.Posting);" |
+		When Create document PurchaseInvoice objects (with aging, prepaid, post-shipment credit)
+		And I execute 1C:Enterprise script at server
+			| "Documents.PurchaseInvoice.FindByNumber(323).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.PurchaseInvoice.FindByNumber(324).GetObject().Write(DocumentWriteMode.Posting);" |
+	* Load OutgoingPaymentOrder
+		When Create document OutgoingPaymentOrder objects (Cash planning)
+		And I execute 1C:Enterprise script at server
+			| "Documents.OutgoingPaymentOrder.FindByNumber(323).GetObject().Write(DocumentWriteMode.Posting);" |
+	
+
+
+Scenario: _045002 check Outgoing payment order movements by the Register "R1022 Vendors payment planning" (lines with basis)
+	* Select Outgoing payment order
+		Given I open hyperlink "e1cib/list/Document.OutgoingPaymentOrder"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '323' |
+	* Check movements by the Register  "R1022 Vendors payment planning" 
+		And I click "Registrations report" button
+		And I select "R1022 Vendors payment planning" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Outgoing payment order 323 dated 07.09.2020 19:23:44' | ''            | ''                    | ''          | ''             | ''                                               | ''                  | ''          | ''                   |
+			| 'Document registrations records'                       | ''            | ''                    | ''          | ''             | ''                                               | ''                  | ''          | ''                   |
+			| 'Register  "R1022 Vendors payment planning"'           | ''            | ''                    | ''          | ''             | ''                                               | ''                  | ''          | ''                   |
+			| ''                                                     | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                                               | ''                  | ''          | ''                   |
+			| ''                                                     | ''            | ''                    | 'Amount'    | 'Company'      | 'Basis'                                          | 'Legal name'        | 'Partner'   | 'Agreement'          |
+			| ''                                                     | 'Expense'     | '07.09.2020 19:23:44' | '900'       | 'Main Company' | 'Purchase invoice 324 dated 30.05.2021 15:09:00' | 'Company Ferron BP' | 'Ferron BP' | 'Vendor Ferron, TRY' |
+			| ''                                                     | 'Expense'     | '07.09.2020 19:23:44' | '1 000'     | 'Main Company' | 'Purchase order 323 dated 30.05.2021 12:55:44'   | 'Company Ferron BP' | 'Ferron BP' | 'Vendor Ferron, TRY' |
+	And I close all client application windows

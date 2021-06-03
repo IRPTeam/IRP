@@ -811,6 +811,36 @@ Scenario: Create document SalesInvoice objects (with aging, prepaid)
 		| 'Ref'                                                                   | 'Date'                | 'ProportionOfPayment' | 'DuePeriod' | 'Amount' | 'CalculationType'                          |
 		| 'e1cib/data/Document.SalesInvoice?ref=b76ac729f215fa6f11ebc12c2da3ee79' | '13.06.2021 00:00:00' | '100'                 | '14'        | '400'    | 'Enum.CalculationTypes.PostShipmentCredit' |
 
+Scenario: Create document SalesInvoice objects (with aging, Post-shipment credit)
+
+	And I check or create document "SalesInvoice" objects:
+		| 'Ref'                                                                   | 'DeletionMark' | 'Number' | 'Date'                | 'Posted' | 'Agreement'                                                          | 'BasisDocument' | 'Company'                                                           | 'Currency'                                                           | 'DateOfShipment'      | 'LegalName'                                                         | 'Manager' | 'ManagerSegment'                                                          | 'Partner'                                                          | 'PriceIncludeTax' | 'IgnoreAdvances' | 'Author'                                                        | 'BusinessUnit' | 'Description' | 'DocumentAmount' |
+		| 'e1cib/data/Document.SalesInvoice?ref=b76ac729f215fa6f11ebc2a337849bda' | 'False'        | '113'    | '01.06.2021 10:37:58' | 'True'   | 'e1cib/data/Catalog.Agreements?ref=aa78120ed92fbced11eaf118bdb7bb75' | ''              | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1855' | '01.01.0001 00:00:00' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf116b32709a3' | ''        | 'e1cib/data/Catalog.PartnerSegments?ref=aa78120ed92fbced11eaf116b327099c' | 'e1cib/data/Catalog.Partners?ref=aa78120ed92fbced11eaf113ba6c1871' | 'False'           | 'False'          | 'e1cib/data/Catalog.Users?ref=aa7f120ed92fbced11eb13d7279770c0' | ''             | ''            | '400'            |
+
+	And I refill object tabular section "ItemList":
+		| 'Ref'                                                                   | 'TotalAmount' | 'NetAmount' | 'ItemKey'                                                          | 'Store'                                                          | 'OffersAmount' | 'Price'  | 'Quantity' | 'TaxAmount' | 'Key'                                  | 'Unit'                                                          | 'PriceType'                                                          | 'SalesOrder'                                                          | 'DeliveryDate'        | 'Detail' | 'BusinessUnit' | 'RevenueType' | 'AdditionalAnalytic' | 'DontCalculateRow' | 'QuantityInBaseUnit' | 'UseShipmentConfirmation' |
+		| 'e1cib/data/Document.SalesInvoice?ref=b76ac729f215fa6f11ebc2a337849bda' | '400'         | '338,98'    | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c600' | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00c' | '0'            | '338,98' | '1'        | '61,02'     | 'd839cd0f-ca23-4337-9c0a-efc63aa49899' | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | 'e1cib/data/Catalog.PriceTypes?ref=aa78120ed92fbced11eaf114c59ef002' | 'e1cib/data/Document.SalesOrder?ref=b76ac729f215fa6f11ebc128ac7daa5c' | '01.01.0001 00:00:00' | ''       | ''             | ''            | ''                   | 'False'            | '1'                  | 'True'                    |
+
+	And I refill object tabular section "TaxList":
+		| 'Ref'                                                                   | 'Key'                                  | 'Tax'                                                           | 'Analytics' | 'TaxRate'                                                          | 'Amount' | 'IncludeToTotalAmount' | 'ManualAmount' |
+		| 'e1cib/data/Document.SalesInvoice?ref=b76ac729f215fa6f11ebc2a337849bda' | 'd839cd0f-ca23-4337-9c0a-efc63aa49899' | 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | ''          | 'e1cib/data/Catalog.TaxRates?ref=aa78120ed92fbced11eaf114c59ef010' | '61,02'  | 'True'                 | '61,02'        |
+
+	And I refill object tabular section "Currencies":
+		| 'Ref'                                                                   | 'Key'                                  | 'CurrencyFrom'                                                       | 'Rate'   | 'ReverseRate' | 'ShowReverseRate' | 'Multiplicity' | 'MovementType'                                                                                    | 'Amount' |
+		| 'e1cib/data/Document.SalesInvoice?ref=b76ac729f215fa6f11ebc2a337849bda' | 'e4ba05cf-3931-456c-a0b5-2dc7b31bd7f1' | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1855' | '1'      | '1'           | 'False'           | '1'            | 'e1cib/data/ChartOfCharacteristicTypes.CurrencyMovementType?ref=aa78120ed92fbced11eaf113ba6c185f' | '400'    |
+		| 'e1cib/data/Document.SalesInvoice?ref=b76ac729f215fa6f11ebc2a337849bda' | 'e4ba05cf-3931-456c-a0b5-2dc7b31bd7f1' | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1855' | '1'      | '1'           | 'False'           | '1'            | 'e1cib/data/ChartOfCharacteristicTypes.CurrencyMovementType?ref=aa78120ed92fbced11eaf113ba6c185d' | '400'    |
+		| 'e1cib/data/Document.SalesInvoice?ref=b76ac729f215fa6f11ebc2a337849bda' | 'e4ba05cf-3931-456c-a0b5-2dc7b31bd7f1' | 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1855' | '0,1712' | '5,8411'      | 'False'           | '1'            | 'e1cib/data/ChartOfCharacteristicTypes.CurrencyMovementType?ref=aa78120ed92fbced11eaf113ba6c185e' | '68,48'  |
+
+	And I refill object tabular section "PaymentTerms":
+		| 'Ref'                                                                   | 'Date'                | 'ProportionOfPayment' | 'DuePeriod' | 'Amount' | 'CalculationType'                          |
+		| 'e1cib/data/Document.SalesInvoice?ref=b76ac729f215fa6f11ebc2a337849bda' | '15.06.2021 00:00:00' | '100'                 | '14'        | '400'    | 'Enum.CalculationTypes.PostShipmentCredit' |
+
+	
+
+
+
+
+
 
 Scenario: Create document PurchaseOrder objects (with aging, prepaid, post-shipment credit)
 
@@ -897,3 +927,5 @@ Scenario: Create document PurchaseInvoice objects (with aging, prepaid, post-shi
 		| 'Ref'                                                                      | 'Date'                | 'ProportionOfPayment' | 'DuePeriod' | 'Amount' | 'CalculationType'                          |
 		| 'e1cib/data/Document.PurchaseInvoice?ref=b76ac729f215fa6f11ebc13fc50b4519' | '30.05.2021 00:00:00' | '100'                 | '0'         | '1 170'  | 'Enum.CalculationTypes.Prepaid'            |
 		| 'e1cib/data/Document.PurchaseInvoice?ref=b76ac729f215fa6f11ebc13fc50b451a' | '07.06.2021 00:00:00' | '100'                 | '8'         | '1 170'  | 'Enum.CalculationTypes.PostShipmentCredit' |
+
+

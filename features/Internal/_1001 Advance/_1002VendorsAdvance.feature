@@ -647,7 +647,9 @@ Scenario: _1002052 check VendorsAdvancesClosing movements when unpost document a
 		And I close all client application windows
 		
 		
-				
+
+		
+							
 	
 
 

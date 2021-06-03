@@ -79,6 +79,13 @@ Scenario: _085001 check tax calculation in the document Cash revenue
 		And I select current line in "List" table
 		And I activate field named "PaymentListNetAmount" in "PaymentList" table
 		And I input "100,00" text in the field named "PaymentListNetAmount" of "PaymentList" table
+		And I activate "Movement type" field in "PaymentList" table
+		And I select current line in "PaymentList" table
+		And I click choice button of "Movement type" attribute in "PaymentList" table
+		And I go to line in "List" table
+			| 'Description'     | 'Type'          |
+			| 'Movement type 1' | 'Cash movement' |
+		And I select current line in "List" table		
 		And I finish line editing in "PaymentList" table
 	* Tax calculation check
 		And "PaymentList" table contains lines
@@ -268,6 +275,13 @@ Scenario: _085006 check movements of the document Cash expense
 		And I select current line in "List" table
 		And I activate field named "PaymentListNetAmount" in "PaymentList" table
 		And I input "100,00" text in the field named "PaymentListNetAmount" of "PaymentList" table
+		And I activate "Movement type" field in "PaymentList" table
+		And I select current line in "PaymentList" table
+		And I click choice button of "Movement type" attribute in "PaymentList" table
+		And I go to line in "List" table
+			| 'Description'     | 'Type'          |
+			| 'Movement type 1' | 'Cash movement' |
+		And I select current line in "List" table		
 		And I finish line editing in "PaymentList" table
 		And I click the button named "FormPost"
 		And I delete "$$NumberCashExpense1$$" variable

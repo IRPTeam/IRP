@@ -300,18 +300,18 @@ Scenario: Open object form "OrderProcurement"
 	
 
 	
-Scenario: Open list form "PlaningCashTransactions" 
+Scenario: Open list form "R3035T_CashPlanning" 
 
-	Given I open "PlaningCashTransactions" accumulation register list form 
+	Given I open "R3035T_CashPlanning" accumulation register list form 
 	If the warning is displayed then
-		Then I raise "Failed to open information register form PlaningCashTransactions" exception
+		Then I raise "Failed to open information register form R3035T_CashPlanning" exception
 	And I close current window
 
-Scenario: Open object form "PlaningCashTransactions"
+Scenario: Open object form "R3035T_CashPlanning"
 
-	Given I open "PlaningCashTransactions" accumulation register default form
+	Given I open "R3035T_CashPlanning" accumulation register default form
 	If the warning is displayed then
-		Then I raise "Failed to open information register form PlaningCashTransactions" exception
+		Then I raise "Failed to open information register form R3035T_CashPlanning" exception
 	And I close current window
 
 	
@@ -746,19 +746,6 @@ Scenario: Open object form "R3022B_CashInTransitOutgoing"
 		Then I raise "Failed to open information register form R3022B_CashInTransitOutgoing" exception
 	And I close current window
 
-Scenario: Open object form "R3033B_CashPlanningIncoming"
-
-	Given I open "R3033B_CashPlanningIncoming" accumulation register default form
-	If the warning is displayed then
-		Then I raise "Failed to open information register form R3033B_CashPlanningIncoming" exception
-	And I close current window
-
-Scenario: Open object form "R3034B_CashPlanningOutgoing"
-
-	Given I open "R3034B_CashPlanningOutgoing" accumulation register default form
-	If the warning is displayed then
-		Then I raise "Failed to open information register form R3034B_CashPlanningOutgoing" exception
-	And I close current window
 
 Scenario: Open object form "R4010B_ActualStocks"
 
@@ -927,6 +914,21 @@ Scenario: Open object form "R5041B_TaxesPayable"
 	If the warning is displayed then
 		Then I raise "Failed to open information register form R5041B_TaxesPayable" exception
 	And I close current window
+
+Scenario: Open object form "R1022B_VendorsPaymentPlanning"
+
+	Given I open "R1022B_VendorsPaymentPlanning" accumulation register default form
+	If the warning is displayed then
+		Then I raise "Failed to open information register form R1022B_VendorsPaymentPlanning" exception
+	And I close current window
+
+Scenario: Open object form "R2022B_CustomersPaymentPlanning"
+
+	Given I open "R2022B_CustomersPaymentPlanning" accumulation register default form
+	If the warning is displayed then
+		Then I raise "Failed to open information register form R2022B_CustomersPaymentPlanning" exception
+	And I close current window
+
 
 Scenario: Open object form "Analise document movements"
 

@@ -66,7 +66,7 @@
   <defaultListForm>Document.IncomingPaymentOrder.Form.ListForm</defaultListForm>
   <defaultChoiceForm>Document.IncomingPaymentOrder.Form.ChoiceForm</defaultChoiceForm>
   <realTimePosting>Deny</realTimePosting>
-  <registerRecords>AccumulationRegister.PlaningCashTransactions</registerRecords>
+  <registerRecords>AccumulationRegister.R3035T_CashPlanning</registerRecords>
   <registerRecords>AccumulationRegister.R2022B_CustomersPaymentPlanning</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
@@ -134,6 +134,28 @@
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <fillChecking>ShowError</fillChecking>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="3f112d82-0542-469c-9d8e-10b7edf55dea">
+    <name>Status</name>
+    <synonym>
+      <key>en</key>
+      <value>Status</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.ObjectStatuses</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillChecking>ShowError</fillChecking>
+    <choiceParameters>
+      <name>Filter.Parent</name>
+      <value xsi:type="core:ReferenceValue">
+        <value>Catalog.ObjectStatuses.IncomingPaymentOrder</value>
+      </value>
+    </choiceParameters>
     <fillValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
@@ -225,6 +247,35 @@
       </synonym>
       <type>
         <types>DefinedType.typeAmount</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="3cfc8698-508a-4a9f-8e04-d61e25e5db35">
+      <name>Basis</name>
+      <synonym>
+        <key>en</key>
+        <value>Basis</value>
+      </synonym>
+      <type>
+        <types>DocumentRef.SalesOrder</types>
+        <types>DocumentRef.SalesInvoice</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="15a0e8fa-d891-4344-aecf-294b80e67099">
+      <name>MovementType</name>
+      <synonym>
+        <key>en</key>
+        <value>Movement type</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.ExpenseAndRevenueTypes</types>
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>

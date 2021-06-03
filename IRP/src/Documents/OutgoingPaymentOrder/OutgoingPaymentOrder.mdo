@@ -66,7 +66,7 @@
   <defaultListForm>Document.OutgoingPaymentOrder.Form.ListForm</defaultListForm>
   <defaultChoiceForm>Document.OutgoingPaymentOrder.Form.ChoiceForm</defaultChoiceForm>
   <realTimePosting>Deny</realTimePosting>
-  <registerRecords>AccumulationRegister.PlaningCashTransactions</registerRecords>
+  <registerRecords>AccumulationRegister.R3035T_CashPlanning</registerRecords>
   <registerRecords>AccumulationRegister.R1022B_VendorsPaymentPlanning</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
@@ -269,6 +269,35 @@
       </synonym>
       <type>
         <types>DefinedType.typeAmount</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="f2431fe8-878b-4d19-bc13-674a6d2a3e70">
+      <name>Basis</name>
+      <synonym>
+        <key>en</key>
+        <value>Basis</value>
+      </synonym>
+      <type>
+        <types>DocumentRef.PurchaseOrder</types>
+        <types>DocumentRef.PurchaseInvoice</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="d1119eab-99df-4564-8c9b-7a90b74ad053">
+      <name>MovementType</name>
+      <synonym>
+        <key>en</key>
+        <value>Movement type</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.ExpenseAndRevenueTypes</types>
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>

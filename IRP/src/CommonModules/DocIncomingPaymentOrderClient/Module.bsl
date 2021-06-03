@@ -106,6 +106,10 @@ Procedure DateOnChange(Object, Form, Item) Export
 	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 EndProcedure
 
+Procedure StatusOnChange(Object, Form, Item) Export
+	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
+EndProcedure
+
 Procedure CurrencyOnChange(Object, Form, Item) Export
 	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 EndProcedure

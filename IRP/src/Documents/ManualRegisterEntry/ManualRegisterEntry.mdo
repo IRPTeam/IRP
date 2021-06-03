@@ -64,7 +64,6 @@
   <registerRecords>AccumulationRegister.R4013B_StockReservationPlanning</registerRecords>
   <registerRecords>AccumulationRegister.R4017B_InternalSupplyRequestProcurement</registerRecords>
   <registerRecords>AccumulationRegister.R3022B_CashInTransitOutgoing</registerRecords>
-  <registerRecords>AccumulationRegister.R3034B_CashPlanningOutgoing</registerRecords>
   <registerRecords>AccumulationRegister.R4020T_StockTransferOrders</registerRecords>
   <registerRecords>AccumulationRegister.R4015T_InternalSupplyRequests</registerRecords>
   <registerRecords>AccumulationRegister.R4022B_StockTransferOrdersShipment</registerRecords>
@@ -73,7 +72,6 @@
   <registerRecords>AccumulationRegister.R3021B_CashInTransitIncoming</registerRecords>
   <registerRecords>AccumulationRegister.R1020B_AdvancesToVendors</registerRecords>
   <registerRecords>AccumulationRegister.R4050B_StockInventory</registerRecords>
-  <registerRecords>AccumulationRegister.R3033B_CashPlanningIncoming</registerRecords>
   <registerRecords>AccumulationRegister.R2001T_Sales</registerRecords>
   <registerRecords>AccumulationRegister.R2021B_CustomersTransactions</registerRecords>
   <registerRecords>AccumulationRegister.R4011B_FreeStocks</registerRecords>

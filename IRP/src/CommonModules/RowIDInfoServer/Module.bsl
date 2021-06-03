@@ -1300,8 +1300,8 @@ Function ExtractData_FromSO(BasisesTable, DataReceiver)
 		|	Document.SalesOrder.SpecialOffers AS SpecialOffers
 		|		INNER JOIN BasisesTable AS BasisesTable
 		|		ON BasisesTable.Basis = SpecialOffers.Ref
-		|		AND BasisesTable.BasisKey = SpecialOffers.Key";
-
+		|		AND BasisesTable.BasisKey = SpecialOffers.Key
+		|";
 	
 	Query.SetParameter("BasisesTable", BasisesTable);
 	QueryResults = Query.ExecuteBatch();
@@ -1799,8 +1799,8 @@ Function ExtractData_FromPO(BasisesTable, DataReceiver)
 		|	Document.PurchaseOrder.SpecialOffers AS SpecialOffers
 		|		INNER JOIN BasisesTable AS BasisesTable
 		|		ON BasisesTable.Basis = SpecialOffers.Ref
-		|		AND BasisesTable.BasisKey = SpecialOffers.Key";
-
+		|		AND BasisesTable.BasisKey = SpecialOffers.Key
+		|";
 	
 	Query.SetParameter("BasisesTable", BasisesTable);
 	QueryResults = Query.ExecuteBatch();
@@ -5608,11 +5608,13 @@ Function ConvertDataToFillingValues(DocReceiverMetadata, ExtractedData) Export
 				If Not CommonFunctionsClientServer.ObjectHasProperty(Tables, TableName_Refreshable) Then
 					Continue;
 				EndIf;
+				
 				For Each Row_DepTable In Tables[TableName_Refreshable].Copy(TableFilter) Do
 					FillingValues[TableName_Refreshable].Add(ValueTableRowToStructure(Tables[TableName_Refreshable].Columns, Row_DepTable));
 				EndDo;
 			EndDo;
 		EndDo;
+		
 		FillingValues.Insert("BasedOn", True);
 		ArrayOfFillingValues.Add(FillingValues);
 	EndDo;	

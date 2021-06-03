@@ -6503,7 +6503,7 @@
 		</right>
 	</object>
 	<object>
-		<name>AccumulationRegister.PlaningCashTransactions</name>
+		<name>AccumulationRegister.R3035T_CashPlanning</name>
 		<right>
 			<name>Read</name>
 			<value>true</value>
@@ -14318,29 +14318,6 @@
 		</right>
 	</object>
 	<object>
-		<name>AccumulationRegister.R3033B_CashPlanningIncoming</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Update</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Edit</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>TotalsControl</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
 		<name>AccumulationRegister.R4050B_StockInventory</name>
 		<right>
 			<name>Read</name>
@@ -14894,29 +14871,6 @@
 	</object>
 	<object>
 		<name>AccumulationRegister.R4010B_ActualStocks</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Update</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Edit</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>TotalsControl</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>AccumulationRegister.R3034B_CashPlanningOutgoing</name>
 		<right>
 			<name>Read</name>
 			<value>true</value>

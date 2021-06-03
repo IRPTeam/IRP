@@ -102,6 +102,7 @@ Function GetDocumentTable_CashTransferOrder(ArrayOfBasisDocuments, EndOfDate = U
 	|	tmp.Company AS Company,
 	|	tmp.CashAccount AS CashAccount,
 	|	tmp.Currency AS Currency,
+	|	tmp.MovementType AS MovementType,
 	|	tmp.CurrencyExchange AS CurrencyExchange,
 	|	tmp.Amount AS Amount,
 	|	tmp.PlaningTransactionBasis AS PlaningTransactionBasis,
@@ -122,26 +123,27 @@ Function GetDocumentTable_CashTransferOrder_QueryText() Export
 	|			THEN VALUE(Enum.IncomingPaymentTransactionType.CashTransferOrder)
 	|		ELSE VALUE(Enum.IncomingPaymentTransactionType.CurrencyExchange)
 	|	END AS TransactionType,
-	|	PlaningCashTransactionsTurnovers.Company AS Company,
-	|	PlaningCashTransactionsTurnovers.Account AS CashAccount,
-	|	PlaningCashTransactionsTurnovers.Currency AS Currency,
+	|	R3035T_CashPlanningTurnovers.Company AS Company,
+	|	R3035T_CashPlanningTurnovers.Account AS CashAccount,
+	|	R3035T_CashPlanningTurnovers.MovementType AS MovementType,
+	|	R3035T_CashPlanningTurnovers.Currency AS Currency,
 	|	Doc.SendCurrency AS CurrencyExchange,
-	|	PlaningCashTransactionsTurnovers.AmountTurnover AS Amount,
-	|	PlaningCashTransactionsTurnovers.BasisDocument AS PlaningTransactionBasis,
+	|	R3035T_CashPlanningTurnovers.AmountTurnover AS Amount,
+	|	R3035T_CashPlanningTurnovers.BasisDocument AS PlaningTransactionBasis,
 	|	CashAdvanceBalance.Partner AS Partner,
 	|	CashAdvanceBalance.AmountBalance AS AmountExchange
 	|INTO tmp
 	|FROM
-	|	AccumulationRegister.PlaningCashTransactions.Turnovers(, &EndOfDate,,
+	|	AccumulationRegister.R3035T_CashPlanning.Turnovers(, &EndOfDate,,
 	|		CashFlowDirection = VALUE(Enum.CashFlowDirections.Incoming)
 	|	AND CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
 	|	AND CASE
 	|		WHEN &UseArrayOfBasisDocuments
 	|			THEN BasisDocument IN (&ArrayOfBasisDocuments)
 	|		ELSE TRUE
-	|	END) AS PlaningCashTransactionsTurnovers
+	|	END) AS R3035T_CashPlanningTurnovers
 	|		INNER JOIN Document.CashTransferOrder AS Doc
-	|		ON PlaningCashTransactionsTurnovers.BasisDocument = Doc.Ref
+	|		ON R3035T_CashPlanningTurnovers.BasisDocument = Doc.Ref
 	|		INNER JOIN AccumulationRegister.R3015B_CashAdvance.Balance(&EndOfDate,
 	|			CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
 	|		AND CASE
@@ -149,10 +151,10 @@ Function GetDocumentTable_CashTransferOrder_QueryText() Export
 	|				THEN Basis IN (&ArrayOfBasisDocuments)
 	|			ELSE TRUE
 	|		END) AS CashAdvanceBalance
-	|		ON PlaningCashTransactionsTurnovers.BasisDocument = CashAdvanceBalance.Basis
+	|		ON R3035T_CashPlanningTurnovers.BasisDocument = CashAdvanceBalance.Basis
 	|WHERE
-	|	PlaningCashTransactionsTurnovers.Account.Type = VALUE(Enum.CashAccountTypes.Cash)
-	|	AND PlaningCashTransactionsTurnovers.AmountTurnover > 0
+	|	R3035T_CashPlanningTurnovers.Account.Type = VALUE(Enum.CashAccountTypes.Cash)
+	|	AND R3035T_CashPlanningTurnovers.AmountTurnover > 0
 	|
 	|UNION ALL
 	|
@@ -163,25 +165,26 @@ Function GetDocumentTable_CashTransferOrder_QueryText() Export
 	|			THEN VALUE(Enum.IncomingPaymentTransactionType.CashTransferOrder)
 	|		ELSE VALUE(Enum.IncomingPaymentTransactionType.CurrencyExchange)
 	|	END,
-	|	PlaningCashTransactionsTurnovers.Company,
-	|	PlaningCashTransactionsTurnovers.Account,
-	|	PlaningCashTransactionsTurnovers.Currency,
+	|	R3035T_CashPlanningTurnovers.Company,
+	|	R3035T_CashPlanningTurnovers.Account,
+	|	R3035T_CashPlanningTurnovers.MovementType,
+	|	R3035T_CashPlanningTurnovers.Currency,
 	|	Doc.SendCurrency,
 	|	CashInTransitBalance.AmountBalance,
-	|	PlaningCashTransactionsTurnovers.BasisDocument,
+	|	R3035T_CashPlanningTurnovers.BasisDocument,
 	|	NULL,
 	|	0
 	|FROM
-	|	AccumulationRegister.PlaningCashTransactions.Turnovers(, &EndOfDate,,
+	|	AccumulationRegister.R3035T_CashPlanning.Turnovers(, &EndOfDate,,
 	|		CashFlowDirection = VALUE(Enum.CashFlowDirections.Incoming)
 	|	AND CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
 	|	AND CASE
 	|		WHEN &UseArrayOfBasisDocuments
 	|			THEN BasisDocument IN (&ArrayOfBasisDocuments)
 	|		ELSE TRUE
-	|	END) AS PlaningCashTransactionsTurnovers
+	|	END) AS R3035T_CashPlanningTurnovers
 	|		INNER JOIN Document.CashTransferOrder AS Doc
-	|		ON PlaningCashTransactionsTurnovers.BasisDocument = Doc.Ref
+	|		ON R3035T_CashPlanningTurnovers.BasisDocument = Doc.Ref
 	|		INNER JOIN AccumulationRegister.CashInTransit.Balance(&EndOfDate,
 	|			CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
 	|		AND CASE
@@ -189,12 +192,13 @@ Function GetDocumentTable_CashTransferOrder_QueryText() Export
 	|				THEN BasisDocument IN (&ArrayOfBasisDocuments)
 	|			ELSE TRUE
 	|		END) AS CashInTransitBalance
-	|		ON PlaningCashTransactionsTurnovers.BasisDocument = CashInTransitBalance.BasisDocument
+	|		ON R3035T_CashPlanningTurnovers.BasisDocument = CashInTransitBalance.BasisDocument
 	|WHERE
-	|	PlaningCashTransactionsTurnovers.Account.Type = VALUE(Enum.CashAccountTypes.Cash)
-	|	AND PlaningCashTransactionsTurnovers.AmountTurnover > 0
+	|	R3035T_CashPlanningTurnovers.Account.Type = VALUE(Enum.CashAccountTypes.Cash)
+	|	AND R3035T_CashPlanningTurnovers.AmountTurnover > 0
 	|	AND Doc.SendCurrency = Doc.ReceiveCurrency
 	|;
+	|
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
@@ -202,6 +206,7 @@ Function GetDocumentTable_CashTransferOrder_QueryText() Export
 	|	tmp.TransactionType AS TransactionType,
 	|	tmp.Company AS Company,
 	|	tmp.CashAccount AS CashAccount,
+	|	tmp.MovementType AS MovementType,
 	|	tmp.Currency AS Currency,
 	|	tmp.CurrencyExchange AS CurrencyExchange,
 	|	tmp.Amount AS Amount,

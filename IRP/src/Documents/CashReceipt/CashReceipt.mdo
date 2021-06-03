@@ -66,7 +66,7 @@
   <defaultListForm>Document.CashReceipt.Form.ListForm</defaultListForm>
   <defaultChoiceForm>Document.CashReceipt.Form.ChoiceForm</defaultChoiceForm>
   <realTimePosting>Deny</realTimePosting>
-  <registerRecords>AccumulationRegister.PlaningCashTransactions</registerRecords>
+  <registerRecords>AccumulationRegister.R3035T_CashPlanning</registerRecords>
   <registerRecords>AccumulationRegister.CashInTransit</registerRecords>
   <registerRecords>AccumulationRegister.R5010B_ReconciliationStatement</registerRecords>
   <registerRecords>AccumulationRegister.R3010B_CashOnHand</registerRecords>
@@ -339,6 +339,20 @@
       </synonym>
       <type>
         <types>DefinedType.typeAmount</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="bf473133-d758-4e96-8743-3a6cc674a10e">
+      <name>MovementType</name>
+      <synonym>
+        <key>en</key>
+        <value>Movement type</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.ExpenseAndRevenueTypes</types>
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>

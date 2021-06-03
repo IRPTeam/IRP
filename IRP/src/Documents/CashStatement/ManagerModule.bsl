@@ -4,14 +4,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	
 	AccReg = Metadata.AccumulationRegisters;
 	Tables = New Structure();
-	Tables.Insert("PlaningCashTransactions", PostingServer.CreateTable(AccReg.PlaningCashTransactions));
 	Tables.Insert("CashInTransit", PostingServer.CreateTable(AccReg.CashInTransit));
-
-	Query_PlaningCashTransactions = New Query();
-	Query_PlaningCashTransactions.Text = GetQueryText_CashStatement_PlaningCashTransactions();
-	Query_PlaningCashTransactions.SetParameter("Ref", Ref);
-	QueryResult_PlaningCashTransactions = Query_PlaningCashTransactions.Execute();
-	PlaningCashTransactions = QueryResult_PlaningCashTransactions.Unload();
 
 	Query_CashInTransit = New Query();
 	Query_CashInTransit.Text = GetQueryText_CashStatement_CashInTransit();
@@ -19,7 +12,6 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	QueryResult_CashInTransit = Query_CashInTransit.Execute();
 	CashInTransit = QueryResult_CashInTransit.Unload();
 
-	Tables.PlaningCashTransactions = PlaningCashTransactions;
 	Tables.CashInTransit = CashInTransit;
 	
 #Region NewRegistersPosting	
@@ -29,30 +21,6 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	
 	Return Tables;
 EndFunction
-
-Function GetQueryText_CashStatement_PlaningCashTransactions()
-	Return "SELECT
-	|	Table.Ref.Company AS Company,
-	|	&Ref AS BasisDocument,
-	|	Table.Ref.CashAccount AS Account,
-	|	Table.Account.Currency AS Currency,
-	|	VALUE(Enum.CashFlowDirections.Incoming) AS CashFlowDirection,
-	|	SUM(Table.Amount) AS Amount,
-	|	Table.Ref.Date AS Period,
-	|	Table.Key
-	|FROM
-	|	Document.CashStatement.PaymentList AS Table
-	|WHERE
-	|	Table.Ref = &Ref
-	|	AND Table.Account.Type = VALUE(Enum.CashAccountTypes.POS)
-	|GROUP BY
-	|	Table.Ref.Company,
-	|	Table.Account.Currency,
-	|	Table.Ref.CashAccount,
-	|	Table.Ref.Date,
-	|	Table.Key,
-	|	VALUE(Enum.CashFlowDirections.Incoming)";
-EndFunction	
 
 Function GetQueryText_CashStatement_CashInTransit()
 	Return "SELECT
@@ -101,12 +69,6 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 		New Structure("RecordType, RecordSet",
 			AccumulationRecordType.Receipt,
 			Parameters.DocumentDataTables.CashInTransit));
-			
-	// PlaningCashTransactions
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.PlaningCashTransactions,
-		New Structure("RecordType, RecordSet",
-			AccumulationRecordType.Expense,
-			Parameters.DocumentDataTables.PlaningCashTransactions));
 			
 #Region NewRegistersPosting	
 	PostingServer.SetPostingDataTables(PostingDataTables, Parameters);
@@ -173,6 +135,7 @@ EndFunction
 Function GetQueryTextsMasterTables()
 	QueryArray = New Array;
 	QueryArray.Add(R3010B_CashOnHand());
+	QueryArray.Add(R3035T_CashPlanning());
 	Return QueryArray;
 EndFunction
 
@@ -180,9 +143,12 @@ Function PaymentList()
 	Return
 	"SELECT
 	|	PaymentList.Ref.Date AS Period,
+	|	PaymentList.Ref AS Ref,
 	|	PaymentList.Ref.Company AS Company,
+	|	PaymentList.Ref.CashAccount AS CashAccount,
 	|	PaymentList.Account,
 	|	PaymentList.Currency,
+	|	PaymentList.MovementType,
 	|	PaymentList.Amount,
 	|	PaymentList.Account.Type = VALUE(Enum.CashAccountTypes.POS) AS IsAccountPOS
 	|INTO PaymentList
@@ -198,6 +164,24 @@ Function R3010B_CashOnHand()
 		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
 		|	*
 		|INTO R3010B_CashOnHand
+		|FROM
+		|	PaymentList AS PaymentList
+		|WHERE
+		|	PaymentList.IsAccountPOS";
+EndFunction
+
+Function R3035T_CashPlanning()
+	Return
+		"SELECT
+		|	PaymentList.Period,
+		|	PaymentList.Company,
+		|	PaymentList.Ref AS BasisDocument,
+		|	PaymentList.CashAccount AS Account,
+		|	PaymentList.Currency,
+		|	VALUE(Enum.CashFlowDirections.Incoming) AS CashFlowDirection,
+		|	PaymentList.MovementType,
+		|	PaymentList.Amount
+		|INTO R3035T_CashPlanning
 		|FROM
 		|	PaymentList AS PaymentList
 		|WHERE

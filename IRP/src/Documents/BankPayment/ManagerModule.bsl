@@ -4,7 +4,6 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	
 	AccReg = Metadata.AccumulationRegisters;
 	Tables = New Structure();
-	Tables.Insert("PlaningCashTransactions"               , PostingServer.CreateTable(AccReg.PlaningCashTransactions));
 	Tables.Insert("CashInTransit"                         , PostingServer.CreateTable(AccReg.CashInTransit));
 	Tables.Insert("ExpensesTurnovers"                     , PostingServer.CreateTable(AccReg.ExpensesTurnovers));
 	
@@ -19,9 +18,8 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Query.SetParameter("QueryTable", QueryTablePaymentList);
 	QueryResults = Query.ExecuteBatch();
 		
-	Tables.PlaningCashTransactions = QueryResults[1].Unload();
-	Tables.CashInTransit           = QueryResults[2].Unload();
-	Tables.ExpensesTurnovers       = QueryResults[3].Unload();
+	Tables.CashInTransit           = QueryResults[1].Unload();
+	Tables.ExpensesTurnovers       = QueryResults[2].Unload();
 
 #Region NewRegistersPosting	
 	QueryArray = GetQueryTextsSecondaryTables();
@@ -142,32 +140,6 @@ Function GetQueryTextQueryTable()
 		|//[1]//////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company AS Company,
-		|	tmp.Account AS Account,
-		|	tmp.Currency AS Currency,
-		|	tmp.PlaningTransactionBasis AS BasisDocument,
-		|	CASE
-		|		WHEN VALUETYPE(tmp.PlaningTransactionBasis) = TYPE(Document.OutgoingPaymentOrder)
-		|			THEN tmp.Partner
-		|		ELSE VALUE(Catalog.Partners.EmptyRef)
-		|	END AS Partner,
-		|	CASE
-		|		WHEN VALUETYPE(tmp.PlaningTransactionBasis) = TYPE(Document.OutgoingPaymentOrder)
-		|			THEN tmp.Payee
-		|		ELSE VALUE(Catalog.Companies.EmptyRef)
-		|	END AS LegalName,
-		|	VALUE(Enum.CashFlowDirections.Outgoing) AS CashFlowDirection,
-		|	-tmp.Amount AS Amount,
-		|	tmp.Period,
-		|	tmp.Key
-		|FROM
-		|	tmp AS tmp
-		|WHERE
-		|	NOT tmp.PlaningTransactionBasis.Date IS NULL
-		|;
-		|
-		|//[2]//////////////////////////////////////////////////////////////////////////////
-		|SELECT
-		|	tmp.Company AS Company,
 		|	tmp.PlaningTransactionBasis AS BasisDocument,
 		|	tmp.FromAccount AS FromAccount,
 		|	tmp.ToAccount AS ToAccount,
@@ -181,7 +153,7 @@ Function GetQueryTextQueryTable()
 		|	tmp.IsMoneyTransfer
 		|;
 		|
-		|//[3]//////////////////////////////////////////////////////////////////////////////
+		|//[2]//////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company AS Company,
 		|	tmp.BusinessUnit AS BusinessUnit,
@@ -212,6 +184,7 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	Tables.R1020B_AdvancesToVendors.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R2020B_AdvancesFromCustomers.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R3010B_CashOnHand.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	Tables.R3035T_CashPlanning.Columns.Add("Key" , Metadata.DefinedTypes.typeRowID.Type);
 	
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
 #EndRegion
@@ -219,9 +192,6 @@ EndProcedure
 
 Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 	PostingDataTables = New Map();
-	// PlaningCashTransactions
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.PlaningCashTransactions,
-		New Structure("RecordSet", Parameters.DocumentDataTables.PlaningCashTransactions));
 	
 	// CashInIransit
 	PostingDataTables.Insert(Parameters.Object.RegisterRecords.CashInTransit,
@@ -360,6 +330,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(T1002I_PartnerAdvances());
 	QueryArray.Add(T1001I_PartnerTransactions());
 	QueryArray.Add(R5012B_VendorsAging());
+	QueryArray.Add(R3035T_CashPlanning());
 	Return QueryArray;
 EndFunction
 
@@ -426,6 +397,7 @@ Function PaymentList()
 		|	PaymentList.ExpenseType AS ExpenseType,
 		|	PaymentList.AdditionalAnalytic AS AdditionalAnalytic,
 		|	PaymentList.Commission AS Commission,
+		|	PaymentList.MovementType AS MovementType,
 		|	PaymentList.Ref.TransactionType = VALUE(Enum.OutgoingPaymentTransactionTypes.PaymentToVendor) AS IsPaymentToVendor,
 		|	PaymentList.Ref.TransactionType = VALUE(Enum.OutgoingPaymentTransactionTypes.CurrencyExchange) AS IsCurrencyExchange,
 		|	PaymentList.Ref.TransactionType = VALUE(Enum.OutgoingPaymentTransactionTypes.CashTransferOrder) AS
@@ -655,6 +627,35 @@ Function R3010B_CashOnHand()
 		|	PaymentList.IsPaymentToVendor
 		|	OR PaymentList.IsCurrencyExchange
 		|	OR PaymentList.IsCashTransferOrder";
+EndFunction
+
+Function R3035T_CashPlanning()
+	Return
+		"SELECT
+		|	PaymentList.Period,
+		|	PaymentList.Company,
+		|	PaymentList.PlaningTransactionBasis AS BasisDocument,
+		|	PaymentList.Account,
+		|	PaymentList.Currency,
+		|	VALUE(Enum.CashFlowDirections.Outgoing) AS CashFlowDirection,
+		|	CASE
+		|		WHEN VALUETYPE(PaymentList.PlaningTransactionBasis) = TYPE(Document.OutgoingPaymentOrder)
+		|			THEN PaymentList.Partner
+		|		ELSE VALUE(Catalog.Partners.EmptyRef)
+		|	END AS Partner,
+		|	CASE
+		|		WHEN VALUETYPE(PaymentList.PlaningTransactionBasis) = TYPE(Document.OutgoingPaymentOrder)
+		|			THEN PaymentList.Payee
+		|		ELSE VALUE(Catalog.Companies.EmptyRef)
+		|	END AS LegalName,
+		|	PaymentList.MovementType,
+		|	-PaymentList.Amount AS Amount,
+		|	PaymentList.Key
+		|INTO R3035T_CashPlanning
+		|FROM
+		|	PaymentList AS PaymentList
+		|WHERE
+		|	NOT PaymentList.PlaningTransactionBasis.Ref IS NULL";
 EndFunction
 
 #EndRegion

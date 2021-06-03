@@ -176,9 +176,6 @@
     <mdObject>Catalog.Workstations</mdObject>
   </content>
   <content>
-    <mdObject>AccumulationRegister.R3034B_CashPlanningOutgoing</mdObject>
-  </content>
-  <content>
     <mdObject>InformationRegister.BundleContents</mdObject>
   </content>
   <content>
@@ -278,9 +275,6 @@
     <mdObject>Catalog.UnitsOfMeasurement</mdObject>
   </content>
   <content>
-    <mdObject>AccumulationRegister.R3033B_CashPlanningIncoming</mdObject>
-  </content>
-  <content>
     <mdObject>Catalog.Files</mdObject>
   </content>
   <content>
@@ -308,7 +302,7 @@
     <mdObject>AccumulationRegister.R2001T_Sales</mdObject>
   </content>
   <content>
-    <mdObject>AccumulationRegister.PlaningCashTransactions</mdObject>
+    <mdObject>AccumulationRegister.R3035T_CashPlanning</mdObject>
   </content>
   <content>
     <mdObject>AccumulationRegister.OrderProcurement</mdObject>

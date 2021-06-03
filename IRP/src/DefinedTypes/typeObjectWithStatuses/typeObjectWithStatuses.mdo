@@ -18,5 +18,6 @@
     <types>DocumentRef.InventoryTransferOrder</types>
     <types>DocumentRef.ReconciliationStatement</types>
     <types>DocumentRef.PhysicalInventory</types>
+    <types>DocumentRef.IncomingPaymentOrder</types>
   </type>
 </mdclass:DefinedType>

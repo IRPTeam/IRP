@@ -252,6 +252,7 @@ Scenario: _0154100 preparation ( filling documents)
 					And I go to line in "List" table
 						| 'Description'     | 'Type'          |
 						| 'Movement type 1' | 'Cash movement' |
+					And I select current line in "List" table	
 				And I click the button named "FormPost"
 				And I delete "$$NumberCashTransferOrder01541002$$" variable
 				And I delete "$$CashTransferOrder01541002$$" variable

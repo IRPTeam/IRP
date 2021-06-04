@@ -125,6 +125,8 @@ Scenario: _043500 preparation (Cash payment)
 		When Create document CashPayment objects (cash planning)
 		And I execute 1C:Enterprise script at server
 			| "Documents.CashPayment.FindByNumber(324).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.CashPayment.FindByNumber(325).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.CashPayment.FindByNumber(326).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I close all client application windows
 		
 

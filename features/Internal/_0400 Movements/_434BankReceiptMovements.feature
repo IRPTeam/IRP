@@ -142,8 +142,37 @@ Scenario: _043400 preparation (Bank receipt)
 				And I execute 1C:Enterprise script at server
 					| "Documents.BankReceipt.FindByNumber(11).GetObject().Write(DocumentWriteMode.UndoPosting);" |
 		And I close all client application windows
-		
-		
+	* Load SO, SI, IPO
+		When Create document SalesOrder objects (with aging, prepaid)
+		And I execute 1C:Enterprise script at server
+			| "Documents.SalesOrder.FindByNumber(112).GetObject().Write(DocumentWriteMode.Posting);" |
+		When Create document SalesOrder objects (with aging, post-shipment credit)
+		And I execute 1C:Enterprise script at server
+			| "Documents.SalesOrder.FindByNumber(113).GetObject().Write(DocumentWriteMode.Posting);" |
+		When Create document SalesInvoice objects (with aging, prepaid)
+		And I execute 1C:Enterprise script at server
+			| "Documents.SalesInvoice.FindByNumber(112).GetObject().Write(DocumentWriteMode.Posting);" |
+		When Create document SalesInvoice objects (with aging, Post-shipment credit)
+		And I execute 1C:Enterprise script at server
+			| "Documents.SalesInvoice.FindByNumber(113).GetObject().Write(DocumentWriteMode.Posting);" |
+		When Create document IncomingPaymentOrder objects (Cash planning)
+		And I execute 1C:Enterprise script at server
+			| "Documents.IncomingPaymentOrder.FindByNumber(113).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.IncomingPaymentOrder.FindByNumber(114).GetObject().Write(DocumentWriteMode.Posting);" |
+	* Load Cash transfer order
+		When Create document CashTransferOrder objects
+		When Create document CashTransferOrder objects (check movements)
+		And I execute 1C:Enterprise script at server
+			| "Documents.CashTransferOrder.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.CashTransferOrder.FindByNumber(2).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.CashTransferOrder.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.CashTransferOrder.FindByNumber(4).GetObject().Write(DocumentWriteMode.Posting);" |
+		When Create document BankReceipt objects (cash planning)
+		And I execute 1C:Enterprise script at server
+			| "Documents.BankReceipt.FindByNumber(513).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.BankReceipt.FindByNumber(514).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.BankReceipt.FindByNumber(515).GetObject().Write(DocumentWriteMode.Posting);" |	
+		And I close all client application windows
 
 Scenario: _043401 check Bank receipt movements by the Register "R3010 Cash on hand"
 	* Select Bank receipt
@@ -276,7 +305,89 @@ Scenario: _043413 check absence Bank receipt movements by the Register "R2021 Cu
 			| 'Register  "R2021 Customer transactions'   |     
 	And I close all client application windows
 
+Scenario: _043420 check Bank receipt movements by the Register "R3035 Cash planning" (Payment from customer, with planning transaction basis)
+	And I close all client application windows
+	* Select Bank receipt (payment from customer)
+		Given I open hyperlink "e1cib/list/Document.BankReceipt"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '513' |
+	* Check movements by the Register  "R3035 Cash planning" 
+		And I click "Registrations report" button
+		And I select "R3035 Cash planning" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Bank receipt 513 dated 04.06.2021 12:27:04' | ''                    | ''          | ''             | ''                                                     | ''                  | ''         | ''                    | ''        | ''           | ''                             | ''                | ''                     |
+			| 'Document registrations records'             | ''                    | ''          | ''             | ''                                                     | ''                  | ''         | ''                    | ''        | ''           | ''                             | ''                | ''                     |
+			| 'Register  "R3035 Cash planning"'            | ''                    | ''          | ''             | ''                                                     | ''                  | ''         | ''                    | ''        | ''           | ''                             | ''                | ''                     |
+			| ''                                           | 'Period'              | 'Resources' | 'Dimensions'   | ''                                                     | ''                  | ''         | ''                    | ''        | ''           | ''                             | ''                | 'Attributes'           |
+			| ''                                           | ''                    | 'Amount'    | 'Company'      | 'Basis document'                                       | 'Account'           | 'Currency' | 'Cash flow direction' | 'Partner' | 'Legal name' | 'Multi currency movement type' | 'Movement type'   | 'Deferred calculation' |
+			| ''                                           | '04.06.2021 12:27:04' | '-600'      | 'Main Company' | 'Incoming payment order 113 dated 01.06.2021 10:53:53' | 'Bank account, TRY' | 'TRY'      | 'Incoming'            | ''        | ''           | 'Local currency'               | 'Movement type 1' | 'No'                   |
+			| ''                                           | '04.06.2021 12:27:04' | '-600'      | 'Main Company' | 'Incoming payment order 113 dated 01.06.2021 10:53:53' | 'Bank account, TRY' | 'TRY'      | 'Incoming'            | ''        | ''           | 'en description is empty'      | 'Movement type 1' | 'No'                   |
+			| ''                                           | '04.06.2021 12:27:04' | '-400'      | 'Main Company' | 'Incoming payment order 113 dated 01.06.2021 10:53:53' | 'Bank account, TRY' | 'TRY'      | 'Incoming'            | ''        | ''           | 'Local currency'               | 'Movement type 1' | 'No'                   |
+			| ''                                           | '04.06.2021 12:27:04' | '-400'      | 'Main Company' | 'Incoming payment order 113 dated 01.06.2021 10:53:53' | 'Bank account, TRY' | 'TRY'      | 'Incoming'            | ''        | ''           | 'en description is empty'      | 'Movement type 1' | 'No'                   |
+			| ''                                           | '04.06.2021 12:27:04' | '-102,72'   | 'Main Company' | 'Incoming payment order 113 dated 01.06.2021 10:53:53' | 'Bank account, TRY' | 'USD'      | 'Incoming'            | ''        | ''           | 'Reporting currency'           | 'Movement type 1' | 'No'                   |
+			| ''                                           | '04.06.2021 12:27:04' | '-68,48'    | 'Main Company' | 'Incoming payment order 113 dated 01.06.2021 10:53:53' | 'Bank account, TRY' | 'USD'      | 'Incoming'            | ''        | ''           | 'Reporting currency'           | 'Movement type 1' | 'No'                   |
+	And I close all client application windows
 
+Scenario: _043421 check Bank receipt movements by the Register "R3035 Cash planning" (Currency exchange, with planning transaction basis)
+	And I close all client application windows
+	* Select Bank receipt
+		Given I open hyperlink "e1cib/list/Document.BankReceipt"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '514' |
+	* Check movements by the Register  "R3035 Cash planning" 
+		And I click "Registrations report" button
+		And I select "R3035 Cash planning" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Bank receipt 514 dated 04.06.2021 12:29:34' | ''                    | ''          | ''             | ''                                                | ''                  | ''         | ''                    | ''        | ''           | ''                             | ''                | ''                     |
+			| 'Document registrations records'             | ''                    | ''          | ''             | ''                                                | ''                  | ''         | ''                    | ''        | ''           | ''                             | ''                | ''                     |
+			| 'Register  "R3035 Cash planning"'            | ''                    | ''          | ''             | ''                                                | ''                  | ''         | ''                    | ''        | ''           | ''                             | ''                | ''                     |
+			| ''                                           | 'Period'              | 'Resources' | 'Dimensions'   | ''                                                | ''                  | ''         | ''                    | ''        | ''           | ''                             | ''                | 'Attributes'           |
+			| ''                                           | ''                    | 'Amount'    | 'Company'      | 'Basis document'                                  | 'Account'           | 'Currency' | 'Cash flow direction' | 'Partner' | 'Legal name' | 'Multi currency movement type' | 'Movement type'   | 'Deferred calculation' |
+			| ''                                           | '04.06.2021 12:29:34' | '-1 620'    | 'Main Company' | 'Cash transfer order 3 dated 05.04.2021 12:23:49' | 'Bank account, EUR' | 'TRY'      | 'Incoming'            | ''        | ''           | 'Local currency'               | 'Movement type 1' | 'No'                   |
+			| ''                                           | '04.06.2021 12:29:34' | '-198'      | 'Main Company' | 'Cash transfer order 3 dated 05.04.2021 12:23:49' | 'Bank account, EUR' | 'USD'      | 'Incoming'            | ''        | ''           | 'Reporting currency'           | 'Movement type 1' | 'No'                   |
+			| ''                                           | '04.06.2021 12:29:34' | '-180'      | 'Main Company' | 'Cash transfer order 3 dated 05.04.2021 12:23:49' | 'Bank account, EUR' | 'EUR'      | 'Incoming'            | ''        | ''           | 'en description is empty'      | 'Movement type 1' | 'No'                   |
+	And I close all client application windows
+
+Scenario: _043422 check Bank receipt movements by the Register "R3035 Cash planning" (Cash transfer order, with planning transaction basis)
+	And I close all client application windows
+	* Select Bank receipt
+		Given I open hyperlink "e1cib/list/Document.BankReceipt"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '515' |
+	* Check movements by the Register  "R3035 Cash planning" 
+		And I click "Registrations report" button
+		And I select "R3035 Cash planning" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Bank receipt 515 dated 04.06.2021 12:30:23' | ''                    | ''          | ''             | ''                                                | ''                    | ''         | ''                    | ''        | ''           | ''                             | ''                | ''                     |
+			| 'Document registrations records'             | ''                    | ''          | ''             | ''                                                | ''                    | ''         | ''                    | ''        | ''           | ''                             | ''                | ''                     |
+			| 'Register  "R3035 Cash planning"'            | ''                    | ''          | ''             | ''                                                | ''                    | ''         | ''                    | ''        | ''           | ''                             | ''                | ''                     |
+			| ''                                           | 'Period'              | 'Resources' | 'Dimensions'   | ''                                                | ''                    | ''         | ''                    | ''        | ''           | ''                             | ''                | 'Attributes'           |
+			| ''                                           | ''                    | 'Amount'    | 'Company'      | 'Basis document'                                  | 'Account'             | 'Currency' | 'Cash flow direction' | 'Partner' | 'Legal name' | 'Multi currency movement type' | 'Movement type'   | 'Deferred calculation' |
+			| ''                                           | '04.06.2021 12:30:23' | '-4 500'    | 'Main Company' | 'Cash transfer order 2 dated 05.04.2021 12:09:54' | 'Bank account 2, EUR' | 'TRY'      | 'Incoming'            | ''        | ''           | 'Local currency'               | 'Movement type 1' | 'No'                   |
+			| ''                                           | '04.06.2021 12:30:23' | '-550'      | 'Main Company' | 'Cash transfer order 2 dated 05.04.2021 12:09:54' | 'Bank account 2, EUR' | 'USD'      | 'Incoming'            | ''        | ''           | 'Reporting currency'           | 'Movement type 1' | 'No'                   |
+			| ''                                           | '04.06.2021 12:30:23' | '-500'      | 'Main Company' | 'Cash transfer order 2 dated 05.04.2021 12:09:54' | 'Bank account 2, EUR' | 'EUR'      | 'Incoming'            | ''        | ''           | 'en description is empty'      | 'Movement type 1' | 'No'                   |
+	And I close all client application windows
+
+Scenario: _043423 check absence Bank receipt movements by the Register "R3035 Cash planning" (without planning transaction basis)
+	And I close all client application windows
+	* Select Bank receipt (payment from customer)
+		Given I open hyperlink "e1cib/list/Document.BankReceipt"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '5' |
+	* Check movements by the Register  "R3035 Cash planning" 
+		And I click "Registrations report" button
+		And I select "R3035 Cash planning" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document does not contain values
+			| 'Register  "R3035 Cash planning'   |     
+	And I close all client application windows
 
 Scenario: _043430 Bank receipt clear posting/mark for deletion
 	And I close all client application windows

@@ -51,6 +51,7 @@ Scenario: _053000 preparation (Bank payment)
 		When Create information register CurrencyRates records
 		When Create catalog CashAccounts objects
 		When update ItemKeys
+		When Create catalog ExpenseAndRevenueTypes objects
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
@@ -191,6 +192,15 @@ Scenario: _053001 create Bank payment (independently)
 		* Filling in amount in a tabular part
 			And I activate "Amount" field in "PaymentList" table
 			And I input "1000,00" text in "Amount" field of "PaymentList" table
+			And I finish line editing in "PaymentList" table
+		* Select movement type
+			And I activate "Movement type" field in "PaymentList" table
+			And I select current line in "PaymentList" table
+			And I click choice button of "Movement type" attribute in "PaymentList" table
+			And I go to line in "List" table
+				| 'Description'     | 'Type'          |
+				| 'Movement type 1' | 'Cash movement' |
+			And I select current line in "List" table		
 			And I finish line editing in "PaymentList" table
 		And I click the button named "FormPost"
 		And I delete "$$NumberBankPayment0530011$$" variable

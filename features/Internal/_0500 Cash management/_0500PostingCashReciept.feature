@@ -202,6 +202,15 @@ Scenario: _050001 create Cash receipt (independently)
 			And I activate "Amount" field in "PaymentList" table
 			And I input "100,00" text in "Amount" field of "PaymentList" table
 			And I finish line editing in "PaymentList" table
+		* Select movement type
+			And I activate "Movement type" field in "PaymentList" table
+			And I select current line in "PaymentList" table
+			And I click choice button of "Movement type" attribute in "PaymentList" table
+			And I go to line in "List" table
+				| 'Description'     | 'Type'          |
+				| 'Movement type 1' | 'Cash movement' |
+			And I select current line in "List" table		
+			And I finish line editing in "PaymentList" table
 		And I click the button named "FormPost"
 		And I delete "$$NumberCashReceipt0500011$$" variable
 		And I delete "$$CashReceipt0500011$$" variable

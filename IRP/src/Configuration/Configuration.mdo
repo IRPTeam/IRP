@@ -562,6 +562,7 @@
   <catalogs>Catalog.Workstations</catalogs>
   <catalogs>Catalog.MovementRules</catalogs>
   <catalogs>Catalog.RowIDs</catalogs>
+  <catalogs>Catalog.PlanningPeriods</catalogs>
   <documents>Document.BankPayment</documents>
   <documents>Document.BankReceipt</documents>
   <documents>Document.Bundling</documents>

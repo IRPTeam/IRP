@@ -178,9 +178,9 @@ Procedure TransactionsLegalNameOnChange(Object, Form, Item) Export
 		Return;
 	EndIf;
 	If ValueIsFilled(CurrentData.LegalName) Then
-		NewPartner = DocCreditDebitNoteServer.GetPartnerByLegalName(CurrentData.LegalName, CurrentData.Partner);
+		NewPartner = DocumentsServer.GetPartnerByLegalName(CurrentData.LegalName, CurrentData.Partner);
 		If NewPartner <> CurrentData.Partner Then
-			CurrentData.Partner = DocCreditDebitNoteServer.GetPartnerByLegalName(CurrentData.LegalName, CurrentData.Partner);
+			CurrentData.Partner = DocumentsServer.GetPartnerByLegalName(CurrentData.LegalName, CurrentData.Partner);
 			TransactionsPartnerOnChange(Object, Form, Undefined);
 		EndIf;
 	EndIf;

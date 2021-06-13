@@ -366,6 +366,32 @@ Function GetLegalNameByPartner(Partner, LegalName) Export
 	Return Undefined;
 EndFunction
 
+Function GetBankAccountByPartner(Partner, LegalName, Currency) Export
+	If Not (ValueIsFilled(Partner) And ValueIsFilled(LegalName) And ValueIsFilled(Currency)) Then
+		Return Undefined;
+	EndIf;
+	Query = New Query();
+	Query.Text = 
+	"SELECT TOP 1
+	|	PartnersBankAccounts.Ref
+	|FROM
+	|	Catalog.PartnersBankAccounts AS PartnersBankAccounts
+	|WHERE
+	|	PartnersBankAccounts.Currency = &Currency
+	|	AND PartnersBankAccounts.Partner = &Partner
+	|	AND PartnersBankAccounts.LegalEntity = &LegalName
+	|	AND NOT PartnersBankAccounts.DeletionMark";
+	Query.SetParameter("Currency", Currency);
+	Query.SetParameter("Partner", Partner);
+	Query.SetParameter("LegalName", LegalName);
+	QuerySelection = Query.Execute().Select();
+	If QuerySelection.Next() Then
+		Return QuerySelection.Ref;
+	Else
+		Return Undefined;
+	EndIf;
+EndFunction
+
 #EndRegion
 
 #Region ListFormEvents
@@ -903,4 +929,24 @@ Procedure RecalculateInvoiceQuantity(ArrayOfRows) Export
 EndProcedure
 
 #EndRegion
+
+Function GetPartnerByLegalName(LegalName, Partner) Export
+	If Not LegalName.IsEmpty() Then
+		ArrayOfFilters = New Array();
+		ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
+		If ValueIsFilled(Partner) Then
+			ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Ref", Partner, ComparisonType.Equal));
+		EndIf;
+		AdditionalParameters = New Structure();
+		If ValueIsFilled(LegalName) Then
+			AdditionalParameters.Insert("Company", LegalName);
+			AdditionalParameters.Insert("FilterPartnersByCompanies", True);
+		EndIf;
+		Parameters = New Structure("CustomSearchFilter, AdditionalParameters",
+		SerializeArrayOfFilters(ArrayOfFilters),
+		SerializeArrayOfFilters(AdditionalParameters));
+		Return Catalogs.Partners.GetDefaultChoiceRef(Parameters);
+	EndIf;
+	Return Undefined;
+EndFunction
 

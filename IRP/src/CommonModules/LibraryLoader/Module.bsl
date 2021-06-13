@@ -170,8 +170,8 @@ Function FormItems_Header_CallChainHandler(Object, Form, ActionHandler, AddInfo,
 	If Upper(ActionHandler) = Upper("DateOnChange") Then 
 		Form.DateOnChange(P1, AddInfo);
 		Return True;
-	ElsIf Upper(ActionHandler) = Upper("PlaningDateOnChange") Then
-		Form.PlaningDateOnChange(P1, AddInfo);
+	ElsIf Upper(ActionHandler) = Upper("PlaningPeriodOnChange") Then
+		Form.PlaningPeriodOnChange(P1, AddInfo);
 		Return True;
 	ElsIf Upper(ActionHandler) = Upper("CompanyOnChange") Then
 		Form.CompanyOnChange(P1, AddInfo);

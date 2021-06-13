@@ -60,26 +60,6 @@ EndProcedure
 
 #EndRegion
 
-Function GetPartnerByLegalName(LegalName, Partner) Export
-	If Not LegalName.IsEmpty() Then
-		ArrayOfFilters = New Array();
-		ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
-		If ValueIsFilled(Partner) Then
-			ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Ref", Partner, ComparisonType.Equal));
-		EndIf;
-		AdditionalParameters = New Structure();
-		If ValueIsFilled(LegalName) Then
-			AdditionalParameters.Insert("Company", LegalName);
-			AdditionalParameters.Insert("FilterPartnersByCompanies", True);
-		EndIf;
-		Parameters = New Structure("CustomSearchFilter, AdditionalParameters",
-				DocumentsServer.SerializeArrayOfFilters(ArrayOfFilters),
-				DocumentsServer.SerializeArrayOfFilters(AdditionalParameters));
-		Return Catalogs.Partners.GetDefaultChoiceRef(Parameters);
-	EndIf;
-	Return Undefined;
-EndFunction
-
 Function IsBasisDocumentReadOnly(ArrayOfAgreements) Export
 	For Each ItemOfAgreements In ArrayOfAgreements Do
 		ItemOfAgreements.ReadOnly = 

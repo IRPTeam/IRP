@@ -78,15 +78,50 @@ Scenario: _041158 preparation (Purchase order closing)
 		When Create document PurchaseInvoice objects (movements, purchase order closing)
 		And I execute 1C:Enterprise script at server
 				| "Documents.PurchaseInvoice.FindByNumber(37).GetObject().Write(DocumentWriteMode.Posting);" |
+		And I close all client application windows
 	* Load Purchase order closing document
-		When Create document PurchaseOrderClosing objects (check movements)
-		And I execute 1C:Enterprise script at server
- 			| "Documents.PurchaseOrderClosing.FindByNumber(2).GetObject().Write(DocumentWriteMode.Posting);" |
-		Given I open hyperlink "e1cib/list/Document.PurchaseOrderClosing"
+		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And I go to line in "List" table
 			| 'Number' |
-			| '2'      |
-		And in the table "List" I click the button named "ListContextMenuPost"
+			| '37'      |
+		And I click the button named "FormDocumentPurchaseOrderClosingGeneratePurchaseOrderClosing"
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' |
+			| 'Shirt' | '38/Black' |
+		And I select current line in "ItemList" table
+		And I click choice button of "Cancel reason" attribute in "ItemList" table
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' |
+			| 'Dress' | 'XS/Blue'  |
+		And I select current line in "ItemList" table
+		And I click choice button of "Cancel reason" attribute in "ItemList" table
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| 'Item'    | 'Item key' |
+			| 'Service' | 'Rent'     |
+		And I select current line in "ItemList" table
+		And I click choice button of "Cancel reason" attribute in "ItemList" table
+		And I select current line in "List" table		
+		* Post document
+			And I click the button named "FormPost"
+			And I delete "$$NumberPurchaseOrderClosing37$$" variable
+			And I delete "$$PurchaseOrderClosing37$$" variable
+			And I delete "$$DatePurchaseOrderClosing37$$" variable
+			And I save the value of "Number" field as "$$NumberPurchaseOrderClosing37$$"
+			And I save the window as "$$PurchaseOrderClosing37$$"
+			And I save the value of the field named "Date" as  "$$DatePurchaseOrderClosing37$$"
+			And I click the button named "FormPostAndClose"						
+		// When Create document PurchaseOrderClosing objects (check movements)
+		// And I execute 1C:Enterprise script at server
+ 		// 	| "Documents.PurchaseOrderClosing.FindByNumber(2).GetObject().Write(DocumentWriteMode.Posting);" |
+		// Given I open hyperlink "e1cib/list/Document.PurchaseOrderClosing"
+		// And I go to line in "List" table
+		// 	| 'Number' |
+		// 	| '2'      |
+		// And in the table "List" I click the button named "ListContextMenuPost"
 		And I close all client application windows
 		
 		
@@ -99,29 +134,29 @@ Scenario: _041159 check Purchase order closing movements by the Register  "Regis
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrderClosing"
 		And I go to line in "List" table
 			| 'Number'  |
-			| '2' |
+			| '$$NumberPurchaseOrderClosing37$$' |
 	* Check movements by the Register  "R2010 Purchase orders" 
 		And I click "Registrations report" button
 		And I select "R1010 Purchase orders" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Purchase order closing 2 dated 09.03.2021 15:41:08' | ''                    | ''          | ''          | ''           | ''             | ''                             | ''         | ''                                            | ''         | ''                                     | ''                     |
-			| 'Document registrations records'                     | ''                    | ''          | ''          | ''           | ''             | ''                             | ''         | ''                                            | ''         | ''                                     | ''                     |
-			| 'Register  "R1010 Purchase orders"'                  | ''                    | ''          | ''          | ''           | ''             | ''                             | ''         | ''                                            | ''         | ''                                     | ''                     |
-			| ''                                                   | 'Period'              | 'Resources' | ''          | ''           | 'Dimensions'   | ''                             | ''         | ''                                            | ''         | ''                                     | 'Attributes'           |
-			| ''                                                   | ''                    | 'Quantity'  | 'Amount'    | 'Net amount' | 'Company'      | 'Multi currency movement type' | 'Currency' | 'Order'                                       | 'Item key' | 'Row key'                              | 'Deferred calculation' |
-			| ''                                                   | '09.03.2021 15:41:08' | '-64'       | '-7 680'    | '-6 508,47'  | 'Main Company' | 'Local currency'               | 'TRY'      | 'Purchase order 37 dated 09.03.2021 14:29:00' | 'XS/Blue'  | '0e65d648-bd28-47a2-84dc-e260219c1395' | 'No'                   |
-			| ''                                                   | '09.03.2021 15:41:08' | '-64'       | '-7 680'    | '-6 508,47'  | 'Main Company' | 'TRY'                          | 'TRY'      | 'Purchase order 37 dated 09.03.2021 14:29:00' | 'XS/Blue'  | '0e65d648-bd28-47a2-84dc-e260219c1395' | 'No'                   |
-			| ''                                                   | '09.03.2021 15:41:08' | '-64'       | '-7 680'    | '-6 508,47'  | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Purchase order 37 dated 09.03.2021 14:29:00' | 'XS/Blue'  | '0e65d648-bd28-47a2-84dc-e260219c1395' | 'No'                   |
-			| ''                                                   | '09.03.2021 15:41:08' | '-64'       | '-1 314,82' | '-1 114,25'  | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Purchase order 37 dated 09.03.2021 14:29:00' | 'XS/Blue'  | '0e65d648-bd28-47a2-84dc-e260219c1395' | 'No'                   |
-			| ''                                                   | '09.03.2021 15:41:08' | '-1'        | '-100'      | '-84,75'     | 'Main Company' | 'Local currency'               | 'TRY'      | 'Purchase order 37 dated 09.03.2021 14:29:00' | 'Rent'     | 'da5e404f-fed0-41c5-81dc-b8eadd89e699' | 'No'                   |
-			| ''                                                   | '09.03.2021 15:41:08' | '-1'        | '-100'      | '-84,75'     | 'Main Company' | 'TRY'                          | 'TRY'      | 'Purchase order 37 dated 09.03.2021 14:29:00' | 'Rent'     | 'da5e404f-fed0-41c5-81dc-b8eadd89e699' | 'No'                   |
-			| ''                                                   | '09.03.2021 15:41:08' | '-1'        | '-100'      | '-84,75'     | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Purchase order 37 dated 09.03.2021 14:29:00' | 'Rent'     | 'da5e404f-fed0-41c5-81dc-b8eadd89e699' | 'No'                   |
-			| ''                                                   | '09.03.2021 15:41:08' | '-1'        | '-17,12'    | '-14,51'     | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Purchase order 37 dated 09.03.2021 14:29:00' | 'Rent'     | 'da5e404f-fed0-41c5-81dc-b8eadd89e699' | 'No'                   |
-			| ''                                                   | '09.03.2021 15:41:08' | '1'         | '25,68'     | '25,68'      | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Purchase order 37 dated 09.03.2021 14:29:00' | '38/Black' | 'b5d168e5-e60d-44c9-9168-b13a2695077f' | 'No'                   |
-			| ''                                                   | '09.03.2021 15:41:08' | '1'         | '150'       | '150'        | 'Main Company' | 'Local currency'               | 'TRY'      | 'Purchase order 37 dated 09.03.2021 14:29:00' | '38/Black' | 'b5d168e5-e60d-44c9-9168-b13a2695077f' | 'No'                   |
-			| ''                                                   | '09.03.2021 15:41:08' | '1'         | '150'       | '150'        | 'Main Company' | 'TRY'                          | 'TRY'      | 'Purchase order 37 dated 09.03.2021 14:29:00' | '38/Black' | 'b5d168e5-e60d-44c9-9168-b13a2695077f' | 'No'                   |
-			| ''                                                   | '09.03.2021 15:41:08' | '1'         | '150'       | '150'        | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Purchase order 37 dated 09.03.2021 14:29:00' | '38/Black' | 'b5d168e5-e60d-44c9-9168-b13a2695077f' | 'No'                   |
+			| '$$PurchaseOrderClosing37$$'        | ''                               | ''          | ''          | ''           | ''             | ''                             | ''         | ''                                            | ''         | ''                                     | ''                     |
+			| 'Document registrations records'    | ''                               | ''          | ''          | ''           | ''             | ''                             | ''         | ''                                            | ''         | ''                                     | ''                     |
+			| 'Register  "R1010 Purchase orders"' | ''                               | ''          | ''          | ''           | ''             | ''                             | ''         | ''                                            | ''         | ''                                     | ''                     |
+			| ''                                  | 'Period'                         | 'Resources' | ''          | ''           | 'Dimensions'   | ''                             | ''         | ''                                            | ''         | ''                                     | 'Attributes'           |
+			| ''                                  | ''                               | 'Quantity'  | 'Amount'    | 'Net amount' | 'Company'      | 'Multi currency movement type' | 'Currency' | 'Order'                                       | 'Item key' | 'Row key'                              | 'Deferred calculation' |
+			| ''                                  | '$$DatePurchaseOrderClosing37$$' | '-64'       | '-7 680'    | '-6 508,47'  | 'Main Company' | 'Local currency'               | 'TRY'      | 'Purchase order 37 dated 09.03.2021 14:29:00' | 'XS/Blue'  | '0e65d648-bd28-47a2-84dc-e260219c1395' | 'No'                   |
+			| ''                                  | '$$DatePurchaseOrderClosing37$$' | '-64'       | '-7 680'    | '-6 508,47'  | 'Main Company' | 'TRY'                          | 'TRY'      | 'Purchase order 37 dated 09.03.2021 14:29:00' | 'XS/Blue'  | '0e65d648-bd28-47a2-84dc-e260219c1395' | 'No'                   |
+			| ''                                  | '$$DatePurchaseOrderClosing37$$' | '-64'       | '-7 680'    | '-6 508,47'  | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Purchase order 37 dated 09.03.2021 14:29:00' | 'XS/Blue'  | '0e65d648-bd28-47a2-84dc-e260219c1395' | 'No'                   |
+			| ''                                  | '$$DatePurchaseOrderClosing37$$' | '-64'       | '-1 314,82' | '-1 114,25'  | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Purchase order 37 dated 09.03.2021 14:29:00' | 'XS/Blue'  | '0e65d648-bd28-47a2-84dc-e260219c1395' | 'No'                   |
+			| ''                                  | '$$DatePurchaseOrderClosing37$$' | '-1'        | '-100'      | '-84,75'     | 'Main Company' | 'Local currency'               | 'TRY'      | 'Purchase order 37 dated 09.03.2021 14:29:00' | 'Rent'     | 'da5e404f-fed0-41c5-81dc-b8eadd89e699' | 'No'                   |
+			| ''                                  | '$$DatePurchaseOrderClosing37$$' | '-1'        | '-100'      | '-84,75'     | 'Main Company' | 'TRY'                          | 'TRY'      | 'Purchase order 37 dated 09.03.2021 14:29:00' | 'Rent'     | 'da5e404f-fed0-41c5-81dc-b8eadd89e699' | 'No'                   |
+			| ''                                  | '$$DatePurchaseOrderClosing37$$' | '-1'        | '-100'      | '-84,75'     | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Purchase order 37 dated 09.03.2021 14:29:00' | 'Rent'     | 'da5e404f-fed0-41c5-81dc-b8eadd89e699' | 'No'                   |
+			| ''                                  | '$$DatePurchaseOrderClosing37$$' | '-1'        | '-17,12'    | '-14,51'     | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Purchase order 37 dated 09.03.2021 14:29:00' | 'Rent'     | 'da5e404f-fed0-41c5-81dc-b8eadd89e699' | 'No'                   |
+			| ''                                  | '$$DatePurchaseOrderClosing37$$' | '1'         | '25,68'     | '21,76'      | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Purchase order 37 dated 09.03.2021 14:29:00' | '38/Black' | 'b5d168e5-e60d-44c9-9168-b13a2695077f' | 'No'                   |
+			| ''                                  | '$$DatePurchaseOrderClosing37$$' | '1'         | '150'       | '127,12'     | 'Main Company' | 'Local currency'               | 'TRY'      | 'Purchase order 37 dated 09.03.2021 14:29:00' | '38/Black' | 'b5d168e5-e60d-44c9-9168-b13a2695077f' | 'No'                   |
+			| ''                                  | '$$DatePurchaseOrderClosing37$$' | '1'         | '150'       | '127,12'     | 'Main Company' | 'TRY'                          | 'TRY'      | 'Purchase order 37 dated 09.03.2021 14:29:00' | '38/Black' | 'b5d168e5-e60d-44c9-9168-b13a2695077f' | 'No'                   |
+			| ''                                  | '$$DatePurchaseOrderClosing37$$' | '1'         | '150'       | '127,12'     | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Purchase order 37 dated 09.03.2021 14:29:00' | '38/Black' | 'b5d168e5-e60d-44c9-9168-b13a2695077f' | 'No'                   |
 		
 		And I close all client application windows
 		
@@ -130,25 +165,25 @@ Scenario: _041160 check Purchase order closing movements by the Register  "R2014
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrderClosing"
 		And I go to line in "List" table
 			| 'Number'  |
-			| '2' |
+			| '$$NumberPurchaseOrderClosing37$$' |
 	* Check movements by the Register  "R2014 Canceled Purchase orders" 
 		And I click "Registrations report" button
 		And I select "R1014 Canceled Purchase orders" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Purchase order closing 2 dated 09.03.2021 15:41:08' | ''                    | ''          | ''         | ''           | ''             | ''                             | ''         | ''                                            | ''         | ''                                     | ''              | ''                     |
-			| 'Document registrations records'                     | ''                    | ''          | ''         | ''           | ''             | ''                             | ''         | ''                                            | ''         | ''                                     | ''              | ''                     |
-			| 'Register  "R1014 Canceled purchase orders"'         | ''                    | ''          | ''         | ''           | ''             | ''                             | ''         | ''                                            | ''         | ''                                     | ''              | ''                     |
-			| ''                                                   | 'Period'              | 'Resources' | ''         | ''           | 'Dimensions'   | ''                             | ''         | ''                                            | ''         | ''                                     | ''              | 'Attributes'           |
-			| ''                                                   | ''                    | 'Quantity'  | 'Amount'   | 'Net amount' | 'Company'      | 'Multi currency movement type' | 'Currency' | 'Order'                                       | 'Item key' | 'Row key'                              | 'Cancel reason' | 'Deferred calculation' |
-			| ''                                                   | '09.03.2021 15:41:08' | '1'         | '17,12'    | '14,51'      | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Purchase order 37 dated 09.03.2021 14:29:00' | 'Rent'     | 'da5e404f-fed0-41c5-81dc-b8eadd89e699' | 'not available' | 'No'                   |
-			| ''                                                   | '09.03.2021 15:41:08' | '1'         | '100'      | '84,75'      | 'Main Company' | 'Local currency'               | 'TRY'      | 'Purchase order 37 dated 09.03.2021 14:29:00' | 'Rent'     | 'da5e404f-fed0-41c5-81dc-b8eadd89e699' | 'not available' | 'No'                   |
-			| ''                                                   | '09.03.2021 15:41:08' | '1'         | '100'      | '84,75'      | 'Main Company' | 'TRY'                          | 'TRY'      | 'Purchase order 37 dated 09.03.2021 14:29:00' | 'Rent'     | 'da5e404f-fed0-41c5-81dc-b8eadd89e699' | 'not available' | 'No'                   |
-			| ''                                                   | '09.03.2021 15:41:08' | '1'         | '100'      | '84,75'      | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Purchase order 37 dated 09.03.2021 14:29:00' | 'Rent'     | 'da5e404f-fed0-41c5-81dc-b8eadd89e699' | 'not available' | 'No'                   |
-			| ''                                                   | '09.03.2021 15:41:08' | '64'        | '1 314,82' | '1 114,25'   | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Purchase order 37 dated 09.03.2021 14:29:00' | 'XS/Blue'  | '0e65d648-bd28-47a2-84dc-e260219c1395' | 'not available' | 'No'                   |
-			| ''                                                   | '09.03.2021 15:41:08' | '64'        | '7 680'    | '6 508,47'   | 'Main Company' | 'Local currency'               | 'TRY'      | 'Purchase order 37 dated 09.03.2021 14:29:00' | 'XS/Blue'  | '0e65d648-bd28-47a2-84dc-e260219c1395' | 'not available' | 'No'                   |
-			| ''                                                   | '09.03.2021 15:41:08' | '64'        | '7 680'    | '6 508,47'   | 'Main Company' | 'TRY'                          | 'TRY'      | 'Purchase order 37 dated 09.03.2021 14:29:00' | 'XS/Blue'  | '0e65d648-bd28-47a2-84dc-e260219c1395' | 'not available' | 'No'                   |
-			| ''                                                   | '09.03.2021 15:41:08' | '64'        | '7 680'    | '6 508,47'   | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Purchase order 37 dated 09.03.2021 14:29:00' | 'XS/Blue'  | '0e65d648-bd28-47a2-84dc-e260219c1395' | 'not available' | 'No'                   |	
+			| '$$PurchaseOrderClosing37$$'                 | ''                               | ''          | ''         | ''           | ''             | ''                             | ''         | ''                                            | ''         | ''                                     | ''              | ''                     |
+			| 'Document registrations records'             | ''                               | ''          | ''         | ''           | ''             | ''                             | ''         | ''                                            | ''         | ''                                     | ''              | ''                     |
+			| 'Register  "R1014 Canceled purchase orders"' | ''                               | ''          | ''         | ''           | ''             | ''                             | ''         | ''                                            | ''         | ''                                     | ''              | ''                     |
+			| ''                                           | 'Period'                         | 'Resources' | ''         | ''           | 'Dimensions'   | ''                             | ''         | ''                                            | ''         | ''                                     | ''              | 'Attributes'           |
+			| ''                                           | ''                               | 'Quantity'  | 'Amount'   | 'Net amount' | 'Company'      | 'Multi currency movement type' | 'Currency' | 'Order'                                       | 'Item key' | 'Row key'                              | 'Cancel reason' | 'Deferred calculation' |
+			| ''                                           | '$$DatePurchaseOrderClosing37$$' | '1'         | '17,12'    | '14,51'      | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Purchase order 37 dated 09.03.2021 14:29:00' | 'Rent'     | 'da5e404f-fed0-41c5-81dc-b8eadd89e699' | 'not available' | 'No'                   |
+			| ''                                           | '$$DatePurchaseOrderClosing37$$' | '1'         | '100'      | '84,75'      | 'Main Company' | 'Local currency'               | 'TRY'      | 'Purchase order 37 dated 09.03.2021 14:29:00' | 'Rent'     | 'da5e404f-fed0-41c5-81dc-b8eadd89e699' | 'not available' | 'No'                   |
+			| ''                                           | '$$DatePurchaseOrderClosing37$$' | '1'         | '100'      | '84,75'      | 'Main Company' | 'TRY'                          | 'TRY'      | 'Purchase order 37 dated 09.03.2021 14:29:00' | 'Rent'     | 'da5e404f-fed0-41c5-81dc-b8eadd89e699' | 'not available' | 'No'                   |
+			| ''                                           | '$$DatePurchaseOrderClosing37$$' | '1'         | '100'      | '84,75'      | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Purchase order 37 dated 09.03.2021 14:29:00' | 'Rent'     | 'da5e404f-fed0-41c5-81dc-b8eadd89e699' | 'not available' | 'No'                   |
+			| ''                                           | '$$DatePurchaseOrderClosing37$$' | '64'        | '1 314,82' | '1 114,25'   | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Purchase order 37 dated 09.03.2021 14:29:00' | 'XS/Blue'  | '0e65d648-bd28-47a2-84dc-e260219c1395' | 'not available' | 'No'                   |
+			| ''                                           | '$$DatePurchaseOrderClosing37$$' | '64'        | '7 680'    | '6 508,47'   | 'Main Company' | 'Local currency'               | 'TRY'      | 'Purchase order 37 dated 09.03.2021 14:29:00' | 'XS/Blue'  | '0e65d648-bd28-47a2-84dc-e260219c1395' | 'not available' | 'No'                   |
+			| ''                                           | '$$DatePurchaseOrderClosing37$$' | '64'        | '7 680'    | '6 508,47'   | 'Main Company' | 'TRY'                          | 'TRY'      | 'Purchase order 37 dated 09.03.2021 14:29:00' | 'XS/Blue'  | '0e65d648-bd28-47a2-84dc-e260219c1395' | 'not available' | 'No'                   |
+			| ''                                           | '$$DatePurchaseOrderClosing37$$' | '64'        | '7 680'    | '6 508,47'   | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Purchase order 37 dated 09.03.2021 14:29:00' | 'XS/Blue'  | '0e65d648-bd28-47a2-84dc-e260219c1395' | 'not available' | 'No'                   |
 		And I close all client application windows
 		
 // Scenario: _041161 check Purchase order closing movements by the Register  "R4013 Stock Reservation planning"
@@ -156,7 +191,7 @@ Scenario: _041160 check Purchase order closing movements by the Register  "R2014
 // 		Given I open hyperlink "e1cib/list/Document.PurchaseOrderClosing"
 // 		And I go to line in "List" table
 // 			| 'Number'  |
-// 			| '2' |
+// 			| '$$NumberPurchaseOrderClosing37$$' |
 // 	* Check movements by the Register  "R4013 Stock Reservation planning" 
 // 		And I click "Registrations report" button
 // 		And I select "R4013 Stock Reservation planning" exact value from "Register" drop-down list
@@ -168,25 +203,24 @@ Scenario: _041160 check Purchase order closing movements by the Register  "R2014
 			
 // 		And I close all client application windows
 		
-Scenario: _041162 check Purchase order closing movements by the Register  "R2011 Shipment of Purchase orders"
+Scenario: _041162 check Purchase order closing movements by the Register  "R1011 Receipt of purchase orders"
 	* Select Purchase order closing
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrderClosing"
 		And I go to line in "List" table
 			| 'Number'  |
-			| '2' |
+			| '$$NumberPurchaseOrderClosing37$$' |
 	* Check movements by the Register  "R2011 Shipment of Purchase orders" 
 		And I click "Registrations report" button
 		And I select "R1011 Receipt of purchase orders" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Purchase order closing 2 dated 09.03.2021 15:41:08' | ''            | ''                    | ''          | ''             | ''                                            | ''         |
-			| 'Document registrations records'                     | ''            | ''                    | ''          | ''             | ''                                            | ''         |
-			| 'Register  "R1011 Receipt of purchase orders"'       | ''            | ''                    | ''          | ''             | ''                                            | ''         |
-			| ''                                                   | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                                            | ''         |
-			| ''                                                   | ''            | ''                    | 'Quantity'  | 'Company'      | 'Order'                                       | 'Item key' |
-			| ''                                                   | 'Receipt'     | '09.03.2021 15:41:08' | '-64'       | 'Main Company' | 'Purchase order 37 dated 09.03.2021 14:29:00' | 'XS/Blue'  |
-			| ''                                                   | 'Receipt'     | '09.03.2021 15:41:08' | '1'         | 'Main Company' | 'Purchase order 37 dated 09.03.2021 14:29:00' | '38/Black' |
-
+			| '$$PurchaseOrderClosing37$$'                   | ''            | ''                               | ''          | ''             | ''                                            | ''         |
+			| 'Document registrations records'               | ''            | ''                               | ''          | ''             | ''                                            | ''         |
+			| 'Register  "R1011 Receipt of purchase orders"' | ''            | ''                               | ''          | ''             | ''                                            | ''         |
+			| ''                                             | 'Record type' | 'Period'                         | 'Resources' | 'Dimensions'   | ''                                            | ''         |
+			| ''                                             | ''            | ''                               | 'Quantity'  | 'Company'      | 'Order'                                       | 'Item key' |
+			| ''                                             | 'Receipt'     | '$$DatePurchaseOrderClosing37$$' | '-64'       | 'Main Company' | 'Purchase order 37 dated 09.03.2021 14:29:00' | 'XS/Blue'  |
+			| ''                                             | 'Receipt'     | '$$DatePurchaseOrderClosing37$$' | '1'         | 'Main Company' | 'Purchase order 37 dated 09.03.2021 14:29:00' | '38/Black' |
 		And I close all client application windows
 		
 		
@@ -197,7 +231,7 @@ Scenario: _041165 check Purchase order closing movements by the Register  "R2013
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrderClosing"
 		And I go to line in "List" table
 			| 'Number'  |
-			| '2' |
+			| '$$NumberPurchaseOrderClosing37$$' |
 	* Check movements by the Register  "R2013 Procurement of sales orders" 
 		And I click "Registrations report" button
 		And I select "R2013 Procurement of sales orders" exact value from "Register" drop-down list
@@ -211,7 +245,7 @@ Scenario: _041166 check Purchase order closing movements by the Register  ""R403
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrderClosing"
 		And I go to line in "List" table
 			| 'Number'  |
-			| '2' |
+			| '$$NumberPurchaseOrderClosing37$$' |
 	* Check movements by the Register  "R4033 Scheduled goods receipts" 
 		And I click "Registrations report" button
 		And I select "R4033 Scheduled goods receipts" exact value from "Register" drop-down list
@@ -225,19 +259,19 @@ Scenario: _041167 check Purchase order closing movements by the Register  "R1012
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrderClosing"
 		And I go to line in "List" table
 			| 'Number'  |
-			| '2' |
+			| '$$NumberPurchaseOrderClosing37$$' |
 	* Check movements by the Register  "R2012 Invoice closing of Purchase orders" 
 		And I click "Registrations report" button
 		And I select "R1012 Invoice closing of Purchase orders" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Purchase order closing 2 dated 09.03.2021 15:41:08'   | ''            | ''                    | ''          | ''       | ''           | ''             | ''                                            | ''         | ''         | ''                                     |
+			| '$$PurchaseOrderClosing37$$'   | ''            | ''                    | ''          | ''       | ''           | ''             | ''                                            | ''         | ''         | ''                                     |
 			| 'Document registrations records'                       | ''            | ''                    | ''          | ''       | ''           | ''             | ''                                            | ''         | ''         | ''                                     |
 			| 'Register  "R1012 Invoice closing of purchase orders"' | ''            | ''                    | ''          | ''       | ''           | ''             | ''                                            | ''         | ''         | ''                                     |
 			| ''                                                     | 'Record type' | 'Period'              | 'Resources' | ''       | ''           | 'Dimensions'   | ''                                            | ''         | ''         | ''                                     |
 			| ''                                                     | ''            | ''                    | 'Quantity'  | 'Amount' | 'Net amount' | 'Company'      | 'Order'                                       | 'Currency' | 'Item key' | 'Row key'                              |
-			| ''                                                     | 'Receipt'     | '09.03.2021 15:41:08' | '-64'       | '-7 680' | '-6 508,47'  | 'Main Company' | 'Purchase order 37 dated 09.03.2021 14:29:00' | 'TRY'      | 'XS/Blue'  | '0e65d648-bd28-47a2-84dc-e260219c1395' |
-			| ''                                                     | 'Receipt'     | '09.03.2021 15:41:08' | '1'         | '150,00' | '127,12'     | 'Main Company' | 'Purchase order 37 dated 09.03.2021 14:29:00' | 'TRY'      | '38/Black' | 'b5d168e5-e60d-44c9-9168-b13a2695077f' |
+			| ''                                                     | 'Receipt'     | '$$DatePurchaseOrderClosing37$$' | '-64'       | '-7 680' | '-6 508,47'  | 'Main Company' | 'Purchase order 37 dated 09.03.2021 14:29:00' | 'TRY'      | 'XS/Blue'  | '0e65d648-bd28-47a2-84dc-e260219c1395' |
+			| ''                                                     | 'Receipt'     | '$$DatePurchaseOrderClosing37$$' | '1'         | '150,00' | '127,12'     | 'Main Company' | 'Purchase order 37 dated 09.03.2021 14:29:00' | 'TRY'      | '38/Black' | 'b5d168e5-e60d-44c9-9168-b13a2695077f' |
 		And I close all client application windows
 
 
@@ -246,21 +280,21 @@ Scenario: _041169 Purchase order closing clear posting/mark for deletion
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrderClosing"
 		And I go to line in "List" table
 			| 'Number'  |
-			| '2' |
+			| '$$NumberPurchaseOrderClosing37$$' |
 	* Clear posting
 		And in the table "List" I click the button named "ListContextMenuUndoPosting"
 		Then user message window does not contain messages
 		And I click "Registrations report" button
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Purchase order closing 2 dated 09.03.2021 15:41:08' |
+			| '$$PurchaseOrderClosing37$$' |
 			| 'Document registrations records'                    |
 		And I close current window
 	* Post Purchase order closing
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrderClosing"
 		And I go to line in "List" table
 			| 'Number'  |
-			| '2' |
+			| '$$NumberPurchaseOrderClosing37$$' |
 		And in the table "List" I click the button named "ListContextMenuPost"		
 		Then user message window does not contain messages
 		And I click "Registrations report" button
@@ -275,7 +309,7 @@ Scenario: _041169 Purchase order closing clear posting/mark for deletion
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrderClosing"
 		And I go to line in "List" table
 			| 'Number'  |
-			| '2' |
+			| '$$NumberPurchaseOrderClosing37$$' |
 		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button
@@ -283,14 +317,14 @@ Scenario: _041169 Purchase order closing clear posting/mark for deletion
 		And I click "Registrations report" button
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Purchase order closing 2 dated 09.03.2021 15:41:08' |
+			| '$$PurchaseOrderClosing37$$' |
 			| 'Document registrations records'                    |
 		And I close current window
 	* Unmark for deletion and post document
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrderClosing"
 		And I go to line in "List" table
 			| 'Number'  |
-			| '2' |
+			| '$$NumberPurchaseOrderClosing37$$' |
 		And in the table "List" I click the button named "ListContextMenuSetDeletionMark"
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button				

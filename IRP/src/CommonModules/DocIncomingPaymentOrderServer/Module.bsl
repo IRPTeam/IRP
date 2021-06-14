@@ -3,6 +3,10 @@
 Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 	DocumentsServer.OnCreateAtServer(Object, Form, Cancel, StandardProcessing);
 	If Form.Parameters.Key.IsEmpty() Then
+		If ValueIsFilled(Object.Account) And ValueIsFilled(Object.Account.Currency)
+			And Not ValueIsFilled(Object.Currency) Then
+				Object.Currency = Object.Account.Currency;
+		EndIf;
 		SetGroupItemsList(Object, Form);
 		DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 	EndIf;
@@ -28,7 +32,7 @@ Procedure SetGroupItemsList(Object, Form)
 	AttributesArray.Add("Company");
 	AttributesArray.Add("Account");
 	AttributesArray.Add("Currency");
-	AttributesArray.Add("PlaningDate");
+	AttributesArray.Add("PlanningPeriod");
 	DocumentsServer.DeleteUnavailableTitleItemNames(AttributesArray);
 	For Each Atr In AttributesArray Do
 		Form.GroupItems.Add(Atr, ?(ValueIsFilled(Form.Items[Atr].Title),

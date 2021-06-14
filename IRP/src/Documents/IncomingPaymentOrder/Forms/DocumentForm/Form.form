@@ -627,7 +627,7 @@
           </extInfo>
         </items>
         <items xsi:type="form:FormField">
-          <name>PlaningDate</name>
+          <name>PlanningPeriod</name>
           <id>16</id>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -636,15 +636,15 @@
           </userVisible>
           <dataPath xsi:type="form:MultiLanguageDataPath">
             <paths xsi:type="form:DataPath">
-              <segments>Object.PlaningDate</segments>
+              <segments>Object.PlanningPeriod</segments>
             </paths>
           </dataPath>
           <handlers>
             <event>OnChange</event>
-            <name>PlaningDateOnChange</name>
+            <name>PlaningPeriodOnChange</name>
           </handlers>
           <extendedTooltip>
-            <name>PlaningDateExtendedTooltip</name>
+            <name>PlanningPeriodExtendedTooltip</name>
             <id>18</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -659,7 +659,7 @@
             </extInfo>
           </extendedTooltip>
           <contextMenu>
-            <name>PlaningDateContextMenu</name>
+            <name>PlanningPeriodContextMenu</name>
             <id>17</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -903,6 +903,10 @@
               <segments>Object.PaymentList.Partner</segments>
             </paths>
           </dataPath>
+          <handlers>
+            <event>OnChange</event>
+            <name>PaymentListPartnerOnChange</name>
+          </handlers>
           <extendedTooltip>
             <name>PaymentListPartnerExtendedTooltip</name>
             <id>49</id>
@@ -934,6 +938,14 @@
           <headerHorizontalAlign>Left</headerHorizontalAlign>
           <showInFooter>true</showInFooter>
           <extInfo xsi:type="form:InputFieldExtInfo">
+            <handlers>
+              <event>StartChoice</event>
+              <name>PaymentListPartnerStartChoice</name>
+            </handlers>
+            <handlers>
+              <event>EditTextChange</event>
+              <name>PaymentListPartnerEditTextChange</name>
+            </handlers>
             <autoMaxWidth>true</autoMaxWidth>
             <autoMaxHeight>true</autoMaxHeight>
             <wrap>true</wrap>
@@ -955,6 +967,10 @@
               <segments>Object.PaymentList.Payer</segments>
             </paths>
           </dataPath>
+          <handlers>
+            <event>OnChange</event>
+            <name>PaymentListPayerOnChange</name>
+          </handlers>
           <extendedTooltip>
             <name>PaymentListPayerExtendedTooltip</name>
             <id>52</id>
@@ -986,6 +1002,14 @@
           <headerHorizontalAlign>Left</headerHorizontalAlign>
           <showInFooter>true</showInFooter>
           <extInfo xsi:type="form:InputFieldExtInfo">
+            <handlers>
+              <event>StartChoice</event>
+              <name>PaymentListPayerStartChoice</name>
+            </handlers>
+            <handlers>
+              <event>EditTextChange</event>
+              <name>PaymentListPayerEditTextChange</name>
+            </handlers>
             <autoMaxWidth>true</autoMaxWidth>
             <autoMaxHeight>true</autoMaxHeight>
             <wrap>true</wrap>

@@ -111,7 +111,7 @@ Function PaymentList()
 	Return 
 		"SELECT
 		|	PaymentList.Ref.Date AS Date,
-		|	PaymentList.Ref.PlaningDate AS PlaningDate,
+		|	PaymentList.Ref.PlanningPeriod AS PlanningPeriod,
 		|	PaymentList.Ref.Company AS Company,
 		|	PaymentList.Ref.Currency AS Currency,
 		|	PaymentList.Basis,
@@ -152,7 +152,7 @@ EndFunction
 Function R3035T_CashPlanning()
 	Return
 		"SELECT
-		|	PaymentList.PlaningDate AS Period,
+		|	PaymentList.Date AS Period,
 		|	PaymentList.Company,
 		|	PaymentList.Ref AS BasisDocument,
 		|	PaymentList.Account,

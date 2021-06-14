@@ -82,6 +82,7 @@ Scenario: 950100 Basic role
 	When Create information register UserSettings records
 	When Create catalog SpecialOfferRules objects
 	When Create catalog SpecialOfferTypes objects
+	When Create catalog PlanningPeriods objects
 	When Create catalog SpecialOffers objects
 	When Create document SalesInvoice objects
 	When Create document SalesOrder objects

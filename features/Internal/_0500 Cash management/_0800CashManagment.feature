@@ -83,7 +83,11 @@ Scenario: _080001 create Incoming payment order
 		| Code | Description     |
 		| USD  | American dollar |
 	And I select current line in "List" table
-	And I input begin of the next month date in "Planning date" field
+	And I click Select button of "Planning period" field
+	And I go to line in "List" table
+		| 'Description'             |
+		| 'Begin of the next month' |
+	And I select current line in "List" table	
 	* Filling in tabular part
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
 		And I click choice button of "Partner" attribute in "PaymentList" table
@@ -307,9 +311,13 @@ Scenario: _080014 check Description in Outgoing payment order
 Scenario: _080015 check the display of the header of the collapsible group in Incoming payment order
 	Given I open hyperlink "e1cib/list/Document.IncomingPaymentOrder"
 	When check the display of the header of the collapsible group in planned incoming/outgoing documents
-	And I input current date in the field named "PlaningDate"
+	And I click Select button of "Planning period" field
+	And I go to line in "List" table
+		| 'Description'             |
+		| 'Begin of the next month' |
+	And I select current line in "List" table
 	And I move to the next attribute
-	Then the field named "DecorationGroupTitleUncollapsedLabel" value contains "Company: Main Company   Account: Cash desk №2   Currency: TRY   Planning date:" text
+	Then the field named "DecorationGroupTitleUncollapsedLabel" value contains "Company: Main Company   Account: Cash desk №2   Currency: TRY   Planning period: Begin of the next month" text
 	And I close all client application windows
 
 Scenario: _080016 check the display of the header of the collapsible group in Outgoing payment order

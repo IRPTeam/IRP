@@ -102,6 +102,88 @@ EndProcedure
 
 #EndRegion
 
+#Region Partner
+
+Procedure PaymentListPartnerOnChange(Object, Form, Item) Export
+	CurrentData = Form.Items.PaymentList.CurrentData;
+	
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+		
+	If ValueIsFilled(CurrentData.Partner) Then
+		CurrentData.Payer = DocumentsServer.GetLegalNameByPartner(CurrentData.Partner, CurrentData.Payer);
+	EndIf;
+EndProcedure
+
+Procedure PaymentListPartnerStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
+	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
+	
+	OpenSettings.ArrayOfFilters = New Array();
+	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", 
+																	True, DataCompositionComparisonType.NotEqual));
+	OpenSettings.FormParameters = New Structure();
+	If ValueIsFilled(Form.Items.PaymentList.CurrentData.Payer) Then
+		OpenSettings.FormParameters.Insert("Company", Form.Items.PaymentList.CurrentData.Payer);
+		OpenSettings.FormParameters.Insert("FilterPartnersByCompanies", True);
+	EndIf;
+	OpenSettings.FillingData = New Structure("Company", Form.Items.PaymentList.CurrentData.Payer);
+	DocumentsClient.PartnerStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
+EndProcedure
+
+Procedure PaymentListPartnerEditTextChange(Object, Form, Item, Text, StandardProcessing) Export
+	ArrayOfFilters = New Array();
+	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
+	AdditionalParameters = New Structure();
+	If ValueIsFilled(Form.Items.PaymentList.CurrentData.Payer) Then
+		AdditionalParameters.Insert("Company", Form.Items.PaymentList.CurrentData.Payer);
+		AdditionalParameters.Insert("FilterPartnersByCompanies", True);
+	EndIf;
+	DocumentsClient.PartnerEditTextChange(Object, Form, Item, Text, StandardProcessing, 
+				ArrayOfFilters, AdditionalParameters);
+EndProcedure
+
+#EndRegion
+
+#Region Payer
+
+Procedure PaymentListPayerOnChange(Object, Form, Item) Export
+	CurrentData = Form.Items.PaymentList.CurrentData;
+	If ValueIsFilled(CurrentData.Payer) Then
+		CurrentData.Partner = DocumentsServer.GetPartnerByLegalName(CurrentData.Payer, CurrentData.Partner);
+	EndIf;
+EndProcedure
+
+Procedure PaymentListPayerStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
+	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
+	
+	OpenSettings.ArrayOfFilters = New Array();
+	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", 
+																		True, DataCompositionComparisonType.NotEqual));
+	OpenSettings.FormParameters = New Structure();
+	If ValueIsFilled(Form.Items.PaymentList.CurrentData.Partner) Then
+		OpenSettings.FormParameters.Insert("Partner", Form.Items.PaymentList.CurrentData.Partner);
+		OpenSettings.FormParameters.Insert("FilterByPartnerHierarchy", True);
+	EndIf;
+	OpenSettings.FillingData = New Structure("Partner", Form.Items.PaymentList.CurrentData.Partner);
+	
+	DocumentsClient.CompanyStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
+EndProcedure
+
+Procedure PaymentListPayerEditTextChange(Object, Form, Item, Text, StandardProcessing) Export
+	ArrayOfFilters = New Array();
+	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
+	AdditionalParameters = New Structure();
+	If ValueIsFilled(Form.Items.PaymentList.CurrentData.Partner) Then
+		AdditionalParameters.Insert("Partner", Form.Items.PaymentList.CurrentData.Partner);
+		AdditionalParameters.Insert("FilterByPartnerHierarchy", True);
+	EndIf;
+	DocumentsClient.CompanyEditTextChange(Object, Form, Item, Text, StandardProcessing, 
+				ArrayOfFilters, AdditionalParameters);
+EndProcedure
+
+#EndRegion
+
 Procedure DateOnChange(Object, Form, Item) Export
 	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 EndProcedure
@@ -114,7 +196,7 @@ Procedure CurrencyOnChange(Object, Form, Item) Export
 	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 EndProcedure
 
-Procedure PlaningDateOnChange(Object, Form, Item) Export
+Procedure PlaningPeriodOnChange(Object, Form, Item) Export
 	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 EndProcedure
 

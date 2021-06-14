@@ -120,20 +120,16 @@
     <dataHistory>Use</dataHistory>
   </attributes>
   <attributes uuid="5fa5d43e-c985-4f09-9109-2feb9af12bdc">
-    <name>PlaningDate</name>
+    <name>PlanningPeriod</name>
     <synonym>
       <key>en</key>
-      <value>Planning date</value>
+      <value>Planning period</value>
     </synonym>
     <type>
-      <types>Date</types>
-      <dateQualifiers>
-        <dateFractions>Date</dateFractions>
-      </dateQualifiers>
+      <types>CatalogRef.PlanningPeriods</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
     <fillValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>

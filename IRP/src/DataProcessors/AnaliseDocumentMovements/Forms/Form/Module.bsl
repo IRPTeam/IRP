@@ -9,14 +9,12 @@ Procedure FillMovementsAtServer()
 	Object.Info.Clear();
 	For Each Document In Metadata.Documents Do
 		For Each Reg In Document.RegisterRecords Do
-			If Not ShowAllRegisters AND PostingServer.NotUseRegister(Reg.Name) Then
-				Continue;
+			If ShowAllRegisters Or PostingServer.UseRegister(Reg.Name) Then
+				NewRow = Object.Info.Add();
+				NewRow.Document = Document.Name;
+				NewRow.Register = Reg.Name;
+				NewRow.Recorder = True;
 			EndIf;
-			
-			NewRow = Object.Info.Add();
-			NewRow.Document = Document.Name;
-			NewRow.Register = Reg.Name;
-			NewRow.Recorder = True;
 		EndDo;
 	EndDo;
 	

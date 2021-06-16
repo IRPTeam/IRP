@@ -34,26 +34,6 @@ Procedure OnReadAtServer(Object, Form, CurrentObject) Export
 	DocumentsClientServer.ChangeTitleGroupTitle(CurrentObject, Form);
 EndProcedure
 
-Function GetPartnerByLegalName(LegalName, Partner) Export
-	If Not LegalName.IsEmpty() Then
-		ArrayOfFilters = New Array();
-		ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
-		If ValueIsFilled(Partner) Then
-			ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Ref", Partner, ComparisonType.Equal));
-		EndIf;
-		AdditionalParameters = New Structure();
-		If ValueIsFilled(LegalName) Then
-			AdditionalParameters.Insert("Company", LegalName);
-			AdditionalParameters.Insert("FilterPartnersByCompanies", True);
-		EndIf;
-		Parameters = New Structure("CustomSearchFilter, AdditionalParameters",
-				DocumentsServer.SerializeArrayOfFilters(ArrayOfFilters),
-				DocumentsServer.SerializeArrayOfFilters(AdditionalParameters));
-		Return Catalogs.Partners.GetDefaultChoiceRef(Parameters);
-	EndIf;
-	Return Undefined;
-EndFunction
-
 Procedure FillAttributesByType(TransactionType, ArrayAll, ArrayByType) Export
 	Documents.BankReceipt.FillAttributesByType(TransactionType, ArrayAll, ArrayByType);
 EndProcedure

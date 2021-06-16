@@ -34,11 +34,13 @@ Scenario: _080000 preparation (Incoming payment order and Outgoing payment order
 		When Create catalog Taxes objects	
 		When Create information register TaxSettings records
 		When Create catalog IntegrationSettings objects
+		When create catalog ExpenseAndRevenueTypes objects
 		When Create information register CurrencyRates records
 		When Create catalog CashAccounts objects
 		When Create catalog Companies objects (partners company)
 		When Create catalog Partners objects
 		When Create catalog Companies objects (partners company)
+		When Create catalog PlanningPeriods objects
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
@@ -48,7 +50,20 @@ Scenario: _080000 preparation (Incoming payment order and Outgoing payment order
 		When Create information register Taxes records (VAT)
 	* Tax settings
 		When filling in Tax settings for company
-	
+	* Create Planning period
+		Given I open hyperlink "e1cib/list/Catalog.PlanningPeriods"
+		And I click the button named "FormCreate"
+		And I input "Begin of the next month" text in "Description" field
+		And I input begin of the next month date in "Begin date" field
+		And I input begin of the next month date in "End date" field
+		And I click the button named "FormWriteAndClose"
+		And "List" table contains lines
+			| 'Description'             |
+			| 'Begin of the next month' |
+		And I close all client application windows
+
+		
+		
 
 Scenario: _080001 create Incoming payment order
 	Given I open hyperlink "e1cib/list/Document.IncomingPaymentOrder"
@@ -68,7 +83,11 @@ Scenario: _080001 create Incoming payment order
 		| Code | Description     |
 		| USD  | American dollar |
 	And I select current line in "List" table
-	And I input begin of the next month date in "Planning date" field
+	And I click Select button of "Planning period" field
+	And I go to line in "List" table
+		| 'Description'             |
+		| 'Begin of the next month' |
+	And I select current line in "List" table	
 	* Filling in tabular part
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
 		And I click choice button of "Partner" attribute in "PaymentList" table
@@ -158,20 +177,24 @@ Scenario: _080006 create Outgoing payment order
 	And I click the button named "FormCreate"
 	And I click Select button of "Company" field
 	And I go to line in "List" table
-		| Description  |
-		| Main Company |
+		| 'Description'  |
+		| 'Main Company' |
 	And I select current line in "List" table
 	And I click Select button of "Account" field
 	And I go to line in "List" table
-		| Description         |
-		| Bank account, TRY |
+		| 'Description'         |
+		| 'Bank account, TRY' |
 	And I select current line in "List" table
 	And I click Select button of "Currency" field
 	And I go to line in "List" table
-		| Code |
-		| TRY  |
+		| 'Code' |
+		| 'TRY'  |
 	And I select current line in "List" table
-	And I input begin of the next month date in "Planning date" field
+	And I click Select button of "Planning period" field
+	And I go to line in "List" table
+		| 'Description' |
+		| 'Begin of the next month'  |
+	And I select current line in "List" table
 	* Change status
 		And I select "Approved" exact value from "Status" drop-down list
 	* Filling in tabular part
@@ -288,17 +311,25 @@ Scenario: _080014 check Description in Outgoing payment order
 Scenario: _080015 check the display of the header of the collapsible group in Incoming payment order
 	Given I open hyperlink "e1cib/list/Document.IncomingPaymentOrder"
 	When check the display of the header of the collapsible group in planned incoming/outgoing documents
-	And I input current date in the field named "PlaningDate"
+	And I click Select button of "Planning period" field
+	And I go to line in "List" table
+		| 'Description'             |
+		| 'Begin of the next month' |
+	And I select current line in "List" table
 	And I move to the next attribute
-	Then the field named "DecorationGroupTitleUncollapsedLabel" value contains "Company: Main Company   Account: Cash desk №2   Currency: TRY   Planning date:" text
+	Then the field named "DecorationGroupTitleUncollapsedLabel" value contains "Company: Main Company   Account: Cash desk №2   Currency: TRY   Planning period: Begin of the next month" text
 	And I close all client application windows
 
 Scenario: _080016 check the display of the header of the collapsible group in Outgoing payment order
 	Given I open hyperlink "e1cib/list/Document.OutgoingPaymentOrder"
 	When check the display of the header of the collapsible group in planned incoming/outgoing documents
-	And I input current date in the field named "PlaningDate"
+	And I click Select button of "Planning period" field
+	And I go to line in "List" table
+		| 'Description' |
+		| 'First'       |
+	And I select current line in "List" table
 	And I move to the next attribute
-	Then the field named "DecorationGroupTitleUncollapsedLabel" value contains "Company: Main Company   Account: Cash desk №2   Currency: TRY   Planning date:" text
+	Then the field named "DecorationGroupTitleUncollapsedLabel" value contains "Company: Main Company   Account: Cash desk №2   Currency: TRY   Planning period: First" text
 	And I close all client application windows
 
 

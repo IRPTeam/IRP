@@ -139,22 +139,6 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		|	tmp.UseInternalSupplyRequest
 		|;
 		|
-//		|//[3]//////////////////////////////////////////////////////////////////////////////
-//		|SELECT
-//		|	tmp.Store,
-//		|	tmp.ItemKey,
-//		|	tmp.Order AS ReceiptBasis,
-//		|	tmp.Quantity,
-//		|	tmp.Period,
-//		|   tmp.RowKey
-//		|FROM
-//		|	tmp AS tmp
-//		|WHERE
-//		|	tmp.GoodsReceiptBeforePurchaseInvoice
-//		|	AND tmp.UseGoodsReceipt
-//		|	AND
-//		|	NOT tmp.IsService
-//		|;
 		|//[3]//////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.ItemKey,
@@ -226,7 +210,6 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	
 	Tables.OrderBalance_Receipt         = QueryResults[1].Unload();
 	Tables.OrderBalance_Expense         = QueryResults[2].Unload();
-//	Tables.GoodsInTransitIncoming       = QueryResults[3].Unload();
 	Tables.ReceiptOrders                = QueryResults[3].Unload();
 	Tables.GoodsReceiptSchedule_Receipt = QueryResults[4].Unload();
 	Tables.GoodsReceiptSchedule_Expense = QueryResults[5].Unload();
@@ -249,7 +232,6 @@ Procedure FillTables(Ref, AddInfo, Tables)
 	AccReg = Metadata.AccumulationRegisters;
 	Tables.Insert("OrderBalance_Expense"         , PostingServer.CreateTable(AccReg.OrderBalance));
 	Tables.Insert("OrderBalance_Receipt"         , PostingServer.CreateTable(AccReg.OrderBalance));
-//	Tables.Insert("GoodsInTransitIncoming"       , PostingServer.CreateTable(AccReg.GoodsInTransitIncoming));
 	Tables.Insert("ReceiptOrders"                , PostingServer.CreateTable(AccReg.ReceiptOrders));
 	Tables.Insert("GoodsReceiptSchedule_Receipt" , PostingServer.CreateTable(AccReg.GoodsReceiptSchedule));
 	Tables.Insert("GoodsReceiptSchedule_Expense" , PostingServer.CreateTable(AccReg.GoodsReceiptSchedule));
@@ -257,7 +239,6 @@ Procedure FillTables(Ref, AddInfo, Tables)
 	
 	Tables.Insert("OrderBalance_Exists_Receipt"   , PostingServer.CreateTable(AccReg.OrderBalance));
 	Tables.Insert("OrderBalance_Exists_Expense"   , PostingServer.CreateTable(AccReg.OrderBalance));
-//	Tables.Insert("GoodsInTransitIncoming_Exists" , PostingServer.CreateTable(AccReg.GoodsInTransitIncoming));
 	Tables.Insert("OrderProcurement_Exists"       , PostingServer.CreateTable(AccReg.OrderProcurement));
 	Tables.Insert("ReceiptOrders_Exists"          , PostingServer.CreateTable(AccReg.ReceiptOrders));
 	
@@ -266,9 +247,6 @@ Procedure FillTables(Ref, AddInfo, Tables)
 	
 	Tables.OrderBalance_Exists_Expense =
 	AccumulationRegisters.OrderBalance.GetExistsRecords(Ref, AccumulationRecordType.Expense, AddInfo);
-	
-//	Tables.GoodsInTransitIncoming_Exists =
-//	AccumulationRegisters.GoodsInTransitIncoming.GetExistsRecords(Ref, AccumulationRecordType.Receipt, AddInfo);
 	
 	Tables.OrderProcurement_Exists =
 	AccumulationRegisters.OrderProcurement.GetExistsRecords(Ref, AccumulationRecordType.Expense, AddInfo);
@@ -420,13 +398,6 @@ Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
 		Cancel = True;
 	EndIf;
 	
-//	If Not Cancel And Not AccReg.GoodsInTransitIncoming.CheckBalance(Ref, LineNumberAndRowKeyFromItemList,
-//	                                                                 Parameters.DocumentDataTables.GoodsInTransitIncoming,
-//	                                                                 Parameters.DocumentDataTables.GoodsInTransitIncoming_Exists,
-//	                                                                 AccumulationRecordType.Receipt, Unposting, AddInfo) Then
-//		Cancel = True;
-//	EndIf;
-	
 	If Not Cancel And Not AccReg.OrderProcurement.CheckBalance(Ref, LineNumberAndRowKeyFromItemList,
 	                                                           Parameters.DocumentDataTables.OrderProcurement,
 	                                                           Parameters.DocumentDataTables.OrderProcurement_Exists,
@@ -536,7 +507,11 @@ Function ItemList()
 	|	PurchaseOrderItems.PurchaseBasis REFS Document.SalesOrder
 	|	AND NOT PurchaseOrderItems.PurchaseBasis.REF IS NULL AS UseSalesOrder,
 	|	PurchaseOrderItems.Ref.Currency AS Currency,
-	|	&StatusInfoPosting
+	|	&StatusInfoPosting,
+	|	PurchaseOrderItems.Ref.MovementType AS MovementType,
+	|	PurchaseOrderItems.Ref.Agreement AS Agreement,
+	|	PurchaseOrderItems.Ref.Partner AS Partner,
+	|	PurchaseOrderItems.Ref.LegalName
 	|INTO ItemList
 	|FROM
 	|	Document.PurchaseOrder.ItemList AS PurchaseOrderItems

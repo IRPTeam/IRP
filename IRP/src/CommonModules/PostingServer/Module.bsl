@@ -1475,8 +1475,8 @@ EndFunction
 
 #Region NewRegistersPosting
 
-Function NotUseRegister(Name) Export
-	Return NOT Mid(Name, 7, 1) = "_";
+Function UseRegister(Name) Export
+	Return Mid(Name, 7, 1) = "_" OR Mid(Name, 4, 1) = "_";
 EndFunction	
 
 Procedure ExecuteQuery(Ref, QueryArray, Parameters) Export
@@ -1521,30 +1521,23 @@ Procedure FillPostingTables(Tables, Ref, QueryArray, Parameters) Export
 EndProcedure
 
 Procedure SetPostingDataTables(PostingDataTables, Parameters, UseOldRegisters = False) Export
-
 	For Each Table In Parameters.DocumentDataTables Do
-		If Not UseOldRegisters AND NotUseRegister(Table.Key) Then
-			Continue;
+		If UseOldRegisters Or UseRegister(Table.Key) Then
+			Settings = New Structure("RegisterName", Table.Key);
+			Settings.Insert("RecordSet", Table.Value);
+			Settings.Insert("WriteInTransaction", True);
+			PostingDataTables.Insert(Parameters.Object.RegisterRecords[Table.Key], Settings);
 		EndIf;
-		Settings = New Structure("RegisterName", Table.Key);
-		Settings.Insert("RecordSet", Table.Value);
-		Settings.Insert("WriteInTransaction", True);
-		PostingDataTables.Insert(Parameters.Object.RegisterRecords[Table.Key], Settings);
 	EndDo;
-
 EndProcedure
 
 Procedure GetLockDataSource(DataMapWithLockFields, DocumentDataTables, UseOldRegisters = False) Export
-
 	For Each Register In DocumentDataTables Do
-		If Not UseOldRegisters AND NotUseRegister(Register.Key) Then
-			Continue;
+		If UseOldRegisters Or UseRegister(Register.Key) Then
+			LockData = AccumulationRegisters[Register.Key].GetLockFields(DocumentDataTables[Register.Key]);
+			DataMapWithLockFields.Insert(LockData.RegisterName, LockData.LockInfo);
 		EndIf;
-		LockData = AccumulationRegisters[Register.Key].GetLockFields(DocumentDataTables[Register.Key]);
-		DataMapWithLockFields.Insert(LockData.RegisterName, LockData.LockInfo);
-	
 	EndDo;
-	
 EndProcedure
 
 Procedure SetLockDataSource(DataMap, RegisterManager, Table) Export
@@ -1554,10 +1547,9 @@ EndProcedure
 
 Procedure SetRegisters(Tables, DocumentRef, UseOldRegisters = False) Export
 	For Each Register In DocumentRef.Metadata().RegisterRecords Do
-		If Not UseOldRegisters AND NotUseRegister(Register.Name) Then
-			Continue;
+		If UseOldRegisters Or UseRegister(Register.Name) Then
+			Tables.Insert(Register.Name, PostingServer.CreateTable(Register));
 		EndIf;
-		Tables.Insert(Register.Name, PostingServer.CreateTable(Register));
 	EndDo;
 EndProcedure
 

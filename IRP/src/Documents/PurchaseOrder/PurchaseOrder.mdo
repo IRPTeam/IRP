@@ -251,6 +251,21 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="c751f177-8027-4f08-b69c-9e6eac3b84dd">
+    <name>MovementType</name>
+    <synonym>
+      <key>en</key>
+      <value>Movement type</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.ExpenseAndRevenueTypes</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <forms uuid="8f595946-9ad8-46e0-bc8c-85fe1da258a5">
     <name>DocumentForm</name>
     <synonym>

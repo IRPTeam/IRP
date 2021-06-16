@@ -141,6 +141,21 @@ Scenario: Open object form "Companies"
 		Then I raise "Failed to open catalog form Companies" exception
 	And I close current window
 
+	
+Scenario: Open list form "PlanningPeriods" 
+	And I close all client application windows
+	Given I open "PlanningPeriods" catalog default form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form PlanningPeriods" exception
+	And I close current window
+
+Scenario: Open object form "PlanningPeriods"
+	And I close all client application windows
+	Given I open "PlanningPeriods" reference main form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form PlanningPeriods" exception
+	And I close current window
+
 
 	
 Scenario: Open list form "ConfigurationMetadata" 

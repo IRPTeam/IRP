@@ -128,9 +128,47 @@ Procedure StatusOnChange(Item, AddInfo = Undefined) Export
 EndProcedure
 
 &AtClient
-Procedure PlaningDateOnChange(Item, AddInfo = Undefined) Export
-	DocIncomingPaymentOrderClient.PlaningDateOnChange(Object, ThisObject, Item);
+Procedure PlaningPeriodOnChange(Item, AddInfo = Undefined) Export
+	DocIncomingPaymentOrderClient.PlaningPeriodOnChange(Object, ThisObject, Item);
 EndProcedure
+
+#Region Partner
+
+&AtClient
+Procedure PaymentListPartnerOnChange(Item, AddInfo = Undefined) Export
+	DocIncomingPaymentOrderClient.PaymentListPartnerOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure PaymentListPartnerStartChoice(Item, ChoiceData, StandardProcessing)
+	DocIncomingPaymentOrderClient.PaymentListPartnerStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure PaymentListPartnerEditTextChange(Item, Text, StandardProcessing)
+	DocIncomingPaymentOrderClient.PaymentListPartnerEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region Payee
+
+&AtClient
+Procedure PaymentListPayerOnChange(Item, AddInfo = Undefined) Export
+	DocIncomingPaymentOrderClient.PaymentListPayerOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure PaymentListPayerStartChoice(Item, ChoiceData, StandardProcessing)
+	DocIncomingPaymentOrderClient.PaymentListPayerStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure PaymentListPayerEditTextChange(Item, Text, StandardProcessing)
+	DocIncomingPaymentOrderClient.PaymentListPayerEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
 
 #Region Currencies
 
@@ -162,7 +200,7 @@ Function Currencies_GetDeclaration(Object, Form)
 	ArrayOfItems_Header.Add(Form.Items.Company);
 	ArrayOfItems_Header.Add(Form.Items.Account);
 	ArrayOfItems_Header.Add(Form.Items.Currency);
-	ArrayOfItems_Header.Add(Form.Items.PlaningDate);
+	ArrayOfItems_Header.Add(Form.Items.PlanningPeriod);
 	ArrayOfItems_Header.Add(Form.Items.Date);
 	
 	LibraryLoader.AddActionHandler(Declaration, "Currencies_HeaderOnChange", "OnChange", ArrayOfItems_Header);

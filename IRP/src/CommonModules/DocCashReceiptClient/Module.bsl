@@ -230,7 +230,7 @@ Procedure PaymentListBeforeAddRow(Object, Form, Item, Cancel, Clone, Parent, IsF
 	CurrentData = Form.Items.PaymentList.CurrentData;
 	If CurrentData <> Undefined
 		And Not Saas.SeparationUsed() Then
-		CurrentData.Partner = DocCashReceiptServer.GetPartnerByLegalName(CurrentData.Payer, CurrentData.Partner);
+		CurrentData.Partner = DocumentsServer.GetPartnerByLegalName(CurrentData.Payer, CurrentData.Partner);
 		PaymentListPartnerOnChange(Object, Form, Item);
 	EndIf;
 EndProcedure
@@ -519,7 +519,7 @@ EndProcedure
 Procedure PaymentListPayerOnChange(Object, Form, Item) Export
 	CurrentData = Form.Items.PaymentList.CurrentData;
 	If ValueIsFilled(CurrentData.Payer) Then
-		CurrentData.Partner = DocCashReceiptServer.GetPartnerByLegalName(CurrentData.Payer, CurrentData.Partner);
+		CurrentData.Partner = DocumentsServer.GetPartnerByLegalName(CurrentData.Payer, CurrentData.Partner);
 	EndIf;
 EndProcedure
 

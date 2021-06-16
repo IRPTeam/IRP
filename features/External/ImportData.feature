@@ -1721,3 +1721,10 @@ Scenario: Create catalog PaymentSchedules objects
 		| 'Ref'                                                                      | 'CalculationType'                          | 'ProportionOfPayment' | 'DuePeriod' |
 		| 'e1cib/data/Catalog.PaymentSchedules?ref=b768fb7fcb8cb62f11ebba1d08549f51' | 'Enum.CalculationTypes.PostShipmentCredit' | '100'                 | '7'         |
 		| 'e1cib/data/Catalog.PaymentSchedules?ref=b768fb7fcb8cb62f11ebba1d08549f52' | 'Enum.CalculationTypes.PostShipmentCredit' | '100'                 | '14'        |
+
+Scenario: Create catalog PlanningPeriods objects
+
+	And I check or create catalog "PlanningPeriods" objects:
+		| 'Ref'                                                                     | 'DeletionMark' | 'Code'      | 'Description'             | 'BeginDate'           | 'EndDate'             |
+		| 'e1cib/data/Catalog.PlanningPeriods?ref=b76bafe8d8921be311ebccdc0f9de002' | 'False'        | '000000002' | 'First'                   | '01.08.2021 00:00:00' | '10.08.2021 00:00:00' |
+		| 'e1cib/data/Catalog.PlanningPeriods?ref=b76bafe8d8921be311ebccdc0f9de003' | 'False'        | '000000003' | 'Second'                  | '11.08.2021 00:00:00' | '20.08.2021 00:00:00' |

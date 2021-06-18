@@ -635,6 +635,7 @@ Function R3035T_CashPlanning()
 		|	PaymentList.Period,
 		|	PaymentList.Company,
 		|	PaymentList.PlaningTransactionBasis AS BasisDocument,
+		|	PaymentList.PlaningTransactionBasis.PlanningPeriod AS PlanningPeriod,
 		|	PaymentList.Account,
 		|	PaymentList.Currency,
 		|	VALUE(Enum.CashFlowDirections.Outgoing) AS CashFlowDirection,

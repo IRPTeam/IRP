@@ -94,8 +94,6 @@ EndProcedure
 Procedure DateOnChange(Object, Form, Item) Export
 	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 	CommonFunctionsClientServer.SetFormItemModifiedByUser(Form, Item.Name);
-	SetSendDate(Object, Form);
-	SetReceiveDate(Object, Form);
 EndProcedure
 
 #EndRegion
@@ -125,34 +123,6 @@ EndProcedure
 
 Procedure DecorationGroupTitleUncollapsedLabelClick(Object, Form, Item) Export
 	DocumentsClientServer.ChangeTitleCollapse(Object, Form, False);
-EndProcedure
-
-#EndRegion
-
-#Region ItemSendDate
-
-Procedure SendDateOnChange(Object, Form, Item) Export
-	CommonFunctionsClientServer.SetFormItemModifiedByUser(Form, Item.Name);
-EndProcedure
-
-Procedure SetSendDate(Object, Form)
-	If Not CommonFunctionsClientServer.IsFormItemModifiedByUser(Form, "SendDate") Then
-		Object.SendDate = Object.Date;		
-	EndIf;
-EndProcedure
-
-#EndRegion
-
-#Region ItemReceiveDate
-
-Procedure ReceiveDateOnChange(Object, Form, Item) Export
-	CommonFunctionsClientServer.SetFormItemModifiedByUser(Form, Item.Name);
-EndProcedure
-
-Procedure SetReceiveDate(Object, Form)
-	If Not CommonFunctionsClientServer.IsFormItemModifiedByUser(Form, "ReceiveDate") Then
-		Object.ReceiveDate = Object.Date;
-	EndIf;
 EndProcedure
 
 #EndRegion
@@ -301,8 +271,6 @@ EndProcedure
 #Region CheckFillData
 
 Procedure CheckFillData(Object, Form)
-	SetSendDate(Object, Form);
-	SetReceiveDate(Object, Form);
 	SetSenderCurrency(Object, Form);
 	SetReceiverCurrency(Object, Form);
 EndProcedure

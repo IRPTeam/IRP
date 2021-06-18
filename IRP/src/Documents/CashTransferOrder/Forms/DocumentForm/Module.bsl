@@ -75,16 +75,6 @@ Procedure DateOnChange(Item, AddInfo = Undefined) Export
 EndProcedure
 
 &AtClient
-Procedure SendDateOnChange(Item)
-	DocCashTransferOrderClient.SendDateOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure ReceiveDateOnChange(Item)
-	DocCashTransferOrderClient.ReceiveDateOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
 Procedure ReceiveAmountOnChange(Item, AddInfo = Undefined) Export
 	DocCashTransferOrderClient.ReceiveAmountOnChange(Object, ThisObject, Item);
 EndProcedure

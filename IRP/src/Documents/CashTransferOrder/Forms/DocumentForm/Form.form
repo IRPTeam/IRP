@@ -779,7 +779,7 @@
             </extInfo>
           </items>
           <items xsi:type="form:FormField">
-            <name>SendDate</name>
+            <name>SendPeriod</name>
             <id>25</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -788,15 +788,11 @@
             </userVisible>
             <dataPath xsi:type="form:MultiLanguageDataPath">
               <paths xsi:type="form:DataPath">
-                <segments>Object.SendDate</segments>
+                <segments>Object.SendPeriod</segments>
               </paths>
             </dataPath>
-            <handlers>
-              <event>OnChange</event>
-              <name>SendDateOnChange</name>
-            </handlers>
             <extendedTooltip>
-              <name>SendDateExtendedTooltip</name>
+              <name>SendPeriodExtendedTooltip</name>
               <id>27</id>
               <visible>true</visible>
               <enabled>true</enabled>
@@ -811,7 +807,7 @@
               </extInfo>
             </extendedTooltip>
             <contextMenu>
-              <name>SendDateContextMenu</name>
+              <name>SendPeriodContextMenu</name>
               <id>26</id>
               <visible>true</visible>
               <enabled>true</enabled>
@@ -1160,7 +1156,7 @@
             </extInfo>
           </items>
           <items xsi:type="form:FormField">
-            <name>ReceiveDate</name>
+            <name>ReceivePeriod</name>
             <id>28</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -1169,15 +1165,11 @@
             </userVisible>
             <dataPath xsi:type="form:MultiLanguageDataPath">
               <paths xsi:type="form:DataPath">
-                <segments>Object.ReceiveDate</segments>
+                <segments>Object.ReceivePeriod</segments>
               </paths>
             </dataPath>
-            <handlers>
-              <event>OnChange</event>
-              <name>ReceiveDateOnChange</name>
-            </handlers>
             <extendedTooltip>
-              <name>ReceiveDateExtendedTooltip</name>
+              <name>ReceivePeriodExtendedTooltip</name>
               <id>30</id>
               <visible>true</visible>
               <enabled>true</enabled>
@@ -1192,7 +1184,7 @@
               </extInfo>
             </extendedTooltip>
             <contextMenu>
-              <name>ReceiveDateContextMenu</name>
+              <name>ReceivePeriodContextMenu</name>
               <id>29</id>
               <visible>true</visible>
               <enabled>true</enabled>

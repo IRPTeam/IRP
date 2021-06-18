@@ -136,16 +136,13 @@
     <dataHistory>Use</dataHistory>
   </attributes>
   <attributes uuid="ea969443-4557-463c-a165-a9b4408f2f5a">
-    <name>ReceiveDate</name>
+    <name>ReceivePeriod</name>
     <synonym>
       <key>en</key>
-      <value>Receive date</value>
+      <value>Receive period</value>
     </synonym>
     <type>
-      <types>Date</types>
-      <dateQualifiers>
-        <dateFractions>Date</dateFractions>
-      </dateQualifiers>
+      <types>CatalogRef.PlanningPeriods</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
@@ -219,16 +216,13 @@
     <dataHistory>Use</dataHistory>
   </attributes>
   <attributes uuid="e555c972-ac68-400b-b480-9c0f81edf4f1">
-    <name>SendDate</name>
+    <name>SendPeriod</name>
     <synonym>
       <key>en</key>
-      <value>Send date</value>
+      <value>Send period</value>
     </synonym>
     <type>
-      <types>Date</types>
-      <dateQualifiers>
-        <dateFractions>Date</dateFractions>
-      </dateQualifiers>
+      <types>CatalogRef.PlanningPeriods</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

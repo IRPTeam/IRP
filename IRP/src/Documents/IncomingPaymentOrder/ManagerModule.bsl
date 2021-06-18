@@ -153,6 +153,7 @@ Function R3035T_CashPlanning()
 	Return
 		"SELECT
 		|	PaymentList.Date AS Period,
+		|	PaymentList.PlanningPeriod AS PlanningPeriod,
 		|	PaymentList.Company,
 		|	PaymentList.Ref AS BasisDocument,
 		|	PaymentList.Account,

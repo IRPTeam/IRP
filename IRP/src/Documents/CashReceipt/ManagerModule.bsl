@@ -602,16 +602,17 @@ Function R3035T_CashPlanning()
 		|	PaymentList.Period,
 		|	PaymentList.Company,
 		|	PaymentList.PlaningTransactionBasis AS BasisDocument,
+		|	PaymentList.PlaningTransactionBasis.PlanningPeriod AS PlanningPeriod,
 		|	PaymentList.CashAccount AS Account,
 		|	PaymentList.Currency,
 		|	VALUE(Enum.CashFlowDirections.Incoming) AS CashFlowDirection,
 		|	CASE
-		|		WHEN VALUETYPE(PaymentList.PlaningTransactionBasis) = TYPE(Document.OutgoingPaymentOrder)
+		|		WHEN VALUETYPE(PaymentList.PlaningTransactionBasis) = TYPE(Document.IncomingPaymentOrder)
 		|			THEN PaymentList.Partner
 		|		ELSE VALUE(Catalog.Partners.EmptyRef)
 		|	END AS Partner,
 		|	CASE
-		|		WHEN VALUETYPE(PaymentList.PlaningTransactionBasis) = TYPE(Document.OutgoingPaymentOrder)
+		|		WHEN VALUETYPE(PaymentList.PlaningTransactionBasis) = TYPE(Document.IncomingPaymentOrder)
 		|			THEN PaymentList.LegalName
 		|		ELSE VALUE(Catalog.Companies.EmptyRef)
 		|	END AS LegalName,

@@ -101,7 +101,8 @@ Function MoneySender()
 		|	CashTransferOrder.SendAmount AS Amount,
 		|	CashTransferOrder.SendCurrency AS Currency,
 		|	CashTransferOrder.SendUUID AS Key,
-		|	CashTransferOrder.SendDate AS Period,
+		|	CashTransferOrder.Date AS Period,
+		|	CashTransferOrder.SendPeriod AS SendPeriod,
 		|	CashTransferOrder.SendMovementType AS MovementType,
 		|	CashTransferOrder.CashAdvanceHolder
 		|INTO MoneySender
@@ -120,7 +121,8 @@ Function MoneyReceiver()
 		|	CashTransferOrder.ReceiveAmount AS Amount,
 		|	CashTransferOrder.ReceiveCurrency AS Currency,
 		|	CashTransferOrder.ReceiveUUID AS Key,
-		|	CashTransferOrder.ReceiveDate AS Period,
+		|	CashTransferOrder.Date AS Period,
+		|	CashTransferOrder.ReceivePeriod AS ReceivePeriod,
 		|	CashTransferOrder.ReceiveMovementType AS MovementType,
 		|	CashTransferOrder.CashAdvanceHolder
 		|INTO MoneyReceiver
@@ -134,6 +136,7 @@ Function R3035T_CashPlanning()
 	Return
 		"SELECT
 		|	MoneySender.Period,
+		|	MoneySender.SendPeriod AS PlanningPeriod,
 		|	MoneySender.Company,
 		|	MoneySender.Account,
 		|	MoneySender.Amount,
@@ -150,6 +153,7 @@ Function R3035T_CashPlanning()
 		|
 		|SELECT
 		|	MoneyReceiver.Period,
+		|	MoneyReceiver.ReceivePeriod,
 		|	MoneyReceiver.Company,
 		|	MoneyReceiver.Account,
 		|	MoneyReceiver.Amount,

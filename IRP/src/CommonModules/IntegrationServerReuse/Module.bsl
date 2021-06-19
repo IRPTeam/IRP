@@ -1,6 +1,12 @@
 
 Function GetIntegrationSettings(IntegrationSettingName, AddInfo = Undefined) Export
-	IntegrationSettingsRef = UniqueID.UniqueIDByName(Metadata.Catalogs.IntegrationSettings, IntegrationSettingName);
+		
+	If TypeOf(IntegrationSettingName) = Type("String") Then
+		IntegrationSettingsRef = UniqueID.UniqueIDByName(Metadata.Catalogs.IntegrationSettings, IntegrationSettingName);
+	Else
+		IntegrationSettingsRef = IntegrationSettingName;
+	EndIf;
+	
 	CustomizedSetting = New Structure();
 	For Each Str In IntegrationSettingsRef.ConnectionSetting Do
 		If ValueIsFilled(Str.Value) Then

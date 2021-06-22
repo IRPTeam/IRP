@@ -53,6 +53,7 @@ Scenario: _045000 preparation (Outgoing payment order)
 		When update ItemKeys
 		When Create catalog SerialLotNumbers objects
 		When Create catalog CashAccounts objects
+		When Create catalog PlanningPeriods objects
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then

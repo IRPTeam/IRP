@@ -44,6 +44,7 @@ Scenario: _054000 preparation (Cash transfer order)
 				| "TaxCalculateVAT_TR" |
 			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
+		When Create catalog PlanningPeriods objects
 	* Tax settings
 		When filling in Tax settings for company
 	
@@ -84,9 +85,17 @@ Scenario: _054001 create Cash transfer order (from Cash/Bank accounts to Cash/Ba
 			| USD  | American dollar |
 		And I activate "Description" field in "List" table
 		And I select current line in "List" table
-	* Filling Send date and Receive date
-		And I input "01.07.2019  0:00:00" text in "Send date" field
-		And I input "01.07.2019  0:00:00" text in "Receive date" field
+	* Filling Send period and Receive period
+		And I click Select button of "Send period" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'First'       |
+		And I select current line in "List" table
+		And I click Select button of "Receive period" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Second'       |
+		And I select current line in "List" table
 	* Filling Movement type
 		And I click Select button of "Send movement type" field
 		And I go to line in "List" table
@@ -250,9 +259,17 @@ Scenario: _054004 create Cash transfer order (from Cash/Bank accounts to Cash/Ba
 			| 'Description' |
 			| 'Daniel Smith' |
 		And I select current line in "List" table
-	* Filling Send date and Receive date
-		And I input "02.07.2019  0:00:00" text in "Send date" field
-		And I input "03.07.2019  0:00:00" text in "Receive date" field
+	* Filling Send period and Receive period
+		And I click Select button of "Send period" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'First'       |
+		And I select current line in "List" table
+		And I click Select button of "Receive period" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Second'       |
+		And I select current line in "List" table
 	* Filling Movement type
 		And I click Select button of "Send movement type" field
 		And I go to line in "List" table
@@ -364,9 +381,17 @@ Scenario: _054006 create Cash transfer order (from Cash/Bank accounts to bank ac
 			| Bank account, USD |
 		And I select current line in "List" table
 		And I input "500,00" text in "Receive amount" field
-	* Filling Send date and Receive date
-		And I input "01.07.2019  0:00:00" text in "Send date" field
-		And I input "02.07.2019  0:00:00" text in "Receive date" field
+	* Filling Send period and Receive period
+		And I click Select button of "Send period" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'First'       |
+		And I select current line in "List" table
+		And I click Select button of "Receive period" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Second'       |
+		And I select current line in "List" table
 	* Filling Movement type
 		And I click Select button of "Send movement type" field
 		And I go to line in "List" table
@@ -464,9 +489,17 @@ Scenario: _054007 create Cash transfer order from bank account to Cash account (
 			| USD  | American dollar |
 		And I activate "Description" field in "List" table
 		And I select current line in "List" table
-	* Filling Send date and Receive date
-		And I input "03.07.2019  0:00:00" text in "Send date" field
-		And I input "04.07.2019  0:00:00" text in "Receive date" field
+	* Filling Send period and Receive period
+		And I click Select button of "Send period" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'First'       |
+		And I select current line in "List" table
+		And I click Select button of "Receive period" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Second'       |
+		And I select current line in "List" table
 	* Filling Movement type
 		And I click Select button of "Send movement type" field
 		And I go to line in "List" table
@@ -573,9 +606,17 @@ Scenario: _054008 currency exchange within one Cash/Bank accounts with exchange 
 			| 'Description' |
 			| 'Daniel Smith' |
 		And I select current line in "List" table
-	* Filling Send date and Receive date
-		And I input "04.07.2019  0:00:00" text in "Send date" field
-		And I input "05.07.2019  0:00:00" text in "Receive date" field
+	* Filling Send period and Receive period
+		And I click Select button of "Send period" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'First'       |
+		And I select current line in "List" table
+		And I click Select button of "Receive period" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Second'       |
+		And I select current line in "List" table
 	* Filling Movement type
 		And I click Select button of "Send movement type" field
 		And I go to line in "List" table
@@ -725,9 +766,17 @@ Scenario: _054009 currency exchange within one Cash/Bank accounts with exchange 
 			| 'Description' |
 			| 'Daniel Smith' |
 		And I select current line in "List" table
-	* Filling Send date and Receive date
-		And I input "04.07.2019  0:00:00" text in "Send date" field
-		And I input "05.07.2019  0:00:00" text in "Receive date" field
+	* Filling Send period and Receive period
+		And I click Select button of "Send period" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'First'       |
+		And I select current line in "List" table
+		And I click Select button of "Receive period" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Second'       |
+		And I select current line in "List" table
 	* Filling Movement type
 		And I click Select button of "Send movement type" field
 		And I go to line in "List" table
@@ -839,9 +888,17 @@ Scenario: _054012 exchange currency from bank account (Cash Transfer Order)
 			| Bank account, EUR |
 		And I select current line in "List" table
 		And I input "175,00" text in "Receive amount" field
-	* Filling Send date and Receive date
-		And I input "04.07.2019  0:00:00" text in "Send date" field
-		And I input "05.07.2019  0:00:00" text in "Receive date" field
+	* Filling Send period and Receive period
+		And I click Select button of "Send period" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'First'       |
+		And I select current line in "List" table
+		And I click Select button of "Receive period" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Second'       |
+		And I select current line in "List" table
 	* Filling Movement type
 		And I click Select button of "Send movement type" field
 		And I go to line in "List" table

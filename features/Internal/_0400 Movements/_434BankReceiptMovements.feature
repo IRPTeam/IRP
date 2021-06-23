@@ -52,7 +52,7 @@ Scenario: _043400 preparation (Bank receipt)
 		When update ItemKeys
 		When Create catalog SerialLotNumbers objects
 		When Create catalog CashAccounts objects
-		When When Create catalog PlanningPeriods objects
+		When Create catalog PlanningPeriods objects
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then

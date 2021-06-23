@@ -261,10 +261,7 @@
     </title>
     <id>2</id>
     <valueType>
-      <types>String</types>
-      <stringQualifiers>
-        <length>100</length>
-      </stringQualifiers>
+      <types>EnumRef.IntegrationType</types>
     </valueType>
     <view>
       <common>true</common>
@@ -319,10 +316,7 @@
   <parameters>
     <name>Type</name>
     <valueType>
-      <types>String</types>
-      <stringQualifiers>
-        <length>100</length>
-      </stringQualifiers>
+      <types>EnumRef.IntegrationType</types>
     </valueType>
   </parameters>
   <parameters>

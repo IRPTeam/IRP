@@ -117,6 +117,7 @@ Scenario: 950100 Basic role
 	When Create document StockAdjustmentAsSurplus objects
 	When Create document StockAdjustmentAsWriteOff objects
 	When Create document Unbundling objects
+	When Create catalog PlanningPeriods objects
 	* Update user roles
 		Given I open hyperlink "e1cib/list/Catalog.AccessGroups"
 		And I click "Update all user roles" button	

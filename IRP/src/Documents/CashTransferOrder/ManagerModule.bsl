@@ -1,86 +1,8 @@
 #Region Posting
 
 Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-//	Query = New Query();
-//	Query.Text =
-//		"SELECT
-//		|	CashTransferOrder.Company AS Company,
-//		|	CashTransferOrder.Ref AS Ref,
-//		|	CashTransferOrder.Sender AS Sender,
-//		|	CashTransferOrder.Receiver AS Receiver,
-//		|	CashTransferOrder.SendAmount AS SendAmount,
-//		|	CashTransferOrder.ReceiveAmount AS ReceiveAmount,
-//		|	CashTransferOrder.SendCurrency AS SendCurrency,
-//		|	CashTransferOrder.SendUUID AS SendUUID,
-//		|	CashTransferOrder.ReceiveCurrency AS ReceiveCurrency,
-//		|	CashTransferOrder.ReceiveUUID AS ReceiveUUID,
-//		|	CashTransferOrder.SendDate AS Senddate,
-//		|	CashTransferOrder.ReceiveDate AS ReceiveDate,
-//		|	CashTransferOrder.CashAdvanceHolder
-//		|FROM
-//		|	Document.CashTransferOrder AS CashTransferOrder
-//		|WHERE
-//		|	CashTransferOrder.Ref = &Ref";
-//	
-//	Query.SetParameter("Ref", Ref);
-//	QueryResults = Query.Execute();
-//	
-//	QueryTable = QueryResults.Unload();
-//	
-//	Query = New Query();
-//	Query.Text =
-//		"SELECT
-//		|	QueryTable.Company AS Company,
-//		|	QueryTable.Sender AS Sender,
-//		|	QueryTable.Receiver AS Receiver,
-//		|	QueryTable.SendAmount AS SendAmount,
-//		|	QueryTable.ReceiveAmount AS ReceiveAmount,
-//		|	QueryTable.SendCurrency AS SendCurrency,
-//		|	QueryTable.ReceiveCurrency AS ReceiveCurrency,
-//		|	QueryTable.SendDate AS Senddate,
-//		|	QueryTable.ReceiveDate AS ReceiveDate,
-//		|	QueryTable.Ref AS BasisDocument,
-//		|	QueryTable.SendUUID AS SendUUID,
-//		|	QueryTable.ReceiveUUID AS ReceiveUUID,
-//		|	QueryTable.CashAdvanceHolder AS CashAdvanceHolder
-//		|INTO tmp
-//		|FROM
-//		|	&QueryTable AS QueryTable
-//		|;
-//		|
-//		|////////////////////////////////////////////////////////////////////////////////
-//		|SELECT
-//		|	tmp.Company AS Company,
-//		|	tmp.Sender AS Account,
-//		|	tmp.SendAmount AS Amount,
-//		|	tmp.SendCurrency AS Currency,
-//		|	tmp.SendDate AS Period,
-//		|	VALUE(Enum.CashFlowDirections.Outgoing) AS CashFlowDirection,
-//		|	tmp.BasisDocument AS BasisDocument,
-//		|	tmp.SendUUID AS Key
-//		|FROM
-//		|	tmp AS tmp
-//		|
-//		|UNION ALL
-//		|
-//		|SELECT
-//		|	tmp.Company,
-//		|	tmp.Receiver,
-//		|	tmp.ReceiveAmount,
-//		|	tmp.ReceiveCurrency,
-//		|	tmp.ReceiveDate AS Period,
-//		|	VALUE(Enum.CashFlowDirections.Incoming),
-//		|	tmp.BasisDocument,
-//		|	tmp.ReceiveUUID
-//		|FROM
-//		|	tmp AS tmp";
-//	Query.SetParameter("QueryTable", QueryTable);
-//	QueryResults = Query.ExecuteBatch();
-	
 	Tables = New Structure();
-	
-//	Tables.Insert("PaymentList_PlaningCashTransactions", QueryResults[1].Unload());
-	
+		
 #Region NewRegistersPosting	
 	QueryArray = GetQueryTextsSecondaryTables();
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
@@ -179,7 +101,8 @@ Function MoneySender()
 		|	CashTransferOrder.SendAmount AS Amount,
 		|	CashTransferOrder.SendCurrency AS Currency,
 		|	CashTransferOrder.SendUUID AS Key,
-		|	CashTransferOrder.SendDate AS Period,
+		|	CashTransferOrder.Date AS Period,
+		|	CashTransferOrder.SendPeriod AS SendPeriod,
 		|	CashTransferOrder.SendMovementType AS MovementType,
 		|	CashTransferOrder.CashAdvanceHolder
 		|INTO MoneySender
@@ -198,7 +121,8 @@ Function MoneyReceiver()
 		|	CashTransferOrder.ReceiveAmount AS Amount,
 		|	CashTransferOrder.ReceiveCurrency AS Currency,
 		|	CashTransferOrder.ReceiveUUID AS Key,
-		|	CashTransferOrder.ReceiveDate AS Period,
+		|	CashTransferOrder.Date AS Period,
+		|	CashTransferOrder.ReceivePeriod AS ReceivePeriod,
 		|	CashTransferOrder.ReceiveMovementType AS MovementType,
 		|	CashTransferOrder.CashAdvanceHolder
 		|INTO MoneyReceiver
@@ -212,6 +136,7 @@ Function R3035T_CashPlanning()
 	Return
 		"SELECT
 		|	MoneySender.Period,
+		|	MoneySender.SendPeriod AS PlanningPeriod,
 		|	MoneySender.Company,
 		|	MoneySender.Account,
 		|	MoneySender.Amount,
@@ -228,6 +153,7 @@ Function R3035T_CashPlanning()
 		|
 		|SELECT
 		|	MoneyReceiver.Period,
+		|	MoneyReceiver.ReceivePeriod,
 		|	MoneyReceiver.Company,
 		|	MoneyReceiver.Account,
 		|	MoneyReceiver.Amount,

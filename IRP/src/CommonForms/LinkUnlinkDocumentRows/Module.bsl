@@ -125,53 +125,8 @@ EndProcedure
 &AtServer
 Procedure FillBasisesTree(FilterBySelectedRow)
 	ThisObject.BasisesTree.GetItems().Clear();
-	
-	FullFilter = New Structure();
-	For Each KeyValue In ThisObject.MainFilter Do
-		FullFilter.Insert(KeyValue.Key, KeyValue.Value);
-	EndDo;
-	
-	If FilterBySelectedRow <> Undefined Then
-		For Each KeyValue In FilterBySelectedRow Do
-			FullFilter.Insert(KeyValue.Key, KeyValue.Value);
-		EndDo;
-	EndIf;
-	
-	BasisesTable = RowIDInfoServer.GetBasises(ThisObject.MainFilter.Ref, FullFilter);
-	
-	// filter by already linked
-	For Each Row In ThisObject.ResultsTable Do
-		Filter = New Structure();
-		Filter.Insert("RowID"   , Row.RowID);
-		Filter.Insert("BasisKey", Row.BasisKey);
-		Filter.Insert("Basis"   , Row.Basis);
-		ArrayAlredyLinked = BasisesTable.FindRows(Filter);
-		For Each ItemArray In ArrayAlredyLinked Do
-			BasisesTable.Delete(ItemArray);
-		EndDo;
-	EndDo;
-	
-	ArrayForDelete = New Array();
-	If ValueIsFilled(ThisObject.LinkedRowID) Then
-		For Each Row In BasisesTable Do
-			If Row.RowID <> ThisObject.LinkedRowID Then
-				ArrayForDelete.Add(Row);
-				Continue;
-			EndIf;
-			If ThisObject.ShipingReceipt Then 
-				If Not (TypeOf(Row.Basis) = Type("DocumentRef.ShipmentConfirmation")
-					Or TypeOf(Row.Basis) = Type("DocumentRef.GoodsReceipt")) Then
-					ArrayForDelete.Add(Row);
-				EndIf;
-			Else
-				ArrayForDelete.Add(Row);
-			EndIf;	
-		EndDo;
-	EndIf;
-	For Each ItemArray In ArrayForDelete Do
-		BasisesTable.Delete(ItemArray);
-	EndDo;
-	
+
+	BasisesTable = CreateBasisesTable(FilterBySelectedRow);	
 	TreeReverseInfo = RowIDInfoServer.CreateBasisesTreeReverse(BasisesTable);
 		
 	RowIDInfoServer.CreateBasisesTree(TreeReverseInfo, BasisesTable, ThisObject.ResultsTable.Unload(), ThisObject.BasisesTree.GetItems());
@@ -211,60 +166,60 @@ Procedure Link(Command)
 EndProcedure
 
 &AtClient
-Function IsCanLink()
+Function IsCanLink(ItemListRowsData = Undefined, BasisesTreeData = Undefined)
 	Result = New Structure("IsCan", False);
 	
-	ItemListRowsCurrentData = Items.ItemListRows.CurrentData;
-	If ItemListRowsCurrentData = Undefined Then
-		Return Result;
+	If ItemListRowsData = Undefined Then
+		ItemListRowsData = Items.ItemListRows.CurrentData;
+		If ItemListRowsData = Undefined Then
+			Return Result;
+		EndIf;
 	EndIf;
 	
-	BasisesTreeCurrentData = Items.BasisesTree.CurrentData;
-	If BasisesTreeCurrentData = Undefined Then
-		Return Result;
+	
+	If BasisesTreeData = Undefined Then
+		BasisesTreeData = Items.BasisesTree.CurrentData;
+		If BasisesTreeData = Undefined Then
+			Return Result;
+		EndIf;
 	EndIf;
 	
-	If Not BasisesTreeCurrentData.DeepLevel Then
+	If Not BasisesTreeData.DeepLevel Then
 		Return Result;
 	EndIf;
 	
 	Result.IsCan = True;
-	Result.Insert("Key"         , ItemListRowsCurrentData.Key);
-	Result.Insert("Item"        , ItemListRowsCurrentData.Item);
-	Result.Insert("ItemKey"     , ItemListRowsCurrentData.ItemKey);
-	Result.Insert("Store"       , ItemListRowsCurrentData.Store);
+	Result.Insert("Key"         , ItemListRowsData.Key);
+	Result.Insert("Item"        , ItemListRowsData.Item);
+	Result.Insert("ItemKey"     , ItemListRowsData.ItemKey);
+	Result.Insert("Store"       , ItemListRowsData.Store);
 	
-	If ValueIsFilled(ItemListRowsCurrentData.ItemKey)
-		And ValueIsFilled(ItemListRowsCurrentData.Unit)
-		And ValueIsFilled(ItemListRowsCurrentData.Quantity) Then
-		ConvertationResult = ConvertQuantityToQuantityInBaseUnit(ItemListRowsCurrentData.ItemKey, 
-		                                                         ItemListRowsCurrentData.Unit, 
-		                                                         ItemListRowsCurrentData.Quantity);
+	If ValueIsFilled(ItemListRowsData.ItemKey)
+		And ValueIsFilled(ItemListRowsData.Unit)
+		And ValueIsFilled(ItemListRowsData.Quantity) Then
+		ConvertationResult = RowIDInfoServer.ConvertQuantityToQuantityInBaseUnit(ItemListRowsData.ItemKey, 
+		                                                         ItemListRowsData.Unit, 
+		                                                         ItemListRowsData.Quantity);
 		
 		Result.Insert("QuantityInBaseUnit" , ConvertationResult.QuantityInBaseUnit);
 		Result.Insert("BasisUnit"          , ConvertationResult.BasisUnit);		                                                   
 	Else
-		Result.Insert("QuantityInBaseUnit" , BasisesTreeCurrentData.QuantityInBaseUnit);
-		Result.Insert("BasisUnit"          , BasisesTreeCurrentData.BasisUnit);
+		Result.Insert("QuantityInBaseUnit" , BasisesTreeData.QuantityInBaseUnit);
+		Result.Insert("BasisUnit"          , BasisesTreeData.BasisUnit);
 	EndIf;
 	
-	If ValueIsFilled(ItemListRowsCurrentData.Unit) Then
-		Result.Insert("Unit" , ItemListRowsCurrentData.Unit);
+	If ValueIsFilled(ItemListRowsData.Unit) Then
+		Result.Insert("Unit" , ItemListRowsData.Unit);
 	Else
-		Result.Insert("Unit" , BasisesTreeCurrentData.Unit);
+		Result.Insert("Unit" , BasisesTreeData.Unit);
 	EndIf;
 	
-	Result.Insert("RowRef"      , BasisesTreeCurrentData.RowRef);
-	Result.Insert("CurrentStep" , BasisesTreeCurrentData.CurrentStep);
-	Result.Insert("Basis"       , BasisesTreeCurrentData.Basis);
-	Result.Insert("BasisKey"    , BasisesTreeCurrentData.BasisKey);
-	Result.Insert("RowID"       , BasisesTreeCurrentData.RowID);
+	Result.Insert("RowRef"      , BasisesTreeData.RowRef);
+	Result.Insert("CurrentStep" , BasisesTreeData.CurrentStep);
+	Result.Insert("Basis"       , BasisesTreeData.Basis);
+	Result.Insert("BasisKey"    , BasisesTreeData.BasisKey);
+	Result.Insert("RowID"       , BasisesTreeData.RowID);
 	Return Result;
-EndFunction
-
-&AtServer
-Function ConvertQuantityToQuantityInBaseUnit(ItemKey, Unit, Quantity)
-	Return Catalogs.Units.ConvertQuantityToQuantityInBaseUnit(ItemKey, Unit, Quantity);
 EndFunction
 
 &AtClient
@@ -322,3 +277,97 @@ EndFunction
 Procedure ShowRowKey(Command)
 	DocumentsClient.ShowRowKey(ThisObject);
 EndProcedure
+
+&AtServer
+Function CreateBasisesTable(FilterBySelectedRow)
+	FullFilter = New Structure();
+	For Each KeyValue In ThisObject.MainFilter Do
+		FullFilter.Insert(KeyValue.Key, KeyValue.Value);
+	EndDo;
+	
+	If FilterBySelectedRow <> Undefined Then
+		For Each KeyValue In FilterBySelectedRow Do
+			FullFilter.Insert(KeyValue.Key, KeyValue.Value);
+		EndDo;
+	EndIf;
+	
+	BasisesTable = RowIDInfoServer.GetBasises(ThisObject.MainFilter.Ref, FullFilter);
+	
+	// filter by already linked
+	For Each Row In ThisObject.ResultsTable Do
+		Filter = New Structure();
+		Filter.Insert("RowID"   , Row.RowID);
+		Filter.Insert("BasisKey", Row.BasisKey);
+		Filter.Insert("Basis"   , Row.Basis);
+		ArrayAlredyLinked = BasisesTable.FindRows(Filter);
+		For Each ItemArray In ArrayAlredyLinked Do
+			BasisesTable.Delete(ItemArray);
+		EndDo;
+	EndDo;
+	
+	ArrayForDelete = New Array();
+	If ValueIsFilled(ThisObject.LinkedRowID) Then
+		For Each Row In BasisesTable Do
+			If Row.RowID <> ThisObject.LinkedRowID Then
+				ArrayForDelete.Add(Row);
+				Continue;
+			EndIf;
+			If ThisObject.ShipingReceipt Then 
+				If Not (TypeOf(Row.Basis) = Type("DocumentRef.ShipmentConfirmation")
+					Or TypeOf(Row.Basis) = Type("DocumentRef.GoodsReceipt")) Then
+					ArrayForDelete.Add(Row);
+				EndIf;
+			Else
+				ArrayForDelete.Add(Row);
+			EndIf;	
+		EndDo;
+	EndIf;
+	For Each ItemArray In ArrayForDelete Do
+		BasisesTable.Delete(ItemArray);
+	EndDo;
+	Return BasisesTable;
+EndFunction
+
+&AtClient
+Procedure AutoLink(Command)
+	For Each ItemListRow In ThisObject.ItemListRows Do
+		RowInfo = RowIDInfoClient.GetSelectedRowInfo(ItemListRow);
+		NeedAutoLink = NeedAutoLinkAtServer(RowInfo);
+		If NeedAutoLink.IsOk Then
+			LinkInfo = IsCanLink(ItemListRow, NeedAutoLink.BaseInfo);
+			If LinkInfo.IsCan Then
+				FillPropertyValues(ThisObject.ResultsTable.Add(), LinkInfo);
+			EndIf;
+		EndIf;
+	EndDo;
+	RefreshTrees();
+EndProcedure
+
+&AtServer
+Function NeedAutoLinkAtServer(RowInfo)
+	NeedAutoLink = New Structure("IsOk, BaseInfo", False, New Structure());
+	NeedAutoLink.BaseInfo.Insert("DeepLevel", True);
+	NeedAutoLink.BaseInfo.Insert("QuantityInBaseUnit");
+	NeedAutoLink.BaseInfo.Insert("BasisUnit");
+	NeedAutoLink.BaseInfo.Insert("RowRef");
+	NeedAutoLink.BaseInfo.Insert("CurrentStep");
+	NeedAutoLink.BaseInfo.Insert("Basis");
+	NeedAutoLink.BaseInfo.Insert("BasisKey");
+	NeedAutoLink.BaseInfo.Insert("RowID");
+	
+	BasisesTable = CreateBasisesTable(RowInfo.FilterBySelectedRow);
+	If BasisesTable.Count() = 1 Then
+		FillPropertyValues(NeedAutoLink.BaseInfo, BasisesTable[0]);
+		NeedAutoLink.IsOk = True;
+	Else
+		For Each Row In BasisesTable Do
+			If RowInfo.SelectedRow.QuantityInBaseUnit = Row.QuantityInBaseUnit Then
+				FillPropertyValues(NeedAutoLink.BaseInfo, Row);
+				NeedAutoLink.IsOk = True;
+				Break;
+			EndIf;
+		EndDo;
+	EndIf;
+	Return NeedAutoLink;
+EndFunction
+

@@ -62,6 +62,20 @@ Function GetSelectedRowInfo(CurrentData) Export
 	Result.SelectedRow.Insert("Store"    , Store);
 	Result.SelectedRow.Insert("Unit"     , CurrentData.Unit);
 	Result.SelectedRow.Insert("Quantity" , CurrentData.Quantity);
+	
+	Result.SelectedRow.Insert("QuantityInBaseUnit" , 0);
+	Result.SelectedRow.Insert("BasisUnit" , Undefined);
+		
+	If ValueIsFilled(CurrentData.ItemKey)
+		And ValueIsFilled(CurrentData.Unit)
+		And ValueIsFilled(CurrentData.Quantity) Then
+		ConvertationResult = RowIDInfoServer.ConvertQuantityToQuantityInBaseUnit(CurrentData.ItemKey, 
+		                                                         CurrentData.Unit, 
+		                                                         CurrentData.Quantity);
+		
+		Result.SelectedRow.QuantityInBaseUnit = ConvertationResult.QuantityInBaseUnit;
+		Result.SelectedRow.BasisUnit          = ConvertationResult.BasisUnit;
+	EndIf;		    	
 		
 	Result.FilterBySelectedRow = New Structure();
 	Result.FilterBySelectedRow.Insert("ItemKey"  , CurrentData.ItemKey);

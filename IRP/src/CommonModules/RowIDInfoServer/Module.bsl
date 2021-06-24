@@ -6452,4 +6452,8 @@ Function Is(Source)
 	Return Result;
 EndFunction
 
+Function ConvertQuantityToQuantityInBaseUnit(ItemKey, Unit, Quantity) Export
+	Return Catalogs.Units.ConvertQuantityToQuantityInBaseUnit(ItemKey, Unit, Quantity);
+EndFunction
+
 #EndRegion

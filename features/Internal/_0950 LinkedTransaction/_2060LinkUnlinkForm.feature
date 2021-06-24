@@ -36,6 +36,7 @@ Scenario: _2060001 preparation
 		When Create catalog Stores objects
 		When Create catalog Partners objects
 		When Create catalog Companies objects (partners company)
+		When Create Document discount
 		When Create information register PartnerSegments records
 		When Create catalog PartnerSegments objects
 		When Create chart of characteristic types CurrencyMovementType objects
@@ -53,6 +54,8 @@ Scenario: _2060001 preparation
 				| "TaxCalculateVAT_TR" |
 			When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
+		When Create catalog BusinessUnits objects
+		When Create catalog ExpenseAndRevenueTypes objects
 	* Tax settings
 		When filling in Tax settings for company
 	* Add sales tax
@@ -89,6 +92,12 @@ Scenario: _2060001 preparation
 			| "Documents.SalesInvoice.FindByNumber(102).GetObject().Write(DocumentWriteMode.Posting);" |
 			| "Documents.SalesInvoice.FindByNumber(101).GetObject().Write(DocumentWriteMode.Posting);" |
 			| "Documents.SalesInvoice.FindByNumber(103).GetObject().Write(DocumentWriteMode.Posting);" |
+	When Create document SalesOrder objects (SI before SC, not Use shipment sheduling)
+	And I execute 1C:Enterprise script at server
+			| "Documents.SalesOrder.FindByNumber(31).GetObject().Write(DocumentWriteMode.Posting);" |
+	When Create document SalesOrder objects (check movements, SI before SC, not Use shipment sheduling)
+	And I execute 1C:Enterprise script at server
+			| "Documents.SalesOrder.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);" |
 	* Save SI numbers
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 		And I go to line in "List" table
@@ -266,7 +275,126 @@ Scenario: _2060002 check link/unlink form in the SC
 		And I close all client application windows
 		
 		
+Scenario: _2060003 check auto link button in the SI
+	* Open form for create SI
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I click the button named "FormCreate"
+	* Filling in the main details of the document
+		And I click Select button of "Partner" field
+		And I click "List" button
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Ferron BP'     |
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Company Ferron BP'     |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Basic Partner terms, TRY'     |
+		And I select current line in "List" table
+		And I activate field named "ItemListLineNumber" in "ItemList" table		
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Main Company' | 
+		And I select current line in "List" table
+		And I click Select button of "Store" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Store 02'  |
+		And I select current line in "List" table
+	* Add items	
+		* One SO - 1 pcs, second SO - 1 pcs
+			And in the table "ItemList" I click the button named "ItemListAdd"
+			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Dress'       |
+			And I select current line in "List" table
+			And I activate field named "ItemListItemKey" in "ItemList" table
+			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+			And I go to line in "List" table
+				| 'Item'  | 'Item key' |
+				| 'Dress' | 'XS/Blue'  |
+			And I select current line in "List" table
+			And I activate field named "ItemListQuantity" in "ItemList" table
+			And I input "2,000" text in the field named "ItemListQuantity" of "ItemList" table
+			And I finish line editing in "ItemList" table
+		* One SO - 10 pcs, second SO - 10 pcs
+			And in the table "ItemList" I click the button named "ItemListAdd"
+			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Shirt'       |
+			And I select current line in "List" table
+			And I activate field named "ItemListItemKey" in "ItemList" table
+			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+			And I go to line in "List" table
+				| 'Item'  | 'Item key' |
+				| 'Shirt' | '36/Red'  |
+			And I select current line in "List" table
+			And I activate field named "ItemListQuantity" in "ItemList" table
+			And I input "10,000" text in the field named "ItemListQuantity" of "ItemList" table
+			And I finish line editing in "ItemList" table
+		* One SO - 1 pcs, second SO - 1 pcs
+			And in the table "ItemList" I click the button named "ItemListAdd"
+			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Service'       |
+			And I select current line in "List" table
+			And I activate field named "ItemListItemKey" in "ItemList" table
+			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+			And I go to line in "List" table
+				| 'Item'    | 'Item key' |
+				| 'Service' | 'Interner' |
+			And I select current line in "List" table
+			And I activate field named "ItemListQuantity" in "ItemList" table
+			And I input "1,000" text in the field named "ItemListQuantity" of "ItemList" table
+			And I finish line editing in "ItemList" table
+		* More than in SO, only one line
+			And in the table "ItemList" I click the button named "ItemListAdd"
+			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Boots'       |
+			And I select current line in "List" table
+			And I activate field named "ItemListItemKey" in "ItemList" table
+			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+			And I go to line in "List" table
+				| 'Item'  | 'Item key' |
+				| 'Boots' | '36/18SD' |
+			And I select current line in "List" table
+			And I activate field named "ItemListQuantity" in "ItemList" table
+			And I input "65,000" text in the field named "ItemListQuantity" of "ItemList" table
+			And I finish line editing in "ItemList" table
+	* Auto link
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		Then "Link / unlink document row" window is opened
+		And I click "Auto link" button
+		And I click "Ok" button
+	* Check auto link
+		And "ItemList" table contains lines
+			| '#' | 'Business unit'           | 'SalesTax' | 'Revenue type' | 'Price type'              | 'Item'    | 'Item key' | 'Dont calculate row' | 'Serial lot numbers' | 'Q'      | 'Unit' | 'Tax amount' | 'Price'    | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Delivery date' | 'Use shipment confirmation' | 'Detail' | 'Sales order'                             |
+			| '1' | ''                        | '1%'       | ''             | 'Basic Price Types'       | 'Dress'   | 'XS/Blue'  | 'No'                 | ''                   | '2,000'  | 'pcs'  | '168,94'     | '520,00'   | '18%' | ''              | '871,06'     | '1 040,00'     | ''                    | 'Store 02' | ''              | 'No'                        | ''       | ''                                        |
+			| '2' | 'Distribution department' | ''         | 'Revenue'      | 'Basic Price Types'       | 'Shirt'   | '36/Red'   | 'No'                 | ''                   | '10,000' | 'pcs'  | '507,20'     | '350,00'   | '18%' | '175,00'        | '2 817,80'   | '3 325,00'     | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | 'Sales order 3 dated 27.01.2021 19:50:45' |
+			| '3' | 'Front office'            | ''         | 'Revenue'      | 'en description is empty' | 'Service' | 'Interner' | 'No'                 | ''                   | '1,000'  | 'pcs'  | '14,49'      | '100,00'   | '18%' | '5,00'          | '80,51'      | '95,00'        | ''                    | 'Store 02' | '27.01.2021'    | 'No'                        | ''       | 'Sales order 3 dated 27.01.2021 19:50:45' |
+			| '4' | 'Front office'            | ''         | 'Revenue'      | 'Basic Price Types'       | 'Boots'   | '36/18SD'  | 'No'                 | ''                   | '65,000' | 'pcs'  | '6 940,68'   | '8 400,00' | '18%' | ''              | '38 559,32'  | '45 500,00'    | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | 'Sales order 3 dated 27.01.2021 19:50:45' |
+		Then the number of "ItemList" table lines is "равно" "4"
+		And I close all client application windows
+		
+		
 				
+		
+
+
+		
+				
+
 
 		
 				

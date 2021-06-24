@@ -49,6 +49,7 @@ Scenario: _0154100 preparation ( filling documents)
 		When Create catalog ExpenseAndRevenueTypes objects
 		When Create catalog Companies objects (second company Ferron BP)
 		When Create catalog PartnersBankAccounts objects
+		When Create catalog PlanningPeriods objects
 		When update ItemKeys
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
@@ -2941,19 +2942,19 @@ Scenario: _0154115 check filling in and refilling Cash transfer order
 		And I move to the next attribute
 		And the editing text of form attribute named "ReceiveAmount" became equal to "100,00"
 		And the editing text of form attribute named "SendAmount" became equal to "100,00"
-	* Check filling in Send date and Receive date
-		And I input "01.01.2020  0:00:00" text in "Date" field
-		And I move to the next attribute
-		And I save the value of "Send date" field as "Senddate"
-		Then "Senddate" variable is equal to "01.01.2020"
-		And I save the value of "Receive date" field as "Receivedate"
-		Then "Receivedate" variable is equal to "01.01.2020"
-		And I input "01.03.2020  0:00:00" text in "Date" field
-		And I move to the next attribute
-		And I save the value of "Send date" field as "Senddate"
-		Then "Senddate" variable is equal to "01.03.2020"
-		And I save the value of "Receive date" field as "Receivedate"
-		Then "Receivedate" variable is equal to "01.03.2020"
+	* Filling Send period and Receive period
+		And I click Select button of "Send period" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'First'       |
+		And I select current line in "List" table
+		And I click Select button of "Receive period" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Second'       |
+		And I select current line in "List" table
+		Then the form attribute named "ReceivePeriod" became equal to "Second"
+		Then the form attribute named "SendPeriod" became equal to "First"
 	* Check the drawing of Cash advance holder field in case of currency exchange through cash accounts
 		And I click Select button of "Sender" field
 		And I go to line in "List" table

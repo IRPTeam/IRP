@@ -527,7 +527,6 @@ Function GetQueryTextQueryTable()
 EndFunction
 
 Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	Tables = Parameters.DocumentDataTables;
 	DataMapWithLockFields = New Map();
 	Return DataMapWithLockFields;
 EndFunction

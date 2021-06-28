@@ -43,12 +43,6 @@ Procedure Filling(FillingData, FillingText, StandardProcessing)
 		If Not ValueIsFilled(Row.Key) Then
 			Row.Key = New UUID();
 		EndIf;
-		AgreementInfo = Undefined;
-		If ValueIsFilled(Row.BasisDocument) 
-			And Row.BasisDocument.Metadata().Attributes.Find("Agreement") <> Undefined
-			And ValueIsFilled(Row.BasisDocument.Agreement) Then
-			AgreementInfo = CatAgreementsServer.GetAgreementInfo(Row.BasisDocument.Agreement);
-		EndIf;
 	EndDo;
 EndProcedure
 

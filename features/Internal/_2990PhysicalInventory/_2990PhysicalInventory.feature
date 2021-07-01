@@ -861,12 +861,14 @@ Scenario: _2990010 create Physical inventory and Physical count by location with
 			| 'Description'  |
 			| 'Anna Petrova' |
 		And I select current line in "List" table
+		And I save "Format((EndOfDay(CurrentDate()) + 500), \"DF=dd.MM.yyyy\")" in "$$$$DateCurrentDay$$$$" variable
+		And I input "$$$$DateCurrentDay$$$$" text in "Date" field
 		And I click the button named "FormPost"
 		And I delete "$$NumberPhysicalInventory2990010$$" variable
 		And I delete "$$PhysicalInventory2990010$$" variable
 		And I save the value of "Number" field as "$$NumberPhysicalInventory2990010$$"
 		And I save the window as "$$PhysicalInventory2990010$$"
-	* Create Physical count by locatio
+	* Create Physical count by location
 		And I click "Physical count by location" button
 	* Check the display of which recalculations the string has got into
 		And "ItemList" table contains lines
@@ -1018,6 +1020,12 @@ Scenario: _2990010 create Physical inventory and Physical count by location with
 				| 'Description' |
 				| 'Store 05'    |
 			And I select current line in "List" table
+		* Filling in Company
+			And I click Select button of "Company" field
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Main Company'   |
+			And I select current line in "List" table
 		* Add items
 			And I click the button named "Add"
 			And I click choice button of "Item" attribute in "ItemList" table
@@ -1054,7 +1062,7 @@ Scenario: _2990010 create Physical inventory and Physical count by location with
 			| 'Shirt' | '-7,000'     | '36/Red'   | '7,000'      | 'pcs'  | ''                   | ''               |
 			| 'Boots' | '-4,000'     | '36/18SD'  | '4,000'      | 'pcs'  | ''                   | ''               |
 			| 'Dress' | '-125,000'   | 'S/Yellow' | '125,000'    | 'pcs'  | 'Anna Petrova'       | '#1 date*'       |
-			| 'Dress' | '-206,000'   | 'XS/Blue'  | '206,000'    | 'pcs'  | 'Arina Brown'        | '#2 date*'       |
+			| 'Dress' | '-202,000'   | 'XS/Blue'  | '202,000'    | 'pcs'  | 'Arina Brown'        | '#2 date*'       |
 		* Check for line locks on which a Physical count by location has already been created
 			* Inability to delete a line
 				And I go to line in "ItemList" table
@@ -1114,7 +1122,7 @@ Scenario: _2990010 create Physical inventory and Physical count by location with
 			| 'Shirt' | '36/Red'   | '7,000'      | 'pcs'  | 'Anna Petrova'       | '#3 date:*'      |
 			| 'Boots' | '36/18SD'  | '4,000'      | 'pcs'  | 'Anna Petrova'       | '#3 date:*'      |
 			| 'Dress' | 'S/Yellow' | '125,000'    | 'pcs'  | 'Anna Petrova'       | '#1 date:*'      |
-			| 'Dress' | 'XS/Blue'  | '206,000'    | 'pcs'  | 'Arina Brown'        | '#2 date:*'      |
+			| 'Dress' | 'XS/Blue'  | '202,000'    | 'pcs'  | 'Arina Brown'        | '#2 date:*'      |
 		* Check for impossibility to change the status to the one that makes movements with open Physical count by location
 			And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
 			And I select "Done" exact value from "Status" drop-down list

@@ -1476,7 +1476,7 @@ EndFunction
 #Region NewRegistersPosting
 
 Function UseRegister(Name) Export
-	Return Mid(Name, 7, 1) = "_" OR Mid(Name, 4, 1) = "_";
+	Return Mid(Name, 7, 1) = "_" OR Mid(Name, 4, 1) = "_" OR Mid(Name, 3, 1) = "_";
 EndFunction	
 
 Procedure ExecuteQuery(Ref, QueryArray, Parameters) Export

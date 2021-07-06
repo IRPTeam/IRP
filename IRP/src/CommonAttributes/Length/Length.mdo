@@ -1,38 +1,46 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:CommonAttribute xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="deff738c-1148-497e-a330-71ce9448bc23">
-  <name>Length</name>
-  <synonym>
-    <key>en</key>
-    <value>Length</value>
-  </synonym>
-  <type>
-    <types>Number</types>
-    <numberQualifiers>
-      <precision>16</precision>
-      <scale>3</scale>
-      <nonNegative>true</nonNegative>
-    </numberQualifiers>
-  </type>
-  <minValue xsi:type="core:UndefinedValue"/>
-  <maxValue xsi:type="core:UndefinedValue"/>
-  <dataHistory>Use</dataHistory>
-  <fillValue xsi:type="core:UndefinedValue"/>
-  <content>
-    <metadata>Catalog.Items</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Catalog.Units</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Catalog.ItemKeys</metadata>
-    <use>Use</use>
-  </content>
-  <autoUse>DontUse</autoUse>
-  <dataSeparation>DontUse</dataSeparation>
-  <usersSeparation>DontUse</usersSeparation>
-  <authenticationSeparation>DontUse</authenticationSeparation>
-  <configurationExtensionsSeparation>DontUse</configurationExtensionsSeparation>
-  <fullTextSearch>Use</fullTextSearch>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:CommonAttribute xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="deff738c-1148-497e-a330-71ce9448bc23">
+ <name>Length</name>
+ <synonym>
+  <key>ru</key>
+  <value>Длина</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Length</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Uzunluk</value>
+ </synonym>
+ <type>
+  <types>Number</types>
+  <numberQualifiers>
+   <precision>16</precision>
+   <scale>3</scale>
+   <nonNegative>true</nonNegative>
+  </numberQualifiers>
+ </type>
+ <minValue xsi:type="core:UndefinedValue"/>
+ <maxValue xsi:type="core:UndefinedValue"/>
+ <dataHistory>Use</dataHistory>
+ <fillValue xsi:type="core:UndefinedValue"/>
+ <content>
+  <metadata>Catalog.Items</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Catalog.Units</metadata>
+  <use>Use</use>
+ </content>
+ <content>
+  <metadata>Catalog.ItemKeys</metadata>
+  <use>Use</use>
+ </content>
+ <autoUse>DontUse</autoUse>
+ <dataSeparation>DontUse</dataSeparation>
+ <usersSeparation>DontUse</usersSeparation>
+ <authenticationSeparation>DontUse</authenticationSeparation>
+ <configurationExtensionsSeparation>DontUse</configurationExtensionsSeparation>
+ <fullTextSearch>Use</fullTextSearch>
 </mdclass:CommonAttribute>

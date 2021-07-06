@@ -1,10 +1,26 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonForm xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="79868951-da4b-482d-b039-dc7ca5f00ec3">
-  <name>PickupSpecialOffers</name>
-  <synonym>
-    <key>en</key>
-    <value>Pickup special offers</value>
-  </synonym>
-  <usePurposes>PersonalComputer</usePurposes>
-  <usePurposes>MobileDevice</usePurposes>
+ <name>PickupSpecialOffers</name>
+ <synonym>
+  <key>fr</key>
+  <value>Sélectionner les offres spéciales</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Подбор специальных предложений</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Pickup special offers</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Kapmanya seç</value>
+ </synonym>
+ <synonym>
+  <key>de</key>
+  <value>Sonderangebote auswählen</value>
+ </synonym>
+ <usePurposes>PersonalComputer</usePurposes>
+ <usePurposes>MobileDevice</usePurposes>
 </mdclass:CommonForm>

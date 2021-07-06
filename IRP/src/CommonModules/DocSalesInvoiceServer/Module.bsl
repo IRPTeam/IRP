@@ -1,4 +1,4 @@
-#Region FormEvents
+﻿#Region FormEvents
 
 Procedure AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters) Export
 	Form.CurrentPartner   = CurrentObject.Partner;

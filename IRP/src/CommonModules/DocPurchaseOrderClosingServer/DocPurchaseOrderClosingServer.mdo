@@ -1,10 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="e6ffd880-0031-4618-b5a1-371d0da481f8">
-  <name>DocPurchaseOrderClosingServer</name>
-  <synonym>
-    <key>en</key>
-    <value>Doc purchase order closing server</value>
-  </synonym>
-  <server>true</server>
-  <serverCall>true</serverCall>
+ <name>DocPurchaseOrderClosingServer</name>
+ <synonym>
+  <key>ru</key>
+  <value>Документ закрытие заказа поставщику сервер</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Doc purchase order closing server</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Evrak satın alma sipariş kapanışı server</value>
+ </synonym>
+ <server>true</server>
+ <serverCall>true</serverCall>
 </mdclass:CommonModule>

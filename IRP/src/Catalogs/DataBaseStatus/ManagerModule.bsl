@@ -1,4 +1,4 @@
-
+﻿
 Function GetOrCreateDataBaseStatusInfo() Export
 	
 	If Not Saas.isAreaActive() Then

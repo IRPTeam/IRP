@@ -1,11 +1,27 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="fe11b35c-dc2d-4950-8072-ba725a7dedb1">
-  <name>Sales</name>
-  <synonym>
-    <key>en</key>
-    <value>Sales</value>
-  </synonym>
-  <includeHelpInContents>true</includeHelpInContents>
-  <includeInCommandInterface>true</includeInCommandInterface>
-  <parentSubsystem>Subsystem.Reports</parentSubsystem>
+ <name>Sales</name>
+ <synonym>
+  <key>fr</key>
+  <value>Ventes</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Продажи</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Sales</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Satışlar</value>
+ </synonym>
+ <synonym>
+  <key>de</key>
+  <value>Verkauf</value>
+ </synonym>
+ <includeHelpInContents>true</includeHelpInContents>
+ <includeInCommandInterface>true</includeInCommandInterface>
+ <parentSubsystem>Subsystem.Reports</parentSubsystem>
 </mdclass:Subsystem>

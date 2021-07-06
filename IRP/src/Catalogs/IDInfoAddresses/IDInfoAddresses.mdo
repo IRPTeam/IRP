@@ -1,116 +1,228 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="df3efb8e-3ad7-4551-a378-7b8f64f5cf29">
-  <producedTypes>
-    <objectType typeId="8af81dd2-b7f3-4365-8188-e246a7eda43e" valueTypeId="0975a8a9-2b19-4d6a-93de-ffd924d343d9"/>
-    <refType typeId="93e98b9f-499b-4725-8c80-a4e069781757" valueTypeId="c9775cd7-0aa7-40dd-bf26-3859f63fe01f"/>
-    <selectionType typeId="76113e86-cc83-45f0-807d-887b4c10aa68" valueTypeId="a68855ab-d374-4060-9a1b-30bd286b4865"/>
-    <listType typeId="f9cdbc33-8746-4482-8134-1791d2fc9abd" valueTypeId="ec2695f2-68b8-4a64-9f29-b873d3d981c4"/>
-    <managerType typeId="66223a1a-7f7a-4824-82ac-93ea4767e502" valueTypeId="41fe6ed0-67e9-4c22-b6ee-3517e2d612be"/>
-  </producedTypes>
-  <name>IDInfoAddresses</name>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Catalog xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="df3efb8e-3ad7-4551-a378-7b8f64f5cf29">
+ <producedTypes>
+  <objectType typeId="8af81dd2-b7f3-4365-8188-e246a7eda43e" valueTypeId="0975a8a9-2b19-4d6a-93de-ffd924d343d9"/>
+  <refType typeId="93e98b9f-499b-4725-8c80-a4e069781757" valueTypeId="c9775cd7-0aa7-40dd-bf26-3859f63fe01f"/>
+  <selectionType typeId="76113e86-cc83-45f0-807d-887b4c10aa68" valueTypeId="a68855ab-d374-4060-9a1b-30bd286b4865"/>
+  <listType typeId="f9cdbc33-8746-4482-8134-1791d2fc9abd" valueTypeId="ec2695f2-68b8-4a64-9f29-b873d3d981c4"/>
+  <managerType typeId="66223a1a-7f7a-4824-82ac-93ea4767e502" valueTypeId="41fe6ed0-67e9-4c22-b6ee-3517e2d612be"/>
+ </producedTypes>
+ <name>IDInfoAddresses</name>
+ <synonym>
+  <key>fr</key>
+  <value>Hiérarchie des adresses</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Адресная иерархия</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Addresses hierarchy</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Adresler hiyerarşisi</value>
+ </synonym>
+ <synonym>
+  <key>de</key>
+  <value>Adresshierarchie</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <inputByString>Catalog.IDInfoAddresses.StandardAttribute.Code</inputByString>
+ <inputByString>Catalog.IDInfoAddresses.StandardAttribute.Description</inputByString>
+ <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+ <createOnInput>Use</createOnInput>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>fr</key>
+  <value>Hiérarchie d'adresse</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>ru</key>
+  <value>Адресная иерархия</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>en</key>
+  <value>Address hierarchy</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>tr</key>
+  <value>Adres hiyerarşisi</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>de</key>
+  <value>Adresshierarchie</value>
+ </objectPresentation>
+ <hierarchical>true</hierarchical>
+ <hierarchyType>HierarchyOfItems</hierarchyType>
+ <levelCount>2</levelCount>
+ <foldersOnTop>true</foldersOnTop>
+ <owners>ChartOfCharacteristicTypes.IDInfoTypes</owners>
+ <codeLength>9</codeLength>
+ <descriptionLength>150</descriptionLength>
+ <codeType>String</codeType>
+ <codeAllowedLength>Variable</codeAllowedLength>
+ <checkUnique>true</checkUnique>
+ <autonumbering>true</autonumbering>
+ <defaultPresentation>AsDescription</defaultPresentation>
+ <editType>InDialog</editType>
+ <choiceMode>BothWays</choiceMode>
+ <defaultObjectForm>Catalog.IDInfoAddresses.Form.ItemForm</defaultObjectForm>
+ <defaultListForm>Catalog.IDInfoAddresses.Form.ListForm</defaultListForm>
+ <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+ <attributes uuid="40eba57e-a472-49ad-9fe9-740da1de86bc">
+  <name>Level</name>
   <synonym>
-    <key>en</key>
-    <value>Addresses hierarchy</value>
+   <key>fr</key>
+   <value>Niveau</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <inputByString>Catalog.IDInfoAddresses.StandardAttribute.Code</inputByString>
-  <inputByString>Catalog.IDInfoAddresses.StandardAttribute.Description</inputByString>
-  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
-  <createOnInput>Use</createOnInput>
-  <dataLockControlMode>Managed</dataLockControlMode>
+  <synonym>
+   <key>ru</key>
+   <value>Уровень</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Level</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Seviye</value>
+  </synonym>
+  <synonym>
+   <key>de</key>
+   <value>Ebene</value>
+  </synonym>
+  <type>
+   <types>String</types>
+   <stringQualifiers>
+    <length>50</length>
+   </stringQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:StringValue">
+   <value/>
+  </fillValue>
   <fullTextSearch>Use</fullTextSearch>
-  <objectPresentation>
-    <key>en</key>
-    <value>Address hierarchy</value>
-  </objectPresentation>
-  <hierarchical>true</hierarchical>
-  <hierarchyType>HierarchyOfItems</hierarchyType>
-  <levelCount>2</levelCount>
-  <foldersOnTop>true</foldersOnTop>
-  <owners>ChartOfCharacteristicTypes.IDInfoTypes</owners>
-  <codeLength>9</codeLength>
-  <descriptionLength>150</descriptionLength>
-  <codeType>String</codeType>
-  <codeAllowedLength>Variable</codeAllowedLength>
-  <checkUnique>true</checkUnique>
-  <autonumbering>true</autonumbering>
-  <defaultPresentation>AsDescription</defaultPresentation>
-  <editType>InDialog</editType>
-  <choiceMode>BothWays</choiceMode>
-  <defaultObjectForm>Catalog.IDInfoAddresses.Form.ItemForm</defaultObjectForm>
-  <defaultListForm>Catalog.IDInfoAddresses.Form.ListForm</defaultListForm>
-  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
-  <attributes uuid="40eba57e-a472-49ad-9fe9-740da1de86bc">
-    <name>Level</name>
-    <synonym>
-      <key>en</key>
-      <value>Level</value>
-    </synonym>
-    <type>
-      <types>String</types>
-      <stringQualifiers>
-        <length>50</length>
-      </stringQualifiers>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:StringValue">
-      <value></value>
-    </fillValue>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="ee83bd43-d0bc-44bb-a7db-3e97f09176ce">
-    <name>Country</name>
-    <synonym>
-      <key>en</key>
-      <value>Country</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Countries</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="e585b9b0-decc-47f5-a52e-241f40e7f411">
-    <name>FullDescription</name>
-    <synonym>
-      <key>en</key>
-      <value>Full description</value>
-    </synonym>
-    <type>
-      <types>String</types>
-      <stringQualifiers>
-        <length>500</length>
-      </stringQualifiers>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:StringValue">
-      <value></value>
-    </fillValue>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <forms uuid="23652c9c-63d4-4c58-b035-2e529ba406b0">
-    <name>ItemForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Item form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="a48d47b9-9910-448a-baf4-a4d1f7839108">
-    <name>ListForm</name>
-    <synonym>
-      <key>en</key>
-      <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="ee83bd43-d0bc-44bb-a7db-3e97f09176ce">
+  <name>Country</name>
+  <synonym>
+   <key>fr</key>
+   <value>Pays</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Страна</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Country</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Ülke</value>
+  </synonym>
+  <synonym>
+   <key>de</key>
+   <value>Land</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Countries</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="e585b9b0-decc-47f5-a52e-241f40e7f411">
+  <name>FullDescription</name>
+  <synonym>
+   <key>fr</key>
+   <value>Description complète</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Полное наименование</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Full description</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Uzun tanım</value>
+  </synonym>
+  <synonym>
+   <key>de</key>
+   <value>Vollständige Beschreibung</value>
+  </synonym>
+  <type>
+   <types>String</types>
+   <stringQualifiers>
+    <length>500</length>
+   </stringQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:StringValue">
+   <value/>
+  </fillValue>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <forms uuid="23652c9c-63d4-4c58-b035-2e529ba406b0">
+  <name>ItemForm</name>
+  <synonym>
+   <key>fr</key>
+   <value>Formulaire d'élément</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Форма элемента</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Item form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Nesne formu</value>
+  </synonym>
+  <synonym>
+   <key>de</key>
+   <value>Elementformular</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="a48d47b9-9910-448a-baf4-a4d1f7839108">
+  <name>ListForm</name>
+  <synonym>
+   <key>fr</key>
+   <value>Formulaire de liste</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Форма списка</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>List form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Liste formu</value>
+  </synonym>
+  <synonym>
+   <key>de</key>
+   <value>Listenformular</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:Catalog>

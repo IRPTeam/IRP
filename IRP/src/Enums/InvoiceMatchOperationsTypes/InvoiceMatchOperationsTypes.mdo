@@ -1,36 +1,92 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="26a87d1b-8bca-4657-8d38-be654410e12a">
-  <producedTypes>
-    <refType typeId="4c300415-3736-4e28-ae2d-7d925f0d8593" valueTypeId="6a9e30b5-83cf-4e2d-b6a8-b7b19f463f58"/>
-    <listType typeId="f6801ef5-5fc6-487d-934f-872779340819" valueTypeId="9996944b-8889-4893-b29f-3dcf756eb778"/>
-    <managerType typeId="fe2adf51-0f6e-436b-aec6-9a239faf0ff9" valueTypeId="54d50605-22d0-492a-8789-78ed4eac55d9"/>
-  </producedTypes>
-  <name>InvoiceMatchOperationsTypes</name>
+ <producedTypes>
+  <refType typeId="4c300415-3736-4e28-ae2d-7d925f0d8593" valueTypeId="6a9e30b5-83cf-4e2d-b6a8-b7b19f463f58"/>
+  <listType typeId="f6801ef5-5fc6-487d-934f-872779340819" valueTypeId="9996944b-8889-4893-b29f-3dcf756eb778"/>
+  <managerType typeId="fe2adf51-0f6e-436b-aec6-9a239faf0ff9" valueTypeId="54d50605-22d0-492a-8789-78ed4eac55d9"/>
+ </producedTypes>
+ <name>InvoiceMatchOperationsTypes</name>
+ <synonym>
+  <key>fr</key>
+  <value>Types des opérations des rapprochements des factures</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Сопоставление документов-оснований взаиморасчетов с платежами</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Invoice match operations types</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Fatura kapatma işlem tipleri</value>
+ </synonym>
+ <synonym>
+  <key>de</key>
+  <value>Operationstypen des Rechnungsabgleichs</value>
+ </synonym>
+ <quickChoice>true</quickChoice>
+ <choiceMode>BothWays</choiceMode>
+ <enumValues uuid="456cf3d3-b696-4dfe-8afb-61e3972602a8">
+  <name>WithCustomer</name>
   <synonym>
-    <key>en</key>
-    <value>Invoice match operations types</value>
+   <key>ru</key>
+   <value>С клиентом</value>
   </synonym>
-  <quickChoice>true</quickChoice>
-  <choiceMode>BothWays</choiceMode>
-  <enumValues uuid="456cf3d3-b696-4dfe-8afb-61e3972602a8">
-    <name>WithCustomer</name>
-    <synonym>
-      <key>en</key>
-      <value>With customer</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="7792e63a-891e-45e8-ab1e-231c3407a04f">
-    <name>WithVendor</name>
-    <synonym>
-      <key>en</key>
-      <value>With vendor</value>
-    </synonym>
-  </enumValues>
-  <enumValues uuid="f5a5d9c1-a8ae-44a9-8096-fb802703cebe">
-    <name>UserDefined</name>
-    <synonym>
-      <key>en</key>
-      <value>User defined</value>
-    </synonym>
-  </enumValues>
+  <synonym>
+   <key>en</key>
+   <value>With customer</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Müşteri ile</value>
+  </synonym>
+  <synonym>
+   <key>de</key>
+   <value>Mit Kunden</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="7792e63a-891e-45e8-ab1e-231c3407a04f">
+  <name>WithVendor</name>
+  <synonym>
+   <key>ru</key>
+   <value>С поставщиком</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>With vendor</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Tedarikçi ile</value>
+  </synonym>
+  <synonym>
+   <key>de</key>
+   <value>Mit Lieferanten</value>
+  </synonym>
+ </enumValues>
+ <enumValues uuid="f5a5d9c1-a8ae-44a9-8096-fb802703cebe">
+  <name>UserDefined</name>
+  <synonym>
+   <key>fr</key>
+   <value>Défini par l’utilisateur</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Произвольный</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>User defined</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Kullanıcı tanımlı</value>
+  </synonym>
+  <synonym>
+   <key>de</key>
+   <value>Benutzerdefiniert</value>
+  </synonym>
+ </enumValues>
 </mdclass:Enum>

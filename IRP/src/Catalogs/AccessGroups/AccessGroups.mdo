@@ -1,111 +1,255 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="83de07f9-07e5-4260-8362-3c7ac996f065">
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Catalog xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="83de07f9-07e5-4260-8362-3c7ac996f065">
+ <producedTypes>
+  <objectType typeId="aa3a7849-046f-40ec-9a35-8bb5378143bf" valueTypeId="5679b9f9-cff6-4662-b412-029f23e9c12f"/>
+  <refType typeId="621e0a37-95f7-48ef-b0a3-e70f8ec500fe" valueTypeId="9b58a866-f72f-4903-ba2b-d05d58896cde"/>
+  <selectionType typeId="f0701390-1a48-4e85-8f26-498566ebae3a" valueTypeId="9a02bf66-5bf6-421c-bf7e-4cdc19bca643"/>
+  <listType typeId="9c37752b-22a4-4506-aaa4-9bccd4d00eed" valueTypeId="0a66be13-530c-4e07-8e40-4af8e196190c"/>
+  <managerType typeId="b1816f6e-c6f0-40b5-a658-f77c6917e441" valueTypeId="5eb79faf-3be0-4181-9212-87949e158bea"/>
+ </producedTypes>
+ <name>AccessGroups</name>
+ <synonym>
+  <key>fr</key>
+  <value>Groupes d'accès des utilisateurs</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Группы доступа пользователей</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>User access groups</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Kullanıcı erişim grupları</value>
+ </synonym>
+ <synonym>
+  <key>de</key>
+  <value>Zugriffsgruppen</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+ <createOnInput>DontUse</createOnInput>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <objectPresentation>
+  <key>fr</key>
+  <value>Groupe d'accès des utilisateurs</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>ru</key>
+  <value>Группа доступа пользователей</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>en</key>
+  <value>User access group</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>tr</key>
+  <value>Kullanıcı erişim grubu</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>de</key>
+  <value>Zugriffsgruppe</value>
+ </objectPresentation>
+ <levelCount>2</levelCount>
+ <foldersOnTop>true</foldersOnTop>
+ <codeLength>12</codeLength>
+ <codeAllowedLength>Variable</codeAllowedLength>
+ <checkUnique>true</checkUnique>
+ <autonumbering>true</autonumbering>
+ <defaultPresentation>AsDescription</defaultPresentation>
+ <editType>InDialog</editType>
+ <choiceMode>BothWays</choiceMode>
+ <defaultObjectForm>Catalog.AccessGroups.Form.ItemForm</defaultObjectForm>
+ <defaultListForm>Catalog.AccessGroups.Form.ListForm</defaultListForm>
+ <defaultChoiceForm>Catalog.AccessGroups.Form.ChoiceForm</defaultChoiceForm>
+ <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+ <tabularSections uuid="6bb388da-7c65-4db7-8e65-0bbba090a078">
   <producedTypes>
-    <objectType typeId="aa3a7849-046f-40ec-9a35-8bb5378143bf" valueTypeId="5679b9f9-cff6-4662-b412-029f23e9c12f"/>
-    <refType typeId="621e0a37-95f7-48ef-b0a3-e70f8ec500fe" valueTypeId="9b58a866-f72f-4903-ba2b-d05d58896cde"/>
-    <selectionType typeId="f0701390-1a48-4e85-8f26-498566ebae3a" valueTypeId="9a02bf66-5bf6-421c-bf7e-4cdc19bca643"/>
-    <listType typeId="9c37752b-22a4-4506-aaa4-9bccd4d00eed" valueTypeId="0a66be13-530c-4e07-8e40-4af8e196190c"/>
-    <managerType typeId="b1816f6e-c6f0-40b5-a658-f77c6917e441" valueTypeId="5eb79faf-3be0-4181-9212-87949e158bea"/>
+   <objectType typeId="2caa41b3-4d90-404b-8c01-62fa60f85b6d" valueTypeId="1793b811-3036-47fe-bae8-fe904333dd5a"/>
+   <rowType typeId="07d824dd-ed70-48c7-bcd7-e33a18029acb" valueTypeId="6570434c-ebf3-4838-ba42-bd02dc8b7bd7"/>
   </producedTypes>
-  <name>AccessGroups</name>
+  <name>Profiles</name>
   <synonym>
-    <key>en</key>
-    <value>User access groups</value>
+   <key>fr</key>
+   <value>Profils</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
-  <createOnInput>DontUse</createOnInput>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <objectPresentation>
+  <synonym>
+   <key>ru</key>
+   <value>Профили</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Profiles</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Profiller</value>
+  </synonym>
+  <synonym>
+   <key>de</key>
+   <value>Profile</value>
+  </synonym>
+  <attributes uuid="c98bde96-193a-42e8-9ce5-c6e507dfb9ac">
+   <name>Profile</name>
+   <synonym>
+    <key>fr</key>
+    <value>Profil</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Профиль</value>
+   </synonym>
+   <synonym>
     <key>en</key>
-    <value>User access group</value>
-  </objectPresentation>
-  <levelCount>2</levelCount>
-  <foldersOnTop>true</foldersOnTop>
-  <codeLength>12</codeLength>
-  <codeAllowedLength>Variable</codeAllowedLength>
-  <checkUnique>true</checkUnique>
-  <autonumbering>true</autonumbering>
-  <defaultPresentation>AsDescription</defaultPresentation>
-  <editType>InDialog</editType>
-  <choiceMode>BothWays</choiceMode>
-  <defaultObjectForm>Catalog.AccessGroups.Form.ItemForm</defaultObjectForm>
-  <defaultListForm>Catalog.AccessGroups.Form.ListForm</defaultListForm>
-  <defaultChoiceForm>Catalog.AccessGroups.Form.ChoiceForm</defaultChoiceForm>
-  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
-  <tabularSections uuid="6bb388da-7c65-4db7-8e65-0bbba090a078">
-    <producedTypes>
-      <objectType typeId="2caa41b3-4d90-404b-8c01-62fa60f85b6d" valueTypeId="1793b811-3036-47fe-bae8-fe904333dd5a"/>
-      <rowType typeId="07d824dd-ed70-48c7-bcd7-e33a18029acb" valueTypeId="6570434c-ebf3-4838-ba42-bd02dc8b7bd7"/>
-    </producedTypes>
-    <name>Profiles</name>
-    <synonym>
-      <key>en</key>
-      <value>Profiles</value>
-    </synonym>
-    <attributes uuid="c98bde96-193a-42e8-9ce5-c6e507dfb9ac">
-      <name>Profile</name>
-      <synonym>
-        <key>en</key>
-        <value>Profile</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.AccessProfiles</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-    </attributes>
-  </tabularSections>
-  <tabularSections uuid="f5048857-3c47-4e08-b39c-64a0319cc210">
-    <producedTypes>
-      <objectType typeId="fdb2fdb7-ace3-4ffa-9542-6c9f9afb2fdf" valueTypeId="caa31c7d-a84c-487e-9c6f-2a0593e0b5f4"/>
-      <rowType typeId="b1a5e26f-f47d-4ad3-9dfb-5ef2eb7625e8" valueTypeId="9ae5692f-d8e0-49d4-9357-c79f7be26c6a"/>
-    </producedTypes>
-    <name>Users</name>
-    <synonym>
-      <key>en</key>
-      <value>Users</value>
-    </synonym>
-    <attributes uuid="4ddcb09d-ff6c-415b-a519-08469fe52339">
-      <name>User</name>
-      <synonym>
-        <key>en</key>
-        <value>User</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.Users</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-    </attributes>
-  </tabularSections>
-  <forms uuid="4834790e-58e6-473b-b3f3-988d799569ee">
-    <name>ItemForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Item form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="f259c78d-279c-4820-9a8a-a970e736ee6a">
-    <name>ListForm</name>
-    <synonym>
-      <key>en</key>
-      <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="c236196d-015b-4ef4-895e-55a09553cc24">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
+    <value>Profile</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Profil</value>
+   </synonym>
+   <synonym>
+    <key>de</key>
+    <value>Profil</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.AccessProfiles</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+  </attributes>
+ </tabularSections>
+ <tabularSections uuid="f5048857-3c47-4e08-b39c-64a0319cc210">
+  <producedTypes>
+   <objectType typeId="fdb2fdb7-ace3-4ffa-9542-6c9f9afb2fdf" valueTypeId="caa31c7d-a84c-487e-9c6f-2a0593e0b5f4"/>
+   <rowType typeId="b1a5e26f-f47d-4ad3-9dfb-5ef2eb7625e8" valueTypeId="9ae5692f-d8e0-49d4-9357-c79f7be26c6a"/>
+  </producedTypes>
+  <name>Users</name>
+  <synonym>
+   <key>fr</key>
+   <value>Utilisateurs</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Пользователи</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Users</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Kullanıcılar</value>
+  </synonym>
+  <synonym>
+   <key>de</key>
+   <value>Benutzer</value>
+  </synonym>
+  <attributes uuid="4ddcb09d-ff6c-415b-a519-08469fe52339">
+   <name>User</name>
+   <synonym>
+    <key>fr</key>
+    <value>Utilisateur</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Пользователь</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>User</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Kullanıcı</value>
+   </synonym>
+   <synonym>
+    <key>de</key>
+    <value>Benutzer</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.Users</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+  </attributes>
+ </tabularSections>
+ <forms uuid="4834790e-58e6-473b-b3f3-988d799569ee">
+  <name>ItemForm</name>
+  <synonym>
+   <key>fr</key>
+   <value>Formulaire d'élément</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Форма элемента</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Item form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Nesne formu</value>
+  </synonym>
+  <synonym>
+   <key>de</key>
+   <value>Elementformular</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="f259c78d-279c-4820-9a8a-a970e736ee6a">
+  <name>ListForm</name>
+  <synonym>
+   <key>fr</key>
+   <value>Formulaire de liste</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Форма списка</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>List form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Liste formu</value>
+  </synonym>
+  <synonym>
+   <key>de</key>
+   <value>Listenformular</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="c236196d-015b-4ef4-895e-55a09553cc24">
+  <name>ChoiceForm</name>
+  <synonym>
+   <key>fr</key>
+   <value>Formulaire de sélection</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Форма выбора</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Choice form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Seçim formu</value>
+  </synonym>
+  <synonym>
+   <key>de</key>
+   <value>Auswahlformular</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:Catalog>

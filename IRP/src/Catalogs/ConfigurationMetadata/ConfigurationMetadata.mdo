@@ -1,182 +1,310 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="863c380c-7c02-49e0-a73e-4227917bb70e">
-  <producedTypes>
-    <objectType typeId="88d55be2-d648-4786-aae9-26b24d8afd75" valueTypeId="b7bdea0c-a275-4e3b-b6c7-d51797946d8a"/>
-    <refType typeId="b6b98229-e5c1-46f9-b68f-a9d7a818e653" valueTypeId="a7d8a7f2-c551-4f41-8d2e-bdd569acfa64"/>
-    <selectionType typeId="2b3d0dae-6f94-4ff0-901e-3a3a29c11f1e" valueTypeId="a8952618-fbd9-429b-a163-92bd2466a572"/>
-    <listType typeId="8bec9175-d625-4a25-88a9-b2eb8ff18674" valueTypeId="3325ec36-0420-4aaf-a6ec-4efda8fd1cd4"/>
-    <managerType typeId="9e722420-669b-4d10-ab5e-76e6e054a3ef" valueTypeId="379862f5-f952-4fd1-ac75-17c07823ca69"/>
-  </producedTypes>
-  <name>ConfigurationMetadata</name>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Catalog xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="863c380c-7c02-49e0-a73e-4227917bb70e">
+ <producedTypes>
+  <objectType typeId="88d55be2-d648-4786-aae9-26b24d8afd75" valueTypeId="b7bdea0c-a275-4e3b-b6c7-d51797946d8a"/>
+  <refType typeId="b6b98229-e5c1-46f9-b68f-a9d7a818e653" valueTypeId="a7d8a7f2-c551-4f41-8d2e-bdd569acfa64"/>
+  <selectionType typeId="2b3d0dae-6f94-4ff0-901e-3a3a29c11f1e" valueTypeId="a8952618-fbd9-429b-a163-92bd2466a572"/>
+  <listType typeId="8bec9175-d625-4a25-88a9-b2eb8ff18674" valueTypeId="3325ec36-0420-4aaf-a6ec-4efda8fd1cd4"/>
+  <managerType typeId="9e722420-669b-4d10-ab5e-76e6e054a3ef" valueTypeId="379862f5-f952-4fd1-ac75-17c07823ca69"/>
+ </producedTypes>
+ <name>ConfigurationMetadata</name>
+ <synonym>
+  <key>fr</key>
+  <value>Métadonnées de la configuration</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Метаданные конфигурации</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Configuration metadata</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Konfigürasyon anaverisi</value>
+ </synonym>
+ <synonym>
+  <key>de</key>
+  <value>Metadaten</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+ <createOnInput>Use</createOnInput>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>fr</key>
+  <value>Métadonnées de la configuration</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>ru</key>
+  <value>Метаданные конфигурации</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>en</key>
+  <value>Configuration metadata</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>tr</key>
+  <value>Konfigürasyon anaverisi</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>de</key>
+  <value>Metadaten</value>
+ </objectPresentation>
+ <hierarchical>true</hierarchical>
+ <hierarchyType>HierarchyOfItems</hierarchyType>
+ <limitLevelCount>true</limitLevelCount>
+ <levelCount>2</levelCount>
+ <foldersOnTop>true</foldersOnTop>
+ <descriptionLength>64</descriptionLength>
+ <codeAllowedLength>Variable</codeAllowedLength>
+ <defaultPresentation>AsDescription</defaultPresentation>
+ <predefined>
+  <items id="e913d420-ffbd-4366-9f1b-2c2b42de0fb7">
+   <name>Catalogs</name>
+   <description>Catalogs</description>
+   <code xsi:type="core:NumberValue">
+    <value>0</value>
+   </code>
+  </items>
+  <items id="79e6dfcb-53cf-49be-b1ef-032948cacd0c">
+   <name>Documents</name>
+   <description>Documents</description>
+   <code xsi:type="core:NumberValue">
+    <value>0</value>
+   </code>
+  </items>
+  <items id="35c8b407-96be-4355-87d0-9be6a1c66c9c">
+   <name>Reports</name>
+   <description>Reports</description>
+   <code xsi:type="core:NumberValue">
+    <value>0</value>
+   </code>
+  </items>
+  <items id="98da3047-c361-4bad-9e87-e34a4cfaefa9">
+   <name>DataProcessors</name>
+   <description>Data processors</description>
+   <code xsi:type="core:NumberValue">
+    <value>0</value>
+   </code>
+  </items>
+ </predefined>
+ <editType>InDialog</editType>
+ <choiceMode>BothWays</choiceMode>
+ <defaultObjectForm>Catalog.ConfigurationMetadata.Form.ItemForm</defaultObjectForm>
+ <defaultListForm>Catalog.ConfigurationMetadata.Form.ListForm</defaultListForm>
+ <attributes uuid="c1323631-5529-43f7-94d3-70abc4f80fdc">
+  <name>Extension</name>
   <synonym>
-    <key>en</key>
-    <value>Configuration metadata</value>
+   <key>fr</key>
+   <value>Extension</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
-  <createOnInput>Use</createOnInput>
-  <dataLockControlMode>Managed</dataLockControlMode>
+  <synonym>
+   <key>ru</key>
+   <value>Расширение</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Extension</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Uzantı</value>
+  </synonym>
+  <synonym>
+   <key>de</key>
+   <value>Erweiterung</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Extensions</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
-  <objectPresentation>
-    <key>en</key>
-    <value>Configuration metadata</value>
-  </objectPresentation>
-  <hierarchical>true</hierarchical>
-  <hierarchyType>HierarchyOfItems</hierarchyType>
-  <limitLevelCount>true</limitLevelCount>
-  <levelCount>2</levelCount>
-  <foldersOnTop>true</foldersOnTop>
-  <descriptionLength>64</descriptionLength>
-  <codeAllowedLength>Variable</codeAllowedLength>
-  <defaultPresentation>AsDescription</defaultPresentation>
-  <predefined>
-    <items id="e913d420-ffbd-4366-9f1b-2c2b42de0fb7">
-      <name>Catalogs</name>
-      <description>Catalogs</description>
-      <code xsi:type="core:NumberValue">
-        <value>0</value>
-      </code>
-    </items>
-    <items id="79e6dfcb-53cf-49be-b1ef-032948cacd0c">
-      <name>Documents</name>
-      <description>Documents</description>
-      <code xsi:type="core:NumberValue">
-        <value>0</value>
-      </code>
-    </items>
-    <items id="35c8b407-96be-4355-87d0-9be6a1c66c9c">
-      <name>Reports</name>
-      <description>Reports</description>
-      <code xsi:type="core:NumberValue">
-        <value>0</value>
-      </code>
-    </items>
-    <items id="98da3047-c361-4bad-9e87-e34a4cfaefa9">
-      <name>DataProcessors</name>
-      <description>Data processors</description>
-      <code xsi:type="core:NumberValue">
-        <value>0</value>
-      </code>
-    </items>
-  </predefined>
-  <editType>InDialog</editType>
-  <choiceMode>BothWays</choiceMode>
-  <defaultObjectForm>Catalog.ConfigurationMetadata.Form.ItemForm</defaultObjectForm>
-  <defaultListForm>Catalog.ConfigurationMetadata.Form.ListForm</defaultListForm>
-  <attributes uuid="c1323631-5529-43f7-94d3-70abc4f80fdc">
-    <name>Extension</name>
-    <synonym>
-      <key>en</key>
-      <value>Extension</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Extensions</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="4c5116b9-b786-40fc-bf62-ca9f303ca025">
-    <name>CheckDescriptionDuplicate</name>
-    <synonym>
-      <key>en</key>
-      <value>Check description duplicate</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="e487cc9a-c41a-4fc0-955b-32afd191113e">
-    <name>CheckDescriptionFilling</name>
-    <synonym>
-      <key>en</key>
-      <value>Check description filling</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="a9819821-f441-4740-ab99-d97309248954">
-    <name>ObjectName</name>
-    <synonym>
-      <key>en</key>
-      <value>Object name</value>
-    </synonym>
-    <type>
-      <types>String</types>
-      <stringQualifiers>
-        <length>64</length>
-      </stringQualifiers>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <indexing>Index</indexing>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="f7c954dd-436d-4983-9d86-4147f0e39cf5">
-    <name>ObjectFullName</name>
-    <synonym>
-      <key>en</key>
-      <value>Object full name</value>
-    </synonym>
-    <type>
-      <types>String</types>
-      <stringQualifiers>
-        <length>128</length>
-      </stringQualifiers>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <indexing>Index</indexing>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="b783a657-e3df-405d-a2c8-90579272608b">
-    <name>Unused</name>
-    <synonym>
-      <key>en</key>
-      <value>Unused</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <forms uuid="e0eaab55-a0e3-4730-98df-0377c61e508d">
-    <name>ListForm</name>
-    <synonym>
-      <key>en</key>
-      <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="360b8f17-2d37-4d3a-9a8f-384daa8e706f">
-    <name>ItemForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Item form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="4c5116b9-b786-40fc-bf62-ca9f303ca025">
+  <name>CheckDescriptionDuplicate</name>
+  <synonym>
+   <key>ru</key>
+   <value>Поверить задвоенность наименования</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Check description duplicate</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Tanım duplike kontrolü</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="e487cc9a-c41a-4fc0-955b-32afd191113e">
+  <name>CheckDescriptionFilling</name>
+  <synonym>
+   <key>ru</key>
+   <value>Проверка заполнения наименования</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Check description filling</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Tanım duplike kontrolü</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="a9819821-f441-4740-ab99-d97309248954">
+  <name>ObjectName</name>
+  <synonym>
+   <key>fr</key>
+   <value>Nom de l'objet</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Наименование объекта</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Object name</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Nesne ismi</value>
+  </synonym>
+  <synonym>
+   <key>de</key>
+   <value>Objektname</value>
+  </synonym>
+  <type>
+   <types>String</types>
+   <stringQualifiers>
+    <length>64</length>
+   </stringQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <indexing>Index</indexing>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="f7c954dd-436d-4983-9d86-4147f0e39cf5">
+  <name>ObjectFullName</name>
+  <synonym>
+   <key>ru</key>
+   <value>Полное наименование объекта</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Object full name</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Nesne ful tanımı</value>
+  </synonym>
+  <type>
+   <types>String</types>
+   <stringQualifiers>
+    <length>128</length>
+   </stringQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <indexing>Index</indexing>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="b783a657-e3df-405d-a2c8-90579272608b">
+  <name>Unused</name>
+  <synonym>
+   <key>ru</key>
+   <value>Не используется</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Unused</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Kullanım dışı</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <forms uuid="e0eaab55-a0e3-4730-98df-0377c61e508d">
+  <name>ListForm</name>
+  <synonym>
+   <key>fr</key>
+   <value>Formulaire de liste</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Форма списка</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>List form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Liste formu</value>
+  </synonym>
+  <synonym>
+   <key>de</key>
+   <value>Listenformular</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="360b8f17-2d37-4d3a-9a8f-384daa8e706f">
+  <name>ItemForm</name>
+  <synonym>
+   <key>fr</key>
+   <value>Formulaire d'élément</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Форма элемента</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Item form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Nesne formu</value>
+  </synonym>
+  <synonym>
+   <key>de</key>
+   <value>Elementformular</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:Catalog>

@@ -1,9 +1,17 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonTemplate xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="fe815f88-ebaa-4662-a323-b1711cae3f8a">
-  <name>HTMLTextField</name>
-  <synonym>
-    <key>en</key>
-    <value>HTMLText field</value>
-  </synonym>
-  <templateType>TextDocument</templateType>
+ <name>HTMLTextField</name>
+ <synonym>
+  <key>ru</key>
+  <value>HTMLТекстовое поле</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>HTMLText field</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>HTML Metin alanı</value>
+ </synonym>
+ <templateType>TextDocument</templateType>
 </mdclass:CommonTemplate>

@@ -1,10 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="23004fb6-67c5-46e1-9675-404c47d76e52">
-  <name>DocPurchaseOrderClosingClient</name>
-  <synonym>
-    <key>en</key>
-    <value>Doc purchase order closing client</value>
-  </synonym>
-  <clientManagedApplication>true</clientManagedApplication>
-  <clientOrdinaryApplication>true</clientOrdinaryApplication>
+ <name>DocPurchaseOrderClosingClient</name>
+ <synonym>
+  <key>ru</key>
+  <value>Документ закрытие заказа поставщику клиент</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Doc purchase order closing client</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Evrak satın alma sipariş kapanışı client</value>
+ </synonym>
+ <clientManagedApplication>true</clientManagedApplication>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
 </mdclass:CommonModule>

@@ -1,10 +1,26 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="b0c077c7-46c6-4473-9a59-22a7aa57f03d">
-  <name>FillingFromClassifiers</name>
-  <synonym>
-    <key>en</key>
-    <value>Filling from classifiers</value>
-  </synonym>
-  <server>true</server>
-  <serverCall>true</serverCall>
+ <name>FillingFromClassifiers</name>
+ <synonym>
+  <key>fr</key>
+  <value>Remplissage à partir des classificateurs</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Заполнение из классификаторов</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Filling from classifiers</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Sınıflandırıcıdan yükleme</value>
+ </synonym>
+ <synonym>
+  <key>de</key>
+  <value>Ausfüllen aus Klassifizierer</value>
+ </synonym>
+ <server>true</server>
+ <serverCall>true</serverCall>
 </mdclass:CommonModule>

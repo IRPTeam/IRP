@@ -1,4 +1,4 @@
-Function GetArrayOfTaxInfo(Form) Export
+﻿Function GetArrayOfTaxInfo(Form) Export
 	SavedData = TaxesClientServer.GetSavedData(Form, TaxesServer.GetAttributeNames().CacheName);
 	If SavedData.Property("ArrayOfColumnsInfo") Then
 		Return SavedData.ArrayOfColumnsInfo;

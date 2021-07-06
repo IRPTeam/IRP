@@ -1,13 +1,21 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:EventSubscription xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="45dc7e40-2add-441e-8339-e9525e92f20a">
-  <name>OnWrite_RowID</name>
-  <synonym>
-    <key>en</key>
-    <value>On write row ID</value>
-  </synonym>
-  <source>
-    <types>DocumentObject</types>
-  </source>
-  <event>OnWrite</event>
-  <handler>CommonModule.RowIDInfoServer.OnWrite_RowID</handler>
+ <name>OnWrite_RowID</name>
+ <synonym>
+  <key>ru</key>
+  <value>При записи row ID</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>On write row ID</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Satır ID saklandığında</value>
+ </synonym>
+ <source>
+  <types>DocumentObject</types>
+ </source>
+ <event>OnWrite</event>
+ <handler>CommonModule.RowIDInfoServer.OnWrite_RowID</handler>
 </mdclass:EventSubscription>

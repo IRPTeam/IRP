@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <DataCompositionSchema xmlns="http://v8.1c.ru/8.1/data-composition-system/schema" xmlns:dcscom="http://v8.1c.ru/8.1/data-composition-system/common" xmlns:dcscor="http://v8.1c.ru/8.1/data-composition-system/core" xmlns:dcsset="http://v8.1c.ru/8.1/data-composition-system/settings" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:v8ui="http://v8.1c.ru/8.1/data/ui" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<dataSource>
 		<name>DataSource1</name>
@@ -63,15 +63,31 @@
 			<field>RegisterName</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Наименование регистра</v8:content>
+				</v8:item>
+				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Register name</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Kayıt tablo tanımı</v8:content>
 				</v8:item>
 			</title>
 			<availableValue>
 				<value xsi:type="xs:string">R1001T_Purchases</value>
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R1001 Закупки</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
+						<v8:content>R1001T_Purchases</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
 						<v8:content>R1001T_Purchases</v8:content>
 					</v8:item>
 				</presentation>
@@ -80,7 +96,15 @@
 				<value xsi:type="xs:string">R1002T_PurchaseReturns</value>
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R1002 Возвраты поступлений</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
+						<v8:content>R1002T_PurchaseReturns</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
 						<v8:content>R1002T_PurchaseReturns</v8:content>
 					</v8:item>
 				</presentation>
@@ -89,7 +113,15 @@
 				<value xsi:type="xs:string">R1005T_PurchaseSpecialOffers</value>
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R1005 Специальные предложения поступлений</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
+						<v8:content>R1005T_PurchaseSpecialOffers</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
 						<v8:content>R1005T_PurchaseSpecialOffers</v8:content>
 					</v8:item>
 				</presentation>
@@ -98,7 +130,15 @@
 				<value xsi:type="xs:string">R1010T_PurchaseOrders</value>
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R1010 Заказы поставщикам</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
+						<v8:content>R1010T_PurchaseOrders</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
 						<v8:content>R1010T_PurchaseOrders</v8:content>
 					</v8:item>
 				</presentation>
@@ -107,7 +147,15 @@
 				<value xsi:type="xs:string">R1011B_PurchaseOrdersReceipt</value>
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R1011 Прием товаров по заказам поставщикам</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
+						<v8:content>R1011B_PurchaseOrdersReceipt</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
 						<v8:content>R1011B_PurchaseOrdersReceipt</v8:content>
 					</v8:item>
 				</presentation>
@@ -116,7 +164,15 @@
 				<value xsi:type="xs:string">R1012B_PurchaseOrdersInvoiceClosing</value>
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R1012 Закрытие поступлениями заказов поставщикам</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
+						<v8:content>R1012B_PurchaseOrdersInvoiceClosing</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
 						<v8:content>R1012B_PurchaseOrdersInvoiceClosing</v8:content>
 					</v8:item>
 				</presentation>
@@ -125,7 +181,15 @@
 				<value xsi:type="xs:string">R1014T_CanceledPurchaseOrders</value>
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R1014 Отменные заказы поставщикам</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
+						<v8:content>R1014T_CanceledPurchaseOrders</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
 						<v8:content>R1014T_CanceledPurchaseOrders</v8:content>
 					</v8:item>
 				</presentation>
@@ -134,7 +198,15 @@
 				<value xsi:type="xs:string">R1020B_AdvancesToVendors</value>
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R1020 Авансы выданные (поставщикам)</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
+						<v8:content>R1020B_AdvancesToVendors</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
 						<v8:content>R1020B_AdvancesToVendors</v8:content>
 					</v8:item>
 				</presentation>
@@ -143,7 +215,15 @@
 				<value xsi:type="xs:string">R1021B_VendorsTransactions</value>
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R1021 Взаиморасчеты с поставщиками</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
+						<v8:content>R1021B_VendorsTransactions</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
 						<v8:content>R1021B_VendorsTransactions</v8:content>
 					</v8:item>
 				</presentation>
@@ -152,7 +232,15 @@
 				<value xsi:type="xs:string">R1031B_ReceiptInvoicing</value>
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R1031 Контроль закрытия - Приход товаров/Поступления</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
+						<v8:content>R1031B_ReceiptInvoicing</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
 						<v8:content>R1031B_ReceiptInvoicing</v8:content>
 					</v8:item>
 				</presentation>
@@ -161,7 +249,15 @@
 				<value xsi:type="xs:string">R1040B_TaxesOutgoing</value>
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R1040 Налоги к зачету</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
+						<v8:content>R1040B_TaxesOutgoing</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
 						<v8:content>R1040B_TaxesOutgoing</v8:content>
 					</v8:item>
 				</presentation>
@@ -170,7 +266,15 @@
 				<value xsi:type="xs:string">R2001T_Sales</value>
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R2001 Продажи</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
+						<v8:content>R2001T_Sales</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
 						<v8:content>R2001T_Sales</v8:content>
 					</v8:item>
 				</presentation>
@@ -179,7 +283,15 @@
 				<value xsi:type="xs:string">R2002T_SalesReturns</value>
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R2002 Возвраты продаж</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
+						<v8:content>R2002T_SalesReturns</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
 						<v8:content>R2002T_SalesReturns</v8:content>
 					</v8:item>
 				</presentation>
@@ -188,7 +300,15 @@
 				<value xsi:type="xs:string">R2005T_SalesSpecialOffers</value>
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R2005 Специальные предложения продаж</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
+						<v8:content>R2005T_SalesSpecialOffers</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
 						<v8:content>R2005T_SalesSpecialOffers</v8:content>
 					</v8:item>
 				</presentation>
@@ -197,7 +317,15 @@
 				<value xsi:type="xs:string">R2010T_SalesOrders</value>
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R2010 Заказы покупателей</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
+						<v8:content>R2010T_SalesOrders</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
 						<v8:content>R2010T_SalesOrders</v8:content>
 					</v8:item>
 				</presentation>
@@ -206,7 +334,15 @@
 				<value xsi:type="xs:string">R2011B_SalesOrdersShipment</value>
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R2011 Отгрузка товаров по заказам покупателей</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
+						<v8:content>R2011B_SalesOrdersShipment</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
 						<v8:content>R2011B_SalesOrdersShipment</v8:content>
 					</v8:item>
 				</presentation>
@@ -215,7 +351,15 @@
 				<value xsi:type="xs:string">R2012B_SalesOrdersInvoiceClosing</value>
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R2012 Закрытие заказов реализациями товаров</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
+						<v8:content>R2012B_SalesOrdersInvoiceClosing</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
 						<v8:content>R2012B_SalesOrdersInvoiceClosing</v8:content>
 					</v8:item>
 				</presentation>
@@ -224,7 +368,15 @@
 				<value xsi:type="xs:string">R2013T_SalesOrdersProcurement</value>
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R2013 Обособленное обеспечение заказов покупателей</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
+						<v8:content>R2013T_SalesOrdersProcurement</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
 						<v8:content>R2013T_SalesOrdersProcurement</v8:content>
 					</v8:item>
 				</presentation>
@@ -233,7 +385,15 @@
 				<value xsi:type="xs:string">R2014T_CanceledSalesOrders</value>
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R2014 Отмены заказов покупателей</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
+						<v8:content>R2014T_CanceledSalesOrders</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
 						<v8:content>R2014T_CanceledSalesOrders</v8:content>
 					</v8:item>
 				</presentation>
@@ -242,7 +402,15 @@
 				<value xsi:type="xs:string">R2020B_AdvancesFromCustomers</value>
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R2020 Авансы полученные (от покупателей)</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
+						<v8:content>R2020B_AdvancesFromCustomers</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
 						<v8:content>R2020B_AdvancesFromCustomers</v8:content>
 					</v8:item>
 				</presentation>
@@ -251,7 +419,15 @@
 				<value xsi:type="xs:string">R2021B_CustomersTransactions</value>
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R2021 Взаиморасчеты с покупателями</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
+						<v8:content>R2021B_CustomersTransactions</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
 						<v8:content>R2021B_CustomersTransactions</v8:content>
 					</v8:item>
 				</presentation>
@@ -260,7 +436,15 @@
 				<value xsi:type="xs:string">R2031B_ShipmentInvoicing</value>
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R2031 Закрытие отгрузок реализациями товаров</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
+						<v8:content>R2031B_ShipmentInvoicing</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
 						<v8:content>R2031B_ShipmentInvoicing</v8:content>
 					</v8:item>
 				</presentation>
@@ -269,7 +453,15 @@
 				<value xsi:type="xs:string">R2040B_TaxesIncoming</value>
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R2040 Налоги к начислению</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
+						<v8:content>R2040B_TaxesIncoming</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
 						<v8:content>R2040B_TaxesIncoming</v8:content>
 					</v8:item>
 				</presentation>
@@ -278,7 +470,15 @@
 				<value xsi:type="xs:string">R3010B_CashOnHand</value>
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R3010 Остатки денежных средств</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
+						<v8:content>R3010B_CashOnHand</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
 						<v8:content>R3010B_CashOnHand</v8:content>
 					</v8:item>
 				</presentation>
@@ -287,7 +487,15 @@
 				<value xsi:type="xs:string">R3011T_CashMovements</value>
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R3011 Движения денежных средств</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
+						<v8:content>R3011T_CashMovements</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
 						<v8:content>R3011T_CashMovements</v8:content>
 					</v8:item>
 				</presentation>
@@ -296,7 +504,15 @@
 				<value xsi:type="xs:string">R3015B_CashAdvance</value>
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R3015 Денежные средства у подотчетных лиц</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
+						<v8:content>R3015B_CashAdvance</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
 						<v8:content>R3015B_CashAdvance</v8:content>
 					</v8:item>
 				</presentation>
@@ -305,7 +521,15 @@
 				<value xsi:type="xs:string">R3016B_ChequeAndBonds</value>
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R3016 Чеки и долговые обязательства</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
+						<v8:content>R3016B_ChequeAndBonds</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
 						<v8:content>R3016B_ChequeAndBonds</v8:content>
 					</v8:item>
 				</presentation>
@@ -314,7 +538,15 @@
 				<value xsi:type="xs:string">R3021B_CashInTransitIncoming</value>
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R3021 Деньги в пути (к приходу)</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
+						<v8:content>R3021B_CashInTransitIncoming</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
 						<v8:content>R3021B_CashInTransitIncoming</v8:content>
 					</v8:item>
 				</presentation>
@@ -323,7 +555,15 @@
 				<value xsi:type="xs:string">R3022B_CashInTransitOutgoing</value>
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R3022 Деньги в пути (к расходу)</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
+						<v8:content>R3022B_CashInTransitOutgoing</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
 						<v8:content>R3022B_CashInTransitOutgoing</v8:content>
 					</v8:item>
 				</presentation>
@@ -332,7 +572,15 @@
 				<value xsi:type="xs:string">R3033B_CashPlanningIncoming</value>
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R3033 Планирование поступления денежных средств</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
+						<v8:content>R3033B_CashPlanningIncoming</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
 						<v8:content>R3033B_CashPlanningIncoming</v8:content>
 					</v8:item>
 				</presentation>
@@ -341,7 +589,15 @@
 				<value xsi:type="xs:string">R3034B_CashPlanningOutgoing</value>
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R3034 Планирование расхода денежных средств</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
+						<v8:content>R3034B_CashPlanningOutgoing</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
 						<v8:content>R3034B_CashPlanningOutgoing</v8:content>
 					</v8:item>
 				</presentation>
@@ -350,7 +606,15 @@
 				<value xsi:type="xs:string">R4010B_ActualStocks</value>
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R4010 Остатки товара на складах</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
+						<v8:content>R4010B_ActualStocks</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
 						<v8:content>R4010B_ActualStocks</v8:content>
 					</v8:item>
 				</presentation>
@@ -359,7 +623,15 @@
 				<value xsi:type="xs:string">R4011B_FreeStocks</value>
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R4011 Свободные остатки</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
+						<v8:content>R4011B_FreeStocks</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
 						<v8:content>R4011B_FreeStocks</v8:content>
 					</v8:item>
 				</presentation>
@@ -368,7 +640,15 @@
 				<value xsi:type="xs:string">R4012B_StockReservation</value>
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R4012 Товары в резерве на складах</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
+						<v8:content>R4012B_StockReservation</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
 						<v8:content>R4012B_StockReservation</v8:content>
 					</v8:item>
 				</presentation>
@@ -377,7 +657,15 @@
 				<value xsi:type="xs:string">R4013B_StockReservationPlanning</value>
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R4031 Товары в пути (к приходу)</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
+						<v8:content>R4013B_StockReservationPlanning</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
 						<v8:content>R4013B_StockReservationPlanning</v8:content>
 					</v8:item>
 				</presentation>
@@ -386,7 +674,15 @@
 				<value xsi:type="xs:string">R4014B_SerialLotNumber</value>
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R4014 Серии номенклатуры</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
+						<v8:content>R4014B_SerialLotNumber</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
 						<v8:content>R4014B_SerialLotNumber</v8:content>
 					</v8:item>
 				</presentation>
@@ -395,7 +691,15 @@
 				<value xsi:type="xs:string">R4015T_InternalSupplyRequests</value>
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R4015 Заявки на обеспечение товара</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
+						<v8:content>R4015T_InternalSupplyRequests</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
 						<v8:content>R4015T_InternalSupplyRequests</v8:content>
 					</v8:item>
 				</presentation>
@@ -404,7 +708,15 @@
 				<value xsi:type="xs:string">R4016B_InternalSupplyRequestOrdering</value>
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R4016 Заказы заявок на обеспечение товара</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
+						<v8:content>R4016B_InternalSupplyRequestOrdering</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
 						<v8:content>R4016B_InternalSupplyRequestOrdering</v8:content>
 					</v8:item>
 				</presentation>
@@ -413,7 +725,15 @@
 				<value xsi:type="xs:string">R4017B_InternalSupplyRequestProcurement</value>
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R4017 Приход товаров по заявкам на обеспечение</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
+						<v8:content>R4017B_InternalSupplyRequestProcurement</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
 						<v8:content>R4017B_InternalSupplyRequestProcurement</v8:content>
 					</v8:item>
 				</presentation>
@@ -422,7 +742,15 @@
 				<value xsi:type="xs:string">R4020T_StockTransferOrders</value>
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R4020 Заказы на перемещение товара</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
+						<v8:content>R4020T_StockTransferOrders</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
 						<v8:content>R4020T_StockTransferOrders</v8:content>
 					</v8:item>
 				</presentation>
@@ -431,7 +759,15 @@
 				<value xsi:type="xs:string">R4021B_StockTransferOrdersReceipt</value>
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R4021 Приход по заказам на перемещение товаров</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
+						<v8:content>R4021B_StockTransferOrdersReceipt</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
 						<v8:content>R4021B_StockTransferOrdersReceipt</v8:content>
 					</v8:item>
 				</presentation>
@@ -440,7 +776,15 @@
 				<value xsi:type="xs:string">R4022B_StockTransferOrdersShipment</value>
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R4022 Отгрузка по заказам на перемещение товаров</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
+						<v8:content>R4022B_StockTransferOrdersShipment</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
 						<v8:content>R4022B_StockTransferOrdersShipment</v8:content>
 					</v8:item>
 				</presentation>
@@ -449,7 +793,15 @@
 				<value xsi:type="xs:string">R4031B_GoodsInTransitIncoming</value>
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R4031 Товары в пути (к приходу)</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
+						<v8:content>R4031B_GoodsInTransitIncoming</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
 						<v8:content>R4031B_GoodsInTransitIncoming</v8:content>
 					</v8:item>
 				</presentation>
@@ -458,7 +810,15 @@
 				<value xsi:type="xs:string">R4032B_GoodsInTransitOutgoing</value>
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R4032 Товары в пути (к расходу)</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
+						<v8:content>R4032B_GoodsInTransitOutgoing</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
 						<v8:content>R4032B_GoodsInTransitOutgoing</v8:content>
 					</v8:item>
 				</presentation>
@@ -467,7 +827,15 @@
 				<value xsi:type="xs:string">R4033B_GoodsReceiptSchedule</value>
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R4033 Планирование прихода товара</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
+						<v8:content>R4033B_GoodsReceiptSchedule</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
 						<v8:content>R4033B_GoodsReceiptSchedule</v8:content>
 					</v8:item>
 				</presentation>
@@ -476,7 +844,15 @@
 				<value xsi:type="xs:string">R4034B_GoodsShipmentSchedule</value>
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R4034 Планирование расхода товара</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
+						<v8:content>R4034B_GoodsShipmentSchedule</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
 						<v8:content>R4034B_GoodsShipmentSchedule</v8:content>
 					</v8:item>
 				</presentation>
@@ -485,7 +861,15 @@
 				<value xsi:type="xs:string">R4035B_IncomingStocks</value>
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R4035B Свободные остатки по товарам к приходу</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
+						<v8:content>R4035B_IncomingStocks</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
 						<v8:content>R4035B_IncomingStocks</v8:content>
 					</v8:item>
 				</presentation>
@@ -494,7 +878,15 @@
 				<value xsi:type="xs:string">R4036B_IncomingStocksRequested</value>
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R4036 Заявки на планируемый приход товара</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
+						<v8:content>R4036B_IncomingStocksRequested</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
 						<v8:content>R4036B_IncomingStocksRequested</v8:content>
 					</v8:item>
 				</presentation>
@@ -503,7 +895,15 @@
 				<value xsi:type="xs:string">R4050B_StockInventory</value>
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R4050 Товары организации</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
+						<v8:content>R4050B_StockInventory</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
 						<v8:content>R4050B_StockInventory</v8:content>
 					</v8:item>
 				</presentation>
@@ -512,7 +912,15 @@
 				<value xsi:type="xs:string">R4051T_StockAdjustmentAsWriteOff</value>
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R4051T Списание товаров</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
+						<v8:content>R4051T_StockAdjustmentAsWriteOff</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
 						<v8:content>R4051T_StockAdjustmentAsWriteOff</v8:content>
 					</v8:item>
 				</presentation>
@@ -521,7 +929,15 @@
 				<value xsi:type="xs:string">R4052T_StockAdjustmentAsSurplus</value>
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R4052 Корректировки товаров организации (оприходование)</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
+						<v8:content>R4052T_StockAdjustmentAsSurplus</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
 						<v8:content>R4052T_StockAdjustmentAsSurplus</v8:content>
 					</v8:item>
 				</presentation>
@@ -530,7 +946,15 @@
 				<value xsi:type="xs:string">R5010B_ReconciliationStatement</value>
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R5010 Взаиморасчеты по контрагентам</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
+						<v8:content>R5010B_ReconciliationStatement</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
 						<v8:content>R5010B_ReconciliationStatement</v8:content>
 					</v8:item>
 				</presentation>
@@ -539,7 +963,15 @@
 				<value xsi:type="xs:string">R5011B_PartnersAging</value>
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R5011 Контроль задолженности партнеров</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
+						<v8:content>R5011B_PartnersAging</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
 						<v8:content>R5011B_PartnersAging</v8:content>
 					</v8:item>
 				</presentation>
@@ -548,7 +980,15 @@
 				<value xsi:type="xs:string">R5021T_Revenues</value>
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R5021 Доходы</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
+						<v8:content>R5021T_Revenues</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
 						<v8:content>R5021T_Revenues</v8:content>
 					</v8:item>
 				</presentation>
@@ -557,7 +997,15 @@
 				<value xsi:type="xs:string">R5022T_Expenses</value>
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R5022 Расходы</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
+						<v8:content>R5022T_Expenses</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
 						<v8:content>R5022T_Expenses</v8:content>
 					</v8:item>
 				</presentation>
@@ -566,7 +1014,15 @@
 				<value xsi:type="xs:string">R5041B_TaxesPayable</value>
 				<presentation xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>R5041 Налоги к оплате</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
+						<v8:content>R5041B_TaxesPayable</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
 						<v8:content>R5041B_TaxesPayable</v8:content>
 					</v8:item>
 				</presentation>
@@ -755,8 +1211,16 @@
 				<field>RegisterName</field>
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -834,8 +1298,16 @@
 				<field>RegisterName</field>
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -953,8 +1425,16 @@
 				<field>RegisterName</field>
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -996,8 +1476,16 @@
 				<field>RegisterName</field>
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -1055,8 +1543,16 @@
 				<field>RegisterName</field>
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -1114,8 +1610,16 @@
 				<field>RegisterName</field>
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -1193,8 +1697,16 @@
 				<field>RegisterName</field>
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -1240,8 +1752,16 @@
 				<field>RegisterName</field>
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -1331,8 +1851,16 @@
 				<field>RegisterName</field>
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -1382,8 +1910,16 @@
 				<field>RegisterName</field>
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -1429,8 +1965,16 @@
 				<field>RegisterName</field>
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -1492,8 +2036,16 @@
 				<field>RegisterName</field>
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -1543,8 +2095,16 @@
 				<field>RegisterName</field>
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -1642,8 +2202,16 @@
 				<field>RegisterName</field>
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -1753,8 +2321,16 @@
 				<field>RegisterName</field>
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -1780,8 +2356,16 @@
 				<field>RegisterName</field>
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -1823,8 +2407,16 @@
 				<field>RegisterName</field>
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -1902,8 +2494,16 @@
 				<field>RegisterName</field>
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -1981,8 +2581,16 @@
 				<field>RegisterName</field>
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -2028,8 +2636,16 @@
 				<field>RegisterName</field>
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -2095,8 +2711,16 @@
 				<field>RegisterName</field>
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -2170,8 +2794,16 @@
 				<field>RegisterName</field>
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -2249,8 +2881,16 @@
 				<field>RegisterName</field>
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -2288,8 +2928,16 @@
 				<field>RegisterName</field>
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -2331,8 +2979,16 @@
 				<field>RegisterName</field>
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -2374,8 +3030,16 @@
 				<field>RegisterName</field>
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -2453,8 +3117,16 @@
 				<field>RegisterName</field>
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -2536,8 +3208,16 @@
 				<field>RegisterName</field>
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -2563,8 +3243,16 @@
 				<field>RegisterName</field>
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -2634,8 +3322,16 @@
 				<field>RegisterName</field>
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -2673,8 +3369,16 @@
 				<field>RegisterName</field>
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -2712,8 +3416,16 @@
 				<field>RegisterName</field>
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -2775,8 +3487,16 @@
 				<field>RegisterName</field>
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -2826,8 +3546,16 @@
 				<field>RegisterName</field>
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -2865,8 +3593,16 @@
 				<field>RegisterName</field>
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -2912,8 +3648,16 @@
 				<field>RegisterName</field>
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -2955,8 +3699,16 @@
 				<field>RegisterName</field>
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -3018,8 +3770,16 @@
 				<field>RegisterName</field>
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -3053,8 +3813,16 @@
 				<field>RegisterName</field>
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -3108,8 +3876,16 @@
 				<field>RegisterName</field>
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -3171,8 +3947,16 @@
 				<field>RegisterName</field>
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -3214,8 +3998,16 @@
 				<field>RegisterName</field>
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -3277,8 +4069,16 @@
 				<field>RegisterName</field>
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -3340,8 +4140,16 @@
 				<field>RegisterName</field>
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -3375,8 +4183,16 @@
 				<field>RegisterName</field>
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -3410,8 +4226,16 @@
 				<field>RegisterName</field>
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -3481,8 +4305,16 @@
 				<field>RegisterName</field>
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -3528,8 +4360,16 @@
 				<field>RegisterName</field>
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -3583,8 +4423,16 @@
 				<field>RegisterName</field>
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -3602,8 +4450,16 @@
 				<field>RegisterName</field>
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -3677,8 +4533,16 @@
 				<field>RegisterName</field>
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -3756,8 +4620,16 @@
 				<field>RegisterName</field>
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -3771,8 +4643,16 @@
 				<field>RegisterName</field>
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
 					</v8:item>
 				</title>
 			</field>
@@ -3850,8 +4730,16 @@
 				<field>RegisterName</field>
 				<title xsi:type="v8:LocalStringType">
 					<v8:item>
+						<v8:lang>ru</v8:lang>
+						<v8:content>Наименование регистра</v8:content>
+					</v8:item>
+					<v8:item>
 						<v8:lang>en</v8:lang>
 						<v8:content>Register name</v8:content>
+					</v8:item>
+					<v8:item>
+						<v8:lang>tr</v8:lang>
+						<v8:content>Kayıt tablo tanımı</v8:content>
 					</v8:item>
 				</title>
 			</field>

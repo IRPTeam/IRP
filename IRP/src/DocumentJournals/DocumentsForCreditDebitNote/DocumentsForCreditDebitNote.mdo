@@ -1,24 +1,40 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:DocumentJournal xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="0b9c3576-36d2-4bc2-a507-ab7bbf381577">
-  <producedTypes>
-    <selectionType typeId="a370f93a-4c58-4989-83a0-e0852a10b60d" valueTypeId="800f72bc-a40e-4cb2-aff3-148a2de37e26"/>
-    <listType typeId="5a160d9c-104b-4d8d-8875-edd005ba3645" valueTypeId="4855ec57-0f68-4d9a-a805-82dfc20f736e"/>
-    <managerType typeId="5f5ffb67-1bcd-4a05-b1e2-f92aecd1d81e" valueTypeId="bf4e1301-2150-43fc-85c3-c77815b5b0ad"/>
-  </producedTypes>
-  <name>DocumentsForCreditDebitNote</name>
-  <useStandardCommands>true</useStandardCommands>
-  <registeredDocuments>Document.PurchaseInvoice</registeredDocuments>
-  <registeredDocuments>Document.SalesReturn</registeredDocuments>
-  <registeredDocuments>Document.PurchaseReturn</registeredDocuments>
-  <registeredDocuments>Document.SalesInvoice</registeredDocuments>
-  <registeredDocuments>Document.OpeningEntry</registeredDocuments>
-  <forms uuid="660fcb41-19b0-4b15-9986-d0964ef549f3">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
+ <producedTypes>
+  <selectionType typeId="a370f93a-4c58-4989-83a0-e0852a10b60d" valueTypeId="800f72bc-a40e-4cb2-aff3-148a2de37e26"/>
+  <listType typeId="5a160d9c-104b-4d8d-8875-edd005ba3645" valueTypeId="4855ec57-0f68-4d9a-a805-82dfc20f736e"/>
+  <managerType typeId="5f5ffb67-1bcd-4a05-b1e2-f92aecd1d81e" valueTypeId="bf4e1301-2150-43fc-85c3-c77815b5b0ad"/>
+ </producedTypes>
+ <name>DocumentsForCreditDebitNote</name>
+ <useStandardCommands>true</useStandardCommands>
+ <registeredDocuments>Document.PurchaseInvoice</registeredDocuments>
+ <registeredDocuments>Document.SalesReturn</registeredDocuments>
+ <registeredDocuments>Document.PurchaseReturn</registeredDocuments>
+ <registeredDocuments>Document.SalesInvoice</registeredDocuments>
+ <registeredDocuments>Document.OpeningEntry</registeredDocuments>
+ <forms uuid="660fcb41-19b0-4b15-9986-d0964ef549f3">
+  <name>ChoiceForm</name>
+  <synonym>
+   <key>fr</key>
+   <value>Formulaire de sélection</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Форма выбора</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Choice form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Seçim formu</value>
+  </synonym>
+  <synonym>
+   <key>de</key>
+   <value>Auswahlformular</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:DocumentJournal>

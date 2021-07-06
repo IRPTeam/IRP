@@ -1,11 +1,27 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="97f0894c-5669-4659-ad2d-9d1ce86de60b">
-  <name>Purchase</name>
-  <synonym>
-    <key>en</key>
-    <value>Purchase</value>
-  </synonym>
-  <includeHelpInContents>true</includeHelpInContents>
-  <includeInCommandInterface>true</includeInCommandInterface>
-  <parentSubsystem>Subsystem.Reports</parentSubsystem>
+ <name>Purchase</name>
+ <synonym>
+  <key>fr</key>
+  <value>Achats</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Закупки</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Purchase</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Alımlar</value>
+ </synonym>
+ <synonym>
+  <key>de</key>
+  <value>Einkauf</value>
+ </synonym>
+ <includeHelpInContents>true</includeHelpInContents>
+ <includeInCommandInterface>true</includeInCommandInterface>
+ <parentSubsystem>Subsystem.Reports</parentSubsystem>
 </mdclass:Subsystem>

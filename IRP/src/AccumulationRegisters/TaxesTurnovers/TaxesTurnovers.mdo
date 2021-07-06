@@ -1,184 +1,392 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:AccumulationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="944f1ed4-b6d4-45c2-9fb9-be471f51ff56">
-  <producedTypes>
-    <selectionType typeId="d2e74b4e-86e9-4de0-9b77-59c7c9b4c7c7" valueTypeId="7d0597a8-54ee-42a6-aaa1-2634b607f805"/>
-    <listType typeId="bfdd7163-abf6-44af-9cb2-b00e4476b4b6" valueTypeId="324cbab5-f75f-4332-83bb-ce7f1816e6d9"/>
-    <managerType typeId="b64fb1ec-1096-4822-b5da-6ad3f3b09a96" valueTypeId="1958b3ac-43aa-4137-9c06-194b7cea667c"/>
-    <recordSetType typeId="a7849f16-3405-480d-ace0-2160c701e4fb" valueTypeId="e8c7e533-499e-46c2-b379-c2c6e8f22523"/>
-    <recordKeyType typeId="e6e63adf-c570-4111-ac5a-aafc1044c254" valueTypeId="4324a8f1-ba0d-4d50-b94d-2af244f4e427"/>
-    <recordType typeId="c8a5ffe4-8159-43cd-a39e-326b03fdcdca" valueTypeId="00eab54a-d245-4077-8bc3-aef5bc57e80a"/>
-  </producedTypes>
-  <name>TaxesTurnovers</name>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:AccumulationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="944f1ed4-b6d4-45c2-9fb9-be471f51ff56">
+ <producedTypes>
+  <selectionType typeId="d2e74b4e-86e9-4de0-9b77-59c7c9b4c7c7" valueTypeId="7d0597a8-54ee-42a6-aaa1-2634b607f805"/>
+  <listType typeId="bfdd7163-abf6-44af-9cb2-b00e4476b4b6" valueTypeId="324cbab5-f75f-4332-83bb-ce7f1816e6d9"/>
+  <managerType typeId="b64fb1ec-1096-4822-b5da-6ad3f3b09a96" valueTypeId="1958b3ac-43aa-4137-9c06-194b7cea667c"/>
+  <recordSetType typeId="a7849f16-3405-480d-ace0-2160c701e4fb" valueTypeId="e8c7e533-499e-46c2-b379-c2c6e8f22523"/>
+  <recordKeyType typeId="e6e63adf-c570-4111-ac5a-aafc1044c254" valueTypeId="4324a8f1-ba0d-4d50-b94d-2af244f4e427"/>
+  <recordType typeId="c8a5ffe4-8159-43cd-a39e-326b03fdcdca" valueTypeId="00eab54a-d245-4077-8bc3-aef5bc57e80a"/>
+ </producedTypes>
+ <name>TaxesTurnovers</name>
+ <synonym>
+  <key>fr</key>
+  <value>Chiffre d'affaires par impôts/taxes</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Оборот по налогам</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Taxes turnovers</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Vergiler (TaxesTurnovers)</value>
+ </synonym>
+ <synonym>
+  <key>de</key>
+  <value>Steuerumsätze</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <registerType>Turnovers</registerType>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <enableTotalsSplitting>true</enableTotalsSplitting>
+ <resources uuid="c7371c97-0084-4b8c-8845-ec5224805515">
+  <name>Amount</name>
   <synonym>
-    <key>en</key>
-    <value>Taxes turnovers</value>
+   <key>fr</key>
+   <value>Montant</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <registerType>Turnovers</registerType>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <enableTotalsSplitting>true</enableTotalsSplitting>
-  <resources uuid="c7371c97-0084-4b8c-8845-ec5224805515">
-    <name>Amount</name>
-    <synonym>
-      <key>en</key>
-      <value>Amount</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAmount</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <resources uuid="992748f3-a837-46fa-a6f1-1b1ff17df64e">
-    <name>ManualAmount</name>
-    <synonym>
-      <key>en</key>
-      <value>Manual amount</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAmount</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <resources uuid="d38ed4ad-8c44-40d2-89ab-dbfd025eea9f">
-    <name>NetAmount</name>
-    <synonym>
-      <key>en</key>
-      <value>Net amount</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAmount</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <attributes uuid="35fcb977-12b7-463e-b84b-08f25333520b">
-    <name>DeferredCalculation</name>
-    <synonym>
-      <key>en</key>
-      <value>Deferred calculation</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </attributes>
-  <dimensions uuid="9b6752c5-fb8c-44c2-a8df-04dedabf99cb">
-    <name>Document</name>
-    <synonym>
-      <key>en</key>
-      <value>Document</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeObjectWithTaxes</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="66570328-78fa-4b79-8533-7d9a5277eb17">
-    <name>Tax</name>
-    <synonym>
-      <key>en</key>
-      <value>Tax</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Taxes</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="5a60f7a5-3263-43ce-ae5a-2efdddfd51d2">
-    <name>Analytics</name>
-    <synonym>
-      <key>en</key>
-      <value>Analytics</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.TaxAnalytics</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="09bd7991-b551-4cde-8eaa-d15722245738">
-    <name>TaxRate</name>
-    <synonym>
-      <key>en</key>
-      <value>Tax rate</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.TaxRates</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="4b63980b-1e0e-4d31-a9ea-56a0d93026ef">
-    <name>IncludeToTotalAmount</name>
-    <synonym>
-      <key>en</key>
-      <value>Include to total amount</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="0cb978c4-1c01-4880-9e8f-22b5c0188c70">
-    <name>RowKey</name>
-    <synonym>
-      <key>en</key>
-      <value>Row key</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeRowID</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="357d1ee3-5295-4211-90c1-5a7860a7c8a2">
-    <name>Currency</name>
-    <synonym>
-      <key>en</key>
-      <value>Currency</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Currencies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="837fb353-b8a6-4b90-be3d-50d18793d115">
-    <name>CurrencyMovementType</name>
-    <synonym>
-      <key>en</key>
-      <value>Multi currency movement type</value>
-    </synonym>
-    <type>
-      <types>ChartOfCharacteristicTypesRef.CurrencyMovementType</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
+  <synonym>
+   <key>ru</key>
+   <value>Сумма</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Amount</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Tutar</value>
+  </synonym>
+  <synonym>
+   <key>de</key>
+   <value>Betrag</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <resources uuid="992748f3-a837-46fa-a6f1-1b1ff17df64e">
+  <name>ManualAmount</name>
+  <synonym>
+   <key>fr</key>
+   <value>Montant manuel</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Ручная корректировка</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Manual amount</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Manuel tutar</value>
+  </synonym>
+  <synonym>
+   <key>de</key>
+   <value>Manueller Betrag</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <resources uuid="d38ed4ad-8c44-40d2-89ab-dbfd025eea9f">
+  <name>NetAmount</name>
+  <synonym>
+   <key>fr</key>
+   <value>Montant net</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Сумма без налогов</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Net amount</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Net tutar</value>
+  </synonym>
+  <synonym>
+   <key>de</key>
+   <value>Nettobetrag</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <attributes uuid="35fcb977-12b7-463e-b84b-08f25333520b">
+  <name>DeferredCalculation</name>
+  <synonym>
+   <key>fr</key>
+   <value>Calcul différé</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Отложенный расчет</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Deferred calculation</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Ertelenen hesaplama</value>
+  </synonym>
+  <synonym>
+   <key>de</key>
+   <value>Verzögerte Berechnung</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </attributes>
+ <dimensions uuid="9b6752c5-fb8c-44c2-a8df-04dedabf99cb">
+  <name>Document</name>
+  <synonym>
+   <key>fr</key>
+   <value>Document</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Документ</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Document</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Evrak</value>
+  </synonym>
+  <synonym>
+   <key>de</key>
+   <value>Dokument</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeObjectWithTaxes</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="66570328-78fa-4b79-8533-7d9a5277eb17">
+  <name>Tax</name>
+  <synonym>
+   <key>fr</key>
+   <value>Impôt/taxe</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Налог</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Tax</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Vergi</value>
+  </synonym>
+  <synonym>
+   <key>de</key>
+   <value>Steuer</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Taxes</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="5a60f7a5-3263-43ce-ae5a-2efdddfd51d2">
+  <name>Analytics</name>
+  <synonym>
+   <key>fr</key>
+   <value>Analytique</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Аналитика учета</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Analytics</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Detaylar</value>
+  </synonym>
+  <synonym>
+   <key>de</key>
+   <value>Analyse</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.TaxAnalytics</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="09bd7991-b551-4cde-8eaa-d15722245738">
+  <name>TaxRate</name>
+  <synonym>
+   <key>fr</key>
+   <value>Taux d'imposition</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Налоговая ставка</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Tax rate</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Vergi oranı</value>
+  </synonym>
+  <synonym>
+   <key>de</key>
+   <value>Steuersatz</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.TaxRates</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="4b63980b-1e0e-4d31-a9ea-56a0d93026ef">
+  <name>IncludeToTotalAmount</name>
+  <synonym>
+   <key>fr</key>
+   <value>Inclure dans le montant total</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Включается в общую сумму</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Include to total amount</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Toplam tutara dahil</value>
+  </synonym>
+  <synonym>
+   <key>de</key>
+   <value>In Gesamtbetrag einschließen</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="0cb978c4-1c01-4880-9e8f-22b5c0188c70">
+  <name>RowKey</name>
+  <synonym>
+   <key>fr</key>
+   <value>Clé de ligne</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Ключ строки</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Row key</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Satır anahtarı</value>
+  </synonym>
+  <synonym>
+   <key>de</key>
+   <value>Zeilenschlüssel</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeRowID</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="357d1ee3-5295-4211-90c1-5a7860a7c8a2">
+  <name>Currency</name>
+  <synonym>
+   <key>fr</key>
+   <value>Devise</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Валюта</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Currency</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Döviz</value>
+  </synonym>
+  <synonym>
+   <key>de</key>
+   <value>Währung</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Currencies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="837fb353-b8a6-4b90-be3d-50d18793d115">
+  <name>CurrencyMovementType</name>
+  <synonym>
+   <key>fr</key>
+   <value>Type d'analytique multidevise</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Вид мультивалютной аналитики</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Multi currency movement type</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Çoklu döviz kırılım tipi</value>
+  </synonym>
+  <synonym>
+   <key>de</key>
+   <value>Multiwährungsanalysetyp</value>
+  </synonym>
+  <type>
+   <types>ChartOfCharacteristicTypesRef.CurrencyMovementType</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
 </mdclass:AccumulationRegister>

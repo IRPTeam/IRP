@@ -1,97 +1,193 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:InformationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="6e332906-e7af-490c-8d04-773ce9406e4a">
-  <producedTypes>
-    <selectionType typeId="2e747477-b068-4770-8258-9dfaa15c5665" valueTypeId="cf39f769-3f90-4640-ab02-7a82d3a1572a"/>
-    <listType typeId="0b191c2d-7f29-4777-85d0-f93d3b1de96b" valueTypeId="42e10ee2-f695-49f6-99c0-0c324e93f041"/>
-    <managerType typeId="9ce8b7fb-be7c-4e08-9063-fb64bc04932c" valueTypeId="41e44329-ce02-4d72-803b-8914aabeddad"/>
-    <recordSetType typeId="d9eb9065-b796-445c-95ca-11ded36a71d3" valueTypeId="46016dee-eaa6-4fcb-a3a8-345383053d83"/>
-    <recordKeyType typeId="6d4bc89e-9c99-41fc-a4e4-92388a34a9ef" valueTypeId="b252a2e7-31ce-43ae-8723-6407a0d15fa1"/>
-    <recordType typeId="9563c598-e076-48bc-9895-3f82f29985b2" valueTypeId="437a3a49-a4e2-464d-aebe-f33be1262207"/>
-    <recordManagerType typeId="613d8866-b914-4b4a-8ceb-45f869ddea7a" valueTypeId="30bcae2c-8af0-48d8-a00f-bd206b6caccb"/>
-  </producedTypes>
-  <name>IDInfo</name>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:InformationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="6e332906-e7af-490c-8d04-773ce9406e4a">
+ <producedTypes>
+  <selectionType typeId="2e747477-b068-4770-8258-9dfaa15c5665" valueTypeId="cf39f769-3f90-4640-ab02-7a82d3a1572a"/>
+  <listType typeId="0b191c2d-7f29-4777-85d0-f93d3b1de96b" valueTypeId="42e10ee2-f695-49f6-99c0-0c324e93f041"/>
+  <managerType typeId="9ce8b7fb-be7c-4e08-9063-fb64bc04932c" valueTypeId="41e44329-ce02-4d72-803b-8914aabeddad"/>
+  <recordSetType typeId="d9eb9065-b796-445c-95ca-11ded36a71d3" valueTypeId="46016dee-eaa6-4fcb-a3a8-345383053d83"/>
+  <recordKeyType typeId="6d4bc89e-9c99-41fc-a4e4-92388a34a9ef" valueTypeId="b252a2e7-31ce-43ae-8723-6407a0d15fa1"/>
+  <recordType typeId="9563c598-e076-48bc-9895-3f82f29985b2" valueTypeId="437a3a49-a4e2-464d-aebe-f33be1262207"/>
+  <recordManagerType typeId="613d8866-b914-4b4a-8ceb-45f869ddea7a" valueTypeId="30bcae2c-8af0-48d8-a00f-bd206b6caccb"/>
+ </producedTypes>
+ <name>IDInfo</name>
+ <synonym>
+  <key>fr</key>
+  <value>Informations de contact</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Контактная информация</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Contact info</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>İletişim bilgi</value>
+ </synonym>
+ <synonym>
+  <key>de</key>
+  <value>Kontaktinformationen</value>
+ </synonym>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <resources uuid="f704a578-563f-49d8-85f9-8232e7b2f17e">
+  <name>Value</name>
   <synonym>
-    <key>en</key>
-    <value>Contact info</value>
+   <key>fr</key>
+   <value>Valeur</value>
   </synonym>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <resources uuid="f704a578-563f-49d8-85f9-8232e7b2f17e">
-    <name>Value</name>
-    <synonym>
-      <key>en</key>
-      <value>Value</value>
-    </synonym>
-    <type>
-      <types>Characteristic.IDInfoTypes</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </resources>
-  <resources uuid="1fa68620-62a7-403a-91ff-e350ea174d58">
-    <name>Info</name>
-    <synonym>
-      <key>en</key>
-      <value>Info</value>
-    </synonym>
-    <type>
-      <types>ValueStorage</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </resources>
-  <attributes uuid="ec6c0f46-d6da-4b0b-8d5b-e7e292b31da1">
-    <name>Country</name>
-    <synonym>
-      <key>en</key>
-      <value>Country</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Countries</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </attributes>
-  <dimensions uuid="1ff8f3eb-08e8-4eea-aae7-32004a223af6">
-    <name>Object</name>
-    <synonym>
-      <key>en</key>
-      <value>Object</value>
-    </synonym>
-    <type>
-      <types>DocumentRef</types>
-      <types>CatalogRef</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <master>true</master>
-    <mainFilter>true</mainFilter>
-  </dimensions>
-  <dimensions uuid="f2096ab0-3e02-4202-a1fe-ea3dfa46e994">
-    <name>IDInfoType</name>
-    <synonym>
-      <key>en</key>
-      <value>Contact info type</value>
-    </synonym>
-    <type>
-      <types>ChartOfCharacteristicTypesRef.IDInfoTypes</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <mainFilter>true</mainFilter>
-  </dimensions>
+  <synonym>
+   <key>ru</key>
+   <value>Значение</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Value</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Değer</value>
+  </synonym>
+  <synonym>
+   <key>de</key>
+   <value>Wert</value>
+  </synonym>
+  <type>
+   <types>Characteristic.IDInfoTypes</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <resources uuid="1fa68620-62a7-403a-91ff-e350ea174d58">
+  <name>Info</name>
+  <synonym>
+   <key>fr</key>
+   <value>Informations</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Контактная информация</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Info</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Bilgi</value>
+  </synonym>
+  <synonym>
+   <key>de</key>
+   <value>Information</value>
+  </synonym>
+  <type>
+   <types>ValueStorage</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </resources>
+ <attributes uuid="ec6c0f46-d6da-4b0b-8d5b-e7e292b31da1">
+  <name>Country</name>
+  <synonym>
+   <key>fr</key>
+   <value>Pays</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Страна</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Country</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Ülke</value>
+  </synonym>
+  <synonym>
+   <key>de</key>
+   <value>Land</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Countries</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+ </attributes>
+ <dimensions uuid="1ff8f3eb-08e8-4eea-aae7-32004a223af6">
+  <name>Object</name>
+  <synonym>
+   <key>fr</key>
+   <value>Objet</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Объект</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Object</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Obje</value>
+  </synonym>
+  <synonym>
+   <key>de</key>
+   <value>Objekt</value>
+  </synonym>
+  <type>
+   <types>DocumentRef</types>
+   <types>CatalogRef</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <master>true</master>
+  <mainFilter>true</mainFilter>
+ </dimensions>
+ <dimensions uuid="f2096ab0-3e02-4202-a1fe-ea3dfa46e994">
+  <name>IDInfoType</name>
+  <synonym>
+   <key>fr</key>
+   <value>Type d'informations de contact</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Вид контактной информации</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Contact info type</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>İletişim bilgi türü</value>
+  </synonym>
+  <synonym>
+   <key>de</key>
+   <value>Kontaktinformationstyp</value>
+  </synonym>
+  <type>
+   <types>ChartOfCharacteristicTypesRef.IDInfoTypes</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <mainFilter>true</mainFilter>
+ </dimensions>
 </mdclass:InformationRegister>

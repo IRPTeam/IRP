@@ -1,10 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="ab912837-0959-448b-aea2-4bb111ef8bbb">
-  <name>DocItemStockAdjustmentClient</name>
-  <synonym>
-    <key>en</key>
-    <value>Doc item stock adjustment client</value>
-  </synonym>
-  <clientManagedApplication>true</clientManagedApplication>
-  <clientOrdinaryApplication>true</clientOrdinaryApplication>
+ <name>DocItemStockAdjustmentClient</name>
+ <synonym>
+  <key>ru</key>
+  <value>Документ Пересорт товара клиент</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Doc item stock adjustment client</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Evrak varyant stok düzeltme fişi client</value>
+ </synonym>
+ <clientManagedApplication>true</clientManagedApplication>
+ <clientOrdinaryApplication>true</clientOrdinaryApplication>
 </mdclass:CommonModule>

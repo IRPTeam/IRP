@@ -1,15 +1,31 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:DefinedType xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="22692619-6399-4ccc-a8aa-56bf1888cac7">
-  <producedTypes>
-    <containerType typeId="77130677-9357-48c4-ab94-ed3263e22199" valueTypeId="3787b7f3-1cef-481d-9c70-4c547f6d394e"/>
-  </producedTypes>
-  <name>typeFilesOwner</name>
-  <synonym>
-    <key>en</key>
-    <value>Type files owner</value>
-  </synonym>
-  <type>
-    <types>CatalogRef.Items</types>
-    <types>CatalogRef.ItemKeys</types>
-  </type>
+ <producedTypes>
+  <containerType typeId="77130677-9357-48c4-ab94-ed3263e22199" valueTypeId="3787b7f3-1cef-481d-9c70-4c547f6d394e"/>
+ </producedTypes>
+ <name>typeFilesOwner</name>
+ <synonym>
+  <key>fr</key>
+  <value>Type Propriétaire des fichiers</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Тип владелец файлов</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Type files owner</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Dosya sahip tipi</value>
+ </synonym>
+ <synonym>
+  <key>de</key>
+  <value>Typ Dateibesitzer</value>
+ </synonym>
+ <type>
+  <types>CatalogRef.Items</types>
+  <types>CatalogRef.ItemKeys</types>
+ </type>
 </mdclass:DefinedType>

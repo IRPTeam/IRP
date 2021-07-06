@@ -1,186 +1,390 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:AccumulationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="ab753e93-4e2c-4487-8310-85765392b872">
-  <producedTypes>
-    <selectionType typeId="8b1c2048-7974-4fc8-93cd-60a0d5a18170" valueTypeId="db885365-322a-4b9d-a97a-316d012fec34"/>
-    <listType typeId="d4328e8c-350a-4659-a8a8-31e6369e5be1" valueTypeId="c7abfc26-8de2-4399-8e7f-c35a5f4705f5"/>
-    <managerType typeId="68f83a67-53af-4f19-9213-246f5b959ce8" valueTypeId="81061e61-2e4c-4757-be87-b230e2d2d306"/>
-    <recordSetType typeId="ea1d194b-07a1-45c9-8e68-ff739d209c57" valueTypeId="76f2a217-5dfe-4aaf-976e-13a5200996ec"/>
-    <recordKeyType typeId="ad560133-cfaa-4ac4-867a-8f3de2463ca2" valueTypeId="48bfaaa6-0b92-48fc-9fe2-58ba1d33c482"/>
-    <recordType typeId="2bf48c78-2cc9-4652-8875-212b2d58f532" valueTypeId="b2d7fc1f-cc1e-4131-a0d8-ab3147642fb3"/>
-  </producedTypes>
-  <name>SalesTurnovers</name>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:AccumulationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="ab753e93-4e2c-4487-8310-85765392b872">
+ <producedTypes>
+  <selectionType typeId="8b1c2048-7974-4fc8-93cd-60a0d5a18170" valueTypeId="db885365-322a-4b9d-a97a-316d012fec34"/>
+  <listType typeId="d4328e8c-350a-4659-a8a8-31e6369e5be1" valueTypeId="c7abfc26-8de2-4399-8e7f-c35a5f4705f5"/>
+  <managerType typeId="68f83a67-53af-4f19-9213-246f5b959ce8" valueTypeId="81061e61-2e4c-4757-be87-b230e2d2d306"/>
+  <recordSetType typeId="ea1d194b-07a1-45c9-8e68-ff739d209c57" valueTypeId="76f2a217-5dfe-4aaf-976e-13a5200996ec"/>
+  <recordKeyType typeId="ad560133-cfaa-4ac4-867a-8f3de2463ca2" valueTypeId="48bfaaa6-0b92-48fc-9fe2-58ba1d33c482"/>
+  <recordType typeId="2bf48c78-2cc9-4652-8875-212b2d58f532" valueTypeId="b2d7fc1f-cc1e-4131-a0d8-ab3147642fb3"/>
+ </producedTypes>
+ <name>SalesTurnovers</name>
+ <synonym>
+  <key>fr</key>
+  <value>Chiffre d'affaires par ventes</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Обороты по продажам</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Sales turnovers</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Satışlar (SalesTurnovers)</value>
+ </synonym>
+ <synonym>
+  <key>de</key>
+  <value>Verkaufsumsätze</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <registerType>Turnovers</registerType>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <enableTotalsSplitting>true</enableTotalsSplitting>
+ <resources uuid="03457f95-0137-4096-a759-773d668b4ccb">
+  <name>Quantity</name>
   <synonym>
-    <key>en</key>
-    <value>Sales turnovers</value>
+   <key>fr</key>
+   <value>Quantité</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <registerType>Turnovers</registerType>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <enableTotalsSplitting>true</enableTotalsSplitting>
-  <resources uuid="03457f95-0137-4096-a759-773d668b4ccb">
-    <name>Quantity</name>
-    <synonym>
-      <key>en</key>
-      <value>Quantity</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeQuantity</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <resources uuid="914f090d-b55e-4255-abee-454ad7dbc377">
-    <name>Amount</name>
-    <synonym>
-      <key>en</key>
-      <value>Amount</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAmount</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <resources uuid="6ad2a5fa-dd25-4736-b94b-61e08f2f2260">
-    <name>NetAmount</name>
-    <synonym>
-      <key>en</key>
-      <value>Net amount</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAmount</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <resources uuid="2b902a7d-f0ac-4931-938f-d9e4dadf0ee6">
-    <name>OffersAmount</name>
-    <synonym>
-      <key>en</key>
-      <value>Offers amount</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeAmount</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <attributes uuid="305650de-0bd8-4857-96f7-81274bc82814">
-    <name>DeferredCalculation</name>
-    <synonym>
-      <key>en</key>
-      <value>Deferred calculation</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </attributes>
-  <dimensions uuid="30090737-563a-4e73-a1bf-b494750f7b44">
-    <name>Company</name>
-    <synonym>
-      <key>en</key>
-      <value>Company</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Companies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="6d6939ad-a436-491f-bc99-a99ee8a4498e">
-    <name>SalesInvoice</name>
-    <synonym>
-      <key>en</key>
-      <value>Sales invoice</value>
-    </synonym>
-    <type>
-      <types>DocumentRef.RetailReturnReceipt</types>
-      <types>DocumentRef.SalesReturn</types>
-      <types>DocumentRef.RetailSalesReceipt</types>
-      <types>DocumentRef.SalesInvoice</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="881bc076-1ca6-4170-a6bb-9140a9f2eb13">
-    <name>Currency</name>
-    <synonym>
-      <key>en</key>
-      <value>Currency</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Currencies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="48534ee8-c5ba-4117-a2bf-b46e2ae7db21">
-    <name>ItemKey</name>
-    <synonym>
-      <key>en</key>
-      <value>Item key</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.ItemKeys</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="2bcc3214-56ff-45b7-ab17-3cd38a8f7f5f">
-    <name>RowKey</name>
-    <synonym>
-      <key>en</key>
-      <value>Row key</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeRowID</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="8a410ceb-8ee6-4c81-956b-0d246d33c54c">
-    <name>CurrencyMovementType</name>
-    <synonym>
-      <key>en</key>
-      <value>Multi currency movement type</value>
-    </synonym>
-    <type>
-      <types>ChartOfCharacteristicTypesRef.CurrencyMovementType</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="944897dc-ffc5-4bc0-91dd-90e5d6ff4152">
-    <name>SerialLotNumber</name>
-    <synonym>
-      <key>en</key>
-      <value>Serial lot number</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.SerialLotNumbers</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
+  <synonym>
+   <key>ru</key>
+   <value>Количество</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Quantity</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Miktar</value>
+  </synonym>
+  <synonym>
+   <key>de</key>
+   <value>Anzahl</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeQuantity</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <resources uuid="914f090d-b55e-4255-abee-454ad7dbc377">
+  <name>Amount</name>
+  <synonym>
+   <key>fr</key>
+   <value>Montant</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Сумма</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Amount</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Tutar</value>
+  </synonym>
+  <synonym>
+   <key>de</key>
+   <value>Betrag</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <resources uuid="6ad2a5fa-dd25-4736-b94b-61e08f2f2260">
+  <name>NetAmount</name>
+  <synonym>
+   <key>fr</key>
+   <value>Montant net</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Сумма без налогов</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Net amount</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Net tutar</value>
+  </synonym>
+  <synonym>
+   <key>de</key>
+   <value>Nettobetrag</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <resources uuid="2b902a7d-f0ac-4931-938f-d9e4dadf0ee6">
+  <name>OffersAmount</name>
+  <synonym>
+   <key>fr</key>
+   <value>Montant de l'offre</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Сумма скидки</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Offers amount</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Iskonto tutarı</value>
+  </synonym>
+  <synonym>
+   <key>de</key>
+   <value>Rabattbetrag</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeAmount</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <attributes uuid="305650de-0bd8-4857-96f7-81274bc82814">
+  <name>DeferredCalculation</name>
+  <synonym>
+   <key>fr</key>
+   <value>Calcul différé</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Отложенный расчет</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Deferred calculation</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Ertelenen hesaplama</value>
+  </synonym>
+  <synonym>
+   <key>de</key>
+   <value>Verzögerte Berechnung</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </attributes>
+ <dimensions uuid="30090737-563a-4e73-a1bf-b494750f7b44">
+  <name>Company</name>
+  <synonym>
+   <key>fr</key>
+   <value>Entreprise</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Организация</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Company</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Şirket</value>
+  </synonym>
+  <synonym>
+   <key>de</key>
+   <value>Organisation</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Companies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="6d6939ad-a436-491f-bc99-a99ee8a4498e">
+  <name>SalesInvoice</name>
+  <synonym>
+   <key>fr</key>
+   <value>Facture de vente</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Реализация товаров и услуг</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Sales invoice</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Satış faturası</value>
+  </synonym>
+  <synonym>
+   <key>de</key>
+   <value>Rechnung</value>
+  </synonym>
+  <type>
+   <types>DocumentRef.RetailReturnReceipt</types>
+   <types>DocumentRef.SalesReturn</types>
+   <types>DocumentRef.RetailSalesReceipt</types>
+   <types>DocumentRef.SalesInvoice</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="881bc076-1ca6-4170-a6bb-9140a9f2eb13">
+  <name>Currency</name>
+  <synonym>
+   <key>fr</key>
+   <value>Devise</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Валюта</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Currency</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Döviz</value>
+  </synonym>
+  <synonym>
+   <key>de</key>
+   <value>Währung</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Currencies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="48534ee8-c5ba-4117-a2bf-b46e2ae7db21">
+  <name>ItemKey</name>
+  <synonym>
+   <key>fr</key>
+   <value>Clé d'article</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Характеристика</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Item key</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Varyant</value>
+  </synonym>
+  <synonym>
+   <key>de</key>
+   <value>Artikelvariante</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.ItemKeys</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="2bcc3214-56ff-45b7-ab17-3cd38a8f7f5f">
+  <name>RowKey</name>
+  <synonym>
+   <key>fr</key>
+   <value>Clé de ligne</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Ключ строки</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Row key</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Satır anahtarı</value>
+  </synonym>
+  <synonym>
+   <key>de</key>
+   <value>Zeilenschlüssel</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeRowID</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="8a410ceb-8ee6-4c81-956b-0d246d33c54c">
+  <name>CurrencyMovementType</name>
+  <synonym>
+   <key>fr</key>
+   <value>Type d'analytique multidevise</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Вид мультивалютной аналитики</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Multi currency movement type</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Çoklu döviz kırılım tipi</value>
+  </synonym>
+  <synonym>
+   <key>de</key>
+   <value>Multiwährungsanalysetyp</value>
+  </synonym>
+  <type>
+   <types>ChartOfCharacteristicTypesRef.CurrencyMovementType</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="944897dc-ffc5-4bc0-91dd-90e5d6ff4152">
+  <name>SerialLotNumber</name>
+  <synonym>
+   <key>fr</key>
+   <value>Numéro de série/lot</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Серия номенклатуры</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Serial lot number</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Seri lot numaraları</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.SerialLotNumbers</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
 </mdclass:AccumulationRegister>

@@ -1,13 +1,21 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:EventSubscription xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="99d01884-4a3f-411b-9efb-9ba1e2480506">
-  <name>Filling_DocumentsWithDefaultData</name>
-  <synonym>
-    <key>en</key>
-    <value>Filling documents with default data</value>
-  </synonym>
-  <source>
-    <types>DocumentObject</types>
-  </source>
-  <event>Filling</event>
-  <handler>CommonModule.FillingWithDefaultDataEvent.FillingWithDefaultDataFilling</handler>
+ <name>Filling_DocumentsWithDefaultData</name>
+ <synonym>
+  <key>ru</key>
+  <value>Обработка заполнения документов информацией по умолчанию</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Filling documents with default data</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Varsayılan veri ile evrakları doldurma</value>
+ </synonym>
+ <source>
+  <types>DocumentObject</types>
+ </source>
+ <event>Filling</event>
+ <handler>CommonModule.FillingWithDefaultDataEvent.FillingWithDefaultDataFilling</handler>
 </mdclass:EventSubscription>

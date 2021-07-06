@@ -1,4 +1,4 @@
-#Region FormEvents
+﻿#Region FormEvents
 
 Procedure OnOpen(Object, Form, Cancel, AddInfo = Undefined) Export
 	DocumentsClient.SetTextOfDescriptionAtForm(Object, Form);

@@ -1,12 +1,28 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonCommand xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="a7351908-7c36-4bfe-8311-94a3eeccdb24">
-  <name>OpenCompanies</name>
-  <synonym>
-    <key>en</key>
-    <value>Companies</value>
-  </synonym>
-  <group>NavigationPanelOrdinary</group>
-  <commandParameterType/>
-  <representation>Auto</representation>
-  <shortcut></shortcut>
+ <name>OpenCompanies</name>
+ <synonym>
+  <key>fr</key>
+  <value>Entreprises</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Организации</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Companies</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Şirketler</value>
+ </synonym>
+ <synonym>
+  <key>de</key>
+  <value>Organisationen</value>
+ </synonym>
+ <group>NavigationPanelOrdinary</group>
+ <commandParameterType/>
+ <representation>Auto</representation>
+ <shortcut/>
 </mdclass:CommonCommand>

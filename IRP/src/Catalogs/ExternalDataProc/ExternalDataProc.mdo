@@ -1,148 +1,308 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="af033abd-c7bb-48ff-b98a-3799de45538f">
-  <producedTypes>
-    <objectType typeId="ce118ccd-da38-4a34-b019-cc1eca9d62cf" valueTypeId="438b145a-65c2-46b5-b599-c4b03c5cc794"/>
-    <refType typeId="ceb3517c-2774-444e-b6b0-78c20b06f85e" valueTypeId="984fb6f2-0c27-4599-b805-978184617845"/>
-    <selectionType typeId="b13e4d71-39a0-42cb-a64c-4b25d25d8ce5" valueTypeId="d708622e-49bc-45eb-a21f-d867a396286a"/>
-    <listType typeId="6c05389d-cfb8-4512-8254-1a2ae3eb0978" valueTypeId="2a932f79-706d-42b4-9848-c010562a510a"/>
-    <managerType typeId="f09ff255-86ab-4dea-886a-2b1092b9c17f" valueTypeId="272417dc-6de9-42a4-949c-2a3e37ffeded"/>
-  </producedTypes>
-  <name>ExternalDataProc</name>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Catalog xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="af033abd-c7bb-48ff-b98a-3799de45538f">
+ <producedTypes>
+  <objectType typeId="ce118ccd-da38-4a34-b019-cc1eca9d62cf" valueTypeId="438b145a-65c2-46b5-b599-c4b03c5cc794"/>
+  <refType typeId="ceb3517c-2774-444e-b6b0-78c20b06f85e" valueTypeId="984fb6f2-0c27-4599-b805-978184617845"/>
+  <selectionType typeId="b13e4d71-39a0-42cb-a64c-4b25d25d8ce5" valueTypeId="d708622e-49bc-45eb-a21f-d867a396286a"/>
+  <listType typeId="6c05389d-cfb8-4512-8254-1a2ae3eb0978" valueTypeId="2a932f79-706d-42b4-9848-c010562a510a"/>
+  <managerType typeId="f09ff255-86ab-4dea-886a-2b1092b9c17f" valueTypeId="272417dc-6de9-42a4-949c-2a3e37ffeded"/>
+ </producedTypes>
+ <name>ExternalDataProc</name>
+ <synonym>
+  <key>fr</key>
+  <value>Plug-ins</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Внешние обработки</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Plugins</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Eklentiler</value>
+ </synonym>
+ <synonym>
+  <key>de</key>
+  <value>Plug-Ins</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+ <createOnInput>Use</createOnInput>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>fr</key>
+  <value>Plug-in</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>ru</key>
+  <value>Внешняя обработка</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>en</key>
+  <value>Plugin</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>tr</key>
+  <value>Eklenti</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>de</key>
+  <value>Plug-In</value>
+ </objectPresentation>
+ <hierarchical>true</hierarchical>
+ <levelCount>2</levelCount>
+ <foldersOnTop>true</foldersOnTop>
+ <codeLength>12</codeLength>
+ <codeAllowedLength>Variable</codeAllowedLength>
+ <checkUnique>true</checkUnique>
+ <autonumbering>true</autonumbering>
+ <editType>InDialog</editType>
+ <choiceMode>BothWays</choiceMode>
+ <defaultObjectForm>Catalog.ExternalDataProc.Form.ItemForm</defaultObjectForm>
+ <defaultListForm>Catalog.ExternalDataProc.Form.ListForm</defaultListForm>
+ <defaultChoiceForm>Catalog.ExternalDataProc.Form.ChoiceForm</defaultChoiceForm>
+ <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+ <attributes uuid="a5eaa40d-ca09-44c8-a4ac-aaee25b075f2">
+  <name>Settings</name>
   <synonym>
-    <key>en</key>
-    <value>Plugins</value>
+   <key>fr</key>
+   <value>Paramètres</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
-  <createOnInput>Use</createOnInput>
-  <dataLockControlMode>Managed</dataLockControlMode>
+  <synonym>
+   <key>ru</key>
+   <value>Настройки</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Settings</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Ayarlar</value>
+  </synonym>
+  <synonym>
+   <key>de</key>
+   <value>Einstellungen</value>
+  </synonym>
+  <type>
+   <types>ValueStorage</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
-  <objectPresentation>
-    <key>en</key>
-    <value>Plugin</value>
-  </objectPresentation>
-  <hierarchical>true</hierarchical>
-  <levelCount>2</levelCount>
-  <foldersOnTop>true</foldersOnTop>
-  <codeLength>12</codeLength>
-  <codeAllowedLength>Variable</codeAllowedLength>
-  <checkUnique>true</checkUnique>
-  <autonumbering>true</autonumbering>
-  <editType>InDialog</editType>
-  <choiceMode>BothWays</choiceMode>
-  <defaultObjectForm>Catalog.ExternalDataProc.Form.ItemForm</defaultObjectForm>
-  <defaultListForm>Catalog.ExternalDataProc.Form.ListForm</defaultListForm>
-  <defaultChoiceForm>Catalog.ExternalDataProc.Form.ChoiceForm</defaultChoiceForm>
-  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
-  <attributes uuid="a5eaa40d-ca09-44c8-a4ac-aaee25b075f2">
-    <name>Settings</name>
-    <synonym>
-      <key>en</key>
-      <value>Settings</value>
-    </synonym>
-    <type>
-      <types>ValueStorage</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="96d97d03-e7c8-4c39-87ed-f9d0684b4df4">
-    <name>PathToExtDataProcForTest</name>
-    <synonym>
-      <key>en</key>
-      <value>Path to plugin for test</value>
-    </synonym>
-    <type>
-      <types>String</types>
-      <stringQualifiers/>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:StringValue">
-      <value></value>
-    </fillValue>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="b005d057-6934-41c2-a7b7-722d771b56e8">
-    <name>Name</name>
-    <synonym>
-      <key>en</key>
-      <value>Name</value>
-    </synonym>
-    <type>
-      <types>String</types>
-      <stringQualifiers>
-        <length>200</length>
-      </stringQualifiers>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fillValue xsi:type="core:StringValue">
-      <value></value>
-    </fillValue>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="3d225365-ac57-4b99-a580-307b1f2b03a8">
-    <name>DataProcStorage</name>
-    <synonym>
-      <key>en</key>
-      <value>Data proc storage</value>
-    </synonym>
-    <type>
-      <types>ValueStorage</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="e086cdd7-1e25-494d-b8f2-5029a1df8994">
-    <name>UnsafeMode</name>
-    <synonym>
-      <key>en</key>
-      <value>Unsafe mode</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <forms uuid="4d4718e1-8dd1-412b-a706-5881b0ae4357">
-    <name>ItemForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Item form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="efb47de5-4389-4827-bc30-d72a8fc89b5a">
-    <name>ListForm</name>
-    <synonym>
-      <key>en</key>
-      <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="54b9a1de-f949-4742-875f-694285720512">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="96d97d03-e7c8-4c39-87ed-f9d0684b4df4">
+  <name>PathToExtDataProcForTest</name>
+  <synonym>
+   <key>fr</key>
+   <value>Chemin d’accès au plug-in pour les tests</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Путь к внешней обработке (для теста)</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Path to plugin for test</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Test için eklenti yolu</value>
+  </synonym>
+  <synonym>
+   <key>de</key>
+   <value>Pfad zum Plug-In für Test</value>
+  </synonym>
+  <type>
+   <types>String</types>
+   <stringQualifiers/>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:StringValue">
+   <value/>
+  </fillValue>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="b005d057-6934-41c2-a7b7-722d771b56e8">
+  <name>Name</name>
+  <synonym>
+   <key>fr</key>
+   <value>Nom</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Наименование</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Name</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Ad</value>
+  </synonym>
+  <synonym>
+   <key>de</key>
+   <value>Name</value>
+  </synonym>
+  <type>
+   <types>String</types>
+   <stringQualifiers>
+    <length>200</length>
+   </stringQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fillValue xsi:type="core:StringValue">
+   <value/>
+  </fillValue>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="3d225365-ac57-4b99-a580-307b1f2b03a8">
+  <name>DataProcStorage</name>
+  <synonym>
+   <key>fr</key>
+   <value>Stockage du plug-in</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Хранилище внешней обработки</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Data proc storage</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Veri işlemci deposu</value>
+  </synonym>
+  <synonym>
+   <key>de</key>
+   <value>Plug-In-Speicher</value>
+  </synonym>
+  <type>
+   <types>ValueStorage</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="e086cdd7-1e25-494d-b8f2-5029a1df8994">
+  <name>UnsafeMode</name>
+  <synonym>
+   <key>fr</key>
+   <value>Mode non sécurisée</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Небезопасный режим</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Unsafe mode</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Güvensiz biçim</value>
+  </synonym>
+  <synonym>
+   <key>de</key>
+   <value>Unsicherer Modus</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <forms uuid="4d4718e1-8dd1-412b-a706-5881b0ae4357">
+  <name>ItemForm</name>
+  <synonym>
+   <key>fr</key>
+   <value>Formulaire d'élément</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Форма элемента</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Item form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Nesne formu</value>
+  </synonym>
+  <synonym>
+   <key>de</key>
+   <value>Elementformular</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="efb47de5-4389-4827-bc30-d72a8fc89b5a">
+  <name>ListForm</name>
+  <synonym>
+   <key>fr</key>
+   <value>Formulaire de liste</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Форма списка</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>List form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Liste formu</value>
+  </synonym>
+  <synonym>
+   <key>de</key>
+   <value>Listenformular</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="54b9a1de-f949-4742-875f-694285720512">
+  <name>ChoiceForm</name>
+  <synonym>
+   <key>fr</key>
+   <value>Formulaire de sélection</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Форма выбора</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Choice form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Seçim formu</value>
+  </synonym>
+  <synonym>
+   <key>de</key>
+   <value>Auswahlformular</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:Catalog>

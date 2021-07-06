@@ -1,61 +1,109 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="74710749-117b-493f-87a5-b39f29ee5e85">
-  <producedTypes>
-    <objectType typeId="eaea175c-f7ef-4193-b18d-16a899e631fe" valueTypeId="4cc14344-00c6-4893-a9b9-1cdfc6db02a8"/>
-    <refType typeId="6432272c-e889-4349-a209-b195099999cc" valueTypeId="17087db0-bc41-48d0-9166-ba5e801f8fc5"/>
-    <selectionType typeId="05bcde5a-0b92-49ef-986d-a02faccba4f5" valueTypeId="a6c92e90-f3d3-4148-85fc-7069ca765832"/>
-    <listType typeId="9030fc3a-1c76-48d5-bf90-ba3a32e50c72" valueTypeId="fc887bd5-df75-4825-a911-1380b06103a9"/>
-    <managerType typeId="653692e6-008d-4103-a844-d7134a5a472d" valueTypeId="d366bdec-61e3-4f35-817f-a6e2725a2289"/>
-  </producedTypes>
-  <name>UnitsOfMeasurement</name>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Catalog xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="74710749-117b-493f-87a5-b39f29ee5e85">
+ <producedTypes>
+  <objectType typeId="eaea175c-f7ef-4193-b18d-16a899e631fe" valueTypeId="4cc14344-00c6-4893-a9b9-1cdfc6db02a8"/>
+  <refType typeId="6432272c-e889-4349-a209-b195099999cc" valueTypeId="17087db0-bc41-48d0-9166-ba5e801f8fc5"/>
+  <selectionType typeId="05bcde5a-0b92-49ef-986d-a02faccba4f5" valueTypeId="a6c92e90-f3d3-4148-85fc-7069ca765832"/>
+  <listType typeId="9030fc3a-1c76-48d5-bf90-ba3a32e50c72" valueTypeId="fc887bd5-df75-4825-a911-1380b06103a9"/>
+  <managerType typeId="653692e6-008d-4103-a844-d7134a5a472d" valueTypeId="d366bdec-61e3-4f35-817f-a6e2725a2289"/>
+ </producedTypes>
+ <name>UnitsOfMeasurement</name>
+ <synonym>
+  <key>fr</key>
+  <value>Unité de mesure</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Единицы измерения</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Units of measurement</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Ölçü birimleri</value>
+ </synonym>
+ <synonym>
+  <key>de</key>
+  <value>Maßeinheiten</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <inputByString>Catalog.UnitsOfMeasurement.StandardAttribute.Code</inputByString>
+ <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+ <createOnInput>Use</createOnInput>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <fullTextSearch>Use</fullTextSearch>
+ <levelCount>2</levelCount>
+ <foldersOnTop>true</foldersOnTop>
+ <codeLength>9</codeLength>
+ <codeType>String</codeType>
+ <codeAllowedLength>Variable</codeAllowedLength>
+ <checkUnique>true</checkUnique>
+ <autonumbering>true</autonumbering>
+ <defaultPresentation>AsDescription</defaultPresentation>
+ <editType>InDialog</editType>
+ <choiceMode>BothWays</choiceMode>
+ <defaultObjectForm>Catalog.UnitsOfMeasurement.Form.ItemForm</defaultObjectForm>
+ <attributes uuid="bb100a4b-60c6-448a-b812-8c62687c76fc">
+  <name>Symbol</name>
   <synonym>
-    <key>en</key>
-    <value>Units of measurement</value>
+   <key>fr</key>
+   <value>Symbole</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <inputByString>Catalog.UnitsOfMeasurement.StandardAttribute.Code</inputByString>
-  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
-  <createOnInput>Use</createOnInput>
-  <dataLockControlMode>Managed</dataLockControlMode>
+  <synonym>
+   <key>ru</key>
+   <value>Символ</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Symbol</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Simge</value>
+  </synonym>
+  <synonym>
+   <key>de</key>
+   <value>Symbol</value>
+  </synonym>
+  <type>
+   <types>String</types>
+   <stringQualifiers>
+    <length>10</length>
+   </stringQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:StringValue">
+   <value/>
+  </fillValue>
   <fullTextSearch>Use</fullTextSearch>
-  <levelCount>2</levelCount>
-  <foldersOnTop>true</foldersOnTop>
-  <codeLength>9</codeLength>
-  <codeType>String</codeType>
-  <codeAllowedLength>Variable</codeAllowedLength>
-  <checkUnique>true</checkUnique>
-  <autonumbering>true</autonumbering>
-  <defaultPresentation>AsDescription</defaultPresentation>
-  <editType>InDialog</editType>
-  <choiceMode>BothWays</choiceMode>
-  <defaultObjectForm>Catalog.UnitsOfMeasurement.Form.ItemForm</defaultObjectForm>
-  <attributes uuid="bb100a4b-60c6-448a-b812-8c62687c76fc">
-    <name>Symbol</name>
-    <synonym>
-      <key>en</key>
-      <value>Symbol</value>
-    </synonym>
-    <type>
-      <types>String</types>
-      <stringQualifiers>
-        <length>10</length>
-      </stringQualifiers>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:StringValue">
-      <value></value>
-    </fillValue>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <forms uuid="930fbc38-1aa0-4b85-b743-2f7770dfab1a">
-    <name>ItemForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Item form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <forms uuid="930fbc38-1aa0-4b85-b743-2f7770dfab1a">
+  <name>ItemForm</name>
+  <synonym>
+   <key>fr</key>
+   <value>Formulaire d'élément</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Форма элемента</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Item form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Nesne formu</value>
+  </synonym>
+  <synonym>
+   <key>de</key>
+   <value>Elementformular</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:Catalog>

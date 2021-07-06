@@ -1,145 +1,289 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="ad348166-cfde-4359-823f-0ba55fdc35be">
-  <producedTypes>
-    <objectType typeId="a591d74d-a3c2-485b-bcc8-0cd67aa48ce3" valueTypeId="6888943e-5e8a-4625-a078-ee28d1cc6cec"/>
-    <refType typeId="28f27cfb-cf9c-482e-8f86-da457f6a72ac" valueTypeId="003b8103-6030-43c6-8e17-6a3786839236"/>
-    <selectionType typeId="a482ed44-8c3f-4d9a-89f7-f8b0ae1e3dc0" valueTypeId="d778ea81-9ab7-49ad-ad44-21b693d21101"/>
-    <listType typeId="fe0f9a24-6d7e-44aa-bb5d-43d3bce16085" valueTypeId="d58679fc-322d-4d30-8dca-e43be1a891ae"/>
-    <managerType typeId="af3434a0-d5db-418e-b9a5-b3d2ec04a475" valueTypeId="45a4965c-8389-4fe2-b2e7-286e8bd90ae2"/>
-  </producedTypes>
-  <name>ExpenseAndRevenueTypes</name>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Catalog xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="ad348166-cfde-4359-823f-0ba55fdc35be">
+ <producedTypes>
+  <objectType typeId="a591d74d-a3c2-485b-bcc8-0cd67aa48ce3" valueTypeId="6888943e-5e8a-4625-a078-ee28d1cc6cec"/>
+  <refType typeId="28f27cfb-cf9c-482e-8f86-da457f6a72ac" valueTypeId="003b8103-6030-43c6-8e17-6a3786839236"/>
+  <selectionType typeId="a482ed44-8c3f-4d9a-89f7-f8b0ae1e3dc0" valueTypeId="d778ea81-9ab7-49ad-ad44-21b693d21101"/>
+  <listType typeId="fe0f9a24-6d7e-44aa-bb5d-43d3bce16085" valueTypeId="d58679fc-322d-4d30-8dca-e43be1a891ae"/>
+  <managerType typeId="af3434a0-d5db-418e-b9a5-b3d2ec04a475" valueTypeId="45a4965c-8389-4fe2-b2e7-286e8bd90ae2"/>
+ </producedTypes>
+ <name>ExpenseAndRevenueTypes</name>
+ <synonym>
+  <key>fr</key>
+  <value>Catégories des dépenses et recettes</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Статьи доходов и расходов</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Expense and revenue types</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Gider ve gelir tipleri</value>
+ </synonym>
+ <synonym>
+  <key>de</key>
+  <value>Spesen- und Einnahmearten</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+ <characteristics>
+  <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
+  <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
+  <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.AddAttributeAndPropertySets.Catalog_ExpenseAndRevenueTypes</value>
+  </typesFilterValue>
+  <characteristicValues>InformationRegister.AddProperties</characteristicValues>
+  <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
+  <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
+  <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
+ </characteristics>
+ <characteristics>
+  <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
+  <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
+  <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.AddAttributeAndPropertySets.Catalog_ExpenseAndRevenueTypes</value>
+  </typesFilterValue>
+  <characteristicValues>Catalog.ExpenseAndRevenueTypes.TabularSection.AddAttributes</characteristicValues>
+  <objectField>Catalog.ExpenseAndRevenueTypes.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
+  <typeField>Catalog.ExpenseAndRevenueTypes.TabularSection.AddAttributes.Attribute.Property</typeField>
+  <valueField>Catalog.ExpenseAndRevenueTypes.TabularSection.AddAttributes.Attribute.Value</valueField>
+ </characteristics>
+ <createOnInput>DontUse</createOnInput>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>fr</key>
+  <value>Catégorie des dépenses et recettes</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>ru</key>
+  <value>Статья доходов и расходов</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>en</key>
+  <value>Expense and revenue type</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>tr</key>
+  <value>Gider ve gelir türü</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>de</key>
+  <value>Spesen- und Einnahmeart</value>
+ </objectPresentation>
+ <hierarchical>true</hierarchical>
+ <hierarchyType>HierarchyOfItems</hierarchyType>
+ <levelCount>2</levelCount>
+ <foldersOnTop>true</foldersOnTop>
+ <codeLength>12</codeLength>
+ <codeAllowedLength>Variable</codeAllowedLength>
+ <checkUnique>true</checkUnique>
+ <autonumbering>true</autonumbering>
+ <defaultPresentation>AsDescription</defaultPresentation>
+ <editType>InDialog</editType>
+ <choiceMode>BothWays</choiceMode>
+ <defaultObjectForm>Catalog.ExpenseAndRevenueTypes.Form.ItemForm</defaultObjectForm>
+ <defaultListForm>Catalog.ExpenseAndRevenueTypes.Form.ListForm</defaultListForm>
+ <defaultChoiceForm>Catalog.ExpenseAndRevenueTypes.Form.ChoiceForm</defaultChoiceForm>
+ <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+ <attributes uuid="994ce746-3408-43fd-a072-708d00166dd8">
+  <name>Type</name>
   <synonym>
-    <key>en</key>
-    <value>Expense and revenue types</value>
+   <key>fr</key>
+   <value>Type</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
-  <characteristics>
-    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
-    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
-    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
-    <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.AddAttributeAndPropertySets.Catalog_ExpenseAndRevenueTypes</value>
-    </typesFilterValue>
-    <characteristicValues>InformationRegister.AddProperties</characteristicValues>
-    <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
-    <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
-    <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
-  </characteristics>
-  <characteristics>
-    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
-    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
-    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
-    <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.AddAttributeAndPropertySets.Catalog_ExpenseAndRevenueTypes</value>
-    </typesFilterValue>
-    <characteristicValues>Catalog.ExpenseAndRevenueTypes.TabularSection.AddAttributes</characteristicValues>
-    <objectField>Catalog.ExpenseAndRevenueTypes.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
-    <typeField>Catalog.ExpenseAndRevenueTypes.TabularSection.AddAttributes.Attribute.Property</typeField>
-    <valueField>Catalog.ExpenseAndRevenueTypes.TabularSection.AddAttributes.Attribute.Value</valueField>
-  </characteristics>
-  <createOnInput>DontUse</createOnInput>
-  <dataLockControlMode>Managed</dataLockControlMode>
+  <synonym>
+   <key>ru</key>
+   <value>Вид</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Type</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Tip</value>
+  </synonym>
+  <synonym>
+   <key>de</key>
+   <value>Typ</value>
+  </synonym>
+  <type>
+   <types>EnumRef.ExpenseAndRevenueTypes</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fillValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
-  <objectPresentation>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <tabularSections uuid="4ebde56c-bdca-4050-baf0-8ddbd1a35358">
+  <producedTypes>
+   <objectType typeId="3ccd12e7-2bda-4a44-9879-14bd1bd3f919" valueTypeId="78c72c13-febf-40c4-8a1e-c9ca03ce577c"/>
+   <rowType typeId="14e6c116-0ce5-4e3f-b07d-f6cfdcb88758" valueTypeId="4e88e634-4a69-4a27-ba1f-668bd84131c1"/>
+  </producedTypes>
+  <name>AddAttributes</name>
+  <synonym>
+   <key>fr</key>
+   <value>Attributs supplémentaires</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Дополнительные реквизиты</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Additional attributes</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Ek özellikler</value>
+  </synonym>
+  <synonym>
+   <key>de</key>
+   <value>Zusatzattribute</value>
+  </synonym>
+  <attributes uuid="8be41110-2d11-47c9-97f6-3b183be5a56b">
+   <name>Property</name>
+   <synonym>
+    <key>fr</key>
+    <value>Propriété</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Характеристика</value>
+   </synonym>
+   <synonym>
     <key>en</key>
-    <value>Expense and revenue type</value>
-  </objectPresentation>
-  <hierarchical>true</hierarchical>
-  <hierarchyType>HierarchyOfItems</hierarchyType>
-  <levelCount>2</levelCount>
-  <foldersOnTop>true</foldersOnTop>
-  <codeLength>12</codeLength>
-  <codeAllowedLength>Variable</codeAllowedLength>
-  <checkUnique>true</checkUnique>
-  <autonumbering>true</autonumbering>
-  <defaultPresentation>AsDescription</defaultPresentation>
-  <editType>InDialog</editType>
-  <choiceMode>BothWays</choiceMode>
-  <defaultObjectForm>Catalog.ExpenseAndRevenueTypes.Form.ItemForm</defaultObjectForm>
-  <defaultListForm>Catalog.ExpenseAndRevenueTypes.Form.ListForm</defaultListForm>
-  <defaultChoiceForm>Catalog.ExpenseAndRevenueTypes.Form.ChoiceForm</defaultChoiceForm>
-  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
-  <attributes uuid="994ce746-3408-43fd-a072-708d00166dd8">
-    <name>Type</name>
-    <synonym>
-      <key>en</key>
-      <value>Type</value>
-    </synonym>
-    <type>
-      <types>EnumRef.ExpenseAndRevenueTypes</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+    <value>Property</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Özellik</value>
+   </synonym>
+   <synonym>
+    <key>de</key>
+    <value>Eigenschaft</value>
+   </synonym>
+   <type>
+    <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <tabularSections uuid="4ebde56c-bdca-4050-baf0-8ddbd1a35358">
-    <producedTypes>
-      <objectType typeId="3ccd12e7-2bda-4a44-9879-14bd1bd3f919" valueTypeId="78c72c13-febf-40c4-8a1e-c9ca03ce577c"/>
-      <rowType typeId="14e6c116-0ce5-4e3f-b07d-f6cfdcb88758" valueTypeId="4e88e634-4a69-4a27-ba1f-668bd84131c1"/>
-    </producedTypes>
-    <name>AddAttributes</name>
-    <synonym>
-      <key>en</key>
-      <value>Additional attributes</value>
-    </synonym>
-    <attributes uuid="8be41110-2d11-47c9-97f6-3b183be5a56b">
-      <name>Property</name>
-      <synonym>
-        <key>en</key>
-        <value>Property</value>
-      </synonym>
-      <type>
-        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="9ab0d71e-c10f-443e-b7d3-04b8e94c04c4">
-      <name>Value</name>
-      <synonym>
-        <key>en</key>
-        <value>Value</value>
-      </synonym>
-      <type>
-        <types>Characteristic.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-  </tabularSections>
-  <forms uuid="40b038de-71f9-4410-8247-b962e131b497">
-    <name>ItemForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Item form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="3aef72b9-a6c0-41e9-b8b3-fd42b72dfee5">
-    <name>ListForm</name>
-    <synonym>
-      <key>en</key>
-      <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="2fa4d0d1-dcb5-4887-87dd-96f14ec6e2b7">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
+  <attributes uuid="9ab0d71e-c10f-443e-b7d3-04b8e94c04c4">
+   <name>Value</name>
+   <synonym>
+    <key>fr</key>
+    <value>Valeur</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Значение</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Value</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Değer</value>
+   </synonym>
+   <synonym>
+    <key>de</key>
+    <value>Wert</value>
+   </synonym>
+   <type>
+    <types>Characteristic.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+ </tabularSections>
+ <forms uuid="40b038de-71f9-4410-8247-b962e131b497">
+  <name>ItemForm</name>
+  <synonym>
+   <key>fr</key>
+   <value>Formulaire d'élément</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Форма элемента</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Item form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Nesne formu</value>
+  </synonym>
+  <synonym>
+   <key>de</key>
+   <value>Elementformular</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="3aef72b9-a6c0-41e9-b8b3-fd42b72dfee5">
+  <name>ListForm</name>
+  <synonym>
+   <key>fr</key>
+   <value>Formulaire de liste</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Форма списка</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>List form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Liste formu</value>
+  </synonym>
+  <synonym>
+   <key>de</key>
+   <value>Listenformular</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="2fa4d0d1-dcb5-4887-87dd-96f14ec6e2b7">
+  <name>ChoiceForm</name>
+  <synonym>
+   <key>fr</key>
+   <value>Formulaire de sélection</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Форма выбора</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Choice form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Seçim formu</value>
+  </synonym>
+  <synonym>
+   <key>de</key>
+   <value>Auswahlformular</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
 </mdclass:Catalog>

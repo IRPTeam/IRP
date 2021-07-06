@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <DataCompositionSchema xmlns="http://v8.1c.ru/8.1/data-composition-system/schema" xmlns:dcscom="http://v8.1c.ru/8.1/data-composition-system/common" xmlns:dcscor="http://v8.1c.ru/8.1/data-composition-system/core" xmlns:dcsset="http://v8.1c.ru/8.1/data-composition-system/settings" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:v8ui="http://v8.1c.ru/8.1/data/ui" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<dataSource>
 		<name>DataSource1</name>
@@ -26,8 +26,24 @@
 			<field>ItemKey</field>
 			<title xsi:type="v8:LocalStringType">
 				<v8:item>
+					<v8:lang>fr</v8:lang>
+					<v8:content>Clé d'article</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Характеристика</v8:content>
+				</v8:item>
+				<v8:item>
 					<v8:lang>en</v8:lang>
 					<v8:content>Item key</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>tr</v8:lang>
+					<v8:content>Varyant</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>de</v8:lang>
+					<v8:content>Artikelvariante</v8:content>
 				</v8:item>
 			</title>
 		</field>
@@ -47,8 +63,24 @@ FROM
 		<expression>ItemKey.Item</expression>
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
+				<v8:lang>fr</v8:lang>
+				<v8:content>Article</v8:content>
+			</v8:item>
+			<v8:item>
+				<v8:lang>ru</v8:lang>
+				<v8:content>Номенклатура</v8:content>
+			</v8:item>
+			<v8:item>
 				<v8:lang>en</v8:lang>
 				<v8:content>Item</v8:content>
+			</v8:item>
+			<v8:item>
+				<v8:lang>tr</v8:lang>
+				<v8:content>Malzeme</v8:content>
+			</v8:item>
+			<v8:item>
+				<v8:lang>de</v8:lang>
+				<v8:content>Produkt</v8:content>
 			</v8:item>
 		</title>
 	</calculatedField>
@@ -57,7 +89,23 @@ FROM
 		<expression>String(EVALEXPRESSIONWITHGROUPARRAY("Barcode","ItemKey, Barcode")) </expression>
 		<title xsi:type="v8:LocalStringType">
 			<v8:item>
+				<v8:lang>fr</v8:lang>
+				<v8:content>Codes-barres</v8:content>
+			</v8:item>
+			<v8:item>
+				<v8:lang>ru</v8:lang>
+				<v8:content>Штрихкоды</v8:content>
+			</v8:item>
+			<v8:item>
 				<v8:lang>en</v8:lang>
+				<v8:content>Barcodes</v8:content>
+			</v8:item>
+			<v8:item>
+				<v8:lang>tr</v8:lang>
+				<v8:content>Barkodlar</v8:content>
+			</v8:item>
+			<v8:item>
+				<v8:lang>de</v8:lang>
 				<v8:content>Barcodes</v8:content>
 			</v8:item>
 		</title>

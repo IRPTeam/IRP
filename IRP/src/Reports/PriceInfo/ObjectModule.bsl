@@ -1,4 +1,4 @@
-
+﻿
 Procedure OnComposeResult(ResultDocument, DetailsData, StandardProcessing)
 	StandardProcessing = False;
 	

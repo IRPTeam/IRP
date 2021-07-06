@@ -1,8 +1,16 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonPicture xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="e1266ad5-fdbb-4230-8c55-fb281fda9dc9">
-  <name>SerialNumber</name>
-  <synonym>
-    <key>en</key>
-    <value>Serial number</value>
-  </synonym>
+ <name>SerialNumber</name>
+ <synonym>
+  <key>ru</key>
+  <value>Серийный номер</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Serial number</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Seri numarası</value>
+ </synonym>
 </mdclass:CommonPicture>

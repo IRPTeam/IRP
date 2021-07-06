@@ -1,20 +1,36 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Constant xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="c827af37-6be5-4361-94d4-99c8710a595d">
-  <producedTypes>
-    <managerType typeId="a5fdc8dc-89f9-4180-ae5b-0d479affc30e" valueTypeId="6a6f9e75-aaae-4742-b6ba-17e8a5e4fdbb"/>
-    <valueManagerType typeId="87ca0888-21b9-48d6-85f5-2e85617a7e8f" valueTypeId="1ca4a57e-91c3-4442-af75-08aa9a8f86b4"/>
-    <valueKeyType typeId="a505fb55-af14-4e6f-9be9-30a2ca300b6a" valueTypeId="5de41e8c-e6c4-4afd-be59-672555f344f1"/>
-  </producedTypes>
-  <name>NotFirstStart</name>
-  <synonym>
-    <key>en</key>
-    <value>Not first start</value>
-  </synonym>
-  <type>
-    <types>Boolean</types>
-  </type>
-  <useStandardCommands>true</useStandardCommands>
-  <minValue xsi:type="core:UndefinedValue"/>
-  <maxValue xsi:type="core:UndefinedValue"/>
-  <dataLockControlMode>Managed</dataLockControlMode>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Constant xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="c827af37-6be5-4361-94d4-99c8710a595d">
+ <producedTypes>
+  <managerType typeId="a5fdc8dc-89f9-4180-ae5b-0d479affc30e" valueTypeId="6a6f9e75-aaae-4742-b6ba-17e8a5e4fdbb"/>
+  <valueManagerType typeId="87ca0888-21b9-48d6-85f5-2e85617a7e8f" valueTypeId="1ca4a57e-91c3-4442-af75-08aa9a8f86b4"/>
+  <valueKeyType typeId="a505fb55-af14-4e6f-9be9-30a2ca300b6a" valueTypeId="5de41e8c-e6c4-4afd-be59-672555f344f1"/>
+ </producedTypes>
+ <name>NotFirstStart</name>
+ <synonym>
+  <key>fr</key>
+  <value>Pas un premier démarrage</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Не первый запуск</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Not first start</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>İlk açılış değil</value>
+ </synonym>
+ <synonym>
+  <key>de</key>
+  <value>Nicht erster Start</value>
+ </synonym>
+ <type>
+  <types>Boolean</types>
+ </type>
+ <useStandardCommands>true</useStandardCommands>
+ <minValue xsi:type="core:UndefinedValue"/>
+ <maxValue xsi:type="core:UndefinedValue"/>
+ <dataLockControlMode>Managed</dataLockControlMode>
 </mdclass:Constant>

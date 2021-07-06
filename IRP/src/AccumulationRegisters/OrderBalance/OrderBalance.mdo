@@ -1,88 +1,184 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:AccumulationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="fca8f6c4-8fa8-4cfb-952e-b8bb7482ef3e">
-  <producedTypes>
-    <selectionType typeId="c56c4a2e-7eb7-4ed7-b9e6-6350794bd659" valueTypeId="7e602b1a-2a14-4ce6-a4f9-b63e2aa984d1"/>
-    <listType typeId="45c4afd9-f76d-4027-9e32-5880efed7a7a" valueTypeId="23f88508-ba91-4cb3-8b4c-194d34b281b3"/>
-    <managerType typeId="10af8d24-2ec2-4c62-a221-50efd716c575" valueTypeId="6c022270-25d9-4994-944d-c6e3097c0dda"/>
-    <recordSetType typeId="82575ed5-a5f9-4b80-8d0e-8b41ed040f2c" valueTypeId="1286eb0f-991b-4c9d-bfbc-214aa051b2da"/>
-    <recordKeyType typeId="548adc85-64d4-4f0b-a2d2-c9b315b97e40" valueTypeId="b29886a3-b721-4380-8673-db291b55041e"/>
-    <recordType typeId="b920685a-9083-4d6f-a0b1-077246a4fa2a" valueTypeId="8dd90c52-484a-47dd-addd-fc063431affd"/>
-  </producedTypes>
-  <name>OrderBalance</name>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:AccumulationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="fca8f6c4-8fa8-4cfb-952e-b8bb7482ef3e">
+ <producedTypes>
+  <selectionType typeId="c56c4a2e-7eb7-4ed7-b9e6-6350794bd659" valueTypeId="7e602b1a-2a14-4ce6-a4f9-b63e2aa984d1"/>
+  <listType typeId="45c4afd9-f76d-4027-9e32-5880efed7a7a" valueTypeId="23f88508-ba91-4cb3-8b4c-194d34b281b3"/>
+  <managerType typeId="10af8d24-2ec2-4c62-a221-50efd716c575" valueTypeId="6c022270-25d9-4994-944d-c6e3097c0dda"/>
+  <recordSetType typeId="82575ed5-a5f9-4b80-8d0e-8b41ed040f2c" valueTypeId="1286eb0f-991b-4c9d-bfbc-214aa051b2da"/>
+  <recordKeyType typeId="548adc85-64d4-4f0b-a2d2-c9b315b97e40" valueTypeId="b29886a3-b721-4380-8673-db291b55041e"/>
+  <recordType typeId="b920685a-9083-4d6f-a0b1-077246a4fa2a" valueTypeId="8dd90c52-484a-47dd-addd-fc063431affd"/>
+ </producedTypes>
+ <name>OrderBalance</name>
+ <synonym>
+  <key>fr</key>
+  <value>Commandes</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Заказы</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Order balance</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Sipariş bakiyeleri (OrderBalance)</value>
+ </synonym>
+ <synonym>
+  <key>de</key>
+  <value>Auftragsbestand</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <enableTotalsSplitting>true</enableTotalsSplitting>
+ <resources uuid="65b53793-52eb-4632-8e0e-458357f57899">
+  <name>Quantity</name>
   <synonym>
-    <key>en</key>
-    <value>Order balance</value>
+   <key>fr</key>
+   <value>Quantité</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <enableTotalsSplitting>true</enableTotalsSplitting>
-  <resources uuid="65b53793-52eb-4632-8e0e-458357f57899">
-    <name>Quantity</name>
-    <synonym>
-      <key>en</key>
-      <value>Quantity</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeQuantity</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <dimensions uuid="eb0d8026-8166-4210-9073-49df77918bf6">
-    <name>Store</name>
-    <synonym>
-      <key>en</key>
-      <value>Store</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Stores</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="0c6f2de4-1af7-468e-9012-a435e20abfdc">
-    <name>Order</name>
-    <synonym>
-      <key>en</key>
-      <value>Order</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeOrders</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="8ecde951-232b-4646-be67-6549286e3869">
-    <name>ItemKey</name>
-    <synonym>
-      <key>en</key>
-      <value>Item key</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.ItemKeys</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="15edbda9-5717-4c96-8e5c-43e8bd3a03d6">
-    <name>RowKey</name>
-    <synonym>
-      <key>en</key>
-      <value>Row key</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeRowID</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
+  <synonym>
+   <key>ru</key>
+   <value>Количество</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Quantity</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Miktar</value>
+  </synonym>
+  <synonym>
+   <key>de</key>
+   <value>Anzahl</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeQuantity</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <dimensions uuid="eb0d8026-8166-4210-9073-49df77918bf6">
+  <name>Store</name>
+  <synonym>
+   <key>fr</key>
+   <value>Entrepôt</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Склад</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Store</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Depo</value>
+  </synonym>
+  <synonym>
+   <key>de</key>
+   <value>Lager</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Stores</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="0c6f2de4-1af7-468e-9012-a435e20abfdc">
+  <name>Order</name>
+  <synonym>
+   <key>fr</key>
+   <value>Commande</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Заказ</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Order</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Sipariş</value>
+  </synonym>
+  <synonym>
+   <key>de</key>
+   <value>Auftrag</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeOrders</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="8ecde951-232b-4646-be67-6549286e3869">
+  <name>ItemKey</name>
+  <synonym>
+   <key>fr</key>
+   <value>Clé d'article</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Характеристика</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Item key</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Varyant</value>
+  </synonym>
+  <synonym>
+   <key>de</key>
+   <value>Artikelvariante</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.ItemKeys</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="15edbda9-5717-4c96-8e5c-43e8bd3a03d6">
+  <name>RowKey</name>
+  <synonym>
+   <key>fr</key>
+   <value>Clé de ligne</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Ключ строки</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Row key</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Satır anahtarı</value>
+  </synonym>
+  <synonym>
+   <key>de</key>
+   <value>Zeilenschlüssel</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeRowID</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
 </mdclass:AccumulationRegister>

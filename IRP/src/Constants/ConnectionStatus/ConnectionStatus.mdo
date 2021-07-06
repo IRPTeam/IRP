@@ -1,23 +1,39 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Constant xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="e711cbc9-bd52-4141-8878-b01f993b3579">
-  <producedTypes>
-    <managerType typeId="8755da1a-910c-4854-b29c-92725003c81f" valueTypeId="7191bdc1-361c-4c65-9ae7-c3e3acf2fb60"/>
-    <valueManagerType typeId="b374ee99-072c-4ea7-aa70-860a0e4a927b" valueTypeId="34148a50-47c3-47af-863c-5562c0980456"/>
-    <valueKeyType typeId="e49cf452-7c71-4f38-8709-92433ae3a5e4" valueTypeId="d8fe9eb0-96cf-456f-a1ee-2c83ee36824b"/>
-  </producedTypes>
-  <name>ConnectionStatus</name>
-  <synonym>
-    <key>en</key>
-    <value>Connection status</value>
-  </synonym>
-  <type>
-    <types>Number</types>
-    <numberQualifiers>
-      <precision>1</precision>
-    </numberQualifiers>
-  </type>
-  <useStandardCommands>true</useStandardCommands>
-  <minValue xsi:type="core:UndefinedValue"/>
-  <maxValue xsi:type="core:UndefinedValue"/>
-  <dataLockControlMode>Managed</dataLockControlMode>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Constant xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="e711cbc9-bd52-4141-8878-b01f993b3579">
+ <producedTypes>
+  <managerType typeId="8755da1a-910c-4854-b29c-92725003c81f" valueTypeId="7191bdc1-361c-4c65-9ae7-c3e3acf2fb60"/>
+  <valueManagerType typeId="b374ee99-072c-4ea7-aa70-860a0e4a927b" valueTypeId="34148a50-47c3-47af-863c-5562c0980456"/>
+  <valueKeyType typeId="e49cf452-7c71-4f38-8709-92433ae3a5e4" valueTypeId="d8fe9eb0-96cf-456f-a1ee-2c83ee36824b"/>
+ </producedTypes>
+ <name>ConnectionStatus</name>
+ <synonym>
+  <key>fr</key>
+  <value>Statut de la connexion</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Статус соединения</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Connection status</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Bağlantı statüsü</value>
+ </synonym>
+ <synonym>
+  <key>de</key>
+  <value>Verbindungsstatus</value>
+ </synonym>
+ <type>
+  <types>Number</types>
+  <numberQualifiers>
+   <precision>1</precision>
+  </numberQualifiers>
+ </type>
+ <useStandardCommands>true</useStandardCommands>
+ <minValue xsi:type="core:UndefinedValue"/>
+ <maxValue xsi:type="core:UndefinedValue"/>
+ <dataLockControlMode>Managed</dataLockControlMode>
 </mdclass:Constant>

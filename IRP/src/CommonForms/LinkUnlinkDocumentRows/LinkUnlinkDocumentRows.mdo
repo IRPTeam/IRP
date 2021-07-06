@@ -1,10 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonForm xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="3384697a-7792-4450-b1d0-ff45912482fb">
-  <name>LinkUnlinkDocumentRows</name>
-  <synonym>
-    <key>en</key>
-    <value>Link / unlink document row</value>
-  </synonym>
-  <usePurposes>PersonalComputer</usePurposes>
-  <usePurposes>MobileDevice</usePurposes>
+ <name>LinkUnlinkDocumentRows</name>
+ <synonym>
+  <key>ru</key>
+  <value>Линковать/разлинковать строки документа</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Link / unlink document row</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Bağlantı kur/boz evrak satırı</value>
+ </synonym>
+ <usePurposes>PersonalComputer</usePurposes>
+ <usePurposes>MobileDevice</usePurposes>
 </mdclass:CommonForm>

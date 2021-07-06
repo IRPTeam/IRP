@@ -1,10 +1,26 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonForm xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="ed520eea-c951-4b36-8d11-24d2b2a10656">
-  <name>PickUpDocuments</name>
-  <synonym>
-    <key>en</key>
-    <value>Pick up documents</value>
-  </synonym>
-  <usePurposes>PersonalComputer</usePurposes>
-  <usePurposes>MobileDevice</usePurposes>
+ <name>PickUpDocuments</name>
+ <synonym>
+  <key>fr</key>
+  <value>Sélectionner les documents </value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Подбор документов</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Pick up documents</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Evrak seç</value>
+ </synonym>
+ <synonym>
+  <key>de</key>
+  <value>Dokumente auswählen</value>
+ </synonym>
+ <usePurposes>PersonalComputer</usePurposes>
+ <usePurposes>MobileDevice</usePurposes>
 </mdclass:CommonForm>

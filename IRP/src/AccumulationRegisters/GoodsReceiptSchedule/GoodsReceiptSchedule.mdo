@@ -1,118 +1,246 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:AccumulationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="e55e8eef-9bf6-4752-b43f-12aeea843807">
-  <producedTypes>
-    <selectionType typeId="56f99263-361a-4cd2-8e99-45d73feb17e6" valueTypeId="4dfec1dd-2e2c-455e-8c28-4882dac2991d"/>
-    <listType typeId="9e03c71f-be70-484d-888e-c294506a935e" valueTypeId="f60b24a5-93d2-476d-82cd-838aea79aa55"/>
-    <managerType typeId="082d6767-7764-47f6-859f-2a7a0662f5b3" valueTypeId="a2dc7e61-f473-4d13-bee9-136e44cc269e"/>
-    <recordSetType typeId="6c8949c3-e9a2-4fa4-9bd5-7bb64852c597" valueTypeId="4954715a-1477-4d02-a8f6-ba1e3e79f3d4"/>
-    <recordKeyType typeId="1cbaf19c-78c0-44f7-af35-7050b39b04f4" valueTypeId="427561d9-5513-4502-8f4b-469d91b8bb82"/>
-    <recordType typeId="88997af0-217c-4406-a0a0-24a561988674" valueTypeId="b606c35c-e627-488e-95fc-2eecbc5b79f7"/>
-  </producedTypes>
-  <name>GoodsReceiptSchedule</name>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:AccumulationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="e55e8eef-9bf6-4752-b43f-12aeea843807">
+ <producedTypes>
+  <selectionType typeId="56f99263-361a-4cd2-8e99-45d73feb17e6" valueTypeId="4dfec1dd-2e2c-455e-8c28-4882dac2991d"/>
+  <listType typeId="9e03c71f-be70-484d-888e-c294506a935e" valueTypeId="f60b24a5-93d2-476d-82cd-838aea79aa55"/>
+  <managerType typeId="082d6767-7764-47f6-859f-2a7a0662f5b3" valueTypeId="a2dc7e61-f473-4d13-bee9-136e44cc269e"/>
+  <recordSetType typeId="6c8949c3-e9a2-4fa4-9bd5-7bb64852c597" valueTypeId="4954715a-1477-4d02-a8f6-ba1e3e79f3d4"/>
+  <recordKeyType typeId="1cbaf19c-78c0-44f7-af35-7050b39b04f4" valueTypeId="427561d9-5513-4502-8f4b-469d91b8bb82"/>
+  <recordType typeId="88997af0-217c-4406-a0a0-24a561988674" valueTypeId="b606c35c-e627-488e-95fc-2eecbc5b79f7"/>
+ </producedTypes>
+ <name>GoodsReceiptSchedule</name>
+ <synonym>
+  <key>fr</key>
+  <value>Calendrier d'entrée de marchandises</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>График поступления товаров</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Goods receipt schedule</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Malzeme tedarik takvimi (GoodsReceiptSchedule)</value>
+ </synonym>
+ <synonym>
+  <key>de</key>
+  <value>Wareneingangsplan</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <enableTotalsSplitting>true</enableTotalsSplitting>
+ <resources uuid="1d716523-b7e8-4233-bb64-bd115942a073">
+  <name>Quantity</name>
   <synonym>
-    <key>en</key>
-    <value>Goods receipt schedule</value>
+   <key>fr</key>
+   <value>Quantité</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <enableTotalsSplitting>true</enableTotalsSplitting>
-  <resources uuid="1d716523-b7e8-4233-bb64-bd115942a073">
-    <name>Quantity</name>
-    <synonym>
-      <key>en</key>
-      <value>Quantity</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeQuantity</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <attributes uuid="8f39a703-f317-4e60-9202-97de4178f4b0">
-    <name>DeliveryDate</name>
-    <synonym>
-      <key>en</key>
-      <value>Delivery date</value>
-    </synonym>
-    <type>
-      <types>Date</types>
-      <dateQualifiers>
-        <dateFractions>Date</dateFractions>
-      </dateQualifiers>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </attributes>
-  <dimensions uuid="06d7877b-dc67-4b88-98ae-c0dbc16c84ce">
-    <name>Company</name>
-    <synonym>
-      <key>en</key>
-      <value>Company</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Companies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="b529bc4a-5a94-4806-b0f4-b7d7824bbff4">
-    <name>Order</name>
-    <synonym>
-      <key>en</key>
-      <value>Order</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeOrders</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="d2818846-a0d1-444e-8f6f-582ca88e7d31">
-    <name>Store</name>
-    <synonym>
-      <key>en</key>
-      <value>Store</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Stores</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="3b622b02-e5d9-410e-b501-96d2256b3c24">
-    <name>ItemKey</name>
-    <synonym>
-      <key>en</key>
-      <value>Item key</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.ItemKeys</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="86c6efea-e7ab-49f3-8fac-a6bc04372bb7">
-    <name>RowKey</name>
-    <synonym>
-      <key>en</key>
-      <value>Row key</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeRowID</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
+  <synonym>
+   <key>ru</key>
+   <value>Количество</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Quantity</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Miktar</value>
+  </synonym>
+  <synonym>
+   <key>de</key>
+   <value>Anzahl</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeQuantity</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <attributes uuid="8f39a703-f317-4e60-9202-97de4178f4b0">
+  <name>DeliveryDate</name>
+  <synonym>
+   <key>fr</key>
+   <value>Date de livraison</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Дата выполнения</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Delivery date</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Teslim tarihi</value>
+  </synonym>
+  <synonym>
+   <key>de</key>
+   <value>Lieferdatum</value>
+  </synonym>
+  <type>
+   <types>Date</types>
+   <dateQualifiers>
+    <dateFractions>Date</dateFractions>
+   </dateQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </attributes>
+ <dimensions uuid="06d7877b-dc67-4b88-98ae-c0dbc16c84ce">
+  <name>Company</name>
+  <synonym>
+   <key>fr</key>
+   <value>Entreprise</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Организация</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Company</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Şirket</value>
+  </synonym>
+  <synonym>
+   <key>de</key>
+   <value>Organisation</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Companies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="b529bc4a-5a94-4806-b0f4-b7d7824bbff4">
+  <name>Order</name>
+  <synonym>
+   <key>fr</key>
+   <value>Commande</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Заказ</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Order</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Sipariş</value>
+  </synonym>
+  <synonym>
+   <key>de</key>
+   <value>Auftrag</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeOrders</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="d2818846-a0d1-444e-8f6f-582ca88e7d31">
+  <name>Store</name>
+  <synonym>
+   <key>fr</key>
+   <value>Entrepôt</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Склад</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Store</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Depo</value>
+  </synonym>
+  <synonym>
+   <key>de</key>
+   <value>Lager</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Stores</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="3b622b02-e5d9-410e-b501-96d2256b3c24">
+  <name>ItemKey</name>
+  <synonym>
+   <key>fr</key>
+   <value>Clé d'article</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Характеристика</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Item key</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Varyant</value>
+  </synonym>
+  <synonym>
+   <key>de</key>
+   <value>Artikelvariante</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.ItemKeys</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="86c6efea-e7ab-49f3-8fac-a6bc04372bb7">
+  <name>RowKey</name>
+  <synonym>
+   <key>fr</key>
+   <value>Clé de ligne</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Ключ строки</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Row key</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Satır anahtarı</value>
+  </synonym>
+  <synonym>
+   <key>de</key>
+   <value>Zeilenschlüssel</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeRowID</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
 </mdclass:AccumulationRegister>

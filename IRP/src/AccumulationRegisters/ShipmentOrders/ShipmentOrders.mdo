@@ -1,89 +1,185 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:AccumulationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="ac9588f2-3716-4b18-a3a8-f17d70ef8cfb">
-  <producedTypes>
-    <selectionType typeId="536df565-81f0-4aeb-9e46-1c2ce9f6f78a" valueTypeId="84df3bac-9a68-46af-9464-4c6e7cc6be55"/>
-    <listType typeId="5042ce62-aade-4367-88d3-fa2a909bd1d5" valueTypeId="56924af2-b149-4113-a6e8-2396ca24b038"/>
-    <managerType typeId="866493f7-26db-45bc-8338-95ec1b95179d" valueTypeId="77e2c33b-4518-45e2-a6d4-af75dcb40e0a"/>
-    <recordSetType typeId="25855fc3-7a62-43ac-8666-1ccb844a05f9" valueTypeId="37e6add2-dcc7-4912-a319-24acc90b2a1c"/>
-    <recordKeyType typeId="7b9f827a-6d06-4eea-a112-370ac50d6425" valueTypeId="e50c3e88-3757-42eb-be05-9e9fb56a6341"/>
-    <recordType typeId="2ac1796e-bd15-419b-b94a-17f66d206bf0" valueTypeId="bfe4b9c4-f0ae-4296-96ef-a2a224d14b39"/>
-  </producedTypes>
-  <name>ShipmentOrders</name>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:AccumulationRegister xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="ac9588f2-3716-4b18-a3a8-f17d70ef8cfb">
+ <producedTypes>
+  <selectionType typeId="536df565-81f0-4aeb-9e46-1c2ce9f6f78a" valueTypeId="84df3bac-9a68-46af-9464-4c6e7cc6be55"/>
+  <listType typeId="5042ce62-aade-4367-88d3-fa2a909bd1d5" valueTypeId="56924af2-b149-4113-a6e8-2396ca24b038"/>
+  <managerType typeId="866493f7-26db-45bc-8338-95ec1b95179d" valueTypeId="77e2c33b-4518-45e2-a6d4-af75dcb40e0a"/>
+  <recordSetType typeId="25855fc3-7a62-43ac-8666-1ccb844a05f9" valueTypeId="37e6add2-dcc7-4912-a319-24acc90b2a1c"/>
+  <recordKeyType typeId="7b9f827a-6d06-4eea-a112-370ac50d6425" valueTypeId="e50c3e88-3757-42eb-be05-9e9fb56a6341"/>
+  <recordType typeId="2ac1796e-bd15-419b-b94a-17f66d206bf0" valueTypeId="bfe4b9c4-f0ae-4296-96ef-a2a224d14b39"/>
+ </producedTypes>
+ <name>ShipmentOrders</name>
+ <synonym>
+  <key>fr</key>
+  <value>Commandes client à livrer</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Заказы клиентов к отгрузке</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Shipment orders</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Sevkiyat emirleri (ShipmentOrders)</value>
+ </synonym>
+ <synonym>
+  <key>de</key>
+  <value>Lieferungsaufträge</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <enableTotalsSplitting>true</enableTotalsSplitting>
+ <resources uuid="65371f14-24c0-40b8-9947-5e1709937f23">
+  <name>Quantity</name>
   <synonym>
-    <key>en</key>
-    <value>Shipment orders</value>
+   <key>fr</key>
+   <value>Quantité</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <dataLockControlMode>Managed</dataLockControlMode>
-  <enableTotalsSplitting>true</enableTotalsSplitting>
-  <resources uuid="65371f14-24c0-40b8-9947-5e1709937f23">
-    <name>Quantity</name>
-    <synonym>
-      <key>en</key>
-      <value>Quantity</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeQuantity</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
-  <dimensions uuid="f1f64667-fea2-4ea4-b67c-054c2db22d10">
-    <name>Order</name>
-    <synonym>
-      <key>en</key>
-      <value>Order</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeOrders</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="871a7337-5e6c-4e61-b648-919151452d0d">
-    <name>ShipmentConfirmation</name>
-    <synonym>
-      <key>en</key>
-      <value>Shipment confirmation</value>
-    </synonym>
-    <type>
-      <types>DocumentRef.ShipmentConfirmation</types>
-      <types>DocumentRef.SalesOrder</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="69519fd5-ff33-49f1-bdfd-232bbf137730">
-    <name>ItemKey</name>
-    <synonym>
-      <key>en</key>
-      <value>Item key</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.ItemKeys</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="290eed0d-24ca-484d-8a9d-c5b5d7d1ccb3">
-    <name>RowKey</name>
-    <synonym>
-      <key>en</key>
-      <value>Row key</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeRowID</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
+  <synonym>
+   <key>ru</key>
+   <value>Количество</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Quantity</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Miktar</value>
+  </synonym>
+  <synonym>
+   <key>de</key>
+   <value>Anzahl</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeQuantity</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+ </resources>
+ <dimensions uuid="f1f64667-fea2-4ea4-b67c-054c2db22d10">
+  <name>Order</name>
+  <synonym>
+   <key>fr</key>
+   <value>Commande</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Заказ</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Order</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Sipariş</value>
+  </synonym>
+  <synonym>
+   <key>de</key>
+   <value>Auftrag</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeOrders</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="871a7337-5e6c-4e61-b648-919151452d0d">
+  <name>ShipmentConfirmation</name>
+  <synonym>
+   <key>fr</key>
+   <value>Bon de livraison</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Расходная товарная накладная</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Shipment confirmation</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Sevk irsaliyesi</value>
+  </synonym>
+  <synonym>
+   <key>de</key>
+   <value>Lieferschein</value>
+  </synonym>
+  <type>
+   <types>DocumentRef.ShipmentConfirmation</types>
+   <types>DocumentRef.SalesOrder</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="69519fd5-ff33-49f1-bdfd-232bbf137730">
+  <name>ItemKey</name>
+  <synonym>
+   <key>fr</key>
+   <value>Clé d'article</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Характеристика</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Item key</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Varyant</value>
+  </synonym>
+  <synonym>
+   <key>de</key>
+   <value>Artikelvariante</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.ItemKeys</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
+ <dimensions uuid="290eed0d-24ca-484d-8a9d-c5b5d7d1ccb3">
+  <name>RowKey</name>
+  <synonym>
+   <key>fr</key>
+   <value>Clé de ligne</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Ключ строки</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Row key</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Satır anahtarı</value>
+  </synonym>
+  <synonym>
+   <key>de</key>
+   <value>Zeilenschlüssel</value>
+  </synonym>
+  <type>
+   <types>DefinedType.typeRowID</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <useInTotals>true</useInTotals>
+ </dimensions>
 </mdclass:AccumulationRegister>

@@ -1,588 +1,1200 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mdclass:Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="eb3ae5d6-f73f-42ee-a899-7cbc016f4201">
-  <producedTypes>
-    <objectType typeId="d6e1f550-a522-43d3-bd9d-800795cc2a3f" valueTypeId="82f7d44b-7d28-4ba2-9092-0110b909594d"/>
-    <refType typeId="51c537b4-7b6f-4471-8822-159a36d19584" valueTypeId="b697a213-bc0a-4eb6-a9b3-0bb5ce381eef"/>
-    <selectionType typeId="e4e99dcc-c926-4db4-8560-84f94d7bd355" valueTypeId="9530c5d2-1c94-4aa1-8fb6-cd0c962cc0f3"/>
-    <listType typeId="e6e9400f-e803-4d66-8af8-c442e1e94bcf" valueTypeId="38844967-9873-4735-806c-f76a83a9a5fa"/>
-    <managerType typeId="6693800e-2687-4cf0-a89f-08342b407787" valueTypeId="c76b6dc6-757a-485d-8528-3dd5439becb7"/>
-  </producedTypes>
-  <name>BankPayment</name>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Document xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="eb3ae5d6-f73f-42ee-a899-7cbc016f4201">
+ <producedTypes>
+  <objectType typeId="d6e1f550-a522-43d3-bd9d-800795cc2a3f" valueTypeId="82f7d44b-7d28-4ba2-9092-0110b909594d"/>
+  <refType typeId="51c537b4-7b6f-4471-8822-159a36d19584" valueTypeId="b697a213-bc0a-4eb6-a9b3-0bb5ce381eef"/>
+  <selectionType typeId="e4e99dcc-c926-4db4-8560-84f94d7bd355" valueTypeId="9530c5d2-1c94-4aa1-8fb6-cd0c962cc0f3"/>
+  <listType typeId="e6e9400f-e803-4d66-8af8-c442e1e94bcf" valueTypeId="38844967-9873-4735-806c-f76a83a9a5fa"/>
+  <managerType typeId="6693800e-2687-4cf0-a89f-08342b407787" valueTypeId="c76b6dc6-757a-485d-8528-3dd5439becb7"/>
+ </producedTypes>
+ <name>BankPayment</name>
+ <synonym>
+  <key>fr</key>
+  <value>Paiement bancaire</value>
+ </synonym>
+ <synonym>
+  <key>ru</key>
+  <value>Платежное поручение исходящие</value>
+ </synonym>
+ <synonym>
+  <key>en</key>
+  <value>Bank payment</value>
+ </synonym>
+ <synonym>
+  <key>tr</key>
+  <value>Banka ödeme fişi</value>
+ </synonym>
+ <synonym>
+  <key>de</key>
+  <value>Ausgangszahlung</value>
+ </synonym>
+ <useStandardCommands>true</useStandardCommands>
+ <inputByString>Document.BankPayment.StandardAttribute.Number</inputByString>
+ <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+ <characteristics>
+  <characteristicTypes>Catalog.CurrencyMovementSets.TabularSection.CurrencyMovements</characteristicTypes>
+  <keyField>Catalog.CurrencyMovementSets.TabularSection.CurrencyMovements.Attribute.CurrencyMovementType</keyField>
+  <typesFilterField>Catalog.CurrencyMovementSets.TabularSection.CurrencyMovements.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.CurrencyMovementSets.Document_BankPayment</value>
+  </typesFilterValue>
+  <characteristicValues>Document.BankPayment.TabularSection.Currencies</characteristicValues>
+  <objectField>Document.BankPayment.TabularSection.Currencies.StandardAttribute.Ref</objectField>
+  <typeField>Document.BankPayment.TabularSection.Currencies.Attribute.MovementType</typeField>
+  <valueField>Document.BankPayment.TabularSection.Currencies.Attribute.Amount</valueField>
+ </characteristics>
+ <characteristics>
+  <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
+  <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
+  <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.AddAttributeAndPropertySets.Document_BankPayment</value>
+  </typesFilterValue>
+  <characteristicValues>InformationRegister.AddProperties</characteristicValues>
+  <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
+  <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
+  <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
+ </characteristics>
+ <characteristics>
+  <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
+  <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
+  <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
+  <typesFilterValue xsi:type="core:ReferenceValue">
+   <value>Catalog.AddAttributeAndPropertySets.Document_BankPayment</value>
+  </typesFilterValue>
+  <characteristicValues>Document.BankPayment.TabularSection.AddAttributes</characteristicValues>
+  <objectField>Document.BankPayment.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
+  <typeField>Document.BankPayment.TabularSection.AddAttributes.Attribute.Property</typeField>
+  <valueField>Document.BankPayment.TabularSection.AddAttributes.Attribute.Value</valueField>
+ </characteristics>
+ <createOnInput>DontUse</createOnInput>
+ <dataLockControlMode>Managed</dataLockControlMode>
+ <fullTextSearch>Use</fullTextSearch>
+ <objectPresentation>
+  <key>fr</key>
+  <value>Paiement bancaire</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>ru</key>
+  <value>Платежное поручение исходящие</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>en</key>
+  <value>Bank payment</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>tr</key>
+  <value>Banka ödeme fişi</value>
+ </objectPresentation>
+ <objectPresentation>
+  <key>de</key>
+  <value>Ausgangszahlung</value>
+ </objectPresentation>
+ <listPresentation>
+  <key>fr</key>
+  <value>Paiements bancaires</value>
+ </listPresentation>
+ <listPresentation>
+  <key>ru</key>
+  <value>Платежные поручения исходящие</value>
+ </listPresentation>
+ <listPresentation>
+  <key>en</key>
+  <value>Bank payments</value>
+ </listPresentation>
+ <listPresentation>
+  <key>tr</key>
+  <value>Banka ödeme fişleri</value>
+ </listPresentation>
+ <listPresentation>
+  <key>de</key>
+  <value>Ausgangszahlungen</value>
+ </listPresentation>
+ <numberLength>12</numberLength>
+ <numberAllowedLength>Variable</numberAllowedLength>
+ <checkUnique>true</checkUnique>
+ <autonumbering>true</autonumbering>
+ <defaultObjectForm>Document.BankPayment.Form.DocumentForm</defaultObjectForm>
+ <defaultListForm>Document.BankPayment.Form.ListForm</defaultListForm>
+ <defaultChoiceForm>Document.BankPayment.Form.ChoiceForm</defaultChoiceForm>
+ <realTimePosting>Deny</realTimePosting>
+ <registerRecords>AccumulationRegister.R1021B_VendorsTransactions</registerRecords>
+ <registerRecords>AccumulationRegister.R5010B_ReconciliationStatement</registerRecords>
+ <registerRecords>AccumulationRegister.R1020B_AdvancesToVendors</registerRecords>
+ <registerRecords>AccumulationRegister.ExpensesTurnovers</registerRecords>
+ <registerRecords>AccumulationRegister.R3035T_CashPlanning</registerRecords>
+ <registerRecords>AccumulationRegister.CashInTransit</registerRecords>
+ <registerRecords>AccumulationRegister.R3010B_CashOnHand</registerRecords>
+ <registerRecords>AccumulationRegister.R5011B_CustomersAging</registerRecords>
+ <registerRecords>AccumulationRegister.R2021B_CustomersTransactions</registerRecords>
+ <registerRecords>AccumulationRegister.R2020B_AdvancesFromCustomers</registerRecords>
+ <registerRecords>InformationRegister.T1002I_PartnerAdvances</registerRecords>
+ <registerRecords>InformationRegister.T1001I_PartnerTransactions</registerRecords>
+ <registerRecords>AccumulationRegister.R5012B_VendorsAging</registerRecords>
+ <postInPrivilegedMode>true</postInPrivilegedMode>
+ <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
+ <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+ <attributes uuid="7ff8e85b-5f5a-45e8-b1dc-e5b793e290c1">
+  <name>Account</name>
   <synonym>
-    <key>en</key>
-    <value>Bank payment</value>
+   <key>fr</key>
+   <value>Compte</value>
   </synonym>
-  <useStandardCommands>true</useStandardCommands>
-  <inputByString>Document.BankPayment.StandardAttribute.Number</inputByString>
-  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
-  <characteristics>
-    <characteristicTypes>Catalog.CurrencyMovementSets.TabularSection.CurrencyMovements</characteristicTypes>
-    <keyField>Catalog.CurrencyMovementSets.TabularSection.CurrencyMovements.Attribute.CurrencyMovementType</keyField>
-    <typesFilterField>Catalog.CurrencyMovementSets.TabularSection.CurrencyMovements.StandardAttribute.Ref</typesFilterField>
-    <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.CurrencyMovementSets.Document_BankPayment</value>
-    </typesFilterValue>
-    <characteristicValues>Document.BankPayment.TabularSection.Currencies</characteristicValues>
-    <objectField>Document.BankPayment.TabularSection.Currencies.StandardAttribute.Ref</objectField>
-    <typeField>Document.BankPayment.TabularSection.Currencies.Attribute.MovementType</typeField>
-    <valueField>Document.BankPayment.TabularSection.Currencies.Attribute.Amount</valueField>
-  </characteristics>
-  <characteristics>
-    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Properties</characteristicTypes>
-    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.Attribute.Property</keyField>
-    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Properties.StandardAttribute.Ref</typesFilterField>
-    <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.AddAttributeAndPropertySets.Document_BankPayment</value>
-    </typesFilterValue>
-    <characteristicValues>InformationRegister.AddProperties</characteristicValues>
-    <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
-    <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
-    <valueField>InformationRegister.AddProperties.Resource.Value</valueField>
-  </characteristics>
-  <characteristics>
-    <characteristicTypes>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes</characteristicTypes>
-    <keyField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.Attribute.Attribute</keyField>
-    <typesFilterField>Catalog.AddAttributeAndPropertySets.TabularSection.Attributes.StandardAttribute.Ref</typesFilterField>
-    <typesFilterValue xsi:type="core:ReferenceValue">
-      <value>Catalog.AddAttributeAndPropertySets.Document_BankPayment</value>
-    </typesFilterValue>
-    <characteristicValues>Document.BankPayment.TabularSection.AddAttributes</characteristicValues>
-    <objectField>Document.BankPayment.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
-    <typeField>Document.BankPayment.TabularSection.AddAttributes.Attribute.Property</typeField>
-    <valueField>Document.BankPayment.TabularSection.AddAttributes.Attribute.Value</valueField>
-  </characteristics>
-  <createOnInput>DontUse</createOnInput>
-  <dataLockControlMode>Managed</dataLockControlMode>
+  <synonym>
+   <key>ru</key>
+   <value>Касса/Банковский счет</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Account</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Kasa/Banka</value>
+  </synonym>
+  <synonym>
+   <key>de</key>
+   <value>Konto</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.CashAccounts</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fillValue xsi:type="core:UndefinedValue"/>
   <fullTextSearch>Use</fullTextSearch>
-  <objectPresentation>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="32e04b3b-f606-4d64-9d83-244b56b8e943">
+  <name>Company</name>
+  <synonym>
+   <key>fr</key>
+   <value>Entreprise</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Организация</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Company</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Şirket</value>
+  </synonym>
+  <synonym>
+   <key>de</key>
+   <value>Organisation</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Companies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="9794f86b-abd7-41a1-bf37-09e2f119b74f">
+  <name>Currency</name>
+  <synonym>
+   <key>fr</key>
+   <value>Devise</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Валюта</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Currency</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Döviz</value>
+  </synonym>
+  <synonym>
+   <key>de</key>
+   <value>Währung</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.Currencies</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillChecking>ShowError</fillChecking>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="b5884df6-b022-4e0b-bcab-2c5c5ee41ad9">
+  <name>TransactionType</name>
+  <synonym>
+   <key>fr</key>
+   <value>Type de transaction</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Операция</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Transaction type</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>İşlem tipi</value>
+  </synonym>
+  <synonym>
+   <key>de</key>
+   <value>Transaktionstyp</value>
+  </synonym>
+  <type>
+   <types>EnumRef.OutgoingPaymentTransactionTypes</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:ReferenceValue">
+   <value>Enum.OutgoingPaymentTransactionTypes.EnumValue.PaymentToVendor</value>
+  </fillValue>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="f6418c46-f262-4f5e-8b17-e1cb155d4bf0">
+  <name>TransitAccount</name>
+  <synonym>
+   <key>fr</key>
+   <value>Compte de passage</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Транзитный счет</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Transit account</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Transit hesap</value>
+  </synonym>
+  <synonym>
+   <key>de</key>
+   <value>Durchgangskonto</value>
+  </synonym>
+  <type>
+   <types>CatalogRef.CashAccounts</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="1ae82fc5-b89c-42d4-8294-2e1a53fa8e5c">
+  <name>DocNumber</name>
+  <synonym>
+   <key>fr</key>
+   <value>Numéro de document</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Номер вх. документа</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Doc number</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Belge numarası</value>
+  </synonym>
+  <synonym>
+   <key>de</key>
+   <value>Dokumentnummer</value>
+  </synonym>
+  <type>
+   <types>String</types>
+   <stringQualifiers>
+    <length>50</length>
+   </stringQualifiers>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:StringValue">
+   <value/>
+  </fillValue>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <attributes uuid="334b1dd8-dbf2-4563-ade7-de27333c87f5">
+  <name>IgnoreAdvances</name>
+  <synonym>
+   <key>en</key>
+   <value>Ignore advances</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Avansları görmezden geç</value>
+  </synonym>
+  <type>
+   <types>Boolean</types>
+  </type>
+  <minValue xsi:type="core:UndefinedValue"/>
+  <maxValue xsi:type="core:UndefinedValue"/>
+  <fillValue xsi:type="core:UndefinedValue"/>
+  <fullTextSearch>Use</fullTextSearch>
+  <dataHistory>Use</dataHistory>
+ </attributes>
+ <forms uuid="bf44b0ee-a0a1-4a4c-8523-3cea7817ea06">
+  <name>DocumentForm</name>
+  <synonym>
+   <key>fr</key>
+   <value>Formulaire de document</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Форма документа</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Document form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Evrak formu</value>
+  </synonym>
+  <synonym>
+   <key>de</key>
+   <value>Dokumentformular</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="1cd0db02-33c5-4189-9352-0472d2d5f7b8">
+  <name>ListForm</name>
+  <synonym>
+   <key>fr</key>
+   <value>Formulaire de liste</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Форма списка</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>List form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Liste formu</value>
+  </synonym>
+  <synonym>
+   <key>de</key>
+   <value>Listenformular</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <forms uuid="91ba3e7f-298c-4098-b8ec-9bfb4282327f">
+  <name>ChoiceForm</name>
+  <synonym>
+   <key>fr</key>
+   <value>Formulaire de sélection</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Форма выбора</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Choice form</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Seçim formu</value>
+  </synonym>
+  <synonym>
+   <key>de</key>
+   <value>Auswahlformular</value>
+  </synonym>
+  <usePurposes>PersonalComputer</usePurposes>
+  <usePurposes>MobileDevice</usePurposes>
+ </forms>
+ <tabularSections uuid="7d41b53e-9220-4f7f-b2db-a29a9834b108">
+  <producedTypes>
+   <objectType typeId="c22960fa-dcc9-401e-9138-f3e797d439bd" valueTypeId="0d9532dc-dbe4-420a-ab63-d67488b3c695"/>
+   <rowType typeId="af4d5ac4-fb66-426a-be10-52b979d43c7b" valueTypeId="16783d03-af0d-462e-8911-2bb50a59d01d"/>
+  </producedTypes>
+  <name>PaymentList</name>
+  <synonym>
+   <key>fr</key>
+   <value>Liste de paiements</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Платежи</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Payment list</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Ödeme listesi</value>
+  </synonym>
+  <synonym>
+   <key>de</key>
+   <value>Zahlungsliste</value>
+  </synonym>
+  <attributes uuid="2e86f332-925f-4906-b19d-9251842df42d">
+   <name>Key</name>
+   <synonym>
+    <key>fr</key>
+    <value>Clé</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Ключ</value>
+   </synonym>
+   <synonym>
     <key>en</key>
-    <value>Bank payment</value>
-  </objectPresentation>
-  <listPresentation>
+    <value>Key</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Anahtar</value>
+   </synonym>
+   <synonym>
+    <key>de</key>
+    <value>Schlüssel</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeRowID</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="fc69909a-78d4-4ccc-a22e-f41692d44868">
+   <name>BasisDocument</name>
+   <synonym>
+    <key>fr</key>
+    <value>Document de base</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Основание</value>
+   </synonym>
+   <synonym>
     <key>en</key>
-    <value>Bank payments</value>
-  </listPresentation>
-  <numberLength>12</numberLength>
-  <numberAllowedLength>Variable</numberAllowedLength>
-  <checkUnique>true</checkUnique>
-  <autonumbering>true</autonumbering>
-  <defaultObjectForm>Document.BankPayment.Form.DocumentForm</defaultObjectForm>
-  <defaultListForm>Document.BankPayment.Form.ListForm</defaultListForm>
-  <defaultChoiceForm>Document.BankPayment.Form.ChoiceForm</defaultChoiceForm>
-  <realTimePosting>Deny</realTimePosting>
-  <registerRecords>AccumulationRegister.R1021B_VendorsTransactions</registerRecords>
-  <registerRecords>AccumulationRegister.R5010B_ReconciliationStatement</registerRecords>
-  <registerRecords>AccumulationRegister.R1020B_AdvancesToVendors</registerRecords>
-  <registerRecords>AccumulationRegister.ExpensesTurnovers</registerRecords>
-  <registerRecords>AccumulationRegister.R3035T_CashPlanning</registerRecords>
-  <registerRecords>AccumulationRegister.CashInTransit</registerRecords>
-  <registerRecords>AccumulationRegister.R3010B_CashOnHand</registerRecords>
-  <registerRecords>AccumulationRegister.R5011B_CustomersAging</registerRecords>
-  <registerRecords>AccumulationRegister.R2021B_CustomersTransactions</registerRecords>
-  <registerRecords>AccumulationRegister.R2020B_AdvancesFromCustomers</registerRecords>
-  <registerRecords>InformationRegister.T1002I_PartnerAdvances</registerRecords>
-  <registerRecords>InformationRegister.T1001I_PartnerTransactions</registerRecords>
-  <registerRecords>AccumulationRegister.R5012B_VendorsAging</registerRecords>
-  <postInPrivilegedMode>true</postInPrivilegedMode>
-  <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
-  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
-  <attributes uuid="7ff8e85b-5f5a-45e8-b1dc-e5b793e290c1">
-    <name>Account</name>
-    <synonym>
-      <key>en</key>
-      <value>Account</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.CashAccounts</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+    <value>Basis document</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Kaynak evrak</value>
+   </synonym>
+   <synonym>
+    <key>de</key>
+    <value>Basisdokument</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeApTransactionBasises</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="32e04b3b-f606-4d64-9d83-244b56b8e943">
-    <name>Company</name>
-    <synonym>
-      <key>en</key>
-      <value>Company</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Companies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="9ef6da19-598d-4620-a88e-7126300d2c54">
+   <name>Agreement</name>
+   <synonym>
+    <key>fr</key>
+    <value>Accord</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Соглашение</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Partner term</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Sözleşme</value>
+   </synonym>
+   <synonym>
+    <key>de</key>
+    <value>Vereinbarung</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.Agreements</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="9794f86b-abd7-41a1-bf37-09e2f119b74f">
-    <name>Currency</name>
-    <synonym>
-      <key>en</key>
-      <value>Currency</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Currencies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="980b30cf-a943-4b57-8066-74ffc972ed25">
+   <name>Partner</name>
+   <synonym>
+    <key>fr</key>
+    <value>Partenaire</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Партнер</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Partner</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Cari hesap</value>
+   </synonym>
+   <synonym>
+    <key>de</key>
+    <value>Geschäftspartner</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.Partners</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="b5884df6-b022-4e0b-bcab-2c5c5ee41ad9">
-    <name>TransactionType</name>
-    <synonym>
-      <key>en</key>
-      <value>Transaction type</value>
-    </synonym>
-    <type>
-      <types>EnumRef.OutgoingPaymentTransactionTypes</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:ReferenceValue">
-      <value>Enum.OutgoingPaymentTransactionTypes.EnumValue.PaymentToVendor</value>
-    </fillValue>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="8e0906d2-fa04-47c5-9908-4d3ba06243f5">
+   <name>Amount</name>
+   <synonym>
+    <key>fr</key>
+    <value>Montant</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Сумма</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Amount</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Tutar</value>
+   </synonym>
+   <synonym>
+    <key>de</key>
+    <value>Betrag</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeAmount</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
   </attributes>
-  <attributes uuid="f6418c46-f262-4f5e-8b17-e1cb155d4bf0">
-    <name>TransitAccount</name>
-    <synonym>
-      <key>en</key>
-      <value>Transit account</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.CashAccounts</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="9ba9b566-6640-456f-9802-62b25dcba5a7">
+   <name>Payee</name>
+   <synonym>
+    <key>fr</key>
+    <value>Bénéficiaire</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Контрагент</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Payee</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Ödenen</value>
+   </synonym>
+   <synonym>
+    <key>de</key>
+    <value>Zahlungsempfänger</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.Companies</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="1ae82fc5-b89c-42d4-8294-2e1a53fa8e5c">
-    <name>DocNumber</name>
-    <synonym>
-      <key>en</key>
-      <value>Doc number</value>
-    </synonym>
-    <type>
-      <types>String</types>
-      <stringQualifiers>
-        <length>50</length>
-      </stringQualifiers>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:StringValue">
-      <value></value>
-    </fillValue>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="30953e18-9fc6-41ef-a2c2-aa125b2944bd">
+   <name>PlaningTransactionBasis</name>
+   <synonym>
+    <key>fr</key>
+    <value>Base planifiée de transaction</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Плановый документ-основания</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Planning transaction basis</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>İşlem bazında planlama</value>
+   </synonym>
+   <synonym>
+    <key>de</key>
+    <value>Transaktionsplanungsbasis</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typePlaningTransactionBasises</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <attributes uuid="334b1dd8-dbf2-4563-ade7-de27333c87f5">
-    <name>IgnoreAdvances</name>
-    <synonym>
-      <key>en</key>
-      <value>Ignore advances</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+  <attributes uuid="3e30d265-e436-42f7-8417-83e626bbb7ec">
+   <name>Commission</name>
+   <synonym>
+    <key>fr</key>
+    <value>Commission</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Сумма комиссии</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Commission</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Komisyon</value>
+   </synonym>
+   <synonym>
+    <key>de</key>
+    <value>Provision</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeAmount</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
   </attributes>
-  <forms uuid="bf44b0ee-a0a1-4a4c-8523-3cea7817ea06">
-    <name>DocumentForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Document form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="1cd0db02-33c5-4189-9352-0472d2d5f7b8">
-    <name>ListForm</name>
-    <synonym>
-      <key>en</key>
-      <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="91ba3e7f-298c-4098-b8ec-9bfb4282327f">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <tabularSections uuid="7d41b53e-9220-4f7f-b2db-a29a9834b108">
-    <producedTypes>
-      <objectType typeId="c22960fa-dcc9-401e-9138-f3e797d439bd" valueTypeId="0d9532dc-dbe4-420a-ab63-d67488b3c695"/>
-      <rowType typeId="af4d5ac4-fb66-426a-be10-52b979d43c7b" valueTypeId="16783d03-af0d-462e-8911-2bb50a59d01d"/>
-    </producedTypes>
-    <name>PaymentList</name>
-    <synonym>
-      <key>en</key>
-      <value>Payment list</value>
-    </synonym>
-    <attributes uuid="2e86f332-925f-4906-b19d-9251842df42d">
-      <name>Key</name>
-      <synonym>
-        <key>en</key>
-        <value>Key</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeRowID</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="fc69909a-78d4-4ccc-a22e-f41692d44868">
-      <name>BasisDocument</name>
-      <synonym>
-        <key>en</key>
-        <value>Basis document</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeApTransactionBasises</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="9ef6da19-598d-4620-a88e-7126300d2c54">
-      <name>Agreement</name>
-      <synonym>
-        <key>en</key>
-        <value>Partner term</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.Agreements</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="980b30cf-a943-4b57-8066-74ffc972ed25">
-      <name>Partner</name>
-      <synonym>
-        <key>en</key>
-        <value>Partner</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.Partners</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="8e0906d2-fa04-47c5-9908-4d3ba06243f5">
-      <name>Amount</name>
-      <synonym>
-        <key>en</key>
-        <value>Amount</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeAmount</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-    </attributes>
-    <attributes uuid="9ba9b566-6640-456f-9802-62b25dcba5a7">
-      <name>Payee</name>
-      <synonym>
-        <key>en</key>
-        <value>Payee</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.Companies</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="30953e18-9fc6-41ef-a2c2-aa125b2944bd">
-      <name>PlaningTransactionBasis</name>
-      <synonym>
-        <key>en</key>
-        <value>Planning transaction basis</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typePlaningTransactionBasises</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="3e30d265-e436-42f7-8417-83e626bbb7ec">
-      <name>Commission</name>
-      <synonym>
-        <key>en</key>
-        <value>Commission</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeAmount</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="952345eb-f7af-4d5e-8a63-503f48285e5c">
-      <name>BusinessUnit</name>
-      <synonym>
-        <key>en</key>
-        <value>Business unit</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.BusinessUnits</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="9efb1abf-6381-4f4c-be63-bead8b93f2c7">
-      <name>ExpenseType</name>
-      <synonym>
-        <key>en</key>
-        <value>Expense type</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.ExpenseAndRevenueTypes</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="f06e9ad7-03e9-44b8-bea1-4b2a9341b828">
-      <name>AdditionalAnalytic</name>
-      <synonym>
-        <key>en</key>
-        <value>Additional analytic</value>
-      </synonym>
-      <type>
-        <types>Characteristic.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="9e59c57e-b470-4d82-be72-1c338f89ee16">
-      <name>MovementType</name>
-      <synonym>
-        <key>en</key>
-        <value>Movement type</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.ExpenseAndRevenueTypes</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-  </tabularSections>
-  <tabularSections uuid="e629744a-a4f2-4b41-a350-c16ddb11e5a7">
-    <producedTypes>
-      <objectType typeId="0465f0d0-c903-4c1e-9e38-2ac6c12ee3d9" valueTypeId="4ee88368-f44d-4824-8dd4-ce3684429569"/>
-      <rowType typeId="8e25fa7b-c108-4423-9985-299fe313e74f" valueTypeId="acd7647b-b04a-47cf-9c03-963dc3bc304f"/>
-    </producedTypes>
-    <name>Currencies</name>
-    <synonym>
-      <key>en</key>
-      <value>Currencies</value>
-    </synonym>
-    <attributes uuid="530c988c-cd5b-4da5-8c05-c534401c94cb">
-      <name>Key</name>
-      <synonym>
-        <key>en</key>
-        <value>Key</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeRowID</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="840e40c8-f3ee-4ab2-b087-8d035dd01d4d">
-      <name>CurrencyFrom</name>
-      <synonym>
-        <key>en</key>
-        <value>Currency from</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.Currencies</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="efbd7d70-cc48-4df6-b482-dca587523d93">
-      <name>Rate</name>
-      <synonym>
-        <key>en</key>
-        <value>Rate</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeCurrencyRate</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="814c5586-cfd9-4e2d-a11f-f43aa94fa58f">
-      <name>ReverseRate</name>
-      <synonym>
-        <key>en</key>
-        <value>Reverse rate</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeCurrencyRate</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="1b4a5955-e60c-4673-9419-e1435838df93">
-      <name>ShowReverseRate</name>
-      <synonym>
-        <key>en</key>
-        <value>Show reverse rate</value>
-      </synonym>
-      <type>
-        <types>Boolean</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="ca956d4a-2e3b-4fac-8a2b-bf1ea125aed6">
-      <name>Multiplicity</name>
-      <synonym>
-        <key>en</key>
-        <value>Multiplicity</value>
-      </synonym>
-      <type>
-        <types>Number</types>
-        <numberQualifiers>
-          <precision>10</precision>
-        </numberQualifiers>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="87184a1a-573b-46b3-897f-6f923dfa8fa7">
-      <name>MovementType</name>
-      <synonym>
-        <key>en</key>
-        <value>Movement type</value>
-      </synonym>
-      <type>
-        <types>ChartOfCharacteristicTypesRef.CurrencyMovementType</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="23f6bd45-36bf-4c73-b747-26efffd33bf6">
-      <name>Amount</name>
-      <synonym>
-        <key>en</key>
-        <value>Amount</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeAmount</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-  </tabularSections>
-  <tabularSections uuid="6191848c-f533-4689-bae3-46499b265e84">
-    <producedTypes>
-      <objectType typeId="a6850450-fa18-4391-8a40-367a327188e5" valueTypeId="5ec631ea-c88e-4344-a79e-5674d2c31e3d"/>
-      <rowType typeId="94d2f221-d4c3-40c1-86e7-10cfcb7a60cf" valueTypeId="10e66145-697b-4449-a16f-2c3e74417aab"/>
-    </producedTypes>
-    <name>AddAttributes</name>
-    <synonym>
-      <key>en</key>
-      <value>Additional attributes</value>
-    </synonym>
-    <attributes uuid="f3b4a028-2329-45ba-8c9a-374e69978712">
-      <name>Property</name>
-      <synonym>
-        <key>en</key>
-        <value>Property</value>
-      </synonym>
-      <type>
-        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-    </attributes>
-    <attributes uuid="4078739b-56ae-49e4-aadd-2e9db7b5fa1d">
-      <name>Value</name>
-      <synonym>
-        <key>en</key>
-        <value>Value</value>
-      </synonym>
-      <type>
-        <types>Characteristic.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-    </attributes>
-  </tabularSections>
-  <commands uuid="652eb8c0-9773-4733-818c-e405dc646823">
-    <name>GenarateBankPayment</name>
-    <synonym>
-      <key>en</key>
-      <value>Bank payment</value>
-    </synonym>
-    <group>FormCommandBarCreateBasedOn</group>
-    <commandParameterType>
-      <types>DocumentRef.CashTransferOrder</types>
-      <types>DocumentRef.PurchaseInvoice</types>
-      <types>DocumentRef.OutgoingPaymentOrder</types>
-    </commandParameterType>
-    <parameterUseMode>Multiple</parameterUseMode>
-    <representation>Auto</representation>
-    <shortcut></shortcut>
-  </commands>
+  <attributes uuid="952345eb-f7af-4d5e-8a63-503f48285e5c">
+   <name>BusinessUnit</name>
+   <synonym>
+    <key>fr</key>
+    <value>Division</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Подразделение</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Business unit</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Departman</value>
+   </synonym>
+   <synonym>
+    <key>de</key>
+    <value>Abteilung</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.BusinessUnits</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="9efb1abf-6381-4f4c-be63-bead8b93f2c7">
+   <name>ExpenseType</name>
+   <synonym>
+    <key>fr</key>
+    <value>Type de dépense</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Статья расходов</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Expense type</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Gider tipi</value>
+   </synonym>
+   <synonym>
+    <key>de</key>
+    <value>Spesenart</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.ExpenseAndRevenueTypes</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="f06e9ad7-03e9-44b8-bea1-4b2a9341b828">
+   <name>AdditionalAnalytic</name>
+   <synonym>
+    <key>fr</key>
+    <value>Analytique supplémentaire</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Дополнительная аналитика</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Additional analytic</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Ek detaylar</value>
+   </synonym>
+   <synonym>
+    <key>de</key>
+    <value>Zusätzliche Analyse</value>
+   </synonym>
+   <type>
+    <types>Characteristic.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="9e59c57e-b470-4d82-be72-1c338f89ee16">
+   <name>MovementType</name>
+   <synonym>
+    <key>fr</key>
+    <value>Analytique de devise</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Статья движених денежных средств</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Movement type</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Hareket tipi</value>
+   </synonym>
+   <synonym>
+    <key>de</key>
+    <value>Bewegungstyp</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.ExpenseAndRevenueTypes</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+ </tabularSections>
+ <tabularSections uuid="e629744a-a4f2-4b41-a350-c16ddb11e5a7">
+  <producedTypes>
+   <objectType typeId="0465f0d0-c903-4c1e-9e38-2ac6c12ee3d9" valueTypeId="4ee88368-f44d-4824-8dd4-ce3684429569"/>
+   <rowType typeId="8e25fa7b-c108-4423-9985-299fe313e74f" valueTypeId="acd7647b-b04a-47cf-9c03-963dc3bc304f"/>
+  </producedTypes>
+  <name>Currencies</name>
+  <synonym>
+   <key>fr</key>
+   <value>Devises</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Валюты</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Currencies</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Dövizler</value>
+  </synonym>
+  <synonym>
+   <key>de</key>
+   <value>Währungen</value>
+  </synonym>
+  <attributes uuid="530c988c-cd5b-4da5-8c05-c534401c94cb">
+   <name>Key</name>
+   <synonym>
+    <key>fr</key>
+    <value>Clé</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Ключ</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Key</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Anahtar</value>
+   </synonym>
+   <synonym>
+    <key>de</key>
+    <value>Schlüssel</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeRowID</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="840e40c8-f3ee-4ab2-b087-8d035dd01d4d">
+   <name>CurrencyFrom</name>
+   <synonym>
+    <key>fr</key>
+    <value>De devise</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>С валюты</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Currency from</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Dövizden</value>
+   </synonym>
+   <synonym>
+    <key>de</key>
+    <value>Von-Währung</value>
+   </synonym>
+   <type>
+    <types>CatalogRef.Currencies</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="efbd7d70-cc48-4df6-b482-dca587523d93">
+   <name>Rate</name>
+   <synonym>
+    <key>fr</key>
+    <value>Taux</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Ставка</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Rate</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Oran</value>
+   </synonym>
+   <synonym>
+    <key>de</key>
+    <value>Kurs</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeCurrencyRate</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="814c5586-cfd9-4e2d-a11f-f43aa94fa58f">
+   <name>ReverseRate</name>
+   <synonym>
+    <key>fr</key>
+    <value>Taux inversé</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Обратный курс</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Reverse rate</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Ters kur</value>
+   </synonym>
+   <synonym>
+    <key>de</key>
+    <value>Umgekehrter Kurs</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeCurrencyRate</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="1b4a5955-e60c-4673-9419-e1435838df93">
+   <name>ShowReverseRate</name>
+   <synonym>
+    <key>fr</key>
+    <value>Afficher le taux inversé</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Показать обратный курс</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Show reverse rate</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Ters kur göster</value>
+   </synonym>
+   <synonym>
+    <key>de</key>
+    <value>Umgekehrten Kurs anzeigen</value>
+   </synonym>
+   <type>
+    <types>Boolean</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="ca956d4a-2e3b-4fac-8a2b-bf1ea125aed6">
+   <name>Multiplicity</name>
+   <synonym>
+    <key>fr</key>
+    <value>Multiplicité</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Кратность</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Multiplicity</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Çarpan</value>
+   </synonym>
+   <synonym>
+    <key>de</key>
+    <value>Multiplizität</value>
+   </synonym>
+   <type>
+    <types>Number</types>
+    <numberQualifiers>
+     <precision>10</precision>
+    </numberQualifiers>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="87184a1a-573b-46b3-897f-6f923dfa8fa7">
+   <name>MovementType</name>
+   <synonym>
+    <key>fr</key>
+    <value>Analytique de devise</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Статья движених денежных средств</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Movement type</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Hareket tipi</value>
+   </synonym>
+   <synonym>
+    <key>de</key>
+    <value>Bewegungstyp</value>
+   </synonym>
+   <type>
+    <types>ChartOfCharacteristicTypesRef.CurrencyMovementType</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+  <attributes uuid="23f6bd45-36bf-4c73-b747-26efffd33bf6">
+   <name>Amount</name>
+   <synonym>
+    <key>fr</key>
+    <value>Montant</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Сумма</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Amount</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Tutar</value>
+   </synonym>
+   <synonym>
+    <key>de</key>
+    <value>Betrag</value>
+   </synonym>
+   <type>
+    <types>DefinedType.typeAmount</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+   <fullTextSearch>Use</fullTextSearch>
+  </attributes>
+ </tabularSections>
+ <tabularSections uuid="6191848c-f533-4689-bae3-46499b265e84">
+  <producedTypes>
+   <objectType typeId="a6850450-fa18-4391-8a40-367a327188e5" valueTypeId="5ec631ea-c88e-4344-a79e-5674d2c31e3d"/>
+   <rowType typeId="94d2f221-d4c3-40c1-86e7-10cfcb7a60cf" valueTypeId="10e66145-697b-4449-a16f-2c3e74417aab"/>
+  </producedTypes>
+  <name>AddAttributes</name>
+  <synonym>
+   <key>fr</key>
+   <value>Attributs supplémentaires</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Дополнительные реквизиты</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Additional attributes</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Ek özellikler</value>
+  </synonym>
+  <synonym>
+   <key>de</key>
+   <value>Zusatzattribute</value>
+  </synonym>
+  <attributes uuid="f3b4a028-2329-45ba-8c9a-374e69978712">
+   <name>Property</name>
+   <synonym>
+    <key>fr</key>
+    <value>Propriété</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Характеристика</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Property</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Özellik</value>
+   </synonym>
+   <synonym>
+    <key>de</key>
+    <value>Eigenschaft</value>
+   </synonym>
+   <type>
+    <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="4078739b-56ae-49e4-aadd-2e9db7b5fa1d">
+   <name>Value</name>
+   <synonym>
+    <key>fr</key>
+    <value>Valeur</value>
+   </synonym>
+   <synonym>
+    <key>ru</key>
+    <value>Значение</value>
+   </synonym>
+   <synonym>
+    <key>en</key>
+    <value>Value</value>
+   </synonym>
+   <synonym>
+    <key>tr</key>
+    <value>Değer</value>
+   </synonym>
+   <synonym>
+    <key>de</key>
+    <value>Wert</value>
+   </synonym>
+   <type>
+    <types>Characteristic.AddAttributeAndProperty</types>
+   </type>
+   <minValue xsi:type="core:UndefinedValue"/>
+   <maxValue xsi:type="core:UndefinedValue"/>
+   <dataHistory>Use</dataHistory>
+  </attributes>
+ </tabularSections>
+ <commands uuid="652eb8c0-9773-4733-818c-e405dc646823">
+  <name>GenarateBankPayment</name>
+  <synonym>
+   <key>fr</key>
+   <value>Paiement bancaire</value>
+  </synonym>
+  <synonym>
+   <key>ru</key>
+   <value>Платежное поручение исходящие</value>
+  </synonym>
+  <synonym>
+   <key>en</key>
+   <value>Bank payment</value>
+  </synonym>
+  <synonym>
+   <key>tr</key>
+   <value>Banka ödeme fişi</value>
+  </synonym>
+  <synonym>
+   <key>de</key>
+   <value>Ausgangszahlung</value>
+  </synonym>
+  <group>FormCommandBarCreateBasedOn</group>
+  <commandParameterType>
+   <types>DocumentRef.CashTransferOrder</types>
+   <types>DocumentRef.PurchaseInvoice</types>
+   <types>DocumentRef.OutgoingPaymentOrder</types>
+  </commandParameterType>
+  <parameterUseMode>Multiple</parameterUseMode>
+  <representation>Auto</representation>
+  <shortcut/>
+ </commands>
 </mdclass:Document>

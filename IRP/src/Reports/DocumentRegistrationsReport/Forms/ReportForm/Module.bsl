@@ -68,14 +68,24 @@ Procedure GenerateReportForOneDocument(DocumentRef, Result, Template, MainTitleA
 	
 	DocumentRegisterRecords = DocumentRef.Metadata().RegisterRecords;
 	
-	ArrayOfDocumentRegisterRecords = New Array();
+	TableOfDocumentRegisterRecords = New ValueTable();
+	TableOfDocumentRegisterRecords.Columns.Add("RegisterRecord");
+	TableOfDocumentRegisterRecords.Columns.Add("RegisterRecordPresentation");
 	For Each RegisterRecord In DocumentRegisterRecords Do
+		NewRow = TableOfDocumentRegisterRecords.Add();
+		NewRow.RegisterRecord = RegisterRecord;
+		NewRow.RegisterRecordPresentation = String(RegisterRecord);
+	EndDo;
+	TableOfDocumentRegisterRecords.Sort("RegisterRecordPresentation");
+	
+	ArrayOfDocumentRegisterRecords = New Array();
+	For Each Row In TableOfDocumentRegisterRecords Do
 		If ValueIsFilled(ThisObject.FilterRegister) Then
-			If Upper(RegisterRecord.FullName()) = Upper(ThisObject.FilterRegister) Then
-				ArrayOfDocumentRegisterRecords.Add(RegisterRecord);
+			If Upper(Row.RegisterRecord.FullName()) = Upper(ThisObject.FilterRegister) Then
+				ArrayOfDocumentRegisterRecords.Add(Row.RegisterRecord);
 			EndIf;
 		Else
-			ArrayOfDocumentRegisterRecords.Add(RegisterRecord);
+			ArrayOfDocumentRegisterRecords.Add(Row.RegisterRecord);
 		EndIf;
 	EndDo;
 	

@@ -3,6 +3,9 @@
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	DocSalesReturnServer.OnCreateAtServerListForm(ThisObject, Cancel, StandardProcessing);
+	ThisObject.List.Parameters.SetParameterValue("StatusClosed"    , R().Status_Closed);
+	ThisObject.List.Parameters.SetParameterValue("StatusAwaiting"  , R().Status_Awaiting);
+	ThisObject.List.Parameters.SetParameterValue("StatusInvoicing" , R().Status_Invoicing);
 EndProcedure
 
 #EndRegion

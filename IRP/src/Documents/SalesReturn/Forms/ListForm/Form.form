@@ -253,6 +253,56 @@
       </extInfo>
     </items>
     <items xsi:type="form:FormField">
+      <name>Status</name>
+      <id>46</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <dataPath xsi:type="form:DataPath">
+        <segments>List.Status</segments>
+      </dataPath>
+      <extendedTooltip>
+        <name>StatusExtendedTooltip</name>
+        <id>48</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <type>Label</type>
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <extInfo xsi:type="form:LabelDecorationExtInfo">
+          <horizontalAlign>Left</horizontalAlign>
+        </extInfo>
+      </extendedTooltip>
+      <contextMenu>
+        <name>StatusContextMenu</name>
+        <id>47</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <autoFill>true</autoFill>
+      </contextMenu>
+      <type>InputField</type>
+      <editMode>Enter</editMode>
+      <showInHeader>true</showInHeader>
+      <headerHorizontalAlign>Left</headerHorizontalAlign>
+      <showInFooter>true</showInFooter>
+      <extInfo xsi:type="form:InputFieldExtInfo">
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <wrap>true</wrap>
+        <chooseType>true</chooseType>
+        <typeDomainEnabled>true</typeDomainEnabled>
+        <textEdit>true</textEdit>
+      </extInfo>
+    </items>
+    <items xsi:type="form:FormField">
       <name>DocumentAmount</name>
       <id>34</id>
       <visible>true</visible>
@@ -784,10 +834,33 @@
     <edit>
       <common>true</common>
     </edit>
+    <notDefaultUseAlwaysAttributes xsi:type="form:DataPath">
+      <segments>List.StatusCode</segments>
+    </notDefaultUseAlwaysAttributes>
     <main>true</main>
     <extInfo xsi:type="form:DynamicListExtInfo">
       <queryText>SELECT
 	SalesReturn.Ref,
+	CASE
+		WHEN SUM(ISNULL(R2031B_ShipmentInvoicingBalance.QuantityBalance, 0)) = 0
+			THEN &amp;StatusClosed
+		WHEN SUM(ISNULL(SalesReturnItemList.QuantityInBaseUnit,
+			0)) = SUM(ISNULL(R2031B_ShipmentInvoicingBalance.QuantityBalance, 0))
+			THEN &amp;StatusAwaiting
+		WHEN SUM(ISNULL(SalesReturnItemList.QuantityInBaseUnit,
+			0)) &lt;> SUM(ISNULL(R2031B_ShipmentInvoicingBalance.QuantityBalance, 0))
+			THEN &amp;StatusInvoicing
+	END AS Status,
+	CASE
+		WHEN SUM(ISNULL(R2031B_ShipmentInvoicingBalance.QuantityBalance, 0)) = 0
+			THEN 0
+		WHEN SUM(ISNULL(SalesReturnItemList.QuantityInBaseUnit,
+			0)) = SUM(ISNULL(R2031B_ShipmentInvoicingBalance.QuantityBalance, 0))
+			THEN 1
+		WHEN SUM(ISNULL(SalesReturnItemList.QuantityInBaseUnit,
+			0)) &lt;> SUM(ISNULL(R2031B_ShipmentInvoicingBalance.QuantityBalance, 0))
+			THEN 2
+	END AS StatusCode,
 	SalesReturn.DeletionMark,
 	SalesReturn.Number,
 	SalesReturn.Date,
@@ -805,13 +878,17 @@
 	SalesReturn.BusinessUnit,
 	SalesReturn.Description,
 	SalesReturn.DocumentAmount,
-	CASE WHEN COUNT(DISTINCT SalesReturnItemList.Store) = 1 THEN
-		MAX(SalesReturnItemList.Store)
-	ELSE UNDEFINED END AS Store
+	CASE
+		WHEN COUNT(DISTINCT SalesReturnItemList.Store) = 1
+			THEN MAX(SalesReturnItemList.Store)
+		ELSE UNDEFINED
+	END AS Store
 FROM
 	Document.SalesReturn AS SalesReturn
 		LEFT JOIN Document.SalesReturn.ItemList AS SalesReturnItemList
 		ON SalesReturnItemList.Ref = SalesReturn.Ref
+		LEFT JOIN AccumulationRegister.R2031B_ShipmentInvoicing.Balance AS R2031B_ShipmentInvoicingBalance
+		ON SalesReturn.Ref = CAST(R2031B_ShipmentInvoicingBalance.Basis AS Document.SalesReturn)
 GROUP BY
 	SalesReturn.Ref,
 	SalesReturn.DeletionMark,

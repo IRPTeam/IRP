@@ -253,6 +253,56 @@
       </extInfo>
     </items>
     <items xsi:type="form:FormField">
+      <name>Status</name>
+      <id>46</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <dataPath xsi:type="form:DataPath">
+        <segments>List.Status</segments>
+      </dataPath>
+      <extendedTooltip>
+        <name>StatusExtendedTooltip</name>
+        <id>48</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <type>Label</type>
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <extInfo xsi:type="form:LabelDecorationExtInfo">
+          <horizontalAlign>Left</horizontalAlign>
+        </extInfo>
+      </extendedTooltip>
+      <contextMenu>
+        <name>StatusContextMenu</name>
+        <id>47</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <autoFill>true</autoFill>
+      </contextMenu>
+      <type>InputField</type>
+      <editMode>Enter</editMode>
+      <showInHeader>true</showInHeader>
+      <headerHorizontalAlign>Left</headerHorizontalAlign>
+      <showInFooter>true</showInFooter>
+      <extInfo xsi:type="form:InputFieldExtInfo">
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <wrap>true</wrap>
+        <chooseType>true</chooseType>
+        <typeDomainEnabled>true</typeDomainEnabled>
+        <textEdit>true</textEdit>
+      </extInfo>
+    </items>
+    <items xsi:type="form:FormField">
       <name>DocumentAmount</name>
       <id>34</id>
       <visible>true</visible>
@@ -784,10 +834,24 @@
     <edit>
       <common>true</common>
     </edit>
+    <notDefaultUseAlwaysAttributes xsi:type="form:DataPath">
+      <segments>List.StatusCode</segments>
+    </notDefaultUseAlwaysAttributes>
     <main>true</main>
     <extInfo xsi:type="form:DynamicListExtInfo">
       <queryText>SELECT
 	PurchaseReturn.Ref,
+	CASE
+		WHEN ISNULL(R1031B_ReceiptInvoicingBalance.QuantityBalance, 0) = 0
+			THEN VALUE(Enum.InvoicingShippingStatuses.Closed)
+		WHEN SUM(ISNULL(PurchaseReturnItemList.QuantityInBaseUnit,
+			0)) = ISNULL(R1031B_ReceiptInvoicingBalance.QuantityBalance, 0)
+			THEN VALUE(Enum.InvoicingShippingStatuses.Awaiting)
+		WHEN SUM(ISNULL(PurchaseReturnItemList.QuantityInBaseUnit,
+			0)) &lt;> ISNULL(R1031B_ReceiptInvoicingBalance.QuantityBalance, 0)
+			THEN VALUE(Enum.InvoicingShippingStatuses.Shipping)
+	END AS Status,
+	
 	PurchaseReturn.DeletionMark,
 	PurchaseReturn.Number,
 	PurchaseReturn.Date,
@@ -805,13 +869,17 @@
 	PurchaseReturn.BusinessUnit,
 	PurchaseReturn.Description,
 	PurchaseReturn.DocumentAmount,
-	CASE WHEN COUNT(DISTINCT PurchaseReturnItemList.Store) = 1 THEN
-		MAX(PurchaseReturnItemList.Store)
-	ELSE UNDEFINED END AS Store
+	CASE
+		WHEN COUNT(DISTINCT PurchaseReturnItemList.Store) = 1
+			THEN MAX(PurchaseReturnItemList.Store)
+		ELSE UNDEFINED
+	END AS Store
 FROM
 	Document.PurchaseReturn AS PurchaseReturn
 		LEFT JOIN Document.PurchaseReturn.ItemList AS PurchaseReturnItemList
 		ON PurchaseReturnItemList.Ref = PurchaseReturn.Ref
+		LEFT JOIN AccumulationRegister.R1031B_ReceiptInvoicing.Balance AS R1031B_ReceiptInvoicingBalance
+		ON PurchaseReturn.Ref = CAST(R1031B_ReceiptInvoicingBalance.Basis AS Document.PurchaseReturn)
 GROUP BY
 	PurchaseReturn.Ref,
 	PurchaseReturn.DeletionMark,
@@ -830,7 +898,8 @@ GROUP BY
 	PurchaseReturn.Author,
 	PurchaseReturn.BusinessUnit,
 	PurchaseReturn.Description,
-	PurchaseReturn.DocumentAmount</queryText>
+	PurchaseReturn.DocumentAmount,
+	R1031B_ReceiptInvoicingBalance.QuantityBalance</queryText>
       <mainTable>Document.PurchaseReturn</mainTable>
       <dynamicDataRead>true</dynamicDataRead>
       <autoFillAvailableFields>true</autoFillAvailableFields>

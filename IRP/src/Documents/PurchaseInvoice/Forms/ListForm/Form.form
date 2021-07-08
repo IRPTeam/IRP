@@ -842,13 +842,13 @@
       <queryText>SELECT
 	PurchaseInvoice.Ref,
 	CASE
-		WHEN SUM(ISNULL(R1031B_ReceiptInvoicingBalance.QuantityBalance, 0)) = 0
+		WHEN ISNULL(R1031B_ReceiptInvoicingBalance.QuantityBalance, 0) = 0
 			THEN VALUE(Enum.InvoicingShippingStatuses.Closed)
 		WHEN SUM(ISNULL(PurchaseInvoiceItemList.QuantityInBaseUnit,
-			0)) = SUM(ISNULL(R1031B_ReceiptInvoicingBalance.QuantityBalance, 0))
+			0)) = ISNULL(R1031B_ReceiptInvoicingBalance.QuantityBalance, 0)
 			THEN VALUE(Enum.InvoicingShippingStatuses.Awaiting)
 		WHEN SUM(ISNULL(PurchaseInvoiceItemList.QuantityInBaseUnit,
-			0)) &lt;> SUM(ISNULL(R1031B_ReceiptInvoicingBalance.QuantityBalance, 0))
+			0)) &lt;> ISNULL(R1031B_ReceiptInvoicingBalance.QuantityBalance, 0)
 			THEN VALUE(Enum.InvoicingShippingStatuses.Shipping)
 	END AS Status,
 	PurchaseInvoice.DeletionMark,
@@ -895,7 +895,8 @@ GROUP BY
 	PurchaseInvoice.Author,
 	PurchaseInvoice.BusinessUnit,
 	PurchaseInvoice.Description,
-	PurchaseInvoice.DocumentAmount</queryText>
+	PurchaseInvoice.DocumentAmount,
+	R1031B_ReceiptInvoicingBalance.QuantityBalance</queryText>
       <mainTable>Document.PurchaseInvoice</mainTable>
       <dynamicDataRead>true</dynamicDataRead>
       <autoFillAvailableFields>true</autoFillAvailableFields>

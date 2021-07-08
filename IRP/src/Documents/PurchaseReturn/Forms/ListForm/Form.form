@@ -842,13 +842,13 @@
       <queryText>SELECT
 	PurchaseReturn.Ref,
 	CASE
-		WHEN SUM(ISNULL(R1031B_ReceiptInvoicingBalance.QuantityBalance, 0)) = 0
+		WHEN ISNULL(R1031B_ReceiptInvoicingBalance.QuantityBalance, 0) = 0
 			THEN VALUE(Enum.InvoicingShippingStatuses.Closed)
 		WHEN SUM(ISNULL(PurchaseReturnItemList.QuantityInBaseUnit,
-			0)) = SUM(ISNULL(R1031B_ReceiptInvoicingBalance.QuantityBalance, 0))
+			0)) = ISNULL(R1031B_ReceiptInvoicingBalance.QuantityBalance, 0)
 			THEN VALUE(Enum.InvoicingShippingStatuses.Awaiting)
 		WHEN SUM(ISNULL(PurchaseReturnItemList.QuantityInBaseUnit,
-			0)) &lt;> SUM(ISNULL(R1031B_ReceiptInvoicingBalance.QuantityBalance, 0))
+			0)) &lt;> ISNULL(R1031B_ReceiptInvoicingBalance.QuantityBalance, 0)
 			THEN VALUE(Enum.InvoicingShippingStatuses.Shipping)
 	END AS Status,
 	
@@ -898,7 +898,8 @@ GROUP BY
 	PurchaseReturn.Author,
 	PurchaseReturn.BusinessUnit,
 	PurchaseReturn.Description,
-	PurchaseReturn.DocumentAmount</queryText>
+	PurchaseReturn.DocumentAmount,
+	R1031B_ReceiptInvoicingBalance.QuantityBalance</queryText>
       <mainTable>Document.PurchaseReturn</mainTable>
       <dynamicDataRead>true</dynamicDataRead>
       <autoFillAvailableFields>true</autoFillAvailableFields>

@@ -738,13 +738,13 @@
       <queryText>SELECT
 	GoodsReceipt.Ref AS Ref,
 	CASE
-		WHEN SUM(ISNULL(R1031B_ReceiptInvoicingBalance.QuantityBalance, 0)) = 0
+		WHEN ISNULL(R1031B_ReceiptInvoicingBalance.QuantityBalance, 0) = 0
 			THEN VALUE(Enum.InvoicingShippingStatuses.Closed)
 		WHEN SUM(ISNULL(GoodsReceiptItemList.QuantityInBaseUnit,
-			0)) = SUM(ISNULL(R1031B_ReceiptInvoicingBalance.QuantityBalance, 0))
+			0)) = ISNULL(R1031B_ReceiptInvoicingBalance.QuantityBalance, 0)
 			THEN VALUE(Enum.InvoicingShippingStatuses.Awaiting)
 		WHEN SUM(ISNULL(GoodsReceiptItemList.QuantityInBaseUnit,
-			0)) &lt;> SUM(ISNULL(R1031B_ReceiptInvoicingBalance.QuantityBalance, 0))
+			0)) &lt;> ISNULL(R1031B_ReceiptInvoicingBalance.QuantityBalance, 0)
 			THEN VALUE(Enum.InvoicingShippingStatuses.Invoicing)
 	END AS Status,
 	
@@ -782,7 +782,9 @@ GROUP BY
 	GoodsReceipt.TransactionType,
 	GoodsReceipt.Author,
 	GoodsReceipt.BusinessUnit,
-	GoodsReceipt.Description</queryText>
+	GoodsReceipt.Description,
+	R1031B_ReceiptInvoicingBalance.QuantityBalance	
+	</queryText>
       <mainTable>Document.GoodsReceipt</mainTable>
       <dynamicDataRead>true</dynamicDataRead>
       <autoFillAvailableFields>true</autoFillAvailableFields>

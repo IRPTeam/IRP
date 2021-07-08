@@ -866,13 +866,13 @@
       <queryText>SELECT
 	SalesInvoice.Ref,
 	CASE
-		WHEN SUM(ISNULL(R2031B_ShipmentInvoicingBalance.QuantityBalance, 0)) = 0
+		WHEN ISNULL(R2031B_ShipmentInvoicingBalance.QuantityBalance, 0) = 0
 			THEN VALUE(Enum.InvoicingShippingStatuses.Closed)
 		WHEN SUM(ISNULL(SalesInvoiceItemList.QuantityInBaseUnit,
-			0)) = SUM(ISNULL(R2031B_ShipmentInvoicingBalance.QuantityBalance, 0))
+			0)) = ISNULL(R2031B_ShipmentInvoicingBalance.QuantityBalance, 0)
 			THEN VALUE(Enum.InvoicingShippingStatuses.Awaiting)
 		WHEN SUM(ISNULL(SalesInvoiceItemList.QuantityInBaseUnit,
-			0)) &lt;> SUM(ISNULL(R2031B_ShipmentInvoicingBalance.QuantityBalance, 0))
+			0)) &lt;> ISNULL(R2031B_ShipmentInvoicingBalance.QuantityBalance, 0)
 			THEN VALUE(Enum.InvoicingShippingStatuses.Shipping)
 	END AS Status,
 	
@@ -912,7 +912,8 @@ GROUP BY
 	SalesInvoice.Manager,
 	SalesInvoice.BasisDocument,
 	SalesInvoice.DocumentAmount,
-	SalesInvoice.Author</queryText>
+	SalesInvoice.Author,
+	R2031B_ShipmentInvoicingBalance.QuantityBalance</queryText>
       <mainTable>Document.SalesInvoice</mainTable>
       <dynamicDataRead>true</dynamicDataRead>
       <autoFillAvailableFields>true</autoFillAvailableFields>

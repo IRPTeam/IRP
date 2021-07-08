@@ -738,13 +738,13 @@
       <queryText>SELECT
 	ShipmentConfirmation.Ref AS Ref,
 	CASE
-		WHEN SUM(ISNULL(R2031B_ShipmentInvoicingBalance.QuantityBalance, 0)) = 0
+		WHEN ISNULL(R2031B_ShipmentInvoicingBalance.QuantityBalance, 0) = 0
 			THEN VALUE(Enum.InvoicingShippingStatuses.Closed)
 		WHEN SUM(ISNULL(ShipmentConfirmationItemList.QuantityInBaseUnit,
-			0)) = SUM(ISNULL(R2031B_ShipmentInvoicingBalance.QuantityBalance, 0))
+			0)) = ISNULL(R2031B_ShipmentInvoicingBalance.QuantityBalance, 0)
 			THEN VALUE(Enum.InvoicingShippingStatuses.Awaiting)
 		WHEN SUM(ISNULL(ShipmentConfirmationItemList.QuantityInBaseUnit,
-			0)) &lt;> SUM(ISNULL(R2031B_ShipmentInvoicingBalance.QuantityBalance, 0))
+			0)) &lt;> ISNULL(R2031B_ShipmentInvoicingBalance.QuantityBalance, 0)
 			THEN VALUE(Enum.InvoicingShippingStatuses.Invoicing)
 	END AS Status,
 	ShipmentConfirmation.DeletionMark AS DeletionMark,
@@ -781,7 +781,8 @@ GROUP BY
 	ShipmentConfirmation.TransactionType,
 	ShipmentConfirmation.Author,
 	ShipmentConfirmation.BusinessUnit,
-	ShipmentConfirmation.Description</queryText>
+	ShipmentConfirmation.Description,
+	R2031B_ShipmentInvoicingBalance.QuantityBalance</queryText>
       <mainTable>Document.ShipmentConfirmation</mainTable>
       <dynamicDataRead>true</dynamicDataRead>
       <autoFillAvailableFields>true</autoFillAvailableFields>

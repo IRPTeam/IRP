@@ -739,24 +739,14 @@
 	ShipmentConfirmation.Ref AS Ref,
 	CASE
 		WHEN SUM(ISNULL(R2031B_ShipmentInvoicingBalance.QuantityBalance, 0)) = 0
-			THEN &amp;StatusClosed
+			THEN VALUE(Enum.InvoicingShippingStatuses.Closed)
 		WHEN SUM(ISNULL(ShipmentConfirmationItemList.QuantityInBaseUnit,
 			0)) = SUM(ISNULL(R2031B_ShipmentInvoicingBalance.QuantityBalance, 0))
-			THEN &amp;StatusAwaiting
+			THEN VALUE(Enum.InvoicingShippingStatuses.Awaiting)
 		WHEN SUM(ISNULL(ShipmentConfirmationItemList.QuantityInBaseUnit,
 			0)) &lt;> SUM(ISNULL(R2031B_ShipmentInvoicingBalance.QuantityBalance, 0))
-			THEN &amp;StatusInvoicing
+			THEN VALUE(Enum.InvoicingShippingStatuses.Invoicing)
 	END AS Status,
-	CASE
-		WHEN SUM(ISNULL(R2031B_ShipmentInvoicingBalance.QuantityBalance, 0)) = 0
-			THEN 0
-		WHEN SUM(ISNULL(ShipmentConfirmationItemList.QuantityInBaseUnit,
-			0)) = SUM(ISNULL(R2031B_ShipmentInvoicingBalance.QuantityBalance, 0))
-			THEN 1
-		WHEN SUM(ISNULL(ShipmentConfirmationItemList.QuantityInBaseUnit,
-			0)) &lt;> SUM(ISNULL(R2031B_ShipmentInvoicingBalance.QuantityBalance, 0))
-			THEN 2
-	END AS StatusCode,
 	ShipmentConfirmation.DeletionMark AS DeletionMark,
 	ShipmentConfirmation.Number AS Number,
 	ShipmentConfirmation.Date AS Date,

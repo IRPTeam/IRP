@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Enum xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="325e2820-a46c-47cb-8481-0ab91f954de5">
+  <producedTypes>
+    <refType typeId="f0eaf3a6-1a89-4730-8859-4d4177a68e17" valueTypeId="9e228024-e52f-4c70-a9e5-fd53be024e81"/>
+    <listType typeId="88d38a75-ad13-4bcd-b44b-07328848be44" valueTypeId="46f02601-e7f2-4409-ba8b-4fd0cd015fb8"/>
+    <managerType typeId="3ec0fd93-6eb5-45e4-b4a4-7e1a5ce3eadc" valueTypeId="59db190a-a950-4df6-9914-4743ad287423"/>
+  </producedTypes>
+  <name>InvoicingShippingStatuses</name>
+  <synonym>
+    <key>en</key>
+    <value>Invoicing shipping statuses</value>
+  </synonym>
+  <quickChoice>true</quickChoice>
+  <choiceMode>BothWays</choiceMode>
+  <enumValues uuid="b7433856-ff3b-4241-a6c5-345e4bff13c7">
+    <name>Awaiting</name>
+    <synonym>
+      <key>en</key>
+      <value>Awaiting</value>
+    </synonym>
+  </enumValues>
+  <enumValues uuid="b0e8a46e-9096-4af5-8694-0712df352843">
+    <name>Invoicing</name>
+    <synonym>
+      <key>en</key>
+      <value>Invoicing</value>
+    </synonym>
+  </enumValues>
+  <enumValues uuid="eabc8c9e-874a-42fe-ae03-0e8083139849">
+    <name>Shipping</name>
+    <synonym>
+      <key>en</key>
+      <value>Shipping</value>
+    </synonym>
+  </enumValues>
+  <enumValues uuid="7c6274ff-9cbc-4603-b9bb-93ebcdb1cbc0">
+    <name>Closed</name>
+    <synonym>
+      <key>en</key>
+      <value>Closed</value>
+    </synonym>
+  </enumValues>
+</mdclass:Enum>

@@ -8,9 +8,9 @@
 		</selection>
 		<filter>
 			<item xsi:type="FilterItemComparison">
-				<left xsi:type="dcscor:Field">List.StatusCode</left>
+				<left xsi:type="dcscor:Field">List.Status</left>
 				<comparisonType>Equal</comparisonType>
-				<right xsi:type="xs:decimal">0</right>
+				<right xsi:type="dcscor:DesignTimeValue">Enum.InvoicingShippingStatuses.Closed</right>
 			</item>
 		</filter>
 		<appearance>
@@ -28,9 +28,9 @@
 		</selection>
 		<filter>
 			<item xsi:type="FilterItemComparison">
-				<left xsi:type="dcscor:Field">List.StatusCode</left>
+				<left xsi:type="dcscor:Field">List.Status</left>
 				<comparisonType>Equal</comparisonType>
-				<right xsi:type="xs:decimal">1</right>
+				<right xsi:type="dcscor:DesignTimeValue">Enum.InvoicingShippingStatuses.Awaiting</right>
 			</item>
 		</filter>
 		<appearance>
@@ -48,9 +48,9 @@
 		</selection>
 		<filter>
 			<item xsi:type="FilterItemComparison">
-				<left xsi:type="dcscor:Field">List.StatusCode</left>
+				<left xsi:type="dcscor:Field">List.Status</left>
 				<comparisonType>Equal</comparisonType>
-				<right xsi:type="xs:decimal">2</right>
+				<right xsi:type="dcscor:DesignTimeValue">Enum.InvoicingShippingStatuses.Shipping</right>
 			</item>
 		</filter>
 		<appearance>

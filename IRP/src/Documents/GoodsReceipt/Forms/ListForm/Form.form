@@ -739,24 +739,14 @@
 	GoodsReceipt.Ref AS Ref,
 	CASE
 		WHEN SUM(ISNULL(R1031B_ReceiptInvoicingBalance.QuantityBalance, 0)) = 0
-			THEN &amp;StatusClosed
+			THEN VALUE(Enum.InvoicingShippingStatuses.Closed)
 		WHEN SUM(ISNULL(GoodsReceiptItemList.QuantityInBaseUnit,
 			0)) = SUM(ISNULL(R1031B_ReceiptInvoicingBalance.QuantityBalance, 0))
-			THEN &amp;StatusAwaiting
+			THEN VALUE(Enum.InvoicingShippingStatuses.Awaiting)
 		WHEN SUM(ISNULL(GoodsReceiptItemList.QuantityInBaseUnit,
 			0)) &lt;> SUM(ISNULL(R1031B_ReceiptInvoicingBalance.QuantityBalance, 0))
-			THEN &amp;StatusInvoicing
+			THEN VALUE(Enum.InvoicingShippingStatuses.Invoicing)
 	END AS Status,
-	CASE
-		WHEN SUM(ISNULL(R1031B_ReceiptInvoicingBalance.QuantityBalance, 0)) = 0
-			THEN 0
-		WHEN SUM(ISNULL(GoodsReceiptItemList.QuantityInBaseUnit,
-			0)) = SUM(ISNULL(R1031B_ReceiptInvoicingBalance.QuantityBalance, 0))
-			THEN 1
-		WHEN SUM(ISNULL(GoodsReceiptItemList.QuantityInBaseUnit,
-			0)) &lt;> SUM(ISNULL(R1031B_ReceiptInvoicingBalance.QuantityBalance, 0))
-			THEN 2
-	END AS StatusCode,
 	
 	GoodsReceipt.DeletionMark AS DeletionMark,
 	GoodsReceipt.Number AS Number,

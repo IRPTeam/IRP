@@ -486,13 +486,7 @@ Function Strings(Lang) Export
 	#Region SalesOrderStatusReport
 	Strings.Insert("SOR_1", NStr("en = 'Not enough items in free stock'", Lang));
 	#EndRegion	
-	
-	#Region Statuses
-	Strings.Insert("Status_Closed"    , NStr("en = 'Closed'", Lang));
-	Strings.Insert("Status_Awaiting"  , NStr("en = 'Awaiting'", Lang));
-	Strings.Insert("Status_Invoicing" , NStr("en = 'Invoicing'", Lang));
-	#EndRegion
-	
+		
 	Return Strings;
 EndFunction
 

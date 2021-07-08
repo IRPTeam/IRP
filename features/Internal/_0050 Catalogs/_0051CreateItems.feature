@@ -475,6 +475,11 @@ Scenario: _005116 filling in the "Items" catalog
 			| 'Description' |
 			| 'Ferron BP'   |
 		And I select current line in "List" table
+		And I click Select button of "Package unit" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'box (8 pcs)' |
+		And I select current line in "List" table
 		And I click the button named "FormWrite"
 	* Check data save
 		Then the form attribute named "ItemID" became equal to "AB475590i"
@@ -482,6 +487,7 @@ Scenario: _005116 filling in the "Items" catalog
 		Then the form attribute named "Unit" became equal to "pcs"
 		Then the form attribute named "Vendor" became equal to "Ferron BP"
 		Then the form attribute named "Description_en" became equal to "Bodie"
+		Then the form attribute named "PackageUnit" became equal to "box (8 pcs)"
 		If "Brand" field is equal to "Gir" Then
 		If "Producer" field is equal to "UNIQ" Then
 		And I click the button named "FormWriteAndClose"

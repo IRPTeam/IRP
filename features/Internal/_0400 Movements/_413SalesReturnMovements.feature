@@ -470,12 +470,12 @@ Scenario: _041316 check Sales return movements by the Register  "R2031 Shipment 
 		And I select "R2031 Shipment invoicing" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales return 101 dated 12.03.2021 08:44:18' | ''            | ''                    | ''          | ''             | ''         | ''      | ''         |
-			| 'Document registrations records'             | ''            | ''                    | ''          | ''             | ''         | ''      | ''         |
-			| 'Register  "R2031 Shipment invoicing"'       | ''            | ''                    | ''          | ''             | ''         | ''      | ''         |
-			| ''                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''         | ''      | ''         |
-			| ''                                           | ''            | ''                    | 'Quantity'  | 'Company'      | 'Store'    | 'Basis' | 'Item key' |
-			| ''                                           | 'Receipt'     | '12.03.2021 08:44:18' | '1'         | 'Main Company' | 'Store 02' | ''      | 'XS/Blue'  |	
+			| 'Sales return 101 dated 12.03.2021 08:44:18' | ''            | ''                    | ''          | ''             | ''         | ''                                           | ''         |
+			| 'Document registrations records'             | ''            | ''                    | ''          | ''             | ''         | ''                                           | ''         |
+			| 'Register  "R2031 Shipment invoicing"'       | ''            | ''                    | ''          | ''             | ''         | ''                                           | ''         |
+			| ''                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''         | ''                                           | ''         |
+			| ''                                           | ''            | ''                    | 'Quantity'  | 'Company'      | 'Store'    | 'Basis'                                      | 'Item key' |
+			| ''                                           | 'Receipt'     | '12.03.2021 08:44:18' | '1'         | 'Main Company' | 'Store 02' | 'Sales return 101 dated 12.03.2021 08:44:18' | 'XS/Blue'  |
 	And I close all client application windows
 
 Scenario: _041317 check Sales return movements by the Register  "R2031 Shipment invoicing" (GR-SR)

@@ -58,7 +58,6 @@
   <registerRecords>AccumulationRegister.R4010B_ActualStocks</registerRecords>
   <registerRecords>AccumulationRegister.R4011B_FreeStocks</registerRecords>
   <registerRecords>AccumulationRegister.R4052T_StockAdjustmentAsSurplus</registerRecords>
-  <registerRecords>AccumulationRegister.RevenuesTurnovers</registerRecords>
   <registerRecords>AccumulationRegister.R4014B_SerialLotNumber</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>

@@ -75,22 +75,16 @@
   <registerRecords>AccumulationRegister.R4017B_InternalSupplyRequestProcurement</registerRecords>
   <registerRecords>AccumulationRegister.R1020B_AdvancesToVendors</registerRecords>
   <registerRecords>AccumulationRegister.R4050B_StockInventory</registerRecords>
-  <registerRecords>AccumulationRegister.ExpensesTurnovers</registerRecords>
-  <registerRecords>AccumulationRegister.OrderProcurement</registerRecords>
   <registerRecords>AccumulationRegister.R4011B_FreeStocks</registerRecords>
   <registerRecords>AccumulationRegister.R1031B_ReceiptInvoicing</registerRecords>
   <registerRecords>AccumulationRegister.R1040B_TaxesOutgoing</registerRecords>
-  <registerRecords>AccumulationRegister.TaxesTurnovers</registerRecords>
   <registerRecords>AccumulationRegister.R1012B_PurchaseOrdersInvoiceClosing</registerRecords>
   <registerRecords>AccumulationRegister.R4035B_IncomingStocks</registerRecords>
   <registerRecords>AccumulationRegister.R4012B_StockReservation</registerRecords>
   <registerRecords>AccumulationRegister.R2013T_SalesOrdersProcurement</registerRecords>
-  <registerRecords>AccumulationRegister.ReceiptOrders</registerRecords>
-  <registerRecords>AccumulationRegister.GoodsReceiptSchedule</registerRecords>
   <registerRecords>AccumulationRegister.R4036B_IncomingStocksRequested</registerRecords>
   <registerRecords>AccumulationRegister.R4014B_SerialLotNumber</registerRecords>
   <registerRecords>AccumulationRegister.R1011B_PurchaseOrdersReceipt</registerRecords>
-  <registerRecords>AccumulationRegister.OrderBalance</registerRecords>
   <registerRecords>AccumulationRegister.R4031B_GoodsInTransitIncoming</registerRecords>
   <registerRecords>AccumulationRegister.T10000T_RowIDMovements</registerRecords>
   <registerRecords>InformationRegister.T1001I_PartnerTransactions</registerRecords>

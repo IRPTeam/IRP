@@ -1,173 +1,13 @@
 #Region Posting
 
 Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	
-	AccReg = Metadata.AccumulationRegisters;
 	Tables = New Structure();
-	Tables.Insert("OrderBalance"                          , PostingServer.CreateTable(AccReg.OrderBalance));
-	Tables.Insert("PurchaseReturnTurnovers"               , PostingServer.CreateTable(AccReg.PurchaseReturnTurnovers));
-	Tables.Insert("RevenuesTurnovers"                     , PostingServer.CreateTable(AccReg.RevenuesTurnovers));	
-	
-	Query = New Query();
-	Query.SetParameter("Ref", Ref);
-	Query.Text = GetQueryTextQueryTable();
-	QueryResults = Query.ExecuteBatch();
-	
-	Tables.OrderBalance               = QueryResults[3].Unload();
-	Tables.PurchaseReturnTurnovers    = QueryResults[4].Unload();
-	Tables.RevenuesTurnovers          = QueryResults[5].Unload();
-	
 #Region NewRegistersPosting		
 	QueryArray = GetQueryTextsSecondaryTables();
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
 #EndRegion	
 
 	Return Tables;
-EndFunction
-
-Function GetQueryTextQueryTable()
-	Return
-		"SELECT
-		|	RowIDInfo.Ref AS Ref,
-		|	RowIDInfo.Key AS Key,
-		|	MAX(RowIDInfo.RowID) AS RowID
-		|INTO RowIDInfo
-		|FROM
-		|	Document.PurchaseReturn.RowIDInfo AS RowIDInfo
-		|WHERE
-		|	RowIDInfo.Ref = &Ref
-		|GROUP BY
-		|	RowIDInfo.Ref,
-		|	RowIDInfo.Key
-		|;
-		|
-		|//1//////////////////////////////////////////////////////////////////////////////	
-		|SELECT
-		|	PurchaseReturnShipmentConfirmations.Key
-		|INTO ShipmentConfirmations
-		|FROM
-		|	Document.PurchaseReturn.ShipmentConfirmations AS PurchaseReturnShipmentConfirmations
-		|WHERE
-		|	PurchaseReturnShipmentConfirmations.Ref = &Ref
-		|GROUP BY
-		|	PurchaseReturnShipmentConfirmations.Key
-		|;
-		|
-		|//2//////////////////////////////////////////////////////////////////////////////
-		|SELECT
-		|	PurchaseReturnItemList.Ref.Company AS Company,
-		|	PurchaseReturnItemList.Store AS Store,
-		|	PurchaseReturnItemList.Store.UseShipmentConfirmation AS UseShipmentConfirmation,
-		|	PurchaseReturnItemList.ItemKey AS ItemKey,
-		|	PurchaseReturnItemList.TotalAmount AS Amount,
-		|	PurchaseReturnItemList.Ref.Partner AS Partner,
-		|	PurchaseReturnItemList.Ref.LegalName AS LegalName,
-		|	CASE
-		|		WHEN PurchaseReturnItemList.Ref.Agreement.Kind = VALUE(Enum.AgreementKinds.Regular)
-		|		AND PurchaseReturnItemList.Ref.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByStandardAgreement)
-		|			THEN PurchaseReturnItemList.Ref.Agreement.StandardAgreement
-		|		ELSE PurchaseReturnItemList.Ref.Agreement
-		|	END AS Agreement,
-		|	ISNULL(PurchaseReturnItemList.Ref.Currency, VALUE(Catalog.Currencies.EmptyRef)) AS Currency,
-		|	PurchaseReturnItemList.Unit,
-		|	PurchaseReturnItemList.ItemKey.Item.Unit AS ItemUnit,
-		|	PurchaseReturnItemList.ItemKey.Unit AS ItemKeyUnit,
-		|	PurchaseReturnItemList.ItemKey.Item AS Item,
-		|	PurchaseReturnItemList.Ref.Date AS Period,
-		|	PurchaseReturnItemList.PurchaseReturnOrder,
-		|	PurchaseReturnItemList.PurchaseInvoice,
-		|	PurchaseReturnItemList.Ref AS ShipmentBasis,
-		|	CASE
-		|		WHEN PurchaseReturnItemList.Ref.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
-		|			THEN PurchaseReturnItemList.Ref
-		|		ELSE UNDEFINED
-		|	END AS BasisDocument,
-		|	RowIDInfo.RowID AS RowKey,
-		|	PurchaseReturnItemList.NetAmount AS NetAmount,
-		|	CASE
-		|		WHEN PurchaseReturnItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service)
-		|			THEN TRUE
-		|		ELSE FALSE
-		|	END AS IsService,
-		|	NOT ShipmentConfirmations.Key IS NULL AS ShipmentConfirmationExists,
-		|	PurchaseReturnItemList.BusinessUnit,
-		|	PurchaseReturnItemList.RevenueType,
-		|	PurchaseReturnItemList.AdditionalAnalytic,
-		|	PurchaseReturnItemList.QuantityInBaseUnit AS Quantity
-		|INTO tmp
-		|FROM
-		|	Document.PurchaseReturn.ItemList AS PurchaseReturnItemList
-		|		LEFT JOIN ShipmentConfirmations AS ShipmentConfirmations
-		|		ON PurchaseReturnItemList.Key = ShipmentConfirmations.Key
-		|		LEFT JOIN RowIDInfo AS RowIDInfo
-		|		ON PurchaseReturnItemList.Key = RowIDInfo.Key
-		|WHERE
-		|	PurchaseReturnItemList.Ref = &Ref
-		|;
-		|
-		|// 3. ItemList_OrderBalance //////////////////////////////////////////////////////////////////////////////
-		|SELECT
-		|	tmp.Company,
-		|	tmp.Store,
-		|	tmp.ItemKey,
-		|	SUM(tmp.Quantity) AS Quantity,
-		|	tmp.Period,
-		|	tmp.PurchaseReturnOrder AS Order,
-		|	tmp.RowKey AS RowKey
-		|FROM
-		|	tmp AS tmp
-		|WHERE
-		|	tmp.PurchaseReturnOrder <> VALUE(Document.PurchaseReturnOrder.EmptyRef)
-		|GROUP BY
-		|	tmp.Company,
-		|	tmp.Store,
-		|	tmp.ItemKey,
-		|	tmp.Period,
-		|	tmp.PurchaseReturnOrder,
-		|	tmp.RowKey
-		|;
-		|
-		|
-		|// 4. PurchaseReturnTurnovers //////////////////////////////////////////////////////////////////////////////
-		|SELECT
-		|	tmp.Company,
-		|	tmp.PurchaseInvoice AS PurchaseInvoice,
-		|	tmp.Currency,
-		|	tmp.ItemKey,
-		|	-SUM(tmp.Quantity) AS Quantity,
-		|	-SUM(tmp.Amount) AS Amount,
-		|	tmp.Period,
-		|	tmp.RowKey
-		|FROM
-		|	tmp AS tmp
-		|GROUP BY
-		|	tmp.Company,
-		|	tmp.PurchaseInvoice,
-		|	tmp.Currency,
-		|	tmp.ItemKey,
-		|	tmp.Period,
-		|	tmp.RowKey
-		|;
-		|// 5. RevenuesTurnovers  //////////////////////////////////////////////////////////////////////////////
-		|SELECT
-		|	tmp.Period AS Period,
-		|	tmp.Company AS Company,
-		|	tmp.BusinessUnit AS BusinessUnit,
-		|	tmp.RevenueType AS RevenueType,
-		|	tmp.ItemKey AS ItemKey,
-		|	tmp.Currency AS Currency,
-		|	tmp.AdditionalAnalytic AS AdditionalAnalytic,
-		|	SUM(tmp.NetAmount) AS Amount
-		|FROM
-		|	tmp AS tmp
-		|GROUP BY
-		|	tmp.Period,
-		|	tmp.Company,
-		|	tmp.BusinessUnit,
-		|	tmp.RevenueType,
-		|	tmp.Currency,
-		|	tmp.AdditionalAnalytic,
-		|	tmp.ItemKey";
 EndFunction
 
 Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
@@ -187,22 +27,6 @@ EndProcedure
 Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 	PostingDataTables = New Map();
 	
-	// OrderBalance 
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.OrderBalance,
-		New Structure("RecordType, RecordSet",
-			AccumulationRecordType.Expense,
-			Parameters.DocumentDataTables.OrderBalance));
-		
-	// PurchaseReturnTurnovers
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.PurchaseReturnTurnovers,
-		New Structure("RecordSet", Parameters.DocumentDataTables.PurchaseReturnTurnovers));
-			
-	// RevenuesTurnovers
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.RevenuesTurnovers,
-		New Structure("RecordSet, WriteInTransaction",
-			Parameters.DocumentDataTables.RevenuesTurnovers,
-			Parameters.IsReposting));			
-			
 #Region NewRegistersPosting
 	PostingServer.SetPostingDataTables(PostingDataTables, Parameters);
 #EndRegion	

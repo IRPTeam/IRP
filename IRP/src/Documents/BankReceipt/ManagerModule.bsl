@@ -5,7 +5,6 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Tables = New Structure();
 	Tables.Insert("CashInTransit"                         , PostingServer.CreateTable(AccReg.CashInTransit));
 	Tables.Insert("CashInTransit_POS"                     , PostingServer.CreateTable(AccReg.CashInTransit));
-	Tables.Insert("ExpensesTurnovers"                     , PostingServer.CreateTable(AccReg.ExpensesTurnovers));
 	
 	QueryPaymentList = New Query();
 	QueryPaymentList.Text = GetQueryTextBankReceiptPaymentList();
@@ -20,7 +19,6 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		
 	Tables.CashInTransit              = QueryResults[1].Unload();
 	Tables.CashInTransit_POS          = QueryResults[2].Unload();
-	Tables.ExpensesTurnovers          = QueryResults[3].Unload();
 
 #Region NewRegistersPosting	
 	QueryArray = GetQueryTextsSecondaryTables();
@@ -150,7 +148,7 @@ Function GetQueryTextQueryTable()
 		|	&QueryTable AS QueryTable
 		|;
 		|
-		|//[2]//////////////////////////////////////////////////////////////////////////////
+		|//[1]//////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company AS Company,
 		|	tmp.PlaningTransactionBasis AS BasisDocument,
@@ -166,7 +164,7 @@ Function GetQueryTextQueryTable()
 		|	tmp.IsMoneyTransfer
 		|;
 		|
-		|//[3]//////////////////////////////////////////////////////////////////////////////
+		|//[2]//////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company AS Company,
 		|	tmp.PlaningTransactionBasis AS BasisDocument,
@@ -179,22 +177,7 @@ Function GetQueryTextQueryTable()
 		|FROM
 		|	tmp AS tmp
 		|WHERE
-		|	tmp.TransferFromPOS
-		|;
-		|//[4]//////////////////////////////////////////////////////////////////////////////
-		|SELECT
-		|	tmp.Company AS Company,
-		|	tmp.BusinessUnit AS BusinessUnit,
-		|	tmp.ExpenseType AS ExpenseType,
-		|	tmp.Currency AS Currency,
-		|	tmp.AdditionalAnalytic AS AdditionalAnalytic,
-		|	tmp.Commission AS Amount,
-		|	tmp.Period AS Period,
-		|	tmp.Key AS Key
-		|FROM
-		|	tmp AS tmp
-		|WHERE
-		|	tmp.Commission <> 0";
+		|	tmp.TransferFromPOS";
 EndFunction
 
 Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
@@ -238,10 +221,6 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 			PostingServer.JoinTables(ArrayOfTables,
 				"RecordType, Period, Company, BasisDocument, FromAccount, ToAccount, Currency, Amount, Key"),
 			Parameters.IsReposting));
-	// ExpensesTurnovers
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.ExpensesTurnovers,
-		New Structure("RecordSet", Parameters.DocumentDataTables.ExpensesTurnovers));
-	
 #Region NewRegistersPosting
 	PostingServer.SetPostingDataTables(PostingDataTables, Parameters);
 #EndRegion			

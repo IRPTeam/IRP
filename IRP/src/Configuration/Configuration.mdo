@@ -695,12 +695,7 @@
   <informationRegisters>InformationRegister.T1002I_PartnerAdvances</informationRegisters>
   <informationRegisters>InformationRegister.T1003I_OffsetOfAging</informationRegisters>
   <accumulationRegisters>AccumulationRegister.CashInTransit</accumulationRegisters>
-  <accumulationRegisters>AccumulationRegister.ExpensesTurnovers</accumulationRegisters>
-  <accumulationRegisters>AccumulationRegister.GoodsReceiptSchedule</accumulationRegisters>
-  <accumulationRegisters>AccumulationRegister.OrderBalance</accumulationRegisters>
-  <accumulationRegisters>AccumulationRegister.OrderProcurement</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R3035T_CashPlanning</accumulationRegisters>
-  <accumulationRegisters>AccumulationRegister.PurchaseReturnTurnovers</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1001T_Purchases</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1002T_PurchaseReturns</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1005T_PurchaseSpecialOffers</accumulationRegisters>
@@ -758,15 +753,8 @@
   <accumulationRegisters>AccumulationRegister.R5021T_Revenues</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R5022T_Expenses</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R5041B_TaxesPayable</accumulationRegisters>
-  <accumulationRegisters>AccumulationRegister.ReceiptOrders</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.RetailCash</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.RetailSales</accumulationRegisters>
-  <accumulationRegisters>AccumulationRegister.RevenuesTurnovers</accumulationRegisters>
-  <accumulationRegisters>AccumulationRegister.SalesReturnTurnovers</accumulationRegisters>
-  <accumulationRegisters>AccumulationRegister.SalesTurnovers</accumulationRegisters>
-  <accumulationRegisters>AccumulationRegister.ShipmentConfirmationSchedule</accumulationRegisters>
-  <accumulationRegisters>AccumulationRegister.ShipmentOrders</accumulationRegisters>
-  <accumulationRegisters>AccumulationRegister.TaxesTurnovers</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.T10000B_RowIDMovements</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.T10000T_RowIDMovements</accumulationRegisters>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.AddAttributeAndProperty</chartsOfCharacteristicTypes>

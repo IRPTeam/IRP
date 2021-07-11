@@ -67,18 +67,14 @@
   <defaultChoiceForm>Document.PurchaseOrder.Form.ChoiceForm</defaultChoiceForm>
   <realTimePosting>Deny</realTimePosting>
   <registerRecords>AccumulationRegister.T10000B_RowIDMovements</registerRecords>
-  <registerRecords>AccumulationRegister.OrderProcurement</registerRecords>
   <registerRecords>AccumulationRegister.R1012B_PurchaseOrdersInvoiceClosing</registerRecords>
   <registerRecords>AccumulationRegister.R4035B_IncomingStocks</registerRecords>
   <registerRecords>AccumulationRegister.R2013T_SalesOrdersProcurement</registerRecords>
   <registerRecords>AccumulationRegister.R1014T_CanceledPurchaseOrders</registerRecords>
   <registerRecords>AccumulationRegister.R4016B_InternalSupplyRequestOrdering</registerRecords>
-  <registerRecords>AccumulationRegister.ReceiptOrders</registerRecords>
   <registerRecords>AccumulationRegister.R1010T_PurchaseOrders</registerRecords>
   <registerRecords>AccumulationRegister.R4033B_GoodsReceiptSchedule</registerRecords>
-  <registerRecords>AccumulationRegister.GoodsReceiptSchedule</registerRecords>
   <registerRecords>AccumulationRegister.R1011B_PurchaseOrdersReceipt</registerRecords>
-  <registerRecords>AccumulationRegister.OrderBalance</registerRecords>
   <registerRecords>AccumulationRegister.R1022B_VendorsPaymentPlanning</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>

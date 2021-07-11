@@ -75,21 +75,15 @@
   <registerRecords>AccumulationRegister.R2001T_Sales</registerRecords>
   <registerRecords>AccumulationRegister.R2021B_CustomersTransactions</registerRecords>
   <registerRecords>AccumulationRegister.R4011B_FreeStocks</registerRecords>
-  <registerRecords>AccumulationRegister.TaxesTurnovers</registerRecords>
   <registerRecords>AccumulationRegister.R4012B_StockReservation</registerRecords>
-  <registerRecords>AccumulationRegister.SalesTurnovers</registerRecords>
   <registerRecords>AccumulationRegister.R2013T_SalesOrdersProcurement</registerRecords>
-  <registerRecords>AccumulationRegister.ShipmentOrders</registerRecords>
   <registerRecords>AccumulationRegister.R5011B_CustomersAging</registerRecords>
   <registerRecords>AccumulationRegister.R2020B_AdvancesFromCustomers</registerRecords>
-  <registerRecords>AccumulationRegister.RevenuesTurnovers</registerRecords>
   <registerRecords>AccumulationRegister.R2040B_TaxesIncoming</registerRecords>
   <registerRecords>AccumulationRegister.R4034B_GoodsShipmentSchedule</registerRecords>
   <registerRecords>AccumulationRegister.R4014B_SerialLotNumber</registerRecords>
   <registerRecords>AccumulationRegister.R2031B_ShipmentInvoicing</registerRecords>
   <registerRecords>AccumulationRegister.R2012B_SalesOrdersInvoiceClosing</registerRecords>
-  <registerRecords>AccumulationRegister.OrderBalance</registerRecords>
-  <registerRecords>AccumulationRegister.ShipmentConfirmationSchedule</registerRecords>
   <registerRecords>AccumulationRegister.R4032B_GoodsInTransitOutgoing</registerRecords>
   <registerRecords>AccumulationRegister.T10000T_RowIDMovements</registerRecords>
   <registerRecords>InformationRegister.T1001I_PartnerTransactions</registerRecords>

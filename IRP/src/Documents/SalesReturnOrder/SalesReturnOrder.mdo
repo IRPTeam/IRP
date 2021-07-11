@@ -109,10 +109,8 @@
   <realTimePosting>Deny</realTimePosting>
   <registerRecords>AccumulationRegister.T10000B_RowIDMovements</registerRecords>
   <registerRecords>AccumulationRegister.R2010T_SalesOrders</registerRecords>
-  <registerRecords>AccumulationRegister.SalesTurnovers</registerRecords>
   <registerRecords>AccumulationRegister.T10000T_RowIDMovements</registerRecords>
   <registerRecords>AccumulationRegister.R2012B_SalesOrdersInvoiceClosing</registerRecords>
-  <registerRecords>AccumulationRegister.OrderBalance</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>

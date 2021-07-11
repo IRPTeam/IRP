@@ -1,11 +1,7 @@
 #Region Posting
 
 Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	
-	AccReg = Metadata.AccumulationRegisters;
 	Tables = New Structure();
-//	Tables.Insert("TransferOrderBalance"         , PostingServer.CreateTable(AccReg.TransferOrderBalance));
-	Tables.Insert("OrderBalance"                 , PostingServer.CreateTable(AccReg.OrderBalance));
 		
 	ObjectStatusesServer.WriteStatusToRegister(Ref, Ref.Status);
 	StatusInfo = ObjectStatusesServer.GetLastStatusInfo(Ref);
@@ -18,112 +14,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 #EndRegion
 		Return Tables;
 	EndIf;
-	
-	Query = New Query();
-	Query.Text =
-	"SELECT
-	|	RowIDInfo.Ref AS Ref,
-	|	RowIDInfo.Key AS Key,
-	|	MAX(RowIDInfo.RowID) AS RowID
-	|INTO RowIDInfo
-	|FROM
-	|	Document.InventoryTransferOrder.RowIDInfo AS RowIDInfo
-	|WHERE
-	|	RowIDInfo.Ref = &Ref
-	|GROUP BY
-	|	RowIDInfo.Ref,
-	|	RowIDInfo.Key
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	InventoryTransferOrderItemList.Ref.Company AS Company,
-	|	InventoryTransferOrderItemList.Ref.StoreSender AS StoreSender,
-	|	InventoryTransferOrderItemList.Ref.StoreReceiver AS StoreReceiver,
-	|	InventoryTransferOrderItemList.Ref AS Order,
-	|	InventoryTransferOrderItemList.InternalSupplyRequest AS InternalSupplyRequest,
-	|	InventoryTransferOrderItemList.ItemKey AS ItemKey,
-	|	InventoryTransferOrderItemList.Quantity AS Quantity,
-	|	0 AS BasisQuantity,
-	|	InventoryTransferOrderItemList.Unit,
-	|	InventoryTransferOrderItemList.ItemKey.Item.Unit AS ItemUnit,
-	|	InventoryTransferOrderItemList.ItemKey.Unit AS ItemKeyUnit,
-	|	VALUE(Catalog.Units.EmptyRef) AS BasisUnit,
-	|	InventoryTransferOrderItemList.ItemKey.Item AS Item,
-	|	&Period AS Period,
-	|	RowIDInfo.RowID AS RowKey,
-	|	InventoryTransferOrderItemList.PurchaseOrder AS PurchaseOrder,
-	|	NOT InventoryTransferOrderItemList.PurchaseOrder.Ref IS NULL AS UsePurchaseOrder
-	|FROM
-	|	Document.InventoryTransferOrder.ItemList AS InventoryTransferOrderItemList
-	|		LEFT JOIN RowIDInfo AS RowIDInfo
-	|		ON InventoryTransferOrderItemList.Key = RowIDInfo.Key
-	|WHERE
-	|	InventoryTransferOrderItemList.Ref = &Ref";
-	
-	Query.SetParameter("Ref", Ref);
-	Query.SetParameter("Period", StatusInfo.Period);
-	QueryResults = Query.Execute();
-	
-	QueryTable = QueryResults.Unload();
-	
-	PostingServer.CalculateQuantityByUnit(QueryTable);
-	
-	Query = New Query();
-	Query.Text =
-		"SELECT
-		|	QueryTable.Company AS Company,
-		|	QueryTable.StoreSender AS StoreSender,
-		|	QueryTable.StoreReceiver AS StoreReceiver,
-		|	QueryTable.InternalSupplyRequest AS InternalSupplyRequest,
-		|	QueryTable.Order AS Order,
-		|	QueryTable.ItemKey AS ItemKey,
-		|	QueryTable.BasisQuantity AS Quantity,
-		|	QueryTable.BasisUnit AS Unit,
-		|	QueryTable.Period AS Period,
-		|	QueryTable.RowKey AS RowKey,
-		|	QueryTable.PurchaseOrder,
-		|	QueryTable.UsePurchaseOrder
-		|INTO tmp
-		|FROM
-		|	&QueryTable AS QueryTable
-		|;
-		|
-//		|//[1]//////////////////////////////////////////////////////////////////////////////
-//		|SELECT
-//		|	tmp.Company,
-//		|	tmp.StoreSender AS StoreSender,
-//		|	tmp.StoreReceiver AS StoreReceiver,
-//		|	tmp.Order AS Order,
-//		|	tmp.ItemKey,
-//		|	tmp.RowKey,
-//		|	tmp.Quantity AS Quantity,
-//		|	tmp.Unit AS Unit,
-//		|	tmp.Period
-//		|FROM
-//		|	tmp AS tmp
-//		|;
-		|//[1]//////////////////////////////////////////////////////////////////////////////
-		|SELECT
-		|	tmp.StoreReceiver AS Store,
-		|	tmp.ItemKey,
-		|	tmp.Quantity AS Quantity,
-		|	tmp.InternalSupplyRequest AS Order,
-		|	tmp.Period,
-		|	tmp.RowKey
-		|FROM
-		|	tmp AS tmp
-		|WHERE
-		|	tmp.InternalSupplyRequest <> VALUE(Document.InternalSupplyRequest.EmptyRef)";
-	
-	Query.SetParameter("QueryTable", QueryTable);
-	Query.SetParameter("Period", New Boundary(New PointInTime(StatusInfo.Period, Ref), BoundaryType.Excluding));
-	
-	QueryResults = Query.ExecuteBatch();
-	
-//	Tables.TransferOrderBalance         = QueryResults[1].Unload();
-	Tables.OrderBalance                 = QueryResults[1].Unload();
-	
+		
 	Parameters.IsReposting = False;
 	
 #Region NewRegistersPosting
@@ -152,20 +43,6 @@ EndProcedure
 Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 	PostingDataTables = New Map();
 	
-//	// TransferOrderBalance
-//	PostingDataTables.Insert(Parameters.Object.RegisterRecords.TransferOrderBalance,
-//		New Structure("RecordType, RecordSet, WriteInTransaction",
-//			AccumulationRecordType.Receipt,
-//			Parameters.DocumentDataTables.TransferOrderBalance,
-//			Parameters.IsReposting));
-	
-	// OrderBalance
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.OrderBalance,
-		New Structure("RecordType, RecordSet, WriteInTransaction",
-			AccumulationRecordType.Expense,
-			Parameters.DocumentDataTables.OrderBalance,
-			Parameters.IsReposting));
-
 #Region NewRegistersPosting
 	PostingServer.SetPostingDataTables(PostingDataTables, Parameters);
 #EndRegion		

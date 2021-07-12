@@ -248,55 +248,11 @@ Scenario: Open object form "CashInTransit"
 
 
 	
-Scenario: Open list form "ExpensesTurnovers" 
 
-	Given I open "ExpensesTurnovers" accumulation register list form 
-	If the warning is displayed then
-		Then I raise "Failed to open information register form ExpensesTurnovers" exception
-	And I close current window
-
-Scenario: Open object form "ExpensesTurnovers"
-
-	Given I open "ExpensesTurnovers" accumulation register default form
-	If the warning is displayed then
-		Then I raise "Failed to open information register form ExpensesTurnovers" exception
-	And I close current window
 
 	
 
 	
-Scenario: Open list form "GoodsReceiptSchedule" 
-
-	Given I open "GoodsReceiptSchedule" accumulation register list form 
-	If the warning is displayed then
-		Then I raise "Failed to open information register form GoodsReceiptSchedule" exception
-	And I close current window
-
-Scenario: Open object form "GoodsReceiptSchedule"
-
-	Given I open "GoodsReceiptSchedule" accumulation register default form
-	If the warning is displayed then
-		Then I raise "Failed to open information register form GoodsReceiptSchedule" exception
-	And I close current window
-
-	
-	
-
-	
-Scenario: Open list form "OrderProcurement" 
-
-	Given I open "OrderProcurement" accumulation register list form 
-	If the warning is displayed then
-		Then I raise "Failed to open information register form OrderProcurement" exception
-	And I close current window
-
-Scenario: Open object form "OrderProcurement"
-
-	Given I open "OrderProcurement" accumulation register default form
-	If the warning is displayed then
-		Then I raise "Failed to open information register form OrderProcurement" exception
-	And I close current window
-
 	
 
 	
@@ -314,142 +270,8 @@ Scenario: Open object form "R3035T_CashPlanning"
 		Then I raise "Failed to open information register form R3035T_CashPlanning" exception
 	And I close current window
 
-	
-Scenario: Open list form "PurchaseReturnTurnovers" 
-
-	Given I open "PurchaseReturnTurnovers" accumulation register list form 
-	If the warning is displayed then
-		Then I raise "Failed to open information register form PurchaseReturnTurnovers" exception
-	And I close current window
-
-Scenario: Open object form "PurchaseReturnTurnovers"
-
-	Given I open "PurchaseReturnTurnovers" accumulation register default form
-	If the warning is displayed then
-		Then I raise "Failed to open information register form PurchaseReturnTurnovers" exception
-	And I close current window
-
-	
 
 
-	
-Scenario: Open list form "ReceiptOrders" 
-
-	Given I open "ReceiptOrders" accumulation register list form 
-	If the warning is displayed then
-		Then I raise "Failed to open information register form ReceiptOrders" exception
-	And I close current window
-
-Scenario: Open object form "ReceiptOrders"
-
-	Given I open "ReceiptOrders" accumulation register default form
-	If the warning is displayed then
-		Then I raise "Failed to open information register form ReceiptOrders" exception
-	And I close current window
-
-	
-
-
-	
-Scenario: Open list form "RevenuesTurnovers" 
-
-	Given I open "RevenuesTurnovers" accumulation register list form 
-	If the warning is displayed then
-		Then I raise "Failed to open information register form RevenuesTurnovers" exception
-	And I close current window
-
-Scenario: Open object form "RevenuesTurnovers"
-
-	Given I open "RevenuesTurnovers" accumulation register default form
-	If the warning is displayed then
-		Then I raise "Failed to open information register form RevenuesTurnovers" exception
-	And I close current window
-
-	
-
-
-	
-Scenario: Open list form "SalesReturnTurnovers" 
-
-	Given I open "SalesReturnTurnovers" accumulation register list form 
-	If the warning is displayed then
-		Then I raise "Failed to open information register form SalesReturnTurnovers" exception
-	And I close current window
-
-Scenario: Open object form "SalesReturnTurnovers"
-
-	Given I open "SalesReturnTurnovers" accumulation register default form
-	If the warning is displayed then
-		Then I raise "Failed to open information register form SalesReturnTurnovers" exception
-	And I close current window
-
-	
-Scenario: Open list form "SalesTurnovers" 
-
-	Given I open "SalesTurnovers" accumulation register list form 
-	If the warning is displayed then
-		Then I raise "Failed to open information register form SalesTurnovers" exception
-	And I close current window
-
-Scenario: Open object form "SalesTurnovers"
-
-	Given I open "SalesTurnovers" accumulation register default form
-	If the warning is displayed then
-		Then I raise "Failed to open information register form SalesTurnovers" exception
-	And I close current window
-
-	
-Scenario: Open list form "ShipmentConfirmationSchedule" 
-
-	Given I open "ShipmentConfirmationSchedule" accumulation register list form 
-	If the warning is displayed then
-		Then I raise "Failed to open information register form ShipmentConfirmationSchedule" exception
-	And I close current window
-
-Scenario: Open object form "ShipmentConfirmationSchedule"
-
-	Given I open "ShipmentConfirmationSchedule" accumulation register default form
-	If the warning is displayed then
-		Then I raise "Failed to open information register form ShipmentConfirmationSchedule" exception
-	And I close current window
-
-	
-Scenario: Open list form "ShipmentOrders" 
-
-	Given I open "ShipmentOrders" accumulation register list form 
-	If the warning is displayed then
-		Then I raise "Failed to open information register form ShipmentOrders" exception
-	And I close current window
-
-Scenario: Open object form "ShipmentOrders"
-
-	Given I open "ShipmentOrders" accumulation register default form
-	If the warning is displayed then
-		Then I raise "Failed to open information register form ShipmentOrders" exception
-	And I close current window
-
-	
-
-
-	
-
-
-
-
-	
-Scenario: Open list form "TaxesTurnovers" 
-
-	Given I open "TaxesTurnovers" accumulation register list form 
-	If the warning is displayed then
-		Then I raise "Failed to open information register form TaxesTurnovers" exception
-	And I close current window
-
-Scenario: Open object form "TaxesTurnovers"
-
-	Given I open "TaxesTurnovers" accumulation register default form
-	If the warning is displayed then
-		Then I raise "Failed to open information register form TaxesTurnovers" exception
-	And I close current window
 
 	
 

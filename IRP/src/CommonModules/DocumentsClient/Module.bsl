@@ -1324,7 +1324,7 @@ EndProcedure
 
 #Region Item
 
-Function GetOpenSettingsForSelectItemWithNotServiceFilter(OpenSettings = Undefined, AddInfo = Undefined) Export
+Function GetOpenSettingsForSelectItemWithoutServiceFilter(OpenSettings = Undefined, AddInfo = Undefined) Export
 	If  OpenSettings = Undefined Then
 		OpenSettings = GetOpenSettingsStructure();
 	EndIf;
@@ -1369,6 +1369,15 @@ Procedure ItemStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, Op
 	
 	OpenChoiceForm(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
 EndProcedure
+
+Function GetArrayOfFiltersForSelectItemWithoutServiceFilter(AddInfo = Undefined) Export
+	ArrayOfFilters = New Array();
+	DeletionMarkItem = DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual);
+	ArrayOfFilters.Add(DeletionMarkItem);
+	NotService = DocumentsClientServer.CreateFilterItem("ItemType.Type", PredefinedValue("Enum.ItemTypes.Service"), ComparisonType.NotEqual);
+	ArrayOfFilters.Add(NotService);
+	Return ArrayOfFilters;
+EndFunction
 
 Procedure ItemEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters = Undefined) Export
 	

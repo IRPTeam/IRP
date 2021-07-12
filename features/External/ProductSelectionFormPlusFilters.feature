@@ -855,7 +855,7 @@ Scenario: check the filter by Company
 			| Company Kalipso |
 		And I click the button named "FormChoose"
 		When I Check the steps for Exception
-			|'Then the form attribute named "LegalName" became equal to 'Company Kalipso''|
+			|'Then the form attribute named "Company" became equal to 'Company Kalipso''|
 	And I close all client application windows
 
 Scenario: check the filter by Company  in the inventory transfer

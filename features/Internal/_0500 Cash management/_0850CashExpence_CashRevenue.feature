@@ -97,7 +97,7 @@ Scenario: _085001 check tax calculation in the document Cash revenue
 			| 'VAT' | '18%'      | 'TRY'      | 'Accountants office' | '18,00'  | 'Fuel'         | '18,00'         |
 		And I close all client application windows
 
-Scenario: _085002 check movements of the document Cash revenue
+Scenario: _085002 check Cash revenue creation
 	* Open document form
 		Given I open hyperlink "e1cib/list/Document.CashRevenue"
 		And I click the button named "FormCreate"
@@ -134,25 +134,12 @@ Scenario: _085002 check movements of the document Cash revenue
 		And I delete "$$CashRevenue1$$" variable
 		And I save the value of "Number" field as "$$NumberCashRevenue1$$"
 		And I save the window as "$$CashRevenue1$$"
-	* Check movements
-		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
-		And "ResultTable" spreadsheet document contains lines:
-		| '$$CashRevenue1$$'               | ''            | ''          | ''              | ''                   | ''                  | ''         | ''                             | ''                     | ''                             | ''                     | ''         | ''                             | ''                     |
-		| 'Document registrations records' | ''            | ''          | ''              | ''                   | ''                  | ''         | ''                             | ''                     | ''                             | ''                     | ''         | ''                             | ''                     |
-		| 'Register  "Taxes turnovers"'    | ''            | ''          | ''              | ''                   | ''                  | ''         | ''                             | ''                     | ''                             | ''                     | ''         | ''                             | ''                     |
-		| ''                               | 'Period'      | 'Resources' | ''              | ''                   | 'Dimensions'        | ''         | ''                             | ''                     | ''                             | ''                     | ''         | ''                             | 'Attributes'           |
-		| ''                               | ''            | 'Amount'    | 'Manual amount' | 'Net amount'         | 'Document'          | 'Tax'      | 'Analytics'                    | 'Tax rate'             | 'Include to total amount'      | 'Row key'              | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
-		| ''                               | '*'           | '3,08'      | '3,08'          | '17,12'              | '$$CashRevenue1$$'  | 'VAT'      | ''                             | '18%'                  | 'Yes'                          | '*'                    | 'USD'      | 'Reporting currency'           | 'No'                   |
-		| ''                               | '*'           | '18'        | '18'            | '100'                | '$$CashRevenue1$$'  | 'VAT'      | ''                             | '18%'                  | 'Yes'                          | '*'                    | 'TRY'      | 'en description is empty'      | 'No'                   |
-		| ''                               | '*'           | '18'        | '18'            | '100'                | '$$CashRevenue1$$'  | 'VAT'      | ''                             | '18%'                  | 'Yes'                          | '*'                    | 'TRY'      | 'Local currency'               | 'No'                   |
-		| ''                               | ''            | ''          | ''              | ''                   | ''                  | ''         | ''                             | ''                     | ''                             | ''                     | ''         | ''                             | ''                     |
-		| 'Register  "Revenues turnovers"' | ''            | ''          | ''              | ''                   | ''                  | ''         | ''                             | ''                     | ''                             | ''                     | ''         | ''                             | ''                     |
-		| ''                               | 'Period'      | 'Resources' | 'Dimensions'    | ''                   | ''                  | ''         | ''                             | ''                     | ''                             | 'Attributes'           | ''         | ''                             | ''                     |
-		| ''                               | ''            | 'Amount'    | 'Company'       | 'Business unit'      | 'Revenue type'      | 'Item key' | 'Currency'                     | 'Additional analytic'  | 'Multi currency movement type' | 'Deferred calculation' | ''         | ''                             | ''                     |
-		| ''                               | '*'           | '17,12'     | 'Main Company'  | 'Accountants office' | 'Fuel'              | ''         | 'USD'                          | ''                     | 'Reporting currency'           | 'No'                   | ''         | ''                             | ''                     |
-		| ''                               | '*'           | '100'       | 'Main Company'  | 'Accountants office' | 'Fuel'              | ''         | 'TRY'                          | ''                     | 'en description is empty'      | 'No'                   | ''         | ''                             | ''                     |
-		| ''                               | '*'           | '100'       | 'Main Company'  | 'Accountants office' | 'Fuel'              | ''         | 'TRY'                          | ''                     | 'Local currency'               | 'No'                   | ''         | ''                             | ''                     |
-		| ''                               | ''            | ''          | ''              | ''                   | ''                  | ''         | ''                             | ''                     | ''                             | ''                     | ''         | ''                             | ''                     |
+		And I close all client application windows
+	* Check creation
+		Given I open hyperlink "e1cib/list/Document.CashRevenue"
+		And "List" table contains lines
+			| 'Description'        |
+			| '$$NumberCashRevenue1$$' |
 		And I close all client application windows
 	
 
@@ -244,7 +231,7 @@ Scenario: _085005 check tax calculation in the document Cash expense
 			| 'VAT' | '18%'      | 'TRY'      | 'Accountants office' | '18,00'  | 'Fuel'         | '18,00'         |
 		And I close all client application windows
 
-Scenario: _085006 check movements of the document Cash expense
+Scenario: _085006 check Cash expense creation
 	* Open document form
 		Given I open hyperlink "e1cib/list/Document.CashExpense"
 		And I click the button named "FormCreate"
@@ -288,29 +275,13 @@ Scenario: _085006 check movements of the document Cash expense
 		And I delete "$$CashExpense1$$" variable
 		And I save the value of "Number" field as "$$NumberCashExpense1$$"
 		And I save the window as "$$CashExpense1$$"
-	* Check movements
-		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
-		And I select "Expenses turnovers" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| '$$CashExpense1$$'               | ''       | ''          | ''             | ''                   | ''             | ''         | ''         | ''                    | ''                             | ''                     | '' | '' | '' |
-		| 'Document registrations records' | ''       | ''          | ''             | ''                   | ''             | ''         | ''         | ''                    | ''                             | ''                     | '' | '' | '' |
-		| 'Register  "Expenses turnovers"' | ''       | ''          | ''             | ''                   | ''             | ''         | ''         | ''                    | ''                             | ''                     | '' | '' | '' |
-		| ''                               | 'Period' | 'Resources' | 'Dimensions'   | ''                   | ''             | ''         | ''         | ''                    | ''                             | 'Attributes'           | '' | '' | '' |
-		| ''                               | ''       | 'Amount'    | 'Company'      | 'Business unit'      | 'Expense type' | 'Item key' | 'Currency' | 'Additional analytic' | 'Multi currency movement type' | 'Deferred calculation' | '' | '' | '' |
-		| ''                               | '*'      | '17,12'     | 'Main Company' | 'Accountants office' | 'Fuel'         | ''         | 'USD'      | ''                    | 'Reporting currency'           | 'No'                   | '' | '' | '' |
-		| ''                               | '*'      | '100'       | 'Main Company' | 'Accountants office' | 'Fuel'         | ''         | 'TRY'      | ''                    | 'en description is empty'      | 'No'                   | '' | '' | '' |
-		| ''                               | '*'      | '100'       | 'Main Company' | 'Accountants office' | 'Fuel'         | ''         | 'TRY'      | ''                    | 'Local currency'               | 'No'                   | '' | '' | '' |
-		And I select "Taxes turnovers" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-		| 'Register  "Taxes turnovers"' | ''       | ''          | ''              | ''           | ''                 | ''    | ''          | ''         | ''                        | ''        | ''         | ''                             | ''                     |
-		| ''                            | 'Period' | 'Resources' | ''              | ''           | 'Dimensions'       | ''    | ''          | ''         | ''                        | ''        | ''         | ''                             | 'Attributes'           |
-		| ''                            | ''       | 'Amount'    | 'Manual amount' | 'Net amount' | 'Document'         | 'Tax' | 'Analytics' | 'Tax rate' | 'Include to total amount' | 'Row key' | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
-		| ''                            | '*'      | '3,08'      | '3,08'          | '17,12'      | '$$CashExpense1$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'USD'      | 'Reporting currency'           | 'No'                   |
-		| ''                            | '*'      | '18'        | '18'            | '100'        | '$$CashExpense1$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'en description is empty'      | 'No'                   |
-		| ''                            | '*'      | '18'        | '18'            | '100'        | '$$CashExpense1$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'Local currency'               | 'No'                   |
+	* Check creation
+		Given I open hyperlink "e1cib/list/Document.CashRevenue"
+		And "List" table contains lines
+			| 'Description'        |
+			| '$$NumberCashExpense1$$' |
 		And I close all client application windows
+	
 	
 
 

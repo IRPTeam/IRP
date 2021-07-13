@@ -232,6 +232,13 @@
         <value>24</value>
       </code>
     </items>
+    <items id="73dcc0a6-7e33-4c52-a35b-0c5801d1c465">
+      <name>RRR</name>
+      <description>RRR</description>
+      <code xsi:type="core:StringValue">
+        <value>25</value>
+      </code>
+    </items>
   </predefined>
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>

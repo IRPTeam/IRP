@@ -66,8 +66,6 @@
   <defaultListForm>Document.CashExpense.Form.ListForm</defaultListForm>
   <defaultChoiceForm>Document.CashExpense.Form.ChoiceForm</defaultChoiceForm>
   <realTimePosting>Deny</realTimePosting>
-  <registerRecords>AccumulationRegister.ExpensesTurnovers</registerRecords>
-  <registerRecords>AccumulationRegister.TaxesTurnovers</registerRecords>
   <registerRecords>AccumulationRegister.R3010B_CashOnHand</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>

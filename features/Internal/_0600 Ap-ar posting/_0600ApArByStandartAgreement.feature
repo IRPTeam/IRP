@@ -61,7 +61,7 @@ Scenario: _060000 preparation
 		When filling in Tax settings for company
 
 
-Scenario: _060002 create Sales invoice with the type of settlements under standard Partner terms and check its movements
+Scenario: _060002 create Sales invoice with the type of settlements under standard Partner terms
 	* Create Sales invoice
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 		And I click the button named "FormCreate"
@@ -103,30 +103,17 @@ Scenario: _060002 create Sales invoice with the type of settlements under standa
 				| 'Number' |
 				| '$$NumberSalesInvoice060002$$'  |
 			And I click "Registrations report" button
-			
-			And I select "Taxes turnovers" exact value from "Register" drop-down list
+			And I select "R2021 Customer transactions" exact value from "Register" drop-down list
 			And I click "Generate report" button
 			And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Taxes turnovers"' | ''       | ''          | ''              | ''           | ''                       | ''    | ''          | ''         | ''                        | ''        | ''         | ''                             | ''                     |
-			| ''                            | 'Period' | 'Resources' | ''              | ''           | 'Dimensions'             | ''    | ''          | ''         | ''                        | ''        | ''         | ''                             | 'Attributes'           |
-			| ''                            | ''       | 'Amount'    | 'Manual amount' | 'Net amount' | 'Document'               | 'Tax' | 'Analytics' | 'Tax rate' | 'Include to total amount' | 'Row key' | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
-			| ''                            | '*'      | '287,27'    | '287,27'        | '1 595,93'   | '$$SalesInvoice060002$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'USD'      | 'Reporting currency'           | 'No'                   |
-			| ''                            | '*'      | '1 677,97'  | '1 677,97'      | '9 322,03'   | '$$SalesInvoice060002$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'Local currency'               | 'No'                   |
-			| ''                            | '*'      | '1 677,97'  | '1 677,97'      | '9 322,03'   | '$$SalesInvoice060002$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'TRY'                          | 'No'                   |
-			| ''                            | '*'      | '1 677,97'  | '1 677,97'      | '9 322,03'   | '$$SalesInvoice060002$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'en description is empty'      | 'No'                   |
-			
-			And I select "Revenues turnovers" exact value from "Register" drop-down list
-			And I click "Generate report" button
-			And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Revenues turnovers"' | ''       | ''          | ''             | ''              | ''             | ''         | ''         | ''                    | ''                             | ''                     | '' | '' | '' |
-			| ''                               | 'Period' | 'Resources' | 'Dimensions'   | ''              | ''             | ''         | ''         | ''                    | ''                             | 'Attributes'           | '' | '' | '' |
-			| ''                               | ''       | 'Amount'    | 'Company'      | 'Business unit' | 'Revenue type' | 'Item key' | 'Currency' | 'Additional analytic' | 'Multi currency movement type' | 'Deferred calculation' | '' | '' | '' |
-			| ''                               | '*'      | '1 595,93'  | 'Main Company' | ''              | ''             | 'L/Green'  | 'USD'      | ''                    | 'Reporting currency'           | 'No'                   | '' | '' | '' |
-			| ''                               | '*'      | '9 322,03'  | 'Main Company' | ''              | ''             | 'L/Green'  | 'TRY'      | ''                    | 'Local currency'               | 'No'                   | '' | '' | '' |
-			| ''                               | '*'      | '9 322,03'  | 'Main Company' | ''              | ''             | 'L/Green'  | 'TRY'      | ''                    | 'TRY'                          | 'No'                   | '' | '' | '' |
-			| ''                               | '*'      | '9 322,03'  | 'Main Company' | ''              | ''             | 'L/Green'  | 'TRY'      | ''                    | 'en description is empty'      | 'No'                   | '' | '' | '' |
-			
-			
+				| 'Document registrations records'              | ''            | ''                    | ''          | ''             | ''                             | ''         | ''                  | ''          | ''                    | ''      | ''                     | ''                           |
+				| 'Register  "R2021 Customer transactions"'     | ''            | ''                    | ''          | ''             | ''                             | ''         | ''                  | ''          | ''                    | ''      | ''                     | ''                           |
+				| ''                                            | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                             | ''         | ''                  | ''          | ''                    | ''      | 'Attributes'           | ''                           |
+				| ''                                            | ''            | ''                    | 'Amount'    | 'Company'      | 'Multi currency movement type' | 'Currency' | 'Legal name'        | 'Partner'   | 'Agreement'           | 'Basis' | 'Deferred calculation' | 'Customers advances closing' |
+				| ''                                            | 'Receipt'     | '*'                   | '1 883,2'   | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Company Nicoletta' | 'Nicoletta' | 'Standard (Customer)' | ''      | 'No'                   | ''                           |
+				| ''                                            | 'Receipt'     | '*'                   | '11 000'    | 'Main Company' | 'Local currency'               | 'TRY'      | 'Company Nicoletta' | 'Nicoletta' | 'Standard (Customer)' | ''      | 'No'                   | ''                           |
+				| ''                                            | 'Receipt'     | '*'                   | '11 000'    | 'Main Company' | 'TRY'                          | 'TRY'      | 'Company Nicoletta' | 'Nicoletta' | 'Standard (Customer)' | ''      | 'No'                   | ''                           |
+				| ''                                            | 'Receipt'     | '*'                   | '11 000'    | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Company Nicoletta' | 'Nicoletta' | 'Standard (Customer)' | ''      | 'No'                   | ''                           |
 	And I close all client application windows
 
 Scenario: _060003 create Cash receipt with the type of settlements under standard Partner terms and check its movements

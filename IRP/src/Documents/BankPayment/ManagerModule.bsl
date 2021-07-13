@@ -4,8 +4,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	
 	AccReg = Metadata.AccumulationRegisters;
 	Tables = New Structure();
-	Tables.Insert("CashInTransit"                         , PostingServer.CreateTable(AccReg.CashInTransit));
-	Tables.Insert("ExpensesTurnovers"                     , PostingServer.CreateTable(AccReg.ExpensesTurnovers));
+	Tables.Insert("CashInTransit", PostingServer.CreateTable(AccReg.CashInTransit));
 	
 	QueryPaymentList = New Query();
 	QueryPaymentList.Text = GetQueryTextBankPaymentPaymentList();
@@ -19,7 +18,6 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	QueryResults = Query.ExecuteBatch();
 		
 	Tables.CashInTransit           = QueryResults[1].Unload();
-	Tables.ExpensesTurnovers       = QueryResults[2].Unload();
 
 #Region NewRegistersPosting	
 	QueryArray = GetQueryTextsSecondaryTables();
@@ -150,23 +148,7 @@ Function GetQueryTextQueryTable()
 		|FROM
 		|	tmp AS tmp
 		|WHERE
-		|	tmp.IsMoneyTransfer
-		|;
-		|
-		|//[2]//////////////////////////////////////////////////////////////////////////////
-		|SELECT
-		|	tmp.Company AS Company,
-		|	tmp.BusinessUnit AS BusinessUnit,
-		|	tmp.ExpenseType AS ExpenseType,
-		|	tmp.Currency AS Currency,
-		|	tmp.AdditionalAnalytic AS AdditionalAnalytic,
-		|	tmp.Commission AS Amount,
-		|	tmp.Period AS Period,
-		|	tmp.Key AS Key
-		|FROM
-		|	tmp AS tmp
-		|WHERE
-		|	tmp.Commission <> 0";
+		|	tmp.IsMoneyTransfer";
 EndFunction
 
 Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
@@ -198,10 +180,6 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 		New Structure("RecordType, RecordSet",
 			AccumulationRecordType.Receipt,
 			Parameters.DocumentDataTables.CashInTransit));
-	
-	// ExpensesTurnovers
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.ExpensesTurnovers,
-		New Structure("RecordSet", Parameters.DocumentDataTables.ExpensesTurnovers));
 	
 #Region NewRegistersPosting
 	PostingServer.SetPostingDataTables(PostingDataTables, Parameters);

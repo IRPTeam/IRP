@@ -28,37 +28,9 @@ EndProcedure
 
 Procedure Filling(FillingData, FillingText, StandardProcessing)
 	If TypeOf(FillingData) = Type("Structure") Then
-		If FillingData.Property("BasedOn") And FillingData.BasedOn = "RetailSalesReceipt" Then
-			Filling_BasedOnRetailSalesReceipt(FillingData);
-		EndIf;
+		FillPropertyValues(ThisObject, FillingData, RowIDInfoServer.GetSeperatorColumns(ThisObject.Metadata()));
+		RowIDInfoServer.AddLinkedDocumentRows(ThisObject, FillingData);
 	EndIf;
-EndProcedure
-
-Procedure Filling_BasedOnRetailSalesReceipt(FillingData)
-	FillPropertyValues(ThisObject, FillingData,
-		"Company, Partner, LegalName, Agreement, Currency, PriceIncludeTax, RetailCustomer");
-	ThisObject.BusinessUnit = FillingData.BusinessUnitTitle;
-	
-	For Each Row In FillingData.ItemList Do
-		NewRow = ThisObject.ItemList.Add();
-		FillPropertyValues(NewRow, Row);
-	EndDo;
-	For Each Row In FillingData.TaxList Do
-		NewRow = ThisObject.TaxList.Add();
-		FillPropertyValues(NewRow, Row);
-	EndDo;
-	For Each Row In FillingData.SpecialOffers Do
-		NewRow = ThisObject.SpecialOffers.Add();
-		FillPropertyValues(NewRow, Row);
-	EndDo;
-	For Each Row In FillingData.SerialLotNumbers Do
-		NewRow = ThisObject.SerialLotNumbers.Add();
-		FillPropertyValues(NewRow, Row);
-	EndDo;	
-	For Each Row In FillingData.Payments Do
-		NewRow = ThisObject.Payments.Add();
-		FillPropertyValues(NewRow, Row);
-	EndDo;	
 EndProcedure
 
 Procedure OnCopy(CopiedObject)

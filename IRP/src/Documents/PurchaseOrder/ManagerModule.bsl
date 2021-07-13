@@ -2,10 +2,7 @@
 
 Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 	Tables = New Structure();
-	#Region OldPosting
-
-	FillTables(Ref, AddInfo, Tables);
-
+	
 	ObjectStatusesServer.WriteStatusToRegister(Ref, Ref.Status);
 	StatusInfo = ObjectStatusesServer.GetLastStatusInfo(Ref);
 	Parameters.Insert("StatusInfo", StatusInfo);
@@ -18,204 +15,6 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		Return Tables;
 	EndIf;
 	
-	Query = New Query();
-	Query.Text =
-		"SELECT
-		|	RowIDInfo.Ref AS Ref,
-		|	RowIDInfo.Key AS Key,
-		|	MAX(RowIDInfo.RowID) AS RowID
-		|INTO RowIDInfo
-		|FROM
-		|	Document.PurchaseOrder.RowIDInfo AS RowIDInfo
-		|WHERE
-		|	RowIDInfo.Ref = &Ref
-		|GROUP BY
-		|	RowIDInfo.Ref,
-		|	RowIDInfo.Key
-		|;
-		|
-		|////////////////////////////////////////////////////////////////////////////////
-		|SELECT
-		|	PurchaseOrderItemList.Ref.Company AS Company,
-		|	PurchaseOrderItemList.Store AS Store,
-		|	PurchaseOrderItemList.Store.UseGoodsReceipt AS UseGoodsReceipt,
-		|	PurchaseOrderItemList.Ref.GoodsReceiptBeforePurchaseInvoice AS GoodsReceiptBeforePurchaseInvoice,
-		|	PurchaseOrderItemList.Ref AS Order,
-		|	PurchaseOrderItemList.PurchaseBasis AS PurchaseBasis,
-		|	PurchaseOrderItemList.ItemKey.Item AS Item,
-		|	PurchaseOrderItemList.ItemKey AS ItemKey,
-		|	PurchaseOrderItemList.Quantity AS Quantity,
-		|	PurchaseOrderItemList.Unit,
-		|	PurchaseOrderItemList.ItemKey.Item.Unit AS ItemUnit,
-		|	PurchaseOrderItemList.ItemKey.Unit AS ItemKeyUnit,
-		|	0 AS BasisQuantity,
-		|	VALUE(Catalog.Units.EmptyRef) AS BasisUnit,
-		|	&Period AS Period,
-		|	RowIDInfo.RowID AS RowKey,
-		|	PurchaseOrderItemList.BusinessUnit AS BusinessUnit,
-		|	PurchaseOrderItemList.ExpenseType AS ExpenseType,
-		|	CASE
-		|		WHEN PurchaseOrderItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service)
-		|			THEN TRUE
-		|		ELSE FALSE
-		|	END AS IsService,
-		|	PurchaseOrderItemList.DeliveryDate AS DeliveryDate,
-		|	CASE
-		|		WHEN PurchaseOrderItemList.PurchaseBasis REFS Document.InternalSupplyRequest
-		|		AND NOT PurchaseOrderItemList.PurchaseBasis.Date IS NULL
-		|			THEN TRUE
-		|		ELSE FALSE
-		|	END AS UseInternalSupplyRequest,
-		|	CASE
-		|		WHEN PurchaseOrderItemList.PurchaseBasis REFS Document.SalesOrder
-		|		AND NOT PurchaseOrderItemList.PurchaseBasis.Date IS NULL
-		|			THEN TRUE
-		|		ELSE FALSE
-		|	END AS UseSalesOrder
-		|FROM
-		|	Document.PurchaseOrder.ItemList AS PurchaseOrderItemList
-		|		LEFT JOIN RowIDInfo AS RowIDInfo
-		|		ON PurchaseOrderItemList.Key = RowIDInfo.Key
-		|WHERE
-		|	PurchaseOrderItemList.Ref = &Ref
-		|	AND NOT PurchaseOrderItemList.Cancel";
-	
-	Query.SetParameter("Ref", Ref);
-	Query.SetParameter("Period", StatusInfo.Period);
-	QueryResults = Query.Execute();
-	QueryTable = QueryResults.Unload();
-	
-	
-	PostingServer.CalculateQuantityByUnit(QueryTable);
-	
-	Query = New Query();
-	Query.Text =
-		"SELECT
-		|	QueryTable.Company AS Company,
-		|	QueryTable.Store AS Store,
-		|	QueryTable.GoodsReceiptBeforePurchaseInvoice AS GoodsReceiptBeforePurchaseInvoice,
-		|	QueryTable.UseGoodsReceipt AS UseGoodsReceipt,
-		|	QueryTable.Order AS Order,
-		|	QueryTable.PurchaseBasis AS PurchaseBasis,
-		|	QueryTable.ItemKey AS ItemKey,
-		|	QueryTable.BasisQuantity AS Quantity,
-		|	QueryTable.BasisUnit AS Unit,
-		|	QueryTable.Period AS Period,
-		|	QueryTable.RowKey AS RowKey,
-		|	QueryTable.BusinessUnit AS BusinessUnit,
-		|	QueryTable.ExpenseType AS ExpenseType,
-		|	QueryTable.IsService AS IsService,
-		|   QueryTable.DeliveryDate AS DeliveryDate,
-		|   QueryTable.UseInternalSupplyRequest AS UseInternalSupplyRequest,
-		|   QueryTable.UseSalesOrder AS UseSalesOrder
-		|INTO tmp
-		|FROM
-		|	&QueryTable AS QueryTable
-		|;
-		|
-		|//[1]//////////////////////////////////////////////////////////////////////////////
-		|SELECT
-		|	tmp.Store,
-		|	tmp.Order,
-		|	tmp.ItemKey,
-		|	tmp.Quantity,
-		|	tmp.Period,
-		|	tmp.RowKey
-		|FROM
-		|	tmp AS tmp
-		|;
-		|
-		|//[2]//////////////////////////////////////////////////////////////////////////////
-		|SELECT
-		|	tmp.Store,
-		|	tmp.PurchaseBasis AS Order,
-		|	tmp.ItemKey,
-		|	tmp.Quantity,
-		|	tmp.Period,
-		|	tmp.RowKey
-		|FROM
-		|	tmp AS tmp
-		|WHERE
-		|	tmp.UseInternalSupplyRequest
-		|;
-		|
-		|//[3]//////////////////////////////////////////////////////////////////////////////
-		|SELECT
-		|	tmp.ItemKey,
-		|	tmp.Order AS Order,
-		|	tmp.Order AS GoodsReceipt,
-		|	tmp.Quantity,
-		|	tmp.Period,
-		|   tmp.RowKey
-		|FROM
-		|	tmp AS tmp
-		|WHERE
-		|	tmp.GoodsReceiptBeforePurchaseInvoice
-		|	AND
-		|	NOT tmp.UseGoodsReceipt
-		|	AND
-		|	NOT tmp.IsService
-		|;
-		|
-		|//[4]//////////////////////////////////////////////////////////////////////////////
-		|SELECT
-		|	tmp.Company AS Company,
-		|	tmp.Order AS Order,
-		|	tmp.Store AS Store,
-		|	tmp.ItemKey AS ItemKey,
-		|	tmp.RowKey AS RowKey,
-		|	tmp.Quantity,
-		|	tmp.DeliveryDate AS Period,
-		|	tmp.DeliveryDate
-		|FROM
-		|	tmp AS tmp
-		|WHERE
-		|	tmp.DeliveryDate <> DATETIME(1, 1, 1)
-		|;
-		|
-		|//[5]//////////////////////////////////////////////////////////////////////////////
-		|SELECT
-		|	tmp.Company AS Company,
-		|	tmp.Order AS Order,
-		|	tmp.Store AS Store,
-		|	tmp.ItemKey AS ItemKey,
-		|	tmp.RowKey AS RowKey,
-		|	tmp.Quantity,
-		|	tmp.DeliveryDate AS Period,
-		|	tmp.DeliveryDate AS DeliveryDate
-		|FROM
-		|	tmp AS tmp
-		|WHERE
-		|	tmp.DeliveryDate <> DATETIME(1, 1, 1)
-		|	AND tmp.GoodsReceiptBeforePurchaseInvoice
-		|	AND
-		|	NOT tmp.UseGoodsReceipt
-		|;
-		|//[6]////////////////////////////////////////////////////////////////////////////////
-		|SELECT
-		|	tmp.Company AS Company,
-		|   tmp.PurchaseBasis AS Order,
-		|   tmp.Store AS Store,
-		|   tmp.ItemKey AS ItemKey,
-		|   tmp.RowKey AS RowKey,
-		|   tmp.Quantity,
-		|   tmp.Period
-		|FROM 
-		|	tmp AS tmp
-		|WHERE
-		|   tmp.UseSalesOrder";
-	
-	Query.SetParameter("QueryTable", QueryTable);
-	QueryResults = Query.ExecuteBatch();
-	
-	Tables.OrderBalance_Receipt         = QueryResults[1].Unload();
-	Tables.OrderBalance_Expense         = QueryResults[2].Unload();
-	Tables.ReceiptOrders                = QueryResults[3].Unload();
-	Tables.GoodsReceiptSchedule_Receipt = QueryResults[4].Unload();
-	Tables.GoodsReceiptSchedule_Expense = QueryResults[5].Unload();
-	Tables.OrderProcurement             = QueryResults[6].Unload();
-
-#EndRegion
 	Parameters.IsReposting = False;
 	
 #Region NewRegistersPosting
@@ -226,35 +25,6 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 
 	Return Tables;
 EndFunction
-
-Procedure FillTables(Ref, AddInfo, Tables)
-	Var AccReg;
-	AccReg = Metadata.AccumulationRegisters;
-	Tables.Insert("OrderBalance_Expense"         , PostingServer.CreateTable(AccReg.OrderBalance));
-	Tables.Insert("OrderBalance_Receipt"         , PostingServer.CreateTable(AccReg.OrderBalance));
-	Tables.Insert("ReceiptOrders"                , PostingServer.CreateTable(AccReg.ReceiptOrders));
-	Tables.Insert("GoodsReceiptSchedule_Receipt" , PostingServer.CreateTable(AccReg.GoodsReceiptSchedule));
-	Tables.Insert("GoodsReceiptSchedule_Expense" , PostingServer.CreateTable(AccReg.GoodsReceiptSchedule));
-	Tables.Insert("OrderProcurement"             , PostingServer.CreateTable(AccReg.OrderProcurement));
-	
-	Tables.Insert("OrderBalance_Exists_Receipt"   , PostingServer.CreateTable(AccReg.OrderBalance));
-	Tables.Insert("OrderBalance_Exists_Expense"   , PostingServer.CreateTable(AccReg.OrderBalance));
-	Tables.Insert("OrderProcurement_Exists"       , PostingServer.CreateTable(AccReg.OrderProcurement));
-	Tables.Insert("ReceiptOrders_Exists"          , PostingServer.CreateTable(AccReg.ReceiptOrders));
-	
-	Tables.OrderBalance_Exists_Receipt =
-	AccumulationRegisters.OrderBalance.GetExistsRecords(Ref, AccumulationRecordType.Receipt, AddInfo);
-	
-	Tables.OrderBalance_Exists_Expense =
-	AccumulationRegisters.OrderBalance.GetExistsRecords(Ref, AccumulationRecordType.Expense, AddInfo);
-	
-	Tables.OrderProcurement_Exists =
-	AccumulationRegisters.OrderProcurement.GetExistsRecords(Ref, AccumulationRecordType.Expense, AddInfo);
-	
-	Tables.ReceiptOrders_Exists =
-	AccumulationRegisters.ReceiptOrders.GetExistsRecords(Ref, AccumulationRecordType.Receipt, AddInfo);
-	
-EndProcedure
 
 Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 	DataMapWithLockFields = New Map();
@@ -272,71 +42,9 @@ EndProcedure
 
 Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 	PostingDataTables = New Map();
-	 
-	// OrderBalance_Expense [Expense] 
-	// OrderBalance_Receipt [Receipt]
-	ArrayOfTables = New Array();
-	
-	Table1 = Parameters.DocumentDataTables.OrderBalance_Expense.Copy();
-	Table1.Columns.Add("RecordType", New TypeDescription("AccumulationRecordType"));
-	Table1.FillValues(AccumulationRecordType.Expense, "RecordType");
-	ArrayOfTables.Add(Table1);
-	
-	Table2 = Parameters.DocumentDataTables.OrderBalance_Receipt.Copy();
-	Table2.Columns.Add("RecordType", New TypeDescription("AccumulationRecordType"));
-	Table2.FillValues(AccumulationRecordType.Receipt, "RecordType");
-	ArrayOfTables.Add(Table2);
-	
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.OrderBalance,
-		New Structure("RecordSet, WriteInTransaction",
-			PostingServer.JoinTables(ArrayOfTables, "RecordType, Period, Store, Order, ItemKey, RowKey, Quantity"), 
-			True));
-	
-//	// GoodsInTransitIncoming
-//	PostingDataTables.Insert(Parameters.Object.RegisterRecords.GoodsInTransitIncoming,
-//		New Structure("RecordType, RecordSet, WriteInTransaction",
-//			AccumulationRecordType.Receipt,
-//			Parameters.DocumentDataTables.GoodsInTransitIncoming,
-//			True));
-		
-	// ReceiptOrders
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.ReceiptOrders,
-		New Structure("RecordType, RecordSet, WriteInTransaction",
-			AccumulationRecordType.Receipt,
-			Parameters.DocumentDataTables.ReceiptOrders,
-			True));
-	
-	// GoodsReceiptSchedule
-	// GoodsReceiptSchedule_Receipt [Receipt]  
-	// GoodsReceiptSchedule_Expense [Expense]
-	ArrayOfTables = New Array();
-	Table1 = Parameters.DocumentDataTables.GoodsReceiptSchedule_Receipt.Copy();
-	Table1.Columns.Add("RecordType", New TypeDescription("AccumulationRecordType"));
-	Table1.FillValues(AccumulationRecordType.Receipt, "RecordType");
-	ArrayOfTables.Add(Table1);
-	
-	Table2 = Parameters.DocumentDataTables.GoodsReceiptSchedule_Expense.Copy();
-	Table2.Columns.Add("RecordType", New TypeDescription("AccumulationRecordType"));
-	Table2.FillValues(AccumulationRecordType.Expense, "RecordType");
-	ArrayOfTables.Add(Table2);
-	
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.GoodsReceiptSchedule,
-		New Structure("RecordSet, WriteInTransaction",
-			PostingServer.JoinTables(ArrayOfTables,
-				"RecordType, Period, Company, Order, Store, ItemKey, RowKey, Quantity, DeliveryDate"),
-			Parameters.IsReposting));
-	
-	// OrderProcurement
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.OrderProcurement,
-		New Structure("RecordType, RecordSet, WriteInTransaction",
-			AccumulationRecordType.Expense,
-			Parameters.DocumentDataTables.OrderProcurement,
-			True));
-			
 #Region NewRegistersPosting
 	PostingServer.SetPostingDataTables(PostingDataTables, Parameters);
-#EndRegion	
-				
+#EndRegion				
 	Return PostingDataTables;
 EndFunction
 
@@ -381,35 +89,6 @@ Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
 	If StatusInfo.Posting Then
 		CommonFunctionsClientServer.PutToAddInfo(AddInfo, "BalancePeriod", 
 			New Boundary(New PointInTime(StatusInfo.Period, Ref), BoundaryType.Including));
-	EndIf;
-		
-	LineNumberAndRowKeyFromItemList = PostingServer.GetLineNumberAndRowKeyFromItemList(Ref, "Document.PurchaseOrder.ItemList");
-	If Not Cancel And Not AccReg.OrderBalance.CheckBalance(Ref, LineNumberAndRowKeyFromItemList,
-	                                                       Parameters.DocumentDataTables.OrderBalance_Receipt,
-	                                                       Parameters.DocumentDataTables.OrderBalance_Exists_Receipt,
-	                                                       AccumulationRecordType.Receipt, Unposting, AddInfo) Then
-		Cancel = True;
-	EndIf;
-	
-	If Not Cancel And Not AccReg.OrderBalance.CheckBalance(Ref, LineNumberAndRowKeyFromItemList,
-	                                                       Parameters.DocumentDataTables.OrderBalance_Expense,
-	                                                       Parameters.DocumentDataTables.OrderBalance_Exists_Expense,
-	                                                       AccumulationRecordType.Expense, Unposting, AddInfo) Then
-		Cancel = True;
-	EndIf;
-	
-	If Not Cancel And Not AccReg.OrderProcurement.CheckBalance(Ref, LineNumberAndRowKeyFromItemList,
-	                                                           Parameters.DocumentDataTables.OrderProcurement,
-	                                                           Parameters.DocumentDataTables.OrderProcurement_Exists,
-	                                                           AccumulationRecordType.Expense, Unposting, AddInfo) Then
-		Cancel = True;
-	EndIf;
-
-	If Not Cancel And Not AccReg.ReceiptOrders.CheckBalance(Ref, LineNumberAndRowKeyFromItemList,
-	                                                        Parameters.DocumentDataTables.ReceiptOrders,
-	                                                        Parameters.DocumentDataTables.ReceiptOrders_Exists,
-	                                                        AccumulationRecordType.Receipt, Unposting, AddInfo) Then
-		Cancel = True;
 	EndIf;
 	
 	LineNumberAndItemKeyFromItemList = PostingServer.GetLineNumberAndItemKeyFromItemList(Ref, "Document.PurchaseOrder.ItemList");

@@ -702,17 +702,6 @@
 		</right>
 	</object>
 	<object>
-		<name>AccumulationRegister.PurchaseReturnTurnovers</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
 		<name>Catalog.Items.Command.OpenItemsList</name>
 		<right>
 			<name>View</name>
@@ -1587,17 +1576,6 @@
 		</right>
 	</object>
 	<object>
-		<name>AccumulationRegister.SalesReturnTurnovers</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
 		<name>Catalog.ItemSegments</name>
 		<right>
 			<name>Read</name>
@@ -2162,17 +2140,6 @@
 		</right>
 	</object>
 	<object>
-		<name>AccumulationRegister.ExpensesTurnovers</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
 		<name>Subsystem.SalesAR.Subsystem.SpecialOffers</name>
 		<right>
 			<name>View</name>
@@ -2229,17 +2196,6 @@
 	</object>
 	<object>
 		<name>AccumulationRegister.R3035T_CashPlanning</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>AccumulationRegister.OrderProcurement</name>
 		<right>
 			<name>Read</name>
 			<value>true</value>
@@ -2606,17 +2562,6 @@
 		</right>
 	</object>
 	<object>
-		<name>AccumulationRegister.TaxesTurnovers</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
 		<name>DataProcessor.DataHistory</name>
 		<right>
 			<name>Use</name>
@@ -2954,17 +2899,6 @@
 		</right>
 	</object>
 	<object>
-		<name>AccumulationRegister.SalesTurnovers</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
 		<name>Subsystem.MasterData.Subsystem.OpeningEntry</name>
 		<right>
 			<name>View</name>
@@ -2991,17 +2925,6 @@
 		</right>
 		<right>
 			<name>ViewDataHistory</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>AccumulationRegister.ShipmentOrders</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
 			<value>true</value>
 		</right>
 	</object>
@@ -3192,17 +3115,6 @@
 		</right>
 		<right>
 			<name>ViewDataHistory</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>AccumulationRegister.RevenuesTurnovers</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
 			<value>true</value>
 		</right>
 	</object>
@@ -3559,17 +3471,6 @@
 	</object>
 	<object>
 		<name>Subsystem.Retail</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>AccumulationRegister.ReceiptOrders</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -3999,17 +3900,6 @@
 	</object>
 	<object>
 		<name>Subsystem.MasterData.Subsystem.Items</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>AccumulationRegister.GoodsReceiptSchedule</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -4575,17 +4465,6 @@
 		</right>
 	</object>
 	<object>
-		<name>AccumulationRegister.OrderBalance</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
 		<name>Catalog.Companies</name>
 		<right>
 			<name>Read</name>
@@ -4647,17 +4526,6 @@
 		</right>
 		<right>
 			<name>Set</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>AccumulationRegister.ShipmentConfirmationSchedule</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
 			<value>true</value>
 		</right>
 	</object>

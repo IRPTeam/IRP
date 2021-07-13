@@ -733,13 +733,13 @@ Scenario: _019901 check changes in movements on a Purchase Order document when q
 		And I finish line editing in "ItemList" table
 		And I click the button named "FormPostAndClose"
 	* Check registry entries (Order Balance)
-		Given I open hyperlink "e1cib/list/AccumulationRegister.OrderBalance"
+		Given I open hyperlink "e1cib/list/AccumulationRegister.R1010T_PurchaseOrders"
 		And "List" table contains lines
-			| 'Quantity' | 'Recorder'                | 'Line number' | 'Store'    | 'Order'                   | 'Item key' |
-			| '250,000'  | '$$PurchaseOrder019901$$' | '1'           | 'Store 03' | '$$PurchaseOrder019901$$' | 'S/Yellow' |
+			| 'Quantity' | 'Recorder'                | 'Order'                   | 'Item key'  |
+			| '250,000'  | '$$PurchaseOrder019901$$' | '$$PurchaseOrder019901$$' | 'S/Yellow'  |
 		And "List" table does not contain lines
-			| 'Quantity' | 'Recorder'                | 'Line number' | 'Store'    | 'Order'                   | 'Item key' |
-			| '200,000'  | '$$PurchaseOrder019901$$' | '1'           | 'Store 03' | '$$PurchaseOrder019901$$' | 'S/Yellow' |
+			| 'Quantity' | 'Recorder'                | 'Order'                   | 'Item key'  |
+			| '200,000'  | '$$PurchaseOrder019901$$' | '$$PurchaseOrder019901$$' | 'S/Yellow'  |
 		
 		
 				
@@ -756,10 +756,10 @@ Scenario: _019902 delete line in Purchase order and chek movements changes
 		And I delete current line in "ItemList" table
 		And I click the button named "FormPostAndClose"
 	* Check registry entries (Order Balance)
-		Given I open hyperlink "e1cib/list/AccumulationRegister.OrderBalance"
+		Given I open hyperlink "e1cib/list/AccumulationRegister.R1010T_PurchaseOrders"
 		And "List" table does not contain lines
-			| 'Quantity' | 'Recorder'                | 'Store'    | 'Order'                   | 'Item key' |
-			| '200,000'  | '$$PurchaseOrder019901$$' | 'Store 03' | '$$PurchaseOrder019901$$' | '39/18SD'  |
+			| 'Quantity' | 'Recorder'                | 'Order'                   | 'Item key' |
+			| '200,000'  | '$$PurchaseOrder019901$$' | '$$PurchaseOrder019901$$' | '39/18SD'  |
 	
 Scenario: _019903 add line in Purchase order and chek movements changes
 	* Add line in the order

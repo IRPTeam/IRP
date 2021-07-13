@@ -113,9 +113,6 @@
     <mdObject>AccumulationRegister.R1005T_PurchaseSpecialOffers</mdObject>
   </content>
   <content>
-    <mdObject>AccumulationRegister.PurchaseReturnTurnovers</mdObject>
-  </content>
-  <content>
     <mdObject>Catalog.FileStoragesInfo</mdObject>
   </content>
   <content>
@@ -221,9 +218,6 @@
     <mdObject>AccumulationRegister.R2011B_SalesOrdersShipment</mdObject>
   </content>
   <content>
-    <mdObject>AccumulationRegister.SalesReturnTurnovers</mdObject>
-  </content>
-  <content>
     <mdObject>Catalog.ItemSegments</mdObject>
   </content>
   <content>
@@ -290,9 +284,6 @@
     <mdObject>Catalog.Stores</mdObject>
   </content>
   <content>
-    <mdObject>AccumulationRegister.ExpensesTurnovers</mdObject>
-  </content>
-  <content>
     <mdObject>InformationRegister.BarcodeScanInfoCheck</mdObject>
   </content>
   <content>
@@ -303,9 +294,6 @@
   </content>
   <content>
     <mdObject>AccumulationRegister.R3035T_CashPlanning</mdObject>
-  </content>
-  <content>
-    <mdObject>AccumulationRegister.OrderProcurement</mdObject>
   </content>
   <content>
     <mdObject>Catalog.AccessProfiles</mdObject>
@@ -360,9 +348,6 @@
   </content>
   <content>
     <mdObject>AccumulationRegister.R1040B_TaxesOutgoing</mdObject>
-  </content>
-  <content>
-    <mdObject>AccumulationRegister.TaxesTurnovers</mdObject>
   </content>
   <content>
     <mdObject>Catalog.DataAreas</mdObject>
@@ -422,16 +407,10 @@
     <mdObject>Constant.UseLockDataModification</mdObject>
   </content>
   <content>
-    <mdObject>AccumulationRegister.SalesTurnovers</mdObject>
-  </content>
-  <content>
     <mdObject>InformationRegister.Taxes</mdObject>
   </content>
   <content>
     <mdObject>AccumulationRegister.R2013T_SalesOrdersProcurement</mdObject>
-  </content>
-  <content>
-    <mdObject>AccumulationRegister.ShipmentOrders</mdObject>
   </content>
   <content>
     <mdObject>AccumulationRegister.R5011B_CustomersAging</mdObject>
@@ -465,9 +444,6 @@
   </content>
   <content>
     <mdObject>AccumulationRegister.R5041B_TaxesPayable</mdObject>
-  </content>
-  <content>
-    <mdObject>AccumulationRegister.RevenuesTurnovers</mdObject>
   </content>
   <content>
     <mdObject>AccumulationRegister.R2040B_TaxesIncoming</mdObject>
@@ -507,9 +483,6 @@
   </content>
   <content>
     <mdObject>Catalog.ChequeBonds</mdObject>
-  </content>
-  <content>
-    <mdObject>AccumulationRegister.ReceiptOrders</mdObject>
   </content>
   <content>
     <mdObject>Catalog.PrintTemplates</mdObject>
@@ -561,9 +534,6 @@
   </content>
   <content>
     <mdObject>Document.PlannedReceiptReservation</mdObject>
-  </content>
-  <content>
-    <mdObject>AccumulationRegister.GoodsReceiptSchedule</mdObject>
   </content>
   <content>
     <mdObject>ChartOfCharacteristicTypes.CurrencyMovementType</mdObject>
@@ -636,16 +606,10 @@
     <mdObject>InformationRegister.TaxSettings</mdObject>
   </content>
   <content>
-    <mdObject>AccumulationRegister.OrderBalance</mdObject>
-  </content>
-  <content>
     <mdObject>Catalog.Companies</mdObject>
   </content>
   <content>
     <mdObject>Catalog.TaxAnalytics</mdObject>
-  </content>
-  <content>
-    <mdObject>AccumulationRegister.ShipmentConfirmationSchedule</mdObject>
   </content>
   <content>
     <mdObject>Document.CashStatement</mdObject>

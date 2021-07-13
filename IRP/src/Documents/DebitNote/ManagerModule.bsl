@@ -1,63 +1,11 @@
 #Region Posting
 
 Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	AccReg = Metadata.AccumulationRegisters;
 	Tables = New Structure();
-	Tables.Insert("RevenuesTurnovers"                     , PostingServer.CreateTable(AccReg.RevenuesTurnovers));
-	
-	Query = New Query();
-	Query.Text =
-		"SELECT
-		|	Transactions.Ref.Company AS Company,
-		|	Transactions.Ref.Date AS Period,
-		|	Transactions.Agreement.Type = VALUE(Enum.AgreementTypes.Vendor) AS IsVendor,
-		|	Transactions.Agreement.Type = VALUE(Enum.AgreementTypes.Customer) AS IsCustomer,
-		|	Transactions.AdditionalAnalytic AS AdditionalAnalytic,
-		|	Transactions.Currency AS Currency,
-		|	Transactions.BasisDocument AS BasisDocument,
-		|	Transactions.BusinessUnit AS BusinessUnit,
-		|	Transactions.RevenueType AS RevenueType,
-		|	CASE
-		|		WHEN Transactions.Agreement.Kind = VALUE(Enum.AgreementKinds.Regular)
-		|		AND Transactions.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByStandardAgreement)
-		|			THEN Transactions.Agreement.StandardAgreement
-		|		ELSE Transactions.Agreement
-		|	END AS Agreement,
-		|	Transactions.Partner AS Partner,
-		|	Transactions.LegalName AS LegalName,
-		|	Transactions.Amount AS Amount,
-		|	Transactions.Key AS Key
-		|INTO tmp
-		|FROM
-		|	Document.DebitNote.Transactions AS Transactions
-		|WHERE
-		|	Transactions.Ref = &Ref
-		|;
-		|
-		|//[1]//////////////////////////////////////////////////////////////////////////////
-		|SELECT
-		|	tmp.Company AS Company,
-		|	tmp.BusinessUnit AS BusinessUnit,
-		|	tmp.RevenueType AS RevenueType,
-		|	VALUE(Catalog.ItemKeys.EmptyRef) AS ItemKey,
-		|	tmp.Currency AS Currency,
-		|	tmp.AdditionalAnalytic AS AdditionalAnalytic,
-		|	tmp.Amount AS Amount,
-		|	tmp.Period AS Period,
-		|	tmp.Key AS Key
-		|FROM
-		|	tmp AS tmp";
-	
-	Query.SetParameter("Ref", Ref);
-	QueryResults = Query.ExecuteBatch();
-	
-	Tables.RevenuesTurnovers         = QueryResults[1].Unload();
-	
 #Region NewRegistersPosting	
 	QueryArray = GetQueryTextsSecondaryTables();
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
 #EndRegion	
-
 	Return Tables;
 EndFunction
 
@@ -83,14 +31,9 @@ EndProcedure
 
 Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 	PostingDataTables = New Map();		
-	// RevenuesTurnovers
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.RevenuesTurnovers,
-		New Structure("RecordSet", Parameters.DocumentDataTables.RevenuesTurnovers));
-		
 #Region NewRegistersPosting	
 	PostingServer.SetPostingDataTables(PostingDataTables, Parameters);
 #EndRegion
-
 	Return PostingDataTables;
 EndFunction
 

@@ -483,45 +483,7 @@ Scenario: _0154136 create document Retail Return Receipt based on RetailSalesRec
 		| 'Number' |
 		| '$$NumberRetailReturnReceipt0154136$$'      |
 		And I close all client application windows
-	* Check retail sales receipt movements
-		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
-		And I go to line in "List" table
-			| 'Number' |
-			| '$$NumberRetailReturnReceipt0154136$$'      |
-		And I click "Registrations report" button
-		And I select "Sales return turnovers" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| '$$RetailReturnReceipt0154136$$'     | ''       | ''          | ''       | ''             | ''                             | ''         | ''         | ''        | ''                             | ''                     | '' | '' | '' |
-			| 'Document registrations records'     | ''       | ''          | ''       | ''             | ''                             | ''         | ''         | ''        | ''                             | ''                     | '' | '' | '' |
-			| 'Register  "Sales return turnovers"' | ''       | ''          | ''       | ''             | ''                             | ''         | ''         | ''        | ''                             | ''                     | '' | '' | '' |
-			| ''                                   | 'Period' | 'Resources' | ''       | 'Dimensions'   | ''                             | ''         | ''         | ''        | ''                             | 'Attributes'           | '' | '' | '' |
-			| ''                                   | ''       | 'Quantity'  | 'Amount' | 'Company'      | 'Sales invoice'                | 'Currency' | 'Item key' | 'Row key' | 'Multi currency movement type' | 'Deferred calculation' | '' | '' | '' |
-			| ''                                   | '*'      | '-1'        | '-550'   | 'Main Company' | '$$RetailSalesReceipt015413$$' | 'TRY'      | 'L/Green'  | '*'       | 'Local currency'               | 'No'                   | '' | '' | '' |
-			| ''                                   | '*'      | '-1'        | '-550'   | 'Main Company' | '$$RetailSalesReceipt015413$$' | 'TRY'      | 'L/Green'  | '*'       | 'TRY'                          | 'No'                   | '' | '' | '' |
-			| ''                                   | '*'      | '-1'        | '-550'   | 'Main Company' | '$$RetailSalesReceipt015413$$' | 'TRY'      | 'L/Green'  | '*'       | 'en description is empty'      | 'No'                   | '' | '' | '' |
-			| ''                                   | '*'      | '-1'        | '-350'   | 'Main Company' | '$$RetailSalesReceipt015413$$' | 'TRY'      | '38/Black' | '*'       | 'Local currency'               | 'No'                   | '' | '' | '' |
-			| ''                                   | '*'      | '-1'        | '-350'   | 'Main Company' | '$$RetailSalesReceipt015413$$' | 'TRY'      | '38/Black' | '*'       | 'TRY'                          | 'No'                   | '' | '' | '' |
-			| ''                                   | '*'      | '-1'        | '-350'   | 'Main Company' | '$$RetailSalesReceipt015413$$' | 'TRY'      | '38/Black' | '*'       | 'en description is empty'      | 'No'                   | '' | '' | '' |
-			| ''                                   | '*'      | '-1'        | '-94,16' | 'Main Company' | '$$RetailSalesReceipt015413$$' | 'USD'      | 'L/Green'  | '*'       | 'Reporting currency'           | 'No'                   | '' | '' | '' |
-			| ''                                   | '*'      | '-1'        | '-59,92' | 'Main Company' | '$$RetailSalesReceipt015413$$' | 'USD'      | '38/Black' | '*'       | 'Reporting currency'           | 'No'                   | '' | '' | '' |
-		And I select "Retail sales" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Retail sales"' | ''            | ''       | ''          | ''       | ''           | ''              | ''             | ''              | ''         | ''                             | ''         | ''                  | ''        |
-			| ''                         | 'Record type' | 'Period' | 'Resources' | ''       | ''           | ''              | 'Dimensions'   | ''              | ''         | ''                             | ''         | ''                  | ''        |
-			| ''                         | ''            | ''       | 'Quantity'  | 'Amount' | 'Net amount' | 'Offers amount' | 'Company'      | 'Business unit' | 'Store'    | 'Retail sales receipt'         | 'Item key' | 'Serial lot number' | 'Row key' |
-			| ''                         | 'Receipt'     | '*'      | '-1'        | '350'    | '296,61'     | ''              | 'Main Company' | 'Shop 01'       | 'Store 01' | '$$RetailSalesReceipt015413$$' | '38/Black' | ''                  | '*'       |
-			| ''                         | 'Receipt'     | '*'      | '-1'        | '550'    | '466,1'      | ''              | 'Main Company' | 'Shop 01'       | 'Store 01' | '$$RetailSalesReceipt015413$$' | 'L/Green'  | ''                  | '*'       |
-		And I select "Retail cash" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Retail cash"' | ''            | ''       | ''          | ''           | ''             | ''              | ''             | ''             | ''                    | '' | '' | '' | '' |
-			| ''                        | 'Record type' | 'Period' | 'Resources' | ''           | 'Dimensions'   | ''              | ''             | ''             | ''                    | '' | '' | '' | '' |
-			| ''                        | ''            | ''       | 'Amount'    | 'Commission' | 'Company'      | 'Business unit' | 'Payment type' | 'Account'      | 'Payment terminal'    | '' | '' | '' | '' |
-			| ''                        | 'Receipt'     | '*'      | '-900'      | '9'          | 'Main Company' | 'Shop 01'       | 'Card 01'      | 'Transit Main' | 'Payment terminal 01' | '' | '' | '' | '' |
 	
-		And I close all client application windows
 		
 
 

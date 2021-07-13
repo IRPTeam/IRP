@@ -103,17 +103,17 @@ Scenario: _060002 create Sales invoice with the type of settlements under standa
 				| 'Number' |
 				| '$$NumberSalesInvoice060002$$'  |
 			And I click "Registrations report" button
-			| 'Sales invoice 105 dated 12.07.2021 17:40:38' | ''            | ''                    | ''          | ''             | ''                             | ''         | ''                  | ''          | ''                    | ''      | ''                     | ''                           |
-			| 'Document registrations records'              | ''            | ''                    | ''          | ''             | ''                             | ''         | ''                  | ''          | ''                    | ''      | ''                     | ''                           |
-			| 'Register  "R2021 Customer transactions"'     | ''            | ''                    | ''          | ''             | ''                             | ''         | ''                  | ''          | ''                    | ''      | ''                     | ''                           |
-			| ''                                            | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                             | ''         | ''                  | ''          | ''                    | ''      | 'Attributes'           | ''                           |
-			| ''                                            | ''            | ''                    | 'Amount'    | 'Company'      | 'Multi currency movement type' | 'Currency' | 'Legal name'        | 'Partner'   | 'Agreement'           | 'Basis' | 'Deferred calculation' | 'Customers advances closing' |
-			| ''                                            | 'Receipt'     | '12.07.2021 17:40:38' | '1 883,2'   | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Company Nicoletta' | 'Nicoletta' | 'Standard (Customer)' | ''      | 'No'                   | ''                           |
-			| ''                                            | 'Receipt'     | '12.07.2021 17:40:38' | '11 000'    | 'Main Company' | 'Local currency'               | 'TRY'      | 'Company Nicoletta' | 'Nicoletta' | 'Standard (Customer)' | ''      | 'No'                   | ''                           |
-			| ''                                            | 'Receipt'     | '12.07.2021 17:40:38' | '11 000'    | 'Main Company' | 'TRY'                          | 'TRY'      | 'Company Nicoletta' | 'Nicoletta' | 'Standard (Customer)' | ''      | 'No'                   | ''                           |
-			| ''                                            | 'Receipt'     | '12.07.2021 17:40:38' | '11 000'    | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Company Nicoletta' | 'Nicoletta' | 'Standard (Customer)' | ''      | 'No'                   | ''                           |
-
-
+			And I select "R2021 Customer transactions" exact value from "Register" drop-down list
+			And I click "Generate report" button
+			And "ResultTable" spreadsheet document contains lines:
+				| 'Document registrations records'              | ''            | ''                    | ''          | ''             | ''                             | ''         | ''                  | ''          | ''                    | ''      | ''                     | ''                           |
+				| 'Register  "R2021 Customer transactions"'     | ''            | ''                    | ''          | ''             | ''                             | ''         | ''                  | ''          | ''                    | ''      | ''                     | ''                           |
+				| ''                                            | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                             | ''         | ''                  | ''          | ''                    | ''      | 'Attributes'           | ''                           |
+				| ''                                            | ''            | ''                    | 'Amount'    | 'Company'      | 'Multi currency movement type' | 'Currency' | 'Legal name'        | 'Partner'   | 'Agreement'           | 'Basis' | 'Deferred calculation' | 'Customers advances closing' |
+				| ''                                            | 'Receipt'     | '*'                   | '1 883,2'   | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Company Nicoletta' | 'Nicoletta' | 'Standard (Customer)' | ''      | 'No'                   | ''                           |
+				| ''                                            | 'Receipt'     | '*'                   | '11 000'    | 'Main Company' | 'Local currency'               | 'TRY'      | 'Company Nicoletta' | 'Nicoletta' | 'Standard (Customer)' | ''      | 'No'                   | ''                           |
+				| ''                                            | 'Receipt'     | '*'                   | '11 000'    | 'Main Company' | 'TRY'                          | 'TRY'      | 'Company Nicoletta' | 'Nicoletta' | 'Standard (Customer)' | ''      | 'No'                   | ''                           |
+				| ''                                            | 'Receipt'     | '*'                   | '11 000'    | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Company Nicoletta' | 'Nicoletta' | 'Standard (Customer)' | ''      | 'No'                   | ''                           |
 	And I close all client application windows
 
 Scenario: _060003 create Cash receipt with the type of settlements under standard Partner terms and check its movements

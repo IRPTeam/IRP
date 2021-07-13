@@ -771,57 +771,18 @@ Scenario: _029150 create Retail return receipt for service and product
 			And I activate "Description" field in "List" table
 			And I select current line in "List" table
 			And I finish line editing in "Payments" table
-		* Check movements
 			And I click the button named "FormPost"
 			And I delete "$$NumberRetailReturnReceipt029150$$" variable
 			And I delete "$$RetailReturnReceipt029150$$" variable
 			And I save the value of "Number" field as "$$NumberRetailReturnReceipt029150$$"
-			And I save the window as "$$RetailReturnReceipt029150$$"
-			And I click "Registrations report" button
-			And I select "Sales return turnovers" exact value from "Register" drop-down list
-			And I click "Generate report" button
-			And "ResultTable" spreadsheet document contains lines:
-				| '$$RetailReturnReceipt029150$$'      | ''       | ''          | ''       | ''             | ''                              | ''         | ''         | ''        | ''                             | ''                     | '' | '' | '' |
-				| 'Document registrations records'     | ''       | ''          | ''       | ''             | ''                              | ''         | ''         | ''        | ''                             | ''                     | '' | '' | '' |
-				| 'Register  "Sales return turnovers"' | ''       | ''          | ''       | ''             | ''                              | ''         | ''         | ''        | ''                             | ''                     | '' | '' | '' |
-				| ''                                   | 'Period' | 'Resources' | ''       | 'Dimensions'   | ''                              | ''         | ''         | ''        | ''                             | 'Attributes'           | '' | '' | '' |
-				| ''                                   | ''       | 'Quantity'  | 'Amount' | 'Company'      | 'Sales invoice'                 | 'Currency' | 'Item key' | 'Row key' | 'Multi currency movement type' | 'Deferred calculation' | '' | '' | '' |
-				| ''                                   | '*'      | '-1'        | '-200'   | 'Main Company' | '$$RetailReturnReceipt029150$$' | 'TRY'      | 'Table'    | '*'       | 'Local currency'               | 'No'                   | '' | '' | '' |
-				| ''                                   | '*'      | '-1'        | '-200'   | 'Main Company' | '$$RetailReturnReceipt029150$$' | 'TRY'      | 'Table'    | '*'       | 'TRY'                          | 'No'                   | '' | '' | '' |
-				| ''                                   | '*'      | '-1'        | '-200'   | 'Main Company' | '$$RetailReturnReceipt029150$$' | 'TRY'      | 'Table'    | '*'       | 'en description is empty'      | 'No'                   | '' | '' | '' |
-				| ''                                   | '*'      | '-1'        | '-50'    | 'Main Company' | '$$RetailReturnReceipt029150$$' | 'TRY'      | 'Interner' | '*'       | 'Local currency'               | 'No'                   | '' | '' | '' |
-				| ''                                   | '*'      | '-1'        | '-50'    | 'Main Company' | '$$RetailReturnReceipt029150$$' | 'TRY'      | 'Interner' | '*'       | 'TRY'                          | 'No'                   | '' | '' | '' |
-				| ''                                   | '*'      | '-1'        | '-50'    | 'Main Company' | '$$RetailReturnReceipt029150$$' | 'TRY'      | 'Interner' | '*'       | 'en description is empty'      | 'No'                   | '' | '' | '' |
-				| ''                                   | '*'      | '-1'        | '-34,24' | 'Main Company' | '$$RetailReturnReceipt029150$$' | 'USD'      | 'Table'    | '*'       | 'Reporting currency'           | 'No'                   | '' | '' | '' |
-				| ''                                   | '*'      | '-1'        | '-8,56'  | 'Main Company' | '$$RetailReturnReceipt029150$$' | 'USD'      | 'Interner' | '*'       | 'Reporting currency'           | 'No'                   | '' | '' | '' |
-			And I select "Retail sales" exact value from "Register" drop-down list
-			And I click "Generate report" button
-			And "ResultTable" spreadsheet document contains lines:
-				| 'Register  "Retail sales"' | ''            | ''       | ''          | ''       | ''           | ''              | ''             | ''              | ''         | ''                              | ''         | ''                  | ''        |
-				| ''                         | 'Record type' | 'Period' | 'Resources' | ''       | ''           | ''              | 'Dimensions'   | ''              | ''         | ''                              | ''         | ''                  | ''        |
-				| ''                         | ''            | ''       | 'Quantity'  | 'Amount' | 'Net amount' | 'Offers amount' | 'Company'      | 'Business unit' | 'Store'    | 'Retail sales receipt'          | 'Item key' | 'Serial lot number' | 'Row key' |
-				| ''                         | 'Receipt'     | '*'      | '-1'        | '50'     | '42,37'      | ''              | 'Main Company' | ''              | 'Store 01' | '$$RetailReturnReceipt029150$$' | 'Interner' | ''                  | '*'       |
-				| ''                         | 'Receipt'     | '*'      | '-1'        | '200'    | '169,49'     | ''              | 'Main Company' | ''              | 'Store 01' | '$$RetailReturnReceipt029150$$' | 'Table'    | ''                  | '*'       |
-			And I select "Retail cash" exact value from "Register" drop-down list
-			And I click "Generate report" button
-			And "ResultTable" spreadsheet document contains lines:
-				| 'Register  "Retail cash"' | ''            | ''       | ''          | ''           | ''             | ''              | ''             | ''             | ''                 | '' | '' | '' | '' |
-				| ''                        | 'Record type' | 'Period' | 'Resources' | ''           | 'Dimensions'   | ''              | ''             | ''             | ''                 | '' | '' | '' | '' |
-				| ''                        | ''            | ''       | 'Amount'    | 'Commission' | 'Company'      | 'Business unit' | 'Payment type' | 'Account'      | 'Payment terminal' | '' | '' | '' | '' |
-				| ''                        | 'Receipt'     | '*'      | '-250'      | ''           | 'Main Company' | ''              | 'Cash'         | 'Cash desk №4' | ''                 | '' | '' | '' | '' |
-		
-			And I select "R3010 Cash on hand" exact value from "Register" drop-down list
-			And I click "Generate report" button
-			And "ResultTable" spreadsheet document contains lines:
-				| 'Register  "R3010 Cash on hand"' | ''            | ''       | ''          | ''             | ''             | ''         | ''                             | ''                     | '' | '' | '' | '' | '' |
-				| ''                            | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''             | ''         | ''                             | 'Attributes'           | '' | '' | '' | '' | '' |
-				| ''                            | ''            | ''       | 'Amount'    | 'Company'      | 'Account'      | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' | '' | '' | '' | '' | '' |
-				| ''                            | 'Expense'     | '*'      | '42,8'      | 'Main Company' | 'Cash desk №4' | 'USD'      | 'Reporting currency'           | 'No'                   | '' | '' | '' | '' | '' |
-				| ''                            | 'Expense'     | '*'      | '250'       | 'Main Company' | 'Cash desk №4' | 'TRY'      | 'Local currency'               | 'No'                   | '' | '' | '' | '' | '' |
-				| ''                            | 'Expense'     | '*'      | '250'       | 'Main Company' | 'Cash desk №4' | 'TRY'      | 'en description is empty'      | 'No'                   | '' | '' | '' | '' | '' |
-			
-		
-		And I close all client application windows
+			And I save the window as "$$RetailReturnReceipt029150$$"	
+			And I close all client application windows
+	* Check creation	
+			Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
+			And "List" table contains lines
+				| 'Number' |
+				| '$$NumberRetailReturnReceipt029150$$'       |	
+			And I close all client application windows
 		
 
 

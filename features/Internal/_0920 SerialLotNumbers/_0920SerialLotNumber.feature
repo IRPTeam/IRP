@@ -170,23 +170,23 @@ Scenario: _092002 check serial lot number in the Retail sales receipt
 		And I select current line in "ItemList" table
 		When I Check the steps for Exception
         |"And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table"|
-	* Post Retail sales receipt and check movements in the register Sales turnovers
+	* Post Retail sales receipt and check movements in the register Retail sales
 		And I click the button named "FormPost"
 		And I delete "$$RetailSalesReceipt092002$$" variable
 		And I delete "$$NumberRetailSalesReceipt092002$$" variable
 		And I save the window as "$$RetailSalesReceipt092002$$"
 		And I save the value of the field named "Number" as "$$NumberRetailSalesReceipt092002$$"
-		Given I open hyperlink "e1cib/list/AccumulationRegister.SalesTurnovers"
-		And "List" table contains lines
-			| 'Currency' | 'Recorder'                     | 'Company'      | 'Multi currency movement type' | 'Sales invoice'                                    | 'Item key'  | 'Serial lot number' | 'Quantity' | 'Amount' |
-			| 'TRY'      | '$$RetailSalesReceipt092002$$' | 'Main Company' | 'TRY'                          | '$$RetailSalesReceipt092002$$'                     | '38/Yellow' | '99098809009999'    | '1,000'    | '400,00' |
-			| 'TRY'      | '$$RetailSalesReceipt092002$$' | 'Main Company' | 'Local currency'               | '$$RetailSalesReceipt092002$$'                     | '38/Yellow' | '99098809009999'    | '1,000'    | '400,00' |
-			| 'USD'      | '$$RetailSalesReceipt092002$$' | 'Main Company' | 'Reporting currency'           | '$$RetailSalesReceipt092002$$'                     | '38/Yellow' | '99098809009999'    | '1,000'    | '68,48'  |
-			| 'TRY'      | '$$RetailSalesReceipt092002$$' | 'Main Company' | 'TRY'                          | '$$RetailSalesReceipt092002$$'                     | '38/18SD'   | ''                  | '1,000'    | '650,00' |
-			| 'TRY'      | '$$RetailSalesReceipt092002$$' | 'Main Company' | 'Local currency'               | '$$RetailSalesReceipt092002$$'                     | '38/18SD'   | ''                  | '1,000'    | '650,00' |
-			| 'USD'      | '$$RetailSalesReceipt092002$$' | 'Main Company' | 'Reporting currency'           | '$$RetailSalesReceipt092002$$'                     | '38/18SD'   | ''                  | '1,000'    | '111,28' |
-			| 'TRY'      | '$$RetailSalesReceipt092002$$' | 'Main Company' | 'en description is empty'      | '$$RetailSalesReceipt092002$$'                     | '38/Yellow' | '99098809009999'    | '1,000'    | '400,00' |
-			| 'TRY'      | '$$RetailSalesReceipt092002$$' | 'Main Company' | 'en description is empty'      | '$$RetailSalesReceipt092002$$'                     | '38/18SD'   | ''                  | '1,000'    | '650,00' |
+		And I click "Registrations report" button
+		And I select "Retail sales" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document contains lines
+			| '$$RetailSalesReceipt092002$$'   | ''            | ''       | ''          | ''       | ''           | ''              | ''             | ''              | ''         | ''                             | ''          | ''                  | ''        |
+			| 'Document registrations records' | ''            | ''       | ''          | ''       | ''           | ''              | ''             | ''              | ''         | ''                             | ''          | ''                  | ''        |
+			| 'Register  "Retail sales"'       | ''            | ''       | ''          | ''       | ''           | ''              | ''             | ''              | ''         | ''                             | ''          | ''                  | ''        |
+			| ''                               | 'Record type' | 'Period' | 'Resources' | ''       | ''           | ''              | 'Dimensions'   | ''              | ''         | ''                             | ''          | ''                  | ''        |
+			| ''                               | ''            | ''       | 'Quantity'  | 'Amount' | 'Net amount' | 'Offers amount' | 'Company'      | 'Business unit' | 'Store'    | 'Retail sales receipt'         | 'Item key'  | 'Serial lot number' | 'Row key' |
+			| ''                               | 'Receipt'     | '*'      | '1'         | '400'    | '338,98'     | ''              | 'Main Company' | ''              | 'Store 01' | '$$RetailSalesReceipt092002$$' | '38/Yellow' | '99098809009999'    | '*'       |
+			| ''                               | 'Receipt'     | '*'      | '1'         | '650'    | '550,85'     | ''              | 'Main Company' | ''              | 'Store 01' | '$$RetailSalesReceipt092002$$' | '38/18SD'   | ''                  | '*'       |
 	* Сhange the quantity and check that the quantity of the serial lot numbers matches the quantity in the document
 		And I activate "$$RetailSalesReceipt092002$$" window
 		And I go to line in "ItemList" table
@@ -232,23 +232,20 @@ Scenario: _092002 check serial lot number in the Retail sales receipt
 			And I input "2,000" text in "Quantity" field of "SerialLotNumbers" table
 			And I finish line editing in "SerialLotNumbers" table
 			And I click "Ok" button
-	* Post Retail sales receipt and check movements in the register Sales turnovers
+	* Post Retail sales receipt and check movements in the register Retail sales
 		And I click the button named "FormPost"
-		Given I open hyperlink "e1cib/list/AccumulationRegister.SalesTurnovers"
-		And "List" table contains lines
-			| 'Currency' | 'Recorder'                     | 'Company'      | 'Multi currency movement type' | 'Sales invoice'                                    | 'Item key'  | 'Serial lot number' | 'Quantity' | 'Amount' |
-			| 'TRY'      | '$$RetailSalesReceipt092002$$' | 'Main Company' | 'TRY'                          | '$$RetailSalesReceipt092002$$'                     | '38/Yellow' | '99098809009999'    | '1,000'    | '400,00' |
-			| 'TRY'      | '$$RetailSalesReceipt092002$$' | 'Main Company' | 'Local currency'               | '$$RetailSalesReceipt092002$$'                     | '38/Yellow' | '99098809009999'    | '1,000'    | '400,00' |
-			| 'USD'      | '$$RetailSalesReceipt092002$$' | 'Main Company' | 'Reporting currency'           | '$$RetailSalesReceipt092002$$'                     | '38/Yellow' | '99098809009999'    | '1,000'    | '68,48'  |
-			| 'TRY'      | '$$RetailSalesReceipt092002$$' | 'Main Company' | 'TRY'                          | '$$RetailSalesReceipt092002$$'                     | '38/18SD'   | ''                  | '1,000'    | '650,00' |
-			| 'TRY'      | '$$RetailSalesReceipt092002$$' | 'Main Company' | 'Local currency'               | '$$RetailSalesReceipt092002$$'                     | '38/18SD'   | ''                  | '1,000'    | '650,00' |
-			| 'USD'      | '$$RetailSalesReceipt092002$$' | 'Main Company' | 'Reporting currency'           | '$$RetailSalesReceipt092002$$'                     | '38/18SD'   | ''                  | '1,000'    | '111,28' |
-			| 'TRY'      | '$$RetailSalesReceipt092002$$' | 'Main Company' | 'en description is empty'      | '$$RetailSalesReceipt092002$$'                     | '38/Yellow' | '99098809009999'    | '1,000'    | '400,00' |
-			| 'TRY'      | '$$RetailSalesReceipt092002$$' | 'Main Company' | 'en description is empty'      | '$$RetailSalesReceipt092002$$'                     | '38/18SD'   | ''                  | '1,000'    | '650,00' |
-			| 'TRY'      | '$$RetailSalesReceipt092002$$' | 'Main Company' | 'TRY'                          | '$$RetailSalesReceipt092002$$'                     | '38/Yellow' | '99098809009998'    | '2,000'    | '800,00' |
-			| 'TRY'      | '$$RetailSalesReceipt092002$$' | 'Main Company' | 'Local currency'               | '$$RetailSalesReceipt092002$$'                     | '38/Yellow' | '99098809009998'    | '2,000'    | '800,00' |
-			| 'USD'      | '$$RetailSalesReceipt092002$$' | 'Main Company' | 'Reporting currency'           | '$$RetailSalesReceipt092002$$'                     | '38/Yellow' | '99098809009998'    | '2,000'    | '136,96' |
-			| 'TRY'      | '$$RetailSalesReceipt092002$$' | 'Main Company' | 'en description is empty'      | '$$RetailSalesReceipt092002$$'                     | '38/Yellow' | '99098809009998'    | '2,000'    | '800,00' |
+		And I click "Registrations report" button
+		And I select "Retail sales" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document contains lines
+			| '$$RetailSalesReceipt092002$$'   | ''            | ''       | ''          | ''       | ''           | ''              | ''             | ''              | ''         | ''                             | ''          | ''                  | ''        |
+			| 'Document registrations records' | ''            | ''       | ''          | ''       | ''           | ''              | ''             | ''              | ''         | ''                             | ''          | ''                  | ''        |
+			| 'Register  "Retail sales"'       | ''            | ''       | ''          | ''       | ''           | ''              | ''             | ''              | ''         | ''                             | ''          | ''                  | ''        |
+			| ''                               | 'Record type' | 'Period' | 'Resources' | ''       | ''           | ''              | 'Dimensions'   | ''              | ''         | ''                             | ''          | ''                  | ''        |
+			| ''                               | ''            | ''       | 'Quantity'  | 'Amount' | 'Net amount' | 'Offers amount' | 'Company'      | 'Business unit' | 'Store'    | 'Retail sales receipt'         | 'Item key'  | 'Serial lot number' | 'Row key' |
+			| ''                               | 'Receipt'     | '*'      | '1'         | '400'    | '338,98'     | ''              | 'Main Company' | ''              | 'Store 01' | '$$RetailSalesReceipt092002$$' | '38/Yellow' | '99098809009999'    | '*'       |
+			| ''                               | 'Receipt'     | '*'      | '1'         | '650'    | '550,85'     | ''              | 'Main Company' | ''              | 'Store 01' | '$$RetailSalesReceipt092002$$' | '38/18SD'   | ''                  | '*'       |
+			| ''                               | 'Receipt'     | '*'      | '2'         | '800'    | '677,97'     | ''              | 'Main Company' | ''              | 'Store 01' | '$$RetailSalesReceipt092002$$' | '38/Yellow' | '99098809009998'    | '*'       |
 	* Check the message to the user when the serial number was not filled in
 		And I activate "$$RetailSalesReceipt092002$$" window
 		And in the table "ItemList" I click the button named "ItemListAdd"
@@ -329,7 +326,8 @@ Scenario: _092002 check serial lot number in the Retail sales receipt
 		| ''                               | 'Receipt'     | '*'      | '1'         | '650'    | '550,85'     | ''              | 'Main Company' | ''              | 'Store 01' | '$$RetailSalesReceipt092002$$' | '38/18SD'   | ''                  | '*'       |
 		| ''                               | 'Receipt'     | '*'      | '1'         | '700'    | '593,22'     | ''              | 'Main Company' | ''              | 'Store 01' | '$$RetailSalesReceipt092002$$' | '37/18SD'   | ''                  | '*'       |
 		| ''                               | 'Receipt'     | '*'      | '2'         | '800'    | '677,97'     | ''              | 'Main Company' | ''              | 'Store 01' | '$$RetailSalesReceipt092002$$' | '38/Yellow' | '99098809009998'    | '*'       |
-
+	And I close all client application windows
+	
 
 		
 	
@@ -368,12 +366,14 @@ Scenario: _092003 check serial lot number in the Retail return receipt
 			| 'Description' |
 			| 'Shop 01'     |
 		And I select current line in "List" table	
-	* Post Retail return receipt and check movements in the register Sales turnovers
+	* Post Retail return receipt and check movements in the register Retail sales
 		And I click the button named "FormPost"
 		And I delete "$$RetailReturnReceipt092003$$" variable
 		And I save the window as "$$RetailReturnReceipt092003$$"
-		Given I open hyperlink "e1cib/list/AccumulationRegister.SalesTurnovers"
-		And "List" table contains lines
+		And I click "Registrations report" button
+		And I select "Retail sales" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document contains lines:
 			| 'Currency' | 'Recorder'                      | 'Company'      | 'Multi currency movement type' | 'Sales invoice'                | 'Item key'  | 'Serial lot number' | 'Quantity'  | 'Amount' |
 			| 'TRY'      | '$$RetailReturnReceipt092003$$' | 'Main Company' | 'TRY'                          | '$$RetailSalesReceipt092002$$' | '38/Yellow' | '99098809009999'    | '-1,000'    | '-400,00' |
 			| 'TRY'      | '$$RetailReturnReceipt092003$$' | 'Main Company' | 'Local currency'               | '$$RetailSalesReceipt092002$$' | '38/Yellow' | '99098809009999'    | '-1,000'    | '-400,00' |
@@ -428,10 +428,12 @@ Scenario: _092003 check serial lot number in the Retail return receipt
 			And I input "1 750,00" text in "Amount" field of "Payments" table
 			And I finish line editing in "Payments" table
 			And I move to "Item list" tab			
-	* Post Retail return receipt and check movements in the register Sales turnovers
+	* Post Retail return receipt and check movements in the register Retail sales
 		And I click the button named "FormPost"
-		Given I open hyperlink "e1cib/list/AccumulationRegister.SalesTurnovers"
-		And "List" table contains lines
+		And I click "Registrations report" button
+		And I select "Retail sales" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document contains lines:
 		| 'Currency' | 'Recorder'                      | 'Company'      | 'Multi currency movement type' | 'Sales invoice'                | 'Item key'  | 'Serial lot number' | 'Quantity' | 'Amount'  |
 		| 'TRY'      | '$$RetailReturnReceipt092003$$' | 'Main Company' | 'TRY'                          | '$$RetailSalesReceipt092002$$' | '38/Yellow' | '99098809009998'    | '-1,000'   | '-400,00' |
 		| 'TRY'      | '$$RetailReturnReceipt092003$$' | 'Main Company' | 'Local currency'               | '$$RetailSalesReceipt092002$$' | '38/Yellow' | '99098809009998'    | '-1,000'   | '-400,00' |
@@ -588,24 +590,12 @@ Scenario: _092004 check serial lot number in the Sales invoice
 		And I select current line in "ItemList" table
 		When I Check the steps for Exception
         |"And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table"|
-	* Post Retail sales receipt and check movements in the register Sales turnovers and R4014 Serial lot numbers
+	* Post Retail sales receipt and check movements in the register R4014 Serial lot numbers
 		And I click the button named "FormPost"
 		And I delete "$$SalesInvoice092004$$" variable
 		And I delete "$$NumberSalesInvoice092004$$" variable
 		And I save the window as "$$SalesInvoice092004$$"
 		And I save the value of the field named "Number" as "$$NumberSalesInvoice092004$$"
-		Given I open hyperlink "e1cib/list/AccumulationRegister.SalesTurnovers"
-		And "List" table contains lines
-			| 'Currency' | 'Recorder'               | 'Company'      | 'Multi currency movement type' | 'Sales invoice'          | 'Item key'  | 'Serial lot number' | 'Quantity' | 'Amount' |
-			| 'TRY'      | '$$SalesInvoice092004$$' | 'Main Company' | 'TRY'                          | '$$SalesInvoice092004$$' | '38/Yellow' | '99098809009910'    | '1,000'    | '400,00' |
-			| 'TRY'      | '$$SalesInvoice092004$$' | 'Main Company' | 'Local currency'               | '$$SalesInvoice092004$$' | '38/Yellow' | '99098809009910'    | '1,000'    | '400,00' |
-			| 'USD'      | '$$SalesInvoice092004$$' | 'Main Company' | 'Reporting currency'           | '$$SalesInvoice092004$$' | '38/Yellow' | '99098809009910'    | '1,000'    | '68,48'  |
-			| 'TRY'      | '$$SalesInvoice092004$$' | 'Main Company' | 'TRY'                          | '$$SalesInvoice092004$$' | '38/18SD'   | ''                  | '1,000'    | '650,00' |
-			| 'TRY'      | '$$SalesInvoice092004$$' | 'Main Company' | 'Local currency'               | '$$SalesInvoice092004$$' | '38/18SD'   | ''                  | '1,000'    | '650,00' |
-			| 'USD'      | '$$SalesInvoice092004$$' | 'Main Company' | 'Reporting currency'           | '$$SalesInvoice092004$$' | '38/18SD'   | ''                  | '1,000'    | '111,28' |
-			| 'TRY'      | '$$SalesInvoice092004$$' | 'Main Company' | 'en description is empty'      | '$$SalesInvoice092004$$' | '38/Yellow' | '99098809009910'    | '1,000'    | '400,00' |
-			| 'TRY'      | '$$SalesInvoice092004$$' | 'Main Company' | 'en description is empty'      | '$$SalesInvoice092004$$' | '38/18SD'   | ''                  | '1,000'    | '650,00' |
-		And I activate "$$SalesInvoice092004$$" window
 		And I click "Registrations report" button
 		And I select "R4014 Serial lot numbers" exact value from "Register" drop-down list
 		And I click "Generate report" button
@@ -668,21 +658,17 @@ Scenario: _092004 check serial lot number in the Sales invoice
 			And I click "Ok" button
 	* Post Sales invoice and check movements in the register Sales turnovers
 		And I click the button named "FormPost"
-		Given I open hyperlink "e1cib/list/AccumulationRegister.SalesTurnovers"
-		And "List" table contains lines
-			| 'Currency' | 'Recorder'               | 'Company'      | 'Multi currency movement type' | 'Sales invoice'          | 'Item key'  | 'Serial lot number' | 'Quantity' | 'Amount' |
-			| 'TRY'      | '$$SalesInvoice092004$$' | 'Main Company' | 'TRY'                          | '$$SalesInvoice092004$$' | '38/Yellow' | '99098809009910'    | '1,000'    | '400,00' |
-			| 'TRY'      | '$$SalesInvoice092004$$' | 'Main Company' | 'Local currency'               | '$$SalesInvoice092004$$' | '38/Yellow' | '99098809009910'    | '1,000'    | '400,00' |
-			| 'USD'      | '$$SalesInvoice092004$$' | 'Main Company' | 'Reporting currency'           | '$$SalesInvoice092004$$' | '38/Yellow' | '99098809009910'    | '1,000'    | '68,48'  |
-			| 'TRY'      | '$$SalesInvoice092004$$' | 'Main Company' | 'TRY'                          | '$$SalesInvoice092004$$' | '38/18SD'   | ''                  | '1,000'    | '650,00' |
-			| 'TRY'      | '$$SalesInvoice092004$$' | 'Main Company' | 'Local currency'               | '$$SalesInvoice092004$$' | '38/18SD'   | ''                  | '1,000'    | '650,00' |
-			| 'USD'      | '$$SalesInvoice092004$$' | 'Main Company' | 'Reporting currency'           | '$$SalesInvoice092004$$' | '38/18SD'   | ''                  | '1,000'    | '111,28' |
-			| 'TRY'      | '$$SalesInvoice092004$$' | 'Main Company' | 'en description is empty'      | '$$SalesInvoice092004$$' | '38/Yellow' | '99098809009910'    | '1,000'    | '400,00' |
-			| 'TRY'      | '$$SalesInvoice092004$$' | 'Main Company' | 'en description is empty'      | '$$SalesInvoice092004$$' | '38/18SD'   | ''                  | '1,000'    | '650,00' |
-			| 'TRY'      | '$$SalesInvoice092004$$' | 'Main Company' | 'TRY'                          | '$$SalesInvoice092004$$' | '38/Yellow' | '99098809009911'    | '2,000'    | '800,00' |
-			| 'TRY'      | '$$SalesInvoice092004$$' | 'Main Company' | 'Local currency'               | '$$SalesInvoice092004$$' | '38/Yellow' | '99098809009911'    | '2,000'    | '800,00' |
-			| 'USD'      | '$$SalesInvoice092004$$' | 'Main Company' | 'Reporting currency'           | '$$SalesInvoice092004$$' | '38/Yellow' | '99098809009911'    | '2,000'    | '136,96' |
-			| 'TRY'      | '$$SalesInvoice092004$$' | 'Main Company' | 'en description is empty'      | '$$SalesInvoice092004$$' | '38/Yellow' | '99098809009911'    | '2,000'    | '800,00' |
+		And I click "Registrations report" button
+		And I select "R4014 Serial lot numbers" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document contains lines:
+			| '$$SalesInvoice092004$$'               | ''            | ''       | ''          | ''             | ''          | ''                  |
+			| 'Document registrations records'       | ''            | ''       | ''          | ''             | ''          | ''                  |
+			| 'Register  "R4014 Serial lot numbers"' | ''            | ''       | ''          | ''             | ''          | ''                  |
+			| ''                                     | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''          | ''                  |
+			| ''                                     | ''            | ''       | 'Quantity'  | 'Company'      | 'Item key'  | 'Serial lot number' |
+			| ''                                     | 'Expense'     | '*'      | '1'         | 'Main Company' | '38/Yellow' | '99098809009910'    |
+			| ''                                     | 'Expense'     | '*'      | '2'         | 'Main Company' | '38/Yellow' | '99098809009911'    |
 	* Check the message to the user when the serial number was not filled in
 		And I activate "$$SalesInvoice092004$$" window
 		And in the table "ItemList" I click the button named "ItemListAdd"
@@ -774,26 +760,10 @@ Scenario: _092005 check serial lot number in the Sales return
 		And I select current line in "ItemList" table
 		When I Check the steps for Exception
         |"And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table"|
-	* Post Retail return receipt and check movements in the register Sales turnovers and R4014 Serial lot numbers
+	* Post Retail return receipt and check movements in the register R4014 Serial lot numbers
 		And I click the button named "FormPost"
 		And I delete "$$SalesReturn092005$$" variable
 		And I save the window as "$$SalesReturn092005$$"
-		Given I open hyperlink "e1cib/list/AccumulationRegister.SalesTurnovers"
-		And "List" table contains lines
-			| 'Currency' | 'Recorder'              | 'Company'      | 'Multi currency movement type' | 'Sales invoice'          | 'Item key'  | 'Serial lot number' | 'Quantity' | 'Amount'  |
-			| 'TRY'      | '$$SalesReturn092005$$' | 'Main Company' | 'TRY'                          | '$$SalesInvoice092004$$' | '38/Yellow' | '99098809009910'    | '-1,000'   | '-400,00' |
-			| 'TRY'      | '$$SalesReturn092005$$' | 'Main Company' | 'Local currency'               | '$$SalesInvoice092004$$' | '38/Yellow' | '99098809009910'    | '-1,000'   | '-400,00' |
-			| 'USD'      | '$$SalesReturn092005$$' | 'Main Company' | 'Reporting currency'           | '$$SalesInvoice092004$$' | '38/Yellow' | '99098809009910'    | '-1,000'   | '-68,48'  |
-			| 'TRY'      | '$$SalesReturn092005$$' | 'Main Company' | 'TRY'                          | '$$SalesInvoice092004$$' | '38/18SD'   | ''                  | '-1,000'   | '-650,00' |
-			| 'TRY'      | '$$SalesReturn092005$$' | 'Main Company' | 'Local currency'               | '$$SalesInvoice092004$$' | '38/18SD'   | ''                  | '-1,000'   | '-650,00' |
-			| 'USD'      | '$$SalesReturn092005$$' | 'Main Company' | 'Reporting currency'           | '$$SalesInvoice092004$$' | '38/18SD'   | ''                  | '-1,000'   | '-111,28' |
-			| 'TRY'      | '$$SalesReturn092005$$' | 'Main Company' | 'en description is empty'      | '$$SalesInvoice092004$$' | '38/Yellow' | '99098809009910'    | '-1,000'   | '-400,00' |
-			| 'TRY'      | '$$SalesReturn092005$$' | 'Main Company' | 'en description is empty'      | '$$SalesInvoice092004$$' | '38/18SD'   | ''                  | '-1,000'   | '-650,00' |
-			| 'TRY'      | '$$SalesReturn092005$$' | 'Main Company' | 'TRY'                          | '$$SalesInvoice092004$$' | '38/Yellow' | '99098809009911'    | '-2,000'   | '-800,00' |
-			| 'TRY'      | '$$SalesReturn092005$$' | 'Main Company' | 'Local currency'               | '$$SalesInvoice092004$$' | '38/Yellow' | '99098809009911'    | '-2,000'   | '-800,00' |
-			| 'USD'      | '$$SalesReturn092005$$' | 'Main Company' | 'Reporting currency'           | '$$SalesInvoice092004$$' | '38/Yellow' | '99098809009911'    | '-2,000'   | '-136,96' |
-			| 'TRY'      | '$$SalesReturn092005$$' | 'Main Company' | 'en description is empty'      | '$$SalesInvoice092004$$' | '38/Yellow' | '99098809009911'    | '-2,000'   | '-800,00' |
-		And I activate "$$SalesReturn092005$$" window
 		And I click "Registrations report" button
 		And I select "R4014 Serial lot numbers" exact value from "Register" drop-down list
 		And I click "Generate report" button
@@ -841,24 +811,17 @@ Scenario: _092005 check serial lot number in the Sales return
 			And I input "1,000" text in "Quantity" field of "SerialLotNumbers" table
 			And I finish line editing in "SerialLotNumbers" table
 			And I click "Ok" button
-	* Post Sales return and check movements in the register Sales turnovers
+	* Post Sales return and check movements in the register R4014 Serial lot numbers
 		And I click the button named "FormPost"
-		Given I open hyperlink "e1cib/list/AccumulationRegister.SalesTurnovers"
-		And Delay 3
-		And "List" table contains lines
-		| 'Currency' | 'Recorder'              | 'Company'      | 'Multi currency movement type' | 'Sales invoice'          | 'Item key'  | 'Serial lot number' | 'Quantity' |
-		| 'TRY'      | '$$SalesReturn092005$$' | 'Main Company' | 'TRY'                          | '$$SalesInvoice092004$$' | '38/Yellow' | '99098809009911'    | '-1,000'   |
-		| 'TRY'      | '$$SalesReturn092005$$' | 'Main Company' | 'Local currency'               | '$$SalesInvoice092004$$' | '38/Yellow' | '99098809009911'    | '-1,000'   |
-		| 'USD'      | '$$SalesReturn092005$$' | 'Main Company' | 'Reporting currency'           | '$$SalesInvoice092004$$' | '38/Yellow' | '99098809009911'    | '-1,000'   |
-		| 'TRY'      | '$$SalesReturn092005$$' | 'Main Company' | 'TRY'                          | '$$SalesInvoice092004$$' | '38/18SD'   | ''                  | '-1,000'   |
-		| 'TRY'      | '$$SalesReturn092005$$' | 'Main Company' | 'Local currency'               | '$$SalesInvoice092004$$' | '38/18SD'   | ''                  | '-1,000'   |
-		| 'USD'      | '$$SalesReturn092005$$' | 'Main Company' | 'Reporting currency'           | '$$SalesInvoice092004$$' | '38/18SD'   | ''                  | '-1,000'   |
-		| 'TRY'      | '$$SalesReturn092005$$' | 'Main Company' | 'TRY'                          | '$$SalesInvoice092004$$' | '37/18SD'   | ''                  | '-1,000'   |
-		| 'TRY'      | '$$SalesReturn092005$$' | 'Main Company' | 'Local currency'               | '$$SalesInvoice092004$$' | '37/18SD'   | ''                  | '-1,000'   |
-		| 'USD'      | '$$SalesReturn092005$$' | 'Main Company' | 'Reporting currency'           | '$$SalesInvoice092004$$' | '37/18SD'   | ''                  | '-1,000'   |
-		| 'TRY'      | '$$SalesReturn092005$$' | 'Main Company' | 'en description is empty'      | '$$SalesInvoice092004$$' | '38/Yellow' | '99098809009911'    | '-1,000'   |
-		| 'TRY'      | '$$SalesReturn092005$$' | 'Main Company' | 'en description is empty'      | '$$SalesInvoice092004$$' | '38/18SD'   | ''                  | '-1,000'   |
-		| 'TRY'      | '$$SalesReturn092005$$' | 'Main Company' | 'en description is empty'      | '$$SalesInvoice092004$$' | '37/18SD'   | ''                  | '-1,000'   |
+		And I click "Registrations report" button
+		And I select "R4014 Serial lot numbers" exact value from "Register" drop-down list
+		And I click "Generate report" button
+			| '$$SalesReturn092005$$'                | ''            | ''       | ''          | ''             | ''          | ''                  |
+			| 'Document registrations records'       | ''            | ''       | ''          | ''             | ''          | ''                  |
+			| 'Register  "R4014 Serial lot numbers"' | ''            | ''       | ''          | ''             | ''          | ''                  |
+			| ''                                     | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''          | ''                  |
+			| ''                                     | ''            | ''       | 'Quantity'  | 'Company'      | 'Item key'  | 'Serial lot number' |
+			| ''                                     | 'Receipt'     | '*'      | '1'         | 'Main Company' | '38/Yellow' | '99098809009911'    |
 	* Check the message to the user when the serial number was not filled in
 		And I activate "$$SalesReturn092005$$" window
 		And I click the button named "Add"

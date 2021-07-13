@@ -3199,8 +3199,7 @@ Scenario: _0205042 add test command to the list of documents Planned receipt res
 		Then I wait that in user messages the "Success server" substring will appear in 10 seconds
 	* Check that the command is not displayed in the document
 		And I click "Create" button
-		When I Check the steps for Exception
-			|'And I click "Test command" button'|
+		And I click "Test command" button
 		And I close all client application windows
 	* Connect a command to a document form
 		* Open Command register

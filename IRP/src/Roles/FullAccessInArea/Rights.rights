@@ -15285,13 +15285,6 @@
 		</right>
 	</object>
 	<object>
-		<name>Document.RetailReturnReceipt.Command.GenerateSalesReturn</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
 		<name>Document.SalesOrderClosing.Command.GenerateSalesOrderClosing</name>
 		<right>
 			<name>View</name>

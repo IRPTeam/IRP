@@ -3,9 +3,13 @@
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	LocalizationEvents.CreateMainFormItemDescription(ThisObject, "GroupDescriptions");
-	If Parameters.Property("Item") And Not ValueIsFilled(Object.Ref) Then
-		Object.Item = Parameters.Item;
-		Items.Item.ReadOnly = True;
+	If Object.Ref.IsEmpty() Then
+		If Parameters.Property("Item") Then
+			Object.Item = Parameters.Item;
+			Items.Item.ReadOnly = True;
+		EndIf;
+		Items.PackageUnit.ReadOnly = True;
+		Items.PackageUnit.InputHint = R().InfoMessage_004;
 	EndIf;
 	AddAttributesAndPropertiesServer.OnCreateAtServer(ThisObject);
 	If Parameters.Property("SelectedFilters") Then
@@ -41,6 +45,9 @@ EndProcedure
 Procedure AfterWrite(WriteParameters)
 	UpdateAddAttributesHTMLDocument();
 	AddAttributesCreateFormControl();
+	
+	Items.PackageUnit.ReadOnly = False;
+	Items.PackageUnit.InputHint = "";
 EndProcedure
 
 &AtClient

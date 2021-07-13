@@ -475,7 +475,6 @@ Scenario: _005116 filling in the "Items" catalog
 			| 'Description' |
 			| 'Ferron BP'   |
 		And I select current line in "List" table
-		And I click the button named "FormWrite"
 	* Check data save
 		Then the form attribute named "ItemID" became equal to "AB475590i"
 		Then the form attribute named "ItemType" became equal to "Coat"
@@ -510,8 +509,58 @@ Scenario: _005116 filling in the "Items" catalog
 		| 'Jeans'       | 'Jeans'     |
 
 
+
+
+Scenario: _005118 filling in Package unit
+	* Open item form
+		Given I open hyperlink "e1cib/list/Catalog.Items"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Jeans'       |
+		And I select current line in "List" table
+	* Select Package unit
+		And I click Select button of "Package unit" field
+		And "List" table contains lines
+			| 'Description'       |
+			| 'pcs'               |
+			| 'Jeans box (8 pcs)' |
+			| 'Boots (12 pcs)'    |
+		Then the number of "List" table lines is "равно" "3"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Jeans box (8 pcs)' |
+		And I select current line in "List" table
+		And I click the button named "FormWrite"
+	* Check
+		Then the form attribute named "PackageUnit" became equal to "Jeans box (8 pcs)"
+	* Input by search in line
+		And I input "box (8 pcs)" text in "Package unit" field
+		When I Check the steps for Exception
+			|'Then the form attribute named "PackageUnit" became equal to 'box (8 pcs)''|
+		And I close all client application windows
+	* Filling in Package unit when create new item
+		Given I open hyperlink "e1cib/list/Catalog.Items"
+		And I click the button named "FormCreate"
+		And I click Select button of "Unit" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'pcs' |
+		And I select current line in "List" table
+		And I click Select button of "Package unit" field
+		And "List" table contains lines
+			| 'Description'       |
+			| 'pcs'               |
+		Then the number of "List" table lines is "равно" "1"
+		And I close all client application windows
+
+
+		
+				
+
+
 Scenario: _005117 filling in Item keys
 # Bodie, Shoes
+	And I close all client application windows
 	Given I open hyperlink "e1cib/list/Catalog.Items"
 	* Preparation
 		When Create catalog AddAttributeAndPropertyValues objects

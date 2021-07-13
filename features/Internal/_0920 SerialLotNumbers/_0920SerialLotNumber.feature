@@ -816,6 +816,7 @@ Scenario: _092005 check serial lot number in the Sales return
 		And I click "Registrations report" button
 		And I select "R4014 Serial lot numbers" exact value from "Register" drop-down list
 		And I click "Generate report" button
+		And "ResultTable" spreadsheet document contains lines:
 			| '$$SalesReturn092005$$'                | ''            | ''       | ''          | ''             | ''          | ''                  |
 			| 'Document registrations records'       | ''            | ''       | ''          | ''             | ''          | ''                  |
 			| 'Register  "R4014 Serial lot numbers"' | ''            | ''       | ''          | ''             | ''          | ''                  |

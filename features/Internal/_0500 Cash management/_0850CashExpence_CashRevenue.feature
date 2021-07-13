@@ -138,7 +138,7 @@ Scenario: _085002 check Cash revenue creation
 	* Check creation
 		Given I open hyperlink "e1cib/list/Document.CashRevenue"
 		And "List" table contains lines
-			| 'Description'        |
+			| 'Number'        |
 			| '$$NumberCashRevenue1$$' |
 		And I close all client application windows
 	
@@ -278,7 +278,7 @@ Scenario: _085006 check Cash expense creation
 	* Check creation
 		Given I open hyperlink "e1cib/list/Document.CashRevenue"
 		And "List" table contains lines
-			| 'Description'        |
+			| 'Number'        |
 			| '$$NumberCashExpense1$$' |
 		And I close all client application windows
 	

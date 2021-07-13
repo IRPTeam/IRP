@@ -383,6 +383,7 @@ Function Strings(Lang) Export
   	// %1 - 
   	Strings.Insert("InfoMessage_022", NStr("en = 'This order is closed by %1'", Lang));
 	Strings.Insert("InfoMessage_023", NStr("en = 'Сan not use confirmation of shipment without goods receipt. Use goods receipt mode is enabled.'", Lang));
+	Strings.Insert("InfoMessage_024", NStr("en = 'Will be available after save.'", Lang));
 	#EndRegion
 	
 	#Region QuestionToUser

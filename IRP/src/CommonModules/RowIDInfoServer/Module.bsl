@@ -2868,7 +2868,33 @@ Function ExtractData_FromRSR(BasisesTable, DataReceiver)
 		|	Document.RetailSalesReceipt.SerialLotNumbers AS SerialLotNumbers
 		|		INNER JOIN BasisesTable AS BasisesTable
 		|		ON BasisesTable.Basis = SerialLotNumbers.Ref
-		|		AND BasisesTable.BasisKey = SerialLotNumbers.Key";
+		|		AND BasisesTable.BasisKey = SerialLotNumbers.Key
+		|;
+		|
+		|///////////////////////////////////////////////////////////////////////////////
+		|
+		|SELECT DISTINCT
+		|	UNDEFINED AS Ref,
+		//|	BasisesTable.Key,
+		|	Payments.PaymentType,
+		|	Payments.PaymentTerminal,
+		|	Payments.Account,
+		|	Payments.Amount,
+		|	Payments.Percent,
+		|	Payments.Commission,
+		|	Payments.BankTerm
+		|FROM
+		|	Document.RetailSalesReceipt.Payments AS Payments
+		|		INNER JOIN BasisesTable AS BasisesTable
+		|		ON BasisesTable.Basis = Payments.Ref
+		|GROUP BY
+		|	Payments.Account,
+		|	Payments.Amount,
+		|	Payments.BankTerm,
+		|	Payments.Commission,
+		|	Payments.PaymentTerminal,
+		|	Payments.PaymentType,
+		|	Payments.Percent";
 		
 	Query.SetParameter("BasisesTable", BasisesTable);
 	QueryResults = Query.ExecuteBatch();
@@ -2878,6 +2904,7 @@ Function ExtractData_FromRSR(BasisesTable, DataReceiver)
 	TableTaxList          = QueryResults[3].Unload();
 	TableSpecialOffers    = QueryResults[4].Unload();
 	TableSerialLotNumbers = QueryResults[5].Unload();
+	TablePayments         = QueryResults[6].Unload();
 		
 	Tables = New Structure();
 	Tables.Insert("ItemList"         , TableItemList);
@@ -2885,7 +2912,8 @@ Function ExtractData_FromRSR(BasisesTable, DataReceiver)
 	Tables.Insert("TaxList"          , TableTaxList);
 	Tables.Insert("SpecialOffers"    , TableSpecialOffers);
 	Tables.Insert("SerialLotNumbers" , TableSerialLotNumbers);
-	
+	Tables.Insert("Payments"         , TablePayments);
+		
 	AddTables(Tables);
 	
 	RecalculateAmounts(Tables);
@@ -2922,6 +2950,9 @@ Procedure AddTables(Tables)
 		Tables.Insert("SerialLotNumbers", GetEmptyTable_SerialLotNumbers());
 	EndIf;
 	
+	If Not Tables.Property("Payments") Then
+		Tables.Insert("Payments", GetEmptyTable_Payments());
+	EndIf;
 EndProcedure
 
 Function AddColumnsToItemList(TableItemList)
@@ -5903,11 +5934,34 @@ Function ConvertDataToFillingValues(DocReceiverMetadata, ExtractedData) Export
 					Continue;
 				EndIf;
 				
-				For Each Row_DepTable In Tables[TableName_Refreshable].Copy(TableFilter) Do
+				If Tables[TableName_Refreshable].Columns.Find("Key") = Undefined Then
+					Continue;
+				Else 
+					DepTable = Tables[TableName_Refreshable].Copy(TableFilter);
+				EndIf;
+				
+				For Each Row_DepTable In DepTable Do
 					FillingValues[TableName_Refreshable].Add(ValueTableRowToStructure(Tables[TableName_Refreshable].Columns, Row_DepTable));
 				EndDo;
 			EndDo;
 		EndDo;
+		
+		For Each TableName_Refreshable In TableNames_Refreshable Do
+			If Not CommonFunctionsClientServer.ObjectHasProperty(Tables, TableName_Refreshable) Then
+				Continue;
+			EndIf;
+				
+			If Tables[TableName_Refreshable].Columns.Find("Key") = Undefined Then
+				DepTable = Tables[TableName_Refreshable].Copy();
+			Else 
+				Continue;
+			EndIf;
+				
+			For Each Row_DepTable In DepTable Do
+				FillingValues[TableName_Refreshable].Add(ValueTableRowToStructure(Tables[TableName_Refreshable].Columns, Row_DepTable));
+			EndDo;
+		EndDo;
+		
 		
 		FillingValues.Insert("BasedOn", True);
 		ArrayOfFillingValues.Add(FillingValues);
@@ -5924,6 +5978,7 @@ Function JoinAllExtractedData(ArrayOfData)
 	Tables.Insert("ShipmentConfirmations" , GetEmptyTable_ShipmentConfirmations());
 	Tables.Insert("GoodsReceipts"         , GetEmptyTable_GoodsReceipts());
 	Tables.Insert("SerialLotNumbers"      , GetEmptyTable_SerialLotNumbers());
+	Tables.Insert("Payments"              , GetEmptyTable_Payments());
 	
 	For Each Data In ArrayOfData Do
 		For Each Table In Tables Do
@@ -5943,6 +5998,8 @@ Function GetTableNames_Refreshable()
 	NamesArray.Add("ShipmentConfirmations");
 	NamesArray.Add("GoodsReceipts");
 	NamesArray.Add("SerialLotNumbers");
+	NamesArray.Add("Payments");
+	
 	Return NamesArray;
 EndFunction
 
@@ -6151,6 +6208,22 @@ EndFunction
 
 Function GetEmptyTable_SerialLotNumbers()
 	Return GetEmptyTable(GetColumnNames_SerialLotNumbers() + ", " + GetColumnNamesSum_SerialLotNumbers());
+EndFunction
+
+#EndRegion
+
+#Region EmptyTables_Payments
+
+Function GetColumnNames_Payments()
+	Return "Ref, PaymentType, PaymentTerminal, Account, Percent, BankTerm";
+EndFunction
+
+Function GetColumnNamesSum_Payments()
+	Return "Amount, Commission";
+EndFunction
+
+Function GetEmptyTable_Payments()
+	Return GetEmptyTable(GetColumnNames_Payments() + ", " + GetColumnNamesSum_Payments());
 EndFunction
 
 #EndRegion

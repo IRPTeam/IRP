@@ -20,6 +20,10 @@ Procedure BeforeDelete(Cancel)
 	EndIf;
 EndProcedure
 
+Procedure OnCopy(CopiedObject)
+	PackageUnit = Undefined;
+EndProcedure
+
 #EndRegion
 
 #Region Private

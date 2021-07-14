@@ -42,13 +42,12 @@ EndProcedure
 #Region ItemItemList
 
 Procedure ItemListItemStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
-	OpenSettings = DocumentsClient.GetOpenSettingsForSelectItemWithNotServiceFilter();
+	OpenSettings = DocumentsClient.GetOpenSettingsForSelectItemWithoutServiceFilter();
 	DocumentsClient.ItemStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
 EndProcedure
 
 Procedure ItemListItemEditTextChange(Object, Form, Item, Text, StandardProcessing) Export
-	ArrayOfFilters = New Array();
-	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
+	ArrayOfFilters = DocumentsClient.GetArrayOfFiltersForSelectItemWithoutServiceFilter();
 	DocumentsClient.ItemEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters);
 EndProcedure
 

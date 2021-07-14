@@ -345,68 +345,7 @@ Scenario: _0154135 create document Retail Sales Receipt
 			| 'Number' |
 			| '$$NumberRetailSalesReceipt0154135$$'      |
 			And I close all client application windows
-		* Check retail sales receipt movements
-			Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
-			And I go to line in "List" table
-				| 'Number' |
-				| '$$NumberRetailSalesReceipt0154135$$'      |
-			And I click "Registrations report" button
-			And I select "Retail sales" exact value from "Register" drop-down list
-			And I click "Generate report" button
-			And "ResultTable" spreadsheet document contains lines:
-				| '$$RetailSalesReceipt015413$$'   | ''            | ''       | ''          | ''       | ''           | ''              | ''             | ''              | ''         | ''                             | ''         | ''                  | ''        |
-				| 'Document registrations records' | ''            | ''       | ''          | ''       | ''           | ''              | ''             | ''              | ''         | ''                             | ''         | ''                  | ''        |
-				| 'Register  "Retail sales"'       | ''            | ''       | ''          | ''       | ''           | ''              | ''             | ''              | ''         | ''                             | ''         | ''                  | ''        |
-				| ''                               | 'Record type' | 'Period' | 'Resources' | ''       | ''           | ''              | 'Dimensions'   | ''              | ''         | ''                             | ''         | ''                  | ''        |
-				| ''                               | ''            | ''       | 'Quantity'  | 'Amount' | 'Net amount' | 'Offers amount' | 'Company'      | 'Business unit' | 'Store'    | 'Retail sales receipt'         | 'Item key' | 'Serial lot number' | 'Row key' |
-				| ''                               | 'Receipt'     | '*'      | '1'         | '520'    | '440,68'     | ''              | 'Main Company' | 'Shop 01'       | 'Store 01' | '$$RetailSalesReceipt015413$$' | 'XS/Blue'  | ''                  | '*'       |
-				| ''                               | 'Receipt'     | '*'      | '1'         | '550'    | '466,1'      | ''              | 'Main Company' | 'Shop 01'       | 'Store 01' | '$$RetailSalesReceipt015413$$' | 'L/Green'  | ''                  | '*'       |
-				| ''                               | 'Receipt'     | '*'      | '2'         | '700'    | '593,22'     | ''              | 'Main Company' | 'Shop 01'       | 'Store 01' | '$$RetailSalesReceipt015413$$' | '38/Black' | ''                  | '*'       |
-			And I select "Retail cash" exact value from "Register" drop-down list
-			And I click "Generate report" button
-			And "ResultTable" spreadsheet document contains lines:
-				| 'Register  "Retail cash"' | ''            | ''       | ''          | ''           | ''             | ''              | ''             | ''             | ''                    | '' | '' | '' | '' |
-				| ''                        | 'Record type' | 'Period' | 'Resources' | ''           | 'Dimensions'   | ''              | ''             | ''             | ''                    | '' | '' | '' | '' |
-				| ''                        | ''            | ''       | 'Amount'    | 'Commission' | 'Company'      | 'Business unit' | 'Payment type' | 'Account'      | 'Payment terminal'    | '' | '' | '' | '' |
-				| ''                        | 'Receipt'     | '*'      | '1 290'     | '12,9'       | 'Main Company' | 'Shop 01'       | 'Card 01'      | 'Transit Main' | 'Payment terminal 01' | '' | '' | '' | '' |
-			And I select "Taxes turnovers" exact value from "Register" drop-down list
-			And I click "Generate report" button
-			And "ResultTable" spreadsheet document contains lines:
-				| 'Register  "Taxes turnovers"' | ''       | ''          | ''              | ''           | ''                             | ''    | ''          | ''         | ''                        | ''        | ''         | ''                             | ''                     |
-				| ''                            | 'Period' | 'Resources' | ''              | ''           | 'Dimensions'                   | ''    | ''          | ''         | ''                        | ''        | ''         | ''                             | 'Attributes'           |
-				| ''                            | ''       | 'Amount'    | 'Manual amount' | 'Net amount' | 'Document'                     | 'Tax' | 'Analytics' | 'Tax rate' | 'Include to total amount' | 'Row key' | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
-				| ''                            | '*'      | '13,58'     | '13,58'         | '75,44'      | '$$RetailSalesReceipt015413$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'USD'      | 'Reporting currency'           | 'No'                   |
-				| ''                            | '*'      | '14,36'     | '14,36'         | '79,8'       | '$$RetailSalesReceipt015413$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'USD'      | 'Reporting currency'           | 'No'                   |
-				| ''                            | '*'      | '18,28'     | '18,28'         | '101,56'     | '$$RetailSalesReceipt015413$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'USD'      | 'Reporting currency'           | 'No'                   |
-				| ''                            | '*'      | '79,32'     | '79,32'         | '440,68'     | '$$RetailSalesReceipt015413$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'Local currency'               | 'No'                   |
-				| ''                            | '*'      | '79,32'     | '79,32'         | '440,68'     | '$$RetailSalesReceipt015413$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'TRY'                          | 'No'                   |
-				| ''                            | '*'      | '79,32'     | '79,32'         | '440,68'     | '$$RetailSalesReceipt015413$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'en description is empty'      | 'No'                   |
-				| ''                            | '*'      | '83,9'      | '83,9'          | '466,1'      | '$$RetailSalesReceipt015413$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'Local currency'               | 'No'                   |
-				| ''                            | '*'      | '83,9'      | '83,9'          | '466,1'      | '$$RetailSalesReceipt015413$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'TRY'                          | 'No'                   |
-				| ''                            | '*'      | '83,9'      | '83,9'          | '466,1'      | '$$RetailSalesReceipt015413$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'en description is empty'      | 'No'                   |
-				| ''                            | '*'      | '106,78'    | '106,78'        | '593,22'     | '$$RetailSalesReceipt015413$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'Local currency'               | 'No'                   |
-				| ''                            | '*'      | '106,78'    | '106,78'        | '593,22'     | '$$RetailSalesReceipt015413$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'TRY'                          | 'No'                   |
-				| ''                            | '*'      | '106,78'    | '106,78'        | '593,22'     | '$$RetailSalesReceipt015413$$' | 'VAT' | ''          | '18%'      | 'Yes'                     | '*'       | 'TRY'      | 'en description is empty'      | 'No'                   |
-		
-			And I select "Revenues turnovers" exact value from "Register" drop-down list
-			And I click "Generate report" button
-			And "ResultTable" spreadsheet document contains lines:
-				| 'Register  "Revenues turnovers"' | ''       | ''          | ''             | ''              | ''             | ''         | ''         | ''                    | ''                             | ''                     | '' | '' | '' |
-				| ''                               | 'Period' | 'Resources' | 'Dimensions'   | ''              | ''             | ''         | ''         | ''                    | ''                             | 'Attributes'           | '' | '' | '' |
-				| ''                               | ''       | 'Amount'    | 'Company'      | 'Business unit' | 'Revenue type' | 'Item key' | 'Currency' | 'Additional analytic' | 'Multi currency movement type' | 'Deferred calculation' | '' | '' | '' |
-				| ''                               | '*'      | '75,44'     | 'Main Company' | 'Shop 01'       | ''             | 'XS/Blue'  | 'USD'      | ''                    | 'Reporting currency'           | 'No'                   | '' | '' | '' |
-				| ''                               | '*'      | '79,8'      | 'Main Company' | 'Shop 01'       | ''             | 'L/Green'  | 'USD'      | ''                    | 'Reporting currency'           | 'No'                   | '' | '' | '' |
-				| ''                               | '*'      | '101,56'    | 'Main Company' | 'Shop 01'       | ''             | '38/Black' | 'USD'      | ''                    | 'Reporting currency'           | 'No'                   | '' | '' | '' |
-				| ''                               | '*'      | '440,68'    | 'Main Company' | 'Shop 01'       | ''             | 'XS/Blue'  | 'TRY'      | ''                    | 'Local currency'               | 'No'                   | '' | '' | '' |
-				| ''                               | '*'      | '440,68'    | 'Main Company' | 'Shop 01'       | ''             | 'XS/Blue'  | 'TRY'      | ''                    | 'TRY'                          | 'No'                   | '' | '' | '' |
-				| ''                               | '*'      | '440,68'    | 'Main Company' | 'Shop 01'       | ''             | 'XS/Blue'  | 'TRY'      | ''                    | 'en description is empty'      | 'No'                   | '' | '' | '' |
-				| ''                               | '*'      | '466,1'     | 'Main Company' | 'Shop 01'       | ''             | 'L/Green'  | 'TRY'      | ''                    | 'Local currency'               | 'No'                   | '' | '' | '' |
-				| ''                               | '*'      | '466,1'     | 'Main Company' | 'Shop 01'       | ''             | 'L/Green'  | 'TRY'      | ''                    | 'TRY'                          | 'No'                   | '' | '' | '' |
-				| ''                               | '*'      | '466,1'     | 'Main Company' | 'Shop 01'       | ''             | 'L/Green'  | 'TRY'      | ''                    | 'en description is empty'      | 'No'                   | '' | '' | '' |
-				| ''                               | '*'      | '593,22'    | 'Main Company' | 'Shop 01'       | ''             | '38/Black' | 'TRY'      | ''                    | 'Local currency'               | 'No'                   | '' | '' | '' |
-				| ''                               | '*'      | '593,22'    | 'Main Company' | 'Shop 01'       | ''             | '38/Black' | 'TRY'      | ''                    | 'TRY'                          | 'No'                   | '' | '' | '' |
-				| ''                               | '*'      | '593,22'    | 'Main Company' | 'Shop 01'       | ''             | '38/Black' | 'TRY'      | ''                    | 'en description is empty'      | 'No'                   | '' | '' | '' |
-			And I close all client application windows
+
 
 			
 						
@@ -419,7 +358,8 @@ Scenario: _0154136 create document Retail Return Receipt based on RetailSalesRec
 			| 'Number' |
 			| '$$NumberRetailSalesReceipt0154135$$'      |
 	* Create Retail Return Receipt
-		And I click the button named "FormDocumentRetailReturnReceiptGenerateSalesReturn"
+		And I click the button named "FormDocumentRetailReturnReceiptGenarate"
+		And I click "Ok" button		
 	* Check filling in
 		Then the form attribute named "DecorationGroupTitleCollapsedPicture" became equal to "Decoration group title collapsed picture"
 		Then the form attribute named "DecorationGroupTitleCollapsedLabel" became equal to "Company: Main Company   Partner: Retail customer   Legal name: Company Retail customer   Partner term: Retail partner term   "

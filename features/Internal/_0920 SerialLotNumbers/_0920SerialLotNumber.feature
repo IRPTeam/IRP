@@ -341,7 +341,8 @@ Scenario: _092003 check serial lot number in the Retail return receipt
 		And I go to line in "List" table
 			|'Number'|
 			|'$$NumberRetailSalesReceipt092002$$'|
-		And I click the button named "FormDocumentRetailReturnReceiptGenerateSalesReturn"
+		And I click the button named "FormDocumentRetailReturnReceiptGenarate"
+		And I click "Ok" button	
 	* Check filling in serial lot number
 		And "ItemList" table contains lines
 			| 'Serial lot numbers'             | 'Price'  | 'Item'     | 'Item key'  | 'Q'     | 'Unit' | 'Retail sales receipt'         |

@@ -203,7 +203,8 @@ Scenario: _034510 check discount recalculation when change quantity in Retail re
 			And I go to line in "List" table
 				| 'Number' |
 				| '$$NumberRetailSalesReceipt034501$$'  |
-			And I click the button named "FormDocumentRetailReturnReceiptGenerateSalesReturn"
+			And I click the button named "FormDocumentRetailReturnReceiptGenarate"
+			And I click "Ok" button		
 			And the editing text of form attribute named "ItemListTotalOffersAmount" became equal to "5 750,00"
 			Then the form attribute named "ItemListTotalNetAmount" became equal to "43 855,94"
 			Then the form attribute named "ItemListTotalTaxAmount" became equal to "7 894,06"
@@ -263,7 +264,8 @@ Scenario: _034510 check discount recalculation when change quantity in Retail re
 			And I go to line in "List" table
 				| 'Number' |
 				| '$$NumberRetailSalesReceipt034502$$'  |
-			And I click the button named "FormDocumentRetailReturnReceiptGenerateSalesReturn"
+			And I click the button named "FormDocumentRetailReturnReceiptGenarate"
+			And I click "Ok" button	
 			And "ItemList" table contains lines
 				| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Offers amount' | 'Q'       | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
 				| '520,00' | 'Dress' | '18%' | 'M/White'  | '8 320,00'      | '100,000' | 'pcs'  | 'No'                 | '6 663,05'   | '37 016,95'  | '43 680,00'    | 'Store 01' |

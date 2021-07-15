@@ -375,19 +375,15 @@ Scenario: _092003 check serial lot number in the Retail return receipt
 		And I select "Retail sales" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-			| 'Currency' | 'Recorder'                      | 'Company'      | 'Multi currency movement type' | 'Sales invoice'                | 'Item key'  | 'Serial lot number' | 'Quantity'  | 'Amount' |
-			| 'TRY'      | '$$RetailReturnReceipt092003$$' | 'Main Company' | 'TRY'                          | '$$RetailSalesReceipt092002$$' | '38/Yellow' | '99098809009999'    | '-1,000'    | '-400,00' |
-			| 'TRY'      | '$$RetailReturnReceipt092003$$' | 'Main Company' | 'Local currency'               | '$$RetailSalesReceipt092002$$' | '38/Yellow' | '99098809009999'    | '-1,000'    | '-400,00' |
-			| 'USD'      | '$$RetailReturnReceipt092003$$' | 'Main Company' | 'Reporting currency'           | '$$RetailSalesReceipt092002$$' | '38/Yellow' | '99098809009999'    | '-1,000'    | '-68,48'  |
-			| 'TRY'      | '$$RetailReturnReceipt092003$$' | 'Main Company' | 'TRY'                          | '$$RetailSalesReceipt092002$$' | '38/18SD'   | ''                  | '-1,000'    | '-650,00' |
-			| 'TRY'      | '$$RetailReturnReceipt092003$$' | 'Main Company' | 'Local currency'               | '$$RetailSalesReceipt092002$$' | '38/18SD'   | ''                  | '-1,000'    | '-650,00' |
-			| 'USD'      | '$$RetailReturnReceipt092003$$' | 'Main Company' | 'Reporting currency'           | '$$RetailSalesReceipt092002$$' | '38/18SD'   | ''                  | '-1,000'    | '-111,28' |
-			| 'TRY'      | '$$RetailReturnReceipt092003$$' | 'Main Company' | 'en description is empty'      | '$$RetailSalesReceipt092002$$' | '38/Yellow' | '99098809009999'    | '-1,000'    | '-400,00' |
-			| 'TRY'      | '$$RetailReturnReceipt092003$$' | 'Main Company' | 'en description is empty'      | '$$RetailSalesReceipt092002$$' | '38/18SD'   | ''                  | '-1,000'    | '-650,00' |
-			| 'TRY'      | '$$RetailReturnReceipt092003$$' | 'Main Company' | 'TRY'                          | '$$RetailSalesReceipt092002$$' | '38/Yellow' | '99098809009998'    | '-2,000'    | '-800,00' |
-			| 'TRY'      | '$$RetailReturnReceipt092003$$' | 'Main Company' | 'Local currency'               | '$$RetailSalesReceipt092002$$' | '38/Yellow' | '99098809009998'    | '-2,000'    | '-800,00' |
-			| 'USD'      | '$$RetailReturnReceipt092003$$' | 'Main Company' | 'Reporting currency'           | '$$RetailSalesReceipt092002$$' | '38/Yellow' | '99098809009998'    | '-2,000'    | '-136,96' |
-			| 'TRY'      | '$$RetailReturnReceipt092003$$' | 'Main Company' | 'en description is empty'      | '$$RetailSalesReceipt092002$$' | '38/Yellow' | '99098809009998'    | '-2,000'    | '-800,00' |
+			| '$$RetailReturnReceipt092003$$'  | ''            | ''       | ''          | ''       | ''           | ''              | ''             | ''              | ''         | ''                             | ''          | ''                  | ''        |
+			| 'Document registrations records' | ''            | ''       | ''          | ''       | ''           | ''              | ''             | ''              | ''         | ''                             | ''          | ''                  | ''        |
+			| 'Register  "Retail sales"'       | ''            | ''       | ''          | ''       | ''           | ''              | ''             | ''              | ''         | ''                             | ''          | ''                  | ''        |
+			| ''                               | 'Record type' | 'Period' | 'Resources' | ''       | ''           | ''              | 'Dimensions'   | ''              | ''         | ''                             | ''          | ''                  | ''        |
+			| ''                               | ''            | ''       | 'Quantity'  | 'Amount' | 'Net amount' | 'Offers amount' | 'Company'      | 'Business unit' | 'Store'    | 'Retail sales receipt'         | 'Item key'  | 'Serial lot number' | 'Row key' |
+			| ''                               | 'Receipt'     | '*'      | '-2'        | '-800'   | '-677,97'    | ''              | 'Main Company' | 'Shop 01'       | 'Store 01' | '$$RetailSalesReceipt092002$$' | '38/Yellow' | '99098809009998'    | '*'       |
+			| ''                               | 'Receipt'     | '*'      | '-1'        | '-400'   | '-338,98'    | ''              | 'Main Company' | 'Shop 01'       | 'Store 01' | '$$RetailSalesReceipt092002$$' | '38/Yellow' | '99098809009999'    | '*'       |
+			| ''                               | 'Receipt'     | '*'      | '-1'        | '650'    | '550,85'     | ''              | 'Main Company' | 'Shop 01'       | 'Store 01' | '$$RetailSalesReceipt092002$$' | '38/18SD'   | ''                  | '*'       |
+			| ''                               | 'Receipt'     | '*'      | '-1'        | '700'    | '593,22'     | ''              | 'Main Company' | 'Shop 01'       | 'Store 01' | '$$RetailSalesReceipt092002$$' | '37/18SD'   | ''                  | '*'       |
 	* Сhange the quantity and check that the quantity of the serial lot numbers matches the quantity in the document
 		And I activate "$$RetailReturnReceipt092003$$" window
 		And I go to line in "ItemList" table
@@ -435,19 +431,14 @@ Scenario: _092003 check serial lot number in the Retail return receipt
 		And I select "Retail sales" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-		| 'Currency' | 'Recorder'                      | 'Company'      | 'Multi currency movement type' | 'Sales invoice'                | 'Item key'  | 'Serial lot number' | 'Quantity' | 'Amount'  |
-		| 'TRY'      | '$$RetailReturnReceipt092003$$' | 'Main Company' | 'TRY'                          | '$$RetailSalesReceipt092002$$' | '38/Yellow' | '99098809009998'    | '-1,000'   | '-400,00' |
-		| 'TRY'      | '$$RetailReturnReceipt092003$$' | 'Main Company' | 'Local currency'               | '$$RetailSalesReceipt092002$$' | '38/Yellow' | '99098809009998'    | '-1,000'   | '-400,00' |
-		| 'USD'      | '$$RetailReturnReceipt092003$$' | 'Main Company' | 'Reporting currency'           | '$$RetailSalesReceipt092002$$' | '38/Yellow' | '99098809009998'    | '-1,000'   | '-68,48'  |
-		| 'TRY'      | '$$RetailReturnReceipt092003$$' | 'Main Company' | 'TRY'                          | '$$RetailSalesReceipt092002$$' | '38/18SD'   | ''                  | '-1,000'   | '-650,00' |
-		| 'TRY'      | '$$RetailReturnReceipt092003$$' | 'Main Company' | 'Local currency'               | '$$RetailSalesReceipt092002$$' | '38/18SD'   | ''                  | '-1,000'   | '-650,00' |
-		| 'USD'      | '$$RetailReturnReceipt092003$$' | 'Main Company' | 'Reporting currency'           | '$$RetailSalesReceipt092002$$' | '38/18SD'   | ''                  | '-1,000'   | '-111,28' |
-		| 'TRY'      | '$$RetailReturnReceipt092003$$' | 'Main Company' | 'TRY'                          | '$$RetailSalesReceipt092002$$' | '37/18SD'   | ''                  | '-1,000'   | '-700,00' |
-		| 'TRY'      | '$$RetailReturnReceipt092003$$' | 'Main Company' | 'Local currency'               | '$$RetailSalesReceipt092002$$' | '37/18SD'   | ''                  | '-1,000'   | '-700,00' |
-		| 'USD'      | '$$RetailReturnReceipt092003$$' | 'Main Company' | 'Reporting currency'           | '$$RetailSalesReceipt092002$$' | '37/18SD'   | ''                  | '-1,000'   | '-119,84' |
-		| 'TRY'      | '$$RetailReturnReceipt092003$$' | 'Main Company' | 'en description is empty'      | '$$RetailSalesReceipt092002$$' | '38/Yellow' | '99098809009998'    | '-1,000'   | '-400,00' |
-		| 'TRY'      | '$$RetailReturnReceipt092003$$' | 'Main Company' | 'en description is empty'      | '$$RetailSalesReceipt092002$$' | '38/18SD'   | ''                  | '-1,000'   | '-650,00' |
-		| 'TRY'      | '$$RetailReturnReceipt092003$$' | 'Main Company' | 'en description is empty'      | '$$RetailSalesReceipt092002$$' | '37/18SD'   | ''                  | '-1,000'   | '-700,00' |
+			| '$$RetailReturnReceipt092003$$'  | ''            | ''       | ''          | ''       | ''           | ''              | ''             | ''              | ''         | ''                             | ''          | ''                  | ''        |
+			| 'Document registrations records' | ''            | ''       | ''          | ''       | ''           | ''              | ''             | ''              | ''         | ''                             | ''          | ''                  | ''        |
+			| 'Register  "Retail sales"'       | ''            | ''       | ''          | ''       | ''           | ''              | ''             | ''              | ''         | ''                             | ''          | ''                  | ''        |
+			| ''                               | 'Record type' | 'Period' | 'Resources' | ''       | ''           | ''              | 'Dimensions'   | ''              | ''         | ''                             | ''          | ''                  | ''        |
+			| ''                               | ''            | ''       | 'Quantity'  | 'Amount' | 'Net amount' | 'Offers amount' | 'Company'      | 'Business unit' | 'Store'    | 'Retail sales receipt'         | 'Item key'  | 'Serial lot number' | 'Row key' |
+			| ''                               | 'Receipt'     | '*'      | '-1'        | '-400'   | '-338,98'    | ''              | 'Main Company' | 'Shop 01'       | 'Store 01' | '$$RetailSalesReceipt092002$$' | '38/Yellow' | '99098809009998'    | '*'       |
+			| ''                               | 'Receipt'     | '*'      | '-1'        | '650'    | '550,85'     | ''              | 'Main Company' | 'Shop 01'       | 'Store 01' | '$$RetailSalesReceipt092002$$' | '38/18SD'   | ''                  | '*'       |
+			| ''                               | 'Receipt'     | '*'      | '-1'        | '700'    | '593,22'     | ''              | 'Main Company' | 'Shop 01'       | 'Store 01' | '$$RetailSalesReceipt092002$$' | '37/18SD'   | ''                  | '*'       |
 	* Check the message to the user when the serial number was not filled in
 		And I activate "$$RetailReturnReceipt092003$$" window
 		And I click the button named "Add"

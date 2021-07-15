@@ -674,10 +674,10 @@ Scenario: _0051191 filling in Package unit
 		And I click the button named "FormWrite"
 	* Check
 		Then the form attribute named "PackageUnit" became equal to "Jeans box (8 pcs)"
-	* Input by search in line
-		And I input "box (8 pcs)" text in "Package unit" field
-		When I Check the steps for Exception
-			|'Then the form attribute named "PackageUnit" became equal to 'box (8 pcs)''|
+	// * Input by search in line
+	// 	And I input "box (8 pcs)" text in "Package unit" field
+	// 	When I Check the steps for Exception
+	// 		|'Then the form attribute named "PackageUnit" became equal to 'box (8 pcs)''|
 		And I close all client application windows
 
 Scenario: _0051192 filling in Package unit when create new item

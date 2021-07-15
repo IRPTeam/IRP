@@ -1809,7 +1809,8 @@ Scenario:  _0154149 create Cash statement
 			| 'Number' |
 			| '$$NumberRetailSalesReceipt01541494$$'      |
 		And I activate "Date" field in "List" table
-		And I click the button named "FormDocumentRetailReturnReceiptGenerateSalesReturn"
+		And I click the button named "FormDocumentRetailReturnReceiptGenarate"
+		And I click "Ok" button		
 		And I activate "Q" field in "ItemList" table
 		And I select current line in "ItemList" table
 		And I input "2,000" text in "Q" field of "ItemList" table
@@ -1838,7 +1839,8 @@ Scenario:  _0154149 create Cash statement
 		And I go to line in "List" table
 			| 'Number' |
 			| '$$NumberRetailSalesReceipt01541493$$'      |
-		And I click the button named "FormDocumentRetailReturnReceiptGenerateSalesReturn"
+		And I click the button named "FormDocumentRetailReturnReceiptGenarate"
+		And I click "Ok" button	
 		Then "Retail return receipt (create)" window is opened
 		And I activate "Q" field in "ItemList" table
 		And I select current line in "ItemList" table
@@ -1868,7 +1870,8 @@ Scenario:  _0154149 create Cash statement
 		And I go to line in "List" table
 			| 'Number' |
 			| '$$NumberRetailSalesReceipt01541491$$'      |
-		And I click the button named "FormDocumentRetailReturnReceiptGenerateSalesReturn"
+		And I click the button named "FormDocumentRetailReturnReceiptGenarate"
+		And I click "Ok" button	
 		And I click Select button of "Business unit" field
 		Then "Business units" window is opened
 		And I go to line in "List" table

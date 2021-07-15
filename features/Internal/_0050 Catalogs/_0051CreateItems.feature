@@ -508,56 +508,6 @@ Scenario: _005116 filling in the "Items" catalog
 		| 'Bodie'       | 'Coat'      |
 		| 'Jeans'       | 'Jeans'     |
 
-
-
-
-Scenario: _005118 filling in Package unit
-	* Open item form
-		Given I open hyperlink "e1cib/list/Catalog.Items"
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Jeans'       |
-		And I select current line in "List" table
-	* Select Package unit
-		And I click Select button of "Package unit" field
-		And "List" table contains lines
-			| 'Description'       |
-			| 'pcs'               |
-			| 'Jeans box (8 pcs)' |
-			| 'Boots (12 pcs)'    |
-		Then the number of "List" table lines is "равно" "3"
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Jeans box (8 pcs)' |
-		And I select current line in "List" table
-		And I click the button named "FormWrite"
-	* Check
-		Then the form attribute named "PackageUnit" became equal to "Jeans box (8 pcs)"
-	* Input by search in line
-		And I input "box (8 pcs)" text in "Package unit" field
-		When I Check the steps for Exception
-			|'Then the form attribute named "PackageUnit" became equal to 'box (8 pcs)''|
-		And I close all client application windows
-	* Filling in Package unit when create new item
-		Given I open hyperlink "e1cib/list/Catalog.Items"
-		And I click the button named "FormCreate"
-		And I click Select button of "Unit" field
-		And I go to line in "List" table
-			| 'Description' |
-			| 'pcs' |
-		And I select current line in "List" table
-		And I click Select button of "Package unit" field
-		And "List" table contains lines
-			| 'Description'       |
-			| 'pcs'               |
-		Then the number of "List" table lines is "равно" "1"
-		And I close all client application windows
-
-
-		
-				
-
-
 Scenario: _005117 filling in Item keys
 # Bodie, Shoes
 	And I close all client application windows
@@ -700,6 +650,74 @@ Scenario: _005119 packaging for Jeans
 		And I input "12" text in "Quantity" field
 		And I click "Save and close" button
 	And I close current window
+
+
+Scenario: _0051191 filling in Package unit
+	* Open item form
+		Given I open hyperlink "e1cib/list/Catalog.Items"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Jeans'       |
+		And I select current line in "List" table
+	* Select Package unit
+		And I click Select button of "Package unit" field
+		And "List" table contains lines
+			| 'Description'       |
+			| 'pcs'               |
+			| 'Jeans box (8 pcs)' |
+			| 'Boots (12 pcs)'    |
+		Then the number of "List" table lines is "равно" "3"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Jeans box (8 pcs)' |
+		And I select current line in "List" table
+		And I click the button named "FormWrite"
+	* Check
+		Then the form attribute named "PackageUnit" became equal to "Jeans box (8 pcs)"
+	// * Input by search in line
+	// 	And I input "box (8 pcs)" text in "Package unit" field
+	// 	When I Check the steps for Exception
+	// 		|'Then the form attribute named "PackageUnit" became equal to 'box (8 pcs)''|
+		And I close all client application windows
+
+Scenario: _0051192 filling in Package unit when create new item
+		Given I open hyperlink "e1cib/list/Catalog.Items"
+		And I click the button named "FormCreate"
+		And I input "Test1" text in "ENG" field
+		And I click Select button of "Item type" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Jeans'       |
+		And I select current line in "List" table
+		And I click "Save" button		
+		And I click Select button of "Unit" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'pcs' |
+		And I select current line in "List" table
+		And I click Select button of "Package unit" field
+		When I Check the steps for Exception
+			|'And I select current line in "List" table'|
+		And I click "Save" button	
+		And I click Select button of "Package unit" field
+		And "List" table contains lines
+			| 'Description'       |
+			| 'pcs'               |
+		Then the number of "List" table lines is "равно" "1"
+		And I select current line in "List" table
+		And I click "Save" button
+		Then the form attribute named "PackageUnit" became equal to "pcs"
+		And I close all client application windows
+
+Scenario: _0051193 filling in Package unit when create new item (copy)
+		Given I open hyperlink "e1cib/list/Catalog.Items"
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Jeans'       |
+		And in the table "List" I click the button named "ListContextMenuCopy"
+		Then the form attribute named "PackageUnit" became equal to ""
+		And I close all client application windows
+		
 
 Scenario: _005120 set Coat/Jeans specification creation
 # Set is a dimensional grid, set to the type of item

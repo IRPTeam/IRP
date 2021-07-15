@@ -666,29 +666,14 @@ Scenario: _029150 create Retail return receipt for service and product
 		And I go to line in "List" table
 			| 'Number' |
 			| '$$NumberRetailSalesReceipt029130$$'       |	
-		And I click the button named "FormDocumentRetailReturnReceiptGenerateSalesReturn"
+		And I click the button named "FormDocumentRetailReturnReceiptGenarate"
+		And I click "Ok" button	
 		And I click the button named "FormPost"
 		And I delete "$$NumberRetailReturnReceipt029150$$" variable
 		And I delete "$$RetailReturnReceipt029150$$" variable
 		And I save the value of "Number" field as "$$NumberRetailReturnReceipt029150$$"
 		And I save the window as "$$RetailReturnReceipt029150$$"
 		And I click "Registrations report" button
-		And I select "Sales return turnovers" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document contains lines:
-			| '$$RetailReturnReceipt029150$$'      | ''       | ''          | ''       | ''             | ''                             | ''         | ''         | ''        | ''                             | ''                     | '' | '' | '' |
-			| 'Document registrations records'     | ''       | ''          | ''       | ''             | ''                             | ''         | ''         | ''        | ''                             | ''                     | '' | '' | '' |
-			| 'Register  "Sales return turnovers"' | ''       | ''          | ''       | ''             | ''                             | ''         | ''         | ''        | ''                             | ''                     | '' | '' | '' |
-			| ''                                   | 'Period' | 'Resources' | ''       | 'Dimensions'   | ''                             | ''         | ''         | ''        | ''                             | 'Attributes'           | '' | '' | '' |
-			| ''                                   | ''       | 'Quantity'  | 'Amount' | 'Company'      | 'Sales invoice'                | 'Currency' | 'Item key' | 'Row key' | 'Multi currency movement type' | 'Deferred calculation' | '' | '' | '' |
-			| ''                                   | '*'      | '-1'        | '-200'   | 'Main Company' | '$$RetailSalesReceipt029130$$' | 'TRY'      | 'Table'    | '*'       | 'Local currency'               | 'No'                   | '' | '' | '' |
-			| ''                                   | '*'      | '-1'        | '-200'   | 'Main Company' | '$$RetailSalesReceipt029130$$' | 'TRY'      | 'Table'    | '*'       | 'TRY'                          | 'No'                   | '' | '' | '' |
-			| ''                                   | '*'      | '-1'        | '-200'   | 'Main Company' | '$$RetailSalesReceipt029130$$' | 'TRY'      | 'Table'    | '*'       | 'en description is empty'      | 'No'                   | '' | '' | '' |
-			| ''                                   | '*'      | '-1'        | '-50'    | 'Main Company' | '$$RetailSalesReceipt029130$$' | 'TRY'      | 'Interner' | '*'       | 'Local currency'               | 'No'                   | '' | '' | '' |
-			| ''                                   | '*'      | '-1'        | '-50'    | 'Main Company' | '$$RetailSalesReceipt029130$$' | 'TRY'      | 'Interner' | '*'       | 'TRY'                          | 'No'                   | '' | '' | '' |
-			| ''                                   | '*'      | '-1'        | '-50'    | 'Main Company' | '$$RetailSalesReceipt029130$$' | 'TRY'      | 'Interner' | '*'       | 'en description is empty'      | 'No'                   | '' | '' | '' |
-			| ''                                   | '*'      | '-1'        | '-34,24' | 'Main Company' | '$$RetailSalesReceipt029130$$' | 'USD'      | 'Table'    | '*'       | 'Reporting currency'           | 'No'                   | '' | '' | '' |
-			| ''                                   | '*'      | '-1'        | '-8,56'  | 'Main Company' | '$$RetailSalesReceipt029130$$' | 'USD'      | 'Interner' | '*'       | 'Reporting currency'           | 'No'                   | '' | '' | '' |
 		And I select "Retail sales" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:

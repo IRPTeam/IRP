@@ -196,7 +196,7 @@ Function ItemList()
 		|	PurchaseReturnItemList.PurchaseInvoice AS Invoice,
 		|	PurchaseReturnItemList.ReturnReason,
 		|	PurchaseReturnItemList.BusinessUnit AS BusinessUnit,
-		|	PurchaseReturnItemList.RevenueType AS ExpenseType,
+		|	PurchaseReturnItemList.ExpenseType AS ExpenseType,
 		|	PurchaseReturnItemList.AdditionalAnalytic AS AdditionalAnalytic
 		|INTO ItemList
 		|FROM

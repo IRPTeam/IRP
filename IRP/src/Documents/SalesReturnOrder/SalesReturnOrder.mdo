@@ -107,9 +107,9 @@
   <defaultListForm>Document.SalesReturnOrder.Form.ListForm</defaultListForm>
   <defaultChoiceForm>Document.SalesReturnOrder.Form.ChoiceForm</defaultChoiceForm>
   <realTimePosting>Deny</realTimePosting>
-  <registerRecords>AccumulationRegister.T10000B_RowIDMovements</registerRecords>
+  <registerRecords>AccumulationRegister.TM1010B_RowIDMovements</registerRecords>
   <registerRecords>AccumulationRegister.R2010T_SalesOrders</registerRecords>
-  <registerRecords>AccumulationRegister.T10000T_RowIDMovements</registerRecords>
+  <registerRecords>AccumulationRegister.TM1010T_RowIDMovements</registerRecords>
   <registerRecords>AccumulationRegister.R2012B_SalesOrdersInvoiceClosing</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
@@ -529,10 +529,10 @@
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
     <attributes uuid="5c70dfae-b7f5-4566-ad73-119ad7a6bda4">
-      <name>ExpenseType</name>
+      <name>RevenueType</name>
       <synonym>
         <key>en</key>
-        <value>Expense type</value>
+        <value>Revenue type</value>
       </synonym>
       <type>
         <types>CatalogRef.ExpenseAndRevenueTypes</types>

@@ -159,7 +159,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R4036B_IncomingStocksRequested());
 	QueryArray.Add(R5010B_ReconciliationStatement());
 	QueryArray.Add(R1022B_VendorsPaymentPlanning());
-	QueryArray.Add(T1001I_PartnerTransactions());
+	QueryArray.Add(T2011S_PartnerTransactions());
 	QueryArray.Add(R5022T_Expenses());
 	Return QueryArray;
 EndFunction
@@ -398,7 +398,7 @@ Function R1020B_AdvancesToVendors()
 		|	*
 		|INTO R1020B_AdvancesToVendors
 		|FROM
-		|	InformationRegister.T1000I_OffsetOfAdvances AS OffsetOfAdvances
+		|	InformationRegister.T2010S_OffsetOfAdvances AS OffsetOfAdvances
 		|WHERE
 		|	OffsetOfAdvances.Document = &Ref";
 EndFunction
@@ -443,7 +443,7 @@ Function R1021B_VendorsTransactions()
 		|	OffsetOfAdvances.Amount,
 		|	OffsetOfAdvances.Recorder
 		|FROM
-		|	InformationRegister.T1000I_OffsetOfAdvances AS OffsetOfAdvances
+		|	InformationRegister.T2010S_OffsetOfAdvances AS OffsetOfAdvances
 		|WHERE
 		|	OffsetOfAdvances.Document = &Ref";
 EndFunction
@@ -490,12 +490,12 @@ Function R5012B_VendorsAging()
 		|	OffsetOfAging.Amount,
 		|	OffsetOfAging.Recorder
 		|FROM
-		|	InformationRegister.T1003I_OffsetOfAging AS OffsetOfAging
+		|	InformationRegister.T2013S_OffsetOfAging AS OffsetOfAging
 		|WHERE
 		|	OffsetOfAging.Document = &Ref";
 EndFunction
 
-Function T1001I_PartnerTransactions()
+Function T2011S_PartnerTransactions()
 	Return
 		"SELECT
 		|	ItemList.Period,
@@ -508,7 +508,7 @@ Function T1001I_PartnerTransactions()
 		|	TRUE AS IsVendorTransaction,
 		|	SUM(ItemList.Amount) AS Amount,
 		|	ItemList.Key
-		|INTO T1001I_PartnerTransactions
+		|INTO T2011S_PartnerTransactions
 		|FROM
 		|	ItemList AS ItemList
 		|WHERE

@@ -2178,7 +2178,7 @@
           </extInfo>
         </items>
         <items xsi:type="form:FormField">
-          <name>ItemListRevenueType</name>
+          <name>ItemListExpenseType</name>
           <id>399</id>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -2187,11 +2187,11 @@
           </userVisible>
           <dataPath xsi:type="form:MultiLanguageDataPath">
             <paths xsi:type="form:DataPath">
-              <segments>Object.ItemList.RevenueType</segments>
+              <segments>Object.ItemList.ExpenseType</segments>
             </paths>
           </dataPath>
           <extendedTooltip>
-            <name>ItemListRevenueTypeExtendedTooltip</name>
+            <name>ItemListExpenseTypeExtendedTooltip</name>
             <id>401</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -2206,7 +2206,7 @@
             </extInfo>
           </extendedTooltip>
           <contextMenu>
-            <name>ItemListRevenueTypeContextMenu</name>
+            <name>ItemListExpenseTypeContextMenu</name>
             <id>400</id>
             <visible>true</visible>
             <enabled>true</enabled>

@@ -196,7 +196,7 @@ Function ItemList()
 		|	ItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS IsService,
 		|	ItemList.ReturnReason,
 		|	ItemList.BusinessUnit AS BusinessUnit,
-		|	ItemList.ExpenseType AS RevenueType,
+		|	ItemList.RevenueType AS RevenueType,
 		|	ItemList.AdditionalAnalytic AS AdditionalAnalytic
 		|INTO ItemList
 		|FROM

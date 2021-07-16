@@ -5279,7 +5279,7 @@
 		</right>
 	</object>
 	<object>
-		<name>InformationRegister.T1002I_PartnerAdvances</name>
+		<name>InformationRegister.T2012S_PartnerAdvances</name>
 		<right>
 			<name>Read</name>
 			<value>true</value>
@@ -5312,7 +5312,7 @@
 		</right>
 	</object>
 	<object>
-		<name>InformationRegister.T1001I_PartnerTransactions</name>
+		<name>InformationRegister.T2011S_PartnerTransactions</name>
 		<right>
 			<name>Read</name>
 			<value>true</value>
@@ -5323,7 +5323,7 @@
 		</right>
 	</object>
 	<object>
-		<name>AccumulationRegister.T10000T_RowIDMovements</name>
+		<name>AccumulationRegister.TM1010T_RowIDMovements</name>
 		<right>
 			<name>Read</name>
 			<value>true</value>
@@ -5345,7 +5345,7 @@
 		</right>
 	</object>
 	<object>
-		<name>InformationRegister.T1000I_OffsetOfAdvances</name>
+		<name>InformationRegister.T2010S_OffsetOfAdvances</name>
 		<right>
 			<name>Read</name>
 			<value>true</value>
@@ -5367,7 +5367,7 @@
 		</right>
 	</object>
 	<object>
-		<name>InformationRegister.T1003I_OffsetOfAging</name>
+		<name>InformationRegister.T2013S_OffsetOfAging</name>
 		<right>
 			<name>Read</name>
 			<value>true</value>
@@ -5411,7 +5411,7 @@
 		</right>
 	</object>
 	<object>
-		<name>AccumulationRegister.T10000B_RowIDMovements</name>
+		<name>AccumulationRegister.TM1010B_RowIDMovements</name>
 		<right>
 			<name>Read</name>
 			<value>true</value>

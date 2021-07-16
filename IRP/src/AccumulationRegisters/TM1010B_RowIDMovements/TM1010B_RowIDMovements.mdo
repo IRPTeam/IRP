@@ -8,10 +8,10 @@
     <recordKeyType typeId="968a13d7-0317-4f9f-b135-7f0a3dcb5add" valueTypeId="dbacb6e6-acb5-46f3-8f8a-9ac15d2fca18"/>
     <recordType typeId="888fa803-d20a-47e9-91ca-fcad7d8e4bdd" valueTypeId="efff49d8-40fe-4bee-8db1-edf72f7eeac8"/>
   </producedTypes>
-  <name>T10000B_RowIDMovements</name>
+  <name>TM1010B_RowIDMovements</name>
   <synonym>
     <key>en</key>
-    <value>T10000B Row ID movements</value>
+    <value>TM1010B Row ID movements</value>
   </synonym>
   <useStandardCommands>true</useStandardCommands>
   <standardAttributes>

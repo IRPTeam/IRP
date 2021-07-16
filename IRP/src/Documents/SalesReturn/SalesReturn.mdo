@@ -119,8 +119,8 @@
   <registerRecords>AccumulationRegister.R2040B_TaxesIncoming</registerRecords>
   <registerRecords>AccumulationRegister.R2021B_CustomersTransactions</registerRecords>
   <registerRecords>AccumulationRegister.R5010B_ReconciliationStatement</registerRecords>
-  <registerRecords>AccumulationRegister.T10000B_RowIDMovements</registerRecords>
-  <registerRecords>AccumulationRegister.T10000T_RowIDMovements</registerRecords>
+  <registerRecords>AccumulationRegister.TM1010B_RowIDMovements</registerRecords>
+  <registerRecords>AccumulationRegister.TM1010T_RowIDMovements</registerRecords>
   <registerRecords>AccumulationRegister.R2020B_AdvancesFromCustomers</registerRecords>
   <registerRecords>AccumulationRegister.R5021T_Revenues</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
@@ -581,10 +581,10 @@
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
     <attributes uuid="0cb83502-c0b3-4f36-8edd-c203b26e455e">
-      <name>ExpenseType</name>
+      <name>RevenueType</name>
       <synonym>
         <key>en</key>
-        <value>Expense type</value>
+        <value>Revenue type</value>
       </synonym>
       <type>
         <types>CatalogRef.ExpenseAndRevenueTypes</types>

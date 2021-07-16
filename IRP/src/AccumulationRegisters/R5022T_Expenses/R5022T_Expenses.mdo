@@ -107,7 +107,7 @@
       <value>Additional analytic</value>
     </synonym>
     <type>
-      <types>CatalogRef.AddAttributeAndPropertyValues</types>
+      <types>Characteristic.AddAttributeAndProperty</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

@@ -1419,6 +1419,8 @@ Function ExtractData_FromSI(BasisesTable, DataReceiver)
 		|	ItemList.DontCalculateRow AS DontCalculateRow,
 		|	ItemList.BusinessUnit AS BusinessUnit,
 		|	ItemList.RevenueType AS RevenueType,
+		|	ItemList.RevenueType AS ExpenseType,
+		|	ItemList.AdditionalAnalytic AS AdditionalAnalytic,
 		|	ItemList.Detail AS Detail,
 		|	ItemList.Store.UseShipmentConfirmation
 		|	AND NOT ItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS UseShipmentConfirmation,
@@ -1918,6 +1920,8 @@ Function ExtractData_FromPI(BasisesTable, DataReceiver)
 		|	ItemList.DontCalculateRow AS DontCalculateRow,
 		|	ItemList.BusinessUnit AS BusinessUnit,
 		|	ItemList.ExpenseType AS ExpenseType,
+		|	ItemList.ExpenseType AS RevenueType,
+		|	ItemList.AdditionalAnalytic AS AdditionalAnalytic,
 		|	ItemList.Detail AS Detail,
 		|	ItemList.Store.UseGoodsReceipt
 		|	AND NOT ItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS UseGoodsReceipt,
@@ -6103,7 +6107,8 @@ Function GetColumnNames_ItemList()
 	|PurchaseReturnOrder,
 	|SalesReturn,
 	|SalesReturnOrder,
-	|RetailSalesReceipt";
+	|RetailSalesReceipt,
+	|AdditionalAnalytic";
 EndFunction
 
 Function GetEmptyTable_ItemList()

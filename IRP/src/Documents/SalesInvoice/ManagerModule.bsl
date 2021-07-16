@@ -142,6 +142,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R5010B_ReconciliationStatement());
 	QueryArray.Add(T1001I_PartnerTransactions());
 	QueryArray.Add(R2022B_CustomersPaymentPlanning());
+	QueryArray.Add(R5021T_Revenues());
 	Return QueryArray;
 EndFunction
 
@@ -832,5 +833,17 @@ Function R2022B_CustomersPaymentPlanning()
 		|	SalesInvoicePaymentTerms.Ref.Agreement,
 		|	VALUE(AccumulationRecordType.Receipt)";
 EndFunction
+
+Function R5021T_Revenues()
+	Return
+		"SELECT
+		|	*,
+		|	ItemList.NetAmount AS Amount
+		|INTO R5021T_Revenues
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	TRUE";
+EndFunction	
 
 #EndRegion

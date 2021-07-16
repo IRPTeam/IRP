@@ -77,21 +77,21 @@ Procedure FillTransactions(Object, AddInfo = Undefined) Export
 	Query = New Query;
 	Query.Text =
 		"SELECT
-		|	RetailCash.PaymentType,
-		|	RetailCash.Account,
-		|	SUM(RetailCash.Amount) AS Amount,
-		|	SUM(RetailCash.Commission) AS Commission,
-		|	RetailCash.Account.Currency AS Currency
+		|	R3050B_RetailCash.PaymentType,
+		|	R3050B_RetailCash.Account,
+		|	SUM(R3050B_RetailCash.Amount) AS Amount,
+		|	SUM(R3050B_RetailCash.Commission) AS Commission,
+		|	R3050B_RetailCash.Account.Currency AS Currency
 		|FROM
-		|	AccumulationRegister.RetailCash AS RetailCash
+		|	AccumulationRegister.R3050B_RetailCash AS R3050B_RetailCash
 		|WHERE
-		|	RetailCash.Company = &Company
-		|	AND RetailCash.BusinessUnit = &BusinessUnit
-		|	AND RetailCash.Period BETWEEN &BegOfPeriod AND &EndOfPeriod
+		|	R3050B_RetailCash.Company = &Company
+		|	AND R3050B_RetailCash.BusinessUnit = &BusinessUnit
+		|	AND R3050B_RetailCash.Period BETWEEN &BegOfPeriod AND &EndOfPeriod
 		|GROUP BY
-		|	RetailCash.PaymentType,
-		|	RetailCash.Account,
-		|	RetailCash.Account.Currency";
+		|	R3050B_RetailCash.PaymentType,
+		|	R3050B_RetailCash.Account,
+		|	R3050B_RetailCash.Account.Currency";
 	
 	Query.SetParameter("BegOfPeriod", Object.BegOfPeriod);
 	Query.SetParameter("EndOfPeriod", Object.EndOfPeriod);

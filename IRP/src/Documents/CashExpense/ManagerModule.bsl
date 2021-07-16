@@ -21,6 +21,7 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	QueryArray = GetQueryTextsMasterTables();
 	PostingServer.SetRegisters(Tables, Ref);
 	Tables.R3010B_CashOnHand.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	Tables.R5022T_Expenses.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
 #EndRegion
 EndProcedure
@@ -83,6 +84,7 @@ EndFunction
 Function GetQueryTextsMasterTables()
 	QueryArray = New Array;
 	QueryArray.Add(R3010B_CashOnHand());
+	QueryArray.Add(R5022T_Expenses());
 	Return QueryArray;
 EndFunction
 
@@ -95,7 +97,9 @@ Function PaymentList()
 		|	PaymentList.Currency AS Currency,
 		|	PaymentList.ExpenseType AS ExpenseType,
 		|	PaymentList.NetAmount AS Amount,
-		|	PaymentList.Key
+		|	PaymentList.Key,
+		|	PaymentList.BusinessUnit,
+		|	PaymentList.AdditionalAnalytic
 		|INTO PaymentList
 		|FROM
 		|	Document.CashExpense.PaymentList AS PaymentList
@@ -109,6 +113,17 @@ Function R3010B_CashOnHand()
 		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
 		|	*
 		|INTO R3010B_CashOnHand
+		|FROM
+		|	PaymentList AS PaymentList
+		|WHERE
+		|	TRUE";
+EndFunction
+
+Function R5022T_Expenses()
+	Return
+		"SELECT
+		|	*
+		|INTO R5022T_Expenses
 		|FROM
 		|	PaymentList AS PaymentList
 		|WHERE

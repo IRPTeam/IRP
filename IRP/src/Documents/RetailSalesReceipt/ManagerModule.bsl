@@ -1,26 +1,7 @@
 #Region Posting
 
 Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	
-	AccReg = Metadata.AccumulationRegisters;
 	Tables = New Structure();
-	Tables.Insert("RetailSales"        , PostingServer.CreateTable(AccReg.RetailSales));
-	Tables.Insert("RetailCash"         , PostingServer.CreateTable(AccReg.RetailCash));
-		
-	QueryRetailSales = New Query();
-	QueryRetailSales.Text = GetQueryText_RetailSalesReceipt_RetailSales();
-	QueryRetailSales.SetParameter("Ref", Ref);
-	QueryResultRetailSales = QueryRetailSales.Execute();
-	QueryTableRetailSales = QueryResultRetailSales.Unload();
-	
-	QueryRetailCash = New Query();
-	QueryRetailCash.Text = GetQueryText_RetailSalesReceipt_RetailCash();
-	QueryRetailCash.SetParameter("Ref", Ref);
-	QueryResultRetailCash = QueryRetailCash.Execute();
-	QueryTableRetailCash = QueryResultRetailCash.Unload();
-	
-	Tables.RetailSales = QueryTableRetailSales;
-	Tables.RetailCash = QueryTableRetailCash;
 	
 #Region NewRegistersPosting		
 	QueryArray = GetQueryTextsSecondaryTables();
@@ -28,120 +9,6 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 #EndRegion	
 	
 	Return Tables;
-EndFunction
-
-Function GetQueryText_RetailSalesReceipt_RetailCash()
-	Return 
-	"SELECT
-	|	RetailSalesReceiptPayments.Ref.Company,
-	|	RetailSalesReceiptPayments.Ref.BusinessUnit,
-	|	RetailSalesReceiptPayments.Ref.Currency,
-	|	RetailSalesReceiptPayments.Account,
-	|	SUM(RetailSalesReceiptPayments.Amount) AS Amount,
-	|	RetailSalesReceiptPayments.Ref.Date AS Period,
-	|	RetailSalesReceiptPayments.PaymentType,
-	|	RetailSalesReceiptPayments.PaymentTerminal,
-	|	RetailSalesReceiptPayments.BankTerm,
-	|	RetailSalesReceiptPayments.Percent,
-	|	SUM(RetailSalesReceiptPayments.Commission) AS Commission
-	|FROM
-	|	Document.RetailSalesReceipt.Payments AS RetailSalesReceiptPayments
-	|WHERE
-	|	RetailSalesReceiptPayments.Ref = &Ref
-	|GROUP BY
-	|	RetailSalesReceiptPayments.Ref.Company,
-	|	RetailSalesReceiptPayments.Ref.BusinessUnit,
-	|	RetailSalesReceiptPayments.Ref.Currency,
-	|	RetailSalesReceiptPayments.Account,
-	|	RetailSalesReceiptPayments.Ref.Date,
-	|	RetailSalesReceiptPayments.PaymentType,
-	|	RetailSalesReceiptPayments.PaymentTerminal,
-	|	RetailSalesReceiptPayments.BankTerm,
-	|	RetailSalesReceiptPayments.Percent";
-EndFunction
-
-Function GetQueryText_RetailSalesReceipt_RetailSales()
-	Return 
-	"SELECT
-	|	RetailSalesReceiptItemList.Ref.Company AS Company,
-	|	RetailSalesReceiptItemList.Ref.BusinessUnit AS BusinessUnit,
-	|	RetailSalesReceiptItemList.ItemKey AS ItemKey,
-	|	SUM(RetailSalesReceiptItemList.QuantityInBaseUnit) AS Quantity,
-	|	SUM(ISNULL(RetailSalesReceiptSerialLotNumbers.Quantity, 0)) AS QuantityBySerialLtNumbers,
-	|	RetailSalesReceiptItemList.Ref.Date AS Period,
-	|	RetailSalesReceiptItemList.Ref AS RetailSalesReceipt,
-	|	SUM(RetailSalesReceiptItemList.TotalAmount) AS Amount,
-	|	SUM(RetailSalesReceiptItemList.NetAmount) AS NetAmount,
-	|	SUM(RetailSalesReceiptItemList.OffersAmount) AS OffersAmount,
-	|	RetailSalesReceiptItemList.Key AS RowKey,
-	|	RetailSalesReceiptSerialLotNumbers.SerialLotNumber AS SerialLotNumber,
-	|	RetailSalesReceiptItemList.Store
-	|INTO tmp
-	|FROM
-	|	Document.RetailSalesReceipt.ItemList AS RetailSalesReceiptItemList
-	|		LEFT JOIN Document.RetailSalesReceipt.SerialLotNumbers AS RetailSalesReceiptSerialLotNumbers
-	|		ON RetailSalesReceiptItemList.Key = RetailSalesReceiptSerialLotNumbers.Key
-	|		AND RetailSalesReceiptItemList.Ref = RetailSalesReceiptSerialLotNumbers.Ref
-	|		AND RetailSalesReceiptItemList.Ref = &Ref
-	|		AND RetailSalesReceiptSerialLotNumbers.Ref = &Ref
-	|WHERE
-	|	RetailSalesReceiptItemList.Ref = &Ref
-	|GROUP BY
-	|	RetailSalesReceiptItemList.Ref.Company,
-	|	RetailSalesReceiptItemList.Ref.BusinessUnit,
-	|	RetailSalesReceiptItemList.ItemKey,
-	|	RetailSalesReceiptItemList.Ref.Date,
-	|	RetailSalesReceiptItemList.Ref,
-	|	RetailSalesReceiptItemList.Key,
-	|	RetailSalesReceiptSerialLotNumbers.SerialLotNumber,
-	|	RetailSalesReceiptItemList.Store
-	|;
-	|
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	tmp.Company AS Company,
-	|	tmp.BusinessUnit AS BusinessUnit,
-	|	tmp.ItemKey AS ItemKey,
-	|	CASE
-	|		WHEN tmp.QuantityBySerialLtNumbers = 0
-	|			THEN tmp.Quantity
-	|		ELSE tmp.QuantityBySerialLtNumbers
-	|	END AS Quantity,
-	|	tmp.Period AS Period,
-	|	tmp.RetailSalesReceipt AS RetailSalesReceipt,
-	|	tmp.RowKey AS RowKey,
-	|	tmp.SerialLotNumber AS SerialLotNumber,
-	|	CASE
-	|		WHEN tmp.QuantityBySerialLtNumbers <> 0
-	|			THEN CASE
-	|				WHEN tmp.Quantity = 0
-	|					THEN 0
-	|				ELSE tmp.Amount / tmp.Quantity * tmp.QuantityBySerialLtNumbers
-	|			END
-	|		ELSE tmp.Amount
-	|	END AS Amount,
-	|	CASE
-	|		WHEN tmp.QuantityBySerialLtNumbers <> 0
-	|			THEN CASE
-	|				WHEN tmp.Quantity = 0
-	|					THEN 0
-	|				ELSE tmp.NetAmount / tmp.Quantity * tmp.QuantityBySerialLtNumbers
-	|			END
-	|		ELSE tmp.NetAmount
-	|	END AS NetAmount,
-	|	CASE
-	|		WHEN tmp.QuantityBySerialLtNumbers <> 0
-	|			THEN CASE
-	|				WHEN tmp.Quantity = 0
-	|					THEN 0
-	|				ELSE tmp.OffersAmount / tmp.Quantity * tmp.QuantityBySerialLtNumbers
-	|			END
-	|		ELSE tmp.OffersAmount
-	|	END AS OffersAmount,
-	|	tmp.Store
-	|FROM
-	|	tmp AS tmp";
 EndFunction
 
 Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
@@ -161,14 +28,6 @@ EndProcedure
 Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 	PostingDataTables = New Map();
 	
-	// RetailSales
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.RetailSales,
-		New Structure("RecordSet", Parameters.DocumentDataTables.RetailSales));
-		
-	// RetailCash
-	PostingDataTables.Insert(Parameters.Object.RegisterRecords.RetailCash,
-		New Structure("RecordSet", Parameters.DocumentDataTables.RetailCash));
-
 #Region NewRegistersPosting
 	PostingServer.SetPostingDataTables(PostingDataTables, Parameters);
 #EndRegion	
@@ -243,6 +102,7 @@ Function GetQueryTextsSecondaryTables()
 	QueryArray = New Array;
 	QueryArray.Add(ItemList());
 	QueryArray.Add(Payments());
+	QueryArray.Add(RetailSales());
 	QueryArray.Add(PostingServer.Exists_R4011B_FreeStocks());
 	QueryArray.Add(PostingServer.Exists_R4010B_ActualStocks());	
 	Return QueryArray;
@@ -253,6 +113,8 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R4011B_FreeStocks());
 	QueryArray.Add(R4010B_ActualStocks());	
 	QueryArray.Add(R3010B_CashOnHand());
+	QueryArray.Add(R3050B_RetailCash());
+	QueryArray.Add(R2050B_RetailSales());
 	Return QueryArray;
 EndFunction
 
@@ -298,14 +160,104 @@ Function Payments()
 	"SELECT
 	|	Payments.Ref.Date AS Period,
 	|	Payments.Ref.Company AS Company,
+	|	Payments.Ref.BusinessUnit AS BusinessUnit,
 	|	Payments.Account AS Account,
 	|	Payments.Ref.Currency AS Currency,
-	|	Payments.Amount AS Amount
+	|	Payments.Amount AS Amount,
+	|	Payments.PaymentType AS PaymentType,
+	|	Payments.PaymentTerminal AS PaymentTerminal,
+	|	Payments.BankTerm AS BankTerm,
+	|	Payments.Percent AS Percent,
+	|	Payments.Commission AS Commission
 	|INTO Payments
 	|FROM
 	|	Document.RetailSalesReceipt.Payments AS Payments
 	|WHERE
 	|	Payments.Ref = &Ref";
+EndFunction
+
+Function RetailSales()
+	Return 
+	"SELECT
+	|	RetailSalesReceiptItemList.Ref.Company AS Company,
+	|	RetailSalesReceiptItemList.Ref.BusinessUnit AS BusinessUnit,
+	|	RetailSalesReceiptItemList.ItemKey AS ItemKey,
+	|	SUM(RetailSalesReceiptItemList.QuantityInBaseUnit) AS Quantity,
+	|	SUM(ISNULL(RetailSalesReceiptSerialLotNumbers.Quantity, 0)) AS QuantityBySerialLtNumbers,
+	|	RetailSalesReceiptItemList.Ref.Date AS Period,
+	|	RetailSalesReceiptItemList.Ref AS RetailSalesReceipt,
+	|	SUM(RetailSalesReceiptItemList.TotalAmount) AS Amount,
+	|	SUM(RetailSalesReceiptItemList.NetAmount) AS NetAmount,
+	|	SUM(RetailSalesReceiptItemList.OffersAmount) AS OffersAmount,
+	|	RetailSalesReceiptItemList.Key AS RowKey,
+	|	RetailSalesReceiptSerialLotNumbers.SerialLotNumber AS SerialLotNumber,
+	|	RetailSalesReceiptItemList.Store
+	|INTO tmpRetailSales
+	|FROM
+	|	Document.RetailSalesReceipt.ItemList AS RetailSalesReceiptItemList
+	|		LEFT JOIN Document.RetailSalesReceipt.SerialLotNumbers AS RetailSalesReceiptSerialLotNumbers
+	|		ON RetailSalesReceiptItemList.Key = RetailSalesReceiptSerialLotNumbers.Key
+	|		AND RetailSalesReceiptItemList.Ref = RetailSalesReceiptSerialLotNumbers.Ref
+	|		AND RetailSalesReceiptItemList.Ref = &Ref
+	|		AND RetailSalesReceiptSerialLotNumbers.Ref = &Ref
+	|WHERE
+	|	RetailSalesReceiptItemList.Ref = &Ref
+	|GROUP BY
+	|	RetailSalesReceiptItemList.Ref.Company,
+	|	RetailSalesReceiptItemList.Ref.BusinessUnit,
+	|	RetailSalesReceiptItemList.ItemKey,
+	|	RetailSalesReceiptItemList.Ref.Date,
+	|	RetailSalesReceiptItemList.Ref,
+	|	RetailSalesReceiptItemList.Key,
+	|	RetailSalesReceiptSerialLotNumbers.SerialLotNumber,
+	|	RetailSalesReceiptItemList.Store
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	tmpRetailSales.Company AS Company,
+	|	tmpRetailSales.BusinessUnit AS BusinessUnit,
+	|	tmpRetailSales.ItemKey AS ItemKey,
+	|	CASE
+	|		WHEN tmpRetailSales.QuantityBySerialLtNumbers = 0
+	|			THEN tmpRetailSales.Quantity
+	|		ELSE tmpRetailSales.QuantityBySerialLtNumbers
+	|	END AS Quantity,
+	|	tmpRetailSales.Period AS Period,
+	|	tmpRetailSales.RetailSalesReceipt AS RetailSalesReceipt,
+	|	tmpRetailSales.RowKey AS RowKey,
+	|	tmpRetailSales.SerialLotNumber AS SerialLotNumber,
+	|	CASE
+	|		WHEN tmpRetailSales.QuantityBySerialLtNumbers <> 0
+	|			THEN CASE
+	|				WHEN tmpRetailSales.Quantity = 0
+	|					THEN 0
+	|				ELSE tmpRetailSales.Amount / tmpRetailSales.Quantity * tmpRetailSales.QuantityBySerialLtNumbers
+	|			END
+	|		ELSE tmpRetailSales.Amount
+	|	END AS Amount,
+	|	CASE
+	|		WHEN tmpRetailSales.QuantityBySerialLtNumbers <> 0
+	|			THEN CASE
+	|				WHEN tmpRetailSales.Quantity = 0
+	|					THEN 0
+	|				ELSE tmpRetailSales.NetAmount / tmpRetailSales.Quantity * tmpRetailSales.QuantityBySerialLtNumbers
+	|			END
+	|		ELSE tmpRetailSales.NetAmount
+	|	END AS NetAmount,
+	|	CASE
+	|		WHEN tmpRetailSales.QuantityBySerialLtNumbers <> 0
+	|			THEN CASE
+	|				WHEN tmpRetailSales.Quantity = 0
+	|					THEN 0
+	|				ELSE tmpRetailSales.OffersAmount / tmpRetailSales.Quantity * tmpRetailSales.QuantityBySerialLtNumbers
+	|			END
+	|		ELSE tmpRetailSales.OffersAmount
+	|	END AS OffersAmount,
+	|	tmpRetailSales.Store
+	|INTO RetailSales
+	|FROM
+	|	tmpRetailSales AS tmpRetailSales";
 EndFunction
 
 Function R3010B_CashOnHand()
@@ -344,5 +296,29 @@ Function R4010B_ActualStocks()
 	|WHERE
 	|	NOT ItemList.IsService";	
 EndFunction	
+
+Function R3050B_RetailCash()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	*
+		|INTO R3050B_RetailCash
+		|FROM
+		|	Payments AS Payments
+		|WHERE
+		|	TRUE";
+EndFunction
+
+Function R2050B_RetailSales()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	*
+		|INTO R2050B_RetailSales
+		|FROM
+		|	RetailSales AS RetailSales
+		|WHERE
+		|	TRUE";
+EndFunction
 
 #EndRegion

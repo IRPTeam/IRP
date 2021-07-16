@@ -160,6 +160,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R5010B_ReconciliationStatement());
 	QueryArray.Add(R1022B_VendorsPaymentPlanning());
 	QueryArray.Add(T1001I_PartnerTransactions());
+	QueryArray.Add(R5022T_Expenses());
 	Return QueryArray;
 EndFunction
 
@@ -823,6 +824,18 @@ Function Exists_R4036B_IncomingStocksRequested()
 		|	AccumulationRegister.R4036B_IncomingStocksRequested AS R4036B_IncomingStocksRequested
 		|WHERE
 		|	R4036B_IncomingStocksRequested.Recorder = &Ref";
+EndFunction
+
+Function R5022T_Expenses()
+	Return
+		"SELECT
+		|	*,
+		|	ItemList.NetAmount AS Amount
+		|INTO R5022T_Expenses
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	ItemList.IsService";
 EndFunction
 
 #EndRegion

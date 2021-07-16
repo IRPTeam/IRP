@@ -88,6 +88,7 @@
   <registerRecords>AccumulationRegister.T10000T_RowIDMovements</registerRecords>
   <registerRecords>InformationRegister.T1001I_PartnerTransactions</registerRecords>
   <registerRecords>AccumulationRegister.R2022B_CustomersPaymentPlanning</registerRecords>
+  <registerRecords>AccumulationRegister.R5021T_Revenues</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>

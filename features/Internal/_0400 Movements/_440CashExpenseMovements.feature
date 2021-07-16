@@ -98,6 +98,28 @@ Scenario: _044001 check Cash expense movements by the Register "R3010 Cash on ha
 	And I close all client application windows
 
 
+
+Scenario: _044002 check Cash expense movements by the Register "R5022 Expenses"
+	* Select Cash expense
+		Given I open hyperlink "e1cib/list/Document.CashExpense"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '1' |
+	* Check movements by the Register  "R5022 Expenses" 
+		And I click "Registrations report" button
+		And I select "R5022 Expenses" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Cash expense 1 dated 07.09.2020 19:25:17' | ''                    | ''          | ''             | ''              | ''             | ''         | ''         | ''                    | ''                             |
+			| 'Document registrations records'           | ''                    | ''          | ''             | ''              | ''             | ''         | ''         | ''                    | ''                             |
+			| 'Register  "R5022 Expenses"'               | ''                    | ''          | ''             | ''              | ''             | ''         | ''         | ''                    | ''                             |
+			| ''                                         | 'Period'              | 'Resources' | 'Dimensions'   | ''              | ''             | ''         | ''         | ''                    | ''                             |
+			| ''                                         | ''                    | 'Amount'    | 'Company'      | 'Business unit' | 'Expense type' | 'Item key' | 'Currency' | 'Additional analytic' | 'Multi currency movement type' |
+			| ''                                         | '07.09.2020 19:25:17' | '100'       | 'Main Company' | 'Front office'  | 'Fuel'         | ''         | 'TRY'      | ''                    | 'Local currency'               |
+			| ''                                         | '07.09.2020 19:25:17' | '100'       | 'Main Company' | 'Front office'  | 'Fuel'         | ''         | 'TRY'      | ''                    | 'en description is empty'      |
+			| ''                                         | '07.09.2020 19:25:17' | '584'       | 'Main Company' | 'Front office'  | 'Fuel'         | ''         | 'USD'      | ''                    | 'Reporting currency'           |
+	And I close all client application windows
+
 Scenario: _044030 Cash expense clear posting/mark for deletion
 	And I close all client application windows
 	* Select Cash expense

@@ -498,32 +498,6 @@ Scenario: _0401063 check Purchase invoice movements by the Register  "R1031 Rece
 		And I close all client application windows
 		
 
-// Scenario: _0401064 check Purchase invoice movements by the Register  "R1021 Vendors transactions" (with advance)
-// 	* Select Purchase invoice
-// 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
-// 		And I go to line in "List" table
-// 			| 'Number'  |
-// 			| '117' |
-// 	* Check movements by the Register  "R1021 Vendors transactions"
-// 		And I click "Registrations report" button
-// 		And I select "R1021 Vendors transactions" exact value from "Register" drop-down list
-// 		And I click "Generate report" button
-// 		Then "ResultTable" spreadsheet document is equal
-// 			| 'Purchase invoice 117 dated 12.02.2021 15:12:15' | ''            | ''                    | ''          | ''             | ''                             | ''         | ''                  | ''          | ''                   | ''                                               | ''                     |
-// 			| 'Document registrations records'                 | ''            | ''                    | ''          | ''             | ''                             | ''         | ''                  | ''          | ''                   | ''                                               | ''                     |
-// 			| 'Register  "R1021 Vendors transactions"'         | ''            | ''                    | ''          | ''             | ''                             | ''         | ''                  | ''          | ''                   | ''                                               | ''                     |
-// 			| ''                                               | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                             | ''         | ''                  | ''          | ''                   | ''                                               | 'Attributes'           |
-// 			| ''                                               | ''            | ''                    | 'Amount'    | 'Company'      | 'Multi currency movement type' | 'Currency' | 'Legal name'        | 'Partner'   | 'Agreement'          | 'Basis'                                          | 'Deferred calculation' |
-// 			| ''                                               | 'Receipt'     | '12.02.2021 15:12:15' | '765,26'    | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Company Ferron BP' | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Purchase invoice 117 dated 12.02.2021 15:12:15' | 'No'                   |
-// 			| ''                                               | 'Receipt'     | '12.02.2021 15:12:15' | '4 470'     | 'Main Company' | 'Local currency'               | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Purchase invoice 117 dated 12.02.2021 15:12:15' | 'No'                   |
-// 			| ''                                               | 'Receipt'     | '12.02.2021 15:12:15' | '4 470'     | 'Main Company' | 'TRY'                          | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Purchase invoice 117 dated 12.02.2021 15:12:15' | 'No'                   |
-// 			| ''                                               | 'Receipt'     | '12.02.2021 15:12:15' | '4 470'     | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Purchase invoice 117 dated 12.02.2021 15:12:15' | 'No'                   |
-// 			| ''                                               | 'Expense'     | '12.02.2021 15:12:15' | '342,4'     | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Company Ferron BP' | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Purchase invoice 117 dated 12.02.2021 15:12:15' | 'No'                   |
-// 			| ''                                               | 'Expense'     | '12.02.2021 15:12:15' | '2 000'     | 'Main Company' | 'Local currency'               | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Purchase invoice 117 dated 12.02.2021 15:12:15' | 'No'                   |
-// 			| ''                                               | 'Expense'     | '12.02.2021 15:12:15' | '2 000'     | 'Main Company' | 'TRY'                          | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Purchase invoice 117 dated 12.02.2021 15:12:15' | 'No'                   |
-// 			| ''                                               | 'Expense'     | '12.02.2021 15:12:15' | '2 000'     | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Purchase invoice 117 dated 12.02.2021 15:12:15' | 'No'                   |
-
-// 		And I close all client application windows
 
 Scenario: _0401066 check Purchase invoice movements by the Register  "R4017 Procurement of internal supply requests" (ISR exists)
 	* Select Purchase invoice
@@ -602,6 +576,28 @@ Scenario: _0401069 check Purchase invoice movements by the Register  "R4014 Seri
 			| ''                                               | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''         | ''                  |
 			| ''                                               | ''            | ''                    | 'Quantity'  | 'Company'      | 'Item key' | 'Serial lot number' |
 			| ''                                               | 'Receipt'     | '12.02.2021 15:12:15' | '10'        | 'Main Company' | 'S/Yellow' | '0512'              |
+		And I close all client application windows
+
+Scenario: _0401070 check Purchase invoice movements by the Register  "R5022 Expenses" (PO-PI)
+	* Select Purchase invoice
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '117' |
+	* Check movements by the Register  "R5022 Expenses"
+		And I click "Registrations report" button
+		And I select "R5022 Expenses" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Purchase invoice 117 dated 12.02.2021 15:12:15' | ''                    | ''          | ''             | ''              | ''             | ''         | ''         | ''                    | ''                             |
+			| 'Document registrations records'                 | ''                    | ''          | ''             | ''              | ''             | ''         | ''         | ''                    | ''                             |
+			| 'Register  "R5022 Expenses"'                     | ''                    | ''          | ''             | ''              | ''             | ''         | ''         | ''                    | ''                             |
+			| ''                                               | 'Period'              | 'Resources' | 'Dimensions'   | ''              | ''             | ''         | ''         | ''                    | ''                             |
+			| ''                                               | ''                    | 'Amount'    | 'Company'      | 'Business unit' | 'Expense type' | 'Item key' | 'Currency' | 'Additional analytic' | 'Multi currency movement type' |
+			| ''                                               | '12.02.2021 15:12:15' | '39,17'     | 'Main Company' | 'Front office'  | 'Expense'      | 'Interner' | 'USD'      | ''                    | 'Reporting currency'           |
+			| ''                                               | '12.02.2021 15:12:15' | '228,81'    | 'Main Company' | 'Front office'  | 'Expense'      | 'Interner' | 'TRY'      | ''                    | 'Local currency'               |
+			| ''                                               | '12.02.2021 15:12:15' | '228,81'    | 'Main Company' | 'Front office'  | 'Expense'      | 'Interner' | 'TRY'      | ''                    | 'TRY'                          |
+			| ''                                               | '12.02.2021 15:12:15' | '228,81'    | 'Main Company' | 'Front office'  | 'Expense'      | 'Interner' | 'TRY'      | ''                    | 'en description is empty'      |
 		And I close all client application windows
 
 //PI (without GR)

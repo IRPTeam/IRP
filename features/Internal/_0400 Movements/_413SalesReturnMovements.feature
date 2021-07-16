@@ -324,6 +324,37 @@ Scenario: _041308 check Sales return movements by the Register  "R4014 Serial lo
 			| ''                                           | 'Receipt'     | '12.03.2021 09:49:05' | '10'        | 'Main Company' | '36/Red'   | '0512'              |		
 	And I close all client application windows
 
+Scenario: _041309 check Sales return movements by the Register  "R5021 Revenues"
+	* Select Sales return
+		Given I open hyperlink "e1cib/list/Document.SalesReturn"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '101' |
+	* Check movements by the Register  "R5021 Revenues"
+		And I click "Registrations report" button
+		And I select "R5021 Revenues" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Sales return 101 dated 12.03.2021 08:44:18' | ''                    | ''          | ''             | ''                        | ''             | ''         | ''         | ''                    | ''                             |
+			| 'Document registrations records'             | ''                    | ''          | ''             | ''                        | ''             | ''         | ''         | ''                    | ''                             |
+			| 'Register  "R5021 Revenues"'                 | ''                    | ''          | ''             | ''                        | ''             | ''         | ''         | ''                    | ''                             |
+			| ''                                           | 'Period'              | 'Resources' | 'Dimensions'   | ''                        | ''             | ''         | ''         | ''                    | ''                             |
+			| ''                                           | ''                    | 'Amount'    | 'Company'      | 'Business unit'           | 'Revenue type' | 'Item key' | 'Currency' | 'Additional analytic' | 'Multi currency movement type' |
+			| ''                                           | '12.03.2021 08:44:18' | '-563,56'   | 'Main Company' | 'Distribution department' | 'Revenue'      | '36/Red'   | 'TRY'      | ''                    | 'Local currency'               |
+			| ''                                           | '12.03.2021 08:44:18' | '-563,56'   | 'Main Company' | 'Distribution department' | 'Revenue'      | '36/Red'   | 'TRY'      | ''                    | 'TRY'                          |
+			| ''                                           | '12.03.2021 08:44:18' | '-563,56'   | 'Main Company' | 'Distribution department' | 'Revenue'      | '36/Red'   | 'TRY'      | ''                    | 'en description is empty'      |
+			| ''                                           | '12.03.2021 08:44:18' | '-418,64'   | 'Main Company' | 'Distribution department' | 'Revenue'      | 'XS/Blue'  | 'TRY'      | ''                    | 'Local currency'               |
+			| ''                                           | '12.03.2021 08:44:18' | '-418,64'   | 'Main Company' | 'Distribution department' | 'Revenue'      | 'XS/Blue'  | 'TRY'      | ''                    | 'TRY'                          |
+			| ''                                           | '12.03.2021 08:44:18' | '-418,64'   | 'Main Company' | 'Distribution department' | 'Revenue'      | 'XS/Blue'  | 'TRY'      | ''                    | 'en description is empty'      |
+			| ''                                           | '12.03.2021 08:44:18' | '-96,48'    | 'Main Company' | 'Distribution department' | 'Revenue'      | '36/Red'   | 'USD'      | ''                    | 'Reporting currency'           |
+			| ''                                           | '12.03.2021 08:44:18' | '-80,51'    | 'Main Company' | 'Distribution department' | 'Revenue'      | 'Interner' | 'TRY'      | ''                    | 'Local currency'               |
+			| ''                                           | '12.03.2021 08:44:18' | '-80,51'    | 'Main Company' | 'Distribution department' | 'Revenue'      | 'Interner' | 'TRY'      | ''                    | 'TRY'                          |
+			| ''                                           | '12.03.2021 08:44:18' | '-80,51'    | 'Main Company' | 'Distribution department' | 'Revenue'      | 'Interner' | 'TRY'      | ''                    | 'en description is empty'      |
+			| ''                                           | '12.03.2021 08:44:18' | '-71,67'    | 'Main Company' | 'Distribution department' | 'Revenue'      | 'XS/Blue'  | 'USD'      | ''                    | 'Reporting currency'           |
+			| ''                                           | '12.03.2021 08:44:18' | '-13,78'    | 'Main Company' | 'Distribution department' | 'Revenue'      | 'Interner' | 'USD'      | ''                    | 'Reporting currency'           |
+	And I close all client application windows
+
+
 
 Scenario: _041310 check Sales return movements by the Register  "R4010 Actual stocks" (not use GR)
 	And I close all client application windows

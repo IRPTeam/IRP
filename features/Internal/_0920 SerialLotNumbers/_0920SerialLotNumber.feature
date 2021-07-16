@@ -177,12 +177,12 @@ Scenario: _092002 check serial lot number in the Retail sales receipt
 		And I save the window as "$$RetailSalesReceipt092002$$"
 		And I save the value of the field named "Number" as "$$NumberRetailSalesReceipt092002$$"
 		And I click "Registrations report" button
-		And I select "Retail sales" exact value from "Register" drop-down list
+		And I select "R2050 Retail sales" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document contains lines
 			| '$$RetailSalesReceipt092002$$'   | ''            | ''       | ''          | ''       | ''           | ''              | ''             | ''              | ''         | ''                             | ''          | ''                  | ''        |
 			| 'Document registrations records' | ''            | ''       | ''          | ''       | ''           | ''              | ''             | ''              | ''         | ''                             | ''          | ''                  | ''        |
-			| 'Register  "Retail sales"'       | ''            | ''       | ''          | ''       | ''           | ''              | ''             | ''              | ''         | ''                             | ''          | ''                  | ''        |
+			| 'Register  "R2050 Retail sales"' | ''            | ''       | ''          | ''       | ''           | ''              | ''             | ''              | ''         | ''                             | ''          | ''                  | ''        |
 			| ''                               | 'Record type' | 'Period' | 'Resources' | ''       | ''           | ''              | 'Dimensions'   | ''              | ''         | ''                             | ''          | ''                  | ''        |
 			| ''                               | ''            | ''       | 'Quantity'  | 'Amount' | 'Net amount' | 'Offers amount' | 'Company'      | 'Business unit' | 'Store'    | 'Retail sales receipt'         | 'Item key'  | 'Serial lot number' | 'Row key' |
 			| ''                               | 'Receipt'     | '*'      | '1'         | '400'    | '338,98'     | ''              | 'Main Company' | ''              | 'Store 01' | '$$RetailSalesReceipt092002$$' | '38/Yellow' | '99098809009999'    | '*'       |
@@ -235,12 +235,12 @@ Scenario: _092002 check serial lot number in the Retail sales receipt
 	* Post Retail sales receipt and check movements in the register Retail sales
 		And I click the button named "FormPost"
 		And I click "Registrations report" button
-		And I select "Retail sales" exact value from "Register" drop-down list
+		And I select "R2050 Retail sales" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document contains lines
 			| '$$RetailSalesReceipt092002$$'   | ''            | ''       | ''          | ''       | ''           | ''              | ''             | ''              | ''         | ''                             | ''          | ''                  | ''        |
 			| 'Document registrations records' | ''            | ''       | ''          | ''       | ''           | ''              | ''             | ''              | ''         | ''                             | ''          | ''                  | ''        |
-			| 'Register  "Retail sales"'       | ''            | ''       | ''          | ''       | ''           | ''              | ''             | ''              | ''         | ''                             | ''          | ''                  | ''        |
+			| 'Register  "R2050 Retail sales"'       | ''            | ''       | ''          | ''       | ''           | ''              | ''             | ''              | ''         | ''                             | ''          | ''                  | ''        |
 			| ''                               | 'Record type' | 'Period' | 'Resources' | ''       | ''           | ''              | 'Dimensions'   | ''              | ''         | ''                             | ''          | ''                  | ''        |
 			| ''                               | ''            | ''       | 'Quantity'  | 'Amount' | 'Net amount' | 'Offers amount' | 'Company'      | 'Business unit' | 'Store'    | 'Retail sales receipt'         | 'Item key'  | 'Serial lot number' | 'Row key' |
 			| ''                               | 'Receipt'     | '*'      | '1'         | '400'    | '338,98'     | ''              | 'Main Company' | ''              | 'Store 01' | '$$RetailSalesReceipt092002$$' | '38/Yellow' | '99098809009999'    | '*'       |
@@ -314,12 +314,12 @@ Scenario: _092002 check serial lot number in the Retail sales receipt
 			| 'Number'     |
 			| '$$NumberRetailSalesReceipt092002$$' |
 	And I click "Registrations report" button
-	And I select "Retail sales" exact value from "Register" drop-down list
+	And I select "R2050 Retail sales" exact value from "Register" drop-down list
 	And I click "Generate report" button
 	And "ResultTable" spreadsheet document contains lines:
 		| '$$RetailSalesReceipt092002$$'   | ''            | ''       | ''          | ''       | ''           | ''              | ''             | ''              | ''         | ''                             | ''          | ''                  | ''        |
 		| 'Document registrations records' | ''            | ''       | ''          | ''       | ''           | ''              | ''             | ''              | ''         | ''                             | ''          | ''                  | ''        |
-		| 'Register  "Retail sales"'       | ''            | ''       | ''          | ''       | ''           | ''              | ''             | ''              | ''         | ''                             | ''          | ''                  | ''        |
+		| 'Register  "R2050 Retail sales"'       | ''            | ''       | ''          | ''       | ''           | ''              | ''             | ''              | ''         | ''                             | ''          | ''                  | ''        |
 		| ''                               | 'Record type' | 'Period' | 'Resources' | ''       | ''           | ''              | 'Dimensions'   | ''              | ''         | ''                             | ''          | ''                  | ''        |
 		| ''                               | ''            | ''       | 'Quantity'  | 'Amount' | 'Net amount' | 'Offers amount' | 'Company'      | 'Business unit' | 'Store'    | 'Retail sales receipt'         | 'Item key'  | 'Serial lot number' | 'Row key' |
 		| ''                               | 'Receipt'     | '*'      | '1'         | '400'    | '338,98'     | ''              | 'Main Company' | ''              | 'Store 01' | '$$RetailSalesReceipt092002$$' | '38/Yellow' | '99098809009999'    | '*'       |
@@ -372,12 +372,12 @@ Scenario: _092003 check serial lot number in the Retail return receipt
 		And I delete "$$RetailReturnReceipt092003$$" variable
 		And I save the window as "$$RetailReturnReceipt092003$$"
 		And I click "Registrations report" button
-		And I select "Retail sales" exact value from "Register" drop-down list
+		And I select "R2050 Retail sales" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
 			| '$$RetailReturnReceipt092003$$'  | ''            | ''       | ''          | ''       | ''           | ''              | ''             | ''              | ''         | ''                             | ''          | ''                  | ''        |
 			| 'Document registrations records' | ''            | ''       | ''          | ''       | ''           | ''              | ''             | ''              | ''         | ''                             | ''          | ''                  | ''        |
-			| 'Register  "Retail sales"'       | ''            | ''       | ''          | ''       | ''           | ''              | ''             | ''              | ''         | ''                             | ''          | ''                  | ''        |
+			| 'Register  "R2050 Retail sales"' | ''            | ''       | ''          | ''       | ''           | ''              | ''             | ''              | ''         | ''                             | ''          | ''                  | ''        |
 			| ''                               | 'Record type' | 'Period' | 'Resources' | ''       | ''           | ''              | 'Dimensions'   | ''              | ''         | ''                             | ''          | ''                  | ''        |
 			| ''                               | ''            | ''       | 'Quantity'  | 'Amount' | 'Net amount' | 'Offers amount' | 'Company'      | 'Business unit' | 'Store'    | 'Retail sales receipt'         | 'Item key'  | 'Serial lot number' | 'Row key' |
 			| ''                               | 'Receipt'     | '*'      | '-2'        | '-800'   | '-677,97'    | ''              | 'Main Company' | 'Shop 01'       | 'Store 01' | '$$RetailSalesReceipt092002$$' | '38/Yellow' | '99098809009998'    | '*'       |
@@ -428,12 +428,12 @@ Scenario: _092003 check serial lot number in the Retail return receipt
 	* Post Retail return receipt and check movements in the register Retail sales
 		And I click the button named "FormPost"
 		And I click "Registrations report" button
-		And I select "Retail sales" exact value from "Register" drop-down list
+		And I select "R2050 Retail sales" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
 			| '$$RetailReturnReceipt092003$$'  | ''            | ''       | ''          | ''       | ''           | ''              | ''             | ''              | ''         | ''                             | ''          | ''                  | ''        |
 			| 'Document registrations records' | ''            | ''       | ''          | ''       | ''           | ''              | ''             | ''              | ''         | ''                             | ''          | ''                  | ''        |
-			| 'Register  "Retail sales"'       | ''            | ''       | ''          | ''       | ''           | ''              | ''             | ''              | ''         | ''                             | ''          | ''                  | ''        |
+			| 'Register  "R2050 Retail sales"' | ''            | ''       | ''          | ''       | ''           | ''              | ''             | ''              | ''         | ''                             | ''          | ''                  | ''        |
 			| ''                               | 'Record type' | 'Period' | 'Resources' | ''       | ''           | ''              | 'Dimensions'   | ''              | ''         | ''                             | ''          | ''                  | ''        |
 			| ''                               | ''            | ''       | 'Quantity'  | 'Amount' | 'Net amount' | 'Offers amount' | 'Company'      | 'Business unit' | 'Store'    | 'Retail sales receipt'         | 'Item key'  | 'Serial lot number' | 'Row key' |
 			| ''                               | 'Receipt'     | '*'      | '-1'        | '-400'   | '-338,98'    | ''              | 'Main Company' | 'Shop 01'       | 'Store 01' | '$$RetailSalesReceipt092002$$' | '38/Yellow' | '99098809009998'    | '*'       |

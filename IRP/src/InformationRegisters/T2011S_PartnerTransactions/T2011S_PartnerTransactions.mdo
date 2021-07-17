@@ -9,10 +9,10 @@
     <recordType typeId="b9beae59-78ab-44ee-ac02-23d90773d2cb" valueTypeId="3c2e3c39-8092-49ab-a95f-6e0a660b19f5"/>
     <recordManagerType typeId="b4e0bbdf-aacf-40ee-afb1-a40e3d073da5" valueTypeId="950d7a7d-a0af-4138-a440-2629e1ba357b"/>
   </producedTypes>
-  <name>T1001I_PartnerTransactions</name>
+  <name>T2011S_PartnerTransactions</name>
   <synonym>
     <key>en</key>
-    <value>T1001I Partner transactions</value>
+    <value>T2011S Partner transactions</value>
   </synonym>
   <useStandardCommands>true</useStandardCommands>
   <editType>InDialog</editType>

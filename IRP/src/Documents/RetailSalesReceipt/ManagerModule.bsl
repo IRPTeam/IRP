@@ -115,6 +115,8 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R3010B_CashOnHand());
 	QueryArray.Add(R3050B_RetailCash());
 	QueryArray.Add(R2050B_RetailSales());
+	QueryArray.Add(R5021T_Revenues());
+	QueryArray.Add(R2001T_Sales());
 	Return QueryArray;
 EndFunction
 
@@ -147,7 +149,9 @@ Function ItemList()
 		|		ELSE UNDEFINED
 		|	END AS BasisDocument,
 		|	ItemList.NetAmount AS NetAmount,
-		|	ItemList.OffersAmount AS OffersAmount
+		|	ItemList.OffersAmount AS OffersAmount,
+		|	ItemList.Ref AS Invoice,
+		|	ItemList.Key AS RowKey
 		|INTO ItemList
 		|FROM
 		|	Document.RetailSalesReceipt.ItemList AS ItemList
@@ -312,7 +316,6 @@ EndFunction
 Function R2050B_RetailSales()
 	Return
 		"SELECT
-		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
 		|	*
 		|INTO R2050B_RetailSales
 		|FROM
@@ -320,5 +323,30 @@ Function R2050B_RetailSales()
 		|WHERE
 		|	TRUE";
 EndFunction
+
+Function R5021T_Revenues()
+	Return
+		"SELECT
+		|	*,
+		|	ItemList.NetAmount AS Amount
+		|INTO R5021T_Revenues
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	TRUE";
+EndFunction	
+
+Function R2001T_Sales()
+	Return
+		"SELECT
+		|	*,
+		|	ItemList.TotalAmount AS Amount
+		|INTO R2001T_Sales
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	TRUE";
+EndFunction	
+		
 
 #EndRegion

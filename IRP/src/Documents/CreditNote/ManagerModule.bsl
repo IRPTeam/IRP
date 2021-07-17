@@ -93,7 +93,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R2020B_AdvancesFromCustomers());
 	QueryArray.Add(R5012B_VendorsAging());
 	QueryArray.Add(R5011B_CustomersAging());
-	QueryArray.Add(T1001I_PartnerTransactions());
+	QueryArray.Add(T2011S_PartnerTransactions());
 	Return QueryArray;
 EndFunction
 
@@ -167,7 +167,7 @@ Function R1021B_VendorsTransactions()
 		|	OffsetOfAdvances.Amount,
 		|	OffsetOfAdvances.Recorder
 		|FROM
-		|	InformationRegister.T1000I_OffsetOfAdvances AS OffsetOfAdvances
+		|	InformationRegister.T2010S_OffsetOfAdvances AS OffsetOfAdvances
 		|WHERE
 		|	OffsetOfAdvances.Document = &Ref
 		|	AND OffsetOfAdvances.Recorder REFS Document.VendorsAdvancesClosing";
@@ -208,7 +208,7 @@ Function R2021B_CustomersTransactions()
 		|	OffsetOfAdvances.Amount,
 		|	OffsetOfAdvances.Recorder
 		|FROM
-		|	InformationRegister.T1000I_OffsetOfAdvances AS OffsetOfAdvances
+		|	InformationRegister.T2010S_OffsetOfAdvances AS OffsetOfAdvances
 		|WHERE
 		|	OffsetOfAdvances.Document = &Ref
 		|	AND  OffsetOfAdvances.DueAsAdvance
@@ -224,7 +224,7 @@ Function R1020B_AdvancesToVendors()
 		|	*
 		|INTO R1020B_AdvancesToVendors
 		|FROM
-		|	InformationRegister.T1000I_OffsetOfAdvances AS OffsetOfAdvances
+		|	InformationRegister.T2010S_OffsetOfAdvances AS OffsetOfAdvances
 		|WHERE
 		|	OffsetOfAdvances.Document = &Ref
 		|	AND OffsetOfAdvances.Recorder REFS Document.VendorsAdvancesClosing";
@@ -245,7 +245,7 @@ Function R2020B_AdvancesFromCustomers()
 		|	OffsetOfAdvances.Recorder AS CustomersAdvancesClosing
 		|INTO R2020B_AdvancesFromCustomers
 		|FROM
-		|	InformationRegister.T1000I_OffsetOfAdvances AS OffsetOfAdvances
+		|	InformationRegister.T2010S_OffsetOfAdvances AS OffsetOfAdvances
 		|WHERE
 		|	OffsetOfAdvances.Document = &Ref
 		|	AND OffsetOfAdvances.DueAsAdvance
@@ -294,7 +294,7 @@ Function R5012B_VendorsAging()
 		|	OffsetOfAging.Amount,
 		|	OffsetOfAging.Recorder
 		|FROM
-		|	InformationRegister.T1003I_OffsetOfAging AS OffsetOfAging
+		|	InformationRegister.T2013S_OffsetOfAging AS OffsetOfAging
 		|WHERE
 		|	OffsetOfAging.Document = &Ref
 		|	AND OffsetOfAging.Recorder REFS Document.VendorsAdvancesClosing";
@@ -315,13 +315,13 @@ Function R5011B_CustomersAging()
 		|	OffsetOfAging.Recorder AS AgingClosing
 		|INTO R5011B_CustomersAging
 		|FROM
-		|	InformationRegister.T1003I_OffsetOfAging AS OffsetOfAging
+		|	InformationRegister.T2013S_OffsetOfAging AS OffsetOfAging
 		|WHERE
 		|	OffsetOfAging.Document = &Ref
 		|	AND OffsetOfAging.Recorder REFS Document.CustomersAdvancesClosing";
 EndFunction
 
-Function T1001I_PartnerTransactions()
+Function T2011S_PartnerTransactions()
 	Return
 		"SELECT
 		|	Transactions.Period AS Period,
@@ -335,7 +335,7 @@ Function T1001I_PartnerTransactions()
 		|	Transactions.Amount,
 		|	TRUE AS IsVendorTransaction,
 		|	FALSE AS IsPaymentFromCustomer
-		|INTO T1001I_PartnerTransactions
+		|INTO T2011S_PartnerTransactions
 		|FROM
 		|	Transactions AS Transactions
 		|WHERE

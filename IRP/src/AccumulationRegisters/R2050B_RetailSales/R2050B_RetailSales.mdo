@@ -14,6 +14,7 @@
     <value>R2050 Retail sales</value>
   </synonym>
   <useStandardCommands>true</useStandardCommands>
+  <registerType>Turnovers</registerType>
   <dataLockControlMode>Managed</dataLockControlMode>
   <enableTotalsSplitting>true</enableTotalsSplitting>
   <resources uuid="ec0cc161-7030-4da7-8027-a697dcf2208f">

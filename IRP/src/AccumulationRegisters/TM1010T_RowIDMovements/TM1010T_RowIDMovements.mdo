@@ -8,10 +8,10 @@
     <recordKeyType typeId="6dd7ad82-b66e-4ca2-bf9c-cbd7466e9e92" valueTypeId="3cbe5893-8563-48ed-be4f-624edc341015"/>
     <recordType typeId="9d09147d-7213-484e-b02d-912cf4381103" valueTypeId="edd2229f-6a3b-40df-aa15-d60499889327"/>
   </producedTypes>
-  <name>T10000T_RowIDMovements</name>
+  <name>TM1010T_RowIDMovements</name>
   <synonym>
     <key>en</key>
-    <value>T10000T Row ID movements</value>
+    <value>TM1010T Row ID movements</value>
   </synonym>
   <useStandardCommands>true</useStandardCommands>
   <registerType>Turnovers</registerType>

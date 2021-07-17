@@ -107,6 +107,8 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R3010B_CashOnHand());
 	QueryArray.Add(R3050B_RetailCash());
 	QueryArray.Add(R2050B_RetailSales());
+	QueryArray.Add(R5021T_Revenues());
+	QueryArray.Add(R2002T_SalesReturns());
 	Return QueryArray;
 EndFunction
 
@@ -135,7 +137,18 @@ Function ItemList()
 	|		ELSE ItemList.RetailSalesReceipt
 	|	END AS RetailSalesReceipt,
 	|	ItemList.Key AS RowKey,
-	|	ItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS IsService
+	|	ItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS IsService,
+	|	ItemList.BusinessUnit AS BusinessUnit,
+	|	ItemList.RevenueType AS RevenueType,
+	|	ItemList.AdditionalAnalytic AS AdditionalAnalytic,
+	|	ItemList.NetAmount AS NetAmount,
+	|	ItemList.OffersAmount AS OffersAmount,
+	|	ItemList.ReturnReason AS ReturnReason,
+	|	CASE
+	|		WHEN ItemList.RetailSalesReceipt.Ref IS NULL
+	|			THEN ItemList.Ref
+	|		ELSE ItemList.RetailSalesReceipt
+	|	END AS Invoice
 	|INTO ItemList
 	|FROM
 	|	Document.RetailReturnReceipt.ItemList AS ItemList
@@ -295,8 +308,7 @@ EndFunction
 Function R3050B_RetailCash()
 	Return
 		"SELECT
-		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		|	- Payments.Amount AS Amount,
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
 		|	*
 		|INTO R3050B_RetailCash
 		|FROM
@@ -308,11 +320,34 @@ EndFunction
 Function R2050B_RetailSales()
 	Return
 		"SELECT
-		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
 		|	*
 		|INTO R2050B_RetailSales
 		|FROM
 		|	RetailSales AS RetailSales
+		|WHERE
+		|	TRUE";
+EndFunction
+
+Function R5021T_Revenues()
+	Return
+		"SELECT
+		|	*,
+		|	- ItemList.NetAmount AS Amount
+		|INTO R5021T_Revenues
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	TRUE";
+EndFunction
+
+Function R2002T_SalesReturns()
+	Return
+		"SELECT
+		|	*,
+		|	ItemList.TotalAmount AS Amount
+		|INTO R2002T_SalesReturns
+		|FROM
+		|	ItemList AS ItemList
 		|WHERE
 		|	TRUE";
 EndFunction

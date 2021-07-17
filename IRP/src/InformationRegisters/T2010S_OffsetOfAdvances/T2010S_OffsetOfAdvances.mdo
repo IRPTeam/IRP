@@ -9,10 +9,10 @@
     <recordType typeId="1d3c6b4d-1a30-48ce-bd49-99e569bdcef9" valueTypeId="f7a6597f-52eb-40f8-bbe6-5088bd7a975d"/>
     <recordManagerType typeId="e5f08f91-64fe-4c08-98cd-c16f2df88260" valueTypeId="d4b1398a-b5e7-4c1a-af5e-68c4e8d64a87"/>
   </producedTypes>
-  <name>T1000I_OffsetOfAdvances</name>
+  <name>T2010S_OffsetOfAdvances</name>
   <synonym>
     <key>en</key>
-    <value>T1000I Offset of advances</value>
+    <value>T2010S Offset of advances</value>
   </synonym>
   <useStandardCommands>true</useStandardCommands>
   <editType>InDialog</editType>

@@ -690,10 +690,10 @@
   <informationRegisters>InformationRegister.Taxes</informationRegisters>
   <informationRegisters>InformationRegister.TaxSettings</informationRegisters>
   <informationRegisters>InformationRegister.UserSettings</informationRegisters>
-  <informationRegisters>InformationRegister.T1000I_OffsetOfAdvances</informationRegisters>
-  <informationRegisters>InformationRegister.T1001I_PartnerTransactions</informationRegisters>
-  <informationRegisters>InformationRegister.T1002I_PartnerAdvances</informationRegisters>
-  <informationRegisters>InformationRegister.T1003I_OffsetOfAging</informationRegisters>
+  <informationRegisters>InformationRegister.T2010S_OffsetOfAdvances</informationRegisters>
+  <informationRegisters>InformationRegister.T2011S_PartnerTransactions</informationRegisters>
+  <informationRegisters>InformationRegister.T2012S_PartnerAdvances</informationRegisters>
+  <informationRegisters>InformationRegister.T2013S_OffsetOfAging</informationRegisters>
   <accumulationRegisters>AccumulationRegister.CashInTransit</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R3035T_CashPlanning</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1001T_Purchases</accumulationRegisters>
@@ -755,8 +755,8 @@
   <accumulationRegisters>AccumulationRegister.R5041B_TaxesPayable</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R3050B_RetailCash</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R2050B_RetailSales</accumulationRegisters>
-  <accumulationRegisters>AccumulationRegister.T10000B_RowIDMovements</accumulationRegisters>
-  <accumulationRegisters>AccumulationRegister.T10000T_RowIDMovements</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.TM1010B_RowIDMovements</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.TM1010T_RowIDMovements</accumulationRegisters>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.AddAttributeAndProperty</chartsOfCharacteristicTypes>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.CustomUserSettings</chartsOfCharacteristicTypes>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.IDInfoTypes</chartsOfCharacteristicTypes>

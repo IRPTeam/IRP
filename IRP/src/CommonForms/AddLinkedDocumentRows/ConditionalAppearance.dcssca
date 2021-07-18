@@ -8,31 +8,6 @@
 		</selection>
 		<filter>
 			<item xsi:type="FilterItemComparison">
-				<left xsi:type="dcscor:Field">BasisesTree.DeepLevel</left>
-				<comparisonType>Equal</comparisonType>
-				<right xsi:type="xs:boolean">false</right>
-			</item>
-		</filter>
-		<appearance>
-			<dcscor:item xsi:type="SettingsParameterValue">
-				<dcscor:use>false</dcscor:use>
-				<dcscor:parameter>Visible</dcscor:parameter>
-				<dcscor:value xsi:type="xs:boolean">false</dcscor:value>
-			</dcscor:item>
-			<dcscor:item xsi:type="SettingsParameterValue">
-				<dcscor:parameter>Show</dcscor:parameter>
-				<dcscor:value xsi:type="xs:boolean">false</dcscor:value>
-			</dcscor:item>
-		</appearance>
-	</item>
-	<item>
-		<selection>
-			<item>
-				<field>BasisesTreeUse</field>
-			</item>
-		</selection>
-		<filter>
-			<item xsi:type="FilterItemComparison">
 				<left xsi:type="dcscor:Field">BasisesTree.Linked</left>
 				<comparisonType>Equal</comparisonType>
 				<right xsi:type="xs:boolean">true</right>

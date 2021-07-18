@@ -723,39 +723,6 @@ EndFunction
 
 #Region SpecialOffersInReturns
 
-Procedure FillSpecialOffersCacheRetail(Object, Form, BasisDocumentName, AddInfo = Undefined) Export
-	Form.SpecialOffersCache.Clear();
-	Query = New Query();
-	Query.Text = 
-	"SELECT
-	|	ItemList.Key,
-	|	ItemList.%1
-	|INTO tmpItemList
-	|FROM
-	|	&ItemList AS ItemList
-	|;
-	|
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	BasisDocumentSpecialOffers.Key,
-	|	BasisDocumentSpecialOffers.Offer,
-	|	BasisDocumentSpecialOffers.Amount,
-	|	BasisDocumentItemList.Quantity
-	|FROM
-	|	tmpItemList AS tmpItemList
-	|		INNER JOIN Document.%1.SpecialOffers AS BasisDocumentSpecialOffers
-	|		ON BasisDocumentSpecialOffers.Ref = tmpItemList.%1
-	|		AND BasisDocumentSpecialOffers.Key = tmpItemList.Key
-	|		INNER JOIN Document.%1.ItemList AS BasisDocumentItemList
-	|		ON BasisDocumentItemList.Ref = tmpItemList.%1
-	|		AND BasisDocumentItemList.Key = tmpItemList.Key";
-	Query.Text = StrTemplate(Query.Text, BasisDocumentName);
-	Query.SetParameter("ItemList", Object.ItemList.Unload());
-	QueryResult = Query.Execute();
-	Form.SpecialOffersCache.Load(QueryResult.Unload());
-EndProcedure
-
 Procedure FillSpecialOffersCache(Object, Form, BasisDocumentName, AddInfo = Undefined) Export
 	Form.SpecialOffersCache.Clear();
 	Query = New Query();

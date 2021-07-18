@@ -18,5 +18,5 @@
   <content>Document.CashStatement</content>
   <content>Catalog.CashStatementStatuses</content>
   <content>AccumulationRegister.R3050B_RetailCash</content>
-  <content>AccumulationRegister.R2050B_RetailSales</content>
+  <content>AccumulationRegister.R2050T_RetailSales</content>
 </mdclass:Subsystem>

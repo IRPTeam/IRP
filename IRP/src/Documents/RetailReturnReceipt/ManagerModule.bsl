@@ -106,7 +106,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R4010B_ActualStocks());
 	QueryArray.Add(R3010B_CashOnHand());
 	QueryArray.Add(R3050B_RetailCash());
-	QueryArray.Add(R2050B_RetailSales());
+	QueryArray.Add(R2050T_RetailSales());
 	QueryArray.Add(R5021T_Revenues());
 	QueryArray.Add(R2002T_SalesReturns());
 	Return QueryArray;
@@ -317,11 +317,11 @@ Function R3050B_RetailCash()
 		|	TRUE";
 EndFunction
 
-Function R2050B_RetailSales()
+Function R2050T_RetailSales()
 	Return
 		"SELECT
 		|	*
-		|INTO R2050B_RetailSales
+		|INTO R2050T_RetailSales
 		|FROM
 		|	RetailSales AS RetailSales
 		|WHERE

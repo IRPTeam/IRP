@@ -245,7 +245,7 @@
     <mdObject>AccumulationRegister.R4050B_StockInventory</mdObject>
   </content>
   <content>
-    <mdObject>AccumulationRegister.R2050B_RetailSales</mdObject>
+    <mdObject>AccumulationRegister.R2050T_RetailSales</mdObject>
   </content>
   <content>
     <mdObject>InformationRegister.IDInfo</mdObject>

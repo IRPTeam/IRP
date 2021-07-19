@@ -523,13 +523,13 @@ Scenario: _029130 create Retail sales receipt for service and product
 		And I select "R2050 Retail sales" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-			| '$$RetailSalesReceipt029130$$'   | ''            | ''       | ''          | ''       | ''           | ''              | ''             | ''              | ''         | ''                             | ''         | ''                  | ''        |
-			| 'Document registrations records' | ''            | ''       | ''          | ''       | ''           | ''              | ''             | ''              | ''         | ''                             | ''         | ''                  | ''        |
-			| 'Register  "R2050 Retail sales"' | ''            | ''       | ''          | ''       | ''           | ''              | ''             | ''              | ''         | ''                             | ''         | ''                  | ''        |
-			| ''                               | 'Record type' | 'Period' | 'Resources' | ''       | ''           | ''              | 'Dimensions'   | ''              | ''         | ''                             | ''         | ''                  | ''        |
-			| ''                               | ''            | ''       | 'Quantity'  | 'Amount' | 'Net amount' | 'Offers amount' | 'Company'      | 'Business unit' | 'Store'    | 'Retail sales receipt'         | 'Item key' | 'Serial lot number' | 'Row key' |
-			| ''                               | 'Receipt'     | '*'      | '1'         | '50'     | '42,37'      | ''              | 'Main Company' | ''              | 'Store 01' | '$$RetailSalesReceipt029130$$' | 'Interner' | ''                  | '*'       |
-			| ''                               | 'Receipt'     | '*'      | '1'         | '200'    | '169,49'     | ''              | 'Main Company' | ''              | 'Store 01' | '$$RetailSalesReceipt029130$$' | 'Table'    | ''                  | '*'       |
+			| '$$RetailSalesReceipt029130$$'   | ''       | ''          | ''       | ''           | ''              | ''             | ''              | ''         | ''                             | ''         | ''                  | ''        |
+			| 'Document registrations records' | ''       | ''          | ''       | ''           | ''              | ''             | ''              | ''         | ''                             | ''         | ''                  | ''        |
+			| 'Register  "R2050 Retail sales"' | ''       | ''          | ''       | ''           | ''              | ''             | ''              | ''         | ''                             | ''         | ''                  | ''        |
+			| ''                               | 'Period' | 'Resources' | ''       | ''           | ''              | 'Dimensions'   | ''              | ''         | ''                             | ''         | ''                  | ''        |
+			| ''                               | ''       | 'Quantity'  | 'Amount' | 'Net amount' | 'Offers amount' | 'Company'      | 'Business unit' | 'Store'    | 'Retail sales receipt'         | 'Item key' | 'Serial lot number' | 'Row key' |
+			| ''                               | '*'      | '1'         | '50'     | '42,37'      | ''              | 'Main Company' | ''              | 'Store 01' | '$$RetailSalesReceipt029130$$' | 'Interner' | ''                  | '*'       |
+			| ''                               | '*'      | '1'         | '200'    | '169,49'     | ''              | 'Main Company' | ''              | 'Store 01' | '$$RetailSalesReceipt029130$$' | 'Table'    | ''                  | '*'       |
 		And I close all client application windows
 	
 
@@ -677,28 +677,28 @@ Scenario: _029150 create Retail return receipt for service and product
 		And I select "R2050 Retail sales" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "R2050 Retail sales"' | ''            | ''       | ''          | ''       | ''           | ''              | ''             | ''              | ''         | ''                             | ''         | ''                  | ''        |
-			| ''                               | 'Record type' | 'Period' | 'Resources' | ''       | ''           | ''              | 'Dimensions'   | ''              | ''         | ''                             | ''         | ''                  | ''        |
-			| ''                               | ''            | ''       | 'Quantity'  | 'Amount' | 'Net amount' | 'Offers amount' | 'Company'      | 'Business unit' | 'Store'    | 'Retail sales receipt'         | 'Item key' | 'Serial lot number' | 'Row key' |
-			| ''                               | 'Receipt'     | '*'      | '-1'        | '50'     | '42,37'      | ''              | 'Main Company' | ''              | 'Store 01' | '$$RetailSalesReceipt029130$$' | 'Interner' | ''                  | '*'       |
-			| ''                               | 'Receipt'     | '*'      | '-1'        | '200'    | '169,49'     | ''              | 'Main Company' | ''              | 'Store 01' | '$$RetailSalesReceipt029130$$' | 'Table'    | ''                  | '*'       |
+			| 'Register  "R2050 Retail sales"' | ''       | ''          | ''       | ''           | ''              | ''             | ''              | ''         | ''                             | ''         | ''                  | ''        |
+			| ''                               | 'Period' | 'Resources' | ''       | ''           | ''              | 'Dimensions'   | ''              | ''         | ''                             | ''         | ''                  | ''        |
+			| ''                               | ''       | 'Quantity'  | 'Amount' | 'Net amount' | 'Offers amount' | 'Company'      | 'Business unit' | 'Store'    | 'Retail sales receipt'         | 'Item key' | 'Serial lot number' | 'Row key' |
+			| ''                               | '*'      | '-1'        | '50'     | '42,37'      | ''              | 'Main Company' | ''              | 'Store 01' | '$$RetailSalesReceipt029130$$' | 'Interner' | ''                  | '*'       |
+			| ''                               | '*'      | '-1'        | '200'    | '169,49'     | ''              | 'Main Company' | ''              | 'Store 01' | '$$RetailSalesReceipt029130$$' | 'Table'    | ''                  | '*'       |
 		And I select "R3050 Retail cash" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
 			| 'Register  "R3050 Retail cash"' | ''            | ''       | ''          | ''           | ''             | ''              | ''             | ''             | ''                 | '' | '' | '' | '' |
-			| ''                        | 'Record type' | 'Period' | 'Resources' | ''           | 'Dimensions'   | ''              | ''             | ''             | ''                 | '' | '' | '' | '' |
-			| ''                        | ''            | ''       | 'Amount'    | 'Commission' | 'Company'      | 'Business unit' | 'Payment type' | 'Account'      | 'Payment terminal' | '' | '' | '' | '' |
-			| ''                        | 'Receipt'     | '*'      | '-450'      | ''           | 'Main Company' | ''              | 'Cash'         | 'Cash desk №4' | ''                 | '' | '' | '' | '' |
+			| ''                              | 'Record type' | 'Period' | 'Resources' | ''           | 'Dimensions'   | ''              | ''             | ''             | ''                 | '' | '' | '' | '' |
+			| ''                              | ''            | ''       | 'Amount'    | 'Commission' | 'Company'      | 'Business unit' | 'Payment type' | 'Account'      | 'Payment terminal' | '' | '' | '' | '' |
+			| ''                              | 'Expense'     | '*'      | '450'      | ''           | 'Main Company' | ''              | 'Cash'         | 'Cash desk №4' | ''                 | '' | '' | '' | '' |
 	
 		And I select "R3010 Cash on hand" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
 			| 'Register  "R3010 Cash on hand"' | ''            | ''       | ''          | ''             | ''             | ''         | ''                             | ''                     | '' | '' | '' | '' | '' |
-			| ''                            | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''             | ''         | ''                             | 'Attributes'           | '' | '' | '' | '' | '' |
-			| ''                            | ''            | ''       | 'Amount'    | 'Company'      | 'Account'      | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' | '' | '' | '' | '' | '' |
-			| ''                            | 'Expense'     | '*'      | '77,04'     | 'Main Company' | 'Cash desk №4' | 'USD'      | 'Reporting currency'           | 'No'                   | '' | '' | '' | '' | '' |
-			| ''                            | 'Expense'     | '*'      | '450'       | 'Main Company' | 'Cash desk №4' | 'TRY'      | 'Local currency'               | 'No'                   | '' | '' | '' | '' | '' |
-			| ''                            | 'Expense'     | '*'      | '450'       | 'Main Company' | 'Cash desk №4' | 'TRY'      | 'en description is empty'      | 'No'                   | '' | '' | '' | '' | '' |
+			| ''                               | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''             | ''         | ''                             | 'Attributes'           | '' | '' | '' | '' | '' |
+			| ''                               | ''            | ''       | 'Amount'    | 'Company'      | 'Account'      | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' | '' | '' | '' | '' | '' |
+			| ''                               | 'Expense'     | '*'      | '77,04'     | 'Main Company' | 'Cash desk №4' | 'USD'      | 'Reporting currency'           | 'No'                   | '' | '' | '' | '' | '' |
+			| ''                               | 'Expense'     | '*'      | '450'       | 'Main Company' | 'Cash desk №4' | 'TRY'      | 'Local currency'               | 'No'                   | '' | '' | '' | '' | '' |
+			| ''                               | 'Expense'     | '*'      | '450'       | 'Main Company' | 'Cash desk №4' | 'TRY'      | 'en description is empty'      | 'No'                   | '' | '' | '' | '' | '' |
 		
 		And I close all client application windows
 	* Create Retail return receipt without Retail sales receipt

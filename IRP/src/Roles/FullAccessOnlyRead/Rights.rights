@@ -2177,7 +2177,7 @@
 		</right>
 	</object>
 	<object>
-		<name>AccumulationRegister.R3050B_RetailCash</name>
+		<name>AccumulationRegister.R3050T_RetailCash</name>
 		<right>
 			<name>Read</name>
 			<value>true</value>

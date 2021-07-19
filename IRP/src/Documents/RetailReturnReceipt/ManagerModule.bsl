@@ -105,7 +105,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R4011B_FreeStocks());
 	QueryArray.Add(R4010B_ActualStocks());
 	QueryArray.Add(R3010B_CashOnHand());
-	QueryArray.Add(R3050B_RetailCash());
+	QueryArray.Add(R3050T_RetailCash());
 	QueryArray.Add(R2050T_RetailSales());
 	QueryArray.Add(R5021T_Revenues());
 	QueryArray.Add(R2002T_SalesReturns());
@@ -305,12 +305,12 @@ Function R4010B_ActualStocks()
 	|	NOT ItemList.IsService";	
 EndFunction	
 
-Function R3050B_RetailCash()
+Function R3050T_RetailCash()
 	Return
 		"SELECT
-		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	- Payments.Amount AS Amount,
 		|	*
-		|INTO R3050B_RetailCash
+		|INTO R3050T_RetailCash
 		|FROM
 		|	Payments AS Payments
 		|WHERE

@@ -8,12 +8,13 @@
     <recordKeyType typeId="e2adee5a-8391-40e6-abe7-fe3eec93f7c6" valueTypeId="7e118126-768d-4a7c-a855-42e8d56e9416"/>
     <recordType typeId="74fa0ea5-a723-47c7-ab29-dfe2c5260086" valueTypeId="8c5bb627-e81f-4230-859e-553d1b172ee1"/>
   </producedTypes>
-  <name>R3050B_RetailCash</name>
+  <name>R3050T_RetailCash</name>
   <synonym>
     <key>en</key>
     <value>R3050 Retail cash</value>
   </synonym>
   <useStandardCommands>true</useStandardCommands>
+  <registerType>Turnovers</registerType>
   <dataLockControlMode>Managed</dataLockControlMode>
   <enableTotalsSplitting>true</enableTotalsSplitting>
   <resources uuid="680ed740-a0a5-48ef-93d5-5aaa0d061962">

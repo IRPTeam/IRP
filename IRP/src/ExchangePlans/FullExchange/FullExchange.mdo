@@ -287,7 +287,7 @@
     <mdObject>InformationRegister.BarcodeScanInfoCheck</mdObject>
   </content>
   <content>
-    <mdObject>AccumulationRegister.R3050B_RetailCash</mdObject>
+    <mdObject>AccumulationRegister.R3050T_RetailCash</mdObject>
   </content>
   <content>
     <mdObject>AccumulationRegister.R2001T_Sales</mdObject>

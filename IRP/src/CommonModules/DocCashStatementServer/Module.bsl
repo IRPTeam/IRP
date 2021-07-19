@@ -77,21 +77,15 @@ Procedure FillTransactions(Object, AddInfo = Undefined) Export
 	Query = New Query;
 	Query.Text =
 		"SELECT
-		|	R3050B_RetailCash.PaymentType,
-		|	R3050B_RetailCash.Account,
-		|	SUM(R3050B_RetailCash.Amount) AS Amount,
-		|	SUM(R3050B_RetailCash.Commission) AS Commission,
-		|	R3050B_RetailCash.Account.Currency AS Currency
+		|	R3050T_RetailCash.PaymentType AS PaymentType,
+		|	R3050T_RetailCash.Account AS Account,
+		|	R3050T_RetailCash.AmountTurnover AS Amount,
+		|	R3050T_RetailCash.CommissionTurnover AS Commission,
+		|	R3050T_RetailCash.Account.Currency AS Currency
 		|FROM
-		|	AccumulationRegister.R3050B_RetailCash AS R3050B_RetailCash
-		|WHERE
-		|	R3050B_RetailCash.Company = &Company
-		|	AND R3050B_RetailCash.BusinessUnit = &BusinessUnit
-		|	AND R3050B_RetailCash.Period BETWEEN &BegOfPeriod AND &EndOfPeriod
-		|GROUP BY
-		|	R3050B_RetailCash.PaymentType,
-		|	R3050B_RetailCash.Account,
-		|	R3050B_RetailCash.Account.Currency";
+		|	AccumulationRegister.R3050T_RetailCash.Turnovers(BEGINOFPERIOD(&BegOfPeriod, DAY), ENDOFPERIOD(&EndOfPeriod, DAY),,
+		|		Company = &Company
+		|	AND BusinessUnit = &BusinessUnit) AS R3050T_RetailCash";
 	
 	Query.SetParameter("BegOfPeriod", Object.BegOfPeriod);
 	Query.SetParameter("EndOfPeriod", Object.EndOfPeriod);

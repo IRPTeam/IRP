@@ -108,8 +108,8 @@
   <defaultChoiceForm>Document.RetailReturnReceipt.Form.ChoiceForm</defaultChoiceForm>
   <realTimePosting>Deny</realTimePosting>
   <registerRecords>AccumulationRegister.R4010B_ActualStocks</registerRecords>
-  <registerRecords>AccumulationRegister.R2050B_RetailSales</registerRecords>
-  <registerRecords>AccumulationRegister.R3050B_RetailCash</registerRecords>
+  <registerRecords>AccumulationRegister.R2050T_RetailSales</registerRecords>
+  <registerRecords>AccumulationRegister.R3050T_RetailCash</registerRecords>
   <registerRecords>AccumulationRegister.R4011B_FreeStocks</registerRecords>
   <registerRecords>AccumulationRegister.R3010B_CashOnHand</registerRecords>
   <registerRecords>AccumulationRegister.R4014B_SerialLotNumber</registerRecords>

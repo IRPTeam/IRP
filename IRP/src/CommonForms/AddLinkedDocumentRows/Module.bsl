@@ -113,3 +113,27 @@ Procedure ShowRowKey(Command)
 	DocumentsClient.ShowRowKey(ThisObject);	
 EndProcedure
 
+&AtClient
+Procedure BasisesTreeUseOnChange(Item)
+	CurrentData = ThisObject.Items.BasisesTree.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	If Not CurrentData.DeepLevel Then
+		For Each Row In CurrentData.GetItems() Do
+			If Row.DeepLevel Then
+				Row.Use = CurrentData.Use;
+			EndIf;
+		EndDo;
+	Else
+		UseForDocument = True;
+		For Each Row In CurrentData.GetParent().GetItems() Do
+			If Row.DeepLevel And Not Row.Use Then
+				UseForDocument = False;
+			EndIf;
+		EndDo;
+		CurrentData.GetParent().Use = UseForDocument;
+	EndIf;
+EndProcedure
+
+

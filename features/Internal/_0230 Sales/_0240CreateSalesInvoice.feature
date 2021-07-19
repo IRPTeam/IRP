@@ -86,12 +86,12 @@ Scenario: _024001 create document Sales Invoice based on sales order (partial qu
 		Then "Add linked document rows" window is opened
 		And I expand current line in "BasisesTree" table
 		And "BasisesTree" table became equal
-			| 'Row presentation'                        | 'Use'                                     | 'Quantity' | 'Unit'           | 'Price'    | 'Currency' |
-			| 'Sales order 3 dated 27.01.2021 19:50:45' | 'Sales order 3 dated 27.01.2021 19:50:45' | ''         | ''               | ''         | ''         |
-			| 'Dress, XS/Blue'                          | 'Yes'                                     | '1,000'    | 'pcs'            | '520,00'   | 'TRY'      |
-			| 'Shirt, 36/Red'                           | 'Yes'                                     | '10,000'   | 'pcs'            | '350,00'   | 'TRY'      |
-			| 'Service, Interner'                       | 'Yes'                                     | '1,000'    | 'pcs'            | '100,00'   | 'TRY'      |
-			| 'Boots, 36/18SD'                          | 'Yes'                                     | '5,000'    | 'Boots (12 pcs)' | '8 400,00' | 'TRY'      |
+			| 'Row presentation'                        | 'Use' | 'Quantity' | 'Unit'           | 'Price'    | 'Currency' |
+			| 'Sales order 3 dated 27.01.2021 19:50:45' | 'Yes' | ''         | ''               | ''         | ''         |
+			| 'Dress, XS/Blue'                          | 'Yes' | '1,000'    | 'pcs'            | '520,00'   | 'TRY'      |
+			| 'Shirt, 36/Red'                           | 'Yes' | '10,000'   | 'pcs'            | '350,00'   | 'TRY'      |
+			| 'Service, Interner'                       | 'Yes' | '1,000'    | 'pcs'            | '100,00'   | 'TRY'      |
+			| 'Boots, 36/18SD'                          | 'Yes' | '5,000'    | 'Boots (12 pcs)' | '8 400,00' | 'TRY'      |
 		And I go to line in "BasisesTree" table
 			| 'Row presentation'            |
 			| 'Service, Interner' |
@@ -462,16 +462,16 @@ Scenario: _024005 create SI based on SO with 2 SC (SC>SO + new string + string f
 			| '15'      |
 		And I click the button named "FormDocumentSalesInvoiceGenerate"
 		And "BasisesTree" table contains lines
-			| 'Row presentation'                                   | 'Use'                                                | 'Quantity' | 'Unit' | 'Price'  | 'Currency' |
-			| 'Sales order 15 dated 01.02.2021 19:50:45'           | 'Sales order 15 dated 01.02.2021 19:50:45'           | ''         | ''     | ''       | ''         |
-			| 'Service, Interner'                                  | 'Yes'                                                | '1,000'    | 'pcs'  | '100,00' | 'TRY'      |
-			| 'Dress, XS/Blue'                                     | 'Yes'                                                | '10,000'   | 'pcs'  | '520,00' | 'TRY'      |
-			| 'Shipment confirmation 15 dated 25.02.2021 14:13:30' | 'Shipment confirmation 15 dated 25.02.2021 14:13:30' | ''         | ''     | ''       | ''         |
-			| 'Dress, XS/Blue'                                     | 'Yes'                                                | '1,000'    | 'pcs'  | '520,00' | 'TRY'      |
-			| 'Shirt, 36/Red'                                      | 'Yes'                                                | '7,000'    | 'pcs'  | '350,00' | 'TRY'      |
-			| 'Dress, XS/Blue'                                     | 'Yes'                                                | '2,000'    | 'pcs'  | '500,00' | 'TRY'      |
-			| 'Shipment confirmation 16 dated 25.02.2021 14:14:14' | 'Shipment confirmation 16 dated 25.02.2021 14:14:14' | ''         | ''     | ''       | ''         |
-			| 'Shirt, 36/Red'                                      | 'Yes'                                                | '3,000'    | 'pcs'  | '350,00' | 'TRY'      |	
+			| 'Row presentation'                                   | 'Use' | 'Quantity' | 'Unit' | 'Price'  | 'Currency' |
+			| 'Sales order 15 dated 01.02.2021 19:50:45'           | 'Yes' | ''         | ''     | ''       | ''         |
+			| 'Service, Interner'                                  | 'Yes' | '1,000'    | 'pcs'  | '100,00' | 'TRY'      |
+			| 'Dress, XS/Blue'                                     | 'Yes' | '10,000'   | 'pcs'  | '520,00' | 'TRY'      |
+			| 'Shipment confirmation 15 dated 25.02.2021 14:13:30' | 'Yes' | ''         | ''     | ''       | ''         |
+			| 'Dress, XS/Blue'                                     | 'Yes' | '1,000'    | 'pcs'  | '520,00' | 'TRY'      |
+			| 'Shirt, 36/Red'                                      | 'Yes' | '7,000'    | 'pcs'  | '350,00' | 'TRY'      |
+			| 'Dress, XS/Blue'                                     | 'Yes' | '2,000'    | 'pcs'  | '500,00' | 'TRY'      |
+			| 'Shipment confirmation 16 dated 25.02.2021 14:14:14' | 'Yes' | ''         | ''     | ''       | ''         |
+			| 'Shirt, 36/Red'                                      | 'Yes' | '3,000'    | 'pcs'  | '350,00' | 'TRY'      |
 	* Select items for SI
 		And I go to line in "BasisesTree" table
 			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
@@ -519,19 +519,19 @@ Scenario: _024006 create SI based on 2 SO with SC
 		And I move one line down in "List" table and select line
 		And I click the button named "FormDocumentSalesInvoiceGenerate"	
 		And "BasisesTree" table contains lines
-			| 'Row presentation'                                   | 'Use'                                                | 'Quantity' | 'Unit' | 'Price'  | 'Currency' |
-			| 'Sales order 3 dated 27.01.2021 19:50:45'            | 'Sales order 3 dated 27.01.2021 19:50:45'            | ''         | ''     | ''       | ''         |
-			| 'Shirt, 36/Red'                                      | 'Yes'                                                | '5,000'    | 'pcs'  | '350,00' | 'TRY'      |
-			| 'Service, Interner'                                  | 'Yes'                                                | '1,000'    | 'pcs'  | '100,00' | 'TRY'      |
-			| 'Sales order 15 dated 01.02.2021 19:50:45'           | 'Sales order 15 dated 01.02.2021 19:50:45'           | ''         | ''     | ''       | ''         |
-			| 'Service, Interner'                                  | 'Yes'                                                | '1,000'    | 'pcs'  | '100,00' | 'TRY'      |
-			| 'Dress, XS/Blue'                                     | 'Yes'                                                | '10,000'   | 'pcs'  | '520,00' | 'TRY'      |
-			| 'Shipment confirmation 15 dated 25.02.2021 14:13:30' | 'Shipment confirmation 15 dated 25.02.2021 14:13:30' | ''         | ''     | ''       | ''         |
-			| 'Dress, XS/Blue'                                     | 'Yes'                                                | '1,000'    | 'pcs'  | '520,00' | 'TRY'      |
-			| 'Shirt, 36/Red'                                      | 'Yes'                                                | '7,000'    | 'pcs'  | '350,00' | 'TRY'      |
-			| 'Dress, XS/Blue'                                     | 'Yes'                                                | '2,000'    | 'pcs'  | '500,00' | 'TRY'      |
-			| 'Shipment confirmation 16 dated 25.02.2021 14:14:14' | 'Shipment confirmation 16 dated 25.02.2021 14:14:14' | ''         | ''     | ''       | ''         |
-			| 'Shirt, 36/Red'                                      | 'Yes'                                                | '3,000'    | 'pcs'  | '350,00' | 'TRY'      |
+			| 'Row presentation'                                   | 'Use' | 'Quantity' | 'Unit' | 'Price'  | 'Currency' |
+			| 'Sales order 3 dated 27.01.2021 19:50:45'            | 'Yes' | ''         | ''     | ''       | ''         |
+			| 'Shirt, 36/Red'                                      | 'Yes' | '5,000'    | 'pcs'  | '350,00' | 'TRY'      |
+			| 'Service, Interner'                                  | 'Yes' | '1,000'    | 'pcs'  | '100,00' | 'TRY'      |
+			| 'Sales order 15 dated 01.02.2021 19:50:45'           | 'Yes' | ''         | ''     | ''       | ''         |
+			| 'Service, Interner'                                  | 'Yes' | '1,000'    | 'pcs'  | '100,00' | 'TRY'      |
+			| 'Dress, XS/Blue'                                     | 'Yes' | '10,000'   | 'pcs'  | '520,00' | 'TRY'      |
+			| 'Shipment confirmation 15 dated 25.02.2021 14:13:30' | 'Yes' | ''         | ''     | ''       | ''         |
+			| 'Dress, XS/Blue'                                     | 'Yes' | '1,000'    | 'pcs'  | '520,00' | 'TRY'      |
+			| 'Shirt, 36/Red'                                      | 'Yes' | '7,000'    | 'pcs'  | '350,00' | 'TRY'      |
+			| 'Dress, XS/Blue'                                     | 'Yes' | '2,000'    | 'pcs'  | '500,00' | 'TRY'      |
+			| 'Shipment confirmation 16 dated 25.02.2021 14:14:14' | 'Yes' | ''         | ''     | ''       | ''         |
+			| 'Shirt, 36/Red'                                      | 'Yes' | '3,000'    | 'pcs'  | '350,00' | 'TRY'      |
 		Then the number of "BasisesTree" table lines is "равно" "12"
 		And I click "Ok" button
 	* Create SI
@@ -576,11 +576,11 @@ Scenario: _024007 create SI based on SC	without SO
 			| '17'      |
 		And I click the button named "FormDocumentSalesInvoiceGenerate"	
 		And "BasisesTree" table contains lines
-			| 'Row presentation'                                   | 'Use'                                                | 'Quantity' | 'Unit' | 'Price' | 'Currency' |
-			| 'Shipment confirmation 17 dated 25.02.2021 16:28:54' | 'Shipment confirmation 17 dated 25.02.2021 16:28:54' | ''         | ''     | ''      | ''         |
-			| 'Dress, S/Yellow'                                    | 'Yes'                                                | '10,000'   | 'pcs'  | ''      | ''         |
-			| 'Dress, S/Yellow'                                    | 'Yes'                                                | '5,000'    | 'pcs'  | ''      | ''         |
-			| 'Dress, L/Green'                                     | 'Yes'                                                | '8,000'    | 'pcs'  | ''      | ''         |
+			| 'Row presentation'                                   | 'Use' | 'Quantity' | 'Unit' | 'Price' | 'Currency' |
+			| 'Shipment confirmation 17 dated 25.02.2021 16:28:54' | 'Yes' | ''         | ''     | ''      | ''         |
+			| 'Dress, S/Yellow'                                    | 'Yes' | '10,000'   | 'pcs'  | ''      | ''         |
+			| 'Dress, S/Yellow'                                    | 'Yes' | '5,000'    | 'pcs'  | ''      | ''         |
+			| 'Dress, L/Green'                                     | 'Yes' | '8,000'    | 'pcs'  | ''      | ''         |
 		Then the number of "BasisesTree" table lines is "равно" "4"
 		And I click "Ok" button
 	* Create SI

@@ -123,14 +123,14 @@ Scenario: _028901 create document Goods Receipt based on Purchase invoice (with 
 			| '102'      | 'Ferron BP' |
 		And I click the button named "FormDocumentGoodsReceiptGenerate"	
 		And "BasisesTree" table contains lines
-			| 'Row presentation'                               | 'Use'                                            | 'Quantity' | 'Unit'           | 'Price'  | 'Currency' |
-			| 'Purchase order 102 dated 03.03.2021 08:59:33'   | 'Purchase order 102 dated 03.03.2021 08:59:33'   | ''         | ''               | ''       | ''         |
-			| 'Purchase invoice 102 dated 03.03.2021 09:25:04' | 'Purchase invoice 102 dated 03.03.2021 09:25:04' | ''         | ''               | ''       | ''         |
-			| 'Dress, XS/Blue'                                 | 'Yes'                                            | '1,000'    | 'pcs'            | '100,00' | 'TRY'      |
-			| 'Shirt, 36/Red'                                  | 'Yes'                                            | '12,000'   | 'pcs'            | '200,00' | 'TRY'      |
-			| 'Boots, 37/18SD'                                 | 'Yes'                                            | '2,000'    | 'Boots (12 pcs)' | '300,00' | 'TRY'      |
-			| 'Purchase invoice 102 dated 03.03.2021 09:25:04' | 'Purchase invoice 102 dated 03.03.2021 09:25:04' | ''         | ''               | ''       | ''         |
-			| 'Shirt, 38/Black'                                | 'Yes'                                            | '2,000'    | 'pcs'            | '150,00' | 'TRY'      |
+			| 'Row presentation'                               | 'Use' | 'Quantity' | 'Unit'           | 'Price'  | 'Currency' |
+			| 'Purchase order 102 dated 03.03.2021 08:59:33'   | 'Yes' | ''         | ''               | ''       | ''         |
+			| 'Purchase invoice 102 dated 03.03.2021 09:25:04' | 'Yes' | ''         | ''               | ''       | ''         |
+			| 'Dress, XS/Blue'                                 | 'Yes' | '1,000'    | 'pcs'            | '100,00' | 'TRY'      |
+			| 'Shirt, 36/Red'                                  | 'Yes' | '12,000'   | 'pcs'            | '200,00' | 'TRY'      |
+			| 'Boots, 37/18SD'                                 | 'Yes' | '2,000'    | 'Boots (12 pcs)' | '300,00' | 'TRY'      |
+			| 'Purchase invoice 102 dated 03.03.2021 09:25:04' | 'Yes' | ''         | ''               | ''       | ''         |
+			| 'Shirt, 38/Black'                                | 'Yes' | '2,000'    | 'pcs'            | '150,00' | 'TRY'      |
 		Then the number of "BasisesTree" table lines is "равно" "7"
 		And I click "Ok" button
 	* Create GR and check filling in
@@ -162,12 +162,12 @@ Scenario: _028902 create document Goods Receipt based on Purchase order (with PI
 			| '102'      |
 		And I click the button named "FormDocumentGoodsReceiptGenerate"	
 		And "BasisesTree" table contains lines
-			| 'Row presentation'                               | 'Use'                                            | 'Quantity' | 'Unit'           | 'Price'  | 'Currency' |
-			| 'Purchase order 102 dated 03.03.2021 08:59:33'   | 'Purchase order 102 dated 03.03.2021 08:59:33'   | ''         | ''               | ''       | ''         |
-			| 'Purchase invoice 102 dated 03.03.2021 09:25:04' | 'Purchase invoice 102 dated 03.03.2021 09:25:04' | ''         | ''               | ''       | ''         |
-			| 'Dress, XS/Blue'                                 | 'Yes'                                            | '1,000'    | 'pcs'            | '100,00' | 'TRY'      |
-			| 'Shirt, 36/Red'                                  | 'Yes'                                            | '12,000'   | 'pcs'            | '200,00' | 'TRY'      |
-			| 'Boots, 37/18SD'                                 | 'Yes'                                            | '2,000'    | 'Boots (12 pcs)' | '300,00' | 'TRY'      |
+			| 'Row presentation'                               | 'Use' | 'Quantity' | 'Unit'           | 'Price'  | 'Currency' |
+			| 'Purchase order 102 dated 03.03.2021 08:59:33'   | 'Yes' | ''         | ''               | ''       | ''         |
+			| 'Purchase invoice 102 dated 03.03.2021 09:25:04' | 'Yes' | ''         | ''               | ''       | ''         |
+			| 'Dress, XS/Blue'                                 | 'Yes' | '1,000'    | 'pcs'            | '100,00' | 'TRY'      |
+			| 'Shirt, 36/Red'                                  | 'Yes' | '12,000'   | 'pcs'            | '200,00' | 'TRY'      |
+			| 'Boots, 37/18SD'                                 | 'Yes' | '2,000'    | 'Boots (12 pcs)' | '300,00' | 'TRY'      |
 		Then the number of "BasisesTree" table lines is "равно" "5"
 		And I click "Ok" button
 	* Create GR and check filling in
@@ -193,7 +193,7 @@ Scenario: _028902 create document Goods Receipt based on Purchase order (with PI
 		And I click the button named "FormPostAndClose"
 		And I close all client application windows
 	* Check creation
-		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
+		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
 		And "List" table contains lines
 			| 'Number'                |
 			| '$$NumberGoodsReceipt028901$$' |
@@ -412,10 +412,10 @@ Scenario: _028903 create document Goods Receipt based on Sales return (Create bu
 			| '32'      |
 		And I click the button named "FormDocumentGoodsReceiptGenerate"	
 		And "BasisesTree" table contains lines
-			| 'Row presentation'                          | 'Use'                                       | 'Quantity' | 'Unit'           | 'Price'    | 'Currency' |
-			| 'Sales return 32 dated 24.03.2021 14:27:53' | 'Sales return 32 dated 24.03.2021 14:27:53' | ''         | ''               | ''         | ''         |
-			| 'Dress, XS/Blue'                            | 'Yes'                                       | '1,000'    | 'pcs'            | '520,00'   | 'TRY'      |
-			| 'Boots, 37/18SD'                            | 'Yes'                                       | '2,000'    | 'Boots (12 pcs)' | '8 400,00' | 'TRY'      |
+			| 'Row presentation'                          | 'Use' | 'Quantity' | 'Unit'           | 'Price'    | 'Currency' |
+			| 'Sales return 32 dated 24.03.2021 14:27:53' | 'Yes' | ''         | ''               | ''         | ''         |
+			| 'Dress, XS/Blue'                            | 'Yes' | '1,000'    | 'pcs'            | '520,00'   | 'TRY'      |
+			| 'Boots, 37/18SD'                            | 'Yes' | '2,000'    | 'Boots (12 pcs)' | '8 400,00' | 'TRY'      |
 		Then the number of "BasisesTree" table lines is "равно" "3"
 		And I click "Ok" button
 	* Create GR and check filling in
@@ -482,15 +482,15 @@ Scenario: _028931 check link/unlink form in the GR (Sales return)
 	* Select items from basis documents
 		And I click the button named "AddBasisDocuments"		
 		And "BasisesTree" table became equal
-			| 'Row presentation'                           | 'Use'                                        | 'Quantity' | 'Unit'                   | 'Price'    | 'Currency' |
-			| 'Sales return 351 dated 24.03.2021 14:04:08' | 'Sales return 351 dated 24.03.2021 14:04:08' | ''         | ''                       | ''         | ''         |
-			| 'High shoes, 39/19SD'                        | 'No'                                         | '10,000'   | 'High shoes box (8 pcs)' | '4 000,00' | 'TRY'      |
-			| 'Bag, ODS'                                   | 'No'                                         | '20,000'   | 'pcs'                    | '200,00'   | 'TRY'      |
-			| 'High shoes, 39/19SD'                        | 'No'                                         | '10,000'   | 'High shoes box (8 pcs)' | '4 000,00' | 'TRY'      |
-			| 'Sales return 353 dated 24.03.2021 14:10:41' | 'Sales return 353 dated 24.03.2021 14:10:41' | ''         | ''                       | ''         | ''         |
-			| 'High shoes, 39/19SD'                        | 'No'                                         | '10,000'   | 'High shoes box (8 pcs)' | '4 000,00' | 'TRY'      |
-			| 'Bag, ODS'                                   | 'No'                                         | '20,000'   | 'pcs'                    | '200,00'   | 'TRY'      |
-			| 'High shoes, 39/19SD'                        | 'No'                                         | '10,000'   | 'High shoes box (8 pcs)' | '4 000,00' | 'TRY'      |
+			| 'Row presentation'                           | 'Use' | 'Quantity' | 'Unit'                   | 'Price'    | 'Currency' |
+			| 'Sales return 351 dated 24.03.2021 14:04:08' | 'No'  | ''         | ''                       | ''         | ''         |
+			| 'High shoes, 39/19SD'                        | 'No'  | '10,000'   | 'High shoes box (8 pcs)' | '4 000,00' | 'TRY'      |
+			| 'Bag, ODS'                                   | 'No'  | '20,000'   | 'pcs'                    | '200,00'   | 'TRY'      |
+			| 'High shoes, 39/19SD'                        | 'No'  | '10,000'   | 'High shoes box (8 pcs)' | '4 000,00' | 'TRY'      |
+			| 'Sales return 353 dated 24.03.2021 14:10:41' | 'No'  | ''         | ''                       | ''         | ''         |
+			| 'High shoes, 39/19SD'                        | 'No'  | '10,000'   | 'High shoes box (8 pcs)' | '4 000,00' | 'TRY'      |
+			| 'Bag, ODS'                                   | 'No'  | '20,000'   | 'pcs'                    | '200,00'   | 'TRY'      |
+			| 'High shoes, 39/19SD'                        | 'No'  | '10,000'   | 'High shoes box (8 pcs)' | '4 000,00' | 'TRY'      |
 		And I go to line in "BasisesTree" table
 			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
 			| 'TRY'      | '4 000,00' | '10,000'   | 'High shoes, 39/19SD'         | 'High shoes box (8 pcs)'  | 'No'  |

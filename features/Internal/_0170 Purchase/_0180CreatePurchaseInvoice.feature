@@ -80,13 +80,13 @@ Scenario: _018001 create document Purchase Invoice based on order (partial quant
 		And I click the button named "FormDocumentPurchaseInvoiceGenerate"
 		Then "Add linked document rows" window is opened
 		And "BasisesTree" table became equal
-			| 'Row presentation'                             | 'Use'                                          | 'Quantity' | 'Unit'           | 'Price'  | 'Currency' |
-			| 'Purchase order 217 dated 12.02.2021 12:45:05' | 'Purchase order 217 dated 12.02.2021 12:45:05' | ''         | ''               | ''       | ''         |
-			| 'Dress, S/Yellow'                              | 'Yes'                                          | '10,000'   | 'pcs'            | '100,00' | 'TRY'      |
-			| 'Service, Interner'                            | 'Yes'                                          | '2,000'    | 'pcs'            | '150,00' | 'TRY'      |
-			| 'Trousers, 36/Yellow'                          | 'Yes'                                          | '5,000'    | 'pcs'            | '200,00' | 'TRY'      |
-			| 'Trousers, 36/Yellow'                          | 'Yes'                                          | '8,000'    | 'pcs'            | '210,00' | 'TRY'      |
-			| 'Boots, 36/18SD'                               | 'Yes'                                          | '5,000'    | 'Boots (12 pcs)' | '200,00' | 'TRY'      |
+			| 'Row presentation'                             | 'Use' | 'Quantity' | 'Unit'           | 'Price'  | 'Currency' |
+			| 'Purchase order 217 dated 12.02.2021 12:45:05' | 'Yes' | ''         | ''               | ''       | ''         |
+			| 'Dress, S/Yellow'                              | 'Yes' | '10,000'   | 'pcs'            | '100,00' | 'TRY'      |
+			| 'Service, Interner'                            | 'Yes' | '2,000'    | 'pcs'            | '150,00' | 'TRY'      |
+			| 'Trousers, 36/Yellow'                          | 'Yes' | '5,000'    | 'pcs'            | '200,00' | 'TRY'      |
+			| 'Trousers, 36/Yellow'                          | 'Yes' | '8,000'    | 'pcs'            | '210,00' | 'TRY'      |
+			| 'Boots, 36/18SD'                               | 'Yes' | '5,000'    | 'Boots (12 pcs)' | '200,00' | 'TRY'      |
 		And I go to line in "BasisesTree" table
 			| 'Row presentation'  |
 			| 'Service, Interner' |
@@ -319,12 +319,12 @@ Scenario: _018004 create PI based on GR without PO
 			| '12'      |
 		And I click the button named "FormDocumentPurchaseInvoiceGenerate"	
 		And "BasisesTree" table contains lines
-			| 'Row presentation'                           | 'Use'                                        | 'Quantity' | 'Unit'           | 'Price' | 'Currency' |
-			| 'Goods receipt 12 dated 02.03.2021 12:16:02' | 'Goods receipt 12 dated 02.03.2021 12:16:02' | ''         | ''               | ''      | ''         |
-			| 'Dress, XS/Blue'                             | 'Yes'                                        | '10,000'   | 'pcs'            | ''      | ''         |
-			| 'Trousers, 38/Yellow'                        | 'Yes'                                        | '20,000'   | 'pcs'            | ''      | ''         |
-			| 'Boots, 39/18SD'                             | 'Yes'                                        | '2,000'    | 'Boots (12 pcs)' | ''      | ''         |
-			| 'Dress, XS/Blue'                             | 'Yes'                                        | '2,000'    | 'pcs'            | ''      | ''         |
+			| 'Row presentation'                           | 'Use' | 'Quantity' | 'Unit'           | 'Price' | 'Currency' |
+			| 'Goods receipt 12 dated 02.03.2021 12:16:02' | 'Yes' | ''         | ''               | ''      | ''         |
+			| 'Dress, XS/Blue'                             | 'Yes' | '10,000'   | 'pcs'            | ''      | ''         |
+			| 'Trousers, 38/Yellow'                        | 'Yes' | '20,000'   | 'pcs'            | ''      | ''         |
+			| 'Boots, 39/18SD'                             | 'Yes' | '2,000'    | 'Boots (12 pcs)' | ''      | ''         |
+			| 'Dress, XS/Blue'                             | 'Yes' | '2,000'    | 'pcs'            | ''      | ''         |
 		Then the number of "BasisesTree" table lines is "равно" "5"
 		And I click "Ok" button
 	* Create PI and check creation

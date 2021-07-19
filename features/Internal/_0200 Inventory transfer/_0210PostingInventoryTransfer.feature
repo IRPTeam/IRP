@@ -64,11 +64,11 @@ Scenario: _0201001 create IT based on ITO
 		And I click the button named "FormDocumentInventoryTransferGenerate"
 		Then "Add linked document rows" window is opened
 		And "BasisesTree" table became equal
-			| 'Row presentation'                                   | 'Use'                                                | 'Quantity' | 'Unit'           | 'Price' | 'Currency' |
-			| 'Inventory transfer order 17 dated 02.03.2021 13:34' | 'Inventory transfer order 17 dated 02.03.2021 13:34' | ''         | ''               | ''      | ''         |
-			| 'Dress, L/Green'                                     | 'Yes'                                                | '20,000'   | 'pcs'            | ''      | ''         |
-			| 'Trousers, 38/Yellow'                                | 'Yes'                                                | '20,000'   | 'pcs'            | ''      | ''         |
-			| 'Boots, 36/18SD'                                     | 'Yes'                                                | '2,000'    | 'Boots (12 pcs)' | ''      | ''         |
+			| 'Row presentation'                                   | 'Use' | 'Quantity' | 'Unit'           | 'Price' | 'Currency' |
+			| 'Inventory transfer order 17 dated 02.03.2021 13:34' | 'Yes' | ''         | ''               | ''      | ''         |
+			| 'Dress, L/Green'                                     | 'Yes' | '20,000'   | 'pcs'            | ''      | ''         |
+			| 'Trousers, 38/Yellow'                                | 'Yes' | '20,000'   | 'pcs'            | ''      | ''         |
+			| 'Boots, 36/18SD'                                     | 'Yes' | '2,000'    | 'Boots (12 pcs)' | ''      | ''         |
 		And I go to line in "BasisesTree" table
 			| 'Row presentation'  |
 			| 'Dress, L/Green' |

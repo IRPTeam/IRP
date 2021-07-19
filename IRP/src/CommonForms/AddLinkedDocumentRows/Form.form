@@ -29,6 +29,10 @@
           </paths>
         </dataPath>
         <titleLocation>None</titleLocation>
+        <handlers>
+          <event>OnChange</event>
+          <name>BasisesTreeUseOnChange</name>
+        </handlers>
         <extendedTooltip>
           <name>BasisesTreeUseExtendedTooltip</name>
           <id>509</id>

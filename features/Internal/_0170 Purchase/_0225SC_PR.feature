@@ -259,8 +259,8 @@ Scenario: _022502 check link/unlink when add items to Purchase return from SC
 			| 'Row presentation'                                   | 'Use'                                                 |
 			| 'Shipment confirmation 17 dated 25.02.2021 16:28:54' | 'Shipment confirmation 17 dated 25.02.2021 16:28:54' |
 		And "BasisesTree" table contains lines
-			| 'Row presentation'                                   | 'Use'                                                |
-			| 'Shipment confirmation 233 dated 14.03.2021 19:22:5' | 'Shipment confirmation 233 dated 14.03.2021 19:22:5' |
+			| 'Row presentation'                                   | 'Use' |
+			| 'Shipment confirmation 233 dated 14.03.2021 19:22:5' | 'No'  |
 		And I go to line in "BasisesTree" table
 			| 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
 			| '4,000'    | 'Dress, S/Yellow'   | 'pcs'  | 'No'  |

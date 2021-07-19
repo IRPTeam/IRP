@@ -160,10 +160,10 @@ Scenario: _2060002 check link/unlink form in the SC
 		And I expand current line in "BasisesTree" table
 		And I expand a line in "BasisesTree" table
 			| 'Row presentation'                            | 'Use'                                         |
-			| 'Sales invoice 102 dated 05.03.2021 12:57:59' | 'Sales invoice 102 dated 05.03.2021 12:57:59' |
+			| 'Sales invoice 102 dated 05.03.2021 12:57:59' | 'No' |
 		And I expand a line in "BasisesTree" table
 			| 'Row presentation'                            | 'Use'                                         |
-			| 'Sales invoice 103 dated 05.03.2021 12:59:44' | 'Sales invoice 103 dated 05.03.2021 12:59:44' |
+			| 'Sales invoice 103 dated 05.03.2021 12:59:44' | 'No' |
 		And I go to line in "BasisesTree" table
 			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
 			| 'TRY'      | '700,00' | '2,000'    | 'Boots, 37/18SD'   | 'pcs'  | 'No'  |
@@ -272,6 +272,21 @@ Scenario: _2060002 check link/unlink form in the SC
 			| '2' | 'Sales invoice 101 dated 05.03.2021 12:56:38' | ''          | '2,000' | 'SC'           |
 			| '3' | 'Sales invoice 103 dated 05.03.2021 12:59:44' | ''          | '24,000' | 'SC'          |
 		Then the number of "RowIDInfo" table lines is "равно" "3"
+	* Add all items from SI
+		And I click "AddBasisDocuments" button
+		And I go to line in "BasisesTree" table
+			| 'Row presentation'                            | 'Use' |
+			| 'Sales invoice 103 dated 05.03.2021 12:59:44' | 'No'  |
+		And I change "Use" checkbox in "BasisesTree" table
+		And I finish line editing in "BasisesTree" table
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Store'    | 'Item'  | 'Item key' | 'Quantity' | 'Sales invoice'                               | 'Unit'           |
+			| 'Store 02' | 'Dress' | 'M/White'  | '8,000'    | 'Sales invoice 103 dated 05.03.2021 12:59:44' | 'pcs'            |
+			| 'Store 01' | 'Boots' | '37/18SD'  | '2,000'    | 'Sales invoice 101 dated 05.03.2021 12:56:38' | 'pcs'            |
+			| 'Store 02' | 'Boots' | '37/18SD'  | '2,000'    | 'Sales invoice 103 dated 05.03.2021 12:59:44' | 'Boots (12 pcs)' |
+			| 'Store 02' | 'Boots' | '36/18SD'  | '2,000'    | 'Sales invoice 103 dated 05.03.2021 12:59:44' | 'Boots (12 pcs)' |
+			| 'Store 02' | 'Dress' | 'S/Yellow' | '8,000'    | 'Sales invoice 103 dated 05.03.2021 12:59:44' | 'pcs'            |
 		And I close all client application windows
 		
 		

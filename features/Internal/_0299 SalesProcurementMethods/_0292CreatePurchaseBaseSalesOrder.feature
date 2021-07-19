@@ -71,14 +71,14 @@ Scenario: _029201 create Purchase order based on Sales order
 		And I move one line down in "List" table and select line
 		And I click the button named "FormDocumentPurchaseOrderGenerate"
 		And "BasisesTree" table contains lines
-			| 'Row presentation'                          | 'Use'                                       | 'Quantity' | 'Unit' | 'Price'  | 'Currency' |
-			| 'Sales order 501 dated 30.03.2021 11:56:21' | 'Sales order 501 dated 30.03.2021 11:56:21' | ''         | ''     | ''       | ''         |
-			| 'Trousers, 38/Yellow'                       | 'Yes'                                       | '5,000'    | 'pcs'  | '338,98' | 'TRY'      |
-			| 'Shirt, 38/Black'                           | 'Yes'                                       | '2,000'    | 'pcs'  | '296,61' | 'TRY'      |
-			| 'Sales order 502 dated 30.03.2021 11:56:28' | 'Sales order 502 dated 30.03.2021 11:56:28' | ''         | ''     | ''       | ''         |
-			| 'Trousers, 38/Yellow'                       | 'Yes'                                       | '8,000'    | 'pcs'  | '400,00' | 'TRY'      |
-			| 'Shirt, 38/Black'                           | 'Yes'                                       | '11,000'   | 'pcs'  | '350,00' | 'TRY'      |
-			| 'Dress, M/White'                            | 'Yes'                                       | '8,000'    | 'pcs'  | '520,00' | 'TRY'      |
+			| 'Row presentation'                          | 'Use' | 'Quantity' | 'Unit' | 'Price'  | 'Currency' |
+			| 'Sales order 501 dated 30.03.2021 11:56:21' | 'Yes' | ''         | ''     | ''       | ''         |
+			| 'Trousers, 38/Yellow'                       | 'Yes' | '5,000'    | 'pcs'  | '338,98' | 'TRY'      |
+			| 'Shirt, 38/Black'                           | 'Yes' | '2,000'    | 'pcs'  | '296,61' | 'TRY'      |
+			| 'Sales order 502 dated 30.03.2021 11:56:28' | 'Yes' | ''         | ''     | ''       | ''         |
+			| 'Trousers, 38/Yellow'                       | 'Yes' | '8,000'    | 'pcs'  | '400,00' | 'TRY'      |
+			| 'Shirt, 38/Black'                           | 'Yes' | '11,000'   | 'pcs'  | '350,00' | 'TRY'      |
+			| 'Dress, M/White'                            | 'Yes' | '8,000'    | 'pcs'  | '520,00' | 'TRY'      |
 		Then the number of "BasisesTree" table lines is "равно" "7"
 		And I click "Ok" button
 	* Filling in main info
@@ -444,13 +444,13 @@ Scenario: _029202 create PI and GR based on PO that based on SO
 		* Create GR
 			And I click the button named "FormDocumentGoodsReceiptGenerate"
 			And "BasisesTree" table contains lines
-				| 'Row presentation'                          | 'Use'                                       | 'Quantity' | 'Unit' | 'Price'  | 'Currency' |
-				| 'Sales order 501 dated 30.03.2021 11:56:21' | 'Sales order 501 dated 30.03.2021 11:56:21' | ''         | ''     | ''       | ''         |
-				| '$$PurchaseOrder029201$$'                   | '$$PurchaseOrder029201$$'                   | ''         | ''     | ''       | ''         |
-				| 'Trousers, 38/Yellow'                       | 'Yes'                                       | '1,000'    | 'pcs'  | '338,98' | 'TRY'      |
-				| 'Sales order 503 dated 30.03.2021 11:57:06' | 'Sales order 503 dated 30.03.2021 11:57:06' | ''         | ''     | ''       | ''         |
-				| '$$PurchaseOrder029201$$'                   | '$$PurchaseOrder029201$$'                   | ''         | ''     | ''       | ''         |
-				| 'Trousers, 38/Yellow'                       | 'Yes'                                       | '20,000'   | 'pcs'  | '400,00' | 'TRY'      |
+				| 'Row presentation'                          | 'Use' | 'Quantity' | 'Unit' | 'Price'  | 'Currency' |
+				| 'Sales order 501 dated 30.03.2021 11:56:21' | 'Yes' | ''         | ''     | ''       | ''         |
+				| '$$PurchaseOrder029201$$'                   | 'Yes' | ''         | ''     | ''       | ''         |
+				| 'Trousers, 38/Yellow'                       | 'Yes' | '1,000'    | 'pcs'  | '338,98' | 'TRY'      |
+				| 'Sales order 503 dated 30.03.2021 11:57:06' | 'Yes' | ''         | ''     | ''       | ''         |
+				| '$$PurchaseOrder029201$$'                   | 'Yes' | ''         | ''     | ''       | ''         |
+				| 'Trousers, 38/Yellow'                       | 'Yes' | '20,000'   | 'pcs'  | '400,00' | 'TRY'      |
 			Then the number of "BasisesTree" table lines is "равно" "6"
 			And I click "Ok" button
 			And "ItemList" table contains lines
@@ -482,15 +482,15 @@ Scenario: _029202 create PI and GR based on PO that based on SO
 		* Create PI
 			And I click the button named "FormDocumentPurchaseInvoiceGenerate"
 			And "BasisesTree" table contains lines
-				| 'Row presentation'                          | 'Use'                                       | 'Quantity' | 'Unit' | 'Price'  | 'Currency' |
-				| 'Sales order 501 dated 30.03.2021 11:56:21' | 'Sales order 501 dated 30.03.2021 11:56:21' | ''         | ''     | ''       | ''         |
-				| '$$PurchaseOrder029201$$'                   | '$$PurchaseOrder029201$$'                   | ''         | ''     | ''       | ''         |
-				| '$$GoodsReceipt0292022$$'                   | '$$GoodsReceipt0292022$$'                   | ''         | ''     | ''       | ''         |
-				| 'Trousers, 38/Yellow'                       | 'Yes'                                       | '1,000'    | 'pcs'  | '338,98' | 'TRY'      |
-				| 'Sales order 503 dated 30.03.2021 11:57:06' | 'Sales order 503 dated 30.03.2021 11:57:06' | ''         | ''     | ''       | ''         |
-				| '$$PurchaseOrder029201$$'                   | '$$PurchaseOrder029201$$'                   | ''         | ''     | ''       | ''         |
-				| '$$GoodsReceipt0292022$$'                   | '$$GoodsReceipt0292022$$'                   | ''         | ''     | ''       | ''         |
-				| 'Trousers, 38/Yellow'                       | 'Yes'                                       | '20,000'   | 'pcs'  | '400,00' | 'TRY'      |
+				| 'Row presentation'                          | 'Use' | 'Quantity' | 'Unit' | 'Price'  | 'Currency' |
+				| 'Sales order 501 dated 30.03.2021 11:56:21' | 'Yes' | ''         | ''     | ''       | ''         |
+				| '$$PurchaseOrder029201$$'                   | 'Yes' | ''         | ''     | ''       | ''         |
+				| '$$GoodsReceipt0292022$$'                   | 'Yes' | ''         | ''     | ''       | ''         |
+				| 'Trousers, 38/Yellow'                       | 'Yes' | '1,000'    | 'pcs'  | '338,98' | 'TRY'      |
+				| 'Sales order 503 dated 30.03.2021 11:57:06' | 'Yes' | ''         | ''     | ''       | ''         |
+				| '$$PurchaseOrder029201$$'                   | 'Yes' | ''         | ''     | ''       | ''         |
+				| '$$GoodsReceipt0292022$$'                   | 'Yes' | ''         | ''     | ''       | ''         |
+				| 'Trousers, 38/Yellow'                       | 'Yes' | '20,000'   | 'pcs'  | '400,00' | 'TRY'      |
 			Then the number of "BasisesTree" table lines is "равно" "8"
 			And I click "Ok" button
 			And "ItemList" table contains lines

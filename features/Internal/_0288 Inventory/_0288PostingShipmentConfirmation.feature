@@ -279,17 +279,17 @@ Scenario: _028805 create document Shipment confirmation based on 2 SO
 		And I move one line down in "List" table and select line
 		And I click the button named "FormDocumentShipmentConfirmationGenerate"	
 		And "BasisesTree" table contains lines
-			| 'Row presentation'                         | 'Use'                                      | 'Quantity' | 'Unit' | 'Price'  | 'Currency' |
-			| 'Sales order 15 dated 01.02.2021 19:50:45' | 'Sales order 15 dated 01.02.2021 19:50:45' | ''         | ''     | ''       | ''         |
-			| 'Dress, XS/Blue'                           | 'Yes'                                      | '1,000'    | 'pcs'  | '520,00' | 'TRY'      |
-			| 'Shirt, 36/Red'                            | 'Yes'                                      | '10,000'   | 'pcs'  | '350,00' | 'TRY'      |
-			| 'Dress, XS/Blue'                           | 'Yes'                                      | '2,000'    | 'pcs'  | '500,00' | 'TRY'      |
-			| 'Dress, XS/Blue'                           | 'Yes'                                      | '10,000'   | 'pcs'  | '520,00' | 'TRY'      |
-			| 'Sales order 16*'                          | 'Sales order 16*'                          | ''         | ''     | ''       | ''         |
-			| 'Dress, XS/Blue'                           | 'Yes'                                      | '1,000'    | 'pcs'  | '520,00' | 'TRY'      |
-			| 'Shirt, 36/Red'                            | 'Yes'                                      | '10,000'   | 'pcs'  | '350,00' | 'TRY'      |
-			| 'Dress, XS/Blue'                           | 'Yes'                                      | '2,000'    | 'pcs'  | '500,00' | 'TRY'      |
-			| 'Dress, XS/Blue'                           | 'Yes'                                      | '10,000'   | 'pcs'  | '520,00' | 'TRY'      |
+			| 'Row presentation'                         | 'Use' | 'Quantity' | 'Unit' | 'Price'  | 'Currency' |
+			| 'Sales order 15 dated 01.02.2021 19:50:45' | 'Yes' | ''         | ''     | ''       | ''         |
+			| 'Dress, XS/Blue'                           | 'Yes' | '1,000'    | 'pcs'  | '520,00' | 'TRY'      |
+			| 'Shirt, 36/Red'                            | 'Yes' | '10,000'   | 'pcs'  | '350,00' | 'TRY'      |
+			| 'Dress, XS/Blue'                           | 'Yes' | '2,000'    | 'pcs'  | '500,00' | 'TRY'      |
+			| 'Dress, XS/Blue'                           | 'Yes' | '10,000'   | 'pcs'  | '520,00' | 'TRY'      |
+			| 'Sales order 16*'                          | 'Yes' | ''         | ''     | ''       | ''         |
+			| 'Dress, XS/Blue'                           | 'Yes' | '1,000'    | 'pcs'  | '520,00' | 'TRY'      |
+			| 'Shirt, 36/Red'                            | 'Yes' | '10,000'   | 'pcs'  | '350,00' | 'TRY'      |
+			| 'Dress, XS/Blue'                           | 'Yes' | '2,000'    | 'pcs'  | '500,00' | 'TRY'      |
+			| 'Dress, XS/Blue'                           | 'Yes' | '10,000'   | 'pcs'  | '520,00' | 'TRY'      |
 		Then the number of "BasisesTree" table lines is "равно" "10"
 		And I click "Ok" button
 	* Create SC and check filling in
@@ -328,14 +328,14 @@ Scenario: _028806 create document Shipment confirmation based on SI (with SO, SI
 			| '32'      |
 		And I click the button named "FormDocumentShipmentConfirmationGenerate"	
 		And "BasisesTree" table contains lines
-			| 'Row presentation'                           | 'Use'                                        | 'Quantity' | 'Unit'           | 'Price'    | 'Currency' |
-			| 'Sales order 32 dated 26.02.2021 13:30:49'   | 'Sales order 32 dated 26.02.2021 13:30:49'   | ''         | ''               | ''         | ''         |
-			| 'Sales invoice 32 dated 04.03.2021 16:32:23' | 'Sales invoice 32 dated 04.03.2021 16:32:23' | ''         | ''               | ''         | ''         |
-			| 'Dress, XS/Blue'                             | 'Yes'                                        | '1,000'    | 'pcs'            | '520,00'   | 'TRY'      |
-			| 'Shirt, 36/Red'                              | 'Yes'                                        | '12,000'   | 'pcs'            | '350,00'   | 'TRY'      |
-			| 'Boots, 37/18SD'                             | 'Yes'                                        | '2,000'    | 'Boots (12 pcs)' | '8 400,00' | 'TRY'      |
-			| 'Sales invoice 32 dated 04.03.2021 16:32:23' | 'Sales invoice 32 dated 04.03.2021 16:32:23' | ''         | ''               | ''         | ''         |
-			| 'Shirt, 38/Black'                            | 'Yes'                                        | '2,000'    | 'pcs'            | '350,00'   | 'TRY'      |
+			| 'Row presentation'                           | 'Use' | 'Quantity' | 'Unit'           | 'Price'    | 'Currency' |
+			| 'Sales order 32 dated 26.02.2021 13:30:49'   | 'Yes' | ''         | ''               | ''         | ''         |
+			| 'Sales invoice 32 dated 04.03.2021 16:32:23' | 'Yes' | ''         | ''               | ''         | ''         |
+			| 'Dress, XS/Blue'                             | 'Yes' | '1,000'    | 'pcs'            | '520,00'   | 'TRY'      |
+			| 'Shirt, 36/Red'                              | 'Yes' | '12,000'   | 'pcs'            | '350,00'   | 'TRY'      |
+			| 'Boots, 37/18SD'                             | 'Yes' | '2,000'    | 'Boots (12 pcs)' | '8 400,00' | 'TRY'      |
+			| 'Sales invoice 32 dated 04.03.2021 16:32:23' | 'Yes' | ''         | ''               | ''         | ''         |
+			| 'Shirt, 38/Black'                            | 'Yes' | '2,000'    | 'pcs'            | '350,00'   | 'TRY'      |
 		Then the number of "BasisesTree" table lines is "равно" "7"
 		And I click "Ok" button
 	* Create SC and check filling in
@@ -464,10 +464,10 @@ Scenario: _028815 create document Shipment confirmation based on Purchase return
 		* Select items from basis documents
 			And I click the button named "AddBasisDocuments"
 			And "BasisesTree" table contains lines
-				| 'Row presentation'                             | 'Use'                                          | 'Quantity' | 'Unit'           | 'Price'  | 'Currency' |
-				| 'Purchase return 32 dated 24.03.2021 15:15:22' | 'Purchase return 32 dated 24.03.2021 15:15:22' | ''         | ''               | ''       | ''         |
-				| 'Dress, XS/Blue'                               | 'No'                                           | '1,000'    | 'pcs'            | '200,00' | 'TRY'      |
-				| 'Boots, 36/18SD'                               | 'No'                                           | '2,000'    | 'Boots (12 pcs)' | '220,00' | 'TRY'      |
+				| 'Row presentation'                             | 'Use' | 'Quantity' | 'Unit'           | 'Price'  | 'Currency' |
+				| 'Purchase return 32 dated 24.03.2021 15:15:22' | 'No'  | ''         | ''               | ''       | ''         |
+				| 'Dress, XS/Blue'                               | 'No'  | '1,000'    | 'pcs'            | '200,00' | 'TRY'      |
+				| 'Boots, 36/18SD'                               | 'No'  | '2,000'    | 'Boots (12 pcs)' | '220,00' | 'TRY'      |
 			And I go to line in "BasisesTree" table
 				| 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
 				| '1,000'    | 'Dress, XS/Blue'   | 'pcs'  | 'No'  |
@@ -705,13 +705,13 @@ Scenario: _028831 check link/unlink form in the SC (Purchase return)
 	* Select items from basis documents
 		And I click the button named "AddBasisDocuments"		
 		And "BasisesTree" table became equal
-			| 'Row presentation'                              | 'Use'                                           | 'Quantity' | 'Unit'           | 'Price'  | 'Currency' |
-			| 'Purchase return 351 dated 24.03.2021 16:08:15' | 'Purchase return 351 dated 24.03.2021 16:08:15' | ''         | ''               | ''       | ''         |
-			| 'Dress, XS/Blue'                                | 'No'                                            | '1,000'    | 'pcs'            | '200,00' | 'TRY'      |
-			| 'Boots, 36/18SD'                                | 'No'                                            | '2,000'    | 'Boots (12 pcs)' | '220,00' | 'TRY'      |
-			| 'Purchase return 352 dated 24.03.2021 16:08:35' | 'Purchase return 352 dated 24.03.2021 16:08:35' | ''         | ''               | ''       | ''         |
-			| 'Dress, XS/Blue'                                | 'No'                                            | '1,000'    | 'pcs'            | '200,00' | 'TRY'      |
-			| 'Boots, 36/18SD'                                | 'No'                                            | '2,000'    | 'Boots (12 pcs)' | '220,00' | 'TRY'      |
+			| 'Row presentation'                              | 'Use' | 'Quantity' | 'Unit'           | 'Price'  | 'Currency' |
+			| 'Purchase return 351 dated 24.03.2021 16:08:15' | 'No'  | ''         | ''               | ''       | ''         |
+			| 'Dress, XS/Blue'                                | 'No'  | '1,000'    | 'pcs'            | '200,00' | 'TRY'      |
+			| 'Boots, 36/18SD'                                | 'No'  | '2,000'    | 'Boots (12 pcs)' | '220,00' | 'TRY'      |
+			| 'Purchase return 352 dated 24.03.2021 16:08:35' | 'No'  | ''         | ''               | ''       | ''         |
+			| 'Dress, XS/Blue'                                | 'No'  | '1,000'    | 'pcs'            | '200,00' | 'TRY'      |
+			| 'Boots, 36/18SD'                                | 'No'  | '2,000'    | 'Boots (12 pcs)' | '220,00' | 'TRY'      |
 		And I go to line in "BasisesTree" table
 			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
 			| 'TRY'      | '200,00' | '1,000'    | 'Dress, XS/Blue'   | 'pcs'  | 'No'  |	

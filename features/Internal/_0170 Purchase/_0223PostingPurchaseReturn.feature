@@ -417,9 +417,9 @@ Scenario: _022310 create Purchase return based on Purchase return order
 		* Select items from basis documents
 			And I click the button named "AddBasisDocuments"
 			And "BasisesTree" table contains lines
-				| 'Row presentation'              | 'Use'                           | 'Quantity' | 'Unit' | 'Price'  | 'Currency' |
-				| '$$PurchaseReturnOrder022006$$' | '$$PurchaseReturnOrder022006$$' | ''         | ''     | ''       | ''         |
-				| 'Trousers, 36/Yellow'           | 'No'                            | '3,000'    | 'pcs'  | '250,00' | 'TRY'      |
+				| 'Row presentation'              | 'Use' | 'Quantity' | 'Unit' | 'Price'  | 'Currency' |
+				| '$$PurchaseReturnOrder022006$$' | 'No'  | ''         | ''     | ''       | ''         |
+				| 'Trousers, 36/Yellow'           | 'No'  | '3,000'    | 'pcs'  | '250,00' | 'TRY'      |
 			And I go to line in "BasisesTree" table
 				| 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
 				| '3,000'    | 'Trousers, 36/Yellow'   | 'pcs'  | 'No'  |

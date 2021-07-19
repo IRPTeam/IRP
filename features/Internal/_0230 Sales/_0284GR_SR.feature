@@ -252,8 +252,8 @@ Scenario: _028402 check link/unlink when add items to Sales return from GR
 			| 'Row presentation'                           | 'Use'                                        |
 			| 'Goods receipt 12 dated 02.03.2021 12:16:02' | 'Goods receipt 12 dated 02.03.2021 12:16:02' |
 		And "BasisesTree" table contains lines
-			| 'Row presentation'                            | 'Use'                                         |
-			| 'Goods receipt 125 dated 12.03.2021 08:56:32' | 'Goods receipt 125 dated 12.03.2021 08:56:32' |
+			| 'Row presentation'                            | 'Use' |
+			| 'Goods receipt 125 dated 12.03.2021 08:56:32' | 'No'  |
 		And I go to line in "BasisesTree" table
 			| 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
 			| '2,000'    | 'Dress, XS/Blue'   | 'pcs'  | 'No'  |

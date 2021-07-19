@@ -67,7 +67,7 @@
   <defaultChoiceForm>Document.PurchaseInvoice.Form.ChoiceForm</defaultChoiceForm>
   <realTimePosting>Deny</realTimePosting>
   <registerRecords>AccumulationRegister.R1021B_VendorsTransactions</registerRecords>
-  <registerRecords>AccumulationRegister.T10000B_RowIDMovements</registerRecords>
+  <registerRecords>AccumulationRegister.TM1010B_RowIDMovements</registerRecords>
   <registerRecords>AccumulationRegister.R1001T_Purchases</registerRecords>
   <registerRecords>AccumulationRegister.R1005T_PurchaseSpecialOffers</registerRecords>
   <registerRecords>AccumulationRegister.R5010B_ReconciliationStatement</registerRecords>
@@ -86,10 +86,11 @@
   <registerRecords>AccumulationRegister.R4014B_SerialLotNumber</registerRecords>
   <registerRecords>AccumulationRegister.R1011B_PurchaseOrdersReceipt</registerRecords>
   <registerRecords>AccumulationRegister.R4031B_GoodsInTransitIncoming</registerRecords>
-  <registerRecords>AccumulationRegister.T10000T_RowIDMovements</registerRecords>
-  <registerRecords>InformationRegister.T1001I_PartnerTransactions</registerRecords>
+  <registerRecords>AccumulationRegister.TM1010T_RowIDMovements</registerRecords>
+  <registerRecords>InformationRegister.T2011S_PartnerTransactions</registerRecords>
   <registerRecords>AccumulationRegister.R5012B_VendorsAging</registerRecords>
   <registerRecords>AccumulationRegister.R1022B_VendorsPaymentPlanning</registerRecords>
+  <registerRecords>AccumulationRegister.R5022T_Expenses</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>

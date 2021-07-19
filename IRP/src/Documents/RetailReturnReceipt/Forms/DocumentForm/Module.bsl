@@ -218,6 +218,16 @@ Procedure ItemListStoreOnChange(Item)
 	DocRetailReturnReceiptClient.ItemListStoreOnChange(Object, ThisObject, Item);
 EndProcedure
 
+&AtClient
+Procedure ItemListRevenueTypeStartChoice(Item, ChoiceData, StandardProcessing)
+	DocRetailReturnReceiptClient.ItemListRevenueTypeStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure ItemListRevenueTypeEditTextChange(Item, Text, StandardProcessing)
+	DocRetailReturnReceiptClient.ItemListRevenueTypeEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
 #EndRegion
 
 #Region ItemPartner

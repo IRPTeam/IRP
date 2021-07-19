@@ -116,7 +116,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R4032B_GoodsInTransitOutgoing());
 	QueryArray.Add(R4050B_StockInventory());
 	QueryArray.Add(R5010B_ReconciliationStatement());
-
+	QueryArray.Add(R5022T_Expenses());
 	Return QueryArray;
 EndFunction
 
@@ -194,7 +194,10 @@ Function ItemList()
 		|	PurchaseReturnItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS IsService,
 		|	PurchaseReturnItemList.NetAmount,
 		|	PurchaseReturnItemList.PurchaseInvoice AS Invoice,
-		|	PurchaseReturnItemList.ReturnReason
+		|	PurchaseReturnItemList.ReturnReason,
+		|	PurchaseReturnItemList.BusinessUnit AS BusinessUnit,
+		|	PurchaseReturnItemList.ExpenseType AS ExpenseType,
+		|	PurchaseReturnItemList.AdditionalAnalytic AS AdditionalAnalytic
 		|INTO ItemList
 		|FROM
 		|	Document.PurchaseReturn.ItemList AS PurchaseReturnItemList
@@ -493,3 +496,15 @@ Function R5010B_ReconciliationStatement()
 EndFunction
 
 #EndRegion
+
+Function R5022T_Expenses()
+	Return
+		"SELECT
+		|	*,
+		|	- ItemList.NetAmount AS Amount
+		|INTO R5022T_Expenses
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	ItemList.IsService";
+EndFunction

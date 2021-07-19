@@ -116,6 +116,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R4031B_GoodsInTransitIncoming());
 	QueryArray.Add(R4050B_StockInventory());
 	QueryArray.Add(R5010B_ReconciliationStatement());
+	QueryArray.Add(R5021T_Revenues());
 	Return QueryArray;
 EndFunction
 
@@ -193,7 +194,10 @@ Function ItemList()
 		|	GoodsReceipts.GoodsReceipt,
 		|	ItemList.NetAmount,
 		|	ItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS IsService,
-		|	ItemList.ReturnReason
+		|	ItemList.ReturnReason,
+		|	ItemList.BusinessUnit AS BusinessUnit,
+		|	ItemList.RevenueType AS RevenueType,
+		|	ItemList.AdditionalAnalytic AS AdditionalAnalytic
 		|INTO ItemList
 		|FROM
 		|	Document.SalesReturn.ItemList AS ItemList
@@ -504,3 +508,15 @@ Function R5010B_ReconciliationStatement()
 EndFunction
 
 #EndRegion
+
+Function R5021T_Revenues()
+	Return
+		"SELECT
+		|	*,
+		|	- ItemList.NetAmount AS Amount
+		|INTO R5021T_Revenues
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	TRUE";
+EndFunction

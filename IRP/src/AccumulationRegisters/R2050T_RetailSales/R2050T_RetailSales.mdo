@@ -8,12 +8,13 @@
     <recordKeyType typeId="23b98f58-90fb-4112-bfd2-1c1f89b321ed" valueTypeId="f97119f5-e6a6-4ead-ba25-8f59111be3f2"/>
     <recordType typeId="a0889534-4bf3-463b-8e02-6ed3f73b8d68" valueTypeId="a2b01cbc-4ba5-414d-92f1-d48576f5e19c"/>
   </producedTypes>
-  <name>RetailSales</name>
+  <name>R2050T_RetailSales</name>
   <synonym>
     <key>en</key>
-    <value>Retail sales</value>
+    <value>R2050 Retail sales</value>
   </synonym>
   <useStandardCommands>true</useStandardCommands>
+  <registerType>Turnovers</registerType>
   <dataLockControlMode>Managed</dataLockControlMode>
   <enableTotalsSplitting>true</enableTotalsSplitting>
   <resources uuid="ec0cc161-7030-4da7-8027-a697dcf2208f">

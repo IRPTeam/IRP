@@ -314,8 +314,8 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R2020B_AdvancesFromCustomers());
 	QueryArray.Add(R1021B_VendorsTransactions());
 	QueryArray.Add(R1020B_AdvancesToVendors());
-	QueryArray.Add(T1002I_PartnerAdvances());
-	QueryArray.Add(T1001I_PartnerTransactions());
+	QueryArray.Add(T2012S_PartnerAdvances());
+	QueryArray.Add(T2011S_PartnerTransactions());
 	QueryArray.Add(R5011B_CustomersAging());
 	QueryArray.Add(R3035T_CashPlanning());
 	Return QueryArray;
@@ -451,7 +451,7 @@ Function R2021B_CustomersTransactions()
 		|	OffsetOfAdvances.Amount,
 		|	OffsetOfAdvances.Recorder
 		|FROM
-		|	InformationRegister.T1000I_OffsetOfAdvances AS OffsetOfAdvances
+		|	InformationRegister.T2010S_OffsetOfAdvances AS OffsetOfAdvances
 		|WHERE
 		|	OffsetOfAdvances.Document = &Ref";
 EndFunction
@@ -510,7 +510,7 @@ Function R2020B_AdvancesFromCustomers()
 		|	OffsetOfAdvances.Key,
 		|	OffsetOfAdvances.Recorder
 		|FROM
-		|	InformationRegister.T1000I_OffsetOfAdvances AS OffsetOfAdvances
+		|	InformationRegister.T2010S_OffsetOfAdvances AS OffsetOfAdvances
 		|WHERE
 		|	OffsetOfAdvances.Document = &Ref";
 EndFunction
@@ -550,12 +550,12 @@ Function R5011B_CustomersAging()
 		|	OffsetOfAging.Recorder AS AgingClosing
 		|INTO R5011B_CustomersAging
 		|FROM
-		|	InformationRegister.T1003I_OffsetOfAging AS OffsetOfAging
+		|	InformationRegister.T2013S_OffsetOfAging AS OffsetOfAging
 		|WHERE
 		|	OffsetOfAging.Document = &Ref";
 EndFunction
 
-Function T1002I_PartnerAdvances()
+Function T2012S_PartnerAdvances()
 	Return
 		"SELECT
 		|	PaymentList.Period,
@@ -567,7 +567,7 @@ Function T1002I_PartnerAdvances()
 		|	PaymentList.Amount,
 		|	PaymentList.Key,
 		|	TRUE AS IsCustomerAdvance
-		|INTO T1002I_PartnerAdvances
+		|INTO T2012S_PartnerAdvances
 		|FROM
 		|	PaymentList AS PaymentList
 		|WHERE
@@ -575,7 +575,7 @@ Function T1002I_PartnerAdvances()
 		|	AND PaymentList.IsAdvance";	
 EndFunction
 
-Function T1001I_PartnerTransactions()
+Function T2011S_PartnerTransactions()
 	Return
 		"SELECT
 		|	PaymentList.Period,
@@ -588,7 +588,7 @@ Function T1001I_PartnerTransactions()
 		|	PaymentList.Key,
 		|	PaymentList.Amount,
 		|	TRUE AS IsPaymentFromCustomer
-		|INTO T1001I_PartnerTransactions
+		|INTO T2011S_PartnerTransactions
 		|FROM
 		|	PaymentList AS PaymentList
 		|WHERE

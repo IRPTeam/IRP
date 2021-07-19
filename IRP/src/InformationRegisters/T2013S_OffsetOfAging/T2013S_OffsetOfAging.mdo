@@ -9,10 +9,10 @@
     <recordType typeId="031813da-657a-4cff-8fb0-b04d9c4abd00" valueTypeId="9a32d0f9-b21a-446c-b71d-05ab22c494b8"/>
     <recordManagerType typeId="c18c8de9-7cf5-40b3-b4cc-7672d0509350" valueTypeId="04557e1f-3b7a-4173-a099-cd6cd927fc19"/>
   </producedTypes>
-  <name>T1003I_OffsetOfAging</name>
+  <name>T2013S_OffsetOfAging</name>
   <synonym>
     <key>en</key>
-    <value>T1003I Offset of aging</value>
+    <value>T2013S Offset of aging</value>
   </synonym>
   <useStandardCommands>true</useStandardCommands>
   <editType>InDialog</editType>

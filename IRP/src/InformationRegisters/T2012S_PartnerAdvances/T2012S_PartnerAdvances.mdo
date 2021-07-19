@@ -9,10 +9,10 @@
     <recordType typeId="2a30f3e4-d48f-43e1-aa8b-b5758e8bca4a" valueTypeId="5d5c7436-deb5-4424-900c-61e6a7acee69"/>
     <recordManagerType typeId="c4cbe0d4-5a0f-4f47-af40-0cb478e70562" valueTypeId="2beaa1e9-fbcc-4f00-aa00-7c51e4d1149d"/>
   </producedTypes>
-  <name>T1002I_PartnerAdvances</name>
+  <name>T2012S_PartnerAdvances</name>
   <synonym>
     <key>en</key>
-    <value>T1002I Partner advances</value>
+    <value>T2012S Partner advances</value>
   </synonym>
   <useStandardCommands>true</useStandardCommands>
   <editType>InDialog</editType>

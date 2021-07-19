@@ -119,8 +119,9 @@
   <registerRecords>AccumulationRegister.R4050B_StockInventory</registerRecords>
   <registerRecords>AccumulationRegister.R5010B_ReconciliationStatement</registerRecords>
   <registerRecords>AccumulationRegister.R4032B_GoodsInTransitOutgoing</registerRecords>
-  <registerRecords>AccumulationRegister.T10000B_RowIDMovements</registerRecords>
-  <registerRecords>AccumulationRegister.T10000T_RowIDMovements</registerRecords>
+  <registerRecords>AccumulationRegister.TM1010B_RowIDMovements</registerRecords>
+  <registerRecords>AccumulationRegister.TM1010T_RowIDMovements</registerRecords>
+  <registerRecords>AccumulationRegister.R5022T_Expenses</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -578,10 +579,10 @@
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
     <attributes uuid="c1c24cea-3784-4236-89c7-973ca9fb0a72">
-      <name>RevenueType</name>
+      <name>ExpenseType</name>
       <synonym>
         <key>en</key>
-        <value>Revenue type</value>
+        <value>Expense type</value>
       </synonym>
       <type>
         <types>CatalogRef.ExpenseAndRevenueTypes</types>

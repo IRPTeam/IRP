@@ -11,20 +11,20 @@ Procedure Posting_RowID(Source, Cancel, PostingMode) Export
 		EndIf;
 	EndIf;
 
-	Posting_T10000B_RowIDMovements(Source, Cancel, PostingMode);
+	Posting_TM1010B_RowIDMovements(Source, Cancel, PostingMode);
 	
 	If Is(Source).SI Or Is(Source).PI Or Is(Source).RSR Then
-		Posting_T10000T_RowIDMovements_Invoice(Source, Cancel, PostingMode);
+		Posting_TM1010T_RowIDMovements_Invoice(Source, Cancel, PostingMode);
 	EndIf;
 
 	If Is(Source).SR Or Is(Source).SRO 
 		Or Is(Source).PR Or Is(Source).PRO 
 		Or Is (Source).RRR Then
-		Posting_T10000T_RowIDMovements_Return(Source, Cancel, PostingMode);
+		Posting_TM1010T_RowIDMovements_Return(Source, Cancel, PostingMode);
 	EndIf;
 EndProcedure
 
-Procedure Posting_T10000T_RowIDMovements_Return(Source, Cancel, PostingMode)
+Procedure Posting_TM1010T_RowIDMovements_Return(Source, Cancel, PostingMode)
 	Query = New Query();
 	Query.Text =
 	"SELECT
@@ -62,10 +62,10 @@ Procedure Posting_T10000T_RowIDMovements_Return(Source, Cancel, PostingMode)
 	Query.SetParameter("CurrentStep", CurrentStep);
 	
 	QueryResult = Query.Execute().Unload();
-	Source.RegisterRecords.T10000T_RowIDMovements.Load(QueryResult);
+	Source.RegisterRecords.TM1010T_RowIDMovements.Load(QueryResult);
 EndProcedure
 
-Procedure Posting_T10000T_RowIDMovements_Invoice(Source, Cancel, PostingMode)
+Procedure Posting_TM1010T_RowIDMovements_Invoice(Source, Cancel, PostingMode)
 	Query = New Query();
 	Query.Text =
 	"SELECT
@@ -100,10 +100,10 @@ Procedure Posting_T10000T_RowIDMovements_Invoice(Source, Cancel, PostingMode)
 	Query.SetParameter("NextStep", NextStep);
 	
 	QueryResult = Query.Execute().Unload();
-	Source.RegisterRecords.T10000T_RowIDMovements.Load(QueryResult);
+	Source.RegisterRecords.TM1010T_RowIDMovements.Load(QueryResult);
 EndProcedure
 
-Procedure Posting_T10000B_RowIDMovements(Source, Cancel, PostingMode)	
+Procedure Posting_TM1010B_RowIDMovements(Source, Cancel, PostingMode)	
 	Query = New Query;
 	Query.Text =
 		"SELECT
@@ -131,13 +131,13 @@ Procedure Posting_T10000B_RowIDMovements(Source, Cancel, PostingMode)
 		|	END AS Basis,
 		|	Table.RowRef,
 		|	CASE
-		|		WHEN ISNULL(T10000B_RowIDMovements.QuantityBalance, 0) < Table.Quantity
-		|			THEN ISNULL(T10000B_RowIDMovements.QuantityBalance, 0)
+		|		WHEN ISNULL(TM1010B_RowIDMovements.QuantityBalance, 0) < Table.Quantity
+		|			THEN ISNULL(TM1010B_RowIDMovements.QuantityBalance, 0)
 		|		ELSE Table.Quantity
 		|	END AS Quantity
 		|FROM
 		|	RowIDMovements AS Table
-		|		INNER JOIN AccumulationRegister.T10000B_RowIDMovements.Balance(&Period, (RowID, Step, Basis, RowRef) IN
+		|		INNER JOIN AccumulationRegister.TM1010B_RowIDMovements.Balance(&Period, (RowID, Step, Basis, RowRef) IN
 		|			(SELECT
 		|				Table.RowID,
 		|				Table.CurrentStep,
@@ -146,11 +146,11 @@ Procedure Posting_T10000B_RowIDMovements(Source, Cancel, PostingMode)
 		|			FROM
 		|				RowIDMovements AS Table
 		|			WHERE
-		|				NOT Table.CurrentStep = VALUE(Catalog.MovementRules.EmptyRef))) AS T10000B_RowIDMovements
-		|		ON T10000B_RowIDMovements.RowID = Table.RowID
-		|		AND T10000B_RowIDMovements.Step = Table.CurrentStep
-		|		AND T10000B_RowIDMovements.Basis = Table.Basis
-		|		AND T10000B_RowIDMovements.RowRef = Table.RowRef
+		|				NOT Table.CurrentStep = VALUE(Catalog.MovementRules.EmptyRef))) AS TM1010B_RowIDMovements
+		|		ON TM1010B_RowIDMovements.RowID = Table.RowID
+		|		AND TM1010B_RowIDMovements.Step = Table.CurrentStep
+		|		AND TM1010B_RowIDMovements.Basis = Table.Basis
+		|		AND TM1010B_RowIDMovements.RowRef = Table.RowRef
 		|WHERE
 		|	NOT Table.CurrentStep = VALUE(Catalog.MovementRules.EmptyRef)
 		|
@@ -175,7 +175,7 @@ Procedure Posting_T10000B_RowIDMovements(Source, Cancel, PostingMode)
 	Query.SetParameter("Period", New Boundary(Source.Ref.PointInTime(), BoundaryType.Excluding));
 	
 	QueryResult = Query.Execute().Unload();
-	Source.RegisterRecords.T10000B_RowIDMovements.Load(QueryResult);
+	Source.RegisterRecords.TM1010B_RowIDMovements.Load(QueryResult);
 EndProcedure
 
 Procedure BeforeWrite_RowID(Source, Cancel, WriteMode, PostingMode) Export
@@ -953,12 +953,12 @@ Function GetBalanceQuantity(Source, Row)
 	Query = New Query();
 	Query.Text = 
 	"SELECT
-	|	T10000B_RowIDMovementsBalance.QuantityBalance
+	|	TM1010B_RowIDMovements.QuantityBalance
 	|FROM
-	|	AccumulationRegister.T10000B_RowIDMovements.Balance(&Period, RowID = &RowID
+	|	AccumulationRegister.TM1010B_RowIDMovements.Balance(&Period, RowID = &RowID
 	|	AND Step = &Step
 	|	AND Basis = &Basis
-	|	AND RowRef = &RowRef) AS T10000B_RowIDMovementsBalance";
+	|	AND RowRef = &RowRef) AS TM1010B_RowIDMovements";
 	Period = Undefined;
 	If ValueIsFilled(Source.Ref) Then
 		Period = New Boundary(Source.Ref.PointInTime(), BoundaryType.Excluding);
@@ -1419,6 +1419,7 @@ Function ExtractData_FromSI(BasisesTable, DataReceiver)
 		|	ItemList.DontCalculateRow AS DontCalculateRow,
 		|	ItemList.BusinessUnit AS BusinessUnit,
 		|	ItemList.RevenueType AS RevenueType,
+		|	ItemList.AdditionalAnalytic AS AdditionalAnalytic,
 		|	ItemList.Detail AS Detail,
 		|	ItemList.Store.UseShipmentConfirmation
 		|	AND NOT ItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS UseShipmentConfirmation,
@@ -1918,6 +1919,7 @@ Function ExtractData_FromPI(BasisesTable, DataReceiver)
 		|	ItemList.DontCalculateRow AS DontCalculateRow,
 		|	ItemList.BusinessUnit AS BusinessUnit,
 		|	ItemList.ExpenseType AS ExpenseType,
+		|	ItemList.AdditionalAnalytic AS AdditionalAnalytic,
 		|	ItemList.Detail AS Detail,
 		|	ItemList.Store.UseGoodsReceipt
 		|	AND NOT ItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS UseGoodsReceipt,
@@ -2411,7 +2413,7 @@ Function ExtractData_FromPR(BasisesTable, DataReceiver)
 		|	ItemList.PriceType AS PriceType,
 		|	ItemList.DontCalculateRow AS DontCalculateRow,
 		|	ItemList.BusinessUnit AS BusinessUnit,
-		|	ItemList.RevenueType AS RevenueType,
+		|	ItemList.ExpenseType AS ExpenseType,
 		|	ItemList.AdditionalAnalytic AS AdditionalAnalytic,
 		|	ItemLIst.ReturnReason AS ReturnReason,
 		|	ItemList.Store.UseShipmentConfirmation
@@ -2511,7 +2513,7 @@ Function ExtractData_FromPRO(BasisesTable, DataReceiver)
 		|	ItemList.PriceType AS PriceType,
 		|	ItemList.DontCalculateRow AS DontCalculateRow,
 		|	ItemList.BusinessUnit AS BusinessUnit,
-		|	ItemList.RevenueType AS RevenueType,
+		|	ItemList.ExpenseType AS ExpenseType,
 		|	ItemList.AdditionalAnalytic AS AdditionalAnalytic,
 		|	0 AS Quantity,
 		|	ISNULL(ItemList.QuantityInBaseUnit, 0) AS OriginalQuantity,
@@ -2609,7 +2611,7 @@ Function ExtractData_FromSR(BasisesTable, DataReceiver)
 		|	ItemList.PriceType AS PriceType,
 		|	ItemList.DontCalculateRow AS DontCalculateRow,
 		|	ItemList.BusinessUnit AS BusinessUnit,
-		|	ItemList.ExpenseType AS ExpenseType,
+		|	ItemList.RevenueType AS RevenueType,
 		|	ItemList.AdditionalAnalytic AS AdditionalAnalytic,
 		|	ItemList.Store.UseGoodsReceipt
 		|	AND NOT ItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS UseGoodsReceipt,
@@ -2708,7 +2710,7 @@ Function ExtractData_FromSRO(BasisesTable, DataReceiver)
 		|	ItemList.PriceType AS PriceType,
 		|	ItemList.DontCalculateRow AS DontCalculateRow,
 		|	ItemList.BusinessUnit AS BusinessUnit,
-		|	ItemList.ExpenseType AS ExpenseType,
+		|	ItemList.RevenueType AS RevenueType,
 		|	ItemList.AdditionalAnalytic AS AdditionalAnalytic,
 		|	0 AS Quantity,
 		|	ISNULL(ItemList.QuantityInBaseUnit, 0) AS OriginalQuantity,
@@ -2804,6 +2806,7 @@ Function ExtractData_FromRSR(BasisesTable, DataReceiver)
 		|	ItemList.DontCalculateRow AS DontCalculateRow,
 		|	ItemList.BusinessUnit AS BusinessUnit,
 		|	ItemList.RevenueType AS RevenueType,
+		|	ItemList.AdditionalAnalytic AS AdditionalAnalytic,
 		|	ItemList.Detail AS Detail,
 		|	0 AS Quantity,
 		|	ISNULL(ItemList.QuantityInBaseUnit, 0) AS OriginalQuantity,
@@ -3515,7 +3518,7 @@ Procedure ApplyFilterSet_SO_ForSI(Query)
 	|	RowIDMovements.QuantityBalance AS Quantity
 	|INTO RowIDMovements_SO_ForSI
 	|FROM
-	|	AccumulationRegister.T10000B_RowIDMovements.Balance(&Period, Step IN (&StepArray)
+	|	AccumulationRegister.TM1010B_RowIDMovements.Balance(&Period, Step IN (&StepArray)
 	|	AND (Basis IN (&Basises)
 	|	OR RowRef IN
 	|		(SELECT
@@ -3576,7 +3579,7 @@ Procedure ApplyFilterSet_SO_ForSC(Query)
 	|	RowIDMovements.QuantityBalance AS Quantity
 	|INTO RowIDMovements_SO_ForSC
 	|FROM
-	|	AccumulationRegister.T10000B_RowIDMovements.Balance(&Period, Step IN (&StepArray)
+	|	AccumulationRegister.TM1010B_RowIDMovements.Balance(&Period, Step IN (&StepArray)
 	|	AND (Basis IN (&Basises)
 	|	OR RowRef IN
 	|		(SELECT
@@ -3627,7 +3630,7 @@ Procedure ApplyFilterSet_SO_ForPO_ForPI(Query)
 	|	RowIDMovements.QuantityBalance AS Quantity
 	|INTO RowIDMovements_SO_ForPO_ForPI
 	|FROM
-	|	AccumulationRegister.T10000B_RowIDMovements.Balance(&Period, Step IN (&StepArray)
+	|	AccumulationRegister.TM1010B_RowIDMovements.Balance(&Period, Step IN (&StepArray)
 	|	AND (Basis IN (&Basises)
 	|	OR RowRef IN
 	|		(SELECT
@@ -3668,7 +3671,7 @@ Procedure ApplyFilterSet_SC_ForSI(Query)
 	|	RowIDMovements.QuantityBalance AS Quantity
 	|INTO RowIDMovements_SC_ForSI
 	|FROM
-	|	AccumulationRegister.T10000B_RowIDMovements.Balance(&Period, Step IN (&StepArray)
+	|	AccumulationRegister.TM1010B_RowIDMovements.Balance(&Period, Step IN (&StepArray)
 	|	AND (Basis IN (&Basises)
 	|	OR RowRef.Basis IN (&Basises)
 	|	OR RowRef IN
@@ -3720,7 +3723,7 @@ Procedure ApplyFilterSet_SI_ForSC(Query)
 	|	RowIDMovements.QuantityBalance AS Quantity
 	|INTO RowIDMovements_SI_ForSC
 	|FROM
-	|	AccumulationRegister.T10000B_RowIDMovements.Balance(&Period, Step IN (&StepArray)
+	|	AccumulationRegister.TM1010B_RowIDMovements.Balance(&Period, Step IN (&StepArray)
 	|	AND (Basis IN (&Basises)
 	|	OR RowRef.Basis IN (&Basises)
 	|	OR RowRef IN
@@ -3772,7 +3775,7 @@ Procedure ApplyFilterSet_PO_ForPI(Query)
 	|	RowIDMovements.QuantityBalance AS Quantity
 	|INTO RowIDMovements_PO_ForPI
 	|FROM
-	|	AccumulationRegister.T10000B_RowIDMovements.Balance(&Period, Step IN (&StepArray)
+	|	AccumulationRegister.TM1010B_RowIDMovements.Balance(&Period, Step IN (&StepArray)
 	|	AND (Basis IN (&Basises)
 	|	OR RowRef.Basis IN (&Basises)
 	|	OR RowRef IN
@@ -3834,7 +3837,7 @@ Procedure ApplyFilterSet_PO_ForGR(Query)
 	|	RowIDMovements.QuantityBalance AS Quantity
 	|INTO RowIDMovements_PO_ForGR
 	|FROM
-	|	AccumulationRegister.T10000B_RowIDMovements.Balance(&Period, Step IN (&StepArray)
+	|	AccumulationRegister.TM1010B_RowIDMovements.Balance(&Period, Step IN (&StepArray)
 	|	AND (Basis IN (&Basises)
 	|	OR RowRef IN
 	|		(SELECT
@@ -3885,7 +3888,7 @@ Procedure ApplyFilterSet_GR_ForSI_ForSC(Query)
 	|	RowIDMovements.QuantityBalance AS Quantity
 	|INTO RowIDMovements_GR_ForSI_ForSC
 	|FROM
-	|	AccumulationRegister.T10000B_RowIDMovements.Balance(&Period, Step IN (&StepArray)
+	|	AccumulationRegister.TM1010B_RowIDMovements.Balance(&Period, Step IN (&StepArray)
 	|	AND (Basis IN (&Basises) 
 	|     OR RowRef.Basis IN (&Basises)
 	|	  OR RowRef IN
@@ -3922,7 +3925,7 @@ Procedure ApplyFIlterSet_PI_ForSI_ForSC(Query)
 	|	RowIDMovements.QuantityBalance AS Quantity
 	|INTO RowIDMovements_PI_ForSI_ForSC
 	|FROM
-	|	AccumulationRegister.T10000B_RowIDMovements.Balance(&Period, Step IN (&StepArray)
+	|	AccumulationRegister.TM1010B_RowIDMovements.Balance(&Period, Step IN (&StepArray)
 	|	AND (Basis IN (&Basises))
 	|	OR RowRef.Basis IN (&Basises)
 	|	OR RowRef IN
@@ -3959,7 +3962,7 @@ Procedure ApplyFilterSet_GR_ForPI(Query)
 	|	RowIDMovements.QuantityBalance AS Quantity
 	|INTO RowIDMovements_GR_ForPI
 	|FROM
-	|	AccumulationRegister.T10000B_RowIDMovements.Balance(&Period, Step IN (&StepArray)
+	|	AccumulationRegister.TM1010B_RowIDMovements.Balance(&Period, Step IN (&StepArray)
 	|	AND (Basis IN (&Basises)
 	|	OR RowRef.Basis IN (&Basises)
 	|	OR RowRef IN
@@ -4011,7 +4014,7 @@ Procedure ApplyFilterSet_PI_ForGR(Query)
 	|	RowIDMovements.QuantityBalance AS Quantity
 	|INTO RowIDMovements_PI_ForGR
 	|FROM
-	|	AccumulationRegister.T10000B_RowIDMovements.Balance(&Period, Step IN (&StepArray)
+	|	AccumulationRegister.TM1010B_RowIDMovements.Balance(&Period, Step IN (&StepArray)
 	|	AND (Basis IN (&Basises)
 	|	OR RowRef.Basis IN (&Basises)
 	|	OR RowRef IN
@@ -4063,7 +4066,7 @@ Procedure ApplyFIlterSet_ITO_ForIT(Query)
 	|	RowIDMovements.QuantityBalance AS Quantity
 	|INTO RowIDMovements_ITO_ForIT
 	|FROM
-	|	AccumulationRegister.T10000B_RowIDMovements.Balance(&Period,
+	|	AccumulationRegister.TM1010B_RowIDMovements.Balance(&Period,
 	|	Step IN (&StepArray)
 	|	AND Basis IN (&Basises)
 	|	OR RowRef IN
@@ -4110,7 +4113,7 @@ Procedure ApplyFilterSet_IT_ForSC(Query)
 	|	RowIDMovements.QuantityBalance AS Quantity
 	|INTO RowIDMovements_IT_ForSC
 	|FROM
-	|	AccumulationRegister.T10000B_RowIDMovements.Balance(&Period, Step IN (&StepArray)
+	|	AccumulationRegister.TM1010B_RowIDMovements.Balance(&Period, Step IN (&StepArray)
 	|	AND (Basis IN (&Basises)
 	|	OR RowRef IN
 	|		(SELECT
@@ -4151,7 +4154,7 @@ Procedure ApplyFilterSet_IT_ForGR(Query)
 	|	RowIDMovements.QuantityBalance AS Quantity
 	|INTO RowIDMovements_IT_ForGR
 	|FROM
-	|	AccumulationRegister.T10000B_RowIDMovements.Balance(&Period,
+	|	AccumulationRegister.TM1010B_RowIDMovements.Balance(&Period,
 	|	Step IN (&StepArray)
 	|	AND (Basis IN (&Basises)
 	|	OR RowRef IN
@@ -4193,7 +4196,7 @@ Procedure ApplyFilterSet_ISR_ForITO_ForPO_ForPI(Query)
 	|	RowIDMovements.QuantityBalance AS Quantity
 	|INTO RowIDMovements_ISR_ForITO_ForPO_ForPI
 	|FROM
-	|	AccumulationRegister.T10000B_RowIDMovements.Balance(&Period, Step IN (&StepArray)
+	|	AccumulationRegister.TM1010B_RowIDMovements.Balance(&Period, Step IN (&StepArray)
 	|	AND (Basis IN (&Basises)
 	|	OR RowRef IN
 	|		(SELECT
@@ -4229,7 +4232,7 @@ Procedure ApplyFilterSet_PhysicalInventory_ForSurplus_ForWriteOff(Query)
 	|	RowIDMovements.QuantityBalance AS Quantity
 	|INTO RowIDMovements_PhysicalInventory_ForSurplus_ForWriteOff
 	|FROM
-	|	AccumulationRegister.T10000B_RowIDMovements.Balance(&Period, Step IN (&StepArray)
+	|	AccumulationRegister.TM1010B_RowIDMovements.Balance(&Period, Step IN (&StepArray)
 	|	AND (Basis IN (&Basises)
 	|	OR RowRef IN
 	|		(SELECT
@@ -4265,7 +4268,7 @@ Procedure ApplyFilterSet_SC_ForPR(Query)
 	|	RowIDMovements.QuantityBalance AS Quantity
 	|INTO RowIDMovements_SC_ForPR
 	|FROM
-	|	AccumulationRegister.T10000B_RowIDMovements.Balance(&Period, Step IN (&StepArray)
+	|	AccumulationRegister.TM1010B_RowIDMovements.Balance(&Period, Step IN (&StepArray)
 	|	AND (Basis IN (&Basises)
 	|	OR RowRef.Basis IN (&Basises)
 	|	OR RowRef IN
@@ -4317,7 +4320,7 @@ Procedure ApplyFilterSet_GR_ForSR(Query)
 	|	RowIDMovements.QuantityBalance AS Quantity
 	|INTO RowIDMovements_GR_ForSR
 	|FROM
-	|	AccumulationRegister.T10000B_RowIDMovements.Balance(&Period, Step IN (&StepArray)
+	|	AccumulationRegister.TM1010B_RowIDMovements.Balance(&Period, Step IN (&StepArray)
 	|	AND (Basis IN (&Basises)
 	|	OR RowRef.Basis IN (&Basises)
 	|	OR RowRef IN
@@ -4369,7 +4372,7 @@ Procedure ApplyFilterSet_PR_ForSC(Query)
 	|	RowIDMovements.QuantityBalance AS Quantity
 	|INTO RowIDMovements_PR_ForSC
 	|FROM
-	|	AccumulationRegister.T10000B_RowIDMovements.Balance(&Period, Step IN (&StepArray)
+	|	AccumulationRegister.TM1010B_RowIDMovements.Balance(&Period, Step IN (&StepArray)
 	|	AND (Basis IN (&Basises)
 	|	OR RowRef.Basis IN (&Basises)
 	|	OR RowRef IN
@@ -4421,7 +4424,7 @@ Procedure ApplyFilterSet_SR_ForGR(Query)
 	|	RowIDMovements.QuantityBalance AS Quantity
 	|INTO RowIDMovements_SR_ForGR
 	|FROM
-	|	AccumulationRegister.T10000B_RowIDMovements.Balance(&Period, Step IN (&StepArray)
+	|	AccumulationRegister.TM1010B_RowIDMovements.Balance(&Period, Step IN (&StepArray)
 	|	AND (Basis IN (&Basises)
 	|	OR RowRef.Basis IN (&Basises)
 	|	OR RowRef IN
@@ -4473,7 +4476,7 @@ Procedure ApplyFilterSet_PRO_ForPR(Query)
 	|	RowIDMovements.QuantityBalance AS Quantity
 	|INTO RowIDMovements_PRO_ForPR
 	|FROM
-	|	AccumulationRegister.T10000B_RowIDMovements.Balance(&Period, Step IN (&StepArray)
+	|	AccumulationRegister.TM1010B_RowIDMovements.Balance(&Period, Step IN (&StepArray)
 	|	AND (Basis IN (&Basises)
 	|	OR RowRef.Basis IN (&Basises)
 	|	OR RowRef IN
@@ -4535,7 +4538,7 @@ Procedure ApplyFilterSet_SRO_ForSR(Query)
 	|	RowIDMovements.QuantityBalance AS Quantity
 	|INTO RowIDMovements_SRO_ForSR
 	|FROM
-	|	AccumulationRegister.T10000B_RowIDMovements.Balance(&Period, Step IN (&StepArray)
+	|	AccumulationRegister.TM1010B_RowIDMovements.Balance(&Period, Step IN (&StepArray)
 	|	AND (Basis IN (&Basises)
 	|	OR RowRef.Basis IN (&Basises)
 	|	OR RowRef IN
@@ -4597,7 +4600,7 @@ Procedure ApplyFilterSet_SI_ForSR_ForSRO(Query)
 	|	RowIDMovements.QuantityTurnover AS Quantity
 	|INTO RowIDMovements_SI_ForSR_ForSRO
 	|FROM
-	|	AccumulationRegister.T10000T_RowIDMovements.Turnovers(, &Period,, Step IN (&StepArray)
+	|	AccumulationRegister.TM1010T_RowIDMovements.Turnovers(, &Period,, Step IN (&StepArray)
 	|	AND (Basis IN (&Basises)
 	|	OR RowRef IN
 	|		(SELECT
@@ -4660,7 +4663,7 @@ Procedure ApplyFilterSet_PI_ForPR_ForPRO(Query)
 	|	RowIDMovements.QuantityTurnover AS Quantity
 	|INTO RowIDMovements_PI_ForPR_ForPRO
 	|FROM
-	|	AccumulationRegister.T10000T_RowIDMovements.Turnovers(, &Period,, Step IN (&StepArray)
+	|	AccumulationRegister.TM1010T_RowIDMovements.Turnovers(, &Period,, Step IN (&StepArray)
 	|	AND (Basis IN (&Basises)
 	|	OR RowRef IN
 	|		(SELECT
@@ -4723,7 +4726,7 @@ Procedure ApplyFilterSet_RSR_ForRRR(Query)
 	|	RowIDMovements.QuantityTurnover AS Quantity
 	|INTO RowIDMovements_RSR_ForRRR
 	|FROM
-	|	AccumulationRegister.T10000T_RowIDMovements.Turnovers(, &Period,, Step IN (&StepArray)
+	|	AccumulationRegister.TM1010T_RowIDMovements.Turnovers(, &Period,, Step IN (&StepArray)
 	|	AND (Basis IN (&Basises)
 	|	OR RowRef IN
 	|		(SELECT
@@ -6103,7 +6106,8 @@ Function GetColumnNames_ItemList()
 	|PurchaseReturnOrder,
 	|SalesReturn,
 	|SalesReturnOrder,
-	|RetailSalesReceipt";
+	|RetailSalesReceipt,
+	|AdditionalAnalytic";
 EndFunction
 
 Function GetEmptyTable_ItemList()

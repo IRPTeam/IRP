@@ -483,6 +483,28 @@ Scenario: _041617 check Purchase return movements by the Register  "R1031 Receip
 			| ''                                              | 'Receipt'     | '14.03.2021 18:53:34' | '5'         | 'Main Company' | 'Store 02' | 'Purchase return 231 dated 14.03.2021 18:53:34' | 'S/Yellow' |	
 	And I close all client application windows
 
+Scenario: _041618 check Purchase return movements by the Register  "R5022 Expenses"
+	And I close all client application windows
+	* Select Purchase return
+		Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '231' |
+	* Check movements by the Register  "R5022 Expenses" 
+		And I click "Registrations report" button
+		And I select "R5022 Expenses" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Purchase return 231 dated 14.03.2021 18:53:34' | ''                    | ''          | ''             | ''              | ''             | ''         | ''         | ''                    | ''                             |
+			| 'Document registrations records'                | ''                    | ''          | ''             | ''              | ''             | ''         | ''         | ''                    | ''                             |
+			| 'Register  "R5022 Expenses"'                    | ''                    | ''          | ''             | ''              | ''             | ''         | ''         | ''                    | ''                             |
+			| ''                                              | 'Period'              | 'Resources' | 'Dimensions'   | ''              | ''             | ''         | ''         | ''                    | ''                             |
+			| ''                                              | ''                    | 'Amount'    | 'Company'      | 'Business unit' | 'Expense type' | 'Item key' | 'Currency' | 'Additional analytic' | 'Multi currency movement type' |
+			| ''                                              | '14.03.2021 18:53:34' | '-228,81'   | 'Main Company' | 'Front office'  | 'Expense'      | 'Interner' | 'TRY'      | ''                    | 'Local currency'               |
+			| ''                                              | '14.03.2021 18:53:34' | '-228,81'   | 'Main Company' | 'Front office'  | 'Expense'      | 'Interner' | 'TRY'      | ''                    | 'TRY'                          |
+			| ''                                              | '14.03.2021 18:53:34' | '-228,81'   | 'Main Company' | 'Front office'  | 'Expense'      | 'Interner' | 'TRY'      | ''                    | 'en description is empty'      |
+			| ''                                              | '14.03.2021 18:53:34' | '-39,17'    | 'Main Company' | 'Front office'  | 'Expense'      | 'Interner' | 'USD'      | ''                    | 'Reporting currency'           |
+	And I close all client application windows
 
 Scenario: _041630 Purchase return clear posting/mark for deletion
 	And I close all client application windows

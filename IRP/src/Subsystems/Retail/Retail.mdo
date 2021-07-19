@@ -17,6 +17,6 @@
   <content>DataProcessor.PointOfSale</content>
   <content>Document.CashStatement</content>
   <content>Catalog.CashStatementStatuses</content>
-  <content>AccumulationRegister.RetailCash</content>
-  <content>AccumulationRegister.RetailSales</content>
+  <content>AccumulationRegister.R3050T_RetailCash</content>
+  <content>AccumulationRegister.R2050T_RetailSales</content>
 </mdclass:Subsystem>

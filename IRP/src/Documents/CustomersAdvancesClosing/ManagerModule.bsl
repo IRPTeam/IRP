@@ -84,27 +84,27 @@ EndFunction
 
 Function GetQueryTextsMasterTables()
 	QueryArray = New Array;
-	QueryArray.Add(T1000I_OffsetOfAdvances());
-	QueryArray.Add(T1003I_OffsetOfAging());
+	QueryArray.Add(T2010S_OffsetOfAdvances());
+	QueryArray.Add(T2013S_OffsetOfAging());
 	Return QueryArray;
 EndFunction
 
-Function T1000I_OffsetOfAdvances()
+Function T2010S_OffsetOfAdvances()
 	Return
 		"SELECT
 		|	*
-		|INTO T1000I_OffsetOfAdvances
+		|INTO T2010S_OffsetOfAdvances
 		|FROM
 		|	OffsetOfAdvances
 		|WHERE
 		|	TRUE";
 EndFunction
 
-Function T1003I_OffsetOfAging()
+Function T2013S_OffsetOfAging()
 	Return
 		"SELECT
 		|	*
-		|INTO T1003I_OffsetOfAging
+		|INTO T2013S_OffsetOfAging
 		|FROM
 		|	OffsetOfAging
 		|WHERE
@@ -122,10 +122,10 @@ Function OffsetOfAdvances(Parameters)
 		Return CustomersAdvancesClosingQueryText();
 	Endif;
 	
-	OffsetOfAdvanceFull = InformationRegisters.T1000I_OffsetOfAdvances.CreateRecordSet().UnloadColumns();
+	OffsetOfAdvanceFull = InformationRegisters.T2010S_OffsetOfAdvances.CreateRecordSet().UnloadColumns();
 	OffsetOfAdvanceFull.Columns.Delete(OffsetOfAdvanceFull.Columns.PointInTime);
 	
-	OffsetOfAgingFull = InformationRegisters.T1003I_OffsetOfAging.CreateRecordSet().UnloadColumns();
+	OffsetOfAgingFull = InformationRegisters.T2013S_OffsetOfAging.CreateRecordSet().UnloadColumns();
 	OffsetOfAgingFull.Columns.Delete(OffsetOfAgingFull.Columns.PointInTime);
 	
 	// CustomersTransactions
@@ -138,7 +138,7 @@ Function OffsetOfAdvances(Parameters)
 	|	TRUE AS IsCustomerAdvanceOrPayment
 	|INTO tmpPartnerAdvancesOrPayments
 	|FROM
-	|	InformationRegister.T1002I_PartnerAdvances AS PartnerAdvances
+	|	InformationRegister.T2012S_PartnerAdvances AS PartnerAdvances
 	|WHERE
 	|	PartnerAdvances.Period BETWEEN BEGINOFPERIOD(&BeginOfPeriod, DAY) AND ENDOFPERIOD(&EndOfPeriod, DAY)
 	|	AND PartnerAdvances.IsCustomerAdvance
@@ -155,7 +155,7 @@ Function OffsetOfAdvances(Parameters)
 	|	FALSE,
 	|	TRUE
 	|FROM
-	|	InformationRegister.T1001I_PartnerTransactions AS PartnerTransactions
+	|	InformationRegister.T2011S_PartnerTransactions AS PartnerTransactions
 	|WHERE
 	|	PartnerTransactions.Period BETWEEN BEGINOFPERIOD(&BeginOfPeriod, DAY) AND ENDOFPERIOD(&EndOfPeriod, DAY)
 	|	AND PartnerTransactions.IsPaymentFromCustomer
@@ -170,7 +170,7 @@ Function OffsetOfAdvances(Parameters)
 	|	FALSE AS IsCustomerAdvanceOrPayment
 	|INTO tmp
 	|FROM
-	|	InformationRegister.T1001I_PartnerTransactions AS PartnerTransactions
+	|	InformationRegister.T2011S_PartnerTransactions AS PartnerTransactions
 	|WHERE
 	|	PartnerTransactions.Period BETWEEN BEGINOFPERIOD(&BeginOfPeriod, DAY) AND ENDOFPERIOD(&EndOfPeriod, DAY)
 	|	AND PartnerTransactions.IsCustomerTransaction
@@ -473,7 +473,7 @@ Procedure Create_CustomersTransactions(Recorder, Parameters)
 	|	END AS Key
 	|INTO tmpCustomersTransactions
 	|FROM
-	|	InformationRegister.T1001I_PartnerTransactions AS PartnerTransactions
+	|	InformationRegister.T2011S_PartnerTransactions AS PartnerTransactions
 	|WHERE
 	|	PartnerTransactions.Recorder = &Recorder
 	|	AND PartnerTransactions.IsCustomerTransaction
@@ -585,7 +585,7 @@ Procedure Create_PaymentFromCustomers(Recorder, Parameters)
 	|	PartnerTransactions.Key
 	|INTO CustomersTransactions
 	|FROM
-	|	InformationRegister.T1001I_PartnerTransactions AS PartnerTransactions
+	|	InformationRegister.T2011S_PartnerTransactions AS PartnerTransactions
 	|WHERE
 	|	PartnerTransactions.Recorder = &Recorder
 	|	and PartnerTransactions.IsPaymentFromCustomer
@@ -626,7 +626,7 @@ Procedure Create_AdvancesFromCustomers(Recorder, Parameters)
 	|	PartnerAdvances.Key
 	|INTO AdvancesFromCustomers
 	|FROM
-	|	InformationRegister.T1002I_PartnerAdvances AS PartnerAdvances
+	|	InformationRegister.T2012S_PartnerAdvances AS PartnerAdvances
 	|WHERE
 	|	PartnerAdvances.Recorder = &Recorder";
 	Query.SetParameter("Recorder", Recorder);

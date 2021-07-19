@@ -5055,7 +5055,7 @@
 		</right>
 	</object>
 	<object>
-		<name>AccumulationRegister.RetailSales</name>
+		<name>AccumulationRegister.R2050T_RetailSales</name>
 		<right>
 			<name>Read</name>
 			<value>true</value>
@@ -6404,7 +6404,7 @@
 		</right>
 	</object>
 	<object>
-		<name>AccumulationRegister.RetailCash</name>
+		<name>AccumulationRegister.R3050T_RetailCash</name>
 		<right>
 			<name>Read</name>
 			<value>true</value>

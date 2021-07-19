@@ -77,21 +77,15 @@ Procedure FillTransactions(Object, AddInfo = Undefined) Export
 	Query = New Query;
 	Query.Text =
 		"SELECT
-		|	RetailCash.PaymentType,
-		|	RetailCash.Account,
-		|	SUM(RetailCash.Amount) AS Amount,
-		|	SUM(RetailCash.Commission) AS Commission,
-		|	RetailCash.Account.Currency AS Currency
+		|	R3050T_RetailCash.PaymentType AS PaymentType,
+		|	R3050T_RetailCash.Account AS Account,
+		|	R3050T_RetailCash.AmountTurnover AS Amount,
+		|	R3050T_RetailCash.CommissionTurnover AS Commission,
+		|	R3050T_RetailCash.Account.Currency AS Currency
 		|FROM
-		|	AccumulationRegister.RetailCash AS RetailCash
-		|WHERE
-		|	RetailCash.Company = &Company
-		|	AND RetailCash.BusinessUnit = &BusinessUnit
-		|	AND RetailCash.Period BETWEEN &BegOfPeriod AND &EndOfPeriod
-		|GROUP BY
-		|	RetailCash.PaymentType,
-		|	RetailCash.Account,
-		|	RetailCash.Account.Currency";
+		|	AccumulationRegister.R3050T_RetailCash.Turnovers(BEGINOFPERIOD(&BegOfPeriod, DAY), ENDOFPERIOD(&EndOfPeriod, DAY),,
+		|		Company = &Company
+		|	AND BusinessUnit = &BusinessUnit) AS R3050T_RetailCash";
 	
 	Query.SetParameter("BegOfPeriod", Object.BegOfPeriod);
 	Query.SetParameter("EndOfPeriod", Object.EndOfPeriod);

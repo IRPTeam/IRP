@@ -75,8 +75,8 @@
   <registerRecords>AccumulationRegister.R3010B_CashOnHand</registerRecords>
   <registerRecords>AccumulationRegister.R1021B_VendorsTransactions</registerRecords>
   <registerRecords>AccumulationRegister.R1020B_AdvancesToVendors</registerRecords>
-  <registerRecords>InformationRegister.T1001I_PartnerTransactions</registerRecords>
-  <registerRecords>InformationRegister.T1002I_PartnerAdvances</registerRecords>
+  <registerRecords>InformationRegister.T2011S_PartnerTransactions</registerRecords>
+  <registerRecords>InformationRegister.T2012S_PartnerAdvances</registerRecords>
   <registerRecords>AccumulationRegister.R5012B_VendorsAging</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>

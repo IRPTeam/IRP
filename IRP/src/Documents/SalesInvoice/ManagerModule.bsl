@@ -140,8 +140,9 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R2020B_AdvancesFromCustomers());
 	QueryArray.Add(R5011B_CustomersAging());
 	QueryArray.Add(R5010B_ReconciliationStatement());
-	QueryArray.Add(T1001I_PartnerTransactions());
+	QueryArray.Add(T2011S_PartnerTransactions());
 	QueryArray.Add(R2022B_CustomersPaymentPlanning());
+	QueryArray.Add(R5021T_Revenues());
 	Return QueryArray;
 EndFunction
 
@@ -661,7 +662,7 @@ Function R2020B_AdvancesFromCustomers()
 		|	*
 		|INTO R2020B_AdvancesFromCustomers
 		|FROM
-		|	InformationRegister.T1000I_OffsetOfAdvances AS OffsetOfAdvances
+		|	InformationRegister.T2010S_OffsetOfAdvances AS OffsetOfAdvances
 		|WHERE
 		|	OffsetOfAdvances.Document = &Ref";
 EndFunction
@@ -706,12 +707,12 @@ Function R2021B_CustomersTransactions()
 		|	OffsetOfAdvances.Amount,
 		|	OffsetOfAdvances.Recorder
 		|FROM
-		|	InformationRegister.T1000I_OffsetOfAdvances AS OffsetOfAdvances
+		|	InformationRegister.T2010S_OffsetOfAdvances AS OffsetOfAdvances
 		|WHERE
 		|	OffsetOfAdvances.Document = &Ref";
 EndFunction
 
-Function T1001I_PartnerTransactions()
+Function T2011S_PartnerTransactions()
 	Return
 		"SELECT
 		|	ItemList.Period,
@@ -724,7 +725,7 @@ Function T1001I_PartnerTransactions()
 		|	TRUE AS IsCustomerTransaction,
 		|	SUM(ItemList.Amount) AS Amount,
 		|	ItemList.Key
-		|INTO T1001I_PartnerTransactions
+		|INTO T2011S_PartnerTransactions
 		|FROM
 		|	ItemList AS ItemList
 		|WHERE
@@ -782,7 +783,7 @@ Function R5011B_CustomersAging()
 		|	OffsetOfAging.Amount,
 		|	OffsetOfAging.Recorder
 		|FROM
-		|	InformationRegister.T1003I_OffsetOfAging AS OffsetOfAging
+		|	InformationRegister.T2013S_OffsetOfAging AS OffsetOfAging
 		|WHERE
 		|	OffsetOfAging.Document = &Ref";
 EndFunction
@@ -832,5 +833,17 @@ Function R2022B_CustomersPaymentPlanning()
 		|	SalesInvoicePaymentTerms.Ref.Agreement,
 		|	VALUE(AccumulationRecordType.Receipt)";
 EndFunction
+
+Function R5021T_Revenues()
+	Return
+		"SELECT
+		|	*,
+		|	ItemList.NetAmount AS Amount
+		|INTO R5021T_Revenues
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	TRUE";
+EndFunction	
 
 #EndRegion

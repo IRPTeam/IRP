@@ -108,13 +108,15 @@
   <defaultChoiceForm>Document.RetailReturnReceipt.Form.ChoiceForm</defaultChoiceForm>
   <realTimePosting>Deny</realTimePosting>
   <registerRecords>AccumulationRegister.R4010B_ActualStocks</registerRecords>
-  <registerRecords>AccumulationRegister.RetailSales</registerRecords>
-  <registerRecords>AccumulationRegister.RetailCash</registerRecords>
+  <registerRecords>AccumulationRegister.R2050T_RetailSales</registerRecords>
+  <registerRecords>AccumulationRegister.R3050T_RetailCash</registerRecords>
   <registerRecords>AccumulationRegister.R4011B_FreeStocks</registerRecords>
   <registerRecords>AccumulationRegister.R3010B_CashOnHand</registerRecords>
   <registerRecords>AccumulationRegister.R4014B_SerialLotNumber</registerRecords>
-  <registerRecords>AccumulationRegister.T10000T_RowIDMovements</registerRecords>
-  <registerRecords>AccumulationRegister.T10000B_RowIDMovements</registerRecords>
+  <registerRecords>AccumulationRegister.TM1010T_RowIDMovements</registerRecords>
+  <registerRecords>AccumulationRegister.TM1010B_RowIDMovements</registerRecords>
+  <registerRecords>AccumulationRegister.R5021T_Revenues</registerRecords>
+  <registerRecords>AccumulationRegister.R2002T_SalesReturns</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -525,6 +527,61 @@
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="f4dd68f4-3c8d-406d-9efc-76e9330269f1">
+      <name>Detail</name>
+      <synonym>
+        <key>en</key>
+        <value>Detail</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeDescription</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="768a1915-4a9f-43a2-b9d7-db8d366027a7">
+      <name>RevenueType</name>
+      <synonym>
+        <key>en</key>
+        <value>Revenue type</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.ExpenseAndRevenueTypes</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="93ec11b3-1cca-484b-a54e-11a2faf3b9c0">
+      <name>AdditionalAnalytic</name>
+      <synonym>
+        <key>en</key>
+        <value>Additional analytic</value>
+      </synonym>
+      <type>
+        <types>Characteristic.AddAttributeAndProperty</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="584c5eef-0cb8-4241-9cfb-f9993bcdf86e">
+      <name>ReturnReason</name>
+      <synonym>
+        <key>en</key>
+        <value>Return reason</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.CancelReturnReasons</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <fullTextSearch>Use</fullTextSearch>
     </attributes>
   </tabularSections>
   <tabularSections uuid="9060cdbb-b372-4def-9d82-0080fe8c5522">

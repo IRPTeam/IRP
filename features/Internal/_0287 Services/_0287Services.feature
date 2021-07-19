@@ -686,19 +686,19 @@ Scenario: _029150 create Retail return receipt for service and product
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
 			| 'Register  "R3050 Retail cash"' | ''            | ''       | ''          | ''           | ''             | ''              | ''             | ''             | ''                 | '' | '' | '' | '' |
-			| ''                        | 'Record type' | 'Period' | 'Resources' | ''           | 'Dimensions'   | ''              | ''             | ''             | ''                 | '' | '' | '' | '' |
-			| ''                        | ''            | ''       | 'Amount'    | 'Commission' | 'Company'      | 'Business unit' | 'Payment type' | 'Account'      | 'Payment terminal' | '' | '' | '' | '' |
-			| ''                        | 'Receipt'     | '*'      | '-450'      | ''           | 'Main Company' | ''              | 'Cash'         | 'Cash desk №4' | ''                 | '' | '' | '' | '' |
+			| ''                              | 'Record type' | 'Period' | 'Resources' | ''           | 'Dimensions'   | ''              | ''             | ''             | ''                 | '' | '' | '' | '' |
+			| ''                              | ''            | ''       | 'Amount'    | 'Commission' | 'Company'      | 'Business unit' | 'Payment type' | 'Account'      | 'Payment terminal' | '' | '' | '' | '' |
+			| ''                              | 'Receipt'     | '*'      | '-450'      | ''           | 'Main Company' | ''              | 'Cash'         | 'Cash desk №4' | ''                 | '' | '' | '' | '' |
 	
 		And I select "R3010 Cash on hand" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
 			| 'Register  "R3010 Cash on hand"' | ''            | ''       | ''          | ''             | ''             | ''         | ''                             | ''                     | '' | '' | '' | '' | '' |
-			| ''                            | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''             | ''         | ''                             | 'Attributes'           | '' | '' | '' | '' | '' |
-			| ''                            | ''            | ''       | 'Amount'    | 'Company'      | 'Account'      | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' | '' | '' | '' | '' | '' |
-			| ''                            | 'Expense'     | '*'      | '77,04'     | 'Main Company' | 'Cash desk №4' | 'USD'      | 'Reporting currency'           | 'No'                   | '' | '' | '' | '' | '' |
-			| ''                            | 'Expense'     | '*'      | '450'       | 'Main Company' | 'Cash desk №4' | 'TRY'      | 'Local currency'               | 'No'                   | '' | '' | '' | '' | '' |
-			| ''                            | 'Expense'     | '*'      | '450'       | 'Main Company' | 'Cash desk №4' | 'TRY'      | 'en description is empty'      | 'No'                   | '' | '' | '' | '' | '' |
+			| ''                               | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''             | ''         | ''                             | 'Attributes'           | '' | '' | '' | '' | '' |
+			| ''                               | ''            | ''       | 'Amount'    | 'Company'      | 'Account'      | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' | '' | '' | '' | '' | '' |
+			| ''                               | 'Expense'     | '*'      | '77,04'     | 'Main Company' | 'Cash desk №4' | 'USD'      | 'Reporting currency'           | 'No'                   | '' | '' | '' | '' | '' |
+			| ''                               | 'Expense'     | '*'      | '450'       | 'Main Company' | 'Cash desk №4' | 'TRY'      | 'Local currency'               | 'No'                   | '' | '' | '' | '' | '' |
+			| ''                               | 'Expense'     | '*'      | '450'       | 'Main Company' | 'Cash desk №4' | 'TRY'      | 'en description is empty'      | 'No'                   | '' | '' | '' | '' | '' |
 		
 		And I close all client application windows
 	* Create Retail return receipt without Retail sales receipt

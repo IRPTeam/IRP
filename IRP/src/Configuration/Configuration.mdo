@@ -754,7 +754,7 @@
   <accumulationRegisters>AccumulationRegister.R5022T_Expenses</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R5041B_TaxesPayable</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R3050B_RetailCash</accumulationRegisters>
-  <accumulationRegisters>AccumulationRegister.R2050B_RetailSales</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R2050T_RetailSales</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.TM1010B_RowIDMovements</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.TM1010T_RowIDMovements</accumulationRegisters>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.AddAttributeAndProperty</chartsOfCharacteristicTypes>

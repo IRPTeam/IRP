@@ -245,7 +245,7 @@
     <mdObject>AccumulationRegister.R4050B_StockInventory</mdObject>
   </content>
   <content>
-    <mdObject>AccumulationRegister.R2050B_RetailSales</mdObject>
+    <mdObject>AccumulationRegister.R2050T_RetailSales</mdObject>
   </content>
   <content>
     <mdObject>InformationRegister.IDInfo</mdObject>
@@ -287,7 +287,7 @@
     <mdObject>InformationRegister.BarcodeScanInfoCheck</mdObject>
   </content>
   <content>
-    <mdObject>AccumulationRegister.R3050B_RetailCash</mdObject>
+    <mdObject>AccumulationRegister.R3050T_RetailCash</mdObject>
   </content>
   <content>
     <mdObject>AccumulationRegister.R2001T_Sales</mdObject>

@@ -563,11 +563,11 @@ Scenario: _028830 check link/unlink form in the SC
 		And I click "AddBasisDocuments" button
 		And I expand current line in "BasisesTree" table
 		And I expand a line in "BasisesTree" table
-			| 'Row presentation'                            | 'Use'                                         |
-			| 'Sales invoice 102 dated 05.03.2021 12:57:59' | 'Sales invoice 102 dated 05.03.2021 12:57:59' |
+			| 'Row presentation'                            | 'Use' |
+			| 'Sales invoice 102 dated 05.03.2021 12:57:59' | 'No'  |
 		And I expand a line in "BasisesTree" table
-			| 'Row presentation'                            | 'Use'                                         |
-			| 'Sales invoice 103 dated 05.03.2021 12:59:44' | 'Sales invoice 103 dated 05.03.2021 12:59:44' |
+			| 'Row presentation'                            | 'Use' |
+			| 'Sales invoice 103 dated 05.03.2021 12:59:44' | 'No'  |
 		And I go to line in "BasisesTree" table
 			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
 			| 'TRY'      | '700,00' | '2,000'    | 'Boots, 37/18SD'   | 'pcs'  | 'No'  |

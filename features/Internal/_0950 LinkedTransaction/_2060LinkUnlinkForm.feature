@@ -127,6 +127,17 @@ Scenario: _2060001 preparation
 		And I save the window as "$$SalesInvoice20400021$$"
 		And I save the value of "Number" field as "$$NumberSalesInvoice20400021$$"
 		And I close all client application windows
+	When create GoodsReceipt and PurchaseOrder objects (select from basis in the PI)
+	And I execute 1C:Enterprise script at server
+			| "Documents.PurchaseOrder.FindByNumber(1051).GetObject().Write(DocumentWriteMode.Posting);"|
+			| "Documents.GoodsReceipt.FindByNumber(1051).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.GoodsReceipt.FindByNumber(1052).GetObject().Write(DocumentWriteMode.Posting);" |
+	When create ShipmentConfirmation and SalesOrder objects (select from basis in the PI)
+	And I execute 1C:Enterprise script at server
+			| "Documents.SalesOrder.FindByNumber(1051).GetObject().Write(DocumentWriteMode.Posting);"|
+			| "Documents.ShipmentConfirmation.FindByNumber(1051).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.ShipmentConfirmation.FindByNumber(1052).GetObject().Write(DocumentWriteMode.Posting);" |	
+			
 	
 Scenario: _2060002 check link/unlink form in the SC
 	* Open form for create SC
@@ -402,8 +413,106 @@ Scenario: _2060003 check auto link button in the SI
 		Then the number of "ItemList" table lines is "равно" "4"
 		And I close all client application windows
 		
-		
-				
+Scenario: _2060007 select items from basis documents in the PI
+	* Open form for create PI
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I click the button named "FormCreate"
+	* Filling in the main details of the document
+		And I click Select button of "Partner" field
+		And I click "List" button
+		And I go to line in "List" table
+			| 'Description' |
+			| 'DFC'     |
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'DFC'     |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Partner term vendor DFC'     |
+		And I select current line in "List" table
+		And I activate field named "ItemListLineNumber" in "ItemList" table		
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Main Company' | 
+		And I select current line in "List" table
+		And I click Select button of "Store" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Store 03'  |
+		And I select current line in "List" table
+	* Select items from basis documents
+		And I click "Add basis documents" button
+		And I expand current line in "BasisesTree" table
+		And "BasisesTree" table contains lines 
+			| 'Row presentation'                               | 'Quantity' | 'Unit' | 'Price'  | 'Currency' |
+			| 'Purchase order 1 051 dated 20.07.2021 10:22:16' | ''         | ''     | ''       | ''         |
+			| 'Dress, S/Yellow'                                | '55,000'   | 'pcs'  | '550,00' | 'TRY'      |
+			| 'Dress, XS/Blue'                                 | '250,000'  | 'pcs'  | '520,00' | 'TRY'      |
+			| 'Goods receipt 1 051 dated 20.07.2021 10:23:22'  | ''         | ''     | ''       | ''         |
+			| 'Dress, S/Yellow'                                | '45,000'   | 'pcs'  | '550,00' | 'TRY'      |
+			| 'Dress, XS/Blue'                                 | '750,000'  | 'pcs'  | '520,00' | 'TRY'      |
+			| 'Goods receipt 1 052 dated 20.07.2021 10:23:55'  | ''         | ''     | ''       | ''         |
+			| 'Dress, S/Yellow'                                | '5,000'    | 'pcs'  | ''       | ''         |
+			| 'Dress, XS/Blue'                                 | '50,000'   | 'pcs'  | ''       | ''         |
+			| 'Trousers, 36/Yellow'                            | '40,000'   | 'pcs'  | ''       | ''         |
+		Then the number of "BasisesTree" table lines is "равно" "14"
+		And I close all client application windows
+
+
+
+Scenario: _2060010 select items from basis documents in the SI
+	* Open form for create SI
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I click the button named "FormCreate"
+	* Filling in the main details of the document
+		And I click Select button of "Partner" field
+		And I click "List" button
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Kalipso'     |
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Company Kalipso'     |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Basic Partner terms, TRY'     |
+		And I select current line in "List" table
+		And I activate field named "ItemListLineNumber" in "ItemList" table		
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Main Company' | 
+		And I select current line in "List" table
+		And I click Select button of "Store" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Store 01'  |
+		And I select current line in "List" table
+	* Select items from basis documents
+		And I click "Add basis documents" button
+		And I expand current line in "BasisesTree" table
+		And "BasisesTree" table contains lines 
+			| 'Row presentation'                                   | 'Quantity' | 'Unit' | 'Price'  | 'Currency' |
+			| 'Sales order 1 051 dated 20.07.2021 10:44:11'        | ''         | ''     | ''       | ''         |
+			| 'Dress, XS/Blue'                                     | '55,000'   | 'pcs'  | '520,00' | 'TRY'      |
+			| 'Dress, S/Yellow'                                    | '250,000'  | 'pcs'  | '550,00' | 'TRY'      |
+			| 'Shipment confirmation 1 051 dated 20.07.2021 10:44' | ''         | ''     | ''       | ''         |
+			| 'Dress, XS/Blue'                                     | '45,000'   | 'pcs'  | '520,00' | 'TRY'      |
+			| 'Dress, S/Yellow'                                    | '750,000'  | 'pcs'  | '550,00' | 'TRY'      |
+			| 'Shipment confirmation 1 052 dated 20.07.2021 10:44' | ''         | ''     | ''       | ''         |
+			| 'Dress, XS/Blue'                                     | '5,000'    | 'pcs'  | ''       | ''         |
+			| 'Dress, S/Yellow'                                    | '100,000'  | 'pcs'  | ''       | ''         |
+		Then the number of "BasisesTree" table lines is "равно" "9"
+		And I close all client application windows
 Scenario: _2060015 check form select items from basis documents in the SI
 	* Open form for create SI
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
@@ -499,37 +608,3 @@ Scenario: _2060015 check form select items from basis documents in the SI
 			| 'Dress, XS/Blue'                                     | 'Yes' | '5,000'    | 'pcs'  | ''       | ''         |
 			| 'Dress, S/Yellow'                                    | 'Yes' | '100,000'  | 'pcs'  | ''       | ''         |
 		And I close all client application windows
-		
-		
-				
-		
-				
-
-		
-				
-
-		
-				
-
-
-
-
-
-				
-		
-
-
-		
-				
-
-
-		
-				
-		
-				
-		
-				
-		
-		
-			
-

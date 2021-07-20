@@ -222,10 +222,6 @@
       <dataPath xsi:type="form:DataPath">
         <segments>Object.Partner</segments>
       </dataPath>
-      <handlers>
-        <event>OnChange</event>
-        <name>PartnerOnChange</name>
-      </handlers>
       <extendedTooltip>
         <name>PartnerExtendedTooltip</name>
         <id>19</id>
@@ -284,10 +280,6 @@
       <dataPath xsi:type="form:DataPath">
         <segments>Object.LegalName</segments>
       </dataPath>
-      <handlers>
-        <event>OnChange</event>
-        <name>LegalNameOnChange</name>
-      </handlers>
       <extendedTooltip>
         <name>LegalNameExtendedTooltip</name>
         <id>22</id>
@@ -346,10 +338,6 @@
       <dataPath xsi:type="form:DataPath">
         <segments>Object.Agreement</segments>
       </dataPath>
-      <handlers>
-        <event>OnChange</event>
-        <name>AgreementOnChange</name>
-      </handlers>
       <extendedTooltip>
         <name>AgreementExtendedTooltip</name>
         <id>25</id>

@@ -380,6 +380,7 @@
   <commonModules>CommonModule.DocSalesOrderClosingServer</commonModules>
   <commonModules>CommonModule.DocPurchaseOrderClosingClient</commonModules>
   <commonModules>CommonModule.DocPurchaseOrderClosingServer</commonModules>
+  <commonModules>CommonModule.CatRetailCustomersClient</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.BusinessUnit</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>

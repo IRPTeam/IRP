@@ -117,6 +117,8 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R2050T_RetailSales());
 	QueryArray.Add(R5021T_Revenues());
 	QueryArray.Add(R2001T_Sales());
+	QueryArray.Add(R2021B_CustomersTransactions());
+	QueryArray.Add(R5010B_ReconciliationStatement());
 	Return QueryArray;
 EndFunction
 
@@ -151,7 +153,8 @@ Function ItemList()
 		|	ItemList.NetAmount AS NetAmount,
 		|	ItemList.OffersAmount AS OffersAmount,
 		|	ItemList.Ref AS Invoice,
-		|	ItemList.Key AS RowKey
+		|	ItemList.Key AS RowKey,
+		|	ItemList.Ref.UsePartnerTransactions AS UsePartnerTransactions
 		|INTO ItemList
 		|FROM
 		|	Document.RetailSalesReceipt.ItemList AS ItemList
@@ -276,7 +279,6 @@ Function R3010B_CashOnHand()
 		|	TRUE";
 EndFunction
 
-
 Function R4011B_FreeStocks()
 	Return
 	"SELECT
@@ -347,5 +349,99 @@ Function R2001T_Sales()
 		|	TRUE";
 EndFunction	
 		
+Function R2021B_CustomersTransactions()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Currency,
+		|	ItemList.LegalName,
+		|	ItemList.Partner,
+		|	ItemList.Agreement,
+		|	ItemList.BasisDocument AS Basis,
+		|	SUM(ItemList.TotalAmount) AS Amount,
+		|	UNDEFINED AS CustomersAdvancesClosing
+		|INTO R2021B_CustomersTransactions
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	ItemList.UsePartnerTransactions
+		|GROUP BY
+		|	ItemList.Agreement,
+		|	ItemList.BasisDocument,
+		|	ItemList.Company,
+		|	ItemList.Currency,
+		|	ItemList.LegalName,
+		|	ItemList.Partner,
+		|	ItemList.Period,
+		|	VALUE(AccumulationRecordType.Receipt)
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Expense),
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Currency,
+		|	ItemList.LegalName,
+		|	ItemList.Partner,
+		|	ItemList.Agreement,
+		|	ItemList.BasisDocument,
+		|	SUM(ItemList.TotalAmount),
+		|	UNDEFINED
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	ItemList.UsePartnerTransactions
+		|GROUP BY
+		|	ItemList.Agreement,
+		|	ItemList.BasisDocument,
+		|	ItemList.Company,
+		|	ItemList.Currency,
+		|	ItemList.LegalName,
+		|	ItemList.Partner,
+		|	ItemList.Period,
+		|	VALUE(AccumulationRecordType.Expense)";
+EndFunction
+
+Function R5010B_ReconciliationStatement()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	ItemList.Company,
+		|	ItemList.LegalName,
+		|	ItemList.Currency,
+		|	SUM(ItemList.TotalAmount) AS Amount,
+		|	ItemList.Period
+		|INTO R5010B_ReconciliationStatement
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	ItemList.UsePartnerTransactions
+		|GROUP BY
+		|	ItemList.Company,
+		|	ItemList.LegalName,
+		|	ItemList.Currency,
+		|	ItemList.Period
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Expense),
+		|	ItemList.Company,
+		|	ItemList.LegalName,
+		|	ItemList.Currency,
+		|	SUM(ItemList.TotalAmount),
+		|	ItemList.Period
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	ItemList.UsePartnerTransactions
+		|GROUP BY
+		|	ItemList.Company,
+		|	ItemList.LegalName,
+		|	ItemList.Currency,
+		|	ItemList.Period";
+EndFunction
 
 #EndRegion

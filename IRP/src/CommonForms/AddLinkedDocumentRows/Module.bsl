@@ -119,12 +119,9 @@ Procedure BasisesTreeUseOnChange(Item)
 	If CurrentData = Undefined Then
 		Return;
 	EndIf;
+	// is document level
 	If Not CurrentData.DeepLevel Then
-		For Each Row In CurrentData.GetItems() Do
-			If Row.DeepLevel Then
-				Row.Use = CurrentData.Use;
-			EndIf;
-		EndDo;
+		SetUseRecursive(CurrentData.GetItems(), CurrentData.Use);
 	Else
 		UseForDocument = True;
 		For Each Row In CurrentData.GetParent().GetItems() Do
@@ -136,4 +133,10 @@ Procedure BasisesTreeUseOnChange(Item)
 	EndIf;
 EndProcedure
 
-
+&AtClient
+Procedure SetUseRecursive(TreeItems, UseValue)
+	For Each Row In TreeItems Do
+		Row.Use = UseValue;
+		SetUseRecursive(Row.GetItems(), UseValue);
+	EndDo;
+EndProcedure

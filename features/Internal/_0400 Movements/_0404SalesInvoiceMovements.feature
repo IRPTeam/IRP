@@ -536,23 +536,19 @@ Scenario: _0401446 check Sales invoice movements by the Register  "R5021 Revenue
 		And I select "R5021 Revenues" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains values
-			| 'Sales invoice 2 dated 28.01.2021 18:49:39' | ''                    | ''          | ''             | ''                        | ''             | ''         | ''         | ''                    | ''                             |
-			| 'Document registrations records'            | ''                    | ''          | ''             | ''                        | ''             | ''         | ''         | ''                    | ''                             |
-			| 'Register  "R5021 Revenues"'                | ''                    | ''          | ''             | ''                        | ''             | ''         | ''         | ''                    | ''                             |
-			| ''                                          | 'Period'              | 'Resources' | 'Dimensions'   | ''                        | ''             | ''         | ''         | ''                    | ''                             |
-			| ''                                          | ''                    | 'Amount'    | 'Company'      | 'Business unit'           | 'Revenue type' | 'Item key' | 'Currency' | 'Additional analytic' | 'Multi currency movement type' |
-			| ''                                          | '28.01.2021 18:49:39' | '13,78'     | 'Main Company' | 'Distribution department' | 'Revenue'      | 'Interner' | 'USD'      | ''                    | 'Reporting currency'           |
-			| ''                                          | '28.01.2021 18:49:39' | '80,51'     | 'Main Company' | 'Distribution department' | 'Revenue'      | 'Interner' | 'TRY'      | ''                    | 'Local currency'               |
-			| ''                                          | '28.01.2021 18:49:39' | '80,51'     | 'Main Company' | 'Distribution department' | 'Revenue'      | 'Interner' | 'TRY'      | ''                    | 'TRY'                          |
-			| ''                                          | '28.01.2021 18:49:39' | '80,51'     | 'Main Company' | 'Distribution department' | 'Revenue'      | 'Interner' | 'TRY'      | ''                    | 'en description is empty'      |
-			| ''                                          | '28.01.2021 18:49:39' | '358,36'    | 'Main Company' | 'Distribution department' | 'Revenue'      | 'XS/Blue'  | 'USD'      | ''                    | 'Reporting currency'           |
-			| ''                                          | '28.01.2021 18:49:39' | '482,41'    | 'Main Company' | 'Distribution department' | 'Revenue'      | '36/Red'   | 'USD'      | ''                    | 'Reporting currency'           |
-			| ''                                          | '28.01.2021 18:49:39' | '2 093,2'   | 'Main Company' | 'Distribution department' | 'Revenue'      | 'XS/Blue'  | 'TRY'      | ''                    | 'Local currency'               |
-			| ''                                          | '28.01.2021 18:49:39' | '2 093,2'   | 'Main Company' | 'Distribution department' | 'Revenue'      | 'XS/Blue'  | 'TRY'      | ''                    | 'TRY'                          |
-			| ''                                          | '28.01.2021 18:49:39' | '2 093,2'   | 'Main Company' | 'Distribution department' | 'Revenue'      | 'XS/Blue'  | 'TRY'      | ''                    | 'en description is empty'      |
-			| ''                                          | '28.01.2021 18:49:39' | '2 817,8'   | 'Main Company' | 'Distribution department' | 'Revenue'      | '36/Red'   | 'TRY'      | ''                    | 'Local currency'               |
-			| ''                                          | '28.01.2021 18:49:39' | '2 817,8'   | 'Main Company' | 'Distribution department' | 'Revenue'      | '36/Red'   | 'TRY'      | ''                    | 'TRY'                          |
-			| ''                                          | '28.01.2021 18:49:39' | '2 817,8'   | 'Main Company' | 'Distribution department' | 'Revenue'      | '36/Red'   | 'TRY'      | ''                    | 'en description is empty'      |
+			| 'Period'              | 'Resources' | 'Dimensions'   | ''                        | ''        | ''         | ''    | '' | ''                        |
+			| '28.01.2021 18:49:39' | '13,78'     | 'Main Company' | 'Distribution department' | 'Revenue' | 'Interner' | 'USD' | '' | 'Reporting currency'      |
+			| '28.01.2021 18:49:39' | '80,51'     | 'Main Company' | 'Distribution department' | 'Revenue' | 'Interner' | 'TRY' | '' | 'Local currency'          |
+			| '28.01.2021 18:49:39' | '80,51'     | 'Main Company' | 'Distribution department' | 'Revenue' | 'Interner' | 'TRY' | '' | 'TRY'                     |
+			| '28.01.2021 18:49:39' | '80,51'     | 'Main Company' | 'Distribution department' | 'Revenue' | 'Interner' | 'TRY' | '' | 'en description is empty' |
+			| '28.01.2021 18:49:39' | '358,36'    | 'Main Company' | 'Distribution department' | 'Revenue' | 'XS/Blue'  | 'USD' | '' | 'Reporting currency'      |
+			| '28.01.2021 18:49:39' | '482,41'    | 'Main Company' | 'Distribution department' | 'Revenue' | '36/Red'   | 'USD' | '' | 'Reporting currency'      |
+			| '28.01.2021 18:49:39' | '2 093,2'   | 'Main Company' | 'Distribution department' | 'Revenue' | 'XS/Blue'  | 'TRY' | '' | 'Local currency'          |
+			| '28.01.2021 18:49:39' | '2 093,2'   | 'Main Company' | 'Distribution department' | 'Revenue' | 'XS/Blue'  | 'TRY' | '' | 'TRY'                     |
+			| '28.01.2021 18:49:39' | '2 093,2'   | 'Main Company' | 'Distribution department' | 'Revenue' | 'XS/Blue'  | 'TRY' | '' | 'en description is empty' |
+			| '28.01.2021 18:49:39' | '2 817,8'   | 'Main Company' | 'Distribution department' | 'Revenue' | '36/Red'   | 'TRY' | '' | 'Local currency'          |
+			| '28.01.2021 18:49:39' | '2 817,8'   | 'Main Company' | 'Distribution department' | 'Revenue' | '36/Red'   | 'TRY' | '' | 'TRY'                     |
+			| '28.01.2021 18:49:39' | '2 817,8'   | 'Main Company' | 'Distribution department' | 'Revenue' | '36/Red'   | 'TRY' | '' | 'en description is empty' |
 		And I close all client application windows	
 
 

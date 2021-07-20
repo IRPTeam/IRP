@@ -3988,7 +3988,7 @@ Procedure ApplyFilterSet_GR_ForPI(Query)
 	|			END
 	|			AND CASE
 	|				WHEN &Filter_TransactionType
-	|					THEN RowRef.TransactionTypeSC = &TransactionType
+	|					THEN RowRef.TransactionTypeGR = &TransactionType
 	|				ELSE FALSE
 	|			END
 	|			AND CASE

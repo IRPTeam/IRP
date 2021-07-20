@@ -2808,6 +2808,8 @@ Function ExtractData_FromRSR(BasisesTable, DataReceiver)
 		|	ItemList.RevenueType AS RevenueType,
 		|	ItemList.AdditionalAnalytic AS AdditionalAnalytic,
 		|	ItemList.Detail AS Detail,
+		|	ItemList.Ref.RetailCustomer AS RetailCustomer,
+		|	ItemList.Ref.UsePartnerTransactions AS UsePartnerTransactions,
 		|	0 AS Quantity,
 		|	ISNULL(ItemList.QuantityInBaseUnit, 0) AS OriginalQuantity,
 		|	ISNULL(ItemList.Price, 0) AS Price,
@@ -5869,10 +5871,10 @@ Function GetSeperatorColumns(DocReceiverMetadata) Export
 	ElsIf DocReceiverMetadata = Metadata.Documents.PurchaseReturnOrder Then
 		Return "Company, Partner, LegalName, Agreement, Currency, PriceIncludeTax";
 	ElsIf DocReceiverMetadata = Metadata.Documents.RetailReturnReceipt Then
-		Return "Company, Partner, LegalName, Agreement, Currency, PriceIncludeTax";
+		Return "Company, Partner, LegalName, Agreement, Currency, PriceIncludeTax, RetailCustomer, UsePartnerTransactions";
 	EndIf;
 EndFunction	
-
+	
 Function ConvertDataToFillingValues(DocReceiverMetadata, ExtractedData) Export
 
 	Tables = JoinAllExtractedData(ExtractedData);
@@ -6107,7 +6109,9 @@ Function GetColumnNames_ItemList()
 	|SalesReturn,
 	|SalesReturnOrder,
 	|RetailSalesReceipt,
-	|AdditionalAnalytic";
+	|AdditionalAnalytic,
+	|RetailCustomer,
+	|UsePartnerTransactions";
 EndFunction
 
 Function GetEmptyTable_ItemList()

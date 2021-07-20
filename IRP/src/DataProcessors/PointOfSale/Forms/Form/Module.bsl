@@ -475,6 +475,18 @@ Function WriteTransaction(Result)
 	ObjectValue.Date = CommonFunctionsServer.GetCurrentSessionDate();
 	ObjectValue.Payments.Load(Payments);
 	DPPointOfSaleServer.BeforePostingDocument(ObjectValue);
+		
+	If ValueIsFilled(ObjectValue.RetailCustomer.Partner)
+		And ValueIsFilled(ObjectValue.RetailCustomer.LegalName)
+		And ValueIsFilled(ObjectValue.RetailCustomer.Agreement) Then
+			
+			ObjectValue.Partner   = ObjectValue.RetailCustomer.Partner;
+			ObjectValue.LegalName = ObjectValue.RetailCustomer.LegalName;
+			ObjectValue.Agreement = ObjectValue.RetailCustomer.Agreement;
+			ObjectValue.UsePartnerTransactions = True;
+		
+	EndIf;
+	
 	ObjectValue.Write(DocumentWriteMode.Posting);
 	DocRef = ObjectValue.Ref;	
 	DPPointOfSaleServer.AfterPostingDocument(DocRef);

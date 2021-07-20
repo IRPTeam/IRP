@@ -33,3 +33,45 @@ Procedure AddAttributesCreateFormControl()
 EndProcedure
 
 #EndRegion
+
+#Region ItemPartner
+
+&AtClient
+Procedure PartnerStartChoice(Item, ChoiceData, StandardProcessing)
+	CatRetailCustomersClient.PartnerStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure PartnerEditTextChange(Item, Text, StandardProcessing)
+	CatRetailCustomersClient.PartnerTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region ItemLegalName
+
+&AtClient
+Procedure LegalNameStartChoice(Item, ChoiceData, StandardProcessing)
+	CatRetailCustomersClient.LegalNameStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure LegalNameEditTextChange(Item, Text, StandardProcessing)
+	CatRetailCustomersClient.LegalNameTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region ItemAgreement
+
+&AtClient
+Procedure AgreementStartChoice(Item, ChoiceData, StandardProcessing)
+	CatRetailCustomersClient.AgreementStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure AgreementEditTextChange(Item, Text, StandardProcessing)
+	CatRetailCustomersClient.AgreementTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion

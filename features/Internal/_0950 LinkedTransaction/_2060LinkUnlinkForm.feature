@@ -445,7 +445,7 @@ Scenario: _2060007 select items from basis documents in the PI
 			| 'Dress, S/Yellow'                                | '5,000'    | 'pcs'  | ''       | ''         |
 			| 'Dress, XS/Blue'                                 | '50,000'   | 'pcs'  | ''       | ''         |
 			| 'Trousers, 36/Yellow'                            | '40,000'   | 'pcs'  | ''       | ''         |
-		Then the number of "BasisesTree" table lines is "равно" "10"
+		Then the number of "BasisesTree" table lines is "равно" "14"
 		And I close all client application windows
 
 

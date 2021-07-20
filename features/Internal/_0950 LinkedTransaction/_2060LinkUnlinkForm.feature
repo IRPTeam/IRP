@@ -404,6 +404,118 @@ Scenario: _2060003 check auto link button in the SI
 		
 		
 				
+Scenario: _2060015 check form select items from basis documents in the SI
+	* Open form for create SI
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I click the button named "FormCreate"
+	* Filling in the main details of the document
+		And I click Select button of "Partner" field
+		And I click "List" button
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Kalipso'     |
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Company Kalipso'     |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Basic Partner terms, TRY'     |
+		And I select current line in "List" table
+		And I activate field named "ItemListLineNumber" in "ItemList" table		
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Main Company' | 
+		And I select current line in "List" table
+		And I click Select button of "Store" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Store 01'  |
+		And I select current line in "List" table
+	* Select items from basis documents
+		And I click "Add basis documents" button
+		And I expand current line in "BasisesTree" table
+		And "BasisesTree" table contains lines
+			| 'Row presentation'                                   | 'Use' | 'Quantity' | 'Unit' | 'Price'  | 'Currency' |
+			| 'Sales order 1 051 dated 20.07.2021 10:44:11'        | 'No'  | ''         | ''     | ''       | ''         |
+			| 'Dress, XS/Blue'                                     | 'No'  | '55,000'   | 'pcs'  | '520,00' | 'TRY'      |
+			| 'Dress, S/Yellow'                                    | 'No'  | '250,000'  | 'pcs'  | '550,00' | 'TRY'      |
+			| 'Shipment confirmation 1 051 dated 20.07.2021 10:44' | 'No'  | ''         | ''     | ''       | ''         |
+			| 'Dress, XS/Blue'                                     | 'No'  | '45,000'   | 'pcs'  | '520,00' | 'TRY'      |
+			| 'Dress, S/Yellow'                                    | 'No'  | '750,000'  | 'pcs'  | '550,00' | 'TRY'      |
+			| 'Shipment confirmation 1 052 dated 20.07.2021 10:44' | 'No'  | ''         | ''     | ''       | ''         |
+			| 'Dress, XS/Blue'                                     | 'No'  | '5,000'    | 'pcs'  | ''       | ''         |
+			| 'Dress, S/Yellow'                                    | 'No'  | '100,000'  | 'pcs'  | ''       | ''         |
+	* Check use/unused all related documents
+		And I go to line in "BasisesTree" table
+			| 'Row presentation'                            | 'Use' |
+			| 'Sales order 1 051 dated 20.07.2021 10:44:11' | 'No'  |
+		And I set "Use" checkbox in "BasisesTree" table
+		And I finish line editing in "BasisesTree" table
+		And "BasisesTree" table contains lines
+			| 'Row presentation'                                   | 'Use' | 'Quantity' | 'Unit' | 'Price'  | 'Currency' |
+			| 'Sales order 1 051 dated 20.07.2021 10:44:11'        | 'Yes' | ''         | ''     | ''       | ''         |
+			| 'Dress, XS/Blue'                                     | 'Yes' | '55,000'   | 'pcs'  | '520,00' | 'TRY'      |
+			| 'Dress, S/Yellow'                                    | 'Yes' | '250,000'  | 'pcs'  | '550,00' | 'TRY'      |
+			| 'Shipment confirmation 1 051 dated 20.07.2021 10:44' | 'Yes' | ''         | ''     | ''       | ''         |
+			| 'Dress, XS/Blue'                                     | 'Yes' | '45,000'   | 'pcs'  | '520,00' | 'TRY'      |
+			| 'Dress, S/Yellow'                                    | 'Yes' | '750,000'  | 'pcs'  | '550,00' | 'TRY'      |
+		And I go to line in "BasisesTree" table
+			| 'Row presentation'                                   | 'Use' |
+			| 'Shipment confirmation 1 051 dated 20.07.2021 10:44' | 'Yes' |
+		And I remove "Use" checkbox in "BasisesTree" table
+		And I finish line editing in "BasisesTree" table
+		And "BasisesTree" table contains lines
+			| 'Row presentation'                                   | 'Use' | 'Quantity' | 'Unit' | 'Price'  | 'Currency' |
+			| 'Sales order 1 051 dated 20.07.2021 10:44:11'        | 'Yes' | ''         | ''     | ''       | ''         |
+			| 'Dress, XS/Blue'                                     | 'Yes' | '55,000'   | 'pcs'  | '520,00' | 'TRY'      |
+			| 'Dress, S/Yellow'                                    | 'Yes' | '250,000'  | 'pcs'  | '550,00' | 'TRY'      |
+			| 'Shipment confirmation 1 051 dated 20.07.2021 10:44' | 'No'  | ''         | ''     | ''       | ''         |
+			| 'Dress, XS/Blue'                                     | 'No'  | '45,000'   | 'pcs'  | '520,00' | 'TRY'      |
+			| 'Dress, S/Yellow'                                    | 'No'  | '750,000'  | 'pcs'  | '550,00' | 'TRY'      |
+		And I go to line in "BasisesTree" table
+			| 'Row presentation'                                   | 'Use' |
+			| 'Shipment confirmation 1 052 dated 20.07.2021 10:44' | 'No'  |
+		And I set "Use" checkbox in "BasisesTree" table
+		And I finish line editing in "BasisesTree" table
+		And I go to line in "BasisesTree" table
+			| 'Row presentation'                            | 'Use' |
+			| 'Sales order 1 051 dated 20.07.2021 10:44:11' | 'Yes' |
+		And I remove "Use" checkbox in "BasisesTree" table
+		And I finish line editing in "BasisesTree" table
+		And "BasisesTree" table contains lines
+			| 'Row presentation'                                   | 'Use' | 'Quantity' | 'Unit' | 'Price'  | 'Currency' |
+			| 'Sales order 1 051 dated 20.07.2021 10:44:11'        | 'No'  | ''         | ''     | ''       | ''         |
+			| 'Dress, XS/Blue'                                     | 'No'  | '55,000'   | 'pcs'  | '520,00' | 'TRY'      |
+			| 'Dress, S/Yellow'                                    | 'No'  | '250,000'  | 'pcs'  | '550,00' | 'TRY'      |
+			| 'Shipment confirmation 1 051 dated 20.07.2021 10:44' | 'No'  | ''         | ''     | ''       | ''         |
+			| 'Dress, XS/Blue'                                     | 'No'  | '45,000'   | 'pcs'  | '520,00' | 'TRY'      |
+			| 'Dress, S/Yellow'                                    | 'No'  | '750,000'  | 'pcs'  | '550,00' | 'TRY'      |
+			| 'Shipment confirmation 1 052 dated 20.07.2021 10:44' | 'Yes' | ''         | ''     | ''       | ''         |
+			| 'Dress, XS/Blue'                                     | 'Yes' | '5,000'    | 'pcs'  | ''       | ''         |
+			| 'Dress, S/Yellow'                                    | 'Yes' | '100,000'  | 'pcs'  | ''       | ''         |
+		And I close all client application windows
+		
+		
+				
+		
+				
+
+		
+				
+
+		
+				
+
+
+
+
+
+				
 		
 
 

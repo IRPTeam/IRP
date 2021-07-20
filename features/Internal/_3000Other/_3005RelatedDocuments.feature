@@ -118,6 +118,9 @@ Scenario: _300521 check post/unpost/mark for deletion from report "Related docum
 		* Check unpost Sales invoice from report Related documents
 			And I go to the last line in "DocumentsTree" table
 			And in the table "DocumentsTree" I click the button named "DocumentsTreeUnpost"
+			And the current line of "DocumentsTree" table is equal to
+				| 'Presentation'                          |
+				| '$$SalesInvoice300521$$'         |
 			Given I open hyperlink "e1cib/list/AccumulationRegister.R2021B_CustomersTransactions"
 			And Delay 10
 			And "List" table does not contain lines
@@ -127,6 +130,9 @@ Scenario: _300521 check post/unpost/mark for deletion from report "Related docum
 			When in opened panel I select "Related documents"
 			And I go to the last line in "DocumentsTree" table
 			And in the table "DocumentsTree" I click the button named "DocumentsTreePost"
+			And the current line of "DocumentsTree" table is equal to
+				| 'Presentation'                          |
+				| '$$SalesInvoice300521$$'         |
 			Given I open hyperlink "e1cib/list/AccumulationRegister.R2021B_CustomersTransactions"
 			And I click "Refresh" button
 			And Delay 10
@@ -137,6 +143,9 @@ Scenario: _300521 check post/unpost/mark for deletion from report "Related docum
 			When in opened panel I select "Related documents"
 			And I go to the last line in "DocumentsTree" table
 			And in the table "DocumentsTree" I click the button named "DocumentsTreeDelete"
+			And the current line of "DocumentsTree" table is equal to
+				| 'Presentation'                          |
+				| '$$SalesInvoice300521$$'         |
 			And I go to the last line in "DocumentsTree" table
 		* Unmark for deletion  Sales invoice from report Related documents
 			When in opened panel I select "Related documents"

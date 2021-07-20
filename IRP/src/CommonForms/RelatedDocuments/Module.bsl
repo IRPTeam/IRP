@@ -1,3 +1,7 @@
+
+&AtClient
+Var CurrenDocument;
+
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	If Parameters.Property("DocumentRef") Then
@@ -52,10 +56,30 @@ Procedure UpdateCommandAvailability()
 EndProcedure
 
 &AtClient
-Procedure ExpandDocumentsTree()
-	DocumentTreeItems = ThisObject.DocumentsTree.GetItems();
-	For Each Row In DocumentTreeItems Do
+Procedure ExpandDocumentsTree()	
+	For Each Row In ThisObject.DocumentsTree.GetItems() Do
 		Items.DocumentsTree.Expand(Row.GetID(), True);
+	EndDo;
+	
+	CurrentRow = Undefined;
+	If CurrenDocument <> Undefined Then
+		FindCurrentRow(ThisObject.DocumentsTree.GetItems(), CurrentRow);
+		If CurrentRow <> Undefined Then
+			Items.DocumentsTree.CurrentRow = CurrentRow;
+		EndIf;
+	EndIf;
+EndProcedure
+
+&AtClient
+Procedure FindCurrentRow(TreeItems, CurrentRow)
+	For Each Row In TreeItems Do
+		If Row.Ref = CurrenDocument Then
+			CurrentRow = Row.GetID();
+			Break;
+		EndIf;
+		If CurrentRow = Undefined Then
+			FindCurrentRow(Row.GetItems(), CurrentRow)
+		EndIf;
 	EndDo;
 EndProcedure
 
@@ -93,6 +117,7 @@ EndProcedure
 
 &AtClient
 Procedure Post(Command)
+	SetCurrentDocument();
 	PostAtServer();
 	GenerateTree();
 	ExpandDocumentsTree();
@@ -111,6 +136,7 @@ EndProcedure
 
 &AtClient
 Procedure Unpost(Command)
+	SetCurrentDocument();
 	UnpostAtServer();
 	GenerateTree();
 	ExpandDocumentsTree();
@@ -129,6 +155,7 @@ EndProcedure
 
 &AtClient
 Procedure Delete(Command)
+	SetCurrentDocument();
 	DeleteAtServer();
 	GenerateTree();
 	ExpandDocumentsTree();
@@ -146,7 +173,18 @@ Procedure DeleteAtServer()
 EndProcedure
 
 &AtClient
+Procedure SetCurrentDocument()
+	CurrentData = Items.DocumentsTree.CurrentData;
+	If CurrentData = Undefined Then
+		CurrenDocument = Undefined;
+	Else
+		CurrenDocument = CurrentData.Ref;
+	EndIf;
+EndProcedure		
+
+&AtClient
 Procedure Refresh(Command)
+	SetCurrentDocument();
 	GenerateTree();
 	ExpandDocumentsTree();
 EndProcedure

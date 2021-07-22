@@ -125,7 +125,7 @@ Scenario: Create catalog AddAttributeAndPropertyValues objects (test data base)
 		| 'e1cib/data/Catalog.AddAttributeAndPropertyValues?ref=b762b13668d0905011eb766bf96b2760' | 'False'        | 'e1cib/data/ChartOfCharacteristicTypes.AddAttributeAndProperty?ref=b762b13668d0905011eb766bf96b275d' | '8'    | ''             | 'Бренд 1'        | ''                 | ''               | ''               | '_31bf0db18f0840a5b67fc9b7f6c2df25' |
 		| 'e1cib/data/Catalog.AddAttributeAndPropertyValues?ref=b762b13668d0905011eb766bf96b2761' | 'False'        | 'e1cib/data/ChartOfCharacteristicTypes.AddAttributeAndProperty?ref=b762b13668d0905011eb766bf96b275d' | '9'    | ''             | 'Бренд 2'        | ''                 | ''               | ''               | '_1cea0aa955c141de84e1e6afade738c9' |
 
-Scenario: Create catalog IDInfoAddresses objects
+Scenario: Create catalog IDInfoAddresses objects (test data base)
 
 	And I check or create catalog "IDInfoAddresses" objects:
 		| 'Ref'                                                                     | 'DeletionMark' | 'Owner'                                                                                  | 'Parent'                                                                  | 'Code'      | 'Description'                | 'Level'       | 'Country'                                                           | 'FullDescription'                                            |

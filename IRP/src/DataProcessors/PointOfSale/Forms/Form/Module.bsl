@@ -300,6 +300,7 @@ EndProcedure
 Procedure SetRetailCustomer(Value, AddInfo = Undefined) Export
 	If ValueIsFilled(Value) Then
 		Object.RetailCustomer = Value;
+		DocRetailSalesReceiptClient.RetailCustomerPointOfSaleOnChange(Object, ThisObject, ThisObject.Items.RetailCustomer);
 	EndIf;
 EndProcedure
 
@@ -476,17 +477,6 @@ Function WriteTransaction(Result)
 	ObjectValue.Payments.Load(Payments);
 	DPPointOfSaleServer.BeforePostingDocument(ObjectValue);
 		
-	If ValueIsFilled(ObjectValue.RetailCustomer.Partner)
-		And ValueIsFilled(ObjectValue.RetailCustomer.LegalName)
-		And ValueIsFilled(ObjectValue.RetailCustomer.Agreement) Then
-			
-			ObjectValue.Partner   = ObjectValue.RetailCustomer.Partner;
-			ObjectValue.LegalName = ObjectValue.RetailCustomer.LegalName;
-			ObjectValue.Agreement = ObjectValue.RetailCustomer.Agreement;
-			ObjectValue.UsePartnerTransactions = True;
-		
-	EndIf;
-	
 	ObjectValue.Write(DocumentWriteMode.Posting);
 	DocRef = ObjectValue.Ref;	
 	DPPointOfSaleServer.AfterPostingDocument(DocRef);
@@ -608,6 +598,7 @@ EndProcedure
 &AtClient
 Procedure ClearRetailCustomer(Command)
 	Object.RetailCustomer = Undefined;
+	DocRetailSalesReceiptClient.RetailCustomerPointOfSaleOnChange(Object, ThisObject, ThisObject.Items.RetailCustomer);
 EndProcedure
 
 #EndRegion

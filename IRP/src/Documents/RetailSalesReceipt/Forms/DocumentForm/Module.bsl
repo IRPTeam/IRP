@@ -131,6 +131,11 @@ Procedure ManagerOnChange(Item)
 	Return;
 EndProcedure
 
+&AtClient
+Procedure RetailCustomerOnChange(Item)
+	DocRetailSalesReceiptClient.RetailCustomerOnChange(Object, ThisObject, Item);
+EndProcedure
+
 #EndRegion
 
 #Region ItemListEvents

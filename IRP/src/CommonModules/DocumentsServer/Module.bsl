@@ -647,6 +647,11 @@ Function PrepareServerData(Parameters) Export
 		Result.Insert("PaymentTerms", ArrayOfPaymentTerms);
 	EndIf;
 	
+	If Parameters.Property("GetRetailCustomerInfo") Then
+		Result.Insert("RetailCustomerInfo", 
+			CatRetailCustomersServer.GetRetailCustomerInfo(Parameters.GetRetailCustomerInfo.RetailCustomer));
+	EndIf;
+	
 	Return Result;
 EndFunction	
 

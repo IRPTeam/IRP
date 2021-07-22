@@ -744,6 +744,10 @@
               <segments>Object.RetailCustomer</segments>
             </paths>
           </dataPath>
+          <handlers>
+            <event>OnChange</event>
+            <name>RetailCustomerOnChange</name>
+          </handlers>
           <extendedTooltip>
             <name>RetailCustomerExtendedTooltip</name>
             <id>816</id>

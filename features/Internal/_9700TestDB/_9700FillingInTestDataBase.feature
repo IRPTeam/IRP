@@ -211,8 +211,28 @@ When Create document CashStatement objects  (test data base)
 		Then I select all lines of "List" table
 		And in the table "List" I click the button named "ListContextMenuPost"
  		And Delay "3"
+* Posting Inventory transfer order
+		Given I open hyperlink "e1cib/list/Document.InventoryTransferOrder"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+ 		And Delay "3"
+* Posting Inventory transfer
+		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+ 		And Delay "3"
+* Posting InternalSupplyRequest
+		Given I open hyperlink "e1cib/list/Document.InternalSupplyRequest"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+ 		And Delay "3"
 * Posting Shipment confirmation
 		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+ 		And Delay "3"
+* Posting PhysicalInventory
+		Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
 		Then I select all lines of "List" table
 		And in the table "List" I click the button named "ListContextMenuPost"
  		And Delay "3"
@@ -233,21 +253,6 @@ When Create document CashStatement objects  (test data base)
  		And Delay "3"
 * Posting Unbundling
 		Given I open hyperlink "e1cib/list/Document.Unbundling"
-		Then I select all lines of "List" table
-		And in the table "List" I click the button named "ListContextMenuPost"
- 		And Delay "3"
-* Posting Inventory transfer order
-		Given I open hyperlink "e1cib/list/Document.InventoryTransferOrder"
-		Then I select all lines of "List" table
-		And in the table "List" I click the button named "ListContextMenuPost"
- 		And Delay "3"
-* Posting Inventory transfer
-		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
-		Then I select all lines of "List" table
-		And in the table "List" I click the button named "ListContextMenuPost"
- 		And Delay "3"
-* Posting InternalSupplyRequest
-		Given I open hyperlink "e1cib/list/Document.InternalSupplyRequest"
 		Then I select all lines of "List" table
 		And in the table "List" I click the button named "ListContextMenuPost"
  		And Delay "3"
@@ -362,10 +367,5 @@ When Create document CashStatement objects  (test data base)
 		Then I select all lines of "List" table
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And Delay "3"
-* Posting PhysicalInventory
-		Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
-		Then I select all lines of "List" table
-		And in the table "List" I click the button named "ListContextMenuPost"
- 		And Delay "3"
 And I close all client application windows
 

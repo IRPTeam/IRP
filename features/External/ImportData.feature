@@ -1728,3 +1728,29 @@ Scenario: Create catalog PlanningPeriods objects
 		| 'Ref'                                                                     | 'DeletionMark' | 'Code'      | 'Description'             | 'BeginDate'           | 'EndDate'             |
 		| 'e1cib/data/Catalog.PlanningPeriods?ref=b76bafe8d8921be311ebccdc0f9de002' | 'False'        | '000000002' | 'First'                   | '01.08.2021 00:00:00' | '10.08.2021 00:00:00' |
 		| 'e1cib/data/Catalog.PlanningPeriods?ref=b76bafe8d8921be311ebccdc0f9de003' | 'False'        | '000000003' | 'Second'                  | '11.08.2021 00:00:00' | '20.08.2021 00:00:00' |
+
+
+	
+Scenario: Create catalog Agreements objects (Customer)
+
+	And I check or create catalog "Agreements" objects:
+		| 'Ref'                                                                | 'DeletionMark' | 'Code' | 'Number' | 'Date'                | 'PartnerSegment' | 'Partner'                                                          | 'Company'                                                           | 'PriceType'                                                          | 'ItemSegment' | 'StartUsing'          | 'EndOfUse'            | 'ManagerSegment' | 'PriceIncludeTax' | 'DaysBeforeDelivery' | 'Store'                                                          | 'Type'                         | 'LegalName' | 'CurrencyMovementType'                                                                            | 'ApArPostingDetail'                  | 'StandardAgreement' | 'Kind'                        | 'UseCreditLimit' | 'CreditLimitAmount' | 'PaymentTerm' | 'Description_en'        | 'Description_hash' | 'Description_ru' | 'Description_tr' |
+		| 'e1cib/data/Catalog.Agreements?ref=b76cbacb2511e57d11ebe9e1959cde77' | 'False'        | '1'    | ''       | '01.01.0001 00:00:00' | ''               | 'e1cib/data/Catalog.Partners?ref=b76cbacb2511e57d11ebe9e1959cde75' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | 'e1cib/data/Catalog.PriceTypes?ref=aa78120ed92fbced11eaf114c59ef002' | ''            | '01.07.2021 00:00:00' | '01.01.0001 00:00:00' | ''               | 'False'           | '0'                  | 'e1cib/data/Catalog.Stores?ref=aa78120ed92fbced11eaf114c59ef00d' | 'Enum.AgreementTypes.Customer' | ''          | 'e1cib/data/ChartOfCharacteristicTypes.CurrencyMovementType?ref=aa78120ed92fbced11eaf113ba6c185f' | 'Enum.ApArPostingDetail.ByDocuments' | ''                  | 'Enum.AgreementKinds.Regular' | 'False'          | '0'                 | ''            | 'Customer partner term' | ''                 | ''               | ''               |
+
+Scenario: Create catalog Partners objects and Companies objects (Customer)
+
+	And I check or create catalog "Partners" objects:
+		| 'Ref'                                                              | 'DeletionMark' | 'Parent' | 'Code' | 'Customer' | 'Vendor' | 'Employee' | 'Opponent' | 'ManagerSegment' | 'ShipmentConfirmationsBeforeSalesInvoice' | 'GoodsReceiptBeforePurchaseInvoice' | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' |
+		| 'e1cib/data/Catalog.Partners?ref=b76cbacb2511e57d11ebe9e1959cde75' | 'False'        | ''       | '1'    | 'True'     | 'False'  | 'False'    | 'False'    | ''               | 'False'                                   | 'False'                             | 'Customer'       | ''                 | ''               | ''               |
+	And I check or create catalog "Companies" objects:
+		| 'Ref'                                                               | 'DeletionMark' | 'Code' | 'Country' | 'MainCompany' | 'Partner'                                                          | 'Type'                             | 'OurCompany' | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' |
+		| 'e1cib/data/Catalog.Companies?ref=b76cbacb2511e57d11ebe9e1959cde76' | 'False'        | '1'    | ''        | ''            | 'e1cib/data/Catalog.Partners?ref=b76cbacb2511e57d11ebe9e1959cde75' | 'Enum.CompanyLegalType.Individual' | 'False'      | 'Customer'       | ''                 | ''               | ''               |
+
+
+Scenario: Create catalog RetailCustomers objects (check POS)
+
+	And I check or create catalog "RetailCustomers" objects:
+		| 'Ref'                                                                     | 'DeletionMark' | 'Code' | 'Description'                     | 'Name'                 | 'Surname'                 | 'Partner'                                                          | 'LegalName'                                                         | 'Agreement'                                                          |
+		| 'e1cib/data/Catalog.RetailCustomers?ref=b76cbacb2511e57d11ebe9f994538237' | 'False'        | '002'  | 'Retail customer with partner'    | 'Name Retail customer' | 'Surname Retail customer' | 'e1cib/data/Catalog.Partners?ref=b76cbacb2511e57d11ebe9e1959cde75' | 'e1cib/data/Catalog.Companies?ref=b76cbacb2511e57d11ebe9e1959cde76' | 'e1cib/data/Catalog.Agreements?ref=b76cbacb2511e57d11ebe9e1959cde77' |
+		| 'e1cib/data/Catalog.RetailCustomers?ref=b76cbacb2511e57d11ebe9f994538238' | 'False'        | '003'  | 'Retail customer without partner' | 'Retail customer'      | 'Second'                  | ''                                                                 | ''                                                                  | ''                                                                   |
+

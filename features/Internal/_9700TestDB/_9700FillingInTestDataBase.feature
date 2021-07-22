@@ -52,6 +52,7 @@ When Create catalog ExternalDataProc objects (test data base)
 When Create catalog AddAttributeAndPropertySets objects (test data base)
 When Create catalog AddAttributeAndPropertyValues objects (test data base)
 When Create catalog IDInfoAddresses objects (test data base)
+When Create catalog RowIDs objects (test data base)
 When Create catalog BankTerms objects (test data base)
 When Create catalog BusinessUnits objects (test data base)
 When Create catalog CancelReturnReasons objects (test data base)
@@ -161,6 +162,7 @@ When Create information register Barcodes records (test data base)
 When Create information register PartnerSegments records (test data base)
 When Create information register TaxSettings records (test data base)
 When Create information register UserSettings records (test data base)
+When Create document CashStatement objects  (test data base)
 * Posting Opening entry
 		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
 		Then "Opening entries" window is opened
@@ -265,11 +267,6 @@ When Create information register UserSettings records (test data base)
 		Then I select all lines of "List" table
 		And in the table "List" I click the button named "ListContextMenuPost"
  		And Delay "3"
-* Posting PhysicalInventory
-		Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
-		Then I select all lines of "List" table
-		And in the table "List" I click the button named "ListContextMenuPost"
- 		And Delay "3"
 * Posting CashPayment
 		Given I open hyperlink "e1cib/list/Document.CashPayment"
 		Then I select all lines of "List" table
@@ -355,5 +352,15 @@ When Create information register UserSettings records (test data base)
 		Then I select all lines of "List" table
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And Delay "3"
+* Posting CashStatement
+		Given I open hyperlink "e1cib/list/Document.CashStatement"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And Delay "3"
+* Posting PhysicalInventory
+		Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+ 		And Delay "3"
 And I close all client application windows
 

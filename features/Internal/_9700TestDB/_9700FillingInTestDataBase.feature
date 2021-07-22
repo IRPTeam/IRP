@@ -357,6 +357,11 @@ When Create document CashStatement objects  (test data base)
 		Then I select all lines of "List" table
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And Delay "3"
+* Posting SalesReturn
+		Given I open hyperlink "e1cib/list/Document.SalesReturn"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+		And Delay "3"
 * Posting PhysicalInventory
 		Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
 		Then I select all lines of "List" table

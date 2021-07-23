@@ -32,6 +32,7 @@ Scenario: _0154100 preparation ( filling documents)
 		When Create catalog Items objects
 		When Create catalog PriceTypes objects
 		When Create catalog Specifications objects
+		When Create catalog Partners objects (Customer)
 		When Create chart of characteristic types AddAttributeAndProperty objects
 		When Create catalog AddAttributeAndPropertySets objects
 		When Create catalog AddAttributeAndPropertyValues objects
@@ -3373,6 +3374,62 @@ Scenario: _0154175 check change amount in POS
 		And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "1 050,00"
 		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
 		And I close all client application windows
+
+
+Scenario: _0154182 check filling in Retail sales when select retail customer (with partner) in POS
+	And I close all client application windows
+	* Open Point of sale
+		And In the command interface I select "Retail" "Point of sale"	
+	* Add items and payment
+		And I click "Show items" button
+		And I go to line in "ItemsPickup" table
+			| 'Item'  |
+			| 'Dress' |
+		And I go to line in "ItemKeysPickup" table
+			| 'Presentation' |
+			| 'M/White'      |
+		And I select current line in "ItemKeysPickup" table
+	* Select retail customer
+		And I click "Search customer" button
+		And I go to line in "List" table
+			| 'Description'                  |
+			| 'Name Retail customer Surname Retail customer' |
+		And I select current line in "List" table
+		And I click "OK" button
+		Then "Update item list info" window is opened
+		And I click "OK" button
+		And "ItemList" table became equal
+			| 'Item'  | 'Item key' | 'Serial number' | 'Quantity' | 'Price'  | 'Offers amount' | 'Total amount' |
+			| 'Dress' | 'M/White'  | ''              | '1,000'    | '440,68' | ''              | '520,00'       |		
+	* Payment
+		And I click "Payment (+)" button
+		And I click "Cash (/)" button
+		And I click "Enter" button
+	* Check Retail Sales Receipt
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I go to the last line in "List" table
+		And I select current line in "List" table
+		Then the form attribute named "Partner" became equal to "Customer"
+		Then the form attribute named "LegalName" became equal to "Customer"
+		Then the form attribute named "Agreement" became equal to "Customer partner term"
+		Then the form attribute named "Company" became equal to "Main Company"
+		Then the form attribute named "Store" became equal to "Store 01"
+		Then the form attribute named "UsePartnerTransactions" became equal to "Yes"
+		Then the form attribute named "RetailCustomer" became equal to "Name Retail customer Surname Retail customer"
+		And "ItemList" table contains lines
+			| 'Business unit' | 'Price type'              | 'Item'  | 'Item key' | 'Dont calculate row' | 'Serial lot numbers' | 'Q'     | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Revenue type' | 'Detail' |
+			| 'Shop 01'       | 'Basic Price without VAT' | 'Dress' | 'M/White'  | 'No'                 | ''                   | '1,000' | 'pcs'  | '79,32'      | '440,68' | '18%' | ''              | '440,68'     | '520,00'       | ''                    | 'Store 01' | ''             | ''       |
+		And "Payments" table contains lines
+			| 'Amount' | 'Payment type' |
+			| '520,00' | 'Cash'         |
+		And I delete "$$NumberRetailSalesReceipt0154182$$" variable
+		And I delete "$$RetailSalesReceipt0154182$$" variable
+		And I save the value of "Number" field as "$$NumberRetailSalesReceipt0154182$$"
+		And I click the button named "FormPost"
+		And I save the window as "$$RetailSalesReceipt0154182$$"
+
+
+
 
 Scenario: _0154190 check filling in Retail sales receipt when copying
 	* Select Retail sales receipt

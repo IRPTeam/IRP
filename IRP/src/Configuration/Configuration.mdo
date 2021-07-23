@@ -381,6 +381,7 @@
   <commonModules>CommonModule.DocPurchaseOrderClosingClient</commonModules>
   <commonModules>CommonModule.DocPurchaseOrderClosingServer</commonModules>
   <commonModules>CommonModule.CatRetailCustomersClient</commonModules>
+  <commonModules>CommonModule.CatRetailCustomersServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.BusinessUnit</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>

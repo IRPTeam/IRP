@@ -65,6 +65,87 @@ EndProcedure
 
 #EndRegion
 
+#Region ItemRetailCustomer
+	
+Procedure RetailCustomerOnChange(Object, Form, Module, Item = Undefined, Settings = Undefined, AddInfo = Undefined) Export
+	
+	CommonFunctionsClientServer.DeleteFromAddInfo(AddInfo, "ServerData");
+	RetailCustomerSettings = Module.RetailCustomerSettings(Object, Form);
+	If RetailCustomerSettings.Property("PutServerDataToAddInfo") And RetailCustomerSettings.PutServerDataToAddInfo Then
+		Module.RetailCustomerOnChangePutServerDataToAddInfo(Object, Form, AddInfo);
+	EndIf;
+	RetailCustomerSettings = Module.RetailCustomerSettings(Object, Form, AddInfo);
+	ServerData = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "ServerData");
+	
+	If Not Item = Undefined Then
+		CacheObject = CommonFunctionsClientServer.GetStructureOfProperty(Object, AddInfo);
+		CacheForm = New Structure("CurrentDeliveryDate, CurrentPartner, CurrentPriceType, CurrentStore, CurrentDate,
+						|CurrentAgreement, DeliveryDate, PriceType, Store, StoreBeforeChange, TaxAndOffersCalculated");
+		FillPropertyValues(CacheForm, Form);
+	EndIf;
+	
+	If Settings = Undefined Then
+		Settings = GetSettingsStructure(Module);	
+	EndIf;
+	
+	RetailCustomerInfo = New Structure();
+	If ServerData = Undefined Then
+		RetailCustomerInfo = CatRetailCustomersServer.GetRetailCustomerInfo(Object.RetailCustomer);
+		AgreementInfo = CatAgreementsServer.GetAgreementInfo(RetailCustomerInfo.Agreement);
+	Else
+		RetailCustomerInfo = ServerData.RetailCustomerInfo;
+		AgreementInfo = ServerData.RetailCustomerInfo.AgreementInfo;
+	EndIf;	
+	
+	RetailCustomerInfo.Insert("UsePartnerTransactions", True);
+	
+	If Not (ValueIsFilled(RetailCustomerInfo.Partner) And ValueIsFilled(RetailCustomerInfo.LegalName)
+		And ValueIsFilled(RetailCustomerInfo.Agreement)) Then
+		RetailCustomerInfo.Partner   = Object.Partner;
+		RetailCustomerInfo.LegalName = Object.LegalName;
+		RetailCustomerInfo.Agreement = Object.Agreement;
+		RetailCustomerInfo.UsePartnerTransactions = False;
+		AgreementInfo = ServerData.AgreementInfo;
+	EndIf;
+	
+	Settings.Insert("ObjectAttributes"	, RetailCustomerSettings.ObjectAttributes);
+	Settings.Insert("FormAttributes"	, RetailCustomerSettings.FormAttributes);
+	Settings.CalculateSettings = CalculationStringsClientServer.GetCalculationSettings(Settings.CalculateSettings);
+	
+	CurrentValuesStructure = CreateCurrentValuesStructure(Object, Settings.ObjectAttributes, Settings.FormAttributes);
+	FillPropertyValues(CurrentValuesStructure, Form, Settings.FormAttributes);
+		
+	Settings.Insert("CurrentValuesStructure" , CurrentValuesStructure);
+	Settings.Insert("PartnerInfo"			 , RetailCustomerInfo);
+	Settings.Insert("AgreementInfo"			 , AgreementInfo);
+		
+	DoTitleActions(Object, Form, Settings, RetailCustomerSettings.Actions, AddInfo);
+	
+	If Item = Undefined Then
+		Return;
+	EndIf;
+	
+	#If Not MobileClient Then
+		DocumentsClientServer.ChangeTitleGroupTitle(Object, Form, Settings);
+	#EndIf
+	
+	If Settings.Questions.Count() > 0  Then
+		Settings.Insert("CacheObject", CacheObject);
+		Settings.Insert("CacheForm", CacheForm);
+		ShowUserQueryBox(Object, Form, Settings, AddInfo); 
+	Else
+		Form.CurrentPartner = Object.Partner;
+		Form.CurrentAgreement = Object.Agreement;
+		Form.CurrentDate = Object.Date;
+		Settings.Insert("Rows", Object.ItemList);
+		Settings.CalculateSettings = CalculationStringsClientServer.GetCalculationSettings(Settings.CalculateSettings);
+		CalculateTable(Object, Form, Settings, AddInfo);
+	EndIf;
+
+EndProcedure
+
+#EndRegion
+
 #Region ItemPartner
 
 Procedure PartnerOnChange(Object, Form, Module, Item = Undefined, Settings = Undefined, AddInfo = Undefined) Export
@@ -134,7 +215,7 @@ Procedure PartnerOnChange(Object, Form, Module, Item = Undefined, Settings = Und
 	EndIf;
 	
 	#If Not MobileClient Then
-	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
+	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form, Settings);
 	#EndIf
 	
 	If Settings.Questions.Count() > 0  Then
@@ -302,7 +383,7 @@ Procedure AgreementOnChange(Object, Form, Module, Item = Undefined, Settings  = 
 	EndIf;
 	
 	#If Not MobileClient Then
-	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
+	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form, Settings);
 	#EndIf
 	
 	If Settings.Questions.Count() > 0  Then
@@ -399,7 +480,7 @@ EndProcedure
 #Region ItemLegalName
 
 Procedure LegalNameOnChange(Object, Form, Module, Item = Undefined, Settings = Undefined) Export	 
-	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
+	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form, Settings);
 EndProcedure
 
 #EndRegion
@@ -484,7 +565,7 @@ Procedure CompanyOnChange(Object, Form, Module, Item = Undefined, Settings = Und
 	EndIf;
 	
 	#If Not MobileClient Then
-	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
+	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form, Settings);
 	#EndIf
 	
 	Settings.Insert("Rows", Object[CompanySettings.TableName]);
@@ -829,7 +910,7 @@ Procedure PriceIncludeTaxOnChange(Object, Form, Module, Item = Undefined, Settin
 	PriceIncludeTaxSettings = Module.StoreSettings(Object, Form, AddInfo);
 	
 	#If Not MobileClient Then
-	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
+	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form, Settings);
 	#EndIf
 	
 	Settings.Insert("Rows", Object.ItemList);
@@ -953,7 +1034,7 @@ Procedure DateOnChange(Object, Form, Module, Item = Undefined, Settings = Undefi
 	DoTitleActions(Object, Form, Settings, DateSettings.Actions);
 	
 	#If Not MobileClient Then
-	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
+	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form, Settings);
 	#EndIf
 	
 	If Item = Undefined Then
@@ -1850,6 +1931,14 @@ Procedure ChangePriceIncludeTax(Object, Form, Settings) Export
 	EndIf;  
 EndProcedure
 
+Procedure ChangePartner(Object, Form, Settings) Export
+	Object.Partner = Settings.PartnerInfo.Partner;
+	Object.LegalName = Settings.PartnerInfo.LegalName;
+	Object.Agreement = Settings.PartnerInfo.Agreement;
+	
+	Object.UsePartnerTransactions = Settings.PartnerInfo.UsePartnerTransactions;	
+EndProcedure
+
 Procedure ChangeLegalName(Object, Form, Settings) Export
 	Object.LegalName = Settings.PartnerInfo.LegalName;
 	
@@ -2116,6 +2205,11 @@ Procedure DoTitleActions(Object, Form, Settings, Actions, AddInfo = Undefined) E
 		
 		If Action.Key = "ChangePriceIncludeTax" Then
 			ChangePriceIncludeTax(Object, Form, Settings);
+			Continue;
+		EndIf;
+		
+		If Action.Key = "ChangePartner" Then
+			ChangePartner(Object, Form, Settings);
 			Continue;
 		EndIf;
 		
@@ -2840,6 +2934,33 @@ Procedure PartnerOnChangePutServerDataToAddInfo(Object, Form, AddInfo = Undefine
 	PaymentTermsParameters = New Structure();
 	PaymentTermsParameters.Insert("Agreement", Object.Agreement);
 	ParametersToServer.Insert("GetPaymentTerms", PaymentTermsParameters);
+	
+	ServerData = DocumentsServer.PrepareServerData(ParametersToServer);
+	ServerData.Insert("OnChangeItemName", OnChangeItemName);
+	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "ServerData", ServerData);
+	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "CalculateItemRowsAtServer", True);
+EndProcedure
+
+#EndRegion
+
+#Region ItemRetailCustomer
+
+Procedure RetailCustomerOnChangePutServerDataToAddInfo(Object, Form, AddInfo = Undefined) Export
+	OnChangeItemName = "RetailCustomer";
+	ParametersToServer = New Structure();
+	CommonParametersToServer(Object, Form, ParametersToServer, AddInfo);
+	
+	RetailCustomerInfo = New Structure();
+	RetailCustomerInfo.Insert("RetailCustomer", Object.RetailCustomer);
+	ParametersToServer.Insert("GetRetailCustomerInfo", RetailCustomerInfo);
+		
+	AgreementInfoParameters = New Structure();
+	AgreementInfoParameters.Insert("Agreement", Object.Agreement);
+	ParametersToServer.Insert("GetAgreementInfo", AgreementInfoParameters);	
+	
+	MetaDataStructureParameters = New Structure();
+	MetaDataStructureParameters.Insert("Ref", Object.Ref);	
+	ParametersToServer.Insert("GetMetaDataStructure", MetaDataStructureParameters);
 	
 	ServerData = DocumentsServer.PrepareServerData(ParametersToServer);
 	ServerData.Insert("OnChangeItemName", OnChangeItemName);

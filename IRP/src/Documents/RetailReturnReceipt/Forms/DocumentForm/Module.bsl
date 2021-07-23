@@ -127,6 +127,11 @@ Procedure CurrencyOnChange(Item)
 	DocRetailReturnReceiptClient.CurrencyOnChange(Object, ThisObject, Item);	
 EndProcedure
 
+&AtClient
+Procedure RetailCustomerOnChange(Item)
+	DocRetailReturnReceiptClient.RetailCustomerOnChange(Object, ThisObject, Item);	
+EndProcedure
+
 #EndRegion
 
 #Region ItemListEvents

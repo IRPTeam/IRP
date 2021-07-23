@@ -28,7 +28,7 @@ Function GetGroupItemsArray(Object, Form)
 	Return ItemsArray;
 EndFunction
 
-Procedure ChangeTitleGroupTitle(Object, Form) Export
+Procedure ChangeTitleGroupTitle(Object, Form, Settings = Undefined) Export
 		
 	#If Server Then
 	If SessionParameters.isMobile Then
@@ -37,6 +37,12 @@ Procedure ChangeTitleGroupTitle(Object, Form) Export
 	#ElsIf MobileClient Then
 	Return;
 	#EndIf
+	
+	If Settings <> Undefined 
+		And Settings.Property("ChangeTitleGroupTitle")
+		And Not Settings.ChangeTitleGroupTitle Then
+			Return;
+	EndIf;
 	
 	ItemsArray = GetGroupItemsArray(Object, Form);
 	

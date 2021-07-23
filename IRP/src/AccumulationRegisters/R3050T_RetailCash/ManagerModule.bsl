@@ -9,7 +9,7 @@ Function GetLockFields(Data) Export
 EndFunction
 
 Function GetLockFieldNames() Export
-	Return "Company, BusinessUnit, PaymentType, Account, PaymentTerminal";
+	Return "Company, ProfitLossCenter, PaymentType, Account, PaymentTerminal";
 EndFunction
 
 Function GetExistsRecords(Ref, RecordType = Undefined, AddInfo = Undefined) Export

@@ -1066,7 +1066,7 @@
                     </userVisible>
                     <dataPath xsi:type="form:MultiLanguageDataPath">
                       <paths xsi:type="form:DataPath">
-                        <segments>Object.ItemList.BusinessUnit</segments>
+                        <segments>Object.ItemList.ProfitLossCenter</segments>
                       </paths>
                     </dataPath>
                     <extendedTooltip>

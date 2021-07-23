@@ -98,7 +98,7 @@ Function PaymentList()
 		|	PaymentList.ExpenseType AS ExpenseType,
 		|	PaymentList.NetAmount AS Amount,
 		|	PaymentList.Key,
-		|	PaymentList.BusinessUnit,
+		|	PaymentList.ProfitLossCenter,
 		|	PaymentList.AdditionalAnalytic
 		|INTO PaymentList
 		|FROM

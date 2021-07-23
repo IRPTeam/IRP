@@ -1391,7 +1391,7 @@
         </extInfo>
       </items>
       <items xsi:type="form:FormField">
-        <name>BusinessUnit</name>
+        <name>Branch</name>
         <id>93</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -1400,11 +1400,11 @@
         </userVisible>
         <dataPath xsi:type="form:MultiLanguageDataPath">
           <paths xsi:type="form:DataPath">
-            <segments>Object.BusinessUnit</segments>
+            <segments>Object.Branch</segments>
           </paths>
         </dataPath>
         <extendedTooltip>
-          <name>BusinessUnitExtendedTooltip</name>
+          <name>BranchExtendedTooltip</name>
           <id>95</id>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -1419,7 +1419,7 @@
           </extInfo>
         </extendedTooltip>
         <contextMenu>
-          <name>BusinessUnitContextMenu</name>
+          <name>BranchContextMenu</name>
           <id>94</id>
           <visible>true</visible>
           <enabled>true</enabled>

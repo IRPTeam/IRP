@@ -750,7 +750,7 @@
 	SalesReturnOrder.PriceIncludeTax,
 	SalesReturnOrder.Status,
 	SalesReturnOrder.Author,
-	SalesReturnOrder.BusinessUnit,
+	SalesReturnOrder.Branch,
 	SalesReturnOrder.Description,
 	SalesReturnOrder.DocumentAmount,
 	CASE WHEN COUNT(DISTINCT SalesReturnOrderItemList.Store) = 1 THEN
@@ -776,7 +776,7 @@ GROUP BY
 	SalesReturnOrder.PriceIncludeTax,
 	SalesReturnOrder.Status,
 	SalesReturnOrder.Author,
-	SalesReturnOrder.BusinessUnit,
+	SalesReturnOrder.Branch,
 	SalesReturnOrder.Description,
 	SalesReturnOrder.DocumentAmount</queryText>
       <mainTable>Document.SalesReturnOrder</mainTable>

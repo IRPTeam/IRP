@@ -140,7 +140,7 @@ Function ItemList()
 	|	END AS RetailSalesReceipt,
 	|	ItemList.Key AS RowKey,
 	|	ItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS IsService,
-	|	ItemList.BusinessUnit AS BusinessUnit,
+	|	ItemList.ProfitLossCenter AS ProfitLossCenter,
 	|	ItemList.RevenueType AS RevenueType,
 	|	ItemList.AdditionalAnalytic AS AdditionalAnalytic,
 	|	ItemList.NetAmount AS NetAmount,
@@ -172,7 +172,7 @@ Function Payments()
 	|	Payments.Account AS Account,
 	|	Payments.Ref.Currency AS Currency,
 	|	Payments.Amount AS Amount,
-	|	Payments.Ref.BusinessUnit AS BusinessUnit,
+	|	Payments.Ref.Branch AS Branch,
 	|	Payments.PaymentType AS PaymentType,
 	|	Payments.PaymentTerminal AS PaymentTerminal,
 	|	Payments.Percent AS Percent,
@@ -187,7 +187,7 @@ EndFunction
 Function RetailSales()
 	Return 
 	"SELECT
-	|	RetailReturnReceiptItemList.Ref.BusinessUnit AS BusinessUnit,
+	|	RetailReturnReceiptItemList.Ref.Branch AS Branch,
 	|	RetailReturnReceiptItemList.Ref.Company AS Company,
 	|	RetailReturnReceiptItemList.ItemKey AS ItemKey,
 	|	SUM(RetailReturnReceiptItemList.QuantityInBaseUnit) AS Quantity,
@@ -215,7 +215,7 @@ Function RetailSales()
 	|WHERE
 	|	RetailReturnReceiptItemList.Ref = &Ref
 	|GROUP BY
-	|	RetailReturnReceiptItemList.Ref.BusinessUnit,
+	|	RetailReturnReceiptItemList.Ref.Branch,
 	|	RetailReturnReceiptItemList.Ref.Company,
 	|	RetailReturnReceiptItemList.ItemKey,
 	|	RetailReturnReceiptItemList.Ref.Date,
@@ -233,7 +233,7 @@ Function RetailSales()
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
 	|	tmpRetailSales.Company AS Company,
-	|	tmpRetailSales.BusinessUnit AS BusinessUnit,
+	|	tmpRetailSales.Branch AS Branch,
 	|	tmpRetailSales.ItemKey AS ItemKey,
 	|	CASE
 	|		WHEN tmpRetailSales.QuantityBySerialLtNumbers = 0

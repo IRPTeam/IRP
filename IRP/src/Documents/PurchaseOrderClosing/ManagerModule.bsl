@@ -121,7 +121,7 @@ Function ItemList()
 		|	PurchaseOrderItems.Unit,
 		|	PurchaseOrderItems.Ref.Date AS Period,
 		|	PurchaseOrderItems.Key AS RowKey,
-		|	PurchaseOrderItems.BusinessUnit AS BusinessUnit,
+		|	PurchaseOrderItems.ProfitLossCenter AS ProfitLossCenter,
 		|	PurchaseOrderItems.ExpenseType AS ExpenseType,
 		|	PurchaseOrderItems.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS IsService,
 		|	PurchaseOrderItems.DeliveryDate AS DeliveryDate,

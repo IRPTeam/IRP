@@ -195,7 +195,7 @@ Function ItemList()
 		|	ItemList.NetAmount,
 		|	ItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS IsService,
 		|	ItemList.ReturnReason,
-		|	ItemList.BusinessUnit AS BusinessUnit,
+		|	ItemList.ProfitLossCenter AS ProfitLossCenter,
 		|	ItemList.RevenueType AS RevenueType,
 		|	ItemList.AdditionalAnalytic AS AdditionalAnalytic
 		|INTO ItemList

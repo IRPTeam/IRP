@@ -142,7 +142,7 @@ Function ItemList()
 		|	ItemList.Ref.Date AS Period,
 		|	ItemList.Ref AS RetailSalesReceipt,
 		|	ItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS IsService,
-		|	ItemList.BusinessUnit AS BusinessUnit,
+		|	ItemList.ProfitLossCenter AS ProfitLossCenter,
 		|	ItemList.RevenueType AS RevenueType,
 		|	ItemList.AdditionalAnalytic AS AdditionalAnalytic,
 		|	CASE
@@ -167,7 +167,7 @@ Function Payments()
 	"SELECT
 	|	Payments.Ref.Date AS Period,
 	|	Payments.Ref.Company AS Company,
-	|	Payments.Ref.BusinessUnit AS BusinessUnit,
+	|	Payments.Ref.Branch AS Branch,
 	|	Payments.Account AS Account,
 	|	Payments.Ref.Currency AS Currency,
 	|	Payments.Amount AS Amount,
@@ -187,7 +187,7 @@ Function RetailSales()
 	Return 
 	"SELECT
 	|	RetailSalesReceiptItemList.Ref.Company AS Company,
-	|	RetailSalesReceiptItemList.Ref.BusinessUnit AS BusinessUnit,
+	|	RetailSalesReceiptItemList.Ref.Branch AS Branch,
 	|	RetailSalesReceiptItemList.ItemKey AS ItemKey,
 	|	SUM(RetailSalesReceiptItemList.QuantityInBaseUnit) AS Quantity,
 	|	SUM(ISNULL(RetailSalesReceiptSerialLotNumbers.Quantity, 0)) AS QuantityBySerialLtNumbers,
@@ -211,7 +211,7 @@ Function RetailSales()
 	|	RetailSalesReceiptItemList.Ref = &Ref
 	|GROUP BY
 	|	RetailSalesReceiptItemList.Ref.Company,
-	|	RetailSalesReceiptItemList.Ref.BusinessUnit,
+	|	RetailSalesReceiptItemList.Ref.Branch,
 	|	RetailSalesReceiptItemList.ItemKey,
 	|	RetailSalesReceiptItemList.Ref.Date,
 	|	RetailSalesReceiptItemList.Ref,
@@ -223,7 +223,7 @@ Function RetailSales()
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
 	|	tmpRetailSales.Company AS Company,
-	|	tmpRetailSales.BusinessUnit AS BusinessUnit,
+	|	tmpRetailSales.Branch AS Branch,
 	|	tmpRetailSales.ItemKey AS ItemKey,
 	|	CASE
 	|		WHEN tmpRetailSales.QuantityBySerialLtNumbers = 0

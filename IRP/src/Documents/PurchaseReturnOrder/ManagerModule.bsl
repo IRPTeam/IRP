@@ -130,7 +130,7 @@ Function ItemList()
 		|	PurchaseReturnOrderItemList.Unit,
 		|	PurchaseReturnOrderItemList.Ref.Date AS Period,
 		|	PurchaseReturnOrderItemList.Key AS RowKey,
-		|	PurchaseReturnOrderItemList.BusinessUnit AS BusinessUnit,
+		|	PurchaseReturnOrderItemList.ProfitLossCenter AS ProfitLossCenter,
 		|	PurchaseReturnOrderItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS IsService,
 		|	PurchaseReturnOrderItemList.Cancel AS IsCanceled,
 		|	PurchaseReturnOrderItemList.TotalAmount AS Amount,

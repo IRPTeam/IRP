@@ -383,7 +383,7 @@
   <commonModules>CommonModule.CatRetailCustomersClient</commonModules>
   <commonModules>CommonModule.CatRetailCustomersServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
-  <commonAttributes>CommonAttribute.BusinessUnit</commonAttributes>
+  <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>
   <commonAttributes>CommonAttribute.Description_en</commonAttributes>
   <commonAttributes>CommonAttribute.Description_hash</commonAttributes>

@@ -195,7 +195,7 @@ Function ItemList()
 		|	PurchaseReturnItemList.NetAmount,
 		|	PurchaseReturnItemList.PurchaseInvoice AS Invoice,
 		|	PurchaseReturnItemList.ReturnReason,
-		|	PurchaseReturnItemList.BusinessUnit AS BusinessUnit,
+		|	PurchaseReturnItemList.ProfitLossCenter AS ProfitLossCenter,
 		|	PurchaseReturnItemList.ExpenseType AS ExpenseType,
 		|	PurchaseReturnItemList.AdditionalAnalytic AS AdditionalAnalytic
 		|INTO ItemList

@@ -251,7 +251,7 @@ Function ItemList()
 	|	PurchaseInvoiceItemList.Ref.Date AS Period,
 	|	TableRowIDInfo.RowID AS RowKey,
 	|	PurchaseInvoiceItemList.AdditionalAnalytic AS AdditionalAnalytic,
-	|	PurchaseInvoiceItemList.BusinessUnit AS BusinessUnit,
+	|	PurchaseInvoiceItemList.ProfitLossCenter AS ProfitLossCenter,
 	|	PurchaseInvoiceItemList.ExpenseType AS ExpenseType,
 	|	PurchaseInvoiceItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS IsService,
 	|	PurchaseInvoiceItemList.DeliveryDate AS DeliveryDate,

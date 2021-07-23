@@ -194,9 +194,9 @@ Procedure Taxes_CreateTaxTree() Export
 	TaxesTreeParameters.MetadataTaxList = Metadata.Documents.CashExpense.TabularSections.TaxList;
 	TaxesTreeParameters.ObjectMainList = Object.PaymentList;
 	TaxesTreeParameters.ObjectTaxList = Object.TaxList;
-	TaxesTreeParameters.MainListColumns = "Key, BusinessUnit, ExpenseType, Currency";
+	TaxesTreeParameters.MainListColumns = "Key, ProfitLossCenter, ExpenseType, Currency";
 	TaxesTreeParameters.Level1Columns = "Tax, Currency";
-	TaxesTreeParameters.Level2Columns = "Key, BusinessUnit, ExpenseType, TaxRate";
+	TaxesTreeParameters.Level2Columns = "Key, ProfitLossCenter, ExpenseType, TaxRate";
 	TaxesTreeParameters.Level3Columns = "Key, Analytics";
 	TaxesServer.CreateTaxTree(Object, ThisObject, TaxesTreeParameters);
 EndProcedure

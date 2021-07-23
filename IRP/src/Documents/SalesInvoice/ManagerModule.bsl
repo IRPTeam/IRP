@@ -200,7 +200,7 @@ Function ItemList()
 	|	TableRowIDInfo.RowID AS RowKey,
 	|	SalesInvoiceItemList.DeliveryDate AS DeliveryDate,
 	|	SalesInvoiceItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS IsService,
-	|	SalesInvoiceItemList.BusinessUnit AS BusinessUnit,
+	|	SalesInvoiceItemList.ProfitLossCenter AS ProfitLossCenter,
 	|	SalesInvoiceItemList.RevenueType AS RevenueType,
 	|	SalesInvoiceItemList.AdditionalAnalytic AS AdditionalAnalytic,
 	|	CASE

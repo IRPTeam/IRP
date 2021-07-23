@@ -12071,7 +12071,7 @@
 		</right>
 	</object>
 	<object>
-		<name>CommonAttribute.BusinessUnit</name>
+		<name>CommonAttribute.Branch</name>
 		<right>
 			<name>View</name>
 			<value>true</value>

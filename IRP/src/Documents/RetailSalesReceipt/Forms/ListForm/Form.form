@@ -373,20 +373,18 @@
       </extInfo>
     </items>
     <items xsi:type="form:FormField">
-      <name>BusinessUnit</name>
+      <name>Branch</name>
       <id>37</id>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>List.BusinessUnit</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>List.Branch</segments>
       </dataPath>
       <extendedTooltip>
-        <name>BusinessUnitExtendedTooltip</name>
+        <name>BranchExtendedTooltip</name>
         <id>39</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -401,7 +399,7 @@
         </extInfo>
       </extendedTooltip>
       <contextMenu>
-        <name>BusinessUnitContextMenu</name>
+        <name>BranchContextMenu</name>
         <id>38</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -764,7 +762,7 @@
 	RetailSalesReceipt.Manager,
 	RetailSalesReceipt.BasisDocument,
 	RetailSalesReceipt.Author,
-	RetailSalesReceipt.BusinessUnit,
+	RetailSalesReceipt.Branch,
 	RetailSalesReceipt.Description,
 	RetailSalesReceipt.DocumentAmount,
 	RetailSalesReceipt.RetailCustomer,
@@ -788,7 +786,7 @@ GROUP BY
 	RetailSalesReceipt.Manager,
 	RetailSalesReceipt.BasisDocument,
 	RetailSalesReceipt.Author,
-	RetailSalesReceipt.BusinessUnit,
+	RetailSalesReceipt.Branch,
 	RetailSalesReceipt.Description,
 	RetailSalesReceipt.DocumentAmount,
 	RetailSalesReceipt.RetailCustomer</queryText>

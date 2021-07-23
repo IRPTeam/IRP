@@ -95,7 +95,7 @@ Function GetQueryTextBankPaymentPaymentList()
 		|	BankPaymentPaymentList.PlaningTransactionBasis.Receiver AS ToAccount,
 		|	BankPaymentPaymentList.Ref AS PaymentDocument,
 		|	BankPaymentPaymentList.Key AS Key,
-		|	BankPaymentPaymentList.BusinessUnit AS BusinessUnit,
+		|	BankPaymentPaymentList.ProfitLossCenter AS ProfitLossCenter,
 		|	BankPaymentPaymentList.ExpenseType AS ExpenseType,
 		|	BankPaymentPaymentList.AdditionalAnalytic AS AdditionalAnalytic,
 		|	BankPaymentPaymentList.Commission AS Commission
@@ -126,7 +126,7 @@ Function GetQueryTextQueryTable()
 		|	QueryTable.ToAccount AS ToAccount,
 		|	QueryTable.PaymentDocument AS PaymentDocument,
 		|	QueryTable.Key AS Key,
-		|	QueryTable.BusinessUnit AS BusinessUnit,
+		|	QueryTable.ProfitLossCenter AS ProfitLossCenter,
 		|	QueryTable.ExpenseType AS ExpenseType,
 		|	QueryTable.AdditionalAnalytic AS AdditionalAnalytic,
 		|	QueryTable.Commission AS Commission
@@ -371,7 +371,7 @@ Function PaymentList()
 		|	PaymentList.PlaningTransactionBasis.Receiver AS ToAccount,
 		|	PaymentList.Ref AS Basis,
 		|	PaymentList.Key AS Key,
-		|	PaymentList.BusinessUnit AS BusinessUnit,
+		|	PaymentList.ProfitLossCenter AS ProfitLossCenter,
 		|	PaymentList.ExpenseType AS ExpenseType,
 		|	PaymentList.AdditionalAnalytic AS AdditionalAnalytic,
 		|	PaymentList.Commission AS Commission,

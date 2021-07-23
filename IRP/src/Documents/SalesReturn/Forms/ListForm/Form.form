@@ -866,7 +866,7 @@
 	SalesReturn.Partner,
 	SalesReturn.PriceIncludeTax,
 	SalesReturn.Author,
-	SalesReturn.BusinessUnit,
+	SalesReturn.Branch,
 	SalesReturn.Description,
 	SalesReturn.DocumentAmount,
 	CASE
@@ -896,7 +896,7 @@ GROUP BY
 	SalesReturn.Partner,
 	SalesReturn.PriceIncludeTax,
 	SalesReturn.Author,
-	SalesReturn.BusinessUnit,
+	SalesReturn.Branch,
 	SalesReturn.Description,
 	SalesReturn.DocumentAmount,
 	R2031B_ShipmentInvoicingBalance.QuantityBalance</queryText>

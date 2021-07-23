@@ -56,7 +56,7 @@ Procedure FillTransactions(Object, AddInfo = Undefined) Export
 		|	SUM(R3010B_CashOnHandTurnovers.AmountReceipt) AS Receipt
 		|FROM
 		|	AccumulationRegister.R3010B_CashOnHand.Turnovers(&BegOfPeriod, &EndOfPeriod, Record,
-		|		Account.BusinessUnit = &Branch
+		|		Account.Branch = &Branch
 		|	AND Company = &Company) AS R3010B_CashOnHandTurnovers
 		|WHERE
 		|	R3010B_CashOnHandTurnovers.Account.Type = VALUE(Enum.CashAccountTypes.Cash)

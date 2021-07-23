@@ -1311,7 +1311,8 @@ Function ExtractData_FromSO(BasisesTable, DataReceiver)
 		|	ItemList.PriceType AS PriceType,
 		|	ItemList.DeliveryDate AS DeliveryDate,
 		|	ItemList.DontCalculateRow AS DontCalculateRow,
-		|	ItemList.BusinessUnit AS BusinessUnit,
+		|	ItemList.Ref.Branch AS Branch,
+		|	ItemList.ProfitLossCenter AS ProfitLossCenter,
 		|	ItemList.RevenueType AS RevenueType,
 		|	ItemList.Detail AS Detail,
 		|	ItemList.Store.UseShipmentConfirmation 
@@ -1417,7 +1418,8 @@ Function ExtractData_FromSI(BasisesTable, DataReceiver)
 		|	ItemList.PriceType AS PriceType,
 		|	ItemList.DeliveryDate AS DeliveryDate,
 		|	ItemList.DontCalculateRow AS DontCalculateRow,
-		|	ItemList.BusinessUnit AS BusinessUnit,
+		|	ItemList.Ref.Branch AS Branch,
+		|	ItemList.ProfitLossCenter AS ProfitLossCenter,
 		|	ItemList.RevenueType AS RevenueType,
 		|	ItemList.AdditionalAnalytic AS AdditionalAnalytic,
 		|	ItemList.Detail AS Detail,
@@ -1814,7 +1816,8 @@ Function ExtractData_FromPO(BasisesTable, DataReceiver)
 		|	ItemList.PriceType AS PriceType,
 		|	ItemList.DeliveryDate AS DeliveryDate,
 		|	ItemList.DontCalculateRow AS DontCalculateRow,
-		|	ItemList.BusinessUnit AS BusinessUnit,
+		|	ItemList.Ref.Branch AS Branch,
+		|	ItemList.ProfitLossCenter AS ProfitLossCenter,
 		|	ItemList.ExpenseType AS ExpenseType,
 		|	ItemList.Detail AS Detail,
 		|	ItemList.Store.UseGoodsReceipt 
@@ -1917,7 +1920,8 @@ Function ExtractData_FromPI(BasisesTable, DataReceiver)
 		|	ItemList.PriceType AS PriceType,
 		|	ItemList.DeliveryDate AS DeliveryDate,
 		|	ItemList.DontCalculateRow AS DontCalculateRow,
-		|	ItemList.BusinessUnit AS BusinessUnit,
+		|	ItemList.Ref.Branch AS Branch,
+		|	ItemList.ProfitLossCenter AS ProfitLossCenter,
 		|	ItemList.ExpenseType AS ExpenseType,
 		|	ItemList.AdditionalAnalytic AS AdditionalAnalytic,
 		|	ItemList.Detail AS Detail,
@@ -2207,7 +2211,7 @@ Function ExtractData_FromITO(BasisesTable, DataReceiver)
 		|	ItemList.Ref AS InventoryTransferOrder,
 		|	ItemList.InternalSupplyRequest AS InternalSupplyRequest,
 		|	ItemList.Ref.Company AS Company,
-		|	ItemList.Ref.BusinessUnit AS BusinessUnit,
+		|	ItemList.Ref.Branch AS Branch,
 		|	ItemList.Ref.StoreSender AS StoreSender,
 		|	ItemList.Ref.StoreReceiver AS StoreReceiver,
 		|	ItemList.ItemKey.Item AS Item,
@@ -2310,7 +2314,7 @@ Function ExtractData_FromISR(BasisesTable, DataReceiver)
 		|	UNDEFINED AS Ref,
 		|	ItemList.Ref AS InternalSupplyRequest,
 		|	ItemList.Ref.Company AS Company,
-		|	ItemList.Ref.BusinessUnit AS BusinessUnit,
+		|	ItemList.Ref.Branch AS Branch,
 		|	ItemList.Ref.Store AS Store,
 		|	ItemList.Ref.Store AS StoreReceiver,
 		|	ItemList.ItemKey.Item AS Item,
@@ -2412,7 +2416,8 @@ Function ExtractData_FromPR(BasisesTable, DataReceiver)
 		|	ItemList.Store AS Store,
 		|	ItemList.PriceType AS PriceType,
 		|	ItemList.DontCalculateRow AS DontCalculateRow,
-		|	ItemList.BusinessUnit AS BusinessUnit,
+		|	ItemList.Ref.Branch AS Branch,
+		|	ItemList.ProfitLossCenter AS ProfitLossCenter,
 		|	ItemList.ExpenseType AS ExpenseType,
 		|	ItemList.AdditionalAnalytic AS AdditionalAnalytic,
 		|	ItemLIst.ReturnReason AS ReturnReason,
@@ -2512,7 +2517,8 @@ Function ExtractData_FromPRO(BasisesTable, DataReceiver)
 		|	ItemList.Store AS Store,
 		|	ItemList.PriceType AS PriceType,
 		|	ItemList.DontCalculateRow AS DontCalculateRow,
-		|	ItemList.BusinessUnit AS BusinessUnit,
+		|	ItemList.Ref.Branch AS Branch,
+		|	ItemList.ProfitLossCenter AS ProfitLossCenter,
 		|	ItemList.ExpenseType AS ExpenseType,
 		|	ItemList.AdditionalAnalytic AS AdditionalAnalytic,
 		|	0 AS Quantity,
@@ -2610,7 +2616,8 @@ Function ExtractData_FromSR(BasisesTable, DataReceiver)
 		|	ItemList.Store AS Store,
 		|	ItemList.PriceType AS PriceType,
 		|	ItemList.DontCalculateRow AS DontCalculateRow,
-		|	ItemList.BusinessUnit AS BusinessUnit,
+		|	ItemList.Ref.Branch AS Branch,
+		|	ItemList.ProfitLossCenter AS ProfitLossCenter,
 		|	ItemList.RevenueType AS RevenueType,
 		|	ItemList.AdditionalAnalytic AS AdditionalAnalytic,
 		|	ItemList.Store.UseGoodsReceipt
@@ -2709,7 +2716,8 @@ Function ExtractData_FromSRO(BasisesTable, DataReceiver)
 		|	ItemList.Store AS Store,
 		|	ItemList.PriceType AS PriceType,
 		|	ItemList.DontCalculateRow AS DontCalculateRow,
-		|	ItemList.BusinessUnit AS BusinessUnit,
+		|	ItemList.Ref.Branch AS Branch,
+		|	ItemList.ProfitLossCenter AS ProfitLossCenter,
 		|	ItemList.RevenueType AS RevenueType,
 		|	ItemList.AdditionalAnalytic AS AdditionalAnalytic,
 		|	0 AS Quantity,
@@ -2804,7 +2812,8 @@ Function ExtractData_FromRSR(BasisesTable, DataReceiver)
 		|	ItemList.Store AS Store,
 		|	ItemList.PriceType AS PriceType,
 		|	ItemList.DontCalculateRow AS DontCalculateRow,
-		|	ItemList.BusinessUnit AS BusinessUnit,
+		|	ItemList.Ref.Branch AS Branch,
+		|	ItemList.ProfitLossCenter AS ProfitLossCenter,
 		|	ItemList.RevenueType AS RevenueType,
 		|	ItemList.AdditionalAnalytic AS AdditionalAnalytic,
 		|	ItemList.Detail AS Detail,
@@ -5845,33 +5854,33 @@ EndProcedure
 
 Function GetSeperatorColumns(DocReceiverMetadata) Export
 	If DocReceiverMetadata = Metadata.Documents.SalesInvoice Then
-		Return "Partner, Company, Currency, Agreement, PriceIncludeTax, ManagerSegment, LegalName";
+		Return "Company, Branch, Partner, Currency, Agreement, PriceIncludeTax, ManagerSegment, LegalName";
 	ElsIf DocReceiverMetadata = Metadata.Documents.ShipmentConfirmation Then
-		Return "Company, Partner, LegalName, TransactionType";
+		Return "Company, Branch, Partner, LegalName, TransactionType";
 	ElsIf DocReceiverMetadata = Metadata.Documents.PurchaseOrder Then
-		Return "Company";
+		Return "Company, Branch";
 	ElsIf DocReceiverMetadata = Metadata.Documents.PurchaseInvoice Then
-		Return "Company, Partner, LegalName, Agreement, Currency, PriceIncludeTax";
+		Return "Company, Branch, Partner, LegalName, Agreement, Currency, PriceIncludeTax";
 	ElsIf DocReceiverMetadata = Metadata.Documents.GoodsReceipt Then
-		Return "Company, Partner, LegalName, TransactionType";
+		Return "Company, Branch, Partner, LegalName, TransactionType";
 	ElsIf DocReceiverMetadata = Metadata.Documents.InventoryTransfer Then
-		Return "Company, BusinessUnit, StoreSender, StoreReceiver";	 
+		Return "Company, Branch, StoreSender, StoreReceiver";	 
 	ElsIf DocReceiverMetadata = Metadata.Documents.InventoryTransferOrder Then
-		Return "Company, BusinessUnit, StoreReceiver";
+		Return "Company, Branch, StoreReceiver";
 	ElsIf DocReceiverMetadata = Metadata.Documents.StockAdjustmentAsSurplus Then
-		Return "Store";
+		Return "Company, Branch, Store";
 	ElsIf DocReceiverMetadata = Metadata.Documents.StockAdjustmentAsWriteOff Then
-		Return "Store";
+		Return "Company, Branch, Store";
 	ElsIf DocReceiverMetadata = Metadata.Documents.SalesReturn Then
-		Return "Company, Partner, LegalName, Agreement, Currency, PriceIncludeTax";
+		Return "Company, Branch, Partner, LegalName, Agreement, Currency, PriceIncludeTax";
 	ElsIf DocReceiverMetadata = Metadata.Documents.PurchaseReturn Then
-		Return "Company, Partner, LegalName, Agreement, Currency, PriceIncludeTax";
+		Return "Company, Branch, Partner, LegalName, Agreement, Currency, PriceIncludeTax";
 	ElsIf DocReceiverMetadata = Metadata.Documents.SalesReturnOrder Then
-		Return "Company, Partner, LegalName, Agreement, Currency, PriceIncludeTax";
+		Return "Company, Branch, Partner, LegalName, Agreement, Currency, PriceIncludeTax";
 	ElsIf DocReceiverMetadata = Metadata.Documents.PurchaseReturnOrder Then
-		Return "Company, Partner, LegalName, Agreement, Currency, PriceIncludeTax";
+		Return "Company, Branch, Partner, LegalName, Agreement, Currency, PriceIncludeTax";
 	ElsIf DocReceiverMetadata = Metadata.Documents.RetailReturnReceipt Then
-		Return "Company, Partner, LegalName, Agreement, Currency, PriceIncludeTax, RetailCustomer, UsePartnerTransactions";
+		Return "Company, Branch, Partner, LegalName, Agreement, Currency, PriceIncludeTax, RetailCustomer, UsePartnerTransactions";
 	EndIf;
 EndFunction	
 	
@@ -6090,7 +6099,8 @@ Function GetColumnNames_ItemList()
 	|Price,
 	|DeliveryDate,
 	|DontCalculateRow,
-	|BusinessUnit,
+	|Branch,
+	|ProfitLossCenter,
 	|RevenueType,
 	|ExpenseType,
 	|Detail,

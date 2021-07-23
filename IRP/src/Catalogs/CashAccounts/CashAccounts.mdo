@@ -160,10 +160,10 @@
     <dataHistory>Use</dataHistory>
   </attributes>
   <attributes uuid="699c3c57-cd78-46ad-a184-d47b349a0788">
-    <name>BusinessUnit</name>
+    <name>Branch</name>
     <synonym>
       <key>en</key>
-      <value>Business unit</value>
+      <value>Branch</value>
     </synonym>
     <type>
       <types>CatalogRef.BusinessUnits</types>

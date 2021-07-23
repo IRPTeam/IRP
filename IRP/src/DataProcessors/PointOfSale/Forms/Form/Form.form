@@ -1058,7 +1058,7 @@
                     </extInfo>
                   </items>
                   <items xsi:type="form:FormField">
-                    <name>ItemListBusinessUnit</name>
+                    <name>ItemListProfitLossCenter</name>
                     <id>812</id>
                     <enabled>true</enabled>
                     <userVisible>
@@ -1070,7 +1070,7 @@
                       </paths>
                     </dataPath>
                     <extendedTooltip>
-                      <name>ItemListBusinessUnitExtendedTooltip</name>
+                      <name>ItemListProfitLossCenterExtendedTooltip</name>
                       <id>814</id>
                       <visible>true</visible>
                       <enabled>true</enabled>
@@ -1085,7 +1085,7 @@
                       </extInfo>
                     </extendedTooltip>
                     <contextMenu>
-                      <name>ItemListBusinessUnitContextMenu</name>
+                      <name>ItemListProfitLossCenterContextMenu</name>
                       <id>813</id>
                       <visible>true</visible>
                       <enabled>true</enabled>

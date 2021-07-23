@@ -1044,7 +1044,7 @@
 		</right>
 	</object>
 	<object>
-		<name>InformationRegister.BusinessUnitBankTerms</name>
+		<name>InformationRegister.BranchBankTerms</name>
 		<right>
 			<name>Read</name>
 			<value>true</value>

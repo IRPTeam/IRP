@@ -206,8 +206,8 @@ When Create document CashStatement objects  (test data base)
 		Then I select all lines of "List" table
 		And in the table "List" I click the button named "ListContextMenuPost"
  		And Delay "3"
-* Posting Goods receipt
-		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
+* Posting InternalSupplyRequest
+		Given I open hyperlink "e1cib/list/Document.InternalSupplyRequest"
 		Then I select all lines of "List" table
 		And in the table "List" I click the button named "ListContextMenuPost"
  		And Delay "3"
@@ -221,8 +221,8 @@ When Create document CashStatement objects  (test data base)
 		Then I select all lines of "List" table
 		And in the table "List" I click the button named "ListContextMenuPost"
  		And Delay "3"
-* Posting InternalSupplyRequest
-		Given I open hyperlink "e1cib/list/Document.InternalSupplyRequest"
+* Posting Goods receipt
+		Given I open hyperlink "e1cib/list/Document.GoodsReceipt"
 		Then I select all lines of "List" table
 		And in the table "List" I click the button named "ListContextMenuPost"
  		And Delay "3"

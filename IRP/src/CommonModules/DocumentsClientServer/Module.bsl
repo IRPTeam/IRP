@@ -143,14 +143,6 @@ EndProcedure
 // TODO: Delete parameter Object
 Procedure ChangeTitleCollapse(Object = Undefined, Form, TitleVisible = True) Export
 	
-	#If Server Then
-	If SessionParameters.isMobile Then
-		Return;
-	EndIf;
-	#ElsIf MobileClient Then
-	Return;
-	#EndIf
-	
 	Form.Items.GroupTitleCollapsed.Visible = Not TitleVisible;
 	Form.Items.GroupTitleUncollapsed.Visible = TitleVisible;
 	Form.Items.GroupTitleItems.Visible = TitleVisible;

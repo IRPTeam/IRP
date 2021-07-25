@@ -500,6 +500,7 @@
   <commonForms>CommonForm.UpdateItemListInfo</commonForms>
   <commonForms>CommonForm.LinkUnlinkDocumentRows</commonForms>
   <commonForms>CommonForm.AddLinkedDocumentRows</commonForms>
+  <commonForms>CommonForm.ItemScanForm</commonForms>
   <catalogs>Catalog.AccessGroups</catalogs>
   <catalogs>Catalog.AccessProfiles</catalogs>
   <catalogs>Catalog.AddAttributeAndPropertySets</catalogs>

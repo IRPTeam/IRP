@@ -94,6 +94,11 @@ Procedure OpenPickupItems(Command)
 EndProcedure
 
 &AtClient
+Procedure OpenScanForm(Command)
+	DocInventoryTransferClient.OpenScanForm(Object, ThisObject, Command);
+EndProcedure
+
+&AtClient
 Procedure ItemListItemStartChoice(Item, ChoiceData, StandardProcessing)
 	DocInventoryTransferClient.ItemListItemStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
 EndProcedure

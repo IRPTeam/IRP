@@ -29,69 +29,32 @@ Function GetGroupItemsArray(Object, Form)
 EndFunction
 
 Procedure ChangeTitleGroupTitle(Object, Form, Settings = Undefined) Export
-		
-	#If Server Then
-	If SessionParameters.isMobile Then
-		Return;
-	EndIf;
-	#ElsIf MobileClient Then
-	Return;
-	#EndIf
-	
+
 	If Settings <> Undefined 
 		And Settings.Property("ChangeTitleGroupTitle")
 		And Not Settings.ChangeTitleGroupTitle Then
 			Return;
 	EndIf;
+
+	isMobile = False;
+	#If Server Then
+	If SessionParameters.isMobile Then
+		isMobile = True;
+	EndIf;
+	#ElsIf MobileClient Then
+	isMobile = True;
+	#EndIf
 	
 	ItemsArray = GetGroupItemsArray(Object, Form);
 	
-	TitleFont = New Font(Form.Items.DecorationGroupTitleCollapsedLabel.Font, , , True);
-	TitleTextColor = WebColors.Gray;
-	TitleBackColor = Form.Items.DecorationGroupTitleCollapsedLabel.BackColor;
-	If TitleBackColor = New Color Then
-		TitleBackColor = WebColors.White;
-	EndIf;
+	FillCollapsedLabel(Form, ItemsArray, isMobile);
 	
-	ValueFont = New Font(Form.Items.DecorationGroupTitleCollapsedLabel.Font);
-	ValueTextColor = New Color(28, 85, 174); // Standard hyperlink color (28, 85, 174)
-	ValueBackColor = Form.Items.DecorationGroupTitleCollapsedLabel.BackColor;
-	If ValueBackColor = New Color Then
-		ValueBackColor = WebColors.White;
-	EndIf;
+	FillUncollapsedLabel(Form, ItemsArray, isMobile);
 	
-	SeparatorText = "   ";
-	SeparatorFont = New Font(Form.Items.DecorationGroupTitleCollapsedLabel.Font);
-	SeparatorTextColor = Form.Items.DecorationGroupTitleCollapsedLabel.BackColor;
-	If SeparatorTextColor = New Color Then
-		SeparatorTextColor = WebColors.White;
-	EndIf;
-	SeparatorBackColor = Form.Items.DecorationGroupTitleCollapsedLabel.BackColor;
-	If SeparatorBackColor = New Color Then
-		SeparatorBackColor = WebColors.White;
-	EndIf;
-	
-	TitleArray = New Array;
-	
-	For Each Item In ItemsArray Do
-		If ValueIsFilled(Item.Value) Then
-			TitleRow = New FormattedString(Item.Title, TitleFont, TitleTextColor, TitleBackColor);
-			TitleArray.Add(TitleRow);
-			TitleRow = New FormattedString(Item.Value, ValueFont, ValueTextColor, ValueBackColor);
-			TitleArray.Add(TitleRow);
-			TitleRow = New FormattedString(SeparatorText, SeparatorFont, SeparatorTextColor, SeparatorBackColor);
-			TitleArray.Add(TitleRow);
-		EndIf;
-	EndDo;
-	
-	TitleRow = New FormattedString(TitleArray);
-	If IsBlankString(TitleRow) Then
-		Form.Items.DecorationGroupTitleCollapsedLabel.Title = New FormattedString(R().I_3,
-				ValueFont, ValueTextColor, ValueBackColor);
-	Else
-		Form.Items.DecorationGroupTitleCollapsedLabel.Title = TitleRow;
-	EndIf;
-	
+EndProcedure
+
+Procedure FillUncollapsedLabel(Form, Val ItemsArray, isMobile)
+
 	TitleFont = New Font(Form.Items.DecorationGroupTitleUncollapsedLabel.Font, , , True);
 	TitleTextColor = WebColors.LightGray;
 	TitleBackColor = Form.Items.DecorationGroupTitleUncollapsedLabel.BackColor;
@@ -104,6 +67,13 @@ Procedure ChangeTitleGroupTitle(Object, Form, Settings = Undefined) Export
 	ValueBackColor = Form.Items.DecorationGroupTitleUncollapsedLabel.BackColor;
 	If ValueBackColor = New Color Then
 		ValueBackColor = WebColors.White;
+	EndIf;
+	
+	
+	If isMobile Then
+		Form.Items.DecorationGroupTitleUncollapsedLabel.Title = New FormattedString(R().Form_034,
+				ValueFont, ValueTextColor, ValueBackColor);
+		Return;
 	EndIf;
 	
 	SeparatorText = "   ";
@@ -137,7 +107,60 @@ Procedure ChangeTitleGroupTitle(Object, Form, Settings = Undefined) Export
 	Else
 		Form.Items.DecorationGroupTitleUncollapsedLabel.Title = TitleRow;
 	EndIf;
+EndProcedure
+
+Procedure FillCollapsedLabel(Form, Val ItemsArray, isMobile)
+	TitleFont = New Font(Form.Items.DecorationGroupTitleCollapsedLabel.Font, , , True);
+	TitleTextColor = WebColors.Gray;
+	TitleBackColor = Form.Items.DecorationGroupTitleCollapsedLabel.BackColor;
+	If TitleBackColor = New Color Then
+		TitleBackColor = WebColors.White;
+	EndIf;
 	
+	ValueFont = New Font(Form.Items.DecorationGroupTitleCollapsedLabel.Font);
+	ValueTextColor = New Color(28, 85, 174); // Standard hyperlink color (28, 85, 174)
+	ValueBackColor = Form.Items.DecorationGroupTitleCollapsedLabel.BackColor;
+	If ValueBackColor = New Color Then
+		ValueBackColor = WebColors.White;
+	EndIf;
+	
+	If isMobile Then
+		Form.Items.DecorationGroupTitleCollapsedLabel.Title = New FormattedString(R().Form_033,
+				ValueFont, ValueTextColor, ValueBackColor);
+		Return;
+	EndIf;
+	
+	SeparatorText = "   ";
+	SeparatorFont = New Font(Form.Items.DecorationGroupTitleCollapsedLabel.Font);
+	SeparatorTextColor = Form.Items.DecorationGroupTitleCollapsedLabel.BackColor;
+	If SeparatorTextColor = New Color Then
+		SeparatorTextColor = WebColors.White;
+	EndIf;
+	SeparatorBackColor = Form.Items.DecorationGroupTitleCollapsedLabel.BackColor;
+	If SeparatorBackColor = New Color Then
+		SeparatorBackColor = WebColors.White;
+	EndIf;
+	
+	TitleArray = New Array;
+	
+	For Each Item In ItemsArray Do
+		If ValueIsFilled(Item.Value) Then
+			TitleRow = New FormattedString(Item.Title, TitleFont, TitleTextColor, TitleBackColor);
+			TitleArray.Add(TitleRow);
+			TitleRow = New FormattedString(Item.Value, ValueFont, ValueTextColor, ValueBackColor);
+			TitleArray.Add(TitleRow);
+			TitleRow = New FormattedString(SeparatorText, SeparatorFont, SeparatorTextColor, SeparatorBackColor);
+			TitleArray.Add(TitleRow);
+		EndIf;
+	EndDo;
+	
+	TitleRow = New FormattedString(TitleArray);
+	If IsBlankString(TitleRow) Then
+		Form.Items.DecorationGroupTitleCollapsedLabel.Title = New FormattedString(R().I_3,
+				ValueFont, ValueTextColor, ValueBackColor);
+	Else
+		Form.Items.DecorationGroupTitleCollapsedLabel.Title = TitleRow;
+	EndIf;
 EndProcedure
 
 // TODO: Delete parameter Object

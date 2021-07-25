@@ -28,6 +28,10 @@
     <functionality>
       <use>true</use>
     </functionality>
+    <functionality>
+      <functionality>Camera</functionality>
+      <use>true</use>
+    </functionality>
   </usedMobileApplicationFunctionalities>
   <mainSectionPicture/>
   <defaultLanguage>Language.English</defaultLanguage>

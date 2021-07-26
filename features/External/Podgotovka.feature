@@ -788,7 +788,7 @@ Scenario: create SalesOrder023001
 		And I input "5,000" text in "Q" field of "ItemList" table
 		And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
 		And I activate "Profit loss center" field in "ItemList" table
-		And I click choice button of the attribute named "ItemListBusinessUnit" in "ItemList" table
+		And I click choice button of the attribute named "ItemListProfitLossCenter" in "ItemList" table
 		And I go to line in "List" table
 			| 'Description'             |
 			| 'Distribution department' |
@@ -814,7 +814,7 @@ Scenario: create SalesOrder023001
 		And I input "4,000" text in "Q" field of "ItemList" table
 		And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
 		And I activate "Profit loss center" field in "ItemList" table
-		And I click choice button of the attribute named "ItemListBusinessUnit" in "ItemList" table
+		And I click choice button of the attribute named "ItemListProfitLossCenter" in "ItemList" table
 		And I go to line in "List" table
 			| 'Description'             |
 			| 'Distribution department' |

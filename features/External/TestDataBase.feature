@@ -1804,9 +1804,9 @@ Scenario: Create information register BundleContents records (test data base)
 		| '24.02.2021 10:41:09' | 'e1cib/data/Document.Bundling?ref=b762b13668d0905011eb7674324a4a49' | '1'          | 'True'   | 'e1cib/data/Catalog.ItemKeys?ref=b762b13668d0905011eb7674324a4a4b' | 'e1cib/data/Catalog.ItemKeys?ref=b762b13668d0905011eb76684b9f687e' | '1'        |
 		| '24.02.2021 10:41:09' | 'e1cib/data/Document.Bundling?ref=b762b13668d0905011eb7674324a4a49' | '2'          | 'True'   | 'e1cib/data/Catalog.ItemKeys?ref=b762b13668d0905011eb7674324a4a4b' | 'e1cib/data/Catalog.ItemKeys?ref=b762b13668d0905011eb766bf96b274f' | '1'        |
 
-Scenario: Create information register BusinessUnitBankTerms records (test data base)
+Scenario: Create information register BranchBankTerms records (test data base)
 
-	And I check or create information register "BusinessUnitBankTerms" records:
+	And I check or create information register "BranchBankTerms" records:
 		| 'Branch'                                                          | 'BankTerm'                                                          |
 		| 'e1cib/data/Catalog.BusinessUnits?ref=b762b13668d0905011eb7663e35d795a' | 'e1cib/data/Catalog.BankTerms?ref=b762b13668d0905011eb7663e35d7962' |
 

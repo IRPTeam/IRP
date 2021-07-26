@@ -848,7 +848,7 @@ Scenario: _200001 customize the CI user settings
 			| 'Sales order closing' |
 		And I go to line in "MetadataTree" table
 			| 'Group name' | 'Use' |
-			| 'Profit loss center'    | 'No'  |
+			| 'Branch'    | 'No'  |
 		And I activate "Value" field in "MetadataTree" table
 		And I select current line in "MetadataTree" table
 		And I click choice button of "Value" attribute in "MetadataTree" table

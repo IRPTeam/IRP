@@ -490,6 +490,7 @@ Scenario: _022310 create Purchase return based on Purchase return order
 		And I save the window as "$$PurchaseReturn22310$$"
 		And I click the button named "FormPostAndClose"
 	* Check creation
+		And I close all client application windows
 		Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
 		And "List" table contains lines
 			| 'Number'  |

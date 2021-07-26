@@ -420,6 +420,7 @@ Scenario: _0154136 create document Retail Return Receipt based on RetailSalesRec
 		And I save the value of "Number" field as "$$NumberRetailReturnReceipt0154136$$"
 		And I save the window as "$$RetailReturnReceipt0154136$$"
 		And I click the button named "FormPostAndClose"
+		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
 		And "List" table contains lines
 		| 'Number' |
 		| '$$NumberRetailReturnReceipt0154136$$'      |

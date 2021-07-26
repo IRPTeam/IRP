@@ -109,7 +109,7 @@ Scenario: _018001 create document Purchase Invoice based on order (partial quant
 			| '#' | 'Amount' |
 			| '1' | '100,00' |
 			| '2' | '100,00' |
-		Then the form attribute named "Branch" became equal to ""
+		Then the form attribute named "Branch" became equal to "Front office"
 		Then the form attribute named "Author" became equal to "en description is empty"
 		Then the form attribute named "PriceIncludeTax" became equal to "Yes"
 		Then the form attribute named "Currency" became equal to "TRY"
@@ -290,7 +290,7 @@ Scenario: _018003 copy PI (based on PO) and check filling in Row Id info table (
 			| 'Local currency'     | 'Legal'        | 'TRY'           | 'TRY'      | '1'                 | '1'            | '14 980'   |
 			| 'Reporting currency' | 'Reporting'    | 'TRY'           | 'USD'      | '0,1712'            | '1'            | '2 564,58' |
 
-		Then the form attribute named "Branch" became equal to ""
+		Then the form attribute named "Branch" became equal to "Front office"
 		Then the form attribute named "Author" became equal to "en description is empty"
 		Then the form attribute named "PriceIncludeTax" became equal to "Yes"
 		Then the form attribute named "Currency" became equal to "TRY"

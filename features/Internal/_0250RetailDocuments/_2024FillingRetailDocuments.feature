@@ -145,9 +145,9 @@ Scenario: _0154100 preparation ( filling documents)
 		And I input "2,00" text in "Percent" field of "PaymentTypes" table
 		And I finish line editing in "PaymentTypes" table
 		And I click "Save" button
-		And In this window I click command interface button "Business unit bank terms"
+		And In this window I click command interface button "Branch bank terms"
 		And I click the button named "FormCreate"
-		Then "Business unit bank terms (create)" window is opened
+		Then "Branch bank terms (create)" window is opened
 		And I click Select button of "Branch" field
 		And I go to line in "List" table
 			| 'Description' |
@@ -1875,7 +1875,6 @@ Scenario:  _0154149 create Cash statement
 		And I click the button named "FormDocumentRetailReturnReceiptGenarate"
 		And I click "Ok" button	
 		And I click Select button of "Branch" field
-		Then "Business units" window is opened
 		And I go to line in "List" table
 			| 'Description' |
 			| 'Shop 01'     |

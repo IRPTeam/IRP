@@ -3157,7 +3157,7 @@ Scenario: _0154116 check filling in and refilling Cash expence
 		And I select current line in "List" table
 	* Check the Net amount and VAT calculation when filling in the Total amount
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
-		And I click choice button of the attribute named "PaymentListBusinessUnit" in "PaymentList" table
+		And I click choice button of the attribute named "PaymentListProfitLossCenter" in "PaymentList" table
 		And I go to line in "List" table
 			| 'Description'        |
 			| 'Accountants office' |
@@ -3202,7 +3202,7 @@ Scenario: _0154116 check filling in and refilling Cash expence
 			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,1712'            | '37,76'  | '1'            |
 	* Add one more line
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
-		And I click choice button of the attribute named "PaymentListBusinessUnit" in "PaymentList" table
+		And I click choice button of the attribute named "PaymentListProfitLossCenter" in "PaymentList" table
 		And I go to line in "List" table
 			| 'Description' |
 			| 'Front office'    |
@@ -3296,7 +3296,7 @@ Scenario: _0154116 check filling in and refilling Cash expence
 			| 'Cash desk №2' |
 		And I select current line in "List" table
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
-		And I click choice button of the attribute named "PaymentListBusinessUnit" in "PaymentList" table
+		And I click choice button of the attribute named "PaymentListProfitLossCenter" in "PaymentList" table
 		And I go to line in "List" table
 			| 'Description'        |
 			| 'Accountants office' |
@@ -3394,7 +3394,7 @@ Scenario: _0154117 check filling in and refilling Cash revenue
 		And I select current line in "List" table
 	* Check the Net amount and VAT calculation when filling in the Total amount
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
-		And I click choice button of the attribute named "PaymentListBusinessUnit" in "PaymentList" table
+		And I click choice button of the attribute named "PaymentListProfitLossCenter" in "PaymentList" table
 		And I go to line in "List" table
 			| 'Description'        |
 			| 'Accountants office' |
@@ -3439,7 +3439,7 @@ Scenario: _0154117 check filling in and refilling Cash revenue
 		| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,1712'            | '37,76'  | '1'            |
 	* Add one more line
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
-		And I click choice button of the attribute named "PaymentListBusinessUnit" in "PaymentList" table
+		And I click choice button of the attribute named "PaymentListProfitLossCenter" in "PaymentList" table
 		And I go to line in "List" table
 			| 'Description' |
 			| 'Front office'    |

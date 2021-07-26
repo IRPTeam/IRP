@@ -746,7 +746,7 @@ Scenario:_800017 check remaining stock control in the Stock adjustment as write 
 			And I activate "Item key" field in "List" table
 			And I select current line in "List" table
 			And I input "10,000" text in "Quantity" field of "ItemList" table
-			And I click choice button of the attribute named "ItemListBusinessUnit" in "ItemList" table
+			And I click choice button of the attribute named "ItemListProfitLossCenter" in "ItemList" table
 			And I go to line in "List" table
 				| 'Description' |
 				| 'Shop 01'     |
@@ -775,7 +775,7 @@ Scenario:_800017 check remaining stock control in the Stock adjustment as write 
 			And I activate "Quantity" field in "ItemList" table
 			And I input "110,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
-			And I click choice button of the attribute named "ItemListBusinessUnit" in "ItemList" table
+			And I click choice button of the attribute named "ItemListProfitLossCenter" in "ItemList" table
 			And I go to line in "List" table
 				| 'Description' |
 				| 'Shop 01'     |
@@ -802,7 +802,7 @@ Scenario:_800017 check remaining stock control in the Stock adjustment as write 
 			And I select current line in "List" table
 			And I activate "Quantity" field in "ItemList" table
 			And I input "1,000" text in "Quantity" field of "ItemList" table
-			And I click choice button of the attribute named "ItemListBusinessUnit" in "ItemList" table
+			And I click choice button of the attribute named "ItemListProfitLossCenter" in "ItemList" table
 			And I go to line in "List" table
 				| 'Description' |
 				| 'Shop 01'     |

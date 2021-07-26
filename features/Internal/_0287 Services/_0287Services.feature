@@ -162,7 +162,7 @@ Scenario: _029103 create a Purchase order for service
 		And I click choice button of "Item key" attribute in "ItemList" table
 		And I select current line in "List" table
 		And I activate field named "ItemListStore" in "ItemList" table
-		And I activate "Business unit" field in "ItemList" table
+		And I activate "Profit loss center" field in "ItemList" table
 		And I click choice button of "Profit loss center" attribute in "ItemList" table
 		And I select current line in "List" table
 		And I activate "Expense type" field in "ItemList" table
@@ -273,7 +273,7 @@ Scenario: _029106 create a Purchase invoice for service and product (based on Pu
 			And I click choice button of "Item key" attribute in "ItemList" table
 			And I select current line in "List" table
 			And I activate field named "ItemListStore" in "ItemList" table
-			And I activate "Business unit" field in "ItemList" table
+			And I activate "Profit loss center" field in "ItemList" table
 			And I click choice button of "Profit loss center" attribute in "ItemList" table
 			And I select current line in "List" table
 			And I activate "Expense type" field in "ItemList" table
@@ -298,7 +298,7 @@ Scenario: _029106 create a Purchase invoice for service and product (based on Pu
 			And I activate "Item key" field in "ItemList" table
 			And I click choice button of "Item key" attribute in "ItemList" table
 			And I click the button named "FormChoose"
-			And I activate "Business unit" field in "ItemList" table
+			And I activate "Profit loss center" field in "ItemList" table
 			And I click choice button of "Profit loss center" attribute in "ItemList" table
 			And I go to line in "List" table
 				| Description  |

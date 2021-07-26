@@ -1676,7 +1676,7 @@ Scenario: _092009 check serial lot number in the Stock adjustment as surplus
 			| 'Item'     | 'Item key'  |
 			| 'Trousers' | '38/Yellow' |
 		And I select current line in "List" table
-		And I click choice button of the attribute named "ItemListBusinessUnit" in "ItemList" table
+		And I click choice button of the attribute named "ItemListProfitLossCenter" in "ItemList" table
 		And I go to line in "List" table
 			| 'Description'             |
 			| 'Distribution department' |
@@ -1699,7 +1699,7 @@ Scenario: _092009 check serial lot number in the Stock adjustment as surplus
 			| 'Boots' | '38/18SD'  |
 		And I select current line in "List" table	
 		And I input "2,00" text in "Quantity" field of "ItemList" table	
-		And I click choice button of the attribute named "ItemListBusinessUnit" in "ItemList" table
+		And I click choice button of the attribute named "ItemListProfitLossCenter" in "ItemList" table
 		And I go to line in "List" table
 			| 'Description'             |
 			| 'Distribution department' |
@@ -1782,7 +1782,7 @@ Scenario: _0920091 check serial lot number controls in the Stock adjustment as s
 			| 'Item'     | 'Item key'  |
 			| 'Trousers' | '38/Yellow' |
 		And I select current line in "List" table
-		And I click choice button of the attribute named "ItemListBusinessUnit" in "ItemList" table
+		And I click choice button of the attribute named "ItemListProfitLossCenter" in "ItemList" table
 		And I go to line in "List" table
 			| 'Description'             |
 			| 'Distribution department' |
@@ -1805,7 +1805,7 @@ Scenario: _0920091 check serial lot number controls in the Stock adjustment as s
 			| 'Boots' | '38/18SD'  |
 		And I select current line in "List" table	
 		And I input "2,00" text in "Quantity" field of "ItemList" table	
-		And I click choice button of the attribute named "ItemListBusinessUnit" in "ItemList" table
+		And I click choice button of the attribute named "ItemListProfitLossCenter" in "ItemList" table
 		And I go to line in "List" table
 			| 'Description'             |
 			| 'Distribution department' |
@@ -1909,7 +1909,7 @@ Scenario: _0920091 check serial lot number controls in the Stock adjustment as s
 			| 'Dress' | 'L/Green'  |
 		And I select current line in "List" table
 		And I input "1,000" text in "Quantity" field of "ItemList" table
-		And I click choice button of the attribute named "ItemListBusinessUnit" in "ItemList" table
+		And I click choice button of the attribute named "ItemListProfitLossCenter" in "ItemList" table
 		And I go to line in "List" table
 			| 'Description'             |
 			| 'Distribution department' |
@@ -1988,7 +1988,7 @@ Scenario: _092010 check serial lot number in the Stock adjustment as write off
 			| 'Item'     | 'Item key'  |
 			| 'Trousers' | '38/Yellow' |
 		And I select current line in "List" table
-		And I click choice button of the attribute named "ItemListBusinessUnit" in "ItemList" table
+		And I click choice button of the attribute named "ItemListProfitLossCenter" in "ItemList" table
 		And I go to line in "List" table
 			| 'Description'             |
 			| 'Distribution department' |
@@ -2011,7 +2011,7 @@ Scenario: _092010 check serial lot number in the Stock adjustment as write off
 			| 'Boots' | '38/18SD'  |
 		And I select current line in "List" table	
 		And I input "2,00" text in "Quantity" field of "ItemList" table	
-		And I click choice button of the attribute named "ItemListBusinessUnit" in "ItemList" table
+		And I click choice button of the attribute named "ItemListProfitLossCenter" in "ItemList" table
 		And I go to line in "List" table
 			| 'Description'             |
 			| 'Distribution department' |
@@ -2094,7 +2094,7 @@ Scenario: _09200101 check serial lot number controls in the Stock adjustment as 
 			| 'Item'     | 'Item key'  |
 			| 'Trousers' | '38/Yellow' |
 		And I select current line in "List" table
-		And I click choice button of the attribute named "ItemListBusinessUnit" in "ItemList" table
+		And I click choice button of the attribute named "ItemListProfitLossCenter" in "ItemList" table
 		And I go to line in "List" table
 			| 'Description'             |
 			| 'Distribution department' |
@@ -2117,7 +2117,7 @@ Scenario: _09200101 check serial lot number controls in the Stock adjustment as 
 			| 'Boots' | '38/18SD'  |
 		And I select current line in "List" table	
 		And I input "2,00" text in "Quantity" field of "ItemList" table	
-		And I click choice button of the attribute named "ItemListBusinessUnit" in "ItemList" table
+		And I click choice button of the attribute named "ItemListProfitLossCenter" in "ItemList" table
 		And I go to line in "List" table
 			| 'Description'             |
 			| 'Distribution department' |
@@ -2221,7 +2221,7 @@ Scenario: _09200101 check serial lot number controls in the Stock adjustment as 
 			| 'Dress' | 'L/Green'  |
 		And I select current line in "List" table
 		And I input "3,000" text in "Quantity" field of "ItemList" table
-		And I click choice button of the attribute named "ItemListBusinessUnit" in "ItemList" table
+		And I click choice button of the attribute named "ItemListProfitLossCenter" in "ItemList" table
 		And I go to line in "List" table
 			| 'Description'             |
 			| 'Distribution department' |

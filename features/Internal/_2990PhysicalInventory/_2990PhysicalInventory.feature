@@ -494,7 +494,7 @@ Scenario: _2990006 create Stock adjustment as surplus based on Physical inventor
 				| 'Item'  | 'Quantity' | 'Item key' | 'Profit loss center' | 'Unit' | 'Revenue type' | 'Basis document'               |
 				| 'Dress' | '5,000'    | 'S/Yellow' | ''              | 'pcs'  | ''             | '$$PhysicalInventory2990004$$' |
 			And I select current line in "ItemList" table
-			And I click choice button of the attribute named "ItemListBusinessUnit" in "ItemList" table
+			And I click choice button of the attribute named "ItemListProfitLossCenter" in "ItemList" table
 			And I go to line in "List" table
 				| 'Description'          |
 				| 'Logistics department' |
@@ -550,7 +550,7 @@ Scenario: _2990006 create Stock adjustment as surplus based on Physical inventor
 				| 'Item'  | 'Quantity' | 'Item key' | 'Profit loss center' | 'Unit' | 'Revenue type' | 'Basis document'               |
 				| 'Dress' | '5,000'    | 'S/Yellow' | ''              | 'pcs'  | ''             | '$$PhysicalInventory2990004$$' |
 			And I select current line in "ItemList" table
-			And I click choice button of the attribute named "ItemListBusinessUnit" in "ItemList" table
+			And I click choice button of the attribute named "ItemListProfitLossCenter" in "ItemList" table
 			And I go to line in "List" table
 				| 'Description'          |
 				| 'Logistics department' |
@@ -597,7 +597,7 @@ Scenario: _2990007 create Stock adjustment as write off based on Physical invent
 				| 'Item'  | 'Quantity' | 'Item key' | 'Profit loss center' | 'Unit' | 'Expense type' | 'Basis document'               |
 				| 'Dress' | '2,000'    | 'XS/Blue'  | ''              | 'pcs'  | ''             | '$$PhysicalInventory2990004$$' |
 			And I select current line in "ItemList" table
-			And I click choice button of the attribute named "ItemListBusinessUnit" in "ItemList" table
+			And I click choice button of the attribute named "ItemListProfitLossCenter" in "ItemList" table
 			And I go to line in "List" table
 				| 'Description'          |
 				| 'Logistics department' |
@@ -653,7 +653,7 @@ Scenario: _2990007 create Stock adjustment as write off based on Physical invent
 				| 'Item'  | 'Quantity' | 'Item key' | 'Profit loss center' | 'Unit' | 'Expense type' | 'Basis document'               |
 				| 'Dress' | '2,000'    | 'XS/Blue'  | ''              | 'pcs'  | ''             | '$$PhysicalInventory2990004$$' |
 			And I select current line in "ItemList" table
-			And I click choice button of the attribute named "ItemListBusinessUnit" in "ItemList" table
+			And I click choice button of the attribute named "ItemListProfitLossCenter" in "ItemList" table
 			And I go to line in "List" table
 				| 'Description'          |
 				| 'Logistics department' |

@@ -65,7 +65,7 @@ Scenario: _085001 check tax calculation in the document Cash revenue
 		And I select current line in "List" table
 	* Filling in the tabular part by cost
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
-		And I click choice button of the attribute named "PaymentListBusinessUnit" in "PaymentList" table
+		And I click choice button of the attribute named "PaymentListProfitLossCenter" in "PaymentList" table
 		And I go to line in "List" table
 			| 'Description'        |
 			| 'Accountants office' |
@@ -114,7 +114,7 @@ Scenario: _085002 check Cash revenue creation
 		And I select current line in "List" table
 	* Filling in the tabular part by cost
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
-		And I click choice button of the attribute named "PaymentListBusinessUnit" in "PaymentList" table
+		And I click choice button of the attribute named "PaymentListProfitLossCenter" in "PaymentList" table
 		And I go to line in "List" table
 			| 'Description'        |
 			| 'Accountants office' |
@@ -206,7 +206,7 @@ Scenario: _085005 check tax calculation in the document Cash expense
 		And I select current line in "List" table
 	* Filling in the tabular part by cost
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
-		And I click choice button of the attribute named "PaymentListBusinessUnit" in "PaymentList" table
+		And I click choice button of the attribute named "PaymentListProfitLossCenter" in "PaymentList" table
 		And I go to line in "List" table
 			| 'Description'        |
 			| 'Accountants office' |
@@ -248,7 +248,7 @@ Scenario: _085006 check Cash expense creation
 		And I select current line in "List" table
 	* Filling in the tabular part by cost
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
-		And I click choice button of the attribute named "PaymentListBusinessUnit" in "PaymentList" table
+		And I click choice button of the attribute named "PaymentListProfitLossCenter" in "PaymentList" table
 		And I go to line in "List" table
 			| 'Description'        |
 			| 'Accountants office' |

@@ -259,7 +259,7 @@ Scenario: _2990002 create Stock adjustment as surplus
 		And I select current line in "List" table
 		And I input "8,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
-		And I click choice button of "Business unit" attribute in "ItemList" table
+		And I click choice button of "Profit loss center" attribute in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |
 			| 'Distribution department'  |
@@ -272,7 +272,7 @@ Scenario: _2990002 create Stock adjustment as surplus
 		And I finish line editing in "ItemList" table
 	* Check filling in tabular part
 		And "ItemList" table contains lines
-		| 'Item'  | 'Quantity' | 'Item key' | 'Business unit'           | 'Unit' | 'Revenue type' | 'Basis document' |
+		| 'Item'  | 'Quantity' | 'Item key' | 'Profit loss center'           | 'Unit' | 'Revenue type' | 'Basis document' |
 		| 'Dress' | '8,000'    | 'M/White'  | 'Distribution department' | 'pcs'  | 'Delivery'     | ''               |
 	* Post document
 		And I click the button named "FormPost"
@@ -327,7 +327,7 @@ Scenario: _2990003 create Stock adjustment as write off
 		And I select current line in "List" table
 		And I input "8,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
-		And I click choice button of "Business unit" attribute in "ItemList" table
+		And I click choice button of "Profit loss center" attribute in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |
 			| 'Distribution department'  |
@@ -340,7 +340,7 @@ Scenario: _2990003 create Stock adjustment as write off
 		And I finish line editing in "ItemList" table
 	* Check filling in tabular part
 		And "ItemList" table contains lines
-		| 'Item'  | 'Quantity' | 'Item key' | 'Business unit'           | 'Unit' | 'Expense type' | 'Basis document' |
+		| 'Item'  | 'Quantity' | 'Item key' | 'Profit loss center'           | 'Unit' | 'Expense type' | 'Basis document' |
 		| 'Dress' | '8,000'    | 'M/White'  | 'Distribution department' | 'pcs'  | 'Delivery'     | ''               |
 	* Post document
 		And I click the button named "FormPost"
@@ -491,7 +491,7 @@ Scenario: _2990006 create Stock adjustment as surplus based on Physical inventor
 			And I finish line editing in "BasisesTree" table
 			And I click "Ok" button
 			And "ItemList" table contains lines
-				| 'Item'  | 'Quantity' | 'Item key' | 'Business unit' | 'Unit' | 'Revenue type' | 'Basis document'               |
+				| 'Item'  | 'Quantity' | 'Item key' | 'Profit loss center' | 'Unit' | 'Revenue type' | 'Basis document'               |
 				| 'Dress' | '5,000'    | 'S/Yellow' | ''              | 'pcs'  | ''             | '$$PhysicalInventory2990004$$' |
 			And I select current line in "ItemList" table
 			And I click choice button of the attribute named "ItemListBusinessUnit" in "ItemList" table
@@ -531,7 +531,7 @@ Scenario: _2990006 create Stock adjustment as surplus based on Physical inventor
 			And I click "Unlink" button
 			And I click "Ok" button
 			And "ItemList" table contains lines
-				| 'Item'  | 'Quantity' | 'Item key' | 'Business unit'        | 'Unit' | 'Revenue type' | 'Basis document' |
+				| 'Item'  | 'Quantity' | 'Item key' | 'Profit loss center'        | 'Unit' | 'Revenue type' | 'Basis document' |
 				| 'Dress' | '5,000'    | 'S/Yellow' | 'Logistics department' | 'pcs'  | 'Revenue'      | ''               |
 			And I click the button named "FormPost"
 			And "RowIDInfo" table became equal
@@ -547,7 +547,7 @@ Scenario: _2990006 create Stock adjustment as surplus based on Physical inventor
 			And I click "Link" button
 			And I click "Ok" button
 			And "ItemList" table contains lines
-				| 'Item'  | 'Quantity' | 'Item key' | 'Business unit' | 'Unit' | 'Revenue type' | 'Basis document'               |
+				| 'Item'  | 'Quantity' | 'Item key' | 'Profit loss center' | 'Unit' | 'Revenue type' | 'Basis document'               |
 				| 'Dress' | '5,000'    | 'S/Yellow' | ''              | 'pcs'  | ''             | '$$PhysicalInventory2990004$$' |
 			And I select current line in "ItemList" table
 			And I click choice button of the attribute named "ItemListBusinessUnit" in "ItemList" table
@@ -594,7 +594,7 @@ Scenario: _2990007 create Stock adjustment as write off based on Physical invent
 			And I finish line editing in "BasisesTree" table
 			And I click "Ok" button
 			And "ItemList" table contains lines
-				| 'Item'  | 'Quantity' | 'Item key' | 'Business unit' | 'Unit' | 'Expense type' | 'Basis document'               |
+				| 'Item'  | 'Quantity' | 'Item key' | 'Profit loss center' | 'Unit' | 'Expense type' | 'Basis document'               |
 				| 'Dress' | '2,000'    | 'XS/Blue'  | ''              | 'pcs'  | ''             | '$$PhysicalInventory2990004$$' |
 			And I select current line in "ItemList" table
 			And I click choice button of the attribute named "ItemListBusinessUnit" in "ItemList" table
@@ -634,7 +634,7 @@ Scenario: _2990007 create Stock adjustment as write off based on Physical invent
 			And I click "Unlink" button
 			And I click "Ok" button
 			And "ItemList" table contains lines
-				| 'Item'  | 'Quantity' | 'Item key'       | 'Business unit'        | 'Unit' | 'Expense type' | 'Basis document' |
+				| 'Item'  | 'Quantity' | 'Item key'       | 'Profit loss center'        | 'Unit' | 'Expense type' | 'Basis document' |
 				| 'Dress' | '2,000'    | 'XS/Blue'        | 'Logistics department' | 'pcs'  | 'Expense'      | ''               |
 			And I click the button named "FormPost"
 			And "RowIDInfo" table became equal
@@ -650,7 +650,7 @@ Scenario: _2990007 create Stock adjustment as write off based on Physical invent
 			And I click "Link" button
 			And I click "Ok" button
 			And "ItemList" table contains lines
-				| 'Item'  | 'Quantity' | 'Item key' | 'Business unit' | 'Unit' | 'Expense type' | 'Basis document'               |
+				| 'Item'  | 'Quantity' | 'Item key' | 'Profit loss center' | 'Unit' | 'Expense type' | 'Basis document'               |
 				| 'Dress' | '2,000'    | 'XS/Blue'  | ''              | 'pcs'  | ''             | '$$PhysicalInventory2990004$$' |
 			And I select current line in "ItemList" table
 			And I click choice button of the attribute named "ItemListBusinessUnit" in "ItemList" table
@@ -684,7 +684,7 @@ Scenario: _2990008 create Stock adjustment as surplus and Stock adjustment as wr
 			| 'Description'  |
 			| 'Main Company' |
 		And I select current line in "List" table
-		And I click choice button of "Business unit" attribute in "ItemList" table
+		And I click choice button of "Profit loss center" attribute in "ItemList" table
 		And I go to line in "List" table
 			| 'Description'          |
 			| 'Logistics department' |
@@ -709,7 +709,7 @@ Scenario: _2990008 create Stock adjustment as surplus and Stock adjustment as wr
 			| 'Description'  |
 			| 'Main Company' |
 		And I select current line in "List" table
-		And I click choice button of "Business unit" attribute in "ItemList" table
+		And I click choice button of "Profit loss center" attribute in "ItemList" table
 		And I go to line in "List" table
 			| 'Description'          |
 			| 'Logistics department' |
@@ -721,7 +721,7 @@ Scenario: _2990008 create Stock adjustment as surplus and Stock adjustment as wr
 		And I select current line in "List" table
 		And I finish line editing in "ItemList" table
 		And "ItemList" table contains lines
-			| 'Item'  | 'Quantity' | 'Item key' | 'Business unit'        | 'Unit' | 'Expense type' | 'Basis document'        |
+			| 'Item'  | 'Quantity' | 'Item key' | 'Profit loss center'        | 'Unit' | 'Expense type' | 'Basis document'        |
 			| 'Dress' | '1,000'    | 'XS/Blue'  | 'Logistics department' | 'pcs'  | 'Delivery'     | '$$PhysicalInventory2990005$$' |
 		Then the number of "ItemList" table lines is "меньше или равно" 1
 		And I click the button named "FormPostAndClose"
@@ -733,7 +733,7 @@ Scenario: _2990008 create Stock adjustment as surplus and Stock adjustment as wr
 			| 'Description'  |
 			| 'Main Company' |
 		And I select current line in "List" table
-		And I click choice button of "Business unit" attribute in "ItemList" table
+		And I click choice button of "Profit loss center" attribute in "ItemList" table
 		And I go to line in "List" table
 			| 'Description'          |
 			| 'Logistics department' |
@@ -758,7 +758,7 @@ Scenario: _2990008 create Stock adjustment as surplus and Stock adjustment as wr
 			| 'Description'  |
 			| 'Main Company' |
 		And I select current line in "List" table
-		And I click choice button of "Business unit" attribute in "ItemList" table
+		And I click choice button of "Profit loss center" attribute in "ItemList" table
 		And I go to line in "List" table
 			| 'Description'          |
 			| 'Logistics department' |
@@ -770,7 +770,7 @@ Scenario: _2990008 create Stock adjustment as surplus and Stock adjustment as wr
 		And I select current line in "List" table
 		And I finish line editing in "ItemList" table
 		And "ItemList" table contains lines
-			| 'Item'     | 'Quantity' | 'Item key'   | 'Business unit'        | 'Unit' | 'Revenue type' | 'Basis document'        |
+			| 'Item'     | 'Quantity' | 'Item key'   | 'Profit loss center'        | 'Unit' | 'Revenue type' | 'Basis document'        |
 			| 'Trousers' | '4,000'    | '36/Yellow'  | 'Logistics department' | 'pcs'  | 'Delivery'     | '$$PhysicalInventory2990005$$' |
 		Then the number of "ItemList" table lines is "меньше или равно" 1
 		And I click the button named "FormPostAndClose"
@@ -912,7 +912,7 @@ Scenario: _2990010 create Physical inventory and Physical count by location with
 				And I select current line in "List" table
 				And I input "8,000" text in "Quantity" field of "ItemList" table
 				And I finish line editing in "ItemList" table
-				And I click choice button of "Business unit" attribute in "ItemList" table
+				And I click choice button of "Profit loss center" attribute in "ItemList" table
 				And I go to line in "List" table
 					| 'Description' |
 					| 'Distribution department'  |
@@ -938,7 +938,7 @@ Scenario: _2990010 create Physical inventory and Physical count by location with
 				And I select current line in "List" table
 				And I input "8,000" text in "Quantity" field of "ItemList" table
 				And I finish line editing in "ItemList" table
-				And I click choice button of "Business unit" attribute in "ItemList" table
+				And I click choice button of "Profit loss center" attribute in "ItemList" table
 				And I go to line in "List" table
 					| 'Description' |
 					| 'Distribution department'  |
@@ -964,7 +964,7 @@ Scenario: _2990010 create Physical inventory and Physical count by location with
 				And I select current line in "List" table
 				And I input "7,000" text in "Quantity" field of "ItemList" table
 				And I finish line editing in "ItemList" table
-				And I click choice button of "Business unit" attribute in "ItemList" table
+				And I click choice button of "Profit loss center" attribute in "ItemList" table
 				And I go to line in "List" table
 					| 'Description' |
 					| 'Distribution department'  |
@@ -990,7 +990,7 @@ Scenario: _2990010 create Physical inventory and Physical count by location with
 				And I select current line in "List" table
 				And I input "4,000" text in "Quantity" field of "ItemList" table
 				And I finish line editing in "ItemList" table
-				And I click choice button of "Business unit" attribute in "ItemList" table
+				And I click choice button of "Profit loss center" attribute in "ItemList" table
 				And I go to line in "List" table
 					| 'Description' |
 					| 'Distribution department'  |

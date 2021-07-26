@@ -163,7 +163,7 @@ Scenario: _029103 create a Purchase order for service
 		And I select current line in "List" table
 		And I activate field named "ItemListStore" in "ItemList" table
 		And I activate "Business unit" field in "ItemList" table
-		And I click choice button of "Business unit" attribute in "ItemList" table
+		And I click choice button of "Profit loss center" attribute in "ItemList" table
 		And I select current line in "List" table
 		And I activate "Expense type" field in "ItemList" table
 		And I click choice button of "Expense type" attribute in "ItemList" table
@@ -203,7 +203,7 @@ Scenario: _029104 create a Purchase invoice for service
 	And I click "Ok" button
 	* Check the filling of the tabular part
 		And "ItemList" table contains lines
-		| 'Price'    | 'Item'    | 'VAT' | 'Item key' | 'Q'     | 'Tax amount' | 'Unit' | 'Net amount' | 'Total amount' | 'Expense type'             | 'Business unit' | 'Purchase order'      |
+		| 'Price'    | 'Item'    | 'VAT' | 'Item key' | 'Q'     | 'Tax amount' | 'Unit' | 'Net amount' | 'Total amount' | 'Expense type'             | 'Profit loss center' | 'Purchase order'      |
 		| '1 000,00' | 'Service' | '18%' | 'Interner' | '1,000' | '152,54'     | 'pcs'  | '847,46'     | '1 000,00'     | 'Telephone communications' | 'Front office'  | '$$PurchaseOrder029103$$' |
 	And I click the button named "FormPost"
 	And I delete "$$NumberPurchaseInvoice029104$$" variable
@@ -274,7 +274,7 @@ Scenario: _029106 create a Purchase invoice for service and product (based on Pu
 			And I select current line in "List" table
 			And I activate field named "ItemListStore" in "ItemList" table
 			And I activate "Business unit" field in "ItemList" table
-			And I click choice button of "Business unit" attribute in "ItemList" table
+			And I click choice button of "Profit loss center" attribute in "ItemList" table
 			And I select current line in "List" table
 			And I activate "Expense type" field in "ItemList" table
 			And I click choice button of "Expense type" attribute in "ItemList" table
@@ -299,7 +299,7 @@ Scenario: _029106 create a Purchase invoice for service and product (based on Pu
 			And I click choice button of "Item key" attribute in "ItemList" table
 			And I click the button named "FormChoose"
 			And I activate "Business unit" field in "ItemList" table
-			And I click choice button of "Business unit" attribute in "ItemList" table
+			And I click choice button of "Profit loss center" attribute in "ItemList" table
 			And I go to line in "List" table
 				| Description  |
 				| Front office | 
@@ -527,7 +527,7 @@ Scenario: _029130 create Retail sales receipt for service and product
 			| 'Document registrations records' | ''       | ''          | ''       | ''           | ''              | ''             | ''              | ''         | ''                             | ''         | ''                  | ''        |
 			| 'Register  "R2050 Retail sales"' | ''       | ''          | ''       | ''           | ''              | ''             | ''              | ''         | ''                             | ''         | ''                  | ''        |
 			| ''                               | 'Period' | 'Resources' | ''       | ''           | ''              | 'Dimensions'   | ''              | ''         | ''                             | ''         | ''                  | ''        |
-			| ''                               | ''       | 'Quantity'  | 'Amount' | 'Net amount' | 'Offers amount' | 'Company'      | 'Business unit' | 'Store'    | 'Retail sales receipt'         | 'Item key' | 'Serial lot number' | 'Row key' |
+			| ''                               | ''       | 'Quantity'  | 'Amount' | 'Net amount' | 'Offers amount' | 'Company'      | 'Profit loss center' | 'Store'    | 'Retail sales receipt'         | 'Item key' | 'Serial lot number' | 'Row key' |
 			| ''                               | '*'      | '1'         | '50'     | '42,37'      | ''              | 'Main Company' | ''              | 'Store 01' | '$$RetailSalesReceipt029130$$' | 'Interner' | ''                  | '*'       |
 			| ''                               | '*'      | '1'         | '200'    | '169,49'     | ''              | 'Main Company' | ''              | 'Store 01' | '$$RetailSalesReceipt029130$$' | 'Table'    | ''                  | '*'       |
 		And I close all client application windows
@@ -679,7 +679,7 @@ Scenario: _029150 create Retail return receipt for service and product
 		And "ResultTable" spreadsheet document contains lines:
 			| 'Register  "R2050 Retail sales"' | ''       | ''          | ''       | ''           | ''              | ''             | ''              | ''         | ''                             | ''         | ''                  | ''        |
 			| ''                               | 'Period' | 'Resources' | ''       | ''           | ''              | 'Dimensions'   | ''              | ''         | ''                             | ''         | ''                  | ''        |
-			| ''                               | ''       | 'Quantity'  | 'Amount' | 'Net amount' | 'Offers amount' | 'Company'      | 'Business unit' | 'Store'    | 'Retail sales receipt'         | 'Item key' | 'Serial lot number' | 'Row key' |
+			| ''                               | ''       | 'Quantity'  | 'Amount' | 'Net amount' | 'Offers amount' | 'Company'      | 'Profit loss center' | 'Store'    | 'Retail sales receipt'         | 'Item key' | 'Serial lot number' | 'Row key' |
 			| ''                               | '*'      | '-1'        | '50'     | '42,37'      | ''              | 'Main Company' | ''              | 'Store 01' | '$$RetailSalesReceipt029130$$' | 'Interner' | ''                  | '*'       |
 			| ''                               | '*'      | '-1'        | '200'    | '169,49'     | ''              | 'Main Company' | ''              | 'Store 01' | '$$RetailSalesReceipt029130$$' | 'Table'    | ''                  | '*'       |
 		And I select "R3050 Retail cash" exact value from "Register" drop-down list
@@ -687,7 +687,7 @@ Scenario: _029150 create Retail return receipt for service and product
 		And "ResultTable" spreadsheet document contains lines:
 			| 'Register  "R3050 Retail cash"' | ''       | ''          | ''           | ''             | ''              | ''             | ''             | ''                 | '' | '' | '' | '' |
 			| ''                              | 'Period' | 'Resources' | ''           | 'Dimensions'   | ''              | ''             | ''             | ''                 | '' | '' | '' | '' |
-			| ''                              | ''       | 'Amount'    | 'Commission' | 'Company'      | 'Business unit' | 'Payment type' | 'Account'      | 'Payment terminal' | '' | '' | '' | '' |
+			| ''                              | ''       | 'Amount'    | 'Commission' | 'Company'      | 'Profit loss center' | 'Payment type' | 'Account'      | 'Payment terminal' | '' | '' | '' | '' |
 			| ''                              | '*'      | '-450'      | ''           | 'Main Company' | ''              | 'Cash'         | 'Cash desk №4' | ''                 | '' | '' | '' | '' |
 	
 		And I select "R3010 Cash on hand" exact value from "Register" drop-down list

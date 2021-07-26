@@ -89,10 +89,10 @@ Scenario: _085001 check tax calculation in the document Cash revenue
 		And I finish line editing in "PaymentList" table
 	* Tax calculation check
 		And "PaymentList" table contains lines
-			| 'Net amount' | 'Business unit'      | 'Revenue type' | 'Total amount' | 'Currency' | 'VAT' | 'Tax amount' |
+			| 'Net amount' | 'Profit loss center'      | 'Revenue type' | 'Total amount' | 'Currency' | 'VAT' | 'Tax amount' |
 			| '100,00'     | 'Accountants office' | 'Fuel'         | '118,00'       | 'TRY'      | '18%' | '18,00'      |
 		And "TaxTree" table contains lines
-			| 'Tax' | 'Tax rate' | 'Currency' | 'Business unit'      | 'Amount' | 'Revenue type' | 'Manual amount' |
+			| 'Tax' | 'Tax rate' | 'Currency' | 'Profit loss center'      | 'Amount' | 'Revenue type' | 'Manual amount' |
 			| 'VAT' | ''         | 'TRY'      | ''                   | '18,00'  | ''             | '18,00'         |
 			| 'VAT' | '18%'      | 'TRY'      | 'Accountants office' | '18,00'  | 'Fuel'         | '18,00'         |
 		And I close all client application windows
@@ -223,10 +223,10 @@ Scenario: _085005 check tax calculation in the document Cash expense
 		And I finish line editing in "PaymentList" table
 	* Tax calculation check
 		And "PaymentList" table contains lines
-			| 'Net amount' | 'Business unit'      | 'Expense type' | 'Total amount' | 'Currency' | 'VAT' | 'Tax amount' |
+			| 'Net amount' | 'Profit loss center'      | 'Expense type' | 'Total amount' | 'Currency' | 'VAT' | 'Tax amount' |
 			| '100,00'     | 'Accountants office' | 'Fuel'         | '118,00'       | 'TRY'      | '18%' | '18,00'      |
 		And "TaxTree" table contains lines
-			| 'Tax' | 'Tax rate' | 'Currency' | 'Business unit'      | 'Amount' | 'Expense type' | 'Manual amount' |
+			| 'Tax' | 'Tax rate' | 'Currency' | 'Profit loss center'      | 'Amount' | 'Expense type' | 'Manual amount' |
 			| 'VAT' | ''         | 'TRY'      | ''                   | '18,00'  | ''             | '18,00'         |
 			| 'VAT' | '18%'      | 'TRY'      | 'Accountants office' | '18,00'  | 'Fuel'         | '18,00'         |
 		And I close all client application windows

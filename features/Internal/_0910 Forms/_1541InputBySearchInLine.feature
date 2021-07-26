@@ -1119,7 +1119,7 @@ Scenario: _0154088 check company, operation type, partner, legal name, Partner t
 		Then the form attribute named "Company" became equal to "Main Company"
 		// Then the form attribute named "LegalName" became equal to "Company Ferron BP"
 		And "Transactions" table contains lines
-		| 'Legal name'          | 'Partner'   | 'Partner term'                     | 'Business unit'        | 'Currency' | 'Expense type' |
+		| 'Legal name'          | 'Partner'   | 'Partner term'                     | 'Profit loss center'        | 'Currency' | 'Expense type' |
 		| 'Company Ferron BP'   | 'Ferron BP' | 'Basic Partner terms, without VAT' | 'Logistics department' | 'TRY'      | 'Fuel'         |
 		And I close all client application windows
 
@@ -1148,7 +1148,7 @@ Scenario: _0154100 check company, operation type, partner, legal name, Partner t
 		Then the form attribute named "Company" became equal to "Main Company"
 		// Then the form attribute named "LegalName" became equal to "Company Ferron BP"
 		And "Transactions" table contains lines
-		| 'Legal name'          | 'Partner'   | 'Partner term'                     | 'Business unit'        | 'Currency' | 'Revenue type' |
+		| 'Legal name'          | 'Partner'   | 'Partner term'                     | 'Profit loss center'        | 'Currency' | 'Revenue type' |
 		| 'Company Ferron BP'   | 'Ferron BP' | 'Basic Partner terms, without VAT' | 'Logistics department' | 'TRY'      | 'Fuel'         |
 		And I close all client application windows
 
@@ -1256,12 +1256,12 @@ Scenario: _0154094 check store, company, tabular part input by search in line in
 		And I select "fu" from "Expense type" drop-down list by string in "ItemList" table
 	* Check filling in
 		And "ItemList" table contains lines
-		| 'Business unit'        | 'Expense type' |
+		| 'Profit loss center'        | 'Expense type' |
 		| 'Logistics department' | 'Fuel'         |
 	* Change expense type
 		And I select "exp" from "Expense type" drop-down list by string in "ItemList" table
 		And "ItemList" table contains lines
-			| 'Business unit'        | 'Expense type' |
+			| 'Profit loss center'        | 'Expense type' |
 			| 'Logistics department' | 'Expense'         |
 		And I close all client application windows
 
@@ -1287,12 +1287,12 @@ Scenario: _0154095 check store, company, tabular part input by search in line in
 		And I select "fu" from "Revenue type" drop-down list by string in "ItemList" table
 	* Check filling in
 		And "ItemList" table contains lines
-		| 'Business unit'        | 'Revenue type' |
+		| 'Profit loss center'        | 'Revenue type' |
 		| 'Logistics department' | 'Fuel'         |
 	* Change revenue type
 		And I select "rev" from "Revenue type" drop-down list by string in "ItemList" table
 		And "ItemList" table contains lines
-			| 'Business unit'        | 'Revenue type' |
+			| 'Profit loss center'        | 'Revenue type' |
 			| 'Logistics department' | 'Revenue'         |
 		And I close all client application windows
 

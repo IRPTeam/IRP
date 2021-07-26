@@ -1398,7 +1398,7 @@ Scenario:_800040 check remaining stock control when unpost/change Stock adjustme
 		And I select current line in "List" table
 		And I activate "Quantity" field in "ItemList" table
 		And I input "1,000" text in "Quantity" field of "ItemList" table
-		And I click choice button of "Business unit" attribute in "ItemList" table
+		And I click choice button of "Profit loss center" attribute in "ItemList" table
 		And I go to line in "List" table
 			| 'Description'        |
 			| 'Accountants office' |

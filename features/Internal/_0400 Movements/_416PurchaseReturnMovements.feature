@@ -495,15 +495,15 @@ Scenario: _041618 check Purchase return movements by the Register  "R5022 Expens
 		And I select "R5022 Expenses" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Purchase return 231 dated 14.03.2021 18:53:34' | ''                    | ''          | ''             | ''              | ''             | ''         | ''         | ''                    | ''                             |
-			| 'Document registrations records'                | ''                    | ''          | ''             | ''              | ''             | ''         | ''         | ''                    | ''                             |
-			| 'Register  "R5022 Expenses"'                    | ''                    | ''          | ''             | ''              | ''             | ''         | ''         | ''                    | ''                             |
-			| ''                                              | 'Period'              | 'Resources' | 'Dimensions'   | ''              | ''             | ''         | ''         | ''                    | ''                             |
-			| ''                                              | ''                    | 'Amount'    | 'Company'      | 'Profit loss center' | 'Expense type' | 'Item key' | 'Currency' | 'Additional analytic' | 'Multi currency movement type' |
-			| ''                                              | '14.03.2021 18:53:34' | '-228,81'   | 'Main Company' | 'Front office'  | 'Expense'      | 'Interner' | 'TRY'      | ''                    | 'Local currency'               |
-			| ''                                              | '14.03.2021 18:53:34' | '-228,81'   | 'Main Company' | 'Front office'  | 'Expense'      | 'Interner' | 'TRY'      | ''                    | 'TRY'                          |
-			| ''                                              | '14.03.2021 18:53:34' | '-228,81'   | 'Main Company' | 'Front office'  | 'Expense'      | 'Interner' | 'TRY'      | ''                    | 'en description is empty'      |
-			| ''                                              | '14.03.2021 18:53:34' | '-39,17'    | 'Main Company' | 'Front office'  | 'Expense'      | 'Interner' | 'USD'      | ''                    | 'Reporting currency'           |
+			| 'Purchase return 231 dated 14.03.2021 18:53:34' | ''                    | ''          | ''             | ''              | ''              | ''             | ''         | ''         | ''                    | ''                             |
+			| 'Document registrations records'                | ''                    | ''          | ''             | ''              | ''              | ''             | ''         | ''         | ''                    | ''                             |
+			| 'Register  "R5022 Expenses"'                    | ''                    | ''          | ''             | ''              | ''              | ''             | ''         | ''         | ''                    | ''                             |
+			| ''                                              | 'Period'              | 'Resources' | 'Dimensions'   | ''              | ''              | ''             | ''         | ''         | ''                    | ''                             |
+			| ''                                              | ''                    | 'Amount'    | 'Company'      | 'Branch'        | 'Profit loss center' | 'Expense type' | 'Item key' | 'Currency' | 'Additional analytic' | 'Multi currency movement type' |
+			| ''                                              | '14.03.2021 18:53:34' | '-228,81'   | 'Main Company' | ''              | 'Front office'  | 'Expense'      | 'Interner' | 'TRY'      | ''                    | 'Local currency'               |
+			| ''                                              | '14.03.2021 18:53:34' | '-228,81'   | 'Main Company' | ''              | 'Front office'  | 'Expense'      | 'Interner' | 'TRY'      | ''                    | 'TRY'                          |
+			| ''                                              | '14.03.2021 18:53:34' | '-228,81'   | 'Main Company' | ''              | 'Front office'  | 'Expense'      | 'Interner' | 'TRY'      | ''                    | 'en description is empty'      |
+			| ''                                              | '14.03.2021 18:53:34' | '-39,17'    | 'Main Company' | ''              | 'Front office'  | 'Expense'      | 'Interner' | 'USD'      | ''                    | 'Reporting currency'           |
 	And I close all client application windows
 
 Scenario: _041630 Purchase return clear posting/mark for deletion

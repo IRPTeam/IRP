@@ -278,7 +278,8 @@ Function Taxes()
 		|			THEN PurchaseReturnTaxList.Amount
 		|		ELSE PurchaseReturnTaxList.ManualAmount
 		|	END AS TaxAmount,
-		|	PurchaseReturnItemList.NetAmount AS TaxableAmount
+		|	PurchaseReturnItemList.NetAmount AS TaxableAmount,
+		|	PurchaseReturnItemList.Ref.Branch AS Branch
 		|INTO Taxes
 		|FROM
 		|	Document.PurchaseReturn.ItemList AS PurchaseReturnItemList

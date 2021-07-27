@@ -294,7 +294,8 @@ Function ItemList()
 	|			THEN PurchaseInvoiceTaxList.Amount
 	|		ELSE PurchaseInvoiceTaxList.ManualAmount
 	|	END AS TaxAmount,
-	|	PurchaseInvoiceItemList.NetAmount AS TaxableAmount
+	|	PurchaseInvoiceItemList.NetAmount AS TaxableAmount,
+	|	PurchaseInvoiceItemList.Ref.Branch AS Branch
 	|INTO Taxes
 	|FROM
 	|	Document.PurchaseInvoice.ItemList AS PurchaseInvoiceItemList

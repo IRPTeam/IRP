@@ -114,7 +114,8 @@ Function Transactions()
 	|	Transactions.Agreement.Type = VALUE(Enum.AgreementTypes.Customer) AS IsCustomer,
 	|	Transactions.Currency,
 	|	Transactions.Key,
-	|	Transactions.Amount
+	|	Transactions.Amount,
+	|	Transactions.Ref.Branch AS Branch
 	|INTO Transactions
 	|FROM
 	|	Document.CreditNote.Transactions AS Transactions

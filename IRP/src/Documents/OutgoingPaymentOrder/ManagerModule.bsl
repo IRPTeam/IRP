@@ -123,7 +123,8 @@ Function PaymentList()
 		|	PaymentList.MovementType,
 		|	PaymentList.Amount,
 		|	PaymentList.Key,
-		|	PaymentList.Ref
+		|	PaymentList.Ref,
+		|	PaymentList.Ref.Branch AS Branch
 		|INTO PaymentList
 		|FROM
 		|	Document.OutgoingPaymentOrder.PaymentList AS PaymentList
@@ -156,6 +157,7 @@ Function R3035T_CashPlanning()
 		|	PaymentList.Date AS Period,
 		|	PaymentList.PlanningPeriod AS PlanningPeriod,
 		|	PaymentList.Company,
+		|	PaymentList.Branch,
 		|	PaymentList.Ref AS BasisDocument,
 		|	PaymentList.Account,
 		|	PaymentList.Currency,

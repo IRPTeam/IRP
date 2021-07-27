@@ -190,7 +190,8 @@ Function ItemList()
 	|	PurchaseOrderItems.Ref.MovementType AS MovementType,
 	|	PurchaseOrderItems.Ref.Agreement AS Agreement,
 	|	PurchaseOrderItems.Ref.Partner AS Partner,
-	|	PurchaseOrderItems.Ref.LegalName
+	|	PurchaseOrderItems.Ref.LegalName,
+	|	PurchaseOrderItems.Ref.Branch AS Branch
 	|INTO ItemList
 	|FROM
 	|	Document.PurchaseOrder.ItemList AS PurchaseOrderItems

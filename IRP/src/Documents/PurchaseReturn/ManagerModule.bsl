@@ -197,7 +197,8 @@ Function ItemList()
 		|	PurchaseReturnItemList.ReturnReason,
 		|	PurchaseReturnItemList.ProfitLossCenter AS ProfitLossCenter,
 		|	PurchaseReturnItemList.ExpenseType AS ExpenseType,
-		|	PurchaseReturnItemList.AdditionalAnalytic AS AdditionalAnalytic
+		|	PurchaseReturnItemList.AdditionalAnalytic AS AdditionalAnalytic,
+		|	PurchaseReturnItemList.Ref.Branch AS Branch
 		|INTO ItemList
 		|FROM
 		|	Document.PurchaseReturn.ItemList AS PurchaseReturnItemList
@@ -240,7 +241,8 @@ Function OffersInfo()
 		|	PurchaseReturnSpecialOffers.Offer AS SpecialOffer,
 		|	PurchaseReturnSpecialOffers.Amount AS OffersAmount,
 		|	PurchaseReturnItemList.TotalAmount AS SalesAmount,
-		|	PurchaseReturnItemList.NetAmount AS NetAmount
+		|	PurchaseReturnItemList.NetAmount AS NetAmount,
+		|	PurchaseReturnItemList.Ref.Branch AS Branch
 		|INTO OffersInfo
 		|FROM
 		|	Document.PurchaseReturn.ItemList AS PurchaseReturnItemList

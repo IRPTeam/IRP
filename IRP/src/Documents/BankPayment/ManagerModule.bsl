@@ -98,7 +98,8 @@ Function GetQueryTextBankPaymentPaymentList()
 		|	BankPaymentPaymentList.ProfitLossCenter AS ProfitLossCenter,
 		|	BankPaymentPaymentList.ExpenseType AS ExpenseType,
 		|	BankPaymentPaymentList.AdditionalAnalytic AS AdditionalAnalytic,
-		|	BankPaymentPaymentList.Commission AS Commission
+		|	BankPaymentPaymentList.Commission AS Commission,
+		|	BankPaymentPaymentList.Ref.Branch AS Branch
 		|FROM
 		|	Document.BankPayment.PaymentList AS BankPaymentPaymentList
 		|WHERE
@@ -129,7 +130,8 @@ Function GetQueryTextQueryTable()
 		|	QueryTable.ProfitLossCenter AS ProfitLossCenter,
 		|	QueryTable.ExpenseType AS ExpenseType,
 		|	QueryTable.AdditionalAnalytic AS AdditionalAnalytic,
-		|	QueryTable.Commission AS Commission
+		|	QueryTable.Commission AS Commission,
+		|	QueryTable.Branch
 		|INTO tmp
 		|FROM
 		|	&QueryTable AS QueryTable
@@ -144,7 +146,8 @@ Function GetQueryTextQueryTable()
 		|	tmp.Currency AS Currency,
 		|	tmp.Amount AS Amount,
 		|	tmp.Period,
-		|	tmp.Key
+		|	tmp.Key,
+		|	tmp.Branch
 		|FROM
 		|	tmp AS tmp
 		|WHERE
@@ -380,7 +383,8 @@ Function PaymentList()
 		|	PaymentList.Ref.TransactionType = VALUE(Enum.OutgoingPaymentTransactionTypes.CurrencyExchange) AS IsCurrencyExchange,
 		|	PaymentList.Ref.TransactionType = VALUE(Enum.OutgoingPaymentTransactionTypes.CashTransferOrder) AS
 		|		IsCashTransferOrder,
-		|	PaymentList.Ref.TransactionType = VALUE(Enum.OutgoingPaymentTransactionTypes.ReturnToCustomer) AS IsReturnToCustomer
+		|	PaymentList.Ref.TransactionType = VALUE(Enum.OutgoingPaymentTransactionTypes.ReturnToCustomer) AS IsReturnToCustomer,
+		|	PaymentList.Ref.Branch AS Branch
 		|INTO PaymentList
 		|FROM
 		|	Document.BankPayment.PaymentList AS PaymentList
@@ -612,6 +616,7 @@ Function R3035T_CashPlanning()
 		"SELECT
 		|	PaymentList.Period,
 		|	PaymentList.Company,
+		|	PaymentList.Branch,
 		|	PaymentList.PlaningTransactionBasis AS BasisDocument,
 		|	PaymentList.PlaningTransactionBasis.PlanningPeriod AS PlanningPeriod,
 		|	PaymentList.Account,

@@ -9,7 +9,7 @@ Function GetLockFields(Data) Export
 EndFunction
 
 Function GetLockFieldNames() Export
-	Return "Company, ProfitLossCenter, Store, ItemKey";
+	Return "Company, Branch, Store, ItemKey";
 EndFunction
 
 Function GetExistsRecords(Ref, RecordType = Undefined, AddInfo = Undefined) Export

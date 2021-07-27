@@ -106,7 +106,8 @@ Function GetQueryTextBankReceiptPaymentList()
 		|	BankReceiptPaymentList.ProfitLossCenter AS ProfitLossCenter,
 		|	BankReceiptPaymentList.ExpenseType AS ExpenseType,
 		|	BankReceiptPaymentList.AdditionalAnalytic AS AdditionalAnalytic,
-		|	BankReceiptPaymentList.Commission AS Commission
+		|	BankReceiptPaymentList.Commission AS Commission,
+		|	BankReceiptPaymentList.Ref.Branch AS Branch
 		|FROM
 		|	Document.BankReceipt.PaymentList AS BankReceiptPaymentList
 		|WHERE
@@ -142,7 +143,8 @@ Function GetQueryTextQueryTable()
 		|	QueryTable.ProfitLossCenter AS ProfitLossCenter,
 		|	QueryTable.ExpenseType AS ExpenseType,
 		|	QueryTable.AdditionalAnalytic AS AdditionalAnalytic,
-		|	QueryTable.Commission AS Commission
+		|	QueryTable.Commission AS Commission,	
+		|	QueryTable.Branch AS Branch
 		|INTO tmp
 		|FROM
 		|	&QueryTable AS QueryTable
@@ -157,7 +159,8 @@ Function GetQueryTextQueryTable()
 		|	tmp.Currency AS Currency,
 		|	tmp.Amount AS Amount,
 		|	tmp.Period,
-		|	tmp.Key
+		|	tmp.Key,
+		|	tmp.Branch
 		|FROM
 		|	tmp AS tmp
 		|WHERE
@@ -173,7 +176,8 @@ Function GetQueryTextQueryTable()
 		|	tmp.Currency AS Currency,
 		|	tmp.Amount AS Amount,
 		|	tmp.Period,
-		|	tmp.Key
+		|	tmp.Key,
+		|	tmp.Branch
 		|FROM
 		|	tmp AS tmp
 		|WHERE
@@ -452,7 +456,8 @@ Function PaymentList()
 		|		IsCashTransferOrder,
 		|	PaymentList.Ref.TransactionType = VALUE(Enum.IncomingPaymentTransactionType.TransferFromPOS) AS IsTransferFromPOS,
 		|	PaymentList.Ref.TransactionType = VALUE(Enum.IncomingPaymentTransactionType.ReturnFromVendor) AS IsReturnFromVendor,
-		|	PaymentList.Ref.IgnoreAdvances AS IgnoreAdvances
+		|	PaymentList.Ref.IgnoreAdvances AS IgnoreAdvances,
+		|	PaymentList.Ref.Branch AS Branch
 		|INTO PaymentList
 		|FROM
 		|	Document.BankReceipt.PaymentList AS PaymentList
@@ -685,6 +690,7 @@ Function R3035T_CashPlanning()
 		"SELECT
 		|	PaymentList.Period,
 		|	PaymentList.Company,
+		|	PaymentList.Branch,
 		|	PaymentList.PlaningTransactionBasis AS BasisDocument,
 		|	PaymentList.PlaningTransactionBasis.PlanningPeriod AS PlanningPeriod,
 		|	PaymentList.Account,

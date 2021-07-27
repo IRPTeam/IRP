@@ -92,7 +92,8 @@ Function GetQueryTextCashPaymentPaymentList()
 		|	CashPaymentPaymentList.PlaningTransactionBasis.Sender AS FromAccount,
 		|	CashPaymentPaymentList.PlaningTransactionBasis.Receiver AS ToAccount,
 		|	CashPaymentPaymentList.Ref AS PaymentDocument,
-		|	CashPaymentPaymentList.Key AS Key
+		|	CashPaymentPaymentList.Key AS Key,
+		|	CashPaymentPaymentList.Ref.Branch AS Branch
 		|FROM
 		|	Document.CashPayment.PaymentList AS CashPaymentPaymentList
 		|WHERE
@@ -118,7 +119,8 @@ Function GetQueryTextQueryTable()
 		|	QueryTable.FromAccount AS FromAccount,
 		|	QueryTable.ToAccount AS ToAccount,
 		|	QueryTable.PaymentDocument AS PaymentDocument,
-		|	QueryTable.Key AS Key
+		|	QueryTable.Key AS Key,
+		|	QueryTable.Branch AS Branch
 		|INTO tmp
 		|FROM
 		|	&QueryTable AS QueryTable
@@ -133,7 +135,8 @@ Function GetQueryTextQueryTable()
 		|	tmp.Currency AS Currency,
 		|	SUM(tmp.Amount) AS Amount,
 		|	tmp.Period,
-		|	tmp.Key
+		|	tmp.Key,
+		|	tmp.Branch
 		|FROM
 		|	tmp AS tmp
 		|WHERE
@@ -145,7 +148,8 @@ Function GetQueryTextQueryTable()
 		|	tmp.ToAccount,
 		|	tmp.Currency,
 		|	tmp.Period,
-		|	tmp.Key";
+		|	tmp.Key,
+		|	tmp.Branch";
 EndFunction
 
 Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
@@ -355,7 +359,8 @@ Function PaymentList()
 	|	PaymentList.Ref.TransactionType = VALUE(Enum.OutgoingPaymentTransactionTypes.CashTransferOrder) AS
 	|		IsCashTransferOrder,
 	|	PaymentList.Ref.TransactionType = VALUE(Enum.OutgoingPaymentTransactionTypes.ReturnToCustomer) AS IsReturnToCustomer,
-	|	PaymentList.Partner
+	|	PaymentList.Partner,
+	|	PaymentList.Ref.Branch AS Branch
 	|INTO PaymentList
 	|FROM
 	|	Document.CashPayment.PaymentList AS PaymentList
@@ -588,6 +593,7 @@ Function R3035T_CashPlanning()
 		"SELECT
 		|	PaymentList.Period,
 		|	PaymentList.Company,
+		|	PaymentList.Branch,
 		|	PaymentList.PlaningTransactionBasis AS BasisDocument,
 		|	PaymentList.PlaningTransactionBasis.PlanningPeriod AS PlanningPeriod,
 		|	PaymentList.CashAccount AS Account,

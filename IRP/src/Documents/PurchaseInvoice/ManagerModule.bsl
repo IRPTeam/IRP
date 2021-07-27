@@ -201,7 +201,8 @@ Function ItemList()
 	|	PurchaseInvoiceItemList.Ref.Company AS Company,
 	|	PurchaseInvoiceItemList.Ref.Currency,
 	|	PurchaseInvoiceSpecialOffers.Offer AS SpecialOffer,
-	|	PurchaseInvoiceSpecialOffers.Amount AS OffersAmount
+	|	PurchaseInvoiceSpecialOffers.Amount AS OffersAmount,
+	|	PurchaseInvoiceSpecialOffers.Ref.Branch AS Branch
 	|INTO OffersInfo
 	|FROM
 	|	Document.PurchaseInvoice.ItemList AS PurchaseInvoiceItemList
@@ -257,7 +258,8 @@ Function ItemList()
 	|	PurchaseInvoiceItemList.DeliveryDate AS DeliveryDate,
 	|	PurchaseInvoiceItemList.NetAmount AS NetAmount,
 	|	PurchaseInvoiceItemList.Ref.IgnoreAdvances AS IgnoreAdvances,
-	|	PurchaseInvoiceItemList.Key
+	|	PurchaseInvoiceItemList.Key,
+	|	PurchaseInvoiceItemList.Ref.Branch AS Branch
 	|INTO ItemList
 	|FROM
 	|	Document.PurchaseInvoice.ItemList AS PurchaseInvoiceItemList

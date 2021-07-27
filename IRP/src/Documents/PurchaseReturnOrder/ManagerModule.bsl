@@ -137,7 +137,8 @@ Function ItemList()
 		|	PurchaseReturnOrderItemList.NetAmount,
 		|	PurchaseReturnOrderItemList.Ref.Currency AS Currency,
 		|	PurchaseReturnOrderItemList.PurchaseInvoice AS Invoice,
-		|	&StatusInfoPosting
+		|	&StatusInfoPosting AS StatusInfoPosting,
+		|	PurchaseReturnOrderItemList.Ref.Branch AS Branch
 		|INTO ItemList
 		|FROM
 		|	Document.PurchaseReturnOrder.ItemList AS PurchaseReturnOrderItemList

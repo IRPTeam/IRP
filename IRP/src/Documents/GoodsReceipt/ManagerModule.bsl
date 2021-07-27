@@ -194,7 +194,8 @@ Function ItemList()
 		|	ItemList.Ref.TransactionType = VALUE(Enum.GoodsReceiptTransactionTypes.ReturnFromCustomer) AS
 		|		IsTransaction_ReturnFromCustomer,
 		|	ItemList.Ref.TransactionType = VALUE(Enum.GoodsReceiptTransactionTypes.InventoryTransfer) AS
-		|		IsTransaction_InventoryTransfer
+		|		IsTransaction_InventoryTransfer,
+		|	ItemList.Ref.Branch AS Branch
 		|INTO ItemList
 		|FROM
 		|	Document.GoodsReceipt.ItemList AS ItemList

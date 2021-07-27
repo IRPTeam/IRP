@@ -212,7 +212,8 @@ Function ItemList()
 	|	SalesInvoiceItemList.OffersAmount AS OffersAmount,
 	|	SalesInvoiceItemList.UseShipmentConfirmation AS UseShipmentConfirmation,
 	|	SalesInvoiceItemList.Ref.IgnoreAdvances AS IgnoreAdvances,
-	|	SalesInvoiceItemList.Key
+	|	SalesInvoiceItemList.Key,
+	|	SalesInvoiceItemList.Ref.Branch AS Branch
 	|INTO ItemList
 	|FROM
 	|	Document.SalesInvoice.ItemList AS SalesInvoiceItemList

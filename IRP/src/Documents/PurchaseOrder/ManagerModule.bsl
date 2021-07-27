@@ -325,6 +325,7 @@ Function R1022B_VendorsPaymentPlanning()
 		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
 		|	PurchaseOrderPaymentTerms.Ref.Date AS Period,
 		|	PurchaseOrderPaymentTerms.Ref.Company AS Company,
+		|	PurchaseOrderPaymentTerms.Ref.Branch AS Branch,
 		|	PurchaseOrderPaymentTerms.Ref AS Basis,
 		|	PurchaseOrderPaymentTerms.Ref.LegalName AS LegalName,
 		|	PurchaseOrderPaymentTerms.Ref.Partner AS Partner,
@@ -340,6 +341,7 @@ Function R1022B_VendorsPaymentPlanning()
 		|GROUP BY
 		|	PurchaseOrderPaymentTerms.Ref.Date,
 		|	PurchaseOrderPaymentTerms.Ref.Company,
+		|	PurchaseOrderPaymentTerms.Ref.Branch,
 		|	PurchaseOrderPaymentTerms.Ref,
 		|	PurchaseOrderPaymentTerms.Ref.LegalName,
 		|	PurchaseOrderPaymentTerms.Ref.Partner,

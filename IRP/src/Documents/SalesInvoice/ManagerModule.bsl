@@ -718,6 +718,7 @@ Function T2011S_PartnerTransactions()
 		"SELECT
 		|	ItemList.Period,
 		|	ItemList.Company,
+		|	ItemList.Branch,
 		|	ItemList.Currency,
 		|	ItemList.LegalName,
 		|	ItemList.Partner,
@@ -735,6 +736,7 @@ Function T2011S_PartnerTransactions()
 		|	ItemList.Agreement,
 		|	ItemList.Basis,
 		|	ItemList.Company,
+		|	ItemList.Branch,
 		|	ItemList.Currency,
 		|	ItemList.Key,
 		|	ItemList.LegalName,

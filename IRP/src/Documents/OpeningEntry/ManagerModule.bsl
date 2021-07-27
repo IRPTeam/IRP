@@ -121,8 +121,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R2020B_AdvancesFromCustomers());
 	QueryArray.Add(R2021B_CustomersTransactions());
 	QueryArray.Add(R5011B_CustomersAging());
-	QueryArray.Add(R5012B_VendorsAging());
-//	QueryArray.Add(R3015B_CashAdvance());	
+	QueryArray.Add(R5012B_VendorsAging());	
 	Return QueryArray;
 EndFunction
 
@@ -137,7 +136,8 @@ Function ItemList()
 		|	NOT OpeningEntryInventory.SerialLotNumber = VALUE(Catalog.SerialLotNumbers.EmptyRef) AS isSerialLotNumberSet,
 		|	OpeningEntryInventory.SerialLotNumber,
 		|	OpeningEntryInventory.Ref.Date AS Period,
-		|	OpeningEntryInventory.Ref.Company AS Company
+		|	OpeningEntryInventory.Ref.Company AS Company,
+		|	OpeningEntryInventory.Ref.Branch AS Branch
 		|INTO ItemList
 		|FROM
 		|	Document.OpeningEntry.Inventory AS OpeningEntryInventory
@@ -148,7 +148,8 @@ EndFunction
 Function AccauntBalance()
 	Return
 		"SELECT
-		|	AccountBalance.Ref.Company,
+		|	AccountBalance.Ref.Company AS Company,
+		|	AccountBalance.Ref.Branch AS Branch,
 		|	AccountBalance.Account,
 		|	AccountBalance.Currency,
 		|	AccountBalance.Amount AS Amount,
@@ -165,6 +166,7 @@ Function AdvancesToVendors()
 	Return
 		"SELECT
 		|	OpeningEntryAdvanceToSuppliers.Ref.Company AS Company,
+		|	OpeningEntryAdvanceToSuppliers.Ref.Branch AS Branch,
 		|	OpeningEntryAdvanceToSuppliers.Currency,
 		|	OpeningEntryAdvanceToSuppliers.Partner,
 		|	OpeningEntryAdvanceToSuppliers.LegalName,
@@ -185,6 +187,7 @@ Function VendorsTransactions()
 		|	OpeningEntryAccountPayableByDocuments.Ref.Date AS Period,
 		|	OpeningEntryAccountPayableByDocuments.Key,
 		|	OpeningEntryAccountPayableByDocuments.Ref.Company,
+		|	OpeningEntryAccountPayableByDocuments.Ref.Branch AS Branch,
 		|	OpeningEntryAccountPayableByDocuments.Ref AS Basis,
 		|	OpeningEntryAccountPayableByDocuments.Partner,
 		|	OpeningEntryAccountPayableByDocuments.LegalName,
@@ -209,6 +212,7 @@ Function VendorsTransactions()
 		|	OpeningEntryAccountPayableByAgreements.Ref.Date,
 		|	OpeningEntryAccountPayableByAgreements.Key,
 		|	OpeningEntryAccountPayableByAgreements.Ref.Company,
+		|	OpeningEntryAccountPayableByAgreements.Ref.Branch,
 		|	UNDEFINED,
 		|	OpeningEntryAccountPayableByAgreements.Partner,
 		|	OpeningEntryAccountPayableByAgreements.LegalName,
@@ -231,6 +235,7 @@ Function AdvancesFromCustomers()
 	Return
 		"SELECT
 		|	OpeningEntryAdvanceFromCustomers.Ref.Company AS Company,
+		|	OpeningEntryAdvanceFromCustomers.Ref.Branch AS Branch,
 		|	OpeningEntryAdvanceFromCustomers.Currency,
 		|	OpeningEntryAdvanceFromCustomers.Partner,
 		|	OpeningEntryAdvanceFromCustomers.LegalName,
@@ -251,6 +256,7 @@ Function CustomersTransactions()
 		|	OpeningEntryAccountReceivableByDocuments.Key,
 		|	OpeningEntryAccountReceivableByDocuments.Ref.Date AS Period,
 		|	OpeningEntryAccountReceivableByDocuments.Ref.Company,
+		|	OpeningEntryAccountReceivableByDocuments.Ref.Branch,
 		|	OpeningEntryAccountReceivableByDocuments.Ref AS Basis,
 		|	OpeningEntryAccountReceivableByDocuments.Partner,
 		|	OpeningEntryAccountReceivableByDocuments.LegalName,
@@ -275,6 +281,7 @@ Function CustomersTransactions()
 		|	OpeningEntryAccountReceivableByAgreements.Key,
 		|	OpeningEntryAccountReceivableByAgreements.Ref.Date,
 		|	OpeningEntryAccountReceivableByAgreements.Ref.Company,
+		|	OpeningEntryAccountReceivableByAgreements.Ref.Branch,
 		|	UNDEFINED,
 		|	OpeningEntryAccountReceivableByAgreements.Partner,
 		|	OpeningEntryAccountReceivableByAgreements.LegalName,
@@ -298,6 +305,7 @@ Function CustomersAging()
 		"SELECT
 		|	OpeningEntryCustomersPaymentTerms.Ref.Date AS Period,
 		|	OpeningEntryAccountReceivableByDocuments.Ref.Company AS Company,
+		|	OpeningEntryAccountReceivableByDocuments.Ref.Branch AS Branch,
 		|	OpeningEntryAccountReceivableByDocuments.Partner AS Partner,
 		|	OpeningEntryAccountReceivableByDocuments.Agreement AS Agreement,
 		|	OpeningEntryAccountReceivableByDocuments.Ref AS Invoice,
@@ -320,6 +328,7 @@ Function VendorsAging()
 		"SELECT
 		|	OpeningEntryVendorsPaymentTerms.Ref.Date AS Period,
 		|	OpeningEntryAccountPayableByDocuments.Ref.Company AS Company,
+		|	OpeningEntryAccountPayableByDocuments.Ref.Branch AS Branch,
 		|	OpeningEntryAccountPayableByDocuments.Partner AS Partner,
 		|	OpeningEntryAccountPayableByDocuments.Agreement AS Agreement,
 		|	OpeningEntryAccountPayableByDocuments.Ref AS Invoice,

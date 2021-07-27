@@ -18,12 +18,63 @@
           <segments>ItemList</segments>
         </dataPath>
         <titleLocation>None</titleLocation>
+        <items xsi:type="form:FormField">
+          <name>ItemListKey</name>
+          <id>87</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <dataPath xsi:type="form:DataPath">
+            <segments>ItemList.Key</segments>
+          </dataPath>
+          <extendedTooltip>
+            <name>ItemListKeyExtendedTooltip</name>
+            <id>89</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <type>Label</type>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <extInfo xsi:type="form:LabelDecorationExtInfo">
+              <horizontalAlign>Left</horizontalAlign>
+            </extInfo>
+          </extendedTooltip>
+          <contextMenu>
+            <name>ItemListKeyContextMenu</name>
+            <id>88</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <autoFill>true</autoFill>
+          </contextMenu>
+          <type>InputField</type>
+          <editMode>Enter</editMode>
+          <showInHeader>true</showInHeader>
+          <headerHorizontalAlign>Left</headerHorizontalAlign>
+          <showInFooter>true</showInFooter>
+          <extInfo xsi:type="form:InputFieldExtInfo">
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <wrap>true</wrap>
+            <chooseType>true</chooseType>
+            <typeDomainEnabled>true</typeDomainEnabled>
+            <textEdit>true</textEdit>
+          </extInfo>
+        </items>
         <items xsi:type="form:FormGroup">
           <name>ItemListGroup1</name>
           <id>43</id>
           <items xsi:type="form:FormField">
             <name>ItemsListItemKeyItem</name>
             <id>84</id>
+            <displayImportance>VeryHigh</displayImportance>
             <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>
@@ -74,6 +125,7 @@
           <items xsi:type="form:FormField">
             <name>ItemListItemKey</name>
             <id>78</id>
+            <displayImportance>VeryHigh</displayImportance>
             <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>
@@ -150,6 +202,7 @@
         <items xsi:type="form:FormField">
           <name>ItemListQuantity</name>
           <id>81</id>
+          <displayImportance>VeryHigh</displayImportance>
           <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
@@ -585,6 +638,14 @@
     <event>NotificationProcessing</event>
     <name>NotificationProcessing</name>
   </handlers>
+  <handlers>
+    <event>OnCreateAtServer</event>
+    <name>OnCreateAtServer</name>
+  </handlers>
+  <handlers>
+    <event>OnOpen</event>
+    <name>OnOpen</name>
+  </handlers>
   <excludedCommands>Abort</excludedCommands>
   <excludedCommands>Cancel</excludedCommands>
   <excludedCommands>ChangeHistory</excludedCommands>
@@ -722,6 +783,23 @@
       <id>9</id>
       <valueType>
         <types>DefinedType.typeQuantity</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>Key</name>
+      <title>
+        <key>en</key>
+        <value>Key</value>
+      </title>
+      <id>9</id>
+      <valueType>
+        <types>DefinedType.typeRowID</types>
       </valueType>
       <view>
         <common>true</common>

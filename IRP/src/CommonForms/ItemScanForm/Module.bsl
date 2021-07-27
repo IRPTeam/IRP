@@ -1,3 +1,15 @@
+&AtServer
+Procedure OnCreateAtServer(Cancel, StandardProcessing)
+
+EndProcedure
+
+&AtClient
+Procedure OnOpen(Cancel)
+	For Each Row In FormOwner.Object.ItemList Do
+		FillPropertyValues(ItemList.Add(), Row);
+	EndDo;
+EndProcedure
+
 &AtClient
 Procedure SearchByBarcode(Command, Barcode = "")
 	AddInfo = New Structure("MobileModule", ThisObject);
@@ -57,6 +69,8 @@ Procedure ScanBarcodeEndMobile(Barcode, Result, Message, Parameters) Export
 	EndIf;
 EndProcedure
 
+
+
 &AtClient
 Procedure ItemListSelection(Item, RowSelected, Field, StandardProcessing)
 	StandardProcessing = False;
@@ -69,7 +83,7 @@ Procedure StartEditQuantity(Val RowSelected, AutoMode = False)
 	ItemListRow = ItemList.FindByID(RowSelected);
 	Structure.Insert("ItemRef", Undefined);
 	Structure.Insert("ItemKey", ItemListRow.ItemKey);
-	Structure.Insert("Quantity", ItemListRow.PhysCount);
+	Structure.Insert("Quantity", ItemListRow.Quantity);
 	Structure.Insert("RowID", RowSelected);
 	Structure.Insert("AutoMode", AutoMode);
 	NotifyOnClosing = New NotifyDescription("OnEditQuantityEnd", ThisObject);
@@ -82,7 +96,7 @@ Procedure OnEditQuantityEnd(Result, AddInfo) Export
 		Return;
 	EndIf;
 	ItemListRow = ItemList.FindByID(Result.RowID);
-	ItemListRow.OpenScanForm = Result.Quantity;
+	ItemListRow.Quantity = Result.Quantity;
 EndProcedure
 
 &AtClient

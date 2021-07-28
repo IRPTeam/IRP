@@ -215,6 +215,7 @@ Function SerialLotNumbers()
 		"SELECT
 		|	SerialLotNumbers.Ref.Date AS Period,
 		|	SerialLotNumbers.Ref.Company AS Company,
+		|	SerialLotNumbers.Ref.Branch AS Branch,
 		|	SerialLotNumbers.Key,
 		|	SerialLotNumbers.SerialLotNumber,
 		|	SerialLotNumbers.Quantity,
@@ -329,6 +330,7 @@ Function R1021B_VendorsTransactions()
 		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
 		|	ItemList.Period,
 		|	ItemList.Company,
+		|	ItemList.Branch,
 		|	ItemList.Currency,
 		|	ItemList.LegalName,
 		|	ItemList.Partner,
@@ -341,6 +343,7 @@ Function R1021B_VendorsTransactions()
 		|GROUP BY
 		|	ItemList.Agreement,
 		|	ItemList.Company,
+		|	ItemList.Branch,
 		|	ItemList.Currency,
 		|	ItemList.BasisDocument,
 		|	ItemList.LegalName,
@@ -356,6 +359,7 @@ Function R1031B_ReceiptInvoicing()
 		|	ItemList.PurchaseReturn AS Basis,
 		|	ItemList.Quantity AS Quantity,
 		|	ItemList.Company,
+		|	ItemList.Branch,
 		|	ItemList.Period,
 		|	ItemList.ItemKey,
 		|	ItemList.Store
@@ -374,6 +378,7 @@ Function R1031B_ReceiptInvoicing()
 		|	ShipmentConfirmations.ShipmentConfirmation,
 		|	ShipmentConfirmations.Quantity,
 		|	ItemList.Company,
+		|	ItemList.Branch,
 		|	ItemList.Period,
 		|	ItemList.ItemKey,
 		|	ItemList.Store
@@ -484,6 +489,7 @@ Function R5010B_ReconciliationStatement()
 		"SELECT
 		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
 		|	ItemList.Company AS Company,
+		|	ItemList.Branch AS Branch,
 		|	ItemList.LegalName AS LegalName,
 		|	ItemList.Currency AS Currency,
 		|	- SUM(ItemList.Amount) AS Amount,
@@ -493,6 +499,7 @@ Function R5010B_ReconciliationStatement()
 		|	ItemList AS ItemList
 		|GROUP BY
 		|	ItemList.Company,
+		|	ItemList.Branch,
 		|	ItemList.LegalName,
 		|	ItemList.Currency,
 		|	ItemList.Period";

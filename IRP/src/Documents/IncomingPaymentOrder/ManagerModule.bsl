@@ -138,6 +138,7 @@ Function R2022B_CustomersPaymentPlanning()
 		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
 		|	PaymentList.Date AS Period,
 		|	PaymentList.Company,
+		|	PaymentList.Branch,
 		|	PaymentList.Basis,
 		|	PaymentList.LegalName,
 		|	PaymentList.Partner,

@@ -156,7 +156,8 @@ Function ItemList()
 	|			THEN ItemList.Ref
 	|		ELSE UNDEFINED
 	|	END AS BasisDocument,
-	|	ItemList.Ref.UsePartnerTransactions AS UsePartnerTransactions
+	|	ItemList.Ref.UsePartnerTransactions AS UsePartnerTransactions,
+	|	ItemList.Ref.Branch AS Branch
 	|INTO ItemList
 	|FROM
 	|	Document.RetailReturnReceipt.ItemList AS ItemList
@@ -366,6 +367,7 @@ Function R2021B_CustomersTransactions()
 		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
 		|	ItemList.Period,
 		|	ItemList.Company,
+		|	ItemList.Branch,
 		|	ItemList.Currency,
 		|	ItemList.LegalName,
 		|	ItemList.Partner,
@@ -382,6 +384,7 @@ Function R2021B_CustomersTransactions()
 		|	ItemList.Agreement,
 		|	ItemList.BasisDocument,
 		|	ItemList.Company,
+		|	ItemList.Branch,
 		|	ItemList.Currency,
 		|	ItemList.LegalName,
 		|	ItemList.Partner,
@@ -394,6 +397,7 @@ Function R2021B_CustomersTransactions()
 		|	VALUE(AccumulationRecordType.Expense),
 		|	ItemList.Period,
 		|	ItemList.Company,
+		|	ItemList.Branch,
 		|	ItemList.Currency,
 		|	ItemList.LegalName,
 		|	ItemList.Partner,
@@ -409,6 +413,7 @@ Function R2021B_CustomersTransactions()
 		|	ItemList.Agreement,
 		|	ItemList.BasisDocument,
 		|	ItemList.Company,
+		|	ItemList.Branch,
 		|	ItemList.Currency,
 		|	ItemList.LegalName,
 		|	ItemList.Partner,
@@ -421,6 +426,7 @@ Function R5010B_ReconciliationStatement()
 		"SELECT
 		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
 		|	ItemList.Company,
+		|	ItemList.Branch,
 		|	ItemList.LegalName,
 		|	ItemList.Currency,
 		|	- SUM(ItemList.TotalAmount) AS Amount,
@@ -432,6 +438,7 @@ Function R5010B_ReconciliationStatement()
 		|	ItemList.UsePartnerTransactions
 		|GROUP BY
 		|	ItemList.Company,
+		|	ItemList.Branch,
 		|	ItemList.LegalName,
 		|	ItemList.Currency,
 		|	ItemList.Period
@@ -440,6 +447,7 @@ Function R5010B_ReconciliationStatement()
 		|SELECT
 		|	VALUE(AccumulationRecordType.Receipt),
 		|	ItemList.Company,
+		|	ItemList.Branch,
 		|	ItemList.LegalName,
 		|	ItemList.Currency,
 		|	SUM(ItemList.TotalAmount),
@@ -450,6 +458,7 @@ Function R5010B_ReconciliationStatement()
 		|	ItemList.UsePartnerTransactions
 		|GROUP BY
 		|	ItemList.Company,
+		|	ItemList.Branch,
 		|	ItemList.LegalName,
 		|	ItemList.Currency,
 		|	ItemList.Period";

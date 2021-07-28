@@ -311,6 +311,7 @@ Function SerialLotNumbers()
 		"SELECT
 		|	SerialLotNumbers.Ref.Date AS Period,
 		|	SerialLotNumbers.Ref.Company AS Company,
+		|	SerialLotNumbers.Ref.Branch AS Branch,
 		|	SerialLotNumbers.Key,
 		|	SerialLotNumbers.SerialLotNumber,
 		|	SerialLotNumbers.Quantity,
@@ -460,6 +461,7 @@ Function R5012B_VendorsAging()
 		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
 		|	PaymentTerms.Ref.Date AS Period,
 		|	PaymentTerms.Ref.Company AS Company,
+		|	PaymentTerms.Ref.Branch AS Branch,
 		|	PaymentTerms.Ref.Currency AS Currency,
 		|	PaymentTerms.Ref.Agreement AS Agreement,
 		|	PaymentTerms.Ref.Partner AS Partner,
@@ -477,6 +479,7 @@ Function R5012B_VendorsAging()
 		|	PaymentTerms.Ref,
 		|	PaymentTerms.Ref.Agreement,
 		|	PaymentTerms.Ref.Company,
+		|	PaymentTerms.Ref.Branch,
 		|	PaymentTerms.Ref.Currency,
 		|	PaymentTerms.Ref.Date,
 		|	PaymentTerms.Ref.Partner,
@@ -488,6 +491,7 @@ Function R5012B_VendorsAging()
 		|	VALUE(AccumulationRecordType.Expense),
 		|	OffsetOfAging.Period,
 		|	OffsetOfAging.Company,
+		|	OffsetOfAging.Branch,
 		|	OffsetOfAging.Currency,
 		|	OffsetOfAging.Agreement,
 		|	OffsetOfAging.Partner,
@@ -539,6 +543,7 @@ Function R1031B_ReceiptInvoicing()
 		|	ItemList.Invoice AS Basis,
 		|	ItemList.Quantity AS Quantity,
 		|	ItemList.Company,
+		|	ItemList.Branch,
 		|	ItemList.Period,
 		|	ItemList.ItemKey,
 		|	ItemList.Store
@@ -557,6 +562,7 @@ Function R1031B_ReceiptInvoicing()
 		|	GoodsReceipts.GoodsReceipt,
 		|	GoodsReceipts.Quantity,
 		|	ItemList.Company,
+		|	ItemList.Branch,
 		|	ItemList.Period,
 		|	ItemList.ItemKey,
 		|	ItemList.Store
@@ -748,6 +754,7 @@ Function R5010B_ReconciliationStatement()
 		"SELECT
 		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
 		|	ItemList.Company AS Company,
+		|	ItemList.Branch AS Branch,
 		|	ItemList.LegalName AS LegalName,
 		|	ItemList.Currency AS Currency,
 		|	SUM(ItemList.Amount) AS Amount,
@@ -757,6 +764,7 @@ Function R5010B_ReconciliationStatement()
 		|	ItemList AS ItemList
 		|GROUP BY
 		|	ItemList.Company,
+		|	ItemList.Branch,
 		|	ItemList.LegalName,
 		|	ItemList.Currency,
 		|	ItemList.Period";
@@ -802,6 +810,7 @@ Function R1022B_VendorsPaymentPlanning()
 		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
 		|	PurchaseInvoicePaymentTerms.Ref.Date AS Period,
 		|	PurchaseInvoicePaymentTerms.Ref.Company AS Company,
+		|	PurchaseInvoicePaymentTerms.Ref.Branch AS Branch,
 		|	PurchaseInvoicePaymentTerms.Ref AS Basis,
 		|	PurchaseInvoicePaymentTerms.Ref.LegalName AS LegalName,
 		|	PurchaseInvoicePaymentTerms.Ref.Partner AS Partner,
@@ -816,6 +825,7 @@ Function R1022B_VendorsPaymentPlanning()
 		|GROUP BY
 		|	PurchaseInvoicePaymentTerms.Ref.Date,
 		|	PurchaseInvoicePaymentTerms.Ref.Company,
+		|	PurchaseInvoicePaymentTerms.Ref.Branch,
 		|	PurchaseInvoicePaymentTerms.Ref,
 		|	PurchaseInvoicePaymentTerms.Ref.LegalName,
 		|	PurchaseInvoicePaymentTerms.Ref.Partner,

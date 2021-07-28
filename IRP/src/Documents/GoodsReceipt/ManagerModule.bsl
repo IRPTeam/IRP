@@ -241,6 +241,7 @@ Function R1031B_ReceiptInvoicing()
 		|	ItemList.GoodsReceipt AS Basis,
 		|	ItemList.Quantity AS Quantity,
 		|	ItemList.Company,
+		|	ItemList.Branch,
 		|	ItemList.Period,
 		|	ItemList.ItemKey,
 		|	ItemList.Store
@@ -258,6 +259,7 @@ Function R1031B_ReceiptInvoicing()
 		|	ItemList.PurchaseInvoice,
 		|	ItemList.Quantity,
 		|	ItemList.Company,
+		|	ItemList.Branch,
 		|	ItemList.Period,
 		|	ItemList.ItemKey,
 		|	ItemList.Store
@@ -275,6 +277,7 @@ Function R2031B_ShipmentInvoicing()
 		|	ItemList.GoodsReceipt AS Basis,
 		|	ItemList.Quantity AS Quantity,
 		|	ItemList.Company,
+		|	ItemList.Branch,
 		|	ItemList.Period,
 		|	ItemList.ItemKey,
 		|	ItemList.Store
@@ -292,6 +295,7 @@ Function R2031B_ShipmentInvoicing()
 		|	ItemList.SalesReturn,
 		|	ItemList.Quantity,
 		|	ItemList.Company,
+		|	ItemList.Branch,
 		|	ItemList.Period,
 		|	ItemList.ItemKey,
 		|	ItemList.Store

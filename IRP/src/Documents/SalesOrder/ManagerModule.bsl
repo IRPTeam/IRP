@@ -302,6 +302,7 @@ Function R2022B_CustomersPaymentPlanning()
 		|	SalesOrderPaymentTerms.Ref.Date AS Period,
 		|	SalesOrderPaymentTerms.Ref.Company AS Company,
 		|	SalesOrderPaymentTerms.Ref.Branch AS Branch,
+		|	SalesOrderPaymentTerms.Ref.Branch AS Branch,
 		|	SalesOrderPaymentTerms.Ref AS Basis,
 		|	SalesOrderPaymentTerms.Ref.LegalName AS LegalName,
 		|	SalesOrderPaymentTerms.Ref.Partner AS Partner,
@@ -317,6 +318,7 @@ Function R2022B_CustomersPaymentPlanning()
 		|GROUP BY
 		|	SalesOrderPaymentTerms.Ref.Date,
 		|	SalesOrderPaymentTerms.Ref.Company,
+		|	SalesOrderPaymentTerms.Ref.Branch,
 		|	SalesOrderPaymentTerms.Ref.Branch,
 		|	SalesOrderPaymentTerms.Ref,
 		|	SalesOrderPaymentTerms.Ref.LegalName,

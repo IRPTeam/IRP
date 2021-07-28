@@ -601,6 +601,7 @@ Function R5010B_ReconciliationStatement()
 		|	AND NOT PaymentList.IsMoneyExchange
 		|GROUP BY
 		|	PaymentList.Company,
+		|	PaymentList.Branch,
 		|	PaymentList.Payee,
 		|	PaymentList.Currency,
 		|	PaymentList.Period,

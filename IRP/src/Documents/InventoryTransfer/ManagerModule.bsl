@@ -343,6 +343,8 @@ Function R4050B_StockInventory()
 		"SELECT
 		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
 		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Branch,
 		|	ItemList.StoreSender AS Store,
 		|	ItemList.ItemKey,
 		|	ItemList.Quantity
@@ -357,6 +359,8 @@ Function R4050B_StockInventory()
 		|SELECT
 		|	VALUE(AccumulationRecordType.Receipt),
 		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Branch,
 		|	ItemList.StoreReceiver,
 		|	ItemLIst.ItemKey,
 		|	ItemList.Quantity

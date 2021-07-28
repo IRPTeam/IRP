@@ -675,6 +675,7 @@ Function R5010B_ReconciliationStatement()
 		|	NOT PaymentList.TransferFromPOS
 		|GROUP BY
 		|	PaymentList.Company,
+		|	PaymentList.Branch,
 		|	PaymentList.Payer,
 		|	PaymentList.Currency,
 		|	PaymentList.Period";	

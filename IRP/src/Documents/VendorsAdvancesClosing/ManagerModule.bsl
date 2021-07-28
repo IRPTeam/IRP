@@ -143,6 +143,7 @@ Function OffsetOfAdvances(Parameters)
 	|	PartnerAdvances.Period BETWEEN BEGINOFPERIOD(&BeginOfPeriod, DAY) AND ENDOFPERIOD(&EndOfPeriod, DAY)
 	|	AND PartnerAdvances.IsVendorAdvance
 	|	AND PartnerAdvances.Company = &Company
+	|	AND PartnerAdvances.Branch = &Branch
 	|GROUP BY
 	|	PartnerAdvances.Recorder,
 	|	PartnerAdvances.Recorder.Date
@@ -160,6 +161,7 @@ Function OffsetOfAdvances(Parameters)
 	|	PartnerTransactions.Period BETWEEN BEGINOFPERIOD(&BeginOfPeriod, DAY) AND ENDOFPERIOD(&EndOfPeriod, DAY)
 	|	AND PartnerTransactions.IsPaymentToVendor
 	|	AND PartnerTransactions.Company = &Company
+	|	AND PartnerTransactions.Branch = &Branch
 	|;
 	|
 	|
@@ -176,6 +178,7 @@ Function OffsetOfAdvances(Parameters)
 	|	PartnerTransactions.Period BETWEEN BEGINOFPERIOD(&BeginOfPeriod, DAY) AND ENDOFPERIOD(&EndOfPeriod, DAY)
 	|	AND PartnerTransactions.IsVendorTransaction
 	|	AND PartnerTransactions.Company = &Company
+	|	AND PartnerTransactions.Branch = &Branch
 	|
 	|UNION ALL
 	|
@@ -206,6 +209,7 @@ Function OffsetOfAdvances(Parameters)
 	Query.SetParameter("BeginOfPeriod", Parameters.Object.BeginOfPeriod);
 	Query.SetParameter("EndOfPeriod"  , Parameters.Object.EndOfPeriod);
 	Query.SetParameter("Company"      , Parameters.Object.Company);
+	Query.SetParameter("Branch"       , Parameters.Object.Branch);
 	
 	QueryTable = Query.Execute().Unload();
 	For Each Row In QueryTable Do
@@ -461,6 +465,7 @@ Procedure Create_VendorsTransactions(Recorder, Parameters)
 	"SELECT
 	|	PartnerTransactions.Period,
 	|	PartnerTransactions.Company,
+	|	PartnerTransactions.Branch,
 	|	PartnerTransactions.Currency,
 	|	PartnerTransactions.Partner,
 	|	PartnerTransactions.LegalName,
@@ -481,6 +486,7 @@ Procedure Create_VendorsTransactions(Recorder, Parameters)
 	|GROUP BY
 	|	PartnerTransactions.Agreement,
 	|	PartnerTransactions.Company,
+	|	PartnerTransactions.Branch,
 	|	PartnerTransactions.Currency,
 	|	PartnerTransactions.LegalName,
 	|	PartnerTransactions.Partner,
@@ -497,6 +503,7 @@ Procedure Create_VendorsTransactions(Recorder, Parameters)
 	|SELECT
 	|	tmpVendorsTransactions.Period,
 	|	tmpVendorsTransactions.Company,
+	|	tmpVendorsTransactions.Branch,
 	|	tmpVendorsTransactions.Currency,
 	|	tmpVendorsTransactions.Partner,
 	|	tmpVendorsTransactions.LegalName,
@@ -507,10 +514,11 @@ Procedure Create_VendorsTransactions(Recorder, Parameters)
 	|	FALSE AS IgnoreAdvances
 	|	INTO VendorsTransactions
 	|FROM
-	|	AccumulationRegister.R1021B_VendorsTransactions.Balance(&Period, (Company, Currency, LegalName, Partner, Agreement,
+	|	AccumulationRegister.R1021B_VendorsTransactions.Balance(&Period, (Company, Branch, Currency, LegalName, Partner, Agreement,
 	|		Basis) IN
 	|		(SELECT
 	|			tmp.Company,
+	|			tmp.Branch,
 	|			tmp.Currency,
 	|			tmp.LegalName,
 	|			tmp.Partner,
@@ -522,6 +530,7 @@ Procedure Create_VendorsTransactions(Recorder, Parameters)
 	|		R1021B_VendorsTransactionsBalance
 	|		LEFT JOIN tmpVendorsTransactions AS tmpVendorsTransactions
 	|		ON R1021B_VendorsTransactionsBalance.Company = tmpVendorsTransactions.Company
+	|		AND R1021B_VendorsTransactionsBalance.Branch = tmpVendorsTransactions.Branch
 	|		AND R1021B_VendorsTransactionsBalance.Currency = tmpVendorsTransactions.Currency
 	|		AND R1021B_VendorsTransactionsBalance.Partner = tmpVendorsTransactions.Partner
 	|		AND R1021B_VendorsTransactionsBalance.LegalName = tmpVendorsTransactions.LegalName
@@ -551,6 +560,7 @@ Procedure Create_VendorsAging(Recorder, Parameters)
 	"SELECT
 	|	R5012B_VendorsAging.Period,
 	|	R5012B_VendorsAging.Company,
+	|	R5012B_VendorsAging.Branch,
 	|	R5012B_VendorsAging.Currency,
 	|	R5012B_VendorsAging.Partner,
 	|	R5012B_VendorsAging.Invoice,
@@ -574,6 +584,7 @@ Procedure Create_PaymentToVendors(Recorder, Parameters)
 	"SELECT
 	|	PartnerTransactions.Period,
 	|	PartnerTransactions.Company,
+	|	PartnerTransactions.Branch,
 	|	PartnerTransactions.Currency,
 	|	PartnerTransactions.Partner,
 	|	PartnerTransactions.LegalName,
@@ -591,6 +602,7 @@ Procedure Create_PaymentToVendors(Recorder, Parameters)
 	|GROUP BY
 	|	PartnerTransactions.Agreement,
 	|	PartnerTransactions.Company,
+	|	PartnerTransactions.Branch,
 	|	PartnerTransactions.Currency,
 	|	PartnerTransactions.LegalName,
 	|	PartnerTransactions.Partner,
@@ -617,6 +629,7 @@ Procedure Create_AdvancesToVendors(Recorder, Parameters)
 	"SELECT
 	|	PartnerAdvances.Period,
 	|	PartnerAdvances.Company,
+	|	PartnerAdvances.Branch,
 	|	PartnerAdvances.Currency,
 	|	PartnerAdvances.Partner,
 	|	PartnerAdvances.LegalName,
@@ -657,6 +670,7 @@ Procedure Write_AdvancesAndTransactions_DueAsAdvance(Recorder, Parameters, Offse
 	"SELECT
 	|	DueAsAdvanceToVendors.Period,
 	|	DueAsAdvanceToVendors.Company,
+	|	DueAsAdvanceToVendors.Branch,
 	|	DueAsAdvanceToVendors.Partner,
 	|	DueAsAdvanceToVendors.LegalName,
 	|	DueAsAdvanceToVendors.Agreement,
@@ -759,6 +773,7 @@ Procedure Write_AdvancesAndTransactions(Recorder, Parameters, OffsetOfAdvanceFul
 	"SELECT
 	|	OffsetOfAdvance.Period,
 	|	OffsetOfAdvance.Company,
+	|	OffsetOfAdvance.Branch,
 	|	OffsetOfAdvance.Currency,
 	|	OffsetOfAdvance.Partner,
 	|	OffsetOfAdvance.LegalName,
@@ -868,6 +883,7 @@ Procedure Write_PartnersAging(Recorder, Parameters, OffsetOfAgingFull)
 	"SELECT
 	|	OffsetOfAging.Period,
 	|	OffsetOfAging.Company,
+	|	OffsetOfAging.Branch,
 	|	OffsetOfAging.Currency,
 	|	OffsetOfAging.Partner,
 	|	OffsetOfAging.Invoice,

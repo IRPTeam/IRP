@@ -201,7 +201,8 @@ Function ItemList()
 	|	PurchaseInvoiceItemList.Ref.Company AS Company,
 	|	PurchaseInvoiceItemList.Ref.Currency,
 	|	PurchaseInvoiceSpecialOffers.Offer AS SpecialOffer,
-	|	PurchaseInvoiceSpecialOffers.Amount AS OffersAmount
+	|	PurchaseInvoiceSpecialOffers.Amount AS OffersAmount,
+	|	PurchaseInvoiceSpecialOffers.Ref.Branch AS Branch
 	|INTO OffersInfo
 	|FROM
 	|	Document.PurchaseInvoice.ItemList AS PurchaseInvoiceItemList
@@ -257,7 +258,8 @@ Function ItemList()
 	|	PurchaseInvoiceItemList.DeliveryDate AS DeliveryDate,
 	|	PurchaseInvoiceItemList.NetAmount AS NetAmount,
 	|	PurchaseInvoiceItemList.Ref.IgnoreAdvances AS IgnoreAdvances,
-	|	PurchaseInvoiceItemList.Key
+	|	PurchaseInvoiceItemList.Key,
+	|	PurchaseInvoiceItemList.Ref.Branch AS Branch
 	|INTO ItemList
 	|FROM
 	|	Document.PurchaseInvoice.ItemList AS PurchaseInvoiceItemList
@@ -292,7 +294,8 @@ Function ItemList()
 	|			THEN PurchaseInvoiceTaxList.Amount
 	|		ELSE PurchaseInvoiceTaxList.ManualAmount
 	|	END AS TaxAmount,
-	|	PurchaseInvoiceItemList.NetAmount AS TaxableAmount
+	|	PurchaseInvoiceItemList.NetAmount AS TaxableAmount,
+	|	PurchaseInvoiceItemList.Ref.Branch AS Branch
 	|INTO Taxes
 	|FROM
 	|	Document.PurchaseInvoice.ItemList AS PurchaseInvoiceItemList
@@ -409,6 +412,7 @@ Function R1021B_VendorsTransactions()
 		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
 		|	ItemList.Period,
 		|	ItemList.Company,
+		|	ItemList.Branch,
 		|	ItemList.Currency,
 		|	ItemList.LegalName,
 		|	ItemList.Partner,
@@ -423,6 +427,7 @@ Function R1021B_VendorsTransactions()
 		|	ItemList.Agreement,
 		|	ItemList.BasisDocument,
 		|	ItemList.Company,
+		|	ItemList.Branch,
 		|	ItemList.Currency,
 		|	ItemList.LegalName,
 		|	ItemList.Partner,
@@ -435,6 +440,7 @@ Function R1021B_VendorsTransactions()
 		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
 		|	OffsetOfAdvances.Period,
 		|	OffsetOfAdvances.Company,
+		|	OffsetOfAdvances.Branch,
 		|	OffsetOfAdvances.Currency,
 		|	OffsetOfAdvances.LegalName,
 		|	OffsetOfAdvances.Partner,
@@ -500,6 +506,7 @@ Function T2011S_PartnerTransactions()
 		"SELECT
 		|	ItemList.Period,
 		|	ItemList.Company,
+		|	ItemList.Branch,
 		|	ItemList.Currency,
 		|	ItemList.LegalName,
 		|	ItemList.Partner,
@@ -517,6 +524,7 @@ Function T2011S_PartnerTransactions()
 		|	ItemList.Agreement,
 		|	ItemList.BasisDocument,
 		|	ItemList.Company,
+		|	ItemList.Branch,
 		|	ItemList.Currency,
 		|	ItemList.Key,
 		|	ItemList.LegalName,

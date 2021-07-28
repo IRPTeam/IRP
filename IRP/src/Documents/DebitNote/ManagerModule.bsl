@@ -114,7 +114,8 @@ Function Transactions()
 	|	Transactions.Agreement.Type = VALUE(Enum.AgreementTypes.Customer) AS IsCustomer,
 	|	Transactions.Currency,
 	|	Transactions.Key,
-	|	Transactions.Amount
+	|	Transactions.Amount,
+	|	Transactions.Ref.Branch AS Branch
 	|INTO Transactions
 	|FROM
 	|	Document.DebitNote.Transactions AS Transactions
@@ -237,6 +238,7 @@ Function R1020B_AdvancesToVendors()
 		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
 		|	OffsetOfAdvances.Period,
 		|	OffsetOfAdvances.Company,
+		|	OffsetOfAdvances.Branch,
 		|	OffsetOfAdvances.Currency,
 		|	OffsetOfAdvances.LegalName,
 		|	OffsetOfAdvances.Partner,
@@ -327,6 +329,7 @@ Function T2011S_PartnerTransactions()
 		"SELECT
 		|	Transactions.Period AS Period,
 		|	Transactions.Company,
+		|	Transactions.Branch,
 		|	Transactions.Currency,
 		|	Transactions.LegalName,
 		|	Transactions.Partner,
@@ -347,6 +350,7 @@ Function T2011S_PartnerTransactions()
 		|SELECT
 		|	Transactions.Period,
 		|	Transactions.Company,
+		|	Transactions.Branch,
 		|	Transactions.Currency,
 		|	Transactions.LegalName,
 		|	Transactions.Partner,

@@ -135,7 +135,8 @@ Function ItemList()
 		|	PurchaseOrderItems.PurchaseBasis REFS Document.SalesOrder
 		|	AND NOT PurchaseOrderItems.PurchaseBasis.REF IS NULL AS UseSalesOrder,
 		|	PurchaseOrderItems.OffersAmount,
-		|	PurchaseOrderItems.Ref.Currency AS Currency
+		|	PurchaseOrderItems.Ref.Currency AS Currency,
+		|	PurchaseOrderItems.Ref.Branch AS Branch
 		|INTO ItemList
 		|FROM
 		|	Document.PurchaseOrderClosing.ItemList AS PurchaseOrderItems

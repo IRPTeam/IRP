@@ -404,6 +404,24 @@
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
+    <attributes uuid="ff6a73f0-d1d7-4b83-b834-199edc95a13c">
+      <name>LegalNameContract</name>
+      <synonym>
+        <key>en</key>
+        <value>Legal name contract</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.LegalNameContracts</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <choiceParameterLinks>
+        <name>Filter.Company</name>
+        <field>Document.BankPayment.TabularSection.PaymentList.Attribute.Payee</field>
+      </choiceParameterLinks>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
   </tabularSections>
   <tabularSections uuid="e629744a-a4f2-4b41-a350-c16ddb11e5a7">
     <producedTypes>

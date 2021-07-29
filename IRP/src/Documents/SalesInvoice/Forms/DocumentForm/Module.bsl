@@ -112,6 +112,11 @@ Procedure LegalNameOnChange(Item, AddInfo = Undefined) Export
 EndProcedure
 
 &AtClient
+Procedure LegalNameContractOnChange(Item)
+	DocSalesInvoiceClient.LegalNameContractOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
 Procedure AgreementOnChange(Item, AddInfo = Undefined) Export
 	DocSalesInvoiceClient.AgreementOnChange(Object, ThisObject, Item);
 EndProcedure

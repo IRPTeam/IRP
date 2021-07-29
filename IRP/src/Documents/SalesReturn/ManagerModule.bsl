@@ -198,7 +198,8 @@ Function ItemList()
 		|	ItemList.ProfitLossCenter AS ProfitLossCenter,
 		|	ItemList.RevenueType AS RevenueType,
 		|	ItemList.AdditionalAnalytic AS AdditionalAnalytic,
-		|	ItemList.Ref.Branch AS Branch
+		|	ItemList.Ref.Branch AS Branch,
+		|	ItemList.Ref.LegalNameContract AS LegalNameContract
 		|INTO ItemList
 		|FROM
 		|	Document.SalesReturn.ItemList AS ItemList
@@ -503,6 +504,7 @@ Function R5010B_ReconciliationStatement()
 		|	ItemList.Company,
 		|	ItemList.Branch,
 		|	ItemList.LegalName,
+		|	ItemList.LegalNameContract,
 		|	ItemList.Currency,
 		|	- SUM(ItemList.Amount) AS Amount,
 		|	ItemList.Period
@@ -513,6 +515,7 @@ Function R5010B_ReconciliationStatement()
 		|	ItemList.Company,
 		|	ItemList.Branch,
 		|	ItemList.LegalName,
+		|	ItemList.LegalNameContract,
 		|	ItemList.Currency,
 		|	ItemList.Period";
 EndFunction

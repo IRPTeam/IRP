@@ -278,6 +278,7 @@ Procedure FillAttributesByType(TransactionType, ArrayAll, ArrayByType) Export
 	ArrayAll.Add("PaymentList.Amount");
 	ArrayAll.Add("PaymentList.AmountExchange");
 	ArrayAll.Add("PaymentList.POSAccount");
+	ArrayAll.Add("PaymentList.LegalNameContract");
 	
 	ArrayByType = New Array();
 	If TransactionType = Enums.IncomingPaymentTransactionType.CashTransferOrder Then
@@ -327,6 +328,7 @@ Procedure FillAttributesByType(TransactionType, ArrayAll, ArrayByType) Export
 		ArrayByType.Add("PaymentList.PlaningTransactionBasis");
 		ArrayByType.Add("PaymentList.Amount");
 		ArrayByType.Add("PaymentList.Agreement");
+		ArrayByType.Add("PaymentList.LegalNameContract");
 	Else // empty
 		ArrayByType.Add("Company");
 		ArrayByType.Add("Currency");
@@ -457,7 +459,8 @@ Function PaymentList()
 		|	PaymentList.Ref.TransactionType = VALUE(Enum.IncomingPaymentTransactionType.TransferFromPOS) AS IsTransferFromPOS,
 		|	PaymentList.Ref.TransactionType = VALUE(Enum.IncomingPaymentTransactionType.ReturnFromVendor) AS IsReturnFromVendor,
 		|	PaymentList.Ref.IgnoreAdvances AS IgnoreAdvances,
-		|	PaymentList.Ref.Branch AS Branch
+		|	PaymentList.Ref.Branch AS Branch,
+		|	PaymentList.LegalNameContract AS LegalNameContract
 		|INTO PaymentList
 		|FROM
 		|	Document.BankReceipt.PaymentList AS PaymentList
@@ -661,6 +664,7 @@ Function R5010B_ReconciliationStatement()
 		|	PaymentList.Company,
 		|	PaymentList.Branch,
 		|	PaymentList.Payer AS LegalName,
+		|	PaymentList.LegalNameContract AS LegalNameContract,
 		|	PaymentList.Currency,
 		|	SUM(PaymentList.Amount) AS Amount,
 		|	PaymentList.Period
@@ -677,6 +681,7 @@ Function R5010B_ReconciliationStatement()
 		|	PaymentList.Company,
 		|	PaymentList.Branch,
 		|	PaymentList.Payer,
+		|	PaymentList.LegalNameContract,
 		|	PaymentList.Currency,
 		|	PaymentList.Period";	
 EndFunction

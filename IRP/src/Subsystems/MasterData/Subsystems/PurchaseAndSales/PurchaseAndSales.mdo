@@ -17,5 +17,6 @@
   <content>Catalog.SpecialOfferRules</content>
   <content>Catalog.Stores</content>
   <content>CommonCommand.OpenCompanies</content>
+  <content>Catalog.LegalNameContracts</content>
   <parentSubsystem>Subsystem.MasterData</parentSubsystem>
 </mdclass:Subsystem>

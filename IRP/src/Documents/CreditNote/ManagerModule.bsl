@@ -115,7 +115,8 @@ Function Transactions()
 	|	Transactions.Currency,
 	|	Transactions.Key,
 	|	Transactions.Amount,
-	|	Transactions.Ref.Branch AS Branch
+	|	Transactions.Ref.Branch AS Branch,
+	|	Transactions.LegalNameContract AS LegalNameContract
 	|INTO Transactions
 	|FROM
 	|	Document.CreditNote.Transactions AS Transactions

@@ -157,7 +157,8 @@ Function ItemList()
 	|		ELSE UNDEFINED
 	|	END AS BasisDocument,
 	|	ItemList.Ref.UsePartnerTransactions AS UsePartnerTransactions,
-	|	ItemList.Ref.Branch AS Branch
+	|	ItemList.Ref.Branch AS Branch,
+	|	ItemList.Ref.LegalNameContract AS LegalNameContract
 	|INTO ItemList
 	|FROM
 	|	Document.RetailReturnReceipt.ItemList AS ItemList
@@ -428,6 +429,7 @@ Function R5010B_ReconciliationStatement()
 		|	ItemList.Company,
 		|	ItemList.Branch,
 		|	ItemList.LegalName,
+		|	ItemList.LegalNameContract,
 		|	ItemList.Currency,
 		|	- SUM(ItemList.TotalAmount) AS Amount,
 		|	ItemList.Period
@@ -440,6 +442,7 @@ Function R5010B_ReconciliationStatement()
 		|	ItemList.Company,
 		|	ItemList.Branch,
 		|	ItemList.LegalName,
+		|	ItemList.LegalNameContract,
 		|	ItemList.Currency,
 		|	ItemList.Period
 		|UNION ALL
@@ -449,6 +452,7 @@ Function R5010B_ReconciliationStatement()
 		|	ItemList.Company,
 		|	ItemList.Branch,
 		|	ItemList.LegalName,
+		|	ItemList.LegalNameContract,
 		|	ItemList.Currency,
 		|	SUM(ItemList.TotalAmount),
 		|	ItemList.Period
@@ -460,6 +464,7 @@ Function R5010B_ReconciliationStatement()
 		|	ItemList.Company,
 		|	ItemList.Branch,
 		|	ItemList.LegalName,
+		|	ItemList.LegalNameContract,
 		|	ItemList.Currency,
 		|	ItemList.Period";
 EndFunction

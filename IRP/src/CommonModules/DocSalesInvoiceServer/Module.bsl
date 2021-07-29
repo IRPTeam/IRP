@@ -102,6 +102,7 @@ Procedure SetGroupItemsList(Object, Form)
 	AttributesArray.Add("Partner");
 	AttributesArray.Add("LegalName");
 	AttributesArray.Add("Agreement");
+	AttributesArray.Add("LegalNameContract");
 	DocumentsServer.DeleteUnavailableTitleItemNames(AttributesArray);
 	For Each Atr In AttributesArray Do
 		Form.GroupItems.Add(Atr, ?(ValueIsFilled(Form.Items[Atr].Title),

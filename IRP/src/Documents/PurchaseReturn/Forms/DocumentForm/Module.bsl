@@ -106,6 +106,11 @@ Procedure LegalNameOnChange(Item, AddInfo = Undefined) Export
 EndProcedure
 
 &AtClient
+Procedure LegalNameContractOnChange(Item)
+	DocPurchaseReturnClient.LegalNameContractOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
 Procedure AgreementOnChange(Item, AddInfo = Undefined) Export
 	DocPurchaseReturnClient.AgreementOnChange(Object, ThisObject, Item);
 EndProcedure

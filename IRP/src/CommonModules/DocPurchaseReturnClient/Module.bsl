@@ -526,6 +526,10 @@ Procedure LegalNameOnChange(Object, Form, Item) Export
 	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 EndProcedure
 
+Procedure LegalNameContractOnChange(Object, Form, Item) Export 
+	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
+EndProcedure
+
 Procedure LegalNameStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
 	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
 	

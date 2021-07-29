@@ -256,6 +256,25 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="4e2af1de-62a9-4c4d-821b-6809e75feeda">
+    <name>LegalNameContract</name>
+    <synonym>
+      <key>en</key>
+      <value>Legal name contract</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.LegalNameContracts</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <choiceParameterLinks>
+      <name>Filter.Company</name>
+      <field>Document.PurchaseInvoice.Attribute.LegalName</field>
+    </choiceParameterLinks>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <forms uuid="37d56a81-36f9-4777-a269-e65e67e60ad1">
     <name>DocumentForm</name>
     <synonym>

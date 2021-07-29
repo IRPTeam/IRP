@@ -259,7 +259,8 @@ Function ItemList()
 	|	PurchaseInvoiceItemList.NetAmount AS NetAmount,
 	|	PurchaseInvoiceItemList.Ref.IgnoreAdvances AS IgnoreAdvances,
 	|	PurchaseInvoiceItemList.Key,
-	|	PurchaseInvoiceItemList.Ref.Branch AS Branch
+	|	PurchaseInvoiceItemList.Ref.Branch AS Branch,
+	|	PurchaseInvoiceItemList.Ref.LegalNameContract AS LegalNameContract
 	|INTO ItemList
 	|FROM
 	|	Document.PurchaseInvoice.ItemList AS PurchaseInvoiceItemList
@@ -756,6 +757,7 @@ Function R5010B_ReconciliationStatement()
 		|	ItemList.Company AS Company,
 		|	ItemList.Branch AS Branch,
 		|	ItemList.LegalName AS LegalName,
+		|	ItemList.LegalNameContract AS LegalNameContract,
 		|	ItemList.Currency AS Currency,
 		|	SUM(ItemList.Amount) AS Amount,
 		|	ItemList.Period
@@ -766,6 +768,7 @@ Function R5010B_ReconciliationStatement()
 		|	ItemList.Company,
 		|	ItemList.Branch,
 		|	ItemList.LegalName,
+		|	ItemList.LegalNameContract,
 		|	ItemList.Currency,
 		|	ItemList.Period";
 EndFunction

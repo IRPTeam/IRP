@@ -1407,6 +1407,7 @@ Function ExtractData_FromSI(BasisesTable, DataReceiver)
 		|	ItemList.SalesOrder AS SalesOrder,
 		|	ItemList.Ref.Partner AS Partner,
 		|	ItemList.Ref.LegalName AS LegalName,
+		|	ItemList.Ref.LegalNameContract AS LegalNameContract,
 		|	ItemList.Ref.PriceIncludeTax AS PriceIncludeTax,
 		|	ItemList.Ref.Agreement AS Agreement,
 		|	ItemList.Ref.ManagerSegment AS ManagerSegment,
@@ -1910,6 +1911,7 @@ Function ExtractData_FromPI(BasisesTable, DataReceiver)
 		|	ItemList.SalesOrder AS SalesOrder,
 		|	ItemList.Ref.Partner AS Partner,
 		|	ItemList.Ref.LegalName AS LegalName,
+		|	ItemList.Ref.LegalNameContract AS LegalNameContract,
 		|	ItemList.Ref.PriceIncludeTax AS PriceIncludeTax,
 		|	ItemList.Ref.Agreement AS Agreement,
 		|	ItemList.Ref.Currency AS Currency,
@@ -2802,6 +2804,7 @@ Function ExtractData_FromRSR(BasisesTable, DataReceiver)
 		|	ItemList.Ref AS RetailSalesReceipt,
 		|	ItemList.Ref.Partner AS Partner,
 		|	ItemList.Ref.LegalName AS LegalName,
+		|	ItemList.Ref.LegalNameContract AS LegalNameContract,
 		|	ItemList.Ref.PriceIncludeTax AS PriceIncludeTax,
 		|	ItemList.Ref.Agreement AS Agreement,
 		|	ItemList.Ref.ManagerSegment AS ManagerSegment,
@@ -5854,13 +5857,13 @@ EndProcedure
 
 Function GetSeperatorColumns(DocReceiverMetadata) Export
 	If DocReceiverMetadata = Metadata.Documents.SalesInvoice Then
-		Return "Company, Branch, Partner, Currency, Agreement, PriceIncludeTax, ManagerSegment, LegalName";
+		Return "Company, Branch, Partner, Currency, Agreement, PriceIncludeTax, ManagerSegment, LegalName, LegalNameContract";
 	ElsIf DocReceiverMetadata = Metadata.Documents.ShipmentConfirmation Then
-		Return "Company, Branch, Partner, LegalName, TransactionType";
+		Return "Company, Branch, Partner, LegalName, LegalNameContract, TransactionType";
 	ElsIf DocReceiverMetadata = Metadata.Documents.PurchaseOrder Then
 		Return "Company, Branch";
 	ElsIf DocReceiverMetadata = Metadata.Documents.PurchaseInvoice Then
-		Return "Company, Branch, Partner, LegalName, Agreement, Currency, PriceIncludeTax";
+		Return "Company, Branch, Partner, LegalName, LegalNameContract, Agreement, Currency, PriceIncludeTax";
 	ElsIf DocReceiverMetadata = Metadata.Documents.GoodsReceipt Then
 		Return "Company, Branch, Partner, LegalName, TransactionType";
 	ElsIf DocReceiverMetadata = Metadata.Documents.InventoryTransfer Then
@@ -5872,15 +5875,15 @@ Function GetSeperatorColumns(DocReceiverMetadata) Export
 	ElsIf DocReceiverMetadata = Metadata.Documents.StockAdjustmentAsWriteOff Then
 		Return "Company, Branch, Store";
 	ElsIf DocReceiverMetadata = Metadata.Documents.SalesReturn Then
-		Return "Company, Branch, Partner, LegalName, Agreement, Currency, PriceIncludeTax";
+		Return "Company, Branch, Partner, LegalName, LegalNameContract, Agreement, Currency, PriceIncludeTax";
 	ElsIf DocReceiverMetadata = Metadata.Documents.PurchaseReturn Then
-		Return "Company, Branch, Partner, LegalName, Agreement, Currency, PriceIncludeTax";
+		Return "Company, Branch, Partner, LegalName, LegalNameContract, Agreement, Currency, PriceIncludeTax";
 	ElsIf DocReceiverMetadata = Metadata.Documents.SalesReturnOrder Then
 		Return "Company, Branch, Partner, LegalName, Agreement, Currency, PriceIncludeTax";
 	ElsIf DocReceiverMetadata = Metadata.Documents.PurchaseReturnOrder Then
 		Return "Company, Branch, Partner, LegalName, Agreement, Currency, PriceIncludeTax";
 	ElsIf DocReceiverMetadata = Metadata.Documents.RetailReturnReceipt Then
-		Return "Company, Branch, Partner, LegalName, Agreement, Currency, PriceIncludeTax, RetailCustomer, UsePartnerTransactions";
+		Return "Company, Branch, Partner, LegalName, LegalNameContract, Agreement, Currency, PriceIncludeTax, RetailCustomer, UsePartnerTransactions";
 	EndIf;
 EndFunction	
 	
@@ -6121,7 +6124,8 @@ Function GetColumnNames_ItemList()
 	|RetailSalesReceipt,
 	|AdditionalAnalytic,
 	|RetailCustomer,
-	|UsePartnerTransactions";
+	|UsePartnerTransactions,
+	|LegalNameContract";
 EndFunction
 
 Function GetEmptyTable_ItemList()

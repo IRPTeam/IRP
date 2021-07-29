@@ -198,7 +198,8 @@ Function ItemList()
 		|	PurchaseReturnItemList.ProfitLossCenter AS ProfitLossCenter,
 		|	PurchaseReturnItemList.ExpenseType AS ExpenseType,
 		|	PurchaseReturnItemList.AdditionalAnalytic AS AdditionalAnalytic,
-		|	PurchaseReturnItemList.Ref.Branch AS Branch
+		|	PurchaseReturnItemList.Ref.Branch AS Branch,
+		|	PurchaseReturnItemList.Ref.LegalNameContract AS LegalNameContract
 		|INTO ItemList
 		|FROM
 		|	Document.PurchaseReturn.ItemList AS PurchaseReturnItemList
@@ -491,6 +492,7 @@ Function R5010B_ReconciliationStatement()
 		|	ItemList.Company AS Company,
 		|	ItemList.Branch AS Branch,
 		|	ItemList.LegalName AS LegalName,
+		|	ItemList.LegalNameContract AS LegalNameContract,
 		|	ItemList.Currency AS Currency,
 		|	- SUM(ItemList.Amount) AS Amount,
 		|	ItemList.Period
@@ -501,6 +503,7 @@ Function R5010B_ReconciliationStatement()
 		|	ItemList.Company,
 		|	ItemList.Branch,
 		|	ItemList.LegalName,
+		|	ItemList.LegalNameContract,
 		|	ItemList.Currency,
 		|	ItemList.Period";
 EndFunction

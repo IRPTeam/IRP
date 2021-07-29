@@ -213,7 +213,8 @@ Function ItemList()
 	|	SalesInvoiceItemList.UseShipmentConfirmation AS UseShipmentConfirmation,
 	|	SalesInvoiceItemList.Ref.IgnoreAdvances AS IgnoreAdvances,
 	|	SalesInvoiceItemList.Key,
-	|	SalesInvoiceItemList.Ref.Branch AS Branch
+	|	SalesInvoiceItemList.Ref.Branch AS Branch,
+	|	SalesInvoiceItemList.Ref.LegalNameContract AS LegalNameContract
 	|INTO ItemList
 	|FROM
 	|	Document.SalesInvoice.ItemList AS SalesInvoiceItemList
@@ -809,6 +810,7 @@ Function R5010B_ReconciliationStatement()
 		|	ItemList.Company,
 		|	ItemList.Branch,
 		|	ItemList.LegalName,
+		|	ItemList.LegalNameContract,
 		|	ItemList.Currency,
 		|	SUM(ItemList.Amount) AS Amount,
 		|	ItemList.Period
@@ -819,6 +821,7 @@ Function R5010B_ReconciliationStatement()
 		|	ItemList.Company,
 		|	ItemList.Branch,
 		|	ItemList.LegalName,
+		|	ItemList.LegalNameContract,
 		|	ItemList.Currency,
 		|	ItemList.Period";
 EndFunction

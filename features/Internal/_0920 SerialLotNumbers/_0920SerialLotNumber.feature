@@ -180,13 +180,13 @@ Scenario: _092002 check serial lot number in the Retail sales receipt
 		And I select "R2050 Retail sales" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document contains lines
-		| '$$RetailSalesReceipt092002$$'   | ''       | ''          | ''       | ''           | ''              | ''             | ''       | ''                   | ''         | ''                             | ''          | ''                  | ''        |
-		| 'Document registrations records' | ''       | ''          | ''       | ''           | ''              | ''             | ''       | ''                   | ''         | ''                             | ''          | ''                  | ''        |
-		| 'Register  "R2050 Retail sales"' | ''       | ''          | ''       | ''           | ''              | ''             | ''       | ''                   | ''         | ''                             | ''          | ''                  | ''        |
-		| ''                               | 'Period' | 'Resources' | ''       | ''           | ''              | 'Dimensions'   | ''       | ''                   | ''         | ''                             | ''          | ''                  | ''        |
-		| ''                               | ''       | 'Quantity'  | 'Amount' | 'Net amount' | 'Offers amount' | 'Company'      | 'Branch' | 'Profit loss center' | 'Store'    | 'Retail sales receipt'         | 'Item key'  | 'Serial lot number' | 'Row key' |
-		| ''                               | '*'      | '1'         | '400'    | '338,98'     | ''              | 'Main Company' | ''       | ''                   | 'Store 01' | '$$RetailSalesReceipt092002$$' | '38/Yellow' | '99098809009999'    | '*'       |
-		| ''                               | '*'      | '1'         | '650'    | '550,85'     | ''              | 'Main Company' | ''       | ''                   | 'Store 01' | '$$RetailSalesReceipt092002$$' | '38/18SD'   | ''                  | '*'       |
+		| '$$RetailSalesReceipt092002$$'   | ''       | ''          | ''       | ''           | ''              | ''             | ''        | ''         | ''                             | ''          | ''                  | ''        |
+		| 'Document registrations records' | ''       | ''          | ''       | ''           | ''              | ''             | ''        | ''         | ''                             | ''          | ''                  | ''        |
+		| 'Register  "R2050 Retail sales"' | ''       | ''          | ''       | ''           | ''              | ''             | ''        | ''         | ''                             | ''          | ''                  | ''        |
+		| ''                               | 'Period' | 'Resources' | ''       | ''           | ''              | 'Dimensions'   | ''        | ''         | ''                             | ''          | ''                  | ''        |
+		| ''                               | ''       | 'Quantity'  | 'Amount' | 'Net amount' | 'Offers amount' | 'Company'      | 'Branch'  | 'Store'    | 'Retail sales receipt'         | 'Item key'  | 'Serial lot number' | 'Row key' |
+		| ''                               | '*'      | '1'         | '400'    | '338,98'     | ''              | 'Main Company' | '*'       | 'Store 01' | '$$RetailSalesReceipt092002$$' | '38/Yellow' | '99098809009999'    | '*'       |
+		| ''                               | '*'      | '1'         | '650'    | '550,85'     | ''              | 'Main Company' | '*'       | 'Store 01' | '$$RetailSalesReceipt092002$$' | '38/18SD'   | ''                  | '*'       |
 	* Сhange the quantity and check that the quantity of the serial lot numbers matches the quantity in the document
 		And I activate "$$RetailSalesReceipt092002$$" window
 		And I go to line in "ItemList" table
@@ -238,14 +238,14 @@ Scenario: _092002 check serial lot number in the Retail sales receipt
 		And I select "R2050 Retail sales" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document contains lines
-			| '$$RetailSalesReceipt092002$$'   | ''       | ''          | ''       | ''           | ''              | ''             | ''              | ''              | ''         | ''                             | ''          | ''                  | ''        |
-			| 'Document registrations records' | ''       | ''          | ''       | ''           | ''              | ''             | ''              | ''              | ''         | ''                             | ''          | ''                  | ''        |
-			| 'Register  "R2050 Retail sales"' | ''       | ''          | ''       | ''           | ''              | ''             | ''              | ''              | ''         | ''                             | ''          | ''                  | ''        |
-			| ''                               | 'Period' | 'Resources' | ''       | ''           | ''              | 'Dimensions'   | ''              | ''              | ''         | ''                             | ''          | ''                  | ''        |
-			| ''                               | ''       | 'Quantity'  | 'Amount' | 'Net amount' | 'Offers amount' | 'Company'      | 'Branch'        | 'Profit loss center' | 'Store'    | 'Retail sales receipt'         | 'Item key'  | 'Serial lot number' | 'Row key' |
-			| ''                               | '*'      | '1'         | '400'    | '338,98'     | ''              | 'Main Company' | ''              | ''              | 'Store 01' | '$$RetailSalesReceipt092002$$' | '38/Yellow' | '99098809009999'    | '*'       |
-			| ''                               | '*'      | '1'         | '650'    | '550,85'     | ''              | 'Main Company' | ''              | ''              | 'Store 01' | '$$RetailSalesReceipt092002$$' | '38/18SD'   | ''                  | '*'       |
-			| ''                               | '*'      | '2'         | '800'    | '677,97'     | ''              | 'Main Company' | ''              | ''              | 'Store 01' | '$$RetailSalesReceipt092002$$' | '38/Yellow' | '99098809009998'    | '*'       |
+			| '$$RetailSalesReceipt092002$$'   | ''       | ''          | ''       | ''           | ''              | ''             | ''       | ''         | ''                             | ''          | ''                  | ''        |
+			| 'Document registrations records' | ''       | ''          | ''       | ''           | ''              | ''             | ''       | ''         | ''                             | ''          | ''                  | ''        |
+			| 'Register  "R2050 Retail sales"' | ''       | ''          | ''       | ''           | ''              | ''             | ''       | ''         | ''                             | ''          | ''                  | ''        |
+			| ''                               | 'Period' | 'Resources' | ''       | ''           | ''              | 'Dimensions'   | ''       | ''         | ''                             | ''          | ''                  | ''        |
+			| ''                               | ''       | 'Quantity'  | 'Amount' | 'Net amount' | 'Offers amount' | 'Company'      | 'Branch' | 'Store'    | 'Retail sales receipt'         | 'Item key'  | 'Serial lot number' | 'Row key' |
+			| ''                               | '*'      | '1'         | '400'    | '338,98'     | ''              | 'Main Company' | ''       | 'Store 01' | '$$RetailSalesReceipt092002$$' | '38/Yellow' | '99098809009999'    | '*'       |
+			| ''                               | '*'      | '1'         | '650'    | '550,85'     | ''              | 'Main Company' | ''       | 'Store 01' | '$$RetailSalesReceipt092002$$' | '38/18SD'   | ''                  | '*'       |
+			| ''                               | '*'      | '2'         | '800'    | '677,97'     | ''              | 'Main Company' | ''       | 'Store 01' | '$$RetailSalesReceipt092002$$' | '38/Yellow' | '99098809009998'    | '*'       |
 	* Check the message to the user when the serial number was not filled in
 		And I activate "$$RetailSalesReceipt092002$$" window
 		And in the table "ItemList" I click the button named "ItemListAdd"
@@ -317,15 +317,15 @@ Scenario: _092002 check serial lot number in the Retail sales receipt
 	And I select "R2050 Retail sales" exact value from "Register" drop-down list
 	And I click "Generate report" button
 	And "ResultTable" spreadsheet document contains lines:
-		| '$$RetailSalesReceipt092002$$'   | ''       | ''          | ''       | ''           | ''              | ''             | ''       | ''                   | ''         | ''                             | ''          | ''                  | ''        |
-		| 'Document registrations records' | ''       | ''          | ''       | ''           | ''              | ''             | ''       | ''                   | ''         | ''                             | ''          | ''                  | ''        |
-		| 'Register  "R2050 Retail sales"' | ''       | ''          | ''       | ''           | ''              | ''             | ''       | ''                   | ''         | ''                             | ''          | ''                  | ''        |
-		| ''                               | 'Period' | 'Resources' | ''       | ''           | ''              | 'Dimensions'   | ''       | ''                   | ''         | ''                             | ''          | ''                  | ''        |
-		| ''                               | ''       | 'Quantity'  | 'Amount' | 'Net amount' | 'Offers amount' | 'Company'      | 'Branch' | 'Profit loss center' | 'Store'    | 'Retail sales receipt'         | 'Item key'  | 'Serial lot number' | 'Row key' |
-		| ''                               | '*'      | '1'         | '400'    | '338,98'     | ''              | 'Main Company' | ''       | ''                   | 'Store 01' | '$$RetailSalesReceipt092002$$' | '38/Yellow' | '99098809009999'    | '*'       |
-		| ''                               | '*'      | '1'         | '650'    | '550,85'     | ''              | 'Main Company' | ''       | ''                   | 'Store 01' | '$$RetailSalesReceipt092002$$' | '38/18SD'   | ''                  | '*'       |
-		| ''                               | '*'      | '1'         | '700'    | '593,22'     | ''              | 'Main Company' | ''       | ''                   | 'Store 01' | '$$RetailSalesReceipt092002$$' | '37/18SD'   | ''                  | '*'       |
-		| ''                               | '*'      | '2'         | '800'    | '677,97'     | ''              | 'Main Company' | ''       | ''                   | 'Store 01' | '$$RetailSalesReceipt092002$$' | '38/Yellow' | '99098809009998'    | '*'       |
+		| '$$RetailSalesReceipt092002$$'   | ''       | ''          | ''       | ''           | ''              | ''             | ''       | ''         | ''                             | ''          | ''                  | ''        |
+		| 'Document registrations records' | ''       | ''          | ''       | ''           | ''              | ''             | ''       | ''         | ''                             | ''          | ''                  | ''        |
+		| 'Register  "R2050 Retail sales"' | ''       | ''          | ''       | ''           | ''              | ''             | ''       | ''         | ''                             | ''          | ''                  | ''        |
+		| ''                               | 'Period' | 'Resources' | ''       | ''           | ''              | 'Dimensions'   | ''       | ''         | ''                             | ''          | ''                  | ''        |
+		| ''                               | ''       | 'Quantity'  | 'Amount' | 'Net amount' | 'Offers amount' | 'Company'      | 'Branch' | 'Store'    | 'Retail sales receipt'         | 'Item key'  | 'Serial lot number' | 'Row key' |
+		| ''                               | '*'      | '1'         | '400'    | '338,98'     | ''              | 'Main Company' | ''       | 'Store 01' | '$$RetailSalesReceipt092002$$' | '38/Yellow' | '99098809009999'    | '*'       |
+		| ''                               | '*'      | '1'         | '650'    | '550,85'     | ''              | 'Main Company' | ''       | 'Store 01' | '$$RetailSalesReceipt092002$$' | '38/18SD'   | ''                  | '*'       |
+		| ''                               | '*'      | '1'         | '700'    | '593,22'     | ''              | 'Main Company' | ''       | 'Store 01' | '$$RetailSalesReceipt092002$$' | '37/18SD'   | ''                  | '*'       |
+		| ''                               | '*'      | '2'         | '800'    | '677,97'     | ''              | 'Main Company' | ''       | 'Store 01' | '$$RetailSalesReceipt092002$$' | '38/Yellow' | '99098809009998'    | '*'       |
 	And I close all client application windows
 	
 
@@ -375,15 +375,15 @@ Scenario: _092003 check serial lot number in the Retail return receipt
 		And I select "R2050 Retail sales" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-			| '$$RetailReturnReceipt092003$$'  | ''       | ''          | ''       | ''           | ''              | ''             | ''        | ''                   | ''         | ''                             | ''          | ''                  | ''        |
-			| 'Document registrations records' | ''       | ''          | ''       | ''           | ''              | ''             | ''        | ''                   | ''         | ''                             | ''          | ''                  | ''        |
-			| 'Register  "R2050 Retail sales"' | ''       | ''          | ''       | ''           | ''              | ''             | ''        | ''                   | ''         | ''                             | ''          | ''                  | ''        |
-			| ''                               | 'Period' | 'Resources' | ''       | ''           | ''              | 'Dimensions'   | ''        | ''                   | ''         | ''                             | ''          | ''                  | ''        |
-			| ''                               | ''       | 'Quantity'  | 'Amount' | 'Net amount' | 'Offers amount' | 'Company'      | 'Branch'  | 'Profit loss center' | 'Store'    | 'Retail sales receipt'         | 'Item key'  | 'Serial lot number' | 'Row key' |
-			| ''                               | '*'      | '-2'        | '-800'   | '-677,97'    | ''              | 'Main Company' | 'Shop 01' | ''                   | 'Store 01' | '$$RetailSalesReceipt092002$$' | '38/Yellow' | '99098809009998'    | '*'       |
-			| ''                               | '*'      | '-1'        | '-400'   | '-338,98'    | ''              | 'Main Company' | 'Shop 01' | ''                   | 'Store 01' | '$$RetailSalesReceipt092002$$' | '38/Yellow' | '99098809009999'    | '*'       |
-			| ''                               | '*'      | '-1'        | '650'    | '550,85'     | ''              | 'Main Company' | 'Shop 01' | ''                   | 'Store 01' | '$$RetailSalesReceipt092002$$' | '38/18SD'   | ''                  | '*'       |
-			| ''                               | '*'      | '-1'        | '700'    | '593,22'     | ''              | 'Main Company' | 'Shop 01' | ''                   | 'Store 01' | '$$RetailSalesReceipt092002$$' | '37/18SD'   | ''                  | '*'       |
+			| '$$RetailReturnReceipt092003$$'  | ''       | ''          | ''       | ''           | ''              | ''             | ''        | ''         | ''                             | ''          | ''                  | ''        |
+			| 'Document registrations records' | ''       | ''          | ''       | ''           | ''              | ''             | ''        | ''         | ''                             | ''          | ''                  | ''        |
+			| 'Register  "R2050 Retail sales"' | ''       | ''          | ''       | ''           | ''              | ''             | ''        | ''         | ''                             | ''          | ''                  | ''        |
+			| ''                               | 'Period' | 'Resources' | ''       | ''           | ''              | 'Dimensions'   | ''        | ''         | ''                             | ''          | ''                  | ''        |
+			| ''                               | ''       | 'Quantity'  | 'Amount' | 'Net amount' | 'Offers amount' | 'Company'      | 'Branch'  | 'Store'    | 'Retail sales receipt'         | 'Item key'  | 'Serial lot number' | 'Row key' |
+			| ''                               | '*'      | '-2'        | '-800'   | '-677,97'    | ''              | 'Main Company' | 'Shop 01' | 'Store 01' | '$$RetailSalesReceipt092002$$' | '38/Yellow' | '99098809009998'    | '*'       |
+			| ''                               | '*'      | '-1'        | '-400'   | '-338,98'    | ''              | 'Main Company' | 'Shop 01' | 'Store 01' | '$$RetailSalesReceipt092002$$' | '38/Yellow' | '99098809009999'    | '*'       |
+			| ''                               | '*'      | '-1'        | '650'    | '550,85'     | ''              | 'Main Company' | 'Shop 01' | 'Store 01' | '$$RetailSalesReceipt092002$$' | '38/18SD'   | ''                  | '*'       |
+			| ''                               | '*'      | '-1'        | '700'    | '593,22'     | ''              | 'Main Company' | 'Shop 01' | 'Store 01' | '$$RetailSalesReceipt092002$$' | '37/18SD'   | ''                  | '*'       |
 	* Сhange the quantity and check that the quantity of the serial lot numbers matches the quantity in the document
 		And I activate "$$RetailReturnReceipt092003$$" window
 		And I go to line in "ItemList" table
@@ -431,14 +431,14 @@ Scenario: _092003 check serial lot number in the Retail return receipt
 		And I select "R2050 Retail sales" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-			| '$$RetailReturnReceipt092003$$'  | ''       | ''          | ''       | ''           | ''              | ''             | ''        | ''                   | ''         | ''                             | ''          | ''                  | ''        |
-			| 'Document registrations records' | ''       | ''          | ''       | ''           | ''              | ''             | ''        | ''                   | ''         | ''                             | ''          | ''                  | ''        |
-			| 'Register  "R2050 Retail sales"' | ''       | ''          | ''       | ''           | ''              | ''             | ''        | ''                   | ''         | ''                             | ''          | ''                  | ''        |
-			| ''                               | 'Period' | 'Resources' | ''       | ''           | ''              | 'Dimensions'   | ''        | ''                   | ''         | ''                             | ''          | ''                  | ''        |
-			| ''                               | ''       | 'Quantity'  | 'Amount' | 'Net amount' | 'Offers amount' | 'Company'      | 'Branch'  | 'Profit loss center' | 'Store'    | 'Retail sales receipt'         | 'Item key'  | 'Serial lot number' | 'Row key' |
-			| ''                               | '*'      | '-1'        | '-400'   | '-338,98'    | ''              | 'Main Company' | 'Shop 01' | ''                   | 'Store 01' | '$$RetailSalesReceipt092002$$' | '38/Yellow' | '99098809009998'    | '*'       |
-			| ''                               | '*'      | '-1'        | '650'    | '550,85'     | ''              | 'Main Company' | 'Shop 01' | ''                   | 'Store 01' | '$$RetailSalesReceipt092002$$' | '38/18SD'   | ''                  | '*'       |
-			| ''                               | '*'      | '-1'        | '700'    | '593,22'     | ''              | 'Main Company' | 'Shop 01' | ''                   | 'Store 01' | '$$RetailSalesReceipt092002$$' | '37/18SD'   | ''                  | '*'       |
+			| '$$RetailReturnReceipt092003$$'  | ''       | ''          | ''       | ''           | ''              | ''             | ''        | ''         | ''                             | ''          | ''                  | ''        |
+			| 'Document registrations records' | ''       | ''          | ''       | ''           | ''              | ''             | ''        | ''         | ''                             | ''          | ''                  | ''        |
+			| 'Register  "R2050 Retail sales"' | ''       | ''          | ''       | ''           | ''              | ''             | ''        | ''         | ''                             | ''          | ''                  | ''        |
+			| ''                               | 'Period' | 'Resources' | ''       | ''           | ''              | 'Dimensions'   | ''        | ''         | ''                             | ''          | ''                  | ''        |
+			| ''                               | ''       | 'Quantity'  | 'Amount' | 'Net amount' | 'Offers amount' | 'Company'      | 'Branch'  | 'Store'    | 'Retail sales receipt'         | 'Item key'  | 'Serial lot number' | 'Row key' |
+			| ''                               | '*'      | '-1'        | '-400'   | '-338,98'    | ''              | 'Main Company' | 'Shop 01' | 'Store 01' | '$$RetailSalesReceipt092002$$' | '38/Yellow' | '99098809009998'    | '*'       |
+			| ''                               | '*'      | '-1'        | '650'    | '550,85'     | ''              | 'Main Company' | 'Shop 01' | 'Store 01' | '$$RetailSalesReceipt092002$$' | '38/18SD'   | ''                  | '*'       |
+			| ''                               | '*'      | '-1'        | '700'    | '593,22'     | ''              | 'Main Company' | 'Shop 01' | 'Store 01' | '$$RetailSalesReceipt092002$$' | '37/18SD'   | ''                  | '*'       |
 	* Check the message to the user when the serial number was not filled in
 		And I activate "$$RetailReturnReceipt092003$$" window
 		And I click the button named "Add"
@@ -592,12 +592,12 @@ Scenario: _092004 check serial lot number in the Sales invoice
 		And I select "R4014 Serial lot numbers" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-			| '$$SalesInvoice092004$$'               | ''            | ''       | ''          | ''             | ''          | ''                  |
-			| 'Document registrations records'       | ''            | ''       | ''          | ''             | ''          | ''                  |
-			| 'Register  "R4014 Serial lot numbers"' | ''            | ''       | ''          | ''             | ''          | ''                  |
-			| ''                                     | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''          | ''                  |
-			| ''                                     | ''            | ''       | 'Quantity'  | 'Company'      | 'Item key'  | 'Serial lot number' |
-			| ''                                     | 'Expense'     | '*'      | '1'         | 'Main Company' | '38/Yellow' | '99098809009910'    |
+			| '$$SalesInvoice092004$$'               | ''            | ''       | ''          | ''             | ''       | ''          | ''                  |
+			| 'Document registrations records'       | ''            | ''       | ''          | ''             | ''       | ''          | ''                  |
+			| 'Register  "R4014 Serial lot numbers"' | ''            | ''       | ''          | ''             | ''       | ''          | ''                  |
+			| ''                                     | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''       | ''          | ''                  |
+			| ''                                     | ''            | ''       | 'Quantity'  | 'Company'      | 'Branch' | 'Item key'  | 'Serial lot number' |
+			| ''                                     | 'Expense'     | '*'      | '1'         | 'Main Company' | '*'      | '38/Yellow' | '99098809009910'    |
 		And I close current window
 	* Сhange the quantity and check that the quantity of the serial lot numbers matches the quantity in the document
 		And I activate "$$SalesInvoice092004$$" window
@@ -654,13 +654,13 @@ Scenario: _092004 check serial lot number in the Sales invoice
 		And I select "R4014 Serial lot numbers" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-			| '$$SalesInvoice092004$$'               | ''            | ''       | ''          | ''             | ''          | ''                  |
-			| 'Document registrations records'       | ''            | ''       | ''          | ''             | ''          | ''                  |
-			| 'Register  "R4014 Serial lot numbers"' | ''            | ''       | ''          | ''             | ''          | ''                  |
-			| ''                                     | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''          | ''                  |
-			| ''                                     | ''            | ''       | 'Quantity'  | 'Company'      | 'Item key'  | 'Serial lot number' |
-			| ''                                     | 'Expense'     | '*'      | '1'         | 'Main Company' | '38/Yellow' | '99098809009910'    |
-			| ''                                     | 'Expense'     | '*'      | '2'         | 'Main Company' | '38/Yellow' | '99098809009911'    |
+			| '$$SalesInvoice092004$$'               | ''            | ''       | ''          | ''             | ''       | ''          | ''                  |
+			| 'Document registrations records'       | ''            | ''       | ''          | ''             | ''       | ''          | ''                  |
+			| 'Register  "R4014 Serial lot numbers"' | ''            | ''       | ''          | ''             | ''       | ''          | ''                  |
+			| ''                                     | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''       | ''          | ''                  |
+			| ''                                     | ''            | ''       | 'Quantity'  | 'Company'      | 'Branch' | 'Item key'  | 'Serial lot number' |
+			| ''                                     | 'Expense'     | '*'      | '1'         | 'Main Company' | '*'      | '38/Yellow' | '99098809009910'    |
+			| ''                                     | 'Expense'     | '*'      | '2'         | 'Main Company' | '*'      | '38/Yellow' | '99098809009911'    |
 	* Check the message to the user when the serial number was not filled in
 		And I activate "$$SalesInvoice092004$$" window
 		And in the table "ItemList" I click the button named "ItemListAdd"
@@ -760,13 +760,13 @@ Scenario: _092005 check serial lot number in the Sales return
 		And I select "R4014 Serial lot numbers" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-			| '$$SalesReturn092005$$'                | ''            | ''       | ''          | ''             | ''          | ''                  |
-			| 'Document registrations records'       | ''            | ''       | ''          | ''             | ''          | ''                  |
-			| 'Register  "R4014 Serial lot numbers"' | ''            | ''       | ''          | ''             | ''          | ''                  |
-			| ''                                     | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''          | ''                  |
-			| ''                                     | ''            | ''       | 'Quantity'  | 'Company'      | 'Item key'  | 'Serial lot number' |
-			| ''                                     | 'Receipt'     | '*'      | '1'         | 'Main Company' | '38/Yellow' | '99098809009910'    |
-			| ''                                     | 'Receipt'     | '*'      | '2'         | 'Main Company' | '38/Yellow' | '99098809009911'    |
+			| '$$SalesReturn092005$$'                | ''            | ''       | ''          | ''             | ''       | ''          | ''                  |
+			| 'Document registrations records'       | ''            | ''       | ''          | ''             | ''       | ''          | ''                  |
+			| 'Register  "R4014 Serial lot numbers"' | ''            | ''       | ''          | ''             | ''       | ''          | ''                  |
+			| ''                                     | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''       | ''          | ''                  |
+			| ''                                     | ''            | ''       | 'Quantity'  | 'Company'      | 'Branch' | 'Item key'  | 'Serial lot number' |
+			| ''                                     | 'Receipt'     | '*'      | '1'         | 'Main Company' | '*'      | '38/Yellow' | '99098809009910'    |
+			| ''                                     | 'Receipt'     | '*'      | '2'         | 'Main Company' | '*'      | '38/Yellow' | '99098809009911'    |
 		And I close current window
 	* Сhange the quantity and check that the quantity of the serial lot numbers matches the quantity in the document
 		And I activate "$$SalesReturn092005$$" window
@@ -809,12 +809,12 @@ Scenario: _092005 check serial lot number in the Sales return
 		And I select "R4014 Serial lot numbers" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-			| '$$SalesReturn092005$$'                | ''            | ''       | ''          | ''             | ''          | ''                  |
-			| 'Document registrations records'       | ''            | ''       | ''          | ''             | ''          | ''                  |
-			| 'Register  "R4014 Serial lot numbers"' | ''            | ''       | ''          | ''             | ''          | ''                  |
-			| ''                                     | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''          | ''                  |
-			| ''                                     | ''            | ''       | 'Quantity'  | 'Company'      | 'Item key'  | 'Serial lot number' |
-			| ''                                     | 'Receipt'     | '*'      | '1'         | 'Main Company' | '38/Yellow' | '99098809009911'    |
+			| '$$SalesReturn092005$$'                | ''            | ''       | ''          | ''             | ''       | ''          | ''                  |
+			| 'Document registrations records'       | ''            | ''       | ''          | ''             | ''       | ''          | ''                  |
+			| 'Register  "R4014 Serial lot numbers"' | ''            | ''       | ''          | ''             | ''       | ''          | ''                  |
+			| ''                                     | 'Record type' | 'Period' | 'Resources' | 'Dimensions'   | ''       | ''          | ''                  |
+			| ''                                     | ''            | ''       | 'Quantity'  | 'Company'      | 'Branch' | 'Item key'  | 'Serial lot number' |
+			| ''                                     | 'Receipt'     | '*'      | '1'         | 'Main Company' | '*'      | '38/Yellow' | '99098809009911'    |
 	* Check the message to the user when the serial number was not filled in
 		And I activate "$$SalesReturn092005$$" window
 		And I click the button named "Add"
@@ -964,12 +964,12 @@ Scenario: _092006 check serial lot number in the PurchaseInvoice
 		And I select "R4014 Serial lot numbers" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-			| '$$PurchaseInvoice092006$$'            | ''            | ''                              | ''          | ''             | ''          | ''                  |
-			| 'Document registrations records'       | ''            | ''                              | ''          | ''             | ''          | ''                  |
-			| 'Register  "R4014 Serial lot numbers"' | ''            | ''                              | ''          | ''             | ''          | ''                  |
-			| ''                                     | 'Record type' | 'Period'                        | 'Resources' | 'Dimensions'   | ''          | ''                  |
-			| ''                                     | ''            | ''                              | 'Quantity'  | 'Company'      | 'Item key'  | 'Serial lot number' |
-			| ''                                     | 'Receipt'     | '$$DatePurchaseInvoice092006$$' | '1'         | 'Main Company' | '38/Yellow' | '99098809009999'    |
+			| '$$PurchaseInvoice092006$$'            | ''            | ''                              | ''          | ''             | ''       | ''          | ''                  |
+			| 'Document registrations records'       | ''            | ''                              | ''          | ''             | ''       | ''          | ''                  |
+			| 'Register  "R4014 Serial lot numbers"' | ''            | ''                              | ''          | ''             | ''       | ''          | ''                  |
+			| ''                                     | 'Record type' | 'Period'                        | 'Resources' | 'Dimensions'   | ''       | ''          | ''                  |
+			| ''                                     | ''            | ''                              | 'Quantity'  | 'Company'      | 'Branch' | 'Item key'  | 'Serial lot number' |
+			| ''                                     | 'Receipt'     | '$$DatePurchaseInvoice092006$$' | '1'         | 'Main Company' | '*'      | '38/Yellow' | '99098809009999'    |
 		And I close all client application windows
 		
 	
@@ -1111,13 +1111,13 @@ Scenario: _0920061 check serial lot number controls in the PurchaseInvoice
 		And I select "R4014 Serial lot numbers" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-			| '$$PurchaseInvoice0920061$$'            | ''            | ''                              | ''          | ''             | ''          | ''                  |
-			| 'Document registrations records'       | ''            | ''                              | ''          | ''             | ''          | ''                  |
-			| 'Register  "R4014 Serial lot numbers"' | ''            | ''                              | ''          | ''             | ''          | ''                  |
-			| ''                                     | 'Record type' | 'Period'                        | 'Resources' | 'Dimensions'   | ''          | ''                  |
-			| ''                                     | ''            | ''                              | 'Quantity'  | 'Company'      | 'Item key'  | 'Serial lot number' |
-			| ''                                     | 'Receipt'     | '$$DatePurchaseInvoice0920061$$' | '1'         | 'Main Company' | '38/Yellow' | '99098809009999'    |
-			| ''                                     | 'Receipt'     | '$$DatePurchaseInvoice0920061$$' | '2'         | 'Main Company' | '38/Yellow' | '99098809009908'    |
+			| '$$PurchaseInvoice0920061$$'           | ''            | ''                               | ''          | ''             | ''       | ''          | ''                  |
+			| 'Document registrations records'       | ''            | ''                               | ''          | ''             | ''       | ''          | ''                  |
+			| 'Register  "R4014 Serial lot numbers"' | ''            | ''                               | ''          | ''             | ''       | ''          | ''                  |
+			| ''                                     | 'Record type' | 'Period'                         | 'Resources' | 'Dimensions'   | ''       | ''          | ''                  |
+			| ''                                     | ''            | ''                               | 'Quantity'  | 'Company'      | 'Branch' | 'Item key'  | 'Serial lot number' |
+			| ''                                     | 'Receipt'     | '$$DatePurchaseInvoice0920061$$' | '1'         | 'Main Company' | '*'      | '38/Yellow' | '99098809009999'    |
+			| ''                                     | 'Receipt'     | '$$DatePurchaseInvoice0920061$$' | '2'         | 'Main Company' | '*'      | '38/Yellow' | '99098809009908'    |
 		And I close current window
 	* Check the message to the user when the serial number was not filled in
 		And I activate "$$PurchaseInvoice0920061$$" window
@@ -1269,12 +1269,12 @@ Scenario: _092007 check serial lot number in the PurchaseReturn
 		And I select "R4014 Serial lot numbers" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-			| '$$PurchaseReturn092007$$'            | ''            | ''                              | ''          | ''             | ''          | ''                  |
-			| 'Document registrations records'       | ''            | ''                              | ''          | ''             | ''          | ''                  |
-			| 'Register  "R4014 Serial lot numbers"' | ''            | ''                              | ''          | ''             | ''          | ''                  |
-			| ''                                     | 'Record type' | 'Period'                        | 'Resources' | 'Dimensions'   | ''          | ''                  |
-			| ''                                     | ''            | ''                              | 'Quantity'  | 'Company'      | 'Item key'  | 'Serial lot number' |
-			| ''                                     | 'Expense'     | '$$DatePurchaseReturn092007$$' | '1'         | 'Main Company' | '38/Yellow' | '99098809009999'    |
+			| '$$PurchaseReturn092007$$'             | ''            | ''                             | ''          | ''             | ''       | ''          | ''                  |
+			| 'Document registrations records'       | ''            | ''                             | ''          | ''             | ''       | ''          | ''                  |
+			| 'Register  "R4014 Serial lot numbers"' | ''            | ''                             | ''          | ''             | ''       | ''          | ''                  |
+			| ''                                     | 'Record type' | 'Period'                       | 'Resources' | 'Dimensions'   | ''       | ''          | ''                  |
+			| ''                                     | ''            | ''                             | 'Quantity'  | 'Company'      | 'Branch' | 'Item key'  | 'Serial lot number' |
+			| ''                                     | 'Expense'     | '$$DatePurchaseReturn092007$$' | '1'         | 'Main Company' | '*'      | '38/Yellow' | '99098809009999'    |
 		And I close all client application windows
 		
 
@@ -1422,13 +1422,13 @@ Scenario: _0920071 check serial lot number controls in the PurchaseReturn
 		And I select "R4014 Serial lot numbers" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-			| '$$PurchaseReturn0920071$$'             | ''            | ''                             | ''          | ''             | ''          | ''                  |
-			| 'Document registrations records'       | ''            | ''                             | ''          | ''             | ''          | ''                  |
-			| 'Register  "R4014 Serial lot numbers"' | ''            | ''                             | ''          | ''             | ''          | ''                  |
-			| ''                                     | 'Record type' | 'Period'                       | 'Resources' | 'Dimensions'   | ''          | ''                  |
-			| ''                                     | ''            | ''                             | 'Quantity'  | 'Company'      | 'Item key'  | 'Serial lot number' |
-			| ''                                     | 'Expense'     | '$$DatePurchaseReturn0920071$$' | '1'         | 'Main Company' | '38/Yellow' | '99098809009999'    |
-			| ''                                     | 'Expense'     | '$$DatePurchaseReturn0920071$$' | '2'         | 'Main Company' | '38/Yellow' | '99098809009008'    |
+			| '$$PurchaseReturn0920071$$'            | ''            | ''                              | ''          | ''             | ''       | ''          | ''                  |
+			| 'Document registrations records'       | ''            | ''                              | ''          | ''             | ''       | ''          | ''                  |
+			| 'Register  "R4014 Serial lot numbers"' | ''            | ''                              | ''          | ''             | ''       | ''          | ''                  |
+			| ''                                     | 'Record type' | 'Period'                        | 'Resources' | 'Dimensions'   | ''       | ''          | ''                  |
+			| ''                                     | ''            | ''                              | 'Quantity'  | 'Company'      | 'Branch' | 'Item key'  | 'Serial lot number' |
+			| ''                                     | 'Expense'     | '$$DatePurchaseReturn0920071$$' | '1'         | 'Main Company' | '*'      | '38/Yellow' | '99098809009999'    |
+			| ''                                     | 'Expense'     | '$$DatePurchaseReturn0920071$$' | '2'         | 'Main Company' | '*'      | '38/Yellow' | '99098809009008'    |
 		And I close current window
 	* Check the message to the user when the serial number was not filled in
 		And I activate "$$PurchaseReturn0920071$$" window
@@ -1571,12 +1571,12 @@ Scenario: _092008 check serial lot number in the Opening entry
 		And I select "R4014 Serial lot numbers" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-			| '$$OpeningEntry092008$$'               | ''            | ''                           | ''          | ''             | ''          | ''                  |
-			| 'Document registrations records'       | ''            | ''                           | ''          | ''             | ''          | ''                  |
-			| 'Register  "R4014 Serial lot numbers"' | ''            | ''                           | ''          | ''             | ''          | ''                  |
-			| ''                                     | 'Record type' | 'Period'                     | 'Resources' | 'Dimensions'   | ''          | ''                  |
-			| ''                                     | ''            | ''                           | 'Quantity'  | 'Company'      | 'Item key'  | 'Serial lot number' |
-			| ''                                     | 'Receipt'     | '$$DateOpeningEntry092008$$' | '1'         | 'Main Company' | '38/Yellow' | '99098809009999'                |
+			| '$$OpeningEntry092008$$'               | ''            | ''                           | ''          | ''             | ''       | ''          | ''                  |
+			| 'Document registrations records'       | ''            | ''                           | ''          | ''             | ''       | ''          | ''                  |
+			| 'Register  "R4014 Serial lot numbers"' | ''            | ''                           | ''          | ''             | ''       | ''          | ''                  |
+			| ''                                     | 'Record type' | 'Period'                     | 'Resources' | 'Dimensions'   | ''       | ''          | ''                  |
+			| ''                                     | ''            | ''                           | 'Quantity'  | 'Company'      | 'Branch' | 'Item key'  | 'Serial lot number' |
+			| ''                                     | 'Receipt'     | '$$DateOpeningEntry092008$$' | '1'         | 'Main Company' | '*'      | '38/Yellow' | '99098809009999'    |
 		And I close current window
 	* Clear post Opening entry and check movements
 		And I activate "$$OpeningEntry092008$$" window			
@@ -1599,12 +1599,12 @@ Scenario: _092008 check serial lot number in the Opening entry
 		And I select "R4014 Serial lot numbers" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-			| '$$OpeningEntry092008$$'               | ''            | ''                           | ''          | ''             | ''          | ''                  |
-			| 'Document registrations records'       | ''            | ''                           | ''          | ''             | ''          | ''                  |
-			| 'Register  "R4014 Serial lot numbers"' | ''            | ''                           | ''          | ''             | ''          | ''                  |
-			| ''                                     | 'Record type' | 'Period'                     | 'Resources' | 'Dimensions'   | ''          | ''                  |
-			| ''                                     | ''            | ''                           | 'Quantity'  | 'Company'      | 'Item key'  | 'Serial lot number' |
-			| ''                                     | 'Receipt'     | '$$DateOpeningEntry092008$$' | '5'         | 'Main Company' | '38/Yellow' | '99098809009999'                |
+			| '$$OpeningEntry092008$$'               | ''            | ''                           | ''          | ''             | ''       | ''          | ''                  |
+			| 'Document registrations records'       | ''            | ''                           | ''          | ''             | ''       | ''          | ''                  |
+			| 'Register  "R4014 Serial lot numbers"' | ''            | ''                           | ''          | ''             | ''       | ''          | ''                  |
+			| ''                                     | 'Record type' | 'Period'                     | 'Resources' | 'Dimensions'   | ''       | ''          | ''                  |
+			| ''                                     | ''            | ''                           | 'Quantity'  | 'Company'      | 'Branch' | 'Item key'  | 'Serial lot number' |
+			| ''                                     | 'Receipt'     | '$$DateOpeningEntry092008$$' | '5'         | 'Main Company' | '*'      | '38/Yellow' | '99098809009999'    |
 		And I close current window
 	* Add one more string with the same item and different Serial lot number
 		And I activate "$$OpeningEntry092008$$" window
@@ -1639,13 +1639,13 @@ Scenario: _092008 check serial lot number in the Opening entry
 		And I select "R4014 Serial lot numbers" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-			| '$$OpeningEntry092008$$'               | ''            | ''                           | ''          | ''             | ''          | ''                  |
-			| 'Document registrations records'       | ''            | ''                           | ''          | ''             | ''          | ''                  |
-			| 'Register  "R4014 Serial lot numbers"' | ''            | ''                           | ''          | ''             | ''          | ''                  |
-			| ''                                     | 'Record type' | 'Period'                     | 'Resources' | 'Dimensions'   | ''          | ''                  |
-			| ''                                     | ''            | ''                           | 'Quantity'  | 'Company'      | 'Item key'  | 'Serial lot number' |
-			| ''                                     | 'Receipt'     | '$$DateOpeningEntry092008$$' | '5'         | 'Main Company' | '38/Yellow' | '99098809009999'    |
-			| ''                                     | 'Receipt'     | '$$DateOpeningEntry092008$$' | '8'         | 'Main Company' | '38/Yellow' | '99098809009910'    |
+			| '$$OpeningEntry092008$$'               | ''            | ''                           | ''          | ''             | ''       | ''          | ''                  |
+			| 'Document registrations records'       | ''            | ''                           | ''          | ''             | ''       | ''          | ''                  |
+			| 'Register  "R4014 Serial lot numbers"' | ''            | ''                           | ''          | ''             | ''       | ''          | ''                  |
+			| ''                                     | 'Record type' | 'Period'                     | 'Resources' | 'Dimensions'   | ''       | ''          | ''                  |
+			| ''                                     | ''            | ''                           | 'Quantity'  | 'Company'      | 'Branch' | 'Item key'  | 'Serial lot number' |
+			| ''                                     | 'Receipt'     | '$$DateOpeningEntry092008$$' | '5'         | 'Main Company' | '*'      | '38/Yellow' | '99098809009999'    |
+			| ''                                     | 'Receipt'     | '$$DateOpeningEntry092008$$' | '8'         | 'Main Company' | '*'      | '38/Yellow' | '99098809009910'    |
 		And I close all client application windows
 
 
@@ -1745,12 +1745,12 @@ Scenario: _092009 check serial lot number in the Stock adjustment as surplus
 		And I select "R4014 Serial lot numbers" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-			| '$$StockAdjustmentAsSurplus092009$$'            | ''            | ''                              | ''          | ''             | ''          | ''                  |
-			| 'Document registrations records'       | ''            | ''                              | ''          | ''             | ''          | ''                  |
-			| 'Register  "R4014 Serial lot numbers"' | ''            | ''                              | ''          | ''             | ''          | ''                  |
-			| ''                                     | 'Record type' | 'Period'                        | 'Resources' | 'Dimensions'   | ''          | ''                  |
-			| ''                                     | ''            | ''                              | 'Quantity'  | 'Company'      | 'Item key'  | 'Serial lot number' |
-			| ''                                     | 'Receipt'     | '$$DateStockAdjustmentAsSurplus092009$$' | '1'         | 'Main Company' | '38/Yellow' | '99098809009999'    |
+			| '$$StockAdjustmentAsSurplus092009$$'   | ''            | ''                                       | ''          | ''             | ''       | ''          | ''                  |
+			| 'Document registrations records'       | ''            | ''                                       | ''          | ''             | ''       | ''          | ''                  |
+			| 'Register  "R4014 Serial lot numbers"' | ''            | ''                                       | ''          | ''             | ''       | ''          | ''                  |
+			| ''                                     | 'Record type' | 'Period'                                 | 'Resources' | 'Dimensions'   | ''       | ''          | ''                  |
+			| ''                                     | ''            | ''                                       | 'Quantity'  | 'Company'      | 'Branch' | 'Item key'  | 'Serial lot number' |
+			| ''                                     | 'Receipt'     | '$$DateStockAdjustmentAsSurplus092009$$' | '1'         | 'Main Company' | '*'      | '38/Yellow' | '99098809009999'    |
 		And I close all client application windows
 		
 
@@ -1887,13 +1887,13 @@ Scenario: _0920091 check serial lot number controls in the Stock adjustment as s
 		And I select "R4014 Serial lot numbers" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-			| '$$StockAdjustmentAsSurplus0920091$$'   | ''            | ''                                        | ''          | ''             | ''          | ''                  |
-			| 'Document registrations records'       | ''            | ''                                        | ''          | ''             | ''          | ''                  |
-			| 'Register  "R4014 Serial lot numbers"' | ''            | ''                                        | ''          | ''             | ''          | ''                  |
-			| ''                                     | 'Record type' | 'Period'                                  | 'Resources' | 'Dimensions'   | ''          | ''                  |
-			| ''                                     | ''            | ''                                        | 'Quantity'  | 'Company'      | 'Item key'  | 'Serial lot number' |
-			| ''                                     | 'Receipt'     | '$$DateStockAdjustmentAsSurplus0920091$$' | '1'         | 'Main Company' | '38/Yellow' | '99098809009999'    |
-			| ''                                     | 'Receipt'     | '$$DateStockAdjustmentAsSurplus0920091$$' | '2'         | 'Main Company' | '38/Yellow' | '99098809009008'    |
+			| '$$StockAdjustmentAsSurplus0920091$$'  | ''            | ''                                        | ''          | ''             | ''       | ''          | ''                  |
+			| 'Document registrations records'       | ''            | ''                                        | ''          | ''             | ''       | ''          | ''                  |
+			| 'Register  "R4014 Serial lot numbers"' | ''            | ''                                        | ''          | ''             | ''       | ''          | ''                  |
+			| ''                                     | 'Record type' | 'Period'                                  | 'Resources' | 'Dimensions'   | ''       | ''          | ''                  |
+			| ''                                     | ''            | ''                                        | 'Quantity'  | 'Company'      | 'Branch' | 'Item key'  | 'Serial lot number' |
+			| ''                                     | 'Receipt'     | '$$DateStockAdjustmentAsSurplus0920091$$' | '1'         | 'Main Company' | '*'      | '38/Yellow' | '99098809009999'    |
+			| ''                                     | 'Receipt'     | '$$DateStockAdjustmentAsSurplus0920091$$' | '2'         | 'Main Company' | '*'      | '38/Yellow' | '99098809009008'    |
 		And I close current window
 	* Check the message to the user when the serial number was not filled in
 		And I activate "$$StockAdjustmentAsSurplus0920091$$" window
@@ -2057,12 +2057,12 @@ Scenario: _092010 check serial lot number in the Stock adjustment as write off
 		And I select "R4014 Serial lot numbers" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-			| '$$StockAdjustmentAsWriteOff092010$$'  | ''            | ''                                        | ''          | ''             | ''          | ''                  |
-			| 'Document registrations records'       | ''            | ''                                        | ''          | ''             | ''          | ''                  |
-			| 'Register  "R4014 Serial lot numbers"' | ''            | ''                                        | ''          | ''             | ''          | ''                  |
-			| ''                                     | 'Record type' | 'Period'                                  | 'Resources' | 'Dimensions'   | ''          | ''                  |
-			| ''                                     | ''            | ''                                        | 'Quantity'  | 'Company'      | 'Item key'  | 'Serial lot number' |
-			| ''                                     | 'Expense'     | '$$DateStockAdjustmentAsWriteOff092010$$' | '1'         | 'Main Company' | '38/Yellow' | '99098809009999'    |
+			| '$$StockAdjustmentAsWriteOff092010$$'  | ''            | ''                                        | ''          | ''             | ''       | ''          | ''                  |
+			| 'Document registrations records'       | ''            | ''                                        | ''          | ''             | ''       | ''          | ''                  |
+			| 'Register  "R4014 Serial lot numbers"' | ''            | ''                                        | ''          | ''             | ''       | ''          | ''                  |
+			| ''                                     | 'Record type' | 'Period'                                  | 'Resources' | 'Dimensions'   | ''       | ''          | ''                  |
+			| ''                                     | ''            | ''                                        | 'Quantity'  | 'Company'      | 'Branch' | 'Item key'  | 'Serial lot number' |
+			| ''                                     | 'Expense'     | '$$DateStockAdjustmentAsWriteOff092010$$' | '1'         | 'Main Company' | '*'      | '38/Yellow' | '99098809009999'    |
 		And I close all client application windows
 		
 
@@ -2199,13 +2199,13 @@ Scenario: _09200101 check serial lot number controls in the Stock adjustment as 
 		And I select "R4014 Serial lot numbers" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-			| '$$StockAdjustmentAsWriteOff09200101$$'| ''            | ''                                        | ''          | ''             | ''          | ''                  |
-			| 'Document registrations records'       | ''            | ''                                        | ''          | ''             | ''          | ''                  |
-			| 'Register  "R4014 Serial lot numbers"' | ''            | ''                                        | ''          | ''             | ''          | ''                  |
-			| ''                                     | 'Record type' | 'Period'                                  | 'Resources' | 'Dimensions'   | ''          | ''                  |
-			| ''                                     | ''            | ''                                        | 'Quantity'  | 'Company'      | 'Item key'  | 'Serial lot number' |
-			| ''                                     | 'Expense'     | '$$DateStockAdjustmentAsWriteOff09200101$$' | '1'         | 'Main Company' | '38/Yellow' | '99098809009999'    |
-			| ''                                     | 'Expense'     | '$$DateStockAdjustmentAsWriteOff09200101$$' | '2'         | 'Main Company' | '38/Yellow' | '99098809009008'    |
+			| '$$StockAdjustmentAsWriteOff09200101$$' | ''            | ''                                          | ''          | ''             | ''       | ''          | ''                  |
+			| 'Document registrations records'        | ''            | ''                                          | ''          | ''             | ''       | ''          | ''                  |
+			| 'Register  "R4014 Serial lot numbers"'  | ''            | ''                                          | ''          | ''             | ''       | ''          | ''                  |
+			| ''                                      | 'Record type' | 'Period'                                    | 'Resources' | 'Dimensions'   | ''       | ''          | ''                  |
+			| ''                                      | ''            | ''                                          | 'Quantity'  | 'Company'      | 'Branch' | 'Item key'  | 'Serial lot number' |
+			| ''                                      | 'Expense'     | '$$DateStockAdjustmentAsWriteOff09200101$$' | '1'         | 'Main Company' | '*'      | '38/Yellow' | '99098809009999'    |
+			| ''                                      | 'Expense'     | '$$DateStockAdjustmentAsWriteOff09200101$$' | '2'         | 'Main Company' | '*'      | '38/Yellow' | '99098809009008'    |
 		And I close current window
 	* Check the message to the user when the serial number was not filled in
 		And I activate "$$StockAdjustmentAsWriteOff09200101$$" window
@@ -2352,13 +2352,13 @@ Scenario: _092011 check serial lot number in the Item stock adjustment
 		And I select "R4014 Serial lot numbers" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-			| '$$ItemStockAdjustment092011$$'        | ''            | ''                                  | ''          | ''             | ''          | ''                  |
-			| 'Document registrations records'       | ''            | ''                                  | ''          | ''             | ''          | ''                  |
-			| 'Register  "R4014 Serial lot numbers"' | ''            | ''                                  | ''          | ''             | ''          | ''                  |
-			| ''                                     | 'Record type' | 'Period'                            | 'Resources' | 'Dimensions'   | ''          | ''                  |
-			| ''                                     | ''            | ''                                  | 'Quantity'  | 'Company'      | 'Item key'  | 'Serial lot number' |
-			| ''                                     | 'Receipt'     | '$$DateItemStockAdjustment092011$$' | '1'         | 'Main Company' | '38/Yellow' | '99098809009910'    |
-			| ''                                     | 'Expense'     | '$$DateItemStockAdjustment092011$$' | '1'         | 'Main Company' | '36/Yellow' | '99098809009999'    |
+			| '$$ItemStockAdjustment092011$$'        | ''            | ''                                  | ''          | ''             | ''       | ''          | ''                  |
+			| 'Document registrations records'       | ''            | ''                                  | ''          | ''             | ''       | ''          | ''                  |
+			| 'Register  "R4014 Serial lot numbers"' | ''            | ''                                  | ''          | ''             | ''       | ''          | ''                  |
+			| ''                                     | 'Record type' | 'Period'                            | 'Resources' | 'Dimensions'   | ''       | ''          | ''                  |
+			| ''                                     | ''            | ''                                  | 'Quantity'  | 'Company'      | 'Branch' | 'Item key'  | 'Serial lot number' |
+			| ''                                     | 'Receipt'     | '$$DateItemStockAdjustment092011$$' | '1'         | 'Main Company' | '*'      | '38/Yellow' | '99098809009910'    |
+			| ''                                     | 'Expense'     | '$$DateItemStockAdjustment092011$$' | '1'         | 'Main Company' | '*'      | '36/Yellow' | '99098809009999'    |
 		And I close all client application windows
 		
 

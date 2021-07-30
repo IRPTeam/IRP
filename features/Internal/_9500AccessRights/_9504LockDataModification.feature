@@ -110,6 +110,7 @@ Scenario: 950400 preparation
 		And I change checkbox "Do you want to update filled prices?"
 		And I click "OK" button	
 		And I click "Post and close" button
+		And I close all client application windows
 	* Load SO and change it date
 		When Create document SalesOrder objects
 	* Load PO

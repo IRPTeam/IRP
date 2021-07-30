@@ -309,7 +309,7 @@ Scenario: _022304 copy PR and check filling in Row Id info table
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Store" became equal to "Store 01"
 		And "ItemList" table became equal
-			| '#' | 'Business unit' | 'Item'     | 'Item key'  | 'Dont calculate row' | 'Serial lot numbers' | 'Q'       | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Total amount' | 'Use shipment confirmation' | 'Additional analytic' | 'Store'    | 'Expense type' | 'Return reason' | 'Net amount' | 'Purchase invoice' | 'Purchase return order' |
+			| '#' | 'Profit loss center' | 'Item'     | 'Item key'  | 'Dont calculate row' | 'Serial lot numbers' | 'Q'       | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Total amount' | 'Use shipment confirmation' | 'Additional analytic' | 'Store'    | 'Expense type' | 'Return reason' | 'Net amount' | 'Purchase invoice' | 'Purchase return order' |
 			| '1' | ''              | 'Dress'    | 'M/White'   | 'No'                 | ''                   | '100,000' | 'pcs'  | '3 050,85'   | '200,00' | '18%' | ''              | '20 000,00'    | 'No'                        | ''                    | 'Store 01' | ''             | ''              | '16 949,15'  | ''                 | ''                      |
 			| '2' | ''              | 'Dress'    | 'L/Green'   | 'No'                 | ''                   | '200,000' | 'pcs'  | '6 406,78'   | '210,00' | '18%' | ''              | '42 000,00'    | 'No'                        | ''                    | 'Store 01' | ''             | ''              | '35 593,22'  | ''                 | ''                      |
 			| '3' | ''              | 'Trousers' | '36/Yellow' | 'No'                 | ''                   | '300,000' | 'pcs'  | '11 440,68'  | '250,00' | '18%' | ''              | '75 000,00'    | 'No'                        | ''                    | 'Store 01' | ''             | ''              | '63 559,32'  | ''                 | ''                      |
@@ -318,7 +318,7 @@ Scenario: _022304 copy PR and check filling in Row Id info table
 			| 'TRY'                | 'Partner term' | 'TRY'           | 'TRY'      | '1'                 | '1'            | '137 000'   |
 			| 'Local currency'     | 'Legal'        | 'TRY'           | 'TRY'      | '1'                 | '1'            | '137 000'   |
 			| 'Reporting currency' | 'Reporting'    | 'TRY'           | 'USD'      | '0,1712'            | '1'            | '23 454,40' |
-		Then the form attribute named "BusinessUnit" became equal to ""
+		Then the form attribute named "Branch" became equal to ""
 		Then the form attribute named "Author" became equal to "en description is empty"
 		Then the form attribute named "PriceIncludeTax" became equal to "Yes"
 		Then the form attribute named "Currency" became equal to "TRY"
@@ -490,6 +490,7 @@ Scenario: _022310 create Purchase return based on Purchase return order
 		And I save the window as "$$PurchaseReturn22310$$"
 		And I click the button named "FormPostAndClose"
 	* Check creation
+		And I close all client application windows
 		Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
 		And "List" table contains lines
 			| 'Number'  |

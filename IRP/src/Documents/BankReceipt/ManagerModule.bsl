@@ -103,10 +103,11 @@ Function GetQueryTextBankReceiptPaymentList()
 		|	BankReceiptPaymentList.PlaningTransactionBasis.Receiver AS ToAccount,
 		|	BankReceiptPaymentList.Ref AS ReceiptDocument,
 		|	BankReceiptPaymentList.Key,
-		|	BankReceiptPaymentList.BusinessUnit AS BusinessUnit,
+		|	BankReceiptPaymentList.ProfitLossCenter AS ProfitLossCenter,
 		|	BankReceiptPaymentList.ExpenseType AS ExpenseType,
 		|	BankReceiptPaymentList.AdditionalAnalytic AS AdditionalAnalytic,
-		|	BankReceiptPaymentList.Commission AS Commission
+		|	BankReceiptPaymentList.Commission AS Commission,
+		|	BankReceiptPaymentList.Ref.Branch AS Branch
 		|FROM
 		|	Document.BankReceipt.PaymentList AS BankReceiptPaymentList
 		|WHERE
@@ -139,10 +140,11 @@ Function GetQueryTextQueryTable()
 		|	QueryTable.TransferFromPOS AS TransferFromPOS,
 		|	QueryTable.ToAccount_POS AS ToAccount_POS,
 		|	QueryTable.FromAccount_POS AS FromAccount_POS,
-		|	QueryTable.BusinessUnit AS BusinessUnit,
+		|	QueryTable.ProfitLossCenter AS ProfitLossCenter,
 		|	QueryTable.ExpenseType AS ExpenseType,
 		|	QueryTable.AdditionalAnalytic AS AdditionalAnalytic,
-		|	QueryTable.Commission AS Commission
+		|	QueryTable.Commission AS Commission,	
+		|	QueryTable.Branch AS Branch
 		|INTO tmp
 		|FROM
 		|	&QueryTable AS QueryTable
@@ -157,7 +159,8 @@ Function GetQueryTextQueryTable()
 		|	tmp.Currency AS Currency,
 		|	tmp.Amount AS Amount,
 		|	tmp.Period,
-		|	tmp.Key
+		|	tmp.Key,
+		|	tmp.Branch
 		|FROM
 		|	tmp AS tmp
 		|WHERE
@@ -173,7 +176,8 @@ Function GetQueryTextQueryTable()
 		|	tmp.Currency AS Currency,
 		|	tmp.Amount AS Amount,
 		|	tmp.Period,
-		|	tmp.Key
+		|	tmp.Key,
+		|	tmp.Branch
 		|FROM
 		|	tmp AS tmp
 		|WHERE
@@ -440,7 +444,7 @@ Function PaymentList()
 		|	PaymentList.PlaningTransactionBasis.Receiver AS ToAccount,
 		|	PaymentList.Ref AS Basis,
 		|	PaymentList.Key,
-		|	PaymentList.BusinessUnit AS BusinessUnit,
+		|	PaymentList.ProfitLossCenter AS ProfitLossCenter,
 		|	PaymentList.ExpenseType AS ExpenseType,
 		|	PaymentList.AdditionalAnalytic AS AdditionalAnalytic,
 		|	PaymentList.Commission AS Commission,
@@ -452,7 +456,8 @@ Function PaymentList()
 		|		IsCashTransferOrder,
 		|	PaymentList.Ref.TransactionType = VALUE(Enum.IncomingPaymentTransactionType.TransferFromPOS) AS IsTransferFromPOS,
 		|	PaymentList.Ref.TransactionType = VALUE(Enum.IncomingPaymentTransactionType.ReturnFromVendor) AS IsReturnFromVendor,
-		|	PaymentList.Ref.IgnoreAdvances AS IgnoreAdvances
+		|	PaymentList.Ref.IgnoreAdvances AS IgnoreAdvances,
+		|	PaymentList.Ref.Branch AS Branch
 		|INTO PaymentList
 		|FROM
 		|	Document.BankReceipt.PaymentList AS PaymentList
@@ -466,6 +471,7 @@ Function R2021B_CustomersTransactions()
 		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
 		|	PaymentList.Period,
 		|	PaymentList.Company,
+		|	PaymentList.Branch,
 		|	PaymentList.Partner,
 		|	PaymentList.Payer AS LegalName,
 		|	PaymentList.Currency,
@@ -486,6 +492,7 @@ Function R2021B_CustomersTransactions()
 		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
 		|	OffsetOfAdvances.Period,
 		|	OffsetOfAdvances.Company,
+		|	OffsetOfAdvances.Branch,
 		|	OffsetOfAdvances.Partner,
 		|	OffsetOfAdvances.LegalName,
 		|	OffsetOfAdvances.Currency,
@@ -506,6 +513,7 @@ Function R1021B_VendorsTransactions()
 		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
 		|	PaymentList.Period,
 		|	PaymentList.Company,
+		|	PaymentList.Branch,
 		|	PaymentList.Partner,
 		|	PaymentList.Payer AS LegalName,
 		|	PaymentList.Currency,
@@ -526,6 +534,7 @@ Function R2020B_AdvancesFromCustomers()
 		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
 		|	PaymentList.Period,
 		|	PaymentList.Company,
+		|	PaymentList.Branch,
 		|	PaymentList.Partner,
 		|	PaymentList.Payer AS LegalName,
 		|	PaymentList.Currency,
@@ -546,6 +555,7 @@ Function R2020B_AdvancesFromCustomers()
 		|	VALUE(AccumulationRecordType.Expense),
 		|	OffsetOfAdvances.Period,
 		|	OffsetOfAdvances.Company,
+		|	OffsetOfAdvances.Branch,
 		|	OffsetOfAdvances.Partner,
 		|	OffsetOfAdvances.LegalName,
 		|	OffsetOfAdvances.Currency,
@@ -565,6 +575,7 @@ Function R1020B_AdvancesToVendors()
 		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
 		|	PaymentList.Period,
 		|	PaymentList.Company,
+		|	PaymentList.Branch,
 		|	PaymentList.Partner,
 		|	PaymentList.Payer AS LegalName,
 		|	PaymentList.Currency,
@@ -585,6 +596,7 @@ Function R5011B_CustomersAging()
 		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
 		|	OffsetOfAging.Period,
 		|	OffsetOfAging.Company,
+		|	OffsetOfAging.Branch,
 		|	OffsetOfAging.Partner,
 		|	OffsetOfAging.Agreement,
 		|	OffsetOfAging.Currency,
@@ -604,6 +616,7 @@ Function T2012S_PartnerAdvances()
 		"SELECT
 		|	PaymentList.Period,
 		|	PaymentList.Company,
+		|	PaymentList.Branch,
 		|	PaymentList.Partner,
 		|	PaymentList.Payer AS LegalName,
 		|	PaymentList.Currency,
@@ -624,6 +637,7 @@ Function T2011S_PartnerTransactions()
 		"SELECT
 		|	PaymentList.Period,
 		|	PaymentList.Company,
+		|	PaymentList.Branch,
 		|	PaymentList.Partner,
 		|	PaymentList.Payer AS LegalName,
 		|	PaymentList.Currency,
@@ -645,6 +659,7 @@ Function R5010B_ReconciliationStatement()
 		"SELECT
 		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
 		|	PaymentList.Company,
+		|	PaymentList.Branch,
 		|	PaymentList.Payer AS LegalName,
 		|	PaymentList.Currency,
 		|	SUM(PaymentList.Amount) AS Amount,
@@ -660,6 +675,7 @@ Function R5010B_ReconciliationStatement()
 		|	NOT PaymentList.TransferFromPOS
 		|GROUP BY
 		|	PaymentList.Company,
+		|	PaymentList.Branch,
 		|	PaymentList.Payer,
 		|	PaymentList.Currency,
 		|	PaymentList.Period";	
@@ -685,6 +701,7 @@ Function R3035T_CashPlanning()
 		"SELECT
 		|	PaymentList.Period,
 		|	PaymentList.Company,
+		|	PaymentList.Branch,
 		|	PaymentList.PlaningTransactionBasis AS BasisDocument,
 		|	PaymentList.PlaningTransactionBasis.PlanningPeriod AS PlanningPeriod,
 		|	PaymentList.Account,

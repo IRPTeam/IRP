@@ -669,7 +669,7 @@
           </extInfo>
         </items>
         <items xsi:type="form:FormField">
-          <name>PaymentListBusinessUnit</name>
+          <name>PaymentListProfitLossCenter</name>
           <id>453</id>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -678,11 +678,11 @@
           </userVisible>
           <dataPath xsi:type="form:MultiLanguageDataPath">
             <paths xsi:type="form:DataPath">
-              <segments>Object.PaymentList.BusinessUnit</segments>
+              <segments>Object.PaymentList.ProfitLossCenter</segments>
             </paths>
           </dataPath>
           <extendedTooltip>
-            <name>PaymentListBusinessUnitExtendedTooltip</name>
+            <name>PaymentListProfitLossCenterExtendedTooltip</name>
             <id>455</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -697,7 +697,7 @@
             </extInfo>
           </extendedTooltip>
           <contextMenu>
-            <name>PaymentListBusinessUnitContextMenu</name>
+            <name>PaymentListProfitLossCenterContextMenu</name>
             <id>454</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -2146,7 +2146,7 @@
           </extInfo>
         </items>
         <items xsi:type="form:FormField">
-          <name>TaxTreeBusinessUnit</name>
+          <name>TaxTreeProfitLossCenter</name>
           <id>426</id>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -2155,11 +2155,11 @@
           </userVisible>
           <dataPath xsi:type="form:MultiLanguageDataPath">
             <paths xsi:type="form:DataPath">
-              <segments>TaxTree.BusinessUnit</segments>
+              <segments>TaxTree.ProfitLossCenter</segments>
             </paths>
           </dataPath>
           <extendedTooltip>
-            <name>TaxTreeBusinessUnitExtendedTooltip</name>
+            <name>TaxTreeProfitLossCenterExtendedTooltip</name>
             <id>428</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -2174,7 +2174,7 @@
             </extInfo>
           </extendedTooltip>
           <contextMenu>
-            <name>TaxTreeBusinessUnitContextMenu</name>
+            <name>TaxTreeProfitLossCenterContextMenu</name>
             <id>427</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -3037,7 +3037,7 @@
         </extInfo>
       </items>
       <items xsi:type="form:FormField">
-        <name>BusinessUnit</name>
+        <name>Branch</name>
         <id>545</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -3046,11 +3046,11 @@
         </userVisible>
         <dataPath xsi:type="form:MultiLanguageDataPath">
           <paths xsi:type="form:DataPath">
-            <segments>Object.BusinessUnit</segments>
+            <segments>Object.Branch</segments>
           </paths>
         </dataPath>
         <extendedTooltip>
-          <name>BusinessUnitExtendedTooltip</name>
+          <name>BranchExtendedTooltip</name>
           <id>547</id>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -3065,7 +3065,7 @@
           </extInfo>
         </extendedTooltip>
         <contextMenu>
-          <name>BusinessUnitContextMenu</name>
+          <name>BranchContextMenu</name>
           <id>546</id>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -3706,10 +3706,10 @@
       </edit>
     </columns>
     <columns>
-      <name>BusinessUnit</name>
+      <name>ProfitLossCenter</name>
       <title>
         <key>en</key>
-        <value>Business unit</value>
+        <value>Profit loss center</value>
       </title>
       <id>18</id>
       <valueType>

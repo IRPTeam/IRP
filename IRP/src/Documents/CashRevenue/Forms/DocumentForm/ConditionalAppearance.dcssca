@@ -29,7 +29,7 @@
 				<field>TaxTreeAnalytics</field>
 			</item>
 			<item>
-				<field>TaxTreeBusinessUnit</field>
+				<field>TaxTreeProfitLossCenter</field>
 			</item>
 			<item>
 				<field>TaxTreeRevenueType</field>

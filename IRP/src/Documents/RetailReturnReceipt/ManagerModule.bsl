@@ -140,7 +140,7 @@ Function ItemList()
 	|	END AS RetailSalesReceipt,
 	|	ItemList.Key AS RowKey,
 	|	ItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS IsService,
-	|	ItemList.BusinessUnit AS BusinessUnit,
+	|	ItemList.ProfitLossCenter AS ProfitLossCenter,
 	|	ItemList.RevenueType AS RevenueType,
 	|	ItemList.AdditionalAnalytic AS AdditionalAnalytic,
 	|	ItemList.NetAmount AS NetAmount,
@@ -156,7 +156,8 @@ Function ItemList()
 	|			THEN ItemList.Ref
 	|		ELSE UNDEFINED
 	|	END AS BasisDocument,
-	|	ItemList.Ref.UsePartnerTransactions AS UsePartnerTransactions
+	|	ItemList.Ref.UsePartnerTransactions AS UsePartnerTransactions,
+	|	ItemList.Ref.Branch AS Branch
 	|INTO ItemList
 	|FROM
 	|	Document.RetailReturnReceipt.ItemList AS ItemList
@@ -172,7 +173,7 @@ Function Payments()
 	|	Payments.Account AS Account,
 	|	Payments.Ref.Currency AS Currency,
 	|	Payments.Amount AS Amount,
-	|	Payments.Ref.BusinessUnit AS BusinessUnit,
+	|	Payments.Ref.Branch AS Branch,
 	|	Payments.PaymentType AS PaymentType,
 	|	Payments.PaymentTerminal AS PaymentTerminal,
 	|	Payments.Percent AS Percent,
@@ -187,7 +188,7 @@ EndFunction
 Function RetailSales()
 	Return 
 	"SELECT
-	|	RetailReturnReceiptItemList.Ref.BusinessUnit AS BusinessUnit,
+	|	RetailReturnReceiptItemList.Ref.Branch AS Branch,
 	|	RetailReturnReceiptItemList.Ref.Company AS Company,
 	|	RetailReturnReceiptItemList.ItemKey AS ItemKey,
 	|	SUM(RetailReturnReceiptItemList.QuantityInBaseUnit) AS Quantity,
@@ -215,7 +216,7 @@ Function RetailSales()
 	|WHERE
 	|	RetailReturnReceiptItemList.Ref = &Ref
 	|GROUP BY
-	|	RetailReturnReceiptItemList.Ref.BusinessUnit,
+	|	RetailReturnReceiptItemList.Ref.Branch,
 	|	RetailReturnReceiptItemList.Ref.Company,
 	|	RetailReturnReceiptItemList.ItemKey,
 	|	RetailReturnReceiptItemList.Ref.Date,
@@ -233,7 +234,7 @@ Function RetailSales()
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
 	|	tmpRetailSales.Company AS Company,
-	|	tmpRetailSales.BusinessUnit AS BusinessUnit,
+	|	tmpRetailSales.Branch AS Branch,
 	|	tmpRetailSales.ItemKey AS ItemKey,
 	|	CASE
 	|		WHEN tmpRetailSales.QuantityBySerialLtNumbers = 0
@@ -366,6 +367,7 @@ Function R2021B_CustomersTransactions()
 		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
 		|	ItemList.Period,
 		|	ItemList.Company,
+		|	ItemList.Branch,
 		|	ItemList.Currency,
 		|	ItemList.LegalName,
 		|	ItemList.Partner,
@@ -382,6 +384,7 @@ Function R2021B_CustomersTransactions()
 		|	ItemList.Agreement,
 		|	ItemList.BasisDocument,
 		|	ItemList.Company,
+		|	ItemList.Branch,
 		|	ItemList.Currency,
 		|	ItemList.LegalName,
 		|	ItemList.Partner,
@@ -394,6 +397,7 @@ Function R2021B_CustomersTransactions()
 		|	VALUE(AccumulationRecordType.Expense),
 		|	ItemList.Period,
 		|	ItemList.Company,
+		|	ItemList.Branch,
 		|	ItemList.Currency,
 		|	ItemList.LegalName,
 		|	ItemList.Partner,
@@ -409,6 +413,7 @@ Function R2021B_CustomersTransactions()
 		|	ItemList.Agreement,
 		|	ItemList.BasisDocument,
 		|	ItemList.Company,
+		|	ItemList.Branch,
 		|	ItemList.Currency,
 		|	ItemList.LegalName,
 		|	ItemList.Partner,
@@ -421,6 +426,7 @@ Function R5010B_ReconciliationStatement()
 		"SELECT
 		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
 		|	ItemList.Company,
+		|	ItemList.Branch,
 		|	ItemList.LegalName,
 		|	ItemList.Currency,
 		|	- SUM(ItemList.TotalAmount) AS Amount,
@@ -432,6 +438,7 @@ Function R5010B_ReconciliationStatement()
 		|	ItemList.UsePartnerTransactions
 		|GROUP BY
 		|	ItemList.Company,
+		|	ItemList.Branch,
 		|	ItemList.LegalName,
 		|	ItemList.Currency,
 		|	ItemList.Period
@@ -440,6 +447,7 @@ Function R5010B_ReconciliationStatement()
 		|SELECT
 		|	VALUE(AccumulationRecordType.Receipt),
 		|	ItemList.Company,
+		|	ItemList.Branch,
 		|	ItemList.LegalName,
 		|	ItemList.Currency,
 		|	SUM(ItemList.TotalAmount),
@@ -450,6 +458,7 @@ Function R5010B_ReconciliationStatement()
 		|	ItemList.UsePartnerTransactions
 		|GROUP BY
 		|	ItemList.Company,
+		|	ItemList.Branch,
 		|	ItemList.LegalName,
 		|	ItemList.Currency,
 		|	ItemList.Period";

@@ -829,7 +829,7 @@
 	SalesOrderClosing.SalesOrder,
 	SalesOrderClosing.CloseOrder,
 	SalesOrderClosing.Author,
-	SalesOrderClosing.BusinessUnit,
+	SalesOrderClosing.Branch,
 	SalesOrderClosing.Description,
 	SalesOrderClosing.DocumentAmount,
 	CASE
@@ -860,7 +860,7 @@ GROUP BY
 	SalesOrderClosing.SalesOrder,
 	SalesOrderClosing.CloseOrder,
 	SalesOrderClosing.Author,
-	SalesOrderClosing.BusinessUnit,
+	SalesOrderClosing.Branch,
 	SalesOrderClosing.Description,
 	SalesOrderClosing.DocumentAmount</queryText>
       <mainTable>Document.SalesOrderClosing</mainTable>

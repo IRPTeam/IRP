@@ -44,11 +44,25 @@
     <fullTextSearch>Use</fullTextSearch>
     <useInTotals>true</useInTotals>
   </dimensions>
-  <dimensions uuid="ae74b83e-b279-4f2b-9a35-753ff26239f6">
-    <name>BusinessUnit</name>
+  <dimensions uuid="094ca554-f982-4d3b-9923-15952e2017ac">
+    <name>Branch</name>
     <synonym>
       <key>en</key>
-      <value>Business unit</value>
+      <value>Branch</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.BusinessUnits</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
+  </dimensions>
+  <dimensions uuid="ae74b83e-b279-4f2b-9a35-753ff26239f6">
+    <name>ProfitLossCenter</name>
+    <synonym>
+      <key>en</key>
+      <value>Profit loss center</value>
     </synonym>
     <type>
       <types>CatalogRef.BusinessUnits</types>

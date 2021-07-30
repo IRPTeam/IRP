@@ -864,7 +864,7 @@
 	PurchaseInvoice.Partner,
 	PurchaseInvoice.PriceIncludeTax,
 	PurchaseInvoice.Author,
-	PurchaseInvoice.BusinessUnit,
+	PurchaseInvoice.Branch,
 	PurchaseInvoice.Description,
 	PurchaseInvoice.DocumentAmount,
 	CASE
@@ -893,7 +893,7 @@ GROUP BY
 	PurchaseInvoice.Partner,
 	PurchaseInvoice.PriceIncludeTax,
 	PurchaseInvoice.Author,
-	PurchaseInvoice.BusinessUnit,
+	PurchaseInvoice.Branch,
 	PurchaseInvoice.Description,
 	PurchaseInvoice.DocumentAmount,
 	R1031B_ReceiptInvoicingBalance.QuantityBalance</queryText>

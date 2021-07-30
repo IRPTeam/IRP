@@ -157,13 +157,13 @@ Scenario: _04014 check Goods receipt movements by the Register  "R1031 Receipt i
 		And I select "R1031 Receipt invoicing" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Goods receipt 115 dated 12.02.2021 15:10:35' | ''            | ''                    | ''          | ''             | ''         | ''                                            | ''          |
-			| 'Document registrations records'              | ''            | ''                    | ''          | ''             | ''         | ''                                            | ''          |
-			| 'Register  "R1031 Receipt invoicing"'         | ''            | ''                    | ''          | ''             | ''         | ''                                            | ''          |
-			| ''                                            | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''         | ''                                            | ''          |
-			| ''                                            | ''            | ''                    | 'Quantity'  | 'Company'      | 'Store'    | 'Basis'                                       | 'Item key'  |
-			| ''                                            | 'Receipt'     | '12.02.2021 15:10:35' | '5'         | 'Main Company' | 'Store 02' | 'Goods receipt 115 dated 12.02.2021 15:10:35' | '36/Yellow' |
-			| ''                                            | 'Receipt'     | '12.02.2021 15:10:35' | '10'        | 'Main Company' | 'Store 02' | 'Goods receipt 115 dated 12.02.2021 15:10:35' | 'S/Yellow'  |
+			| 'Goods receipt 115 dated 12.02.2021 15:10:35' | ''            | ''                    | ''          | ''             | ''             | ''         | ''                                            | ''          |
+			| 'Document registrations records'              | ''            | ''                    | ''          | ''             | ''             | ''         | ''                                            | ''          |
+			| 'Register  "R1031 Receipt invoicing"'         | ''            | ''                    | ''          | ''             | ''             | ''         | ''                                            | ''          |
+			| ''                                            | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''         | ''                                            | ''          |
+			| ''                                            | ''            | ''                    | 'Quantity'  | 'Company'      | 'Branch'       | 'Store'    | 'Basis'                                       | 'Item key'  |
+			| ''                                            | 'Receipt'     | '12.02.2021 15:10:35' | '5'         | 'Main Company' | 'Front office' | 'Store 02' | 'Goods receipt 115 dated 12.02.2021 15:10:35' | '36/Yellow' |
+			| ''                                            | 'Receipt'     | '12.02.2021 15:10:35' | '10'        | 'Main Company' | 'Front office' | 'Store 02' | 'Goods receipt 115 dated 12.02.2021 15:10:35' | 'S/Yellow'  |
 		And I close all client application windows
 		
 Scenario: _04015 check Goods receipt movements by the Register  "R4035 Incoming stocks"
@@ -213,13 +213,13 @@ Scenario: _04018 check Goods receipt movements by the Register  "R4033 Scheduled
 		And I select "R4033 Scheduled goods receipts" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Goods receipt 115 dated 12.02.2021 15:10:35' | ''            | ''                    | ''          | ''             | ''                                             | ''         | ''          | ''                                     |
-			| 'Document registrations records'              | ''            | ''                    | ''          | ''             | ''                                             | ''         | ''          | ''                                     |
-			| 'Register  "R4033 Scheduled goods receipts"'  | ''            | ''                    | ''          | ''             | ''                                             | ''         | ''          | ''                                     |
-			| ''                                            | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                                             | ''         | ''          | ''                                     |
-			| ''                                            | ''            | ''                    | 'Quantity'  | 'Company'      | 'Basis'                                        | 'Store'    | 'Item key'  | 'Row key'                              |
-			| ''                                            | 'Expense'     | '12.02.2021 15:10:35' | '5'         | 'Main Company' | 'Purchase order 115 dated 12.02.2021 12:44:43' | 'Store 02' | '36/Yellow' | '18d36228-af88-4ba5-a17a-f3ab3ddb6816' |
-			| ''                                            | 'Expense'     | '12.02.2021 15:10:35' | '10'        | 'Main Company' | 'Purchase order 115 dated 12.02.2021 12:44:43' | 'Store 02' | 'S/Yellow'  | '3e2661d8-cf3b-4695-8cf7-a14ecc9f32ce' |
+			| 'Goods receipt 115 dated 12.02.2021 15:10:35' | ''            | ''                    | ''          | ''             | ''             | ''                                             | ''         | ''          | ''                                     |
+			| 'Document registrations records'              | ''            | ''                    | ''          | ''             | ''             | ''                                             | ''         | ''          | ''                                     |
+			| 'Register  "R4033 Scheduled goods receipts"'  | ''            | ''                    | ''          | ''             | ''             | ''                                             | ''         | ''          | ''                                     |
+			| ''                                            | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''                                             | ''         | ''          | ''                                     |
+			| ''                                            | ''            | ''                    | 'Quantity'  | 'Company'      | 'Branch'       | 'Basis'                                        | 'Store'    | 'Item key'  | 'Row key'                              |
+			| ''                                            | 'Expense'     | '12.02.2021 15:10:35' | '5'         | 'Main Company' | 'Front office' | 'Purchase order 115 dated 12.02.2021 12:44:43' | 'Store 02' | '36/Yellow' | '18d36228-af88-4ba5-a17a-f3ab3ddb6816' |
+			| ''                                            | 'Expense'     | '12.02.2021 15:10:35' | '10'        | 'Main Company' | 'Front office' | 'Purchase order 115 dated 12.02.2021 12:44:43' | 'Store 02' | 'S/Yellow'  | '3e2661d8-cf3b-4695-8cf7-a14ecc9f32ce' |
 		And I close all client application windows
 
 Scenario: _040181 check Goods receipt movements by the Register  "R4033 Scheduled goods receipts" (not use shedule)
@@ -277,13 +277,13 @@ Scenario: _04021 check Goods receipt movements by the Register  "R1011 Receipt o
 		And I select "R1011 Receipt of purchase orders" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Goods receipt 115 dated 12.02.2021 15:10:35'  | ''            | ''                    | ''          | ''             | ''                                             | ''          |
-			| 'Document registrations records'               | ''            | ''                    | ''          | ''             | ''                                             | ''          |
-			| 'Register  "R1011 Receipt of purchase orders"' | ''            | ''                    | ''          | ''             | ''                                             | ''          |
-			| ''                                             | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                                             | ''          |
-			| ''                                             | ''            | ''                    | 'Quantity'  | 'Company'      | 'Order'                                        | 'Item key'  |
-			| ''                                             | 'Expense'     | '12.02.2021 15:10:35' | '5'         | 'Main Company' | 'Purchase order 115 dated 12.02.2021 12:44:43' | '36/Yellow' |
-			| ''                                             | 'Expense'     | '12.02.2021 15:10:35' | '10'        | 'Main Company' | 'Purchase order 115 dated 12.02.2021 12:44:43' | 'S/Yellow'  |
+			| 'Goods receipt 115 dated 12.02.2021 15:10:35'  | ''            | ''                    | ''          | ''             | ''             | ''                                             | ''          |
+			| 'Document registrations records'               | ''            | ''                    | ''          | ''             | ''             | ''                                             | ''          |
+			| 'Register  "R1011 Receipt of purchase orders"' | ''            | ''                    | ''          | ''             | ''             | ''                                             | ''          |
+			| ''                                             | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''                                             | ''          |
+			| ''                                             | ''            | ''                    | 'Quantity'  | 'Company'      | 'Branch'       | 'Order'                                        | 'Item key'  |
+			| ''                                             | 'Expense'     | '12.02.2021 15:10:35' | '5'         | 'Main Company' | 'Front office' | 'Purchase order 115 dated 12.02.2021 12:44:43' | '36/Yellow' |
+			| ''                                             | 'Expense'     | '12.02.2021 15:10:35' | '10'        | 'Main Company' | 'Front office' | 'Purchase order 115 dated 12.02.2021 12:44:43' | 'S/Yellow'  |
 		And I close all client application windows
 
 
@@ -300,13 +300,13 @@ Scenario: _040211 check Goods receipt movements by the Register  "R1031 Receipt 
 		And I select "R1031 Receipt invoicing" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Goods receipt 117 dated 12.02.2021 15:13:11' | ''            | ''                    | ''          | ''             | ''         | ''                                               | ''          |
-			| 'Document registrations records'              | ''            | ''                    | ''          | ''             | ''         | ''                                               | ''          |
-			| 'Register  "R1031 Receipt invoicing"'         | ''            | ''                    | ''          | ''             | ''         | ''                                               | ''          |
-			| ''                                            | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''         | ''                                               | ''          |
-			| ''                                            | ''            | ''                    | 'Quantity'  | 'Company'      | 'Store'    | 'Basis'                                          | 'Item key'  |
-			| ''                                            | 'Expense'     | '12.02.2021 15:13:11' | '5'         | 'Main Company' | 'Store 02' | 'Purchase invoice 117 dated 12.02.2021 15:12:15' | '36/Yellow' |
-			| ''                                            | 'Expense'     | '12.02.2021 15:13:11' | '10'        | 'Main Company' | 'Store 02' | 'Purchase invoice 117 dated 12.02.2021 15:12:15' | 'S/Yellow'  |
+			| 'Goods receipt 117 dated 12.02.2021 15:13:11' | ''            | ''                    | ''          | ''             | ''             | ''         | ''                                               | ''          |
+			| 'Document registrations records'              | ''            | ''                    | ''          | ''             | ''             | ''         | ''                                               | ''          |
+			| 'Register  "R1031 Receipt invoicing"'         | ''            | ''                    | ''          | ''             | ''             | ''         | ''                                               | ''          |
+			| ''                                            | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''         | ''                                               | ''          |
+			| ''                                            | ''            | ''                    | 'Quantity'  | 'Company'      | 'Branch'       | 'Store'    | 'Basis'                                          | 'Item key'  |
+			| ''                                            | 'Expense'     | '12.02.2021 15:13:11' | '5'         | 'Main Company' | 'Front office' | 'Store 02' | 'Purchase invoice 117 dated 12.02.2021 15:12:15' | '36/Yellow' |
+			| ''                                            | 'Expense'     | '12.02.2021 15:13:11' | '10'        | 'Main Company' | 'Front office' | 'Store 02' | 'Purchase invoice 117 dated 12.02.2021 15:12:15' | 'S/Yellow'  |
 		And I close all client application windows
 
 Scenario: _0401211 check Goods receipt movements by the Register  "R4017 Procurement of internal supply requests" (ISR exist)
@@ -320,13 +320,13 @@ Scenario: _0401211 check Goods receipt movements by the Register  "R4017 Procure
 		And I select "R4017 Procurement of internal supply requests" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Goods receipt 117 dated 12.02.2021 15:13:11'               | ''            | ''                    | ''          | ''             | ''         | ''                                                      | ''          |
-			| 'Document registrations records'                            | ''            | ''                    | ''          | ''             | ''         | ''                                                      | ''          |
-			| 'Register  "R4017 Procurement of internal supply requests"' | ''            | ''                    | ''          | ''             | ''         | ''                                                      | ''          |
-			| ''                                                          | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''         | ''                                                      | ''          |
-			| ''                                                          | ''            | ''                    | 'Quantity'  | 'Company'      | 'Store'    | 'Internal supply request'                               | 'Item key'  |
-			| ''                                                          | 'Expense'     | '12.02.2021 15:13:11' | '5'         | 'Main Company' | 'Store 02' | 'Internal supply request 117 dated 12.02.2021 14:39:38' | '36/Yellow' |
-			| ''                                                          | 'Expense'     | '12.02.2021 15:13:11' | '10'        | 'Main Company' | 'Store 02' | 'Internal supply request 117 dated 12.02.2021 14:39:38' | 'S/Yellow'  |
+			| 'Goods receipt 117 dated 12.02.2021 15:13:11'               | ''            | ''                    | ''          | ''             | ''             | ''         | ''                                                      | ''          |
+			| 'Document registrations records'                            | ''            | ''                    | ''          | ''             | ''             | ''         | ''                                                      | ''          |
+			| 'Register  "R4017 Procurement of internal supply requests"' | ''            | ''                    | ''          | ''             | ''             | ''         | ''                                                      | ''          |
+			| ''                                                          | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''         | ''                                                      | ''          |
+			| ''                                                          | ''            | ''                    | 'Quantity'  | 'Company'      | 'Branch'       | 'Store'    | 'Internal supply request'                               | 'Item key'  |
+			| ''                                                          | 'Expense'     | '12.02.2021 15:13:11' | '5'         | 'Main Company' | 'Front office' | 'Store 02' | 'Internal supply request 117 dated 12.02.2021 14:39:38' | '36/Yellow' |
+			| ''                                                          | 'Expense'     | '12.02.2021 15:13:11' | '10'        | 'Main Company' | 'Front office' | 'Store 02' | 'Internal supply request 117 dated 12.02.2021 14:39:38' | 'S/Yellow'  |
 		And I close all client application windows
 
 Scenario: _0401219 Goods receipt clear posting/mark for deletion

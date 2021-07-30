@@ -148,7 +148,8 @@ Function ItemList()
 		|	InventoryTransferItemList.QuantityInBaseUnit AS Quantity,
 		|	InventoryTransferItemList.Ref AS Basis,
 		|	InventoryTransferItemList.Ref.UseGoodsReceipt AS UseGoodsReceipt,
-		|	InventoryTransferItemList.Ref.UseShipmentConfirmation AS UseShipmentConfirmation
+		|	InventoryTransferItemList.Ref.UseShipmentConfirmation AS UseShipmentConfirmation,
+		|	InventoryTransferItemList.Ref.Branch AS Branch
 		|INTO ItemList
 		|FROM
 		|	Document.InventoryTransfer.ItemList AS InventoryTransferItemList
@@ -342,6 +343,8 @@ Function R4050B_StockInventory()
 		"SELECT
 		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
 		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Branch,
 		|	ItemList.StoreSender AS Store,
 		|	ItemList.ItemKey,
 		|	ItemList.Quantity
@@ -356,6 +359,8 @@ Function R4050B_StockInventory()
 		|SELECT
 		|	VALUE(AccumulationRecordType.Receipt),
 		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Branch,
 		|	ItemList.StoreReceiver,
 		|	ItemLIst.ItemKey,
 		|	ItemList.Quantity

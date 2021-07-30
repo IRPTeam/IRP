@@ -137,7 +137,7 @@ Function GetPurchaseOrderForClosing(PurchaseOrder, AddInfo = Undefined) Export
 		|	PurchaseOrder.Partner AS Partner,
 		|	PurchaseOrder.PriceIncludeTax AS PriceIncludeTax,
 		|	PurchaseOrder.Author AS Author,
-		|	PurchaseOrder.BusinessUnit AS BusinessUnit,
+		|	PurchaseOrder.Branch AS Branch,
 		|	PurchaseOrder.Description AS Description
 		|FROM
 		|	Document.PurchaseOrder AS PurchaseOrder
@@ -158,7 +158,7 @@ Function GetPurchaseOrderForClosing(PurchaseOrder, AddInfo = Undefined) Export
 		|	ItemList.ItemKey.Item.Unit AS Unit,
 		|	ItemList.DeliveryDate AS DeliveryDate,
 		|	ItemList.Detail AS Detail,
-		|	ItemList.BusinessUnit AS BusinessUnit,
+		|	ItemList.ProfitLossCenter AS ProfitLossCenter,
 		|	ItemList.DontCalculateRow AS DontCalculateRow,
 		|	ItemList.CancelReason AS CancelReason,
 		|	PurchaseOrdersInvoiceClosing.QuantityBalance > 0 AS Cancel,

@@ -129,42 +129,42 @@ Scenario: _029901 create Sales order without reserve and check its movements (SO
 		And I select "R2010 Sales orders" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-			| '$$SalesOrder029901$$'           | ''                         | ''          | ''         | ''           | ''              | ''             | ''                             | ''         | ''                     | ''          | ''        | ''                   | ''                     |
-			| 'Document registrations records' | ''                         | ''          | ''         | ''           | ''              | ''             | ''                             | ''         | ''                     | ''          | ''        | ''                   | ''                     |
-			| 'Register  "R2010 Sales orders"' | ''                         | ''          | ''         | ''           | ''              | ''             | ''                             | ''         | ''                     | ''          | ''        | ''                   | ''                     |
-			| ''                               | 'Period'                   | 'Resources' | ''         | ''           | ''              | 'Dimensions'   | ''                             | ''         | ''                     | ''          | ''        | ''                   | 'Attributes'           |
-			| ''                               | ''                         | 'Quantity'  | 'Amount'   | 'Net amount' | 'Offers amount' | 'Company'      | 'Multi currency movement type' | 'Currency' | 'Order'                | 'Item key'  | 'Row key' | 'Procurement method' | 'Deferred calculation' |
-			| ''                               | '$$DateSalesOrder029901$$' | '31'        | '2 122,88' | '1 799,05'   | ''              | 'Main Company' | 'Reporting currency'           | 'USD'      | '$$SalesOrder029901$$' | '38/Yellow' | '*'       | 'No reserve'         | 'No'                   |
-			| ''                               | '$$DateSalesOrder029901$$' | '31'        | '12 400'   | '10 508,47'  | ''              | 'Main Company' | 'Local currency'               | 'TRY'      | '$$SalesOrder029901$$' | '38/Yellow' | '*'       | 'No reserve'         | 'No'                   |
-			| ''                               | '$$DateSalesOrder029901$$' | '31'        | '12 400'   | '10 508,47'  | ''              | 'Main Company' | 'TRY'                          | 'TRY'      | '$$SalesOrder029901$$' | '38/Yellow' | '*'       | 'No reserve'         | 'No'                   |
-			| ''                               | '$$DateSalesOrder029901$$' | '31'        | '12 400'   | '10 508,47'  | ''              | 'Main Company' | 'en description is empty'      | 'TRY'      | '$$SalesOrder029901$$' | '38/Yellow' | '*'       | 'No reserve'         | 'No'                   |
-			| ''                               | '$$DateSalesOrder029901$$' | '40'        | '2 396,8'  | '2 031,19'   | ''              | 'Main Company' | 'Reporting currency'           | 'USD'      | '$$SalesOrder029901$$' | '38/Black'  | '*'       | 'No reserve'         | 'No'                   |
-			| ''                               | '$$DateSalesOrder029901$$' | '40'        | '14 000'   | '11 864,41'  | ''              | 'Main Company' | 'Local currency'               | 'TRY'      | '$$SalesOrder029901$$' | '38/Black'  | '*'       | 'No reserve'         | 'No'                   |
-			| ''                               | '$$DateSalesOrder029901$$' | '40'        | '14 000'   | '11 864,41'  | ''              | 'Main Company' | 'TRY'                          | 'TRY'      | '$$SalesOrder029901$$' | '38/Black'  | '*'       | 'No reserve'         | 'No'                   |
-			| ''                               | '$$DateSalesOrder029901$$' | '40'        | '14 000'   | '11 864,41'  | ''              | 'Main Company' | 'en description is empty'      | 'TRY'      | '$$SalesOrder029901$$' | '38/Black'  | '*'       | 'No reserve'         | 'No'                   |
+			| '$$SalesOrder029901$$'           | ''                         | ''          | ''         | ''           | ''              | ''             | ''             | ''                             | ''         | ''                     | ''          | ''        | ''                   | ''                     |
+			| 'Document registrations records' | ''                         | ''          | ''         | ''           | ''              | ''             | ''             | ''                             | ''         | ''                     | ''          | ''        | ''                   | ''                     |
+			| 'Register  "R2010 Sales orders"' | ''                         | ''          | ''         | ''           | ''              | ''             | ''             | ''                             | ''         | ''                     | ''          | ''        | ''                   | ''                     |
+			| ''                               | 'Period'                   | 'Resources' | ''         | ''           | ''              | 'Dimensions'   | ''             | ''                             | ''         | ''                     | ''          | ''        | ''                   | 'Attributes'           |
+			| ''                               | ''                         | 'Quantity'  | 'Amount'   | 'Net amount' | 'Offers amount' | 'Company'      | 'Branch'       | 'Multi currency movement type' | 'Currency' | 'Order'                | 'Item key'  | 'Row key' | 'Procurement method' | 'Deferred calculation' |
+			| ''                               | '$$DateSalesOrder029901$$' | '31'        | '2 122,88' | '1 799,05'   | ''              | 'Main Company' | ''             | 'Reporting currency'           | 'USD'      | '$$SalesOrder029901$$' | '38/Yellow' | '*'       | 'No reserve'         | 'No'                   |
+			| ''                               | '$$DateSalesOrder029901$$' | '31'        | '12 400'   | '10 508,47'  | ''              | 'Main Company' | ''             | 'Local currency'               | 'TRY'      | '$$SalesOrder029901$$' | '38/Yellow' | '*'       | 'No reserve'         | 'No'                   |
+			| ''                               | '$$DateSalesOrder029901$$' | '31'        | '12 400'   | '10 508,47'  | ''              | 'Main Company' | ''             | 'TRY'                          | 'TRY'      | '$$SalesOrder029901$$' | '38/Yellow' | '*'       | 'No reserve'         | 'No'                   |
+			| ''                               | '$$DateSalesOrder029901$$' | '31'        | '12 400'   | '10 508,47'  | ''              | 'Main Company' | ''             | 'en description is empty'      | 'TRY'      | '$$SalesOrder029901$$' | '38/Yellow' | '*'       | 'No reserve'         | 'No'                   |
+			| ''                               | '$$DateSalesOrder029901$$' | '40'        | '2 396,8'  | '2 031,19'   | ''              | 'Main Company' | ''             | 'Reporting currency'           | 'USD'      | '$$SalesOrder029901$$' | '38/Black'  | '*'       | 'No reserve'         | 'No'                   |
+			| ''                               | '$$DateSalesOrder029901$$' | '40'        | '14 000'   | '11 864,41'  | ''              | 'Main Company' | ''             | 'Local currency'               | 'TRY'      | '$$SalesOrder029901$$' | '38/Black'  | '*'       | 'No reserve'         | 'No'                   |
+			| ''                               | '$$DateSalesOrder029901$$' | '40'        | '14 000'   | '11 864,41'  | ''              | 'Main Company' | ''             | 'TRY'                          | 'TRY'      | '$$SalesOrder029901$$' | '38/Black'  | '*'       | 'No reserve'         | 'No'                   |
+			| ''                               | '$$DateSalesOrder029901$$' | '40'        | '14 000'   | '11 864,41'  | ''              | 'Main Company' | ''             | 'en description is empty'      | 'TRY'      | '$$SalesOrder029901$$' | '38/Black'  | '*'       | 'No reserve'         | 'No'                   |
 	* Check SO movements Register  "R2011 Shipment of sales orders")
 		And I select "R2011 Shipment of sales orders" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-			| '$$SalesOrder029901$$'                       | ''            | ''                         | ''          | ''             | ''                     | ''          |
-			| 'Document registrations records'             | ''            | ''                         | ''          | ''             | ''                     | ''          |
-			| 'Register  "R2011 Shipment of sales orders"' | ''            | ''                         | ''          | ''             | ''                     | ''          |
-			| ''                                           | 'Record type' | 'Period'                   | 'Resources' | 'Dimensions'   | ''                     | ''          |
-			| ''                                           | ''            | ''                         | 'Quantity'  | 'Company'      | 'Order'                | 'Item key'  |
-			| ''                                           | 'Receipt'     | '$$DateSalesOrder029901$$' | '31'        | 'Main Company' | '$$SalesOrder029901$$' | '38/Yellow' |
-			| ''                                           | 'Receipt'     | '$$DateSalesOrder029901$$' | '40'        | 'Main Company' | '$$SalesOrder029901$$' | '38/Black'  |
+			| '$$SalesOrder029901$$'                       | ''            | ''                         | ''          | ''             | ''                     | ''                     | ''          |
+			| 'Document registrations records'             | ''            | ''                         | ''          | ''             | ''                     | ''                     | ''          |
+			| 'Register  "R2011 Shipment of sales orders"' | ''            | ''                         | ''          | ''             | ''                     | ''                     | ''          |
+			| ''                                           | 'Record type' | 'Period'                   | 'Resources' | 'Dimensions'   | ''                     | ''                     | ''          |
+			| ''                                           | ''            | ''                         | 'Quantity'  | 'Company'      | 'Branch'               | 'Order'                | 'Item key'  |
+			| ''                                           | 'Receipt'     | '$$DateSalesOrder029901$$' | '31'        | 'Main Company' | ''                     | '$$SalesOrder029901$$' | '38/Yellow' |
+			| ''                                           | 'Receipt'     | '$$DateSalesOrder029901$$' | '40'        | 'Main Company' | ''                     | '$$SalesOrder029901$$' | '38/Black'  |
 
 	* Check SO movements Register  "Register  "R2012 Invoice closing of sales orders")
 		And I select "R2012 Invoice closing of sales orders" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-			| '$$SalesOrder029901$$'                              | ''            | ''                         | ''          | ''       | ''           | ''             | ''                     | ''         | ''          | ''        |
-			| 'Document registrations records'                    | ''            | ''                         | ''          | ''       | ''           | ''             | ''                     | ''         | ''          | ''        |
-			| 'Register  "R2012 Invoice closing of sales orders"' | ''            | ''                         | ''          | ''       | ''           | ''             | ''                     | ''         | ''          | ''        |
-			| ''                                                  | 'Record type' | 'Period'                   | 'Resources' | ''       | ''           | 'Dimensions'   | ''                     | ''         | ''          | ''        |
-			| ''                                                  | ''            | ''                         | 'Quantity'  | 'Amount' | 'Net amount' | 'Company'      | 'Order'                | 'Currency' | 'Item key'  | 'Row key' |
-			| ''                                                  | 'Receipt'     | '$$DateSalesOrder029901$$' | '31'        | '12 400' | '10 508,47'  | 'Main Company' | '$$SalesOrder029901$$' | 'TRY'      | '38/Yellow' | '*'       |
-			| ''                                                  | 'Receipt'     | '$$DateSalesOrder029901$$' | '40'        | '14 000' | '11 864,41'  | 'Main Company' | '$$SalesOrder029901$$' | 'TRY'      | '38/Black'  | '*'       |
+			| '$$SalesOrder029901$$'                              | ''            | ''                         | ''          | ''       | ''           | ''             | ''                     | ''                     | ''         | ''          | ''        |
+			| 'Document registrations records'                    | ''            | ''                         | ''          | ''       | ''           | ''             | ''                     | ''                     | ''         | ''          | ''        |
+			| 'Register  "R2012 Invoice closing of sales orders"' | ''            | ''                         | ''          | ''       | ''           | ''             | ''                     | ''                     | ''         | ''          | ''        |
+			| ''                                                  | 'Record type' | 'Period'                   | 'Resources' | ''       | ''           | 'Dimensions'   | ''                     | ''                     | ''         | ''          | ''        |
+			| ''                                                  | ''            | ''                         | 'Quantity'  | 'Amount' | 'Net amount' | 'Company'      | 'Branch'               | 'Order'                | 'Currency' | 'Item key'  | 'Row key' |
+			| ''                                                  | 'Receipt'     | '$$DateSalesOrder029901$$' | '31'        | '12 400' | '10 508,47'  | 'Main Company' | ''                     | '$$SalesOrder029901$$' | 'TRY'      | '38/Yellow' | '*'       |
+			| ''                                                  | 'Receipt'     | '$$DateSalesOrder029901$$' | '40'        | '14 000' | '11 864,41'  | 'Main Company' | ''                     | '$$SalesOrder029901$$' | 'TRY'      | '38/Black'  | '*'       |
 	
 	And I close all client application windows
 
@@ -189,18 +189,18 @@ Scenario: _029902 create SI for SO without reserve and check its movements (SO-S
 		And I select "R5010 Reconciliation statement" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-			| '$$SalesInvoice029901$$'                       | ''            | ''                           | ''          | ''           | ''             | ''                 |
-			| 'Document registrations records'             | ''            | ''                           | ''          | ''           | ''             | ''                 |
-			| 'Register  "R5010 Reconciliation statement"' | ''            | ''                           | ''          | ''           | ''             | ''                 |
-			| ''                                           | 'Record type' | 'Period'                     | 'Resources' | 'Dimensions' | ''             | ''                 |
-			| ''                                           | ''            | ''                           | 'Amount'    | 'Currency'   | 'Company'      | 'Legal name'       |
-			| ''                                           | 'Receipt'     | '$$DateSalesInvoice029901$$' | '26 400'    | 'TRY'        | 'Main Company' | 'Company Lomaniti' |
+			| '$$SalesInvoice029901$$'                     | ''            | ''                           | ''          | ''             | ''             | ''           | ''                 |
+			| 'Document registrations records'             | ''            | ''                           | ''          | ''             | ''             | ''           | ''                 |
+			| 'Register  "R5010 Reconciliation statement"' | ''            | ''                           | ''          | ''             | ''             | ''           | ''                 |
+			| ''                                           | 'Record type' | 'Period'                     | 'Resources' | 'Dimensions'   | ''             | ''           | ''                 |
+			| ''                                           | ''            | ''                           | 'Amount'    | 'Company'      | 'Branch'       | 'Currency'   | 'Legal name'       |
+			| ''                                           | 'Receipt'     | '$$DateSalesInvoice029901$$' | '26 400'    | 'Main Company' | ''             | 'TRY'        | 'Company Lomaniti' |
 	
 	* Check SI movements (Register  "R4010 Actual stocks")
 		And I select "R4010 Actual stocks" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-			| '$$SalesInvoice029901$$'            | ''            | ''                           | ''          | ''           | ''          | ''                  |
+			| '$$SalesInvoice029901$$'          | ''            | ''                           | ''          | ''           | ''          | ''                  |
 			| 'Document registrations records'  | ''            | ''                           | ''          | ''           | ''          | ''                  |
 			| 'Register  "R4010 Actual stocks"' | ''            | ''                           | ''          | ''           | ''          | ''                  |
 			| ''                                | 'Record type' | 'Period'                     | 'Resources' | 'Dimensions' | ''          | ''                  |
@@ -212,90 +212,90 @@ Scenario: _029902 create SI for SO without reserve and check its movements (SO-S
 		And I select "R2011 Shipment of sales orders" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-		| '$$SalesInvoice029901$$'                       | ''            | ''                           | ''          | ''             | ''                     | ''          |
-		| 'Document registrations records'             | ''            | ''                           | ''          | ''             | ''                     | ''          |
-		| 'Register  "R2011 Shipment of sales orders"' | ''            | ''                           | ''          | ''             | ''                     | ''          |
-		| ''                                           | 'Record type' | 'Period'                     | 'Resources' | 'Dimensions'   | ''                     | ''          |
-		| ''                                           | ''            | ''                           | 'Quantity'  | 'Company'      | 'Order'                | 'Item key'  |
-		| ''                                           | 'Expense'     | '$$DateSalesInvoice029901$$' | '31'        | 'Main Company' | '$$SalesOrder029901$$' | '38/Yellow' |
-		| ''                                           | 'Expense'     | '$$DateSalesInvoice029901$$' | '40'        | 'Main Company' | '$$SalesOrder029901$$' | '38/Black'  |
+		| '$$SalesInvoice029901$$'                     | ''            | ''                           | ''          | ''             | ''             | ''                     | ''          |
+		| 'Document registrations records'             | ''            | ''                           | ''          | ''             | ''             | ''                     | ''          |
+		| 'Register  "R2011 Shipment of sales orders"' | ''            | ''                           | ''          | ''             | ''             | ''                     | ''          |
+		| ''                                           | 'Record type' | 'Period'                     | 'Resources' | 'Dimensions'   | ''             | ''                     | ''          |
+		| ''                                           | ''            | ''                           | 'Quantity'  | 'Company'      | 'Branch'       | 'Order'                | 'Item key'  |
+		| ''                                           | 'Expense'     | '$$DateSalesInvoice029901$$' | '31'        | 'Main Company' | ''             | '$$SalesOrder029901$$' | '38/Yellow' |
+		| ''                                           | 'Expense'     | '$$DateSalesInvoice029901$$' | '40'        | 'Main Company' | ''             | '$$SalesOrder029901$$' | '38/Black'  |
 
 	* Check SI movements (Register  "R4050 Stock inventory")
 		And I select "R4050 Stock inventory" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-		| '$$SalesInvoice029901$$'            | ''            | ''                           | ''          | ''             | ''         | ''          |
-		| 'Document registrations records'    | ''            | ''                           | ''          | ''             | ''         | ''          |
-		| 'Register  "R4050 Stock inventory"' | ''            | ''                           | ''          | ''             | ''         | ''          |
-		| ''                                  | 'Record type' | 'Period'                     | 'Resources' | 'Dimensions'   | ''         | ''          |
-		| ''                                  | ''            | ''                           | 'Quantity'  | 'Company'      | 'Store'    | 'Item key'  |
-		| ''                                  | 'Expense'     | '$$DateSalesInvoice029901$$' | '31'        | 'Main Company' | 'Store 01' | '38/Yellow' |
-		| ''                                  | 'Expense'     | '$$DateSalesInvoice029901$$' | '40'        | 'Main Company' | 'Store 01' | '38/Black'  |
+		| '$$SalesInvoice029901$$'            | ''            | ''                           | ''          | ''             | ''             | ''         | ''          |
+		| 'Document registrations records'    | ''            | ''                           | ''          | ''             | ''             | ''         | ''          |
+		| 'Register  "R4050 Stock inventory"' | ''            | ''                           | ''          | ''             | ''             | ''         | ''          |
+		| ''                                  | 'Record type' | 'Period'                     | 'Resources' | 'Dimensions'   | ''             | ''         | ''          |
+		| ''                                  | ''            | ''                           | 'Quantity'  | 'Company'      | 'Branch'       | 'Store'    | 'Item key'  |
+		| ''                                  | 'Expense'     | '$$DateSalesInvoice029901$$' | '31'        | 'Main Company' | ''             | 'Store 01' | '38/Yellow' |
+		| ''                                  | 'Expense'     | '$$DateSalesInvoice029901$$' | '40'        | 'Main Company' | ''             | 'Store 01' | '38/Black'  |
 
 	* Check SI movements (Register  "Register  "R2001 Sales")
 		And I select "R2001 Sales" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-		| '$$SalesInvoice029901$$'         | ''                           | ''          | ''         | ''           | ''              | ''             | ''                             | ''         | ''                       | ''          | ''        |
-		| 'Document registrations records' | ''                           | ''          | ''         | ''           | ''              | ''             | ''                             | ''         | ''                       | ''          | ''        |
-		| 'Register  "R2001 Sales"'        | ''                           | ''          | ''         | ''           | ''              | ''             | ''                             | ''         | ''                       | ''          | ''        |
-		| ''                               | 'Period'                     | 'Resources' | ''         | ''           | ''              | 'Dimensions'   | ''                             | ''         | ''                       | ''          | ''        |
-		| ''                               | ''                           | 'Quantity'  | 'Amount'   | 'Net amount' | 'Offers amount' | 'Company'      | 'Multi currency movement type' | 'Currency' | 'Invoice'                | 'Item key'  | 'Row key' |
-		| ''                               | '$$DateSalesInvoice029901$$' | '31'        | '2 122,88' | '1 799,05'   | ''              | 'Main Company' | 'Reporting currency'           | 'USD'      | '$$SalesInvoice029901$$' | '38/Yellow' | '*'       |
-		| ''                               | '$$DateSalesInvoice029901$$' | '31'        | '12 400'   | '10 508,47'  | ''              | 'Main Company' | 'Local currency'               | 'TRY'      | '$$SalesInvoice029901$$' | '38/Yellow' | '*'       |
-		| ''                               | '$$DateSalesInvoice029901$$' | '31'        | '12 400'   | '10 508,47'  | ''              | 'Main Company' | 'TRY'                          | 'TRY'      | '$$SalesInvoice029901$$' | '38/Yellow' | '*'       |
-		| ''                               | '$$DateSalesInvoice029901$$' | '31'        | '12 400'   | '10 508,47'  | ''              | 'Main Company' | 'en description is empty'      | 'TRY'      | '$$SalesInvoice029901$$' | '38/Yellow' | '*'       |
-		| ''                               | '$$DateSalesInvoice029901$$' | '40'        | '2 396,8'  | '2 031,19'   | ''              | 'Main Company' | 'Reporting currency'           | 'USD'      | '$$SalesInvoice029901$$' | '38/Black'  | '*'       |
-		| ''                               | '$$DateSalesInvoice029901$$' | '40'        | '14 000'   | '11 864,41'  | ''              | 'Main Company' | 'Local currency'               | 'TRY'      | '$$SalesInvoice029901$$' | '38/Black'  | '*'       |
-		| ''                               | '$$DateSalesInvoice029901$$' | '40'        | '14 000'   | '11 864,41'  | ''              | 'Main Company' | 'TRY'                          | 'TRY'      | '$$SalesInvoice029901$$' | '38/Black'  | '*'       |
-		| ''                               | '$$DateSalesInvoice029901$$' | '40'        | '14 000'   | '11 864,41'  | ''              | 'Main Company' | 'en description is empty'      | 'TRY'      | '$$SalesInvoice029901$$' | '38/Black'  | '*'       |
+		| '$$SalesInvoice029901$$'         | ''                           | ''          | ''         | ''           | ''              | ''             | ''       | ''                             | ''         | ''                       | ''          | ''        |
+		| 'Document registrations records' | ''                           | ''          | ''         | ''           | ''              | ''             | ''       | ''                             | ''         | ''                       | ''          | ''        |
+		| 'Register  "R2001 Sales"'        | ''                           | ''          | ''         | ''           | ''              | ''             | ''       | ''                             | ''         | ''                       | ''          | ''        |
+		| ''                               | 'Period'                     | 'Resources' | ''         | ''           | ''              | 'Dimensions'   | ''       | ''                             | ''         | ''                       | ''          | ''        |
+		| ''                               | ''                           | 'Quantity'  | 'Amount'   | 'Net amount' | 'Offers amount' | 'Company'      | 'Branch' | 'Multi currency movement type' | 'Currency' | 'Invoice'                | 'Item key'  | 'Row key' |
+		| ''                               | '$$DateSalesInvoice029901$$' | '31'        | '2 122,88' | '1 799,05'   | ''              | 'Main Company' | ''       | 'Reporting currency'           | 'USD'      | '$$SalesInvoice029901$$' | '38/Yellow' | '*'       |
+		| ''                               | '$$DateSalesInvoice029901$$' | '31'        | '12 400'   | '10 508,47'  | ''              | 'Main Company' | ''       | 'Local currency'               | 'TRY'      | '$$SalesInvoice029901$$' | '38/Yellow' | '*'       |
+		| ''                               | '$$DateSalesInvoice029901$$' | '31'        | '12 400'   | '10 508,47'  | ''              | 'Main Company' | ''       | 'TRY'                          | 'TRY'      | '$$SalesInvoice029901$$' | '38/Yellow' | '*'       |
+		| ''                               | '$$DateSalesInvoice029901$$' | '31'        | '12 400'   | '10 508,47'  | ''              | 'Main Company' | ''       | 'en description is empty'      | 'TRY'      | '$$SalesInvoice029901$$' | '38/Yellow' | '*'       |
+		| ''                               | '$$DateSalesInvoice029901$$' | '40'        | '2 396,8'  | '2 031,19'   | ''              | 'Main Company' | ''       | 'Reporting currency'           | 'USD'      | '$$SalesInvoice029901$$' | '38/Black'  | '*'       |
+		| ''                               | '$$DateSalesInvoice029901$$' | '40'        | '14 000'   | '11 864,41'  | ''              | 'Main Company' | ''       | 'Local currency'               | 'TRY'      | '$$SalesInvoice029901$$' | '38/Black'  | '*'       |
+		| ''                               | '$$DateSalesInvoice029901$$' | '40'        | '14 000'   | '11 864,41'  | ''              | 'Main Company' | ''       | 'TRY'                          | 'TRY'      | '$$SalesInvoice029901$$' | '38/Black'  | '*'       |
+		| ''                               | '$$DateSalesInvoice029901$$' | '40'        | '14 000'   | '11 864,41'  | ''              | 'Main Company' | ''       | 'en description is empty'      | 'TRY'      | '$$SalesInvoice029901$$' | '38/Black'  | '*'       |
 
 	* Check SI movements (Register  "R2021 Customer transactions")
 		And I select "R2021 Customer transactions" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-		| '$$SalesInvoice029901$$'                  | ''            | ''                           | ''          | ''             | ''                             | ''         | ''                 | ''         | ''                         | ''                       | ''                     | ''                           |
-		| 'Document registrations records'          | ''            | ''                           | ''          | ''             | ''                             | ''         | ''                 | ''         | ''                         | ''                       | ''                     | ''                           |
-		| 'Register  "R2021 Customer transactions"' | ''            | ''                           | ''          | ''             | ''                             | ''         | ''                 | ''         | ''                         | ''                       | ''                     | ''                           |
-		| ''                                        | 'Record type' | 'Period'                     | 'Resources' | 'Dimensions'   | ''                             | ''         | ''                 | ''         | ''                         | ''                       | 'Attributes'           | ''                           |
-		| ''                                        | ''            | ''                           | 'Amount'    | 'Company'      | 'Multi currency movement type' | 'Currency' | 'Legal name'       | 'Partner'  | 'Agreement'                | 'Basis'                  | 'Deferred calculation' | 'Customers advances closing' |
-		| ''                                        | 'Receipt'     | '$$DateSalesInvoice029901$$' | '4 519,68'  | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Company Lomaniti' | 'Lomaniti' | 'Basic Partner terms, TRY' | '$$SalesInvoice029901$$' | 'No'                   | ''                           |
-		| ''                                        | 'Receipt'     | '$$DateSalesInvoice029901$$' | '26 400'    | 'Main Company' | 'Local currency'               | 'TRY'      | 'Company Lomaniti' | 'Lomaniti' | 'Basic Partner terms, TRY' | '$$SalesInvoice029901$$' | 'No'                   | ''                           |
-		| ''                                        | 'Receipt'     | '$$DateSalesInvoice029901$$' | '26 400'    | 'Main Company' | 'TRY'                          | 'TRY'      | 'Company Lomaniti' | 'Lomaniti' | 'Basic Partner terms, TRY' | '$$SalesInvoice029901$$' | 'No'                   | ''                           |
-		| ''                                        | 'Receipt'     | '$$DateSalesInvoice029901$$' | '26 400'    | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Company Lomaniti' | 'Lomaniti' | 'Basic Partner terms, TRY' | '$$SalesInvoice029901$$' | 'No'                   | ''                           |
+		| '$$SalesInvoice029901$$'                  | ''            | ''                           | ''          | ''             | ''       | ''                             | ''         | ''                 | ''         | ''                         | ''                       | ''                     | ''                           |
+		| 'Document registrations records'          | ''            | ''                           | ''          | ''             | ''       | ''                             | ''         | ''                 | ''         | ''                         | ''                       | ''                     | ''                           |
+		| 'Register  "R2021 Customer transactions"' | ''            | ''                           | ''          | ''             | ''       | ''                             | ''         | ''                 | ''         | ''                         | ''                       | ''                     | ''                           |
+		| ''                                        | 'Record type' | 'Period'                     | 'Resources' | 'Dimensions'   | ''       | ''                             | ''         | ''                 | ''         | ''                         | ''                       | 'Attributes'           | ''                           |
+		| ''                                        | ''            | ''                           | 'Amount'    | 'Company'      | 'Branch' | 'Multi currency movement type' | 'Currency' | 'Legal name'       | 'Partner'  | 'Agreement'                | 'Basis'                  | 'Deferred calculation' | 'Customers advances closing' |
+		| ''                                        | 'Receipt'     | '$$DateSalesInvoice029901$$' | '4 519,68'  | 'Main Company' | ''       | 'Reporting currency'           | 'USD'      | 'Company Lomaniti' | 'Lomaniti' | 'Basic Partner terms, TRY' | '$$SalesInvoice029901$$' | 'No'                   | ''                           |
+		| ''                                        | 'Receipt'     | '$$DateSalesInvoice029901$$' | '26 400'    | 'Main Company' | ''       | 'Local currency'               | 'TRY'      | 'Company Lomaniti' | 'Lomaniti' | 'Basic Partner terms, TRY' | '$$SalesInvoice029901$$' | 'No'                   | ''                           |
+		| ''                                        | 'Receipt'     | '$$DateSalesInvoice029901$$' | '26 400'    | 'Main Company' | ''       | 'TRY'                          | 'TRY'      | 'Company Lomaniti' | 'Lomaniti' | 'Basic Partner terms, TRY' | '$$SalesInvoice029901$$' | 'No'                   | ''                           |
+		| ''                                        | 'Receipt'     | '$$DateSalesInvoice029901$$' | '26 400'    | 'Main Company' | ''       | 'en description is empty'      | 'TRY'      | 'Company Lomaniti' | 'Lomaniti' | 'Basic Partner terms, TRY' | '$$SalesInvoice029901$$' | 'No'                   | ''                           |
 	* Check SI movements (Register  "R2040 Taxes incoming")
 		And I select "R2040 Taxes incoming" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-		| '$$SalesInvoice029901$$'           | ''            | ''                           | ''               | ''           | ''             | ''    | ''         | ''                  |
-		| 'Document registrations records'   | ''            | ''                           | ''               | ''           | ''             | ''    | ''         | ''                  |
-		| 'Register  "R2040 Taxes incoming"' | ''            | ''                           | ''               | ''           | ''             | ''    | ''         | ''                  |
-		| ''                                 | 'Record type' | 'Period'                     | 'Resources'      | ''           | 'Dimensions'   | ''    | ''         | ''                  |
-		| ''                                 | ''            | ''                           | 'Taxable amount' | 'Tax amount' | 'Company'      | 'Tax' | 'Tax rate' | 'Tax movement type' |
-		| ''                                 | 'Receipt'     | '$$DateSalesInvoice029901$$' | '10 508,47'      | '1 891,53'   | 'Main Company' | 'VAT' | '18%'      | ''                  |
-		| ''                                 | 'Receipt'     | '$$DateSalesInvoice029901$$' | '11 864,41'      | '2 135,59'   | 'Main Company' | 'VAT' | '18%'      | ''                  |
+		| '$$SalesInvoice029901$$'           | ''            | ''                           | ''               | ''           | ''             | ''       | ''    | ''         | ''                  |
+		| 'Document registrations records'   | ''            | ''                           | ''               | ''           | ''             | ''       | ''    | ''         | ''                  |
+		| 'Register  "R2040 Taxes incoming"' | ''            | ''                           | ''               | ''           | ''             | ''       | ''    | ''         | ''                  |
+		| ''                                 | 'Record type' | 'Period'                     | 'Resources'      | ''           | 'Dimensions'   | ''       | ''    | ''         | ''                  |
+		| ''                                 | ''            | ''                           | 'Taxable amount' | 'Tax amount' | 'Company'      | 'Branch' | 'Tax' | 'Tax rate' | 'Tax movement type' |
+		| ''                                 | 'Receipt'     | '$$DateSalesInvoice029901$$' | '10 508,47'      | '1 891,53'   | 'Main Company' | ''       | 'VAT' | '18%'      | ''                  |
+		| ''                                 | 'Receipt'     | '$$DateSalesInvoice029901$$' | '11 864,41'      | '2 135,59'   | 'Main Company' | ''       | 'VAT' | '18%'      | ''                  |
 	* Check SI movements (Register  "R4050 Stock inventory")
 		And I select "R4050 Stock inventory" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-		| '$$SalesInvoice029901$$' | ''            | ''                    | ''          | ''             | ''         | ''          |
-		| 'Document registrations records'            | ''            | ''                    | ''          | ''             | ''         | ''          |
-		| 'Register  "R4050 Stock inventory"'         | ''            | ''                    | ''          | ''             | ''         | ''          |
-		| ''                                          | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''         | ''          |
-		| ''                                          | ''            | ''                    | 'Quantity'  | 'Company'      | 'Store'    | 'Item key'  |
-		| ''                                          | 'Expense'     | '$$DateSalesInvoice029901$$' | '31'        | 'Main Company' | 'Store 01' | '38/Yellow' |
-		| ''                                          | 'Expense'     | '$$DateSalesInvoice029901$$' | '40'        | 'Main Company' | 'Store 01' | '38/Black'  |
+		| '$$SalesInvoice029901$$'            | ''            | ''                           | ''          | ''             | ''       | ''         | ''          |
+		| 'Document registrations records'    | ''            | ''                           | ''          | ''             | ''       | ''         | ''          |
+		| 'Register  "R4050 Stock inventory"' | ''            | ''                           | ''          | ''             | ''       | ''         | ''          |
+		| ''                                  | 'Record type' | 'Period'                     | 'Resources' | 'Dimensions'   | ''       | ''         | ''          |
+		| ''                                  | ''            | ''                           | 'Quantity'  | 'Company'      | 'Branch' | 'Store'    | 'Item key'  |
+		| ''                                  | 'Expense'     | '$$DateSalesInvoice029901$$' | '31'        | 'Main Company' | ''       | 'Store 01' | '38/Yellow' |
+		| ''                                  | 'Expense'     | '$$DateSalesInvoice029901$$' | '40'        | 'Main Company' | ''       | 'Store 01' | '38/Black'  |
 	* Check SI movements (Register  "R2011 Shipment of sales orders")
 		And I select "R2011 Shipment of sales orders" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-		| '$$SalesInvoice029901$$'  | ''            | ''                    | ''          | ''             | ''                                         | ''          |
-		| 'Document registrations records'             | ''            | ''                    | ''          | ''             | ''                                         | ''          |
-		| 'Register  "R2011 Shipment of sales orders"' | ''            | ''                    | ''          | ''             | ''                                         | ''          |
-		| ''                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                                         | ''          |
-		| ''                                           | ''            | ''                    | 'Quantity'  | 'Company'      | 'Order'                                    | 'Item key'  |
-		| ''                                           | 'Expense'     | '$$DateSalesInvoice029901$$' | '31'        | 'Main Company' | '$$SalesOrder029901$$' | '38/Yellow' |
-		| ''                                           | 'Expense'     | '$$DateSalesInvoice029901$$' | '40'        | 'Main Company' | '$$SalesOrder029901$$' | '38/Black'  |
+		| '$$SalesInvoice029901$$'                     | ''            | ''                           | ''          | ''             | ''       | ''                     | ''          |
+		| 'Document registrations records'             | ''            | ''                           | ''          | ''             | ''       | ''                     | ''          |
+		| 'Register  "R2011 Shipment of sales orders"' | ''            | ''                           | ''          | ''             | ''       | ''                     | ''          |
+		| ''                                           | 'Record type' | 'Period'                     | 'Resources' | 'Dimensions'   | ''       | ''                     | ''          |
+		| ''                                           | ''            | ''                           | 'Quantity'  | 'Company'      | 'Branch' | 'Order'                | 'Item key'  |
+		| ''                                           | 'Expense'     | '$$DateSalesInvoice029901$$' | '31'        | 'Main Company' | ''       | '$$SalesOrder029901$$' | '38/Yellow' |
+		| ''                                           | 'Expense'     | '$$DateSalesInvoice029901$$' | '40'        | 'Main Company' | ''       | '$$SalesOrder029901$$' | '38/Black'  |
 	* Check SI movements (Register  "R4011B Free stocks")
 		And I select "R4011 Free stocks" exact value from "Register" drop-down list
 		And I click "Generate report" button
@@ -391,42 +391,42 @@ Scenario: _029903 create Sales order without reserve and check its movements (SO
 		And I select "R2010 Sales orders" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-			| '$$SalesOrder029903$$'           | ''                         | ''          | ''         | ''           | ''              | ''             | ''                             | ''         | ''                     | ''          | ''        | ''                   | ''                     |
-			| 'Document registrations records' | ''                         | ''          | ''         | ''           | ''              | ''             | ''                             | ''         | ''                     | ''          | ''        | ''                   | ''                     |
-			| 'Register  "R2010 Sales orders"' | ''                         | ''          | ''         | ''           | ''              | ''             | ''                             | ''         | ''                     | ''          | ''        | ''                   | ''                     |
-			| ''                               | 'Period'                   | 'Resources' | ''         | ''           | ''              | 'Dimensions'   | ''                             | ''         | ''                     | ''          | ''        | ''                   | 'Attributes'           |
-			| ''                               | ''                         | 'Quantity'  | 'Amount'   | 'Net amount' | 'Offers amount' | 'Company'      | 'Multi currency movement type' | 'Currency' | 'Order'                | 'Item key'  | 'Row key' | 'Procurement method' | 'Deferred calculation' |
-			| ''                               | '$$DateSalesOrder029903$$' | '31'        | '2 122,88' | '1 799,05'   | ''              | 'Main Company' | 'Reporting currency'           | 'USD'      | '$$SalesOrder029903$$' | '38/Yellow' | '*'       | 'No reserve'         | 'No'                   |
-			| ''                               | '$$DateSalesOrder029903$$' | '31'        | '12 400'   | '10 508,47'  | ''              | 'Main Company' | 'Local currency'               | 'TRY'      | '$$SalesOrder029903$$' | '38/Yellow' | '*'       | 'No reserve'         | 'No'                   |
-			| ''                               | '$$DateSalesOrder029903$$' | '31'        | '12 400'   | '10 508,47'  | ''              | 'Main Company' | 'TRY'                          | 'TRY'      | '$$SalesOrder029903$$' | '38/Yellow' | '*'       | 'No reserve'         | 'No'                   |
-			| ''                               | '$$DateSalesOrder029903$$' | '31'        | '12 400'   | '10 508,47'  | ''              | 'Main Company' | 'en description is empty'      | 'TRY'      | '$$SalesOrder029903$$' | '38/Yellow' | '*'       | 'No reserve'         | 'No'                   |
-			| ''                               | '$$DateSalesOrder029903$$' | '40'        | '2 396,8'  | '2 031,19'   | ''              | 'Main Company' | 'Reporting currency'           | 'USD'      | '$$SalesOrder029903$$' | '38/Black'  | '*'       | 'No reserve'         | 'No'                   |
-			| ''                               | '$$DateSalesOrder029903$$' | '40'        | '14 000'   | '11 864,41'  | ''              | 'Main Company' | 'Local currency'               | 'TRY'      | '$$SalesOrder029903$$' | '38/Black'  | '*'       | 'No reserve'         | 'No'                   |
-			| ''                               | '$$DateSalesOrder029903$$' | '40'        | '14 000'   | '11 864,41'  | ''              | 'Main Company' | 'TRY'                          | 'TRY'      | '$$SalesOrder029903$$' | '38/Black'  | '*'       | 'No reserve'         | 'No'                   |
-			| ''                               | '$$DateSalesOrder029903$$' | '40'        | '14 000'   | '11 864,41'  | ''              | 'Main Company' | 'en description is empty'      | 'TRY'      | '$$SalesOrder029903$$' | '38/Black'  | '*'       | 'No reserve'         | 'No'                   |
+			| '$$SalesOrder029903$$'           | ''                         | ''          | ''         | ''           | ''              | ''             | ''       | ''                             | ''         | ''                     | ''          | ''        | ''                   | ''                     |
+			| 'Document registrations records' | ''                         | ''          | ''         | ''           | ''              | ''             | ''       | ''                             | ''         | ''                     | ''          | ''        | ''                   | ''                     |
+			| 'Register  "R2010 Sales orders"' | ''                         | ''          | ''         | ''           | ''              | ''             | ''       | ''                             | ''         | ''                     | ''          | ''        | ''                   | ''                     |
+			| ''                               | 'Period'                   | 'Resources' | ''         | ''           | ''              | 'Dimensions'   | ''       | ''                             | ''         | ''                     | ''          | ''        | ''                   | 'Attributes'           |
+			| ''                               | ''                         | 'Quantity'  | 'Amount'   | 'Net amount' | 'Offers amount' | 'Company'      | 'Branch' | 'Multi currency movement type' | 'Currency' | 'Order'                | 'Item key'  | 'Row key' | 'Procurement method' | 'Deferred calculation' |
+			| ''                               | '$$DateSalesOrder029903$$' | '31'        | '2 122,88' | '1 799,05'   | ''              | 'Main Company' | ''       | 'Reporting currency'           | 'USD'      | '$$SalesOrder029903$$' | '38/Yellow' | '*'       | 'No reserve'         | 'No'                   |
+			| ''                               | '$$DateSalesOrder029903$$' | '31'        | '12 400'   | '10 508,47'  | ''              | 'Main Company' | ''       | 'Local currency'               | 'TRY'      | '$$SalesOrder029903$$' | '38/Yellow' | '*'       | 'No reserve'         | 'No'                   |
+			| ''                               | '$$DateSalesOrder029903$$' | '31'        | '12 400'   | '10 508,47'  | ''              | 'Main Company' | ''       | 'TRY'                          | 'TRY'      | '$$SalesOrder029903$$' | '38/Yellow' | '*'       | 'No reserve'         | 'No'                   |
+			| ''                               | '$$DateSalesOrder029903$$' | '31'        | '12 400'   | '10 508,47'  | ''              | 'Main Company' | ''       | 'en description is empty'      | 'TRY'      | '$$SalesOrder029903$$' | '38/Yellow' | '*'       | 'No reserve'         | 'No'                   |
+			| ''                               | '$$DateSalesOrder029903$$' | '40'        | '2 396,8'  | '2 031,19'   | ''              | 'Main Company' | ''       | 'Reporting currency'           | 'USD'      | '$$SalesOrder029903$$' | '38/Black'  | '*'       | 'No reserve'         | 'No'                   |
+			| ''                               | '$$DateSalesOrder029903$$' | '40'        | '14 000'   | '11 864,41'  | ''              | 'Main Company' | ''       | 'Local currency'               | 'TRY'      | '$$SalesOrder029903$$' | '38/Black'  | '*'       | 'No reserve'         | 'No'                   |
+			| ''                               | '$$DateSalesOrder029903$$' | '40'        | '14 000'   | '11 864,41'  | ''              | 'Main Company' | ''       | 'TRY'                          | 'TRY'      | '$$SalesOrder029903$$' | '38/Black'  | '*'       | 'No reserve'         | 'No'                   |
+			| ''                               | '$$DateSalesOrder029903$$' | '40'        | '14 000'   | '11 864,41'  | ''              | 'Main Company' | ''       | 'en description is empty'      | 'TRY'      | '$$SalesOrder029903$$' | '38/Black'  | '*'       | 'No reserve'         | 'No'                   |
 	* Check SO movements Register  "R2011 Shipment of sales orders")
 		And I select "R2011 Shipment of sales orders" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-			| '$$SalesOrder029903$$'                       | ''            | ''                         | ''          | ''             | ''                     | ''          |
-			| 'Document registrations records'             | ''            | ''                         | ''          | ''             | ''                     | ''          |
-			| 'Register  "R2011 Shipment of sales orders"' | ''            | ''                         | ''          | ''             | ''                     | ''          |
-			| ''                                           | 'Record type' | 'Period'                   | 'Resources' | 'Dimensions'   | ''                     | ''          |
-			| ''                                           | ''            | ''                         | 'Quantity'  | 'Company'      | 'Order'                | 'Item key'  |
-			| ''                                           | 'Receipt'     | '$$DateSalesOrder029903$$' | '31'        | 'Main Company' | '$$SalesOrder029903$$' | '38/Yellow' |
-			| ''                                           | 'Receipt'     | '$$DateSalesOrder029903$$' | '40'        | 'Main Company' | '$$SalesOrder029903$$' | '38/Black'  |
+			| '$$SalesOrder029903$$'                       | ''            | ''                         | ''          | ''             | ''       | ''                     | ''          |
+			| 'Document registrations records'             | ''            | ''                         | ''          | ''             | ''       | ''                     | ''          |
+			| 'Register  "R2011 Shipment of sales orders"' | ''            | ''                         | ''          | ''             | ''       | ''                     | ''          |
+			| ''                                           | 'Record type' | 'Period'                   | 'Resources' | 'Dimensions'   | ''       | ''                     | ''          |
+			| ''                                           | ''            | ''                         | 'Quantity'  | 'Company'      | 'Branch' | 'Order'                | 'Item key'  |
+			| ''                                           | 'Receipt'     | '$$DateSalesOrder029903$$' | '31'        | 'Main Company' | ''       | '$$SalesOrder029903$$' | '38/Yellow' |
+			| ''                                           | 'Receipt'     | '$$DateSalesOrder029903$$' | '40'        | 'Main Company' | ''       | '$$SalesOrder029903$$' | '38/Black'  |
 
 	* Check SO movements Register  "Register  "R2012 Invoice closing of sales orders")
 		And I select "R2012 Invoice closing of sales orders" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-			| '$$SalesOrder029903$$'                              | ''            | ''                         | ''          | ''       | ''           | ''             | ''                     | ''         | ''          | ''        |
-			| 'Document registrations records'                    | ''            | ''                         | ''          | ''       | ''           | ''             | ''                     | ''         | ''          | ''        |
-			| 'Register  "R2012 Invoice closing of sales orders"' | ''            | ''                         | ''          | ''       | ''           | ''             | ''                     | ''         | ''          | ''        |
-			| ''                                                  | 'Record type' | 'Period'                   | 'Resources' | ''       | ''           | 'Dimensions'   | ''                     | ''         | ''          | ''        |
-			| ''                                                  | ''            | ''                         | 'Quantity'  | 'Amount' | 'Net amount' | 'Company'      | 'Order'                | 'Currency' | 'Item key'  | 'Row key' |
-			| ''                                                  | 'Receipt'     | '$$DateSalesOrder029903$$' | '31'        | '12 400' | '10 508,47'  | 'Main Company' | '$$SalesOrder029903$$' | 'TRY'      | '38/Yellow' | '*'       |
-			| ''                                                  | 'Receipt'     | '$$DateSalesOrder029903$$' | '40'        | '14 000' | '11 864,41'  | 'Main Company' | '$$SalesOrder029903$$' | 'TRY'      | '38/Black'  | '*'       |
+			| '$$SalesOrder029903$$'                              | ''            | ''                         | ''          | ''       | ''           | ''             | ''       | ''                     | ''         | ''          | ''        |
+			| 'Document registrations records'                    | ''            | ''                         | ''          | ''       | ''           | ''             | ''       | ''                     | ''         | ''          | ''        |
+			| 'Register  "R2012 Invoice closing of sales orders"' | ''            | ''                         | ''          | ''       | ''           | ''             | ''       | ''                     | ''         | ''          | ''        |
+			| ''                                                  | 'Record type' | 'Period'                   | 'Resources' | ''       | ''           | 'Dimensions'   | ''       | ''                     | ''         | ''          | ''        |
+			| ''                                                  | ''            | ''                         | 'Quantity'  | 'Amount' | 'Net amount' | 'Company'      | 'Branch' | 'Order'                | 'Currency' | 'Item key'  | 'Row key' |
+			| ''                                                  | 'Receipt'     | '$$DateSalesOrder029903$$' | '31'        | '12 400' | '10 508,47'  | 'Main Company' | ''       | '$$SalesOrder029903$$' | 'TRY'      | '38/Yellow' | '*'       |
+			| ''                                                  | 'Receipt'     | '$$DateSalesOrder029903$$' | '40'        | '14 000' | '11 864,41'  | 'Main Company' | ''       | '$$SalesOrder029903$$' | 'TRY'      | '38/Black'  | '*'       |
 	
 		And I close all client application windows		
 
@@ -464,24 +464,24 @@ Scenario: _029904 create Shipment confirmation for SO without reserve and check 
 			And I select "R2031 Shipment invoicing" exact value from "Register" drop-down list
 			And I click "Generate report" button
 			And "ResultTable" spreadsheet document contains lines:
-			| '$$ShipmentConfirmation029903$$'       | ''            | ''                                   | ''          | ''             | ''         | ''                               | ''          |
-			| 'Document registrations records'       | ''            | ''                                   | ''          | ''             | ''         | ''                               | ''          |
-			| 'Register  "R2031 Shipment invoicing"' | ''            | ''                                   | ''          | ''             | ''         | ''                               | ''          |
-			| ''                                     | 'Record type' | 'Period'                             | 'Resources' | 'Dimensions'   | ''         | ''                               | ''          |
-			| ''                                     | ''            | ''                                   | 'Quantity'  | 'Company'      | 'Store'    | 'Basis'                          | 'Item key'  |
-			| ''                                     | 'Receipt'     | '$$DateShipmentConfirmation029903$$' | '31'        | 'Main Company' | 'Store 02' | '$$ShipmentConfirmation029903$$' | '38/Yellow' |
-			| ''                                     | 'Receipt'     | '$$DateShipmentConfirmation029903$$' | '40'        | 'Main Company' | 'Store 02' | '$$ShipmentConfirmation029903$$' | '38/Black'  |
+			| '$$ShipmentConfirmation029903$$'       | ''            | ''                                   | ''          | ''             | ''       | ''         | ''                               | ''          |
+			| 'Document registrations records'       | ''            | ''                                   | ''          | ''             | ''       | ''         | ''                               | ''          |
+			| 'Register  "R2031 Shipment invoicing"' | ''            | ''                                   | ''          | ''             | ''       | ''         | ''                               | ''          |
+			| ''                                     | 'Record type' | 'Period'                             | 'Resources' | 'Dimensions'   | ''       | ''         | ''                               | ''          |
+			| ''                                     | ''            | ''                                   | 'Quantity'  | 'Company'      | 'Branch' | 'Store'    | 'Basis'                          | 'Item key'  |
+			| ''                                     | 'Receipt'     | '$$DateShipmentConfirmation029903$$' | '31'        | 'Main Company' | ''       | 'Store 02' | '$$ShipmentConfirmation029903$$' | '38/Yellow' |
+			| ''                                     | 'Receipt'     | '$$DateShipmentConfirmation029903$$' | '40'        | 'Main Company' | ''       | 'Store 02' | '$$ShipmentConfirmation029903$$' | '38/Black'  |
 		* Check SC movements Register  "R2011 Shipment of sales orders"
 			And I select "R2011 Shipment of sales orders" exact value from "Register" drop-down list
 			And I click "Generate report" button
 			And "ResultTable" spreadsheet document contains lines:
-				| '$$ShipmentConfirmation029903$$'             | ''            | ''                                   | ''          | ''             | ''                     | ''          |
-				| 'Document registrations records'             | ''            | ''                                   | ''          | ''             | ''                     | ''          |
-				| 'Register  "R2011 Shipment of sales orders"' | ''            | ''                                   | ''          | ''             | ''                     | ''          |
-				| ''                                           | 'Record type' | 'Period'                             | 'Resources' | 'Dimensions'   | ''                     | ''          |
-				| ''                                           | ''            | ''                                   | 'Quantity'  | 'Company'      | 'Order'                | 'Item key'  |
-				| ''                                           | 'Expense'     | '$$DateShipmentConfirmation029903$$' | '31'        | 'Main Company' | '$$SalesOrder029903$$' | '38/Yellow' |
-				| ''                                           | 'Expense'     | '$$DateShipmentConfirmation029903$$' | '40'        | 'Main Company' | '$$SalesOrder029903$$' | '38/Black'  |
+				| '$$ShipmentConfirmation029903$$'             | ''            | ''                                   | ''          | ''             | ''       | ''                     | ''          |
+				| 'Document registrations records'             | ''            | ''                                   | ''          | ''             | ''       | ''                     | ''          |
+				| 'Register  "R2011 Shipment of sales orders"' | ''            | ''                                   | ''          | ''             | ''       | ''                     | ''          |
+				| ''                                           | 'Record type' | 'Period'                             | 'Resources' | 'Dimensions'   | ''       | ''                     | ''          |
+				| ''                                           | ''            | ''                                   | 'Quantity'  | 'Company'      | 'Branch' | 'Order'                | 'Item key'  |
+				| ''                                           | 'Expense'     | '$$DateShipmentConfirmation029903$$' | '31'        | 'Main Company' | ''       | '$$SalesOrder029903$$' | '38/Yellow' |
+				| ''                                           | 'Expense'     | '$$DateShipmentConfirmation029903$$' | '40'        | 'Main Company' | ''       | '$$SalesOrder029903$$' | '38/Black'  |
 		* Check SC movements Register  "R4011B_FreeStocks")
 			And I select "R4011 Free stocks" exact value from "Register" drop-down list
 			And I click "Generate report" button
@@ -518,89 +518,89 @@ Scenario: _029905 create Sales ivoice for SO (SC first) without reserve and chec
 			And I select "R5010 Reconciliation statement" exact value from "Register" drop-down list
 			And I click "Generate report" button
 			And "ResultTable" spreadsheet document contains lines:
-				| '$$SalesInvoice029903$$'                       | ''            | ''                           | ''          | ''           | ''             | ''                 |
-				| 'Document registrations records'             | ''            | ''                           | ''          | ''           | ''             | ''                 |
-				| 'Register  "R5010 Reconciliation statement"' | ''            | ''                           | ''          | ''           | ''             | ''                 |
-				| ''                                           | 'Record type' | 'Period'                     | 'Resources' | 'Dimensions' | ''             | ''                 |
-				| ''                                           | ''            | ''                           | 'Amount'    | 'Currency'   | 'Company'      | 'Legal name'       |
-				| ''                                           | 'Receipt'     | '$$DateSalesInvoice029903$$' | '26 400'    | 'TRY'        | 'Main Company' | 'Company Lomaniti' |
+				| '$$SalesInvoice029903$$'                     | ''            | ''                           | ''          | ''             | ''       | ''         | ''                 |
+				| 'Document registrations records'             | ''            | ''                           | ''          | ''             | ''       | ''         | ''                 |
+				| 'Register  "R5010 Reconciliation statement"' | ''            | ''                           | ''          | ''             | ''       | ''         | ''                 |
+				| ''                                           | 'Record type' | 'Period'                     | 'Resources' | 'Dimensions'   | ''       | ''         | ''                 |
+				| ''                                           | ''            | ''                           | 'Amount'    | 'Company'      | 'Branch' | 'Currency' | 'Legal name'       |
+				| ''                                           | 'Receipt'     | '$$DateSalesInvoice029903$$' | '26 400'    | 'Main Company' | ''       | 'TRY'      | 'Company Lomaniti' |
 		
 		* Check SI movements (Register  "R2011 Shipment of sales orders")
 			And I select "R2011 Shipment of sales orders" exact value from "Register" drop-down list
 			And I click "Generate report" button
 			And "ResultTable" spreadsheet document does not contain values
-			| 'Register  "R2011 Shipment of sales orders"' | ''            | ''                           | ''          | ''             | ''                     | ''          |
-			| ''                                           | 'Record type' | 'Period'                     | 'Resources' | 'Dimensions'   | ''                     | ''          |
-			| ''                                           | ''            | ''                           | 'Quantity'  | 'Company'      | 'Order'                | 'Item key'  |
-			| ''                                           | 'Expense'     | '$$DateSalesInvoice029903$$' | '31'        | 'Main Company' | '$$SalesOrder029903$$' | '38/Yellow' |
-			| ''                                           | 'Expense'     | '$$DateSalesInvoice029903$$' | '40'        | 'Main Company' | '$$SalesOrder029903$$' | '38/Black'  |
+			| 'Register  "R2011 Shipment of sales orders"' | ''            | ''                           | ''          | ''             | ''       | ''                     | ''          |
+			| ''                                           | 'Record type' | 'Period'                     | 'Resources' | 'Dimensions'   | ''       | ''                     | ''          |
+			| ''                                           | ''            | ''                           | 'Quantity'  | 'Company'      | 'Branch' | 'Order'                | 'Item key'  |
+			| ''                                           | 'Expense'     | '$$DateSalesInvoice029903$$' | '31'        | 'Main Company' | ''       | '$$SalesOrder029903$$' | '38/Yellow' |
+			| ''                                           | 'Expense'     | '$$DateSalesInvoice029903$$' | '40'        | 'Main Company' | ''       | '$$SalesOrder029903$$' | '38/Black'  |
 
 		* Check SI movements (Register  "R4050 Stock inventory")
 			And I select "R4050 Stock inventory" exact value from "Register" drop-down list
 			And I click "Generate report" button
 			And "ResultTable" spreadsheet document contains lines:
-			| '$$SalesInvoice029903$$'            | ''            | ''                           | ''          | ''             | ''         | ''          |
-			| 'Document registrations records'    | ''            | ''                           | ''          | ''             | ''         | ''          |
-			| 'Register  "R4050 Stock inventory"' | ''            | ''                           | ''          | ''             | ''         | ''          |
-			| ''                                  | 'Record type' | 'Period'                     | 'Resources' | 'Dimensions'   | ''         | ''          |
-			| ''                                  | ''            | ''                           | 'Quantity'  | 'Company'      | 'Store'    | 'Item key'  |
-			| ''                                  | 'Expense'     | '$$DateSalesInvoice029903$$' | '31'        | 'Main Company' | 'Store 02' | '38/Yellow' |
-			| ''                                  | 'Expense'     | '$$DateSalesInvoice029903$$' | '40'        | 'Main Company' | 'Store 02' | '38/Black'  |
+			| '$$SalesInvoice029903$$'            | ''            | ''                           | ''          | ''             | ''       | ''         | ''          |
+			| 'Document registrations records'    | ''            | ''                           | ''          | ''             | ''       | ''         | ''          |
+			| 'Register  "R4050 Stock inventory"' | ''            | ''                           | ''          | ''             | ''       | ''         | ''          |
+			| ''                                  | 'Record type' | 'Period'                     | 'Resources' | 'Dimensions'   | ''       | ''         | ''          |
+			| ''                                  | ''            | ''                           | 'Quantity'  | 'Company'      | 'Branch' | 'Store'    | 'Item key'  |
+			| ''                                  | 'Expense'     | '$$DateSalesInvoice029903$$' | '31'        | 'Main Company' | ''       | 'Store 02' | '38/Yellow' |
+			| ''                                  | 'Expense'     | '$$DateSalesInvoice029903$$' | '40'        | 'Main Company' | ''       | 'Store 02' | '38/Black'  |
 
 		* Check SI movements (Register  "Register  "R2001 Sales")
 			And I select "R2001 Sales" exact value from "Register" drop-down list
 			And I click "Generate report" button
 			And "ResultTable" spreadsheet document contains lines:
-			| '$$SalesInvoice029903$$'         | ''                           | ''          | ''         | ''           | ''              | ''             | ''                             | ''         | ''                       | ''          | ''        |
-			| 'Document registrations records' | ''                           | ''          | ''         | ''           | ''              | ''             | ''                             | ''         | ''                       | ''          | ''        |
-			| 'Register  "R2001 Sales"'        | ''                           | ''          | ''         | ''           | ''              | ''             | ''                             | ''         | ''                       | ''          | ''        |
-			| ''                               | 'Period'                     | 'Resources' | ''         | ''           | ''              | 'Dimensions'   | ''                             | ''         | ''                       | ''          | ''        |
-			| ''                               | ''                           | 'Quantity'  | 'Amount'   | 'Net amount' | 'Offers amount' | 'Company'      | 'Multi currency movement type' | 'Currency' | 'Invoice'                | 'Item key'  | 'Row key' |
-			| ''                               | '$$DateSalesInvoice029903$$' | '31'        | '2 122,88' | '1 799,05'   | ''              | 'Main Company' | 'Reporting currency'           | 'USD'      | '$$SalesInvoice029903$$' | '38/Yellow' | '*'       |
-			| ''                               | '$$DateSalesInvoice029903$$' | '31'        | '12 400'   | '10 508,47'  | ''              | 'Main Company' | 'Local currency'               | 'TRY'      | '$$SalesInvoice029903$$' | '38/Yellow' | '*'       |
-			| ''                               | '$$DateSalesInvoice029903$$' | '31'        | '12 400'   | '10 508,47'  | ''              | 'Main Company' | 'TRY'                          | 'TRY'      | '$$SalesInvoice029903$$' | '38/Yellow' | '*'       |
-			| ''                               | '$$DateSalesInvoice029903$$' | '31'        | '12 400'   | '10 508,47'  | ''              | 'Main Company' | 'en description is empty'      | 'TRY'      | '$$SalesInvoice029903$$' | '38/Yellow' | '*'       |
-			| ''                               | '$$DateSalesInvoice029903$$' | '40'        | '2 396,8'  | '2 031,19'   | ''              | 'Main Company' | 'Reporting currency'           | 'USD'      | '$$SalesInvoice029903$$' | '38/Black'  | '*'       |
-			| ''                               | '$$DateSalesInvoice029903$$' | '40'        | '14 000'   | '11 864,41'  | ''              | 'Main Company' | 'Local currency'               | 'TRY'      | '$$SalesInvoice029903$$' | '38/Black'  | '*'       |
-			| ''                               | '$$DateSalesInvoice029903$$' | '40'        | '14 000'   | '11 864,41'  | ''              | 'Main Company' | 'TRY'                          | 'TRY'      | '$$SalesInvoice029903$$' | '38/Black'  | '*'       |
-			| ''                               | '$$DateSalesInvoice029903$$' | '40'        | '14 000'   | '11 864,41'  | ''              | 'Main Company' | 'en description is empty'      | 'TRY'      | '$$SalesInvoice029903$$' | '38/Black'  | '*'       |
+			| '$$SalesInvoice029903$$'         | ''                           | ''          | ''         | ''           | ''              | ''             | ''       | ''                             | ''         | ''                       | ''          | ''        |
+			| 'Document registrations records' | ''                           | ''          | ''         | ''           | ''              | ''             | ''       | ''                             | ''         | ''                       | ''          | ''        |
+			| 'Register  "R2001 Sales"'        | ''                           | ''          | ''         | ''           | ''              | ''             | ''       | ''                             | ''         | ''                       | ''          | ''        |
+			| ''                               | 'Period'                     | 'Resources' | ''         | ''           | ''              | 'Dimensions'   | ''       | ''                             | ''         | ''                       | ''          | ''        |
+			| ''                               | ''                           | 'Quantity'  | 'Amount'   | 'Net amount' | 'Offers amount' | 'Company'      | 'Branch' | 'Multi currency movement type' | 'Currency' | 'Invoice'                | 'Item key'  | 'Row key' |
+			| ''                               | '$$DateSalesInvoice029903$$' | '31'        | '2 122,88' | '1 799,05'   | ''              | 'Main Company' | ''       | 'Reporting currency'           | 'USD'      | '$$SalesInvoice029903$$' | '38/Yellow' | '*'       |
+			| ''                               | '$$DateSalesInvoice029903$$' | '31'        | '12 400'   | '10 508,47'  | ''              | 'Main Company' | ''       | 'Local currency'               | 'TRY'      | '$$SalesInvoice029903$$' | '38/Yellow' | '*'       |
+			| ''                               | '$$DateSalesInvoice029903$$' | '31'        | '12 400'   | '10 508,47'  | ''              | 'Main Company' | ''       | 'TRY'                          | 'TRY'      | '$$SalesInvoice029903$$' | '38/Yellow' | '*'       |
+			| ''                               | '$$DateSalesInvoice029903$$' | '31'        | '12 400'   | '10 508,47'  | ''              | 'Main Company' | ''       | 'en description is empty'      | 'TRY'      | '$$SalesInvoice029903$$' | '38/Yellow' | '*'       |
+			| ''                               | '$$DateSalesInvoice029903$$' | '40'        | '2 396,8'  | '2 031,19'   | ''              | 'Main Company' | ''       | 'Reporting currency'           | 'USD'      | '$$SalesInvoice029903$$' | '38/Black'  | '*'       |
+			| ''                               | '$$DateSalesInvoice029903$$' | '40'        | '14 000'   | '11 864,41'  | ''              | 'Main Company' | ''       | 'Local currency'               | 'TRY'      | '$$SalesInvoice029903$$' | '38/Black'  | '*'       |
+			| ''                               | '$$DateSalesInvoice029903$$' | '40'        | '14 000'   | '11 864,41'  | ''              | 'Main Company' | ''       | 'TRY'                          | 'TRY'      | '$$SalesInvoice029903$$' | '38/Black'  | '*'       |
+			| ''                               | '$$DateSalesInvoice029903$$' | '40'        | '14 000'   | '11 864,41'  | ''              | 'Main Company' | ''       | 'en description is empty'      | 'TRY'      | '$$SalesInvoice029903$$' | '38/Black'  | '*'       |
 
 		* Check SI movements (Register  "R2021 Customer transactions")
 			And I select "R2021 Customer transactions" exact value from "Register" drop-down list
 			And I click "Generate report" button
 			And "ResultTable" spreadsheet document contains lines:
-			| '$$SalesInvoice029903$$'                  | ''            | ''                           | ''          | ''             | ''                             | ''         | ''                 | ''         | ''                         | ''                       | ''                     | ''                           |
-			| 'Document registrations records'          | ''            | ''                           | ''          | ''             | ''                             | ''         | ''                 | ''         | ''                         | ''                       | ''                     | ''                           |
-			| 'Register  "R2021 Customer transactions"' | ''            | ''                           | ''          | ''             | ''                             | ''         | ''                 | ''         | ''                         | ''                       | ''                     | ''                           |
-			| ''                                        | 'Record type' | 'Period'                     | 'Resources' | 'Dimensions'   | ''                             | ''         | ''                 | ''         | ''                         | ''                       | 'Attributes'           | ''                           |
-			| ''                                        | ''            | ''                           | 'Amount'    | 'Company'      | 'Multi currency movement type' | 'Currency' | 'Legal name'       | 'Partner'  | 'Agreement'                | 'Basis'                  | 'Deferred calculation' | 'Customers advances closing' |
-			| ''                                        | 'Receipt'     | '$$DateSalesInvoice029903$$' | '4 519,68'  | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Company Lomaniti' | 'Lomaniti' | 'Basic Partner terms, TRY' | '$$SalesInvoice029903$$' | 'No'                   | ''                           |
-			| ''                                        | 'Receipt'     | '$$DateSalesInvoice029903$$' | '26 400'    | 'Main Company' | 'Local currency'               | 'TRY'      | 'Company Lomaniti' | 'Lomaniti' | 'Basic Partner terms, TRY' | '$$SalesInvoice029903$$' | 'No'                   | ''                           |
-			| ''                                        | 'Receipt'     | '$$DateSalesInvoice029903$$' | '26 400'    | 'Main Company' | 'TRY'                          | 'TRY'      | 'Company Lomaniti' | 'Lomaniti' | 'Basic Partner terms, TRY' | '$$SalesInvoice029903$$' | 'No'                   | ''                           |
-			| ''                                        | 'Receipt'     | '$$DateSalesInvoice029903$$' | '26 400'    | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Company Lomaniti' | 'Lomaniti' | 'Basic Partner terms, TRY' | '$$SalesInvoice029903$$' | 'No'                   | ''                           |
+			| '$$SalesInvoice029903$$'                  | ''            | ''                           | ''          | ''             | ''       | ''                             | ''         | ''                 | ''         | ''                         | ''                       | ''                     | ''                           |
+			| 'Document registrations records'          | ''            | ''                           | ''          | ''             | ''       | ''                             | ''         | ''                 | ''         | ''                         | ''                       | ''                     | ''                           |
+			| 'Register  "R2021 Customer transactions"' | ''            | ''                           | ''          | ''             | ''       | ''                             | ''         | ''                 | ''         | ''                         | ''                       | ''                     | ''                           |
+			| ''                                        | 'Record type' | 'Period'                     | 'Resources' | 'Dimensions'   | ''       | ''                             | ''         | ''                 | ''         | ''                         | ''                       | 'Attributes'           | ''                           |
+			| ''                                        | ''            | ''                           | 'Amount'    | 'Company'      | 'Branch' | 'Multi currency movement type' | 'Currency' | 'Legal name'       | 'Partner'  | 'Agreement'                | 'Basis'                  | 'Deferred calculation' | 'Customers advances closing' |
+			| ''                                        | 'Receipt'     | '$$DateSalesInvoice029903$$' | '4 519,68'  | 'Main Company' | ''       | 'Reporting currency'           | 'USD'      | 'Company Lomaniti' | 'Lomaniti' | 'Basic Partner terms, TRY' | '$$SalesInvoice029903$$' | 'No'                   | ''                           |
+			| ''                                        | 'Receipt'     | '$$DateSalesInvoice029903$$' | '26 400'    | 'Main Company' | ''       | 'Local currency'               | 'TRY'      | 'Company Lomaniti' | 'Lomaniti' | 'Basic Partner terms, TRY' | '$$SalesInvoice029903$$' | 'No'                   | ''                           |
+			| ''                                        | 'Receipt'     | '$$DateSalesInvoice029903$$' | '26 400'    | 'Main Company' | ''       | 'TRY'                          | 'TRY'      | 'Company Lomaniti' | 'Lomaniti' | 'Basic Partner terms, TRY' | '$$SalesInvoice029903$$' | 'No'                   | ''                           |
+			| ''                                        | 'Receipt'     | '$$DateSalesInvoice029903$$' | '26 400'    | 'Main Company' | ''       | 'en description is empty'      | 'TRY'      | 'Company Lomaniti' | 'Lomaniti' | 'Basic Partner terms, TRY' | '$$SalesInvoice029903$$' | 'No'                   | ''                           |
 
 		* Check SI movements (Register  "R2040 Taxes incoming")
 			And I select "R2040 Taxes incoming" exact value from "Register" drop-down list
 			And I click "Generate report" button
 			And "ResultTable" spreadsheet document contains lines:
-			| '$$SalesInvoice029903$$'           | ''            | ''                           | ''               | ''           | ''             | ''    | ''         | ''                  |
-			| 'Document registrations records'   | ''            | ''                           | ''               | ''           | ''             | ''    | ''         | ''                  |
-			| 'Register  "R2040 Taxes incoming"' | ''            | ''                           | ''               | ''           | ''             | ''    | ''         | ''                  |
-			| ''                                 | 'Record type' | 'Period'                     | 'Resources'      | ''           | 'Dimensions'   | ''    | ''         | ''                  |
-			| ''                                 | ''            | ''                           | 'Taxable amount' | 'Tax amount' | 'Company'      | 'Tax' | 'Tax rate' | 'Tax movement type' |
-			| ''                                 | 'Receipt'     | '$$DateSalesInvoice029903$$' | '10 508,47'      | '1 891,53'   | 'Main Company' | 'VAT' | '18%'      | ''                  |
-			| ''                                 | 'Receipt'     | '$$DateSalesInvoice029903$$' | '11 864,41'      | '2 135,59'   | 'Main Company' | 'VAT' | '18%'      | ''                  |
+			| '$$SalesInvoice029903$$'           | ''            | ''                           | ''               | ''           | ''             | ''       | ''    | ''         | ''                  |
+			| 'Document registrations records'   | ''            | ''                           | ''               | ''           | ''             | ''       | ''    | ''         | ''                  |
+			| 'Register  "R2040 Taxes incoming"' | ''            | ''                           | ''               | ''           | ''             | ''       | ''    | ''         | ''                  |
+			| ''                                 | 'Record type' | 'Period'                     | 'Resources'      | ''           | 'Dimensions'   | ''       | ''    | ''         | ''                  |
+			| ''                                 | ''            | ''                           | 'Taxable amount' | 'Tax amount' | 'Company'      | 'Branch' | 'Tax' | 'Tax rate' | 'Tax movement type' |
+			| ''                                 | 'Receipt'     | '$$DateSalesInvoice029903$$' | '10 508,47'      | '1 891,53'   | 'Main Company' | ''       | 'VAT' | '18%'      | ''                  |
+			| ''                                 | 'Receipt'     | '$$DateSalesInvoice029903$$' | '11 864,41'      | '2 135,59'   | 'Main Company' | ''       | 'VAT' | '18%'      | ''                  |
 		* Check SI movements (Register  "R4050 Stock inventory")
 			And I select "R4050 Stock inventory" exact value from "Register" drop-down list
 			And I click "Generate report" button
 			And "ResultTable" spreadsheet document contains lines:
-			| '$$SalesInvoice029903$$' | ''            | ''                    | ''          | ''             | ''         | ''          |
-			| 'Document registrations records'            | ''            | ''                    | ''          | ''             | ''         | ''          |
-			| 'Register  "R4050 Stock inventory"'         | ''            | ''                    | ''          | ''             | ''         | ''          |
-			| ''                                          | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''         | ''          |
-			| ''                                          | ''            | ''                    | 'Quantity'  | 'Company'      | 'Store'    | 'Item key'  |
-			| ''                                          | 'Expense'     | '$$DateSalesInvoice029903$$' | '31'        | 'Main Company' | 'Store 02' | '38/Yellow' |
-			| ''                                          | 'Expense'     | '$$DateSalesInvoice029903$$' | '40'        | 'Main Company' | 'Store 02' | '38/Black'  |
+			| '$$SalesInvoice029903$$'            | ''            | ''                           | ''          | ''             | ''       | ''         | ''          |
+			| 'Document registrations records'    | ''            | ''                           | ''          | ''             | ''       | ''         | ''          |
+			| 'Register  "R4050 Stock inventory"' | ''            | ''                           | ''          | ''             | ''       | ''         | ''          |
+			| ''                                  | 'Record type' | 'Period'                     | 'Resources' | 'Dimensions'   | ''       | ''         | ''          |
+			| ''                                  | ''            | ''                           | 'Quantity'  | 'Company'      | 'Branch' | 'Store'    | 'Item key'  |
+			| ''                                  | 'Expense'     | '$$DateSalesInvoice029903$$' | '31'        | 'Main Company' | ''       | 'Store 02' | '38/Yellow' |
+			| ''                                  | 'Expense'     | '$$DateSalesInvoice029903$$' | '40'        | 'Main Company' | ''       | 'Store 02' | '38/Black'  |
 		// * Check that there is no movements in the Register  "R2013 Procurement of sales orders"
 		// 	And I select "R2013 Procurement of sales orders" exact value from "Register" drop-down list
 		// 	And I click "Generate report" button

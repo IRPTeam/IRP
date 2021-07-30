@@ -804,7 +804,7 @@
 	PurchaseOrderClosing.CloseOrder,
 	PurchaseOrderClosing.PurchaseOrder,
 	PurchaseOrderClosing.Author,
-	PurchaseOrderClosing.BusinessUnit,
+	PurchaseOrderClosing.Branch,
 	PurchaseOrderClosing.Description,
 	PurchaseOrderClosing.DocumentAmount,
 	CASE WHEN COUNT(DISTINCT PurchaseOrderClosingItemList.Store) = 1 THEN
@@ -832,7 +832,7 @@ GROUP BY
 	PurchaseOrderClosing.CloseOrder,
 	PurchaseOrderClosing.PurchaseOrder,
 	PurchaseOrderClosing.Author,
-	PurchaseOrderClosing.BusinessUnit,
+	PurchaseOrderClosing.Branch,
 	PurchaseOrderClosing.Description,
 	PurchaseOrderClosing.DocumentAmount</queryText>
       <mainTable>Document.PurchaseOrderClosing</mainTable>

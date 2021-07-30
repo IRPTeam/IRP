@@ -802,7 +802,7 @@
 	RetailReturnReceipt.PriceIncludeTax,
 	RetailReturnReceipt.RetailCustomer,
 	RetailReturnReceipt.Author,
-	RetailReturnReceipt.BusinessUnit,
+	RetailReturnReceipt.Branch,
 	RetailReturnReceipt.Description,
 	RetailReturnReceipt.DocumentAmount,
 	CASE WHEN COUNT(DISTINCT RetailReturnReceiptItemList.Store) = 1 THEN
@@ -828,7 +828,7 @@ GROUP BY
 	RetailReturnReceipt.PriceIncludeTax,
 	RetailReturnReceipt.RetailCustomer,
 	RetailReturnReceipt.Author,
-	RetailReturnReceipt.BusinessUnit,
+	RetailReturnReceipt.Branch,
 	RetailReturnReceipt.Description,
 	RetailReturnReceipt.DocumentAmount</queryText>
       <mainTable>Document.RetailReturnReceipt</mainTable>

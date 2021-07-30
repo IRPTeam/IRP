@@ -194,7 +194,8 @@ Function ItemList()
 		|	ItemList.Ref.TransactionType = VALUE(Enum.GoodsReceiptTransactionTypes.ReturnFromCustomer) AS
 		|		IsTransaction_ReturnFromCustomer,
 		|	ItemList.Ref.TransactionType = VALUE(Enum.GoodsReceiptTransactionTypes.InventoryTransfer) AS
-		|		IsTransaction_InventoryTransfer
+		|		IsTransaction_InventoryTransfer,
+		|	ItemList.Ref.Branch AS Branch
 		|INTO ItemList
 		|FROM
 		|	Document.GoodsReceipt.ItemList AS ItemList
@@ -240,6 +241,7 @@ Function R1031B_ReceiptInvoicing()
 		|	ItemList.GoodsReceipt AS Basis,
 		|	ItemList.Quantity AS Quantity,
 		|	ItemList.Company,
+		|	ItemList.Branch,
 		|	ItemList.Period,
 		|	ItemList.ItemKey,
 		|	ItemList.Store
@@ -257,6 +259,7 @@ Function R1031B_ReceiptInvoicing()
 		|	ItemList.PurchaseInvoice,
 		|	ItemList.Quantity,
 		|	ItemList.Company,
+		|	ItemList.Branch,
 		|	ItemList.Period,
 		|	ItemList.ItemKey,
 		|	ItemList.Store
@@ -274,6 +277,7 @@ Function R2031B_ShipmentInvoicing()
 		|	ItemList.GoodsReceipt AS Basis,
 		|	ItemList.Quantity AS Quantity,
 		|	ItemList.Company,
+		|	ItemList.Branch,
 		|	ItemList.Period,
 		|	ItemList.ItemKey,
 		|	ItemList.Store
@@ -291,6 +295,7 @@ Function R2031B_ShipmentInvoicing()
 		|	ItemList.SalesReturn,
 		|	ItemList.Quantity,
 		|	ItemList.Company,
+		|	ItemList.Branch,
 		|	ItemList.Period,
 		|	ItemList.ItemKey,
 		|	ItemList.Store

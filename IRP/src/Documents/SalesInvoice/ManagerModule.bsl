@@ -200,7 +200,7 @@ Function ItemList()
 	|	TableRowIDInfo.RowID AS RowKey,
 	|	SalesInvoiceItemList.DeliveryDate AS DeliveryDate,
 	|	SalesInvoiceItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS IsService,
-	|	SalesInvoiceItemList.BusinessUnit AS BusinessUnit,
+	|	SalesInvoiceItemList.ProfitLossCenter AS ProfitLossCenter,
 	|	SalesInvoiceItemList.RevenueType AS RevenueType,
 	|	SalesInvoiceItemList.AdditionalAnalytic AS AdditionalAnalytic,
 	|	CASE
@@ -212,7 +212,8 @@ Function ItemList()
 	|	SalesInvoiceItemList.OffersAmount AS OffersAmount,
 	|	SalesInvoiceItemList.UseShipmentConfirmation AS UseShipmentConfirmation,
 	|	SalesInvoiceItemList.Ref.IgnoreAdvances AS IgnoreAdvances,
-	|	SalesInvoiceItemList.Key
+	|	SalesInvoiceItemList.Key,
+	|	SalesInvoiceItemList.Ref.Branch AS Branch
 	|INTO ItemList
 	|FROM
 	|	Document.SalesInvoice.ItemList AS SalesInvoiceItemList
@@ -249,7 +250,8 @@ Function OffersInfo()
 		|	SalesInvoiceSpecialOffers.Offer AS SpecialOffer,
 		|	SalesInvoiceSpecialOffers.Amount AS OffersAmount,
 		|	SalesInvoiceItemList.TotalAmount AS SalesAmount,
-		|	SalesInvoiceItemList.NetAmount
+		|	SalesInvoiceItemList.NetAmount,
+		|	SalesInvoiceItemList.Ref.Branch AS Branch
 		|INTO OffersInfo
 		|FROM
 		|	Document.SalesInvoice.ItemList AS SalesInvoiceItemList
@@ -273,7 +275,8 @@ Function Taxes()
 		|			THEN SalesInvoiceTaxList.Amount
 		|		ELSE SalesInvoiceTaxList.ManualAmount
 		|	END AS TaxAmount,
-		|	SalesInvoiceItemList.NetAmount AS TaxableAmount
+		|	SalesInvoiceItemList.NetAmount AS TaxableAmount,
+		|	SalesInvoiceItemList.Ref.Branch AS Branch
 		|INTO Taxes
 		|FROM
 		|	Document.SalesInvoice.ItemList AS SalesInvoiceItemList
@@ -288,6 +291,7 @@ Function SerialLotNumbers()
 		"SELECT
 		|	SerialLotNumbers.Ref.Date AS Period,
 		|	SerialLotNumbers.Ref.Company AS Company,
+		|	SerialLotNumbers.Ref.Branch AS Branch,
 		|	SerialLotNumbers.Key,
 		|	SerialLotNumbers.SerialLotNumber,
 		|	SerialLotNumbers.Quantity,
@@ -375,6 +379,7 @@ Function R2031B_ShipmentInvoicing()
 		|	ItemList.Invoice AS Basis,
 		|	ItemList.Quantity AS Quantity,
 		|	ItemList.Company,
+		|	ItemList.Branch,
 		|	ItemList.Period,
 		|	ItemList.ItemKey,
 		|	ItemList.Store
@@ -392,6 +397,7 @@ Function R2031B_ShipmentInvoicing()
 		|	ShipmentConfirmations.ShipmentConfirmation,
 		|	ShipmentConfirmations.Quantity,
 		|	ItemList.Company,
+		|	ItemList.Branch,
 		|	ItemList.Period,
 		|	ItemList.ItemKey,
 		|	ItemList.Store
@@ -673,6 +679,7 @@ Function R2021B_CustomersTransactions()
 		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
 		|	ItemList.Period,
 		|	ItemList.Company,
+		|	ItemList.Branch,
 		|	ItemList.Currency,
 		|	ItemList.LegalName,
 		|	ItemList.Partner,
@@ -687,6 +694,7 @@ Function R2021B_CustomersTransactions()
 		|	ItemList.Agreement,
 		|	ItemList.Basis,
 		|	ItemList.Company,
+		|	ItemList.Branch,
 		|	ItemList.Currency,
 		|	ItemList.LegalName,
 		|	ItemList.Partner,
@@ -699,6 +707,7 @@ Function R2021B_CustomersTransactions()
 		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
 		|	OffsetOfAdvances.Period,
 		|	OffsetOfAdvances.Company,
+		|	OffsetOfAdvances.Branch,
 		|	OffsetOfAdvances.Currency,
 		|	OffsetOfAdvances.LegalName,
 		|	OffsetOfAdvances.Partner,
@@ -717,6 +726,7 @@ Function T2011S_PartnerTransactions()
 		"SELECT
 		|	ItemList.Period,
 		|	ItemList.Company,
+		|	ItemList.Branch,
 		|	ItemList.Currency,
 		|	ItemList.LegalName,
 		|	ItemList.Partner,
@@ -734,6 +744,7 @@ Function T2011S_PartnerTransactions()
 		|	ItemList.Agreement,
 		|	ItemList.Basis,
 		|	ItemList.Company,
+		|	ItemList.Branch,
 		|	ItemList.Currency,
 		|	ItemList.Key,
 		|	ItemList.LegalName,
@@ -747,6 +758,7 @@ Function R5011B_CustomersAging()
 		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
 		|	PaymentTerms.Ref.Date AS Period,
 		|	PaymentTerms.Ref.Company AS Company,
+		|	PaymentTerms.Ref.Branch AS Branch,
 		|	PaymentTerms.Ref.Currency AS Currency,
 		|	PaymentTerms.Ref.Agreement AS Agreement,
 		|	PaymentTerms.Ref.Partner AS Partner,
@@ -764,6 +776,7 @@ Function R5011B_CustomersAging()
 		|	PaymentTerms.Ref,
 		|	PaymentTerms.Ref.Agreement,
 		|	PaymentTerms.Ref.Company,
+		|	PaymentTerms.Ref.Branch,
 		|	PaymentTerms.Ref.Currency,
 		|	PaymentTerms.Ref.Date,
 		|	PaymentTerms.Ref.Partner,
@@ -775,6 +788,7 @@ Function R5011B_CustomersAging()
 		|	VALUE(AccumulationRecordType.Expense),
 		|	OffsetOfAging.Period,
 		|	OffsetOfAging.Company,
+		|	OffsetOfAging.Branch,
 		|	OffsetOfAging.Currency,
 		|	OffsetOfAging.Agreement,
 		|	OffsetOfAging.Partner,
@@ -793,6 +807,7 @@ Function R5010B_ReconciliationStatement()
 		"SELECT
 		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
 		|	ItemList.Company,
+		|	ItemList.Branch,
 		|	ItemList.LegalName,
 		|	ItemList.Currency,
 		|	SUM(ItemList.Amount) AS Amount,
@@ -802,6 +817,7 @@ Function R5010B_ReconciliationStatement()
 		|	ItemList AS ItemList
 		|GROUP BY
 		|	ItemList.Company,
+		|	ItemList.Branch,
 		|	ItemList.LegalName,
 		|	ItemList.Currency,
 		|	ItemList.Period";
@@ -813,6 +829,7 @@ Function R2022B_CustomersPaymentPlanning()
 		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
 		|	SalesInvoicePaymentTerms.Ref.Date AS Period,
 		|	SalesInvoicePaymentTerms.Ref.Company AS Company,
+		|	SalesInvoicePaymentTerms.Ref.Branch AS Branch,
 		|	SalesInvoicePaymentTerms.Ref AS Basis,
 		|	SalesInvoicePaymentTerms.Ref.LegalName AS LegalName,
 		|	SalesInvoicePaymentTerms.Ref.Partner AS Partner,
@@ -827,6 +844,7 @@ Function R2022B_CustomersPaymentPlanning()
 		|GROUP BY
 		|	SalesInvoicePaymentTerms.Ref.Date,
 		|	SalesInvoicePaymentTerms.Ref.Company,
+		|	SalesInvoicePaymentTerms.Ref.Branch,
 		|	SalesInvoicePaymentTerms.Ref,
 		|	SalesInvoicePaymentTerms.Ref.LegalName,
 		|	SalesInvoicePaymentTerms.Ref.Partner,

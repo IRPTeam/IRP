@@ -114,7 +114,8 @@ Function ItemList()
 		|	ItemStockAdjustmentItemList.Ref.Company AS Company,
 		|	ItemStockAdjustmentItemList.Ref.Store AS Store,
 		|	ItemStockAdjustmentItemList.SerialLotNumber,
-		|	ItemStockAdjustmentItemList.SerialLotNumberWriteOff
+		|	ItemStockAdjustmentItemList.SerialLotNumberWriteOff,
+		|	ItemStockAdjustmentItemList.Ref.Branch AS Branch
 		|INTO ItemList
 		|FROM
 		|	Document.ItemStockAdjustment.ItemList AS ItemStockAdjustmentItemList

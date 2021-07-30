@@ -567,10 +567,10 @@
       <dataHistory>Use</dataHistory>
     </attributes>
     <attributes uuid="8e556130-6d84-4c27-aa30-ec3b1f3487ef">
-      <name>BusinessUnit</name>
+      <name>ProfitLossCenter</name>
       <synonym>
         <key>en</key>
-        <value>Business unit</value>
+        <value>Profit loss center</value>
       </synonym>
       <type>
         <types>CatalogRef.BusinessUnits</types>

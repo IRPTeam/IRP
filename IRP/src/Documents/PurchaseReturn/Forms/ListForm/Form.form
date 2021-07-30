@@ -866,7 +866,7 @@
 	PurchaseReturn.Partner,
 	PurchaseReturn.PriceIncludeTax,
 	PurchaseReturn.Author,
-	PurchaseReturn.BusinessUnit,
+	PurchaseReturn.Branch,
 	PurchaseReturn.Description,
 	PurchaseReturn.DocumentAmount,
 	CASE
@@ -896,7 +896,7 @@ GROUP BY
 	PurchaseReturn.Partner,
 	PurchaseReturn.PriceIncludeTax,
 	PurchaseReturn.Author,
-	PurchaseReturn.BusinessUnit,
+	PurchaseReturn.Branch,
 	PurchaseReturn.Description,
 	PurchaseReturn.DocumentAmount,
 	R1031B_ReceiptInvoicingBalance.QuantityBalance</queryText>

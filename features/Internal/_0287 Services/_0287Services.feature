@@ -523,13 +523,14 @@ Scenario: _029130 create Retail sales receipt for service and product
 		And I select "R2050 Retail sales" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-			| '$$RetailSalesReceipt029130$$'   | ''       | ''          | ''       | ''           | ''              | ''             | ''       | ''                   | ''         | ''                             | ''         | ''                  | ''        |
-			| 'Document registrations records' | ''       | ''          | ''       | ''           | ''              | ''             | ''       | ''                   | ''         | ''                             | ''         | ''                  | ''        |
-			| 'Register  "R2050 Retail sales"' | ''       | ''          | ''       | ''           | ''              | ''             | ''       | ''                   | ''         | ''                             | ''         | ''                  | ''        |
-			| ''                               | 'Period' | 'Resources' | ''       | ''           | ''              | 'Dimensions'   | ''       | ''                   | ''         | ''                             | ''         | ''                  | ''        |
-			| ''                               | ''       | 'Quantity'  | 'Amount' | 'Net amount' | 'Offers amount' | 'Company'      | 'Branch' | 'Profit loss center' | 'Store'    | 'Retail sales receipt'         | 'Item key' | 'Serial lot number' | 'Row key' |
-			| ''                               | '*'      | '1'         | '50'     | '42,37'      | ''              | 'Main Company' | '*'      | ''                   | 'Store 01' | '$$RetailSalesReceipt029130$$' | 'Interner' | ''                  | '*'       |
-			| ''                               | '*'      | '1'         | '200'    | '169,49'     | ''              | 'Main Company' | '*'      | ''                   | 'Store 01' | '$$RetailSalesReceipt029130$$' | 'Table'    | ''                  | '*'       |
+			| '$$RetailSalesReceipt029130$$'   | ''       | ''          | ''       | ''           | ''              | ''             | ''       | ''         | ''                             | ''         | ''                  | ''                                     |
+			| 'Document registrations records' | ''       | ''          | ''       | ''           | ''              | ''             | ''       | ''         | ''                             | ''         | ''                  | ''                                     |
+			| 'Register  "R2050 Retail sales"' | ''       | ''          | ''       | ''           | ''              | ''             | ''       | ''         | ''                             | ''         | ''                  | ''                                     |
+			| ''                               | 'Period' | 'Resources' | ''       | ''           | ''              | 'Dimensions'   | ''       | ''         | ''                             | ''         | ''                  | ''                                     |
+			| ''                               | ''       | 'Quantity'  | 'Amount' | 'Net amount' | 'Offers amount' | 'Company'      | 'Branch' | 'Store'    | 'Retail sales receipt'         | 'Item key' | 'Serial lot number' | 'Row key'                              |
+			| ''                               | '*'      | '1'         | '50'     | '42,37'      | ''              | 'Main Company' | ''       | 'Store 01' | '$$RetailSalesReceipt029130$$' | 'Interner' | ''                  | '*' |
+			| ''                               | '*'      | '1'         | '200'    | '169,49'     | ''              | 'Main Company' | ''       | 'Store 01' | '$$RetailSalesReceipt029130$$' | 'Table'    | ''                  | '*' |
+			| ''                               | '*'      | '1'         | '200'    | '169,49'     | ''              | 'Main Company' | ''       | 'Store 01' | '$$RetailSalesReceipt029130$$' | 'Table'    | ''                  | '*' |
 		And I close all client application windows
 	
 

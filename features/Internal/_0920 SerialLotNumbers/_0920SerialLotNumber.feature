@@ -185,8 +185,8 @@ Scenario: _092002 check serial lot number in the Retail sales receipt
 		| 'Register  "R2050 Retail sales"' | ''       | ''          | ''       | ''           | ''              | ''             | ''        | ''         | ''                             | ''          | ''                  | ''        |
 		| ''                               | 'Period' | 'Resources' | ''       | ''           | ''              | 'Dimensions'   | ''        | ''         | ''                             | ''          | ''                  | ''        |
 		| ''                               | ''       | 'Quantity'  | 'Amount' | 'Net amount' | 'Offers amount' | 'Company'      | 'Branch'  | 'Store'    | 'Retail sales receipt'         | 'Item key'  | 'Serial lot number' | 'Row key' |
-		| ''                               | '*'      | '1'         | '400'    | '338,98'     | ''              | 'Main Company' | 'Shop 01' | 'Store 01' | '$$RetailSalesReceipt092002$$' | '38/Yellow' | '99098809009999'    | '*'       |
-		| ''                               | '*'      | '1'         | '650'    | '550,85'     | ''              | 'Main Company' | 'Shop 01' | 'Store 01' | '$$RetailSalesReceipt092002$$' | '38/18SD'   | ''                  | '*'       |
+		| ''                               | '*'      | '1'         | '400'    | '338,98'     | ''              | 'Main Company' | '*'       | 'Store 01' | '$$RetailSalesReceipt092002$$' | '38/Yellow' | '99098809009999'    | '*'       |
+		| ''                               | '*'      | '1'         | '650'    | '550,85'     | ''              | 'Main Company' | '*'       | 'Store 01' | '$$RetailSalesReceipt092002$$' | '38/18SD'   | ''                  | '*'       |
 	* Сhange the quantity and check that the quantity of the serial lot numbers matches the quantity in the document
 		And I activate "$$RetailSalesReceipt092002$$" window
 		And I go to line in "ItemList" table

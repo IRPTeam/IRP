@@ -151,12 +151,12 @@ Scenario: _041301 check Sales return movements by the Register "R5010 Reconcilia
 		And I select "R5010 Reconciliation statement" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales return 101 dated 12.03.2021 08:44:18' | ''            | ''                    | ''          | ''           | ''             | ''                        | ''                  |
-			| 'Document registrations records'             | ''            | ''                    | ''          | ''           | ''             | ''                        | ''                  |
-			| 'Register  "R5010 Reconciliation statement"' | ''            | ''                    | ''          | ''           | ''             | ''                        | ''                  |
-			| ''                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''             | ''                        | ''                  |
-			| ''                                           | ''            | ''                    | 'Amount'    | 'Currency'   | 'Company'      | 'Branch'                  | 'Legal name'        |
-			| ''                                           | 'Receipt'     | '12.03.2021 08:44:18' | '-1 254'    | 'TRY'        | 'Main Company' | 'Distribution department' | 'Company Ferron BP' |
+			| 'Sales return 101 dated 12.03.2021 08:44:18' | ''            | ''                    | ''          | ''             | ''                        | ''           | ''                  |
+			| 'Document registrations records'             | ''            | ''                    | ''          | ''             | ''                        | ''           | ''                  |
+			| 'Register  "R5010 Reconciliation statement"' | ''            | ''                    | ''          |  ''            | ''                        | ''           | ''                  |
+			| ''                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                        | ''           | ''                  |
+			| ''                                           | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'                  | 'Currency'   | 'Legal name'        |
+			| ''                                           | 'Receipt'     | '12.03.2021 08:44:18' | '-1 254'    | 'Main Company' | 'Distribution department' | 'TRY'        | 'Company Ferron BP' |
 	And I close all client application windows
 
 

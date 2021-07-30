@@ -222,12 +222,12 @@ Scenario: _041605 check Purchase return movements by the Register  "R5010 Reconc
 		And I select "R5010 Reconciliation statement" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Purchase return 231 dated 14.03.2021 18:53:34' | ''            | ''                    | ''          | ''           | ''             | ''             | ''                  |
-			| 'Document registrations records'                | ''            | ''                    | ''          | ''           | ''             | ''             | ''                  |
-			| 'Register  "R5010 Reconciliation statement"'    | ''            | ''                    | ''          | ''           | ''             | ''             | ''                  |
-			| ''                                              | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''             | ''             | ''                  |
-			| ''                                              | ''            | ''                    | 'Amount'    | 'Currency'   | 'Company'      | 'Branch'       | 'Legal name'        |
-			| ''                                              | 'Expense'     | '14.03.2021 18:53:34' | '-900'      | 'TRY'        | 'Main Company' | 'Front office' | 'Company Ferron BP' |
+			| 'Purchase return 231 dated 14.03.2021 18:53:34' | ''            | ''                    | ''          |  ''             | ''             | ''           | ''                  |
+			| 'Document registrations records'                | ''            | ''                    | ''          |  ''             | ''             | ''           | ''                  |
+			| 'Register  "R5010 Reconciliation statement"'    | ''            | ''                    | ''          |  ''             | ''             |  ''          |''                  |
+			| ''                                              | 'Record type' | 'Period'              | 'Resources' |  ''             | ''             | ''           | ''                  |
+			| ''                                              | ''            | ''                    | 'Amount'    |  'Company'      | 'Branch'       | 'Currency'   | 'Legal name'        |
+			| ''                                              | 'Expense'     | '14.03.2021 18:53:34' | '-900'      |  'Main Company' | 'Front office' | 'TRY'        | 'Company Ferron BP' |
 	And I close all client application windows
 
 

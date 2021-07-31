@@ -232,6 +232,7 @@ Scenario: _095002 create document Dedit Note (write off debts to the vendor)
 			| 'Partner term Maxim' |
 		And I select current line in "List" table
 		And in "Transactions" table I move to the next cell
+		And in "Transactions" table I move to the next cell
 		* Check the selection of basis documents for the specified partner
 		And "List" table contains lines
 			| 'Document'                        | 'Legal name'    | 'Partner' | 'Amount' |
@@ -316,6 +317,7 @@ Scenario: _095003 check movements of the document Credit Note (increase in debt 
 			| 'Description'   |
 			| 'Partner term Maxim' |
 		And I select current line in "List" table
+		And in "Transactions" table I move to the next cell
 		And in "Transactions" table I move to the next cell
 	* Check the selection of basis documents for the specified partner
 		And "List" table contains lines
@@ -403,6 +405,7 @@ Scenario: _095004 check movements of the document Credit Note (write off custome
 			| 'Basic Partner terms, TRY' |
 		And I select current line in "List" table
 		And in "Transactions" table I move to the next cell
+		And in "Transactions" table I move to the next cell
 		* Check the selection of basis documents for the specified partner
 		And delay 2
 		And I go to line in "List" table
@@ -484,6 +487,7 @@ Scenario: _095005 create document Debit Note (increase in customers debt)
 			| 'Description'   |
 			| 'Basic Partner terms, TRY' |
 		And I select current line in "List" table
+		And in "Transactions" table I move to the next cell
 		And in "Transactions" table I move to the next cell
 		* Check the selection of basis documents for the specified partner
 		And delay 2

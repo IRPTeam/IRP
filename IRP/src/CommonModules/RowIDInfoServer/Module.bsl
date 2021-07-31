@@ -5859,7 +5859,7 @@ Function GetSeperatorColumns(DocReceiverMetadata) Export
 	If DocReceiverMetadata = Metadata.Documents.SalesInvoice Then
 		Return "Company, Branch, Partner, Currency, Agreement, PriceIncludeTax, ManagerSegment, LegalName, LegalNameContract";
 	ElsIf DocReceiverMetadata = Metadata.Documents.ShipmentConfirmation Then
-		Return "Company, Branch, Partner, LegalName, LegalNameContract, TransactionType";
+		Return "Company, Branch, Partner, LegalName, TransactionType";
 	ElsIf DocReceiverMetadata = Metadata.Documents.PurchaseOrder Then
 		Return "Company, Branch";
 	ElsIf DocReceiverMetadata = Metadata.Documents.PurchaseInvoice Then

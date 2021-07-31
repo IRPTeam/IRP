@@ -99,7 +99,7 @@ Procedure OpenScanForm(Object, Form, Command) Export
 	NotifyDescription = New NotifyDescription("OpenScanFormEnd", DocInventoryTransferClient, NotifyParameters);
 	OpenFormParameters = New Structure;
 
-	OpenForm("CommonForm.ItemScanForm", OpenFormParameters, Form, , , , NotifyDescription);
+	OpenForm("CommonForm.ItemScanForm", OpenFormParameters, Form, , , , NotifyDescription, FormWindowOpeningMode.LockOwnerWindow);
 	
 EndProcedure
 
@@ -203,7 +203,7 @@ Procedure StoreReceiverOnChange(Object, Form, Item) Export
 	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 EndProcedure
 
-Procedure SearchByBarcode(Barcode, Object, Form) Export
-	DocumentsClient.SearchByBarcode(Barcode, Object, Form);
+Procedure SearchByBarcode(Barcode, Object, Form, DocumentClientModule = Undefined, PriceType = Undefined, AddInfo = Undefined) Export
+	DocumentsClient.SearchByBarcode(Barcode, Object, Form, DocumentClientModule, PriceType, AddInfo);
 EndProcedure
 

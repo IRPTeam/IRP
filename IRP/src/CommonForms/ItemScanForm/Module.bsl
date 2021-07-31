@@ -1,25 +1,46 @@
-&AtServer
-Procedure OnCreateAtServer(Cancel, StandardProcessing)
-
-EndProcedure
+#Region FormEvents
 
 &AtClient
 Procedure OnOpen(Cancel)
-	For Each Row In FormOwner.Object.ItemList Do
-		FillPropertyValues(ItemList.Add(), Row);
-	EndDo;
+	UpdateRows(FormOwner.Object.ItemList);
 EndProcedure
+
+#EndRegion
+
+#Region FormTableEvent
+
+&AtClient
+Procedure ItemListQuantityOnChange(Item)
+	CurrentData = Item.Parent.CurrentData;
+	OwnerRow = FormOwner.Object.ItemList.FindRows(New Structure("Key", CurrentData.Key))[0];
+	OwnerRow.Quantity = Item.Parent.CurrentData.Quantity;
+	DocInventoryTransferClient.ItemListQuantityOnChange(FormOwner.Object, FormOwner, Item);
+EndProcedure
+
+&AtClient
+Procedure ItemListBeforeDeleteRow(Item, Cancel)
+	CurrentData = Item.CurrentData;
+	OwnerRow = FormOwner.Object.ItemList.FindRows(New Structure("Key", CurrentData.Key))[0];
+	FormOwner.Object.ItemList.Delete(OwnerRow);
+	DocInventoryTransferClient.ItemListAfterDeleteRow(FormOwner.Object, FormOwner, Item);
+EndProcedure
+
+#EndRegion
+
+#Region Barcode
 
 &AtClient
 Procedure SearchByBarcode(Command, Barcode = "")
 	AddInfo = New Structure("MobileModule", ThisObject);
-	DocumentsClient.SearchByBarcode(Barcode, Object, ThisObject, ThisObject, , AddInfo);
+	DocInventoryTransferClient.SearchByBarcode(Barcode, FormOwner.Object, FormOwner, , , AddInfo);
 EndProcedure
 
 &AtClient
 Procedure NotificationProcessing(EventName, Parameter, Source)
 	If EventName = "NewBarcode" And IsInputAvailable() Then
 		SearchByBarcode(Undefined, Parameter);
+	ElsIf EventName = "AddNewItemListRow" And IsInputAvailable()  AND Source = FormOwner Then
+		UpdateRows(Parameter);
 	EndIf;
 EndProcedure
 
@@ -38,26 +59,6 @@ Procedure AddBarcodeAfterEnd(Number, AdditionalParameters) Export
 EndProcedure
 
 &AtClient
-Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
-
-	NotifyParameters = New Structure;
-	NotifyParameters.Insert("Form", ThisObject);
-
-	For Each Row In AdditionalParameters.FoundedItems Do
-		NewRow = ItemList.Add();
-		FillPropertyValues(NewRow, Row);
-		NewRow.Quantity = Row.Quantity;
-	EndDo;
-	If AdditionalParameters.FoundedItems.Count() Then
-		If RuleEditQuantity Then
-			BarcodeClient.CloseMobileScanner();
-			StartEditQuantity(NewRow.GetID(), True);
-		EndIf;
-	EndIf;
-
-EndProcedure
-
-&AtClient
 Procedure ScanBarcodeEndMobile(Barcode, Result, Message, Parameters) Export
 
 	ProcessBarcodeResult = Barcodeclient.ProcessBarcode(Barcode, Parameters);
@@ -69,59 +70,17 @@ Procedure ScanBarcodeEndMobile(Barcode, Result, Message, Parameters) Export
 	EndIf;
 EndProcedure
 
-
-
 &AtClient
-Procedure ItemListSelection(Item, RowSelected, Field, StandardProcessing)
-	StandardProcessing = False;
-	StartEditQuantity(RowSelected);
-EndProcedure
+Procedure UpdateRows(RowList)
 
-&AtClient
-Procedure StartEditQuantity(Val RowSelected, AutoMode = False)
-	Structure = New Structure;
-	ItemListRow = ItemList.FindByID(RowSelected);
-	Structure.Insert("ItemRef", Undefined);
-	Structure.Insert("ItemKey", ItemListRow.ItemKey);
-	Structure.Insert("Quantity", ItemListRow.Quantity);
-	Structure.Insert("RowID", RowSelected);
-	Structure.Insert("AutoMode", AutoMode);
-	NotifyOnClosing = New NotifyDescription("OnEditQuantityEnd", ThisObject);
-	OpenForm("DataProcessor.MobileInvent.Form.RowForm", Structure, ThisObject, , , , NotifyOnClosing);
-EndProcedure
-
-&AtClient
-Procedure OnEditQuantityEnd(Result, AddInfo) Export
-	If Result = Undefined Then
-		Return;
-	EndIf;
-	ItemListRow = ItemList.FindByID(Result.RowID);
-	ItemListRow.Quantity = Result.Quantity;
-EndProcedure
-
-&AtClient
-Procedure CompleteLocation()
-	NotifyDescription = New NotifyDescription("InputQuantityEnd", ThisObject);
-	If Not SecondTryToInputQuantity Then
-		Text = R().QuestionToUser_018;
-	Else
-		Text = R().InfoMessage_009;
-	EndIf;
-	ShowInputNumber(NotifyDescription, "", Text);
-EndProcedure
-
-&AtClient
-Procedure InputQuantityEnd(Quantity, Parameters) Export
-	If Quantity <> ItemList.Total("Quantity") Then
-		If Not SecondTryToInputQuantity Then
-			SecondTryToInputQuantity = True;
-			CompleteLocation();
+	For Each Row In RowList Do
+		Rows = ItemList.FindRows(New Structure("Key", Row.Key));
+		If Rows.Count() Then
+			FillPropertyValues(Rows[0], Row);
 		Else
-			CommonFunctionsClientServer.ShowUsersMessage(R().InfoMessage_010);
-			ItemList.Clear();
+			FillPropertyValues(ItemList.Add(), Row);
 		EndIf;
-	Else
-		SecondTryToInputQuantity = False;
-		CommonFunctionsClientServer.ShowUsersMessage(R().InfoMessage_011);
-	EndIf;
+	EndDo;
+	
 EndProcedure
+#EndRegion

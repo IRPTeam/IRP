@@ -20,7 +20,7 @@
         <titleLocation>None</titleLocation>
         <items xsi:type="form:FormField">
           <name>ItemListKey</name>
-          <id>87</id>
+          <id>90</id>
           <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
@@ -31,7 +31,7 @@
           </dataPath>
           <extendedTooltip>
             <name>ItemListKeyExtendedTooltip</name>
-            <id>89</id>
+            <id>92</id>
             <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>
@@ -46,7 +46,7 @@
           </extendedTooltip>
           <contextMenu>
             <name>ItemListKeyContextMenu</name>
-            <id>88</id>
+            <id>91</id>
             <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>
@@ -211,6 +211,10 @@
           <dataPath xsi:type="form:DataPath">
             <segments>ItemList.Quantity</segments>
           </dataPath>
+          <handlers>
+            <event>OnChange</event>
+            <name>ItemListQuantityOnChange</name>
+          </handlers>
           <extendedTooltip>
             <name>ItemListQuantityExtendedTooltip</name>
             <id>83</id>
@@ -263,6 +267,14 @@
         <handlers>
           <event>Selection</event>
           <name>ItemListSelection</name>
+        </handlers>
+        <handlers>
+          <event>AfterDeleteRow</event>
+          <name>ItemListAfterDeleteRow</name>
+        </handlers>
+        <handlers>
+          <event>BeforeDeleteRow</event>
+          <name>ItemListBeforeDeleteRow</name>
         </handlers>
         <searchStringAddition>
           <visible>true</visible>
@@ -797,7 +809,7 @@
         <key>en</key>
         <value>Key</value>
       </title>
-      <id>9</id>
+      <id>10</id>
       <valueType>
         <types>DefinedType.typeRowID</types>
       </valueType>

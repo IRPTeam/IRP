@@ -1279,7 +1279,9 @@ Procedure PickupItemsEnd(Result, AddInfo) Export
 	EndDo;
 
 	Form.ItemListOnChange(Form.Items.ItemList);
-
+	Form.Modified = True;
+	Notify("AddNewItemListRow", Settings.Rows, Form);
+	
 EndProcedure
 
 Procedure OpenPickupItems(Object, Form, Command) Export

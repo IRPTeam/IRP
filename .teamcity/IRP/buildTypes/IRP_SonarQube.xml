@@ -72,6 +72,9 @@
           <param name="vcsRootId" value="IRP_GitTC" />
         </parameters>
       </extension>
+      <extension id="perfmon" type="perfmon">
+        <parameters />
+      </extension>
     </build-extensions>
     <artifact-dependencies>
       <dependency id="ARTIFACT_DEPENDENCY_1" sourceBuildTypeId="IRP_RunVA" cleanDestination="false">

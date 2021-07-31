@@ -1476,7 +1476,7 @@
           </extInfo>
         </items>
         <items xsi:type="form:FormField">
-          <name>PaymentListBusinessUnit</name>
+          <name>PaymentListProfitLossCenter</name>
           <id>230</id>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -1485,11 +1485,11 @@
           </userVisible>
           <dataPath xsi:type="form:MultiLanguageDataPath">
             <paths xsi:type="form:DataPath">
-              <segments>Object.PaymentList.BusinessUnit</segments>
+              <segments>Object.PaymentList.ProfitLossCenter</segments>
             </paths>
           </dataPath>
           <extendedTooltip>
-            <name>PaymentListBusinessUnitExtendedTooltip</name>
+            <name>PaymentListProfitLossCenterExtendedTooltip</name>
             <id>232</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -1504,7 +1504,7 @@
             </extInfo>
           </extendedTooltip>
           <contextMenu>
-            <name>PaymentListBusinessUnitContextMenu</name>
+            <name>PaymentListProfitLossCenterContextMenu</name>
             <id>231</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -2708,7 +2708,7 @@
         <extInfo xsi:type="form:CheckBoxFieldExtInfo"/>
       </items>
       <items xsi:type="form:FormField">
-        <name>BusinessUnit</name>
+        <name>Branch</name>
         <id>241</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -2717,11 +2717,11 @@
         </userVisible>
         <dataPath xsi:type="form:MultiLanguageDataPath">
           <paths xsi:type="form:DataPath">
-            <segments>Object.BusinessUnit</segments>
+            <segments>Object.Branch</segments>
           </paths>
         </dataPath>
         <extendedTooltip>
-          <name>BusinessUnitExtendedTooltip</name>
+          <name>BranchExtendedTooltip</name>
           <id>243</id>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -2736,7 +2736,7 @@
           </extInfo>
         </extendedTooltip>
         <contextMenu>
-          <name>BusinessUnitContextMenu</name>
+          <name>BranchContextMenu</name>
           <id>242</id>
           <visible>true</visible>
           <enabled>true</enabled>

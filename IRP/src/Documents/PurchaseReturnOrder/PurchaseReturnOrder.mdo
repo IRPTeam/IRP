@@ -522,10 +522,10 @@
       <dataHistory>Use</dataHistory>
     </attributes>
     <attributes uuid="505841a2-d652-4a4e-8631-de2de25d39e0">
-      <name>BusinessUnit</name>
+      <name>ProfitLossCenter</name>
       <synonym>
         <key>en</key>
-        <value>Business unit</value>
+        <value>Profit loss center</value>
       </synonym>
       <type>
         <types>CatalogRef.BusinessUnits</types>

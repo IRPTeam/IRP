@@ -84,7 +84,7 @@ Scenario: _0201001 create IT based on ITO
 			| '1' | 'Trousers' | '38/Yellow' | '20,000'   | 'pcs'            | 'Inventory transfer order 17 dated 02.03.2021 13:34:27' |
 			| '2' | 'Boots'    | '36/18SD'   | '2,000'    | 'Boots (12 pcs)' | 'Inventory transfer order 17 dated 02.03.2021 13:34:27' |
 
-		Then the form attribute named "BusinessUnit" became equal to "Logistics department"
+		Then the form attribute named "Branch" became equal to "Logistics department"
 		Then the form attribute named "Author" became equal to "en description is empty"
 	* Change quantity (more than ITO) + new line
 		And I go to line in "ItemList" table
@@ -267,7 +267,7 @@ Scenario: _0201003 copy IT (based on ITO) and check filling in Row Id info table
 			| '3' | 'Shirt'    | '38/Black'  | '3,000'    | 'pcs'            | ''                         |
 		Then the form attribute named "UseShipmentConfirmation" became equal to "Yes"
 		Then the form attribute named "UseGoodsReceipt" became equal to "Yes"
-		Then the form attribute named "BusinessUnit" became equal to "Logistics department"
+		Then the form attribute named "Branch" became equal to "Logistics department"
 		Then the form attribute named "Author" became equal to "en description is empty"
 	* Post IT and check Row ID Info tab
 		And I click the button named "FormPost"

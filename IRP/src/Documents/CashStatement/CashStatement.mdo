@@ -80,8 +80,8 @@
       <field>Document.CashStatement.Attribute.Company</field>
     </choiceParameterLinks>
     <choiceParameterLinks>
-      <name>Filter.BusinessUnit</name>
-      <field>CommonAttribute.BusinessUnit</field>
+      <name>Filter.Branch</name>
+      <field>CommonAttribute.Branch</field>
     </choiceParameterLinks>
     <choiceParameters>
       <name>Filter.Posted</name>

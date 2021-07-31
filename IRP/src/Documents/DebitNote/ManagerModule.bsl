@@ -114,7 +114,8 @@ Function Transactions()
 	|	Transactions.Agreement.Type = VALUE(Enum.AgreementTypes.Customer) AS IsCustomer,
 	|	Transactions.Currency,
 	|	Transactions.Key,
-	|	Transactions.Amount
+	|	Transactions.Amount,
+	|	Transactions.Ref.Branch AS Branch
 	|INTO Transactions
 	|FROM
 	|	Document.DebitNote.Transactions AS Transactions
@@ -138,6 +139,7 @@ Function R2021B_CustomersTransactions()
 		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
 		|	Transactions.Period AS Period,
 		|	Transactions.Company,
+		|	Transactions.Branch,
 		|	Transactions.Currency,
 		|	Transactions.LegalName,
 		|	Transactions.Partner,
@@ -158,6 +160,7 @@ Function R2021B_CustomersTransactions()
 		|	VALUE(AccumulationRecordType.Expense),
 		|	OffsetOfAdvances.Period,
 		|	OffsetOfAdvances.Company,
+		|	OffsetOfAdvances.Branch,
 		|	OffsetOfAdvances.Currency,
 		|	OffsetOfAdvances.LegalName,
 		|	OffsetOfAdvances.Partner,
@@ -179,6 +182,7 @@ Function R1021B_VendorsTransactions()
 		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
 		|	Transactions.Period AS Period,
 		|	Transactions.Company,
+		|	Transactions.Branch,
 		|	Transactions.Currency,
 		|	Transactions.LegalName,
 		|	Transactions.Partner,
@@ -199,6 +203,7 @@ Function R1021B_VendorsTransactions()
 		|	VALUE(AccumulationRecordType.Expense),
 		|	OffsetOfAdvances.Period,
 		|	OffsetOfAdvances.Company,
+		|	OffsetOfAdvances.Branch,
 		|	OffsetOfAdvances.Currency,
 		|	OffsetOfAdvances.LegalName,
 		|	OffsetOfAdvances.Partner,
@@ -237,6 +242,7 @@ Function R1020B_AdvancesToVendors()
 		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
 		|	OffsetOfAdvances.Period,
 		|	OffsetOfAdvances.Company,
+		|	OffsetOfAdvances.Branch,
 		|	OffsetOfAdvances.Currency,
 		|	OffsetOfAdvances.LegalName,
 		|	OffsetOfAdvances.Partner,
@@ -260,6 +266,7 @@ Function R5011B_CustomersAging()
 		|	Transactions.Period AS PaymentDate,
 		|	Transactions.Period AS Period,
 		|	Transactions.Company,
+		|	Transactions.Branch,
 		|	Transactions.Currency,
 		|	Transactions.Partner,
 		|	Transactions.Agreement,
@@ -275,6 +282,7 @@ Function R5011B_CustomersAging()
 		|GROUP BY
 		|	Transactions.Period,
 		|	Transactions.Company,
+		|	Transactions.Branch,
 		|	Transactions.Currency,
 		|	Transactions.Partner,
 		|	Transactions.Agreement,
@@ -288,6 +296,7 @@ Function R5011B_CustomersAging()
 		|	OffsetOfAging.PaymentDate,
 		|	OffsetOfAging.Period,
 		|	OffsetOfAging.Company,
+		|	OffsetOfAging.Branch,
 		|	OffsetOfAging.Currency,
 		|	OffsetOfAging.Partner,
 		|	OffsetOfAging.Agreement,
@@ -307,6 +316,7 @@ Function R5012B_VendorsAging()
 		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
 		|	OffsetOfAging.Period,
 		|	OffsetOfAging.Company,
+		|	OffsetOfAging.Branch,
 		|	OffsetOfAging.Partner,
 		|	OffsetOfAging.Agreement,
 		|	OffsetOfAging.Currency,
@@ -327,6 +337,7 @@ Function T2011S_PartnerTransactions()
 		"SELECT
 		|	Transactions.Period AS Period,
 		|	Transactions.Company,
+		|	Transactions.Branch,
 		|	Transactions.Currency,
 		|	Transactions.LegalName,
 		|	Transactions.Partner,
@@ -347,6 +358,7 @@ Function T2011S_PartnerTransactions()
 		|SELECT
 		|	Transactions.Period,
 		|	Transactions.Company,
+		|	Transactions.Branch,
 		|	Transactions.Currency,
 		|	Transactions.LegalName,
 		|	Transactions.Partner,

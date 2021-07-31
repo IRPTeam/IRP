@@ -725,10 +725,6 @@
 			<field>RevenueType</field>
 		</field>
 		<field xsi:type="DataSetFieldField">
-			<dataPath>BusinessUnit</dataPath>
-			<field>BusinessUnit</field>
-		</field>
-		<field xsi:type="DataSetFieldField">
 			<dataPath>VendorsAdvancesClosing</dataPath>
 			<field>VendorsAdvancesClosing</field>
 		</field>
@@ -743,6 +739,14 @@
 		<field xsi:type="DataSetFieldField">
 			<dataPath>ExpenseType</dataPath>
 			<field>ExpenseType</field>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>ProfitLossCenter</dataPath>
+			<field>ProfitLossCenter</field>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Branch</dataPath>
+			<field>Branch</field>
 		</field>
 		<item xsi:type="DataSetQuery">
 			<name>R1001T_Purchases</name>
@@ -3712,10 +3716,6 @@
 				<field>CurrencyMovementType</field>
 			</field>
 			<field xsi:type="DataSetFieldField">
-				<dataPath>BusinessUnit</dataPath>
-				<field>BusinessUnit</field>
-			</field>
-			<field xsi:type="DataSetFieldField">
 				<dataPath>AdditionalAnalytic</dataPath>
 				<field>AdditionalAnalytic</field>
 			</field>
@@ -3760,6 +3760,14 @@
 						<v8:content>Register name</v8:content>
 					</v8:item>
 				</title>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>Branch</dataPath>
+				<field>Branch</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>ProfitLossCenter</dataPath>
+				<field>ProfitLossCenter</field>
 			</field>
 			<dataSource>DataSource1</dataSource>
 			<query>SELECT "R5021T_Revenues" AS RegisterName, * FROM AccumulationRegister.R5021T_Revenues</query>
@@ -3821,8 +3829,12 @@
 				<field>AdditionalAnalytic</field>
 			</field>
 			<field xsi:type="DataSetFieldField">
-				<dataPath>BusinessUnit</dataPath>
-				<field>BusinessUnit</field>
+				<dataPath>ProfitLossCenter</dataPath>
+				<field>ProfitLossCenter</field>
+			</field>
+			<field xsi:type="DataSetFieldField">
+				<dataPath>Branch</dataPath>
+				<field>Branch</field>
 			</field>
 			<dataSource>DataSource1</dataSource>
 			<query>SELECT "R5022T_Expenses" AS RegisterName, * FROM AccumulationRegister.R5022T_Expenses</query>
@@ -3969,7 +3981,7 @@
 					<dcsset:field>Basis</dcsset:field>
 				</dcsset:item>
 				<dcsset:item xsi:type="dcsset:SelectedItemField">
-					<dcsset:field>BusinessUnit</dcsset:field>
+					<dcsset:field>Branch</dcsset:field>
 				</dcsset:item>
 				<dcsset:item xsi:type="dcsset:SelectedItemField">
 					<dcsset:field>CancelReason</dcsset:field>

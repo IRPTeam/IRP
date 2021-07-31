@@ -97,10 +97,10 @@
     <dataHistory>Use</dataHistory>
   </attributes>
   <attributes uuid="6bca6201-5a50-4726-8980-a506ca0c65f0">
-    <name>BusinessUnit</name>
+    <name>Branch</name>
     <synonym>
       <key>en</key>
-      <value>Business unit</value>
+      <value>Branch</value>
     </synonym>
     <type>
       <types>CatalogRef.BusinessUnits</types>

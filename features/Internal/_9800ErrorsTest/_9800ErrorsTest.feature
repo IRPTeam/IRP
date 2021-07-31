@@ -107,7 +107,7 @@ Scenario: _9802 create document SI based on Sales order
 		And I click "Sales invoice" button
 		And I click "Ok" button
 		And "ItemList" table became equal
-			| '#' | 'Business unit'           | 'Price type'        | 'Item'     | 'Item key'  | 'Dont calculate row' | 'Serial lot numbers' | 'Q'      | 'Unit' | 'Tax amount' | 'Price'  | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Delivery date' | 'Use shipment confirmation' | 'Detail' | 'Sales order'                             | 'Revenue type' |
+			| '#' | 'Profit loss center'           | 'Price type'        | 'Item'     | 'Item key'  | 'Dont calculate row' | 'Serial lot numbers' | 'Q'      | 'Unit' | 'Tax amount' | 'Price'  | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Delivery date' | 'Use shipment confirmation' | 'Detail' | 'Sales order'                             | 'Revenue type' |
 			| '1' | 'Distribution department' | 'Basic Price Types' | 'Dress'    | 'L/Green'   | 'No'                 | ''                   | '10,000' | 'pcs'  | ''           | '550,00' | ''              | '2 750,00'   | '2 750,00'     | ''                    | 'Store 01' | '12.03.2021'    | 'No'                        | '123'    | 'Sales order 1 dated 12.03.2021 19:07:17' | 'Revenue'      |
 			| '2' | 'Distribution department' | 'Basic Price Types' | 'Trousers' | '36/Yellow' | 'No'                 | ''                   | '4,000'  | 'pcs'  | ''           | '400,00' | ''              | '1 600,00'   | '1 600,00'     | ''                    | 'Store 01' | '12.03.2021'    | 'No'                        | ''       | 'Sales order 1 dated 12.03.2021 19:07:17' | 'Revenue'      |
 		And I close all client application windows

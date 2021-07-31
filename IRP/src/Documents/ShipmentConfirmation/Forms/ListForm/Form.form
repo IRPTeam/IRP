@@ -756,7 +756,7 @@
 	ShipmentConfirmation.Partner AS Partner,
 	ShipmentConfirmation.TransactionType AS TransactionType,
 	ShipmentConfirmation.Author AS Author,
-	ShipmentConfirmation.BusinessUnit AS BusinessUnit,
+	ShipmentConfirmation.Branch AS Branch,
 	ShipmentConfirmation.Description AS Description,
 	CASE
 		WHEN COUNT(DISTINCT ShipmentConfirmationItemList.Store) = 1
@@ -780,7 +780,7 @@ GROUP BY
 	ShipmentConfirmation.Partner,
 	ShipmentConfirmation.TransactionType,
 	ShipmentConfirmation.Author,
-	ShipmentConfirmation.BusinessUnit,
+	ShipmentConfirmation.Branch,
 	ShipmentConfirmation.Description,
 	R2031B_ShipmentInvoicingBalance.QuantityBalance</queryText>
       <mainTable>Document.ShipmentConfirmation</mainTable>

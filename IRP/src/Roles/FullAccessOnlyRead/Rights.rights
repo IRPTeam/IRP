@@ -1044,7 +1044,7 @@
 		</right>
 	</object>
 	<object>
-		<name>InformationRegister.BusinessUnitBankTerms</name>
+		<name>InformationRegister.BranchBankTerms</name>
 		<right>
 			<name>Read</name>
 			<value>true</value>
@@ -4006,7 +4006,7 @@
 		</right>
 	</object>
 	<object>
-		<name>CommonAttribute.BusinessUnit</name>
+		<name>CommonAttribute.Branch</name>
 		<right>
 			<name>View</name>
 			<value>true</value>

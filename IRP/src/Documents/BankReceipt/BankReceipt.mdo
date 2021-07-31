@@ -393,10 +393,10 @@
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
     <attributes uuid="bd718dda-32ab-4a2e-b011-a0ec080f8bd8">
-      <name>BusinessUnit</name>
+      <name>ProfitLossCenter</name>
       <synonym>
         <key>en</key>
-        <value>Business unit</value>
+        <value>Profit loss center</value>
       </synonym>
       <type>
         <types>CatalogRef.BusinessUnits</types>

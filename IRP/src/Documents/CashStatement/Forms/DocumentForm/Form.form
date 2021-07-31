@@ -594,7 +594,7 @@
         <name>GroupTitleRight</name>
         <id>71</id>
         <items xsi:type="form:FormField">
-          <name>BusinessUnit</name>
+          <name>Branch</name>
           <id>214</id>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -603,15 +603,15 @@
           </userVisible>
           <dataPath xsi:type="form:MultiLanguageDataPath">
             <paths xsi:type="form:DataPath">
-              <segments>Object.BusinessUnit</segments>
+              <segments>Object.Branch</segments>
             </paths>
           </dataPath>
           <handlers>
             <event>OnChange</event>
-            <name>BusinessUnitOnChange</name>
+            <name>BranchOnChange</name>
           </handlers>
           <extendedTooltip>
-            <name>BusinessUnitExtendedTooltip</name>
+            <name>BranchExtendedTooltip</name>
             <id>216</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -626,7 +626,7 @@
             </extInfo>
           </extendedTooltip>
           <contextMenu>
-            <name>BusinessUnitContextMenu</name>
+            <name>BranchContextMenu</name>
             <id>215</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -978,9 +978,9 @@
           <typeDomainEnabled>true</typeDomainEnabled>
           <textEdit>true</textEdit>
           <choiceParameterLinks>
-            <name>Filter.BusinessUnit</name>
+            <name>Filter.Branch</name>
             <datapath xsi:type="form:DataPath">
-              <segments>Object.BusinessUnit</segments>
+              <segments>Object.Branch</segments>
             </datapath>
           </choiceParameterLinks>
           <choiceParameterLinks>

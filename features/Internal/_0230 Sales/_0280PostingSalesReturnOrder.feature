@@ -87,7 +87,7 @@ Scenario: _028001 create document Sales return order based on SI (button Create)
 		And I select "Approved" exact value from "Status" drop-down list
 	* Check items tab
 		And "ItemList" table became equal
-			| 'Business unit'           | '#' | 'Item'    | 'Dont calculate row' | 'Q'      | 'Unit'           | 'Tax amount' | 'Price'    | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Sales invoice'                              | 'Revenue type' | 'Item key' | 'Cancel' | 'Cancel reason' |
+			| 'Profit loss center'           | '#' | 'Item'    | 'Dont calculate row' | 'Q'      | 'Unit'           | 'Tax amount' | 'Price'    | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Sales invoice'                              | 'Revenue type' | 'Item key' | 'Cancel' | 'Cancel reason' |
 			| 'Distribution department' | '1' | 'Dress'   | 'No'                 | '1,000'  | 'pcs'            | '75,36'      | '520,00'   | '18%' | '26,00'         | '418,64'     | '494,00'       | ''                    | 'Store 02' | 'Sales invoice 32 dated 04.03.2021 16:32:23' | 'Revenue'      | 'XS/Blue'  | 'No'     | ''              |
 			| 'Distribution department' | '2' | 'Shirt'   | 'No'                 | '12,000' | 'pcs'            | '640,68'     | '350,00'   | '18%' | ''              | '3 559,32'   | '4 200,00'     | ''                    | 'Store 02' | 'Sales invoice 32 dated 04.03.2021 16:32:23' | 'Revenue'      | '36/Red'   | 'No'     | ''              |
 			| 'Distribution department' | '3' | 'Boots'   | 'No'                 | '2,000'  | 'Boots (12 pcs)' | '2 434,58'   | '8 400,00' | '18%' | '840,00'        | '13 525,42'  | '15 960,00'    | ''                    | 'Store 02' | 'Sales invoice 32 dated 04.03.2021 16:32:23' | 'Revenue'      | '37/18SD'  | 'No'     | ''              |
@@ -362,7 +362,7 @@ Scenario: _028011 copy SRO and check filling in Row Id info table
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Store" became equal to "Store 01"
 		And "ItemList" table became equal
-			| '#' | 'Business unit' | 'Item'     | 'Item key'  | 'Dont calculate row' | 'Q'       | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Revenue type' | 'Net amount' |
+			| '#' | 'Profit loss center' | 'Item'     | 'Item key'  | 'Dont calculate row' | 'Q'       | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Revenue type' | 'Net amount' |
 			| '1' | ''              | 'Dress'    | 'M/White'   | 'No'                 | '100,000' | 'pcs'  | '3 050,85'   | '200,00' | '18%' | ''              | '20 000,00'    | ''                    | 'Store 01' | ''             | '16 949,15'  |
 			| '2' | ''              | 'Dress'    | 'L/Green'   | 'No'                 | '200,000' | 'pcs'  | '6 406,78'   | '210,00' | '18%' | ''              | '42 000,00'    | ''                    | 'Store 01' | ''             | '35 593,22'  |
 			| '3' | ''              | 'Trousers' | '36/Yellow' | 'No'                 | '300,000' | 'pcs'  | '11 440,68'  | '250,00' | '18%' | ''              | '75 000,00'    | ''                    | 'Store 01' | ''             | '63 559,32'  |
@@ -371,7 +371,7 @@ Scenario: _028011 copy SRO and check filling in Row Id info table
 			| 'TRY'                | 'Partner term' | 'TRY'           | 'TRY'      | '1'                 | '1'            | '137 000'   |
 			| 'Local currency'     | 'Legal'        | 'TRY'           | 'TRY'      | '1'                 | '1'            | '137 000'   |
 			| 'Reporting currency' | 'Reporting'    | 'TRY'           | 'USD'      | '0,1712'            | '1'            | '23 454,40' |
-		Then the form attribute named "BusinessUnit" became equal to ""
+		Then the form attribute named "Branch" became equal to ""
 		Then the form attribute named "PriceIncludeTax" became equal to "Yes"
 		Then the form attribute named "Currency" became equal to "TRY"
 		Then the form attribute named "ItemListTotalNetAmount" became equal to "116 101,69"

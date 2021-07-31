@@ -57,11 +57,11 @@
     <fullTextSearch>Use</fullTextSearch>
     <useInTotals>true</useInTotals>
   </dimensions>
-  <dimensions uuid="928fab44-edde-4746-9eba-687eb2c0247d">
-    <name>BusinessUnit</name>
+  <dimensions uuid="78181d18-902d-473b-bdab-0181bc61a1a7">
+    <name>Branch</name>
     <synonym>
       <key>en</key>
-      <value>Business unit</value>
+      <value>Branch</value>
     </synonym>
     <type>
       <types>CatalogRef.BusinessUnits</types>

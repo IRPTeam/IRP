@@ -55,6 +55,9 @@ Scenario: _042400 preparation (RetailSalesReceipt)
 		When Create catalog PaymentTerminals objects
 		When Create catalog PaymentTypes objects
 		When Create catalog Workstations objects
+		When Create catalog RetailCustomers objects (check POS)
+		When Create catalog Partners objects and Companies objects (Customer)
+		When Create catalog Agreements objects (Customer)
 	* Add plugin for taxes calculation
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
@@ -68,6 +71,9 @@ Scenario: _042400 preparation (RetailSalesReceipt)
 		When Create document RetailSalesReceipt objects (check movements)
 		And I execute 1C:Enterprise script at server
 			| "Documents.RetailSalesReceipt.FindByNumber(201).GetObject().Write(DocumentWriteMode.Posting);" |
+		When Create document RetailSalesReceipt objects (with retail customer)
+		And I execute 1C:Enterprise script at server
+			| "Documents.RetailSalesReceipt.FindByNumber(202).GetObject().Write(DocumentWriteMode.Posting);" |
 	
 
 Scenario: _042401 check Retail sales receipt movements by the Register  "R4010 Actual stocks"
@@ -123,15 +129,64 @@ Scenario: _042403 check Retail sales receipt movements by the Register  "R3010 C
 		And I select "R3010 Cash on hand" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Retail sales receipt 201 dated 15.03.2021 16:01:04' | ''            | ''                    | ''          | ''             | ''             | ''         | ''                             | ''                     |
-			| 'Document registrations records'                     | ''            | ''                    | ''          | ''             | ''             | ''         | ''                             | ''                     |
-			| 'Register  "R3010 Cash on hand"'                     | ''            | ''                    | ''          | ''             | ''             | ''         | ''                             | ''                     |
-			| ''                                                   | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''         | ''                             | 'Attributes'           |
-			| ''                                                   | ''            | ''                    | 'Amount'    | 'Company'      | 'Account'      | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
-			| ''                                                   | 'Receipt'     | '15.03.2021 16:01:04' | '1 664,06'  | 'Main Company' | 'Cash desk №4' | 'USD'      | 'Reporting currency'           | 'No'                   |
-			| ''                                                   | 'Receipt'     | '15.03.2021 16:01:04' | '9 720'     | 'Main Company' | 'Cash desk №4' | 'TRY'      | 'Local currency'               | 'No'                   |
-			| ''                                                   | 'Receipt'     | '15.03.2021 16:01:04' | '9 720'     | 'Main Company' | 'Cash desk №4' | 'TRY'      | 'en description is empty'      | 'No'                   |
+			| 'Retail sales receipt 201 dated 15.03.2021 16:01:04' | ''            | ''                    | ''          | ''             | ''        | ''             | ''         | ''                             | ''                     |
+			| 'Document registrations records'                     | ''            | ''                    | ''          | ''             | ''        | ''             | ''         | ''                             | ''                     |
+			| 'Register  "R3010 Cash on hand"'                     | ''            | ''                    | ''          | ''             | ''        | ''             | ''         | ''                             | ''                     |
+			| ''                                                   | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''        | ''             | ''         | ''                             | 'Attributes'           |
+			| ''                                                   | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'  | 'Account'      | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
+			| ''                                                   | 'Receipt'     | '15.03.2021 16:01:04' | '1 664,06'  | 'Main Company' | 'Shop 01' | 'Cash desk №4' | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                                   | 'Receipt'     | '15.03.2021 16:01:04' | '9 720'     | 'Main Company' | 'Shop 01' | 'Cash desk №4' | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                                   | 'Receipt'     | '15.03.2021 16:01:04' | '9 720'     | 'Main Company' | 'Shop 01' | 'Cash desk №4' | 'TRY'      | 'en description is empty'      | 'No'                   |
 		And I close all client application windows
+
+Scenario: _042408 check Retail sales receipt movements by the Register  "R2021 Customer transactions"
+	* Select Retail sales receipt
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '202' |
+	* Check movements by the Register  "R2021 Customer transactions"
+		And I click "Registrations report" button
+		And I select "R2021 Customer transactions" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Retail sales receipt 202 dated 28.07.2021 13:53:27' | ''            | ''                    | ''          | ''             | ''        | ''                             | ''         | ''           | ''         | ''                      | ''                                                   | ''                     | ''                           |
+			| 'Document registrations records'                     | ''            | ''                    | ''          | ''             | ''        | ''                             | ''         | ''           | ''         | ''                      | ''                                                   | ''                     | ''                           |
+			| 'Register  "R2021 Customer transactions"'            | ''            | ''                    | ''          | ''             | ''        | ''                             | ''         | ''           | ''         | ''                      | ''                                                   | ''                     | ''                           |
+			| ''                                                   | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''        | ''                             | ''         | ''           | ''         | ''                      | ''                                                   | 'Attributes'           | ''                           |
+			| ''                                                   | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'  | 'Multi currency movement type' | 'Currency' | 'Legal name' | 'Partner'  | 'Agreement'             | 'Basis'                                              | 'Deferred calculation' | 'Customers advances closing' |
+			| ''                                                   | 'Receipt'     | '28.07.2021 13:53:27' | '1 797,22'  | 'Main Company' | 'Shop 01' | 'Reporting currency'           | 'USD'      | 'Customer'   | 'Customer' | 'Customer partner term' | 'Retail sales receipt 202 dated 28.07.2021 13:53:27' | 'No'                   | ''                           |
+			| ''                                                   | 'Receipt'     | '28.07.2021 13:53:27' | '10 497,79' | 'Main Company' | 'Shop 01' | 'Local currency'               | 'TRY'      | 'Customer'   | 'Customer' | 'Customer partner term' | 'Retail sales receipt 202 dated 28.07.2021 13:53:27' | 'No'                   | ''                           |
+			| ''                                                   | 'Receipt'     | '28.07.2021 13:53:27' | '10 497,79' | 'Main Company' | 'Shop 01' | 'TRY'                          | 'TRY'      | 'Customer'   | 'Customer' | 'Customer partner term' | 'Retail sales receipt 202 dated 28.07.2021 13:53:27' | 'No'                   | ''                           |
+			| ''                                                   | 'Receipt'     | '28.07.2021 13:53:27' | '10 497,79' | 'Main Company' | 'Shop 01' | 'en description is empty'      | 'TRY'      | 'Customer'   | 'Customer' | 'Customer partner term' | 'Retail sales receipt 202 dated 28.07.2021 13:53:27' | 'No'                   | ''                           |
+			| ''                                                   | 'Expense'     | '28.07.2021 13:53:27' | '1 797,22'  | 'Main Company' | 'Shop 01' | 'Reporting currency'           | 'USD'      | 'Customer'   | 'Customer' | 'Customer partner term' | 'Retail sales receipt 202 dated 28.07.2021 13:53:27' | 'No'                   | ''                           |
+			| ''                                                   | 'Expense'     | '28.07.2021 13:53:27' | '10 497,79' | 'Main Company' | 'Shop 01' | 'Local currency'               | 'TRY'      | 'Customer'   | 'Customer' | 'Customer partner term' | 'Retail sales receipt 202 dated 28.07.2021 13:53:27' | 'No'                   | ''                           |
+			| ''                                                   | 'Expense'     | '28.07.2021 13:53:27' | '10 497,79' | 'Main Company' | 'Shop 01' | 'TRY'                          | 'TRY'      | 'Customer'   | 'Customer' | 'Customer partner term' | 'Retail sales receipt 202 dated 28.07.2021 13:53:27' | 'No'                   | ''                           |
+			| ''                                                   | 'Expense'     | '28.07.2021 13:53:27' | '10 497,79' | 'Main Company' | 'Shop 01' | 'en description is empty'      | 'TRY'      | 'Customer'   | 'Customer' | 'Customer partner term' | 'Retail sales receipt 202 dated 28.07.2021 13:53:27' | 'No'                   | ''                           |
+		And I close all client application windows
+
+
+Scenario: _042409 check Retail sales receipt movements by the Register  "R5010 Reconciliation statement"
+	* Select Retail sales receipt
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '202' |
+	* Check movements by the Register  "R5010 Reconciliation statement"
+		And I click "Registrations report" button
+		And I select "R5010 Reconciliation statement" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Retail sales receipt 202 dated 28.07.2021 13:53:27' | ''            | ''                    | ''          | ''             | ''        | ''         | ''           |
+			| 'Document registrations records'                     | ''            | ''                    | ''          | ''             | ''        | ''         | ''           |
+			| 'Register  "R5010 Reconciliation statement"'         | ''            | ''                    | ''          | ''             | ''        | ''         | ''           |
+			| ''                                                   | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''        | ''         | ''           |
+			| ''                                                   | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'  | 'Currency' | 'Legal name' |
+			| ''                                                   | 'Receipt'     | '28.07.2021 13:53:27' | '10 497,79' | 'Main Company' | 'Shop 01' | 'TRY'      | 'Customer'   |
+			| ''                                                   | 'Expense'     | '28.07.2021 13:53:27' | '10 497,79' | 'Main Company' | 'Shop 01' | 'TRY'      | 'Customer'   |
+		And I close all client application windows
+
+
 
 Scenario: _042430 Retail sales receipt clear posting/mark for deletion
 	And I close all client application windows

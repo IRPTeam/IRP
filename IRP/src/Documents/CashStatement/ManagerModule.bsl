@@ -31,7 +31,8 @@ Function GetQueryText_CashStatement_CashInTransit()
 	|	(&Ref).CashAccount.Currency AS Currency,
 	|	SUM(Table.Amount) AS Amount,
 	|	Table.Ref.Date AS Period,
-	|	Table.Key
+	|	Table.Key,
+	|	Table.Ref.Branch AS Branch
 	|FROM
 	|	Document.CashStatement.PaymentList AS Table
 	|WHERE
@@ -44,7 +45,8 @@ Function GetQueryText_CashStatement_CashInTransit()
 	|	Table.Ref.Date,
 	|	Table.Key,
 	|	(&Ref).CashAccount,
-	|	(&Ref).CashAccount.Currency";
+	|	(&Ref).CashAccount.Currency,
+	|	Table.Ref.Branch";
 EndFunction
 
 Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
@@ -150,7 +152,8 @@ Function PaymentList()
 	|	PaymentList.Currency,
 	|	PaymentList.MovementType,
 	|	PaymentList.Amount,
-	|	PaymentList.Account.Type = VALUE(Enum.CashAccountTypes.POS) AS IsAccountPOS
+	|	PaymentList.Account.Type = VALUE(Enum.CashAccountTypes.POS) AS IsAccountPOS,
+	|	PaymentList.Ref.Branch AS Branch
 	|INTO PaymentList
 	|FROM
 	|	Document.CashStatement.PaymentList AS PaymentList
@@ -175,6 +178,7 @@ Function R3035T_CashPlanning()
 		"SELECT
 		|	PaymentList.Period,
 		|	PaymentList.Company,
+		|	PaymentList.Branch,
 		|	PaymentList.Ref AS BasisDocument,
 		|	PaymentList.CashAccount AS Account,
 		|	PaymentList.Currency,

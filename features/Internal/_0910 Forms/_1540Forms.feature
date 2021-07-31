@@ -1389,15 +1389,15 @@ Scenario: _012020 check sorting of item keys
 	And I finish line editing in "SettingsComposerUserSettingsItem1Order" table
 	And I click "Finish editing" button
 	And "List" table became equal
-		| 'Code' | 'Item key'  | 'Specification' |
-		| '16'   | 'Dress/A-8' | 'A-8'           |
-		| '4'    | 'L/Green'   | ''              |
-		| '25'   | 'M/Brown'   | ''              |
-		| '3'    | 'M/White'   | ''              |
-		| '1'    | 'S/Yellow'  | ''              |
-		| '5'    | 'XL/Green'  | ''              |
-		| '2'    | 'XS/Blue'   | ''              |
-		| '18'   | 'XXL/Red'   | ''              |
+		| 'Item key'  | 'Specification' |
+		| 'Dress/A-8' | 'A-8'           |
+		| 'L/Green'   | ''              |
+		| 'M/Brown'   | ''              |
+		| 'M/White'   | ''              |
+		| 'S/Yellow'  | ''              |
+		| 'XL/Green'  | ''              |
+		| 'XS/Blue'   | ''              |
+		| 'XXL/Red'   | ''              |
 	And I close all client application windows
 	
 

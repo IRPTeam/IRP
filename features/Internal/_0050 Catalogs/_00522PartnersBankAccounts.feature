@@ -44,7 +44,7 @@ Scenario: _005022 filling in the "Partners bank account" catalog
 			| 'Kalipso'     |
 		And I select current line in "List" table
 		And I input "Bank name" text in "Bank name" field
-		And I click Select button of "Business unit" field
+		And I click Select button of "Branch" field
 		And I go to line in "List" table
 			| 'Description' |
 			| 'Front office'     |
@@ -55,7 +55,7 @@ Scenario: _005022 filling in the "Partners bank account" catalog
 			Then the form attribute named "Partner" became equal to "Kalipso"
 			Then the form attribute named "LegalEntity" became equal to "Company Kalipso"
 			Then the form attribute named "BankName" became equal to "Bank name"
-			Then the form attribute named "BusinessUnit" became equal to "Front office"
+			Then the form attribute named "Branch" became equal to "Front office"
 			Then the form attribute named "Number" became equal to "56788888888888689"
 			Then the form attribute named "Currency" became equal to "EUR"	
 	* Check for created Partners bank account

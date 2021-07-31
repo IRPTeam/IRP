@@ -1095,7 +1095,7 @@ Scenario: _0154087 check company, sender, receiver, send currency, receive curre
 		Then the form attribute named "ReceiveCurrency" became equal to "EUR"
 		And I close all client application windows
 
-Scenario: _0154088 check company, operation type, partner, legal name, Partner term, business unit, expence type input by search in line in a CreditNote (in english)
+Scenario: _0154088 check company, operation type, partner, legal name, Partner term, profit loss center, expence type input by search in line in a CreditNote (in english)
 	And I close all client application windows
 	* Open a creation form CreditNote
 		Given I open hyperlink "e1cib/list/Document.CreditNote"
@@ -1110,21 +1110,21 @@ Scenario: _0154088 check company, operation type, partner, legal name, Partner t
 		And I activate "Partner term" field in "Transactions" table
 		And I select "without" from "Partner term" drop-down list by string in "Transactions" table
 		And I select "lir" from "Currency" drop-down list by string in "Transactions" table
-		And I activate "Business unit" field in "Transactions" table
+		And I activate "Profit loss center" field in "Transactions" table
 		And I select current line in "Transactions" table
-		And I select "lo" from "Business unit" drop-down list by string in "Transactions" table
+		And I select "lo" from "Profit loss center" drop-down list by string in "Transactions" table
 		And I activate "Expense type" field in "Transactions" table
 		And I select "fu" from "Expense type" drop-down list by string in "Transactions" table
 	* Filling check
 		Then the form attribute named "Company" became equal to "Main Company"
 		// Then the form attribute named "LegalName" became equal to "Company Ferron BP"
 		And "Transactions" table contains lines
-		| 'Legal name'          | 'Partner'   | 'Partner term'                     | 'Business unit'        | 'Currency' | 'Expense type' |
+		| 'Legal name'          | 'Partner'   | 'Partner term'                     | 'Profit loss center'        | 'Currency' | 'Expense type' |
 		| 'Company Ferron BP'   | 'Ferron BP' | 'Basic Partner terms, without VAT' | 'Logistics department' | 'TRY'      | 'Fuel'         |
 		And I close all client application windows
 
 
-Scenario: _0154100 check company, operation type, partner, legal name, Partner term, business unit, expence type input by search in line in a DebitNote (in english)
+Scenario: _0154100 check company, operation type, partner, legal name, Partner term, profit loss center, expence type input by search in line in a DebitNote (in english)
 	And I close all client application windows
 	* Open a creation form DebitNote
 		Given I open hyperlink "e1cib/list/Document.DebitNote"
@@ -1139,16 +1139,16 @@ Scenario: _0154100 check company, operation type, partner, legal name, Partner t
 		And I activate "Partner term" field in "Transactions" table
 		And I select "without" from "Partner term" drop-down list by string in "Transactions" table
 		And I select "lir" from "Currency" drop-down list by string in "Transactions" table
-		And I activate "Business unit" field in "Transactions" table
+		And I activate "Profit loss center" field in "Transactions" table
 		And I select current line in "Transactions" table
-		And I select "lo" from "Business unit" drop-down list by string in "Transactions" table
+		And I select "lo" from "Profit loss center" drop-down list by string in "Transactions" table
 		And I activate "Revenue type" field in "Transactions" table
 		And I select "fu" from "Revenue type" drop-down list by string in "Transactions" table
 	* Filling check
 		Then the form attribute named "Company" became equal to "Main Company"
 		// Then the form attribute named "LegalName" became equal to "Company Ferron BP"
 		And "Transactions" table contains lines
-		| 'Legal name'          | 'Partner'   | 'Partner term'                     | 'Business unit'        | 'Currency' | 'Revenue type' |
+		| 'Legal name'          | 'Partner'   | 'Partner term'                     | 'Profit loss center'        | 'Currency' | 'Revenue type' |
 		| 'Company Ferron BP'   | 'Ferron BP' | 'Basic Partner terms, without VAT' | 'Logistics department' | 'TRY'      | 'Fuel'         |
 		And I close all client application windows
 
@@ -1247,21 +1247,21 @@ Scenario: _0154094 check store, company, tabular part input by search in line in
 	* Check filling in
 		Then the form attribute named "Store" became equal to "Store 02"
 		Then the form attribute named "Company" became equal to "Main Company"
-	* Business unit, expence type input by search in line
+	* Profit loss center, expence type input by search in line
 		And I click the button named "Add"
-		And I activate "Business unit" field in "ItemList" table
-		And I select "log" from "Business unit" drop-down list by string in "ItemList" table
+		And I activate "Profit loss center" field in "ItemList" table
+		And I select "log" from "Profit loss center" drop-down list by string in "ItemList" table
 		And I move to the next attribute
 		And I activate "Expense type" field in "ItemList" table
 		And I select "fu" from "Expense type" drop-down list by string in "ItemList" table
 	* Check filling in
 		And "ItemList" table contains lines
-		| 'Business unit'        | 'Expense type' |
+		| 'Profit loss center'        | 'Expense type' |
 		| 'Logistics department' | 'Fuel'         |
 	* Change expense type
 		And I select "exp" from "Expense type" drop-down list by string in "ItemList" table
 		And "ItemList" table contains lines
-			| 'Business unit'        | 'Expense type' |
+			| 'Profit loss center'        | 'Expense type' |
 			| 'Logistics department' | 'Expense'         |
 		And I close all client application windows
 
@@ -1278,21 +1278,21 @@ Scenario: _0154095 check store, company, tabular part input by search in line in
 	* Check filling in
 		Then the form attribute named "Store" became equal to "Store 02"
 		Then the form attribute named "Company" became equal to "Main Company"
-	* Business unit, expence type input by search in line
+	* Profit loss center, expence type input by search in line
 		And I click the button named "Add"
-		And I activate "Business unit" field in "ItemList" table
-		And I select "log" from "Business unit" drop-down list by string in "ItemList" table
+		And I activate "Profit loss center" field in "ItemList" table
+		And I select "log" from "Profit loss center" drop-down list by string in "ItemList" table
 		And I move to the next attribute
 		And I activate "Revenue type" field in "ItemList" table
 		And I select "fu" from "Revenue type" drop-down list by string in "ItemList" table
 	* Check filling in
 		And "ItemList" table contains lines
-		| 'Business unit'        | 'Revenue type' |
+		| 'Profit loss center'        | 'Revenue type' |
 		| 'Logistics department' | 'Fuel'         |
 	* Change revenue type
 		And I select "rev" from "Revenue type" drop-down list by string in "ItemList" table
 		And "ItemList" table contains lines
-			| 'Business unit'        | 'Revenue type' |
+			| 'Profit loss center'        | 'Revenue type' |
 			| 'Logistics department' | 'Revenue'         |
 		And I close all client application windows
 

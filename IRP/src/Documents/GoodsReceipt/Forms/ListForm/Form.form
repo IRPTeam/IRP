@@ -747,7 +747,6 @@
 			0)) &lt;> ISNULL(R1031B_ReceiptInvoicingBalance.QuantityBalance, 0)
 			THEN VALUE(Enum.InvoicingShippingStatuses.Invoicing)
 	END AS Status,
-	
 	GoodsReceipt.DeletionMark AS DeletionMark,
 	GoodsReceipt.Number AS Number,
 	GoodsReceipt.Date AS Date,
@@ -757,7 +756,7 @@
 	GoodsReceipt.Partner AS Partner,
 	GoodsReceipt.TransactionType AS TransactionType,
 	GoodsReceipt.Author AS Author,
-	GoodsReceipt.BusinessUnit AS BusinessUnit,
+	GoodsReceipt.Branch AS Branch,
 	GoodsReceipt.Description AS Description,
 	CASE
 		WHEN COUNT(DISTINCT GoodsReceiptItemList.Store) = 1
@@ -781,10 +780,9 @@ GROUP BY
 	GoodsReceipt.Partner,
 	GoodsReceipt.TransactionType,
 	GoodsReceipt.Author,
-	GoodsReceipt.BusinessUnit,
+	GoodsReceipt.Branch,
 	GoodsReceipt.Description,
-	R1031B_ReceiptInvoicingBalance.QuantityBalance	
-	</queryText>
+	R1031B_ReceiptInvoicingBalance.QuantityBalance</queryText>
       <mainTable>Document.GoodsReceipt</mainTable>
       <dynamicDataRead>true</dynamicDataRead>
       <autoFillAvailableFields>true</autoFillAvailableFields>

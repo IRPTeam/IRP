@@ -234,7 +234,7 @@ Function GetSalesOrderForClosing(SalesOrder, AddInfo = Undefined) Export
 		|	SalesOrder.Status AS Status,
 		|	SalesOrder.UseItemsShipmentScheduling AS UseItemsShipmentScheduling,
 		|	SalesOrder.Author AS Author,
-		|	SalesOrder.BusinessUnit AS BusinessUnit,
+		|	SalesOrder.Branch AS Branch,
 		|	SalesOrder.Description AS Description
 		|FROM
 		|	Document.SalesOrder AS SalesOrder
@@ -256,7 +256,7 @@ Function GetSalesOrderForClosing(SalesOrder, AddInfo = Undefined) Export
 		|	ItemList.DeliveryDate AS DeliveryDate,
 		|	ItemList.ProcurementMethod AS ProcurementMethod,
 		|	ItemList.Detail AS Detail,
-		|	ItemList.BusinessUnit AS BusinessUnit,
+		|	ItemList.ProfitLossCenter AS ProfitLossCenter,
 		|	ItemList.RevenueType AS RevenueType,
 		|	ItemList.DontCalculateRow AS DontCalculateRow,
 		|	ItemList.CancelReason AS CancelReason,
@@ -384,7 +384,7 @@ Function GetSalesOrderInfo(SalesOrder, AddInfo = Undefined) Export
 		|	SalesOrder.Status,
 		|	SalesOrder.UseItemsShipmentScheduling,
 		|	SalesOrder.Author,
-		|	SalesOrder.BusinessUnit,
+		|	SalesOrder.Branch,
 		|	SalesOrder.Description,
 		|	SalesOrder.DocumentAmount
 		|FROM

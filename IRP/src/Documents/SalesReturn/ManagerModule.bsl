@@ -195,9 +195,10 @@ Function ItemList()
 		|	ItemList.NetAmount,
 		|	ItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS IsService,
 		|	ItemList.ReturnReason,
-		|	ItemList.BusinessUnit AS BusinessUnit,
+		|	ItemList.ProfitLossCenter AS ProfitLossCenter,
 		|	ItemList.RevenueType AS RevenueType,
-		|	ItemList.AdditionalAnalytic AS AdditionalAnalytic
+		|	ItemList.AdditionalAnalytic AS AdditionalAnalytic,
+		|	ItemList.Ref.Branch AS Branch
 		|INTO ItemList
 		|FROM
 		|	Document.SalesReturn.ItemList AS ItemList
@@ -230,6 +231,7 @@ Function OffersInfo()
 		|	SalesReturnItemList.Key AS RowKey,
 		|	SalesReturnItemList.ItemKey,
 		|	SalesReturnItemList.Ref.Company AS Company,
+		|	SalesReturnItemList.Ref.Branch AS Branch,
 		|	SalesReturnItemList.Ref.Currency,
 		|	SalesReturnSpecialOffers.Offer AS SpecialOffer,
 		|	- SalesReturnSpecialOffers.Amount AS OffersAmount,
@@ -249,6 +251,7 @@ Function SerialLotNumbers()
 		"SELECT
 		|	SerialLotNumbers.Ref.Date AS Period,
 		|	SerialLotNumbers.Ref.Company AS Company,
+		|	SerialLotNumbers.Ref.Branch AS Branch,
 		|	SerialLotNumbers.Key,
 		|	SerialLotNumbers.SerialLotNumber,
 		|	SerialLotNumbers.Quantity,
@@ -268,6 +271,7 @@ Function Taxes()
 		"SELECT
 		|	SalesReturnTaxList.Ref.Date AS Period,
 		|	SalesReturnTaxList.Ref.Company AS Company,
+		|	SalesReturnTaxList.Ref.Branch AS Branch,
 		|	SalesReturnTaxList.Tax AS Tax,
 		|	SalesReturnTaxList.TaxRate AS TaxRate,
 		|	CASE
@@ -326,6 +330,7 @@ Function R2021B_CustomersTransactions()
 		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
 		|	ItemList.Period,
 		|	ItemList.Company,
+		|	ItemList.Branch,
 		|	ItemList.Currency,
 		|	ItemList.LegalName,
 		|	ItemList.Partner,
@@ -338,6 +343,7 @@ Function R2021B_CustomersTransactions()
 		|GROUP BY
 		|	ItemList.Agreement,
 		|	ItemList.Company,
+		|	ItemList.Branch,
 		|	ItemList.Currency,
 		|	ItemList.LegalName,
 		|	ItemList.Partner,
@@ -363,6 +369,7 @@ Function R2031B_ShipmentInvoicing()
 		|	ItemList.SalesReturn AS Basis,
 		|	ItemList.Quantity AS Quantity,
 		|	ItemList.Company,
+		|	ItemList.Branch,
 		|	ItemList.Period,
 		|	ItemList.ItemKey,
 		|	ItemList.Store
@@ -380,6 +387,7 @@ Function R2031B_ShipmentInvoicing()
 		|	GoodReceipts.GoodsReceipt,
 		|	GoodReceipts.Quantity,
 		|	ItemList.Company,
+		|	ItemList.Branch,
 		|	ItemList.Period,
 		|	ItemList.ItemKey,
 		|	ItemList.Store
@@ -493,6 +501,7 @@ Function R5010B_ReconciliationStatement()
 		"SELECT
 		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
 		|	ItemList.Company,
+		|	ItemList.Branch,
 		|	ItemList.LegalName,
 		|	ItemList.Currency,
 		|	- SUM(ItemList.Amount) AS Amount,
@@ -502,6 +511,7 @@ Function R5010B_ReconciliationStatement()
 		|	ItemList AS ItemList
 		|GROUP BY
 		|	ItemList.Company,
+		|	ItemList.Branch,
 		|	ItemList.LegalName,
 		|	ItemList.Currency,
 		|	ItemList.Period";

@@ -141,7 +141,8 @@ Function ItemList()
 		|	SalesOrderItemList.QuantityInBaseUnit AS Quantity,
 		|	SalesOrderItemList.OffersAmount AS OffersAmount,
 		|	SalesOrderItemList.NetAmount AS NetAmount,
-		|	SalesOrderItemList.TotalAmount AS Amount
+		|	SalesOrderItemList.TotalAmount AS Amount,
+		|	SalesOrderItemList.Ref.Branch AS Branch
 		|	INTO ItemList
 		|FROM
 		|	Document.SalesOrderClosing.ItemList AS SalesOrderItemList

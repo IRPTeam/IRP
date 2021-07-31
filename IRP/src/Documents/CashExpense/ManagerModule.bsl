@@ -98,8 +98,9 @@ Function PaymentList()
 		|	PaymentList.ExpenseType AS ExpenseType,
 		|	PaymentList.NetAmount AS Amount,
 		|	PaymentList.Key,
-		|	PaymentList.BusinessUnit,
-		|	PaymentList.AdditionalAnalytic
+		|	PaymentList.ProfitLossCenter,
+		|	PaymentList.AdditionalAnalytic,
+		|	PaymentList.Ref.Branch AS Branch
 		|INTO PaymentList
 		|FROM
 		|	Document.CashExpense.PaymentList AS PaymentList

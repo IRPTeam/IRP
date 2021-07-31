@@ -1927,7 +1927,7 @@
           </extInfo>
         </items>
         <items xsi:type="form:FormField">
-          <name>ItemListBusinessUnit</name>
+          <name>ItemListProfitLossCenter</name>
           <id>647</id>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -1936,11 +1936,11 @@
           </userVisible>
           <dataPath xsi:type="form:MultiLanguageDataPath">
             <paths xsi:type="form:DataPath">
-              <segments>Object.ItemList.BusinessUnit</segments>
+              <segments>Object.ItemList.ProfitLossCenter</segments>
             </paths>
           </dataPath>
           <extendedTooltip>
-            <name>ItemListBusinessUnitExtendedTooltip</name>
+            <name>ItemListProfitLossCenterExtendedTooltip</name>
             <id>649</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -1955,7 +1955,7 @@
             </extInfo>
           </extendedTooltip>
           <contextMenu>
-            <name>ItemListBusinessUnitContextMenu</name>
+            <name>ItemListProfitLossCenterContextMenu</name>
             <id>648</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -5114,7 +5114,7 @@
         </extInfo>
       </items>
       <items xsi:type="form:FormField">
-        <name>BusinessUnit</name>
+        <name>Branch</name>
         <id>878</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -5123,11 +5123,11 @@
         </userVisible>
         <dataPath xsi:type="form:MultiLanguageDataPath">
           <paths xsi:type="form:DataPath">
-            <segments>Object.BusinessUnit</segments>
+            <segments>Object.Branch</segments>
           </paths>
         </dataPath>
         <extendedTooltip>
-          <name>BusinessUnitExtendedTooltip</name>
+          <name>BranchExtendedTooltip</name>
           <id>880</id>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -5142,7 +5142,7 @@
           </extInfo>
         </extendedTooltip>
         <contextMenu>
-          <name>BusinessUnitContextMenu</name>
+          <name>BranchContextMenu</name>
           <id>879</id>
           <visible>true</visible>
           <enabled>true</enabled>

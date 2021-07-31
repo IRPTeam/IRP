@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonAttribute xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="e78c5f17-4211-40e5-9dd7-258bf6140324">
-  <name>BusinessUnit</name>
+  <name>Branch</name>
   <synonym>
     <key>en</key>
-    <value>Business unit</value>
+    <value>Branch</value>
   </synonym>
   <type>
     <types>CatalogRef.BusinessUnits</types>
@@ -171,6 +171,18 @@
   </content>
   <content>
     <metadata>Document.CashStatement</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Document.VendorsAdvancesClosing</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Document.CustomersAdvancesClosing</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Document.ItemStockAdjustment</metadata>
     <use>Use</use>
   </content>
   <autoUse>DontUse</autoUse>

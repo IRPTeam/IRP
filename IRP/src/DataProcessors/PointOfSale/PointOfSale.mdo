@@ -72,10 +72,10 @@
     <maxValue xsi:type="core:UndefinedValue"/>
   </attributes>
   <attributes uuid="6f075ed4-8717-425d-a8f2-f3596b403efa">
-    <name>BusinessUnit</name>
+    <name>Branch</name>
     <synonym>
       <key>en</key>
-      <value>Business unit</value>
+      <value>Branch</value>
     </synonym>
     <type>
       <types>CatalogRef.BusinessUnits</types>

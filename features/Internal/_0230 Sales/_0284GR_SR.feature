@@ -113,7 +113,7 @@ Scenario: _028401 create GR with transaction type return from customer and creat
 		And I input "1,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And I move to "Other" tab
-		And I click Select button of "Business unit" field
+		And I click Select button of "Branch" field
 		And I go to line in "List" table
 			| 'Description'             |
 			| 'Distribution department' |

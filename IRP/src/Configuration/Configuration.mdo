@@ -387,7 +387,7 @@
   <commonModules>CommonModule.CatRetailCustomersClient</commonModules>
   <commonModules>CommonModule.CatRetailCustomersServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
-  <commonAttributes>CommonAttribute.BusinessUnit</commonAttributes>
+  <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>
   <commonAttributes>CommonAttribute.Description_en</commonAttributes>
   <commonAttributes>CommonAttribute.Description_hash</commonAttributes>
@@ -677,7 +677,7 @@
   <informationRegisters>InformationRegister.Barcodes</informationRegisters>
   <informationRegisters>InformationRegister.BarcodeScanInfoCheck</informationRegisters>
   <informationRegisters>InformationRegister.BundleContents</informationRegisters>
-  <informationRegisters>InformationRegister.BusinessUnitBankTerms</informationRegisters>
+  <informationRegisters>InformationRegister.BranchBankTerms</informationRegisters>
   <informationRegisters>InformationRegister.CreatedProcurementOrders</informationRegisters>
   <informationRegisters>InformationRegister.CurrencyRates</informationRegisters>
   <informationRegisters>InformationRegister.DataMappingTable</informationRegisters>

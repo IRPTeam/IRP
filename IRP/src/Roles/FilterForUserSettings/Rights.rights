@@ -297,7 +297,7 @@
 		</right>
 	</object>
 	<object>
-		<name>Document.CreditNote.TabularSection.Transactions.Attribute.BusinessUnit</name>
+		<name>Document.CreditNote.TabularSection.Transactions.Attribute.ProfitLossCenter</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -685,7 +685,7 @@
 		</right>
 	</object>
 	<object>
-		<name>Document.DebitNote.TabularSection.Transactions.Attribute.BusinessUnit</name>
+		<name>Document.DebitNote.TabularSection.Transactions.Attribute.ProfitLossCenter</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -975,7 +975,7 @@
 		</right>
 	</object>
 	<object>
-		<name>Document.RetailSalesReceipt.TabularSection.ItemList.Attribute.BusinessUnit</name>
+		<name>Document.RetailSalesReceipt.TabularSection.ItemList.Attribute.ProfitLossCenter</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -1000,7 +1000,7 @@
 		</right>
 	</object>
 	<object>
-		<name>CommonAttribute.BusinessUnit</name>
+		<name>CommonAttribute.Branch</name>
 		<right>
 			<name>View</name>
 			<value>true</value>

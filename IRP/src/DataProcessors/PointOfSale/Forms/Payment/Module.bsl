@@ -11,7 +11,7 @@ Var AmountFractionDigitsCount, AmountDotIsActive, AmountFractionDigitsMaxCount, 
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)		
 	Object.Amount = Parameters.Parameters.Amount;
-	Object.BusinessUnit = Parameters.Parameters.BusinessUnit;
+	Object.Branch = Parameters.Parameters.Branch;
 	Object.Workstation = Parameters.Parameters.Workstation;
 	FillPaymentTypes();	
 EndProcedure
@@ -336,12 +336,12 @@ Procedure FillPaymentsAtServer()
 	
 	Query = New Query;
 	Query.Text = "SELECT
-	|	BusinessUnitBankTerms.BankTerm
+	|	BranchBankTerms.BankTerm
 	|FROM
-	|	InformationRegister.BusinessUnitBankTerms AS BusinessUnitBankTerms
+	|	InformationRegister.BranchBankTerms AS BranchBankTerms
 	|WHERE
-	|	BusinessUnitBankTerms.BusinessUnit = &BusinessUnit";
-	Query.SetParameter("BusinessUnit", Object.BusinessUnit);
+	|	BranchBankTerms.Branch = &Branch";
+	Query.SetParameter("Branch", Object.Branch);
 	QueryUnload = Query.Execute().Unload();
 	BankTerms = QueryUnload.UnloadColumn("BankTerm");
 	

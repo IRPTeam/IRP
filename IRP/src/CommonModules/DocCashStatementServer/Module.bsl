@@ -56,7 +56,7 @@ Procedure FillTransactions(Object, AddInfo = Undefined) Export
 		|	SUM(R3010B_CashOnHandTurnovers.AmountReceipt) AS Receipt
 		|FROM
 		|	AccumulationRegister.R3010B_CashOnHand.Turnovers(&BegOfPeriod, &EndOfPeriod, Record,
-		|		Account.BusinessUnit = &BusinessUnit
+		|		Account.Branch = &Branch
 		|	AND Company = &Company) AS R3010B_CashOnHandTurnovers
 		|WHERE
 		|	R3010B_CashOnHandTurnovers.Account.Type = VALUE(Enum.CashAccountTypes.Cash)
@@ -69,7 +69,7 @@ Procedure FillTransactions(Object, AddInfo = Undefined) Export
 		
 	Query.SetParameter("BegOfPeriod", Object.BegOfPeriod);
 	Query.SetParameter("EndOfPeriod", Object.EndOfPeriod);
-	Query.SetParameter("BusinessUnit", Object.BusinessUnit);
+	Query.SetParameter("Branch", Object.Branch);
 	Query.SetParameter("Company", Object.Company);
 	CashTransactionList = Query.Execute().Unload();
 	Object.CashTransactionList.Load(CashTransactionList);
@@ -85,11 +85,11 @@ Procedure FillTransactions(Object, AddInfo = Undefined) Export
 		|FROM
 		|	AccumulationRegister.R3050T_RetailCash.Turnovers(BEGINOFPERIOD(&BegOfPeriod, DAY), ENDOFPERIOD(&EndOfPeriod, DAY),,
 		|		Company = &Company
-		|	AND BusinessUnit = &BusinessUnit) AS R3050T_RetailCash";
+		|	AND Branch = &Branch) AS R3050T_RetailCash";
 	
 	Query.SetParameter("BegOfPeriod", Object.BegOfPeriod);
 	Query.SetParameter("EndOfPeriod", Object.EndOfPeriod);
-	Query.SetParameter("BusinessUnit", Object.BusinessUnit);
+	Query.SetParameter("Branch", Object.Branch);
 	Query.SetParameter("Company", Object.Company);
 	QueryResult = Query.Execute().Unload();
 	Object.PaymentList.Load(QueryResult);	

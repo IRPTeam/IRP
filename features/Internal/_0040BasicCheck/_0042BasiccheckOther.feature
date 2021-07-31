@@ -215,11 +215,11 @@ Scenario: Open information register form "SharedReportOptions"
 
 
 	
-Scenario: Open information register form "BusinessUnitBankTerms" 
+Scenario: Open information register form "BranchBankTerms" 
 
-	Given I open "BusinessUnitBankTerms" information register default form 
+	Given I open "BranchBankTerms" information register default form 
 	If the warning is displayed then
-		Then I raise "Failed to open information register form  BusinessUnitBankTerms" exception
+		Then I raise "Failed to open information register form  BranchBankTerms" exception
 	And I close current window
 
 

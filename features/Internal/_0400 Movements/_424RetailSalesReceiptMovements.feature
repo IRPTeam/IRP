@@ -177,13 +177,13 @@ Scenario: _042409 check Retail sales receipt movements by the Register  "R5010 R
 		And I select "R5010 Reconciliation statement" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Retail sales receipt 202 dated 28.07.2021 13:53:27' | ''            | ''                    | ''          | ''             | ''        | ''         | ''           |
-			| 'Document registrations records'                     | ''            | ''                    | ''          | ''             | ''        | ''         | ''           |
-			| 'Register  "R5010 Reconciliation statement"'         | ''            | ''                    | ''          | ''             | ''        | ''         | ''           |
-			| ''                                                   | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''        | ''         | ''           |
-			| ''                                                   | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'  | 'Currency' | 'Legal name' |
-			| ''                                                   | 'Receipt'     | '28.07.2021 13:53:27' | '10 497,79' | 'Main Company' | 'Shop 01' | 'TRY'      | 'Customer'   |
-			| ''                                                   | 'Expense'     | '28.07.2021 13:53:27' | '10 497,79' | 'Main Company' | 'Shop 01' | 'TRY'      | 'Customer'   |
+			| 'Retail sales receipt 202 dated 28.07.2021 13:53:27' | ''            | ''                    | ''          | ''             | ''        | ''         | ''           | ''                    |
+			| 'Document registrations records'                     | ''            | ''                    | ''          | ''             | ''        | ''         | ''           | ''                    |
+			| 'Register  "R5010 Reconciliation statement"'         | ''            | ''                    | ''          | ''             | ''        | ''         | ''           | ''                    |
+			| ''                                                   | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''        | ''         | ''           | ''                    |
+			| ''                                                   | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'  | 'Currency' | 'Legal name' | 'Legal name contract' |
+			| ''                                                   | 'Receipt'     | '28.07.2021 13:53:27' | '10 497,79' | 'Main Company' | 'Shop 01' | 'TRY'      | 'Customer'   | ''                    |
+			| ''                                                   | 'Expense'     | '28.07.2021 13:53:27' | '10 497,79' | 'Main Company' | 'Shop 01' | 'TRY'      | 'Customer'   | ''                    |
 		And I close all client application windows
 
 

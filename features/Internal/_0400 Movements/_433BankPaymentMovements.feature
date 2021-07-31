@@ -63,6 +63,7 @@ Scenario: _043300 preparation (Bank payment)
 	* Tax settings
 		When filling in Tax settings for company
 	When Create Document discount
+	When Create catalog LegalNameContracts objects
 	* Add plugin for discount
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
@@ -167,12 +168,12 @@ Scenario: _043302 check Bank payment movements by the Register "R5010 Reconcilia
 		And I select "R5010 Reconciliation statement" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Bank payment 1 dated 07.09.2020 19:16:43'   | ''            | ''                    | ''          | ''             | ''             | ''           | ''                  |
-			| 'Document registrations records'             | ''            | ''                    | ''          | ''             | ''             |  ''          |''                   |
-			| 'Register  "R5010 Reconciliation statement"' | ''            | ''                    | ''          | ''             | ''             | ''           | ''                  |
-			| ''                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''           | ''                  |
-			| ''                                           | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'       |'Currency'    | 'Legal name'        |
-			| ''                                           | 'Receipt'     | '07.09.2020 19:16:43' | '1 000'     | 'Main Company' | ''             | 'TRY'        | 'Company Ferron BP' |
+			| 'Bank payment 1 dated 07.09.2020 19:16:43'   | ''            | ''                    | ''          | ''             | ''             | ''           | ''                  | ''                  |
+			| 'Document registrations records'             | ''            | ''                    | ''          | ''             | ''             |  ''          |''                   | ''                  |
+			| 'Register  "R5010 Reconciliation statement"' | ''            | ''                    | ''          | ''             | ''             | ''           | ''                  | ''                  |
+			| ''                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''           | ''                  | ''                  |
+			| ''                                           | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'       |'Currency'    | 'Legal name'        |'Legal name contract'|
+			| ''                                           | 'Receipt'     | '07.09.2020 19:16:43' | '1 000'     | 'Main Company' | ''             | 'TRY'        | 'Company Ferron BP' |'Contract Ferron BP' |
 	And I close all client application windows
 
 Scenario: _043303 check Bank payment movements by the Register "R5010 Reconciliation statement" (cash transfer, currency exchange)

@@ -46,6 +46,7 @@ Scenario: _043100 preparation (Credit note)
 		When Create catalog IntegrationSettings objects
 		When Create information register CurrencyRates records
 		When Create catalog BusinessUnits objects
+		When Create catalog LegalNameContracts objects
 		When Create catalog ExpenseAndRevenueTypes objects
 		When Create catalog Companies objects (second company Ferron BP)
 		When Create catalog PartnersBankAccounts objects
@@ -113,12 +114,12 @@ Scenario: _043101 check Credit note movements by the Register "R5010 Reconciliat
 		And I select "R5010 Reconciliation statement" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Credit note 1 dated 05.04.2021 09:30:47'    | ''            | ''                    | ''          | ''             | ''             | ''         | ''                  |
-			| 'Document registrations records'             | ''            | ''                    | ''          | ''             | ''             | ''         | ''                  |
-			| 'Register  "R5010 Reconciliation statement"' | ''            | ''                    | ''          | ''             | ''             | ''         | ''                  |
-			| ''                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'    | ''             | ''         | ''                  |
-			| ''                                           | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'       | 'Currency' | 'Legal name'        |
-			| ''                                           | 'Expense'     | '05.04.2021 09:30:47' | '500'       | 'Main Company' | 'Front office' | 'TRY'      | 'Company Ferron BP' |
+			| 'Credit note 1 dated 05.04.2021 09:30:47'    | ''            | ''                    | ''          | ''             | ''             | ''         | ''                  | ''                       |
+			| 'Document registrations records'             | ''            | ''                    | ''          | ''             | ''             | ''         | ''                  | ''                       |
+			| 'Register  "R5010 Reconciliation statement"' | ''            | ''                    | ''          | ''             | ''             | ''         | ''                  | ''                       |
+			| ''                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''         | ''                  | ''                       |
+			| ''                                           | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'       | 'Currency' | 'Legal name'        | 'Legal name contract'    |
+			| ''                                           | 'Expense'     | '05.04.2021 09:30:47' | '500'       | 'Main Company' | 'Front office' | 'TRY'      | 'Company Ferron BP' | 'Contract Ferron BP New' |
 		And I close all client application windows
 
 Scenario: _043102 check Credit note movements by the Register "R2021 Customer transactions" (with customer)

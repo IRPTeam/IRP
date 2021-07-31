@@ -1754,3 +1754,12 @@ Scenario: Create catalog RetailCustomers objects (check POS)
 		| 'e1cib/data/Catalog.RetailCustomers?ref=b76cbacb2511e57d11ebe9f994538237' | 'False'        | '002'  | 'Retail customer with partner'    | 'Name Retail customer' | 'Surname Retail customer' | 'e1cib/data/Catalog.Partners?ref=b76cbacb2511e57d11ebe9e1959cde75' | 'e1cib/data/Catalog.Companies?ref=b76cbacb2511e57d11ebe9e1959cde76' | 'e1cib/data/Catalog.Agreements?ref=b76cbacb2511e57d11ebe9e1959cde77' |
 		| 'e1cib/data/Catalog.RetailCustomers?ref=b76cbacb2511e57d11ebe9f994538238' | 'False'        | '003'  | 'Retail customer without partner' | 'Retail customer'      | 'Second'                  | ''                                                                 | ''                                                                  | ''                                                                   |
 
+
+Scenario: Create catalog LegalNameContracts objects
+
+	And I check or create catalog "LegalNameContracts" objects:
+		| 'Ref'                                                                        | 'DeletionMark' | 'Code' | 'Description'            | 'BeginDate'           | 'EndDate'             | 'Company'                                                           | 'PartnerBankAccount'                                                           |
+		| 'e1cib/data/Catalog.LegalNameContracts?ref=b76d88abafbd4c5e11ebf1c565207b8a' | 'False'        | '1'    | 'Contract Ferron BP'     | '01.01.2021 00:00:00' | '01.01.0001 00:00:00' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf116b32709a2' | 'e1cib/data/Catalog.PartnersBankAccounts?ref=b75dad46e66c4c2c11eb4522c1c161a1' |
+		| 'e1cib/data/Catalog.LegalNameContracts?ref=b76d88abafbd4c5e11ebf1c694dd9b44' | 'False'        | '2'    | 'Contract Ferron BP New' | '01.07.2021 00:00:00' | '01.01.0001 00:00:00' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf116b32709a2' | 'e1cib/data/Catalog.PartnersBankAccounts?ref=b75dad46e66c4c2c11eb4522c1c161a1' |
+		| 'e1cib/data/Catalog.LegalNameContracts?ref=b76d88abafbd4c5e11ebf1c989218108' | 'False'        | '3'    | 'Contract Kalipso'       | '01.01.2021 00:00:00' | '01.01.0001 00:00:00' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf116b32709a3' | 'e1cib/data/Catalog.PartnersBankAccounts?ref=b75dad46e66c4c2c11eb451e00a38c06' |
+

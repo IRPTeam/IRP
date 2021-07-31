@@ -107,6 +107,20 @@ Scenario: Open object form "BusinessUnits"
 		Then I raise "Failed to open catalog form BusinessUnits" exception
 	And I close current window
 
+Scenario: Open list form "LegalNameContracts" 
+	And I close all client application windows
+	Given I open "LegalNameContracts" catalog default form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form LegalNameContracts" exception
+	And I close current window
+
+Scenario: Open object form "LegalNameContracts"
+	And I close all client application windows
+	Given I open "LegalNameContracts" reference main form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form LegalNameContracts" exception
+	And I close current window
+
 
 	
 Scenario: Open list form "CashAccounts" 

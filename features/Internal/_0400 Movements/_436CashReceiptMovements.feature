@@ -63,6 +63,7 @@ Scenario: _043600 preparation (Cash receipt)
 	* Tax settings
 		When filling in Tax settings for company
 	When Create Document discount
+	When Create catalog LegalNameContracts objects
 	* Add plugin for discount
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
@@ -195,12 +196,12 @@ Scenario: _043602 check Cash receipt movements by the Register "R5010 Reconcilia
 		And I select "R5010 Reconciliation statement" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Cash receipt 1 dated 05.04.2021 14:33:49'   | ''            | ''                    | ''          | ''             | ''             | ''         | ''                  |
-			| 'Document registrations records'             | ''            | ''                    | ''          | ''             | ''             | ''         | ''                  |
-			| 'Register  "R5010 Reconciliation statement"' | ''            | ''                    | ''          | ''             | ''             | ''         | ''                  |
-			| ''                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''         | ''                  |
-			| ''                                           | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'       | 'Currency' | 'Legal name'        |
-			| ''                                           | 'Expense'     | '05.04.2021 14:33:49' | '100'       | 'Main Company' | 'Front office' | 'TRY'      | 'Company Ferron BP' |
+			| 'Cash receipt 1 dated 05.04.2021 14:33:49'   | ''            | ''                    | ''          | ''             | ''             | ''         | ''                  | ''                  |
+			| 'Document registrations records'             | ''            | ''                    | ''          | ''             | ''             | ''         | ''                  | ''                  |
+			| 'Register  "R5010 Reconciliation statement"' | ''            | ''                    | ''          | ''             | ''             | ''         | ''                  | ''                  |
+			| ''                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''         | ''                  | ''                  |
+			| ''                                           | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'       | 'Currency' | 'Legal name'        |'Legal name contract'|
+			| ''                                           | 'Expense'     | '05.04.2021 14:33:49' | '100'       | 'Main Company' | 'Front office' | 'TRY'      | 'Company Ferron BP' |'Contract Ferron BP New'|
 	And I close all client application windows
 
 

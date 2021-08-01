@@ -456,6 +456,7 @@ Scenario: _1000020 create Credit note and check Aging register movements
 			| 'Basic Partner terms, without VAT' |
 		And I select current line in "List" table
 		And in "Transactions" table I move to the next cell
+		And in "Transactions" table I move to the next cell
 		* Check the selection of basis documents for the specified partner
 			And delay 2
 			And I set checkbox "Show all"			
@@ -530,6 +531,7 @@ Scenario: _1000030 create Debit note and check Aging register movements
 			| 'Description'   |
 			| 'Basic Partner terms, without VAT' |
 		And I select current line in "List" table
+		And in "Transactions" table I move to the next cell
 		And in "Transactions" table I move to the next cell
 		* Check the selection of basis documents for the specified partner
 			And delay 2

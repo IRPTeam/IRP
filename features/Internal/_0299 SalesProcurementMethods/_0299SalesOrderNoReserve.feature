@@ -189,12 +189,12 @@ Scenario: _029902 create SI for SO without reserve and check its movements (SO-S
 		And I select "R5010 Reconciliation statement" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-			| '$$SalesInvoice029901$$'                     | ''            | ''                           | ''          | ''             | ''             | ''           | ''                 |
-			| 'Document registrations records'             | ''            | ''                           | ''          | ''             | ''             | ''           | ''                 |
-			| 'Register  "R5010 Reconciliation statement"' | ''            | ''                           | ''          | ''             | ''             | ''           | ''                 |
-			| ''                                           | 'Record type' | 'Period'                     | 'Resources' | 'Dimensions'   | ''             | ''           | ''                 |
-			| ''                                           | ''            | ''                           | 'Amount'    | 'Company'      | 'Branch'       | 'Currency'   | 'Legal name'       |
-			| ''                                           | 'Receipt'     | '$$DateSalesInvoice029901$$' | '26 400'    | 'Main Company' | ''             | 'TRY'        | 'Company Lomaniti' |
+			| '$$SalesInvoice029901$$'                     | ''            | ''                           | ''          | ''             | ''             | ''           | ''                 | ''                   |
+			| 'Document registrations records'             | ''            | ''                           | ''          | ''             | ''             | ''           | ''                 | ''                   |
+			| 'Register  "R5010 Reconciliation statement"' | ''            | ''                           | ''          | ''             | ''             | ''           | ''                 | ''                   |
+			| ''                                           | 'Record type' | 'Period'                     | 'Resources' | 'Dimensions'   | ''             | ''           | ''                 | ''                   |
+			| ''                                           | ''            | ''                           | 'Amount'    | 'Company'      | 'Branch'       | 'Currency'   | 'Legal name'       | 'Legal name contract'|
+			| ''                                           | 'Receipt'     | '$$DateSalesInvoice029901$$' | '26 400'    | 'Main Company' | ''             | 'TRY'        | 'Company Lomaniti' | ''                   | 
 	
 	* Check SI movements (Register  "R4010 Actual stocks")
 		And I select "R4010 Actual stocks" exact value from "Register" drop-down list
@@ -518,12 +518,12 @@ Scenario: _029905 create Sales ivoice for SO (SC first) without reserve and chec
 			And I select "R5010 Reconciliation statement" exact value from "Register" drop-down list
 			And I click "Generate report" button
 			And "ResultTable" spreadsheet document contains lines:
-				| '$$SalesInvoice029903$$'                     | ''            | ''                           | ''          | ''             | ''       | ''         | ''                 |
-				| 'Document registrations records'             | ''            | ''                           | ''          | ''             | ''       | ''         | ''                 |
-				| 'Register  "R5010 Reconciliation statement"' | ''            | ''                           | ''          | ''             | ''       | ''         | ''                 |
-				| ''                                           | 'Record type' | 'Period'                     | 'Resources' | 'Dimensions'   | ''       | ''         | ''                 |
-				| ''                                           | ''            | ''                           | 'Amount'    | 'Company'      | 'Branch' | 'Currency' | 'Legal name'       |
-				| ''                                           | 'Receipt'     | '$$DateSalesInvoice029903$$' | '26 400'    | 'Main Company' | ''       | 'TRY'      | 'Company Lomaniti' |
+				| '$$SalesInvoice029903$$'                     | ''            | ''                           | ''          | ''             | ''       | ''         | ''                 | ''                 |
+				| 'Document registrations records'             | ''            | ''                           | ''          | ''             | ''       | ''         | ''                 | ''                 |
+				| 'Register  "R5010 Reconciliation statement"' | ''            | ''                           | ''          | ''             | ''       | ''         | ''                 | ''                 |
+				| ''                                           | 'Record type' | 'Period'                     | 'Resources' | 'Dimensions'   | ''       | ''         | ''                 | ''                 |
+				| ''                                           | ''            | ''                           | 'Amount'    | 'Company'      | 'Branch' | 'Currency' | 'Legal name'       | 'Legal name contract'       |
+				| ''                                           | 'Receipt'     | '$$DateSalesInvoice029903$$' | '26 400'    | 'Main Company' | ''       | 'TRY'      | 'Company Lomaniti' | ''                 |
 		
 		* Check SI movements (Register  "R2011 Shipment of sales orders")
 			And I select "R2011 Shipment of sales orders" exact value from "Register" drop-down list

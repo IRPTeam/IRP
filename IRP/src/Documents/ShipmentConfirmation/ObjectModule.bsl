@@ -35,14 +35,8 @@ EndProcedure
 
 Procedure Filling(FillingData, FillingText, StandardProcessing)
 	If TypeOf(FillingData) = Type("Structure") Then
-//		If FillingData.Property("BasedOn") And FillingData.BasedOn = "PurchaseReturn" Then
-//			TransactionType = Enums.ShipmentConfirmationTransactionTypes.ReturnToVendor;
-//			FillPropertyValues(ThisObject, FillingData, "Company, Partner, LegalName");
-//			RowIDInfoServer.AddLinkedDocumentRows(ThisObject, FillingData);			
-//		Else
-			FillPropertyValues(ThisObject, FillingData, RowIDInfoServer.GetSeperatorColumns(ThisObject.Metadata()));
-			RowIDInfoServer.AddLinkedDocumentRows(ThisObject, FillingData);	
-//		EndIf;
+		FillPropertyValues(ThisObject, FillingData, RowIDInfoServer.GetSeperatorColumns(ThisObject.Metadata()));
+		RowIDInfoServer.AddLinkedDocumentRows(ThisObject, FillingData);	
 	EndIf;	
 EndProcedure
 

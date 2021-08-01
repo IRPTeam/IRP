@@ -1407,6 +1407,7 @@ Function ExtractData_FromSI(BasisesTable, DataReceiver)
 		|	ItemList.SalesOrder AS SalesOrder,
 		|	ItemList.Ref.Partner AS Partner,
 		|	ItemList.Ref.LegalName AS LegalName,
+		|	ItemList.Ref.LegalNameContract AS LegalNameContract,
 		|	ItemList.Ref.PriceIncludeTax AS PriceIncludeTax,
 		|	ItemList.Ref.Agreement AS Agreement,
 		|	ItemList.Ref.ManagerSegment AS ManagerSegment,
@@ -1910,6 +1911,7 @@ Function ExtractData_FromPI(BasisesTable, DataReceiver)
 		|	ItemList.SalesOrder AS SalesOrder,
 		|	ItemList.Ref.Partner AS Partner,
 		|	ItemList.Ref.LegalName AS LegalName,
+		|	ItemList.Ref.LegalNameContract AS LegalNameContract,
 		|	ItemList.Ref.PriceIncludeTax AS PriceIncludeTax,
 		|	ItemList.Ref.Agreement AS Agreement,
 		|	ItemList.Ref.Currency AS Currency,
@@ -2802,6 +2804,7 @@ Function ExtractData_FromRSR(BasisesTable, DataReceiver)
 		|	ItemList.Ref AS RetailSalesReceipt,
 		|	ItemList.Ref.Partner AS Partner,
 		|	ItemList.Ref.LegalName AS LegalName,
+		|	ItemList.Ref.LegalNameContract AS LegalNameContract,
 		|	ItemList.Ref.PriceIncludeTax AS PriceIncludeTax,
 		|	ItemList.Ref.Agreement AS Agreement,
 		|	ItemList.Ref.ManagerSegment AS ManagerSegment,
@@ -6121,7 +6124,8 @@ Function GetColumnNames_ItemList()
 	|RetailSalesReceipt,
 	|AdditionalAnalytic,
 	|RetailCustomer,
-	|UsePartnerTransactions";
+	|UsePartnerTransactions,
+	|LegalNameContract";
 EndFunction
 
 Function GetEmptyTable_ItemList()

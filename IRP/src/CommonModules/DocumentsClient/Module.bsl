@@ -483,6 +483,10 @@ Procedure LegalNameOnChange(Object, Form, Module, Item = Undefined, Settings = U
 	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form, Settings);
 EndProcedure
 
+Procedure LegalNameContractOnChange(Object, Form, Module, Item = Undefined, Settings = Undefined) Export	 
+	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form, Settings);
+EndProcedure
+
 #EndRegion
 
 #Region ItemCompany

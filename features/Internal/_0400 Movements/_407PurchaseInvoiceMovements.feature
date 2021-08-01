@@ -61,6 +61,7 @@ Scenario: _04096 preparation (Purchase invoice)
 				| "Description" |
 				| "DocumentDiscount" |
 			When add Plugin for document discount
+	When Create catalog LegalNameContracts objects
 	When Create catalog CancelReturnReasons objects
 	When Create catalog CashAccounts objects
 	When Create catalog SerialLotNumbers objects
@@ -185,12 +186,12 @@ Scenario: _040100 check Purchase invoice movements by the Register  "R5010 Recon
 		And I select "R5010 Reconciliation statement" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Purchase invoice 115 dated 12.02.2021 15:13:56' | ''            | ''                    | ''          | ''             | ''             | ''         | ''                  |
-			| 'Document registrations records'                 | ''            | ''                    | ''          | ''             | ''             | ''         | ''                  |
-			| 'Register  "R5010 Reconciliation statement"'     | ''            | ''                    | ''          | ''             | ''             | ''         | ''                  |
-			| ''                                               | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''         | ''                  |
-			| ''                                               | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'       | 'Currency' | 'Legal name'        |
-			| ''                                               | 'Expense'     | '12.02.2021 15:13:56' | '2 300'     | 'Main Company' | 'Front office' | 'TRY'      | 'Company Ferron BP' |
+			| 'Purchase invoice 115 dated 12.02.2021 15:13:56' | ''            | ''                    | ''          | ''             | ''             | ''         | ''                  | ''                    |
+			| 'Document registrations records'                 | ''            | ''                    | ''          | ''             | ''             | ''         | ''                  | ''                    |
+			| 'Register  "R5010 Reconciliation statement"'     | ''            | ''                    | ''          | ''             | ''             | ''         | ''                  | ''                    |
+			| ''                                               | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''         | ''                  | ''                    |
+			| ''                                               | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'       | 'Currency' | 'Legal name'        | 'Legal name contract' |
+			| ''                                               | 'Expense'     | '12.02.2021 15:13:56' | '2 300'     | 'Main Company' | 'Front office' | 'TRY'      | 'Company Ferron BP' | 'Contract Ferron BP'  |
 		And I close all client application windows
 		
 Scenario: _040101 check Purchase invoice movements by the Register  "R4010 Actual stocks" (use GR)

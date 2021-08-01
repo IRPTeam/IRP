@@ -238,6 +238,7 @@ Procedure FillAttributesByType(TransactionType, ArrayAll, ArrayByType) Export
 	ArrayAll.Add("PaymentList.Amount");
 	ArrayAll.Add("PaymentList.Agreement");
 	ArrayAll.Add("PaymentList.AmountExchange");
+	ArrayAll.Add("PaymentList.LegalNameContract");
 	
 	ArrayByType = New Array();
 	If TransactionType = Enums.IncomingPaymentTransactionType.CashTransferOrder Then
@@ -277,7 +278,7 @@ Procedure FillAttributesByType(TransactionType, ArrayAll, ArrayByType) Export
 		ArrayByType.Add("PaymentList.PlaningTransactionBasis");
 		ArrayByType.Add("PaymentList.Amount");
 		ArrayByType.Add("PaymentList.Agreement");
-		
+		ArrayByType.Add("PaymentList.LegalNameContract");
 	Else // empty
 		ArrayByType.Add("Company");
 		ArrayByType.Add("Currency");
@@ -375,7 +376,8 @@ Function PaymentList()
 	|   = VALUE(Enum.IncomingPaymentTransactionType.ReturnFromVendor) AS IsReturnFromVendor,
 	|	PaymentList.Ref.IgnoreAdvances AS IgnoreAdvances,
 	|	PaymentList.Partner,
-	|	PaymentList.Ref.Branch AS Branch
+	|	PaymentList.Ref.Branch AS Branch,
+	|	PaymentList.LegalNameContract AS LegalNameContract
 	|INTO PaymentList
 	|FROM
 	|	Document.CashReceipt.PaymentList AS PaymentList

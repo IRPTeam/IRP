@@ -395,6 +395,7 @@ Scenario: _1002020 create Credit note and check Aging register movements
 			| 'Vendor Ferron, TRY' |
 		And I select current line in "List" table
 		And in "Transactions" table I move to the next cell
+		And in "Transactions" table I move to the next cell
 		* Check the selection of basis documents for the specified partner
 			And delay 2
 			And I go to line in "List" table
@@ -472,6 +473,7 @@ Scenario: _1020030 create Debit note and check Aging register movements
 			| 'Description'   |
 			| 'Vendor Ferron, TRY' |
 		And I select current line in "List" table
+		And in "Transactions" table I move to the next cell
 		And in "Transactions" table I move to the next cell
 		* Check the selection of basis documents for the specified partner
 			And delay 2

@@ -30,6 +30,7 @@ Scenario: _043000 preparation (Debit note)
 		When Create catalog Specifications objects
 		When Create chart of characteristic types AddAttributeAndProperty objects
 		When Create catalog AddAttributeAndPropertySets objects
+		When Create catalog LegalNameContracts objects
 		When Create catalog AddAttributeAndPropertyValues objects
 		When Create catalog Currencies objects
 		When Create catalog Companies objects (Main company)
@@ -133,12 +134,12 @@ Scenario: _043001 check Debit note movements by the Register "R5010 Reconciliati
 		And I select "R5010 Reconciliation statement" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Debit note 1 dated 05.04.2021 09:30:36'     | ''            | ''                    | ''          | ''             | ''             | ''         | ''                  |
-			| 'Document registrations records'             | ''            | ''                    | ''          | ''             | ''             | ''         | ''                  |
-			| 'Register  "R5010 Reconciliation statement"' | ''            | ''                    | ''          | ''             | ''             | ''         | ''                  |
-			| ''                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''         | ''                  |
-			| ''                                           | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'       | 'Currency' | 'Legal name'        |
-			| ''                                           | 'Receipt'     | '05.04.2021 09:30:36' | '2 300'     | 'Main Company' | 'Front office' | 'TRY'      | 'Company Ferron BP' |
+			| 'Debit note 1 dated 05.04.2021 09:30:36'     | ''            | ''                    | ''          | ''             | ''             | ''         | ''                  | ''                       |
+			| 'Document registrations records'             | ''            | ''                    | ''          | ''             | ''             | ''         | ''                  | ''                       |
+			| 'Register  "R5010 Reconciliation statement"' | ''            | ''                    | ''          | ''             | ''             | ''         | ''                  | ''                       |
+			| ''                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''         | ''                  | ''                       |
+			| ''                                           | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'       | 'Currency' | 'Legal name'        | 'Legal name contract'    |
+			| ''                                           | 'Receipt'     | '05.04.2021 09:30:36' | '2 300'     | 'Main Company' | 'Front office' | 'TRY'      | 'Company Ferron BP' | 'Contract Ferron BP New' |
 	And I close all client application windows
 
 Scenario: _043002 check Debit note movements by the Register "R2021 Customer transactions" (with customer)

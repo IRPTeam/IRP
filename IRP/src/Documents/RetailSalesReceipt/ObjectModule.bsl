@@ -5,6 +5,12 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	EndIf;	
 
 	ThisObject.DocumentAmount = ThisObject.ItemList.Total("TotalAmount");	
+	
+	Payments_Amount = ThisObject.Payments.Total("Amount");
+	If  ThisObject.DocumentAmount <> Payments_Amount  Then
+		Cancel = True;		
+		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_079, Payments_Amount, ThisObject.DocumentAmount));
+	EndIf;
 EndProcedure
 
 Procedure OnWrite(Cancel)
@@ -43,13 +49,5 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 
 	If Not SerialLotNumbersServer.CheckFilling(ThisObject) Then
 		Cancel = True;
-	EndIf;
-	
-	ItemList_TotalAmount = ThisObject.ItemList.Total("TotalAmount");
-	Payments_Amount = ThisObject.Payments.Total("Amount");
-	If  ItemList_TotalAmount <> Payments_Amount  Then
-		Cancel = True;		
-		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_079, 
-		Format(Payments_Amount, "NFD=2; NN=;"), Format(ItemList_TotalAmount, "NFD=2; NN=;")));
 	EndIf;
 EndProcedure

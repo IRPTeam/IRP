@@ -576,6 +576,7 @@
   <documents>Document.CashStatement</documents>
   <documents>Document.CashTransferOrder</documents>
   <documents>Document.CreditNote</documents>
+  <documents>Document.CustomersAdvancesClosing</documents>
   <documents>Document.DebitNote</documents>
   <documents>Document.GoodsReceipt</documents>
   <documents>Document.IncomingPaymentOrder</documents>
@@ -610,7 +611,6 @@
   <documents>Document.StockAdjustmentAsWriteOff</documents>
   <documents>Document.Unbundling</documents>
   <documents>Document.VendorsAdvancesClosing</documents>
-  <documents>Document.CustomersAdvancesClosing</documents>
   <documentJournals>DocumentJournal.DocumentsForIncomingPayment</documentJournals>
   <documentJournals>DocumentJournal.DocumentsForOutgoingPayment</documentJournals>
   <documentJournals>DocumentJournal.DocumentsForCreditDebitNote</documentJournals>

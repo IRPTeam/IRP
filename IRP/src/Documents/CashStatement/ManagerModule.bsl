@@ -1,3 +1,11 @@
+#Region PrintForm
+
+Function GetPrintForm(Ref, PrintFormName, AddInfo = Undefined) Export
+	Return Undefined;
+EndFunction
+
+#EndRegion
+
 #Region Posting
 
 Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
@@ -102,14 +110,6 @@ EndProcedure
 Procedure UndopostingCheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined) Export
 	Return;
 EndProcedure
-
-#EndRegion
-
-#Region PrintForm
-
-Function GetPrintForm(Ref, PrintFormName, AddInfo = Undefined) Export
-	Return Undefined;
-EndFunction
 
 #EndRegion
 

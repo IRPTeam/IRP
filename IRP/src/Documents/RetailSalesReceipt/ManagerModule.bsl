@@ -100,10 +100,10 @@ EndFunction
 
 Function GetQueryTextsSecondaryTables()
 	QueryArray = New Array;
-	QueryArray.Add(OffersInfo());
 	QueryArray.Add(ItemList());
 	QueryArray.Add(Payments());
 	QueryArray.Add(RetailSales());
+	QueryArray.Add(OffersInfo());
 	QueryArray.Add(PostingServer.Exists_R4011B_FreeStocks());
 	QueryArray.Add(PostingServer.Exists_R4010B_ActualStocks());	
 	Return QueryArray;

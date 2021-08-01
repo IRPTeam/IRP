@@ -103,6 +103,7 @@ Function GetQueryTextsSecondaryTables()
 	QueryArray.Add(ItemList());
 	QueryArray.Add(Payments());
 	QueryArray.Add(RetailSales());
+	QueryArray.Add(OffersInfo());
 	QueryArray.Add(PostingServer.Exists_R4011B_FreeStocks());
 	QueryArray.Add(PostingServer.Exists_R4010B_ActualStocks());	
 	Return QueryArray;
@@ -117,6 +118,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R2050T_RetailSales());
 	QueryArray.Add(R5021T_Revenues());
 	QueryArray.Add(R2001T_Sales());
+	QueryArray.Add(R2005T_SalesSpecialOffers());
 	QueryArray.Add(R2002T_SalesReturns());
 	QueryArray.Add(R2021B_CustomersTransactions());
 	QueryArray.Add(R5010B_ReconciliationStatement());
@@ -126,6 +128,21 @@ EndFunction
 Function ItemList()
 	Return
 	"SELECT
+	|	RowIDInfo.Ref AS Ref,
+	|	RowIDInfo.Key AS Key,
+	|	MAX(RowIDInfo.RowID) AS RowID
+	|INTO TableRowIDInfo
+	|FROM
+	|	Document.RetailReturnReceipt.RowIDInfo AS RowIDInfo
+	|WHERE
+	|	RowIDInfo.Ref = &Ref
+	|GROUP BY
+	|	RowIDInfo.Ref,
+	|	RowIDInfo.Key
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
 	|	ItemList.Ref.Company AS Company,
 	|	ItemList.Store AS Store,
 	|	ItemList.ItemKey AS ItemKey,
@@ -193,6 +210,31 @@ Function Payments()
 	|	Document.RetailReturnReceipt.Payments AS Payments
 	|WHERE
 	|	Payments.Ref = &Ref";
+EndFunction
+
+Function OffersInfo()
+	Return
+		"SELECT
+		|	RetailSalesReceiptItemList.Ref.Date AS Period,
+		|	RetailSalesReceiptItemList.Ref AS Invoice,
+		|	TableRowIDInfo.RowID AS RowKey,
+		|	RetailSalesReceiptItemList.ItemKey,
+		|	RetailSalesReceiptItemList.Ref.Company AS Company,
+		|	RetailSalesReceiptItemList.Ref.Currency,
+		|	RetailSalesReceiptSpecialOffers.Offer AS SpecialOffer,
+		|	RetailSalesReceiptSpecialOffers.Amount AS OffersAmount,
+		|	RetailSalesReceiptItemList.TotalAmount AS SalesAmount,
+		|	RetailSalesReceiptItemList.NetAmount,
+		|	RetailSalesReceiptItemList.Ref.Branch AS Branch
+		|INTO OffersInfo
+		|FROM
+		|	Document.RetailSalesReceipt.ItemList AS RetailSalesReceiptItemList
+		|		INNER JOIN Document.RetailSalesReceipt.SpecialOffers AS RetailSalesReceiptSpecialOffers
+		|		ON RetailSalesReceiptItemList.Key = RetailSalesReceiptSpecialOffers.Key
+		|		AND RetailSalesReceiptItemList.Ref = &Ref
+		|		AND RetailSalesReceiptSpecialOffers.Ref = &Ref
+		|		INNER JOIN TableRowIDInfo AS TableRowIDInfo
+		|		ON RetailSalesReceiptItemList.Key = TableRowIDInfo.Key";
 EndFunction
 
 Function RetailSales()
@@ -303,6 +345,16 @@ Function R2001T_Sales()
 		|WHERE
 		|	TRUE";
 EndFunction	
+
+Function R2005T_SalesSpecialOffers()
+	Return
+		"SELECT *
+		|INTO R2005T_SalesSpecialOffers
+		|FROM
+		|	OffersInfo AS OffersInfo
+		|WHERE TRUE";
+
+EndFunction
 
 Function R3010B_CashOnHand()
 	Return

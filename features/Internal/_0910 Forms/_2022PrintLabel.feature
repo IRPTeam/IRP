@@ -280,13 +280,13 @@ Scenario: _0202203 print layout creation with using external data processors
 		And I finish line editing in "ItemList" table
 		And I click "Print" button
 		Then "" spreadsheet document is equal
-		| 'Dress'          |
-		| ''               |
-		| ''               |
-		| ''               |
-		| '550'            |
-		| ''               |
-		| 'Цiна: 550 грн.' |
+		| 'Dress'                 |
+		| ''                      |
+		| 'Цiна: 550 грн.'        |
+		| ''                      |
+		| '550'                   |
+		| ''                      |
+		| 'Нова цiна: 466,1 грн.' |
 	And I close all client application windows
 	
 

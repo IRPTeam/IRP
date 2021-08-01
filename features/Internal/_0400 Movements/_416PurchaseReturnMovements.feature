@@ -63,7 +63,9 @@ Scenario: _041600 preparation (Purchase return)
 			When add Plugin for document discount
 	When Create catalog CancelReturnReasons objects
 	When Create catalog CashAccounts objects
+	When Create catalog LegalNameContracts objects
 	When Create catalog SerialLotNumbers objects
+	When Create catalog LegalNameContracts objects
 	* Load Bank payment
 	When Create document BankPayment objects (check movements, advance)
 	And I execute 1C:Enterprise script at server
@@ -222,12 +224,12 @@ Scenario: _041605 check Purchase return movements by the Register  "R5010 Reconc
 		And I select "R5010 Reconciliation statement" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Purchase return 231 dated 14.03.2021 18:53:34' | ''            | ''                    | ''          |  ''             | ''             | ''           | ''                  |
-			| 'Document registrations records'                | ''            | ''                    | ''          |  ''             | ''             | ''           | ''                  |
-			| 'Register  "R5010 Reconciliation statement"'    | ''            | ''                    | ''          |  ''             | ''             |  ''          |''                  |
-			| ''                                              | 'Record type' | 'Period'              | 'Resources' |  ''             | ''             | ''           | ''                  |
-			| ''                                              | ''            | ''                    | 'Amount'    |  'Company'      | 'Branch'       | 'Currency'   | 'Legal name'        |
-			| ''                                              | 'Expense'     | '14.03.2021 18:53:34' | '-900'      |  'Main Company' | 'Front office' | 'TRY'        | 'Company Ferron BP' |
+			| 'Purchase return 231 dated 14.03.2021 18:53:34' | ''            | ''                    | ''          | ''             | ''             | ''         | ''                  | ''                       |
+			| 'Document registrations records'                | ''            | ''                    | ''          | ''             | ''             | ''         | ''                  | ''                       |
+			| 'Register  "R5010 Reconciliation statement"'    | ''            | ''                    | ''          | ''             | ''             | ''         | ''                  | ''                       |
+			| ''                                              | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''         | ''                  | ''                       |
+			| ''                                              | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'       | 'Currency' | 'Legal name'        | 'Legal name contract'    |
+			| ''                                              | 'Expense'     | '14.03.2021 18:53:34' | '-900'      | 'Main Company' | 'Front office' | 'TRY'      | 'Company Ferron BP' | 'Contract Ferron BP New' |
 	And I close all client application windows
 
 

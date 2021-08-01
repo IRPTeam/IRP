@@ -116,6 +116,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R3050T_RetailCash());
 	QueryArray.Add(R2050T_RetailSales());
 	QueryArray.Add(R5021T_Revenues());
+	QueryArray.Add(R2001T_Sales());
 	QueryArray.Add(R2002T_SalesReturns());
 	QueryArray.Add(R2021B_CustomersTransactions());
 	QueryArray.Add(R5010B_ReconciliationStatement());
@@ -286,6 +287,22 @@ Function RetailSales()
 	|FROM
 	|	tmpRetailSales AS tmpRetailSales";
 EndFunction
+
+Function R2001T_Sales()
+	Return
+		"SELECT
+		|	ItemList.RetailSalesReceipt AS Invoice,
+		|	- ItemList.Quantity AS Quantity,
+		|	- ItemList.TotalAmount AS Amount,
+		|	- ItemList.NetAmount AS NetAmount,
+		|	- ItemList.OffersAmount AS OffersAmount,
+		|	*
+		|INTO R2001T_Sales
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	TRUE";
+EndFunction	
 
 Function R3010B_CashOnHand()
 	Return

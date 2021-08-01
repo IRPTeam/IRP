@@ -110,7 +110,8 @@ Function GetQueryTextsSecondaryTables()
 EndFunction
 
 Function GetQueryTextsMasterTables()
-	QueryArray = New Array;
+	QueryArray = New Array;	
+	QueryArray.Add(R2001T_Sales());
 	QueryArray.Add(R2002T_SalesReturns());	
 	QueryArray.Add(R2005T_SalesSpecialOffers());
 	QueryArray.Add(R2012B_SalesOrdersInvoiceClosing());
@@ -207,7 +208,8 @@ Function ItemList()
 		|	ItemList.RevenueType AS RevenueType,
 		|	ItemList.AdditionalAnalytic AS AdditionalAnalytic,
 		|	ItemList.Ref.Branch AS Branch,
-		|	ItemList.Ref.LegalNameContract AS LegalNameContract
+		|	ItemList.Ref.LegalNameContract AS LegalNameContract,
+		|	ItemList.OffersAmount
 		|INTO ItemList
 		|FROM
 		|	Document.SalesReturn.ItemList AS ItemList
@@ -296,6 +298,22 @@ Function Taxes()
 		|		ON SalesReturnItemList.Key = SalesReturnTaxList.Key
 		|		AND SalesReturnItemList.Ref = &Ref
 		|		AND SalesReturnTaxList.Ref = &Ref";
+EndFunction
+
+Function R2001T_Sales()
+	Return
+		"SELECT 
+		|	- ItemList.Quantity AS Quantity,
+		|	- ItemList.Amount AS Amount,
+		|	- ItemList.NetAmount AS NetAmount,
+		|	- ItemList.OffersAmount AS OffersAmount,
+		|	ItemList.SalesInvoice AS Invoice,
+		|	*
+		|INTO R2001T_Sales
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE TRUE";
+
 EndFunction
 
 Function R2002T_SalesReturns()

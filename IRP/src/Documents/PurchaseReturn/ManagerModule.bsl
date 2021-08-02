@@ -197,7 +197,7 @@ Function ItemList()
 		|		OR VALUETYPE(PurchaseReturnItemList.PurchaseInvoice) <> TYPE(Document.PurchaseInvoice)
 		|			THEN PurchaseReturnItemList.Ref
 		|		ELSE PurchaseReturnItemList.PurchaseInvoice
-		|	END AS SalesInvoice,
+		|	END AS PurchaseInvoice,
 		|	TableRowIDInfo.RowID AS RowKey,
 		|	PurchaseReturnItemList.Key,
 		|	PurchaseReturnItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS IsService,
@@ -308,7 +308,7 @@ Function R1001T_Purchases()
 		|	- ItemList.Amount AS Amount,
 		|	- ItemList.NetAmount AS NetAmount,
 		|	- ItemList.OffersAmount AS OffersAmount,
-		|	ItemList.SalesInvoice AS Invoice,
+		|	ItemList.PurchaseInvoice AS Invoice,
 		|	*
 		|INTO R1001T_Purchases
 		|FROM

@@ -1054,7 +1054,7 @@ Scenario: Create catalog Taxes objects
 		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'RetailReturnReceipt' |
 		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'SalesOrderClosing'    |
 		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'PurchaseOrderClosing' |
-		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c5' | 'SalesOrderClosing'    |
+
 
 
 Scenario: Create catalog Taxes objects (Sales tax)
@@ -1071,6 +1071,7 @@ Scenario: Create catalog Taxes objects (Sales tax)
 		| 'Ref'                                                           | 'DocumentName' |
 		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c5' | 'SalesOrder'   |
 		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c5' | 'SalesInvoice' |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c5' | 'SalesOrderClosing'    |
 
 Scenario: Create information register TaxSettings records
 

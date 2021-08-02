@@ -274,7 +274,8 @@ Scenario: _041167 check Purchase order closing movements by the Register  "R1012
 			| ''                                                     | 'Record type' | 'Period'                         | 'Resources' | ''       | ''           | 'Dimensions'   | ''             | ''                                            | ''         | ''         | ''                                     |
 			| ''                                                     | ''            | ''                               | 'Quantity'  | 'Amount' | 'Net amount' | 'Company'      | 'Branch'       | 'Order'                                       | 'Currency' | 'Item key' | 'Row key'                              |
 			| ''                                                     | 'Receipt'     | '$$DatePurchaseOrderClosing37$$' | '-64'       | '-7 680' | '-6 508,47'  | 'Main Company' | 'Front office' | 'Purchase order 37 dated 09.03.2021 14:29:00' | 'TRY'      | 'XS/Blue'  | '0e65d648-bd28-47a2-84dc-e260219c1395' |
-			| ''                                                     | 'Receipt'     | '$$DatePurchaseOrderClosing37$$' | '1'         | '150,00' | '127,12'     | 'Main Company' | 'Front office' | 'Purchase order 37 dated 09.03.2021 14:29:00' | 'TRY'      | '38/Black' | 'b5d168e5-e60d-44c9-9168-b13a2695077f' |
+			| ''                                                     | 'Receipt'     | '$$DatePurchaseOrderClosing37$$' | '-1'        | '-100'   | '-84,75'     | 'Main Company' | 'Front office' | 'Purchase order 37 dated 09.03.2021 14:29:00' | 'TRY'      | 'Rent'     | 'da5e404f-fed0-41c5-81dc-b8eadd89e699' |
+			| ''                                                     | 'Receipt'     | '$$DatePurchaseOrderClosing37$$' | '1'         | '150'    | '127,12'     | 'Main Company' | 'Front office' | 'Purchase order 37 dated 09.03.2021 14:29:00' | 'TRY'      | '38/Black' | 'b5d168e5-e60d-44c9-9168-b13a2695077f' |
 		And I close all client application windows
 
 

@@ -1,3 +1,11 @@
+#Region PrintForm
+
+Function GetPrintForm(Ref, PrintFormName, AddInfo = Undefined) Export
+	Return Undefined;
+EndFunction
+
+#EndRegion
+
 #Region Posting
 
 Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
@@ -163,7 +171,8 @@ Function ItemList()
 	|	SalesOrderItemList.NetAmount,
 	|	SalesOrderItemList.Ref.UseItemsShipmentScheduling AS UseItemsShipmentScheduling,
 	|	SalesOrderItemList.OffersAmount,
-	|	&StatusInfoPosting
+	|	&StatusInfoPosting AS StatusInfoPosting,
+	|	SalesOrderItemList.Ref.Branch AS Branch
 	|INTO ItemList
 	|FROM
 	|	Document.SalesOrder.ItemList AS SalesOrderItemList
@@ -300,6 +309,7 @@ Function R2022B_CustomersPaymentPlanning()
 		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
 		|	SalesOrderPaymentTerms.Ref.Date AS Period,
 		|	SalesOrderPaymentTerms.Ref.Company AS Company,
+		|	SalesOrderPaymentTerms.Ref.Branch AS Branch,
 		|	SalesOrderPaymentTerms.Ref AS Basis,
 		|	SalesOrderPaymentTerms.Ref.LegalName AS LegalName,
 		|	SalesOrderPaymentTerms.Ref.Partner AS Partner,
@@ -315,6 +325,8 @@ Function R2022B_CustomersPaymentPlanning()
 		|GROUP BY
 		|	SalesOrderPaymentTerms.Ref.Date,
 		|	SalesOrderPaymentTerms.Ref.Company,
+		|	SalesOrderPaymentTerms.Ref.Branch,
+		|	SalesOrderPaymentTerms.Ref.Branch,
 		|	SalesOrderPaymentTerms.Ref,
 		|	SalesOrderPaymentTerms.Ref.LegalName,
 		|	SalesOrderPaymentTerms.Ref.Partner,

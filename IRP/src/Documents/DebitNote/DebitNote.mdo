@@ -208,10 +208,10 @@
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
     <attributes uuid="ade8dbc4-433e-4445-bc95-3d2fd465c241">
-      <name>BusinessUnit</name>
+      <name>ProfitLossCenter</name>
       <synonym>
         <key>en</key>
-        <value>Business unit</value>
+        <value>Profit loss center</value>
       </synonym>
       <type>
         <types>CatalogRef.BusinessUnits</types>
@@ -279,6 +279,24 @@
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
       <fillChecking>ShowError</fillChecking>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="867abd87-9b82-41ae-9dde-8e434348d639">
+      <name>LegalNameContract</name>
+      <synonym>
+        <key>en</key>
+        <value>Legal name contract</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.LegalNameContracts</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <choiceParameterLinks>
+        <name>Filter.Company</name>
+        <field>Document.DebitNote.TabularSection.Transactions.Attribute.LegalName</field>
+      </choiceParameterLinks>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>

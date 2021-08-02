@@ -1,3 +1,11 @@
+#Region PrintForm
+
+Function GetPrintForm(Ref, PrintFormName, AddInfo = Undefined) Export
+	Return Undefined;
+EndFunction
+
+#EndRegion
+
 #Region Posting
 
 Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
@@ -195,9 +203,11 @@ Function ItemList()
 		|	PurchaseReturnItemList.NetAmount,
 		|	PurchaseReturnItemList.PurchaseInvoice AS Invoice,
 		|	PurchaseReturnItemList.ReturnReason,
-		|	PurchaseReturnItemList.BusinessUnit AS BusinessUnit,
+		|	PurchaseReturnItemList.ProfitLossCenter AS ProfitLossCenter,
 		|	PurchaseReturnItemList.ExpenseType AS ExpenseType,
-		|	PurchaseReturnItemList.AdditionalAnalytic AS AdditionalAnalytic
+		|	PurchaseReturnItemList.AdditionalAnalytic AS AdditionalAnalytic,
+		|	PurchaseReturnItemList.Ref.Branch AS Branch,
+		|	PurchaseReturnItemList.Ref.LegalNameContract AS LegalNameContract
 		|INTO ItemList
 		|FROM
 		|	Document.PurchaseReturn.ItemList AS PurchaseReturnItemList
@@ -214,6 +224,7 @@ Function SerialLotNumbers()
 		"SELECT
 		|	SerialLotNumbers.Ref.Date AS Period,
 		|	SerialLotNumbers.Ref.Company AS Company,
+		|	SerialLotNumbers.Ref.Branch AS Branch,
 		|	SerialLotNumbers.Key,
 		|	SerialLotNumbers.SerialLotNumber,
 		|	SerialLotNumbers.Quantity,
@@ -240,7 +251,8 @@ Function OffersInfo()
 		|	PurchaseReturnSpecialOffers.Offer AS SpecialOffer,
 		|	PurchaseReturnSpecialOffers.Amount AS OffersAmount,
 		|	PurchaseReturnItemList.TotalAmount AS SalesAmount,
-		|	PurchaseReturnItemList.NetAmount AS NetAmount
+		|	PurchaseReturnItemList.NetAmount AS NetAmount,
+		|	PurchaseReturnItemList.Ref.Branch AS Branch
 		|INTO OffersInfo
 		|FROM
 		|	Document.PurchaseReturn.ItemList AS PurchaseReturnItemList
@@ -276,7 +288,8 @@ Function Taxes()
 		|			THEN PurchaseReturnTaxList.Amount
 		|		ELSE PurchaseReturnTaxList.ManualAmount
 		|	END AS TaxAmount,
-		|	PurchaseReturnItemList.NetAmount AS TaxableAmount
+		|	PurchaseReturnItemList.NetAmount AS TaxableAmount,
+		|	PurchaseReturnItemList.Ref.Branch AS Branch
 		|INTO Taxes
 		|FROM
 		|	Document.PurchaseReturn.ItemList AS PurchaseReturnItemList
@@ -326,6 +339,7 @@ Function R1021B_VendorsTransactions()
 		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
 		|	ItemList.Period,
 		|	ItemList.Company,
+		|	ItemList.Branch,
 		|	ItemList.Currency,
 		|	ItemList.LegalName,
 		|	ItemList.Partner,
@@ -338,6 +352,7 @@ Function R1021B_VendorsTransactions()
 		|GROUP BY
 		|	ItemList.Agreement,
 		|	ItemList.Company,
+		|	ItemList.Branch,
 		|	ItemList.Currency,
 		|	ItemList.BasisDocument,
 		|	ItemList.LegalName,
@@ -353,6 +368,7 @@ Function R1031B_ReceiptInvoicing()
 		|	ItemList.PurchaseReturn AS Basis,
 		|	ItemList.Quantity AS Quantity,
 		|	ItemList.Company,
+		|	ItemList.Branch,
 		|	ItemList.Period,
 		|	ItemList.ItemKey,
 		|	ItemList.Store
@@ -371,6 +387,7 @@ Function R1031B_ReceiptInvoicing()
 		|	ShipmentConfirmations.ShipmentConfirmation,
 		|	ShipmentConfirmations.Quantity,
 		|	ItemList.Company,
+		|	ItemList.Branch,
 		|	ItemList.Period,
 		|	ItemList.ItemKey,
 		|	ItemList.Store
@@ -481,7 +498,9 @@ Function R5010B_ReconciliationStatement()
 		"SELECT
 		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
 		|	ItemList.Company AS Company,
+		|	ItemList.Branch AS Branch,
 		|	ItemList.LegalName AS LegalName,
+		|	ItemList.LegalNameContract AS LegalNameContract,
 		|	ItemList.Currency AS Currency,
 		|	- SUM(ItemList.Amount) AS Amount,
 		|	ItemList.Period
@@ -490,7 +509,9 @@ Function R5010B_ReconciliationStatement()
 		|	ItemList AS ItemList
 		|GROUP BY
 		|	ItemList.Company,
+		|	ItemList.Branch,
 		|	ItemList.LegalName,
+		|	ItemList.LegalNameContract,
 		|	ItemList.Currency,
 		|	ItemList.Period";
 EndFunction

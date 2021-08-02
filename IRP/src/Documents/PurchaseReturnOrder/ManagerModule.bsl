@@ -1,3 +1,11 @@
+#Region PrintForm
+
+Function GetPrintForm(Ref, PrintFormName, AddInfo = Undefined) Export
+	Return Undefined;
+EndFunction
+
+#EndRegion
+
 #Region Posting
 
 Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
@@ -130,14 +138,15 @@ Function ItemList()
 		|	PurchaseReturnOrderItemList.Unit,
 		|	PurchaseReturnOrderItemList.Ref.Date AS Period,
 		|	PurchaseReturnOrderItemList.Key AS RowKey,
-		|	PurchaseReturnOrderItemList.BusinessUnit AS BusinessUnit,
+		|	PurchaseReturnOrderItemList.ProfitLossCenter AS ProfitLossCenter,
 		|	PurchaseReturnOrderItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS IsService,
 		|	PurchaseReturnOrderItemList.Cancel AS IsCanceled,
 		|	PurchaseReturnOrderItemList.TotalAmount AS Amount,
 		|	PurchaseReturnOrderItemList.NetAmount,
 		|	PurchaseReturnOrderItemList.Ref.Currency AS Currency,
 		|	PurchaseReturnOrderItemList.PurchaseInvoice AS Invoice,
-		|	&StatusInfoPosting
+		|	&StatusInfoPosting AS StatusInfoPosting,
+		|	PurchaseReturnOrderItemList.Ref.Branch AS Branch
 		|INTO ItemList
 		|FROM
 		|	Document.PurchaseReturnOrder.ItemList AS PurchaseReturnOrderItemList

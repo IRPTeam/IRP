@@ -1,3 +1,11 @@
+#Region PrintForm
+
+Function GetPrintForm(Ref, PrintFormName, AddInfo = Undefined) Export
+	Return Undefined;
+EndFunction
+
+#EndRegion
+
 #Region Posting
 
 Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
@@ -137,7 +145,8 @@ Function ItemList()
 		|	SalesReturnOrderList.CancelReason,
 		|	SalesReturnOrderList.NetAmount,
 		|	SalesReturnOrderList.OffersAmount,
-		|	&StatusInfoPosting
+		|	&StatusInfoPosting AS StatusInfoPosting,
+		|	SalesReturnOrderList.Ref.Branch AS Branch
 		|INTO ItemList
 		|FROM
 		|	Document.SalesReturnOrder.ItemList AS SalesReturnOrderList

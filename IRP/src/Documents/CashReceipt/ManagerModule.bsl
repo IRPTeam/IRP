@@ -1,3 +1,11 @@
+#Region PrintForm
+
+Function GetPrintForm(Ref, PrintFormName, AddInfo = Undefined) Export
+	Return Undefined;
+EndFunction
+
+#EndRegion
+
 #Region Posting
 
 Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
@@ -94,7 +102,8 @@ Function GetQueryTextCashReceiptPaymentList()
 		|	CashReceiptPaymentList.PlaningTransactionBasis.Sender AS FromAccount,
 		|	CashReceiptPaymentList.PlaningTransactionBasis.Receiver AS ToAccount,
 		|	CashReceiptPaymentList.Ref AS ReceiptDocument,
-		|	CashReceiptPaymentList.Key AS Key
+		|	CashReceiptPaymentList.Key AS Key,
+		|	CashReceiptPaymentList.Ref.Branch AS Branch
 		|FROM
 		|	Document.CashReceipt.PaymentList AS CashReceiptPaymentList
 		|WHERE
@@ -122,13 +131,14 @@ Function GetQueryTextQueryTable()
 		|	QueryTable.FromAccount AS FromAccount,
 		|	QueryTable.ToAccount AS ToAccount,
 		|	QueryTable.ReceiptDocument,
-		|	QueryTable.Key AS Key
+		|	QueryTable.Key AS Key,
+		|	QueryTable.Branch AS Branch
 		|INTO tmp
 		|FROM
 		|	&QueryTable AS QueryTable
 		|;
 		|
-		|//[2]//////////////////////////////////////////////////////////////////////////////
+		|//[1]//////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	tmp.Company AS Company,
 		|	tmp.PlaningTransactionBasis AS BasisDocument,
@@ -137,7 +147,8 @@ Function GetQueryTextQueryTable()
 		|	tmp.Currency AS Currency,
 		|	SUM(tmp.Amount) AS Amount,
 		|	tmp.Period,
-		|	tmp.Key
+		|	tmp.Key,
+		|	tmp.Branch
 		|FROM
 		|	tmp AS tmp
 		|WHERE
@@ -149,7 +160,8 @@ Function GetQueryTextQueryTable()
 		|	tmp.ToAccount,
 		|	tmp.Currency,
 		|	tmp.Period,
-		|	tmp.Key";
+		|	tmp.Key,
+		|	tmp.Branch";
 EndFunction
 
 Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
@@ -234,6 +246,7 @@ Procedure FillAttributesByType(TransactionType, ArrayAll, ArrayByType) Export
 	ArrayAll.Add("PaymentList.Amount");
 	ArrayAll.Add("PaymentList.Agreement");
 	ArrayAll.Add("PaymentList.AmountExchange");
+	ArrayAll.Add("PaymentList.LegalNameContract");
 	
 	ArrayByType = New Array();
 	If TransactionType = Enums.IncomingPaymentTransactionType.CashTransferOrder Then
@@ -273,7 +286,7 @@ Procedure FillAttributesByType(TransactionType, ArrayAll, ArrayByType) Export
 		ArrayByType.Add("PaymentList.PlaningTransactionBasis");
 		ArrayByType.Add("PaymentList.Amount");
 		ArrayByType.Add("PaymentList.Agreement");
-		
+		ArrayByType.Add("PaymentList.LegalNameContract");
 	Else // empty
 		ArrayByType.Add("Company");
 		ArrayByType.Add("Currency");
@@ -370,7 +383,9 @@ Function PaymentList()
 	|	PaymentList.Ref.TransactionType
 	|   = VALUE(Enum.IncomingPaymentTransactionType.ReturnFromVendor) AS IsReturnFromVendor,
 	|	PaymentList.Ref.IgnoreAdvances AS IgnoreAdvances,
-	|	PaymentList.Partner
+	|	PaymentList.Partner,
+	|	PaymentList.Ref.Branch AS Branch,
+	|	PaymentList.LegalNameContract AS LegalNameContract
 	|INTO PaymentList
 	|FROM
 	|	Document.CashReceipt.PaymentList AS PaymentList
@@ -422,6 +437,7 @@ Function R2021B_CustomersTransactions()
 		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
 		|	PaymentList.Period,
 		|	PaymentList.Company,
+		|	PaymentList.Branch,
 		|	PaymentList.Partner,
 		|	PaymentList.LegalName,
 		|	PaymentList.Currency,
@@ -442,6 +458,7 @@ Function R2021B_CustomersTransactions()
 		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
 		|	OffsetOfAdvances.Period,
 		|	OffsetOfAdvances.Company,
+		|	OffsetOfAdvances.Branch,
 		|	OffsetOfAdvances.Partner,
 		|	OffsetOfAdvances.LegalName,
 		|	OffsetOfAdvances.Currency,
@@ -462,6 +479,7 @@ Function R1021B_VendorsTransactions()
 		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
 		|	PaymentList.Period,
 		|	PaymentList.Company,
+		|	PaymentList.Branch,
 		|	PaymentList.Partner,
 		|	PaymentList.LegalName,
 		|	PaymentList.Currency,
@@ -482,6 +500,7 @@ Function R2020B_AdvancesFromCustomers()
 		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
 		|	PaymentList.Period,
 		|	PaymentList.Company,
+		|	PaymentList.Branch,
 		|	PaymentList.Partner,
 		|	PaymentList.LegalName,
 		|	PaymentList.Currency,
@@ -502,6 +521,7 @@ Function R2020B_AdvancesFromCustomers()
 		|	VALUE(AccumulationRecordType.Expense),
 		|	OffsetOfAdvances.Period,
 		|	OffsetOfAdvances.Company,
+		|	OffsetOfAdvances.Branch,
 		|	OffsetOfAdvances.Partner,
 		|	OffsetOfAdvances.LegalName,
 		|	OffsetOfAdvances.Currency,
@@ -521,6 +541,7 @@ Function R1020B_AdvancesToVendors()
 		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
 		|	PaymentList.Period,
 		|	PaymentList.Company,
+		|	PaymentList.Branch,
 		|	PaymentList.Partner,
 		|	PaymentList.LegalName,
 		|	PaymentList.Currency,
@@ -541,6 +562,7 @@ Function R5011B_CustomersAging()
 		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
 		|	OffsetOfAging.Period,
 		|	OffsetOfAging.Company,
+		|	OffsetOfAging.Branch,
 		|	OffsetOfAging.Partner,
 		|	OffsetOfAging.Agreement,
 		|	OffsetOfAging.Currency,
@@ -560,6 +582,7 @@ Function T2012S_PartnerAdvances()
 		"SELECT
 		|	PaymentList.Period,
 		|	PaymentList.Company,
+		|	PaymentList.Branch,
 		|	PaymentList.Partner,
 		|	PaymentList.LegalName,
 		|	PaymentList.Currency,
@@ -580,6 +603,7 @@ Function T2011S_PartnerTransactions()
 		"SELECT
 		|	PaymentList.Period,
 		|	PaymentList.Company,
+		|	PaymentList.Branch,
 		|	PaymentList.Partner,
 		|	PaymentList.LegalName,
 		|	PaymentList.Currency,
@@ -601,6 +625,7 @@ Function R3035T_CashPlanning()
 		"SELECT
 		|	PaymentList.Period,
 		|	PaymentList.Company,
+		|	PaymentList.Branch,
 		|	PaymentList.PlaningTransactionBasis AS BasisDocument,
 		|	PaymentList.PlaningTransactionBasis.PlanningPeriod AS PlanningPeriod,
 		|	PaymentList.CashAccount AS Account,

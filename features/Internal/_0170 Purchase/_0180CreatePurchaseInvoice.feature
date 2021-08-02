@@ -100,7 +100,7 @@ Scenario: _018001 create document Purchase Invoice based on order (partial quant
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Store" became equal to "Store 02"
 		And "ItemList" table became equal
-			| '#' | 'Business unit' | 'Price type'              | 'Item'     | 'Item key'  | 'Dont calculate row' | 'Tax amount' | 'Unit'           | 'Serial lot numbers' | 'Q'      | 'Price'  | 'VAT' | 'Offers amount' | 'Total amount' | 'Additional analytic' | 'Internal supply request' | 'Store'    | 'Delivery date' | 'Expense type' | 'Purchase order'                               | 'Detail' | 'Sales order' | 'Net amount' | 'Use goods receipt' |
+			| '#' | 'Profit loss center' | 'Price type'              | 'Item'     | 'Item key'  | 'Dont calculate row' | 'Tax amount' | 'Unit'           | 'Serial lot numbers' | 'Q'      | 'Price'  | 'VAT' | 'Offers amount' | 'Total amount' | 'Additional analytic' | 'Internal supply request' | 'Store'    | 'Delivery date' | 'Expense type' | 'Purchase order'                               | 'Detail' | 'Sales order' | 'Net amount' | 'Use goods receipt' |
 			| '1' | 'Front office'  | 'en description is empty' | 'Dress'    | 'S/Yellow'  | 'No'                 | '137,29'     | 'pcs'            | ''                   | '10,000' | '100,00' | '18%' | '100,00'        | '900,00'       | ''                    | ''                        | 'Store 02' | '12.02.2021'    | ''             | 'Purchase order 217 dated 12.02.2021 12:45:05' | ''       | ''            | '762,71'     | 'Yes'               |
 			| '2' | 'Front office'  | 'en description is empty' | 'Trousers' | '36/Yellow' | 'No'                 | '137,29'     | 'pcs'            | ''                   | '5,000'  | '200,00' | '18%' | '100,00'        | '900,00'       | ''                    | ''                        | 'Store 02' | '12.02.2021'    | ''             | 'Purchase order 217 dated 12.02.2021 12:45:05' | ''       | ''            | '762,71'     | 'Yes'               |
 			| '3' | 'Front office'  | 'en description is empty' | 'Trousers' | '36/Yellow' | 'No'                 | '256,27'     | 'pcs'            | ''                   | '8,000'  | '210,00' | '18%' | ''              | '1 680,00'     | ''                    | ''                        | 'Store 02' | '12.02.2021'    | ''             | 'Purchase order 217 dated 12.02.2021 12:45:05' | ''       | ''            | '1 423,73'   | 'Yes'               |
@@ -109,7 +109,7 @@ Scenario: _018001 create document Purchase Invoice based on order (partial quant
 			| '#' | 'Amount' |
 			| '1' | '100,00' |
 			| '2' | '100,00' |
-		Then the form attribute named "BusinessUnit" became equal to ""
+		Then the form attribute named "Branch" became equal to "Front office"
 		Then the form attribute named "Author" became equal to "en description is empty"
 		Then the form attribute named "PriceIncludeTax" became equal to "Yes"
 		Then the form attribute named "Currency" became equal to "TRY"
@@ -278,7 +278,7 @@ Scenario: _018003 copy PI (based on PO) and check filling in Row Id info table (
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Store" became equal to "Store 02"
 		And "ItemList" table became equal
-			| '#' | 'Business unit' | 'Price type'              | 'Item'     | 'Item key'  | 'Dont calculate row' | 'Tax amount' | 'Unit'           | 'Serial lot numbers' | 'Q'     | 'Price'  | 'VAT' | 'Offers amount' | 'Total amount' | 'Additional analytic' | 'Internal supply request' | 'Store'    | 'Delivery date' | 'Expense type' | 'Purchase order' | 'Detail' | 'Sales order' | 'Net amount' | 'Use goods receipt' |
+			| '#' | 'Profit loss center' | 'Price type'              | 'Item'     | 'Item key'  | 'Dont calculate row' | 'Tax amount' | 'Unit'           | 'Serial lot numbers' | 'Q'     | 'Price'  | 'VAT' | 'Offers amount' | 'Total amount' | 'Additional analytic' | 'Internal supply request' | 'Store'    | 'Delivery date' | 'Expense type' | 'Purchase order' | 'Detail' | 'Sales order' | 'Net amount' | 'Use goods receipt' |
 			| '1' | 'Front office'  | 'en description is empty' | 'Dress'    | 'S/Yellow'  | 'No'                 | '61,02'      | 'pcs'            | ''                   | '5,000' | '100,00' | '18%' | '100,00'        | '400,00'       | ''                    | ''                        | 'Store 02' | '12.02.2021'    | ''             | ''               | ''       | ''            | '338,98'     | 'Yes'               |
 			| '2' | 'Front office'  | 'en description is empty' | 'Trousers' | '36/Yellow' | 'No'                 | '137,29'     | 'pcs'            | ''                   | '5,000' | '200,00' | '18%' | '100,00'        | '900,00'       | ''                    | ''                        | 'Store 02' | '12.02.2021'    | ''             | ''               | ''       | ''            | '762,71'     | 'Yes'               |
 			| '3' | 'Front office'  | 'en description is empty' | 'Trousers' | '36/Yellow' | 'No'                 | '256,27'     | 'pcs'            | ''                   | '8,000' | '210,00' | '18%' | ''              | '1 680,00'     | ''                    | ''                        | 'Store 02' | '12.02.2021'    | ''             | ''               | ''       | ''            | '1 423,73'   | 'Yes'               |
@@ -290,7 +290,7 @@ Scenario: _018003 copy PI (based on PO) and check filling in Row Id info table (
 			| 'Local currency'     | 'Legal'        | 'TRY'           | 'TRY'      | '1'                 | '1'            | '14 980'   |
 			| 'Reporting currency' | 'Reporting'    | 'TRY'           | 'USD'      | '0,1712'            | '1'            | '2 564,58' |
 
-		Then the form attribute named "BusinessUnit" became equal to ""
+		Then the form attribute named "Branch" became equal to "Front office"
 		Then the form attribute named "Author" became equal to "en description is empty"
 		Then the form attribute named "PriceIncludeTax" became equal to "Yes"
 		Then the form attribute named "Currency" became equal to "TRY"
@@ -329,7 +329,7 @@ Scenario: _018004 create PI based on GR without PO
 		And I click "Ok" button
 	* Create PI and check creation
 		And "ItemList" table contains lines
-			| '#' | 'Business unit' | 'Price type' | 'Item'     | 'Item key'  | 'Dont calculate row' | 'Tax amount' | 'Unit'           | 'Serial lot numbers' | 'Q'      | 'Price' | 'VAT' | 'Offers amount' | 'Total amount' | 'Additional analytic' | 'Internal supply request' | 'Store'    | 'Delivery date' | 'Expense type' | 'Purchase order' | 'Detail' | 'Sales order' | 'Net amount' | 'Use goods receipt' |
+			| '#' | 'Profit loss center' | 'Price type' | 'Item'     | 'Item key'  | 'Dont calculate row' | 'Tax amount' | 'Unit'           | 'Serial lot numbers' | 'Q'      | 'Price' | 'VAT' | 'Offers amount' | 'Total amount' | 'Additional analytic' | 'Internal supply request' | 'Store'    | 'Delivery date' | 'Expense type' | 'Purchase order' | 'Detail' | 'Sales order' | 'Net amount' | 'Use goods receipt' |
 			| '1' | ''              | ''           | 'Dress'    | 'XS/Blue'   | 'No'                 | ''           | 'pcs'            | ''                   | '12,000' | ''      | ''    | ''              | ''             | ''                    | ''                        | 'Store 02' | ''              | ''             | ''               | ''       | ''            | ''           | 'Yes'               |
 			| '2' | ''              | ''           | 'Trousers' | '38/Yellow' | 'No'                 | ''           | 'pcs'            | ''                   | '20,000' | ''      | ''    | ''              | ''             | ''                    | ''                        | 'Store 02' | ''              | ''             | ''               | ''       | ''            | ''           | 'Yes'               |
 			| '3' | ''              | ''           | 'Boots'    | '39/18SD'   | 'No'                 | ''           | 'Boots (12 pcs)' | ''                   | '2,000'  | ''      | ''    | ''              | ''             | ''                    | ''                        | 'Store 02' | ''              | ''             | ''               | ''       | ''            | ''           | 'Yes'               |
@@ -403,7 +403,7 @@ Scenario: _018005 create Purchase invoice based on Internal supply request
 			And I click "Save" button							
 		* Check Item tab and RowID tab
 			And "ItemList" table contains lines
-				| 'Store'    | 'Internal supply request'                               | 'Quantity in base unit' | 'Business unit' | 'Price type' | 'Item'  | 'Item key' | 'Dont calculate row' | 'Q'      | 'Unit' | 'Tax amount' | 'Price' | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Expense type' | 'Detail' | 'Sales order' | 'Purchase order' | 'Delivery date' |
+				| 'Store'    | 'Internal supply request'                               | 'Quantity in base unit' | 'Profit loss center' | 'Price type' | 'Item'  | 'Item key' | 'Dont calculate row' | 'Q'      | 'Unit' | 'Tax amount' | 'Price' | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Expense type' | 'Detail' | 'Sales order' | 'Purchase order' | 'Delivery date' |
 				| 'Store 02' | 'Internal supply request 117 dated 12.02.2021 14:39:38' | '10,000'                | ''              | ''           | 'Dress' | 'S/Yellow' | 'No'                 | '10,000' | 'pcs'  | ''           | ''      | ''    | ''              | ''           | ''             | ''             | ''       | ''            | ''               | ''              |
 				| 'Store 02' | 'Internal supply request 117 dated 12.02.2021 14:39:38' | '50,000'                | ''              | ''           | 'Dress' | 'XS/Blue'  | 'No'                 | '50,000' | 'pcs'  | ''           | ''      | ''    | ''              | ''           | ''             | ''             | ''       | ''            | ''               | ''              |
 			And "RowIDInfo" table contains lines
@@ -436,7 +436,7 @@ Scenario: _018005 create Purchase invoice based on Internal supply request
 		Then the form attribute named "Store" became equal to "Store 02"
 		And I click "Show row key" button	
 		And "ItemList" table contains lines
-			| 'Store'    | 'Internal supply request'                               | 'Quantity in base unit' | 'Business unit' | 'Price type' | 'Item'  | 'Item key' | 'Dont calculate row' | 'Q'      | 'Unit' | 'Tax amount' | 'Price' | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Expense type' | 'Detail' | 'Sales order' | 'Purchase order' | 'Delivery date' |
+			| 'Store'    | 'Internal supply request'                               | 'Quantity in base unit' | 'Profit loss center' | 'Price type' | 'Item'  | 'Item key' | 'Dont calculate row' | 'Q'      | 'Unit' | 'Tax amount' | 'Price' | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Expense type' | 'Detail' | 'Sales order' | 'Purchase order' | 'Delivery date' |
 			| 'Store 02' | 'Internal supply request 117 dated 12.02.2021 14:39:38' | '10,000'                | ''              | ''           | 'Dress' | 'S/Yellow' | 'No'                 | '10,000' | 'pcs'  | ''           | ''      | ''    | ''              | ''           | ''             | ''             | ''       | ''            | ''               | ''              |
 			| 'Store 02' | 'Internal supply request 117 dated 12.02.2021 14:39:38' | '50,000'                | ''              | ''           | 'Dress' | 'XS/Blue'  | 'No'                 | '50,000' | 'pcs'  | ''           | ''      | ''    | ''              | ''           | ''             | ''             | ''       | ''            | ''               | ''              |
 		And I go to line in "ItemList" table

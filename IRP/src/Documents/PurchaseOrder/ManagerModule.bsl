@@ -1,3 +1,11 @@
+#Region PrintForm
+
+Function GetPrintForm(Ref, PrintFormName, AddInfo = Undefined) Export
+	Return Undefined;
+EndFunction
+
+#EndRegion
+
 #Region Posting
 
 Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
@@ -172,7 +180,7 @@ Function ItemList()
 	|	PurchaseOrderItems.Unit,
 	|	PurchaseOrderItems.Ref.Date AS Period,
 	|	ISNULL(TableRowIDInfo.RowID, PurchaseOrderItems.Key)  AS RowKey,
-	|	PurchaseOrderItems.BusinessUnit AS BusinessUnit,
+	|	PurchaseOrderItems.ProfitLossCenter AS ProfitLossCenter,
 	|	PurchaseOrderItems.ExpenseType AS ExpenseType,
 	|	PurchaseOrderItems.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS IsService,
 	|	PurchaseOrderItems.DeliveryDate AS DeliveryDate,
@@ -190,7 +198,8 @@ Function ItemList()
 	|	PurchaseOrderItems.Ref.MovementType AS MovementType,
 	|	PurchaseOrderItems.Ref.Agreement AS Agreement,
 	|	PurchaseOrderItems.Ref.Partner AS Partner,
-	|	PurchaseOrderItems.Ref.LegalName
+	|	PurchaseOrderItems.Ref.LegalName,
+	|	PurchaseOrderItems.Ref.Branch AS Branch
 	|INTO ItemList
 	|FROM
 	|	Document.PurchaseOrder.ItemList AS PurchaseOrderItems
@@ -324,6 +333,7 @@ Function R1022B_VendorsPaymentPlanning()
 		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
 		|	PurchaseOrderPaymentTerms.Ref.Date AS Period,
 		|	PurchaseOrderPaymentTerms.Ref.Company AS Company,
+		|	PurchaseOrderPaymentTerms.Ref.Branch AS Branch,
 		|	PurchaseOrderPaymentTerms.Ref AS Basis,
 		|	PurchaseOrderPaymentTerms.Ref.LegalName AS LegalName,
 		|	PurchaseOrderPaymentTerms.Ref.Partner AS Partner,
@@ -339,6 +349,7 @@ Function R1022B_VendorsPaymentPlanning()
 		|GROUP BY
 		|	PurchaseOrderPaymentTerms.Ref.Date,
 		|	PurchaseOrderPaymentTerms.Ref.Company,
+		|	PurchaseOrderPaymentTerms.Ref.Branch,
 		|	PurchaseOrderPaymentTerms.Ref,
 		|	PurchaseOrderPaymentTerms.Ref.LegalName,
 		|	PurchaseOrderPaymentTerms.Ref.Partner,

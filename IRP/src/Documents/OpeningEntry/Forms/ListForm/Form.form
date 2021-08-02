@@ -579,7 +579,7 @@
 	OpeningEntry.Posted,
 	OpeningEntry.Company,
 	OpeningEntry.Author,
-	OpeningEntry.BusinessUnit,
+	OpeningEntry.Branch,
 	OpeningEntry.Description,
 	CASE WHEN COUNT(DISTINCT OpeningEntryInventory.Store) = 1 THEN
 		MAX(OpeningEntryInventory.Store)
@@ -596,7 +596,7 @@ GROUP BY
 	OpeningEntry.Posted,
 	OpeningEntry.Company,
 	OpeningEntry.Author,
-	OpeningEntry.BusinessUnit,
+	OpeningEntry.Branch,
 	OpeningEntry.Description</queryText>
       <mainTable>Document.OpeningEntry</mainTable>
       <dynamicDataRead>true</dynamicDataRead>

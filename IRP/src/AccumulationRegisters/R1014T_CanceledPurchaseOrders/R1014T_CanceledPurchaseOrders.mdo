@@ -83,6 +83,20 @@
     <fullTextSearch>Use</fullTextSearch>
     <useInTotals>true</useInTotals>
   </dimensions>
+  <dimensions uuid="54ccd749-3235-4292-a6db-7fcb1860c8e5">
+    <name>Branch</name>
+    <synonym>
+      <key>en</key>
+      <value>Branch</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.BusinessUnits</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
+  </dimensions>
   <dimensions uuid="4e7c7d7f-cd06-47d2-a85c-896537cba450">
     <name>CurrencyMovementType</name>
     <synonym>

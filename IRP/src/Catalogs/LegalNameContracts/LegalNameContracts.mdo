@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="1564ff49-3bab-44a6-b840-c90d5431e7ce">
+  <producedTypes>
+    <objectType typeId="f9d551a5-1abc-44a1-ba0a-5601d0f3880f" valueTypeId="f76898c7-635a-478a-bdfe-0215cf79ae61"/>
+    <refType typeId="02dca62e-424a-41b2-8603-cf8a0db1eb0d" valueTypeId="dbf03682-768f-4710-9286-60243d4809b2"/>
+    <selectionType typeId="879d2a84-50cf-4e93-9002-a00ae6a98181" valueTypeId="073658dd-99cc-417a-93a0-153b8a475f5f"/>
+    <listType typeId="b0aca072-c639-45b2-9f47-e6b66511e4f4" valueTypeId="c68df076-f6d3-4ff1-8509-7eb9aa7aea6b"/>
+    <managerType typeId="8f93e29d-0c2c-42da-a033-17895c463957" valueTypeId="1822bf36-7bd5-488a-92aa-63b15da2f40c"/>
+  </producedTypes>
+  <name>LegalNameContracts</name>
+  <synonym>
+    <key>en</key>
+    <value>Legal name contracts</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <inputByString>Catalog.LegalNameContracts.StandardAttribute.Code</inputByString>
+  <inputByString>Catalog.LegalNameContracts.StandardAttribute.Description</inputByString>
+  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+  <standardAttributes>
+    <dataHistory>Use</dataHistory>
+    <name>Description</name>
+    <synonym>
+      <key>en</key>
+      <value>Contract number</value>
+    </synonym>
+    <fillChecking>ShowError</fillChecking>
+    <fullTextSearch>Use</fullTextSearch>
+  </standardAttributes>
+  <createOnInput>Use</createOnInput>
+  <dataLockControlMode>Managed</dataLockControlMode>
+  <fullTextSearch>Use</fullTextSearch>
+  <levelCount>2</levelCount>
+  <foldersOnTop>true</foldersOnTop>
+  <codeLength>12</codeLength>
+  <descriptionLength>50</descriptionLength>
+  <codeAllowedLength>Variable</codeAllowedLength>
+  <checkUnique>true</checkUnique>
+  <autonumbering>true</autonumbering>
+  <defaultPresentation>AsDescription</defaultPresentation>
+  <editType>InDialog</editType>
+  <choiceMode>BothWays</choiceMode>
+  <defaultObjectForm>Catalog.LegalNameContracts.Form.ItemForm</defaultObjectForm>
+  <defaultListForm>Catalog.LegalNameContracts.Form.ListForm</defaultListForm>
+  <defaultChoiceForm>Catalog.LegalNameContracts.Form.ChoiceForm</defaultChoiceForm>
+  <attributes uuid="9ce2c4ca-3159-47b3-bb19-fb85e8acb098">
+    <name>BeginDate</name>
+    <synonym>
+      <key>en</key>
+      <value>Begin date</value>
+    </synonym>
+    <type>
+      <types>Date</types>
+      <dateQualifiers>
+        <dateFractions>Date</dateFractions>
+      </dateQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="1739d44f-0f31-4710-b5fe-fb9d991d1411">
+    <name>EndDate</name>
+    <synonym>
+      <key>en</key>
+      <value>End date</value>
+    </synonym>
+    <type>
+      <types>Date</types>
+      <dateQualifiers>
+        <dateFractions>Date</dateFractions>
+      </dateQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="9f2f084b-f226-4c00-b341-aa1a93636bc2">
+    <name>Company</name>
+    <synonym>
+      <key>en</key>
+      <value>Company</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Companies</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillFromFillingValue>true</fillFromFillingValue>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="b4950f6d-cca2-4723-8d0c-d409695e6ab8">
+    <name>PartnerBankAccount</name>
+    <synonym>
+      <key>en</key>
+      <value>Partner bank account</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.PartnersBankAccounts</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <forms uuid="0f7d7d42-e7fd-4d8e-b2fc-c15596f88d13">
+    <name>ItemForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Item form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="3f943910-7cac-4461-bb70-c7fb99a66629">
+    <name>ListForm</name>
+    <synonym>
+      <key>en</key>
+      <value>List form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="ebd25ed4-769d-42b7-a38d-f05e4d9b9383">
+    <name>ChoiceForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Choice form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+</mdclass:Catalog>

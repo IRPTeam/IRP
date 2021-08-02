@@ -3157,7 +3157,7 @@ Scenario: _0154116 check filling in and refilling Cash expence
 		And I select current line in "List" table
 	* Check the Net amount and VAT calculation when filling in the Total amount
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
-		And I click choice button of the attribute named "PaymentListBusinessUnit" in "PaymentList" table
+		And I click choice button of the attribute named "PaymentListProfitLossCenter" in "PaymentList" table
 		And I go to line in "List" table
 			| 'Description'        |
 			| 'Accountants office' |
@@ -3177,7 +3177,7 @@ Scenario: _0154116 check filling in and refilling Cash expence
 		And I move to "Tax list" tab
 		And I activate "Manual amount" field in "TaxTree" table
 		And I go to line in "TaxTree" table
-			| 'Business unit'     |
+			| 'Profit loss center'     |
 			| 'Accountants office' |
 		And I select current line in "TaxTree" table
 		And I input "33,55" text in "Manual amount" field of "TaxTree" table
@@ -3189,7 +3189,7 @@ Scenario: _0154116 check filling in and refilling Cash expence
 	* Check the Net amount recalculation when Total amount changes and with changes in taxes
 		And I input "220,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 		And "PaymentList" table contains lines
-			| 'Net amount' | 'Business unit'      | 'Expense type'             | 'Currency' | 'VAT' | 'Tax amount' | 'Total amount' |
+			| 'Net amount' | 'Profit loss center'      | 'Expense type'             | 'Currency' | 'VAT' | 'Tax amount' | 'Total amount' |
 			| '186,45'     | 'Accountants office' | 'Telephone communications' | 'TRY'      | '18%' | '33,55'      | '220,00'       |
 	* Check the Total amount recalculation when Net amount changes and with changes in taxes
 		And I input "187,00" text in the field named "PaymentListNetAmount" of "PaymentList" table
@@ -3202,7 +3202,7 @@ Scenario: _0154116 check filling in and refilling Cash expence
 			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,1712'            | '37,76'  | '1'            |
 	* Add one more line
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
-		And I click choice button of the attribute named "PaymentListBusinessUnit" in "PaymentList" table
+		And I click choice button of the attribute named "PaymentListProfitLossCenter" in "PaymentList" table
 		And I go to line in "List" table
 			| 'Description' |
 			| 'Front office'    |
@@ -3223,20 +3223,20 @@ Scenario: _0154116 check filling in and refilling Cash expence
 	* Manual tax correction by line
 		And I move to "Tax list" tab
 		And I go to line in "TaxTree" table
-			| 'Amount' | 'Business unit' | 'Currency' |
+			| 'Amount' | 'Profit loss center' | 'Currency' |
 			| '36,00'  | 'Front office'  | 'TRY'      |
 		And I select current line in "TaxTree" table
 		And I input "38,00" text in "Manual amount" field of "TaxTree" table
 		And I finish line editing in "TaxTree" table
 		And I move to "Payment list" tab
 		And "PaymentList" table contains lines
-			| 'Net amount' | 'Business unit'      | 'Expense type'             | 'Currency' | 'VAT' | 'Tax amount' | 'Total amount' |
+			| 'Net amount' | 'Profit loss center'      | 'Expense type'             | 'Currency' | 'VAT' | 'Tax amount' | 'Total amount' |
 			| '187,00'     | 'Accountants office' | 'Telephone communications' | 'TRY'      | '18%' | '33,55'      | '220,55'       |
 			| '200,00'     | 'Front office'       | 'Software'                 | 'TRY'      | '18%' | '38,00'      | '238,00'       |
 	* Delete a line and check the total amount conversion
 		And I activate field named "PaymentListCurrency" in "PaymentList" table
 		And I go to line in "PaymentList" table
-			| 'Business unit'      | 'Currency' | 'Expense type'             | 'Net amount' | 'Tax amount' | 'Total amount' | 'VAT' |
+			| 'Profit loss center'      | 'Currency' | 'Expense type'             | 'Net amount' | 'Tax amount' | 'Total amount' | 'VAT' |
 			| 'Accountants office' | 'TRY'      | 'Telephone communications' | '187,00'     | '33,55'      | '220,55'       | '18%' |
 		And in the table "PaymentList" I click the button named "PaymentListContextMenuDelete"
 		And the editing text of form attribute named "PaymentListTotalNetAmount" became equal to "200,00"
@@ -3251,7 +3251,7 @@ Scenario: _0154116 check filling in and refilling Cash expence
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button
 		And "PaymentList" table contains lines
-			| 'Net amount' | 'Business unit' | 'Expense type' | 'Currency' | 'VAT' | 'Tax amount' | 'Total amount' |
+			| 'Net amount' | 'Profit loss center' | 'Expense type' | 'Currency' | 'VAT' | 'Tax amount' | 'Total amount' |
 			| '200,00'     | 'Front office'  | 'Software'     | 'USD'      | '18%' | '38,00'      | '238,00'       |
 	* Check that the Account does not change when you click No in the message window
 		And I click Select button of "Account" field
@@ -3262,7 +3262,7 @@ Scenario: _0154116 check filling in and refilling Cash expence
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button
 		And "PaymentList" table does not contain lines
-			| 'Net amount' | 'Business unit' | 'Expense type' | 'Currency' | 'VAT' | 'Tax amount' | 'Total amount' |
+			| 'Net amount' | 'Profit loss center' | 'Expense type' | 'Currency' | 'VAT' | 'Tax amount' | 'Total amount' |
 			| '200,00'     | 'Front office'  | 'Software'     | 'USD'      | '18%' | '38,00'      | '238,00'       |
 	* Change the company (without taxes) and check to delete the VAT column
 		And I click Select button of "Company" field
@@ -3296,7 +3296,7 @@ Scenario: _0154116 check filling in and refilling Cash expence
 			| 'Cash desk №2' |
 		And I select current line in "List" table
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
-		And I click choice button of the attribute named "PaymentListBusinessUnit" in "PaymentList" table
+		And I click choice button of the attribute named "PaymentListProfitLossCenter" in "PaymentList" table
 		And I go to line in "List" table
 			| 'Description'        |
 			| 'Accountants office' |
@@ -3315,11 +3315,11 @@ Scenario: _0154116 check filling in and refilling Cash expence
 		And I select "0%" exact value from "VAT" drop-down list in "PaymentList" table
 		And I input "100,00" text in the field named "PaymentListNetAmount" of "PaymentList" table
 		And "PaymentList" table contains lines
-			| 'Net amount' | 'Business unit'      | 'Expense type' | 'Currency' | 'VAT' | 'Tax amount' | 'Total amount' |
+			| 'Net amount' | 'Profit loss center'      | 'Expense type' | 'Currency' | 'VAT' | 'Tax amount' | 'Total amount' |
 			| '200,00'     | 'Front office'       | 'Software'     | 'TRY'      | '18%' | '36,00'      | '236,00'       |
 			| '100,00'     | 'Accountants office' | 'Software'     | 'USD'      | '0%'  | ''           | '100,00'       |
 		And I go to line in "PaymentList" table
-			| 'Net amount' | 'Business unit'      | 'Expense type' | 'Currency' | 'VAT' | 'Tax amount' | 'Total amount' |
+			| 'Net amount' | 'Profit loss center'      | 'Expense type' | 'Currency' | 'VAT' | 'Tax amount' | 'Total amount' |
 			| '100,00'     | 'Accountants office' | 'Software'     | 'USD'      | '0%'  | ''           | '100,00'       |
 	* Check the addition of a line to the form by currency
 		And I go to line in "PaymentListCurrencies" table
@@ -3327,7 +3327,7 @@ Scenario: _0154116 check filling in and refilling Cash expence
 		| 'Local currency'     | 'Legal'     | 'USD'           | 'TRY'      | '5,6275'             | '562,75' | '1'            |
 	* Change of currency on the first line and check of form on currencies
 		And I go to line in "PaymentList" table
-			| 'Net amount' | 'Business unit'      | 'Expense type' | 'Currency' | 'VAT' | 'Tax amount' | 'Total amount' |
+			| 'Net amount' | 'Profit loss center'      | 'Expense type' | 'Currency' | 'VAT' | 'Tax amount' | 'Total amount' |
 			| '200,00'     | 'Front office'       | 'Software'     | 'TRY'      | '18%' | '36,00'      | '236,00'       |
 		And I click choice button of the attribute named "PaymentListCurrency" in "PaymentList" table
 		And I go to line in "List" table
@@ -3335,22 +3335,22 @@ Scenario: _0154116 check filling in and refilling Cash expence
 			| 'USD'  | 'American dollar' |
 		And I select current line in "List" table
 		And I go to line in "PaymentList" table
-			| 'Net amount' | 'Business unit'      | 'Expense type' | 'Currency' | 'VAT' | 'Tax amount' | 'Total amount' |
+			| 'Net amount' | 'Profit loss center'      | 'Expense type' | 'Currency' | 'VAT' | 'Tax amount' | 'Total amount' |
 			| '200,00'     | 'Front office'       | 'Software'     | 'USD'      | '18%' | '36,00'      | '236,00'       |
 		And I go to line in "PaymentListCurrencies" table
 			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount'   | 'Multiplicity' |
 			| 'Local currency'     | 'Legal'     | 'USD'           | 'TRY'      | '5,6275'            | '1 328,09' | '1'            |
 	* Manual correction of tax rate and check of tax calculations
 		And I go to line in "PaymentList" table
-			| 'Business unit' | 'Currency' | 'Expense type' | 'Net amount' | 'Tax amount' | 'Total amount' | 'VAT' |
+			| 'Profit loss center' | 'Currency' | 'Expense type' | 'Net amount' | 'Tax amount' | 'Total amount' | 'VAT' |
 			| 'Front office'  | 'USD'      | 'Software'     | '200,00'     | '36,00'      | '236,00'       | '18%' |
 		And I select current line in "PaymentList" table
 		And I select "8%" exact value from "VAT" drop-down list in "PaymentList" table
 		And "PaymentList" table contains lines
-			| 'Net amount' | 'Business unit' | 'Expense type' | 'Currency' | 'VAT' | 'Tax amount' | 'Total amount' |
+			| 'Net amount' | 'Profit loss center' | 'Expense type' | 'Currency' | 'VAT' | 'Tax amount' | 'Total amount' |
 			| '200,00'     | 'Front office'  | 'Software'     | 'USD'      | '8%'  | '16,00'      | '216,00'       |
 		And "TaxTree" table contains lines
-			| 'Tax' | 'Currency' | 'Business unit' | 'Amount' | 'Expense type' | 'Tax rate' | 'Manual amount' |
+			| 'Tax' | 'Currency' | 'Profit loss center' | 'Amount' | 'Expense type' | 'Tax rate' | 'Manual amount' |
 			| 'VAT' | 'USD'      | ''              | '16,00'  | ''             | ''         | '16,00'         |
 			| 'VAT' | 'USD'      | 'Front office'  | '16,00'  | 'Software'     | '8%'       | '16,00'         |
 	And I close all client application windows
@@ -3394,7 +3394,7 @@ Scenario: _0154117 check filling in and refilling Cash revenue
 		And I select current line in "List" table
 	* Check the Net amount and VAT calculation when filling in the Total amount
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
-		And I click choice button of the attribute named "PaymentListBusinessUnit" in "PaymentList" table
+		And I click choice button of the attribute named "PaymentListProfitLossCenter" in "PaymentList" table
 		And I go to line in "List" table
 			| 'Description'        |
 			| 'Accountants office' |
@@ -3414,7 +3414,7 @@ Scenario: _0154117 check filling in and refilling Cash revenue
 		And I move to "Tax list" tab
 		And I activate "Manual amount" field in "TaxTree" table
 		And I go to line in "TaxTree" table
-		| 'Business unit'     |
+		| 'Profit loss center'     |
 		| 'Accountants office' |
 		And I select current line in "TaxTree" table
 		And I input "33,55" text in "Manual amount" field of "TaxTree" table
@@ -3426,7 +3426,7 @@ Scenario: _0154117 check filling in and refilling Cash revenue
 	* Check the Net amount recalculation when Total amount changes and with changes in taxes
 		And I input "220,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 		And "PaymentList" table contains lines
-		| 'Net amount' | 'Business unit'      | 'Revenue type'             | 'Currency' | 'VAT' | 'Tax amount' | 'Total amount' |
+		| 'Net amount' | 'Profit loss center'      | 'Revenue type'             | 'Currency' | 'VAT' | 'Tax amount' | 'Total amount' |
 		| '186,45'     | 'Accountants office' | 'Telephone communications' | 'TRY'      | '18%' | '33,55'      | '220,00'       |
 	* Check the Total amount recalculation when Net amount changes and with changes in taxes
 		And I input "187,00" text in the field named "PaymentListNetAmount" of "PaymentList" table
@@ -3439,7 +3439,7 @@ Scenario: _0154117 check filling in and refilling Cash revenue
 		| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,1712'            | '37,76'  | '1'            |
 	* Add one more line
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
-		And I click choice button of the attribute named "PaymentListBusinessUnit" in "PaymentList" table
+		And I click choice button of the attribute named "PaymentListProfitLossCenter" in "PaymentList" table
 		And I go to line in "List" table
 			| 'Description' |
 			| 'Front office'    |
@@ -3460,20 +3460,20 @@ Scenario: _0154117 check filling in and refilling Cash revenue
 	* Manual tax correction by line
 		And I move to "Tax list" tab
 		And I go to line in "TaxTree" table
-			| 'Amount' | 'Business unit' | 'Currency' |
+			| 'Amount' | 'Profit loss center' | 'Currency' |
 			| '36,00'  | 'Front office'  | 'TRY'      |
 		And I select current line in "TaxTree" table
 		And I input "38,00" text in "Manual amount" field of "TaxTree" table
 		And I finish line editing in "TaxTree" table
 		And I move to "Payment list" tab
 		And "PaymentList" table contains lines
-			| 'Net amount' | 'Business unit'      | 'Revenue type'             | 'Currency' | 'VAT' | 'Tax amount' | 'Total amount' |
+			| 'Net amount' | 'Profit loss center'      | 'Revenue type'             | 'Currency' | 'VAT' | 'Tax amount' | 'Total amount' |
 			| '187,00'     | 'Accountants office' | 'Telephone communications' | 'TRY'      | '18%' | '33,55'      | '220,55'       |
 			| '200,00'     | 'Front office'       | 'Software'                 | 'TRY'      | '18%' | '38,00'      | '238,00'       |
 	* Delete a line and check the total amount conversion
 		And I activate field named "PaymentListCurrency" in "PaymentList" table
 		And I go to line in "PaymentList" table
-			| 'Business unit'      | 'Currency' | 'Revenue type'             | 'Net amount' | 'Tax amount' | 'Total amount' | 'VAT' |
+			| 'Profit loss center'      | 'Currency' | 'Revenue type'             | 'Net amount' | 'Tax amount' | 'Total amount' | 'VAT' |
 			| 'Accountants office' | 'TRY'      | 'Telephone communications' | '187,00'     | '33,55'      | '220,55'       | '18%' |
 		And in the table "PaymentList" I click the button named "PaymentListContextMenuDelete"
 		And the editing text of form attribute named "PaymentListTotalNetAmount" became equal to "200,00"
@@ -3488,7 +3488,7 @@ Scenario: _0154117 check filling in and refilling Cash revenue
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button
 		And "PaymentList" table contains lines
-			| 'Net amount' | 'Business unit' | 'Revenue type' | 'Currency' | 'VAT' | 'Tax amount' | 'Total amount' |
+			| 'Net amount' | 'Profit loss center' | 'Revenue type' | 'Currency' | 'VAT' | 'Tax amount' | 'Total amount' |
 			| '200,00'     | 'Front office'  | 'Software'     | 'USD'      | '18%' | '38,00'      | '238,00'       |
 	* Check that the Account does not change when you click in the No message window
 		And I click Select button of "Account" field
@@ -3499,7 +3499,7 @@ Scenario: _0154117 check filling in and refilling Cash revenue
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button
 		And "PaymentList" table does not contain lines
-			| 'Net amount' | 'Business unit' | 'Revenue type' | 'Currency' | 'VAT' | 'Tax amount' | 'Total amount' |
+			| 'Net amount' | 'Profit loss center' | 'Revenue type' | 'Currency' | 'VAT' | 'Tax amount' | 'Total amount' |
 			| '200,00'     | 'Front office'  | 'Software'     | 'USD'      | '18%' | '38,00'      | '238,00'       |
 	* Change the company (without taxes) and check to delete the VAT column
 		And I click Select button of "Company" field

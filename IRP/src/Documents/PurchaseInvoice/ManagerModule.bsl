@@ -1,3 +1,11 @@
+#Region PrintForm
+
+Function GetPrintForm(Ref, PrintFormName, AddInfo = Undefined) Export
+	Return Undefined;
+EndFunction
+
+#EndRegion
+
 #Region Posting
 
 Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
@@ -201,7 +209,8 @@ Function ItemList()
 	|	PurchaseInvoiceItemList.Ref.Company AS Company,
 	|	PurchaseInvoiceItemList.Ref.Currency,
 	|	PurchaseInvoiceSpecialOffers.Offer AS SpecialOffer,
-	|	PurchaseInvoiceSpecialOffers.Amount AS OffersAmount
+	|	PurchaseInvoiceSpecialOffers.Amount AS OffersAmount,
+	|	PurchaseInvoiceSpecialOffers.Ref.Branch AS Branch
 	|INTO OffersInfo
 	|FROM
 	|	Document.PurchaseInvoice.ItemList AS PurchaseInvoiceItemList
@@ -251,13 +260,15 @@ Function ItemList()
 	|	PurchaseInvoiceItemList.Ref.Date AS Period,
 	|	TableRowIDInfo.RowID AS RowKey,
 	|	PurchaseInvoiceItemList.AdditionalAnalytic AS AdditionalAnalytic,
-	|	PurchaseInvoiceItemList.BusinessUnit AS BusinessUnit,
+	|	PurchaseInvoiceItemList.ProfitLossCenter AS ProfitLossCenter,
 	|	PurchaseInvoiceItemList.ExpenseType AS ExpenseType,
 	|	PurchaseInvoiceItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS IsService,
 	|	PurchaseInvoiceItemList.DeliveryDate AS DeliveryDate,
 	|	PurchaseInvoiceItemList.NetAmount AS NetAmount,
 	|	PurchaseInvoiceItemList.Ref.IgnoreAdvances AS IgnoreAdvances,
-	|	PurchaseInvoiceItemList.Key
+	|	PurchaseInvoiceItemList.Key,
+	|	PurchaseInvoiceItemList.Ref.Branch AS Branch,
+	|	PurchaseInvoiceItemList.Ref.LegalNameContract AS LegalNameContract
 	|INTO ItemList
 	|FROM
 	|	Document.PurchaseInvoice.ItemList AS PurchaseInvoiceItemList
@@ -292,7 +303,8 @@ Function ItemList()
 	|			THEN PurchaseInvoiceTaxList.Amount
 	|		ELSE PurchaseInvoiceTaxList.ManualAmount
 	|	END AS TaxAmount,
-	|	PurchaseInvoiceItemList.NetAmount AS TaxableAmount
+	|	PurchaseInvoiceItemList.NetAmount AS TaxableAmount,
+	|	PurchaseInvoiceItemList.Ref.Branch AS Branch
 	|INTO Taxes
 	|FROM
 	|	Document.PurchaseInvoice.ItemList AS PurchaseInvoiceItemList
@@ -308,6 +320,7 @@ Function SerialLotNumbers()
 		"SELECT
 		|	SerialLotNumbers.Ref.Date AS Period,
 		|	SerialLotNumbers.Ref.Company AS Company,
+		|	SerialLotNumbers.Ref.Branch AS Branch,
 		|	SerialLotNumbers.Key,
 		|	SerialLotNumbers.SerialLotNumber,
 		|	SerialLotNumbers.Quantity,
@@ -409,6 +422,7 @@ Function R1021B_VendorsTransactions()
 		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
 		|	ItemList.Period,
 		|	ItemList.Company,
+		|	ItemList.Branch,
 		|	ItemList.Currency,
 		|	ItemList.LegalName,
 		|	ItemList.Partner,
@@ -423,6 +437,7 @@ Function R1021B_VendorsTransactions()
 		|	ItemList.Agreement,
 		|	ItemList.BasisDocument,
 		|	ItemList.Company,
+		|	ItemList.Branch,
 		|	ItemList.Currency,
 		|	ItemList.LegalName,
 		|	ItemList.Partner,
@@ -435,6 +450,7 @@ Function R1021B_VendorsTransactions()
 		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
 		|	OffsetOfAdvances.Period,
 		|	OffsetOfAdvances.Company,
+		|	OffsetOfAdvances.Branch,
 		|	OffsetOfAdvances.Currency,
 		|	OffsetOfAdvances.LegalName,
 		|	OffsetOfAdvances.Partner,
@@ -454,6 +470,7 @@ Function R5012B_VendorsAging()
 		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
 		|	PaymentTerms.Ref.Date AS Period,
 		|	PaymentTerms.Ref.Company AS Company,
+		|	PaymentTerms.Ref.Branch AS Branch,
 		|	PaymentTerms.Ref.Currency AS Currency,
 		|	PaymentTerms.Ref.Agreement AS Agreement,
 		|	PaymentTerms.Ref.Partner AS Partner,
@@ -471,6 +488,7 @@ Function R5012B_VendorsAging()
 		|	PaymentTerms.Ref,
 		|	PaymentTerms.Ref.Agreement,
 		|	PaymentTerms.Ref.Company,
+		|	PaymentTerms.Ref.Branch,
 		|	PaymentTerms.Ref.Currency,
 		|	PaymentTerms.Ref.Date,
 		|	PaymentTerms.Ref.Partner,
@@ -482,6 +500,7 @@ Function R5012B_VendorsAging()
 		|	VALUE(AccumulationRecordType.Expense),
 		|	OffsetOfAging.Period,
 		|	OffsetOfAging.Company,
+		|	OffsetOfAging.Branch,
 		|	OffsetOfAging.Currency,
 		|	OffsetOfAging.Agreement,
 		|	OffsetOfAging.Partner,
@@ -500,6 +519,7 @@ Function T2011S_PartnerTransactions()
 		"SELECT
 		|	ItemList.Period,
 		|	ItemList.Company,
+		|	ItemList.Branch,
 		|	ItemList.Currency,
 		|	ItemList.LegalName,
 		|	ItemList.Partner,
@@ -517,6 +537,7 @@ Function T2011S_PartnerTransactions()
 		|	ItemList.Agreement,
 		|	ItemList.BasisDocument,
 		|	ItemList.Company,
+		|	ItemList.Branch,
 		|	ItemList.Currency,
 		|	ItemList.Key,
 		|	ItemList.LegalName,
@@ -531,6 +552,7 @@ Function R1031B_ReceiptInvoicing()
 		|	ItemList.Invoice AS Basis,
 		|	ItemList.Quantity AS Quantity,
 		|	ItemList.Company,
+		|	ItemList.Branch,
 		|	ItemList.Period,
 		|	ItemList.ItemKey,
 		|	ItemList.Store
@@ -549,6 +571,7 @@ Function R1031B_ReceiptInvoicing()
 		|	GoodsReceipts.GoodsReceipt,
 		|	GoodsReceipts.Quantity,
 		|	ItemList.Company,
+		|	ItemList.Branch,
 		|	ItemList.Period,
 		|	ItemList.ItemKey,
 		|	ItemList.Store
@@ -740,7 +763,9 @@ Function R5010B_ReconciliationStatement()
 		"SELECT
 		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
 		|	ItemList.Company AS Company,
+		|	ItemList.Branch AS Branch,
 		|	ItemList.LegalName AS LegalName,
+		|	ItemList.LegalNameContract AS LegalNameContract,
 		|	ItemList.Currency AS Currency,
 		|	SUM(ItemList.Amount) AS Amount,
 		|	ItemList.Period
@@ -749,7 +774,9 @@ Function R5010B_ReconciliationStatement()
 		|	ItemList AS ItemList
 		|GROUP BY
 		|	ItemList.Company,
+		|	ItemList.Branch,
 		|	ItemList.LegalName,
+		|	ItemList.LegalNameContract,
 		|	ItemList.Currency,
 		|	ItemList.Period";
 EndFunction
@@ -794,6 +821,7 @@ Function R1022B_VendorsPaymentPlanning()
 		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
 		|	PurchaseInvoicePaymentTerms.Ref.Date AS Period,
 		|	PurchaseInvoicePaymentTerms.Ref.Company AS Company,
+		|	PurchaseInvoicePaymentTerms.Ref.Branch AS Branch,
 		|	PurchaseInvoicePaymentTerms.Ref AS Basis,
 		|	PurchaseInvoicePaymentTerms.Ref.LegalName AS LegalName,
 		|	PurchaseInvoicePaymentTerms.Ref.Partner AS Partner,
@@ -808,6 +836,7 @@ Function R1022B_VendorsPaymentPlanning()
 		|GROUP BY
 		|	PurchaseInvoicePaymentTerms.Ref.Date,
 		|	PurchaseInvoicePaymentTerms.Ref.Company,
+		|	PurchaseInvoicePaymentTerms.Ref.Branch,
 		|	PurchaseInvoicePaymentTerms.Ref,
 		|	PurchaseInvoicePaymentTerms.Ref.LegalName,
 		|	PurchaseInvoicePaymentTerms.Ref.Partner,

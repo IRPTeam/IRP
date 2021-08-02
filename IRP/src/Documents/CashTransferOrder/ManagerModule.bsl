@@ -1,3 +1,11 @@
+#Region PrintForm
+
+Function GetPrintForm(Ref, PrintFormName, AddInfo = Undefined) Export
+	Return Undefined;
+EndFunction
+
+#EndRegion
+
 #Region Posting
 
 Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
@@ -96,6 +104,7 @@ Function MoneySender()
 	Return
 		"SELECT
 		|	CashTransferOrder.Company AS Company,
+		|	CashTransferOrder.Ref.Branch AS Branch,
 		|	CashTransferOrder.Ref AS Ref,
 		|	CashTransferOrder.Sender AS Account,
 		|	CashTransferOrder.SendAmount AS Amount,
@@ -116,6 +125,7 @@ Function MoneyReceiver()
 	Return
 		"SELECT
 		|	CashTransferOrder.Company AS Company,
+		|	CashTransferOrder.Ref.Branch AS Branch,
 		|	CashTransferOrder.Ref AS Ref,
 		|	CashTransferOrder.Receiver AS Account,
 		|	CashTransferOrder.ReceiveAmount AS Amount,
@@ -138,6 +148,7 @@ Function R3035T_CashPlanning()
 		|	MoneySender.Period,
 		|	MoneySender.SendPeriod AS PlanningPeriod,
 		|	MoneySender.Company,
+		|	MoneySender.Branch,
 		|	MoneySender.Account,
 		|	MoneySender.Amount,
 		|	MoneySender.Currency,
@@ -155,6 +166,7 @@ Function R3035T_CashPlanning()
 		|	MoneyReceiver.Period,
 		|	MoneyReceiver.ReceivePeriod,
 		|	MoneyReceiver.Company,
+		|	MoneyReceiver.Branch,
 		|	MoneyReceiver.Account,
 		|	MoneyReceiver.Amount,
 		|	MoneyReceiver.Currency,

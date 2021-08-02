@@ -76,7 +76,6 @@ Procedure AgreementStartChoice(Object, Form, Item, ChoiceData, StandardProcessin
 	OpenSettings.FormParameters.Insert("Partner", Object.Partner);
 	OpenSettings.FormParameters.Insert("IncludeFilterByPartner", True);
 	OpenSettings.FormParameters.Insert("IncludePartnerSegments", True);
-	OpenSettings.FormParameters.Insert("IncludeFilterByEndOfUseDate", True);
 	
 	OpenSettings.FillingData = New Structure();
 	OpenSettings.FillingData.Insert("Partner", Object.Partner);
@@ -96,10 +95,8 @@ Procedure AgreementTextChange(Object, Form, Item, Text, StandardProcessing) Expo
 																	PredefinedValue("Enum.AgreementKinds.Standard"), 
 																	ComparisonType.NotEqual));
 	AdditionalParameters = New Structure();
-	AdditionalParameters.Insert("IncludeFilterByEndOfUseDate", True);
 	AdditionalParameters.Insert("IncludeFilterByPartner", True);
 	AdditionalParameters.Insert("IncludePartnerSegments", True);
-	AdditionalParameters.Insert("EndOfUseDate", Object.Date);
 	AdditionalParameters.Insert("Partner", Object.Partner);
 	DocumentsClient.AgreementEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters, AdditionalParameters);
 EndProcedure

@@ -139,11 +139,15 @@ EndProcedure
 
 Procedure SendAmountOnChange(Object, Form, Item) Export
 	CommonFunctionsClientServer.SetFormItemModifiedByUser(Form, Item.Name);
+	FillReceiveAmountBySendAmount(Object, Form);  
+EndProcedure
+
+Procedure FillReceiveAmountBySendAmount(Object, Form)
 	If Not CommonFunctionsClientServer.IsFormItemModifiedByUser(Form, "ReceiveAmount")
 		And ValueIsFilled(Object.SendCurrency) = ValueIsFilled(Object.ReceiveCurrency)
 		And Object.SendCurrency = Object.ReceiveCurrency Then
 		Object.ReceiveAmount = Object.SendAmount;
-	EndIf;  
+	EndIf;
 EndProcedure
 
 #EndRegion
@@ -217,6 +221,7 @@ EndProcedure
 Procedure ReceiverOnChange(Object, Form, Item) Export
 	CommonFunctionsClientServer.SetFormItemModifiedByUser(Form, Item.Name);
 	SetReceiverCurrency(Object, Form);
+	FillReceiveAmountBySendAmount(Object, Form);
 	SetVisibilityAvailability(Object, Form);
 EndProcedure
 

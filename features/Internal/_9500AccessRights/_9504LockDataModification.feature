@@ -110,6 +110,7 @@ Scenario: 950400 preparation
 		And I change checkbox "Do you want to update filled prices?"
 		And I click "OK" button	
 		And I click "Post and close" button
+		And I close all client application windows
 	* Load SO and change it date
 		When Create document SalesOrder objects
 	* Load PO
@@ -483,6 +484,10 @@ Scenario: 9504062 create rules for documents (number of days from the current da
 			| 'Number' |
 			| '1'    |
 		And I select current line in "List" table
+		And I activate "Q" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "9,000" text in "Q" field of "ItemList" table
+		And I finish line editing in "ItemList" table		
 		And I click "Post and close" button
 		Then user message window does not contain messages
 				

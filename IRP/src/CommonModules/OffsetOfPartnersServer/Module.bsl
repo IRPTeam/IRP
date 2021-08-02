@@ -33,6 +33,7 @@ Procedure Customers_DueAsAdvance(Parameters) Export
 	"SELECT
 	|	Transactions.Period,
 	|	Transactions.Company,
+	|	Transactions.Branch,
 	|	Transactions.Currency,
 	|	Transactions.Partner,
 	|	Transactions.LegalName,
@@ -49,6 +50,7 @@ Procedure Customers_DueAsAdvance(Parameters) Export
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
 	|	TransactionsBalance.Company,
+	|	TransactionsBalance.Branch,
 	|	TransactionsBalance.Currency,
 	|	TransactionsBalance.LegalName,
 	|	TransactionsBalance.Partner,
@@ -61,10 +63,11 @@ Procedure Customers_DueAsAdvance(Parameters) Export
 	|	Transactions.Key
 	|INTO TransactionsBalance
 	|FROM
-	|	AccumulationRegister.R2021B_CustomersTransactions.Balance(&Period, (Company, Currency, LegalName, Partner, Agreement,
+	|	AccumulationRegister.R2021B_CustomersTransactions.Balance(&Period, (Company, Branch, Currency, LegalName, Partner, Agreement,
 	|		Basis, CurrencyMovementType) IN
 	|		(SELECT
 	|			Transactions.Company,
+	|			Transactions.Branch,
 	|			Transactions.Currency,
 	|			Transactions.LegalName,
 	|			Transactions.Partner,
@@ -75,6 +78,7 @@ Procedure Customers_DueAsAdvance(Parameters) Export
 	|			Transactions AS Transactions)) AS TransactionsBalance
 	|		INNER JOIN Transactions AS Transactions
 	|		ON TransactionsBalance.Company = Transactions.Company
+	|		AND TransactionsBalance.Branch = Transactions.Branch
 	|		AND TransactionsBalance.Partner = Transactions.Partner
 	|		AND TransactionsBalance.LegalName = Transactions.LegalName
 	|		AND TransactionsBalance.Agreement = Transactions.Agreement
@@ -82,6 +86,7 @@ Procedure Customers_DueAsAdvance(Parameters) Export
 	|		AND TransactionsBalance.Basis = Transactions.TransactionDocument
 	|GROUP BY
 	|	TransactionsBalance.Company,
+	|	TransactionsBalance.Branch,
 	|	TransactionsBalance.Currency,
 	|	TransactionsBalance.LegalName,
 	|	TransactionsBalance.Partner,
@@ -96,6 +101,7 @@ Procedure Customers_DueAsAdvance(Parameters) Export
 	|SELECT
 	|	TransactionsBalance.Period,
 	|	TransactionsBalance.Company,
+	|	TransactionsBalance.Branch,
 	|	TransactionsBalance.Partner,
 	|	TransactionsBalance.LegalName,
 	|	TransactionsBalance.Agreement,
@@ -178,6 +184,7 @@ Procedure Customers_OnTransaction(Parameters) Export
 	"SELECT
 	|	Aging.Period,
 	|	Aging.Company,
+	|	Aging.Branch,
 	|	Aging.Partner,
 	|	Aging.Agreement,
 	|	Aging.Invoice,
@@ -191,6 +198,7 @@ Procedure Customers_OnTransaction(Parameters) Export
 	|	Aging AS Aging
 	|		INNER JOIN OffsetOfAdvanceFromCustomers AS OffsetOfAdvanceFromCustomers
 	|		ON Aging.Company = OffsetOfAdvanceFromCustomers.Company
+	|		AND Aging.Branch = OffsetOfAdvanceFromCustomers.Branch
 	|		AND Aging.Partner = OffsetOfAdvanceFromCustomers.Partner
 	|		AND Aging.Agreement = OffsetOfAdvanceFromCustomers.Agreement
 	|		AND Aging.Invoice = OffsetOfAdvanceFromCustomers.TransactionDocument
@@ -203,7 +211,7 @@ Procedure Customers_OnTransaction(Parameters) Export
 	OffsetOfAging_Groupped = OffsetOfAging.Copy();
 	
 	OffsetOfAging_Groupped.GroupBy("AdvancesDocument, Amount_OffsetOfAdvance");
-	OffsetOfAging.GroupBy("Period, Company, Partner, Agreement, Invoice, PaymentDate, Currency, DueAmount, Amount");
+	OffsetOfAging.GroupBy("Period, Company, Branch, Partner, Agreement, Invoice, PaymentDate, Currency, DueAmount, Amount");
 	
 	For Each Row_Advance In OffsetOfAging_Groupped Do
 		NeedWriteOff = Row_Advance.Amount_OffsetOfAdvance;
@@ -243,6 +251,7 @@ Procedure Customers_OnTransaction_Unposting(Parameters) Export
 	"SELECT
 	|	Table.Period,
 	|	Table.Company,
+	|	Table.Branch,
 	|	Table.Currency,
 	|	Table.Partner,
 	|	Table.LegalName,
@@ -261,6 +270,7 @@ Procedure Customers_OnTransaction_Unposting(Parameters) Export
 	|SELECT
 	|	Table.Period,
 	|	Table.Company,
+	|	Table.Branch,
 	|	Table.Currency,
 	|	Table.Partner,
 	|	Table.Invoice,
@@ -310,6 +320,7 @@ Procedure Vendors_DueAsAdvance(Parameters) Export
 	"SELECT
 	|	Transactions.Period,
 	|	Transactions.Company,
+	|	Transactions.Branch,
 	|	Transactions.Currency,
 	|	Transactions.Partner,
 	|	Transactions.LegalName,
@@ -326,6 +337,7 @@ Procedure Vendors_DueAsAdvance(Parameters) Export
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
 	|	TransactionsBalance.Company,
+	|	TransactionsBalance.Branch,
 	|	TransactionsBalance.Currency,
 	|	TransactionsBalance.LegalName,
 	|	TransactionsBalance.Partner,
@@ -338,10 +350,11 @@ Procedure Vendors_DueAsAdvance(Parameters) Export
 	|	Transactions.Key
 	|INTO TransactionsBalance
 	|FROM
-	|	AccumulationRegister.R1021B_VendorsTransactions.Balance(&Period, (Company, Currency, LegalName, Partner, Agreement,
+	|	AccumulationRegister.R1021B_VendorsTransactions.Balance(&Period, (Company, Branch, Currency, LegalName, Partner, Agreement,
 	|		Basis, CurrencyMovementType) IN
 	|		(SELECT
 	|			Transactions.Company,
+	|			Transactions.Branch,
 	|			Transactions.Currency,
 	|			Transactions.LegalName,
 	|			Transactions.Partner,
@@ -352,6 +365,7 @@ Procedure Vendors_DueAsAdvance(Parameters) Export
 	|			Transactions AS Transactions)) AS TransactionsBalance
 	|		INNER JOIN Transactions AS Transactions
 	|		ON TransactionsBalance.Company = Transactions.Company
+	|		AND TransactionsBalance.Branch = Transactions.Branch
 	|		AND TransactionsBalance.Partner = Transactions.Partner
 	|		AND TransactionsBalance.LegalName = Transactions.LegalName
 	|		AND TransactionsBalance.Agreement = Transactions.Agreement
@@ -359,6 +373,7 @@ Procedure Vendors_DueAsAdvance(Parameters) Export
 	|		AND TransactionsBalance.Basis = Transactions.TransactionDocument
 	|GROUP BY
 	|	TransactionsBalance.Company,
+	|	TransactionsBalance.Branch,
 	|	TransactionsBalance.Currency,
 	|	TransactionsBalance.LegalName,
 	|	TransactionsBalance.Partner,
@@ -373,6 +388,7 @@ Procedure Vendors_DueAsAdvance(Parameters) Export
 	|SELECT
 	|	TransactionsBalance.Period,
 	|	TransactionsBalance.Company,
+	|	TransactionsBalance.Branch,
 	|	TransactionsBalance.Partner,
 	|	TransactionsBalance.LegalName,
 	|	TransactionsBalance.Agreement,
@@ -434,6 +450,7 @@ Procedure Vendors_OnTransaction(Parameters) Export
 	"SELECT
 	|	Aging.Period,
 	|	Aging.Company,
+	|	Aging.Branch,
 	|	Aging.Partner,
 	|	Aging.Agreement,
 	|	Aging.Invoice,
@@ -447,6 +464,7 @@ Procedure Vendors_OnTransaction(Parameters) Export
 	|	Aging AS Aging
 	|		INNER JOIN OffsetOfAdvanceToVendors AS OffsetOfAdvanceToVendors
 	|		ON Aging.Company = OffsetOfAdvanceToVendors.Company
+	|		AND Aging.Branch = OffsetOfAdvanceToVendors.Branch
 	|		AND Aging.Partner = OffsetOfAdvanceToVendors.Partner
 	|		AND Aging.Agreement = OffsetOfAdvanceToVendors.Agreement
 	|		AND Aging.Invoice = OffsetOfAdvanceToVendors.TransactionDocument
@@ -459,7 +477,7 @@ Procedure Vendors_OnTransaction(Parameters) Export
 	OffsetOfAging_Groupped = OffsetOfAging.Copy();
 	
 	OffsetOfAging_Groupped.GroupBy("AdvancesDocument, Amount_OffsetOfAdvance");
-	OffsetOfAging.GroupBy("Period, Company, Partner, Agreement, Invoice, PaymentDate, Currency, DueAmount, Amount");
+	OffsetOfAging.GroupBy("Period, Company, Branch, Partner, Agreement, Invoice, PaymentDate, Currency, DueAmount, Amount");
 	
 	For Each Row_Advance In OffsetOfAging_Groupped Do
 		NeedWriteOff = Row_Advance.Amount_OffsetOfAdvance;
@@ -499,6 +517,7 @@ Procedure Vendors_OnTransaction_Unposting(Parameters) Export
 	"SELECT
 	|	Table.Period,
 	|	Table.Company,
+	|	Table.Branch,
 	|	Table.Currency,
 	|	Table.Partner,
 	|	Table.LegalName,
@@ -517,6 +536,7 @@ Procedure Vendors_OnTransaction_Unposting(Parameters) Export
 	|SELECT
 	|	Table.Period,
 	|	Table.Company,
+	|	Table.Branch,
 	|	Table.Currency,
 	|	Table.Partner,
 	|	Table.Invoice,
@@ -547,6 +567,7 @@ Function GetQueryTextAdvancesOnTransaction()
 		"SELECT
 		|	Transactions.Period,
 		|	Transactions.Company,
+		|	Transactions.Branch,
 		|	Transactions.Partner,
 		|	Transactions.LegalName,
 		|	Transactions.Currency,
@@ -556,13 +577,13 @@ Function GetQueryTextAdvancesOnTransaction()
 		|	Advances.Basis AS AdvancesDocument,
 		|	SUM(Advances.AmountBalance) AS BalanceAmount,
 		|	0 AS Amount,
-		//|	"""" AS Key
 		|	Transactions.Key AS Key
 		|FROM
-		|	AccumulationRegister.%1.Balance(&Period, (Company, Partner, LegalName, Currency,
+		|	AccumulationRegister.%1.Balance(&Period, (Company, Branch, Partner, LegalName, Currency,
 		|		CurrencyMovementType) IN
 		|		(SELECT
 		|			Transactions.Company,
+		|			Transactions.Branch,
 		|			Transactions.Partner,
 		|			Transactions.LegalName,
 		|			Transactions.Currency,
@@ -571,6 +592,7 @@ Function GetQueryTextAdvancesOnTransaction()
 		|			%2 AS Transactions)) AS Advances
 		|		LEFT JOIN %2 AS Transactions
 		|		ON Advances.Company = Transactions.Company
+		|		AND Advances.Branch = Transactions.Branch
 		|		AND Advances.Partner = Transactions.Partner
 		|		AND Advances.LegalName = Transactions.LegalName
 		|		AND Advances.Currency = Transactions.Currency
@@ -580,6 +602,7 @@ Function GetQueryTextAdvancesOnTransaction()
 		|GROUP BY
 		|	Transactions.Period,
 		|	Transactions.Company,
+		|	Transactions.Branch,
 		|	Transactions.Partner,
 		|	Transactions.LegalName,
 		|	Transactions.Currency,
@@ -601,6 +624,7 @@ Function DistributeAdvancesTableOnTransaction(AdvancesTable)
 	FilterFields = 
 		"Period, 
 		|Company,
+		|Branch,
 		|Partner, 
 		|LegalName, 
 		|Currency,  
@@ -696,6 +720,7 @@ AdvancesOnMoneyMovements(Parameters, "R2021B_CustomersTransactions", "AdvancesFr
 	Query.Text = 
 	"SELECT
 	|	OffsetOfAdvanceFromCustomers.Company,
+	|	OffsetOfAdvanceFromCustomers.Branch,
 	|	OffsetOfAdvanceFromCustomers.Partner,
 	|	OffsetOfAdvanceFromCustomers.Agreement,
 	|	OffsetOfAdvanceFromCustomers.TransactionDocument AS Invoice,
@@ -709,6 +734,7 @@ AdvancesOnMoneyMovements(Parameters, "R2021B_CustomersTransactions", "AdvancesFr
 	|SELECT
 	|	CustomersTransactions.Period,
 	|	CustomersTransactions.Company,
+	|	CustomersTransactions.Branch,
 	|	CustomersTransactions.TransactionDocument AS Basis,
 	|	CustomersTransactions.Partner,
 	|	CustomersTransactions.LegalName,
@@ -724,6 +750,7 @@ AdvancesOnMoneyMovements(Parameters, "R2021B_CustomersTransactions", "AdvancesFr
 	|SELECT
 	|	OffsetOfAdvanceFromCustomers.Period,
 	|	OffsetOfAdvanceFromCustomers.Company,
+	|	OffsetOfAdvanceFromCustomers.Branch,
 	|	OffsetOfAdvanceFromCustomers.TransactionDocument,
 	|	OffsetOfAdvanceFromCustomers.Partner,
 	|	OffsetOfAdvanceFromCustomers.LegalName,
@@ -739,6 +766,7 @@ AdvancesOnMoneyMovements(Parameters, "R2021B_CustomersTransactions", "AdvancesFr
 	|SELECT
 	|	Transactions.Period,
 	|	Transactions.Company,
+	|	Transactions.Branch,
 	|	Transactions.Basis,
 	|	Transactions.Partner,
 	|	Transactions.LegalName,
@@ -751,6 +779,7 @@ AdvancesOnMoneyMovements(Parameters, "R2021B_CustomersTransactions", "AdvancesFr
 	|GROUP BY
 	|	Transactions.Period,
 	|	Transactions.Company,
+	|	Transactions.Branch,
 	|	Transactions.Basis,
 	|	Transactions.Partner,
 	|	Transactions.LegalName,
@@ -776,6 +805,7 @@ AdvancesOnMoneyMovements(Parameters, "R2021B_CustomersTransactions", "AdvancesFr
 	"SELECT
 	|	TransactionsGroupped.Period,
 	|	R5011B_CustomersAgingBalance.Company,
+	|	R5011B_CustomersAgingBalance.Branch,
 	|	R5011B_CustomersAgingBalance.Partner,
 	|	R5011B_CustomersAgingBalance.Agreement,
 	|	R5011B_CustomersAgingBalance.Invoice,
@@ -785,9 +815,10 @@ AdvancesOnMoneyMovements(Parameters, "R2021B_CustomersTransactions", "AdvancesFr
 	|	TransactionsGroupped.Amount AS ReceiptAmount,
 	|	0 AS Amount
 	|FROM
-	|	AccumulationRegister.R5011B_CustomersAging.Balance(&Period, (Company, Partner, Agreement, Invoice, Currency) IN
+	|	AccumulationRegister.R5011B_CustomersAging.Balance(&Period, (Company, Branch, Partner, Agreement, Invoice, Currency) IN
 	|		(SELECT
 	|			TransactionsGroupped.Company,
+	|			TransactionsGroupped.Branch,
 	|			TransactionsGroupped.Partner,
 	|			TransactionsGroupped.Agreement,
 	|			TransactionsGroupped.Basis,
@@ -796,6 +827,7 @@ AdvancesOnMoneyMovements(Parameters, "R2021B_CustomersTransactions", "AdvancesFr
 	|			TransactionsGroupped AS TransactionsGroupped)) AS R5011B_CustomersAgingBalance
 	|		INNER JOIN TransactionsGroupped AS TransactionsGroupped
 	|		ON R5011B_CustomersAgingBalance.Company = TransactionsGroupped.Company
+	|		AND R5011B_CustomersAgingBalance.Branch = TransactionsGroupped.Branch
 	|		AND R5011B_CustomersAgingBalance.Partner = TransactionsGroupped.Partner
 	|		AND R5011B_CustomersAgingBalance.Agreement = TransactionsGroupped.Agreement
 	|		AND R5011B_CustomersAgingBalance.Invoice = TransactionsGroupped.Basis
@@ -808,7 +840,7 @@ AdvancesOnMoneyMovements(Parameters, "R2021B_CustomersTransactions", "AdvancesFr
 	QueryTable = QueryResult.Unload();
 	QueryTable_Groupped = QueryTable.Copy();
 	QueryTable_Groupped.GroupBy("Invoice, ReceiptAmount");
-	QueryTable.GroupBy("Period, Company, Partner, Agreement, Invoice, PaymentDate, Currency, DueAmount, Amount");
+	QueryTable.GroupBy("Period, Company, Branch, Partner, Agreement, Invoice, PaymentDate, Currency, DueAmount, Amount");
 	For Each Row In QueryTable_Groupped Do
 		NeedWriteOff = Row.ReceiptAmount;
 		ArrayOfRows = QueryTable.FindRows(New Structure("Invoice", Row.Invoice));
@@ -845,6 +877,7 @@ AdvancesOnMoneyMovements(Parameters, "R2021B_CustomersTransactions", "AdvancesFr
 	"SELECT
 	|	Table_OffsetOfAging.Period,
 	|	Table_OffsetOfAging.Company,
+	|	Table_OffsetOfAging.Branch,
 	|	Table_OffsetOfAging.Partner,
 	|	Table_OffsetOfAging.Agreement,
 	|	Table_OffsetOfAging.Invoice,
@@ -909,6 +942,7 @@ Procedure Vendors_OnMoneyMovements(Parameters) Export
 	Query.Text = 
 	"SELECT
 	|	OffsetOfAdvanceToVendors.Company,
+	|	OffsetOfAdvanceToVendors.Branch,
 	|	OffsetOfAdvanceToVendors.Partner,
 	|	OffsetOfAdvanceToVendors.Agreement,
 	|	OffsetOfAdvanceToVendors.TransactionDocument AS Invoice,
@@ -922,6 +956,7 @@ Procedure Vendors_OnMoneyMovements(Parameters) Export
 	|SELECT
 	|	VendorsTransactions.Period,
 	|	VendorsTransactions.Company,
+	|	VendorsTransactions.Branch,
 	|	VendorsTransactions.TransactionDocument AS Basis,
 	|	VendorsTransactions.Partner,
 	|	VendorsTransactions.LegalName,
@@ -937,6 +972,7 @@ Procedure Vendors_OnMoneyMovements(Parameters) Export
 	|SELECT
 	|	OffsetOfAdvanceToVendors.Period,
 	|	OffsetOfAdvanceToVendors.Company,
+	|	OffsetOfAdvanceToVendors.Branch,
 	|	OffsetOfAdvanceToVendors.TransactionDocument,
 	|	OffsetOfAdvanceToVendors.Partner,
 	|	OffsetOfAdvanceToVendors.LegalName,
@@ -952,6 +988,7 @@ Procedure Vendors_OnMoneyMovements(Parameters) Export
 	|SELECT
 	|	Transactions.Period,
 	|	Transactions.Company,
+	|	Transactions.Branch,
 	|	Transactions.Basis,
 	|	Transactions.Partner,
 	|	Transactions.LegalName,
@@ -964,6 +1001,7 @@ Procedure Vendors_OnMoneyMovements(Parameters) Export
 	|GROUP BY
 	|	Transactions.Period,
 	|	Transactions.Company,
+	|	Transactions.Branch,
 	|	Transactions.Basis,
 	|	Transactions.Partner,
 	|	Transactions.LegalName,
@@ -989,6 +1027,7 @@ Procedure Vendors_OnMoneyMovements(Parameters) Export
 	"SELECT
 	|	TransactionsGroupped.Period,
 	|	R5012B_VendorsAgingBalance.Company,
+	|	R5012B_VendorsAgingBalance.Branch,
 	|	R5012B_VendorsAgingBalance.Partner,
 	|	R5012B_VendorsAgingBalance.Agreement,
 	|	R5012B_VendorsAgingBalance.Invoice,
@@ -998,9 +1037,10 @@ Procedure Vendors_OnMoneyMovements(Parameters) Export
 	|	TransactionsGroupped.Amount AS ReceiptAmount,
 	|	0 AS Amount
 	|FROM
-	|	AccumulationRegister.R5012B_VendorsAging.Balance(&Period, (Company, Partner, Agreement, Invoice, Currency) IN
+	|	AccumulationRegister.R5012B_VendorsAging.Balance(&Period, (Company, Branch, Partner, Agreement, Invoice, Currency) IN
 	|		(SELECT
 	|			TransactionsGroupped.Company,
+	|			TransactionsGroupped.Branch,
 	|			TransactionsGroupped.Partner,
 	|			TransactionsGroupped.Agreement,
 	|			TransactionsGroupped.Basis,
@@ -1009,6 +1049,7 @@ Procedure Vendors_OnMoneyMovements(Parameters) Export
 	|			TransactionsGroupped AS TransactionsGroupped)) AS R5012B_VendorsAgingBalance
 	|		INNER JOIN TransactionsGroupped AS TransactionsGroupped
 	|		ON R5012B_VendorsAgingBalance.Company = TransactionsGroupped.Company
+	|		AND R5012B_VendorsAgingBalance.Branch = TransactionsGroupped.Branch
 	|		AND R5012B_VendorsAgingBalance.Partner = TransactionsGroupped.Partner
 	|		AND R5012B_VendorsAgingBalance.Agreement = TransactionsGroupped.Agreement
 	|		AND R5012B_VendorsAgingBalance.Invoice = TransactionsGroupped.Basis
@@ -1021,7 +1062,7 @@ Procedure Vendors_OnMoneyMovements(Parameters) Export
 	QueryTable = QueryResult.Unload();
 	QueryTable_Groupped = QueryTable.Copy();
 	QueryTable_Groupped.GroupBy("Invoice, ReceiptAmount");
-	QueryTable.GroupBy("Period, Company, Partner, Agreement, Invoice, PaymentDate, Currency, DueAmount, Amount");
+	QueryTable.GroupBy("Period, Company, Branch, Partner, Agreement, Invoice, PaymentDate, Currency, DueAmount, Amount");
 	For Each Row In QueryTable_Groupped Do
 		NeedWriteOff = Row.ReceiptAmount;
 		ArrayOfRows = QueryTable.FindRows(New Structure("Invoice", Row.Invoice));
@@ -1058,6 +1099,7 @@ Procedure Vendors_OnMoneyMovements(Parameters) Export
 	"SELECT
 	|	Table_OffsetOfAging.Period,
 	|	Table_OffsetOfAging.Company,
+	|	Table_OffsetOfAging.Branch,
 	|	Table_OffsetOfAging.Partner,
 	|	Table_OffsetOfAging.Agreement,
 	|	Table_OffsetOfAging.Invoice,
@@ -1085,6 +1127,7 @@ Procedure AdvancesOnMoneyMovements(Parameters, RegisterName, AdvancesTableName, 
 	
 	FilterFields = 
 		"Company,
+		|Branch,
 		|Partner,
 		|Agreement,
 		|LegalName,
@@ -1121,6 +1164,7 @@ Procedure AdvancesOnMoneyMovements(Parameters, RegisterName, AdvancesTableName, 
 	"SELECT
 	|	TransactionsBalanceTable.Period,
 	|	TransactionsBalanceTable.Company,
+	|	TransactionsBalanceTable.Branch,
 	|	TransactionsBalanceTable.Partner,
 	|	TransactionsBalanceTable.LegalName,
 	|	TransactionsBalanceTable.Currency,
@@ -1141,6 +1185,7 @@ Procedure AdvancesOnMoneyMovements(Parameters, RegisterName, AdvancesTableName, 
 	|SELECT
 	|	TransactionsBalanceTable.Period,
 	|	TransactionsBalanceTable.Company,
+	|	TransactionsBalanceTable.Branch,
 	|	TransactionsBalanceTable.Partner,
 	|	TransactionsBalanceTable.LegalName,
 	|	TransactionsBalanceTable.Currency,
@@ -1159,10 +1204,11 @@ Procedure AdvancesOnMoneyMovements(Parameters, RegisterName, AdvancesTableName, 
 	|	TransactionsBalanceTable.Amount
 	|FROM
 	|	TransactionsBalanceTable AS TransactionsBalanceTable
-	|		LEFT JOIN AccumulationRegister.R5011B_CustomersAging.Balance(&Period, (Company, Partner, Agreement, Invoice,
+	|		LEFT JOIN AccumulationRegister.R5011B_CustomersAging.Balance(&Period, (Company, Branch, Partner, Agreement, Invoice,
 	|			Currency) IN
 	|			(SELECT
 	|				TransactionsBalanceTable.Company,
+	|				TransactionsBalanceTable.Branch,
 	|				TransactionsBalanceTable.Partner,
 	|				TransactionsBalanceTable.Agreement,
 	|				TransactionsBalanceTable.TransactionDocument,
@@ -1170,6 +1216,7 @@ Procedure AdvancesOnMoneyMovements(Parameters, RegisterName, AdvancesTableName, 
 	|			FROM
 	|				TransactionsBalanceTable AS TransactionsBalanceTable)) AS AgingBalance
 	|		ON TransactionsBalanceTable.Company = AgingBalance.Company
+	|		AND TransactionsBalanceTable.Branch = AgingBalance.Branch
 	|		AND TransactionsBalanceTable.Partner = AgingBalance.Partner
 	|		AND TransactionsBalanceTable.Agreement = AgingBalance.Agreement
 	|		AND TransactionsBalanceTable.TransactionDocument = AgingBalance.Invoice
@@ -1188,6 +1235,7 @@ Procedure AdvancesOnMoneyMovements(Parameters, RegisterName, AdvancesTableName, 
 	FilterFields = 
 		"Period,
 		|Company,
+		|Branch,
 		|Partner,
 		|LegalName,
 		|Currency,
@@ -1236,6 +1284,7 @@ Function GetQueryTextAdvancesOnMoneyMovements()
 	"SELECT
 	|	Advances.Period,
 	|	Advances.Company,
+	|	Advances.Branch,
 	|	Advances.Partner,
 	|	Advances.LegalName,
 	|	Advances.Currency,
@@ -1248,10 +1297,11 @@ Function GetQueryTextAdvancesOnMoneyMovements()
 	|	SUM(Transactions.AmountBalance) AS BalanceAmount,
 	|	0 AS Amount
 	|FROM
-	|	AccumulationRegister.%1.Balance(&Period, (Company, Partner, LegalName, Currency,
+	|	AccumulationRegister.%1.Balance(&Period, (Company, Branch, Partner, LegalName, Currency,
 	|		CurrencyMovementType) IN
 	|		(SELECT
 	|			Advances.Company,
+	|			Advances.Branch,
 	|			Advances.Partner,
 	|			Advances.LegalName,
 	|			Advances.Currency,
@@ -1260,12 +1310,14 @@ Function GetQueryTextAdvancesOnMoneyMovements()
 	|			%2 AS Advances)) AS Transactions
 	|		INNER JOIN %2 AS Advances
 	|		ON Advances.Company = Transactions.Company
+	|		AND Advances.Branch = Transactions.Branch
 	|		AND Advances.Partner = Transactions.Partner
 	|		AND Advances.LegalName = Transactions.LegalName
 	|		AND Advances.Currency = Transactions.Currency
 	|GROUP BY
 	|	Advances.Period,
 	|	Advances.Company,
+	|	Advances.Branch,
 	|	Advances.Partner,
 	|	Advances.LegalName,
 	|	Advances.Currency,
@@ -1285,6 +1337,7 @@ Function DistributeAgingTableOnMoneyMovement(AgingBalanceTable)
 	FilterFields = 
 		"Period, 
 		|Company,
+		|Branch,
 		|Partner, 
 		|LegalName, 
 		|Currency, 
@@ -1337,6 +1390,7 @@ Procedure PutAdvancesTableToTempTables(Query, OffsetOfAdvance, OffsetOfAdvanceTa
 	"SELECT
 	|	OffsetOfAdvance.Period,
 	|	OffsetOfAdvance.Company,
+	|	OffsetOfAdvance.Branch,
 	|	OffsetOfAdvance.Partner,
 	|	OffsetOfAdvance.LegalName,
 	|	OffsetOfAdvance.Currency,
@@ -1358,6 +1412,7 @@ Procedure PutAgingTableToTempTables(Query, OffsetOfAging)
 	"SELECT
 	|	OffsetOfAging.Period,
 	|	OffsetOfAging.Company,
+	|	OffsetOfAging.Branch,
 	|	OffsetOfAging.Partner,
 	|	OffsetOfAging.Agreement,
 	|	OffsetOfAging.Invoice,

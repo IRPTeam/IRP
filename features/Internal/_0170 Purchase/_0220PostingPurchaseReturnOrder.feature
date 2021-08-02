@@ -376,7 +376,7 @@ Scenario: _022011 copy PRO and check filling in Row Id info table
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Store" became equal to "Store 01"
 		And "ItemList" table became equal
-			| '#' | 'Business unit' | 'Item'     | 'Item key'  | 'Dont calculate row' | 'Q'       | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Expense type' | 'Net amount' | 'Purchase invoice' |
+			| '#' | 'Profit loss center' | 'Item'     | 'Item key'  | 'Dont calculate row' | 'Q'       | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Expense type' | 'Net amount' | 'Purchase invoice' |
 			| '1' | ''              | 'Dress'    | 'M/White'   | 'No'                 | '100,000' | 'pcs'  | '3 050,85'   | '200,00' | '18%' | ''              | '20 000,00'    | ''                    | 'Store 01' | ''             | '16 949,15'  | ''                 |
 			| '2' | ''              | 'Dress'    | 'L/Green'   | 'No'                 | '200,000' | 'pcs'  | '6 406,78'   | '210,00' | '18%' | ''              | '42 000,00'    | ''                    | 'Store 01' | ''             | '35 593,22'  | ''                 |
 			| '3' | ''              | 'Trousers' | '36/Yellow' | 'No'                 | '300,000' | 'pcs'  | '11 440,68'  | '250,00' | '18%' | ''              | '75 000,00'    | ''                    | 'Store 01' | ''             | '63 559,32'  | ''                 |
@@ -385,7 +385,7 @@ Scenario: _022011 copy PRO and check filling in Row Id info table
 			| 'TRY'                | 'Partner term' | 'TRY'           | 'TRY'      | '1'                 | '1'            | '137 000'   |
 			| 'Local currency'     | 'Legal'        | 'TRY'           | 'TRY'      | '1'                 | '1'            | '137 000'   |
 			| 'Reporting currency' | 'Reporting'    | 'TRY'           | 'USD'      | '0,1712'            | '1'            | '23 454,40' |
-		Then the form attribute named "BusinessUnit" became equal to ""
+		Then the form attribute named "Branch" became equal to ""
 		Then the form attribute named "PriceIncludeTax" became equal to "Yes"
 		Then the form attribute named "Currency" became equal to "TRY"
 		Then the form attribute named "ItemListTotalNetAmount" became equal to "116 101,69"

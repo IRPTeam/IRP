@@ -769,6 +769,56 @@
           </extInfo>
         </items>
         <items xsi:type="form:FormField">
+          <name>TransactionsLegalNameContract</name>
+          <id>288</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.Transactions.LegalNameContract</segments>
+          </dataPath>
+          <extendedTooltip>
+            <name>TransactionsLegalNameContractExtendedTooltip</name>
+            <id>290</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <type>Label</type>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <extInfo xsi:type="form:LabelDecorationExtInfo">
+              <horizontalAlign>Left</horizontalAlign>
+            </extInfo>
+          </extendedTooltip>
+          <contextMenu>
+            <name>TransactionsLegalNameContractContextMenu</name>
+            <id>289</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <autoFill>true</autoFill>
+          </contextMenu>
+          <type>InputField</type>
+          <editMode>Enter</editMode>
+          <showInHeader>true</showInHeader>
+          <headerHorizontalAlign>Left</headerHorizontalAlign>
+          <showInFooter>true</showInFooter>
+          <extInfo xsi:type="form:InputFieldExtInfo">
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <wrap>true</wrap>
+            <chooseType>true</chooseType>
+            <typeDomainEnabled>true</typeDomainEnabled>
+            <textEdit>true</textEdit>
+          </extInfo>
+        </items>
+        <items xsi:type="form:FormField">
           <name>TransactionsBasisDocument</name>
           <id>271</id>
           <visible>true</visible>
@@ -937,7 +987,7 @@
           </extInfo>
         </items>
         <items xsi:type="form:FormField">
-          <name>TransactionsBusinessUnit</name>
+          <name>TransactionsProfitLossCenter</name>
           <id>151</id>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -946,11 +996,11 @@
           </userVisible>
           <dataPath xsi:type="form:MultiLanguageDataPath">
             <paths xsi:type="form:DataPath">
-              <segments>Object.Transactions.BusinessUnit</segments>
+              <segments>Object.Transactions.ProfitLossCenter</segments>
             </paths>
           </dataPath>
           <extendedTooltip>
-            <name>TransactionsBusinessUnitExtendedTooltip</name>
+            <name>TransactionsProfitLossCenterExtendedTooltip</name>
             <id>153</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -965,7 +1015,7 @@
             </extInfo>
           </extendedTooltip>
           <contextMenu>
-            <name>TransactionsBusinessUnitContextMenu</name>
+            <name>TransactionsProfitLossCenterContextMenu</name>
             <id>152</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -2141,7 +2191,7 @@
         <extInfo xsi:type="form:CheckBoxFieldExtInfo"/>
       </items>
       <items xsi:type="form:FormField">
-        <name>BusinessUnit</name>
+        <name>Branch</name>
         <id>279</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -2150,11 +2200,11 @@
         </userVisible>
         <dataPath xsi:type="form:MultiLanguageDataPath">
           <paths xsi:type="form:DataPath">
-            <segments>Object.BusinessUnit</segments>
+            <segments>Object.Branch</segments>
           </paths>
         </dataPath>
         <extendedTooltip>
-          <name>BusinessUnitExtendedTooltip</name>
+          <name>BranchExtendedTooltip</name>
           <id>281</id>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -2169,7 +2219,7 @@
           </extInfo>
         </extendedTooltip>
         <contextMenu>
-          <name>BusinessUnitContextMenu</name>
+          <name>BranchContextMenu</name>
           <id>280</id>
           <visible>true</visible>
           <enabled>true</enabled>

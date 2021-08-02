@@ -787,8 +787,8 @@ Scenario: create SalesOrder023001
 		And I activate "Q" field in "ItemList" table
 		And I input "5,000" text in "Q" field of "ItemList" table
 		And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
-		And I activate "Business unit" field in "ItemList" table
-		And I click choice button of the attribute named "ItemListBusinessUnit" in "ItemList" table
+		And I activate "Profit loss center" field in "ItemList" table
+		And I click choice button of the attribute named "ItemListProfitLossCenter" in "ItemList" table
 		And I go to line in "List" table
 			| 'Description'             |
 			| 'Distribution department' |
@@ -813,8 +813,8 @@ Scenario: create SalesOrder023001
 		And I activate "Q" field in "ItemList" table
 		And I input "4,000" text in "Q" field of "ItemList" table
 		And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
-		And I activate "Business unit" field in "ItemList" table
-		And I click choice button of the attribute named "ItemListBusinessUnit" in "ItemList" table
+		And I activate "Profit loss center" field in "ItemList" table
+		And I click choice button of the attribute named "ItemListProfitLossCenter" in "ItemList" table
 		And I go to line in "List" table
 			| 'Description'             |
 			| 'Distribution department' |
@@ -879,8 +879,8 @@ Scenario: create SalesOrder023005
 	And I activate "Q" field in "ItemList" table
 	And I input "10,000" text in "Q" field of "ItemList" table
 	And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
-	And I activate "Business unit" field in "ItemList" table
-	And I click choice button of "Business unit" attribute in "ItemList" table
+	And I activate "Profit loss center" field in "ItemList" table
+	And I click choice button of "Profit loss center" attribute in "ItemList" table
 	And I go to line in "List" table
 		| 'Description'             |
 		| 'Distribution department' |
@@ -905,8 +905,8 @@ Scenario: create SalesOrder023005
 	And I activate "Q" field in "ItemList" table
 	And I input "14,000" text in "Q" field of "ItemList" table
 	And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
-	And I activate "Business unit" field in "ItemList" table
-	And I click choice button of "Business unit" attribute in "ItemList" table
+	And I activate "Profit loss center" field in "ItemList" table
+	And I click choice button of "Profit loss center" attribute in "ItemList" table
 	And I go to line in "List" table
 		| 'Description'             |
 		| 'Distribution department' |
@@ -1563,10 +1563,9 @@ Scenario: create Bank terms
 		And I input "2,00" text in "Percent" field of "PaymentTypes" table
 		And I finish line editing in "PaymentTypes" table
 		And I click "Save" button
-		And In this window I click command interface button "Business unit bank terms"
+		And In this window I click command interface button "Branch bank terms"
 		And I click the button named "FormCreate"
-		Then "Business unit bank terms (create)" window is opened
-		And I click Select button of "Business unit" field
+		And I click Select button of "Branch" field
 		And I go to line in "List" table
 			| 'Description' |
 			| 'Shop 01'     |

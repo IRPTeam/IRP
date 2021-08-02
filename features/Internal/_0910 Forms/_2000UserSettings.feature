@@ -848,7 +848,7 @@ Scenario: _200001 customize the CI user settings
 			| 'Sales order closing' |
 		And I go to line in "MetadataTree" table
 			| 'Group name' | 'Use' |
-			| 'Business unit'    | 'No'  |
+			| 'Branch'    | 'No'  |
 		And I activate "Value" field in "MetadataTree" table
 		And I select current line in "MetadataTree" table
 		And I click choice button of "Value" attribute in "MetadataTree" table
@@ -1336,7 +1336,7 @@ Scenario:  _200033 check filling in field from custom user settings in Retail re
 		Then the form attribute named "Partner" became equal to "Retail customer"
 		Then the form attribute named "LegalName" became equal to "Company Retail customer"
 		Then the form attribute named "Agreement" became equal to "Retail partner term"
-		Then the form attribute named "BusinessUnit" became equal to "Shop 01"
+		Then the form attribute named "Branch" became equal to "Shop 01"
 	And I close all client application windows
 
 Scenario:  _200034 check filling in field from custom user settings in Cash statement
@@ -1344,7 +1344,7 @@ Scenario:  _200034 check filling in field from custom user settings in Cash stat
 	And I click the button named "FormCreate"
 	* Check that fields are filled in from user settings
 		Then the form attribute named "Company" became equal to "Main Company"
-		Then the form attribute named "BusinessUnit" became equal to "Shop 01"
+		Then the form attribute named "Branch" became equal to "Shop 01"
 		Then the form attribute named "CashAccount" became equal to "Cash desk №4"
 	And I close all client application windows	
 
@@ -1359,7 +1359,7 @@ Scenario:  _200036 check filling in field from custom user settings in Sales ord
 	Given I open hyperlink "e1cib/list/Document.SalesOrderClosing"
 	And I click the button named "FormCreate"
 	* Check that fields are filled in from user settings
-		Then the form attribute named "BusinessUnit" became equal to "Front office"
+		Then the form attribute named "Branch" became equal to "Front office"
 	And I close all client application windows	
 
 

@@ -3627,7 +3627,7 @@
         </extInfo>
       </items>
       <items xsi:type="form:FormField">
-        <name>BusinessUnit</name>
+        <name>Branch</name>
         <id>299</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -3636,11 +3636,11 @@
         </userVisible>
         <dataPath xsi:type="form:MultiLanguageDataPath">
           <paths xsi:type="form:DataPath">
-            <segments>Object.BusinessUnit</segments>
+            <segments>Object.Branch</segments>
           </paths>
         </dataPath>
         <extendedTooltip>
-          <name>BusinessUnitExtendedTooltip</name>
+          <name>BranchExtendedTooltip</name>
           <id>301</id>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -3655,7 +3655,7 @@
           </extInfo>
         </extendedTooltip>
         <contextMenu>
-          <name>BusinessUnitContextMenu</name>
+          <name>BranchContextMenu</name>
           <id>300</id>
           <visible>true</visible>
           <enabled>true</enabled>

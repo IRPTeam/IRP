@@ -1,3 +1,11 @@
+#Region PrintForm
+
+Function GetPrintForm(Ref, PrintFormName, AddInfo = Undefined) Export
+	Return Undefined;
+EndFunction
+
+#EndRegion
+
 #Region Posting
 
 Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
@@ -191,7 +199,8 @@ Function ItemList()
 	|	NOT InventoryTransferOrderItemList.PurchaseOrder.Ref IS NULL AS PurchaseOrderExists,
 	|	InventoryTransferOrderItemList.InternalSupplyRequest AS InternalSupplyRequest,
 	|	NOT InventoryTransferOrderItemList.InternalSupplyRequest.Ref IS NULL AS InternalSupplyRequestExists,
-	|	&StatusInfoPosting AS StatusInfoPosting
+	|	&StatusInfoPosting AS StatusInfoPosting,
+	|	InventoryTransferOrderItemList.Ref.Branch
 	|INTO ItemList
 	|FROM
 	|	Document.InventoryTransferOrder.ItemList AS InventoryTransferOrderItemList

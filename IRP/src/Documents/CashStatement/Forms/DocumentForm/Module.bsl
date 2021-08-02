@@ -114,8 +114,8 @@ Procedure CompanyOnChange(Item)
 EndProcedure
 
 &AtClient
-Procedure BusinessUnitOnChange(Item)
-	DocCashStatementClient.BusinessUnitOnChange(ThisObject);
+Procedure BranchOnChange(Item)
+	DocCashStatementClient.BranchOnChange(ThisObject);
 EndProcedure
 
 &AtClient

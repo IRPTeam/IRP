@@ -232,6 +232,7 @@ Scenario: _095002 create document Dedit Note (write off debts to the vendor)
 			| 'Partner term Maxim' |
 		And I select current line in "List" table
 		And in "Transactions" table I move to the next cell
+		And in "Transactions" table I move to the next cell
 		* Check the selection of basis documents for the specified partner
 		And "List" table contains lines
 			| 'Document'                        | 'Legal name'    | 'Partner' | 'Amount' |
@@ -245,9 +246,9 @@ Scenario: _095002 create document Dedit Note (write off debts to the vendor)
 		And I activate field named "TransactionsAmount" in "Transactions" table
 		And I input "1 000,00" text in the field named "TransactionsAmount" of "Transactions" table
 		And I finish line editing in "Transactions" table
-		And I activate "Business unit" field in "Transactions" table
+		And I activate "Profit loss center" field in "Transactions" table
 		And I select current line in "Transactions" table
-		And I click choice button of "Business unit" attribute in "Transactions" table
+		And I click choice button of "Profit loss center" attribute in "Transactions" table
 		And I go to line in "List" table
 			| 'Description'             |
 			| 'Distribution department' |
@@ -317,6 +318,7 @@ Scenario: _095003 check movements of the document Credit Note (increase in debt 
 			| 'Partner term Maxim' |
 		And I select current line in "List" table
 		And in "Transactions" table I move to the next cell
+		And in "Transactions" table I move to the next cell
 	* Check the selection of basis documents for the specified partner
 		And "List" table contains lines
 			| 'Document'                  | 'Legal name'    | 'Partner' | 'Amount' |
@@ -330,9 +332,9 @@ Scenario: _095003 check movements of the document Credit Note (increase in debt 
 		And I activate field named "TransactionsAmount" in "Transactions" table
 		And I input "100,00" text in the field named "TransactionsAmount" of "Transactions" table
 		And I finish line editing in "Transactions" table
-		And I activate "Business unit" field in "Transactions" table
+		And I activate "Profit loss center" field in "Transactions" table
 		And I select current line in "Transactions" table
-		And I click choice button of "Business unit" attribute in "Transactions" table
+		And I click choice button of "Profit loss center" attribute in "Transactions" table
 		And I go to line in "List" table
 			| 'Description'             |
 			| 'Distribution department' |
@@ -403,6 +405,7 @@ Scenario: _095004 check movements of the document Credit Note (write off custome
 			| 'Basic Partner terms, TRY' |
 		And I select current line in "List" table
 		And in "Transactions" table I move to the next cell
+		And in "Transactions" table I move to the next cell
 		* Check the selection of basis documents for the specified partner
 		And delay 2
 		And I go to line in "List" table
@@ -413,9 +416,9 @@ Scenario: _095004 check movements of the document Credit Note (write off custome
 		And I activate field named "TransactionsAmount" in "Transactions" table
 		And I input "1 000,00" text in the field named "TransactionsAmount" of "Transactions" table
 		And I finish line editing in "Transactions" table
-		And I activate "Business unit" field in "Transactions" table
+		And I activate "Profit loss center" field in "Transactions" table
 		And I select current line in "Transactions" table
-		And I click choice button of "Business unit" attribute in "Transactions" table
+		And I click choice button of "Profit loss center" attribute in "Transactions" table
 		And I go to line in "List" table
 			| 'Description'             |
 			| 'Distribution department' |
@@ -485,6 +488,7 @@ Scenario: _095005 create document Debit Note (increase in customers debt)
 			| 'Basic Partner terms, TRY' |
 		And I select current line in "List" table
 		And in "Transactions" table I move to the next cell
+		And in "Transactions" table I move to the next cell
 		* Check the selection of basis documents for the specified partner
 		And delay 2
 		And "List" table contains lines
@@ -498,9 +502,9 @@ Scenario: _095005 create document Debit Note (increase in customers debt)
 		And I activate field named "TransactionsAmount" in "Transactions" table
 		And I input "100,00" text in the field named "TransactionsAmount" of "Transactions" table
 		And I finish line editing in "Transactions" table
-		And I activate "Business unit" field in "Transactions" table
+		And I activate "Profit loss center" field in "Transactions" table
 		And I select current line in "Transactions" table
-		And I click choice button of "Business unit" attribute in "Transactions" table
+		And I click choice button of "Profit loss center" attribute in "Transactions" table
 		And I go to line in "List" table
 			| 'Description'             |
 			| 'Distribution department' |

@@ -25,7 +25,7 @@ Procedure StatusOnChange(Object, AddInfo = Undefined) Export
 	DocumentsClientServer.ChangeTitleGroupTitle(Object.Object, Object.ThisForm);
 EndProcedure
 
-Procedure BusinessUnitOnChange(Object, AddInfo = Undefined) Export
+Procedure BranchOnChange(Object, AddInfo = Undefined) Export
 	DocumentsClientServer.ChangeTitleGroupTitle(Object.Object, Object.ThisForm);
 EndProcedure
 

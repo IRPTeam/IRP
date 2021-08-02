@@ -1,3 +1,11 @@
+#Region PrintForm
+
+Function GetPrintForm(Ref, PrintFormName, AddInfo = Undefined) Export
+	Return Undefined;
+EndFunction
+
+#EndRegion
+
 #Region Posting
 
 Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
@@ -114,7 +122,8 @@ Function ItemList()
 		|	ItemStockAdjustmentItemList.Ref.Company AS Company,
 		|	ItemStockAdjustmentItemList.Ref.Store AS Store,
 		|	ItemStockAdjustmentItemList.SerialLotNumber,
-		|	ItemStockAdjustmentItemList.SerialLotNumberWriteOff
+		|	ItemStockAdjustmentItemList.SerialLotNumberWriteOff,
+		|	ItemStockAdjustmentItemList.Ref.Branch AS Branch
 		|INTO ItemList
 		|FROM
 		|	Document.ItemStockAdjustment.ItemList AS ItemStockAdjustmentItemList

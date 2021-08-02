@@ -43,6 +43,7 @@ Scenario: _040130 preparation (Sales invoice)
 		When Create catalog Stores objects
 		When Create catalog Partners objects
 		When Create catalog Companies objects (partners company)
+		When Create catalog LegalNameContracts objects
 		When Create information register PartnerSegments records
 		When Create catalog PartnerSegments objects
 		When Create chart of characteristic types CurrencyMovementType objects
@@ -146,23 +147,23 @@ Scenario: _0401311 check Sales invoice movements by the Register  "R2005 Sales s
 		And I select "R2005 Sales special offers" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales invoice 1 dated 28.01.2021 18:48:53' | ''                    | ''             | ''           | ''              | ''                 | ''             | ''                             | ''         | ''                                          | ''         | ''                                     | ''                 |
-			| 'Document registrations records'            | ''                    | ''             | ''           | ''              | ''                 | ''             | ''                             | ''         | ''                                          | ''         | ''                                     | ''                 |
-			| 'Register  "R2005 Sales special offers"'    | ''                    | ''             | ''           | ''              | ''                 | ''             | ''                             | ''         | ''                                          | ''         | ''                                     | ''                 |
-			| ''                                          | 'Period'              | 'Resources'    | ''           | ''              | ''                 | 'Dimensions'   | ''                             | ''         | ''                                          | ''         | ''                                     | ''                 |
-			| ''                                          | ''                    | 'Sales amount' | 'Net amount' | 'Offers amount' | 'Net offer amount' | 'Company'      | 'Multi currency movement type' | 'Currency' | 'Invoice'                                   | 'Item key' | 'Row key'                              | 'Special offer'    |
-			| ''                                          | '28.01.2021 18:48:53' | '16,26'        | '13,78'      | '0,86'          | ''                 | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'Interner' | '835ca87f-804e-4f3b-b02a-7a1f5d49abe0' | 'DocumentDiscount' |
-			| ''                                          | '28.01.2021 18:48:53' | '84,57'        | '71,67'      | '4,45'          | ''                 | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'XS/Blue'  | '0cb89084-5857-45fc-b333-4fbec2c2e90a' | 'DocumentDiscount' |
-			| ''                                          | '28.01.2021 18:48:53' | '95'           | '80,51'      | '5'             | ''                 | 'Main Company' | 'Local currency'               | 'TRY'      | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'Interner' | '835ca87f-804e-4f3b-b02a-7a1f5d49abe0' | 'DocumentDiscount' |
-			| ''                                          | '28.01.2021 18:48:53' | '95'           | '80,51'      | '5'             | ''                 | 'Main Company' | 'TRY'                          | 'TRY'      | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'Interner' | '835ca87f-804e-4f3b-b02a-7a1f5d49abe0' | 'DocumentDiscount' |
-			| ''                                          | '28.01.2021 18:48:53' | '95'           | '80,51'      | '5'             | ''                 | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'Interner' | '835ca87f-804e-4f3b-b02a-7a1f5d49abe0' | 'DocumentDiscount' |
-			| ''                                          | '28.01.2021 18:48:53' | '494'          | '418,64'     | '26'            | ''                 | 'Main Company' | 'Local currency'               | 'TRY'      | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'XS/Blue'  | '0cb89084-5857-45fc-b333-4fbec2c2e90a' | 'DocumentDiscount' |
-			| ''                                          | '28.01.2021 18:48:53' | '494'          | '418,64'     | '26'            | ''                 | 'Main Company' | 'TRY'                          | 'TRY'      | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'XS/Blue'  | '0cb89084-5857-45fc-b333-4fbec2c2e90a' | 'DocumentDiscount' |
-			| ''                                          | '28.01.2021 18:48:53' | '494'          | '418,64'     | '26'            | ''                 | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'XS/Blue'  | '0cb89084-5857-45fc-b333-4fbec2c2e90a' | 'DocumentDiscount' |
-			| ''                                          | '28.01.2021 18:48:53' | '569,24'       | '482,41'     | '29,96'         | ''                 | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Sales invoice 1 dated 28.01.2021 18:48:53' | '36/Red'   | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' | 'DocumentDiscount' |
-			| ''                                          | '28.01.2021 18:48:53' | '3 325'        | '2 817,8'    | '175'           | ''                 | 'Main Company' | 'Local currency'               | 'TRY'      | 'Sales invoice 1 dated 28.01.2021 18:48:53' | '36/Red'   | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' | 'DocumentDiscount' |
-			| ''                                          | '28.01.2021 18:48:53' | '3 325'        | '2 817,8'    | '175'           | ''                 | 'Main Company' | 'TRY'                          | 'TRY'      | 'Sales invoice 1 dated 28.01.2021 18:48:53' | '36/Red'   | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' | 'DocumentDiscount' |
-			| ''                                          | '28.01.2021 18:48:53' | '3 325'        | '2 817,8'    | '175'           | ''                 | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Sales invoice 1 dated 28.01.2021 18:48:53' | '36/Red'   | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' | 'DocumentDiscount' |
+			| 'Sales invoice 1 dated 28.01.2021 18:48:53' | ''                    | ''             | ''           | ''              | ''                 | ''             | ''                        | ''                             | ''         | ''                                          | ''         | ''                                     | ''                 |
+			| 'Document registrations records'            | ''                    | ''             | ''           | ''              | ''                 | ''             | ''                        | ''                             | ''         | ''                                          | ''         | ''                                     | ''                 |
+			| 'Register  "R2005 Sales special offers"'    | ''                    | ''             | ''           | ''              | ''                 | ''             | ''                        | ''                             | ''         | ''                                          | ''         | ''                                     | ''                 |
+			| ''                                          | 'Period'              | 'Resources'    | ''           | ''              | ''                 | 'Dimensions'   | ''                        | ''                             | ''         | ''                                          | ''         | ''                                     | ''                 |
+			| ''                                          | ''                    | 'Sales amount' | 'Net amount' | 'Offers amount' | 'Net offer amount' | 'Company'      | 'Branch'                  | 'Multi currency movement type' | 'Currency' | 'Invoice'                                   | 'Item key' | 'Row key'                              | 'Special offer'    |
+			| ''                                          | '28.01.2021 18:48:53' | '16,26'        | '13,78'      | '0,86'          | ''                 | 'Main Company' | 'Distribution department' | 'Reporting currency'           | 'USD'      | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'Interner' | '835ca87f-804e-4f3b-b02a-7a1f5d49abe0' | 'DocumentDiscount' |
+			| ''                                          | '28.01.2021 18:48:53' | '84,57'        | '71,67'      | '4,45'          | ''                 | 'Main Company' | 'Distribution department' | 'Reporting currency'           | 'USD'      | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'XS/Blue'  | '0cb89084-5857-45fc-b333-4fbec2c2e90a' | 'DocumentDiscount' |
+			| ''                                          | '28.01.2021 18:48:53' | '95'           | '80,51'      | '5'             | ''                 | 'Main Company' | 'Distribution department' | 'Local currency'               | 'TRY'      | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'Interner' | '835ca87f-804e-4f3b-b02a-7a1f5d49abe0' | 'DocumentDiscount' |
+			| ''                                          | '28.01.2021 18:48:53' | '95'           | '80,51'      | '5'             | ''                 | 'Main Company' | 'Distribution department' | 'TRY'                          | 'TRY'      | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'Interner' | '835ca87f-804e-4f3b-b02a-7a1f5d49abe0' | 'DocumentDiscount' |
+			| ''                                          | '28.01.2021 18:48:53' | '95'           | '80,51'      | '5'             | ''                 | 'Main Company' | 'Distribution department' | 'en description is empty'      | 'TRY'      | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'Interner' | '835ca87f-804e-4f3b-b02a-7a1f5d49abe0' | 'DocumentDiscount' |
+			| ''                                          | '28.01.2021 18:48:53' | '494'          | '418,64'     | '26'            | ''                 | 'Main Company' | 'Distribution department' | 'Local currency'               | 'TRY'      | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'XS/Blue'  | '0cb89084-5857-45fc-b333-4fbec2c2e90a' | 'DocumentDiscount' |
+			| ''                                          | '28.01.2021 18:48:53' | '494'          | '418,64'     | '26'            | ''                 | 'Main Company' | 'Distribution department' | 'TRY'                          | 'TRY'      | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'XS/Blue'  | '0cb89084-5857-45fc-b333-4fbec2c2e90a' | 'DocumentDiscount' |
+			| ''                                          | '28.01.2021 18:48:53' | '494'          | '418,64'     | '26'            | ''                 | 'Main Company' | 'Distribution department' | 'en description is empty'      | 'TRY'      | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'XS/Blue'  | '0cb89084-5857-45fc-b333-4fbec2c2e90a' | 'DocumentDiscount' |
+			| ''                                          | '28.01.2021 18:48:53' | '569,24'       | '482,41'     | '29,96'         | ''                 | 'Main Company' | 'Distribution department' | 'Reporting currency'           | 'USD'      | 'Sales invoice 1 dated 28.01.2021 18:48:53' | '36/Red'   | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' | 'DocumentDiscount' |
+			| ''                                          | '28.01.2021 18:48:53' | '3 325'        | '2 817,8'    | '175'           | ''                 | 'Main Company' | 'Distribution department' | 'Local currency'               | 'TRY'      | 'Sales invoice 1 dated 28.01.2021 18:48:53' | '36/Red'   | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' | 'DocumentDiscount' |
+			| ''                                          | '28.01.2021 18:48:53' | '3 325'        | '2 817,8'    | '175'           | ''                 | 'Main Company' | 'Distribution department' | 'TRY'                          | 'TRY'      | 'Sales invoice 1 dated 28.01.2021 18:48:53' | '36/Red'   | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' | 'DocumentDiscount' |
+			| ''                                          | '28.01.2021 18:48:53' | '3 325'        | '2 817,8'    | '175'           | ''                 | 'Main Company' | 'Distribution department' | 'en description is empty'      | 'TRY'      | 'Sales invoice 1 dated 28.01.2021 18:48:53' | '36/Red'   | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' | 'DocumentDiscount' |
 			
 		And I close all client application windows
 		
@@ -177,12 +178,12 @@ Scenario: _040132 check Sales invoice movements by the Register  "R5010 Reconcil
 		And I select "R5010 Reconciliation statement" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales invoice 1 dated 28.01.2021 18:48:53'  | ''            | ''                    | ''          | ''           | ''             | ''                  |
-			| 'Document registrations records'             | ''            | ''                    | ''          | ''           | ''             | ''                  |
-			| 'Register  "R5010 Reconciliation statement"' | ''            | ''                    | ''          | ''           | ''             | ''                  |
-			| ''                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions' | ''             | ''                  |
-			| ''                                           | ''            | ''                    | 'Amount'    | 'Currency'   | 'Company'      | 'Legal name'        |
-			| ''                                           | 'Receipt'     | '28.01.2021 18:48:53' | '3 914'     | 'TRY'        | 'Main Company' | 'Company Ferron BP' |	
+			| 'Sales invoice 1 dated 28.01.2021 18:48:53'  | ''            | ''                    | ''          | ''             | ''                        | ''         | ''                  | ''                    |
+			| 'Document registrations records'             | ''            | ''                    | ''          | ''             | ''                        | ''         | ''                  | ''                    |
+			| 'Register  "R5010 Reconciliation statement"' | ''            | ''                    | ''          | ''             | ''                        | ''         | ''                  | ''                    |
+			| ''                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                        | ''         | ''                  | ''                    |
+			| ''                                           | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'                  | 'Currency' | 'Legal name'        | 'Legal name contract' |
+			| ''                                           | 'Receipt'     | '28.01.2021 18:48:53' | '3 914'     | 'Main Company' | 'Distribution department' | 'TRY'      | 'Company Ferron BP' | 'Contract Ferron BP'  |
 		And I close all client application windows
 		
 Scenario: _040133 check Sales invoice movements by the Register  "R4010 Actual stocks" (use SC, SC first)
@@ -225,13 +226,13 @@ Scenario: _040135 check Sales invoice movements by the Register  "R4050 Stock in
 		And I select "R4050 Stock inventory" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales invoice 1 dated 28.01.2021 18:48:53' | ''            | ''                    | ''          | ''             | ''         | ''         |
-			| 'Document registrations records'            | ''            | ''                    | ''          | ''             | ''         | ''         |
-			| 'Register  "R4050 Stock inventory"'         | ''            | ''                    | ''          | ''             | ''         | ''         |
-			| ''                                          | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''         | ''         |
-			| ''                                          | ''            | ''                    | 'Quantity'  | 'Company'      | 'Store'    | 'Item key' |
-			| ''                                          | 'Expense'     | '28.01.2021 18:48:53' | '1'         | 'Main Company' | 'Store 02' | 'XS/Blue'  |
-			| ''                                          | 'Expense'     | '28.01.2021 18:48:53' | '10'        | 'Main Company' | 'Store 02' | '36/Red'   |
+			| 'Sales invoice 1 dated 28.01.2021 18:48:53' | ''            | ''                    | ''          | ''             | ''                        | ''         | ''         |
+			| 'Document registrations records'            | ''            | ''                    | ''          | ''             | ''                        | ''         | ''         |
+			| 'Register  "R4050 Stock inventory"'         | ''            | ''                    | ''          | ''             | ''                        | ''         | ''         |
+			| ''                                          | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                        | ''         | ''         |
+			| ''                                          | ''            | ''                    | 'Quantity'  | 'Company'      | 'Branch'                  | 'Store'    | 'Item key' |
+			| ''                                          | 'Expense'     | '28.01.2021 18:48:53' | '1'         | 'Main Company' | 'Distribution department' | 'Store 02' | 'XS/Blue'  |
+			| ''                                          | 'Expense'     | '28.01.2021 18:48:53' | '10'        | 'Main Company' | 'Distribution department' | 'Store 02' | '36/Red'   |
 			
 		And I close all client application windows
 		
@@ -246,23 +247,23 @@ Scenario: _040136 check Sales invoice movements by the Register  "R2001 Sales"
 		And I select "R2001 Sales" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales invoice 1 dated 28.01.2021 18:48:53' | ''                    | ''          | ''       | ''           | ''              | ''             | ''                             | ''         | ''                                          | ''         | ''                                     |
-			| 'Document registrations records'            | ''                    | ''          | ''       | ''           | ''              | ''             | ''                             | ''         | ''                                          | ''         | ''                                     |
-			| 'Register  "R2001 Sales"'                   | ''                    | ''          | ''       | ''           | ''              | ''             | ''                             | ''         | ''                                          | ''         | ''                                     |
-			| ''                                          | 'Period'              | 'Resources' | ''       | ''           | ''              | 'Dimensions'   | ''                             | ''         | ''                                          | ''         | ''                                     |
-			| ''                                          | ''                    | 'Quantity'  | 'Amount' | 'Net amount' | 'Offers amount' | 'Company'      | 'Multi currency movement type' | 'Currency' | 'Invoice'                                   | 'Item key' | 'Row key'                              |
-			| ''                                          | '28.01.2021 18:48:53' | '1'         | '16,26'  | '13,78'      | '0,86'          | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'Interner' | '835ca87f-804e-4f3b-b02a-7a1f5d49abe0' |
-			| ''                                          | '28.01.2021 18:48:53' | '1'         | '84,57'  | '71,67'      | '4,45'          | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'XS/Blue'  | '0cb89084-5857-45fc-b333-4fbec2c2e90a' |
-			| ''                                          | '28.01.2021 18:48:53' | '1'         | '95'     | '80,51'      | '5'             | 'Main Company' | 'Local currency'               | 'TRY'      | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'Interner' | '835ca87f-804e-4f3b-b02a-7a1f5d49abe0' |
-			| ''                                          | '28.01.2021 18:48:53' | '1'         | '95'     | '80,51'      | '5'             | 'Main Company' | 'TRY'                          | 'TRY'      | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'Interner' | '835ca87f-804e-4f3b-b02a-7a1f5d49abe0' |
-			| ''                                          | '28.01.2021 18:48:53' | '1'         | '95'     | '80,51'      | '5'             | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'Interner' | '835ca87f-804e-4f3b-b02a-7a1f5d49abe0' |
-			| ''                                          | '28.01.2021 18:48:53' | '1'         | '494'    | '418,64'     | '26'            | 'Main Company' | 'Local currency'               | 'TRY'      | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'XS/Blue'  | '0cb89084-5857-45fc-b333-4fbec2c2e90a' |
-			| ''                                          | '28.01.2021 18:48:53' | '1'         | '494'    | '418,64'     | '26'            | 'Main Company' | 'TRY'                          | 'TRY'      | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'XS/Blue'  | '0cb89084-5857-45fc-b333-4fbec2c2e90a' |
-			| ''                                          | '28.01.2021 18:48:53' | '1'         | '494'    | '418,64'     | '26'            | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'XS/Blue'  | '0cb89084-5857-45fc-b333-4fbec2c2e90a' |
-			| ''                                          | '28.01.2021 18:48:53' | '10'        | '569,24' | '482,41'     | '29,96'         | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Sales invoice 1 dated 28.01.2021 18:48:53' | '36/Red'   | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' |
-			| ''                                          | '28.01.2021 18:48:53' | '10'        | '3 325'  | '2 817,8'    | '175'           | 'Main Company' | 'Local currency'               | 'TRY'      | 'Sales invoice 1 dated 28.01.2021 18:48:53' | '36/Red'   | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' |
-			| ''                                          | '28.01.2021 18:48:53' | '10'        | '3 325'  | '2 817,8'    | '175'           | 'Main Company' | 'TRY'                          | 'TRY'      | 'Sales invoice 1 dated 28.01.2021 18:48:53' | '36/Red'   | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' |
-			| ''                                          | '28.01.2021 18:48:53' | '10'        | '3 325'  | '2 817,8'    | '175'           | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Sales invoice 1 dated 28.01.2021 18:48:53' | '36/Red'   | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' |
+			| 'Sales invoice 1 dated 28.01.2021 18:48:53' | ''                    | ''          | ''       | ''           | ''              | ''             | ''                        | ''                             | ''         | ''                                          | ''         | ''                                     |
+			| 'Document registrations records'            | ''                    | ''          | ''       | ''           | ''              | ''             | ''                        | ''                             | ''         | ''                                          | ''         | ''                                     |
+			| 'Register  "R2001 Sales"'                   | ''                    | ''          | ''       | ''           | ''              | ''             | ''                        | ''                             | ''         | ''                                          | ''         | ''                                     |
+			| ''                                          | 'Period'              | 'Resources' | ''       | ''           | ''              | 'Dimensions'   | ''                        | ''                             | ''         | ''                                          | ''         | ''                                     |
+			| ''                                          | ''                    | 'Quantity'  | 'Amount' | 'Net amount' | 'Offers amount' | 'Company'      | 'Branch'                  | 'Multi currency movement type' | 'Currency' | 'Invoice'                                   | 'Item key' | 'Row key'                              |
+			| ''                                          | '28.01.2021 18:48:53' | '1'         | '16,26'  | '13,78'      | '0,86'          | 'Main Company' | 'Distribution department' | 'Reporting currency'           | 'USD'      | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'Interner' | '835ca87f-804e-4f3b-b02a-7a1f5d49abe0' |
+			| ''                                          | '28.01.2021 18:48:53' | '1'         | '84,57'  | '71,67'      | '4,45'          | 'Main Company' | 'Distribution department' | 'Reporting currency'           | 'USD'      | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'XS/Blue'  | '0cb89084-5857-45fc-b333-4fbec2c2e90a' |
+			| ''                                          | '28.01.2021 18:48:53' | '1'         | '95'     | '80,51'      | '5'             | 'Main Company' | 'Distribution department' | 'Local currency'               | 'TRY'      | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'Interner' | '835ca87f-804e-4f3b-b02a-7a1f5d49abe0' |
+			| ''                                          | '28.01.2021 18:48:53' | '1'         | '95'     | '80,51'      | '5'             | 'Main Company' | 'Distribution department' | 'TRY'                          | 'TRY'      | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'Interner' | '835ca87f-804e-4f3b-b02a-7a1f5d49abe0' |
+			| ''                                          | '28.01.2021 18:48:53' | '1'         | '95'     | '80,51'      | '5'             | 'Main Company' | 'Distribution department' | 'en description is empty'      | 'TRY'      | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'Interner' | '835ca87f-804e-4f3b-b02a-7a1f5d49abe0' |
+			| ''                                          | '28.01.2021 18:48:53' | '1'         | '494'    | '418,64'     | '26'            | 'Main Company' | 'Distribution department' | 'Local currency'               | 'TRY'      | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'XS/Blue'  | '0cb89084-5857-45fc-b333-4fbec2c2e90a' |
+			| ''                                          | '28.01.2021 18:48:53' | '1'         | '494'    | '418,64'     | '26'            | 'Main Company' | 'Distribution department' | 'TRY'                          | 'TRY'      | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'XS/Blue'  | '0cb89084-5857-45fc-b333-4fbec2c2e90a' |
+			| ''                                          | '28.01.2021 18:48:53' | '1'         | '494'    | '418,64'     | '26'            | 'Main Company' | 'Distribution department' | 'en description is empty'      | 'TRY'      | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'XS/Blue'  | '0cb89084-5857-45fc-b333-4fbec2c2e90a' |
+			| ''                                          | '28.01.2021 18:48:53' | '10'        | '569,24' | '482,41'     | '29,96'         | 'Main Company' | 'Distribution department' | 'Reporting currency'           | 'USD'      | 'Sales invoice 1 dated 28.01.2021 18:48:53' | '36/Red'   | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' |
+			| ''                                          | '28.01.2021 18:48:53' | '10'        | '3 325'  | '2 817,8'    | '175'           | 'Main Company' | 'Distribution department' | 'Local currency'               | 'TRY'      | 'Sales invoice 1 dated 28.01.2021 18:48:53' | '36/Red'   | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' |
+			| ''                                          | '28.01.2021 18:48:53' | '10'        | '3 325'  | '2 817,8'    | '175'           | 'Main Company' | 'Distribution department' | 'TRY'                          | 'TRY'      | 'Sales invoice 1 dated 28.01.2021 18:48:53' | '36/Red'   | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' |
+			| ''                                          | '28.01.2021 18:48:53' | '10'        | '3 325'  | '2 817,8'    | '175'           | 'Main Company' | 'Distribution department' | 'en description is empty'      | 'TRY'      | 'Sales invoice 1 dated 28.01.2021 18:48:53' | '36/Red'   | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' |
 			
 		And I close all client application windows
 		
@@ -277,15 +278,15 @@ Scenario: _040137 check Sales invoice movements by the Register  "R2021 Customer
 		And I select "R2021 Customer transactions" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales invoice 1 dated 28.01.2021 18:48:53' | ''            | ''                    | ''          | ''             | ''                             | ''         | ''                  | ''          | ''                         | ''                                          | ''                     | ''                  |
-			| 'Document registrations records'            | ''            | ''                    | ''          | ''             | ''                             | ''         | ''                  | ''          | ''                         | ''                                          | ''                     | ''                  |
-			| 'Register  "R2021 Customer transactions"'   | ''            | ''                    | ''          | ''             | ''                             | ''         | ''                  | ''          | ''                         | ''                                          | ''                     | ''                  |
-			| ''                                          | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                             | ''         | ''                  | ''          | ''                         | ''                                          | 'Attributes'           | ''                  |
-			| ''                                          | ''            | ''                    | 'Amount'    | 'Company'      | 'Multi currency movement type' | 'Currency' | 'Legal name'        | 'Partner'   | 'Agreement'                | 'Basis'                                     | 'Deferred calculation' | 'Customers advances closing' |
-			| ''                                          | 'Receipt'     | '28.01.2021 18:48:53' | '670,08'    | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'No'                   | ''                |
-			| ''                                          | 'Receipt'     | '28.01.2021 18:48:53' | '3 914'     | 'Main Company' | 'Local currency'               | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'No'                   | ''                |
-			| ''                                          | 'Receipt'     | '28.01.2021 18:48:53' | '3 914'     | 'Main Company' | 'TRY'                          | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'No'                   | ''                |
-			| ''                                          | 'Receipt'     | '28.01.2021 18:48:53' | '3 914'     | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'No'                   | ''                |	
+			| 'Sales invoice 1 dated 28.01.2021 18:48:53' | ''            | ''                    | ''          | ''             | ''                        | ''                             | ''         | ''                  | ''          | ''                         | ''                                          | ''                     | ''                           |
+			| 'Document registrations records'            | ''            | ''                    | ''          | ''             | ''                        | ''                             | ''         | ''                  | ''          | ''                         | ''                                          | ''                     | ''                           |
+			| 'Register  "R2021 Customer transactions"'   | ''            | ''                    | ''          | ''             | ''                        | ''                             | ''         | ''                  | ''          | ''                         | ''                                          | ''                     | ''                           |
+			| ''                                          | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                        | ''                             | ''         | ''                  | ''          | ''                         | ''                                          | 'Attributes'           | ''                           |
+			| ''                                          | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'                  | 'Multi currency movement type' | 'Currency' | 'Legal name'        | 'Partner'   | 'Agreement'                | 'Basis'                                     | 'Deferred calculation' | 'Customers advances closing' |
+			| ''                                          | 'Receipt'     | '28.01.2021 18:48:53' | '670,08'    | 'Main Company' | 'Distribution department' | 'Reporting currency'           | 'USD'      | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'No'                   | ''                           |
+			| ''                                          | 'Receipt'     | '28.01.2021 18:48:53' | '3 914'     | 'Main Company' | 'Distribution department' | 'Local currency'               | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'No'                   | ''                           |
+			| ''                                          | 'Receipt'     | '28.01.2021 18:48:53' | '3 914'     | 'Main Company' | 'Distribution department' | 'TRY'                          | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'No'                   | ''                           |
+			| ''                                          | 'Receipt'     | '28.01.2021 18:48:53' | '3 914'     | 'Main Company' | 'Distribution department' | 'en description is empty'      | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'No'                   | ''                           |
 		And I close all client application windows
 		
 Scenario: _040138 check Sales invoice movements by the Register  "R4011 Free stocks" SO-SC-SI (use SC)
@@ -378,14 +379,14 @@ Scenario: _040143 check Sales invoice movements by the Register  "R2040 Taxes in
 		And I select "R2040 Taxes incoming" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales invoice 1 dated 28.01.2021 18:48:53' | ''            | ''                    | ''               | ''           | ''             | ''    | ''         | ''                  |
-			| 'Document registrations records'            | ''            | ''                    | ''               | ''           | ''             | ''    | ''         | ''                  |
-			| 'Register  "R2040 Taxes incoming"'          | ''            | ''                    | ''               | ''           | ''             | ''    | ''         | ''                  |
-			| ''                                          | 'Record type' | 'Period'              | 'Resources'      | ''           | 'Dimensions'   | ''    | ''         | ''                  |
-			| ''                                          | ''            | ''                    | 'Taxable amount' | 'Tax amount' | 'Company'      | 'Tax' | 'Tax rate' | 'Tax movement type' |
-			| ''                                          | 'Receipt'     | '28.01.2021 18:48:53' | '80,51'          | '14,49'      | 'Main Company' | 'VAT' | '18%'      | ''                  |
-			| ''                                          | 'Receipt'     | '28.01.2021 18:48:53' | '418,64'         | '75,36'      | 'Main Company' | 'VAT' | '18%'      | ''                  |
-			| ''                                          | 'Receipt'     | '28.01.2021 18:48:53' | '2 817,8'        | '507,2'      | 'Main Company' | 'VAT' | '18%'      | ''                  |
+			| 'Sales invoice 1 dated 28.01.2021 18:48:53' | ''            | ''                    | ''               | ''           | ''             | ''                        | ''    | ''         | ''                  |
+			| 'Document registrations records'            | ''            | ''                    | ''               | ''           | ''             | ''                        | ''    | ''         | ''                  |
+			| 'Register  "R2040 Taxes incoming"'          | ''            | ''                    | ''               | ''           | ''             | ''                        | ''    | ''         | ''                  |
+			| ''                                          | 'Record type' | 'Period'              | 'Resources'      | ''           | 'Dimensions'   | ''                        | ''    | ''         | ''                  |
+			| ''                                          | ''            | ''                    | 'Taxable amount' | 'Tax amount' | 'Company'      | 'Branch'                  | 'Tax' | 'Tax rate' | 'Tax movement type' |
+			| ''                                          | 'Receipt'     | '28.01.2021 18:48:53' | '80,51'          | '14,49'      | 'Main Company' | 'Distribution department' | 'VAT' | '18%'      | ''                  |
+			| ''                                          | 'Receipt'     | '28.01.2021 18:48:53' | '418,64'         | '75,36'      | 'Main Company' | 'Distribution department' | 'VAT' | '18%'      | ''                  |
+			| ''                                          | 'Receipt'     | '28.01.2021 18:48:53' | '2 817,8'        | '507,2'      | 'Main Company' | 'Distribution department' | 'VAT' | '18%'      | ''                  |
 			
 		And I close all client application windows
 		
@@ -430,13 +431,13 @@ Scenario: _040146 check Sales invoice movements by the Register  "R2031 Shipment
 		And I select "R2031 Shipment invoicing" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales invoice 1 dated 28.01.2021 18:48:53' | ''            | ''                    | ''          | ''             | ''             | ''                                                  | ''         |
-			| 'Document registrations records'            | ''            | ''                    | ''          | ''             | ''             | ''                                                  | ''         |
-			| 'Register  "R2031 Shipment invoicing"'      | ''            | ''                    | ''          | ''             | ''             | ''                                                  | ''         |
-			| ''                                          | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''                                                  | ''         |
-			| ''                                          | ''            | ''                    | 'Quantity'  | 'Company'      | 'Store'        | 'Basis'                                             | 'Item key' |
-			| ''                                          | 'Expense'     | '28.01.2021 18:48:53' | '1'         | 'Main Company' | 'Store 02'     | 'Shipment confirmation 2 dated 28.01.2021 18:43:36' | 'XS/Blue'  |
-			| ''                                          | 'Expense'     | '28.01.2021 18:48:53' | '10'        | 'Main Company' | 'Store 02'     | 'Shipment confirmation 2 dated 28.01.2021 18:43:36' | '36/Red'   |	
+			| 'Sales invoice 1 dated 28.01.2021 18:48:53' | ''            | ''                    | ''          | ''             | ''                        | ''         | ''                                                  | ''         |
+			| 'Document registrations records'            | ''            | ''                    | ''          | ''             | ''                        | ''         | ''                                                  | ''         |
+			| 'Register  "R2031 Shipment invoicing"'      | ''            | ''                    | ''          | ''             | ''                        | ''         | ''                                                  | ''         |
+			| ''                                          | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                        | ''         | ''                                                  | ''         |
+			| ''                                          | ''            | ''                    | 'Quantity'  | 'Company'      | 'Branch'                  | 'Store'    | 'Basis'                                             | 'Item key' |
+			| ''                                          | 'Expense'     | '28.01.2021 18:48:53' | '1'         | 'Main Company' | 'Distribution department' | 'Store 02' | 'Shipment confirmation 2 dated 28.01.2021 18:43:36' | 'XS/Blue'  |
+			| ''                                          | 'Expense'     | '28.01.2021 18:48:53' | '10'        | 'Main Company' | 'Distribution department' | 'Store 02' | 'Shipment confirmation 2 dated 28.01.2021 18:43:36' | '36/Red'   |
 		And I close all client application windows
 		
 Scenario: _040147 check Sales invoice movements by the Register  "R2012 Invoice closing of sales orders" (SO exists)
@@ -450,14 +451,14 @@ Scenario: _040147 check Sales invoice movements by the Register  "R2012 Invoice 
 		And I select "R2012 Invoice closing of sales orders" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales invoice 1 dated 28.01.2021 18:48:53'         | ''            | ''                    | ''          | ''       | ''           | ''             | ''                                        | ''         | ''         | ''                                     |
-			| 'Document registrations records'                    | ''            | ''                    | ''          | ''       | ''           | ''             | ''                                        | ''         | ''         | ''                                     |
-			| 'Register  "R2012 Invoice closing of sales orders"' | ''            | ''                    | ''          | ''       | ''           | ''             | ''                                        | ''         | ''         | ''                                     |
-			| ''                                                  | 'Record type' | 'Period'              | 'Resources' | ''       | ''           | 'Dimensions'   | ''                                        | ''         | ''         | ''                                     |
-			| ''                                                  | ''            | ''                    | 'Quantity'  | 'Amount' | 'Net amount' | 'Company'      | 'Order'                                   | 'Currency' | 'Item key' | 'Row key'                              |
-			| ''                                                  | 'Expense'     | '28.01.2021 18:48:53' | '1'         | '95'     | '80,51'      | 'Main Company' | 'Sales order 1 dated 27.01.2021 19:50:45' | 'TRY'      | 'Interner' | '835ca87f-804e-4f3b-b02a-7a1f5d49abe0' |
-			| ''                                                  | 'Expense'     | '28.01.2021 18:48:53' | '1'         | '494'    | '418,64'     | 'Main Company' | 'Sales order 1 dated 27.01.2021 19:50:45' | 'TRY'      | 'XS/Blue'  | '0cb89084-5857-45fc-b333-4fbec2c2e90a' |
-			| ''                                                  | 'Expense'     | '28.01.2021 18:48:53' | '10'        | '3 325'  | '2 817,8'    | 'Main Company' | 'Sales order 1 dated 27.01.2021 19:50:45' | 'TRY'      | '36/Red'   | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' |
+			| 'Sales invoice 1 dated 28.01.2021 18:48:53'         | ''            | ''                    | ''          | ''       | ''           | ''             | ''                        | ''                                        | ''         | ''         | ''                                     |
+			| 'Document registrations records'                    | ''            | ''                    | ''          | ''       | ''           | ''             | ''                        | ''                                        | ''         | ''         | ''                                     |
+			| 'Register  "R2012 Invoice closing of sales orders"' | ''            | ''                    | ''          | ''       | ''           | ''             | ''                        | ''                                        | ''         | ''         | ''                                     |
+			| ''                                                  | 'Record type' | 'Period'              | 'Resources' | ''       | ''           | 'Dimensions'   | ''                        | ''                                        | ''         | ''         | ''                                     |
+			| ''                                                  | ''            | ''                    | 'Quantity'  | 'Amount' | 'Net amount' | 'Company'      | 'Branch'                  | 'Order'                                   | 'Currency' | 'Item key' | 'Row key'                              |
+			| ''                                                  | 'Expense'     | '28.01.2021 18:48:53' | '1'         | '95'     | '80,51'      | 'Main Company' | 'Distribution department' | 'Sales order 1 dated 27.01.2021 19:50:45' | 'TRY'      | 'Interner' | '835ca87f-804e-4f3b-b02a-7a1f5d49abe0' |
+			| ''                                                  | 'Expense'     | '28.01.2021 18:48:53' | '1'         | '494'    | '418,64'     | 'Main Company' | 'Distribution department' | 'Sales order 1 dated 27.01.2021 19:50:45' | 'TRY'      | 'XS/Blue'  | '0cb89084-5857-45fc-b333-4fbec2c2e90a' |
+			| ''                                                  | 'Expense'     | '28.01.2021 18:48:53' | '10'        | '3 325'  | '2 817,8'    | 'Main Company' | 'Distribution department' | 'Sales order 1 dated 27.01.2021 19:50:45' | 'TRY'      | '36/Red'   | '3a8fe357-b7bd-4d83-8816-c8348bbf4595' |
 		And I close all client application windows
 
 //2
@@ -475,11 +476,11 @@ Scenario: _0401442 check Sales invoice movements by the Register  "R4034 Schedul
 		And I select "R4034 Scheduled goods shipments" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document does not contain values
-			| 'Register  "R4034 Scheduled goods shipments"' | ''            | ''                    | ''          | ''             | ''                                        | ''         | ''         | ''                                     |
-			| ''                                            | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                                        | ''         | ''         | ''                                     |
-			| ''                                            | ''            | ''                    | 'Quantity'  | 'Company'      | 'Basis'                                   | 'Store'    | 'Item key' | 'Row key'                              |
-			| ''                                            | 'Expense'     | '28.01.2021 18:49:39' | '5'         | 'Main Company' | 'Sales order 1 dated 27.01.2021 19:50:45' | 'Store 02' | 'XS/Blue'  | '63008c12-b682-4aff-b29f-e6927036b05a' |
-			| ''                                            | 'Expense'     | '28.01.2021 18:49:39' | '10'        | 'Main Company' | 'Sales order 1 dated 27.01.2021 19:50:45' | 'Store 02' | '36/Red'   | 'e34f52ea-1fe2-47b2-9b37-63c093896662' |
+			| 'Register  "R4034 Scheduled goods shipments"' | ''            | ''                    | ''          | ''             | ''             | ''                                        | ''         | ''         | ''                                     |
+			| ''                                            | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''   | ''                                        | ''         | ''         | ''                                     |
+			| ''                                            | ''            | ''                    | 'Quantity'  | 'Company'      | 'Branch'      | 'Basis'                                   | 'Store'    | 'Item key' | 'Row key'                              |
+			| ''                                            | 'Expense'     | '28.01.2021 18:49:39' | '5'         | 'Main Company' | 'Main Company' | 'Sales order 1 dated 27.01.2021 19:50:45' | 'Store 02' | 'XS/Blue'  | '63008c12-b682-4aff-b29f-e6927036b05a' |
+			| ''                                            | 'Expense'     | '28.01.2021 18:49:39' | '10'        | 'Main Company' | 'Main Company' | 'Sales order 1 dated 27.01.2021 19:50:45' | 'Store 02' | '36/Red'   | 'e34f52ea-1fe2-47b2-9b37-63c093896662' |
 	
 		And I close all client application windows
 		
@@ -588,12 +589,12 @@ Scenario: _0401343 check Sales invoice movements by the Register  "R2011 Shipmen
 		And I select "R2011 Shipment of sales orders" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales invoice 3 dated 28.01.2021 18:50:57'  | ''            | ''                    | ''          | ''             | ''                                        | ''         |
-			| 'Document registrations records'             | ''            | ''                    | ''          | ''             | ''                                        | ''         |
-			| 'Register  "R2011 Shipment of sales orders"' | ''            | ''                    | ''          | ''             | ''                                        | ''         |
-			| ''                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                                        | ''         |
-			| ''                                           | ''            | ''                    | 'Quantity'  | 'Company'      | 'Order'                                   | 'Item key' |
-			| ''                                           | 'Expense'     | '28.01.2021 18:50:57' | '24'        | 'Main Company' | 'Sales order 3 dated 27.01.2021 19:50:45' | '37/18SD'  |
+			| 'Sales invoice 3 dated 28.01.2021 18:50:57'  | ''            | ''                    | ''          | ''             | ''                        | ''                                        | ''         |
+			| 'Document registrations records'             | ''            | ''                    | ''          | ''             | ''                        | ''                                        | ''         |
+			| 'Register  "R2011 Shipment of sales orders"' | ''            | ''                    | ''          | ''             | ''                        | ''                                        | ''         |
+			| ''                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                        | ''                                        | ''         |
+			| ''                                           | ''            | ''                    | 'Quantity'  | 'Company'      | 'Branch'                  | 'Order'                                   | 'Item key' |
+			| ''                                           | 'Expense'     | '28.01.2021 18:50:57' | '24'        | 'Main Company' | 'Distribution department' | 'Sales order 3 dated 27.01.2021 19:50:45' | '37/18SD'  |
 			
 		And I close all client application windows
 	
@@ -667,12 +668,12 @@ Scenario: _0401314 check Sales invoice movements by the Register  "R5011 Custome
 		And I select "R5011 Customers aging" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales invoice 4 dated 16.02.2021 10:59:49' | ''            | ''                    | ''          | ''             | ''         | ''                          | ''        | ''                                          | ''                    | ''              |
-			| 'Document registrations records'            | ''            | ''                    | ''          | ''             | ''         | ''                          | ''        | ''                                          | ''                    | ''              |
-			| 'Register  "R5011 Customers aging"'         | ''            | ''                    | ''          | ''             | ''         | ''                          | ''        | ''                                          | ''                    | ''              |
-			| ''                                          | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''         | ''                          | ''        | ''                                          | ''                    | 'Attributes'    |
-			| ''                                          | ''            | ''                    | 'Amount'    | 'Company'      | 'Currency' | 'Agreement'                 | 'Partner' | 'Invoice'                                   | 'Payment date'        | 'Aging closing' |
-			| ''                                          | 'Receipt'     | '16.02.2021 10:59:49' | '23 374'    | 'Main Company' | 'USD'      | 'Personal Partner terms, $' | 'Kalipso' | 'Sales invoice 4 dated 16.02.2021 10:59:49' | '23.02.2021 00:00:00' | ''              |
+			| 'Sales invoice 4 dated 16.02.2021 10:59:49' | ''            | ''                    | ''          | ''             | ''                        | ''         | ''                          | ''        | ''                                          | ''                    | ''              |
+			| 'Document registrations records'            | ''            | ''                    | ''          | ''             | ''                        | ''         | ''                          | ''        | ''                                          | ''                    | ''              |
+			| 'Register  "R5011 Customers aging"'         | ''            | ''                    | ''          | ''             | ''                        | ''         | ''                          | ''        | ''                                          | ''                    | ''              |
+			| ''                                          | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                        | ''         | ''                          | ''        | ''                                          | ''                    | 'Attributes'    |
+			| ''                                          | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'                  | 'Currency' | 'Agreement'                 | 'Partner' | 'Invoice'                                   | 'Payment date'        | 'Aging closing' |
+			| ''                                          | 'Receipt'     | '16.02.2021 10:59:49' | '23 374'    | 'Main Company' | 'Distribution department' | 'USD'      | 'Personal Partner terms, $' | 'Kalipso' | 'Sales invoice 4 dated 16.02.2021 10:59:49' | '23.02.2021 00:00:00' | ''              |
 		And I close all client application windows 
 
 
@@ -687,12 +688,12 @@ Scenario: _0401315 check Sales invoice movements by the Register  "R4014 Serial 
 		And I select "R4014 Serial lot numbers" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales invoice 4 dated 16.02.2021 10:59:49' | ''            | ''                    | ''          | ''             | ''         | ''                  |
-			| 'Document registrations records'            | ''            | ''                    | ''          | ''             | ''         | ''                  |
-			| 'Register  "R4014 Serial lot numbers"'      | ''            | ''                    | ''          | ''             | ''         | ''                  |
-			| ''                                          | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''         | ''                  |
-			| ''                                          | ''            | ''                    | 'Quantity'  | 'Company'      | 'Item key' | 'Serial lot number' |
-			| ''                                          | 'Expense'     | '16.02.2021 10:59:49' | '10'        | 'Main Company' | '36/Red'   | '0512'              |
+			| 'Sales invoice 4 dated 16.02.2021 10:59:49' | ''            | ''                    | ''          | ''             | ''                        | ''         | ''                  |
+			| 'Document registrations records'            | ''            | ''                    | ''          | ''             | ''                        | ''         | ''                  |
+			| 'Register  "R4014 Serial lot numbers"'      | ''            | ''                    | ''          | ''             | ''                        | ''         | ''                  |
+			| ''                                          | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                        | ''         | ''                  |
+			| ''                                          | ''            | ''                    | 'Quantity'  | 'Company'      | 'Branch'                  | 'Item key' | 'Serial lot number' |
+			| ''                                          | 'Expense'     | '16.02.2021 10:59:49' | '10'        | 'Main Company' | 'Distribution department' | '36/Red'   | '0512'              |
 		And I close all client application windows 
 
 Scenario: _0401316 check Sales invoice movements by the Register  "R2022 Customers payment planning" (use Aging, Receipt)
@@ -706,12 +707,12 @@ Scenario: _0401316 check Sales invoice movements by the Register  "R2022 Custome
 		And I select "R2022 Customers payment planning" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales invoice 4 dated 16.02.2021 10:59:49'    | ''            | ''                    | ''          | ''             | ''                                          | ''                | ''        | ''                          |
-			| 'Document registrations records'               | ''            | ''                    | ''          | ''             | ''                                          | ''                | ''        | ''                          |
-			| 'Register  "R2022 Customers payment planning"' | ''            | ''                    | ''          | ''             | ''                                          | ''                | ''        | ''                          |
-			| ''                                             | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                                          | ''                | ''        | ''                          |
-			| ''                                             | ''            | ''                    | 'Amount'    | 'Company'      | 'Basis'                                     | 'Legal name'      | 'Partner' | 'Agreement'                 |
-			| ''                                             | 'Receipt'     | '16.02.2021 10:59:49' | '23 374'    | 'Main Company' | 'Sales invoice 4 dated 16.02.2021 10:59:49' | 'Company Kalipso' | 'Kalipso' | 'Personal Partner terms, $' |
+			| 'Sales invoice 4 dated 16.02.2021 10:59:49'    | ''            | ''                    | ''          | ''             | ''                        | ''                                          | ''                | ''        | ''                          |
+			| 'Document registrations records'               | ''            | ''                    | ''          | ''             | ''                        | ''                                          | ''                | ''        | ''                          |
+			| 'Register  "R2022 Customers payment planning"' | ''            | ''                    | ''          | ''             | ''                        | ''                                          | ''                | ''        | ''                          |
+			| ''                                             | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                        | ''                                          | ''                | ''        | ''                          |
+			| ''                                             | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'                  | 'Basis'                                     | 'Legal name'      | 'Partner' | 'Agreement'                 |
+			| ''                                             | 'Receipt'     | '16.02.2021 10:59:49' | '23 374'    | 'Main Company' | 'Distribution department' | 'Sales invoice 4 dated 16.02.2021 10:59:49' | 'Company Kalipso' | 'Kalipso' | 'Personal Partner terms, $' |
 		And I close all client application windows 
 
 Scenario: _0401317 check there is no Sales invoice movements by the Register  "R2022 Customers payment planning" (without Aging)
@@ -740,12 +741,12 @@ Scenario: _0401318 check there is no Sales invoice movements by the Register  "R
 		And I select "R2022 Customers payment planning" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales invoice 112 dated 30.05.2021 12:48:26'  | ''            | ''                    | ''          | ''             | ''                                            | ''                | ''        | ''                                 |
-			| 'Document registrations records'               | ''            | ''                    | ''          | ''             | ''                                            | ''                | ''        | ''                                 |
-			| 'Register  "R2022 Customers payment planning"' | ''            | ''                    | ''          | ''             | ''                                            | ''                | ''        | ''                                 |
-			| ''                                             | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                                            | ''                | ''        | ''                                 |
-			| ''                                             | ''            | ''                    | 'Amount'    | 'Company'      | 'Basis'                                       | 'Legal name'      | 'Partner' | 'Agreement'                        |
-			| ''                                             | 'Receipt'     | '30.05.2021 12:48:26' | '400'       | 'Main Company' | 'Sales invoice 112 dated 30.05.2021 12:48:26' | 'Company Kalipso' | 'Kalipso' | 'Basic Partner terms, without VAT' |
+			| 'Sales invoice 112 dated 30.05.2021 12:48:26'  | ''            | ''                    | ''          | ''             | ''                        | ''                                            | ''                | ''        | ''                                 |
+			| 'Document registrations records'               | ''            | ''                    | ''          | ''             | ''                        | ''                                            | ''                | ''        | ''                                 |
+			| 'Register  "R2022 Customers payment planning"' | ''            | ''                    | ''          | ''             | ''                        | ''                                            | ''                | ''        | ''                                 |
+			| ''                                             | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                        | ''                                            | ''                | ''        | ''                                 |
+			| ''                                             | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'                  | 'Basis'                                       | 'Legal name'      | 'Partner' | 'Agreement'                        |
+			| ''                                             | 'Receipt'     | '30.05.2021 12:48:26' | '400'       | 'Main Company' | 'Distribution department' | 'Sales invoice 112 dated 30.05.2021 12:48:26' | 'Company Kalipso' | 'Kalipso' | 'Basic Partner terms, without VAT' |
 		And I close all client application windows 
 
 
@@ -774,13 +775,13 @@ Scenario: _0401317 check Sales invoice movements by the Register  "R2031 Shipmen
 		And I select "R2031 Shipment invoicing" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales invoice 4 dated 16.02.2021 10:59:49' | ''            | ''                    | ''          | ''             | ''         | ''                                          | ''         |
-			| 'Document registrations records'            | ''            | ''                    | ''          | ''             | ''         | ''                                          | ''         |
-			| 'Register  "R2031 Shipment invoicing"'      | ''            | ''                    | ''          | ''             | ''         | ''                                          | ''         |
-			| ''                                          | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''         | ''                                          | ''         |
-			| ''                                          | ''            | ''                    | 'Quantity'  | 'Company'      | 'Store'    | 'Basis'                                     | 'Item key' |
-			| ''                                          | 'Receipt'     | '16.02.2021 10:59:49' | '1'         | 'Main Company' | 'Store 02' | 'Sales invoice 4 dated 16.02.2021 10:59:49' | 'XS/Blue'  |
-			| ''                                          | 'Receipt'     | '16.02.2021 10:59:49' | '24'        | 'Main Company' | 'Store 02' | 'Sales invoice 4 dated 16.02.2021 10:59:49' | '37/18SD'  |
+			| 'Sales invoice 4 dated 16.02.2021 10:59:49' | ''            | ''                    | ''          | ''             | ''                        | ''         | ''                                          | ''         |
+			| 'Document registrations records'            | ''            | ''                    | ''          | ''             | ''                        | ''         | ''                                          | ''         |
+			| 'Register  "R2031 Shipment invoicing"'      | ''            | ''                    | ''          | ''             | ''                        | ''         | ''                                          | ''         |
+			| ''                                          | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                        | ''         | ''                                          | ''         |
+			| ''                                          | ''            | ''                    | 'Quantity'  | 'Company'      | 'Branch'                  | 'Store'    | 'Basis'                                     | 'Item key' |
+			| ''                                          | 'Receipt'     | '16.02.2021 10:59:49' | '1'         | 'Main Company' | 'Distribution department' | 'Store 02' | 'Sales invoice 4 dated 16.02.2021 10:59:49' | 'XS/Blue'  |
+			| ''                                          | 'Receipt'     | '16.02.2021 10:59:49' | '24'        | 'Main Company' | 'Distribution department' | 'Store 02' | 'Sales invoice 4 dated 16.02.2021 10:59:49' | '37/18SD'  |
 		And I close all client application windows
 
 Scenario: _0401318 check Sales invoice movements by the Register  "R4011 Free stocks" (SI first, not use SC)

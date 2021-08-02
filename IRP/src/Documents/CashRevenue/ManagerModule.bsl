@@ -1,3 +1,11 @@
+#Region PrintForm
+
+Function GetPrintForm(Ref, PrintFormName, AddInfo = Undefined) Export
+	Return Undefined;
+EndFunction
+
+#EndRegion
+
 #Region Posting
 
 Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
@@ -98,8 +106,9 @@ Function PaymentList()
 		|	PaymentList.RevenueType AS RevenueType,
 		|	PaymentList.NetAmount AS Amount,
 		|	PaymentList.Key,
-		|	PaymentList.BusinessUnit,
-		|	PaymentList.AdditionalAnalytic
+		|	PaymentList.ProfitLossCenter,
+		|	PaymentList.AdditionalAnalytic,
+		|	PaymentList.Ref.Branch AS Branch
 		|INTO PaymentList
 		|FROM
 		|	Document.CashRevenue.PaymentList AS PaymentList

@@ -1,3 +1,11 @@
+#Region PrintForm
+
+Function GetPrintForm(Ref, PrintFormName, AddInfo = Undefined) Export
+	Return Undefined;
+EndFunction
+
+#EndRegion
+
 #Region Posting
 
 Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
@@ -75,15 +83,6 @@ EndProcedure
 
 #EndRegion
 
-#Region PrintForm
-
-Function GetPrintForm(Ref, PrintFormName, AddInfo = Undefined) Export
-	Return Undefined;
-EndFunction
-
-#EndRegion
-
-
 #Region NewRegistersPosting
 
 Function GetInformationAboutMovements(Ref) Export
@@ -141,6 +140,7 @@ Function SerialLotNumbers()
 		"SELECT
 		|	SerialLotNumbers.Ref.Date AS Period,
 		|	SerialLotNumbers.Ref.Company AS Company,
+		|	SerialLotNumbers.Ref.Branch AS Branch,
 		|	SerialLotNumbers.Key,
 		|	SerialLotNumbers.SerialLotNumber,
 		|	SerialLotNumbers.Quantity,

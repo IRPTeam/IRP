@@ -175,7 +175,7 @@ Scenario: _017003 copy PO and check filling in Row Id info table
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Store" became equal to "Store 01"
 		And "ItemList" table became equal
-			| '#' | 'Business unit' | 'Price type'              | 'Item'     | 'Item key'  | 'Dont calculate row' | 'Tax amount' | 'Q'       | 'Unit' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Internal supply request' | 'Store'    | 'Expense type' | 'Detail' | 'Sales order' | 'Cancel' | 'Purchase basis' | 'Cancel reason' |
+			| '#' | 'Profit loss center' | 'Price type'              | 'Item'     | 'Item key'  | 'Dont calculate row' | 'Tax amount' | 'Q'       | 'Unit' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Internal supply request' | 'Store'    | 'Expense type' | 'Detail' | 'Sales order' | 'Cancel' | 'Purchase basis' | 'Cancel reason' |
 			| '1' | ''              | 'en description is empty' | 'Dress'    | 'M/White'   | 'No'                 | '3 050,85'   | '100,000' | 'pcs'  | '200,00' | '18%' | ''              | '16 949,15'  | '20 000,00'    | ''                        | 'Store 01' | ''             | ''       | ''            | 'No'     | ''               | ''              |
 			| '2' | ''              | 'en description is empty' | 'Dress'    | 'L/Green'   | 'No'                 | '6 406,78'   | '200,000' | 'pcs'  | '210,00' | '18%' | ''              | '35 593,22'  | '42 000,00'    | ''                        | 'Store 01' | ''             | ''       | ''            | 'No'     | ''               | ''              |
 			| '3' | ''              | 'en description is empty' | 'Trousers' | '36/Yellow' | 'No'                 | '11 440,68'  | '300,000' | 'pcs'  | '250,00' | '18%' | ''              | '63 559,32'  | '75 000,00'    | ''                        | 'Store 01' | ''             | ''       | ''            | 'No'     | ''               | ''              |
@@ -184,7 +184,7 @@ Scenario: _017003 copy PO and check filling in Row Id info table
 			| 'TRY'                | 'Partner term' | 'TRY'           | 'TRY'      | '1'                 | '1'            | '137 000'   |
 			| 'Local currency'     | 'Legal'        | 'TRY'           | 'TRY'      | '1'                 | '1'            | '137 000'   |
 			| 'Reporting currency' | 'Reporting'    | 'TRY'           | 'USD'      | '0,1712'            | '1'            | '23 454,40' |
-		Then the form attribute named "BusinessUnit" became equal to ""
+		Then the form attribute named "Branch" became equal to ""
 		Then the form attribute named "Autor" became equal to "en description is empty"
 		Then the form attribute named "PriceIncludeTax" became equal to "Yes"
 		Then the form attribute named "UseItemsReceiptScheduling" became equal to "No"
@@ -405,7 +405,7 @@ Scenario: _017006 create Purchase order based on Internal supply request
 			And I click "Save" button							
 		* Check Item tab and RowID tab
 			And "ItemList" table contains lines
-				| 'Store'    | 'Internal supply request'                               | 'Quantity in base unit' | 'Business unit' | 'Price type' | 'Item'  | 'Item key' | 'Dont calculate row' | 'Q'      | 'Unit' | 'Tax amount' | 'Price' | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Expense type' | 'Detail' | 'Sales order' | 'Cancel' | 'Purchase basis' | 'Delivery date' | 'Cancel reason' |
+				| 'Store'    | 'Internal supply request'                               | 'Quantity in base unit' | 'Profit loss center' | 'Price type' | 'Item'  | 'Item key' | 'Dont calculate row' | 'Q'      | 'Unit' | 'Tax amount' | 'Price' | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Expense type' | 'Detail' | 'Sales order' | 'Cancel' | 'Purchase basis' | 'Delivery date' | 'Cancel reason' |
 				| 'Store 02' | 'Internal supply request 117 dated 12.02.2021 14:39:38' | '10,000'                | ''              | ''           | 'Dress' | 'S/Yellow' | 'No'                 | '10,000' | 'pcs'  | ''           | ''      | ''    | ''              | ''           | ''             | ''             | ''       | ''            | 'No'     | ''               | ''              | ''              |
 				| 'Store 02' | 'Internal supply request 117 dated 12.02.2021 14:39:38' | '50,000'                | ''              | ''           | 'Dress' | 'XS/Blue'  | 'No'                 | '50,000' | 'pcs'  | ''           | ''      | ''    | ''              | ''           | ''             | ''             | ''       | ''            | 'No'     | ''               | ''              | ''              |
 			And "RowIDInfo" table contains lines
@@ -438,7 +438,7 @@ Scenario: _017006 create Purchase order based on Internal supply request
 		Then the form attribute named "Store" became equal to "Store 02"
 		And I click "Show row key" button	
 		And "ItemList" table contains lines
-			| 'Store'    | 'Internal supply request'                               | 'Quantity in base unit' | 'Business unit' | 'Price type' | 'Item'  | 'Item key' | 'Dont calculate row' | 'Q'      | 'Unit' | 'Tax amount' | 'Price' | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Expense type' | 'Detail' | 'Sales order' | 'Cancel' | 'Purchase basis' | 'Delivery date' | 'Cancel reason' |
+			| 'Store'    | 'Internal supply request'                               | 'Quantity in base unit' | 'Profit loss center' | 'Price type' | 'Item'  | 'Item key' | 'Dont calculate row' | 'Q'      | 'Unit' | 'Tax amount' | 'Price' | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Expense type' | 'Detail' | 'Sales order' | 'Cancel' | 'Purchase basis' | 'Delivery date' | 'Cancel reason' |
 			| 'Store 02' | 'Internal supply request 117 dated 12.02.2021 14:39:38' | '10,000'                | ''              | ''           | 'Dress' | 'S/Yellow' | 'No'                 | '10,000' | 'pcs'  | ''           | ''      | ''    | ''              | ''           | ''             | ''             | ''       | ''            | 'No'     | ''               | ''              | ''              |
 			| 'Store 02' | 'Internal supply request 117 dated 12.02.2021 14:39:38' | '50,000'                | ''              | ''           | 'Dress' | 'XS/Blue'  | 'No'                 | '50,000' | 'pcs'  | ''           | ''      | ''    | ''              | ''           | ''             | ''             | ''       | ''            | 'No'     | ''               | ''              | ''              |
 		And I go to line in "ItemList" table

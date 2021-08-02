@@ -1,3 +1,11 @@
+#Region PrintForm
+
+Function GetPrintForm(Ref, PrintFormName, AddInfo = Undefined) Export
+	Return Undefined;
+EndFunction
+
+#EndRegion
+
 #Region Posting
 
 Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
@@ -75,14 +83,6 @@ EndProcedure
 
 #EndRegion
 
-#Region PrintForm
-
-Function GetPrintForm(Ref, PrintTemplate, AddInfo = Undefined) Export
-	Return Undefined;
-EndFunction
-
-#EndRegion
-
 #Region NewRegistersPosting
 Function GetInformationAboutMovements(Ref) Export
 	Str = New Structure;
@@ -142,7 +142,7 @@ Function ItemList()
 		|	ItemList.Ref.Date AS Period,
 		|	ItemList.Ref AS RetailSalesReceipt,
 		|	ItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS IsService,
-		|	ItemList.BusinessUnit AS BusinessUnit,
+		|	ItemList.ProfitLossCenter AS ProfitLossCenter,
 		|	ItemList.RevenueType AS RevenueType,
 		|	ItemList.AdditionalAnalytic AS AdditionalAnalytic,
 		|	CASE
@@ -154,7 +154,9 @@ Function ItemList()
 		|	ItemList.OffersAmount AS OffersAmount,
 		|	ItemList.Ref AS Invoice,
 		|	ItemList.Key AS RowKey,
-		|	ItemList.Ref.UsePartnerTransactions AS UsePartnerTransactions
+		|	ItemList.Ref.UsePartnerTransactions AS UsePartnerTransactions,
+		|	ItemList.Ref.Branch AS Branch,
+		|	ItemList.Ref.LegalNameContract AS LegalNameContract
 		|INTO ItemList
 		|FROM
 		|	Document.RetailSalesReceipt.ItemList AS ItemList
@@ -167,7 +169,7 @@ Function Payments()
 	"SELECT
 	|	Payments.Ref.Date AS Period,
 	|	Payments.Ref.Company AS Company,
-	|	Payments.Ref.BusinessUnit AS BusinessUnit,
+	|	Payments.Ref.Branch AS Branch,
 	|	Payments.Account AS Account,
 	|	Payments.Ref.Currency AS Currency,
 	|	Payments.Amount AS Amount,
@@ -187,7 +189,7 @@ Function RetailSales()
 	Return 
 	"SELECT
 	|	RetailSalesReceiptItemList.Ref.Company AS Company,
-	|	RetailSalesReceiptItemList.Ref.BusinessUnit AS BusinessUnit,
+	|	RetailSalesReceiptItemList.Ref.Branch AS Branch,
 	|	RetailSalesReceiptItemList.ItemKey AS ItemKey,
 	|	SUM(RetailSalesReceiptItemList.QuantityInBaseUnit) AS Quantity,
 	|	SUM(ISNULL(RetailSalesReceiptSerialLotNumbers.Quantity, 0)) AS QuantityBySerialLtNumbers,
@@ -211,7 +213,7 @@ Function RetailSales()
 	|	RetailSalesReceiptItemList.Ref = &Ref
 	|GROUP BY
 	|	RetailSalesReceiptItemList.Ref.Company,
-	|	RetailSalesReceiptItemList.Ref.BusinessUnit,
+	|	RetailSalesReceiptItemList.Ref.Branch,
 	|	RetailSalesReceiptItemList.ItemKey,
 	|	RetailSalesReceiptItemList.Ref.Date,
 	|	RetailSalesReceiptItemList.Ref,
@@ -223,7 +225,7 @@ Function RetailSales()
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
 	|	tmpRetailSales.Company AS Company,
-	|	tmpRetailSales.BusinessUnit AS BusinessUnit,
+	|	tmpRetailSales.Branch AS Branch,
 	|	tmpRetailSales.ItemKey AS ItemKey,
 	|	CASE
 	|		WHEN tmpRetailSales.QuantityBySerialLtNumbers = 0
@@ -355,6 +357,7 @@ Function R2021B_CustomersTransactions()
 		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
 		|	ItemList.Period,
 		|	ItemList.Company,
+		|	ItemList.Branch,
 		|	ItemList.Currency,
 		|	ItemList.LegalName,
 		|	ItemList.Partner,
@@ -371,6 +374,7 @@ Function R2021B_CustomersTransactions()
 		|	ItemList.Agreement,
 		|	ItemList.BasisDocument,
 		|	ItemList.Company,
+		|	ItemList.Branch,
 		|	ItemList.Currency,
 		|	ItemList.LegalName,
 		|	ItemList.Partner,
@@ -383,6 +387,7 @@ Function R2021B_CustomersTransactions()
 		|	VALUE(AccumulationRecordType.Expense),
 		|	ItemList.Period,
 		|	ItemList.Company,
+		|	ItemList.Branch,
 		|	ItemList.Currency,
 		|	ItemList.LegalName,
 		|	ItemList.Partner,
@@ -398,6 +403,7 @@ Function R2021B_CustomersTransactions()
 		|	ItemList.Agreement,
 		|	ItemList.BasisDocument,
 		|	ItemList.Company,
+		|	ItemList.Branch,
 		|	ItemList.Currency,
 		|	ItemList.LegalName,
 		|	ItemList.Partner,
@@ -410,7 +416,9 @@ Function R5010B_ReconciliationStatement()
 		"SELECT
 		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
 		|	ItemList.Company,
+		|	ItemList.Branch,
 		|	ItemList.LegalName,
+		|	ItemList.LegalNameContract,
 		|	ItemList.Currency,
 		|	SUM(ItemList.TotalAmount) AS Amount,
 		|	ItemList.Period
@@ -421,7 +429,9 @@ Function R5010B_ReconciliationStatement()
 		|	ItemList.UsePartnerTransactions
 		|GROUP BY
 		|	ItemList.Company,
+		|	ItemList.Branch,
 		|	ItemList.LegalName,
+		|	ItemList.LegalNameContract,
 		|	ItemList.Currency,
 		|	ItemList.Period
 		|UNION ALL
@@ -429,7 +439,9 @@ Function R5010B_ReconciliationStatement()
 		|SELECT
 		|	VALUE(AccumulationRecordType.Expense),
 		|	ItemList.Company,
+		|	ItemList.Branch,
 		|	ItemList.LegalName,
+		|	ItemList.LegalNameContract,
 		|	ItemList.Currency,
 		|	SUM(ItemList.TotalAmount),
 		|	ItemList.Period
@@ -439,7 +451,9 @@ Function R5010B_ReconciliationStatement()
 		|	ItemList.UsePartnerTransactions
 		|GROUP BY
 		|	ItemList.Company,
+		|	ItemList.Branch,
 		|	ItemList.LegalName,
+		|	ItemList.LegalNameContract,
 		|	ItemList.Currency,
 		|	ItemList.Period";
 EndFunction

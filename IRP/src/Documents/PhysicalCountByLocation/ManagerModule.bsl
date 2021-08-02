@@ -1,3 +1,10 @@
+#Region PrintForm
+
+Function GetPrintForm(Ref, PrintFormName, AddInfo = Undefined) Export
+	Return Undefined;
+EndFunction
+
+#EndRegion
 
 Procedure GeneratePhysicalCountByLocation(Parameters, AddInfo = Undefined) Export
 	

@@ -209,24 +209,24 @@ Scenario: _1000003 create Sales invoice and check Aging tab
 			And I select "R2021 Customer transactions" exact value from "Register" drop-down list
 			And I click "Generate report" button
 			And "ResultTable" spreadsheet document contains lines:
-				| '$$SalesInvoice0240162$$'                 | ''            | ''                            | ''          | ''             | ''                             | ''         | ''                | ''        | ''                                 | ''                        | ''                     | ''                  |
-				| 'Document registrations records'          | ''            | ''                            | ''          | ''             | ''                             | ''         | ''                | ''        | ''                                 | ''                        | ''                     | ''                  |
-				| 'Register  "R2021 Customer transactions"' | ''            | ''                            | ''          | ''             | ''                             | ''         | ''                | ''        | ''                                 | ''                        | ''                     | ''                  |
-				| ''                                        | 'Record type' | 'Period'                      | 'Resources' | 'Dimensions'   | ''                             | ''         | ''                | ''        | ''                                 | ''                        | 'Attributes'           | ''                  |
-				| ''                                        | ''            | ''                            | 'Amount'    | 'Company'      | 'Multi currency movement type' | 'Currency' | 'Legal name'      | 'Partner' | 'Agreement'                        | 'Basis'                   | 'Deferred calculation' | 'Customers advances closing' |
-				| ''                                        | 'Receipt'     | '$$DateSalesInvoice0240162$$' | '94,16'     | 'Main Company' | 'Reporting currency'           | 'USD'      | 'Company Kalipso' | 'Kalipso' | 'Basic Partner terms, without VAT' | '$$SalesInvoice0240162$$' | 'No'                   | ''                |
-				| ''                                        | 'Receipt'     | '$$DateSalesInvoice0240162$$' | '550'       | 'Main Company' | 'Local currency'               | 'TRY'      | 'Company Kalipso' | 'Kalipso' | 'Basic Partner terms, without VAT' | '$$SalesInvoice0240162$$' | 'No'                   | ''                |
-				| ''                                        | 'Receipt'     | '$$DateSalesInvoice0240162$$' | '550'       | 'Main Company' | 'TRY'                          | 'TRY'      | 'Company Kalipso' | 'Kalipso' | 'Basic Partner terms, without VAT' | '$$SalesInvoice0240162$$' | 'No'                   | ''                |
-				| ''                                        | 'Receipt'     | '$$DateSalesInvoice0240162$$' | '550'       | 'Main Company' | 'en description is empty'      | 'TRY'      | 'Company Kalipso' | 'Kalipso' | 'Basic Partner terms, without VAT' | '$$SalesInvoice0240162$$' | 'No'                   | ''                |	
+				| '$$SalesInvoice0240162$$'                 | ''            | ''                            | ''          | ''             | ''       | ''                             | ''         | ''                | ''        | ''                                 | ''                        | ''                     | ''                           |
+				| 'Document registrations records'          | ''            | ''                            | ''          | ''             | ''       | ''                             | ''         | ''                | ''        | ''                                 | ''                        | ''                     | ''                           |
+				| 'Register  "R2021 Customer transactions"' | ''            | ''                            | ''          | ''             | ''       | ''                             | ''         | ''                | ''        | ''                                 | ''                        | ''                     | ''                           |
+				| ''                                        | 'Record type' | 'Period'                      | 'Resources' | 'Dimensions'   | ''       | ''                             | ''         | ''                | ''        | ''                                 | ''                        | 'Attributes'           | ''                           |
+				| ''                                        | ''            | ''                            | 'Amount'    | 'Company'      | 'Branch' | 'Multi currency movement type' | 'Currency' | 'Legal name'      | 'Partner' | 'Agreement'                        | 'Basis'                   | 'Deferred calculation' | 'Customers advances closing' |
+				| ''                                        | 'Receipt'     | '$$DateSalesInvoice0240162$$' | '94,16'     | 'Main Company' | ''       | 'Reporting currency'           | 'USD'      | 'Company Kalipso' | 'Kalipso' | 'Basic Partner terms, without VAT' | '$$SalesInvoice0240162$$' | 'No'                   | ''                           |
+				| ''                                        | 'Receipt'     | '$$DateSalesInvoice0240162$$' | '550'       | 'Main Company' | ''       | 'Local currency'               | 'TRY'      | 'Company Kalipso' | 'Kalipso' | 'Basic Partner terms, without VAT' | '$$SalesInvoice0240162$$' | 'No'                   | ''                           |
+				| ''                                        | 'Receipt'     | '$$DateSalesInvoice0240162$$' | '550'       | 'Main Company' | ''       | 'TRY'                          | 'TRY'      | 'Company Kalipso' | 'Kalipso' | 'Basic Partner terms, without VAT' | '$$SalesInvoice0240162$$' | 'No'                   | ''                           |
+				| ''                                        | 'Receipt'     | '$$DateSalesInvoice0240162$$' | '550'       | 'Main Company' | ''       | 'en description is empty'      | 'TRY'      | 'Company Kalipso' | 'Kalipso' | 'Basic Partner terms, without VAT' | '$$SalesInvoice0240162$$' | 'No'                   | ''                           |
 			And I select "R5011 Customers aging" exact value from "Register" drop-down list
 			And I click "Generate report" button
 			And "ResultTable" spreadsheet document contains lines:
-				| '$$SalesInvoice0240162$$'          | ''            | ''                            | ''          | ''             | ''         | ''                                 | ''        | ''                        | ''                    | ''                    |
-				| 'Document registrations records'   | ''            | ''                            | ''          | ''             | ''         | ''                                 | ''        | ''                        | ''                    | ''                    |
-				| 'Register  "R5011 Customers aging"' | ''            | ''                            | ''          | ''             | ''         | ''                                 | ''        | ''                        | ''                   | ''                    |
-				| ''                                 | 'Record type' | 'Period'                      | 'Resources' | 'Dimensions'   | ''         | ''                                 | ''        | ''                        | ''                    | 'Attributes'          |
-				| ''                                 | ''            | ''                            | 'Amount'    | 'Company'      | 'Currency' | 'Agreement'                        | 'Partner' | 'Invoice'                 | 'Payment date'        | 'Aging closing'       |
-				| ''                                 | 'Receipt'     | '$$DateSalesInvoice0240162$$' | '550'       | 'Main Company' | 'TRY'      | 'Basic Partner terms, without VAT' | 'Kalipso' | '$$SalesInvoice0240162$$' | '19.11.2020 00:00:00' | ''                    |
+				| '$$SalesInvoice0240162$$'           | ''            | ''                            | ''          | ''             | ''       | ''         | ''                                 | ''        | ''                        | ''                    | ''              |
+				| 'Document registrations records'    | ''            | ''                            | ''          | ''             | ''       | ''         | ''                                 | ''        | ''                        | ''                    | ''              |
+				| 'Register  "R5011 Customers aging"' | ''            | ''                            | ''          | ''             | ''       | ''         | ''                                 | ''        | ''                        | ''                    | ''              |
+				| ''                                  | 'Record type' | 'Period'                      | 'Resources' | 'Dimensions'   | ''       | ''         | ''                                 | ''        | ''                        | ''                    | 'Attributes'    |
+				| ''                                  | ''            | ''                            | 'Amount'    | 'Company'      | 'Branch' | 'Currency' | 'Agreement'                        | 'Partner' | 'Invoice'                 | 'Payment date'        | 'Aging closing' |
+				| ''                                  | 'Receipt'     | '$$DateSalesInvoice0240162$$' | '550'       | 'Main Company' | ''       | 'TRY'      | 'Basic Partner terms, without VAT' | 'Kalipso' | '$$SalesInvoice0240162$$' | '19.11.2020 00:00:00' | ''              |
 			And I close all client application windows
 	* Create second test SI
 		When create SalesInvoice024016 (Shipment confirmation does not used)
@@ -244,9 +244,9 @@ Scenario: _1000003 create Sales invoice and check Aging tab
 	* Check Aging movements
 		Given I open hyperlink "e1cib/list/AccumulationRegister.R5011B_CustomersAging"
 		And "List" table contains lines
-		| 'Period'                      | 'Recorder'                | 'Currency' | 'Company'      | 'Partner' | 'Amount' | 'Agreement'                        | 'Invoice'                 | 'Payment date'                            |
-		| '$$DateSalesInvoice024016$$'  | '$$SalesInvoice024016$$'  | 'TRY'      | 'Main Company' | 'Kalipso' | '550,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '$$DatePaymentTermsSalesInvoice0240161$$' |
-		| '$$DateSalesInvoice0240162$$' | '$$SalesInvoice0240162$$' | 'TRY'      | 'Main Company' | 'Kalipso' | '550,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice0240162$$' | '19.11.2020'                              |
+		| 'Period'                      | 'Recorder'                | 'Currency' | 'Company'      | 'Branch' | 'Partner' | 'Amount' | 'Agreement'                        | 'Invoice'                 | 'Payment date'                            |
+		| '$$DateSalesInvoice024016$$'  | '$$SalesInvoice024016$$'  | 'TRY'      | 'Main Company' | ''       | 'Kalipso' | '550,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '$$DatePaymentTermsSalesInvoice0240161$$' |
+		| '$$DateSalesInvoice0240162$$' | '$$SalesInvoice0240162$$' | 'TRY'      | 'Main Company' | ''       | 'Kalipso' | '550,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice0240162$$' | '19.11.2020'                              |
 		And I close all client application windows
 		
 Scenario: _1000009 create Cash receipt and check Aging register movements
@@ -328,10 +328,10 @@ Scenario: _1000009 create Cash receipt and check Aging register movements
 	* Check movements
 		Given I open hyperlink 'e1cib/list/AccumulationRegister.R5011B_CustomersAging'
 		And "List" table contains lines
-			| 'Period'                      | 'Recorder'                | 'Currency' | 'Company'      | 'Partner' | 'Amount' | 'Agreement'                        | 'Invoice'                 | 'Payment date'                            | 'Aging closing'                                          |
-			| '$$DateSalesInvoice0240162$$' | '$$SalesInvoice0240162$$' | 'TRY'      | 'Main Company' | 'Kalipso' | '550,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice0240162$$' | '19.11.2020'                              | ''                                                       |
-			| '$$DateSalesInvoice024016$$'  | '$$SalesInvoice024016$$'  | 'TRY'      | 'Main Company' | 'Kalipso' | '550,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '$$DatePaymentTermsSalesInvoice0240161$$' | ''                                                       |
-			| '$$DateCashReceipt1000009$$'  | '$$CashReceipt1000009$$'  | 'TRY'      | 'Main Company' | 'Kalipso' | '550,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice0240162$$' | '19.11.2020'                              | 'Customers advances closing 4 dated 21.04.2021 12:00:00' |
+			| 'Period'                      | 'Recorder'                | 'Currency' | 'Company'      | 'Branch' | 'Partner' | 'Amount' | 'Agreement'                        | 'Invoice'                 | 'Payment date'                            | 'Aging closing'                                          |
+			| '$$DateSalesInvoice0240162$$' | '$$SalesInvoice0240162$$' | 'TRY'      | 'Main Company' | ''       | 'Kalipso' | '550,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice0240162$$' | '19.11.2020'                              | ''                                                       |
+			| '$$DateSalesInvoice024016$$'  | '$$SalesInvoice024016$$'  | 'TRY'      | 'Main Company' | ''       | 'Kalipso' | '550,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '$$DatePaymentTermsSalesInvoice0240161$$' | ''                                                       |
+			| '$$DateCashReceipt1000009$$'  | '$$CashReceipt1000009$$'  | 'TRY'      | 'Main Company' | ''       | 'Kalipso' | '550,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice0240162$$' | '19.11.2020'                              | 'Customers advances closing 4 dated 21.04.2021 12:00:00' |
 		Then the number of "List" table lines is "равно" "3"
 		And I close all client application windows
 		
@@ -419,11 +419,11 @@ Scenario: _1000015 create Bank receipt and check Aging register movements
 		* Check movements
 			Given I open hyperlink 'e1cib/list/AccumulationRegister.R5011B_CustomersAging'
 			And "List" table contains lines
-				| 'Period'                      | 'Recorder'                | 'Currency' | 'Company'      | 'Partner' | 'Amount' | 'Agreement'                        | 'Invoice'                 | 'Payment date'                            | 'Aging closing'                                          |
-				| '$$DateSalesInvoice0240162$$' | '$$SalesInvoice0240162$$' | 'TRY'      | 'Main Company' | 'Kalipso' | '550,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice0240162$$' | '19.11.2020'                              | ''                                                       |
-				| '$$DateSalesInvoice024016$$'  | '$$SalesInvoice024016$$'  | 'TRY'      | 'Main Company' | 'Kalipso' | '550,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '$$DatePaymentTermsSalesInvoice0240161$$' | ''                                                       |
-				| '$$DateCashReceipt1000009$$'  | '$$CashReceipt1000009$$'  | 'TRY'      | 'Main Company' | 'Kalipso' | '550,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice0240162$$' | '19.11.2020'                              | 'Customers advances closing 4 dated 21.04.2021 12:00:00' |
-				| '$$DateBankReceipt1000015$$'  | '$$BankReceipt1000015$$'  | 'TRY'      | 'Main Company' | 'Kalipso' | '450,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '$$DatePaymentTermsSalesInvoice0240161$$' | 'Customers advances closing 4 dated 21.04.2021 12:00:00' |
+				| 'Period'                      | 'Recorder'                | 'Currency' | 'Company'      | 'Branch' | 'Partner' | 'Amount' | 'Agreement'                        | 'Invoice'                 | 'Payment date'                            | 'Aging closing'                                          |
+				| '$$DateSalesInvoice0240162$$' | '$$SalesInvoice0240162$$' | 'TRY'      | 'Main Company' | ''       | 'Kalipso' | '550,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice0240162$$' | '19.11.2020'                              | ''                                                       |
+				| '$$DateSalesInvoice024016$$'  | '$$SalesInvoice024016$$'  | 'TRY'      | 'Main Company' | ''       | 'Kalipso' | '550,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '$$DatePaymentTermsSalesInvoice0240161$$' | ''                                                       |
+				| '$$DateCashReceipt1000009$$'  | '$$CashReceipt1000009$$'  | 'TRY'      | 'Main Company' | ''       | 'Kalipso' | '550,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice0240162$$' | '19.11.2020'                              | 'Customers advances closing 4 dated 21.04.2021 12:00:00' |
+				| '$$DateBankReceipt1000015$$'  | '$$BankReceipt1000015$$'  | 'TRY'      | 'Main Company' | ''       | 'Kalipso' | '450,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '$$DatePaymentTermsSalesInvoice0240161$$' | 'Customers advances closing 4 dated 21.04.2021 12:00:00' |
 			Then the number of "List" table lines is "равно" "4"
 			And I close all client application windows
 
@@ -455,6 +455,7 @@ Scenario: _1000020 create Credit note and check Aging register movements
 			| 'Description'   |
 			| 'Basic Partner terms, without VAT' |
 		And I select current line in "List" table
+		And in "Transactions" table I move to the next cell
 		And in "Transactions" table I move to the next cell
 		* Check the selection of basis documents for the specified partner
 			And delay 2
@@ -493,12 +494,12 @@ Scenario: _1000020 create Credit note and check Aging register movements
 		* Check movements
 			Given I open hyperlink 'e1cib/list/AccumulationRegister.R5011B_CustomersAging'
 			And "List" table contains lines
-				| 'Period'                      | 'Recorder'                | 'Currency' | 'Company'      | 'Partner' | 'Amount' | 'Agreement'                        | 'Invoice'                 | 'Payment date'                            | 'Aging closing'                                          |
-				| '$$DateSalesInvoice0240162$$' | '$$SalesInvoice0240162$$' | 'TRY'      | 'Main Company' | 'Kalipso' | '550,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice0240162$$' | '19.11.2020'                              | ''                                                       |
-				| '$$DateSalesInvoice024016$$'  | '$$SalesInvoice024016$$'  | 'TRY'      | 'Main Company' | 'Kalipso' | '550,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '$$DatePaymentTermsSalesInvoice0240161$$' | ''                                                       |
-				| '$$DateCashReceipt1000009$$'  | '$$CashReceipt1000009$$'  | 'TRY'      | 'Main Company' | 'Kalipso' | '550,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice0240162$$' | '19.11.2020'                              | 'Customers advances closing 4 dated 21.04.2021 12:00:00' |
-				| '$$DateBankReceipt1000015$$'  | '$$BankReceipt1000015$$'  | 'TRY'      | 'Main Company' | 'Kalipso' | '450,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '$$DatePaymentTermsSalesInvoice0240161$$' | 'Customers advances closing 4 dated 21.04.2021 12:00:00' |
-				| '$$CreditNoteDate1000020$$'   | '$$CreditNote1000020$$'   | 'TRY'      | 'Main Company' | 'Kalipso' | '100,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '$$DatePaymentTermsSalesInvoice0240161$$' | 'Customers advances closing 4 dated 21.04.2021 12:00:00' |
+				| 'Period'                      | 'Recorder'                | 'Currency' | 'Company'      | 'Branch' | 'Partner' | 'Amount' | 'Agreement'                        | 'Invoice'                 | 'Payment date'                            | 'Aging closing'                                          |
+				| '$$DateSalesInvoice0240162$$' | '$$SalesInvoice0240162$$' | 'TRY'      | 'Main Company' | ''       | 'Kalipso' | '550,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice0240162$$' | '19.11.2020'                              | ''                                                       |
+				| '$$DateSalesInvoice024016$$'  | '$$SalesInvoice024016$$'  | 'TRY'      | 'Main Company' | ''       | 'Kalipso' | '550,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '$$DatePaymentTermsSalesInvoice0240161$$' | ''                                                       |
+				| '$$DateCashReceipt1000009$$'  | '$$CashReceipt1000009$$'  | 'TRY'      | 'Main Company' | ''       | 'Kalipso' | '550,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice0240162$$' | '19.11.2020'                              | 'Customers advances closing 4 dated 21.04.2021 12:00:00' |
+				| '$$DateBankReceipt1000015$$'  | '$$BankReceipt1000015$$'  | 'TRY'      | 'Main Company' | ''       | 'Kalipso' | '450,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '$$DatePaymentTermsSalesInvoice0240161$$' | 'Customers advances closing 4 dated 21.04.2021 12:00:00' |
+				| '$$CreditNoteDate1000020$$'   | '$$CreditNote1000020$$'   | 'TRY'      | 'Main Company' | ''       | 'Kalipso' | '100,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '$$DatePaymentTermsSalesInvoice0240161$$' | 'Customers advances closing 4 dated 21.04.2021 12:00:00' |
 			Then the number of "List" table lines is "равно" "5"
 	And I close all client application windows
 			
@@ -531,6 +532,7 @@ Scenario: _1000030 create Debit note and check Aging register movements
 			| 'Basic Partner terms, without VAT' |
 		And I select current line in "List" table
 		And in "Transactions" table I move to the next cell
+		And in "Transactions" table I move to the next cell
 		* Check the selection of basis documents for the specified partner
 			And delay 2
 			And I set checkbox "Show all"			
@@ -552,12 +554,12 @@ Scenario: _1000030 create Debit note and check Aging register movements
 		And I select "R5011 Customers aging" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| '$$DebitNote1000030$$'              | ''            | ''                         | ''          | ''             | ''         | ''                                 | ''        | ''                       | ''             | ''              |
-			| 'Document registrations records'    | ''            | ''                         | ''          | ''             | ''         | ''                                 | ''        | ''                       | ''             | ''              |
-			| 'Register  "R5011 Customers aging"' | ''            | ''                         | ''          | ''             | ''         | ''                                 | ''        | ''                       | ''             | ''              |
-			| ''                                  | 'Record type' | 'Period'                   | 'Resources' | 'Dimensions'   | ''         | ''                                 | ''        | ''                       | ''             | 'Attributes'    |
-			| ''                                  | ''            | ''                         | 'Amount'    | 'Company'      | 'Currency' | 'Agreement'                        | 'Partner' | 'Invoice'                | 'Payment date' | 'Aging closing' |
-			| ''                                  | 'Receipt'     | '$$DebitNoteDate1000030$$' | '50'        | 'Main Company' | 'TRY'      | 'Basic Partner terms, without VAT' | 'Kalipso' | '$$SalesInvoice024016$$' | '*'            | ''              |
+			| '$$DebitNote1000030$$'              | ''            | ''                         | ''          | ''             | ''       | ''         | ''                                 | ''        | ''                       | ''             | ''              |
+			| 'Document registrations records'    | ''            | ''                         | ''          | ''             | ''       | ''         | ''                                 | ''        | ''                       | ''             | ''              |
+			| 'Register  "R5011 Customers aging"' | ''            | ''                         | ''          | ''             | ''       | ''         | ''                                 | ''        | ''                       | ''             | ''              |
+			| ''                                  | 'Record type' | 'Period'                   | 'Resources' | 'Dimensions'   | ''       | ''         | ''                                 | ''        | ''                       | ''             | 'Attributes'    |
+			| ''                                  | ''            | ''                         | 'Amount'    | 'Company'      | 'Branch' | 'Currency' | 'Agreement'                        | 'Partner' | 'Invoice'                | 'Payment date' | 'Aging closing' |
+			| ''                                  | 'Receipt'     | '$$DebitNoteDate1000030$$' | '50'        | 'Main Company' | ''       | 'TRY'      | 'Basic Partner terms, without VAT' | 'Kalipso' | '$$SalesInvoice024016$$' | '*'            | ''              |
 		And I close all client application windows
 	* Post customers advance closing document
 		Given I open hyperlink 'e1cib/list/Document.CustomersAdvancesClosing'
@@ -572,13 +574,13 @@ Scenario: _1000030 create Debit note and check Aging register movements
 	* Check movements
 		Given I open hyperlink 'e1cib/list/AccumulationRegister.R5011B_CustomersAging'
 		And "List" table contains lines
-			| 'Period'                      | 'Recorder'                | 'Currency' | 'Company'      | 'Partner' | 'Amount' | 'Agreement'                        | 'Invoice'                 | 'Payment date'                            | 'Aging closing'                                          |
-			| '$$DateSalesInvoice0240162$$' | '$$SalesInvoice0240162$$' | 'TRY'      | 'Main Company' | 'Kalipso' | '550,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice0240162$$' | '19.11.2020'                              | ''                                                       |
-			| '$$DateSalesInvoice024016$$'  | '$$SalesInvoice024016$$'  | 'TRY'      | 'Main Company' | 'Kalipso' | '550,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '$$DatePaymentTermsSalesInvoice0240161$$' | ''                                                       |
-			| '$$DateCashReceipt1000009$$'  | '$$CashReceipt1000009$$'  | 'TRY'      | 'Main Company' | 'Kalipso' | '550,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice0240162$$' | '19.11.2020'                              | 'Customers advances closing 4 dated 21.04.2021 12:00:00' |
-			| '$$DateBankReceipt1000015$$'  | '$$BankReceipt1000015$$'  | 'TRY'      | 'Main Company' | 'Kalipso' | '450,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '$$DatePaymentTermsSalesInvoice0240161$$' | 'Customers advances closing 4 dated 21.04.2021 12:00:00' |
-			| '$$CreditNoteDate1000020$$'   | '$$CreditNote1000020$$'   | 'TRY'      | 'Main Company' | 'Kalipso' | '100,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '$$DatePaymentTermsSalesInvoice0240161$$' | 'Customers advances closing 4 dated 21.04.2021 12:00:00' |
-			| '$$DebitNoteDate1000030$$'    | '$$DebitNote1000030$$'    | 'TRY'      | 'Main Company' | 'Kalipso' | '50,00'  | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '*'                                       | '' |
+			| 'Period'                      | 'Recorder'                | 'Currency' | 'Company'      | 'Branch' | 'Partner' | 'Amount' | 'Agreement'                        | 'Invoice'                 | 'Payment date'                            | 'Aging closing'                                          |
+			| '$$DateSalesInvoice0240162$$' | '$$SalesInvoice0240162$$' | 'TRY'      | 'Main Company' | ''       | 'Kalipso' | '550,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice0240162$$' | '19.11.2020'                              | ''                                                       |
+			| '$$DateSalesInvoice024016$$'  | '$$SalesInvoice024016$$'  | 'TRY'      | 'Main Company' | ''       | 'Kalipso' | '550,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '$$DatePaymentTermsSalesInvoice0240161$$' | ''                                                       |
+			| '$$DateCashReceipt1000009$$'  | '$$CashReceipt1000009$$'  | 'TRY'      | 'Main Company' | ''       | 'Kalipso' | '550,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice0240162$$' | '19.11.2020'                              | 'Customers advances closing 4 dated 21.04.2021 12:00:00' |
+			| '$$DateBankReceipt1000015$$'  | '$$BankReceipt1000015$$'  | 'TRY'      | 'Main Company' | ''       | 'Kalipso' | '450,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '$$DatePaymentTermsSalesInvoice0240161$$' | 'Customers advances closing 4 dated 21.04.2021 12:00:00' |
+			| '$$CreditNoteDate1000020$$'   | '$$CreditNote1000020$$'   | 'TRY'      | 'Main Company' | ''       | 'Kalipso' | '100,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '$$DatePaymentTermsSalesInvoice0240161$$' | 'Customers advances closing 4 dated 21.04.2021 12:00:00' |
+			| '$$DebitNoteDate1000030$$'    | '$$DebitNote1000030$$'    | 'TRY'      | 'Main Company' | ''       | 'Kalipso' | '50,00'  | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '*'                                       | ''                                                       |
 		Then the number of "List" table lines is "равно" "6"
 	And I close all client application windows
 				
@@ -705,11 +707,11 @@ Scenario: _1000050 check the offset of Sales invoice advance (type of settlement
 			And I select "R5011 Customers aging" exact value from "Register" drop-down list
 			And I click "Generate report" button			
 			And "ResultTable" spreadsheet document contains lines:
-				| 'Document registrations records'    | ''            | ''                            | ''          | ''             | ''         | ''                                 | ''        | ''                        | ''             | ''              |
-				| 'Register  "R5011 Customers aging"' | ''            | ''                            | ''          | ''             | ''         | ''                                 | ''        | ''                        | ''             | ''              |
-				| ''                                  | 'Record type' | 'Period'                      | 'Resources' | 'Dimensions'   | ''         | ''                                 | ''        | ''                        | ''             | 'Attributes'    |
-				| ''                                  | ''            | ''                            | 'Amount'    | 'Company'      | 'Currency' | 'Agreement'                        | 'Partner' | 'Invoice'                 | 'Payment date' | 'Aging closing' |
-				| ''                                  | 'Receipt'     | '$$DateSalesInvoice0240164$$' | '550'       | 'Main Company' | 'TRY'      | 'Basic Partner terms, without VAT' | 'Kalipso' | '$$SalesInvoice0240164$$' | '*'            | ''              |
+				| 'Document registrations records'    | ''            | ''                            | ''          | ''             | ''       | ''         | ''                                 | ''        | ''                        | ''             | ''              |
+				| 'Register  "R5011 Customers aging"' | ''            | ''                            | ''          | ''             | ''       | ''         | ''                                 | ''        | ''                        | ''             | ''              |
+				| ''                                  | 'Record type' | 'Period'                      | 'Resources' | 'Dimensions'   | ''       | ''         | ''                                 | ''        | ''                        | ''             | 'Attributes'    |
+				| ''                                  | ''            | ''                            | 'Amount'    | 'Company'      | 'Branch' | 'Currency' | 'Agreement'                        | 'Partner' | 'Invoice'                 | 'Payment date' | 'Aging closing' |
+				| ''                                  | 'Receipt'     | '$$DateSalesInvoice0240164$$' | '550'       | 'Main Company' | ''       | 'TRY'      | 'Basic Partner terms, without VAT' | 'Kalipso' | '$$SalesInvoice0240164$$' | '*'            | ''              |
 	* Create Cash receipt (advance + closed the remainder of the invoice)
 			Given I open hyperlink "e1cib/list/Document.CashReceipt"
 			And I click the button named "FormCreate"
@@ -768,12 +770,12 @@ Scenario: _1000050 check the offset of Sales invoice advance (type of settlement
 			And I select "R5011 Customers aging" exact value from "Register" drop-down list
 			And I click "Generate report" button		
 			And "ResultTable" spreadsheet document contains lines:	
-				| '$$SalesInvoice0240175$$'           | ''            | ''                            | ''          | ''             | ''         | ''                                 | ''        | ''                        | ''             | ''              |
-				| 'Document registrations records'    | ''            | ''                            | ''          | ''             | ''         | ''                                 | ''        | ''                        | ''             | ''              |
-				| 'Register  "R5011 Customers aging"' | ''            | ''                            | ''          | ''             | ''         | ''                                 | ''        | ''                        | ''             | ''              |
-				| ''                                  | 'Record type' | 'Period'                      | 'Resources' | 'Dimensions'   | ''         | ''                                 | ''        | ''                        | ''             | 'Attributes'    |
-				| ''                                  | ''            | ''                            | 'Amount'    | 'Company'      | 'Currency' | 'Agreement'                        | 'Partner' | 'Invoice'                 | 'Payment date' | 'Aging closing' |
-				| ''                                  | 'Receipt'     | '$$DateSalesInvoice0240175$$' | '550'       | 'Main Company' | 'TRY'      | 'Basic Partner terms, without VAT' | 'Kalipso' | '$$SalesInvoice0240175$$' | '*'            | ''              |
+				| '$$SalesInvoice0240175$$'           | ''            | ''                            | ''          | ''             | ''       | ''         | ''                                 | ''        | ''                        | ''             | ''              |
+				| 'Document registrations records'    | ''            | ''                            | ''          | ''             | ''       | ''         | ''                                 | ''        | ''                        | ''             | ''              |
+				| 'Register  "R5011 Customers aging"' | ''            | ''                            | ''          | ''             | ''       | ''         | ''                                 | ''        | ''                        | ''             | ''              |
+				| ''                                  | 'Record type' | 'Period'                      | 'Resources' | 'Dimensions'   | ''       | ''         | ''                                 | ''        | ''                        | ''             | 'Attributes'    |
+				| ''                                  | ''            | ''                            | 'Amount'    | 'Company'      | 'Branch' | 'Currency' | 'Agreement'                        | 'Partner' | 'Invoice'                 | 'Payment date' | 'Aging closing' |
+				| ''                                  | 'Receipt'     | '$$DateSalesInvoice0240175$$' | '550'       | 'Main Company' | ''       | 'TRY'      | 'Basic Partner terms, without VAT' | 'Kalipso' | '$$SalesInvoice0240175$$' | '*'            | ''              |
 		* Post customers advance closing document
 			Given I open hyperlink 'e1cib/list/Document.CustomersAdvancesClosing'
 			And I go to line in "List" table
@@ -787,9 +789,9 @@ Scenario: _1000050 check the offset of Sales invoice advance (type of settlement
 		* Check movements
 			Given I open hyperlink 'e1cib/list/AccumulationRegister.R5011B_CustomersAging'
 			And "List" table contains lines:
-				| 'Recorder'                | 'Currency' | 'Company'      | 'Partner' | 'Amount' | 'Agreement'                        | 'Invoice'                 | 'Payment date' | 'Aging closing'                                          |
-				| '$$SalesInvoice0240164$$' | 'TRY'      | 'Main Company' | 'Kalipso' | '550,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice0240164$$' | '*'            | ''                                                       |
-				| '$$SalesInvoice0240164$$' | 'TRY'      | 'Main Company' | 'Kalipso' | '550,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice0240164$$' | '*'            | 'Customers advances closing 4 dated 21.04.2021 12:00:00' |
-				| '$$SalesInvoice024016$$'  | 'TRY'      | 'Main Company' | 'Kalipso' | '550,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '*'            | ''                                                       |
-				| '$$SalesInvoice024016$$'  | 'TRY'      | 'Main Company' | 'Kalipso' | '550,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '*'            | 'Customers advances closing 4 dated 21.04.2021 12:00:00' |
+				| 'Recorder'                | 'Currency' | 'Company'      | 'Branch' | 'Partner' | 'Amount' | 'Agreement'                        | 'Invoice'                 | 'Payment date' | 'Aging closing'                                          |
+				| '$$SalesInvoice0240164$$' | 'TRY'      | 'Main Company' | ''       | 'Kalipso' | '550,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice0240164$$' | '*'            | ''                                                       |
+				| '$$SalesInvoice0240164$$' | 'TRY'      | 'Main Company' | ''       | 'Kalipso' | '550,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice0240164$$' | '*'            | 'Customers advances closing 4 dated 21.04.2021 12:00:00' |
+				| '$$SalesInvoice024016$$'  | 'TRY'      | 'Main Company' | ''       | 'Kalipso' | '550,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '*'            | ''                                                       |
+				| '$$SalesInvoice024016$$'  | 'TRY'      | 'Main Company' | ''       | 'Kalipso' | '550,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '*'            | 'Customers advances closing 4 dated 21.04.2021 12:00:00' |
 			And I close all client application windows	

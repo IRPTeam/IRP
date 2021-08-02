@@ -108,6 +108,11 @@ Procedure LegalNameOnChange(Item, AddInfo = Undefined) Export
 EndProcedure
 
 &AtClient
+Procedure LegalNameContractOnChange(Item)
+	DocRetailReturnReceiptClient.LegalNameContractOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
 Procedure AgreementOnChange(Item, AddInfo = Undefined) Export
 	DocRetailReturnReceiptClient.AgreementOnChange(Object, ThisObject, Item);
 EndProcedure
@@ -125,6 +130,11 @@ EndProcedure
 &AtClient
 Procedure CurrencyOnChange(Item)
 	DocRetailReturnReceiptClient.CurrencyOnChange(Object, ThisObject, Item);	
+EndProcedure
+
+&AtClient
+Procedure RetailCustomerOnChange(Item)
+	DocRetailReturnReceiptClient.RetailCustomerOnChange(Object, ThisObject, Item);	
 EndProcedure
 
 #EndRegion

@@ -1,3 +1,11 @@
+#Region PrintForm
+
+Function GetPrintForm(Ref, PrintFormName, AddInfo = Undefined) Export
+	Return Undefined;
+EndFunction
+
+#EndRegion
+
 #Region Posting
 
 Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
@@ -163,7 +171,8 @@ Function ItemList()
 	|	ItemList.Ref.TransactionType = VALUE(Enum.ShipmentConfirmationTransactionTypes.ReturnToVendor) AS
 	|		IsTransaction_ReturnToVendor,
 	|	ItemList.Ref.TransactionType = VALUE(Enum.ShipmentConfirmationTransactionTypes.InventoryTransfer) AS
-	|		IsTransaction_InventoryTransfer
+	|		IsTransaction_InventoryTransfer,
+	|	ItemList.Ref.Branch AS Branch
 	|INTO ItemList
 	|FROM
 	|	Document.ShipmentConfirmation.ItemList AS ItemList
@@ -207,6 +216,7 @@ Function R2031B_ShipmentInvoicing()
 		|	ItemList.ShipmentConfirmation AS Basis,
 		|	ItemList.Quantity AS Quantity,
 		|	ItemList.Company,
+		|	ItemList.Branch,
 		|	ItemList.Period,
 		|	ItemList.ItemKey,
 		|	ItemList.Store
@@ -224,6 +234,7 @@ Function R2031B_ShipmentInvoicing()
 		|	ItemList.SalesInvoice,
 		|	ItemList.Quantity,
 		|	ItemList.Company,
+		|	ItemList.Branch,
 		|	ItemList.Period,
 		|	ItemList.ItemKey,
 		|	ItemList.Store
@@ -241,6 +252,7 @@ Function R1031B_ReceiptInvoicing()
 		|	ItemList.ShipmentConfirmation AS Basis,
 		|	ItemList.Quantity AS Quantity,
 		|	ItemList.Company,
+		|	ItemList.Branch,
 		|	ItemList.Period,
 		|	ItemList.ItemKey,
 		|	ItemList.Store
@@ -258,6 +270,7 @@ Function R1031B_ReceiptInvoicing()
 		|	ItemList.PurchaseReturn,
 		|	ItemList.Quantity,
 		|	ItemList.Company,
+		|	ItemList.Branch,
 		|	ItemList.Period,
 		|	ItemList.ItemKey,
 		|	ItemList.Store

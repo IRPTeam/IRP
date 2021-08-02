@@ -567,6 +567,45 @@ EndProcedure
 
 #EndRegion
 
+#Region RetailCustomer
+
+Procedure RetailCustomerPointOfSaleOnChange(Object, Form, Item, AddInfo = Undefined) Export
+	Settings = DocumentsClient.GetSettingsStructure(ThisObject);
+	Settings.Insert("ChangeTitleGroupTitle", False);
+	DocumentsClient.RetailCustomerOnChange(Object, Form, ThisObject, Item, Settings, AddInfo);
+EndProcedure
+	
+Procedure RetailCustomerOnChange(Object, Form, Item, AddInfo = Undefined) Export
+	DocumentsClient.RetailCustomerOnChange(Object, Form, ThisObject, Item, Undefined, AddInfo);
+EndProcedure
+	
+Procedure RetailCustomerOnChangePutServerDataToAddInfo(Object, Form, AddInfo = Undefined) Export
+	DocumentsClient.RetailCustomerOnChangePutServerDataToAddInfo(Object, Form, AddInfo);
+EndProcedure
+
+Function RetailCustomerSettings(Object, Form, AddInfo = Undefined) Export
+	If AddInfo = Undefined Then
+		Return New Structure("PutServerDataToAddInfo", True);
+	EndIf;
+	ServerData = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "ServerData");
+	
+	Settings = New Structure("Actions, ObjectAttributes, FormAttributes, AgreementType");
+	
+	Actions = New Structure();
+	Actions.Insert("ChangePartner"	        , "ChangePartner");
+	Actions.Insert("ChangeManagerSegment"	, "ChangeManagerSegment");
+	Actions.Insert("ChangeLegalName"		, "ChangeLegalName");
+	Actions.Insert("ChangeAgreement"		, "ChangeAgreement");
+	Settings.Actions = Actions;
+	
+	Settings.ObjectAttributes 	= "Company, Currency, PriceIncludeTax, Agreement, LegalName, ManagerSegment, Partner";
+	Settings.FormAttributes		= "CurrentPriceType";
+	Settings.AgreementType = ServerData.AgreementTypes_Customer;
+	Return Settings;
+EndFunction
+	
+#EndRegion
+
 #Region ItemCurrency
 
 Procedure CurrencyOnChange(Object, Form, Item, AddInfo = Undefined) Export
@@ -591,6 +630,10 @@ EndFunction
 
 Procedure LegalNameOnChange(Object, Form, Item) Export
 	DocumentsClient.LegalNameOnChange(Object, Form, ThisObject, Item);
+EndProcedure
+
+Procedure LegalNameContractOnChange(Object, Form, Item) Export
+	DocumentsClient.LegalNameContractOnChange(Object, Form, ThisObject, Item);
 EndProcedure
 
 Procedure LegalNameStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export

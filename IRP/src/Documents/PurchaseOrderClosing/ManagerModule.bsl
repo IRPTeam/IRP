@@ -1,3 +1,11 @@
+#Region PrintForm
+
+Function GetPrintForm(Ref, PrintFormName, AddInfo = Undefined) Export
+	Return Undefined;
+EndFunction
+
+#EndRegion
+
 #Region Posting
 
 Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
@@ -101,6 +109,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R1011B_PurchaseOrdersReceipt());
 	QueryArray.Add(R1012B_PurchaseOrdersInvoiceClosing());
 	QueryArray.Add(R1014T_CanceledPurchaseOrders());
+	QueryArray.Add(R4033B_GoodsReceiptSchedule());
 	QueryArray.Add(R4035B_IncomingStocks());
 	Return QueryArray;	
 EndFunction	
@@ -121,7 +130,7 @@ Function ItemList()
 		|	PurchaseOrderItems.Unit,
 		|	PurchaseOrderItems.Ref.Date AS Period,
 		|	PurchaseOrderItems.Key AS RowKey,
-		|	PurchaseOrderItems.BusinessUnit AS BusinessUnit,
+		|	PurchaseOrderItems.ProfitLossCenter AS ProfitLossCenter,
 		|	PurchaseOrderItems.ExpenseType AS ExpenseType,
 		|	PurchaseOrderItems.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS IsService,
 		|	PurchaseOrderItems.DeliveryDate AS DeliveryDate,
@@ -135,7 +144,8 @@ Function ItemList()
 		|	PurchaseOrderItems.PurchaseBasis REFS Document.SalesOrder
 		|	AND NOT PurchaseOrderItems.PurchaseBasis.REF IS NULL AS UseSalesOrder,
 		|	PurchaseOrderItems.OffersAmount,
-		|	PurchaseOrderItems.Ref.Currency AS Currency
+		|	PurchaseOrderItems.Ref.Currency AS Currency,
+		|	PurchaseOrderItems.Ref.Branch AS Branch
 		|INTO ItemList
 		|FROM
 		|	Document.PurchaseOrderClosing.ItemList AS PurchaseOrderItems
@@ -207,6 +217,21 @@ Function R1014T_CanceledPurchaseOrders()
 		|FROM
 		|	ItemList AS QueryTable
 		|WHERE QueryTable.isCanceled";
+
+EndFunction
+
+Function R4033B_GoodsReceiptSchedule()
+	Return
+		"SELECT 
+		|	&Period AS Period,
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	-IncomingStocks.QuantityBalance AS Quantity,
+		|	*
+		|
+		|INTO R4033B_GoodsReceiptSchedule
+		|FROM
+		|	AccumulationRegister.R4033B_GoodsReceiptSchedule.Balance(&BalancePeriod, Basis = &PurchaseOrder) AS
+		|		IncomingStocks";
 
 EndFunction
 

@@ -67,6 +67,7 @@ Scenario: _0154100 preparation ( filling documents)
 		When Create catalog Taxes objects (Sales tax)
 		When Create information register TaxSettings (Sales tax)
 		When Create information register Taxes records (Sales tax)
+		When Create catalog RetailCustomers objects (check POS)
 	* Tax settings
 		Given I open hyperlink "e1cib/list/Catalog.Taxes"
 		And I go to line in "List" table
@@ -145,10 +146,10 @@ Scenario: _0154100 preparation ( filling documents)
 		And I input "2,00" text in "Percent" field of "PaymentTypes" table
 		And I finish line editing in "PaymentTypes" table
 		And I click "Save" button
-		And In this window I click command interface button "Business unit bank terms"
+		And In this window I click command interface button "Branch bank terms"
 		And I click the button named "FormCreate"
-		Then "Business unit bank terms (create)" window is opened
-		And I click Select button of "Business unit" field
+		Then "Branch bank terms (create)" window is opened
+		And I click Select button of "Branch" field
 		And I go to line in "List" table
 			| 'Description' |
 			| 'Shop 01'     |
@@ -408,7 +409,7 @@ Scenario: _0154136 create document Retail Return Receipt based on RetailSalesRec
 			| '350,00' | 'Shirt' | '18%' | '38/Black' | '1,000' | ''              | '53,39'      | 'pcs'  | '296,61'     | '350,00'       | 'Store 01' | '$$RetailSalesReceipt015413$$' |
 			| '550,00' | 'Dress' | '18%' | 'L/Green'  | '1,000' | ''              | '83,90'      | 'pcs'  | '466,10'     | '550,00'       | 'Store 01' | '$$RetailSalesReceipt015413$$' |
 		And I move to "Other" tab
-		And I click Select button of "Business unit" field
+		And I click Select button of "Branch" field
 		And I go to line in "List" table
 			| 'Description'  |
 			| 'Shop 01' |
@@ -420,6 +421,7 @@ Scenario: _0154136 create document Retail Return Receipt based on RetailSalesRec
 		And I save the value of "Number" field as "$$NumberRetailReturnReceipt0154136$$"
 		And I save the window as "$$RetailReturnReceipt0154136$$"
 		And I click the button named "FormPostAndClose"
+		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
 		And "List" table contains lines
 		| 'Number' |
 		| '$$NumberRetailReturnReceipt0154136$$'      |
@@ -495,7 +497,7 @@ Scenario: _0154137 create document Retail Sales Receipt from Point of sale (paym
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Store" became equal to "Store 01"
 		And "ItemList" table contains lines
-			| 'Business unit' | 'Revenue type' | 'Item'     | 'Price type'        | 'Item key'  | 'Q'     | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Detail' |
+			| 'Profit loss center' | 'Revenue type' | 'Item'     | 'Price type'        | 'Item key'  | 'Q'     | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Detail' |
 			| 'Shop 01'       | ''             | 'Dress'    | 'Basic Price Types' | 'L/Green'   | '3,000' | 'pcs'  | '251,69'     | '550,00' | '18%' | ''              | '1 398,31'   | '1 650,00'     | ''                    | 'Store 01' | ''       |
 			| 'Shop 01'       | ''             | 'Trousers' | 'Basic Price Types' | '38/Yellow' | '1,000' | 'pcs'  | '61,02'      | '400,00' | '18%' | ''              | '338,98'     | '400,00'       | ''                    | 'Store 01' | ''       |
 		And "Payments" table contains lines
@@ -578,7 +580,7 @@ Scenario: _0154138 create document Retail Sales Receipt from Point of sale (paym
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Store" became equal to "Store 01"
 		And "ItemList" table contains lines
-			| 'Business unit' | 'Revenue type' | 'Item'     | 'Price type'        | 'Item key'  | 'Q'     | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Detail' |
+			| 'Profit loss center' | 'Revenue type' | 'Item'     | 'Price type'        | 'Item key'  | 'Q'     | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Detail' |
 			| 'Shop 01'       | ''             | 'Dress'    | 'Basic Price Types' | 'L/Green'   | '3,000' | 'pcs'  | '251,69'     | '550,00' | '18%' | ''              | '1 398,31'   | '1 650,00'     | ''                    | 'Store 01' | ''       |
 			| 'Shop 01'       | ''             | 'Trousers' | 'Basic Price Types' | '38/Yellow' | '1,000' | 'pcs'  | '61,02'      | '400,00' | '18%' | ''              | '338,98'     | '400,00'       | ''                    | 'Store 01' | ''       |
 		And "Payments" table contains lines
@@ -1142,7 +1144,7 @@ Scenario: _0154139 check payments form in the Point of sale
 			And I close "Payment: Point of sale" window
 		And I close all client application windows
 		
-Scenario: _0154140 check filling in retail customer from the POS
+Scenario: _0154140 check filling in retail customer from the POS (without partner)
 	And I close all client application windows
 	* Open Point of sale
 		And In the command interface I select "Retail" "Point of sale"
@@ -1175,6 +1177,7 @@ Scenario: _0154140 check filling in retail customer from the POS
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Store" became equal to "Store 01"
 		Then the form attribute named "RetailCustomer" became equal to "Olga Olhovska"
+		Then the form attribute named "UsePartnerTransactions" became equal to "No"
 		And I delete "$$NumberRetailSalesReceipt0154140$$" variable
 		And I delete "$$RetailSalesReceipt0154140$$" variable
 		And I save the value of "Number" field as "$$NumberRetailSalesReceipt0154140$$"
@@ -1340,7 +1343,7 @@ Scenario:  _0154149 create Cash statement
 			| 'Cash desk №4' |
 		And I activate "Description" field in "List" table
 		And I select current line in "List" table
-		And I click Select button of "Business unit" field
+		And I click Select button of "Branch" field
 		And I go to line in "List" table
 			| 'Description' |
 			| 'Shop 01'     |
@@ -1350,7 +1353,7 @@ Scenario:  _0154149 create Cash statement
 			| 'Description'  |
 			| 'Transit Main' |
 		And I select current line in "List" table
-		And I click Select button of "Business unit" field
+		And I click Select button of "Branch" field
 		And I go to line in "List" table
 			| 'Description' |
 			| 'Shop 01'     |
@@ -1824,7 +1827,7 @@ Scenario:  _0154149 create Cash statement
 		And I go to line in "Payments" table
 			| '#' | 'Account'      | 'Amount' | 'Commission' | 'Payment terminal'    | 'Payment type' | 'Percent' |
 			| '2' | 'Transit Main' | '200,00' | '12,90'      | 'Payment terminal 01' | 'Card 01'      | '1,00'    |
-		And I click Select button of "Business unit" field
+		And I click Select button of "Branch" field
 		And I go to line in "List" table
 			| 'Description' |
 			| 'Shop 01'     |
@@ -1855,7 +1858,7 @@ Scenario:  _0154149 create Cash statement
 			| '#' | 'Account'      | 'Amount' | 'Commission' | 'Payment terminal'    | 'Payment type' | 'Percent' |
 			| '2' | 'Transit Main' | '200,00' | '12,90'      | 'Payment terminal 01' | 'Card 01'      | '1,00'    |
 		And I delete a line in "Payments" table
-		And I click Select button of "Business unit" field
+		And I click Select button of "Branch" field
 		And I go to line in "List" table
 			| 'Description' |
 			| 'Shop 01'     |
@@ -1873,8 +1876,7 @@ Scenario:  _0154149 create Cash statement
 			| '$$NumberRetailSalesReceipt01541491$$'      |
 		And I click the button named "FormDocumentRetailReturnReceiptGenarate"
 		And I click "Ok" button	
-		And I click Select button of "Business unit" field
-		Then "Business units" window is opened
+		And I click Select button of "Branch" field
 		And I go to line in "List" table
 			| 'Description' |
 			| 'Shop 01'     |
@@ -1899,7 +1901,7 @@ Scenario:  _0154149 create Cash statement
 			| 'Description' | 'Reference' |
 			| 'Done'        | 'Done'      |
 		And I select current line in "List" table
-		And I click Select button of "Business unit" field
+		And I click Select button of "Branch" field
 		And I go to line in "List" table
 			| 'Description' |
 			| 'Shop 01'     |
@@ -1969,33 +1971,33 @@ Scenario:  _0154149 create Cash statement
 		And I select "R3035 Cash planning" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-			| 'Document registrations records'  | ''                              | ''          | ''             | ''                          | ''                  | ''         | ''                    | ''        | ''           | ''                             | ''                | ''                | ''                     |
-			| 'Register  "R3035 Cash planning"' | ''                              | ''          | ''             | ''                          | ''                  | ''         | ''                    | ''        | ''           | ''                             | ''                | ''                | ''                     |
-			| ''                                | 'Period'                        | 'Resources' | 'Dimensions'   | ''                          | ''                  | ''         | ''                    | ''        | ''           | ''                             | ''                | ''                | 'Attributes'           |
-			| ''                                | ''                              | 'Amount'    | 'Company'      | 'Basis document'            | 'Account'           | 'Currency' | 'Cash flow direction' | 'Partner' | 'Legal name' | 'Multi currency movement type' | 'Movement type'   | 'Planning period' | 'Deferred calculation' |
-			| ''                                | '$$DateCashStatement01541491$$' | '68,48'     | 'Main Company' | '$$CashStatement01541491$$' | 'Bank account, TRY' | 'USD'      | 'Incoming'            | ''        | ''           | 'Reporting currency'           | 'Movement type 1' | ''                | 'No'                   |
-			| ''                                | '$$DateCashStatement01541491$$' | '400'       | 'Main Company' | '$$CashStatement01541491$$' | 'Bank account, TRY' | 'TRY'      | 'Incoming'            | ''        | ''           | 'Local currency'               | 'Movement type 1' | ''                | 'No'                   |
-			| ''                                | '$$DateCashStatement01541491$$' | '400'       | 'Main Company' | '$$CashStatement01541491$$' | 'Bank account, TRY' | 'TRY'      | 'Incoming'            | ''        | ''           | 'en description is empty'      | 'Movement type 1' | ''                | 'No'                   |
+			| 'Document registrations records'  | ''                              | ''          | ''             | ''        | ''                          | ''                  | ''         | ''                    | ''        | ''           | ''                             | ''                | ''                | ''                     |
+			| 'Register  "R3035 Cash planning"' | ''                              | ''          | ''             | ''        | ''                          | ''                  | ''         | ''                    | ''        | ''           | ''                             | ''                | ''                | ''                     |
+			| ''                                | 'Period'                        | 'Resources' | 'Dimensions'   | ''        | ''                          | ''                  | ''         | ''                    | ''        | ''           | ''                             | ''                | ''                | 'Attributes'           |
+			| ''                                | ''                              | 'Amount'    | 'Company'      | 'Branch'  | 'Basis document'            | 'Account'           | 'Currency' | 'Cash flow direction' | 'Partner' | 'Legal name' | 'Multi currency movement type' | 'Movement type'   | 'Planning period' | 'Deferred calculation' |
+			| ''                                | '$$DateCashStatement01541491$$' | '68,48'     | 'Main Company' | 'Shop 01' | '$$CashStatement01541491$$' | 'Bank account, TRY' | 'USD'      | 'Incoming'            | ''        | ''           | 'Reporting currency'           | 'Movement type 1' | ''                | 'No'                   |
+			| ''                                | '$$DateCashStatement01541491$$' | '400'       | 'Main Company' | 'Shop 01' | '$$CashStatement01541491$$' | 'Bank account, TRY' | 'TRY'      | 'Incoming'            | ''        | ''           | 'Local currency'               | 'Movement type 1' | ''                | 'No'                   |
+			| ''                                | '$$DateCashStatement01541491$$' | '400'       | 'Main Company' | 'Shop 01' | '$$CashStatement01541491$$' | 'Bank account, TRY' | 'TRY'      | 'Incoming'            | ''        | ''           | 'en description is empty'      | 'Movement type 1' | ''                | 'No'                   |
 		And I select "Cash in transit" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-			| 'Register  "Cash in transit"' | ''            | ''                              | ''          | ''             | ''                          | ''             | ''                  | ''         | ''                             | ''                     | '' |
-			| ''                            | 'Record type' | 'Period'                        | 'Resources' | 'Dimensions'   | ''                          | ''             | ''                  | ''         | ''                             | 'Attributes'           | '' |
-			| ''                            | ''            | ''                              | 'Amount'    | 'Company'      | 'Basis document'            | 'From account' | 'To account'        | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' | '' |
-			| ''                            | 'Receipt'     | '$$DateCashStatement01541491$$' | '68,48'     | 'Main Company' | '$$CashStatement01541491$$' | 'Transit Main' | 'Bank account, TRY' | 'USD'      | 'Reporting currency'           | 'No'                   | '' |
-			| ''                            | 'Receipt'     | '$$DateCashStatement01541491$$' | '400'       | 'Main Company' | '$$CashStatement01541491$$' | 'Transit Main' | 'Bank account, TRY' | 'TRY'      | 'Local currency'               | 'No'                   | '' |
-			| ''                            | 'Receipt'     | '$$DateCashStatement01541491$$' | '400'       | 'Main Company' | '$$CashStatement01541491$$' | 'Transit Main' | 'Bank account, TRY' | 'TRY'      | 'en description is empty'      | 'No'                   | '' |
+			| 'Register  "Cash in transit"' | ''            | ''                              | ''          | ''             | ''        | ''                          | ''             | ''                  | ''         | ''                             | ''                     | '' |
+			| ''                            | 'Record type' | 'Period'                        | 'Resources' | 'Dimensions'   | ''        | ''                          | ''             | ''                  | ''         | ''                             | 'Attributes'           | '' |
+			| ''                            | ''            | ''                              | 'Amount'    | 'Company'      | 'Branch'  | 'Basis document'            | 'From account' | 'To account'        | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' | '' |
+			| ''                            | 'Receipt'     | '$$DateCashStatement01541491$$' | '68,48'     | 'Main Company' | 'Shop 01' | '$$CashStatement01541491$$' | 'Transit Main' | 'Bank account, TRY' | 'USD'      | 'Reporting currency'           | 'No'                   | '' |
+			| ''                            | 'Receipt'     | '$$DateCashStatement01541491$$' | '400'       | 'Main Company' | 'Shop 01' | '$$CashStatement01541491$$' | 'Transit Main' | 'Bank account, TRY' | 'TRY'      | 'Local currency'               | 'No'                   | '' |
+			| ''                            | 'Receipt'     | '$$DateCashStatement01541491$$' | '400'       | 'Main Company' | 'Shop 01' | '$$CashStatement01541491$$' | 'Transit Main' | 'Bank account, TRY' | 'TRY'      | 'en description is empty'      | 'No'                   | '' |
 		And I select "R3010 Cash on hand" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| '$$CashStatement01541491$$'      | ''            | ''                              | ''          | ''             | ''             | ''         | ''                             | ''                     |
-			| 'Document registrations records' | ''            | ''                              | ''          | ''             | ''             | ''         | ''                             | ''                     |
-			| 'Register  "R3010 Cash on hand"' | ''            | ''                              | ''          | ''             | ''             | ''         | ''                             | ''                     |
-			| ''                               | 'Record type' | 'Period'                        | 'Resources' | 'Dimensions'   | ''             | ''         | ''                             | 'Attributes'           |
-			| ''                               | ''            | ''                              | 'Amount'    | 'Company'      | 'Account'      | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
-			| ''                               | 'Expense'     | '$$DateCashStatement01541491$$' | '68,48'     | 'Main Company' | 'Transit Main' | 'USD'      | 'Reporting currency'           | 'No'                   |
-			| ''                               | 'Expense'     | '$$DateCashStatement01541491$$' | '400'       | 'Main Company' | 'Transit Main' | 'TRY'      | 'Local currency'               | 'No'                   |
-			| ''                               | 'Expense'     | '$$DateCashStatement01541491$$' | '400'       | 'Main Company' | 'Transit Main' | 'TRY'      | 'en description is empty'      | 'No'                   |
+			| '$$CashStatement01541491$$'      | ''            | ''                              | ''          | ''             | ''        | ''             | ''         | ''                             | ''                     |
+			| 'Document registrations records' | ''            | ''                              | ''          | ''             |  ''       |''             | ''         | ''                             | ''                     |
+			| 'Register  "R3010 Cash on hand"' | ''            | ''                              | ''          | ''             | ''        | ''             | ''         | ''                             | ''                     |
+			| ''                               | 'Record type' | 'Period'                        | 'Resources' | 'Dimensions'   | ''        | ''             | ''         | ''                             | 'Attributes'           |
+			| ''                               | ''            | ''                              | 'Amount'    | 'Company'      | 'Branch'  | 'Account'      | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
+			| ''                               | 'Expense'     | '$$DateCashStatement01541491$$' | '68,48'     | 'Main Company' | 'Shop 01' | 'Transit Main' | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                               | 'Expense'     | '$$DateCashStatement01541491$$' | '400'       | 'Main Company' | 'Shop 01' | 'Transit Main' | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                               | 'Expense'     | '$$DateCashStatement01541491$$' | '400'       | 'Main Company' | 'Shop 01' | 'Transit Main' | 'TRY'      | 'en description is empty'      | 'No'                   |
 		And I close all client application windows
 		
 		
@@ -2450,7 +2452,7 @@ Scenario: _0154155 check filling in and refilling Retail sales receipt
 				| 'Shirt'    | '350,00' | '38/Black'  | '2,000' | 'pcs'  | 'Store 01' |
 	* Check the re-drawing of the form for taxes at company re-selection.
 			And "ItemList" table contains lines
-				| 'Serial lot numbers' | 'Price'  | 'Detail' | 'Item'     | 'VAT' | 'Item key'  | 'Offers amount' | 'Q'     | 'Price type'        | 'Unit' | 'Revenue type' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Business unit' | 'Additional analytic' |
+				| 'Serial lot numbers' | 'Price'  | 'Detail' | 'Item'     | 'VAT' | 'Item key'  | 'Offers amount' | 'Q'     | 'Price type'        | 'Unit' | 'Revenue type' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Profit loss center' | 'Additional analytic' |
 				| ''                   | '400,00' | ''       | 'Trousers' | '18%' | '38/Yellow' | ''              | '1,000' | 'Basic Price Types' | 'pcs'  | ''             | 'No'                 | '61,02'      | '338,98'     | '400,00'       | 'Store 01' | 'Shop 01'       | ''                    |
 				| ''                   | '350,00' | ''       | 'Shirt'    | '18%' | '38/Black'  | ''              | '2,000' | 'Basic Price Types' | 'pcs'  | ''             | 'No'                 | '106,78'     | '593,22'     | '700,00'       | 'Store 01' | 'Shop 01'       | ''                    |
 			And I click Select button of "Company" field
@@ -2468,7 +2470,7 @@ Scenario: _0154155 check filling in and refilling Retail sales receipt
 			And I select current line in "List" table
 		* Tax calculation check
 			And "ItemList" table contains lines
-			| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Price type'        | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Business unit' |
+			| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Price type'        | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Profit loss center' |
 			| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '1,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | '61,02'      | '338,98'     | '400,00'       | 'Store 01' | 'Shop 01'       |
 			| '350,00' | 'Shirt'    | '18%' | '38/Black'  | '2,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | '106,78'     | '593,22'     | '700,00'       | 'Store 01' | 'Shop 01'       |
 	* Check filling in prices and calculate taxes when adding items via barcode search
@@ -2480,7 +2482,7 @@ Scenario: _0154155 check filling in and refilling Retail sales receipt
 			And Delay 4
 		* Check filling in prices and tax calculation
 			And "ItemList" table contains lines
-			| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Price type'        | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Business unit' |
+			| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Price type'        | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Profit loss center' |
 			| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '1,000' | 'Basic Price Types' | 'pcs'  | '61,02'      | '338,98'     | '400,00'       | 'Store 01' | 'Shop 01'       |
 			| '350,00' | 'Shirt'    | '18%' | '38/Black'  | '2,000' | 'Basic Price Types' | 'pcs'  | '106,78'     | '593,22'     | '700,00'       | 'Store 01' | 'Shop 01'       |
 			| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '1,000' | 'Basic Price Types' | 'pcs'  | '83,90'      | '466,10'     | '550,00'       | 'Store 01' | 'Shop 01'       |
@@ -2499,7 +2501,7 @@ Scenario: _0154155 check filling in and refilling Retail sales receipt
 			And I click "Transfer to document" button
 		* Check filling in prices and tax calculation
 			And "ItemList" table contains lines
-			| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Price type'        | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Business unit' |
+			| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Price type'        | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Profit loss center' |
 			| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '1,000' | 'Basic Price Types' | 'pcs'  | '61,02'      | '338,98'     | '400,00'       | 'Store 01' | 'Shop 01'       |
 			| '350,00' | 'Shirt'    | '18%' | '38/Black'  | '2,000' | 'Basic Price Types' | 'pcs'  | '106,78'     | '593,22'     | '700,00'       | 'Store 01' | 'Shop 01'       |
 			| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '1,000' | 'Basic Price Types' | 'pcs'  | '83,90'      | '466,10'     | '550,00'       | 'Store 01' | 'Shop 01'       |
@@ -2520,7 +2522,7 @@ Scenario: _0154155 check filling in and refilling Retail sales receipt
 		* Tax recalculation check
 			And I move to "Item list" tab
 			And "ItemList" table contains lines
-			| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Q'     | 'Price type'        | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Business unit' |
+			| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Q'     | 'Price type'        | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Profit loss center' |
 			| '350,00' | 'Shirt' | '18%' | '38/Black' | '2,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | '126,00'     | '700,00'     | '826,00'       | 'Store 01' | 'Shop 01'       |
 			| '550,00' | 'Dress' | '18%' | 'L/Green'  | '1,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | '99,00'      | '550,00'     | '649,00'       | 'Store 01' | 'Shop 01'       |
 			| '520,00' | 'Dress' | '18%' | 'XS/Blue'  | '1,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | '93,60'      | '520,00'     | '613,60'       | 'Store 01' | 'Shop 01'       |
@@ -2530,7 +2532,7 @@ Scenario: _0154155 check filling in and refilling Retail sales receipt
 			And I set checkbox "Price includes tax"
 			And I move to "Item list" tab
 			And "ItemList" table contains lines
-			| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Q'     | 'Price type'        | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Business unit' |
+			| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Q'     | 'Price type'        | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Profit loss center' |
 			| '350,00' | 'Shirt' | '18%' | '38/Black' | '2,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | '106,78'     | '593,22'     | '700,00'       | 'Store 01' | 'Shop 01'       |
 			| '550,00' | 'Dress' | '18%' | 'L/Green'  | '1,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | '83,90'      | '466,10'     | '550,00'       | 'Store 01' | 'Shop 01'       |
 			| '520,00' | 'Dress' | '18%' | 'XS/Blue'  | '1,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | '79,32'      | '440,68'     | '520,00'       | 'Store 01' | 'Shop 01'       |
@@ -2547,7 +2549,7 @@ Scenario: _0154155 check filling in and refilling Retail sales receipt
 			Then the form attribute named "PriceIncludeTax" became equal to "No"
 		* Check tax recalculation 
 			And "ItemList" table contains lines
-			| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Q'     | 'Price type'              | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Business unit' |
+			| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Q'     | 'Price type'              | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Profit loss center' |
 			| '296,61' | 'Shirt' | '18%' | '38/Black' | '2,000' | 'Basic Price without VAT' | 'pcs'  | 'No'                 | '106,78'     | '593,22'     | '700,00'       | 'Store 02' | 'Shop 01'       |
 			| '466,10' | 'Dress' | '18%' | 'L/Green'  | '1,000' | 'Basic Price without VAT' | 'pcs'  | 'No'                 | '83,90'      | '466,10'     | '550,00'       | 'Store 02' | 'Shop 01'       |
 			| '440,68' | 'Dress' | '18%' | 'XS/Blue'  | '1,000' | 'Basic Price without VAT' | 'pcs'  | 'No'                 | '79,32'      | '440,68'     | '520,00'       | 'Store 02' | 'Shop 01'       |
@@ -2562,7 +2564,7 @@ Scenario: _0154155 check filling in and refilling Retail sales receipt
 			Then the form attribute named "PriceIncludeTax" became equal to "Yes"
 		* Tax recalculation check
 			And "ItemList" table contains lines
-			| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Q'     | 'Price type'        | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Business unit' |
+			| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Q'     | 'Price type'        | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Profit loss center' |
 			| '350,00' | 'Shirt' | '18%' | '38/Black' | '2,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | '106,78'     | '593,22'     | '700,00'       | 'Store 01' | 'Shop 01'       |
 			| '550,00' | 'Dress' | '18%' | 'L/Green'  | '1,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | '83,90'      | '466,10'     | '550,00'       | 'Store 01' | 'Shop 01'       |
 			| '520,00' | 'Dress' | '18%' | 'XS/Blue'  | '1,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | '79,32'      | '440,68'     | '520,00'       | 'Store 01' | 'Shop 01'       |
@@ -2585,7 +2587,7 @@ Scenario: _0154155 check filling in and refilling Retail sales receipt
 				And I select "0%" exact value from "VAT" drop-down list in "ItemList" table
 				And I finish line editing in "ItemList" table
 				And "ItemList" table contains lines
-				| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Q'     | 'Price type'        | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Business unit' |
+				| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Q'     | 'Price type'        | 'Unit' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Profit loss center' |
 				| '350,00' | 'Shirt' | '18%' | '38/Black' | '2,000' | 'Basic Price Types' | 'pcs'  | '106,78'     | '593,22'     | '700,00'       | 'Store 01' | 'Shop 01'       |
 				| '550,00' | 'Dress' | '0%'  | 'L/Green'  | '1,000' | 'Basic Price Types' | 'pcs'  | ''           | '550,00'     | '550,00'       | 'Store 01' | 'Shop 01'       |
 				| '520,00' | 'Dress' | '18%' | 'XS/Blue'  | '1,000' | 'Basic Price Types' | 'pcs'  | '79,32'      | '440,68'     | '520,00'       | 'Store 01' | 'Shop 01'       |
@@ -2610,7 +2612,7 @@ Scenario: _0154155 check filling in and refilling Retail sales receipt
 				And I select "0%" exact value from "VAT" drop-down list in "ItemList" table
 				And I finish line editing in "ItemList" table
 				And "ItemList" table contains lines
-				| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Q'     | 'Price type'        | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Business unit' |
+				| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Q'     | 'Price type'        | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Profit loss center' |
 				| '350,00' | 'Shirt' | '0%'  | '38/Black' | '2,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | ''           | '700,00'     | '700,00'       | 'Store 01' | 'Shop 01'       |
 				| '550,00' | 'Dress' | '18%' | 'L/Green'  | '1,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | '99,00'      | '550,00'     | '649,00'       | 'Store 01' | 'Shop 01'       |
 				| '520,00' | 'Dress' | '18%' | 'XS/Blue'  | '1,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | '93,60'      | '520,00'     | '613,60'       | 'Store 01' | 'Shop 01'       |
@@ -2630,13 +2632,13 @@ Scenario: _0154155 check filling in and refilling Retail sales receipt
 			And I select current line in "List" table
 			And I finish line editing in "ItemList" table
 			And "ItemList" table contains lines
-				| 'Business unit' | 'Price type'              | 'Item'  | 'Item key' | 'Dont calculate row' | 'Q'     | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Net amount' | 'Total amount' | 'Store'    |
+				| 'Profit loss center' | 'Price type'              | 'Item'  | 'Item key' | 'Dont calculate row' | 'Q'     | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Net amount' | 'Total amount' | 'Store'    |
 				| 'Shop 01'       | 'Basic Price Types'       | 'Shirt' | '38/Black' | 'No'                 | '2,000' | 'pcs'  | ''           | '350,00' | '0%'  | '700,00'     | '700,00'       | 'Store 01' |
 				| 'Shop 01'       | 'Basic Price Types'       | 'Dress' | 'L/Green'  | 'No'                 | '1,000' | 'pcs'  | '99,00'      | '550,00' | '18%' | '550,00'     | '649,00'       | 'Store 01' |
 				| 'Shop 01'       | 'Basic Price without VAT' | 'Dress' | 'XS/Blue'  | 'No'                 | '1,000' | 'pcs'  | '79,32'      | '440,68' | '18%' | '440,68'     | '520,00'       | 'Store 01' |
 		* Change unit and check price re-calculation
 			And I go to line in "ItemList" table
-				| 'Business unit' | 'Dont calculate row' | 'Item'  | 'Item key' | 'Net amount' | 'Price'  | 'Price type'        | 'Q'     | 'Store'    | 'Tax amount' | 'Total amount' | 'Unit' | 'VAT' |
+				| 'Profit loss center' | 'Dont calculate row' | 'Item'  | 'Item key' | 'Net amount' | 'Price'  | 'Price type'        | 'Q'     | 'Store'    | 'Tax amount' | 'Total amount' | 'Unit' | 'VAT' |
 				| 'Shop 01'       | 'No'                 | 'Dress' | 'L/Green'  | '550,00'     | '550,00' | 'Basic Price Types' | '1,000' | 'Store 01' | '99,00'      | '649,00'       | 'pcs'  | '18%' |
 			And I select current line in "ItemList" table
 			And I click choice button of "Unit" attribute in "ItemList" table
@@ -2653,7 +2655,7 @@ Scenario: _0154155 check filling in and refilling Retail sales receipt
 				| 'box Dress (8 pcs)' |
 			And I select current line in "List" table
 			And "ItemList" table contains lines
-				| 'Business unit' | 'Price type'              | 'Item'  | 'Item key' | 'Dont calculate row' | 'Q'     | 'Unit'        | 'Tax amount' | 'Price'    | 'VAT' | 'Net amount' | 'Total amount' | 'Store'    |
+				| 'Profit loss center' | 'Price type'              | 'Item'  | 'Item key' | 'Dont calculate row' | 'Q'     | 'Unit'        | 'Tax amount' | 'Price'    | 'VAT' | 'Net amount' | 'Total amount' | 'Store'    |
 				| 'Shop 01'       | 'Basic Price Types'       | 'Shirt' | '38/Black' | 'No'                 | '2,000' | 'pcs'         | ''           | '350,00'   | '0%'  | '700,00'     | '700,00'       | 'Store 01' |
 				| 'Shop 01'       | 'Basic Price Types'       | 'Dress' | 'L/Green'  | 'No'                 | '1,000' | 'box Dress (8 pcs)' | '792,00'     | '4 400,00' | '18%' | '4 400,00'   | '5 192,00'     | 'Store 01' |
 				| 'Shop 01'       | 'Basic Price without VAT' | 'Dress' | 'XS/Blue'  | 'No'                 | '1,000' | 'pcs'         | '79,32'      | '440,68'   | '18%' | '440,68'     | '520,00'       | 'Store 01' |
@@ -2698,7 +2700,7 @@ Scenario: _0154156 check Retail sales receipt when changing date
 		And I input "1,000" text in "Q" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 		And "ItemList" table contains lines
-		| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Q'     | 'Price type'        | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Business unit' |
+		| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Q'     | 'Price type'        | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Profit loss center' |
 		| '500,00' | 'Dress' | '18%' | 'M/Brown'  | '1,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | '76,27'      | '423,73'     | '500,00'       | 'Store 01' | 'Shop 01'       |
 	* Change of date and check of price and tax recalculation
 		And I move to "Other" tab
@@ -3366,7 +3368,7 @@ Scenario: _0154175 check change amount in POS
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Store" became equal to "Store 01"
 		And "ItemList" table contains lines
-			| 'Business unit' | 'Item'  | 'Price type'        | 'Item key' | 'Q'     | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    |
+			| 'Profit loss center' | 'Item'  | 'Price type'        | 'Item key' | 'Q'     | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    |
 			| 'Shop 01'       | 'Dress' | 'Basic Price Types' | 'L/Green'  | '1,000' | 'pcs'  | '76,27'      | '500,00' | '18%' | ''              | '423,73'     | '500,00'       | ''                    | 'Store 01' |
 			| 'Shop 01'       | 'Dress' | 'Basic Price Types' | 'S/Yellow' | '1,000' | 'pcs'  | '83,90'      | '550,00' | '18%' | ''              | '466,10'     | '550,00'       | ''                    | 'Store 01' |
 		And the editing text of form attribute named "ItemListTotalNetAmount" became equal to "889,83"
@@ -3380,6 +3382,13 @@ Scenario: _0154182 check filling in Retail sales when select retail customer (wi
 	And I close all client application windows
 	* Open Point of sale
 		And In the command interface I select "Retail" "Point of sale"	
+	* Select retail customer
+		And I click "Search customer" button
+		And I go to line in "List" table
+			| 'Description'                  |
+			| 'Retail customer with partner' |
+		And I select current line in "List" table
+		And I click "OK" button
 	* Add items and payment
 		And I click "Show items" button
 		And I go to line in "ItemsPickup" table
@@ -3417,11 +3426,11 @@ Scenario: _0154182 check filling in Retail sales when select retail customer (wi
 		Then the form attribute named "UsePartnerTransactions" became equal to "Yes"
 		Then the form attribute named "RetailCustomer" became equal to "Name Retail customer Surname Retail customer"
 		And "ItemList" table contains lines
-			| 'Business unit' | 'Price type'              | 'Item'  | 'Item key' | 'Dont calculate row' | 'Serial lot numbers' | 'Q'     | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Revenue type' | 'Detail' |
-			| 'Shop 01'       | 'Basic Price without VAT' | 'Dress' | 'M/White'  | 'No'                 | ''                   | '1,000' | 'pcs'  | '79,32'      | '440,68' | '18%' | ''              | '440,68'     | '520,00'       | ''                    | 'Store 01' | ''             | ''       |
+			| 'Profit loss center' | 'Price type'              | 'Item'  | 'Item key' | 'Dont calculate row' | 'Serial lot numbers' | 'Q'     | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Revenue type' | 'Detail' |
+			| 'Shop 01'       | 'Basic Price without VAT' | 'Dress' | 'M/White'  | 'No'                 | ''                   | '1,000' | 'pcs'  | '67,22'      | '440,68' | '18%' | ''              | '373,46'     | '440,68'       | ''                    | 'Store 01' | ''             | ''       |
 		And "Payments" table contains lines
 			| 'Amount' | 'Payment type' |
-			| '520,00' | 'Cash'         |
+			| '440,68' | 'Cash'         |
 		And I delete "$$NumberRetailSalesReceipt0154182$$" variable
 		And I delete "$$RetailSalesReceipt0154182$$" variable
 		And I save the value of "Number" field as "$$NumberRetailSalesReceipt0154182$$"
@@ -3447,7 +3456,7 @@ Scenario: _0154190 check filling in Retail sales receipt when copying
 		Then the form attribute named "RetailCustomer" became equal to "Olga Olhovska"
 		Then the form attribute named "Store" became equal to "Store 01"
 		And "ItemList" table became equal
-			| 'Business unit' | 'Price type'        | 'Item'  | 'Item key' | 'Dont calculate row' | 'Serial lot numbers' | 'Q'     | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Revenue type' | 'Detail' |
+			| 'Profit loss center' | 'Price type'        | 'Item'  | 'Item key' | 'Dont calculate row' | 'Serial lot numbers' | 'Q'     | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Revenue type' | 'Detail' |
 			| 'Shop 01'       | 'Basic Price Types' | 'Dress' | 'M/White'  | 'No'                 | ''                   | '1,000' | 'pcs'  | '79,32'      | '520,00' | '18%' | ''              | '440,68'     | '520,00'       | ''                    | 'Store 01' | ''             | ''       |
 		And "Payments" table became equal
 			| 'Amount' | 'Commission' | 'Payment type' | 'Payment terminal' | 'Bank term' | 'Account'      | 'Percent' |
@@ -3457,7 +3466,7 @@ Scenario: _0154190 check filling in Retail sales receipt when copying
 			| 'TRY'                | 'Partner term' | 'TRY'           | 'TRY'      | '1'                 | '1'            | '520'    |
 			| 'Local currency'     | 'Legal'        | 'TRY'           | 'TRY'      | '1'                 | '1'            | '520'    |
 			| 'Reporting currency' | 'Reporting'    | 'TRY'           | 'USD'      | '0,1712'            | '1'            | '89,02'  |
-		Then the form attribute named "BusinessUnit" became equal to "Shop 01"
+		Then the form attribute named "Branch" became equal to "Shop 01"
 		Then the form attribute named "Author" became equal to "CI"
 		Then the form attribute named "PriceIncludeTax" became equal to "Yes"
 		Then the form attribute named "Manager" became equal to ""
@@ -3468,7 +3477,11 @@ Scenario: _0154190 check filling in Retail sales receipt when copying
 		Then the form attribute named "CurrencyTotalAmount" became equal to "TRY"
 		And I close all client application windows
 		
-					
+
+
+
+		
+							
 
 Scenario: _999999 close TestClient session
 	And I close TestClient session

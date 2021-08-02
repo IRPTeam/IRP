@@ -149,7 +149,7 @@
     <mdObject>AccumulationRegister.R4013B_StockReservationPlanning</mdObject>
   </content>
   <content>
-    <mdObject>InformationRegister.BusinessUnitBankTerms</mdObject>
+    <mdObject>InformationRegister.BranchBankTerms</mdObject>
   </content>
   <content>
     <mdObject>AccumulationRegister.R4017B_InternalSupplyRequestProcurement</mdObject>

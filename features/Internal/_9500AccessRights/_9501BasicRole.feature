@@ -107,7 +107,7 @@ Scenario: 950100 Basic role
 	When Create document InternalSupplyRequest objects
 	When Create document InventoryTransfer objects
 	When Create document InventoryTransferOrder objects
-	When Create document InvoiceMatch objects
+	# When Create document InvoiceMatch objects
 	When Create document OpeningEntry objects
 	When Create document OutgoingPaymentOrder objects
 	When Create document Bundling objects

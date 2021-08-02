@@ -349,10 +349,10 @@
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
     <attributes uuid="952345eb-f7af-4d5e-8a63-503f48285e5c">
-      <name>BusinessUnit</name>
+      <name>ProfitLossCenter</name>
       <synonym>
         <key>en</key>
-        <value>Business unit</value>
+        <value>Profit loss center</value>
       </synonym>
       <type>
         <types>CatalogRef.BusinessUnits</types>
@@ -401,6 +401,24 @@
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="ff6a73f0-d1d7-4b83-b834-199edc95a13c">
+      <name>LegalNameContract</name>
+      <synonym>
+        <key>en</key>
+        <value>Legal name contract</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.LegalNameContracts</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <choiceParameterLinks>
+        <name>Filter.Company</name>
+        <field>Document.BankPayment.TabularSection.PaymentList.Attribute.Payee</field>
+      </choiceParameterLinks>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>

@@ -539,6 +539,10 @@ Procedure LegalNameOnChange(Object, Form, Item) Export
 	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 EndProcedure
 
+Procedure LegalNameContractOnChange(Object, Form, Item) Export
+	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
+EndProcedure
+
 Procedure LegalNameStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
 	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
 	
@@ -694,6 +698,39 @@ Function DateSettings(Object, Form, AddInfo = Undefined) Export
 	Return Settings;
 EndFunction
 
+#EndRegion
+
+#Region RetailCustomer
+	
+Procedure RetailCustomerOnChange(Object, Form, Item, AddInfo = Undefined) Export
+	DocumentsClient.RetailCustomerOnChange(Object, Form, ThisObject, Item, Undefined, AddInfo);
+EndProcedure
+	
+Procedure RetailCustomerOnChangePutServerDataToAddInfo(Object, Form, AddInfo = Undefined) Export
+	DocumentsClient.RetailCustomerOnChangePutServerDataToAddInfo(Object, Form, AddInfo);
+EndProcedure
+
+Function RetailCustomerSettings(Object, Form, AddInfo = Undefined) Export
+	If AddInfo = Undefined Then
+		Return New Structure("PutServerDataToAddInfo", True);
+	EndIf;
+	ServerData = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "ServerData");
+	
+	Settings = New Structure("Actions, ObjectAttributes, FormAttributes, AgreementType");
+	
+	Actions = New Structure();
+	Actions.Insert("ChangePartner"	        , "ChangePartner");
+	Actions.Insert("ChangeManagerSegment"	, "ChangeManagerSegment");
+	Actions.Insert("ChangeLegalName"		, "ChangeLegalName");
+	Actions.Insert("ChangeAgreement"		, "ChangeAgreement");
+	Settings.Actions = Actions;
+	
+	Settings.ObjectAttributes 	= "Company, Currency, PriceIncludeTax, Agreement, LegalName, ManagerSegment, Partner";
+	Settings.FormAttributes		= "CurrentPriceType";
+	Settings.AgreementType = ServerData.AgreementTypes_Customer;
+	Return Settings;
+EndFunction
+	
 #EndRegion
 
 #Region GroupTitleDecorationsEvents

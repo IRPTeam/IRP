@@ -448,10 +448,10 @@ Scenario: Create catalog Currencies objects
 
 	And I check or create catalog "Currencies" objects:
 		| 'Ref'                                                                | 'DeletionMark' | 'Code' | 'Symbol' | 'NumericCode' | 'Description_en'  | 'Description_hash' | 'Description_ru' | 'Description_tr'  |
-		| 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1857' | 'False'           | 'EUR'  | '€'      | ''            | 'Euro'            | ''                 | ''               | 'Euro'            |
-		| 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1855' | 'False'           | 'TRY'  | 'TL'     | ''            | 'Turkish lira'    | ''                 | ''               | 'Turkish lira'    |
-		| 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1858' | 'False'           | 'UAH'  | '₴'      | ''            | 'Ukraine Hryvnia' | ''                 | ''               | 'Ukraine Hryvnia' |
-		| 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1856' | 'False'           | 'USD'  | '$'      | ''            | 'American dollar' | ''                 | ''               | 'American dollar' |
+		| 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1857' | 'False'        | 'EUR'  | '€'      | ''            | 'Euro'            | ''                 | ''               | 'Euro'            |
+		| 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1855' | 'False'        | 'TRY'  | 'TL'     | ''            | 'Turkish lira'    | ''                 | ''               | 'Turkish lira'    |
+		| 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1858' | 'False'        | 'UAH'  | '₴'      | ''            | 'Ukraine Hryvnia' | ''                 | ''               | 'Ukraine Hryvnia' |
+		| 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1856' | 'False'        | 'USD'  | '$'      | ''            | 'American dollar' | ''                 | ''               | 'American dollar' |
 
 Scenario: Create catalog ItemKeys objects
 
@@ -1052,6 +1052,10 @@ Scenario: Create catalog Taxes objects
 		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'SalesReturn'         |
 		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'RetailSalesReceipt'  |
 		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'RetailReturnReceipt' |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'SalesOrderClosing'    |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'PurchaseOrderClosing' |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c5' | 'SalesOrderClosing'    |
+
 
 Scenario: Create catalog Taxes objects (Sales tax)
 	
@@ -1391,7 +1395,7 @@ Scenario: Create catalog RetailCustomers objects
 
 	And I check or create catalog "RetailCustomers" objects:
 		| 'Ref'                                                                     | 'DeletionMark' | 'Code'   | 'Description'   | 'Name'   | 'Surname' |
-		| 'e1cib/data/Catalog.RetailCustomers?ref=aa7d120ed92fbced11eb095a22e1d877' | 'False'           | 'Test01' | 'Test01 Test01' | 'Test01' | 'Test01'  |
+		| 'e1cib/data/Catalog.RetailCustomers?ref=aa7d120ed92fbced11eb095a22e1d877' | 'False'        | 'Test01' | 'Test01 Test01' | 'Test01' | 'Test01'  |
 
 Scenario: Create catalog BankTerms objects
 
@@ -1767,10 +1771,7 @@ Scenario: Create catalog Partners objects (Customer)
 		And I check or create catalog "Agreements" objects:
 			| 'Ref'                                                                | 'DeletionMark' | 'Code' | 'Number' | 'Date'                | 'PartnerSegment'                                                          | 'Partner'                                                          | 'Company'                                                           | 'PriceType'                                                          | 'ItemSegment'                                                          | 'StartUsing'          | 'EndOfUse'            | 'ManagerSegment' | 'PriceIncludeTax' | 'DaysBeforeDelivery' | 'Store'                                                          | 'Type'                         | 'LegalName'                                                         | 'CurrencyMovementType'                                                                            | 'ApArPostingDetail'                          | 'StandardAgreement'                                                  | 'Kind'                         | 'UseCreditLimit' | 'CreditLimitAmount' | 'PaymentTerm' | 'Description_en'                             | 'Description_hash' | 'Description_ru' | 'Description_tr'                   |
 			| 'e1cib/data/Catalog.Agreements?ref=b76cbacb2511e57d11ebebbd152ab7f8' | 'False'        | '2'    | ''       | '01.01.0001 00:00:00' | ''                                                                        | 'e1cib/data/Catalog.Partners?ref=b76cbacb2511e57d11ebebbd152ab7f6' | ''                                                                  | 'e1cib/data/Catalog.PriceTypes?ref=aa78120ed92fbced11eaf114c59ef002' | ''                                                                     | '01.01.0001 00:00:00' | '01.01.0001 00:00:00' | ''               | 'False'           | '0'                  | ''                                                               | 'Enum.AgreementTypes.Customer' | ''                                                                  | 'e1cib/data/ChartOfCharacteristicTypes.CurrencyMovementType?ref=aa78120ed92fbced11eaf113ba6c185f' | 'Enum.ApArPostingDetail.ByDocuments'         | ''                                                                   | 'Enum.AgreementKinds.Regular'  | 'False'          | '0'                 | ''            | 'Customer partner term'                      | ''                 | ''               | ''                                 |
-		| 'e1cib/data/Catalog.RetailCustomers?ref=b76cbacb2511e57d11ebe9f994538237' | 'False'        | '002'  | 'Retail customer with partner'    | 'Name Retail customer' | 'Surname Retail customer' | 'e1cib/data/Catalog.Partners?ref=b76cbacb2511e57d11ebe9e1959cde75' | 'e1cib/data/Catalog.Companies?ref=b76cbacb2511e57d11ebe9e1959cde76' | 'e1cib/data/Catalog.Agreements?ref=b76cbacb2511e57d11ebe9e1959cde77' |
-		| 'e1cib/data/Catalog.RetailCustomers?ref=b76cbacb2511e57d11ebe9f994538238' | 'False'        | '003'  | 'Retail customer without partner' | 'Retail customer'      | 'Second'                  | ''                                                                 | ''                                                                  | ''                                                                   |
-
-
+		
 Scenario: Create catalog LegalNameContracts objects
 
 	And I check or create catalog "LegalNameContracts" objects:

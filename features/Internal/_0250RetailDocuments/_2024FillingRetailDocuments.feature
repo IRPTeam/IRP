@@ -3382,13 +3382,6 @@ Scenario: _0154182 check filling in Retail sales when select retail customer (wi
 	And I close all client application windows
 	* Open Point of sale
 		And In the command interface I select "Retail" "Point of sale"	
-	* Select retail customer
-		And I click "Search customer" button
-		And I go to line in "List" table
-			| 'Description'                  |
-			| 'Retail customer with partner' |
-		And I select current line in "List" table
-		And I click "OK" button
 	* Add items and payment
 		And I click "Show items" button
 		And I go to line in "ItemsPickup" table
@@ -3426,11 +3419,11 @@ Scenario: _0154182 check filling in Retail sales when select retail customer (wi
 		Then the form attribute named "UsePartnerTransactions" became equal to "Yes"
 		Then the form attribute named "RetailCustomer" became equal to "Name Retail customer Surname Retail customer"
 		And "ItemList" table contains lines
-			| 'Profit loss center' | 'Price type'              | 'Item'  | 'Item key' | 'Dont calculate row' | 'Serial lot numbers' | 'Q'     | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Revenue type' | 'Detail' |
-			| 'Shop 01'       | 'Basic Price without VAT' | 'Dress' | 'M/White'  | 'No'                 | ''                   | '1,000' | 'pcs'  | '67,22'      | '440,68' | '18%' | ''              | '373,46'     | '440,68'       | ''                    | 'Store 01' | ''             | ''       |
+			| 'Price type'              | 'Item'  | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Serial lot numbers' | 'Q'     | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Revenue type' | 'Detail' |
+			| 'Basic Price without VAT' | 'Dress' | 'M/White'  | 'Shop 01'            | 'No'                 | ''                   | '1,000' | 'pcs'  | '79,32'      | '440,68' | '18%' | ''              | '440,68'     | '520,00'       | ''                    | 'Store 01' | ''             | ''       |
 		And "Payments" table contains lines
 			| 'Amount' | 'Payment type' |
-			| '440,68' | 'Cash'         |
+			| '520,00' | 'Cash'         |
 		And I delete "$$NumberRetailSalesReceipt0154182$$" variable
 		And I delete "$$RetailSalesReceipt0154182$$" variable
 		And I save the value of "Number" field as "$$NumberRetailSalesReceipt0154182$$"
@@ -3457,7 +3450,7 @@ Scenario: _0154190 check filling in Retail sales receipt when copying
 		Then the form attribute named "Store" became equal to "Store 01"
 		And "ItemList" table became equal
 			| 'Profit loss center' | 'Price type'        | 'Item'  | 'Item key' | 'Dont calculate row' | 'Serial lot numbers' | 'Q'     | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Revenue type' | 'Detail' |
-			| 'Shop 01'       | 'Basic Price Types' | 'Dress' | 'M/White'  | 'No'                 | ''                   | '1,000' | 'pcs'  | '79,32'      | '520,00' | '18%' | ''              | '440,68'     | '520,00'       | ''                    | 'Store 01' | ''             | ''       |
+			| 'Shop 01'            | 'Basic Price Types' | 'Dress' | 'M/White'  | 'No'                 | ''                   | '1,000' | 'pcs'  | '79,32'      | '520,00' | '18%' | ''              | '440,68'     | '520,00'       | ''                    | 'Store 01' | ''             | ''       |
 		And "Payments" table became equal
 			| 'Amount' | 'Commission' | 'Payment type' | 'Payment terminal' | 'Bank term' | 'Account'      | 'Percent' |
 			| '520,00' | ''           | 'Cash'         | ''                 | ''          | 'Cash desk №2' | ''        |

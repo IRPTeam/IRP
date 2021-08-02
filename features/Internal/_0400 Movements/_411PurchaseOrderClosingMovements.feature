@@ -78,6 +78,9 @@ Scenario: _041158 preparation (Purchase order closing)
 		When Create document PurchaseInvoice objects (movements, purchase order closing)
 		And I execute 1C:Enterprise script at server
 				| "Documents.PurchaseInvoice.FindByNumber(37).GetObject().Write(DocumentWriteMode.Posting);" |
+		When Create document GoodsReceipt objects (movements, purchase order closing)
+		And I execute 1C:Enterprise script at server
+				| "Documents.GoodsReceipt.FindByNumber(38).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I close all client application windows
 	* Load Purchase order closing document
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"

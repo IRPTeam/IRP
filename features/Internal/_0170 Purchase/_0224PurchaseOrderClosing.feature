@@ -72,15 +72,15 @@ Scenario: _0224001 create and check filling Purchase order closing (PO not shipp
 		Then the form attribute named "PurchaseOrder" became equal to "Purchase order 37 dated 09.03.2021 14:29:00"
 		And "ItemList" table contains lines
 			| 'Profit loss center' | 'Price type'              | 'Item'    | 'Item key' | 'Dont calculate row' | 'Q'      | 'Unit' | 'Tax amount' | 'Price'  | 'Offers amount' | 'Net amount' | 'Total amount' | 'Internal supply request' | 'Store'    | 'Expense type' | 'Detail' | 'Sales order' | 'Cancel' | 'Purchase basis' | 'Delivery date' | 'Cancel reason' |
-			| 'Front office'  | 'en description is empty' | 'Shirt'   | '38/Black' | 'No'                 | '2,000'  | 'pcs'  | '45,76'      | '150,00' | ''              | '254,24'     | '300,00'       | ''                        | 'Store 03' | ''             | ''       | ''            | 'Yes'    | ''               | '11.03.2021'    | ''              |
-			| 'Front office'  | 'en description is empty' | 'Dress'   | 'XS/Blue'  | 'No'                 | '96,000' | 'pcs'  | '1 757,29'   | '120,00' | ''              | '9 762,71'   | '11 520,00'    | ''                        | 'Store 03' | ''             | ''       | ''            | 'Yes'    | ''               | '11.03.2021'    | ''              |
-			| 'Front office'  | 'en description is empty' | 'Service' | 'Rent'     | 'No'                 | '1,000'  | 'pcs'  | '15,25'      | '100,00' | ''              | '84,75'      | '100,00'       | ''                        | 'Store 03' | 'Rent'         | ''       | ''            | 'Yes'    | ''               | '11.03.2021'    | ''              |
+			| 'Front office'       | 'en description is empty' | 'Shirt'   | '38/Black' | 'No'                 | '2,000'  | 'pcs'  | '45,76'      | '150,00' | ''              | '254,24'     | '300,00'       | ''                        | 'Store 03' | ''             | ''       | ''            | 'Yes'    | ''               | '11.03.2021'    | ''              |
+			| 'Front office'       | 'en description is empty' | 'Dress'   | 'XS/Blue'  | 'No'                 | '96,000' | 'pcs'  | '1 757,29'   | '120,00' | ''              | '9 762,71'   | '11 520,00'    | ''                        | 'Store 03' | ''             | ''       | ''            | 'Yes'    | ''               | '11.03.2021'    | ''              |
+			| 'Front office'       | 'en description is empty' | 'Service' | 'Rent'     | 'No'                 | '1,000'  | 'pcs'  | '15,25'      | '100,00' | ''              | '84,75'      | '100,00'       | ''                        | 'Store 03' | 'Rent'         | ''       | ''            | 'Yes'    | ''               | '11.03.2021'    | ''              |
 		Then the number of "ItemList" table lines is "equal" "3"
 		Then the form attribute named "Currency" became equal to "TRY"
 	// * Try to post document without filling in cancel reason
 	// 	And I click the button named "FormPost"
 	// 	Then I wait that in user messages the "Cancel reason has to be filled if string was canceled" substring will appear in "10" seconds
-	* Filling in cancel reason and post Sales order closing
+	* Filling in cancel reason and post Purchase order closing
 		And I go to line in "ItemList" table
 			| 'Item'  | 'Item key' |
 			| 'Dress' | 'XS/Blue'   |
@@ -144,8 +144,8 @@ Scenario: _0230002 create and check filling Purchase order closing (PO partially
 		Then the form attribute named "PurchaseOrder" became equal to "Purchase order 37 dated 09.03.2021 14:29:00"
 		And "ItemList" table contains lines
 			| 'Profit loss center' | 'Price type'              | 'Item'    | 'Item key' | 'Dont calculate row' | 'Q'     | 'Unit' | 'Tax amount' | 'Price'  | 'Offers amount' | 'Net amount' | 'Total amount' | 'Internal supply request' | 'Store'    | 'Expense type' | 'Detail' | 'Sales order' | 'Cancel' | 'Purchase basis' | 'Delivery date' | 'Cancel reason' |
-			| 'Front office'  | 'en description is empty' | 'Shirt'   | '38/Black' | 'No'                 | '1,000' | 'pcs'  | ''           | '150,00' | ''              | '150,00'     | '150,00'       | ''                        | 'Store 03' | ''             | ''       | ''            | 'No'     | ''               | '11.03.2021'    | ''              |
-			| 'Front office'  | 'en description is empty' | 'Dress'   | 'XS/Blue'  | 'No'                 | '8,000' | 'pcs'  | ''           | '120,00' | ''              | '960,00'     | '960,00'       | ''                        | 'Store 03' | ''             | ''       | ''            | 'Yes'    | ''               | '11.03.2021'    | ''              |
-			| 'Front office'  | 'en description is empty' | 'Service' | 'Rent'     | 'No'                 | '1,000' | 'pcs'  | '15,25'      | '100,00' | ''              | '84,75'      | '100,00'       | ''                        | 'Store 03' | 'Rent'         | ''       | ''            | 'Yes'    | ''               | '11.03.2021'    | ''              |
+			| 'Front office'       | 'en description is empty' | 'Shirt'   | '38/Black' | 'No'                 | '1,000' | 'pcs'  | '22,88'      | '150,00' | ''              | '127,12'     | '150,00'       | ''                        | 'Store 03' | ''             | ''       | ''            | 'No'     | ''               | '11.03.2021'    | ''              |
+			| 'Front office'       | 'en description is empty' | 'Dress'   | 'XS/Blue'  | 'No'                 | '8,000' | 'pcs'  | '146,44'     | '120,00' | ''              | '813,56'     | '960,00'       | ''                        | 'Store 03' | ''             | ''       | ''            | 'Yes'    | ''               | '11.03.2021'    | ''              |
+			| 'Front office'       | 'en description is empty' | 'Service' | 'Rent'     | 'No'                 | '1,000' | 'pcs'  | '15,25'      | '100,00' | ''              | '84,75'      | '100,00'       | ''                        | 'Store 03' | 'Rent'         | ''       | ''            | 'Yes'    | ''               | '11.03.2021'    | ''              |
 		Then the number of "ItemList" table lines is "equal" "3"
 		And I close all client application windows

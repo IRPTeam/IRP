@@ -170,6 +170,17 @@ Scenario: _092002 check serial lot number in the Retail sales receipt
 		And I select current line in "ItemList" table
 		When I Check the steps for Exception
         |"And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table"|
+	* Filling in payment tab
+		And I move to "Payments" tab
+		And in the table "Payments" I click "Add" button
+		And I click choice button of "Account" attribute in "Payments" table
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Transit Main' |
+		And I select current line in "List" table
+		And I activate "Amount" field in "Payments" table
+		And I input "1 050,00" text in "Amount" field of "Payments" table
+		And I finish line editing in "Payments" table
 	* Post Retail sales receipt and check movements in the register Retail sales
 		And I click the button named "FormPost"
 		And I delete "$$RetailSalesReceipt092002$$" variable
@@ -193,6 +204,11 @@ Scenario: _092002 check serial lot number in the Retail sales receipt
 			| 'Item'     | 'Item key'  | 'Q'     |
 			| 'Trousers' | '38/Yellow' | '1,000' |
 		And I input "3,000" text in "Q" field of "ItemList" table
+		* Filling in payment tab
+			And I move to "Payments" tab
+			And I select current line in "Payments" table
+			And I input "1 050,00" text in "Amount" field of "Payments" table
+			And I finish line editing in "Payments" table
 		And I click the button named "FormPost"
 		Then I wait that in user messages the "Quantity [3] does not match the quantity [1] by serial/lot numbers" substring will appear in "30" seconds
 		* Add one more serial lot number
@@ -232,6 +248,11 @@ Scenario: _092002 check serial lot number in the Retail sales receipt
 			And I input "2,000" text in "Quantity" field of "SerialLotNumbers" table
 			And I finish line editing in "SerialLotNumbers" table
 			And I click "Ok" button
+		* Filling in payment tab
+			And I move to "Payments" tab
+			And I select current line in "Payments" table
+			And I input "1 850,00" text in "Amount" field of "Payments" table
+			And I finish line editing in "Payments" table
 	* Post Retail sales receipt and check movements in the register Retail sales
 		And I click the button named "FormPost"
 		And I click "Registrations report" button
@@ -279,14 +300,8 @@ Scenario: _092002 check serial lot number in the Retail sales receipt
 		And I finish line editing in "ItemList" table
 	* Filling in payments tab
 		And I move to "Payments" tab
-		And in the table "Payments" I click the button named "PaymentsAdd"
-		And I click choice button of "Payment type" attribute in "Payments" table
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Cash'        |
-		And I select current line in "List" table
-		And I activate field named "PaymentsAmount" in "Payments" table
-		And I input "2 550,00" text in the field named "PaymentsAmount" of "Payments" table
+		And I select current line in "Payments" table
+		And I input "2 550,00" text in "Amount" field of "Payments" table
 		And I finish line editing in "Payments" table
 		And I click the button named "FormPost"
 		Then user message window does not contain messages

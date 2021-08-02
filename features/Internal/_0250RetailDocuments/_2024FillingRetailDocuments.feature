@@ -32,6 +32,7 @@ Scenario: _0154100 preparation ( filling documents)
 		When Create catalog Items objects
 		When Create catalog PriceTypes objects
 		When Create catalog Specifications objects
+		When Create catalog Partners objects (Customer)
 		When Create chart of characteristic types AddAttributeAndProperty objects
 		When Create catalog AddAttributeAndPropertySets objects
 		When Create catalog AddAttributeAndPropertyValues objects
@@ -293,15 +294,7 @@ Scenario: _0154135 create document Retail Sales Receipt
 				| '350,00' | 'Shirt'    | '18%' | '38/Black'  | '106,78'     | '2,000' | 'pcs'  | '593,22'     | '700,00'       | 'Store 01' |
 				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '83,90'      | '1,000' | 'pcs'  | '466,10'     | '550,00'       | 'Store 01' |
 				| '520,00' | 'Dress'    | '18%' | 'XS/Blue'   | '79,32'      | '1,000' | 'pcs'  | '440,68'     | '520,00'       | 'Store 01' |
-		* Check filling in currency tab
-			And I click "Save" button
-			And I move to the tab named "GroupCurrencies"
-			And "ObjectCurrencies" table became equal
-			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
-			| 'TRY'                | 'Partner term' | 'TRY'           | 'TRY'      | '1'                 | '1 770'  | '1'            |
-			| 'Local currency'     | 'Legal'     | 'TRY'           | 'TRY'      | '1'                 | '1 770'  | '1'            |
-			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,1712'            | '303,02' | '1'            |
-		* Filling in payment tab
+		* Payment
 			And I move to "Payments" tab
 			And in the table "Payments" I click "Add" button
 			And I click choice button of "Payment type" attribute in "Payments" table
@@ -325,7 +318,7 @@ Scenario: _0154135 create document Retail Sales Receipt
 				| 'Transit Main' |
 			And I select current line in "List" table
 			And I activate "Amount" field in "Payments" table
-			And I input "1 290,00" text in "Amount" field of "Payments" table
+			And I input "1 770,00" text in "Amount" field of "Payments" table
 			And I finish line editing in "Payments" table
 			And I activate "Percent" field in "Payments" table
 			And I select current line in "Payments" table
@@ -334,7 +327,15 @@ Scenario: _0154135 create document Retail Sales Receipt
 			And I activate "Commission" field in "Payments" table
 			And I select current line in "Payments" table
 			And I input "12,90" text in "Commission" field of "Payments" table
-			And I finish line editing in "Payments" table
+			And I finish line editing in "Payments" table			
+		* Check filling in currency tab
+			And I click "Save" button
+			And I move to the tab named "GroupCurrencies"
+			And "ObjectCurrencies" table became equal
+			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
+			| 'TRY'                | 'Partner term' | 'TRY'           | 'TRY'      | '1'                 | '1 770'  | '1'            |
+			| 'Local currency'     | 'Legal'     | 'TRY'           | 'TRY'      | '1'                 | '1 770'  | '1'            |
+			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,1712'            | '303,02' | '1'            |
 		* Post Retail sales receipt
 			And I delete "$$NumberRetailSalesReceipt0154135$$" variable
 			And I delete "$$RetailSalesReceipt015413$$" variable
@@ -2567,6 +2568,24 @@ Scenario: _0154155 check filling in and refilling Retail sales receipt
 			| '350,00' | 'Shirt' | '18%' | '38/Black' | '2,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | '106,78'     | '593,22'     | '700,00'       | 'Store 01' | 'Shop 01'       |
 			| '550,00' | 'Dress' | '18%' | 'L/Green'  | '1,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | '83,90'      | '466,10'     | '550,00'       | 'Store 01' | 'Shop 01'       |
 			| '520,00' | 'Dress' | '18%' | 'XS/Blue'  | '1,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | '79,32'      | '440,68'     | '520,00'       | 'Store 01' | 'Shop 01'       |
+		* Filling in payment tab
+			And I move to "Payments" tab
+			And in the table "Payments" I click "Add" button
+			And I click choice button of "Payment type" attribute in "Payments" table
+			Then "Payment types" window is opened
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Cash'        |
+			And I select current line in "List" table
+			And I activate "Account" field in "Payments" table
+			And I click choice button of "Account" attribute in "Payments" table
+			Then "Cash/Bank accounts" window is opened
+			And I go to line in "List" table
+				| 'Description'  |
+				| 'Transit Main' |
+			And I select current line in "List" table
+			And I activate "Amount" field in "Payments" table
+			And I input "1 770,00" text in "Amount" field of "Payments" table
 		* Check filling in currency tab
 			And I click "Save" button
 			And I move to the tab named "GroupCurrencies"
@@ -2820,6 +2839,24 @@ Scenario: _0154158 check function DontCalculateRow in the Retail sales receipt
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
 				| '400,00' | 'Trousers' | '18%' | '38/Yellow' | '2,000' | 'pcs'  | 'Yes'                | '150,00'     | '801,00'     | '951,00'       |
 				| '550,00' | 'Dress'    | '18%' | 'L/Green'   | '5,000' | 'pcs'  | 'No'                 | '495,00'     | '2 750,00'   | '3 245,00'     |
+		* Filling in payment tab
+			And I move to "Payments" tab
+			And in the table "Payments" I click "Add" button
+			And I click choice button of "Payment type" attribute in "Payments" table
+			Then "Payment types" window is opened
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Cash'        |
+			And I select current line in "List" table
+			And I activate "Account" field in "Payments" table
+			And I click choice button of "Account" attribute in "Payments" table
+			Then "Cash/Bank accounts" window is opened
+			And I go to line in "List" table
+				| 'Description'  |
+				| 'Transit Main' |
+			And I select current line in "List" table
+			And I activate "Amount" field in "Payments" table
+			And I input "4 196,00" text in "Amount" field of "Payments" table
 			And I click the button named "FormPost"
 			And "ItemList" table contains lines
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
@@ -2897,6 +2934,11 @@ Scenario: _0154158 check function DontCalculateRow in the Retail sales receipt
 			And the editing text of form attribute named "ItemListTotalNetAmount" became equal to "4 011,87"
 			And the editing text of form attribute named "ItemListTotalTaxAmount" became equal to "730,13"
 			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "4 744,00"
+		* Change payment
+			And I move to "Payments" tab
+			And I select current line in "Payments" table
+			And I input "4 744,00" text in "Amount" field of "Payments" table
+			And I finish line editing in "Payments" table	
 			And I click the button named "FormPostAndClose"
 
 
@@ -3381,13 +3423,6 @@ Scenario: _0154182 check filling in Retail sales when select retail customer (wi
 	And I close all client application windows
 	* Open Point of sale
 		And In the command interface I select "Retail" "Point of sale"	
-	* Select retail customer
-		And I click "Search customer" button
-		And I go to line in "List" table
-			| 'Description'                  |
-			| 'Retail customer with partner' |
-		And I select current line in "List" table
-		And I click "OK" button
 	* Add items and payment
 		And I click "Show items" button
 		And I go to line in "ItemsPickup" table
@@ -3397,6 +3432,19 @@ Scenario: _0154182 check filling in Retail sales when select retail customer (wi
 			| 'Presentation' |
 			| 'M/White'      |
 		And I select current line in "ItemKeysPickup" table
+	* Select retail customer
+		And I click "Search customer" button
+		And I go to line in "List" table
+			| 'Description'                  |
+			| 'Retail customer with partner' |
+		And I select current line in "List" table
+		And I click "OK" button
+		Then "Update item list info" window is opened
+		And I click "OK" button
+		And "ItemList" table became equal
+			| 'Item'  | 'Item key' | 'Serial number' | 'Quantity' | 'Price'  | 'Offers amount' | 'Total amount' |
+			| 'Dress' | 'M/White'  | ''              | '1,000'    | '440,68' | ''              | '520,00'       |		
+	* Payment
 		And I click "Payment (+)" button
 		And I click "Cash (/)" button
 		And I click "Enter" button
@@ -3412,11 +3460,11 @@ Scenario: _0154182 check filling in Retail sales when select retail customer (wi
 		Then the form attribute named "UsePartnerTransactions" became equal to "Yes"
 		Then the form attribute named "RetailCustomer" became equal to "Name Retail customer Surname Retail customer"
 		And "ItemList" table contains lines
-			| 'Profit loss center' | 'Price type'              | 'Item'  | 'Item key' | 'Dont calculate row' | 'Serial lot numbers' | 'Q'     | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Revenue type' | 'Detail' |
-			| 'Shop 01'       | 'Basic Price without VAT' | 'Dress' | 'M/White'  | 'No'                 | ''                   | '1,000' | 'pcs'  | '67,22'      | '440,68' | '18%' | ''              | '373,46'     | '440,68'       | ''                    | 'Store 01' | ''             | ''       |
+			| 'Price type'              | 'Item'  | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Serial lot numbers' | 'Q'     | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Revenue type' | 'Detail' |
+			| 'Basic Price without VAT' | 'Dress' | 'M/White'  | 'Shop 01'            | 'No'                 | ''                   | '1,000' | 'pcs'  | '79,32'      | '440,68' | '18%' | ''              | '440,68'     | '520,00'       | ''                    | 'Store 01' | ''             | ''       |
 		And "Payments" table contains lines
 			| 'Amount' | 'Payment type' |
-			| '440,68' | 'Cash'         |
+			| '520,00' | 'Cash'         |
 		And I delete "$$NumberRetailSalesReceipt0154182$$" variable
 		And I delete "$$RetailSalesReceipt0154182$$" variable
 		And I save the value of "Number" field as "$$NumberRetailSalesReceipt0154182$$"
@@ -3443,7 +3491,7 @@ Scenario: _0154190 check filling in Retail sales receipt when copying
 		Then the form attribute named "Store" became equal to "Store 01"
 		And "ItemList" table became equal
 			| 'Profit loss center' | 'Price type'        | 'Item'  | 'Item key' | 'Dont calculate row' | 'Serial lot numbers' | 'Q'     | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Revenue type' | 'Detail' |
-			| 'Shop 01'       | 'Basic Price Types' | 'Dress' | 'M/White'  | 'No'                 | ''                   | '1,000' | 'pcs'  | '79,32'      | '520,00' | '18%' | ''              | '440,68'     | '520,00'       | ''                    | 'Store 01' | ''             | ''       |
+			| 'Shop 01'            | 'Basic Price Types' | 'Dress' | 'M/White'  | 'No'                 | ''                   | '1,000' | 'pcs'  | '79,32'      | '520,00' | '18%' | ''              | '440,68'     | '520,00'       | ''                    | 'Store 01' | ''             | ''       |
 		And "Payments" table became equal
 			| 'Amount' | 'Commission' | 'Payment type' | 'Payment terminal' | 'Bank term' | 'Account'      | 'Percent' |
 			| '520,00' | ''           | 'Cash'         | ''                 | ''          | 'Cash desk №2' | ''        |

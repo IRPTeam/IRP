@@ -9,7 +9,7 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	Payments_Amount = ThisObject.Payments.Total("Amount");
 	If  ThisObject.DocumentAmount <> Payments_Amount  Then
 		Cancel = True;		
-		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_079, Payments_Amount, ThisObject.DocumentAmount));
+		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_095, Payments_Amount, ThisObject.DocumentAmount));
 	EndIf;
 EndProcedure
 

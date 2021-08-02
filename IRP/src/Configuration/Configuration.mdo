@@ -698,7 +698,6 @@
   <informationRegisters>InformationRegister.T2012S_PartnerAdvances</informationRegisters>
   <informationRegisters>InformationRegister.T2013S_OffsetOfAging</informationRegisters>
   <accumulationRegisters>AccumulationRegister.CashInTransit</accumulationRegisters>
-  <accumulationRegisters>AccumulationRegister.R3035T_CashPlanning</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1001T_Purchases</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1002T_PurchaseReturns</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1005T_PurchaseSpecialOffers</accumulationRegisters>
@@ -724,12 +723,15 @@
   <accumulationRegisters>AccumulationRegister.R2022B_CustomersPaymentPlanning</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R2031B_ShipmentInvoicing</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R2040B_TaxesIncoming</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R2050T_RetailSales</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R3010B_CashOnHand</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R3011T_CashMovements</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R3015B_CashAdvance</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R3016B_ChequeAndBonds</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R3021B_CashInTransitIncoming</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R3022B_CashInTransitOutgoing</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R3035T_CashPlanning</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R3050T_RetailCash</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R4010B_ActualStocks</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R4011B_FreeStocks</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R4012B_StockReservation</accumulationRegisters>
@@ -756,8 +758,6 @@
   <accumulationRegisters>AccumulationRegister.R5021T_Revenues</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R5022T_Expenses</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R5041B_TaxesPayable</accumulationRegisters>
-  <accumulationRegisters>AccumulationRegister.R3050T_RetailCash</accumulationRegisters>
-  <accumulationRegisters>AccumulationRegister.R2050T_RetailSales</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.TM1010B_RowIDMovements</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.TM1010T_RowIDMovements</accumulationRegisters>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.AddAttributeAndProperty</chartsOfCharacteristicTypes>

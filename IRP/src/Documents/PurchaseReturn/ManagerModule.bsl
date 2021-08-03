@@ -112,6 +112,7 @@ EndFunction
 
 Function GetQueryTextsMasterTables()
 	QueryArray = New Array;
+	QueryArray.Add(R1001T_Purchases());
 	QueryArray.Add(R1002T_PurchaseReturns());
 	QueryArray.Add(R1005T_PurchaseSpecialOffers());
 	QueryArray.Add(R1012B_PurchaseOrdersInvoiceClosing());
@@ -196,7 +197,7 @@ Function ItemList()
 		|		OR VALUETYPE(PurchaseReturnItemList.PurchaseInvoice) <> TYPE(Document.PurchaseInvoice)
 		|			THEN PurchaseReturnItemList.Ref
 		|		ELSE PurchaseReturnItemList.PurchaseInvoice
-		|	END AS SalesInvoice,
+		|	END AS PurchaseInvoice,
 		|	TableRowIDInfo.RowID AS RowKey,
 		|	PurchaseReturnItemList.Key,
 		|	PurchaseReturnItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS IsService,
@@ -207,7 +208,8 @@ Function ItemList()
 		|	PurchaseReturnItemList.ExpenseType AS ExpenseType,
 		|	PurchaseReturnItemList.AdditionalAnalytic AS AdditionalAnalytic,
 		|	PurchaseReturnItemList.Ref.Branch AS Branch,
-		|	PurchaseReturnItemList.Ref.LegalNameContract AS LegalNameContract
+		|	PurchaseReturnItemList.Ref.LegalNameContract AS LegalNameContract,
+		|	PurchaseReturnItemList.OffersAmount
 		|INTO ItemList
 		|FROM
 		|	Document.PurchaseReturn.ItemList AS PurchaseReturnItemList
@@ -297,6 +299,21 @@ Function Taxes()
 		|		ON PurchaseReturnItemList.Key = PurchaseReturnTaxList.Key
 		|		AND PurchaseReturnItemList.Ref = &Ref
 		|		AND PurchaseReturnTaxList.Ref = &Ref";
+EndFunction
+
+Function R1001T_Purchases()
+	Return
+		"SELECT 
+		|	- ItemList.Quantity AS Quantity,
+		|	- ItemList.Amount AS Amount,
+		|	- ItemList.NetAmount AS NetAmount,
+		|	- ItemList.OffersAmount AS OffersAmount,
+		|	ItemList.PurchaseInvoice AS Invoice,
+		|	*
+		|INTO R1001T_Purchases
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE TRUE";
 EndFunction
 
 Function R1002T_PurchaseReturns()

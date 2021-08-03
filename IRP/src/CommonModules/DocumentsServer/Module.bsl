@@ -922,3 +922,14 @@ Function GetPartnerByLegalName(LegalName, Partner) Export
 	Return Undefined;
 EndFunction
 
+Function GetItemAndItemKeyByPartnerItem(PartnerItem) Export
+	Result = New Structure("Item, ItemKey");
+	If Not ValueIsFilled(PartnerItem) Then
+		Return Result;
+	EndIf;
+	Result.Item = PartnerItem.Item;
+	Result.ItemKey = PartnerItem.ItemKey;
+	Return Result;	
+EndFunction
+
+

@@ -57,6 +57,7 @@ Scenario: _0154100 preparation ( filling documents)
 				| "Description" |
 				| "TaxCalculateVAT_TR" |
 			When add Plugin for tax calculation
+		When Create catalog PartnerItems objects
 		When Create information register Taxes records (VAT)
 	* Tax settings
 		When filling in Tax settings for company
@@ -7773,19 +7774,95 @@ Scenario: _0154168 check tax rate recalculation when change partner term (Purcha
 		And I close all client application windows		
 
 
+
+Scenario: _0154170 select Partner items in the PO
+	* Create PO
+		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"	
+		And I click the button named "FormCreate"
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Ferron BP'         |
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Company Ferron BP'         |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Vendor Ferron, TRY'         |
+		And I select current line in "List" table
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Main Company'         |
+		And I select current line in "List" table
+	* Select partner items
+		And I click the button named "Add"
+		And I click choice button of "Partner item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description'          |
+			| 'Dress M/White Ferron' |
+		And I select current line in "List" table
+		And "ItemList" table contains lines
+			| 'Partner item'         | 'Cancel' | 'Item key' | 'Price type'        | 'Item'  | 'Dont calculate row' | 'Q'     | 'Unit' | 'VAT' |
+			| 'Dress M/White Ferron' | 'No'     | 'M/White'  | 'Vendor price, TRY' | 'Dress' | 'No'                 | '1,000' | 'pcs'  | '18%' |
+		And I click the button named "Add"
+		And I select "xs" from "Partner item" drop-down list by string in "ItemList" table
+		And "ItemList" table contains lines
+			| 'Partner item'         | 'Cancel' | 'Item key' | 'Price type'        | 'Item'  | 'Dont calculate row' | 'Q'     | 'Unit' | 'VAT' |
+			| 'Dress M/White Ferron' | 'No'     | 'M/White'  | 'Vendor price, TRY' | 'Dress' | 'No'                 | '1,000' | 'pcs'  | '18%' |
+			| 'Dress XS/Blue Ferron' | 'No'     | 'XS/Blue'  | 'Vendor price, TRY' | 'Dress' | 'No'                 | '1,000' | 'pcs'  | '18%' |
+	And I close all client application windows
+	
+
 		
-				
-			
-						
 
-
+Scenario: _0154171 select Partner items in the SO
+	* Create SO
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"	
+		And I click the button named "FormCreate"
+		And I click Select button of "Partner" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Ferron BP'         |
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Company Ferron BP'         |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Basic Partner terms, TRY'         |
+		And I select current line in "List" table
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Main Company'         |
+		And I select current line in "List" table
+	* Select partner items
+		And in the table "ItemList" I click the button named "ItemListAdd"	
+		And I click choice button of "Partner item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description'          |
+			| 'Dress M/White Ferron' |
+		And I select current line in "List" table
+		And "ItemList" table contains lines
+			| 'SalesTax' | 'Partner item'         | 'Cancel' | 'Procurement method' | 'Item key' | 'Item'  | 'Price type'        | 'Dont calculate row' | 'Q'     | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Net amount' | 'Total amount' | 'Store'    |
+			| '1%'       | 'Dress M/White Ferron' | 'No'     | 'Stock'              | 'M/White'  | 'Dress' | 'Basic Price Types' | 'No'                 | '1,000' | 'pcs'  | '84,47'      | '520,00' | '18%' | '435,53'     | '520,00'       | 'Store 01' |
+		And in the table "ItemList" I click the button named "ItemListAdd"	
+		And I select "xs" from "Partner item" drop-down list by string in "ItemList" table
+		And "ItemList" table contains lines
+			| 'SalesTax' | 'Partner item'         | 'Cancel' | 'Procurement method' | 'Item key' | 'Item'  | 'Price type'        | 'Dont calculate row' | 'Q'     | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Net amount' | 'Total amount' | 'Store'    |
+			| '1%'       | 'Dress M/White Ferron' | 'No'     | 'Stock'              | 'M/White'  | 'Dress' | 'Basic Price Types' | 'No'                 | '1,000' | 'pcs'  | '84,47'      | '520,00' | '18%' | '435,53'     | '520,00'       | 'Store 01' |
+			| '1%'       | 'Dress XS/Blue Ferron' | 'No'     | 'Stock'              | 'XS/Blue'  | 'Dress' | 'Basic Price Types' | 'No'                 | '1,000' | 'pcs'  | '84,47'      | '520,00' | '18%' | '435,53'     | '520,00'       | 'Store 01' |
+	And I close all client application windows				
 		
-				
-
-		
-				
-			
-
+	
 
 Scenario: _0154180 check that author does not copy when copying a document
 	Given I open hyperlink "e1cib/list/Document.SalesInvoice"	

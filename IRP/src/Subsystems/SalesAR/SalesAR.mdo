@@ -15,6 +15,7 @@
   <content>Catalog.Items</content>
   <content>CommonCommand.OpenCustomerAgreements</content>
   <content>Catalog.LegalNameContracts</content>
+  <content>Catalog.PartnerItems</content>
   <subsystems>Pricing</subsystems>
   <subsystems>Sales</subsystems>
   <subsystems>SalesReturn</subsystems>

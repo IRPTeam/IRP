@@ -240,6 +240,25 @@ EndProcedure
 #Region ItemListItemsEvents
 
 &AtClient
+Procedure ItemListPartnerItemOnChange(Item)
+	CurrentData = Items.ItemList.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	ItemAndItemKeyByPartnerItem = DocumentsServer.GetItemAndItemKeyByPartnerItem(CurrentData.PartnerItem);
+
+	If ItemAndItemKeyByPartnerItem.Item <> CurrentData.Item Then
+		CurrentData.Item = ItemAndItemKeyByPartnerItem.Item;
+		DocSalesOrderClient.ItemListItemOnChange(Object, ThisObject, Item);
+	EndIf;
+	
+	If ItemAndItemKeyByPartnerItem.ItemKey <> CurrentData.ItemKey Then
+		CurrentData.ItemKey = ItemAndItemKeyByPartnerItem.ItemKey;
+		DocSalesOrderClient.ItemListItemKeyOnChange(Object, ThisObject, Item);
+	EndIf;
+EndProcedure
+
+&AtClient
 Procedure ItemListItemOnChange(Item, AddInfo = Undefined) Export
 	DocSalesOrderClient.ItemListItemOnChange(Object, ThisObject, Item);
 EndProcedure

@@ -736,16 +736,27 @@
     <main>true</main>
     <extInfo xsi:type="form:DynamicListExtInfo">
       <queryText>SELECT
+	ShipmentConfirmationItemList.Ref AS Ref,
+	COUNT(DISTINCT ShipmentConfirmationItemList.Store) AS StoreCount,
+	MAX(ShipmentConfirmationItemList.Store) AS Store,
+	SUM(ISNULL(ShipmentConfirmationItemList.QuantityInBaseUnit, 0)) AS QuantityInBaseUnit
+INTO ItemListTable
+FROM
+	Document.ShipmentConfirmation.ItemList AS ShipmentConfirmationItemList
+GROUP BY
+	ShipmentConfirmationItemList.Ref
+;
+
+////////////////////////////////////////////////////////////////////////////////
+SELECT
 	ShipmentConfirmation.Ref AS Ref,
 	CASE
 		WHEN ISNULL(R2031B_ShipmentInvoicingBalance.QuantityBalance, 0) = 0
-			THEN VALUE(Enum.InvoicingShippingStatuses.Closed)
-		WHEN SUM(ISNULL(ShipmentConfirmationItemList.QuantityInBaseUnit,
-			0)) = ISNULL(R2031B_ShipmentInvoicingBalance.QuantityBalance, 0)
-			THEN VALUE(Enum.InvoicingShippingStatuses.Awaiting)
-		WHEN SUM(ISNULL(ShipmentConfirmationItemList.QuantityInBaseUnit,
-			0)) &lt;> ISNULL(R2031B_ShipmentInvoicingBalance.QuantityBalance, 0)
-			THEN VALUE(Enum.InvoicingShippingStatuses.Invoicing)
+			THEN VALUE(Enum.InvoicingStatuses.Closed)
+		WHEN ItemListTable.QuantityInBaseUnit = ISNULL(R2031B_ShipmentInvoicingBalance.QuantityBalance, 0)
+			THEN VALUE(Enum.InvoicingStatuses.Awaiting)
+		WHEN ItemListTable.QuantityInBaseUnit &lt;> ISNULL(R2031B_ShipmentInvoicingBalance.QuantityBalance, 0)
+			THEN VALUE(Enum.InvoicingStatuses.Invoicing)
 	END AS Status,
 	ShipmentConfirmation.DeletionMark AS DeletionMark,
 	ShipmentConfirmation.Number AS Number,
@@ -759,14 +770,14 @@
 	ShipmentConfirmation.Branch AS Branch,
 	ShipmentConfirmation.Description AS Description,
 	CASE
-		WHEN COUNT(DISTINCT ShipmentConfirmationItemList.Store) = 1
-			THEN MAX(ShipmentConfirmationItemList.Store)
-		ELSE UNDEFINED
+		WHEN ItemListTable.StoreCount = 1
+			THEN ItemListTable.Store
+		ELSE VALUE(Catalog.Stores.EmptyRef)
 	END AS Store
 FROM
 	Document.ShipmentConfirmation AS ShipmentConfirmation
-		LEFT JOIN Document.ShipmentConfirmation.ItemList AS ShipmentConfirmationItemList
-		ON ShipmentConfirmationItemList.Ref = ShipmentConfirmation.Ref
+		LEFT JOIN ItemListTable AS ItemListTable
+		ON ItemListTable.Ref = ShipmentConfirmation.Ref
 		LEFT JOIN AccumulationRegister.R2031B_ShipmentInvoicing.Balance AS R2031B_ShipmentInvoicingBalance
 		ON ShipmentConfirmation.Ref = CAST(R2031B_ShipmentInvoicingBalance.Basis AS Document.ShipmentConfirmation)
 GROUP BY
@@ -782,7 +793,20 @@ GROUP BY
 	ShipmentConfirmation.Author,
 	ShipmentConfirmation.Branch,
 	ShipmentConfirmation.Description,
-	R2031B_ShipmentInvoicingBalance.QuantityBalance</queryText>
+	CASE
+		WHEN ItemListTable.StoreCount = 1
+			THEN ItemListTable.Store
+		ELSE VALUE(Catalog.Stores.EmptyRef)
+	END,
+	R2031B_ShipmentInvoicingBalance.QuantityBalance,
+	CASE
+		WHEN ISNULL(R2031B_ShipmentInvoicingBalance.QuantityBalance, 0) = 0
+			THEN VALUE(Enum.InvoicingStatuses.Closed)
+		WHEN ItemListTable.QuantityInBaseUnit = ISNULL(R2031B_ShipmentInvoicingBalance.QuantityBalance, 0)
+			THEN VALUE(Enum.InvoicingStatuses.Awaiting)
+		WHEN ItemListTable.QuantityInBaseUnit &lt;> ISNULL(R2031B_ShipmentInvoicingBalance.QuantityBalance, 0)
+			THEN VALUE(Enum.InvoicingStatuses.Invoicing)
+	END</queryText>
       <mainTable>Document.ShipmentConfirmation</mainTable>
       <dynamicDataRead>true</dynamicDataRead>
       <autoFillAvailableFields>true</autoFillAvailableFields>

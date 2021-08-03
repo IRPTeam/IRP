@@ -404,7 +404,7 @@ Scenario: _041614 check Purchase return movements by the Register  "R4011 Free s
 	And I close all client application windows
 
 
-Scenario: _041614 check Purchase return movements by the Register  "R4032 Goods in transit (outgoing) (use SC, PR)
+Scenario: _041619 check Purchase return movements by the Register  "R4032 Goods in transit (outgoing) (use SC, PR)
 	And I close all client application windows
 	* Select Purchase return
 		Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
@@ -506,6 +506,37 @@ Scenario: _041618 check Purchase return movements by the Register  "R5022 Expens
 			| ''                                              | '14.03.2021 18:53:34' | '-228,81'   | 'Main Company' | 'Front office' | 'Front office'       | 'Expense'      | 'Interner' | 'TRY'      | ''                    | 'TRY'                          |
 			| ''                                              | '14.03.2021 18:53:34' | '-228,81'   | 'Main Company' | 'Front office' | 'Front office'       | 'Expense'      | 'Interner' | 'TRY'      | ''                    | 'en description is empty'      |
 			| ''                                              | '14.03.2021 18:53:34' | '-39,17'    | 'Main Company' | 'Front office' | 'Front office'       | 'Expense'      | 'Interner' | 'USD'      | ''                    | 'Reporting currency'           |
+	And I close all client application windows
+
+Scenario: _041620 check Purchase return movements by the Register  "R1001 Purchases"
+	And I close all client application windows
+	* Select Purchase return
+		Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '231' |
+	* Check movements by the Register  "R1001 Purchases" 
+		And I click "Registrations report" button
+		And I select "R1001 Purchases" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Purchase return 231 dated 14.03.2021 18:53:34' | ''                    | ''          | ''       | ''           | ''              | ''             | ''             | ''                             | ''         | ''                                               | ''          | ''                                     | ''                     |
+			| 'Document registrations records'                | ''                    | ''          | ''       | ''           | ''              | ''             | ''             | ''                             | ''         | ''                                               | ''          | ''                                     | ''                     |
+			| 'Register  "R1001 Purchases"'                   | ''                    | ''          | ''       | ''           | ''              | ''             | ''             | ''                             | ''         | ''                                               | ''          | ''                                     | ''                     |
+			| ''                                              | 'Period'              | 'Resources' | ''       | ''           | ''              | 'Dimensions'   | ''             | ''                             | ''         | ''                                               | ''          | ''                                     | 'Attributes'           |
+			| ''                                              | ''                    | 'Quantity'  | 'Amount' | 'Net amount' | 'Offers amount' | 'Company'      | 'Branch'       | 'Multi currency movement type' | 'Currency' | 'Invoice'                                        | 'Item key'  | 'Row key'                              | 'Deferred calculation' |
+			| ''                                              | '14.03.2021 18:53:34' | '-5'        | '-450'   | '-381,36'    | '-50'           | 'Main Company' | 'Front office' | 'Local currency'               | 'TRY'      | 'Purchase invoice 117 dated 12.02.2021 15:12:15' | 'S/Yellow'  | '4fcbb4cf-3824-47fb-89b5-50d151315d4d' | 'No'                   |
+			| ''                                              | '14.03.2021 18:53:34' | '-5'        | '-450'   | '-381,36'    | '-50'           | 'Main Company' | 'Front office' | 'TRY'                          | 'TRY'      | 'Purchase invoice 117 dated 12.02.2021 15:12:15' | 'S/Yellow'  | '4fcbb4cf-3824-47fb-89b5-50d151315d4d' | 'No'                   |
+			| ''                                              | '14.03.2021 18:53:34' | '-5'        | '-450'   | '-381,36'    | '-50'           | 'Main Company' | 'Front office' | 'en description is empty'      | 'TRY'      | 'Purchase invoice 117 dated 12.02.2021 15:12:15' | 'S/Yellow'  | '4fcbb4cf-3824-47fb-89b5-50d151315d4d' | 'No'                   |
+			| ''                                              | '14.03.2021 18:53:34' | '-5'        | '-77,04' | '-65,29'     | '-8,56'         | 'Main Company' | 'Front office' | 'Reporting currency'           | 'USD'      | 'Purchase invoice 117 dated 12.02.2021 15:12:15' | 'S/Yellow'  | '4fcbb4cf-3824-47fb-89b5-50d151315d4d' | 'No'                   |
+			| ''                                              | '14.03.2021 18:53:34' | '-2'        | '-270'   | '-228,81'    | '-30'           | 'Main Company' | 'Front office' | 'Local currency'               | 'TRY'      | 'Purchase invoice 117 dated 12.02.2021 15:12:15' | 'Interner'  | '1b90516b-b3ac-4ca5-bb47-44477975f242' | 'No'                   |
+			| ''                                              | '14.03.2021 18:53:34' | '-2'        | '-270'   | '-228,81'    | '-30'           | 'Main Company' | 'Front office' | 'TRY'                          | 'TRY'      | 'Purchase invoice 117 dated 12.02.2021 15:12:15' | 'Interner'  | '1b90516b-b3ac-4ca5-bb47-44477975f242' | 'No'                   |
+			| ''                                              | '14.03.2021 18:53:34' | '-2'        | '-270'   | '-228,81'    | '-30'           | 'Main Company' | 'Front office' | 'en description is empty'      | 'TRY'      | 'Purchase invoice 117 dated 12.02.2021 15:12:15' | 'Interner'  | '1b90516b-b3ac-4ca5-bb47-44477975f242' | 'No'                   |
+			| ''                                              | '14.03.2021 18:53:34' | '-2'        | '-46,22' | '-39,17'     | '-5,14'         | 'Main Company' | 'Front office' | 'Reporting currency'           | 'USD'      | 'Purchase invoice 117 dated 12.02.2021 15:12:15' | 'Interner'  | '1b90516b-b3ac-4ca5-bb47-44477975f242' | 'No'                   |
+			| ''                                              | '14.03.2021 18:53:34' | '-1'        | '-180'   | '-152,54'    | '-20'           | 'Main Company' | 'Front office' | 'Local currency'               | 'TRY'      | 'Purchase invoice 117 dated 12.02.2021 15:12:15' | '36/Yellow' | '923e7825-c20f-4a3e-a983-2b85d80e475a' | 'No'                   |
+			| ''                                              | '14.03.2021 18:53:34' | '-1'        | '-180'   | '-152,54'    | '-20'           | 'Main Company' | 'Front office' | 'TRY'                          | 'TRY'      | 'Purchase invoice 117 dated 12.02.2021 15:12:15' | '36/Yellow' | '923e7825-c20f-4a3e-a983-2b85d80e475a' | 'No'                   |
+			| ''                                              | '14.03.2021 18:53:34' | '-1'        | '-180'   | '-152,54'    | '-20'           | 'Main Company' | 'Front office' | 'en description is empty'      | 'TRY'      | 'Purchase invoice 117 dated 12.02.2021 15:12:15' | '36/Yellow' | '923e7825-c20f-4a3e-a983-2b85d80e475a' | 'No'                   |
+			| ''                                              | '14.03.2021 18:53:34' | '-1'        | '-30,82' | '-26,11'     | '-3,42'         | 'Main Company' | 'Front office' | 'Reporting currency'           | 'USD'      | 'Purchase invoice 117 dated 12.02.2021 15:12:15' | '36/Yellow' | '923e7825-c20f-4a3e-a983-2b85d80e475a' | 'No'                   |
 	And I close all client application windows
 
 Scenario: _041630 Purchase return clear posting/mark for deletion

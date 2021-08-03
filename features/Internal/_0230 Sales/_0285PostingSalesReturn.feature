@@ -632,7 +632,7 @@ Scenario: _028515 create document Sales return based on SRO
 			And I save the current field value as "$$Rov2SalesReturn028515$$"			
 		* Check Item tab and RowID tab
 			And "ItemList" table contains lines
-				| 'Key'                       | 'Store'    | 'Additional analytic' | 'Quantity in base unit' | '#' | 'Item'  | 'Item key' | 'Dont calculate row' | 'Serial lot numbers' | 'Q'      | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Use goods receipt' | 'Total amount' | 'Sales return order'                               | 'Sales invoice' | 'Expense type' |
+				| 'Key'                       | 'Store'    | 'Additional analytic' | 'Quantity in base unit' | '#' | 'Item'  | 'Item key' | 'Dont calculate row' | 'Serial lot numbers' | 'Q'      | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Use goods receipt' | 'Total amount' | 'Sales return order'                               | 'Sales invoice' | 'Revenue type' |
 				| '$$Rov1SalesReturn028515$$' | 'Store 02' | ''                    | '1,000'                 | '1' | 'Dress' | 'XS/Blue'  | 'No'                 | ''                   | '1,000'  | 'pcs'  | '79,32'      | '520,00' | '18%' | ''              | '440,68'     | 'No'                | '520,00'       | 'Sales return order 105 dated 25.03.2021 12:09:40' | ''              | 'Expense'      |
 				| '$$Rov2SalesReturn028515$$' | 'Store 02' | ''                    | '12,000'                | '2' | 'Dress' | 'XS/Blue'  | 'No'                 | ''                   | '12,000' | 'pcs'  | '951,86'     | '520,00' | '18%' | ''              | '5 288,14'   | 'No'                | '6 240,00'     | 'Sales return order 106 dated 25.03.2021 12:10:03' | ''              | ''             |
 			And "RowIDInfo" table contains lines
@@ -697,6 +697,7 @@ Scenario: _028515 create document Sales return based on SRO
 		And I save the value of "Number" field as "$$NumberSalesReturn028515$$"
 		And I save the window as "$$SalesReturn028515$$"
 		And I click the button named "FormPostAndClose"
+		And I close all client application windows
 	* Check creation
 		Given I open hyperlink "e1cib/list/Document.SalesReturn"
 		And "List" table contains lines

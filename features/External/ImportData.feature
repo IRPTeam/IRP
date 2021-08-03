@@ -1781,3 +1781,12 @@ Scenario: Create catalog LegalNameContracts objects
 		| 'e1cib/data/Catalog.LegalNameContracts?ref=b76d88abafbd4c5e11ebf1c694dd9b44' | 'False'        | '2'    | 'Contract Ferron BP New' | '01.07.2021 00:00:00' | '01.01.0001 00:00:00' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf116b32709a2' | 'e1cib/data/Catalog.PartnersBankAccounts?ref=b75dad46e66c4c2c11eb4522c1c161a1' |
 		| 'e1cib/data/Catalog.LegalNameContracts?ref=b76d88abafbd4c5e11ebf1c989218108' | 'False'        | '3'    | 'Contract Kalipso'       | '01.01.2021 00:00:00' | '01.01.0001 00:00:00' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf116b32709a3' | 'e1cib/data/Catalog.PartnersBankAccounts?ref=b75dad46e66c4c2c11eb451e00a38c06' |
 
+
+Scenario: Create catalog PartnerItems objects
+
+	And I check or create catalog "PartnerItems" objects:
+		| 'Ref'                                                                  | 'DeletionMark' | 'Code' | 'Partner'                                                          | 'ItemID'  | 'Item'                                                          | 'ItemKey'                                                          | 'Description_en'        | 'Description_hash' | 'Description_ru' | 'Description_tr'           |
+		| 'e1cib/data/Catalog.PartnerItems?ref=b76e892a86cabee011ebf4471d198cc2' | 'False'        | '1'    | 'e1cib/data/Catalog.Partners?ref=aa78120ed92fbced11eaf113ba6c1870' | 'QN90999' | 'e1cib/data/Catalog.Items?ref=aa78120ed92fbced11eaf115bcc9c5f3' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c5fc' | 'Dress XS/Blue Ferron'  | ''                 | ''               | 'Dress Ferron TR'          |
+		| 'e1cib/data/Catalog.PartnerItems?ref=b76e892a86cabee011ebf4483f49e197' | 'False'        | '2'    | 'e1cib/data/Catalog.Partners?ref=aa78120ed92fbced11eaf113ba6c1871' | 'QN10998' | 'e1cib/data/Catalog.Items?ref=aa78120ed92fbced11eaf115bcc9c5f3' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c5fd' | 'Dress M/White Kalipso' | ''                 | ''               | 'Dress M/White Kalipso TR' |
+		| 'e1cib/data/Catalog.PartnerItems?ref=b76e892a86cabee011ebf4483f49e198' | 'False'        | '3'    | 'e1cib/data/Catalog.Partners?ref=aa78120ed92fbced11eaf113ba6c1870' | 'QN301'   | 'e1cib/data/Catalog.Items?ref=aa78120ed92fbced11eaf115bcc9c5f3' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c5fd' | 'Dress M/White Ferron'  | ''                 | ''               | 'Dress M/White Ferron TR'  |
+

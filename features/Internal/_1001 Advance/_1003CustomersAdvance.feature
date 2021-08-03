@@ -153,9 +153,14 @@ Scenario: _1003002 create CustomersAdvancesClosing
 	And I click Select button of "Begin of period" field
 	And I input "12.01.2021" text in "Begin of period" field
 	And I input "12.01.2021" text in "End of period" field
+	And I click Choice button of the field named "Branch"
+	And I go to line in "List" table
+		| 'Description'  |
+		| 'Distribution department' |
+	And I select current line in "List" table
 	And I click the button named "FormPost"
 	And I delete "$$NumberCustomersAdvancesClosing12012021$$" variable
-	And I delete "$CustomersAdvancesClosing12012021$$" variable
+	And I delete "$$CustomersAdvancesClosing12012021$$" variable
 	And I delete "$$DateCustomersAdvancesClosing11022021$$" variable
 	And I save the value of "Number" field as "$$NumberCustomersAdvancesClosing12012021$$"
 	And I save the window as "$$CustomersAdvancesClosing12012021$$"
@@ -171,9 +176,14 @@ Scenario: _1003002 create CustomersAdvancesClosing
 	And I click Select button of "Begin of period" field
 	And I input "27.01.2021" text in "Begin of period" field
 	And I input "27.01.2021" text in "End of period" field
+	And I click Choice button of the field named "Branch"
+	And I go to line in "List" table
+		| 'Description'  |
+		| 'Distribution department' |
+	And I select current line in "List" table
 	And I click the button named "FormPost"
 	And I delete "$$NumberCustomersAdvancesClosing27012021$$" variable
-	And I delete "$CustomersAdvancesClosing27012021$$" variable
+	And I delete "$$CustomersAdvancesClosing27012021$$" variable
 	And I delete "$$DateCustomersAdvancesClosing27012021$$" variable
 	And I save the value of "Number" field as "$$NumberCustomersAdvancesClosing27012021$$"
 	And I save the window as "$$CustomersAdvancesClosing27012021$$"

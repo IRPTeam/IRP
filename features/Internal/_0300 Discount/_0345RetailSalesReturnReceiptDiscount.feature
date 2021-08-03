@@ -108,6 +108,17 @@ Scenario: _034501 check discount in Retail sales receipt
 				| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Offers amount' | 'Q'       | 'Price type'        | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
 				| '520,00' | 'Dress' | '18%' | 'M/White'  | '5 200,00'      | '100,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | '7 138,98'   | '39 661,02'  | '46 800,00'    | 'Store 01' |
 				| '550,00' | 'Dress' | '18%' | 'L/Green'  | '550,00'        | '10,000'  | 'Basic Price Types' | 'pcs'  | 'No'                 | '755,08'     | '4 194,92'   | '4 950,00'     | 'Store 01' |
+			* Filling in payment tab
+				And I move to "Payments" tab
+				And in the table "Payments" I click "Add" button
+				And I click choice button of "Account" attribute in "Payments" table
+				And I go to line in "List" table
+					| 'Description'  |
+					| 'Transit Main' |
+				And I select current line in "List" table
+				And I activate "Amount" field in "Payments" table
+				And I input "51 750,00" text in "Amount" field of "Payments" table
+				And I finish line editing in "Payments" table
 			And I click the button named "FormPost"
 			And I delete "$$NumberRetailSalesReceipt034501$$" variable
 			And I delete "$$RetailSalesReceipt034501$$" variable
@@ -188,6 +199,18 @@ Scenario: _034502 check discount in Retail sales receipt 5+1
 			Then the form attribute named "ItemListTotalNetAmount" became equal to "41 211,87"
 			Then the form attribute named "ItemListTotalTaxAmount" became equal to "7 418,13"
 			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "48 630,00"
+		* Filling in payment tab
+			And I move to "Payments" tab
+			And in the table "Payments" I click "Add" button
+			And I click choice button of "Account" attribute in "Payments" table
+			And I go to line in "List" table
+				| 'Description'  |
+				| 'Transit Main' |
+			And I select current line in "List" table
+			And I activate "Amount" field in "Payments" table
+			And I input "48 630,00" text in "Amount" field of "Payments" table
+			And I finish line editing in "Payments" table
+		* Post document
 			And I click the button named "FormPost"
 			And Delay 5
 			And I delete "$$NumberRetailSalesReceipt034502$$" variable
@@ -257,7 +280,18 @@ Scenario: _034510 check discount recalculation when change quantity in Retail re
 				| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Offers amount' | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
 				| '520,00' | 'Dress' | '18%' | 'M/White'  | '520,00'        | '10,000' | 'pcs'  | 'No'                 | '713,90'     | '3 966,10'   | '4 680,00'     | 'Store 01' |
 				| '550,00' | 'Dress' | '18%' | 'L/Green'  | '55,00'         | '1,000' | 'pcs'  | 'No'                 | '75,51'      | '419,49'     | '495,00'       | 'Store 01' |	
-			And I click the button named "FormPostAndClose"		
+		* Filling in payment tab
+			And I move to "Payments" tab
+			And in the table "Payments" I click "Add" button
+			And I click choice button of "Account" attribute in "Payments" table
+			And I go to line in "List" table
+				| 'Description'  |
+				| 'Transit Main' |
+			And I select current line in "List" table
+			And I activate "Amount" field in "Payments" table
+			And I input "5 175,00" text in "Amount" field of "Payments" table
+			And I finish line editing in "Payments" table
+		And I click the button named "FormPostAndClose"		
 	* Discount 5+1
 		* Create Retail return receipt based on $$RetailSalesReceipt034502$$
 			Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
@@ -301,7 +335,18 @@ Scenario: _034510 check discount recalculation when change quantity in Retail re
 			Then the form attribute named "ItemListTotalNetAmount" became equal to "4 194,92"
 			Then the form attribute named "ItemListTotalTaxAmount" became equal to "755,08"
 			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "4 950,00"
-			And I click the button named "FormPostAndClose"				
+		* Filling in payment tab
+			And I move to "Payments" tab
+			And in the table "Payments" I click "Add" button
+			And I click choice button of "Account" attribute in "Payments" table
+			And I go to line in "List" table
+				| 'Description'  |
+				| 'Transit Main' |
+			And I select current line in "List" table
+			And I activate "Amount" field in "Payments" table
+			And I input "4 950,00" text in "Amount" field of "Payments" table
+			And I finish line editing in "Payments" table
+		And I click the button named "FormPostAndClose"				
 			
 						
 			

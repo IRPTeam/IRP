@@ -147,6 +147,39 @@ Scenario: _042503 check Retail return receipt movements by the Register  "R3010 
 			| ''                                                    | 'Expense'     | '15.03.2021 16:01:25' | '9 720'     | 'Main Company' | 'Shop 01' | 'Cash desk №4' | 'TRY'      | 'en description is empty'      | 'No'                   |
 		And I close all client application windows
 
+
+Scenario: _042504 check Retail return receipt movements by the Register  "R2001 Sales"
+	* Select Retail return receipt
+		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '201' |
+	* Check movements by the Register  "R2001 Sales"
+		And I click "Registrations report" button
+		And I select "R2001 Sales" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Retail return receipt 201 dated 15.03.2021 16:01:25' | ''                    | ''          | ''          | ''           | ''              | ''             | ''        | ''                             | ''         | ''                                                   | ''          | ''                                     |
+			| 'Document registrations records'                      | ''                    | ''          | ''          | ''           | ''              | ''             | ''        | ''                             | ''         | ''                                                   | ''          | ''                                     |
+			| 'Register  "R2001 Sales"'                             | ''                    | ''          | ''          | ''           | ''              | ''             | ''        | ''                             | ''         | ''                                                   | ''          | ''                                     |
+			| ''                                                    | 'Period'              | 'Resources' | ''          | ''           | ''              | 'Dimensions'   | ''        | ''                             | ''         | ''                                                   | ''          | ''                                     |
+			| ''                                                    | ''                    | 'Quantity'  | 'Amount'    | 'Net amount' | 'Offers amount' | 'Company'      | 'Branch'  | 'Multi currency movement type' | 'Currency' | 'Invoice'                                            | 'Item key'  | 'Row key'                              |
+			| ''                                                    | '15.03.2021 16:01:25' | '-12'       | '-8 400'    | '-7 118,64'  | ''              | 'Main Company' | 'Shop 01' | 'Local currency'               | 'TRY'      | 'Retail sales receipt 201 dated 15.03.2021 16:01:04' | '36/18SD'   | '27115324-bb2e-4c35-897e-0666d863ed5f' |
+			| ''                                                    | '15.03.2021 16:01:25' | '-12'       | '-8 400'    | '-7 118,64'  | ''              | 'Main Company' | 'Shop 01' | 'TRY'                          | 'TRY'      | 'Retail sales receipt 201 dated 15.03.2021 16:01:04' | '36/18SD'   | '27115324-bb2e-4c35-897e-0666d863ed5f' |
+			| ''                                                    | '15.03.2021 16:01:25' | '-12'       | '-8 400'    | '-7 118,64'  | ''              | 'Main Company' | 'Shop 01' | 'en description is empty'      | 'TRY'      | 'Retail sales receipt 201 dated 15.03.2021 16:01:04' | '36/18SD'   | '27115324-bb2e-4c35-897e-0666d863ed5f' |
+			| ''                                                    | '15.03.2021 16:01:25' | '-12'       | '-1 438,08' | '-1 218,71'  | ''              | 'Main Company' | 'Shop 01' | 'Reporting currency'           | 'USD'      | 'Retail sales receipt 201 dated 15.03.2021 16:01:04' | '36/18SD'   | '27115324-bb2e-4c35-897e-0666d863ed5f' |
+			| ''                                                    | '15.03.2021 16:01:25' | '-2'        | '-800'      | '-677,97'    | ''              | 'Main Company' | 'Shop 01' | 'Local currency'               | 'TRY'      | 'Retail sales receipt 201 dated 15.03.2021 16:01:04' | '38/Yellow' | '0481a0d2-13a8-45ee-b0ea-ad8662cf7edd' |
+			| ''                                                    | '15.03.2021 16:01:25' | '-2'        | '-800'      | '-677,97'    | ''              | 'Main Company' | 'Shop 01' | 'TRY'                          | 'TRY'      | 'Retail sales receipt 201 dated 15.03.2021 16:01:04' | '38/Yellow' | '0481a0d2-13a8-45ee-b0ea-ad8662cf7edd' |
+			| ''                                                    | '15.03.2021 16:01:25' | '-2'        | '-800'      | '-677,97'    | ''              | 'Main Company' | 'Shop 01' | 'en description is empty'      | 'TRY'      | 'Retail sales receipt 201 dated 15.03.2021 16:01:04' | '38/Yellow' | '0481a0d2-13a8-45ee-b0ea-ad8662cf7edd' |
+			| ''                                                    | '15.03.2021 16:01:25' | '-2'        | '-136,96'   | '-116,07'    | ''              | 'Main Company' | 'Shop 01' | 'Reporting currency'           | 'USD'      | 'Retail sales receipt 201 dated 15.03.2021 16:01:04' | '38/Yellow' | '0481a0d2-13a8-45ee-b0ea-ad8662cf7edd' |
+			| ''                                                    | '15.03.2021 16:01:25' | '-1'        | '-520'      | '-440,68'    | ''              | 'Main Company' | 'Shop 01' | 'Local currency'               | 'TRY'      | 'Retail sales receipt 201 dated 15.03.2021 16:01:04' | 'XS/Blue'   | 'd7b48944-49d7-4b9b-9a60-0d9a31003b55' |
+			| ''                                                    | '15.03.2021 16:01:25' | '-1'        | '-520'      | '-440,68'    | ''              | 'Main Company' | 'Shop 01' | 'TRY'                          | 'TRY'      | 'Retail sales receipt 201 dated 15.03.2021 16:01:04' | 'XS/Blue'   | 'd7b48944-49d7-4b9b-9a60-0d9a31003b55' |
+			| ''                                                    | '15.03.2021 16:01:25' | '-1'        | '-520'      | '-440,68'    | ''              | 'Main Company' | 'Shop 01' | 'en description is empty'      | 'TRY'      | 'Retail sales receipt 201 dated 15.03.2021 16:01:04' | 'XS/Blue'   | 'd7b48944-49d7-4b9b-9a60-0d9a31003b55' |
+			| ''                                                    | '15.03.2021 16:01:25' | '-1'        | '-89,02'    | '-75,44'     | ''              | 'Main Company' | 'Shop 01' | 'Reporting currency'           | 'USD'      | 'Retail sales receipt 201 dated 15.03.2021 16:01:04' | 'XS/Blue'   | 'd7b48944-49d7-4b9b-9a60-0d9a31003b55' |
+		And I close all client application windows
+
+
+
 Scenario: _042508 check Retail return receipt movements by the Register  "R2021 Customer transactions"
 	* Select Retail return receipt
 		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"

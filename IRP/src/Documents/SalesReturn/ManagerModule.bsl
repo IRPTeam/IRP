@@ -238,16 +238,16 @@ Function OffersInfo()
 	Return
 		"SELECT
 		|	SalesReturnItemList.Ref.Date AS Period,
-		|	SalesReturnItemList.Ref AS Invoice,
 		|	SalesReturnItemList.Key AS RowKey,
 		|	SalesReturnItemList.ItemKey,
 		|	SalesReturnItemList.Ref.Company AS Company,
 		|	SalesReturnItemList.Ref.Branch AS Branch,
 		|	SalesReturnItemList.Ref.Currency,
 		|	SalesReturnSpecialOffers.Offer AS SpecialOffer,
-		|	- SalesReturnSpecialOffers.Amount AS OffersAmount,
-		|	- SalesReturnItemList.TotalAmount AS SalesAmount,
-		|	- SalesReturnItemList.NetAmount AS NetAmount
+		|	SalesReturnItemList.SalesInvoice AS Invoice,
+		|	-SalesReturnSpecialOffers.Amount AS OffersAmount,
+		|	-SalesReturnItemList.TotalAmount AS SalesAmount,
+		|	-SalesReturnItemList.NetAmount AS NetAmount
 		|INTO OffersInfo
 		|FROM
 		|	Document.SalesReturn.ItemList AS SalesReturnItemList
@@ -328,7 +328,7 @@ EndFunction
 
 Function R2005T_SalesSpecialOffers()
 	Return
-		"SELECT 
+		"SELECT
 		|	*
 		|INTO R2005T_SalesSpecialOffers
 		|FROM

@@ -599,6 +599,29 @@ Scenario: _041323 check Sales return movements by the Register  "R2021 Customer 
 	And I close all client application windows
 
 
+Scenario: _041325 check Sales return movements by the Register  "R2001 Sales"
+	And I close all client application windows
+	* Select Sales return
+		Given I open hyperlink "e1cib/list/Document.SalesReturn"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '107' |
+	* Check movements by the Register  "R2001 Sales"
+		And I click "Registrations report" button
+		And I select "R2001 Sales" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Sales return 107 dated 21.04.2021 14:24:43' | ''                    | ''          | ''       | ''           | ''              | ''             | ''                        | ''                             | ''         | ''                                            | ''         | ''                                     |
+			| 'Document registrations records'             | ''                    | ''          | ''       | ''           | ''              | ''             | ''                        | ''                             | ''         | ''                                            | ''         | ''                                     |
+			| 'Register  "R2001 Sales"'                    | ''                    | ''          | ''       | ''           | ''              | ''             | ''                        | ''                             | ''         | ''                                            | ''         | ''                                     |
+			| ''                                           | 'Period'              | 'Resources' | ''       | ''           | ''              | 'Dimensions'   | ''                        | ''                             | ''         | ''                                            | ''         | ''                                     |
+			| ''                                           | ''                    | 'Quantity'  | 'Amount' | 'Net amount' | 'Offers amount' | 'Company'      | 'Branch'                  | 'Multi currency movement type' | 'Currency' | 'Invoice'                                     | 'Item key' | 'Row key'                              |
+			| ''                                           | '21.04.2021 14:24:43' | '-1'        | '-520'   | '-440,68'    | ''              | 'Main Company' | 'Distribution department' | 'Local currency'               | 'TRY'      | 'Sales invoice 101 dated 21.04.2021 14:10:58' | 'XS/Blue'  | 'f441f6a4-f90d-4139-a593-e2d3d7c111ef' |
+			| ''                                           | '21.04.2021 14:24:43' | '-1'        | '-520'   | '-440,68'    | ''              | 'Main Company' | 'Distribution department' | 'TRY'                          | 'TRY'      | 'Sales invoice 101 dated 21.04.2021 14:10:58' | 'XS/Blue'  | 'f441f6a4-f90d-4139-a593-e2d3d7c111ef' |
+			| ''                                           | '21.04.2021 14:24:43' | '-1'        | '-520'   | '-440,68'    | ''              | 'Main Company' | 'Distribution department' | 'en description is empty'      | 'TRY'      | 'Sales invoice 101 dated 21.04.2021 14:10:58' | 'XS/Blue'  | 'f441f6a4-f90d-4139-a593-e2d3d7c111ef' |
+			| ''                                           | '21.04.2021 14:24:43' | '-1'        | '-89,02' | '-75,44'     | ''              | 'Main Company' | 'Distribution department' | 'Reporting currency'           | 'USD'      | 'Sales invoice 101 dated 21.04.2021 14:10:58' | 'XS/Blue'  | 'f441f6a4-f90d-4139-a593-e2d3d7c111ef' |
+	And I close all client application windows
+
 
 
 // Scenario: _041325 check Sales return movements by the Register  "R2021 Customer transactions" (Due as advance - False, SI-BR, SR more than due)

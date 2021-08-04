@@ -163,6 +163,7 @@ When Create information register PartnerSegments records (test data base)
 When Create information register TaxSettings records (test data base)
 When Create information register UserSettings records (test data base)
 When Create document CashStatement objects  (test data base)
+When Create catalog PartnerItems objects (test data base)
 * Posting Opening entry
 		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
 		Then "Opening entries" window is opened
@@ -368,4 +369,12 @@ When Create document CashStatement objects  (test data base)
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And Delay "3"
 And I close all client application windows
+
+
+	
+		
+	
+		
+	
+		
 

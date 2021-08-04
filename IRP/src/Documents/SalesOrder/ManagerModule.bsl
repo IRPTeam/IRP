@@ -137,7 +137,6 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R2014T_CanceledSalesOrders());
 	QueryArray.Add(R4011B_FreeStocks());
 	QueryArray.Add(R4012B_StockReservation());
-	QueryArray.Add(R4013B_StockReservationPlanning());
 	QueryArray.Add(R4034B_GoodsShipmentSchedule());
 	QueryArray.Add(R2022B_CustomersPaymentPlanning());
 	Return QueryArray;	
@@ -273,18 +272,6 @@ Function R4012B_StockReservation()
 EndFunction
 
 #EndRegion
-
-Function R4013B_StockReservationPlanning()
-	Return
-		"SELECT
-		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		|	*
-		|INTO R4013B_StockReservationPlanning
-		|FROM
-		|	ItemList AS ItemList
-		|WHERE
-		|	FALSE";
-EndFunction
 
 Function R4034B_GoodsShipmentSchedule()
 	Return

@@ -61,7 +61,6 @@
   <registerRecords>AccumulationRegister.R1005T_PurchaseSpecialOffers</registerRecords>
   <registerRecords>AccumulationRegister.R5010B_ReconciliationStatement</registerRecords>
   <registerRecords>AccumulationRegister.R4010B_ActualStocks</registerRecords>
-  <registerRecords>AccumulationRegister.R4013B_StockReservationPlanning</registerRecords>
   <registerRecords>AccumulationRegister.R4017B_InternalSupplyRequestProcurement</registerRecords>
   <registerRecords>AccumulationRegister.R3022B_CashInTransitOutgoing</registerRecords>
   <registerRecords>AccumulationRegister.R4020T_StockTransferOrders</registerRecords>

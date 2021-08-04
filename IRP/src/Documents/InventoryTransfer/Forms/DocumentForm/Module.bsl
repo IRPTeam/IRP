@@ -242,6 +242,7 @@ EndProcedure
 Function GetLinkedDocumentsFilter()
 	Filter = New Structure();
 	Filter.Insert("Company"       , Object.Company);
+	Filter.Insert("Branch"        , Object.Branch);
 	Filter.Insert("StoreSender"   , Object.StoreSender);
 	Filter.Insert("StoreReceiver" , Object.StoreReceiver);
 	

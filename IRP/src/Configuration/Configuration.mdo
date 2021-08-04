@@ -657,7 +657,8 @@
   <enums>Enum.TypeExternalObject</enums>
   <enums>Enum.InterfaceGroupBehaviors</enums>
   <enums>Enum.InterfaceGroupChildFormItemsGroups</enums>
-  <enums>Enum.InvoicingShippingStatuses</enums>
+  <enums>Enum.InvoicingStatuses</enums>
+  <enums>Enum.ShippingStatuses</enums>
   <reports>Report.DocumentRegistrationsReport</reports>
   <reports>Report.PriceInfo</reports>
   <reports>Report.AllRegistersMovement</reports>

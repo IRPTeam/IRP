@@ -737,7 +737,6 @@
   <accumulationRegisters>AccumulationRegister.R4010B_ActualStocks</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R4011B_FreeStocks</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R4012B_StockReservation</accumulationRegisters>
-  <accumulationRegisters>AccumulationRegister.R4013B_StockReservationPlanning</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R4014B_SerialLotNumber</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R4015T_InternalSupplyRequests</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R4016B_InternalSupplyRequestOrdering</accumulationRegisters>

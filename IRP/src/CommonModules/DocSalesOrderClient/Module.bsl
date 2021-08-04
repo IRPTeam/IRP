@@ -169,8 +169,15 @@ Procedure ItemListItemStartChoice(Object, Form, Item, ChoiceData, StandardProces
 	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
 	
 	OpenSettings.ArrayOfFilters = New Array();
-	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", 
-																	True, DataCompositionComparisonType.NotEqual));
+	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, DataCompositionComparisonType.NotEqual));
+	
+	CurrentData = Form.Items.ItemList.CurrentData;
+	If CurrentData <> Undefined Then
+		FilterItemByPartnerItem = DocumentsServer.GetItemAndItemKeyByPartnerItem(CurrentData.PartnerItem);
+		If ValueIsFilled(FilterItemByPartnerItem.Item) Then	
+			OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Ref", FilterItemByPartnerItem.Item, DataCompositionComparisonType.Equal));
+		EndIf;
+	EndIf;
 	
 	DocumentsClient.ItemStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
 EndProcedure
@@ -178,6 +185,15 @@ EndProcedure
 Procedure ItemListItemEditTextChange(Object, Form, Item, Text, StandardProcessing) Export
 	ArrayOfFilters = New Array();
 	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
+	
+	CurrentData = Form.Items.ItemList.CurrentData;
+	If CurrentData <> Undefined Then
+		FilterItemByPartnerItem = DocumentsServer.GetItemAndItemKeyByPartnerItem(CurrentData.PartnerItem);
+		If ValueIsFilled(FilterItemByPartnerItem.Item) Then
+			ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Ref", FilterItemByPartnerItem.Item, ComparisonType.Equal));
+		EndIf;
+	EndIf;
+	
 	DocumentsClient.ItemEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters);
 EndProcedure
 

@@ -594,6 +594,13 @@
         <value>82</value>
       </code>
     </items>
+    <items id="c8b31d5b-c7f6-4b7b-99f8-647c86352975">
+      <name>Catalog_PartnerItems</name>
+      <description>Catalog partner items</description>
+      <code xsi:type="core:NumberValue">
+        <value>83</value>
+      </code>
+    </items>
   </predefined>
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>

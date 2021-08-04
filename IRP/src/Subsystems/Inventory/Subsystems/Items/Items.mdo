@@ -21,5 +21,6 @@
   <content>CommonPicture.QRPicture</content>
   <content>Catalog.PrintTemplates</content>
   <content>Document.ItemStockAdjustment</content>
+  <content>Catalog.PartnerItems</content>
   <parentSubsystem>Subsystem.Inventory</parentSubsystem>
 </mdclass:Subsystem>

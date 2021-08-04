@@ -273,6 +273,18 @@ EndProcedure
 
 #EndRegion
 
+#Region MovementType
+
+Procedure MovementTypeStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
+	DocumentsClient.MovementTypeStartChoice(Object, Form, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+Procedure MovementTypeEditTextChange(Object, Form, Item, Text, StandardProcessing) Export
+	DocumentsClient.MovementTypeEditTextChange(Object, Form, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
 #Region CheckFillData
 
 Procedure CheckFillData(Object, Form)

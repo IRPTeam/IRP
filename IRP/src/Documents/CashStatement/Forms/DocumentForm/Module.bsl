@@ -153,4 +153,14 @@ Procedure PaymentListOnChange(Item, AddInfo = Undefined) Export
 	Return;
 EndProcedure
 
+&AtClient
+Procedure PaymentListMovementTypeStartChoice(Item, ChoiceData, StandardProcessing)
+	DocCashStatementClient.PaymentListMovementTypeStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure PaymentListMovementTypeEditTextChange(Item, Text, StandardProcessing)
+	DocCashStatementClient.PaymentListMovementTypeEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
 #EndRegion

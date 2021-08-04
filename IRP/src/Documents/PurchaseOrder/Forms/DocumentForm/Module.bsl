@@ -397,6 +397,20 @@ EndProcedure
 
 #EndRegion
 
+#Region MovementType
+
+&AtClient
+Procedure MovementTypeStartChoice(Item, ChoiceData, StandardProcessing)
+	DocPurchaseOrderClient.MovementTypeStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure MovementTypeEditTextChange(Item, Text, StandardProcessing)
+	DocPurchaseOrderClient.MovementTypeEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
 #Region DescriptionEvents
 
 &AtClient

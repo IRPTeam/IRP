@@ -231,6 +231,16 @@ Procedure ItemListStoreOnChange(Item)
 	DocPurchaseReturnClient.ItemListStoreOnChange(Object, ThisObject, Item);
 EndProcedure
 
+&AtClient
+Procedure ItemListExpenseTypeStartChoice(Item, ChoiceData, StandardProcessing)
+	DocPurchaseReturnClient.ItemListExpenseTypeStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure ItemListExpenseTypeEditTextChange(Item, Text, StandardProcessing)
+	DocPurchaseReturnClient.ItemListExpenseTypeEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
 #EndRegion
 
 #Region ItemPartner

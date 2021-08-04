@@ -658,6 +658,14 @@
             <headerHorizontalAlign>Left</headerHorizontalAlign>
             <showInFooter>true</showInFooter>
             <extInfo xsi:type="form:InputFieldExtInfo">
+              <handlers>
+                <event>StartChoice</event>
+                <name>SendMovementTypeStartChoice</name>
+              </handlers>
+              <handlers>
+                <event>EditTextChange</event>
+                <name>SendMovementTypeEditTextChange</name>
+              </handlers>
               <autoMaxWidth>true</autoMaxWidth>
               <autoMaxHeight>true</autoMaxHeight>
               <wrap>true</wrap>
@@ -1035,6 +1043,14 @@
             <headerHorizontalAlign>Left</headerHorizontalAlign>
             <showInFooter>true</showInFooter>
             <extInfo xsi:type="form:InputFieldExtInfo">
+              <handlers>
+                <event>StartChoice</event>
+                <name>ReceiveMovementTypeStartChoice</name>
+              </handlers>
+              <handlers>
+                <event>EditTextChange</event>
+                <name>ReceiveMovementTypeEditTextChange</name>
+              </handlers>
               <autoMaxWidth>true</autoMaxWidth>
               <autoMaxHeight>true</autoMaxHeight>
               <wrap>true</wrap>

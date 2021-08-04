@@ -154,12 +154,16 @@ Procedure ItemListExpenseTypeStartChoice(Object, Form, Item, ChoiceData, Standar
 	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", 
 																	True, 
 																	DataCompositionComparisonType.NotEqual));
-	FilterTypesValue = New Array;
-	FilterTypesValue.Add(PredefinedValue("Enum.ExpenseAndRevenueTypes.Expense"));
-	FilterTypesValue.Add(PredefinedValue("Enum.ExpenseAndRevenueTypes.Both"));
-	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Type", 
-																	FilterTypesValue, 
-																	DataCompositionComparisonType.InList));
+																	
+	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("IsExpense", 
+																	True, 
+																	DataCompositionComparisonType.Equal));
+//	FilterTypesValue = New Array;
+//	FilterTypesValue.Add(PredefinedValue("Enum.ExpenseAndRevenueTypes.Expense"));
+//	FilterTypesValue.Add(PredefinedValue("Enum.ExpenseAndRevenueTypes.Both"));
+//	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Type", 
+//																	FilterTypesValue, 
+//																	DataCompositionComparisonType.InList));
 
 	OpenSettings.FormParameters = New Structure();
 	OpenSettings.FillingData = New Structure();
@@ -170,12 +174,15 @@ EndProcedure
 Procedure ItemListExpenseTypeEditTextChange(Object, Form, Item, Text, StandardProcessing) Export
 	ArrayOfFilters = New Array();
 	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
-	FilterTypesValue = New ValueList;
-	FilterTypesValue.Add(PredefinedValue("Enum.ExpenseAndRevenueTypes.Expense"));
-	FilterTypesValue.Add(PredefinedValue("Enum.ExpenseAndRevenueTypes.Both"));
-	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Type", 
-																	FilterTypesValue,
-																	ComparisonType.InList));							
+	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("IsExpense"   , True, ComparisonType.Equal));
+	
+//	FilterTypesValue = New ValueList;
+//	FilterTypesValue.Add(PredefinedValue("Enum.ExpenseAndRevenueTypes.Expense"));
+//	FilterTypesValue.Add(PredefinedValue("Enum.ExpenseAndRevenueTypes.Both"));
+//	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Type", 
+//																	FilterTypesValue,
+//																	ComparisonType.InList));							
+	
 	AdditionalParameters = New Structure();
 	DocumentsClient.ExpenseAndRevenueTypeEditTextChange(Object, Form, Item, Text, StandardProcessing,
 				ArrayOfFilters, AdditionalParameters);

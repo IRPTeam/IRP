@@ -590,12 +590,6 @@ Scenario: Open object form "R4012B_StockReservation"
 		Then I raise "Failed to open information register form R4012B_StockReservation" exception
 	And I close current window
 
-Scenario: Open object form "R4013B_StockReservationPlanning"
-
-	Given I open "R4013B_StockReservationPlanning" accumulation register default form
-	If the warning is displayed then
-		Then I raise "Failed to open information register form R4013B_StockReservationPlanning" exception
-	And I close current window
 
 Scenario: Open object form "R4015T_InternalSupplyRequests"
 

@@ -189,22 +189,7 @@ Scenario: _041160 check Purchase order closing movements by the Register  "R2014
 			| ''                                           | '$$DatePurchaseOrderClosing37$$' | '64'        | '7 680'    | '6 508,47'   | 'Main Company' | 'Front office' | 'en description is empty'      | 'TRY'      | 'Purchase order 37 dated 09.03.2021 14:29:00' | 'XS/Blue'  | '0e65d648-bd28-47a2-84dc-e260219c1395' | 'not available' | 'No'                   |
 		And I close all client application windows
 		
-// Scenario: _041161 check Purchase order closing movements by the Register  "R4013 Stock Reservation planning"
-// 	* Select Purchase order closing
-// 		Given I open hyperlink "e1cib/list/Document.PurchaseOrderClosing"
-// 		And I go to line in "List" table
-// 			| 'Number'  |
-// 			| '$$NumberPurchaseOrderClosing37$$' |
-// 	* Check movements by the Register  "R4013 Stock Reservation planning" 
-// 		And I click "Registrations report" button
-// 		And I select "R4013 Stock Reservation planning" exact value from "Register" drop-down list
-// 		And I click "Generate report" button
-// 		Then "ResultTable" spreadsheet document is equal
-// 			| 'Purchase order closing 1 dated *'					 	  | ''            | ''                    | ''          | ''           | ''          |
-// 			| 'Document registrations records'                    | ''            | ''                    | ''          | ''           | ''          |
-// 			| 'Register  "R4013 Stock Reservation planning"'                     | ''            | ''                    | ''          | ''           | ''          |
-			
-// 		And I close all client application windows
+
 		
 Scenario: _041162 check Purchase order closing movements by the Register  "R1011 Receipt of purchase orders"
 	* Select Purchase order closing

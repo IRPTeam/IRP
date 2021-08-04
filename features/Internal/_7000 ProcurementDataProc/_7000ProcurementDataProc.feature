@@ -2,6 +2,7 @@
 @tree
 @Positive
 @ProcurementDataProc
+@IgnoreOnCIMainBuild
 
 
 Feature: check procurement data processor

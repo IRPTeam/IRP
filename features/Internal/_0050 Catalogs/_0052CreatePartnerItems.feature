@@ -65,7 +65,7 @@ Scenario: _005210 filling in the "Partner Items" catalog
 		Then the form attribute named "Item" became equal to "Dress"
 		Then the form attribute named "ItemKey" became equal to "XS/Blue"
 		Then the form attribute named "Code" became equal to "1"
-		Then the form attribute named "Description_en" became equal to "Dress Ferron"
+		Then the form attribute named "Description_en" became equal to "Dress XS/Blue Ferron"
 		And I close all client application windows
 		
 		

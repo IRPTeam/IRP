@@ -7774,6 +7774,7 @@ Scenario: _0154168 check tax rate recalculation when change partner term (Purcha
 		And I close all client application windows		
 
 
+
 Scenario: _0154170 select Partner items in the PO
 	* Create PO
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"	
@@ -7806,16 +7807,17 @@ Scenario: _0154170 select Partner items in the PO
 			| 'Dress M/White Ferron' |
 		And I select current line in "List" table
 		And "ItemList" table contains lines
-			| 'Partner item'         | 'Cancel' | 'Item key' | 'Price type'        | 'Item'  | 'Dont calculate row' | 'Q'     | 'Unit' | 'VAT' | 'Store'    |
-			| 'Dress M/White Ferron' | 'No'     | 'M/White'  | 'Vendor price, TRY' | 'Dress' | 'No'                 | '1,000' | 'pcs'  | '18%' | 'Store 02' |
+			| 'Partner item'         | 'Cancel' | 'Item key' | 'Price type'        | 'Item'  | 'Dont calculate row' | 'Q'     | 'Unit' | 'VAT' |
+			| 'Dress M/White Ferron' | 'No'     | 'M/White'  | 'Vendor price, TRY' | 'Dress' | 'No'                 | '1,000' | 'pcs'  | '18%' |
 		And I click the button named "Add"
 		And I select "xs" from "Partner item" drop-down list by string in "ItemList" table
 		And "ItemList" table contains lines
-			| 'Partner item'         | 'Cancel' | 'Item key' | 'Price type'        | 'Item'  | 'Dont calculate row' | 'Q'     | 'Unit' | 'VAT' | 'Store'    |
-			| 'Dress M/White Ferron' | 'No'     | 'M/White'  | 'Vendor price, TRY' | 'Dress' | 'No'                 | '1,000' | 'pcs'  | '18%' | 'Store 02' |
-			| 'Dress XS/Blue Ferron' | 'No'     | 'XS/Blue'  | 'Vendor price, TRY' | 'Dress' | 'No'                 | '1,000' | 'pcs'  | '18%' | 'Store 02' |
+			| 'Partner item'         | 'Cancel' | 'Item key' | 'Price type'        | 'Item'  | 'Dont calculate row' | 'Q'     | 'Unit' | 'VAT' |
+			| 'Dress M/White Ferron' | 'No'     | 'M/White'  | 'Vendor price, TRY' | 'Dress' | 'No'                 | '1,000' | 'pcs'  | '18%' |
+			| 'Dress XS/Blue Ferron' | 'No'     | 'XS/Blue'  | 'Vendor price, TRY' | 'Dress' | 'No'                 | '1,000' | 'pcs'  | '18%' |
 	And I close all client application windows
 	
+
 		
 
 Scenario: _0154171 select Partner items in the SO

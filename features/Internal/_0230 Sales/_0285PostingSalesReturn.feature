@@ -96,11 +96,11 @@ Scenario: _028501 create document Sales return based on SI (without SRO)
 		// Then the form attribute named "Branch" became equal to "Distribution department"
 	* Check items tab
 		And "ItemList" table contains lines
-		| '#' | 'Profit loss center'           	| 'Item'  | 'Item key' | 'Dont calculate row' | 'Serial lot numbers' | 'Q'     | 'Unit'           | 'Tax amount' | 'Price'    | 'VAT' | 'Offers amount' | 'Net amount' | 'Use goods receipt' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Sales return order' | 'Sales invoice'                               | 'Revenue type' |
-		| '1' | 'Distribution department' 		| 'Shirt' | '38/Black' | 'No'                 | ''                   | '2,000' | 'pcs'            | '113,71'     | '350,00'   | '18%' | ''              | '586,29'     | 'No'                | '700,00'       | ''                    | 'Store 01' | ''                   | 'Sales invoice 101 dated 05.03.2021 12:56:38' | 'Revenue'      |
-		| '2' | 'Distribution department' 		| 'Boots' | '36/18SD'  | 'No'                 | ''                   | '2,000' | 'Boots (12 pcs)' | '2 729,05'   | '8 400,00' | '18%' | ''              | '14 070,95'  | 'No'                | '16 800,00'    | ''                    | 'Store 01' | ''                   | 'Sales invoice 101 dated 05.03.2021 12:56:38' | 'Revenue'      |
-		| '3' | 'Distribution department' 		| 'Boots' | '37/18SD'  | 'No'                 | ''                   | '2,000' | 'pcs'            | '227,42'     | '700,00'   | '18%' | ''              | '1 172,58'   | 'No'                | '1 400,00'     | ''                    | 'Store 01' | ''                   | 'Sales invoice 101 dated 05.03.2021 12:56:38' | 'Revenue'      |
-		| '4' | 'Distribution department' 		| 'Dress' | 'M/White'  | 'No'                 | ''                   | '4,000' | 'pcs'            | '337,88'     | '520,00'   | '18%' | ''              | '1 742,12'   | 'No'                | '2 080,00'     | ''                    | 'Store 01' | ''                   | 'Sales invoice 101 dated 05.03.2021 12:56:38' | 'Revenue'      |
+		| '#' | 'Item'  | 'Item key' | 'Dont calculate row' | 'Serial lot numbers' | 'Q'     | 'Unit'           | 'Tax amount' | 'Price'    | 'VAT' | 'Offers amount' | 'Net amount' | 'Use goods receipt' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Sales return order' | 'Sales invoice'                               | 'Revenue type' |
+		| '1' | 'Shirt' | '38/Black' | 'No'                 | ''                   | '2,000' | 'pcs'            | '113,71'     | '350,00'   | '18%' | ''              | '586,29'     | 'No'                | '700,00'       | ''                    | 'Store 01' | ''                   | 'Sales invoice 101 dated 05.03.2021 12:56:38' | 'Revenue'      |
+		| '2' | 'Boots' | '36/18SD'  | 'No'                 | ''                   | '2,000' | 'Boots (12 pcs)' | '2 729,05'   | '8 400,00' | '18%' | ''              | '14 070,95'  | 'No'                | '16 800,00'    | ''                    | 'Store 01' | ''                   | 'Sales invoice 101 dated 05.03.2021 12:56:38' | 'Revenue'      |
+		| '3' | 'Boots' | '37/18SD'  | 'No'                 | ''                   | '2,000' | 'pcs'            | '227,42'     | '700,00'   | '18%' | ''              | '1 172,58'   | 'No'                | '1 400,00'     | ''                    | 'Store 01' | ''                   | 'Sales invoice 101 dated 05.03.2021 12:56:38' | 'Revenue'      |
+		| '4' | 'Dress' | 'M/White'  | 'No'                 | ''                   | '4,000' | 'pcs'            | '337,88'     | '520,00'   | '18%' | ''              | '1 742,12'   | 'No'                | '2 080,00'     | ''                    | 'Store 01' | ''                   | 'Sales invoice 101 dated 05.03.2021 12:56:38' | 'Revenue'      |
 	And I click the button named "FormPost"
 	And I delete "$$NumberSalesReturn028501$$" variable
 	And I delete "$$SalesReturn028501$$" variable
@@ -599,10 +599,10 @@ Scenario: _028515 create document Sales return based on SRO
 			And I click the button named "AddBasisDocuments"
 			And "BasisesTree" table contains lines
 				| 'Row presentation'                                 | 'Use'                                              | 'Quantity' | 'Unit'           | 'Price'    | 'Currency' |
-				| 'Sales return order 105 dated 25.03.2021 12:09:40' | 'Sales return order 105 dated 25.03.2021 12:09:40' | ''         | ''               | ''         | ''         |
+				| 'Sales return order 105 dated 25.03.2021 12:09:40' | 'No'                                               | ''         | ''               | ''         | ''         |
 				| 'Dress, XS/Blue'                                   | 'No'                                               | '1,000'    | 'pcs'            | '520,00'   | 'TRY'      |
 				| 'Boots, 37/18SD'                                   | 'No'                                               | '3,000'    | 'Boots (12 pcs)' | '8 400,00' | 'TRY'      |
-				| 'Sales return order 106 dated 25.03.2021 12:10:03' | 'Sales return order 106 dated 25.03.2021 12:10:03' | ''         | ''               | ''         | ''         |
+				| 'Sales return order 106 dated 25.03.2021 12:10:03' | 'No'                                               | ''         | ''               | ''         | ''         |
 				| 'Dress, XS/Blue'                                   | 'No'                                               | '12,000'   | 'pcs'            | '520,00'   | 'TRY'      |
 				| 'Boots, 37/18SD'                                   | 'No'                                               | '11,000'   | 'Boots (12 pcs)' | '8 400,00' | 'TRY'      |
 			// Then the number of "BasisesTree" table lines is "равно" "6"
@@ -632,9 +632,9 @@ Scenario: _028515 create document Sales return based on SRO
 			And I save the current field value as "$$Rov2SalesReturn028515$$"			
 		* Check Item tab and RowID tab
 			And "ItemList" table contains lines
-				| 'Key'                       | 'Store'    | 'Additional analytic' | 'Quantity in base unit' | '#' | 'Profit loss center'           | 'Item'  | 'Item key' | 'Dont calculate row' | 'Serial lot numbers' | 'Q'      | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Use goods receipt' | 'Total amount' | 'Sales return order'                               | 'Sales invoice' | 'Expense type' |
-				| '$$Rov1SalesReturn028515$$' | 'Store 02' | ''                    | '1,000'                 | '1' | 'Distribution department' | 'Dress' | 'XS/Blue'  | 'No'                 | ''                   | '1,000'  | 'pcs'  | '79,32'      | '520,00' | '18%' | ''              | '440,68'     | 'No'                | '520,00'       | 'Sales return order 105 dated 25.03.2021 12:09:40' | ''              | 'Expense'      |
-				| '$$Rov2SalesReturn028515$$' | 'Store 02' | ''                    | '12,000'                | '2' | 'Distribution department' | 'Dress' | 'XS/Blue'  | 'No'                 | ''                   | '12,000' | 'pcs'  | '951,86'     | '520,00' | '18%' | ''              | '5 288,14'   | 'No'                | '6 240,00'     | 'Sales return order 106 dated 25.03.2021 12:10:03' | ''              | ''             |
+				| 'Key'                       | 'Store'    | 'Additional analytic' | 'Quantity in base unit' | '#' | 'Item'  | 'Item key' | 'Dont calculate row' | 'Serial lot numbers' | 'Q'      | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Use goods receipt' | 'Total amount' | 'Sales return order'                               | 'Sales invoice' | 'Revenue type' |
+				| '$$Rov1SalesReturn028515$$' | 'Store 02' | ''                    | '1,000'                 | '1' | 'Dress' | 'XS/Blue'  | 'No'                 | ''                   | '1,000'  | 'pcs'  | '79,32'      | '520,00' | '18%' | ''              | '440,68'     | 'No'                | '520,00'       | 'Sales return order 105 dated 25.03.2021 12:09:40' | ''              | 'Expense'      |
+				| '$$Rov2SalesReturn028515$$' | 'Store 02' | ''                    | '12,000'                | '2' | 'Dress' | 'XS/Blue'  | 'No'                 | ''                   | '12,000' | 'pcs'  | '951,86'     | '520,00' | '18%' | ''              | '5 288,14'   | 'No'                | '6 240,00'     | 'Sales return order 106 dated 25.03.2021 12:10:03' | ''              | ''             |
 			And "RowIDInfo" table contains lines
 				| '#' | 'Key'                       | 'Basis'                                            | 'Row ID'                         | 'Next step' | 'Q'      | 'Basis key'                      | 'Current step' | 'Row ref'                        |
 				| '1' | '$$Rov1SalesReturn028515$$' | 'Sales return order 105 dated 25.03.2021 12:09:40' | '$$Rov1SalesReturnOrder028515$$' | ''          | '1,000'  | '$$Rov1SalesReturnOrder028515$$' | 'SR'           | '$$Rov1SalesReturnOrder028515$$' |
@@ -670,9 +670,9 @@ Scenario: _028515 create document Sales return based on SRO
 		Then the form attribute named "Agreement" became equal to "Basic Partner terms, TRY"		
 		And I click "Show row key" button	
 		And "ItemList" table contains lines
-			| 'Store'    | 'Additional analytic' | 'Quantity in base unit' | '#' | 'Profit loss center'           | 'Item'  | 'Item key' | 'Dont calculate row' | 'Serial lot numbers' | 'Q'     | 'Unit'           | 'Tax amount' | 'Price'    | 'VAT' | 'Offers amount' | 'Net amount' | 'Use goods receipt' | 'Total amount' | 'Sales return order'                               | 'Sales invoice' | 'Revenue type' |
-			| 'Store 02' | ''                    | '1,000'                 | '1' | 'Distribution department' | 'Dress' | 'XS/Blue'  | 'No'                 | ''                   | '1,000' | 'pcs'            | '79,32'      | '520,00'   | '18%' | ''              | '440,68'     | 'No'                | '520,00'       | 'Sales return order 105 dated 25.03.2021 12:09:40' | ''              | 'Expense'      |
-			| 'Store 02' | ''                    | '36,000'                | '2' | 'Distribution department' | 'Boots' | '37/18SD'  | 'No'                 | ''                   | '3,000' | 'Boots (12 pcs)' | '3 844,07'   | '8 400,00' | '18%' | ''              | '21 355,93'  | 'No'                | '25 200,00'    | 'Sales return order 105 dated 25.03.2021 12:09:40' | ''              | 'Expense'      |
+			| 'Store'    | 'Additional analytic' | 'Quantity in base unit' | '#' | 'Item'  | 'Item key' | 'Dont calculate row' | 'Serial lot numbers' | 'Q'     | 'Unit'           | 'Tax amount' | 'Price'    | 'VAT' | 'Offers amount' | 'Net amount' | 'Use goods receipt' | 'Total amount' | 'Sales return order'                               | 'Sales invoice' | 'Revenue type' |
+			| 'Store 02' | ''                    | '1,000'                 | '1' | 'Dress' | 'XS/Blue'  | 'No'                 | ''                   | '1,000' | 'pcs'            | '79,32'      | '520,00'   | '18%' | ''              | '440,68'     | 'No'                | '520,00'       | 'Sales return order 105 dated 25.03.2021 12:09:40' | ''              | 'Expense'      |
+			| 'Store 02' | ''                    | '36,000'                | '2' | 'Boots' | '37/18SD'  | 'No'                 | ''                   | '3,000' | 'Boots (12 pcs)' | '3 844,07'   | '8 400,00' | '18%' | ''              | '21 355,93'  | 'No'                | '25 200,00'    | 'Sales return order 105 dated 25.03.2021 12:09:40' | ''              | 'Expense'      |
 		And I go to line in "ItemList" table
 			| '#' |
 			| '1' |
@@ -697,6 +697,7 @@ Scenario: _028515 create document Sales return based on SRO
 		And I save the value of "Number" field as "$$NumberSalesReturn028515$$"
 		And I save the window as "$$SalesReturn028515$$"
 		And I click the button named "FormPostAndClose"
+		And I close all client application windows
 	* Check creation
 		Given I open hyperlink "e1cib/list/Document.SalesReturn"
 		And "List" table contains lines

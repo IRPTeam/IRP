@@ -114,7 +114,7 @@ $TagArray = @(%env.TagsFullList%)
 #Jobs count (how much VA can be running at the same time)
 $StreamCountMax = "%env.StreamCount%"
 #Start test client port
-$startPort = 48010
+$startPort = %env.PortStartNumber%
 $workingDir = "%system.teamcity.build.workingDir%"
 $FeaturePath = "%env.VA.FeaturePath%" #inside 2 folders - External and Internal. In External has to be export steps, in internal - scenarios.
 $OScriptLib = "%env.OScript%"

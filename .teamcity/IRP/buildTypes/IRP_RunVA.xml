@@ -99,6 +99,24 @@ rem coverage-cli start --infobase %env.Database1CName%  --debugger http://localh
           <param name="use.custom.script" value="true" />
         </parameters>
       </runner>
+      <runner id="RUNNER_61" name="" type="jetbrains_powershell">
+        <parameters>
+          <param name="jetbrains_powershell_execution" value="PS1" />
+          <param name="jetbrains_powershell_noprofile" value="true" />
+          <param name="jetbrains_powershell_script_code"><![CDATA[if("%teamcity.agent.name%" -eq "Agent One"){
+	Write-Host "##teamcity[setParameter name='env.PortStartNumber' value='49000']"
+} elseif ("%teamcity.agent.name%" -eq "BuildAgentTwo"){
+	Write-Host "##teamcity[setParameter name='env.PortStartNumber' value='50000']"
+}
+ elseif ("%teamcity.agent.name%" -eq "BuildAgentThree"){
+	Write-Host "##teamcity[setParameter name='env.PortStartNumber' value='51000']"
+} else {
+	Write-Host "##teamcity[buildStop comment='rename agent' readdToQueue='true']"
+}]]></param>
+          <param name="jetbrains_powershell_script_mode" value="CODE" />
+          <param name="teamcity.step.mode" value="default" />
+        </parameters>
+      </runner>
       <runner id="RUNNER_19" name="Run VA in SaaS" type="jetbrains_powershell">
         <parameters>
           <param name="jetbrains_powershell_execution" value="PS1" />
@@ -617,24 +635,6 @@ Compress-Archive -Path "allure-report/*" -DestinationPath "allure-report.zip"]]>
           <param name="jetbrains_powershell_script_code" value="Compress-Archive -Path Cover.xml -DestinationPath Cover.zip" />
           <param name="jetbrains_powershell_script_mode" value="CODE" />
           <param name="teamcity.step.mode" value="execute_always" />
-        </parameters>
-      </runner>
-      <runner id="RUNNER_61" name="" type="jetbrains_powershell">
-        <parameters>
-          <param name="jetbrains_powershell_execution" value="PS1" />
-          <param name="jetbrains_powershell_noprofile" value="true" />
-          <param name="jetbrains_powershell_script_code"><![CDATA[if("%teamcity.agent.name%" -eq "Agent One"){
-	Write-Host "##teamcity[setParameter name='env.PortStartNumber' value='49000']"
-} elseif ("%teamcity.agent.name%" -eq "BuildAgentTwo"){
-	Write-Host "##teamcity[setParameter name='env.PortStartNumber' value='50000']"
-}
- elseif ("%teamcity.agent.name%" -eq "BuildAgentThree"){
-	Write-Host "##teamcity[setParameter name='env.PortStartNumber' value='51000']"
-} else {
-	Write-Host "##teamcity[buildStop comment='rename agent' readdToQueue='true']"
-}]]></param>
-          <param name="jetbrains_powershell_script_mode" value="CODE" />
-          <param name="teamcity.step.mode" value="default" />
         </parameters>
       </runner>
     </build-runners>

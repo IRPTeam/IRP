@@ -325,20 +325,6 @@ EndProcedure
 
 #EndRegion
 
-#Region MovementType
-
-&AtClient
-Procedure MovementTypeStartChoice(Item, ChoiceData, StandardProcessing)
-	DocPurchaseInvoiceClient.MovementTypeStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
-EndProcedure
-
-&AtClient
-Procedure MovementTypeEditTextChange(Item, Text, StandardProcessing)
-	DocPurchaseInvoiceClient.MovementTypeEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
-EndProcedure
-
-#EndRegion
-
 #Region DescriptionEvents
 
 &AtClient

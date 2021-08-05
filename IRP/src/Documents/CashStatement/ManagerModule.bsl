@@ -150,7 +150,7 @@ Function PaymentList()
 	|	PaymentList.Ref.CashAccount AS CashAccount,
 	|	PaymentList.Account,
 	|	PaymentList.Currency,
-	|	PaymentList.MovementType,
+	|	PaymentList.FinancialMovementType,
 	|	PaymentList.Amount,
 	|	PaymentList.Account.Type = VALUE(Enum.CashAccountTypes.POS) AS IsAccountPOS,
 	|	PaymentList.Ref.Branch AS Branch
@@ -183,7 +183,7 @@ Function R3035T_CashPlanning()
 		|	PaymentList.CashAccount AS Account,
 		|	PaymentList.Currency,
 		|	VALUE(Enum.CashFlowDirections.Incoming) AS CashFlowDirection,
-		|	PaymentList.MovementType,
+		|	PaymentList.FinancialMovementType,
 		|	PaymentList.Amount
 		|INTO R3035T_CashPlanning
 		|FROM

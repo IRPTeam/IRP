@@ -3396,9 +3396,9 @@ EndProcedure
 
 #EndRegion
 
-#Region MovementType
+#Region FinancialMovementType
 
-Procedure MovementTypeStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
+Procedure FinancialMovementTypeStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
 	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
 	
 	OpenSettings.ArrayOfFilters = New Array();
@@ -3416,7 +3416,7 @@ Procedure MovementTypeStartChoice(Object, Form, Item, ChoiceData, StandardProces
 	DocumentsClient.ExpenseAndRevenueTypeStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
 EndProcedure
 
-Procedure MovementTypeEditTextChange(Object, Form, Item, Text, StandardProcessing) Export
+Procedure FinancialMovementTypeEditTextChange(Object, Form, Item, Text, StandardProcessing) Export
 	ArrayOfFilters = New Array();
 	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
 	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("IsFinancialMovementType"   , True, ComparisonType.Equal));

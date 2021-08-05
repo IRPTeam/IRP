@@ -273,14 +273,14 @@ EndProcedure
 
 #EndRegion
 
-#Region MovementType
+#Region FinancialMovementType
 
-Procedure MovementTypeStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
-	DocumentsClient.MovementTypeStartChoice(Object, Form, Item, ChoiceData, StandardProcessing);
+Procedure FinancialMovementTypeStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
+	DocumentsClient.FinancialMovementTypeStartChoice(Object, Form, Item, ChoiceData, StandardProcessing);
 EndProcedure
 
-Procedure MovementTypeEditTextChange(Object, Form, Item, Text, StandardProcessing) Export
-	DocumentsClient.MovementTypeEditTextChange(Object, Form, Item, Text, StandardProcessing);
+Procedure FinancialMovementTypeEditTextChange(Object, Form, Item, Text, StandardProcessing) Export
+	DocumentsClient.FinancialMovementTypeEditTextChange(Object, Form, Item, Text, StandardProcessing);
 EndProcedure
 
 #EndRegion

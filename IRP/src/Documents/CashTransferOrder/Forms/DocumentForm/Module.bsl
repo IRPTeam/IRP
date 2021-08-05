@@ -95,23 +95,23 @@ Procedure ReceiverOnChange(Item, AddInfo = Undefined) Export
 EndProcedure
 
 &AtClient
-Procedure SendMovementTypeStartChoice(Item, ChoiceData, StandardProcessing)
-	DocCashTransferOrderClient.MovementTypeStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+Procedure SendFinancialMovementTypeStartChoice(Item, ChoiceData, StandardProcessing)
+	DocCashTransferOrderClient.FinancialMovementTypeStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
 EndProcedure
 
 &AtClient
-Procedure SendMovementTypeEditTextChange(Item, Text, StandardProcessing)
-	DocCashTransferOrderClient.MovementTypeEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+Procedure SendFinancialMovementTypeEditTextChange(Item, Text, StandardProcessing)
+	DocCashTransferOrderClient.FinancialMovementTypeEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
 EndProcedure
 
 &AtClient
-Procedure ReceiveMovementTypeStartChoice(Item, ChoiceData, StandardProcessing)
-	DocCashTransferOrderClient.MovementTypeStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+Procedure ReceiveFinancialMovementTypeStartChoice(Item, ChoiceData, StandardProcessing)
+	DocCashTransferOrderClient.FinancialMovementTypeStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
 EndProcedure
 
 &AtClient
-Procedure ReceiveMovementTypeEditTextChange(Item, Text, StandardProcessing)
-	DocCashTransferOrderClient.MovementTypeEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+Procedure ReceiveFinancialMovementTypeEditTextChange(Item, Text, StandardProcessing)
+	DocCashTransferOrderClient.FinancialMovementTypeEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
 EndProcedure
 
 #Region GroupTitleDecorations

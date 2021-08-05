@@ -123,13 +123,13 @@ Procedure PaymentListExpenseTypeEditTextChange(Item, Text, StandardProcessing)
 EndProcedure
 
 &AtClient
-Procedure PaymentListMovementTypeStartChoice(Item, ChoiceData, StandardProcessing)
-	DocCashExpenseRevenueClient.PaymentListMovementTypeStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+Procedure PaymentListFinancialMovementTypeStartChoice(Item, ChoiceData, StandardProcessing)
+	DocCashExpenseRevenueClient.PaymentListFinancialMovementTypeStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
 EndProcedure
 
 &AtClient
-Procedure PaymentListMovementTypeEditTextChange(Item, Text, StandardProcessing)
-	DocCashExpenseRevenueClient.PaymentListMovementTypeEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+Procedure PaymentListFinancialMovementTypeEditTextChange(Item, Text, StandardProcessing)
+	DocCashExpenseRevenueClient.PaymentListFinancialMovementTypeEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
 EndProcedure
 
 &AtClient

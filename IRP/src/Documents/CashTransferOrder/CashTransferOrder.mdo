@@ -263,10 +263,10 @@
     <dataHistory>Use</dataHistory>
   </attributes>
   <attributes uuid="9b525d4f-0585-41d6-bab4-5d1de1ae52a7">
-    <name>SendMovementType</name>
+    <name>SendFinancialMovementType</name>
     <synonym>
       <key>en</key>
-      <value>Send movement type</value>
+      <value>Send financial movement type</value>
     </synonym>
     <type>
       <types>CatalogRef.ExpenseAndRevenueTypes</types>
@@ -279,10 +279,10 @@
     <dataHistory>Use</dataHistory>
   </attributes>
   <attributes uuid="3bd85a0a-f604-439b-9eda-5e59e85a7f5d">
-    <name>ReceiveMovementType</name>
+    <name>ReceiveFinancialMovementType</name>
     <synonym>
       <key>en</key>
-      <value>Receive movement type</value>
+      <value>Receive financial movement type</value>
     </synonym>
     <type>
       <types>CatalogRef.ExpenseAndRevenueTypes</types>

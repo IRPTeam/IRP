@@ -551,14 +551,14 @@ Procedure PaymentListPayerEditTextChange(Object, Form, Item, Text, StandardProce
 EndProcedure
 #EndRegion
 
-#Region MovementType
+#Region FinancialMovementType
 
 Procedure PaymentListMovementTypeStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
-	DocumentsClient.MovementTypeStartChoice(Object, Form, Item, ChoiceData, StandardProcessing);
+	DocumentsClient.FinancialMovementTypeStartChoice(Object, Form, Item, ChoiceData, StandardProcessing);
 EndProcedure
 
 Procedure PaymentListMovementTypeEditTextChange(Object, Form, Item, Text, StandardProcessing) Export
-	DocumentsClient.MovementTypeEditTextChange(Object, Form, Item, Text, StandardProcessing);
+	DocumentsClient.FinancialMovementTypeEditTextChange(Object, Form, Item, Text, StandardProcessing);
 EndProcedure
 
 #EndRegion

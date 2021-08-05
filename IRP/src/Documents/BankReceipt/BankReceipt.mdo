@@ -435,10 +435,10 @@
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
     <attributes uuid="834ed1e0-c183-4c5c-b223-6c73a36e3b77">
-      <name>MovementType</name>
+      <name>FinancialMovementType</name>
       <synonym>
         <key>en</key>
-        <value>Movement type</value>
+        <value>Financial movement type</value>
       </synonym>
       <type>
         <types>CatalogRef.ExpenseAndRevenueTypes</types>

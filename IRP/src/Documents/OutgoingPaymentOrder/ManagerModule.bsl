@@ -128,7 +128,7 @@ Function PaymentList()
 		|	PaymentList.Partner AS Partner,
 		|	PaymentList.Basis.Agreement AS Agreement,
 		|	PaymentList.Ref.Account AS Account,
-		|	PaymentList.MovementType,
+		|	PaymentList.FinancialMovementType,
 		|	PaymentList.Amount,
 		|	PaymentList.Key,
 		|	PaymentList.Ref,
@@ -173,7 +173,7 @@ Function R3035T_CashPlanning()
 		|	VALUE(Enum.CashFlowDirections.Outgoing) AS CashFlowDirection,
 		|	PaymentList.Partner,
 		|	PaymentList.LegalName,
-		|	PaymentList.MovementType,
+		|	PaymentList.FinancialMovementType,
 		|	PaymentList.Amount,
 		|	PaymentList.Key
 		|INTO R3035T_CashPlanning

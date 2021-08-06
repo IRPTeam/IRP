@@ -208,12 +208,12 @@ Procedure Customers_OnTransaction(Parameters) Export
 	
 	QueryResult = Query.Execute();
 	OffsetOfAging = QueryResult.Unload();
-	OffsetOfAging_Groupped = OffsetOfAging.Copy();
+	OffsetOfAging_Grouped = OffsetOfAging.Copy();
 	
-	OffsetOfAging_Groupped.GroupBy("AdvancesDocument, Amount_OffsetOfAdvance");
+	OffsetOfAging_Grouped.GroupBy("AdvancesDocument, Amount_OffsetOfAdvance");
 	OffsetOfAging.GroupBy("Period, Company, Branch, Partner, Agreement, Invoice, PaymentDate, Currency, DueAmount, Amount");
 	
-	For Each Row_Advance In OffsetOfAging_Groupped Do
+	For Each Row_Advance In OffsetOfAging_Grouped Do
 		NeedWriteOff = Row_Advance.Amount_OffsetOfAdvance;
 		For Each Row In OffsetOfAging Do
 			If Not NeedWriteOff > 0 Then
@@ -474,12 +474,12 @@ Procedure Vendors_OnTransaction(Parameters) Export
 	
 	QueryResult = Query.Execute();
 	OffsetOfAging = QueryResult.Unload();
-	OffsetOfAging_Groupped = OffsetOfAging.Copy();
+	OffsetOfAging_Grouped = OffsetOfAging.Copy();
 	
-	OffsetOfAging_Groupped.GroupBy("AdvancesDocument, Amount_OffsetOfAdvance");
+	OffsetOfAging_Grouped.GroupBy("AdvancesDocument, Amount_OffsetOfAdvance");
 	OffsetOfAging.GroupBy("Period, Company, Branch, Partner, Agreement, Invoice, PaymentDate, Currency, DueAmount, Amount");
 	
-	For Each Row_Advance In OffsetOfAging_Groupped Do
+	For Each Row_Advance In OffsetOfAging_Grouped Do
 		NeedWriteOff = Row_Advance.Amount_OffsetOfAdvance;
 		For Each Row In OffsetOfAging Do
 			If Not NeedWriteOff > 0 Then
@@ -619,7 +619,7 @@ EndFunction
 Function DistributeAdvancesTableOnTransaction(AdvancesTable)
 	OffsetOfAdvance = AdvancesTable.CopyColumns();
 	
-	AdvancesTable_Groupped = AdvancesTable.Copy();
+	AdvancesTable_Grouped = AdvancesTable.Copy();
 	
 	FilterFields = 
 		"Period, 
@@ -633,8 +633,8 @@ Function DistributeAdvancesTableOnTransaction(AdvancesTable)
 		|DocumentAmount,
 		|Key, 
 		|Amount"; 
-	AdvancesTable_Groupped.GroupBy(FilterFields);
-	For Each Row In AdvancesTable_Groupped Do
+	AdvancesTable_Grouped.GroupBy(FilterFields);
+	For Each Row In AdvancesTable_Grouped Do
 		NeedWriteOff = Row.DocumentAmount;
 		Filter = New Structure(FilterFields);
 		FillPropertyValues(Filter, Row);
@@ -773,7 +773,7 @@ AdvancesOnMoneyMovements(Parameters, "R2021B_CustomersTransactions", "AdvancesFr
 	|	Transactions.Agreement,
 	|	Transactions.Currency,
 	|	SUM(Transactions.Amount) AS Amount
-	|INTO TransactionsGroupped
+	|INTO TransactionsGrouped
 	|FROM
 	|	Transactions AS Transactions
 	|GROUP BY
@@ -803,7 +803,7 @@ AdvancesOnMoneyMovements(Parameters, "R2021B_CustomersTransactions", "AdvancesFr
 	
 	Query.Text = 
 	"SELECT
-	|	TransactionsGroupped.Period,
+	|	TransactionsGrouped.Period,
 	|	R5011B_CustomersAgingBalance.Company,
 	|	R5011B_CustomersAgingBalance.Branch,
 	|	R5011B_CustomersAgingBalance.Partner,
@@ -812,36 +812,36 @@ AdvancesOnMoneyMovements(Parameters, "R2021B_CustomersTransactions", "AdvancesFr
 	|	R5011B_CustomersAgingBalance.PaymentDate AS PaymentDate,
 	|	R5011B_CustomersAgingBalance.Currency,
 	|	R5011B_CustomersAgingBalance.AmountBalance AS DueAmount,
-	|	TransactionsGroupped.Amount AS ReceiptAmount,
+	|	TransactionsGrouped.Amount AS ReceiptAmount,
 	|	0 AS Amount
 	|FROM
 	|	AccumulationRegister.R5011B_CustomersAging.Balance(&Period, (Company, Branch, Partner, Agreement, Invoice, Currency) IN
 	|		(SELECT
-	|			TransactionsGroupped.Company,
-	|			TransactionsGroupped.Branch,
-	|			TransactionsGroupped.Partner,
-	|			TransactionsGroupped.Agreement,
-	|			TransactionsGroupped.Basis,
-	|			TransactionsGroupped.Currency
+	|			TransactionsGrouped.Company,
+	|			TransactionsGrouped.Branch,
+	|			TransactionsGrouped.Partner,
+	|			TransactionsGrouped.Agreement,
+	|			TransactionsGrouped.Basis,
+	|			TransactionsGrouped.Currency
 	|		FROM
-	|			TransactionsGroupped AS TransactionsGroupped)) AS R5011B_CustomersAgingBalance
-	|		INNER JOIN TransactionsGroupped AS TransactionsGroupped
-	|		ON R5011B_CustomersAgingBalance.Company = TransactionsGroupped.Company
-	|		AND R5011B_CustomersAgingBalance.Branch = TransactionsGroupped.Branch
-	|		AND R5011B_CustomersAgingBalance.Partner = TransactionsGroupped.Partner
-	|		AND R5011B_CustomersAgingBalance.Agreement = TransactionsGroupped.Agreement
-	|		AND R5011B_CustomersAgingBalance.Invoice = TransactionsGroupped.Basis
-	|		AND R5011B_CustomersAgingBalance.Currency = TransactionsGroupped.Currency
+	|			TransactionsGrouped AS TransactionsGrouped)) AS R5011B_CustomersAgingBalance
+	|		INNER JOIN TransactionsGrouped AS TransactionsGrouped
+	|		ON R5011B_CustomersAgingBalance.Company = TransactionsGrouped.Company
+	|		AND R5011B_CustomersAgingBalance.Branch = TransactionsGrouped.Branch
+	|		AND R5011B_CustomersAgingBalance.Partner = TransactionsGrouped.Partner
+	|		AND R5011B_CustomersAgingBalance.Agreement = TransactionsGrouped.Agreement
+	|		AND R5011B_CustomersAgingBalance.Invoice = TransactionsGrouped.Basis
+	|		AND R5011B_CustomersAgingBalance.Currency = TransactionsGrouped.Currency
 	|ORDER BY
 	|	PaymentDate";
 	
 	Query.SetParameter("Period", New Boundary(Parameters.RecorderPointInTime, BoundaryType.Excluding));
 	QueryResult = Query.Execute();
 	QueryTable = QueryResult.Unload();
-	QueryTable_Groupped = QueryTable.Copy();
-	QueryTable_Groupped.GroupBy("Invoice, ReceiptAmount");
+	QueryTable_Grouped = QueryTable.Copy();
+	QueryTable_Grouped.GroupBy("Invoice, ReceiptAmount");
 	QueryTable.GroupBy("Period, Company, Branch, Partner, Agreement, Invoice, PaymentDate, Currency, DueAmount, Amount");
-	For Each Row In QueryTable_Groupped Do
+	For Each Row In QueryTable_Grouped Do
 		NeedWriteOff = Row.ReceiptAmount;
 		ArrayOfRows = QueryTable.FindRows(New Structure("Invoice", Row.Invoice));
 		For Each ItemOfArray In ArrayOfRows Do
@@ -870,7 +870,7 @@ AdvancesOnMoneyMovements(Parameters, "R2021B_CustomersTransactions", "AdvancesFr
 	Query.Text = 
 	"DROP R5011B_CustomersAging_OffsetOfAging_Lock;
 	|DROP Transactions;
-	|DROP TransactionsGroupped";
+	|DROP TransactionsGrouped";
 	Query.Execute();
 	
 	Query.Text =  
@@ -995,7 +995,7 @@ Procedure Vendors_OnMoneyMovements(Parameters) Export
 	|	Transactions.Agreement,
 	|	Transactions.Currency,
 	|	SUM(Transactions.Amount) AS Amount
-	|INTO TransactionsGroupped
+	|INTO TransactionsGrouped
 	|FROM
 	|	Transactions AS Transactions
 	|GROUP BY
@@ -1025,7 +1025,7 @@ Procedure Vendors_OnMoneyMovements(Parameters) Export
 	
 	Query.Text = 
 	"SELECT
-	|	TransactionsGroupped.Period,
+	|	TransactionsGrouped.Period,
 	|	R5012B_VendorsAgingBalance.Company,
 	|	R5012B_VendorsAgingBalance.Branch,
 	|	R5012B_VendorsAgingBalance.Partner,
@@ -1034,36 +1034,36 @@ Procedure Vendors_OnMoneyMovements(Parameters) Export
 	|	R5012B_VendorsAgingBalance.PaymentDate AS PaymentDate,
 	|	R5012B_VendorsAgingBalance.Currency,
 	|	R5012B_VendorsAgingBalance.AmountBalance AS DueAmount,
-	|	TransactionsGroupped.Amount AS ReceiptAmount,
+	|	TransactionsGrouped.Amount AS ReceiptAmount,
 	|	0 AS Amount
 	|FROM
 	|	AccumulationRegister.R5012B_VendorsAging.Balance(&Period, (Company, Branch, Partner, Agreement, Invoice, Currency) IN
 	|		(SELECT
-	|			TransactionsGroupped.Company,
-	|			TransactionsGroupped.Branch,
-	|			TransactionsGroupped.Partner,
-	|			TransactionsGroupped.Agreement,
-	|			TransactionsGroupped.Basis,
-	|			TransactionsGroupped.Currency
+	|			TransactionsGrouped.Company,
+	|			TransactionsGrouped.Branch,
+	|			TransactionsGrouped.Partner,
+	|			TransactionsGrouped.Agreement,
+	|			TransactionsGrouped.Basis,
+	|			TransactionsGrouped.Currency
 	|		FROM
-	|			TransactionsGroupped AS TransactionsGroupped)) AS R5012B_VendorsAgingBalance
-	|		INNER JOIN TransactionsGroupped AS TransactionsGroupped
-	|		ON R5012B_VendorsAgingBalance.Company = TransactionsGroupped.Company
-	|		AND R5012B_VendorsAgingBalance.Branch = TransactionsGroupped.Branch
-	|		AND R5012B_VendorsAgingBalance.Partner = TransactionsGroupped.Partner
-	|		AND R5012B_VendorsAgingBalance.Agreement = TransactionsGroupped.Agreement
-	|		AND R5012B_VendorsAgingBalance.Invoice = TransactionsGroupped.Basis
-	|		AND R5012B_VendorsAgingBalance.Currency = TransactionsGroupped.Currency
+	|			TransactionsGrouped AS TransactionsGrouped)) AS R5012B_VendorsAgingBalance
+	|		INNER JOIN TransactionsGrouped AS TransactionsGrouped
+	|		ON R5012B_VendorsAgingBalance.Company = TransactionsGrouped.Company
+	|		AND R5012B_VendorsAgingBalance.Branch = TransactionsGrouped.Branch
+	|		AND R5012B_VendorsAgingBalance.Partner = TransactionsGrouped.Partner
+	|		AND R5012B_VendorsAgingBalance.Agreement = TransactionsGrouped.Agreement
+	|		AND R5012B_VendorsAgingBalance.Invoice = TransactionsGrouped.Basis
+	|		AND R5012B_VendorsAgingBalance.Currency = TransactionsGrouped.Currency
 	|ORDER BY
 	|	PaymentDate";
 	
 	Query.SetParameter("Period", New Boundary(Parameters.RecorderPointInTime, BoundaryType.Excluding));
 	QueryResult = Query.Execute();
 	QueryTable = QueryResult.Unload();
-	QueryTable_Groupped = QueryTable.Copy();
-	QueryTable_Groupped.GroupBy("Invoice, ReceiptAmount");
+	QueryTable_Grouped = QueryTable.Copy();
+	QueryTable_Grouped.GroupBy("Invoice, ReceiptAmount");
 	QueryTable.GroupBy("Period, Company, Branch, Partner, Agreement, Invoice, PaymentDate, Currency, DueAmount, Amount");
-	For Each Row In QueryTable_Groupped Do
+	For Each Row In QueryTable_Grouped Do
 		NeedWriteOff = Row.ReceiptAmount;
 		ArrayOfRows = QueryTable.FindRows(New Structure("Invoice", Row.Invoice));
 		For Each ItemOfArray In ArrayOfRows Do
@@ -1092,7 +1092,7 @@ Procedure Vendors_OnMoneyMovements(Parameters) Export
 	Query.Text = 
 	"DROP R5012B_VendorsAging_OffsetOfAging_Lock;
 	|DROP Transactions;
-	|DROP TransactionsGroupped";
+	|DROP TransactionsGrouped";
 	Query.Execute();
 	
 	Query.Text =  
@@ -1332,7 +1332,7 @@ EndFunction
 
 Function DistributeAgingTableOnMoneyMovement(AgingBalanceTable)
 	OffsetOfAdvance = AgingBalanceTable.CopyColumns();
-	AgingBalanceTable_Groupped = AgingBalanceTable.Copy();
+	AgingBalanceTable_Grouped = AgingBalanceTable.Copy();
 	
 	FilterFields = 
 		"Period, 
@@ -1345,8 +1345,8 @@ Function DistributeAgingTableOnMoneyMovement(AgingBalanceTable)
 		|AdvancesDocument, 
 		|Key,
 		|Amount"; 
-	AgingBalanceTable_Groupped.GroupBy(FilterFields);
-	For Each Row In AgingBalanceTable_Groupped Do
+	AgingBalanceTable_Grouped.GroupBy(FilterFields);
+	For Each Row In AgingBalanceTable_Grouped Do
 		NeedWriteOff = Row.DocumentAmount;
 		If NeedWriteOff = 0 Then
 			Continue;

@@ -250,11 +250,12 @@ Scenario: Create catalog DataBaseStatus objects (test data base)
 Scenario: Create catalog ExpenseAndRevenueTypes objects (test data base)
 
 	And I check or create catalog "ExpenseAndRevenueTypes" objects:
-		| 'Ref'                                                                            | 'DeletionMark' | 'Parent' | 'Code' | 'Type'                                     | 'Description_en'     | 'Description_hash' | 'Description_ru'  | 'Description_tr'     |
-		| 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=b762b13668d0905011eb76684b9f685f' | 'False'        | ''       | '1'    | 'Enum.ExpenseAndRevenueTypes.Revenue'      | 'Доход'              | ''                 | ''                | ''                   |
-		| 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=b762b13668d0905011eb76684b9f6860' | 'False'        | ''       | '2'    | 'Enum.ExpenseAndRevenueTypes.Expense'      | 'Затраты'            | ''                 | ''                | ''                   |
-		| 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=aa78120ed98fbced11eaf114c59ef02b' | 'False'        | ''       | '3'    | 'Enum.ExpenseAndRevenueTypes.CashMovement' | 'Конвертация валюты' | ''                 | 'Movement type 1' | 'Movement type 1 TR' |
-		| 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=b76bafe8d8921be311ebc458232c5aae' | 'False'        | ''       | '4'    | 'Enum.ExpenseAndRevenueTypes.CashMovement' | 'Перемещение ДС'     | ''                 | ''                | ''                   |
+		| 'Ref'                                                                            | 'DeletionMark' | 'Parent' | 'Code' | 'IsExpense' | 'IsRevenue' | 'IsFinancialMovementType' | 'Description_en'     | 'Description_hash' | 'Description_ru'  | 'Description_tr'     |
+		| 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=b762b13668d0905011eb76684b9f685f' | 'False'        | ''       | '1'    | 'False'     | 'True'      | 'False'                   | 'Доход'              | ''                 | ''                | ''                   |
+		| 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=b762b13668d0905011eb76684b9f6860' | 'False'        | ''       | '2'    | 'True'      | 'False'     | 'False'                   | 'Затраты'            | ''                 | ''                | ''                   |
+		| 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=aa78120ed98fbced11eaf114c59ef02b' | 'False'        | ''       | '3'    | 'False'     | 'False'     | 'True'                    | 'Конвертация валюты' | ''                 | 'Movement type 1' | 'Movement type 1 TR' |
+		| 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=b76bafe8d8921be311ebc458232c5aae' | 'False'        | ''       | '4'    | 'False'     | 'False'     | 'True'                    | 'Перемещение ДС'     | ''                 | ''                | ''                   |
+
 
 Scenario: Create catalog IntegrationSettings objects (test data base)
 

@@ -461,19 +461,19 @@ Scenario: _2060007 select items from basis documents in the PI
 		And I click "Add basis documents" button
 		And I expand current line in "BasisesTree" table
 		And "BasisesTree" table contains lines 
-			| 'Row presentation'                               | 'Quantity' | 'Unit'  | 'Price'          | 'Currency' |
-			| 'Sales order 31 dated 27.01.2021 19:50:45'       | 'No'       | ''      | ''               | ''         |
-			| 'Boots, 37/18SD'                                 | 'No'       | '2,000' | 'Boots (12 pcs)' | '8 400,00' |
-			| 'Purchase order 1 051 dated 20.07.2021 10:22:16' | ''         | ''      | ''               | ''         |
-			| 'Dress, S/Yellow'                                | '55,000'   | 'pcs'   | '550,00'         | 'TRY'      |
-			| 'Dress, XS/Blue'                                 | '250,000'  | 'pcs'   | '520,00'         | 'TRY'      |
-			| 'Goods receipt 1 051 dated 20.07.2021 10:23:22'  | ''         | ''      | ''               | ''         |
-			| 'Dress, S/Yellow'                                | '45,000'   | 'pcs'   | '550,00'         | 'TRY'      |
-			| 'Dress, XS/Blue'                                 | '750,000'  | 'pcs'   | '520,00'         | 'TRY'      |
-			| 'Goods receipt 1 052 dated 20.07.2021 10:23:55'  | ''         | ''      | ''               | ''         |
-			| 'Dress, S/Yellow'                                | '5,000'    | 'pcs'   | ''               | ''         |
-			| 'Dress, XS/Blue'                                 | '50,000'   | 'pcs'   | ''               | ''         |
-			| 'Trousers, 36/Yellow'                            | '40,000'   | 'pcs'   | ''               | ''         |
+			| 'Row presentation'                               | 'Use' | 'Quantity' | 'Unit'           | 'Price'    | 'Currency' |
+			| 'Sales order 31 dated 27.01.2021 19:50:45'       | 'No'  | ''         | ''               | ''         | ''         |
+			| 'Boots, 37/18SD'                                 | 'No'  | '2,000'    | 'Boots (12 pcs)' | '8 400,00' | 'TRY'      |
+			| 'Purchase order 1 051 dated 20.07.2021 10:22:16' | 'No'  | ''         | ''               | ''         | ''         |
+			| 'Dress, S/Yellow'                                | 'No'  | '55,000'   | 'pcs'            | '550,00'   | 'TRY'      |
+			| 'Dress, XS/Blue'                                 | 'No'  | '250,000'  | 'pcs'            | '520,00'   | 'TRY'      |
+			| 'Goods receipt 1 051 dated 20.07.2021 10:23:22'  | 'No'  | ''         | ''               | ''         | ''         |
+			| 'Dress, S/Yellow'                                | 'No'  | '45,000'   | 'pcs'            | '550,00'   | 'TRY'      |
+			| 'Dress, XS/Blue'                                 | 'No'  | '750,000'  | 'pcs'            | '520,00'   | 'TRY'      |
+			| 'Goods receipt 1 052 dated 20.07.2021 10:23:55'  | 'No'  | ''         | ''               | ''         | ''         |
+			| 'Dress, S/Yellow'                                | 'No'  | '5,000'    | 'pcs'            | ''         | ''         |
+			| 'Dress, XS/Blue'                                 | 'No'  | '50,000'   | 'pcs'            | ''         | ''         |
+			| 'Trousers, 36/Yellow'                            | 'No'  | '40,000'   | 'pcs'            | ''         | ''         |
 		Then the number of "BasisesTree" table lines is "равно" "12"
 		And I close all client application windows
 

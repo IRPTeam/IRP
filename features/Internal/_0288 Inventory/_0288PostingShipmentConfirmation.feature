@@ -559,6 +559,12 @@ Scenario: _028830 check link/unlink form in the SC
 			| 'Description' |
 			| 'Company Adel'     |
 		And I select current line in "List" table
+		And I move to "Other" tab
+		And I click Choice button of the field named "Branch"
+		And I go to line in "List" table
+			| 'Description'             |
+			| 'Distribution department' |
+		And I select current line in "List" table			
 	* Select items from basis documents
 		And I click "AddBasisDocuments" button
 		And I expand current line in "BasisesTree" table
@@ -707,9 +713,6 @@ Scenario: _028831 check link/unlink form in the SC (Purchase return)
 		And "BasisesTree" table became equal
 			| 'Row presentation'                              | 'Use' | 'Quantity' | 'Unit'           | 'Price'  | 'Currency' |
 			| 'Purchase return 351 dated 24.03.2021 16:08:15' | 'No'  | ''         | ''               | ''       | ''         |
-			| 'Dress, XS/Blue'                                | 'No'  | '1,000'    | 'pcs'            | '200,00' | 'TRY'      |
-			| 'Boots, 36/18SD'                                | 'No'  | '2,000'    | 'Boots (12 pcs)' | '220,00' | 'TRY'      |
-			| 'Purchase return 352 dated 24.03.2021 16:08:35' | 'No'  | ''         | ''               | ''       | ''         |
 			| 'Dress, XS/Blue'                                | 'No'  | '1,000'    | 'pcs'            | '200,00' | 'TRY'      |
 			| 'Boots, 36/18SD'                                | 'No'  | '2,000'    | 'Boots (12 pcs)' | '220,00' | 'TRY'      |
 		And I go to line in "BasisesTree" table

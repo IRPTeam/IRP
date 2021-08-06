@@ -840,16 +840,27 @@
     <main>true</main>
     <extInfo xsi:type="form:DynamicListExtInfo">
       <queryText>SELECT
+	PurchaseInvoiceItemList.Ref AS Ref,
+	COUNT(DISTINCT PurchaseInvoiceItemList.Store) AS StoreCount,
+	MAX(PurchaseInvoiceItemList.Store) AS Store,
+	SUM(ISNULL(PurchaseInvoiceItemList.QuantityInBaseUnit, 0)) AS QuantityInBaseUnit
+INTO ItemListTable
+FROM
+	Document.PurchaseInvoice.ItemList AS PurchaseInvoiceItemList
+GROUP BY
+	PurchaseInvoiceItemList.Ref
+;
+
+////////////////////////////////////////////////////////////////////////////////
+SELECT
 	PurchaseInvoice.Ref,
 	CASE
 		WHEN ISNULL(R1031B_ReceiptInvoicingBalance.QuantityBalance, 0) = 0
-			THEN VALUE(Enum.InvoicingShippingStatuses.Closed)
-		WHEN SUM(ISNULL(PurchaseInvoiceItemList.QuantityInBaseUnit,
-			0)) = ISNULL(R1031B_ReceiptInvoicingBalance.QuantityBalance, 0)
-			THEN VALUE(Enum.InvoicingShippingStatuses.Awaiting)
-		WHEN SUM(ISNULL(PurchaseInvoiceItemList.QuantityInBaseUnit,
-			0)) &lt;> ISNULL(R1031B_ReceiptInvoicingBalance.QuantityBalance, 0)
-			THEN VALUE(Enum.InvoicingShippingStatuses.Shipping)
+			THEN VALUE(Enum.ShippingStatuses.Closed)
+		WHEN ItemListTable.QuantityInBaseUnit = ISNULL(R1031B_ReceiptInvoicingBalance.QuantityBalance, 0)
+			THEN VALUE(Enum.ShippingStatuses.Awaiting)
+		WHEN ItemListTable.QuantityInBaseUnit &lt;> ISNULL(R1031B_ReceiptInvoicingBalance.QuantityBalance, 0)
+			THEN VALUE(Enum.ShippingStatuses.Shipping)
 	END AS Status,
 	PurchaseInvoice.DeletionMark,
 	PurchaseInvoice.Number,
@@ -868,14 +879,14 @@
 	PurchaseInvoice.Description,
 	PurchaseInvoice.DocumentAmount,
 	CASE
-		WHEN COUNT(DISTINCT PurchaseInvoiceItemList.Store) = 1
-			THEN MAX(PurchaseInvoiceItemList.Store)
-		ELSE UNDEFINED
+		WHEN ItemListTable.StoreCount = 1
+			THEN ItemListTable.Store
+		ELSE VALUE(Catalog.Stores.EmptyRef)
 	END AS Store
 FROM
 	Document.PurchaseInvoice AS PurchaseInvoice
-		LEFT JOIN Document.PurchaseInvoice.ItemList AS PurchaseInvoiceItemList
-		ON PurchaseInvoice.Ref = PurchaseInvoiceItemList.Ref
+		LEFT JOIN ItemListTable AS ItemListTable
+		ON PurchaseInvoice.Ref = ItemListTable.Ref
 		LEFT JOIN AccumulationRegister.R1031B_ReceiptInvoicing.Balance AS R1031B_ReceiptInvoicingBalance
 		ON PurchaseInvoice.Ref = CAST(R1031B_ReceiptInvoicingBalance.Basis AS Document.PurchaseInvoice)
 GROUP BY
@@ -896,7 +907,20 @@ GROUP BY
 	PurchaseInvoice.Branch,
 	PurchaseInvoice.Description,
 	PurchaseInvoice.DocumentAmount,
-	R1031B_ReceiptInvoicingBalance.QuantityBalance</queryText>
+	CASE
+		WHEN ItemListTable.StoreCount = 1
+			THEN ItemListTable.Store
+		ELSE VALUE(Catalog.Stores.EmptyRef)
+	END,
+	R1031B_ReceiptInvoicingBalance.QuantityBalance,
+	CASE
+		WHEN ISNULL(R1031B_ReceiptInvoicingBalance.QuantityBalance, 0) = 0
+			THEN VALUE(Enum.ShippingStatuses.Closed)
+		WHEN ItemListTable.QuantityInBaseUnit = ISNULL(R1031B_ReceiptInvoicingBalance.QuantityBalance, 0)
+			THEN VALUE(Enum.ShippingStatuses.Awaiting)
+		WHEN ItemListTable.QuantityInBaseUnit &lt;> ISNULL(R1031B_ReceiptInvoicingBalance.QuantityBalance, 0)
+			THEN VALUE(Enum.ShippingStatuses.Shipping)
+	END</queryText>
       <mainTable>Document.PurchaseInvoice</mainTable>
       <dynamicDataRead>true</dynamicDataRead>
       <autoFillAvailableFields>true</autoFillAvailableFields>

@@ -417,6 +417,12 @@ Scenario: _02104809 create IT using form link/unlink
 			| 'Description'           |
 			| 'Store 03' |
 		And I select current line in "List" table
+		And I move to "Other" tab
+		And I click Choice button of the field named "Branch"
+		And I go to line in "List" table
+			| 'Description'          |
+			| 'Logistics department' |
+		And I select current line in "List" table		
 	* Select items from basis documents
 		And I click the button named "AddBasisDocuments"
 		And I go to line in "BasisesTree" table

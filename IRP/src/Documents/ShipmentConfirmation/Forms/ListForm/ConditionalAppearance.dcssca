@@ -10,7 +10,7 @@
 			<item xsi:type="FilterItemComparison">
 				<left xsi:type="dcscor:Field">List.Status</left>
 				<comparisonType>Equal</comparisonType>
-				<right xsi:type="dcscor:DesignTimeValue">Enum.InvoicingShippingStatuses.Awaiting</right>
+				<right xsi:type="dcscor:DesignTimeValue">Enum.InvoicingStatuses.Awaiting</right>
 			</item>
 		</filter>
 		<appearance>
@@ -30,13 +30,13 @@
 			<item xsi:type="FilterItemComparison">
 				<left xsi:type="dcscor:Field">List.Status</left>
 				<comparisonType>Equal</comparisonType>
-				<right xsi:type="dcscor:DesignTimeValue">Enum.InvoicingShippingStatuses.Invoicing</right>
+				<right xsi:type="dcscor:DesignTimeValue">Enum.InvoicingStatuses.Invoicing</right>
 			</item>
 		</filter>
 		<appearance>
 			<dcscor:item xsi:type="SettingsParameterValue">
 				<dcscor:parameter>TextColor</dcscor:parameter>
-				<dcscor:value xsi:type="v8ui:Color">style:ActivityColor</dcscor:value>
+				<dcscor:value xsi:type="v8ui:Color">web:DarkOrange</dcscor:value>
 			</dcscor:item>
 		</appearance>
 	</item>
@@ -50,7 +50,7 @@
 			<item xsi:type="FilterItemComparison">
 				<left xsi:type="dcscor:Field">List.Status</left>
 				<comparisonType>Equal</comparisonType>
-				<right xsi:type="dcscor:DesignTimeValue">Enum.InvoicingShippingStatuses.Closed</right>
+				<right xsi:type="dcscor:DesignTimeValue">Enum.InvoicingStatuses.Closed</right>
 			</item>
 		</filter>
 		<appearance>

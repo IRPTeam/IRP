@@ -23,7 +23,7 @@ Procedure FillMovementsAtServer()
 		ParametersStructure = Documents[Document.Name].GetInformationAboutMovements(Ref);
 		
 		ParametersInfo = New Array;
-		For Each Param In ParametersStructure.QueryParamenters Do
+		For Each Param In ParametersStructure.QueryParameters Do
 			ParametersInfo.Add(Param.Key + ": " + TypeOf(Param.Value));
 		EndDo;
 		ParametersInfo = StrConcat(ParametersInfo, Chars.LF);

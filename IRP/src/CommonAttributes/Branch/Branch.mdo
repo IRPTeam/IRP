@@ -46,10 +46,6 @@
     <use>Use</use>
   </content>
   <content>
-    <metadata>Document.PhysicalInventory</metadata>
-    <use>Use</use>
-  </content>
-  <content>
     <metadata>Document.PhysicalCountByLocation</metadata>
     <use>Use</use>
   </content>

@@ -166,6 +166,12 @@ Scenario: _2060002 check link/unlink form in the SC
 			| 'Description' |
 			| 'Company Adel'     |
 		And I select current line in "List" table
+		And I move to "Other" tab
+		And I click Choice button of the field named "Branch"
+		And I go to line in "List" table
+			| 'Description'             |
+			| 'Distribution department' |
+		And I select current line in "List" table		
 	* Select items from basis documents
 		And I click "AddBasisDocuments" button
 		And I expand current line in "BasisesTree" table
@@ -333,6 +339,12 @@ Scenario: _2060003 check auto link button in the SI
 			| 'Description' |
 			| 'Store 02'  |
 		And I select current line in "List" table
+		And I move to "Other" tab
+		And I click Choice button of the field named "Branch"
+		And I go to line in "List" table
+			| 'Description'             |
+			| 'Distribution department' |
+		And I select current line in "List" table
 	* Add items	
 		* One SO - 1 pcs, second SO - 1 pcs
 			And in the table "ItemList" I click the button named "ItemListAdd"
@@ -405,11 +417,11 @@ Scenario: _2060003 check auto link button in the SI
 		And I click "Ok" button
 	* Check auto link
 		And "ItemList" table contains lines
-			| '#' | 'Profit loss center'           | 'SalesTax' | 'Revenue type' | 'Price type'              | 'Item'    | 'Item key' | 'Dont calculate row' | 'Serial lot numbers' | 'Q'      | 'Unit' | 'Tax amount' | 'Price'    | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Delivery date' | 'Use shipment confirmation' | 'Detail' | 'Sales order'                             |
-			| '1' | ''                        | '1%'       | ''             | 'Basic Price Types'       | 'Dress'   | 'XS/Blue'  | 'No'                 | ''                   | '2,000'  | 'pcs'  | '168,94'     | '520,00'   | '18%' | ''              | '871,06'     | '1 040,00'     | ''                    | 'Store 02' | ''              | 'No'                        | ''       | ''                                        |
-			| '2' | 'Distribution department' | ''         | 'Revenue'      | 'Basic Price Types'       | 'Shirt'   | '36/Red'   | 'No'                 | ''                   | '10,000' | 'pcs'  | '507,20'     | '350,00'   | '18%' | '175,00'        | '2 817,80'   | '3 325,00'     | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | 'Sales order 3 dated 27.01.2021 19:50:45' |
-			| '3' | 'Front office'            | ''         | 'Revenue'      | 'en description is empty' | 'Service' | 'Interner' | 'No'                 | ''                   | '1,000'  | 'pcs'  | '14,49'      | '100,00'   | '18%' | '5,00'          | '80,51'      | '95,00'        | ''                    | 'Store 02' | '27.01.2021'    | 'No'                        | ''       | 'Sales order 3 dated 27.01.2021 19:50:45' |
-			| '4' | 'Front office'            | ''         | 'Revenue'      | 'Basic Price Types'       | 'Boots'   | '36/18SD'  | 'No'                 | ''                   | '65,000' | 'pcs'  | '6 940,68'   | '8 400,00' | '18%' | ''              | '38 559,32'  | '45 500,00'    | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | 'Sales order 3 dated 27.01.2021 19:50:45' |
+			| '#' | 'SalesTax' | 'Revenue type' | 'Price type'              | 'Item'    | 'Item key' | 'Profit loss center'      | 'Dont calculate row' | 'Serial lot numbers' | 'Q'      | 'Unit' | 'Tax amount' | 'Price'    | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Delivery date' | 'Use shipment confirmation' | 'Detail' | 'Sales order'                             |
+			| '1' | ''         | 'Revenue'      | 'Basic Price Types'       | 'Dress'   | 'XS/Blue'  | 'Distribution department' | 'No'                 | ''                   | '2,000'  | 'pcs'  | '150,72'     | '520,00'   | '18%' | '52,00'         | '837,28'     | '988,00'       | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | 'Sales order 3 dated 27.01.2021 19:50:45' |
+			| '2' | ''         | 'Revenue'      | 'Basic Price Types'       | 'Shirt'   | '36/Red'   | 'Distribution department' | 'No'                 | ''                   | '10,000' | 'pcs'  | '507,20'     | '350,00'   | '18%' | '175,00'        | '2 817,80'   | '3 325,00'     | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | 'Sales order 3 dated 27.01.2021 19:50:45' |
+			| '3' | ''         | 'Revenue'      | 'en description is empty' | 'Service' | 'Interner' | 'Front office'            | 'No'                 | ''                   | '1,000'  | 'pcs'  | '14,49'      | '100,00'   | '18%' | '5,00'          | '80,51'      | '95,00'        | ''                    | 'Store 02' | '27.01.2021'    | 'No'                        | ''       | 'Sales order 3 dated 27.01.2021 19:50:45' |
+			| '4' | ''         | 'Revenue'      | 'Basic Price Types'       | 'Boots'   | '36/18SD'  | 'Front office'            | 'No'                 | ''                   | '65,000' | 'pcs'  | '6 940,68'   | '8 400,00' | '18%' | ''              | '38 559,32'  | '45 500,00'    | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | 'Sales order 3 dated 27.01.2021 19:50:45' |
 		Then the number of "ItemList" table lines is "равно" "4"
 		And I close all client application windows
 		
@@ -449,18 +461,20 @@ Scenario: _2060007 select items from basis documents in the PI
 		And I click "Add basis documents" button
 		And I expand current line in "BasisesTree" table
 		And "BasisesTree" table contains lines 
-			| 'Row presentation'                               | 'Quantity' | 'Unit' | 'Price'  | 'Currency' |
-			| 'Purchase order 1 051 dated 20.07.2021 10:22:16' | ''         | ''     | ''       | ''         |
-			| 'Dress, S/Yellow'                                | '55,000'   | 'pcs'  | '550,00' | 'TRY'      |
-			| 'Dress, XS/Blue'                                 | '250,000'  | 'pcs'  | '520,00' | 'TRY'      |
-			| 'Goods receipt 1 051 dated 20.07.2021 10:23:22'  | ''         | ''     | ''       | ''         |
-			| 'Dress, S/Yellow'                                | '45,000'   | 'pcs'  | '550,00' | 'TRY'      |
-			| 'Dress, XS/Blue'                                 | '750,000'  | 'pcs'  | '520,00' | 'TRY'      |
-			| 'Goods receipt 1 052 dated 20.07.2021 10:23:55'  | ''         | ''     | ''       | ''         |
-			| 'Dress, S/Yellow'                                | '5,000'    | 'pcs'  | ''       | ''         |
-			| 'Dress, XS/Blue'                                 | '50,000'   | 'pcs'  | ''       | ''         |
-			| 'Trousers, 36/Yellow'                            | '40,000'   | 'pcs'  | ''       | ''         |
-		Then the number of "BasisesTree" table lines is "равно" "14"
+			| 'Row presentation'                               | 'Use' | 'Quantity' | 'Unit'           | 'Price'    | 'Currency' |
+			| 'Sales order 31 dated 27.01.2021 19:50:45'       | 'No'  | ''         | ''               | ''         | ''         |
+			| 'Boots, 37/18SD'                                 | 'No'  | '2,000'    | 'Boots (12 pcs)' | '8 400,00' | 'TRY'      |
+			| 'Purchase order 1 051 dated 20.07.2021 10:22:16' | 'No'  | ''         | ''               | ''         | ''         |
+			| 'Dress, S/Yellow'                                | 'No'  | '55,000'   | 'pcs'            | '550,00'   | 'TRY'      |
+			| 'Dress, XS/Blue'                                 | 'No'  | '250,000'  | 'pcs'            | '520,00'   | 'TRY'      |
+			| 'Goods receipt 1 051 dated 20.07.2021 10:23:22'  | 'No'  | ''         | ''               | ''         | ''         |
+			| 'Dress, S/Yellow'                                | 'No'  | '45,000'   | 'pcs'            | '550,00'   | 'TRY'      |
+			| 'Dress, XS/Blue'                                 | 'No'  | '750,000'  | 'pcs'            | '520,00'   | 'TRY'      |
+			| 'Goods receipt 1 052 dated 20.07.2021 10:23:55'  | 'No'  | ''         | ''               | ''         | ''         |
+			| 'Dress, S/Yellow'                                | 'No'  | '5,000'    | 'pcs'            | ''         | ''         |
+			| 'Dress, XS/Blue'                                 | 'No'  | '50,000'   | 'pcs'            | ''         | ''         |
+			| 'Trousers, 36/Yellow'                            | 'No'  | '40,000'   | 'pcs'            | ''         | ''         |
+		Then the number of "BasisesTree" table lines is "равно" "12"
 		And I close all client application windows
 
 

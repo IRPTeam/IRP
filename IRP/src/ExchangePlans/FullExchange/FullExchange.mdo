@@ -146,9 +146,6 @@
     <mdObject>AccumulationRegister.R4010B_ActualStocks</mdObject>
   </content>
   <content>
-    <mdObject>AccumulationRegister.R4013B_StockReservationPlanning</mdObject>
-  </content>
-  <content>
     <mdObject>InformationRegister.BranchBankTerms</mdObject>
   </content>
   <content>

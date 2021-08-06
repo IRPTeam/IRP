@@ -14127,29 +14127,6 @@
 		</right>
 	</object>
 	<object>
-		<name>AccumulationRegister.R4013B_StockReservationPlanning</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Update</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Edit</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>TotalsControl</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
 		<name>AccumulationRegister.R4036B_IncomingStocksRequested</name>
 		<right>
 			<name>Read</name>

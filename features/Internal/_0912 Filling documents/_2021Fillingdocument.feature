@@ -249,7 +249,7 @@ Scenario: _0154100 preparation ( filling documents)
 					And I go to line in "List" table
 						| 'Description'     |
 						| 'Movement type 1' |
-					And I select current line
+					And I select current line in "List" table
 					And I click Select button of "Receive financial movement type" field
 					And I go to line in "List" table
 						| 'Description'     |
@@ -401,7 +401,7 @@ Scenario: _0154100 preparation ( filling documents)
 Scenario: _0154101 check filling in and refilling Sales order
 	And I close all client application windows
 	* Open the Sales order creation form
-		Given I open hyper link "e1cib/list/Document.SalesOrder"
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I click the button named "FormCreate"
 	* Check filling in legal name if the partner has only one
 		And I click Select button of "Partner" field
@@ -4704,7 +4704,7 @@ Scenario: _0154133  check currency form in Outgoing payment order
 Scenario: _0154140 check filling in and refilling Sales order closing
 	And I close all client application windows
 	* Open the Sales order closing creation form
-		Given I open hyper link "e1cib/list/Document.SalesOrderClosing"
+		Given I open hyperlink "e1cib/list/Document.SalesOrderClosing"
 		And I click the button named "FormCreate"
 	* Check filling in legal name if the partner has only one
 		And I click Select button of "Partner" field

@@ -125,7 +125,7 @@ Scenario: _054002 check Cash transfer order movements by register Planing cash t
 	* Check movements
 		Given I open hyperlink "e1cib/list/AccumulationRegister.R3035T_CashPlanning"
 		And "List" table contains lines
-			| 'Currency' | 'Recorder'                    | 'Basis document'              | 'Company'      | 'Account'      | 'Cash flow direction' | 'Amount' | 'Movement type'   |
+			| 'Currency' | 'Recorder'                    | 'Basis document'              | 'Company'      | 'Account'      | 'Cash flow direction' | 'Amount' | 'Financial movement type'   |
 			| 'USD'      | '$$CashTransferOrder054001$$' | '$$CashTransferOrder054001$$' | 'Main Company' | 'Cash desk №1' | 'Outgoing'            | '500,00' | 'Movement type 1' |
 			| 'USD'      | '$$CashTransferOrder054001$$' | '$$CashTransferOrder054001$$' | 'Main Company' | 'Cash desk №2' | 'Incoming'            | '500,00' | 'Movement type 1' |
 		And I close all client application windows
@@ -137,7 +137,7 @@ Scenario: _054002 check Cash transfer order movements by register Planing cash t
 		And in the table "List" I click the button named "ListContextMenuUndoPosting"
 		Given I open hyperlink "e1cib/list/AccumulationRegister.R3035T_CashPlanning"
 		And "List" table does not contain lines
-			| 'Currency' | 'Recorder'                    | 'Basis document'              | 'Company'      | 'Account'      | 'Cash flow direction' | 'Amount' | 'Movement type'   |
+			| 'Currency' | 'Recorder'                    | 'Basis document'              | 'Company'      | 'Account'      | 'Cash flow direction' | 'Amount' | 'Financial movement type'   |
 			| 'USD'      | '$$CashTransferOrder054001$$' | '$$CashTransferOrder054001$$' | 'Main Company' | 'Cash desk №1' | 'Outgoing'            | '500,00' | 'Movement type 1' |
 			| 'USD'      | '$$CashTransferOrder054001$$' | '$$CashTransferOrder054001$$' | 'Main Company' | 'Cash desk №2' | 'Incoming'            | '500,00' | 'Movement type 1' |
 		And I close all client application windows
@@ -149,7 +149,7 @@ Scenario: _054002 check Cash transfer order movements by register Planing cash t
 		And in the table "List" I click the button named "ListContextMenuPost"
 		Given I open hyperlink "e1cib/list/AccumulationRegister.R3035T_CashPlanning"
 		And "List" table contains lines
-			| 'Currency' | 'Recorder'                    | 'Basis document'              | 'Company'      | 'Account'      | 'Cash flow direction' | 'Amount' | 'Movement type'   |
+			| 'Currency' | 'Recorder'                    | 'Basis document'              | 'Company'      | 'Account'      | 'Cash flow direction' | 'Amount' | 'Financial movement type'   |
 			| 'USD'      | '$$CashTransferOrder054001$$' | '$$CashTransferOrder054001$$' | 'Main Company' | 'Cash desk №1' | 'Outgoing'            | '500,00' | 'Movement type 1' |
 			| 'USD'      | '$$CashTransferOrder054001$$' | '$$CashTransferOrder054001$$' | 'Main Company' | 'Cash desk №2' | 'Incoming'            | '500,00' | 'Movement type 1' |
 		And I close all client application windows
@@ -213,7 +213,7 @@ Scenario: _054003 create Cash payment and Cash receipt based on Cash transfer or
 	* Check movement of Cash payment and Cash receipt by register Planing cash transactions
 		Given I open hyperlink "e1cib/list/AccumulationRegister.R3035T_CashPlanning"
 		And "List" table contains lines
-		| 'Currency' | 'Recorder'               | 'Basis document'              | 'Company'      | 'Account'      | 'Cash flow direction' | 'Movement type'   |
+		| 'Currency' | 'Recorder'               | 'Basis document'              | 'Company'      | 'Account'      | 'Cash flow direction' | 'Financial movement type'   |
 		| 'USD'      | '$$CashPayment054003$$'  | '$$CashTransferOrder054001$$' | 'Main Company' | 'Cash desk №1' | 'Outgoing'            | 'Movement type 1' |
 		| 'USD'      | '$$CashReceipt054003$$'  | '$$CashTransferOrder054001$$' | 'Main Company' | 'Cash desk №2' | 'Incoming'            | 'Movement type 1' |
 		| 'USD'      | '$$CashReceipt0540031$$' | '$$CashTransferOrder054001$$' | 'Main Company' | 'Cash desk №2' | 'Incoming'            | 'Movement type 1' |
@@ -296,7 +296,7 @@ Scenario: _054004 create Cash transfer order (from Cash/Bank accounts to Cash/Ba
 	And I close all client application windows
 	Given I open hyperlink "e1cib/list/AccumulationRegister.R3035T_CashPlanning"
 	And "List" table contains lines
-		| 'Currency' | 'Recorder'                    | 'Basis document'              | 'Company'      | 'Account'      | 'Cash flow direction' | 'Partner' | 'Legal name' | 'Amount'   | 'Movement type'   |
+		| 'Currency' | 'Recorder'                    | 'Basis document'              | 'Company'      | 'Account'      | 'Cash flow direction' | 'Partner' | 'Legal name' | 'Amount'   | 'Financial movement type'   |
 		| 'USD'      | '$$CashTransferOrder054004$$' | '$$CashTransferOrder054004$$' | 'Main Company' | 'Cash desk №2' | 'Outgoing'            | ''        | ''           | '200,00'   | 'Movement type 1' |
 		| 'TRY'      | '$$CashTransferOrder054004$$' | '$$CashTransferOrder054004$$' | 'Main Company' | 'Cash desk №1' | 'Incoming'            | ''        | ''           | '1 150,00' | 'Movement type 1' |
 	And I close all client application windows
@@ -904,6 +904,7 @@ Scenario: _054012 exchange currency from bank account (Cash Transfer Order)
 		And I go to line in "List" table
 			| 'Description'     |
 			| 'Movement type 1' |
+		And I select current line in "List" table	
 		And I click Select button of "Receive financial movement type" field
 		And I go to line in "List" table
 			| 'Description'     |

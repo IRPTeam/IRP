@@ -4318,16 +4318,6 @@ Procedure ApplyFilterSet_PhysicalInventory_ForSurplus_ForWriteOff(Query)
 	|			Catalog.RowIDs AS RowRef
 	|		WHERE
 	|			CASE
-	|				WHEN &Filter_Company
-	|					THEN RowRef.Company = &Company
-	|				ELSE TRUE
-	|			END
-	|			AND CASE
-	|				WHEN &Filter_Branch
-	|					THEN RowRef.Branch = &Branch
-	|				ELSE FALSE
-	|			END
-	|			AND CASE
 	|				WHEN &Filter_ItemKey
 	|					THEN RowRef.ItemKey = &ItemKey
 	|				ELSE TRUE

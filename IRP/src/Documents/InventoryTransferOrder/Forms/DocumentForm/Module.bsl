@@ -237,6 +237,7 @@ EndProcedure
 Function GetLinkedDocumentsFilter()
 	Filter = New Structure();
 	Filter.Insert("Company" , Object.Company);
+	Filter.Insert("Branch"  , Object.Branch);
 	Filter.Insert("Ref"     , Object.Ref);
 	Return Filter;
 EndFunction

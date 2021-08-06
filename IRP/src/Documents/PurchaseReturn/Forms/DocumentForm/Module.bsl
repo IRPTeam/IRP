@@ -459,6 +459,7 @@ EndProcedure
 Function GetLinkedDocumentsFilter()
 	Filter = New Structure();
 	Filter.Insert("Company"           , Object.Company);
+	Filter.Insert("Branch"            , Object.Branch);
 	Filter.Insert("Partner"           , Object.Partner);
 	Filter.Insert("LegalName"         , Object.LegalName);
 	Filter.Insert("Agreement"         , Object.Agreement);

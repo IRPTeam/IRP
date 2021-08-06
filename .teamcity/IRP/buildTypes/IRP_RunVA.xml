@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<build-type xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="7f2b4266-2190-45dc-8a50-eaa7d2e2fa01" xsi:noNamespaceSchemaLocation="https://www.jetbrains.com/teamcity/schemas/2020.1/project-config.xsd">
+<build-type xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="7f2b4266-2190-45dc-8a50-eaa7d2e2fa01" xsi:noNamespaceSchemaLocation="https://www.jetbrains.com/teamcity/schemas/2021.1/project-config.xsd">
   <name>3. RunVA</name>
   <description />
   <settings>
@@ -21,6 +21,7 @@
       <param name="env.LogFile1C" value="%system.teamcity.build.workingDir%\Log1C.log" />
       <param name="env.OScript" value="C:/OneScript" />
       <param name="env.PID_ID" value="0" />
+      <param name="env.PortStartNumber" value="0" />
       <param name="env.RunSaasMode" value="false" spec="checkbox uncheckedValue='false' display='normal' checkedValue='true'" />
       <param name="env.SaasTag" value="SaasPrepare" />
       <param name="env.SonarParamCover" value="" />
@@ -98,6 +99,24 @@ rem coverage-cli start --infobase %env.Database1CName%  --debugger http://localh
           <param name="use.custom.script" value="true" />
         </parameters>
       </runner>
+      <runner id="RUNNER_61" name="Set port number" type="jetbrains_powershell">
+        <parameters>
+          <param name="jetbrains_powershell_execution" value="PS1" />
+          <param name="jetbrains_powershell_noprofile" value="true" />
+          <param name="jetbrains_powershell_script_code"><![CDATA[if("%teamcity.agent.name%" -eq "Agent One"){
+	Write-Host "##teamcity[setParameter name='env.PortStartNumber' value='49000']"
+} elseif ("%teamcity.agent.name%" -eq "BuildAgentTwo"){
+	Write-Host "##teamcity[setParameter name='env.PortStartNumber' value='50000']"
+}
+ elseif ("%teamcity.agent.name%" -eq "BuildAgentThree"){
+	Write-Host "##teamcity[setParameter name='env.PortStartNumber' value='51000']"
+} else {
+	Write-Host "##teamcity[buildStop comment='rename agent' readdToQueue='true']"
+}]]></param>
+          <param name="jetbrains_powershell_script_mode" value="CODE" />
+          <param name="teamcity.step.mode" value="default" />
+        </parameters>
+      </runner>
       <runner id="RUNNER_19" name="Run VA in SaaS" type="jetbrains_powershell">
         <parameters>
           <param name="jetbrains_powershell_execution" value="PS1" />
@@ -113,7 +132,7 @@ $TagArray = @(%env.TagsFullList%)
 #Jobs count (how much VA can be running at the same time)
 $StreamCountMax = "%env.StreamCount%"
 #Start test client port
-$startPort = 48010
+$startPort = %env.PortStartNumber%
 $workingDir = "%system.teamcity.build.workingDir%"
 $FeaturePath = "%env.VA.FeaturePath%" #inside 2 folders - External and Internal. In External has to be export steps, in internal - scenarios.
 $OScriptLib = "%env.OScript%"
@@ -232,7 +251,7 @@ $VanessaRun = {
             }
         ],
         'runtestclientwithmaximizedwindow': false,
-        'testclienttimeout': 25
+        'testclienttimeout': 60
     },
     'Version': '1.2.034',
     'VersionVA': 'ver 1.2.034',

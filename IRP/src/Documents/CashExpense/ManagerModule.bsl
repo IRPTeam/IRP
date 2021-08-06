@@ -104,7 +104,9 @@ Function PaymentList()
 		|	PaymentList.Ref.Account AS Account,
 		|	PaymentList.Currency AS Currency,
 		|	PaymentList.ExpenseType AS ExpenseType,
-		|	PaymentList.NetAmount AS Amount,
+		|	PaymentList.NetAmount AS NetAmount,
+		|	PaymentList.TaxAmount AS TaxAmount,
+		|	PaymentList.TotalAmount AS TotalAmount,
 		|	PaymentList.Key,
 		|	PaymentList.ProfitLossCenter,
 		|	PaymentList.AdditionalAnalytic,
@@ -120,6 +122,7 @@ Function R3010B_CashOnHand()
 	Return
 		"SELECT
 		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	PaymentList.TotalAmount AS Amount,
 		|	*
 		|INTO R3010B_CashOnHand
 		|FROM
@@ -131,6 +134,7 @@ EndFunction
 Function R5022T_Expenses()
 	Return
 		"SELECT
+		|	PaymentList.NetAmount AS Amount,
 		|	*
 		|INTO R5022T_Expenses
 		|FROM

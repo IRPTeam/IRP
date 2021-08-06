@@ -607,38 +607,38 @@ Scenario: _018013 create PI using form link/unlink
 			| 'Description'           |
 			| 'Store 02' |
 		And I select current line in "List" table
+		And I move to "Other" tab
+		And I click Choice button of the field named "Branch"
+		And I go to line in "List" table
+			| 'Description'             |
+			| 'Front office' |
+		And I select current line in "List" table	
 	* Select items from basis documents
 		And I click the button named "AddBasisDocuments"		
-		And I go to line in "BasisesTree" table
-			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
-			| 'TRY'      | '150,00' | '2,000'   | 'Service, Interner'   | 'pcs'  | 'No'  |
-		And I change "Use" checkbox in "BasisesTree" table
-		And I finish line editing in "BasisesTree" table
 		And I go to line in "BasisesTree" table
 			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
 			| 'TRY'      | '100,00' | '5,000'    | 'Dress, S/Yellow'  | 'pcs'  | 'No'  |
 		And I change "Use" checkbox in "BasisesTree" table
 		And I finish line editing in "BasisesTree" table
 		And I go to line in "BasisesTree" table
-			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
-			| 'TRY'      | '8 400,00' | '2,000'    | 'Boots, 37/18SD'  | 'Boots (12 pcs)'  | 'No'  |
-		And I change "Use" checkbox in "BasisesTree" table
+			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation'  | 'Unit' | 'Use' |
+			| 'TRY'      | '150,00' | '2,000'    | 'Service, Interner' | 'pcs'  | 'No'  |
+		And I set "Use" checkbox in "BasisesTree" table
 		And I finish line editing in "BasisesTree" table
 		And I click "Ok" button
 		And I click "Show row key" button
 	* Check RowIDInfo
 		And "RowIDInfo" table contains lines
 		| '#' | 'Basis'                                        | 'Next step' | 'Q'      | 'Current step' |
-		| '1' | 'Sales order 15 dated 01.02.2021 19:50:45'     | ''          | '24,000' | 'PO&PI'        |
-		| '2' | 'Purchase order 217 dated 12.02.2021 12:45:05' | ''          | '5,000'  | 'PI&GR'        |
-		| '3' | 'Purchase order 217 dated 12.02.2021 12:45:05' | ''          | '2,000'  | 'PI'           |
-		Then the number of "RowIDInfo" table lines is "равно" "3"
+		| '1' | 'Purchase order 217 dated 12.02.2021 12:45:05' | ''          | '5,000'  | 'PI&GR'        |
+		| '2' | 'Purchase order 217 dated 12.02.2021 12:45:05' | ''          | '2,000'  | 'PI'           |
+		Then the number of "RowIDInfo" table lines is "равно" "2"
 	* Unlink line
 		And I click the button named "LinkUnlinkBasisDocuments"
 		Then "Link / unlink document row" window is opened
 		And I go to line in "ItemListRows" table
 			| '#' | 'Quantity' | 'Row presentation' | 'Store'    | 'Unit' |
-			| '3' | '2,000'    | 'Service, Interner'   | 'Store 02' | 'pcs'  |
+			| '2' | '2,000'    | 'Service, Interner'   | 'Store 02' | 'pcs'  |
 		And I go to line in "ResultsTree" table
 			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' |
 			| 'TRY'      | '150,00' | '2,000'    | 'Service, Interner'    | 'pcs'  |
@@ -647,20 +647,18 @@ Scenario: _018013 create PI using form link/unlink
 		And I click "Save" button	
 		And "RowIDInfo" table contains lines
 			| '#' | 'Basis'                                        | 'Next step' | 'Q'      | 'Current step' |
-			| '1' | 'Sales order 15 dated 01.02.2021 19:50:45'     | 'GR'        | '24,000' | 'PO&PI'        |
-			| '2' | 'Purchase order 217 dated 12.02.2021 12:45:05' | 'GR'        | '5,000'  | 'PI&GR'        |
-			| '3' | ''                                             | ''          | '2,000'  | ''             |
-		Then the number of "RowIDInfo" table lines is "равно" "3"
+			| '1' | 'Purchase order 217 dated 12.02.2021 12:45:05' | 'GR'        | '5,000'  | 'PI&GR'        |
+			| '2' | ''                                             | ''          | '2,000'  | ''             |
+		Then the number of "RowIDInfo" table lines is "равно" "2"
 		And "ItemList" table contains lines
 			| 'Item'    | 'Item key' | 'Sales order'                              | 'Purchase order'                               |
-			| 'Boots'   | '37/18SD'  | 'Sales order 15 dated 01.02.2021 19:50:45' | ''                                             |
 			| 'Dress'   | 'S/Yellow' | ''                                         | 'Purchase order 217 dated 12.02.2021 12:45:05' |
 			| 'Service' | 'Interner' | ''                                         | ''                                             |
 	* Link line
 		And I click the button named "LinkUnlinkBasisDocuments"
 		And I go to line in "ItemListRows" table
 			| '#' | 'Quantity' | 'Row presentation'  | 'Store'    | 'Unit' |
-			| '3' | '2,000'    | 'Service, Interner' | 'Store 02' | 'pcs'  |
+			| '2' | '2,000'    | 'Service, Interner' | 'Store 02' | 'pcs'  |
 		And I activate field named "ItemListRowsRowPresentation" in "ItemListRows" table
 		And I go to line in "BasisesTree" table
 			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation'  | 'Unit' |
@@ -669,30 +667,27 @@ Scenario: _018013 create PI using form link/unlink
 		And I click "Ok" button
 		And "RowIDInfo" table contains lines
 			| '#' | 'Basis'                                        | 'Next step' | 'Q'      | 'Current step' |
-			| '1' | 'Sales order 15 dated 01.02.2021 19:50:45'     | ''          | '24,000' | 'PO&PI'        |
-			| '2' | 'Purchase order 217 dated 12.02.2021 12:45:05' | ''          | '5,000'  | 'PI&GR'        |
-			| '3' | 'Purchase order 217 dated 12.02.2021 12:45:05' | ''          | '2,000'  | 'PI'           |
-		Then the number of "RowIDInfo" table lines is "равно" "3"
+			| '1' | 'Purchase order 217 dated 12.02.2021 12:45:05' | ''          | '5,000'  | 'PI&GR'        |
+			| '2' | 'Purchase order 217 dated 12.02.2021 12:45:05' | ''          | '2,000'  | 'PI'           |
+		Then the number of "RowIDInfo" table lines is "равно" "2"
 		And "ItemList" table contains lines
 			| 'Item'    | 'Item key' | 'Sales order'                              | 'Purchase order'                               |
-			| 'Boots'   | '37/18SD'  | 'Sales order 15 dated 01.02.2021 19:50:45' | ''                                             |
 			| 'Dress'   | 'S/Yellow' | ''                                         | 'Purchase order 217 dated 12.02.2021 12:45:05' |
 			| 'Service' | 'Interner' | ''                                         | 'Purchase order 217 dated 12.02.2021 12:45:05' |
 	* Delete string, add it again, change unit
 		And I go to line in "ItemList" table
-			| 'Item'  | 'Item key' | 'Sales order'                              |
-			| 'Boots' | '37/18SD'  | 'Sales order 15 dated 01.02.2021 19:50:45' |
+			| 'Item'    | 'Item key' | 'Sales order'                              | 'Purchase order'                               |
+			| 'Dress'   | 'S/Yellow' | ''                                         | 'Purchase order 217 dated 12.02.2021 12:45:05' |
 		And in the table "ItemList" I click the button named "ItemListContextMenuDelete"
 		And I click the button named "AddBasisDocuments"
 		And I go to line in "BasisesTree" table
 			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
-			| 'TRY'      | '8 400,00' | '2,000'    | 'Boots, 37/18SD'  | 'Boots (12 pcs)'  | 'No'  |
+			| 'TRY'      | '100,00' | '5,000'    | 'Dress, S/Yellow'  | 'pcs'  | 'No'  |
 		And I change "Use" checkbox in "BasisesTree" table
 		And I finish line editing in "BasisesTree" table
 		And I click "Ok" button
 		And "ItemList" table contains lines
 			| 'Item'    | 'Item key' | 'Sales order'                              | 'Purchase order'                               |
-			| 'Boots'   | '37/18SD'  | 'Sales order 15 dated 01.02.2021 19:50:45' | ''                                             |
 			| 'Dress'   | 'S/Yellow' | ''                                         | 'Purchase order 217 dated 12.02.2021 12:45:05' |
 			| 'Service' | 'Interner' | ''                                         | 'Purchase order 217 dated 12.02.2021 12:45:05' |
 		And I go to line in "ItemList" table
@@ -707,10 +702,9 @@ Scenario: _018013 create PI using form link/unlink
 		And I select current line in "List" table
 		And "RowIDInfo" table contains lines
 			| 'Basis'                                        | 'Next step' | 'Q'      | 'Current step' |
-			| 'Sales order 15 dated 01.02.2021 19:50:45'     | ''          | '24,000' | 'PO&PI'        |
 			| 'Purchase order 217 dated 12.02.2021 12:45:05' | ''          | '40,000' | 'PI&GR'        |
 			| 'Purchase order 217 dated 12.02.2021 12:45:05' | ''          | '2,000'  | 'PI'           |
-		Then the number of "RowIDInfo" table lines is "равно" "3"
+		Then the number of "RowIDInfo" table lines is "равно" "2"
 		And I click "Save" button
 		And I close all client application windows
 

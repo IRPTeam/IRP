@@ -595,6 +595,12 @@ Scenario: _028515 create document Sales return based on SRO
 				| 'Description'  |
 				| 'Basic Partner terms, TRY' | 
 			And I select current line in "List" table
+			And I move to "Other" tab
+			And I click Choice button of the field named "Branch"
+			And I go to line in "List" table
+				| 'Description'             |
+				| 'Distribution department' |
+			And I select current line in "List" table	
 		* Select items from basis documents
 			And I click the button named "AddBasisDocuments"
 			And "BasisesTree" table contains lines

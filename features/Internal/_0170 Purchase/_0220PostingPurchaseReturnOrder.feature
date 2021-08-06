@@ -431,6 +431,12 @@ Scenario: _022015 create PRO using form link/unlink
 			| 'Description'           |
 			| 'Store 02' |
 		And I select current line in "List" table
+		And I move to "Other" tab
+		And I click Choice button of the field named "Branch"
+		And I go to line in "List" table
+			| 'Description'             |
+			| 'Front office' |
+		And I select current line in "List" table	
 	* Select items from basis documents
 		And I click the button named "AddBasisDocuments"		
 		And I go to line in "BasisesTree" table

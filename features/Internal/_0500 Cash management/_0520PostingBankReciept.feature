@@ -210,8 +210,8 @@ Scenario: _052001 create Bank receipt (independently)
 			And I select current line in "PaymentList" table
 			And I click choice button of "Financial movement type" attribute in "PaymentList" table
 			And I go to line in "List" table
-				| 'Description'     | 'Type'          |
-				| 'Movement type 1' | 'Cash movement' |
+				| 'Description'     |
+				| 'Movement type 1' |
 			And I select current line in "List" table		
 			And I finish line editing in "PaymentList" table
 		And I click the button named "FormPost"

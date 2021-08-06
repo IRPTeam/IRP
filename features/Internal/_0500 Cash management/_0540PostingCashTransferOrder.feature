@@ -97,15 +97,15 @@ Scenario: _054001 create Cash transfer order (from Cash/Bank accounts to Cash/Ba
 			| 'Second'       |
 		And I select current line in "List" table
 	* Filling Movement type
-		And I click Select button of "Send movement type" field
+		And I click Select button of "Send financial movement type" field
 		And I go to line in "List" table
-			| 'Description'     | 'Type'          |
-			| 'Movement type 1' | 'Cash movement' |
+			| 'Description'     |
+			| 'Movement type 1' |
 		And I select current line in "List" table
-		And I click Select button of "Receive movement type" field
+		And I click Select button of "Receive financial movement type" field
 		And I go to line in "List" table
-			| 'Description'     | 'Type'          |
-			| 'Movement type 1' | 'Cash movement' |
+			| 'Description'     |
+			| 'Movement type 1' |
 		And I select current line in "List" table	
 	And I click the button named "FormPost"
 	And I delete "$$NumberCashTransferOrder054001$$" variable
@@ -271,15 +271,15 @@ Scenario: _054004 create Cash transfer order (from Cash/Bank accounts to Cash/Ba
 			| 'Second'       |
 		And I select current line in "List" table
 	* Filling Movement type
-		And I click Select button of "Send movement type" field
+		And I click Select button of "Send financial movement type" field
 		And I go to line in "List" table
-			| 'Description'     | 'Type'          |
-			| 'Movement type 1' | 'Cash movement' |
+			| 'Description'     |
+			| 'Movement type 1' |
 		And I select current line in "List" table
-		And I click Select button of "Receive movement type" field
+		And I click Select button of "Receive financial movement type" field
 		And I go to line in "List" table
-			| 'Description'     | 'Type'          |
-			| 'Movement type 1' | 'Cash movement' |
+			| 'Description'     |
+			| 'Movement type 1' |
 		And I select current line in "List" table	
 	And I click the button named "FormPost"
 	And I delete "$$NumberCashTransferOrder054004$$" variable
@@ -393,15 +393,15 @@ Scenario: _054006 create Cash transfer order (from Cash/Bank accounts to bank ac
 			| 'Second'       |
 		And I select current line in "List" table
 	* Filling Movement type
-		And I click Select button of "Send movement type" field
+		And I click Select button of "Send financial movement type" field
 		And I go to line in "List" table
-			| 'Description'     | 'Type'          |
-			| 'Movement type 1' | 'Cash movement' |
+			| 'Description'     |
+			| 'Movement type 1' |
 		And I select current line in "List" table
-		And I click Select button of "Receive movement type" field
+		And I click Select button of "Receive financial movement type" field
 		And I go to line in "List" table
-			| 'Description'     | 'Type'          |
-			| 'Movement type 1' | 'Cash movement' |
+			| 'Description'     |
+			| 'Movement type 1' |
 		And I select current line in "List" table	
 	And I click the button named "FormPost"
 	And I delete "$$NumberCashTransferOrder054006$$" variable
@@ -501,15 +501,15 @@ Scenario: _054007 create Cash transfer order from bank account to Cash account (
 			| 'Second'       |
 		And I select current line in "List" table
 	* Filling Movement type
-		And I click Select button of "Send movement type" field
+		And I click Select button of "Send financial movement type" field
 		And I go to line in "List" table
-			| 'Description'     | 'Type'          |
-			| 'Movement type 1' | 'Cash movement' |
+			| 'Description'     |
+			| 'Movement type 1' |
 		And I select current line in "List" table
-		And I click Select button of "Receive movement type" field
+		And I click Select button of "Receive financial movement type" field
 		And I go to line in "List" table
-			| 'Description'     | 'Type'          |
-			| 'Movement type 1' | 'Cash movement' |
+			| 'Description'     |
+			| 'Movement type 1' |
 		And I select current line in "List" table	
 	And I click the button named "FormPost"
 	And I delete "$$NumberCashTransferOrder054007$$" variable
@@ -618,15 +618,15 @@ Scenario: _054008 currency exchange within one Cash/Bank accounts with exchange 
 			| 'Second'       |
 		And I select current line in "List" table
 	* Filling Movement type
-		And I click Select button of "Send movement type" field
+		And I click Select button of "Send financial movement type" field
 		And I go to line in "List" table
-			| 'Description'     | 'Type'          |
-			| 'Movement type 1' | 'Cash movement' |
+			| 'Description'     |
+			| 'Movement type 1' |
 		And I select current line in "List" table
-		And I click Select button of "Receive movement type" field
+		And I click Select button of "Receive financial movement type" field
 		And I go to line in "List" table
-			| 'Description'     | 'Type'          |
-			| 'Movement type 1' | 'Cash movement' |
+			| 'Description'     |
+			| 'Movement type 1' |
 		And I select current line in "List" table	
 	And I click the button named "FormPost"
 	And I delete "$$NumberCashTransferOrder054008$$" variable
@@ -778,15 +778,15 @@ Scenario: _054009 currency exchange within one Cash/Bank accounts with exchange 
 			| 'Second'       |
 		And I select current line in "List" table
 	* Filling Movement type
-		And I click Select button of "Send movement type" field
+		And I click Select button of "Send financial movement type" field
 		And I go to line in "List" table
-			| 'Description'     | 'Type'          |
-			| 'Movement type 1' | 'Cash movement' |
+			| 'Description'     |
+			| 'Movement type 1' |
 		And I select current line in "List" table
-		And I click Select button of "Receive movement type" field
+		And I click Select button of "Receive financial movement type" field
 		And I go to line in "List" table
-			| 'Description'     | 'Type'          |
-			| 'Movement type 1' | 'Cash movement' |
+			| 'Description'     |
+			| 'Movement type 1' |
 		And I select current line in "List" table	
 	And I click the button named "FormPost"
 	And I delete "$$NumberCashTransferOrder054009$$" variable
@@ -900,15 +900,14 @@ Scenario: _054012 exchange currency from bank account (Cash Transfer Order)
 			| 'Second'       |
 		And I select current line in "List" table
 	* Filling Movement type
-		And I click Select button of "Send movement type" field
+		And I click Select button of "Send financial movement type" field
 		And I go to line in "List" table
-			| 'Description'     | 'Type'          |
-			| 'Movement type 1' | 'Cash movement' |
-		And I select current line in "List" table
-		And I click Select button of "Receive movement type" field
+			| 'Description'     |
+			| 'Movement type 1' |
+		And I click Select button of "Receive financial movement type" field
 		And I go to line in "List" table
-			| 'Description'     | 'Type'          |
-			| 'Movement type 1' | 'Cash movement' |
+			| 'Description'     |
+			| 'Movement type 1' |
 		And I select current line in "List" table	
 	And I click the button named "FormPost"
 	And I delete "$$NumberCashTransferOrder054012$$" variable

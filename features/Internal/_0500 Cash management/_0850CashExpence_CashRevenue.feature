@@ -83,8 +83,8 @@ Scenario: _085001 check tax calculation in the document Cash revenue
 		And I select current line in "PaymentList" table
 		And I click choice button of "Financial movement type" attribute in "PaymentList" table
 		And I go to line in "List" table
-			| 'Description'     | 'Type'          |
-			| 'Movement type 1' | 'Cash movement' |
+			| 'Description'     |
+			| 'Movement type 1' |
 		And I select current line in "List" table		
 		And I finish line editing in "PaymentList" table
 	* Tax calculation check
@@ -266,8 +266,8 @@ Scenario: _085006 check Cash expense creation
 		And I select current line in "PaymentList" table
 		And I click choice button of "Financial movement type" attribute in "PaymentList" table
 		And I go to line in "List" table
-			| 'Description'     | 'Type'          |
-			| 'Movement type 1' | 'Cash movement' |
+			| 'Description'     |
+			| 'Movement type 1' |
 		And I select current line in "List" table		
 		And I finish line editing in "PaymentList" table
 		And I click the button named "FormPost"

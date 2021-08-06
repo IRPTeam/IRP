@@ -104,7 +104,7 @@ Scenario: _080001 create Incoming payment order
 		And I activate "Amount" field in "PaymentList" table
 		And I input "1 000,00" text in "Amount" field of "PaymentList" table
 		And I select current line in "PaymentList" table
-		And I click choice button of the attribute named "PaymentListMovementType" in "PaymentList" table
+		And I click choice button of the attribute named "PaymentListFinancialMovementType" in "PaymentList" table
 		And I go to line in "List" table
 			| 'Description'     | 'Type'          |
 			| 'Movement type 1' | 'Cash movement' |
@@ -212,9 +212,9 @@ Scenario: _080006 create Outgoing payment order
 		And I select current line in "List" table
 		And I activate "Amount" field in "PaymentList" table
 		And I input "3 000,00" text in "Amount" field of "PaymentList" table
-		And I activate "Movement type" field in "PaymentList" table
+		And I activate "Financial movement type" field in "PaymentList" table
 		And I select current line in "PaymentList" table
-		And I click choice button of "Movement type" attribute in "PaymentList" table
+		And I click choice button of "Financial movement type" attribute in "PaymentList" table
 		And I go to line in "List" table
 			| 'Description'     | 'Type'          |
 			| 'Movement type 1' | 'Cash movement' |

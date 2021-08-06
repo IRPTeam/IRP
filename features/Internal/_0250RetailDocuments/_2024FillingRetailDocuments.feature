@@ -1935,9 +1935,9 @@ Scenario:  _0154149 create Cash statement
 			And I go to line in "PaymentList" table
 				| '#' | 'Account'      | 'Amount'   | 'Currency' | 'Payment type' |
 				| '2' | 'Cash desk №4' | '1 450,00' | 'TRY'      | 'Cash'         |
-			And I activate "Movement type" field in "PaymentList" table
+			And I activate "Financial movement type" field in "PaymentList" table
 			And I select current line in "PaymentList" table
-			And I click choice button of "Movement type" attribute in "PaymentList" table
+			And I click choice button of "Financial movement type" attribute in "PaymentList" table
 			And I go to line in "List" table
 				| 'Description'     | 'Type'          |
 				| 'Movement type 1' | 'Cash movement' |	
@@ -1947,7 +1947,7 @@ Scenario:  _0154149 create Cash statement
 				| '#' | 'Account'      | 'Amount' | 'Commission' | 'Currency' | 'Payment type' |
 				| '1' | 'Transit Main' | '400,00' | '64,50'      | 'TRY'      | 'Card 01'      |
 			And I select current line in "PaymentList" table
-			And I click choice button of "Movement type" attribute in "PaymentList" table
+			And I click choice button of "Financial movement type" attribute in "PaymentList" table
 			And I go to line in "List" table
 				| 'Description'     | 'Type'          |
 				| 'Movement type 1' | 'Cash movement' |
@@ -1974,7 +1974,7 @@ Scenario:  _0154149 create Cash statement
 			| 'Document registrations records'  | ''                              | ''          | ''             | ''        | ''                          | ''                  | ''         | ''                    | ''        | ''           | ''                             | ''                | ''                | ''                     |
 			| 'Register  "R3035 Cash planning"' | ''                              | ''          | ''             | ''        | ''                          | ''                  | ''         | ''                    | ''        | ''           | ''                             | ''                | ''                | ''                     |
 			| ''                                | 'Period'                        | 'Resources' | 'Dimensions'   | ''        | ''                          | ''                  | ''         | ''                    | ''        | ''           | ''                             | ''                | ''                | 'Attributes'           |
-			| ''                                | ''                              | 'Amount'    | 'Company'      | 'Branch'  | 'Basis document'            | 'Account'           | 'Currency' | 'Cash flow direction' | 'Partner' | 'Legal name' | 'Multi currency movement type' | 'Movement type'   | 'Planning period' | 'Deferred calculation' |
+			| ''                                | ''                              | 'Amount'    | 'Company'      | 'Branch'  | 'Basis document'            | 'Account'           | 'Currency' | 'Cash flow direction' | 'Partner' | 'Legal name' | 'Multi currency movement type' | 'Financial movement type'   | 'Planning period' | 'Deferred calculation' |
 			| ''                                | '$$DateCashStatement01541491$$' | '68,48'     | 'Main Company' | 'Shop 01' | '$$CashStatement01541491$$' | 'Bank account, TRY' | 'USD'      | 'Incoming'            | ''        | ''           | 'Reporting currency'           | 'Movement type 1' | ''                | 'No'                   |
 			| ''                                | '$$DateCashStatement01541491$$' | '400'       | 'Main Company' | 'Shop 01' | '$$CashStatement01541491$$' | 'Bank account, TRY' | 'TRY'      | 'Incoming'            | ''        | ''           | 'Local currency'               | 'Movement type 1' | ''                | 'No'                   |
 			| ''                                | '$$DateCashStatement01541491$$' | '400'       | 'Main Company' | 'Shop 01' | '$$CashStatement01541491$$' | 'Bank account, TRY' | 'TRY'      | 'Incoming'            | ''        | ''           | 'en description is empty'      | 'Movement type 1' | ''                | 'No'                   |

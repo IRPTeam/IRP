@@ -5722,9 +5722,21 @@ EndFunction
 Procedure FillQueryParameters(Query, FilterValues)
 	For Each Attribute In Metadata.Catalogs.RowIDs.Attributes Do
 		Value = Undefined; Use = False;
-		If FilterValues.Property(Attribute.Name) And ValueIsFilled(FilterValues[Attribute.Name]) Then
-			Value = FilterValues[Attribute.Name];
-			Use = True;
+		If FilterValues.Property(Attribute.Name) Then
+			If TrimAll(Upper(Attribute.Name)) = TrimAll(Upper("Branch")) Then
+				If ValueIsFilled(FilterValues[Attribute.Name]) Then
+					Value = FilterValues[Attribute.Name];
+					Use = True;
+				Else
+					Value = Catalogs.BusinessUnits.EmptyRef();
+					Use = True;
+				EndIf;
+			Else
+				If ValueIsFilled(FilterValues[Attribute.Name]) Then
+					Value = FilterValues[Attribute.Name];
+					Use = True;
+				EndIf;
+			EndIf;
 		EndIf;
 		Query.SetParameter("Filter_" + Attribute.Name, Use);
 		Query.SetParameter(Attribute.Name, Value);

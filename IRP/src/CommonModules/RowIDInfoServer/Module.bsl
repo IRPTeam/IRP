@@ -3546,6 +3546,11 @@ Procedure ApplyFilterSet_SO_ForSI(Query)
 	|				ELSE FALSE
 	|			END
 	|			AND CASE
+	|				WHEN &Filter_Branch
+	|					THEN RowRef.Branch = &Branch
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
 	|				WHEN &Filter_Partner
 	|					THEN RowRef.Partner = &Partner
 	|				ELSE FALSE
@@ -3607,6 +3612,11 @@ Procedure ApplyFilterSet_SO_ForSC(Query)
 	|				ELSE FALSE
 	|			END
 	|			AND CASE
+	|				WHEN &Filter_Branch
+	|					THEN RowRef.Branch = &Branch
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
 	|				WHEN &Filter_Partner
 	|					THEN RowRef.Partner = &Partner
 	|				ELSE FALSE
@@ -3658,6 +3668,11 @@ Procedure ApplyFilterSet_SO_ForPO_ForPI(Query)
 	|				ELSE FALSE
 	|			END
 	|			AND CASE
+	|				WHEN &Filter_Branch
+	|					THEN RowRef.Branch = &Branch
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
 	|				WHEN &Filter_ProcurementMethod
 	|					THEN RowRef.ProcurementMethod = &ProcurementMethod
 	|				ELSE FALSE
@@ -3697,6 +3712,11 @@ Procedure ApplyFilterSet_SC_ForSI(Query)
 	|			CASE
 	|				WHEN &Filter_Company
 	|					THEN RowRef.Company = &Company
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Branch
+	|					THEN RowRef.Branch = &Branch
 	|				ELSE FALSE
 	|			END
 	|			AND CASE
@@ -3752,6 +3772,11 @@ Procedure ApplyFilterSet_SI_ForSC(Query)
 	|				ELSE FALSE
 	|			END
 	|			AND CASE
+	|				WHEN &Filter_Branch
+	|					THEN RowRef.Branch = &Branch
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
 	|				WHEN &Filter_Partner
 	|					THEN RowRef.Partner = &Partner
 	|				ELSE FALSE
@@ -3801,6 +3826,11 @@ Procedure ApplyFilterSet_PO_ForPI(Query)
 	|			CASE
 	|				WHEN &Filter_Company
 	|					THEN RowRef.Company = &Company
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Branch
+	|					THEN RowRef.Branch = &Branch
 	|				ELSE FALSE
 	|			END
 	|			AND CASE
@@ -3865,6 +3895,11 @@ Procedure ApplyFilterSet_PO_ForGR(Query)
 	|				ELSE FALSE
 	|			END
 	|			AND CASE
+	|				WHEN &Filter_Branch
+	|					THEN RowRef.Branch = &Branch
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
 	|				WHEN &Filter_Partner
 	|					THEN RowRef.Partner = &Partner
 	|				ELSE FALSE
@@ -3903,9 +3938,9 @@ Procedure ApplyFilterSet_GR_ForSI_ForSC(Query)
 	|INTO RowIDMovements_GR_ForSI_ForSC
 	|FROM
 	|	AccumulationRegister.TM1010B_RowIDMovements.Balance(&Period, Step IN (&StepArray)
-	|	AND (Basis IN (&Basises) 
-	|     OR RowRef.Basis IN (&Basises)
-	|	  OR RowRef IN
+	|	AND (Basis IN (&Basises)
+	|	OR RowRef.Basis IN (&Basises)
+	|	OR RowRef IN
 	|		(SELECT
 	|			RowRef.Ref AS Ref
 	|		FROM
@@ -3940,7 +3975,7 @@ Procedure ApplyFIlterSet_PI_ForSI_ForSC(Query)
 	|INTO RowIDMovements_PI_ForSI_ForSC
 	|FROM
 	|	AccumulationRegister.TM1010B_RowIDMovements.Balance(&Period, Step IN (&StepArray)
-	|	AND (Basis IN (&Basises))
+	|	AND Basis IN (&Basises)
 	|	OR RowRef.Basis IN (&Basises)
 	|	OR RowRef IN
 	|		(SELECT
@@ -3988,6 +4023,11 @@ Procedure ApplyFilterSet_GR_ForPI(Query)
 	|			CASE
 	|				WHEN &Filter_Company
 	|					THEN RowRef.Company = &Company
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Branch
+	|					THEN RowRef.Branch = &Branch
 	|				ELSE FALSE
 	|			END
 	|			AND CASE
@@ -4043,6 +4083,11 @@ Procedure ApplyFilterSet_PI_ForGR(Query)
 	|				ELSE FALSE
 	|			END
 	|			AND CASE
+	|				WHEN &Filter_Branch
+	|					THEN RowRef.Branch = &Branch
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
 	|				WHEN &Filter_Partner
 	|					THEN RowRef.Partner = &Partner
 	|				ELSE FALSE
@@ -4080,8 +4125,7 @@ Procedure ApplyFIlterSet_ITO_ForIT(Query)
 	|	RowIDMovements.QuantityBalance AS Quantity
 	|INTO RowIDMovements_ITO_ForIT
 	|FROM
-	|	AccumulationRegister.TM1010B_RowIDMovements.Balance(&Period,
-	|	Step IN (&StepArray)
+	|	AccumulationRegister.TM1010B_RowIDMovements.Balance(&Period, Step IN (&StepArray)
 	|	AND Basis IN (&Basises)
 	|	OR RowRef IN
 	|		(SELECT
@@ -4098,6 +4142,11 @@ Procedure ApplyFIlterSet_ITO_ForIT(Query)
 	|				WHEN &Filter_Company
 	|					THEN RowRef.Company = &Company
 	|				ELSE TRUE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Branch
+	|					THEN RowRef.Branch = &Branch
+	|				ELSE FALSE
 	|			END
 	|			AND CASE
 	|				WHEN &Filter_ItemKey
@@ -4141,6 +4190,11 @@ Procedure ApplyFilterSet_IT_ForSC(Query)
 	|				ELSE FALSE
 	|			END
 	|			AND CASE
+	|				WHEN &Filter_Branch
+	|					THEN RowRef.Branch = &Branch
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
 	|				WHEN &Filter_TransactionType
 	|					THEN RowRef.TransactionTypeSC = &TransactionType
 	|				ELSE FALSE
@@ -4168,8 +4222,7 @@ Procedure ApplyFilterSet_IT_ForGR(Query)
 	|	RowIDMovements.QuantityBalance AS Quantity
 	|INTO RowIDMovements_IT_ForGR
 	|FROM
-	|	AccumulationRegister.TM1010B_RowIDMovements.Balance(&Period,
-	|	Step IN (&StepArray)
+	|	AccumulationRegister.TM1010B_RowIDMovements.Balance(&Period, Step IN (&StepArray)
 	|	AND (Basis IN (&Basises)
 	|	OR RowRef IN
 	|		(SELECT
@@ -4180,6 +4233,11 @@ Procedure ApplyFilterSet_IT_ForGR(Query)
 	|			CASE
 	|				WHEN &Filter_Company
 	|					THEN RowRef.Company = &Company
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Branch
+	|					THEN RowRef.Branch = &Branch
 	|				ELSE FALSE
 	|			END
 	|			AND CASE
@@ -4224,6 +4282,11 @@ Procedure ApplyFilterSet_ISR_ForITO_ForPO_ForPI(Query)
 	|				ELSE FALSE
 	|			END
 	|			AND CASE
+	|				WHEN &Filter_Branch
+	|					THEN RowRef.Branch = &Branch
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
 	|				WHEN &Filter_ItemKey
 	|					THEN RowRef.ItemKey = &ItemKey
 	|				ELSE TRUE
@@ -4255,11 +4318,6 @@ Procedure ApplyFilterSet_PhysicalInventory_ForSurplus_ForWriteOff(Query)
 	|			Catalog.RowIDs AS RowRef
 	|		WHERE
 	|			CASE
-	|				WHEN &Filter_Company
-	|					THEN RowRef.Company = &Company
-	|				ELSE TRUE
-	|			END
-	|			AND CASE
 	|				WHEN &Filter_ItemKey
 	|					THEN RowRef.ItemKey = &ItemKey
 	|				ELSE TRUE
@@ -4294,6 +4352,11 @@ Procedure ApplyFilterSet_SC_ForPR(Query)
 	|			CASE
 	|				WHEN &Filter_Company
 	|					THEN RowRef.Company = &Company
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Branch
+	|					THEN RowRef.Branch = &Branch
 	|				ELSE FALSE
 	|			END
 	|			AND CASE
@@ -4349,6 +4412,11 @@ Procedure ApplyFilterSet_GR_ForSR(Query)
 	|				ELSE FALSE
 	|			END
 	|			AND CASE
+	|				WHEN &Filter_Branch
+	|					THEN RowRef.Branch = &Branch
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
 	|				WHEN &Filter_Partner
 	|					THEN RowRef.Partner = &Partner
 	|				ELSE FALSE
@@ -4398,6 +4466,11 @@ Procedure ApplyFilterSet_PR_ForSC(Query)
 	|			CASE
 	|				WHEN &Filter_Company
 	|					THEN RowRef.Company = &Company
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Branch
+	|					THEN RowRef.Branch = &Branch
 	|				ELSE FALSE
 	|			END
 	|			AND CASE
@@ -4453,6 +4526,11 @@ Procedure ApplyFilterSet_SR_ForGR(Query)
 	|				ELSE FALSE
 	|			END
 	|			AND CASE
+	|				WHEN &Filter_Branch
+	|					THEN RowRef.Branch = &Branch
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
 	|				WHEN &Filter_Partner
 	|					THEN RowRef.Partner = &Partner
 	|				ELSE FALSE
@@ -4502,6 +4580,11 @@ Procedure ApplyFilterSet_PRO_ForPR(Query)
 	|			CASE
 	|				WHEN &Filter_Company
 	|					THEN RowRef.Company = &Company
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Branch
+	|					THEN RowRef.Branch = &Branch
 	|				ELSE FALSE
 	|			END
 	|			AND CASE
@@ -4567,6 +4650,11 @@ Procedure ApplyFilterSet_SRO_ForSR(Query)
 	|				ELSE FALSE
 	|			END
 	|			AND CASE
+	|				WHEN &Filter_Branch
+	|					THEN RowRef.Branch = &Branch
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
 	|				WHEN &Filter_Partner
 	|					THEN RowRef.Partner = &Partner
 	|				ELSE FALSE
@@ -4625,6 +4713,11 @@ Procedure ApplyFilterSet_SI_ForSR_ForSRO(Query)
 	|			CASE
 	|				WHEN &Filter_Company
 	|					THEN RowRef.Company = &Company
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Branch
+	|					THEN RowRef.Branch = &Branch
 	|				ELSE FALSE
 	|			END
 	|			AND CASE
@@ -4691,6 +4784,11 @@ Procedure ApplyFilterSet_PI_ForPR_ForPRO(Query)
 	|				ELSE FALSE
 	|			END
 	|			AND CASE
+	|				WHEN &Filter_Branch
+	|					THEN RowRef.Branch = &Branch
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
 	|				WHEN &Filter_Partner
 	|					THEN RowRef.Partner = &Partner
 	|				ELSE FALSE
@@ -4751,6 +4849,11 @@ Procedure ApplyFilterSet_RSR_ForRRR(Query)
 	|			CASE
 	|				WHEN &Filter_Company
 	|					THEN RowRef.Company = &Company
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Branch
+	|					THEN RowRef.Branch = &Branch
 	|				ELSE FALSE
 	|			END
 	|			AND CASE
@@ -5609,9 +5712,21 @@ EndFunction
 Procedure FillQueryParameters(Query, FilterValues)
 	For Each Attribute In Metadata.Catalogs.RowIDs.Attributes Do
 		Value = Undefined; Use = False;
-		If FilterValues.Property(Attribute.Name) And ValueIsFilled(FilterValues[Attribute.Name]) Then
-			Value = FilterValues[Attribute.Name];
-			Use = True;
+		If FilterValues.Property(Attribute.Name) Then
+			If TrimAll(Upper(Attribute.Name)) = TrimAll(Upper("Branch")) Then
+				If ValueIsFilled(FilterValues[Attribute.Name]) Then
+					Value = FilterValues[Attribute.Name];
+					Use = True;
+				Else
+					Value = Catalogs.BusinessUnits.EmptyRef();
+					Use = True;
+				EndIf;
+			Else
+				If ValueIsFilled(FilterValues[Attribute.Name]) Then
+					Value = FilterValues[Attribute.Name];
+					Use = True;
+				EndIf;
+			EndIf;
 		EndIf;
 		Query.SetParameter("Filter_" + Attribute.Name, Use);
 		Query.SetParameter(Attribute.Name, Value);

@@ -69,7 +69,6 @@
   <registerRecords>AccumulationRegister.TM1010B_RowIDMovements</registerRecords>
   <registerRecords>AccumulationRegister.R2010T_SalesOrders</registerRecords>
   <registerRecords>AccumulationRegister.R2014T_CanceledSalesOrders</registerRecords>
-  <registerRecords>AccumulationRegister.R4013B_StockReservationPlanning</registerRecords>
   <registerRecords>AccumulationRegister.R2011B_SalesOrdersShipment</registerRecords>
   <registerRecords>AccumulationRegister.R4011B_FreeStocks</registerRecords>
   <registerRecords>AccumulationRegister.R4012B_StockReservation</registerRecords>

@@ -1,6 +1,6 @@
 
 &AtClient
-Var CurrenDocument;
+Var CurrentDocument;
 
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
@@ -62,7 +62,7 @@ Procedure ExpandDocumentsTree()
 	EndDo;
 	
 	CurrentRow = Undefined;
-	If CurrenDocument <> Undefined Then
+	If CurrentDocument <> Undefined Then
 		FindCurrentRow(ThisObject.DocumentsTree.GetItems(), CurrentRow);
 		If CurrentRow <> Undefined Then
 			Items.DocumentsTree.CurrentRow = CurrentRow;
@@ -73,7 +73,7 @@ EndProcedure
 &AtClient
 Procedure FindCurrentRow(TreeItems, CurrentRow)
 	For Each Row In TreeItems Do
-		If Row.Ref = CurrenDocument Then
+		If Row.Ref = CurrentDocument Then
 			CurrentRow = Row.GetID();
 			Break;
 		EndIf;
@@ -176,9 +176,9 @@ EndProcedure
 Procedure SetCurrentDocument()
 	CurrentData = Items.DocumentsTree.CurrentData;
 	If CurrentData = Undefined Then
-		CurrenDocument = Undefined;
+		CurrentDocument = Undefined;
 	Else
-		CurrenDocument = CurrentData.Ref;
+		CurrentDocument = CurrentData.Ref;
 	EndIf;
 EndProcedure		
 

@@ -481,6 +481,12 @@ Scenario: _2990006 create Stock adjustment as surplus based on Physical inventor
 			| 'Description'  |
 			| 'Store 05' |
 		And I select current line in "List" table
+		And I move to "Other" tab
+		And I click Choice button of the field named "Branch"
+		And I go to line in "List" table
+			| 'Description'             |
+			| 'Logistics department' |
+		And I select current line in "List" table	
 	* Filling ItemList tab and check link/unlink line
 		* Add item from Physical inventory
 			And I click "AddBasisDocuments" button

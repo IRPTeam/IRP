@@ -195,7 +195,6 @@ Function ItemList()
 	|	AND NOT PurchaseOrderItems.PurchaseBasis.REF IS NULL AS UseSalesOrder,
 	|	PurchaseOrderItems.Ref.Currency AS Currency,
 	|	&StatusInfoPosting,
-	|	PurchaseOrderItems.Ref.MovementType AS MovementType,
 	|	PurchaseOrderItems.Ref.Agreement AS Agreement,
 	|	PurchaseOrderItems.Ref.Partner AS Partner,
 	|	PurchaseOrderItems.Ref.LegalName,

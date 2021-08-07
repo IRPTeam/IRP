@@ -362,7 +362,7 @@ Function PaymentList()
 	|	PaymentList.PlaningTransactionBasis AS PlaningTransactionBasis,
 	|	PaymentList.Partner.Employee AS IsEmployee,
 	|	PaymentList.Amount,
-	|	PaymentList.MovementType AS MovementType,
+	|	PaymentList.FinancialMovementType AS FinancialMovementType,
 	|	PaymentList.Ref.TransactionType = VALUE(Enum.OutgoingPaymentTransactionTypes.PaymentToVendor) AS IsPaymentToVendor,
 	|	PaymentList.Ref.TransactionType = VALUE(Enum.OutgoingPaymentTransactionTypes.CurrencyExchange) AS IsCurrencyExchange,
 	|	PaymentList.Ref.TransactionType = VALUE(Enum.OutgoingPaymentTransactionTypes.CashTransferOrder) AS
@@ -628,7 +628,7 @@ Function R3035T_CashPlanning()
 		|			THEN PaymentList.LegalName
 		|		ELSE VALUE(Catalog.Companies.EmptyRef)
 		|	END AS LegalName,
-		|	PaymentList.MovementType,
+		|	PaymentList.FinancialMovementType,
 		|	-PaymentList.Amount AS Amount,
 		|	PaymentList.Key
 		|INTO R3035T_CashPlanning

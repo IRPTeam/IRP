@@ -628,7 +628,6 @@
   <enums>Enum.DataAreaStatus</enums>
   <enums>Enum.DocumentPostingTypes</enums>
   <enums>Enum.EquipmentTypes</enums>
-  <enums>Enum.ExpenseAndRevenueTypes</enums>
   <enums>Enum.FileTypes</enums>
   <enums>Enum.FormTypes</enums>
   <enums>Enum.GoodsReceiptTransactionTypes</enums>

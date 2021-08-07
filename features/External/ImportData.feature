@@ -206,16 +206,17 @@ Scenario: Create catalog Countries objects
 Scenario: Create catalog ExpenseAndRevenueTypes objects
 
 	And I check or create catalog "ExpenseAndRevenueTypes" objects:
-		| 'Ref'                                                                            | 'DeletionMark'    | 'Parent' | 'Description_en'           | 'Description_hash' | 'Description_ru' | 'Description_tr'              |'Type'                             |
-		| 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=aa78120ed92fbced11eaf114c59ef027' | 'False'           | ''       | 'Rent'                     | ''                 | ''               | 'Rent TR'                     |'Enum.ExpenseAndRevenueTypes.Both' |
-		| 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=aa78120ed92fbced11eaf114c59ef028' | 'False'           | ''       | 'Telephone communications' | ''                 | ''               | 'Telephone communications TR' |'Enum.ExpenseAndRevenueTypes.Both' |
-		| 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=aa78120ed92fbced11eaf114c59ef029' | 'False'           | ''       | 'Fuel'                     | ''                 | ''               | 'Fuel TR'                     |'Enum.ExpenseAndRevenueTypes.Both' |
-		| 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=aa78120ed92fbced11eaf114c59ef02a' | 'False'           | ''       | 'Software'                 | ''                 | ''               | 'Software TR'                 |'Enum.ExpenseAndRevenueTypes.Both' |
-		| 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=aa78120ed92fbced11eaf114c59ef02b' | 'False'           | ''       | 'Delivery'                 | ''                 | ''               | 'Delivery TR'                 |'Enum.ExpenseAndRevenueTypes.Both' |
-		| 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=aa78120ed93fbced11eaf114c59ef02b' | 'False'           | ''       | 'Revenue'                  | ''                 | ''               | 'Revenue TR'                  |'Enum.ExpenseAndRevenueTypes.Revenue' |
-		| 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=aa78120ed95fbced11eaf114c59ef02b' | 'False'           | ''       | 'Expense'                  | ''                 | ''               | 'Expense TR'                  |'Enum.ExpenseAndRevenueTypes.Expense' |
-		| 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=aa78120ed98fbced11eaf114c59ef02b' | 'True'            | ''       | 'Deletion'                 | ''                 | ''               | 'Deletion TR'                 |'Enum.ExpenseAndRevenueTypes.Both' |
-		| 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=aa78120ed98fbced11eaf114c59ef02b' | 'False'           | ''       | 'Movement type 1'          | ''                 | 'Movement type 1'| 'Movement type 1 TR'          |'Enum.ExpenseAndRevenueTypes.CashMovement' |
+		| 'Ref'                                                                            | 'DeletionMark' | 'Parent' | 'Code' | 'IsExpense' | 'IsRevenue' | 'IsFinancialMovementType' | 'Description_en'           | 'Description_hash' | 'Description_ru'  | 'Description_tr'              |
+		| 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=aa78120ed92fbced11eaf114c59ef027' | 'False'        | ''       | '3'    | 'True'      | 'True'      | 'False'                   | 'Rent'                     | ''                 | ''                | 'Rent TR'                     |
+		| 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=aa78120ed92fbced11eaf114c59ef028' | 'False'        | ''       | '4'    | 'True'      | 'True'      | 'False'                   | 'Telephone communications' | ''                 | ''                | 'Telephone communications TR' |
+		| 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=aa78120ed92fbced11eaf114c59ef029' | 'False'        | ''       | '5'    | 'True'      | 'True'      | 'False'                   | 'Fuel'                     | ''                 | ''                | 'Fuel TR'                     |
+		| 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=aa78120ed92fbced11eaf114c59ef02a' | 'False'        | ''       | '6'    | 'True'      | 'True'      | 'False'                   | 'Software'                 | ''                 | ''                | 'Software TR'                 |
+		| 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=aa78120ed92fbced11eaf114c59ef02b' | 'False'        | ''       | '7'    | 'True'      | 'True'      | 'False'                   | 'Delivery'                 | ''                 | ''                | 'Delivery TR'                 |
+		| 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=aa78120ed93fbced11eaf114c59ef02b' | 'False'        | ''       | '8'    | 'False'     | 'True'      | 'False'                   | 'Revenue'                  | ''                 | ''                | 'Revenue TR'                  |
+		| 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=aa78120ed95fbced11eaf114c59ef02b' | 'False'        | ''       | '9'    | 'True'      | 'False'     | 'False'                   | 'Expense'                  | ''                 | ''                | 'Expense TR'                  |
+		| 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=aa78120ed98fbced11eaf114c59ef02b' | 'False'        | ''       | '10'   | 'False'     | 'False'     | 'True'                    | 'Movement type 1'          | ''                 | 'Movement type 1' | 'Movement type 1 TR'          |
+
+
 
 Scenario: Create catalog FileStorageVolumes objects
 

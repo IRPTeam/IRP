@@ -241,21 +241,6 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
-  <attributes uuid="587aade3-cfee-4f8c-aea2-0aedf5117fcc">
-    <name>MovementType</name>
-    <synonym>
-      <key>en</key>
-      <value>Movement type</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.ExpenseAndRevenueTypes</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
   <attributes uuid="4e2af1de-62a9-4c4d-821b-6809e75feeda">
     <name>LegalNameContract</name>
     <synonym>

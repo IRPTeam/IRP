@@ -1199,7 +1199,7 @@
           </extInfo>
         </items>
         <items xsi:type="form:FormField">
-          <name>PaymentListMovementType</name>
+          <name>PaymentListFinancialMovementType</name>
           <id>221</id>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -1207,10 +1207,10 @@
             <common>true</common>
           </userVisible>
           <dataPath xsi:type="form:DataPath">
-            <segments>Object.PaymentList.MovementType</segments>
+            <segments>Object.PaymentList.FinancialMovementType</segments>
           </dataPath>
           <extendedTooltip>
-            <name>PaymentListMovementTypeExtendedTooltip</name>
+            <name>PaymentListFinancialMovementTypeExtendedTooltip</name>
             <id>223</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -1225,7 +1225,7 @@
             </extInfo>
           </extendedTooltip>
           <contextMenu>
-            <name>PaymentListMovementTypeContextMenu</name>
+            <name>PaymentListFinancialMovementTypeContextMenu</name>
             <id>222</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -1240,6 +1240,14 @@
           <headerHorizontalAlign>Left</headerHorizontalAlign>
           <showInFooter>true</showInFooter>
           <extInfo xsi:type="form:InputFieldExtInfo">
+            <handlers>
+              <event>StartChoice</event>
+              <name>PaymentListFinancialMovementTypeStartChoice</name>
+            </handlers>
+            <handlers>
+              <event>EditTextChange</event>
+              <name>PaymentListFinancialMovementTypeEditTextChange</name>
+            </handlers>
             <autoMaxWidth>true</autoMaxWidth>
             <autoMaxHeight>true</autoMaxHeight>
             <wrap>true</wrap>

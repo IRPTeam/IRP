@@ -233,6 +233,16 @@ Procedure ItemListStoreOnChange(Item, AddInfo = Undefined)
 	DocSalesReturnOrderClient.ItemListStoreOnChange(Object, ThisObject, Item);
 EndProcedure
 
+&AtClient
+Procedure ItemListRevenueTypeStartChoice(Item, ChoiceData, StandardProcessing)
+	DocSalesReturnOrderClient.ItemListRevenueTypeStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure ItemListRevenueTypeEditTextChange(Item, Text, StandardProcessing)
+	DocSalesReturnOrderClient.ItemListRevenueTypeEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
 #EndRegion
 
 #Region ItemPartner

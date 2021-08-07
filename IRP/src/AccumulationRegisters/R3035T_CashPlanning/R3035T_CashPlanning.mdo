@@ -170,10 +170,10 @@
     <useInTotals>true</useInTotals>
   </dimensions>
   <dimensions uuid="d06ca054-690c-44fe-9089-b11670d57039">
-    <name>MovementType</name>
+    <name>FinancialMovementType</name>
     <synonym>
       <key>en</key>
-      <value>Movement type</value>
+      <value>Financial movement type</value>
     </synonym>
     <type>
       <types>CatalogRef.ExpenseAndRevenueTypes</types>

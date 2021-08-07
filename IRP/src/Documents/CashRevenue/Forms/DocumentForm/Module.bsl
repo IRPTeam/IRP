@@ -134,6 +134,16 @@ Procedure PaymentListRevenueTypeEditTextChange(Item, Text, StandardProcessing)
 EndProcedure
 
 &AtClient
+Procedure PaymentListFinancialMovementTypeStartChoice(Item, ChoiceData, StandardProcessing)
+	DocCashExpenseRevenueClient.PaymentListFinancialMovementTypeStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);	
+EndProcedure
+
+&AtClient
+Procedure PaymentListFinancialMovementTypeEditTextChange(Item, Text, StandardProcessing)
+	DocCashExpenseRevenueClient.PaymentListFinancialMovementTypeEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+&AtClient
 Procedure DescriptionClick(Item, StandardProcessing)
 	DocumentsClient.DescriptionClick(Object, ThisObject, Item, StandardProcessing);
 EndProcedure

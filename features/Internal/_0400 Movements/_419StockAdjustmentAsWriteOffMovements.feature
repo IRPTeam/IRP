@@ -106,6 +106,26 @@ Scenario: _041902 check Stock adjustment as write off movements by the Register 
 			| ''                                                            | 'Expense'     | '15.03.2021 15:29:14' | '8'         | 'Store 01'   | 'M/White'   |	
 		And I close all client application windows
 
+Scenario: _041903 check Stock adjustment as write off movements by the Register  "R4050 Stock inventory"
+	* Select Stock adjustment as write off
+		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsWriteOff"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '201' |
+	* Check movements by the Register  "R4050 Stock inventory"
+		And I click "Registrations report" button
+		And I select "R4050 Stock inventory" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Stock adjustment as write-off 201 dated 15.03.2021 15:29:14' | ''            | ''                    | ''          | ''               | ''             | ''         | ''          |
+			| 'Document registrations records'                              | ''            | ''                    | ''          | ''               | ''             | ''         | ''          |
+			| 'Register  "R4050 Stock inventory"'                           | ''            | ''                    | ''          | ''               | ''             | ''         | ''          |
+			| ''                                                            | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'     | ''             | ''         | ''          |
+			| ''                                                            | ''            | ''                    | 'Quantity'  | 'Company'        | 'Branch'       | 'Store'    | 'Item key'  |
+			| ''                                                            | 'Expense'     | '15.03.2021 15:29:14' | '2'         | 'Second Company' | 'Front office' | 'Store 01' | '38/Yellow' |
+			| ''                                                            | 'Expense'     | '15.03.2021 15:29:14' | '8'         | 'Second Company' | 'Front office' | 'Store 01' | 'M/White'   |
+		And I close all client application windows
+
 
 Scenario: _041930 Stock adjustment as write off clear posting/mark for deletion
 	And I close all client application windows

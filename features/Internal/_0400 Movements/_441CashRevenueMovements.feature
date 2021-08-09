@@ -91,9 +91,9 @@ Scenario: _044101 check Cash revenue movements by the Register "R3010 Cash on ha
 			| 'Register  "R3010 Cash on hand"'           | ''            | ''                    | ''          | ''             | ''        | ''                  | ''         | ''                             | ''                     |
 			| ''                                         | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''        | ''                  | ''         | ''                             | 'Attributes'           |
 			| ''                                         | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'  | 'Account'           | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
-			| ''                                         | 'Receipt'     | '07.09.2020 19:24:49' | '100'       | 'Main Company' | 'Shop 01' | 'Bank account, TRY' | 'TRY'      | 'Local currency'               | 'No'                   |
-			| ''                                         | 'Receipt'     | '07.09.2020 19:24:49' | '100'       | 'Main Company' | 'Shop 01' | 'Bank account, TRY' | 'TRY'      | 'en description is empty'      | 'No'                   |
-			| ''                                         | 'Receipt'     | '07.09.2020 19:24:49' | '584'       | 'Main Company' | 'Shop 01' | 'Bank account, TRY' | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                         | 'Receipt'     | '07.09.2020 19:24:49' | '118'       | 'Main Company' | 'Shop 01' | 'Bank account, TRY' | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                         | 'Receipt'     | '07.09.2020 19:24:49' | '118'       | 'Main Company' | 'Shop 01' | 'Bank account, TRY' | 'TRY'      | 'en description is empty'      | 'No'                   |
+			| ''                                         | 'Receipt'     | '07.09.2020 19:24:49' | '689,12'    | 'Main Company' | 'Shop 01' | 'Bank account, TRY' | 'USD'      | 'Reporting currency'           | 'No'                   |
 	And I close all client application windows
 
 

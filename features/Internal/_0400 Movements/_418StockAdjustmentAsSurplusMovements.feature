@@ -110,6 +110,27 @@ Scenario: _041802 check Stock adjustment as surplus movements by the Register  "
 			| ''                                                          | 'Receipt'     | '01.03.2021 12:00:00' | '8'         | 'Store 05'   | 'M/White'  |
 		And I close all client application windows
 
+Scenario: _041803 check Stock adjustment as surplus movements by the Register  "R4050 Stock inventory"
+	* Select Stock adjustment as surplus
+		Given I open hyperlink "e1cib/list/Document.StockAdjustmentAsSurplus"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '201' |
+	* Check movements by the Register  "R4050 Stock inventory"
+		And I click "Registrations report" button
+		And I select "R4050 Stock inventory" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Stock adjustment as surplus 201 dated 01.03.2021 12:00:00' | ''            | ''                    | ''          | ''             | ''             | ''         | ''         |
+			| 'Document registrations records'                            | ''            | ''                    | ''          | ''             | ''             | ''         | ''         |
+			| 'Register  "R4050 Stock inventory"'                         | ''            | ''                    | ''          | ''             | ''             | ''         | ''         |
+			| ''                                                          | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''         | ''         |
+			| ''                                                          | ''            | ''                    | 'Quantity'  | 'Company'      | 'Branch'       | 'Store'    | 'Item key' |
+			| ''                                                          | 'Receipt'     | '01.03.2021 12:00:00' | '4'         | 'Main Company' | 'Front office' | 'Store 05' | '36/18SD'  |
+			| ''                                                          | 'Receipt'     | '01.03.2021 12:00:00' | '7'         | 'Main Company' | 'Front office' | 'Store 05' | '36/Red'   |
+			| ''                                                          | 'Receipt'     | '01.03.2021 12:00:00' | '8'         | 'Main Company' | 'Front office' | 'Store 05' | 'XS/Blue'  |
+			| ''                                                          | 'Receipt'     | '01.03.2021 12:00:00' | '8'         | 'Main Company' | 'Front office' | 'Store 05' | 'M/White'  |
+		And I close all client application windows
 
 Scenario: _041830 Stock adjustment as surplus clear posting/mark for deletion
 	And I close all client application windows

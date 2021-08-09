@@ -179,15 +179,15 @@ Scenario: _0154100 preparation ( filling documents)
 					And I activate "Description" field in "List" table
 					And I select current line in "List" table
 				* Filling Movement type
-					And I click Select button of "Send movement type" field
+					And I click Select button of "Send financial movement type" field
 					And I go to line in "List" table
-						| 'Description'     | 'Type'          |
-						| 'Movement type 1' | 'Cash movement' |
+						| 'Description'     | 
+						| 'Movement type 1' | 
 					And I select current line in "List" table
-					And I click Select button of "Receive movement type" field
+					And I click Select button of "Receive financial movement type" field
 					And I go to line in "List" table
-						| 'Description'     | 'Type'          |
-						| 'Movement type 1' | 'Cash movement' |
+						| 'Description'     |
+						| 'Movement type 1' |
 					And I select current line in "List" table					
 				And I click the button named "FormPost"
 				And I delete "$$NumberCashTransferOrder01541001$$" variable
@@ -245,15 +245,15 @@ Scenario: _0154100 preparation ( filling documents)
 						| 'Arina Brown' |
 					And I select current line in "List" table
 				* Filling Movement type
-					And I click Select button of "Send movement type" field
+					And I click Select button of "Send financial movement type" field
 					And I go to line in "List" table
-						| 'Description'     | 'Type'          |
-						| 'Movement type 1' | 'Cash movement' |
+						| 'Description'     |
+						| 'Movement type 1' |
 					And I select current line in "List" table
-					And I click Select button of "Receive movement type" field
+					And I click Select button of "Receive financial movement type" field
 					And I go to line in "List" table
-						| 'Description'     | 'Type'          |
-						| 'Movement type 1' | 'Cash movement' |
+						| 'Description'     |
+						| 'Movement type 1' |
 					And I select current line in "List" table	
 				And I click the button named "FormPost"
 				And I delete "$$NumberCashTransferOrder01541002$$" variable
@@ -296,15 +296,15 @@ Scenario: _0154100 preparation ( filling documents)
 					And I select current line in "List" table
 					And I input "175,00" text in "Receive amount" field
 				* Filling Movement type
-					And I click Select button of "Send movement type" field
+					And I click Select button of "Send financial movement type" field
 					And I go to line in "List" table
-						| 'Description'     | 'Type'          |
-						| 'Movement type 1' | 'Cash movement' |
+						| 'Description'     |
+						| 'Movement type 1' |
 					And I select current line in "List" table
-					And I click Select button of "Receive movement type" field
+					And I click Select button of "Receive financial movement type" field
 					And I go to line in "List" table
-						| 'Description'     | 'Type'          |
-						| 'Movement type 1' | 'Cash movement' |
+						| 'Description'     |
+						| 'Movement type 1' |
 					And I select current line in "List" table
 				And I click the button named "FormPost"
 				And I delete "$$NumberCashTransferOrder01541003$$" variable
@@ -348,15 +348,15 @@ Scenario: _0154100 preparation ( filling documents)
 						And I select current line in "List" table
 						And I input "1150,00" text in "Receive amount" field
 					* Filling Movement type
-						And I click Select button of "Send movement type" field
+						And I click Select button of "Send financial movement type" field
 						And I go to line in "List" table
-							| 'Description'     | 'Type'          |
-							| 'Movement type 1' | 'Cash movement' |
+							| 'Description'     |
+							| 'Movement type 1' |
 						And I select current line in "List" table
-						And I click Select button of "Receive movement type" field
+						And I click Select button of "Receive financial movement type" field
 						And I go to line in "List" table
-							| 'Description'     | 'Type'          |
-							| 'Movement type 1' | 'Cash movement' |
+							| 'Description'     |
+							| 'Movement type 1' |
 						And I select current line in "List" table
 					And I click the button named "FormPost"
 					And I delete "$$NumberCashTransferOrder01541004$$" variable
@@ -401,7 +401,7 @@ Scenario: _0154100 preparation ( filling documents)
 Scenario: _0154101 check filling in and refilling Sales order
 	And I close all client application windows
 	* Open the Sales order creation form
-		Given I open hyper link "e1cib/list/Document.SalesOrder"
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I click the button named "FormCreate"
 	* Check filling in legal name if the partner has only one
 		And I click Select button of "Partner" field
@@ -4704,7 +4704,7 @@ Scenario: _0154133  check currency form in Outgoing payment order
 Scenario: _0154140 check filling in and refilling Sales order closing
 	And I close all client application windows
 	* Open the Sales order closing creation form
-		Given I open hyper link "e1cib/list/Document.SalesOrderClosing"
+		Given I open hyperlink "e1cib/list/Document.SalesOrderClosing"
 		And I click the button named "FormCreate"
 	* Check filling in legal name if the partner has only one
 		And I click Select button of "Partner" field

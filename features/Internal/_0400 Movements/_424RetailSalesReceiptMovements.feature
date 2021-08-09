@@ -32,6 +32,7 @@ Scenario: _042400 preparation (RetailSalesReceipt)
 		When Create chart of characteristic types AddAttributeAndProperty objects
 		When Create catalog AddAttributeAndPropertySets objects
 		When Create catalog AddAttributeAndPropertyValues objects
+		When Create catalog CashAccounts objects
 		When Create catalog Currencies objects
 		When Create catalog Companies objects (Main company)
 		When Create catalog Stores objects
@@ -58,12 +59,19 @@ Scenario: _042400 preparation (RetailSalesReceipt)
 		When Create catalog RetailCustomers objects (check POS)
 		When Create catalog Partners objects and Companies objects (Customer)
 		When Create catalog Agreements objects (Customer)
-	* Add plugin for taxes calculation
-		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
-		If "List" table does not contain lines Then
-				| "Description" |
-				| "TaxCalculateVAT_TR" |
-			When add Plugin for tax calculation
+		When Create Document discount
+		* Add plugin for discount
+			Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
+			If "List" table does not contain lines Then
+					| "Description" |
+					| "DocumentDiscount" |
+				When add Plugin for document discount
+		* Add plugin for taxes calculation
+			Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
+			If "List" table does not contain lines Then
+					| "Description" |
+					| "TaxCalculateVAT_TR" |
+				When add Plugin for tax calculation
 		When Create information register Taxes records (VAT)
 	* Tax settings
 		When filling in Tax settings for company
@@ -74,6 +82,9 @@ Scenario: _042400 preparation (RetailSalesReceipt)
 		When Create document RetailSalesReceipt objects (with retail customer)
 		And I execute 1C:Enterprise script at server
 			| "Documents.RetailSalesReceipt.FindByNumber(202).GetObject().Write(DocumentWriteMode.Posting);" |
+		When Create document RetailSalesReceipt and RetailRetutnReceipt objects (with discount) 
+		And I execute 1C:Enterprise script at server
+			| "Documents.RetailSalesReceipt.FindByNumber(203).GetObject().Write(DocumentWriteMode.Posting);" |
 	
 
 Scenario: _042401 check Retail sales receipt movements by the Register  "R4010 Actual stocks"
@@ -186,7 +197,50 @@ Scenario: _042409 check Retail sales receipt movements by the Register  "R5010 R
 			| ''                                                   | 'Expense'     | '28.07.2021 13:53:27' | '10 497,79' | 'Main Company' | 'Shop 01' | 'TRY'      | 'Customer'   | ''                    |
 		And I close all client application windows
 
+Scenario: _042410 check Retail sales receipt movements by the Register  "R2005 Sales special offers" (with discount)
+	* Select Retail sales receipt
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '203' |
+	* Check movements by the Register  "R2005 Sales special offers"
+		And I click "Registrations report" button
+		And I select "R2005 Sales special offers" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Retail sales receipt 203 dated 09.08.2021 11:39:42' | ''                    | ''             | ''           | ''              | ''                 | ''             | ''        | ''                             | ''         | ''                                                   | ''          | ''                                     | ''                 |
+			| 'Document registrations records'                     | ''                    | ''             | ''           | ''              | ''                 | ''             | ''        | ''                             | ''         | ''                                                   | ''          | ''                                     | ''                 |
+			| 'Register  "R2005 Sales special offers"'             | ''                    | ''             | ''           | ''              | ''                 | ''             | ''        | ''                             | ''         | ''                                                   | ''          | ''                                     | ''                 |
+			| ''                                                   | 'Period'              | 'Resources'    | ''           | ''              | ''                 | 'Dimensions'   | ''        | ''                             | ''         | ''                                                   | ''          | ''                                     | ''                 |
+			| ''                                                   | ''                    | 'Sales amount' | 'Net amount' | 'Offers amount' | 'Net offer amount' | 'Company'      | 'Branch'  | 'Multi currency movement type' | 'Currency' | 'Invoice'                                            | 'Item key'  | 'Row key'                              | 'Special offer'    |
+			| ''                                                   | '09.08.2021 11:39:42' | '80,12'        | '67,9'       | '7,54'          | ''                 | 'Main Company' | 'Shop 01' | 'Reporting currency'           | 'USD'      | 'Retail sales receipt 203 dated 09.08.2021 11:39:42' | 'XS/Blue'   | '8c5b09d8-ec48-4846-be01-39bd9dc72d58' | 'DocumentDiscount' |
+			| ''                                                   | '09.08.2021 11:39:42' | '123,26'       | '104,46'     | '11,61'         | ''                 | 'Main Company' | 'Shop 01' | 'Reporting currency'           | 'USD'      | 'Retail sales receipt 203 dated 09.08.2021 11:39:42' | '38/Yellow' | 'b302922e-0b16-4707-9611-6738e0f0de46' | 'DocumentDiscount' |
+			| ''                                                   | '09.08.2021 11:39:42' | '468'          | '396,61'     | '44,07'         | ''                 | 'Main Company' | 'Shop 01' | 'Local currency'               | 'TRY'      | 'Retail sales receipt 203 dated 09.08.2021 11:39:42' | 'XS/Blue'   | '8c5b09d8-ec48-4846-be01-39bd9dc72d58' | 'DocumentDiscount' |
+			| ''                                                   | '09.08.2021 11:39:42' | '468'          | '396,61'     | '44,07'         | ''                 | 'Main Company' | 'Shop 01' | 'TRY'                          | 'TRY'      | 'Retail sales receipt 203 dated 09.08.2021 11:39:42' | 'XS/Blue'   | '8c5b09d8-ec48-4846-be01-39bd9dc72d58' | 'DocumentDiscount' |
+			| ''                                                   | '09.08.2021 11:39:42' | '468'          | '396,61'     | '44,07'         | ''                 | 'Main Company' | 'Shop 01' | 'en description is empty'      | 'TRY'      | 'Retail sales receipt 203 dated 09.08.2021 11:39:42' | 'XS/Blue'   | '8c5b09d8-ec48-4846-be01-39bd9dc72d58' | 'DocumentDiscount' |
+			| ''                                                   | '09.08.2021 11:39:42' | '719,99'       | '610,16'     | '67,8'          | ''                 | 'Main Company' | 'Shop 01' | 'Local currency'               | 'TRY'      | 'Retail sales receipt 203 dated 09.08.2021 11:39:42' | '38/Yellow' | 'b302922e-0b16-4707-9611-6738e0f0de46' | 'DocumentDiscount' |
+			| ''                                                   | '09.08.2021 11:39:42' | '719,99'       | '610,16'     | '67,8'          | ''                 | 'Main Company' | 'Shop 01' | 'TRY'                          | 'TRY'      | 'Retail sales receipt 203 dated 09.08.2021 11:39:42' | '38/Yellow' | 'b302922e-0b16-4707-9611-6738e0f0de46' | 'DocumentDiscount' |
+			| ''                                                   | '09.08.2021 11:39:42' | '719,99'       | '610,16'     | '67,8'          | ''                 | 'Main Company' | 'Shop 01' | 'en description is empty'      | 'TRY'      | 'Retail sales receipt 203 dated 09.08.2021 11:39:42' | '38/Yellow' | 'b302922e-0b16-4707-9611-6738e0f0de46' | 'DocumentDiscount' |
+			| ''                                                   | '09.08.2021 11:39:42' | '1 414,12'     | '1 198,4'    | '133,16'        | ''                 | 'Main Company' | 'Shop 01' | 'Reporting currency'           | 'USD'      | 'Retail sales receipt 203 dated 09.08.2021 11:39:42' | '36/18SD'   | '996e771d-7b70-4d2f-9a32-f92836115173' | 'DocumentDiscount' |
+			| ''                                                   | '09.08.2021 11:39:42' | '8 260,02'     | '7 000,02'   | '777,78'        | ''                 | 'Main Company' | 'Shop 01' | 'Local currency'               | 'TRY'      | 'Retail sales receipt 203 dated 09.08.2021 11:39:42' | '36/18SD'   | '996e771d-7b70-4d2f-9a32-f92836115173' | 'DocumentDiscount' |
+			| ''                                                   | '09.08.2021 11:39:42' | '8 260,02'     | '7 000,02'   | '777,78'        | ''                 | 'Main Company' | 'Shop 01' | 'TRY'                          | 'TRY'      | 'Retail sales receipt 203 dated 09.08.2021 11:39:42' | '36/18SD'   | '996e771d-7b70-4d2f-9a32-f92836115173' | 'DocumentDiscount' |
+			| ''                                                   | '09.08.2021 11:39:42' | '8 260,02'     | '7 000,02'   | '777,78'        | ''                 | 'Main Company' | 'Shop 01' | 'en description is empty'      | 'TRY'      | 'Retail sales receipt 203 dated 09.08.2021 11:39:42' | '36/18SD'   | '996e771d-7b70-4d2f-9a32-f92836115173' | 'DocumentDiscount' |
+		And I close all client application windows
 
+Scenario:_042412 check Retail sales receipt movements by the Register  "R2005 Sales special offers" (without discount)
+	And I close all client application windows
+	* Select Retail sales receipt
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '202' |
+	* Check movements by the Register  "R2005 Sales special offers" 
+		And I click "Registrations report" button
+		And I select "R2005 Sales special offers" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document does not contain values
+			| Register  "R2005 Sales special offers" |
+		And I close all client application windows
 
 Scenario: _042430 Retail sales receipt clear posting/mark for deletion
 	And I close all client application windows

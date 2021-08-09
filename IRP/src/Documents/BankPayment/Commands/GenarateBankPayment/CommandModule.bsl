@@ -95,7 +95,7 @@ Function JoinDocumentsStructure(ArrayOfTables)
 	ValueTable.Columns.Add("Payee", New TypeDescription("CatalogRef.Companies"));
 	ValueTable.Columns.Add("PlaningTransactionBasis"
 		, New TypeDescription(Metadata.DefinedTypes.typePlaningTransactionBasises.Type));
-	ValueTable.Columns.Add("MovementType", New TypeDescription("CatalogRef.ExpenseAndRevenueTypes"));
+	ValueTable.Columns.Add("FinancialMovementType", New TypeDescription("CatalogRef.ExpenseAndRevenueTypes"));
 	
 	For Each Table In ArrayOfTables Do
 		For Each Row In Table Do
@@ -134,7 +134,7 @@ Function JoinDocumentsStructure(ArrayOfTables)
 			NewRow.Insert("Payee", RowPaymentList.Payee);
 			NewRow.Insert("Amount", RowPaymentList.Amount);
 			NewRow.Insert("PlaningTransactionBasis", RowPaymentList.PlaningTransactionBasis);
-			NewRow.Insert("MovementType", RowPaymentList.MovementType);
+			NewRow.Insert("FinancialMovementType", RowPaymentList.FinancialMovementType);
 			
 			Result.PaymentList.Add(NewRow);
 		EndDo;
@@ -170,7 +170,7 @@ Function GetDocumentTable_OutgoingPaymentOrder(ArrayOfBasisDocuments)
 		"SELECT ALLOWED
 		|	""OutgoingPaymentOrder"" AS BasedOn,
 		|	VALUE(Enum.OutgoingPaymentTransactionTypes.PaymentToVendor) AS TransactionType,
-		|	R3035T_CashPlanningTurnovers.MovementType AS MovementType,
+		|	R3035T_CashPlanningTurnovers.FinancialMovementType AS FinancialMovementType,
 		|	R3035T_CashPlanningTurnovers.Company AS Company,
 		|	R3035T_CashPlanningTurnovers.Account AS Account,
 		|	R3035T_CashPlanningTurnovers.Currency AS Currency,

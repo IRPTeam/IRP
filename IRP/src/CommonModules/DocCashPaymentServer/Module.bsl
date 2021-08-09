@@ -79,7 +79,7 @@ Function GetDocumentTable_CashTransferOrder(ArrayOfBasisDocuments, EndOfDate = U
 	|	tmp.Company AS Company,
 	|	tmp.CashAccount AS CashAccount,
 	|	tmp.Currency AS Currency,
-	|	tmp.MovementType AS MovementType,
+	|	tmp.FinancialMovementType AS FinancialMovementType,
 	|	tmp.Amount AS Amount,
 	|	tmp.PlaningTransactionBasis AS PlaningTransactionBasis,
 	|	tmp.Partner AS Partner
@@ -101,7 +101,7 @@ Function GetDocumentTable_CashTransferOrder_QueryText() Export
 	|	R3035T_CashPlanningTurnovers.Company AS Company,
 	|	R3035T_CashPlanningTurnovers.Account AS CashAccount,
 	|	R3035T_CashPlanningTurnovers.Currency AS Currency,
-	|	R3035T_CashPlanningTurnovers.MovementType AS MovementType,
+	|	R3035T_CashPlanningTurnovers.FinancialMovementType AS FinancialMovementType,
 	|	R3035T_CashPlanningTurnovers.AmountTurnover AS Amount,
 	|	R3035T_CashPlanningTurnovers.BasisDocument AS PlaningTransactionBasis,
 	|	Doc.CashAdvanceHolder AS Partner

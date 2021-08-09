@@ -1421,8 +1421,8 @@ Scenario:_800040 check remaining stock control when unpost/change Stock adjustme
 		And I select current line in "List" table
 		And I click choice button of "Revenue type" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Description' | 'Type'    |
-			| 'Revenue'     | 'Revenue' |
+			| 'Description' |
+			| 'Revenue'     |
 		And I select current line in "List" table	
 		And I click the button named "FormPost"
 		Then user message window does not contain messages

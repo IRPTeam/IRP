@@ -597,11 +597,8 @@ EndProcedure
 
 &AtClient
 Procedure ClearRetailCustomer(Command)
-	If Not ValueIsFilled(Object.RetailCustomer) Then
-		Return;
-	EndIf;
 	Object.RetailCustomer = Undefined;
-	DocRetailSalesReceiptClient.RetailCustomerPointOfSaleOnChange(Object, ThisObject, ThisObject.Items.RetailCustomer);
+	DocRetailSalesReceiptClient.RetailCustomerPointOfSaleOnChange(Object, ThisObject, Undefined);
 
 	ClearRetailCustomerAtServer();
 	DocRetailSalesReceiptClient.AgreementOnChange(Object, ThisObject, Items.RetailCustomer);
@@ -612,7 +609,14 @@ Procedure ClearRetailCustomerAtServer()
 	ObjectValue = FormAttributeToValue("Object");
 	FillingWithDefaultDataEvent.FillingWithDefaultDataFilling(ObjectValue, Undefined, Undefined, True, True);
 	ObjectValue.Date = CommonFunctionsServer.GetCurrentSessionDate();
-	ValueToFormAttribute(ObjectValue, "Object");	
+	ValueToFormAttribute(ObjectValue, "Object");
+	For Each Row In Object.ItemList Do
+		If ValueIsFilled(Row.ItemKey) Then
+			Row.Item = Row.ItemKey.Item;
+		Else
+			Row.Item = Undefined;
+		EndIf;
+	EndDo;
 EndProcedure
 
 #EndRegion

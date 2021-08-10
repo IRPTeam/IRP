@@ -209,7 +209,8 @@ Function ItemList()
 		|	PurchaseReturnItemList.AdditionalAnalytic AS AdditionalAnalytic,
 		|	PurchaseReturnItemList.Ref.Branch AS Branch,
 		|	PurchaseReturnItemList.Ref.LegalNameContract AS LegalNameContract,
-		|	PurchaseReturnItemList.OffersAmount
+		|	PurchaseReturnItemList.OffersAmount,
+		|	PurchaseReturnItemList.Detail AS Detail
 		|INTO ItemList
 		|FROM
 		|	Document.PurchaseReturn.ItemList AS PurchaseReturnItemList

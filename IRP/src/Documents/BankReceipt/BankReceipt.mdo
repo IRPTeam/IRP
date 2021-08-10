@@ -78,6 +78,7 @@
   <registerRecords>InformationRegister.T2011S_PartnerTransactions</registerRecords>
   <registerRecords>InformationRegister.T2012S_PartnerAdvances</registerRecords>
   <registerRecords>AccumulationRegister.R5012B_VendorsAging</registerRecords>
+  <registerRecords>AccumulationRegister.R5022T_Expenses</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>

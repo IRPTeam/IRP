@@ -58,7 +58,7 @@ Scenario: _1002000 preparation (vendors aging)
 	* Tax settings
 		When filling in Tax settings for company
 	* Load vendors advance closing document
-		When Create document VendorsAdvancesClosing objects
+		When Create document VendorsAdvancesClosing objects (without branch)
 		Given I open hyperlink 'e1cib/list/Document.VendorsAdvancesClosing'
 		And I go to line in "List" table
 			| 'Number' |

@@ -3041,6 +3041,14 @@ Scenario: Create document VendorsAdvancesClosing objects
 		| 'e1cib/data/Document.VendorsAdvancesClosing?ref=b76790ebcbe4b2b311ebb4012c9e935e' | 'False'        | '4'      | '28.04.2021 22:00:00' | 'True'   | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | '28.04.2021 00:00:00' | '28.04.2021 00:00:00' | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef023' |
 
 
+Scenario: Create document VendorsAdvancesClosing objects (without branch)
+
+	And I check or create document "VendorsAdvancesClosing" objects:
+		| 'Ref'                                                                             | 'DeletionMark' | 'Number' | 'Date'                | 'Posted' | 'Company'                                                           | 'BeginOfPeriod'       | 'EndOfPeriod'         | 'Branch'    |
+		| 'e1cib/data/Document.VendorsAdvancesClosing?ref=b76790ebcbe4b2b311ebb4012c9e935b' | 'False'        | '1'      | '12.02.2021 22:00:00' | 'True'   | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | '12.02.2021 00:00:00' | '12.02.2021 00:00:00' | ''          |
+		| 'e1cib/data/Document.VendorsAdvancesClosing?ref=b76790ebcbe4b2b311ebb4012c9e935e' | 'False'        | '4'      | '28.04.2021 22:00:00' | 'True'   | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | '28.04.2021 00:00:00' | '28.04.2021 00:00:00' | ''          |
+
+
 Scenario: Create document CustomersAdvancesClosing objects
 
 	And I check or create document "CustomersAdvancesClosing" objects:
@@ -3057,6 +3065,24 @@ Scenario: Create document CustomersAdvancesClosing objects
 		| 'e1cib/data/Document.CustomersAdvancesClosing?ref=b76790ebcbe4b2b311ebb4984ba30fe7' | 'False'        | '14'     | '12.04.2021 12:00:00' | 'True'   | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef025' | '12.04.2021 00:00:00' | '12.04.2021 00:00:00' |
 		| 'e1cib/data/Document.CustomersAdvancesClosing?ref=b768fb7fcb8cb62f11ebbc98f715ae84' | 'False'        | '17'     | '25.05.2021 09:49:46' | 'True'   | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef025' | '25.05.2021 00:00:00' | '25.05.2021 00:00:00' |
 		| 'e1cib/data/Document.CustomersAdvancesClosing?ref=b768fb7fcb8cb62f11ebbc98f715ae85' | 'False'        | '18'     | '24.05.2021 12:00:00' | 'True'   | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | 'e1cib/data/Catalog.BusinessUnits?ref=aa78120ed92fbced11eaf114c59ef025' | '24.05.2021 00:00:00' | '24.05.2021 00:00:00' |
+
+
+Scenario: Create document CustomersAdvancesClosing objects (without branch)
+
+	And I check or create document "CustomersAdvancesClosing" objects:
+		| 'Ref'                                                                               | 'DeletionMark' | 'Number' | 'Date'                | 'Posted' | 'Company'                                                           | 'Branch'  | 'BeginOfPeriod'       | 'EndOfPeriod'         |
+		| 'e1cib/data/Document.CustomersAdvancesClosing?ref=b76790ebcbe4b2b311ebb481153093f9' | 'False'        | '3'      | '15.04.2021 12:00:00' | 'True'   | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | ''        | '15.04.2021 00:00:00' | '15.04.2021 00:00:00' |
+		| 'e1cib/data/Document.CustomersAdvancesClosing?ref=b76790ebcbe4b2b311ebb481153093fa' | 'False'        | '4'      | '21.04.2021 12:00:00' | 'True'   | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | ''        | '21.04.2021 00:00:00' | '21.04.2021 00:00:00' |
+		| 'e1cib/data/Document.CustomersAdvancesClosing?ref=b76790ebcbe4b2b311ebb489ae09460a' | 'False'        | '5'      | '27.04.2021 12:00:00' | 'True'   | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | ''        | '27.04.2021 00:00:00' | '27.04.2021 00:00:00' |
+		| 'e1cib/data/Document.CustomersAdvancesClosing?ref=b76790ebcbe4b2b311ebb489ae09460b' | 'False'        | '6'      | '28.04.2021 12:00:00' | 'True'   | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | ''        | '28.04.2021 00:00:00' | '28.04.2021 00:00:00' |
+		| 'e1cib/data/Document.CustomersAdvancesClosing?ref=b76790ebcbe4b2b311ebb4984ba30fe2' | 'False'        | '9'      | '28.01.2021 12:00:00' | 'True'   | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | ''        | '28.01.2021 00:00:00' | '28.01.2021 00:00:00' |
+		| 'e1cib/data/Document.CustomersAdvancesClosing?ref=b76790ebcbe4b2b311ebb4984ba30fe3' | 'False'        | '10'     | '16.02.2021 12:00:00' | 'True'   | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | ''        | '16.02.2021 00:00:00' | '16.02.2021 00:00:00' |
+		| 'e1cib/data/Document.CustomersAdvancesClosing?ref=b76790ebcbe4b2b311ebb4984ba30fe4' | 'False'        | '11'     | '18.02.2021 00:00:00' | 'True'   | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | ''        | '18.02.2021 00:00:00' | '18.02.2021 00:00:00' |
+		| 'e1cib/data/Document.CustomersAdvancesClosing?ref=b76790ebcbe4b2b311ebb4984ba30fe5' | 'False'        | '12'     | '14.05.2021 12:45:05' | 'True'   | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | ''        | '14.05.2021 00:00:00' | '14.05.2021 00:00:00' |
+		| 'e1cib/data/Document.CustomersAdvancesClosing?ref=b76790ebcbe4b2b311ebb4984ba30fe6' | 'False'        | '13'     | '17.02.2021 12:00:00' | 'True'   | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | ''        | '17.02.2021 00:00:00' | '17.02.2021 00:00:00' |
+		| 'e1cib/data/Document.CustomersAdvancesClosing?ref=b76790ebcbe4b2b311ebb4984ba30fe7' | 'False'        | '14'     | '12.04.2021 12:00:00' | 'True'   | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | ''        | '12.04.2021 00:00:00' | '12.04.2021 00:00:00' |
+		| 'e1cib/data/Document.CustomersAdvancesClosing?ref=b768fb7fcb8cb62f11ebbc98f715ae84' | 'False'        | '17'     | '25.05.2021 09:49:46' | 'True'   | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | ''        | '25.05.2021 00:00:00' | '25.05.2021 00:00:00' |
+		| 'e1cib/data/Document.CustomersAdvancesClosing?ref=b768fb7fcb8cb62f11ebbc98f715ae85' | 'False'        | '18'     | '24.05.2021 12:00:00' | 'True'   | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | ''        | '24.05.2021 00:00:00' | '24.05.2021 00:00:00' |
 
 Scenario: Create document BankReceipt objects (advance, customers)
 

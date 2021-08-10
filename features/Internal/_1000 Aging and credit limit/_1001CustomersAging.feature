@@ -27,6 +27,7 @@ Scenario: _1000000 preparation (payment terms)
 		When Create catalog Units objects
 		When Create catalog Items objects
 		When Create catalog PriceTypes objects
+		When Create catalog BusinessUnits objects
 		When Create catalog Specifications objects
 		When Create chart of characteristic types AddAttributeAndProperty objects
 		When Create catalog AddAttributeAndPropertySets objects
@@ -76,7 +77,7 @@ Scenario: _1000000 preparation (payment terms)
 			And in the table "List" I click the button named "ListContextMenuUndoPosting"
 		And I close all client application windows
 	* Load customers advance closing document
-		When Create document CustomersAdvancesClosing objects
+		When Create document CustomersAdvancesClosing objects (without branch)
 		Given I open hyperlink 'e1cib/list/Document.CustomersAdvancesClosing'
 		And I go to line in "List" table
 			| 'Number' |

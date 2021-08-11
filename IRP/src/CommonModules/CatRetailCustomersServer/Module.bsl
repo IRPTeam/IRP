@@ -1,15 +1,15 @@
 
 Function GetRetailCustomerInfo(RetailCustomer, AddInfo = Undefined) Export
 	RetailCustomerInfo = New Structure();
-	RetailCustomerInfo.Insert("UsePartnerTransactions"      , RetailCustomer.UsePartnerTransactions);
-	RetailCustomerInfo.Insert("PartnerInfoFromUserSettings" , RetailCustomer.PartnerInfoFromUserSettings);
+	RetailCustomerInfo.Insert("UsePartnerTransactions" , RetailCustomer.UsePartnerTransactions);
+	RetailCustomerInfo.Insert("UsePartnerInfo"         , RetailCustomer.UsePartnerInfo);
 	
 	RetailCustomerInfo.Insert("Partner"   , Undefined);
 	RetailCustomerInfo.Insert("LegalName" , Undefined);
 	RetailCustomerInfo.Insert("Agreement" , Undefined);
 	
 	If RetailCustomerInfo.UsePartnerTransactions Then
-		If RetailCustomerInfo.PartnerInfoFromUserSettings Then
+		If Not RetailCustomerInfo.UsePartnerInfo Then
 			FillPropertyValues(RetailCustomerInfo, GetPartnerInfoFromUserSettinfs());
 		Else
 			RetailCustomerInfo.Partner   = RetailCustomer.Partner;

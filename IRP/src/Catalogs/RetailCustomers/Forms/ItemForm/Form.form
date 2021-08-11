@@ -260,7 +260,7 @@
     <name>GroupPartnerInfo</name>
     <id>15</id>
     <items xsi:type="form:FormField">
-      <name>PartnerInfoFromUserSettings</name>
+      <name>UsePartnerInfo</name>
       <id>29</id>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -268,15 +268,15 @@
         <common>true</common>
       </userVisible>
       <dataPath xsi:type="form:DataPath">
-        <segments>Object.PartnerInfoFromUserSettings</segments>
+        <segments>Object.UsePartnerInfo</segments>
       </dataPath>
       <titleLocation>Right</titleLocation>
       <handlers>
         <event>OnChange</event>
-        <name>PartnerInfoFromUserSettingsOnChange</name>
+        <name>UsePartnerInfoOnChange</name>
       </handlers>
       <extendedTooltip>
-        <name>PartnerInfoFromUserSettingsExtendedTooltip</name>
+        <name>UsePartnerInfoExtendedTooltip</name>
         <id>31</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -291,7 +291,7 @@
         </extInfo>
       </extendedTooltip>
       <contextMenu>
-        <name>PartnerInfoFromUserSettingsContextMenu</name>
+        <name>UsePartnerInfoContextMenu</name>
         <id>30</id>
         <visible>true</visible>
         <enabled>true</enabled>

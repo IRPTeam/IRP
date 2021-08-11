@@ -42,7 +42,7 @@ Procedure UsePartnerTransactionsOnChange(Item)
 EndProcedure
 
 &AtClient
-Procedure PartnerInfoFromUserSettingsOnChange(Item)
+Procedure UsePartnerInfoOnChange(Item)
 	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
@@ -50,9 +50,9 @@ EndProcedure
 Procedure SetVisibilityAvailability(Object, Form) Export
 	Form.Items.GroupPartnerInfo.Visible = Object.UsePartnerTransactions;
 
-	Form.Items.Partner.Visible     = Not Object.PartnerInfoFromUserSettings;
-	Form.Items.LegalName.Visible   = Not Object.PartnerInfoFromUserSettings;
-	Form.Items.Agreement.Visible   = Not Object.PartnerInfoFromUserSettings;
+	Form.Items.Partner.Visible     = Object.UsePartnerInfo;
+	Form.Items.LegalName.Visible   = Object.UsePartnerInfo;
+	Form.Items.Agreement.Visible   = Object.UsePartnerInfo;
 EndProcedure
 
 #EndRegion

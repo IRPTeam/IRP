@@ -235,10 +235,10 @@
     <dataHistory>Use</dataHistory>
   </attributes>
   <attributes uuid="4111d1ae-82d2-4e43-89d1-e699eab23853">
-    <name>PartnerInfoFromUserSettings</name>
+    <name>UsePartnerInfo</name>
     <synonym>
       <key>en</key>
-      <value>Partner info from user settings</value>
+      <value>Use partner info</value>
     </synonym>
     <type>
       <types>Boolean</types>

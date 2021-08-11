@@ -403,6 +403,7 @@ Scenario: _043424 check Bank receipt movements by the Register "R5022 Expenses" 
 		And I click "Registrations report" button
 		And I select "R5022 Expenses" exact value from "Register" drop-down list
 		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
 			| 'Bank receipt 513 dated 04.06.2021 12:27:04' | ''                    | ''          | ''             | ''             | ''                   | ''             | ''         | ''         | ''                    | ''                             |
 			| 'Document registrations records'             | ''                    | ''          | ''             | ''             | ''                   | ''             | ''         | ''         | ''                    | ''                             |
 			| 'Register  "R5022 Expenses"'                 | ''                    | ''          | ''             | ''             | ''                   | ''             | ''         | ''         | ''                    | ''                             |

@@ -77,6 +77,8 @@
       <types>DocumentRef.PhysicalInventory</types>
       <types>DocumentRef.SalesInvoice</types>
       <types>DocumentRef.CashExpense</types>
+      <types>DocumentRef.VendorsAdvancesClosing</types>
+      <types>DocumentRef.CustomersAdvancesClosing</types>
     </commandParameterType>
     <representation>Auto</representation>
     <shortcut></shortcut>

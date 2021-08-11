@@ -392,6 +392,27 @@ Scenario: _043423 check absence Bank receipt movements by the Register "R3035 Ca
 			| 'Register  "R3035 Cash planning'   |     
 	And I close all client application windows
 
+Scenario: _043424 check Bank receipt movements by the Register "R5022 Expenses" (with comission)
+	And I close all client application windows
+	* Select Bank receipt (payment from customer)
+		Given I open hyperlink "e1cib/list/Document.BankReceipt"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '513' |
+	* Check movements by the Register  "R5022 Expenses" 
+		And I click "Registrations report" button
+		And I select "R5022 Expenses" exact value from "Register" drop-down list
+		And I click "Generate report" button
+			| 'Bank receipt 513 dated 04.06.2021 12:27:04' | ''                    | ''          | ''             | ''             | ''                   | ''             | ''         | ''         | ''                    | ''                             |
+			| 'Document registrations records'             | ''                    | ''          | ''             | ''             | ''                   | ''             | ''         | ''         | ''                    | ''                             |
+			| 'Register  "R5022 Expenses"'                 | ''                    | ''          | ''             | ''             | ''                   | ''             | ''         | ''         | ''                    | ''                             |
+			| ''                                           | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''                   | ''             | ''         | ''         | ''                    | ''                             |
+			| ''                                           | ''                    | 'Amount'    | 'Company'      | 'Branch'       | 'Profit loss center' | 'Expense type' | 'Item key' | 'Currency' | 'Additional analytic' | 'Multi currency movement type' |
+			| ''                                           | '04.06.2021 12:27:04' | '1,8'       | 'Main Company' | 'Front office' | ''                   | 'Expense'      | ''         | 'USD'      | ''                    | 'Reporting currency'           |
+			| ''                                           | '04.06.2021 12:27:04' | '10,51'     | 'Main Company' | 'Front office' | ''                   | 'Expense'      | ''         | 'TRY'      | ''                    | 'Local currency'               |
+			| ''                                           | '04.06.2021 12:27:04' | '10,51'     | 'Main Company' | 'Front office' | ''                   | 'Expense'      | ''         | 'TRY'      | ''                    | 'en description is empty'      |
+	And I close all client application windows
+
 Scenario: _043430 Bank receipt clear posting/mark for deletion
 	And I close all client application windows
 	* Select Bank receipt

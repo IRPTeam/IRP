@@ -1,4 +1,8 @@
 Procedure FillingWithDefaultDataFilling(Source, FillingData, FillingText, StandardProcessing, Force = False) Export
+	If Force = Undefined Then
+		Force = False;
+	EndIf;
+	
 	Data = New Structure();
 	
 	Data.Insert("Author", SessionParameters.CurrentUser);

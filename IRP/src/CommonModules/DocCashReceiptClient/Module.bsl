@@ -371,6 +371,7 @@ Procedure PaymentListBasisDocumentStartChoiceEnd(Result, AdditionalParameters) E
 	If CurrentData <> Undefined Then
 		CurrentData.BasisDocument = Result.BasisDocument;
 		CurrentData.Amount        = Result.Amount;
+		DocumentsClient.CalculateTotalAmount(Form.Object, Form);
 	EndIf;
 EndProcedure
 

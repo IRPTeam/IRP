@@ -208,6 +208,7 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	Tables.R2020B_AdvancesFromCustomers.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R3010B_CashOnHand.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R3035T_CashPlanning.Columns.Add("Key" , Metadata.DefinedTypes.typeRowID.Type);
+	Tables.R5022T_Expenses.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
 #EndRegion	
@@ -380,6 +381,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(T2011S_PartnerTransactions());
 	QueryArray.Add(R5011B_CustomersAging());
 	QueryArray.Add(R3035T_CashPlanning());
+	QueryArray.Add(R5022T_Expenses());
 	Return QueryArray;
 EndFunction
 
@@ -738,6 +740,18 @@ Function R3035T_CashPlanning()
 		|	PaymentList AS PaymentList
 		|WHERE
 		|	NOT PaymentList.PlaningTransactionBasis.Ref IS NULL";
+EndFunction
+
+Function R5022T_Expenses()
+	Return
+		"SELECT
+		|	PaymentList.Commission AS Amount,
+		|	*
+		|INTO R5022T_Expenses
+		|FROM
+		|	PaymentList AS PaymentList
+		|WHERE
+		|	PaymentList.Commission <> 0";
 EndFunction
 
 #EndRegion

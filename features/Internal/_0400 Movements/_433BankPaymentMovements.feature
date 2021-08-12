@@ -372,6 +372,28 @@ Scenario: _043318 check absence Bank payment movements by the Register "R3035 Ca
 			| 'R3035 Cash planning'   | 
 	And I close all client application windows
 
+Scenario: _043319 check Bank payment movements by the Register "R5022 Expenses" (with  comission)
+	And I close all client application windows
+	* Select Bank payment
+		Given I open hyperlink "e1cib/list/Document.BankPayment"
+		And I go to line in "List" table
+			| 'Number' | 'Date'                |
+			| '323'    | '03.06.2021 17:01:44' |
+	* Check movements by the Register  "R5022 Expenses" 
+		And I click "Registrations report" button
+		And I select "R5022 Expenses" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Bank payment 323 dated 03.06.2021 17:01:44' | ''                    | ''          | ''             | ''       | ''                   | ''             | ''         | ''         | ''                    | ''                             |
+			| 'Document registrations records'             | ''                    | ''          | ''             | ''       | ''                   | ''             | ''         | ''         | ''                    | ''                             |
+			| 'Register  "R5022 Expenses"'                 | ''                    | ''          | ''             | ''       | ''                   | ''             | ''         | ''         | ''                    | ''                             |
+			| ''                                           | 'Period'              | 'Resources' | 'Dimensions'   | ''       | ''                   | ''             | ''         | ''         | ''                    | ''                             |
+			| ''                                           | ''                    | 'Amount'    | 'Company'      | 'Branch' | 'Profit loss center' | 'Expense type' | 'Item key' | 'Currency' | 'Additional analytic' | 'Multi currency movement type' |
+			| ''                                           | '03.06.2021 17:01:44' | '2,57'      | 'Main Company' | ''       | 'Front office'       | 'Expense'      | ''         | 'USD'      | ''                    | 'Reporting currency'           |
+			| ''                                           | '03.06.2021 17:01:44' | '15'        | 'Main Company' | ''       | 'Front office'       | 'Expense'      | ''         | 'TRY'      | ''                    | 'Local currency'               |
+			| ''                                           | '03.06.2021 17:01:44' | '15'        | 'Main Company' | ''       | 'Front office'       | 'Expense'      | ''         | 'TRY'      | ''                    | 'en description is empty'      |
+	And I close all client application windows
+
 Scenario: _043330 Bank payment clear posting/mark for deletion
 	And I close all client application windows
 	* Select Bank payment

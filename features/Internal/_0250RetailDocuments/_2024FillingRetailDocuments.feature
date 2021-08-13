@@ -1202,7 +1202,7 @@ Scenario: _0154188 check customer on change in POS
 		And I click "Search customer" button
 		And I go to line in "List" table
 			| 'Description'                  |
-			| 'Retail customer with partner' |
+			| 'Name Retail customer Surname Retail customer' |
 		And I select current line in "List" table
 		And I click "OK" button
 		Then "Update item list info" window is opened
@@ -1236,6 +1236,8 @@ Scenario: _0154188 check customer on change in POS
 			| 'Description'            |
 			| 'Retail customer Second' |
 		And I select current line in "List" table
+		And I click "OK" button
+		Then "Update item list info" window is opened
 		And I click "OK" button
 		And "ItemList" table contains lines
 			| 'Item'  | 'Item key' | 'Serial number' | 'Quantity' | 'Price'  | 'Offers amount' | 'Total amount' |
@@ -3493,7 +3495,7 @@ Scenario: _0154182 check filling in Retail sales when select retail customer (wi
 		And I click "Search customer" button
 		And I go to line in "List" table
 			| 'Description'                  |
-			| 'Retail customer with partner' |
+			| 'Name Retail customer Surname Retail customer' |
 		And I select current line in "List" table
 		And I click "OK" button
 		Then "Update item list info" window is opened

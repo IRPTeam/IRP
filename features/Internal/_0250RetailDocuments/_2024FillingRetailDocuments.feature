@@ -1185,6 +1185,65 @@ Scenario: _0154140 check filling in retail customer from the POS (without partne
 		And I save the window as "$$RetailSalesReceipt0154140$$"
 	And I close all client application windows	
 
+Scenario: _0154188 check customer on change in POS 
+	And I close all client application windows
+	* Open Point of sale
+		And In the command interface I select "Retail" "Point of sale"
+	* Add items and payment
+		And I click "Show items" button
+		And I go to line in "ItemsPickup" table
+			| 'Item'  |
+			| 'Dress' |
+		And I go to line in "ItemKeysPickup" table
+			| 'Presentation' |
+			| 'M/White'      |
+		And I select current line in "ItemKeysPickup" table
+	* Select retail customer with own partner term
+		And I click "Search customer" button
+		And I go to line in "List" table
+			| 'Description'                  |
+			| 'Name Retail customer Surname Retail customer' |
+		And I select current line in "List" table
+		And I click "OK" button
+		Then "Update item list info" window is opened
+		And I click "OK" button
+	* Check price
+		And "ItemList" table contains lines
+			| 'Item'  | 'Item key' | 'Serial number' | 'Quantity' | 'Price'  | 'Offers amount' | 'Total amount' |
+			| 'Dress' | 'M/White'  | ''              | '1,000'    | '440,68' | ''              | '520,00'       |
+	* Delete retail customer and check price change
+		And I click the button named "ClearRetailCustomer"
+		Then "Update item list info" window is opened
+		And I click "OK" button
+		And "ItemList" table contains lines
+			| 'Item'  | 'Item key' | 'Serial number' | 'Quantity' | 'Price'  | 'Offers amount' | 'Total amount' |
+			| 'Dress' | 'M/White'  | ''              | '1,000'    | '520,00' | ''              | '520,00'       |
+	* Select retail customer with own partner term again and check price change
+		And I click "Search customer" button
+		And I go to line in "List" table
+			| 'Description'                  |
+			| 'Name Retail customer Surname Retail customer' |
+		And I select current line in "List" table
+		And I click "OK" button
+		Then "Update item list info" window is opened
+		And I click "OK" button
+		And "ItemList" table contains lines
+			| 'Item'  | 'Item key' | 'Serial number' | 'Quantity' | 'Price'  | 'Offers amount' | 'Total amount' |
+			| 'Dress' | 'M/White'  | ''              | '1,000'    | '440,68' | ''              | '520,00'       |
+	* Change retail customer and check price change
+		And I click "Search customer" button
+		And I go to line in "List" table
+			| 'Description'            |
+			| 'Retail customer Second' |
+		And I select current line in "List" table
+		And I click "OK" button
+		Then "Update item list info" window is opened
+		And I click "OK" button
+		And "ItemList" table contains lines
+			| 'Item'  | 'Item key' | 'Serial number' | 'Quantity' | 'Price'  | 'Offers amount' | 'Total amount' |
+			| 'Dress' | 'M/White'  | ''              | '1,000'    | '520,00' | ''              | '520,00'       |
+		And I close all client application windows
+
 Scenario:  _0154141 manual price adjustment in the POS
 	And I close all client application windows
 	* Open Point of sale
@@ -3436,7 +3495,7 @@ Scenario: _0154182 check filling in Retail sales when select retail customer (wi
 		And I click "Search customer" button
 		And I go to line in "List" table
 			| 'Description'                  |
-			| 'Retail customer with partner' |
+			| 'Name Retail customer Surname Retail customer' |
 		And I select current line in "List" table
 		And I click "OK" button
 		Then "Update item list info" window is opened

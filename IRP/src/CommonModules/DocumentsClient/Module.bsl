@@ -96,18 +96,7 @@ Procedure RetailCustomerOnChange(Object, Form, Module, Item = Undefined, Setting
 		RetailCustomerInfo = ServerData.RetailCustomerInfo;
 		AgreementInfo = ServerData.RetailCustomerInfo.AgreementInfo;
 	EndIf;	
-	
-	RetailCustomerInfo.Insert("UsePartnerTransactions", True);
-	
-	If Not (ValueIsFilled(RetailCustomerInfo.Partner) And ValueIsFilled(RetailCustomerInfo.LegalName)
-		And ValueIsFilled(RetailCustomerInfo.Agreement)) Then
-		RetailCustomerInfo.Partner   = Object.Partner;
-		RetailCustomerInfo.LegalName = Object.LegalName;
-		RetailCustomerInfo.Agreement = Object.Agreement;
-		RetailCustomerInfo.UsePartnerTransactions = False;
-		AgreementInfo = ServerData.AgreementInfo;
-	EndIf;
-	
+		
 	Settings.Insert("ObjectAttributes"	, RetailCustomerSettings.ObjectAttributes);
 	Settings.Insert("FormAttributes"	, RetailCustomerSettings.FormAttributes);
 	Settings.CalculateSettings = CalculationStringsClientServer.GetCalculationSettings(Settings.CalculateSettings);

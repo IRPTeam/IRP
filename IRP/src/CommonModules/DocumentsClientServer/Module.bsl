@@ -4,6 +4,10 @@
 Function GetGroupItemsArray(Object, Form)
 	ItemsArray = New Array;
 	
+	If Not CommonFunctionsClientServer.ObjectHasProperty(Form, "GroupItems") Then
+		Return ItemsArray;
+	EndIf;
+	
 	ItemStructure = New Structure;
 	ItemStructure.Insert("Title", R().Form_013 + ":" + Chars.NBSp);
 	ItemStructure.Insert("Value", Format(Object.Date, "DLF=DDT;"));
@@ -45,6 +49,10 @@ Procedure ChangeTitleGroupTitle(Object, Form, Settings = Undefined) Export
 	EndIf;
 	
 	ItemsArray = GetGroupItemsArray(Object, Form);
+	
+	If Not ItemsArray.Count() Then
+		Return;
+	EndIf;
 	
 	TitleFont = New Font(Form.Items.DecorationGroupTitleCollapsedLabel.Font, , , True);
 	TitleTextColor = WebColors.Gray;

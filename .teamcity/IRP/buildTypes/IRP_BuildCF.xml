@@ -31,7 +31,7 @@ find /c "completed successfully" %env.LogFile1C% && ( echo Success ) || ( echo "
       </runner>
       <runner id="RUNNER_63" name="Update DB Config from XML HASH" type="simpleRunner">
         <conditions>
-          <equals name="teamcity.build.branch" value=" develop_hash" />
+          <equals name="teamcity.build.branch" value="develop_hash" />
         </conditions>
         <parameters>
           <param name="script.content"><![CDATA[start /wait "1cv8.exe" %env.PathTo1CPlatform%  Designer /F"C:\IRP_HASH" /Out %env.LogFile1C% /LoadConfigFromFiles %system.teamcity.build.workingDir%\xml /UpdateDBCfg

@@ -6,12 +6,12 @@
   <param name="authMethod" value="PASSWORD" />
   <param name="branch" value="develop" />
   <param name="ignoreKnownHosts" value="true" />
-  <param name="secure:password" value="credentialsJSON:670abf51-3690-414c-b712-ed60e503a0bf" />
+  <param name="secure:password" value="credentialsJSON:11afbd00-583f-4236-976b-588598edea15" />
   <param name="submoduleCheckout" value="CHECKOUT" />
   <param name="teamcity:branchSpec"><![CDATA[+:refs/heads/*
 +:refs/*/head]]></param>
   <param name="url" value="https://github.com/IRPTeam/IRP" />
-  <param name="useAlternates" value="true" />
+  <param name="useAlternates" value="USE_MIRRORS" />
   <param name="username" value="DitriXNew" />
   <param name="usernameStyle" value="USERID" />
 </vcs-root>

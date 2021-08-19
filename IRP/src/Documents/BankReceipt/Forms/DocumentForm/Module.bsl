@@ -532,6 +532,11 @@ EndProcedure
 
 #EndRegion
 
+&AtClient
+Procedure ShowRowKey(Command)
+	DocumentsClient.ShowRowKey(ThisObject);	
+EndProcedure
+
 #Region Common
 
 &AtClient

@@ -225,6 +225,7 @@ Procedure PaymentListBeforeAddRow(Object, Form, Item, Cancel, Clone, Parent, IsF
 	Cancel = True;
 	NewRow = Object.PaymentList.Add();
 	Form.Items.PaymentList.CurrentRow = NewRow.GetID();
+	UserSettingsClient.FillingRowFromSettings(Object, "Object.PaymentList", NewRow, True);
 	Form.Items.PaymentList.ChangeRow();
 	PaymentListOnChange(Object, Form, Item);
 	CurrentData = Form.Items.PaymentList.CurrentData;

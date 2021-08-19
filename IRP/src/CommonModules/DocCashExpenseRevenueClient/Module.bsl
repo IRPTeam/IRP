@@ -135,17 +135,28 @@ Procedure PaymentListOnStartEdit(Object, Form, Item, NewRow, Clone) Export
 		Settings.Insert("Rows", Rows);
 		CalculateItemsRows(Object, Form, Settings);
 		Return;
-	EndIf;
-	
-	If Not NewRow  Then
+	EndIf;	
+EndProcedure
+
+Procedure PaymentListBeforeAddRow(Object, Form, Item, Cancel, Clone, Parent, IsFolder, Parameter) Export
+	If Clone Then
 		Return;
 	EndIf;
-	
-	If Item.CurrentData = Undefined Then
-		Return;
-	EndIf;
-	
-	Item.CurrentData.Currency = Form.Currency;
+	Cancel = True;
+	NewRow = Object.PaymentList.Add();
+	Form.Items.PaymentList.CurrentRow = NewRow.GetID();
+	UserSettingsClient.FillingRowFromSettings(Object, "Object.PaymentList", NewRow, True);
+	NewRow.Currency = Form.Currency;
+	Form.Items.PaymentList.ChangeRow();
+	PaymentListOnChange(Object, Form, Item);
+EndProcedure
+
+Procedure PaymentListOnChange(Object, Form, Item) Export
+	For Each Row In Object.PaymentList Do
+		If Not ValueIsFilled(Row.Key) Then
+			Row.Key = New UUID();
+		EndIf;
+	EndDo;
 EndProcedure
 
 Procedure PaymentListAfterDeleteRow(Object, Form, Item) Export

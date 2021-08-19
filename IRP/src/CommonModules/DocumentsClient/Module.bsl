@@ -3187,7 +3187,10 @@ Procedure ShowRowKey(Form) Export
 	|ResultsTreeBasis, ResultsTreeBasisUnit, ResultsTreeQuantityInBaseUnit, ResultsTreeKey,
 	|ResultsTreeRowID, ResultsTreeRowRef, ResultsTreeBasisKey, ResultsTreeCurrentStep,
 	|LinkedBasises,
-	|ItemListQuantityInBaseUnit, QuantityInBaseUnit";
+	|ItemListQuantityInBaseUnit, QuantityInBaseUnit,
+	|GroupCostAllocationDetail, CostRowsRowID, AllocationRowsBasisRowID, AllocationRowsRowID, CostDocumentsKey,
+	|AllocationDocumentsKey, CostRowsTreeRowID, DocumentRowsBasisRowID, DocumentRowsRowID, ResultTreeRowID,
+	|PaymentListKey";
 	
 	ArrayOfItemNames = StrSplit(ItemNames, ",");
 	For Each ItemName In ArrayOfItemNames Do

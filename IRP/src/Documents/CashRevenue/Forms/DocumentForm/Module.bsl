@@ -75,11 +75,7 @@ EndProcedure
 
 &AtClient
 Procedure PaymentListOnChange(Item)
-	For Each Row In Object.PaymentList Do
-		If Not ValueIsFilled(Row.Key) Then
-			Row.Key = New UUID();
-		EndIf;
-	EndDo;
+	DocCashExpenseRevenueClient.PaymentListOnChange(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient
@@ -111,6 +107,11 @@ EndProcedure
 &AtClient
 Procedure PaymentListOnStartEdit(Item, NewRow, Clone)
 	DocCashExpenseRevenueClient.PaymentListOnStartEdit(Object, ThisObject, Item, NewRow, Clone);
+EndProcedure
+
+&AtClient
+Procedure PaymentListBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
+	DocCashExpenseRevenueClient.PaymentListBeforeAddRow(Object, ThisObject, Item, Cancel, Clone, Parent, IsFolder, Parameter);
 EndProcedure
 
 &AtClient
@@ -451,6 +452,11 @@ EndProcedure
 #EndRegion
 
 #EndRegion
+
+&AtClient
+Procedure ShowRowKey(Command)
+	DocumentsClient.ShowRowKey(ThisObject);	
+EndProcedure
 
 #Region AddAttributes
 

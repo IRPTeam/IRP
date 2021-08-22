@@ -40,6 +40,20 @@ find /c "completed successfully" %env.LogFile1C% && ( echo Success ) || ( echo "
     <vcs-settings />
     <requirements />
     <build-triggers />
+    <build-extensions>
+      <extension id="BUILD_EXT_10" type="JetBrains.FileContentReplacer">
+        <parameters>
+          <param name="teamcity.file.content.replacer.failBuild" value="true" />
+          <param name="teamcity.file.content.replacer.file.encoding" value="autodetect" />
+          <param name="teamcity.file.content.replacer.file.encoding.custom" value="autodetect" />
+          <param name="teamcity.file.content.replacer.pattern" value="#BuildNumber#" />
+          <param name="teamcity.file.content.replacer.pattern.case.sensitive" value="true" />
+          <param name="teamcity.file.content.replacer.regexMode" value="FIXED_STRINGS" />
+          <param name="teamcity.file.content.replacer.replacement" value="%env.BUILD_NUMBER%" />
+          <param name="teamcity.file.content.replacer.wildcards" value="+:IRP\src\Configuration\Configuration.mdo" />
+        </parameters>
+      </extension>
+    </build-extensions>
     <cleanup />
   </settings>
 </build-type>

@@ -106,7 +106,7 @@ find /c "Distribution files successfully created" %env.LogFile1C% && ( echo Succ
     <artifact-dependencies>
       <dependency id="ARTIFACT_DEPENDENCY_7" sourceBuildTypeId="IRP_BuildCF" cleanDestination="false">
         <revisionRule name="sameChainOrLastFinished" revision="latest.sameChainOrLastFinished" />
-        <artifact sourcePath="%teamcity.project.id%.cf&#xD;&#xA;%teamcity.project.id%.zip" />
+        <artifact sourcePath="%teamcity.project.id%.cf&#xD;&#xA;%teamcity.project.id%.zip =&gt; %teamcity.project.id%_xml" />
       </dependency>
     </artifact-dependencies>
     <dependencies>

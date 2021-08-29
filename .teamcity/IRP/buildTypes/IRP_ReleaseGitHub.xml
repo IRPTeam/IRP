@@ -75,6 +75,11 @@ find /c "Distribution files successfully created" %env.LogFile1C% && ( echo Succ
           <param name="use.custom.script" value="true" />
         </parameters>
       </runner>
+      <runner id="RUNNER_65" name="" type="ConvertFromEDTtoXML">
+        <parameters>
+          <param name="teamcity.step.mode" value="default" />
+        </parameters>
+      </runner>
     </build-runners>
     <vcs-settings>
       <vcs-entry-ref root-id="IRP_GitTC" />

@@ -95,7 +95,7 @@ find /c "Distribution files successfully created" %env.LogFile1C% && ( echo Succ
           <param name="teamcity.file.content.replacer.failBuild" value="true" />
           <param name="teamcity.file.content.replacer.file.encoding" value="autodetect" />
           <param name="teamcity.file.content.replacer.file.encoding.custom" value="autodetect" />
-          <param name="teamcity.file.content.replacer.pattern" value="Result = False;" />
+          <param name="teamcity.file.content.replacer.pattern" value="Result = False; // CI delete" />
           <param name="teamcity.file.content.replacer.pattern.case.sensitive" value="true" />
           <param name="teamcity.file.content.replacer.regexMode" value="FIXED_STRINGS" />
           <param name="teamcity.file.content.replacer.replacement" value="Result = AttachAddIn(LinkOnDriver, ObjectName[1]);" />

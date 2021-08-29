@@ -17,7 +17,8 @@
         <parameters>
           <param name="branchFilter"><![CDATA[-:*
 +:develop
-+:pull/*]]></param>
++:pull/*
++:*multilang]]></param>
           <param name="enableQueueOptimization" value="true" />
           <param name="quietPeriodMode" value="DO_NOT_USE" />
           <param name="triggerRules" value="-:.teamcity/**" />

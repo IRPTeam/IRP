@@ -53,6 +53,18 @@ find /c "completed successfully" %env.LogFile1C% && ( echo Success ) || ( echo "
           <param name="teamcity.file.content.replacer.wildcards" value="+:IRP\src\Configuration\Configuration.mdo" />
         </parameters>
       </extension>
+      <extension id="BUILD_EXT_12" type="JetBrains.FileContentReplacer">
+        <parameters>
+          <param name="teamcity.file.content.replacer.failBuild" value="true" />
+          <param name="teamcity.file.content.replacer.file.encoding" value="autodetect" />
+          <param name="teamcity.file.content.replacer.file.encoding.custom" value="autodetect" />
+          <param name="teamcity.file.content.replacer.pattern" value="Result = AttachAddIn(LinkOnDriver, ObjectName[1]);" />
+          <param name="teamcity.file.content.replacer.pattern.case.sensitive" value="true" />
+          <param name="teamcity.file.content.replacer.regexMode" value="FIXED_STRINGS" />
+          <param name="teamcity.file.content.replacer.replacement" value="Result = False; // CI delete" />
+          <param name="teamcity.file.content.replacer.wildcards" value="+:IRP\src\CommonModules\HardwareClient\Module.bsl" />
+        </parameters>
+      </extension>
     </build-extensions>
     <cleanup />
   </settings>

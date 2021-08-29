@@ -6,7 +6,7 @@
     <options>
       <option name="allowPersonalBuildTriggering" value="false" />
       <option name="artifactRules" value="NewRelease =&gt; NewRelease" />
-      <option name="branchFilter" value="+:master&#xD;&#xA;+:master_multilang" />
+      <option name="branchFilter" value="+:*multilang" />
       <option name="buildConfigurationType" value="DEPLOYMENT" />
       <option name="cleanBuild" value="true" />
       <option name="maximumNumberOfBuilds" value="1" />

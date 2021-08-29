@@ -115,6 +115,13 @@ find /c "Distribution files successfully created" %env.LogFile1C% && ( echo Succ
           <option name="take-successful-builds-only" value="true" />
         </options>
       </depend-on>
+      <depend-on sourceBuildTypeId="IRP_SonarQube">
+        <options>
+          <option name="run-build-if-dependency-failed" value="CANCEL" />
+          <option name="take-started-build-with-same-revisions" value="true" />
+          <option name="take-successful-builds-only" value="true" />
+        </options>
+      </depend-on>
     </dependencies>
     <cleanup />
   </settings>

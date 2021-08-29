@@ -38,6 +38,11 @@ $sXML | foreach {
           <param name="teamcity.step.mode" value="default" />
         </parameters>
       </runner>
+      <runner id="RUNNER_65" name="" type="ConvertFromEDTtoXML">
+        <parameters>
+          <param name="teamcity.step.mode" value="default" />
+        </parameters>
+      </runner>
       <runner id="RUNNER_21" name="Create files cf and cfu" type="simpleRunner">
         <parameters>
           <param name="script.content"><![CDATA[start /wait "1cv8.exe" %env.PathTo1CPlatform%  CREATEINFOBASE File=%system.teamcity.build.workingDir%\TempDB /UseTemplate %teamcity.tool.TemplateIRP%\TemplateIRP.dt /Out %env.LogFile1C%
@@ -73,11 +78,6 @@ find /c "Distribution files successfully created" %env.LogFile1C% && ( echo Succ
 %teamcity.tool.windows-amd64-github-release%\bin\windows\amd64\github-release.exe upload  --security-token %env.GitHubSecurityToken% --user DitriXNew --repo irp --tag Release-v%env.Version%.%build.number%  --name Release-v%env.Version%.%build.number%.cf --file %system.teamcity.build.workingDir%\IRP_develop.cf]]></param>
           <param name="teamcity.step.mode" value="default" />
           <param name="use.custom.script" value="true" />
-        </parameters>
-      </runner>
-      <runner id="RUNNER_65" name="" type="ConvertFromEDTtoXML">
-        <parameters>
-          <param name="teamcity.step.mode" value="default" />
         </parameters>
       </runner>
     </build-runners>

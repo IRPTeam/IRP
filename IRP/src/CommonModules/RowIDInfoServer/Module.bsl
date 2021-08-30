@@ -510,6 +510,7 @@ Procedure FillRowID_IT(Source)
 	
 	NewRowsSC = New Map();
 	NewRowsGR = New Map();
+	RowsForDelete = New Array();
 		
 	For Each RowItemList In Source.ItemList Do	
 		Row = Undefined;
@@ -530,7 +531,7 @@ Procedure FillRowID_IT(Source)
 		If Source.UseShipmentConfirmation Then
 			NewRowsSC.Insert(Row, RowItemList.QuantityInBaseUnit);
 		EndIf;
-		
+		RowsForDelete.Add(Row);	
 	EndDo;
 		
 	For Each Row In NewRowsSC Do
@@ -538,7 +539,7 @@ Procedure FillRowID_IT(Source)
 		FillPropertyValues(NewRow, Row.Key);
 		NewRow.CurrentStep = Undefined;
 		NewRow.NextStep    = Catalogs.MovementRules.SC;
-		NewRow.Quantity    =Row.Value;
+		NewRow.Quantity    = Row.Value;
 	EndDo;
 	
 	For Each Row In NewRowsGR Do
@@ -546,7 +547,11 @@ Procedure FillRowID_IT(Source)
 		FillPropertyValues(NewRow, Row.Key);
 		NewRow.CurrentStep = Undefined;
 		NewRow.NextStep    = Catalogs.MovementRules.GR;
-		NewRow.Quantity    =Row.Value;
+		NewRow.Quantity    = Row.Value;
+	EndDo;
+	
+	For Each RowForDelete In RowsForDelete Do
+		Source.RowIDInfo.Delete(RowForDelete);
 	EndDo;
 EndProcedure
 

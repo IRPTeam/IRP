@@ -287,6 +287,7 @@ Procedure FillRowID_SI(Source)
 			EndDo;
 		EndIf;
 	EndDo;
+	DeleteRowsWithoutSteps(Source);
 EndProcedure
 
 Procedure FillRowID_SC(Source)
@@ -405,6 +406,8 @@ Procedure FillRowID_PI(Source)
 		NewRow.NextStep    = Catalogs.MovementRules.SI_SC;
 		NewRow.Quantity    = Row.Value;
 	EndDo;
+	
+	DeleteRowsWithoutSteps(Source);
 EndProcedure
 
 Procedure FillRowID_GR(Source)
@@ -776,6 +779,7 @@ EndFunction
 Function GetNextStep_SI(Source, RowItemList, Row)
 	NextStep = Catalogs.MovementRules.EmptyRef();
 	If RowItemList.UseShipmentConfirmation
+		And Not RowItemList.ItemKey.Item.ItemType.Type = Enums.ItemTypes.Service
 		And Not Source.ShipmentConfirmations.FindRows(New Structure("Key", RowItemList.Key)).Count() Then
 			NextStep = Catalogs.MovementRules.SC;
 	EndIf;
@@ -807,6 +811,7 @@ EndFunction
 Function GetNextStep_PI(Source, RowItemList, Row)
 	NextStep = Catalogs.MovementRules.EmptyRef();
 	If RowItemList.UseGoodsReceipt
+		And Not RowItemList.ItemKey.Item.ItemType.Type = Enums.ItemTypes.Service
 		And Not Source.GoodsReceipts.FindRows(New Structure("Key", RowItemList.Key)).Count() Then
 			NextStep = Catalogs.MovementRules.GR;
 	EndIf;
@@ -895,6 +900,18 @@ Function GetNextStep_RRR(Source, RowItemList, Row)
 EndFunction	
 
 #EndRegion
+
+Procedure DeleteRowsWithoutSteps(Source)	
+	ArrayForDelete = New Array();
+	For Each Row In Source.RowIDInfo Do
+		If Not ValueIsFilled(Row.CurrentStep) And Not ValueIsFilled(Row.NextStep) Then
+			ArrayForDelete.Add(Row);
+		EndIf;
+	EndDo;
+	For Each ItemForDelete In ArrayForDelete Do
+		Source.RowIDInfo.Delete(ItemForDelete);
+	EndDo;
+EndProcedure
 
 Procedure FillRowID(Source, Row, RowItemList)
 	Row.Key      = RowItemList.Key;

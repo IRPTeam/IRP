@@ -2,7 +2,7 @@
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	ThisObject.MainFilter = Parameters.Filter;
-	
+	ThisObject.CurrentLineNumber = Parameters.SelectedRowInfo.SelectedRow.LineNumber;
 	ResultsTableTmp = ThisObject.ResultsTable.Unload().CopyColumns();
 	For Each RowIdInfo In Parameters.TablesInfo.RowIDInfoRows Do
 		If Not ValueIsFilled(RowIdInfo.CurrentStep) Then
@@ -39,6 +39,12 @@ EndProcedure
 Procedure ExpandAllTrees() Export
 	RowIDInfoClient.ExpandTree(Items.BasisesTree, ThisObject.BasisesTree.GetItems());
 	RowIDInfoClient.ExpandTree(Items.ResultsTree, ThisObject.ResultsTree.GetItems());
+	If ValueIsFilled(ThisObject.CurrentLineNumber) Then
+		ItemListRow = ThisObject.ItemListRows.FindRows(New Structure("LineNumber", ThisObject.CurrentLineNumber));
+		If ItemListRow.Count() Then
+			Items.ItemListRows.CurrentRow = ItemListRow[0].GetID();
+		EndIf;
+	EndIf;
 	SetButtonsEnabled();
 EndProcedure
 

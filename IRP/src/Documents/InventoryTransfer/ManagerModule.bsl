@@ -205,7 +205,8 @@ Function R4011B_FreeStocks()
 		|FROM
 		|	ItemList AS ItemList
 		|WHERE
-		|	NOT InventoryTransferOrderExists
+		|	NOT ItemList.InventoryTransferOrderExists
+		|	AND NOT ItemList.UseShipmentConfirmation
 		|
 		|UNION ALL
 		|
@@ -218,7 +219,7 @@ Function R4011B_FreeStocks()
 		|FROM
 		|	ItemList AS ItemList
 		|WHERE
-		|NOT ItemList.UseGoodsReceipt";
+		|	NOT ItemList.UseGoodsReceipt";
 EndFunction
 
 Function R4012B_StockReservation()

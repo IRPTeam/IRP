@@ -135,6 +135,7 @@ Function R5022T_Expenses()
 	Return
 		"SELECT
 		|	PaymentList.NetAmount AS Amount,
+		|	PaymentList.TotalAmount AS AmountWithTaxes,
 		|	*
 		|INTO R5022T_Expenses
 		|FROM

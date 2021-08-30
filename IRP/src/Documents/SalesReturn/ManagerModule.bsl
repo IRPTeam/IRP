@@ -554,7 +554,8 @@ Function R5021T_Revenues()
 	Return
 		"SELECT
 		|	*,
-		|	- ItemList.NetAmount AS Amount
+		|	- ItemList.NetAmount AS Amount,
+		|	- ItemList.Amount AS AmountWithTaxes
 		|INTO R5021T_Revenues
 		|FROM
 		|	ItemList AS ItemList

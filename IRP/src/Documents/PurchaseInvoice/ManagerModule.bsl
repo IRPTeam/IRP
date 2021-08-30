@@ -859,7 +859,8 @@ Function R5022T_Expenses()
 	Return
 		"SELECT
 		|	*,
-		|	ItemList.NetAmount AS Amount
+		|	ItemList.NetAmount AS Amount,
+		|	ItemList.Amount AS AmountWithTaxes
 		|INTO R5022T_Expenses
 		|FROM
 		|	ItemList AS ItemList

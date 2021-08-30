@@ -135,6 +135,7 @@ Function R5021T_Revenues()
 	Return
 		"SELECT
 		|	PaymentList.NetAmount AS Amount,
+		|	PaymentList.TotalAmount AS AmountWithTaxes,
 		|	*
 		|INTO R5021T_Revenues
 		|FROM

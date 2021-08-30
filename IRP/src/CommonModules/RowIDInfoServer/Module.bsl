@@ -531,7 +531,9 @@ Procedure FillRowID_IT(Source)
 		If Source.UseShipmentConfirmation Then
 			NewRowsSC.Insert(Row, RowItemList.QuantityInBaseUnit);
 		EndIf;
-		RowsForDelete.Add(Row);	
+		If Not ValueIsFilled(Row.CurrentStep) Then
+			RowsForDelete.Add(Row);	
+		EndIf;
 	EndDo;
 		
 	For Each Row In NewRowsSC Do

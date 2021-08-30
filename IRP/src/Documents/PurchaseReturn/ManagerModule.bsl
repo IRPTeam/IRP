@@ -319,7 +319,9 @@ EndFunction
 
 Function R1002T_PurchaseReturns()
 	Return
-		"SELECT *
+		"SELECT
+		|	ItemList.PurchaseInvoice AS Invoice, 
+		|	*
 		|INTO R1002T_PurchaseReturns
 		|FROM
 		|	ItemList AS ItemList

@@ -318,7 +318,9 @@ EndFunction
 
 Function R2002T_SalesReturns()
 	Return
-		"SELECT *
+		"SELECT 
+		|	ItemList.SalesInvoice AS Invoice,
+		|	*
 		|INTO R2002T_SalesReturns
 		|FROM
 		|	ItemList AS ItemList

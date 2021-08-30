@@ -114,4 +114,34 @@
 			</dcscor:item>
 		</appearance>
 	</item>
+	<item>
+		<selection>
+			<item>
+				<field>ItemListReservationDate</field>
+			</item>
+		</selection>
+		<filter>
+			<item xsi:type="FilterItemGroup">
+				<groupType>AndGroup</groupType>
+				<item xsi:type="FilterItemComparison">
+					<left xsi:type="dcscor:Field">Object.ItemList.ProcurementMethod</left>
+					<comparisonType>Equal</comparisonType>
+					<right xsi:type="dcscor:DesignTimeValue">Enum.ProcurementMethods.Stock</right>
+				</item>
+				<item xsi:type="FilterItemComparison">
+					<left xsi:type="dcscor:Field">Object.ItemList.ReservationDate</left>
+					<comparisonType>NotFilled</comparisonType>
+					<right xsi:type="v8:StandardBeginningDate">
+						<v8:variant xsi:type="v8:StandardBeginningDateVariant">Custom</v8:variant>
+					</right>
+				</item>
+			</item>
+		</filter>
+		<appearance>
+			<dcscor:item xsi:type="SettingsParameterValue">
+				<dcscor:parameter>MarkIncomplete</dcscor:parameter>
+				<dcscor:value xsi:type="xs:boolean">true</dcscor:value>
+			</dcscor:item>
+		</appearance>
+	</item>
 </ConditionalAppearance>

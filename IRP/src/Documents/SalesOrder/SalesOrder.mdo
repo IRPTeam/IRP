@@ -597,6 +597,23 @@
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
+    <attributes uuid="ba241f0e-5ce7-463c-9f70-264f08216284">
+      <name>ReservationDate</name>
+      <synonym>
+        <key>en</key>
+        <value>Reservation date</value>
+      </synonym>
+      <type>
+        <types>Date</types>
+        <dateQualifiers>
+          <dateFractions>Date</dateFractions>
+        </dateQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
   </tabularSections>
   <tabularSections uuid="46bdc8b0-f18a-4783-ad94-9d5dfcc5f136">
     <producedTypes>

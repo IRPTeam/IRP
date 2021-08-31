@@ -212,7 +212,7 @@ Scenario: _023003 copy SO and check filling in Row Id info table
 		Then the number of "RowIDInfo" table lines is "равно" "2"
 		And I close all client application windows
 				
-Scenario: _023007 check filling in Delivery date and Use items shipment scheduling
+Scenario: _023007 check filling in Delivery date/Reservation date and Use items shipment scheduling
 	* Create SO
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I click the button named "FormCreate"
@@ -256,7 +256,14 @@ Scenario: _023007 check filling in Delivery date and Use items shipment scheduli
 		And I save the value of the field named "DeliveryDate" as "$$DeliveryDate023007$$"
 		And "ItemList" table contains lines
 			| '#' | 'Profit loss center' | 'Price type'        | 'Item'  | 'Dont calculate row' | 'Q'     | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Revenue type' | 'Detail' | 'Procurement method' | 'Item key' | 'Cancel' | 'Delivery date'          | 'Cancel reason' |
-			| '1' | ''              | 'Basic Price Types' | 'Dress' | 'No'                 | '5,000' | 'pcs'  | '419,49'     | '550,00' | '18%' | ''              | '2 330,51'   | '2 750,00'     | 'Store 01' | ''             | ''       | 'Stock'              | 'L/Green'  | 'No'     | '$$DeliveryDate023007$$' | ''              |
+			| '1' | ''                   | 'Basic Price Types' | 'Dress' | 'No'                 | '5,000' | 'pcs'  | '419,49'     | '550,00' | '18%' | ''              | '2 330,51'   | '2 750,00'     | 'Store 01' | ''             | ''       | 'Stock'              | 'L/Green'  | 'No'     | '$$DeliveryDate023007$$' | ''              |
+	* Filling in reservation date
+		And I save "Format((EndOfDay(CurrentDate()) + 432000), \"DF=dd.MM.yyyy\")" in "$$$$DateCurrentDayPluSFive$$$$" variable
+		And I input "$$$$DateCurrentDayPluSFive$$$$" text in "Reservation date" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And "ItemList" table contains lines
+			| '#' | 'Profit loss center' | 'Price type'        | 'Item'  | 'Dont calculate row' | 'Q'     | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Revenue type' | 'Detail' | 'Procurement method' | 'Item key' | 'Cancel' | 'Reservation date'               | 'Cancel reason' |
+			| '1' | ''                   | 'Basic Price Types' | 'Dress' | 'No'                 | '5,000' | 'pcs'  | '419,49'     | '550,00' | '18%' | ''              | '2 330,51'   | '2 750,00'     | 'Store 01' | ''             | ''       | 'Stock'              | 'L/Green'  | 'No'     | '$$$$DateCurrentDayPluSFive$$$$' | ''              |
 	* Use items shipment scheduling
 		And I move to "Other" tab
 		And I set checkbox "Use items shipment scheduling"

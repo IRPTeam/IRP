@@ -78,6 +78,11 @@ Procedure RefreshTrees()
 	FillResultsTree(SelectedRowInfo.SelectedRow);
 	FillBasisesTree(SelectedRowInfo.FilterBySelectedRow);
 	ExpandAllTrees();
+	RowID = Undefined;
+	SetCurrentRowInResultsTree(ThisObject.ResultsTree.GetItems(), SelectedRowInfo.SelectedRow.Key, RowID);
+	If RowID <> Undefined Then
+		Items.ResultsTree.CurrentRow = RowID;
+	EndIf;
 EndProcedure	
 
 &AtServer
@@ -126,9 +131,9 @@ Procedure SetIsLinkedItemListRows()
 EndProcedure
 
 &AtServer
-Procedure SetAlreadyLinkedInfo(TreeRows)
+Procedure SetAlreadyLinkedInfo(TreeRows, Key)
 	For Each TreeRow In TreeRows Do
-		If TreeRow.DeepLevel Then
+		If TreeRow.DeepLevel And Key = TreeRow.Key Then
 			ThisObject.LinkedRowID = TreeRow.RowID;
 			If TypeOf(TreeRow.Basis) = Type("DocumentRef.ShipmentConfirmation")
 				Or TypeOf(TreeRow.Basis) = Type("DocumentRef.GoodsReceipt") Then
@@ -137,8 +142,22 @@ Procedure SetAlreadyLinkedInfo(TreeRows)
 				ThisObject.ShipingReceipt = False;
 			EndIf;
 		EndIf;
-		SetAlreadyLinkedInfo(TreeRow.GetItems());
+		SetAlreadyLinkedInfo(TreeRow.GetItems(), Key);
 	EndDo;
+EndProcedure
+
+&AtClient
+Procedure SetCurrentRowInResultsTree(TreeRows, Key, RowID)
+	If RowID <> Undefined Then
+		Return;
+	EndIf;
+	For Each TreeRow In TreeRows Do
+		If TreeRow.DeepLevel And Key = TreeRow.Key Then
+			RowID = TreeRow.GetID();
+			Break;
+		EndIf;
+		SetCurrentRowInResultsTree(TreeRow.GetItems(), Key, RowID);
+	EndDo;	
 EndProcedure
 
 &AtServer
@@ -148,7 +167,8 @@ Procedure FillResultsTree(SelectedRow)
 		Return;
 	EndIf;
 	
-	TmpBasisTable = ThisObject.ResultsTable.Unload().Copy(New Structure("Key", SelectedRow.Key));
+	TmpBasisTable = ThisObject.ResultsTable.Unload();
+	
 	BasisesTable = TmpBasisTable.CopyColumns();
 	For Each Row In TmpBasisTable Do
 		If ValueIsFilled(Row.Basis) Then
@@ -162,7 +182,7 @@ Procedure FillResultsTree(SelectedRow)
 	ThisObject.LinkedRowID = "";
 	ThisObject.ShipingReceipt = False;
 		
-	SetAlreadyLinkedInfo(ThisObject.ResultsTree.GetItems());
+	SetAlreadyLinkedInfo(ThisObject.ResultsTree.GetItems(), SelectedRow.Key);
 EndProcedure	
 
 &AtServer
@@ -369,6 +389,7 @@ Function CreateBasisesTable(FilterBySelectedRow)
 	EndDo;
 	
 	ArrayForDelete = New Array();
+	
 	If ValueIsFilled(ThisObject.LinkedRowID) Then
 		For Each Row In BasisesTable Do
 			If Row.RowID <> ThisObject.LinkedRowID Then
@@ -385,6 +406,7 @@ Function CreateBasisesTable(FilterBySelectedRow)
 			EndIf;	
 		EndDo;
 	EndIf;
+	
 	For Each ItemArray In ArrayForDelete Do
 		BasisesTable.Delete(ItemArray);
 	EndDo;

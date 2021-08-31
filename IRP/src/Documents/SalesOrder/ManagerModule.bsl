@@ -172,7 +172,11 @@ Function ItemList()
 	|	SalesOrderItemList.OffersAmount,
 	|	&StatusInfoPosting AS StatusInfoPosting,
 	|	SalesOrderItemList.Ref.Branch AS Branch,
-	|	SalesOrderItemList.ReservationDate AS ReservationDate
+	|	CASE
+	|		WHEN SalesOrderItemList.ReservationDate = DATETIME(1, 1, 1)
+	|			THEN SalesOrderItemList.Ref.Date
+	|		ELSE SalesOrderItemList.ReservationDate
+	|	END AS ReservationDate
 	|INTO ItemList
 	|FROM
 	|	Document.SalesOrder.ItemList AS SalesOrderItemList

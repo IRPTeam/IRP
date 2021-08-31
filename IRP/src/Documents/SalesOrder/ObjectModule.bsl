@@ -51,14 +51,6 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 				+ "].CancelReason", "Object.ItemList");
 			Cancel = True;
 		EndIf;
-		
-		If ValueIsFilled(Row.ProcurementMethod) 
-			And Row.ProcurementMethod = Enums.ProcurementMethods.Stock 
-			And Not ValueIsFilled(Row.ReservationDate) Then
-			CommonFunctionsClientServer.ShowUsersMessage(R().Error_096, "Object.ItemList[" + RowIndex
-				+ "].ReservationDate", "Object.ItemList");
-			Cancel = True;	
-		EndIf;
 	EndDo;
 EndProcedure
 

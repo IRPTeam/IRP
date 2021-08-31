@@ -308,7 +308,7 @@ Scenario: _018003 copy PI (based on PO) and check filling in Row Id info table (
 			| '$$Rov2PurchaseInvoice018001$$' | 'Purchase order 217 dated 12.02.2021 12:45:05' | '923e7825-c20f-4a3e-a983-3b85d80e475a' | 'GR'        | '5,000'  | '923e7825-c20f-4a3e-a983-3b85d80e475a' | 'PI&GR'        | '923e7825-c20f-4a3e-a983-3b85d80e475a' |
 			| '$$Rov3PurchaseInvoice018001$$' | 'Purchase order 217 dated 12.02.2021 12:45:05' | '4e941c9a-e895-4eb2-87cd-09fe5b60fc57' | 'GR'        | '8,000'  | '4e941c9a-e895-4eb2-87cd-09fe5b60fc57' | 'PI&GR'        | '4e941c9a-e895-4eb2-87cd-09fe5b60fc57' |
 			| '$$Rov4PurchaseInvoice018001$$' | 'Purchase order 217 dated 12.02.2021 12:45:05' | '8d544e62-9a68-43c3-8399-b4ef451d9770' | ''          | '60,000' | '8d544e62-9a68-43c3-8399-b4ef451d9770' | 'PI&GR'        | '8d544e62-9a68-43c3-8399-b4ef451d9770' |
-		Then the number of "RowIDInfo" table lines is "равно" "4"
+		Then the number of "RowIDInfo" table lines is "равно" "3"
 		And I close all client application windows		
 
 Scenario: _018004 create PI based on GR without PO
@@ -648,8 +648,7 @@ Scenario: _018013 create PI using form link/unlink
 		And "RowIDInfo" table contains lines
 			| '#' | 'Basis'                                        | 'Next step' | 'Q'      | 'Current step' |
 			| '1' | 'Purchase order 217 dated 12.02.2021 12:45:05' | 'GR'        | '5,000'  | 'PI&GR'        |
-			| '2' | ''                                             | ''          | '2,000'  | ''             |
-		Then the number of "RowIDInfo" table lines is "равно" "2"
+		Then the number of "RowIDInfo" table lines is "равно" "1"
 		And "ItemList" table contains lines
 			| 'Item'    | 'Item key' | 'Sales order'                              | 'Purchase order'                               |
 			| 'Dress'   | 'S/Yellow' | ''                                         | 'Purchase order 217 dated 12.02.2021 12:45:05' |

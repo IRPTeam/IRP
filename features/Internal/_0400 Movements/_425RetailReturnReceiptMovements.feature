@@ -272,6 +272,32 @@ Scenario: _042511 check Retail return receipt movements by the Register  "R2005 
 			| Register  "R2005 Sales special offers" |
 		And I close all client application windows
 
+Scenario: _042512 check Retail return receipt movements by the Register  "R5021 Revenues"
+	* Select Retail return receipt
+		Given I open hyperlink "e1cib/list/Document.RetailReturnReceipt"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '203' |
+	* Check movements by the Register  "R5021 Revenues"
+		And I click "Registrations report" button
+		And I select "R5021 Revenues" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Retail return receipt 203 dated 09.08.2021 11:41:58' | ''                    | ''          | ''                  | ''             | ''        | ''                   | ''             | ''         | ''         | ''                    | ''                             |
+			| 'Document registrations records'                      | ''                    | ''          | ''                  | ''             | ''        | ''                   | ''             | ''         | ''         | ''                    | ''                             |
+			| 'Register  "R5021 Revenues"'                          | ''                    | ''          | ''                  | ''             | ''        | ''                   | ''             | ''         | ''         | ''                    | ''                             |
+			| ''                                                    | 'Period'              | 'Resources' | ''                  | 'Dimensions'   | ''        | ''                   | ''             | ''         | ''         | ''                    | ''                             |
+			| ''                                                    | ''                    | 'Amount'    | 'Amount with taxes' | 'Company'      | 'Branch'  | 'Profit loss center' | 'Revenue type' | 'Item key' | 'Currency' | 'Additional analytic' | 'Multi currency movement type' |
+			| ''                                                    | '09.08.2021 11:41:58' | '-7 000,02' | '-8 260,02'         | 'Main Company' | 'Shop 01' | 'Shop 01'            | 'Revenue'      | '36/18SD'  | 'TRY'      | ''                    | 'Local currency'               |
+			| ''                                                    | '09.08.2021 11:41:58' | '-7 000,02' | '-8 260,02'         | 'Main Company' | 'Shop 01' | 'Shop 01'            | 'Revenue'      | '36/18SD'  | 'TRY'      | ''                    | 'TRY'                          |
+			| ''                                                    | '09.08.2021 11:41:58' | '-7 000,02' | '-8 260,02'         | 'Main Company' | 'Shop 01' | 'Shop 01'            | 'Revenue'      | '36/18SD'  | 'TRY'      | ''                    | 'en description is empty'      |
+			| ''                                                    | '09.08.2021 11:41:58' | '-1 198,4'  | '-1 414,12'         | 'Main Company' | 'Shop 01' | 'Shop 01'            | 'Revenue'      | '36/18SD'  | 'USD'      | ''                    | 'Reporting currency'           |
+			| ''                                                    | '09.08.2021 11:41:58' | '-396,61'   | '-468'              | 'Main Company' | 'Shop 01' | 'Shop 01'            | 'Revenue'      | 'XS/Blue'  | 'TRY'      | ''                    | 'Local currency'               |
+			| ''                                                    | '09.08.2021 11:41:58' | '-396,61'   | '-468'              | 'Main Company' | 'Shop 01' | 'Shop 01'            | 'Revenue'      | 'XS/Blue'  | 'TRY'      | ''                    | 'TRY'                          |
+			| ''                                                    | '09.08.2021 11:41:58' | '-396,61'   | '-468'              | 'Main Company' | 'Shop 01' | 'Shop 01'            | 'Revenue'      | 'XS/Blue'  | 'TRY'      | ''                    | 'en description is empty'      |
+			| ''                                                    | '09.08.2021 11:41:58' | '-67,9'     | '-80,12'            | 'Main Company' | 'Shop 01' | 'Shop 01'            | 'Revenue'      | 'XS/Blue'  | 'USD'      | ''                    | 'Reporting currency'           |		
+		And I close all client application windows
+
 Scenario: _042530 Retail return receipt clear posting/mark for deletion
 	And I close all client application windows
 	* Select Retail return receipt

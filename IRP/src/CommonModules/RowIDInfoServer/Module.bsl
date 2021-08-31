@@ -6435,10 +6435,12 @@ Function CreateBasisesTree(TreeReverseInfo, BasisesTable, ResultsTable, BasisesT
 				For Each TableRow In BasisesTable.FindRows(BasisesFilter) Do
 					
 					// deep level
+					NewBasisesTreeRow.Picture = 2;
+					NewBasisesTreeRow.IsMainDocument = True;
 					DeepLevelRow = NewBasisesTreeRow.GetItems().Add();
 					DeepLevelRow.Picture = 0;
 					DeepLevelRow.RowPresentation =
-					String(TableRow.Item) + ", " + String(TableRow.ItemKey);
+					String(TableRow.Item) + " (" + String(TableRow.ItemKey) + ")";
 					
 					DeepLevelRow.DeepLevel = True;
 					FillPropertyValues(DeepLevelRow, TableRow);

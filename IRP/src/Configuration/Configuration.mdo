@@ -162,6 +162,8 @@
   <commonPictures>CommonPicture.SessionParameter</commonPictures>
   <commonPictures>CommonPicture.AccountingFlags</commonPictures>
   <commonPictures>CommonPicture.Recalculations</commonPictures>
+  <commonPictures>CommonPicture.IconCollection5</commonPictures>
+  <commonPictures>CommonPicture.IconCollection6</commonPictures>
   <sessionParameters>SessionParameter.ClientType</sessionParameters>
   <sessionParameters>SessionParameter.ConnectedAddDataProc</sessionParameters>
   <sessionParameters>SessionParameter.ConnectionSettings</sessionParameters>

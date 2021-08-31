@@ -33,18 +33,21 @@ EndProcedure
 &AtClient
 Procedure OnOpen(Cancel)
 	AttachIdleHandler("ExpandAllTrees", 1, True);
-EndProcedure
-
-&AtClient
-Procedure ExpandAllTrees() Export
-	RowIDInfoClient.ExpandTree(Items.BasisesTree, ThisObject.BasisesTree.GetItems());
-	RowIDInfoClient.ExpandTree(Items.ResultsTree, ThisObject.ResultsTree.GetItems());
+	
 	If ValueIsFilled(ThisObject.CurrentLineNumber) Then
 		ItemListRow = ThisObject.ItemListRows.FindRows(New Structure("LineNumber", ThisObject.CurrentLineNumber));
 		If ItemListRow.Count() Then
 			Items.ItemListRows.CurrentRow = ItemListRow[0].GetID();
 		EndIf;
 	EndIf;
+	
+	SetIsLinkedItemListRows();
+EndProcedure
+
+&AtClient
+Procedure ExpandAllTrees() Export
+	RowIDInfoClient.ExpandTree(Items.BasisesTree, ThisObject.BasisesTree.GetItems());
+	RowIDInfoClient.ExpandTree(Items.ResultsTree, ThisObject.ResultsTree.GetItems());
 	SetButtonsEnabled();
 EndProcedure
 
@@ -74,7 +77,6 @@ Procedure RefreshTrees()
 	SelectedRowInfo = RowIDInfoClient.GetSelectedRowInfo(Items.ItemListRows.CurrentData);
 	FillResultsTree(SelectedRowInfo.SelectedRow);
 	FillBasisesTree(SelectedRowInfo.FilterBySelectedRow);
-	
 	ExpandAllTrees();
 EndProcedure	
 
@@ -83,8 +85,43 @@ Procedure FillItemListRows(ItemListRows)
 	For Each Row In ItemListRows Do
 		NewRow = ThisObject.ItemListRows.Add();
 		FillPropertyValues(NewRow, Row);
-		NewRow.RowPresentation = "" + Row.Item + ", " + Row.ItemKey;
+		NewRow.RowPresentation = "" + Row.Item + " (" + Row.ItemKey + ")";
 		NewRow.Picture = 0;
+		
+		If ValueIsFilled(NewRow.ItemKey) And ValueIsFilled(NewRow.Unit) And ValueIsFilled(NewRow.Quantity) Then
+			ConvertationResult = RowIDInfoServer.ConvertQuantityToQuantityInBaseUnit(NewRow.ItemKey, 
+		                                                         				 NewRow.Unit, 
+		                                                         				 NewRow.Quantity);
+		
+			NewRow.QuantityInBaseUnit =  ConvertationResult.QuantityInBaseUnit;
+			NewRow.BasisUnit          =  ConvertationResult.BasisUnit;		                                                   
+		Else
+			NewRow.QuantityInBaseUnit = NewRow.Quantity;
+			NewRow.BasisUnit          = NewRow.Unit;
+		EndIf;
+	EndDo;
+EndProcedure
+
+&AtClient
+Procedure ShowQuantityInBasisUnitOnChange(Item)
+	ThisObject.Items.ItemListRowsBasisUnit.Visible = ThisObject.ShowQuantityInBasisUnit;
+	ThisObject.Items.ItemListRowsQuantityInBaseUnit.Visible = ThisObject.ShowQuantityInBasisUnit;	
+EndProcedure
+
+&AtClient
+Procedure ShowLinkedDocumentsOnChange(Item)
+	ThisObject.Items.ResultsTree.Visible = ThisObject.ShowLinkedDocuments;
+	AttachIdleHandler("ExpandAllTrees", 1, True);
+EndProcedure
+
+&AtClient
+Procedure SetIsLinkedItemListRows()
+	For Each Row In ItemListRows Do
+		If ThisObject.ResultsTable.FindRows(New Structure("Key", Row.Key)).Count() Then
+			Row.Picture = 1;
+		Else
+			Row.Picture = 0;
+		EndIf;
 	EndDo;
 EndProcedure
 
@@ -161,6 +198,17 @@ EndProcedure
 
 &AtClient
 Procedure Link(Command)
+	LinkAtClient();
+EndProcedure
+
+&AtClient
+Procedure BasisesTreeSelection(Item, RowSelected, Field, StandardProcessing)
+	StandardProcessing = False;
+	LinkAtClient();	
+EndProcedure
+
+&AtClient
+Procedure LinkAtClient()
 	LinkInfo = IsCanLink();
 	If Not LinkInfo.IsCan Then
 		Return;
@@ -169,6 +217,7 @@ Procedure Link(Command)
 	FillPropertyValues(ThisObject.ResultsTable.Add(), LinkInfo);
 	
 	RefreshTrees();
+	SetIsLinkedItemListRows();
 EndProcedure
 
 &AtClient
@@ -257,6 +306,14 @@ Procedure Unlink(Command)
 	EndDo;
 	
 	RefreshTrees();	
+	SetIsLinkedItemListRows();
+EndProcedure
+
+&AtClient
+Procedure UnlinkAll(Command)
+	ThisObject.ResultsTable.Clear();
+	RefreshTrees();	
+	SetIsLinkedItemListRows();	
 EndProcedure
 
 &AtClient
@@ -347,6 +404,7 @@ Procedure AutoLink(Command)
 		EndIf;
 	EndDo;
 	RefreshTrees();
+	SetIsLinkedItemListRows();
 EndProcedure
 
 &AtServer
@@ -376,4 +434,3 @@ Function NeedAutoLinkAtServer(RowInfo)
 	EndIf;
 	Return NeedAutoLink;
 EndFunction
-

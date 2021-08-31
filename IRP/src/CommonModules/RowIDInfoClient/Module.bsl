@@ -161,6 +161,9 @@ Procedure FindRowInTreeRecursive(Filter, TreeRows, RowID)
 EndProcedure
 
 Procedure ExpandTree(Tree, TreeRows) Export
+	If Not Tree.Visible Then
+		Return;
+	EndIf;
 	For Each ItemTreeRows In TreeRows Do
 		Tree.Expand(ItemTreeRows.GetID());
 		ExpandTree(Tree, ItemTreeRows.GetItems());

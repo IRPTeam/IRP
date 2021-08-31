@@ -374,7 +374,7 @@ Scenario: _0401570 check there is no Sales order movements by the Register  "R20
 			| 'Document registrations records'          |
 		And I close all client application windows
 
-Scenario: _0401570 check Sales order movements by the Register  "R4012 Stock Reservation"
+Scenario: _0401571 check Sales order movements by the Register  "R4012 Stock Reservation"
 	* Select Sales order
 		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I go to line in "List" table
@@ -382,7 +382,7 @@ Scenario: _0401570 check Sales order movements by the Register  "R4012 Stock Res
 			| '112' |
 	* Check movements by the Register  "R4012 Stock Reservation" 
 		And I click "Registrations report" button
-		And I select "R4012 Stock Reservationg" exact value from "Register" drop-down list
+		And I select "R4012 Stock Reservation" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
 			| 'Sales order 112 dated 30.05.2021 12:24:18' | ''            | ''                    | ''          | ''           | ''          | ''                                          |

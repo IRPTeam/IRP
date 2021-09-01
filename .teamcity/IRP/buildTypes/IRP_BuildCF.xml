@@ -10,9 +10,19 @@
       <setting-ref ref="RUNNER_22" />
     </disabled-settings>
     <parameters />
-    <build-runners order="RUNNER_22, RUNNER_5, RUNNER_32, RUNNER_8, RUNNER_63, RUNNER_9, RUNNER_11, RUNNER_43">
+    <build-runners order="RUNNER_22, RUNNER_67, RUNNER_5, RUNNER_32, RUNNER_8, RUNNER_9, RUNNER_11, RUNNER_43">
       <runner id="RUNNER_22" name="Drop DB MetaRunner" type="DropDB">
         <parameters>
+          <param name="teamcity.step.mode" value="default" />
+        </parameters>
+      </runner>
+      <runner id="RUNNER_67" name="Set version" type="jetbrains_powershell">
+        <parameters>
+          <param name="jetbrains_powershell_execution" value="PS1" />
+          <param name="jetbrains_powershell_noprofile" value="true" />
+          <param name="jetbrains_powershell_script_code"><![CDATA[$week = Get-Date -UFormat %V
+((Get-Content -path "%teamcity.build.workingDir%\%teamcity.project.id%\src\Configuration\Configuration.mdo" -Raw) -replace "#weekNumber#","$week") | Set-Content -Path "%teamcity.build.workingDir%\%teamcity.project.id%\src\Configuration\Configuration.mdo"]]></param>
+          <param name="jetbrains_powershell_script_mode" value="CODE" />
           <param name="teamcity.step.mode" value="default" />
         </parameters>
       </runner>

@@ -1777,10 +1777,12 @@ Scenario: Create catalog Partners objects (Customer)
 Scenario: Create catalog LegalNameContracts objects
 
 	And I check or create catalog "LegalNameContracts" objects:
-		| 'Ref'                                                                        | 'DeletionMark' | 'Code' | 'Description'            | 'BeginDate'           | 'EndDate'             | 'Company'                                                           | 'PartnerBankAccount'                                                           |
-		| 'e1cib/data/Catalog.LegalNameContracts?ref=b76d88abafbd4c5e11ebf1c565207b8a' | 'False'        | '1'    | 'Contract Ferron BP'     | '01.01.2021 00:00:00' | '01.01.0001 00:00:00' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf116b32709a2' | 'e1cib/data/Catalog.PartnersBankAccounts?ref=b75dad46e66c4c2c11eb4522c1c161a1' |
-		| 'e1cib/data/Catalog.LegalNameContracts?ref=b76d88abafbd4c5e11ebf1c694dd9b44' | 'False'        | '2'    | 'Contract Ferron BP New' | '01.07.2021 00:00:00' | '01.01.0001 00:00:00' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf116b32709a2' | 'e1cib/data/Catalog.PartnersBankAccounts?ref=b75dad46e66c4c2c11eb4522c1c161a1' |
-		| 'e1cib/data/Catalog.LegalNameContracts?ref=b76d88abafbd4c5e11ebf1c989218108' | 'False'        | '3'    | 'Contract Kalipso'       | '01.01.2021 00:00:00' | '01.01.0001 00:00:00' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf116b32709a3' | 'e1cib/data/Catalog.PartnersBankAccounts?ref=b75dad46e66c4c2c11eb451e00a38c06' |
+		| 'Ref'                                                                        | 'DeletionMark' | 'Code' | 'Description'             | 'BeginDate'           | 'EndDate'             | 'Company'                                                           | 'PartnerBankAccount'                                                           |
+		| 'e1cib/data/Catalog.LegalNameContracts?ref=b76d88abafbd4c5e11ebf1c565207b8a' | 'False'        | '1'    | 'Contract Ferron BP'      | '01.01.2021 00:00:00' | '01.01.0001 00:00:00' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf116b32709a2' | 'e1cib/data/Catalog.PartnersBankAccounts?ref=b75dad46e66c4c2c11eb4522c1c161a1' |
+		| 'e1cib/data/Catalog.LegalNameContracts?ref=b76e892a86cabee011ec0b3161ae719f' | 'False'        | '1'    | 'DFC Legal name contract' | '01.01.0001 00:00:00' | '01.01.0001 00:00:00' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | ''                                                                             |
+		| 'e1cib/data/Catalog.LegalNameContracts?ref=b76d88abafbd4c5e11ebf1c694dd9b44' | 'False'        | '2'    | 'Contract Ferron BP New'  | '01.07.2021 00:00:00' | '01.01.0001 00:00:00' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf116b32709a2' | 'e1cib/data/Catalog.PartnersBankAccounts?ref=b75dad46e66c4c2c11eb4522c1c161a1' |
+		| 'e1cib/data/Catalog.LegalNameContracts?ref=b76d88abafbd4c5e11ebf1c989218108' | 'False'        | '3'    | 'Contract Kalipso'        | '01.01.2021 00:00:00' | '01.01.0001 00:00:00' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf116b32709a3' | 'e1cib/data/Catalog.PartnersBankAccounts?ref=b75dad46e66c4c2c11eb451e00a38c06' |
+
 
 
 Scenario: Create catalog PartnerItems objects

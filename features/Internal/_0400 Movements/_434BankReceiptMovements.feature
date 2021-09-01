@@ -404,14 +404,14 @@ Scenario: _043424 check Bank receipt movements by the Register "R5022 Expenses" 
 		And I select "R5022 Expenses" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Bank receipt 513 dated 04.06.2021 12:27:04' | ''                    | ''          | ''             | ''             | ''                   | ''             | ''         | ''         | ''                    | ''                             |
-			| 'Document registrations records'             | ''                    | ''          | ''             | ''             | ''                   | ''             | ''         | ''         | ''                    | ''                             |
-			| 'Register  "R5022 Expenses"'                 | ''                    | ''          | ''             | ''             | ''                   | ''             | ''         | ''         | ''                    | ''                             |
-			| ''                                           | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''                   | ''             | ''         | ''         | ''                    | ''                             |
-			| ''                                           | ''                    | 'Amount'    | 'Company'      | 'Branch'       | 'Profit loss center' | 'Expense type' | 'Item key' | 'Currency' | 'Additional analytic' | 'Multi currency movement type' |
-			| ''                                           | '04.06.2021 12:27:04' | '1,8'       | 'Main Company' | 'Front office' | ''                   | 'Expense'      | ''         | 'USD'      | ''                    | 'Reporting currency'           |
-			| ''                                           | '04.06.2021 12:27:04' | '10,51'     | 'Main Company' | 'Front office' | ''                   | 'Expense'      | ''         | 'TRY'      | ''                    | 'Local currency'               |
-			| ''                                           | '04.06.2021 12:27:04' | '10,51'     | 'Main Company' | 'Front office' | ''                   | 'Expense'      | ''         | 'TRY'      | ''                    | 'en description is empty'      |
+			| 'Bank receipt 513 dated 04.06.2021 12:27:04' | ''                    | ''          | ''                  | ''             | ''             | ''                   | ''             | ''         | ''         | ''                    | ''                             |
+			| 'Document registrations records'             | ''                    | ''          | ''                  | ''             | ''             | ''                   | ''             | ''         | ''         | ''                    | ''                             |
+			| 'Register  "R5022 Expenses"'                 | ''                    | ''          | ''                  | ''             | ''             | ''                   | ''             | ''         | ''         | ''                    | ''                             |
+			| ''                                           | 'Period'              | 'Resources' | ''                  | 'Dimensions'   | ''             | ''                   | ''             | ''         | ''         | ''                    | ''                             |
+			| ''                                           | ''                    | 'Amount'    | 'Amount with taxes' | 'Company'      | 'Branch'       | 'Profit loss center' | 'Expense type' | 'Item key' | 'Currency' | 'Additional analytic' | 'Multi currency movement type' |
+			| ''                                           | '04.06.2021 12:27:04' | '1,8'       | '1,8'               | 'Main Company' | 'Front office' | ''                   | 'Expense'      | ''         | 'USD'      | ''                    | 'Reporting currency'           |
+			| ''                                           | '04.06.2021 12:27:04' | '10,51'     | '10,51'             | 'Main Company' | 'Front office' | ''                   | 'Expense'      | ''         | 'TRY'      | ''                    | 'Local currency'               |
+			| ''                                           | '04.06.2021 12:27:04' | '10,51'     | '10,51'             | 'Main Company' | 'Front office' | ''                   | 'Expense'      | ''         | 'TRY'      | ''                    | 'en description is empty'      |
 	And I close all client application windows
 
 Scenario: _043430 Bank receipt clear posting/mark for deletion

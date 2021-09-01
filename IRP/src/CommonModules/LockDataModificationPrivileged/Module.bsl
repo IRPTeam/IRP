@@ -80,7 +80,7 @@ Function IsLockFormAttribute(Ref) Export
 	ShowTop = 5;
 	VT.GroupBy("Metadata");
 	VT.Sort("Metadata");
-	For Index = 0 To ?(VT.Count() - 1 >= ShowTop, ShowTop, VT.Count() - 1) Do
+	For Index = 0 To ?(VT.Count() - 1 > ShowTop, ShowTop - 1, VT.Count() - 1) Do
 		CommonFunctionsClientServer.ShowUsersMessage(VT[Index].Metadata);
 	EndDo;
 	Return True;

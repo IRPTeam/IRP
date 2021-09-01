@@ -43,12 +43,11 @@ Scenario: _206102 try to change item unit that was used in the documents
 	And I click "Unlock attributes" button
 	If user messages contain "Can not unlock attributes, this is element used * times, ex.:" string Then	
 	When there are lines in TestClient message log
-	| "Bundling" |
-	| "Goods receipt" |
-	| "Internal supply request" |
-	| "Inventory transfer" |
-	| "Inventory transfer order" |
-	| "Purchase invoice" |
+		| "Bundling" |
+		| "Goods receipt" |
+		| "Internal supply request" |
+		| "Inventory transfer" |
+		| "Inventory transfer order" |
 	And the attribute named "BasisUnit" is read-only
 	And the attribute named "Item" is read-only
 	And the attribute named "Quantity" is read-only

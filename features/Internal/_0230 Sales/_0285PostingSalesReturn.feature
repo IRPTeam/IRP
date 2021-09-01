@@ -606,20 +606,20 @@ Scenario: _028515 create document Sales return based on SRO
 			And "BasisesTree" table contains lines
 				| 'Row presentation'                                 | 'Use'                                              | 'Quantity' | 'Unit'           | 'Price'    | 'Currency' |
 				| 'Sales return order 105 dated 25.03.2021 12:09:40' | 'No'                                               | ''         | ''               | ''         | ''         |
-				| 'Dress, XS/Blue'                                   | 'No'                                               | '1,000'    | 'pcs'            | '520,00'   | 'TRY'      |
-				| 'Boots, 37/18SD'                                   | 'No'                                               | '3,000'    | 'Boots (12 pcs)' | '8 400,00' | 'TRY'      |
+				| 'Dress (XS/Blue)'                                   | 'No'                                               | '1,000'    | 'pcs'            | '520,00'   | 'TRY'      |
+				| 'Boots (37/18SD)'                                   | 'No'                                               | '3,000'    | 'Boots (12 pcs)' | '8 400,00' | 'TRY'      |
 				| 'Sales return order 106 dated 25.03.2021 12:10:03' | 'No'                                               | ''         | ''               | ''         | ''         |
-				| 'Dress, XS/Blue'                                   | 'No'                                               | '12,000'   | 'pcs'            | '520,00'   | 'TRY'      |
-				| 'Boots, 37/18SD'                                   | 'No'                                               | '11,000'   | 'Boots (12 pcs)' | '8 400,00' | 'TRY'      |
+				| 'Dress (XS/Blue)'                                   | 'No'                                               | '12,000'   | 'pcs'            | '520,00'   | 'TRY'      |
+				| 'Boots (37/18SD)'                                   | 'No'                                               | '11,000'   | 'Boots (12 pcs)' | '8 400,00' | 'TRY'      |
 			// Then the number of "BasisesTree" table lines is "равно" "6"
 			And I go to line in "BasisesTree" table
 				| 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
-				| '12,000'    | 'Dress, XS/Blue'   | 'pcs'  | 'No'  |
+				| '12,000'    | 'Dress (XS/Blue)'   | 'pcs'  | 'No'  |
 			And I change "Use" checkbox in "BasisesTree" table
 			And I finish line editing in "BasisesTree" table
 			And I go to line in "BasisesTree" table
 				| 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
-				| '1,000'    | 'Dress, XS/Blue'   | 'pcs'  | 'No'  |
+				| '1,000'    | 'Dress (XS/Blue)'   | 'pcs'  | 'No'  |
 			And I change "Use" checkbox in "BasisesTree" table
 			And I finish line editing in "BasisesTree" table
 			And I click "Ok" button

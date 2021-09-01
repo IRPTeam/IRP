@@ -66,12 +66,12 @@ Scenario: _0201001 create IT based on ITO
 		And "BasisesTree" table became equal
 			| 'Row presentation'                                   | 'Use' | 'Quantity' | 'Unit'           | 'Price' | 'Currency' |
 			| 'Inventory transfer order 17 dated 02.03.2021 13:34' | 'Yes' | ''         | ''               | ''      | ''         |
-			| 'Dress, L/Green'                                     | 'Yes' | '20,000'   | 'pcs'            | ''      | ''         |
-			| 'Trousers, 38/Yellow'                                | 'Yes' | '20,000'   | 'pcs'            | ''      | ''         |
-			| 'Boots, 36/18SD'                                     | 'Yes' | '2,000'    | 'Boots (12 pcs)' | ''      | ''         |
+			| 'Dress (L/Green)'                                     | 'Yes' | '20,000'   | 'pcs'            | ''      | ''         |
+			| 'Trousers (38/Yellow)'                                | 'Yes' | '20,000'   | 'pcs'            | ''      | ''         |
+			| 'Boots (36/18SD)'                                     | 'Yes' | '2,000'    | 'Boots (12 pcs)' | ''      | ''         |
 		And I go to line in "BasisesTree" table
 			| 'Row presentation'  |
-			| 'Dress, L/Green' |
+			| 'Dress (L/Green)' |
 		And I change "Use" checkbox in "BasisesTree" table
 		And I finish line editing in "BasisesTree" table
 		And I click "Ok" button
@@ -421,17 +421,17 @@ Scenario: _02104809 create IT using form link/unlink
 		And I click the button named "AddBasisDocuments"
 		And I go to line in "BasisesTree" table
 			| 'Currency' | 'Price' | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
-			| ''         | ''      | '20,000'   | 'Dress, L/Green'   | 'pcs'  | 'No'  |
+			| ''         | ''      | '20,000'   | 'Dress (L/Green)'   | 'pcs'  | 'No'  |
 		And I change "Use" checkbox in "BasisesTree" table
 		And I finish line editing in "BasisesTree" table
 		And I go to line in "BasisesTree" table
 			| 'Currency' | 'Price' | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
-			| ''         | ''      | '5,000'    | 'Shirt, 38/Black'  | 'pcs'  | 'No'  |
+			| ''         | ''      | '5,000'    | 'Shirt (38/Black)'  | 'pcs'  | 'No'  |
 		And I change "Use" checkbox in "BasisesTree" table
 		And I finish line editing in "BasisesTree" table
 		And I go to line in "BasisesTree" table
 			| 'Currency' | 'Price' | 'Quantity' | 'Row presentation' | 'Unit'           | 'Use' |
-			| ''         | ''      | '3,000'    | 'Boots, 36/18SD'   | 'Boots (12 pcs)' | 'No'  |
+			| ''         | ''      | '3,000'    | 'Boots (36/18SD)'   | 'Boots (12 pcs)' | 'No'  |
 		And I change "Use" checkbox in "BasisesTree" table
 		And I finish line editing in "BasisesTree" table
 		And I click "Ok" button
@@ -447,10 +447,11 @@ Scenario: _02104809 create IT using form link/unlink
 		Then "Link / unlink document row" window is opened
 		And I go to line in "ItemListRows" table
 			| '#' | 'Quantity' | 'Row presentation' | 'Store' | 'Unit' |
-			| '3' | '5,000'    | 'Shirt, 38/Black'  | ''      | 'pcs'  |
+			| '3' | '5,000'    | 'Shirt (38/Black)'  | ''      | 'pcs'  |
+		And I set checkbox "Linked documents"
 		And I go to line in "ResultsTree" table
 			| 'Currency' | 'Price' | 'Quantity' | 'Row presentation' | 'Unit' |
-			| ''         | ''      | '5,000'    | 'Shirt, 38/Black'  | 'pcs'  |
+			| ''         | ''      | '5,000'    | 'Shirt (38/Black)'  | 'pcs'  |
 		And I click "Unlink" button
 		And I click "Ok" button
 		And I click "Save" button	
@@ -474,10 +475,10 @@ Scenario: _02104809 create IT using form link/unlink
 		And I click the button named "LinkUnlinkBasisDocuments"
 		And I go to line in "ItemListRows" table
 			| '#' | 'Quantity' | 'Row presentation' | 'Store' | 'Unit' |
-			| '3' | '5,000'    | 'Shirt, 38/Black'  | ''      | 'pcs'  |
+			| '3' | '5,000'    | 'Shirt (38/Black)'  | ''      | 'pcs'  |
 		And I go to line in "BasisesTree" table
 			| 'Quantity' | 'Row presentation' | 'Unit' |
-			| '5,000'    | 'Shirt, 38/Black'  | 'pcs'  |
+			| '5,000'    | 'Shirt (38/Black)'  | 'pcs'  |
 		And I click "Link" button
 		And I click "Ok" button
 		And I click "Save" button
@@ -506,7 +507,7 @@ Scenario: _02104809 create IT using form link/unlink
 		And I click the button named "AddBasisDocuments"
 		And I go to line in "BasisesTree" table
 			| 'Currency' | 'Price' | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
-			| ''         | ''      | '20,000'   | 'Dress, L/Green'   | 'pcs'  | 'No'  |
+			| ''         | ''      | '20,000'   | 'Dress (L/Green)'   | 'pcs'  | 'No'  |
 		And I change "Use" checkbox in "BasisesTree" table
 		And I finish line editing in "BasisesTree" table
 		And I click "Ok" button

@@ -183,17 +183,17 @@ Scenario: _2060002 check link/unlink form in the SC
 			| 'Sales invoice 103 dated 05.03.2021 12:59:44' | 'No' |
 		And I go to line in "BasisesTree" table
 			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
-			| 'TRY'      | '700,00' | '2,000'    | 'Boots, 37/18SD'   | 'pcs'  | 'No'  |
+			| 'TRY'      | '700,00' | '2,000'    | 'Boots (37/18SD)'   | 'pcs'  | 'No'  |
 		And I change "Use" checkbox in "BasisesTree" table
 		And I finish line editing in "BasisesTree" table
 		And I go to line in "BasisesTree" table
 			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
-			| 'TRY'      | '440,68' | '8,000'    | 'Dress, M/White'   | 'pcs'  | 'No'  |
+			| 'TRY'      | '440,68' | '8,000'    | 'Dress (M/White)'   | 'pcs'  | 'No'  |
 		And I change "Use" checkbox in "BasisesTree" table
 		And I finish line editing in "BasisesTree" table
 		And I go to line in "BasisesTree" table
 			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
-			| 'TRY'      | '648,15' | '2,000'    | 'Boots, 37/18SD'   | 'pcs'  | 'No'  |
+			| 'TRY'      | '648,15' | '2,000'    | 'Boots (37/18SD)'   | 'pcs'  | 'No'  |
 		And I change "Use" checkbox in "BasisesTree" table
 		And I finish line editing in "BasisesTree" table
 		And I click "Ok" button
@@ -208,19 +208,17 @@ Scenario: _2060002 check link/unlink form in the SC
 	* Unlink line
 		And I click "LinkUnlinkBasisDocuments" button
 		Then "Link / unlink document row" window is opened
-		And I expand a line in "ResultsTree" table
-			| 'Row presentation'                            |
-			| 'Sales invoice 103 dated 05.03.2021 12:59:44' |
+		And I set checkbox "Linked documents"
 		And I go to line in "ItemListRows" table
 			| '#' | 'Quantity' | 'Row presentation' | 'Store'    | 'Unit' |
-			| '3' | '2,000'    | 'Boots, 37/18SD'   | 'Store 02' | 'pcs'  |
+			| '3' | '2,000'    | 'Boots (37/18SD)'   | 'Store 02' | 'pcs'  |
 		And I expand a line in "ResultsTree" table
 			| 'Row presentation'                            |
 			| 'Sales invoice 103 dated 05.03.2021 12:59:44' |
 		And I activate field named "ItemListRowsRowPresentation" in "ItemListRows" table
 		And I go to line in "ResultsTree" table
 			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' |
-			| 'TRY'      | '648,15' | '2,000'    | 'Boots, 37/18SD'   | 'pcs'  |
+			| 'TRY'      | '648,15' | '2,000'    | 'Boots (37/18SD)'   | 'pcs'  |
 		And I click "Unlink" button
 		And I click "Ok" button
 		And "ItemList" table contains lines
@@ -230,19 +228,17 @@ Scenario: _2060002 check link/unlink form in the SC
 			| 'Boots' | '37/18SD'  | ''                                            |
 	* Link line
 		And I click "LinkUnlinkBasisDocuments" button
-		And I expand a line in "ResultsTree" table
-			| 'Row presentation'                            |
-			| 'Sales invoice 103 dated 05.03.2021 12:59:44' |
 		And I go to line in "ItemListRows" table
 			| '#' | 'Quantity' | 'Row presentation' | 'Store'    | 'Unit' |
-			| '3' | '2,000'    | 'Boots, 37/18SD'   | 'Store 02' | 'pcs'  |
+			| '3' | '2,000'    | 'Boots (37/18SD)'   | 'Store 02' | 'pcs'  |
+		And I set checkbox "Linked documents"
 		And I expand a line in "BasisesTree" table
 			| 'Row presentation'                            |
 			| 'Sales invoice 103 dated 05.03.2021 12:59:44' |
 		And I activate field named "ItemListRowsRowPresentation" in "ItemListRows" table
 		And I go to line in "BasisesTree" table
 			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' |
-			| 'TRY'      | '648,15' | '2,000'    | 'Boots, 37/18SD'   | 'pcs'  |
+			| 'TRY'      | '648,15' | '2,000'    | 'Boots (37/18SD)'   | 'pcs'  |
 		And I click "Link" button
 		And I click "Ok" button
 		And "RowIDInfo" table contains lines
@@ -264,7 +260,7 @@ Scenario: _2060002 check link/unlink form in the SC
 		And I click "AddBasisDocuments" button
 		And I go to line in "BasisesTree" table
 			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
-			| 'TRY'      | '648,15' | '2,000'    | 'Boots, 37/18SD'   | 'pcs'  | 'No'  |
+			| 'TRY'      | '648,15' | '2,000'    | 'Boots (37/18SD)'   | 'pcs'  | 'No'  |
 		And I change "Use" checkbox in "BasisesTree" table
 		And I finish line editing in "BasisesTree" table
 		And I click "Ok" button
@@ -304,6 +300,22 @@ Scenario: _2060002 check link/unlink form in the SC
 			| 'Store 02' | 'Boots' | '37/18SD'  | '2,000'    | 'Sales invoice 103 dated 05.03.2021 12:59:44' | 'Boots (12 pcs)' |
 			| 'Store 02' | 'Boots' | '36/18SD'  | '2,000'    | 'Sales invoice 103 dated 05.03.2021 12:59:44' | 'Boots (12 pcs)' |
 			| 'Store 02' | 'Dress' | 'S/Yellow' | '8,000'    | 'Sales invoice 103 dated 05.03.2021 12:59:44' | 'pcs'            |
+	* Unlink all lines
+		And I click "LinkUnlinkBasisDocuments" button
+		And I set checkbox "Linked documents"
+		And in the table "ResultsTree" I click "Unlink all" button
+		And "BasisesTree" table became equal
+			| 'Row presentation'                            | 'Quantity' | 'Unit' | 'Price'  | 'Currency' |
+			| 'Sales invoice 103 dated 05.03.2021 12:59:44' | ''         | ''     | ''       | ''         |
+			| 'Dress (M/White)'                             | '8,000'    | 'pcs'  | '440,68' | 'TRY'      |
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Store'    | 'Item'  | 'Item key' | 'Quantity' | 'Sales invoice' | 'Unit'           |
+			| 'Store 02' | 'Dress' | 'M/White'  | '8,000'    | ''              | 'pcs'            |
+			| 'Store 01' | 'Boots' | '37/18SD'  | '2,000'    | ''              | 'pcs'            |
+			| 'Store 02' | 'Boots' | '37/18SD'  | '2,000'    | ''              | 'Boots (12 pcs)' |
+			| 'Store 02' | 'Boots' | '36/18SD'  | '2,000'    | ''              | 'Boots (12 pcs)' |
+			| 'Store 02' | 'Dress' | 'S/Yellow' | '8,000'    | ''              | 'pcs'            |
 		And I close all client application windows
 		
 		
@@ -463,17 +475,17 @@ Scenario: _2060007 select items from basis documents in the PI
 		And "BasisesTree" table contains lines 
 			| 'Row presentation'                               | 'Use' | 'Quantity' | 'Unit'           | 'Price'    | 'Currency' |
 			| 'Sales order 31 dated 27.01.2021 19:50:45'       | 'No'  | ''         | ''               | ''         | ''         |
-			| 'Boots, 37/18SD'                                 | 'No'  | '2,000'    | 'Boots (12 pcs)' | '8 400,00' | 'TRY'      |
+			| 'Boots (37/18SD)'                                | 'No'  | '2,000'    | 'Boots (12 pcs)' | '8 400,00' | 'TRY'      |
 			| 'Purchase order 1 051 dated 20.07.2021 10:22:16' | 'No'  | ''         | ''               | ''         | ''         |
-			| 'Dress, S/Yellow'                                | 'No'  | '55,000'   | 'pcs'            | '550,00'   | 'TRY'      |
-			| 'Dress, XS/Blue'                                 | 'No'  | '250,000'  | 'pcs'            | '520,00'   | 'TRY'      |
+			| 'Dress (S/Yellow)'                               | 'No'  | '55,000'   | 'pcs'            | '550,00'   | 'TRY'      |
+			| 'Dress (XS/Blue)'                                | 'No'  | '250,000'  | 'pcs'            | '520,00'   | 'TRY'      |
 			| 'Goods receipt 1 051 dated 20.07.2021 10:23:22'  | 'No'  | ''         | ''               | ''         | ''         |
-			| 'Dress, S/Yellow'                                | 'No'  | '45,000'   | 'pcs'            | '550,00'   | 'TRY'      |
-			| 'Dress, XS/Blue'                                 | 'No'  | '750,000'  | 'pcs'            | '520,00'   | 'TRY'      |
+			| 'Dress (S/Yellow)'                               | 'No'  | '45,000'   | 'pcs'            | '550,00'   | 'TRY'      |
+			| 'Dress (XS/Blue)'                                | 'No'  | '750,000'  | 'pcs'            | '520,00'   | 'TRY'      |
 			| 'Goods receipt 1 052 dated 20.07.2021 10:23:55'  | 'No'  | ''         | ''               | ''         | ''         |
-			| 'Dress, S/Yellow'                                | 'No'  | '5,000'    | 'pcs'            | ''         | ''         |
-			| 'Dress, XS/Blue'                                 | 'No'  | '50,000'   | 'pcs'            | ''         | ''         |
-			| 'Trousers, 36/Yellow'                            | 'No'  | '40,000'   | 'pcs'            | ''         | ''         |
+			| 'Dress (S/Yellow)'                               | 'No'  | '5,000'    | 'pcs'            | ''         | ''         |
+			| 'Dress (XS/Blue)'                                | 'No'  | '50,000'   | 'pcs'            | ''         | ''         |
+			| 'Trousers (36/Yellow)'                            | 'No'  | '40,000'   | 'pcs'            | ''         | ''         |
 		Then the number of "BasisesTree" table lines is "равно" "12"
 		And I close all client application windows
 
@@ -517,16 +529,17 @@ Scenario: _2060010 select items from basis documents in the SI
 		And "BasisesTree" table contains lines 
 			| 'Row presentation'                                   | 'Quantity' | 'Unit' | 'Price'  | 'Currency' |
 			| 'Sales order 1 051 dated 20.07.2021 10:44:11'        | ''         | ''     | ''       | ''         |
-			| 'Dress, XS/Blue'                                     | '55,000'   | 'pcs'  | '520,00' | 'TRY'      |
-			| 'Dress, S/Yellow'                                    | '250,000'  | 'pcs'  | '550,00' | 'TRY'      |
+			| 'Dress (XS/Blue)'                                     | '55,000'   | 'pcs'  | '520,00' | 'TRY'      |
+			| 'Dress (S/Yellow)'                                    | '250,000'  | 'pcs'  | '550,00' | 'TRY'      |
 			| 'Shipment confirmation 1 051 dated 20.07.2021 10:44' | ''         | ''     | ''       | ''         |
-			| 'Dress, XS/Blue'                                     | '45,000'   | 'pcs'  | '520,00' | 'TRY'      |
-			| 'Dress, S/Yellow'                                    | '750,000'  | 'pcs'  | '550,00' | 'TRY'      |
+			| 'Dress (XS/Blue)'                                     | '45,000'   | 'pcs'  | '520,00' | 'TRY'      |
+			| 'Dress (S/Yellow)'                                    | '750,000'  | 'pcs'  | '550,00' | 'TRY'      |
 			| 'Shipment confirmation 1 052 dated 20.07.2021 10:44' | ''         | ''     | ''       | ''         |
-			| 'Dress, XS/Blue'                                     | '5,000'    | 'pcs'  | ''       | ''         |
-			| 'Dress, S/Yellow'                                    | '100,000'  | 'pcs'  | ''       | ''         |
+			| 'Dress (XS/Blue)'                                     | '5,000'    | 'pcs'  | ''       | ''         |
+			| 'Dress (S/Yellow)'                                    | '100,000'  | 'pcs'  | ''       | ''         |
 		Then the number of "BasisesTree" table lines is "равно" "9"
 		And I close all client application windows
+
 Scenario: _2060015 check form select items from basis documents in the SI
 	* Open form for create SI
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
@@ -565,14 +578,14 @@ Scenario: _2060015 check form select items from basis documents in the SI
 		And "BasisesTree" table contains lines
 			| 'Row presentation'                                   | 'Use' | 'Quantity' | 'Unit' | 'Price'  | 'Currency' |
 			| 'Sales order 1 051 dated 20.07.2021 10:44:11'        | 'No'  | ''         | ''     | ''       | ''         |
-			| 'Dress, XS/Blue'                                     | 'No'  | '55,000'   | 'pcs'  | '520,00' | 'TRY'      |
-			| 'Dress, S/Yellow'                                    | 'No'  | '250,000'  | 'pcs'  | '550,00' | 'TRY'      |
+			| 'Dress (XS/Blue)'                                     | 'No'  | '55,000'   | 'pcs'  | '520,00' | 'TRY'      |
+			| 'Dress (S/Yellow)'                                    | 'No'  | '250,000'  | 'pcs'  | '550,00' | 'TRY'      |
 			| 'Shipment confirmation 1 051 dated 20.07.2021 10:44' | 'No'  | ''         | ''     | ''       | ''         |
-			| 'Dress, XS/Blue'                                     | 'No'  | '45,000'   | 'pcs'  | '520,00' | 'TRY'      |
-			| 'Dress, S/Yellow'                                    | 'No'  | '750,000'  | 'pcs'  | '550,00' | 'TRY'      |
+			| 'Dress (XS/Blue)'                                     | 'No'  | '45,000'   | 'pcs'  | '520,00' | 'TRY'      |
+			| 'Dress (S/Yellow)'                                    | 'No'  | '750,000'  | 'pcs'  | '550,00' | 'TRY'      |
 			| 'Shipment confirmation 1 052 dated 20.07.2021 10:44' | 'No'  | ''         | ''     | ''       | ''         |
-			| 'Dress, XS/Blue'                                     | 'No'  | '5,000'    | 'pcs'  | ''       | ''         |
-			| 'Dress, S/Yellow'                                    | 'No'  | '100,000'  | 'pcs'  | ''       | ''         |
+			| 'Dress (XS/Blue)'                                     | 'No'  | '5,000'    | 'pcs'  | ''       | ''         |
+			| 'Dress (S/Yellow)'                                    | 'No'  | '100,000'  | 'pcs'  | ''       | ''         |
 	* Check use/unused all related documents
 		And I go to line in "BasisesTree" table
 			| 'Row presentation'                            | 'Use' |
@@ -582,11 +595,11 @@ Scenario: _2060015 check form select items from basis documents in the SI
 		And "BasisesTree" table contains lines
 			| 'Row presentation'                                   | 'Use' | 'Quantity' | 'Unit' | 'Price'  | 'Currency' |
 			| 'Sales order 1 051 dated 20.07.2021 10:44:11'        | 'Yes' | ''         | ''     | ''       | ''         |
-			| 'Dress, XS/Blue'                                     | 'Yes' | '55,000'   | 'pcs'  | '520,00' | 'TRY'      |
-			| 'Dress, S/Yellow'                                    | 'Yes' | '250,000'  | 'pcs'  | '550,00' | 'TRY'      |
+			| 'Dress (XS/Blue)'                                     | 'Yes' | '55,000'   | 'pcs'  | '520,00' | 'TRY'      |
+			| 'Dress (S/Yellow)'                                    | 'Yes' | '250,000'  | 'pcs'  | '550,00' | 'TRY'      |
 			| 'Shipment confirmation 1 051 dated 20.07.2021 10:44' | 'Yes' | ''         | ''     | ''       | ''         |
-			| 'Dress, XS/Blue'                                     | 'Yes' | '45,000'   | 'pcs'  | '520,00' | 'TRY'      |
-			| 'Dress, S/Yellow'                                    | 'Yes' | '750,000'  | 'pcs'  | '550,00' | 'TRY'      |
+			| 'Dress (XS/Blue)'                                     | 'Yes' | '45,000'   | 'pcs'  | '520,00' | 'TRY'      |
+			| 'Dress (S/Yellow)'                                    | 'Yes' | '750,000'  | 'pcs'  | '550,00' | 'TRY'      |
 		And I go to line in "BasisesTree" table
 			| 'Row presentation'                                   | 'Use' |
 			| 'Shipment confirmation 1 051 dated 20.07.2021 10:44' | 'Yes' |
@@ -595,11 +608,11 @@ Scenario: _2060015 check form select items from basis documents in the SI
 		And "BasisesTree" table contains lines
 			| 'Row presentation'                                   | 'Use' | 'Quantity' | 'Unit' | 'Price'  | 'Currency' |
 			| 'Sales order 1 051 dated 20.07.2021 10:44:11'        | 'Yes' | ''         | ''     | ''       | ''         |
-			| 'Dress, XS/Blue'                                     | 'Yes' | '55,000'   | 'pcs'  | '520,00' | 'TRY'      |
-			| 'Dress, S/Yellow'                                    | 'Yes' | '250,000'  | 'pcs'  | '550,00' | 'TRY'      |
+			| 'Dress (XS/Blue)'                                     | 'Yes' | '55,000'   | 'pcs'  | '520,00' | 'TRY'      |
+			| 'Dress (S/Yellow)'                                    | 'Yes' | '250,000'  | 'pcs'  | '550,00' | 'TRY'      |
 			| 'Shipment confirmation 1 051 dated 20.07.2021 10:44' | 'No'  | ''         | ''     | ''       | ''         |
-			| 'Dress, XS/Blue'                                     | 'No'  | '45,000'   | 'pcs'  | '520,00' | 'TRY'      |
-			| 'Dress, S/Yellow'                                    | 'No'  | '750,000'  | 'pcs'  | '550,00' | 'TRY'      |
+			| 'Dress (XS/Blue)'                                     | 'No'  | '45,000'   | 'pcs'  | '520,00' | 'TRY'      |
+			| 'Dress (S/Yellow)'                                    | 'No'  | '750,000'  | 'pcs'  | '550,00' | 'TRY'      |
 		And I go to line in "BasisesTree" table
 			| 'Row presentation'                                   | 'Use' |
 			| 'Shipment confirmation 1 052 dated 20.07.2021 10:44' | 'No'  |
@@ -613,12 +626,117 @@ Scenario: _2060015 check form select items from basis documents in the SI
 		And "BasisesTree" table contains lines
 			| 'Row presentation'                                   | 'Use' | 'Quantity' | 'Unit' | 'Price'  | 'Currency' |
 			| 'Sales order 1 051 dated 20.07.2021 10:44:11'        | 'No'  | ''         | ''     | ''       | ''         |
-			| 'Dress, XS/Blue'                                     | 'No'  | '55,000'   | 'pcs'  | '520,00' | 'TRY'      |
-			| 'Dress, S/Yellow'                                    | 'No'  | '250,000'  | 'pcs'  | '550,00' | 'TRY'      |
+			| 'Dress (XS/Blue)'                                     | 'No'  | '55,000'   | 'pcs'  | '520,00' | 'TRY'      |
+			| 'Dress (S/Yellow)'                                    | 'No'  | '250,000'  | 'pcs'  | '550,00' | 'TRY'      |
 			| 'Shipment confirmation 1 051 dated 20.07.2021 10:44' | 'No'  | ''         | ''     | ''       | ''         |
-			| 'Dress, XS/Blue'                                     | 'No'  | '45,000'   | 'pcs'  | '520,00' | 'TRY'      |
-			| 'Dress, S/Yellow'                                    | 'No'  | '750,000'  | 'pcs'  | '550,00' | 'TRY'      |
+			| 'Dress (XS/Blue)'                                     | 'No'  | '45,000'   | 'pcs'  | '520,00' | 'TRY'      |
+			| 'Dress (S/Yellow)'                                    | 'No'  | '750,000'  | 'pcs'  | '550,00' | 'TRY'      |
 			| 'Shipment confirmation 1 052 dated 20.07.2021 10:44' | 'Yes' | ''         | ''     | ''       | ''         |
-			| 'Dress, XS/Blue'                                     | 'Yes' | '5,000'    | 'pcs'  | ''       | ''         |
-			| 'Dress, S/Yellow'                                    | 'Yes' | '100,000'  | 'pcs'  | ''       | ''         |
+			| 'Dress (XS/Blue)'                                     | 'Yes' | '5,000'    | 'pcs'  | ''       | ''         |
+			| 'Dress (S/Yellow)'                                    | 'Yes' | '100,000'  | 'pcs'  | ''       | ''         |
 		And I close all client application windows
+
+Scenario: _2060020 check button Show quantity in base unit in the Link form
+	* Open form for create SC
+		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
+		And I click the button named "FormCreate"
+	* Filling in the main details of the document
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Main Company' | 
+		And I select current line in "List" table
+		And I click Select button of "Store" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Store 01'  |
+		And I select current line in "List" table
+		And I select "Sales" exact value from "Transaction type" drop-down list
+		And I click Select button of "Partner" field
+		And I click "List" button
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Crystal'     |
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Company Adel'     |
+		And I select current line in "List" table
+		And I move to "Other" tab
+		And I click Choice button of the field named "Branch"
+		And I go to line in "List" table
+			| 'Description'             |
+			| 'Distribution department' |
+		And I select current line in "List" table	
+	* Filling in Item tab
+		And I move to "Items" tab
+		And I click the button named "Add"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Boots'       |
+		And I activate field named "Description" in "List" table
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		Then "Item keys" window is opened
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Boots' | '37/18SD'  |
+		And I activate field named "ItemKey" in "List" table
+		And I select current line in "List" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "2,000" text in "Quantity" field of "ItemList" table
+		And I activate "Unit" field in "ItemList" table
+		And I click choice button of "Unit" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Boots (12 pcs)' |
+		And I activate field named "Description" in "List" table
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And I click the button named "Add"
+		And I click choice button of "Item" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Dress'       |
+		And I activate field named "Description" in "List" table
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemList" table
+		And I click choice button of "Item key" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Dress' | 'XS/Blue'  |
+		And I activate field named "Item" in "List" table
+		And I select current line in "List" table
+		And I activate "Quantity" field in "ItemList" table
+		And I input "2,000" text in "Quantity" field of "ItemList" table
+		And I activate "Unit" field in "ItemList" table
+		And I click choice button of "Unit" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description'       |
+			| 'box Dress (8 pcs)' |
+		And I activate field named "Description" in "List" table
+		And I select current line in "List" table
+	* Check button Show quantity in base unit in the Link form
+		And I click "LinkUnlinkBasisDocuments" button
+		And I set checkbox "Show quantity in basis unit"
+		And "ItemListRows" table contains lines
+			| 'Row presentation' | 'Unit'              | 'Quantity' | 'Unit (basis)' | 'Quantity (basis)' | 'Store'    |
+			| 'Boots (37/18SD)'  | 'Boots (12 pcs)'    | '2,000'    | 'pcs'          | '24,000'           | 'Store 01' |
+			| 'Dress (XS/Blue)'  | 'box Dress (8 pcs)' | '2,000'    | 'pcs'          | '16,000'           | 'Store 01' |
+		And I close all client application windows
+			
+		
+		
+				
+
+		
+				
+
+		
+					
+
+		
+				

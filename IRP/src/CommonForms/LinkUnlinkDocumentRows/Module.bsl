@@ -33,18 +33,21 @@ EndProcedure
 &AtClient
 Procedure OnOpen(Cancel)
 	AttachIdleHandler("ExpandAllTrees", 1, True);
-EndProcedure
-
-&AtClient
-Procedure ExpandAllTrees() Export
-	RowIDInfoClient.ExpandTree(Items.BasisesTree, ThisObject.BasisesTree.GetItems());
-	RowIDInfoClient.ExpandTree(Items.ResultsTree, ThisObject.ResultsTree.GetItems());
+	
 	If ValueIsFilled(ThisObject.CurrentLineNumber) Then
 		ItemListRow = ThisObject.ItemListRows.FindRows(New Structure("LineNumber", ThisObject.CurrentLineNumber));
 		If ItemListRow.Count() Then
 			Items.ItemListRows.CurrentRow = ItemListRow[0].GetID();
 		EndIf;
 	EndIf;
+	
+	SetIsLinkedItemListRows();
+EndProcedure
+
+&AtClient
+Procedure ExpandAllTrees() Export
+	RowIDInfoClient.ExpandTree(Items.BasisesTree, ThisObject.BasisesTree.GetItems());
+	RowIDInfoClient.ExpandTree(Items.ResultsTree, ThisObject.ResultsTree.GetItems());
 	SetButtonsEnabled();
 EndProcedure
 
@@ -74,8 +77,12 @@ Procedure RefreshTrees()
 	SelectedRowInfo = RowIDInfoClient.GetSelectedRowInfo(Items.ItemListRows.CurrentData);
 	FillResultsTree(SelectedRowInfo.SelectedRow);
 	FillBasisesTree(SelectedRowInfo.FilterBySelectedRow);
-	
 	ExpandAllTrees();
+	RowID = Undefined;
+	SetCurrentRowInResultsTree(ThisObject.ResultsTree.GetItems(), SelectedRowInfo.SelectedRow.Key, RowID);
+	If RowID <> Undefined Then
+		Items.ResultsTree.CurrentRow = RowID;
+	EndIf;
 EndProcedure	
 
 &AtServer
@@ -83,15 +90,50 @@ Procedure FillItemListRows(ItemListRows)
 	For Each Row In ItemListRows Do
 		NewRow = ThisObject.ItemListRows.Add();
 		FillPropertyValues(NewRow, Row);
-		NewRow.RowPresentation = "" + Row.Item + ", " + Row.ItemKey;
+		NewRow.RowPresentation = "" + Row.Item + " (" + Row.ItemKey + ")";
 		NewRow.Picture = 0;
+		
+		If ValueIsFilled(NewRow.ItemKey) And ValueIsFilled(NewRow.Unit) And ValueIsFilled(NewRow.Quantity) Then
+			ConvertationResult = RowIDInfoServer.ConvertQuantityToQuantityInBaseUnit(NewRow.ItemKey, 
+		                                                         				 NewRow.Unit, 
+		                                                         				 NewRow.Quantity);
+		
+			NewRow.QuantityInBaseUnit =  ConvertationResult.QuantityInBaseUnit;
+			NewRow.BasisUnit          =  ConvertationResult.BasisUnit;		                                                   
+		Else
+			NewRow.QuantityInBaseUnit = NewRow.Quantity;
+			NewRow.BasisUnit          = NewRow.Unit;
+		EndIf;
+	EndDo;
+EndProcedure
+
+&AtClient
+Procedure ShowQuantityInBasisUnitOnChange(Item)
+	ThisObject.Items.ItemListRowsBasisUnit.Visible = ThisObject.ShowQuantityInBasisUnit;
+	ThisObject.Items.ItemListRowsQuantityInBaseUnit.Visible = ThisObject.ShowQuantityInBasisUnit;	
+EndProcedure
+
+&AtClient
+Procedure ShowLinkedDocumentsOnChange(Item)
+	ThisObject.Items.ResultsTree.Visible = ThisObject.ShowLinkedDocuments;
+	AttachIdleHandler("ExpandAllTrees", 1, True);
+EndProcedure
+
+&AtClient
+Procedure SetIsLinkedItemListRows()
+	For Each Row In ItemListRows Do
+		If ThisObject.ResultsTable.FindRows(New Structure("Key", Row.Key)).Count() Then
+			Row.Picture = 1;
+		Else
+			Row.Picture = 0;
+		EndIf;
 	EndDo;
 EndProcedure
 
 &AtServer
-Procedure SetAlreadyLinkedInfo(TreeRows)
+Procedure SetAlreadyLinkedInfo(TreeRows, Key)
 	For Each TreeRow In TreeRows Do
-		If TreeRow.DeepLevel Then
+		If TreeRow.DeepLevel And Key = TreeRow.Key Then
 			ThisObject.LinkedRowID = TreeRow.RowID;
 			If TypeOf(TreeRow.Basis) = Type("DocumentRef.ShipmentConfirmation")
 				Or TypeOf(TreeRow.Basis) = Type("DocumentRef.GoodsReceipt") Then
@@ -100,8 +142,22 @@ Procedure SetAlreadyLinkedInfo(TreeRows)
 				ThisObject.ShipingReceipt = False;
 			EndIf;
 		EndIf;
-		SetAlreadyLinkedInfo(TreeRow.GetItems());
+		SetAlreadyLinkedInfo(TreeRow.GetItems(), Key);
 	EndDo;
+EndProcedure
+
+&AtClient
+Procedure SetCurrentRowInResultsTree(TreeRows, Key, RowID)
+	If RowID <> Undefined Then
+		Return;
+	EndIf;
+	For Each TreeRow In TreeRows Do
+		If TreeRow.DeepLevel And Key = TreeRow.Key Then
+			RowID = TreeRow.GetID();
+			Break;
+		EndIf;
+		SetCurrentRowInResultsTree(TreeRow.GetItems(), Key, RowID);
+	EndDo;	
 EndProcedure
 
 &AtServer
@@ -111,7 +167,8 @@ Procedure FillResultsTree(SelectedRow)
 		Return;
 	EndIf;
 	
-	TmpBasisTable = ThisObject.ResultsTable.Unload().Copy(New Structure("Key", SelectedRow.Key));
+	TmpBasisTable = ThisObject.ResultsTable.Unload();
+	
 	BasisesTable = TmpBasisTable.CopyColumns();
 	For Each Row In TmpBasisTable Do
 		If ValueIsFilled(Row.Basis) Then
@@ -125,7 +182,7 @@ Procedure FillResultsTree(SelectedRow)
 	ThisObject.LinkedRowID = "";
 	ThisObject.ShipingReceipt = False;
 		
-	SetAlreadyLinkedInfo(ThisObject.ResultsTree.GetItems());
+	SetAlreadyLinkedInfo(ThisObject.ResultsTree.GetItems(), SelectedRow.Key);
 EndProcedure	
 
 &AtServer
@@ -161,6 +218,17 @@ EndProcedure
 
 &AtClient
 Procedure Link(Command)
+	LinkAtClient();
+EndProcedure
+
+&AtClient
+Procedure BasisesTreeSelection(Item, RowSelected, Field, StandardProcessing)
+	StandardProcessing = False;
+	LinkAtClient();	
+EndProcedure
+
+&AtClient
+Procedure LinkAtClient()
 	LinkInfo = IsCanLink();
 	If Not LinkInfo.IsCan Then
 		Return;
@@ -169,6 +237,7 @@ Procedure Link(Command)
 	FillPropertyValues(ThisObject.ResultsTable.Add(), LinkInfo);
 	
 	RefreshTrees();
+	SetIsLinkedItemListRows();
 EndProcedure
 
 &AtClient
@@ -257,6 +326,14 @@ Procedure Unlink(Command)
 	EndDo;
 	
 	RefreshTrees();	
+	SetIsLinkedItemListRows();
+EndProcedure
+
+&AtClient
+Procedure UnlinkAll(Command)
+	ThisObject.ResultsTable.Clear();
+	RefreshTrees();	
+	SetIsLinkedItemListRows();	
 EndProcedure
 
 &AtClient
@@ -312,6 +389,7 @@ Function CreateBasisesTable(FilterBySelectedRow)
 	EndDo;
 	
 	ArrayForDelete = New Array();
+	
 	If ValueIsFilled(ThisObject.LinkedRowID) Then
 		For Each Row In BasisesTable Do
 			If Row.RowID <> ThisObject.LinkedRowID Then
@@ -328,6 +406,7 @@ Function CreateBasisesTable(FilterBySelectedRow)
 			EndIf;	
 		EndDo;
 	EndIf;
+	
 	For Each ItemArray In ArrayForDelete Do
 		BasisesTable.Delete(ItemArray);
 	EndDo;
@@ -347,6 +426,7 @@ Procedure AutoLink(Command)
 		EndIf;
 	EndDo;
 	RefreshTrees();
+	SetIsLinkedItemListRows();
 EndProcedure
 
 &AtServer
@@ -376,4 +456,3 @@ Function NeedAutoLinkAtServer(RowInfo)
 	EndIf;
 	Return NeedAutoLink;
 EndFunction
-

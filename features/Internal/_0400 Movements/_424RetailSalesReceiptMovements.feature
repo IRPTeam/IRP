@@ -227,6 +227,37 @@ Scenario: _042410 check Retail sales receipt movements by the Register  "R2005 S
 			| ''                                                   | '09.08.2021 11:39:42' | '8 260,02'     | '7 000,02'   | '777,78'        | ''                 | 'Main Company' | 'Shop 01' | 'en description is empty'      | 'TRY'      | 'Retail sales receipt 203 dated 09.08.2021 11:39:42' | '36/18SD'   | '996e771d-7b70-4d2f-9a32-f92836115173' | 'DocumentDiscount' |
 		And I close all client application windows
 
+
+Scenario: _042411 check Retail sales receipt movements by the Register  "R5021 Revenues"
+	* Select Retail sales receipt
+		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '202' |
+	* Check movements by the Register  "R5021 Revenues"
+		And I click "Registrations report" button
+		And I select "R5021 Revenues" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Retail sales receipt 202 dated 28.07.2021 13:53:27' | ''                    | ''          | ''                  | ''             | ''        | ''                   | ''             | ''          | ''         | ''                    | ''                             |
+			| 'Document registrations records'                     | ''                    | ''          | ''                  | ''             | ''        | ''                   | ''             | ''          | ''         | ''                    | ''                             |
+			| 'Register  "R5021 Revenues"'                         | ''                    | ''          | ''                  | ''             | ''        | ''                   | ''             | ''          | ''         | ''                    | ''                             |
+			| ''                                                   | 'Period'              | 'Resources' | ''                  | 'Dimensions'   | ''        | ''                   | ''             | ''          | ''         | ''                    | ''                             |
+			| ''                                                   | ''                    | 'Amount'    | 'Amount with taxes' | 'Company'      | 'Branch'  | 'Profit loss center' | 'Revenue type' | 'Item key'  | 'Currency' | 'Additional analytic' | 'Multi currency movement type' |
+			| ''                                                   | '28.07.2021 13:53:27' | '75,44'     | '89,02'             | 'Main Company' | 'Shop 01' | 'Shop 01'            | 'Revenue'      | 'XS/Blue'   | 'USD'      | ''                    | 'Reporting currency'           |
+			| ''                                                   | '28.07.2021 13:53:27' | '116,07'    | '136,96'            | 'Main Company' | 'Shop 01' | 'Shop 01'            | 'Revenue'      | '38/Yellow' | 'USD'      | ''                    | 'Reporting currency'           |
+			| ''                                                   | '28.07.2021 13:53:27' | '440,68'    | '520'               | 'Main Company' | 'Shop 01' | 'Shop 01'            | 'Revenue'      | 'XS/Blue'   | 'TRY'      | ''                    | 'Local currency'               |
+			| ''                                                   | '28.07.2021 13:53:27' | '440,68'    | '520'               | 'Main Company' | 'Shop 01' | 'Shop 01'            | 'Revenue'      | 'XS/Blue'   | 'TRY'      | ''                    | 'TRY'                          |
+			| ''                                                   | '28.07.2021 13:53:27' | '440,68'    | '520'               | 'Main Company' | 'Shop 01' | 'Shop 01'            | 'Revenue'      | 'XS/Blue'   | 'TRY'      | ''                    | 'en description is empty'      |
+			| ''                                                   | '28.07.2021 13:53:27' | '677,96'    | '799,99'            | 'Main Company' | 'Shop 01' | 'Shop 01'            | 'Revenue'      | '38/Yellow' | 'TRY'      | ''                    | 'Local currency'               |
+			| ''                                                   | '28.07.2021 13:53:27' | '677,96'    | '799,99'            | 'Main Company' | 'Shop 01' | 'Shop 01'            | 'Revenue'      | '38/Yellow' | 'TRY'      | ''                    | 'TRY'                          |
+			| ''                                                   | '28.07.2021 13:53:27' | '677,96'    | '799,99'            | 'Main Company' | 'Shop 01' | 'Shop 01'            | 'Revenue'      | '38/Yellow' | 'TRY'      | ''                    | 'en description is empty'      |
+			| ''                                                   | '28.07.2021 13:53:27' | '1 331,56'  | '1 571,24'          | 'Main Company' | 'Shop 01' | 'Shop 01'            | 'Revenue'      | '36/18SD'   | 'USD'      | ''                    | 'Reporting currency'           |
+			| ''                                                   | '28.07.2021 13:53:27' | '7 777,8'   | '9 177,8'           | 'Main Company' | 'Shop 01' | 'Shop 01'            | 'Revenue'      | '36/18SD'   | 'TRY'      | ''                    | 'Local currency'               |
+			| ''                                                   | '28.07.2021 13:53:27' | '7 777,8'   | '9 177,8'           | 'Main Company' | 'Shop 01' | 'Shop 01'            | 'Revenue'      | '36/18SD'   | 'TRY'      | ''                    | 'TRY'                          |
+			| ''                                                   | '28.07.2021 13:53:27' | '7 777,8'   | '9 177,8'           | 'Main Company' | 'Shop 01' | 'Shop 01'            | 'Revenue'      | '36/18SD'   | 'TRY'      | ''                    | 'en description is empty'      |			
+		And I close all client application windows
+
 Scenario:_042412 check Retail sales receipt movements by the Register  "R2005 Sales special offers" (without discount)
 	And I close all client application windows
 	* Select Retail sales receipt

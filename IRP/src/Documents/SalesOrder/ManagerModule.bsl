@@ -171,7 +171,12 @@ Function ItemList()
 	|	SalesOrderItemList.Ref.UseItemsShipmentScheduling AS UseItemsShipmentScheduling,
 	|	SalesOrderItemList.OffersAmount,
 	|	&StatusInfoPosting AS StatusInfoPosting,
-	|	SalesOrderItemList.Ref.Branch AS Branch
+	|	SalesOrderItemList.Ref.Branch AS Branch,
+	|	CASE
+	|		WHEN SalesOrderItemList.ReservationDate = DATETIME(1, 1, 1)
+	|			THEN SalesOrderItemList.Ref.Date
+	|		ELSE SalesOrderItemList.ReservationDate
+	|	END AS ReservationDate
 	|INTO ItemList
 	|FROM
 	|	Document.SalesOrder.ItemList AS SalesOrderItemList
@@ -261,6 +266,7 @@ Function R4012B_StockReservation()
 	Return
 		"SELECT
 		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	ItemList.ReservationDate AS Period,
 		|	*
 		|INTO R4012B_StockReservation
 		|FROM

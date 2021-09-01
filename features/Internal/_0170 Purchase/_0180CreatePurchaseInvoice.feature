@@ -644,9 +644,9 @@ Scenario: _018013 create PI using form link/unlink
 		And I click "Ok" button
 		And I click "Save" button	
 		And "RowIDInfo" table contains lines
-			| '#' | 'Basis'                                        | 'Next step' | 'Q'      | 'Current step' |
-			| '1' | 'Purchase order 217 dated 12.02.2021 12:45:05' | 'GR'        | '5,000'  | 'PI&GR'        |
-			| '2' | ''                                             | ''          | '2,000'  | ''             |
+			| '#' | 'Basis'                                        | 'Next step' | 'Q'     | 'Current step' |
+			| '1' | 'Purchase order 217 dated 12.02.2021 12:45:05' | 'GR'        | '5,000' | 'PI&GR'        |
+			| '2' | ''                                             | ''          | '2,000' | ''             |	
 		Then the number of "RowIDInfo" table lines is "равно" "2"
 		And "ItemList" table contains lines
 			| 'Item'    | 'Item key' | 'Sales order'                              | 'Purchase order'                               |

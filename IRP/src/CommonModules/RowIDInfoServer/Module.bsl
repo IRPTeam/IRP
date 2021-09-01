@@ -5944,7 +5944,14 @@ Procedure LinkTables(Object, FillingValue, LinkRow, TableNames)
 		EndIf;
 		If Object.Property(TableName) Then
 			For Each DeletionRow In Object[TableName].FindRows(New Structure("Key", LinkRow.Key)) Do
-				Object[TableName].Delete(DeletionRow);
+				If FillingValue.Property(TableName) Then
+					For Each Row In FillingValue[TableName] Do
+						If DeletionRow.Key = Row.Key Then
+							Object[TableName].Delete(DeletionRow);
+							Break;
+						EndIf;
+					EndDo;
+				EndIf;
 			EndDo;
 		Else
 			Continue;
@@ -5968,7 +5975,12 @@ Procedure LinkAttributes(Object, FillingValue, LinkRow)
 			Continue;
 		EndIf;
 		For Each Row In Object.ItemList.FindRows(New Structure("Key", LinkRow.Key)) Do
-				FillPropertyValues(Row, Row_ItemList);
+			For Each KeyValue In Row_ItemList Do
+				// update column only when not filled
+				If Row.Property(KeyValue.Key) And Not ValueIsFilled(Row[KeyValue.Key]) Then
+					Row[KeyValue.Key] = KeyValue.Value;
+				EndIf; 
+			EndDo;
 		EndDo;
 	EndDo;
 EndProcedure

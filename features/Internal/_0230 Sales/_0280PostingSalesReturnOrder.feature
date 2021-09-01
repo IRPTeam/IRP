@@ -445,17 +445,17 @@ Scenario: _028013 create SRO using form link/unlink
 		And I click the button named "ItemListAddBasisDocuments"
 		And I go to line in "BasisesTree" table
 			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
-			| 'TRY'      | '350,00' | '2,000'    | 'Shirt, 38/Black'  | 'pcs'  | 'No'  |
+			| 'TRY'      | '350,00' | '2,000'    | 'Shirt (38/Black)'  | 'pcs'  | 'No'  |
 		And I change "Use" checkbox in "BasisesTree" table
 		And I finish line editing in "BasisesTree" table
 		And I go to line in "BasisesTree" table
 			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
-			| 'TRY'      | '520,00' | '4,000'    | 'Dress, M/White'   | 'pcs'  | 'No'  |
+			| 'TRY'      | '520,00' | '4,000'    | 'Dress (M/White)'   | 'pcs'  | 'No'  |
 		And I change "Use" checkbox in "BasisesTree" table
 		And I finish line editing in "BasisesTree" table
 		And I go to line in "BasisesTree" table
 			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
-			| 'TRY'      | '700,00' | '1,000'    | 'Boots, 37/18SD'   | 'pcs'  | 'No'  |
+			| 'TRY'      | '700,00' | '1,000'    | 'Boots (37/18SD)'   | 'pcs'  | 'No'  |
 		And I change "Use" checkbox in "BasisesTree" table
 		And I finish line editing in "BasisesTree" table
 		And I click "Ok" button
@@ -472,10 +472,11 @@ Scenario: _028013 create SRO using form link/unlink
 		Then "Link / unlink document row" window is opened
 		And I go to line in "ItemListRows" table
 			| '#' | 'Quantity' | 'Row presentation' | 'Store'    | 'Unit' |
-			| '1' | '2,000'    | 'Shirt, 38/Black'   | 'Store 01' | 'pcs'  |
+			| '1' | '2,000'    | 'Shirt (38/Black)'   | 'Store 01' | 'pcs'  |
+		And I set checkbox "Linked documents"		
 		And I go to line in "ResultsTree" table
 			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' |
-			| 'TRY'      | '350,00' | '2,000'    | 'Shirt, 38/Black'    | 'pcs'  |
+			| 'TRY'      | '350,00' | '2,000'    | 'Shirt (38/Black)'    | 'pcs'  |
 		And I click "Unlink" button
 		And I click "Ok" button
 		And I click "Save" button	
@@ -494,11 +495,11 @@ Scenario: _028013 create SRO using form link/unlink
 		And I click the button named "ItemListLinkUnlinkBasisDocuments"
 		And I go to line in "ItemListRows" table
 			| '#' | 'Quantity' | 'Row presentation' | 'Store'    | 'Unit' |
-			| '1' | '2,000'    | 'Shirt, 38/Black'   | 'Store 01' | 'pcs'  |
+			| '1' | '2,000'    | 'Shirt (38/Black)'   | 'Store 01' | 'pcs'  |
 		And I activate field named "ItemListRowsRowPresentation" in "ItemListRows" table
 		And I go to line in "BasisesTree" table
 			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' |
-			| 'TRY'      | '350,00' | '2,000'    | 'Shirt, 38/Black'    | 'pcs'  |
+			| 'TRY'      | '350,00' | '2,000'    | 'Shirt (38/Black)'    | 'pcs'  |
 		And I click "Link" button
 		And I click "Ok" button
 		And "RowIDInfo" table contains lines
@@ -520,7 +521,7 @@ Scenario: _028013 create SRO using form link/unlink
 		And I click the button named "ItemListAddBasisDocuments"
 		And I go to line in "BasisesTree" table
 			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
-			| 'TRY'      | '520,00' | '4,000'   | 'Dress, M/White'   | 'pcs'  | 'No'  |
+			| 'TRY'      | '520,00' | '4,000'   | 'Dress (M/White)'   | 'pcs'  | 'No'  |
 		And I change "Use" checkbox in "BasisesTree" table
 		And I finish line editing in "BasisesTree" table
 		And I click "Ok" button

@@ -126,11 +126,11 @@ Scenario: _028901 create document Goods Receipt based on Purchase invoice (with 
 			| 'Row presentation'                               | 'Use' | 'Quantity' | 'Unit'           | 'Price'  | 'Currency' |
 			| 'Purchase order 102 dated 03.03.2021 08:59:33'   | 'Yes' | ''         | ''               | ''       | ''         |
 			| 'Purchase invoice 102 dated 03.03.2021 09:25:04' | 'Yes' | ''         | ''               | ''       | ''         |
-			| 'Dress, XS/Blue'                                 | 'Yes' | '1,000'    | 'pcs'            | '100,00' | 'TRY'      |
-			| 'Shirt, 36/Red'                                  | 'Yes' | '12,000'   | 'pcs'            | '200,00' | 'TRY'      |
-			| 'Boots, 37/18SD'                                 | 'Yes' | '2,000'    | 'Boots (12 pcs)' | '300,00' | 'TRY'      |
+			| 'Dress (XS/Blue)'                                | 'Yes' | '1,000'    | 'pcs'            | '100,00' | 'TRY'      |
+			| 'Shirt (36/Red)'                                 | 'Yes' | '12,000'   | 'pcs'            | '200,00' | 'TRY'      |
+			| 'Boots (37/18SD)'                                | 'Yes' | '2,000'    | 'Boots (12 pcs)' | '300,00' | 'TRY'      |
 			| 'Purchase invoice 102 dated 03.03.2021 09:25:04' | 'Yes' | ''         | ''               | ''       | ''         |
-			| 'Shirt, 38/Black'                                | 'Yes' | '2,000'    | 'pcs'            | '150,00' | 'TRY'      |
+			| 'Shirt (38/Black)'                               | 'Yes' | '2,000'    | 'pcs'            | '150,00' | 'TRY'      |
 		Then the number of "BasisesTree" table lines is "равно" "7"
 		And I click "Ok" button
 	* Create GR and check filling in
@@ -165,9 +165,9 @@ Scenario: _028902 create document Goods Receipt based on Purchase order (with PI
 			| 'Row presentation'                               | 'Use' | 'Quantity' | 'Unit'           | 'Price'  | 'Currency' |
 			| 'Purchase order 102 dated 03.03.2021 08:59:33'   | 'Yes' | ''         | ''               | ''       | ''         |
 			| 'Purchase invoice 102 dated 03.03.2021 09:25:04' | 'Yes' | ''         | ''               | ''       | ''         |
-			| 'Dress, XS/Blue'                                 | 'Yes' | '1,000'    | 'pcs'            | '100,00' | 'TRY'      |
-			| 'Shirt, 36/Red'                                  | 'Yes' | '12,000'   | 'pcs'            | '200,00' | 'TRY'      |
-			| 'Boots, 37/18SD'                                 | 'Yes' | '2,000'    | 'Boots (12 pcs)' | '300,00' | 'TRY'      |
+			| 'Dress (XS/Blue)'                                 | 'Yes' | '1,000'    | 'pcs'            | '100,00' | 'TRY'      |
+			| 'Shirt (36/Red)'                                  | 'Yes' | '12,000'   | 'pcs'            | '200,00' | 'TRY'      |
+			| 'Boots (37/18SD)'                                 | 'Yes' | '2,000'    | 'Boots (12 pcs)' | '300,00' | 'TRY'      |
 		Then the number of "BasisesTree" table lines is "равно" "5"
 		And I click "Ok" button
 	* Create GR and check filling in
@@ -220,7 +220,7 @@ Scenario: _028905 create document Goods Receipt based on Inventory transfer
 			And I click the button named "AddBasisDocuments"
 			And I go to line in "BasisesTree" table
 				| 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
-				| '3,000'    | 'Dress, L/Green'   | 'pcs'  | 'No'  |
+				| '3,000'    | 'Dress (L/Green)'   | 'pcs'  | 'No'  |
 			And I change "Use" checkbox in "BasisesTree" table
 			And I finish line editing in "BasisesTree" table
 			And I click "Ok" button
@@ -299,17 +299,17 @@ Scenario: _028930 check link/unlink form in the GR
 		And I expand current line in "BasisesTree" table
 		And I go to line in "BasisesTree" table
 			| 'Currency' | 'Price'    | 'Quantity' | 'Row presentation' | 'Unit'           | 'Use' |
-			| 'TRY'      | '8 400,00' | '2,000'    | 'Boots, 36/18SD'   | 'Boots (12 pcs)' | 'No'  |
+			| 'TRY'      | '8 400,00' | '2,000'    | 'Boots (36/18SD)'   | 'Boots (12 pcs)' | 'No'  |
 		And I change "Use" checkbox in "BasisesTree" table
 		And I finish line editing in "BasisesTree" table
 		And I go to line in "BasisesTree" table
 			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
-			| 'TRY'      | '520,00' | '10,000'    | 'Dress, M/White'   | 'pcs'  | 'No'  |
+			| 'TRY'      | '520,00' | '10,000'    | 'Dress (M/White)'   | 'pcs'  | 'No'  |
 		And I change "Use" checkbox in "BasisesTree" table
 		And I finish line editing in "BasisesTree" table
 		And I go to line in "BasisesTree" table
 			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
-			| 'TRY'      | '400,00' | '15,000'    | 'Trousers, 36/Yellow'   | 'pcs'  | 'No'  |
+			| 'TRY'      | '400,00' | '15,000'    | 'Trousers (36/Yellow)'   | 'pcs'  | 'No'  |
 		And I change "Use" checkbox in "BasisesTree" table
 		And I finish line editing in "BasisesTree" table
 		And I click "Ok" button
@@ -325,14 +325,11 @@ Scenario: _028930 check link/unlink form in the GR
 		And I click the button named "LinkUnlinkBasisDocuments"
 		And I go to line in "ItemListRows" table
 			| '#' | 'Quantity' | 'Row presentation' | 'Store'    | 'Unit'           |
-			| '3' | '2,000'    | 'Boots, 36/18SD'   | 'Store 02' | 'Boots (12 pcs)' |
-		And I expand a line in "ResultsTree" table
-			| 'Row presentation'                           |
-			| 'Purchase invoice 101 dated 05.03.2021 12:14:08' |
-		And I activate field named "ItemListRowsRowPresentation" in "ItemListRows" table
+			| '3' | '2,000'    | 'Boots (36/18SD)'   | 'Store 02' | 'Boots (12 pcs)' |
+		And I set checkbox "Linked documents"
 		And I go to line in "ResultsTree" table
 			| 'Currency' | 'Price'    | 'Quantity' | 'Row presentation' | 'Unit' |
-			| 'TRY'      | '8 400,00' | '2,000'    | 'Boots, 36/18SD'   | 'Boots (12 pcs)'  |
+			| 'TRY'      | '8 400,00' | '2,000'    | 'Boots (36/18SD)'   | 'Boots (12 pcs)'  |
 		And I click "Unlink" button
 		And I click "Ok" button
 		And "ItemList" table contains lines
@@ -342,19 +339,16 @@ Scenario: _028930 check link/unlink form in the GR
 			| 'Boots'    | '36/18SD'   | ''                                           |
 	* Link line
 		And I click the button named "LinkUnlinkBasisDocuments"
-		And I expand a line in "ResultsTree" table
-			| 'Row presentation'                           |
-			| 'Purchase invoice 101 dated 05.03.2021 12:14:08' |
 		And I go to line in "ItemListRows" table
 			| '#' | 'Quantity' | 'Row presentation' | 'Store'    | 'Unit'           |
-			| '3' | '2,000'    | 'Boots, 36/18SD'   | 'Store 02' | 'Boots (12 pcs)' |
+			| '3' | '2,000'    | 'Boots (36/18SD)'   | 'Store 02' | 'Boots (12 pcs)' |
 		And I expand a line in "BasisesTree" table
 			| 'Row presentation'                           |
 			| 'Purchase invoice 101 dated 05.03.2021 12:14:08' |
 		And I activate field named "ItemListRowsRowPresentation" in "ItemListRows" table
 		And I go to line in "BasisesTree" table
 			| 'Currency' | 'Price'    | 'Quantity' | 'Row presentation' | 'Unit'           |
-			| 'TRY'      | '8 400,00' | '2,000'    | 'Boots, 36/18SD'   | 'Boots (12 pcs)' |
+			| 'TRY'      | '8 400,00' | '2,000'    | 'Boots (36/18SD)'   | 'Boots (12 pcs)' |
 		And I click "Link" button
 		And I click "Ok" button
 		And "RowIDInfo" table contains lines
@@ -376,7 +370,7 @@ Scenario: _028930 check link/unlink form in the GR
 		And I click the button named "AddBasisDocuments"
 		And I go to line in "BasisesTree" table
 			| 'Currency' | 'Price'    | 'Quantity' | 'Row presentation' | 'Unit'           | 'Use' |
-			| 'TRY'      | '8 400,00' | '2,000'    | 'Boots, 36/18SD'   | 'Boots (12 pcs)' | 'No'  |
+			| 'TRY'      | '8 400,00' | '2,000'    | 'Boots (36/18SD)'   | 'Boots (12 pcs)' | 'No'  |
 		And I change "Use" checkbox in "BasisesTree" table
 		And I finish line editing in "BasisesTree" table
 		And I click "Ok" button
@@ -414,8 +408,8 @@ Scenario: _028903 create document Goods Receipt based on Sales return (Create bu
 		And "BasisesTree" table contains lines
 			| 'Row presentation'                          | 'Use' | 'Quantity' | 'Unit'           | 'Price'    | 'Currency' |
 			| 'Sales return 32 dated 24.03.2021 14:27:53' | 'Yes' | ''         | ''               | ''         | ''         |
-			| 'Dress, XS/Blue'                            | 'Yes' | '1,000'    | 'pcs'            | '520,00'   | 'TRY'      |
-			| 'Boots, 37/18SD'                            | 'Yes' | '2,000'    | 'Boots (12 pcs)' | '8 400,00' | 'TRY'      |
+			| 'Dress (XS/Blue)'                            | 'Yes' | '1,000'    | 'pcs'            | '520,00'   | 'TRY'      |
+			| 'Boots (37/18SD)'                            | 'Yes' | '2,000'    | 'Boots (12 pcs)' | '8 400,00' | 'TRY'      |
 		Then the number of "BasisesTree" table lines is "равно" "3"
 		And I click "Ok" button
 	* Create GR and check filling in
@@ -490,21 +484,21 @@ Scenario: _028931 check link/unlink form in the GR (Sales return)
 		And "BasisesTree" table became equal
 			| 'Row presentation'                           | 'Use' | 'Quantity' | 'Unit'                   | 'Price'    | 'Currency' |
 			| 'Sales return 351 dated 24.03.2021 14:04:08' | 'No'  | ''         | ''                       | ''         | ''         |
-			| 'High shoes, 39/19SD'                        | 'No'  | '10,000'   | 'High shoes box (8 pcs)' | '4 000,00' | 'TRY'      |
-			| 'Bag, ODS'                                   | 'No'  | '20,000'   | 'pcs'                    | '200,00'   | 'TRY'      |
-			| 'High shoes, 39/19SD'                        | 'No'  | '10,000'   | 'High shoes box (8 pcs)' | '4 000,00' | 'TRY'      |
+			| 'High shoes (39/19SD)'                       | 'No'  | '10,000'   | 'High shoes box (8 pcs)' | '4 000,00' | 'TRY'      |
+			| 'Bag (ODS)'                                  | 'No'  | '20,000'   | 'pcs'                    | '200,00'   | 'TRY'      |
+			| 'High shoes (39/19SD)'                       | 'No'  | '10,000'   | 'High shoes box (8 pcs)' | '4 000,00' | 'TRY'      |
 			| 'Sales return 353 dated 24.03.2021 14:10:41' | 'No'  | ''         | ''                       | ''         | ''         |
-			| 'High shoes, 39/19SD'                        | 'No'  | '10,000'   | 'High shoes box (8 pcs)' | '4 000,00' | 'TRY'      |
-			| 'Bag, ODS'                                   | 'No'  | '20,000'   | 'pcs'                    | '200,00'   | 'TRY'      |
-			| 'High shoes, 39/19SD'                        | 'No'  | '10,000'   | 'High shoes box (8 pcs)' | '4 000,00' | 'TRY'      |
+			| 'High shoes (39/19SD)'                       | 'No'  | '10,000'   | 'High shoes box (8 pcs)' | '4 000,00' | 'TRY'      |
+			| 'Bag (ODS)'                                  | 'No'  | '20,000'   | 'pcs'                    | '200,00'   | 'TRY'      |
+			| 'High shoes (39/19SD)'                       | 'No'  | '10,000'   | 'High shoes box (8 pcs)' | '4 000,00' | 'TRY'      |
 		And I go to line in "BasisesTree" table
 			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
-			| 'TRY'      | '4 000,00' | '10,000'   | 'High shoes, 39/19SD'         | 'High shoes box (8 pcs)'  | 'No'  |
+			| 'TRY'      | '4 000,00' | '10,000'   | 'High shoes (39/19SD)'         | 'High shoes box (8 pcs)'  | 'No'  |
 		And I change "Use" checkbox in "BasisesTree" table
 		And I finish line editing in "BasisesTree" table
 		And I go to line in "BasisesTree" table
 			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
-			| 'TRY'      | '200,00' | '20,000'   | 'Bag, ODS'         | 'pcs'  | 'No'  |
+			| 'TRY'      | '200,00' | '20,000'   | 'Bag (ODS)'         | 'pcs'  | 'No'  |
 		And I change "Use" checkbox in "BasisesTree" table
 		And I finish line editing in "BasisesTree" table
 		And I click "Ok" button
@@ -516,14 +510,11 @@ Scenario: _028931 check link/unlink form in the GR (Sales return)
 		And I click the button named "LinkUnlinkBasisDocuments"
 		And I go to line in "ItemListRows" table
 			| '#' | 'Quantity' | 'Row presentation' | 'Store'    | 'Unit' |
-			| '2' | '20,000'   | 'Bag, ODS'         | 'Store 03' | 'pcs'  |
-		And I expand a line in "ResultsTree" table
-			| 'Row presentation'                           |
-			| 'Sales return 351 dated 24.03.2021 14:04:08' |
-		And I activate field named "ItemListRowsRowPresentation" in "ItemListRows" table
+			| '2' | '20,000'   | 'Bag (ODS)'         | 'Store 03' | 'pcs'  |
+		And I set checkbox "Linked documents"
 		And I go to line in "ResultsTree" table
 			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' |
-			| 'TRY'      | '200,00' | '20,000'   | 'Bag, ODS'         | 'pcs'  |
+			| 'TRY'      | '200,00' | '20,000'   | 'Bag (ODS)'         | 'pcs'  |
 		And I click "Unlink" button
 		And I click "Ok" button
 		And "ItemList" table contains lines
@@ -531,19 +522,16 @@ Scenario: _028931 check link/unlink form in the GR (Sales return)
 			| '1' | 'High shoes' | '39/19SD'  | 'Store 03' | '10,000'   | 'High shoes box (8 pcs)' | 'Sales return 351 dated 24.03.2021 14:04:08' | ''                 | ''         | ''                   | ''               | ''                         | 'Sales return 351 dated 24.03.2021 14:04:08' |
 			| '2' | 'Bag'        | 'ODS'      | 'Store 03' | '20,000'   | 'pcs'                    | ''                                           | ''                 | ''         | ''                   | ''               | ''                         | ''                                           |
 		And I click the button named "LinkUnlinkBasisDocuments"
-		And I expand a line in "ResultsTree" table
-			| 'Row presentation'                           |
-			| 'Sales return 351 dated 24.03.2021 14:04:08' |
 		And I go to line in "ItemListRows" table
 			| '#' | 'Quantity' | 'Row presentation' | 'Store'    | 'Unit' |
-			| '2' | '20,000'   | 'Bag, ODS'         | 'Store 03' | 'pcs'  |
+			| '2' | '20,000'   | 'Bag (ODS)'         | 'Store 03' | 'pcs'  |
 		And I expand a line in "BasisesTree" table
 			| 'Row presentation'                           |
 			| 'Sales return 351 dated 24.03.2021 14:04:08' |
 		And I activate field named "ItemListRowsRowPresentation" in "ItemListRows" table
 		And I go to line in "BasisesTree" table
 			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' |
-			| 'TRY'      | '200,00' | '20,000'   | 'Bag, ODS'         | 'pcs'  |
+			| 'TRY'      | '200,00' | '20,000'   | 'Bag (ODS)'         | 'pcs'  |
 		And I click "Link" button
 		And I click "Ok" button
 		And "ItemList" table contains lines

@@ -256,7 +256,7 @@ Scenario: _028402 check link/unlink when add items to Sales return from GR
 			| 'Goods receipt 125 dated 12.03.2021 08:56:32' | 'No'  |
 		And I go to line in "BasisesTree" table
 			| 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
-			| '2,000'    | 'Dress, XS/Blue'   | 'pcs'  | 'No'  |
+			| '2,000'    | 'Dress (XS/Blue)'   | 'pcs'  | 'No'  |
 		And I change "Use" checkbox in "BasisesTree" table
 		And I finish line editing in "BasisesTree" table
 		And I click "Ok" button
@@ -282,13 +282,10 @@ Scenario: _028402 check link/unlink when add items to Sales return from GR
 		Then the number of "RowIDInfo" table lines is "равно" "1"
 	* Unlink line and check RowId tab
 		And I click the button named "LinkUnlinkBasisDocuments"
-		And I expand a line in "ResultsTree" table
-			| 'Row presentation'                            |
-			| 'Goods receipt 125 dated 12.03.2021 08:56:32' |
-		And I activate field named "ItemListRowsRowPresentation" in "ItemListRows" table
+		And I set checkbox "Linked documents"
 		And I go to line in "ResultsTree" table
 			| 'Quantity' | 'Row presentation' | 'Unit' |
-			| '2,000'    | 'Dress, XS/Blue'   | 'pcs'  |
+			| '2,000'    | 'Dress (XS/Blue)'   | 'pcs'  |
 		And I click "Unlink" button
 		And I click "Ok" button
 		Then the number of "GoodsReceiptsTree" table lines is "равно" "0"
@@ -302,7 +299,7 @@ Scenario: _028402 check link/unlink when add items to Sales return from GR
 		Then "Link / unlink document row" window is opened
 		And I go to line in "BasisesTree" table
 			| 'Quantity' | 'Row presentation' | 'Unit' |
-			| '2,000'    | 'Dress, XS/Blue'   | 'pcs'  |
+			| '2,000'    | 'Dress (XS/Blue)'   | 'pcs'  |
 		And I click "Link" button
 		And I click "Ok" button
 		And "GoodsReceiptsTree" table contains lines

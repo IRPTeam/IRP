@@ -281,15 +281,15 @@ Scenario: _028805 create document Shipment confirmation based on 2 SO
 		And "BasisesTree" table contains lines
 			| 'Row presentation'                         | 'Use' | 'Quantity' | 'Unit' | 'Price'  | 'Currency' |
 			| 'Sales order 15 dated 01.02.2021 19:50:45' | 'Yes' | ''         | ''     | ''       | ''         |
-			| 'Dress, XS/Blue'                           | 'Yes' | '1,000'    | 'pcs'  | '520,00' | 'TRY'      |
-			| 'Shirt, 36/Red'                            | 'Yes' | '10,000'   | 'pcs'  | '350,00' | 'TRY'      |
-			| 'Dress, XS/Blue'                           | 'Yes' | '2,000'    | 'pcs'  | '500,00' | 'TRY'      |
-			| 'Dress, XS/Blue'                           | 'Yes' | '10,000'   | 'pcs'  | '520,00' | 'TRY'      |
+			| 'Dress (XS/Blue)'                           | 'Yes' | '1,000'    | 'pcs'  | '520,00' | 'TRY'      |
+			| 'Shirt (36/Red)'                            | 'Yes' | '10,000'   | 'pcs'  | '350,00' | 'TRY'      |
+			| 'Dress (XS/Blue)'                           | 'Yes' | '2,000'    | 'pcs'  | '500,00' | 'TRY'      |
+			| 'Dress (XS/Blue)'                           | 'Yes' | '10,000'   | 'pcs'  | '520,00' | 'TRY'      |
 			| 'Sales order 16*'                          | 'Yes' | ''         | ''     | ''       | ''         |
-			| 'Dress, XS/Blue'                           | 'Yes' | '1,000'    | 'pcs'  | '520,00' | 'TRY'      |
-			| 'Shirt, 36/Red'                            | 'Yes' | '10,000'   | 'pcs'  | '350,00' | 'TRY'      |
-			| 'Dress, XS/Blue'                           | 'Yes' | '2,000'    | 'pcs'  | '500,00' | 'TRY'      |
-			| 'Dress, XS/Blue'                           | 'Yes' | '10,000'   | 'pcs'  | '520,00' | 'TRY'      |
+			| 'Dress (XS/Blue)'                           | 'Yes' | '1,000'    | 'pcs'  | '520,00' | 'TRY'      |
+			| 'Shirt (36/Red)'                            | 'Yes' | '10,000'   | 'pcs'  | '350,00' | 'TRY'      |
+			| 'Dress (XS/Blue)'                           | 'Yes' | '2,000'    | 'pcs'  | '500,00' | 'TRY'      |
+			| 'Dress (XS/Blue)'                           | 'Yes' | '10,000'   | 'pcs'  | '520,00' | 'TRY'      |
 		Then the number of "BasisesTree" table lines is "равно" "10"
 		And I click "Ok" button
 	* Create SC and check filling in
@@ -331,11 +331,11 @@ Scenario: _028806 create document Shipment confirmation based on SI (with SO, SI
 			| 'Row presentation'                           | 'Use' | 'Quantity' | 'Unit'           | 'Price'    | 'Currency' |
 			| 'Sales order 32 dated 26.02.2021 13:30:49'   | 'Yes' | ''         | ''               | ''         | ''         |
 			| 'Sales invoice 32 dated 04.03.2021 16:32:23' | 'Yes' | ''         | ''               | ''         | ''         |
-			| 'Dress, XS/Blue'                             | 'Yes' | '1,000'    | 'pcs'            | '520,00'   | 'TRY'      |
-			| 'Shirt, 36/Red'                              | 'Yes' | '12,000'   | 'pcs'            | '350,00'   | 'TRY'      |
-			| 'Boots, 37/18SD'                             | 'Yes' | '2,000'    | 'Boots (12 pcs)' | '8 400,00' | 'TRY'      |
+			| 'Dress (XS/Blue)'                            | 'Yes' | '1,000'    | 'pcs'            | '520,00'   | 'TRY'      |
+			| 'Shirt (36/Red)'                             | 'Yes' | '12,000'   | 'pcs'            | '350,00'   | 'TRY'      |
+			| 'Boots (37/18SD)'                            | 'Yes' | '2,000'    | 'Boots (12 pcs)' | '8 400,00' | 'TRY'      |
 			| 'Sales invoice 32 dated 04.03.2021 16:32:23' | 'Yes' | ''         | ''               | ''         | ''         |
-			| 'Shirt, 38/Black'                            | 'Yes' | '2,000'    | 'pcs'            | '350,00'   | 'TRY'      |
+			| 'Shirt (38/Black)'                           | 'Yes' | '2,000'    | 'pcs'            | '350,00'   | 'TRY'      |
 		Then the number of "BasisesTree" table lines is "равно" "7"
 		And I click "Ok" button
 	* Create SC and check filling in
@@ -382,7 +382,7 @@ Scenario: _028810 create document Shipment confirmation based on Inventory trans
 			And I click the button named "AddBasisDocuments"
 			And I go to line in "BasisesTree" table
 				| 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
-				| '3,000'    | 'Dress, L/Green'   | 'pcs'  | 'No'  |
+				| '3,000'    | 'Dress (L/Green)'   | 'pcs'  | 'No'  |
 			And I change "Use" checkbox in "BasisesTree" table
 			And I finish line editing in "BasisesTree" table
 			And I click "Ok" button
@@ -466,11 +466,11 @@ Scenario: _028815 create document Shipment confirmation based on Purchase return
 			And "BasisesTree" table contains lines
 				| 'Row presentation'                             | 'Use' | 'Quantity' | 'Unit'           | 'Price'  | 'Currency' |
 				| 'Purchase return 32 dated 24.03.2021 15:15:22' | 'No'  | ''         | ''               | ''       | ''         |
-				| 'Dress, XS/Blue'                               | 'No'  | '1,000'    | 'pcs'            | '200,00' | 'TRY'      |
-				| 'Boots, 36/18SD'                               | 'No'  | '2,000'    | 'Boots (12 pcs)' | '220,00' | 'TRY'      |
+				| 'Dress (XS/Blue)'                              | 'No'  | '1,000'    | 'pcs'            | '200,00' | 'TRY'      |
+				| 'Boots (36/18SD)'                              | 'No'  | '2,000'    | 'Boots (12 pcs)' | '220,00' | 'TRY'      |
 			And I go to line in "BasisesTree" table
 				| 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
-				| '1,000'    | 'Dress, XS/Blue'   | 'pcs'  | 'No'  |
+				| '1,000'    | 'Dress (XS/Blue)'   | 'pcs'  | 'No'  |
 			And I change "Use" checkbox in "BasisesTree" table
 			And I finish line editing in "BasisesTree" table
 			And I click "Ok" button
@@ -576,17 +576,17 @@ Scenario: _028830 check link/unlink form in the SC
 			| 'Sales invoice 103 dated 05.03.2021 12:59:44' | 'No'  |
 		And I go to line in "BasisesTree" table
 			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
-			| 'TRY'      | '700,00' | '2,000'    | 'Boots, 37/18SD'   | 'pcs'  | 'No'  |
+			| 'TRY'      | '700,00' | '2,000'    | 'Boots (37/18SD)'   | 'pcs'  | 'No'  |
 		And I change "Use" checkbox in "BasisesTree" table
 		And I finish line editing in "BasisesTree" table
 		And I go to line in "BasisesTree" table
 			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
-			| 'TRY'      | '440,68' | '8,000'    | 'Dress, M/White'   | 'pcs'  | 'No'  |
+			| 'TRY'      | '440,68' | '8,000'    | 'Dress (M/White)'   | 'pcs'  | 'No'  |
 		And I change "Use" checkbox in "BasisesTree" table
 		And I finish line editing in "BasisesTree" table
 		And I go to line in "BasisesTree" table
 			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
-			| 'TRY'      | '648,15' | '2,000'    | 'Boots, 37/18SD'   | 'pcs'  | 'No'  |
+			| 'TRY'      | '648,15' | '2,000'    | 'Boots (37/18SD)'   | 'pcs'  | 'No'  |
 		And I change "Use" checkbox in "BasisesTree" table
 		And I finish line editing in "BasisesTree" table
 		And I click "Ok" button
@@ -600,19 +600,11 @@ Scenario: _028830 check link/unlink form in the SC
 	* Unlink line
 		And I click "LinkUnlinkBasisDocuments" button
 		Then "Link / unlink document row" window is opened
-		And I expand a line in "ResultsTree" table
-			| 'Row presentation'                            |
-			| 'Sales invoice 103 dated 05.03.2021 12:59:44' |
 		And I go to line in "ItemListRows" table
 			| '#' | 'Quantity' | 'Row presentation' | 'Store'    | 'Unit' |
-			| '3' | '2,000'    | 'Boots, 37/18SD'   | 'Store 02' | 'pcs'  |
-		And I expand a line in "ResultsTree" table
-			| 'Row presentation'                            |
-			| 'Sales invoice 103 dated 05.03.2021 12:59:44' |
-		And I activate field named "ItemListRowsRowPresentation" in "ItemListRows" table
-		And I go to line in "ResultsTree" table
-			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' |
-			| 'TRY'      | '648,15' | '2,000'    | 'Boots, 37/18SD'   | 'pcs'  |
+			| '3' | '2,000'    | 'Boots (37/18SD)'  | 'Store 02' | 'pcs'  |
+		And I set checkbox "Linked documents"
+		And I activate field named "ResultsTreeRowPresentation" in "ResultsTree" table
 		And I click "Unlink" button
 		And I click "Ok" button
 		And "ItemList" table contains lines
@@ -622,19 +614,16 @@ Scenario: _028830 check link/unlink form in the SC
 			| 'Boots' | '37/18SD'  | ''                                            |
 	* Link line
 		And I click "LinkUnlinkBasisDocuments" button
-		And I expand a line in "ResultsTree" table
-			| 'Row presentation'                            |
-			| 'Sales invoice 103 dated 05.03.2021 12:59:44' |
 		And I go to line in "ItemListRows" table
 			| '#' | 'Quantity' | 'Row presentation' | 'Store'    | 'Unit' |
-			| '3' | '2,000'    | 'Boots, 37/18SD'   | 'Store 02' | 'pcs'  |
+			| '3' | '2,000'    | 'Boots (37/18SD)'   | 'Store 02' | 'pcs'  |
 		And I expand a line in "BasisesTree" table
 			| 'Row presentation'                            |
 			| 'Sales invoice 103 dated 05.03.2021 12:59:44' |
 		And I activate field named "ItemListRowsRowPresentation" in "ItemListRows" table
 		And I go to line in "BasisesTree" table
 			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' |
-			| 'TRY'      | '648,15' | '2,000'    | 'Boots, 37/18SD'   | 'pcs'  |
+			| 'TRY'      | '648,15' | '2,000'    | 'Boots (37/18SD)'   | 'pcs'  |
 		And I click "Link" button
 		And I click "Ok" button
 		And "RowIDInfo" table contains lines
@@ -655,7 +644,7 @@ Scenario: _028830 check link/unlink form in the SC
 		And I click "AddBasisDocuments" button
 		And I go to line in "BasisesTree" table
 			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
-			| 'TRY'      | '648,15' | '2,000'    | 'Boots, 37/18SD'   | 'pcs'  | 'No'  |
+			| 'TRY'      | '648,15' | '2,000'    | 'Boots (37/18SD)'   | 'pcs'  | 'No'  |
 		And I change "Use" checkbox in "BasisesTree" table
 		And I finish line editing in "BasisesTree" table
 		And I click "Ok" button
@@ -713,16 +702,16 @@ Scenario: _028831 check link/unlink form in the SC (Purchase return)
 		And "BasisesTree" table became equal
 			| 'Row presentation'                              | 'Use' | 'Quantity' | 'Unit'           | 'Price'  | 'Currency' |
 			| 'Purchase return 351 dated 24.03.2021 16:08:15' | 'No'  | ''         | ''               | ''       | ''         |
-			| 'Dress, XS/Blue'                                | 'No'  | '1,000'    | 'pcs'            | '200,00' | 'TRY'      |
-			| 'Boots, 36/18SD'                                | 'No'  | '2,000'    | 'Boots (12 pcs)' | '220,00' | 'TRY'      |
+			| 'Dress (XS/Blue)'                                | 'No'  | '1,000'    | 'pcs'            | '200,00' | 'TRY'      |
+			| 'Boots (36/18SD)'                                | 'No'  | '2,000'    | 'Boots (12 pcs)' | '220,00' | 'TRY'      |
 		And I go to line in "BasisesTree" table
 			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
-			| 'TRY'      | '200,00' | '1,000'    | 'Dress, XS/Blue'   | 'pcs'  | 'No'  |	
+			| 'TRY'      | '200,00' | '1,000'    | 'Dress (XS/Blue)'   | 'pcs'  | 'No'  |	
 		And I change "Use" checkbox in "BasisesTree" table
 		And I finish line editing in "BasisesTree" table
 		And I go to line in "BasisesTree" table
 			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit'           | 'Use' |
-			| 'TRY'      | '220,00' | '2,000'    | 'Boots, 36/18SD'   | 'Boots (12 pcs)' | 'No'  |
+			| 'TRY'      | '220,00' | '2,000'    | 'Boots (36/18SD)'   | 'Boots (12 pcs)' | 'No'  |
 		And I change "Use" checkbox in "BasisesTree" table
 		And I finish line editing in "BasisesTree" table
 		And I click "Ok" button
@@ -734,14 +723,15 @@ Scenario: _028831 check link/unlink form in the SC (Purchase return)
 		And I click the button named "LinkUnlinkBasisDocuments"
 		And I go to line in "ItemListRows" table
 			| '#' | 'Quantity' | 'Row presentation' | 'Store'    | 'Unit'           |
-			| '2' | '2,000'    | 'Boots, 36/18SD'   | 'Store 02' | 'Boots (12 pcs)' |
+			| '2' | '2,000'    | 'Boots (36/18SD)'   | 'Store 02' | 'Boots (12 pcs)' |
+		And I set checkbox "Linked documents"
 		And I expand a line in "ResultsTree" table
-			| 'Row presentation'                           |
+			| 'Row presentation'                              |
 			| 'Purchase return 351 dated 24.03.2021 16:08:15' |
-		And I activate field named "ItemListRowsRowPresentation" in "ItemListRows" table
+		And I activate field named "ResultsTreeRowPresentation" in "ResultsTree" table
 		And I go to line in "ResultsTree" table
 			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit'           |
-			| 'TRY'      | '220,00' | '2,000'    | 'Boots, 36/18SD'   | 'Boots (12 pcs)' |
+			| 'TRY'      | '220,00' | '2,000'    | 'Boots (36/18SD)'   | 'Boots (12 pcs)' |
 		And I click "Unlink" button
 		And I click "Ok" button
 		And "ItemList" table contains lines
@@ -749,19 +739,16 @@ Scenario: _028831 check link/unlink form in the SC (Purchase return)
 			| '1' | 'Dress' | ''                   | 'XS/Blue'  | '1,000'    | ''              | 'pcs'            | 'Store 02' | 'Purchase return 351 dated 24.03.2021 16:08:15' | ''            | ''                         | ''                      | 'Purchase return 351 dated 24.03.2021 16:08:15' |
 			| '2' | 'Boots' | ''                   | '36/18SD'  | '2,000'    | ''              | 'Boots (12 pcs)' | 'Store 02' | ''                                              | ''            | ''                         | ''                      | ''                                              |
 		And I click the button named "LinkUnlinkBasisDocuments"
-		And I expand a line in "ResultsTree" table
-			| 'Row presentation'                           |
-			| 'Purchase return 351 dated 24.03.2021 16:08:15' |
 		And I go to line in "ItemListRows" table
 			| '#' | 'Quantity' | 'Row presentation' | 'Store'    | 'Unit'           |
-			| '2' | '2,000'    | 'Boots, 36/18SD'   | 'Store 02' | 'Boots (12 pcs)' |
+			| '2' | '2,000'    | 'Boots (36/18SD)'   | 'Store 02' | 'Boots (12 pcs)' |
 		And I expand a line in "BasisesTree" table
 			| 'Row presentation'                           |
 			| 'Purchase return 351 dated 24.03.2021 16:08:15' |
 		And I activate field named "ItemListRowsRowPresentation" in "ItemListRows" table
 		And I go to line in "BasisesTree" table
 			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit'           |
-			| 'TRY'      | '220,00' | '2,000'    | 'Boots, 36/18SD'   | 'Boots (12 pcs)' |
+			| 'TRY'      | '220,00' | '2,000'    | 'Boots (36/18SD)'   | 'Boots (12 pcs)' |
 		And I click "Link" button
 		And I click "Ok" button
 		And "ItemList" table contains lines

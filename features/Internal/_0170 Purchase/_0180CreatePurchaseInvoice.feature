@@ -82,14 +82,14 @@ Scenario: _018001 create document Purchase Invoice based on order (partial quant
 		And "BasisesTree" table became equal
 			| 'Row presentation'                             | 'Use' | 'Quantity' | 'Unit'           | 'Price'  | 'Currency' |
 			| 'Purchase order 217 dated 12.02.2021 12:45:05' | 'Yes' | ''         | ''               | ''       | ''         |
-			| 'Dress, S/Yellow'                              | 'Yes' | '10,000'   | 'pcs'            | '100,00' | 'TRY'      |
-			| 'Service, Interner'                            | 'Yes' | '2,000'    | 'pcs'            | '150,00' | 'TRY'      |
-			| 'Trousers, 36/Yellow'                          | 'Yes' | '5,000'    | 'pcs'            | '200,00' | 'TRY'      |
-			| 'Trousers, 36/Yellow'                          | 'Yes' | '8,000'    | 'pcs'            | '210,00' | 'TRY'      |
-			| 'Boots, 36/18SD'                               | 'Yes' | '5,000'    | 'Boots (12 pcs)' | '200,00' | 'TRY'      |
+			| 'Dress (S/Yellow)'                             | 'Yes' | '10,000'   | 'pcs'            | '100,00' | 'TRY'      |
+			| 'Service (Interner)'                           | 'Yes' | '2,000'    | 'pcs'            | '150,00' | 'TRY'      |
+			| 'Trousers (36/Yellow)'                         | 'Yes' | '5,000'    | 'pcs'            | '200,00' | 'TRY'      |
+			| 'Trousers (36/Yellow)'                         | 'Yes' | '8,000'    | 'pcs'            | '210,00' | 'TRY'      |
+			| 'Boots (36/18SD)'                              | 'Yes' | '5,000'    | 'Boots (12 pcs)' | '200,00' | 'TRY'      |
 		And I go to line in "BasisesTree" table
 			| 'Row presentation'  |
-			| 'Service, Interner' |
+			| 'Service (Interner)' |
 		And I change "Use" checkbox in "BasisesTree" table
 		And I finish line editing in "BasisesTree" table
 		And I click "Ok" button
@@ -321,10 +321,10 @@ Scenario: _018004 create PI based on GR without PO
 		And "BasisesTree" table contains lines
 			| 'Row presentation'                           | 'Use' | 'Quantity' | 'Unit'           | 'Price' | 'Currency' |
 			| 'Goods receipt 12 dated 02.03.2021 12:16:02' | 'Yes' | ''         | ''               | ''      | ''         |
-			| 'Dress, XS/Blue'                             | 'Yes' | '10,000'   | 'pcs'            | ''      | ''         |
-			| 'Trousers, 38/Yellow'                        | 'Yes' | '20,000'   | 'pcs'            | ''      | ''         |
-			| 'Boots, 39/18SD'                             | 'Yes' | '2,000'    | 'Boots (12 pcs)' | ''      | ''         |
-			| 'Dress, XS/Blue'                             | 'Yes' | '2,000'    | 'pcs'            | ''      | ''         |
+			| 'Dress (XS/Blue)'                            | 'Yes' | '10,000'   | 'pcs'            | ''      | ''         |
+			| 'Trousers (38/Yellow)'                       | 'Yes' | '20,000'   | 'pcs'            | ''      | ''         |
+			| 'Boots (39/18SD)'                            | 'Yes' | '2,000'    | 'Boots (12 pcs)' | ''      | ''         |
+			| 'Dress (XS/Blue)'                            | 'Yes' | '2,000'    | 'pcs'            | ''      | ''         |
 		Then the number of "BasisesTree" table lines is "равно" "5"
 		And I click "Ok" button
 	* Create PI and check creation
@@ -380,12 +380,12 @@ Scenario: _018005 create Purchase invoice based on Internal supply request
 			And I click the button named "AddBasisDocuments"
 			And I go to line in "BasisesTree" table
 				| 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
-				| '50,000'    | 'Dress, XS/Blue'   | 'pcs'  | 'No'  |
+				| '50,000'    | 'Dress (XS/Blue)'   | 'pcs'  | 'No'  |
 			And I change "Use" checkbox in "BasisesTree" table
 			And I finish line editing in "BasisesTree" table
 			And I go to line in "BasisesTree" table
 				| 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
-				| '10,000'    | 'Dress, S/Yellow'   | 'pcs'  | 'No'  |
+				| '10,000'    | 'Dress (S/Yellow)'   | 'pcs'  | 'No'  |
 			And I change "Use" checkbox in "BasisesTree" table
 			And I click "Ok" button
 			And I click "Show row key" button
@@ -617,12 +617,12 @@ Scenario: _018013 create PI using form link/unlink
 		And I click the button named "AddBasisDocuments"		
 		And I go to line in "BasisesTree" table
 			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
-			| 'TRY'      | '100,00' | '5,000'    | 'Dress, S/Yellow'  | 'pcs'  | 'No'  |
+			| 'TRY'      | '100,00' | '5,000'    | 'Dress (S/Yellow)'  | 'pcs'  | 'No'  |
 		And I change "Use" checkbox in "BasisesTree" table
 		And I finish line editing in "BasisesTree" table
 		And I go to line in "BasisesTree" table
 			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation'  | 'Unit' | 'Use' |
-			| 'TRY'      | '150,00' | '2,000'    | 'Service, Interner' | 'pcs'  | 'No'  |
+			| 'TRY'      | '150,00' | '2,000'    | 'Service (Interner)' | 'pcs'  | 'No'  |
 		And I set "Use" checkbox in "BasisesTree" table
 		And I finish line editing in "BasisesTree" table
 		And I click "Ok" button
@@ -638,10 +638,8 @@ Scenario: _018013 create PI using form link/unlink
 		Then "Link / unlink document row" window is opened
 		And I go to line in "ItemListRows" table
 			| '#' | 'Quantity' | 'Row presentation' | 'Store'    | 'Unit' |
-			| '2' | '2,000'    | 'Service, Interner'   | 'Store 02' | 'pcs'  |
-		And I go to line in "ResultsTree" table
-			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' |
-			| 'TRY'      | '150,00' | '2,000'    | 'Service, Interner'    | 'pcs'  |
+			| '2' | '2,000'    | 'Service (Interner)'   | 'Store 02' | 'pcs'  |
+		And I set checkbox "Linked documents"
 		And I click "Unlink" button
 		And I click "Ok" button
 		And I click "Save" button	
@@ -658,11 +656,11 @@ Scenario: _018013 create PI using form link/unlink
 		And I click the button named "LinkUnlinkBasisDocuments"
 		And I go to line in "ItemListRows" table
 			| '#' | 'Quantity' | 'Row presentation'  | 'Store'    | 'Unit' |
-			| '2' | '2,000'    | 'Service, Interner' | 'Store 02' | 'pcs'  |
+			| '2' | '2,000'    | 'Service (Interner)' | 'Store 02' | 'pcs'  |
 		And I activate field named "ItemListRowsRowPresentation" in "ItemListRows" table
 		And I go to line in "BasisesTree" table
 			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation'  | 'Unit' |
-			| 'TRY'      | '150,00' | '2,000'    | 'Service, Interner' | 'pcs'  |
+			| 'TRY'      | '150,00' | '2,000'    | 'Service (Interner)' | 'pcs'  |
 		And I click "Link" button
 		And I click "Ok" button
 		And "RowIDInfo" table contains lines
@@ -682,7 +680,7 @@ Scenario: _018013 create PI using form link/unlink
 		And I click the button named "AddBasisDocuments"
 		And I go to line in "BasisesTree" table
 			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
-			| 'TRY'      | '100,00' | '5,000'    | 'Dress, S/Yellow'  | 'pcs'  | 'No'  |
+			| 'TRY'      | '100,00' | '5,000'    | 'Dress (S/Yellow)'  | 'pcs'  | 'No'  |
 		And I change "Use" checkbox in "BasisesTree" table
 		And I finish line editing in "BasisesTree" table
 		And I click "Ok" button

@@ -4138,7 +4138,7 @@
       <valueType>
         <types>String</types>
         <stringQualifiers>
-          <length>20</length>
+          <length>200</length>
         </stringQualifiers>
       </valueType>
       <view>
@@ -5214,6 +5214,26 @@
     <id>72</id>
     <valueType>
       <types>Boolean</types>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
+  </attributes>
+  <attributes>
+    <name>CurrentLineNumber</name>
+    <title>
+      <key>en</key>
+      <value>Current line number</value>
+    </title>
+    <id>75</id>
+    <valueType>
+      <types>Number</types>
+      <numberQualifiers>
+        <precision>10</precision>
+      </numberQualifiers>
     </valueType>
     <view>
       <common>true</common>

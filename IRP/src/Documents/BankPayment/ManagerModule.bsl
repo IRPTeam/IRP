@@ -672,6 +672,7 @@ Function R5022T_Expenses()
 	Return
 		"SELECT
 		|	PaymentList.Commission AS Amount,
+		|	PaymentList.Commission AS AmountWithTaxes,
 		|	*
 		|INTO R5022T_Expenses
 		|FROM

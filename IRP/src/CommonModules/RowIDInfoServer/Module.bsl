@@ -510,6 +510,7 @@ Procedure FillRowID_IT(Source)
 	
 	NewRowsSC = New Map();
 	NewRowsGR = New Map();
+	RowsForDelete = New Array();
 		
 	For Each RowItemList In Source.ItemList Do	
 		Row = Undefined;
@@ -530,7 +531,9 @@ Procedure FillRowID_IT(Source)
 		If Source.UseShipmentConfirmation Then
 			NewRowsSC.Insert(Row, RowItemList.QuantityInBaseUnit);
 		EndIf;
-		
+		If Not ValueIsFilled(Row.CurrentStep) Then
+			RowsForDelete.Add(Row);	
+		EndIf;
 	EndDo;
 		
 	For Each Row In NewRowsSC Do
@@ -538,7 +541,7 @@ Procedure FillRowID_IT(Source)
 		FillPropertyValues(NewRow, Row.Key);
 		NewRow.CurrentStep = Undefined;
 		NewRow.NextStep    = Catalogs.MovementRules.SC;
-		NewRow.Quantity    =Row.Value;
+		NewRow.Quantity    = Row.Value;
 	EndDo;
 	
 	For Each Row In NewRowsGR Do
@@ -546,7 +549,11 @@ Procedure FillRowID_IT(Source)
 		FillPropertyValues(NewRow, Row.Key);
 		NewRow.CurrentStep = Undefined;
 		NewRow.NextStep    = Catalogs.MovementRules.GR;
-		NewRow.Quantity    =Row.Value;
+		NewRow.Quantity    = Row.Value;
+	EndDo;
+	
+	For Each RowForDelete In RowsForDelete Do
+		Source.RowIDInfo.Delete(RowForDelete);
 	EndDo;
 EndProcedure
 
@@ -769,6 +776,7 @@ EndFunction
 Function GetNextStep_SI(Source, RowItemList, Row)
 	NextStep = Catalogs.MovementRules.EmptyRef();
 	If RowItemList.UseShipmentConfirmation
+		And Not RowItemList.ItemKey.Item.ItemType.Type = Enums.ItemTypes.Service
 		And Not Source.ShipmentConfirmations.FindRows(New Structure("Key", RowItemList.Key)).Count() Then
 			NextStep = Catalogs.MovementRules.SC;
 	EndIf;
@@ -800,6 +808,7 @@ EndFunction
 Function GetNextStep_PI(Source, RowItemList, Row)
 	NextStep = Catalogs.MovementRules.EmptyRef();
 	If RowItemList.UseGoodsReceipt
+		And Not RowItemList.ItemKey.Item.ItemType.Type = Enums.ItemTypes.Service
 		And Not Source.GoodsReceipts.FindRows(New Structure("Key", RowItemList.Key)).Count() Then
 			NextStep = Catalogs.MovementRules.GR;
 	EndIf;

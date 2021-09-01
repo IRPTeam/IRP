@@ -108,6 +108,9 @@ Scenario: _041600 preparation (Purchase return)
 		| "Documents.PurchaseReturn.FindByNumber(231).GetObject().Write(DocumentWriteMode.Posting);" |	
 		| "Documents.PurchaseReturn.FindByNumber(232).GetObject().Write(DocumentWriteMode.Posting);" |	
 		| "Documents.PurchaseReturn.FindByNumber(233).GetObject().Write(DocumentWriteMode.Posting);" |
+	When Create document PurchaseReturn objects (advance)
+	And I execute 1C:Enterprise script at server
+		| "Documents.PurchaseReturn.FindByNumber(11).GetObject().Write(DocumentWriteMode.Posting);" |
 	And I close all client application windows
 	
 Scenario: _041601 check Purchase return movements by the Register  "R1002 Purchase returns"
@@ -497,15 +500,15 @@ Scenario: _041618 check Purchase return movements by the Register  "R5022 Expens
 		And I select "R5022 Expenses" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Purchase return 231 dated 14.03.2021 18:53:34' | ''                    | ''          | ''             | ''             | ''                   | ''             | ''         | ''         | ''                    | ''                             |
-			| 'Document registrations records'                | ''                    | ''          | ''             | ''             | ''                   | ''             | ''         | ''         | ''                    | ''                             |
-			| 'Register  "R5022 Expenses"'                    | ''                    | ''          | ''             | ''             | ''                   | ''             | ''         | ''         | ''                    | ''                             |
-			| ''                                              | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''                   | ''             | ''         | ''         | ''                    | ''                             |
-			| ''                                              | ''                    | 'Amount'    | 'Company'      | 'Branch'       | 'Profit loss center' | 'Expense type' | 'Item key' | 'Currency' | 'Additional analytic' | 'Multi currency movement type' |
-			| ''                                              | '14.03.2021 18:53:34' | '-228,81'   | 'Main Company' | 'Front office' | 'Front office'       | 'Expense'      | 'Interner' | 'TRY'      | ''                    | 'Local currency'               |
-			| ''                                              | '14.03.2021 18:53:34' | '-228,81'   | 'Main Company' | 'Front office' | 'Front office'       | 'Expense'      | 'Interner' | 'TRY'      | ''                    | 'TRY'                          |
-			| ''                                              | '14.03.2021 18:53:34' | '-228,81'   | 'Main Company' | 'Front office' | 'Front office'       | 'Expense'      | 'Interner' | 'TRY'      | ''                    | 'en description is empty'      |
-			| ''                                              | '14.03.2021 18:53:34' | '-39,17'    | 'Main Company' | 'Front office' | 'Front office'       | 'Expense'      | 'Interner' | 'USD'      | ''                    | 'Reporting currency'           |
+			| 'Purchase return 231 dated 14.03.2021 18:53:34' | ''                    | ''          | ''                  | ''             | ''             | ''                   | ''             | ''         | ''         | ''                    | ''                             |
+			| 'Document registrations records'                | ''                    | ''          | ''                  | ''             | ''             | ''                   | ''             | ''         | ''         | ''                    | ''                             |
+			| 'Register  "R5022 Expenses"'                    | ''                    | ''          | ''                  | ''             | ''             | ''                   | ''             | ''         | ''         | ''                    | ''                             |
+			| ''                                              | 'Period'              | 'Resources' | ''                  | 'Dimensions'   | ''             | ''                   | ''             | ''         | ''         | ''                    | ''                             |
+			| ''                                              | ''                    | 'Amount'    | 'Amount with taxes' | 'Company'      | 'Branch'       | 'Profit loss center' | 'Expense type' | 'Item key' | 'Currency' | 'Additional analytic' | 'Multi currency movement type' |
+			| ''                                              | '14.03.2021 18:53:34' | '-228,81'   | '-270'              | 'Main Company' | 'Front office' | 'Front office'       | 'Expense'      | 'Interner' | 'TRY'      | ''                    | 'Local currency'               |
+			| ''                                              | '14.03.2021 18:53:34' | '-228,81'   | '-270'              | 'Main Company' | 'Front office' | 'Front office'       | 'Expense'      | 'Interner' | 'TRY'      | ''                    | 'TRY'                          |
+			| ''                                              | '14.03.2021 18:53:34' | '-228,81'   | '-270'              | 'Main Company' | 'Front office' | 'Front office'       | 'Expense'      | 'Interner' | 'TRY'      | ''                    | 'en description is empty'      |
+			| ''                                              | '14.03.2021 18:53:34' | '-39,17'    | '-46,22'            | 'Main Company' | 'Front office' | 'Front office'       | 'Expense'      | 'Interner' | 'USD'      | ''                    | 'Reporting currency'           |		
 	And I close all client application windows
 
 Scenario: _041620 check Purchase return movements by the Register  "R1001 Purchases"
@@ -537,6 +540,29 @@ Scenario: _041620 check Purchase return movements by the Register  "R1001 Purcha
 			| ''                                              | '14.03.2021 18:53:34' | '-1'        | '-180'   | '-152,54'    | '-20'           | 'Main Company' | 'Front office' | 'TRY'                          | 'TRY'      | 'Purchase invoice 117 dated 12.02.2021 15:12:15' | '36/Yellow' | '923e7825-c20f-4a3e-a983-2b85d80e475a' | 'No'                   |
 			| ''                                              | '14.03.2021 18:53:34' | '-1'        | '-180'   | '-152,54'    | '-20'           | 'Main Company' | 'Front office' | 'en description is empty'      | 'TRY'      | 'Purchase invoice 117 dated 12.02.2021 15:12:15' | '36/Yellow' | '923e7825-c20f-4a3e-a983-2b85d80e475a' | 'No'                   |
 			| ''                                              | '14.03.2021 18:53:34' | '-1'        | '-30,82' | '-26,11'     | '-3,42'         | 'Main Company' | 'Front office' | 'Reporting currency'           | 'USD'      | 'Purchase invoice 117 dated 12.02.2021 15:12:15' | '36/Yellow' | '923e7825-c20f-4a3e-a983-2b85d80e475a' | 'No'                   |
+	And I close all client application windows
+
+Scenario: _041621 check Purchase return movements by the Register  "R1001 Purchases" (without PI)
+	And I close all client application windows
+	* Select Purchase return
+		Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '11' |
+	* Check movements by the Register  "R1001 Purchases" 
+		And I click "Registrations report" button
+		And I select "R1001 Purchases" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Purchase return 11 dated 12.02.2021 10:21:24' | ''                    | ''          | ''          | ''           | ''              | ''             | ''             | ''                             | ''         | ''                                             | ''          | ''                                     | ''                     |
+			| 'Document registrations records'               | ''                    | ''          | ''          | ''           | ''              | ''             | ''             | ''                             | ''         | ''                                             | ''          | ''                                     | ''                     |
+			| 'Register  "R1001 Purchases"'                  | ''                    | ''          | ''          | ''           | ''              | ''             | ''             | ''                             | ''         | ''                                             | ''          | ''                                     | ''                     |
+			| ''                                             | 'Period'              | 'Resources' | ''          | ''           | ''              | 'Dimensions'   | ''             | ''                             | ''         | ''                                             | ''          | ''                                     | 'Attributes'           |
+			| ''                                             | ''                    | 'Quantity'  | 'Amount'    | 'Net amount' | 'Offers amount' | 'Company'      | 'Branch'       | 'Multi currency movement type' | 'Currency' | 'Invoice'                                      | 'Item key'  | 'Row key'                              | 'Deferred calculation' |
+			| ''                                             | '12.02.2021 10:21:24' | '-1'        | '-1 069,23' | '-1 069,23'  | ''              | 'Main Company' | 'Front office' | 'Local currency'               | 'TRY'      | 'Purchase return 11 dated 12.02.2021 10:21:24' | '36/Yellow' | 'febad533-cba1-43bc-afb1-80b0a6bdef77' | 'No'                   |
+			| ''                                             | '12.02.2021 10:21:24' | '-1'        | '-190'      | '-190'       | ''              | 'Main Company' | 'Front office' | 'Reporting currency'           | 'USD'      | 'Purchase return 11 dated 12.02.2021 10:21:24' | '36/Yellow' | 'febad533-cba1-43bc-afb1-80b0a6bdef77' | 'No'                   |
+			| ''                                             | '12.02.2021 10:21:24' | '-1'        | '-190'      | '-190'       | ''              | 'Main Company' | 'Front office' | 'USD'                          | 'USD'      | 'Purchase return 11 dated 12.02.2021 10:21:24' | '36/Yellow' | 'febad533-cba1-43bc-afb1-80b0a6bdef77' | 'No'                   |
+			| ''                                             | '12.02.2021 10:21:24' | '-1'        | '-190'      | '-190'       | ''              | 'Main Company' | 'Front office' | 'en description is empty'      | 'USD'      | 'Purchase return 11 dated 12.02.2021 10:21:24' | '36/Yellow' | 'febad533-cba1-43bc-afb1-80b0a6bdef77' | 'No'                   |				
 	And I close all client application windows
 
 Scenario: _041630 Purchase return clear posting/mark for deletion

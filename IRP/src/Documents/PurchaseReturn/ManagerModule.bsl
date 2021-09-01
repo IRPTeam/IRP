@@ -319,7 +319,9 @@ EndFunction
 
 Function R1002T_PurchaseReturns()
 	Return
-		"SELECT *
+		"SELECT
+		|	ItemList.PurchaseInvoice AS Invoice, 
+		|	*
 		|INTO R1002T_PurchaseReturns
 		|FROM
 		|	ItemList AS ItemList
@@ -540,7 +542,8 @@ Function R5022T_Expenses()
 	Return
 		"SELECT
 		|	*,
-		|	- ItemList.NetAmount AS Amount
+		|	- ItemList.NetAmount AS Amount,
+		|	- ItemList.TotalAmount AS AmountWithTaxes
 		|INTO R5022T_Expenses
 		|FROM
 		|	ItemList AS ItemList

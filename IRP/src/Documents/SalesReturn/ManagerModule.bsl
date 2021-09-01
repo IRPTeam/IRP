@@ -318,7 +318,9 @@ EndFunction
 
 Function R2002T_SalesReturns()
 	Return
-		"SELECT *
+		"SELECT 
+		|	ItemList.SalesInvoice AS Invoice,
+		|	*
 		|INTO R2002T_SalesReturns
 		|FROM
 		|	ItemList AS ItemList
@@ -552,7 +554,8 @@ Function R5021T_Revenues()
 	Return
 		"SELECT
 		|	*,
-		|	- ItemList.NetAmount AS Amount
+		|	- ItemList.NetAmount AS Amount,
+		|	- ItemList.Amount AS AmountWithTaxes
 		|INTO R5021T_Revenues
 		|FROM
 		|	ItemList AS ItemList

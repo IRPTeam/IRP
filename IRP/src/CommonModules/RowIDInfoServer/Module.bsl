@@ -1708,6 +1708,7 @@ Function ExtractData_FromSC_ThenFromSI(BasisesTable, DataReceiver)
 	AddTables(Tables);
 	
 	Return CollapseRepeatingItemListRows(Tables, "SalesInvoiceItemListKey");
+	//Return CollapseRepeatingItemListRows(Tables, "SalesInvoiceItemListKey, Key");
 EndFunction
 
 Function ExtractData_FromSC_ThenFromPIGR_ThenFromSO(BasisesTable, DataReceiver)
@@ -5945,7 +5946,11 @@ Procedure LinkTables(Object, FillingValue, LinkRow, TableNames, ArrayOfExcluding
 		EndIf;
 		If Object.Property(TableName) Then
 			For Each DeletionRow In Object[TableName].FindRows(New Structure("Key", LinkRow.Key)) Do
-				If ArrayOfExcludingKeys.Find(LinkRow.Key) = Undefined Then
+				If Upper(TableName) = Upper("SpecialOffers") Or Upper(TableName) = Upper("TaxList") Then
+					If ArrayOfExcludingKeys.Find(LinkRow.Key) = Undefined Then
+						Object[TableName].Delete(DeletionRow);
+					EndIf;
+				Else
 					Object[TableName].Delete(DeletionRow);
 				EndIf;
 			EndDo;
@@ -5958,8 +5963,15 @@ Procedure LinkTables(Object, FillingValue, LinkRow, TableNames, ArrayOfExcluding
 		EndIf;
 				
 		For Each Row In FillingValue[TableName] Do
-			If Row.Key = LinkRow.Key And ArrayOfExcludingKeys.Find(LinkRow.Key) = Undefined Then
-				FillPropertyValues(Object[TableName].Add(), Row);
+			If Row.Key = LinkRow.Key Then
+				If Upper(TableName) = Upper("SpecialOffers") Or Upper(TableName) = Upper("TaxList") Then
+			
+					If ArrayOfExcludingKeys.Find(LinkRow.Key) = Undefined Then
+						FillPropertyValues(Object[TableName].Add(), Row);
+					EndIf;
+				Else
+					FillPropertyValues(Object[TableName].Add(), Row);
+				EndIf;
 			EndIf;
 		EndDo;
 	EndDo;

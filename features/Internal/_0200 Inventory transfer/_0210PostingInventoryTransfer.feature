@@ -541,6 +541,44 @@ Scenario: _02104809 create IT using form link/unlink
 		Then the number of "RowIDInfo" table lines is "равно" "9"
 		And I close all client application windows
 
+Scenario: _02104810 check IT list form statuses
+	Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
+	And "List" table contains lines
+		| 'Company'      | 'Store sender' | 'Status outgoing' | 'Store receiver' | 'Status incoming' |
+		| 'Main Company' | 'Store 02'     | 'Awaiting'        | 'Store 03'       | 'Awaiting'        |
+		| 'Main Company' | 'Store 02'     | 'Awaiting'        | 'Store 03'       | 'Awaiting'        |
+		| 'Main Company' | 'Store 01'     | 'Closed'          | 'Store 02'       | 'Awaiting'        |
+		| 'Main Company' | 'Store 02'     | 'Closed'          | 'Store 03'       | 'Closed'          |
+	* Create GR and check status
+		And I go to line in "List" table
+			| 'Number' |
+			| '3'      |
+		And I click the button named "FormDocumentGoodsReceiptGenerate"
+		And I click "Ok" button
+		And I click "Post and close" button
+		And I click "Refresh" button
+		And "List" table contains lines
+			| 'Number' | 'Company'      | 'Store sender' | 'Status outgoing' | 'Store receiver' | 'Status incoming' |
+			| '1'      | 'Main Company' | 'Store 02'     | 'Awaiting'        | 'Store 03'       | 'Awaiting'        |
+			| '2'      | 'Main Company' | 'Store 02'     | 'Awaiting'        | 'Store 03'       | 'Awaiting'        |
+			| '3'      | 'Main Company' | 'Store 01'     | 'Closed'          | 'Store 02'       | 'Closed'          |
+			| '4'      | 'Main Company' | 'Store 02'     | 'Closed'          | 'Store 03'       | 'Closed'          |
+	* Create SC and check status
+		And I go to line in "List" table
+			| 'Number' |
+			| '2'      |
+		And I click the button named "FormDocumentShipmentConfirmationGenerate"
+		And I click "Ok" button
+		And I click "Post and close" button
+		And I click "Refresh" button
+		And "List" table contains lines
+			| 'Number' | 'Company'      | 'Store sender' | 'Status outgoing' | 'Store receiver' | 'Status incoming' |
+			| '1'      | 'Main Company' | 'Store 02'     | 'Awaiting'        | 'Store 03'       | 'Awaiting'        |
+			| '2'      | 'Main Company' | 'Store 02'     | 'Closed'          | 'Store 03'       | 'Awaiting'        |
+			| '3'      | 'Main Company' | 'Store 01'     | 'Closed'          | 'Store 02'       | 'Closed'          |
+			| '4'      | 'Main Company' | 'Store 02'     | 'Closed'          | 'Store 03'       | 'Closed'          |
+		And I close all client application windows
+
 
 Scenario: _999999 close TestClient session
 	And I close TestClient session

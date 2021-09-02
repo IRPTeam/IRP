@@ -590,7 +590,8 @@ Function R3010B_CashOnHand()
 		|	PaymentList AS PaymentList
 		|WHERE
 		|	PaymentList.IsPaymentToVendor
-		|	OR PaymentList.IsCashTransferOrder";
+		|	OR PaymentList.IsCashTransferOrder
+		|	OR PaymentList.IsReturnToCustomer";
 EndFunction
 
 Function R3015B_CashAdvance()

@@ -369,6 +369,8 @@ Function R2021B_CustomersTransactions()
 		|INTO R2021B_CustomersTransactions
 		|FROM
 		|	ItemList AS ItemList
+		|WHERE
+		|	NOT ItemList.DueAsAdvance
 		|GROUP BY
 		|	ItemList.Agreement,
 		|	ItemList.Company,
@@ -383,12 +385,14 @@ EndFunction
 
 Function R2020B_AdvancesFromCustomers()
 	Return
-		"SELECT *
+		"SELECT
+		|	ItemList.AdvanceBasis AS Basis,
+		|	*
 		|INTO R2020B_AdvancesFromCustomers
 		|FROM
 		|	ItemList AS ItemList
 		|WHERE
-		|	FALSE";
+		|	ItemList.DueAsAdvance";
 EndFunction
 
 Function R2031B_ShipmentInvoicing()

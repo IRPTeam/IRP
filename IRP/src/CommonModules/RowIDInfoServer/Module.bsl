@@ -5910,11 +5910,12 @@ EndProcedure
 
 Procedure Link(Object, FillingValue, LinkRows, TableNames)
 	For Each LinkRow In LinkRows Do
+		ArrayOfExcludingKeys = New Array();
 		// Update ItemList row
-		LinkAttributes(Object, FillingValue, LinkRow);
+		LinkAttributes(Object, FillingValue, LinkRow, ArrayOfExcludingKeys);
 		
 		// Update tables
-		LinkTables(Object, FillingValue, LinkRow, TableNames);		
+		LinkTables(Object, FillingValue, LinkRow, TableNames, ArrayOfExcludingKeys);		
 	EndDo;
 EndProcedure	
 
@@ -5937,20 +5938,15 @@ Function GetLinkRows(Object, FillingValue)
 	Return LinkRows;
 EndFunction
 
-Procedure LinkTables(Object, FillingValue, LinkRow, TableNames)
+Procedure LinkTables(Object, FillingValue, LinkRow, TableNames, ArrayOfExcludingKeys)
 	For Each TableName In TableNames Do
 		If Upper(TableName) = Upper("RowIDInfo") Then
 			Continue;
 		EndIf;
 		If Object.Property(TableName) Then
 			For Each DeletionRow In Object[TableName].FindRows(New Structure("Key", LinkRow.Key)) Do
-				If FillingValue.Property(TableName) Then
-					For Each Row In FillingValue[TableName] Do
-						If DeletionRow.Key = Row.Key Then
-							Object[TableName].Delete(DeletionRow);
-							Break;
-						EndIf;
-					EndDo;
+				If ArrayOfExcludingKeys.Find(LinkRow.Key) = Undefined Then
+					Object[TableName].Delete(DeletionRow);
 				EndIf;
 			EndDo;
 		Else
@@ -5962,25 +5958,49 @@ Procedure LinkTables(Object, FillingValue, LinkRow, TableNames)
 		EndIf;
 				
 		For Each Row In FillingValue[TableName] Do
-			If Row.Key = LinkRow.Key Then
+			If Row.Key = LinkRow.Key And ArrayOfExcludingKeys.Find(LinkRow.Key) = Undefined Then
 				FillPropertyValues(Object[TableName].Add(), Row);
 			EndIf;
 		EndDo;
 	EndDo;
 EndProcedure
 
-Procedure LinkAttributes(Object, FillingValue, LinkRow)
+Procedure LinkAttributes(Object, FillingValue, LinkRow, ArrayOfExcludingKeys)
+	ArrayOfRefillColumns = New Array();
+	ArrayOfRefillColumns.Add(Upper("TotalAmount"));    
+	ArrayOfRefillColumns.Add(Upper("NetAmount"));
+	ArrayOfRefillColumns.Add(Upper("OffersAmount"));
+	ArrayOfRefillColumns.Add(Upper("TaxAmount"));
+	ArrayOfRefillColumns.Add(Upper("PriceType"));
+	
 	For Each Row_ItemLIst In FillingValue.ItemList Do
 		If LinkRow.Key <> Row_ItemList.Key Then
 			Continue;
 		EndIf;
 		For Each Row In Object.ItemList.FindRows(New Structure("Key", LinkRow.Key)) Do
+			NeedRefillColumns = True;
+			
 			For Each KeyValue In Row_ItemList Do
-				// update column only when not filled
-				If Row.Property(KeyValue.Key) And Not ValueIsFilled(Row[KeyValue.Key]) Then
+				If Upper(KeyValue.Key) = Upper("Price") And Row.Property("Price") And ValueIsFilled(Row.Price) 
+					And Row.Property("PriceType") And Row.PriceType = Catalogs.PriceTypes.ManualPriceType	Then
+					NeedRefillColumns = False;
+					ArrayOfExcludingKeys.Add(Row_ItemLIst.Key);
+					Continue;
+				EndIf;
+				
+				If ArrayOfRefillColumns.Find(Upper(KeyValue.Key)) = Undefined And Row.Property(KeyValue.Key) Then
 					Row[KeyValue.Key] = KeyValue.Value;
-				EndIf; 
+				EndIf;
 			EndDo;
+			
+			If NeedRefillColumns Then
+				For Each RefillColumn In ArrayOfRefillColumns Do
+					If Row.Property(RefillColumn) And Row_ItemLIst.Property(RefillColumn) Then
+						Row[RefillColumn] = Row_ItemList[RefillColumn];
+					EndIf;
+				EndDo;
+			EndIf;
+			
 		EndDo;
 	EndDo;
 EndProcedure

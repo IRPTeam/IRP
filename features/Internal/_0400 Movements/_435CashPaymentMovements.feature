@@ -130,6 +130,9 @@ Scenario: _043500 preparation (Cash payment)
 			| "Documents.CashPayment.FindByNumber(324).GetObject().Write(DocumentWriteMode.Posting);" |
 			| "Documents.CashPayment.FindByNumber(325).GetObject().Write(DocumentWriteMode.Posting);" |
 			| "Documents.CashPayment.FindByNumber(326).GetObject().Write(DocumentWriteMode.Posting);" |
+		When Create document CashPayment objects (return to customer)
+		And I execute 1C:Enterprise script at server
+			| "Documents.CashPayment.FindByNumber(327).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I close all client application windows
 		
 
@@ -279,6 +282,30 @@ Scenario: _043518 check absence Cash payment movements by the Register "R3035 Ca
 		Then "ResultTable" spreadsheet document does not contain values
 			| 'R3035 Cash planning'   | 
 	And I close all client application windows
+
+Scenario: _043520 check Cash payment movements by the Register "R3010 Cash on hand" (Return to customer, without basis)
+	* Select Cash payment
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.CashPayment"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '327' |
+		And I select current line in "List" table
+	* Check movements by the Register  "R3010 Cash on hand" 
+		And I click "Registrations report" button
+		And I select "R3010 Cash on hand" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Cash payment 327 dated 02.09.2021 14:09:26' | ''            | ''                    | ''          | ''             | ''             | ''             | ''         | ''                             | ''                     |
+			| 'Document registrations records'             | ''            | ''                    | ''          | ''             | ''             | ''             | ''         | ''                             | ''                     |
+			| 'Register  "R3010 Cash on hand"'             | ''            | ''                    | ''          | ''             | ''             | ''             | ''         | ''                             | ''                     |
+			| ''                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''             | ''         | ''                             | 'Attributes'           |
+			| ''                                           | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'       | 'Account'      | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
+			| ''                                           | 'Expense'     | '02.09.2021 14:09:26' | '450'       | 'Main Company' | 'Front office' | 'Cash desk №1' | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                           | 'Expense'     | '02.09.2021 14:09:26' | '450'       | 'Main Company' | 'Front office' | 'Cash desk №1' | 'USD'      | 'en description is empty'      | 'No'                   |
+			| ''                                           | 'Expense'     | '02.09.2021 14:09:26' | '2 532,38'  | 'Main Company' | 'Front office' | 'Cash desk №1' | 'TRY'      | 'Local currency'               | 'No'                   |		
+	And I close all client application windows
+
 
 Scenario: _043530 Cash payment clear posting/mark for deletion
 	And I close all client application windows

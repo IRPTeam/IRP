@@ -159,7 +159,10 @@ Scenario: _043600 preparation (Cash receipt)
 			| "Documents.CashReceipt.FindByNumber(513).GetObject().Write(DocumentWriteMode.Posting);" |
 			| "Documents.CashReceipt.FindByNumber(514).GetObject().Write(DocumentWriteMode.Posting);" |
 			| "Documents.CashReceipt.FindByNumber(515).GetObject().Write(DocumentWriteMode.Posting);" |
-		And I close all client application windows
+	When Create document CashReceipt objects (return from vendor)
+	And I execute 1C:Enterprise script at server
+		| "Documents.CashReceipt.FindByNumber(516).GetObject().Write(DocumentWriteMode.Posting);" |
+	And I close all client application windows
 		
 
 
@@ -371,6 +374,28 @@ Scenario: _043620 check absence Cash receipt movements by the Register "R3035 Ca
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document does not contain values
 			| 'Register  "R3035 Cash planning'   |   
+	And I close all client application windows
+
+Scenario: _043621 check Cash receipt movements by the Register "R3010 Cash on hand" (Return from vendor, without basis)
+	And I close all client application windows
+	* Select Cash receipt (Currency exchange)
+		Given I open hyperlink "e1cib/list/Document.CashReceipt"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '516' |
+	* Check movements by the Register  "R3010 Cash on hand" 
+		And I click "Registrations report" button
+		And I select "R3010 Cash on hand" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Cash receipt 516 dated 02.09.2021 14:17:00' | ''            | ''                    | ''          | ''             | ''             | ''             | ''         | ''                             | ''                     |
+			| 'Document registrations records'             | ''            | ''                    | ''          | ''             | ''             | ''             | ''         | ''                             | ''                     |
+			| 'Register  "R3010 Cash on hand"'             | ''            | ''                    | ''          | ''             | ''             | ''             | ''         | ''                             | ''                     |
+			| ''                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''             | ''         | ''                             | 'Attributes'           |
+			| ''                                           | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'       | 'Account'      | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
+			| ''                                           | 'Receipt'     | '02.09.2021 14:17:00' | '17,12'     | 'Main Company' | 'Front office' | 'Cash desk №4' | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                           | 'Receipt'     | '02.09.2021 14:17:00' | '100'       | 'Main Company' | 'Front office' | 'Cash desk №4' | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                           | 'Receipt'     | '02.09.2021 14:17:00' | '100'       | 'Main Company' | 'Front office' | 'Cash desk №4' | 'TRY'      | 'en description is empty'      | 'No'                   |			
 	And I close all client application windows
 
 Scenario: _043630 Cash receipt clear posting/mark for deletion

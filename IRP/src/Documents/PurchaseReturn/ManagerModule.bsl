@@ -117,6 +117,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R1005T_PurchaseSpecialOffers());
 	QueryArray.Add(R1012B_PurchaseOrdersInvoiceClosing());
 	QueryArray.Add(R1021B_VendorsTransactions());
+	QueryArray.Add(R1020B_AdvancesToVendors());
 	QueryArray.Add(R1031B_ReceiptInvoicing());
 	QueryArray.Add(R1040B_TaxesOutgoing());
 	QueryArray.Add(R4010B_ActualStocks());
@@ -179,6 +180,8 @@ Function ItemList()
 		|			END
 		|		ELSE UNDEFINED
 		|	END AS BasisDocument,
+		|	PurchaseReturnItemList.Ref AS AdvanceBasis,
+		|	PurchaseReturnItemList.Ref.DueAsAdvance AS DueAsAdvance,
 		|	PurchaseReturnItemList.QuantityInBaseUnit AS Quantity,
 		|	PurchaseReturnItemList.TotalAmount AS TotalAmount,
 		|	PurchaseReturnItemList.TotalAmount AS Amount,
@@ -369,6 +372,8 @@ Function R1021B_VendorsTransactions()
 		|INTO R1021B_VendorsTransactions
 		|FROM
 		|	ItemList AS ItemList
+		|WHERE
+		|	NOT ItemList.DueAsAdvance
 		|GROUP BY
 		|	ItemList.Agreement,
 		|	ItemList.Company,
@@ -380,6 +385,19 @@ Function R1021B_VendorsTransactions()
 		|	ItemList.Period,
 		|	VALUE(AccumulationRecordType.Receipt)";
 EndFunction
+
+Function R1020B_AdvancesToVendors()
+	Return
+		"SELECT
+		|	ItemList.AdvanceBasis AS Basis, 
+		|	*
+		|INTO R1020B_AdvancesToVendors
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	ItemList.DueAsAdvance";
+EndFunction
+
 
 Function R1031B_ReceiptInvoicing()
 	Return

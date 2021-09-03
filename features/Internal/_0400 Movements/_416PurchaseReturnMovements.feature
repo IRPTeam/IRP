@@ -144,7 +144,7 @@ Scenario: _041601 check Purchase return movements by the Register  "R1002 Purcha
 			| ''                                              | '14.03.2021 18:53:34' | '5'         | '450'    | '381,36'     | 'Main Company' | 'Front office' | 'en description is empty'      | 'TRY'      | 'Purchase invoice 117 dated 12.02.2021 15:12:15' | 'S/Yellow'  | '4fcbb4cf-3824-47fb-89b5-50d151315d4d' | 'not available' | 'No'                   |
 	And I close all client application windows
 
-Scenario: _041602 check Purchase return movements by the Register  "R1021 Vendors transactions"
+Scenario: _041602 check Purchase return movements by the Register  "R1021 Vendors transactions" (Due as advance - False)
 	And I close all client application windows
 	* Select Purchase return
 		Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
@@ -406,6 +406,57 @@ Scenario: _041614 check Purchase return movements by the Register  "R4011 Free s
 			| 'Register  "R4011 Free stocks"' |
 	And I close all client application windows
 
+Scenario: _041615 check Purchase return movements by the Register  "R1021 Vendors transactions" (Due as advance - True)
+	And I close all client application windows
+	* Select Purchase return
+		Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '233' |
+	* Check movements by the Register  "R1021 Vendors transactions" 
+		And I click "Registrations report" button
+		And I select "R1021 Vendors transactions" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document does not contain values
+			| 'Register  "R1021 Vendors transactions"' |
+	And I close all client application windows
+
+Scenario: _041616 check Purchase return movements by the Register  "R1020 Advances to vendors" (Due as advance - False)
+	And I close all client application windows
+	* Select Purchase return
+		Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '231' |
+	* Check movements by the Register  "R1020 Advances to vendors" 
+		And I click "Registrations report" button
+		And I select "R1020 Advances to vendors" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		And "ResultTable" spreadsheet document does not contain values
+			| 'Register  "R1020 Advances to vendors"' |
+	And I close all client application windows
+
+Scenario: _041617 check Purchase return movements by the Register  "R1020 Advances to vendors" (Due as advance - True)
+	And I close all client application windows
+	* Select Purchase return
+		Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '233' |
+	* Check movements by the Register  "R1020 Advances to vendors" 
+		And I click "Registrations report" button
+		And I select "R1020 Advances to vendors" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Purchase return 233 dated 14.03.2021 19:26:51' | ''            | ''                    | ''          | ''             | ''             | ''                             | ''         | ''                  | ''          | ''                                              | ''                     | ''                         |
+			| 'Document registrations records'                | ''            | ''                    | ''          | ''             | ''             | ''                             | ''         | ''                  | ''          | ''                                              | ''                     | ''                         |
+			| 'Register  "R1020 Advances to vendors"'         | ''            | ''                    | ''          | ''             | ''             | ''                             | ''         | ''                  | ''          | ''                                              | ''                     | ''                         |
+			| ''                                              | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''                             | ''         | ''                  | ''          | ''                                              | 'Attributes'           | ''                         |
+			| ''                                              | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'       | 'Multi currency movement type' | 'Currency' | 'Legal name'        | 'Partner'   | 'Basis'                                         | 'Deferred calculation' | 'Vendors advances closing' |
+			| ''                                              | 'Receipt'     | '14.03.2021 19:26:51' | '68,48'     | 'Main Company' | 'Front office' | 'Reporting currency'           | 'USD'      | 'Company Ferron BP' | 'Ferron BP' | 'Purchase return 233 dated 14.03.2021 19:26:51' | 'No'                   | ''                         |
+			| ''                                              | 'Receipt'     | '14.03.2021 19:26:51' | '400'       | 'Main Company' | 'Front office' | 'Local currency'               | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Purchase return 233 dated 14.03.2021 19:26:51' | 'No'                   | ''                         |
+			| ''                                              | 'Receipt'     | '14.03.2021 19:26:51' | '400'       | 'Main Company' | 'Front office' | 'en description is empty'      | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Purchase return 233 dated 14.03.2021 19:26:51' | 'No'                   | ''                         |		
+	And I close all client application windows
 
 Scenario: _041619 check Purchase return movements by the Register  "R4032 Goods in transit (outgoing) (use SC, PR)
 	And I close all client application windows

@@ -28,15 +28,7 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 	If DocumentsServer.CheckItemListStores(ThisObject) Then
 		Cancel = True;
 	EndIf;
-	
-	If Not Cancel And IsNew() Then
-		For Each Row In ThisObject.ItemList Do
-			If Not ValueIsFilled(Row.ReservationDate) Then
-				Row.ReservationDate = ThisObject.Date;
-			EndIf;
-		EndDo;
-	EndIf;
-		
+			
 	For RowIndex = 0 To (ThisObject.ItemList.Count() - 1) Do
 		Row = ThisObject.ItemList[RowIndex];
 		If Not ValueIsFilled(Row.ProcurementMethod) And Row.ItemKey.Item.ItemType.Type = Enums.ItemTypes.Product Then

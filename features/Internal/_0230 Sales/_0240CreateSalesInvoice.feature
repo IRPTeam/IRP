@@ -352,7 +352,8 @@ Scenario: _024004 create SI using form link/unlink
 			| 'Distribution department' |
 		And I select current line in "List" table	
 	* Select items from basis documents
-		And I click the button named "ItemListAddBasisDocuments"
+		And I move to "Item list" tab		
+		And I click the button named "AddBasisDocuments"
 		And I go to line in "BasisesTree" table
 			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
 			| 'TRY'      | '520,00' | '10,000'   | 'Dress (XS/Blue)'   | 'pcs'  | 'No'  |
@@ -378,7 +379,7 @@ Scenario: _024004 create SI using form link/unlink
 		| '3' | 'Shipment confirmation 15 dated 25.02.2021 14:13:30' | ''          | '7,000'  | 'SI'           |
 		Then the number of "RowIDInfo" table lines is "равно" "3"
 	* Unlink line
-		And I click the button named "ItemListLinkUnlinkBasisDocuments"
+		And I click the button named "LinkUnlinkBasisDocuments"
 		Then "Link / unlink document row" window is opened
 		And I go to line in "ItemListRows" table
 			| '#' | 'Quantity' | 'Row presentation' | 'Store'    | 'Unit' |
@@ -402,7 +403,7 @@ Scenario: _024004 create SI using form link/unlink
 			| 'Dress' | 'S/Yellow' | ''                                         |
 			| 'Shirt' | '36/Red'   | ''                                         |
 	* Link line
-		And I click the button named "ItemListLinkUnlinkBasisDocuments"
+		And I click the button named "LinkUnlinkBasisDocuments"
 		And I go to line in "ItemListRows" table
 			| '#' | 'Quantity' | 'Row presentation' | 'Store'    | 'Unit' |
 			| '3' | '7,000'    | 'Shirt (36/Red)'   | 'Store 02' | 'pcs'  |
@@ -428,7 +429,7 @@ Scenario: _024004 create SI using form link/unlink
 			| 'Item'  | 'Item key' |
 			| 'Dress' | 'XS/Blue'  |
 		And in the table "ItemList" I click the button named "ItemListContextMenuDelete"
-		And I click the button named "ItemListAddBasisDocuments"
+		And I click the button named "AddBasisDocuments"
 		And I go to line in "BasisesTree" table
 			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
 			| 'TRY'      | '520,00' | '10,000'   | 'Dress (XS/Blue)'   | 'pcs'  | 'No'  |

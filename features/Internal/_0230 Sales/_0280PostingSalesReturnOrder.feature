@@ -442,7 +442,7 @@ Scenario: _028013 create SRO using form link/unlink
 			| 'Distribution department' |
 		And I select current line in "List" table	
 	* Select items from basis documents
-		And I click the button named "ItemListAddBasisDocuments"
+		And I click the button named "AddBasisDocuments"
 		And I go to line in "BasisesTree" table
 			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
 			| 'TRY'      | '350,00' | '2,000'    | 'Shirt (38/Black)'  | 'pcs'  | 'No'  |
@@ -468,7 +468,7 @@ Scenario: _028013 create SRO using form link/unlink
 		| '3' | 'Sales invoice 101 dated 05.03.2021 12:56:38' | ''          | '4,000' | 'SRO&SR'       |
 		Then the number of "RowIDInfo" table lines is "равно" "3"
 	* Unlink line
-		And I click the button named "ItemListLinkUnlinkBasisDocuments"
+		And I click the button named "LinkUnlinkBasisDocuments"
 		Then "Link / unlink document row" window is opened
 		And I go to line in "ItemListRows" table
 			| '#' | 'Quantity' | 'Row presentation' | 'Store'    | 'Unit' |
@@ -492,7 +492,7 @@ Scenario: _028013 create SRO using form link/unlink
 			| 'Dress' | 'M/White'  | 'Sales invoice 101 dated 05.03.2021 12:56:38' |
 			| 'Boots' | '37/18SD'  | 'Sales invoice 102 dated 05.03.2021 12:57:59' |
 	* Link line
-		And I click the button named "ItemListLinkUnlinkBasisDocuments"
+		And I click the button named "LinkUnlinkBasisDocuments"
 		And I go to line in "ItemListRows" table
 			| '#' | 'Quantity' | 'Row presentation' | 'Store'    | 'Unit' |
 			| '1' | '2,000'    | 'Shirt (38/Black)'   | 'Store 01' | 'pcs'  |
@@ -518,7 +518,7 @@ Scenario: _028013 create SRO using form link/unlink
 			| 'Item'  | 'Item key' |
 			| 'Dress' | 'M/White'  |
 		And in the table "ItemList" I click the button named "ItemListContextMenuDelete"
-		And I click the button named "ItemListAddBasisDocuments"
+		And I click the button named "AddBasisDocuments"
 		And I go to line in "BasisesTree" table
 			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
 			| 'TRY'      | '520,00' | '4,000'   | 'Dress (M/White)'   | 'pcs'  | 'No'  |

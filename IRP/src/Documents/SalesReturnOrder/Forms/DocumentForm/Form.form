@@ -2101,7 +2101,7 @@
             <representationInContextMenu>Auto</representationInContextMenu>
           </items>
           <items xsi:type="form:Button">
-            <name>ItemListAddBasisDocuments</name>
+            <name>AddBasisDocuments</name>
             <id>458</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -2109,7 +2109,7 @@
               <common>true</common>
             </userVisible>
             <extendedTooltip>
-              <name>ItemListAddBasisDocumentsExtendedTooltip</name>
+              <name>AddBasisDocumentsExtendedTooltip</name>
               <id>459</id>
               <visible>true</visible>
               <enabled>true</enabled>
@@ -2131,7 +2131,7 @@
             <representationInContextMenu>Auto</representationInContextMenu>
           </items>
           <items xsi:type="form:Button">
-            <name>ItemListLinkUnlinkBasisDocuments</name>
+            <name>LinkUnlinkBasisDocuments</name>
             <id>460</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -2139,7 +2139,7 @@
               <common>true</common>
             </userVisible>
             <extendedTooltip>
-              <name>ItemListLinkUnlinkBasisDocumentsExtendedTooltip</name>
+              <name>LinkUnlinkBasisDocumentsExtendedTooltip</name>
               <id>461</id>
               <visible>true</visible>
               <enabled>true</enabled>
@@ -5564,7 +5564,6 @@
       </handler>
     </action>
     <representation>Picture</representation>
-    <modifiesStoredData>true</modifiesStoredData>
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
   <formCommands>
@@ -5586,7 +5585,6 @@
       </handler>
     </action>
     <representation>Picture</representation>
-    <modifiesStoredData>true</modifiesStoredData>
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
   <commandInterface>

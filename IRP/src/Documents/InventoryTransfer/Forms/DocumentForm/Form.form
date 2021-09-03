@@ -2954,7 +2954,6 @@
       </handler>
     </action>
     <representation>Picture</representation>
-    <modifiesStoredData>true</modifiesStoredData>
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
   <formCommands>
@@ -2976,7 +2975,6 @@
       </handler>
     </action>
     <representation>Picture</representation>
-    <modifiesStoredData>true</modifiesStoredData>
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
   <commandInterface>

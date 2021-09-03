@@ -133,6 +133,9 @@ Scenario: _043300 preparation (Bank payment)
 			| "Documents.BankPayment.FindByNumber(323).GetObject().Write(DocumentWriteMode.Posting);" |
 			| "Documents.BankPayment.FindByNumber(324).GetObject().Write(DocumentWriteMode.Posting);" |
 			| "Documents.BankPayment.FindByNumber(325).GetObject().Write(DocumentWriteMode.Posting);" |
+		When Create document BankPayment objects (return to customer)
+		And I execute 1C:Enterprise script at server
+			| "Documents.BankPayment.FindByNumber(326).GetObject().Write(DocumentWriteMode.Posting);" |
 		
 Scenario: _043301 check Bank payment movements by the Register "R3010 Cash on hand"
 	* Select Bank payment
@@ -392,6 +395,28 @@ Scenario: _043319 check Bank payment movements by the Register "R5022 Expenses" 
 			| ''                                           | '03.06.2021 17:01:44' | '2,57'      | '2,57'              | 'Main Company' | ''       | 'Front office'       | 'Expense'      | ''         | 'USD'      | ''                    | 'Reporting currency'           |
 			| ''                                           | '03.06.2021 17:01:44' | '15'        | '15'                | 'Main Company' | ''       | 'Front office'       | 'Expense'      | ''         | 'TRY'      | ''                    | 'Local currency'               |
 			| ''                                           | '03.06.2021 17:01:44' | '15'        | '15'                | 'Main Company' | ''       | 'Front office'       | 'Expense'      | ''         | 'TRY'      | ''                    | 'en description is empty'      |
+	And I close all client application windows
+
+Scenario: _043320 check Bank payment movements by the Register "R3010 Cash on hand" (Return to customer, without basis)
+	And I close all client application windows
+	* Select Bank payment
+		Given I open hyperlink "e1cib/list/Document.BankPayment"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '326' |
+	* Check movements by the Register  "R3010 Cash on hand" 
+		And I click "Registrations report" button
+		And I select "R3010 Cash on hand" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Bank payment 326 dated 02.09.2021 14:24:44' | ''            | ''                    | ''          | ''             | ''                        | ''                  | ''         | ''                             | ''                     |
+			| 'Document registrations records'             | ''            | ''                    | ''          | ''             | ''                        | ''                  | ''         | ''                             | ''                     |
+			| 'Register  "R3010 Cash on hand"'             | ''            | ''                    | ''          | ''             | ''                        | ''                  | ''         | ''                             | ''                     |
+			| ''                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                        | ''                  | ''         | ''                             | 'Attributes'           |
+			| ''                                           | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'                  | 'Account'           | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
+			| ''                                           | 'Expense'     | '02.09.2021 14:24:44' | '17,12'     | 'Main Company' | 'Distribution department' | 'Bank account, TRY' | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                           | 'Expense'     | '02.09.2021 14:24:44' | '100'       | 'Main Company' | 'Distribution department' | 'Bank account, TRY' | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                           | 'Expense'     | '02.09.2021 14:24:44' | '100'       | 'Main Company' | 'Distribution department' | 'Bank account, TRY' | 'TRY'      | 'en description is empty'      | 'No'                   |		
 	And I close all client application windows
 
 Scenario: _043330 Bank payment clear posting/mark for deletion

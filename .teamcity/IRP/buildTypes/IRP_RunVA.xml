@@ -732,11 +732,12 @@ Compress-Archive -Path "allure-report/*" -DestinationPath "allure-report.zip"]]>
       </extension>
       <extension id="BUILD_EXT_37" type="BuildFailureOnMetric">
         <parameters>
+          <param name="anchorBuild" value="lastSuccessful" />
           <param name="metricKey" value="TestsDuration" />
-          <param name="metricThreshold" value="1800" />
-          <param name="metricUnits" value="metricUnitsDefault" />
+          <param name="metricThreshold" value="100" />
+          <param name="metricUnits" value="metricUnitsPercents" />
           <param name="moreOrLess" value="more" />
-          <param name="withBuildAnchor" value="false" />
+          <param name="withBuildAnchor" value="true" />
         </parameters>
       </extension>
     </build-extensions>

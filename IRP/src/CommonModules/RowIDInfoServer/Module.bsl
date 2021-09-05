@@ -5773,7 +5773,7 @@ Procedure AddLinkedDocumentRows(Object, FillingValues) Export
 	EndDo;
 	
 	TableNames_Refreshable.Add("ItemList");
-	
+		
 	For Each TableName In TableNames_Refreshable Do
 		If FillingValue.Property(TableName) 
 			And CommonFunctionsClientServer.ObjectHasProperty(Object, TableName) Then
@@ -5985,6 +5985,8 @@ Procedure LinkAttributes(Object, FillingValue, LinkRow, ArrayOfExcludingKeys)
 	ArrayOfRefillColumns.Add(Upper("TaxAmount"));
 	ArrayOfRefillColumns.Add(Upper("PriceType"));
 	
+	ArrayOfNotReffilingColumns = GetNotReffilingColumns(TypeOf(Object.Ref));
+	
 	For Each Row_ItemLIst In FillingValue.ItemList Do
 		If LinkRow.Key <> Row_ItemList.Key Then
 			Continue;
@@ -6001,6 +6003,10 @@ Procedure LinkAttributes(Object, FillingValue, LinkRow, ArrayOfExcludingKeys)
 				EndIf;
 				
 				If ArrayOfRefillColumns.Find(Upper(KeyValue.Key)) = Undefined And Row.Property(KeyValue.Key) Then
+					If ArrayOfNotReffilingColumns <> Undefined 
+						And ArrayOfNotReffilingColumns.Find(Upper("ItemList."+KeyValue.Key)) <> Undefined Then
+						Continue;
+					EndIf;	
 					Row[KeyValue.Key] = KeyValue.Value;
 				EndIf;
 			EndDo;
@@ -6014,8 +6020,24 @@ Procedure LinkAttributes(Object, FillingValue, LinkRow, ArrayOfExcludingKeys)
 			EndIf;
 			
 		EndDo;
+		
 	EndDo;
 EndProcedure
+
+Function GetNotReffilingColumns(ObjectType)
+	Map = New Map();
+	ArrayOfColumns = New Array();
+	ArrayOfColumns.Add(Upper("ItemList.ProfitLossCenter"));
+	ArrayOfColumns.Add(Upper("ItemList.RevenueType"));
+	Map.Insert(Type("DocumentRef.StockAdjustmentAsSurplus"), ArrayOfColumns);
+	
+	ArrayOfColumns.Clear();
+	ArrayOfColumns.Add(Upper("ItemList.ProfitLossCenter"));
+	ArrayOfColumns.Add(Upper("ItemList.ExpenseType"));
+	Map.Insert(Type("DocumentRef.StockAdjustmentAsWriteOff"), ArrayOfColumns);
+	
+	Return Map.Get(ObjectType);	
+EndFunction
 
 #EndRegion
 

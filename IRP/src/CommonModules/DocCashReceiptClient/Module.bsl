@@ -359,6 +359,8 @@ Procedure PaymentListBasisDocumentStartChoice(Object, Form, Item, ChoiceData, St
 	Parameters.Insert("TableName"              , "DocumentsForIncomingPayment");
 	Parameters.Insert("OpeningEntryTableName1" , "AccountPayableByDocuments");
 	Parameters.Insert("OpeningEntryTableName2" , "AccountReceivableByDocuments");
+	Parameters.Insert("DebitNoteTableName"     , "Transactions");
+	
 	Parameters.Insert("Ref"                    , Object.Ref);
 	JorDocumentsClient.BasisDocumentStartChoice(Object, Form, Item, CurrentData, Parameters);
 EndProcedure

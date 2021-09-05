@@ -124,15 +124,6 @@ EndProcedure
 
 #EndRegion
 
-#Region BasisDocument
-
-&AtClient
-Procedure TransactionsBasisDocumentStartChoice(Item, ChoiceData, StandardProcessing)
-	DocCreditDebitNoteClient.TransactionsBasisDocumentStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
-EndProcedure
-
-#EndRegion
-
 #Region Currency
 
 &AtClient

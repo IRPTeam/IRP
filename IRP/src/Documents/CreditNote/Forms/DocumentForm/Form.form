@@ -821,7 +821,6 @@
         <items xsi:type="form:FormField">
           <name>TransactionsBasisDocument</name>
           <id>271</id>
-          <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
             <common>true</common>
@@ -2150,7 +2149,6 @@
       <items xsi:type="form:FormField">
         <name>DueAsAdvance</name>
         <id>285</id>
-        <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
           <common>true</common>

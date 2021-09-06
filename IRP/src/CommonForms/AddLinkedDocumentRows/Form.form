@@ -115,7 +115,7 @@
           <horizontalStretch>true</horizontalStretch>
           <verticalStretch>true</verticalStretch>
           <valuesPicture xsi:type="core:PictureRef">
-            <picture>CommonPicture.IconCollection4</picture>
+            <picture>CommonPicture.IconCollection6</picture>
           </valuesPicture>
           <fileDragMode>AsFileRef</fileDragMode>
         </extInfo>
@@ -2546,7 +2546,7 @@
       <valueType>
         <types>String</types>
         <stringQualifiers>
-          <length>50</length>
+          <length>200</length>
         </stringQualifiers>
       </valueType>
       <view>

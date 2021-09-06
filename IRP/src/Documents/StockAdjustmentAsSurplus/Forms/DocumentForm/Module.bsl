@@ -83,6 +83,11 @@ Procedure ItemListItemOnChange(Item)
 EndProcedure
 
 &AtClient
+Procedure ItemListBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
+	DocStockAdjustmentAsSurplusClient.ItemListBeforeAddRow(Object, ThisObject, Item, Cancel, Clone, Parent, IsFolder, Parameter);
+EndProcedure
+
+&AtClient
 Procedure ItemListItemKeyOnChange(Item)
 	DocStockAdjustmentAsSurplusClient.ItemListItemKeyOnChange(Object, ThisObject, Item);
 EndProcedure

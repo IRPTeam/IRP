@@ -17,6 +17,18 @@ Procedure ItemListOnChange(Object, Form, Item = Undefined, CalculationSettings =
 	RowIDInfoClient.UpdateQuantity(Object, Form);
 EndProcedure
 
+Procedure ItemListBeforeAddRow(Object, Form, Item, Cancel, Clone, Parent, IsFolder, Parameter) Export
+	If Clone Then
+		Return;
+	EndIf;
+	Cancel = True;
+	NewRow = Object.ItemList.Add();
+	Form.Items.ItemList.CurrentRow = NewRow.GetID();
+	UserSettingsClient.FillingRowFromSettings(Object, "Object.ItemList", NewRow, True);
+	Form.Items.ItemList.ChangeRow();
+	ItemListOnChange(Object, Form, Item);
+EndProcedure
+
 Procedure ItemListAfterDeleteRow(Object, Form, Item, AddInfo = Undefined) Export
 	SerialLotNumberClient.DeleteUnusedSerialLotNumbers(Object);
 	SerialLotNumberClient.UpdateSerialLotNumbersTree(Object, Form);

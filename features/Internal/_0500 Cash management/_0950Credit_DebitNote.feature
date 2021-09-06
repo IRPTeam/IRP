@@ -213,8 +213,6 @@ Scenario: _095002 create document Dedit Note (write off debts to the vendor)
 			| 'Description'  |
 			| 'Main Company' |
 		And I select current line in "List" table
-	* Filling in the basis document for debt write-offs
-		* Filling in the basis document for debt write-offs
 		And in the table "Transactions" I click the button named "TransactionsAdd"
 		And I click choice button of "Partner" attribute in "Transactions" table
 		And I go to line in "List" table
@@ -231,19 +229,7 @@ Scenario: _095002 create document Dedit Note (write off debts to the vendor)
 			| 'Description'   |
 			| 'Partner term Maxim' |
 		And I select current line in "List" table
-		And in "Transactions" table I move to the next cell
-		And in "Transactions" table I move to the next cell
-		* Check the selection of basis documents for the specified partner
-		And "List" table contains lines
-			| 'Document'                        | 'Legal name'    | 'Partner' | 'Amount' |
-			| '$$PurchaseInvoice095001$$'  | 'Company Maxim' | 'Maxim'   | '11 000,00'       |
-			| '$$PurchaseInvoice0950011$$' | 'Company Maxim' | 'Maxim'   | '10 000,00'       |
-		And I go to line in "List" table
-			| 'Document' |
-			| '$$PurchaseInvoice095001$$'  |
-		And I select current line in "List" table
-		And I click the button named "FormCommandSelect" 
-		And I activate field named "TransactionsAmount" in "Transactions" table
+		And I select current line in "Transactions" table
 		And I input "1 000,00" text in the field named "TransactionsAmount" of "Transactions" table
 		And I finish line editing in "Transactions" table
 		And I activate "Profit loss center" field in "Transactions" table
@@ -290,7 +276,7 @@ Scenario: _095002 create document Dedit Note (write off debts to the vendor)
 		And I close all client application windows
 
 
-Scenario: _095003 check movements of the document Credit Note (increase in debt to the vendor)
+Scenario: _095003 create document Credit Note (increase in debt to the vendor)
 	* Create document
 		Given I open hyperlink "e1cib/list/Document.CreditNote"
 		And I click the button named "FormCreate"
@@ -300,7 +286,7 @@ Scenario: _095003 check movements of the document Credit Note (increase in debt 
 			| 'Description'  |
 			| 'Main Company' |
 		And I select current line in "List" table
-	* Filling in the basis document for debt write-offs
+	* Filling in document
 		And in the table "Transactions" I click the button named "TransactionsAdd"
 		And I click choice button of "Partner" attribute in "Transactions" table
 		And I go to line in "List" table
@@ -318,17 +304,6 @@ Scenario: _095003 check movements of the document Credit Note (increase in debt 
 			| 'Partner term Maxim' |
 		And I select current line in "List" table
 		And in "Transactions" table I move to the next cell
-		And in "Transactions" table I move to the next cell
-	# * Check the selection of basis documents for the specified partner
-	# 	And "List" table contains lines
-	# 		| 'Document'                  | 'Legal name'    | 'Partner' | 'Amount' |
-	# 		| '$$PurchaseInvoice095001$$'  | 'Company Maxim' | 'Maxim'   | '10 000,00'       |
-	# 		| '$$PurchaseInvoice0950011$$' | 'Company Maxim' | 'Maxim'   | '10 000,00'       |
-	# 	And I go to line in "List" table
-	# 		| 'Document' |
-	# 		| '$$PurchaseInvoice095001$$'  |
-	# 	And I select current line in "List" table
-	# 	And I click the button named "FormCommandSelect" 
 		And I activate field named "TransactionsAmount" in "Transactions" table
 		And I input "100,00" text in the field named "TransactionsAmount" of "Transactions" table
 		And I finish line editing in "Transactions" table
@@ -377,7 +352,7 @@ Scenario: _095003 check movements of the document Credit Note (increase in debt 
 
 
 
-Scenario: _095004 check movements of the document Credit Note (write off customers debts)
+Scenario: _095004 create document Credit Note (write off customers debts)
 	* Create document
 		Given I open hyperlink "e1cib/list/Document.CreditNote"
 		And I click the button named "FormCreate"
@@ -387,7 +362,7 @@ Scenario: _095004 check movements of the document Credit Note (write off custome
 			| 'Description'  |
 			| 'Main Company' |
 		And I select current line in "List" table
-	* Filling in the basis document for debt write-offs
+	* Filling in document 
 		And in the table "Transactions" I click the button named "TransactionsAdd"
 		And I click choice button of "Partner" attribute in "Transactions" table
 		And I go to line in "List" table
@@ -404,15 +379,6 @@ Scenario: _095004 check movements of the document Credit Note (write off custome
 			| 'Description'   |
 			| 'Basic Partner terms, TRY' |
 		And I select current line in "List" table
-		And in "Transactions" table I move to the next cell
-		And in "Transactions" table I move to the next cell
-		* Check the selection of basis documents for the specified partner
-		And delay 2
-		And I go to line in "List" table
-			| 'Document' |
-			| '$$SalesInvoice095001$$'  |
-		And I select current line in "List" table
-		And I click the button named "FormCommandSelect" 
 		And I activate field named "TransactionsAmount" in "Transactions" table
 		And I input "1 000,00" text in the field named "TransactionsAmount" of "Transactions" table
 		And I finish line editing in "Transactions" table
@@ -470,7 +436,7 @@ Scenario: _095005 create document Debit Note (increase in customers debt)
 			| 'Description'  |
 			| 'Main Company' |
 		And I select current line in "List" table
-	* Filling in the basis document for debt write-offs
+	* Filling in document
 		And in the table "Transactions" I click the button named "TransactionsAdd"
 		And I click choice button of "Partner" attribute in "Transactions" table
 		And I go to line in "List" table
@@ -487,18 +453,6 @@ Scenario: _095005 create document Debit Note (increase in customers debt)
 			| 'Description'   |
 			| 'Basic Partner terms, TRY' |
 		And I select current line in "List" table
-		And in "Transactions" table I move to the next cell
-		And in "Transactions" table I move to the next cell
-		* Check the selection of basis documents for the specified partner
-		And delay 2
-		And "List" table contains lines
-			| 'Document' |
-			| '$$SalesInvoice095001$$'  |
-		And I go to line in "List" table
-			| 'Document' |
-			| '$$SalesInvoice095001$$'  |
-		And I select current line in "List" table
-		And I click the button named "FormCommandSelect" 
 		And I activate field named "TransactionsAmount" in "Transactions" table
 		And I input "100,00" text in the field named "TransactionsAmount" of "Transactions" table
 		And I finish line editing in "Transactions" table

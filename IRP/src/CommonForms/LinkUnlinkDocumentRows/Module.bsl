@@ -27,7 +27,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	
 	FillItemListRows(Parameters.TablesInfo.ItemListRows);
 	FillResultsTree(Parameters.SelectedRowInfo.SelectedRow);
-	FillBasisesTree(Parameters.SelectedRowInfo.FilterBySelectedRow);
+	FillBasisesTree(Parameters.SelectedRowInfo);
 EndProcedure
 
 &AtClient
@@ -76,7 +76,7 @@ EndProcedure
 Procedure RefreshTrees()
 	SelectedRowInfo = RowIDInfoClient.GetSelectedRowInfo(Items.ItemListRows.CurrentData);
 	FillResultsTree(SelectedRowInfo.SelectedRow);
-	FillBasisesTree(SelectedRowInfo.FilterBySelectedRow);
+	FillBasisesTree(SelectedRowInfo);
 	ExpandAllTrees();
 	RowID = Undefined;
 	SetCurrentRowInResultsTree(ThisObject.ResultsTree.GetItems(), SelectedRowInfo.SelectedRow.Key, RowID);
@@ -186,10 +186,10 @@ Procedure FillResultsTree(SelectedRow)
 EndProcedure	
 
 &AtServer
-Procedure FillBasisesTree(FilterBySelectedRow)
+Procedure FillBasisesTree(SelectedRowInfo)
 	ThisObject.BasisesTree.GetItems().Clear();
-
-	BasisesTable = CreateBasisesTable(FilterBySelectedRow);	
+	
+	BasisesTable = CreateBasisesTable(SelectedRowInfo);
 	TreeReverseInfo = RowIDInfoServer.CreateBasisesTreeReverse(BasisesTable);
 		
 	RowIDInfoServer.CreateBasisesTree(TreeReverseInfo, BasisesTable, ThisObject.ResultsTable.Unload(), ThisObject.BasisesTree.GetItems());
@@ -204,7 +204,9 @@ EndProcedure
 &AtServer
 Function GetFillingValues()
 	BasisesTable = ThisObject.ResultsTable.Unload();
-	ExtractedData = RowIDInfoServer.ExtractData(BasisesTable, ThisObject.MainFilter.Ref);
+	AddInfo = New Structure();
+	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "IsLinkRows", True);
+	ExtractedData = RowIDInfoServer.ExtractData(BasisesTable, ThisObject.MainFilter.Ref, AddInfo);
 	FillingValues = RowIDInfoServer.ConvertDataToFillingValues(ThisObject.MainFilter.Ref.Metadata(), ExtractedData);
 	Return FillingValues;
 EndFunction
@@ -362,22 +364,24 @@ Procedure ShowRowKey(Command)
 EndProcedure
 
 &AtServer
-Function CreateBasisesTable(FilterBySelectedRow)
+Function CreateBasisesTable(SelectedRowInfo)
 	FullFilter = New Structure();
 	For Each KeyValue In ThisObject.MainFilter Do
 		FullFilter.Insert(KeyValue.Key, KeyValue.Value);
 	EndDo;
 	
-	If FilterBySelectedRow <> Undefined Then
-		For Each KeyValue In FilterBySelectedRow Do
+	If SelectedRowInfo.FilterBySelectedRow <> Undefined Then
+		For Each KeyValue In SelectedRowInfo.FilterBySelectedRow Do
 			FullFilter.Insert(KeyValue.Key, KeyValue.Value);
 		EndDo;
 	EndIf;
 	
 	BasisesTable = RowIDInfoServer.GetBasises(ThisObject.MainFilter.Ref, FullFilter);
 	
+	AlredyLinkedRows = ThisObject.ResultsTable.FindRows(New Structure("Key", SelectedRowInfo.SelectedRow.Key));
+	
 	// filter by already linked
-	For Each Row In ThisObject.ResultsTable Do
+	For Each Row In AlredyLinkedRows Do
 		Filter = New Structure();
 		Filter.Insert("RowID"   , Row.RowID);
 		Filter.Insert("BasisKey", Row.BasisKey);
@@ -441,7 +445,8 @@ Function NeedAutoLinkAtServer(RowInfo)
 	NeedAutoLink.BaseInfo.Insert("BasisKey");
 	NeedAutoLink.BaseInfo.Insert("RowID");
 	
-	BasisesTable = CreateBasisesTable(RowInfo.FilterBySelectedRow);
+	BasisesTable = CreateBasisesTable(RowInfo);
+	
 	If BasisesTable.Count() = 1 Then
 		FillPropertyValues(NeedAutoLink.BaseInfo, BasisesTable[0]);
 		NeedAutoLink.IsOk = True;

@@ -10,7 +10,7 @@ EndFunction
 
 Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 	QueryArray = GetQueryTextsSecondaryTables();
-	Parameters.Insert("QueryParameters", GetAdditionalQueryParamenters(Ref));
+	Parameters.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
 	Return New Structure();
 EndFunction
@@ -102,13 +102,13 @@ EndProcedure
 
 Function GetInformationAboutMovements(Ref) Export
 	Str = New Structure;
-	Str.Insert("QueryParamenters", GetAdditionalQueryParamenters(Ref));
+	Str.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
 	Str.Insert("QueryTextsMasterTables", GetQueryTextsMasterTables());
 	Str.Insert("QueryTextsSecondaryTables", GetQueryTextsSecondaryTables());
 	Return Str;
 EndFunction
 
-Function GetAdditionalQueryParamenters(Ref)
+Function GetAdditionalQueryParameters(Ref)
 	StrParams = New Structure();
 	StrParams.Insert("Ref", Ref);
 	If ValueIsFilled(Ref) Then
@@ -205,7 +205,8 @@ Function R4011B_FreeStocks()
 		|FROM
 		|	ItemList AS ItemList
 		|WHERE
-		|	NOT InventoryTransferOrderExists
+		|	NOT ItemList.InventoryTransferOrderExists
+		|	AND NOT ItemList.UseShipmentConfirmation
 		|
 		|UNION ALL
 		|
@@ -218,7 +219,7 @@ Function R4011B_FreeStocks()
 		|FROM
 		|	ItemList AS ItemList
 		|WHERE
-		|NOT ItemList.UseGoodsReceipt";
+		|	NOT ItemList.UseGoodsReceipt";
 EndFunction
 
 Function R4012B_StockReservation()

@@ -510,6 +510,7 @@ Procedure FillRowID_IT(Source)
 	
 	NewRowsSC = New Map();
 	NewRowsGR = New Map();
+	RowsForDelete = New Array();
 		
 	For Each RowItemList In Source.ItemList Do	
 		Row = Undefined;
@@ -530,7 +531,9 @@ Procedure FillRowID_IT(Source)
 		If Source.UseShipmentConfirmation Then
 			NewRowsSC.Insert(Row, RowItemList.QuantityInBaseUnit);
 		EndIf;
-		
+		If Not ValueIsFilled(Row.CurrentStep) Then
+			RowsForDelete.Add(Row);	
+		EndIf;
 	EndDo;
 		
 	For Each Row In NewRowsSC Do
@@ -538,7 +541,7 @@ Procedure FillRowID_IT(Source)
 		FillPropertyValues(NewRow, Row.Key);
 		NewRow.CurrentStep = Undefined;
 		NewRow.NextStep    = Catalogs.MovementRules.SC;
-		NewRow.Quantity    =Row.Value;
+		NewRow.Quantity    = Row.Value;
 	EndDo;
 	
 	For Each Row In NewRowsGR Do
@@ -546,7 +549,11 @@ Procedure FillRowID_IT(Source)
 		FillPropertyValues(NewRow, Row.Key);
 		NewRow.CurrentStep = Undefined;
 		NewRow.NextStep    = Catalogs.MovementRules.GR;
-		NewRow.Quantity    =Row.Value;
+		NewRow.Quantity    = Row.Value;
+	EndDo;
+	
+	For Each RowForDelete In RowsForDelete Do
+		Source.RowIDInfo.Delete(RowForDelete);
 	EndDo;
 EndProcedure
 
@@ -769,6 +776,7 @@ EndFunction
 Function GetNextStep_SI(Source, RowItemList, Row)
 	NextStep = Catalogs.MovementRules.EmptyRef();
 	If RowItemList.UseShipmentConfirmation
+		And Not RowItemList.ItemKey.Item.ItemType.Type = Enums.ItemTypes.Service
 		And Not Source.ShipmentConfirmations.FindRows(New Structure("Key", RowItemList.Key)).Count() Then
 			NextStep = Catalogs.MovementRules.SC;
 	EndIf;
@@ -800,6 +808,7 @@ EndFunction
 Function GetNextStep_PI(Source, RowItemList, Row)
 	NextStep = Catalogs.MovementRules.EmptyRef();
 	If RowItemList.UseGoodsReceipt
+		And Not RowItemList.ItemKey.Item.ItemType.Type = Enums.ItemTypes.Service
 		And Not Source.GoodsReceipts.FindRows(New Structure("Key", RowItemList.Key)).Count() Then
 			NextStep = Catalogs.MovementRules.GR;
 	EndIf;
@@ -1699,6 +1708,7 @@ Function ExtractData_FromSC_ThenFromSI(BasisesTable, DataReceiver)
 	AddTables(Tables);
 	
 	Return CollapseRepeatingItemListRows(Tables, "SalesInvoiceItemListKey");
+	//Return CollapseRepeatingItemListRows(Tables, "SalesInvoiceItemListKey, Key");
 EndFunction
 
 Function ExtractData_FromSC_ThenFromPIGR_ThenFromSO(BasisesTable, DataReceiver)
@@ -3546,6 +3556,11 @@ Procedure ApplyFilterSet_SO_ForSI(Query)
 	|				ELSE FALSE
 	|			END
 	|			AND CASE
+	|				WHEN &Filter_Branch
+	|					THEN RowRef.Branch = &Branch
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
 	|				WHEN &Filter_Partner
 	|					THEN RowRef.Partner = &Partner
 	|				ELSE FALSE
@@ -3607,6 +3622,11 @@ Procedure ApplyFilterSet_SO_ForSC(Query)
 	|				ELSE FALSE
 	|			END
 	|			AND CASE
+	|				WHEN &Filter_Branch
+	|					THEN RowRef.Branch = &Branch
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
 	|				WHEN &Filter_Partner
 	|					THEN RowRef.Partner = &Partner
 	|				ELSE FALSE
@@ -3658,6 +3678,11 @@ Procedure ApplyFilterSet_SO_ForPO_ForPI(Query)
 	|				ELSE FALSE
 	|			END
 	|			AND CASE
+	|				WHEN &Filter_Branch
+	|					THEN RowRef.Branch = &Branch
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
 	|				WHEN &Filter_ProcurementMethod
 	|					THEN RowRef.ProcurementMethod = &ProcurementMethod
 	|				ELSE FALSE
@@ -3697,6 +3722,11 @@ Procedure ApplyFilterSet_SC_ForSI(Query)
 	|			CASE
 	|				WHEN &Filter_Company
 	|					THEN RowRef.Company = &Company
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Branch
+	|					THEN RowRef.Branch = &Branch
 	|				ELSE FALSE
 	|			END
 	|			AND CASE
@@ -3752,6 +3782,11 @@ Procedure ApplyFilterSet_SI_ForSC(Query)
 	|				ELSE FALSE
 	|			END
 	|			AND CASE
+	|				WHEN &Filter_Branch
+	|					THEN RowRef.Branch = &Branch
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
 	|				WHEN &Filter_Partner
 	|					THEN RowRef.Partner = &Partner
 	|				ELSE FALSE
@@ -3801,6 +3836,11 @@ Procedure ApplyFilterSet_PO_ForPI(Query)
 	|			CASE
 	|				WHEN &Filter_Company
 	|					THEN RowRef.Company = &Company
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Branch
+	|					THEN RowRef.Branch = &Branch
 	|				ELSE FALSE
 	|			END
 	|			AND CASE
@@ -3865,6 +3905,11 @@ Procedure ApplyFilterSet_PO_ForGR(Query)
 	|				ELSE FALSE
 	|			END
 	|			AND CASE
+	|				WHEN &Filter_Branch
+	|					THEN RowRef.Branch = &Branch
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
 	|				WHEN &Filter_Partner
 	|					THEN RowRef.Partner = &Partner
 	|				ELSE FALSE
@@ -3903,9 +3948,9 @@ Procedure ApplyFilterSet_GR_ForSI_ForSC(Query)
 	|INTO RowIDMovements_GR_ForSI_ForSC
 	|FROM
 	|	AccumulationRegister.TM1010B_RowIDMovements.Balance(&Period, Step IN (&StepArray)
-	|	AND (Basis IN (&Basises) 
-	|     OR RowRef.Basis IN (&Basises)
-	|	  OR RowRef IN
+	|	AND (Basis IN (&Basises)
+	|	OR RowRef.Basis IN (&Basises)
+	|	OR RowRef IN
 	|		(SELECT
 	|			RowRef.Ref AS Ref
 	|		FROM
@@ -3940,7 +3985,7 @@ Procedure ApplyFIlterSet_PI_ForSI_ForSC(Query)
 	|INTO RowIDMovements_PI_ForSI_ForSC
 	|FROM
 	|	AccumulationRegister.TM1010B_RowIDMovements.Balance(&Period, Step IN (&StepArray)
-	|	AND (Basis IN (&Basises))
+	|	AND Basis IN (&Basises)
 	|	OR RowRef.Basis IN (&Basises)
 	|	OR RowRef IN
 	|		(SELECT
@@ -3988,6 +4033,11 @@ Procedure ApplyFilterSet_GR_ForPI(Query)
 	|			CASE
 	|				WHEN &Filter_Company
 	|					THEN RowRef.Company = &Company
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Branch
+	|					THEN RowRef.Branch = &Branch
 	|				ELSE FALSE
 	|			END
 	|			AND CASE
@@ -4043,6 +4093,11 @@ Procedure ApplyFilterSet_PI_ForGR(Query)
 	|				ELSE FALSE
 	|			END
 	|			AND CASE
+	|				WHEN &Filter_Branch
+	|					THEN RowRef.Branch = &Branch
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
 	|				WHEN &Filter_Partner
 	|					THEN RowRef.Partner = &Partner
 	|				ELSE FALSE
@@ -4080,8 +4135,7 @@ Procedure ApplyFIlterSet_ITO_ForIT(Query)
 	|	RowIDMovements.QuantityBalance AS Quantity
 	|INTO RowIDMovements_ITO_ForIT
 	|FROM
-	|	AccumulationRegister.TM1010B_RowIDMovements.Balance(&Period,
-	|	Step IN (&StepArray)
+	|	AccumulationRegister.TM1010B_RowIDMovements.Balance(&Period, Step IN (&StepArray)
 	|	AND Basis IN (&Basises)
 	|	OR RowRef IN
 	|		(SELECT
@@ -4098,6 +4152,11 @@ Procedure ApplyFIlterSet_ITO_ForIT(Query)
 	|				WHEN &Filter_Company
 	|					THEN RowRef.Company = &Company
 	|				ELSE TRUE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Branch
+	|					THEN RowRef.Branch = &Branch
+	|				ELSE FALSE
 	|			END
 	|			AND CASE
 	|				WHEN &Filter_ItemKey
@@ -4141,6 +4200,11 @@ Procedure ApplyFilterSet_IT_ForSC(Query)
 	|				ELSE FALSE
 	|			END
 	|			AND CASE
+	|				WHEN &Filter_Branch
+	|					THEN RowRef.Branch = &Branch
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
 	|				WHEN &Filter_TransactionType
 	|					THEN RowRef.TransactionTypeSC = &TransactionType
 	|				ELSE FALSE
@@ -4168,8 +4232,7 @@ Procedure ApplyFilterSet_IT_ForGR(Query)
 	|	RowIDMovements.QuantityBalance AS Quantity
 	|INTO RowIDMovements_IT_ForGR
 	|FROM
-	|	AccumulationRegister.TM1010B_RowIDMovements.Balance(&Period,
-	|	Step IN (&StepArray)
+	|	AccumulationRegister.TM1010B_RowIDMovements.Balance(&Period, Step IN (&StepArray)
 	|	AND (Basis IN (&Basises)
 	|	OR RowRef IN
 	|		(SELECT
@@ -4180,6 +4243,11 @@ Procedure ApplyFilterSet_IT_ForGR(Query)
 	|			CASE
 	|				WHEN &Filter_Company
 	|					THEN RowRef.Company = &Company
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Branch
+	|					THEN RowRef.Branch = &Branch
 	|				ELSE FALSE
 	|			END
 	|			AND CASE
@@ -4224,6 +4292,11 @@ Procedure ApplyFilterSet_ISR_ForITO_ForPO_ForPI(Query)
 	|				ELSE FALSE
 	|			END
 	|			AND CASE
+	|				WHEN &Filter_Branch
+	|					THEN RowRef.Branch = &Branch
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
 	|				WHEN &Filter_ItemKey
 	|					THEN RowRef.ItemKey = &ItemKey
 	|				ELSE TRUE
@@ -4255,11 +4328,6 @@ Procedure ApplyFilterSet_PhysicalInventory_ForSurplus_ForWriteOff(Query)
 	|			Catalog.RowIDs AS RowRef
 	|		WHERE
 	|			CASE
-	|				WHEN &Filter_Company
-	|					THEN RowRef.Company = &Company
-	|				ELSE TRUE
-	|			END
-	|			AND CASE
 	|				WHEN &Filter_ItemKey
 	|					THEN RowRef.ItemKey = &ItemKey
 	|				ELSE TRUE
@@ -4294,6 +4362,11 @@ Procedure ApplyFilterSet_SC_ForPR(Query)
 	|			CASE
 	|				WHEN &Filter_Company
 	|					THEN RowRef.Company = &Company
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Branch
+	|					THEN RowRef.Branch = &Branch
 	|				ELSE FALSE
 	|			END
 	|			AND CASE
@@ -4349,6 +4422,11 @@ Procedure ApplyFilterSet_GR_ForSR(Query)
 	|				ELSE FALSE
 	|			END
 	|			AND CASE
+	|				WHEN &Filter_Branch
+	|					THEN RowRef.Branch = &Branch
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
 	|				WHEN &Filter_Partner
 	|					THEN RowRef.Partner = &Partner
 	|				ELSE FALSE
@@ -4398,6 +4476,11 @@ Procedure ApplyFilterSet_PR_ForSC(Query)
 	|			CASE
 	|				WHEN &Filter_Company
 	|					THEN RowRef.Company = &Company
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Branch
+	|					THEN RowRef.Branch = &Branch
 	|				ELSE FALSE
 	|			END
 	|			AND CASE
@@ -4453,6 +4536,11 @@ Procedure ApplyFilterSet_SR_ForGR(Query)
 	|				ELSE FALSE
 	|			END
 	|			AND CASE
+	|				WHEN &Filter_Branch
+	|					THEN RowRef.Branch = &Branch
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
 	|				WHEN &Filter_Partner
 	|					THEN RowRef.Partner = &Partner
 	|				ELSE FALSE
@@ -4502,6 +4590,11 @@ Procedure ApplyFilterSet_PRO_ForPR(Query)
 	|			CASE
 	|				WHEN &Filter_Company
 	|					THEN RowRef.Company = &Company
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Branch
+	|					THEN RowRef.Branch = &Branch
 	|				ELSE FALSE
 	|			END
 	|			AND CASE
@@ -4567,6 +4660,11 @@ Procedure ApplyFilterSet_SRO_ForSR(Query)
 	|				ELSE FALSE
 	|			END
 	|			AND CASE
+	|				WHEN &Filter_Branch
+	|					THEN RowRef.Branch = &Branch
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
 	|				WHEN &Filter_Partner
 	|					THEN RowRef.Partner = &Partner
 	|				ELSE FALSE
@@ -4625,6 +4723,11 @@ Procedure ApplyFilterSet_SI_ForSR_ForSRO(Query)
 	|			CASE
 	|				WHEN &Filter_Company
 	|					THEN RowRef.Company = &Company
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Branch
+	|					THEN RowRef.Branch = &Branch
 	|				ELSE FALSE
 	|			END
 	|			AND CASE
@@ -4691,6 +4794,11 @@ Procedure ApplyFilterSet_PI_ForPR_ForPRO(Query)
 	|				ELSE FALSE
 	|			END
 	|			AND CASE
+	|				WHEN &Filter_Branch
+	|					THEN RowRef.Branch = &Branch
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
 	|				WHEN &Filter_Partner
 	|					THEN RowRef.Partner = &Partner
 	|				ELSE FALSE
@@ -4751,6 +4859,11 @@ Procedure ApplyFilterSet_RSR_ForRRR(Query)
 	|			CASE
 	|				WHEN &Filter_Company
 	|					THEN RowRef.Company = &Company
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Branch
+	|					THEN RowRef.Branch = &Branch
 	|				ELSE FALSE
 	|			END
 	|			AND CASE
@@ -5609,9 +5722,21 @@ EndFunction
 Procedure FillQueryParameters(Query, FilterValues)
 	For Each Attribute In Metadata.Catalogs.RowIDs.Attributes Do
 		Value = Undefined; Use = False;
-		If FilterValues.Property(Attribute.Name) And ValueIsFilled(FilterValues[Attribute.Name]) Then
-			Value = FilterValues[Attribute.Name];
-			Use = True;
+		If FilterValues.Property(Attribute.Name) Then
+			If TrimAll(Upper(Attribute.Name)) = TrimAll(Upper("Branch")) Then
+				If ValueIsFilled(FilterValues[Attribute.Name]) Then
+					Value = FilterValues[Attribute.Name];
+					Use = True;
+				Else
+					Value = Catalogs.BusinessUnits.EmptyRef();
+					Use = True;
+				EndIf;
+			Else
+				If ValueIsFilled(FilterValues[Attribute.Name]) Then
+					Value = FilterValues[Attribute.Name];
+					Use = True;
+				EndIf;
+			EndIf;
 		EndIf;
 		Query.SetParameter("Filter_" + Attribute.Name, Use);
 		Query.SetParameter(Attribute.Name, Value);
@@ -5648,7 +5773,7 @@ Procedure AddLinkedDocumentRows(Object, FillingValues) Export
 	EndDo;
 	
 	TableNames_Refreshable.Add("ItemList");
-	
+		
 	For Each TableName In TableNames_Refreshable Do
 		If FillingValue.Property(TableName) 
 			And CommonFunctionsClientServer.ObjectHasProperty(Object, TableName) Then
@@ -5786,11 +5911,12 @@ EndProcedure
 
 Procedure Link(Object, FillingValue, LinkRows, TableNames)
 	For Each LinkRow In LinkRows Do
+		ArrayOfExcludingKeys = New Array();
 		// Update ItemList row
-		LinkAttributes(Object, FillingValue, LinkRow);
+		LinkAttributes(Object, FillingValue, LinkRow, ArrayOfExcludingKeys);
 		
 		// Update tables
-		LinkTables(Object, FillingValue, LinkRow, TableNames);		
+		LinkTables(Object, FillingValue, LinkRow, TableNames, ArrayOfExcludingKeys);		
 	EndDo;
 EndProcedure	
 
@@ -5813,14 +5939,20 @@ Function GetLinkRows(Object, FillingValue)
 	Return LinkRows;
 EndFunction
 
-Procedure LinkTables(Object, FillingValue, LinkRow, TableNames)
+Procedure LinkTables(Object, FillingValue, LinkRow, TableNames, ArrayOfExcludingKeys)
 	For Each TableName In TableNames Do
 		If Upper(TableName) = Upper("RowIDInfo") Then
 			Continue;
 		EndIf;
 		If Object.Property(TableName) Then
 			For Each DeletionRow In Object[TableName].FindRows(New Structure("Key", LinkRow.Key)) Do
-				Object[TableName].Delete(DeletionRow);
+				If Upper(TableName) = Upper("SpecialOffers") Or Upper(TableName) = Upper("TaxList") Then
+					If ArrayOfExcludingKeys.Find(LinkRow.Key) = Undefined Then
+						Object[TableName].Delete(DeletionRow);
+					EndIf;
+				Else
+					Object[TableName].Delete(DeletionRow);
+				EndIf;
 			EndDo;
 		Else
 			Continue;
@@ -5832,22 +5964,80 @@ Procedure LinkTables(Object, FillingValue, LinkRow, TableNames)
 				
 		For Each Row In FillingValue[TableName] Do
 			If Row.Key = LinkRow.Key Then
-				FillPropertyValues(Object[TableName].Add(), Row);
+				If Upper(TableName) = Upper("SpecialOffers") Or Upper(TableName) = Upper("TaxList") Then
+			
+					If ArrayOfExcludingKeys.Find(LinkRow.Key) = Undefined Then
+						FillPropertyValues(Object[TableName].Add(), Row);
+					EndIf;
+				Else
+					FillPropertyValues(Object[TableName].Add(), Row);
+				EndIf;
 			EndIf;
 		EndDo;
 	EndDo;
 EndProcedure
 
-Procedure LinkAttributes(Object, FillingValue, LinkRow)
+Procedure LinkAttributes(Object, FillingValue, LinkRow, ArrayOfExcludingKeys)
+	ArrayOfRefillColumns = New Array();
+	ArrayOfRefillColumns.Add(Upper("TotalAmount"));    
+	ArrayOfRefillColumns.Add(Upper("NetAmount"));
+	ArrayOfRefillColumns.Add(Upper("OffersAmount"));
+	ArrayOfRefillColumns.Add(Upper("TaxAmount"));
+	ArrayOfRefillColumns.Add(Upper("PriceType"));
+	
+	ArrayOfNotReffilingColumns = GetNotReffilingColumns(TypeOf(Object.Ref));
+	
 	For Each Row_ItemLIst In FillingValue.ItemList Do
 		If LinkRow.Key <> Row_ItemList.Key Then
 			Continue;
 		EndIf;
 		For Each Row In Object.ItemList.FindRows(New Structure("Key", LinkRow.Key)) Do
-				FillPropertyValues(Row, Row_ItemList);
+			NeedRefillColumns = True;
+			
+			For Each KeyValue In Row_ItemList Do
+				If Upper(KeyValue.Key) = Upper("Price") And Row.Property("Price") And ValueIsFilled(Row.Price) 
+					And Row.Property("PriceType") And Row.PriceType = Catalogs.PriceTypes.ManualPriceType	Then
+					NeedRefillColumns = False;
+					ArrayOfExcludingKeys.Add(Row_ItemLIst.Key);
+					Continue;
+				EndIf;
+				
+				If ArrayOfRefillColumns.Find(Upper(KeyValue.Key)) = Undefined And Row.Property(KeyValue.Key) Then
+					If ArrayOfNotReffilingColumns <> Undefined 
+						And ArrayOfNotReffilingColumns.Find(Upper("ItemList."+KeyValue.Key)) <> Undefined Then
+						Continue;
+					EndIf;	
+					Row[KeyValue.Key] = KeyValue.Value;
+				EndIf;
+			EndDo;
+			
+			If NeedRefillColumns Then
+				For Each RefillColumn In ArrayOfRefillColumns Do
+					If Row.Property(RefillColumn) And Row_ItemLIst.Property(RefillColumn) Then
+						Row[RefillColumn] = Row_ItemList[RefillColumn];
+					EndIf;
+				EndDo;
+			EndIf;
+			
 		EndDo;
+		
 	EndDo;
 EndProcedure
+
+Function GetNotReffilingColumns(ObjectType)
+	Map = New Map();
+	ArrayOfColumns = New Array();
+	ArrayOfColumns.Add(Upper("ItemList.ProfitLossCenter"));
+	ArrayOfColumns.Add(Upper("ItemList.RevenueType"));
+	Map.Insert(Type("DocumentRef.StockAdjustmentAsSurplus"), ArrayOfColumns);
+	
+	ArrayOfColumns = New Array();
+	ArrayOfColumns.Add(Upper("ItemList.ProfitLossCenter"));
+	ArrayOfColumns.Add(Upper("ItemList.ExpenseType"));
+	Map.Insert(Type("DocumentRef.StockAdjustmentAsWriteOff"), ArrayOfColumns);
+	
+	Return Map.Get(ObjectType);	
+EndFunction
 
 #EndRegion
 
@@ -6311,10 +6501,12 @@ Function CreateBasisesTree(TreeReverseInfo, BasisesTable, ResultsTable, BasisesT
 				For Each TableRow In BasisesTable.FindRows(BasisesFilter) Do
 					
 					// deep level
+					NewBasisesTreeRow.Picture = 2;
+					NewBasisesTreeRow.IsMainDocument = True;
 					DeepLevelRow = NewBasisesTreeRow.GetItems().Add();
 					DeepLevelRow.Picture = 0;
 					DeepLevelRow.RowPresentation =
-					String(TableRow.Item) + ", " + String(TableRow.ItemKey);
+					String(TableRow.Item) + " (" + String(TableRow.ItemKey) + ")";
 					
 					DeepLevelRow.DeepLevel = True;
 					FillPropertyValues(DeepLevelRow, TableRow);

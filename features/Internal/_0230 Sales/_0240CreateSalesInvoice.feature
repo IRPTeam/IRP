@@ -88,13 +88,13 @@ Scenario: _024001 create document Sales Invoice based on sales order (partial qu
 		And "BasisesTree" table became equal
 			| 'Row presentation'                        | 'Use' | 'Quantity' | 'Unit'           | 'Price'    | 'Currency' |
 			| 'Sales order 3 dated 27.01.2021 19:50:45' | 'Yes' | ''         | ''               | ''         | ''         |
-			| 'Dress, XS/Blue'                          | 'Yes' | '1,000'    | 'pcs'            | '520,00'   | 'TRY'      |
-			| 'Shirt, 36/Red'                           | 'Yes' | '10,000'   | 'pcs'            | '350,00'   | 'TRY'      |
-			| 'Service, Interner'                       | 'Yes' | '1,000'    | 'pcs'            | '100,00'   | 'TRY'      |
-			| 'Boots, 36/18SD'                          | 'Yes' | '5,000'    | 'Boots (12 pcs)' | '8 400,00' | 'TRY'      |
+			| 'Dress (XS/Blue)'                          | 'Yes' | '1,000'    | 'pcs'            | '520,00'   | 'TRY'      |
+			| 'Shirt (36/Red)'                           | 'Yes' | '10,000'   | 'pcs'            | '350,00'   | 'TRY'      |
+			| 'Service (Interner)'                       | 'Yes' | '1,000'    | 'pcs'            | '100,00'   | 'TRY'      |
+			| 'Boots (36/18SD)'                          | 'Yes' | '5,000'    | 'Boots (12 pcs)' | '8 400,00' | 'TRY'      |
 		And I go to line in "BasisesTree" table
 			| 'Row presentation'            |
-			| 'Service, Interner' |
+			| 'Service (Interner)' |
 		And I change "Use" checkbox in "BasisesTree" table
 		And I finish line editing in "BasisesTree" table
 		And I click "Ok" button
@@ -105,7 +105,7 @@ Scenario: _024001 create document Sales Invoice based on sales order (partial qu
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Store" became equal to "Store 02"
 		And "ItemList" table became equal
-			| '#' | 'Profit loss center'           | 'Price type'        | 'Item'  | 'Item key' | 'Dont calculate row' | 'Serial lot numbers' | 'Q'      | 'Unit'           | 'Tax amount' | 'Price'    | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Delivery date' | 'Use shipment confirmation' | 'Detail' | 'Sales order'                             | 'Revenue type' |
+			| '#' | 'Profit loss center'      | 'Price type'        | 'Item'  | 'Item key' | 'Dont calculate row' | 'Serial lot numbers' | 'Q'      | 'Unit'           | 'Tax amount' | 'Price'    | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Delivery date' | 'Use shipment confirmation' | 'Detail' | 'Sales order'                             | 'Revenue type' |
 			| '1' | 'Distribution department' | 'Basic Price Types' | 'Dress' | 'XS/Blue'  | 'No'                 | ''                   | '1,000'  | 'pcs'            | '75,36'      | '520,00'   | '18%' | '26,00'         | '418,64'     | '494,00'       | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | 'Sales order 3 dated 27.01.2021 19:50:45' | 'Revenue'      |
 			| '2' | 'Distribution department' | 'Basic Price Types' | 'Shirt' | '36/Red'   | 'No'                 | ''                   | '10,000' | 'pcs'            | '507,20'     | '350,00'   | '18%' | '175,00'        | '2 817,80'   | '3 325,00'     | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | 'Sales order 3 dated 27.01.2021 19:50:45' | 'Revenue'      |
 			| '3' | 'Front office'            | 'Basic Price Types' | 'Boots' | '36/18SD'  | 'No'                 | ''                   | '5,000'  | 'Boots (12 pcs)' | '6 406,78'   | '8 400,00' | '18%' | ''              | '35 593,22'  | '42 000,00'    | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | 'Sales order 3 dated 27.01.2021 19:50:45' | 'Revenue'      |
@@ -288,7 +288,7 @@ Scenario: _024003 copy SI (based on SO) and check filling in Row Id info table (
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Store" became equal to "Store 02"
 		And "ItemList" table became equal
-			| '#' | 'Profit loss center'           | 'Price type'        | 'Item'  | 'Item key' | 'Dont calculate row' | 'Serial lot numbers' | 'Q'     | 'Unit'           | 'Tax amount' | 'Price'    | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Delivery date' | 'Use shipment confirmation' | 'Detail' | 'Sales order' | 'Revenue type' |
+			| '#' | 'Profit loss center'      | 'Price type'        | 'Item'  | 'Item key' | 'Dont calculate row' | 'Serial lot numbers' | 'Q'     | 'Unit'           | 'Tax amount' | 'Price'    | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Delivery date' | 'Use shipment confirmation' | 'Detail' | 'Sales order' | 'Revenue type' |
 			| '1' | 'Distribution department' | 'Basic Price Types' | 'Dress' | 'XS/Blue'  | 'No'                 | ''                   | '1,000' | 'pcs'            | '79,32'      | '520,00'   | '18%' | ''              | '440,68'     | '520,00'       | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | ''            | 'Revenue'      |
 			| '2' | 'Distribution department' | 'Basic Price Types' | 'Shirt' | '36/Red'   | 'No'                 | ''                   | '5,000' | 'pcs'            | '240,25'     | '350,00'   | '18%' | '175,00'        | '1 334,75'   | '1 575,00'     | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | ''            | 'Revenue'      |
 			| '3' | 'Front office'            | 'Basic Price Types' | 'Boots' | '36/18SD'  | 'No'                 | ''                   | '5,000' | 'Boots (12 pcs)' | '6 406,78'   | '8 400,00' | '18%' | ''              | '35 593,22'  | '42 000,00'    | ''                    | 'Store 02' | '27.01.2021'    | 'No'                        | ''       | ''            | 'Revenue'      |
@@ -345,21 +345,28 @@ Scenario: _024004 create SI using form link/unlink
 			| 'Description'           |
 			| 'Store 02' |
 		And I select current line in "List" table
+		And I move to "Other" tab
+		And I click Choice button of the field named "Branch"
+		And I go to line in "List" table
+			| 'Description'             |
+			| 'Distribution department' |
+		And I select current line in "List" table	
 	* Select items from basis documents
-		And I click the button named "ItemListAddBasisDocuments"
+		And I move to "Item list" tab		
+		And I click the button named "AddBasisDocuments"
 		And I go to line in "BasisesTree" table
 			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
-			| 'TRY'      | '350,00' | '7,000'    | 'Shirt, 36/Red'   | 'pcs'  | 'No'  |
+			| 'TRY'      | '520,00' | '10,000'   | 'Dress (XS/Blue)'   | 'pcs'  | 'No'  |
 		And I change "Use" checkbox in "BasisesTree" table
 		And I finish line editing in "BasisesTree" table
 		And I go to line in "BasisesTree" table
 			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
-			| 'TRY'      | '520,00' | '10,000'   | 'Dress, XS/Blue'   | 'pcs'  | 'No'  |
+			| 'TRY'      | '350,00' | '7,000'    | 'Shirt (36/Red)'   | 'pcs'  | 'No'  |
 		And I change "Use" checkbox in "BasisesTree" table
 		And I finish line editing in "BasisesTree" table
 		And I go to line in "BasisesTree" table
 			| 'Currency' | 'Price' | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
-			| ''         | ''      | '10,000'   | 'Dress, S/Yellow'  | 'pcs'  | 'No'  |
+			| ''         | ''      | '10,000'   | 'Dress (S/Yellow)'  | 'pcs'  | 'No'  |
 		And I change "Use" checkbox in "BasisesTree" table
 		And I finish line editing in "BasisesTree" table
 		And I click "Ok" button
@@ -372,14 +379,15 @@ Scenario: _024004 create SI using form link/unlink
 		| '3' | 'Shipment confirmation 15 dated 25.02.2021 14:13:30' | ''          | '7,000'  | 'SI'           |
 		Then the number of "RowIDInfo" table lines is "равно" "3"
 	* Unlink line
-		And I click the button named "ItemListLinkUnlinkBasisDocuments"
+		And I click the button named "LinkUnlinkBasisDocuments"
 		Then "Link / unlink document row" window is opened
 		And I go to line in "ItemListRows" table
 			| '#' | 'Quantity' | 'Row presentation' | 'Store'    | 'Unit' |
-			| '3' | '7,000'    | 'Shirt, 36/Red'   | 'Store 02' | 'pcs'  |
+			| '3' | '7,000'    | 'Shirt (36/Red)'   | 'Store 02' | 'pcs'  |
+		And I set checkbox "Linked documents"	
 		And I go to line in "ResultsTree" table
 			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' |
-			| 'TRY'      | '350,00' | '7,000'    | 'Shirt, 36/Red'    | 'pcs'  |
+			| 'TRY'      | '350,00' | '7,000'    | 'Shirt (36/Red)'    | 'pcs'  |
 		And I click "Unlink" button
 		And I click "Ok" button
 		And I click "Save" button	
@@ -395,14 +403,14 @@ Scenario: _024004 create SI using form link/unlink
 			| 'Dress' | 'S/Yellow' | ''                                         |
 			| 'Shirt' | '36/Red'   | ''                                         |
 	* Link line
-		And I click the button named "ItemListLinkUnlinkBasisDocuments"
+		And I click the button named "LinkUnlinkBasisDocuments"
 		And I go to line in "ItemListRows" table
 			| '#' | 'Quantity' | 'Row presentation' | 'Store'    | 'Unit' |
-			| '3' | '7,000'    | 'Shirt, 36/Red'   | 'Store 02' | 'pcs'  |
+			| '3' | '7,000'    | 'Shirt (36/Red)'   | 'Store 02' | 'pcs'  |
 		And I activate field named "ItemListRowsRowPresentation" in "ItemListRows" table
 		And I go to line in "BasisesTree" table
 			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' |
-			| 'TRY'      | '350,00' | '7,000'    | 'Shirt, 36/Red'    | 'pcs'  |
+			| 'TRY'      | '350,00' | '7,000'    | 'Shirt (36/Red)'    | 'pcs'  |
 		And I click "Link" button
 		And I click "Ok" button
 		And "RowIDInfo" table contains lines
@@ -421,10 +429,10 @@ Scenario: _024004 create SI using form link/unlink
 			| 'Item'  | 'Item key' |
 			| 'Dress' | 'XS/Blue'  |
 		And in the table "ItemList" I click the button named "ItemListContextMenuDelete"
-		And I click the button named "ItemListAddBasisDocuments"
+		And I click the button named "AddBasisDocuments"
 		And I go to line in "BasisesTree" table
 			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
-			| 'TRY'      | '520,00' | '10,000'   | 'Dress, XS/Blue'   | 'pcs'  | 'No'  |
+			| 'TRY'      | '520,00' | '10,000'   | 'Dress (XS/Blue)'   | 'pcs'  | 'No'  |
 		And I change "Use" checkbox in "BasisesTree" table
 		And I finish line editing in "BasisesTree" table
 		And I click "Ok" button
@@ -464,18 +472,18 @@ Scenario: _024005 create SI based on SO with 2 SC (SC>SO + new string + string f
 		And "BasisesTree" table contains lines
 			| 'Row presentation'                                   | 'Use' | 'Quantity' | 'Unit' | 'Price'  | 'Currency' |
 			| 'Sales order 15 dated 01.02.2021 19:50:45'           | 'Yes' | ''         | ''     | ''       | ''         |
-			| 'Service, Interner'                                  | 'Yes' | '1,000'    | 'pcs'  | '100,00' | 'TRY'      |
-			| 'Dress, XS/Blue'                                     | 'Yes' | '10,000'   | 'pcs'  | '520,00' | 'TRY'      |
+			| 'Service (Interner)'                                  | 'Yes' | '1,000'    | 'pcs'  | '100,00' | 'TRY'      |
+			| 'Dress (XS/Blue)'                                     | 'Yes' | '10,000'   | 'pcs'  | '520,00' | 'TRY'      |
 			| 'Shipment confirmation 15 dated 25.02.2021 14:13:30' | 'Yes' | ''         | ''     | ''       | ''         |
-			| 'Dress, XS/Blue'                                     | 'Yes' | '1,000'    | 'pcs'  | '520,00' | 'TRY'      |
-			| 'Shirt, 36/Red'                                      | 'Yes' | '7,000'    | 'pcs'  | '350,00' | 'TRY'      |
-			| 'Dress, XS/Blue'                                     | 'Yes' | '2,000'    | 'pcs'  | '500,00' | 'TRY'      |
+			| 'Dress (XS/Blue)'                                     | 'Yes' | '1,000'    | 'pcs'  | '520,00' | 'TRY'      |
+			| 'Shirt (36/Red)'                                      | 'Yes' | '7,000'    | 'pcs'  | '350,00' | 'TRY'      |
+			| 'Dress (XS/Blue)'                                     | 'Yes' | '2,000'    | 'pcs'  | '500,00' | 'TRY'      |
 			| 'Shipment confirmation 16 dated 25.02.2021 14:14:14' | 'Yes' | ''         | ''     | ''       | ''         |
-			| 'Shirt, 36/Red'                                      | 'Yes' | '3,000'    | 'pcs'  | '350,00' | 'TRY'      |
+			| 'Shirt (36/Red)'                                      | 'Yes' | '3,000'    | 'pcs'  | '350,00' | 'TRY'      |
 	* Select items for SI
 		And I go to line in "BasisesTree" table
 			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
-			| 'TRY'      | '520,00' | '10,000'   | 'Dress, XS/Blue'   | 'pcs'  | 'Yes' |
+			| 'TRY'      | '520,00' | '10,000'   | 'Dress (XS/Blue)'   | 'pcs'  | 'Yes' |
 		And I change "Use" checkbox in "BasisesTree" table
 		And I finish line editing in "BasisesTree" table
 		And I click "Ok" button
@@ -521,17 +529,17 @@ Scenario: _024006 create SI based on 2 SO with SC
 		And "BasisesTree" table contains lines
 			| 'Row presentation'                                   | 'Use' | 'Quantity' | 'Unit' | 'Price'  | 'Currency' |
 			| 'Sales order 3 dated 27.01.2021 19:50:45'            | 'Yes' | ''         | ''     | ''       | ''         |
-			| 'Shirt, 36/Red'                                      | 'Yes' | '5,000'    | 'pcs'  | '350,00' | 'TRY'      |
-			| 'Service, Interner'                                  | 'Yes' | '1,000'    | 'pcs'  | '100,00' | 'TRY'      |
+			| 'Shirt (36/Red)'                                      | 'Yes' | '5,000'    | 'pcs'  | '350,00' | 'TRY'      |
+			| 'Service (Interner)'                                  | 'Yes' | '1,000'    | 'pcs'  | '100,00' | 'TRY'      |
 			| 'Sales order 15 dated 01.02.2021 19:50:45'           | 'Yes' | ''         | ''     | ''       | ''         |
-			| 'Service, Interner'                                  | 'Yes' | '1,000'    | 'pcs'  | '100,00' | 'TRY'      |
-			| 'Dress, XS/Blue'                                     | 'Yes' | '10,000'   | 'pcs'  | '520,00' | 'TRY'      |
+			| 'Service (Interner)'                                  | 'Yes' | '1,000'    | 'pcs'  | '100,00' | 'TRY'      |
+			| 'Dress (XS/Blue)'                                     | 'Yes' | '10,000'   | 'pcs'  | '520,00' | 'TRY'      |
 			| 'Shipment confirmation 15 dated 25.02.2021 14:13:30' | 'Yes' | ''         | ''     | ''       | ''         |
-			| 'Dress, XS/Blue'                                     | 'Yes' | '1,000'    | 'pcs'  | '520,00' | 'TRY'      |
-			| 'Shirt, 36/Red'                                      | 'Yes' | '7,000'    | 'pcs'  | '350,00' | 'TRY'      |
-			| 'Dress, XS/Blue'                                     | 'Yes' | '2,000'    | 'pcs'  | '500,00' | 'TRY'      |
+			| 'Dress (XS/Blue)'                                     | 'Yes' | '1,000'    | 'pcs'  | '520,00' | 'TRY'      |
+			| 'Shirt (36/Red)'                                      | 'Yes' | '7,000'    | 'pcs'  | '350,00' | 'TRY'      |
+			| 'Dress (XS/Blue)'                                     | 'Yes' | '2,000'    | 'pcs'  | '500,00' | 'TRY'      |
 			| 'Shipment confirmation 16 dated 25.02.2021 14:14:14' | 'Yes' | ''         | ''     | ''       | ''         |
-			| 'Shirt, 36/Red'                                      | 'Yes' | '3,000'    | 'pcs'  | '350,00' | 'TRY'      |
+			| 'Shirt (36/Red)'                                      | 'Yes' | '3,000'    | 'pcs'  | '350,00' | 'TRY'      |
 		Then the number of "BasisesTree" table lines is "равно" "12"
 		And I click "Ok" button
 	* Create SI
@@ -578,9 +586,9 @@ Scenario: _024007 create SI based on SC	without SO
 		And "BasisesTree" table contains lines
 			| 'Row presentation'                                   | 'Use' | 'Quantity' | 'Unit' | 'Price' | 'Currency' |
 			| 'Shipment confirmation 17 dated 25.02.2021 16:28:54' | 'Yes' | ''         | ''     | ''      | ''         |
-			| 'Dress, S/Yellow'                                    | 'Yes' | '10,000'   | 'pcs'  | ''      | ''         |
-			| 'Dress, S/Yellow'                                    | 'Yes' | '5,000'    | 'pcs'  | ''      | ''         |
-			| 'Dress, L/Green'                                     | 'Yes' | '8,000'    | 'pcs'  | ''      | ''         |
+			| 'Dress (S/Yellow)'                                    | 'Yes' | '10,000'   | 'pcs'  | ''      | ''         |
+			| 'Dress (S/Yellow)'                                    | 'Yes' | '5,000'    | 'pcs'  | ''      | ''         |
+			| 'Dress (L/Green)'                                     | 'Yes' | '8,000'    | 'pcs'  | ''      | ''         |
 		Then the number of "BasisesTree" table lines is "равно" "4"
 		And I click "Ok" button
 	* Create SI

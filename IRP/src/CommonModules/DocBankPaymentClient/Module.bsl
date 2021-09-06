@@ -218,6 +218,7 @@ Procedure PaymentListBasisDocumentStartChoice(Object, Form, Item, ChoiceData, St
 	Parameters.Insert("TableName"              , "DocumentsForOutgoingPayment");
 	Parameters.Insert("OpeningEntryTableName1" , "AccountPayableByDocuments");
 	Parameters.Insert("OpeningEntryTableName2" , "AccountReceivableByDocuments");
+	Parameters.Insert("CreditNoteTableName"    , "Transactions");
 	Parameters.Insert("Ref"                    , Object.Ref);
 	JorDocumentsClient.BasisDocumentStartChoice(Object, Form, Item, CurrentData, Parameters);
 EndProcedure
@@ -231,6 +232,7 @@ Procedure PaymentListBasisDocumentStartChoiceEnd(Result, AdditionalParameters) E
 	If CurrentData <> Undefined Then
 		CurrentData.BasisDocument = Result.BasisDocument;
 		CurrentData.Amount        = Result.Amount;
+		DocumentsClient.CalculateTotalAmount(Form.Object, Form);
 	EndIf;
 EndProcedure
 
@@ -241,6 +243,7 @@ Procedure PaymentListBeforeAddRow(Object, Form, Item, Cancel, Clone, Parent, IsF
 	Cancel = True;
 	NewRow = Object.PaymentList.Add();
 	Form.Items.PaymentList.CurrentRow = NewRow.GetID();
+	UserSettingsClient.FillingRowFromSettings(Object, "Object.PaymentList", NewRow, True);
 	Form.Items.PaymentList.ChangeRow();
 	PaymentListOnChange(Object, Form, Item);
 	CurrentData = Form.Items.PaymentList.CurrentData;
@@ -527,6 +530,30 @@ Procedure AgreementTextChange(Object, Form, Item, Text, StandardProcessing) Expo
 	AdditionalParameters.Insert("EndOfUseDate", Object.Date);
 	AdditionalParameters.Insert("Partner", CurrentData.Partner);
 	DocumentsClient.AgreementEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters, AdditionalParameters);
+EndProcedure
+
+#EndRegion
+
+#Region ExpenseType
+
+Procedure PaymentListExpenseTypeStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
+	DocumentsClient.ExpenseTypeStartChoice(Object, Form, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+Procedure PaymentListExpenseTypeEditTextChange(Object, Form, Item, Text, StandardProcessing) Export
+	DocumentsClient.ExpenseTypeEditTextChange(Object, Form, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region FinancialMovementType
+
+Procedure PaymentListFinancialMovementTypeStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
+	DocumentsClient.FinancialMovementTypeStartChoice(Object, Form, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+Procedure PaymentListFinancialMovementTypeEditTextChange(Object, Form, Item, Text, StandardProcessing) Export
+	DocumentsClient.FinancialMovementTypeEditTextChange(Object, Form, Item, Text, StandardProcessing);
 EndProcedure
 
 #EndRegion

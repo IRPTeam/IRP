@@ -330,6 +330,7 @@ Function Strings(Lang) Export
 	// %1 - 100.00 
 	// %2 - 120.00
 	Strings.Insert("Error_095", NStr("en = 'Payment amount [%1] and sales amount [%2] not match'", Lang));
+	
 	#EndRegion
 	
 	#Region InfoMessages

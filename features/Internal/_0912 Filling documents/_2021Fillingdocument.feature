@@ -179,15 +179,15 @@ Scenario: _0154100 preparation ( filling documents)
 					And I activate "Description" field in "List" table
 					And I select current line in "List" table
 				* Filling Movement type
-					And I click Select button of "Send movement type" field
+					And I click Select button of "Send financial movement type" field
 					And I go to line in "List" table
-						| 'Description'     | 'Type'          |
-						| 'Movement type 1' | 'Cash movement' |
+						| 'Description'     | 
+						| 'Movement type 1' | 
 					And I select current line in "List" table
-					And I click Select button of "Receive movement type" field
+					And I click Select button of "Receive financial movement type" field
 					And I go to line in "List" table
-						| 'Description'     | 'Type'          |
-						| 'Movement type 1' | 'Cash movement' |
+						| 'Description'     |
+						| 'Movement type 1' |
 					And I select current line in "List" table					
 				And I click the button named "FormPost"
 				And I delete "$$NumberCashTransferOrder01541001$$" variable
@@ -245,15 +245,15 @@ Scenario: _0154100 preparation ( filling documents)
 						| 'Arina Brown' |
 					And I select current line in "List" table
 				* Filling Movement type
-					And I click Select button of "Send movement type" field
+					And I click Select button of "Send financial movement type" field
 					And I go to line in "List" table
-						| 'Description'     | 'Type'          |
-						| 'Movement type 1' | 'Cash movement' |
+						| 'Description'     |
+						| 'Movement type 1' |
 					And I select current line in "List" table
-					And I click Select button of "Receive movement type" field
+					And I click Select button of "Receive financial movement type" field
 					And I go to line in "List" table
-						| 'Description'     | 'Type'          |
-						| 'Movement type 1' | 'Cash movement' |
+						| 'Description'     |
+						| 'Movement type 1' |
 					And I select current line in "List" table	
 				And I click the button named "FormPost"
 				And I delete "$$NumberCashTransferOrder01541002$$" variable
@@ -296,15 +296,15 @@ Scenario: _0154100 preparation ( filling documents)
 					And I select current line in "List" table
 					And I input "175,00" text in "Receive amount" field
 				* Filling Movement type
-					And I click Select button of "Send movement type" field
+					And I click Select button of "Send financial movement type" field
 					And I go to line in "List" table
-						| 'Description'     | 'Type'          |
-						| 'Movement type 1' | 'Cash movement' |
+						| 'Description'     |
+						| 'Movement type 1' |
 					And I select current line in "List" table
-					And I click Select button of "Receive movement type" field
+					And I click Select button of "Receive financial movement type" field
 					And I go to line in "List" table
-						| 'Description'     | 'Type'          |
-						| 'Movement type 1' | 'Cash movement' |
+						| 'Description'     |
+						| 'Movement type 1' |
 					And I select current line in "List" table
 				And I click the button named "FormPost"
 				And I delete "$$NumberCashTransferOrder01541003$$" variable
@@ -348,15 +348,15 @@ Scenario: _0154100 preparation ( filling documents)
 						And I select current line in "List" table
 						And I input "1150,00" text in "Receive amount" field
 					* Filling Movement type
-						And I click Select button of "Send movement type" field
+						And I click Select button of "Send financial movement type" field
 						And I go to line in "List" table
-							| 'Description'     | 'Type'          |
-							| 'Movement type 1' | 'Cash movement' |
+							| 'Description'     |
+							| 'Movement type 1' |
 						And I select current line in "List" table
-						And I click Select button of "Receive movement type" field
+						And I click Select button of "Receive financial movement type" field
 						And I go to line in "List" table
-							| 'Description'     | 'Type'          |
-							| 'Movement type 1' | 'Cash movement' |
+							| 'Description'     |
+							| 'Movement type 1' |
 						And I select current line in "List" table
 					And I click the button named "FormPost"
 					And I delete "$$NumberCashTransferOrder01541004$$" variable
@@ -401,7 +401,7 @@ Scenario: _0154100 preparation ( filling documents)
 Scenario: _0154101 check filling in and refilling Sales order
 	And I close all client application windows
 	* Open the Sales order creation form
-		Given I open hyper link "e1cib/list/Document.SalesOrder"
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
 		And I click the button named "FormCreate"
 	* Check filling in legal name if the partner has only one
 		And I click Select button of "Partner" field
@@ -2139,6 +2139,16 @@ Scenario: _0154108 total amount calculation in Cash receipt
 	* Open form Cash receipt
 		Given I open hyperlink "e1cib/list/Document.CashReceipt"
 		And I click the button named "FormCreate"
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Main Company' |
+		And I select current line in "List" table
+		And I click Choice button of the field named "CashAccount"
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Cash desk №1' |
+		And I select current line in "List" table			
 	* Check the Total amount calculation when adding rows
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
 		And I activate field named "PaymentListAmount" in "PaymentList" table
@@ -2153,19 +2163,47 @@ Scenario: _0154108 total amount calculation in Cash receipt
 		And I input "180,00" text in the field named "PaymentListAmount" of "PaymentList" table
 		And I finish line editing in "PaymentList" table
 		And the editing text of form attribute named "DocumentAmount" became equal to "430,00"
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I activate "Partner" field in "PaymentList" table
+		And I select current line in "PaymentList" table
+		And I click choice button of "Partner" attribute in "PaymentList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Kalipso'     |
+		And I select current line in "List" table
+		And I activate "Partner term" field in "PaymentList" table
+		And I click choice button of "Partner term" attribute in "PaymentList" table
+		And I go to line in "List" table
+			| 'Description'                      |
+			| 'Basic Partner terms, without VAT' |
+		And I select current line in "List" table
+		And I finish line editing in "PaymentList" table
+		And I activate "Basis document" field in "PaymentList" table
+		And I select current line in "PaymentList" table
+		And I click "Select" button	
+		And the editing text of form attribute named "DocumentAmount" became equal to "984,66"		
 	* Check the Total amount re-calculation when deleting rows
 		And I go to line in "PaymentList" table
-		| 'Amount' |
-		| '50,00'  |
+			| 'Amount' |
+			| '50,00'  |
 		And I delete a line in "PaymentList" table
-		And the editing text of form attribute named "DocumentAmount" became equal to "380,00"
+		And the editing text of form attribute named "DocumentAmount" became equal to "934,66"
 	* Check the Total amount calculation when adding rows
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
 		And I activate field named "PaymentListAmount" in "PaymentList" table
 		And I input "80,00" text in the field named "PaymentListAmount" of "PaymentList" table
 		And I finish line editing in "PaymentList" table
-		And the editing text of form attribute named "DocumentAmount" became equal to "460,00"
-		
+		And the editing text of form attribute named "DocumentAmount" became equal to "1 014,66"
+	* Copy line and check Total amount calculation
+		And I go to line in "PaymentList" table
+			| 'Amount' | 'Partner' | 'Partner term'                     | 'Payer'           |
+			| '554,66' | 'Kalipso' | 'Basic Partner terms, without VAT' | 'Company Kalipso' |
+		And I activate "Partner term" field in "PaymentList" table
+		And in the table "PaymentList" I click the button named "PaymentListContextMenuCopy"
+		And the editing text of form attribute named "DocumentAmount" became equal to "1 569,32"
+		And I close all client application windows
+
+
 Scenario: _0154109 check filling in and refilling Bank receipt (transaction type Payment from customer)
 	* Open form Bank receipt
 		Given I open hyperlink "e1cib/list/Document.BankReceipt"
@@ -2348,6 +2386,16 @@ Scenario: _0154110 total amount calculation in Bank receipt
 	* Open form Bank receipt
 		Given I open hyperlink "e1cib/list/Document.BankReceipt"
 		And I click the button named "FormCreate"
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Main Company' |
+		And I select current line in "List" table
+		And I click Choice button of the field named "Account"
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Bank account, TRY' |
+		And I select current line in "List" table			
 	* Check the Total amount calculation when adding rows
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
 		And I activate field named "PaymentListAmount" in "PaymentList" table
@@ -2362,18 +2410,48 @@ Scenario: _0154110 total amount calculation in Bank receipt
 		And I input "180,00" text in the field named "PaymentListAmount" of "PaymentList" table
 		And I finish line editing in "PaymentList" table
 		And the editing text of form attribute named "DocumentAmount" became equal to "430,00"
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I activate "Partner" field in "PaymentList" table
+		And I select current line in "PaymentList" table
+		And I click choice button of "Partner" attribute in "PaymentList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Kalipso'     |
+		And I select current line in "List" table
+		And I activate "Partner term" field in "PaymentList" table
+		And I click choice button of "Partner term" attribute in "PaymentList" table
+		And I go to line in "List" table
+			| 'Description'                      |
+			| 'Basic Partner terms, without VAT' |
+		And I select current line in "List" table
+		And I finish line editing in "PaymentList" table
+		And I activate "Basis document" field in "PaymentList" table
+		And I select current line in "PaymentList" table
+		And I click "Select" button	
+		And the editing text of form attribute named "DocumentAmount" became equal to "984,66"		
 	* Check the Total amount re-calculation when deleting rows
 		And I go to line in "PaymentList" table
 		| 'Amount' |
 		| '50,00'  |
 		And I delete a line in "PaymentList" table
-		And the editing text of form attribute named "DocumentAmount" became equal to "380,00"
+		And the editing text of form attribute named "DocumentAmount" became equal to "934,66"
 	* Check the Total amount calculation when adding rows
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
 		And I activate field named "PaymentListAmount" in "PaymentList" table
 		And I input "80,00" text in the field named "PaymentListAmount" of "PaymentList" table
 		And I finish line editing in "PaymentList" table
-		And the editing text of form attribute named "DocumentAmount" became equal to "460,00"
+		And the editing text of form attribute named "DocumentAmount" became equal to "1 014,66"
+	* Copy line and check Total amount calculation
+		And I go to line in "PaymentList" table
+			| 'Amount' | 'Partner' | 'Partner term'                     | 'Payer'           |
+			| '554,66' | 'Kalipso' | 'Basic Partner terms, without VAT' | 'Company Kalipso' |
+		And I activate "Partner term" field in "PaymentList" table
+		And in the table "PaymentList" I click the button named "PaymentListContextMenuCopy"
+		And the editing text of form attribute named "DocumentAmount" became equal to "1 569,32"
+		And I close all client application windows
+		
+		
+				
 
 
 
@@ -2581,6 +2659,16 @@ Scenario: _0154112 total amount calculation in Cash payment
 	* Open form Cash payment
 		Given I open hyperlink "e1cib/list/Document.CashPayment"
 		And I click the button named "FormCreate"
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Main Company' |
+		And I select current line in "List" table
+		And I click Choice button of the field named "CashAccount"
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Cash desk №1' |
+		And I select current line in "List" table
 	* Check the Total amount calculation when adding rows
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
 		And I activate field named "PaymentListAmount" in "PaymentList" table
@@ -2595,18 +2683,52 @@ Scenario: _0154112 total amount calculation in Cash payment
 		And I input "180,00" text in the field named "PaymentListAmount" of "PaymentList" table
 		And I finish line editing in "PaymentList" table
 		And the editing text of form attribute named "DocumentAmount" became equal to "430,00"
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I finish line editing in "PaymentList" table
+		And I activate "Partner" field in "PaymentList" table
+		And I select current line in "PaymentList" table
+		And I click choice button of "Partner" attribute in "PaymentList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Ferron BP'   |
+		And I select current line in "List" table
+		And I activate "Payee" field in "PaymentList" table
+		And I click choice button of "Payee" attribute in "PaymentList" table
+		And I go to line in "List" table
+			| 'Description'       |
+			| 'Company Ferron BP' |
+		And I select current line in "List" table
+		And I activate "Partner term" field in "PaymentList" table
+		And I click choice button of "Partner term" attribute in "PaymentList" table
+		And I go to line in "List" table
+			| 'Description'        |
+			| 'Vendor Ferron, TRY' |
+		And I select current line in "List" table
+		And I finish line editing in "PaymentList" table
+		And I activate "Basis document" field in "PaymentList" table
+		And I select current line in "PaymentList" table
+		And I click "Select" button
+		And the editing text of form attribute named "DocumentAmount" became equal to "13 430,00"		
 	* Check the Total amount re-calculation when deleting rows
 		And I go to line in "PaymentList" table
 		| 'Amount' |
 		| '50,00'  |
 		And I delete a line in "PaymentList" table
-		And the editing text of form attribute named "DocumentAmount" became equal to "380,00"
+		And the editing text of form attribute named "DocumentAmount" became equal to "13 380,00"
 	* Check the Total amount calculation when adding rows
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
 		And I activate field named "PaymentListAmount" in "PaymentList" table
 		And I input "80,00" text in the field named "PaymentListAmount" of "PaymentList" table
 		And I finish line editing in "PaymentList" table
-		And the editing text of form attribute named "DocumentAmount" became equal to "460,00"
+		And the editing text of form attribute named "DocumentAmount" became equal to "13 460,00"
+	* Copy line and check Total amount calculation
+		And I go to line in "PaymentList" table
+			| 'Amount'    | 'Partner'   | 'Partner term'       | 'Payee'             |
+			| '13 000,00' | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Company Ferron BP' |
+		And I activate "Partner term" field in "PaymentList" table
+		And in the table "PaymentList" I click the button named "PaymentListContextMenuCopy"
+		And the editing text of form attribute named "DocumentAmount" became equal to "26 460,00"
+		And I close all client application windows
 
 
 Scenario: _0154113 check filling in and refilling Bank payment (transaction type Payment to the vendor)
@@ -2801,6 +2923,16 @@ Scenario: _0154114 total amount calculation in Bank payment
 	* Open form Bank payment
 		Given I open hyperlink "e1cib/list/Document.BankPayment"
 		And I click the button named "FormCreate"
+		And I click Choice button of the field named "Company"
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Main Company' |
+		And I select current line in "List" table
+		And I click Choice button of the field named "Account"
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Bank account, TRY' |
+		And I select current line in "List" table
 	* Check the Total amount calculation when adding rows
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
 		And I activate field named "PaymentListAmount" in "PaymentList" table
@@ -2815,18 +2947,52 @@ Scenario: _0154114 total amount calculation in Bank payment
 		And I input "180,00" text in the field named "PaymentListAmount" of "PaymentList" table
 		And I finish line editing in "PaymentList" table
 		And the editing text of form attribute named "DocumentAmount" became equal to "430,00"
+		And in the table "PaymentList" I click the button named "PaymentListAdd"
+		And I finish line editing in "PaymentList" table
+		And I activate "Partner" field in "PaymentList" table
+		And I select current line in "PaymentList" table
+		And I click choice button of "Partner" attribute in "PaymentList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Ferron BP'   |
+		And I select current line in "List" table
+		And I activate "Payee" field in "PaymentList" table
+		And I click choice button of "Payee" attribute in "PaymentList" table
+		And I go to line in "List" table
+			| 'Description'       |
+			| 'Company Ferron BP' |
+		And I select current line in "List" table
+		And I activate "Partner term" field in "PaymentList" table
+		And I click choice button of "Partner term" attribute in "PaymentList" table
+		And I go to line in "List" table
+			| 'Description'        |
+			| 'Vendor Ferron, TRY' |
+		And I select current line in "List" table
+		And I finish line editing in "PaymentList" table
+		And I activate "Basis document" field in "PaymentList" table
+		And I select current line in "PaymentList" table
+		And I click "Select" button
+		And the editing text of form attribute named "DocumentAmount" became equal to "13 430,00"		
 	* Check the Total amount re-calculation when deleting rows
 		And I go to line in "PaymentList" table
 		| 'Amount' |
 		| '50,00'  |
 		And I delete a line in "PaymentList" table
-		And the editing text of form attribute named "DocumentAmount" became equal to "380,00"
+		And the editing text of form attribute named "DocumentAmount" became equal to "13 380,00"
 	* Check the Total amount calculation when adding rows
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
 		And I activate field named "PaymentListAmount" in "PaymentList" table
 		And I input "80,00" text in the field named "PaymentListAmount" of "PaymentList" table
 		And I finish line editing in "PaymentList" table
-		And the editing text of form attribute named "DocumentAmount" became equal to "460,00"
+		And the editing text of form attribute named "DocumentAmount" became equal to "13 460,00"
+	* Copy line and check Total amount calculation
+		And I go to line in "PaymentList" table
+			| 'Amount'    | 'Partner'   | 'Partner term'       | 'Payee'             |
+			| '13 000,00' | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Company Ferron BP' |
+		And I activate "Partner term" field in "PaymentList" table
+		And in the table "PaymentList" I click the button named "PaymentListContextMenuCopy"
+		And the editing text of form attribute named "DocumentAmount" became equal to "26 460,00"
+		And I close all client application windows
 
 Scenario: _01541140 total amount calculation in Incoming payment order
 	* Open form Bank payment
@@ -4704,7 +4870,7 @@ Scenario: _0154133  check currency form in Outgoing payment order
 Scenario: _0154140 check filling in and refilling Sales order closing
 	And I close all client application windows
 	* Open the Sales order closing creation form
-		Given I open hyper link "e1cib/list/Document.SalesOrderClosing"
+		Given I open hyperlink "e1cib/list/Document.SalesOrderClosing"
 		And I click the button named "FormCreate"
 	* Check filling in legal name if the partner has only one
 		And I click Select button of "Partner" field

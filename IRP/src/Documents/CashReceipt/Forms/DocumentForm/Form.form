@@ -793,6 +793,55 @@
         </dataPath>
         <titleLocation>None</titleLocation>
         <items xsi:type="form:FormField">
+          <name>PaymentListKey</name>
+          <id>229</id>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.PaymentList.Key</segments>
+          </dataPath>
+          <extendedTooltip>
+            <name>PaymentListKeyExtendedTooltip</name>
+            <id>231</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <type>Label</type>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <extInfo xsi:type="form:LabelDecorationExtInfo">
+              <horizontalAlign>Left</horizontalAlign>
+            </extInfo>
+          </extendedTooltip>
+          <contextMenu>
+            <name>PaymentListKeyContextMenu</name>
+            <id>230</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <autoFill>true</autoFill>
+          </contextMenu>
+          <type>InputField</type>
+          <editMode>Enter</editMode>
+          <showInHeader>true</showInHeader>
+          <headerHorizontalAlign>Left</headerHorizontalAlign>
+          <showInFooter>true</showInFooter>
+          <extInfo xsi:type="form:InputFieldExtInfo">
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <wrap>true</wrap>
+            <chooseType>true</chooseType>
+            <typeDomainEnabled>true</typeDomainEnabled>
+            <textEdit>true</textEdit>
+          </extInfo>
+        </items>
+        <items xsi:type="form:FormField">
           <name>PaymentListLineNumber</name>
           <id>70</id>
           <visible>true</visible>
@@ -853,6 +902,7 @@
               <segments>Object.PaymentList.Partner</segments>
             </paths>
           </dataPath>
+          <defaultItem>true</defaultItem>
           <handlers>
             <event>OnChange</event>
             <name>PaymentListPartnerOnChange</name>
@@ -1199,7 +1249,7 @@
           </extInfo>
         </items>
         <items xsi:type="form:FormField">
-          <name>PaymentListMovementType</name>
+          <name>PaymentListFinancialMovementType</name>
           <id>221</id>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -1207,10 +1257,10 @@
             <common>true</common>
           </userVisible>
           <dataPath xsi:type="form:DataPath">
-            <segments>Object.PaymentList.MovementType</segments>
+            <segments>Object.PaymentList.FinancialMovementType</segments>
           </dataPath>
           <extendedTooltip>
-            <name>PaymentListMovementTypeExtendedTooltip</name>
+            <name>PaymentListFinancialMovementTypeExtendedTooltip</name>
             <id>223</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -1225,7 +1275,7 @@
             </extInfo>
           </extendedTooltip>
           <contextMenu>
-            <name>PaymentListMovementTypeContextMenu</name>
+            <name>PaymentListFinancialMovementTypeContextMenu</name>
             <id>222</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -1240,6 +1290,14 @@
           <headerHorizontalAlign>Left</headerHorizontalAlign>
           <showInFooter>true</showInFooter>
           <extInfo xsi:type="form:InputFieldExtInfo">
+            <handlers>
+              <event>StartChoice</event>
+              <name>PaymentListFinancialMovementTypeStartChoice</name>
+            </handlers>
+            <handlers>
+              <event>EditTextChange</event>
+              <name>PaymentListFinancialMovementTypeEditTextChange</name>
+            </handlers>
             <autoMaxWidth>true</autoMaxWidth>
             <autoMaxHeight>true</autoMaxHeight>
             <wrap>true</wrap>
@@ -2897,6 +2955,37 @@
   <autoCommandBar>
     <name>FormCommandBar</name>
     <id>-1</id>
+    <items xsi:type="form:Button">
+      <name>FormShowRowKey</name>
+      <id>227</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <extendedTooltip>
+        <name>FormShowRowKeyExtendedTooltip</name>
+        <id>228</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <type>Label</type>
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <extInfo xsi:type="form:LabelDecorationExtInfo">
+          <horizontalAlign>Left</horizontalAlign>
+        </extInfo>
+      </extendedTooltip>
+      <commandName>Form.Command.ShowRowKey</commandName>
+      <representation>Auto</representation>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <placementArea>UserCmds</placementArea>
+      <representationInContextMenu>Auto</representationInContextMenu>
+      <locationInCommandBar>InAdditionalSubmenu</locationInCommandBar>
+    </items>
     <visible>true</visible>
     <enabled>true</enabled>
     <userVisible>
@@ -3110,6 +3199,26 @@
       <common>true</common>
     </edit>
   </attributes>
+  <formCommands>
+    <name>ShowRowKey</name>
+    <title>
+      <key>en</key>
+      <value>Show row key</value>
+    </title>
+    <id>1</id>
+    <use>
+      <common>true</common>
+    </use>
+    <picture xsi:type="core:PictureRef">
+      <picture>StdPicture.GetURL</picture>
+    </picture>
+    <action xsi:type="form:FormCommandHandlerContainer">
+      <handler>
+        <name>ShowRowKey</name>
+      </handler>
+    </action>
+    <currentRowUse>Auto</currentRowUse>
+  </formCommands>
   <commandInterface>
     <navigationPanel/>
     <commandBar/>

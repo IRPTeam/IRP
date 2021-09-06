@@ -34,6 +34,8 @@ Scenario: _005049 filling in the "Retail customers" catalog
 		And I input "Name Retail customer" text in the field named "Name"
 		And I input "Surname Retail customer" text in the field named "Surname"
 		And I input "002" text in the field named "Code"
+		And I set checkbox "Use partner transactions"
+		And I set checkbox "Use partner info"		
 		And I click Select button of "Partner" field
 		And I go to line in "List" table
 			| 'Description' |

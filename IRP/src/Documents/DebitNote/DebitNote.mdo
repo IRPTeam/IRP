@@ -62,6 +62,8 @@
   <registerRecords>AccumulationRegister.R1020B_AdvancesToVendors</registerRecords>
   <registerRecords>InformationRegister.T2011S_PartnerTransactions</registerRecords>
   <registerRecords>AccumulationRegister.R5012B_VendorsAging</registerRecords>
+  <registerRecords>InformationRegister.T2012S_PartnerAdvances</registerRecords>
+  <registerRecords>AccumulationRegister.R2022B_CustomersPaymentPlanning</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>

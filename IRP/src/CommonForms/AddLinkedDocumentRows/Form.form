@@ -115,7 +115,7 @@
           <horizontalStretch>true</horizontalStretch>
           <verticalStretch>true</verticalStretch>
           <valuesPicture xsi:type="core:PictureRef">
-            <picture>CommonPicture.IconCollection4</picture>
+            <picture>CommonPicture.IconCollection6</picture>
           </valuesPicture>
           <fileDragMode>AsFileRef</fileDragMode>
         </extInfo>
@@ -2295,6 +2295,23 @@
         <common>true</common>
       </edit>
     </columns>
+    <columns>
+      <name>IsMainDocument</name>
+      <title>
+        <key>en</key>
+        <value>Is main document</value>
+      </title>
+      <id>68</id>
+      <valueType>
+        <types>Boolean</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
   </attributes>
   <attributes>
     <name>SetAllCheckedOnOpen</name>
@@ -2529,7 +2546,7 @@
       <valueType>
         <types>String</types>
         <stringQualifiers>
-          <length>50</length>
+          <length>200</length>
         </stringQualifiers>
       </valueType>
       <view>
@@ -2685,6 +2702,23 @@
         <value>Deep level</value>
       </title>
       <id>64</id>
+      <valueType>
+        <types>Boolean</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>IsMainDocument</name>
+      <title>
+        <key>en</key>
+        <value>Is main document</value>
+      </title>
+      <id>67</id>
       <valueType>
         <types>Boolean</types>
       </valueType>

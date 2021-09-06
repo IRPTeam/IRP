@@ -13,7 +13,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Parameters.IsReposting = False;	
 #Region NewRegistersPosting	
 	QueryArray = GetQueryTextsSecondaryTables();
-	Parameters.Insert("QueryParameters", GetAdditionalQueryParamenters(Ref));
+	Parameters.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
 #EndRegion	
 	Return Tables;
@@ -85,13 +85,13 @@ EndProcedure
 
 Function GetInformationAboutMovements(Ref) Export
 	Str = New Structure;
-	Str.Insert("QueryParamenters", GetAdditionalQueryParamenters(Ref));
+	Str.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
 	Str.Insert("QueryTextsMasterTables", GetQueryTextsMasterTables());
 	Str.Insert("QueryTextsSecondaryTables", GetQueryTextsSecondaryTables());
 	Return Str;
 EndFunction
 
-Function GetAdditionalQueryParamenters(Ref)
+Function GetAdditionalQueryParameters(Ref)
 	StrParams = New Structure();
 	StrParams.Insert("Ref", Ref);
 	Return StrParams;
@@ -318,7 +318,9 @@ EndFunction
 
 Function R2002T_SalesReturns()
 	Return
-		"SELECT *
+		"SELECT 
+		|	ItemList.SalesInvoice AS Invoice,
+		|	*
 		|INTO R2002T_SalesReturns
 		|FROM
 		|	ItemList AS ItemList
@@ -367,6 +369,8 @@ Function R2021B_CustomersTransactions()
 		|INTO R2021B_CustomersTransactions
 		|FROM
 		|	ItemList AS ItemList
+		|WHERE
+		|	NOT ItemList.DueAsAdvance
 		|GROUP BY
 		|	ItemList.Agreement,
 		|	ItemList.Company,
@@ -381,12 +385,14 @@ EndFunction
 
 Function R2020B_AdvancesFromCustomers()
 	Return
-		"SELECT *
+		"SELECT
+		|	ItemList.AdvanceBasis AS Basis,
+		|	*
 		|INTO R2020B_AdvancesFromCustomers
 		|FROM
 		|	ItemList AS ItemList
 		|WHERE
-		|	FALSE";
+		|	ItemList.DueAsAdvance";
 EndFunction
 
 Function R2031B_ShipmentInvoicing()
@@ -552,7 +558,8 @@ Function R5021T_Revenues()
 	Return
 		"SELECT
 		|	*,
-		|	- ItemList.NetAmount AS Amount
+		|	- ItemList.NetAmount AS Amount,
+		|	- ItemList.Amount AS AmountWithTaxes
 		|INTO R5021T_Revenues
 		|FROM
 		|	ItemList AS ItemList

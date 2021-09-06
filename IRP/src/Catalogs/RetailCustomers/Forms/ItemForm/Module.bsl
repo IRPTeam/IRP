@@ -4,6 +4,19 @@
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	AddAttributesAndPropertiesServer.OnCreateAtServer(ThisObject);
 	ExtensionServer.AddAttributesFromExtensions(ThisObject, Object.Ref);
+	If Parameters.Key.IsEmpty() Then
+		SetVisibilityAvailability(Object, ThisObject);
+	EndIf;
+EndProcedure
+
+&AtServer
+Procedure OnWriteAtServer(Cancel, CurrentObject, WriteParameters)
+	SetVisibilityAvailability(Object, ThisObject);
+EndProcedure
+
+&AtServer
+Procedure OnReadAtServer(CurrentObject)
+	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
 &AtServer
@@ -16,6 +29,30 @@ Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefin
 	If EventName = "UpdateAddAttributeAndPropertySets" Then
 		AddAttributesCreateFormControl();
 	EndIf;
+EndProcedure
+
+&AtClient
+Procedure UsePartnerTransactionsOnChange(Item)
+	If Not Object.UsePartnerTransactions Then
+		Object.Partner   = Undefined;
+		Object.LegalName = Undefined;
+		Object.Agreement = Undefined;
+	EndIf;
+	SetVisibilityAvailability(Object, ThisObject);
+EndProcedure
+
+&AtClient
+Procedure UsePartnerInfoOnChange(Item)
+	SetVisibilityAvailability(Object, ThisObject);
+EndProcedure
+
+&AtClientAtServerNoContext
+Procedure SetVisibilityAvailability(Object, Form) Export
+	Form.Items.GroupPartnerInfo.Visible = Object.UsePartnerTransactions;
+
+	Form.Items.Partner.Visible     = Object.UsePartnerInfo;
+	Form.Items.LegalName.Visible   = Object.UsePartnerInfo;
+	Form.Items.Agreement.Visible   = Object.UsePartnerInfo;
 EndProcedure
 
 #EndRegion

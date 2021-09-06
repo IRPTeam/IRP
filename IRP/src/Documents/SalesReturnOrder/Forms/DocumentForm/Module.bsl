@@ -79,6 +79,9 @@ EndProcedure
 
 &AtClientAtServerNoContext
 Procedure SetVisibilityAvailability(Object, Form) Export
+	Form.Items.AddBasisDocuments.Enabled = Not Form.ReadOnly;
+	Form.Items.LinkUnlinkBasisDocuments.Enabled = Not Form.ReadOnly;
+	
 	Form.Items.LegalName.Enabled = ValueIsFilled(Object.Partner);
 EndProcedure
 
@@ -231,6 +234,16 @@ EndProcedure
 &AtClient
 Procedure ItemListStoreOnChange(Item, AddInfo = Undefined)
 	DocSalesReturnOrderClient.ItemListStoreOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure ItemListRevenueTypeStartChoice(Item, ChoiceData, StandardProcessing)
+	DocSalesReturnOrderClient.ItemListRevenueTypeStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure ItemListRevenueTypeEditTextChange(Item, Text, StandardProcessing)
+	DocSalesReturnOrderClient.ItemListRevenueTypeEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
 EndProcedure
 
 #EndRegion
@@ -434,6 +447,7 @@ EndProcedure
 Function GetLinkedDocumentsFilter()
 	Filter = New Structure();
 	Filter.Insert("Company"           , Object.Company);
+	Filter.Insert("Branch"            , Object.Branch);
 	Filter.Insert("Partner"           , Object.Partner);
 	Filter.Insert("LegalName"         , Object.LegalName);
 	Filter.Insert("Agreement"         , Object.Agreement);
@@ -472,6 +486,7 @@ Procedure AddOrLinkUnlinkDocumentRowsContinue(Result, AdditionalParameters) Expo
 	If Result = Undefined Then
 		Return;
 	EndIf;
+	ThisObject.Modified = True;
 	AddOrLinkUnlinkDocumentRowsContinueAtServer(Result);
 	Taxes_CreateFormControls();
 EndProcedure

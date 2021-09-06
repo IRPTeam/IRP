@@ -617,7 +617,7 @@
             </extInfo>
           </items>
           <items xsi:type="form:FormField">
-            <name>SendMovementType</name>
+            <name>SendFinancialMovementType</name>
             <id>205</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -625,10 +625,10 @@
               <common>true</common>
             </userVisible>
             <dataPath xsi:type="form:DataPath">
-              <segments>Object.SendMovementType</segments>
+              <segments>Object.SendFinancialMovementType</segments>
             </dataPath>
             <extendedTooltip>
-              <name>SendMovementTypeExtendedTooltip</name>
+              <name>SendFinancialMovementTypeExtendedTooltip</name>
               <id>207</id>
               <visible>true</visible>
               <enabled>true</enabled>
@@ -643,7 +643,7 @@
               </extInfo>
             </extendedTooltip>
             <contextMenu>
-              <name>SendMovementTypeContextMenu</name>
+              <name>SendFinancialMovementTypeContextMenu</name>
               <id>206</id>
               <visible>true</visible>
               <enabled>true</enabled>
@@ -658,6 +658,14 @@
             <headerHorizontalAlign>Left</headerHorizontalAlign>
             <showInFooter>true</showInFooter>
             <extInfo xsi:type="form:InputFieldExtInfo">
+              <handlers>
+                <event>StartChoice</event>
+                <name>SendFinancialMovementTypeStartChoice</name>
+              </handlers>
+              <handlers>
+                <event>EditTextChange</event>
+                <name>SendFinancialMovementTypeEditTextChange</name>
+              </handlers>
               <autoMaxWidth>true</autoMaxWidth>
               <autoMaxHeight>true</autoMaxHeight>
               <wrap>true</wrap>
@@ -994,7 +1002,7 @@
             </extInfo>
           </items>
           <items xsi:type="form:FormField">
-            <name>ReceiveMovementType</name>
+            <name>ReceiveFinancialMovementType</name>
             <id>208</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -1002,10 +1010,10 @@
               <common>true</common>
             </userVisible>
             <dataPath xsi:type="form:DataPath">
-              <segments>Object.ReceiveMovementType</segments>
+              <segments>Object.ReceiveFinancialMovementType</segments>
             </dataPath>
             <extendedTooltip>
-              <name>ReceiveMovementTypeExtendedTooltip</name>
+              <name>ReceiveFinancialMovementTypeExtendedTooltip</name>
               <id>210</id>
               <visible>true</visible>
               <enabled>true</enabled>
@@ -1020,7 +1028,7 @@
               </extInfo>
             </extendedTooltip>
             <contextMenu>
-              <name>ReceiveMovementTypeContextMenu</name>
+              <name>ReceiveFinancialMovementTypeContextMenu</name>
               <id>209</id>
               <visible>true</visible>
               <enabled>true</enabled>
@@ -1035,6 +1043,14 @@
             <headerHorizontalAlign>Left</headerHorizontalAlign>
             <showInFooter>true</showInFooter>
             <extInfo xsi:type="form:InputFieldExtInfo">
+              <handlers>
+                <event>StartChoice</event>
+                <name>ReceiveFinancialMovementTypeStartChoice</name>
+              </handlers>
+              <handlers>
+                <event>EditTextChange</event>
+                <name>ReceiveFinancialMovementTypeEditTextChange</name>
+              </handlers>
               <autoMaxWidth>true</autoMaxWidth>
               <autoMaxHeight>true</autoMaxHeight>
               <wrap>true</wrap>

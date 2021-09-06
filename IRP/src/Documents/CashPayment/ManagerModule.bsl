@@ -291,13 +291,13 @@ EndProcedure
 #Region NewRegistersPosting
 Function GetInformationAboutMovements(Ref) Export
 	Str = New Structure;
-	Str.Insert("QueryParamenters", GetAdditionalQueryParamenters(Ref));
+	Str.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
 	Str.Insert("QueryTextsMasterTables", GetQueryTextsMasterTables());
 	Str.Insert("QueryTextsSecondaryTables", GetQueryTextsSecondaryTables());
 	Return Str;
 EndFunction
 
-Function GetAdditionalQueryParamenters(Ref)
+Function GetAdditionalQueryParameters(Ref)
 	StrParams = New Structure();
 	StrParams.Insert("Ref", Ref);
 	Return StrParams;
@@ -362,7 +362,7 @@ Function PaymentList()
 	|	PaymentList.PlaningTransactionBasis AS PlaningTransactionBasis,
 	|	PaymentList.Partner.Employee AS IsEmployee,
 	|	PaymentList.Amount,
-	|	PaymentList.MovementType AS MovementType,
+	|	PaymentList.FinancialMovementType AS FinancialMovementType,
 	|	PaymentList.Ref.TransactionType = VALUE(Enum.OutgoingPaymentTransactionTypes.PaymentToVendor) AS IsPaymentToVendor,
 	|	PaymentList.Ref.TransactionType = VALUE(Enum.OutgoingPaymentTransactionTypes.CurrencyExchange) AS IsCurrencyExchange,
 	|	PaymentList.Ref.TransactionType = VALUE(Enum.OutgoingPaymentTransactionTypes.CashTransferOrder) AS
@@ -590,7 +590,8 @@ Function R3010B_CashOnHand()
 		|	PaymentList AS PaymentList
 		|WHERE
 		|	PaymentList.IsPaymentToVendor
-		|	OR PaymentList.IsCashTransferOrder";
+		|	OR PaymentList.IsCashTransferOrder
+		|	OR PaymentList.IsReturnToCustomer";
 EndFunction
 
 Function R3015B_CashAdvance()
@@ -628,7 +629,7 @@ Function R3035T_CashPlanning()
 		|			THEN PaymentList.LegalName
 		|		ELSE VALUE(Catalog.Companies.EmptyRef)
 		|	END AS LegalName,
-		|	PaymentList.MovementType,
+		|	PaymentList.FinancialMovementType,
 		|	-PaymentList.Amount AS Amount,
 		|	PaymentList.Key
 		|INTO R3035T_CashPlanning

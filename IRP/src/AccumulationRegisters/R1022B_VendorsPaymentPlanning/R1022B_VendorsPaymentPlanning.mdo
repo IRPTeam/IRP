@@ -66,6 +66,7 @@
     <type>
       <types>DocumentRef.PurchaseOrder</types>
       <types>DocumentRef.PurchaseInvoice</types>
+      <types>DocumentRef.CreditNote</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

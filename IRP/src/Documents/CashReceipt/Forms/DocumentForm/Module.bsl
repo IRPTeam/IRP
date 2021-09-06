@@ -135,6 +135,16 @@ Procedure PaymentListBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Paramet
 	DocCashReceiptClient.PaymentListBeforeAddRow(Object, ThisObject, Item, Cancel, Clone, Parent, IsFolder, Parameter);
 EndProcedure
 
+&AtClient
+Procedure PaymentListFinancialMovementTypeStartChoice(Item, ChoiceData, StandardProcessing)
+	DocCashReceiptClient.PaymentListMovementTypeStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure PaymentListFinancialMovementTypeEditTextChange(Item, Text, StandardProcessing)
+	DocCashReceiptClient.PaymentListMovementTypeEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
 #Region Partner
 
 &AtClient
@@ -524,6 +534,11 @@ EndProcedure
 #EndRegion
 
 #EndRegion
+
+&AtClient
+Procedure ShowRowKey(Command)
+	DocumentsClient.ShowRowKey(ThisObject);	
+EndProcedure
 
 #Region Common
 

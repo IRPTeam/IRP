@@ -71,13 +71,13 @@ EndProcedure
 #Region NewRegistersPosting
 Function GetInformationAboutMovements(Ref) Export
 	Str = New Structure;
-	Str.Insert("QueryParamenters", GetAdditionalQueryParamenters(Ref));
+	Str.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
 	Str.Insert("QueryTextsMasterTables", GetQueryTextsMasterTables());
 	Str.Insert("QueryTextsSecondaryTables", GetQueryTextsSecondaryTables());
 	Return Str;
 EndFunction
 
-Function GetAdditionalQueryParamenters(Ref)
+Function GetAdditionalQueryParameters(Ref)
 	StrParams = New Structure();
 	StrParams.Insert("Ref", Ref);
 	Return StrParams;
@@ -104,7 +104,9 @@ Function PaymentList()
 		|	PaymentList.Ref.Account AS Account,
 		|	PaymentList.Currency AS Currency,
 		|	PaymentList.ExpenseType AS ExpenseType,
-		|	PaymentList.NetAmount AS Amount,
+		|	PaymentList.NetAmount AS NetAmount,
+		|	PaymentList.TaxAmount AS TaxAmount,
+		|	PaymentList.TotalAmount AS TotalAmount,
 		|	PaymentList.Key,
 		|	PaymentList.ProfitLossCenter,
 		|	PaymentList.AdditionalAnalytic,
@@ -120,6 +122,7 @@ Function R3010B_CashOnHand()
 	Return
 		"SELECT
 		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	PaymentList.TotalAmount AS Amount,
 		|	*
 		|INTO R3010B_CashOnHand
 		|FROM
@@ -131,6 +134,8 @@ EndFunction
 Function R5022T_Expenses()
 	Return
 		"SELECT
+		|	PaymentList.NetAmount AS Amount,
+		|	PaymentList.TotalAmount AS AmountWithTaxes,
 		|	*
 		|INTO R5022T_Expenses
 		|FROM

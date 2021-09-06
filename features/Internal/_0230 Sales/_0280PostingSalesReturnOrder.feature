@@ -435,21 +435,27 @@ Scenario: _028013 create SRO using form link/unlink
 			| 'Description'           |
 			| 'Store 01' |
 		And I select current line in "List" table
+		And I move to "Other" tab
+		And I click Choice button of the field named "Branch"
+		And I go to line in "List" table
+			| 'Description'             |
+			| 'Distribution department' |
+		And I select current line in "List" table	
 	* Select items from basis documents
-		And I click the button named "ItemListAddBasisDocuments"
+		And I click the button named "AddBasisDocuments"
 		And I go to line in "BasisesTree" table
 			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
-			| 'TRY'      | '350,00' | '2,000'    | 'Shirt, 38/Black'  | 'pcs'  | 'No'  |
+			| 'TRY'      | '350,00' | '2,000'    | 'Shirt (38/Black)'  | 'pcs'  | 'No'  |
 		And I change "Use" checkbox in "BasisesTree" table
 		And I finish line editing in "BasisesTree" table
 		And I go to line in "BasisesTree" table
 			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
-			| 'TRY'      | '520,00' | '4,000'    | 'Dress, M/White'   | 'pcs'  | 'No'  |
+			| 'TRY'      | '520,00' | '4,000'    | 'Dress (M/White)'   | 'pcs'  | 'No'  |
 		And I change "Use" checkbox in "BasisesTree" table
 		And I finish line editing in "BasisesTree" table
 		And I go to line in "BasisesTree" table
 			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
-			| 'TRY'      | '700,00' | '1,000'    | 'Boots, 37/18SD'   | 'pcs'  | 'No'  |
+			| 'TRY'      | '700,00' | '1,000'    | 'Boots (37/18SD)'   | 'pcs'  | 'No'  |
 		And I change "Use" checkbox in "BasisesTree" table
 		And I finish line editing in "BasisesTree" table
 		And I click "Ok" button
@@ -462,14 +468,15 @@ Scenario: _028013 create SRO using form link/unlink
 		| '3' | 'Sales invoice 101 dated 05.03.2021 12:56:38' | ''          | '4,000' | 'SRO&SR'       |
 		Then the number of "RowIDInfo" table lines is "равно" "3"
 	* Unlink line
-		And I click the button named "ItemListLinkUnlinkBasisDocuments"
+		And I click the button named "LinkUnlinkBasisDocuments"
 		Then "Link / unlink document row" window is opened
 		And I go to line in "ItemListRows" table
 			| '#' | 'Quantity' | 'Row presentation' | 'Store'    | 'Unit' |
-			| '1' | '2,000'    | 'Shirt, 38/Black'   | 'Store 01' | 'pcs'  |
+			| '1' | '2,000'    | 'Shirt (38/Black)'   | 'Store 01' | 'pcs'  |
+		And I set checkbox "Linked documents"		
 		And I go to line in "ResultsTree" table
 			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' |
-			| 'TRY'      | '350,00' | '2,000'    | 'Shirt, 38/Black'    | 'pcs'  |
+			| 'TRY'      | '350,00' | '2,000'    | 'Shirt (38/Black)'    | 'pcs'  |
 		And I click "Unlink" button
 		And I click "Ok" button
 		And I click "Save" button	
@@ -485,14 +492,14 @@ Scenario: _028013 create SRO using form link/unlink
 			| 'Dress' | 'M/White'  | 'Sales invoice 101 dated 05.03.2021 12:56:38' |
 			| 'Boots' | '37/18SD'  | 'Sales invoice 102 dated 05.03.2021 12:57:59' |
 	* Link line
-		And I click the button named "ItemListLinkUnlinkBasisDocuments"
+		And I click the button named "LinkUnlinkBasisDocuments"
 		And I go to line in "ItemListRows" table
 			| '#' | 'Quantity' | 'Row presentation' | 'Store'    | 'Unit' |
-			| '1' | '2,000'    | 'Shirt, 38/Black'   | 'Store 01' | 'pcs'  |
+			| '1' | '2,000'    | 'Shirt (38/Black)'   | 'Store 01' | 'pcs'  |
 		And I activate field named "ItemListRowsRowPresentation" in "ItemListRows" table
 		And I go to line in "BasisesTree" table
 			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' |
-			| 'TRY'      | '350,00' | '2,000'    | 'Shirt, 38/Black'    | 'pcs'  |
+			| 'TRY'      | '350,00' | '2,000'    | 'Shirt (38/Black)'    | 'pcs'  |
 		And I click "Link" button
 		And I click "Ok" button
 		And "RowIDInfo" table contains lines
@@ -511,10 +518,10 @@ Scenario: _028013 create SRO using form link/unlink
 			| 'Item'  | 'Item key' |
 			| 'Dress' | 'M/White'  |
 		And in the table "ItemList" I click the button named "ItemListContextMenuDelete"
-		And I click the button named "ItemListAddBasisDocuments"
+		And I click the button named "AddBasisDocuments"
 		And I go to line in "BasisesTree" table
 			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
-			| 'TRY'      | '520,00' | '4,000'   | 'Dress, M/White'   | 'pcs'  | 'No'  |
+			| 'TRY'      | '520,00' | '4,000'   | 'Dress (M/White)'   | 'pcs'  | 'No'  |
 		And I change "Use" checkbox in "BasisesTree" table
 		And I finish line editing in "BasisesTree" table
 		And I click "Ok" button

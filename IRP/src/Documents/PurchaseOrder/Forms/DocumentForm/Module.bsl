@@ -84,6 +84,9 @@ EndProcedure
 
 &AtClientAtServerNoContext
 Procedure SetVisibilityAvailability(Object, Form) Export
+	Form.Items.AddBasisDocuments.Enabled = Not Form.ReadOnly;
+	Form.Items.LinkUnlinkBasisDocuments.Enabled = Not Form.ReadOnly;
+
 	Form.Items.LegalName.Enabled = ValueIsFilled(Object.Partner);
 	If Not Form.ClosingOrder.IsEmpty() Then
 		Form.ReadOnly = True;
@@ -580,6 +583,7 @@ EndProcedure
 Function GetLinkedDocumentsFilter()
 	Filter = New Structure();
 	Filter.Insert("Company"           , Object.Company);
+	Filter.Insert("Branch"            , Object.Branch);
 	Filter.Insert("ProcurementMethod" , PredefinedValue("Enum.ProcurementMethods.Purchase"));
 	Filter.Insert("Ref"               , Object.Ref);
 	Return Filter;
@@ -614,6 +618,7 @@ Procedure AddOrLinkUnlinkDocumentRowsContinue(Result, AdditionalParameters) Expo
 	If Result = Undefined Then
 		Return;
 	EndIf;
+	ThisObject.Modified = True;
 	AddOrLinkUnlinkDocumentRowsContinueAtServer(Result);
 	Taxes_CreateFormControls();
 EndProcedure

@@ -85,13 +85,13 @@ EndProcedure
 
 Function GetInformationAboutMovements(Ref) Export
 	Str = New Structure;
-	Str.Insert("QueryParamenters", GetAdditionalQueryParamenters(Ref));
+	Str.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
 	Str.Insert("QueryTextsMasterTables", GetQueryTextsMasterTables());
 	Str.Insert("QueryTextsSecondaryTables", GetQueryTextsSecondaryTables());
 	Return Str;
 EndFunction
 
-Function GetAdditionalQueryParamenters(Ref)
+Function GetAdditionalQueryParameters(Ref)
 	StrParams = New Structure();
 	StrParams.Insert("Ref", Ref);
 	Return StrParams;
@@ -112,6 +112,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R4010B_ActualStocks());
 	QueryArray.Add(R4014B_SerialLotNumber());
 	QueryArray.Add(R4052T_StockAdjustmentAsSurplus());	
+	QueryArray.Add(R4050B_StockInventory());
 	Return QueryArray;
 EndFunction
 
@@ -120,6 +121,7 @@ Function ItemList()
 		"SELECT
 		|	ItemList.Ref.Date AS Period,
 		|	ItemList.Ref.Company AS Company,
+		|	ItemList.Ref.Branch AS Branch,
 		|	ItemList.Ref.Store AS Store,
 		|	ItemList.ItemKey AS ItemKey,
 		|	ItemList.ProfitLossCenter AS ProfitLossCenter,
@@ -201,6 +203,18 @@ Function R4052T_StockAdjustmentAsSurplus()
 		|WHERE
 		|	NOT ItemList.PhysicalInventoryExists";
 EndFunction	
+
+Function R4050B_StockInventory()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	*
+		|INTO R4050B_StockInventory
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	TRUE";
+EndFunction
 
 #EndRegion
 

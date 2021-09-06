@@ -78,6 +78,7 @@
   <registerRecords>InformationRegister.T2011S_PartnerTransactions</registerRecords>
   <registerRecords>InformationRegister.T2012S_PartnerAdvances</registerRecords>
   <registerRecords>AccumulationRegister.R5012B_VendorsAging</registerRecords>
+  <registerRecords>AccumulationRegister.R5022T_Expenses</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -435,10 +436,10 @@
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
     <attributes uuid="834ed1e0-c183-4c5c-b223-6c73a36e3b77">
-      <name>MovementType</name>
+      <name>FinancialMovementType</name>
       <synonym>
         <key>en</key>
-        <value>Movement type</value>
+        <value>Financial movement type</value>
       </synonym>
       <type>
         <types>CatalogRef.ExpenseAndRevenueTypes</types>

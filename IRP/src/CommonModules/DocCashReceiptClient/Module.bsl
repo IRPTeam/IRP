@@ -225,6 +225,7 @@ Procedure PaymentListBeforeAddRow(Object, Form, Item, Cancel, Clone, Parent, IsF
 	Cancel = True;
 	NewRow = Object.PaymentList.Add();
 	Form.Items.PaymentList.CurrentRow = NewRow.GetID();
+	UserSettingsClient.FillingRowFromSettings(Object, "Object.PaymentList", NewRow, True);
 	Form.Items.PaymentList.ChangeRow();
 	PaymentListOnChange(Object, Form, Item);
 	CurrentData = Form.Items.PaymentList.CurrentData;
@@ -358,6 +359,8 @@ Procedure PaymentListBasisDocumentStartChoice(Object, Form, Item, ChoiceData, St
 	Parameters.Insert("TableName"              , "DocumentsForIncomingPayment");
 	Parameters.Insert("OpeningEntryTableName1" , "AccountPayableByDocuments");
 	Parameters.Insert("OpeningEntryTableName2" , "AccountReceivableByDocuments");
+	Parameters.Insert("DebitNoteTableName"     , "Transactions");
+	
 	Parameters.Insert("Ref"                    , Object.Ref);
 	JorDocumentsClient.BasisDocumentStartChoice(Object, Form, Item, CurrentData, Parameters);
 EndProcedure
@@ -371,6 +374,7 @@ Procedure PaymentListBasisDocumentStartChoiceEnd(Result, AdditionalParameters) E
 	If CurrentData <> Undefined Then
 		CurrentData.BasisDocument = Result.BasisDocument;
 		CurrentData.Amount        = Result.Amount;
+		DocumentsClient.CalculateTotalAmount(Form.Object, Form);
 	EndIf;
 EndProcedure
 
@@ -549,6 +553,18 @@ Procedure PaymentListPayerEditTextChange(Object, Form, Item, Text, StandardProce
 	DocumentsClient.CompanyEditTextChange(Object, Form, Item, Text, StandardProcessing,
 				ArrayOfFilters, AdditionalParameters);
 EndProcedure
+#EndRegion
+
+#Region FinancialMovementType
+
+Procedure PaymentListMovementTypeStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
+	DocumentsClient.FinancialMovementTypeStartChoice(Object, Form, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+Procedure PaymentListMovementTypeEditTextChange(Object, Form, Item, Text, StandardProcessing) Export
+	DocumentsClient.FinancialMovementTypeEditTextChange(Object, Form, Item, Text, StandardProcessing);
+EndProcedure
+
 #EndRegion
 
 #EndRegion

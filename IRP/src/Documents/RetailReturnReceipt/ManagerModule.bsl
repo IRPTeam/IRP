@@ -86,13 +86,13 @@ EndProcedure
 #Region NewRegistersPosting
 Function GetInformationAboutMovements(Ref) Export
 	Str = New Structure;
-	Str.Insert("QueryParamenters", GetAdditionalQueryParamenters(Ref));
+	Str.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
 	Str.Insert("QueryTextsMasterTables", GetQueryTextsMasterTables());
 	Str.Insert("QueryTextsSecondaryTables", GetQueryTextsSecondaryTables());
 	Return Str;
 EndFunction
 
-Function GetAdditionalQueryParamenters(Ref)
+Function GetAdditionalQueryParameters(Ref)
 	StrParams = New Structure();
 	StrParams.Insert("Ref", Ref);
 	Return StrParams;
@@ -215,26 +215,26 @@ EndFunction
 Function OffersInfo()
 	Return
 		"SELECT
-		|	RetailSalesReceiptItemList.Ref.Date AS Period,
-		|	RetailSalesReceiptItemList.Ref AS Invoice,
+		|	RetailReturnReceiptItemList.Ref.Date AS Period,
+		|	RetailReturnReceiptItemList.RetailSalesReceipt AS Invoice,
 		|	TableRowIDInfo.RowID AS RowKey,
-		|	RetailSalesReceiptItemList.ItemKey,
-		|	RetailSalesReceiptItemList.Ref.Company AS Company,
-		|	RetailSalesReceiptItemList.Ref.Currency,
-		|	RetailSalesReceiptSpecialOffers.Offer AS SpecialOffer,
-		|	RetailSalesReceiptSpecialOffers.Amount AS OffersAmount,
-		|	RetailSalesReceiptItemList.TotalAmount AS SalesAmount,
-		|	RetailSalesReceiptItemList.NetAmount,
-		|	RetailSalesReceiptItemList.Ref.Branch AS Branch
+		|	RetailReturnReceiptItemList.ItemKey,
+		|	RetailReturnReceiptItemList.Ref.Company AS Company,
+		|	RetailReturnReceiptItemList.Ref.Currency,
+		|	RetailReturnReceiptSpecialOffers.Offer AS SpecialOffer,
+		|	- RetailReturnReceiptSpecialOffers.Amount AS OffersAmount,
+		|	- RetailReturnReceiptItemList.TotalAmount AS SalesAmount,
+		|	- RetailReturnReceiptItemList.NetAmount AS NetAmount,
+		|	RetailReturnReceiptItemList.Ref.Branch AS Branch
 		|INTO OffersInfo
 		|FROM
-		|	Document.RetailSalesReceipt.ItemList AS RetailSalesReceiptItemList
-		|		INNER JOIN Document.RetailSalesReceipt.SpecialOffers AS RetailSalesReceiptSpecialOffers
-		|		ON RetailSalesReceiptItemList.Key = RetailSalesReceiptSpecialOffers.Key
-		|		AND RetailSalesReceiptItemList.Ref = &Ref
-		|		AND RetailSalesReceiptSpecialOffers.Ref = &Ref
+		|	Document.RetailReturnReceipt.ItemList AS RetailReturnReceiptItemList
+		|		INNER JOIN Document.RetailReturnReceipt.SpecialOffers AS RetailReturnReceiptSpecialOffers
+		|		ON RetailReturnReceiptItemList.Key = RetailReturnReceiptSpecialOffers.Key
+		|		AND RetailReturnReceiptItemList.Ref = &Ref
+		|		AND RetailReturnReceiptSpecialOffers.Ref = &Ref
 		|		INNER JOIN TableRowIDInfo AS TableRowIDInfo
-		|		ON RetailSalesReceiptItemList.Key = TableRowIDInfo.Key";
+		|		ON RetailReturnReceiptItemList.Key = TableRowIDInfo.Key";
 EndFunction
 
 Function RetailSales()
@@ -419,7 +419,8 @@ Function R5021T_Revenues()
 	Return
 		"SELECT
 		|	*,
-		|	- ItemList.NetAmount AS Amount
+		|	- ItemList.NetAmount AS Amount,
+		|	- ItemList.TotalAmount AS AmountWithTaxes
 		|INTO R5021T_Revenues
 		|FROM
 		|	ItemList AS ItemList

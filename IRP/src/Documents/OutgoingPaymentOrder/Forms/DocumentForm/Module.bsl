@@ -131,6 +131,16 @@ Procedure PlaningPeriodOnChange(Item, AddInfo = Undefined) Export
 	DocOutgoingPaymentOrderClient.PlaningPeriodOnChange(Object, ThisObject, Item);
 EndProcedure
 
+&AtClient
+Procedure PaymentListFinancialMovementTypeStartChoice(Item, ChoiceData, StandardProcessing)
+	DocOutgoingPaymentOrderClient.PaymentListFinancialMovementTypeStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);	
+EndProcedure
+
+&AtClient
+Procedure PaymentListFinancialMovementTypeEditTextChange(Item, Text, StandardProcessing)
+	DocOutgoingPaymentOrderClient.PaymentListFinancialMovementTypeEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
 #Region Partner
 
 &AtClient

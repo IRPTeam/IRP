@@ -821,7 +821,6 @@
         <items xsi:type="form:FormField">
           <name>TransactionsBasisDocument</name>
           <id>271</id>
-          <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
             <common>true</common>
@@ -862,10 +861,6 @@
           <headerHorizontalAlign>Left</headerHorizontalAlign>
           <showInFooter>true</showInFooter>
           <extInfo xsi:type="form:InputFieldExtInfo">
-            <handlers>
-              <event>StartChoice</event>
-              <name>TransactionsBasisDocumentStartChoice</name>
-            </handlers>
             <autoMaxWidth>true</autoMaxWidth>
             <autoMaxHeight>true</autoMaxHeight>
             <wrap>true</wrap>
@@ -2150,7 +2145,6 @@
       <items xsi:type="form:FormField">
         <name>DueAsAdvance</name>
         <id>285</id>
-        <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
           <common>true</common>

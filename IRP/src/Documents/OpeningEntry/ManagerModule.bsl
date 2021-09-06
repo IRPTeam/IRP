@@ -91,13 +91,13 @@ EndProcedure
 
 Function GetInformationAboutMovements(Ref) Export
 	Str = New Structure;
-	Str.Insert("QueryParamenters", GetAdditionalQueryParamenters(Ref));
+	Str.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
 	Str.Insert("QueryTextsMasterTables", GetQueryTextsMasterTables());
 	Str.Insert("QueryTextsSecondaryTables", GetQueryTextsSecondaryTables());
 	Return Str;
 EndFunction
 
-Function GetAdditionalQueryParamenters(Ref)
+Function GetAdditionalQueryParameters(Ref)
 	StrParams = New Structure();
 	StrParams.Insert("Ref", Ref);
 	Return StrParams;
@@ -129,7 +129,8 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R2020B_AdvancesFromCustomers());
 	QueryArray.Add(R2021B_CustomersTransactions());
 	QueryArray.Add(R5011B_CustomersAging());
-	QueryArray.Add(R5012B_VendorsAging());	
+	QueryArray.Add(R5012B_VendorsAging());
+	QueryArray.Add(R5010B_ReconciliationStatement());	
 	Return QueryArray;
 EndFunction
 
@@ -178,6 +179,7 @@ Function AdvancesToVendors()
 		|	OpeningEntryAdvanceToSuppliers.Currency,
 		|	OpeningEntryAdvanceToSuppliers.Partner,
 		|	OpeningEntryAdvanceToSuppliers.LegalName,
+		|	OpeningEntryAdvanceToSuppliers.LegalNameContract,
 		|	OpeningEntryAdvanceToSuppliers.Amount AS Amount,
 		|	OpeningEntryAdvanceToSuppliers.Ref AS Basis,
 		|	OpeningEntryAdvanceToSuppliers.Ref.Date AS Period,
@@ -199,6 +201,7 @@ Function VendorsTransactions()
 		|	OpeningEntryAccountPayableByDocuments.Ref AS Basis,
 		|	OpeningEntryAccountPayableByDocuments.Partner,
 		|	OpeningEntryAccountPayableByDocuments.LegalName,
+		|	OpeningEntryAccountPayableByDocuments.LegalNameContract,
 		|	CASE
 		|		WHEN OpeningEntryAccountPayableByDocuments.Agreement.Kind = VALUE(Enum.AgreementKinds.Regular)
 		|		AND
@@ -224,6 +227,7 @@ Function VendorsTransactions()
 		|	UNDEFINED,
 		|	OpeningEntryAccountPayableByAgreements.Partner,
 		|	OpeningEntryAccountPayableByAgreements.LegalName,
+		|	OpeningEntryAccountPayableByAgreements.LegalNameContract,
 		|	CASE
 		|		WHEN OpeningEntryAccountPayableByAgreements.Agreement.Kind = VALUE(Enum.AgreementKinds.Regular)
 		|		AND
@@ -247,6 +251,7 @@ Function AdvancesFromCustomers()
 		|	OpeningEntryAdvanceFromCustomers.Currency,
 		|	OpeningEntryAdvanceFromCustomers.Partner,
 		|	OpeningEntryAdvanceFromCustomers.LegalName,
+		|	OpeningEntryAdvanceFromCustomers.LegalNameContract,
 		|	OpeningEntryAdvanceFromCustomers.Amount AS Amount,
 		|	OpeningEntryAdvanceFromCustomers.Ref AS Basis,
 		|	OpeningEntryAdvanceFromCustomers.Ref.Date AS Period,
@@ -268,6 +273,7 @@ Function CustomersTransactions()
 		|	OpeningEntryAccountReceivableByDocuments.Ref AS Basis,
 		|	OpeningEntryAccountReceivableByDocuments.Partner,
 		|	OpeningEntryAccountReceivableByDocuments.LegalName,
+		|	OpeningEntryAccountReceivableByDocuments.LegalNameContract,
 		|	CASE
 		|		WHEN OpeningEntryAccountReceivableByDocuments.Agreement.Kind = VALUE(Enum.AgreementKinds.Regular)
 		|		AND
@@ -293,6 +299,7 @@ Function CustomersTransactions()
 		|	UNDEFINED,
 		|	OpeningEntryAccountReceivableByAgreements.Partner,
 		|	OpeningEntryAccountReceivableByAgreements.LegalName,
+		|	OpeningEntryAccountReceivableByAgreements.LegalNameContract,
 		|	CASE
 		|		WHEN OpeningEntryAccountReceivableByAgreements.Agreement.Kind = VALUE(Enum.AgreementKinds.Regular)
 		|		AND
@@ -479,6 +486,65 @@ Function R3010B_CashOnHand()
 		|	AccauntBalance AS AccauntBalance
 		|WHERE 
 		|	TRUE";
+EndFunction
+
+
+Function R5010B_ReconciliationStatement()
+	Return 
+		"SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	VendorsTransactions.Period,
+		|	VendorsTransactions.Company,
+		|	VendorsTransactions.Branch,
+		|	VendorsTransactions.LegalName,
+		|	VendorsTransactions.LegalNameContract,
+		|	VendorsTransactions.Currency,
+		|	VendorsTransactions.Amount
+		|INTO R5010B_ReconciliationStatement
+		|FROM
+		|	VendorsTransactions AS VendorsTransactions
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	AdvancesToVendors.Period,
+		|	AdvancesToVendors.Company,
+		|	AdvancesToVendors.Branch,
+		|	AdvancesToVendors.LegalName,
+		|	AdvancesToVendors.LegalNameContract,
+		|	AdvancesToVendors.Currency,
+		|	AdvancesToVendors.Amount
+		|FROM
+		|	AdvancesToVendors AS AdvancesToVendors
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	CustomersTransactions.Period,
+		|	CustomersTransactions.Company,
+		|	CustomersTransactions.Branch,
+		|	CustomersTransactions.LegalName,
+		|	CustomersTransactions.LegalNameContract,
+		|	CustomersTransactions.Currency,
+		|	CustomersTransactions.Amount
+		|FROM
+		|	CustomersTransactions AS CustomersTransactions
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	AdvancesFromCustomers.Period,
+		|	AdvancesFromCustomers.Company,
+		|	AdvancesFromCustomers.Branch,
+		|	AdvancesFromCustomers.LegalName,
+		|	AdvancesFromCustomers.LegalNameContract,
+		|	AdvancesFromCustomers.Currency,
+		|	AdvancesFromCustomers.Amount
+		|FROM
+		|	AdvancesFromCustomers AS AdvancesFromCustomers";
 EndFunction
 
 #EndRegion

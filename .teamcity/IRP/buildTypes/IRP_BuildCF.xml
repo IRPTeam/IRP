@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<build-type xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="cad3ba1b-b3c6-4310-bc39-b5c670c0fc01" xsi:noNamespaceSchemaLocation="https://www.jetbrains.com/teamcity/schemas/2020.1/project-config.xsd">
+<build-type xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="cad3ba1b-b3c6-4310-bc39-b5c670c0fc01" xsi:noNamespaceSchemaLocation="https://www.jetbrains.com/teamcity/schemas/2021.1/project-config.xsd">
   <name>2. Build CF and Update DB</name>
   <description />
   <settings ref="IRP_BuildCF_FromEDT">
@@ -10,9 +10,19 @@
       <setting-ref ref="RUNNER_22" />
     </disabled-settings>
     <parameters />
-    <build-runners order="RUNNER_22, RUNNER_5, RUNNER_32, RUNNER_8, RUNNER_9, RUNNER_11, RUNNER_43">
+    <build-runners order="RUNNER_22, RUNNER_67, RUNNER_5, RUNNER_32, RUNNER_8, RUNNER_9, RUNNER_11, RUNNER_43">
       <runner id="RUNNER_22" name="Drop DB MetaRunner" type="DropDB">
         <parameters>
+          <param name="teamcity.step.mode" value="default" />
+        </parameters>
+      </runner>
+      <runner id="RUNNER_67" name="Set version" type="jetbrains_powershell">
+        <parameters>
+          <param name="jetbrains_powershell_execution" value="PS1" />
+          <param name="jetbrains_powershell_noprofile" value="true" />
+          <param name="jetbrains_powershell_script_code"><![CDATA[$week = Get-Date -UFormat %V
+((Get-Content  -Encoding UTF8 -path "%teamcity.build.workingDir%\%teamcity.project.id%\src\Configuration\Configuration.mdo" -Raw) -replace "#weekNumber#","$week") | Set-Content -Encoding UTF8 -Path "%teamcity.build.workingDir%\%teamcity.project.id%\src\Configuration\Configuration.mdo"]]></param>
+          <param name="jetbrains_powershell_script_mode" value="CODE" />
           <param name="teamcity.step.mode" value="default" />
         </parameters>
       </runner>
@@ -40,6 +50,32 @@ find /c "completed successfully" %env.LogFile1C% && ( echo Success ) || ( echo "
     <vcs-settings />
     <requirements />
     <build-triggers />
+    <build-extensions>
+      <extension id="BUILD_EXT_10" type="JetBrains.FileContentReplacer">
+        <parameters>
+          <param name="teamcity.file.content.replacer.failBuild" value="true" />
+          <param name="teamcity.file.content.replacer.file.encoding" value="autodetect" />
+          <param name="teamcity.file.content.replacer.file.encoding.custom" value="autodetect" />
+          <param name="teamcity.file.content.replacer.pattern" value="#BuildNumber#" />
+          <param name="teamcity.file.content.replacer.pattern.case.sensitive" value="true" />
+          <param name="teamcity.file.content.replacer.regexMode" value="FIXED_STRINGS" />
+          <param name="teamcity.file.content.replacer.replacement" value="%env.BUILD_NUMBER%" />
+          <param name="teamcity.file.content.replacer.wildcards" value="+:IRP\src\Configuration\Configuration.mdo" />
+        </parameters>
+      </extension>
+      <extension id="BUILD_EXT_12" type="JetBrains.FileContentReplacer">
+        <parameters>
+          <param name="teamcity.file.content.replacer.failBuild" value="true" />
+          <param name="teamcity.file.content.replacer.file.encoding" value="autodetect" />
+          <param name="teamcity.file.content.replacer.file.encoding.custom" value="autodetect" />
+          <param name="teamcity.file.content.replacer.pattern" value="Result = AttachAddIn(LinkOnDriver, ObjectName[1]);" />
+          <param name="teamcity.file.content.replacer.pattern.case.sensitive" value="true" />
+          <param name="teamcity.file.content.replacer.regexMode" value="FIXED_STRINGS" />
+          <param name="teamcity.file.content.replacer.replacement" value="Result = False; // CI delete" />
+          <param name="teamcity.file.content.replacer.wildcards" value="+:IRP\src\CommonModules\HardwareClient\Module.bsl" />
+        </parameters>
+      </extension>
+    </build-extensions>
     <cleanup />
   </settings>
 </build-type>

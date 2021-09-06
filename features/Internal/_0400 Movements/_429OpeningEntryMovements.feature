@@ -47,6 +47,7 @@ Scenario: _042900 preparation (Opening entry)
 		When Create catalog BusinessUnits objects
 		When Create catalog ExpenseAndRevenueTypes objects
 		When Create catalog Companies objects (second company Ferron BP)
+		When Create catalog LegalNameContracts objects
 		When Create catalog PartnersBankAccounts objects
 		When update ItemKeys
 		When Create catalog SerialLotNumbers objects
@@ -366,6 +367,68 @@ Scenario: _042912 check Opening entry movements by the Register  "R5011 Customer
 			| ''                                          | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''         | ''                 | ''        | ''                                          | ''                    | 'Attributes'    |
 			| ''                                          | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'       | 'Currency' | 'Agreement'        | 'Partner' | 'Invoice'                                   | 'Payment date'        | 'Aging closing' |
 			| ''                                          | 'Receipt'     | '07.09.2020 21:27:57' | '200'       | 'Main Company' | 'Front office' | 'TRY'      | 'Partner term DFC' | 'DFC'     | 'Opening entry 9 dated 07.09.2020 21:27:57' | '01.01.2022 00:00:00' | ''              |
+		And I close all client application windows
+
+Scenario: _042913 check Opening entry movements by the Register  "R5010 Reconciliation statement" (AP by partner term)
+	And I close all client application windows
+	* Select Opening entry
+		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '4' |
+	* Check movements by the Register  "R5010 Reconciliation statement" 
+		And I click "Registrations report" button
+		And I select "R5010 Reconciliation statement" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Opening entry 4 dated 07.09.2020 21:27:01'  | ''            | ''                    | ''          | ''             | ''             | ''         | ''           | ''                    |
+			| 'Document registrations records'             | ''            | ''                    | ''          | ''             | ''             | ''         | ''           | ''                    |
+			| 'Register  "R5010 Reconciliation statement"' | ''            | ''                    | ''          | ''             | ''             | ''         | ''           | ''                    |
+			| ''                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''         | ''           | ''                    |
+			| ''                                           | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'       | 'Currency' | 'Legal name' | 'Legal name contract' |
+			| ''                                           | 'Expense'     | '07.09.2020 21:27:01' | '100'       | 'Main Company' | 'Front office' | 'TRY'      | 'DFC'        | ''                    |					
+		And I close all client application windows
+
+Scenario: _042914 check Opening entry movements by the Register  "R5010 Reconciliation statement" (AR by partner term)
+	And I close all client application windows
+	* Select Opening entry
+		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '5' |
+	* Check movements by the Register  "R5010 Reconciliation statement" 
+		And I click "Registrations report" button
+		And I select "R5010 Reconciliation statement" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Opening entry 5 dated 07.09.2020 21:27:18'  | ''            | ''                    | ''          | ''             | ''             | ''         | ''           | ''                        |
+			| 'Document registrations records'             | ''            | ''                    | ''          | ''             | ''             | ''         | ''           | ''                        |
+			| 'Register  "R5010 Reconciliation statement"' | ''            | ''                    | ''          | ''             | ''             | ''         | ''           | ''                        |
+			| ''                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''         | ''           | ''                        |
+			| ''                                           | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'       | 'Currency' | 'Legal name' | 'Legal name contract'     |
+			| ''                                           | 'Receipt'     | '07.09.2020 21:27:18' | '100'       | 'Main Company' | 'Front office' | 'TRY'      | 'DFC'        | 'DFC Legal name contract' |					
+		And I close all client application windows
+
+Scenario: _042915 check Opening entry movements by the Register  "R5010 Reconciliation statement" (AR/AP by documents)
+	And I close all client application windows
+	* Select Opening entry
+		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '9' |
+	* Check movements by the Register  "R5010 Reconciliation statement" 
+		And I click "Registrations report" button
+		And I select "R5010 Reconciliation statement" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Opening entry 9 dated 07.09.2020 21:27:57'  | ''            | ''                    | ''          | ''             | ''             | ''         | ''              | ''                        |
+			| 'Document registrations records'             | ''            | ''                    | ''          | ''             | ''             | ''         | ''              | ''                        |
+			| 'Register  "R5010 Reconciliation statement"' | ''            | ''                    | ''          | ''             | ''             | ''         | ''              | ''                        |
+			| ''                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''         | ''              | ''                        |
+			| ''                                           | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'       | 'Currency' | 'Legal name'    | 'Legal name contract'     |
+			| ''                                           | 'Receipt'     | '07.09.2020 21:27:57' | '200'       | 'Main Company' | 'Front office' | 'TRY'      | 'DFC'           | 'DFC Legal name contract' |
+			| ''                                           | 'Expense'     | '07.09.2020 21:27:57' | '100'       | 'Main Company' | 'Front office' | 'TRY'      | 'DFC'           | 'DFC Legal name contract' |
+			| ''                                           | 'Expense'     | '07.09.2020 21:27:57' | '200'       | 'Main Company' | 'Front office' | 'TRY'      | 'Company Maxim' | ''                        |
 		And I close all client application windows
 
 Scenario: _042930 Opening entry clear posting/mark for deletion

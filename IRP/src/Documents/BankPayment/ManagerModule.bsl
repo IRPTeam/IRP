@@ -178,6 +178,7 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	Tables.R2020B_AdvancesFromCustomers.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R3010B_CashOnHand.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R3035T_CashPlanning.Columns.Add("Key" , Metadata.DefinedTypes.typeRowID.Type);
+	Tables.R5022T_Expenses.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
 #EndRegion
@@ -293,13 +294,13 @@ EndProcedure
 #Region NewRegistersPosting
 Function GetInformationAboutMovements(Ref) Export
 	Str = New Structure;
-	Str.Insert("QueryParamenters", GetAdditionalQueryParamenters(Ref));
+	Str.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
 	Str.Insert("QueryTextsMasterTables", GetQueryTextsMasterTables());
 	Str.Insert("QueryTextsSecondaryTables", GetQueryTextsSecondaryTables());
 	Return Str;
 EndFunction
 
-Function GetAdditionalQueryParamenters(Ref)
+Function GetAdditionalQueryParameters(Ref)
 	StrParams = New Structure();
 	StrParams.Insert("Ref", Ref);
 	Return StrParams;
@@ -322,6 +323,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(T2011S_PartnerTransactions());
 	QueryArray.Add(R5012B_VendorsAging());
 	QueryArray.Add(R3035T_CashPlanning());
+	QueryArray.Add(R5022T_Expenses());
 	Return QueryArray;
 EndFunction
 
@@ -388,7 +390,7 @@ Function PaymentList()
 		|	PaymentList.ExpenseType AS ExpenseType,
 		|	PaymentList.AdditionalAnalytic AS AdditionalAnalytic,
 		|	PaymentList.Commission AS Commission,
-		|	PaymentList.MovementType AS MovementType,
+		|	PaymentList.FinancialMovementType AS FinancialMovementType,
 		|	PaymentList.Ref.TransactionType = VALUE(Enum.OutgoingPaymentTransactionTypes.PaymentToVendor) AS IsPaymentToVendor,
 		|	PaymentList.Ref.TransactionType = VALUE(Enum.OutgoingPaymentTransactionTypes.CurrencyExchange) AS IsCurrencyExchange,
 		|	PaymentList.Ref.TransactionType = VALUE(Enum.OutgoingPaymentTransactionTypes.CashTransferOrder) AS
@@ -632,7 +634,8 @@ Function R3010B_CashOnHand()
 		|WHERE
 		|	PaymentList.IsPaymentToVendor
 		|	OR PaymentList.IsCurrencyExchange
-		|	OR PaymentList.IsCashTransferOrder";
+		|	OR PaymentList.IsCashTransferOrder
+		|	OR PaymentList.IsReturnToCustomer";
 EndFunction
 
 Function R3035T_CashPlanning()
@@ -656,7 +659,7 @@ Function R3035T_CashPlanning()
 		|			THEN PaymentList.Payee
 		|		ELSE VALUE(Catalog.Companies.EmptyRef)
 		|	END AS LegalName,
-		|	PaymentList.MovementType,
+		|	PaymentList.FinancialMovementType,
 		|	-PaymentList.Amount AS Amount,
 		|	PaymentList.Key
 		|INTO R3035T_CashPlanning
@@ -664,6 +667,19 @@ Function R3035T_CashPlanning()
 		|	PaymentList AS PaymentList
 		|WHERE
 		|	NOT PaymentList.PlaningTransactionBasis.Ref IS NULL";
+EndFunction
+
+Function R5022T_Expenses()
+	Return
+		"SELECT
+		|	PaymentList.Commission AS Amount,
+		|	PaymentList.Commission AS AmountWithTaxes,
+		|	*
+		|INTO R5022T_Expenses
+		|FROM
+		|	PaymentList AS PaymentList
+		|WHERE
+		|	PaymentList.Commission <> 0";
 EndFunction
 
 #EndRegion

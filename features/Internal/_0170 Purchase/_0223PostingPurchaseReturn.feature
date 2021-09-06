@@ -419,10 +419,10 @@ Scenario: _022310 create Purchase return based on Purchase return order
 			And "BasisesTree" table contains lines
 				| 'Row presentation'              | 'Use' | 'Quantity' | 'Unit' | 'Price'  | 'Currency' |
 				| '$$PurchaseReturnOrder022006$$' | 'No'  | ''         | ''     | ''       | ''         |
-				| 'Trousers, 36/Yellow'           | 'No'  | '3,000'    | 'pcs'  | '250,00' | 'TRY'      |
+				| 'Trousers (36/Yellow)'           | 'No'  | '3,000'    | 'pcs'  | '250,00' | 'TRY'      |
 			And I go to line in "BasisesTree" table
 				| 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
-				| '3,000'    | 'Trousers, 36/Yellow'   | 'pcs'  | 'No'  |
+				| '3,000'    | 'Trousers (36/Yellow)'   | 'pcs'  | 'No'  |
 			And I change "Use" checkbox in "BasisesTree" table
 			And I finish line editing in "BasisesTree" table
 			And I click "Ok" button

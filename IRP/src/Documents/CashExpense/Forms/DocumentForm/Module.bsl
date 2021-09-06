@@ -69,11 +69,7 @@ EndProcedure
 
 &AtClient
 Procedure PaymentListOnChange(Item)
-	For Each Row In Object.PaymentList Do
-		If Not ValueIsFilled(Row.Key) Then
-			Row.Key = New UUID();
-		EndIf;
-	EndDo;
+	DocCashExpenseRevenueClient.PaymentListOnChange(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient
@@ -108,6 +104,11 @@ Procedure PaymentListOnStartEdit(Item, NewRow, Clone)
 EndProcedure
 
 &AtClient
+Procedure PaymentListBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
+	DocCashExpenseRevenueClient.PaymentListBeforeAddRow(Object, ThisObject, Item, Cancel, Clone, Parent, IsFolder, Parameter);
+EndProcedure
+
+&AtClient
 Procedure PaymentListTotalAmountOnChange(Item, AddInfo = Undefined) Export
 	DocCashExpenseRevenueClient.PaymentListTotalAmountOnChange(Object, ThisObject, Item);
 EndProcedure
@@ -120,6 +121,16 @@ EndProcedure
 &AtClient
 Procedure PaymentListExpenseTypeEditTextChange(Item, Text, StandardProcessing)
 	DocCashExpenseRevenueClient.PaymentListExpenseTypeEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure PaymentListFinancialMovementTypeStartChoice(Item, ChoiceData, StandardProcessing)
+	DocCashExpenseRevenueClient.PaymentListFinancialMovementTypeStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure PaymentListFinancialMovementTypeEditTextChange(Item, Text, StandardProcessing)
+	DocCashExpenseRevenueClient.PaymentListFinancialMovementTypeEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
 EndProcedure
 
 &AtClient
@@ -435,6 +446,11 @@ EndProcedure
 #EndRegion
 
 #EndRegion
+
+&AtClient
+Procedure ShowRowKey(Command)
+	DocumentsClient.ShowRowKey(ThisObject);	
+EndProcedure
 
 #Region AddAttributes
 

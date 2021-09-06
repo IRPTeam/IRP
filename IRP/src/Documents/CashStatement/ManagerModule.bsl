@@ -116,13 +116,13 @@ EndProcedure
 #Region NewRegistersPosting
 Function GetInformationAboutMovements(Ref) Export
 	Str = New Structure;
-	Str.Insert("QueryParamenters", GetAdditionalQueryParamenters(Ref));
+	Str.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
 	Str.Insert("QueryTextsMasterTables", GetQueryTextsMasterTables());
 	Str.Insert("QueryTextsSecondaryTables", GetQueryTextsSecondaryTables());
 	Return Str;
 EndFunction
 
-Function GetAdditionalQueryParamenters(Ref)
+Function GetAdditionalQueryParameters(Ref)
 	StrParams = New Structure();
 	StrParams.Insert("Ref", Ref);
 	Return StrParams;
@@ -150,7 +150,7 @@ Function PaymentList()
 	|	PaymentList.Ref.CashAccount AS CashAccount,
 	|	PaymentList.Account,
 	|	PaymentList.Currency,
-	|	PaymentList.MovementType,
+	|	PaymentList.FinancialMovementType,
 	|	PaymentList.Amount,
 	|	PaymentList.Account.Type = VALUE(Enum.CashAccountTypes.POS) AS IsAccountPOS,
 	|	PaymentList.Ref.Branch AS Branch
@@ -183,7 +183,7 @@ Function R3035T_CashPlanning()
 		|	PaymentList.CashAccount AS Account,
 		|	PaymentList.Currency,
 		|	VALUE(Enum.CashFlowDirections.Incoming) AS CashFlowDirection,
-		|	PaymentList.MovementType,
+		|	PaymentList.FinancialMovementType,
 		|	PaymentList.Amount
 		|INTO R3035T_CashPlanning
 		|FROM

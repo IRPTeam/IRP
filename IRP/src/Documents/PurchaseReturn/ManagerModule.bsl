@@ -86,13 +86,13 @@ EndProcedure
 
 Function GetInformationAboutMovements(Ref) Export
 	Str = New Structure;
-	Str.Insert("QueryParamenters", GetAdditionalQueryParamenters(Ref));
+	Str.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
 	Str.Insert("QueryTextsMasterTables", GetQueryTextsMasterTables());
 	Str.Insert("QueryTextsSecondaryTables", GetQueryTextsSecondaryTables());
 	Return Str;
 EndFunction
 
-Function GetAdditionalQueryParamenters(Ref)
+Function GetAdditionalQueryParameters(Ref)
 	StrParams = New Structure();
 	StrParams.Insert("Ref", Ref);
 	Return StrParams;
@@ -117,6 +117,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R1005T_PurchaseSpecialOffers());
 	QueryArray.Add(R1012B_PurchaseOrdersInvoiceClosing());
 	QueryArray.Add(R1021B_VendorsTransactions());
+	QueryArray.Add(R1020B_AdvancesToVendors());
 	QueryArray.Add(R1031B_ReceiptInvoicing());
 	QueryArray.Add(R1040B_TaxesOutgoing());
 	QueryArray.Add(R4010B_ActualStocks());
@@ -179,6 +180,8 @@ Function ItemList()
 		|			END
 		|		ELSE UNDEFINED
 		|	END AS BasisDocument,
+		|	PurchaseReturnItemList.Ref AS AdvanceBasis,
+		|	PurchaseReturnItemList.Ref.DueAsAdvance AS DueAsAdvance,
 		|	PurchaseReturnItemList.QuantityInBaseUnit AS Quantity,
 		|	PurchaseReturnItemList.TotalAmount AS TotalAmount,
 		|	PurchaseReturnItemList.TotalAmount AS Amount,
@@ -209,7 +212,8 @@ Function ItemList()
 		|	PurchaseReturnItemList.AdditionalAnalytic AS AdditionalAnalytic,
 		|	PurchaseReturnItemList.Ref.Branch AS Branch,
 		|	PurchaseReturnItemList.Ref.LegalNameContract AS LegalNameContract,
-		|	PurchaseReturnItemList.OffersAmount
+		|	PurchaseReturnItemList.OffersAmount,
+		|	PurchaseReturnItemList.Detail AS Detail
 		|INTO ItemList
 		|FROM
 		|	Document.PurchaseReturn.ItemList AS PurchaseReturnItemList
@@ -318,7 +322,9 @@ EndFunction
 
 Function R1002T_PurchaseReturns()
 	Return
-		"SELECT *
+		"SELECT
+		|	ItemList.PurchaseInvoice AS Invoice, 
+		|	*
 		|INTO R1002T_PurchaseReturns
 		|FROM
 		|	ItemList AS ItemList
@@ -366,6 +372,8 @@ Function R1021B_VendorsTransactions()
 		|INTO R1021B_VendorsTransactions
 		|FROM
 		|	ItemList AS ItemList
+		|WHERE
+		|	NOT ItemList.DueAsAdvance
 		|GROUP BY
 		|	ItemList.Agreement,
 		|	ItemList.Company,
@@ -377,6 +385,19 @@ Function R1021B_VendorsTransactions()
 		|	ItemList.Period,
 		|	VALUE(AccumulationRecordType.Receipt)";
 EndFunction
+
+Function R1020B_AdvancesToVendors()
+	Return
+		"SELECT
+		|	ItemList.AdvanceBasis AS Basis, 
+		|	*
+		|INTO R1020B_AdvancesToVendors
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	ItemList.DueAsAdvance";
+EndFunction
+
 
 Function R1031B_ReceiptInvoicing()
 	Return
@@ -539,7 +560,8 @@ Function R5022T_Expenses()
 	Return
 		"SELECT
 		|	*,
-		|	- ItemList.NetAmount AS Amount
+		|	- ItemList.NetAmount AS Amount,
+		|	- ItemList.TotalAmount AS AmountWithTaxes
 		|INTO R5022T_Expenses
 		|FROM
 		|	ItemList AS ItemList

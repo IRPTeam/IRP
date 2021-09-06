@@ -1007,6 +1007,7 @@
               <segments>Object.ItemList.Item</segments>
             </paths>
           </dataPath>
+          <defaultItem>true</defaultItem>
           <handlers>
             <event>OnChange</event>
             <name>ItemListItemOnChange</name>
@@ -1587,6 +1588,10 @@
         <handlers>
           <event>OnChange</event>
           <name>ItemListOnChange</name>
+        </handlers>
+        <handlers>
+          <event>BeforeAddRow</event>
+          <name>ItemListBeforeAddRow</name>
         </handlers>
         <searchStringAddition>
           <visible>true</visible>
@@ -3611,7 +3616,6 @@
       </handler>
     </action>
     <representation>Picture</representation>
-    <modifiesStoredData>true</modifiesStoredData>
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
   <formCommands>
@@ -3633,7 +3637,6 @@
       </handler>
     </action>
     <representation>Picture</representation>
-    <modifiesStoredData>true</modifiesStoredData>
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
   <commandInterface>

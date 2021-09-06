@@ -1185,6 +1185,65 @@ Scenario: _0154140 check filling in retail customer from the POS (without partne
 		And I save the window as "$$RetailSalesReceipt0154140$$"
 	And I close all client application windows	
 
+Scenario: _0154188 check customer on change in POS 
+	And I close all client application windows
+	* Open Point of sale
+		And In the command interface I select "Retail" "Point of sale"
+	* Add items and payment
+		And I click "Show items" button
+		And I go to line in "ItemsPickup" table
+			| 'Item'  |
+			| 'Dress' |
+		And I go to line in "ItemKeysPickup" table
+			| 'Presentation' |
+			| 'M/White'      |
+		And I select current line in "ItemKeysPickup" table
+	* Select retail customer with own partner term
+		And I click "Search customer" button
+		And I go to line in "List" table
+			| 'Description'                  |
+			| 'Name Retail customer Surname Retail customer' |
+		And I select current line in "List" table
+		And I click "OK" button
+		Then "Update item list info" window is opened
+		And I click "OK" button
+	* Check price
+		And "ItemList" table contains lines
+			| 'Item'  | 'Item key' | 'Serial number' | 'Quantity' | 'Price'  | 'Offers amount' | 'Total amount' |
+			| 'Dress' | 'M/White'  | ''              | '1,000'    | '440,68' | ''              | '520,00'       |
+	* Delete retail customer and check price change
+		And I click the button named "ClearRetailCustomer"
+		Then "Update item list info" window is opened
+		And I click "OK" button
+		And "ItemList" table contains lines
+			| 'Item'  | 'Item key' | 'Serial number' | 'Quantity' | 'Price'  | 'Offers amount' | 'Total amount' |
+			| 'Dress' | 'M/White'  | ''              | '1,000'    | '520,00' | ''              | '520,00'       |
+	* Select retail customer with own partner term again and check price change
+		And I click "Search customer" button
+		And I go to line in "List" table
+			| 'Description'                  |
+			| 'Name Retail customer Surname Retail customer' |
+		And I select current line in "List" table
+		And I click "OK" button
+		Then "Update item list info" window is opened
+		And I click "OK" button
+		And "ItemList" table contains lines
+			| 'Item'  | 'Item key' | 'Serial number' | 'Quantity' | 'Price'  | 'Offers amount' | 'Total amount' |
+			| 'Dress' | 'M/White'  | ''              | '1,000'    | '440,68' | ''              | '520,00'       |
+	* Change retail customer and check price change
+		And I click "Search customer" button
+		And I go to line in "List" table
+			| 'Description'            |
+			| 'Retail customer Second' |
+		And I select current line in "List" table
+		And I click "OK" button
+		Then "Update item list info" window is opened
+		And I click "OK" button
+		And "ItemList" table contains lines
+			| 'Item'  | 'Item key' | 'Serial number' | 'Quantity' | 'Price'  | 'Offers amount' | 'Total amount' |
+			| 'Dress' | 'M/White'  | ''              | '1,000'    | '520,00' | ''              | '520,00'       |
+		And I close all client application windows
+
 Scenario:  _0154141 manual price adjustment in the POS
 	And I close all client application windows
 	* Open Point of sale
@@ -1935,22 +1994,22 @@ Scenario:  _0154149 create Cash statement
 			And I go to line in "PaymentList" table
 				| '#' | 'Account'      | 'Amount'   | 'Currency' | 'Payment type' |
 				| '2' | 'Cash desk №4' | '1 450,00' | 'TRY'      | 'Cash'         |
-			And I activate "Movement type" field in "PaymentList" table
+			And I activate "Financial movement type" field in "PaymentList" table
 			And I select current line in "PaymentList" table
-			And I click choice button of "Movement type" attribute in "PaymentList" table
+			And I click choice button of "Financial movement type" attribute in "PaymentList" table
 			And I go to line in "List" table
-				| 'Description'     | 'Type'          |
-				| 'Movement type 1' | 'Cash movement' |	
+				| 'Description'     |
+				| 'Movement type 1' |
 			And I select current line in "List" table	
 			And I finish line editing in "PaymentList" table
 			And I go to line in "PaymentList" table
 				| '#' | 'Account'      | 'Amount' | 'Commission' | 'Currency' | 'Payment type' |
 				| '1' | 'Transit Main' | '400,00' | '64,50'      | 'TRY'      | 'Card 01'      |
 			And I select current line in "PaymentList" table
-			And I click choice button of "Movement type" attribute in "PaymentList" table
+			And I click choice button of "Financial movement type" attribute in "PaymentList" table
 			And I go to line in "List" table
-				| 'Description'     | 'Type'          |
-				| 'Movement type 1' | 'Cash movement' |
+				| 'Description'     |
+				| 'Movement type 1' |
 			And I select current line in "List" table				
 		And I delete "$$NumberCashStatement01541491$$" variable
 		And I delete "$$CashStatement01541491$$" variable
@@ -1974,7 +2033,7 @@ Scenario:  _0154149 create Cash statement
 			| 'Document registrations records'  | ''                              | ''          | ''             | ''        | ''                          | ''                  | ''         | ''                    | ''        | ''           | ''                             | ''                | ''                | ''                     |
 			| 'Register  "R3035 Cash planning"' | ''                              | ''          | ''             | ''        | ''                          | ''                  | ''         | ''                    | ''        | ''           | ''                             | ''                | ''                | ''                     |
 			| ''                                | 'Period'                        | 'Resources' | 'Dimensions'   | ''        | ''                          | ''                  | ''         | ''                    | ''        | ''           | ''                             | ''                | ''                | 'Attributes'           |
-			| ''                                | ''                              | 'Amount'    | 'Company'      | 'Branch'  | 'Basis document'            | 'Account'           | 'Currency' | 'Cash flow direction' | 'Partner' | 'Legal name' | 'Multi currency movement type' | 'Movement type'   | 'Planning period' | 'Deferred calculation' |
+			| ''                                | ''                              | 'Amount'    | 'Company'      | 'Branch'  | 'Basis document'            | 'Account'           | 'Currency' | 'Cash flow direction' | 'Partner' | 'Legal name' | 'Multi currency movement type' | 'Financial movement type'   | 'Planning period' | 'Deferred calculation' |
 			| ''                                | '$$DateCashStatement01541491$$' | '68,48'     | 'Main Company' | 'Shop 01' | '$$CashStatement01541491$$' | 'Bank account, TRY' | 'USD'      | 'Incoming'            | ''        | ''           | 'Reporting currency'           | 'Movement type 1' | ''                | 'No'                   |
 			| ''                                | '$$DateCashStatement01541491$$' | '400'       | 'Main Company' | 'Shop 01' | '$$CashStatement01541491$$' | 'Bank account, TRY' | 'TRY'      | 'Incoming'            | ''        | ''           | 'Local currency'               | 'Movement type 1' | ''                | 'No'                   |
 			| ''                                | '$$DateCashStatement01541491$$' | '400'       | 'Main Company' | 'Shop 01' | '$$CashStatement01541491$$' | 'Bank account, TRY' | 'TRY'      | 'Incoming'            | ''        | ''           | 'en description is empty'      | 'Movement type 1' | ''                | 'No'                   |
@@ -3436,7 +3495,7 @@ Scenario: _0154182 check filling in Retail sales when select retail customer (wi
 		And I click "Search customer" button
 		And I go to line in "List" table
 			| 'Description'                  |
-			| 'Retail customer with partner' |
+			| 'Name Retail customer Surname Retail customer' |
 		And I select current line in "List" table
 		And I click "OK" button
 		Then "Update item list info" window is opened

@@ -6031,7 +6031,7 @@ Function GetNotReffilingColumns(ObjectType)
 	ArrayOfColumns.Add(Upper("ItemList.RevenueType"));
 	Map.Insert(Type("DocumentRef.StockAdjustmentAsSurplus"), ArrayOfColumns);
 	
-	ArrayOfColumns.Clear();
+	ArrayOfColumns = New Array();
 	ArrayOfColumns.Add(Upper("ItemList.ProfitLossCenter"));
 	ArrayOfColumns.Add(Upper("ItemList.ExpenseType"));
 	Map.Insert(Type("DocumentRef.StockAdjustmentAsWriteOff"), ArrayOfColumns);

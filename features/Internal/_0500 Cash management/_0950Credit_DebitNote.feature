@@ -319,16 +319,16 @@ Scenario: _095003 check movements of the document Credit Note (increase in debt 
 		And I select current line in "List" table
 		And in "Transactions" table I move to the next cell
 		And in "Transactions" table I move to the next cell
-	* Check the selection of basis documents for the specified partner
-		And "List" table contains lines
-			| 'Document'                  | 'Legal name'    | 'Partner' | 'Amount' |
-			| '$$PurchaseInvoice095001$$'  | 'Company Maxim' | 'Maxim'   | '10 000,00'       |
-			| '$$PurchaseInvoice0950011$$' | 'Company Maxim' | 'Maxim'   | '10 000,00'       |
-		And I go to line in "List" table
-			| 'Document' |
-			| '$$PurchaseInvoice095001$$'  |
-		And I select current line in "List" table
-		And I click the button named "FormCommandSelect" 
+	# * Check the selection of basis documents for the specified partner
+	# 	And "List" table contains lines
+	# 		| 'Document'                  | 'Legal name'    | 'Partner' | 'Amount' |
+	# 		| '$$PurchaseInvoice095001$$'  | 'Company Maxim' | 'Maxim'   | '10 000,00'       |
+	# 		| '$$PurchaseInvoice0950011$$' | 'Company Maxim' | 'Maxim'   | '10 000,00'       |
+	# 	And I go to line in "List" table
+	# 		| 'Document' |
+	# 		| '$$PurchaseInvoice095001$$'  |
+	# 	And I select current line in "List" table
+	# 	And I click the button named "FormCommandSelect" 
 		And I activate field named "TransactionsAmount" in "Transactions" table
 		And I input "100,00" text in the field named "TransactionsAmount" of "Transactions" table
 		And I finish line editing in "Transactions" table

@@ -1611,7 +1611,7 @@ Function ExtractData_FromSC(BasisesTable, DataReceiver, AddInfo = Undefined)
 	
 	AddTables(Tables);
 	
-	Return CollapseRepeatingItemListRows(Tables, "Item, ItemKey, Store, Unit");
+	Return CollapseRepeatingItemListRows(Tables, "Item, ItemKey, Store, Unit", AddInfo);
 EndFunction
 
 Function ExtractData_FromSC_ThenFromSO(BasisesTable, DataReceiver, AddInfo = Undefined)
@@ -1671,12 +1671,7 @@ Function ExtractData_FromSC_ThenFromSO(BasisesTable, DataReceiver, AddInfo = Und
 	
 	AddTables(Tables);
 	
-	IsLinkRows = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "IsLinkRows");
-	If IsLinkRows <> Undefined And IsLinkRows Then
-		Return CollapseRepeatingItemListRows(Tables, "SalesOrderItemListKey, Key");
-	Else
-		Return CollapseRepeatingItemListRows(Tables, "SalesOrderItemListKey");
-	EndIf;
+	Return CollapseRepeatingItemListRows(Tables, "SalesOrderItemListKey", AddInfo);
 EndFunction
 
 Function ExtractData_FromSC_ThenFromSI(BasisesTable, DataReceiver, AddInfo = Undefined)
@@ -1736,8 +1731,7 @@ Function ExtractData_FromSC_ThenFromSI(BasisesTable, DataReceiver, AddInfo = Und
 	
 	AddTables(Tables);
 	
-	Return CollapseRepeatingItemListRows(Tables, "SalesInvoiceItemListKey");
-	//Return CollapseRepeatingItemListRows(Tables, "SalesInvoiceItemListKey, Key");
+	Return CollapseRepeatingItemListRows(Tables, "SalesInvoiceItemListKey", AddInfo);
 EndFunction
 
 Function ExtractData_FromSC_ThenFromPIGR_ThenFromSO(BasisesTable, DataReceiver, AddInfo = Undefined)
@@ -1797,7 +1791,7 @@ Function ExtractData_FromSC_ThenFromPIGR_ThenFromSO(BasisesTable, DataReceiver, 
 	
 	AddTables(Tables);
 	
-	Return CollapseRepeatingItemListRows(Tables, "SalesOrderItemListKey");
+	Return CollapseRepeatingItemListRows(Tables, "SalesOrderItemListKey", AddInfo);
 EndFunction
 
 Function ExtractData_FromPIGR_ThenFromSO(BasisesTable, DataReceiver, AddInfo = Undefined)
@@ -1832,7 +1826,7 @@ Function ExtractData_FromPIGR_ThenFromSO(BasisesTable, DataReceiver, AddInfo = U
 	
 	AddTables(Tables);
 	
-	Return CollapseRepeatingItemListRows(Tables, "SalesOrderItemListKey");
+	Return CollapseRepeatingItemListRows(Tables, "SalesOrderItemListKey", AddInfo);
 EndFunction
 
 Function ExtractData_FromPO(BasisesTable, DataReceiver, AddInfo = Undefined)
@@ -2120,7 +2114,7 @@ Function ExtractData_FromGR(BasisesTable, DataReceiver, AddInfo = Undefined)
 	
 	AddTables(Tables);
 	
-	Return CollapseRepeatingItemListRows(Tables, "Item, ItemKey, Store, Unit");
+	Return CollapseRepeatingItemListRows(Tables, "Item, ItemKey, Store, Unit", AddInfo);
 EndFunction
 
 Function ExtractData_FromGR_ThenFromPO(BasisesTable, DataReceiver, AddInfo = Undefined)
@@ -2180,7 +2174,7 @@ Function ExtractData_FromGR_ThenFromPO(BasisesTable, DataReceiver, AddInfo = Und
 	
 	AddTables(Tables);
 	
-	Return CollapseRepeatingItemListRows(Tables, "PurchaseOrderItemListKey");
+	Return CollapseRepeatingItemListRows(Tables, "PurchaseOrderItemListKey", AddInfo);
 EndFunction
 
 Function ExtractData_FromGR_ThenFromPI(BasisesTable, DataReceiver, AddInfo = Undefined)
@@ -2240,7 +2234,7 @@ Function ExtractData_FromGR_ThenFromPI(BasisesTable, DataReceiver, AddInfo = Und
 	
 	AddTables(Tables);
 	
-	Return CollapseRepeatingItemListRows(Tables, "PurchaseInvoiceItemListKey");
+	Return CollapseRepeatingItemListRows(Tables, "PurchaseInvoiceItemListKey", AddInfo);
 EndFunction
 
 Function ExtractData_FromITO(BasisesTable, DataReceiver, AddInfo = Undefined)
@@ -3067,7 +3061,11 @@ Procedure RecalculateAmounts(Tables)
 	EndDo;
 EndProcedure
 
-Function CollapseRepeatingItemListRows(Tables, UniqueColumnNames)
+Function CollapseRepeatingItemListRows(Tables, UniqueColumnNames, AddInfo = Undefined)
+	IsLinkRows = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "IsLinkRows");
+	If IsLinkRows <> Undefined And IsLinkRows Then
+		UniqueColumnNames = UniqueColumnNames + ", Key";
+	EndIf;
 	ItemListGrouped = Tables.ItemList.Copy();
 	ItemListGrouped.GroupBy(UniqueColumnNames, GetColumnNamesSum_ItemList());
 	ItemListResult = Tables.ItemList.CopyColumns();

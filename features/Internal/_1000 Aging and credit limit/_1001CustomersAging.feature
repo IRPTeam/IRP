@@ -456,25 +456,15 @@ Scenario: _1000020 create Credit note and check Aging register movements
 			| 'Description'   |
 			| 'Basic Partner terms, without VAT' |
 		And I select current line in "List" table
-		And in "Transactions" table I move to the next cell
-		And in "Transactions" table I move to the next cell
-		* Check the selection of basis documents for the specified partner
-			And delay 2
-			And I set checkbox "Show all"			
-			And I go to line in "List" table
-				| 'Document' |
-				| '$$SalesInvoice024016$$'  |
-			And I select current line in "List" table
-			And I click the button named "FormCommandSelect" 
-			And I activate field named "TransactionsAmount" in "Transactions" table
-			And I input "150,00" text in the field named "TransactionsAmount" of "Transactions" table
-			And I finish line editing in "Transactions" table
-			And I click the button named "FormPost"
-			And I delete "$$CreditNote1000020$$" variable
-			And I delete "$$CreditNoteDate1000020$$" variable
-			And I save the window as "$$CreditNote1000020$$"
-			And I save the value of the field named "Date" as  "$$CreditNoteDate1000020$$"
-			And I click "Registrations report" button
+		And I activate field named "TransactionsAmount" in "Transactions" table
+		And I input "150,00" text in the field named "TransactionsAmount" of "Transactions" table
+		And I finish line editing in "Transactions" table
+		And I click the button named "FormPost"
+		And I delete "$$CreditNote1000020$$" variable
+		And I delete "$$CreditNoteDate1000020$$" variable
+		And I save the window as "$$CreditNote1000020$$"
+		And I save the value of the field named "Date" as  "$$CreditNoteDate1000020$$"
+		And I click "Registrations report" button
 		* Check movements
 			And I select "R5011 Customers aging" exact value from "Register" drop-down list
 			And I click "Generate report" button
@@ -532,19 +522,9 @@ Scenario: _1000030 create Debit note and check Aging register movements
 			| 'Description'   |
 			| 'Basic Partner terms, without VAT' |
 		And I select current line in "List" table
-		And in "Transactions" table I move to the next cell
-		And in "Transactions" table I move to the next cell
-		* Check the selection of basis documents for the specified partner
-			And delay 2
-			And I set checkbox "Show all"			
-			And I go to line in "List" table
-				| 'Document' |
-				| '$$SalesInvoice024016$$'  |
-			And I select current line in "List" table
-			And I click the button named "FormCommandSelect" 
-			And I activate field named "TransactionsAmount" in "Transactions" table
-			And I input "50,00" text in the field named "TransactionsAmount" of "Transactions" table
-			And I finish line editing in "Transactions" table
+		And I activate field named "TransactionsAmount" in "Transactions" table
+		And I input "50,00" text in the field named "TransactionsAmount" of "Transactions" table
+		And I finish line editing in "Transactions" table
 	* Check movements
 		And I click the button named "FormPost"
 		And I delete "$$DebitNote1000030$$" variable
@@ -560,7 +540,7 @@ Scenario: _1000030 create Debit note and check Aging register movements
 			| 'Register  "R5011 Customers aging"' | ''            | ''                         | ''          | ''             | ''       | ''         | ''                                 | ''        | ''                       | ''             | ''              |
 			| ''                                  | 'Record type' | 'Period'                   | 'Resources' | 'Dimensions'   | ''       | ''         | ''                                 | ''        | ''                       | ''             | 'Attributes'    |
 			| ''                                  | ''            | ''                         | 'Amount'    | 'Company'      | 'Branch' | 'Currency' | 'Agreement'                        | 'Partner' | 'Invoice'                | 'Payment date' | 'Aging closing' |
-			| ''                                  | 'Receipt'     | '$$DebitNoteDate1000030$$' | '50'        | 'Main Company' | ''       | 'TRY'      | 'Basic Partner terms, without VAT' | 'Kalipso' | '$$SalesInvoice024016$$' | '*'            | ''              |
+			| ''                                  | 'Receipt'     | '$$DebitNoteDate1000030$$' | '50'        | 'Main Company' | ''       | 'TRY'      | 'Basic Partner terms, without VAT' | 'Kalipso' | '$$DebitNote1000030$$'   | '*'            | ''              |
 		And I close all client application windows
 	* Post customers advance closing document
 		Given I open hyperlink 'e1cib/list/Document.CustomersAdvancesClosing'
@@ -581,8 +561,9 @@ Scenario: _1000030 create Debit note and check Aging register movements
 			| '$$DateCashReceipt1000009$$'  | '$$CashReceipt1000009$$'  | 'TRY'      | 'Main Company' | ''       | 'Kalipso' | '550,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice0240162$$' | '19.11.2020'                              | 'Customers advances closing 4 dated 21.04.2021 12:00:00' |
 			| '$$DateBankReceipt1000015$$'  | '$$BankReceipt1000015$$'  | 'TRY'      | 'Main Company' | ''       | 'Kalipso' | '450,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '$$DatePaymentTermsSalesInvoice0240161$$' | 'Customers advances closing 4 dated 21.04.2021 12:00:00' |
 			| '$$CreditNoteDate1000020$$'   | '$$CreditNote1000020$$'   | 'TRY'      | 'Main Company' | ''       | 'Kalipso' | '100,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '$$DatePaymentTermsSalesInvoice0240161$$' | 'Customers advances closing 4 dated 21.04.2021 12:00:00' |
-			| '$$DebitNoteDate1000030$$'    | '$$DebitNote1000030$$'    | 'TRY'      | 'Main Company' | ''       | 'Kalipso' | '50,00'  | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '*'                                       | ''                                                       |
-		Then the number of "List" table lines is "равно" "6"
+			| '$$DebitNoteDate1000030$$'    | '$$DebitNote1000030$$'    | 'TRY'      | 'Main Company' | ''       | 'Kalipso' | '50,00'  | 'Basic Partner terms, without VAT' | '$$DebitNote1000030$$'    | '*'                                       | ''                                                       |
+			| '$$DebitNoteDate1000030$$'    | '$$DebitNote1000030$$'    | 'TRY'      | 'Main Company' | ''       | 'Kalipso' | '50,00'  | 'Basic Partner terms, without VAT' | '$$DebitNote1000030$$'    | '*'                                       | 'Customers advances closing 4 dated 21.04.2021 12:00:00' |
+		Then the number of "List" table lines is "равно" "7"
 	And I close all client application windows
 				
 Scenario: _1000050 check the offset of Sales invoice advance (type of settlement by documents)

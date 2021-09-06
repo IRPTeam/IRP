@@ -225,7 +225,13 @@ Function OffsetOfAdvances(Parameters)
 			Create_CustomersTransactions(Row.Recorder, Parameters);
 			Create_CustomersAging(Row.Recorder, Parameters);
 			OffsetOfPartnersServer.Customers_OnTransaction(Parameters);
-			Write_AdvancesAndTransactions(Row.Recorder, Parameters, OffsetOfAdvanceFull);
+			
+			UseKeyForAdvance = False;
+			If OffsetOfPartnersServer.IsDebitCreditNote(Row.Recorder) Then
+				UseKeyForAdvance = True;
+			EndIf;
+			
+			Write_AdvancesAndTransactions(Row.Recorder, Parameters, OffsetOfAdvanceFull, UseKeyForAdvance);
 			Write_PartnersAging(Row.Recorder, Parameters, OffsetOfAgingFull);
 			Drop_Table(Parameters, "CustomersTransactions");
 			Drop_Table(Parameters, "Aging");
@@ -819,12 +825,7 @@ Procedure Write_AdvancesAndTransactions(Recorder, Parameters, OffsetOfAdvanceFul
 	TableTransactions = RecordSet_CustomersTransactions.UnloadColumns();
 	TableTransactions.Columns.Delete(TableTransactions.Columns.PointInTime);
 	
-	IsDebitCreditNote = OffsetOfPartnersServer.IsDebitCreditNote(Recorder); 
-	If IsDebitCreditNote Then
-		TableTransactions.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
-	EndIf;
-	
-	If IsDebitCreditNote Or UseKeyForAdvance Then
+	If UseKeyForAdvance Then
 		TableAdvances.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	EndIf;
 	

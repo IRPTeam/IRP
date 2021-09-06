@@ -14,5 +14,7 @@
     <types>DocumentRef.PurchaseReturn</types>
     <types>DocumentRef.OpeningEntry</types>
     <types>DocumentRef.SalesReturn</types>
+    <types>DocumentRef.DebitNote</types>
+    <types>DocumentRef.CreditNote</types>
   </type>
 </mdclass:DefinedType>

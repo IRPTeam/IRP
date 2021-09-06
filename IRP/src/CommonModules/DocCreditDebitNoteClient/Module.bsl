@@ -217,54 +217,6 @@ EndProcedure
 
 #EndRegion
 
-#Region BasisDocument
-
-Procedure TransactionsBasisDocumentStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
-	StandardProcessing = False;
-	
-	CurrentData = Form.Items.Transactions.CurrentData;
-	If CurrentData = Undefined Then
-		Return;
-	EndIf;
-	
-	Parameters = New Structure();
-	Parameters.Insert("Filter", New Structure());
-	If Not ValueIsFilled(CurrentData.Agreement) Then
-		Parameters.Filter.Insert("Agreement_ApArPostingDetail", PredefinedValue("Enum.ApArPostingDetail.ByDocuments"));
-	EndIf;
-	Parameters.Filter.Insert("Company", Object.Company);
-	
-	Parameters.Insert("FilterFromCurrentData", "Partner, LegalName, Agreement");
-	
-	Notify = New NotifyDescription("TransactionsBasisDocumentStartChoiceEnd", ThisObject, New Structure("Form", Form));
-	Parameters.Insert("Notify"                 , Notify);
-	Parameters.Insert("TableName"              , "DocumentsForCreditDebitNote");
-	Parameters.Insert("OpeningEntryTableName1" , "AccountPayableByDocuments");
-	Parameters.Insert("OpeningEntryTableName2" , "AccountReceivableByDocuments");
-	Parameters.Insert("Ref"                    , Object.Ref);
-	JorDocumentsClient.BasisDocumentStartChoice(Object, Form, Item, CurrentData, Parameters);
-EndProcedure
-
-Procedure TransactionsBasisDocumentStartChoiceEnd(Result, AdditionalParameters) Export
-	If Result = Undefined Then
-		Return;
-	EndIf;
-	Object = AdditionalParameters.Form.Object;
-	Form = AdditionalParameters.Form;
-	CurrentData = AdditionalParameters.Form.Items.Transactions.CurrentData;
-	If CurrentData <> Undefined Then
-		CurrentData.BasisDocument = Result.BasisDocument;
-		CurrentData.Partner       = Result.Partner;
-		CurrentData.Agreement     = Result.Agreement;
-		CurrentData.Currency      = Result.Currency;
-		CurrentData.LegalName     = Result.LegalName;
-		CurrentData.Amount        = Result.Amount;
-		CurrenciesClient.AgreementOnChange(Object, Form, "Transactions");
-	EndIf;
-EndProcedure
-
-#EndRegion
-
 #Region Currency
 
 &AtClient

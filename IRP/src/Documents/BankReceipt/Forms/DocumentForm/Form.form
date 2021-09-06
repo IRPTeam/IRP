@@ -962,6 +962,7 @@
               <segments>Object.PaymentList.Partner</segments>
             </paths>
           </dataPath>
+          <defaultItem>true</defaultItem>
           <handlers>
             <event>OnChange</event>
             <name>PaymentListPartnerOnChange</name>

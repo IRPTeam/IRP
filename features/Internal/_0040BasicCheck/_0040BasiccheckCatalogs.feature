@@ -107,6 +107,20 @@ Scenario: Open object form "BusinessUnits"
 		Then I raise "Failed to open catalog form BusinessUnits" exception
 	And I close current window
 
+Scenario: Open list form "LegalNameContracts" 
+	And I close all client application windows
+	Given I open "LegalNameContracts" catalog default form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form LegalNameContracts" exception
+	And I close current window
+
+Scenario: Open object form "LegalNameContracts"
+	And I close all client application windows
+	Given I open "LegalNameContracts" reference main form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form LegalNameContracts" exception
+	And I close current window
+
 
 	
 Scenario: Open list form "CashAccounts" 
@@ -944,4 +958,18 @@ Scenario: Open object form "CancelReturnReasons"
 	Given I open "CancelReturnReasons" reference main form
 	If the warning is displayed then
 		Then I raise "Failed to open catalog form CancelReturnReasons" exception
+	And I close current window
+
+Scenario: Open list form "PartnerItems" 
+
+	Given I open "PartnerItems" catalog default form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form PartnerItems" exception
+	And I close current window
+
+Scenario: Open object form "PartnerItems"
+	And I close all client application windows
+	Given I open "PartnerItems" reference main form
+	If the warning is displayed then
+		Then I raise "Failed to open catalog form PartnerItems" exception
 	And I close current window

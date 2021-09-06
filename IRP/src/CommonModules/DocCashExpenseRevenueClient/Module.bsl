@@ -135,17 +135,28 @@ Procedure PaymentListOnStartEdit(Object, Form, Item, NewRow, Clone) Export
 		Settings.Insert("Rows", Rows);
 		CalculateItemsRows(Object, Form, Settings);
 		Return;
-	EndIf;
-	
-	If Not NewRow  Then
+	EndIf;	
+EndProcedure
+
+Procedure PaymentListBeforeAddRow(Object, Form, Item, Cancel, Clone, Parent, IsFolder, Parameter) Export
+	If Clone Then
 		Return;
 	EndIf;
-	
-	If Item.CurrentData = Undefined Then
-		Return;
-	EndIf;
-	
-	Item.CurrentData.Currency = Form.Currency;
+	Cancel = True;
+	NewRow = Object.PaymentList.Add();
+	Form.Items.PaymentList.CurrentRow = NewRow.GetID();
+	UserSettingsClient.FillingRowFromSettings(Object, "Object.PaymentList", NewRow, True);
+	NewRow.Currency = Form.Currency;
+	Form.Items.PaymentList.ChangeRow();
+	PaymentListOnChange(Object, Form, Item);
+EndProcedure
+
+Procedure PaymentListOnChange(Object, Form, Item) Export
+	For Each Row In Object.PaymentList Do
+		If Not ValueIsFilled(Row.Key) Then
+			Row.Key = New UUID();
+		EndIf;
+	EndDo;
 EndProcedure
 
 Procedure PaymentListAfterDeleteRow(Object, Form, Item) Export
@@ -227,40 +238,26 @@ Function CurrencySettings(Object, Form, AddInfo = Undefined) Export
 	Return New Structure();
 EndFunction
 
+#Region FinancialMovementType
+
+Procedure PaymentListFinancialMovementTypeStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
+	DocumentsClient.FinancialMovementTypeStartChoice(Object, Form, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+Procedure PaymentListFinancialMovementTypeEditTextChange(Object, Form, Item, Text, StandardProcessing) Export
+	DocumentsClient.FinancialMovementTypeEditTextChange(Object, Form, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
 #Region ExpenseType
 
 Procedure PaymentListExpenseTypeStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
-	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
-	
-	OpenSettings.ArrayOfFilters = New Array();
-	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", 
-																	True, 
-																	DataCompositionComparisonType.NotEqual));
-	FilterTypesValue = New Array;
-	FilterTypesValue.Add(PredefinedValue("Enum.ExpenseAndRevenueTypes.Expense"));
-	FilterTypesValue.Add(PredefinedValue("Enum.ExpenseAndRevenueTypes.Both"));
-	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Type", 
-																	FilterTypesValue, 
-																	DataCompositionComparisonType.InList));
-
-	OpenSettings.FormParameters = New Structure();
-	OpenSettings.FillingData = New Structure();
-	
-	DocumentsClient.ExpenseAndRevenueTypeStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
+	DocumentsClient.ExpenseTypeStartChoice(Object, Form, Item, ChoiceData, StandardProcessing);
 EndProcedure
 
 Procedure PaymentListExpenseTypeEditTextChange(Object, Form, Item, Text, StandardProcessing) Export
-	ArrayOfFilters = New Array();
-	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
-	FilterTypesValue = New ValueList;
-	FilterTypesValue.Add(PredefinedValue("Enum.ExpenseAndRevenueTypes.Expense"));
-	FilterTypesValue.Add(PredefinedValue("Enum.ExpenseAndRevenueTypes.Both"));
-	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Type", 
-																	FilterTypesValue,
-																	ComparisonType.InList));							
-	AdditionalParameters = New Structure();
-	DocumentsClient.ExpenseAndRevenueTypeEditTextChange(Object, Form, Item, Text, StandardProcessing,
-				ArrayOfFilters, AdditionalParameters);
+	DocumentsClient.ExpenseTypeEditTextChange(Object, Form, Item, Text, StandardProcessing);
 EndProcedure
 
 #EndRegion
@@ -268,37 +265,11 @@ EndProcedure
 #Region RevenueType
 
 Procedure PaymentListRevenueTypeStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
-	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
-	
-	OpenSettings.ArrayOfFilters = New Array();
-	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", 
-																	True, 
-																	DataCompositionComparisonType.NotEqual));
-	FilterTypesValue = New Array;
-	FilterTypesValue.Add(PredefinedValue("Enum.ExpenseAndRevenueTypes.Revenue"));
-	FilterTypesValue.Add(PredefinedValue("Enum.ExpenseAndRevenueTypes.Both"));
-	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Type", 
-																	FilterTypesValue, 
-																	DataCompositionComparisonType.InList));
-
-	OpenSettings.FormParameters = New Structure();
-	OpenSettings.FillingData = New Structure();
-	
-	DocumentsClient.ExpenseAndRevenueTypeStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
+	DocumentsClient.RevenueTypeStartChoice(Object, Form, Item, ChoiceData, StandardProcessing);
 EndProcedure
 
 Procedure PaymentListRevenueTypeEditTextChange(Object, Form, Item, Text, StandardProcessing) Export
-	ArrayOfFilters = New Array();
-	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
-	FilterTypesValue = New ValueList;
-	FilterTypesValue.Add(PredefinedValue("Enum.ExpenseAndRevenueTypes.Revenue"));
-	FilterTypesValue.Add(PredefinedValue("Enum.ExpenseAndRevenueTypes.Both"));
-	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Type", 
-																	FilterTypesValue,
-																	ComparisonType.InList));							
-	AdditionalParameters = New Structure();
-	DocumentsClient.ExpenseAndRevenueTypeEditTextChange(Object, Form, Item, Text, StandardProcessing,
-				ArrayOfFilters, AdditionalParameters);
+	DocumentsClient.RevenueTypeEditTextChange(Object, Form, Item, Text, StandardProcessing);
 EndProcedure
 
 #EndRegion

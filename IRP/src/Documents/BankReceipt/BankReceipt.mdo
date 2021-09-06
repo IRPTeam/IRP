@@ -78,6 +78,7 @@
   <registerRecords>InformationRegister.T2011S_PartnerTransactions</registerRecords>
   <registerRecords>InformationRegister.T2012S_PartnerAdvances</registerRecords>
   <registerRecords>AccumulationRegister.R5012B_VendorsAging</registerRecords>
+  <registerRecords>AccumulationRegister.R5022T_Expenses</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -435,16 +436,34 @@
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
     <attributes uuid="834ed1e0-c183-4c5c-b223-6c73a36e3b77">
-      <name>MovementType</name>
+      <name>FinancialMovementType</name>
       <synonym>
         <key>en</key>
-        <value>Movement type</value>
+        <value>Financial movement type</value>
       </synonym>
       <type>
         <types>CatalogRef.ExpenseAndRevenueTypes</types>
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="ca79f1ba-a153-4cbb-ac22-a577f49f76e1">
+      <name>LegalNameContract</name>
+      <synonym>
+        <key>en</key>
+        <value>Legal name contract</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.LegalNameContracts</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <choiceParameterLinks>
+        <name>Filter.Company</name>
+        <field>Document.BankReceipt.TabularSection.PaymentList.Attribute.Payer</field>
+      </choiceParameterLinks>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>

@@ -1,3 +1,11 @@
+#Region PrintForm
+
+Function GetPrintForm(Ref, PrintFormName, AddInfo = Undefined) Export
+	Return Undefined;
+EndFunction
+
+#EndRegion
+
 #Region Posting
 
 Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
@@ -78,13 +86,13 @@ EndProcedure
 
 Function GetInformationAboutMovements(Ref) Export
 	Str = New Structure;
-	Str.Insert("QueryParamenters", GetAdditionalQueryParamenters(Ref));
+	Str.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
 	Str.Insert("QueryTextsMasterTables", GetQueryTextsMasterTables());
 	Str.Insert("QueryTextsSecondaryTables", GetQueryTextsSecondaryTables());
 	Return Str;
 EndFunction
 
-Function GetAdditionalQueryParamenters(Ref)
+Function GetAdditionalQueryParameters(Ref)
 	StrParams = New Structure();
 	StrParams.Insert("Ref", Ref);
 	Return StrParams;
@@ -104,10 +112,12 @@ EndFunction
 
 Function GetQueryTextsMasterTables()
 	QueryArray = New Array;
+	QueryArray.Add(R1001T_Purchases());
 	QueryArray.Add(R1002T_PurchaseReturns());
 	QueryArray.Add(R1005T_PurchaseSpecialOffers());
 	QueryArray.Add(R1012B_PurchaseOrdersInvoiceClosing());
 	QueryArray.Add(R1021B_VendorsTransactions());
+	QueryArray.Add(R1020B_AdvancesToVendors());
 	QueryArray.Add(R1031B_ReceiptInvoicing());
 	QueryArray.Add(R1040B_TaxesOutgoing());
 	QueryArray.Add(R4010B_ActualStocks());
@@ -170,6 +180,8 @@ Function ItemList()
 		|			END
 		|		ELSE UNDEFINED
 		|	END AS BasisDocument,
+		|	PurchaseReturnItemList.Ref AS AdvanceBasis,
+		|	PurchaseReturnItemList.Ref.DueAsAdvance AS DueAsAdvance,
 		|	PurchaseReturnItemList.QuantityInBaseUnit AS Quantity,
 		|	PurchaseReturnItemList.TotalAmount AS TotalAmount,
 		|	PurchaseReturnItemList.TotalAmount AS Amount,
@@ -188,7 +200,7 @@ Function ItemList()
 		|		OR VALUETYPE(PurchaseReturnItemList.PurchaseInvoice) <> TYPE(Document.PurchaseInvoice)
 		|			THEN PurchaseReturnItemList.Ref
 		|		ELSE PurchaseReturnItemList.PurchaseInvoice
-		|	END AS SalesInvoice,
+		|	END AS PurchaseInvoice,
 		|	TableRowIDInfo.RowID AS RowKey,
 		|	PurchaseReturnItemList.Key,
 		|	PurchaseReturnItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS IsService,
@@ -198,7 +210,10 @@ Function ItemList()
 		|	PurchaseReturnItemList.ProfitLossCenter AS ProfitLossCenter,
 		|	PurchaseReturnItemList.ExpenseType AS ExpenseType,
 		|	PurchaseReturnItemList.AdditionalAnalytic AS AdditionalAnalytic,
-		|	PurchaseReturnItemList.Ref.Branch AS Branch
+		|	PurchaseReturnItemList.Ref.Branch AS Branch,
+		|	PurchaseReturnItemList.Ref.LegalNameContract AS LegalNameContract,
+		|	PurchaseReturnItemList.OffersAmount,
+		|	PurchaseReturnItemList.Detail AS Detail
 		|INTO ItemList
 		|FROM
 		|	Document.PurchaseReturn.ItemList AS PurchaseReturnItemList
@@ -290,9 +305,26 @@ Function Taxes()
 		|		AND PurchaseReturnTaxList.Ref = &Ref";
 EndFunction
 
+Function R1001T_Purchases()
+	Return
+		"SELECT 
+		|	- ItemList.Quantity AS Quantity,
+		|	- ItemList.Amount AS Amount,
+		|	- ItemList.NetAmount AS NetAmount,
+		|	- ItemList.OffersAmount AS OffersAmount,
+		|	ItemList.PurchaseInvoice AS Invoice,
+		|	*
+		|INTO R1001T_Purchases
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE TRUE";
+EndFunction
+
 Function R1002T_PurchaseReturns()
 	Return
-		"SELECT *
+		"SELECT
+		|	ItemList.PurchaseInvoice AS Invoice, 
+		|	*
 		|INTO R1002T_PurchaseReturns
 		|FROM
 		|	ItemList AS ItemList
@@ -340,6 +372,8 @@ Function R1021B_VendorsTransactions()
 		|INTO R1021B_VendorsTransactions
 		|FROM
 		|	ItemList AS ItemList
+		|WHERE
+		|	NOT ItemList.DueAsAdvance
 		|GROUP BY
 		|	ItemList.Agreement,
 		|	ItemList.Company,
@@ -351,6 +385,19 @@ Function R1021B_VendorsTransactions()
 		|	ItemList.Period,
 		|	VALUE(AccumulationRecordType.Receipt)";
 EndFunction
+
+Function R1020B_AdvancesToVendors()
+	Return
+		"SELECT
+		|	ItemList.AdvanceBasis AS Basis, 
+		|	*
+		|INTO R1020B_AdvancesToVendors
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	ItemList.DueAsAdvance";
+EndFunction
+
 
 Function R1031B_ReceiptInvoicing()
 	Return
@@ -491,6 +538,7 @@ Function R5010B_ReconciliationStatement()
 		|	ItemList.Company AS Company,
 		|	ItemList.Branch AS Branch,
 		|	ItemList.LegalName AS LegalName,
+		|	ItemList.LegalNameContract AS LegalNameContract,
 		|	ItemList.Currency AS Currency,
 		|	- SUM(ItemList.Amount) AS Amount,
 		|	ItemList.Period
@@ -501,6 +549,7 @@ Function R5010B_ReconciliationStatement()
 		|	ItemList.Company,
 		|	ItemList.Branch,
 		|	ItemList.LegalName,
+		|	ItemList.LegalNameContract,
 		|	ItemList.Currency,
 		|	ItemList.Period";
 EndFunction
@@ -511,7 +560,8 @@ Function R5022T_Expenses()
 	Return
 		"SELECT
 		|	*,
-		|	- ItemList.NetAmount AS Amount
+		|	- ItemList.NetAmount AS Amount,
+		|	- ItemList.TotalAmount AS AmountWithTaxes
 		|INTO R5022T_Expenses
 		|FROM
 		|	ItemList AS ItemList

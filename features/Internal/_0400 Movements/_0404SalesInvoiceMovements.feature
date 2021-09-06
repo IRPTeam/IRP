@@ -43,6 +43,7 @@ Scenario: _040130 preparation (Sales invoice)
 		When Create catalog Stores objects
 		When Create catalog Partners objects
 		When Create catalog Companies objects (partners company)
+		When Create catalog LegalNameContracts objects
 		When Create information register PartnerSegments records
 		When Create catalog PartnerSegments objects
 		When Create chart of characteristic types CurrencyMovementType objects
@@ -177,12 +178,12 @@ Scenario: _040132 check Sales invoice movements by the Register  "R5010 Reconcil
 		And I select "R5010 Reconciliation statement" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales invoice 1 dated 28.01.2021 18:48:53'  | ''            | ''                    | ''          | ''             | ''                        | ''         | ''                  |
-			| 'Document registrations records'             | ''            | ''                    | ''          | ''             | ''                        | ''         | ''                  |
-			| 'Register  "R5010 Reconciliation statement"' | ''            | ''                    | ''          | ''             | ''                        | ''         | ''                  |
-			| ''                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                        | ''         | ''                  |
-			| ''                                           | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'                  | 'Currency' | 'Legal name'        |
-			| ''                                           | 'Receipt'     | '28.01.2021 18:48:53' | '3 914'     | 'Main Company' | 'Distribution department' | 'TRY'      | 'Company Ferron BP' |
+			| 'Sales invoice 1 dated 28.01.2021 18:48:53'  | ''            | ''                    | ''          | ''             | ''                        | ''         | ''                  | ''                    |
+			| 'Document registrations records'             | ''            | ''                    | ''          | ''             | ''                        | ''         | ''                  | ''                    |
+			| 'Register  "R5010 Reconciliation statement"' | ''            | ''                    | ''          | ''             | ''                        | ''         | ''                  | ''                    |
+			| ''                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                        | ''         | ''                  | ''                    |
+			| ''                                           | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'                  | 'Currency' | 'Legal name'        | 'Legal name contract' |
+			| ''                                           | 'Receipt'     | '28.01.2021 18:48:53' | '3 914'     | 'Main Company' | 'Distribution department' | 'TRY'      | 'Company Ferron BP' | 'Contract Ferron BP'  |
 		And I close all client application windows
 		
 Scenario: _040133 check Sales invoice movements by the Register  "R4010 Actual stocks" (use SC, SC first)
@@ -536,19 +537,19 @@ Scenario: _0401446 check Sales invoice movements by the Register  "R5021 Revenue
 		And I select "R5021 Revenues" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains values
-			| 'Period'              | 'Resources' | 'Dimensions'   | ''                        | ''        | ''         | ''    | '' | ''                        |
-			| '28.01.2021 18:49:39' | '13,78'     | 'Main Company' | 'Distribution department' | 'Revenue' | 'Interner' | 'USD' | '' | 'Reporting currency'      |
-			| '28.01.2021 18:49:39' | '80,51'     | 'Main Company' | 'Distribution department' | 'Revenue' | 'Interner' | 'TRY' | '' | 'Local currency'          |
-			| '28.01.2021 18:49:39' | '80,51'     | 'Main Company' | 'Distribution department' | 'Revenue' | 'Interner' | 'TRY' | '' | 'TRY'                     |
-			| '28.01.2021 18:49:39' | '80,51'     | 'Main Company' | 'Distribution department' | 'Revenue' | 'Interner' | 'TRY' | '' | 'en description is empty' |
-			| '28.01.2021 18:49:39' | '358,36'    | 'Main Company' | 'Distribution department' | 'Revenue' | 'XS/Blue'  | 'USD' | '' | 'Reporting currency'      |
-			| '28.01.2021 18:49:39' | '482,41'    | 'Main Company' | 'Distribution department' | 'Revenue' | '36/Red'   | 'USD' | '' | 'Reporting currency'      |
-			| '28.01.2021 18:49:39' | '2 093,2'   | 'Main Company' | 'Distribution department' | 'Revenue' | 'XS/Blue'  | 'TRY' | '' | 'Local currency'          |
-			| '28.01.2021 18:49:39' | '2 093,2'   | 'Main Company' | 'Distribution department' | 'Revenue' | 'XS/Blue'  | 'TRY' | '' | 'TRY'                     |
-			| '28.01.2021 18:49:39' | '2 093,2'   | 'Main Company' | 'Distribution department' | 'Revenue' | 'XS/Blue'  | 'TRY' | '' | 'en description is empty' |
-			| '28.01.2021 18:49:39' | '2 817,8'   | 'Main Company' | 'Distribution department' | 'Revenue' | '36/Red'   | 'TRY' | '' | 'Local currency'          |
-			| '28.01.2021 18:49:39' | '2 817,8'   | 'Main Company' | 'Distribution department' | 'Revenue' | '36/Red'   | 'TRY' | '' | 'TRY'                     |
-			| '28.01.2021 18:49:39' | '2 817,8'   | 'Main Company' | 'Distribution department' | 'Revenue' | '36/Red'   | 'TRY' | '' | 'en description is empty' |
+			| 'Period'              | 'Amount'    | 'Amount with taxes' | 'Dimensions'   | ''                        | ''        | ''         | ''    | '' | ''                        |
+			| '28.01.2021 18:49:39' | '13,78'     | '16,26'             | 'Main Company' | 'Distribution department' | 'Revenue' | 'Interner' | 'USD' | '' | 'Reporting currency'      |
+			| '28.01.2021 18:49:39' | '80,51'     | '95'                | 'Main Company' | 'Distribution department' | 'Revenue' | 'Interner' | 'TRY' | '' | 'Local currency'          |
+			| '28.01.2021 18:49:39' | '80,51'     | '95'                | 'Main Company' | 'Distribution department' | 'Revenue' | 'Interner' | 'TRY' | '' | 'TRY'                     |
+			| '28.01.2021 18:49:39' | '80,51'     | '95'                | 'Main Company' | 'Distribution department' | 'Revenue' | 'Interner' | 'TRY' | '' | 'en description is empty' |
+			| '28.01.2021 18:49:39' | '358,36'    | '422,86'            | 'Main Company' | 'Distribution department' | 'Revenue' | 'XS/Blue'  | 'USD' | '' | 'Reporting currency'      |
+			| '28.01.2021 18:49:39' | '482,41'    | '569,24'            | 'Main Company' | 'Distribution department' | 'Revenue' | '36/Red'   | 'USD' | '' | 'Reporting currency'      |
+			| '28.01.2021 18:49:39' | '2 093,2'   | '2 470'             | 'Main Company' | 'Distribution department' | 'Revenue' | 'XS/Blue'  | 'TRY' | '' | 'Local currency'          |
+			| '28.01.2021 18:49:39' | '2 093,2'   | '2 470'             | 'Main Company' | 'Distribution department' | 'Revenue' | 'XS/Blue'  | 'TRY' | '' | 'TRY'                     |
+			| '28.01.2021 18:49:39' | '2 093,2'   | '2 470'             | 'Main Company' | 'Distribution department' | 'Revenue' | 'XS/Blue'  | 'TRY' | '' | 'en description is empty' |
+			| '28.01.2021 18:49:39' | '2 817,8'   | '3 325'             | 'Main Company' | 'Distribution department' | 'Revenue' | '36/Red'   | 'TRY' | '' | 'Local currency'          |
+			| '28.01.2021 18:49:39' | '2 817,8'   | '3 325'             | 'Main Company' | 'Distribution department' | 'Revenue' | '36/Red'   | 'TRY' | '' | 'TRY'                     |
+			| '28.01.2021 18:49:39' | '2 817,8'   | '3 325'             | 'Main Company' | 'Distribution department' | 'Revenue' | '36/Red'   | 'TRY' | '' | 'en description is empty' |				
 		And I close all client application windows	
 
 

@@ -76,7 +76,7 @@ Function GetDocumentTable_CashTransferOrder(ArrayOfBasisDocuments, EndOfDate = U
 	|	tmp.BasedOn AS BasedOn,
 	|	tmp.TransactionType AS TransactionType,
 	|	tmp.Company AS Company,
-	|	tmp.MovementType AS MovementType,
+	|	tmp.FinancialMovementType AS FinancialMovementType,
 	|	tmp.Account AS Account,
 	|	tmp.TransitAccount AS TransitAccount,
 	|	tmp.Currency AS Currency,
@@ -97,7 +97,7 @@ Function GetDocumentTable_CashTransferOrder_QueryText() Export
 	|			THEN VALUE(Enum.OutgoingPaymentTransactionTypes.CashTransferOrder)
 	|		ELSE VALUE(Enum.OutgoingPaymentTransactionTypes.CurrencyExchange)
 	|	END AS TransactionType,
-	|	R3035T_CashPlanningTurnovers.MovementType AS MovementType,
+	|	R3035T_CashPlanningTurnovers.FinancialMovementType AS FinancialMovementType,
 	|	R3035T_CashPlanningTurnovers.Company AS Company,
 	|	R3035T_CashPlanningTurnovers.Account AS Account,
 	|	R3035T_CashPlanningTurnovers.Account.TransitAccount AS TransitAccount,

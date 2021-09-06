@@ -481,12 +481,18 @@ Scenario: _2990006 create Stock adjustment as surplus based on Physical inventor
 			| 'Description'  |
 			| 'Store 05' |
 		And I select current line in "List" table
+		And I move to "Other" tab
+		And I click Choice button of the field named "Branch"
+		And I go to line in "List" table
+			| 'Description'             |
+			| 'Logistics department' |
+		And I select current line in "List" table	
 	* Filling ItemList tab and check link/unlink line
 		* Add item from Physical inventory
 			And I click "AddBasisDocuments" button
 			And I go to line in "BasisesTree" table
 				| 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
-				| '5,000'    | 'Dress, S/Yellow'  | 'pcs'  | 'No'  |
+				| '5,000'    | 'Dress (S/Yellow)'  | 'pcs'  | 'No'  |
 			And I change "Use" checkbox in "BasisesTree" table
 			And I finish line editing in "BasisesTree" table
 			And I click "Ok" button
@@ -524,10 +530,11 @@ Scenario: _2990006 create Stock adjustment as surplus based on Physical inventor
 			Then the number of "RowIDInfo" table lines is "равно" "1"
 		* Unlink line and check Row ID info tab
 			And I click "LinkUnlinkBasisDocuments" button
+			And I set checkbox "Linked documents"		
 			And I activate field named "ItemListRowsRowPresentation" in "ItemListRows" table
 			And I go to line in "ResultsTree" table
 				| 'Quantity' | 'Row presentation' | 'Unit' |
-				| '5,000'    | 'Dress, S/Yellow'  | 'pcs'  |
+				| '5,000'    | 'Dress (S/Yellow)'  | 'pcs'  |
 			And I click "Unlink" button
 			And I click "Ok" button
 			And "ItemList" table contains lines
@@ -543,12 +550,12 @@ Scenario: _2990006 create Stock adjustment as surplus based on Physical inventor
 			And I click "LinkUnlinkBasisDocuments" button
 			And I go to line in "BasisesTree" table
 				| 'Quantity' | 'Row presentation' | 'Unit' |
-				| '5,000'    | 'Dress, S/Yellow'  | 'pcs'  |
+				| '5,000'    | 'Dress (S/Yellow)'  | 'pcs'  |
 			And I click "Link" button
 			And I click "Ok" button
 			And "ItemList" table contains lines
-				| 'Item'  | 'Quantity' | 'Item key' | 'Profit loss center' | 'Unit' | 'Revenue type' | 'Basis document'               |
-				| 'Dress' | '5,000'    | 'S/Yellow' | ''              | 'pcs'  | ''             | '$$PhysicalInventory2990004$$' |
+				| 'Item'  | 'Quantity' | 'Item key' | 'Profit loss center'   | 'Unit' | 'Revenue type' | 'Basis document'               |
+				| 'Dress' | '5,000'    | 'S/Yellow' | 'Logistics department' | 'pcs'  | 'Revenue'      | '$$PhysicalInventory2990004$$' |
 			And I select current line in "ItemList" table
 			And I click choice button of the attribute named "ItemListProfitLossCenter" in "ItemList" table
 			And I go to line in "List" table
@@ -589,7 +596,7 @@ Scenario: _2990007 create Stock adjustment as write off based on Physical invent
 			And I click "AddBasisDocuments" button
 			And I go to line in "BasisesTree" table
 				| 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
-				| '2,000'    | 'Dress, XS/Blue'  | 'pcs'  | 'No'  |
+				| '2,000'    | 'Dress (XS/Blue)'  | 'pcs'  | 'No'  |
 			And I change "Use" checkbox in "BasisesTree" table
 			And I finish line editing in "BasisesTree" table
 			And I click "Ok" button
@@ -628,9 +635,10 @@ Scenario: _2990007 create Stock adjustment as write off based on Physical invent
 		* Unlink line and check Row ID info tab
 			And I click "LinkUnlinkBasisDocuments" button
 			And I activate field named "ItemListRowsRowPresentation" in "ItemListRows" table
+			And I set checkbox "Linked documents"	
 			And I go to line in "ResultsTree" table
 				| 'Quantity' | 'Row presentation' | 'Unit' |
-				| '2,000'    | 'Dress, XS/Blue'  | 'pcs'  |
+				| '2,000'    | 'Dress (XS/Blue)'  | 'pcs'  |
 			And I click "Unlink" button
 			And I click "Ok" button
 			And "ItemList" table contains lines
@@ -646,12 +654,12 @@ Scenario: _2990007 create Stock adjustment as write off based on Physical invent
 			And I click "LinkUnlinkBasisDocuments" button
 			And I go to line in "BasisesTree" table
 				| 'Quantity' | 'Row presentation' | 'Unit' |
-				| '2,000'    | 'Dress, XS/Blue'  | 'pcs'  |
+				| '2,000'    | 'Dress (XS/Blue)'  | 'pcs'  |
 			And I click "Link" button
 			And I click "Ok" button
 			And "ItemList" table contains lines
-				| 'Item'  | 'Quantity' | 'Item key' | 'Profit loss center' | 'Unit' | 'Expense type' | 'Basis document'               |
-				| 'Dress' | '2,000'    | 'XS/Blue'  | ''              | 'pcs'  | ''             | '$$PhysicalInventory2990004$$' |
+				| 'Item'  | 'Quantity' | 'Item key' | 'Profit loss center'   | 'Unit' | 'Expense type' | 'Basis document'               |
+				| 'Dress' | '2,000'    | 'XS/Blue'  | 'Logistics department' | 'pcs'  | 'Expense'      | '$$PhysicalInventory2990004$$' |
 			And I select current line in "ItemList" table
 			And I click choice button of the attribute named "ItemListProfitLossCenter" in "ItemList" table
 			And I go to line in "List" table

@@ -63,6 +63,7 @@ Scenario: _043300 preparation (Bank payment)
 	* Tax settings
 		When filling in Tax settings for company
 	When Create Document discount
+	When Create catalog LegalNameContracts objects
 	* Add plugin for discount
 		Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		If "List" table does not contain lines Then
@@ -132,6 +133,9 @@ Scenario: _043300 preparation (Bank payment)
 			| "Documents.BankPayment.FindByNumber(323).GetObject().Write(DocumentWriteMode.Posting);" |
 			| "Documents.BankPayment.FindByNumber(324).GetObject().Write(DocumentWriteMode.Posting);" |
 			| "Documents.BankPayment.FindByNumber(325).GetObject().Write(DocumentWriteMode.Posting);" |
+		When Create document BankPayment objects (return to customer)
+		And I execute 1C:Enterprise script at server
+			| "Documents.BankPayment.FindByNumber(326).GetObject().Write(DocumentWriteMode.Posting);" |
 		
 Scenario: _043301 check Bank payment movements by the Register "R3010 Cash on hand"
 	* Select Bank payment
@@ -167,12 +171,12 @@ Scenario: _043302 check Bank payment movements by the Register "R5010 Reconcilia
 		And I select "R5010 Reconciliation statement" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Bank payment 1 dated 07.09.2020 19:16:43'   | ''            | ''                    | ''          | ''             | ''             | ''           | ''                  |
-			| 'Document registrations records'             | ''            | ''                    | ''          | ''             | ''             |  ''          |''                   |
-			| 'Register  "R5010 Reconciliation statement"' | ''            | ''                    | ''          | ''             | ''             | ''           | ''                  |
-			| ''                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''           | ''                  |
-			| ''                                           | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'       |'Currency'    | 'Legal name'        |
-			| ''                                           | 'Receipt'     | '07.09.2020 19:16:43' | '1 000'     | 'Main Company' | ''             | 'TRY'        | 'Company Ferron BP' |
+			| 'Bank payment 1 dated 07.09.2020 19:16:43'   | ''            | ''                    | ''          | ''             | ''             | ''           | ''                  | ''                  |
+			| 'Document registrations records'             | ''            | ''                    | ''          | ''             | ''             |  ''          |''                   | ''                  |
+			| 'Register  "R5010 Reconciliation statement"' | ''            | ''                    | ''          | ''             | ''             | ''           | ''                  | ''                  |
+			| ''                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''           | ''                  | ''                  |
+			| ''                                           | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'       |'Currency'    | 'Legal name'        |'Legal name contract'|
+			| ''                                           | 'Receipt'     | '07.09.2020 19:16:43' | '1 000'     | 'Main Company' | ''             | 'TRY'        | 'Company Ferron BP' |'Contract Ferron BP' |
 	And I close all client application windows
 
 Scenario: _043303 check Bank payment movements by the Register "R5010 Reconciliation statement" (cash transfer, currency exchange)
@@ -300,7 +304,7 @@ Scenario: _043315 check Bank payment movements by the Register "R3035 Cash plann
 			| 'Document registrations records'             | ''                    | ''          | ''             | ''       | ''                                                     | ''                  | ''         | ''                    | ''          | ''                  | ''                             | ''                | ''                | ''                     |
 			| 'Register  "R3035 Cash planning"'            | ''                    | ''          | ''             | ''       | ''                                                     | ''                  | ''         | ''                    | ''          | ''                  | ''                             | ''                | ''                | ''                     |
 			| ''                                           | 'Period'              | 'Resources' | 'Dimensions'   | ''       | ''                                                     | ''                  | ''         | ''                    | ''          | ''                  | ''                             | ''                | ''                | 'Attributes'           |
-			| ''                                           | ''                    | 'Amount'    | 'Company'      | 'Branch' | 'Basis document'                                       | 'Account'           | 'Currency' | 'Cash flow direction' | 'Partner'   | 'Legal name'        | 'Multi currency movement type' | 'Movement type'   | 'Planning period' | 'Deferred calculation' |
+			| ''                                           | ''                    | 'Amount'    | 'Company'      | 'Branch' | 'Basis document'                                       | 'Account'           | 'Currency' | 'Cash flow direction' | 'Partner'   | 'Legal name'        | 'Multi currency movement type' | 'Financial movement type'   | 'Planning period' | 'Deferred calculation' |
 			| ''                                           | '03.06.2021 17:01:44' | '-1 500'    | 'Main Company' | ''       | 'Outgoing payment order 323 dated 07.09.2020 19:23:44' | 'Bank account, TRY' | 'TRY'      | 'Outgoing'            | 'Ferron BP' | 'Company Ferron BP' | 'Local currency'               | 'Movement type 1' | 'First'           | 'No'                   |
 			| ''                                           | '03.06.2021 17:01:44' | '-1 500'    | 'Main Company' | ''       | 'Outgoing payment order 323 dated 07.09.2020 19:23:44' | 'Bank account, TRY' | 'TRY'      | 'Outgoing'            | 'Ferron BP' | 'Company Ferron BP' | 'en description is empty'      | 'Movement type 1' | 'First'           | 'No'                   |
 			| ''                                           | '03.06.2021 17:01:44' | '-400'      | 'Main Company' | ''       | 'Outgoing payment order 323 dated 07.09.2020 19:23:44' | 'Bank account, TRY' | 'TRY'      | 'Outgoing'            | 'Kalipso'   | 'Company Kalipso'   | 'Local currency'               | 'Movement type 1' | 'First'           | 'No'                   |
@@ -325,7 +329,7 @@ Scenario: _043316 check Bank payment movements by the Register "R3035 Cash plann
 			| 'Document registrations records'             | ''                    | ''          | ''             | ''       | ''                                                | ''                  | ''         | ''                    | ''        | ''           | ''                             | ''                | ''                | ''                     |
 			| 'Register  "R3035 Cash planning"'            | ''                    | ''          | ''             | ''       | ''                                                | ''                  | ''         | ''                    | ''        | ''           | ''                             | ''                | ''                | ''                     |
 			| ''                                           | 'Period'              | 'Resources' | 'Dimensions'   | ''       | ''                                                | ''                  | ''         | ''                    | ''        | ''           | ''                             | ''                | ''                | 'Attributes'           |
-			| ''                                           | ''                    | 'Amount'    | 'Company'      | 'Branch' | 'Basis document'                                  | 'Account'           | 'Currency' | 'Cash flow direction' | 'Partner' | 'Legal name' | 'Multi currency movement type' | 'Movement type'   | 'Planning period' | 'Deferred calculation' |
+			| ''                                           | ''                    | 'Amount'    | 'Company'      | 'Branch' | 'Basis document'                                  | 'Account'           | 'Currency' | 'Cash flow direction' | 'Partner' | 'Legal name' | 'Multi currency movement type' | 'Financial movement type'   | 'Planning period' | 'Deferred calculation' |
 			| ''                                           | '03.06.2021 17:05:34' | '-1 000'    | 'Main Company' | ''       | 'Cash transfer order 3 dated 05.04.2021 12:23:49' | 'Bank account, TRY' | 'TRY'      | 'Outgoing'            | ''        | ''           | 'Local currency'               | 'Movement type 1' | ''                | 'No'                   |
 			| ''                                           | '03.06.2021 17:05:34' | '-1 000'    | 'Main Company' | ''       | 'Cash transfer order 3 dated 05.04.2021 12:23:49' | 'Bank account, TRY' | 'TRY'      | 'Outgoing'            | ''        | ''           | 'en description is empty'      | 'Movement type 1' | ''                | 'No'                   |
 			| ''                                           | '03.06.2021 17:05:34' | '-171,2'    | 'Main Company' | ''       | 'Cash transfer order 3 dated 05.04.2021 12:23:49' | 'Bank account, TRY' | 'USD'      | 'Outgoing'            | ''        | ''           | 'Reporting currency'           | 'Movement type 1' | ''                | 'No'                   |
@@ -347,11 +351,14 @@ Scenario: _043317 check Bank payment movements by the Register "R3035 Cash plann
 			| 'Document registrations records'             | ''                    | ''          | ''             | ''       | ''                                                | ''                  | ''         | ''                    | ''        | ''           | ''                             | ''                | ''                | ''                     |
 			| 'Register  "R3035 Cash planning"'            | ''                    | ''          | ''             | ''       | ''                                                | ''                  | ''         | ''                    | ''        | ''           | ''                             | ''                | ''                | ''                     |
 			| ''                                           | 'Period'              | 'Resources' | 'Dimensions'   | ''       | ''                                                | ''                  | ''         | ''                    | ''        | ''           | ''                             | ''                | ''                | 'Attributes'           |
-			| ''                                           | ''                    | 'Amount'    | 'Company'      | 'Branch' | 'Basis document'                                  | 'Account'           | 'Currency' | 'Cash flow direction' | 'Partner' | 'Legal name' | 'Multi currency movement type' | 'Movement type'   | 'Planning period' | 'Deferred calculation' |
+			| ''                                           | ''                    | 'Amount'    | 'Company'      | 'Branch' | 'Basis document'                                  | 'Account'           | 'Currency' | 'Cash flow direction' | 'Partner' | 'Legal name' | 'Multi currency movement type' | 'Financial movement type'   | 'Planning period' | 'Deferred calculation' |
 			| ''                                           | '03.06.2021 17:04:49' | '-4 500'    | 'Main Company' | ''       | 'Cash transfer order 2 dated 05.04.2021 12:09:54' | 'Bank account, EUR' | 'TRY'      | 'Outgoing'            | ''        | ''           | 'Local currency'               | 'Movement type 1' | ''                | 'No'                   |
 			| ''                                           | '03.06.2021 17:04:49' | '-550'      | 'Main Company' | ''       | 'Cash transfer order 2 dated 05.04.2021 12:09:54' | 'Bank account, EUR' | 'USD'      | 'Outgoing'            | ''        | ''           | 'Reporting currency'           | 'Movement type 1' | ''                | 'No'                   |
 			| ''                                           | '03.06.2021 17:04:49' | '-500'      | 'Main Company' | ''       | 'Cash transfer order 2 dated 05.04.2021 12:09:54' | 'Bank account, EUR' | 'EUR'      | 'Outgoing'            | ''        | ''           | 'en description is empty'      | 'Movement type 1' | ''                | 'No'                   |
 	And I close all client application windows
+
+	
+		
 
 Scenario: _043318 check absence Bank payment movements by the Register "R3035 Cash planning" (without planning transaction basis)
 	And I close all client application windows
@@ -366,6 +373,50 @@ Scenario: _043318 check absence Bank payment movements by the Register "R3035 Ca
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document does not contain values
 			| 'R3035 Cash planning'   | 
+	And I close all client application windows
+
+Scenario: _043319 check Bank payment movements by the Register "R5022 Expenses" (with  comission)
+	And I close all client application windows
+	* Select Bank payment
+		Given I open hyperlink "e1cib/list/Document.BankPayment"
+		And I go to line in "List" table
+			| 'Number' | 'Date'                |
+			| '323'    | '03.06.2021 17:01:44' |
+	* Check movements by the Register  "R5022 Expenses" 
+		And I click "Registrations report" button
+		And I select "R5022 Expenses" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Bank payment 323 dated 03.06.2021 17:01:44' | ''                    | ''          | ''                  | ''             | ''       | ''                   | ''             | ''         | ''         | ''                    | ''                             |
+			| 'Document registrations records'             | ''                    | ''          | ''                  | ''             | ''       | ''                   | ''             | ''         | ''         | ''                    | ''                             |
+			| 'Register  "R5022 Expenses"'                 | ''                    | ''          | ''                  | ''             | ''       | ''                   | ''             | ''         | ''         | ''                    | ''                             |
+			| ''                                           | 'Period'              | 'Resources' | ''                  | 'Dimensions'   | ''       | ''                   | ''             | ''         | ''         | ''                    | ''                             |
+			| ''                                           | ''                    | 'Amount'    | 'Amount with taxes' | 'Company'      | 'Branch' | 'Profit loss center' | 'Expense type' | 'Item key' | 'Currency' | 'Additional analytic' | 'Multi currency movement type' |
+			| ''                                           | '03.06.2021 17:01:44' | '2,57'      | '2,57'              | 'Main Company' | ''       | 'Front office'       | 'Expense'      | ''         | 'USD'      | ''                    | 'Reporting currency'           |
+			| ''                                           | '03.06.2021 17:01:44' | '15'        | '15'                | 'Main Company' | ''       | 'Front office'       | 'Expense'      | ''         | 'TRY'      | ''                    | 'Local currency'               |
+			| ''                                           | '03.06.2021 17:01:44' | '15'        | '15'                | 'Main Company' | ''       | 'Front office'       | 'Expense'      | ''         | 'TRY'      | ''                    | 'en description is empty'      |
+	And I close all client application windows
+
+Scenario: _043320 check Bank payment movements by the Register "R3010 Cash on hand" (Return to customer, without basis)
+	And I close all client application windows
+	* Select Bank payment
+		Given I open hyperlink "e1cib/list/Document.BankPayment"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '326' |
+	* Check movements by the Register  "R3010 Cash on hand" 
+		And I click "Registrations report" button
+		And I select "R3010 Cash on hand" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Bank payment 326 dated 02.09.2021 14:24:44' | ''            | ''                    | ''          | ''             | ''                        | ''                  | ''         | ''                             | ''                     |
+			| 'Document registrations records'             | ''            | ''                    | ''          | ''             | ''                        | ''                  | ''         | ''                             | ''                     |
+			| 'Register  "R3010 Cash on hand"'             | ''            | ''                    | ''          | ''             | ''                        | ''                  | ''         | ''                             | ''                     |
+			| ''                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                        | ''                  | ''         | ''                             | 'Attributes'           |
+			| ''                                           | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'                  | 'Account'           | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
+			| ''                                           | 'Expense'     | '02.09.2021 14:24:44' | '17,12'     | 'Main Company' | 'Distribution department' | 'Bank account, TRY' | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                           | 'Expense'     | '02.09.2021 14:24:44' | '100'       | 'Main Company' | 'Distribution department' | 'Bank account, TRY' | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                           | 'Expense'     | '02.09.2021 14:24:44' | '100'       | 'Main Company' | 'Distribution department' | 'Bank account, TRY' | 'TRY'      | 'en description is empty'      | 'No'                   |		
 	And I close all client application windows
 
 Scenario: _043330 Bank payment clear posting/mark for deletion

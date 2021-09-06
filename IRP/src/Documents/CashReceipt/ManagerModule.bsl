@@ -1,3 +1,11 @@
+#Region PrintForm
+
+Function GetPrintForm(Ref, PrintFormName, AddInfo = Undefined) Export
+	Return Undefined;
+EndFunction
+
+#EndRegion
+
 #Region Posting
 
 Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
@@ -238,6 +246,7 @@ Procedure FillAttributesByType(TransactionType, ArrayAll, ArrayByType) Export
 	ArrayAll.Add("PaymentList.Amount");
 	ArrayAll.Add("PaymentList.Agreement");
 	ArrayAll.Add("PaymentList.AmountExchange");
+	ArrayAll.Add("PaymentList.LegalNameContract");
 	
 	ArrayByType = New Array();
 	If TransactionType = Enums.IncomingPaymentTransactionType.CashTransferOrder Then
@@ -277,7 +286,7 @@ Procedure FillAttributesByType(TransactionType, ArrayAll, ArrayByType) Export
 		ArrayByType.Add("PaymentList.PlaningTransactionBasis");
 		ArrayByType.Add("PaymentList.Amount");
 		ArrayByType.Add("PaymentList.Agreement");
-		
+		ArrayByType.Add("PaymentList.LegalNameContract");
 	Else // empty
 		ArrayByType.Add("Company");
 		ArrayByType.Add("Currency");
@@ -291,13 +300,13 @@ EndProcedure
 #Region NewRegistersPosting
 Function GetInformationAboutMovements(Ref) Export
 	Str = New Structure;
-	Str.Insert("QueryParamenters", GetAdditionalQueryParamenters(Ref));
+	Str.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
 	Str.Insert("QueryTextsMasterTables", GetQueryTextsMasterTables());
 	Str.Insert("QueryTextsSecondaryTables", GetQueryTextsSecondaryTables());
 	Return Str;
 EndFunction
 
-Function GetAdditionalQueryParamenters(Ref)
+Function GetAdditionalQueryParameters(Ref)
 	StrParams = New Structure();
 	StrParams.Insert("Ref", Ref);
 	Return StrParams;
@@ -364,7 +373,7 @@ Function PaymentList()
 	|	PaymentList.PlaningTransactionBasis AS PlaningTransactionBasis,
 	|	PaymentList.Partner.Employee AS IsEmployee,
 	|	PaymentList.Amount,
-	|	PaymentList.MovementType AS MovementType,
+	|	PaymentList.FinancialMovementType AS FinancialMovementType,
 	|	PaymentList.Ref.TransactionType = VALUE(Enum.IncomingPaymentTransactionType.PaymentFromCustomer) AS
 	|		IsPaymentFromCustomer,
 	|	PaymentList.Ref.TransactionType = VALUE(Enum.IncomingPaymentTransactionType.CurrencyExchange) AS IsCurrencyExchange,
@@ -375,7 +384,8 @@ Function PaymentList()
 	|   = VALUE(Enum.IncomingPaymentTransactionType.ReturnFromVendor) AS IsReturnFromVendor,
 	|	PaymentList.Ref.IgnoreAdvances AS IgnoreAdvances,
 	|	PaymentList.Partner,
-	|	PaymentList.Ref.Branch AS Branch
+	|	PaymentList.Ref.Branch AS Branch,
+	|	PaymentList.LegalNameContract AS LegalNameContract
 	|INTO PaymentList
 	|FROM
 	|	Document.CashReceipt.PaymentList AS PaymentList
@@ -404,7 +414,8 @@ Function R3010B_CashOnHand()
 		|	PaymentList AS PaymentList
 		|WHERE
 		|	PaymentList.IsPaymentFromCustomer
-		|	OR PaymentList.IsCashTransferOrder";
+		|	OR PaymentList.IsCashTransferOrder
+		|	OR PaymentList.IsReturnFromVendor";
 EndFunction
 
 Function R3015B_CashAdvance()
@@ -631,7 +642,7 @@ Function R3035T_CashPlanning()
 		|			THEN PaymentList.LegalName
 		|		ELSE VALUE(Catalog.Companies.EmptyRef)
 		|	END AS LegalName,
-		|	PaymentList.MovementType,
+		|	PaymentList.FinancialMovementType,
 		|	-PaymentList.Amount AS Amount,
 		|	PaymentList.Key
 		|INTO R3035T_CashPlanning

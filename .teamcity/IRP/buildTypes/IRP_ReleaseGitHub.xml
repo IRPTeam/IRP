@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<build-type xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="30f0c91e-5ea3-4f1f-ab5f-ca78a39f428e" xsi:noNamespaceSchemaLocation="https://www.jetbrains.com/teamcity/schemas/2020.1/project-config.xsd">
+<build-type xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="30f0c91e-5ea3-4f1f-ab5f-ca78a39f428e" xsi:noNamespaceSchemaLocation="https://www.jetbrains.com/teamcity/schemas/2021.1/project-config.xsd">
   <name>5. ReleaseGitHub</name>
   <description />
   <settings>
     <options>
       <option name="allowPersonalBuildTriggering" value="false" />
       <option name="artifactRules" value="NewRelease =&gt; NewRelease" />
-      <option name="branchFilter" value="+:master&#xD;&#xA;+:master_multilang" />
+      <option name="branchFilter" value="+:*multilang" />
       <option name="buildConfigurationType" value="DEPLOYMENT" />
       <option name="cleanBuild" value="true" />
       <option name="maximumNumberOfBuilds" value="1" />
       <option name="publishArtifactCondition" value="SUCCESSFUL" />
     </options>
     <disabled-settings>
-      <setting-ref ref="ARTIFACT_DEPENDENCY_9" />
       <setting-ref ref="RUNNER_17" />
       <setting-ref ref="TRIGGER_6" />
     </disabled-settings>
@@ -39,12 +38,9 @@ $sXML | foreach {
           <param name="teamcity.step.mode" value="default" />
         </parameters>
       </runner>
-      <runner id="RUNNER_17" name="Upload to github" type="simpleRunner">
+      <runner id="RUNNER_65" name="" type="ConvertFromEDTtoXML">
         <parameters>
-          <param name="script.content"><![CDATA[%teamcity.tool.windows-amd64-github-release%\bin\windows\amd64\github-release.exe release --security-token %env.GitHubSecurityToken% --user DitriXNew --repo irp --tag Release-v%env.Version%.%build.number% 
-%teamcity.tool.windows-amd64-github-release%\bin\windows\amd64\github-release.exe upload  --security-token %env.GitHubSecurityToken% --user DitriXNew --repo irp --tag Release-v%env.Version%.%build.number%  --name Release-v%env.Version%.%build.number%.cf --file %system.teamcity.build.workingDir%\IRP_develop.cf]]></param>
           <param name="teamcity.step.mode" value="default" />
-          <param name="use.custom.script" value="true" />
         </parameters>
       </runner>
       <runner id="RUNNER_21" name="Create files cf and cfu" type="simpleRunner">
@@ -58,7 +54,7 @@ echo ##teamcity[compilationFinished compiler='Log from 1C: %env.LogFile1C%']
 find /c "completed successfully" %env.LogFile1C% && ( echo Success ) || ( echo "##teamcity[message text='Error while Create template DB' status='FAILURE']" && exit 1)
 
 
-start /wait "1cv8.exe" %env.PathTo1CPlatform%  Designer %env.ConnectionTo1C% /Out %env.LogFile1C% /LoadCfg %system.teamcity.build.workingDir%\IRP_%teamcity.build.branch%.cf /UpdateDBCfg
+start /wait "1cv8.exe" %env.PathTo1CPlatform%  Designer %env.ConnectionTo1C% /Out %env.LogFile1C% /LoadConfigFromFiles %system.teamcity.build.workingDir%\xml /UpdateDBCfg
 echo ##teamcity[compilationStarted compiler='Log from 1C: %env.LogFile1C%']
 sh -c "while read line; do if [[ $line == *"Error"* ]]; then echo -e ""\e[31m $line""; else  echo -e ""\e[34m $line""; fi;  done < ""%env.LogFile1C%"";"
 echo ##teamcity[compilationFinished compiler='Log from 1C: %env.LogFile1C%']
@@ -66,12 +62,20 @@ echo ##teamcity[compilationFinished compiler='Log from 1C: %env.LogFile1C%']
 find /c "Configuration successfully updated" %env.LogFile1C% && ( echo Success ) || ( echo "##teamcity[message text='Error while Update DB Config' status='FAILURE']" && exit 1)
 
 
-start /wait "1cv8.exe" %env.PathTo1CPlatform%  Designer %env.ConnectionTo1C% /Out %env.LogFile1C% /CreateDistributionFiles -cffile NewRelease/IRP.cf -f IRP_master.cf /cfufile NewRelease/IRP.cfu -f LastRelease/IRP.cf
+start /wait "1cv8.exe" %env.PathTo1CPlatform%  Designer %env.ConnectionTo1C% /Out %env.LogFile1C% /CreateDistributionFiles -cffile NewRelease/IRP.cf
 echo ##teamcity[compilationStarted compiler='Log from 1C: %env.LogFile1C%']
 sh -c "while read line; do if [[ $line == *""<<?>>""* ]]; then echo -e ""\e[31m $line""; else  echo -e ""\e[34m $line""; fi;  done < ""%env.LogFile1C%"";"
 echo ##teamcity[compilationFinished compiler='Log from 1C: %env.LogFile1C%']
 
 find /c "Distribution files successfully created" %env.LogFile1C% && ( echo Success ) || ( echo "##teamcity[message text='Error while create distribution files' status='FAILURE']" && exit 1)]]></param>
+          <param name="teamcity.step.mode" value="default" />
+          <param name="use.custom.script" value="true" />
+        </parameters>
+      </runner>
+      <runner id="RUNNER_17" name="Upload to github" type="simpleRunner">
+        <parameters>
+          <param name="script.content"><![CDATA[%teamcity.tool.windows-amd64-github-release%\bin\windows\amd64\github-release.exe release --security-token %env.GitHubSecurityToken% --user DitriXNew --repo irp --tag Release-v%env.Version%.%build.number% 
+%teamcity.tool.windows-amd64-github-release%\bin\windows\amd64\github-release.exe upload  --security-token %env.GitHubSecurityToken% --user DitriXNew --repo irp --tag Release-v%env.Version%.%build.number%  --name Release-v%env.Version%.%build.number%.cf --file %system.teamcity.build.workingDir%\IRP_develop.cf]]></param>
           <param name="teamcity.step.mode" value="default" />
           <param name="use.custom.script" value="true" />
         </parameters>
@@ -90,22 +94,41 @@ find /c "Distribution files successfully created" %env.LogFile1C% && ( echo Succ
         </parameters>
       </build-trigger>
     </build-triggers>
+    <build-extensions>
+      <extension id="BUILD_EXT_36" type="JetBrains.FileContentReplacer">
+        <parameters>
+          <param name="teamcity.file.content.replacer.failBuild" value="true" />
+          <param name="teamcity.file.content.replacer.file.encoding" value="autodetect" />
+          <param name="teamcity.file.content.replacer.file.encoding.custom" value="autodetect" />
+          <param name="teamcity.file.content.replacer.pattern" value="Result = False; // CI delete" />
+          <param name="teamcity.file.content.replacer.pattern.case.sensitive" value="true" />
+          <param name="teamcity.file.content.replacer.regexMode" value="FIXED_STRINGS" />
+          <param name="teamcity.file.content.replacer.replacement" value="Result = AttachAddIn(LinkOnDriver, ObjectName[1]);" />
+          <param name="teamcity.file.content.replacer.wildcards" value="+:%teamcity.project.id%\src\CommonModules\HardwareClient\Module.bsl" />
+        </parameters>
+      </extension>
+    </build-extensions>
     <artifact-dependencies>
-      <dependency id="ARTIFACT_DEPENDENCY_7" sourceBuildTypeId="IRP_BuildCF" cleanDestination="false">
+      <dependency id="ARTIFACT_DEPENDENCY_7" sourceBuildTypeId="IRP_BuildCF" cleanDestination="true">
         <revisionRule name="sameChainOrLastFinished" revision="latest.sameChainOrLastFinished" />
-        <artifact sourcePath="IRP_%teamcity.build.branch%.cf" />
-      </dependency>
-      <dependency id="ARTIFACT_DEPENDENCY_9" sourceBuildTypeId="IRP_ReleaseGitHub" cleanDestination="false">
-        <revisionRule name="lastSuccessful" revision="latest.lastSuccessful" branch="+:master" />
-        <artifact sourcePath="NewRelease =&gt; LastRelease" />
+        <artifact sourcePath="%teamcity.project.id%.zip!** =&gt; %teamcity.project.id%" />
       </dependency>
     </artifact-dependencies>
     <dependencies>
       <depend-on sourceBuildTypeId="IRP_BuildCF">
         <options>
-          <option name="run-build-if-dependency-failed" value="CANCEL" />
           <option name="take-started-build-with-same-revisions" value="true" />
           <option name="take-successful-builds-only" value="true" />
+        </options>
+      </depend-on>
+      <depend-on sourceBuildTypeId="IRP_RunVA">
+        <options>
+          <option name="take-started-build-with-same-revisions" value="true" />
+        </options>
+      </depend-on>
+      <depend-on sourceBuildTypeId="IRP_SonarQube">
+        <options>
+          <option name="take-started-build-with-same-revisions" value="true" />
         </options>
       </depend-on>
     </dependencies>

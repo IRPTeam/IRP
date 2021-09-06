@@ -58,7 +58,7 @@ Scenario: _1002000 preparation (vendors aging)
 	* Tax settings
 		When filling in Tax settings for company
 	* Load vendors advance closing document
-		When Create document VendorsAdvancesClosing objects
+		When Create document VendorsAdvancesClosing objects (without branch)
 		Given I open hyperlink 'e1cib/list/Document.VendorsAdvancesClosing'
 		And I go to line in "List" table
 			| 'Number' |
@@ -394,23 +394,15 @@ Scenario: _1002020 create Credit note and check Aging register movements
 			| 'Description'   |
 			| 'Vendor Ferron, TRY' |
 		And I select current line in "List" table
-		And in "Transactions" table I move to the next cell
-		* Check the selection of basis documents for the specified partner
-			And delay 2
-			And I go to line in "List" table
-				| 'Document' |
-				| '$$PurchaseInvoiceAging$$'  |
-			And I select current line in "List" table
-			And I click the button named "FormCommandSelect" 
-			And I activate field named "TransactionsAmount" in "Transactions" table
-			And I input "100,00" text in the field named "TransactionsAmount" of "Transactions" table
-			And I finish line editing in "Transactions" table
-			And I click the button named "FormPost"
-			And I delete "$$CreditNote1002020$$" variable
-			And I delete "$$CreditNoteDate1002020$$" variable
-			And I save the window as "$$CreditNote1002020$$"
-			And I save the value of the field named "Date" as  "$$CreditNoteDate1002020$$"
-			And I click "Registrations report" button
+		And I activate field named "TransactionsAmount" in "Transactions" table
+		And I input "100,00" text in the field named "TransactionsAmount" of "Transactions" table
+		And I finish line editing in "Transactions" table
+		And I click the button named "FormPost"
+		And I delete "$$CreditNote1002020$$" variable
+		And I delete "$$CreditNoteDate1002020$$" variable
+		And I save the window as "$$CreditNote1002020$$"
+		And I save the value of the field named "Date" as  "$$CreditNoteDate1002020$$"
+		And I click "Registrations report" button
 		* Check movements
 			And I select "R5012 Vendors aging" exact value from "Register" drop-down list
 			And I click "Generate report" button
@@ -420,7 +412,7 @@ Scenario: _1002020 create Credit note and check Aging register movements
 				| 'Register  "R5012 Vendors aging"' | ''            | ''                          | ''          | ''             | ''       | ''         | ''                   | ''          | ''                         | ''             | ''              |
 				| ''                                | 'Record type' | 'Period'                    | 'Resources' | 'Dimensions'   | ''       | ''         | ''                   | ''          | ''                         | ''             | 'Attributes'    |
 				| ''                                | ''            | ''                          | 'Amount'    | 'Company'      | 'Branch' | 'Currency' | 'Agreement'          | 'Partner'   | 'Invoice'                  | 'Payment date' | 'Aging closing' |
-				| ''                                | 'Receipt'     | '$$CreditNoteDate1002020$$' | '100'       | 'Main Company' | ''       | 'TRY'      | 'Vendor Ferron, TRY' | 'Ferron BP' | '$$PurchaseInvoiceAging$$' | '*'            | ''              |
+				| ''                                | 'Receipt'     | '$$CreditNoteDate1002020$$' | '100'       | 'Main Company' | ''       | 'TRY'      | 'Vendor Ferron, TRY' | 'Ferron BP' | '$$CreditNote1002020$$' | '*'            | ''              |
 			And I close all client application windows
 		* Post Vendors advance closing document
 			Given I open hyperlink 'e1cib/list/Document.VendorsAdvancesClosing'
@@ -440,7 +432,7 @@ Scenario: _1002020 create Credit note and check Aging register movements
 				| '*'                             | '$$PurchaseInvoiceAging$$'  | 'TRY'      | 'Main Company' | ''       | 'Ferron BP' | '4 000,00' | 'Vendor Ferron, TRY' | '$$PurchaseInvoiceAging$$'  | '$$DatePaymentTermsPurchaseInvoiceAging$$' | ''                                                     |
 				| '$$DateCashPayment1002009$$'    | '$$CashPayment1002009$$'    | 'TRY'      | 'Main Company' | ''       | 'Ferron BP' | '4 000,00' | 'Vendor Ferron, TRY' | '$$PurchaseInvoiceAging1$$' | '*'                                        | 'Vendors advances closing 4 dated 28.04.2021 22:00:00' |
 				| '$$DateBankPayment1002015$$'    | '$$BankPayment1002015$$'    | 'TRY'      | 'Main Company' | ''       | 'Ferron BP' | '200,00'   | 'Vendor Ferron, TRY' | '$$PurchaseInvoiceAging$$'  | '$$DatePaymentTermsPurchaseInvoiceAging$$' | 'Vendors advances closing 4 dated 28.04.2021 22:00:00' |
-				| '$$CreditNoteDate1002020$$'     | '$$CreditNote1002020$$'     | 'TRY'      | 'Main Company' | ''       | 'Ferron BP' | '100,00'   | 'Vendor Ferron, TRY' | '$$PurchaseInvoiceAging$$'  | '*'                                        | ''                                                     |
+				| '$$CreditNoteDate1002020$$'     | '$$CreditNote1002020$$'     | 'TRY'      | 'Main Company' | ''       | 'Ferron BP' | '100,00'   | 'Vendor Ferron, TRY' | '$$CreditNote1002020$$'  | '*'                                        | ''                                                     |
 			Then the number of "List" table lines is "равно" "5"
 	And I close all client application windows
 			
@@ -472,17 +464,9 @@ Scenario: _1020030 create Debit note and check Aging register movements
 			| 'Description'   |
 			| 'Vendor Ferron, TRY' |
 		And I select current line in "List" table
-		And in "Transactions" table I move to the next cell
-		* Check the selection of basis documents for the specified partner
-			And delay 2
-			And I go to line in "List" table
-				| 'Document' |
-				| '$$PurchaseInvoiceAging$$'  |
-			And I select current line in "List" table
-			And I click the button named "FormCommandSelect" 
-			And I activate field named "TransactionsAmount" in "Transactions" table
-			And I input "50,00" text in the field named "TransactionsAmount" of "Transactions" table
-			And I finish line editing in "Transactions" table
+		And I activate field named "TransactionsAmount" in "Transactions" table
+		And I input "50,00" text in the field named "TransactionsAmount" of "Transactions" table
+		And I finish line editing in "Transactions" table
 	* Check movements
 		And I click the button named "FormPost"
 		And I delete "$$DebitNote1020030$$" variable
@@ -514,7 +498,7 @@ Scenario: _1020030 create Debit note and check Aging register movements
 			| '*'                             | '$$PurchaseInvoiceAging$$'  | 'TRY'      | 'Main Company' | ''       | 'Ferron BP' | '4 000,00' | 'Vendor Ferron, TRY' | '$$PurchaseInvoiceAging$$'  | '$$DatePaymentTermsPurchaseInvoiceAging$$' | ''                                                     |
 			| '$$DateCashPayment1002009$$'    | '$$CashPayment1002009$$'    | 'TRY'      | 'Main Company' | ''       | 'Ferron BP' | '4 000,00' | 'Vendor Ferron, TRY' | '$$PurchaseInvoiceAging1$$' | '*'                                        | 'Vendors advances closing 4 dated 28.04.2021 22:00:00' |
 			| '$$DateBankPayment1002015$$'    | '$$BankPayment1002015$$'    | 'TRY'      | 'Main Company' | ''       | 'Ferron BP' | '200,00'   | 'Vendor Ferron, TRY' | '$$PurchaseInvoiceAging$$'  | '$$DatePaymentTermsPurchaseInvoiceAging$$' | 'Vendors advances closing 4 dated 28.04.2021 22:00:00' |
-			| '$$CreditNoteDate1002020$$'     | '$$CreditNote1002020$$'     | 'TRY'      | 'Main Company' | ''       | 'Ferron BP' | '100,00'   | 'Vendor Ferron, TRY' | '$$PurchaseInvoiceAging$$'  | '*'                                        | ''                                                     |
+			| '$$CreditNoteDate1002020$$'     | '$$CreditNote1002020$$'     | 'TRY'      | 'Main Company' | ''       | 'Ferron BP' | '100,00'   | 'Vendor Ferron, TRY' | '$$CreditNote1002020$$'  | '*'                                        | ''                                                     |
 			| '$$DebitNoteDate1000030$$'      | '$$DebitNote1020030$$'      | 'TRY'      | 'Main Company' | ''       | 'Ferron BP' | '50,00'    | 'Vendor Ferron, TRY' | '$$PurchaseInvoiceAging$$'  | '*'                                        | 'Vendors advances closing 4 dated 28.04.2021 22:00:00' |
 		Then the number of "List" table lines is "равно" "6"
 	And I close all client application windows

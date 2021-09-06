@@ -1,3 +1,11 @@
+#Region PrintForm
+
+Function GetPrintForm(Ref, PrintFormName, AddInfo = Undefined) Export
+	Return Undefined;
+EndFunction
+
+#EndRegion
+
 #Region Posting
 
 Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
@@ -67,13 +75,13 @@ EndProcedure
 #Region NewRegistersPosting
 Function GetInformationAboutMovements(Ref) Export
 	Str = New Structure;
-	Str.Insert("QueryParamenters", GetAdditionalQueryParamenters(Ref));
+	Str.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
 	Str.Insert("QueryTextsMasterTables", GetQueryTextsMasterTables());
 	Str.Insert("QueryTextsSecondaryTables", GetQueryTextsSecondaryTables());
 	Return Str;
 EndFunction
 
-Function GetAdditionalQueryParamenters(Ref)
+Function GetAdditionalQueryParameters(Ref)
 	StrParams = New Structure();
 	StrParams.Insert("Ref", Ref);
 	Return StrParams;
@@ -104,7 +112,7 @@ Function MoneySender()
 		|	CashTransferOrder.SendUUID AS Key,
 		|	CashTransferOrder.Date AS Period,
 		|	CashTransferOrder.SendPeriod AS SendPeriod,
-		|	CashTransferOrder.SendMovementType AS MovementType,
+		|	CashTransferOrder.SendFinancialMovementType AS FinancialMovementType,
 		|	CashTransferOrder.CashAdvanceHolder
 		|INTO MoneySender
 		|FROM
@@ -125,7 +133,7 @@ Function MoneyReceiver()
 		|	CashTransferOrder.ReceiveUUID AS Key,
 		|	CashTransferOrder.Date AS Period,
 		|	CashTransferOrder.ReceivePeriod AS ReceivePeriod,
-		|	CashTransferOrder.ReceiveMovementType AS MovementType,
+		|	CashTransferOrder.ReceiveFinancialMovementType AS FinancialMovementType,
 		|	CashTransferOrder.CashAdvanceHolder
 		|INTO MoneyReceiver
 		|FROM
@@ -146,7 +154,7 @@ Function R3035T_CashPlanning()
 		|	MoneySender.Currency,
 		|	VALUE(Enum.CashFlowDirections.Outgoing) AS CashFlowDirection,
 		|	MoneySender.Ref AS BasisDocument,
-		|	MoneySender.MovementType,
+		|	MoneySender.FinancialMovementType,
 		|	MoneySender.Key
 		|INTO R3035T_CashPlanning 
 		|FROM
@@ -164,7 +172,7 @@ Function R3035T_CashPlanning()
 		|	MoneyReceiver.Currency,
 		|	VALUE(Enum.CashFlowDirections.Incoming) AS CashFlowDirection,
 		|	MoneyReceiver.Ref AS BasisDocument,
-		|	MoneyReceiver.MovementType,
+		|	MoneyReceiver.FinancialMovementType,
 		|	MoneyReceiver.Key
 		|FROM
 		|	MoneyReceiver AS MoneyReceiver";

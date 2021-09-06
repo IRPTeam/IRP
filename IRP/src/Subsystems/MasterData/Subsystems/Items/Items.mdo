@@ -12,5 +12,6 @@
   <content>Catalog.ItemSegments</content>
   <content>Catalog.Units</content>
   <content>Catalog.Specifications</content>
+  <content>Catalog.PartnerItems</content>
   <parentSubsystem>Subsystem.MasterData</parentSubsystem>
 </mdclass:Subsystem>

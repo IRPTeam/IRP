@@ -85,4 +85,18 @@
     <fullTextSearch>Use</fullTextSearch>
     <useInTotals>true</useInTotals>
   </dimensions>
+  <dimensions uuid="83568593-4b55-49a4-889c-cef1db39bc55">
+    <name>LegalNameContract</name>
+    <synonym>
+      <key>en</key>
+      <value>Legal name contract</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.LegalNameContracts</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
+  </dimensions>
 </mdclass:AccumulationRegister>

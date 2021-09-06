@@ -41,6 +41,18 @@ Procedure NumberOnChange(Object, AddInfo = Undefined) Export
 	DocumentsClientServer.ChangeTitleGroupTitle(Object.Object, Object.ThisForm);
 EndProcedure
 
+#Region FinancialMovementType
+
+Procedure PaymentListFinancialMovementTypeStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
+	DocumentsClient.FinancialMovementTypeStartChoice(Object, Form, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+Procedure PaymentListFinancialMovementTypeEditTextChange(Object, Form, Item, Text, StandardProcessing) Export
+	DocumentsClient.FinancialMovementTypeEditTextChange(Object, Form, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
 #EndRegion
 
 #Region ItemDescription

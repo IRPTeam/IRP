@@ -1,3 +1,11 @@
+#Region PrintForm
+
+Function GetPrintForm(Ref, PrintFormName, AddInfo = Undefined) Export
+	Return Undefined;
+EndFunction
+
+#EndRegion
+
 #Region Posting
 
 Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
@@ -78,13 +86,13 @@ EndProcedure
 #Region NewRegistersPosting
 Function GetInformationAboutMovements(Ref) Export
 	Str = New Structure;
-	Str.Insert("QueryParamenters", GetAdditionalQueryParamenters(Ref));
+	Str.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
 	Str.Insert("QueryTextsMasterTables", GetQueryTextsMasterTables());
 	Str.Insert("QueryTextsSecondaryTables", GetQueryTextsSecondaryTables());
 	Return Str;
 EndFunction
 
-Function GetAdditionalQueryParamenters(Ref)
+Function GetAdditionalQueryParameters(Ref)
 	StrParams = New Structure();
 	StrParams.Insert("Ref", Ref);
 	Return StrParams;
@@ -95,6 +103,7 @@ Function GetQueryTextsSecondaryTables()
 	QueryArray.Add(ItemList());
 	QueryArray.Add(Payments());
 	QueryArray.Add(RetailSales());
+	QueryArray.Add(OffersInfo());
 	QueryArray.Add(PostingServer.Exists_R4011B_FreeStocks());
 	QueryArray.Add(PostingServer.Exists_R4010B_ActualStocks());	
 	Return QueryArray;
@@ -108,6 +117,8 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R3050T_RetailCash());
 	QueryArray.Add(R2050T_RetailSales());
 	QueryArray.Add(R5021T_Revenues());
+	QueryArray.Add(R2001T_Sales());
+	QueryArray.Add(R2005T_SalesSpecialOffers());
 	QueryArray.Add(R2002T_SalesReturns());
 	QueryArray.Add(R2021B_CustomersTransactions());
 	QueryArray.Add(R5010B_ReconciliationStatement());
@@ -117,6 +128,21 @@ EndFunction
 Function ItemList()
 	Return
 	"SELECT
+	|	RowIDInfo.Ref AS Ref,
+	|	RowIDInfo.Key AS Key,
+	|	MAX(RowIDInfo.RowID) AS RowID
+	|INTO TableRowIDInfo
+	|FROM
+	|	Document.RetailReturnReceipt.RowIDInfo AS RowIDInfo
+	|WHERE
+	|	RowIDInfo.Ref = &Ref
+	|GROUP BY
+	|	RowIDInfo.Ref,
+	|	RowIDInfo.Key
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
 	|	ItemList.Ref.Company AS Company,
 	|	ItemList.Store AS Store,
 	|	ItemList.ItemKey AS ItemKey,
@@ -157,7 +183,8 @@ Function ItemList()
 	|		ELSE UNDEFINED
 	|	END AS BasisDocument,
 	|	ItemList.Ref.UsePartnerTransactions AS UsePartnerTransactions,
-	|	ItemList.Ref.Branch AS Branch
+	|	ItemList.Ref.Branch AS Branch,
+	|	ItemList.Ref.LegalNameContract AS LegalNameContract
 	|INTO ItemList
 	|FROM
 	|	Document.RetailReturnReceipt.ItemList AS ItemList
@@ -183,6 +210,31 @@ Function Payments()
 	|	Document.RetailReturnReceipt.Payments AS Payments
 	|WHERE
 	|	Payments.Ref = &Ref";
+EndFunction
+
+Function OffersInfo()
+	Return
+		"SELECT
+		|	RetailReturnReceiptItemList.Ref.Date AS Period,
+		|	RetailReturnReceiptItemList.RetailSalesReceipt AS Invoice,
+		|	TableRowIDInfo.RowID AS RowKey,
+		|	RetailReturnReceiptItemList.ItemKey,
+		|	RetailReturnReceiptItemList.Ref.Company AS Company,
+		|	RetailReturnReceiptItemList.Ref.Currency,
+		|	RetailReturnReceiptSpecialOffers.Offer AS SpecialOffer,
+		|	- RetailReturnReceiptSpecialOffers.Amount AS OffersAmount,
+		|	- RetailReturnReceiptItemList.TotalAmount AS SalesAmount,
+		|	- RetailReturnReceiptItemList.NetAmount AS NetAmount,
+		|	RetailReturnReceiptItemList.Ref.Branch AS Branch
+		|INTO OffersInfo
+		|FROM
+		|	Document.RetailReturnReceipt.ItemList AS RetailReturnReceiptItemList
+		|		INNER JOIN Document.RetailReturnReceipt.SpecialOffers AS RetailReturnReceiptSpecialOffers
+		|		ON RetailReturnReceiptItemList.Key = RetailReturnReceiptSpecialOffers.Key
+		|		AND RetailReturnReceiptItemList.Ref = &Ref
+		|		AND RetailReturnReceiptSpecialOffers.Ref = &Ref
+		|		INNER JOIN TableRowIDInfo AS TableRowIDInfo
+		|		ON RetailReturnReceiptItemList.Key = TableRowIDInfo.Key";
 EndFunction
 
 Function RetailSales()
@@ -278,6 +330,32 @@ Function RetailSales()
 	|	tmpRetailSales AS tmpRetailSales";
 EndFunction
 
+Function R2001T_Sales()
+	Return
+		"SELECT
+		|	ItemList.RetailSalesReceipt AS Invoice,
+		|	- ItemList.Quantity AS Quantity,
+		|	- ItemList.TotalAmount AS Amount,
+		|	- ItemList.NetAmount AS NetAmount,
+		|	- ItemList.OffersAmount AS OffersAmount,
+		|	*
+		|INTO R2001T_Sales
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	TRUE";
+EndFunction	
+
+Function R2005T_SalesSpecialOffers()
+	Return
+		"SELECT *
+		|INTO R2005T_SalesSpecialOffers
+		|FROM
+		|	OffersInfo AS OffersInfo
+		|WHERE TRUE";
+
+EndFunction
+
 Function R3010B_CashOnHand()
 	Return
 		"SELECT
@@ -341,7 +419,8 @@ Function R5021T_Revenues()
 	Return
 		"SELECT
 		|	*,
-		|	- ItemList.NetAmount AS Amount
+		|	- ItemList.NetAmount AS Amount,
+		|	- ItemList.TotalAmount AS AmountWithTaxes
 		|INTO R5021T_Revenues
 		|FROM
 		|	ItemList AS ItemList
@@ -428,6 +507,7 @@ Function R5010B_ReconciliationStatement()
 		|	ItemList.Company,
 		|	ItemList.Branch,
 		|	ItemList.LegalName,
+		|	ItemList.LegalNameContract,
 		|	ItemList.Currency,
 		|	- SUM(ItemList.TotalAmount) AS Amount,
 		|	ItemList.Period
@@ -440,6 +520,7 @@ Function R5010B_ReconciliationStatement()
 		|	ItemList.Company,
 		|	ItemList.Branch,
 		|	ItemList.LegalName,
+		|	ItemList.LegalNameContract,
 		|	ItemList.Currency,
 		|	ItemList.Period
 		|UNION ALL
@@ -449,6 +530,7 @@ Function R5010B_ReconciliationStatement()
 		|	ItemList.Company,
 		|	ItemList.Branch,
 		|	ItemList.LegalName,
+		|	ItemList.LegalNameContract,
 		|	ItemList.Currency,
 		|	SUM(ItemList.TotalAmount),
 		|	ItemList.Period
@@ -460,6 +542,7 @@ Function R5010B_ReconciliationStatement()
 		|	ItemList.Company,
 		|	ItemList.Branch,
 		|	ItemList.LegalName,
+		|	ItemList.LegalNameContract,
 		|	ItemList.Currency,
 		|	ItemList.Period";
 EndFunction

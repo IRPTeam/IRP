@@ -2,6 +2,7 @@
 @tree
 @Positive
 @ProcurementDataProc
+@IgnoreOnCIMainBuild
 
 
 Feature: check procurement data processor
@@ -135,6 +136,8 @@ Scenario:_700000 preparation (procurement data proccessor)
 			And I remove checkbox "Do you want to update filled prices?"		
 			And I click "OK" button	
 		And I click "Post and close" button
+		And Delay 5
+		And I close all client application windows
 	When Create document PurchaseOrder objects (for procurement)
 	* Change PO date
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"

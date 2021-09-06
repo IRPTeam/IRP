@@ -1,3 +1,11 @@
+#Region PrintForm
+
+Function GetPrintForm(Ref, PrintFormName, AddInfo = Undefined) Export
+	Return Undefined;
+EndFunction
+
+#EndRegion
+
 #Region Posting
 
 Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
@@ -111,13 +119,13 @@ EndProcedure
 
 Function GetInformationAboutMovements(Ref) Export
 	Str = New Structure;
-	Str.Insert("QueryParamenters", GetAdditionalQueryParamenters(Ref));
+	Str.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
 	Str.Insert("QueryTextsMasterTables", GetQueryTextsMasterTables());
 	Str.Insert("QueryTextsSecondaryTables", GetQueryTextsSecondaryTables());
 	Return Str;
 EndFunction
 
-Function GetAdditionalQueryParamenters(Ref)
+Function GetAdditionalQueryParameters(Ref)
 	StrParams = New Structure();
 	StrParams.Insert("Ref", Ref);
 	Return StrParams;
@@ -259,7 +267,8 @@ Function ItemList()
 	|	PurchaseInvoiceItemList.NetAmount AS NetAmount,
 	|	PurchaseInvoiceItemList.Ref.IgnoreAdvances AS IgnoreAdvances,
 	|	PurchaseInvoiceItemList.Key,
-	|	PurchaseInvoiceItemList.Ref.Branch AS Branch
+	|	PurchaseInvoiceItemList.Ref.Branch AS Branch,
+	|	PurchaseInvoiceItemList.Ref.LegalNameContract AS LegalNameContract
 	|INTO ItemList
 	|FROM
 	|	Document.PurchaseInvoice.ItemList AS PurchaseInvoiceItemList
@@ -756,6 +765,7 @@ Function R5010B_ReconciliationStatement()
 		|	ItemList.Company AS Company,
 		|	ItemList.Branch AS Branch,
 		|	ItemList.LegalName AS LegalName,
+		|	ItemList.LegalNameContract AS LegalNameContract,
 		|	ItemList.Currency AS Currency,
 		|	SUM(ItemList.Amount) AS Amount,
 		|	ItemList.Period
@@ -766,6 +776,7 @@ Function R5010B_ReconciliationStatement()
 		|	ItemList.Company,
 		|	ItemList.Branch,
 		|	ItemList.LegalName,
+		|	ItemList.LegalNameContract,
 		|	ItemList.Currency,
 		|	ItemList.Period";
 EndFunction
@@ -848,7 +859,8 @@ Function R5022T_Expenses()
 	Return
 		"SELECT
 		|	*,
-		|	ItemList.NetAmount AS Amount
+		|	ItemList.NetAmount AS Amount,
+		|	ItemList.Amount AS AmountWithTaxes
 		|INTO R5022T_Expenses
 		|FROM
 		|	ItemList AS ItemList

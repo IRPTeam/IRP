@@ -122,6 +122,18 @@ EndFunction
 
 #EndRegion
 
+#Region FinancialMovementType
+
+Procedure PaymentListFinancialMovementTypeStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
+	DocumentsClient.FinancialMovementTypeStartChoice(Object, Form, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+Procedure PaymentListFinancialMovementTypeEditTextChange(Object, Form, Item, Text, StandardProcessing) Export
+	DocumentsClient.FinancialMovementTypeEditTextChange(Object, Form, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
 #Region Partner
 
 Procedure PaymentListPartnerOnChange(Object, Form, Item) Export

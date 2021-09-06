@@ -1,4 +1,8 @@
-Procedure FillingWithDefaultDataFilling(Source, FillingData, FillingText, StandardProcessing) Export
+Procedure FillingWithDefaultDataFilling(Source, FillingData, FillingText, StandardProcessing, Force = False) Export
+	If Force = Undefined Then
+		Force = False;
+	EndIf;
+	
 	Data = New Structure();
 	
 	Data.Insert("Author", SessionParameters.CurrentUser);
@@ -21,7 +25,7 @@ Procedure FillingWithDefaultDataFilling(Source, FillingData, FillingText, Standa
 		If ServiceSystemClientServer.ObjectHasAttribute(KeyValue.Key, Source) Then		
 			If TypeOf(Source[KeyValue.Key]) = Type("Boolean") And Not Source[KeyValue.Key] Then
 				Source[KeyValue.Key] = KeyValue.Value;
-			ElsIf Not ValueIsFilled(Source[KeyValue.Key]) Then
+			ElsIf Not ValueIsFilled(Source[KeyValue.Key]) Or Force Then
 				Source[KeyValue.Key] = KeyValue.Value;
 			EndIf;
 		EndIf;

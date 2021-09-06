@@ -42,6 +42,7 @@
 		</appearance>
 	</item>
 	<item>
+		<use>false</use>
 		<selection>
 			<item>
 				<field>TransactionsBasisDocument</field>
@@ -62,6 +63,7 @@
 		</appearance>
 	</item>
 	<item>
+		<use>false</use>
 		<selection>
 			<item>
 				<field>TransactionsBasisDocument</field>

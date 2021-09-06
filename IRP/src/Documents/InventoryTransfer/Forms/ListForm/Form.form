@@ -249,6 +249,56 @@
       </extInfo>
     </items>
     <items xsi:type="form:FormField">
+      <name>StatusOutgoing</name>
+      <id>40</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <dataPath xsi:type="form:DataPath">
+        <segments>List.StatusOutgoing</segments>
+      </dataPath>
+      <extendedTooltip>
+        <name>StatusOutgoingExtendedTooltip</name>
+        <id>42</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <type>Label</type>
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <extInfo xsi:type="form:LabelDecorationExtInfo">
+          <horizontalAlign>Left</horizontalAlign>
+        </extInfo>
+      </extendedTooltip>
+      <contextMenu>
+        <name>StatusOutgoingContextMenu</name>
+        <id>41</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <autoFill>true</autoFill>
+      </contextMenu>
+      <type>InputField</type>
+      <editMode>Enter</editMode>
+      <showInHeader>true</showInHeader>
+      <headerHorizontalAlign>Left</headerHorizontalAlign>
+      <showInFooter>true</showInFooter>
+      <extInfo xsi:type="form:InputFieldExtInfo">
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <wrap>true</wrap>
+        <chooseType>true</chooseType>
+        <typeDomainEnabled>true</typeDomainEnabled>
+        <textEdit>true</textEdit>
+      </extInfo>
+    </items>
+    <items xsi:type="form:FormField">
       <name>StoreReceiver</name>
       <id>25</id>
       <visible>true</visible>
@@ -294,6 +344,56 @@
       <extInfo xsi:type="form:LabelFieldExtInfo">
         <autoMaxWidth>true</autoMaxWidth>
         <autoMaxHeight>true</autoMaxHeight>
+      </extInfo>
+    </items>
+    <items xsi:type="form:FormField">
+      <name>StatusIncoming</name>
+      <id>43</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <dataPath xsi:type="form:DataPath">
+        <segments>List.StatusIncoming</segments>
+      </dataPath>
+      <extendedTooltip>
+        <name>StatusIncomingExtendedTooltip</name>
+        <id>45</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <type>Label</type>
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <extInfo xsi:type="form:LabelDecorationExtInfo">
+          <horizontalAlign>Left</horizontalAlign>
+        </extInfo>
+      </extendedTooltip>
+      <contextMenu>
+        <name>StatusIncomingContextMenu</name>
+        <id>44</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <autoFill>true</autoFill>
+      </contextMenu>
+      <type>InputField</type>
+      <editMode>Enter</editMode>
+      <showInHeader>true</showInHeader>
+      <headerHorizontalAlign>Left</headerHorizontalAlign>
+      <showInFooter>true</showInFooter>
+      <extInfo xsi:type="form:InputFieldExtInfo">
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <wrap>true</wrap>
+        <chooseType>true</chooseType>
+        <typeDomainEnabled>true</typeDomainEnabled>
+        <textEdit>true</textEdit>
       </extInfo>
     </items>
     <items xsi:type="form:FormField">
@@ -670,9 +770,54 @@
     </edit>
     <main>true</main>
     <extInfo xsi:type="form:DynamicListExtInfo">
+      <queryText>SELECT
+	InventoryTransferItemList.Ref AS Ref,
+	SUM(ISNULL(InventoryTransferItemList.QuantityInBaseUnit, 0)) AS QuantityInBaseUnit
+INTO ItemListTable
+FROM
+	Document.InventoryTransfer.ItemList AS InventoryTransferItemList
+GROUP BY
+	InventoryTransferItemList.Ref
+;
+
+////////////////////////////////////////////////////////////////////////////////
+SELECT
+	CASE
+		WHEN ISNULL(R4032B_GoodsInTransitOutgoingBalance.QuantityBalance, 0) = 0
+			THEN VALUE(Enum.ShippingStatuses.Closed)
+		WHEN ItemListTable.QuantityInBaseUnit = ISNULL(R4032B_GoodsInTransitOutgoingBalance.QuantityBalance, 0)
+			THEN VALUE(Enum.ShippingStatuses.Awaiting)
+		WHEN ItemListTable.QuantityInBaseUnit &lt;> ISNULL(R4032B_GoodsInTransitOutgoingBalance.QuantityBalance, 0)
+			THEN VALUE(Enum.ShippingStatuses.Shipping)
+	END AS StatusOutgoing,
+	CASE
+		WHEN ISNULL(R4031B_GoodsInTransitIncomingBalance.QuantityBalance, 0) = 0
+			THEN VALUE(Enum.ShippingStatuses.Closed)
+		WHEN ItemListTable.QuantityInBaseUnit = ISNULL(R4031B_GoodsInTransitIncomingBalance.QuantityBalance, 0)
+			THEN VALUE(Enum.ShippingStatuses.Awaiting)
+		WHEN ItemListTable.QuantityInBaseUnit &lt;> ISNULL(R4031B_GoodsInTransitIncomingBalance.QuantityBalance, 0)
+			THEN VALUE(Enum.ShippingStatuses.Shipping)
+	END AS StatusIncoming,
+	InventoryTransfer.Ref,
+	InventoryTransfer.Number,
+	InventoryTransfer.Date,
+	InventoryTransfer.Company,
+	InventoryTransfer.StoreReceiver,
+	InventoryTransfer.StoreSender,
+	InventoryTransfer.StoreTransit,
+	InventoryTransfer.Author
+FROM
+	Document.InventoryTransfer AS InventoryTransfer
+		LEFT JOIN ItemListTable AS ItemListTable
+		ON InventoryTransfer.Ref = ItemListTable.Ref
+		LEFT JOIN AccumulationRegister.R4032B_GoodsInTransitOutgoing.Balance AS R4032B_GoodsInTransitOutgoingBalance
+		ON InventoryTransfer.Ref = CAST(R4032B_GoodsInTransitOutgoingBalance.Basis AS Document.InventoryTransfer)
+		LEFT JOIN AccumulationRegister.R4031B_GoodsInTransitIncoming.Balance AS R4031B_GoodsInTransitIncomingBalance
+		ON InventoryTransfer.Ref = CAST(R4031B_GoodsInTransitIncomingBalance.Basis AS Document.InventoryTransfer)</queryText>
       <mainTable>Document.InventoryTransfer</mainTable>
       <dynamicDataRead>true</dynamicDataRead>
       <autoFillAvailableFields>true</autoFillAvailableFields>
+      <customQuery>true</customQuery>
       <autoSaveUserSettings>true</autoSaveUserSettings>
       <getInvisibleFieldPresentations>true</getInvisibleFieldPresentations>
     </extInfo>

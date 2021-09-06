@@ -1,3 +1,11 @@
+#Region PrintForm
+
+Function GetPrintForm(Ref, PrintFormName, AddInfo = Undefined) Export
+	Return Undefined;
+EndFunction
+
+#EndRegion
+
 #Region Posting
 
 Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export	
@@ -9,7 +17,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	If Not StatusInfo.Posting Then
 	#Region NewRegistersPosting
 		QueryArray = GetQueryTextsSecondaryTables();
-		Parameters.Insert("QueryParameters", GetAdditionalQueryParamenters(Ref));
+		Parameters.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
 		PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
 	#EndRegion
 		Return Tables;
@@ -17,7 +25,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	
 #Region NewRegistersPosting	
 	QueryArray = GetQueryTextsSecondaryTables();
-	Parameters.Insert("QueryParameters", GetAdditionalQueryParamenters(Ref));
+	Parameters.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
 #EndRegion	
 	
@@ -80,13 +88,13 @@ EndProcedure
 #Region NewRegistersPosting
 Function GetInformationAboutMovements(Ref) Export
 	Str = New Structure;
-	Str.Insert("QueryParamenters", GetAdditionalQueryParamenters(Ref));
+	Str.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
 	Str.Insert("QueryTextsMasterTables", GetQueryTextsMasterTables());
 	Str.Insert("QueryTextsSecondaryTables", GetQueryTextsSecondaryTables());
 	Return Str;
 EndFunction
 
-Function GetAdditionalQueryParamenters(Ref)
+Function GetAdditionalQueryParameters(Ref)
 	StrParams = New Structure();
 	StatusInfo = ObjectStatusesServer.GetLastStatusInfo(Ref);
 	StrParams.Insert("StatusInfoPosting", StatusInfo.Posting);
@@ -119,7 +127,7 @@ Function PaymentList()
 		|	PaymentList.Partner AS Partner,
 		|	PaymentList.Basis.Agreement AS Agreement,
 		|	PaymentList.Ref.Account AS Account,
-		|	PaymentList.MovementType,
+		|	PaymentList.FinancialMovementType,
 		|	PaymentList.Amount,
 		|	PaymentList.Key,
 		|	PaymentList.Ref,
@@ -164,7 +172,7 @@ Function R3035T_CashPlanning()
 		|	VALUE(Enum.CashFlowDirections.Incoming) AS CashFlowDirection,
 		|	PaymentList.Partner,
 		|	PaymentList.LegalName,
-		|	PaymentList.MovementType,
+		|	PaymentList.FinancialMovementType,
 		|	PaymentList.Amount,
 		|	PaymentList.Key
 		|INTO R3035T_CashPlanning

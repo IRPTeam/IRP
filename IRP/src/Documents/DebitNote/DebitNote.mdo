@@ -62,6 +62,8 @@
   <registerRecords>AccumulationRegister.R1020B_AdvancesToVendors</registerRecords>
   <registerRecords>InformationRegister.T2011S_PartnerTransactions</registerRecords>
   <registerRecords>AccumulationRegister.R5012B_VendorsAging</registerRecords>
+  <registerRecords>InformationRegister.T2012S_PartnerAdvances</registerRecords>
+  <registerRecords>AccumulationRegister.R2022B_CustomersPaymentPlanning</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -279,6 +281,24 @@
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
       <fillChecking>ShowError</fillChecking>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="867abd87-9b82-41ae-9dde-8e434348d639">
+      <name>LegalNameContract</name>
+      <synonym>
+        <key>en</key>
+        <value>Legal name contract</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.LegalNameContracts</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <choiceParameterLinks>
+        <name>Filter.Company</name>
+        <field>Document.DebitNote.TabularSection.Transactions.Attribute.LegalName</field>
+      </choiceParameterLinks>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>

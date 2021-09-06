@@ -1,10 +1,18 @@
+#Region PrintForm
+
+Function GetPrintForm(Ref, PrintFormName, AddInfo = Undefined) Export
+	Return Undefined;
+EndFunction
+
+#EndRegion
+
 #Region Posting
 
 Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 	Tables = New Structure();	
 #Region NewRegistersPosting	
 	QueryArray = GetQueryTextsSecondaryTables();
-	Parameters.Insert("QueryParameters", GetAdditionalQueryParamenters(Ref));
+	Parameters.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
 	
 	Tables.Insert("CustomersTransactions", 
@@ -92,13 +100,13 @@ EndProcedure
 
 Function GetInformationAboutMovements(Ref) Export
 	Str = New Structure;
-	Str.Insert("QueryParamenters", GetAdditionalQueryParamenters(Ref));
+	Str.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
 	Str.Insert("QueryTextsMasterTables", GetQueryTextsMasterTables());
 	Str.Insert("QueryTextsSecondaryTables", GetQueryTextsSecondaryTables());
 	Return Str;
 EndFunction
 
-Function GetAdditionalQueryParamenters(Ref)
+Function GetAdditionalQueryParameters(Ref)
 	StrParams = New Structure();
 	StrParams.Insert("Ref", Ref);
 	If ValueIsFilled(Ref) Then
@@ -213,7 +221,8 @@ Function ItemList()
 	|	SalesInvoiceItemList.UseShipmentConfirmation AS UseShipmentConfirmation,
 	|	SalesInvoiceItemList.Ref.IgnoreAdvances AS IgnoreAdvances,
 	|	SalesInvoiceItemList.Key,
-	|	SalesInvoiceItemList.Ref.Branch AS Branch
+	|	SalesInvoiceItemList.Ref.Branch AS Branch,
+	|	SalesInvoiceItemList.Ref.LegalNameContract AS LegalNameContract
 	|INTO ItemList
 	|FROM
 	|	Document.SalesInvoice.ItemList AS SalesInvoiceItemList
@@ -809,6 +818,7 @@ Function R5010B_ReconciliationStatement()
 		|	ItemList.Company,
 		|	ItemList.Branch,
 		|	ItemList.LegalName,
+		|	ItemList.LegalNameContract,
 		|	ItemList.Currency,
 		|	SUM(ItemList.Amount) AS Amount,
 		|	ItemList.Period
@@ -819,6 +829,7 @@ Function R5010B_ReconciliationStatement()
 		|	ItemList.Company,
 		|	ItemList.Branch,
 		|	ItemList.LegalName,
+		|	ItemList.LegalNameContract,
 		|	ItemList.Currency,
 		|	ItemList.Period";
 EndFunction
@@ -856,7 +867,8 @@ Function R5021T_Revenues()
 	Return
 		"SELECT
 		|	*,
-		|	ItemList.NetAmount AS Amount
+		|	ItemList.NetAmount AS Amount,
+		|	ItemList.Amount AS AmountWithTaxes
 		|INTO R5021T_Revenues
 		|FROM
 		|	ItemList AS ItemList

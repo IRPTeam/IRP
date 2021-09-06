@@ -431,16 +431,22 @@ Scenario: _022015 create PRO using form link/unlink
 			| 'Description'           |
 			| 'Store 02' |
 		And I select current line in "List" table
+		And I move to "Other" tab
+		And I click Choice button of the field named "Branch"
+		And I go to line in "List" table
+			| 'Description'             |
+			| 'Front office' |
+		And I select current line in "List" table	
 	* Select items from basis documents
 		And I click the button named "AddBasisDocuments"		
 		And I go to line in "BasisesTree" table
 			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
-			| 'TRY'      | '100,00' | '5,000'    | 'Dress, S/Yellow'  | 'pcs'  | 'No'  |
+			| 'TRY'      | '100,00' | '5,000'    | 'Dress (S/Yellow)'  | 'pcs'  | 'No'  |
 		And I change "Use" checkbox in "BasisesTree" table
 		And I finish line editing in "BasisesTree" table
 		And I go to line in "BasisesTree" table
 			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
-			| 'TRY'      | '200,00' | '5,000'    | 'Boots, 36/18SD'  | 'Boots (12 pcs)'  | 'No'  |
+			| 'TRY'      | '200,00' | '5,000'    | 'Boots (36/18SD)'  | 'Boots (12 pcs)'  | 'No'  |
 		And I change "Use" checkbox in "BasisesTree" table
 		And I finish line editing in "BasisesTree" table
 		And I click "Ok" button
@@ -456,10 +462,8 @@ Scenario: _022015 create PRO using form link/unlink
 		Then "Link / unlink document row" window is opened
 		And I go to line in "ItemListRows" table
 			| '#' | 'Quantity' | 'Row presentation' | 'Store'    | 'Unit' |
-			| '2' | '5,000'    | 'Boots, 36/18SD'   | 'Store 02' | 'Boots (12 pcs)'  |
-		And I go to line in "ResultsTree" table
-			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' |
-			| 'TRY'      | '200,00' | '5,000'    | 'Boots, 36/18SD'    | 'Boots (12 pcs)'  |
+			| '2' | '5,000'    | 'Boots (36/18SD)'   | 'Store 02' | 'Boots (12 pcs)'  |
+		And I set checkbox "Linked documents"
 		And I click "Unlink" button
 		And I click "Ok" button
 		And I click "Save" button	
@@ -476,11 +480,11 @@ Scenario: _022015 create PRO using form link/unlink
 		And I click the button named "LinkUnlinkBasisDocuments"
 		And I go to line in "ItemListRows" table
 			| '#' | 'Quantity' | 'Row presentation' | 'Store'    | 'Unit' |
-			| '2' | '5,000'    | 'Boots, 36/18SD'   | 'Store 02' | 'Boots (12 pcs)'  |
+			| '2' | '5,000'    | 'Boots (36/18SD)'   | 'Store 02' | 'Boots (12 pcs)'  |
 		And I activate field named "ItemListRowsRowPresentation" in "ItemListRows" table
 		And I go to line in "BasisesTree" table
 			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' |
-			| 'TRY'      | '200,00' | '5,000'    | 'Boots, 36/18SD'    | 'Boots (12 pcs)'  |
+			| 'TRY'      | '200,00' | '5,000'    | 'Boots (36/18SD)'    | 'Boots (12 pcs)'  |
 		And I click "Link" button
 		And I click "Ok" button
 		And "RowIDInfo" table contains lines
@@ -500,7 +504,7 @@ Scenario: _022015 create PRO using form link/unlink
 		And I click the button named "AddBasisDocuments"
 		And I go to line in "BasisesTree" table
 			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
-			| 'TRY'      | '200,00' | '5,000'    | 'Boots, 36/18SD'  | 'Boots (12 pcs)'  | 'No'  |
+			| 'TRY'      | '200,00' | '5,000'    | 'Boots (36/18SD)'  | 'Boots (12 pcs)'  | 'No'  |
 		And I change "Use" checkbox in "BasisesTree" table
 		And I finish line editing in "BasisesTree" table
 		And I click "Ok" button

@@ -56,12 +56,13 @@ Function GetSelectedRowInfo(CurrentData) Export
 		Store = CurrentData.Store;
 	EndIf;
 	Result.SelectedRow = New Structure();
-	Result.SelectedRow.Insert("Key"      , CurrentData.Key);
-	Result.SelectedRow.Insert("Item"     , CurrentData.Item);
-	Result.SelectedRow.Insert("ItemKey"  , CurrentData.ItemKey);
-	Result.SelectedRow.Insert("Store"    , Store);
-	Result.SelectedRow.Insert("Unit"     , CurrentData.Unit);
-	Result.SelectedRow.Insert("Quantity" , CurrentData.Quantity);
+	Result.SelectedRow.Insert("Key"        , CurrentData.Key);
+	Result.SelectedRow.Insert("Item"       , CurrentData.Item);
+	Result.SelectedRow.Insert("ItemKey"    , CurrentData.ItemKey);
+	Result.SelectedRow.Insert("Store"      , Store);
+	Result.SelectedRow.Insert("Unit"       , CurrentData.Unit);
+	Result.SelectedRow.Insert("Quantity"   , CurrentData.Quantity);
+	Result.SelectedRow.Insert("LineNumber" , CurrentData.LineNumber);
 	
 	Result.SelectedRow.Insert("QuantityInBaseUnit" , 0);
 	Result.SelectedRow.Insert("BasisUnit" , Undefined);
@@ -160,6 +161,9 @@ Procedure FindRowInTreeRecursive(Filter, TreeRows, RowID)
 EndProcedure
 
 Procedure ExpandTree(Tree, TreeRows) Export
+	If Not Tree.Visible Then
+		Return;
+	EndIf;
 	For Each ItemTreeRows In TreeRows Do
 		Tree.Expand(ItemTreeRows.GetID());
 		ExpandTree(Tree, ItemTreeRows.GetItems());

@@ -33,6 +33,7 @@ Scenario: _022500 preparation (SC-PR)
 		When Create chart of characteristic types CurrencyMovementType objects
 		When Create catalog TaxRates objects
 		When Create catalog Taxes objects	
+		When Create catalog BusinessUnits objects
 		When Create information register TaxSettings records
 		When Create catalog IntegrationSettings objects
 		When Create information register CurrencyRates records
@@ -260,10 +261,10 @@ Scenario: _022502 check link/unlink when add items to Purchase return from SC
 			| 'Shipment confirmation 17 dated 25.02.2021 16:28:54' | 'Shipment confirmation 17 dated 25.02.2021 16:28:54' |
 		And "BasisesTree" table contains lines
 			| 'Row presentation'                                   | 'Use' |
-			| 'Shipment confirmation 233 dated 14.03.2021 19:22:5' | 'No'  |
+			| 'Shipment confirmation 233 dated 14.03.2021 19:22:58' | 'No'  |
 		And I go to line in "BasisesTree" table
 			| 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
-			| '4,000'    | 'Dress, S/Yellow'   | 'pcs'  | 'No'  |
+			| '4,000'    | 'Dress (S/Yellow)'   | 'pcs'  | 'No'  |
 		And I change "Use" checkbox in "BasisesTree" table
 		And I finish line editing in "BasisesTree" table
 		And I click "Ok" button
@@ -290,13 +291,14 @@ Scenario: _022502 check link/unlink when add items to Purchase return from SC
 		Then the number of "ShipmentConfirmationsTree" table lines is "равно" "2"
 	* Unlink line and check RowId tab
 		And I click the button named "LinkUnlinkBasisDocuments"
+		And I set checkbox "Linked documents"
 		And I expand a line in "ResultsTree" table
-			| 'Row presentation'                            |
+			| 'Row presentation'                                   |
 			| 'Shipment confirmation 233 dated 14.03.2021 19:22:5' |
-		And I activate field named "ItemListRowsRowPresentation" in "ItemListRows" table
+		And I activate field named "ResultsTreeRowPresentation" in "ResultsTree" table	
 		And I go to line in "ResultsTree" table
 			| 'Quantity' | 'Row presentation' | 'Unit' |
-			| '4,000'    | 'Dress, S/Yellow'   | 'pcs'  |
+			| '4,000'    | 'Dress (S/Yellow)'   | 'pcs'  |
 		And I click "Unlink" button
 		And I click "Ok" button
 		Then the number of "ShipmentConfirmationsTree" table lines is "равно" "0"
@@ -310,7 +312,7 @@ Scenario: _022502 check link/unlink when add items to Purchase return from SC
 		Then "Link / unlink document row" window is opened
 		And I go to line in "BasisesTree" table
 			| 'Quantity' | 'Row presentation' | 'Unit' |
-			| '4,000'    | 'Dress, S/Yellow'  | 'pcs'  |
+			| '4,000'    | 'Dress (S/Yellow)'  | 'pcs'  |
 		And I click "Link" button
 		And I click "Ok" button
 		And "ShipmentConfirmationsTree" table contains lines

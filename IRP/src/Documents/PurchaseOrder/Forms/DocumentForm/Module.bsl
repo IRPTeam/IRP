@@ -84,6 +84,9 @@ EndProcedure
 
 &AtClientAtServerNoContext
 Procedure SetVisibilityAvailability(Object, Form) Export
+	Form.Items.AddBasisDocuments.Enabled = Not Form.ReadOnly;
+	Form.Items.LinkUnlinkBasisDocuments.Enabled = Not Form.ReadOnly;
+
 	Form.Items.LegalName.Enabled = ValueIsFilled(Object.Partner);
 	If Not Form.ClosingOrder.IsEmpty() Then
 		Form.ReadOnly = True;
@@ -213,6 +216,25 @@ EndProcedure
 #EndRegion
 
 #Region ItemListItemsEvents
+
+&AtClient
+Procedure ItemListPartnerItemOnChange(Item)
+	CurrentData = Items.ItemList.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	ItemAndItemKeyByPartnerItem = DocumentsServer.GetItemAndItemKeyByPartnerItem(CurrentData.PartnerItem);
+
+	If ItemAndItemKeyByPartnerItem.Item <> CurrentData.Item Then
+		CurrentData.Item = ItemAndItemKeyByPartnerItem.Item;
+		DocPurchaseOrderClient.ItemListItemOnChange(Object, ThisObject, Item);
+	EndIf;
+	
+	If ItemAndItemKeyByPartnerItem.ItemKey <> CurrentData.ItemKey Then
+		CurrentData.ItemKey = ItemAndItemKeyByPartnerItem.ItemKey;
+		DocPurchaseOrderClient.ItemListItemKeyOnChange(Object, ThisObject, Item);
+	EndIf;	
+EndProcedure
 
 &AtClient
 Procedure ItemListItemOnChange(Item, AddInfo = Undefined) Export
@@ -561,6 +583,7 @@ EndProcedure
 Function GetLinkedDocumentsFilter()
 	Filter = New Structure();
 	Filter.Insert("Company"           , Object.Company);
+	Filter.Insert("Branch"            , Object.Branch);
 	Filter.Insert("ProcurementMethod" , PredefinedValue("Enum.ProcurementMethods.Purchase"));
 	Filter.Insert("Ref"               , Object.Ref);
 	Return Filter;
@@ -595,6 +618,7 @@ Procedure AddOrLinkUnlinkDocumentRowsContinue(Result, AdditionalParameters) Expo
 	If Result = Undefined Then
 		Return;
 	EndIf;
+	ThisObject.Modified = True;
 	AddOrLinkUnlinkDocumentRowsContinueAtServer(Result);
 	Taxes_CreateFormControls();
 EndProcedure

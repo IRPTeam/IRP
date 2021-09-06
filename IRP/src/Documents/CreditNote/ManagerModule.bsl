@@ -1,3 +1,11 @@
+#Region PrintForm
+
+Function GetPrintForm(Ref, PrintFormName, AddInfo = Undefined) Export
+	Return Undefined;
+EndFunction
+
+#EndRegion
+
 #Region Posting
 
 Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
@@ -66,13 +74,13 @@ EndProcedure
 #Region NewRegistersPosting
 Function GetInformationAboutMovements(Ref) Export
 	Str = New Structure;
-	Str.Insert("QueryParamenters", GetAdditionalQueryParamenters(Ref));
+	Str.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
 	Str.Insert("QueryTextsMasterTables", GetQueryTextsMasterTables());
 	Str.Insert("QueryTextsSecondaryTables", GetQueryTextsSecondaryTables());
 	Return Str;
 EndFunction
 
-Function GetAdditionalQueryParamenters(Ref)
+Function GetAdditionalQueryParameters(Ref)
 	StrParams = New Structure();
 	StrParams.Insert("Ref", Ref);
 	Return StrParams;
@@ -87,13 +95,17 @@ EndFunction
 Function GetQueryTextsMasterTables()
 	QueryArray = New Array;
 	QueryArray.Add(R5010B_ReconciliationStatement());
+	
 	QueryArray.Add(R1021B_VendorsTransactions());
-	QueryArray.Add(R2021B_CustomersTransactions());
 	QueryArray.Add(R1020B_AdvancesToVendors());
-	QueryArray.Add(R2020B_AdvancesFromCustomers());
 	QueryArray.Add(R5012B_VendorsAging());
-	QueryArray.Add(R5011B_CustomersAging());
+	QueryArray.Add(R1022B_VendorsPaymentPlanning());
 	QueryArray.Add(T2011S_PartnerTransactions());
+	
+	QueryArray.Add(R2020B_AdvancesFromCustomers());
+	QueryArray.Add(T2012S_PartnerAdvances());
+	QueryArray.Add(R2021B_CustomersTransactions());
+	QueryArray.Add(R5011B_CustomersAging());
 	Return QueryArray;
 EndFunction
 
@@ -107,15 +119,19 @@ Function Transactions()
 	|	Transactions.Agreement,
 	|	CASE
 	|		WHEN Transactions.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
-	|			THEN Transactions.BasisDocument
+	|			THEN Transactions.Ref
 	|		ELSE UNDEFINED
 	|	END AS BasisDocument,
+	|	Transactions.Ref AS AdvancesOrTransactionDocument,
+	|	Transactions.Ref AS Ref,
 	|	Transactions.Agreement.Type = VALUE(Enum.AgreementTypes.Vendor) AS IsVendor,
 	|	Transactions.Agreement.Type = VALUE(Enum.AgreementTypes.Customer) AS IsCustomer,
+	|	Transactions.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments) AS IsPostingDetail_ByDocuments,
 	|	Transactions.Currency,
 	|	Transactions.Key,
 	|	Transactions.Amount,
-	|	Transactions.Ref.Branch AS Branch
+	|	Transactions.Ref.Branch AS Branch,
+	|	Transactions.LegalNameContract AS LegalNameContract
 	|INTO Transactions
 	|FROM
 	|	Document.CreditNote.Transactions AS Transactions
@@ -179,28 +195,7 @@ EndFunction
 Function R2021B_CustomersTransactions()
 	Return
 		"SELECT
-		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		|	Transactions.Period AS Period,
-		|	Transactions.Company,
-		|	Transactions.Branch,
-		|	Transactions.Currency,
-		|	Transactions.LegalName,
-		|	Transactions.Partner,
-		|	Transactions.Agreement,
-		|	Transactions.BasisDocument AS Basis,
-		|	Transactions.Key,
-		|	-Transactions.Amount AS Amount,
-		|	UNDEFINED AS CustomersAdvancesClosing
-		|INTO R2021B_CustomersTransactions
-		|FROM
-		|	Transactions AS Transactions
-		|WHERE
-		|	Transactions.IsCustomer
-		|
-		|UNION ALL
-		|
-		|SELECT
-		|	VALUE(AccumulationRecordType.Expense),
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
 		|	OffsetOfAdvances.Period,
 		|	OffsetOfAdvances.Company,
 		|	OffsetOfAdvances.Branch,
@@ -208,15 +203,15 @@ Function R2021B_CustomersTransactions()
 		|	OffsetOfAdvances.LegalName,
 		|	OffsetOfAdvances.Partner,
 		|	OffsetOfAdvances.Agreement,
-		|	OffsetOfAdvances.TransactionDocument,
+		|	OffsetOfAdvances.TransactionDocument AS Basis,
 		|	OffsetOfAdvances.Key,
 		|	OffsetOfAdvances.Amount,
-		|	OffsetOfAdvances.Recorder
+		|	OffsetOfAdvances.Recorder AS CustomersAdvancesClosing
+		|INTO R2021B_CustomersTransactions
 		|FROM
 		|	InformationRegister.T2010S_OffsetOfAdvances AS OffsetOfAdvances
 		|WHERE
 		|	OffsetOfAdvances.Document = &Ref
-		|	AND  OffsetOfAdvances.DueAsAdvance
 		|	AND OffsetOfAdvances.Recorder REFS Document.CustomersAdvancesClosing";
 EndFunction
 
@@ -238,24 +233,62 @@ EndFunction
 Function R2020B_AdvancesFromCustomers()
 	Return
 		"SELECT
-		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	Transactions.Period,
+		|	Transactions.Company,
+		|	Transactions.Branch,
+		|	Transactions.Partner,
+		|	Transactions.LegalName,
+		|	Transactions.Currency,
+		|	Transactions.AdvancesOrTransactionDocument AS Basis,
+		|	Transactions.Amount,
+		|	Transactions.Key,
+		|	UNDEFINED AS CustomersAdvancesClosing
+		|INTO R2020B_AdvancesFromCustomers
+		|FROM
+		|	Transactions AS Transactions
+		|WHERE
+		|	Transactions.IsCustomer
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Expense),
 		|	OffsetOfAdvances.Period,
 		|	OffsetOfAdvances.Company,
 		|	OffsetOfAdvances.Branch,
-		|	OffsetOfAdvances.Currency,
-		|	OffsetOfAdvances.LegalName,
 		|	OffsetOfAdvances.Partner,
-		|	OffsetOfAdvances.AdvancesDocument AS Basis,
+		|	OffsetOfAdvances.LegalName,
+		|	OffsetOfAdvances.Currency,
+		|	OffsetOfAdvances.AdvancesDocument,
 		|	OffsetOfAdvances.Amount,
 		|	OffsetOfAdvances.Key,
-		|	OffsetOfAdvances.Recorder AS CustomersAdvancesClosing
-		|INTO R2020B_AdvancesFromCustomers
+		|	OffsetOfAdvances.Recorder
 		|FROM
 		|	InformationRegister.T2010S_OffsetOfAdvances AS OffsetOfAdvances
 		|WHERE
 		|	OffsetOfAdvances.Document = &Ref
-		|	AND OffsetOfAdvances.DueAsAdvance
 		|	AND OffsetOfAdvances.Recorder REFS Document.CustomersAdvancesClosing";
+EndFunction
+
+Function T2012S_PartnerAdvances()
+	Return
+		"SELECT
+		|	Transactions.Period,
+		|	Transactions.Company,
+		|	Transactions.Branch,
+		|	Transactions.Partner,
+		|	Transactions.LegalName,
+		|	Transactions.Currency,
+		|	Transactions.AdvancesOrTransactionDocument AS AdvancesDocument,
+		|	Transactions.Amount,
+		|	Transactions.Key,
+		|	TRUE AS IsCustomerAdvance
+		|INTO T2012S_PartnerAdvances
+		|FROM
+		|	Transactions AS Transactions
+		|WHERE
+		|	Transactions.IsCustomer";
 EndFunction
 
 Function R5012B_VendorsAging()
@@ -277,7 +310,7 @@ Function R5012B_VendorsAging()
 		|	Transactions AS Transactions
 		|WHERE
 		|	Transactions.IsVendor
-		|	AND NOT Transactions.BasisDocument.Ref IS NULL
+		|	AND Transactions.IsPostingDetail_ByDocuments
 		|GROUP BY
 		|	Transactions.Period,
 		|	Transactions.Company,
@@ -341,36 +374,45 @@ Function T2011S_PartnerTransactions()
 		|	Transactions.LegalName,
 		|	Transactions.Partner,
 		|	Transactions.Agreement,
-		|	Transactions.BasisDocument AS TransactionDocument,
+		|	Transactions.AdvancesOrTransactionDocument AS TransactionDocument,
 		|	Transactions.Key,
 		|	Transactions.Amount,
-		|	TRUE AS IsVendorTransaction,
-		|	FALSE AS IsPaymentFromCustomer
+		|	TRUE AS IsVendorTransaction
 		|INTO T2011S_PartnerTransactions
 		|FROM
 		|	Transactions AS Transactions
 		|WHERE
-		|	Transactions.IsVendor
-		|
-		|UNION ALL
-		|
-		|SELECT
+		|	Transactions.IsVendor";
+EndFunction
+
+Function R1022B_VendorsPaymentPlanning()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
 		|	Transactions.Period,
 		|	Transactions.Company,
 		|	Transactions.Branch,
-		|	Transactions.Currency,
-		|	Transactions.LegalName,
-		|	Transactions.Partner,
-		|	Transactions.Agreement,
-		|	Transactions.BasisDocument,
-		|	Transactions.Key,
-		|	Transactions.Amount,
-		|	FALSE,
-		|	TRUE
+		|	Transactions.Ref AS Basis,
+		|	Transactions.LegalName AS LegalName,
+		|	Transactions.Partner AS Partner,
+		|	Transactions.Agreement AS Agreement,
+		|	SUM(Transactions.Amount) AS Amount
+		|INTO R1022B_VendorsPaymentPlanning
 		|FROM
 		|	Transactions AS Transactions
 		|WHERE
-		|	Transactions.IsCustomer";
+		|	Transactions.IsVendor
+		|	AND Transactions.IsPostingDetail_ByDocuments
+		//|	AND PurchaseInvoicePaymentTerms.CalculationType = VALUE(Enum.CalculationTypes.PostShipmentCredit)
+		|GROUP BY
+		|	Transactions.Period,
+		|	Transactions.Company,
+		|	Transactions.Branch,
+		|	Transactions.Ref,
+		|	Transactions.LegalName,
+		|	Transactions.Partner,
+		|	Transactions.Agreement,
+		|	VALUE(AccumulationRecordType.Receipt)";
 EndFunction
 
 #EndRegion

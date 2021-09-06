@@ -78,6 +78,7 @@
   <registerRecords>AccumulationRegister.R2001T_Sales</registerRecords>
   <registerRecords>AccumulationRegister.R2021B_CustomersTransactions</registerRecords>
   <registerRecords>AccumulationRegister.R5010B_ReconciliationStatement</registerRecords>
+  <registerRecords>AccumulationRegister.R2005T_SalesSpecialOffers</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -274,6 +275,25 @@
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="220779c4-7f15-4e91-bf3d-4ce232439bf9">
+    <name>LegalNameContract</name>
+    <synonym>
+      <key>en</key>
+      <value>Legal name contract</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.LegalNameContracts</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <choiceParameterLinks>
+      <name>Filter.Company</name>
+      <field>Document.RetailSalesReceipt.Attribute.LegalName</field>
+    </choiceParameterLinks>
     <fillValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>

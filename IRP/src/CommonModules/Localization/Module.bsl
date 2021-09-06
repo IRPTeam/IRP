@@ -329,6 +329,9 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_093", NStr("en = 'Cancel reason has to be filled if string was canceled'", Lang));
 	Strings.Insert("Error_094", NStr("en = 'Сan not use confirmation of shipment without goods receipt'", Lang));
 	
+	// %1 - 100.00 
+	// %2 - 120.00
+	Strings.Insert("Error_095", NStr("en = 'Payment amount [%1] and sales amount [%2] not match'", Lang));
 	
 	#EndRegion
 	

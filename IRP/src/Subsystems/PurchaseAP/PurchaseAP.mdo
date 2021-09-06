@@ -20,6 +20,8 @@
   <content>CommonCommand.OpenVendorAgreements</content>
   <content>Catalog.PartnersBankAccounts</content>
   <content>Document.PurchaseOrderClosing</content>
+  <content>Catalog.LegalNameContracts</content>
+  <content>Catalog.PartnerItems</content>
   <subsystems>Purchase</subsystems>
   <subsystems>PurchaseReturn</subsystems>
 </mdclass:Subsystem>

@@ -69,7 +69,6 @@
   <registerRecords>AccumulationRegister.TM1010B_RowIDMovements</registerRecords>
   <registerRecords>AccumulationRegister.R2010T_SalesOrders</registerRecords>
   <registerRecords>AccumulationRegister.R2014T_CanceledSalesOrders</registerRecords>
-  <registerRecords>AccumulationRegister.R4013B_StockReservationPlanning</registerRecords>
   <registerRecords>AccumulationRegister.R2011B_SalesOrdersShipment</registerRecords>
   <registerRecords>AccumulationRegister.R4011B_FreeStocks</registerRecords>
   <registerRecords>AccumulationRegister.R4012B_StockReservation</registerRecords>
@@ -578,6 +577,37 @@
       </synonym>
       <type>
         <types>CatalogRef.CancelReturnReasons</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="008cd0b1-6c03-495a-a696-805e407abe96">
+      <name>PartnerItem</name>
+      <synonym>
+        <key>en</key>
+        <value>Partner item</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.PartnerItems</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="ba241f0e-5ce7-463c-9f70-264f08216284">
+      <name>ReservationDate</name>
+      <synonym>
+        <key>en</key>
+        <value>Reservation date</value>
+      </synonym>
+      <type>
+        <types>Date</types>
+        <dateQualifiers>
+          <dateFractions>Date</dateFractions>
+        </dateQualifiers>
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>

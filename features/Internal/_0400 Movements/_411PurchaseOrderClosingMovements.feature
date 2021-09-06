@@ -78,6 +78,9 @@ Scenario: _041158 preparation (Purchase order closing)
 		When Create document PurchaseInvoice objects (movements, purchase order closing)
 		And I execute 1C:Enterprise script at server
 				| "Documents.PurchaseInvoice.FindByNumber(37).GetObject().Write(DocumentWriteMode.Posting);" |
+		When Create document GoodsReceipt objects (movements, purchase order closing)
+		And I execute 1C:Enterprise script at server
+				| "Documents.GoodsReceipt.FindByNumber(38).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I close all client application windows
 	* Load Purchase order closing document
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
@@ -186,22 +189,7 @@ Scenario: _041160 check Purchase order closing movements by the Register  "R2014
 			| ''                                           | '$$DatePurchaseOrderClosing37$$' | '64'        | '7 680'    | '6 508,47'   | 'Main Company' | 'Front office' | 'en description is empty'      | 'TRY'      | 'Purchase order 37 dated 09.03.2021 14:29:00' | 'XS/Blue'  | '0e65d648-bd28-47a2-84dc-e260219c1395' | 'not available' | 'No'                   |
 		And I close all client application windows
 		
-// Scenario: _041161 check Purchase order closing movements by the Register  "R4013 Stock Reservation planning"
-// 	* Select Purchase order closing
-// 		Given I open hyperlink "e1cib/list/Document.PurchaseOrderClosing"
-// 		And I go to line in "List" table
-// 			| 'Number'  |
-// 			| '$$NumberPurchaseOrderClosing37$$' |
-// 	* Check movements by the Register  "R4013 Stock Reservation planning" 
-// 		And I click "Registrations report" button
-// 		And I select "R4013 Stock Reservation planning" exact value from "Register" drop-down list
-// 		And I click "Generate report" button
-// 		Then "ResultTable" spreadsheet document is equal
-// 			| 'Purchase order closing 1 dated *'					 	  | ''            | ''                    | ''          | ''           | ''          |
-// 			| 'Document registrations records'                    | ''            | ''                    | ''          | ''           | ''          |
-// 			| 'Register  "R4013 Stock Reservation planning"'                     | ''            | ''                    | ''          | ''           | ''          |
-			
-// 		And I close all client application windows
+
 		
 Scenario: _041162 check Purchase order closing movements by the Register  "R1011 Receipt of purchase orders"
 	* Select Purchase order closing
@@ -271,7 +259,8 @@ Scenario: _041167 check Purchase order closing movements by the Register  "R1012
 			| ''                                                     | 'Record type' | 'Period'                         | 'Resources' | ''       | ''           | 'Dimensions'   | ''             | ''                                            | ''         | ''         | ''                                     |
 			| ''                                                     | ''            | ''                               | 'Quantity'  | 'Amount' | 'Net amount' | 'Company'      | 'Branch'       | 'Order'                                       | 'Currency' | 'Item key' | 'Row key'                              |
 			| ''                                                     | 'Receipt'     | '$$DatePurchaseOrderClosing37$$' | '-64'       | '-7 680' | '-6 508,47'  | 'Main Company' | 'Front office' | 'Purchase order 37 dated 09.03.2021 14:29:00' | 'TRY'      | 'XS/Blue'  | '0e65d648-bd28-47a2-84dc-e260219c1395' |
-			| ''                                                     | 'Receipt'     | '$$DatePurchaseOrderClosing37$$' | '1'         | '150,00' | '127,12'     | 'Main Company' | 'Front office' | 'Purchase order 37 dated 09.03.2021 14:29:00' | 'TRY'      | '38/Black' | 'b5d168e5-e60d-44c9-9168-b13a2695077f' |
+			| ''                                                     | 'Receipt'     | '$$DatePurchaseOrderClosing37$$' | '-1'        | '-100'   | '-84,75'     | 'Main Company' | 'Front office' | 'Purchase order 37 dated 09.03.2021 14:29:00' | 'TRY'      | 'Rent'     | 'da5e404f-fed0-41c5-81dc-b8eadd89e699' |
+			| ''                                                     | 'Receipt'     | '$$DatePurchaseOrderClosing37$$' | '1'         | '150'    | '127,12'     | 'Main Company' | 'Front office' | 'Purchase order 37 dated 09.03.2021 14:29:00' | 'TRY'      | '38/Black' | 'b5d168e5-e60d-44c9-9168-b13a2695077f' |
 		And I close all client application windows
 
 

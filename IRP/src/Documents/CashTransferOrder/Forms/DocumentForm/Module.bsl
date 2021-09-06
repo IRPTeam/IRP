@@ -94,6 +94,26 @@ Procedure ReceiverOnChange(Item, AddInfo = Undefined) Export
 	DocCashTransferOrderClient.ReceiverOnChange(Object, ThisObject, Item);
 EndProcedure
 
+&AtClient
+Procedure SendFinancialMovementTypeStartChoice(Item, ChoiceData, StandardProcessing)
+	DocCashTransferOrderClient.FinancialMovementTypeStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure SendFinancialMovementTypeEditTextChange(Item, Text, StandardProcessing)
+	DocCashTransferOrderClient.FinancialMovementTypeEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure ReceiveFinancialMovementTypeStartChoice(Item, ChoiceData, StandardProcessing)
+	DocCashTransferOrderClient.FinancialMovementTypeStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure ReceiveFinancialMovementTypeEditTextChange(Item, Text, StandardProcessing)
+	DocCashTransferOrderClient.FinancialMovementTypeEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
 #Region GroupTitleDecorations
 
 &AtClient

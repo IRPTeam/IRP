@@ -70,6 +70,7 @@ Scenario: _043500 preparation (Cash payment)
 				| "DocumentDiscount" |
 			When add Plugin for document discount
 			When Create catalog CancelReturnReasons objects
+			When Create catalog LegalNameContracts objects
 	* Load documents
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		If "List" table does not contain lines Then
@@ -129,6 +130,9 @@ Scenario: _043500 preparation (Cash payment)
 			| "Documents.CashPayment.FindByNumber(324).GetObject().Write(DocumentWriteMode.Posting);" |
 			| "Documents.CashPayment.FindByNumber(325).GetObject().Write(DocumentWriteMode.Posting);" |
 			| "Documents.CashPayment.FindByNumber(326).GetObject().Write(DocumentWriteMode.Posting);" |
+		When Create document CashPayment objects (return to customer)
+		And I execute 1C:Enterprise script at server
+			| "Documents.CashPayment.FindByNumber(327).GetObject().Write(DocumentWriteMode.Posting);" |
 		And I close all client application windows
 		
 
@@ -167,12 +171,12 @@ Scenario: _043502 check Cash payment movements by the Register "R5010 Reconcilia
 		And I select "R5010 Reconciliation statement" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Cash payment 1 dated 05.04.2021 12:40:00'   | ''            | ''                    | ''          | ''             | ''             | ''         | ''                  |
-			| 'Document registrations records'             | ''            | ''                    | ''          | ''             | ''             | ''         | ''                  |
-			| 'Register  "R5010 Reconciliation statement"' | ''            | ''                    | ''          | ''             | ''             | ''         | ''                  |
-			| ''                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''         | ''                  |
-			| ''                                           | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'       | 'Currency' | 'Legal name'        |
-			| ''                                           | 'Receipt'     | '05.04.2021 12:40:00' | '1 000'     | 'Main Company' | 'Front office' | 'TRY'      | 'Company Ferron BP' |
+			| 'Cash payment 1 dated 05.04.2021 12:40:00'   | ''            | ''                    | ''          | ''             | ''             | ''         | ''                  | ''                  |
+			| 'Document registrations records'             | ''            | ''                    | ''          | ''             | ''             | ''         | ''                  | ''                  |
+			| 'Register  "R5010 Reconciliation statement"' | ''            | ''                    | ''          | ''             | ''             | ''         | ''                  | ''                  |
+			| ''                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''         | ''                  | ''                  |
+			| ''                                           | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'       | 'Currency' | 'Legal name'        |'Legal name contract'|
+			| ''                                           | 'Receipt'     | '05.04.2021 12:40:00' | '1 000'     | 'Main Company' | 'Front office' | 'TRY'      | 'Company Ferron BP' |'Contract Ferron BP New'|
 	And I close all client application windows
 
 Scenario: _043503 check Cash payment movements by the Register "R1020 Advances to vendors" (payment to vendor, without basis document)
@@ -213,7 +217,7 @@ Scenario: _043514 check Cash payment movements by the Register "R3035 Cash plann
 			| 'Document registrations records'             | ''                    | ''          | ''             | ''             | ''                                                     | ''             | ''         | ''                    | ''          | ''                  | ''                             | ''                | ''                | ''                     |
 			| 'Register  "R3035 Cash planning"'            | ''                    | ''          | ''             | ''             | ''                                                     | ''             | ''         | ''                    | ''          | ''                  | ''                             | ''                | ''                | ''                     |
 			| ''                                           | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''                                                     | ''             | ''         | ''                    | ''          | ''                  | ''                             | ''                | ''                | 'Attributes'           |
-			| ''                                           | ''                    | 'Amount'    | 'Company'      | 'Branch'       | 'Basis document'                                       | 'Account'      | 'Currency' | 'Cash flow direction' | 'Partner'   | 'Legal name'        | 'Multi currency movement type' | 'Movement type'   | 'Planning period' | 'Deferred calculation' |
+			| ''                                           | ''                    | 'Amount'    | 'Company'      | 'Branch'       | 'Basis document'                                       | 'Account'      | 'Currency' | 'Cash flow direction' | 'Partner'   | 'Legal name'        | 'Multi currency movement type' | 'Financial movement type'   | 'Planning period' | 'Deferred calculation' |
 			| ''                                           | '04.06.2021 11:30:02' | '-960'      | 'Main Company' | 'Front office' | 'Outgoing payment order 324 dated 04.06.2021 10:38:24' | 'Cash desk №1' | 'TRY'      | 'Outgoing'            | 'Ferron BP' | 'Company Ferron BP' | 'Local currency'               | 'Movement type 1' | 'Second'          | 'No'                   |
 			| ''                                           | '04.06.2021 11:30:02' | '-960'      | 'Main Company' | 'Front office' | 'Outgoing payment order 324 dated 04.06.2021 10:38:24' | 'Cash desk №1' | 'TRY'      | 'Outgoing'            | 'Ferron BP' | 'Company Ferron BP' | 'en description is empty'      | 'Movement type 1' | 'Second'          | 'No'                   |
 			| ''                                           | '04.06.2021 11:30:02' | '-164,35'   | 'Main Company' | 'Front office' | 'Outgoing payment order 324 dated 04.06.2021 10:38:24' | 'Cash desk №1' | 'USD'      | 'Outgoing'            | 'Ferron BP' | 'Company Ferron BP' | 'Reporting currency'           | 'Movement type 1' | 'Second'          | 'No'                   |
@@ -235,7 +239,7 @@ Scenario: _043515 check Cash payment movements by the Register "R3035 Cash plann
 			| 'Document registrations records'             | ''                    | ''          | ''             | ''             | ''                                                | ''             | ''         | ''                    | ''        | ''           | ''                             | ''                | ''                | ''                     |
 			| 'Register  "R3035 Cash planning"'            | ''                    | ''          | ''             | ''             | ''                                                | ''             | ''         | ''                    | ''        | ''           | ''                             | ''                | ''                | ''                     |
 			| ''                                           | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''                                                | ''             | ''         | ''                    | ''        | ''           | ''                             | ''                | ''                | 'Attributes'           |
-			| ''                                           | ''                    | 'Amount'    | 'Company'      | 'Branch'       | 'Basis document'                                  | 'Account'      | 'Currency' | 'Cash flow direction' | 'Partner' | 'Legal name' | 'Multi currency movement type' | 'Movement type'   | 'Planning period' | 'Deferred calculation' |
+			| ''                                           | ''                    | 'Amount'    | 'Company'      | 'Branch'       | 'Basis document'                                  | 'Account'      | 'Currency' | 'Cash flow direction' | 'Partner' | 'Legal name' | 'Multi currency movement type' | 'Financial movement type'   | 'Planning period' | 'Deferred calculation' |
 			| ''                                           | '04.06.2021 12:43:40' | '-1 000'    | 'Main Company' | 'Front office' | 'Cash transfer order 4 dated 05.04.2021 12:24:12' | 'Cash desk №1' | 'TRY'      | 'Outgoing'            | ''        | ''           | 'Local currency'               | 'Movement type 1' | ''                | 'No'                   |
 			| ''                                           | '04.06.2021 12:43:40' | '-1 000'    | 'Main Company' | 'Front office' | 'Cash transfer order 4 dated 05.04.2021 12:24:12' | 'Cash desk №1' | 'TRY'      | 'Outgoing'            | ''        | ''           | 'en description is empty'      | 'Movement type 1' | ''                | 'No'                   |
 			| ''                                           | '04.06.2021 12:43:40' | '-171,2'    | 'Main Company' | 'Front office' | 'Cash transfer order 4 dated 05.04.2021 12:24:12' | 'Cash desk №1' | 'USD'      | 'Outgoing'            | ''        | ''           | 'Reporting currency'           | 'Movement type 1' | ''                | 'No'                   |
@@ -257,7 +261,7 @@ Scenario: _043516 check Cash payment movements by the Register "R3035 Cash plann
 			| 'Document registrations records'             | ''                    | ''          | ''             | ''             | ''                                                | ''             | ''         | ''                    | ''        | ''           | ''                             | ''                | ''                | ''                     |
 			| 'Register  "R3035 Cash planning"'            | ''                    | ''          | ''             | ''             | ''                                                | ''             | ''         | ''                    | ''        | ''           | ''                             | ''                | ''                | ''                     |
 			| ''                                           | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''                                                | ''             | ''         | ''                    | ''        | ''           | ''                             | ''                | ''                | 'Attributes'           |
-			| ''                                           | ''                    | 'Amount'    | 'Company'      | 'Branch'       | 'Basis document'                                  | 'Account'      | 'Currency' | 'Cash flow direction' | 'Partner' | 'Legal name' | 'Multi currency movement type' | 'Movement type'   | 'Planning period' | 'Deferred calculation' |
+			| ''                                           | ''                    | 'Amount'    | 'Company'      | 'Branch'       | 'Basis document'                                  | 'Account'      | 'Currency' | 'Cash flow direction' | 'Partner' | 'Legal name' | 'Multi currency movement type' | 'Financial movement type'   | 'Planning period' | 'Deferred calculation' |
 			| ''                                           | '04.06.2021 12:44:31' | '-2 532,38' | 'Main Company' | 'Front office' | 'Cash transfer order 1 dated 07.09.2020 19:18:16' | 'Cash desk №1' | 'TRY'      | 'Outgoing'            | ''        | ''           | 'Local currency'               | 'Movement type 1' | ''                | 'No'                   |
 			| ''                                           | '04.06.2021 12:44:31' | '-450'      | 'Main Company' | 'Front office' | 'Cash transfer order 1 dated 07.09.2020 19:18:16' | 'Cash desk №1' | 'USD'      | 'Outgoing'            | ''        | ''           | 'Reporting currency'           | 'Movement type 1' | ''                | 'No'                   |
 			| ''                                           | '04.06.2021 12:44:31' | '-450'      | 'Main Company' | 'Front office' | 'Cash transfer order 1 dated 07.09.2020 19:18:16' | 'Cash desk №1' | 'USD'      | 'Outgoing'            | ''        | ''           | 'en description is empty'      | 'Movement type 1' | ''                | 'No'                   |
@@ -278,6 +282,30 @@ Scenario: _043518 check absence Cash payment movements by the Register "R3035 Ca
 		Then "ResultTable" spreadsheet document does not contain values
 			| 'R3035 Cash planning'   | 
 	And I close all client application windows
+
+Scenario: _043520 check Cash payment movements by the Register "R3010 Cash on hand" (Return to customer, without basis)
+	* Select Cash payment
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.CashPayment"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '327' |
+		And I select current line in "List" table
+	* Check movements by the Register  "R3010 Cash on hand" 
+		And I click "Registrations report" button
+		And I select "R3010 Cash on hand" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Cash payment 327 dated 02.09.2021 14:09:26' | ''            | ''                    | ''          | ''             | ''             | ''             | ''         | ''                             | ''                     |
+			| 'Document registrations records'             | ''            | ''                    | ''          | ''             | ''             | ''             | ''         | ''                             | ''                     |
+			| 'Register  "R3010 Cash on hand"'             | ''            | ''                    | ''          | ''             | ''             | ''             | ''         | ''                             | ''                     |
+			| ''                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''             | ''         | ''                             | 'Attributes'           |
+			| ''                                           | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'       | 'Account'      | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
+			| ''                                           | 'Expense'     | '02.09.2021 14:09:26' | '450'       | 'Main Company' | 'Front office' | 'Cash desk №1' | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                           | 'Expense'     | '02.09.2021 14:09:26' | '450'       | 'Main Company' | 'Front office' | 'Cash desk №1' | 'USD'      | 'en description is empty'      | 'No'                   |
+			| ''                                           | 'Expense'     | '02.09.2021 14:09:26' | '2 532,38'  | 'Main Company' | 'Front office' | 'Cash desk №1' | 'TRY'      | 'Local currency'               | 'No'                   |		
+	And I close all client application windows
+
 
 Scenario: _043530 Cash payment clear posting/mark for deletion
 	And I close all client application windows

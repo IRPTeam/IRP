@@ -92,9 +92,9 @@ Scenario: _044001 check Cash expense movements by the Register "R3010 Cash on ha
 			| 'Register  "R3010 Cash on hand"'           | ''            | ''                    | ''          | ''             | ''        | ''                  | ''         | ''                             | ''                     |
 			| ''                                         | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''        | ''                  | ''         | ''                             | 'Attributes'           |
 			| ''                                         | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'  | 'Account'           | 'Currency' | 'Multi currency movement type' | 'Deferred calculation' |
-			| ''                                         | 'Expense'     | '07.09.2020 19:25:17' | '100'       | 'Main Company' | 'Shop 01' | 'Bank account, TRY' | 'TRY'      | 'Local currency'               | 'No'                   |
-			| ''                                         | 'Expense'     | '07.09.2020 19:25:17' | '100'       | 'Main Company' | 'Shop 01' | 'Bank account, TRY' | 'TRY'      | 'en description is empty'      | 'No'                   |
-			| ''                                         | 'Expense'     | '07.09.2020 19:25:17' | '584'       | 'Main Company' | 'Shop 01' | 'Bank account, TRY' | 'USD'      | 'Reporting currency'           | 'No'                   |
+			| ''                                         | 'Expense'     | '07.09.2020 19:25:17' | '118'       | 'Main Company' | 'Shop 01' | 'Bank account, TRY' | 'TRY'      | 'Local currency'               | 'No'                   |
+			| ''                                         | 'Expense'     | '07.09.2020 19:25:17' | '118'       | 'Main Company' | 'Shop 01' | 'Bank account, TRY' | 'TRY'      | 'en description is empty'      | 'No'                   |
+			| ''                                         | 'Expense'     | '07.09.2020 19:25:17' | '689,12'    | 'Main Company' | 'Shop 01' | 'Bank account, TRY' | 'USD'      | 'Reporting currency'           | 'No'                   |
 	And I close all client application windows
 
 
@@ -110,14 +110,14 @@ Scenario: _044002 check Cash expense movements by the Register "R5022 Expenses"
 		And I select "R5022 Expenses" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Cash expense 1 dated 07.09.2020 19:25:17' | ''                    | ''          | ''             | ''        | ''                   | ''             | ''         | ''         | ''                    | ''                             |
-			| 'Document registrations records'           | ''                    | ''          | ''             | ''        | ''                   | ''             | ''         | ''         | ''                    | ''                             |
-			| 'Register  "R5022 Expenses"'               | ''                    | ''          | ''             | ''        | ''                   | ''             | ''         | ''         | ''                    | ''                             |
-			| ''                                         | 'Period'              | 'Resources' | 'Dimensions'   | ''        | ''                   | ''             | ''         | ''         | ''                    | ''                             |
-			| ''                                         | ''                    | 'Amount'    | 'Company'      | 'Branch'  | 'Profit loss center' | 'Expense type' | 'Item key' | 'Currency' | 'Additional analytic' | 'Multi currency movement type' |
-			| ''                                         | '07.09.2020 19:25:17' | '100'       | 'Main Company' | 'Shop 01' | 'Front office'       | 'Fuel'         | ''         | 'TRY'      | ''                    | 'Local currency'               |
-			| ''                                         | '07.09.2020 19:25:17' | '100'       | 'Main Company' | 'Shop 01' | 'Front office'       | 'Fuel'         | ''         | 'TRY'      | ''                    | 'en description is empty'      |
-			| ''                                         | '07.09.2020 19:25:17' | '584'       | 'Main Company' | 'Shop 01' | 'Front office'       | 'Fuel'         | ''         | 'USD'      | ''                    | 'Reporting currency'           |
+			| 'Cash expense 1 dated 07.09.2020 19:25:17' | ''                    | ''          | ''                  | ''             | ''        | ''                   | ''             | ''         | ''         | ''                    | ''                             |
+			| 'Document registrations records'           | ''                    | ''          | ''                  | ''             | ''        | ''                   | ''             | ''         | ''         | ''                    | ''                             |
+			| 'Register  "R5022 Expenses"'               | ''                    | ''          | ''                  | ''             | ''        | ''                   | ''             | ''         | ''         | ''                    | ''                             |
+			| ''                                         | 'Period'              | 'Resources' | ''                  | 'Dimensions'   | ''        | ''                   | ''             | ''         | ''         | ''                    | ''                             |
+			| ''                                         | ''                    | 'Amount'    | 'Amount with taxes' | 'Company'      | 'Branch'  | 'Profit loss center' | 'Expense type' | 'Item key' | 'Currency' | 'Additional analytic' | 'Multi currency movement type' |
+			| ''                                         | '07.09.2020 19:25:17' | '100'       | '118'               | 'Main Company' | 'Shop 01' | 'Front office'       | 'Fuel'         | ''         | 'TRY'      | ''                    | 'Local currency'               |
+			| ''                                         | '07.09.2020 19:25:17' | '100'       | '118'               | 'Main Company' | 'Shop 01' | 'Front office'       | 'Fuel'         | ''         | 'TRY'      | ''                    | 'en description is empty'      |
+			| ''                                         | '07.09.2020 19:25:17' | '584'       | '689,12'            | 'Main Company' | 'Shop 01' | 'Front office'       | 'Fuel'         | ''         | 'USD'      | ''                    | 'Reporting currency'           |			
 	And I close all client application windows
 
 Scenario: _044030 Cash expense clear posting/mark for deletion

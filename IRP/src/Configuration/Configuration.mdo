@@ -18,7 +18,7 @@
   <usePurposes>PersonalComputer</usePurposes>
   <defaultRoles>Role.FullAccess</defaultRoles>
   <vendor>IRP Team</vendor>
-  <version>2021.27.#BuildNumber#</version>
+  <version>2021.#weekNumber#.#BuildNumber#</version>
   <updateCatalogAddress>https://github.com/IRPTeam/IRP</updateCatalogAddress>
   <useManagedFormInOrdinaryApplication>true</useManagedFormInOrdinaryApplication>
   <useOrdinaryFormInManagedApplication>true</useOrdinaryFormInManagedApplication>
@@ -166,6 +166,8 @@
   <commonPictures>CommonPicture.SessionParameter</commonPictures>
   <commonPictures>CommonPicture.AccountingFlags</commonPictures>
   <commonPictures>CommonPicture.Recalculations</commonPictures>
+  <commonPictures>CommonPicture.IconCollection5</commonPictures>
+  <commonPictures>CommonPicture.IconCollection6</commonPictures>
   <sessionParameters>SessionParameter.ClientType</sessionParameters>
   <sessionParameters>SessionParameter.ConnectedAddDataProc</sessionParameters>
   <sessionParameters>SessionParameter.ConnectionSettings</sessionParameters>
@@ -570,6 +572,8 @@
   <catalogs>Catalog.MovementRules</catalogs>
   <catalogs>Catalog.RowIDs</catalogs>
   <catalogs>Catalog.PlanningPeriods</catalogs>
+  <catalogs>Catalog.LegalNameContracts</catalogs>
+  <catalogs>Catalog.PartnerItems</catalogs>
   <documents>Document.BankPayment</documents>
   <documents>Document.BankReceipt</documents>
   <documents>Document.Bundling</documents>
@@ -580,6 +584,7 @@
   <documents>Document.CashStatement</documents>
   <documents>Document.CashTransferOrder</documents>
   <documents>Document.CreditNote</documents>
+  <documents>Document.CustomersAdvancesClosing</documents>
   <documents>Document.DebitNote</documents>
   <documents>Document.GoodsReceipt</documents>
   <documents>Document.IncomingPaymentOrder</documents>
@@ -614,7 +619,6 @@
   <documents>Document.StockAdjustmentAsWriteOff</documents>
   <documents>Document.Unbundling</documents>
   <documents>Document.VendorsAdvancesClosing</documents>
-  <documents>Document.CustomersAdvancesClosing</documents>
   <documentJournals>DocumentJournal.DocumentsForIncomingPayment</documentJournals>
   <documentJournals>DocumentJournal.DocumentsForOutgoingPayment</documentJournals>
   <documentJournals>DocumentJournal.DocumentsForCreditDebitNote</documentJournals>
@@ -631,7 +635,6 @@
   <enums>Enum.DataAreaStatus</enums>
   <enums>Enum.DocumentPostingTypes</enums>
   <enums>Enum.EquipmentTypes</enums>
-  <enums>Enum.ExpenseAndRevenueTypes</enums>
   <enums>Enum.FileTypes</enums>
   <enums>Enum.FormTypes</enums>
   <enums>Enum.GoodsReceiptTransactionTypes</enums>
@@ -660,7 +663,8 @@
   <enums>Enum.TypeExternalObject</enums>
   <enums>Enum.InterfaceGroupBehaviors</enums>
   <enums>Enum.InterfaceGroupChildFormItemsGroups</enums>
-  <enums>Enum.InvoicingShippingStatuses</enums>
+  <enums>Enum.InvoicingStatuses</enums>
+  <enums>Enum.ShippingStatuses</enums>
   <reports>Report.DocumentRegistrationsReport</reports>
   <reports>Report.PriceInfo</reports>
   <reports>Report.AllRegistersMovement</reports>
@@ -702,7 +706,6 @@
   <informationRegisters>InformationRegister.T2012S_PartnerAdvances</informationRegisters>
   <informationRegisters>InformationRegister.T2013S_OffsetOfAging</informationRegisters>
   <accumulationRegisters>AccumulationRegister.CashInTransit</accumulationRegisters>
-  <accumulationRegisters>AccumulationRegister.R3035T_CashPlanning</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1001T_Purchases</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1002T_PurchaseReturns</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1005T_PurchaseSpecialOffers</accumulationRegisters>
@@ -728,16 +731,18 @@
   <accumulationRegisters>AccumulationRegister.R2022B_CustomersPaymentPlanning</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R2031B_ShipmentInvoicing</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R2040B_TaxesIncoming</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R2050T_RetailSales</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R3010B_CashOnHand</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R3011T_CashMovements</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R3015B_CashAdvance</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R3016B_ChequeAndBonds</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R3021B_CashInTransitIncoming</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R3022B_CashInTransitOutgoing</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R3035T_CashPlanning</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R3050T_RetailCash</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R4010B_ActualStocks</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R4011B_FreeStocks</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R4012B_StockReservation</accumulationRegisters>
-  <accumulationRegisters>AccumulationRegister.R4013B_StockReservationPlanning</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R4014B_SerialLotNumber</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R4015T_InternalSupplyRequests</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R4016B_InternalSupplyRequestOrdering</accumulationRegisters>
@@ -760,8 +765,6 @@
   <accumulationRegisters>AccumulationRegister.R5021T_Revenues</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R5022T_Expenses</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R5041B_TaxesPayable</accumulationRegisters>
-  <accumulationRegisters>AccumulationRegister.R3050T_RetailCash</accumulationRegisters>
-  <accumulationRegisters>AccumulationRegister.R2050T_RetailSales</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.TM1010B_RowIDMovements</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.TM1010T_RowIDMovements</accumulationRegisters>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.AddAttributeAndProperty</chartsOfCharacteristicTypes>

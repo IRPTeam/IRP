@@ -5,6 +5,12 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	EndIf;	
 
 	ThisObject.DocumentAmount = ThisObject.ItemList.Total("TotalAmount");	
+	
+	Payments_Amount = ThisObject.Payments.Total("Amount");
+	If  ThisObject.DocumentAmount <> Payments_Amount  Then
+		Cancel = True;		
+		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_095, Payments_Amount, ThisObject.DocumentAmount));
+	EndIf;
 EndProcedure
 
 Procedure OnWrite(Cancel)

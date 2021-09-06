@@ -1,3 +1,11 @@
+#Region PrintForm
+
+Function GetPrintForm(Ref, PrintFormName, AddInfo = Undefined) Export
+	Return Undefined;
+EndFunction
+
+#EndRegion
+
 #Region Posting
 
 Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
@@ -71,7 +79,7 @@ EndProcedure
 
 Function GetInformationAboutMovements(Ref) Export
 	Str = New Structure;
-	Str.Insert("QueryParamenters", GetAdditionalQueryParamenters(Ref));
+	Str.Insert("QueryParameters", GetAdditionalQueryParamenters(Ref));
 	Str.Insert("QueryTextsMasterTables", GetQueryTextsMasterTables());
 	Str.Insert("QueryTextsSecondaryTables", GetQueryTextsSecondaryTables());
 	Return Str;
@@ -101,6 +109,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R1011B_PurchaseOrdersReceipt());
 	QueryArray.Add(R1012B_PurchaseOrdersInvoiceClosing());
 	QueryArray.Add(R1014T_CanceledPurchaseOrders());
+	QueryArray.Add(R4033B_GoodsReceiptSchedule());
 	QueryArray.Add(R4035B_IncomingStocks());
 	Return QueryArray;	
 EndFunction	
@@ -208,6 +217,21 @@ Function R1014T_CanceledPurchaseOrders()
 		|FROM
 		|	ItemList AS QueryTable
 		|WHERE QueryTable.isCanceled";
+
+EndFunction
+
+Function R4033B_GoodsReceiptSchedule()
+	Return
+		"SELECT 
+		|	&Period AS Period,
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	-IncomingStocks.QuantityBalance AS Quantity,
+		|	*
+		|
+		|INTO R4033B_GoodsReceiptSchedule
+		|FROM
+		|	AccumulationRegister.R4033B_GoodsReceiptSchedule.Balance(&BalancePeriod, Basis = &PurchaseOrder) AS
+		|		IncomingStocks";
 
 EndFunction
 

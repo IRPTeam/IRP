@@ -1,8 +1,16 @@
+#Region PrintForm
+
+Function GetPrintForm(Ref, PrintFormName, AddInfo = Undefined) Export
+	Return Undefined;
+EndFunction
+
+#EndRegion
+
 #Region Posting
 
 Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 	QueryArray = GetQueryTextsSecondaryTables(Parameters);
-	Parameters.Insert("QueryParameters", GetAdditionalQueryParamenters(Ref));
+	Parameters.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
 	Return New Structure();
 EndFunction
@@ -64,13 +72,13 @@ EndProcedure
 
 Function GetInformationAboutMovements(Ref) Export
 	Str = New Structure;
-	Str.Insert("QueryParamenters", GetAdditionalQueryParamenters(Ref));
+	Str.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
 	Str.Insert("QueryTextsMasterTables", GetQueryTextsMasterTables());
 	Str.Insert("QueryTextsSecondaryTables", GetQueryTextsSecondaryTables());
 	Return Str;
 EndFunction
 
-Function GetAdditionalQueryParamenters(Ref)
+Function GetAdditionalQueryParameters(Ref)
 	StrParams = New Structure();
 	StrParams.Insert("Ref", Ref);
 	Return StrParams;
@@ -217,7 +225,13 @@ Function OffsetOfAdvances(Parameters)
 			Create_CustomersTransactions(Row.Recorder, Parameters);
 			Create_CustomersAging(Row.Recorder, Parameters);
 			OffsetOfPartnersServer.Customers_OnTransaction(Parameters);
-			Write_AdvancesAndTransactions(Row.Recorder, Parameters, OffsetOfAdvanceFull);
+			
+			UseKeyForAdvance = False;
+			If OffsetOfPartnersServer.IsDebitCreditNote(Row.Recorder) Then
+				UseKeyForAdvance = True;
+			EndIf;
+			
+			Write_AdvancesAndTransactions(Row.Recorder, Parameters, OffsetOfAdvanceFull, UseKeyForAdvance);
 			Write_PartnersAging(Row.Recorder, Parameters, OffsetOfAgingFull);
 			Drop_Table(Parameters, "CustomersTransactions");
 			Drop_Table(Parameters, "Aging");
@@ -811,12 +825,7 @@ Procedure Write_AdvancesAndTransactions(Recorder, Parameters, OffsetOfAdvanceFul
 	TableTransactions = RecordSet_CustomersTransactions.UnloadColumns();
 	TableTransactions.Columns.Delete(TableTransactions.Columns.PointInTime);
 	
-	IsDebitCreditNote = OffsetOfPartnersServer.IsDebitCreditNote(Recorder); 
-	If IsDebitCreditNote Then
-		TableTransactions.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
-	EndIf;
-	
-	If IsDebitCreditNote Or UseKeyForAdvance Then
+	If UseKeyForAdvance Then
 		TableAdvances.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	EndIf;
 	

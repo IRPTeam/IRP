@@ -18,12 +18,17 @@ EndProcedure
 
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
+	If Parameters.Key.IsEmpty() Then
+		SetVisibilityAvailability(Object, ThisObject);
+	EndIf;
+
 	DocStockAdjustmentAsSurplusServer.OnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
 EndProcedure
 
 &AtServer
 Procedure OnReadAtServer(CurrentObject)
 	DocStockAdjustmentAsSurplusServer.OnReadAtServer(Object, ThisObject, CurrentObject);
+	SetVisibilityAvailability(CurrentObject, ThisObject);
 EndProcedure
 
 &AtClient
@@ -38,12 +43,19 @@ EndProcedure
 
 &AtServer
 Procedure AfterWriteAtServer(CurrentObject, WriteParameters)
+	SetVisibilityAvailability(CurrentObject, ThisObject);
 	DocStockAdjustmentAsSurplusServer.AfterWriteAtServer(Object, ThisObject, CurrentObject, WriteParameters);
 EndProcedure
 
 &AtServer
 Procedure OnWriteAtServer(Cancel, CurrentObject, WriteParameters)
 	DocumentsServer.OnWriteAtServer(Object, ThisObject, Cancel, CurrentObject, WriteParameters);
+EndProcedure
+
+&AtClientAtServerNoContext
+Procedure SetVisibilityAvailability(Object, Form) Export
+	Form.Items.AddBasisDocuments.Enabled = Not Form.ReadOnly;
+	Form.Items.LinkUnlinkBasisDocuments.Enabled = Not Form.ReadOnly;
 EndProcedure
 
 #EndRegion
@@ -68,6 +80,11 @@ EndProcedure
 &AtClient
 Procedure ItemListItemOnChange(Item)
 	DocStockAdjustmentAsSurplusClient.ItemListItemOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure ItemListBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
+	DocStockAdjustmentAsSurplusClient.ItemListBeforeAddRow(Object, ThisObject, Item, Cancel, Clone, Parent, IsFolder, Parameter);
 EndProcedure
 
 &AtClient
@@ -217,6 +234,8 @@ EndProcedure
 &AtClient
 Function GetLinkedDocumentsFilter()
 	Filter = New Structure();
+	Filter.Insert("Company" , Object.Company);
+	Filter.Insert("Branch"  , Object.Branch);
 	Filter.Insert("Store"   , Object.Store);
 	Filter.Insert("Ref"     , Object.Ref);
 	Return Filter;
@@ -251,6 +270,7 @@ Procedure AddOrLinkUnlinkDocumentRowsContinue(Result, AdditionalParameters) Expo
 	If Result = Undefined Then
 		Return;
 	EndIf;
+	ThisObject.Modified = True;
 	AddOrLinkUnlinkDocumentRowsContinueAtServer(Result);
 EndProcedure
 

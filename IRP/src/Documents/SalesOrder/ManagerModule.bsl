@@ -1,3 +1,11 @@
+#Region PrintForm
+
+Function GetPrintForm(Ref, PrintFormName, AddInfo = Undefined) Export
+	Return Undefined;
+EndFunction
+
+#EndRegion
+
 #Region Posting
 
 Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
@@ -9,7 +17,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	If Not StatusInfo.Posting Then
 #Region NewRegistersPosting
 		QueryArray = GetQueryTextsSecondaryTables();
-		Parameters.Insert("QueryParameters", GetAdditionalQueryParamenters(Ref));
+		Parameters.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
 		PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
 #EndRegion
 		Return Tables;
@@ -19,7 +27,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 
 #Region NewRegistersPosting
 	QueryArray = GetQueryTextsSecondaryTables();
-	Parameters.Insert("QueryParameters", GetAdditionalQueryParamenters(Ref));
+	Parameters.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
 #EndRegion	
 	Return Tables;
@@ -100,13 +108,13 @@ EndProcedure
 
 Function GetInformationAboutMovements(Ref) Export
 	Str = New Structure;
-	Str.Insert("QueryParamenters", GetAdditionalQueryParamenters(Ref));
+	Str.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
 	Str.Insert("QueryTextsMasterTables", GetQueryTextsMasterTables());
 	Str.Insert("QueryTextsSecondaryTables", GetQueryTextsSecondaryTables());
 	Return Str;
 EndFunction
 
-Function GetAdditionalQueryParamenters(Ref)
+Function GetAdditionalQueryParameters(Ref)
 	StrParams = New Structure();
 	StatusInfo = ObjectStatusesServer.GetLastStatusInfo(Ref);
 	StrParams.Insert("StatusInfoPosting", StatusInfo.Posting);
@@ -129,7 +137,6 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R2014T_CanceledSalesOrders());
 	QueryArray.Add(R4011B_FreeStocks());
 	QueryArray.Add(R4012B_StockReservation());
-	QueryArray.Add(R4013B_StockReservationPlanning());
 	QueryArray.Add(R4034B_GoodsShipmentSchedule());
 	QueryArray.Add(R2022B_CustomersPaymentPlanning());
 	Return QueryArray;	
@@ -164,7 +171,12 @@ Function ItemList()
 	|	SalesOrderItemList.Ref.UseItemsShipmentScheduling AS UseItemsShipmentScheduling,
 	|	SalesOrderItemList.OffersAmount,
 	|	&StatusInfoPosting AS StatusInfoPosting,
-	|	SalesOrderItemList.Ref.Branch AS Branch
+	|	SalesOrderItemList.Ref.Branch AS Branch,
+	|	CASE
+	|		WHEN SalesOrderItemList.ReservationDate = DATETIME(1, 1, 1)
+	|			THEN SalesOrderItemList.Ref.Date
+	|		ELSE SalesOrderItemList.ReservationDate
+	|	END AS ReservationDate
 	|INTO ItemList
 	|FROM
 	|	Document.SalesOrder.ItemList AS SalesOrderItemList
@@ -254,6 +266,7 @@ Function R4012B_StockReservation()
 	Return
 		"SELECT
 		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	ItemList.ReservationDate AS Period,
 		|	*
 		|INTO R4012B_StockReservation
 		|FROM
@@ -265,18 +278,6 @@ Function R4012B_StockReservation()
 EndFunction
 
 #EndRegion
-
-Function R4013B_StockReservationPlanning()
-	Return
-		"SELECT
-		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		|	*
-		|INTO R4013B_StockReservationPlanning
-		|FROM
-		|	ItemList AS ItemList
-		|WHERE
-		|	FALSE";
-EndFunction
 
 Function R4034B_GoodsShipmentSchedule()
 	Return

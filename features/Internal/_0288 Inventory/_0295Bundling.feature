@@ -27,6 +27,7 @@ Scenario: _029500 preparation (Bundling)
 		When Create chart of characteristic types AddAttributeAndProperty objects
 		When Create catalog AddAttributeAndPropertySets objects
 		When Create catalog AddAttributeAndPropertyValues objects
+		When Create catalog Stores objects
 		When Create catalog Companies objects (Main company)
 		When update ItemKeys
 	

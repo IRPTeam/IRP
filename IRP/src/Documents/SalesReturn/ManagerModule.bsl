@@ -1,3 +1,11 @@
+#Region PrintForm
+
+Function GetPrintForm(Ref, PrintFormName, AddInfo = Undefined) Export
+	Return Undefined;
+EndFunction
+
+#EndRegion
+
 #Region Posting
 
 Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
@@ -5,7 +13,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Parameters.IsReposting = False;	
 #Region NewRegistersPosting	
 	QueryArray = GetQueryTextsSecondaryTables();
-	Parameters.Insert("QueryParameters", GetAdditionalQueryParamenters(Ref));
+	Parameters.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
 #EndRegion	
 	Return Tables;
@@ -77,13 +85,13 @@ EndProcedure
 
 Function GetInformationAboutMovements(Ref) Export
 	Str = New Structure;
-	Str.Insert("QueryParamenters", GetAdditionalQueryParamenters(Ref));
+	Str.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
 	Str.Insert("QueryTextsMasterTables", GetQueryTextsMasterTables());
 	Str.Insert("QueryTextsSecondaryTables", GetQueryTextsSecondaryTables());
 	Return Str;
 EndFunction
 
-Function GetAdditionalQueryParamenters(Ref)
+Function GetAdditionalQueryParameters(Ref)
 	StrParams = New Structure();
 	StrParams.Insert("Ref", Ref);
 	Return StrParams;
@@ -102,7 +110,8 @@ Function GetQueryTextsSecondaryTables()
 EndFunction
 
 Function GetQueryTextsMasterTables()
-	QueryArray = New Array;
+	QueryArray = New Array;	
+	QueryArray.Add(R2001T_Sales());
 	QueryArray.Add(R2002T_SalesReturns());	
 	QueryArray.Add(R2005T_SalesSpecialOffers());
 	QueryArray.Add(R2012B_SalesOrdersInvoiceClosing());
@@ -198,7 +207,9 @@ Function ItemList()
 		|	ItemList.ProfitLossCenter AS ProfitLossCenter,
 		|	ItemList.RevenueType AS RevenueType,
 		|	ItemList.AdditionalAnalytic AS AdditionalAnalytic,
-		|	ItemList.Ref.Branch AS Branch
+		|	ItemList.Ref.Branch AS Branch,
+		|	ItemList.Ref.LegalNameContract AS LegalNameContract,
+		|	ItemList.OffersAmount
 		|INTO ItemList
 		|FROM
 		|	Document.SalesReturn.ItemList AS ItemList
@@ -227,16 +238,16 @@ Function OffersInfo()
 	Return
 		"SELECT
 		|	SalesReturnItemList.Ref.Date AS Period,
-		|	SalesReturnItemList.Ref AS Invoice,
 		|	SalesReturnItemList.Key AS RowKey,
 		|	SalesReturnItemList.ItemKey,
 		|	SalesReturnItemList.Ref.Company AS Company,
 		|	SalesReturnItemList.Ref.Branch AS Branch,
 		|	SalesReturnItemList.Ref.Currency,
 		|	SalesReturnSpecialOffers.Offer AS SpecialOffer,
-		|	- SalesReturnSpecialOffers.Amount AS OffersAmount,
-		|	- SalesReturnItemList.TotalAmount AS SalesAmount,
-		|	- SalesReturnItemList.NetAmount AS NetAmount
+		|	SalesReturnItemList.SalesInvoice AS Invoice,
+		|	-SalesReturnSpecialOffers.Amount AS OffersAmount,
+		|	-SalesReturnItemList.TotalAmount AS SalesAmount,
+		|	-SalesReturnItemList.NetAmount AS NetAmount
 		|INTO OffersInfo
 		|FROM
 		|	Document.SalesReturn.ItemList AS SalesReturnItemList
@@ -289,9 +300,27 @@ Function Taxes()
 		|		AND SalesReturnTaxList.Ref = &Ref";
 EndFunction
 
+Function R2001T_Sales()
+	Return
+		"SELECT 
+		|	- ItemList.Quantity AS Quantity,
+		|	- ItemList.Amount AS Amount,
+		|	- ItemList.NetAmount AS NetAmount,
+		|	- ItemList.OffersAmount AS OffersAmount,
+		|	ItemList.SalesInvoice AS Invoice,
+		|	*
+		|INTO R2001T_Sales
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE TRUE";
+
+EndFunction
+
 Function R2002T_SalesReturns()
 	Return
-		"SELECT *
+		"SELECT 
+		|	ItemList.SalesInvoice AS Invoice,
+		|	*
 		|INTO R2002T_SalesReturns
 		|FROM
 		|	ItemList AS ItemList
@@ -301,7 +330,7 @@ EndFunction
 
 Function R2005T_SalesSpecialOffers()
 	Return
-		"SELECT 
+		"SELECT
 		|	*
 		|INTO R2005T_SalesSpecialOffers
 		|FROM
@@ -340,6 +369,8 @@ Function R2021B_CustomersTransactions()
 		|INTO R2021B_CustomersTransactions
 		|FROM
 		|	ItemList AS ItemList
+		|WHERE
+		|	NOT ItemList.DueAsAdvance
 		|GROUP BY
 		|	ItemList.Agreement,
 		|	ItemList.Company,
@@ -354,12 +385,14 @@ EndFunction
 
 Function R2020B_AdvancesFromCustomers()
 	Return
-		"SELECT *
+		"SELECT
+		|	ItemList.AdvanceBasis AS Basis,
+		|	*
 		|INTO R2020B_AdvancesFromCustomers
 		|FROM
 		|	ItemList AS ItemList
 		|WHERE
-		|	FALSE";
+		|	ItemList.DueAsAdvance";
 EndFunction
 
 Function R2031B_ShipmentInvoicing()
@@ -503,6 +536,7 @@ Function R5010B_ReconciliationStatement()
 		|	ItemList.Company,
 		|	ItemList.Branch,
 		|	ItemList.LegalName,
+		|	ItemList.LegalNameContract,
 		|	ItemList.Currency,
 		|	- SUM(ItemList.Amount) AS Amount,
 		|	ItemList.Period
@@ -513,6 +547,7 @@ Function R5010B_ReconciliationStatement()
 		|	ItemList.Company,
 		|	ItemList.Branch,
 		|	ItemList.LegalName,
+		|	ItemList.LegalNameContract,
 		|	ItemList.Currency,
 		|	ItemList.Period";
 EndFunction
@@ -523,7 +558,8 @@ Function R5021T_Revenues()
 	Return
 		"SELECT
 		|	*,
-		|	- ItemList.NetAmount AS Amount
+		|	- ItemList.NetAmount AS Amount,
+		|	- ItemList.Amount AS AmountWithTaxes
 		|INTO R5021T_Revenues
 		|FROM
 		|	ItemList AS ItemList

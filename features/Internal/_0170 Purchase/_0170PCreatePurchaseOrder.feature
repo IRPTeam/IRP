@@ -393,12 +393,12 @@ Scenario: _017006 create Purchase order based on Internal supply request
 			And I click the button named "AddBasisDocuments"
 			And I go to line in "BasisesTree" table
 				| 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
-				| '50,000'    | 'Dress, XS/Blue'   | 'pcs'  | 'No'  |
+				| '50,000'    | 'Dress (XS/Blue)'   | 'pcs'  | 'No'  |
 			And I change "Use" checkbox in "BasisesTree" table
 			And I finish line editing in "BasisesTree" table
 			And I go to line in "BasisesTree" table
 				| 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
-				| '10,000'    | 'Dress, S/Yellow'   | 'pcs'  | 'No'  |
+				| '10,000'    | 'Dress (S/Yellow)'   | 'pcs'  | 'No'  |
 			And I change "Use" checkbox in "BasisesTree" table
 			And I click "Ok" button
 			And I click "Show row key" button

@@ -354,6 +354,18 @@ EndProcedure
 
 #EndRegion
 
+#Region RevenueType
+
+Procedure ItemListRevenueTypeStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
+	DocumentsClient.RevenueTypeStartChoice(Object, Form, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+Procedure ItemListRevenueTypeEditTextChange(Object, Form, Item, Text, StandardProcessing) Export
+	DocumentsClient.RevenueTypeEditTextChange(Object, Form, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
 #EndRegion
 
 #Region ItemPartner
@@ -511,6 +523,10 @@ EndFunction
 #Region ItemLegalName
 
 Procedure LegalNameOnChange(Object, Form, Item) Export
+	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
+EndProcedure
+
+Procedure LegalNameContractOnChange(Object, Form, Item) Export
 	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 EndProcedure
 

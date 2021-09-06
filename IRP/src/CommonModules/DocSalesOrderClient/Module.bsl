@@ -169,8 +169,15 @@ Procedure ItemListItemStartChoice(Object, Form, Item, ChoiceData, StandardProces
 	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
 	
 	OpenSettings.ArrayOfFilters = New Array();
-	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", 
-																	True, DataCompositionComparisonType.NotEqual));
+	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, DataCompositionComparisonType.NotEqual));
+	
+	CurrentData = Form.Items.ItemList.CurrentData;
+	If CurrentData <> Undefined Then
+		FilterItemByPartnerItem = DocumentsServer.GetItemAndItemKeyByPartnerItem(CurrentData.PartnerItem);
+		If ValueIsFilled(FilterItemByPartnerItem.Item) Then	
+			OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Ref", FilterItemByPartnerItem.Item, DataCompositionComparisonType.Equal));
+		EndIf;
+	EndIf;
 	
 	DocumentsClient.ItemStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
 EndProcedure
@@ -178,6 +185,15 @@ EndProcedure
 Procedure ItemListItemEditTextChange(Object, Form, Item, Text, StandardProcessing) Export
 	ArrayOfFilters = New Array();
 	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
+	
+	CurrentData = Form.Items.ItemList.CurrentData;
+	If CurrentData <> Undefined Then
+		FilterItemByPartnerItem = DocumentsServer.GetItemAndItemKeyByPartnerItem(CurrentData.PartnerItem);
+		If ValueIsFilled(FilterItemByPartnerItem.Item) Then
+			ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Ref", FilterItemByPartnerItem.Item, ComparisonType.Equal));
+		EndIf;
+	EndIf;
+	
 	DocumentsClient.ItemEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters);
 EndProcedure
 
@@ -405,37 +421,11 @@ EndProcedure
 #Region RevenueType
 
 Procedure ItemListRevenueTypeStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
-	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
-	
-	OpenSettings.ArrayOfFilters = New Array();
-	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", 
-																	True, 
-																	DataCompositionComparisonType.NotEqual));
-	FilterTypesValue = New Array;
-	FilterTypesValue.Add(PredefinedValue("Enum.ExpenseAndRevenueTypes.Revenue"));
-	FilterTypesValue.Add(PredefinedValue("Enum.ExpenseAndRevenueTypes.Both"));
-	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Type", 
-																	FilterTypesValue, 
-																	DataCompositionComparisonType.InList));
-
-	OpenSettings.FormParameters = New Structure();
-	OpenSettings.FillingData = New Structure();
-	
-	DocumentsClient.ExpenseAndRevenueTypeStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
+	DocumentsClient.RevenueTypeStartChoice(Object, Form, Item, ChoiceData, StandardProcessing);
 EndProcedure
 
 Procedure ItemListRevenueTypeEditTextChange(Object, Form, Item, Text, StandardProcessing) Export
-	ArrayOfFilters = New Array();
-	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
-	FilterTypesValue = New ValueList;
-	FilterTypesValue.Add(PredefinedValue("Enum.ExpenseAndRevenueTypes.Revenue"));
-	FilterTypesValue.Add(PredefinedValue("Enum.ExpenseAndRevenueTypes.Both"));
-	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Type", 
-																	FilterTypesValue,
-																	ComparisonType.InList));							
-	AdditionalParameters = New Structure();
-	DocumentsClient.ExpenseAndRevenueTypeEditTextChange(Object, Form, Item, Text, StandardProcessing,
-				ArrayOfFilters, AdditionalParameters);
+	DocumentsClient.RevenueTypeEditTextChange(Object, Form, Item, Text, StandardProcessing);
 EndProcedure
 
 #EndRegion

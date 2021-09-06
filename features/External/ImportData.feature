@@ -206,16 +206,17 @@ Scenario: Create catalog Countries objects
 Scenario: Create catalog ExpenseAndRevenueTypes objects
 
 	And I check or create catalog "ExpenseAndRevenueTypes" objects:
-		| 'Ref'                                                                            | 'DeletionMark'    | 'Parent' | 'Description_en'           | 'Description_hash' | 'Description_ru' | 'Description_tr'              |'Type'                             |
-		| 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=aa78120ed92fbced11eaf114c59ef027' | 'False'           | ''       | 'Rent'                     | ''                 | ''               | 'Rent TR'                     |'Enum.ExpenseAndRevenueTypes.Both' |
-		| 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=aa78120ed92fbced11eaf114c59ef028' | 'False'           | ''       | 'Telephone communications' | ''                 | ''               | 'Telephone communications TR' |'Enum.ExpenseAndRevenueTypes.Both' |
-		| 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=aa78120ed92fbced11eaf114c59ef029' | 'False'           | ''       | 'Fuel'                     | ''                 | ''               | 'Fuel TR'                     |'Enum.ExpenseAndRevenueTypes.Both' |
-		| 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=aa78120ed92fbced11eaf114c59ef02a' | 'False'           | ''       | 'Software'                 | ''                 | ''               | 'Software TR'                 |'Enum.ExpenseAndRevenueTypes.Both' |
-		| 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=aa78120ed92fbced11eaf114c59ef02b' | 'False'           | ''       | 'Delivery'                 | ''                 | ''               | 'Delivery TR'                 |'Enum.ExpenseAndRevenueTypes.Both' |
-		| 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=aa78120ed93fbced11eaf114c59ef02b' | 'False'           | ''       | 'Revenue'                  | ''                 | ''               | 'Revenue TR'                  |'Enum.ExpenseAndRevenueTypes.Revenue' |
-		| 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=aa78120ed95fbced11eaf114c59ef02b' | 'False'           | ''       | 'Expense'                  | ''                 | ''               | 'Expense TR'                  |'Enum.ExpenseAndRevenueTypes.Expense' |
-		| 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=aa78120ed98fbced11eaf114c59ef02b' | 'True'            | ''       | 'Deletion'                 | ''                 | ''               | 'Deletion TR'                 |'Enum.ExpenseAndRevenueTypes.Both' |
-		| 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=aa78120ed98fbced11eaf114c59ef02b' | 'False'           | ''       | 'Movement type 1'          | ''                 | 'Movement type 1'| 'Movement type 1 TR'          |'Enum.ExpenseAndRevenueTypes.CashMovement' |
+		| 'Ref'                                                                            | 'DeletionMark' | 'Parent' | 'Code' | 'IsExpense' | 'IsRevenue' | 'IsFinancialMovementType' | 'Description_en'           | 'Description_hash' | 'Description_ru'  | 'Description_tr'              |
+		| 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=aa78120ed92fbced11eaf114c59ef027' | 'False'        | ''       | '3'    | 'True'      | 'True'      | 'False'                   | 'Rent'                     | ''                 | ''                | 'Rent TR'                     |
+		| 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=aa78120ed92fbced11eaf114c59ef028' | 'False'        | ''       | '4'    | 'True'      | 'True'      | 'False'                   | 'Telephone communications' | ''                 | ''                | 'Telephone communications TR' |
+		| 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=aa78120ed92fbced11eaf114c59ef029' | 'False'        | ''       | '5'    | 'True'      | 'True'      | 'False'                   | 'Fuel'                     | ''                 | ''                | 'Fuel TR'                     |
+		| 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=aa78120ed92fbced11eaf114c59ef02a' | 'False'        | ''       | '6'    | 'True'      | 'True'      | 'False'                   | 'Software'                 | ''                 | ''                | 'Software TR'                 |
+		| 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=aa78120ed92fbced11eaf114c59ef02b' | 'False'        | ''       | '7'    | 'True'      | 'True'      | 'False'                   | 'Delivery'                 | ''                 | ''                | 'Delivery TR'                 |
+		| 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=aa78120ed93fbced11eaf114c59ef02b' | 'False'        | ''       | '8'    | 'False'     | 'True'      | 'False'                   | 'Revenue'                  | ''                 | ''                | 'Revenue TR'                  |
+		| 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=aa78120ed95fbced11eaf114c59ef02b' | 'False'        | ''       | '9'    | 'True'      | 'False'     | 'False'                   | 'Expense'                  | ''                 | ''                | 'Expense TR'                  |
+		| 'e1cib/data/Catalog.ExpenseAndRevenueTypes?ref=aa78120ed98fbced11eaf114c59ef02b' | 'False'        | ''       | '10'   | 'False'     | 'False'     | 'True'                    | 'Movement type 1'          | ''                 | 'Movement type 1' | 'Movement type 1 TR'          |
+
+
 
 Scenario: Create catalog FileStorageVolumes objects
 
@@ -448,10 +449,10 @@ Scenario: Create catalog Currencies objects
 
 	And I check or create catalog "Currencies" objects:
 		| 'Ref'                                                                | 'DeletionMark' | 'Code' | 'Symbol' | 'NumericCode' | 'Description_en'  | 'Description_hash' | 'Description_ru' | 'Description_tr'  |
-		| 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1857' | 'False'           | 'EUR'  | '€'      | ''            | 'Euro'            | ''                 | ''               | 'Euro'            |
-		| 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1855' | 'False'           | 'TRY'  | 'TL'     | ''            | 'Turkish lira'    | ''                 | ''               | 'Turkish lira'    |
-		| 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1858' | 'False'           | 'UAH'  | '₴'      | ''            | 'Ukraine Hryvnia' | ''                 | ''               | 'Ukraine Hryvnia' |
-		| 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1856' | 'False'           | 'USD'  | '$'      | ''            | 'American dollar' | ''                 | ''               | 'American dollar' |
+		| 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1857' | 'False'        | 'EUR'  | '€'      | ''            | 'Euro'            | ''                 | ''               | 'Euro'            |
+		| 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1855' | 'False'        | 'TRY'  | 'TL'     | ''            | 'Turkish lira'    | ''                 | ''               | 'Turkish lira'    |
+		| 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1858' | 'False'        | 'UAH'  | '₴'      | ''            | 'Ukraine Hryvnia' | ''                 | ''               | 'Ukraine Hryvnia' |
+		| 'e1cib/data/Catalog.Currencies?ref=aa78120ed92fbced11eaf113ba6c1856' | 'False'        | 'USD'  | '$'      | ''            | 'American dollar' | ''                 | ''               | 'American dollar' |
 
 Scenario: Create catalog ItemKeys objects
 
@@ -1052,6 +1053,10 @@ Scenario: Create catalog Taxes objects
 		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'SalesReturn'         |
 		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'RetailSalesReceipt'  |
 		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'RetailReturnReceipt' |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'SalesOrderClosing'    |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c4' | 'PurchaseOrderClosing' |
+
+
 
 Scenario: Create catalog Taxes objects (Sales tax)
 	
@@ -1067,6 +1072,7 @@ Scenario: Create catalog Taxes objects (Sales tax)
 		| 'Ref'                                                           | 'DocumentName' |
 		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c5' | 'SalesOrder'   |
 		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c5' | 'SalesInvoice' |
+		| 'e1cib/data/Catalog.Taxes?ref=aa78120ed92fbced11eaf116b32709c5' | 'SalesOrderClosing'    |
 
 Scenario: Create information register TaxSettings records
 
@@ -1391,7 +1397,7 @@ Scenario: Create catalog RetailCustomers objects
 
 	And I check or create catalog "RetailCustomers" objects:
 		| 'Ref'                                                                     | 'DeletionMark' | 'Code'   | 'Description'   | 'Name'   | 'Surname' |
-		| 'e1cib/data/Catalog.RetailCustomers?ref=aa7d120ed92fbced11eb095a22e1d877' | 'False'           | 'Test01' | 'Test01 Test01' | 'Test01' | 'Test01'  |
+		| 'e1cib/data/Catalog.RetailCustomers?ref=aa7d120ed92fbced11eb095a22e1d877' | 'False'        | 'Test01' | 'Test01 Test01' | 'Test01' | 'Test01'  |
 
 Scenario: Create catalog BankTerms objects
 
@@ -1750,7 +1756,40 @@ Scenario: Create catalog Partners objects and Companies objects (Customer)
 Scenario: Create catalog RetailCustomers objects (check POS)
 
 	And I check or create catalog "RetailCustomers" objects:
-		| 'Ref'                                                                     | 'DeletionMark' | 'Code' | 'Description'                     | 'Name'                 | 'Surname'                 | 'Partner'                                                          | 'LegalName'                                                         | 'Agreement'                                                          |
-		| 'e1cib/data/Catalog.RetailCustomers?ref=b76cbacb2511e57d11ebe9f994538237' | 'False'        | '002'  | 'Retail customer with partner'    | 'Name Retail customer' | 'Surname Retail customer' | 'e1cib/data/Catalog.Partners?ref=b76cbacb2511e57d11ebe9e1959cde75' | 'e1cib/data/Catalog.Companies?ref=b76cbacb2511e57d11ebe9e1959cde76' | 'e1cib/data/Catalog.Agreements?ref=b76cbacb2511e57d11ebe9e1959cde77' |
-		| 'e1cib/data/Catalog.RetailCustomers?ref=b76cbacb2511e57d11ebe9f994538238' | 'False'        | '003'  | 'Retail customer without partner' | 'Retail customer'      | 'Second'                  | ''                                                                 | ''                                                                  | ''                                                                   |
+		| 'Ref'                                                                     | 'DeletionMark' | 'Code'          | 'Description'                                  | 'Name'                 | 'Surname'                 | 'UsePartnerTransactions' | 'Partner'                                                          | 'LegalName'                                                         | 'Agreement'                                                          | 'UsePartnerInfo' |
+		| 'e1cib/data/Catalog.RetailCustomers?ref=b76cbacb2511e57d11ebe9f994538237' | 'False'        | '002'           | 'Name Retail customer Surname Retail customer' | 'Name Retail customer' | 'Surname Retail customer' | 'True'                   | 'e1cib/data/Catalog.Partners?ref=b76cbacb2511e57d11ebebbd152ab7f6' | 'e1cib/data/Catalog.Companies?ref=b76cbacb2511e57d11ebebbd152ab7f7' | 'e1cib/data/Catalog.Agreements?ref=b76cbacb2511e57d11ebebbd152ab7f8' | 'True'           |
+		| 'e1cib/data/Catalog.RetailCustomers?ref=b76cbacb2511e57d11ebe9f994538238' | 'False'        | '003'           | 'Retail customer Second'                       | 'Retail customer'      | 'Second'                  | 'False'                  | ''                                                                 | ''                                                                  | ''                                                                   | 'False'          |
+
+Scenario: Create catalog Partners objects (Customer)
+
+		And I check or create catalog "Partners" objects:
+			| 'Ref'                                                              | 'DeletionMark' | 'Parent'                                                           | 'Code' | 'Customer' | 'Vendor' | 'Employee' | 'Opponent' | 'ManagerSegment'                                                          | 'ShipmentConfirmationsBeforeSalesInvoice' | 'GoodsReceiptBeforePurchaseInvoice' | 'Description_en'   | 'Description_hash' | 'Description_ru' | 'Description_tr'     |
+			| 'e1cib/data/Catalog.Partners?ref=b76cbacb2511e57d11ebebbd152ab7f6' | 'False'        | ''                                                                 | '1'    | 'True'     | 'False'  | 'False'    | 'False'    | ''                                                                        | 'False'                                   | 'False'                             | 'Customer'         | ''                 | ''               | ''                   |
+							
+		And I check or create catalog "Companies" objects:
+			| 'Ref'                                                               | 'DeletionMark' | 'Code' | 'Country'                                                           | 'MainCompany' | 'Partner'                                                          | 'Type'                             | 'OurCompany' | 'Description_en'          | 'Description_hash' | 'Description_ru' | 'Description_tr'       |
+			| 'e1cib/data/Catalog.Companies?ref=b76cbacb2511e57d11ebebbd152ab7f7' | 'False'        | '1'    | ''                                                                  | ''            | 'e1cib/data/Catalog.Partners?ref=b76cbacb2511e57d11ebebbd152ab7f6' | 'Enum.CompanyLegalType.Individual' | 'False'      | 'Customer'                | ''                 | ''               | ''                     |
+
+		And I check or create catalog "Agreements" objects:
+			| 'Ref'                                                                | 'DeletionMark' | 'Code' | 'Number' | 'Date'                | 'PartnerSegment'                                                          | 'Partner'                                                          | 'Company'                                                           | 'PriceType'                                                          | 'ItemSegment'                                                          | 'StartUsing'          | 'EndOfUse'            | 'ManagerSegment' | 'PriceIncludeTax' | 'DaysBeforeDelivery' | 'Store'                                                          | 'Type'                         | 'LegalName'                                                         | 'CurrencyMovementType'                                                                            | 'ApArPostingDetail'                          | 'StandardAgreement'                                                  | 'Kind'                         | 'UseCreditLimit' | 'CreditLimitAmount' | 'PaymentTerm' | 'Description_en'                             | 'Description_hash' | 'Description_ru' | 'Description_tr'                   |
+			| 'e1cib/data/Catalog.Agreements?ref=b76cbacb2511e57d11ebebbd152ab7f8' | 'False'        | '2'    | ''       | '01.01.0001 00:00:00' | ''                                                                        | 'e1cib/data/Catalog.Partners?ref=b76cbacb2511e57d11ebebbd152ab7f6' | ''                                                                  | 'e1cib/data/Catalog.PriceTypes?ref=aa78120ed92fbced11eaf114c59ef002' | ''                                                                     | '01.01.0001 00:00:00' | '01.01.0001 00:00:00' | ''               | 'False'           | '0'                  | ''                                                               | 'Enum.AgreementTypes.Customer' | ''                                                                  | 'e1cib/data/ChartOfCharacteristicTypes.CurrencyMovementType?ref=aa78120ed92fbced11eaf113ba6c185f' | 'Enum.ApArPostingDetail.ByDocuments'         | ''                                                                   | 'Enum.AgreementKinds.Regular'  | 'False'          | '0'                 | ''            | 'Customer partner term'                      | ''                 | ''               | ''                                 |
+		
+Scenario: Create catalog LegalNameContracts objects
+
+	And I check or create catalog "LegalNameContracts" objects:
+		| 'Ref'                                                                        | 'DeletionMark' | 'Code' | 'Description'             | 'BeginDate'           | 'EndDate'             | 'Company'                                                           | 'PartnerBankAccount'                                                           |
+		| 'e1cib/data/Catalog.LegalNameContracts?ref=b76d88abafbd4c5e11ebf1c565207b8a' | 'False'        | '1'    | 'Contract Ferron BP'      | '01.01.2021 00:00:00' | '01.01.0001 00:00:00' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf116b32709a2' | 'e1cib/data/Catalog.PartnersBankAccounts?ref=b75dad46e66c4c2c11eb4522c1c161a1' |
+		| 'e1cib/data/Catalog.LegalNameContracts?ref=b76e892a86cabee011ec0b3161ae719f' | 'False'        | '1'    | 'DFC Legal name contract' | '01.01.0001 00:00:00' | '01.01.0001 00:00:00' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf113ba6c185c' | ''                                                                             |
+		| 'e1cib/data/Catalog.LegalNameContracts?ref=b76d88abafbd4c5e11ebf1c694dd9b44' | 'False'        | '2'    | 'Contract Ferron BP New'  | '01.07.2021 00:00:00' | '01.01.0001 00:00:00' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf116b32709a2' | 'e1cib/data/Catalog.PartnersBankAccounts?ref=b75dad46e66c4c2c11eb4522c1c161a1' |
+		| 'e1cib/data/Catalog.LegalNameContracts?ref=b76d88abafbd4c5e11ebf1c989218108' | 'False'        | '3'    | 'Contract Kalipso'        | '01.01.2021 00:00:00' | '01.01.0001 00:00:00' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf116b32709a3' | 'e1cib/data/Catalog.PartnersBankAccounts?ref=b75dad46e66c4c2c11eb451e00a38c06' |
+
+
+
+Scenario: Create catalog PartnerItems objects
+
+	And I check or create catalog "PartnerItems" objects:
+		| 'Ref'                                                                  | 'DeletionMark' | 'Code' | 'Partner'                                                          | 'ItemID'  | 'Item'                                                          | 'ItemKey'                                                          | 'Description_en'        | 'Description_hash' | 'Description_ru' | 'Description_tr'           |
+		| 'e1cib/data/Catalog.PartnerItems?ref=b76e892a86cabee011ebf4471d198cc2' | 'False'        | '1'    | 'e1cib/data/Catalog.Partners?ref=aa78120ed92fbced11eaf113ba6c1870' | 'QN90999' | 'e1cib/data/Catalog.Items?ref=aa78120ed92fbced11eaf115bcc9c5f3' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c5fc' | 'Dress XS/Blue Ferron'  | ''                 | ''               | 'Dress Ferron TR'          |
+		| 'e1cib/data/Catalog.PartnerItems?ref=b76e892a86cabee011ebf4483f49e197' | 'False'        | '2'    | 'e1cib/data/Catalog.Partners?ref=aa78120ed92fbced11eaf113ba6c1871' | 'QN10998' | 'e1cib/data/Catalog.Items?ref=aa78120ed92fbced11eaf115bcc9c5f3' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c5fd' | 'Dress M/White Kalipso' | ''                 | ''               | 'Dress M/White Kalipso TR' |
+		| 'e1cib/data/Catalog.PartnerItems?ref=b76e892a86cabee011ebf4483f49e198' | 'False'        | '3'    | 'e1cib/data/Catalog.Partners?ref=aa78120ed92fbced11eaf113ba6c1870' | 'QN301'   | 'e1cib/data/Catalog.Items?ref=aa78120ed92fbced11eaf115bcc9c5f3' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c5fd' | 'Dress M/White Ferron'  | ''                 | ''               | 'Dress M/White Ferron TR'  |
 

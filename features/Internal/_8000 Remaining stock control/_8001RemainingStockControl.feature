@@ -515,8 +515,19 @@ Scenario:_800011 check remaining stock control in the Retail sales receipt
 				| 'Trousers' | '38/Yellow' |
 			And I activate "Item key" field in "List" table
 			And I select current line in "List" table
-		* Check remaining stock control (store does not use SC and GR)
+		* Filling in payments tab
+			And I move to "Payments" tab
+			And in the table "Payments" I click "Add" button
+			And I click choice button of "Account" attribute in "Payments" table
+			And I go to line in "List" table
+				| 'Description'  |
+				| 'Transit Main' |
+			And I select current line in "List" table
+			And I activate "Amount" field in "Payments" table
+			And I input "335 600,00" text in "Amount" field of "Payments" table
+			And I finish line editing in "Payments" table
 			And I click the button named "FormPost"
+		* Check remaining stock control (store does not use SC and GR)
 			Then "1C:Enterprise" window is opened
 			And I click "OK" button
 			Then I wait that in user messages the "Line No. [2] [Dress Dress/A-8] R4011B_FreeStocks remaining: 98 . Required: 110 . Lacking: 12 ." substring will appear in 10 seconds
@@ -572,6 +583,11 @@ Scenario:_800011 check remaining stock control in the Retail sales receipt
 				| 'Item'     | 'Item key'  |
 				| 'Trousers' | '38/Yellow' |
 			And I delete a line in "ItemList" table
+		* Filling in payment tab
+			And I move to "Payments" tab
+			And I select current line in "Payments" table
+			And I input "35 200,00" text in "Amount" field of "Payments" table
+			And I finish line editing in "Payments" table
 			And I click the button named "FormPost"
 			And I save the value of "Number" field as "$$NumberRetailSalesReceipt1$$"
 			Then user message window does not contain messages
@@ -1405,8 +1421,8 @@ Scenario:_800040 check remaining stock control when unpost/change Stock adjustme
 		And I select current line in "List" table
 		And I click choice button of "Revenue type" attribute in "ItemList" table
 		And I go to line in "List" table
-			| 'Description' | 'Type'    |
-			| 'Revenue'     | 'Revenue' |
+			| 'Description' |
+			| 'Revenue'     |
 		And I select current line in "List" table	
 		And I click the button named "FormPost"
 		Then user message window does not contain messages

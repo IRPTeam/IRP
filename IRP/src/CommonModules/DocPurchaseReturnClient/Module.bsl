@@ -366,6 +366,18 @@ EndProcedure
 
 #EndRegion
 
+#Region ExpenseType
+
+Procedure ItemListExpenseTypeStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
+	DocumentsClient.ExpenseTypeStartChoice(Object, Form, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+Procedure ItemListExpenseTypeEditTextChange(Object, Form, Item, Text, StandardProcessing) Export
+	DocumentsClient.ExpenseTypeEditTextChange(Object, Form, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
 #EndRegion
 
 #Region ItemPartner
@@ -523,6 +535,10 @@ EndFunction
 #Region ItemLegalName
 
 Procedure LegalNameOnChange(Object, Form, Item) Export 
+	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
+EndProcedure
+
+Procedure LegalNameContractOnChange(Object, Form, Item) Export 
 	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 EndProcedure
 

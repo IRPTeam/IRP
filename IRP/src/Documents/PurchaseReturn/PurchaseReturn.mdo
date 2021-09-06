@@ -122,6 +122,8 @@
   <registerRecords>AccumulationRegister.TM1010B_RowIDMovements</registerRecords>
   <registerRecords>AccumulationRegister.TM1010T_RowIDMovements</registerRecords>
   <registerRecords>AccumulationRegister.R5022T_Expenses</registerRecords>
+  <registerRecords>AccumulationRegister.R1001T_Purchases</registerRecords>
+  <registerRecords>AccumulationRegister.R1020B_AdvancesToVendors</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -293,6 +295,25 @@
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="29080e03-80ed-4605-9723-2c6f5740e659">
+    <name>LegalNameContract</name>
+    <synonym>
+      <key>en</key>
+      <value>Legal name contract</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.LegalNameContracts</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <choiceParameterLinks>
+      <name>Filter.Company</name>
+      <field>Document.PurchaseReturn.Attribute.LegalName</field>
+    </choiceParameterLinks>
     <fillValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
@@ -563,6 +584,20 @@
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="5d99742b-a7e2-4675-b71f-5a5cf5201f57">
+      <name>Detail</name>
+      <synonym>
+        <key>en</key>
+        <value>Detail</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeDescription</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
     </attributes>
     <attributes uuid="273c2816-11a4-49a8-b888-64941560640e">
       <name>ProfitLossCenter</name>

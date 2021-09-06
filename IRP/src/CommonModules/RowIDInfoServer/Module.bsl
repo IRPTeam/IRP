@@ -1708,6 +1708,7 @@ Function ExtractData_FromSC_ThenFromSI(BasisesTable, DataReceiver)
 	AddTables(Tables);
 	
 	Return CollapseRepeatingItemListRows(Tables, "SalesInvoiceItemListKey");
+	//Return CollapseRepeatingItemListRows(Tables, "SalesInvoiceItemListKey, Key");
 EndFunction
 
 Function ExtractData_FromSC_ThenFromPIGR_ThenFromSO(BasisesTable, DataReceiver)
@@ -5772,7 +5773,7 @@ Procedure AddLinkedDocumentRows(Object, FillingValues) Export
 	EndDo;
 	
 	TableNames_Refreshable.Add("ItemList");
-	
+		
 	For Each TableName In TableNames_Refreshable Do
 		If FillingValue.Property(TableName) 
 			And CommonFunctionsClientServer.ObjectHasProperty(Object, TableName) Then
@@ -5910,11 +5911,12 @@ EndProcedure
 
 Procedure Link(Object, FillingValue, LinkRows, TableNames)
 	For Each LinkRow In LinkRows Do
+		ArrayOfExcludingKeys = New Array();
 		// Update ItemList row
-		LinkAttributes(Object, FillingValue, LinkRow);
+		LinkAttributes(Object, FillingValue, LinkRow, ArrayOfExcludingKeys);
 		
 		// Update tables
-		LinkTables(Object, FillingValue, LinkRow, TableNames);		
+		LinkTables(Object, FillingValue, LinkRow, TableNames, ArrayOfExcludingKeys);		
 	EndDo;
 EndProcedure	
 
@@ -5937,14 +5939,20 @@ Function GetLinkRows(Object, FillingValue)
 	Return LinkRows;
 EndFunction
 
-Procedure LinkTables(Object, FillingValue, LinkRow, TableNames)
+Procedure LinkTables(Object, FillingValue, LinkRow, TableNames, ArrayOfExcludingKeys)
 	For Each TableName In TableNames Do
 		If Upper(TableName) = Upper("RowIDInfo") Then
 			Continue;
 		EndIf;
 		If Object.Property(TableName) Then
 			For Each DeletionRow In Object[TableName].FindRows(New Structure("Key", LinkRow.Key)) Do
-				Object[TableName].Delete(DeletionRow);
+				If Upper(TableName) = Upper("SpecialOffers") Or Upper(TableName) = Upper("TaxList") Then
+					If ArrayOfExcludingKeys.Find(LinkRow.Key) = Undefined Then
+						Object[TableName].Delete(DeletionRow);
+					EndIf;
+				Else
+					Object[TableName].Delete(DeletionRow);
+				EndIf;
 			EndDo;
 		Else
 			Continue;
@@ -5956,22 +5964,80 @@ Procedure LinkTables(Object, FillingValue, LinkRow, TableNames)
 				
 		For Each Row In FillingValue[TableName] Do
 			If Row.Key = LinkRow.Key Then
-				FillPropertyValues(Object[TableName].Add(), Row);
+				If Upper(TableName) = Upper("SpecialOffers") Or Upper(TableName) = Upper("TaxList") Then
+			
+					If ArrayOfExcludingKeys.Find(LinkRow.Key) = Undefined Then
+						FillPropertyValues(Object[TableName].Add(), Row);
+					EndIf;
+				Else
+					FillPropertyValues(Object[TableName].Add(), Row);
+				EndIf;
 			EndIf;
 		EndDo;
 	EndDo;
 EndProcedure
 
-Procedure LinkAttributes(Object, FillingValue, LinkRow)
+Procedure LinkAttributes(Object, FillingValue, LinkRow, ArrayOfExcludingKeys)
+	ArrayOfRefillColumns = New Array();
+	ArrayOfRefillColumns.Add(Upper("TotalAmount"));    
+	ArrayOfRefillColumns.Add(Upper("NetAmount"));
+	ArrayOfRefillColumns.Add(Upper("OffersAmount"));
+	ArrayOfRefillColumns.Add(Upper("TaxAmount"));
+	ArrayOfRefillColumns.Add(Upper("PriceType"));
+	
+	ArrayOfNotReffilingColumns = GetNotReffilingColumns(TypeOf(Object.Ref));
+	
 	For Each Row_ItemLIst In FillingValue.ItemList Do
 		If LinkRow.Key <> Row_ItemList.Key Then
 			Continue;
 		EndIf;
 		For Each Row In Object.ItemList.FindRows(New Structure("Key", LinkRow.Key)) Do
-				FillPropertyValues(Row, Row_ItemList);
+			NeedRefillColumns = True;
+			
+			For Each KeyValue In Row_ItemList Do
+				If Upper(KeyValue.Key) = Upper("Price") And Row.Property("Price") And ValueIsFilled(Row.Price) 
+					And Row.Property("PriceType") And Row.PriceType = Catalogs.PriceTypes.ManualPriceType	Then
+					NeedRefillColumns = False;
+					ArrayOfExcludingKeys.Add(Row_ItemLIst.Key);
+					Continue;
+				EndIf;
+				
+				If ArrayOfRefillColumns.Find(Upper(KeyValue.Key)) = Undefined And Row.Property(KeyValue.Key) Then
+					If ArrayOfNotReffilingColumns <> Undefined 
+						And ArrayOfNotReffilingColumns.Find(Upper("ItemList."+KeyValue.Key)) <> Undefined Then
+						Continue;
+					EndIf;	
+					Row[KeyValue.Key] = KeyValue.Value;
+				EndIf;
+			EndDo;
+			
+			If NeedRefillColumns Then
+				For Each RefillColumn In ArrayOfRefillColumns Do
+					If Row.Property(RefillColumn) And Row_ItemLIst.Property(RefillColumn) Then
+						Row[RefillColumn] = Row_ItemList[RefillColumn];
+					EndIf;
+				EndDo;
+			EndIf;
+			
 		EndDo;
+		
 	EndDo;
 EndProcedure
+
+Function GetNotReffilingColumns(ObjectType)
+	Map = New Map();
+	ArrayOfColumns = New Array();
+	ArrayOfColumns.Add(Upper("ItemList.ProfitLossCenter"));
+	ArrayOfColumns.Add(Upper("ItemList.RevenueType"));
+	Map.Insert(Type("DocumentRef.StockAdjustmentAsSurplus"), ArrayOfColumns);
+	
+	ArrayOfColumns = New Array();
+	ArrayOfColumns.Add(Upper("ItemList.ProfitLossCenter"));
+	ArrayOfColumns.Add(Upper("ItemList.ExpenseType"));
+	Map.Insert(Type("DocumentRef.StockAdjustmentAsWriteOff"), ArrayOfColumns);
+	
+	Return Map.Get(ObjectType);	
+EndFunction
 
 #EndRegion
 

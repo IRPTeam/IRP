@@ -43,6 +43,18 @@ Procedure ItemListItemOnChange(Object, Form, Item = Undefined, AddInfo = Undefin
 	SerialLotNumberClient.UpdateUseSerialLotNumber(Object, Form, AddInfo);
 EndProcedure
 
+Procedure ItemListBeforeAddRow(Object, Form, Item, Cancel, Clone, Parent, IsFolder, Parameter) Export
+	If Clone Then
+		Return;
+	EndIf;
+	Cancel = True;
+	NewRow = Object.ItemList.Add();
+	Form.Items.ItemList.CurrentRow = NewRow.GetID();
+	UserSettingsClient.FillingRowFromSettings(Object, "Object.ItemList", NewRow, True);
+	Form.Items.ItemList.ChangeRow();
+	ItemListOnChange(Object, Form, Item);
+EndProcedure
+
 #Region PickUpItems
 
 Procedure PickupItemsEnd(Result, AdditionalParameters) Export

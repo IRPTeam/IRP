@@ -127,6 +127,8 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R4050B_StockInventory());
 	QueryArray.Add(R5010B_ReconciliationStatement());
 	QueryArray.Add(R5022T_Expenses());
+	QueryArray.Add(T2012S_PartnerAdvances());
+	QueryArray.Add(R5012B_VendorsAging());
 	Return QueryArray;
 EndFunction
 
@@ -368,6 +370,8 @@ Function R1021B_VendorsTransactions()
 		|	ItemList.Partner,
 		|	ItemList.Agreement,
 		|	ItemList.BasisDocument AS Basis,
+		|	UNDEFINED AS Key,
+		|	UNDEFINED AS VendorsAdvancesClosing,
 		|	-SUM(ItemList.Amount) AS Amount
 		|INTO R1021B_VendorsTransactions
 		|FROM
@@ -379,25 +383,133 @@ Function R1021B_VendorsTransactions()
 		|	ItemList.Company,
 		|	ItemList.Branch,
 		|	ItemList.Currency,
-		|	ItemList.BasisDocument,
 		|	ItemList.LegalName,
 		|	ItemList.Partner,
 		|	ItemList.Period,
-		|	VALUE(AccumulationRecordType.Receipt)";
+		|	ItemList.BasisDocument,
+		|	VALUE(AccumulationRecordType.Receipt)
+		|
+		|UNION ALL
+		|
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	OffsetOfAdvances.Period,
+		|	OffsetOfAdvances.Company,
+		|	OffsetOfAdvances.Branch,
+		|	OffsetOfAdvances.Currency,
+		|	OffsetOfAdvances.LegalName,
+		|	OffsetOfAdvances.Partner,
+		|	OffsetOfAdvances.Agreement,
+		|	OffsetOfAdvances.TransactionDocument,
+		|	OffsetOfAdvances.Key,
+		|	OffsetOfAdvances.Recorder,
+		|	OffsetOfAdvances.Amount
+		|FROM
+		|	InformationRegister.T2010S_OffsetOfAdvances AS OffsetOfAdvances
+		|WHERE
+		|	OffsetOfAdvances.Document = &Ref";		
 EndFunction
 
 Function R1020B_AdvancesToVendors()
 	Return
 		"SELECT
-		|	ItemList.AdvanceBasis AS Basis, 
-		|	*
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	ItemList.Period AS Period,
+		|	ItemList.Company AS Company,
+		|	ItemList.Branch AS Branch,
+		|	ItemList.Partner AS Partner,
+		|	ItemList.LegalName AS LegalName,
+		|	ItemList.Currency AS Currency,
+		|	ItemList.AdvanceBasis AS Basis,
+		|	SUM(ItemList.Amount) AS Amount,
+		|	UNDEFINED AS Key,
+		|	UNDEFINED AS VendorsAdvancesClosing
 		|INTO R1020B_AdvancesToVendors
 		|FROM
 		|	ItemList AS ItemList
 		|WHERE
-		|	ItemList.DueAsAdvance";
+		|	ItemList.DueAsAdvance
+		|
+		|GROUP BY
+		|	ItemList.Partner,
+		|	ItemList.Branch,
+		|	ItemList.Currency,
+		|	ItemList.Period,
+		|	ItemList.AdvanceBasis,
+		|	ItemList.Company,
+		|	ItemList.LegalName
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Expense),
+		|	OffsetOfAdvances.Period,
+		|	OffsetOfAdvances.Company,
+		|	OffsetOfAdvances.Branch,
+		|	OffsetOfAdvances.Partner,
+		|	OffsetOfAdvances.LegalName,
+		|	OffsetOfAdvances.Currency,
+		|	OffsetOfAdvances.AdvancesDocument,
+		|	OffsetOfAdvances.Amount,
+		|	UNDEFINED,
+		|	OffsetOfAdvances.Recorder
+		|FROM
+		|	InformationRegister.T2010S_OffsetOfAdvances AS OffsetOfAdvances
+		|WHERE
+		|	OffsetOfAdvances.Document = &Ref";
+
 EndFunction
 
+Function R5012B_VendorsAging()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	OffsetOfAging.Period,
+		|	OffsetOfAging.Company,
+		|	OffsetOfAging.Branch,
+		|	OffsetOfAging.Partner,
+		|	OffsetOfAging.Agreement,
+		|	OffsetOfAging.Currency,
+		|	OffsetOfAging.Invoice,
+		|	OffsetOfAging.PaymentDate,
+		|	OffsetOfAging.Amount,
+		|	OffsetOfAging.Recorder AS AgingClosing
+		|INTO R5012B_VendorsAging
+		|FROM
+		|	InformationRegister.T2013S_OffsetOfAging AS OffsetOfAging
+		|WHERE
+		|	OffsetOfAging.Document = &Ref";
+EndFunction
+
+Function T2012S_PartnerAdvances()
+	Return
+		"SELECT
+		|	ItemList.Period AS Period,
+		|	ItemList.Company AS Company,
+		|	ItemList.Branch AS Branch,
+		|	ItemList.Partner AS Partner,
+		|	ItemList.LegalName AS LegalName,
+		|	ItemList.Currency AS Currency,
+		|	ItemList.AdvanceBasis AS AdvancesDocument,
+		|	SUM(ItemList.Amount) AS Amount,
+		|	UNDEFINED AS Key,
+		|	TRUE AS IsVendorAdvance
+		|INTO T2012S_PartnerAdvances
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	ItemList.DueAsAdvance
+		|
+		|GROUP BY
+		|	ItemList.Branch,
+		|	ItemList.LegalName,
+		|	ItemList.Company,
+		|	ItemList.Partner,
+		|	ItemList.Period,
+		|	ItemList.AdvanceBasis,
+		|	ItemList.Currency";	
+EndFunction
 
 Function R1031B_ReceiptInvoicing()
 	Return

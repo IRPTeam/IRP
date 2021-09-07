@@ -19,10 +19,13 @@ Procedure BeforeDelete(Cancel)
 EndProcedure
 
 Procedure FillCheckProcessing(Cancel, CheckedAttributes)
-	ClosingOrder = DocSalesOrderServer.GetLastSalesOrderClosingBySalesOrder(Ref);
-	If Not IsNew() AND Not ClosingOrder.IsEmpty() Then
-		Cancel = True;
-		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().InfoMessage_022, ClosingOrder));
+	
+	If Not IsNew() And Modified() Then
+		ClosingOrder = DocSalesOrderServer.GetLastSalesOrderClosingBySalesOrder(Ref);
+		If Not ClosingOrder.IsEmpty() Then
+			Cancel = True;
+			CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().InfoMessage_022, ClosingOrder));
+		EndIf;
 	EndIf;
 	
 	If DocumentsServer.CheckItemListStores(ThisObject) Then

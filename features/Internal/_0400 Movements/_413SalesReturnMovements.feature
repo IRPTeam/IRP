@@ -590,6 +590,26 @@ Scenario: _041322 check Sales return movements by the Register  "R2020 Advances 
 			| ''                                           | 'Receipt'     | '21.04.2021 14:19:47' | '6 760'     | 'Main Company' | 'Distribution department' | 'en description is empty'      | 'TRY'      | 'Company Lunch' | 'Lunch'   | 'Sales return 106 dated 21.04.2021 14:19:47' | 'No'                   | ''                           |		
 	And I close all client application windows
 
+Scenario: _041326 check Sales return movements by the Register  "T2012S Partner advances"
+	And I close all client application windows
+	* Select Sales return
+		Given I open hyperlink "e1cib/list/Document.SalesReturn"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '106' |
+	* Check movements by the Register  "T2012S Partner advances"
+		And I click "Registrations report" button
+		And I select "T2012S Partner advances" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Sales return 106 dated 21.04.2021 14:19:47' | ''                    | ''          | ''             | ''                        | ''         | ''              | ''        | ''                  | ''                    | ''                                           | ''    |
+			| 'Document registrations records'             | ''                    | ''          | ''             | ''                        | ''         | ''              | ''        | ''                  | ''                    | ''                                           | ''    |
+			| 'Register  "T2012S Partner advances"'        | ''                    | ''          | ''             | ''                        | ''         | ''              | ''        | ''                  | ''                    | ''                                           | ''    |
+			| ''                                           | 'Period'              | 'Resources' | 'Dimensions'   | ''                        | ''         | ''              | ''        | ''                  | ''                    | ''                                           | ''    |
+			| ''                                           | ''                    | 'Amount'    | 'Company'      | 'Branch'                  | 'Currency' | 'Legal name'    | 'Partner' | 'Is vendor advance' | 'Is customer advance' | 'Advances document'                          | 'Key' |
+			| ''                                           | '21.04.2021 14:19:47' | '9 360'     | 'Main Company' | 'Distribution department' | 'TRY'      | 'Company Lunch' | 'Lunch'   | 'No'                | 'Yes'                 | 'Sales return 106 dated 21.04.2021 14:19:47' | ''    |										
+	And I close all client application windows
+
 Scenario: _041323 check Sales return movements by the Register  "R2021 Customer transactions" (Due as advance - False)
 	And I close all client application windows
 	* Select Sales return

@@ -1909,3 +1909,14 @@ Scenario: Create information register UserSettings records (test data base)
 		| 'e1cib/data/Catalog.UserGroups?ref=b762b13668d0905011eb767f10805e2c' | 'Document.Unbundling'                | 'CheckBalance_StockReservation'       | 'Enum.KindsOfAttributes.Custom'  | 'True'                                                                  |
 
 
+Scenario: Create catalog PartnerItems objects (test data base)
+
+	And I check or create catalog "PartnerItems" objects:
+		| 'Ref'                                                                  | 'DeletionMark' | 'Code' | 'Partner'                                                          | 'ItemID'    | 'Item'                                                          | 'ItemKey'                                                          | 'Description_en'                                       | 'Description_hash' | 'Description_ru' | 'Description_tr' |
+		| 'e1cib/data/Catalog.PartnerItems?ref=b76e892a86cabee011ebf519306af4fd' | 'False'        | '1'    | 'e1cib/data/Catalog.Partners?ref=b762b13668d0905011eb7663e35d794d' | 'AN1290899' | 'e1cib/data/Catalog.Items?ref=b762b13668d0905011eb76684b9f687d' | 'e1cib/data/Catalog.ItemKeys?ref=b762b13668d0905011eb76684b9f687e' | 'Номенклатура поставщика 1 (товар с характеристиками)' | ''                 | ''               | ''               |
+		| 'e1cib/data/Catalog.PartnerItems?ref=b76e892a86cabee011ebf519306af4fe' | 'False'        | '2'    | 'e1cib/data/Catalog.Partners?ref=b762b13668d0905011eb7663e35d794e' | 'AM15009'   | 'e1cib/data/Catalog.Items?ref=b762b13668d0905011eb76684b9f687d' | 'e1cib/data/Catalog.ItemKeys?ref=b762b13668d0905011eb76684b9f687e' | 'Номенклатура поставщика 2 (товар с характеристиками)' | ''                 | ''               | ''               |
+		| 'e1cib/data/Catalog.PartnerItems?ref=b76e892a86cabee011ebf519306af4ff' | 'False'        | '3'    | 'e1cib/data/Catalog.Partners?ref=b762b13668d0905011eb7663e35d794d' | 'AN1290800' | 'e1cib/data/Catalog.Items?ref=b762b13668d0905011eb766bf96b2750' | 'e1cib/data/Catalog.ItemKeys?ref=b762b13668d0905011eb766bf96b2751' | 'Номенклатура поставщика 1 (товар без характеристик)'  | ''                 | ''               | ''               |
+		| 'e1cib/data/Catalog.PartnerItems?ref=b76e892a86cabee011ebf519306af500' | 'False'        | '4'    | 'e1cib/data/Catalog.Partners?ref=b762b13668d0905011eb7663e35d794e' | 'AM15010'   | 'e1cib/data/Catalog.Items?ref=b762b13668d0905011eb766bf96b2750' | 'e1cib/data/Catalog.ItemKeys?ref=b762b13668d0905011eb766bf96b2751' | 'Номенклатура поставщика 2 (товар без характеристик)'  | ''                 | ''               | ''               |
+
+
+

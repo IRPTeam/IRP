@@ -1464,3 +1464,9 @@ Function IsDebitCreditNote(Ref) Export
 		Or TypeOf(Ref) = Type("DocumentRef.CreditNote");
 EndFunction
 	
+Function IsReturn(Ref) Export
+	Return
+	 	TypeOf(Ref) = Type("DocumentRef.SalesReturn")
+		Or TypeOf(Ref) = Type("DocumentRef.PurchaseReturn");
+EndFunction
+

@@ -1211,6 +1211,7 @@ Procedure PickupItemsEnd(Result, AddInfo) Export
 	
 	UseSerialLotNumbers = Object.Property("SerialLotNumbers");
 	
+	Row = Undefined;
 	For Each ResultElement In Result Do
 		FillPropertyValues(FilterStructure, ResultElement);
 		ExistingRows = Object.ItemList.FindRows(FilterStructure);
@@ -1271,6 +1272,10 @@ Procedure PickupItemsEnd(Result, AddInfo) Export
 		EndIf;
 	EndDo;
 
+	If Not Row = Undefined Then
+		Form.Items.ItemList.CurrentRow = Row.GetID(); 
+	EndIf;
+	
 	Form.ItemListOnChange(Form.Items.ItemList);
 	Form.Modified = True;
 	Notify("AddNewItemListRow", Settings.Rows, Form);

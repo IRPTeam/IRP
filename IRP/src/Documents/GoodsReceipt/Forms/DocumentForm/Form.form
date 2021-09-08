@@ -2255,10 +2255,12 @@
         <verticalScrollBar>AutoUse</verticalScrollBar>
         <horizontalLines>true</horizontalLines>
         <verticalLines>true</verticalLines>
+        <useAlternationRowColor>true</useAlternationRowColor>
         <searchOnInput>Auto</searchOnInput>
         <initialListView>Auto</initialListView>
         <horizontalStretch>true</horizontalStretch>
         <verticalStretch>true</verticalStretch>
+        <currentRowUse>SelectionPresentation</currentRowUse>
         <rowFilter xsi:type="core:UndefinedValue"/>
       </items>
       <visible>true</visible>

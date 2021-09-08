@@ -139,7 +139,7 @@ Function ItemList()
 		|	SalesOrderItemList.ProcurementMethod = VALUE(Enum.ProcurementMethods.Stock) AS IsProcurementMethod_Stock,
 		|	SalesOrderItemList.ProcurementMethod = VALUE(Enum.ProcurementMethods.Purchase) AS IsProcurementMethod_Purchase,
 		|	SalesOrderItemList.ProcurementMethod = VALUE(Enum.ProcurementMethods.NoReserve) 
-		|	SalesOrderItemList.ProcurementMethod = VALUE(Enum.ProcurementMethods.___PRR) AS IsProcurementMethod_NonReserve,
+		|	OR SalesOrderItemList.ProcurementMethod = VALUE(Enum.ProcurementMethods.___PRR) AS IsProcurementMethod_NonReserve,
 		|	SalesOrderItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS IsService,
 		|	SalesOrderItemList.Ref.Currency AS Currency,
 		|	SalesOrderItemList.Cancel AS IsCanceled,

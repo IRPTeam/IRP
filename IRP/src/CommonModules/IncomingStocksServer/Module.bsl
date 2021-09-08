@@ -68,6 +68,8 @@ Procedure ClosureIncomingStocks(Parameters) Export
 	|INTO IncomingStocks
 	|FROM
 	|	&IncomingStocks AS tmp
+	|WHERE
+	|	tmp.Quantity <> 0
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
@@ -83,6 +85,8 @@ Procedure ClosureIncomingStocks(Parameters) Export
 	|INTO IncomingStocksRequested
 	|FROM
 	|	&IncomingStocksRequested AS tmp
+	|WHERE
+	|	tmp.Quantity <> 0
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
@@ -94,7 +98,9 @@ Procedure ClosureIncomingStocks(Parameters) Export
 	|	tmp.Quantity
 	|INTO FreeStocks
 	|FROM
-	|	&IncomingStocksRequested AS tmp";
+	|	&IncomingStocksRequested AS tmp
+	|WHERE
+	|	tmp.Quantity <> 0";
 	Query.Execute();
 EndProcedure
 

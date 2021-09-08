@@ -239,6 +239,13 @@
         <value>25</value>
       </code>
     </items>
+    <items id="e4f75f5c-c671-4711-83a7-773795b71b1e">
+      <name>PRR</name>
+      <description>PRR</description>
+      <code xsi:type="core:StringValue">
+        <value>26</value>
+      </code>
+    </items>
   </predefined>
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>

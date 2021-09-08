@@ -244,7 +244,13 @@ Function OffsetOfAdvances(Parameters)
 			Create_AdvancesFromCustomers(Row.Recorder, Parameters);
 			Create_PaymentFromCustomers(Row.Recorder, Parameters);
 			OffsetOfPartnersServer.Customers_OnMoneyMovements(Parameters);
-			Write_AdvancesAndTransactions(Row.Recorder, Parameters, OffsetOfAdvanceFull, True);
+			
+			UseKeyForAdvance = True;
+			If OffsetOfPartnersServer.IsReturn(Row.Recorder) Then
+				UseKeyForAdvance = False;
+			EndIf;
+			
+			Write_AdvancesAndTransactions(Row.Recorder, Parameters, OffsetOfAdvanceFull, UseKeyForAdvance);
 			Write_PartnersAging(Row.Recorder, Parameters, OffsetOfAgingFull);
 			
 			// Due as advance

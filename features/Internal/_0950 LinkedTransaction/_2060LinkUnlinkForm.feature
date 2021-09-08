@@ -136,7 +136,17 @@ Scenario: _2060001 preparation
 	And I execute 1C:Enterprise script at server
 			| "Documents.SalesOrder.FindByNumber(1051).GetObject().Write(DocumentWriteMode.Posting);"|
 			| "Documents.ShipmentConfirmation.FindByNumber(1051).GetObject().Write(DocumentWriteMode.Posting);" |
-			| "Documents.ShipmentConfirmation.FindByNumber(1052).GetObject().Write(DocumentWriteMode.Posting);" |	
+			| "Documents.ShipmentConfirmation.FindByNumber(1052).GetObject().Write(DocumentWriteMode.Posting);" |
+	When Create SO and SC for link
+	And I execute 1C:Enterprise script at server
+			| "Documents.SalesOrder.FindByNumber(1053).GetObject().Write(DocumentWriteMode.Posting);"|
+			| "Documents.SalesOrder.FindByNumber(1052).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.ShipmentConfirmation.FindByNumber(1053).GetObject().Write(DocumentWriteMode.Posting);" |
+	When Create PO and GR for link
+	And I execute 1C:Enterprise script at server
+			| "Documents.PurchaseOrder.FindByNumber(1052).GetObject().Write(DocumentWriteMode.Posting);"|
+			| "Documents.GoodsReceipt.FindByNumber(1053).GetObject().Write(DocumentWriteMode.Posting);" |		
+
 			
 	
 Scenario: _2060002 check link/unlink form in the SC
@@ -836,11 +846,254 @@ Scenario: _2060016 check price in the PI when link document with different price
 		And I close all client application windows
 	
 
+Scenario: _2060017 check link form in the SI with 3 lines with the same items
+	* Open form for create SI
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I click the button named "FormCreate"
+	* Filling in the main details of the document
+		And I click Select button of "Partner" field
+		And I click "List" button
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Lomaniti'     |
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Company Lomaniti'     |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Basic Partner terms, TRY'     |
+		And I select current line in "List" table
+		And I activate field named "ItemListLineNumber" in "ItemList" table		
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Main Company' | 
+		And I select current line in "List" table
+		And I click Select button of "Store" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Store 01'  |
+		And I select current line in "List" table
+	* Add items	
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Scarf'       |
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Scarf' | 'XS/Red'  |
+		And I select current line in "List" table
+		And I activate field named "ItemListQuantity" in "ItemList" table
+		And I input "99,000" text in the field named "ItemListQuantity" of "ItemList" table
+		And I finish line editing in "ItemList" table 
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Scarf'       |
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Scarf' | 'XS/Red'  |
+		And I select current line in "List" table
+		And I activate field named "ItemListQuantity" in "ItemList" table
+		And I input "3,000" text in the field named "ItemListQuantity" of "ItemList" table
+		And I finish line editing in "ItemList" table 
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Scarf'       |
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Scarf' | 'XS/Red'  |
+		And I select current line in "List" table
+		And I activate field named "ItemListQuantity" in "ItemList" table
+		And I input "1,000" text in the field named "ItemListQuantity" of "ItemList" table
+		And I finish line editing in "ItemList" table
+	* Link 
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		And I go to line in "ItemListRows" table
+			| 'Quantity' | 'Row presentation' | 'Store'    | 'Unit' |
+			| '99,000'   | 'Scarf (XS/Red)'   | 'Store 01' | 'pcs'  |
+		And I activate field named "ItemListRowsRowPresentation" in "ItemListRows" table
+		And I go to line in "BasisesTree" table
+			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' |
+			| 'TRY'      | '100,00' | '100,000'  | 'Scarf (XS/Red)'   | 'pcs'  |
+		And in the table "BasisesTree" I click the button named "Link"
+		And I go to line in "ItemListRows" table
+			| 'Quantity' | 'Row presentation' | 'Store'    | 'Unit' |
+			| '3,000'    | 'Scarf (XS/Red)'   | 'Store 01' | 'pcs'  |
+		And I go to line in "BasisesTree" table
+			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' |
+			| 'TRY'      | '100,00' | '5,000'    | 'Scarf (XS/Red)'   | 'pcs'  |
+		And in the table "BasisesTree" I click the button named "Link"
+		And I go to line in "ItemListRows" table
+			| 'Quantity' | 'Row presentation' | 'Store'    | 'Unit' |
+			| '1,000'    | 'Scarf (XS/Red)'   | 'Store 01' | 'pcs'  |
+		And I go to line in "BasisesTree" table
+			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' |
+			| 'TRY'      | '100,00' | '100,000'  | 'Scarf (XS/Red)'   | 'pcs'  |
+		And in the table "BasisesTree" I click the button named "Link"
+		Then the number of "BasisesTree" table lines is "равно" 0
+		And I go to line in "ItemListRows" table
+			| '#' | 'Quantity' | 'Row presentation' | 'Store'    | 'Unit' |
+			| '2' | '3,000'    | 'Scarf (XS/Red)'   | 'Store 01' | 'pcs'  |
+		Then the number of "BasisesTree" table lines is "равно" 0
+		And I set checkbox "Linked documents"
+		And "ResultsTree" table became equal
+			| 'Row presentation'                                   | 'Quantity' | 'Unit' | 'Price'  | 'Currency' |
+			| 'Sales order 1 052 dated 07.09.2021 21:06:20'        | ''         | ''     | ''       | ''         |
+			| 'Shipment confirmation 1 053 dated 07.09.2021 21:07' | ''         | ''     | ''       | ''         |
+			| 'Scarf (XS/Red)'                                     | '99,000'   | 'pcs'  | '100,00' | 'TRY'      |
+			| 'Scarf (XS/Red)'                                     | '1,000'    | 'pcs'  | '100,00' | 'TRY'      |
+			| 'Sales order 1 053 dated 07.09.2021 10:00:00'        | ''         | ''     | ''       | ''         |
+			| 'Scarf (XS/Red)'                                     | '3,000'    | 'pcs'  | '100,00' | 'TRY'      |
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| '#' | 'SalesTax' | 'Revenue type' | 'Price type'              | 'Item'  | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Serial lot numbers' | 'Q'      | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Delivery date' | 'Use shipment confirmation' | 'Detail' | 'Sales order'                                 |
+			| '1' | '1%'       | ''             | 'en description is empty' | 'Scarf' | 'XS/Red'   | ''                   | 'No'                 | ''                   | '99,000' | 'pcs'  | '1 608,19'   | '100,00' | '18%' | ''              | '8 291,81'   | '9 900,00'     | ''                    | 'Store 01' | ''              | 'Yes'                       | ''       | 'Sales order 1 052 dated 07.09.2021 21:06:20' |
+			| '2' | '1%'       | ''             | 'en description is empty' | 'Scarf' | 'XS/Red'   | ''                   | 'No'                 | ''                   | '3,000'  | 'pcs'  | '48,73'      | '100,00' | '18%' | ''              | '251,27'     | '300,00'       | ''                    | 'Store 01' | ''              | 'No'                        | ''       | 'Sales order 1 053 dated 07.09.2021 10:00:00' |
+			| '3' | '1%'       | ''             | 'en description is empty' | 'Scarf' | 'XS/Red'   | ''                   | 'No'                 | ''                   | '1,000'  | 'pcs'  | '16,24'      | '100,00' | '18%' | ''              | '83,76'      | '100,00'       | ''                    | 'Store 01' | ''              | 'Yes'                       | ''       | 'Sales order 1 052 dated 07.09.2021 21:06:20' |
+	* Auto link
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		And I set checkbox "Linked documents"
+		And in the table "ResultsTree" I click "Unlink all" button
+		And "BasisesTree" table became equal
+			| 'Row presentation'                                   | 'Quantity' | 'Unit' | 'Price'  | 'Currency' |
+			| 'Sales order 1 053 dated 07.09.2021 10:00:00'        | ''         | ''     | ''       | ''         |
+			| 'Scarf (XS/Red)'                                     | '5,000'    | 'pcs'  | '100,00' | 'TRY'      |
+			| 'Sales order 1 052 dated 07.09.2021 21:06:20'        | ''         | ''     | ''       | ''         |
+			| 'Shipment confirmation 1 053 dated 07.09.2021 21:07' | ''         | ''     | ''       | ''         |
+			| 'Scarf (XS/Red)'                                     | '100,000'  | 'pcs'  | '100,00' | 'TRY'      |
+		And in the table "BasisesTree" I click "Auto link" button
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| '#' | 'SalesTax' | 'Revenue type' | 'Price type'              | 'Item'  | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Serial lot numbers' | 'Q'      | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Delivery date' | 'Use shipment confirmation' | 'Detail' | 'Sales order' |
+			| '1' | '1%'       | ''             | 'en description is empty' | 'Scarf' | 'XS/Red'   | ''                   | 'No'                 | ''                   | '99,000' | 'pcs'  | '1 608,19'   | '100,00' | '18%' | ''              | '8 291,81'   | '9 900,00'     | ''                    | 'Store 01' | ''              | 'Yes'                       | ''       | ''            |
+			| '2' | '1%'       | ''             | 'en description is empty' | 'Scarf' | 'XS/Red'   | ''                   | 'No'                 | ''                   | '3,000'  | 'pcs'  | '48,73'      | '100,00' | '18%' | ''              | '251,27'     | '300,00'       | ''                    | 'Store 01' | ''              | 'No'                        | ''       | ''            |
+			| '3' | '1%'       | ''             | 'en description is empty' | 'Scarf' | 'XS/Red'   | ''                   | 'No'                 | ''                   | '1,000'  | 'pcs'  | '16,24'      | '100,00' | '18%' | ''              | '83,76'      | '100,00'       | ''                    | 'Store 01' | ''              | 'Yes'                       | ''       | ''            |
+		And I close all client application windows
 
 
+Scenario: _2060018 check link form in the PI with 2 lines with the same items
+	* Open form for create PI
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I click the button named "FormCreate"
+	* Filling in the main details of the document
+		And I click Select button of "Partner" field
+		And I click "List" button
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Ferron BP'     |
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Company Ferron BP'     |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Vendor Ferron, TRY'     |
+		And I select current line in "List" table
+		And I activate field named "ItemListLineNumber" in "ItemList" table		
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| 'Description'  |
+			| 'Main Company' | 
+		And I select current line in "List" table
+		And I click Select button of "Store" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Store 03'  |
+		And I select current line in "List" table
+	* Add items	
+		And I click the button named "Add"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Scarf'       |
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Scarf' | 'XS/Red'  |
+		And I select current line in "List" table
+		And I activate field named "ItemListQuantity" in "ItemList" table
+		And I input "9,000" text in the field named "ItemListQuantity" of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click the button named "Add"
+		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Scarf'       |
+		And I select current line in "List" table
+		And I activate field named "ItemListItemKey" in "ItemList" table
+		And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+		And I go to line in "List" table
+			| 'Item'  | 'Item key' |
+			| 'Scarf' | 'XS/Red'  |
+		And I select current line in "List" table
+		And I activate field named "ItemListQuantity" in "ItemList" table
+		And I input "1,000" text in the field named "ItemListQuantity" of "ItemList" table
+		And I finish line editing in "ItemList" table
+	* Link 
+		And I click "Link unlink basis documents" button
+		And I activate field named "ItemListRowsRowPresentation" in "ItemListRows" table
+		And I go to line in "ItemListRows" table
+			| '#' | 'Quantity' | 'Row presentation' | 'Store'    | 'Unit' |
+			| '1' | '9,000'    | 'Scarf (XS/Red)'   | 'Store 03' | 'pcs'  |
+		And I go to line in "BasisesTree" table
+			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' |
+			| 'TRY'      | '100,00' | '10,000'   | 'Dress (S/Yellow)' | 'pcs'  |
+		And in the table "BasisesTree" I click the button named "Link"
+		And I go to line in "ItemListRows" table
+			| '#' | 'Quantity' | 'Row presentation' | 'Store'    | 'Unit' |
+			| '2' | '1,000'    | 'Scarf (XS/Red)'   | 'Store 03' | 'pcs'  |
+		And I expand a line in "BasisesTree" table
+			| 'Row presentation'                               |
+			| 'Purchase order 1 052 dated 07.09.2021 21:34:37' |
+		And I expand a line in "BasisesTree" table
+			| 'Row presentation'                              |
+			| 'Goods receipt 1 053 dated 07.09.2021 21:34:43' |
+		And I go to line in "BasisesTree" table
+			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' |
+			| 'TRY'      | '100,00' | '10,000'   | 'Dress (S/Yellow)' | 'pcs'  |
+		And in the table "BasisesTree" I click the button named "Link"
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| '#' | 'Price type'              | 'Item'  | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers' | 'Q'     | 'Price'  | 'VAT' | 'Offers amount' | 'Total amount' | 'Additional analytic' | 'Internal supply request' | 'Store'    | 'Delivery date' | 'Expense type' | 'Purchase order'                                 | 'Detail' | 'Sales order' | 'Net amount' | 'Use goods receipt' |
+			| '1' | 'en description is empty' | 'Scarf' | 'XS/Red'   | ''                   | 'No'                 | '137,29'     | 'pcs'  | ''                   | '9,000' | '100,00' | '18%' | ''              | '900,00'       | ''                    | ''                        | 'Store 03' | ''              | ''             | 'Purchase order 1 052 dated 07.09.2021 21:34:37' | ''       | ''            | '762,71'     | 'Yes'               |
+			| '2' | 'en description is empty' | 'Scarf' | 'XS/Red'   | ''                   | 'No'                 | '15,25'      | 'pcs'  | ''                   | '1,000' | '100,00' | '18%' | ''              | '100,00'       | ''                    | ''                        | 'Store 03' | ''              | ''             | 'Purchase order 1 052 dated 07.09.2021 21:34:37' | ''       | ''            | '84,75'      | 'Yes'               |
+	* Autolink
+		And I click "Link unlink basis documents" button
+		And I change checkbox "Linked documents"
+		And in the table "ResultsTree" I click "Unlink all" button
+		And in the table "BasisesTree" I click "Auto link" button
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| '#' | 'Price type'              | 'Item'  | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers' | 'Q'     | 'Price'  | 'VAT' | 'Offers amount' | 'Total amount' | 'Additional analytic' | 'Internal supply request' | 'Store'    | 'Delivery date' | 'Expense type' | 'Purchase order'                                 | 'Detail' | 'Sales order' | 'Net amount' | 'Use goods receipt' |
+			| '1' | 'en description is empty' | 'Scarf' | 'XS/Red'   | ''                   | 'No'                 | '137,29'     | 'pcs'  | ''                   | '9,000' | '100,00' | '18%' | ''              | '900,00'       | ''                    | ''                        | 'Store 03' | ''              | ''             | 'Purchase order 1 052 dated 07.09.2021 21:34:37' | ''       | ''            | '762,71'     | 'Yes'               |
+			| '2' | 'en description is empty' | 'Scarf' | 'XS/Red'   | ''                   | 'No'                 | '15,25'      | 'pcs'  | ''                   | '1,000' | '100,00' | '18%' | ''              | '100,00'       | ''                    | ''                        | 'Store 03' | ''              | ''             | 'Purchase order 1 052 dated 07.09.2021 21:34:37' | ''       | ''            | '84,75'      | 'Yes'               |
+		And I close all client application windows
+		
 
-
-
+	
 Scenario: _2060020 check button Show quantity in base unit in the Link form
 	* Open form for create SC
 		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"

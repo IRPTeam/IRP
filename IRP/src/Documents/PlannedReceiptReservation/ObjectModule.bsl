@@ -24,3 +24,10 @@ EndProcedure
 Procedure UndoPosting(Cancel)
 	UndopostingServer.Undopost(ThisObject, Cancel, ThisObject.AdditionalProperties);
 EndProcedure
+
+Procedure Filling(FillingData, FillingText, StandardProcessing)
+	If TypeOf(FillingData) = Type("Structure") Then
+		FillPropertyValues(ThisObject, FillingData, RowIDInfoServer.GetSeperatorColumns(ThisObject.Metadata()));
+		RowIDInfoServer.AddLinkedDocumentRows(ThisObject, FillingData);
+	EndIf;
+EndProcedure

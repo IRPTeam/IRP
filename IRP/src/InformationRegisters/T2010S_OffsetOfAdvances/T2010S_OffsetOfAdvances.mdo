@@ -50,6 +50,8 @@
       <types>DocumentRef.DebitNote</types>
       <types>DocumentRef.CreditNote</types>
       <types>DocumentRef.OpeningEntry</types>
+      <types>DocumentRef.PurchaseReturn</types>
+      <types>DocumentRef.SalesReturn</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

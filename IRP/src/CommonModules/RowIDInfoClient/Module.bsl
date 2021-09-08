@@ -32,6 +32,15 @@ Procedure UpdateQuantity(Object, Form) Export
 			EndIf;
 			
 			If Not ValueIsFilled(TabularSectionName) Then
+				If CommonFunctionsClientServer.ObjectHasProperty(RowItemList, "Difference") Then
+					For Each IDInfoRow In IDInfoRows Do
+						IDInfoRow.Quantity = ?(RowItemList.Difference < 0, -RowItemList.Difference, RowItemList.Difference);
+					EndDo;
+				Else
+					For Each IDInfoRow In IDInfoRows Do
+						IDInfoRow.Quantity = RowItemList.QuantityInBaseUnit;
+					EndDo;
+				EndIf;
 				Continue;
 			EndIf;
 			

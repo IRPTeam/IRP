@@ -274,13 +274,6 @@ Function GetIncomingStocks_ConsiderStocksRequested(Parameters)
 	|			THEN StockForWriteOff.QuantityBalance
 	|		ELSE StockForWriteOff.QuantityReal
 	|	END > 0";
-//	|HAVING
-//	|	SUM(CASE
-//	|		WHEN IncomingBalance.Quantity - ISNULL(RequestedBalance.Quantity, 0) > 0
-//	|			THEN (IncomingBalance.Quantity - ISNULL(RequestedBalance.Quantity, 0)) 
-//	|			+ (IncomingBalance.RealIncomingQuntity - IncomingBalance.Quantity)
-//	|		ELSE 0
-//	|	END) > 0";
 	QueryResult = Query.Execute();
 	QueryTable = QueryResult.Unload();
 	Return QueryTable;

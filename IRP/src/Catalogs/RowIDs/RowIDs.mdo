@@ -373,4 +373,19 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="439e9df1-4ee2-4fb5-8fcd-f4e477a6eae2">
+    <name>Requester</name>
+    <synonym>
+      <key>en</key>
+      <value>Requester</value>
+    </synonym>
+    <type>
+      <types>DocumentRef.SalesOrder</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
 </mdclass:Catalog>

@@ -281,22 +281,24 @@ Procedure FillRowID_SO(Source)
 			ArrayForDelete.Add(Row);
 		EndIf;
 	EndDo;
+	
 	For Each ItemForDelete In ArrayForDelete Do
 		Source.RowIDInfo.Delete(ItemForDelete);
 	EndDo;
 	
 	For Each RowItemList In Source.ItemList Do
 	
-		If RowItemList.Cancel Then
-			Continue;
-		EndIf;
-		
 		Row = Undefined;
 		IDInfoRows = Source.RowIDInfo.FindRows(New Structure("Key", RowItemList.Key));
 		If IDInfoRows.Count() = 0 Then
 			Row = Source.RowIDInfo.Add();
 		ElsIf IDInfoRows.Count() = 1 Then
 			Row = IDInfoRows[0];
+		EndIf;
+
+		If RowItemList.Cancel Then
+			Source.RowIDInfo.Delete(Row);
+			Continue;
 		EndIf;
 
 		FillRowID(Source, Row, RowItemList);

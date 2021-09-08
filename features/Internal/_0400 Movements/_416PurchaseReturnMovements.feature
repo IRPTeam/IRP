@@ -458,6 +458,26 @@ Scenario: _041617 check Purchase return movements by the Register  "R1020 Advanc
 			| ''                                              | 'Receipt'     | '14.03.2021 19:26:51' | '400'       | 'Main Company' | 'Front office' | 'en description is empty'      | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Purchase return 233 dated 14.03.2021 19:26:51' | 'No'                   | ''                         |		
 	And I close all client application windows
 
+Scenario: _041618 check Purchase return movements by the Register  "T2012S Partner advances" (Due as advance - True)
+	And I close all client application windows
+	* Select Purchase return
+		Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '233' |
+	* Check movements by the Register  "T2012S Partner advances" 
+		And I click "Registrations report" button
+		And I select "T2012S Partner advances" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Purchase return 233 dated 14.03.2021 19:26:51' | ''                    | ''          | ''             | ''             | ''         | ''                  | ''          | ''                  | ''                    | ''                                              | ''    |
+			| 'Document registrations records'                | ''                    | ''          | ''             | ''             | ''         | ''                  | ''          | ''                  | ''                    | ''                                              | ''    |
+			| 'Register  "T2012S Partner advances"'           | ''                    | ''          | ''             | ''             | ''         | ''                  | ''          | ''                  | ''                    | ''                                              | ''    |
+			| ''                                              | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''         | ''                  | ''          | ''                  | ''                    | ''                                              | ''    |
+			| ''                                              | ''                    | 'Amount'    | 'Company'      | 'Branch'       | 'Currency' | 'Legal name'        | 'Partner'   | 'Is vendor advance' | 'Is customer advance' | 'Advances document'                             | 'Key' |
+			| ''                                              | '14.03.2021 19:26:51' | '400'       | 'Main Company' | 'Front office' | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Yes'               | 'No'                  | 'Purchase return 233 dated 14.03.2021 19:26:51' | ''    |		
+	And I close all client application windows
+
 Scenario: _041619 check Purchase return movements by the Register  "R4032 Goods in transit (outgoing) (use SC, PR)
 	And I close all client application windows
 	* Select Purchase return

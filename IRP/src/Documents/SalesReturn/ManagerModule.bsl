@@ -126,6 +126,8 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R4050B_StockInventory());
 	QueryArray.Add(R5010B_ReconciliationStatement());
 	QueryArray.Add(R5021T_Revenues());
+	QueryArray.Add(T2012S_PartnerAdvances());
+	QueryArray.Add(R5011B_CustomersAging());
 	Return QueryArray;
 EndFunction
 
@@ -365,6 +367,8 @@ Function R2021B_CustomersTransactions()
 		|	ItemList.Partner,
 		|	ItemList.Agreement,
 		|	ItemList.BasisDocument AS Basis,
+		|	UNDEFINED AS Key,
+		|	UNDEFINED AS CustomersAdvancesClosing,
 		|	-SUM(ItemList.Amount) AS Amount
 		|INTO R2021B_CustomersTransactions
 		|FROM
@@ -380,19 +384,127 @@ Function R2021B_CustomersTransactions()
 		|	ItemList.Partner,
 		|	ItemList.Period,
 		|	ItemList.BasisDocument,
-		|	VALUE(AccumulationRecordType.Receipt)";
+		|	VALUE(AccumulationRecordType.Receipt)
+		|
+		|UNION ALL
+		|
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	OffsetOfAdvances.Period,
+		|	OffsetOfAdvances.Company,
+		|	OffsetOfAdvances.Branch,
+		|	OffsetOfAdvances.Currency,
+		|	OffsetOfAdvances.LegalName,
+		|	OffsetOfAdvances.Partner,
+		|	OffsetOfAdvances.Agreement,
+		|	OffsetOfAdvances.TransactionDocument,
+		|	OffsetOfAdvances.Key,
+		|	OffsetOfAdvances.Recorder,
+		|	OffsetOfAdvances.Amount
+		|FROM
+		|	InformationRegister.T2010S_OffsetOfAdvances AS OffsetOfAdvances
+		|WHERE
+		|	OffsetOfAdvances.Document = &Ref";
 EndFunction
 
 Function R2020B_AdvancesFromCustomers()
 	Return
 		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	ItemList.Period AS Period,
+		|	ItemList.Company AS Company,
+		|	ItemList.Branch AS Branch,
+		|	ItemList.Partner AS Partner,
+		|	ItemList.LegalName AS LegalName,
+		|	ItemList.Currency AS Currency,
 		|	ItemList.AdvanceBasis AS Basis,
-		|	*
+		|	SUM(ItemList.Amount) AS Amount,
+		|	UNDEFINED AS Key,
+		|	UNDEFINED AS CustomersAdvancesClosing
 		|INTO R2020B_AdvancesFromCustomers
 		|FROM
 		|	ItemList AS ItemList
 		|WHERE
-		|	ItemList.DueAsAdvance";
+		|	ItemList.DueAsAdvance
+		|
+		|GROUP BY
+		|	ItemList.Partner,
+		|	ItemList.Branch,
+		|	ItemList.Currency,
+		|	ItemList.Period,
+		|	ItemList.AdvanceBasis,
+		|	ItemList.Company,
+		|	ItemList.LegalName
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Expense),
+		|	OffsetOfAdvances.Period,
+		|	OffsetOfAdvances.Company,
+		|	OffsetOfAdvances.Branch,
+		|	OffsetOfAdvances.Partner,
+		|	OffsetOfAdvances.LegalName,
+		|	OffsetOfAdvances.Currency,
+		|	OffsetOfAdvances.AdvancesDocument,
+		|	OffsetOfAdvances.Amount,
+		|	UNDEFINED,
+		|	OffsetOfAdvances.Recorder
+		|FROM
+		|	InformationRegister.T2010S_OffsetOfAdvances AS OffsetOfAdvances
+		|WHERE
+		|	OffsetOfAdvances.Document = &Ref";
+EndFunction
+
+Function R5011B_CustomersAging()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	OffsetOfAging.Period,
+		|	OffsetOfAging.Company,
+		|	OffsetOfAging.Branch,
+		|	OffsetOfAging.Partner,
+		|	OffsetOfAging.Agreement,
+		|	OffsetOfAging.Currency,
+		|	OffsetOfAging.Invoice,
+		|	OffsetOfAging.PaymentDate,
+		|	OffsetOfAging.Amount,
+		|	OffsetOfAging.Recorder AS AgingClosing
+		|INTO R5011B_CustomersAging
+		|FROM
+		|	InformationRegister.T2013S_OffsetOfAging AS OffsetOfAging
+		|WHERE
+		|	OffsetOfAging.Document = &Ref";
+EndFunction
+
+Function T2012S_PartnerAdvances()
+	Return
+		"SELECT
+		|	ItemList.Period AS Period,
+		|	ItemList.Company AS Company,
+		|	ItemList.Branch AS Branch,
+		|	ItemList.Partner AS Partner,
+		|	ItemList.LegalName AS LegalName,
+		|	ItemList.Currency AS Currency,
+		|	ItemList.AdvanceBasis AS AdvancesDocument,
+		|	SUM(ItemList.Amount) AS Amount,
+		|	UNDEFINED AS Key,
+		|	TRUE AS IsCustomerAdvance
+		|INTO T2012S_PartnerAdvances
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	ItemList.DueAsAdvance
+		|
+		|GROUP BY
+		|	ItemList.Branch,
+		|	ItemList.LegalName,
+		|	ItemList.Company,
+		|	ItemList.Partner,
+		|	ItemList.Period,
+		|	ItemList.AdvanceBasis,
+		|	ItemList.Currency";	
 EndFunction
 
 Function R2031B_ShipmentInvoicing()

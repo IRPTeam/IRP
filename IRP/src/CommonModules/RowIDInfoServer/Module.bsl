@@ -108,15 +108,40 @@ Procedure Posting_TM1010B_RowIDMovements(Source, Cancel, PostingMode)
 	Query.Text =
 		"SELECT
 		|	Table.Ref AS Recorder,
-		|	Table.Ref.Date AS Period,
-		|	*
+		|	Table.Ref.Date AS Period, 
+		|	Table.RowID,
+		|	Table.CurrentStep,
+		| 	Table.Basis,
+		|	Table.RowRef,
+		|	SUM(Table.Quantity) AS Quantity
 		|INTO RowIDMovements
 		|FROM
 		|	Document." + Source.Metadata().Name + ".RowIDInfo AS Table
 		|WHERE
 		|	Table.Ref = &Ref
+		|GROUP BY
+		|	Table.Ref,
+		|	Table.Ref.Date, 
+		|	Table.RowID,
+		|	Table.CurrentStep,
+		| 	Table.Basis,
+		|	Table.RowRef
 		|;
-		|
+		|//////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	Table.Ref AS Recorder,
+		|	Table.Ref.Date AS Period, 
+		|	Table.RowID,
+		|	Table.NextStep,
+		| 	Table.Basis,
+		|	Table.RowRef,
+		|	Table.Quantity
+		|INTO RowIDMovementsFull
+		|FROM
+		|	Document." + Source.Metadata().Name + ".RowIDInfo AS Table
+		|WHERE
+		|	Table.Ref = &Ref
+		|;
 		|////////////////////////////////////////////////////////////////////////////////
 		|SELECT
 		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
@@ -163,11 +188,10 @@ Procedure Posting_TM1010B_RowIDMovements(Source, Cancel, PostingMode)
 		|	Table.RowID,
 		|	Table.NextStep AS Step,
 		|	&Ref,
-		|
 		|	Table.RowRef,
 		|	Table.Quantity
 		|FROM
-		|	RowIDMovements AS Table
+		|	RowIDMovementsFull AS Table
 		|WHERE
 		|	NOT Table.NextStep = VALUE(Catalog.MovementRules.EmptyRef)";
 
@@ -990,7 +1014,7 @@ EndFunction
 
 #Region ExtractData
 
-Function ExtractData(BasisesTable, DataReceiver) Export
+Function ExtractData(BasisesTable, DataReceiver, AddInfo = Undefined) Export
 	
 	Tables = CreateTablesForExtractData(BasisesTable.CopyColumns());
 		
@@ -1028,7 +1052,7 @@ Function ExtractData(BasisesTable, DataReceiver) Export
 		EndIf;
 	EndDo;
 	
-	Return ExtractDataByTables(Tables, DataReceiver);	
+	Return ExtractDataByTables(Tables, DataReceiver, AddInfo);	
 EndFunction
 
 Function CreateTablesForExtractData(EmptyTable)
@@ -1176,91 +1200,91 @@ EndProcedure
 
 #Region ExtractDataFrom
 
-Function ExtractDataByTables(Tables, DataReceiver)
+Function ExtractDataByTables(Tables, DataReceiver, AddInfo = Undefined)
 	ExtractedData = New Array();
 	
 	If Tables.FromSO.Count() Then
-		ExtractedData.Add(ExtractData_FromSO(Tables.FromSO, DataReceiver));
+		ExtractedData.Add(ExtractData_FromSO(Tables.FromSO, DataReceiver, AddInfo));
 	EndIf;
 	
 	If Tables.FromSI.Count() Then
-		ExtractedData.Add(ExtractData_FromSI(Tables.FromSI, DataReceiver));
+		ExtractedData.Add(ExtractData_FromSI(Tables.FromSI, DataReceiver, AddInfo));
 	EndIf;
 	
 	If Tables.FromSC.Count() Then
-		ExtractedData.Add(ExtractData_FromSC(Tables.FromSC, DataReceiver));
+		ExtractedData.Add(ExtractData_FromSC(Tables.FromSC, DataReceiver, AddInfo));
 	EndIf;
 	
 	If Tables.FromSC_ThenFromSO.Count() Then
-		ExtractedData.Add(ExtractData_FromSC_ThenFromSO(Tables.FromSC_ThenFromSO, DataReceiver));
+		ExtractedData.Add(ExtractData_FromSC_ThenFromSO(Tables.FromSC_ThenFromSO, DataReceiver, AddInfo));
 	EndIf;
 	
 	If Tables.FromPIGR_ThenFromSO.Count() Then
-		ExtractedData.Add(ExtractData_FromPIGR_ThenFromSO(Tables.FromPIGR_ThenFromSO, DataReceiver));
+		ExtractedData.Add(ExtractData_FromPIGR_ThenFromSO(Tables.FromPIGR_ThenFromSO, DataReceiver, AddInfo));
 	EndIf;
 	
 	If Tables.FromSC_ThenFromPIGR_ThenFromSO.Count() Then
-		ExtractedData.Add(ExtractData_FromSC_ThenFromPIGR_ThenFromSO(Tables.FromSC_ThenFromPIGR_ThenFromSO, DataReceiver));
+		ExtractedData.Add(ExtractData_FromSC_ThenFromPIGR_ThenFromSO(Tables.FromSC_ThenFromPIGR_ThenFromSO, DataReceiver, AddInfo));
 	EndIf;
 	
 	If Tables.FromSC_ThenFromSI.Count() Then
-		ExtractedData.Add(ExtractData_FromSC_ThenFromSI(Tables.FromSC_ThenFromSI, DataReceiver));
+		ExtractedData.Add(ExtractData_FromSC_ThenFromSI(Tables.FromSC_ThenFromSI, DataReceiver, AddInfo));
 	EndIf;
 	
 	If Tables.FromPO.Count() Then
-		ExtractedData.Add(ExtractData_FromPO(Tables.FromPO, DataReceiver));
+		ExtractedData.Add(ExtractData_FromPO(Tables.FromPO, DataReceiver, AddInfo));
 	EndIf;
 	
 	If Tables.FromPI.Count() Then
-		ExtractedData.Add(ExtractData_FromPI(Tables.FromPI, DataReceiver));
+		ExtractedData.Add(ExtractData_FromPI(Tables.FromPI, DataReceiver, AddInfo));
 	EndIf;
 	
 	If Tables.FromGR.Count() Then
-		ExtractedData.Add(ExtractData_FromGR(Tables.FromGR, DataReceiver));
+		ExtractedData.Add(ExtractData_FromGR(Tables.FromGR, DataReceiver, AddInfo));
 	EndIf;
 	
 	If Tables.FromGR_ThenFromPO.Count() Then
-		ExtractedData.Add(ExtractData_FromGR_ThenFromPO(Tables.FromGR_ThenFromPO, DataReceiver));
+		ExtractedData.Add(ExtractData_FromGR_ThenFromPO(Tables.FromGR_ThenFromPO, DataReceiver, AddInfo));
 	EndIf;
 	
 	If Tables.FromGR_ThenFromPI.Count() Then
-		ExtractedData.Add(ExtractData_FromGR_ThenFromPI(Tables.FromGR_ThenFromPI, DataReceiver));
+		ExtractedData.Add(ExtractData_FromGR_ThenFromPI(Tables.FromGR_ThenFromPI, DataReceiver, AddInfo));
 	EndIf;
 	
 	If Tables.FromITO.Count() Then
-		ExtractedData.Add(ExtractData_FromITO(Tables.FromITO, DataReceiver));
+		ExtractedData.Add(ExtractData_FromITO(Tables.FromITO, DataReceiver, AddInfo));
 	EndIf;
 	
 	If Tables.FromIT.Count() Then
-		ExtractedData.Add(ExtractData_FromIT(Tables.FromIT, DataReceiver));
+		ExtractedData.Add(ExtractData_FromIT(Tables.FromIT, DataReceiver, AddInfo));
 	EndIf;
 	
 	If Tables.FromISR.Count() Then
-		ExtractedData.Add(ExtractData_FromISR(Tables.FromISR, DataReceiver));
+		ExtractedData.Add(ExtractData_FromISR(Tables.FromISR, DataReceiver, AddInfo));
 	EndIf;
 	
 	If Tables.FromPhysicalInventory.Count() Then
-		ExtractedData.Add(ExtractData_FromPhysicalInventory(Tables.FromPhysicalInventory, DataReceiver));
+		ExtractedData.Add(ExtractData_FromPhysicalInventory(Tables.FromPhysicalInventory, DataReceiver, AddInfo));
 	EndIf;
 	
 	If Tables.FromPR.Count() Then
-		ExtractedData.Add(ExtractData_FromPR(Tables.FromPR, DataReceiver));
+		ExtractedData.Add(ExtractData_FromPR(Tables.FromPR, DataReceiver, AddInfo));
 	EndIf;
 	
 	If Tables.FromPRO.Count() Then
-		ExtractedData.Add(ExtractData_FromPRO(Tables.FromPRO, DataReceiver));
+		ExtractedData.Add(ExtractData_FromPRO(Tables.FromPRO, DataReceiver, AddInfo));
 	EndIf;
 	
 	If Tables.FromSR.Count() Then
-		ExtractedData.Add(ExtractData_FromSR(Tables.FromSR, DataReceiver));
+		ExtractedData.Add(ExtractData_FromSR(Tables.FromSR, DataReceiver, AddInfo));
 	EndIf;
 	
 	If Tables.FromSRO.Count() Then
-		ExtractedData.Add(ExtractData_FromSRO(Tables.FromSRO, DataReceiver));
+		ExtractedData.Add(ExtractData_FromSRO(Tables.FromSRO, DataReceiver, AddInfo));
 	EndIf;
 	
 	If Tables.FromRSR.Count() Then
-		ExtractedData.Add(ExtractData_FromRSR(Tables.FromRSR, DataReceiver));
+		ExtractedData.Add(ExtractData_FromRSR(Tables.FromRSR, DataReceiver, AddInfo));
 	EndIf;
 	
 	Return ExtractedData;
@@ -1298,7 +1322,7 @@ Function GetQueryText_BasisesTable()
 		|; ";
 EndFunction
 
-Function ExtractData_FromSO(BasisesTable, DataReceiver)
+Function ExtractData_FromSO(BasisesTable, DataReceiver, AddInfo = Undefined)
 	Query = New Query(GetQueryText_BasisesTable());
 	Query.Text = Query.Text +
 		"SELECT ALLOWED
@@ -1405,7 +1429,7 @@ Function ExtractData_FromSO(BasisesTable, DataReceiver)
 	Return ReduseExtractedDataInfo_SO(Tables, DataReceiver);
 EndFunction
 
-Function ExtractData_FromSI(BasisesTable, DataReceiver)
+Function ExtractData_FromSI(BasisesTable, DataReceiver, AddInfo = Undefined)
 	Query = New Query(GetQueryText_BasisesTable());
 	Query.Text = Query.Text +
 		"SELECT ALLOWED
@@ -1524,7 +1548,7 @@ Function ExtractData_FromSI(BasisesTable, DataReceiver)
 	Return Tables;
 EndFunction
 
-Function ExtractData_FromSC(BasisesTable, DataReceiver)
+Function ExtractData_FromSC(BasisesTable, DataReceiver, AddInfo = Undefined)
 	Query = New Query(GetQueryText_BasisesTable());
 	Query.Text = Query.Text +
 		"SELECT ALLOWED
@@ -1587,10 +1611,10 @@ Function ExtractData_FromSC(BasisesTable, DataReceiver)
 	
 	AddTables(Tables);
 	
-	Return CollapseRepeatingItemListRows(Tables, "Item, ItemKey, Store, Unit");
+	Return CollapseRepeatingItemListRows(Tables, "Item, ItemKey, Store, Unit", AddInfo);
 EndFunction
 
-Function ExtractData_FromSC_ThenFromSO(BasisesTable, DataReceiver)
+Function ExtractData_FromSC_ThenFromSO(BasisesTable, DataReceiver, AddInfo = Undefined)
 	Query = New Query(GetQueryText_BasisesTable());
 	Query.Text = Query.Text +
 		"SELECT DISTINCT ALLOWED
@@ -1647,10 +1671,10 @@ Function ExtractData_FromSC_ThenFromSO(BasisesTable, DataReceiver)
 	
 	AddTables(Tables);
 	
-	Return CollapseRepeatingItemListRows(Tables, "SalesOrderItemListKey");
+	Return CollapseRepeatingItemListRows(Tables, "SalesOrderItemListKey", AddInfo);
 EndFunction
 
-Function ExtractData_FromSC_ThenFromSI(BasisesTable, DataReceiver)
+Function ExtractData_FromSC_ThenFromSI(BasisesTable, DataReceiver, AddInfo = Undefined)
 	Query = New Query(GetQueryText_BasisesTable());
 	Query.Text = Query.Text + 
 		"SELECT DISTINCT ALLOWED
@@ -1707,11 +1731,10 @@ Function ExtractData_FromSC_ThenFromSI(BasisesTable, DataReceiver)
 	
 	AddTables(Tables);
 	
-	Return CollapseRepeatingItemListRows(Tables, "SalesInvoiceItemListKey");
-	//Return CollapseRepeatingItemListRows(Tables, "SalesInvoiceItemListKey, Key");
+	Return CollapseRepeatingItemListRows(Tables, "SalesInvoiceItemListKey", AddInfo);
 EndFunction
 
-Function ExtractData_FromSC_ThenFromPIGR_ThenFromSO(BasisesTable, DataReceiver)
+Function ExtractData_FromSC_ThenFromPIGR_ThenFromSO(BasisesTable, DataReceiver, AddInfo = Undefined)
 	Query = New Query(GetQueryText_BasisesTable());
 	Query.Text = Query.Text +
 		"SELECT DISTINCT ALLOWED
@@ -1768,10 +1791,10 @@ Function ExtractData_FromSC_ThenFromPIGR_ThenFromSO(BasisesTable, DataReceiver)
 	
 	AddTables(Tables);
 	
-	Return CollapseRepeatingItemListRows(Tables, "SalesOrderItemListKey");
+	Return CollapseRepeatingItemListRows(Tables, "SalesOrderItemListKey", AddInfo);
 EndFunction
 
-Function ExtractData_FromPIGR_ThenFromSO(BasisesTable, DataReceiver)
+Function ExtractData_FromPIGR_ThenFromSO(BasisesTable, DataReceiver, AddInfo = Undefined)
 	Query = New Query(GetQueryText_BasisesTable());
 	Query.Text = Query.Text +
 		"SELECT DISTINCT ALLOWED
@@ -1803,10 +1826,10 @@ Function ExtractData_FromPIGR_ThenFromSO(BasisesTable, DataReceiver)
 	
 	AddTables(Tables);
 	
-	Return CollapseRepeatingItemListRows(Tables, "SalesOrderItemListKey");
+	Return CollapseRepeatingItemListRows(Tables, "SalesOrderItemListKey", AddInfo);
 EndFunction
 
-Function ExtractData_FromPO(BasisesTable, DataReceiver)
+Function ExtractData_FromPO(BasisesTable, DataReceiver, AddInfo = Undefined)
 	Query = New Query(GetQueryText_BasisesTable());
 	Query.Text = Query.Text +
 		"SELECT ALLOWED
@@ -1909,7 +1932,7 @@ Function ExtractData_FromPO(BasisesTable, DataReceiver)
 	Return Tables;
 EndFunction
 
-Function ExtractData_FromPI(BasisesTable, DataReceiver)
+Function ExtractData_FromPI(BasisesTable, DataReceiver, AddInfo = Undefined)
 	Query = New Query(GetQueryText_BasisesTable());
 	Query.Text = Query.Text + 
 		"SELECT ALLOWED
@@ -2028,7 +2051,7 @@ Function ExtractData_FromPI(BasisesTable, DataReceiver)
 	Return Tables;
 EndFunction
 
-Function ExtractData_FromGR(BasisesTable, DataReceiver)
+Function ExtractData_FromGR(BasisesTable, DataReceiver, AddInfo = Undefined)
 	Query = New Query(GetQueryText_BasisesTable());
 	Query.Text = Query.Text +
 		"SELECT ALLOWED
@@ -2091,10 +2114,10 @@ Function ExtractData_FromGR(BasisesTable, DataReceiver)
 	
 	AddTables(Tables);
 	
-	Return CollapseRepeatingItemListRows(Tables, "Item, ItemKey, Store, Unit");
+	Return CollapseRepeatingItemListRows(Tables, "Item, ItemKey, Store, Unit", AddInfo);
 EndFunction
 
-Function ExtractData_FromGR_ThenFromPO(BasisesTable, DataReceiver)
+Function ExtractData_FromGR_ThenFromPO(BasisesTable, DataReceiver, AddInfo = Undefined)
 	Query = New Query(GetQueryText_BasisesTable());
 	Query.Text = Query.Text +
 		"SELECT DISTINCT ALLOWED
@@ -2151,10 +2174,10 @@ Function ExtractData_FromGR_ThenFromPO(BasisesTable, DataReceiver)
 	
 	AddTables(Tables);
 	
-	Return CollapseRepeatingItemListRows(Tables, "PurchaseOrderItemListKey");
+	Return CollapseRepeatingItemListRows(Tables, "PurchaseOrderItemListKey", AddInfo);
 EndFunction
 
-Function ExtractData_FromGR_ThenFromPI(BasisesTable, DataReceiver)
+Function ExtractData_FromGR_ThenFromPI(BasisesTable, DataReceiver, AddInfo = Undefined)
 	Query = New Query(GetQueryText_BasisesTable());
 	Query.Text = Query.Text +
 		"SELECT DISTINCT ALLOWED
@@ -2211,10 +2234,10 @@ Function ExtractData_FromGR_ThenFromPI(BasisesTable, DataReceiver)
 	
 	AddTables(Tables);
 	
-	Return CollapseRepeatingItemListRows(Tables, "PurchaseInvoiceItemListKey");
+	Return CollapseRepeatingItemListRows(Tables, "PurchaseInvoiceItemListKey", AddInfo);
 EndFunction
 
-Function ExtractData_FromITO(BasisesTable, DataReceiver)
+Function ExtractData_FromITO(BasisesTable, DataReceiver, AddInfo = Undefined)
 	Query = New Query(GetQueryText_BasisesTable());
 	Query.Text = Query.Text +
 		"SELECT ALLOWED
@@ -2260,7 +2283,7 @@ Function ExtractData_FromITO(BasisesTable, DataReceiver)
 	Return Tables;
 EndFunction
 
-Function ExtractData_FromIT(BasisesTable, DataReceiver)
+Function ExtractData_FromIT(BasisesTable, DataReceiver, AddInfo = Undefined)
 	Query = New Query(GetQueryText_BasisesTable());
 	Query.Text = Query.Text +
 		"SELECT ALLOWED
@@ -2318,7 +2341,7 @@ Function ExtractData_FromIT(BasisesTable, DataReceiver)
 	Return Tables;
 EndFunction
 
-Function ExtractData_FromISR(BasisesTable, DataReceiver)
+Function ExtractData_FromISR(BasisesTable, DataReceiver, AddInfo = Undefined)
 	Query = New Query(GetQueryText_BasisesTable());
 	Query.Text = Query.Text +
 		"SELECT ALLOWED
@@ -2363,7 +2386,7 @@ Function ExtractData_FromISR(BasisesTable, DataReceiver)
 	Return Tables;
 EndFunction
 
-Function ExtractData_FromPhysicalInventory(BasisesTable, DataReceiver)
+Function ExtractData_FromPhysicalInventory(BasisesTable, DataReceiver, AddInfo = Undefined)
 	Query = New Query(GetQueryText_BasisesTable());
 	Query.Text = Query.Text +
 		"SELECT ALLOWED
@@ -2406,7 +2429,7 @@ Function ExtractData_FromPhysicalInventory(BasisesTable, DataReceiver)
 	Return Tables;
 EndFunction
 
-Function ExtractData_FromPR(BasisesTable, DataReceiver)
+Function ExtractData_FromPR(BasisesTable, DataReceiver, AddInfo = Undefined)
 	Query = New Query(GetQueryText_BasisesTable());
 	Query.Text = Query.Text +
 		"SELECT ALLOWED
@@ -2509,7 +2532,7 @@ Function ExtractData_FromPR(BasisesTable, DataReceiver)
 	Return Tables;
 EndFunction
 
-Function ExtractData_FromPRO(BasisesTable, DataReceiver)
+Function ExtractData_FromPRO(BasisesTable, DataReceiver, AddInfo = Undefined)
 	Query = New Query(GetQueryText_BasisesTable());
 	Query.Text = Query.Text +
 		"SELECT ALLOWED
@@ -2606,7 +2629,7 @@ Function ExtractData_FromPRO(BasisesTable, DataReceiver)
 	Return Tables;
 EndFunction
 
-Function ExtractData_FromSR(BasisesTable, DataReceiver)
+Function ExtractData_FromSR(BasisesTable, DataReceiver, AddInfo = Undefined)
 	Query = New Query(GetQueryText_BasisesTable());
 	Query.Text = Query.Text +
 		"SELECT ALLOWED
@@ -2708,7 +2731,7 @@ Function ExtractData_FromSR(BasisesTable, DataReceiver)
 	Return Tables;
 EndFunction
 
-Function ExtractData_FromSRO(BasisesTable, DataReceiver)
+Function ExtractData_FromSRO(BasisesTable, DataReceiver, AddInfo = Undefined)
 	Query = New Query(GetQueryText_BasisesTable());
 	Query.Text = Query.Text +
 		"SELECT ALLOWED
@@ -2805,7 +2828,7 @@ Function ExtractData_FromSRO(BasisesTable, DataReceiver)
 	Return Tables;
 EndFunction
 
-Function ExtractData_FromRSR(BasisesTable, DataReceiver)
+Function ExtractData_FromRSR(BasisesTable, DataReceiver, AddInfo = Undefined)
 	Query = New Query(GetQueryText_BasisesTable());
 	Query.Text = Query.Text +
 		"SELECT ALLOWED
@@ -3038,7 +3061,11 @@ Procedure RecalculateAmounts(Tables)
 	EndDo;
 EndProcedure
 
-Function CollapseRepeatingItemListRows(Tables, UniqueColumnNames)
+Function CollapseRepeatingItemListRows(Tables, UniqueColumnNames, AddInfo = Undefined)
+	IsLinkRows = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "IsLinkRows");
+	If IsLinkRows <> Undefined And IsLinkRows Then
+		UniqueColumnNames = UniqueColumnNames + ", Key";
+	EndIf;
 	ItemListGrouped = Tables.ItemList.Copy();
 	ItemListGrouped.GroupBy(UniqueColumnNames, GetColumnNamesSum_ItemList());
 	ItemListResult = Tables.ItemList.CopyColumns();
@@ -5870,8 +5897,13 @@ Procedure UnlinkTables(Object, UnlinkRow, TableNames)
 		If Not Object.Property(TableName) Then
 			Continue;
 		EndIf;
-			
-		Filter = New Structure("Key, BasisKey", UnlinkRow.Key, UnlinkRow.BasisKey);
+		
+		If ValueIsFilled(UnlinkRow.BasisKey) Then	
+			Filter = New Structure("Key, BasisKey", UnlinkRow.Key, UnlinkRow.BasisKey);
+		Else
+			Filter = New Structure("Key", UnlinkRow.Key);
+		EndIf;
+		
 		LinkedRows = Object[TableName].FindRows(Filter);
 			
 		For Each LinkedRow In LinkedRows Do

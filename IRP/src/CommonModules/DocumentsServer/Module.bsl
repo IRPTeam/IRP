@@ -10,16 +10,7 @@ Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 	AddCommonAttributesToForm(Object, Form);
 
 	If SessionParameters.isMobile Then
-		If Form.Items.Find("GroupTitleDecorations") <> Undefined Then
-			Form.Items.GroupTitleDecorations.Visible = False;
-			NewItem = Form.Items.Add("PageHead", Type("FormGroup"), Form.Items.GroupMainPages);
-			NewItem.Type = FormGroupType.Page;	
-			NewItem.Title = R().Form_035;
-			Form.Items.GroupTitleItems.Group = ChildFormItemsGroup.Vertical;
-			Form.Items.Move(NewItem, Form.Items.GroupMainPages, Form.Items.GroupMainPages.ChildItems[0]);
-			Form.Items.Move(Form.Items.GroupTitle, NewItem);
-			Form.Items.GroupMainPages.PagesRepresentation = FormPagesRepresentation.TabsOnBottom;
-		EndIf;
+		DocumentServerMobile.OnCreateAtServer(Object, Form, Cancel, StandardProcessing);						
 	Else	
 		If Form.Items.Find("GroupTitleCollapsed") <> Undefined Then
 			DocumentsClientServer.ChangeTitleCollapse(Object, Form, Not ValueIsFilled(Object.Ref));

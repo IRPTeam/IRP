@@ -4,7 +4,6 @@ Procedure OnOpen(Object, Form, Cancel, AddInfo = Undefined) Export
 	
 	#If MobileClient Then
 	ItemListOnChange(Object, Form);
-	SerialLotNumberListOnChange(Object, Form);
 	#EndIf
 	
 EndProcedure

@@ -115,6 +115,7 @@ Function Strings(Lang) Export
 	Strings.Insert("Form_032", NStr("en = 'Period'", Lang));
 	Strings.Insert("Form_033", NStr("en = 'Show all'", Lang));
 	Strings.Insert("Form_034", NStr("en = 'Hide all'", Lang));
+	Strings.Insert("Form_035", NStr("en = 'Head'", Lang));
 	#EndRegion
 	
 	#Region ErrorMessages

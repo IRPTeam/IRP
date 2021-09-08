@@ -82,6 +82,11 @@ Procedure ItemListOnChange(Object, Form, Item = Undefined, CalculationSettings =
 			Row.Key = New UUID();
 		EndIf;
 	EndDo;
+	RowIDInfoClient.UpdateQuantity(Object, Form);
+EndProcedure
+
+Procedure ItemListAfterDeleteRow(Object, Form, Item) Export
+	DocumentsClient.ItemListAfterDeleteRow(Object, Form, Item);
 EndProcedure
 
 #Region Item

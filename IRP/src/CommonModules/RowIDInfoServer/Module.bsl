@@ -243,6 +243,8 @@ Procedure BeforeWrite_RowID(Source, Cancel, WriteMode, PostingMode) Export
 		FillRowID_RSR(Source);
 	ElsIf Is(Source).RRR Then
 		FillRowID_RRR(Source);
+	ElsIf Is(Source).PRR Then
+		FillRowID_PRR(Source);
 	EndIf;
 EndProcedure
 
@@ -273,6 +275,16 @@ EndProcedure
 #Region FillRowID
 
 Procedure FillRowID_SO(Source)
+	ArrayForDelete = New Array();
+	For Each Row In Source.RowIDInfo Do
+		If Row.NextStep = Catalogs.MovementRules.PRR Then
+			ArrayForDelete.Add(Row);
+		EndIf;
+	EndDo;
+	For Each ItemForDelete In ArrayForDelete Do
+		Source.RowIDInfo.Delete(ItemForDelete);
+	EndDo;
+	
 	For Each RowItemList In Source.ItemList Do
 	
 		If RowItemList.Cancel Then
@@ -289,6 +301,13 @@ Procedure FillRowID_SO(Source)
 
 		FillRowID(Source, Row, RowItemList);
 		Row.NextStep = GetNextStep_SO(Source, RowItemList, Row);
+		
+		If RowItemList.ProcurementMethod = Enums.ProcurementMethods.___PRR Then
+			NewRow = Source.RowIDInfo.Add();
+			FillPropertyValues(NewRow, Row);
+			NewRow.CurrentStep = Undefined;
+			NewRow.NextStep = Catalogs.MovementRules.PRR;
+		EndIf; 
 	EndDo;
 EndProcedure
 
@@ -779,6 +798,27 @@ Procedure FillRowID_RRR(Source)
 	EndDo;
 EndProcedure
 
+Procedure FillRowID_PRR(Source)
+	For Each RowItemList In Source.ItemList Do	
+		Row = Undefined;
+		IDInfoRows = Source.RowIDInfo.FindRows(New Structure("Key", RowItemList.Key));
+		If IDInfoRows.Count() = 0 Then
+			Row = Source.RowIDInfo.Add();
+			FillRowID(Source, Row, RowItemList);
+			Row.NextStep = GetNextStep_PRR(Source, RowItemList, Row);
+		Else
+			For Each Row In IDInfoRows Do
+				If ValueIsFilled(Row.RowRef) And Row.RowRef.Basis <> Source.Ref Then
+					Row.NextStep = GetNextStep_PRR(Source, RowItemList, Row);
+				 	Continue;
+				EndIf;
+				FillRowID(Source, Row, RowItemList);
+				Row.NextStep = GetNextStep_PRR(Source, RowItemList, Row);
+			EndDo;
+		EndIf;
+	EndDo;
+EndProcedure
+
 #EndRegion
 
 #Region GetNextStep
@@ -920,6 +960,10 @@ Function GetNextStep_RRR(Source, RowItemList, Row)
 	Return Undefined;
 EndFunction	
 
+Function GetNextStep_PRR(Source, RowItemList, Row)
+	Return Undefined;
+EndFunction
+
 #EndRegion
 
 Procedure FillRowID(Source, Row, RowItemList)
@@ -967,6 +1011,7 @@ Procedure UpdateRowIDCatalog(Source, Row, RowItemList, RowRefObject)
 		RowRefObject.TransactionTypeGR = Enums.GoodsReceiptTransactionTypes.InventoryTransfer;
 	ElsIf Is(Source).SO Or Is(Source).SI Then
 		RowRefObject.TransactionTypeSC = Enums.ShipmentConfirmationTransactionTypes.Sales;
+		RowRefObject.Requester = Source.Ref;
 	ElsIf Is(Source).PO Or Is(Source).PI Then
 		RowRefObject.TransactionTypeGR = Enums.GoodsReceiptTransactionTypes.Purchase;
 	ElsIf Is(Source).SC Then
@@ -1331,6 +1376,7 @@ Function ExtractData_FromSO(BasisesTable, DataReceiver, AddInfo = Undefined)
 		|	ItemList.Ref AS SalesOrder,
 		|	ItemList.Ref AS ShipmentBasis,
 		|	ItemList.Ref AS PurchaseBasis,
+		|	ItemList.Ref AS Requester,
 		|	ItemList.Ref.Partner AS Partner,
 		|	ItemList.Ref.LegalName AS LegalName,
 		|	ItemList.Ref.PriceIncludeTax AS PriceIncludeTax,
@@ -2283,10 +2329,15 @@ Function ExtractData_FromITO(BasisesTable, DataReceiver, AddInfo = Undefined)
 	Return Tables;
 EndFunction
 
+Function ExtractData_FromIT_GetAdditionalQueryFields()
+	Return "";
+EndFunction
+
 Function ExtractData_FromIT(BasisesTable, DataReceiver, AddInfo = Undefined)
 	Query = New Query(GetQueryText_BasisesTable());
 	Query.Text = Query.Text +
 		"SELECT ALLOWED
+		|	%1
 		|	""InventoryTransfer"" AS BasedOn,
 		|	UNDEFINED AS Ref,
 		|	ItemList.Ref AS InventoryTransfer,
@@ -2294,8 +2345,8 @@ Function ExtractData_FromIT(BasisesTable, DataReceiver, AddInfo = Undefined)
 		|	ItemList.Ref.Company AS Company,
 		|	ItemList.Ref AS ShipmentBasis,
 		|	ItemList.Ref AS ReceiptBasis,
-		|	ItemList.Ref.%1 AS Store,
-		|	%2 AS TransactionType,
+		|	ItemList.Ref.%2 AS Store,
+		|	%3 AS TransactionType,
 		|	ItemList.ItemKey.Item AS Item,
 		|	ItemList.ItemKey AS ItemKey,
 		|	0 AS Quantity,
@@ -2320,7 +2371,7 @@ Function ExtractData_FromIT(BasisesTable, DataReceiver, AddInfo = Undefined)
 		StoreName = "StoreReceiver";
 		TransactionType = "VALUE(Enum.GoodsReceiptTransactionTypes.InventoryTransfer)";
 	EndIf;
-	Query.Text = StrTemplate(Query.Text, StoreName, TransactionType);
+	Query.Text = StrTemplate(Query.Text, ExtractData_FromIT_GetAdditionalQueryFields(), StoreName, TransactionType);
 	
 	Query.SetParameter("BasisesTable", BasisesTable);
 	QueryResults = Query.ExecuteBatch();
@@ -3209,6 +3260,8 @@ Function GetBasises(Ref, FilterValues) Export
 		Return GetBasisesFor_SRO(FilterValues);
 	ElsIf Is(Ref).RRR Then
 		Return GetBasisesFor_RRR(FilterValues);
+	ElsIf Is(Ref).PRR Then
+		Return GetBasisesFor_PRR(FilterValues);	
 	EndIf;
 EndFunction
 
@@ -3385,6 +3438,16 @@ Function GetBasisesFor_RRR(FilterValues)
 	Return GetBasisesTable(StepArray, FilterValues, FilterSets);
 EndFunction
 
+Function GetBasisesFor_PRR(FilterValues)
+	StepArray = New Array;
+	StepArray.Add(Catalogs.MovementRules.PRR);
+	
+	FilterSets = GetAvailableFilterSets();
+	FilterSets.SO_ForPRR = True;
+		
+	Return GetBasisesTable(StepArray, FilterValues, FilterSets);
+EndFunction
+
 #EndRegion
 
 #Region FIlterSets
@@ -3394,6 +3457,7 @@ Function GetAvailableFilterSets()
 	Result.Insert("SO_ForSI"       , False);
 	Result.Insert("SO_ForSC"       , False);
 	Result.Insert("SO_ForPO_ForPI" , False);
+	Result.Insert("SO_ForPRR"      , False);
 	
 	Result.Insert("SC_ForSI"       , False);
 	Result.Insert("SI_ForSC"       , False);
@@ -3444,6 +3508,11 @@ Procedure EnableRequiredFilterSets(FilterSets, Query, QueryArray)
 	If FilterSets.SO_ForPO_ForPI Then
 		ApplyFilterSet_SO_ForPO_ForPI(Query);
 		QueryArray.Add(GetDataByFilterSet_SO_ForPO_ForPI());
+	EndIf;
+	
+	If FilterSets.SO_ForPRR Then
+		ApplyFilterSet_SO_ForPRR(Query);
+		QueryArray.Add(GetDataByFilterSet_SO_ForPRR());
 	EndIf;
 	
 	If FilterSets.SI_ForSC Then
@@ -3610,6 +3679,57 @@ Procedure ApplyFilterSet_SO_ForSI(Query)
 	|			AND CASE
 	|				WHEN &Filter_PriceIncludeTax
 	|					THEN RowRef.PriceIncludeTax = &PriceIncludeTax
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_ItemKey
+	|					THEN RowRef.ItemKey = &ItemKey
+	|				ELSE TRUE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Store
+	|					THEN RowRef.Store = &Store
+	|				ELSE TRUE
+	|			END))) AS RowIDMovements";
+	Query.Execute();
+EndProcedure	
+
+Procedure ApplyFilterSet_SO_ForPRR(Query)
+	Query.Text = 
+	"SELECT
+	|	RowIDMovements.RowID,
+	|	RowIDMovements.Step,
+	|	RowIDMovements.Basis,
+	|	RowIDMovements.RowRef,
+	|	RowIDMovements.QuantityBalance AS Quantity
+	|INTO RowIDMovements_SO_ForPRR
+	|FROM
+	|	AccumulationRegister.TM1010B_RowIDMovements.Balance(&Period, Step IN (&StepArray)
+	|	AND (Basis IN (&Basises)
+	|	OR RowRef IN
+	|		(SELECT
+	|			RowRef.Ref AS Ref
+	|		FROM
+	|			Catalog.RowIDs AS RowRef
+	|		WHERE
+	|			CASE
+	|				WHEN &Filter_Company
+	|					THEN RowRef.Company = &Company
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Branch
+	|					THEN RowRef.Branch = &Branch
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Requester
+	|					THEN RowRef.Requester = &Requester
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_ProcurementMethod
+	|					THEN RowRef.ProcurementMethod = &ProcurementMethod
 	|				ELSE FALSE
 	|			END
 	|			AND CASE
@@ -4964,6 +5084,35 @@ Function GetDataByFilterSet_SO_ForSI()
 	|		AND RowIDMovements.Basis = RowIDInfo.Ref";
 EndFunction
 
+Function GetDataByFilterSet_SO_ForPRR()
+	Return
+	"SELECT 
+	|	Doc.ItemKey,
+	|	Doc.ItemKey.Item,
+	|	Doc.Store,
+	|	Doc.Ref,
+	|	Doc.Key,
+	|	Doc.Key,
+	|	CASE
+	|		WHEN Doc.ItemKey.Unit.Ref IS NULL
+	|			THEN Doc.ItemKey.Item.Unit
+	|		ELSE Doc.ItemKey.Unit
+	|	END AS BasisUnit,
+	|	RowIDMovements.Quantity,
+	|	RowIDMovements.RowRef,
+	|	RowIDMovements.RowID,
+	|	RowIDMovements.Step,
+	|	Doc.LineNumber
+	|FROM
+	|	Document.SalesOrder.ItemList AS Doc
+	|		INNER JOIN Document.SalesOrder.RowIDInfo AS RowIDInfo
+	|		ON Doc.Ref = RowIDInfo.Ref
+	|		AND Doc.Key = RowIDInfo.Key
+	|		INNER JOIN RowIDMovements_SO_ForPRR AS RowIDMovements
+	|		ON RowIDMovements.RowID = RowIDInfo.RowID
+	|		AND RowIDMovements.Basis = RowIDInfo.Ref";
+EndFunction
+
 Function GetDataByFilterSet_SO_ForSC()
 	Return
 	"SELECT 
@@ -6106,6 +6255,8 @@ Function GetSeperatorColumns(DocReceiverMetadata) Export
 		Return "Company, Branch, Partner, LegalName, Agreement, Currency, PriceIncludeTax";
 	ElsIf DocReceiverMetadata = Metadata.Documents.RetailReturnReceipt Then
 		Return "Company, Branch, Partner, LegalName, Agreement, Currency, PriceIncludeTax, RetailCustomer, UsePartnerTransactions";
+	ElsIf DocReceiverMetadata = Metadata.Documents.PlannedReceiptReservation Then
+		Return "Company, Branch, Requester";
 	EndIf;
 EndFunction	
 	
@@ -6319,6 +6470,7 @@ Function GetColumnNames_ItemList()
 	|PurchaseOrder,
 	|ReceiptBasis,
 	|PurchaseInvoice,
+	|Requester,
 	|Unit,
 	|PriceType,
 	|Price,
@@ -7119,6 +7271,8 @@ Function Is(Source)
 	                  Or TypeOf = Type("DocumentRef.RetailSalesReceipt"));
 	Result.Insert("RRR", TypeOf = Type("DocumentObject.RetailReturnReceipt")      
 	                  Or TypeOf = Type("DocumentRef.RetailReturnReceipt"));
+	Result.Insert("PRR", TypeOf = Type("DocumentObject.PlannedReceiptReservation")      
+	                  Or TypeOf = Type("DocumentRef.PlannedReceiptReservation"));
 	
 	Return Result;
 EndFunction

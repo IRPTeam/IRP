@@ -3,11 +3,15 @@
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	DocPlannedReceiptReservationServer.OnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
+	If Parameters.Key.IsEmpty() Then
+		SetVisibilityAvailability(Object, ThisObject);
+	EndIf;
 EndProcedure
 
 &AtServer
 Procedure OnReadAtServer(CurrentObject)
 	DocPlannedReceiptReservationServer.OnReadAtServer(Object, ThisObject, CurrentObject);
+	SetVisibilityAvailability(CurrentObject, ThisObject);
 EndProcedure
 
 &AtServer
@@ -18,6 +22,7 @@ EndProcedure
 &AtServer
 Procedure AfterWriteAtServer(CurrentObject, WriteParameters)
 	DocPlannedReceiptReservationServer.AfterWriteAtServer(Object, ThisObject, CurrentObject, WriteParameters);
+	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
 &AtServer
@@ -35,6 +40,12 @@ EndProcedure
 &AtClient
 Procedure OnOpen(Cancel)
 	DocPlannedReceiptReservationClient.OnOpen(Object, ThisObject, Cancel);
+EndProcedure
+
+&AtClientAtServerNoContext
+Procedure SetVisibilityAvailability(Object, Form) Export
+	Form.Items.AddBasisDocuments.Enabled = Not Form.ReadOnly;
+	Form.Items.LinkUnlinkBasisDocuments.Enabled = Not Form.ReadOnly;
 EndProcedure
 
 #EndRegion
@@ -73,6 +84,7 @@ EndProcedure
 #EndRegion
 
 #Region FormTableItemsEventHandlers
+
 #Region ItemList
 
 &AtClient
@@ -80,7 +92,13 @@ Procedure ItemListOnChange(Item) Export
 	DocPlannedReceiptReservationClient.ItemListOnChange(Object, ThisObject, Item);
 EndProcedure
 
+&AtClient
+Procedure ItemListAfterDeleteRow(Item)
+	DocPlannedReceiptReservationClient.ItemListAfterDeleteRow(Object, ThisObject, Item);
+EndProcedure
+
 #Region Item
+
 &AtClient
 Procedure ItemListItemOnChange(Item)
 	DocPlannedReceiptReservationClient.ItemListItemOnChange(Object, ThisObject, Item);
@@ -198,3 +216,61 @@ EndProcedure
 #EndRegion
 
 #EndRegion
+
+#Region LinkedDocuments
+
+&AtClient
+Function GetLinkedDocumentsFilter()
+	Filter = New Structure();
+	Filter.Insert("Company"           , Object.Company);
+	Filter.Insert("Branch"            , Object.Branch);
+	Filter.Insert("Requester"         , Object.Requester);
+	Filter.Insert("ProcurementMethod" , PredefinedValue("Enum.ProcurementMethods.___PRR"));
+	Filter.Insert("Ref"               , Object.Ref);
+	Return Filter;
+EndFunction
+
+&AtClient
+Procedure LinkUnlinkBasisDocuments(Command)
+	FormParameters = New Structure();
+	FormParameters.Insert("Filter"           , GetLinkedDocumentsFilter());
+	FormParameters.Insert("SelectedRowInfo"  , RowIDInfoClient.GetSelectedRowInfo(Items.ItemList.CurrentData));
+	FormParameters.Insert("TablesInfo"       , RowIDInfoClient.GetTablesInfo(Object));
+	OpenForm("CommonForm.LinkUnlinkDocumentRows"
+		, FormParameters, , , ,
+		, New NotifyDescription("AddOrLinkUnlinkDocumentRowsContinue", ThisObject)
+		, FormWindowOpeningMode.LockOwnerWindow);
+EndProcedure
+
+&AtClient
+Procedure AddBasisDocuments(Command)	
+	FormParameters = New Structure();
+	FormParameters.Insert("Filter"           , GetLinkedDocumentsFilter());
+	FormParameters.Insert("TablesInfo"       , RowIDInfoClient.GetTablesInfo(Object));
+	OpenForm("CommonForm.AddLinkedDocumentRows"
+		, FormParameters, , , ,
+		, New NotifyDescription("AddOrLinkUnlinkDocumentRowsContinue", ThisObject)
+		, FormWindowOpeningMode.LockOwnerWindow);
+EndProcedure
+
+
+&AtClient
+Procedure AddOrLinkUnlinkDocumentRowsContinue(Result, AdditionalParameters) Export
+	If Result = Undefined Then
+		Return;
+	EndIf;
+	ThisObject.Modified = True;
+	AddOrLinkUnlinkDocumentRowsContinueAtServer(Result);
+EndProcedure
+
+&AtServer
+Procedure AddOrLinkUnlinkDocumentRowsContinueAtServer(Result)
+	If Result.Operation = "LinkUnlinkDocumentRows" Then
+		RowIDInfoServer.LinkUnlinkDocumentRows(Object, Result.FillingValues);
+	ElsIf Result.Operation = "AddLinkedDocumentRows" Then
+		RowIDInfoServer.AddLinkedDocumentRows(Object, Result.FillingValues);
+	EndIf;
+EndProcedure
+
+#EndRegion
+

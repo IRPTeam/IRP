@@ -34,6 +34,13 @@
       <value>No reserve</value>
     </synonym>
   </enumValues>
+  <enumValues uuid="3df487da-b58c-4b37-bcd7-67193e9ba328">
+    <name>___PRR</name>
+    <synonym>
+      <key>en</key>
+      <value>___PRR</value>
+    </synonym>
+  </enumValues>
   <forms uuid="b97ec4ea-f339-408e-9f93-9ff3d56939ba">
     <name>ChoiceForm</name>
     <synonym>

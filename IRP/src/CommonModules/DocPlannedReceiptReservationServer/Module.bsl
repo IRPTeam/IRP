@@ -1,10 +1,13 @@
 #Region FormEvents
 
 Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
-	If Not Form.GroupItems.Count() Then
-		SetGroupItemsList(Object, Form);
-	EndIf;
 	DocumentsServer.OnCreateAtServer(Object, Form, Cancel, StandardProcessing);
+	If Form.Parameters.Key.IsEmpty() Then	
+		SetGroupItemsList(Object, Form);
+		DocumentsServer.FillItemList(Object);
+		
+		DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
+	EndIf;
 EndProcedure
 
 Procedure AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters) Export

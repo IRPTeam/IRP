@@ -68,6 +68,8 @@ Procedure ClosureIncomingStocks(Parameters) Export
 	|INTO IncomingStocks
 	|FROM
 	|	&IncomingStocks AS tmp
+	|WHERE
+	|	tmp.Quantity <> 0
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
@@ -83,6 +85,8 @@ Procedure ClosureIncomingStocks(Parameters) Export
 	|INTO IncomingStocksRequested
 	|FROM
 	|	&IncomingStocksRequested AS tmp
+	|WHERE
+	|	tmp.Quantity <> 0
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
@@ -94,7 +98,9 @@ Procedure ClosureIncomingStocks(Parameters) Export
 	|	tmp.Quantity
 	|INTO FreeStocks
 	|FROM
-	|	&IncomingStocksRequested AS tmp";
+	|	&IncomingStocksRequested AS tmp
+	|WHERE
+	|	tmp.Quantity <> 0";
 	Query.Execute();
 EndProcedure
 
@@ -235,10 +241,15 @@ Function GetIncomingStocks_ConsiderStocksRequested(Parameters)
 	|	IncomingBalance.Order,
 	|	SUM(CASE
 	|		WHEN IncomingBalance.Quantity - ISNULL(RequestedBalance.Quantity, 0) > 0
-	|			THEN (IncomingBalance.Quantity - ISNULL(RequestedBalance.Quantity, 0))  
-	|			+ (IncomingBalance.RealIncomingQuntity - IncomingBalance.Quantity)
+	|			THEN IncomingBalance.Quantity
 	|		ELSE 0
-	|	END) AS Quantity
+	|	END) AS QuantityBalance,
+	|	SUM(CASE
+	|		WHEN IncomingBalance.Quantity - ISNULL(RequestedBalance.Quantity, 0) > 0
+	|			THEN IncomingBalance.RealIncomingQuntity - ISNULL(RequestedBalance.Quantity, 0)
+	|		ELSE 0
+	|	END) AS QuantityReal
+	|INTO StockForWriteOff
 	|FROM
 	|	IncomingBalance AS IncomingBalance
 	|		LEFT JOIN RequestedBalance AS RequestedBalance
@@ -250,13 +261,25 @@ Function GetIncomingStocks_ConsiderStocksRequested(Parameters)
 	|	IncomingBalance.Store,
 	|	IncomingBalance.ItemKey,
 	|	IncomingBalance.Order
-	|HAVING
-	|	SUM(CASE
-	|		WHEN IncomingBalance.Quantity - ISNULL(RequestedBalance.Quantity, 0) > 0
-	|			THEN (IncomingBalance.Quantity - ISNULL(RequestedBalance.Quantity, 0)) 
-	|			+ (IncomingBalance.RealIncomingQuntity - IncomingBalance.Quantity)
-	|		ELSE 0
-	|	END) > 0";
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	StockForWriteOff.Period,
+	|	StockForWriteOff.Store,
+	|	StockForWriteOff.ItemKey,
+	|	StockForWriteOff.Order,
+	|	CASE
+	|		WHEN StockForWriteOff.QuantityBalance < StockForWriteOff.QuantityReal
+	|			THEN StockForWriteOff.QuantityBalance
+	|		ELSE StockForWriteOff.QuantityReal
+	|	END AS Quantity
+	|WHERE
+	|	CASE
+	|		WHEN StockForWriteOff.QuantityBalance < StockForWriteOff.QuantityReal
+	|			THEN StockForWriteOff.QuantityBalance
+	|		ELSE StockForWriteOff.QuantityReal
+	|	END > 0";
 	QueryResult = Query.Execute();
 	QueryTable = QueryResult.Unload();
 	Return QueryTable;

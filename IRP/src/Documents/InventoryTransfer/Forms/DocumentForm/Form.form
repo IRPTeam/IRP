@@ -1658,7 +1658,6 @@
         <verticalStretch>true</verticalStretch>
         <enableStartDrag>true</enableStartDrag>
         <enableDrag>true</enableDrag>
-        <currentRowUse>SelectionPresentation</currentRowUse>
         <rowFilter xsi:type="core:UndefinedValue"/>
       </items>
       <visible>true</visible>

@@ -2260,7 +2260,6 @@
         <initialListView>Auto</initialListView>
         <horizontalStretch>true</horizontalStretch>
         <verticalStretch>true</verticalStretch>
-        <currentRowUse>SelectionPresentation</currentRowUse>
         <rowFilter xsi:type="core:UndefinedValue"/>
       </items>
       <visible>true</visible>

@@ -1907,7 +1907,6 @@
         <verticalStretch>true</verticalStretch>
         <enableStartDrag>true</enableStartDrag>
         <enableDrag>true</enableDrag>
-        <currentRowUse>SelectionPresentationAndChoice</currentRowUse>
         <rowFilter xsi:type="core:UndefinedValue"/>
       </items>
       <visible>true</visible>

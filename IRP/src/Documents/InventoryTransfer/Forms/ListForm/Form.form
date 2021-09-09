@@ -251,6 +251,10 @@
     <items xsi:type="form:FormField">
       <name>StatusOutgoing</name>
       <id>40</id>
+      <title>
+        <key>en</key>
+        <value>Status outgoing</value>
+      </title>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -349,6 +353,10 @@
     <items xsi:type="form:FormField">
       <name>StatusIncoming</name>
       <id>43</id>
+      <title>
+        <key>en</key>
+        <value>Status incoming</value>
+      </title>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>

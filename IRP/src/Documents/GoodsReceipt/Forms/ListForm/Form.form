@@ -307,6 +307,10 @@
     <items xsi:type="form:FormField">
       <name>Status</name>
       <id>43</id>
+      <title>
+        <key>en</key>
+        <value>Status</value>
+      </title>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>

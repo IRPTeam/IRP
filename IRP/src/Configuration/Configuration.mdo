@@ -226,6 +226,8 @@
   <commonModules>CommonModule.CatItemsClient</commonModules>
   <commonModules>CommonModule.CatItemsServer</commonModules>
   <commonModules>CommonModule.CatPartnersServer</commonModules>
+  <commonModules>CommonModule.CatRetailCustomersClient</commonModules>
+  <commonModules>CommonModule.CatRetailCustomersServer</commonModules>
   <commonModules>CommonModule.CatUserGroupsServer</commonModules>
   <commonModules>CommonModule.CommonFormActions</commonModules>
   <commonModules>CommonModule.CommonFormActionsServer</commonModules>
@@ -261,9 +263,9 @@
   <commonModules>CommonModule.DocInternalSupplyRequestClient</commonModules>
   <commonModules>CommonModule.DocInternalSupplyRequestServer</commonModules>
   <commonModules>CommonModule.DocInventoryTransferClient</commonModules>
-  <commonModules>CommonModule.DocInventoryTransferServer</commonModules>
   <commonModules>CommonModule.DocInventoryTransferOrderClient</commonModules>
   <commonModules>CommonModule.DocInventoryTransferOrderServer</commonModules>
+  <commonModules>CommonModule.DocInventoryTransferServer</commonModules>
   <commonModules>CommonModule.DocInvoiceMatchClient</commonModules>
   <commonModules>CommonModule.DocInvoiceMatchServer</commonModules>
   <commonModules>CommonModule.DocItemStockAdjustmentClient</commonModules>
@@ -280,11 +282,15 @@
   <commonModules>CommonModule.DocPhysicalCountByLocationServer</commonModules>
   <commonModules>CommonModule.DocPhysicalInventoryClient</commonModules>
   <commonModules>CommonModule.DocPhysicalInventoryServer</commonModules>
+  <commonModules>CommonModule.DocPlannedReceiptReservationClient</commonModules>
+  <commonModules>CommonModule.DocPlannedReceiptReservationServer</commonModules>
   <commonModules>CommonModule.DocPriceListClient</commonModules>
   <commonModules>CommonModule.DocPriceListServer</commonModules>
   <commonModules>CommonModule.DocPurchaseInvoiceClient</commonModules>
   <commonModules>CommonModule.DocPurchaseInvoiceServer</commonModules>
   <commonModules>CommonModule.DocPurchaseOrderClient</commonModules>
+  <commonModules>CommonModule.DocPurchaseOrderClosingClient</commonModules>
+  <commonModules>CommonModule.DocPurchaseOrderClosingServer</commonModules>
   <commonModules>CommonModule.DocPurchaseOrderServer</commonModules>
   <commonModules>CommonModule.DocPurchaseReturnClient</commonModules>
   <commonModules>CommonModule.DocPurchaseReturnOrderClient</commonModules>
@@ -299,6 +305,8 @@
   <commonModules>CommonModule.DocSalesInvoiceClient</commonModules>
   <commonModules>CommonModule.DocSalesInvoiceServer</commonModules>
   <commonModules>CommonModule.DocSalesOrderClient</commonModules>
+  <commonModules>CommonModule.DocSalesOrderClosingClient</commonModules>
+  <commonModules>CommonModule.DocSalesOrderClosingServer</commonModules>
   <commonModules>CommonModule.DocSalesOrderServer</commonModules>
   <commonModules>CommonModule.DocSalesReturnClient</commonModules>
   <commonModules>CommonModule.DocSalesReturnOrderClient</commonModules>
@@ -312,6 +320,7 @@
   <commonModules>CommonModule.DocStockAdjustmentAsWriteOffServer</commonModules>
   <commonModules>CommonModule.DocumentsClient</commonModules>
   <commonModules>CommonModule.DocumentsClientServer</commonModules>
+  <commonModules>CommonModule.DocumentServerMobile</commonModules>
   <commonModules>CommonModule.DocumentsGenerationServer</commonModules>
   <commonModules>CommonModule.DocumentsServer</commonModules>
   <commonModules>CommonModule.DocUnbundlingClient</commonModules>
@@ -359,6 +368,8 @@
   <commonModules>CommonModule.PictureViewerClientServer</commonModules>
   <commonModules>CommonModule.PictureViewerServer</commonModules>
   <commonModules>CommonModule.PostingServer</commonModules>
+  <commonModules>CommonModule.RowIDInfoClient</commonModules>
+  <commonModules>CommonModule.RowIDInfoServer</commonModules>
   <commonModules>CommonModule.Saas</commonModules>
   <commonModules>CommonModule.SaasClient</commonModules>
   <commonModules>CommonModule.ScheduledJobsForExtentions</commonModules>
@@ -379,17 +390,6 @@
   <commonModules>CommonModule.UsersEvent</commonModules>
   <commonModules>CommonModule.WorkstationClient</commonModules>
   <commonModules>CommonModule.WorkstationServer</commonModules>
-  <commonModules>CommonModule.DocPlannedReceiptReservationClient</commonModules>
-  <commonModules>CommonModule.DocPlannedReceiptReservationServer</commonModules>
-  <commonModules>CommonModule.RowIDInfoServer</commonModules>
-  <commonModules>CommonModule.RowIDInfoClient</commonModules>
-  <commonModules>CommonModule.DocSalesOrderClosingClient</commonModules>
-  <commonModules>CommonModule.DocSalesOrderClosingServer</commonModules>
-  <commonModules>CommonModule.DocPurchaseOrderClosingClient</commonModules>
-  <commonModules>CommonModule.DocPurchaseOrderClosingServer</commonModules>
-  <commonModules>CommonModule.CatRetailCustomersClient</commonModules>
-  <commonModules>CommonModule.CatRetailCustomersServer</commonModules>
-  <commonModules>CommonModule.DocumentServerMobile</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>
@@ -543,19 +543,24 @@
   <catalogs>Catalog.Items</catalogs>
   <catalogs>Catalog.ItemSegments</catalogs>
   <catalogs>Catalog.ItemTypes</catalogs>
+  <catalogs>Catalog.LegalNameContracts</catalogs>
   <catalogs>Catalog.LockDataModificationReasons</catalogs>
+  <catalogs>Catalog.MovementRules</catalogs>
   <catalogs>Catalog.ObjectStatuses</catalogs>
+  <catalogs>Catalog.PartnerItems</catalogs>
   <catalogs>Catalog.Partners</catalogs>
   <catalogs>Catalog.PartnersBankAccounts</catalogs>
   <catalogs>Catalog.PartnerSegments</catalogs>
   <catalogs>Catalog.PaymentSchedules</catalogs>
   <catalogs>Catalog.PaymentTerminals</catalogs>
   <catalogs>Catalog.PaymentTypes</catalogs>
+  <catalogs>Catalog.PlanningPeriods</catalogs>
   <catalogs>Catalog.PriceKeys</catalogs>
   <catalogs>Catalog.PriceTypes</catalogs>
   <catalogs>Catalog.PrintTemplates</catalogs>
   <catalogs>Catalog.ReportOptions</catalogs>
   <catalogs>Catalog.RetailCustomers</catalogs>
+  <catalogs>Catalog.RowIDs</catalogs>
   <catalogs>Catalog.SerialLotNumbers</catalogs>
   <catalogs>Catalog.SpecialOfferRules</catalogs>
   <catalogs>Catalog.SpecialOffers</catalogs>
@@ -570,11 +575,6 @@
   <catalogs>Catalog.UserGroups</catalogs>
   <catalogs>Catalog.Users</catalogs>
   <catalogs>Catalog.Workstations</catalogs>
-  <catalogs>Catalog.MovementRules</catalogs>
-  <catalogs>Catalog.RowIDs</catalogs>
-  <catalogs>Catalog.PlanningPeriods</catalogs>
-  <catalogs>Catalog.LegalNameContracts</catalogs>
-  <catalogs>Catalog.PartnerItems</catalogs>
   <documents>Document.BankPayment</documents>
   <documents>Document.BankReceipt</documents>
   <documents>Document.Bundling</documents>
@@ -641,7 +641,10 @@
   <enums>Enum.GoodsReceiptTransactionTypes</enums>
   <enums>Enum.IncomingPaymentTransactionType</enums>
   <enums>Enum.IntegrationType</enums>
+  <enums>Enum.InterfaceGroupBehaviors</enums>
+  <enums>Enum.InterfaceGroupChildFormItemsGroups</enums>
   <enums>Enum.InvoiceMatchOperationsTypes</enums>
+  <enums>Enum.InvoicingStatuses</enums>
   <enums>Enum.ItemTypes</enums>
   <enums>Enum.KindsOfAttributes</enums>
   <enums>Enum.MetadataSubtype</enums>
@@ -656,20 +659,17 @@
   <enums>Enum.SerialNumbersOwner</enums>
   <enums>Enum.SerialNumberTypes</enums>
   <enums>Enum.ShipmentConfirmationTransactionTypes</enums>
+  <enums>Enum.ShippingStatuses</enums>
   <enums>Enum.SpecialOfferTypes</enums>
   <enums>Enum.SpecificationType</enums>
   <enums>Enum.SystemClientType</enums>
   <enums>Enum.TaxType</enums>
   <enums>Enum.TypeEquipment</enums>
   <enums>Enum.TypeExternalObject</enums>
-  <enums>Enum.InterfaceGroupBehaviors</enums>
-  <enums>Enum.InterfaceGroupChildFormItemsGroups</enums>
-  <enums>Enum.InvoicingStatuses</enums>
-  <enums>Enum.ShippingStatuses</enums>
-  <reports>Report.DocumentRegistrationsReport</reports>
-  <reports>Report.PriceInfo</reports>
   <reports>Report.AllRegistersMovement</reports>
+  <reports>Report.DocumentRegistrationsReport</reports>
   <reports>Report.ItemsInfo</reports>
+  <reports>Report.PriceInfo</reports>
   <dataProcessors>DataProcessor.AnaliseDocumentMovements</dataProcessors>
   <dataProcessors>DataProcessor.DataHistory</dataProcessors>
   <dataProcessors>DataProcessor.MobileDesktop</dataProcessors>
@@ -682,8 +682,8 @@
   <informationRegisters>InformationRegister.AttachedFiles</informationRegisters>
   <informationRegisters>InformationRegister.Barcodes</informationRegisters>
   <informationRegisters>InformationRegister.BarcodeScanInfoCheck</informationRegisters>
-  <informationRegisters>InformationRegister.BundleContents</informationRegisters>
   <informationRegisters>InformationRegister.BranchBankTerms</informationRegisters>
+  <informationRegisters>InformationRegister.BundleContents</informationRegisters>
   <informationRegisters>InformationRegister.CreatedProcurementOrders</informationRegisters>
   <informationRegisters>InformationRegister.CurrencyRates</informationRegisters>
   <informationRegisters>InformationRegister.DataMappingTable</informationRegisters>
@@ -700,14 +700,14 @@
   <informationRegisters>InformationRegister.RemainingItemsInfo</informationRegisters>
   <informationRegisters>InformationRegister.SavedItems</informationRegisters>
   <informationRegisters>InformationRegister.SharedReportOptions</informationRegisters>
-  <informationRegisters>InformationRegister.Taxes</informationRegisters>
-  <informationRegisters>InformationRegister.TaxSettings</informationRegisters>
-  <informationRegisters>InformationRegister.UserSettings</informationRegisters>
+  <informationRegisters>InformationRegister.T1010S_ScannedBarcode</informationRegisters>
   <informationRegisters>InformationRegister.T2010S_OffsetOfAdvances</informationRegisters>
   <informationRegisters>InformationRegister.T2011S_PartnerTransactions</informationRegisters>
   <informationRegisters>InformationRegister.T2012S_PartnerAdvances</informationRegisters>
   <informationRegisters>InformationRegister.T2013S_OffsetOfAging</informationRegisters>
-  <informationRegisters>InformationRegister.T1010S_ScannedBarcode</informationRegisters>
+  <informationRegisters>InformationRegister.Taxes</informationRegisters>
+  <informationRegisters>InformationRegister.TaxSettings</informationRegisters>
+  <informationRegisters>InformationRegister.UserSettings</informationRegisters>
   <accumulationRegisters>AccumulationRegister.CashInTransit</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1001T_Purchases</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1002T_PurchaseReturns</accumulationRegisters>

@@ -92,6 +92,10 @@ EndProcedure
 
 Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
 	StatusInfo = ObjectStatusesServer.GetLastStatusInfo(Ref);
+	Unposting = ?(Parameters.Property("Unposting"), Parameters.Unposting, False);
+	AccReg = AccumulationRegisters;
+	LineNumberAndItemKeyFromItemList = PostingServer.GetLineNumberAndItemKeyFromItemList(Ref, "Document.SalesOrder.ItemList");
+	
 	If StatusInfo.Posting Then
 		CommonFunctionsClientServer.PutToAddInfo(AddInfo, "BalancePeriod", 
 			New Boundary(New PointInTime(StatusInfo.Period, Ref), BoundaryType.Including));
@@ -99,7 +103,13 @@ Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
 
 	Parameters.Insert("RecordType", AccumulationRecordType.Expense);
 	PostingServer.CheckBalance_AfterWrite(Ref, Cancel, Parameters, "Document.SalesOrder.ItemList", AddInfo);
-		
+	
+	If Not Cancel And Not AccReg.R4037B_PlannedReceiptReservationRequests.CheckBalance(Ref, LineNumberAndItemKeyFromItemList,
+	                                                                PostingServer.GetQueryTableByName("R4037B_PlannedReceiptReservationRequests", Parameters),
+	                                                                PostingServer.GetQueryTableByName("R4037B_PlannedReceiptReservationRequests_Exists", Parameters),
+	                                                                AccumulationRecordType.Receipt, Unposting, AddInfo) Then
+		Cancel = True;
+	EndIf;	
 EndProcedure
 
 #EndRegion
@@ -125,6 +135,7 @@ Function GetQueryTextsSecondaryTables()
 	QueryArray = New Array;
 	QueryArray.Add(ItemList());
 	QueryArray.Add(PostingServer.Exists_R4011B_FreeStocks());
+	QueryArray.Add(R4037B_PlannedReceiptReservationRequests_Exists());
 	Return QueryArray;	
 EndFunction
 
@@ -139,6 +150,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R4012B_StockReservation());
 	QueryArray.Add(R4034B_GoodsShipmentSchedule());
 	QueryArray.Add(R2022B_CustomersPaymentPlanning());
+	QueryArray.Add(R4037B_PlannedReceiptReservationRequests());
 	Return QueryArray;	
 EndFunction	
 
@@ -161,6 +173,7 @@ Function ItemList()
 	|	SalesOrderItemList.ProcurementMethod,
 	|	SalesOrderItemList.ProcurementMethod = VALUE(Enum.ProcurementMethods.Stock) AS IsProcurementMethod_Stock,
 	|	SalesOrderItemList.ProcurementMethod = VALUE(Enum.ProcurementMethods.Purchase) AS IsProcurementMethod_Purchase,
+	|	SalesOrderItemList.ProcurementMethod = VALUE(Enum.ProcurementMethods.IncomingReserve) AS IsProcurementMethod_IncomingReserve,
 	|	SalesOrderItemList.ProcurementMethod = VALUE(Enum.ProcurementMethods.NoReserve) 
 	|	OR SalesOrderItemList.ProcurementMethod = VALUE(Enum.ProcurementMethods.IncomingReserve) AS IsProcurementMethod_NonReserve,
 	|	SalesOrderItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS IsService,
@@ -326,6 +339,28 @@ Function R2022B_CustomersPaymentPlanning()
 		|	SalesOrderPaymentTerms.Ref.Partner,
 		|	SalesOrderPaymentTerms.Ref.Agreement,
 		|	VALUE(AccumulationRecordType.Receipt)";
+EndFunction
+
+Function R4037B_PlannedReceiptReservationRequests()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType, 
+		|	*
+		|	INTO R4037B_PlannedReceiptReservationRequests
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	ItemList.IsProcurementMethod_IncomingReserve";
+EndFunction	
+	
+Function R4037B_PlannedReceiptReservationRequests_Exists()
+	Return
+		"SELECT *
+		|	INTO R4037B_PlannedReceiptReservationRequests_Exists
+		|FROM
+		|	AccumulationRegister.R4037B_PlannedReceiptReservationRequests AS R4037B_PlannedReceiptReservationRequests
+		|WHERE
+		|	R4037B_PlannedReceiptReservationRequests.Recorder = &Ref";
 EndFunction
 
 #EndRegion

@@ -76,6 +76,7 @@
   <registerRecords>AccumulationRegister.R4034B_GoodsShipmentSchedule</registerRecords>
   <registerRecords>AccumulationRegister.R2012B_SalesOrdersInvoiceClosing</registerRecords>
   <registerRecords>AccumulationRegister.R2022B_CustomersPaymentPlanning</registerRecords>
+  <registerRecords>AccumulationRegister.R4037B_PlannedReceiptReservationRequests</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>

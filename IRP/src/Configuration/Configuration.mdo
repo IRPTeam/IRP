@@ -677,6 +677,7 @@
   <dataProcessors>DataProcessor.PointOfSale</dataProcessors>
   <dataProcessors>DataProcessor.PrintLabels</dataProcessors>
   <dataProcessors>DataProcessor.Procurement</dataProcessors>
+  <dataProcessors>DataProcessor.ScanBarcode</dataProcessors>
   <informationRegisters>InformationRegister.AddProperties</informationRegisters>
   <informationRegisters>InformationRegister.AttachedFiles</informationRegisters>
   <informationRegisters>InformationRegister.Barcodes</informationRegisters>
@@ -706,6 +707,7 @@
   <informationRegisters>InformationRegister.T2011S_PartnerTransactions</informationRegisters>
   <informationRegisters>InformationRegister.T2012S_PartnerAdvances</informationRegisters>
   <informationRegisters>InformationRegister.T2013S_OffsetOfAging</informationRegisters>
+  <informationRegisters>InformationRegister.T1010S_ScannedBarcode</informationRegisters>
   <accumulationRegisters>AccumulationRegister.CashInTransit</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1001T_Purchases</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1002T_PurchaseReturns</accumulationRegisters>

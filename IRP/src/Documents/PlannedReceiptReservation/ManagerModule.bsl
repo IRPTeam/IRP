@@ -88,6 +88,13 @@ Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
 	                                                                AccumulationRecordType.Receipt, Unposting, AddInfo) Then
 		Cancel = True;
 	EndIf;
+	
+	If Not Cancel And Not AccReg.R4037B_PlannedReceiptReservationRequests.CheckBalance(Ref, LineNumberAndItemKeyFromItemList,
+	                                                                PostingServer.GetQueryTableByName("R4037B_PlannedReceiptReservationRequests", Parameters),
+	                                                                PostingServer.GetQueryTableByName("R4037B_PlannedReceiptReservationRequests_Exists", Parameters),
+	                                                                AccumulationRecordType.Expense, Unposting, AddInfo) Then
+		Cancel = True;
+	EndIf;
 EndProcedure
 
 #EndRegion
@@ -113,6 +120,7 @@ Function GetQueryTextsSecondaryTables()
 	QueryArray.Add(ItemList());
 	QueryArray.Add(R4035B_IncomingStocks_Exists());
 	QueryArray.Add(R4036B_IncomingStocksRequested_Exists());
+	QueryArray.Add(R4037B_PlannedReceiptReservationRequests_Exists());
 	Return QueryArray;	
 EndFunction
 
@@ -120,6 +128,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray = New Array;
 	QueryArray.Add(R4035B_IncomingStocks());
 	QueryArray.Add(R4036B_IncomingStocksRequested());
+	QueryArray.Add(R4037B_PlannedReceiptReservationRequests());
 	Return QueryArray;	
 EndFunction	
 
@@ -191,4 +200,28 @@ Function R4036B_IncomingStocksRequested_Exists()
 		|	R4036B_IncomingStocksRequested.Recorder = &Ref";
 EndFunction
 
+Function R4037B_PlannedReceiptReservationRequests()
+	Return
+		"SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType, 
+		|	ItemList.RequesterStore AS Store,
+		|	ItemList.Requester AS Order,
+		|	*
+		|	INTO R4037B_PlannedReceiptReservationRequests
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	TRUE";
+EndFunction	
+	
+Function R4037B_PlannedReceiptReservationRequests_Exists()
+	Return
+		"SELECT *
+		|	INTO R4037B_PlannedReceiptReservationRequests_Exists
+		|FROM
+		|	AccumulationRegister.R4037B_PlannedReceiptReservationRequests AS R4037B_PlannedReceiptReservationRequests
+		|WHERE
+		|	R4037B_PlannedReceiptReservationRequests.Recorder = &Ref";
+EndFunction
+	
 #EndRegion

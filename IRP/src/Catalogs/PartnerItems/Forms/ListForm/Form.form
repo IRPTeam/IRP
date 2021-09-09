@@ -612,18 +612,16 @@
     <main>true</main>
     <extInfo xsi:type="form:DynamicListExtInfo">
       <queryText>SELECT 
-       PartnerItems.Ref, 
-       PartnerItems.DeletionMark, 
-       PartnerItems.Code, 
-       PartnerItems.Partner, 
-       PartnerItems.ItemID, 
-       PartnerItems.Item, 
-       PartnerItems.ItemKey, 
-       PartnerItems.Description_en AS Description 
+       Table.Ref, 
+       Table.DeletionMark, 
+       Table.Code, 
+       Table.Partner, 
+       Table.ItemID, 
+       Table.Item, 
+       Table.ItemKey, 
+       Table.Description_en AS Description 
  FROM 
-       Catalog.PartnerItems
- AS 
-       PartnerItems</queryText>
+       Catalog.PartnerItems AS Table</queryText>
       <mainTable>Catalog.PartnerItems</mainTable>
       <dynamicDataRead>true</dynamicDataRead>
       <autoFillAvailableFields>true</autoFillAvailableFields>

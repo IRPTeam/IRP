@@ -57,6 +57,7 @@ Scenario: _028900 preparation (Goods receipt)
 		When Create information register Taxes records (VAT)
 	* Tax settings
 		When filling in Tax settings for company
+	When Create document PurchaseOrder objects (creation based on)
 	When Create document PurchaseOrder and Purchase invoice objects (creation based on, PI >PO)
 	And I execute 1C:Enterprise script at server
 		| "Documents.PurchaseOrder.FindByNumber(102).GetObject().Write(DocumentWriteMode.Posting);" |
@@ -540,7 +541,35 @@ Scenario: _028931 check link/unlink form in the GR (Sales return)
 			| '2' | 'Bag'        | 'ODS'      | 'Store 03' | '20,000'   | 'pcs'                    | 'Sales return 351 dated 24.03.2021 14:04:08' | ''                 | ''         | ''                   | ''               | ''                         | 'Sales return 351 dated 24.03.2021 14:04:08' |
 		And I close all client application windows
 		
-		
+Scenario: _028932 cancel line in the PO and create GR
+	* Cancel line in the PO
+		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
+		And I go to line in "List" table
+			| 'Number'                     |
+			| '217' |
+		And I select current line in "List" table
+		And I go to line in "ItemList" table
+			| '#' | 'Item'    | 'Item key' | 'Q'     |
+			| '2' | 'Service' | 'Interner' | '2,000' |
+		And I activate "Cancel" field in "ItemList" table
+		And I set "Cancel" checkbox in "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I activate "Cancel reason" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click choice button of "Cancel reason" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description'                     |
+			| 'not available' |	
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And I click "Post" button			
+	* Create GR
+		And I click "Goods receipt" button
+		Then "Add linked document rows" window is opened
+		And "BasisesTree" table does not contain lines
+			| 'Row presentation'   | 'Quantity' | 'Unit' |
+			| 'Service (Interner)' | '2,000'    | 'pcs'  |
+		And I close all client application windows	
 				
 
 

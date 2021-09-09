@@ -34,6 +34,7 @@ Scenario: _018000 preparation
 		When Create catalog Stores objects
 		When Create catalog Partners objects (Ferron BP)
 		When Create catalog Companies objects (partners company)
+		When Create catalog CancelReturnReasons objects
 		When Create information register PartnerSegments records
 		When Create catalog PartnerSegments objects
 		When Create catalog Agreements objects
@@ -705,6 +706,37 @@ Scenario: _018013 create PI using form link/unlink
 		Then the number of "RowIDInfo" table lines is "равно" "2"
 		And I click "Save" button
 		And I close all client application windows
+
+Scenario: _018015 cancel line in the PO and create PI
+	* Cancel line in the PO
+		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
+		And I go to line in "List" table
+			| 'Number'                     |
+			| '217' |
+		And I select current line in "List" table
+		And I go to line in "ItemList" table
+			| '#' | 'Item'    | 'Item key' | 'Q'     |
+			| '2' | 'Service' | 'Interner' | '2,000' |
+		And I activate "Cancel" field in "ItemList" table
+		And I set "Cancel" checkbox in "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I activate "Cancel reason" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click choice button of "Cancel reason" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description'                     |
+			| 'not available' |	
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table	
+		And I click "Post" button	
+	* Create PI
+		And I click "Purchase invoice" button
+		Then "Add linked document rows" window is opened
+		And "BasisesTree" table does not contain lines
+			| 'Row presentation'   | 'Quantity' | 'Unit' |
+			| 'Service (Interner)' | '2,000'    | 'pcs'  |
+		And I close all client application windows
+
 
 
 

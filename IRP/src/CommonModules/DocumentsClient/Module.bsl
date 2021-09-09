@@ -114,9 +114,7 @@ Procedure RetailCustomerOnChange(Object, Form, Module, Item = Undefined, Setting
 		Return;
 	EndIf;
 	
-	#If Not MobileClient Then
-		DocumentsClientServer.ChangeTitleGroupTitle(Object, Form, Settings);
-	#EndIf
+	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form, Settings);
 	
 	If Settings.Questions.Count() > 0  Then
 		Settings.Insert("CacheObject", CacheObject);
@@ -203,9 +201,7 @@ Procedure PartnerOnChange(Object, Form, Module, Item = Undefined, Settings = Und
 		Return;
 	EndIf;
 	
-	#If Not MobileClient Then
 	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form, Settings);
-	#EndIf
 	
 	If Settings.Questions.Count() > 0  Then
 		Settings.Insert("CacheObject", CacheObject);
@@ -371,9 +367,7 @@ Procedure AgreementOnChange(Object, Form, Module, Item = Undefined, Settings  = 
 		Return;
 	EndIf;
 	
-	#If Not MobileClient Then
 	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form, Settings);
-	#EndIf
 	
 	If Settings.Questions.Count() > 0  Then
 		Settings.Insert("CacheObject", CacheObject);
@@ -557,9 +551,7 @@ Procedure CompanyOnChange(Object, Form, Module, Item = Undefined, Settings = Und
 		Return;
 	EndIf;
 	
-	#If Not MobileClient Then
 	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form, Settings);
-	#EndIf
 	
 	Settings.Insert("Rows", Object[CompanySettings.TableName]);
 	If CompanySettings.Property("CalculateSettings") Then
@@ -902,9 +894,7 @@ Procedure PriceIncludeTaxOnChange(Object, Form, Module, Item = Undefined, Settin
 	EndIf;
 	PriceIncludeTaxSettings = Module.StoreSettings(Object, Form, AddInfo);
 	
-	#If Not MobileClient Then
 	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form, Settings);
-	#EndIf
 	
 	Settings.Insert("Rows", Object.ItemList);
 	Settings.CalculateSettings = CalculationStringsClientServer.GetCalculationSettings(Settings.CalculateSettings);
@@ -1026,9 +1016,7 @@ Procedure DateOnChange(Object, Form, Module, Item = Undefined, Settings = Undefi
 	
 	DoTitleActions(Object, Form, Settings, DateSettings.Actions);
 	
-	#If Not MobileClient Then
 	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form, Settings);
-	#EndIf
 	
 	If Item = Undefined Then
 		Return;
@@ -1223,6 +1211,7 @@ Procedure PickupItemsEnd(Result, AddInfo) Export
 	
 	UseSerialLotNumbers = Object.Property("SerialLotNumbers");
 	
+	Row = Undefined;
 	For Each ResultElement In Result Do
 		FillPropertyValues(FilterStructure, ResultElement);
 		ExistingRows = Object.ItemList.FindRows(FilterStructure);
@@ -1283,8 +1272,14 @@ Procedure PickupItemsEnd(Result, AddInfo) Export
 		EndIf;
 	EndDo;
 
+	If Not Row = Undefined Then
+		Form.Items.ItemList.CurrentRow = Row.GetID(); 
+	EndIf;
+	
 	Form.ItemListOnChange(Form.Items.ItemList);
-
+	Form.Modified = True;
+	Notify("AddNewItemListRow", Settings.Rows, Form);
+	
 EndProcedure
 
 Procedure OpenPickupItems(Object, Form, Command) Export

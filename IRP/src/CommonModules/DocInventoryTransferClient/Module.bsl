@@ -41,29 +41,6 @@ EndProcedure
 
 #Region PickUpItems
 
-Procedure PickupItemsEnd(Result, AdditionalParameters) Export
-	If NOT ValueIsFilled(Result)
-		OR Not AdditionalParameters.Property("Object")
-		OR Not AdditionalParameters.Property("Form") Then
-		Return;
-	EndIf;
-	
-	FilterString = "Item, ItemKey, Unit";
-	FilterStructure = New Structure(FilterString);
-	For Each ResultElement In Result Do
-		FillPropertyValues(FilterStructure, ResultElement);
-		ExistingRows = AdditionalParameters.Object.ItemList.FindRows(FilterStructure);
-		If ExistingRows.Count() Then
-			Row = ExistingRows[0];
-		Else
-			Row = AdditionalParameters.Object.ItemList.Add();
-			FillPropertyValues(Row, ResultElement, FilterString);
-		EndIf;
-		Row.Quantity = Row.Quantity + ResultElement.Quantity;
-	EndDo;
-	ItemListOnChange(AdditionalParameters.Object, AdditionalParameters.Form, Undefined, Undefined);
-EndProcedure
-
 Procedure OpenPickupItems(Object, Form, Command) Export
 	NotifyParameters = New Structure;
 	NotifyParameters.Insert("Object", Object);
@@ -90,7 +67,39 @@ Procedure OpenPickupItems(Object, Form, Command) Export
 	OpenForm("CommonForm.PickUpItems", OpenFormParameters, Form, , , , NotifyDescription);
 EndProcedure
 
+Procedure PickupItemsEnd(Result, AdditionalParameters) Export
+	If NOT ValueIsFilled(Result)
+		OR Not AdditionalParameters.Property("Object")
+		OR Not AdditionalParameters.Property("Form") Then
+		Return;
+	EndIf;
+	
+	FilterString = "Item, ItemKey, Unit";
+	FilterStructure = New Structure(FilterString);
+	For Each ResultElement In Result Do
+		FillPropertyValues(FilterStructure, ResultElement);
+		ExistingRows = AdditionalParameters.Object.ItemList.FindRows(FilterStructure);
+		If ExistingRows.Count() Then
+			Row = ExistingRows[0];
+		Else
+			Row = AdditionalParameters.Object.ItemList.Add();
+			FillPropertyValues(Row, ResultElement, FilterString);
+		EndIf;
+		Row.Quantity = Row.Quantity + ResultElement.Quantity;
+	EndDo;
+	ItemListOnChange(AdditionalParameters.Object, AdditionalParameters.Form, Undefined, Undefined);
+EndProcedure
+
 #EndRegion
+
+Procedure OpenScanFormEnd(Result, AdditionalParameters) Export
+	If NOT ValueIsFilled(Result)
+		OR Not AdditionalParameters.Property("Object")
+		OR Not AdditionalParameters.Property("Form") Then
+		Return;
+	EndIf;
+	
+EndProcedure
 
 Procedure ItemListAfterDeleteRow(Object, Form, Item) Export
 	DocumentsClient.ItemListAfterDeleteRow(Object, Form, Item);
@@ -183,7 +192,7 @@ Procedure StoreReceiverOnChange(Object, Form, Item) Export
 	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 EndProcedure
 
-Procedure SearchByBarcode(Barcode, Object, Form) Export
-	DocumentsClient.SearchByBarcode(Barcode, Object, Form);
+Procedure SearchByBarcode(Barcode, Object, Form, DocumentClientModule = Undefined, PriceType = Undefined, AddInfo = Undefined) Export
+	DocumentsClient.SearchByBarcode(Barcode, Object, Form, DocumentClientModule, PriceType, AddInfo);
 EndProcedure
 

@@ -92,17 +92,6 @@ EndProcedure
 
 #EndRegion
 
-Procedure OpenScanForm(Object, Form, Command) Export
-	NotifyParameters = New Structure;
-	NotifyParameters.Insert("Object", Object);
-	NotifyParameters.Insert("Form", Form);
-	NotifyDescription = New NotifyDescription("OpenScanFormEnd", DocInventoryTransferClient, NotifyParameters);
-	OpenFormParameters = New Structure;
-
-	OpenForm("CommonForm.ItemScanForm", OpenFormParameters, Form, , , , NotifyDescription, FormWindowOpeningMode.LockOwnerWindow);
-	
-EndProcedure
-
 Procedure OpenScanFormEnd(Result, AdditionalParameters) Export
 	If NOT ValueIsFilled(Result)
 		OR Not AdditionalParameters.Property("Object")

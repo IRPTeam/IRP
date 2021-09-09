@@ -16,6 +16,7 @@
   </synonym>
   <useStandardCommands>true</useStandardCommands>
   <editType>InDialog</editType>
+  <defaultRecordForm>InformationRegister.T1010S_ScannedBarcode.Form.RecordForm</defaultRecordForm>
   <informationRegisterPeriodicity>Second</informationRegisterPeriodicity>
   <dataLockControlMode>Managed</dataLockControlMode>
   <resources uuid="ad9b3ba1-2a02-4039-a2ad-4a1037bec2b5">
@@ -29,6 +30,7 @@
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
+    <fillChecking>ShowError</fillChecking>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
     <fillValue xsi:type="core:UndefinedValue"/>
@@ -78,25 +80,36 @@
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
+    <denyIncompleteValues>true</denyIncompleteValues>
     <dataHistory>Use</dataHistory>
+    <fillFromFillingValue>true</fillFromFillingValue>
     <fillValue xsi:type="core:UndefinedValue"/>
     <mainFilter>true</mainFilter>
   </dimensions>
   <dimensions uuid="d59a991a-d010-4645-bb11-80fc39ffa641">
-    <name>ID</name>
+    <name>InfoID</name>
     <synonym>
       <key>en</key>
-      <value>ID</value>
+      <value>Info ID</value>
     </synonym>
     <type>
       <types>UUID</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
+    <fillChecking>ShowError</fillChecking>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
     <fillValue xsi:type="core:UndefinedValue"/>
     <mainFilter>true</mainFilter>
   </dimensions>
+  <forms uuid="f1e7b88d-cab3-44dc-ade1-ef2626ea5214">
+    <name>RecordForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Record form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
 </mdclass:InformationRegister>

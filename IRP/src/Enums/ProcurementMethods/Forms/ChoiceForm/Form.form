@@ -234,7 +234,7 @@
         <extInfo xsi:type="form:CheckBoxFieldExtInfo"/>
       </items>
       <items xsi:type="form:FormField">
-        <name>___PRR</name>
+        <name>IncomingReserve</name>
         <id>46</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -242,15 +242,15 @@
           <common>true</common>
         </userVisible>
         <dataPath xsi:type="form:DataPath">
-          <segments>___PRR</segments>
+          <segments>IncomingReserve</segments>
         </dataPath>
         <titleLocation>Right</titleLocation>
         <handlers>
           <event>OnChange</event>
-          <name>___PRROnChange</name>
+          <name>IncomingReserveOnChange</name>
         </handlers>
         <extendedTooltip>
-          <name>___PRRExtendedTooltip</name>
+          <name>IncomingReserveExtendedTooltip</name>
           <id>48</id>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -265,7 +265,7 @@
           </extInfo>
         </extendedTooltip>
         <contextMenu>
-          <name>___PRRContextMenu</name>
+          <name>IncomingReserveContextMenu</name>
           <id>47</id>
           <visible>true</visible>
           <enabled>true</enabled>
@@ -504,10 +504,10 @@
     </extInfo>
   </attributes>
   <attributes>
-    <name>___PRR</name>
+    <name>IncomingReserve</name>
     <title>
       <key>en</key>
-      <value>___PRR</value>
+      <value>Incoming reserve</value>
     </title>
     <id>6</id>
     <valueType>

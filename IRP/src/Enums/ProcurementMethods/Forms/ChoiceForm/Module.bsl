@@ -3,7 +3,7 @@ Procedure StockOnChange(Item)
 	If Stock Then
 		Purchase = False;
 		NoReserve = False;
-		___PRR = False;
+		IncomingReserve = False;
 	EndIf;
 	PickParameters = New Structure();
 	PickParameters.Insert("ItemName", Item.Name);
@@ -12,15 +12,15 @@ Procedure StockOnChange(Item)
 EndProcedure
 
 &AtClient
-Procedure ___PRROnChange(Item)
-	If ___PRR Then
+Procedure IncomingReserveOnChange(Item)
+	If IncomingReserve Then
 		Purchase = False;
 		NoReserve = False;
 		Stock = False;
 	EndIf;
 	PickParameters = New Structure();
 	PickParameters.Insert("ItemName", Item.Name);
-	PickParameters.Insert("ItemValue", ___PRR);
+	PickParameters.Insert("ItemValue", IncomingReserve);
 	PickedProcurementMethodsRefresh(PickParameters);	
 EndProcedure
 
@@ -29,7 +29,7 @@ Procedure PurchaseOnChange(Item)
 	If Purchase Then
 		NoReserve = False;
 		Stock = False;
-		___PRR = False;
+		IncomingReserve = False;
 	EndIf;
 	PickParameters = New Structure();
 	PickParameters.Insert("ItemName", Item.Name);
@@ -42,7 +42,7 @@ Procedure NoReserveOnChange(Item)
 	If NoReserve Then
 		Purchase = False;
 		Stock = False;
-		___PRR = False;
+		IncomingReserve = False;
 	EndIf;
 	PickParameters = New Structure();
 	PickParameters.Insert("ItemName", Item.Name);

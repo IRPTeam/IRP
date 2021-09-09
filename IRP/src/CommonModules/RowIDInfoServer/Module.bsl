@@ -304,7 +304,7 @@ Procedure FillRowID_SO(Source)
 		FillRowID(Source, Row, RowItemList);
 		Row.NextStep = GetNextStep_SO(Source, RowItemList, Row);
 		
-		If RowItemList.ProcurementMethod = Enums.ProcurementMethods.___PRR Then
+		If RowItemList.ProcurementMethod = Enums.ProcurementMethods.IncomingReserve Then
 			NewRow = Source.RowIDInfo.Add();
 			FillPropertyValues(NewRow, Row);
 			NewRow.CurrentStep = Undefined;

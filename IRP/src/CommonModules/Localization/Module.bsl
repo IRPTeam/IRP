@@ -113,6 +113,9 @@ Function Strings(Lang) Export
 	Strings.Insert("Form_030", NStr("en = 'Dimensions'", Lang));
 	Strings.Insert("Form_031", NStr("en = 'Weight information'", Lang));
 	Strings.Insert("Form_032", NStr("en = 'Period'", Lang));
+	Strings.Insert("Form_033", NStr("en = 'Show all'", Lang));
+	Strings.Insert("Form_034", NStr("en = 'Hide all'", Lang));
+	Strings.Insert("Form_035", NStr("en = 'Head'", Lang));
 	#EndRegion
 	
 	#Region ErrorMessages
@@ -428,13 +431,12 @@ Function Strings(Lang) Export
 	
 	// Interface
 	Strings.Insert("I_1", NStr("en = 'Enter description'", Lang));
-	
 	Strings.Insert("I_2", NStr("en = 'Click to enter description'", Lang));
-	
 	Strings.Insert("I_3", NStr("en = 'Fill out the document'", Lang));
 	Strings.Insert("I_4", NStr("en = 'Find %1 rows in table by key %2'", Lang));
 	Strings.Insert("I_5", NStr("en = 'Not supported table'", Lang));
 	Strings.Insert("I_6", NStr("en = 'Ordered without ISR'", Lang));
+	
 	#EndRegion
 	
 	#Region Exceptions

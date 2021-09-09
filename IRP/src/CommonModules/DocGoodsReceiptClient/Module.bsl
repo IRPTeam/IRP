@@ -4,7 +4,6 @@ Procedure OnOpen(Object, Form, Cancel, AddInfo = Undefined) Export
 	
 	#If MobileClient Then
 	ItemListOnChange(Object, Form);
-	SerialLotNumberListOnChange(Object, Form);
 	#EndIf
 	
 EndProcedure
@@ -174,10 +173,6 @@ Procedure ItemListOnChange(Object, Form, Item = Undefined, CalculationSettings =
 		If Not ValueIsFilled(Row.Key) Then
 			Row.Key = New UUID();
 		EndIf;
-		#If MobileClient Then
-		Row.Item = ServiceSystemServer.GetObjectAttribute(Row.ItemKey, "Item");
-		Row.Title = "" + Row.Item + " " + Row.ItemKey;
-		#EndIf
 	EndDo;
 	
 	If Form.Items.ItemList.CurrentData <> Undefined Then

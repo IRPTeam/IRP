@@ -9,9 +9,14 @@ Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 	
 	AddCommonAttributesToForm(Object, Form);
 
-	If Form.Items.Find("GroupTitleCollapsed") <> Undefined Then
-		DocumentsClientServer.ChangeTitleCollapse(Object, Form, Not ValueIsFilled(Object.Ref));
-	EndIf;	
+	If SessionParameters.isMobile Then
+		DocumentServerMobile.OnCreateAtServer(Object, Form, Cancel, StandardProcessing);						
+	Else	
+		If Form.Items.Find("GroupTitleCollapsed") <> Undefined Then
+			DocumentsClientServer.ChangeTitleCollapse(Object, Form, Not ValueIsFilled(Object.Ref));
+		EndIf;	
+	EndIf;
+	
 	ExternalCommandsServer.CreateCommands(Form, Object.Ref.Metadata().FullName(), Enums.FormTypes.ObjectForm);	
 EndProcedure
 

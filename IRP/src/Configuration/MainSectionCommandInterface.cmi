@@ -2,19 +2,19 @@
 <cmi:CommandInterface xmlns:cmi="http://g5.1c.ru/v8/dt/cmi">
   <commandsVisibility>
     <visibilityFragments>
-      <command>Document.SalesOrder.StandardCommand.Create</command>
+      <command>Document.GoodsReceipt.StandardCommand.Create</command>
       <visible>
         <common>true</common>
       </visible>
     </visibilityFragments>
     <visibilityFragments>
-      <command>Catalog.Items.StandardCommand.OpenList</command>
+      <command>Document.InventoryTransfer.StandardCommand.Create</command>
       <visible>
         <common>true</common>
       </visible>
     </visibilityFragments>
     <visibilityFragments>
-      <command>Document.SalesOrder.StandardCommand.OpenList</command>
+      <command>Document.ShipmentConfirmation.StandardCommand.Create</command>
       <visible>
         <common>true</common>
       </visible>
@@ -22,13 +22,24 @@
   </commandsVisibility>
   <commandsPlacement>
     <placementFragments>
-      <group>ActionsPanelCreate</group>
-      <commands>Document.SalesOrder.StandardCommand.Create</commands>
+      <group>NavigationPanelOrdinary</group>
+      <commands>Document.ShipmentConfirmation.StandardCommand.OpenList</commands>
+      <commands>Document.GoodsReceipt.StandardCommand.OpenList</commands>
+      <commands>Document.InventoryTransfer.StandardCommand.OpenList</commands>
     </placementFragments>
     <placementFragments>
-      <group>NavigationPanelOrdinary</group>
-      <commands>Document.SalesOrder.StandardCommand.OpenList</commands>
-      <commands>Catalog.Items.StandardCommand.OpenList</commands>
+      <group>ActionsPanelCreate</group>
+      <commands>Document.GoodsReceipt.StandardCommand.Create</commands>
+      <commands>Document.ShipmentConfirmation.StandardCommand.Create</commands>
+      <commands>Document.InventoryTransfer.StandardCommand.Create</commands>
     </placementFragments>
   </commandsPlacement>
+  <commandsOrder>
+    <orderFragments>
+      <group>NavigationPanelOrdinary</group>
+      <commands>Document.GoodsReceipt.StandardCommand.OpenList</commands>
+      <commands>Document.ShipmentConfirmation.StandardCommand.OpenList</commands>
+      <commands>Document.InventoryTransfer.StandardCommand.OpenList</commands>
+    </orderFragments>
+  </commandsOrder>
 </cmi:CommandInterface>

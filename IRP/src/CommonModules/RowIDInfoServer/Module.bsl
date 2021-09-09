@@ -281,16 +281,13 @@ Procedure FillRowID_SO(Source)
 			ArrayForDelete.Add(Row);
 		EndIf;
 	EndDo;
+	
 	For Each ItemForDelete In ArrayForDelete Do
 		Source.RowIDInfo.Delete(ItemForDelete);
 	EndDo;
 	
 	For Each RowItemList In Source.ItemList Do
 	
-		If RowItemList.Cancel Then
-			Continue;
-		EndIf;
-		
 		Row = Undefined;
 		IDInfoRows = Source.RowIDInfo.FindRows(New Structure("Key", RowItemList.Key));
 		If IDInfoRows.Count() = 0 Then
@@ -299,10 +296,15 @@ Procedure FillRowID_SO(Source)
 			Row = IDInfoRows[0];
 		EndIf;
 
+		If RowItemList.Cancel Then
+			Source.RowIDInfo.Delete(Row);
+			Continue;
+		EndIf;
+
 		FillRowID(Source, Row, RowItemList);
 		Row.NextStep = GetNextStep_SO(Source, RowItemList, Row);
 		
-		If RowItemList.ProcurementMethod = Enums.ProcurementMethods.___PRR Then
+		If RowItemList.ProcurementMethod = Enums.ProcurementMethods.IncomingReserve Then
 			NewRow = Source.RowIDInfo.Add();
 			FillPropertyValues(NewRow, Row);
 			NewRow.CurrentStep = Undefined;

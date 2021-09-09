@@ -225,7 +225,7 @@ Function GetLinkedDocumentsFilter()
 	Filter.Insert("Company"           , Object.Company);
 	Filter.Insert("Branch"            , Object.Branch);
 	Filter.Insert("Requester"         , Object.Requester);
-	Filter.Insert("ProcurementMethod" , PredefinedValue("Enum.ProcurementMethods.___PRR"));
+	Filter.Insert("ProcurementMethod" , PredefinedValue("Enum.ProcurementMethods.IncomingReserve"));
 	Filter.Insert("Ref"               , Object.Ref);
 	Return Filter;
 EndFunction

@@ -21,7 +21,7 @@ Procedure IncomingReserveOnChange(Item)
 	PickParameters = New Structure();
 	PickParameters.Insert("ItemName", Item.Name);
 	PickParameters.Insert("ItemValue", IncomingReserve);
-	PickedProcurementMethodsRefresh(PickParameters);	
+	PickedProcurementMethodsRefresh(PickParameters);
 EndProcedure
 
 &AtClient
@@ -69,10 +69,9 @@ Procedure OK(Command)
 	For Each PickedMethod In PickedProcurementMethods Do
 		ProcurementMethodsArray.Add(PredefinedValue("Enum.ProcurementMethods." + PickedMethod.Value));
 	EndDo;
-	
+
 	ResultStructure = New Structure();
 	ResultStructure.Insert("ProcurementMethods", ProcurementMethodsArray);
-	
+
 	ThisObject.Close(ResultStructure);
 EndProcedure
-

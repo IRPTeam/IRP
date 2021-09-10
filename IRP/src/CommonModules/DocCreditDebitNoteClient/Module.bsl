@@ -8,7 +8,7 @@ EndProcedure
 Procedure AfterWriteAtClient(Object, Form, WriteParameters, AddInfo = Undefined) Export
 	CurrenciesClient.AfterWriteAtClient(Object, Form, "Transactions", AddInfo);
 EndProcedure
-	
+
 #EndRegion
 
 #Region _Date
@@ -24,19 +24,19 @@ EndProcedure
 
 Procedure CompanyOnChange(Object, Form, Item, AddInfo = Undefined) Export
 	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
-	CurrenciesClient.CompanyOnChange(Object, Form, "Transactions", AddInfo);	
+	CurrenciesClient.CompanyOnChange(Object, Form, "Transactions", AddInfo);
 EndProcedure
 
 Procedure CompanyStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
 	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
-	
+
 	OpenSettings.ArrayOfFilters = New Array();
-	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", 
-																	True, DataCompositionComparisonType.NotEqual));
-	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("OurCompany", 
-																	True, DataCompositionComparisonType.Equal));
+	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True,
+		DataCompositionComparisonType.NotEqual));
+	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("OurCompany", True,
+		DataCompositionComparisonType.Equal));
 	OpenSettings.FillingData = New Structure("OurCompany", True);
-	
+
 	DocumentsClient.CompanyStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
 EndProcedure
 
@@ -53,20 +53,21 @@ EndProcedure
 
 Procedure TransactionsPartnerOnChange(Object, Form, Item, AddInfo = Undefined) Export
 	CurrentData = Form.Items.Transactions.CurrentData;
-	
+
 	If CurrentData = Undefined Then
 		Return;
 	EndIf;
-	
+
 	If ValueIsFilled(CurrentData.Partner) Then
 		CurrentData.LegalName = DocumentsServer.GetLegalNameByPartner(CurrentData.Partner, CurrentData.LegalName);
-	
+
 		AgreementParameters = New Structure();
-		AgreementParameters.Insert("Partner"		, CurrentData.Partner);
-		AgreementParameters.Insert("Agreement"		, CurrentData.Agreement);
-		AgreementParameters.Insert("CurrentDate"	, Object.Date);
-		AgreementParameters.Insert("ArrayOfFilters"	, New Array());
-		AgreementParameters.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
+		AgreementParameters.Insert("Partner", CurrentData.Partner);
+		AgreementParameters.Insert("Agreement", CurrentData.Agreement);
+		AgreementParameters.Insert("CurrentDate", Object.Date);
+		AgreementParameters.Insert("ArrayOfFilters", New Array());
+		AgreementParameters.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True,
+			ComparisonType.NotEqual));
 		NewAgreement = DocumentsServer.GetAgreementByPartner(AgreementParameters);
 		If Not CurrentData.Agreement = NewAgreement Then
 			CurrentData.Agreement = NewAgreement;
@@ -78,12 +79,13 @@ EndProcedure
 
 Procedure TransactionsPartnerStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
 	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
-	
+
 	OpenSettings.ArrayOfFilters = New Array();
-	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, DataCompositionComparisonType.NotEqual));
+	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True,
+		DataCompositionComparisonType.NotEqual));
 	OpenSettings.FormParameters = New Structure();
 	OpenSettings.FillingData = New Structure();
-	
+
 	DocumentsClient.PartnerStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
 EndProcedure
 
@@ -91,8 +93,8 @@ Procedure TransactionsPartnerEditTextChange(Object, Form, Item, Text, StandardPr
 	ArrayOfFilters = New Array();
 	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
 	AdditionalParameters = New Structure();
-	DocumentsClient.PartnerEditTextChange(Object, Form, Item, Text, StandardProcessing,
-		ArrayOfFilters, AdditionalParameters);
+	DocumentsClient.PartnerEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters,
+		AdditionalParameters);
 EndProcedure
 
 #EndRegion
@@ -105,13 +107,13 @@ Procedure TransactionsAgreementOnChange(Object, Form, Item, AddInfo = Undefined)
 		Return;
 	EndIf;
 	AgreementInfo = CatAgreementsServer.GetAgreementInfo(CurrentData.Agreement);
-	
+
 	If AgreementInfo.ApArPostingDetail <> PredefinedValue("Enum.ApArPostingDetail.ByDocuments")
-		Or CurrentData.Agreement <> 
-		ServiceSystemServer.GetCompositeObjectAttribute(CurrentData.BasisDocument, "Agreement") Then
+		Or CurrentData.Agreement <> ServiceSystemServer.GetCompositeObjectAttribute(CurrentData.BasisDocument,
+		"Agreement") Then
 		CurrentData.BasisDocument = Undefined;
 	EndIf;
-	
+
 	If CurrentData.Currency <> AgreementInfo.Currency Then
 		CurrentData.Currency = AgreementInfo.Currency;
 		TransactionsCurrencyOnChange(Object, Form, Undefined);
@@ -125,25 +127,23 @@ Procedure TransactionsAgreementStartChoice(Object, Form, Item, ChoiceData, Stand
 	If CurrentData = Undefined Then
 		Return;
 	EndIf;
-	
+
 	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
 	OpenSettings.ArrayOfFilters = New Array();
-	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", 
-																	True, 
-																	DataCompositionComparisonType.NotEqual));
-	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Kind", 
-																	PredefinedValue("Enum.AgreementKinds.Standard"), 
-																	DataCompositionComparisonType.NotEqual));																
+	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True,
+		DataCompositionComparisonType.NotEqual));
+	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Kind", PredefinedValue(
+		"Enum.AgreementKinds.Standard"), DataCompositionComparisonType.NotEqual));
 	OpenSettings.FormParameters = New Structure();
-	OpenSettings.FormParameters.Insert("Partner"						, CurrentData.Partner);
-	OpenSettings.FormParameters.Insert("IncludeFilterByPartner"			, True);
-	OpenSettings.FormParameters.Insert("IncludePartnerSegments"			, True);
-	OpenSettings.FormParameters.Insert("EndOfUseDate"					, Object.Date);
-	OpenSettings.FormParameters.Insert("IncludeFilterByEndOfUseDate"	, True);
+	OpenSettings.FormParameters.Insert("Partner", CurrentData.Partner);
+	OpenSettings.FormParameters.Insert("IncludeFilterByPartner", True);
+	OpenSettings.FormParameters.Insert("IncludePartnerSegments", True);
+	OpenSettings.FormParameters.Insert("EndOfUseDate", Object.Date);
+	OpenSettings.FormParameters.Insert("IncludeFilterByEndOfUseDate", True);
 	OpenSettings.FillingData = New Structure();
-	OpenSettings.FillingData.Insert("Partner"	, CurrentData.Partner);
-	OpenSettings.FillingData.Insert("Company"	, Object.Company);
-	
+	OpenSettings.FillingData.Insert("Partner", CurrentData.Partner);
+	OpenSettings.FillingData.Insert("Company", Object.Company);
+
 	DocumentsClient.AgreementStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
 EndProcedure
 
@@ -152,20 +152,20 @@ Procedure TransactionsAgreementTextChange(Object, Form, Item, Text, StandardProc
 	If CurrentData = Undefined Then
 		Return;
 	EndIf;
-	
+
 	ArrayOfFilters = New Array();
 	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
-	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Kind", 
-																	PredefinedValue("Enum.AgreementKinds.Standard"), 
-																	ComparisonType.NotEqual));	
-																																	
+	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Kind", PredefinedValue("Enum.AgreementKinds.Standard"),
+		ComparisonType.NotEqual));
+
 	AdditionalParameters = New Structure();
 	AdditionalParameters.Insert("IncludeFilterByEndOfUseDate", True);
 	AdditionalParameters.Insert("IncludeFilterByPartner", True);
 	AdditionalParameters.Insert("IncludePartnerSegments", True);
 	AdditionalParameters.Insert("EndOfUseDate", Object.Date);
 	AdditionalParameters.Insert("Partner", CurrentData.Partner);
-	DocumentsClient.AgreementEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters, AdditionalParameters);
+	DocumentsClient.AgreementEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters,
+		AdditionalParameters);
 EndProcedure
 
 #EndRegion
@@ -189,17 +189,17 @@ EndProcedure
 
 Procedure TransactionsLegalNameStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
 	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
-	
+
 	OpenSettings.ArrayOfFilters = New Array();
-	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", 
-																		True, DataCompositionComparisonType.NotEqual));
+	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True,
+		DataCompositionComparisonType.NotEqual));
 	OpenSettings.FormParameters = New Structure();
 	If ValueIsFilled(Form.Items.Transactions.CurrentData.Partner) Then
 		OpenSettings.FormParameters.Insert("Partner", Form.Items.Transactions.CurrentData.Partner);
 		OpenSettings.FormParameters.Insert("FilterByPartnerHierarchy", True);
 	EndIf;
 	OpenSettings.FillingData = New Structure("Partner", Form.Items.Transactions.CurrentData.Partner);
-	
+
 	DocumentsClient.CompanyStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
 EndProcedure
 
@@ -211,8 +211,8 @@ Procedure TransactionsLegalNameEditTextChange(Object, Form, Item, Text, Standard
 		AdditionalParameters.Insert("Partner", Form.Items.Transactions.CurrentData.Partner);
 		AdditionalParameters.Insert("FilterByPartnerHierarchy", True);
 	EndIf;
-	DocumentsClient.CompanyEditTextChange(Object, Form, Item, Text, StandardProcessing, 
-				ArrayOfFilters, AdditionalParameters);
+	DocumentsClient.CompanyEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters,
+		AdditionalParameters);
 EndProcedure
 
 #EndRegion
@@ -268,7 +268,7 @@ Procedure TransactionsRevenueTypeEditTextChange(Object, Form, Item, Text, Standa
 EndProcedure
 
 #EndRegion
-	
+
 #EndRegion
 
 #Region ItemDescription
@@ -303,4 +303,3 @@ EndProcedure
 #EndRegion
 
 #EndRegion
-

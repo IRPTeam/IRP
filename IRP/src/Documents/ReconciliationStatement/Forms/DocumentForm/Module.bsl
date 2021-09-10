@@ -38,41 +38,41 @@ EndProcedure
 &AtServer
 Procedure SetConditionalAppearance() Export
 	ConditionalAppearance.Items.Clear();
-	
+
 	Arr = New Array();
 	Arr.Add("OpeningBalanceDebit");
 	Arr.Add("OpeningBalanceCredit");
 	Arr.Add("ClosingBalanceDebit");
 	Arr.Add("ClosingBalanceCredit");
-	
+
 	For Each ItemName In Arr Do
 		// >0
 		AppearanceElement = ConditionalAppearance.Items.Add();
-		
+
 		FieldElement = AppearanceElement.Fields.Items.Add();
 		FieldElement.Field = New DataCompositionField(ItemName);
-		
+
 		FilterElement = AppearanceElement.Filter.Items.Add(Type("DataCompositionFilterItem"));
 		FilterElement.LeftValue = New DataCompositionField("Object." + ItemName);
 		FilterElement.ComparisonType = DataCompositionComparisonType.Greater;
 		FilterElement.RightValue = 0;
-		
+
 		AppearanceElement.Appearance.SetParameterValue("TextColor", WebColors.Green);
 		
 		// <0
 		AppearanceElement = ConditionalAppearance.Items.Add();
-		
+
 		FieldElement = AppearanceElement.Fields.Items.Add();
 		FieldElement.Field = New DataCompositionField(ItemName);
-		
+
 		FilterElement = AppearanceElement.Filter.Items.Add(Type("DataCompositionFilterItem"));
 		FilterElement.LeftValue = New DataCompositionField("Object." + ItemName);
 		FilterElement.ComparisonType = DataCompositionComparisonType.Less;
 		FilterElement.RightValue = 0;
-		
+
 		AppearanceElement.Appearance.SetParameterValue("TextColor", WebColors.Red);
 	EndDo;
-	
+
 EndProcedure
 
 &AtClient
@@ -86,40 +86,40 @@ EndProcedure
 Procedure FillAtServer()
 	Query = New Query();
 	Query.Text =
-		"SELECT
-		|	ReconciliationStatementBalance.AmountBalance AS OpeningBalance
-		|FROM
-		|	AccumulationRegister.R5010B_ReconciliationStatement.Balance(BEGINOFPERIOD(&StartDate, DAY), Company = &Company
-		|	AND LegalName = &LegalName
-		|	AND Currency = &Currency) AS ReconciliationStatementBalance
-		|;
-		|
-		|////////////////////////////////////////////////////////////////////////////////
-		|SELECT
-		|	ReconciliationStatementBalance.AmountBalance AS ClosingBalance
-		|FROM
-		|	AccumulationRegister.R5010B_ReconciliationStatement.Balance(ENDOFPERIOD(&EndDate, DAY), Company = &Company
-		|	AND LegalName = &LegalName
-		|	AND Currency = &Currency) AS ReconciliationStatementBalance
-		|;
-		|
-		|////////////////////////////////////////////////////////////////////////////////
-		|SELECT
-		|	ReconciliationStatementTurnovers.Period AS Date,
-		|	ReconciliationStatementTurnovers.Recorder AS Document,
-		|	ReconciliationStatementTurnovers.AmountReceipt AS Debit,
-		|	ReconciliationStatementTurnovers.AmountExpense AS Credit
-		|FROM
-		|	AccumulationRegister.R5010B_ReconciliationStatement.Turnovers(BEGINOFPERIOD(&StartDate, DAY), ENDOFPERIOD(&EndDate,
-		|		DAY), Recorder, Company = &Company
-		|	AND LegalName = &LegalName
-		|	AND Currency = &Currency) AS ReconciliationStatementTurnovers";
+	"SELECT
+	|	ReconciliationStatementBalance.AmountBalance AS OpeningBalance
+	|FROM
+	|	AccumulationRegister.R5010B_ReconciliationStatement.Balance(BEGINOFPERIOD(&StartDate, DAY), Company = &Company
+	|	AND LegalName = &LegalName
+	|	AND Currency = &Currency) AS ReconciliationStatementBalance
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	ReconciliationStatementBalance.AmountBalance AS ClosingBalance
+	|FROM
+	|	AccumulationRegister.R5010B_ReconciliationStatement.Balance(ENDOFPERIOD(&EndDate, DAY), Company = &Company
+	|	AND LegalName = &LegalName
+	|	AND Currency = &Currency) AS ReconciliationStatementBalance
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	ReconciliationStatementTurnovers.Period AS Date,
+	|	ReconciliationStatementTurnovers.Recorder AS Document,
+	|	ReconciliationStatementTurnovers.AmountReceipt AS Debit,
+	|	ReconciliationStatementTurnovers.AmountExpense AS Credit
+	|FROM
+	|	AccumulationRegister.R5010B_ReconciliationStatement.Turnovers(BEGINOFPERIOD(&StartDate, DAY), ENDOFPERIOD(&EndDate,
+	|		DAY), Recorder, Company = &Company
+	|	AND LegalName = &LegalName
+	|	AND Currency = &Currency) AS ReconciliationStatementTurnovers";
 	Query.SetParameter("StartDate", Object.BeginPeriod);
 	Query.SetParameter("EndDate", Object.EndPeriod);
 	Query.SetParameter("Company", Object.Company);
 	Query.SetParameter("LegalName", Object.LegalName);
 	Query.SetParameter("Currency", Object.Currency);
-	
+
 	ArrayOfResults = Query.ExecuteBatch();
 	OpeningBalance = 0;
 	QuerySelection = ArrayOfResults[0].Select();
@@ -130,10 +130,10 @@ Procedure FillAtServer()
 		Object.OpeningBalanceDebit = OpeningBalance;
 		Object.OpeningBalanceCredit = 0;
 	Else
-		Object.OpeningBalanceCredit = - OpeningBalance;
+		Object.OpeningBalanceCredit = -OpeningBalance;
 		Object.OpeningBalanceDebit = 0;
 	EndIf;
-	
+
 	ClosingBalance = 0;
 	QuerySelection = ArrayOfResults[1].Select();
 	If QuerySelection.Next() Then
@@ -143,16 +143,16 @@ Procedure FillAtServer()
 		Object.ClosingBalanceDebit = ClosingBalance;
 		Object.ClosingBalanceCredit = 0;
 	Else
-		Object.ClosingBalanceCredit = - ClosingBalance;
+		Object.ClosingBalanceCredit = -ClosingBalance;
 		Object.ClosingBalanceDebit = 0;
 	EndIf;
-	
+
 	Object.Transactions.Clear();
 	QuerySelection = ArrayOfResults[2].Select();
 	While QuerySelection.Next() Do
 		FillPropertyValues(Object.Transactions.Add(), QuerySelection);
 	EndDo;
-	
+
 	DocReconciliationStatementServer.SetVisibility(Object, ThisObject);
 EndProcedure
 
@@ -255,7 +255,7 @@ EndProcedure
 &AtClient
 Procedure GeneratedFormCommandActionByName(Command) Export
 	ExternalCommandsClient.GeneratedFormCommandActionByName(Object, ThisObject, Command.Name);
-	GeneratedFormCommandActionByNameServer(Command.Name);	
+	GeneratedFormCommandActionByNameServer(Command.Name);
 EndProcedure
 
 &AtServer

@@ -1,23 +1,22 @@
-
 #Region Internal
 
 Function RolesSet() Export
-	Settings = New Map;
-	
-	#Region HTTPService
-	HTTPService = New Array;
+	Settings = New Map();
+
+#Region HTTPService
+	HTTPService = New Array();
 	HTTPService.Add(Enums.Rights.Use);
-	#EndRegion 
+#EndRegion
 	Settings.Insert(Enums.MetadataTypes.HTTPService, HTTPService);
 
-	#Region WebService
-	WebService = New Array;
+#Region WebService
+	WebService = New Array();
 	WebService.Add(Enums.Rights.Use);
-	#EndRegion 
+#EndRegion
 	Settings.Insert(Enums.MetadataTypes.WebService, WebService);
 
-	#Region BusinessProcess
-	BusinessProcess = New Array;
+#Region BusinessProcess
+	BusinessProcess = New Array();
 	BusinessProcess.Add(Enums.Rights.Read);
 	BusinessProcess.Add(Enums.Rights.Insert);
 	BusinessProcess.Add(Enums.Rights.Update);
@@ -42,11 +41,11 @@ Function RolesSet() Export
 	BusinessProcess.Add(Enums.Rights.ViewDataHistory);
 	BusinessProcess.Add(Enums.Rights.EditDataHistoryVersionComment);
 	BusinessProcess.Add(Enums.Rights.SwitchToDataHistoryVersion);
-	#EndRegion 
+#EndRegion
 	Settings.Insert(Enums.MetadataTypes.BusinessProcess, BusinessProcess);
 
-	#Region Catalog
-	Catalog = New Array;
+#Region Catalog
+	Catalog = New Array();
 	Catalog.Add(Enums.Rights.Read);
 	Catalog.Add(Enums.Rights.Insert);
 	Catalog.Add(Enums.Rights.Update);
@@ -72,12 +71,10 @@ Function RolesSet() Export
 	Catalog.Add(Enums.Rights.ViewDataHistory);
 	Catalog.Add(Enums.Rights.EditDataHistoryVersionComment);
 	Catalog.Add(Enums.Rights.SwitchToDataHistoryVersion);
-	#EndRegion 
+#EndRegion
 	Settings.Insert(Enums.MetadataTypes.Catalog, Catalog);
-
-
-	#Region Document
-	Document = New Array;
+#Region Document
+	Document = New Array();
 	Document.Add(Enums.Rights.Read);
 	Document.Add(Enums.Rights.Insert);
 	Document.Add(Enums.Rights.Update);
@@ -105,18 +102,18 @@ Function RolesSet() Export
 	Document.Add(Enums.Rights.ViewDataHistory);
 	Document.Add(Enums.Rights.EditDataHistoryVersionComment);
 	Document.Add(Enums.Rights.SwitchToDataHistoryVersion);
-	#EndRegion 
+#EndRegion
 	Settings.Insert(Enums.MetadataTypes.Document, Document);
 
-	#Region DocumentJournal
-	DocumentJournal = New Array;
+#Region DocumentJournal
+	DocumentJournal = New Array();
 	DocumentJournal.Add(Enums.Rights.Read);
 	DocumentJournal.Add(Enums.Rights.View);
-	#EndRegion 
+#EndRegion
 	Settings.Insert(Enums.MetadataTypes.DocumentJournal, DocumentJournal);
 
-	#Region Task
-	Task = New Array;
+#Region Task
+	Task = New Array();
 	Task.Add(Enums.Rights.Read);
 	Task.Add(Enums.Rights.Insert);
 	Task.Add(Enums.Rights.Update);
@@ -141,11 +138,11 @@ Function RolesSet() Export
 	Task.Add(Enums.Rights.ViewDataHistory);
 	Task.Add(Enums.Rights.EditDataHistoryVersionComment);
 	Task.Add(Enums.Rights.SwitchToDataHistoryVersion);
-	#EndRegion 
+#EndRegion
 	Settings.Insert(Enums.MetadataTypes.Task, Task);
 
-	#Region Constant
-	Constant = New Array;
+#Region Constant
+	Constant = New Array();
 	Constant.Add(Enums.Rights.Read);
 	Constant.Add(Enums.Rights.Update);
 	Constant.Add(Enums.Rights.View);
@@ -157,57 +154,57 @@ Function RolesSet() Export
 	Constant.Add(Enums.Rights.ViewDataHistory);
 	Constant.Add(Enums.Rights.EditDataHistoryVersionComment);
 	Constant.Add(Enums.Rights.SwitchToDataHistoryVersion);
-	#EndRegion 
+#EndRegion
 	Settings.Insert(Enums.MetadataTypes.Constant, Constant);
 
-	#Region FilterCriterion
-	FilterCriterion = New Array;
+#Region FilterCriterion
+	FilterCriterion = New Array();
 	FilterCriterion.Add(Enums.Rights.View);
-	#EndRegion 
+#EndRegion
 	Settings.Insert(Enums.MetadataTypes.FilterCriterion, FilterCriterion);
 
-	#Region DataProcessor
-	DataProcessor = New Array;
+#Region DataProcessor
+	DataProcessor = New Array();
 	DataProcessor.Add(Enums.Rights.Use);
 	DataProcessor.Add(Enums.Rights.View);
-	#EndRegion 
+#EndRegion
 	Settings.Insert(Enums.MetadataTypes.DataProcessor, DataProcessor);
 
-	#Region CommonCommand
-	CommonCommand = New Array;
+#Region CommonCommand
+	CommonCommand = New Array();
 	CommonCommand.Add(Enums.Rights.View);
-	#EndRegion 
+#EndRegion
 	Settings.Insert(Enums.MetadataTypes.CommonCommand, CommonCommand);
 
-	#Region CommonForm
-	CommonForm = New Array;
+#Region CommonForm
+	CommonForm = New Array();
 	CommonForm.Add(Enums.Rights.View);
-	#EndRegion 
+#EndRegion
 	Settings.Insert(Enums.MetadataTypes.CommonForm, CommonForm);
 
-	#Region CommonAttribute
-	CommonAttribute = New Array;
+#Region CommonAttribute
+	CommonAttribute = New Array();
 	CommonAttribute.Add(Enums.Rights.View);
 	CommonAttribute.Add(Enums.Rights.Edit);
-	#EndRegion 
+#EndRegion
 	Settings.Insert(Enums.MetadataTypes.CommonAttribute, CommonAttribute);
 
-	#Region Report
-	Report = New Array;
+#Region Report
+	Report = New Array();
 	Report.Add(Enums.Rights.Use);
 	Report.Add(Enums.Rights.View);
-	#EndRegion 
+#EndRegion
 	Settings.Insert(Enums.MetadataTypes.Report, Report);
 
-	#Region SessionParameter
-	SessionParameter = New Array;
+#Region SessionParameter
+	SessionParameter = New Array();
 	SessionParameter.Add(Enums.Rights.Get);
 	SessionParameter.Add(Enums.Rights.Set);
-	#EndRegion 
+#EndRegion
 	Settings.Insert(Enums.MetadataTypes.SessionParameter, SessionParameter);
 
-	#Region ChartOfCalculationTypes
-	ChartOfCalculationTypes = New Array;
+#Region ChartOfCalculationTypes
+	ChartOfCalculationTypes = New Array();
 	ChartOfCalculationTypes.Add(Enums.Rights.Read);
 	ChartOfCalculationTypes.Add(Enums.Rights.Insert);
 	ChartOfCalculationTypes.Add(Enums.Rights.Update);
@@ -233,11 +230,11 @@ Function RolesSet() Export
 	ChartOfCalculationTypes.Add(Enums.Rights.ViewDataHistory);
 	ChartOfCalculationTypes.Add(Enums.Rights.EditDataHistoryVersionComment);
 	ChartOfCalculationTypes.Add(Enums.Rights.SwitchToDataHistoryVersion);
-	#EndRegion 
+#EndRegion
 	Settings.Insert(Enums.MetadataTypes.ChartOfCalculationTypes, ChartOfCalculationTypes);
 
-	#Region ChartOfCharacteristicTypes
-	ChartOfCharacteristicTypes = New Array;
+#Region ChartOfCharacteristicTypes
+	ChartOfCharacteristicTypes = New Array();
 	ChartOfCharacteristicTypes.Add(Enums.Rights.Read);
 	ChartOfCharacteristicTypes.Add(Enums.Rights.Insert);
 	ChartOfCharacteristicTypes.Add(Enums.Rights.Update);
@@ -263,11 +260,11 @@ Function RolesSet() Export
 	ChartOfCharacteristicTypes.Add(Enums.Rights.ViewDataHistory);
 	ChartOfCharacteristicTypes.Add(Enums.Rights.EditDataHistoryVersionComment);
 	ChartOfCharacteristicTypes.Add(Enums.Rights.SwitchToDataHistoryVersion);
-	#EndRegion 
+#EndRegion
 	Settings.Insert(Enums.MetadataTypes.ChartOfCharacteristicTypes, ChartOfCharacteristicTypes);
 
-	#Region ExchangePlan
-	ExchangePlan = New Array;
+#Region ExchangePlan
+	ExchangePlan = New Array();
 	ExchangePlan.Add(Enums.Rights.Read);
 	ExchangePlan.Add(Enums.Rights.Insert);
 	ExchangePlan.Add(Enums.Rights.Update);
@@ -289,11 +286,11 @@ Function RolesSet() Export
 	ExchangePlan.Add(Enums.Rights.ViewDataHistory);
 	ExchangePlan.Add(Enums.Rights.EditDataHistoryVersionComment);
 	ExchangePlan.Add(Enums.Rights.SwitchToDataHistoryVersion);
-	#EndRegion 
+#EndRegion
 	Settings.Insert(Enums.MetadataTypes.ExchangePlan, ExchangePlan);
 
-	#Region ChartOfAccounts
-	ChartOfAccounts = New Array;
+#Region ChartOfAccounts
+	ChartOfAccounts = New Array();
 	ChartOfAccounts.Add(Enums.Rights.Read);
 	ChartOfAccounts.Add(Enums.Rights.Insert);
 	ChartOfAccounts.Add(Enums.Rights.Update);
@@ -319,53 +316,53 @@ Function RolesSet() Export
 	ChartOfAccounts.Add(Enums.Rights.ViewDataHistory);
 	ChartOfAccounts.Add(Enums.Rights.EditDataHistoryVersionComment);
 	ChartOfAccounts.Add(Enums.Rights.SwitchToDataHistoryVersion);
-	#EndRegion 
+#EndRegion
 	Settings.Insert(Enums.MetadataTypes.ChartOfAccounts, ChartOfAccounts);
 
-	#Region Subsystem
-	Subsystem = New Array;
+#Region Subsystem
+	Subsystem = New Array();
 	Subsystem.Add(Enums.Rights.View);
-	#EndRegion 
+#EndRegion
 	Settings.Insert(Enums.MetadataTypes.Subsystem, Subsystem);
 
-	#Region Sequence
-	Sequence = New Array;
+#Region Sequence
+	Sequence = New Array();
 	Sequence.Add(Enums.Rights.Read);
 	Sequence.Add(Enums.Rights.Update);
-	#EndRegion 
+#EndRegion
 	Settings.Insert(Enums.MetadataTypes.Sequence, Sequence);
 
-	#Region AccountingRegister
-	AccountingRegister = New Array;
+#Region AccountingRegister
+	AccountingRegister = New Array();
 	AccountingRegister.Add(Enums.Rights.Read);
 	AccountingRegister.Add(Enums.Rights.Update);
 	AccountingRegister.Add(Enums.Rights.View);
 	AccountingRegister.Add(Enums.Rights.Edit);
 	AccountingRegister.Add(Enums.Rights.TotalsControl);
-	#EndRegion 
+#EndRegion
 	Settings.Insert(Enums.MetadataTypes.AccountingRegister, AccountingRegister);
 
-	#Region AccumulationRegister
-	AccumulationRegister = New Array;
+#Region AccumulationRegister
+	AccumulationRegister = New Array();
 	AccumulationRegister.Add(Enums.Rights.Read);
 	AccumulationRegister.Add(Enums.Rights.Update);
 	AccumulationRegister.Add(Enums.Rights.View);
 	AccumulationRegister.Add(Enums.Rights.Edit);
 	AccumulationRegister.Add(Enums.Rights.TotalsControl);
-	#EndRegion 
+#EndRegion
 	Settings.Insert(Enums.MetadataTypes.AccumulationRegister, AccumulationRegister);
 
-	#Region CalculationRegister
-	CalculationRegister = New Array;
+#Region CalculationRegister
+	CalculationRegister = New Array();
 	CalculationRegister.Add(Enums.Rights.Read);
 	CalculationRegister.Add(Enums.Rights.Update);
 	CalculationRegister.Add(Enums.Rights.View);
 	CalculationRegister.Add(Enums.Rights.Edit);
-	#EndRegion 
+#EndRegion
 	Settings.Insert(Enums.MetadataTypes.CalculationRegister, CalculationRegister);
- 
-	#Region InformationRegister
-	InformationRegister = New Array;
+
+#Region InformationRegister
+	InformationRegister = New Array();
 	InformationRegister.Add(Enums.Rights.Read);
 	InformationRegister.Add(Enums.Rights.Update);
 	InformationRegister.Add(Enums.Rights.View);
@@ -380,11 +377,11 @@ Function RolesSet() Export
 	InformationRegister.Add(Enums.Rights.ViewDataHistory);
 	InformationRegister.Add(Enums.Rights.EditDataHistoryVersionComment);
 	InformationRegister.Add(Enums.Rights.SwitchToDataHistoryVersion);
-	#EndRegion 
+#EndRegion
 	Settings.Insert(Enums.MetadataTypes.InformationRegister, InformationRegister);
 
-	#Region Configuration
-	Configuration = New Array;
+#Region Configuration
+	Configuration = New Array();
 	Configuration.Add(Enums.Rights.Administration);
 	Configuration.Add(Enums.Rights.DataAdministration);
 	Configuration.Add(Enums.Rights.UpdateDataBaseConfiguration);
@@ -410,262 +407,262 @@ Function RolesSet() Export
 	Configuration.Add(Enums.Rights.InteractiveOpenExtDataProcessors);
 	Configuration.Add(Enums.Rights.InteractiveOpenExtReports);
 	Configuration.Add(Enums.Rights.Output);
-	#EndRegion 
+#EndRegion
 
-	#Region IntegrationService
-	IntegrationService = New Array;
+#Region IntegrationService
+	IntegrationService = New Array();
 	IntegrationService.Add(Enums.Rights.Use);
-	#EndRegion 
+#EndRegion
 	Settings.Insert(Enums.MetadataTypes.IntegrationService, IntegrationService);
-	
+
 	Return Settings;
 EndFunction
 
 Function MetaDataObject() Export
-	MetaDataObject = New Structure;
-	
-	AccumulationRegister = New Structure;
-	AccumulationRegister.Insert("AccumulationRegisterRecord"   , "Record"	);
-	AccumulationRegister.Insert("AccumulationRegisterManager"  , "Manager"	);
+	MetaDataObject = New Structure();
+
+	AccumulationRegister = New Structure();
+	AccumulationRegister.Insert("AccumulationRegisterRecord", "Record");
+	AccumulationRegister.Insert("AccumulationRegisterManager", "Manager");
 	AccumulationRegister.Insert("AccumulationRegisterSelection", "Selection");
-	AccumulationRegister.Insert("AccumulationRegisterList"	   , "List"		);
+	AccumulationRegister.Insert("AccumulationRegisterList", "List");
 	AccumulationRegister.Insert("AccumulationRegisterRecordSet", "RecordSet");
 	AccumulationRegister.Insert("AccumulationRegisterRecordKey", "RecordKey");
 	MetaDataObject.Insert("AccumulationRegister", AccumulationRegister);
-	
-	AccountingRegister = New Structure;
-	AccountingRegister.Insert("AccountingRegisterRecord"   		, "Record"		 );
-	AccountingRegister.Insert("AccountingRegisterExtDimensions" , "ExtDimensions");
-	AccountingRegister.Insert("AccountingRegisterRecordSet"		, "RecordSet"    );
-	AccountingRegister.Insert("AccountingRegisterRecordKey"		, "RecordKey"    );
-	AccountingRegister.Insert("AccountingRegisterSelection"		, "Selection"	 );
-	AccountingRegister.Insert("AccountingRegisterList"			, "List" 		 );
-	AccountingRegister.Insert("AccountingRegisterManager"		, "Manager"		 );
+
+	AccountingRegister = New Structure();
+	AccountingRegister.Insert("AccountingRegisterRecord", "Record");
+	AccountingRegister.Insert("AccountingRegisterExtDimensions", "ExtDimensions");
+	AccountingRegister.Insert("AccountingRegisterRecordSet", "RecordSet");
+	AccountingRegister.Insert("AccountingRegisterRecordKey", "RecordKey");
+	AccountingRegister.Insert("AccountingRegisterSelection", "Selection");
+	AccountingRegister.Insert("AccountingRegisterList", "List");
+	AccountingRegister.Insert("AccountingRegisterManager", "Manager");
 	MetaDataObject.Insert("AccountingRegister", AccountingRegister);
-	
-	BusinessProcess = New Structure;
-	BusinessProcess.Insert("BusinessProcessObject"   	 , "Object"		  );
-	BusinessProcess.Insert("BusinessProcessRef" 		 , "Ref"          );
-	BusinessProcess.Insert("BusinessProcessSelection"	 , "Selection"    );
-	BusinessProcess.Insert("BusinessProcessList"		 , "List"         );
-	BusinessProcess.Insert("BusinessProcessManager"		 , "Manager"	  );
+
+	BusinessProcess = New Structure();
+	BusinessProcess.Insert("BusinessProcessObject", "Object");
+	BusinessProcess.Insert("BusinessProcessRef", "Ref");
+	BusinessProcess.Insert("BusinessProcessSelection", "Selection");
+	BusinessProcess.Insert("BusinessProcessList", "List");
+	BusinessProcess.Insert("BusinessProcessManager", "Manager");
 	BusinessProcess.Insert("BusinessProcessRoutePointRef", "RoutePointRef");
 	MetaDataObject.Insert("BusinessProcess", BusinessProcess);
-	
-	CalculationRegister = New Structure;
-	CalculationRegister.Insert("CalculationRegisterRecord"   , "Record"   );
-	CalculationRegister.Insert("CalculationRegisterManager"  , "Manager"  );
+
+	CalculationRegister = New Structure();
+	CalculationRegister.Insert("CalculationRegisterRecord", "Record");
+	CalculationRegister.Insert("CalculationRegisterManager", "Manager");
 	CalculationRegister.Insert("CalculationRegisterSelection", "Selection");
-	CalculationRegister.Insert("CalculationRegisterList"	 , "List"	  );
+	CalculationRegister.Insert("CalculationRegisterList", "List");
 	CalculationRegister.Insert("CalculationRegisterRecordSet", "RecordSet");
 	CalculationRegister.Insert("CalculationRegisterRecordKey", "RecordKey");
-	CalculationRegister.Insert("RecalculationsManager"		 , "Recalcs"  );
+	CalculationRegister.Insert("RecalculationsManager", "Recalcs");
 	MetaDataObject.Insert("CalculationRegister", CalculationRegister);
-	
-	Catalog = New Structure;
-	Catalog.Insert("CatalogObject"   	 , "Object"	  );
-	Catalog.Insert("CatalogRef" 		 , "Ref"      );
-	Catalog.Insert("CatalogSelection"	 , "Selection");
-	Catalog.Insert("CatalogList"		 , "List"     );
-	Catalog.Insert("CatalogManager"		 , "Manager"  );
+
+	Catalog = New Structure();
+	Catalog.Insert("CatalogObject", "Object");
+	Catalog.Insert("CatalogRef", "Ref");
+	Catalog.Insert("CatalogSelection", "Selection");
+	Catalog.Insert("CatalogList", "List");
+	Catalog.Insert("CatalogManager", "Manager");
 	MetaDataObject.Insert("Catalog", Catalog);
-	
-	ChartOfAccounts = New Structure;
-	ChartOfAccounts.Insert("ChartOfAccountsObject"   			, "Object"   			);
-	ChartOfAccounts.Insert("ChartOfAccountsRef"  				, "Ref"  				);
-	ChartOfAccounts.Insert("ChartOfAccountsSelection"			, "Selection"			);
-	ChartOfAccounts.Insert("ChartOfAccountsList"	 			, "List"	  			);
-	ChartOfAccounts.Insert("ChartOfAccountsManager"				, "Manager"				);
-	ChartOfAccounts.Insert("ChartOfAccountsExtDimensionTypes"	, "ExtDimensionTypes"   );
+
+	ChartOfAccounts = New Structure();
+	ChartOfAccounts.Insert("ChartOfAccountsObject", "Object");
+	ChartOfAccounts.Insert("ChartOfAccountsRef", "Ref");
+	ChartOfAccounts.Insert("ChartOfAccountsSelection", "Selection");
+	ChartOfAccounts.Insert("ChartOfAccountsList", "List");
+	ChartOfAccounts.Insert("ChartOfAccountsManager", "Manager");
+	ChartOfAccounts.Insert("ChartOfAccountsExtDimensionTypes", "ExtDimensionTypes");
 	ChartOfAccounts.Insert("ChartOfAccountsExtDimensionTypesRow", "ExtDimensionTypesRow");
 	MetaDataObject.Insert("ChartOfAccounts", ChartOfAccounts);
-	
-	ChartOfCalculationTypes = New Structure;
-	ChartOfCalculationTypes.Insert("ChartOfCalculationTypesObject"   , "Object"   					  );
-	ChartOfCalculationTypes.Insert("ChartOfCalculationTypesRef"  	 , "Ref"  				 		  );
-	ChartOfCalculationTypes.Insert("ChartOfCalculationTypesSelection", "Selection"					  );
-	ChartOfCalculationTypes.Insert("ChartOfCalculationTypesList"	 , "List"	  			    	  );
-	ChartOfCalculationTypes.Insert("ChartOfCalculationTypesManager"	 , "Manager"					  );
-	ChartOfCalculationTypes.Insert("DisplacingCalculationTypes"		 , "DisplacingCalculationTypes"   );
-	ChartOfCalculationTypes.Insert("DisplacingCalculationTypesRow"	 , "DisplacingCalculationTypesRow");
-	ChartOfCalculationTypes.Insert("BaseCalculationTypes"	 		 , "BaseCalculationTypes"	  	  );
-	ChartOfCalculationTypes.Insert("BaseCalculationTypesRow"		 , "BaseCalculationTypesRow"	  );
-	ChartOfCalculationTypes.Insert("LeadingCalculationTypes"		 , "LeadingCalculationTypes"   	  );
-	ChartOfCalculationTypes.Insert("LeadingCalculationTypesRow"		 , "LeadingCalculationTypesRow"	  );
+
+	ChartOfCalculationTypes = New Structure();
+	ChartOfCalculationTypes.Insert("ChartOfCalculationTypesObject", "Object");
+	ChartOfCalculationTypes.Insert("ChartOfCalculationTypesRef", "Ref");
+	ChartOfCalculationTypes.Insert("ChartOfCalculationTypesSelection", "Selection");
+	ChartOfCalculationTypes.Insert("ChartOfCalculationTypesList", "List");
+	ChartOfCalculationTypes.Insert("ChartOfCalculationTypesManager", "Manager");
+	ChartOfCalculationTypes.Insert("DisplacingCalculationTypes", "DisplacingCalculationTypes");
+	ChartOfCalculationTypes.Insert("DisplacingCalculationTypesRow", "DisplacingCalculationTypesRow");
+	ChartOfCalculationTypes.Insert("BaseCalculationTypes", "BaseCalculationTypes");
+	ChartOfCalculationTypes.Insert("BaseCalculationTypesRow", "BaseCalculationTypesRow");
+	ChartOfCalculationTypes.Insert("LeadingCalculationTypes", "LeadingCalculationTypes");
+	ChartOfCalculationTypes.Insert("LeadingCalculationTypesRow", "LeadingCalculationTypesRow");
 	MetaDataObject.Insert("ChartOfCalculationTypes", ChartOfCalculationTypes);
-	
-	ChartOfCharacteristicTypes = New Structure;
-	ChartOfCharacteristicTypes.Insert("ChartOfCharacteristicTypesObject"   , "Object"   		);
-	ChartOfCharacteristicTypes.Insert("ChartOfCharacteristicTypesRef"  	   , "Ref"  			);
-	ChartOfCharacteristicTypes.Insert("ChartOfCharacteristicTypesSelection", "Selection"		);
-	ChartOfCharacteristicTypes.Insert("ChartOfCharacteristicTypesList"	   , "List"	  			);
-	ChartOfCharacteristicTypes.Insert("Characteristic"					   , "Characteristic"	);
-	ChartOfCharacteristicTypes.Insert("ChartOfCharacteristicTypesManager"  , "Manager"			);
+
+	ChartOfCharacteristicTypes = New Structure();
+	ChartOfCharacteristicTypes.Insert("ChartOfCharacteristicTypesObject", "Object");
+	ChartOfCharacteristicTypes.Insert("ChartOfCharacteristicTypesRef", "Ref");
+	ChartOfCharacteristicTypes.Insert("ChartOfCharacteristicTypesSelection", "Selection");
+	ChartOfCharacteristicTypes.Insert("ChartOfCharacteristicTypesList", "List");
+	ChartOfCharacteristicTypes.Insert("Characteristic", "Characteristic");
+	ChartOfCharacteristicTypes.Insert("ChartOfCharacteristicTypesManager", "Manager");
 	MetaDataObject.Insert("ChartOfCharacteristicTypes", ChartOfCharacteristicTypes);
-	
-	CommandGroup = New Structure;
+
+	CommandGroup = New Structure();
 	MetaDataObject.Insert("CommandGroup", CommandGroup);
-	
-	CommonAttribute = New Structure;
-	MetaDataObject.Insert("CommonAttribute", CommonAttribute);	
-	
-	CommonCommand = New Structure;
-	MetaDataObject.Insert("CommonCommand", CommonCommand);	
-	
-	CommonForm = New Structure;
+
+	CommonAttribute = New Structure();
+	MetaDataObject.Insert("CommonAttribute", CommonAttribute);
+
+	CommonCommand = New Structure();
+	MetaDataObject.Insert("CommonCommand", CommonCommand);
+
+	CommonForm = New Structure();
 	MetaDataObject.Insert("CommonForm", CommonForm);
-	
-	CommonModule = New Structure;
+
+	CommonModule = New Structure();
 	MetaDataObject.Insert("CommonModule", CommonModule);
-	
-	CommonPicture = New Structure;
-	MetaDataObject.Insert("CommonPicture", CommonPicture);	
-	
-	CommonTemplate = New Structure;
-	MetaDataObject.Insert("CommonTemplate", CommonTemplate);	
-	
-	Constant = New Structure;
-	Constant.Insert("ConstantManager"     , "Manager"     );
+
+	CommonPicture = New Structure();
+	MetaDataObject.Insert("CommonPicture", CommonPicture);
+
+	CommonTemplate = New Structure();
+	MetaDataObject.Insert("CommonTemplate", CommonTemplate);
+
+	Constant = New Structure();
+	Constant.Insert("ConstantManager", "Manager");
 	Constant.Insert("ConstantValueManager", "ValueManager");
-	Constant.Insert("ConstantValueKey"	  , "ValueKey"	  );
+	Constant.Insert("ConstantValueKey", "ValueKey");
 	MetaDataObject.Insert("Constant", Constant);
-	
-	DataProcessor = New Structure;
-	DataProcessor.Insert("DataProcessorObject" , "Object" );
+
+	DataProcessor = New Structure();
+	DataProcessor.Insert("DataProcessorObject", "Object");
 	DataProcessor.Insert("DataProcessorManager", "Manager");
 	MetaDataObject.Insert("DataProcessor", DataProcessor);
-	
-	DefinedType = New Structure;
-	DefinedType.Insert("DefinedType" , "DefinedType" );
+
+	DefinedType = New Structure();
+	DefinedType.Insert("DefinedType", "DefinedType");
 	MetaDataObject.Insert("DefinedType", DefinedType);
-	
-	DocumentJournal = New Structure;
+
+	DocumentJournal = New Structure();
 	DocumentJournal.Insert("DocumentJournalSelection", "Selection");
-	DocumentJournal.Insert("DocumentJournalList"	 , "List"	  );
-	DocumentJournal.Insert("DocumentJournalManager"	 , "Manager"  );
+	DocumentJournal.Insert("DocumentJournalList", "List");
+	DocumentJournal.Insert("DocumentJournalManager", "Manager");
 	MetaDataObject.Insert("DocumentJournal", DocumentJournal);
-	
-	DocumentNumerator = New Structure;
+
+	DocumentNumerator = New Structure();
 	MetaDataObject.Insert("DocumentNumerator", DocumentNumerator);
-	
-	Document = New Structure;
-	Document.Insert("DocumentObject"   , "Object"   );
-	Document.Insert("DocumentRef"  	   , "Ref"  	);
+
+	Document = New Structure();
+	Document.Insert("DocumentObject", "Object");
+	Document.Insert("DocumentRef", "Ref");
 	Document.Insert("DocumentSelection", "Selection");
-	Document.Insert("DocumentList"	   , "List"	  	);
-	Document.Insert("DocumentManager"  , "Manager"	);
+	Document.Insert("DocumentList", "List");
+	Document.Insert("DocumentManager", "Manager");
 	MetaDataObject.Insert("Document", Document);
-	
-	Enum = New Structure;
-	Enum.Insert("EnumRef"	 , "Ref"    );
+
+	Enum = New Structure();
+	Enum.Insert("EnumRef", "Ref");
 	Enum.Insert("EnumManager", "Manager");
-	Enum.Insert("EnumList"	 , "List"   );
+	Enum.Insert("EnumList", "List");
 	MetaDataObject.Insert("Enum", Enum);
-	
-	EventSubscription = New Structure;
+
+	EventSubscription = New Structure();
 	MetaDataObject.Insert("EventSubscription", EventSubscription);
-	
-	ExchangePlan = New Structure;
-	ExchangePlan.Insert("ExchangePlanObject"   , "Object"   );
-	ExchangePlan.Insert("ExchangePlanRef"  	   , "Ref"  	);
+
+	ExchangePlan = New Structure();
+	ExchangePlan.Insert("ExchangePlanObject", "Object");
+	ExchangePlan.Insert("ExchangePlanRef", "Ref");
 	ExchangePlan.Insert("ExchangePlanSelection", "Selection");
-	ExchangePlan.Insert("ExchangePlanList"	   , "List"	  	);
-	ExchangePlan.Insert("ExchangePlanManager"  , "Manager"	);
-	MetaDataObject.Insert("ExchangePlan", ExchangePlan);	
-	
-	ExternalDataSource = New Structure;
-	ExternalDataSource.Insert("ExternalDataSourceManager"      , "Manager"      );
+	ExchangePlan.Insert("ExchangePlanList", "List");
+	ExchangePlan.Insert("ExchangePlanManager", "Manager");
+	MetaDataObject.Insert("ExchangePlan", ExchangePlan);
+
+	ExternalDataSource = New Structure();
+	ExternalDataSource.Insert("ExternalDataSourceManager", "Manager");
 	ExternalDataSource.Insert("ExternalDataSourceTablesManager", "TablesManager");
-	ExternalDataSource.Insert("ExternalDataSourceCubesManager" , "CubesManager" );
+	ExternalDataSource.Insert("ExternalDataSourceCubesManager", "CubesManager");
 	MetaDataObject.Insert("ExternalDataSource", ExternalDataSource);
-	
-	FilterCriterion = New Structure;
+
+	FilterCriterion = New Structure();
 	FilterCriterion.Insert("FilterCriterionManager", "Manager");
-	FilterCriterion.Insert("FilterCriterionList"   , "List"	  );
+	FilterCriterion.Insert("FilterCriterionList", "List");
 	MetaDataObject.Insert("FilterCriterion", FilterCriterion);
-	
-	FunctionalOption = New Structure;
-	MetaDataObject.Insert("FunctionalOption", FunctionalOption);	
-	
-	FunctionalOptionsParameter = New Structure;
+
+	FunctionalOption = New Structure();
+	MetaDataObject.Insert("FunctionalOption", FunctionalOption);
+
+	FunctionalOptionsParameter = New Structure();
 	MetaDataObject.Insert("FunctionalOptionsParameter", FunctionalOptionsParameter);
-	
-	HTTPService = New Structure;
+
+	HTTPService = New Structure();
 	MetaDataObject.Insert("HTTPService", HTTPService);
-	
-	InformationRegister = New Structure;
-	InformationRegister.Insert("InformationRegisterRecord"   	 , "Record"   	  );
-	InformationRegister.Insert("InformationRegisterManager"  	 , "Manager"  	  );
-	InformationRegister.Insert("InformationRegisterSelection"	 , "Selection"	  );
-	InformationRegister.Insert("InformationRegisterList"	 	 , "List"	      );
-	InformationRegister.Insert("InformationRegisterRecordSet"	 , "RecordSet"	  );
-	InformationRegister.Insert("InformationRegisterRecordKey"	 , "RecordKey"	  );
+
+	InformationRegister = New Structure();
+	InformationRegister.Insert("InformationRegisterRecord", "Record");
+	InformationRegister.Insert("InformationRegisterManager", "Manager");
+	InformationRegister.Insert("InformationRegisterSelection", "Selection");
+	InformationRegister.Insert("InformationRegisterList", "List");
+	InformationRegister.Insert("InformationRegisterRecordSet", "RecordSet");
+	InformationRegister.Insert("InformationRegisterRecordKey", "RecordKey");
 	InformationRegister.Insert("InformationRegisterRecordManager", "RecordManager");
-	MetaDataObject.Insert("InformationRegister", InformationRegister);	
-	
-	Language = New Structure;
+	MetaDataObject.Insert("InformationRegister", InformationRegister);
+
+	Language = New Structure();
 	MetaDataObject.Insert("Language", Language);
-	
-	Report = New Structure;
-	Report.Insert("ReportObject" , "Object" );
+
+	Report = New Structure();
+	Report.Insert("ReportObject", "Object");
 	Report.Insert("ReportManager", "Manager");
 	MetaDataObject.Insert("Report", Report);
-	
-	Role = New Structure;
+
+	Role = New Structure();
 	MetaDataObject.Insert("Role", Role);
-	
-	ScheduledJob = New Structure;
-	MetaDataObject.Insert("ScheduledJob", ScheduledJob);	
-	
-	Sequence = New Structure;
-	Sequence.Insert("SequenceRecord"   	 , "Record"   );
-	Sequence.Insert("SequenceManager"  	 , "Manager"  );
-	Sequence.Insert("SequenceRecordSet"	 , "RecordSet");
-	MetaDataObject.Insert("Sequence", Sequence);	
-	
-	SessionParameter = New Structure;
+
+	ScheduledJob = New Structure();
+	MetaDataObject.Insert("ScheduledJob", ScheduledJob);
+
+	Sequence = New Structure();
+	Sequence.Insert("SequenceRecord", "Record");
+	Sequence.Insert("SequenceManager", "Manager");
+	Sequence.Insert("SequenceRecordSet", "RecordSet");
+	MetaDataObject.Insert("Sequence", Sequence);
+
+	SessionParameter = New Structure();
 	MetaDataObject.Insert("SessionParameter", SessionParameter);
-	
-	SettingsStorage = New Structure;
-	SettingsStorage.Insert("SettingsStorageManager"   	 , "Manager");
-	MetaDataObject.Insert("SettingsStorage", SettingsStorage);	
 
-	StyleItem = New Structure;
-	MetaDataObject.Insert("StyleItem", StyleItem);		
-	
-	Style = New Structure;
-	MetaDataObject.Insert("Style", Style);	
+	SettingsStorage = New Structure();
+	SettingsStorage.Insert("SettingsStorageManager", "Manager");
+	MetaDataObject.Insert("SettingsStorage", SettingsStorage);
 
-	Subsystem = New Structure;
+	StyleItem = New Structure();
+	MetaDataObject.Insert("StyleItem", StyleItem);
+
+	Style = New Structure();
+	MetaDataObject.Insert("Style", Style);
+
+	Subsystem = New Structure();
 	MetaDataObject.Insert("Subsystem", Subsystem);
-	
-	Task = New Structure;
-	Task.Insert("TaskObject"   , "Object"   );
-	Task.Insert("TaskRef"  	   , "Ref"  	);
+
+	Task = New Structure();
+	Task.Insert("TaskObject", "Object");
+	Task.Insert("TaskRef", "Ref");
 	Task.Insert("TaskSelection", "Selection");
-	Task.Insert("TaskList"	   , "List"	  	);
-	Task.Insert("TaskManager"  , "Manager"	);
-	MetaDataObject.Insert("Task", Task);	
-	
-	WebService = New Structure;
-	MetaDataObject.Insert("WebService", WebService);	
-	
-	Configuration = New Structure;
+	Task.Insert("TaskList", "List");
+	Task.Insert("TaskManager", "Manager");
+	MetaDataObject.Insert("Task", Task);
+
+	WebService = New Structure();
+	MetaDataObject.Insert("WebService", WebService);
+
+	Configuration = New Structure();
 	MetaDataObject.Insert("Configuration", Configuration);
-	
-	Interface = New Structure;
+
+	Interface = New Structure();
 	MetaDataObject.Insert("Interface", Interface);
-	
-	CatalogTabularSection = New Structure;
-	CatalogTabularSection.Insert("CatalogTabularSection"	, "TabularSection");
+
+	CatalogTabularSection = New Structure();
+	CatalogTabularSection.Insert("CatalogTabularSection", "TabularSection");
 	CatalogTabularSection.Insert("CatalogTabularSectionRow", "TabularSectionRow");
 	MetaDataObject.Insert("CatalogTabularSection", CatalogTabularSection);
-	
+
 	Return MetaDataObject;
 EndFunction
 
 Function MetaDataObjectNames() Export
-	Structure = New Map;
+	Structure = New Map();
 	Structure.Insert(Enums.MetadataTypes.AccountingRegister, "AccountingRegisters");
 	Structure.Insert(Enums.MetadataTypes.AccumulationRegister, "AccumulationRegisters");
 	Structure.Insert(Enums.MetadataTypes.BusinessProcess, "BusinessProcesses");
@@ -701,200 +698,200 @@ Function MetaDataObjectNames() Export
 EndFunction
 
 Function MetadataInfo() Export
-	
+
 	Structure = MetaDataObjectNames();
-	MetaStructure = New Map;
+	MetaStructure = New Map();
 	For Each Row In Structure Do
 		ValueList = New ValueList();
 		For Each Data In Metadata[Row.Value] Do
 			ValueList.Add(Data.Name, Data.Synonym);
 		EndDo;
-		MetaStructure.Insert(Row.Key, ValueList); 
+		MetaStructure.Insert(Row.Key, ValueList);
 	EndDo;
 	Return MetaStructure;
 EndFunction
 
 Function hasAttributes(MetaName) Export
-	Array = New Array;
-	Array.Add(Enums.MetadataTypes.Catalog);	
-    Array.Add(Enums.MetadataTypes.Document);
-    Array.Add(Enums.MetadataTypes.Task);
-    Array.Add(Enums.MetadataTypes.DataProcessor);
-    Array.Add(Enums.MetadataTypes.Report);
-    Array.Add(Enums.MetadataTypes.ChartOfCalculationTypes);
-    Array.Add(Enums.MetadataTypes.ChartOfCharacteristicTypes);
-    Array.Add(Enums.MetadataTypes.ExchangePlan);
-    Array.Add(Enums.MetadataTypes.ChartOfAccounts);
-    Array.Add(Enums.MetadataTypes.AccountingRegister);
-    Array.Add(Enums.MetadataTypes.AccumulationRegister);
-    Array.Add(Enums.MetadataTypes.CalculationRegister);
-    Array.Add(Enums.MetadataTypes.InformationRegister);
-    Array.Add(Enums.MetadataTypes.BusinessProcess);
+	Array = New Array();
+	Array.Add(Enums.MetadataTypes.Catalog);
+	Array.Add(Enums.MetadataTypes.Document);
+	Array.Add(Enums.MetadataTypes.Task);
+	Array.Add(Enums.MetadataTypes.DataProcessor);
+	Array.Add(Enums.MetadataTypes.Report);
+	Array.Add(Enums.MetadataTypes.ChartOfCalculationTypes);
+	Array.Add(Enums.MetadataTypes.ChartOfCharacteristicTypes);
+	Array.Add(Enums.MetadataTypes.ExchangePlan);
+	Array.Add(Enums.MetadataTypes.ChartOfAccounts);
+	Array.Add(Enums.MetadataTypes.AccountingRegister);
+	Array.Add(Enums.MetadataTypes.AccumulationRegister);
+	Array.Add(Enums.MetadataTypes.CalculationRegister);
+	Array.Add(Enums.MetadataTypes.InformationRegister);
+	Array.Add(Enums.MetadataTypes.BusinessProcess);
 
-	Return NOT Array.Find(MetaName) = Undefined;
+	Return Not Array.Find(MetaName) = Undefined;
 EndFunction
 
 Function hasCommands(MetaName) Export
-	Array = New Array;
-    Array.Add(Enums.MetadataTypes.BusinessProcess);
-    Array.Add(Enums.MetadataTypes.Catalog);
-    Array.Add(Enums.MetadataTypes.Document);
-    Array.Add(Enums.MetadataTypes.DocumentJournal);
-    Array.Add(Enums.MetadataTypes.Task);
-    Array.Add(Enums.MetadataTypes.FilterCriterion);
-    Array.Add(Enums.MetadataTypes.DataProcessor);
-    Array.Add(Enums.MetadataTypes.Report);
-    Array.Add(Enums.MetadataTypes.ChartOfCalculationTypes);
-    Array.Add(Enums.MetadataTypes.ChartOfCharacteristicTypes);
-    Array.Add(Enums.MetadataTypes.ExchangePlan);
-    Array.Add(Enums.MetadataTypes.ChartOfAccounts);
-    Array.Add(Enums.MetadataTypes.AccountingRegister);
-    Array.Add(Enums.MetadataTypes.AccumulationRegister);
-    Array.Add(Enums.MetadataTypes.CalculationRegister);
-    Array.Add(Enums.MetadataTypes.InformationRegister);
+	Array = New Array();
+	Array.Add(Enums.MetadataTypes.BusinessProcess);
+	Array.Add(Enums.MetadataTypes.Catalog);
+	Array.Add(Enums.MetadataTypes.Document);
+	Array.Add(Enums.MetadataTypes.DocumentJournal);
+	Array.Add(Enums.MetadataTypes.Task);
+	Array.Add(Enums.MetadataTypes.FilterCriterion);
+	Array.Add(Enums.MetadataTypes.DataProcessor);
+	Array.Add(Enums.MetadataTypes.Report);
+	Array.Add(Enums.MetadataTypes.ChartOfCalculationTypes);
+	Array.Add(Enums.MetadataTypes.ChartOfCharacteristicTypes);
+	Array.Add(Enums.MetadataTypes.ExchangePlan);
+	Array.Add(Enums.MetadataTypes.ChartOfAccounts);
+	Array.Add(Enums.MetadataTypes.AccountingRegister);
+	Array.Add(Enums.MetadataTypes.AccumulationRegister);
+	Array.Add(Enums.MetadataTypes.CalculationRegister);
+	Array.Add(Enums.MetadataTypes.InformationRegister);
 	Array.Add(Enums.MetadataSubtype.Table);
 	Array.Add(Enums.MetadataSubtype.DimensionTable);
 	Array.Add(Enums.MetadataSubtype.Cube);
-	Return NOT Array.Find(MetaName) = Undefined;
+	Return Not Array.Find(MetaName) = Undefined;
 EndFunction
 
 Function hasDimensions(MetaName) Export
-	Array = New Array;
-    Array.Add(Enums.MetadataTypes.AccountingRegister);
-    Array.Add(Enums.MetadataTypes.AccumulationRegister);
-    Array.Add(Enums.MetadataTypes.CalculationRegister);
-    Array.Add(Enums.MetadataTypes.InformationRegister);
-    Array.Add(Enums.MetadataTypes.Sequence);	
+	Array = New Array();
+	Array.Add(Enums.MetadataTypes.AccountingRegister);
+	Array.Add(Enums.MetadataTypes.AccumulationRegister);
+	Array.Add(Enums.MetadataTypes.CalculationRegister);
+	Array.Add(Enums.MetadataTypes.InformationRegister);
+	Array.Add(Enums.MetadataTypes.Sequence);
 	Array.Add(Enums.MetadataSubtype.Cube);
 
-	Return NOT Array.Find(MetaName) = Undefined;
+	Return Not Array.Find(MetaName) = Undefined;
 EndFunction
 
 Function hasResources(MetaName) Export
-	Array = New Array;
+	Array = New Array();
 	Array.Add(Enums.MetadataTypes.AccumulationRegister);
-    Array.Add(Enums.MetadataTypes.CalculationRegister);
-    Array.Add(Enums.MetadataTypes.InformationRegister);
-    Array.Add(Enums.MetadataTypes.AccountingRegister);
+	Array.Add(Enums.MetadataTypes.CalculationRegister);
+	Array.Add(Enums.MetadataTypes.InformationRegister);
+	Array.Add(Enums.MetadataTypes.AccountingRegister);
 	Array.Add(Enums.MetadataSubtype.Cube);
 
-	Return NOT Array.Find(MetaName) = Undefined;
+	Return Not Array.Find(MetaName) = Undefined;
 EndFunction
- 
+
 Function hasStandardAttributes(MetaName) Export
-	Array = New Array;
-    Array.Add(Enums.MetadataTypes.Catalog);
-    Array.Add(Enums.MetadataTypes.Document);
-    Array.Add(Enums.MetadataTypes.DocumentJournal);
-    Array.Add(Enums.MetadataTypes.Task);
-    Array.Add(Enums.MetadataTypes.ChartOfCalculationTypes);
-    Array.Add(Enums.MetadataTypes.ChartOfCharacteristicTypes);
-    Array.Add(Enums.MetadataTypes.ExchangePlan);
-    Array.Add(Enums.MetadataTypes.ChartOfAccounts);
-    Array.Add(Enums.MetadataTypes.AccountingRegister);
-    Array.Add(Enums.MetadataTypes.AccumulationRegister);
-    Array.Add(Enums.MetadataTypes.CalculationRegister);
-    Array.Add(Enums.MetadataTypes.InformationRegister);
-    Array.Add(Enums.MetadataTypes.BusinessProcess);	
-	Return NOT Array.Find(MetaName) = Undefined;
+	Array = New Array();
+	Array.Add(Enums.MetadataTypes.Catalog);
+	Array.Add(Enums.MetadataTypes.Document);
+	Array.Add(Enums.MetadataTypes.DocumentJournal);
+	Array.Add(Enums.MetadataTypes.Task);
+	Array.Add(Enums.MetadataTypes.ChartOfCalculationTypes);
+	Array.Add(Enums.MetadataTypes.ChartOfCharacteristicTypes);
+	Array.Add(Enums.MetadataTypes.ExchangePlan);
+	Array.Add(Enums.MetadataTypes.ChartOfAccounts);
+	Array.Add(Enums.MetadataTypes.AccountingRegister);
+	Array.Add(Enums.MetadataTypes.AccumulationRegister);
+	Array.Add(Enums.MetadataTypes.CalculationRegister);
+	Array.Add(Enums.MetadataTypes.InformationRegister);
+	Array.Add(Enums.MetadataTypes.BusinessProcess);
+	Return Not Array.Find(MetaName) = Undefined;
 EndFunction
 
 Function hasTabularSections(MetaName) Export
-	Array = New Array;
+	Array = New Array();
 	Array.Add(Enums.MetadataTypes.Catalog);
-    Array.Add(Enums.MetadataTypes.Document);
-    Array.Add(Enums.MetadataTypes.Task);
-    Array.Add(Enums.MetadataTypes.DataProcessor);
-    Array.Add(Enums.MetadataTypes.Report);
-    Array.Add(Enums.MetadataTypes.ChartOfCalculationTypes);
-    Array.Add(Enums.MetadataTypes.ChartOfCharacteristicTypes);
-    Array.Add(Enums.MetadataTypes.ExchangePlan);
-    Array.Add(Enums.MetadataTypes.ChartOfAccounts);
-    Array.Add(Enums.MetadataTypes.BusinessProcess);
-	Return NOT Array.Find(MetaName) = Undefined;
+	Array.Add(Enums.MetadataTypes.Document);
+	Array.Add(Enums.MetadataTypes.Task);
+	Array.Add(Enums.MetadataTypes.DataProcessor);
+	Array.Add(Enums.MetadataTypes.Report);
+	Array.Add(Enums.MetadataTypes.ChartOfCalculationTypes);
+	Array.Add(Enums.MetadataTypes.ChartOfCharacteristicTypes);
+	Array.Add(Enums.MetadataTypes.ExchangePlan);
+	Array.Add(Enums.MetadataTypes.ChartOfAccounts);
+	Array.Add(Enums.MetadataTypes.BusinessProcess);
+	Return Not Array.Find(MetaName) = Undefined;
 EndFunction
 
 Function hasRecalculations(MetaName) Export
-	Array = New Array;
-    Array.Add(Enums.MetadataTypes.CalculationRegister);	
-	Return NOT Array.Find(MetaName) = Undefined;
+	Array = New Array();
+	Array.Add(Enums.MetadataTypes.CalculationRegister);
+	Return Not Array.Find(MetaName) = Undefined;
 EndFunction
 
 Function hasAccountingFlags(MetaName) Export
-	Array = New Array;
-    Array.Add(Enums.MetadataTypes.ChartOfAccounts);	
-	Return NOT Array.Find(MetaName) = Undefined;
+	Array = New Array();
+	Array.Add(Enums.MetadataTypes.ChartOfAccounts);
+	Return Not Array.Find(MetaName) = Undefined;
 EndFunction
 
 Function hasExtDimensionAccountingFlags(MetaName) Export
-	Array = New Array;
-    Array.Add(Enums.MetadataTypes.ChartOfAccounts);	
-	Return NOT Array.Find(MetaName) = Undefined;
+	Array = New Array();
+	Array.Add(Enums.MetadataTypes.ChartOfAccounts);
+	Return Not Array.Find(MetaName) = Undefined;
 EndFunction
 
 Function hasStandardTabularSections(MetaName) Export
-	Array = New Array;
+	Array = New Array();
 	Array.Add(Enums.MetadataTypes.ChartOfCalculationTypes);
-	Return NOT Array.Find(MetaName) = Undefined;
+	Return Not Array.Find(MetaName) = Undefined;
 EndFunction
 
 Function hasAddressingAttributes(MetaName) Export
-	Array = New Array;
-    Array.Add(Enums.MetadataTypes.Task);	
-	Return NOT Array.Find(MetaName) = Undefined;
+	Array = New Array();
+	Array.Add(Enums.MetadataTypes.Task);
+	Return Not Array.Find(MetaName) = Undefined;
 EndFunction
 
 Function hasURLTemplates(MetaName) Export
-	Array = New Array;
-    Array.Add(Enums.MetadataTypes.HTTPService);	
-	Return NOT Array.Find(MetaName) = Undefined;
+	Array = New Array();
+	Array.Add(Enums.MetadataTypes.HTTPService);
+	Return Not Array.Find(MetaName) = Undefined;
 EndFunction
 
 Function hasCubes(MetaName) Export
-	Array = New Array;
-    Array.Add(Enums.MetadataTypes.ExternalDataSource);	
-	Return NOT Array.Find(MetaName) = Undefined;
+	Array = New Array();
+	Array.Add(Enums.MetadataTypes.ExternalDataSource);
+	Return Not Array.Find(MetaName) = Undefined;
 EndFunction
 
 Function hasTables(MetaName) Export
-	Array = New Array;
-    Array.Add(Enums.MetadataTypes.ExternalDataSource);	
-	Return NOT Array.Find(MetaName) = Undefined;
+	Array = New Array();
+	Array.Add(Enums.MetadataTypes.ExternalDataSource);
+	Return Not Array.Find(MetaName) = Undefined;
 EndFunction
 
 Function hasFields(MetaName) Export
-	Array = New Array;
-    Array.Add(Enums.MetadataSubtype.Table);
+	Array = New Array();
+	Array.Add(Enums.MetadataSubtype.Table);
 	Array.Add(Enums.MetadataSubtype.DimensionTable);
-	Return NOT Array.Find(MetaName) = Undefined;
+	Return Not Array.Find(MetaName) = Undefined;
 EndFunction
 
 Function hasDimensionTables(MetaName) Export
-	Array = New Array;
-    Array.Add(Enums.MetadataSubtype.Cube);	
-	Return NOT Array.Find(MetaName) = Undefined;
+	Array = New Array();
+	Array.Add(Enums.MetadataSubtype.Cube);
+	Return Not Array.Find(MetaName) = Undefined;
 EndFunction
 
 Function hasFunctions(MetaName) Export
-	Array = New Array;
-    Array.Add(Enums.MetadataTypes.ExternalDataSource);	
-	Return NOT Array.Find(MetaName) = Undefined;
+	Array = New Array();
+	Array.Add(Enums.MetadataTypes.ExternalDataSource);
+	Return Not Array.Find(MetaName) = Undefined;
 EndFunction
 
 Function hasOperations(MetaName) Export
-	Array = New Array;
-    Array.Add(Enums.MetadataTypes.WebService);	
-	Return NOT Array.Find(MetaName) = Undefined;
+	Array = New Array();
+	Array.Add(Enums.MetadataTypes.WebService);
+	Return Not Array.Find(MetaName) = Undefined;
 EndFunction
 
 Function isSubsystem(MetaName) Export
-	Array = New Array;
-    Array.Add(Enums.MetadataTypes.Subsystem);	
-	Return NOT Array.Find(MetaName) = Undefined;
+	Array = New Array();
+	Array.Add(Enums.MetadataTypes.Subsystem);
+	Return Not Array.Find(MetaName) = Undefined;
 EndFunction
 
 Function hasOnlyProperties(RefData) Export
-	Array = New Array;
+	Array = New Array();
 	Array.Add(Enums.MetadataSubtype.Attribute);
 	Array.Add(Enums.MetadataSubtype.Dimension);
 	Array.Add(Enums.MetadataSubtype.Resource);
@@ -902,12 +899,12 @@ Function hasOnlyProperties(RefData) Export
 	Array.Add(Enums.MetadataSubtype.AccountingFlag);
 	Array.Add(Enums.MetadataSubtype.ExtDimensionAccountingFlag);
 	Array.Add(Enums.MetadataSubtype.AddressingAttribute);
-	
-	Return NOT Array.Find(RefData) = Undefined;
+
+	Return Not Array.Find(RefData) = Undefined;
 EndFunction
 
 Function hasNoChildObjects(RefData) Export
-	Array = New Array;
+	Array = New Array();
 	Array.Add(Enums.MetadataTypes.SessionParameter);
 	Array.Add(Enums.MetadataTypes.CommonCommand);
 	Array.Add(Enums.MetadataTypes.CommonAttribute);
@@ -915,18 +912,18 @@ Function hasNoChildObjects(RefData) Export
 	Array.Add(Enums.MetadataTypes.Constant);
 	Array.Add(Enums.MetadataTypes.Language);
 	Array.Add(Enums.MetadataTypes.Interface);
-	Return NOT Array.Find(RefData) = Undefined;
+	Return Not Array.Find(RefData) = Undefined;
 EndFunction
 
 Function hasNoInternalInfo(RefData) Export
-	Array = New Array;
+	Array = New Array();
 	Array.Add(Enums.MetadataTypes.CommonCommand);
 	Array.Add(Enums.MetadataTypes.Subsystem);
 	Array.Add(Enums.MetadataTypes.SessionParameter);
 	Array.Add(Enums.MetadataTypes.CommonAttribute);
 	Array.Add(Enums.MetadataTypes.CommonForm);
 	Array.Add(Enums.MetadataTypes.Language);
-	Return NOT Array.Find(RefData) = Undefined;
+	Return Not Array.Find(RefData) = Undefined;
 EndFunction
 
 Function EnumNameByRef(RefData) Export

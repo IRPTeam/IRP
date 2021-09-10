@@ -1,7 +1,7 @@
 Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	If DataExchange.Load Then
 		Return;
-	EndIf;	
+	EndIf;
 
 	ThisObject.DocumentAmount = CalculationServer.CalculateDocumentAmount(ItemList);
 EndProcedure
@@ -9,17 +9,17 @@ EndProcedure
 Procedure OnWrite(Cancel)
 	If DataExchange.Load Then
 		Return;
-	EndIf;	
+	EndIf;
 EndProcedure
 
 Procedure BeforeDelete(Cancel)
 	If DataExchange.Load Then
 		Return;
-	EndIf;		
+	EndIf;
 EndProcedure
 
 Procedure FillCheckProcessing(Cancel, CheckedAttributes)
-	
+
 	If Not IsNew() And Modified() Then
 		ClosingOrder = DocSalesOrderServer.GetLastSalesOrderClosingBySalesOrder(Ref);
 		If Not ClosingOrder.IsEmpty() Then
@@ -27,11 +27,11 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 			CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().InfoMessage_022, ClosingOrder));
 		EndIf;
 	EndIf;
-	
+
 	If DocumentsServer.CheckItemListStores(ThisObject) Then
 		Cancel = True;
 	EndIf;
-			
+
 	For RowIndex = 0 To (ThisObject.ItemList.Count() - 1) Do
 		Row = ThisObject.ItemList[RowIndex];
 		If Not ValueIsFilled(Row.ProcurementMethod) And Row.ItemKey.Item.ItemType.Type = Enums.ItemTypes.Product Then
@@ -40,7 +40,7 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 				+ "].ProcurementMethod", "Object.ItemList");
 			Cancel = True;
 		EndIf;
-		
+
 		If Row.Cancel And Row.CancelReason.IsEmpty() Then
 			CommonFunctionsClientServer.ShowUsersMessage(R().Error_093, "Object.ItemList[" + RowIndex
 				+ "].CancelReason", "Object.ItemList");

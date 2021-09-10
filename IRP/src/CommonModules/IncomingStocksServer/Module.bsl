@@ -40,11 +40,11 @@ Procedure ClosureIncomingStocks(Parameters) Export
 	Parameters.Object.RegisterRecords.R4036B_IncomingStocksRequested.LockForUpdate = True;
 	Parameters.Object.RegisterRecords.R4036B_IncomingStocksRequested.Clear();
 	Parameters.Object.RegisterRecords.R4036B_IncomingStocksRequested.Write();
-	
+
 	Parameters.Object.RegisterRecords.R4035B_IncomingStocks.LockForUpdate = True;
 	Parameters.Object.RegisterRecords.R4035B_IncomingStocks.Clear();
 	Parameters.Object.RegisterRecords.R4035B_IncomingStocks.Write();
-		
+
 	If Not Parameters.ConsiderStocksRequested Then
 		IncomingStocks = GetIncomingStocks_NotConsiderStocksRequested(Parameters);
 		IncomingStocksRequested = GetIncomingStocksRequested_NotConsiderStocksRequested(Parameters);
@@ -52,12 +52,12 @@ Procedure ClosureIncomingStocks(Parameters) Export
 		IncomingStocks = GetIncomingStocks_ConsiderStocksRequested(Parameters);
 		IncomingStocksRequested = GetIncomingStocksRequested_ConsiderStocksRequested(Parameters);
 	EndIf;
-	
+
 	Query = New Query();
 	Query.TempTablesManager = Parameters.TempTablesManager;
 	Query.SetParameter("IncomingStocks", IncomingStocks);
 	Query.SetParameter("IncomingStocksRequested", IncomingStocksRequested);
-	Query.Text = 
+	Query.Text =
 	"SELECT
 	|	VALUE(AccumulationRecordType.Expense) AS RecordType,
 	|	tmp.Period,
@@ -107,7 +107,7 @@ EndProcedure
 Procedure ClosureIncomingStocks_Unposting(Parameters) Export
 	Query = New Query();
 	Query.TempTablesManager = Parameters.TempTablesManager;
-	Query.Text = 
+	Query.Text =
 	"SELECT
 	|	Table.Period,
 	|	Table.Store,
@@ -154,7 +154,7 @@ EndProcedure
 Function GetIncomingStocks_NotConsiderStocksRequested(Parameters)
 	Query = New Query();
 	Query.TempTablesManager = Parameters.TempTablesManager;
-	Query.Text = 	
+	Query.Text =
 	"SELECT
 	|	IncomingStocksReal.Period,
 	|	R4035B_IncomingStocksBalance.Store,
@@ -364,13 +364,13 @@ Function GetIncomingStocksRequested_ConsiderStocksRequested(Parameters)
 	|	R4036B_IncomingStocksRequested.Order,
 	|	R4036B_IncomingStocksRequested.Requester,
 	|	R4036B_IncomingStocksRequested.Requester.Date";
-	
+
 	QueryResults = Query.ExecuteBatch();
 	IncomingStocks = QueryResults[0].Unload();
 	IncomingStocksRequested = QueryResults[1].Unload();
 
 	IncomingStocksRequested.Sort("RequesterDate");
-	
+
 	For Each Row In IncomingStocks Do
 		Filter = New Structure("IncomingStore, ItemKey, Order");
 		FillPropertyValues(Filter, Row);
@@ -385,6 +385,6 @@ Function GetIncomingStocksRequested_ConsiderStocksRequested(Parameters)
 			ItemOfArray.Quantity = CanWriteOff;
 		EndDo;
 	EndDo;
-	
+
 	Return IncomingStocksRequested;
 EndFunction

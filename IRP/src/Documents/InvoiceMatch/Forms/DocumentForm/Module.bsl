@@ -34,25 +34,25 @@ EndProcedure
 &AtClient
 Procedure OnOpen(Cancel)
 	DocInvoiceMatchClient.OnOpen(Object, ThisObject, Cancel);
-	
+
 	FillDebtAndAmount();
 EndProcedure
 
 &AtServer
 Procedure SetConditionalAppearance() Export
 	ConditionalAppearance.Items.Clear();
-	
+
 	AppearanceElement = ConditionalAppearance.Items.Add();
-	
+
 	FieldElement = AppearanceElement.Fields.Items.Add();
 	FieldElement.Field = New DataCompositionField(Items.TransactionsLegalName.Name);
-	
+
 	FilterElement = AppearanceElement.Filter.Items.Add(Type("DataCompositionFilterItem"));
 	FilterElement.LeftValue = New DataCompositionField("Object.Transactions.Partner");
 	FilterElement.ComparisonType = DataCompositionComparisonType.NotFilled;
-	
+
 	AppearanceElement.Appearance.SetParameterValue("Enabled", False);
-	
+
 EndProcedure
 
 #EndRegion
@@ -68,16 +68,16 @@ EndProcedure
 Procedure SetVisibility()
 	IsAp = False;
 	IsAr = False;
-	
+
 	IsAp = Object.OperationType = Enums.InvoiceMatchOperationsTypes.WithVendor;
 	IsAr = Object.OperationType = Enums.InvoiceMatchOperationsTypes.WithCustomer;
-	
+
 	Items.PartnerApTransactionsBasisDocument.Visible = IsAp;
 	Items.PartnerArTransactionsBasisDocument.Visible = IsAr;
-	
+
 	Items.TransactionsPartnerApTransactionsBasisDocument.Visible = IsAp;
 	Items.TransactionsPartnerArTransactionsBasisDocument.Visible = IsAr;
-	
+
 	Items.AdvancesPaymentDocument.Visible = IsAp;
 	Items.AdvancesReceiptDocument.Visible = IsAr;
 EndProcedure
@@ -122,7 +122,7 @@ Procedure FillByBasisDocument()
 		EndIf;
 		FillDebtAndAmount();
 	EndIf;
-	
+
 	If Object.OperationType = Enums.InvoiceMatchOperationsTypes.WithCustomer Then
 		If ValueIsFilled(Object.PartnerArTransactionsBasisDocument) Then
 			Object.Currency = Object.PartnerArTransactionsBasisDocument.Currency;
@@ -142,54 +142,52 @@ EndProcedure
 &AtServer
 Function GetApDebtByDocument(Object)
 	ReturnValue = 0;
-	
-	QueryDebt = New Query;
+
+	QueryDebt = New Query();
 	QueryDebt.Text = "SELECT ALLOWED
-	|	PartnerApTransactionsBalance.BasisDocument,
-	|	PartnerApTransactionsBalance.AmountBalance
-	|FROM
-	|	AccumulationRegister.PartnerApTransactions.Balance(&EndPeriod, BasisDocument = &BasisDocument
-	|	AND CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)) AS
-	|		PartnerApTransactionsBalance";
-	QueryDebt.SetParameter("EndPeriod", ?(ValueIsFilled(Object.Ref),
-			New Boundary(Object.Date, BoundaryType.Excluding),
-			Undefined));
+					 |	PartnerApTransactionsBalance.BasisDocument,
+					 |	PartnerApTransactionsBalance.AmountBalance
+					 |FROM
+					 |	AccumulationRegister.PartnerApTransactions.Balance(&EndPeriod, BasisDocument = &BasisDocument
+					 |	AND CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)) AS
+					 |		PartnerApTransactionsBalance";
+	QueryDebt.SetParameter("EndPeriod", ?(ValueIsFilled(Object.Ref), New Boundary(Object.Date, BoundaryType.Excluding),
+		Undefined));
 	QueryDebt.SetParameter("BasisDocument", Object.PartnerApTransactionsBasisDocument);
 	QueryExecute = QueryDebt.Execute();
-	
+
 	If Not QueryExecute.IsEmpty() Then
 		QuerySelection = QueryExecute.Select();
 		QuerySelection.Next();
 		ReturnValue = QuerySelection.AmountBalance;
 	EndIf;
-	
+
 	Return ReturnValue;
 EndFunction
 
 &AtServer
 Function GetArDebtByDocument(Object)
 	ReturnValue = 0;
-	
-	QueryDebt = New Query;
+
+	QueryDebt = New Query();
 	QueryDebt.Text = "SELECT ALLOWED
-	|	PartnerApTransactionsBalance.BasisDocument,
-	|	PartnerApTransactionsBalance.AmountBalance
-	|FROM
-	|	AccumulationRegister.PartnerArTransactions.Balance(&EndPeriod, BasisDocument = &BasisDocument
-	|	AND CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)) AS
-	|		PartnerApTransactionsBalance";
-	QueryDebt.SetParameter("EndPeriod", ?(ValueIsFilled(Object.Ref),
-			New Boundary(Object.Date, BoundaryType.Excluding),
-			Undefined));
+					 |	PartnerApTransactionsBalance.BasisDocument,
+					 |	PartnerApTransactionsBalance.AmountBalance
+					 |FROM
+					 |	AccumulationRegister.PartnerArTransactions.Balance(&EndPeriod, BasisDocument = &BasisDocument
+					 |	AND CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)) AS
+					 |		PartnerApTransactionsBalance";
+	QueryDebt.SetParameter("EndPeriod", ?(ValueIsFilled(Object.Ref), New Boundary(Object.Date, BoundaryType.Excluding),
+		Undefined));
 	QueryDebt.SetParameter("BasisDocument", Object.PartnerArTransactionsBasisDocument);
 	QueryExecute = QueryDebt.Execute();
-	
+
 	If Not QueryExecute.IsEmpty() Then
 		QuerySelection = QueryExecute.Select();
 		QuerySelection.Next();
 		ReturnValue = QuerySelection.AmountBalance;
 	EndIf;
-	
+
 	Return ReturnValue;
 EndFunction
 
@@ -214,26 +212,24 @@ Procedure FillAdvancesAtServer()
 	Else
 		Raise R().Error_044;
 	EndIf;
-	
-	Query.SetParameter("Period", ?(ValueIsFilled(Object.Ref),
-			New Boundary(Object.Date, BoundaryType.Excluding),
-			Undefined));
+
+	Query.SetParameter("Period", ?(ValueIsFilled(Object.Ref), New Boundary(Object.Date, BoundaryType.Excluding),
+		Undefined));
 	Query.SetParameter("LegalName", Object.LegalName);
 	Query.SetParameter("Company", Object.Company);
-	
+
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
 	Object.Advances.Clear();
 	While QuerySelection.Next() Do
 		NewRow = Object.Advances.Add();
 		FillPropertyValues(NewRow, QuerySelection);
-		
-		CurrencyInfo = 
-		Catalogs.Currencies.GetCurrencyInfo(Object.Date, Object.Currency, NewRow.Currency);
-		
+
+		CurrencyInfo = Catalogs.Currencies.GetCurrencyInfo(Object.Date, Object.Currency, NewRow.Currency);
+
 		NewRow.CurrencyRate = CurrencyInfo.Rate;
 		NewRow.CurrencyMultiplicity = CurrencyInfo.Multiplicity;
-		
+
 		If NewRow.CurrencyMultiplicity = 0 Then
 			NewRow.ClosingAmount = 0;
 		Else
@@ -244,42 +240,40 @@ EndProcedure
 
 &AtServer
 Function GetQueryTextByAdvanceToSuppliers()
-	Return
-	"SELECT
-	|	AdvanceToSuppliersBalance.Company AS Company,
-	|	AdvanceToSuppliersBalance.Partner AS Partner,
-	|	AdvanceToSuppliersBalance.Partner AS DocumentPartner,
-	|	AdvanceToSuppliersBalance.LegalName AS LegalName,
-	|	AdvanceToSuppliersBalance.Currency AS Currency,
-	|	AdvanceToSuppliersBalance.PaymentDocument AS PaymentDocument,
-	|	AdvanceToSuppliersBalance.AmountBalance AS Amount
-	|FROM
-	|	AccumulationRegister.AdvanceToSuppliers.Balance(&Period, Company = &Company
-	|	AND LegalName = &LegalName
-	|	AND CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)) AS
-	|		AdvanceToSuppliersBalance
-	|ORDER BY
-	|	AdvanceToSuppliersBalance.PaymentDocument.Date";
+	Return "SELECT
+		   |	AdvanceToSuppliersBalance.Company AS Company,
+		   |	AdvanceToSuppliersBalance.Partner AS Partner,
+		   |	AdvanceToSuppliersBalance.Partner AS DocumentPartner,
+		   |	AdvanceToSuppliersBalance.LegalName AS LegalName,
+		   |	AdvanceToSuppliersBalance.Currency AS Currency,
+		   |	AdvanceToSuppliersBalance.PaymentDocument AS PaymentDocument,
+		   |	AdvanceToSuppliersBalance.AmountBalance AS Amount
+		   |FROM
+		   |	AccumulationRegister.AdvanceToSuppliers.Balance(&Period, Company = &Company
+		   |	AND LegalName = &LegalName
+		   |	AND CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)) AS
+		   |		AdvanceToSuppliersBalance
+		   |ORDER BY
+		   |	AdvanceToSuppliersBalance.PaymentDocument.Date";
 EndFunction
 
 &AtServer
 Function GetQueryTextByAdvanceFromCustomers()
-	Return
-	"SELECT
-	|	AdvanceFromCustomersBalance.Company AS Company,
-	|	AdvanceFromCustomersBalance.Partner AS Partner,
-	|	AdvanceFromCustomersBalance.Partner AS DocumentPartner,
-	|	AdvanceFromCustomersBalance.LegalName AS LegalName,
-	|	AdvanceFromCustomersBalance.Currency AS Currency,
-	|	AdvanceFromCustomersBalance.ReceiptDocument AS ReceiptDocument,
-	|	AdvanceFromCustomersBalance.AmountBalance AS Amount
-	|FROM
-	|	AccumulationRegister.AdvanceFromCustomers.Balance(&Period, Company = &Company
-	|	AND LegalName = &LegalName
-	|	AND CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)) AS
-	|		AdvanceFromCustomersBalance
-	|ORDER BY
-	|	AdvanceFromCustomersBalance.ReceiptDocument.Date";
+	Return "SELECT
+		   |	AdvanceFromCustomersBalance.Company AS Company,
+		   |	AdvanceFromCustomersBalance.Partner AS Partner,
+		   |	AdvanceFromCustomersBalance.Partner AS DocumentPartner,
+		   |	AdvanceFromCustomersBalance.LegalName AS LegalName,
+		   |	AdvanceFromCustomersBalance.Currency AS Currency,
+		   |	AdvanceFromCustomersBalance.ReceiptDocument AS ReceiptDocument,
+		   |	AdvanceFromCustomersBalance.AmountBalance AS Amount
+		   |FROM
+		   |	AccumulationRegister.AdvanceFromCustomers.Balance(&Period, Company = &Company
+		   |	AND LegalName = &LegalName
+		   |	AND CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)) AS
+		   |		AdvanceFromCustomersBalance
+		   |ORDER BY
+		   |	AdvanceFromCustomersBalance.ReceiptDocument.Date";
 EndFunction
 
 #Region ItemCompany
@@ -366,15 +360,15 @@ EndProcedure
 Procedure FillDebtAndAmount()
 	ThisObject.PartnerTransactionsBasisDocumentDebt = 0;
 	ThisObject.PartnerTransactionsBasisDocumentAmount = 0;
-	
-	If Object.OperationType = Enums.InvoiceMatchOperationsTypes.WithVendor
-		And ValueIsFilled(Object.PartnerApTransactionsBasisDocument) Then
+
+	If Object.OperationType = Enums.InvoiceMatchOperationsTypes.WithVendor And ValueIsFilled(
+		Object.PartnerApTransactionsBasisDocument) Then
 		ThisObject.PartnerTransactionsBasisDocumentDebt = GetApDebtByDocument(Object);
 		ThisObject.PartnerTransactionsBasisDocumentAmount = Object.PartnerApTransactionsBasisDocument.DocumentAmount;
 	EndIf;
-	
-	If Object.OperationType = Enums.InvoiceMatchOperationsTypes.WithCustomer
-		And ValueIsFilled(Object.PartnerArTransactionsBasisDocument) Then
+
+	If Object.OperationType = Enums.InvoiceMatchOperationsTypes.WithCustomer And ValueIsFilled(
+		Object.PartnerArTransactionsBasisDocument) Then
 		ThisObject.PartnerTransactionsBasisDocumentDebt = GetArDebtByDocument(Object);
 		ThisObject.PartnerTransactionsBasisDocumentAmount = Object.PartnerArTransactionsBasisDocument.DocumentAmount;
 	EndIf;
@@ -414,20 +408,10 @@ EndProcedure
 Procedure CurrencyOnChangeAtServer()
 	Object.Currencies.Clear();
 	For Each Row In Object.Transactions Do
-		CurrenciesServer.FillCurrencyTable(Object, 
-	                                       Object.Date, 
-	                                       Object.Company, 
-	                                       Row.Currency, 
-	                                       Row.Key,
-	                                       Row.Agreement);
+		CurrenciesServer.FillCurrencyTable(Object, Object.Date, Object.Company, Row.Currency, Row.Key, Row.Agreement);
 	EndDo;
 	For Each Row In Object.Advances Do
-		CurrenciesServer.FillCurrencyTable(Object, 
-	                                       Object.Date, 
-	                                       Object.Company, 
-	                                       Row.Currency, 
-	                                       Row.Key,
-	                                       Undefined);
+		CurrenciesServer.FillCurrencyTable(Object, Object.Date, Object.Company, Row.Currency, Row.Key, Undefined);
 	EndDo;
 EndProcedure
 
@@ -452,7 +436,7 @@ EndProcedure
 &AtClient
 Procedure GeneratedFormCommandActionByName(Command) Export
 	ExternalCommandsClient.GeneratedFormCommandActionByName(Object, ThisObject, Command.Name);
-	GeneratedFormCommandActionByNameServer(Command.Name);	
+	GeneratedFormCommandActionByNameServer(Command.Name);
 EndProcedure
 
 &AtServer

@@ -37,7 +37,7 @@ Procedure TaxTreeManualAmountOnChange(Item)
 	If CurrentData = Undefined Then
 		Return;
 	EndIf;
-	Filter = New Structure;
+	Filter = New Structure();
 	Filter.Insert("Key", CurrentData.Key);
 	Filter.Insert("Tax", CurrentData.Tax);
 	Filter.Insert("TaxRate", CurrentData.TaxRate);
@@ -48,9 +48,9 @@ Procedure TaxTreeManualAmountOnChange(Item)
 	For Each ItemOfTaxRows In ArrayOfTaxRows Do
 		ItemOfTaxRows.ManualAmount = CurrentData.ManualAmount;
 	EndDo;
-	
+
 	CreateTaxTree();
-	
+
 	TaxesClient.ExpandTaxTree(ThisObject.Items.TaxTree, ThisObject.TaxTree.GetItems());
 	ThisObject.Items.TaxTree.CurrentRow = TaxesClient.FindRowInTree(Filter, ThisObject.TaxTree);
 EndProcedure
@@ -67,7 +67,7 @@ EndProcedure
 
 &AtServer
 Procedure CreateTaxTree()
-	MainTable = New ValueTable;
+	MainTable = New ValueTable();
 	MainTable.Columns.Add("Key", New TypeDescription(Metadata.DefinedTypes.typeRowID.Type));
 	MainTable.Columns.Add("Currency", New TypeDescription("CatalogRef.Currencies"));
 
@@ -75,7 +75,7 @@ Procedure CreateTaxTree()
 	NewRowMainTable.Key      = ThisObject.MainTableKey;
 	NewRowMainTable.Currency = ThisObject.MainTableCurrency;
 
-	Query = New Query;
+	Query = New Query();
 	Query.Text =
 	"SELECT *
 	|INTO MainTable
@@ -152,7 +152,7 @@ Procedure CreateTaxTree()
 				FillPropertyValues(NewRow2, Row1);
 				FillPropertyValues(NewRow2, Row2);
 				NewRow2.RowPresentation = StrTemplate("%1", Row2.Analytics);
-	
+
 				NewRow2.Level = 2;
 			EndIf;
 		EndDo;

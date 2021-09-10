@@ -1,4 +1,3 @@
-
 #Region Public
 
 //
@@ -10,11 +9,11 @@ EndFunction
 
 //
 Function GetUniqueID() Export
-	#If WebClient Then
-		ComputerName = "WebClient";
-	#Else 
+#If WebClient Then
+	ComputerName = "WebClient";
+#Else
 		ComputerName = ComputerName();
-	#EndIf
+#EndIf
 	ReturnValue = ComputerName;
 	Return ReturnValue;
 EndFunction

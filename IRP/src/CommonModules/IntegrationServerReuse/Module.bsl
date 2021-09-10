@@ -1,12 +1,11 @@
-
 Function GetIntegrationSettings(IntegrationSettingName, AddInfo = Undefined) Export
-		
+
 	If TypeOf(IntegrationSettingName) = Type("String") Then
 		IntegrationSettingsRef = UniqueID.UniqueIDByName(Metadata.Catalogs.IntegrationSettings, IntegrationSettingName);
 	Else
 		IntegrationSettingsRef = IntegrationSettingName;
 	EndIf;
-	
+
 	CustomizedSetting = New Structure();
 	For Each Str In IntegrationSettingsRef.ConnectionSetting Do
 		If ValueIsFilled(Str.Value) Then
@@ -18,7 +17,7 @@ Function GetIntegrationSettings(IntegrationSettingName, AddInfo = Undefined) Exp
 	Result.Insert("IntegrationType", IntegrationSettingsRef.IntegrationType);
 	Result.Insert("CustomizedSetting", CustomizedSetting);
 	Return Result;
-EndFunction	
+EndFunction
 
 Function ConnectionSettingTemplate(IntegrationType = Undefined, AddInfo = Undefined) Export
 	ConnectionSetting = New Structure();
@@ -57,15 +56,15 @@ Function ExtensionCall_ConnectionSettingTemplate(IntegrationType, ConnectionSett
 EndFunction
 
 Function InfoRegSettingsStructure() Export
-	Query = New Query;
+	Query = New Query();
 	Query.Text =
-		"SELECT TOP 1
-		|	*
-		|FROM
-		|	InformationRegister.IntegrationInfo AS IntegrationInfo
-		|WHERE
-		|	FALSE";
-	
+	"SELECT TOP 1
+	|	*
+	|FROM
+	|	InformationRegister.IntegrationInfo AS IntegrationInfo
+	|WHERE
+	|	FALSE";
+
 	Return Query.Execute().Unload();
-	
+
 EndFunction

@@ -15,7 +15,7 @@ Procedure IconClick(Item, StandardProcessing)
 		QueryText = R().QuestionToUser_016;
 		QueryButtons = New ValueList();
 		QueryButtons.Add("Change", R().Form_017);
-		QueryButtons.Add("Clear" , R().Form_018);
+		QueryButtons.Add("Clear", R().Form_018);
 		QueryButtons.Add("Cancel", R().Form_019);
 		ShowQueryBox(Notify, QueryText, QueryButtons);
 	Else
@@ -60,18 +60,18 @@ Procedure IconOnClickEnd(Result, AdditionalParameters) Export
 	Else
 		Icon = "";
 		Object.isIconSet = False;
-	EndIf;	
+	EndIf;
 EndProcedure
 
 &AtClient
 Procedure SelectFileEnd(Files, AdditionalParameters) Export
-    If Files = Undefined Then
-        Return;
-    EndIf;
-	
+	If Files = Undefined Then
+		Return;
+	EndIf;
+
 	BD = New BinaryData(Files[0].FullName);
 	BDScaled = PictureViewerServer.ScalePicture(BD, 16);
 	Icon = PutToTempStorage(BDScaled, UUID);
 	Object.isIconSet = True;
-	
+
 EndProcedure

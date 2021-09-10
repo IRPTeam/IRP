@@ -7,16 +7,16 @@ Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 		Form.CurrentAgreement  = Object.Agreement;
 		Form.CurrentDate       = Object.Date;
 		Form.StoreBeforeChange = Form.Store;
-		
+
 		DocumentsClientServer.FillDefinedData(Object, Form);
-		
+
 		SetGroupItemsList(Object, Form);
 		DocumentsServer.FillItemList(Object);
-		
+
 		ObjectData = DocumentsClientServer.GetStructureFillStores();
 		FillPropertyValues(ObjectData, Object);
 		DocumentsClientServer.FillStores(ObjectData, Form);
-		
+
 		DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 	EndIf;
 	Form.Taxes_CreateFormControls();
@@ -27,13 +27,13 @@ Procedure AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters) Expor
 	Form.CurrentPartner   = CurrentObject.Partner;
 	Form.CurrentAgreement = CurrentObject.Agreement;
 	Form.CurrentDate      = CurrentObject.Date;
-	
+
 	DocumentsServer.FillItemList(Object);
-	
+
 	ObjectData = DocumentsClientServer.GetStructureFillStores();
 	FillPropertyValues(ObjectData, CurrentObject);
 	DocumentsClientServer.FillStores(ObjectData, Form);
-	
+
 	DocumentsClientServer.ChangeTitleGroupTitle(CurrentObject, Form);
 	CurrenciesServer.UpdateRatePresentation(Object);
 	CurrenciesServer.SetVisibleCurrenciesRow(Object, Undefined, True);
@@ -44,13 +44,13 @@ Procedure OnReadAtServer(Object, Form, CurrentObject) Export
 	Form.CurrentPartner   = CurrentObject.Partner;
 	Form.CurrentAgreement = CurrentObject.Agreement;
 	Form.CurrentDate      = CurrentObject.Date;
-		
+
 	DocumentsServer.FillItemList(Object);
-	
+
 	ObjectData = DocumentsClientServer.GetStructureFillStores();
 	FillPropertyValues(ObjectData, CurrentObject);
 	DocumentsClientServer.FillStores(ObjectData, Form);
-	
+
 	If Not Form.GroupItems.Count() Then
 		SetGroupItemsList(Object, Form);
 	EndIf;
@@ -65,7 +65,7 @@ EndProcedure
 #Region GroupTitle
 
 Procedure SetGroupItemsList(Object, Form)
-	AttributesArray = New Array;
+	AttributesArray = New Array();
 	AttributesArray.Add("Company");
 	AttributesArray.Add("Partner");
 	AttributesArray.Add("LegalName");
@@ -73,9 +73,8 @@ Procedure SetGroupItemsList(Object, Form)
 	AttributesArray.Add("LegalNameContract");
 	DocumentsServer.DeleteUnavailableTitleItemNames(AttributesArray);
 	For Each Atr In AttributesArray Do
-		Form.GroupItems.Add(Atr, ?(ValueIsFilled(Form.Items[Atr].Title),
-				Form.Items[Atr].Title,
-				Object.Ref.Metadata().Attributes[Atr].Synonym + ":" + Chars.NBSp));
+		Form.GroupItems.Add(Atr, ?(ValueIsFilled(Form.Items[Atr].Title), Form.Items[Atr].Title,
+			Object.Ref.Metadata().Attributes[Atr].Synonym + ":" + Chars.NBSp));
 	EndDo;
 EndProcedure
 

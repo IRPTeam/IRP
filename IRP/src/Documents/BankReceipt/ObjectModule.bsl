@@ -2,14 +2,14 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	If DataExchange.Load Then
 		Return;
 	EndIf;
-	
+
 	ThisObject.DocumentAmount = ThisObject.PaymentList.Total("Amount");
 EndProcedure
 
 Procedure OnWrite(Cancel)
 	If DataExchange.Load Then
 		Return;
-	EndIf;	
+	EndIf;
 EndProcedure
 
 Procedure BeforeDelete(Cancel)
@@ -32,11 +32,11 @@ Procedure UndoPosting(Cancel)
 EndProcedure
 
 Procedure Filling(FillingData, FillingText, StandardProcessing)
-	
+
 	If FillingData = Undefined Then
 		Return;
 	EndIf;
-	
+
 	If TypeOf(FillingData) = Type("Structure") Then
 		If FillingData.Property("BasedOn") And FillingData.BasedOn = "CashTransferOrder" Then
 			Filling_BasedOn(FillingData);

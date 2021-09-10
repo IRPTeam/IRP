@@ -23,7 +23,7 @@ EndFunction
 
 Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 #Region NewRegisterPosting
-	Tables = Parameters.DocumentDataTables;	
+	Tables = Parameters.DocumentDataTables;
 	QueryArray = GetQueryTextsMasterTables();
 	PostingServer.SetRegisters(Tables, Ref);
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
@@ -78,7 +78,7 @@ EndProcedure
 #Region NewRegistersPosting
 
 Function GetInformationAboutMovements(Ref) Export
-	Str = New Structure;
+	Str = New Structure();
 	Str.Insert("QueryParameters", GetAdditionalQueryParamenters(Ref));
 	Str.Insert("QueryTextsMasterTables", GetQueryTextsMasterTables());
 	Str.Insert("QueryTextsSecondaryTables", GetQueryTextsSecondaryTables());
@@ -98,154 +98,145 @@ Function GetAdditionalQueryParamenters(Ref)
 EndFunction
 
 Function GetQueryTextsSecondaryTables()
-	QueryArray = New Array;
+	QueryArray = New Array();
 	QueryArray.Add(ItemList());
 	Return QueryArray;
 EndFunction
 
 Function GetQueryTextsMasterTables()
-	QueryArray = New Array;
+	QueryArray = New Array();
 	QueryArray.Add(R1010T_PurchaseOrders());
 	QueryArray.Add(R1011B_PurchaseOrdersReceipt());
 	QueryArray.Add(R1012B_PurchaseOrdersInvoiceClosing());
 	QueryArray.Add(R1014T_CanceledPurchaseOrders());
 	QueryArray.Add(R4033B_GoodsReceiptSchedule());
 	QueryArray.Add(R4035B_IncomingStocks());
-	Return QueryArray;	
-EndFunction	
+	Return QueryArray;
+EndFunction
 
 Function ItemList()
-	Return
-		"SELECT
-		|	PurchaseOrderItems.Ref.Company AS Company,
-		|	PurchaseOrderItems.Store AS Store,
-		|	PurchaseOrderItems.Store.UseGoodsReceipt AS UseGoodsReceipt,
-		|	PurchaseOrderItems.Ref.GoodsReceiptBeforePurchaseInvoice AS GoodsReceiptBeforePurchaseInvoice,
-		|	PurchaseOrderItems.Ref.PurchaseOrder AS Order,
-		|	PurchaseOrderItems.PurchaseBasis AS PurchaseBasis,
-		|	PurchaseOrderItems.ItemKey.Item AS Item,
-		|	PurchaseOrderItems.ItemKey AS ItemKey,
-		|	PurchaseOrderItems.Quantity AS UnitQuantity,
-		|	PurchaseOrderItems.QuantityInBaseUnit AS Quantity,
-		|	PurchaseOrderItems.Unit,
-		|	PurchaseOrderItems.Ref.Date AS Period,
-		|	PurchaseOrderItems.Key AS RowKey,
-		|	PurchaseOrderItems.ProfitLossCenter AS ProfitLossCenter,
-		|	PurchaseOrderItems.ExpenseType AS ExpenseType,
-		|	PurchaseOrderItems.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS IsService,
-		|	PurchaseOrderItems.DeliveryDate AS DeliveryDate,
-		|	PurchaseOrderItems.InternalSupplyRequest AS InternalSupplyRequest,
-		|	PurchaseOrderItems.SalesOrder AS SalesOrder,
-		|	PurchaseOrderItems.Cancel AS IsCanceled,
-		|	PurchaseOrderItems.CancelReason,
-		|	PurchaseOrderItems.TotalAmount AS Amount,
-		|	PurchaseOrderItems.NetAmount,
-		|	PurchaseOrderItems.Ref.UseItemsReceiptScheduling AS UseItemsReceiptScheduling,
-		|	PurchaseOrderItems.PurchaseBasis REFS Document.SalesOrder
-		|	AND NOT PurchaseOrderItems.PurchaseBasis.REF IS NULL AS UseSalesOrder,
-		|	PurchaseOrderItems.OffersAmount,
-		|	PurchaseOrderItems.Ref.Currency AS Currency,
-		|	PurchaseOrderItems.Ref.Branch AS Branch
-		|INTO ItemList
-		|FROM
-		|	Document.PurchaseOrderClosing.ItemList AS PurchaseOrderItems
-		|WHERE
-		|	PurchaseOrderItems.Ref = &Ref";
+	Return "SELECT
+		   |	PurchaseOrderItems.Ref.Company AS Company,
+		   |	PurchaseOrderItems.Store AS Store,
+		   |	PurchaseOrderItems.Store.UseGoodsReceipt AS UseGoodsReceipt,
+		   |	PurchaseOrderItems.Ref.GoodsReceiptBeforePurchaseInvoice AS GoodsReceiptBeforePurchaseInvoice,
+		   |	PurchaseOrderItems.Ref.PurchaseOrder AS Order,
+		   |	PurchaseOrderItems.PurchaseBasis AS PurchaseBasis,
+		   |	PurchaseOrderItems.ItemKey.Item AS Item,
+		   |	PurchaseOrderItems.ItemKey AS ItemKey,
+		   |	PurchaseOrderItems.Quantity AS UnitQuantity,
+		   |	PurchaseOrderItems.QuantityInBaseUnit AS Quantity,
+		   |	PurchaseOrderItems.Unit,
+		   |	PurchaseOrderItems.Ref.Date AS Period,
+		   |	PurchaseOrderItems.Key AS RowKey,
+		   |	PurchaseOrderItems.ProfitLossCenter AS ProfitLossCenter,
+		   |	PurchaseOrderItems.ExpenseType AS ExpenseType,
+		   |	PurchaseOrderItems.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS IsService,
+		   |	PurchaseOrderItems.DeliveryDate AS DeliveryDate,
+		   |	PurchaseOrderItems.InternalSupplyRequest AS InternalSupplyRequest,
+		   |	PurchaseOrderItems.SalesOrder AS SalesOrder,
+		   |	PurchaseOrderItems.Cancel AS IsCanceled,
+		   |	PurchaseOrderItems.CancelReason,
+		   |	PurchaseOrderItems.TotalAmount AS Amount,
+		   |	PurchaseOrderItems.NetAmount,
+		   |	PurchaseOrderItems.Ref.UseItemsReceiptScheduling AS UseItemsReceiptScheduling,
+		   |	PurchaseOrderItems.PurchaseBasis REFS Document.SalesOrder
+		   |	AND NOT PurchaseOrderItems.PurchaseBasis.REF IS NULL AS UseSalesOrder,
+		   |	PurchaseOrderItems.OffersAmount,
+		   |	PurchaseOrderItems.Ref.Currency AS Currency,
+		   |	PurchaseOrderItems.Ref.Branch AS Branch
+		   |INTO ItemList
+		   |FROM
+		   |	Document.PurchaseOrderClosing.ItemList AS PurchaseOrderItems
+		   |WHERE
+		   |	PurchaseOrderItems.Ref = &Ref";
 EndFunction
 
 Function R1010T_PurchaseOrders()
-	Return
-		"SELECT 
-		|	- QueryTable.Quantity AS Quantity,
-		|	- QueryTable.OffersAmount AS OffersAmount,
-		|	- QueryTable.NetAmount AS NetAmount,
-		|	- QueryTable.Amount AS Amount,
-		|	*
-		|INTO R1010T_PurchaseOrders
-		|FROM
-		|	ItemList AS QueryTable
-		|WHERE QueryTable.isCanceled
-		|
-		|UNION ALL
-		|
-		|SELECT 
-		|	QueryTable.Quantity AS Quantity,
-		|	QueryTable.OffersAmount AS OffersAmount,
-		|	QueryTable.NetAmount AS NetAmount,
-		|	QueryTable.Amount AS Amount,
-		|	*
-		|FROM
-		|	ItemList AS QueryTable
-		|WHERE NOT QueryTable.isCanceled";
+	Return "SELECT 
+		   |	- QueryTable.Quantity AS Quantity,
+		   |	- QueryTable.OffersAmount AS OffersAmount,
+		   |	- QueryTable.NetAmount AS NetAmount,
+		   |	- QueryTable.Amount AS Amount,
+		   |	*
+		   |INTO R1010T_PurchaseOrders
+		   |FROM
+		   |	ItemList AS QueryTable
+		   |WHERE QueryTable.isCanceled
+		   |
+		   |UNION ALL
+		   |
+		   |SELECT 
+		   |	QueryTable.Quantity AS Quantity,
+		   |	QueryTable.OffersAmount AS OffersAmount,
+		   |	QueryTable.NetAmount AS NetAmount,
+		   |	QueryTable.Amount AS Amount,
+		   |	*
+		   |FROM
+		   |	ItemList AS QueryTable
+		   |WHERE NOT QueryTable.isCanceled";
 
 EndFunction
 
 Function R1011B_PurchaseOrdersReceipt()
-	Return
-		"SELECT
-		|	&Period AS Period,
-		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		|	-Balance.QuantityBalance AS Quantity,
-		|	*
-		|INTO R1011B_PurchaseOrdersReceipt
-		|FROM
-		|	AccumulationRegister.R1011B_PurchaseOrdersReceipt.Balance(&BalancePeriod, Order = &PurchaseOrder) AS Balance";
-
-
+	Return "SELECT
+		   |	&Period AS Period,
+		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		   |	-Balance.QuantityBalance AS Quantity,
+		   |	*
+		   |INTO R1011B_PurchaseOrdersReceipt
+		   |FROM
+		   |	AccumulationRegister.R1011B_PurchaseOrdersReceipt.Balance(&BalancePeriod, Order = &PurchaseOrder) AS Balance";
 EndFunction
 
 Function R1012B_PurchaseOrdersInvoiceClosing()
-	Return
-		"SELECT
-		|	&Period AS Period,
-		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		|	-PurchaseOrdersInvoiceClosing.QuantityBalance AS Quantity,
-		|	-PurchaseOrdersInvoiceClosing.AmountBalance AS Amount,
-		|	-PurchaseOrdersInvoiceClosing.NetAmountBalance AS NetAmount,
-		|	*
-		|INTO R1012B_PurchaseOrdersInvoiceClosing
-		|FROM
-		|	AccumulationRegister.R1012B_PurchaseOrdersInvoiceClosing.Balance(&BalancePeriod, Order = &PurchaseOrder) AS
-		|		PurchaseOrdersInvoiceClosing";
+	Return "SELECT
+		   |	&Period AS Period,
+		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		   |	-PurchaseOrdersInvoiceClosing.QuantityBalance AS Quantity,
+		   |	-PurchaseOrdersInvoiceClosing.AmountBalance AS Amount,
+		   |	-PurchaseOrdersInvoiceClosing.NetAmountBalance AS NetAmount,
+		   |	*
+		   |INTO R1012B_PurchaseOrdersInvoiceClosing
+		   |FROM
+		   |	AccumulationRegister.R1012B_PurchaseOrdersInvoiceClosing.Balance(&BalancePeriod, Order = &PurchaseOrder) AS
+		   |		PurchaseOrdersInvoiceClosing";
 
 EndFunction
 
 Function R1014T_CanceledPurchaseOrders()
-	Return
-		"SELECT *
-		|INTO R1014T_CanceledPurchaseOrders
-		|FROM
-		|	ItemList AS QueryTable
-		|WHERE QueryTable.isCanceled";
+	Return "SELECT *
+		   |INTO R1014T_CanceledPurchaseOrders
+		   |FROM
+		   |	ItemList AS QueryTable
+		   |WHERE QueryTable.isCanceled";
 
 EndFunction
 
 Function R4033B_GoodsReceiptSchedule()
-	Return
-		"SELECT 
-		|	&Period AS Period,
-		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		|	-IncomingStocks.QuantityBalance AS Quantity,
-		|	*
-		|
-		|INTO R4033B_GoodsReceiptSchedule
-		|FROM
-		|	AccumulationRegister.R4033B_GoodsReceiptSchedule.Balance(&BalancePeriod, Basis = &PurchaseOrder) AS
-		|		IncomingStocks";
+	Return "SELECT 
+		   |	&Period AS Period,
+		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		   |	-IncomingStocks.QuantityBalance AS Quantity,
+		   |	*
+		   |
+		   |INTO R4033B_GoodsReceiptSchedule
+		   |FROM
+		   |	AccumulationRegister.R4033B_GoodsReceiptSchedule.Balance(&BalancePeriod, Basis = &PurchaseOrder) AS
+		   |		IncomingStocks";
 
 EndFunction
 
 Function R4035B_IncomingStocks()
-	Return
-		"SELECT
-		|	&Period AS Period,
-		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		|	-IncomingStocks.QuantityBalance AS Quantity,
-		|	*
-		|INTO R4035B_IncomingStocks
-		|FROM
-		|	AccumulationRegister.R4035B_IncomingStocks.Balance(&BalancePeriod, Order = &PurchaseOrder) AS
-		|		IncomingStocks";
+	Return "SELECT
+		   |	&Period AS Period,
+		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		   |	-IncomingStocks.QuantityBalance AS Quantity,
+		   |	*
+		   |INTO R4035B_IncomingStocks
+		   |FROM
+		   |	AccumulationRegister.R4035B_IncomingStocks.Balance(&BalancePeriod, Order = &PurchaseOrder) AS
+		   |		IncomingStocks";
 
 EndFunction
 #EndRegion

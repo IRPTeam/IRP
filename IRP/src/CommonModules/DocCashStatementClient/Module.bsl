@@ -1,11 +1,11 @@
 #Region FormEvents
 
 Procedure OnOpen(Object, Form, Cancel, AddInfo = Undefined) Export
-	
+
 	DocumentsClient.SetTextOfDescriptionAtForm(Object, Form);
-	
+
 	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
-	
+
 	Form.DataPeriod.StartDate = Object.BegOfPeriod;
 	Form.DataPeriod.EndDate = Object.EndOfPeriod;
 EndProcedure
@@ -15,9 +15,9 @@ EndProcedure
 #Region ItemFormEvents
 
 Procedure DataPeriodOnChange(Object, Period, AddInfo = Undefined) Export
-	
+
 	Object.BegOfPeriod = Period.StartDate;
-	Object.EndOfPeriod = Period.EndDate;	
+	Object.EndOfPeriod = Period.EndDate;
 
 EndProcedure
 
@@ -83,4 +83,3 @@ Procedure DecorationGroupTitleUncollapsedLabelClick(Object, Form, Item) Export
 EndProcedure
 
 #EndRegion
-

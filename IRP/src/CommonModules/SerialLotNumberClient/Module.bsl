@@ -1,4 +1,3 @@
-
 Procedure PresentationStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, AddInfo = Undefined) Export
 	StandardProcessing = False;
 	CurrentData = Form.Items.ItemList.CurrentData;
@@ -6,9 +5,9 @@ Procedure PresentationStartChoice(Object, Form, Item, ChoiceData, StandardProces
 		Return;
 	EndIf;
 
-	Notify = New NotifyDescription("OnFinishEditSerialLotNumbers", ThisObject, 
-							New Structure("Object, Form, AddInfo", Object, Form, AddInfo));
-	OpeningParameters = New Structure;
+	Notify = New NotifyDescription("OnFinishEditSerialLotNumbers", ThisObject, New Structure("Object, Form, AddInfo",
+		Object, Form, AddInfo));
+	OpeningParameters = New Structure();
 	OpeningParameters.Insert("Item", CurrentData.Item);
 	OpeningParameters.Insert("ItemKey", CurrentData.ItemKey);
 	OpeningParameters.Insert("RowKey", CurrentData.Key);
@@ -18,10 +17,10 @@ Procedure PresentationStartChoice(Object, Form, Item, ChoiceData, StandardProces
 	For Each Row In ArrayOfSelectedSerialLotNumbers Do
 		OpeningParameters.SerialLotNumbers.Add(
 		New Structure("SerialLotNumber, Quantity", Row.SerialLotNumber, Row.Quantity));
-	EndDo;	
-	
-	OpenForm("Catalog.SerialLotNumbers.Form.EditListOfSerialLotNumbers", OpeningParameters, ThisObject, , , , 
-		Notify, FormWindowOpeningMode.LockOwnerWindow);
+	EndDo;
+
+	OpenForm("Catalog.SerialLotNumbers.Form.EditListOfSerialLotNumbers", OpeningParameters, ThisObject, , , , Notify,
+		FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
 
 Procedure AddNewSerialLotNumbers(Result, Parameters, AddNewLot = False, AddInfo = Undefined) Export
@@ -80,10 +79,10 @@ Procedure UpdateSerialLotNumbersPresentation(Object, AddInfo = Undefined) Export
 		If ServerData = Undefined Then
 			RowItemList.UseSerialLotNumber = SerialLotNumbersServer.IsItemKeyWithSerialLotNumbers(RowItemList.ItemKey);
 		Else
-			RowItemList.UseSerialLotNumber = 
-			ServerData.ItemKeysWithSerialLotNumbers.Find(RowItemList.ItemKey) <> Undefined;
+			RowItemList.UseSerialLotNumber = ServerData.ItemKeysWithSerialLotNumbers.Find(RowItemList.ItemKey)
+				<> Undefined;
 		EndIf;
-			
+
 	EndDo;
 EndProcedure
 
@@ -98,7 +97,7 @@ Procedure UpdateSerialLotNumbersTree(Object, Form) Export
 			NewRow0.Item = RowItemList.Item;
 			NewRow0.ItemKey = RowItemList.ItemKey;
 			NewRow0.ItemKeyQuantity = RowItemList.Quantity;
-			
+
 			For Each RowSerialLotNumber In ArrayOfSerialLotNumbers Do
 				NewRow1 = NewRow0.GetItems().Add();
 				NewRow1.Level = 2;
@@ -109,10 +108,10 @@ Procedure UpdateSerialLotNumbersTree(Object, Form) Export
 			EndDo;
 		EndIf;
 	EndDo;
-	
+
 	For Each ItemTreeRows In Form.SerialLotNumbersTree.GetItems() Do
 		Form.Items.SerialLotNumbersTree.Expand(ItemTreeRows.GetID());
-	EndDo;	
+	EndDo;
 EndProcedure
 
 Procedure UpdateUseSerialLotNumber(Object, Form, AddInfo = Undefined) Export
@@ -120,9 +119,9 @@ Procedure UpdateUseSerialLotNumber(Object, Form, AddInfo = Undefined) Export
 	If CurrentData = Undefined Then
 		Return;
 	EndIf;
-	
+
 	CurrentData.UseSerialLotNumber = SerialLotNumbersServer.IsItemKeyWithSerialLotNumbers(CurrentData.ItemKey);
-		
+
 	If Not CurrentData.UseSerialLotNumber Then
 		DeleteUnusedSerialLotNumbers(Object, CurrentData.Key);
 		UpdateSerialLotNumbersPresentation(Object, AddInfo);

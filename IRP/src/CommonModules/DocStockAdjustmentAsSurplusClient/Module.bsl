@@ -1,7 +1,7 @@
 Procedure OnOpen(Object, Form, Cancel, AddInfo = Undefined) Export
 	DocumentsClient.SetTextOfDescriptionAtForm(Object, Form);
 	SerialLotNumberClient.UpdateSerialLotNumbersPresentation(Object, AddInfo);
-	SerialLotNumberClient.UpdateSerialLotNumbersTree(Object, Form);	
+	SerialLotNumberClient.UpdateSerialLotNumbersTree(Object, Form);
 EndProcedure
 
 Procedure AfterWriteAtClient(Object, Form, WriteParameters, AddInfo = Undefined) Export
@@ -19,7 +19,7 @@ EndProcedure
 
 Procedure ItemListAfterDeleteRow(Object, Form, Item, AddInfo = Undefined) Export
 	SerialLotNumberClient.DeleteUnusedSerialLotNumbers(Object);
-	SerialLotNumberClient.UpdateSerialLotNumbersTree(Object, Form);	
+	SerialLotNumberClient.UpdateSerialLotNumbersTree(Object, Form);
 	DocumentsClient.ItemListAfterDeleteRow(Object, Form, Item);
 EndProcedure
 
@@ -29,17 +29,15 @@ Procedure ItemListItemOnChange(Object, Form, Item = Undefined, AddInfo = Undefin
 		Return;
 	EndIf;
 	CurrentRow.ItemKey = CatItemsServer.GetItemKeyByItem(CurrentRow.Item);
-	If ValueIsFilled(CurrentRow.ItemKey)
-		And ServiceSystemServer.GetObjectAttribute(CurrentRow.ItemKey, "Item") <> CurrentRow.Item Then
+	If ValueIsFilled(CurrentRow.ItemKey) And ServiceSystemServer.GetObjectAttribute(CurrentRow.ItemKey, "Item")
+		<> CurrentRow.Item Then
 		CurrentRow.ItemKey = Undefined;
 	EndIf;
-	
+
 	CalculationSettings = New Structure();
 	CalculationSettings.Insert("UpdateUnit");
-	CalculationStringsClientServer.CalculateItemsRow(Object,
-		CurrentRow,
-		CalculationSettings);
-	
+	CalculationStringsClientServer.CalculateItemsRow(Object, CurrentRow, CalculationSettings);
+
 	SerialLotNumberClient.UpdateUseSerialLotNumber(Object, Form, AddInfo);
 EndProcedure
 
@@ -58,12 +56,11 @@ EndProcedure
 #Region PickUpItems
 
 Procedure PickupItemsEnd(Result, AdditionalParameters) Export
-	If Not ValueIsFilled(Result)
-		Or Not AdditionalParameters.Property("Object")
-		Or Not AdditionalParameters.Property("Form") Then
+	If Not ValueIsFilled(Result) Or Not AdditionalParameters.Property("Object") Or Not AdditionalParameters.Property(
+		"Form") Then
 		Return;
 	EndIf;
-	
+
 	FilterString = "Item, ItemKey, Unit";
 	FilterStructure = New Structure(FilterString);
 	For Each ResultElement In Result Do
@@ -81,19 +78,19 @@ Procedure PickupItemsEnd(Result, AdditionalParameters) Export
 EndProcedure
 
 Procedure OpenPickupItems(Object, Form, Command) Export
-	NotifyParameters = New Structure;
+	NotifyParameters = New Structure();
 	NotifyParameters.Insert("Object", Object);
 	NotifyParameters.Insert("Form", Form);
 	NotifyDescription = New NotifyDescription("PickupItemsEnd", DocStockAdjustmentAsSurplusClient, NotifyParameters);
-	OpenFormParameters = New Structure;
-	StoreArray = New Array;
+	OpenFormParameters = New Structure();
+	StoreArray = New Array();
 	StoreArray.Add(Object.Store);
-	
+
 	If Command.AssociatedTable <> Undefined Then
 		OpenFormParameters.Insert("AssociatedTableName", Command.AssociatedTable.Name);
 		OpenFormParameters.Insert("Object", Object);
 	EndIf;
-	
+
 	OpenFormParameters.Insert("Stores", StoreArray);
 	OpenFormParameters.Insert("EndPeriod", CommonFunctionsServer.GetCurrentSessionDate());
 	OpenForm("CommonForm.PickUpItems", OpenFormParameters, Form, , , , NotifyDescription);
@@ -116,12 +113,10 @@ Procedure ItemListItemKeyOnChange(Object, Form, Item, AddInfo = Undefined) Expor
 	If CurrentRow = Undefined Then
 		Return;
 	EndIf;
-	
+
 	CalculationSettings = New Structure();
 	CalculationSettings.Insert("UpdateUnit");
-	CalculationStringsClientServer.CalculateItemsRow(Object,
-		CurrentRow,
-		CalculationSettings);
+	CalculationStringsClientServer.CalculateItemsRow(Object, CurrentRow, CalculationSettings);
 	SerialLotNumberClient.UpdateUseSerialLotNumber(Object, Form, AddInfo);
 EndProcedure
 
@@ -132,7 +127,7 @@ Procedure ItemListQuantityOnChange(Object, Form, Item, AddInfo = Undefined) Expo
 	EndIf;
 	Actions = New Structure("CalculateQuantityInBaseUnit");
 	CalculationStringsClientServer.CalculateItemsRow(Object, CurrentData, Actions);
-	SerialLotNumberClient.UpdateSerialLotNumbersTree(Object, Form);	
+	SerialLotNumberClient.UpdateSerialLotNumbersTree(Object, Form);
 EndProcedure
 
 Procedure ItemListUnitOnChange(Object, Form, Item) Export
@@ -146,10 +141,11 @@ EndProcedure
 
 #Region SerialLotNumbers
 
-Procedure ItemListSerialLotNumbersPresentationStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, AddInfo = Undefined) Export
+Procedure ItemListSerialLotNumbersPresentationStartChoice(Object, Form, Item, ChoiceData, StandardProcessing,
+	AddInfo = Undefined) Export
 	DocumentsClient.ItemListSerialLotNumbersPutServerDataToAddInfo(Object, Form, AddInfo);
 	SerialLotNumberClient.PresentationStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, AddInfo);
-EndProcedure	
+EndProcedure
 
 Procedure ItemListSerialLotNumbersPresentationClearing(Object, Form, Item, StandardProcessing, AddInfo = Undefined) Export
 	SerialLotNumberClient.PresentationClearing(Object, Form, Item, AddInfo);
@@ -165,14 +161,14 @@ EndProcedure
 
 Procedure CompanyStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
 	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
-	
+
 	OpenSettings.ArrayOfFilters = New Array();
-	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", 
-																	True, DataCompositionComparisonType.NotEqual));
-	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("OurCompany", 
-																	True, DataCompositionComparisonType.Equal));
+	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True,
+		DataCompositionComparisonType.NotEqual));
+	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("OurCompany", True,
+		DataCompositionComparisonType.Equal));
 	OpenSettings.FillingData = New Structure("OurCompany", True);
-	
+
 	DocumentsClient.CompanyStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
 EndProcedure
 
@@ -229,4 +225,3 @@ EndProcedure
 Procedure SearchByBarcode(Barcode, Object, Form) Export
 	DocumentsClient.SearchByBarcode(Barcode, Object, Form);
 EndProcedure
-

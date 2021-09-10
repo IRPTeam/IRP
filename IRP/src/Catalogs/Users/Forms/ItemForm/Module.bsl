@@ -1,4 +1,3 @@
-
 #Region FormEvents
 
 &AtServer
@@ -19,10 +18,10 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	LocalizationEvents.CreateMainFormItemDescription(ThisObject, "GroupDescriptions");
 	AddAttributesAndPropertiesServer.OnCreateAtServer(ThisObject);
 	ExtensionServer.AddAttributesFromExtensions(ThisObject, Object.Ref);
-	
+
 	FillExistsLangs();
-	
-	If Object.Ref.IsEmpty() Then 	
+
+	If Object.Ref.IsEmpty() Then
 		Object.InfobaseUserID = Undefined;
 		Object.Description = "";
 	EndIf;
@@ -58,12 +57,12 @@ EndProcedure
 
 &AtServer
 Procedure FillExistsLangs()
-	
+
 	For Each Lang In Metadata.Languages Do
 		Items.LocalizationCode.ChoiceList.Add(Lower(Lang.LanguageCode), Lang.Synonym);
 		Items.InterfaceLocalizationCode.ChoiceList.Add(Lower(Lang.LanguageCode), Lang.Synonym);
 	EndDo;
-	
+
 EndProcedure
 
 &AtClient
@@ -75,8 +74,8 @@ EndProcedure
 Procedure SetPassword(Command)
 	OpenArgs = New Structure();
 	OpenArgs.Insert("Password", Password);
-	OpenForm("Catalog.Users.Form.InputPassword", OpenArgs, ThisObject, , , ,
-		New NotifyDescription("SetPasswordFinish", ThisObject));
+	OpenForm("Catalog.Users.Form.InputPassword", OpenArgs, ThisObject, , , , New NotifyDescription("SetPasswordFinish",
+		ThisObject));
 EndProcedure
 
 &AtClient
@@ -84,7 +83,7 @@ Procedure SetPasswordFinish(Result, AdditionalParameters) Export
 	If Result = Undefined Then
 		Return;
 	EndIf;
-	
+
 	Password = Result.Password;
 EndProcedure
 

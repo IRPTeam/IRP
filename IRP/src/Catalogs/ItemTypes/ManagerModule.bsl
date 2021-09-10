@@ -2,7 +2,7 @@ Procedure SetDataLock(DataLock, ItemType)
 	DataSource = New ValueTable();
 	DataSource.Columns.Add("Ref", New TypeDescription("CatalogRef.ItemTypes"));
 	DataSource.Add().Ref = ItemType;
-	
+
 	ItemLock = DataLock.Add("Catalog.ItemTypes");
 	ItemLock.Mode = DataLockMode.Exclusive;
 	ItemLock.DataSource = DataSource;
@@ -31,7 +31,7 @@ EndProcedure
 Procedure DeleteDataFromObject(ItemType, Attribute)
 	DataLock = New DataLock();
 	SetDataLock(DataLock, ItemType);
-	
+
 	CatalogObject = ItemType.GetObject();
 	Filter = New Structure("Attribute", Attribute);
 	ArrayOfRows = CatalogObject.AvailableAttributes.FindRows(Filter);

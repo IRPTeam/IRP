@@ -96,7 +96,7 @@ Procedure ItemKeyListOnStartEdit(Item, NewRow, Clone)
 	EndIf;
 
 	If NewRow Or Clone Then
-		CurrentData.Key = New UUID;
+		CurrentData.Key = New UUID();
 	EndIf;
 
 EndProcedure
@@ -147,7 +147,7 @@ Procedure FillItemKeyList()
 		Row.Item = Row.ItemKey.Item;
 	EndDo;
 
-	RowMap = New Map;
+	RowMap = New Map();
 
 	For Each Row In Object.ItemKeyList Do
 		RowMap.Insert(Row.Key, Row);
@@ -158,7 +158,7 @@ Procedure FillItemKeyList()
 		EndIf;
 	EndDo;
 
-	Query = New Query;
+	Query = New Query();
 	Query.Text =
 	"SELECT
 	|	SavedItems.Key,
@@ -205,13 +205,13 @@ Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
 				NewItemKeyListRow = Object.ItemKeyList.Add();
 				NewItemKeyListRow.ItemKey = ItemData.ItemKey;
 				NewItemKeyListRow.Item = ItemData.Item;
-				NewItemKeyListRow.Key = New UUID;
+				NewItemKeyListRow.Key = New UUID();
 				Items.ItemKeyList.CurrentRow = NewItemKeyListRow.GetID();
 			EndIf;
 		ElsIf Object.PriceListType = PredefinedValue("Enum.PriceListTypes.PriceByItems") Then
 			SearchInItemList = Object.ItemList.FindRows(New Structure("Item", ItemData.Item));
 			If SearchInItemList.Count() Then
-				Items.ItemList.CurrentRow = SearchInItemList[0].GetID();				
+				Items.ItemList.CurrentRow = SearchInItemList[0].GetID();
 			Else
 				NewItemListRow = Object.ItemList.Add();
 				NewItemListRow.Item = ItemData.Item;
@@ -221,7 +221,8 @@ Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
 			Return;
 		EndIf;
 	Else
-		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().S_019, StrConcat(AdditionalParameters.Barcodes, ",")));
+		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().S_019, StrConcat(AdditionalParameters.Barcodes,
+			",")));
 	EndIf;
 EndProcedure
 #EndRegion
@@ -248,9 +249,9 @@ Function GetSavedData()
 	If ValueIsFilled(ThisObject.DynamicDataForm) Then
 		SavedDataStructure = CommonFunctionsServer.DeserializeXMLUseXDTO(ThisObject.DynamicDataForm);
 	Else
-		SavedDataStructure = New Structure;
-		SavedDataStructure.Insert("Fields", New Structure);
-		TableInfo = New Structure("Name, FormTableName, Columns", "PriceKeyList", "PriceKeyList", New Array);
+		SavedDataStructure = New Structure();
+		SavedDataStructure.Insert("Fields", New Structure());
+		TableInfo = New Structure("Name, FormTableName, Columns", "PriceKeyList", "PriceKeyList", New Array());
 
 		SavedDataStructure.Fields.Insert("Table", TableInfo);
 	EndIf;
@@ -273,7 +274,7 @@ Function PriceKeyListHaveError()
 		// Fill cheking
 	HaveError = False;
 
-	ArrayOfFixedColumns = New Array;
+	ArrayOfFixedColumns = New Array();
 	ArrayOfFixedColumns.Add(New Structure("FormName, Name", "PriceKeyListItem", "Item"));
 
 	RowIndex = 0;
@@ -316,13 +317,13 @@ EndProcedure
 
 &AtServer
 Function GetUniqueName(NamePart)
-	Return NamePart + StrReplace(String(New UUID), "-", "");
+	Return NamePart + StrReplace(String(New UUID()), "-", "");
 EndFunction
 
 &AtServer
 Function GetItemAttributes(Item)
 	If ValueIsFilled(Object.ItemType) Then
-		ArrayOfAttributes = New Array;
+		ArrayOfAttributes = New Array();
 		For Each Row In Object.ItemType.AvailableAttributes Do
 			If Not Row.AffectPricing Then
 				Continue;
@@ -338,7 +339,7 @@ EndFunction
 
 &AtServer
 Function GetDataPrice()
-	TableOfResult = New ValueTable;
+	TableOfResult = New ValueTable();
 	TableOfResult.Columns.Add("Item");
 	TableOfResult.Columns.Add("Price");
 	TableOfResult.Columns.Add("Key");
@@ -410,7 +411,7 @@ Procedure DrawFormTablePriceKeyList()
 
 	Table = SavedDataStructure.Fields.Table;
 		// Delete/Create column
-	ArrayOfOwners = New Array;
+	ArrayOfOwners = New Array();
 	For Each Column In Table.Columns Do
 		ArrayOfOwners.Add(Column.DataPath);
 		Items.Delete(Items[Column.FormName]);
@@ -423,8 +424,8 @@ Procedure DrawFormTablePriceKeyList()
 
 	Table.Columns.Clear();
 
-	ChoiceParametersMap = New Map;
-	ArrayOfAttributes = New Array;
+	ChoiceParametersMap = New Map();
+	ArrayOfAttributes = New Array();
 
 	If ValueIsFilled(Object.ItemType) Then
 
@@ -473,7 +474,7 @@ Procedure DrawFormTablePriceKeyList()
 		Column.FormName = NewFormColumn.Name;
 
 		If ChoiceParametersMap.Get(Column.Name) <> Undefined Then
-			ArrayOfChoiceParameters = New Array;
+			ArrayOfChoiceParameters = New Array();
 			For Each i In ChoiceParametersMap[Column.Name] Do
 				ArrayOfChoiceParameters.Add(New ChoiceParameter("Filter.Owner", i.Value));
 			EndDo;
@@ -519,7 +520,7 @@ Procedure SaveTablePriceKeyList(Cancel, CurrentObject, WriteParameters)
 
 	For Each Row In ThisObject.PriceKeyList Do
 		NewRowPrice = CurrentObject.DataPrice.Add();
-		NewRowPrice.Key = New UUID;
+		NewRowPrice.Key = New UUID();
 		NewRowPrice.Price = Row.Price;
 		NewRowPrice.Item = Row.Item;
 

@@ -3,14 +3,13 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing, Form, Parameters) Export
 	If Parameters.Property("FillingData", FillingData) Then
 		Form.FillingData = CommonFunctionsServer.SerializeXMLUseXDTO(FillingData);
 	EndIf;
-	
+
 	If Parameters.Property("FormTitle") Then
-		Form.Title = Parameters.FormTitle;	
+		Form.Title = Parameters.FormTitle;
 		Form.AutoTitle = False;
 	EndIf;
-	
-	If Form.FormName = "Catalog.Agreements.Form.ChoiceForm"
-		Or Form.FormName = "Catalog.Agreements.Form.ListForm" Then
+
+	If Form.FormName = "Catalog.Agreements.Form.ChoiceForm" Or Form.FormName = "Catalog.Agreements.Form.ListForm" Then
 		Form.List.Parameters.SetParameterValue("IncludeFilterByEndOfUseDate", Parameters.IncludeFilterByEndOfUseDate);
 		Form.List.Parameters.SetParameterValue("IncludeFilterByPartner", Parameters.IncludeFilterByPartner);
 		Form.List.Parameters.SetParameterValue("IncludePartnerSegments", Parameters.IncludePartnerSegments);

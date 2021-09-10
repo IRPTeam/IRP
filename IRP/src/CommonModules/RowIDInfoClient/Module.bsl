@@ -1,4 +1,3 @@
-
 Procedure DeleteRows(Object, Form) Export
 	If Object.Property("RowIDInfo") And Object.Property("ItemList") Then
 		ArrayDelete = New Array();
@@ -23,18 +22,19 @@ Procedure UpdateQuantity(Object, Form) Export
 				IDInfoRows[0].Quantity = RowItemList.QuantityInBaseUnit;
 			EndIf;
 		Else
-			
+
 			TabularSectionName = "";
 			If Object.Property("ShipmentConfirmations") Then
 				TabularSectionName = "ShipmentConfirmations";
 			ElsIf Object.Property("GoodsReceipts") Then
 				TabularSectionName = "GoodsReceipts";
 			EndIf;
-			
+
 			If Not ValueIsFilled(TabularSectionName) Then
 				If CommonFunctionsClientServer.ObjectHasProperty(RowItemList, "Difference") Then
 					For Each IDInfoRow In IDInfoRows Do
-						IDInfoRow.Quantity = ?(RowItemList.Difference < 0, -RowItemList.Difference, RowItemList.Difference);
+						IDInfoRow.Quantity = ?(RowItemList.Difference < 0, -RowItemList.Difference,
+							RowItemList.Difference);
 					EndDo;
 				Else
 					For Each IDInfoRow In IDInfoRows Do
@@ -43,14 +43,14 @@ Procedure UpdateQuantity(Object, Form) Export
 				EndIf;
 				Continue;
 			EndIf;
-			
+
 			For Each Row In Object[TabularSectionName] Do
 				IDInfoRows = Object.RowIDInfo.FindRows(New Structure("Key, BasisKey", Row.Key, Row.BasisKey));
 				If IDInfoRows.Count() = 1 Then
 					IDInfoRows[0].Quantity = Row.Quantity;
 				EndIf;
 			EndDo;
-			
+
 		EndIf;
 	EndDo;
 EndProcedure
@@ -65,31 +65,28 @@ Function GetSelectedRowInfo(CurrentData) Export
 		Store = CurrentData.Store;
 	EndIf;
 	Result.SelectedRow = New Structure();
-	Result.SelectedRow.Insert("Key"        , CurrentData.Key);
-	Result.SelectedRow.Insert("Item"       , CurrentData.Item);
-	Result.SelectedRow.Insert("ItemKey"    , CurrentData.ItemKey);
-	Result.SelectedRow.Insert("Store"      , Store);
-	Result.SelectedRow.Insert("Unit"       , CurrentData.Unit);
-	Result.SelectedRow.Insert("Quantity"   , CurrentData.Quantity);
-	Result.SelectedRow.Insert("LineNumber" , CurrentData.LineNumber);
-	
-	Result.SelectedRow.Insert("QuantityInBaseUnit" , 0);
-	Result.SelectedRow.Insert("BasisUnit" , Undefined);
-		
-	If ValueIsFilled(CurrentData.ItemKey)
-		And ValueIsFilled(CurrentData.Unit)
-		And ValueIsFilled(CurrentData.Quantity) Then
-		ConvertationResult = RowIDInfoServer.ConvertQuantityToQuantityInBaseUnit(CurrentData.ItemKey, 
-		                                                         CurrentData.Unit, 
-		                                                         CurrentData.Quantity);
-		
+	Result.SelectedRow.Insert("Key", CurrentData.Key);
+	Result.SelectedRow.Insert("Item", CurrentData.Item);
+	Result.SelectedRow.Insert("ItemKey", CurrentData.ItemKey);
+	Result.SelectedRow.Insert("Store", Store);
+	Result.SelectedRow.Insert("Unit", CurrentData.Unit);
+	Result.SelectedRow.Insert("Quantity", CurrentData.Quantity);
+	Result.SelectedRow.Insert("LineNumber", CurrentData.LineNumber);
+
+	Result.SelectedRow.Insert("QuantityInBaseUnit", 0);
+	Result.SelectedRow.Insert("BasisUnit", Undefined);
+
+	If ValueIsFilled(CurrentData.ItemKey) And ValueIsFilled(CurrentData.Unit) And ValueIsFilled(CurrentData.Quantity) Then
+		ConvertationResult = RowIDInfoServer.ConvertQuantityToQuantityInBaseUnit(CurrentData.ItemKey, CurrentData.Unit,
+			CurrentData.Quantity);
+
 		Result.SelectedRow.QuantityInBaseUnit = ConvertationResult.QuantityInBaseUnit;
 		Result.SelectedRow.BasisUnit          = ConvertationResult.BasisUnit;
-	EndIf;		    	
-		
+	EndIf;
+
 	Result.FilterBySelectedRow = New Structure();
-	Result.FilterBySelectedRow.Insert("ItemKey"  , CurrentData.ItemKey);
-	Result.FilterBySelectedRow.Insert("Store"    , Store);		
+	Result.FilterBySelectedRow.Insert("ItemKey", CurrentData.ItemKey);
+	Result.FilterBySelectedRow.Insert("Store", Store);
 	Return Result;
 EndFunction
 
@@ -108,10 +105,10 @@ Function GetItemListRows(ItemList, Object) Export
 	For Each Row In ItemList Do
 		NewRow = New Structure();
 		NewRow.Insert("LineNumber", Row.LineNumber);
-		NewRow.Insert("Key"       , Row.Key);
-		NewRow.Insert("Item"      , Row.Item); 
-		NewRow.Insert("ItemKey"   , Row.ItemKey); 
-		NewRow.Insert("Unit"      , Row.Unit);
+		NewRow.Insert("Key", Row.Key);
+		NewRow.Insert("Item", Row.Item);
+		NewRow.Insert("ItemKey", Row.ItemKey);
+		NewRow.Insert("Unit", Row.Unit);
 		If CommonFunctionsClientServer.ObjectHasProperty(Row, "Store") Then
 			NewRow.Insert("Store", Row.Store);
 		ElsIf CommonFunctionsClientServer.ObjectHasProperty(Object, "Store") Then
@@ -119,9 +116,9 @@ Function GetItemListRows(ItemList, Object) Export
 		Else
 			NewRow.Insert("Store", Undefined);
 		EndIf;
-		NewRow.Insert("Quantity"  , Row.Quantity);
+		NewRow.Insert("Quantity", Row.Quantity);
 		ItemListRows.Add(NewRow);
-	EndDo;	
+	EndDo;
 	Return ItemListRows;
 EndFunction
 
@@ -129,18 +126,18 @@ Function GetRowIDInfoRows(RowIDInfo, Object)
 	RowIDInfoRows = New Array();
 	For Each Row In RowIDInfo Do
 		NewRow = New Structure();
-		NewRow.Insert("Key"                , Row.Key);
-		NewRow.Insert("RowID"              , Row.RowID); 
-		NewRow.Insert("QuantityInBaseUnit" , Row.Quantity);
-		NewRow.Insert("BasisKey"           , Row.BasisKey); 
-		NewRow.Insert("Basis"              , Row.Basis);
-		NewRow.Insert("CurrentStep"        , Row.CurrentStep);
-		NewRow.Insert("NextStep"           , Row.NextStep);
-		NewRow.Insert("RowRef"             , Row.RowRef);
+		NewRow.Insert("Key", Row.Key);
+		NewRow.Insert("RowID", Row.RowID);
+		NewRow.Insert("QuantityInBaseUnit", Row.Quantity);
+		NewRow.Insert("BasisKey", Row.BasisKey);
+		NewRow.Insert("Basis", Row.Basis);
+		NewRow.Insert("CurrentStep", Row.CurrentStep);
+		NewRow.Insert("NextStep", Row.NextStep);
+		NewRow.Insert("RowRef", Row.RowRef);
 		RowIDInfoRows.Add(NewRow);
 	EndDo;
 	Return RowIDInfoRows;
-EndFunction	
+EndFunction
 
 Function FindRowInTree(Filter, Tree) Export
 	RowID = Undefined;

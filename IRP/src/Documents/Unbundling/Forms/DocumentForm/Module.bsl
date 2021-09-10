@@ -16,7 +16,7 @@ Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefin
 	If EventName = "UpdateAddAttributeAndPropertySets" Then
 		AddAttributesCreateFormControl();
 	EndIf;
-	
+
 	If EventName = "NewBarcode" And IsInputAvailable() Then
 		SearchByBarcode(Undefined, Parameter);
 	EndIf;
@@ -112,12 +112,10 @@ Procedure ItemListItemKeyOnChange(Item)
 	If CurrentRow = Undefined Then
 		Return;
 	EndIf;
-	
+
 	CalculationSettings = New Structure();
 	CalculationSettings.Insert("UpdateUnit");
-	CalculationStringsClientServer.CalculateItemsRow(Object,
-		CurrentRow,
-		CalculationSettings);
+	CalculationStringsClientServer.CalculateItemsRow(Object, CurrentRow, CalculationSettings);
 EndProcedure
 
 &AtClient
@@ -160,7 +158,7 @@ EndProcedure
 &AtServer
 Procedure SetEnableWaysToFillItemListByBundle()
 	WaysToFilling = Catalogs.ItemKeys.GetWaysToFillItemListByBundle(Object.ItemKeyBundle);
-	
+
 	Items.FillItemListBySpecification.Enabled = WaysToFilling.BySpecification;
 	Items.FillItemListByBundling.Enabled = WaysToFilling.ByBundling;
 EndProcedure
@@ -276,7 +274,7 @@ EndProcedure
 &AtClient
 Procedure GeneratedFormCommandActionByName(Command) Export
 	ExternalCommandsClient.GeneratedFormCommandActionByName(Object, ThisObject, Command.Name);
-	GeneratedFormCommandActionByNameServer(Command.Name);	
+	GeneratedFormCommandActionByNameServer(Command.Name);
 EndProcedure
 
 &AtServer

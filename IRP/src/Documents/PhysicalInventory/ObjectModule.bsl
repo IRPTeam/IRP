@@ -1,14 +1,13 @@
-
 Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	If DataExchange.Load Then
 		Return;
-	EndIf;	
+	EndIf;
 EndProcedure
 
 Procedure OnWrite(Cancel)
 	If DataExchange.Load Then
 		Return;
-	EndIf;	
+	EndIf;
 EndProcedure
 
 Procedure BeforeDelete(Cancel)
@@ -28,7 +27,7 @@ EndProcedure
 Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 	If ThisObject.Status.Posting Then
 		Query = New Query();
-		Query.Text = 
+		Query.Text =
 		"SELECT
 		|	PhysicalCountByLocation.Ref
 		|FROM

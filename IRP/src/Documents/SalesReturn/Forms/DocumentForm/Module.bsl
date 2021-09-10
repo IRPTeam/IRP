@@ -1,4 +1,3 @@
-
 #Region FormEvents
 
 &AtServer
@@ -19,26 +18,26 @@ Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefin
 	If EventName = "UpdateAddAttributeAndPropertySets" Then
 		AddAttributesCreateFormControl();
 	EndIf;
-	
+
 	If Not Source = ThisObject Then
 		Return;
 	EndIf;
-	
+
 	DocSalesReturnClient.NotificationProcessing(Object, ThisObject, EventName, Parameter, Source);
 
-	ServerData = Undefined;		
+	ServerData = Undefined;
 	If TypeOf(Parameter) = Type("Structure") And Parameter.Property("AddInfo") Then
 		ServerData = CommonFunctionsClientServer.GetFromAddInfo(Parameter.AddInfo, "ServerData");
 	EndIf;
-	
+
 	If EventName = "NewBarcode" And IsInputAvailable() Then
 		SearchByBarcode(Undefined, Parameter);
 	EndIf;
-	
+
 	If Upper(EventName) = Upper("CallbackHandler") Then
 		CurrenciesClient.CalculateAmount(Object, ThisObject);
 		CurrenciesClient.SetRatePresentation(Object, ThisObject);
-				
+
 		If ServerData <> Undefined Then
 			CurrenciesClient.SetVisibleRows(Object, ThisObject, Parameter.AddInfo);
 		EndIf;
@@ -364,7 +363,8 @@ EndProcedure
 &AtClient
 Procedure CurrenciesSelection(Item, RowSelected, Field, StandardProcessing, AddInfo = Undefined)
 	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "ExecuteAtClient", True);
-	CurrenciesClient.CurrenciesTable_Selection(Object, ThisObject, Item, RowSelected, Field, StandardProcessing, AddInfo);
+	CurrenciesClient.CurrenciesTable_Selection(Object, ThisObject, Item, RowSelected, Field, StandardProcessing,
+		AddInfo);
 EndProcedure
 
 &AtClient
@@ -416,7 +416,7 @@ EndProcedure
 &AtClient
 Procedure GeneratedFormCommandActionByName(Command) Export
 	ExternalCommandsClient.GeneratedFormCommandActionByName(Object, ThisObject, Command.Name);
-	GeneratedFormCommandActionByNameServer(Command.Name);	
+	GeneratedFormCommandActionByNameServer(Command.Name);
 EndProcedure
 
 &AtServer
@@ -444,14 +444,14 @@ EndProcedure
 
 &AtClient
 Procedure GoodsReceiptsTreeQuantityOnChange(Item)
-	DocumentsClient.TradeDocumentsTreeQuantityOnChange(Object, ThisObject, 
-		"GoodsReceipts", "GoodsReceiptsTree", "GoodsReceipt");
+	DocumentsClient.TradeDocumentsTreeQuantityOnChange(Object, ThisObject, "GoodsReceipts", "GoodsReceiptsTree",
+		"GoodsReceipt");
 	RowIDInfoClient.UpdateQuantity(Object, ThisObject);
 EndProcedure
 
 &AtClient
 Procedure GoodsReceiptsTreeBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
-	Cancel = True;	
+	Cancel = True;
 EndProcedure
 
 &AtClient
@@ -466,42 +466,36 @@ EndProcedure
 &AtClient
 Function GetLinkedDocumentsFilter()
 	Filter = New Structure();
-	Filter.Insert("Company"           , Object.Company);
-	Filter.Insert("Branch"            , Object.Branch);
-	Filter.Insert("Partner"           , Object.Partner);
-	Filter.Insert("LegalName"         , Object.LegalName);
-	Filter.Insert("Agreement"         , Object.Agreement);
-	Filter.Insert("Currency"          , Object.Currency);
-	Filter.Insert("PriceIncludeTax"   , Object.PriceIncludeTax);
-	Filter.Insert("TransactionType"   , PredefinedValue("Enum.GoodsReceiptTransactionTypes.ReturnFromCustomer"));
-	Filter.Insert("Ref"               , Object.Ref);
+	Filter.Insert("Company", Object.Company);
+	Filter.Insert("Branch", Object.Branch);
+	Filter.Insert("Partner", Object.Partner);
+	Filter.Insert("LegalName", Object.LegalName);
+	Filter.Insert("Agreement", Object.Agreement);
+	Filter.Insert("Currency", Object.Currency);
+	Filter.Insert("PriceIncludeTax", Object.PriceIncludeTax);
+	Filter.Insert("TransactionType", PredefinedValue("Enum.GoodsReceiptTransactionTypes.ReturnFromCustomer"));
+	Filter.Insert("Ref", Object.Ref);
 	Return Filter;
 EndFunction
 
 &AtClient
 Procedure LinkUnlinkBasisDocuments(Command)
 	FormParameters = New Structure();
-	FormParameters.Insert("Filter"           , GetLinkedDocumentsFilter());
-	FormParameters.Insert("SelectedRowInfo"  , RowIDInfoClient.GetSelectedRowInfo(Items.ItemList.CurrentData));
-	FormParameters.Insert("TablesInfo"       , RowIDInfoClient.GetTablesInfo(Object));
-	OpenForm("CommonForm.LinkUnlinkDocumentRows"
-		, FormParameters, , , ,
-		, New NotifyDescription("AddOrLinkUnlinkDocumentRowsContinue", ThisObject)
-		, FormWindowOpeningMode.LockOwnerWindow);
+	FormParameters.Insert("Filter", GetLinkedDocumentsFilter());
+	FormParameters.Insert("SelectedRowInfo", RowIDInfoClient.GetSelectedRowInfo(Items.ItemList.CurrentData));
+	FormParameters.Insert("TablesInfo", RowIDInfoClient.GetTablesInfo(Object));
+	OpenForm("CommonForm.LinkUnlinkDocumentRows", FormParameters, , , , ,
+		New NotifyDescription("AddOrLinkUnlinkDocumentRowsContinue", ThisObject), FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
 
 &AtClient
-Procedure AddBasisDocuments(Command)	
+Procedure AddBasisDocuments(Command)
 	FormParameters = New Structure();
-	FormParameters.Insert("Filter"           , GetLinkedDocumentsFilter());
-	FormParameters.Insert("TablesInfo"       , RowIDInfoClient.GetTablesInfo(Object));
-	OpenForm("CommonForm.AddLinkedDocumentRows"
-		, FormParameters, , , ,
-		, New NotifyDescription("AddOrLinkUnlinkDocumentRowsContinue", ThisObject)
-		, FormWindowOpeningMode.LockOwnerWindow);
+	FormParameters.Insert("Filter", GetLinkedDocumentsFilter());
+	FormParameters.Insert("TablesInfo", RowIDInfoClient.GetTablesInfo(Object));
+	OpenForm("CommonForm.AddLinkedDocumentRows", FormParameters, , , , ,
+		New NotifyDescription("AddOrLinkUnlinkDocumentRowsContinue", ThisObject), FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
-
-
 &AtClient
 Procedure AddOrLinkUnlinkDocumentRowsContinue(Result, AdditionalParameters) Export
 	If Result = Undefined Then
@@ -511,8 +505,8 @@ Procedure AddOrLinkUnlinkDocumentRowsContinue(Result, AdditionalParameters) Expo
 	AddOrLinkUnlinkDocumentRowsContinueAtServer(Result);
 	Taxes_CreateFormControls();
 	DocumentsClient.SetLockedRowsForItemListByTradeDocuments(Object, ThisObject, "GoodsReceipts");
-	DocumentsClient.UpdateTradeDocumentsTree(Object, ThisObject, 
-		"GoodsReceipts", "GoodsReceiptsTree", "QuantityInGoodsReceipt");
+	DocumentsClient.UpdateTradeDocumentsTree(Object, ThisObject, "GoodsReceipts", "GoodsReceiptsTree",
+		"QuantityInGoodsReceipt");
 EndProcedure
 
 &AtServer

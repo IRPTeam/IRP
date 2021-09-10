@@ -1,16 +1,15 @@
 Function FileInfo() Export
-	Return New Structure(
-		"Success,
-		|FileID,
-		|FileName,
-		|Height,
-		|Width,
-		|Size,
-		|Extension,
-		|URI,
-		|MD5,
-		|Ref,
-		|Preview");
+	Return New Structure("Success,
+						 |FileID,
+						 |FileName,
+						 |Height,
+						 |Width,
+						 |Size,
+						 |Extension,
+						 |URI,
+						 |MD5,
+						 |Ref,
+						 |Preview");
 EndFunction
 
 Procedure SetFileInfo(FileInfo, Object) Export
@@ -29,12 +28,12 @@ Function AllPictureExtensions(AddInfo = Undefined) Export
 EndFunction
 
 Function FilterForPicturesDialog() Export
-	
+
 	Data = "*." + StrConcat(AllPictureExtensions(), ";*.");
 	Return "(" + Data + ")|" + Data;
-	
+
 EndFunction
 
 Function PreparePictureURL(IntegrationSettings, URI, UUID = "", AddInfo = Undefined) Export
-	Return URI; 
+	Return URI;
 EndFunction

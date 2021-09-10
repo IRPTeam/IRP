@@ -1,4 +1,3 @@
-
 #Region FormEventHandlers
 
 &AtServer
@@ -50,7 +49,7 @@ Procedure SetSettings(Command)
 	Info.Insert("Settings", AddressResult);
 	CallMethodAddDataProc(Info);
 	NotifyDescription = New NotifyDescription("OpenFormAddDataProcEnd", ThisObject);
-	AddDataProcClient.OpenFormAddDataProc(Info, NotifyDescription, "RuleForm");	
+	AddDataProcClient.OpenFormAddDataProc(Info, NotifyDescription, "RuleForm");
 EndProcedure
 
 &AtServerNoContext
@@ -60,7 +59,7 @@ EndProcedure
 
 &AtClient
 Procedure OpenFormAddDataProcEnd(Result, AdditionalParameters) Export
-	If Result = Undefined Then 
+	If Result = Undefined Then
 		Return;
 	EndIf;
 	Modified = True;

@@ -11,31 +11,31 @@ EndFunction
 
 Function SendTo(SpreadsheetDocument) Export
 	Info = InfoSample();
-	
+
 	Info.Action = "android.intent.action.SEND";
-	
+
 	Path = DocumentsDir() + "Report.pdf";
 	SpreadsheetDocument.Write(Path, SpreadsheetDocumentFileType.PDF);
-	
+
 	Info.AdditionalData.Add(New Structure("Name, Value, Type", "android.intent.extra.STREAM", "file://" + Path, "uri"));
 	Info.AdditionalData.Add(New Structure("Name, Value, Type", "android.intent.extra.SUBJECT", "Info", "String"));
 	Info.Wait = False;
 	Info.Type = "*/*";
 	StartApplication(Info);
 	Return Undefined;
-	
+
 EndFunction
 
 Function StartApplication(Info) Export
-	#If MobileAppClient OR MobileClient Then
-	NewAppRun = New MobileDeviceApplicationRun;
-	
+#If MobileAppClient Or MobileClient Then
+	NewAppRun = New MobileDeviceApplicationRun();
+
 	If NewAppRun.RunningSupported() Then
 		FillPropertyValues(NewAppRun, Info, , "AdditionalData");
 		For Each StrAddData In Info.AdditionalData Do
 			NewAppRun.AdditionalData.Add(StrAddData.Name, StrAddData.Value, StrAddData.Type);
 		EndDo;
-		
+
 		Result = NewAppRun.Run(Info.Wait);
 		If Info.ErrorCode = Result Then
 			Return Undefined;
@@ -45,10 +45,10 @@ Function StartApplication(Info) Export
 	Else
 		Return Undefined;
 	EndIf;
-	#Else
-	Return Undefined;
-	#EndIf
-	
+#Else
+		Return Undefined;
+#EndIf
+
 EndFunction
 
 Function InfoSample() Export
@@ -61,10 +61,10 @@ Function InfoSample() Export
 	Info.Insert("Wait", True);
 	Info.Insert("ErrorCode", 0);
 	Info.Insert("Type", "");
-	AdditionalData = New Array;
-	
+	AdditionalData = New Array();
+
 	Info.Insert("AdditionalData", AdditionalData);
-	
+
 	Return Info;
-	
+
 EndFunction

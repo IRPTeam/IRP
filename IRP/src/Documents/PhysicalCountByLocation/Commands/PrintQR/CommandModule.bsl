@@ -1,11 +1,11 @@
 &AtClient
 Procedure CommandProcessing(CommandParameter, CommandExecuteParameters)
-	Spreadsheet = New SpreadsheetDocument;
+	Spreadsheet = New SpreadsheetDocument();
 	PrintQR(Spreadsheet, CommandParameter);
 
 	Spreadsheet.ShowGrid = False;
-	Spreadsheet.Protection = False;	
-	Spreadsheet.ReadOnly = False;	
+	Spreadsheet.Protection = False;
+	Spreadsheet.ReadOnly = False;
 	Spreadsheet.ShowHeaders = False;
 	Spreadsheet.Show();
 EndProcedure

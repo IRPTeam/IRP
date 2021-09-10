@@ -10,11 +10,11 @@ EndFunction
 
 Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 	Tables = New Structure();
-	
+
 	QueryArray = GetQueryTextsSecondaryTables();
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
-	
-	Return Tables;	
+
+	Return Tables;
 EndFunction
 
 Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
@@ -24,7 +24,7 @@ EndFunction
 
 Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 	Tables = Parameters.DocumentDataTables;
-	
+
 	QueryArray = GetQueryTextsMasterTables();
 	PostingServer.SetRegisters(Tables, Ref);
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
@@ -76,7 +76,7 @@ EndProcedure
 
 #Region PostingInfo
 Function GetInformationAboutMovements(Ref) Export
-	Str = New Structure;
+	Str = New Structure();
 	Str.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
 	Str.Insert("QueryTextsMasterTables", GetQueryTextsMasterTables());
 	Str.Insert("QueryTextsSecondaryTables", GetQueryTextsSecondaryTables());
@@ -90,157 +90,150 @@ Function GetAdditionalQueryParameters(Ref)
 EndFunction
 
 Function GetQueryTextsSecondaryTables()
-	QueryArray = New Array;
+	QueryArray = New Array();
 	QueryArray.Add(ItemList());
 	QueryArray.Add(PostingServer.Exists_R4011B_FreeStocks());
 	QueryArray.Add(PostingServer.Exists_R4010B_ActualStocks());
-	Return QueryArray;	
+	Return QueryArray;
 EndFunction
 
 Function GetQueryTextsMasterTables()
-	QueryArray = New Array;
+	QueryArray = New Array();
 	QueryArray.Add(R4010B_ActualStocks());
 	QueryArray.Add(R4011B_FreeStocks());
 	QueryArray.Add(R4014B_SerialLotNumber());
 	QueryArray.Add(R4050B_StockInventory());
 	QueryArray.Add(R4051T_StockAdjustmentAsWriteOff());
 	QueryArray.Add(R4052T_StockAdjustmentAsSurplus());
-	Return QueryArray;	
-EndFunction	
+	Return QueryArray;
+EndFunction
 
 Function ItemList()
-	Return
-		"SELECT
-		|	ItemStockAdjustmentItemList.Ref,
-		|	ItemStockAdjustmentItemList.Key,
-		|	ItemStockAdjustmentItemList.ItemKey,
-		|	ItemStockAdjustmentItemList.Unit,
-		|	ItemStockAdjustmentItemList.Quantity,
-		|	ItemStockAdjustmentItemList.QuantityInBaseUnit AS Quantity,
-		|	ItemStockAdjustmentItemList.ItemKeyWriteOff,
-		|	ItemStockAdjustmentItemList.Ref.Date AS Period,
-		|	ItemStockAdjustmentItemList.Ref.Company AS Company,
-		|	ItemStockAdjustmentItemList.Ref.Store AS Store,
-		|	ItemStockAdjustmentItemList.SerialLotNumber,
-		|	ItemStockAdjustmentItemList.SerialLotNumberWriteOff,
-		|	ItemStockAdjustmentItemList.Ref.Branch AS Branch
-		|INTO ItemList
-		|FROM
-		|	Document.ItemStockAdjustment.ItemList AS ItemStockAdjustmentItemList
-		|WHERE
-		|	ItemStockAdjustmentItemList.Ref = &Ref";
+	Return "SELECT
+		   |	ItemStockAdjustmentItemList.Ref,
+		   |	ItemStockAdjustmentItemList.Key,
+		   |	ItemStockAdjustmentItemList.ItemKey,
+		   |	ItemStockAdjustmentItemList.Unit,
+		   |	ItemStockAdjustmentItemList.Quantity,
+		   |	ItemStockAdjustmentItemList.QuantityInBaseUnit AS Quantity,
+		   |	ItemStockAdjustmentItemList.ItemKeyWriteOff,
+		   |	ItemStockAdjustmentItemList.Ref.Date AS Period,
+		   |	ItemStockAdjustmentItemList.Ref.Company AS Company,
+		   |	ItemStockAdjustmentItemList.Ref.Store AS Store,
+		   |	ItemStockAdjustmentItemList.SerialLotNumber,
+		   |	ItemStockAdjustmentItemList.SerialLotNumberWriteOff,
+		   |	ItemStockAdjustmentItemList.Ref.Branch AS Branch
+		   |INTO ItemList
+		   |FROM
+		   |	Document.ItemStockAdjustment.ItemList AS ItemStockAdjustmentItemList
+		   |WHERE
+		   |	ItemStockAdjustmentItemList.Ref = &Ref";
 EndFunction
 
 Function R4010B_ActualStocks()
-	Return
-		"SELECT
-		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		|	QueryTable.ItemKey AS ItemKey,
-		|	*
-		|INTO R4010B_ActualStocks
-		|FROM
-		|	ItemList AS QueryTable
-		|
-		|UNION ALL
-		|
-		|SELECT
-		|	VALUE(AccumulationRecordType.Expense),
-		|	QueryTable.ItemKeyWriteOff AS ItemKey,
-		|	*
-		|FROM
-		|	ItemList AS QueryTable";
+	Return "SELECT
+		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		   |	QueryTable.ItemKey AS ItemKey,
+		   |	*
+		   |INTO R4010B_ActualStocks
+		   |FROM
+		   |	ItemList AS QueryTable
+		   |
+		   |UNION ALL
+		   |
+		   |SELECT
+		   |	VALUE(AccumulationRecordType.Expense),
+		   |	QueryTable.ItemKeyWriteOff AS ItemKey,
+		   |	*
+		   |FROM
+		   |	ItemList AS QueryTable";
 
 EndFunction
 
 Function R4011B_FreeStocks()
-	Return
-		"SELECT
-		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		|	QueryTable.ItemKey AS ItemKey,
-		|	*
-		|INTO R4011B_FreeStocks
-		|FROM
-		|	ItemList AS QueryTable
-		|
-		|UNION ALL
-		|
-		|SELECT
-		|	VALUE(AccumulationRecordType.Expense),
-		|	QueryTable.ItemKeyWriteOff AS ItemKey,
-		|	*
-		|FROM
-		|	ItemList AS QueryTable";
+	Return "SELECT
+		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		   |	QueryTable.ItemKey AS ItemKey,
+		   |	*
+		   |INTO R4011B_FreeStocks
+		   |FROM
+		   |	ItemList AS QueryTable
+		   |
+		   |UNION ALL
+		   |
+		   |SELECT
+		   |	VALUE(AccumulationRecordType.Expense),
+		   |	QueryTable.ItemKeyWriteOff AS ItemKey,
+		   |	*
+		   |FROM
+		   |	ItemList AS QueryTable";
 
 EndFunction
 
 Function R4014B_SerialLotNumber()
-	Return
-		"SELECT
-		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		|	QueryTable.ItemKey AS ItemKey,
-		|	QueryTable.SerialLotNumber AS SerialLotNumber,
-		|	*
-		|INTO R4014B_SerialLotNumber
-		|FROM
-		|	ItemList AS QueryTable
-		|WHERE
-		|	Not QueryTable.SerialLotNumber = Value(Catalog.SerialLotNumbers.EmptyRef)
-		|
-		|UNION ALL
-		|
-		|SELECT
-		|	VALUE(AccumulationRecordType.Expense),
-		|	QueryTable.ItemKeyWriteOff,
-		|	QueryTable.SerialLotNumberWriteOff,
-		|	*
-		|FROM
-		|	ItemList AS QueryTable
-		|WHERE
-		|	Not QueryTable.SerialLotNumberWriteOff = Value(Catalog.SerialLotNumbers.EmptyRef)";
+	Return "SELECT
+		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		   |	QueryTable.ItemKey AS ItemKey,
+		   |	QueryTable.SerialLotNumber AS SerialLotNumber,
+		   |	*
+		   |INTO R4014B_SerialLotNumber
+		   |FROM
+		   |	ItemList AS QueryTable
+		   |WHERE
+		   |	Not QueryTable.SerialLotNumber = Value(Catalog.SerialLotNumbers.EmptyRef)
+		   |
+		   |UNION ALL
+		   |
+		   |SELECT
+		   |	VALUE(AccumulationRecordType.Expense),
+		   |	QueryTable.ItemKeyWriteOff,
+		   |	QueryTable.SerialLotNumberWriteOff,
+		   |	*
+		   |FROM
+		   |	ItemList AS QueryTable
+		   |WHERE
+		   |	Not QueryTable.SerialLotNumberWriteOff = Value(Catalog.SerialLotNumbers.EmptyRef)";
 
 EndFunction
 
 Function R4050B_StockInventory()
-	Return
-		"SELECT
-		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		|	QueryTable.ItemKey AS ItemKey,
-		|	*
-		|INTO R4050B_StockInventory
-		|FROM
-		|	ItemList AS QueryTable
-		|
-		|UNION ALL
-		|
-		|SELECT
-		|	VALUE(AccumulationRecordType.Expense),
-		|	QueryTable.ItemKeyWriteOff AS ItemKey,
-		|	*
-		|FROM
-		|	ItemList AS QueryTable";
+	Return "SELECT
+		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		   |	QueryTable.ItemKey AS ItemKey,
+		   |	*
+		   |INTO R4050B_StockInventory
+		   |FROM
+		   |	ItemList AS QueryTable
+		   |
+		   |UNION ALL
+		   |
+		   |SELECT
+		   |	VALUE(AccumulationRecordType.Expense),
+		   |	QueryTable.ItemKeyWriteOff AS ItemKey,
+		   |	*
+		   |FROM
+		   |	ItemList AS QueryTable";
 
 EndFunction
 
 Function R4051T_StockAdjustmentAsWriteOff()
-	Return
-		"SELECT 
-		|	*
-		|INTO R4051T_StockAdjustmentAsWriteOff
-		|FROM
-		|	ItemList AS QueryTable
-		|WHERE True";
+	Return "SELECT 
+		   |	*
+		   |INTO R4051T_StockAdjustmentAsWriteOff
+		   |FROM
+		   |	ItemList AS QueryTable
+		   |WHERE True";
 
 EndFunction
 
 Function R4052T_StockAdjustmentAsSurplus()
-	Return
-		"SELECT 
-		|	QueryTable.ItemKeyWriteOff AS ItemKey,
-		|	*
-		|INTO R4052T_StockAdjustmentAsSurplus
-		|FROM
-		|	ItemList AS QueryTable
-		|WHERE True";
+	Return "SELECT 
+		   |	QueryTable.ItemKeyWriteOff AS ItemKey,
+		   |	*
+		   |INTO R4052T_StockAdjustmentAsSurplus
+		   |FROM
+		   |	ItemList AS QueryTable
+		   |WHERE True";
 
 EndFunction
 

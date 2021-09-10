@@ -1,6 +1,7 @@
-Procedure OpenFormPickupSpecialOffers_ForDocument(Object, Form, NotifyEditFinish, AddInfo = Undefined, isAutoProcess = False) Export
+Procedure OpenFormPickupSpecialOffers_ForDocument(Object, Form, NotifyEditFinish, AddInfo = Undefined,
+	isAutoProcess = False) Export
 	OpenFormArgs = GetOpenFormArgsPickupSpecialOffers_ForDocument(Object, isAutoProcess);
-	
+
 	If isAutoProcess Then
 		// BSLLS:GetFormMethod-off
 		OffersForm = GetForm("CommonForm.PickupSpecialOffers", New Structure("Info", OpenFormArgs), Form);
@@ -8,10 +9,8 @@ Procedure OpenFormPickupSpecialOffers_ForDocument(Object, Form, NotifyEditFinish
 		ResultAutoProcess = OffersForm.PutOffersTreeToTempStorageOnClient();
 		SpecialOffersEditFinish_ForDocument(ResultAutoProcess, Object, Form, AddInfo);
 	Else
-		OpenForm("CommonForm.PickupSpecialOffers",
-			New Structure("Info", OpenFormArgs), Form, , , ,
-			New NotifyDescription(NotifyEditFinish, Form, AddInfo),
-			FormWindowOpeningMode.LockWholeInterface);
+		OpenForm("CommonForm.PickupSpecialOffers", New Structure("Info", OpenFormArgs), Form, , , ,
+			New NotifyDescription(NotifyEditFinish, Form, AddInfo), FormWindowOpeningMode.LockWholeInterface);
 	EndIf;
 EndProcedure
 
@@ -29,26 +28,21 @@ Procedure SpecialOffersEditFinish_ForDocument(OffersInfo, Object, Form, AddInfo 
 	EndIf;
 	OffersClient.RecalculateTaxAndOffers(Object, Form);
 	CalculationStringsClientServer.CalculateAndLoadOffers_ForDocument(Object, OffersInfo.OffersAddress);
-	
+
 	CalculationStringsClientServer.RecalculateAppliedOffers_ForRow(Object);
-	
-	CalculationStringsClientServer.CalculateItemsRows(Object,
-		Form,
-		Object.ItemList,
-		CalculationStringsClientServer.GetCalculationSettings(),
-		TaxesClient.GetArrayOfTaxInfo(Form));
+
+	CalculationStringsClientServer.CalculateItemsRows(Object, Form, Object.ItemList,
+		CalculationStringsClientServer.GetCalculationSettings(), TaxesClient.GetArrayOfTaxInfo(Form));
 	Form.Modified = True;
 	Form.TaxAndOffersCalculated = True;
-	
+
 	ExecuteCallback(AddInfo);
 EndProcedure
 
 Procedure OpenFormPickupSpecialOffers_ForRow(Object, CurrentRow, Form, NotifyEditFinish, AddInfo = Undefined) Export
 	OpenFormArgs = GetOpenFormArgsPickupSpecialOffers_ForRow(Object, CurrentRow);
-	OpenForm("CommonForm.PickupSpecialOffers",
-		New Structure("Info", OpenFormArgs), Form, , , ,
-		New NotifyDescription(NotifyEditFinish, Form, AddInfo),
-		FormWindowOpeningMode.LockWholeInterface);
+	OpenForm("CommonForm.PickupSpecialOffers", New Structure("Info", OpenFormArgs), Form, , , ,
+		New NotifyDescription(NotifyEditFinish, Form, AddInfo), FormWindowOpeningMode.LockWholeInterface);
 EndProcedure
 
 Function GetOpenFormArgsPickupSpecialOffers_ForRow(Object, CurrentRow) Export
@@ -64,23 +58,19 @@ Procedure SpecialOffersEditFinish_ForRow(OffersInfo, Object, Form, AddInfo = Und
 	If OffersInfo = Undefined Then
 		Return;
 	EndIf;
-	CalculationStringsClientServer.CalculateAndLoadOffers_ForRow(Object, OffersInfo.OffersAddress, OffersInfo.ItemListRowKey);
-	CalculationStringsClientServer.CalculateItemsRows(Object,
-		Form,
-		Object.ItemList,
-		CalculationStringsClientServer.GetCalculationSettings(),
-		TaxesClient.GetArrayOfTaxInfo(Form));
+	CalculationStringsClientServer.CalculateAndLoadOffers_ForRow(Object, OffersInfo.OffersAddress,
+		OffersInfo.ItemListRowKey);
+	CalculationStringsClientServer.CalculateItemsRows(Object, Form, Object.ItemList,
+		CalculationStringsClientServer.GetCalculationSettings(), TaxesClient.GetArrayOfTaxInfo(Form));
 	Form.Modified = True;
 	ExecuteCallback(AddInfo);
 EndProcedure
 
 Procedure ExecuteCallback(Args)
-	If Args <> Undefined
-		And TypeOf(Args) = Type("Structure")
-		And Args.Property("Callback") Then
-		
+	If Args <> Undefined And TypeOf(Args) = Type("Structure") And Args.Property("Callback") Then
+
 		Execute StrTemplate("Args.Callback.Module.%1();", Args.Callback.Method);
-		
+
 	EndIf;
 EndProcedure
 
@@ -90,4 +80,3 @@ Procedure RecalculateTaxAndOffers(Object, Form) Export
 	EndIf;
 	CalculationStringsClientServer.ClearDependentData(Object);
 EndProcedure
-

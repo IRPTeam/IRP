@@ -1,4 +1,3 @@
-
 #Region FormEvents
 
 &AtServer
@@ -6,16 +5,16 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	LocalizationEvents.CreateMainFormItemDescription(ThisObject, "GroupDescriptions");
 	ExtensionServer.AddAttributesFromExtensions(ThisObject, Object.Ref);
 	AddAttributesAndPropertiesServer.OnCreateAtServer(ThisObject);
-	
+
 	RuleListTypeList = FillTypes();
 	For Each Row In RuleListTypeList Do
 		Items.RuleListType.ChoiceList.Add(Row.Value, Row.Presentation, , Row.Picture);
 	EndDo;
-	
+
 	ComparisonTypeArray = StrSplit("=,<>,<,<=,>,>=,IN,IN HIERARCHY,BETWEEN,IS NULL", ",");
 	Items.RuleListComparisonType.ChoiceList.LoadValues(ComparisonTypeArray);
 	Items.ComparisonType.ChoiceList.LoadValues(ComparisonTypeArray);
-	
+
 	If Object.SetOneRuleForAllObjects Then
 		If Object.RuleList.Count() Then
 			FillAttributeListHead(Items.Attribute.ChoiceList);
@@ -42,16 +41,12 @@ EndProcedure
 
 &AtClient
 Procedure ForAllUsersOnChange(Item)
-	SetVisible()
+	SetVisible();
 EndProcedure
-
-
 &AtClient
 Procedure OnOpen(Cancel)
 	SetVisible();
 EndProcedure
-
-
 &AtClient
 Procedure SetOneRuleForAllObjectsOnChange(Item)
 	SetVisible();
@@ -98,7 +93,7 @@ EndProcedure
 
 &AtServer
 Function FillTypes()
-	ValueList = New ValueList;
+	ValueList = New ValueList();
 	For Each Cat In Metadata.Catalogs Do
 		ValueList.Add(Cat.FullName(), Cat.Synonym, , PictureLib.Catalog);
 	EndDo;
@@ -116,7 +111,7 @@ EndFunction
 
 &AtClient
 Procedure RuleListAttributeStartChoice(Item, ChoiceData, StandardProcessing)
-	ValueList = New ValueList;
+	ValueList = New ValueList();
 	FillAttributeList(ValueList, Items.RuleList.CurrentData.Type);
 	Items.RuleListAttribute.ChoiceList.Clear();
 	For Each Row In ValueList Do
@@ -126,7 +121,7 @@ EndProcedure
 
 &AtClient
 Procedure AttributeStartChoice(Item, ChoiceData, StandardProcessing)
-	ValueList = New ValueList;
+	ValueList = New ValueList();
 	FillAttributeListHead(ValueList);
 	Items.Attribute.ChoiceList.Clear();
 	For Each Row In ValueList Do
@@ -143,13 +138,13 @@ EndProcedure
 
 &AtServer
 Procedure FillAttributeListHead(ChoiceData)
-	
-	VT = New ValueTable;
-	VT.Columns.Add("Attribute"	, New TypeDescription("String"));
-	VT.Columns.Add("Count"		, New TypeDescription("Number"));
-	ValueList = New ValueList;
+
+	VT = New ValueTable();
+	VT.Columns.Add("Attribute", New TypeDescription("String"));
+	VT.Columns.Add("Count", New TypeDescription("Number"));
+	ValueList = New ValueList();
 	For Each Row In Object.RuleList Do
-		ValueList = New ValueList;
+		ValueList = New ValueList();
 		FillAttributeList(ValueList, Row.Type);
 		For Each VLRow In ValueList Do
 			VTRow = VT.Add();
@@ -157,7 +152,7 @@ Procedure FillAttributeListHead(ChoiceData)
 			VTRow.Count = 1;
 		EndDo;
 	EndDo;
-	
+
 	VT.GroupBy("Attribute", "Count");
 	For Each AttributeName In VT.FindRows(New Structure("Count", Object.RuleList.Count())) Do
 		Row = ValueList.FindByValue(AttributeName.Attribute);
@@ -177,7 +172,7 @@ Procedure FillAttributeList(ChoiceData, DataType)
 	EndIf;
 	If MetadataInfo.hasStandardAttributes(MetadataType) Then
 		AddChild(MetaItem, ChoiceData, "StandardAttributes");
-	EndIf;	
+	EndIf;
 	If MetadataInfo.hasRecalculations(MetadataType) Then
 		AddChild(MetaItem, ChoiceData, "Recalculations");
 	EndIf;
@@ -186,31 +181,30 @@ Procedure FillAttributeList(ChoiceData, DataType)
 	EndIf;
 
 	For Each CmAttribute In Metadata.CommonAttributes Do
-		If Not CmAttribute.Content.Find(Metadata.FindByFullName(DataType)) = Undefined AND 
-			CmAttribute.Content.Find(Metadata.FindByFullName(DataType)).Use = Metadata.ObjectProperties.CommonAttributeUse.Use Then
-				ChoiceData.Add("CommonAttribute." + CmAttribute.Name, 
-					?(IsBlankString(CmAttribute.Synonym), CmAttribute.Name, CmAttribute.Synonym), , PictureLib.CommonAttributes);
+		If Not CmAttribute.Content.Find(Metadata.FindByFullName(DataType)) = Undefined And CmAttribute.Content.Find(
+			Metadata.FindByFullName(DataType)).Use = Metadata.ObjectProperties.CommonAttributeUse.Use Then
+			ChoiceData.Add("CommonAttribute." + CmAttribute.Name, ?(IsBlankString(CmAttribute.Synonym),
+				CmAttribute.Name, CmAttribute.Synonym), , PictureLib.CommonAttributes);
 		EndIf;
 	EndDo;
 EndProcedure
-
-
 &AtServer
 Procedure AddChild(MetaItem, AttributeChoiceList, DataType)
 
-	If NOT MetaItem[DataType].Count() Then
+	If Not MetaItem[DataType].Count() Then
 		Return;
 	EndIf;
 
 	For Each AddChild In MetaItem[DataType] Do
-		AttributeChoiceList.Add(DataType + "." + AddChild.Name, ?(IsBlankString(AddChild.Synonym), AddChild.Name, AddChild.Synonym), , PictureLib[DataType]);
+		AttributeChoiceList.Add(DataType + "." + AddChild.Name, ?(IsBlankString(AddChild.Synonym), AddChild.Name,
+			AddChild.Synonym), , PictureLib[DataType]);
 	EndDo;
-	
+
 EndProcedure
 
 &AtServer
 Procedure FillValueType(RowStructure)
-	
+
 	If RowStructure.SetValueAsCode Then
 		ThisObject.Items.RuleListValue.TypeRestriction = New TypeDescription("String");
 		ThisObject.Items.RuleListValue.InputHint = String(R().S_032);
@@ -218,17 +212,17 @@ Procedure FillValueType(RowStructure)
 		If StrSplit(RowStructure.Attribute, ".")[0] = "CommonAttribute" Then
 			ThisObject.Items.RuleListValue.TypeRestriction = Metadata.FindByFullName(RowStructure.Attribute).Type;
 		Else
-			ThisObject.Items.RuleListValue.TypeRestriction = Metadata.FindByFullName(RowStructure.Type)
-					[StrSplit(RowStructure.Attribute, ".")[0]][StrSplit(RowStructure.Attribute, ".")[1]].Type;
+			ThisObject.Items.RuleListValue.TypeRestriction = Metadata.FindByFullName(RowStructure.Type)[StrSplit(
+				RowStructure.Attribute, ".")[0]][StrSplit(RowStructure.Attribute, ".")[1]].Type;
 		EndIf;
 		ThisObject.Items.RuleListValue.InputHint = String(ThisObject.Items.RuleListValue.TypeRestriction);
 	EndIf;
-	
+
 EndProcedure
 
 &AtServer
 Procedure FillValueTypeHead(Type)
-	
+
 	If Object.SetValueAsCode Then
 		ThisObject.Items.Value.TypeRestriction = New TypeDescription("String");
 		ThisObject.Items.Value.InputHint = String(R().S_032);
@@ -236,12 +230,12 @@ Procedure FillValueTypeHead(Type)
 		If StrSplit(Object.Attribute, ".")[0] = "CommonAttribute" Then
 			ThisObject.Items.Value.TypeRestriction = Metadata.FindByFullName(Object.Attribute).Type;
 		Else
-			ThisObject.Items.Value.TypeRestriction = Metadata.FindByFullName(Type)
-					[StrSplit(Object.Attribute, ".")[0]][StrSplit(Object.Attribute, ".")[1]].Type;
+			ThisObject.Items.Value.TypeRestriction = Metadata.FindByFullName(Type)[StrSplit(Object.Attribute,
+				".")[0]][StrSplit(Object.Attribute, ".")[1]].Type;
 		EndIf;
 		ThisObject.Items.Value.InputHint = String(ThisObject.Items.Value.TypeRestriction);
 	EndIf;
-	
+
 EndProcedure
 
 #EndRegion

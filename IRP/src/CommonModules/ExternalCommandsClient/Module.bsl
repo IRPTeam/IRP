@@ -1,28 +1,25 @@
-
-Procedure GeneratedFormCommandActionByName(Object, Form, CommandName, AddInfo = Undefined) Export	
-	ExtProc = ExternalCommandsServer.GetRefOfExternalDataProcByName(CommandName);	
-	Info = AddDataProcServer.AddDataProcInfo(ExtProc);	
+Procedure GeneratedFormCommandActionByName(Object, Form, CommandName, AddInfo = Undefined) Export
+	ExtProc = ExternalCommandsServer.GetRefOfExternalDataProcByName(CommandName);
+	Info = AddDataProcServer.AddDataProcInfo(ExtProc);
 	CallMethodAddDataProc(Info);
-	If Info.Property("OpenForm")
-		And Info.OpenForm Then
+	If Info.Property("OpenForm") And Info.OpenForm Then
 		AddDataProcClient.OpenFormAddDataProc(Info, Form);
 	Else
 		ReceivedForm = AddDataProcClient.GetFormAddDataProc(Info, Form);
 		ReceivedForm.CommandProcedure(Object, Form);
-	EndIf;	
+	EndIf;
 EndProcedure
 
-Procedure GeneratedListChoiceFormCommandActionByName(SelectedRows, Form, CommandName, AddInfo = Undefined) Export	
-	ExtProc = ExternalCommandsServer.GetRefOfExternalDataProcByName(CommandName);	
-	Info = AddDataProcServer.AddDataProcInfo(ExtProc);	
+Procedure GeneratedListChoiceFormCommandActionByName(SelectedRows, Form, CommandName, AddInfo = Undefined) Export
+	ExtProc = ExternalCommandsServer.GetRefOfExternalDataProcByName(CommandName);
+	Info = AddDataProcServer.AddDataProcInfo(ExtProc);
 	CallMethodAddDataProc(Info);
-	If Info.Property("OpenForm")
-		And Info.OpenForm Then
+	If Info.Property("OpenForm") And Info.OpenForm Then
 		AddDataProcClient.OpenFormAddDataProc(Info, Form);
-	Else	
+	Else
 		ReceivedForm = AddDataProcClient.GetFormAddDataProc(Info, Form);
 		ReceivedForm.CommandProcedure(SelectedRows, Form);
-	EndIf;	
+	EndIf;
 EndProcedure
 
 Procedure CallMethodAddDataProc(Info)

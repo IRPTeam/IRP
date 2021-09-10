@@ -10,7 +10,7 @@ EndFunction
 
 Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 	Tables = New Structure();
-	
+
 	ObjectStatusesServer.WriteStatusToRegister(Ref, Ref.Status);
 	StatusInfo = ObjectStatusesServer.GetLastStatusInfo(Ref);
 	Parameters.Insert("StatusInfo", StatusInfo);
@@ -21,15 +21,16 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
 #EndRegion
 		Return Tables;
-	EndIf;
-		
+	EndIf
+	;
+
 	Parameters.IsReposting = False;
 
 #Region NewRegistersPosting
 	QueryArray = GetQueryTextsSecondaryTables();
 	Parameters.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
-#EndRegion	
+#EndRegion
 	Return Tables;
 EndFunction
 
@@ -40,7 +41,7 @@ EndFunction
 
 Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 #Region NewRegisterPosting
-	Tables = Parameters.DocumentDataTables;	
+	Tables = Parameters.DocumentDataTables;
 	QueryArray = GetQueryTextsMasterTables();
 	PostingServer.SetRegisters(Tables, Ref);
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
@@ -49,11 +50,11 @@ EndProcedure
 
 Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 	PostingDataTables = New Map();
-		
+
 #Region NewRegistersPosting
 	PostingServer.SetPostingDataTables(PostingDataTables, Parameters);
-#EndRegion		
-			
+#EndRegion
+
 	Return PostingDataTables;
 EndFunction
 
@@ -94,22 +95,23 @@ Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
 	StatusInfo = ObjectStatusesServer.GetLastStatusInfo(Ref);
 	Unposting = ?(Parameters.Property("Unposting"), Parameters.Unposting, False);
 	AccReg = AccumulationRegisters;
-	LineNumberAndItemKeyFromItemList = PostingServer.GetLineNumberAndItemKeyFromItemList(Ref, "Document.SalesOrder.ItemList");
-	
+	LineNumberAndItemKeyFromItemList = PostingServer.GetLineNumberAndItemKeyFromItemList(Ref,
+		"Document.SalesOrder.ItemList");
+
 	If StatusInfo.Posting Then
-		CommonFunctionsClientServer.PutToAddInfo(AddInfo, "BalancePeriod", 
+		CommonFunctionsClientServer.PutToAddInfo(AddInfo, "BalancePeriod",
 			New Boundary(New PointInTime(StatusInfo.Period, Ref), BoundaryType.Including));
 	EndIf;
 
 	Parameters.Insert("RecordType", AccumulationRecordType.Expense);
 	PostingServer.CheckBalance_AfterWrite(Ref, Cancel, Parameters, "Document.SalesOrder.ItemList", AddInfo);
-	
-	If Not Cancel And Not AccReg.R4037B_PlannedReceiptReservationRequests.CheckBalance(Ref, LineNumberAndItemKeyFromItemList,
-	                                                                PostingServer.GetQueryTableByName("R4037B_PlannedReceiptReservationRequests", Parameters),
-	                                                                PostingServer.GetQueryTableByName("R4037B_PlannedReceiptReservationRequests_Exists", Parameters),
-	                                                                AccumulationRecordType.Receipt, Unposting, AddInfo) Then
+
+	If Not Cancel And Not AccReg.R4037B_PlannedReceiptReservationRequests.CheckBalance(Ref,
+		LineNumberAndItemKeyFromItemList, PostingServer.GetQueryTableByName("R4037B_PlannedReceiptReservationRequests",
+		Parameters), PostingServer.GetQueryTableByName("R4037B_PlannedReceiptReservationRequests_Exists", Parameters),
+		AccumulationRecordType.Receipt, Unposting, AddInfo) Then
 		Cancel = True;
-	EndIf;	
+	EndIf;
 EndProcedure
 
 #EndRegion
@@ -117,7 +119,7 @@ EndProcedure
 #Region NewRegistersPosting
 
 Function GetInformationAboutMovements(Ref) Export
-	Str = New Structure;
+	Str = New Structure();
 	Str.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
 	Str.Insert("QueryTextsMasterTables", GetQueryTextsMasterTables());
 	Str.Insert("QueryTextsSecondaryTables", GetQueryTextsSecondaryTables());
@@ -132,15 +134,15 @@ Function GetAdditionalQueryParameters(Ref)
 EndFunction
 
 Function GetQueryTextsSecondaryTables()
-	QueryArray = New Array;
+	QueryArray = New Array();
 	QueryArray.Add(ItemList());
 	QueryArray.Add(PostingServer.Exists_R4011B_FreeStocks());
 	QueryArray.Add(R4037B_PlannedReceiptReservationRequests_Exists());
-	Return QueryArray;	
+	Return QueryArray;
 EndFunction
 
 Function GetQueryTextsMasterTables()
-	QueryArray = New Array;
+	QueryArray = New Array();
 	QueryArray.Add(R2010T_SalesOrders());
 	QueryArray.Add(R2011B_SalesOrdersShipment());
 	QueryArray.Add(R2012B_SalesOrdersInvoiceClosing());
@@ -151,216 +153,204 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R4034B_GoodsShipmentSchedule());
 	QueryArray.Add(R2022B_CustomersPaymentPlanning());
 	QueryArray.Add(R4037B_PlannedReceiptReservationRequests());
-	Return QueryArray;	
-EndFunction	
+	Return QueryArray;
+EndFunction
 
 Function ItemList()
-	Return
-	"SELECT
-	|	SalesOrderItemList.Ref.Company AS Company,
-	|	SalesOrderItemList.Ref.ShipmentConfirmationsBeforeSalesInvoice AS ShipmentConfirmationsBeforeSalesInvoice,
-	|	SalesOrderItemList.Store AS Store,
-	|	SalesOrderItemList.Store.UseShipmentConfirmation AS UseShipmentConfirmation,
-	|	SalesOrderItemList.ItemKey AS ItemKey,
-	|	SalesOrderItemList.Ref AS Order,
-	|	SalesOrderItemList.Quantity AS UnitQuantity,
-	|	SalesOrderItemList.QuantityInBaseUnit AS Quantity,
-	|	SalesOrderItemList.Unit,
-	|	SalesOrderItemList.ItemKey.Item AS Item,
-	|	SalesOrderItemList.Ref.Date AS Period,
-	|	SalesOrderItemList.Key AS RowKey,
-	|	SalesOrderItemList.DeliveryDate AS DeliveryDate,
-	|	SalesOrderItemList.ProcurementMethod,
-	|	SalesOrderItemList.ProcurementMethod = VALUE(Enum.ProcurementMethods.Stock) AS IsProcurementMethod_Stock,
-	|	SalesOrderItemList.ProcurementMethod = VALUE(Enum.ProcurementMethods.Purchase) AS IsProcurementMethod_Purchase,
-	|	SalesOrderItemList.ProcurementMethod = VALUE(Enum.ProcurementMethods.IncomingReserve) AS IsProcurementMethod_IncomingReserve,
-	|	SalesOrderItemList.ProcurementMethod = VALUE(Enum.ProcurementMethods.NoReserve) 
-	|	OR SalesOrderItemList.ProcurementMethod = VALUE(Enum.ProcurementMethods.IncomingReserve) AS IsProcurementMethod_NonReserve,
-	|	SalesOrderItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS IsService,
-	|	SalesOrderItemList.TotalAmount AS Amount,
-	|	SalesOrderItemList.Ref.Currency AS Currency,
-	|	SalesOrderItemList.Cancel AS IsCanceled,
-	|	SalesOrderItemList.CancelReason,
-	|	SalesOrderItemList.NetAmount,
-	|	SalesOrderItemList.Ref.UseItemsShipmentScheduling AS UseItemsShipmentScheduling,
-	|	SalesOrderItemList.OffersAmount,
-	|	&StatusInfoPosting AS StatusInfoPosting,
-	|	SalesOrderItemList.Ref.Branch AS Branch,
-	|	CASE
-	|		WHEN SalesOrderItemList.ReservationDate = DATETIME(1, 1, 1)
-	|			THEN SalesOrderItemList.Ref.Date
-	|		ELSE SalesOrderItemList.ReservationDate
-	|	END AS ReservationDate
-	|INTO ItemList
-	|FROM
-	|	Document.SalesOrder.ItemList AS SalesOrderItemList
-	|WHERE
-	|	SalesOrderItemList.Ref = &Ref
-	|	AND &StatusInfoPosting";
+	Return "SELECT
+		   |	SalesOrderItemList.Ref.Company AS Company,
+		   |	SalesOrderItemList.Ref.ShipmentConfirmationsBeforeSalesInvoice AS ShipmentConfirmationsBeforeSalesInvoice,
+		   |	SalesOrderItemList.Store AS Store,
+		   |	SalesOrderItemList.Store.UseShipmentConfirmation AS UseShipmentConfirmation,
+		   |	SalesOrderItemList.ItemKey AS ItemKey,
+		   |	SalesOrderItemList.Ref AS Order,
+		   |	SalesOrderItemList.Quantity AS UnitQuantity,
+		   |	SalesOrderItemList.QuantityInBaseUnit AS Quantity,
+		   |	SalesOrderItemList.Unit,
+		   |	SalesOrderItemList.ItemKey.Item AS Item,
+		   |	SalesOrderItemList.Ref.Date AS Period,
+		   |	SalesOrderItemList.Key AS RowKey,
+		   |	SalesOrderItemList.DeliveryDate AS DeliveryDate,
+		   |	SalesOrderItemList.ProcurementMethod,
+		   |	SalesOrderItemList.ProcurementMethod = VALUE(Enum.ProcurementMethods.Stock) AS IsProcurementMethod_Stock,
+		   |	SalesOrderItemList.ProcurementMethod = VALUE(Enum.ProcurementMethods.Purchase) AS IsProcurementMethod_Purchase,
+		   |	SalesOrderItemList.ProcurementMethod = VALUE(Enum.ProcurementMethods.IncomingReserve) AS IsProcurementMethod_IncomingReserve,
+		   |	SalesOrderItemList.ProcurementMethod = VALUE(Enum.ProcurementMethods.NoReserve) 
+		   |	OR SalesOrderItemList.ProcurementMethod = VALUE(Enum.ProcurementMethods.IncomingReserve) AS IsProcurementMethod_NonReserve,
+		   |	SalesOrderItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS IsService,
+		   |	SalesOrderItemList.TotalAmount AS Amount,
+		   |	SalesOrderItemList.Ref.Currency AS Currency,
+		   |	SalesOrderItemList.Cancel AS IsCanceled,
+		   |	SalesOrderItemList.CancelReason,
+		   |	SalesOrderItemList.NetAmount,
+		   |	SalesOrderItemList.Ref.UseItemsShipmentScheduling AS UseItemsShipmentScheduling,
+		   |	SalesOrderItemList.OffersAmount,
+		   |	&StatusInfoPosting AS StatusInfoPosting,
+		   |	SalesOrderItemList.Ref.Branch AS Branch,
+		   |	CASE
+		   |		WHEN SalesOrderItemList.ReservationDate = DATETIME(1, 1, 1)
+		   |			THEN SalesOrderItemList.Ref.Date
+		   |		ELSE SalesOrderItemList.ReservationDate
+		   |	END AS ReservationDate
+		   |INTO ItemList
+		   |FROM
+		   |	Document.SalesOrder.ItemList AS SalesOrderItemList
+		   |WHERE
+		   |	SalesOrderItemList.Ref = &Ref
+		   |	AND &StatusInfoPosting";
 EndFunction
 
 Function R2010T_SalesOrders()
-	Return
-		"SELECT
-		|	*
-		|INTO R2010T_SalesOrders
-		|FROM
-		|	ItemList AS ItemList
-		|WHERE
-		|	NOT ItemList.isCanceled";
+	Return "SELECT
+		   |	*
+		   |INTO R2010T_SalesOrders
+		   |FROM
+		   |	ItemList AS ItemList
+		   |WHERE
+		   |	NOT ItemList.isCanceled";
 EndFunction
 
 Function R2011B_SalesOrdersShipment()
-	Return
-		"SELECT
-		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		|	*
-		|INTO R2011B_SalesOrdersShipment
-		|FROM
-		|	ItemList AS ItemList
-		|WHERE
-		|	NOT ItemList.isCanceled
-		|	AND NOT ItemList.IsService";
+	Return "SELECT
+		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		   |	*
+		   |INTO R2011B_SalesOrdersShipment
+		   |FROM
+		   |	ItemList AS ItemList
+		   |WHERE
+		   |	NOT ItemList.isCanceled
+		   |	AND NOT ItemList.IsService";
 EndFunction
 
 Function R2012B_SalesOrdersInvoiceClosing()
-	Return
-		"SELECT
-		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		|	*
-		|INTO R2012B_SalesOrdersInvoiceClosing
-		|FROM
-		|	ItemList AS ItemList
-		|WHERE
-		|	NOT ItemList.isCanceled";
+	Return "SELECT
+		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		   |	*
+		   |INTO R2012B_SalesOrdersInvoiceClosing
+		   |FROM
+		   |	ItemList AS ItemList
+		   |WHERE
+		   |	NOT ItemList.isCanceled";
 EndFunction
 
 Function R2013T_SalesOrdersProcurement()
-	Return
-		"SELECT
-		|	ItemList.Quantity AS OrderedQuantity,
-		|	*
-		|INTO R2013T_SalesOrdersProcurement
-		|FROM
-		|	ItemList AS ItemList
-		|WHERE
-		|	NOT ItemList.isCanceled
-		|	AND NOT ItemList.IsService
-		|	AND ItemList.IsProcurementMethod_Purchase";
+	Return "SELECT
+		   |	ItemList.Quantity AS OrderedQuantity,
+		   |	*
+		   |INTO R2013T_SalesOrdersProcurement
+		   |FROM
+		   |	ItemList AS ItemList
+		   |WHERE
+		   |	NOT ItemList.isCanceled
+		   |	AND NOT ItemList.IsService
+		   |	AND ItemList.IsProcurementMethod_Purchase";
 EndFunction
 
 Function R2014T_CanceledSalesOrders()
-	Return
-		"SELECT
-		|	*
-		|INTO R2014T_CanceledSalesOrders
-		|FROM
-		|	ItemList AS ItemList
-		|WHERE
-		|	ItemList.isCanceled";
+	Return "SELECT
+		   |	*
+		   |INTO R2014T_CanceledSalesOrders
+		   |FROM
+		   |	ItemList AS ItemList
+		   |WHERE
+		   |	ItemList.isCanceled";
 EndFunction
 
 #Region Stock
 
 Function R4011B_FreeStocks()
-	Return
-		"SELECT
-		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		|	*
-		|INTO R4011B_FreeStocks
-		|FROM
-		|	ItemList AS ItemList
-		|WHERE
-		|	NOT ItemList.isCanceled
-		|	AND NOT ItemList.IsService
-		|	AND ItemList.IsProcurementMethod_Stock";
+	Return "SELECT
+		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		   |	*
+		   |INTO R4011B_FreeStocks
+		   |FROM
+		   |	ItemList AS ItemList
+		   |WHERE
+		   |	NOT ItemList.isCanceled
+		   |	AND NOT ItemList.IsService
+		   |	AND ItemList.IsProcurementMethod_Stock";
 EndFunction
 
 Function R4012B_StockReservation()
-	Return
-		"SELECT
-		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		|	ItemList.ReservationDate AS Period,
-		|	*
-		|INTO R4012B_StockReservation
-		|FROM
-		|	ItemList AS ItemList
-		|WHERE
-		|	NOT ItemList.isCanceled
-		|	AND NOT ItemList.IsService
-		|	AND ItemList.IsProcurementMethod_Stock";
+	Return "SELECT
+		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		   |	ItemList.ReservationDate AS Period,
+		   |	*
+		   |INTO R4012B_StockReservation
+		   |FROM
+		   |	ItemList AS ItemList
+		   |WHERE
+		   |	NOT ItemList.isCanceled
+		   |	AND NOT ItemList.IsService
+		   |	AND ItemList.IsProcurementMethod_Stock";
 EndFunction
 
 #EndRegion
 
 Function R4034B_GoodsShipmentSchedule()
-	Return
-		"SELECT
-		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		|	ItemList.DeliveryDate AS Period,
-		|	ItemList.Order AS Basis,
-		|	*
-		|INTO R4034B_GoodsShipmentSchedule
-		|FROM
-		|	ItemList AS ItemList
-		|WHERE
-		|	NOT ItemList.isCanceled
-		|	AND NOT ItemList.IsService
-		|	AND NOT ItemList.DeliveryDate = DATETIME(1, 1, 1)
-		|	AND ItemList.UseItemsShipmentScheduling";
+	Return "SELECT
+		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		   |	ItemList.DeliveryDate AS Period,
+		   |	ItemList.Order AS Basis,
+		   |	*
+		   |INTO R4034B_GoodsShipmentSchedule
+		   |FROM
+		   |	ItemList AS ItemList
+		   |WHERE
+		   |	NOT ItemList.isCanceled
+		   |	AND NOT ItemList.IsService
+		   |	AND NOT ItemList.DeliveryDate = DATETIME(1, 1, 1)
+		   |	AND ItemList.UseItemsShipmentScheduling";
 EndFunction
 
 Function R2022B_CustomersPaymentPlanning()
-	Return
-		"SELECT
-		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		|	SalesOrderPaymentTerms.Ref.Date AS Period,
-		|	SalesOrderPaymentTerms.Ref.Company AS Company,
-		|	SalesOrderPaymentTerms.Ref.Branch AS Branch,
-		|	SalesOrderPaymentTerms.Ref AS Basis,
-		|	SalesOrderPaymentTerms.Ref.LegalName AS LegalName,
-		|	SalesOrderPaymentTerms.Ref.Partner AS Partner,
-		|	SalesOrderPaymentTerms.Ref.Agreement AS Agreement,
-		|	SUM(SalesOrderPaymentTerms.Amount) AS Amount
-		|INTO R2022B_CustomersPaymentPlanning
-		|FROM
-		|	Document.SalesOrder.PaymentTerms AS SalesOrderPaymentTerms
-		|WHERE
-		|	SalesOrderPaymentTerms.Ref = &Ref
-		|	AND SalesOrderPaymentTerms.CalculationType = VALUE(Enum.CalculationTypes.Prepaid)
-		|	AND &StatusInfoPosting
-		|GROUP BY
-		|	SalesOrderPaymentTerms.Ref.Date,
-		|	SalesOrderPaymentTerms.Ref.Company,
-		|	SalesOrderPaymentTerms.Ref.Branch,
-		|	SalesOrderPaymentTerms.Ref.Branch,
-		|	SalesOrderPaymentTerms.Ref,
-		|	SalesOrderPaymentTerms.Ref.LegalName,
-		|	SalesOrderPaymentTerms.Ref.Partner,
-		|	SalesOrderPaymentTerms.Ref.Agreement,
-		|	VALUE(AccumulationRecordType.Receipt)";
+	Return "SELECT
+		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		   |	SalesOrderPaymentTerms.Ref.Date AS Period,
+		   |	SalesOrderPaymentTerms.Ref.Company AS Company,
+		   |	SalesOrderPaymentTerms.Ref.Branch AS Branch,
+		   |	SalesOrderPaymentTerms.Ref AS Basis,
+		   |	SalesOrderPaymentTerms.Ref.LegalName AS LegalName,
+		   |	SalesOrderPaymentTerms.Ref.Partner AS Partner,
+		   |	SalesOrderPaymentTerms.Ref.Agreement AS Agreement,
+		   |	SUM(SalesOrderPaymentTerms.Amount) AS Amount
+		   |INTO R2022B_CustomersPaymentPlanning
+		   |FROM
+		   |	Document.SalesOrder.PaymentTerms AS SalesOrderPaymentTerms
+		   |WHERE
+		   |	SalesOrderPaymentTerms.Ref = &Ref
+		   |	AND SalesOrderPaymentTerms.CalculationType = VALUE(Enum.CalculationTypes.Prepaid)
+		   |	AND &StatusInfoPosting
+		   |GROUP BY
+		   |	SalesOrderPaymentTerms.Ref.Date,
+		   |	SalesOrderPaymentTerms.Ref.Company,
+		   |	SalesOrderPaymentTerms.Ref.Branch,
+		   |	SalesOrderPaymentTerms.Ref.Branch,
+		   |	SalesOrderPaymentTerms.Ref,
+		   |	SalesOrderPaymentTerms.Ref.LegalName,
+		   |	SalesOrderPaymentTerms.Ref.Partner,
+		   |	SalesOrderPaymentTerms.Ref.Agreement,
+		   |	VALUE(AccumulationRecordType.Receipt)";
 EndFunction
 
 Function R4037B_PlannedReceiptReservationRequests()
-	Return
-		"SELECT
-		|	VALUE(AccumulationRecordType.Receipt) AS RecordType, 
-		|	*
-		|	INTO R4037B_PlannedReceiptReservationRequests
-		|FROM
-		|	ItemList AS ItemList
-		|WHERE
-		|	ItemList.IsProcurementMethod_IncomingReserve";
-EndFunction	
-	
+	Return "SELECT
+		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType, 
+		   |	*
+		   |	INTO R4037B_PlannedReceiptReservationRequests
+		   |FROM
+		   |	ItemList AS ItemList
+		   |WHERE
+		   |	ItemList.IsProcurementMethod_IncomingReserve";
+EndFunction
+
 Function R4037B_PlannedReceiptReservationRequests_Exists()
-	Return
-		"SELECT *
-		|	INTO R4037B_PlannedReceiptReservationRequests_Exists
-		|FROM
-		|	AccumulationRegister.R4037B_PlannedReceiptReservationRequests AS R4037B_PlannedReceiptReservationRequests
-		|WHERE
-		|	R4037B_PlannedReceiptReservationRequests.Recorder = &Ref";
+	Return "SELECT *
+		   |	INTO R4037B_PlannedReceiptReservationRequests_Exists
+		   |FROM
+		   |	AccumulationRegister.R4037B_PlannedReceiptReservationRequests AS R4037B_PlannedReceiptReservationRequests
+		   |WHERE
+		   |	R4037B_PlannedReceiptReservationRequests.Recorder = &Ref";
 EndFunction
 
 #EndRegion

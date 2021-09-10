@@ -7,7 +7,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 		Item = Parameters.Filter.Item;
 		List.Parameters.SetParameterValue("Unit", Parameters.Filter.Item.Unit);
 		List.Parameters.SetParameterValue("Filter", True);
-		
+
 		Parameters.Filter.Delete("Item");
 	Else
 		List.Parameters.SetParameterValue("Filter", False);
@@ -23,8 +23,6 @@ Procedure ListBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
 	Filter = New Structure("FillingValues", FormParameters);
 	OpenForm("Catalog.Units.ObjectForm", Filter);
 EndProcedure
-
-
 &AtClient
 Procedure ShowAllUnits(Command)
 	Items.FormShowAllUnits.Check = Not Items.FormShowAllUnits.Check;

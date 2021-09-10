@@ -19,26 +19,26 @@ Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefin
 	If EventName = "UpdateAddAttributeAndPropertySets" Then
 		AddAttributesCreateFormControl();
 	EndIf;
-	
+
 	If Not Source = ThisObject Then
 		Return;
 	EndIf;
-	
+
 	DocRetailSalesReceiptClient.NotificationProcessing(Object, ThisObject, EventName, Parameter, Source);
-	
-	ServerData = Undefined;		
+
+	ServerData = Undefined;
 	If TypeOf(Parameter) = Type("Structure") And Parameter.Property("AddInfo") Then
 		ServerData = CommonFunctionsClientServer.GetFromAddInfo(Parameter.AddInfo, "ServerData");
 	EndIf;
-	
+
 	If EventName = "NewBarcode" And IsInputAvailable() Then
 		SearchByBarcode(Undefined, Parameter);
 	EndIf;
-	
+
 	If Upper(EventName) = Upper("CallbackHandler") Then
 		CurrenciesClient.CalculateAmount(Object, ThisObject);
 		CurrenciesClient.SetRatePresentation(Object, ThisObject);
-				
+
 		If ServerData <> Undefined Then
 			CurrenciesClient.SetVisibleRows(Object, ThisObject, Parameter.AddInfo);
 		EndIf;
@@ -170,7 +170,7 @@ EndProcedure
 
 &AtClient
 Procedure ItemListSelection(Item, RowSelected, Field, StandardProcessing)
-	DocRetailSalesReceiptClient.ItemListSelection(Object, ThisObject, Item, RowSelected, Field, StandardProcessing);	
+	DocRetailSalesReceiptClient.ItemListSelection(Object, ThisObject, Item, RowSelected, Field, StandardProcessing);
 EndProcedure
 
 #EndRegion
@@ -239,12 +239,14 @@ EndProcedure
 
 &AtClient
 Procedure ItemListSerialLotNumbersPresentationStartChoice(Item, ChoiceData, StandardProcessing, AddInfo = Undefined) Export
-	DocRetailSalesReceiptClient.ItemListSerialLotNumbersPresentationStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+	DocRetailSalesReceiptClient.ItemListSerialLotNumbersPresentationStartChoice(Object, ThisObject, Item, ChoiceData,
+		StandardProcessing);
 EndProcedure
 
 &AtClient
 Procedure ItemListSerialLotNumbersPresentationClearing(Item, StandardProcessing)
-	DocRetailSalesReceiptClient.ItemListSerialLotNumbersPresentationClearing(Object, ThisObject, Item, StandardProcessing);
+	DocRetailSalesReceiptClient.ItemListSerialLotNumbersPresentationClearing(Object, ThisObject, Item,
+		StandardProcessing);
 EndProcedure
 
 &AtClient
@@ -330,15 +332,13 @@ EndProcedure
 
 &AtClient
 Procedure SetSpecialOffers(Command)
-	OffersClient.OpenFormPickupSpecialOffers_ForDocument(Object,
-		ThisObject,
-		"SpecialOffersEditFinish_ForDocument");
+	OffersClient.OpenFormPickupSpecialOffers_ForDocument(Object, ThisObject, "SpecialOffersEditFinish_ForDocument");
 EndProcedure
 
 &AtClient
 Procedure SpecialOffersEditFinish_ForDocument(Result, AdditionalParameters) Export
 	OffersClient.SpecialOffersEditFinish_ForDocument(Result, Object, ThisObject, AdditionalParameters);
-	
+
 EndProcedure
 
 #EndRegion
@@ -347,9 +347,7 @@ EndProcedure
 
 &AtClient
 Procedure SetSpecialOffersAtRow(Command)
-	OffersClient.OpenFormPickupSpecialOffers_ForRow(Object,
-		Items.ItemList.CurrentData,
-		ThisObject,
+	OffersClient.OpenFormPickupSpecialOffers_ForRow(Object, Items.ItemList.CurrentData, ThisObject,
 		"SpecialOffersEditFinish_ForRow");
 EndProcedure
 
@@ -424,7 +422,8 @@ EndFunction
 &AtClient
 Procedure CurrenciesSelection(Item, RowSelected, Field, StandardProcessing, AddInfo = Undefined)
 	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "ExecuteAtClient", True);
-	CurrenciesClient.CurrenciesTable_Selection(Object, ThisObject, Item, RowSelected, Field, StandardProcessing, AddInfo);
+	CurrenciesClient.CurrenciesTable_Selection(Object, ThisObject, Item, RowSelected, Field, StandardProcessing,
+		AddInfo);
 EndProcedure
 
 &AtClient
@@ -454,7 +453,7 @@ EndProcedure
 Procedure CurrenciesBeforeDeleteRow(Item, Cancel)
 	Cancel = True;
 EndProcedure
-	
+
 #EndRegion
 
 #Region AddAttributes
@@ -476,7 +475,7 @@ EndProcedure
 &AtClient
 Procedure GeneratedFormCommandActionByName(Command) Export
 	ExternalCommandsClient.GeneratedFormCommandActionByName(Object, ThisObject, Command.Name);
-	GeneratedFormCommandActionByNameServer(Command.Name);	
+	GeneratedFormCommandActionByNameServer(Command.Name);
 EndProcedure
 
 &AtServer

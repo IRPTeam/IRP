@@ -8,18 +8,18 @@ Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 EndProcedure
 
 Procedure OnReadAtServer(Object, Form, CurrentObject) Export
-	
+
 	If ValueIsFilled(Object.Account) Then
 		Form.CurrentAccount = Object.Account;
 		Form.Currency = ServiceSystemServer.GetObjectAttribute(Object.Account, "Currency");
 	EndIf;
-	
+
 	If Not Form.GroupItems.Count() Then
 		SetGroupItemsList(Object, Form);
 	EndIf;
-	
+
 	DocumentsClientServer.ChangeTitleGroupTitle(CurrentObject, Form);
-	
+
 EndProcedure
 
 Procedure AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters) Export
@@ -32,15 +32,14 @@ EndProcedure
 #Region GroupTitle
 
 Procedure SetGroupItemsList(Object, Form)
-	AttributesArray = New Array;
+	AttributesArray = New Array();
 	AttributesArray.Add("Company");
 	AttributesArray.Add("Account");
 	DocumentsServer.DeleteUnavailableTitleItemNames(AttributesArray);
 	For Each Atr In AttributesArray Do
-		Form.GroupItems.Add(Atr, ?(ValueIsFilled(Form.Items[Atr].Title),
-								Form.Items[Atr].Title,
-								Object.Ref.Metadata().Attributes[Atr].Synonym + ":" + Chars.NBSp));
-	EndDo;	
+		Form.GroupItems.Add(Atr, ?(ValueIsFilled(Form.Items[Atr].Title), Form.Items[Atr].Title,
+			Object.Ref.Metadata().Attributes[Atr].Synonym + ":" + Chars.NBSp));
+	EndDo;
 EndProcedure
 
 #EndRegion

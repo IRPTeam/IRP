@@ -13,7 +13,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 			Else
 				Items.UserOrGroup.Title = "";
 			EndIf;
-			
+
 			CreateMetadataTree();
 		EndIf;
 	EndIf;
@@ -111,12 +111,8 @@ Procedure CreateMetadataTree()
 	NewRow.Insert("Rows", New Array());
 	ArrayOfRows = New Array();
 	ArrayOfRows.Add(NewRow);
-	If ExtractMetadata(Metadata.Documents, 
-	                   TableOfSettings, 
-	                   ArrayOfSavedAttributes, 
-	                   NewRow, 
-	                   1, 
-	                   ExistPredefinedDataNames) Then
+	If ExtractMetadata(Metadata.Documents, TableOfSettings, ArrayOfSavedAttributes, NewRow, 1,
+		ExistPredefinedDataNames) Then
 		PutMetadataToTree(ArrayOfRows, ThisObject.MetadataTree.GetItems());
 	EndIf;
 	
@@ -127,12 +123,7 @@ Procedure CreateMetadataTree()
 	NewRow.Insert("Rows", New Array());
 	ArrayOfRows = New Array();
 	ArrayOfRows.Add(NewRow);
-	If ExtractMetadata(Metadata.Catalogs, 
-	                   TableOfSettings, 
-	                   ArrayOfSavedAttributes, 
-	                   NewRow, 
-	                   8, 
-	                   ExistPredefinedDataNames) Then
+	If ExtractMetadata(Metadata.Catalogs, TableOfSettings, ArrayOfSavedAttributes, NewRow, 8, ExistPredefinedDataNames) Then
 		PutMetadataToTree(ArrayOfRows, ThisObject.MetadataTree.GetItems());
 	EndIf;
 	
@@ -146,7 +137,7 @@ Procedure CreateMetadataTree()
 	If GetCustomCommonSettings(NewRow, TableOfSettings) Then
 		PutMetadataToTree(ArrayOfRows, ThisObject.MetadataTree.GetItems());
 	EndIf;
-	
+
 	LoadSettings(TableOfSettings, ThisObject.UserOrGroup);
 EndProcedure
 
@@ -166,22 +157,18 @@ Procedure PutMetadataToTree(Source, TreeRow)
 EndProcedure
 
 &AtServer
-Function ExtractMetadata(MetadataCollection, 
-                         TableOfSettings, 
-                         ArrayOfSavedAttributes, 
-                         RowOwner, 
-                         PictureIndex, 
-                         ExistPredefinedDataNames)
+Function ExtractMetadata(MetadataCollection, TableOfSettings, ArrayOfSavedAttributes, RowOwner, PictureIndex,
+	ExistPredefinedDataNames)
 	Show = False;
 	For Each MetadataObject In MetadataCollection Do
-		
+
 		NewRow = New Structure();
 		NewRow.Insert("FullName", MetadataObject.FullName());
 		NewRow.Insert("Name", MetadataObject.Name);
 		NewRow.Insert("Synonym", MetadataObject.Synonym);
 		NewRow.Insert("PictureIndex", PictureIndex);
 		NewRow.Insert("Rows", New Array());
-		
+
 		If ArrayOfSavedAttributes.Find(Enums.KindsOfAttributes.Standard) <> Undefined Then
 			If GetStandardAttributes(MetadataObject, NewRow, TableOfSettings) Then
 				Show = True;
@@ -207,15 +194,15 @@ Function ExtractMetadata(MetadataCollection,
 				Show = True;
 			EndIf;
 		EndIf;
-		
+
 		If ArrayOfSavedAttributes.Find(Enums.KindsOfAttributes.Custom) <> Undefined Then
 			If GetCustomAttributes(MetadataObject, NewRow, TableOfSettings) Then
 				Show = True;
 			EndIf;
 		EndIf;
-		
+
 		RowOwner.Rows.Add(NewRow);
-		
+
 	EndDo;
 	Return Show;
 EndFunction
@@ -236,7 +223,7 @@ EndProcedure
 Procedure LoadSettingsToTree(Tree, TableOfSettings, UserOrGroup, ValueColumnName, SetUseIfValueIsSet = False)
 	TableOfSettings.FillValues(UserOrGroup, "UserOrGroup");
 	SavedSettings = GetSavedSettings(TableOfSettings);
-	
+
 	For Each Row In SavedSettings Do
 		ArrayOfRows = Tree.Rows.FindRows(New Structure("SettingID", Row.SettingID), True);
 		If ArrayOfRows.Count() Then
@@ -252,26 +239,26 @@ EndProcedure
 Function GetSavedSettings(TableOfSettings)
 	Query = New Query();
 	Query.Text =
-		"SELECT
-		|	tmp.UserOrGroup,
-		|	tmp.MetadataObject,
-		|	tmp.AttributeName,
-		|	tmp.SettingID
-		|INTO tmp
-		|FROM
-		|	&TableOfSettings AS tmp
-		|;
-		|
-		|////////////////////////////////////////////////////////////////////////////////
-		|SELECT
-		|	tmp.SettingID,
-		|	UserSettings.Value
-		|FROM
-		|	tmp AS tmp
-		|		INNER JOIN InformationRegister.UserSettings AS UserSettings
-		|		ON tmp.UserOrGroup = UserSettings.UserOrGroup
-		|		AND tmp.MetadataObject = UserSettings.MetadataObject
-		|		AND tmp.AttributeName = UserSettings.AttributeName";
+	"SELECT
+	|	tmp.UserOrGroup,
+	|	tmp.MetadataObject,
+	|	tmp.AttributeName,
+	|	tmp.SettingID
+	|INTO tmp
+	|FROM
+	|	&TableOfSettings AS tmp
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	tmp.SettingID,
+	|	UserSettings.Value
+	|FROM
+	|	tmp AS tmp
+	|		INNER JOIN InformationRegister.UserSettings AS UserSettings
+	|		ON tmp.UserOrGroup = UserSettings.UserOrGroup
+	|		AND tmp.MetadataObject = UserSettings.MetadataObject
+	|		AND tmp.AttributeName = UserSettings.AttributeName";
 	Query.SetParameter("TableOfSettings", TableOfSettings);
 	QueryResult = Query.Execute();
 	Return QueryResult.Unload();
@@ -305,12 +292,12 @@ EndFunction
 Function GetExistPredefinedDataNames()
 	Query = New Query();
 	Query.Text =
-		"SELECT
-		|	AddAttributeAndPropertySets.PredefinedDataName
-		|FROM
-		|	Catalog.AddAttributeAndPropertySets AS AddAttributeAndPropertySets
-		|WHERE
-		|	AddAttributeAndPropertySets.Predefined";
+	"SELECT
+	|	AddAttributeAndPropertySets.PredefinedDataName
+	|FROM
+	|	Catalog.AddAttributeAndPropertySets AS AddAttributeAndPropertySets
+	|WHERE
+	|	AddAttributeAndPropertySets.Predefined";
 	QueryResult = Query.Execute();
 	Return QueryResult.Unload().UnloadColumn("PredefinedDataName");
 EndFunction
@@ -325,14 +312,13 @@ EndProcedure
 
 &AtServer
 Function FilterIsOk(AttributeInfo)
-	If AttributeInfo.KindOfAttribute = Enums.KindsOfAttributes.Regular
-		Or AttributeInfo.KindOfAttribute = Enums.KindsOfAttributes.Common
-		Or AttributeInfo.KindOfAttribute = Enums.KindsOfAttributes.Column Then
+	If AttributeInfo.KindOfAttribute = Enums.KindsOfAttributes.Regular Or AttributeInfo.KindOfAttribute
+		= Enums.KindsOfAttributes.Common Or AttributeInfo.KindOfAttribute = Enums.KindsOfAttributes.Column Then
 		If Not AccessRight("View", AttributeInfo.Metadata, Metadata.Roles.FilterForUserSettings) Then
 			Return False;
 		EndIf;
 	EndIf;
-	
+
 	Return True;
 EndFunction
 
@@ -356,7 +342,7 @@ Function GetStandardAttributes(MetadataObject, RowOwner, TableOfSettings)
 		// TableOfSettings
 		AddRowToTableOfSettings(TableOfSettings, MetadataObject.FullName(), NewRow.Name, NewRow.SettingID);
 	EndDo;
-	
+
 	Return RowOwner.Rows.Count() > 0;
 EndFunction
 
@@ -388,15 +374,16 @@ Function GetCommonAttributes(MetadataObject, RowOwner, TableOfSettings)
 	// Common attributes
 	For Each CommonAttribute In Metadata.CommonAttributes Do
 		Content = CommonAttribute.Content.Find(MetadataObject);
-		
+
 		If Not Content = Undefined Then
-			If Content.Use = Metadata.ObjectProperties.CommonAttributeUse.Use
-				Or (Content.Use = Metadata.ObjectProperties.CommonAttributeUse.Auto
-					And CommonAttribute.AutoUse = Metadata.ObjectProperties.CommonAttributeAutoUse.Use) Then
+			If Content.Use = Metadata.ObjectProperties.CommonAttributeUse.Use Or (Content.Use
+				= Metadata.ObjectProperties.CommonAttributeUse.Auto And CommonAttribute.AutoUse
+				= Metadata.ObjectProperties.CommonAttributeAutoUse.Use) Then
 				NewRow = New Structure();
 				NewRow.Insert("Name", CommonAttribute.Name);
 				NewRow.Insert("FullName", MetadataObject.FullName());
-				NewRow.Insert("Synonym", ?(ValueIsFilled(CommonAttribute.Synonym), CommonAttribute.Synonym, CommonAttribute.Name));
+				NewRow.Insert("Synonym", ?(ValueIsFilled(CommonAttribute.Synonym), CommonAttribute.Synonym,
+					CommonAttribute.Name));
 				NewRow.Insert("KindOfAttribute", Enums.KindsOfAttributes.Common);
 				NewRow.Insert("TypeRestriction", CommonAttribute.Type);
 				NewRow.Insert("SettingID", New UUID());
@@ -424,17 +411,17 @@ Function GetAdditionalAttributes(MetadataObject, RowOwner, TableOfSettings, Exis
 	// Add Attributes
 	Query = New Query();
 	Query.Text =
-		"SELECT
-		|	AddAttributeAndPropertySets.Ref AS Ref,
-		|	AddAttributeAndPropertySetsAttributes.Attribute AS Attribute,
-		|	AddAttributeAndPropertySetsAttributes.Attribute.UniqueID AS UniqueID
-		|FROM
-		|	Catalog.AddAttributeAndPropertySets AS AddAttributeAndPropertySets
-		|		INNER JOIN Catalog.AddAttributeAndPropertySets.Attributes AS AddAttributeAndPropertySetsAttributes
-		|		ON AddAttributeAndPropertySets.Predefined
-		|		AND AddAttributeAndPropertySets.PredefinedDataName = &PredefinedDataName
-		|		AND AddAttributeAndPropertySets.Ref = AddAttributeAndPropertySetsAttributes.Ref";
-	
+	"SELECT
+	|	AddAttributeAndPropertySets.Ref AS Ref,
+	|	AddAttributeAndPropertySetsAttributes.Attribute AS Attribute,
+	|	AddAttributeAndPropertySetsAttributes.Attribute.UniqueID AS UniqueID
+	|FROM
+	|	Catalog.AddAttributeAndPropertySets AS AddAttributeAndPropertySets
+	|		INNER JOIN Catalog.AddAttributeAndPropertySets.Attributes AS AddAttributeAndPropertySetsAttributes
+	|		ON AddAttributeAndPropertySets.Predefined
+	|		AND AddAttributeAndPropertySets.PredefinedDataName = &PredefinedDataName
+	|		AND AddAttributeAndPropertySets.Ref = AddAttributeAndPropertySetsAttributes.Ref";
+
 	Query.SetParameter("PredefinedDataName", PredefinedDataName);
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
@@ -462,12 +449,12 @@ EndFunction
 Function GetTabularSections(MetadataObject, RowOwner, TableOfSettings)
 	// Tabular sections
 	ArrayOfTabularSections = New Array();
-	
+
 	For Each TabularSection In MetadataObject.TabularSections Do
 		NewRow_TabularSection = New Structure();
 		NewRow_TabularSection.Insert("Name", TabularSection.Name);
-		NewRow_TabularSection.Insert("Synonym", 
-		?(ValueIsFilled(TabularSection.Synonym), TabularSection.Synonym, TabularSection.Name));
+		NewRow_TabularSection.Insert("Synonym", ?(ValueIsFilled(TabularSection.Synonym), TabularSection.Synonym,
+			TabularSection.Name));
 		NewRow_TabularSection.Insert("KindOfAttribute", Enums.KindsOfAttributes.TabularSection);
 		NewRow_TabularSection.Insert("PictureIndex", 6);
 		NewRow_TabularSection.Insert("Rows", New Array());
@@ -489,7 +476,7 @@ Function GetTabularSections(MetadataObject, RowOwner, TableOfSettings)
 			AddRowToTableOfSettings(TableOfSettings, MetadataObject.FullName(), NewRow.Name, NewRow.SettingID);
 		EndDo;
 	EndDo;
-	
+
 	For Each TabularSection In ArrayOfTabularSections Do
 		If Not TabularSection.Rows.Count() Then
 			Continue;
@@ -503,20 +490,20 @@ EndFunction
 Function GetCustomAttributes(MetadataObject, RowOwner, TableOfSettings)
 	Query = New Query();
 	Query.Text =
-		"SELECT
-		|	CustomUserSettingsRefersToObjects.Ref AS Ref,
-		|	CustomUserSettingsRefersToObjects.Ref.UniqueID AS UniqueID
-		|FROM
-		|	ChartOfCharacteristicTypes.CustomUserSettings.RefersToObjects AS CustomUserSettingsRefersToObjects
-		|WHERE
-		|	CustomUserSettingsRefersToObjects.FullName = &FullName
-		|	AND
-		|	NOT CustomUserSettingsRefersToObjects.Ref.IsCommon
-		|	AND
-		|	NOT CustomUserSettingsRefersToObjects.Ref.DeletionMark
-		|GROUP BY
-		|	CustomUserSettingsRefersToObjects.Ref,
-		|	CustomUserSettingsRefersToObjects.Ref.UniqueID";
+	"SELECT
+	|	CustomUserSettingsRefersToObjects.Ref AS Ref,
+	|	CustomUserSettingsRefersToObjects.Ref.UniqueID AS UniqueID
+	|FROM
+	|	ChartOfCharacteristicTypes.CustomUserSettings.RefersToObjects AS CustomUserSettingsRefersToObjects
+	|WHERE
+	|	CustomUserSettingsRefersToObjects.FullName = &FullName
+	|	AND
+	|	NOT CustomUserSettingsRefersToObjects.Ref.IsCommon
+	|	AND
+	|	NOT CustomUserSettingsRefersToObjects.Ref.DeletionMark
+	|GROUP BY
+	|	CustomUserSettingsRefersToObjects.Ref,
+	|	CustomUserSettingsRefersToObjects.Ref.UniqueID";
 	Query.SetParameter("FullName", MetadataObject.FullName());
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
@@ -543,15 +530,15 @@ EndFunction
 Function GetCustomCommonSettings(RowOwner, TableOfSettings)
 	Query = New Query();
 	Query.Text =
-		"SELECT
-		|	CustomUserSettings.Ref AS Ref,
-		|	CustomUserSettings.Ref.UniqueID AS UniqueID
-		|FROM
-		|	ChartOfCharacteristicTypes.CustomUserSettings AS CustomUserSettings
-		|WHERE
-		|	CustomUserSettings.IsCommon
-		|	AND
-		|	NOT CustomUserSettings.DeletionMark";
+	"SELECT
+	|	CustomUserSettings.Ref AS Ref,
+	|	CustomUserSettings.Ref.UniqueID AS UniqueID
+	|FROM
+	|	ChartOfCharacteristicTypes.CustomUserSettings AS CustomUserSettings
+	|WHERE
+	|	CustomUserSettings.IsCommon
+	|	AND
+	|	NOT CustomUserSettings.DeletionMark";
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
 	While QuerySelection.Next() Do
@@ -580,7 +567,7 @@ EndProcedure
 
 &AtClient
 Procedure MetadataTreeExpandAll(Command)
-	For Each Row In MetadataTree.GetItems() Do 
+	For Each Row In MetadataTree.GetItems() Do
 		Items.MetadataTree.Expand(Row.GetID(), True);
 	EndDo;
 EndProcedure
@@ -593,7 +580,7 @@ EndProcedure
 Procedure CollapseTreeRows(Row)
 	ChildRows = Row.GetItems();
 	For Each ChildRow In ChildRows Do
-		CollapseTreeRows(ChildRow); 
+		CollapseTreeRows(ChildRow);
 		Items.MetadataTree.Collapse(ChildRow.GetID());
 	EndDo;
 EndProcedure

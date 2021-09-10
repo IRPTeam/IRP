@@ -1,3 +1,3 @@
 Procedure UpdateDataHistory(AddInfo = Undefined) Export
-	DataHistory.UpdateHistory();	
+	DataHistory.UpdateHistory();
 EndProcedure

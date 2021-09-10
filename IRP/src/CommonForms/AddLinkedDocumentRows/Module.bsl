@@ -1,4 +1,3 @@
-
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	ThisObject.MainFilter = Parameters.Filter;
@@ -14,12 +13,12 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 		For Each RowItemList In Parameters.TablesInfo.ItemListRows Do
 			If RowIdInfo.Key = RowItemList.Key Then
 				FillPropertyValues(NewRow, RowItemList, "ItemKey, Item, Store");
-				NewRow.BasisUnit = ?(ValueIsFilled(RowItemList.ItemKey.Unit), 
-				RowItemList.ItemKey.Unit, RowItemList.ItemKey.Item.Unit);
+				NewRow.BasisUnit = ?(ValueIsFilled(RowItemList.ItemKey.Unit), RowItemList.ItemKey.Unit,
+					RowItemList.ItemKey.Item.Unit);
 			EndIf;
 		EndDo;
 	EndDo;
-				
+
 	FillBasisesTree();
 EndProcedure
 
@@ -37,12 +36,14 @@ Procedure ExpandAllTrees() Export
 EndProcedure
 
 &AtServer
-Procedure FillBasisesTree();
-	ThisObject.BasisesTree.GetItems().Clear();	
-	BasisesTable = RowIDInfoServer.GetBasises(ThisObject.MainFilter.Ref, ThisObject.MainFilter);	
-	
+Procedure FillBasisesTree()
+	;
+	ThisObject.BasisesTree.GetItems().Clear();
+	BasisesTable = RowIDInfoServer.GetBasises(ThisObject.MainFilter.Ref, ThisObject.MainFilter);
+
 	TreeReverseInfo = RowIDInfoServer.CreateBasisesTreeReverse(BasisesTable);
-	RowIDInfoServer.CreateBasisesTree(TreeReverseInfo, BasisesTable, ThisObject.ResultsTable.Unload(), ThisObject.BasisesTree.GetItems());	
+	RowIDInfoServer.CreateBasisesTree(TreeReverseInfo, BasisesTable, ThisObject.ResultsTable.Unload(),
+		ThisObject.BasisesTree.GetItems());
 EndProcedure
 
 &AtClient
@@ -55,7 +56,7 @@ EndProcedure
 Procedure CollectResultTableRecursive(BasisesTreeRows)
 	For Each TreeRow In BasisesTreeRows Do
 		If TreeRow.DeepLevel And TreeRow.Use And Not TreeRow.Linked Then
-			NewRowResultTable = ThisObject.ResultsTable.Add(); 
+			NewRowResultTable = ThisObject.ResultsTable.Add();
 			FillPropertyValues(NewRowResultTable, TreeRow);
 			NewRowResultTable.QuantityInBaseUnit = TreeRow.QuantityInBaseUnit;
 		EndIf;
@@ -67,7 +68,7 @@ EndProcedure
 Function GetFillingValues()
 	ThisObject.ResultsTable.Clear();
 	CollectResultTableRecursive(ThisObject.BasisesTree.GetItems());
-	
+
 	ExtractedData = RowIDInfoServer.ExtractData(ThisObject.ResultsTable.Unload(), ThisObject.MainFilter.Ref);
 	FillingValues = RowIDInfoServer.ConvertDataToFillingValues(ThisObject.MainFilter.Ref.Metadata(), ExtractedData);
 	Return FillingValues;
@@ -75,7 +76,7 @@ EndFunction
 
 &AtClient
 Procedure Cancel(Command)
-	Close(Undefined);	
+	Close(Undefined);
 EndProcedure
 
 &AtClient
@@ -95,7 +96,7 @@ Procedure SetChecked(Value, TreeRows)
 			TreeRow.Use = Value;
 		EndIf;
 		SetChecked(Value, TreeRow.GetItems());
-	EndDo;	
+	EndDo;
 EndProcedure
 
 &AtClient
@@ -110,7 +111,7 @@ EndProcedure
 
 &AtClient
 Procedure ShowRowKey(Command)
-	DocumentsClient.ShowRowKey(ThisObject);	
+	DocumentsClient.ShowRowKey(ThisObject);
 EndProcedure
 
 &AtClient

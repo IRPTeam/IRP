@@ -21,7 +21,7 @@ Procedure CheckUniqueIDBeforeWrite(Source, Cancel) Export
 		CommonFunctionsClientServer.ShowUsersMessage(R().Error_012, "UniqueID", Source);
 		Return;
 	EndTry;
-	
+
 	Ref = UniqueIDByName(Source.Metadata(), Source.UniqueID);
 	If Ref <> Source.Ref And Ref <> Undefined Then
 		Cancel = True;
@@ -35,14 +35,14 @@ Function FindRefByUniqueMD5(Object, UniqueMD5) Export
 	DataLockItem = DataLock.Add(MetadataFullName);
 	DataLockItem.Mode = DataLockMode.Shared;
 	DataLock.Lock();
-	Query = New Query;
+	Query = New Query();
 	Query.Text =
-		"SELECT
-		|	T.Ref
-		|FROM
-		|	%1 AS T
-		|WHERE
-		|	T.UniqueMD5 = &UniqueMD5 AND T.Ref <> &Ref";
+	"SELECT
+	|	T.Ref
+	|FROM
+	|	%1 AS T
+	|WHERE
+	|	T.UniqueMD5 = &UniqueMD5 AND T.Ref <> &Ref";
 	Query.Text = StrTemplate(Query.Text, MetadataFullName);
 	Query.SetParameter("UniqueMD5", UniqueMD5);
 	Query.SetParameter("Ref", Object.Ref);

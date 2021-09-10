@@ -1,9 +1,8 @@
-
 Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	If DataExchange.Load Then
 		Return;
-	EndIf;	
-	
+	EndIf;
+
 	ThisObject.DocumentAmount = CalculationServer.CalculateDocumentAmount(ItemList);
 
 EndProcedure
@@ -11,7 +10,7 @@ EndProcedure
 Procedure OnWrite(Cancel)
 	If DataExchange.Load Then
 		Return;
-	EndIf;	
+	EndIf;
 EndProcedure
 
 Procedure BeforeDelete(Cancel)
@@ -25,9 +24,9 @@ Procedure Posting(Cancel, PostingMode)
 EndProcedure
 
 Procedure UndoPosting(Cancel)
-	
+
 	UndopostingServer.Undopost(ThisObject, Cancel, ThisObject.AdditionalProperties);
-	
+
 EndProcedure
 
 Procedure Filling(FillingData, FillingText, StandardProcessing)
@@ -36,7 +35,7 @@ Procedure Filling(FillingData, FillingText, StandardProcessing)
 	EndIf;
 	If FillingData.Property("PurchaseOrder") Then
 		CloseOrder = True;
-		PurchaseOrder = FillingData.PurchaseOrder; 
+		PurchaseOrder = FillingData.PurchaseOrder;
 		PurchaseOrderData = DocPurchaseOrderServer.GetPurchaseOrderForClosing(FillingData.PurchaseOrder);
 
 		FillPropertyValues(ThisObject, PurchaseOrderData.PurchaseOrderInfo);
@@ -48,20 +47,20 @@ Procedure Filling(FillingData, FillingText, StandardProcessing)
 EndProcedure
 
 Procedure OnCopy(CopiedObject)
-	
+
 	LinkedTables = New Array();
 	LinkedTables.Add(SpecialOffers);
 	LinkedTables.Add(TaxList);
 	LinkedTables.Add(Currencies);
 	DocumentsServer.SetNewTableUUID(ItemList, LinkedTables);
-	
+
 EndProcedure
 
 Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 	If DocumentsServer.CheckItemListStores(ThisObject) Then
-		Cancel = True;	
+		Cancel = True;
 	EndIf;
-	
+
 	For RowIndex = 0 To (ThisObject.ItemList.Count() - 1) Do
 		Row = ThisObject.ItemList[RowIndex];
 		If Row.Cancel And Row.CancelReason.IsEmpty() Then

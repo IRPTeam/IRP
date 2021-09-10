@@ -19,18 +19,18 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 		EndIf;
 	EndIf;
 	If CurrentPicture.isPreviewSet Then
-		Picture = GetURL(CurrentPicture, "Preview"); 
+		Picture = GetURL(CurrentPicture, "Preview");
 	EndIf;
 EndProcedure
 
 &AtClient
 Procedure OnOpen(Cancel)
 	CurrentItem = Items.Quantity;
-	#If MobileClient Then
-		If AutoMode Then
-			BeginEditingItem();
-		EndIf;
-	#EndIf
+#If MobileClient Then
+	If AutoMode Then
+		BeginEditingItem();
+	EndIf;
+#EndIf
 EndProcedure
 
 &AtClient
@@ -40,7 +40,7 @@ EndProcedure
 
 &AtClient
 Procedure OK()
-	Data = New Structure;
+	Data = New Structure();
 	Data.Insert("Quantity", Quantity);
 	Data.Insert("RowId", RowId);
 	Close(Data);

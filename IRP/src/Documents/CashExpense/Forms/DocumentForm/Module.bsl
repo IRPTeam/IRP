@@ -8,7 +8,7 @@ EndProcedure
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	LibraryLoader.RegisterLibrary(Object, ThisObject, Currencies_GetDeclaration(Object, ThisObject));
-	
+
 	DocCashExpenseRevenueServer.OnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
 	Taxes_CreateFormControls();
 	Taxes_CreateTaxTree();
@@ -32,9 +32,7 @@ EndProcedure
 
 &AtClient
 Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefined) Export
-	If EventName = "CalculateTaxByNetAmount" Or 
-		EventName = "CalculateTaxByTotalAmount" Or  
-		EventName = "CalculateTax" Then
+	If EventName = "CalculateTaxByNetAmount" Or EventName = "CalculateTaxByTotalAmount" Or EventName = "CalculateTax" Then
 		Taxes_CreateTaxTree();
 		TaxesClient.ExpandTaxTree(ThisObject.Items.TaxTree, ThisObject.TaxTree.GetItems());
 	EndIf;
@@ -56,7 +54,7 @@ EndProcedure
 
 &AtClientAtServerNoContext
 Procedure SetVisibilityAvailability(Object, Form) Export
-	Form.Items.PaymentListCurrency.ReadOnly = ValueIsFilled(Form.Currency);	
+	Form.Items.PaymentListCurrency.ReadOnly = ValueIsFilled(Form.Currency);
 EndProcedure
 
 #EndRegion
@@ -105,7 +103,8 @@ EndProcedure
 
 &AtClient
 Procedure PaymentListBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
-	DocCashExpenseRevenueClient.PaymentListBeforeAddRow(Object, ThisObject, Item, Cancel, Clone, Parent, IsFolder, Parameter);
+	DocCashExpenseRevenueClient.PaymentListBeforeAddRow(Object, ThisObject, Item, Cancel, Clone, Parent, IsFolder,
+		Parameter);
 EndProcedure
 
 &AtClient
@@ -115,7 +114,8 @@ EndProcedure
 
 &AtClient
 Procedure PaymentListExpenseTypeStartChoice(Item, ChoiceData, StandardProcessing)
-	DocCashExpenseRevenueClient.PaymentListExpenseTypeStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+	DocCashExpenseRevenueClient.PaymentListExpenseTypeStartChoice(Object, ThisObject, Item, ChoiceData,
+		StandardProcessing);
 EndProcedure
 
 &AtClient
@@ -125,12 +125,14 @@ EndProcedure
 
 &AtClient
 Procedure PaymentListFinancialMovementTypeStartChoice(Item, ChoiceData, StandardProcessing)
-	DocCashExpenseRevenueClient.PaymentListFinancialMovementTypeStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+	DocCashExpenseRevenueClient.PaymentListFinancialMovementTypeStartChoice(Object, ThisObject, Item, ChoiceData,
+		StandardProcessing);
 EndProcedure
 
 &AtClient
 Procedure PaymentListFinancialMovementTypeEditTextChange(Item, Text, StandardProcessing)
-	DocCashExpenseRevenueClient.PaymentListFinancialMovementTypeEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+	DocCashExpenseRevenueClient.PaymentListFinancialMovementTypeEditTextChange(Object, ThisObject, Item, Text,
+		StandardProcessing);
 EndProcedure
 
 &AtClient
@@ -148,7 +150,7 @@ Procedure TaxValueOnChange(Item) Export
 		Return;
 	EndIf;
 	PutToTaxTable_(Item.Name, CurrentData.Key, CurrentData[Item.Name]);
-	
+
 	Settings = New Structure();
 	Settings.Insert("Rows", New Array());
 	Settings.Insert("CalculateSettings");
@@ -173,8 +175,8 @@ Procedure TaxTreeOnChange(Item)
 	If CurrentData = Undefined Then
 		Return;
 	EndIf;
-	Filter = TaxesClient.ChangeTaxAmount(Object, ThisObject, CurrentData, 
-											Object.PaymentList, TaxesClient.GetCalculateRowsActions());
+	Filter = TaxesClient.ChangeTaxAmount(Object, ThisObject, CurrentData, Object.PaymentList,
+		TaxesClient.GetCalculateRowsActions());
 	Taxes_CreateTaxTree();
 	TaxesClient.ExpandTaxTree(ThisObject.Items.TaxTree, ThisObject.TaxTree.GetItems());
 	ThisObject.Items.TaxTree.CurrentRow = TaxesClient.FindRowInTree(Filter, ThisObject.TaxTree);
@@ -264,43 +266,47 @@ EndProcedure
 Function Currencies_GetDeclaration(Object, Form)
 	Declaration = LibraryLoader.GetDeclarationInfo();
 	Declaration.LibraryName = "LibraryCurrencies";
-	
+
 	LibraryLoader.AddActionHandler(Declaration, "Currencies_OnOpen", "OnOpen", Form);
 	LibraryLoader.AddActionHandler(Declaration, "Currencies_AfterWriteAtServer", "AfterWriteAtServer", Form);
 	LibraryLoader.AddActionHandler(Declaration, "Currencies_AfterWrite", "AfterWrite", Form);
 	LibraryLoader.AddActionHandler(Declaration, "Currencies_NotificationProcessing", "NotificationProcessing", Form);
-	
+
 	ArrayOfItems_MainTable = New Array();
 	ArrayOfItems_MainTable.Add(Form.Items.PaymentList);
-	LibraryLoader.AddActionHandler(Declaration, "Currencies_MainTableBeforeDeleteRow", "BeforeDeleteRow", ArrayOfItems_MainTable);
-	LibraryLoader.AddActionHandler(Declaration, "Currencies_MainTableOnActivateRow", "OnActivateRow", ArrayOfItems_MainTable);
-	
+	LibraryLoader.AddActionHandler(Declaration, "Currencies_MainTableBeforeDeleteRow", "BeforeDeleteRow",
+		ArrayOfItems_MainTable);
+	LibraryLoader.AddActionHandler(Declaration, "Currencies_MainTableOnActivateRow", "OnActivateRow",
+		ArrayOfItems_MainTable);
+
 	ArrayOfItems_MainTableColumns = New Array();
 	ArrayOfItems_MainTableColumns.Add(Form.Items.PaymentListCurrency);
-	LibraryLoader.AddActionHandler(Declaration, "Currencies_MainTableColumnOnChange", "OnChange", ArrayOfItems_MainTableColumns);
-	
+	LibraryLoader.AddActionHandler(Declaration, "Currencies_MainTableColumnOnChange", "OnChange",
+		ArrayOfItems_MainTableColumns);
+
 	ArrayOfItems_MainTableAmount = New Array();
 	ArrayOfItems_MainTableAmount.Add(Form.Items.PaymentListNetAmount);
 	ArrayOfItems_MainTableAmount.Add(Form.Items.PaymentListTaxAmount);
 	ArrayOfItems_MainTableAmount.Add(Form.Items.PaymentListTotalAmount);
-	LibraryLoader.AddActionHandler(Declaration, "Currencies_MainTableAmountOnChange", "OnChange", ArrayOfItems_MainTableAmount);
-	
+	LibraryLoader.AddActionHandler(Declaration, "Currencies_MainTableAmountOnChange", "OnChange",
+		ArrayOfItems_MainTableAmount);
+
 	ArrayOfItems_Header = New Array();
 	ArrayOfItems_Header.Add(Form.Items.Company);
 	ArrayOfItems_Header.Add(Form.Items.Account);
 	ArrayOfItems_Header.Add(Form.Items.Date);
-	
+
 	LibraryLoader.AddActionHandler(Declaration, "Currencies_HeaderOnChange", "OnChange", ArrayOfItems_Header);
-	
+
 	Columns = CurrenciesClientServer.GetPropertiesForReplace();
 	Columns.Amount = "TotalAmount";
 	TableColumns = New Structure("PaymentList", Columns);
-	
+
 	LibraryData = New Structure();
 	LibraryData.Insert("TableColumns", TableColumns);
 	LibraryData.Insert("Version", "1.0");
 	LibraryLoader.PutData(Declaration, LibraryData);
-	
+
 	Return Declaration;
 EndFunction
 
@@ -315,7 +321,7 @@ EndProcedure
 Procedure Currencies_AfterWriteAtServer(CurrentObject, WriteParameters, AddInfo = Undefined) Export
 	CurrenciesClientServer.AfterWriteAtServer(Object, ThisObject, CurrentObject, WriteParameters, AddInfo);
 EndProcedure
-	
+
 &AtClient
 Procedure Currencies_AfterWrite(WriteParameters, AddInfo = Undefined) Export
 	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "Currencies_CurrentTableName", "PaymentList");
@@ -333,7 +339,7 @@ Procedure Currencies_NotificationProcessing(EventName, Parameter, Source, AddInf
 	ArrayOfTableNames.Add("PaymentList");
 	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "Currencies_ArrayOfTableNames", ArrayOfTableNames);
 	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "Currencies_CurrentTableName", "PaymentList");
-	
+
 	CurrenciesClientServer.NotificationProcessing(Object, ThisObject, EventName, Parameter, Source, AddInfo);
 EndProcedure
 
@@ -364,7 +370,7 @@ Procedure Currencies_HeaderOnChange(Item, AddInfo = Undefined) Export
 	ArrayOfTableNames.Add("PaymentList");
 	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "Currencies_ArrayOfTableNames", ArrayOfTableNames);
 	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "Currencies_CurrentTableName", "PaymentList");
-	
+
 	CurrenciesClientServer.HeaderOnChange(Object, ThisObject, Item, AddInfo);
 EndProcedure
 
@@ -420,12 +426,7 @@ EndProcedure
 
 &AtServer
 Procedure Currencies_FillCurrencyTable(RowKey, Currency, AgreementInfo) Export
-	CurrenciesServer.FillCurrencyTable(Object, 
-	                                   Object.Date, 
-	                                   Object.Company, 
-	                                   Currency, 
-	                                   RowKey,
-	                                   AgreementInfo);
+	CurrenciesServer.FillCurrencyTable(Object, Object.Date, Object.Company, Currency, RowKey, AgreementInfo);
 EndProcedure
 
 &AtServer
@@ -449,7 +450,7 @@ EndProcedure
 
 &AtClient
 Procedure ShowRowKey(Command)
-	DocumentsClient.ShowRowKey(ThisObject);	
+	DocumentsClient.ShowRowKey(ThisObject);
 EndProcedure
 
 #Region AddAttributes
@@ -470,7 +471,7 @@ EndProcedure
 &AtClient
 Procedure GeneratedFormCommandActionByName(Command) Export
 	ExternalCommandsClient.GeneratedFormCommandActionByName(Object, ThisObject, Command.Name);
-	GeneratedFormCommandActionByNameServer(Command.Name);	
+	GeneratedFormCommandActionByNameServer(Command.Name);
 EndProcedure
 
 &AtServer

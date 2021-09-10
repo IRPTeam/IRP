@@ -1,4 +1,3 @@
-
 #Region FormEventHandlers
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
@@ -25,7 +24,7 @@ Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefin
 	If EventName = "UpdateAddAttributeAndPropertySets" Then
 		AddAttributesCreateFormControl();
 	EndIf;
-	
+
 	If EventName = "NewBarcode" And IsInputAvailable() Then
 		SearchByBarcode(Parameter);
 	EndIf;
@@ -58,8 +57,6 @@ Procedure CompanyEditTextChange(Item, Text, StandardProcessing)
 EndProcedure
 
 #EndRegion
-
-
 &AtClient
 Procedure StoreOnChange(Item)
 	DocItemStockAdjustmentClient.StoreOnChange(Object, ThisObject, Item);
@@ -69,8 +66,6 @@ EndProcedure
 Procedure DateOnChange(Item)
 	DocItemStockAdjustmentClient.DateOnChange(Object, ThisObject, Item);
 EndProcedure
-
-
 #EndRegion
 
 #Region FormTableItemsEventHandlers
@@ -197,7 +192,7 @@ EndProcedure
 &AtClient
 Procedure GeneratedFormCommandActionByName(Command) Export
 	ExternalCommandsClient.GeneratedFormCommandActionByName(Object, ThisObject, Command.Name);
-	GeneratedFormCommandActionByNameServer(Command.Name);	
+	GeneratedFormCommandActionByNameServer(Command.Name);
 EndProcedure
 
 &AtServer

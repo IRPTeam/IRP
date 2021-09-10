@@ -16,7 +16,7 @@ EndProcedure
 
 &AtClient
 Procedure SaveShare(Command)
-	FormCloseParameters = New Structure;
+	FormCloseParameters = New Structure();
 	FormCloseParameters.Insert("Users", SharedUsers());
 	Close(FormCloseParameters);
 EndProcedure
@@ -26,13 +26,13 @@ EndProcedure
 #Region FormEvents
 
 &AtServer
-Procedure OnCreateAtServer(Cancel, StandardProcessing)	
+Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	If Parameters.Users <> Undefined Then
 		Users = Parameters.Users;
 	Else
-		Users = New Array;
+		Users = New Array();
 	EndIf;
-	FillUsersList(Users);	
+	FillUsersList(Users);
 EndProcedure
 
 #EndRegion
@@ -50,13 +50,13 @@ EndFunction
 
 &AtServer
 Procedure FillUsersList(ListData)
-	SourceTable = New ValueTable;
+	SourceTable = New ValueTable();
 	SourceTable.Columns.Add("Ref", New TypeDescription("CatalogRef.Users"));
 	For Each Item In ListData Do
 		SourceTableRow = SourceTable.Add();
 		SourceTableRow.Ref = Item.Value;
 	EndDo;
-	Query = New Query;
+	Query = New Query();
 	Query.Text = "SELECT
 				 |	SourceTable.Ref AS Ref,
 				 |	TRUE AS Checked

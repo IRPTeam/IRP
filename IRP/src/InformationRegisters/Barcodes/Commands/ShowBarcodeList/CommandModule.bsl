@@ -1,6 +1,6 @@
 &AtClient
 Procedure CommandProcessing(CommandParameter, CommandExecuteParameters)
-	
+
 	FormParameters = New Structure("FillingData, Filter", New Structure(), New Structure());
 	ArrayItemKeys = New Array();
 	If TypeOf(CommandParameter) = Type("CatalogRef.ItemKeys") Then
@@ -13,14 +13,9 @@ Procedure CommandProcessing(CommandParameter, CommandExecuteParameters)
 		FormParameters.Insert("Item", CommandParameter);
 		FormParameters.Insert("UseItemFilter", True);
 	EndIf;
-	
-	FormParameters.Filter.Insert("ItemKey", ArrayItemKeys);
-	
-	OpenForm("InformationRegister.Barcodes.ListForm",
-		FormParameters,
-		CommandExecuteParameters.Source,
-		CommandExecuteParameters.Uniqueness,
-		CommandExecuteParameters.Window,
-		CommandExecuteParameters.URL);
-EndProcedure
 
+	FormParameters.Filter.Insert("ItemKey", ArrayItemKeys);
+
+	OpenForm("InformationRegister.Barcodes.ListForm", FormParameters, CommandExecuteParameters.Source,
+		CommandExecuteParameters.Uniqueness, CommandExecuteParameters.Window, CommandExecuteParameters.URL);
+EndProcedure

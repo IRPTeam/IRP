@@ -2,10 +2,10 @@
 
 Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 	DocumentsServer.OnCreateAtServer(Object, Form, Cancel, StandardProcessing);
-	If Form.Parameters.Key.IsEmpty() Then	
+	If Form.Parameters.Key.IsEmpty() Then
 		SetGroupItemsList(Object, Form);
 		DocumentsServer.FillItemList(Object);
-		
+
 		DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 	EndIf;
 EndProcedure
@@ -28,14 +28,13 @@ EndProcedure
 #Region GroupTitle
 
 Procedure SetGroupItemsList(Object, Form)
-	AttributesArray = New Array;
+	AttributesArray = New Array();
 	AttributesArray.Add("Company");
 	AttributesArray.Add("Store");
 	DocumentsServer.DeleteUnavailableTitleItemNames(AttributesArray);
 	For Each Atr In AttributesArray Do
-		Form.GroupItems.Add(Atr, ?(ValueIsFilled(Form.Items[Atr].Title),
-				Form.Items[Atr].Title,
-				Object.Ref.Metadata().Attributes[Atr].Synonym + ":" + Chars.NBSp));
+		Form.GroupItems.Add(Atr, ?(ValueIsFilled(Form.Items[Atr].Title), Form.Items[Atr].Title,
+			Object.Ref.Metadata().Attributes[Atr].Synonym + ":" + Chars.NBSp));
 	EndDo;
 EndProcedure
 

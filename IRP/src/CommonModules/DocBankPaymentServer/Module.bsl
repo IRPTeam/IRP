@@ -17,7 +17,7 @@ Procedure AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters) Expor
 	Form.CurrentAccount = CurrentObject.Account;
 	Form.CurrentTransactionType = Object.TransactionType;
 	DocumentsServer.FillPaymentList(Object);
-	
+
 	DocumentsClientServer.ChangeTitleGroupTitle(CurrentObject, Form);
 EndProcedure
 
@@ -25,7 +25,7 @@ Procedure OnReadAtServer(Object, Form, CurrentObject) Export
 	Form.CurrentCurrency = CurrentObject.Currency;
 	Form.CurrentAccount = CurrentObject.Account;
 	Form.CurrentTransactionType = Object.TransactionType;
-	
+
 	DocumentsServer.FillPaymentList(Object);
 	If Not Form.GroupItems.Count() Then
 		SetGroupItemsList(Object, Form);
@@ -42,16 +42,15 @@ EndProcedure
 #Region GroupTitle
 
 Procedure SetGroupItemsList(Object, Form)
-	AttributesArray = New Array;
+	AttributesArray = New Array();
 	AttributesArray.Add("Company");
 	AttributesArray.Add("Account");
 	AttributesArray.Add("TransactionType");
 	AttributesArray.Add("Currency");
 	DocumentsServer.DeleteUnavailableTitleItemNames(AttributesArray);
 	For Each Atr In AttributesArray Do
-		Form.GroupItems.Add(Atr, ?(ValueIsFilled(Form.Items[Atr].Title),
-				Form.Items[Atr].Title,
-				Object.Ref.Metadata().Attributes[Atr].Synonym + ":" + Chars.NBSp));
+		Form.GroupItems.Add(Atr, ?(ValueIsFilled(Form.Items[Atr].Title), Form.Items[Atr].Title,
+			Object.Ref.Metadata().Attributes[Atr].Synonym + ":" + Chars.NBSp));
 	EndDo;
 EndProcedure
 
@@ -69,9 +68,9 @@ Function GetDocumentTable_CashTransferOrder(ArrayOfBasisDocuments, EndOfDate = U
 	Else
 		Query.SetParameter("EndOfDate", EndOfDate);
 	EndIf;
-	
+
 	Query.Execute();
-	Query.Text = 
+	Query.Text =
 	"SELECT
 	|	tmp.BasedOn AS BasedOn,
 	|	tmp.TransactionType AS TransactionType,
@@ -89,36 +88,35 @@ Function GetDocumentTable_CashTransferOrder(ArrayOfBasisDocuments, EndOfDate = U
 EndFunction
 
 Function GetDocumentTable_CashTransferOrder_QueryText() Export
-	Return
-	"SELECT ALLOWED
-	|	""CashTransferOrder"" AS BasedOn,
-	|	CASE
-	|		WHEN Doc.SendCurrency = Doc.ReceiveCurrency
-	|			THEN VALUE(Enum.OutgoingPaymentTransactionTypes.CashTransferOrder)
-	|		ELSE VALUE(Enum.OutgoingPaymentTransactionTypes.CurrencyExchange)
-	|	END AS TransactionType,
-	|	R3035T_CashPlanningTurnovers.FinancialMovementType AS FinancialMovementType,
-	|	R3035T_CashPlanningTurnovers.Company AS Company,
-	|	R3035T_CashPlanningTurnovers.Account AS Account,
-	|	R3035T_CashPlanningTurnovers.Account.TransitAccount AS TransitAccount,
-	|	R3035T_CashPlanningTurnovers.Currency AS Currency,
-	|	R3035T_CashPlanningTurnovers.AmountTurnover AS Amount,
-	|	R3035T_CashPlanningTurnovers.BasisDocument AS PlaningTransactionBasis
-	|INTO tmp_CashTransferOrder
-	|FROM
-	|	AccumulationRegister.R3035T_CashPlanning.Turnovers(, &EndOfDate,,
-	|		CashFlowDirection = VALUE(Enum.CashFlowDirections.Outgoing)
-	|	AND CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
-	|	AND CASE
-	|		WHEN &UseArrayOfBasisDocuments
-	|			THEN BasisDocument IN (&ArrayOfBasisDocuments)
-	|		ELSE TRUE
-	|	END) AS R3035T_CashPlanningTurnovers
-	|		INNER JOIN Document.CashTransferOrder AS Doc
-	|		ON R3035T_CashPlanningTurnovers.BasisDocument = Doc.Ref
-	|WHERE
-	|	R3035T_CashPlanningTurnovers.Account.Type = VALUE(Enum.CashAccountTypes.Bank)
-	|	AND R3035T_CashPlanningTurnovers.AmountTurnover > 0";
+	Return "SELECT ALLOWED
+		   |	""CashTransferOrder"" AS BasedOn,
+		   |	CASE
+		   |		WHEN Doc.SendCurrency = Doc.ReceiveCurrency
+		   |			THEN VALUE(Enum.OutgoingPaymentTransactionTypes.CashTransferOrder)
+		   |		ELSE VALUE(Enum.OutgoingPaymentTransactionTypes.CurrencyExchange)
+		   |	END AS TransactionType,
+		   |	R3035T_CashPlanningTurnovers.FinancialMovementType AS FinancialMovementType,
+		   |	R3035T_CashPlanningTurnovers.Company AS Company,
+		   |	R3035T_CashPlanningTurnovers.Account AS Account,
+		   |	R3035T_CashPlanningTurnovers.Account.TransitAccount AS TransitAccount,
+		   |	R3035T_CashPlanningTurnovers.Currency AS Currency,
+		   |	R3035T_CashPlanningTurnovers.AmountTurnover AS Amount,
+		   |	R3035T_CashPlanningTurnovers.BasisDocument AS PlaningTransactionBasis
+		   |INTO tmp_CashTransferOrder
+		   |FROM
+		   |	AccumulationRegister.R3035T_CashPlanning.Turnovers(, &EndOfDate,,
+		   |		CashFlowDirection = VALUE(Enum.CashFlowDirections.Outgoing)
+		   |	AND CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
+		   |	AND CASE
+		   |		WHEN &UseArrayOfBasisDocuments
+		   |			THEN BasisDocument IN (&ArrayOfBasisDocuments)
+		   |		ELSE TRUE
+		   |	END) AS R3035T_CashPlanningTurnovers
+		   |		INNER JOIN Document.CashTransferOrder AS Doc
+		   |		ON R3035T_CashPlanningTurnovers.BasisDocument = Doc.Ref
+		   |WHERE
+		   |	R3035T_CashPlanningTurnovers.Account.Type = VALUE(Enum.CashAccountTypes.Bank)
+		   |	AND R3035T_CashPlanningTurnovers.AmountTurnover > 0";
 EndFunction
 
 Function GetDocumentTable_CashTransferOrder_ForClient(ArrayOfBasisDocuments, ObjectRef = Undefined) Export
@@ -130,14 +128,14 @@ Function GetDocumentTable_CashTransferOrder_ForClient(ArrayOfBasisDocuments, Obj
 	ValueTable = GetDocumentTable_CashTransferOrder(ArrayOfBasisDocuments, EndOfDate);
 	For Each Row In ValueTable Do
 		NewRow = New Structure();
-		NewRow.Insert("BasedOn" 				, Row.BasedOn);
-		NewRow.Insert("TransactionType" 		, Row.TransactionType);
-		NewRow.Insert("Company" 				, Row.Company);
-		NewRow.Insert("Account" 				, Row.Account);
-		NewRow.Insert("TransitAccount" 			, Row.TransitAccount);
-		NewRow.Insert("Currency" 				, Row.Currency);
-		NewRow.Insert("Amount" 					, Row.Amount);
-		NewRow.Insert("PlaningTransactionBasis" , Row.PlaningTransactionBasis);
+		NewRow.Insert("BasedOn", Row.BasedOn);
+		NewRow.Insert("TransactionType", Row.TransactionType);
+		NewRow.Insert("Company", Row.Company);
+		NewRow.Insert("Account", Row.Account);
+		NewRow.Insert("TransitAccount", Row.TransitAccount);
+		NewRow.Insert("Currency", Row.Currency);
+		NewRow.Insert("Amount", Row.Amount);
+		NewRow.Insert("PlaningTransactionBasis", Row.PlaningTransactionBasis);
 		ArrayOfResults.Add(NewRow);
 	EndDo;
 	Return ArrayOfResults;

@@ -2,34 +2,34 @@
 
 Function FindCatalogItem(Deep, Parent, Level, Value, Country, IDInfoType)
 	Result = New Structure("Success, Ref", False, Undefined);
-	
+
 	ConditionString = "Parent";
 	For i = 2 To Deep Do
 		ConditionString = ConditionString + ".Parent";
 	EndDo;
-	
+
 	Query = New Query();
 	Query.Text =
-		"SELECT
-		|	IDInfoAddresses.Ref AS Ref
-		|FROM
-		|	Catalog.IDInfoAddresses AS IDInfoAddresses
-		|WHERE
-		|	IDInfoAddresses.%1 = VALUE(Catalog.IDInfoAddresses.EmptyRef)
-		|	AND IDInfoAddresses.Country = &Country
-		|	AND IDInfoAddresses.Parent = &Parent
-		|	AND IDInfoAddresses.Level = &Level
-		|	AND IDInfoAddresses.Description = &Value
-		|	AND IDInfoAddresses.Owner = &Owner
-		|	AND NOT IDInfoAddresses.DeletionMark";
-	
+	"SELECT
+	|	IDInfoAddresses.Ref AS Ref
+	|FROM
+	|	Catalog.IDInfoAddresses AS IDInfoAddresses
+	|WHERE
+	|	IDInfoAddresses.%1 = VALUE(Catalog.IDInfoAddresses.EmptyRef)
+	|	AND IDInfoAddresses.Country = &Country
+	|	AND IDInfoAddresses.Parent = &Parent
+	|	AND IDInfoAddresses.Level = &Level
+	|	AND IDInfoAddresses.Description = &Value
+	|	AND IDInfoAddresses.Owner = &Owner
+	|	AND NOT IDInfoAddresses.DeletionMark";
+
 	Query.Text = StrTemplate(Query.Text, ConditionString);
 	Query.SetParameter("Country", Country);
 	Query.SetParameter("Level", Level);
 	Query.SetParameter("Value", Value);
 	Query.SetParameter("Parent", ?(ValueIsFilled(Parent), Parent, Catalogs.IDInfoAddresses.EmptyRef()));
 	Query.SetParameter("Owner", IDInfoType);
-	
+
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
 	If QuerySelection.Next() Then
@@ -43,7 +43,7 @@ EndFunction
 
 Function CreateCatalogItem(Parent, Level, Value, Country, IDInfoType)
 	Result = New Structure("Success, Ref, ErrorMessage", False, Undefined, "");
-	
+
 	NewItem = Catalogs.IDInfoAddresses.CreateItem();
 	NewItem.Owner = IDInfoType;
 	NewItem.Parent = Parent;
@@ -56,10 +56,10 @@ Function CreateCatalogItem(Parent, Level, Value, Country, IDInfoType)
 		Result.ErrorMessage = String(ErrorDescription());
 		Return Result;
 	EndTry;
-	
+
 	Result.Success = True;
 	Result.Ref = NewItem.Ref;
-	
+
 	Return Result;
 EndFunction
 
@@ -87,7 +87,7 @@ Function WriteDataToCatalog(Values, Country, IDInfoType) Export
 		RollbackTransaction();
 		Raise ErrorDescription();
 	EndTry;
-		
+
 	Return CatalogItem.Ref;
 EndFunction
 

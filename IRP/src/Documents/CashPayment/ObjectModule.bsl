@@ -1,15 +1,15 @@
 Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	If DataExchange.Load Then
 		Return;
-	EndIf;	
-	
+	EndIf;
+
 	ThisObject.DocumentAmount = ThisObject.PaymentList.Total("Amount");
 EndProcedure
 
 Procedure OnWrite(Cancel)
 	If DataExchange.Load Then
 		Return;
-	EndIf;	
+	EndIf;
 EndProcedure
 
 Procedure BeforeDelete(Cancel)
@@ -32,15 +32,14 @@ Procedure UndoPosting(Cancel)
 EndProcedure
 
 Procedure Filling(FillingData, FillingText, StandardProcessing)
-	
+
 	If TypeOf(FillingData) = Type("Structure") And FillingData.Property("BasedOn") Then
-		If FillingData.BasedOn = "CashTransferOrder"
-			Or FillingData.BasedOn = "OutgoingPaymentOrder"
+		If FillingData.BasedOn = "CashTransferOrder" Or FillingData.BasedOn = "OutgoingPaymentOrder"
 			Or FillingData.BasedOn = "PurchaseInvoice" Then
 			Filling_BasedOn(FillingData);
 		EndIf;
 	EndIf;
-	
+
 	For Each Row In ThisObject.PaymentList Do
 		If Not ValueIsFilled(Row.Key) Then
 			Row.Key = New UUID();
@@ -49,8 +48,7 @@ Procedure Filling(FillingData, FillingText, StandardProcessing)
 EndProcedure
 
 Procedure Filling_BasedOn(FillingData)
-	FillPropertyValues(ThisObject, FillingData,
-		"Company, CashAccount, Currency, TransactionType");
+	FillPropertyValues(ThisObject, FillingData, "Company, CashAccount, Currency, TransactionType");
 	For Each Row In FillingData.PaymentList Do
 		NewRow = ThisObject.PaymentList.Add();
 		FillPropertyValues(NewRow, Row);

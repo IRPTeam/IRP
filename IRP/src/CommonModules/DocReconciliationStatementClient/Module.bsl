@@ -6,14 +6,14 @@ EndProcedure
 
 Procedure CompanyStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
 	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
-	
+
 	OpenSettings.ArrayOfFilters = New Array();
-	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", 
-																	True, DataCompositionComparisonType.NotEqual));
-	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("OurCompany", 
-																	True, DataCompositionComparisonType.Equal));
+	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True,
+		DataCompositionComparisonType.NotEqual));
+	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("OurCompany", True,
+		DataCompositionComparisonType.Equal));
 	OpenSettings.FillingData = New Structure("OurCompany", True);
-	
+
 	DocumentsClient.CompanyStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
 EndProcedure
 
@@ -67,17 +67,17 @@ EndProcedure
 
 Procedure LegalNameStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
 	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
-	
+
 	OpenSettings.ArrayOfFilters = New Array();
-	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", 
-																		True, DataCompositionComparisonType.NotEqual));
+	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True,
+		DataCompositionComparisonType.NotEqual));
 	OpenSettings.FormParameters = New Structure();
 	If ValueIsFilled(Object.Partner) Then
 		OpenSettings.FormParameters.Insert("Partner", Object.Partner);
 		OpenSettings.FormParameters.Insert("FilterByPartnerHierarchy", True);
 	EndIf;
 	OpenSettings.FillingData = New Structure("Partner", Object.Partner);
-	
+
 	DocumentsClient.CompanyStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
 EndProcedure
 
@@ -89,8 +89,8 @@ Procedure LegalNameTextChange(Object, Form, Item, Text, StandardProcessing) Expo
 		AdditionalParameters.Insert("Partner", Object.Partner);
 		AdditionalParameters.Insert("FilterByPartnerHierarchy", True);
 	EndIf;
-	DocumentsClient.CompanyEditTextChange(Object, Form, Item, Text, StandardProcessing,
-		ArrayOfFilters, AdditionalParameters);
+	DocumentsClient.CompanyEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters,
+		AdditionalParameters);
 EndProcedure
 
 #EndRegion

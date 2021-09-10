@@ -1,19 +1,18 @@
-
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	ThisObject.ObjectKey = Parameters.ObjectKey;
 	ThisObject.CurrentSettingsKey = Parameters.CurrentSettingsKey;
-	
+
 	OptionsList.Parameters.SetParameterValue("ObjectKey", ThisObject.ObjectKey);
 	OptionsList.Parameters.SetParameterValue("CurrentSettingsKey", ThisObject.CurrentSettingsKey);
 	OptionsList.Parameters.SetParameterValue("Author", SessionParameters.CurrentUser);
-	
+
 	For Each StandardSetting In Parameters.StandardSettings Do
 		NewRow = ThisObject.StandardOptions.Add();
 		NewRow.Presentation = StandardSetting.Presentation;
 		NewRow.OptionKey = StandardSetting.Value;
 	EndDo;
-	
+
 	FoundCustomOption = Catalogs.ReportOptions.FindByCode(ThisObject.CurrentSettingsKey);
 	If FoundCustomOption.IsEmpty() Then
 		StandardOptionsFilter = New Structure("OptionKey", ThisObject.CurrentSettingsKey);
@@ -27,7 +26,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 		Items.GroupOptionTypes.CurrentPage = Items.GroupPageCustom;
 		Items.OptionsList.CurrentRow = FoundCustomOption;
 	EndIf;
-	
+
 EndProcedure
 
 &AtClient
@@ -54,9 +53,9 @@ Procedure LoadSetting(Command)
 	If Items.GroupOptionTypes.CurrentPage = Items.GroupPageCustom Then
 		CurrentData = Items.OptionsList.CurrentData;
 	ElsIf Items.GroupOptionTypes.CurrentPage = Items.GroupPageStandard Then
-		CurrentData = Items.StandardOptions.CurrentData;		
+		CurrentData = Items.StandardOptions.CurrentData;
 	Else
-		Return; 
+		Return;
 	EndIf;
 	If CurrentData = Undefined Then
 		Return;
@@ -96,8 +95,8 @@ Procedure ShowMarkedForDeleteReportOptions()
 			EditedFilterItem = OptionsList.Filter.Items.Add(Type("DataCompositionFilterItem"));
 		EndIf;
 		EditedFilterItem.LeftValue = LeftValue;
-		EditedFilterItem.ComparisonType = DataCompositionComparisonType.Equal; 
+		EditedFilterItem.ComparisonType = DataCompositionComparisonType.Equal;
 		EditedFilterItem.ViewMode = DataCompositionSettingsItemViewMode.Inaccessible;
-    	EditedFilterItem.RightValue = False;
-	EndIf;	
+		EditedFilterItem.RightValue = False;
+	EndIf;
 EndProcedure

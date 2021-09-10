@@ -11,15 +11,15 @@ EndFunction
 Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 	Tables = New Structure();
 	Parameters.IsReposting = False;
-	
-#Region NewRegistersPosting		
+
+#Region NewRegistersPosting
 	QueryArray = GetQueryTextsSecondaryTables();
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
-#EndRegion	
+#EndRegion
 
 	Return Tables;
 EndFunction
-	
+
 Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 	DataMapWithLockFields = New Map();
 	Return DataMapWithLockFields;
@@ -27,7 +27,7 @@ EndFunction
 
 Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
 #Region NewRegisterPosting
-	Tables = Parameters.DocumentDataTables;	
+	Tables = Parameters.DocumentDataTables;
 	QueryArray = GetQueryTextsMasterTables();
 	PostingServer.SetRegisters(Tables, Ref);
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
@@ -38,8 +38,8 @@ Function PostingGetPostingDataTables(Ref, Cancel, PostingMode, Parameters, AddIn
 	PostingDataTables = New Map();
 #Region NewRegistersPosting
 	PostingServer.SetPostingDataTables(PostingDataTables, Parameters);
-#EndRegion	
-			
+#EndRegion
+
 	Return PostingDataTables;
 EndFunction
 
@@ -78,7 +78,8 @@ EndProcedure
 
 Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
 	Parameters.Insert("RecordType", AccumulationRecordType.Expense);
-	PostingServer.CheckBalance_AfterWrite(Ref, Cancel, Parameters, "Document.StockAdjustmentAsWriteOff.ItemList", AddInfo);
+	PostingServer.CheckBalance_AfterWrite(Ref, Cancel, Parameters, "Document.StockAdjustmentAsWriteOff.ItemList",
+		AddInfo);
 EndProcedure
 
 #EndRegion
@@ -86,7 +87,7 @@ EndProcedure
 #Region NewRegistersPosting
 
 Function GetInformationAboutMovements(Ref) Export
-	Str = New Structure;
+	Str = New Structure();
 	Str.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
 	Str.Insert("QueryTextsMasterTables", GetQueryTextsMasterTables());
 	Str.Insert("QueryTextsSecondaryTables", GetQueryTextsSecondaryTables());
@@ -100,7 +101,7 @@ Function GetAdditionalQueryParameters(Ref)
 EndFunction
 
 Function GetQueryTextsSecondaryTables()
-	QueryArray = New Array;
+	QueryArray = New Array();
 	QueryArray.Add(ItemList());
 	QueryArray.Add(SerialLotNumbers());
 	QueryArray.Add(PostingServer.Exists_R4011B_FreeStocks());
@@ -109,112 +110,105 @@ Function GetQueryTextsSecondaryTables()
 EndFunction
 
 Function GetQueryTextsMasterTables()
-	QueryArray = New Array;
+	QueryArray = New Array();
 	QueryArray.Add(R4011B_FreeStocks());
 	QueryArray.Add(R4010B_ActualStocks());
 	QueryArray.Add(R4014B_SerialLotNumber());
 	QueryArray.Add(R4051T_StockAdjustmentAsWriteOff());
-	QueryArray.Add(R4050B_StockInventory());	
+	QueryArray.Add(R4050B_StockInventory());
 	Return QueryArray;
 EndFunction
 
 Function ItemList()
-	Return
-		"SELECT
-		|	ItemList.Ref.Date AS Period,
-		|	ItemList.Ref.Company AS Company,
-		|	ItemList.Ref.Branch AS Branch,
-		|	ItemList.Ref.Store AS Store,
-		|	ItemList.ItemKey AS ItemKey,
-		|	NOT ItemList.PhysicalInventory.Ref IS NULL AS PhysicalInventoryExists,
-		|	ItemList.PhysicalInventory AS PhysicalInventory,
-		|	ItemList.Ref AS Basis,
-		|	ItemList.QuantityInBaseUnit AS Quantity
-		|INTO ItemList
-		|FROM
-		|	Document.StockAdjustmentAsWriteOff.ItemList AS ItemList
-		|WHERE
-		|	ItemList.Ref = &Ref";
+	Return "SELECT
+		   |	ItemList.Ref.Date AS Period,
+		   |	ItemList.Ref.Company AS Company,
+		   |	ItemList.Ref.Branch AS Branch,
+		   |	ItemList.Ref.Store AS Store,
+		   |	ItemList.ItemKey AS ItemKey,
+		   |	NOT ItemList.PhysicalInventory.Ref IS NULL AS PhysicalInventoryExists,
+		   |	ItemList.PhysicalInventory AS PhysicalInventory,
+		   |	ItemList.Ref AS Basis,
+		   |	ItemList.QuantityInBaseUnit AS Quantity
+		   |INTO ItemList
+		   |FROM
+		   |	Document.StockAdjustmentAsWriteOff.ItemList AS ItemList
+		   |WHERE
+		   |	ItemList.Ref = &Ref";
 EndFunction
 
 Function SerialLotNumbers()
-	Return
-		"SELECT
-		|	SerialLotNumbers.Ref.Date AS Period,
-		|	SerialLotNumbers.Ref.Company AS Company,
-		|	SerialLotNumbers.Ref.Branch AS Branch,
-		|	SerialLotNumbers.Key,
-		|	SerialLotNumbers.SerialLotNumber,
-		|	SerialLotNumbers.Quantity,
-		|	ItemList.ItemKey AS ItemKey
-		|INTO SerialLotNumbers
-		|FROM
-		|	Document.StockAdjustmentAsWriteOff.SerialLotNumbers AS SerialLotNumbers
-		|		LEFT JOIN Document.StockAdjustmentAsWriteOff.ItemList AS ItemList
-		|		ON SerialLotNumbers.Key = ItemList.Key
-		|		AND ItemList.Ref = &Ref
-		|WHERE
-		|	SerialLotNumbers.Ref = &Ref";	
-EndFunction	
+	Return "SELECT
+		   |	SerialLotNumbers.Ref.Date AS Period,
+		   |	SerialLotNumbers.Ref.Company AS Company,
+		   |	SerialLotNumbers.Ref.Branch AS Branch,
+		   |	SerialLotNumbers.Key,
+		   |	SerialLotNumbers.SerialLotNumber,
+		   |	SerialLotNumbers.Quantity,
+		   |	ItemList.ItemKey AS ItemKey
+		   |INTO SerialLotNumbers
+		   |FROM
+		   |	Document.StockAdjustmentAsWriteOff.SerialLotNumbers AS SerialLotNumbers
+		   |		LEFT JOIN Document.StockAdjustmentAsWriteOff.ItemList AS ItemList
+		   |		ON SerialLotNumbers.Key = ItemList.Key
+		   |		AND ItemList.Ref = &Ref
+		   |WHERE
+		   |	SerialLotNumbers.Ref = &Ref";
+EndFunction
 
 Function R4014B_SerialLotNumber()
-	Return
-		"SELECT 
-		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		|	*
-		|INTO R4014B_SerialLotNumber
-		|FROM
-		|	SerialLotNumbers AS QueryTable
-		|WHERE 
-		|	TRUE";
+	Return "SELECT 
+		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		   |	*
+		   |INTO R4014B_SerialLotNumber
+		   |FROM
+		   |	SerialLotNumbers AS QueryTable
+		   |WHERE 
+		   |	TRUE";
 
 EndFunction
 
 Function R4011B_FreeStocks()
-	Return
-		"SELECT
-		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		|	*
-		|INTO R4011B_FreeStocks
-		|FROM
-		|	ItemList AS ItemList
-		|WHERE
-		|	NOT ItemList.PhysicalInventoryExists";
+	Return "SELECT
+		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		   |	*
+		   |INTO R4011B_FreeStocks
+		   |FROM
+		   |	ItemList AS ItemList
+		   |WHERE
+		   |	NOT ItemList.PhysicalInventoryExists";
 EndFunction
 
 Function R4010B_ActualStocks()
-	Return
-		"SELECT
-		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		|	*
-		|INTO R4010B_ActualStocks
-		|FROM
-		|	ItemList AS ItemList
-		|WHERE
-		|	NOT ItemList.PhysicalInventoryExists";
+	Return "SELECT
+		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		   |	*
+		   |INTO R4010B_ActualStocks
+		   |FROM
+		   |	ItemList AS ItemList
+		   |WHERE
+		   |	NOT ItemList.PhysicalInventoryExists";
 EndFunction
 
 Function R4051T_StockAdjustmentAsWriteOff()
-	Return
-		"SELECT
-		|	*
-		|INTO R4051T_StockAdjustmentAsWriteOff
-		|FROM
-		|	ItemList AS ItemList
-		|WHERE
-		|	NOT ItemList.PhysicalInventoryExists";
-EndFunction	
+	Return "SELECT
+		   |	*
+		   |INTO R4051T_StockAdjustmentAsWriteOff
+		   |FROM
+		   |	ItemList AS ItemList
+		   |WHERE
+		   |	NOT ItemList.PhysicalInventoryExists";
+EndFunction
 
 Function R4050B_StockInventory()
-	Return
-		"SELECT
-		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		|	*
-		|INTO R4050B_StockInventory
-		|FROM
-		|	ItemList AS ItemList
-		|WHERE
-		|	TRUE";
+	Return "SELECT
+		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		   |	*
+		   |INTO R4050B_StockInventory
+		   |FROM
+		   |	ItemList AS ItemList
+		   |WHERE
+		   |	TRUE";
 EndFunction
 
 #EndRegion

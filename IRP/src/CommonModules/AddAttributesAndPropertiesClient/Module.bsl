@@ -1,7 +1,7 @@
 Procedure AddAttributeStartChoice(Form, Item, StandardProcessing, AddInfo = Undefined) Export
 	If TypeOf(Form[Item.Name]) = Type("CatalogRef.AddAttributeAndPropertyValues") Then
 		StandardProcessing = False;
-		
+
 		PropertyOwner = Form[Item.Name + "_owner"];
 		If PropertyOwner <> Undefined Then
 			Filter = New Structure("Owner", PropertyOwner);
@@ -13,17 +13,17 @@ EndProcedure
 
 Procedure SetRequiredAtAllSets(Object, Form, Command) Export
 	Types = New TypeDescription("Boolean");
-	NotifyParameters = New Structure;
+	NotifyParameters = New Structure();
 	NotifyParameters.Insert("Object", Object);
 	NotifyParameters.Insert("Form", Form);
 	Notify = New NotifyDescription("SetRequiredAtAllSetsEnd", ThisObject, NotifyParameters);
-	ShowInputValue(Notify, False, R().SuggestionToUser_1, Types);	
+	ShowInputValue(Notify, False, R().SuggestionToUser_1, Types);
 EndProcedure
 
 Procedure SetRequiredAtAllSetsEnd(Result, AddionalParameters) Export
 	If Result = Undefined Then
 		Return;
-	EndIf;		
+	EndIf;
 	Object = AddionalParameters.Object;
 	AddAttributesAndPropertiesServer.SetRequiredAtAllSets(Object.Ref, Result);
 EndProcedure
@@ -36,7 +36,7 @@ EndProcedure
 Function AddAttributeInfoForHTML(ItemRef, UUID, FileRef = Undefined) Export
 	Filter = New Structure("ShowInHTML", True);
 	Str = AddAttributesAndPropertiesServer.PrepareDataForHTML(ItemRef, Filter);
-	
+
 	For Each Row In Str.Get("Properties") Do
 		Row.Icon = PutToTempStorage(Row.Icon, UUID);
 	EndDo;
@@ -44,7 +44,7 @@ Function AddAttributeInfoForHTML(ItemRef, UUID, FileRef = Undefined) Export
 		Row.Icon = PutToTempStorage(Row.Icon, UUID);
 	EndDo;
 	Return Str;
-	
+
 EndFunction
 
 #EndRegion

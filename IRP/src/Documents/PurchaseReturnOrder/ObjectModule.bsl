@@ -1,7 +1,7 @@
 Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	If DataExchange.Load Then
 		Return;
-	EndIf;	
+	EndIf;
 
 	ThisObject.DocumentAmount = ThisObject.ItemList.Total("TotalAmount");
 EndProcedure
@@ -9,7 +9,7 @@ EndProcedure
 Procedure OnWrite(Cancel)
 	If DataExchange.Load Then
 		Return;
-	EndIf;	
+	EndIf;
 EndProcedure
 
 Procedure BeforeDelete(Cancel)
@@ -34,17 +34,17 @@ Procedure Filling(FillingData, FillingText, StandardProcessing)
 EndProcedure
 
 Procedure OnCopy(CopiedObject)
-	
+
 	LinkedTables = New Array();
 	LinkedTables.Add(SpecialOffers);
 	LinkedTables.Add(TaxList);
 	LinkedTables.Add(Currencies);
 	DocumentsServer.SetNewTableUUID(ItemList, LinkedTables);
-	
+
 EndProcedure
 
 Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 	If DocumentsServer.CheckItemListStores(ThisObject) Then
-		Cancel = True;	
+		Cancel = True;
 	EndIf;
 EndProcedure

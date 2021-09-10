@@ -14,14 +14,14 @@ EndProcedure
 
 Procedure CompanyStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
 	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
-	
+
 	OpenSettings.ArrayOfFilters = New Array();
-	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", 
-																	True, DataCompositionComparisonType.NotEqual));
-	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("OurCompany", 
-																	True, DataCompositionComparisonType.Equal));
+	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True,
+		DataCompositionComparisonType.NotEqual));
+	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("OurCompany", True,
+		DataCompositionComparisonType.Equal));
 	OpenSettings.FillingData = New Structure("OurCompany", True);
-	
+
 	DocumentsClient.CompanyStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
 EndProcedure
 
@@ -72,7 +72,7 @@ EndProcedure
 Procedure InventoryItemOnChange(Object, Form, Module, Item = Undefined, Settings = Undefined) Export
 	TransferSettings = DocumentsClient.GetSettingsStructure(ThisObject);
 	TransferSettings.Insert("ItemListName", "Inventory");
-	DocumentsClient.ItemListItemOnChange(Object, Form, ThisObject, Item, TransferSettings);	
+	DocumentsClient.ItemListItemOnChange(Object, Form, ThisObject, Item, TransferSettings);
 EndProcedure
 
 Function ItemListItemSettings(Object, Form, AddInfo = Undefined) Export
@@ -81,12 +81,12 @@ EndFunction
 
 Function InventoryItemSettings(Form)
 	Settings = New Structure("Actions, ObjectAttributes, FormAttributes, AfterActionsCalculateSettings");
-	
+
 	Actions = New Structure();
-	Actions.Insert("UpdateItemKey"				, "UpdateItemKey");
-	
-	AfterActionsCalculateSettings = New Structure;
-	
+	Actions.Insert("UpdateItemKey", "UpdateItemKey");
+
+	AfterActionsCalculateSettings = New Structure();
+
 	Settings.Actions = Actions;
 	Settings.ObjectAttributes = "ItemKey";
 	Settings.FormAttributes = "";
@@ -97,7 +97,7 @@ EndFunction
 Procedure InventoryItemKeyOnChange(Object, Form, Module, Item = Undefined, Settings = Undefined) Export
 	TransferSettings = DocumentsClient.GetSettingsStructure(ThisObject);
 	TransferSettings.Insert("ItemListName", "Inventory");
-	DocumentsClient.ItemListItemKeyOnChange(Object, Form, ThisObject, Item, TransferSettings);	
+	DocumentsClient.ItemListItemKeyOnChange(Object, Form, ThisObject, Item, TransferSettings);
 EndProcedure
 
 Function ItemListItemKeySettings(Object, Form, AddInfo = Undefined) Export
@@ -105,12 +105,12 @@ Function ItemListItemKeySettings(Object, Form, AddInfo = Undefined) Export
 EndFunction
 
 Function InventoryItemKeySettings(Form)
-	Settings = New Structure("Actions, ObjectAttributes, FormAttributes, AfterActionsCalculateSettings");	
-	
+	Settings = New Structure("Actions, ObjectAttributes, FormAttributes, AfterActionsCalculateSettings");
+
 	Actions = New Structure();
-	
-	AfterActionsCalculateSettings = New Structure;
-	
+
+	AfterActionsCalculateSettings = New Structure();
+
 	Settings.Actions = Actions;
 	Settings.ObjectAttributes = "ItemKey";
 	Settings.FormAttributes = "";

@@ -1,4 +1,3 @@
-
 #Region FormEvents
 
 &AtServer
@@ -35,15 +34,15 @@ Procedure ExternalDataProcSettings(Command)
 	Info = AddDataProcServer.AddDataProcInfo(Object.ExternalDataProc);
 	Info.Insert("Settings", ThisObject.AddressResult);
 	CallMethodAddDataProc(Info);
-	
+
 	NotifyDescription = New NotifyDescription("OpenFormProcSettingsEnd", ThisObject);
 	AddDataProcClient.OpenFormAddDataProc(Info, NotifyDescription, "Settings");
 EndProcedure
 
 &AtServer
 Procedure PutSettingsToTempStorage()
-	ThisObject.AddressResult = PutToTempStorage(FormAttributeToValue("Object").ExternalDataProcSettings.Get()
-			, ThisObject.UUID);
+	ThisObject.AddressResult = PutToTempStorage(FormAttributeToValue("Object").ExternalDataProcSettings.Get(),
+		ThisObject.UUID);
 EndProcedure
 
 &AtClient

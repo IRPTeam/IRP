@@ -29,10 +29,10 @@ EndProcedure
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	ThisObject.Ref = Parameters.Ref;
-	
+
 	IDInfoTypeValues = IDInfoServer.GetIDInfoTypeValues(ThisObject.Ref);
 	ThisObject.IDInfo.Load(IDInfoTypeValues);
-	
+
 	For Each Row In ThisObject.IDInfo Do
 		Row.TypeDef = Row.IDInfoType.ValueType;
 	EndDo;
@@ -43,31 +43,32 @@ Procedure IDInfoBeforeRowChange(Item, Cancel)
 	If Item.CurrentData = Undefined Then
 		Return;
 	EndIf;
-	
+
 	Args = New Structure();
 	Args.Insert("IDInfoType", Item.CurrentData.IDInfoType);
 	Args.Insert("CurrentValue", Item.CurrentData.Value);
 	Args.Insert("RelatedValues", IDInfoServer.GetRelatedIDInfoTypes(Item.CurrentData.IDInfoType, ThisObject.Ref));
-	
-	ArrayOfCountry = 
-	IDInfoServer.GetCountryByIDInfoType(Item.CurrentData.IDInfoType, Item.CurrentData.Country, ThisObject.UUID);
+
+	ArrayOfCountry = IDInfoServer.GetCountryByIDInfoType(Item.CurrentData.IDInfoType, Item.CurrentData.Country,
+		ThisObject.UUID);
 	If ArrayOfCountry.Count() Then
 		Cancel = True;
 	EndIf;
-	
+
 	If ArrayOfCountry.Count() > 1 Then
 		OpenFormArgs = New Structure();
 		OpenFormArgs.Insert("ArrayOfCountry", ArrayOfCountry);
-		
+
 		Notify = New NotifyDescription("StartEditIDInfo", ThisObject, Args);
-		OpenForm("ChartOfCharacteristicTypes.IDInfoTypes.Form.SelectCountryForm", OpenFormArgs, ThisObject, , , , Notify);
+		OpenForm("ChartOfCharacteristicTypes.IDInfoTypes.Form.SelectCountryForm", OpenFormArgs, ThisObject, , , ,
+			Notify);
 	ElsIf ArrayOfCountry.Count() = 1 Then
 		Result = New Structure();
 		Result.Insert("Country", ArrayOfCountry[0].Country);
 		Result.Insert("ExternalDataProc", ArrayOfCountry[0].ExternalDataProc);
 		Result.Insert("Settings", ArrayOfCountry[0].Settings);
 		StartEditIDInfo(Result, Args);
-	Else 
+	Else
 		Return;
 	EndIf;
 EndProcedure
@@ -83,12 +84,12 @@ Procedure StartEditIDInfo(Result, Parameters) Export
 	OpenFormArgs.Insert("RelatedValues", Parameters.RelatedValues);
 	OpenFormArgs.Insert("IDInfoType", Parameters.IDInfoType);
 	OpenFormArgs.Insert("Settings", Result.Settings);
-	
+
 	Parameters.Insert("Country", Result.Country);
-	
+
 	CallMethodAddDataProc(OpenFormArgs);
 	Notify = New NotifyDescription("EndEditIDInfo", ThisObject, Parameters);
-	
+
 	AddDataProcClient.OpenFormAddDataProc(OpenFormArgs, Notify, "Form");
 EndProcedure
 
@@ -102,7 +103,7 @@ Procedure EndEditIDInfo(Result, Parameters) Export
 	If Result = Undefined Then
 		Return;
 	EndIf;
-	
+
 	Filter = New Structure();
 	Filter.Insert("IDInfoType", Parameters.IDInfoType);
 	ArrayOfIDInfo = ThisObject.IDInfo.FindRows(Filter);

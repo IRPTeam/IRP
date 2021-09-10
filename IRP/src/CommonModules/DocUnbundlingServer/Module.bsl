@@ -34,7 +34,7 @@ EndFunction
 #Region GroupTitle
 
 Procedure SetGroupItemsList(Object, Form)
-	AttributesArray = New Array;
+	AttributesArray = New Array();
 	AttributesArray.Add("Company");
 	AttributesArray.Add("Store");
 	AttributesArray.Add("ItemKeyBundle");
@@ -42,9 +42,8 @@ Procedure SetGroupItemsList(Object, Form)
 	AttributesArray.Add("Unit");
 	DocumentsServer.DeleteUnavailableTitleItemNames(AttributesArray);
 	For Each Atr In AttributesArray Do
-		Form.GroupItems.Add(Atr, ?(ValueIsFilled(Form.Items[Atr].Title),
-				Form.Items[Atr].Title,
-				Object.Ref.Metadata().Attributes[Atr].Synonym + ":" + Chars.NBSp));
+		Form.GroupItems.Add(Atr, ?(ValueIsFilled(Form.Items[Atr].Title), Form.Items[Atr].Title,
+			Object.Ref.Metadata().Attributes[Atr].Synonym + ":" + Chars.NBSp));
 	EndDo;
 EndProcedure
 

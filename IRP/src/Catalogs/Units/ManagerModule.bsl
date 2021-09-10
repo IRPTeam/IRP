@@ -1,6 +1,6 @@
 Procedure ChoiceDataGetProcessing(ChoiceData, Parameters, StandardProcessing)
 	StandardProcessing = False;
-	
+
 	FilterItem = Undefined;
 	If Not Parameters.Filter.Property("Item", FilterItem) Then
 		If Not Parameters.Filter.Property("ItemKey") Then
@@ -8,26 +8,25 @@ Procedure ChoiceDataGetProcessing(ChoiceData, Parameters, StandardProcessing)
 			Return;
 		Else
 			FilterItem = ?(TypeOf(Parameters.Filter.ItemKey) = Type("CatalogRef.ItemKeys"),
-					Parameters.Filter.ItemKey.Item,
-					Undefined);
+				Parameters.Filter.ItemKey.Item, Undefined);
 		EndIf;
 	EndIf;
-	
-	Filter = "
-		|	AND (Table.Item = &Item
-		|	OR Table.Item = VALUE(Catalog.Items.EmptyRef))
-		|";
 
-	Settings = New Structure;
+	Filter = "
+			 |	AND (Table.Item = &Item
+			 |	OR Table.Item = VALUE(Catalog.Items.EmptyRef))
+			 |";
+
+	Settings = New Structure();
 	Settings.Insert("MetadataObject", Metadata.Catalogs.Units);
 	Settings.Insert("Filter", Filter);
-	
+
 	QueryBuilderText = CommonFormActionsServer.QuerySearchInputByString(Settings);
 
 	Query = New Query(QueryBuilderText);
 	Query.SetParameter("Item", FilterItem);
 	Query.SetParameter("SearchString", "%" + Parameters.SearchString + "%");
-	
+
 	ChoiceData = New ValueList();
 	ChoiceData.LoadValues(Query.Execute().Unload().UnloadColumn("Ref"));
 EndProcedure
@@ -36,7 +35,7 @@ Function GetUnitFactor(FromUnit, ToUnit = Undefined) Export
 	If FromUnit = ToUnit Then
 		Return ?(ToUnit = Undefined, 0, ToUnit.Quantity);
 	EndIf;
-	
+
 	If ToUnit <> Undefined Then
 		Result = New Array();
 		GetUnitFactorRecursion(FromUnit, ToUnit, Result);
@@ -77,12 +76,12 @@ Function Convert(FromUnit, ToUnit, Quantity) Export
 	For Each Value In Result Do
 		UnitFactorFrom = UnitFactorFrom * Value;
 	EndDo;
-	
+
 	Return Quantity / UnitFactorTo * UnitFactorFrom;
-EndFunction	
+EndFunction
 
 Function ConvertQuantityToQuantityInBaseUnit(ItemKey, Unit, Quantity) Export
-	BasisUnit = GetBasisQuantity(ItemKey); 
+	BasisUnit = GetBasisQuantity(ItemKey);
 	QuantityInBaseUnit =  Convert(Unit, BasisUnit, Quantity);
 	Return New Structure("BasisUnit, QuantityInBaseUnit", BasisUnit, QuantityInBaseUnit);
 EndFunction
@@ -98,12 +97,12 @@ EndFunction
 #Region LockAttributes
 
 Function GetListLockedAttributes_IncludeObjects() Export
-	Array = New Array;
+	Array = New Array();
 	Return Array;
 EndFunction
 
 Function GetListLockedAttributes_ExcludeObjects() Export
-	Array = New Array;
+	Array = New Array();
 	Array.Add(Metadata.Catalogs.Items);
 	Array.Add(Metadata.Catalogs.ItemKeys);
 	Array.Add(Metadata.Catalogs.Units);

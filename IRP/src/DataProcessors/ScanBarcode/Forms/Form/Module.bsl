@@ -1,9 +1,8 @@
-
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	Object.Basis = Parameters.Basis;
 	FillItemList();
-	
+
 	SetParameters("User", SessionParameters.CurrentUser);
 	SetParameters("Basis", Object.Basis);
 	SetParameters("OnlyMy", OnlyMy);
@@ -47,8 +46,6 @@ EndProcedure
 Procedure ItemListRefreshRequestProcessing(Item)
 	FillItemList();
 EndProcedure
-
-
 &AtClient
 Procedure NotificationProcessing(EventName, Parameter, Source)
 	If EventName = "NewBarcode" And IsInputAvailable() Then
@@ -68,16 +65,16 @@ Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
 	NotifyParameters = New Structure();
 	NotifyParameters.Insert("Form", ThisObject);
 	NotifyParameters.Insert("Object", ThisObject);
-	
+
 	ItemListRow = Undefined;
 	For Each Row In AdditionalParameters.FoundedItems Do
-		
+
 		Filter = New Structure();
 		Filter.Insert("ItemKey", Row.ItemKey);
 		Filter.Insert("Unit", Row.Unit);
-		
+
 		SearchInItemList = Object.ItemList.FindRows(Filter);
-		
+
 		If SearchInItemList.Count() Then
 			ItemListRow = SearchInItemList[0];
 			ItemListRow.ScannedQuantity = ItemListRow.ScannedQuantity + Row.Quantity;
@@ -88,15 +85,15 @@ Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
 			ItemListRow.Unit = Row.Unit;
 			ItemListRow.ScannedQuantity = Row.Quantity;
 		EndIf;
-		
+
 		SaveBarcode(Object.Basis, Row.Barcode, Row.Quantity);
 		Modified = True;
 	EndDo;
-	
+
 	If Not ItemListRow = Undefined Then
-		Items.ItemList.CurrentRow = ItemListRow.GetID(); 
+		Items.ItemList.CurrentRow = ItemListRow.GetID();
 	EndIf;
-	
+
 EndProcedure
 
 &AtClient

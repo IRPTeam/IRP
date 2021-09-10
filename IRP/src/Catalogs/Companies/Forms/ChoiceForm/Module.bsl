@@ -23,11 +23,8 @@ EndProcedure
 
 &AtClient
 Procedure OurCompanyFilterOnChange(Item)
-	CommonFunctionsClientServer.SetFilterItem(List.Filter.Items,
-		"OurCompany",
-		?(OurCompanyFilter = 1, True, False),
-			DataCompositionComparisonType.Equal,
-			ValueIsFilled(OurCompanyFilter));
+	CommonFunctionsClientServer.SetFilterItem(List.Filter.Items, "OurCompany", ?(OurCompanyFilter = 1, True, False),
+		DataCompositionComparisonType.Equal, ValueIsFilled(OurCompanyFilter));
 EndProcedure
 
 &AtServer

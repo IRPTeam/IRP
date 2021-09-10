@@ -1,10 +1,9 @@
-
 &AtClient
 Procedure CommandProcessing(CommandParameter, CommandExecuteParameters)
 	Code = AreasOnChangeServer(CommandParameter);
-	#If NOT MobileAppClient Then
-		ClientApplication.SetCaption("IRP (area: " + Code + ")");
-	#EndIf
+#If Not MobileAppClient Then
+	ClientApplication.SetCaption("IRP (area: " + Code + ")");
+#EndIf
 EndProcedure
 
 &AtServer

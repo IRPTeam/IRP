@@ -1,4 +1,3 @@
-
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	ThisObject.Store = Parameters.Store;
@@ -7,26 +6,26 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	ThisObject.ItemKey = Parameters.ItemKey;
 	ThisObject.Unit = Parameters.Unit;
 	ThisObject.DateOfRelevance = CurrentSessionDate();
-	ThisObject.VisibleSelectionTables = Parameters.VisibleSelectionTables; 
+	ThisObject.VisibleSelectionTables = Parameters.VisibleSelectionTables;
 	ThisObject.ShowPrecision = Parameters.ShowPrecision;
-	
+
 	ShowPrecision();
-	
+
 	ResultsTableOfBalance = ThisObject.TableOfBalance.Unload().CopyColumns();
 	For Each Row In Parameters.TableOfBalance Do
 		FillPropertyValues(ResultsTableOfBalance.Add(), Row);
 	EndDo;
-	
+
 	ResultsTableOfPurchase = ThisObject.TableOfPurchase.Unload().CopyColumns();
 	For Each Row In Parameters.TableOfPurchase Do
 		FillPropertyValues(ResultsTableOfPurchase.Add(), Row);
 	EndDo;
-	
+
 	ResultsTableOfInternalSupplyRequest = ThisObject.TableOfInternalSupplyRequest.Unload().CopyColumns();
 	For Each Row In Parameters.TableOfInternalSupplyRequest Do
 		FillPropertyValues(ResultsTableOfInternalSupplyRequest.Add(), Row);
 	EndDo;
-	
+
 	For Each Row In Parameters.ArrayOfSupplyRequest Do
 		NewRow = ThisObject.TableOfInternalSupplyRequest.Add();
 		NewRow.InternalSupplyRequest = Row.InternalSupplyRequest;
@@ -35,12 +34,12 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 		NewRow.ProcurementDate = Row.ProcurementDate;
 		ThisObject.TotalQuantity = ThisObject.TotalQuantity + Row.Quantity;
 	EndDo;
-	
+
 	Update_TableOfBalance();
 	Update_TableOfPurchase();
-	
+
 	Query = New Query();
-	Query.Text = 
+	Query.Text =
 	"SELECT
 	|	tmp.Store,
 	|	tmp.Balance,
@@ -129,7 +128,9 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	|		AND TableOfPurchase.DateOfRelevance = ResultsTableOfPurchase.DateOfRelevance
 	|		AND TableOfPurchase.Agreement = ResultsTableOfPurchase.Agreement
 	//|		AND TableOfPurchase.DeliveryDate = ResultsTableOfPurchase.DeliveryDate
+
 	//|		AND TableOfPurchase.Store = ResultsTableOfPurchase.Store
+
 	//|		AND TableOfPurchase.Unit = ResultsTableOfPurchase.Unit
 	|";
 	Query.SetParameter("Store", ThisObject.Store);
@@ -137,11 +138,11 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	Query.SetParameter("ResultsTableOfBalance", ResultsTableOfBalance);
 	Query.SetParameter("TableOfPurchase", ThisObject.TableOfPurchase.Unload());
 	Query.SetParameter("ResultsTableOfPurchase", ResultsTableOfPurchase);
-	
+
 	QueryResults = Query.ExecuteBatch();
 	ThisObject.TableOfBalance.Load(QueryResults[4].Unload());
 	ThisObject.TableOfPurchase.Load(QueryResults[5].Unload());
-	
+
 	RecalculateBasisQuantity();
 EndProcedure
 
@@ -154,13 +155,13 @@ EndProcedure
 Procedure ShowPrecision()
 	FieldFormat = ?(ThisObject.ShowPrecision, "", "NFD=0");
 	Items.TableOfBalanceBalance.Format = FieldFormat;
-	
+
 	Items.TableOfBalanceQuantity.Format = FieldFormat;
 	Items.TableOfBalanceQuantity.EditFormat = FieldFormat;
-	
+
 	Items.TableOfPurchaseQuantity.Format = FieldFormat;
 	Items.TableOfPurchaseQuantity.EditFormat = FieldFormat;
-	
+
 	Items.TableOfInternalSupplyRequestQuantity.Format = FieldFormat;
 	Items.TableOfInternalSupplyRequestTransfer.Format = FieldFormat;
 	Items.TableOfInternalSupplyRequestPurchase.Format = FieldFormat;
@@ -230,7 +231,7 @@ Procedure TableOfPurchaseSelection(Item, RowSelected, Field, StandardProcessing)
 		OpenParameters.Insert("Key", CurrentData.Partner);
 		OpenForm(GetMetadataFullName(CurrentData.Partner) + ".ObjectForm", OpenParameters);
 	EndIf;
-	
+
 	If Upper(Field.Name) = Upper("TableOfPurchaseAgreement") Then
 		StandardProcessing = False;
 		If Not ValueIsFilled(CurrentData.Agreement) Then
@@ -240,7 +241,7 @@ Procedure TableOfPurchaseSelection(Item, RowSelected, Field, StandardProcessing)
 		OpenParameters.Insert("Key", CurrentData.Agreement);
 		OpenForm(GetMetadataFullName(CurrentData.Agreement) + ".ObjectForm", OpenParameters);
 	EndIf;
-	
+
 	If Upper(Field.Name) = Upper("TableOfPurchasePriceType") Then
 		StandardProcessing = False;
 		If Not ValueIsFilled(CurrentData.PriceType) Then
@@ -264,7 +265,7 @@ EndProcedure
 
 &AtClient
 Procedure TableOfBalanceQuantityIncomingOnChange(Item)
-	Update_TotalQuantity();	
+	Update_TotalQuantity();
 EndProcedure
 
 &AtClient
@@ -297,12 +298,12 @@ Procedure Update_TotalQuantity()
 		PurchaseQuantity = PurchaseQuantity + Row.BasisQuantity;
 	EndDo;
 	ThisObject.LackQuantity = ThisObject.TotalQuantity - ThisObject.SelectedQuantity;
-	
+
 	For Each Row In ThisObject.TableOfInternalSupplyRequest Do
 		Row.Transfer = 0;
 		Row.Purchase = 0;
 	EndDo;
-	
+
 	For Each Row In ThisObject.TableOfInternalSupplyRequest Do
 		If TransferQuantity <= 0 Then
 			Break;
@@ -310,7 +311,7 @@ Procedure Update_TotalQuantity()
 		Row.Transfer = Min(TransferQuantity, Row.Quantity);
 		TransferQuantity = TransferQuantity - Row.Transfer;
 	EndDo;
-	
+
 	For Each Row In ThisObject.TableOfInternalSupplyRequest Do
 		If PurchaseQuantity <= 0 Then
 			Break;
@@ -378,12 +379,9 @@ Procedure BeforeClose(Cancel, Exit, WarningText, StandardProcessing)
 	Result = New Structure();
 	Result.Insert("IsOkPressed", False);
 	Result.Insert("VisibleSelectionTables", ThisObject.VisibleSelectionTables);
-	
+
 	Close(Result);
 EndProcedure
-
-
-
 &AtClient
 Procedure DateOfRelevanceOnChange(Item)
 	Update_AllTables();
@@ -397,7 +395,7 @@ EndProcedure
 &AtServer
 Procedure Update_TableOfBalance()
 	Query = New Query();
-	Query.Text = 
+	Query.Text =
 	"SELECT
 	|	R4011B_FreeStocksBalance.Store,
 	|	UNDEFINED AS PurchaseOrder,
@@ -422,7 +420,7 @@ Procedure Update_TableOfBalance()
 	Query.SetParameter("Store", ThisObject.Store);
 	Query.SetParameter("DateOfRelevance", ThisObject.DateOfRelevance);
 	Query.SetParameter("ItemKey", ThisObject.ItemKey);
-	
+
 	QueryResult = Query.Execute();
 	QueryTable = QueryResult.Unload();
 	ThisObject.TableOfBalance.Load(QueryTable);
@@ -431,7 +429,7 @@ EndProcedure
 &AtServer
 Procedure Update_TableOfPurchase()
 	Query = New Query();
-	Query.Text = 
+	Query.Text =
 	"SELECT
 	|	Agreements.Partner AS Partner,
 	|	Agreements.PriceType AS PriceType,
@@ -637,7 +635,7 @@ Procedure Update_TableOfPurchase()
 	|		WHEN ISNULL(t_PricesByItems.Price, 0) <> 0
 	|			THEN ISNULL(t_PricesByItems.Price, 0)
 	|	END <> 0";
-	
+
 	Query.SetParameter("Store", ThisObject.Store);
 	Query.SetParameter("ItemKey", ThisObject.ItemKey);
 	Query.SetParameter("Period", EndOfDay(ThisObject.DateOfRelevance));
@@ -651,15 +649,15 @@ Procedure Ok(Command)
 	Result = New Structure();
 	Result.Insert("IsOkPressed", True);
 	Result.Insert("VisibleSelectionTables", ThisObject.VisibleSelectionTables);
-	
+
 	Result.Insert("Item", ThisObject.Item);
 	Result.Insert("ItemKey", ThisObject.ItemKey);
 	Result.Insert("Unit", ThisObject.Unit);
-	
+
 	Result.Insert("TableOfBalance", New Array());
 	Result.Insert("TableOfPurchase", New Array());
 	Result.Insert("TableOfInternalSupplyRequest", New Array());
-	
+
 	For Each Row In ThisObject.TableOfBalance Do
 		If Not ValueIsFilled(Row.Quantity) And Not ValueIsFilled(Row.QuantityIncoming) Then
 			Continue;
@@ -670,10 +668,10 @@ Procedure Ok(Command)
 		NewRow.Insert("Quantity", Row.Quantity);
 		NewRow.Insert("QuantityIncoming", Row.QuantityIncoming);
 		NewRow.Insert("PurchaseOrder", Row.PurchaseOrder);
-		
+
 		Result.TableOfBalance.Add(NewRow);
 	EndDo;
-	
+
 	For Each Row In ThisObject.TableOfPurchase Do
 		If Not ValueIsFilled(Row.Quantity) Then
 			Continue;
@@ -693,7 +691,7 @@ Procedure Ok(Command)
 		NewRow.Insert("BasisQuantity", Row.BasisQuantity);
 		Result.TableOfPurchase.Add(NewRow);
 	EndDo;
-	
+
 	For Each Row In ThisObject.TableOfInternalSupplyRequest Do
 		If Not ValueIsFilled(Row.Quantity) Then
 			Continue;
@@ -708,7 +706,7 @@ Procedure Ok(Command)
 		NewRow.Insert("RowKey", Row.RowKey);
 		Result.TableOfInternalSupplyRequest.Add(NewRow);
 	EndDo;
-	
+
 	Close(Result);
 EndProcedure
 
@@ -728,7 +726,5 @@ Procedure SetVisible()
 	ElsIf Upper(ThisObject.VisibleSelectionTables) = Upper("Purchase") Then
 		Items.TableOfBalance.Visible = False;
 		Items.TableOfPurchase.Visible = True;
-	EndIf;	
+	EndIf;
 EndProcedure
-
-

@@ -1,4 +1,3 @@
-
 #Region FormEventHandlers
 
 &AtServer
@@ -49,11 +48,10 @@ Procedure SetSettings(Command)
 	Info = AddDataProcServer.AddDataProcInfo(Object.Ref);
 	Info.Insert("Settings", AddressResult);
 	CallMethodAddDataProc(Info);
-	
+
 	NotifyDescription = New NotifyDescription("OpenFormAddDataProcEnd", ThisObject);
-	AddDataProcClient.OpenFormAddDataProc(Info, 
-	                                      NotifyDescription, 
-	                                      ?(Object.GroupTypes, "GroupTypeForm", "ElementTypeForm"));
+	AddDataProcClient.OpenFormAddDataProc(Info, NotifyDescription, ?(Object.GroupTypes, "GroupTypeForm",
+		"ElementTypeForm"));
 EndProcedure
 
 &AtServerNoContext
@@ -66,7 +64,7 @@ Procedure OpenFormAddDataProcEnd(Result, AdditionalParameters) Export
 	If Result = Undefined Then
 		Return;
 	EndIf;
-	
+
 	Modified = True;
 	OpenFormAddDataProcEndServer(Result);
 EndProcedure

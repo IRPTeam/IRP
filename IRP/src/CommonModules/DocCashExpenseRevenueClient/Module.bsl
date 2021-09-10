@@ -10,10 +10,10 @@ EndProcedure
 
 Procedure DateOnChange(Object, Form, Item) Export
 
-	#If Not MobileClient Then		 
-		DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
-	#EndIf
-	
+#If Not MobileClient Then
+	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
+#EndIf
+
 EndProcedure
 
 Procedure CompanyOnChange(Object, Form, Item) Export
@@ -23,8 +23,8 @@ EndProcedure
 Function CompanySettings(Object, Form, AddInfo = Undefined) Export
 	Settings = New Structure("Actions, ObjectAttributes, FormAttributes, CalculateSettings");
 	Actions = New Structure();
-	Actions.Insert("ChangeAccount"		, "ChangeAccount");
-	Settings.Insert("TableName"		, "PaymentList");
+	Actions.Insert("ChangeAccount", "ChangeAccount");
+	Settings.Insert("TableName", "PaymentList");
 	Settings.Actions = Actions;
 	Settings.ObjectAttributes = "Company, Account";
 	Settings.FormAttributes = "";
@@ -40,44 +40,41 @@ EndFunction
 #Region AccountEvents
 
 Procedure AccountOnChange(Object, Form, Item = Undefined) Export
-	
+
 	CurrencyBeforeChange = Form.Currency;
 	AccountBeforeChange = Form.CurrentAccount;
-	
+
 	Form.Currency = ServiceSystemServer.GetObjectAttribute(Object.Account, "Currency");
-	
+
 	If Not ValueIsFilled(Form.Currency) Then
 		Form.CurrentAccount = Object.Account;
-		
+
 		Return;
 	EndIf;
-	
+
 	AdditionalParameters = New Structure();
-	AdditionalParameters.Insert("Form"					, Form);
-	AdditionalParameters.Insert("Object"				, Object);
-	AdditionalParameters.Insert("CurrencyBeforeChange"	, CurrencyBeforeChange);
-	AdditionalParameters.Insert("AccountBeforeChange"	, AccountBeforeChange);
+	AdditionalParameters.Insert("Form", Form);
+	AdditionalParameters.Insert("Object", Object);
+	AdditionalParameters.Insert("CurrencyBeforeChange", CurrencyBeforeChange);
+	AdditionalParameters.Insert("AccountBeforeChange", AccountBeforeChange);
 	AdditionalParameters.Insert("Item", Item);
-	
-	If Form.Currency <> CurrencyBeforeChange 
-			And Object.PaymentList.Count() Then
-		ShowQueryBox(New NotifyDescription("AccountOnChangeContinue", 
-											ThisObject, 
-											AdditionalParameters),
-					 R().QuestionToUser_006, QuestionDialogMode.YesNo);
+
+	If Form.Currency <> CurrencyBeforeChange And Object.PaymentList.Count() Then
+		ShowQueryBox(New NotifyDescription("AccountOnChangeContinue", ThisObject, AdditionalParameters),
+			R().QuestionToUser_006, QuestionDialogMode.YesNo);
 	EndIf;
 
-	#If Not MobileClient Then		 
-		DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
-	#EndIf
-	
+#If Not MobileClient Then
+	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
+#EndIf
+
 EndProcedure
 
 Procedure AccountOnChangeContinue(Result, AdditionalParameters) Export
-	
+
 	Object = AdditionalParameters.Object;
 	Form = AdditionalParameters.Form;
-	
+
 	If Result = DialogReturnCode.No Then
 		Form.Currency		= AdditionalParameters.CurrencyBeforeChange;
 		Form.CurrentAccount	= AdditionalParameters.AccountBeforeChange;
@@ -97,10 +94,8 @@ Procedure AccountStartChoice(Object, Form, Item, ChoiceData, StandardProcessing)
 	StandardProcessing = False;
 	DefaultStartChoiceParameters = New Structure("Company", Object.Company);
 	StartChoiceParameters = CatCashAccountsClient.GetDefaultStartChoiceParameters(DefaultStartChoiceParameters);
-	StartChoiceParameters.CustomParameters.Filters.Add(DocumentsClientServer.CreateFilterItem("Type",
-																		PredefinedValue("Enum.CashAccountTypes.Transit"),
-																		,
-																		DataCompositionComparisonType.NotEqual));
+	StartChoiceParameters.CustomParameters.Filters.Add(DocumentsClientServer.CreateFilterItem("Type", PredefinedValue(
+		"Enum.CashAccountTypes.Transit"), , DataCompositionComparisonType.NotEqual));
 	StartChoiceParameters.FillingData.Insert("Type", PredefinedValue("Enum.CashAccountTypes.Cash"));
 	OpenForm(StartChoiceParameters.FormName, StartChoiceParameters, Item, Form.UUID, , Form.URL);
 EndProcedure
@@ -108,13 +103,12 @@ EndProcedure
 Procedure AccountEditTextChange(Object, Form, Item, Text, StandardProcessing) Export
 	DefaultEditTextParameters = New Structure("Company", Object.Company);
 	EditTextParameters = CatCashAccountsClient.GetDefaultEditTextParameters(DefaultEditTextParameters);
-	EditTextParameters.Filters.Add(DocumentsClientServer.CreateFilterItem("Type",
-																		PredefinedValue("Enum.CashAccountTypes.Transit"),
-																		ComparisonType.NotEqual));
+	EditTextParameters.Filters.Add(DocumentsClientServer.CreateFilterItem("Type", PredefinedValue(
+		"Enum.CashAccountTypes.Transit"), ComparisonType.NotEqual));
 	Item.ChoiceParameters = CatCashAccountsClient.FixedArrayOfChoiceParameters(EditTextParameters);
 EndProcedure
 
-#EndRegion 
+#EndRegion
 
 #Region PaymentListEvents
 
@@ -123,10 +117,10 @@ Procedure PaymentListOnStartEdit(Object, Form, Item, NewRow, Clone) Export
 	If CurrentData = Undefined Then
 		Return;
 	EndIf;
-	
+
 	If Clone Then
 		CurrentData.Key = New UUID();
-		
+
 		Settings = New Structure();
 		Actions = New Structure("CalculateTax");
 		Settings.Insert("Actions", Actions);
@@ -135,7 +129,7 @@ Procedure PaymentListOnStartEdit(Object, Form, Item, NewRow, Clone) Export
 		Settings.Insert("Rows", Rows);
 		CalculateItemsRows(Object, Form, Settings);
 		Return;
-	EndIf;	
+	EndIf;
 EndProcedure
 
 Procedure PaymentListBeforeAddRow(Object, Form, Item, Cancel, Clone, Parent, IsFolder, Parameter) Export
@@ -167,7 +161,7 @@ EndProcedure
 Procedure PaymentListCurrencyOnChange(Object, Form) Export
 
 	CurrentData = Form.Items.PaymentList.CurrentData;
-	
+
 	If CurrentData = Undefined Then
 		Return;
 	EndIf;
@@ -179,7 +173,7 @@ Procedure PaymentListNetAmountOnChange(Object, Form, Item) Export
 	If CurrentData = Undefined Then
 		Return;
 	EndIf;
-	
+
 	Settings = New Structure();
 	Actions = GetCalculateRowsActions();
 	Actions.Delete("CalculateTaxByTotalAmount");
@@ -196,7 +190,7 @@ Procedure PaymentListTotalAmountOnChange(Object, Form, Item) Export
 	If CurrentData = Undefined Then
 		Return;
 	EndIf;
-	
+
 	Settings = New Structure();
 	Actions = GetCalculateRowsActions();
 	Actions.Delete("CalculateTotalAmountByNetAmount");
@@ -219,10 +213,7 @@ Function GetCalculateRowsActions() Export
 EndFunction
 
 Procedure CalculateItemsRows(Object, Form, Settings) Export
-	CalculationStringsClientServer.CalculateItemsRows(Object,
-		Form,
-		Settings.Rows,
-		Settings.Actions,
+	CalculationStringsClientServer.CalculateItemsRows(Object, Form, Settings.Rows, Settings.Actions,
 		TaxesClient.GetArrayOfTaxInfo(Form));
 EndProcedure
 
@@ -274,4 +265,4 @@ EndProcedure
 
 #EndRegion
 
-#EndRegion 
+#EndRegion

@@ -1,7 +1,7 @@
 Procedure DescriptionOpening(Object, Form, Item, StandardProcessing) Export
 	StandardProcessing = False;
 	OpenArgs = New Structure("Values", New Structure());
-	
+
 	For Each Attribute In LocalizationReuse.AllDescription() Do
 		If "Description_" + LocalizationReuse.GetLocalizationCode() = Attribute Then
 			OpenArgs.Values.Insert(Attribute, Form.Items[Attribute].EditText);
@@ -9,16 +9,14 @@ Procedure DescriptionOpening(Object, Form, Item, StandardProcessing) Export
 			OpenArgs.Values.Insert(Attribute, Object[Attribute]);
 		EndIf;
 	EndDo;
-	
+
 	AdditionalParameters = New Structure();
 	AdditionalParameters.Insert("Object", Object);
 	AdditionalParameters.Insert("Form", Form);
-	
-	OpenForm("CommonForm.EditDescriptions"
-		, OpenArgs
-		, Form, , ,
-		, New NotifyDescription("DescriptionEditEnd", ThisObject, AdditionalParameters));
-	
+
+	OpenForm("CommonForm.EditDescriptions", OpenArgs, Form, , , , New NotifyDescription("DescriptionEditEnd",
+		ThisObject, AdditionalParameters));
+
 EndProcedure
 
 Procedure DescriptionEditEnd(Result, AdditionalParameters) Export

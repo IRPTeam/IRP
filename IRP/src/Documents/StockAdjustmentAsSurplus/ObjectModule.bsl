@@ -1,14 +1,13 @@
-
 Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	If DataExchange.Load Then
 		Return;
-	EndIf;	
+	EndIf;
 EndProcedure
 
 Procedure OnWrite(Cancel)
 	If DataExchange.Load Then
 		Return;
-	EndIf;	
+	EndIf;
 EndProcedure
 
 Procedure BeforeDelete(Cancel)
@@ -35,5 +34,5 @@ EndProcedure
 Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 	If Not SerialLotNumbersServer.CheckFilling(ThisObject) Then
 		Cancel = True;
-	EndIf;	
+	EndIf;
 EndProcedure

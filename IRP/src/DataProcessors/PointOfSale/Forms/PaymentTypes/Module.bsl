@@ -1,11 +1,10 @@
-
 #Region Events
 
 #Region FormEvents
 
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
-	
+
 	For Each PayButton In Parameters.PayButtons Do
 		NewCommand = Commands.Add(PayButton.Value);
 		NewCommand.Action = "PayButtonPress";

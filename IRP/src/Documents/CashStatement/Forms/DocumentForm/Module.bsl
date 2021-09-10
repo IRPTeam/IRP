@@ -86,7 +86,7 @@ EndProcedure
 &AtClient
 Procedure GeneratedFormCommandActionByName(Command) Export
 	ExternalCommandsClient.GeneratedFormCommandActionByName(Object, ThisObject, Command.Name);
-	GeneratedFormCommandActionByNameServer(Command.Name);	
+	GeneratedFormCommandActionByNameServer(Command.Name);
 EndProcedure
 
 &AtServer
@@ -155,12 +155,14 @@ EndProcedure
 
 &AtClient
 Procedure PaymentListFinancialMovementTypeStartChoice(Item, ChoiceData, StandardProcessing)
-	DocCashStatementClient.PaymentListFinancialMovementTypeStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+	DocCashStatementClient.PaymentListFinancialMovementTypeStartChoice(Object, ThisObject, Item, ChoiceData,
+		StandardProcessing);
 EndProcedure
 
 &AtClient
 Procedure PaymentListFinancialMovementTypeEditTextChange(Item, Text, StandardProcessing)
-	DocCashStatementClient.PaymentListFinancialMovementTypeEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+	DocCashStatementClient.PaymentListFinancialMovementTypeEditTextChange(Object, ThisObject, Item, Text,
+		StandardProcessing);
 EndProcedure
 
 #EndRegion

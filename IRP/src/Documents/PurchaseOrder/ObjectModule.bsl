@@ -1,9 +1,8 @@
-
 Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	If DataExchange.Load Then
 		Return;
-	EndIf;	
-	
+	EndIf;
+
 	ThisObject.DocumentAmount = CalculationServer.CalculateDocumentAmount(ItemList);
 
 EndProcedure
@@ -11,7 +10,7 @@ EndProcedure
 Procedure OnWrite(Cancel)
 	If DataExchange.Load Then
 		Return;
-	EndIf;	
+	EndIf;
 EndProcedure
 
 Procedure BeforeDelete(Cancel)
@@ -22,12 +21,12 @@ EndProcedure
 
 Procedure Posting(Cancel, PostingMode)
 	PostingServer.Post(ThisObject, Cancel, PostingMode, ThisObject.AdditionalProperties);
-	
+
 	If Not Cancel Then
 		IsBasedOnInternalSupplyRequest = False;
 		For Each Row In ThisObject.ItemList Do
-			If ValueIsFilled(Row.PurchaseBasis) 
-				And TypeOf(Row.PurchaseBasis) = Type("DocumentRef.InternalSupplyRequest") Then
+			If ValueIsFilled(Row.PurchaseBasis) And TypeOf(Row.PurchaseBasis) = Type(
+				"DocumentRef.InternalSupplyRequest") Then
 				IsBasedOnInternalSupplyRequest = True;
 			EndIf;
 		EndDo;
@@ -49,9 +48,9 @@ Procedure Posting(Cancel, PostingMode)
 EndProcedure
 
 Procedure UndoPosting(Cancel)
-	
+
 	UndopostingServer.Undopost(ThisObject, Cancel, ThisObject.AdditionalProperties);
-	
+
 EndProcedure
 
 Procedure Filling(FillingData, FillingText, StandardProcessing)
@@ -80,20 +79,20 @@ Procedure Filling_BasedOn(FillingData)
 EndProcedure
 
 Procedure OnCopy(CopiedObject)
-	
+
 	LinkedTables = New Array();
 	LinkedTables.Add(SpecialOffers);
 	LinkedTables.Add(TaxList);
 	LinkedTables.Add(Currencies);
 	DocumentsServer.SetNewTableUUID(ItemList, LinkedTables);
-	
+
 EndProcedure
 
 Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 	If DocumentsServer.CheckItemListStores(ThisObject) Then
-		Cancel = True;	
+		Cancel = True;
 	EndIf;
-	
+
 	For RowIndex = 0 To (ThisObject.ItemList.Count() - 1) Do
 		Row = ThisObject.ItemList[RowIndex];
 		If Row.Cancel And Row.CancelReason.IsEmpty() Then

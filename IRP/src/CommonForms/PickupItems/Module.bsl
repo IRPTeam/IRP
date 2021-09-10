@@ -1,8 +1,8 @@
 &AtServer
-Procedure OnCreateAtServer(Cancel, StandardProcessing)	
+Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	If Parameters.Property("Stores") Then
 		ThisObject.Stores.LoadValues(Parameters.Stores);
-	EndIf;	
+	EndIf;
 	If Parameters.Property("ReceiverStores") Then
 		ThisObject.ReceiverStores.LoadValues(Parameters.ReceiverStores);
 		ThisObject.Items.ItemListInStockReceiver.Visible = True;
@@ -10,10 +10,10 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	Else
 		ThisObject.Items.ItemListInStockReceiver.Visible = False;
 		ThisObject.Items.ItemKeyListInStockReceiver.Visible = False;
-	EndIf;	
+	EndIf;
 	If Parameters.Property("EndPeriod") Then
 		ThisObject.EndPeriod = Parameters.EndPeriod;
-	EndIf;	
+	EndIf;
 	If Parameters.Property("PriceType") Then
 		ThisObject.PriceType = Parameters.PriceType;
 		ThisObject.Items.ItemListPrice.Visible = True;
@@ -25,11 +25,11 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 		ThisObject.Items.ItemTableValuePrice.Visible = False;
 		ThisObject.Items.ItemKeyListPrice.Visible = False;
 		ThisObject.Items.ItemTableValueAmount.Visible = False;
-	EndIf;	
+	EndIf;
 	ItemTypeAfterSelection();
-	
-	If Parameters.Property("AssociatedTableName") And ValueIsFilled(Parameters.AssociatedTableName) 
-		And Parameters.Property("Object") And Parameters.Object <> Undefined 
+
+	If Parameters.Property("AssociatedTableName") And ValueIsFilled(Parameters.AssociatedTableName)
+		And Parameters.Property("Object") And Parameters.Object <> Undefined
 		And CommonFunctionsClientServer.ObjectHasProperty(Parameters.Object, Parameters.AssociatedTableName) Then
 		Table = Parameters.Object[Parameters.AssociatedTableName];
 		If Table.Count() Then
@@ -68,84 +68,84 @@ Procedure ItemTypeAfterSelection()
 	FilterTitleOnEdit(TitleFilter);
 	ItemValueTable = ThisObject.ItemTableValue.Unload( , "Item, Quantity");
 	ItemValueTable.GroupBy("Item", "Quantity");
-	Query = New Query;
+	Query = New Query();
 	QueryText = "SELECT
-	|	ItemValueTable.Item,
-	|	ItemValueTable.Quantity
-	|INTO ItemPickedOut
-	|FROM
-	|	&ItemValueTable AS ItemValueTable
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	R4011B_FreeStocksBalance.ItemKey.Item AS Item,
-	|	SUM(R4011B_FreeStocksBalance.QuantityBalance) AS QuantityBalance
-	|INTO ItemBalance
-	|FROM
-	|	AccumulationRegister.R4011B_FreeStocks.Balance(&EndPeriod, Store IN (&Stores)
-	|	AND &ItemType) AS R4011B_FreeStocksBalance
-	|GROUP BY
-	|	R4011B_FreeStocksBalance.ItemKey.Item
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	R4011B_FreeStocksBalance.ItemKey.Item AS Item,
-	|	SUM(R4011B_FreeStocksBalance.QuantityBalance) AS QuantityBalanceReceiver
-	|INTO ItemBalanceReceiver
-	|FROM
-	|	AccumulationRegister.R4011B_FreeStocks.Balance(&EndPeriod, Store IN (&ReceiverStores)
-	|	AND &ItemType) AS R4011B_FreeStocksBalance
-	|GROUP BY
-	|	R4011B_FreeStocksBalance.ItemKey.Item
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	ItemKey.Item,
-	|	ItemKey.Item.ItemType.Type,
-	|	SUM(1) AS ItemKeyCount
-	|INTO Items
-	|FROM
-	|	Catalog.ItemKeys AS ItemKey
-	|WHERE
-	|	NOT ItemKey.DeletionMark
-	|	AND NOT ItemKey.Item.DeletionMark
-	|	AND &ItemType
-	|	AND ItemKey.Item REFS Catalog.Items
-	|GROUP BY
-	|	ItemKey.Item,
-	|	ItemKey.Item.ItemType.Type
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	Items.Item AS Item,
-	|	Items.Item.Unit AS Unit,
-	|	CASE
-	|		WHEN Items.ItemItemTypeType = VALUE(Enum.ItemTypes.Product)
-	|			THEN ISNULL(ItemBalance.QuantityBalance, """")
-	|		ELSE """"
-	|	END AS QuantityBalance,
-	|	CASE
-	|		WHEN Items.ItemItemTypeType = VALUE(Enum.ItemTypes.Product)
-	|			THEN ISNULL(ItemBalanceReceiver.QuantityBalanceReceiver, """")
-	|		ELSE """"
-	|	END AS QuantityBalanceReceiver,
-	|	ItemPickedOut.Quantity AS QuantityPickedOut,
-	|	Items.ItemKeyCount,
-	|	&PriceType AS PriceType,
-	|	0 AS Price,
-	|	Items.Item.Description_en AS ItemPresentation
-	|FROM
-	|	Items AS Items
-	|		LEFT JOIN ItemBalance AS ItemBalance
-	|		ON Items.Item = ItemBalance.Item
-	|		LEFT JOIN ItemPickedOut AS ItemPickedOut
-	|		ON Items.Item = ItemPickedOut.Item
-	|		LEFT JOIN ItemBalanceReceiver AS ItemBalanceReceiver
-	|		ON Items.Item = ItemBalanceReceiver.Item";
+				|	ItemValueTable.Item,
+				|	ItemValueTable.Quantity
+				|INTO ItemPickedOut
+				|FROM
+				|	&ItemValueTable AS ItemValueTable
+				|;
+				|
+				|////////////////////////////////////////////////////////////////////////////////
+				|SELECT
+				|	R4011B_FreeStocksBalance.ItemKey.Item AS Item,
+				|	SUM(R4011B_FreeStocksBalance.QuantityBalance) AS QuantityBalance
+				|INTO ItemBalance
+				|FROM
+				|	AccumulationRegister.R4011B_FreeStocks.Balance(&EndPeriod, Store IN (&Stores)
+				|	AND &ItemType) AS R4011B_FreeStocksBalance
+				|GROUP BY
+				|	R4011B_FreeStocksBalance.ItemKey.Item
+				|;
+				|
+				|////////////////////////////////////////////////////////////////////////////////
+				|SELECT
+				|	R4011B_FreeStocksBalance.ItemKey.Item AS Item,
+				|	SUM(R4011B_FreeStocksBalance.QuantityBalance) AS QuantityBalanceReceiver
+				|INTO ItemBalanceReceiver
+				|FROM
+				|	AccumulationRegister.R4011B_FreeStocks.Balance(&EndPeriod, Store IN (&ReceiverStores)
+				|	AND &ItemType) AS R4011B_FreeStocksBalance
+				|GROUP BY
+				|	R4011B_FreeStocksBalance.ItemKey.Item
+				|;
+				|
+				|////////////////////////////////////////////////////////////////////////////////
+				|SELECT
+				|	ItemKey.Item,
+				|	ItemKey.Item.ItemType.Type,
+				|	SUM(1) AS ItemKeyCount
+				|INTO Items
+				|FROM
+				|	Catalog.ItemKeys AS ItemKey
+				|WHERE
+				|	NOT ItemKey.DeletionMark
+				|	AND NOT ItemKey.Item.DeletionMark
+				|	AND &ItemType
+				|	AND ItemKey.Item REFS Catalog.Items
+				|GROUP BY
+				|	ItemKey.Item,
+				|	ItemKey.Item.ItemType.Type
+				|;
+				|
+				|////////////////////////////////////////////////////////////////////////////////
+				|SELECT
+				|	Items.Item AS Item,
+				|	Items.Item.Unit AS Unit,
+				|	CASE
+				|		WHEN Items.ItemItemTypeType = VALUE(Enum.ItemTypes.Product)
+				|			THEN ISNULL(ItemBalance.QuantityBalance, """")
+				|		ELSE """"
+				|	END AS QuantityBalance,
+				|	CASE
+				|		WHEN Items.ItemItemTypeType = VALUE(Enum.ItemTypes.Product)
+				|			THEN ISNULL(ItemBalanceReceiver.QuantityBalanceReceiver, """")
+				|		ELSE """"
+				|	END AS QuantityBalanceReceiver,
+				|	ItemPickedOut.Quantity AS QuantityPickedOut,
+				|	Items.ItemKeyCount,
+				|	&PriceType AS PriceType,
+				|	0 AS Price,
+				|	Items.Item.Description_en AS ItemPresentation
+				|FROM
+				|	Items AS Items
+				|		LEFT JOIN ItemBalance AS ItemBalance
+				|		ON Items.Item = ItemBalance.Item
+				|		LEFT JOIN ItemPickedOut AS ItemPickedOut
+				|		ON Items.Item = ItemPickedOut.Item
+				|		LEFT JOIN ItemBalanceReceiver AS ItemBalanceReceiver
+				|		ON Items.Item = ItemBalanceReceiver.Item";
 	Query.SetParameter("ItemValueTable", ItemValueTable);
 	Query.SetParameter("EndPeriod", ThisObject.EndPeriod);
 	Query.SetParameter("Stores", ThisObject.Stores);
@@ -158,102 +158,102 @@ Procedure ItemTypeAfterSelection()
 		Query.SetParameter("ItemType", True);
 	EndIf;
 	QueryText = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(QueryText, "Items.Item");
-	Query.Text = QueryText;		
+	Query.Text = QueryText;
 	QueryExecution = Query.Execute();
 	If Not QueryExecution.IsEmpty() Then
 		QueryUnload = QueryExecution.Unload();
 		TableOneItemKey = QueryUnload.Copy(New Structure("ItemKeyCount", 1), "Item");
-		
+
 		ItemsOneItemKeyArray = TableOneItemKey.UnloadColumn("Item");
-		
+
 		TableOfItemKeysInfo = Catalogs.Items.GetTableOfItemKeysInfoByItems(ItemsOneItemKeyArray);
 		TableOfItemKeysInfo.Columns.Add("PriceType", New TypeDescription("CatalogRef.PriceTypes"));
 		TableOfItemKeysInfo.FillValues(ThisObject.PriceType, "PriceType");
-		
+
 		PricesResult = GetItemInfo.ItemPriceInfoByTable(TableOfItemKeysInfo, ThisObject.EndPeriod);
-		
-		QueryPrice = New Query;
+
+		QueryPrice = New Query();
 		QueryPrice.Text = "SELECT
-			|	ItemKeys.Ref AS ItemKey,
-			|	CASE
-			|		WHEN ItemKeys.Unit = VALUE(Catalog.Units.EmptyRef)
-			|			THEN ItemKeys.Item.Unit
-			|		ELSE ItemKeys.Unit
-			|	END AS Unit,
-			|	ItemKeys.Item,
-			|	ItemKeys.AffectPricingMD5 as AffectPricingMD5
-			|INTO ItemKeys
-			|FROM
-			|	Catalog.ItemKeys AS ItemKeys
-			|WHERE
-			|	ItemKeys.Item IN (&Items)
-			|	AND
-			|	NOT ItemKeys.DeletionMark
-			|;
-			|//////////////////////////////////////////////////////////////////////////////////////////////////////////
-			|SELECT
-			|	PricesResult.Price,
-			|	PricesResult.Unit,
-			|	PricesResult.PriceType,
-			|	PricesResult.ItemKey
-			|INTO T_PricesResult
-			|FROM
-			|	&PricesResult AS PricesResult
-			|
-			|;
-			|////////////////////////////////////////////////////////////////////////////////
-			|SELECT
-			|	ItemKeys.ItemKey.Item AS Item,
-			|	IsNull(PricesResult.Price, 0) AS Price
-			|FROM
-			|	ItemKeys AS ItemKeys
-			|		LEFT JOIN T_PricesResult AS PricesResult
-			|		ON ItemKeys.ItemKey = PricesResult.ItemKey";
-		
+						  |	ItemKeys.Ref AS ItemKey,
+						  |	CASE
+						  |		WHEN ItemKeys.Unit = VALUE(Catalog.Units.EmptyRef)
+						  |			THEN ItemKeys.Item.Unit
+						  |		ELSE ItemKeys.Unit
+						  |	END AS Unit,
+						  |	ItemKeys.Item,
+						  |	ItemKeys.AffectPricingMD5 as AffectPricingMD5
+						  |INTO ItemKeys
+						  |FROM
+						  |	Catalog.ItemKeys AS ItemKeys
+						  |WHERE
+						  |	ItemKeys.Item IN (&Items)
+						  |	AND
+						  |	NOT ItemKeys.DeletionMark
+						  |;
+						  |//////////////////////////////////////////////////////////////////////////////////////////////////////////
+						  |SELECT
+						  |	PricesResult.Price,
+						  |	PricesResult.Unit,
+						  |	PricesResult.PriceType,
+						  |	PricesResult.ItemKey
+						  |INTO T_PricesResult
+						  |FROM
+						  |	&PricesResult AS PricesResult
+						  |
+						  |;
+						  |////////////////////////////////////////////////////////////////////////////////
+						  |SELECT
+						  |	ItemKeys.ItemKey.Item AS Item,
+						  |	IsNull(PricesResult.Price, 0) AS Price
+						  |FROM
+						  |	ItemKeys AS ItemKeys
+						  |		LEFT JOIN T_PricesResult AS PricesResult
+						  |		ON ItemKeys.ItemKey = PricesResult.ItemKey";
+
 		QueryPrice.SetParameter("Items", ItemsOneItemKeyArray);
 		QueryPrice.SetParameter("PricesResult", PricesResult);
-		
+
 		QueryPriceExecution = QueryPrice.Execute();
 		If Not QueryPriceExecution.IsEmpty() Then
 			QueryPriceUnload = QueryPriceExecution.Unload();
-			LastQuery = New Query;
+			LastQuery = New Query();
 			QueryText = "SELECT
-			|	Items.Item,
-			|	Items.Unit,
-			|	Items.QuantityBalance,
-			|	Items.QuantityBalanceReceiver,
-			|	Items.QuantityPickedOut,
-			|	Items.ItemKeyCount
-			|INTO Items
-			|FROM
-			|	&Items AS Items
-			|;
-			|
-			|
-			|////////////////////////////////////////////////////////////////////////////////
-			|SELECT
-			|	Prices.Item,
-			|	Prices.Price AS Price
-			|INTO Prices
-			|FROM
-			|	&Prices AS Prices
-			|;
-			|
-			|
-			|////////////////////////////////////////////////////////////////////////////////
-			|SELECT
-			|	Items.Item,
-			|	Items.Unit,
-			|	Items.QuantityBalance AS InStock,
-			|	Items.QuantityBalanceReceiver AS InStockReceiver,
-			|	Items.QuantityPickedOut AS PickedOut,
-			|	Items.ItemKeyCount,
-			|	ISNULL(Prices.Price, 0) AS Price,
-			|	Items.Item.Description_en AS Title
-			|FROM
-			|	Items AS Items
-			|		LEFT JOIN Prices AS Prices
-			|		ON Items.Item = Prices.Item";
+						|	Items.Item,
+						|	Items.Unit,
+						|	Items.QuantityBalance,
+						|	Items.QuantityBalanceReceiver,
+						|	Items.QuantityPickedOut,
+						|	Items.ItemKeyCount
+						|INTO Items
+						|FROM
+						|	&Items AS Items
+						|;
+						|
+						|
+						|////////////////////////////////////////////////////////////////////////////////
+						|SELECT
+						|	Prices.Item,
+						|	Prices.Price AS Price
+						|INTO Prices
+						|FROM
+						|	&Prices AS Prices
+						|;
+						|
+						|
+						|////////////////////////////////////////////////////////////////////////////////
+						|SELECT
+						|	Items.Item,
+						|	Items.Unit,
+						|	Items.QuantityBalance AS InStock,
+						|	Items.QuantityBalanceReceiver AS InStockReceiver,
+						|	Items.QuantityPickedOut AS PickedOut,
+						|	Items.ItemKeyCount,
+						|	ISNULL(Prices.Price, 0) AS Price,
+						|	Items.Item.Description_en AS Title
+						|FROM
+						|	Items AS Items
+						|		LEFT JOIN Prices AS Prices
+						|		ON Items.Item = Prices.Item";
 			LastQuery.SetParameter("Items", QueryUnload);
 			LastQuery.SetParameter("Prices", QueryPriceUnload);
 			QueryText = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(QueryText, "Items.Item");
@@ -264,27 +264,28 @@ Procedure ItemTypeAfterSelection()
 				QueryUnload = LastQueryUnload;
 			EndIf;
 		EndIf;
-		ItemList.Load(QueryUnload);		
+		ItemList.Load(QueryUnload);
 	EndIf;
 EndProcedure
 
 &AtClient
-Procedure ItemListSelection(Item, RowSelected, Field, StandardProcessing)	
-	StandardProcessing = False;	
-	CurrentData = Items.ItemList.CurrentData;	
-	TransferParameters = New Structure;
-	TransferParameters.Insert("Item", CurrentData.Item);	
+Procedure ItemListSelection(Item, RowSelected, Field, StandardProcessing)
+	StandardProcessing = False;
+	CurrentData = Items.ItemList.CurrentData;
+	TransferParameters = New Structure();
+	TransferParameters.Insert("Item", CurrentData.Item);
 	ItemListSelectionAfterResult = ItemListSelectionAfter(TransferParameters);
 	If Not ItemListSelectionAfterResult Then
 		Items.GroupItems.Visible = False;
 		Items.GroupItemKeys.Visible = True;
 		TitleFilter = "";
-		FilterTitleOnEdit(TitleFilter);	EndIf;
+		FilterTitleOnEdit(TitleFilter);
+	EndIf;
 EndProcedure
 
 &AtClient
 Procedure PickupItemsSubEnd(Result, AdditionalParameters) Export
-	If NOT ValueIsFilled(Result) Then
+	If Not ValueIsFilled(Result) Then
 		Return;
 	EndIf;
 EndProcedure
@@ -295,84 +296,84 @@ Function ItemListSelectionAfter(ParametersStructure)
 	ItemKeyList.Clear();
 	ItemValueTable = ThisObject.ItemTableValue.Unload( , "ItemKey, Quantity");
 	ItemValueTable.GroupBy("ItemKey", "Quantity");
-	
+
 	TableOfItemKeysInfo = Catalogs.Items.GetTableOfItemKeysInfoByItems(ParametersStructure.Item);
 	TableOfItemKeysInfo.Columns.Add("PriceType", New TypeDescription("CatalogRef.PriceTypes"));
 	TableOfItemKeysInfo.FillValues(ThisObject.PriceType, "PriceType");
-	
+
 	PricesResult = GetItemInfo.ItemPriceInfoByTable(TableOfItemKeysInfo, ThisObject.EndPeriod);
-	
-	Query = New Query;
+
+	Query = New Query();
 	Query.Text = "SELECT
-	|	ItemValueTable.ItemKey,
-	|	ItemValueTable.Quantity
-	|INTO ItemPickedOut
-	|FROM
-	|	&ItemValueTable AS ItemValueTable
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	ItemKeys.Ref AS ItemKey,
-	|	CASE
-	|		WHEN ItemKeys.Unit = VALUE(Catalog.Units.EmptyRef)
-	|			THEN ItemKeys.Item.Unit
-	|		ELSE ItemKeys.Unit
-	|	END AS Unit,
-	|	ItemKeys.Item,
-	|	ItemKeys.Item.ItemType.Type AS TypeItemType,
-	|	ItemKeys.Item.ItemType AS ItemType,
-	|	ItemKeys.AffectPricingMD5
-	|INTO ItemKeyTempTable
-	|FROM
-	|	Catalog.ItemKeys AS ItemKeys
-	|WHERE
-	|	NOT ItemKeys.DeletionMark
-	|	AND NOT ItemKeys.Item.DeletionMark
-	|	AND ItemKeys.Item = &Item
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	PricesResult.Price,
-	|	PricesResult.Unit,
-	|	PricesResult.PriceType,
-	|	PricesResult.ItemKey
-	|INTO T_PricesResult
-	|FROM
-	|	&PricesResult AS PricesResult
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	ItemKeyTempTable.ItemKey AS ItemKey,
-	|	ItemKeyTempTable.Unit AS Unit,
-	|	CASE
-	|		WHEN ItemKeyTempTable.TypeItemType = VALUE(Enum.ItemTypes.Product)
-	|			THEN ISNULL(R4011B_FreeStocksBalance.QuantityBalance, """")
-	|		ELSE """"
-	|	END AS QuantityBalance,
-	|	CASE
-	|		WHEN ItemKeyTempTable.TypeItemType = VALUE(Enum.ItemTypes.Product)
-	|			THEN ISNULL(R4011B_FreeStocksBalanceReceiver.QuantityBalance, """")
-	|		ELSE """"
-	|	END AS QuantityBalanceReceiver,
-	|	ItemPickedOut.Quantity AS QuantityPickedOut,
-	|	ItemKeyTempTable.ItemType.UseSerialLotNumber AS UseSerialLotNumber,
-	|	NULL AS SerialLotNumber,
-	|	PricesResult.Price
-	|FROM
-	|	ItemKeyTempTable AS ItemKeyTempTable
-	|		LEFT JOIN AccumulationRegister.R4011B_FreeStocks.Balance(&EndPeriod, Store IN (&Stores)
-	|		AND ItemKey.Item = &Item) AS R4011B_FreeStocksBalance
-	|		ON ItemKeyTempTable.ItemKey = R4011B_FreeStocksBalance.ItemKey
-	|		LEFT JOIN AccumulationRegister.R4011B_FreeStocks.Balance(&EndPeriod, Store IN (&ReceiverStores)
-	|		AND ItemKey.Item = &Item) AS R4011B_FreeStocksBalanceReceiver
-	|		ON ItemKeyTempTable.ItemKey = R4011B_FreeStocksBalanceReceiver.ItemKey
-	|		LEFT JOIN ItemPickedOut AS ItemPickedOut
-	|		ON ItemKeyTempTable.ItemKey = ItemPickedOut.ItemKey
-	|		LEFT JOIN T_PricesResult AS PricesResult
-	|		ON ItemKeyTempTable.ItemKey = PricesResult.ItemKey";
+				 |	ItemValueTable.ItemKey,
+				 |	ItemValueTable.Quantity
+				 |INTO ItemPickedOut
+				 |FROM
+				 |	&ItemValueTable AS ItemValueTable
+				 |;
+				 |
+				 |////////////////////////////////////////////////////////////////////////////////
+				 |SELECT
+				 |	ItemKeys.Ref AS ItemKey,
+				 |	CASE
+				 |		WHEN ItemKeys.Unit = VALUE(Catalog.Units.EmptyRef)
+				 |			THEN ItemKeys.Item.Unit
+				 |		ELSE ItemKeys.Unit
+				 |	END AS Unit,
+				 |	ItemKeys.Item,
+				 |	ItemKeys.Item.ItemType.Type AS TypeItemType,
+				 |	ItemKeys.Item.ItemType AS ItemType,
+				 |	ItemKeys.AffectPricingMD5
+				 |INTO ItemKeyTempTable
+				 |FROM
+				 |	Catalog.ItemKeys AS ItemKeys
+				 |WHERE
+				 |	NOT ItemKeys.DeletionMark
+				 |	AND NOT ItemKeys.Item.DeletionMark
+				 |	AND ItemKeys.Item = &Item
+				 |;
+				 |
+				 |////////////////////////////////////////////////////////////////////////////////
+				 |SELECT
+				 |	PricesResult.Price,
+				 |	PricesResult.Unit,
+				 |	PricesResult.PriceType,
+				 |	PricesResult.ItemKey
+				 |INTO T_PricesResult
+				 |FROM
+				 |	&PricesResult AS PricesResult
+				 |;
+				 |
+				 |////////////////////////////////////////////////////////////////////////////////
+				 |SELECT
+				 |	ItemKeyTempTable.ItemKey AS ItemKey,
+				 |	ItemKeyTempTable.Unit AS Unit,
+				 |	CASE
+				 |		WHEN ItemKeyTempTable.TypeItemType = VALUE(Enum.ItemTypes.Product)
+				 |			THEN ISNULL(R4011B_FreeStocksBalance.QuantityBalance, """")
+				 |		ELSE """"
+				 |	END AS QuantityBalance,
+				 |	CASE
+				 |		WHEN ItemKeyTempTable.TypeItemType = VALUE(Enum.ItemTypes.Product)
+				 |			THEN ISNULL(R4011B_FreeStocksBalanceReceiver.QuantityBalance, """")
+				 |		ELSE """"
+				 |	END AS QuantityBalanceReceiver,
+				 |	ItemPickedOut.Quantity AS QuantityPickedOut,
+				 |	ItemKeyTempTable.ItemType.UseSerialLotNumber AS UseSerialLotNumber,
+				 |	NULL AS SerialLotNumber,
+				 |	PricesResult.Price
+				 |FROM
+				 |	ItemKeyTempTable AS ItemKeyTempTable
+				 |		LEFT JOIN AccumulationRegister.R4011B_FreeStocks.Balance(&EndPeriod, Store IN (&Stores)
+				 |		AND ItemKey.Item = &Item) AS R4011B_FreeStocksBalance
+				 |		ON ItemKeyTempTable.ItemKey = R4011B_FreeStocksBalance.ItemKey
+				 |		LEFT JOIN AccumulationRegister.R4011B_FreeStocks.Balance(&EndPeriod, Store IN (&ReceiverStores)
+				 |		AND ItemKey.Item = &Item) AS R4011B_FreeStocksBalanceReceiver
+				 |		ON ItemKeyTempTable.ItemKey = R4011B_FreeStocksBalanceReceiver.ItemKey
+				 |		LEFT JOIN ItemPickedOut AS ItemPickedOut
+				 |		ON ItemKeyTempTable.ItemKey = ItemPickedOut.ItemKey
+				 |		LEFT JOIN T_PricesResult AS PricesResult
+				 |		ON ItemKeyTempTable.ItemKey = PricesResult.ItemKey";
 
 	Query.SetParameter("Stores", ThisObject.Stores);
 	Query.SetParameter("ReceiverStores", ThisObject.ReceiverStores);
@@ -381,14 +382,14 @@ Function ItemListSelectionAfter(ParametersStructure)
 	Query.SetParameter("Item", ParametersStructure.Item);
 	Query.SetParameter("ItemValueTable", ItemValueTable);
 	Query.SetParameter("PricesResult", PricesResult);
-	
+
 	QueryExecution = Query.Execute();
 	If Not QueryExecution.IsEmpty() Then
 		QuerySelection = QueryExecution.Select();
 		If QuerySelection.Count() = 1 Then
 			QuerySelection.Next();
 			ReturnValue = True;
-			TransferParameters = New Structure;
+			TransferParameters = New Structure();
 			TransferParameters.Insert("Item", ParametersStructure.Item);
 			TransferParameters.Insert("ItemKey", QuerySelection.ItemKey);
 			TransferParameters.Insert("Unit", QuerySelection.Unit);
@@ -435,8 +436,8 @@ EndProcedure
 &AtClient
 Procedure ItemKeyListSelection(Item, RowSelected, Field, StandardProcessing)
 	StandardProcessing = False;
-	ItemKeyCurrentData = Items.ItemKeyList.CurrentData;	
-	TransferParameters = New Structure;
+	ItemKeyCurrentData = Items.ItemKeyList.CurrentData;
+	TransferParameters = New Structure();
 	TransferParameters.Insert("Item", ServiceSystemServer.GetObjectAttribute(ItemKeyCurrentData.ItemKey, "Item"));
 	TransferParameters.Insert("ItemKey", ItemKeyCurrentData.ItemKey);
 	TransferParameters.Insert("Price", ItemKeyCurrentData.Price);
@@ -454,7 +455,7 @@ EndProcedure
 
 &AtServer
 Procedure ItemKeyListSelectionAfter(ParametersStructure)
-	SearchStructure = New Structure;
+	SearchStructure = New Structure();
 	SearchStructure.Insert("ItemKey", ParametersStructure.ItemKey);
 	FoundedRows = ItemTableValue.FindRows(SearchStructure);
 	If FoundedRows.Count() Then
@@ -532,7 +533,7 @@ Procedure RefillItemListPickedOut()
 	ItemsPickedOutTable = ThisObject.ItemTableValue.Unload( , "Item, Quantity");
 	ItemsPickedOutTable.GroupBy("Item", "Quantity");
 	For Each Row In ItemsPickedOutTable Do
-		Filter = New Structure("Item", Row.Item); 
+		Filter = New Structure("Item", Row.Item);
 		FoundedRows = ThisObject.ItemList.FindRows(Filter);
 		For Each FoundedRow In FoundedRows Do
 			FoundedRow.PickedOut = Row.Quantity;
@@ -543,9 +544,9 @@ EndProcedure
 &AtServer
 Procedure RefillItemKeyListPickedOut()
 	ItemKeyPickedOutTable = ThisObject.ItemTableValue.Unload( , "ItemKey, Quantity");
-	ItemKeyPickedOutTable.GroupBy("ItemKey", "Quantity");	 
+	ItemKeyPickedOutTable.GroupBy("ItemKey", "Quantity");
 	For Each Row In ItemKeyPickedOutTable Do
-		Filter = New Structure("ItemKey", Row.ItemKey); 
+		Filter = New Structure("ItemKey", Row.ItemKey);
 		FoundedRows = ThisObject.ItemKeyList.FindRows(Filter);
 		For Each FoundedRow In FoundedRows Do
 			FoundedRow.PickedOut = Row.Quantity;

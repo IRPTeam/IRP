@@ -2,7 +2,7 @@
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	CatPartnersServer.OnCreateAtServer(Cancel, StandardProcessing, ThisObject, Parameters);
 	ThisObject.List.QueryText = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(ThisObject.List.QueryText);
-	
+
 	For Each FilterItem In Parameters.Filter Do
 		If FilterItem.Key = "Customer" Then
 			FilterCustomer = FilterItem.Value;
@@ -21,12 +21,12 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 			Items.FilterOpponent.Enabled = False;
 		EndIf;
 	EndDo;
-	
+
 	SetBooleanListFilter(List.Filter.Items, "Customer", FilterCustomer);
-	SetBooleanListFilter(List.Filter.Items, "Vendor"  , FilterVendor);
+	SetBooleanListFilter(List.Filter.Items, "Vendor", FilterVendor);
 	SetBooleanListFilter(List.Filter.Items, "Employee", FilterEmployee);
 	SetBooleanListFilter(List.Filter.Items, "Opponent", FilterOpponent);
-	
+
 	Items.FilterCustomer.TitleTextColor = ?(FilterCustomer, New Color(), WebColors.LightGray);
 	Items.FilterVendor.TitleTextColor = ?(FilterVendor, New Color(), WebColors.LightGray);
 	Items.FilterEmployee.TitleTextColor = ?(FilterEmployee, New Color(), WebColors.LightGray);
@@ -65,9 +65,6 @@ EndProcedure
 
 &AtClientAtServerNoContext
 Procedure SetBooleanListFilter(FilterItems, FieldName, RightValue)
-	CommonFunctionsClientServer.SetFilterItem(FilterItems,
-		FieldName,
-		RightValue,
-		DataCompositionComparisonType.Equal,
+	CommonFunctionsClientServer.SetFilterItem(FilterItems, FieldName, RightValue, DataCompositionComparisonType.Equal,
 		RightValue = True);
 EndProcedure

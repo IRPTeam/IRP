@@ -9,14 +9,14 @@ EndProcedure
 
 #Region ItemCompany
 
-Procedure CompanyStartChoice(Object, Form, Item, ChoiceData,  StandardProcessing) Export
+Procedure CompanyStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
 	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
-	
+
 	OpenSettings.ArrayOfFilters = New Array();
-	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", 
-																		True, DataCompositionComparisonType.NotEqual));
-	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("OurCompany", 
-																		True, DataCompositionComparisonType.Equal));
+	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True,
+		DataCompositionComparisonType.NotEqual));
+	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("OurCompany", True,
+		DataCompositionComparisonType.Equal));
 	OpenSettings.FillingData = New Structure("OurCompany", True);
 	DocumentsClient.CompanyStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
 EndProcedure
@@ -33,12 +33,12 @@ EndProcedure
 #Region ItemLegalName
 Procedure LegalNameStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
 	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
-	
+
 	OpenSettings.ArrayOfFilters = New Array();
-	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", 
-																		True, DataCompositionComparisonType.NotEqual));
-	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("OurCompany", 
-																		False, DataCompositionComparisonType.Equal));
+	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True,
+		DataCompositionComparisonType.NotEqual));
+	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("OurCompany", False,
+		DataCompositionComparisonType.Equal));
 	OpenSettings.FormParameters = New Structure();
 	If ValueIsFilled(Object.Partner) Then
 		OpenSettings.FormParameters.Insert("Partner", Object.Partner);
@@ -48,7 +48,7 @@ Procedure LegalNameStartChoice(Object, Form, Item, ChoiceData, StandardProcessin
 	If ValueIsFilled(Object.Partner) Then
 		OpenSettings.FillingData.Insert("Partner", Object.Partner);
 	EndIf;
-	
+
 	DocumentsClient.CompanyStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
 EndProcedure
 
@@ -61,8 +61,8 @@ Procedure LegalNameTextChange(Object, Form, Item, Text, StandardProcessing) Expo
 		AdditionalParameters.Insert("Partner", Object.Partner);
 		AdditionalParameters.Insert("FilterByPartnerHierarchy", True);
 	EndIf;
-	DocumentsClient.CompanyEditTextChange(Object, Form, Item, Text, StandardProcessing,
-		ArrayOfFilters, AdditionalParameters);
+	DocumentsClient.CompanyEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters,
+		AdditionalParameters);
 EndProcedure
 
 #EndRegion
@@ -71,15 +71,15 @@ EndProcedure
 
 Procedure PartnerSegmentStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
 	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
-	
+
 	OpenSettings.ArrayOfFilters = New Array();
-	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", 
-																		True, DataCompositionComparisonType.NotEqual));
-	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Managers", 
-																		False, DataCompositionComparisonType.Equal));
+	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True,
+		DataCompositionComparisonType.NotEqual));
+	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Managers", False,
+		DataCompositionComparisonType.Equal));
 	OpenSettings.FormParameters = New Structure();
 	OpenSettings.FillingData = New Structure("Managers", False);
-	
+
 	DocumentsClient.PartnerSegmentStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
 EndProcedure
 
@@ -130,4 +130,3 @@ Procedure UseCreditLimitOnChange(Object, Form, Item) Export
 EndProcedure
 
 #EndRegion
-

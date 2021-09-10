@@ -37,7 +37,7 @@ Procedure SetItemsBehavior(Object, Form) Export
 		Form.Items.TransitAccount.Visible = False;
 		Form.Items.CurrencyType.ReadOnly = True;
 	EndIf;
-	
+
 	If Form.CurrencyType = "Fixed" Then
 		Form.Items.Currency.Visible = True;
 		Form.Items.Currency.AutoMarkIncomplete = True;
@@ -53,60 +53,58 @@ EndProcedure
 Function GetOpenSettingsStructure()
 	Settings = New Structure();
 	Settings.Insert("FormName", Undefined);
-	Settings.Insert("FormParameters", New Structure);
-	Settings.Insert("FillingData", New Structure);
-	Settings.Insert("CustomParameters",  New Structure);
+	Settings.Insert("FormParameters", New Structure());
+	Settings.Insert("FillingData", New Structure());
+	Settings.Insert("CustomParameters", New Structure());
 	Return Settings;
 EndFunction
 
 // Parameters
 //	Company - company.
-Function GetDefaultStartChoiceParameters(Parameters) Export	
+Function GetDefaultStartChoiceParameters(Parameters) Export
 	OpenSettings = GetOpenSettingsStructure();
 	OpenSettings.FormName = "Catalog.CashAccounts.ChoiceForm";
 	OpenSettings.FillingData.Insert("Company", Parameters.Company);
 	OpenSettings.CustomParameters = DefaultCustomParameters(Parameters);
-	OpenSettings.CustomParameters.Fields.Insert("Currency",		"Currency");
-	OpenSettings.CustomParameters.Fields.Insert("Type",			"Type");
-	OpenSettings.CustomParameters.Fields.Insert("Description",	"Description_en");
+	OpenSettings.CustomParameters.Fields.Insert("Currency", "Currency");
+	OpenSettings.CustomParameters.Fields.Insert("Type", "Type");
+	OpenSettings.CustomParameters.Fields.Insert("Description", "Description_en");
 	Return OpenSettings;
 EndFunction
 
-Function GetDefaultEditTextParameters(Parameters) Export	
+Function GetDefaultEditTextParameters(Parameters) Export
 	CustomParameters = DefaultCustomParameters(Parameters);
 	CustomParameters.Fields.Insert("Presentation", "Presentation");
-	CustomParameters.OptionsString = "ALLOWED TOP 50";		
+	CustomParameters.OptionsString = "ALLOWED TOP 50";
 	Return CustomParameters;
 EndFunction
 
 Function FixedArrayOfChoiceParameters(Parameters) Export
-	ChoiceParameter = New ChoiceParameter("Filter.CustomParameters", DocumentsServer.SerializeArrayOfFilters(Parameters));
-	ArrayOfChoiceParameters = New Array;
-	ArrayOfChoiceParameters.Add(ChoiceParameter); 													
+	ChoiceParameter = New ChoiceParameter("Filter.CustomParameters", DocumentsServer.SerializeArrayOfFilters(
+		Parameters));
+	ArrayOfChoiceParameters = New Array();
+	ArrayOfChoiceParameters.Add(ChoiceParameter);
 	Return New FixedArray(ArrayOfChoiceParameters);
 EndFunction
 
-Function DefaultCustomParameters(Parameters = Undefined) Export		
-	Filters = New Array;
-	Filters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark",
-														False,
-														ComparisonType.Equal,
-														DataCompositionComparisonType.Equal));
-														
+Function DefaultCustomParameters(Parameters = Undefined) Export
+	Filters = New Array();
+	Filters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", False, ComparisonType.Equal,
+		DataCompositionComparisonType.Equal));
+
 	ComplexFilters = New Array();
-	If Parameters.Property("Company") Then															
-		ComplexFilters.Add(DocumentsClientServer.CreateFilterItem("ByCompanyWithEmpty",
-																Parameters.Company));
+	If Parameters.Property("Company") Then
+		ComplexFilters.Add(DocumentsClientServer.CreateFilterItem("ByCompanyWithEmpty", Parameters.Company));
 	EndIf;
 
-	Fields = New Structure;
-	Fields.Insert("Ref", "Ref");	
-	
-	ReturnValue = New Structure;
-	ReturnValue.Insert("Filters",			Filters);
-	ReturnValue.Insert("ComplexFilters",	ComplexFilters);
-	ReturnValue.Insert("Fields",			Fields);
-	ReturnValue.Insert("OptionsString",		"");
+	Fields = New Structure();
+	Fields.Insert("Ref", "Ref");
+
+	ReturnValue = New Structure();
+	ReturnValue.Insert("Filters", Filters);
+	ReturnValue.Insert("ComplexFilters", ComplexFilters);
+	ReturnValue.Insert("Fields", Fields);
+	ReturnValue.Insert("OptionsString", "");
 	Return ReturnValue;
 EndFunction
 

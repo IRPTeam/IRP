@@ -1,11 +1,9 @@
-
-
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	If Not Parameters.Property("PriceOwner", Report.PriceOwner) Then
 		Cancel = True;
 	EndIf;
-	
+
 	Parameters.Property("PricePeriod", Report.PricePeriod);
 	If Not ValueIsFilled(Report.PricePeriod) Then
 		Report.PricePeriod = CurrentDate();
@@ -14,7 +12,7 @@ EndProcedure
 
 &AtClient
 Procedure OnOpen(Cancel)
-	ComposeResult();	
+	ComposeResult();
 	Items.Result.StatePresentation.Visible = False;
 EndProcedure
 
@@ -22,4 +20,3 @@ EndProcedure
 Procedure ResultSelection(Item, Area, StandardProcessing)
 	StandardProcessing = False;
 EndProcedure
-

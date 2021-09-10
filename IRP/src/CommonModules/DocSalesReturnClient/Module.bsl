@@ -2,67 +2,64 @@
 
 Procedure BeforeWrite(Object, Form, Cancel, WriteParameters) Export
 	If Not Form.TaxAndOffersCalculated Then
-		
-		OffersClient.OpenFormPickupSpecialOffers_ForDocument(Object,
-			Form,
-			"SpecialOffersEditFinish_ForDocument",
-			,
+
+		OffersClient.OpenFormPickupSpecialOffers_ForDocument(Object, Form, "SpecialOffersEditFinish_ForDocument", ,
 			True);
-		
+
 	EndIf;
 EndProcedure
 
-Procedure OnOpen(Object, Form, Cancel, AddInfo = Undefined) Export	
+Procedure OnOpen(Object, Form, Cancel, AddInfo = Undefined) Export
 	DocumentsClient.OnOpenPutServerDataToAddInfo(Object, Form, AddInfo);
 	ServerData = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "ServerData");
-	
-	Settings = New Structure;
+
+	Settings = New Structure();
 	Settings.Insert("UpdateInfoString");
 	If AddInfo <> Undefined And AddInfo.Property("RemovedActions") Then
 		For Each RemovedAction In AddInfo.RemovedActions Do
 			Settings.Delete(RemovedAction);
 		EndDo;
 	EndIf;
-	
-	#If Not MobileClient Then
+
+#If Not MobileClient Then
 	Settings.Delete("UpdateInfoString");
-	#EndIf
-	
+#EndIf
+
 	Form.TaxAndOffersCalculated = True;
 	If Settings.Count() Then
 		CalculationStringsClientServer.CalculateItemsRows(Object, Form, Object.ItemList, Settings, Undefined, AddInfo);
 	EndIf;
-	
+
 	If Not ValueIsFilled(Object.Ref) Then
 		ItemListOnChange(Object, Form);
 		If ValueIsFilled(Object.Company) Then
 			DocumentsClient.CompanyOnChange(Object, Form, ThisObject, Undefined);
 		EndIf;
 	EndIf;
-	
+
 	If Not ValueIsFilled(Form.CurrentStore) Then
 		DocumentsClient.SetCurrentStore(Object, Form, ServerData.AgreementInfo.Store);
 	EndIf;
-	
+
 	If Not ValueIsFilled(Form.CurrentPriceType) Then
 		DocumentsClient.SetCurrentPriceType(Form, ServerData.AgreementInfo.PriceType);
 	EndIf;
-	
-	#If AtClient Then
+
+#If AtClient Then
 	DocumentsClient.SetTextOfDescriptionAtForm(Object, Form);
-	#EndIf
-	
+#EndIf
+
 	If ValueIsFilled(Object.Ref) Then
 		CurrenciesClient.SetSurfaceTable(Object, Form, AddInfo);
 	Else
 		CurrenciesClient.FullRefreshTable(Object, Form, AddInfo);
 	EndIf;
-	
+
 	SerialLotNumberClient.UpdateSerialLotNumbersPresentation(Object);
 	SerialLotNumberClient.UpdateSerialLotNumbersTree(Object, Form);
 	DocumentsClient.SetLockedRowsForItemListByTradeDocuments(Object, Form, "GoodsReceipts");
-	DocumentsClient.UpdateTradeDocumentsTree(Object, Form, 
-		"GoodsReceipts", "GoodsReceiptsTree", "QuantityInGoodsReceipt");		
+	DocumentsClient.UpdateTradeDocumentsTree(Object, Form, "GoodsReceipts", "GoodsReceiptsTree",
+		"QuantityInGoodsReceipt");
 EndProcedure
 
 Procedure NotificationProcessing(Object, Form, EventName, Parameter, Source) Export
@@ -70,12 +67,12 @@ Procedure NotificationProcessing(Object, Form, EventName, Parameter, Source) Exp
 EndProcedure
 
 Procedure AfterWriteAtClient(Object, Form, WriteParameters, AddInfo = Undefined) Export
-	DocumentsClient.AfterWriteAtClientPutServerDataToAddInfo(Object, Form, AddInfo);	
+	DocumentsClient.AfterWriteAtClientPutServerDataToAddInfo(Object, Form, AddInfo);
 	CurrenciesClient.SetVisibleRows(Object, ThisObject, AddInfo);
 	SerialLotNumberClient.UpdateSerialLotNumbersPresentation(Object, AddInfo);
 	DocumentsClient.SetLockedRowsForItemListByTradeDocuments(Object, Form, "GoodsReceipts");
-	DocumentsClient.UpdateTradeDocumentsTree(Object, Form, 
-		"GoodsReceipts", "GoodsReceiptsTree", "QuantityInGoodsReceipt");
+	DocumentsClient.UpdateTradeDocumentsTree(Object, Form, "GoodsReceipts", "GoodsReceiptsTree",
+		"QuantityInGoodsReceipt");
 EndProcedure
 
 #EndRegion
@@ -85,10 +82,10 @@ EndProcedure
 Procedure ItemListAfterDeleteRow(Object, Form, Item) Export
 	DocumentsClient.ItemListAfterDeleteRow(Object, Form, Item);
 	SerialLotNumberClient.DeleteUnusedSerialLotNumbers(Object);
-	SerialLotNumberClient.UpdateSerialLotNumbersTree(Object, Form);	
+	SerialLotNumberClient.UpdateSerialLotNumbersTree(Object, Form);
 	DocumentsClient.ClearTradeDocumentsTable(Object, Form, "GoodsReceipts");
-	DocumentsClient.UpdateTradeDocumentsTree(Object, Form, 
-		"GoodsReceipts", "GoodsReceiptsTree", "QuantityInGoodsReceipt");
+	DocumentsClient.UpdateTradeDocumentsTree(Object, Form, "GoodsReceipts", "GoodsReceiptsTree",
+		"QuantityInGoodsReceipt");
 EndProcedure
 
 Procedure ItemListOnChange(Object, Form, Item = Undefined, CalculationSettings = Undefined) Export
@@ -103,18 +100,16 @@ EndProcedure
 
 Procedure ItemListOnActivateRow(Object, Form, Item) Export
 	CurrentRow = Form.Items.ItemList.CurrentData;
-	
+
 	If CurrentRow = Undefined Then
 		Return;
 	EndIf;
-	
-	If ValueIsFilled(CurrentRow.Store)
-		And CurrentRow.Store <> Form.CurrentStore Then
+
+	If ValueIsFilled(CurrentRow.Store) And CurrentRow.Store <> Form.CurrentStore Then
 		DocumentsClient.SetCurrentStore(Object, Form, CurrentRow.Store);
 	EndIf;
-	
-	If ValueIsFilled(CurrentRow.PriceType)
-		And CurrentRow.PriceType <> Form.CurrentPriceType Then
+
+	If ValueIsFilled(CurrentRow.PriceType) And CurrentRow.PriceType <> Form.CurrentPriceType Then
 		DocumentsClient.SetCurrentPriceType(Form, CurrentRow.PriceType);
 	EndIf;
 EndProcedure
@@ -126,11 +121,11 @@ Procedure ItemListSelection(Object, Form, Item, RowSelected, Field, StandardProc
 			DocumentsClient.ItemListSelectionPutServerDataToAddInfo(Object, Form, AddInfo);
 			Parameters = New Structure();
 			Parameters.Insert("CurrentData", CurrentData);
-			Parameters.Insert("Item"       , Item);
-			Parameters.Insert("Field"      , Field);
+			Parameters.Insert("Item", Item);
+			Parameters.Insert("Field", Field);
 			TaxesClient.ChangeTaxAmount2(Object, Form, Parameters, StandardProcessing, AddInfo);
 		EndIf;
-	EndIf; 
+	EndIf;
 EndProcedure
 
 #EndRegion
@@ -144,7 +139,7 @@ Procedure ItemListItemOnChange(Object, Form, Item, AddInfo = Undefined) Export
 	SerialLotNumberClient.UpdateUseSerialLotNumber(Object, Form, AddInfo);
 EndProcedure
 
-Procedure ItemListItemStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export																		
+Procedure ItemListItemStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
 	DocumentsClient.ItemStartChoice(Object, Form, Item, ChoiceData, StandardProcessing);
 EndProcedure
 
@@ -162,16 +157,17 @@ Function ItemListItemSettings(Object, Form, AddInfo = Undefined) Export
 	If AddInfo = Undefined Then
 		Return New Structure("PutServerDataToAddInfo", True);
 	EndIf;
-	
+
 	Settings = New Structure("Actions, ObjectAttributes, FormAttributes, AfterActionsCalculateSettings");
-	
+
 	Actions = New Structure();
-	Actions.Insert("UpdateRowPriceType"	, "UpdateRowPriceType");
-	Actions.Insert("UpdateItemKey"		, "UpdateItemKey");
-	
-	AfterActionsCalculateSettings = New Structure;
-	AfterActionsCalculateSettings.Insert("UpdatePrice", New Structure("Period, PriceType", Form.Object.Date, Form.CurrentPriceType));
-	
+	Actions.Insert("UpdateRowPriceType", "UpdateRowPriceType");
+	Actions.Insert("UpdateItemKey", "UpdateItemKey");
+
+	AfterActionsCalculateSettings = New Structure();
+	AfterActionsCalculateSettings.Insert("UpdatePrice", New Structure("Period, PriceType", Form.Object.Date,
+		Form.CurrentPriceType));
+
 	Settings.Actions = Actions;
 	Settings.ObjectAttributes = "ItemKey";
 	Settings.FormAttributes = "";
@@ -196,16 +192,17 @@ Function ItemListItemKeySettings(Object, Form, AddInfo = Undefined) Export
 	If AddInfo = Undefined Then
 		Return New Structure("PutServerDataToAddInfo", True);
 	EndIf;
-	
+
 	Settings = New Structure("Actions, ObjectAttributes, FormAttributes, AfterActionsCalculateSettings");
-	
+
 	Actions = New Structure();
-	Actions.Insert("UpdateRowPriceType"	, "UpdateRowPriceType");
-	Actions.Insert("UpdateRowUnit"		, "UpdateRowUnit");
-	
-	AfterActionsCalculateSettings = New Structure;
-	AfterActionsCalculateSettings.Insert("UpdatePrice", New Structure("Period, PriceType", Form.Object.Date, Form.CurrentPriceType));
-	
+	Actions.Insert("UpdateRowPriceType", "UpdateRowPriceType");
+	Actions.Insert("UpdateRowUnit", "UpdateRowUnit");
+
+	AfterActionsCalculateSettings = New Structure();
+	AfterActionsCalculateSettings.Insert("UpdatePrice", New Structure("Period, PriceType", Form.Object.Date,
+		Form.CurrentPriceType));
+
 	Settings.Actions = Actions;
 	Settings.ObjectAttributes = "ItemKey";
 	Settings.FormAttributes = "";
@@ -219,19 +216,19 @@ EndFunction
 
 Procedure ItemListUnitOnChange(Object, Form, Item, AddInfo = Undefined) Export
 	DocumentsClient.ItemListUnitOnChange(Object, Form, ThisObject, Item, Undefined, AddInfo);
-	DocumentsClient.UpdateTradeDocumentsTree(Object, Form, 
-		"GoodsReceipts", "GoodsReceiptsTree", "QuantityInGoodsReceipt");
+	DocumentsClient.UpdateTradeDocumentsTree(Object, Form, "GoodsReceipts", "GoodsReceiptsTree",
+		"QuantityInGoodsReceipt");
 EndProcedure
 
 Procedure ItemListUnitOnChangePutServerDataToAddInfo(Object, Form, AddInfo = Undefined) Export
 	DocumentsClient.ItemListUnitOnChangePutServerDataToAddInfo(Object, Form, AddInfo);
 EndProcedure
 
-Function ItemListUnitSettings(Object, Form, AddInfo = Undefined) Export	
+Function ItemListUnitSettings(Object, Form, AddInfo = Undefined) Export
 	If AddInfo = Undefined Then
 		Return New Structure("PutServerDataToAddInfo", True);
 	EndIf;
-	
+
 	Settings = New Structure("Actions, ObjectAttributes, FormAttributes");
 	Actions = New Structure();
 	Settings.Actions = Actions;
@@ -252,13 +249,13 @@ Procedure ItemListQuantityOnChange(Object, Form, Item, AddInfo = Undefined) Expo
 	DocumentsClient.RecalculateSpecialOffersOnChangeQuantity(Object, Form, CurrentData, AddInfo);
 	DocumentsClient.ItemListCalculateRowAmounts_QuantityChange(Object, Form, CurrentData, Item, ThisObject, AddInfo);
 	SerialLotNumberClient.UpdateSerialLotNumbersTree(Object, Form);
-	DocumentsClient.UpdateTradeDocumentsTree(Object, Form, 
-		"GoodsReceipts", "GoodsReceiptsTree", "QuantityInGoodsReceipt");	
+	DocumentsClient.UpdateTradeDocumentsTree(Object, Form, "GoodsReceipts", "GoodsReceiptsTree",
+		"QuantityInGoodsReceipt");
 EndProcedure
 
 Procedure ItemListQuantityPutServerDataToAddInfo(Object, Form, CurrentData, AddInfo = Undefined) Export
 	DocumentsClient.ItemListQuantityPutServerDataToAddInfo(Object, Form, CurrentData, AddInfo);
-EndProcedure	
+EndProcedure
 
 #EndRegion
 
@@ -268,13 +265,13 @@ Procedure ItemListPriceOnChange(Object, Form, Item, AddInfo = Undefined) Export
 	CurrentData = Form.Items.ItemList.CurrentData;
 	If CurrentData = Undefined Then
 		Return;
-	EndIf;	
+	EndIf;
 	DocumentsClient.ItemListCalculateRowAmounts_PriceChange(Object, Form, CurrentData, Item, ThisObject, AddInfo);
 EndProcedure
 
 Procedure ItemListPricePutServerDataToAddInfo(Object, Form, CurrentData, AddInfo = Undefined) Export
 	DocumentsClient.ItemListPricePutServerDataToAddInfo(Object, Form, CurrentData, AddInfo);
-EndProcedure	
+EndProcedure
 
 #EndRegion
 
@@ -284,15 +281,16 @@ Procedure ItemListTotalAmountOnChange(Object, Form, Item, AddInfo = Undefined) E
 	CurrentData = Form.Items.ItemList.CurrentData;
 	If CurrentData = Undefined Then
 		Return;
-	EndIf;	
+	EndIf;
 	If Not CurrentData.DontCalculateRow Then
-		DocumentsClient.ItemListCalculateRowAmounts_TotalAmountChange(Object, Form, CurrentData, Item, ThisObject, AddInfo);
+		DocumentsClient.ItemListCalculateRowAmounts_TotalAmountChange(Object, Form, CurrentData, Item, ThisObject,
+			AddInfo);
 	EndIf;
 EndProcedure
 
 Procedure ItemListTotalAmountPutServerDataToAddInfo(Object, Form, CurrentData, AddInfo = Undefined) Export
 	DocumentsClient.ItemListTotalAmountPutServerDataToAddInfo(Object, Form, CurrentData, AddInfo);
-EndProcedure	
+EndProcedure
 
 #EndRegion
 
@@ -302,13 +300,13 @@ Procedure ItemListTaxAmountOnChange(Object, Form, Item, AddInfo = Undefined) Exp
 	CurrentData = Form.Items.ItemList.CurrentData;
 	If CurrentData = Undefined Then
 		Return;
-	EndIf;	
+	EndIf;
 	DocumentsClient.ItemListCalculateRowAmounts_TaxAmountChange(Object, Form, CurrentData, Item, ThisObject, AddInfo);
 EndProcedure
 
 Procedure ItemListTaxAmountPutServerDataToAddInfo(Object, Form, CurrentData, AddInfo = Undefined) Export
 	DocumentsClient.ItemListTaxAmountPutServerDataToAddInfo(Object, Form, CurrentData, AddInfo);
-EndProcedure	
+EndProcedure
 
 #EndRegion
 
@@ -320,13 +318,14 @@ Procedure ItemListDontCalculateRowOnChange(Object, Form, Item, AddInfo = Undefin
 		Return;
 	EndIf;
 	If Not CurrentData.DontCalculateRow Then
-		DocumentsClient.ItemListCalculateRowAmounts_DontCalculateRowChange(Object, Form, CurrentData, Item, ThisObject, AddInfo);
+		DocumentsClient.ItemListCalculateRowAmounts_DontCalculateRowChange(Object, Form, CurrentData, Item, ThisObject,
+			AddInfo);
 	EndIf;
 EndProcedure
 
 Procedure ItemListDontCalculateRowPutServerDataToAddInfo(Object, Form, CurrentData, AddInfo = Undefined) Export
 	DocumentsClient.ItemListDontCalculateRowPutServerDataToAddInfo(Object, Form, CurrentData, AddInfo);
-EndProcedure	
+EndProcedure
 
 #EndRegion
 
@@ -336,13 +335,13 @@ Procedure ItemListTaxValueOnChange(Object, Form, Item, AddInfo = Undefined) Expo
 	CurrentData = Form.Items.ItemList.CurrentData;
 	If CurrentData = Undefined Then
 		Return;
-	EndIf;	
+	EndIf;
 	DocumentsClient.ItemListCalculateRowAmounts_TaxValueChange(Object, Form, CurrentData, Item, ThisObject, AddInfo);
 EndProcedure
 
 Procedure ItemListTaxValuePutServerDataToAddInfo(Object, Form, CurrentData, AddInfo = Undefined) Export
 	DocumentsClient.ItemListTaxValuePutServerDataToAddInfo(Object, Form, CurrentData, AddInfo);
-EndProcedure	
+EndProcedure
 
 #EndRegion
 
@@ -378,18 +377,18 @@ Procedure PartnerOnChangePutServerDataToAddInfo(Object, Form, AddInfo = Undefine
 	DocumentsClient.PartnerOnChangePutServerDataToAddInfo(Object, Form, AddInfo);
 EndProcedure
 
-Function PartnerSettings(Object, Form, AddInfo = Undefined) Export	
+Function PartnerSettings(Object, Form, AddInfo = Undefined) Export
 	If AddInfo = Undefined Then
 		Return New Structure("PutServerDataToAddInfo", True);
 	EndIf;
 	ServerData = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "ServerData");
-	
+
 	Settings = New Structure("Actions, ObjectAttributes, FormAttributes, AgreementType");
-	
+
 	Actions = New Structure();
-	Actions.Insert("ChangeLegalName"		, "ChangeLegalName");
-	Actions.Insert("ChangeAgreement"		, "ChangeAgreement");
-	Settings.Actions = Actions;	
+	Actions.Insert("ChangeLegalName", "ChangeLegalName");
+	Actions.Insert("ChangeAgreement", "ChangeAgreement");
+	Settings.Actions = Actions;
 	Settings.ObjectAttributes 	= "Company, Currency, PriceIncludeTax, Agreement, LegalName";
 	Settings.FormAttributes		= "CurrentPriceType";
 	Settings.AgreementType = ServerData.AgreementTypes_Customer;
@@ -398,26 +397,26 @@ EndFunction
 
 Procedure PartnerStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
 	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
-	
+
 	OpenSettings.ArrayOfFilters = New Array();
-	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", 
-																		True, DataCompositionComparisonType.NotEqual));
-	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Customer"		, 
-																		True, DataCompositionComparisonType.Equal));
+	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True,
+		DataCompositionComparisonType.NotEqual));
+	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Customer", True,
+		DataCompositionComparisonType.Equal));
 	OpenSettings.FormParameters = New Structure();
-	OpenSettings.FormParameters.Insert("Filter", New Structure("Customer" , True));
+	OpenSettings.FormParameters.Insert("Filter", New Structure("Customer", True));
 	OpenSettings.FillingData = New Structure("Customer", True);
-	
+
 	DocumentsClient.PartnerStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
 EndProcedure
 
 Procedure PartnerTextChange(Object, Form, Item, Text, StandardProcessing) Export
 	ArrayOfFilters = New Array();
 	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
-	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Customer"		, True, ComparisonType.Equal));
-	AdditionalParameters = New Structure();				
-	DocumentsClient.PartnerEditTextChange(Object, Form, Item, Text, StandardProcessing,
-				ArrayOfFilters, AdditionalParameters);
+	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Customer", True, ComparisonType.Equal));
+	AdditionalParameters = New Structure();
+	DocumentsClient.PartnerEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters,
+		AdditionalParameters);
 EndProcedure
 
 #EndRegion
@@ -438,13 +437,13 @@ Function AgreementSettings(Object, Form, AddInfo = Undefined) Export
 	EndIf;
 	Settings = New Structure("Actions, ObjectAttributes, FormAttributes");
 	Actions = New Structure();
-	Actions.Insert("ChangeCompany"			, "ChangeCompany");
-	Actions.Insert("ChangePriceType"		, "ChangePriceType");
-	Actions.Insert("ChangeCurrency"			, "ChangeCurrency");
-	Actions.Insert("ChangePriceIncludeTax"	, "ChangePriceIncludeTax");
-	Actions.Insert("ChangeStore"			, "ChangeStore");
-	Actions.Insert("ChangeTaxRates"		    , "ChangeTaxRates");
-	
+	Actions.Insert("ChangeCompany", "ChangeCompany");
+	Actions.Insert("ChangePriceType", "ChangePriceType");
+	Actions.Insert("ChangeCurrency", "ChangeCurrency");
+	Actions.Insert("ChangePriceIncludeTax", "ChangePriceIncludeTax");
+	Actions.Insert("ChangeStore", "ChangeStore");
+	Actions.Insert("ChangeTaxRates", "ChangeTaxRates");
+
 	Settings.Actions = Actions;
 	Settings.ObjectAttributes = "Company, Currency, PriceIncludeTax";
 	Settings.FormAttributes = "Store, CurrentPriceType";
@@ -453,17 +452,14 @@ EndFunction
 
 Procedure AgreementStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
 	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
-	
+
 	OpenSettings.ArrayOfFilters = New Array();
-	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", 
-																	True, 
-																	DataCompositionComparisonType.NotEqual));
-	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Type", 
-																	PredefinedValue("Enum.AgreementTypes.Customer"), 
-																	DataCompositionComparisonType.Equal));
-	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Kind", 
-																	PredefinedValue("Enum.AgreementKinds.Standard"), 
-																	DataCompositionComparisonType.NotEqual));
+	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True,
+		DataCompositionComparisonType.NotEqual));
+	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Type", PredefinedValue(
+		"Enum.AgreementTypes.Customer"), DataCompositionComparisonType.Equal));
+	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Kind", PredefinedValue(
+		"Enum.AgreementKinds.Standard"), DataCompositionComparisonType.NotEqual));
 	OpenSettings.FormParameters = New Structure();
 	OpenSettings.FormParameters.Insert("Partner", Object.Partner);
 	OpenSettings.FormParameters.Insert("IncludeFilterByPartner", True);
@@ -475,27 +471,25 @@ Procedure AgreementStartChoice(Object, Form, Item, ChoiceData, StandardProcessin
 	OpenSettings.FillingData.Insert("LegalName", Object.LegalName);
 	OpenSettings.FillingData.Insert("Company", Object.Company);
 	OpenSettings.FillingData.Insert("Type", PredefinedValue("Enum.AgreementTypes.Customer"));
-	
+
 	DocumentsClient.AgreementStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
 EndProcedure
 
 Procedure AgreementTextChange(Object, Form, Item, Text, StandardProcessing) Export
 	ArrayOfFilters = New Array();
 	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
-	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Type", 
-																	PredefinedValue("Enum.AgreementTypes.Customer"),
-																	ComparisonType.Equal));
-	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Kind", 
-																	PredefinedValue("Enum.AgreementKinds.Standard"), 
-																	ComparisonType.NotEqual));				
+	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Type", PredefinedValue("Enum.AgreementTypes.Customer"),
+		ComparisonType.Equal));
+	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Kind", PredefinedValue("Enum.AgreementKinds.Standard"),
+		ComparisonType.NotEqual));
 	AdditionalParameters = New Structure();
 	AdditionalParameters.Insert("IncludeFilterByEndOfUseDate", True);
 	AdditionalParameters.Insert("IncludeFilterByPartner", True);
 	AdditionalParameters.Insert("IncludePartnerSegments", True);
 	AdditionalParameters.Insert("EndOfUseDate", Object.Date);
 	AdditionalParameters.Insert("Partner", Object.Partner);
-	DocumentsClient.AgreementEditTextChange(Object, Form, Item, Text, StandardProcessing,
-				ArrayOfFilters, AdditionalParameters);
+	DocumentsClient.AgreementEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters,
+		AdditionalParameters);
 EndProcedure
 
 #EndRegion
@@ -514,7 +508,7 @@ Function CurrencySettings(Object, Form, AddInfo = Undefined) Export
 	If AddInfo = Undefined Then
 		Return New Structure("PutServerDataToAddInfo", True);
 	EndIf;
-	
+
 	Return New Structure();
 EndFunction
 
@@ -532,17 +526,17 @@ EndProcedure
 
 Procedure LegalNameStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
 	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
-	
+
 	OpenSettings.ArrayOfFilters = New Array();
-	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", 
-																		True, DataCompositionComparisonType.NotEqual));
+	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True,
+		DataCompositionComparisonType.NotEqual));
 	OpenSettings.FormParameters = New Structure();
 	If ValueIsFilled(Object.Partner) Then
 		OpenSettings.FormParameters.Insert("Partner", Object.Partner);
 		OpenSettings.FormParameters.Insert("FilterByPartnerHierarchy", True);
 	EndIf;
 	OpenSettings.FillingData = New Structure("Partner", Object.Partner);
-	
+
 	DocumentsClient.CompanyStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
 EndProcedure
 
@@ -554,8 +548,8 @@ Procedure LegalNameTextChange(Object, Form, Item, Text, StandardProcessing) Expo
 		AdditionalParameters.Insert("Partner", Object.Partner);
 		AdditionalParameters.Insert("FilterByPartnerHierarchy", True);
 	EndIf;
-	DocumentsClient.CompanyEditTextChange(Object, Form, Item, Text, StandardProcessing,
-		ArrayOfFilters, AdditionalParameters);
+	DocumentsClient.CompanyEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters,
+		AdditionalParameters);
 EndProcedure
 
 #EndRegion
@@ -574,11 +568,11 @@ Function CompanySettings(Object, Form, AddInfo = Undefined) Export
 	If AddInfo = Undefined Then
 		Return New Structure("PutServerDataToAddInfo", True);
 	EndIf;
-	
+
 	Settings = New Structure("Actions, ObjectAttributes, FormAttributes");
 	Actions = New Structure();
-	Actions.Insert("ChangeCurrency"	, "ChangeCurrency");
-	Settings.Insert("TableName"		, "ItemList");
+	Actions.Insert("ChangeCurrency", "ChangeCurrency");
+	Settings.Insert("TableName", "ItemList");
 	Settings.Actions = Actions;
 	Settings.ObjectAttributes = "Company, Currency, PriceIncludeTax, Agreement";
 	Settings.FormAttributes = "Store, CurrentPriceType";
@@ -587,14 +581,14 @@ EndFunction
 
 Procedure CompanyStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
 	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
-	
+
 	OpenSettings.ArrayOfFilters = New Array();
-	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", 
-																True, DataCompositionComparisonType.NotEqual));
-	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("OurCompany",
-																True, DataCompositionComparisonType.Equal));
+	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True,
+		DataCompositionComparisonType.NotEqual));
+	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("OurCompany", True,
+		DataCompositionComparisonType.Equal));
 	OpenSettings.FillingData = New Structure("OurCompany", True);
-	
+
 	DocumentsClient.CompanyStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
 EndProcedure
 
@@ -622,9 +616,9 @@ Function StoreSettings(Object, Form, AddInfo = Undefined) Export
 		Return New Structure("PutServerDataToAddInfo", True);
 	EndIf;
 	Settings = New Structure("Actions, ObjectAttributes, FormAttributes");
-	
+
 	Actions = New Structure();
-	Actions.Insert("UpdateStore"		, "UpdateStore");
+	Actions.Insert("UpdateStore", "UpdateStore");
 	Settings.Actions = Actions;
 	Settings.ObjectAttributes = "Company";
 	Settings.FormAttributes = "Store, CurrentPriceType";
@@ -667,22 +661,22 @@ Function DateSettings(Object, Form, AddInfo = Undefined) Export
 		Return New Structure("PutServerDataToAddInfo", True);
 	EndIf;
 	ServerData = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "ServerData");
-	
+
 	Settings = New Structure("Actions, ObjectAttributes, FormAttributes, AgreementType, AfterActionsCalculateSettings");
-	
+
 	Actions = New Structure();
-	Actions.Insert("ChangeAgreement"	, "ChangeAgreement");
-	
-	AfterActionsCalculateSettings = New Structure;
-	
-	Settings.Insert("TableName"			, "ItemList");
+	Actions.Insert("ChangeAgreement", "ChangeAgreement");
+
+	AfterActionsCalculateSettings = New Structure();
+
+	Settings.Insert("TableName", "ItemList");
 	Settings.Insert("EmptyBasisDocument", New Structure("SalesReturnOrder", ServerData.SalesReturnOrder_EmptyRef));
 	Settings.Actions = Actions;
 	Settings.ObjectAttributes = "Company, Currency, PriceIncludeTax, Agreement, LegalName";
 	Settings.FormAttributes = "CurrentPriceType";
 	Settings.AgreementType = ServerData.AgreementTypes_Customer;
 	Settings.AfterActionsCalculateSettings = AfterActionsCalculateSettings;
-	
+
 	Return Settings;
 EndFunction
 
@@ -711,7 +705,7 @@ EndProcedure
 #Region PickUpItems
 
 Procedure OpenPickupItems(Object, Form, Command) Export
-	DocumentsClient.OpenPickupItems(Object, Form, Command); 
+	DocumentsClient.OpenPickupItems(Object, Form, Command);
 EndProcedure
 
 Procedure SearchByBarcode(Barcode, Object, Form) Export
@@ -719,4 +713,3 @@ Procedure SearchByBarcode(Barcode, Object, Form) Export
 EndProcedure
 
 #EndRegion
-

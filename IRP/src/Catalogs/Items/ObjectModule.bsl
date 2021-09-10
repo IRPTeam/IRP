@@ -1,4 +1,3 @@
-
 #Region EventHandlers
 
 Procedure BeforeWrite(Cancel)
@@ -33,13 +32,12 @@ Procedure AutoCreateItemKey(Object)
 	If UseItemKey Then
 		Return;
 	EndIf;
-	Query = New Query(
-	"SELECT TOP 1
-	|	Table.Ref
-	|FROM 
-	|	Catalog.ItemKeys AS Table
-	|WHERE
-	|	Table.Item = &Item");
+	Query = New Query("SELECT TOP 1
+					  |	Table.Ref
+					  |FROM 
+					  |	Catalog.ItemKeys AS Table
+					  |WHERE
+					  |	Table.Item = &Item");
 	Query.SetParameter("Item", Object.Ref);
 	If Query.Execute().IsEmpty() Then
 		NewItem = Catalogs.ItemKeys.CreateItem();

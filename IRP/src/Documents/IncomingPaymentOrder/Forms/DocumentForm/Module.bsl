@@ -20,7 +20,7 @@ EndProcedure
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	LibraryLoader.RegisterLibrary(Object, ThisObject, Currencies_GetDeclaration(Object, ThisObject));
-	
+
 	DocIncomingPaymentOrderServer.OnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
 EndProcedure
 
@@ -134,12 +134,14 @@ EndProcedure
 
 &AtClient
 Procedure PaymentListFinancialMovementTypeStartChoice(Item, ChoiceData, StandardProcessing)
-	DocIncomingPaymentOrderClient.PaymentListFinancialMovementTypeStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+	DocIncomingPaymentOrderClient.PaymentListFinancialMovementTypeStartChoice(Object, ThisObject, Item, ChoiceData,
+		StandardProcessing);
 EndProcedure
 
 &AtClient
 Procedure PaymentListFinancialMovementTypeEditTextChange(Item, Text, StandardProcessing)
-	DocIncomingPaymentOrderClient.PaymentListFinancialMovementTypeEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+	DocIncomingPaymentOrderClient.PaymentListFinancialMovementTypeEditTextChange(Object, ThisObject, Item, Text,
+		StandardProcessing);
 EndProcedure
 
 #Region Partner
@@ -151,7 +153,8 @@ EndProcedure
 
 &AtClient
 Procedure PaymentListPartnerStartChoice(Item, ChoiceData, StandardProcessing)
-	DocIncomingPaymentOrderClient.PaymentListPartnerStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+	DocIncomingPaymentOrderClient.PaymentListPartnerStartChoice(Object, ThisObject, Item, ChoiceData,
+		StandardProcessing);
 EndProcedure
 
 &AtClient
@@ -188,37 +191,41 @@ EndProcedure
 Function Currencies_GetDeclaration(Object, Form)
 	Declaration = LibraryLoader.GetDeclarationInfo();
 	Declaration.LibraryName = "LibraryCurrencies";
-	
+
 	LibraryLoader.AddActionHandler(Declaration, "Currencies_OnOpen", "OnOpen", Form);
 	LibraryLoader.AddActionHandler(Declaration, "Currencies_AfterWriteAtServer", "AfterWriteAtServer", Form);
 	LibraryLoader.AddActionHandler(Declaration, "Currencies_AfterWrite", "AfterWrite", Form);
-	
+
 	ArrayOfItems_MainTable = New Array();
 	ArrayOfItems_MainTable.Add(Form.Items.PaymentList);
-	LibraryLoader.AddActionHandler(Declaration, "Currencies_MainTableBeforeDeleteRow", "BeforeDeleteRow", ArrayOfItems_MainTable);
-	LibraryLoader.AddActionHandler(Declaration, "Currencies_MainTableOnActivateRow", "OnActivateRow", ArrayOfItems_MainTable);
-	
+	LibraryLoader.AddActionHandler(Declaration, "Currencies_MainTableBeforeDeleteRow", "BeforeDeleteRow",
+		ArrayOfItems_MainTable);
+	LibraryLoader.AddActionHandler(Declaration, "Currencies_MainTableOnActivateRow", "OnActivateRow",
+		ArrayOfItems_MainTable);
+
 	ArrayOfItems_MainTableColumns = New Array();
 	ArrayOfItems_MainTableColumns.Add(Form.Items.PaymentListPartner);
-	LibraryLoader.AddActionHandler(Declaration, "Currencies_MainTableColumnOnChange", "OnChange", ArrayOfItems_MainTableColumns);
-	
+	LibraryLoader.AddActionHandler(Declaration, "Currencies_MainTableColumnOnChange", "OnChange",
+		ArrayOfItems_MainTableColumns);
+
 	ArrayOfItems_MainTableAmount = New Array();
 	ArrayOfItems_MainTableAmount.Add(Form.Items.PaymentListAmount);
-	LibraryLoader.AddActionHandler(Declaration, "Currencies_MainTableAmountOnChange", "OnChange", ArrayOfItems_MainTableAmount);
-	
+	LibraryLoader.AddActionHandler(Declaration, "Currencies_MainTableAmountOnChange", "OnChange",
+		ArrayOfItems_MainTableAmount);
+
 	ArrayOfItems_Header = New Array();
 	ArrayOfItems_Header.Add(Form.Items.Company);
 	ArrayOfItems_Header.Add(Form.Items.Account);
 	ArrayOfItems_Header.Add(Form.Items.Currency);
 	ArrayOfItems_Header.Add(Form.Items.PlanningPeriod);
 	ArrayOfItems_Header.Add(Form.Items.Date);
-	
+
 	LibraryLoader.AddActionHandler(Declaration, "Currencies_HeaderOnChange", "OnChange", ArrayOfItems_Header);
-	
+
 	LibraryData = New Structure();
 	LibraryData.Insert("Version", "1.0");
 	LibraryLoader.PutData(Declaration, LibraryData);
-	
+
 	Return Declaration;
 EndFunction
 
@@ -233,7 +240,7 @@ EndProcedure
 Procedure Currencies_AfterWriteAtServer(CurrentObject, WriteParameters, AddInfo = Undefined) Export
 	CurrenciesClientServer.AfterWriteAtServer(Object, ThisObject, CurrentObject, WriteParameters, AddInfo);
 EndProcedure
-	
+
 &AtClient
 Procedure Currencies_AfterWrite(WriteParameters, AddInfo = Undefined) Export
 	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "Currencies_CurrentTableName", "PaymentList");
@@ -267,7 +274,7 @@ Procedure Currencies_HeaderOnChange(Item, AddInfo = Undefined) Export
 	ArrayOfTableNames.Add("PaymentList");
 	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "Currencies_ArrayOfTableNames", ArrayOfTableNames);
 	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "Currencies_CurrentTableName", "PaymentList");
-	
+
 	CurrenciesClientServer.HeaderOnChange(Object, ThisObject, Item, AddInfo);
 EndProcedure
 
@@ -323,12 +330,7 @@ EndProcedure
 
 &AtServer
 Procedure Currencies_FillCurrencyTable(RowKey, Currency, AgreementInfo) Export
-	CurrenciesServer.FillCurrencyTable(Object, 
-	                                   Object.Date, 
-	                                   Object.Company, 
-	                                   Currency, 
-	                                   RowKey,
-	                                   AgreementInfo);
+	CurrenciesServer.FillCurrencyTable(Object, Object.Date, Object.Company, Currency, RowKey, AgreementInfo);
 EndProcedure
 
 &AtServer
@@ -368,7 +370,7 @@ EndProcedure
 &AtClient
 Procedure GeneratedFormCommandActionByName(Command) Export
 	ExternalCommandsClient.GeneratedFormCommandActionByName(Object, ThisObject, Command.Name);
-	GeneratedFormCommandActionByNameServer(Command.Name);	
+	GeneratedFormCommandActionByNameServer(Command.Name);
 EndProcedure
 
 &AtServer

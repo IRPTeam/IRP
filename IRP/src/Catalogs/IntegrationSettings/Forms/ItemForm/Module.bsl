@@ -37,15 +37,15 @@ EndProcedure
 Procedure TestConnectionCall()
 	If Object.IntegrationType = PredefinedValue("Enum.IntegrationType.LocalFileStorage") Then
 		TestRow = Object.ConnectionSetting.FindRows(New Structure("Key", "AddressPath"));
-		IntegrationServer.SaveFileToFileStorage(TestRow[0].Value, "Test.png", PictureLib.DataHistory.GetBinaryData());	
+		IntegrationServer.SaveFileToFileStorage(TestRow[0].Value, "Test.png", PictureLib.DataHistory.GetBinaryData());
 		CommonFunctionsClientServer.ShowUsersMessage(R().InfoMessage_005);
-	ElsIf Object.IntegrationType = PredefinedValue("Enum.IntegrationType.Email") Then 
+	ElsIf Object.IntegrationType = PredefinedValue("Enum.IntegrationType.Email") Then
 		ConnectionSetting = IntegrationServer.ConnectionSettingTemplate(Object.IntegrationType);
 		For Each Str In Object.ConnectionSetting Do
 			FillPropertyValues(ConnectionSetting, New Structure(Str.Key, Str.Value));
 		EndDo;
-		#If Not WebClient Then
-		eMail = New InternetMailMessage;
+#If Not WebClient Then
+		eMail = New InternetMailMessage();
 		eMail.Texts.Add("<h1> Test </h1>", InternetMailTextType.HTML);
 		eMail.Subject = "Test";
 		eMail.SenderName = ConnectionSetting.SenderName;
@@ -56,10 +56,11 @@ Procedure TestConnectionCall()
 		Else
 			CommonFunctionsClientServer.ShowUsersMessage(R().S_028);
 		EndIf;
-		#Else
-		CommonFunctionsClientServer.ShowUsersMessage(R().S_029);
-		#EndIf
-	ElsIf Not ExtensionCall_TestConnectionCall() Then
+#Else
+			CommonFunctionsClientServer.ShowUsersMessage(R().S_029);
+#EndIf
+	ElsIf
+	Not ExtensionCall_TestConnectionCall() Then
 		ConnectionSetting = IntegrationServer.ConnectionSettingTemplate();
 		For Each Str In Object.ConnectionSetting Do
 			FillPropertyValues(ConnectionSetting, New Structure(Str.Key, Str.Value));
@@ -68,10 +69,8 @@ Procedure TestConnectionCall()
 		ResourceParameters = New Structure();
 		ResourceParameters.Insert("MetadataName", "TestConnection");
 		ServerResponse = IntegrationClientServer.SendRequest(ConnectionSetting, ResourceParameters);
-		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().S_016,
-				ServerResponse.Message,
-				ServerResponse.StatusCode,
-				ServerResponse.ResponseBody));
+		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().S_016, ServerResponse.Message,
+			ServerResponse.StatusCode, ServerResponse.ResponseBody));
 	EndIf;
 EndProcedure
 
@@ -158,15 +157,15 @@ Procedure ExternalDataProcSettings(Command)
 	Info = AddDataProcServer.AddDataProcInfo(Object.ExternalDataProc);
 	Info.Insert("Settings", ThisObject.AddressResult);
 	CallMethodAddDataProc(Info);
-	
+
 	NotifyDescription = New NotifyDescription("OpenFormProcSettingsEnd", ThisObject);
 	AddDataProcClient.OpenFormAddDataProc(Info, NotifyDescription, "Settings");
 EndProcedure
 
 &AtServer
 Procedure PutSettingsToTempStorage()
-	ThisObject.AddressResult = PutToTempStorage(FormAttributeToValue("Object").ExternalDataProcSettings.Get()
-			, ThisObject.UUID);
+	ThisObject.AddressResult = PutToTempStorage(FormAttributeToValue("Object").ExternalDataProcSettings.Get(),
+		ThisObject.UUID);
 EndProcedure
 
 &AtServerNoContext

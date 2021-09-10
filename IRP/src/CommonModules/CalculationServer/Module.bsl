@@ -12,7 +12,7 @@ Function ArrayOfStructuresToValueTable(ArrayOfStructures, ColumnNames) Export
 		FillPropertyValues(ValueTable.Add(), Row);
 	EndDo;
 	Return ValueTable;
-EndFunction	
+EndFunction
 
 Function ValueTableToArrayOfStructures(ValueTable, ColumnNames) Export
 	ArrayOfStructures = New Array();
@@ -25,27 +25,27 @@ Function ValueTableToArrayOfStructures(ValueTable, ColumnNames) Export
 EndFunction
 
 Procedure CalculateItemsRows(Object, ItemRows, Actions, ArrayOfTaxInfo = Undefined, AddInfo = Undefined) Export
-	
+
 	ColumnNames_ItemList      = CalculationStringsClientServer.GetColumnNames_ItemList(ArrayOfTaxInfo);
 	ColumnNames_TaxList       = CalculationStringsClientServer.GetColumnNames_TaxList();
 	ColumnNames_SpecialOffers = CalculationStringsClientServer.GetColumnNames_SpecialOffers();
-	
-	Object.ItemList      = ArrayOfStructuresToValueTable(Object.ItemList      , ColumnNames_ItemList);
-	Object.TaxList       = ArrayOfStructuresToValueTable(Object.TaxList       , ColumnNames_TaxList);	
-	Object.SpecialOffers = ArrayOfStructuresToValueTable(Object.SpecialOffers , ColumnNames_SpecialOffers);
-	
+
+	Object.ItemList      = ArrayOfStructuresToValueTable(Object.ItemList, ColumnNames_ItemList);
+	Object.TaxList       = ArrayOfStructuresToValueTable(Object.TaxList, ColumnNames_TaxList);
+	Object.SpecialOffers = ArrayOfStructuresToValueTable(Object.SpecialOffers, ColumnNames_SpecialOffers);
+
 	For Each ItemRow In Object.ItemList Do
 		CalculationStringsClientServer.CalculateItemsRow(Object, ItemRow, Actions, ArrayOfTaxInfo, AddInfo);
 	EndDo;
-	
-	Object.ItemList      = ValueTableToArrayOfStructures(Object.ItemList      , ColumnNames_ItemList);
-	Object.TaxList       = ValueTableToArrayOfStructures(Object.TaxList       , ColumnNames_TaxList);	
-	Object.SpecialOffers = ValueTableToArrayOfStructures(Object.SpecialOffers , ColumnNames_SpecialOffers);
-	
+
+	Object.ItemList      = ValueTableToArrayOfStructures(Object.ItemList, ColumnNames_ItemList);
+	Object.TaxList       = ValueTableToArrayOfStructures(Object.TaxList, ColumnNames_TaxList);
+	Object.SpecialOffers = ValueTableToArrayOfStructures(Object.SpecialOffers, ColumnNames_SpecialOffers);
+
 EndProcedure
 
 Function CalculateDocumentAmount(ItemList, AddInfo = Undefined) Export
-	
+
 	TotalAmount = ItemList.Total("TotalAmount");
 	CanceledRows = ItemList.FindRows(New Structure("Cancel", True));
 	For Each CanceledRow In CanceledRows Do

@@ -24,15 +24,13 @@ Procedure AddBarcodeAfterEnd(Number, AdditionalParameters) Export
 	EndIf;
 	SearchByBarcode(Undefined, Format(Number, "NG="));
 EndProcedure
-
-
 &AtClient
 Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
 
 	NotifyParameters = New Structure();
 	NotifyParameters.Insert("Form", ThisObject);
 	NotifyParameters.Insert("Object", DocumentObject);
-	
+
 	For Each Row In AdditionalParameters.FoundedItems Do
 		NewRow = DocumentObject.ItemList.Add();
 		FillPropertyValues(NewRow, Row);
@@ -41,18 +39,18 @@ Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
 	If AdditionalParameters.FoundedItems.Count() Then
 		If RuleEditQuantity Then
 			BarcodeClient.CloseMobileScanner();
-			StartEditQuantity(NewRow.GetID(), True);			
+			StartEditQuantity(NewRow.GetID(), True);
 		EndIf;
 		Write();
 	EndIf;
-	
+
 EndProcedure
 
 &AtClient
 Procedure ScanBarcodeEndMobile(Barcode, Result, Message, Parameters) Export
 	If DocumentObject.Ref.IsEmpty() Then
 		Message = FindAndSetDocument(Barcode, Result);
-		
+
 		If Result Then
 			BarcodeClient.CloseMobileScanner();
 		EndIf;
@@ -75,7 +73,7 @@ EndProcedure
 
 &AtClient
 Procedure StartEditQuantity(Val RowSelected, AutoMode = False)
-	Structure = New Structure;
+	Structure = New Structure();
 	ItemListRow = DocumentObject.ItemList.FindByID(RowSelected);
 	Structure.Insert("ItemRef", Undefined);
 	Structure.Insert("ItemKey", ItemListRow.ItemKey);
@@ -128,29 +126,29 @@ EndProcedure
 
 &AtServer
 Procedure SaveAndUpdateDocument()
-	DocumentObject.Status = Catalogs.ObjectStatuses.Complete; 
+	DocumentObject.Status = Catalogs.ObjectStatuses.Complete;
 	Write();
 	FillDocumentObject(Documents.PhysicalCountByLocation.EmptyRef());
 EndProcedure
 
 &AtServer
-Function FindAndSetDocument(Number, Result, AddInfo = Undefined) 
-	
-	Query = New Query;
+Function FindAndSetDocument(Number, Result, AddInfo = Undefined)
+
+	Query = New Query();
 	Query.Text =
-		"SELECT
-		|	PhysicalCountByLocation.Ref
-		|FROM
-		|	Document.PhysicalCountByLocation AS PhysicalCountByLocation
-		|WHERE
-		|	PhysicalCountByLocation.Number = &Number";
-	
+	"SELECT
+	|	PhysicalCountByLocation.Ref
+	|FROM
+	|	Document.PhysicalCountByLocation AS PhysicalCountByLocation
+	|WHERE
+	|	PhysicalCountByLocation.Number = &Number";
+
 	Query.SetParameter("Number", Number(Number));
-	
+
 	QueryResult = Query.Execute();
-	
+
 	SelectionDetailRecords = QueryResult.Select();
-	
+
 	If SelectionDetailRecords.Next() Then
 		FillDocumentObject(SelectionDetailRecords.Ref);
 		Result = True;
@@ -159,7 +157,7 @@ Function FindAndSetDocument(Number, Result, AddInfo = Undefined)
 		Result = False;
 		Return StrTemplate(R().Error_083, Number);
 	EndIf;
-	
+
 EndFunction
 
 &AtClient
@@ -174,25 +172,26 @@ Procedure FillDocumentObject(DocRef)
 		ValueToFormAttribute(Documents.PhysicalCountByLocation.CreateDocument(), "DocumentObject");
 		LockFormDataForEdit();
 	Else
-		
+
 		If DocRef.Status = Catalogs.ObjectStatuses.Complete Then
 			CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().InfoMessage_014, DocRef.Number));
 			FillDocumentObject(Documents.PhysicalCountByLocation.EmptyRef());
 			Return;
 		ElsIf Not DocRef.ResponsibleUser.isEmpty() And Not DocRef.ResponsibleUser = SessionParameters.CurrentUser Then
-			CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().InfoMessage_012, DocRef.Number, DocRef.ResponsibleUser));			
+			CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().InfoMessage_012, DocRef.Number,
+				DocRef.ResponsibleUser));
 			FillDocumentObject(Documents.PhysicalCountByLocation.EmptyRef());
 			Return;
 		EndIf;
-		
+
 		DocObj = DocRef.GetObject();
-		
+
 		ValueToFormAttribute(DocObj, "DocumentObject");
-		
+
 		DocumentObject.ResponsibleUser = SessionParameters.CurrentUser;
 		Write();
 		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().InfoMessage_013, DocObj.Number));
 	EndIf;
-	
+
 	RuleEditQuantity = DocumentObject.RuleEditQuantity;
 EndProcedure

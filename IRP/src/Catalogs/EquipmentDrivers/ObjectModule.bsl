@@ -1,4 +1,3 @@
-
 #Region EventHandlers
 
 Procedure BeforeWrite(Cancel)

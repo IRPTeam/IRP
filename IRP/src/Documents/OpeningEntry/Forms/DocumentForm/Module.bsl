@@ -16,7 +16,7 @@ Procedure AfterWrite(WriteParameters, AddInfo = Undefined) Export
 	CurrentData =  Items.AccountPayableByDocuments.CurrentData;
 	If CurrentData <> Undefined Then
 		SetVisibleVendorsPaymentTerms(Object, ThisObject, CurrentData);
-	EndIf;	
+	EndIf;
 EndProcedure
 
 &AtServer
@@ -33,7 +33,7 @@ EndProcedure
 
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
-	LibraryLoader.RegisterLibrary(Object, ThisObject, Currencies_GetDeclaration(Object, ThisObject));	
+	LibraryLoader.RegisterLibrary(Object, ThisObject, Currencies_GetDeclaration(Object, ThisObject));
 	DocOpeningEntryServer.OnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
 	If Parameters.Key.IsEmpty() Then
 		SetVisibleCustomersPaymentTerms(Object, ThisObject);
@@ -45,20 +45,20 @@ EndProcedure
 Procedure OnWriteAtServer(Cancel, CurrentObject, WriteParameters)
 	ItemList = Object.Inventory.Unload().Copy(New Structure("ItemKey", PredefinedValue("Catalog.ItemKeys.EmptyRef")));
 	ObjectRef = Object.Ref;
-	
+
 	If ItemList.Count() = 0 Then
 		RecordSet = InformationRegisters.SavedItems.CreateRecordSet();
 		RecordSet.Filter.ObjectRef.Set(Object.Ref);
 		RecordSet.Write(True);
 		Return;
 	EndIf;
-	
+
 	ItemList.Columns.Add("ObjectRef");
 	ItemList.FillValues(Object.Ref, "ObjectRef");
-	
+
 	RecordSet = InformationRegisters.SavedItems.CreateRecordSet();
 	RecordSet.Filter.ObjectRef.Set(ObjectRef);
-	
+
 	RecordSet.Load(ItemList);
 	RecordSet.Write(True);
 EndProcedure
@@ -72,21 +72,21 @@ Procedure FillItemList()
 		RowMap.Insert(Row.Key, Row);
 		Row.Item = Row.ItemKey.Item;
 	EndDo;
-	
-	Query = New Query;
+
+	Query = New Query();
 	Query.Text =
-		"SELECT
-		|	SavedItems.Key,
-		|	SavedItems.Item
-		|FROM
-		|	InformationRegister.SavedItems AS SavedItems
-		|WHERE
-		|	SavedItems.ObjectRef = &ObjectRef";
-	
-	Query.SetParameter("ObjectRef", Object.Ref);	
+	"SELECT
+	|	SavedItems.Key,
+	|	SavedItems.Item
+	|FROM
+	|	InformationRegister.SavedItems AS SavedItems
+	|WHERE
+	|	SavedItems.ObjectRef = &ObjectRef";
+
+	Query.SetParameter("ObjectRef", Object.Ref);
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
-	
+
 	While QuerySelection.Next() Do
 		RowMap[QuerySelection.Key].Item = QuerySelection.Item;
 	EndDo;
@@ -108,9 +108,9 @@ Procedure AccountBalanceOnActivateCell(Item)
 		Return;
 	EndIf;
 	CashAccountInfo = CatCashAccountsServer.GetCashAccountInfo(CurrentData.Account);
-	
-	Items.AccountBalanceCurrency.ReadOnly = 
-	Item.CurrentItem.Name = "AccountBalanceCurrency" And ValueIsFilled(CashAccountInfo.Currency);
+
+	Items.AccountBalanceCurrency.ReadOnly = Item.CurrentItem.Name = "AccountBalanceCurrency" And ValueIsFilled(
+		CashAccountInfo.Currency);
 EndProcedure
 
 &AtServer
@@ -174,12 +174,12 @@ EndProcedure
 &AtClient
 Procedure InventoryItemStartChoice(Item, ChoiceData, StandardProcessing)
 	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
-	
+
 	OpenSettings.ArrayOfFilters = New Array();
-	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", 
-	                                True, DataCompositionComparisonType.NotEqual));
-	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("ItemType.Type", 
-	                                PredefinedValue("Enum.ItemTypes.Service"), DataCompositionComparisonType.NotEqual));
+	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True,
+		DataCompositionComparisonType.NotEqual));
+	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("ItemType.Type", PredefinedValue(
+		"Enum.ItemTypes.Service"), DataCompositionComparisonType.NotEqual));
 
 	DocumentsClient.ItemStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing, OpenSettings);
 EndProcedure
@@ -188,8 +188,8 @@ EndProcedure
 Procedure InventoryItemEditTextChange(Item, Text, StandardProcessing)
 	ArrayOfFilters = New Array();
 	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
-	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("ItemType.Type", 
-	                                                          PredefinedValue("Enum.ItemTypes.Service"), ComparisonType.NotEqual));
+	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("ItemType.Type", PredefinedValue(
+		"Enum.ItemTypes.Service"), ComparisonType.NotEqual));
 	DocumentsClient.ItemEditTextChange(Object, ThisObject, Item, Text, StandardProcessing, ArrayOfFilters);
 EndProcedure
 
@@ -244,7 +244,7 @@ Function GetCurrentTableName_AccountPayable(PageName)
 	If PageName = "GroupAccountPayableByAgreements" Then
 		Return "AccountPayableByAgreements";
 	ElsIf PageName = "GroupAccountPayableByDocuments" Then
-		 Return "AccountPayableByDocuments";
+		Return "AccountPayableByDocuments";
 	Else
 		Return Undefined;
 	EndIf;
@@ -293,19 +293,19 @@ Procedure MainTableLegalNameStartChoice(Item, ChoiceData, StandardProcessing)
 	If CurrentData = Undefined Then
 		Return;
 	EndIf;
-	
+
 	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
-	
+
 	OpenSettings.ArrayOfFilters = New Array();
-	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", 
-																	True, DataCompositionComparisonType.NotEqual));
+	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True,
+		DataCompositionComparisonType.NotEqual));
 	OpenSettings.FormParameters = New Structure();
 	If ValueIsFilled(CurrentData.Partner) Then
 		OpenSettings.FormParameters.Insert("Partner", CurrentData.Partner);
 		OpenSettings.FormParameters.Insert("FilterByPartnerHierarchy", True);
 	EndIf;
 	OpenSettings.FillingData = New Structure("Partner", CurrentData.Partner);
-	
+
 	DocumentsClient.CompanyStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing, OpenSettings);
 EndProcedure
 
@@ -344,7 +344,7 @@ Procedure AdvanceMainTableOnActivateCell(TableName, Item)
 	CurrentData = Items[TableName].CurrentData;
 	If CurrentData = Undefined Then
 		Return;
-	EndIf;	
+	EndIf;
 	Items[TableName + "LegalName"].ReadOnly = Not ValueIsFilled(CurrentData.Partner);
 EndProcedure
 
@@ -353,7 +353,7 @@ Procedure AccountByAgreementsMainTableOnActivateCell(TableName, Item)
 	CurrentData = Items[TableName].CurrentData;
 	If CurrentData = Undefined Then
 		Return;
-	EndIf;	
+	EndIf;
 	Items[TableName + "LegalName"].ReadOnly = Not ValueIsFilled(CurrentData.Partner);
 	Items[TableName + "Agreement"].ReadOnly = Not ValueIsFilled(CurrentData.Partner);
 EndProcedure
@@ -363,7 +363,7 @@ Procedure AccountByDocumentsMainTableOnActivateCell(TableName, Item)
 	CurrentData = Items[TableName].CurrentData;
 	If CurrentData = Undefined Then
 		Return;
-	EndIf;	
+	EndIf;
 	Items[TableName + "LegalName"].ReadOnly = Not ValueIsFilled(CurrentData.Partner);
 	Items[TableName + "Agreement"].ReadOnly = Not ValueIsFilled(CurrentData.Partner);
 EndProcedure
@@ -389,13 +389,13 @@ Function AccountByAgreementsMainTablePartnerOnChange(Item, AgreementType, ApArPo
 	AgreementParameters.Insert("Partner", CurrentData.Partner);
 	AgreementParameters.Insert("Agreement", CurrentData.Agreement);
 	AgreementParameters.Insert("CurrentDate", Object.Date);
-	
+
 	AgreementParameters.Insert("ArrayOfFilters", New Array());
 	AgreementParameters.ArrayOfFilters.Add(
 	DocumentsClientServer.CreateFilterItem("Type", AgreementType, ComparisonType.Equal));
 	AgreementParameters.ArrayOfFilters.Add(
 	DocumentsClientServer.CreateFilterItem("ApArPostingDetail", ApArPostingDetail, ComparisonType.Equal));
-	
+
 	CurrentData.Agreement = DocumentsServer.GetAgreementByPartner(AgreementParameters);
 	AgreementInfo = CatAgreementsServer.GetAgreementInfo(CurrentData.Agreement);
 	CurrentData.Currency = AgreementInfo.Currency;
@@ -417,7 +417,7 @@ Function AccountByDocumentsMainTablePartnerOnChange(Item, AgreementType, ApArPos
 	AgreementParameters.Insert("PartnerType", AgreementType);
 	AgreementParameters.Insert("ApArPostingDetail", ApArPostingDetail);
 	AgreementParameters.Insert("ArrayOfFilters", New Array());
-	
+
 	CurrentData.Agreement = DocumentsServer.GetAgreementByPartner(AgreementParameters);
 	AgreementInfo = CatAgreementsServer.GetAgreementInfo(CurrentData.Agreement);
 	CurrentData.Currency = AgreementInfo.Currency;
@@ -426,33 +426,29 @@ EndFunction
 
 &AtClient
 Procedure AccountPayableByAgreementsPartnerOnChange(Item, AddInfo = Undefined) Export
-	TableName = AccountByAgreementsMainTablePartnerOnChange(Item, 
-	                                                        PredefinedValue("Enum.AgreementTypes.Vendor"),
-	                                                        PredefinedValue("Enum.ApArPostingDetail.ByAgreements"));
+	TableName = AccountByAgreementsMainTablePartnerOnChange(Item, PredefinedValue("Enum.AgreementTypes.Vendor"),
+		PredefinedValue("Enum.ApArPostingDetail.ByAgreements"));
 	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "Currencies_CurrentTableName", TableName);
 EndProcedure
 
 &AtClient
 Procedure AccountReceivableByAgreementsPartnerOnChange(Item, AddInfo = Undefined) Export
-	TableName = AccountByAgreementsMainTablePartnerOnChange(Item, 
-	                                                        PredefinedValue("Enum.AgreementTypes.Customer"),
-	                                                        PredefinedValue("Enum.ApArPostingDetail.ByAgreements"));
+	TableName = AccountByAgreementsMainTablePartnerOnChange(Item, PredefinedValue("Enum.AgreementTypes.Customer"),
+		PredefinedValue("Enum.ApArPostingDetail.ByAgreements"));
 	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "Currencies_CurrentTableName", TableName);
 EndProcedure
 
 &AtClient
 Procedure AccountPayableByDocumentsPartnerOnChange(Item, AddInfo = Undefined) Export
-	TableName = AccountByDocumentsMainTablePartnerOnChange(Item, 
-	                                                       PredefinedValue("Enum.AgreementTypes.Vendor"),
-	                                                       PredefinedValue("Enum.ApArPostingDetail.ByDocuments"));
+	TableName = AccountByDocumentsMainTablePartnerOnChange(Item, PredefinedValue("Enum.AgreementTypes.Vendor"),
+		PredefinedValue("Enum.ApArPostingDetail.ByDocuments"));
 	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "Currencies_CurrentTableName", TableName);
 EndProcedure
 
 &AtClient
 Procedure AccountReceivableByDocumentsPartnerOnChange(Item, AddInfo = Undefined) Export
-	TableName = AccountByDocumentsMainTablePartnerOnChange(Item, 
-	                                                       PredefinedValue("Enum.AgreementTypes.Customer"),
-	                                                       PredefinedValue("Enum.ApArPostingDetail.ByDocuments"));
+	TableName = AccountByDocumentsMainTablePartnerOnChange(Item, PredefinedValue("Enum.AgreementTypes.Customer"),
+		PredefinedValue("Enum.ApArPostingDetail.ByDocuments"));
 	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "Currencies_CurrentTableName", TableName);
 EndProcedure
 
@@ -469,7 +465,8 @@ Procedure MainTableLegalNameEditTextChange(Item, Text, StandardProcessing)
 		AdditionalParameters.Insert("Partner", CurrentData.Partner);
 		AdditionalParameters.Insert("FilterByPartnerHierarchy", True);
 	EndIf;
-	DocumentsClient.CompanyEditTextChange(Object, ThisObject, Item, Text, StandardProcessing, ArrayOfFilters, AdditionalParameters);
+	DocumentsClient.CompanyEditTextChange(Object, ThisObject, Item, Text, StandardProcessing, ArrayOfFilters,
+		AdditionalParameters);
 EndProcedure
 
 &AtClient
@@ -477,26 +474,18 @@ Procedure AccountReceivableByAgreementsAgreementStartChoice(Item, ChoiceData, St
 	ArrayOfApArPostingDetail = New Array();
 	ArrayOfApArPostingDetail.Add(PredefinedValue("Enum.ApArPostingDetail.ByAgreements"));
 	ArrayOfApArPostingDetail.Add(PredefinedValue("Enum.ApArPostingDetail.ByStandardAgreement"));
-	
-	AgreementStartChoice("AccountReceivableByAgreements", 
-	                     PredefinedValue("Enum.AgreementTypes.Customer"),
-	                     ArrayOfApArPostingDetail,
-	                     Item, 
-	                     ChoiceData, 
-	                     StandardProcessing);
+
+	AgreementStartChoice("AccountReceivableByAgreements", PredefinedValue("Enum.AgreementTypes.Customer"),
+		ArrayOfApArPostingDetail, Item, ChoiceData, StandardProcessing);
 EndProcedure
 
 &AtClient
 Procedure AccountReceivableByDocumentsAgreementStartChoice(Item, ChoiceData, StandardProcessing)
 	ArrayOfApArPostingDetail = New Array();
 	ArrayOfApArPostingDetail.Add(PredefinedValue("Enum.ApArPostingDetail.ByDocuments"));
-	
-	AgreementStartChoice("AccountReceivableByDocuments", 
-	                     PredefinedValue("Enum.AgreementTypes.Customer"),
-	                     ArrayOfApArPostingDetail,
-	                     Item, 
-	                     ChoiceData, 
-	                     StandardProcessing);	
+
+	AgreementStartChoice("AccountReceivableByDocuments", PredefinedValue("Enum.AgreementTypes.Customer"),
+		ArrayOfApArPostingDetail, Item, ChoiceData, StandardProcessing);
 EndProcedure
 
 &AtClient
@@ -504,26 +493,18 @@ Procedure AccountPayableByAgreementsAgreementStartChoice(Item, ChoiceData, Stand
 	ArrayOfApArPostingDetail = New Array();
 	ArrayOfApArPostingDetail.Add(PredefinedValue("Enum.ApArPostingDetail.ByAgreements"));
 	ArrayOfApArPostingDetail.Add(PredefinedValue("Enum.ApArPostingDetail.ByStandardAgreement"));
-	
-	AgreementStartChoice("AccountPayableByAgreements", 
-	                     PredefinedValue("Enum.AgreementTypes.Vendor"),
-	                     ArrayOfApArPostingDetail,
-	                     Item, 
-	                     ChoiceData, 
-	                     StandardProcessing);
+
+	AgreementStartChoice("AccountPayableByAgreements", PredefinedValue("Enum.AgreementTypes.Vendor"),
+		ArrayOfApArPostingDetail, Item, ChoiceData, StandardProcessing);
 EndProcedure
 
 &AtClient
 Procedure AccountPayableByDocumentsAgreementStartChoice(Item, ChoiceData, StandardProcessing)
 	ArrayOfApArPostingDetail = New Array();
 	ArrayOfApArPostingDetail.Add(PredefinedValue("Enum.ApArPostingDetail.ByDocuments"));
-	
-	AgreementStartChoice("AccountPayableByDocuments", 
-	                     PredefinedValue("Enum.AgreementTypes.Vendor"),
-	                     ArrayOfApArPostingDetail,
-	                     Item, 
-	                     ChoiceData, 
-	                     StandardProcessing);
+
+	AgreementStartChoice("AccountPayableByDocuments", PredefinedValue("Enum.AgreementTypes.Vendor"),
+		ArrayOfApArPostingDetail, Item, ChoiceData, StandardProcessing);
 EndProcedure
 
 &AtClient
@@ -532,19 +513,16 @@ Procedure AgreementStartChoice(TableName, AgreementType, ArrayOfApArPostingDetai
 	If CurrentData = Undefined Then
 		Return;
 	EndIf;
-	
+
 	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
-	
+
 	OpenSettings.ArrayOfFilters = New Array();
-	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark",
-									True, 
-	                                DataCompositionComparisonType.NotEqual));
-	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Type", 
-	                                AgreementType, 
-	                                DataCompositionComparisonType.Equal));
-	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("ApArPostingDetail", 
-	                                ArrayOfApArPostingDetail, 
-	                                DataCompositionComparisonType.InList));
+	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True,
+		DataCompositionComparisonType.NotEqual));
+	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Type", AgreementType,
+		DataCompositionComparisonType.Equal));
+	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("ApArPostingDetail", ArrayOfApArPostingDetail,
+		DataCompositionComparisonType.InList));
 	OpenSettings.FormParameters = New Structure();
 	OpenSettings.FormParameters.Insert("Partner", CurrentData.Partner);
 	OpenSettings.FormParameters.Insert("IncludeFilterByPartner", True);
@@ -557,7 +535,7 @@ Procedure AgreementStartChoice(TableName, AgreementType, ArrayOfApArPostingDetai
 	OpenSettings.FillingData.Insert("Company", Object.Company);
 	OpenSettings.FillingData.Insert("Type", AgreementType);
 	OpenSettings.FillingData.Insert("ApArPostingDetail", ArrayOfApArPostingDetail[0]);
-	
+
 	DocumentsClient.AgreementStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing, OpenSettings);
 EndProcedure
 
@@ -566,27 +544,19 @@ Procedure AccountReceivableByAgreementsAgreementEditTextChange(Item, Text, Stand
 	ArrayOfApArPostingDetail = New Array();
 	ArrayOfApArPostingDetail.Add(PredefinedValue("Enum.ApArPostingDetail.ByAgreements"));
 	ArrayOfApArPostingDetail.Add(PredefinedValue("Enum.ApArPostingDetail.ByStandardAgreement"));
-	
-	AgreementEditTextChange("AccountReceivableByAgreements",
-		                     PredefinedValue("Enum.AgreementTypes.Customer"),
-	                         ArrayOfApArPostingDetail,
-	                         Item,
-	                         Text,
-	                         StandardProcessing); 
-	
+
+	AgreementEditTextChange("AccountReceivableByAgreements", PredefinedValue("Enum.AgreementTypes.Customer"),
+		ArrayOfApArPostingDetail, Item, Text, StandardProcessing);
+
 EndProcedure
 
 &AtClient
 Procedure AccountReceivableByDocumentsAgreementEditTextChange(Item, Text, StandardProcessing)
 	ArrayOfApArPostingDetail = New Array();
 	ArrayOfApArPostingDetail.Add(PredefinedValue("Enum.ApArPostingDetail.ByDocuments"));
-	
-	AgreementEditTextChange("AccountReceivableByDocuments",
-	                        PredefinedValue("Enum.AgreementTypes.Customer"),
-	                        ArrayOfApArPostingDetail,
-	                        Item,
-	                        Text,
-	                        StandardProcessing);
+
+	AgreementEditTextChange("AccountReceivableByDocuments", PredefinedValue("Enum.AgreementTypes.Customer"),
+		ArrayOfApArPostingDetail, Item, Text, StandardProcessing);
 EndProcedure
 
 &AtClient
@@ -594,26 +564,18 @@ Procedure AccountPayableByAgreementsAgreementEditTextChange(Item, Text, Standard
 	ArrayOfApArPostingDetail = New Array();
 	ArrayOfApArPostingDetail.Add(PredefinedValue("Enum.ApArPostingDetail.ByAgreements"));
 	ArrayOfApArPostingDetail.Add(PredefinedValue("Enum.ApArPostingDetail.ByStandardAgreement"));
-	
-	AgreementEditTextChange("AccountPayableByAgreements",
-	                        PredefinedValue("Enum.AgreementTypes.Vendor"),
-	                        ArrayOfApArPostingDetail,
-	                        Item,
-	                        Text,
-	                        StandardProcessing);
+
+	AgreementEditTextChange("AccountPayableByAgreements", PredefinedValue("Enum.AgreementTypes.Vendor"),
+		ArrayOfApArPostingDetail, Item, Text, StandardProcessing);
 EndProcedure
 
 &AtClient
 Procedure AccountPayableByDocumentsAgreementEditTextChange(Item, Text, StandardProcessing)
 	ArrayOfApArPostingDetail = New Array();
 	ArrayOfApArPostingDetail.Add(PredefinedValue("Enum.ApArPostingDetail.ByDocuments"));
-	
-	AgreementEditTextChange("AccountPayableByDocuments",
-		                    PredefinedValue("Enum.AgreementTypes.Vendor"),
-	                        ArrayOfApArPostingDetail,
-	                         Item,
-	                         Text,
-	                         StandardProcessing);
+
+	AgreementEditTextChange("AccountPayableByDocuments", PredefinedValue("Enum.AgreementTypes.Vendor"),
+		ArrayOfApArPostingDetail, Item, Text, StandardProcessing);
 EndProcedure
 
 &AtClient
@@ -626,14 +588,16 @@ Procedure AgreementEditTextChange(TableName, AgreementType, ArrayOfApArPostingDe
 	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Type", AgreementType, ComparisonType.Equal));
 	ListOfApArPostingDetail = New ValueList();
 	ListOfApArPostingDetail.LoadValues(ArrayOfApArPostingDetail);
-	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("ApArPostingDetail", ListOfApArPostingDetail, ComparisonType.InList));
+	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("ApArPostingDetail", ListOfApArPostingDetail,
+		ComparisonType.InList));
 	AdditionalParameters = New Structure();
 	AdditionalParameters.Insert("IncludeFilterByEndOfUseDate", True);
 	AdditionalParameters.Insert("IncludeFilterByPartner", True);
 	AdditionalParameters.Insert("IncludePartnerSegments", True);
 	AdditionalParameters.Insert("EndOfUseDate", Object.Date);
 	AdditionalParameters.Insert("Partner", CurrentData.Partner);
-	DocumentsClient.AgreementEditTextChange(Object, ThisObject, Item, Text, StandardProcessing, ArrayOfFilters, AdditionalParameters);	
+	DocumentsClient.AgreementEditTextChange(Object, ThisObject, Item, Text, StandardProcessing, ArrayOfFilters,
+		AdditionalParameters);
 EndProcedure
 
 &AtClient
@@ -657,11 +621,11 @@ EndProcedure
 Function Currencies_GetDeclaration(Object, Form)
 	Declaration = LibraryLoader.GetDeclarationInfo();
 	Declaration.LibraryName = "LibraryCurrencies";
-	
+
 	LibraryLoader.AddActionHandler(Declaration, "Currencies_OnOpen", "OnOpen", Form);
 	LibraryLoader.AddActionHandler(Declaration, "Currencies_AfterWriteAtServer", "AfterWriteAtServer", Form);
 	LibraryLoader.AddActionHandler(Declaration, "Currencies_AfterWrite", "AfterWrite", Form);
-	
+
 	ArrayOfItems_MainTable = New Array();
 	ArrayOfItems_MainTable.Add(Form.Items.AccountBalance);
 	ArrayOfItems_MainTable.Add(Form.Items.AdvanceFromCustomers);
@@ -670,9 +634,11 @@ Function Currencies_GetDeclaration(Object, Form)
 	ArrayOfItems_MainTable.Add(Form.Items.AccountPayableByDocuments);
 	ArrayOfItems_MainTable.Add(Form.Items.AccountReceivableByAgreements);
 	ArrayOfItems_MainTable.Add(Form.Items.AccountReceivableByDocuments);
-	LibraryLoader.AddActionHandler(Declaration, "Currencies_MainTableBeforeDeleteRow", "BeforeDeleteRow", ArrayOfItems_MainTable);
-	LibraryLoader.AddActionHandler(Declaration, "Currencies_MainTableOnActivateRow", "OnActivateRow", ArrayOfItems_MainTable);
-	
+	LibraryLoader.AddActionHandler(Declaration, "Currencies_MainTableBeforeDeleteRow", "BeforeDeleteRow",
+		ArrayOfItems_MainTable);
+	LibraryLoader.AddActionHandler(Declaration, "Currencies_MainTableOnActivateRow", "OnActivateRow",
+		ArrayOfItems_MainTable);
+
 	ArrayOfItems_MainTableColumns = New Array();
 	ArrayOfItems_MainTableColumns.Add(Form.Items.AccountBalanceCurrency);
 	ArrayOfItems_MainTableColumns.Add(Form.Items.AdvanceFromCustomersCurrency);
@@ -681,20 +647,21 @@ Function Currencies_GetDeclaration(Object, Form)
 	ArrayOfItems_MainTableColumns.Add(Form.Items.AccountPayableByDocumentsCurrency);
 	ArrayOfItems_MainTableColumns.Add(Form.Items.AccountReceivableByAgreementsCurrency);
 	ArrayOfItems_MainTableColumns.Add(Form.Items.AccountReceivableByDocumentsCurrency);
-	
+
 	ArrayOfItems_MainTableColumns.Add(Form.Items.AccountBalanceAccount);
-	
+
 	ArrayOfItems_MainTableColumns.Add(Form.Items.AccountPayableByAgreementsAgreement);
 	ArrayOfItems_MainTableColumns.Add(Form.Items.AccountPayableByDocumentsAgreement);
 	ArrayOfItems_MainTableColumns.Add(Form.Items.AccountReceivableByAgreementsAgreement);
 	ArrayOfItems_MainTableColumns.Add(Form.Items.AccountReceivableByDocumentsAgreement);
-	
+
 	ArrayOfItems_MainTableColumns.Add(Form.Items.AccountPayableByAgreementsPartner);
 	ArrayOfItems_MainTableColumns.Add(Form.Items.AccountPayableByDocumentsPartner);
 	ArrayOfItems_MainTableColumns.Add(Form.Items.AccountReceivableByAgreementsPartner);
 	ArrayOfItems_MainTableColumns.Add(Form.Items.AccountReceivableByDocumentsPartner);
-	LibraryLoader.AddActionHandler(Declaration, "Currencies_MainTableColumnOnChange", "OnChange", ArrayOfItems_MainTableColumns);
-	
+	LibraryLoader.AddActionHandler(Declaration, "Currencies_MainTableColumnOnChange", "OnChange",
+		ArrayOfItems_MainTableColumns);
+
 	ArrayOfItems_MainTableAmount = New Array();
 	ArrayOfItems_MainTableAmount.Add(Form.Items.AccountBalanceAmount);
 	ArrayOfItems_MainTableAmount.Add(Form.Items.AdvanceFromCustomersAmount);
@@ -703,17 +670,18 @@ Function Currencies_GetDeclaration(Object, Form)
 	ArrayOfItems_MainTableAmount.Add(Form.Items.AccountPayableByDocumentsAmount);
 	ArrayOfItems_MainTableAmount.Add(Form.Items.AccountReceivableByAgreementsAmount);
 	ArrayOfItems_MainTableAmount.Add(Form.Items.AccountReceivableByDocumentsAmount);
-	LibraryLoader.AddActionHandler(Declaration, "Currencies_MainTableAmountOnChange", "OnChange", ArrayOfItems_MainTableAmount);
-	
+	LibraryLoader.AddActionHandler(Declaration, "Currencies_MainTableAmountOnChange", "OnChange",
+		ArrayOfItems_MainTableAmount);
+
 	ArrayOfItems_Header = New Array();
 	ArrayOfItems_Header.Add(Form.Items.Company);
 	ArrayOfItems_Header.Add(Form.Items.Date);
 	LibraryLoader.AddActionHandler(Declaration, "Currencies_HeaderOnChange", "OnChange", ArrayOfItems_Header);
-	
+
 	LibraryData = New Structure();
 	LibraryData.Insert("Version", "1.0");
 	LibraryLoader.PutData(Declaration, LibraryData);
-	
+
 	Return Declaration;
 EndFunction
 
@@ -728,10 +696,11 @@ EndProcedure
 Procedure Currencies_AfterWriteAtServer(CurrentObject, WriteParameters, AddInfo = Undefined) Export
 	CurrenciesClientServer.AfterWriteAtServer(Object, ThisObject, CurrentObject, WriteParameters, AddInfo);
 EndProcedure
-	
+
 &AtClient
 Procedure Currencies_AfterWrite(WriteParameters, AddInfo = Undefined) Export
-	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "Currencies_CurrentTableName", GetCurrentTableName(Items.GroupPages.CurrentPage));
+	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "Currencies_CurrentTableName", GetCurrentTableName(
+		Items.GroupPages.CurrentPage));
 	CurrenciesClientServer.AfterWrite(Object, ThisObject, WriteParameters, AddInfo);
 EndProcedure
 
@@ -767,8 +736,9 @@ Procedure Currencies_HeaderOnChange(Item, AddInfo = Undefined) Export
 	ArrayOfTableNames.Add("AccountReceivableByAgreements");
 	ArrayOfTableNames.Add("AccountReceivableByDocuments");
 	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "Currencies_ArrayOfTableNames", ArrayOfTableNames);
-	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "Currencies_CurrentTableName", GetCurrentTableName(Items.GroupPages.CurrentPage));
-	
+	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "Currencies_CurrentTableName", GetCurrentTableName(
+		Items.GroupPages.CurrentPage));
+
 	CurrenciesClientServer.HeaderOnChange(Object, ThisObject, Item, AddInfo);
 EndProcedure
 
@@ -824,12 +794,7 @@ EndProcedure
 
 &AtServer
 Procedure Currencies_FillCurrencyTable(RowKey, Currency, AgreementInfo) Export
-	CurrenciesServer.FillCurrencyTable(Object, 
-	                                   Object.Date, 
-	                                   Object.Company, 
-	                                   Currency, 
-	                                   RowKey,
-	                                   AgreementInfo);
+	CurrenciesServer.FillCurrencyTable(Object, Object.Date, Object.Company, Currency, RowKey, AgreementInfo);
 EndProcedure
 
 &AtServer
@@ -889,7 +854,7 @@ EndProcedure
 &AtClient
 Procedure GeneratedFormCommandActionByName(Command) Export
 	ExternalCommandsClient.GeneratedFormCommandActionByName(Object, ThisObject, Command.Name);
-	GeneratedFormCommandActionByNameServer(Command.Name);	
+	GeneratedFormCommandActionByNameServer(Command.Name);
 EndProcedure
 
 &AtServer
@@ -964,7 +929,7 @@ Procedure AccountPayableByDocumentsOnActivateRow(Item, AddInfo = Undefined) Expo
 	If CurrentData = Undefined Then
 		Return;
 	EndIf;
-	SetVisibleVendorsPaymentTerms(Object, ThisObject, CurrentData);	
+	SetVisibleVendorsPaymentTerms(Object, ThisObject, CurrentData);
 EndProcedure
 
 &AtClientAtServerNoContext

@@ -10,7 +10,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing, Form, Parameters) Export
 		EndDo;
 		Ref = CustomFilter.QueryParameters.Ref;
 		Period = EndOfDay(CurrentSessionDate());
-		If ValueIsFilled(Ref) Then 
+		If ValueIsFilled(Ref) Then
 			If Ref.Posted Then
 				Period = New Boundary(Ref.PointInTime(), BoundaryType.Excluding);
 			Else

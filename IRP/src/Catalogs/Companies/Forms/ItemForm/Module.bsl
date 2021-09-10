@@ -1,4 +1,3 @@
-
 #Region FormEvents
 
 &AtServer
@@ -6,7 +5,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	LocalizationEvents.CreateMainFormItemDescription(ThisObject, "GroupDescriptions");
 	IDInfoServer.OnCreateAtServer(ThisObject, "GroupContactInformation");
 	AddAttributesAndPropertiesServer.OnCreateAtServer(ThisObject);
-	
+
 	If Parameters.Key.IsEmpty() Then
 		If Parameters.FillingValues.Property("Partner") Then
 			Object.OurCompany = False;
@@ -73,8 +72,8 @@ Procedure FillCheckProcessingAtServer(Cancel, CheckedAttributes)
 			If Not ValueIsFilled(Row.Period) Then
 				Cancel = True;
 				MessageText = StrTemplate(R().Error_010, R().Form_032);
-				CommonFunctionsClientServer.ShowUsersMessage(MessageText,
-						"CompanyTaxes[" + Format(Index, "NG=0;") + "].Period");
+				CommonFunctionsClientServer.ShowUsersMessage(MessageText, "CompanyTaxes[" + Format(Index, "NG=0;")
+					+ "].Period");
 			EndIf;
 		EndDo;
 	EndIf;
@@ -85,23 +84,21 @@ EndProcedure
 &AtClient
 Procedure CurrenciesMovementTypeStartChoice(Item, ChoiceData, StandardProcessing)
 	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
-	
+
 	OpenSettings.ArrayOfFilters = New Array();
-	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Type", 
-																	GetListOfSupportedMovementTypes(), 
-																	DataCompositionComparisonType.InList));
+	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Type", GetListOfSupportedMovementTypes(),
+		DataCompositionComparisonType.InList));
 	OpenSettings.FormName = "ChartOfCharacteristicTypes.CurrencyMovementType.ChoiceForm";
-	
+
 	DocumentsClient.ItemStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing, OpenSettings);
-	
+
 EndProcedure
 
 &AtClient
 Procedure CurrenciesMovementTypeEditTextChange(Item, Text, StandardProcessing)
 	ArrayOfFilters = New Array();
-	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Type", 
-															   GetListOfSupportedMovementTypes(), 
-															   ComparisonType.InList));
+	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Type", GetListOfSupportedMovementTypes(),
+		ComparisonType.InList));
 	DocumentsClient.ItemEditTextChange(Object, ThisObject, Item, Text, StandardProcessing, ArrayOfFilters);
 EndProcedure
 
@@ -113,7 +110,7 @@ Function GetListOfSupportedMovementTypes()
 	ListOfCurrencyMovementTypes.Add(PredefinedValue("Enum.CurrencyType.Reporting"));
 	Return ListOfCurrencyMovementTypes;
 EndFunction
-	
+
 &AtClient
 Procedure OurOnChange(Item)
 	SetVisible();

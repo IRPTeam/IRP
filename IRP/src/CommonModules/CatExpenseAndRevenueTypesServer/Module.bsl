@@ -3,9 +3,9 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing, Form, Parameters) Export
 	If Parameters.Property("FillingData", FillingData) Then
 		Form.FillingData = CommonFunctionsServer.SerializeXMLUseXDTO(FillingData);
 	EndIf;
-	
+
 	If Parameters.Property("FormTitle") Then
-		Form.Title = Parameters.FormTitle;	
+		Form.Title = Parameters.FormTitle;
 		Form.AutoTitle = False;
-	EndIf;	
+	EndIf;
 EndProcedure

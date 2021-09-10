@@ -2,14 +2,14 @@
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	Query = New Query();
 	Query.Text =
-		"SELECT
-		|	IntegrationSettings.Ref AS IntegrationSettings
-		|FROM
-		|	Catalog.IntegrationSettings AS IntegrationSettings
-		|WHERE
-		|	NOT IntegrationSettings.DeletionMark
-		|	AND IntegrationSettings.IntegrationType = VALUE(Enum.IntegrationType.CurrencyRates)";
-	
+	"SELECT
+	|	IntegrationSettings.Ref AS IntegrationSettings
+	|FROM
+	|	Catalog.IntegrationSettings AS IntegrationSettings
+	|WHERE
+	|	NOT IntegrationSettings.DeletionMark
+	|	AND IntegrationSettings.IntegrationType = VALUE(Enum.IntegrationType.CurrencyRates)";
+
 	QueryResult = Query.Execute();
 	ThisObject.IntegrationTable.Load(QueryResult.Unload());
 EndProcedure

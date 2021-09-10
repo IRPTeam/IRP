@@ -1,10 +1,9 @@
-
 #Region FormEventHandlers
 
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	LocalizationEvents.CreateMainFormItemDescription(ThisObject, "GroupDescriptions");
-	ItemsVisibility();	
+	ItemsVisibility();
 EndProcedure
 
 &AtClient

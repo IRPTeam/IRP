@@ -1,14 +1,13 @@
-
 Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	If DataExchange.Load Then
 		Return;
-	EndIf;	
+	EndIf;
 EndProcedure
 
 Procedure OnWrite(Cancel)
 	If DataExchange.Load Then
 		Return;
-	EndIf;	
+	EndIf;
 EndProcedure
 
 Procedure BeforeDelete(Cancel)
@@ -26,12 +25,12 @@ Procedure UndoPosting(Cancel)
 EndProcedure
 
 Procedure FillCheckProcessing(Cancel, CheckedAttributes)
-	DataFilled = ValueIsFilled(SendCurrency) And ValueIsFilled(ReceiveCurrency)
-					And ValueIsFilled(Sender) And ValueIsFilled(Receiver);
+	DataFilled = ValueIsFilled(SendCurrency) And ValueIsFilled(ReceiveCurrency) And ValueIsFilled(Sender)
+		And ValueIsFilled(Receiver);
 	If DataFilled Then
-		
+
 		If SendCurrency = ReceiveCurrency Then
-			
+
 			If SendAmount <> ReceiveAmount Then
 				Cancel = True;
 				CommonFunctionsClientServer.ShowUsersMessage(R().Error_074, "SendAmount", ThisObject);

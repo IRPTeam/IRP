@@ -1,4 +1,3 @@
-
 Function RequestResultIsOk(RequestResult) Export
 	OkStatusCode = 200;
 	Return RequestResult.Success And RequestResult.StatusCode = OkStatusCode;
@@ -25,69 +24,54 @@ EndFunction
 
 #If Not WebClient Then
 
-Function SendRequestClientServer(ConnectionSetting,
-		ResourceParameters,
-		RequestParameters,
-		RequestBody,
-		EndPoint,
-		AddInfo = Undefined)
-	
+Function SendRequestClientServer(ConnectionSetting, ResourceParameters, RequestParameters, RequestBody, EndPoint,
+	AddInfo = Undefined)
+
 	ServerResponse = ServerResponse(AddInfo);
-	
+
 	OpenSSLSecureConnection = Undefined;
 	If TypeOf(ConnectionSetting.SecureConnection) = Type("Boolean") And ConnectionSetting.SecureConnection Then
 		OpenSSLSecureConnection = New OpenSSLSecureConnection();
 	EndIf;
-	
-	HTTPConnection = New HTTPConnection(
-			ConnectionSetting.Ip,
-			Number(ConnectionSetting.Port),
-			ConnectionSetting.User,
-			ConnectionSetting.Password,
-			ConnectionSetting.Proxy,
-			ConnectionSetting.TimeOut,
-			OpenSSLSecureConnection,
-			ConnectionSetting.UseOSAuthentication);
-	
+
+	HTTPConnection = New HTTPConnection(ConnectionSetting.Ip, Number(ConnectionSetting.Port), ConnectionSetting.User,
+		ConnectionSetting.Password, ConnectionSetting.Proxy, ConnectionSetting.TimeOut, OpenSSLSecureConnection,
+		ConnectionSetting.UseOSAuthentication);
+
 	If Not ValueIsFilled(ConnectionSetting.ResourceAddress) Then
 		ServerResponse.Success = False;
 		ServerResponse.Message = R().S_004;
 		Return ServerResponse;
 	EndIf;
-	
+
 	If Not ValueIsFilled(EndPoint) Then
 		ResourceAddress = ConnectionSetting.ResourceAddress;
 	Else
-		ResourceAddress = ConnectionSetting.ResourceAddress + 
-		?(StrStartsWith(EndPoint, "/"), EndPoint, "/" + EndPoint);
+		ResourceAddress = ConnectionSetting.ResourceAddress + ?(StrStartsWith(EndPoint, "/"), EndPoint, "/" + EndPoint);
 	EndIf;
-	
+
 	SetResourceParameters(ResourceAddress, ResourceParameters, AddInfo);
-	
+
 	SetRequestParameters(ResourceAddress, RequestParameters, AddInfo);
-	
+
 	HTTPRequest = New HTTPRequest(ResourceAddress);
-	
+
 	SetRequestHeaders(HTTPRequest, ConnectionSetting.Headers, AddInfo);
-	
+
 	SetRequestBody(HTTPRequest, RequestBody, AddInfo);
-	
+
 	HTTPResponse = Undefined;
 	Try
 		HTTPResponse = HTTPConnection.CallHTTPMethod(ConnectionSetting.QueryType, HTTPRequest);
 	Except
 		ServerResponse.Success = False;
-		ServerResponse.Message = StrTemplate(R().S_002,
-				ConnectionSetting.Ip,
-				ConnectionSetting.Port,
-				ErrorDescription());
+		ServerResponse.Message = StrTemplate(R().S_002, ConnectionSetting.Ip, ConnectionSetting.Port,
+			ErrorDescription());
 		Return ServerResponse;
 	EndTry;
-	
+
 	ServerResponse.Success = True;
-	ServerResponse.Message = StrTemplate(R().S_003,
-			ConnectionSetting.Ip,
-			ConnectionSetting.Port);
+	ServerResponse.Message = StrTemplate(R().S_003, ConnectionSetting.Ip, ConnectionSetting.Port);
 	ServerResponse.StatusCode = HTTPResponse.StatusCode;
 	ContentType = HTTPResponse.Headers.Get("Content-Type");
 	ContentTypeNotDefined = True;
@@ -98,40 +82,32 @@ Function SendRequestClientServer(ConnectionSetting,
 			ServerResponse.ResponseBody = HTTPResponse.GetBodyAsBinaryData();
 		EndIf;
 	EndIf;
-	
+
 	If ContentTypeNotDefined Then
 		ServerResponse.ResponseBody = HTTPResponse.GetBodyAsString();
 	EndIf;
 	Return ServerResponse;
-	
+
 EndFunction
 
 #EndIf
 
-Function SendRequest(Val ConnectionSetting,
-		Val ResourceParameters = Undefined,
-		Val RequestParameters = Undefined,
-		Val RequestBody = Undefined,
-		Val EndPoint = Undefined,
-		AddInfo = Undefined) Export
-	
-	#If WebClient Then
-	
+Function SendRequest(Val ConnectionSetting, Val ResourceParameters = Undefined, Val RequestParameters = Undefined,
+	Val RequestBody = Undefined, Val EndPoint = Undefined, AddInfo = Undefined) Export
+
+#If WebClient Then
+
 	ServerResponse = ServerResponse(AddInfo);
 	ServerResponse.Success = False;
 	ServerResponse.Message = R().S_006;
 	Return ServerResponse;
-	
-	#Else
-	
-	Return SendRequestClientServer(ConnectionSetting,
-		ResourceParameters,
-		RequestParameters,
-		RequestBody,
-		EndPoint,
-		AddInfo);
-	#EndIf
-	
+
+#Else
+
+		Return SendRequestClientServer(ConnectionSetting, ResourceParameters, RequestParameters, RequestBody, EndPoint,
+			AddInfo);
+#EndIf
+
 EndFunction
 
 Procedure SetResourceParameters(ResourceAddress, ResourceParameters, AddInfo = Undefined)
@@ -179,8 +155,8 @@ Procedure SetRequestBody(HTTPRequest, RequestBody, AddInfo = Undefined)
 EndProcedure
 
 Function SendEmail(ConnectionSetting, InternetMailMessage, AddInfo = Undefined) Export
-	#If Not WebClient Then 
-	InternetMailProfile = New InternetMailProfile;
+#If Not WebClient Then
+	InternetMailProfile = New InternetMailProfile();
 	InternetMailProfile.SMTPServerAddress = ConnectionSetting.SMTPServerAddress;
 	InternetMailProfile.SMTPPort = ConnectionSetting.SMTPPort;
 	InternetMailProfile.SMTPUser = ConnectionSetting.SMTPUser;
@@ -189,18 +165,18 @@ Function SendEmail(ConnectionSetting, InternetMailMessage, AddInfo = Undefined) 
 	InternetMailProfile.POP3BeforeSMTP = ConnectionSetting.POP3BeforeSMTP;
 	InternetMailProfile.SMTPUseSSL = ConnectionSetting.SMTPUseSSL;
 
-	Mail = New InternetMail;
+	Mail = New InternetMail();
 	Mail.Logon(InternetMailProfile);
-	
+
 	InternetMailMessage.From.Address = ConnectionSetting.FromAddress;
 	InternetMailMessage.From.DisplayName = ConnectionSetting.DisplayName;
 	InternetMailMessage.SenderName = ConnectionSetting.SenderName;
 	InternetMailMessage.ProcessTexts();
 	Answer = Mail.Send(InternetMailMessage);
 	Mail.Logoff();
-	#Else
-		Answer = New Map;
+#Else
+		Answer = New Map();
 		Answer.Insert(R().S_029);
-	#EndIf
+#EndIf
 	Return Answer;
 EndFunction

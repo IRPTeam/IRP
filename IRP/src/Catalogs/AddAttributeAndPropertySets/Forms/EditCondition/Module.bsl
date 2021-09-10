@@ -1,11 +1,11 @@
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	ThisObject.Ref = Parameters.Ref;
-	
+
 	DCSTemplate = AddAttributesAndPropertiesServer.GetDCSTemplate(ThisObject.Ref.PredefinedDataName);
 	Address = PutToTempStorage(DCSTemplate);
 	ThisObject.SettingsComposer.Initialize(New DataCompositionAvailableSettingsSource(Address));
-	
+
 	If Parameters.SavedSettings = Undefined Then
 		ThisObject.SettingsComposer.LoadSettings(DCSTemplate.DefaultSettings);
 	Else
@@ -26,7 +26,7 @@ EndProcedure
 &AtServer
 Function PrepareResult()
 	Settings = ThisObject.SettingsComposer.GetSettings();
-	
+
 	Result = New Structure();
 	Result.Insert("Settings", Settings);
 	Return Result;
@@ -41,6 +41,6 @@ EndProcedure
 Procedure VerifyAtServer()
 	DCSTemplate = AddAttributesAndPropertiesServer.GetDCSTemplate(ThisObject.Ref.PredefinedDataName);
 	Settings = ThisObject.SettingsComposer.GetSettings();
-	Result = AddAttributesAndPropertiesServer.GetRefsByCondition(DCSTemplate, Settings,  New ValueTable());
+	Result = AddAttributesAndPropertiesServer.GetRefsByCondition(DCSTemplate, Settings, New ValueTable());
 	ThisObject.ResultTable.Load(Result);
 EndProcedure

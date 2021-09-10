@@ -1,4 +1,3 @@
-
 Function GetDeclarationInfo() Export
 	Declaration = New Structure();
 	Declaration.Insert("LibraryName", "");
@@ -50,13 +49,13 @@ Procedure RegisterLibrary(Object, Form, Declaration) Export
 EndProcedure
 
 Function RestoreFormData(Object, Form, AttributeName, InitValue = Undefined)
-	#If Server Then
+#If Server Then
 	If Not CommonFunctionsServer.FormHaveAttribute(Form, AttributeName) Then
 		ArrayOfNewAttribute = New Array();
 		ArrayOfNewAttribute.Add(New FormAttribute(AttributeName, New TypeDescription("String")));
 		Form.ChangeAttributes(ArrayOfNewAttribute);
 	EndIf;
-	#EndIf
+#EndIf
 	If ValueIsFilled(Form[AttributeName]) Then
 		Return CommonFunctionsServer.DeserializeXMLUseXDTO(Form[AttributeName]);
 	Else
@@ -130,10 +129,10 @@ Function CallChainHandler(Object, Form, ActionHandler, AddInfo, P1, P2, P3)
 EndFunction
 
 Function Form_CallChainHandler(Object, Form, ActionHandler, AddInfo, P1, P2, P3)
-	If Upper(ActionHandler) = Upper("OnOpen") Then 
+	If Upper(ActionHandler) = Upper("OnOpen") Then
 		Form.OnOpen(P1, AddInfo);
 		Return True;
-	ElsIf Upper(ActionHandler) = Upper("AfterWriteAtServer") Then 
+	ElsIf Upper(ActionHandler) = Upper("AfterWriteAtServer") Then
 		Form.AfterWriteAtServer(P1, P2, AddInfo);
 		Return True;
 	ElsIf Upper(ActionHandler) = Upper("AfterWrite") Then
@@ -167,7 +166,7 @@ Function FormItems_CallChainHandler(Object, Form, ActionHandler, AddInfo, P1, P2
 EndFunction
 
 Function FormItems_Header_CallChainHandler(Object, Form, ActionHandler, AddInfo, P1, P2, P3)
-	If Upper(ActionHandler) = Upper("DateOnChange") Then 
+	If Upper(ActionHandler) = Upper("DateOnChange") Then
 		Form.DateOnChange(P1, AddInfo);
 		Return True;
 	ElsIf Upper(ActionHandler) = Upper("PlaningPeriodOnChange") Then
@@ -340,7 +339,7 @@ Function FormItems_Unclassified_CallChainHandler(Object, Form, ActionHandler, Ad
 		Return True;
 	ElsIf Upper(ActionHandler) = Upper("AccountPayableByDocumentsOnActivateRow") Then
 		Form.AccountPayableByDocumentsOnActivateRow(P1, AddInfo);
-		Return True;		
+		Return True;
 	ElsIf Upper(ActionHandler) = Upper("AccountReceivableByDocumentsAfterDeleteRow") Then
 		Form.AccountReceivableByDocumentsAfterDeleteRow(P1, AddInfo);
 		Return True;
@@ -352,13 +351,13 @@ EndFunction
 #Region Currencies
 
 Function Currencies_CallChainHandler(Object, Form, ActionHandler, AddInfo, P1, P2, P3)
-	If Upper(ActionHandler) = Upper("Currencies_OnOpen") Then 
+	If Upper(ActionHandler) = Upper("Currencies_OnOpen") Then
 		Form.Currencies_OnOpen(P1, AddInfo);
 		Return True;
-	ElsIf Upper(ActionHandler) = Upper("Currencies_AfterWriteAtServer") Then 
+	ElsIf Upper(ActionHandler) = Upper("Currencies_AfterWriteAtServer") Then
 		Form.Currencies_AfterWriteAtServer(P1, P2, AddInfo);
 		Return True;
-	ElsIf Upper(ActionHandler) = Upper("Currencies_AfterWrite") Then 
+	ElsIf Upper(ActionHandler) = Upper("Currencies_AfterWrite") Then
 		Form.Currencies_AfterWrite(P1, AddInfo);
 		Return True;
 	ElsIf Upper(ActionHandler) = Upper("NotificationProcessing") Then

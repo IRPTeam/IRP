@@ -1,16 +1,15 @@
 #Region Offers_for_document
 
 Function GetAllActiveOffers_ForDocument(Val Object, AddInfo = Undefined) Export
-	If TypeOf(Object.Ref) = Type("DocumentRef.SalesOrder")
-		Or TypeOf(Object.Ref) = Type("DocumentRef.SalesInvoice")
+	If TypeOf(Object.Ref) = Type("DocumentRef.SalesOrder") Or TypeOf(Object.Ref) = Type("DocumentRef.SalesInvoice")
 		Or TypeOf(Object.Ref) = Type("DocumentRef.RetailSalesReceipt") Then
-		OffersDocumentTypesArray = New Array;
+		OffersDocumentTypesArray = New Array();
 		OffersDocumentTypesArray.Add(Enums.OffersDocumentTypes.Sales);
 		OffersDocumentTypesArray.Add(Enums.OffersDocumentTypes.PurchasesAndSales);
 		Return GetAllActiveOffers_ForDocument_ByDocumentTypes(Object, OffersDocumentTypesArray, AddInfo);
-	ElsIf TypeOf(Object.Ref) = Type("DocumentRef.PurchaseOrder")
-		Or TypeOf(Object.Ref) = Type("DocumentRef.PurchaseInvoice") Then
-		OffersDocumentTypesArray = New Array;
+	ElsIf TypeOf(Object.Ref) = Type("DocumentRef.PurchaseOrder") Or TypeOf(Object.Ref) = Type(
+		"DocumentRef.PurchaseInvoice") Then
+		OffersDocumentTypesArray = New Array();
 		OffersDocumentTypesArray.Add(Enums.OffersDocumentTypes.Purchases);
 		OffersDocumentTypesArray.Add(Enums.OffersDocumentTypes.PurchasesAndSales);
 		Return GetAllActiveOffers_ForDocument_ByDocumentTypes(Object, OffersDocumentTypesArray, AddInfo);
@@ -22,22 +21,22 @@ EndFunction
 Function GetAllActiveOffers_ForDocument_ByDocumentTypes(Object, OffersDocumentTypesArray, AddInfo = Undefined)
 	Query = New Query();
 	Query.Text =
-		"SELECT
-		|	SpecialOffers.Ref AS Offer
-		|FROM
-		|	Catalog.SpecialOffers AS SpecialOffers
-		|WHERE
-		|	NOT SpecialOffers.DeletionMark
-		|	AND SpecialOffers.StartOf <= &Date
-		|	AND (SpecialOffers.EndOf >= &Date
-		|	OR SpecialOffers.EndOf = DATETIME(1, 1, 1))
-		|	AND SpecialOffers.Launch
-		|	AND
-		|	NOT SpecialOffers.IsFolder
-		|	AND SpecialOffers.Type = VALUE(Enum.SpecialOfferTypes.ForDocument)
-		|	AND SpecialOffers.DocumentType In(&OffersDocumentTypesArray)
-		|AUTOORDER";
-	
+	"SELECT
+	|	SpecialOffers.Ref AS Offer
+	|FROM
+	|	Catalog.SpecialOffers AS SpecialOffers
+	|WHERE
+	|	NOT SpecialOffers.DeletionMark
+	|	AND SpecialOffers.StartOf <= &Date
+	|	AND (SpecialOffers.EndOf >= &Date
+	|	OR SpecialOffers.EndOf = DATETIME(1, 1, 1))
+	|	AND SpecialOffers.Launch
+	|	AND
+	|	NOT SpecialOffers.IsFolder
+	|	AND SpecialOffers.Type = VALUE(Enum.SpecialOfferTypes.ForDocument)
+	|	AND SpecialOffers.DocumentType In(&OffersDocumentTypesArray)
+	|AUTOORDER";
+
 	Query.SetParameter("Date", Object.Date);
 	Query.SetParameter("OffersDocumentTypesArray", OffersDocumentTypesArray);
 	QueryResult = Query.Execute();
@@ -50,16 +49,15 @@ EndFunction
 #Region Offers_for_row
 
 Function GetAllActiveOffers_ForRow(Val Object, AddInfo = Undefined) Export
-	If TypeOf(Object.Ref) = Type("DocumentRef.SalesOrder")
-		Or TypeOf(Object.Ref) = Type("DocumentRef.SalesInvoice") 
+	If TypeOf(Object.Ref) = Type("DocumentRef.SalesOrder") Or TypeOf(Object.Ref) = Type("DocumentRef.SalesInvoice")
 		Or TypeOf(Object.Ref) = Type("DocumentRef.RetailSalesReceipt") Then
-		OffersDocumentTypesArray = New Array;
+		OffersDocumentTypesArray = New Array();
 		OffersDocumentTypesArray.Add(Enums.OffersDocumentTypes.Sales);
 		OffersDocumentTypesArray.Add(Enums.OffersDocumentTypes.PurchasesAndSales);
 		Return GetAllActiveOffers_ForRow_ByDocumentTypes(Object, OffersDocumentTypesArray, AddInfo);
-	ElsIf TypeOf(Object.Ref) = Type("DocumentRef.PurchaseOrder")
-		Or TypeOf(Object.Ref) = Type("DocumentRef.PurchaseInvoice") Then
-		OffersDocumentTypesArray = New Array;
+	ElsIf TypeOf(Object.Ref) = Type("DocumentRef.PurchaseOrder") Or TypeOf(Object.Ref) = Type(
+		"DocumentRef.PurchaseInvoice") Then
+		OffersDocumentTypesArray = New Array();
 		OffersDocumentTypesArray.Add(Enums.OffersDocumentTypes.Purchases);
 		OffersDocumentTypesArray.Add(Enums.OffersDocumentTypes.PurchasesAndSales);
 		Return GetAllActiveOffers_ForRow_ByDocumentTypes(Object, OffersDocumentTypesArray, AddInfo);
@@ -71,22 +69,22 @@ EndFunction
 Function GetAllActiveOffers_ForRow_ByDocumentTypes(Object, OffersDocumentTypesArray, AddInfo = Undefined)
 	Query = New Query();
 	Query.Text =
-		"SELECT
-		|	SpecialOffers.Ref AS Offer
-		|FROM
-		|	Catalog.SpecialOffers AS SpecialOffers
-		|WHERE
-		|	NOT SpecialOffers.DeletionMark
-		|	AND SpecialOffers.StartOf <= &Date
-		|	AND (SpecialOffers.EndOf >= &Date
-		|	OR SpecialOffers.EndOf = DATETIME(1, 1, 1))
-		|	AND SpecialOffers.Launch
-		|	AND
-		|	NOT SpecialOffers.IsFolder
-		|	AND SpecialOffers.Type = VALUE(Enum.SpecialOfferTypes.ForRow)
-		|	AND SpecialOffers.DocumentType In(&OffersDocumentTypesArray)
-		|AUTOORDER";
-	
+	"SELECT
+	|	SpecialOffers.Ref AS Offer
+	|FROM
+	|	Catalog.SpecialOffers AS SpecialOffers
+	|WHERE
+	|	NOT SpecialOffers.DeletionMark
+	|	AND SpecialOffers.StartOf <= &Date
+	|	AND (SpecialOffers.EndOf >= &Date
+	|	OR SpecialOffers.EndOf = DATETIME(1, 1, 1))
+	|	AND SpecialOffers.Launch
+	|	AND
+	|	NOT SpecialOffers.IsFolder
+	|	AND SpecialOffers.Type = VALUE(Enum.SpecialOfferTypes.ForRow)
+	|	AND SpecialOffers.DocumentType In(&OffersDocumentTypesArray)
+	|AUTOORDER";
+
 	Query.SetParameter("Date", Object.Date);
 	Query.SetParameter("OffersDocumentTypesArray", OffersDocumentTypesArray);
 	QueryResult = Query.Execute();
@@ -99,11 +97,9 @@ EndFunction
 #Region AppliedOffers
 
 Function GetAllAppliedOffers(Val Object, AddInfo = Undefined) Export
-	CanGetAllAppliedOffers = TypeOf(Object.Ref) = Type("DocumentRef.SalesOrder")
-		Or TypeOf(Object.Ref) = Type("DocumentRef.SalesInvoice") 
-		Or TypeOf(Object.Ref) = Type("DocumentRef.PurchaseOrder")
-		Or TypeOf(Object.Ref) = Type("DocumentRef.PurchaseInvoice")
-		Or TypeOf(Object.Ref) = Type("DocumentRef.RetailSalesReceipt"); 
+	CanGetAllAppliedOffers = TypeOf(Object.Ref) = Type("DocumentRef.SalesOrder") Or TypeOf(Object.Ref) = Type(
+		"DocumentRef.SalesInvoice") Or TypeOf(Object.Ref) = Type("DocumentRef.PurchaseOrder") Or TypeOf(Object.Ref)
+		= Type("DocumentRef.PurchaseInvoice") Or TypeOf(Object.Ref) = Type("DocumentRef.RetailSalesReceipt");
 	If CanGetAllAppliedOffers Then
 		Return GetAllAppliedOffers_Documents(Object, AddInfo);
 	Else
@@ -135,63 +131,50 @@ Function SetIsSelectForAppliedOffers(OffersTreeAddress, ArrayOfAppliedOffers) Ex
 	Return PutToTempStorage(OffersTree);
 EndFunction
 
-Function CreateOffersTreeAndPutToTmpStorage(Val Object,
-		Val ItemList,
-		Val SpecialOffers,
-		ArrayOfOffers,
-		ItemListRowKey = Undefined,
-		AddInfo = Undefined) Export
-	
-	OffersTree = CreateOffersTree(Object,
-			ItemList,
-			SpecialOffers,
-			ArrayOfOffers,
-			ItemListRowKey,
-			AddInfo);
-	
+Function CreateOffersTreeAndPutToTmpStorage(Val Object, Val ItemList, Val SpecialOffers, ArrayOfOffers,
+	ItemListRowKey = Undefined, AddInfo = Undefined) Export
+
+	OffersTree = CreateOffersTree(Object, ItemList, SpecialOffers, ArrayOfOffers, ItemListRowKey, AddInfo);
+
 	Return PutToTempStorage(OffersTree);
 EndFunction
 
-Function CreateOffersTree(Val Object,
-		Val ItemList,
-		Val SpecialOffers,
-		ArrayOfOffers,
-		ItemListRowKey = Undefined,
-		AddInfo = Undefined) Export
+Function CreateOffersTree(Val Object, Val ItemList, Val SpecialOffers, ArrayOfOffers, ItemListRowKey = Undefined,
+	AddInfo = Undefined) Export
 	Query = New Query();
 	Query.Text =
-		"SELECT
-		|	SpecialOffers.Ref AS Offer,
-		|	SpecialOffers.IsFolder AS isFolder,
-		|	CASE
-		|		WHEN SpecialOffers.Manually
-		|			THEN 0
-		|		ELSE 1
-		|	END AS isSelect,
-		|	NOT SpecialOffers.Manually AS Auto,
-		|	SpecialOffers.Priority AS Priority,
-		|	0 AS TotalPercent,
-		|	0 AS TotalAmount,
-		|  UNDEFINED AS Rule,
-		|  UNDEFINED AS Presentation
-		|FROM
-		|	Catalog.SpecialOffers AS SpecialOffers
-		|WHERE
-		|	SpecialOffers.Ref IN(&ArrayOfOffers)
-		|
-		|ORDER BY
-		|	Priority
-		|TOTALS
-		|	SUM(isSelect)
-		|BY
-		|	Offer HIERARCHY
-		|AUTOORDER";
-	
+	"SELECT
+	|	SpecialOffers.Ref AS Offer,
+	|	SpecialOffers.IsFolder AS isFolder,
+	|	CASE
+	|		WHEN SpecialOffers.Manually
+	|			THEN 0
+	|		ELSE 1
+	|	END AS isSelect,
+	|	NOT SpecialOffers.Manually AS Auto,
+	|	SpecialOffers.Priority AS Priority,
+	|	0 AS TotalPercent,
+	|	0 AS TotalAmount,
+	|  UNDEFINED AS Rule,
+	|  UNDEFINED AS Presentation
+	|FROM
+	|	Catalog.SpecialOffers AS SpecialOffers
+	|WHERE
+	|	SpecialOffers.Ref IN(&ArrayOfOffers)
+	|
+	|ORDER BY
+	|	Priority
+	|TOTALS
+	|	SUM(isSelect)
+	|BY
+	|	Offer HIERARCHY
+	|AUTOORDER";
+
 	Query.SetParameter("ArrayOfOffers", ArrayOfOffers);
 	QueryResult = Query.Execute();
 	OffersTree = QueryResult.Unload(QueryResultIteration.ByGroupsWithHierarchy);
 	DeleteDoublesGroups(OffersTree);
-	
+
 	Call_CalculateOfferAmount = True;
 	If AddInfo <> Undefined And AddInfo.Property("Call_CalculateOfferAmount") Then
 		Call_CalculateOfferAmount = AddInfo.Call_CalculateOfferAmount;
@@ -199,7 +182,7 @@ Function CreateOffersTree(Val Object,
 	If Call_CalculateOfferAmount Then
 		CalculateOfferAmount(OffersTree, ItemList.Unload(), SpecialOffers.Unload(), ItemListRowKey);
 	EndIf;
-	
+
 	Return OffersTree;
 EndFunction
 
@@ -218,11 +201,11 @@ Procedure CalculateOfferAmount(OffersTree, ItemList, SpecialOffers, ItemListRowK
 		If ValueIsFilled(Row.Offer) And Not Row.isFolder Then
 			SearchFilter = New Structure();
 			SearchFilter.Insert("Offer", Row.Offer);
-			
+
 			If ValueIsFilled(ItemListRowKey) Then
 				SearchFilter.Insert("Key", ItemListRowKey);
 			EndIf;
-			
+
 			SpecialOffersCopy = SpecialOffers.Copy(SearchFilter);
 			Row.TotalAmount = SpecialOffersCopy.Total("Amount");
 			sum = 0;
@@ -243,16 +226,16 @@ Procedure CalculateOfferAmount(OffersTree, ItemList, SpecialOffers, ItemListRowK
 			Else
 				Row.TotalPercent = 0;
 			EndIf;
-			
+
 			If ValueIsFilled(Row.TotalPercent) And IsOfferForRow(Row.Offer) And Row.Offer.Manually Then
 				Row.IsSelect = True;
 			EndIf;
-			
+
 		EndIf;
-		
+
 		CalculateOfferAmount(Row, ItemList, SpecialOffers, ItemListRowKey);
 	EndDo;
-	
+
 EndProcedure
 
 Function CalculateOffersTreeAndPutToTmpStorage_ForDocument(Val Object, OffersInfo, AddInfo = Undefined) Export
@@ -260,13 +243,11 @@ Function CalculateOffersTreeAndPutToTmpStorage_ForDocument(Val Object, OffersInf
 EndFunction
 
 Function CalculateOffersTree_ForDocument(Val Object, OffersInfo, AddInfo = Undefined) Export
-	isTaxDocRef = TypeOf(Object.Ref) = Type("DocumentRef.SalesOrder")
-		Or TypeOf(Object.Ref) = Type("DocumentRef.SalesInvoice")
-		Or TypeOf(Object.Ref) = Type("DocumentRef.PurchaseOrder")
-		Or TypeOf(Object.Ref) = Type("DocumentRef.PurchaseInvoice")
-		Or TypeOf(Object.Ref) = Type("DocumentRef.RetailSalesReceipt");
+	isTaxDocRef = TypeOf(Object.Ref) = Type("DocumentRef.SalesOrder") Or TypeOf(Object.Ref) = Type(
+		"DocumentRef.SalesInvoice") Or TypeOf(Object.Ref) = Type("DocumentRef.PurchaseOrder") Or TypeOf(Object.Ref)
+		= Type("DocumentRef.PurchaseInvoice") Or TypeOf(Object.Ref) = Type("DocumentRef.RetailSalesReceipt");
 	If isTaxDocRef Then
-			OffersTree = CalculateOffersTree_Documents(Object, OffersInfo, AddInfo);
+		OffersTree = CalculateOffersTree_Documents(Object, OffersInfo, AddInfo);
 	Else
 		Raise StrTemplate(R().S_013, String(TypeOf(Object.Ref)));
 	EndIf;
@@ -278,13 +259,11 @@ Function CalculateOffersTreeAndPutToTmpStorage_ForRow(Val Object, OffersInfo, Ad
 EndFunction
 
 Function CalculateOffersTree_ForRow(Val Object, OffersInfo, AddInfo = Undefined) Export
-	isTaxDocRef = TypeOf(Object.Ref) = Type("DocumentRef.SalesOrder")
-		Or TypeOf(Object.Ref) = Type("DocumentRef.SalesInvoice")
-		Or TypeOf(Object.Ref) = Type("DocumentRef.PurchaseOrder")
-		Or TypeOf(Object.Ref) = Type("DocumentRef.PurchaseInvoice")
-		Or TypeOf(Object.Ref) = Type("DocumentRef.RetailSalesReceipt");
+	isTaxDocRef = TypeOf(Object.Ref) = Type("DocumentRef.SalesOrder") Or TypeOf(Object.Ref) = Type(
+		"DocumentRef.SalesInvoice") Or TypeOf(Object.Ref) = Type("DocumentRef.PurchaseOrder") Or TypeOf(Object.Ref)
+		= Type("DocumentRef.PurchaseInvoice") Or TypeOf(Object.Ref) = Type("DocumentRef.RetailSalesReceipt");
 	If isTaxDocRef Then
-			OffersTree = CalculateOffersTree_Documents(Object, OffersInfo, AddInfo);
+		OffersTree = CalculateOffersTree_Documents(Object, OffersInfo, AddInfo);
 	Else
 		Raise StrTemplate(R().S_013, String(TypeOf(Object.Ref)));
 	EndIf;
@@ -300,7 +279,7 @@ Function CalculateOffersTree_Documents(Object, OffersInfo, AddInfo = Undefined)
 	OffersTree.Columns.Add("AllRuleIsOk", New TypeDescription("Boolean"));
 	OffersTree.Columns.Add("Manual", New TypeDescription("Boolean"));
 	OffersTree.Columns.Add("ReadyOffer", New TypeDescription("Boolean"));
-	
+
 	CalculateOffersRecursion(Object, OffersTree, OffersInfo);
 	
 	// Delete row with Amount=0	
@@ -308,7 +287,7 @@ Function CalculateOffersTree_Documents(Object, OffersInfo, AddInfo = Undefined)
 	For Each Row In ArrayForDelete Do
 		Row.Parent.Rows.Delete(Row);
 	EndDo;
-	
+
 	Return OffersTree;
 EndFunction
 
@@ -323,7 +302,7 @@ Function CheckOfferRule_ForDocument(Object, StrOffers, Rule) Export
 	Else
 		Return AddDataProc.CheckOfferRule(Object, StrOffers, Rule);
 	EndIf;
-	
+
 EndFunction
 
 Function CheckOfferRule_ForRow(Object, StrOffers, Rule, ItemListRowKey) Export
@@ -377,40 +356,31 @@ Procedure CalculateOffersRecursion(Object, OffersTree, OffersInfo, StrOffersInde
 	StrOffersIndex = 0;
 	While StrOffersIndex <= Step Do
 		StrOffers = OffersTree.Rows[StrOffersIndex];
-		If NOT StrOffers.isFolder AND StrOffers.isSelect Then
+		If Not StrOffers.isFolder And StrOffers.isSelect Then
 			AllRuleIsOk = True;
-			
+
 			For Each StrOfferRule In StrOffers.Offer.Rules Do
 				If OffersInfo.Property("ItemListRowKey") Then
-					AllRuleIsOk = CheckOfferRule_ForRow(Object,
-							StrOffers,
-							StrOfferRule.Rule,
-							OffersInfo.ItemListRowKey);
+					AllRuleIsOk = CheckOfferRule_ForRow(Object, StrOffers, StrOfferRule.Rule, OffersInfo.ItemListRowKey);
 				Else
-					AllRuleIsOk = CheckOfferRule_ForDocument(Object,
-							StrOffers,
-							StrOfferRule.Rule);
+					AllRuleIsOk = CheckOfferRule_ForDocument(Object, StrOffers, StrOfferRule.Rule);
 				EndIf;
 				If Not AllRuleIsOk Then
 					Break;
 				EndIf;
 			EndDo;
 			StrOffers.AllRuleIsOk = AllRuleIsOk;
-			
+
 			If StrOffers.AllRuleIsOk Then
-				
+
 				OfferCalculateIsOk = True;
 				If OffersInfo.Property("ItemListRowKey") Then
-					OfferCalculateIsOk = CalculateOffer_ForRow(Object,
-							StrOffers,
-							StrOffers.Offer.SpecialOfferType,
-							OffersInfo.ItemListRowKey);
+					OfferCalculateIsOk = CalculateOffer_ForRow(Object, StrOffers, StrOffers.Offer.SpecialOfferType,
+						OffersInfo.ItemListRowKey);
 				Else
-					OfferCalculateIsOk = CalculateOffer_ForDocument(Object,
-							StrOffers,
-							StrOffers.Offer.SpecialOfferType);
+					OfferCalculateIsOk = CalculateOffer_ForDocument(Object, StrOffers, StrOffers.Offer.SpecialOfferType);
 				EndIf;
-				
+
 				If OfferCalculateIsOk Then
 					StrOffers.Amount = StrOffers.Rows.Total("Amount");
 				Else
@@ -419,19 +389,19 @@ Procedure CalculateOffersRecursion(Object, OffersTree, OffersInfo, StrOffersInde
 					Step = Step - 1;
 				EndIf;
 			EndIf;
-			
+
 		ElsIf StrOffers.isFolder Then
 			CalculateOffersRecursion(Object, StrOffers, OffersInfo, StrOffersIndex);
-			
+
 			StrOffers.Amount = StrOffers.Rows.Total("Amount");
 			StrOffers.AllRuleIsOk = StrOffers.Rows.Total("AllRuleIsOk");
-			
+
 			If StrOffers.AllRuleIsOk Then
 				CalculateOfferGroup(Object, StrOffers, StrOffers.Offer.SpecialOfferType);
 			EndIf;
-			
+
 		EndIf;
-		
+
 		StrOffersIndex = StrOffersIndex + 1;
 	EndDo;
 EndProcedure
@@ -452,42 +422,41 @@ EndFunction
 Function WriteOffersInObject_ForDocument(OffersTable, OffersTree, AddInfo = Undefined)
 	OffersTableCopy = OffersTable.Copy();
 	OffersTableCopy.Clear();
-	
+
 	For Each Row In OffersTable Do
 		If Row.Offer.Type = Enums.SpecialOfferTypes.ForRow Then
 			NewRow = OffersTableCopy.Add();
 			FillPropertyValues(NewRow, Row);
 		EndIf;
 	EndDo;
-	
+
 	OffersToObject = OffersTree.Rows.FindRows(New Structure("ReadyOffer", True), True);
 	For Each Row In OffersToObject Do
 		NewRow = OffersTableCopy.Add();
 		FillPropertyValues(NewRow, Row);
 	EndDo;
-	
+
 	Return OffersTableCopy;
 EndFunction
 
 Function WriteOffersInObject_ForRow(OffersTable, OffersTree, ItemListRowKey, AddInfo = Undefined) Export
 	OffersTableCopy = OffersTable.Copy();
 	OffersTableCopy.Clear();
-	
+
 	For Each Row In OffersTable Do
-		If Not Row.Offer.Type = Enums.SpecialOfferTypes.ForRow
-			Or Row.Key <> ItemListRowKey Then
+		If Not Row.Offer.Type = Enums.SpecialOfferTypes.ForRow Or Row.Key <> ItemListRowKey Then
 			NewRow = OffersTableCopy.Add();
 			FillPropertyValues(NewRow, Row);
 		EndIf;
 	EndDo;
-	
+
 	OffersToObject = OffersTree.Rows.FindRows(New Structure("ReadyOffer", True), True);
 	For Each Row In OffersToObject Do
 		NewRow = OffersTableCopy.Add();
 		FillPropertyValues(NewRow, Row);
 		NewRow.Percent = Row.TotalPercent;
 	EndDo;
-	
+
 	Return OffersTableCopy;
 EndFunction
 
@@ -495,12 +464,12 @@ Function GetAllOffersInTreeAsArray(OffersTree, IncludeFolders = False) Export
 	ArrayOfResults = New Array();
 	SearchFilter = New Structure();
 	SearchFilter.Insert("isFolder", False);
-	
+
 	SearchResult = OffersTree.Rows.FindRows(SearchFilter, True);
 	For Each ItemSearchResult In SearchResult Do
 		ArrayOfResults.Add(ItemSearchResult);
 	EndDo;
-	
+
 	If IncludeFolders Then
 		SearchFilter.isFolder = True;
 		SearchResult = OffersTree.Rows.FindRows(SearchFilter, True);
@@ -508,7 +477,7 @@ Function GetAllOffersInTreeAsArray(OffersTree, IncludeFolders = False) Export
 			ArrayOfResults.Add(ItemSearchResult);
 		EndDo;
 	EndIf;
-	
+
 	Return ArrayOfResults;
 EndFunction
 
@@ -540,4 +509,3 @@ Function GetArrayOfAllOffers_ForRow(Val Object, OffersAddress, ItemListRowKey) E
 	EndDo;
 	Return ArrayOfRows;
 EndFunction
-

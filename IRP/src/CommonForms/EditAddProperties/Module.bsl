@@ -1,42 +1,42 @@
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	ThisObject.Ref = Parameters.Ref;
-	
+
 	AddAttributeAndPropertySet = AddAttributesAndPropertiesServer.AddAttributeAndPropertySetRef(Ref);
-	
+
 	Query = New Query();
 	Query.Text =
-		"SELECT
-		|	AddAttributeAndPropertySetsProperties.Property
-		|INTO Properties
-		|FROM
-		|	Catalog.AddAttributeAndPropertySets.Properties AS AddAttributeAndPropertySetsProperties
-		|WHERE
-		|	AddAttributeAndPropertySetsProperties.Ref = &AddAttributeAndPropertySets
-		|;
-		|
-		|////////////////////////////////////////////////////////////////////////////////
-		|SELECT
-		|	AddProperties.Value,
-		|	Properties.Property
-		|FROM
-		|	Properties AS Properties
-		|		LEFT JOIN InformationRegister.AddProperties AS AddProperties
-		|		ON Properties.Property = AddProperties.Property
-		|		AND AddProperties.Object = &Object";
+	"SELECT
+	|	AddAttributeAndPropertySetsProperties.Property
+	|INTO Properties
+	|FROM
+	|	Catalog.AddAttributeAndPropertySets.Properties AS AddAttributeAndPropertySetsProperties
+	|WHERE
+	|	AddAttributeAndPropertySetsProperties.Ref = &AddAttributeAndPropertySets
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	AddProperties.Value,
+	|	Properties.Property
+	|FROM
+	|	Properties AS Properties
+	|		LEFT JOIN InformationRegister.AddProperties AS AddProperties
+	|		ON Properties.Property = AddProperties.Property
+	|		AND AddProperties.Object = &Object";
 	Query.SetParameter("Object", ThisObject.Ref);
 	Query.SetParameter("AddAttributeAndPropertySets", AddAttributeAndPropertySet);
 	Query.SetParameter("Properties", ThisObject.Properties.Unload());
 	QueryResult = Query.Execute();
 	QueryTable = QueryResult.Unload();
 	ThisObject.Properties.Load(QueryTable);
-	
+
 	For Each Row In ThisObject.Properties Do
 		AttributeStructure = New Structure("Attribute, InterfaceGroup", Row.Property, Undefined);
 		PropertyInfo = AddAttributesAndPropertiesServer.AttributeAndPropertyInfo(AttributeStructure);
 		Row.TypeDef = PropertyInfo.Type;
 	EndDo;
-	
+
 EndProcedure
 
 &AtClient
@@ -45,7 +45,7 @@ Procedure PropertiesBeforeRowChange(Item, Cancel)
 	If CurrentData = Undefined Then
 		Return;
 	EndIf;
-	
+
 	ArrayOfSelectionArgs = New Array();
 	If CurrentData.TypeDef.ContainsType(Type("CatalogRef.AddAttributeAndPropertyValues")) Then
 		ArrayOfSelectionArgs.Add(New ChoiceParameter("Filter.Owner", CurrentData.Property));
@@ -78,7 +78,7 @@ Procedure SaveAtServer()
 	ValueTable = ThisObject.Properties.Unload();
 	ValueTable.Columns.Add("Object");
 	ValueTable.FillValues(ThisObject.Ref, "Object");
-	
+
 	ArrayForDelete = New Array();
 	For Each Row In ValueTable Do
 		If Not ValueIsFilled(Row.Value) Then
@@ -88,7 +88,7 @@ Procedure SaveAtServer()
 	For Each Item In ArrayForDelete Do
 		ValueTable.Delete(Item);
 	EndDo;
-	
+
 	RecordSet.Load(ValueTable);
 	RecordSet.Write();
 EndProcedure

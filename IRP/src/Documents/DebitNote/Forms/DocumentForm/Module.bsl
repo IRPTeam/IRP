@@ -71,7 +71,7 @@ EndProcedure
 
 &AtClient
 Procedure TransactionsPartnerOnChange(Item, AddInfo = Undefined) Export
-	DocCreditDebitNoteClient.TransactionsPartnerOnChange(Object, ThisObject, Item);	
+	DocCreditDebitNoteClient.TransactionsPartnerOnChange(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient
@@ -160,7 +160,7 @@ EndProcedure
 
 &AtClient
 Procedure TransactionsBeforeDeleteRow(Item, Cancel)
-	DocCreditDebitNoteClient.TransactionsBeforeDeleteRow(Object, ThisObject, Item, Cancel);	
+	DocCreditDebitNoteClient.TransactionsBeforeDeleteRow(Object, ThisObject, Item, Cancel);
 EndProcedure
 
 &AtClient
@@ -170,7 +170,8 @@ EndProcedure
 
 &AtClient
 Procedure TransactionsRevenueTypeStartChoice(Item, ChoiceData, StandardProcessing)
-	DocCreditDebitNoteClient.TransactionsRevenueTypeStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+	DocCreditDebitNoteClient.TransactionsRevenueTypeStartChoice(Object, ThisObject, Item, ChoiceData,
+		StandardProcessing);
 EndProcedure
 
 &AtClient
@@ -218,7 +219,8 @@ EndProcedure
 &AtClient
 Procedure CurrenciesSelection(Item, RowSelected, Field, StandardProcessing, AddInfo = Undefined)
 	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "ExecuteAtClient", True);
-	CurrenciesClient.CurrenciesTable_Selection(Object, ThisObject, Item, RowSelected, Field, StandardProcessing, AddInfo);
+	CurrenciesClient.CurrenciesTable_Selection(Object, ThisObject, Item, RowSelected, Field, StandardProcessing,
+		AddInfo);
 EndProcedure
 
 &AtClient
@@ -256,7 +258,7 @@ EndProcedure
 &AtClient
 Procedure GeneratedFormCommandActionByName(Command) Export
 	ExternalCommandsClient.GeneratedFormCommandActionByName(Object, ThisObject, Command.Name);
-	GeneratedFormCommandActionByNameServer(Command.Name);	
+	GeneratedFormCommandActionByNameServer(Command.Name);
 EndProcedure
 
 &AtServer

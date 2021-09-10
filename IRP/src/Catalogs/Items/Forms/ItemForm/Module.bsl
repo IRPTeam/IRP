@@ -45,7 +45,7 @@ EndProcedure
 Procedure AfterWrite(WriteParameters)
 	UpdateAddAttributesHTMLDocument();
 	AddAttributesCreateFormControl();
-	
+
 	Items.PackageUnit.ReadOnly = False;
 	Items.PackageUnit.InputHint = "";
 EndProcedure

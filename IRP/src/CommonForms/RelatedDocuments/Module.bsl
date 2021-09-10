@@ -1,4 +1,3 @@
-
 &AtClient
 Var CurrentDocument;
 
@@ -35,7 +34,7 @@ Procedure UpdateCommandAvailability()
 	If CurrentData = Undefined Then
 		Return;
 	EndIf;
-	
+
 	If CurrentData.Ref = Undefined Then
 		Items.DocumentsTreePost.Enabled = False;
 		Items.DocumentsTreeUnpost.Enabled = False;
@@ -52,15 +51,15 @@ Procedure UpdateCommandAvailability()
 		Items.DocumentsTreeContextMenuPost.Enabled = CanPosting And Not CurrentData.DeletionMark;
 		Items.DocumentsTreeContextMenuUnpost.Enabled = CanPosting And Not CurrentData.DeletionMark;
 	EndIf;
-	
+
 EndProcedure
 
 &AtClient
-Procedure ExpandDocumentsTree()	
+Procedure ExpandDocumentsTree()
 	For Each Row In ThisObject.DocumentsTree.GetItems() Do
 		Items.DocumentsTree.Expand(Row.GetID(), True);
 	EndDo;
-	
+
 	CurrentRow = Undefined;
 	If CurrentDocument <> Undefined Then
 		FindCurrentRow(ThisObject.DocumentsTree.GetItems(), CurrentRow);
@@ -78,8 +77,9 @@ Procedure FindCurrentRow(TreeItems, CurrentRow)
 			Break;
 		EndIf;
 		If CurrentRow = Undefined Then
-			FindCurrentRow(Row.GetItems(), CurrentRow)
-		EndIf;
+			FindCurrentRow(Row.GetItems(), CurrentRow);
+		EndIf
+		;
 	EndDo;
 EndProcedure
 
@@ -89,9 +89,9 @@ Procedure OpenDocument()
 	If CurrentData = Undefined Then
 		Return;
 	EndIf;
-	
-	OpenForm(StrTemplate("Document.%1.ObjectForm", GetDocumentNameByRef(CurrentData.Ref))
-		, New Structure("Key", CurrentData.Ref), ThisObject);
+
+	OpenForm(StrTemplate("Document.%1.ObjectForm", GetDocumentNameByRef(CurrentData.Ref)), New Structure("Key",
+		CurrentData.Ref), ThisObject);
 EndProcedure
 
 &AtServerNoContext
@@ -129,7 +129,7 @@ Procedure PostAtServer()
 	If CurrentData = Undefined Then
 		Return;
 	EndIf;
-	
+
 	DocumentObject = CurrentData.Ref.GetObject();
 	DocumentObject.Write(DocumentWriteMode.Posting);
 EndProcedure
@@ -148,7 +148,7 @@ Procedure UnpostAtServer()
 	If CurrentData = Undefined Then
 		Return;
 	EndIf;
-	
+
 	DocumentObject = CurrentData.Ref.GetObject();
 	DocumentObject.Write(DocumentWriteMode.UndoPosting);
 EndProcedure
@@ -167,7 +167,7 @@ Procedure DeleteAtServer()
 	If CurrentData = Undefined Then
 		Return;
 	EndIf;
-	
+
 	DocumentObject = CurrentData.Ref.GetObject();
 	DocumentObject.SetDeletionMark(Not CurrentData.Ref.DeletionMark);
 EndProcedure
@@ -180,7 +180,7 @@ Procedure SetCurrentDocument()
 	Else
 		CurrentDocument = CurrentData.Ref;
 	EndIf;
-EndProcedure		
+EndProcedure
 
 &AtClient
 Procedure Refresh(Command)
@@ -203,46 +203,43 @@ EndProcedure
 Procedure OutputParentDocuments(DocumentRef, CurrentBranch)
 	DocumentMetadata = DocumentRef.Metadata();
 	ListOfAttributes = New ValueList();
-	
+
 	For Each Attribute In DocumentMetadata.Attributes Do
 		ArrayOfTypes = Attribute.Type.Types();
 		For Each CurrentType In ArrayOfTypes Do
 			AttributeMetadata = Metadata.FindByType(CurrentType);
-			
-			If AttributeMetadata <> Undefined
-				And Metadata.Documents.Contains(AttributeMetadata)
-				And AccessRight("Read", AttributeMetadata) Then
-				
+
+			If AttributeMetadata <> Undefined And Metadata.Documents.Contains(AttributeMetadata) And AccessRight(
+				"Read", AttributeMetadata) Then
+
 				AttributeValue = DocumentRef[Attribute.Name];
-				
-				If GetFromCache(AttributeValue) = Undefined
-					And ValueIsFilled(AttributeValue)
+
+				If GetFromCache(AttributeValue) = Undefined And ValueIsFilled(AttributeValue)
 					And ListOfAttributes.FindByValue(DocumentRef[Attribute.Name]) = Undefined Then
-					
+
 					ListOfAttributes.Add(AttributeValue, Format(AttributeValue.Date, "DF=yyyyMMddHHMMss;"));
 				EndIf;
 			EndIf;
 		EndDo;
 	EndDo;
-	
+
 	For Each TabularSection In DocumentMetadata.TabularSections Do
 		AttributeNames = "";
-		
+
 		For Each Attribute In TabularSection.Attributes Do
 			ArrayOfTypes = Attribute.Type.Types();
 			For Each CurrentType In ArrayOfTypes Do
 				AttributeMetadata = Metadata.FindByType(CurrentType);
-				If AttributeMetadata <> Undefined
-					And Metadata.Documents.Contains(AttributeMetadata)
-					And AccessRight("Read", AttributeMetadata) Then
+				If AttributeMetadata <> Undefined And Metadata.Documents.Contains(AttributeMetadata) And AccessRight(
+					"Read", AttributeMetadata) Then
 					AttributeNames = AttributeNames + ?(AttributeNames = "", "", ", ") + Attribute.Name;
 					Break;
 				EndIf;
 			EndDo;
 		EndDo;
-		
+
 		Table = DocumentRef[TabularSection.Name].Unload();
-		
+
 		Table.GroupBy(AttributeNames);
 		For Each Column In Table.Columns Do
 			For Each Row In Table Do
@@ -251,33 +248,31 @@ Procedure OutputParentDocuments(DocumentRef, CurrentBranch)
 				If ValueMetadata = Undefined Then
 					Continue;
 				EndIf;
-				
-				If Metadata.Documents.Contains(ValueMetadata)
-					And GetFromCache(AttributeValue) = Undefined
-					And ValueIsFilled(AttributeValue)
-					And ListOfAttributes.FindByValue(AttributeValue) = Undefined Then
+
+				If Metadata.Documents.Contains(ValueMetadata) And GetFromCache(AttributeValue) = Undefined
+					And ValueIsFilled(AttributeValue) And ListOfAttributes.FindByValue(AttributeValue) = Undefined Then
 					ListOfAttributes.Add(AttributeValue, Format(AttributeValue.Date, "DF=yyyyMMddHHMMss;"));
 				EndIf;
 			EndDo;
 		EndDo;
 	EndDo;
-	
+
 	ListOfAttributes.SortByPresentation();
-	
+
 	PutToCache(DocumentRef, True);
-	
+
 	If ListOfAttributes.Count() = 1 Then
 		OutputParentDocuments(ListOfAttributes[0].Value, CurrentBranch);
 	ElsIf ListOfAttributes.Count() > 1 Then
 		OutputWithOutParents(ListOfAttributes, CurrentBranch);
 	EndIf;
-	
+
 	Query = GetQueryForDocumentProperties(DocumentRef);
-	
+
 	NewRow = CurrentBranch.GetItems().Add();
 	QuerySelection = Query.Execute().Select();
 	If QuerySelection.Next() Then
-		
+
 		NewRow.Ref = QuerySelection.Ref;
 		NewRow.Posted = QuerySelection.Posted;
 		NewRow.DeletionMark = QuerySelection.DeletionMark;
@@ -285,10 +280,10 @@ Procedure OutputParentDocuments(DocumentRef, CurrentBranch)
 		NewRow.Name = QuerySelection.DocumentName;
 		NewRow.Amount = QuerySelection.Amount;
 		NewRow.IsCurrentDocument = QuerySelection.Ref = ThisObject.DocumentRef;
-		
+
 		SetDocumentStatus(NewRow);
 	EndIf;
-	
+
 	CurrentBranch = NewRow;
 EndProcedure
 
@@ -296,15 +291,15 @@ EndProcedure
 Procedure OutputWithOutParents(ListOfDocuments, CurrentBranch)
 	NewRow = Undefined;
 	For Each Row In ListOfDocuments Do
-		
+
 		Query = GetQueryForDocumentProperties(Row.Value);
-		
+
 		QuerySelection = Query.Execute().Select();
 		If QuerySelection.Next() Then
 			If GetFromCache(QuerySelection.Ref) = Undefined Then
-				
+
 				NewRow = CurrentBranch.GetItems().Add();
-				
+
 				NewRow.Ref = QuerySelection.Ref;
 				NewRow.Posted = QuerySelection.Posted;
 				NewRow.DeletionMark = QuerySelection.DeletionMark;
@@ -313,15 +308,15 @@ Procedure OutputWithOutParents(ListOfDocuments, CurrentBranch)
 				NewRow.Amount = QuerySelection.Amount;
 				NewRow.LimitationByParent = True;
 				NewRow.IsCurrentDocument = QuerySelection.Ref = ThisObject.DocumentRef;
-				
+
 				SetDocumentStatus(NewRow);
-				
+
 				PutToCache(QuerySelection.Ref, True);
-				
+
 			EndIf;
 		EndIf;
 	EndDo;
-	
+
 	If NewRow <> Undefined Then
 		CurrentBranch = NewRow;
 	EndIf;
@@ -329,58 +324,60 @@ EndProcedure
 
 &AtServer
 Procedure OutputChildrenDocuments(TreeRow)
-	
+
 	CurrentDocument = TreeRow.Ref;
-	
+
 	Table = GetRelatedDocuments(CurrentDocument);
-	
+
 	CacheByDocumentTypes = New Map();
-	
+
 	For Each Row In Table Do
 		DocumentMetadata = Row.Ref.Metadata();
-		
+
 		If Not AccessRight("Read", DocumentMetadata) Then
 			Continue;
 		EndIf;
-		
+
 		DocumentName = DocumentMetadata.Name;
 		DocumentSynonym = DocumentMetadata.Synonym;
-		
+
 		AddToMetadataCache(DocumentMetadata, DocumentName);
-		
+
 		DocumentTypeInfo = CacheByDocumentTypes[DocumentName];
 		If DocumentTypeInfo = Undefined Then
 			DocumentTypeInfo = New Structure("Synonym, ArrayOfRefs", DocumentSynonym, New Array());
 			CacheByDocumentTypes.Insert(DocumentName, DocumentTypeInfo);
 		EndIf;
 		DocumentTypeInfo.ArrayOfRefs.Add(Row.Ref);
-		
+
 	EndDo;
-	
+
 	If CacheByDocumentTypes.Count() = 0 Then
 		Return;
 	EndIf;
-	
+
 	Query = New Query();
 	For Each KeyValue In CacheByDocumentTypes Do
-		
+
 		Query.Text = Query.Text + ?(Query.Text = "", "
-				|SELECT ALLOWED", "
-				|UNION ALL
-				|SELECT") + "
-			|Ref, Presentation, Posted, DeletionMark, 
-			|" + ?(GetFromCache(KeyValue.Key, "Attributes")["DocumentAmount"], "DocumentAmount", 0) + " AS Amount				
-			|FROM Document." + KeyValue.Key + "
-			|WHERE Ref In (&" + KeyValue.Key + ")";
-		
+													 |SELECT ALLOWED", "
+																	   |UNION ALL
+																	   |SELECT") + "
+																				   |Ref, Presentation, Posted, DeletionMark, 
+																				   |" + ?(GetFromCache(KeyValue.Key,
+			"Attributes")["DocumentAmount"], "DocumentAmount", 0) + " AS Amount				
+																	|FROM Document." + KeyValue.Key + "
+																									  |WHERE Ref In (&"
+			+ KeyValue.Key + ")";
+
 		Query.SetParameter(KeyValue.Key, KeyValue.Value.ArrayOfRefs);
 	EndDo;
-	
+
 	QuerySelection = Query.Execute().Select();
-	
+
 	While QuerySelection.Next() Do
 		If GetFromCache(QuerySelection.Ref) = Undefined Then
-			
+
 			NewRow = TreeRow.GetItems().Add();
 			NewRow.Ref = QuerySelection.Ref;
 			NewRow.Presentation = QuerySelection.Presentation;
@@ -388,11 +385,11 @@ Procedure OutputChildrenDocuments(TreeRow)
 			NewRow.Posted = QuerySelection.Posted;
 			NewRow.DeletionMark = QuerySelection.DeletionMark;
 			NewRow.IsCurrentDocument = QuerySelection.Ref = ThisObject.DocumentRef;
-			
+
 			SetDocumentStatus(NewRow);
-			
+
 			PutToCache(QuerySelection.Ref, True);
-			
+
 			OutputChildrenDocuments(NewRow);
 		EndIf;
 	EndDo;
@@ -424,9 +421,9 @@ Function DocumentHaveAmount(DocumentMetadata)
 	CommonAttributeUsed = False;
 	Content = CommonAttribute.Content.Find(DocumentMetadata);
 	If Content <> Undefined Then
-		If Content.Use = Metadata.ObjectProperties.CommonAttributeUse.Use
-			Or (Content.Use = Metadata.ObjectProperties.CommonAttributeUse.Auto
-				And CommonAttribute.AutoUse = Metadata.ObjectProperties.CommonAttributeAutoUse.Use) Then
+		If Content.Use = Metadata.ObjectProperties.CommonAttributeUse.Use Or (Content.Use
+			= Metadata.ObjectProperties.CommonAttributeUse.Auto And CommonAttribute.AutoUse
+			= Metadata.ObjectProperties.CommonAttributeAutoUse.Use) Then
 			CommonAttributeUsed = True;
 		EndIf;
 	EndIf;
@@ -436,16 +433,15 @@ EndFunction
 &AtServer
 Function GetQueryForDocumentProperties(DocumentRef)
 	DocumentMetadata = DocumentRef.Metadata();
-	Query = New Query(
-			"SELECT ALLOWED Ref, Posted, DeletionMark, %1, Presentation, ""%2"" AS DocumentName
-			|FROM Document.%2 WHERE Ref = &Ref");
-	
+	Query = New Query("SELECT ALLOWED Ref, Posted, DeletionMark, %1, Presentation, ""%2"" AS DocumentName
+					  |FROM Document.%2 WHERE Ref = &Ref");
+
 	If DocumentHaveAmount(DocumentMetadata) Then
 		Query.Text = StrTemplate(Query.Text, "DocumentAmount AS Amount", DocumentMetadata.Name);
 	Else
 		Query.Text = StrTemplate(Query.Text, "NULL AS Amount", DocumentMetadata.Name);
 	EndIf;
-	
+
 	Query.SetParameter("Ref", DocumentRef);
 	Return Query;
 EndFunction
@@ -454,10 +450,10 @@ EndFunction
 Function GetRelatedDocuments(DocumentRef)
 	Query = New Query();
 	Query.Text =
-		"SELECT
-		|	Ref
-		|FROM
-		|	FilterCriterion.RelatedDocuments(&DocumentRef)";
+	"SELECT
+	|	Ref
+	|FROM
+	|	FilterCriterion.RelatedDocuments(&DocumentRef)";
 	Query.SetParameter("DocumentRef", DocumentRef);
 	Return Query.Execute().Unload();
 EndFunction

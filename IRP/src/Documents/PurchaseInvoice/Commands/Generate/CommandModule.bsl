@@ -1,16 +1,13 @@
-
 &AtClient
-Procedure CommandProcessing(CommandParameter, CommandExecuteParameters)	
+Procedure CommandProcessing(CommandParameter, CommandExecuteParameters)
 	FormParameters = New Structure();
-	FormParameters.Insert("Filter"              , 
-	New Structure("Basises, Ref", CommandParameter, PredefinedValue("Document.PurchaseInvoice.EmptyRef")));
-	FormParameters.Insert("TablesInfo"          , RowIDInfoClient.GetTablesInfo());
-	FormParameters.Insert("SetAllCheckedOnOpen" , True);
+	FormParameters.Insert("Filter", New Structure("Basises, Ref", CommandParameter, PredefinedValue(
+		"Document.PurchaseInvoice.EmptyRef")));
+	FormParameters.Insert("TablesInfo", RowIDInfoClient.GetTablesInfo());
+	FormParameters.Insert("SetAllCheckedOnOpen", True);
 
-	OpenForm("CommonForm.AddLinkedDocumentRows"
-		, FormParameters, , , ,
-		, New NotifyDescription("AddDocumentRowsContinue", ThisObject)
-		, FormWindowOpeningMode.LockOwnerWindow);
+	OpenForm("CommonForm.AddLinkedDocumentRows", FormParameters, , , , ,
+		New NotifyDescription("AddDocumentRowsContinue", ThisObject), FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
 
 &AtClient

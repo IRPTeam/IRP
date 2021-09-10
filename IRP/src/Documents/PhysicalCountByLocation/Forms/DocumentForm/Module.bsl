@@ -65,12 +65,10 @@ Procedure ItemListItemKeyOnChange(Item)
 	If CurrentRow = Undefined Then
 		Return;
 	EndIf;
-	
+
 	CalculationSettings = New Structure();
 	CalculationSettings.Insert("UpdateUnit");
-	CalculationStringsClientServer.CalculateItemsRow(Object,
-		CurrentRow,
-		CalculationSettings);
+	CalculationStringsClientServer.CalculateItemsRow(Object, CurrentRow, CalculationSettings);
 EndProcedure
 
 &AtClient
@@ -133,7 +131,7 @@ Procedure ItemListPhysCountOnChange(Item)
 	If CurrentRow = Undefined Then
 		Return;
 	EndIf;
-	
+
 	CurrentRow.Difference = CurrentRow.PhysCount - CurrentRow.ExpCount;
 EndProcedure
 
@@ -161,7 +159,7 @@ EndProcedure
 &AtClient
 Procedure GeneratedFormCommandActionByName(Command) Export
 	ExternalCommandsClient.GeneratedFormCommandActionByName(Object, ThisObject, Command.Name);
-	GeneratedFormCommandActionByNameServer(Command.Name);	
+	GeneratedFormCommandActionByNameServer(Command.Name);
 EndProcedure
 
 &AtServer

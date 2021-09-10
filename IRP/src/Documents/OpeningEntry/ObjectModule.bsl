@@ -1,14 +1,13 @@
-
 Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	If DataExchange.Load Then
 		Return;
-	EndIf;	
+	EndIf;
 EndProcedure
 
 Procedure OnWrite(Cancel)
 	If DataExchange.Load Then
 		Return;
-	EndIf;	
+	EndIf;
 EndProcedure
 
 Procedure BeforeDelete(Cancel)
@@ -24,8 +23,6 @@ EndProcedure
 Procedure UndoPosting(Cancel)
 	UndopostingServer.Undopost(ThisObject, Cancel, ThisObject.AdditionalProperties);
 EndProcedure
-
-
 Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 	For Each Row In ThisObject.AccountReceivableByDocuments Do
 		ArrayOfPaymentTerms = ThisObject.CustomersPaymentTerms.FindRows(New Structure("Key", Row.Key));
@@ -40,7 +37,7 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 			(Row.LineNumber - 1), "NZ=0; NG=0;") + "].Amount", ThisObject);
 		EndIf;
 	EndDo;
-	
+
 	For Each Row In ThisObject.AccountPayableByDocuments Do
 		ArrayOfPaymentTerms = ThisObject.VendorsPaymentTerms.FindRows(New Structure("Key", Row.Key));
 		AmountPaymentTerms = 0;
@@ -55,4 +52,3 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 		EndIf;
 	EndDo;
 EndProcedure
-

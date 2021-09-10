@@ -6,7 +6,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing, Form, Parameters) Export
 	If Form.FormName = "Catalog.Companies.Form.ChoiceForm" Then
 		SetChoiceFormParameters(Form, Parameters);
 	EndIf;
-	
+
 	For Each FilterItem In Parameters.Filter Do
 		If FilterItem.Key = "OurCompany" Then
 			OurCompanyFilter = ?(FilterItem.Value = True, 1, 2);
@@ -17,12 +17,9 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing, Form, Parameters) Export
 			Form.Items.OurCompanyFilter.Enabled = False;
 		EndIf;
 	EndDo;
-	
-	CommonFunctionsClientServer.SetFilterItem(Form.List.Filter.Items,
-		"OurCompany",
-		?(OurCompanyFilter = 1, True, False),
-			DataCompositionComparisonType.Equal,
-			ValueIsFilled(OurCompanyFilter));
+
+	CommonFunctionsClientServer.SetFilterItem(Form.List.Filter.Items, "OurCompany", ?(OurCompanyFilter = 1, True, False),
+		DataCompositionComparisonType.Equal, ValueIsFilled(OurCompanyFilter));
 EndProcedure
 
 Procedure SetChoiceFormParameters(Form, Parameters) Export

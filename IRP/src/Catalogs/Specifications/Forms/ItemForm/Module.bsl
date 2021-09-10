@@ -1,4 +1,3 @@
-
 #Region FormEvents
 
 &AtClient
@@ -13,31 +12,26 @@ Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
 	SavedDataStructure = GetSavedData();
 	// Fill cheking
 	HaveError = False;
-	
-	If Object.Type = Enums.SpecificationType.Bundle
-		And Not ValueIsFilled(Object.ItemBundle) Then
-		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_010, R().Form_026)
-			, "Object.ItemBundle"
-			, ThisObject);
+
+	If Object.Type = Enums.SpecificationType.Bundle And Not ValueIsFilled(Object.ItemBundle) Then
+		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_010, R().Form_026), "Object.ItemBundle",
+			ThisObject);
 		HaveError = True;
 	EndIf;
-	
+
 	For Each Field In SavedDataStructure.Fields Do
 		If Items[Field.Key].AutoMarkIncomplete And Not ValueIsFilled(ThisObject[Field.Value.Item]) Then
-			CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_010, R().Form_027)
-				, Field.Value.Item
-				, ThisObject);
+			CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_010, R().Form_027), Field.Value.Item,
+				ThisObject);
 			HaveError = True;
 		EndIf;
 		If Not ThisObject[Field.Value.Table.Name].Count() Then
-			CommonFunctionsClientServer.ShowUsersMessage(R().Error_011
-				, Field.Value.Table.Name
-				, ThisObject);
+			CommonFunctionsClientServer.ShowUsersMessage(R().Error_011, Field.Value.Table.Name, ThisObject);
 			HaveError = True;
 		EndIf;
 		RowIndex = 0;
 		For Each Row In ThisObject[Field.Value.Table.Name] Do
-			DimensionStr = New Structure;
+			DimensionStr = New Structure();
 			For Each Column In Field.Value.Table.Columns Do
 				If Items[Column.FormName].AutoMarkIncomplete And Not ValueIsFilled(Row[Column.Name]) Then
 					MessageText = "";
@@ -46,9 +40,8 @@ Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
 					Else
 						MessageText = StrTemplate(R().Error_010, String(ThisObject[Column.OwnerName]));
 					EndIf;
-					CommonFunctionsClientServer.ShowUsersMessage(MessageText
-						, Field.Value.Table.Name + "[" + RowIndex + "]." + Column.Name
-						, ThisObject[Field.Value.Table.Name]);
+					CommonFunctionsClientServer.ShowUsersMessage(MessageText, Field.Value.Table.Name + "[" + RowIndex
+						+ "]." + Column.Name, ThisObject[Field.Value.Table.Name]);
 					HaveError = True;
 				EndIf;
 				If Column.Name <> "Quantity" Then
@@ -57,17 +50,16 @@ Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
 			EndDo;
 			// checking for duplicate lines
 			If ThisObject[Field.Value.Table.Name].FindRows(DimensionStr).Count() > 1
-				AND Field.Value.Table.Columns.Count() Then
+				And Field.Value.Table.Columns.Count() Then
 				MessageText = R().Error_013;
-				CommonFunctionsClientServer.ShowUsersMessage(MessageText
-					, Field.Value.Table.Name + "[" + RowIndex + "]." + Field.Value.Table.Columns[0].Name
-					, ThisObject[Field.Value.Table.Name]);
+				CommonFunctionsClientServer.ShowUsersMessage(MessageText, Field.Value.Table.Name + "[" + RowIndex
+					+ "]." + Field.Value.Table.Columns[0].Name, ThisObject[Field.Value.Table.Name]);
 				HaveError = True;
 			EndIf;
 			RowIndex = RowIndex + 1;
 		EndDo;
 	EndDo;
-	
+
 	If HaveError Then
 		Cancel = True;
 		Return;
@@ -105,16 +97,15 @@ EndProcedure
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	LocalizationEvents.CreateMainFormItemDescription(ThisObject, "GroupDescriptions");
 	AddAttributesAndPropertiesServer.OnCreateAtServer(ThisObject);
-	
+
 	If Not ValueIsFilled(Object.Type) Then
 		Object.Type = Enums.SpecificationType.Bundle;
 	EndIf;
-	
+
 	DrawForm();
-	
+
 	If Items.GroupMainPages.ChildItems.Count() Then
-		Items.GroupMainPages.CurrentPage =
-			Items.GroupMainPages.ChildItems[0];
+		Items.GroupMainPages.CurrentPage = Items.GroupMainPages.ChildItems[0];
 	EndIf;
 	SetVisible();
 EndProcedure
@@ -149,17 +140,17 @@ EndProcedure
 
 &AtServer
 Procedure RestoreData()
-	
+
 	ValueTable_Item = Object.DataSet.Unload();
 	ValueTable_Item.GroupBy("Item");
-	
+
 	For Each Row_Item In ValueTable_Item Do
 		PageInfo = CreatePage();
 		SavedDataStructure = GetSavedData();
 		ThisObject[SavedDataStructure.Fields[PageInfo.Field].Item] = Row_Item.Item;
 		ItemOnChangeAtServer(PageInfo.Field);
 		SavedDataStructure = GetSavedData();
-		
+
 		DataQuantity = GetDataQuantity(Row_Item.Item);
 		For Each Row In DataQuantity Do
 			NewRow = ThisObject[SavedDataStructure.Fields[PageInfo.Field].Table.Name].Add();
@@ -171,7 +162,7 @@ Procedure RestoreData()
 				NewRow[Column.Name] = GetAttributeValue(Row.Key, ThisObject[Column.OwnerName]);
 			EndDo;
 		EndDo;
-		
+
 	EndDo;
 EndProcedure
 
@@ -180,10 +171,10 @@ Function GetDataQuantity(Item)
 	TableOfResult = New ValueTable();
 	TableOfResult.Columns.Add("Quantity");
 	TableOfResult.Columns.Add("Key");
-	
+
 	TableOfKeys = Object.DataSet.Unload(New Structure("Item", Item));
 	TableOfKeys.GroupBy("Key");
-	
+
 	For Each Row In TableOfKeys Do
 		For Each RowQuantity In Object.DataQuantity.Unload(New Structure("Key", Row.Key), "Key, Quantity") Do
 			NewRow = TableOfResult.Add();
@@ -214,23 +205,18 @@ EndProcedure
 
 &AtServer
 Function CreatePage()
-	
+
 	SavedDataStructure = GetSavedData();
 	
 	// Page
-	NewPage = Items.Insert(GetUniqueName("Page")
-			, Type("FormGroup")
-			, Items.GroupMainPages
-			, Items.GroupAddNewPage);
+	NewPage = Items.Insert(GetUniqueName("Page"), Type("FormGroup"), Items.GroupMainPages, Items.GroupAddNewPage);
 	NewPage.Type = FormGroupType.Page;
 	NewPage.Title = R().Form_001;
-	
+
 	Items.GroupMainPages.CurrentPage = NewPage;
 	
 	// HorizontalGroup
-	NewHorizontalGroup = Items.Add(GetUniqueName("HorizontalGroup")
-			, Type("FormGroup")
-			, NewPage);
+	NewHorizontalGroup = Items.Add(GetUniqueName("HorizontalGroup"), Type("FormGroup"), NewPage);
 	NewHorizontalGroup.Type = FormGroupType.UsualGroup;
 	NewHorizontalGroup.Representation = UsualGroupRepresentation.None;
 	NewHorizontalGroup.Group = ChildFormItemsGroup.AlwaysHorizontal;
@@ -242,9 +228,7 @@ Function CreatePage()
 	NewCommand.ModifiesStoredData = True;
 	
 	// Button - DeletePage
-	NewButton = Items.Add(GetUniqueName("DeleteButton")
-			, Type("FormButton")
-			, NewHorizontalGroup);
+	NewButton = Items.Add(GetUniqueName("DeleteButton"), Type("FormButton"), NewHorizontalGroup);
 	NewButton.CommandName = NewCommand.Name;
 	NewButton.Picture = PictureLib.Delete;
 	NewButton.Representation = ButtonRepresentation.PictureAndText;
@@ -252,27 +236,22 @@ Function CreatePage()
 	
 	// Attribute - Item
 	ArrayOfAttributes = New Array();
-	
+
 	MapOfTypeDescriptions = New Map();
 	MapOfTypeDescriptions.Insert(Enums.SpecificationType.Bundle, New TypeDescription("CatalogRef.Items"));
 	MapOfTypeDescriptions.Insert(Enums.SpecificationType.Set, New TypeDescription("CatalogRef.ItemTypes"));
-	
+
 	MapOfFieldTitle = New Map();
 	MapOfFieldTitle.Insert(Enums.SpecificationType.Bundle, R().Form_027);
 	MapOfFieldTitle.Insert(Enums.SpecificationType.Set, R().Form_028);
-	
-	NewAttribute = New FormAttribute(GetUniqueName("Item")
-			, MapOfTypeDescriptions.Get(Object.Type)
-			, ""
-			, MapOfFieldTitle.Get(Object.Type)
-			, True);
+
+	NewAttribute = New FormAttribute(GetUniqueName("Item"), MapOfTypeDescriptions.Get(Object.Type), "",
+		MapOfFieldTitle.Get(Object.Type), True);
 	ArrayOfAttributes.Add(NewAttribute);
 	ThisObject.ChangeAttributes(ArrayOfAttributes);
 	
 	// Field - Item
-	NewField = Items.Add(GetUniqueName("ItemField")
-			, Type("FormField")
-			, NewHorizontalGroup);
+	NewField = Items.Add(GetUniqueName("ItemField"), Type("FormField"), NewHorizontalGroup);
 	NewField.Type = FormFieldType.InputField;
 	NewField.DataPath = NewAttribute.Name;
 	NewField.AutoMarkIncomplete = True;
@@ -280,52 +259,38 @@ Function CreatePage()
 	
 	// Table
 	ArrayOfAttributes = New Array();
-	NewTable = New FormAttribute(GetUniqueName("AttributesTable")
-			, New TypeDescription("ValueTable")
-			, ""
-			, ""
-			, True);
+	NewTable = New FormAttribute(GetUniqueName("AttributesTable"), New TypeDescription("ValueTable"), "", "", True);
 	ArrayOfAttributes.Add(NewTable);
-	
+
 	NewColumn = New FormAttribute("Quantity", Metadata.DefinedTypes.typeQuantity.Type, NewTable.Name, R().Form_003);
 	ArrayOfAttributes.Add(NewColumn);
 	ThisObject.ChangeAttributes(ArrayOfAttributes);
 	
 	// FormTable
-	NewFormTable = Items.Add(GetUniqueName("FormTable")
-			, Type("FormTable")
-			, NewPage);
+	NewFormTable = Items.Add(GetUniqueName("FormTable"), Type("FormTable"), NewPage);
 	NewFormTable.DataPath = NewTable.Name;
-	
+
 	NewFormColumn = Items.Add(NewFormTable.Name + "Quantity", Type("FormField"), NewFormTable);
 	NewFormColumn.Type = FormFieldType.InputField;
 	NewFormColumn.DataPath = NewTable.Name + "." + NewColumn.Name;
 	NewFormColumn.AutoMarkIncomplete = True;
-	
-	Table = New Structure("Name, FormTableName, Columns"
-			, NewTable.Name
-			, NewFormTable.Name
-			, New Array());
+
+	Table = New Structure("Name, FormTableName, Columns", NewTable.Name, NewFormTable.Name, New Array());
 	ColumnStructure = New Structure();
 	ColumnStructure.Insert("Name", NewColumn.Name);
 	ColumnStructure.Insert("DataPath", NewTable.Name + "." + NewColumn.Name);
 	ColumnStructure.Insert("OwnerName", Undefined);
 	ColumnStructure.Insert("FormName", NewFormColumn.Name);
 	Table.Columns.Add(ColumnStructure);
-	
-	SavedDataStructure.Fields.Insert(NewField.Name,
-		New Structure("Item, Page, Table"
-			, NewAttribute.Name
-			, NewPage.Name
-			, Table));
-	
-	SavedDataStructure.Commands.Insert(NewCommand.Name,
-		New Structure("ButtonName, ItemField"
-			, NewButton.Name
-			, NewField.Name));
-	
+
+	SavedDataStructure.Fields.Insert(NewField.Name, New Structure("Item, Page, Table", NewAttribute.Name, NewPage.Name,
+		Table));
+
+	SavedDataStructure.Commands.Insert(NewCommand.Name, New Structure("ButtonName, ItemField", NewButton.Name,
+		NewField.Name));
+
 	SetSavedData(SavedDataStructure);
-	
+
 	Return New Structure("Field", NewField.Name);
 EndFunction
 
@@ -337,11 +302,11 @@ EndProcedure
 &AtServer
 Procedure ItemOnChangeAtServer(ItemName)
 	SavedDataStructure = GetSavedData();
-	
+
 	Item = ThisObject[SavedDataStructure.Fields[ItemName].Item];
-	
+
 	Items[SavedDataStructure.Fields[ItemName].Page].Title = ?(ValueIsFilled(Item), String(Item), R().Form_001);
-	
+
 	Table = SavedDataStructure.Fields[ItemName].Table;
 	// Delete/Create column
 	ArrayOfAttributes = New Array();
@@ -352,15 +317,15 @@ Procedure ItemOnChangeAtServer(ItemName)
 			ArrayOfAttributes.Add(Column.OwnerName);
 		EndIf;
 	EndDo;
-	
+
 	ThisObject.ChangeAttributes( , ArrayOfAttributes);
-	
+
 	Table.Columns.Clear();
 	ChoiceParametersMap = New Map();
 	ArrayOfAttributes = New Array();
-	
+
 	If ValueIsFilled(Item) Then
-		
+
 		For Each i In GetItemAttributes(Item).FormAttributesInfo Do
 			ColumnName = Table.Name + i.Name;
 			ColumnOwnerName = Table.Name + i.Name_owner;
@@ -370,28 +335,28 @@ Procedure ItemOnChangeAtServer(ItemName)
 			ColumnStructure.Insert("OwnerName", ColumnOwnerName);
 			ColumnStructure.Insert("FormName", "");
 			Table.Columns.Add(ColumnStructure);
-			
+
 			NewColumn = New FormAttribute(ColumnName, i.Type, Table.Name, i.Title);
 			ArrayOfAttributes.Add(NewColumn);
-			
+
 			NewColumnOwner = New FormAttribute(ColumnOwnerName, i.Type_owner);
 			ArrayOfAttributes.Add(NewColumnOwner);
-			
+
 			ChoiceParametersMap.Insert(ColumnName, New Structure(Table.Name + i.Name_owner, i.Ref));
 		EndDo;
-		
+
 	EndIf;
-	
+
 	QuantityColumn = New FormAttribute("Quantity", Metadata.DefinedTypes.typeQuantity.Type, Table.Name, R().Form_003);
 	ArrayOfAttributes.Add(QuantityColumn);
-	
+
 	ColumnStructure = New Structure();
 	ColumnStructure.Insert("Name", QuantityColumn.Name);
 	ColumnStructure.Insert("DataPath", Table.Name + "." + QuantityColumn.Name);
 	ColumnStructure.Insert("OwnerName", Undefined);
 	ColumnStructure.Insert("FormName", "");
 	Table.Columns.Add(ColumnStructure);
-	
+
 	ThisObject.ChangeAttributes(ArrayOfAttributes);
 	
 	// Form columns	
@@ -400,17 +365,15 @@ Procedure ItemOnChangeAtServer(ItemName)
 			ThisObject[j.Key] = j.Value;
 		EndDo;
 	EndDo;
-	
+
 	For Each Column In Table.Columns Do
-		NewFormColumn = Items.Add(GetUniqueName(Column.Name)
-				, Type("FormField")
-				, Items[Table.FormTableName]);
+		NewFormColumn = Items.Add(GetUniqueName(Column.Name), Type("FormField"), Items[Table.FormTableName]);
 		NewFormColumn.Type = FormFieldType.InputField;
 		NewFormColumn.DataPath = Table.Name + "." + Column.Name;
 		NewFormColumn.AutoMarkIncomplete = True;
-		
+
 		Column.FormName = NewFormColumn.Name;
-		
+
 		If ChoiceParametersMap.Get(Column.Name) <> Undefined Then
 			ArrayOfChoiceParameters = New Array();
 			For Each i In ChoiceParametersMap[Column.Name] Do
@@ -419,7 +382,7 @@ Procedure ItemOnChangeAtServer(ItemName)
 			NewFormColumn.ChoiceParameters = New FixedArray(ArrayOfChoiceParameters);
 		EndIf;
 	EndDo;
-	
+
 	SetSavedData(SavedDataStructure);
 EndProcedure
 
@@ -455,17 +418,17 @@ Function GetItemAttributes(Item)
 		If ValueIsFilled(Item) Then
 			AvailableAttributes = Item.AvailableAttributes;
 		EndIf;
-	Else 
+	Else
 		AvailableAttributes = Undefined;
 	EndIf;
-	
+
 	If AvailableAttributes <> Undefined Then
 		ArrayOfAttributes = New Array();
 		For Each Row In AvailableAttributes Do
 			AttributeStructure = New Structure("Attribute, InterfaceGroup", Row.Attribute, Undefined);
 			ArrayOfAttributes.Add(AttributeStructure);
 		EndDo;
-		
+
 		Return AddAttributesAndPropertiesServer.FormAttributes(ArrayOfAttributes);
 	Else
 		Return Undefined;

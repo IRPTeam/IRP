@@ -8,10 +8,8 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:MultiLanguageDataPath">
-      <paths xsi:type="form:DataPath">
-        <segments>Object.Enabled</segments>
-      </paths>
+    <dataPath xsi:type="form:DataPath">
+      <segments>Object.Enabled</segments>
     </dataPath>
     <extendedTooltip>
       <name>EnabledExtendedTooltip</name>
@@ -53,10 +51,8 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:MultiLanguageDataPath">
-      <paths xsi:type="form:DataPath">
-        <segments>Object.Code</segments>
-      </paths>
+    <dataPath xsi:type="form:DataPath">
+      <segments>Object.Code</segments>
     </dataPath>
     <extendedTooltip>
       <name>CodeExtendedTooltip</name>
@@ -105,10 +101,8 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:MultiLanguageDataPath">
-      <paths xsi:type="form:DataPath">
-        <segments>Object.Description</segments>
-      </paths>
+    <dataPath xsi:type="form:DataPath">
+      <segments>Object.Description</segments>
     </dataPath>
     <extendedTooltip>
       <name>DescriptionExtendedTooltip</name>
@@ -157,10 +151,8 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:MultiLanguageDataPath">
-      <paths xsi:type="form:DataPath">
-        <segments>Object.EquipmentType</segments>
-      </paths>
+    <dataPath xsi:type="form:DataPath">
+      <segments>Object.EquipmentType</segments>
     </dataPath>
     <extendedTooltip>
       <name>EquipmentTypeExtendedTooltip</name>
@@ -209,10 +201,8 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:MultiLanguageDataPath">
-      <paths xsi:type="form:DataPath">
-        <segments>Object.Driver</segments>
-      </paths>
+    <dataPath xsi:type="form:DataPath">
+      <segments>Object.Driver</segments>
     </dataPath>
     <extendedTooltip>
       <name>DriverExtendedTooltip</name>
@@ -261,10 +251,8 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:MultiLanguageDataPath">
-      <paths xsi:type="form:DataPath">
-        <segments>Object.Workstation</segments>
-      </paths>
+    <dataPath xsi:type="form:DataPath">
+      <segments>Object.Workstation</segments>
     </dataPath>
     <extendedTooltip>
       <name>WorkstationExtendedTooltip</name>
@@ -325,10 +313,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>Object.ConnectParameters.LineNumber</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>Object.ConnectParameters.LineNumber</segments>
       </dataPath>
       <extendedTooltip>
         <name>ConnectParametersLineNumberExtendedTooltip</name>
@@ -373,10 +359,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>Object.ConnectParameters.Name</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>Object.ConnectParameters.Name</segments>
       </dataPath>
       <extendedTooltip>
         <name>ConnectParametersNameExtendedTooltip</name>
@@ -425,10 +409,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>Object.ConnectParameters.Value</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>Object.ConnectParameters.Value</segments>
       </dataPath>
       <extendedTooltip>
         <name>ConnectParametersValueExtendedTooltip</name>
@@ -500,6 +482,7 @@
         <autoMaxWidth>true</autoMaxWidth>
         <autoMaxHeight>true</autoMaxHeight>
         <placementArea>UserCmds</placementArea>
+        <toolTipRepresentation>Auto</toolTipRepresentation>
         <representationInContextMenu>Auto</representationInContextMenu>
       </items>
       <visible>true</visible>
@@ -703,6 +686,7 @@
       <autoMaxWidth>true</autoMaxWidth>
       <autoMaxHeight>true</autoMaxHeight>
       <placementArea>UserCmds</placementArea>
+      <toolTipRepresentation>Auto</toolTipRepresentation>
       <representationInContextMenu>Auto</representationInContextMenu>
     </items>
     <visible>true</visible>

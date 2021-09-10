@@ -12,10 +12,8 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:MultiLanguageDataPath">
-      <paths xsi:type="form:DataPath">
-        <segments>UserOrGroup</segments>
-      </paths>
+    <dataPath xsi:type="form:DataPath">
+      <segments>UserOrGroup</segments>
     </dataPath>
     <extendedTooltip>
       <name>UserOrGroupExtendedTooltip</name>
@@ -73,10 +71,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>MetadataTree.Use</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>MetadataTree.Use</segments>
       </dataPath>
       <titleLocation>None</titleLocation>
       <extendedTooltip>
@@ -122,10 +118,8 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:MultiLanguageDataPath">
-          <paths xsi:type="form:DataPath">
-            <segments>MetadataTree.PictureIndex</segments>
-          </paths>
+        <dataPath xsi:type="form:DataPath">
+          <segments>MetadataTree.PictureIndex</segments>
         </dataPath>
         <titleLocation>None</titleLocation>
         <extendedTooltip>
@@ -177,10 +171,8 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:MultiLanguageDataPath">
-          <paths xsi:type="form:DataPath">
-            <segments>MetadataTree.GroupName</segments>
-          </paths>
+        <dataPath xsi:type="form:DataPath">
+          <segments>MetadataTree.GroupName</segments>
         </dataPath>
         <titleLocation>None</titleLocation>
         <extendedTooltip>
@@ -231,10 +223,8 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:MultiLanguageDataPath">
-          <paths xsi:type="form:DataPath">
-            <segments>MetadataTree.Synonym</segments>
-          </paths>
+        <dataPath xsi:type="form:DataPath">
+          <segments>MetadataTree.Synonym</segments>
         </dataPath>
         <titleLocation>None</titleLocation>
         <extendedTooltip>
@@ -315,10 +305,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>MetadataTree.Value</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>MetadataTree.Value</segments>
       </dataPath>
       <handlers>
         <event>OnChange</event>
@@ -376,10 +364,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>MetadataTree.ValueFromGroup</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>MetadataTree.ValueFromGroup</segments>
       </dataPath>
       <extendedTooltip>
         <name>MetadataTreeValueFromGroupExtendedTooltip</name>
@@ -451,6 +437,7 @@
         <autoMaxWidth>true</autoMaxWidth>
         <autoMaxHeight>true</autoMaxHeight>
         <placementArea>UserCmds</placementArea>
+        <toolTipRepresentation>Auto</toolTipRepresentation>
         <representationInContextMenu>Auto</representationInContextMenu>
       </items>
       <items xsi:type="form:Button">
@@ -480,6 +467,7 @@
         <autoMaxWidth>true</autoMaxWidth>
         <autoMaxHeight>true</autoMaxHeight>
         <placementArea>UserCmds</placementArea>
+        <toolTipRepresentation>Auto</toolTipRepresentation>
         <representationInContextMenu>Auto</representationInContextMenu>
       </items>
       <items xsi:type="form:FormGroup">
@@ -513,6 +501,7 @@
           <autoMaxWidth>true</autoMaxWidth>
           <autoMaxHeight>true</autoMaxHeight>
           <placementArea>UserCmds</placementArea>
+          <toolTipRepresentation>Auto</toolTipRepresentation>
           <representationInContextMenu>Auto</representationInContextMenu>
         </items>
         <items xsi:type="form:Button">
@@ -543,6 +532,7 @@
           <autoMaxWidth>true</autoMaxWidth>
           <autoMaxHeight>true</autoMaxHeight>
           <placementArea>UserCmds</placementArea>
+          <toolTipRepresentation>Auto</toolTipRepresentation>
           <representationInContextMenu>Auto</representationInContextMenu>
         </items>
         <visible>true</visible>
@@ -775,6 +765,7 @@
       <autoMaxWidth>true</autoMaxWidth>
       <autoMaxHeight>true</autoMaxHeight>
       <placementArea>UserCmds</placementArea>
+      <toolTipRepresentation>Auto</toolTipRepresentation>
       <representationInContextMenu>Auto</representationInContextMenu>
     </items>
     <items xsi:type="form:Button">
@@ -805,6 +796,7 @@
       <autoMaxWidth>true</autoMaxWidth>
       <autoMaxHeight>true</autoMaxHeight>
       <placementArea>UserCmds</placementArea>
+      <toolTipRepresentation>Auto</toolTipRepresentation>
       <representationInContextMenu>Auto</representationInContextMenu>
     </items>
     <visible>true</visible>

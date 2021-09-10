@@ -26,6 +26,7 @@
     <type>UsualGroup</type>
     <extInfo xsi:type="form:UsualGroupExtInfo">
       <group>HorizontalIfPossible</group>
+      <behavior>Auto</behavior>
       <showLeftMargin>true</showLeftMargin>
       <united>true</united>
       <throughAlign>Auto</throughAlign>
@@ -43,10 +44,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>Object.ForAllUsers</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>Object.ForAllUsers</segments>
       </dataPath>
       <handlers>
         <event>OnChange</event>
@@ -92,10 +91,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>Object.SetOneRuleForAllObjects</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>Object.SetOneRuleForAllObjects</segments>
       </dataPath>
       <handlers>
         <event>OnChange</event>
@@ -184,10 +181,8 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:MultiLanguageDataPath">
-          <paths xsi:type="form:DataPath">
-            <segments>Object.DisableRule</segments>
-          </paths>
+        <dataPath xsi:type="form:DataPath">
+          <segments>Object.DisableRule</segments>
         </dataPath>
         <extendedTooltip>
           <name>DisableRuleExtendedTooltip</name>
@@ -248,6 +243,7 @@
       <type>UsualGroup</type>
       <extInfo xsi:type="form:UsualGroupExtInfo">
         <group>HorizontalIfPossible</group>
+        <behavior>Auto</behavior>
         <showLeftMargin>true</showLeftMargin>
         <united>true</united>
         <backColor xsi:type="core:ColorRef">
@@ -285,6 +281,7 @@
     <type>UsualGroup</type>
     <extInfo xsi:type="form:UsualGroupExtInfo">
       <group>HorizontalIfPossible</group>
+      <behavior>Auto</behavior>
       <showLeftMargin>true</showLeftMargin>
       <united>true</united>
       <throughAlign>Auto</throughAlign>
@@ -302,10 +299,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>Object.Attribute</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>Object.Attribute</segments>
       </dataPath>
       <defaultItem>true</defaultItem>
       <extendedTooltip>
@@ -360,10 +355,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>Object.ComparisonType</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>Object.ComparisonType</segments>
       </dataPath>
       <extendedTooltip>
         <name>ComparisonTypeExtendedTooltip</name>
@@ -414,10 +407,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>Object.Value</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>Object.Value</segments>
       </dataPath>
       <extendedTooltip>
         <name>ValueExtendedTooltip</name>
@@ -470,10 +461,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>Object.SetValueAsCode</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>Object.SetValueAsCode</segments>
       </dataPath>
       <extendedTooltip>
         <name>SetValueAsCodeExtendedTooltip</name>
@@ -534,6 +523,7 @@
     <type>UsualGroup</type>
     <extInfo xsi:type="form:UsualGroupExtInfo">
       <group>AlwaysHorizontal</group>
+      <behavior>Auto</behavior>
       <showLeftMargin>true</showLeftMargin>
       <united>true</united>
       <showTitle>true</showTitle>
@@ -567,10 +557,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.RuleList.LineNumber</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.RuleList.LineNumber</segments>
           </dataPath>
           <extendedTooltip>
             <name>RuleListLineNumberExtendedTooltip</name>
@@ -619,10 +607,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.RuleList.Type</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.RuleList.Type</segments>
           </dataPath>
           <extendedTooltip>
             <name>RuleListTypeExtendedTooltip</name>
@@ -671,10 +657,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.RuleList.Attribute</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.RuleList.Attribute</segments>
           </dataPath>
           <extendedTooltip>
             <name>RuleListAttributeExtendedTooltip</name>
@@ -728,10 +712,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.RuleList.ComparisonType</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.RuleList.ComparisonType</segments>
           </dataPath>
           <extendedTooltip>
             <name>RuleListComparisonTypeExtendedTooltip</name>
@@ -781,10 +763,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.RuleList.Value</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.RuleList.Value</segments>
           </dataPath>
           <extendedTooltip>
             <name>RuleListValueExtendedTooltip</name>
@@ -837,10 +817,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.RuleList.DisableRule</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.RuleList.DisableRule</segments>
           </dataPath>
           <extendedTooltip>
             <name>RuleListDisableRuleExtendedTooltip</name>
@@ -882,10 +860,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.RuleList.SetValueAsCode</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.RuleList.SetValueAsCode</segments>
           </dataPath>
           <extendedTooltip>
             <name>RuleListSetValueAsCodeExtendedTooltip</name>
@@ -1141,10 +1117,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.UserList.LineNumber</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.UserList.LineNumber</segments>
           </dataPath>
           <extendedTooltip>
             <name>UserListLineNumberExtendedTooltip</name>
@@ -1193,10 +1167,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.UserList.User</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.UserList.User</segments>
           </dataPath>
           <extendedTooltip>
             <name>UserListUserExtendedTooltip</name>
@@ -1459,10 +1431,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.AccessGroupList.LineNumber</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.AccessGroupList.LineNumber</segments>
           </dataPath>
           <extendedTooltip>
             <name>AccessGroupListLineNumberExtendedTooltip</name>
@@ -1511,10 +1481,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.AccessGroupList.AccessGroup</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.AccessGroupList.AccessGroup</segments>
           </dataPath>
           <extendedTooltip>
             <name>AccessGroupListAccessGroupExtendedTooltip</name>
@@ -1780,7 +1748,7 @@
     </extendedTooltip>
     <type>Pages</type>
     <extInfo xsi:type="form:PagesGroupExtInfo">
-      <pagesRepresentation>TabsOnTop</pagesRepresentation>
+      <pagesRepresentation>Auto</pagesRepresentation>
       <currentRowUse>Auto</currentRowUse>
     </extInfo>
   </items>

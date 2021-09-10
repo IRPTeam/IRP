@@ -31,6 +31,7 @@
     <type>UsualGroup</type>
     <extInfo xsi:type="form:UsualGroupExtInfo">
       <group>Vertical</group>
+      <behavior>Auto</behavior>
       <representation>WeakSeparation</representation>
       <showLeftMargin>true</showLeftMargin>
       <united>true</united>
@@ -59,10 +60,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>List.Code</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>List.Code</segments>
       </dataPath>
       <extendedTooltip>
         <name>CodeExtendedTooltip</name>
@@ -111,10 +110,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>List.Description</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>List.Description</segments>
       </dataPath>
       <defaultItem>true</defaultItem>
       <extendedTooltip>
@@ -160,10 +157,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>List.Volume</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>List.Volume</segments>
       </dataPath>
       <extendedTooltip>
         <name>VolumeExtendedTooltip</name>
@@ -208,10 +203,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>List.URI</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>List.URI</segments>
       </dataPath>
       <extendedTooltip>
         <name>URIExtendedTooltip</name>
@@ -256,10 +249,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>List.FileID</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>List.FileID</segments>
       </dataPath>
       <extendedTooltip>
         <name>FileIDExtendedTooltip</name>
@@ -304,10 +295,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>List.Height</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>List.Height</segments>
       </dataPath>
       <extendedTooltip>
         <name>HeightExtendedTooltip</name>
@@ -352,10 +341,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>List.Width</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>List.Width</segments>
       </dataPath>
       <extendedTooltip>
         <name>WidthExtendedTooltip</name>
@@ -400,10 +387,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>List.SizeBytes</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>List.SizeBytes</segments>
       </dataPath>
       <extendedTooltip>
         <name>SizeBytesExtendedTooltip</name>
@@ -448,10 +433,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>List.Extension</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>List.Extension</segments>
       </dataPath>
       <extendedTooltip>
         <name>ExtensionExtendedTooltip</name>
@@ -496,10 +479,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>List.MD5</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>List.MD5</segments>
       </dataPath>
       <extendedTooltip>
         <name>MD5ExtendedTooltip</name>
@@ -544,10 +525,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>List.Ref</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>List.Ref</segments>
       </dataPath>
       <extendedTooltip>
         <name>RefExtendedTooltip</name>
@@ -805,6 +784,7 @@
       <autoMaxWidth>true</autoMaxWidth>
       <autoMaxHeight>true</autoMaxHeight>
       <placementArea>UserCmds</placementArea>
+      <toolTipRepresentation>Auto</toolTipRepresentation>
       <representationInContextMenu>Auto</representationInContextMenu>
     </items>
     <visible>true</visible>

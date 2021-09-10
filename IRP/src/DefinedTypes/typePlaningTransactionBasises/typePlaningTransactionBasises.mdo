@@ -11,11 +11,11 @@
   <type>
     <types>DocumentRef.CashTransferOrder</types>
     <types>DocumentRef.IncomingPaymentOrder</types>
-    <types>DocumentRef.OutgoingPaymentOrder</types>
-    <types>DocumentRef.CashStatement</types>
-    <types>DocumentRef.SalesInvoice</types>
-    <types>DocumentRef.SalesOrder</types>
     <types>DocumentRef.PurchaseInvoice</types>
     <types>DocumentRef.PurchaseOrder</types>
+    <types>DocumentRef.OutgoingPaymentOrder</types>
+    <types>DocumentRef.SalesOrder</types>
+    <types>DocumentRef.CashStatement</types>
+    <types>DocumentRef.SalesInvoice</types>
   </type>
 </mdclass:DefinedType>

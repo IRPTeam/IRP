@@ -31,6 +31,7 @@
     <type>UsualGroup</type>
     <extInfo xsi:type="form:UsualGroupExtInfo">
       <group>Vertical</group>
+      <behavior>Auto</behavior>
       <representation>WeakSeparation</representation>
       <showLeftMargin>true</showLeftMargin>
       <united>true</united>
@@ -59,10 +60,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>List.Code</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>List.Code</segments>
       </dataPath>
       <extendedTooltip>
         <name>CodeExtendedTooltip</name>
@@ -115,10 +114,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>List.Description</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>List.Description</segments>
       </dataPath>
       <extendedTooltip>
         <name>DescriptionExtendedTooltip</name>
@@ -171,10 +168,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>List.Kind</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>List.Kind</segments>
       </dataPath>
       <extendedTooltip>
         <name>KindExtendedTooltip</name>
@@ -227,10 +222,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>List.ApArPostingDetail</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>List.ApArPostingDetail</segments>
       </dataPath>
       <extendedTooltip>
         <name>ApArPostingDetailExtendedTooltip</name>
@@ -277,10 +270,8 @@
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible/>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>List.Ref</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>List.Ref</segments>
       </dataPath>
       <extendedTooltip>
         <name>RefExtendedTooltip</name>

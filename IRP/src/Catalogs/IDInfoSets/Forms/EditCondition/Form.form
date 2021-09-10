@@ -43,6 +43,7 @@
         <autoMaxWidth>true</autoMaxWidth>
         <autoMaxHeight>true</autoMaxHeight>
         <placementArea>UserCmds</placementArea>
+        <toolTipRepresentation>Auto</toolTipRepresentation>
       </items>
       <items xsi:type="form:Button">
         <name>SettingsFilterAddFilterItemGroup</name>
@@ -72,6 +73,7 @@
         <autoMaxWidth>true</autoMaxWidth>
         <autoMaxHeight>true</autoMaxHeight>
         <placementArea>UserCmds</placementArea>
+        <toolTipRepresentation>Auto</toolTipRepresentation>
         <locationInCommandBar>InCommandBarAndInAdditionalSubmenu</locationInCommandBar>
       </items>
       <items xsi:type="form:Button">
@@ -102,6 +104,7 @@
         <autoMaxWidth>true</autoMaxWidth>
         <autoMaxHeight>true</autoMaxHeight>
         <placementArea>UserCmds</placementArea>
+        <toolTipRepresentation>Auto</toolTipRepresentation>
       </items>
       <items xsi:type="form:Button">
         <name>MoveUp</name>
@@ -131,6 +134,7 @@
         <autoMaxWidth>true</autoMaxWidth>
         <autoMaxHeight>true</autoMaxHeight>
         <placementArea>UserCmds</placementArea>
+        <toolTipRepresentation>Auto</toolTipRepresentation>
       </items>
       <items xsi:type="form:Button">
         <name>SettingsFilterMoveDown</name>
@@ -160,6 +164,7 @@
         <autoMaxWidth>true</autoMaxWidth>
         <autoMaxHeight>true</autoMaxHeight>
         <placementArea>UserCmds</placementArea>
+        <toolTipRepresentation>Auto</toolTipRepresentation>
       </items>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -357,10 +362,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>ResultTable.Ref</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>ResultTable.Ref</segments>
       </dataPath>
       <extendedTooltip>
         <name>ResultTableRefExtendedTooltip</name>
@@ -433,6 +436,7 @@
         <autoMaxWidth>true</autoMaxWidth>
         <autoMaxHeight>true</autoMaxHeight>
         <placementArea>UserCmds</placementArea>
+        <toolTipRepresentation>Auto</toolTipRepresentation>
       </items>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -632,6 +636,7 @@
       <autoMaxWidth>true</autoMaxWidth>
       <autoMaxHeight>true</autoMaxHeight>
       <placementArea>UserCmds</placementArea>
+      <toolTipRepresentation>Auto</toolTipRepresentation>
     </items>
     <items xsi:type="form:Button">
       <name>Cancel</name>
@@ -661,6 +666,7 @@
       <autoMaxWidth>true</autoMaxWidth>
       <autoMaxHeight>true</autoMaxHeight>
       <placementArea>UserCmds</placementArea>
+      <toolTipRepresentation>Auto</toolTipRepresentation>
     </items>
     <visible>true</visible>
     <enabled>true</enabled>

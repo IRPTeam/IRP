@@ -44,6 +44,7 @@
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
+      <fillValue xsi:type="core:UndefinedValue"/>
     </attributes>
     <attributes uuid="2dee50a0-fa19-4d5e-9aa2-e77b18767708">
       <name>ItemKey</name>
@@ -57,6 +58,7 @@
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
       <fillChecking>ShowError</fillChecking>
+      <fillValue xsi:type="core:UndefinedValue"/>
     </attributes>
     <attributes uuid="0c940dc0-1154-421d-8778-2981c9b2e3d3">
       <name>Unit</name>
@@ -69,6 +71,7 @@
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
+      <fillValue xsi:type="core:UndefinedValue"/>
     </attributes>
     <attributes uuid="1ca49b3e-f959-45a2-8c9d-d08352d4ebcd">
       <name>Quantity</name>
@@ -81,6 +84,7 @@
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
+      <fillValue xsi:type="core:UndefinedValue"/>
     </attributes>
     <attributes uuid="8edb82e4-1177-4938-adcf-964f2e03ab53">
       <name>ScannedQuantity</name>
@@ -93,6 +97,7 @@
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
+      <fillValue xsi:type="core:UndefinedValue"/>
     </attributes>
   </tabularSections>
   <forms uuid="2c533795-bfcc-4d37-b4c7-055e4d38192e">

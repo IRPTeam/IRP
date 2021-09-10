@@ -177,6 +177,10 @@
     <use>Use</use>
   </content>
   <content>
+    <metadata>Catalog.PartnerItems</metadata>
+    <use>Use</use>
+  </content>
+  <content>
     <metadata>Catalog.PriceTypes</metadata>
     <use>Use</use>
   </content>
@@ -210,10 +214,6 @@
   </content>
   <content>
     <metadata>ChartOfCharacteristicTypes.IDInfoTypes</metadata>
-    <use>Use</use>
-  </content>
-  <content>
-    <metadata>Catalog.PartnerItems</metadata>
     <use>Use</use>
   </content>
   <autoUse>DontUse</autoUse>

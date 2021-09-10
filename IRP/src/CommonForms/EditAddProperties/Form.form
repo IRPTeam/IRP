@@ -20,10 +20,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>Properties.Property</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>Properties.Property</segments>
       </dataPath>
       <extendedTooltip>
         <name>PropertiesPropertyExtendedTooltip</name>
@@ -73,10 +71,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>Properties.Value</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>Properties.Value</segments>
       </dataPath>
       <extendedTooltip>
         <name>PropertiesValueExtendedTooltip</name>
@@ -333,6 +329,7 @@
       <autoMaxWidth>true</autoMaxWidth>
       <autoMaxHeight>true</autoMaxHeight>
       <placementArea>UserCmds</placementArea>
+      <toolTipRepresentation>Auto</toolTipRepresentation>
     </items>
     <items xsi:type="form:Button">
       <name>FormSave</name>
@@ -362,6 +359,7 @@
       <autoMaxWidth>true</autoMaxWidth>
       <autoMaxHeight>true</autoMaxHeight>
       <placementArea>UserCmds</placementArea>
+      <toolTipRepresentation>Auto</toolTipRepresentation>
     </items>
     <visible>true</visible>
     <enabled>true</enabled>

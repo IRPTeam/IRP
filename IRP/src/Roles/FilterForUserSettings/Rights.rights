@@ -57,6 +57,13 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.BankReceipt.TabularSection.PaymentList.Attribute.ExpenseType</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.ShipmentConfirmation.Attribute.Company</name>
 		<right>
 			<name>View</name>
@@ -79,6 +86,13 @@
 	</object>
 	<object>
 		<name>Document.RetailReturnReceipt.Attribute.Partner</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.CashExpense.TabularSection.PaymentList.Attribute.FinancialMovementType</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -118,6 +132,13 @@
 	</object>
 	<object>
 		<name>Document.SalesOrder.Attribute.Partner</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.CashRevenue.TabularSection.PaymentList</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -247,6 +268,13 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.CashRevenue.TabularSection.PaymentList.Attribute.ProfitLossCenter</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.SalesReturn</name>
 		<right>
 			<name>Read</name>
@@ -263,6 +291,13 @@
 			<name>Read</name>
 			<value>true</value>
 		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.CashPayment.TabularSection.PaymentList.Attribute.FinancialMovementType</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -298,6 +333,13 @@
 	</object>
 	<object>
 		<name>Document.CreditNote.TabularSection.Transactions.Attribute.ProfitLossCenter</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.CashReceipt.TabularSection.PaymentList</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -346,6 +388,13 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.StockAdjustmentAsSurplus.TabularSection.ItemList</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.PlannedReceiptReservation.Attribute.Company</name>
 		<right>
 			<name>View</name>
@@ -386,6 +435,13 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.StockAdjustmentAsSurplus.Attribute.Company</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Catalog.Partners.Attribute.ShipmentConfirmationsBeforeSalesInvoice</name>
 		<right>
 			<name>View</name>
@@ -394,6 +450,24 @@
 	</object>
 	<object>
 		<name>Document.CashStatement.Attribute.Company</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.CashPayment.TabularSection.PaymentList</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.StockAdjustmentAsSurplus</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -482,6 +556,13 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.StockAdjustmentAsSurplus.TabularSection.ItemList.Attribute.ProfitLossCenter</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.OpeningEntry.TabularSection.Inventory</name>
 		<right>
 			<name>View</name>
@@ -497,6 +578,13 @@
 	</object>
 	<object>
 		<name>Document.RetailReturnReceipt.Attribute.Company</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.BankPayment.TabularSection.PaymentList</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -524,6 +612,13 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.BankReceipt.TabularSection.PaymentList.Attribute.FinancialMovementType</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.CashRevenue</name>
 		<right>
 			<name>Read</name>
@@ -535,11 +630,25 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.StockAdjustmentAsWriteOff.TabularSection.ItemList.Attribute.ExpenseType</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.ShipmentConfirmation</name>
 		<right>
 			<name>Read</name>
 			<value>true</value>
 		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.CashExpense.TabularSection.PaymentList.Attribute.ProfitLossCenter</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -581,6 +690,13 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.StockAdjustmentAsWriteOff.TabularSection.ItemList</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.InventoryTransfer.Attribute.Company</name>
 		<right>
 			<name>View</name>
@@ -599,6 +715,13 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.BankPayment.TabularSection.PaymentList.Attribute.ProfitLossCenter</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.BankPayment.Attribute.Currency</name>
 		<right>
 			<name>View</name>
@@ -607,6 +730,20 @@
 	</object>
 	<object>
 		<name>Document.CashReceipt.Attribute.Company</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.BankPayment.TabularSection.PaymentList.Attribute.FinancialMovementType</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.BankPayment.TabularSection.PaymentList.Attribute.ExpenseType</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -685,6 +822,27 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.CashRevenue.TabularSection.PaymentList.Attribute.RevenueType</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.StockAdjustmentAsWriteOff.TabularSection.ItemList.Attribute.ProfitLossCenter</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.CashRevenue.TabularSection.PaymentList.Attribute.FinancialMovementType</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.DebitNote.TabularSection.Transactions.Attribute.ProfitLossCenter</name>
 		<right>
 			<name>View</name>
@@ -732,6 +890,17 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.StockAdjustmentAsWriteOff</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.RetailSalesReceipt.Attribute.Partner</name>
 		<right>
 			<name>View</name>
@@ -757,7 +926,21 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.BankReceipt.TabularSection.PaymentList.Attribute.ProfitLossCenter</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.GoodsReceipt.Attribute.Company</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.CashReceipt.TabularSection.PaymentList.Attribute.FinancialMovementType</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -769,6 +952,13 @@
 			<name>Read</name>
 			<value>true</value>
 		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.StockAdjustmentAsWriteOff.Attribute.Company</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -1032,6 +1222,13 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.CashExpense.TabularSection.PaymentList.Attribute.ExpenseType</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.RetailSalesReceipt.Attribute.Agreement</name>
 		<right>
 			<name>View</name>
@@ -1055,6 +1252,13 @@
 			<name>Read</name>
 			<value>true</value>
 		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.StockAdjustmentAsSurplus.TabularSection.ItemList.Attribute.RevenueType</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -1090,6 +1294,13 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.BankReceipt.TabularSection.PaymentList</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.BankReceipt</name>
 		<right>
 			<name>Read</name>
@@ -1108,6 +1319,13 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.CashExpense.TabularSection.PaymentList</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.CashStatement</name>
 		<right>
 			<name>Read</name>
@@ -1120,224 +1338,6 @@
 	</object>
 	<object>
 		<name>Document.IncomingPaymentOrder.Attribute.Account</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.CashExpense.TabularSection.PaymentList.Attribute.ProfitLossCenter</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.CashExpense.TabularSection.PaymentList.Attribute.ExpenseType</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.CashExpense.TabularSection.PaymentList.Attribute.FinancialMovementType</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.CashRevenue.TabularSection.PaymentList.Attribute.ProfitLossCenter</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.CashRevenue.TabularSection.PaymentList.Attribute.RevenueType</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.CashRevenue.TabularSection.PaymentList.Attribute.FinancialMovementType</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.BankPayment.TabularSection.PaymentList.Attribute.ExpenseType</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.BankPayment.TabularSection.PaymentList.Attribute.FinancialMovementType</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.BankPayment.TabularSection.PaymentList.Attribute.ProfitLossCenter</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.BankReceipt.TabularSection.PaymentList.Attribute.ExpenseType</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.BankReceipt.TabularSection.PaymentList.Attribute.FinancialMovementType</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.BankReceipt.TabularSection.PaymentList.Attribute.ProfitLossCenter</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.CashPayment.TabularSection.PaymentList.Attribute.FinancialMovementType</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.CashReceipt.TabularSection.PaymentList.Attribute.FinancialMovementType</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.BankPayment.TabularSection.PaymentList</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.BankReceipt.TabularSection.PaymentList</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.CashExpense.TabularSection.PaymentList</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.CashPayment.TabularSection.PaymentList</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.CashReceipt.TabularSection.PaymentList</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.CashRevenue.TabularSection.PaymentList</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.StockAdjustmentAsWriteOff</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.StockAdjustmentAsSurplus</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.StockAdjustmentAsSurplus.Attribute.Company</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.StockAdjustmentAsSurplus.TabularSection.ItemList.Attribute.ProfitLossCenter</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.StockAdjustmentAsSurplus.TabularSection.ItemList.Attribute.RevenueType</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.StockAdjustmentAsWriteOff.Attribute.Company</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.StockAdjustmentAsWriteOff.TabularSection.ItemList.Attribute.ProfitLossCenter</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.StockAdjustmentAsWriteOff.TabularSection.ItemList.Attribute.ExpenseType</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.StockAdjustmentAsWriteOff.TabularSection.ItemList</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.StockAdjustmentAsSurplus.TabularSection.ItemList</name>
 		<right>
 			<name>View</name>
 			<value>true</value>

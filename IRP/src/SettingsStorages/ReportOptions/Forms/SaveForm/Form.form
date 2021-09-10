@@ -35,6 +35,7 @@
       <autoMaxWidth>true</autoMaxWidth>
       <autoMaxHeight>true</autoMaxHeight>
       <placementArea>UserCmds</placementArea>
+      <toolTipRepresentation>Auto</toolTipRepresentation>
       <representationInContextMenu>Auto</representationInContextMenu>
     </items>
     <items xsi:type="form:Button">
@@ -67,6 +68,7 @@
       <autoMaxWidth>true</autoMaxWidth>
       <autoMaxHeight>true</autoMaxHeight>
       <placementArea>UserCmds</placementArea>
+      <toolTipRepresentation>Auto</toolTipRepresentation>
       <representationInContextMenu>Auto</representationInContextMenu>
     </items>
     <items xsi:type="form:FormField">
@@ -81,10 +83,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>SetShare</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>SetShare</segments>
       </dataPath>
       <titleLocation>Left</titleLocation>
       <extendedTooltip>
@@ -142,6 +142,7 @@
     <type>UsualGroup</type>
     <extInfo xsi:type="form:UsualGroupExtInfo">
       <group>AlwaysHorizontal</group>
+      <behavior>Auto</behavior>
       <showLeftMargin>true</showLeftMargin>
       <united>true</united>
       <throughAlign>Auto</throughAlign>
@@ -172,10 +173,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>OptionsList.DefaultPicture</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>OptionsList.DefaultPicture</segments>
       </dataPath>
       <titleLocation>None</titleLocation>
       <extendedTooltip>
@@ -224,10 +223,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>OptionsList.isCurrentOption</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>OptionsList.isCurrentOption</segments>
       </dataPath>
       <extendedTooltip>
         <name>OptionsListisCurrentOptionExtendedTooltip</name>
@@ -269,10 +266,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>OptionsList.ReportOption</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>OptionsList.ReportOption</segments>
       </dataPath>
       <extendedTooltip>
         <name>OptionsListReportOptionExtendedTooltip</name>
@@ -321,10 +316,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>OptionsList.Shared</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>OptionsList.Shared</segments>
       </dataPath>
       <extendedTooltip>
         <name>OptionsListSharedExtendedTooltip</name>
@@ -366,10 +359,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>OptionsList.Author</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>OptionsList.Author</segments>
       </dataPath>
       <extendedTooltip>
         <name>OptionsListAuthorExtendedTooltip</name>
@@ -418,10 +409,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>OptionsList.OptionKey</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>OptionsList.OptionKey</segments>
       </dataPath>
       <extendedTooltip>
         <name>OptionsListOptionKeyExtendedTooltip</name>
@@ -493,6 +482,7 @@
         <autoMaxWidth>true</autoMaxWidth>
         <autoMaxHeight>true</autoMaxHeight>
         <placementArea>UserCmds</placementArea>
+        <toolTipRepresentation>Auto</toolTipRepresentation>
         <representationInContextMenu>Auto</representationInContextMenu>
       </items>
       <visible>true</visible>

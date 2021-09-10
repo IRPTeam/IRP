@@ -132,6 +132,5 @@
       <types>DocumentRef.CashExpense</types>
     </commandParameterType>
     <representation>Auto</representation>
-    <shortcut></shortcut>
   </commands>
 </mdclass:FilterCriterion>

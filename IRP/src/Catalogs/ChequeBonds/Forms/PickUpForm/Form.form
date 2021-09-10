@@ -31,6 +31,7 @@
     <type>UsualGroup</type>
     <extInfo xsi:type="form:UsualGroupExtInfo">
       <group>Vertical</group>
+      <behavior>Auto</behavior>
       <representation>WeakSeparation</representation>
       <showLeftMargin>true</showLeftMargin>
       <united>true</united>
@@ -49,10 +50,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>StatusCheck</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>StatusCheck</segments>
       </dataPath>
       <titleLocation>None</titleLocation>
       <handlers>
@@ -99,10 +98,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>StatusSelection</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>StatusSelection</segments>
       </dataPath>
       <handlers>
         <event>OnChange</event>
@@ -163,10 +160,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>ChequeBondType</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>ChequeBondType</segments>
       </dataPath>
       <titleLocation>None</titleLocation>
       <handlers>
@@ -247,6 +242,7 @@
     <type>UsualGroup</type>
     <extInfo xsi:type="form:UsualGroupExtInfo">
       <group>AlwaysHorizontal</group>
+      <behavior>Auto</behavior>
       <showLeftMargin>true</showLeftMargin>
       <united>true</united>
       <throughAlign>Auto</throughAlign>
@@ -274,10 +270,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>List.Description</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>List.Description</segments>
       </dataPath>
       <defaultItem>true</defaultItem>
       <extendedTooltip>
@@ -323,10 +317,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>List.ChequeSerialNo</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>List.ChequeSerialNo</segments>
       </dataPath>
       <extendedTooltip>
         <name>ChequeSerialNoExtendedTooltip</name>
@@ -371,10 +363,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>List.Type</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>List.Type</segments>
       </dataPath>
       <extendedTooltip>
         <name>TypeExtendedTooltip</name>
@@ -419,10 +409,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>List.DueDate</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>List.DueDate</segments>
       </dataPath>
       <extendedTooltip>
         <name>DueDateExtendedTooltip</name>
@@ -467,10 +455,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>List.Currency</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>List.Currency</segments>
       </dataPath>
       <extendedTooltip>
         <name>CurrencyExtendedTooltip</name>
@@ -515,10 +501,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>List.Amount</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>List.Amount</segments>
       </dataPath>
       <extendedTooltip>
         <name>AmountExtendedTooltip</name>
@@ -563,10 +547,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>List.Status</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>List.Status</segments>
       </dataPath>
       <extendedTooltip>
         <name>StatusExtendedTooltip</name>
@@ -832,10 +814,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>PickedCheckBonds.ChequeBond.Description</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>PickedCheckBonds.ChequeBond.Description</segments>
       </dataPath>
       <extendedTooltip>
         <name>PickedCheckBondsChequeBondDescriptionExtendedTooltip</name>
@@ -884,10 +864,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>PickedCheckBonds.ChequeBond.ChequeSerialNo</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>PickedCheckBonds.ChequeBond.ChequeSerialNo</segments>
       </dataPath>
       <extendedTooltip>
         <name>PickedCheckBondsChequeBondChequeSerialNoExtendedTooltip</name>
@@ -936,10 +914,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>PickedCheckBonds.ChequeBond.Type</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>PickedCheckBonds.ChequeBond.Type</segments>
       </dataPath>
       <extendedTooltip>
         <name>PickedCheckBondsChequeBondTypeExtendedTooltip</name>
@@ -988,10 +964,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>PickedCheckBonds.ChequeBond.DueDate</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>PickedCheckBonds.ChequeBond.DueDate</segments>
       </dataPath>
       <extendedTooltip>
         <name>PickedCheckBondsChequeBondDueDateExtendedTooltip</name>
@@ -1040,10 +1014,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>PickedCheckBonds.ChequeBond.Currency</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>PickedCheckBonds.ChequeBond.Currency</segments>
       </dataPath>
       <extendedTooltip>
         <name>PickedCheckBondsChequeBondCurrencyExtendedTooltip</name>
@@ -1092,10 +1064,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>PickedCheckBonds.ChequeBond.Amount</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>PickedCheckBonds.ChequeBond.Amount</segments>
       </dataPath>
       <extendedTooltip>
         <name>PickedCheckBondsChequeBondAmountExtendedTooltip</name>
@@ -1337,6 +1307,7 @@
       <autoMaxWidth>true</autoMaxWidth>
       <autoMaxHeight>true</autoMaxHeight>
       <placementArea>UserCmds</placementArea>
+      <toolTipRepresentation>Auto</toolTipRepresentation>
       <representationInContextMenu>Auto</representationInContextMenu>
     </items>
     <visible>true</visible>

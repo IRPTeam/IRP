@@ -265,7 +265,6 @@
       <types>CatalogRef.DataAreas</types>
     </commandParameterType>
     <representation>Auto</representation>
-    <shortcut></shortcut>
   </commands>
   <commands uuid="efc483c9-9908-4b83-afd0-f8131e9002d6">
     <name>LogOutFromArea</name>
@@ -276,7 +275,6 @@
     <group>NavigationPanelOrdinary</group>
     <commandParameterType/>
     <representation>Auto</representation>
-    <shortcut></shortcut>
   </commands>
   <commands uuid="f11e090e-06b6-40ca-bf8b-4266cf467009">
     <name>UpdateAreas</name>
@@ -290,6 +288,5 @@
     <picture xsi:type="core:PictureRef">
       <picture>StdPicture.AppearanceFlagGreen</picture>
     </picture>
-    <shortcut></shortcut>
   </commands>
 </mdclass:Catalog>

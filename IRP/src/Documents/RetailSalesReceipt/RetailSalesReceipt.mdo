@@ -66,19 +66,19 @@
   <defaultListForm>Document.RetailSalesReceipt.Form.ListForm</defaultListForm>
   <defaultChoiceForm>Document.RetailSalesReceipt.Form.ChoiceForm</defaultChoiceForm>
   <realTimePosting>Deny</realTimePosting>
+  <registerRecords>AccumulationRegister.R2005T_SalesSpecialOffers</registerRecords>
+  <registerRecords>AccumulationRegister.TM1010B_RowIDMovements</registerRecords>
+  <registerRecords>AccumulationRegister.R5010B_ReconciliationStatement</registerRecords>
   <registerRecords>AccumulationRegister.R4010B_ActualStocks</registerRecords>
   <registerRecords>AccumulationRegister.R2050T_RetailSales</registerRecords>
   <registerRecords>AccumulationRegister.R3050T_RetailCash</registerRecords>
-  <registerRecords>AccumulationRegister.R4011B_FreeStocks</registerRecords>
-  <registerRecords>AccumulationRegister.R3010B_CashOnHand</registerRecords>
-  <registerRecords>AccumulationRegister.R4014B_SerialLotNumber</registerRecords>
-  <registerRecords>AccumulationRegister.TM1010T_RowIDMovements</registerRecords>
-  <registerRecords>AccumulationRegister.TM1010B_RowIDMovements</registerRecords>
-  <registerRecords>AccumulationRegister.R5021T_Revenues</registerRecords>
   <registerRecords>AccumulationRegister.R2001T_Sales</registerRecords>
   <registerRecords>AccumulationRegister.R2021B_CustomersTransactions</registerRecords>
-  <registerRecords>AccumulationRegister.R5010B_ReconciliationStatement</registerRecords>
-  <registerRecords>AccumulationRegister.R2005T_SalesSpecialOffers</registerRecords>
+  <registerRecords>AccumulationRegister.R4011B_FreeStocks</registerRecords>
+  <registerRecords>AccumulationRegister.R3010B_CashOnHand</registerRecords>
+  <registerRecords>AccumulationRegister.R5021T_Revenues</registerRecords>
+  <registerRecords>AccumulationRegister.TM1010T_RowIDMovements</registerRecords>
+  <registerRecords>AccumulationRegister.R4014B_SerialLotNumber</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>

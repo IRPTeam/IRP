@@ -20,10 +20,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>MetadataTree.Use</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>MetadataTree.Use</segments>
       </dataPath>
       <extendedTooltip>
         <name>MetadataTreeUseExtendedTooltip</name>
@@ -65,10 +63,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>MetadataTree.Name</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>MetadataTree.Name</segments>
       </dataPath>
       <extendedTooltip>
         <name>MetadataTreeNameExtendedTooltip</name>
@@ -143,6 +139,7 @@
         <picture xsi:type="core:PictureRef">
           <picture>StdPicture.WriteAndClose</picture>
         </picture>
+        <toolTipRepresentation>Auto</toolTipRepresentation>
         <representationInContextMenu>Auto</representationInContextMenu>
       </items>
       <items xsi:type="form:Button">
@@ -173,6 +170,7 @@
         <autoMaxWidth>true</autoMaxWidth>
         <autoMaxHeight>true</autoMaxHeight>
         <placementArea>UserCmds</placementArea>
+        <toolTipRepresentation>Auto</toolTipRepresentation>
         <representationInContextMenu>Auto</representationInContextMenu>
       </items>
       <visible>true</visible>

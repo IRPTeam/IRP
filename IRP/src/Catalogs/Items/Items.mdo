@@ -236,6 +236,5 @@
       <types>CatalogRef.ItemTypes</types>
     </commandParameterType>
     <representation>Auto</representation>
-    <shortcut></shortcut>
   </commands>
 </mdclass:Catalog>

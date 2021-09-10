@@ -24,10 +24,8 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:MultiLanguageDataPath">
-          <paths xsi:type="form:DataPath">
-            <segments>List.Code</segments>
-          </paths>
+        <dataPath xsi:type="form:DataPath">
+          <segments>List.Code</segments>
         </dataPath>
         <extendedTooltip>
           <name>CodeExtendedTooltip</name>
@@ -80,10 +78,8 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:MultiLanguageDataPath">
-          <paths xsi:type="form:DataPath">
-            <segments>List.Description</segments>
-          </paths>
+        <dataPath xsi:type="form:DataPath">
+          <segments>List.Description</segments>
         </dataPath>
         <defaultItem>true</defaultItem>
         <extendedTooltip>
@@ -129,10 +125,8 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:MultiLanguageDataPath">
-          <paths xsi:type="form:DataPath">
-            <segments>List.Ref</segments>
-          </paths>
+        <dataPath xsi:type="form:DataPath">
+          <segments>List.Ref</segments>
         </dataPath>
         <extendedTooltip>
           <name>RefExtendedTooltip</name>
@@ -386,6 +380,7 @@
     <type>UsualGroup</type>
     <extInfo xsi:type="form:UsualGroupExtInfo">
       <group>AlwaysHorizontal</group>
+      <behavior>Auto</behavior>
       <showLeftMargin>true</showLeftMargin>
       <united>true</united>
       <throughAlign>Auto</throughAlign>
@@ -423,6 +418,7 @@
     <type>UsualGroup</type>
     <extInfo xsi:type="form:UsualGroupExtInfo">
       <group>Vertical</group>
+      <behavior>Auto</behavior>
       <representation>WeakSeparation</representation>
       <showLeftMargin>true</showLeftMargin>
       <united>true</united>
@@ -461,6 +457,7 @@
     <type>UsualGroup</type>
     <extInfo xsi:type="form:UsualGroupExtInfo">
       <group>Vertical</group>
+      <behavior>Auto</behavior>
       <representation>WeakSeparation</representation>
       <showLeftMargin>true</showLeftMargin>
       <united>true</united>

@@ -74,6 +74,7 @@
       <type>UsualGroup</type>
       <extInfo xsi:type="form:UsualGroupExtInfo">
         <group>HorizontalIfPossible</group>
+        <behavior>Auto</behavior>
         <showLeftMargin>true</showLeftMargin>
         <united>true</united>
         <throughAlign>Auto</throughAlign>
@@ -91,10 +92,8 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:MultiLanguageDataPath">
-          <paths xsi:type="form:DataPath">
-            <segments>Stock</segments>
-          </paths>
+        <dataPath xsi:type="form:DataPath">
+          <segments>Stock</segments>
         </dataPath>
         <titleLocation>Right</titleLocation>
         <handlers>
@@ -141,10 +140,8 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:MultiLanguageDataPath">
-          <paths xsi:type="form:DataPath">
-            <segments>Purchase</segments>
-          </paths>
+        <dataPath xsi:type="form:DataPath">
+          <segments>Purchase</segments>
         </dataPath>
         <titleLocation>Right</titleLocation>
         <handlers>
@@ -191,10 +188,8 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:MultiLanguageDataPath">
-          <paths xsi:type="form:DataPath">
-            <segments>NoReserve</segments>
-          </paths>
+        <dataPath xsi:type="form:DataPath">
+          <segments>NoReserve</segments>
         </dataPath>
         <titleLocation>Right</titleLocation>
         <handlers>
@@ -309,6 +304,7 @@
       <extInfo xsi:type="form:UsualGroupExtInfo">
         <group>Vertical</group>
         <horizontalAlign>Left</horizontalAlign>
+        <behavior>Auto</behavior>
         <showLeftMargin>true</showLeftMargin>
         <united>true</united>
         <throughAlign>Auto</throughAlign>
@@ -339,6 +335,7 @@
     <type>UsualGroup</type>
     <extInfo xsi:type="form:UsualGroupExtInfo">
       <group>AlwaysHorizontal</group>
+      <behavior>Auto</behavior>
       <showLeftMargin>true</showLeftMargin>
       <united>true</united>
       <throughAlign>Auto</throughAlign>
@@ -378,6 +375,7 @@
       <autoMaxWidth>true</autoMaxWidth>
       <autoMaxHeight>true</autoMaxHeight>
       <placementArea>UserCmds</placementArea>
+      <toolTipRepresentation>Auto</toolTipRepresentation>
       <representationInContextMenu>Auto</representationInContextMenu>
     </items>
     <items xsi:type="form:Button">
@@ -408,6 +406,7 @@
       <autoMaxWidth>true</autoMaxWidth>
       <autoMaxHeight>true</autoMaxHeight>
       <placementArea>UserCmds</placementArea>
+      <toolTipRepresentation>Auto</toolTipRepresentation>
       <representationInContextMenu>Auto</representationInContextMenu>
     </items>
     <visible>true</visible>

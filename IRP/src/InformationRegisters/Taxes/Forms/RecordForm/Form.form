@@ -8,10 +8,8 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:MultiLanguageDataPath">
-      <paths xsi:type="form:DataPath">
-        <segments>Record.Period</segments>
-      </paths>
+    <dataPath xsi:type="form:DataPath">
+      <segments>Record.Period</segments>
     </dataPath>
     <extendedTooltip>
       <name>PeriodExtendedTooltip</name>
@@ -60,10 +58,8 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:MultiLanguageDataPath">
-      <paths xsi:type="form:DataPath">
-        <segments>Record.Company</segments>
-      </paths>
+    <dataPath xsi:type="form:DataPath">
+      <segments>Record.Company</segments>
     </dataPath>
     <extendedTooltip>
       <name>CompanyExtendedTooltip</name>
@@ -112,10 +108,8 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:MultiLanguageDataPath">
-      <paths xsi:type="form:DataPath">
-        <segments>Record.Tax</segments>
-      </paths>
+    <dataPath xsi:type="form:DataPath">
+      <segments>Record.Tax</segments>
     </dataPath>
     <extendedTooltip>
       <name>TaxExtendedTooltip</name>
@@ -167,10 +161,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>Record.Use</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>Record.Use</segments>
       </dataPath>
       <extendedTooltip>
         <name>UseExtendedTooltip</name>
@@ -212,10 +204,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>Record.Priority</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>Record.Priority</segments>
       </dataPath>
       <extendedTooltip>
         <name>PriorityExtendedTooltip</name>
@@ -279,6 +269,7 @@
     <type>UsualGroup</type>
     <extInfo xsi:type="form:UsualGroupExtInfo">
       <group>AlwaysHorizontal</group>
+      <behavior>Auto</behavior>
       <showLeftMargin>true</showLeftMargin>
       <united>true</united>
       <throughAlign>Auto</throughAlign>

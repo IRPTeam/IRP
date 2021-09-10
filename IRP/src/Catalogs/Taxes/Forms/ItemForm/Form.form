@@ -11,10 +11,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>Object.Code</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>Object.Code</segments>
       </dataPath>
       <extendedTooltip>
         <name>CodeExtendedTooltip</name>
@@ -78,6 +76,7 @@
     <type>UsualGroup</type>
     <extInfo xsi:type="form:UsualGroupExtInfo">
       <group>Vertical</group>
+      <behavior>Auto</behavior>
       <showLeftMargin>true</showLeftMargin>
       <united>true</united>
       <throughAlign>Auto</throughAlign>
@@ -92,10 +91,8 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:MultiLanguageDataPath">
-      <paths xsi:type="form:DataPath">
-        <segments>Object.Type</segments>
-      </paths>
+    <dataPath xsi:type="form:DataPath">
+      <segments>Object.Type</segments>
     </dataPath>
     <titleLocation>None</titleLocation>
     <handlers>
@@ -165,10 +162,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>Object.ExternalDataProc</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>Object.ExternalDataProc</segments>
       </dataPath>
       <extendedTooltip>
         <name>ExternalDataProcExtendedTooltip</name>
@@ -238,6 +233,7 @@
       <autoMaxWidth>true</autoMaxWidth>
       <autoMaxHeight>true</autoMaxHeight>
       <placementArea>UserCmds</placementArea>
+      <toolTipRepresentation>Auto</toolTipRepresentation>
       <representationInContextMenu>Auto</representationInContextMenu>
     </items>
     <visible>true</visible>
@@ -263,6 +259,7 @@
     <type>UsualGroup</type>
     <extInfo xsi:type="form:UsualGroupExtInfo">
       <group>AlwaysHorizontal</group>
+      <behavior>Auto</behavior>
       <showLeftMargin>true</showLeftMargin>
       <united>true</united>
       <throughAlign>Auto</throughAlign>
@@ -295,10 +292,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.TaxRates.LineNumber</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.TaxRates.LineNumber</segments>
           </dataPath>
           <extendedTooltip>
             <name>TaxRatesLineNumberExtendedTooltip</name>
@@ -347,10 +342,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.TaxRates.TaxRate</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.TaxRates.TaxRate</segments>
           </dataPath>
           <extendedTooltip>
             <name>TaxRatesTaxRateExtendedTooltip</name>
@@ -614,10 +607,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.UseDocuments.LineNumber</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.UseDocuments.LineNumber</segments>
           </dataPath>
           <extendedTooltip>
             <name>UseDocumentsLineNumberExtendedTooltip</name>
@@ -666,10 +657,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.UseDocuments.DocumentName</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.UseDocuments.DocumentName</segments>
           </dataPath>
           <extendedTooltip>
             <name>UseDocumentsDocumentNameExtendedTooltip</name>
@@ -936,7 +925,7 @@
     </extendedTooltip>
     <type>Pages</type>
     <extInfo xsi:type="form:PagesGroupExtInfo">
-      <pagesRepresentation>TabsOnTop</pagesRepresentation>
+      <pagesRepresentation>Auto</pagesRepresentation>
       <currentRowUse>Auto</currentRowUse>
     </extInfo>
   </items>

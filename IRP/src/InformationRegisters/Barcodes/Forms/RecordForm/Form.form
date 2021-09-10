@@ -8,10 +8,8 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:MultiLanguageDataPath">
-      <paths xsi:type="form:DataPath">
-        <segments>Record.Barcode</segments>
-      </paths>
+    <dataPath xsi:type="form:DataPath">
+      <segments>Record.Barcode</segments>
     </dataPath>
     <extendedTooltip>
       <name>BarcodeExtendedTooltip</name>
@@ -60,10 +58,8 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:MultiLanguageDataPath">
-      <paths xsi:type="form:DataPath">
-        <segments>Record.ItemKey</segments>
-      </paths>
+    <dataPath xsi:type="form:DataPath">
+      <segments>Record.ItemKey</segments>
     </dataPath>
     <handlers>
       <event>OnChange</event>
@@ -116,10 +112,8 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:MultiLanguageDataPath">
-      <paths xsi:type="form:DataPath">
-        <segments>Record.SerialLotNumber</segments>
-      </paths>
+    <dataPath xsi:type="form:DataPath">
+      <segments>Record.SerialLotNumber</segments>
     </dataPath>
     <extendedTooltip>
       <name>SerialLotNumberExtendedTooltip</name>
@@ -168,10 +162,8 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:MultiLanguageDataPath">
-      <paths xsi:type="form:DataPath">
-        <segments>Record.Unit</segments>
-      </paths>
+    <dataPath xsi:type="form:DataPath">
+      <segments>Record.Unit</segments>
     </dataPath>
     <extendedTooltip>
       <name>UnitExtendedTooltip</name>
@@ -226,10 +218,8 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:MultiLanguageDataPath">
-      <paths xsi:type="form:DataPath">
-        <segments>Record.Presentation</segments>
-      </paths>
+    <dataPath xsi:type="form:DataPath">
+      <segments>Record.Presentation</segments>
     </dataPath>
     <extendedTooltip>
       <name>PresentationExtendedTooltip</name>

@@ -11,10 +11,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>Object.Code</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>Object.Code</segments>
       </dataPath>
       <extendedTooltip>
         <name>CodeExtendedTooltip</name>
@@ -78,6 +76,7 @@
     <type>UsualGroup</type>
     <extInfo xsi:type="form:UsualGroupExtInfo">
       <group>HorizontalIfPossible</group>
+      <behavior>Auto</behavior>
       <showLeftMargin>true</showLeftMargin>
       <united>true</united>
       <throughAlign>Auto</throughAlign>
@@ -92,10 +91,8 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:MultiLanguageDataPath">
-      <paths xsi:type="form:DataPath">
-        <segments>Object.ExternalDataProc</segments>
-      </paths>
+    <dataPath xsi:type="form:DataPath">
+      <segments>Object.ExternalDataProc</segments>
     </dataPath>
     <extendedTooltip>
       <name>ExternalDataProcExtendedTooltip</name>
@@ -167,6 +164,7 @@
       <autoMaxWidth>true</autoMaxWidth>
       <autoMaxHeight>true</autoMaxHeight>
       <placementArea>UserCmds</placementArea>
+      <toolTipRepresentation>Auto</toolTipRepresentation>
     </items>
     <visible>true</visible>
     <enabled>true</enabled>

@@ -24,10 +24,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>CountryTable.Country</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>CountryTable.Country</segments>
       </dataPath>
       <extendedTooltip>
         <name>CountryTableCountryExtendedTooltip</name>

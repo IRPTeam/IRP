@@ -135,6 +135,5 @@
       <types>CatalogRef.ItemKeys</types>
     </commandParameterType>
     <representation>Auto</representation>
-    <shortcut></shortcut>
   </commands>
 </mdclass:InformationRegister>

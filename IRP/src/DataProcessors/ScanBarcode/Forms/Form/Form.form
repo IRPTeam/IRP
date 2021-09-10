@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<form:Form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:form="http://g5.1c.ru/v8/dt/form" xmlns:schema="http://g5.1c.ru/v8/dt/data-composition-system/schema">
+<form:Form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:form="http://g5.1c.ru/v8/dt/form">
   <items xsi:type="form:Decoration">
     <name>Decoration1</name>
     <id>123</id>
@@ -590,6 +590,7 @@
             <height>1</height>
             <autoMaxHeight>true</autoMaxHeight>
             <placementArea>UserCmds</placementArea>
+            <toolTipRepresentation>Auto</toolTipRepresentation>
             <representationInContextMenu>Auto</representationInContextMenu>
           </items>
           <visible>true</visible>
@@ -640,7 +641,6 @@
             </userVisible>
             <autoFill>true</autoFill>
           </contextMenu>
-          <source>ItemListSearchString</source>
           <extInfo xsi:type="form:SearchStringAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -679,7 +679,6 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>ViewStatusAddition</type>
-          <source>ItemListViewStatus</source>
           <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -718,7 +717,6 @@
             <autoFill>true</autoFill>
           </contextMenu>
           <type>SearchControlAddition</type>
-          <source>ItemList</source>
           <extInfo xsi:type="form:SearchControlAdditionExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
           </extInfo>
@@ -770,6 +768,7 @@
         <enableDrag>true</enableDrag>
         <fileDragMode>AsFileRef</fileDragMode>
         <refreshRequest>PullFromTop</refreshRequest>
+        <rowFilter xsi:type="core:UndefinedValue"/>
       </items>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -839,6 +838,7 @@
           <autoMaxWidth>true</autoMaxWidth>
           <autoMaxHeight>true</autoMaxHeight>
           <placementArea>UserCmds</placementArea>
+          <toolTipRepresentation>Auto</toolTipRepresentation>
           <representationInContextMenu>Auto</representationInContextMenu>
         </items>
         <visible>true</visible>
@@ -1161,12 +1161,12 @@
           <horizontalAlign>Left</horizontalAlign>
         </autoCommandBar>
         <handlers>
-          <event>RefreshRequestProcessing</event>
-          <name>ScanHistoryRefreshRequestProcessing</name>
-        </handlers>
-        <handlers>
           <event>OnChange</event>
           <name>ScanHistoryOnChange</name>
+        </handlers>
+        <handlers>
+          <event>RefreshRequestProcessing</event>
+          <name>ScanHistoryRefreshRequestProcessing</name>
         </handlers>
         <searchStringAddition>
           <visible>true</visible>
@@ -1433,6 +1433,7 @@
       <autoMaxWidth>true</autoMaxWidth>
       <autoMaxHeight>true</autoMaxHeight>
       <placementArea>UserCmds</placementArea>
+      <toolTipRepresentation>Auto</toolTipRepresentation>
       <representationInContextMenu>Auto</representationInContextMenu>
     </items>
     <visible>true</visible>
@@ -1443,12 +1444,12 @@
     <horizontalAlign>Left</horizontalAlign>
   </autoCommandBar>
   <handlers>
-    <event>OnCreateAtServer</event>
-    <name>OnCreateAtServer</name>
-  </handlers>
-  <handlers>
     <event>NotificationProcessing</event>
     <name>NotificationProcessing</name>
+  </handlers>
+  <handlers>
+    <event>OnCreateAtServer</event>
+    <name>OnCreateAtServer</name>
   </handlers>
   <autoTitle>true</autoTitle>
   <autoUrl>true</autoUrl>
@@ -1511,30 +1512,6 @@ WHERE
       <customQuery>true</customQuery>
       <autoSaveUserSettings>true</autoSaveUserSettings>
       <getInvisibleFieldPresentations>true</getInvisibleFieldPresentations>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>Period</dataPath>
-        <field>Period</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>Basis</dataPath>
-        <field>Basis</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>InfoID</dataPath>
-        <field>InfoID</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>Barcode</dataPath>
-        <field>Barcode</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>User</dataPath>
-        <field>User</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>Count</dataPath>
-        <field>Count</field>
-      </fields>
     </extInfo>
   </attributes>
   <attributes>

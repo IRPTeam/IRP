@@ -47,10 +47,8 @@
             <userVisible>
               <common>true</common>
             </userVisible>
-            <dataPath xsi:type="form:MultiLanguageDataPath">
-              <paths xsi:type="form:DataPath">
-                <segments>Offers.Presentation</segments>
-              </paths>
+            <dataPath xsi:type="form:DataPath">
+              <segments>Offers.Presentation</segments>
             </dataPath>
             <extendedTooltip>
               <name>OffersPresentationExtendedTooltip</name>
@@ -102,10 +100,8 @@
               <userVisible>
                 <common>true</common>
               </userVisible>
-              <dataPath xsi:type="form:MultiLanguageDataPath">
-                <paths xsi:type="form:DataPath">
-                  <segments>Offers.isFolder</segments>
-                </paths>
+              <dataPath xsi:type="form:DataPath">
+                <segments>Offers.isFolder</segments>
               </dataPath>
               <extendedTooltip>
                 <name>OffersisFolderExtendedTooltip</name>
@@ -147,10 +143,8 @@
               <userVisible>
                 <common>true</common>
               </userVisible>
-              <dataPath xsi:type="form:MultiLanguageDataPath">
-                <paths xsi:type="form:DataPath">
-                  <segments>Offers.isSelect</segments>
-                </paths>
+              <dataPath xsi:type="form:DataPath">
+                <segments>Offers.isSelect</segments>
               </dataPath>
               <extendedTooltip>
                 <name>OffersSelectExtendedTooltip</name>
@@ -206,10 +200,8 @@
               <userVisible>
                 <common>true</common>
               </userVisible>
-              <dataPath xsi:type="form:MultiLanguageDataPath">
-                <paths xsi:type="form:DataPath">
-                  <segments>Offers.TotalPercent</segments>
-                </paths>
+              <dataPath xsi:type="form:DataPath">
+                <segments>Offers.TotalPercent</segments>
               </dataPath>
               <extendedTooltip>
                 <name>OffersTotalPercentExtendedTooltip</name>
@@ -258,10 +250,8 @@
               <userVisible>
                 <common>true</common>
               </userVisible>
-              <dataPath xsi:type="form:MultiLanguageDataPath">
-                <paths xsi:type="form:DataPath">
-                  <segments>Offers.TotalAmount</segments>
-                </paths>
+              <dataPath xsi:type="form:DataPath">
+                <segments>Offers.TotalAmount</segments>
               </dataPath>
               <extendedTooltip>
                 <name>OffersTotalAmountExtendedTooltip</name>
@@ -384,6 +374,7 @@
             <autoMaxWidth>true</autoMaxWidth>
             <autoMaxHeight>true</autoMaxHeight>
             <placementArea>UserCmds</placementArea>
+            <toolTipRepresentation>Auto</toolTipRepresentation>
             <representationInContextMenu>Auto</representationInContextMenu>
           </items>
           <visible>true</visible>

@@ -11,10 +11,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>Object.Code</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>Object.Code</segments>
       </dataPath>
       <extendedTooltip>
         <name>CodeExtendedTooltip</name>
@@ -78,6 +76,7 @@
     <type>UsualGroup</type>
     <extInfo xsi:type="form:UsualGroupExtInfo">
       <group>HorizontalIfPossible</group>
+      <behavior>Auto</behavior>
       <showLeftMargin>true</showLeftMargin>
       <united>true</united>
       <throughAlign>Auto</throughAlign>
@@ -101,10 +100,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>LabelsInRow</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>LabelsInRow</segments>
           </dataPath>
           <extendedTooltip>
             <name>LabelsInRowExtendedTooltip</name>
@@ -153,10 +150,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>LabelsInColumn</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>LabelsInColumn</segments>
           </dataPath>
           <extendedTooltip>
             <name>LabelsInColumnExtendedTooltip</name>
@@ -220,6 +215,7 @@
         <type>UsualGroup</type>
         <extInfo xsi:type="form:UsualGroupExtInfo">
           <group>HorizontalIfPossible</group>
+          <behavior>Auto</behavior>
           <showLeftMargin>true</showLeftMargin>
           <united>true</united>
           <throughAlign>Auto</throughAlign>
@@ -234,10 +230,8 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:MultiLanguageDataPath">
-          <paths xsi:type="form:DataPath">
-            <segments>Object.ExternalDataProc</segments>
-          </paths>
+        <dataPath xsi:type="form:DataPath">
+          <segments>Object.ExternalDataProc</segments>
         </dataPath>
         <handlers>
           <event>OnChange</event>
@@ -323,10 +317,8 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:MultiLanguageDataPath">
-          <paths xsi:type="form:DataPath">
-            <segments>TemplateSpreadsheet</segments>
-          </paths>
+        <dataPath xsi:type="form:DataPath">
+          <segments>TemplateSpreadsheet</segments>
         </dataPath>
         <extendedTooltip>
           <name>TemplateSpreadsheetExtendedTooltip</name>
@@ -401,6 +393,7 @@
       <type>UsualGroup</type>
       <extInfo xsi:type="form:UsualGroupExtInfo">
         <group>Vertical</group>
+        <behavior>Auto</behavior>
         <showLeftMargin>true</showLeftMargin>
         <united>true</united>
         <throughAlign>Auto</throughAlign>
@@ -421,10 +414,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>DataSource</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>DataSource</segments>
           </dataPath>
           <extendedTooltip>
             <name>DataSchemeSourceExtendedTooltip</name>
@@ -474,10 +465,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>PasteFieldAs</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>PasteFieldAs</segments>
           </dataPath>
           <extendedTooltip>
             <name>PasteTypeExtendedTooltip</name>
@@ -554,6 +543,7 @@
         <type>UsualGroup</type>
         <extInfo xsi:type="form:UsualGroupExtInfo">
           <group>HorizontalIfPossible</group>
+          <behavior>Auto</behavior>
           <showLeftMargin>true</showLeftMargin>
           <united>true</united>
           <throughAlign>Auto</throughAlign>
@@ -768,6 +758,7 @@
       <type>UsualGroup</type>
       <extInfo xsi:type="form:UsualGroupExtInfo">
         <group>Vertical</group>
+        <behavior>Auto</behavior>
         <showLeftMargin>true</showLeftMargin>
         <united>true</united>
         <throughAlign>Auto</throughAlign>
@@ -797,6 +788,7 @@
     <type>UsualGroup</type>
     <extInfo xsi:type="form:UsualGroupExtInfo">
       <group>AlwaysHorizontal</group>
+      <behavior>Auto</behavior>
       <representation>WeakSeparation</representation>
       <showLeftMargin>true</showLeftMargin>
       <united>true</united>
@@ -835,6 +827,7 @@
       <autoMaxWidth>true</autoMaxWidth>
       <autoMaxHeight>true</autoMaxHeight>
       <placementArea>UserCmds</placementArea>
+      <toolTipRepresentation>Auto</toolTipRepresentation>
       <representationInContextMenu>Auto</representationInContextMenu>
     </items>
     <visible>true</visible>

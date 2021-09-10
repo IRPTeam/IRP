@@ -248,6 +248,5 @@
       <types>CatalogRef.Partners</types>
     </commandParameterType>
     <representation>Auto</representation>
-    <shortcut></shortcut>
   </commands>
 </mdclass:Catalog>

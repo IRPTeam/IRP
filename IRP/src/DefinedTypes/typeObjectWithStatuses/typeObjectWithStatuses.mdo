@@ -9,6 +9,7 @@
     <value>Type object with statuses</value>
   </synonym>
   <type>
+    <types>DocumentRef.IncomingPaymentOrder</types>
     <types>DocumentRef.SalesReturnOrder</types>
     <types>DocumentRef.PurchaseReturnOrder</types>
     <types>DocumentRef.PurchaseOrder</types>
@@ -18,6 +19,5 @@
     <types>DocumentRef.InventoryTransferOrder</types>
     <types>DocumentRef.ReconciliationStatement</types>
     <types>DocumentRef.PhysicalInventory</types>
-    <types>DocumentRef.IncomingPaymentOrder</types>
   </type>
 </mdclass:DefinedType>

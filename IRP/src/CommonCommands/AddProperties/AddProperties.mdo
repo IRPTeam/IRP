@@ -13,5 +13,4 @@
   <picture xsi:type="core:PictureRef">
     <picture>CommonPicture.AddProperties</picture>
   </picture>
-  <shortcut></shortcut>
 </mdclass:CommonCommand>

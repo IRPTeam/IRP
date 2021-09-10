@@ -331,10 +331,8 @@
     <edit>
       <common>true</common>
     </edit>
-    <notDefaultUseAlwaysAttributes xsi:type="form:MultiLanguageDataPath">
-      <paths xsi:type="form:DataPath">
-        <segments>Object.RegisterRecords</segments>
-      </paths>
+    <notDefaultUseAlwaysAttributes xsi:type="form:DataPath">
+      <segments>Object.RegisterRecords</segments>
     </notDefaultUseAlwaysAttributes>
     <main>true</main>
     <savedData>true</savedData>

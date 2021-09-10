@@ -11,10 +11,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>Object.Code</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>Object.Code</segments>
       </dataPath>
       <extendedTooltip>
         <name>CodeExtendedTooltip</name>
@@ -78,6 +76,7 @@
     <type>UsualGroup</type>
     <extInfo xsi:type="form:UsualGroupExtInfo">
       <group>HorizontalIfPossible</group>
+      <behavior>Auto</behavior>
       <showLeftMargin>true</showLeftMargin>
       <united>true</united>
       <throughAlign>Auto</throughAlign>
@@ -110,10 +109,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.Profiles.LineNumber</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.Profiles.LineNumber</segments>
           </dataPath>
           <extendedTooltip>
             <name>ProfilesLineNumberExtendedTooltip</name>
@@ -158,10 +155,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.Profiles.Profile</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.Profiles.Profile</segments>
           </dataPath>
           <extendedTooltip>
             <name>ProfilesProfileExtendedTooltip</name>
@@ -427,10 +422,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.Users.LineNumber</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.Users.LineNumber</segments>
           </dataPath>
           <extendedTooltip>
             <name>UsersLineNumberExtendedTooltip</name>
@@ -475,10 +468,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.Users.User</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.Users.User</segments>
           </dataPath>
           <extendedTooltip>
             <name>UsersUserExtendedTooltip</name>
@@ -751,7 +742,7 @@
     </extendedTooltip>
     <type>Pages</type>
     <extInfo xsi:type="form:PagesGroupExtInfo">
-      <pagesRepresentation>TabsOnTop</pagesRepresentation>
+      <pagesRepresentation>Auto</pagesRepresentation>
       <currentRowUse>Auto</currentRowUse>
     </extInfo>
   </items>

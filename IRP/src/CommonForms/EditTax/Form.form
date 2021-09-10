@@ -20,10 +20,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>TaxTree.RowPresentation</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>TaxTree.RowPresentation</segments>
       </dataPath>
       <extendedTooltip>
         <name>TaxTreeRowPresentationExtendedTooltip</name>
@@ -72,10 +70,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>TaxTree.Amount</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>TaxTree.Amount</segments>
       </dataPath>
       <extendedTooltip>
         <name>TaxTreeAmountExtendedTooltip</name>
@@ -123,10 +119,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>TaxTree.ManualAmount</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>TaxTree.ManualAmount</segments>
       </dataPath>
       <handlers>
         <event>OnChange</event>
@@ -177,10 +171,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>TaxTree.PictureEdit</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>TaxTree.PictureEdit</segments>
       </dataPath>
       <titleLocation>None</titleLocation>
       <extendedTooltip>
@@ -231,10 +223,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>TaxTree.ReadOnly</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>TaxTree.ReadOnly</segments>
       </dataPath>
       <extendedTooltip>
         <name>TaxTreeReadOnlyExtendedTooltip</name>
@@ -461,10 +451,8 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:MultiLanguageDataPath">
-          <paths xsi:type="form:DataPath">
-            <segments>TotalTaxAmount</segments>
-          </paths>
+        <dataPath xsi:type="form:DataPath">
+          <segments>TotalTaxAmount</segments>
         </dataPath>
         <extendedTooltip>
           <name>ItemListTotalTaxAmountExtendedTooltip</name>
@@ -530,6 +518,7 @@
       <type>UsualGroup</type>
       <extInfo xsi:type="form:UsualGroupExtInfo">
         <group>HorizontalIfPossible</group>
+        <behavior>Auto</behavior>
         <showLeftMargin>true</showLeftMargin>
         <united>true</united>
         <throughAlign>Auto</throughAlign>
@@ -560,6 +549,7 @@
     <type>UsualGroup</type>
     <extInfo xsi:type="form:UsualGroupExtInfo">
       <group>HorizontalIfPossible</group>
+      <behavior>Auto</behavior>
       <showLeftMargin>true</showLeftMargin>
       <united>true</united>
       <backColor xsi:type="core:ColorDef">
@@ -603,6 +593,7 @@
       <autoMaxWidth>true</autoMaxWidth>
       <autoMaxHeight>true</autoMaxHeight>
       <placementArea>UserCmds</placementArea>
+      <toolTipRepresentation>Auto</toolTipRepresentation>
       <representationInContextMenu>Auto</representationInContextMenu>
     </items>
     <items xsi:type="form:Button">
@@ -633,6 +624,7 @@
       <autoMaxWidth>true</autoMaxWidth>
       <autoMaxHeight>true</autoMaxHeight>
       <placementArea>UserCmds</placementArea>
+      <toolTipRepresentation>Auto</toolTipRepresentation>
       <representationInContextMenu>Auto</representationInContextMenu>
     </items>
     <visible>true</visible>

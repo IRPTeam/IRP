@@ -132,6 +132,7 @@
         <type>UsualGroup</type>
         <extInfo xsi:type="form:UsualGroupExtInfo">
           <group>HorizontalIfPossible</group>
+          <behavior>Auto</behavior>
           <showLeftMargin>true</showLeftMargin>
           <united>true</united>
           <throughAlign>Auto</throughAlign>
@@ -261,6 +262,7 @@
         <type>UsualGroup</type>
         <extInfo xsi:type="form:UsualGroupExtInfo">
           <group>HorizontalIfPossible</group>
+          <behavior>Auto</behavior>
           <showLeftMargin>true</showLeftMargin>
           <united>true</united>
           <throughAlign>Auto</throughAlign>
@@ -290,6 +292,7 @@
       <type>UsualGroup</type>
       <extInfo xsi:type="form:UsualGroupExtInfo">
         <group>Vertical</group>
+        <behavior>Auto</behavior>
         <showLeftMargin>true</showLeftMargin>
         <united>true</united>
         <throughAlign>Auto</throughAlign>
@@ -310,10 +313,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.Store</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.Store</segments>
           </dataPath>
           <handlers>
             <event>OnChange</event>
@@ -366,10 +367,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.Status</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.Status</segments>
           </dataPath>
           <extendedTooltip>
             <name>StatusExtendedTooltip</name>
@@ -418,10 +417,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Description</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Description</segments>
           </dataPath>
           <defaultItem>true</defaultItem>
           <extendedTooltip>
@@ -487,6 +484,7 @@
         <type>UsualGroup</type>
         <extInfo xsi:type="form:UsualGroupExtInfo">
           <group>Vertical</group>
+          <behavior>Auto</behavior>
           <showLeftMargin>true</showLeftMargin>
           <united>true</united>
           <throughAlign>Auto</throughAlign>
@@ -504,10 +502,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.UseResponsiblePersonByRow</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.UseResponsiblePersonByRow</segments>
           </dataPath>
           <titleLocation>Right</titleLocation>
           <handlers>
@@ -569,6 +565,7 @@
         <type>UsualGroup</type>
         <extInfo xsi:type="form:UsualGroupExtInfo">
           <group>Vertical</group>
+          <behavior>Auto</behavior>
           <showLeftMargin>true</showLeftMargin>
           <united>true</united>
           <throughAlign>Auto</throughAlign>
@@ -598,6 +595,7 @@
       <type>UsualGroup</type>
       <extInfo xsi:type="form:UsualGroupExtInfo">
         <group>AlwaysHorizontal</group>
+        <behavior>Auto</behavior>
         <showLeftMargin>true</showLeftMargin>
         <united>true</united>
         <throughAlign>Auto</throughAlign>
@@ -627,6 +625,7 @@
     <type>UsualGroup</type>
     <extInfo xsi:type="form:UsualGroupExtInfo">
       <group>Vertical</group>
+      <behavior>Auto</behavior>
       <controlRepresentation>Picture</controlRepresentation>
       <representation>WeakSeparation</representation>
       <showLeftMargin>true</showLeftMargin>
@@ -675,6 +674,7 @@
             <autoMaxWidth>true</autoMaxWidth>
             <autoMaxHeight>true</autoMaxHeight>
             <placementArea>UserCmds</placementArea>
+            <toolTipRepresentation>Auto</toolTipRepresentation>
             <representationInContextMenu>Auto</representationInContextMenu>
           </items>
           <items xsi:type="form:Button">
@@ -705,6 +705,7 @@
             <autoMaxWidth>true</autoMaxWidth>
             <autoMaxHeight>true</autoMaxHeight>
             <placementArea>UserCmds</placementArea>
+            <toolTipRepresentation>Auto</toolTipRepresentation>
             <representationInContextMenu>Auto</representationInContextMenu>
           </items>
           <items xsi:type="form:Button">
@@ -735,6 +736,7 @@
             <autoMaxWidth>true</autoMaxWidth>
             <autoMaxHeight>true</autoMaxHeight>
             <placementArea>UserCmds</placementArea>
+            <toolTipRepresentation>Auto</toolTipRepresentation>
             <representationInContextMenu>Auto</representationInContextMenu>
           </items>
           <visible>true</visible>
@@ -796,6 +798,7 @@
           <autoMaxWidth>true</autoMaxWidth>
           <autoMaxHeight>true</autoMaxHeight>
           <placementArea>UserCmds</placementArea>
+          <toolTipRepresentation>Auto</toolTipRepresentation>
           <representationInContextMenu>Auto</representationInContextMenu>
         </items>
         <items xsi:type="form:Button">
@@ -828,6 +831,7 @@
           <height>1</height>
           <autoMaxHeight>true</autoMaxHeight>
           <placementArea>UserCmds</placementArea>
+          <toolTipRepresentation>Auto</toolTipRepresentation>
           <representationInContextMenu>Auto</representationInContextMenu>
         </items>
         <items xsi:type="form:FormGroup">
@@ -864,6 +868,7 @@
               <autoMaxWidth>true</autoMaxWidth>
               <autoMaxHeight>true</autoMaxHeight>
               <placementArea>UserCmds</placementArea>
+              <toolTipRepresentation>Auto</toolTipRepresentation>
               <representationInContextMenu>Auto</representationInContextMenu>
             </items>
             <items xsi:type="form:Button">
@@ -894,6 +899,7 @@
               <autoMaxWidth>true</autoMaxWidth>
               <autoMaxHeight>true</autoMaxHeight>
               <placementArea>UserCmds</placementArea>
+              <toolTipRepresentation>Auto</toolTipRepresentation>
               <representationInContextMenu>Auto</representationInContextMenu>
             </items>
             <items xsi:type="form:Button">
@@ -924,6 +930,7 @@
               <autoMaxWidth>true</autoMaxWidth>
               <autoMaxHeight>true</autoMaxHeight>
               <placementArea>UserCmds</placementArea>
+              <toolTipRepresentation>Auto</toolTipRepresentation>
               <representationInContextMenu>Auto</representationInContextMenu>
             </items>
             <visible>true</visible>
@@ -982,6 +989,7 @@
             <autoMaxWidth>true</autoMaxWidth>
             <autoMaxHeight>true</autoMaxHeight>
             <placementArea>UserCmds</placementArea>
+            <toolTipRepresentation>Auto</toolTipRepresentation>
             <representationInContextMenu>Auto</representationInContextMenu>
           </items>
           <visible>true</visible>
@@ -1036,6 +1044,7 @@
         <type>UsualGroup</type>
         <extInfo xsi:type="form:UsualGroupExtInfo">
           <group>HorizontalIfPossible</group>
+          <behavior>Auto</behavior>
           <showLeftMargin>true</showLeftMargin>
           <united>true</united>
           <throughAlign>Auto</throughAlign>
@@ -1061,10 +1070,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.ItemList.Key</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.ItemList.Key</segments>
           </dataPath>
           <extendedTooltip>
             <name>ItemListKeyExtendedTooltip</name>
@@ -1113,10 +1120,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.ItemList.Locked</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.ItemList.Locked</segments>
           </dataPath>
           <titleLocation>None</titleLocation>
           <extendedTooltip>
@@ -1168,10 +1173,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.ItemList.LineNumber</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.ItemList.LineNumber</segments>
           </dataPath>
           <extendedTooltip>
             <name>ItemListLineNumberExtendedTooltip</name>
@@ -1216,10 +1219,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.ItemList.Item</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.ItemList.Item</segments>
           </dataPath>
           <handlers>
             <event>OnChange</event>
@@ -1280,10 +1281,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.ItemList.ItemKey</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.ItemList.ItemKey</segments>
           </dataPath>
           <handlers>
             <event>OnChange</event>
@@ -1342,10 +1341,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.ItemList.Unit</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.ItemList.Unit</segments>
           </dataPath>
           <extendedTooltip>
             <name>ItemListUnitExtendedTooltip</name>
@@ -1401,10 +1398,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.ItemList.ExpCount</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.ItemList.ExpCount</segments>
           </dataPath>
           <extendedTooltip>
             <name>ItemListExpCountExtendedTooltip</name>
@@ -1455,10 +1450,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.ItemList.PhysCount</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.ItemList.PhysCount</segments>
           </dataPath>
           <handlers>
             <event>OnChange</event>
@@ -1511,10 +1504,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.ItemList.Difference</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.ItemList.Difference</segments>
           </dataPath>
           <extendedTooltip>
             <name>ItemListDifferenceExtendedTooltip</name>
@@ -1564,10 +1555,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.ItemList.ResponsiblePerson</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.ItemList.ResponsiblePerson</segments>
           </dataPath>
           <extendedTooltip>
             <name>ItemListResponsiblePersonExtendedTooltip</name>
@@ -1615,10 +1604,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.ItemList.PhysicalCountByLocation</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.ItemList.PhysicalCountByLocation</segments>
           </dataPath>
           <extendedTooltip>
             <name>ItemListPhysicalCountByLocationExtendedTooltip</name>
@@ -1672,10 +1659,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.ItemList.PhysicalCountByLocationPresentation</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.ItemList.PhysicalCountByLocationPresentation</segments>
           </dataPath>
           <extendedTooltip>
             <name>ItemListPhysicalCountByLocationPresentationExtendedTooltip</name>
@@ -1999,10 +1984,8 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:MultiLanguageDataPath">
-          <paths xsi:type="form:DataPath">
-            <segments>Object.Number</segments>
-          </paths>
+        <dataPath xsi:type="form:DataPath">
+          <segments>Object.Number</segments>
         </dataPath>
         <extendedTooltip>
           <name>NumberExtendedTooltip</name>
@@ -2051,10 +2034,8 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:MultiLanguageDataPath">
-          <paths xsi:type="form:DataPath">
-            <segments>Object.Date</segments>
-          </paths>
+        <dataPath xsi:type="form:DataPath">
+          <segments>Object.Date</segments>
         </dataPath>
         <extendedTooltip>
           <name>DateExtendedTooltip</name>
@@ -2103,10 +2084,8 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:MultiLanguageDataPath">
-          <paths xsi:type="form:DataPath">
-            <segments>Object.Author</segments>
-          </paths>
+        <dataPath xsi:type="form:DataPath">
+          <segments>Object.Author</segments>
         </dataPath>
         <extendedTooltip>
           <name>AuthorExtendedTooltip</name>
@@ -2200,10 +2179,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>PhysicalCountByLocationList.DefaultPicture</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>PhysicalCountByLocationList.DefaultPicture</segments>
           </dataPath>
           <extendedTooltip>
             <name>PhysicalCountByLocationListDefaultPictureExtendedTooltip</name>
@@ -2251,10 +2228,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>PhysicalCountByLocationList.Ref</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>PhysicalCountByLocationList.Ref</segments>
           </dataPath>
           <extendedTooltip>
             <name>PhysicalCountByLocationListRefExtendedTooltip</name>
@@ -2303,10 +2278,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>PhysicalCountByLocationList.ResponsiblePerson</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>PhysicalCountByLocationList.ResponsiblePerson</segments>
           </dataPath>
           <extendedTooltip>
             <name>PhysicalCountByLocationListResponsiblePersonExtendedTooltip</name>
@@ -2355,10 +2328,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>PhysicalCountByLocationList.Status</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>PhysicalCountByLocationList.Status</segments>
           </dataPath>
           <extendedTooltip>
             <name>PhysicalCountByLocationListStatusExtendedTooltip</name>
@@ -2628,10 +2599,8 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:MultiLanguageDataPath">
-          <paths xsi:type="form:DataPath">
-            <segments>Object.RuleEditQuantity</segments>
-          </paths>
+        <dataPath xsi:type="form:DataPath">
+          <segments>Object.RuleEditQuantity</segments>
         </dataPath>
         <extendedTooltip>
           <name>RuleEditQuantityExtendedTooltip</name>
@@ -2717,10 +2686,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.RowIDInfo.LineNumber</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.RowIDInfo.LineNumber</segments>
           </dataPath>
           <extendedTooltip>
             <name>RowIDInfoLineNumberExtendedTooltip</name>
@@ -2769,10 +2736,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.RowIDInfo.Key</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.RowIDInfo.Key</segments>
           </dataPath>
           <extendedTooltip>
             <name>RowIDInfoKeyExtendedTooltip</name>
@@ -2821,10 +2786,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.RowIDInfo.RowID</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.RowIDInfo.RowID</segments>
           </dataPath>
           <extendedTooltip>
             <name>RowIDInfoRowIDExtendedTooltip</name>
@@ -2873,10 +2836,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.RowIDInfo.Quantity</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.RowIDInfo.Quantity</segments>
           </dataPath>
           <extendedTooltip>
             <name>RowIDInfoQuantityExtendedTooltip</name>
@@ -2925,10 +2886,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.RowIDInfo.BasisKey</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.RowIDInfo.BasisKey</segments>
           </dataPath>
           <extendedTooltip>
             <name>RowIDInfoBasisKeyExtendedTooltip</name>
@@ -2977,10 +2936,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.RowIDInfo.Basis</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.RowIDInfo.Basis</segments>
           </dataPath>
           <extendedTooltip>
             <name>RowIDInfoBasisExtendedTooltip</name>
@@ -3029,10 +2986,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.RowIDInfo.CurrentStep</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.RowIDInfo.CurrentStep</segments>
           </dataPath>
           <extendedTooltip>
             <name>RowIDInfoCurrentStepExtendedTooltip</name>
@@ -3081,10 +3036,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.RowIDInfo.NextStep</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.RowIDInfo.NextStep</segments>
           </dataPath>
           <extendedTooltip>
             <name>RowIDInfoNextStepExtendedTooltip</name>
@@ -3133,10 +3086,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.RowIDInfo.RowRef</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.RowIDInfo.RowRef</segments>
           </dataPath>
           <extendedTooltip>
             <name>RowIDInfoRowRefExtendedTooltip</name>
@@ -3402,7 +3353,7 @@
     </extendedTooltip>
     <type>Pages</type>
     <extInfo xsi:type="form:PagesGroupExtInfo">
-      <pagesRepresentation>TabsOnTop</pagesRepresentation>
+      <pagesRepresentation>Auto</pagesRepresentation>
       <currentRowUse>Auto</currentRowUse>
     </extInfo>
   </items>
@@ -3437,6 +3388,7 @@
       <autoMaxWidth>true</autoMaxWidth>
       <autoMaxHeight>true</autoMaxHeight>
       <placementArea>UserCmds</placementArea>
+      <toolTipRepresentation>Auto</toolTipRepresentation>
       <representationInContextMenu>Auto</representationInContextMenu>
       <locationInCommandBar>InAdditionalSubmenu</locationInCommandBar>
     </items>

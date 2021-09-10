@@ -134,6 +134,7 @@
         <type>UsualGroup</type>
         <extInfo xsi:type="form:UsualGroupExtInfo">
           <group>HorizontalIfPossible</group>
+          <behavior>Auto</behavior>
           <showLeftMargin>true</showLeftMargin>
           <united>true</united>
           <throughAlign>Auto</throughAlign>
@@ -263,6 +264,7 @@
         <type>UsualGroup</type>
         <extInfo xsi:type="form:UsualGroupExtInfo">
           <group>HorizontalIfPossible</group>
+          <behavior>Auto</behavior>
           <showLeftMargin>true</showLeftMargin>
           <united>true</united>
           <throughAlign>Auto</throughAlign>
@@ -293,6 +295,7 @@
       <type>UsualGroup</type>
       <extInfo xsi:type="form:UsualGroupExtInfo">
         <group>Vertical</group>
+        <behavior>Auto</behavior>
         <showLeftMargin>true</showLeftMargin>
         <united>true</united>
         <throughAlign>Auto</throughAlign>
@@ -313,10 +316,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.Number</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.Number</segments>
           </dataPath>
           <handlers>
             <event>OnChange</event>
@@ -369,10 +370,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.Date</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.Date</segments>
           </dataPath>
           <handlers>
             <event>OnChange</event>
@@ -440,6 +439,7 @@
         <type>UsualGroup</type>
         <extInfo xsi:type="form:UsualGroupExtInfo">
           <group>Vertical</group>
+          <behavior>Auto</behavior>
           <showLeftMargin>true</showLeftMargin>
           <united>true</united>
           <throughAlign>Auto</throughAlign>
@@ -457,10 +457,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.Company</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.Company</segments>
           </dataPath>
           <handlers>
             <event>OnChange</event>
@@ -513,10 +511,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.Status</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.Status</segments>
           </dataPath>
           <handlers>
             <event>OnChange</event>
@@ -584,6 +580,7 @@
         <type>UsualGroup</type>
         <extInfo xsi:type="form:UsualGroupExtInfo">
           <group>Vertical</group>
+          <behavior>Auto</behavior>
           <showLeftMargin>true</showLeftMargin>
           <united>true</united>
           <throughAlign>Auto</throughAlign>
@@ -601,10 +598,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.Branch</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.Branch</segments>
           </dataPath>
           <handlers>
             <event>OnChange</event>
@@ -657,10 +652,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.CashAccount</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.CashAccount</segments>
           </dataPath>
           <extendedTooltip>
             <name>CashAccountExtendedTooltip</name>
@@ -724,6 +717,7 @@
         <type>UsualGroup</type>
         <extInfo xsi:type="form:UsualGroupExtInfo">
           <group>Vertical</group>
+          <behavior>Auto</behavior>
           <showLeftMargin>true</showLeftMargin>
           <united>true</united>
           <throughAlign>Auto</throughAlign>
@@ -754,6 +748,7 @@
       <type>UsualGroup</type>
       <extInfo xsi:type="form:UsualGroupExtInfo">
         <group>AlwaysHorizontal</group>
+        <behavior>Auto</behavior>
         <showLeftMargin>true</showLeftMargin>
         <united>true</united>
         <throughAlign>Auto</throughAlign>
@@ -788,6 +783,7 @@
     <type>UsualGroup</type>
     <extInfo xsi:type="form:UsualGroupExtInfo">
       <group>Vertical</group>
+      <behavior>Auto</behavior>
       <controlRepresentation>Picture</controlRepresentation>
       <representation>WeakSeparation</representation>
       <showLeftMargin>true</showLeftMargin>
@@ -807,10 +803,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>DataPeriod</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>DataPeriod</segments>
       </dataPath>
       <handlers>
         <event>OnChange</event>
@@ -884,6 +878,7 @@
       <autoMaxWidth>true</autoMaxWidth>
       <autoMaxHeight>true</autoMaxHeight>
       <placementArea>UserCmds</placementArea>
+      <toolTipRepresentation>Auto</toolTipRepresentation>
       <representationInContextMenu>Auto</representationInContextMenu>
     </items>
     <visible>true</visible>
@@ -909,6 +904,7 @@
     <type>UsualGroup</type>
     <extInfo xsi:type="form:UsualGroupExtInfo">
       <group>HorizontalIfPossible</group>
+      <behavior>Auto</behavior>
       <representation>WeakSeparation</representation>
       <showLeftMargin>true</showLeftMargin>
       <united>true</united>
@@ -930,10 +926,8 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:MultiLanguageDataPath">
-          <paths xsi:type="form:DataPath">
-            <segments>Object.BasisDocument</segments>
-          </paths>
+        <dataPath xsi:type="form:DataPath">
+          <segments>Object.BasisDocument</segments>
         </dataPath>
         <shortcut>Ctrl+S</shortcut>
         <handlers>
@@ -1018,10 +1012,8 @@
               <userVisible>
                 <common>true</common>
               </userVisible>
-              <dataPath xsi:type="form:MultiLanguageDataPath">
-                <paths xsi:type="form:DataPath">
-                  <segments>Object.BasisDocument.EndOfPeriod</segments>
-                </paths>
+              <dataPath xsi:type="form:DataPath">
+                <segments>Object.BasisDocument.EndOfPeriod</segments>
               </dataPath>
               <extendedTooltip>
                 <name>BasisDocumentEndOfPeriodExtendedTooltip</name>
@@ -1070,10 +1062,8 @@
               <userVisible>
                 <common>true</common>
               </userVisible>
-              <dataPath xsi:type="form:MultiLanguageDataPath">
-                <paths xsi:type="form:DataPath">
-                  <segments>Object.OpeningBalance</segments>
-                </paths>
+              <dataPath xsi:type="form:DataPath">
+                <segments>Object.OpeningBalance</segments>
               </dataPath>
               <extendedTooltip>
                 <name>OpeningBalanceExtendedTooltip</name>
@@ -1138,6 +1128,7 @@
             <type>UsualGroup</type>
             <extInfo xsi:type="form:UsualGroupExtInfo">
               <group>Vertical</group>
+              <behavior>Auto</behavior>
               <showLeftMargin>true</showLeftMargin>
               <united>true</united>
               <throughAlign>Auto</throughAlign>
@@ -1156,10 +1147,8 @@
             <userVisible>
               <common>true</common>
             </userVisible>
-            <dataPath xsi:type="form:MultiLanguageDataPath">
-              <paths xsi:type="form:DataPath">
-                <segments>Object.ClosingBalance</segments>
-              </paths>
+            <dataPath xsi:type="form:DataPath">
+              <segments>Object.ClosingBalance</segments>
             </dataPath>
             <extendedTooltip>
               <name>ClosingBalanceExtendedTooltip</name>
@@ -1209,10 +1198,8 @@
             <userVisible>
               <common>true</common>
             </userVisible>
-            <dataPath xsi:type="form:MultiLanguageDataPath">
-              <paths xsi:type="form:DataPath">
-                <segments>Object.RealCashBalance</segments>
-              </paths>
+            <dataPath xsi:type="form:DataPath">
+              <segments>Object.RealCashBalance</segments>
             </dataPath>
             <extendedTooltip>
               <name>RealCashBalanceExtendedTooltip</name>
@@ -1280,6 +1267,7 @@
           <type>UsualGroup</type>
           <extInfo xsi:type="form:UsualGroupExtInfo">
             <group>Vertical</group>
+            <behavior>Auto</behavior>
             <representation>WeakSeparation</representation>
             <showLeftMargin>true</showLeftMargin>
             <united>true</united>
@@ -1306,10 +1294,8 @@
             <userVisible>
               <common>true</common>
             </userVisible>
-            <dataPath xsi:type="form:MultiLanguageDataPath">
-              <paths xsi:type="form:DataPath">
-                <segments>Object.SalesAmount</segments>
-              </paths>
+            <dataPath xsi:type="form:DataPath">
+              <segments>Object.SalesAmount</segments>
             </dataPath>
             <extendedTooltip>
               <name>SalesAmountExtendedTooltip</name>
@@ -1362,10 +1348,8 @@
             <userVisible>
               <common>true</common>
             </userVisible>
-            <dataPath xsi:type="form:MultiLanguageDataPath">
-              <paths xsi:type="form:DataPath">
-                <segments>Object.ReturnsAmount</segments>
-              </paths>
+            <dataPath xsi:type="form:DataPath">
+              <segments>Object.ReturnsAmount</segments>
             </dataPath>
             <extendedTooltip>
               <name>ReturnsAmountExtendedTooltip</name>
@@ -1433,6 +1417,7 @@
           <type>UsualGroup</type>
           <extInfo xsi:type="form:UsualGroupExtInfo">
             <group>Vertical</group>
+            <behavior>Auto</behavior>
             <representation>WeakSeparation</representation>
             <showLeftMargin>true</showLeftMargin>
             <united>true</united>
@@ -1467,6 +1452,7 @@
         <type>UsualGroup</type>
         <extInfo xsi:type="form:UsualGroupExtInfo">
           <group>HorizontalIfPossible</group>
+          <behavior>Auto</behavior>
           <showLeftMargin>true</showLeftMargin>
           <united>true</united>
           <throughAlign>Auto</throughAlign>
@@ -1529,10 +1515,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.CashTransactionList.LineNumber</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.CashTransactionList.LineNumber</segments>
           </dataPath>
           <extendedTooltip>
             <name>CashTransactionListLineNumberExtendedTooltip</name>
@@ -1581,10 +1565,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.CashTransactionList.Document</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.CashTransactionList.Document</segments>
           </dataPath>
           <extendedTooltip>
             <name>CashTransactionListDocumentExtendedTooltip</name>
@@ -1633,10 +1615,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.CashTransactionList.Receipt</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.CashTransactionList.Receipt</segments>
           </dataPath>
           <extendedTooltip>
             <name>CashTransactionListReceiptExtendedTooltip</name>
@@ -1668,10 +1648,8 @@
           <showInHeader>true</showInHeader>
           <headerHorizontalAlign>Left</headerHorizontalAlign>
           <showInFooter>true</showInFooter>
-          <footerDataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.CashTransactionList.TotalReceipt</segments>
-            </paths>
+          <footerDataPath xsi:type="form:DataPath">
+            <segments>Object.CashTransactionList.TotalReceipt</segments>
           </footerDataPath>
           <extInfo xsi:type="form:InputFieldExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
@@ -1690,10 +1668,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.CashTransactionList.Expense</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.CashTransactionList.Expense</segments>
           </dataPath>
           <extendedTooltip>
             <name>CashTransactionListExpenseExtendedTooltip</name>
@@ -1725,10 +1701,8 @@
           <showInHeader>true</showInHeader>
           <headerHorizontalAlign>Left</headerHorizontalAlign>
           <showInFooter>true</showInFooter>
-          <footerDataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.CashTransactionList.TotalExpense</segments>
-            </paths>
+          <footerDataPath xsi:type="form:DataPath">
+            <segments>Object.CashTransactionList.TotalExpense</segments>
           </footerDataPath>
           <extInfo xsi:type="form:InputFieldExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
@@ -1966,10 +1940,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.PaymentList.LineNumber</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.PaymentList.LineNumber</segments>
           </dataPath>
           <extendedTooltip>
             <name>PaymentsLineNumberExtendedTooltip</name>
@@ -2018,10 +1990,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.PaymentList.PaymentType</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.PaymentList.PaymentType</segments>
           </dataPath>
           <extendedTooltip>
             <name>PaymentsPaymentTypeExtendedTooltip</name>
@@ -2070,10 +2040,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.PaymentList.Account</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.PaymentList.Account</segments>
           </dataPath>
           <extendedTooltip>
             <name>PaymentsAccountExtendedTooltip</name>
@@ -2122,10 +2090,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.PaymentList.Amount</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.PaymentList.Amount</segments>
           </dataPath>
           <extendedTooltip>
             <name>PaymentsAmountExtendedTooltip</name>
@@ -2157,10 +2123,8 @@
           <showInHeader>true</showInHeader>
           <headerHorizontalAlign>Left</headerHorizontalAlign>
           <showInFooter>true</showInFooter>
-          <footerDataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.PaymentList.TotalAmount</segments>
-            </paths>
+          <footerDataPath xsi:type="form:DataPath">
+            <segments>Object.PaymentList.TotalAmount</segments>
           </footerDataPath>
           <extInfo xsi:type="form:InputFieldExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
@@ -2214,12 +2178,12 @@
           <showInFooter>true</showInFooter>
           <extInfo xsi:type="form:InputFieldExtInfo">
             <handlers>
-              <event>StartChoice</event>
-              <name>PaymentListFinancialMovementTypeStartChoice</name>
-            </handlers>
-            <handlers>
               <event>EditTextChange</event>
               <name>PaymentListFinancialMovementTypeEditTextChange</name>
+            </handlers>
+            <handlers>
+              <event>StartChoice</event>
+              <name>PaymentListFinancialMovementTypeStartChoice</name>
             </handlers>
             <autoMaxWidth>true</autoMaxWidth>
             <autoMaxHeight>true</autoMaxHeight>
@@ -2237,10 +2201,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.PaymentList.Currency</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.PaymentList.Currency</segments>
           </dataPath>
           <extendedTooltip>
             <name>PaymentListCurrencyExtendedTooltip</name>
@@ -2289,10 +2251,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.PaymentList.Commission</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.PaymentList.Commission</segments>
           </dataPath>
           <extendedTooltip>
             <name>PaymentsCommissionExtendedTooltip</name>
@@ -2324,10 +2284,8 @@
           <showInHeader>true</showInHeader>
           <headerHorizontalAlign>Left</headerHorizontalAlign>
           <showInFooter>true</showInFooter>
-          <footerDataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.PaymentList.TotalCommission</segments>
-            </paths>
+          <footerDataPath xsi:type="form:DataPath">
+            <segments>Object.PaymentList.TotalCommission</segments>
           </footerDataPath>
           <extInfo xsi:type="form:InputFieldExtInfo">
             <autoMaxWidth>true</autoMaxWidth>
@@ -2608,7 +2566,7 @@
     </extendedTooltip>
     <type>Pages</type>
     <extInfo xsi:type="form:PagesGroupExtInfo">
-      <pagesRepresentation>TabsOnTop</pagesRepresentation>
+      <pagesRepresentation>Auto</pagesRepresentation>
       <currentRowUse>Auto</currentRowUse>
     </extInfo>
   </items>
@@ -2620,10 +2578,8 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:MultiLanguageDataPath">
-      <paths xsi:type="form:DataPath">
-        <segments>Description</segments>
-      </paths>
+    <dataPath xsi:type="form:DataPath">
+      <segments>Description</segments>
     </dataPath>
     <extendedTooltip>
       <name>DescriptionExtendedTooltip</name>

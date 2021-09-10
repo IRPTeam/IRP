@@ -40,6 +40,7 @@
       <picture xsi:type="core:PictureRef">
         <picture>StdPicture.Reread</picture>
       </picture>
+      <toolTipRepresentation>Auto</toolTipRepresentation>
       <representationInContextMenu>Auto</representationInContextMenu>
     </items>
     <items xsi:type="form:FormField">
@@ -54,10 +55,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>Report.PricePeriod</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>Report.PricePeriod</segments>
       </dataPath>
       <extendedTooltip>
         <name>PricePeriodExtendedTooltip</name>
@@ -121,6 +120,7 @@
     <type>UsualGroup</type>
     <extInfo xsi:type="form:UsualGroupExtInfo">
       <group>AlwaysHorizontal</group>
+      <behavior>Auto</behavior>
       <showLeftMargin>true</showLeftMargin>
       <united>true</united>
       <throughAlign>Auto</throughAlign>
@@ -135,10 +135,8 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:MultiLanguageDataPath">
-      <paths xsi:type="form:DataPath">
-        <segments>Result</segments>
-      </paths>
+    <dataPath xsi:type="form:DataPath">
+      <segments>Result</segments>
     </dataPath>
     <defaultItem>true</defaultItem>
     <titleLocation>None</titleLocation>

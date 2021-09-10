@@ -8,10 +8,8 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:MultiLanguageDataPath">
-      <paths xsi:type="form:DataPath">
-        <segments>ItemRef</segments>
-      </paths>
+    <dataPath xsi:type="form:DataPath">
+      <segments>ItemRef</segments>
     </dataPath>
     <titleLocation>None</titleLocation>
     <extendedTooltip>
@@ -57,10 +55,8 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:MultiLanguageDataPath">
-      <paths xsi:type="form:DataPath">
-        <segments>ItemKey</segments>
-      </paths>
+    <dataPath xsi:type="form:DataPath">
+      <segments>ItemKey</segments>
     </dataPath>
     <titleLocation>None</titleLocation>
     <extendedTooltip>
@@ -106,10 +102,8 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:MultiLanguageDataPath">
-      <paths xsi:type="form:DataPath">
-        <segments>Quantity</segments>
-      </paths>
+    <dataPath xsi:type="form:DataPath">
+      <segments>Quantity</segments>
     </dataPath>
     <defaultItem>true</defaultItem>
     <handlers>
@@ -165,10 +159,8 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:MultiLanguageDataPath">
-      <paths xsi:type="form:DataPath">
-        <segments>Picture</segments>
-      </paths>
+    <dataPath xsi:type="form:DataPath">
+      <segments>Picture</segments>
     </dataPath>
     <titleLocation>None</titleLocation>
     <extendedTooltip>
@@ -244,6 +236,7 @@
       <height>12.0</height>
       <bold>true</bold>
     </font>
+    <toolTipRepresentation>Auto</toolTipRepresentation>
     <representationInContextMenu>Auto</representationInContextMenu>
   </items>
   <autoCommandBar>

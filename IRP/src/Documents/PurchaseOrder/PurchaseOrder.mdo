@@ -73,9 +73,9 @@
   <registerRecords>AccumulationRegister.R1014T_CanceledPurchaseOrders</registerRecords>
   <registerRecords>AccumulationRegister.R4016B_InternalSupplyRequestOrdering</registerRecords>
   <registerRecords>AccumulationRegister.R1010T_PurchaseOrders</registerRecords>
+  <registerRecords>AccumulationRegister.R1022B_VendorsPaymentPlanning</registerRecords>
   <registerRecords>AccumulationRegister.R4033B_GoodsReceiptSchedule</registerRecords>
   <registerRecords>AccumulationRegister.R1011B_PurchaseOrdersReceipt</registerRecords>
-  <registerRecords>AccumulationRegister.R1022B_VendorsPaymentPlanning</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -1177,6 +1177,5 @@
     </commandParameterType>
     <parameterUseMode>Multiple</parameterUseMode>
     <representation>Auto</representation>
-    <shortcut></shortcut>
   </commands>
 </mdclass:Document>

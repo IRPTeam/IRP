@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<form:Form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:form="http://g5.1c.ru/v8/dt/form" xmlns:schema="http://g5.1c.ru/v8/dt/data-composition-system/schema">
+<form:Form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:form="http://g5.1c.ru/v8/dt/form">
   <items xsi:type="form:FormGroup">
     <name>ListSettingsComposerUserSettings</name>
     <id>1</id>
@@ -31,6 +31,7 @@
     <type>UsualGroup</type>
     <extInfo xsi:type="form:UsualGroupExtInfo">
       <group>Vertical</group>
+      <behavior>Auto</behavior>
       <representation>WeakSeparation</representation>
       <showLeftMargin>true</showLeftMargin>
       <united>true</united>
@@ -46,10 +47,8 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:MultiLanguageDataPath">
-      <paths xsi:type="form:DataPath">
-        <segments>List</segments>
-      </paths>
+    <dataPath xsi:type="form:DataPath">
+      <segments>List</segments>
     </dataPath>
     <defaultItem>true</defaultItem>
     <titleLocation>None</titleLocation>
@@ -424,7 +423,6 @@
         </userVisible>
         <autoFill>true</autoFill>
       </contextMenu>
-      <source>ListSearchString</source>
       <extInfo xsi:type="form:SearchStringAdditionExtInfo">
         <autoMaxWidth>true</autoMaxWidth>
       </extInfo>
@@ -463,7 +461,6 @@
         <autoFill>true</autoFill>
       </contextMenu>
       <type>ViewStatusAddition</type>
-      <source>ListViewStatus</source>
       <extInfo xsi:type="form:ViewStatusAdditionExtInfo">
         <autoMaxWidth>true</autoMaxWidth>
       </extInfo>
@@ -502,7 +499,6 @@
         <autoFill>true</autoFill>
       </contextMenu>
       <type>SearchControlAddition</type>
-      <source>List</source>
       <extInfo xsi:type="form:SearchControlAdditionExtInfo">
         <autoMaxWidth>true</autoMaxWidth>
       </extInfo>
@@ -555,10 +551,8 @@
     <enableStartDrag>true</enableStartDrag>
     <enableDrag>true</enableDrag>
     <fileDragMode>AsFileRef</fileDragMode>
-    <rowPictureDataPath xsi:type="form:MultiLanguageDataPath">
-      <paths xsi:type="form:DataPath">
-        <segments>List.DefaultPicture</segments>
-      </paths>
+    <rowPictureDataPath xsi:type="form:DataPath">
+      <segments>List.DefaultPicture</segments>
     </rowPictureDataPath>
     <extInfo xsi:type="form:DynamicListTableExtInfo">
       <autoRefreshPeriod>60</autoRefreshPeriod>
@@ -626,46 +620,6 @@
       <customQuery>true</customQuery>
       <autoSaveUserSettings>true</autoSaveUserSettings>
       <getInvisibleFieldPresentations>true</getInvisibleFieldPresentations>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>Ref</dataPath>
-        <field>Ref</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>DeletionMark</dataPath>
-        <field>DeletionMark</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>Code</dataPath>
-        <field>Code</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>Partner</dataPath>
-        <field>Partner</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>ItemID</dataPath>
-        <field>ItemID</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>Item</dataPath>
-        <field>Item</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>ItemKey</dataPath>
-        <field>ItemKey</field>
-      </fields>
-      <fields xsi:type="schema:DataCompositionSchemaDataSetField">
-        <dataPath>Description</dataPath>
-        <field>Description</field>
-        <title>
-          <localValue>
-            <content>
-              <key>en</key>
-              <value>Description</value>
-            </content>
-          </localValue>
-        </title>
-      </fields>
     </extInfo>
   </attributes>
   <commandInterface>

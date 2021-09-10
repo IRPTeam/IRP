@@ -107,25 +107,25 @@
   <defaultListForm>Document.SalesReturn.Form.ListForm</defaultListForm>
   <defaultChoiceForm>Document.SalesReturn.Form.ChoiceForm</defaultChoiceForm>
   <realTimePosting>Deny</realTimePosting>
+  <registerRecords>AccumulationRegister.R2005T_SalesSpecialOffers</registerRecords>
+  <registerRecords>AccumulationRegister.TM1010B_RowIDMovements</registerRecords>
+  <registerRecords>AccumulationRegister.R5010B_ReconciliationStatement</registerRecords>
+  <registerRecords>AccumulationRegister.R4010B_ActualStocks</registerRecords>
+  <registerRecords>AccumulationRegister.R2002T_SalesReturns</registerRecords>
+  <registerRecords>AccumulationRegister.R4050B_StockInventory</registerRecords>
+  <registerRecords>AccumulationRegister.R2001T_Sales</registerRecords>
+  <registerRecords>AccumulationRegister.R2021B_CustomersTransactions</registerRecords>
+  <registerRecords>AccumulationRegister.R4011B_FreeStocks</registerRecords>
+  <registerRecords>InformationRegister.T2012S_PartnerAdvances</registerRecords>
+  <registerRecords>AccumulationRegister.R4031B_GoodsInTransitIncoming</registerRecords>
+  <registerRecords>AccumulationRegister.R5011B_CustomersAging</registerRecords>
+  <registerRecords>AccumulationRegister.R2020B_AdvancesFromCustomers</registerRecords>
+  <registerRecords>AccumulationRegister.R5021T_Revenues</registerRecords>
+  <registerRecords>AccumulationRegister.R2040B_TaxesIncoming</registerRecords>
+  <registerRecords>AccumulationRegister.TM1010T_RowIDMovements</registerRecords>
   <registerRecords>AccumulationRegister.R4014B_SerialLotNumber</registerRecords>
   <registerRecords>AccumulationRegister.R2031B_ShipmentInvoicing</registerRecords>
   <registerRecords>AccumulationRegister.R2012B_SalesOrdersInvoiceClosing</registerRecords>
-  <registerRecords>AccumulationRegister.R2002T_SalesReturns</registerRecords>
-  <registerRecords>AccumulationRegister.R2005T_SalesSpecialOffers</registerRecords>
-  <registerRecords>AccumulationRegister.R4010B_ActualStocks</registerRecords>
-  <registerRecords>AccumulationRegister.R4011B_FreeStocks</registerRecords>
-  <registerRecords>AccumulationRegister.R4050B_StockInventory</registerRecords>
-  <registerRecords>AccumulationRegister.R4031B_GoodsInTransitIncoming</registerRecords>
-  <registerRecords>AccumulationRegister.R2040B_TaxesIncoming</registerRecords>
-  <registerRecords>AccumulationRegister.R2021B_CustomersTransactions</registerRecords>
-  <registerRecords>AccumulationRegister.R5010B_ReconciliationStatement</registerRecords>
-  <registerRecords>AccumulationRegister.TM1010B_RowIDMovements</registerRecords>
-  <registerRecords>AccumulationRegister.TM1010T_RowIDMovements</registerRecords>
-  <registerRecords>AccumulationRegister.R2020B_AdvancesFromCustomers</registerRecords>
-  <registerRecords>AccumulationRegister.R5021T_Revenues</registerRecords>
-  <registerRecords>AccumulationRegister.R2001T_Sales</registerRecords>
-  <registerRecords>InformationRegister.T2012S_PartnerAdvances</registerRecords>
-  <registerRecords>AccumulationRegister.R5011B_CustomersAging</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -1262,8 +1262,8 @@
     </synonym>
     <group>FormCommandBarCreateBasedOn</group>
     <commandParameterType>
-      <types>DocumentRef.GoodsReceipt</types>
       <types>DocumentRef.SalesReturnOrder</types>
+      <types>DocumentRef.GoodsReceipt</types>
       <types>DocumentRef.SalesInvoice</types>
     </commandParameterType>
     <parameterUseMode>Multiple</parameterUseMode>

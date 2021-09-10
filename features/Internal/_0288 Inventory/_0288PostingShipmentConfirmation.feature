@@ -34,6 +34,7 @@ Scenario: _028800 preparation (Shipment confirmation)
 		When Create catalog AddAttributeAndPropertyValues objects
 		When Create catalog Currencies objects
 		When Create catalog Companies objects (Main company)
+		When Create catalog CancelReturnReasons objects
 		When Create catalog Stores objects
 		When Create catalog Partners objects (Ferron BP)
 		When Create catalog Partners objects (Kalipso)
@@ -757,7 +758,35 @@ Scenario: _028831 check link/unlink form in the SC (Purchase return)
 			| '2' | 'Boots' | ''                   | '36/18SD'  | '2,000'    | ''              | 'Boots (12 pcs)' | 'Store 02' | 'Purchase return 351 dated 24.03.2021 16:08:15' | ''            | ''                         | ''                      | 'Purchase return 351 dated 24.03.2021 16:08:15' |
 		And I close all client application windows
 
-
+Scenario: _028832 cancel line in the SO and create SC
+	* Cancel line in the SO
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I go to line in "List" table
+			| 'Number'                     |
+			| '15' |
+		And I select current line in "List" table
+		And I go to line in "ItemList" table
+			| '#' | 'Item'  | 'Item key' | 'Q'      |
+			| '7' | 'Dress' | 'XS/Blue'  | '10,000' |
+		And I activate "Cancel" field in "ItemList" table
+		And I set "Cancel" checkbox in "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I activate "Cancel reason" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click choice button of "Cancel reason" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description'                     |
+			| 'not available' |	
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And I click "Post" button		
+	* Create SI
+		And I click "Shipment confirmation" button
+		Then "Add linked document rows" window is opened
+		And "BasisesTree" table does not contain lines
+			| 'Row presentation' | 'Quantity' | 'Unit' |
+			| 'Dress (XS/Blue)'  | '10,000'   | 'pcs'  |
+		And I close all client application windows
 
 
 Scenario: _300506 check connection to Shipment Confirmation report "Related documents"

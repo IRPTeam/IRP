@@ -48,6 +48,7 @@ Scenario: _024000 preparation (Sales invoice)
 		When Create information register CurrencyRates records
 		When update ItemKeys
 		When Create catalog BusinessUnits objects
+		When Create catalog CancelReturnReasons objects
 		When Create catalog ExpenseAndRevenueTypes objects
 		When Create catalog Partners objects
 	* Add plugin for taxes calculation
@@ -634,48 +635,37 @@ Scenario: _024025 create document Sales Invoice without Sales order and check Ro
 		Then the number of "RowIDInfo" table lines is "равно" "1"
 		And I close all client application windows
 		
-
+Scenario: _024027 cancel line in the SO and create SI
+	* Cancel line in the SO
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I go to line in "List" table
+			| 'Number'                     |
+			| '15' |
+		And I select current line in "List" table
+		And I go to line in "ItemList" table
+			| '#' | 'Item'  | 'Item key' | 'Q'      |
+			| '7' | 'Dress' | 'XS/Blue'  | '10,000' |
+		And I activate "Cancel" field in "ItemList" table
+		And I set "Cancel" checkbox in "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I activate "Cancel reason" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click choice button of "Cancel reason" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description'                     |
+			| 'not available' |	
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table	
+		And I click "Post" button	
+	* Create SI
+		And I click "Sales invoice" button
+		Then "Add linked document rows" window is opened
+		And "BasisesTree" table does not contain lines
+			| 'Row presentation' | 'Quantity' | 'Unit' |
+			| 'Dress (XS/Blue)'  | '10,000'   | 'pcs'  |
+		And I close all client application windows
 		
-				
-
-# Scenario: _024035 check the form of selection of items (sales invoice)
-# 	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
-# 	And I click the button named "FormCreate"
-# 	* Filling in the main details of the document
-# 		And I click Select button of "Partner" field
-# 		And I go to line in "List" table
-# 			| 'Description' |
-# 			| 'Ferron BP'  |
-# 		And I select current line in "List" table
-# 		And I click Select button of "Partner term" field
-# 		And I go to line in "List" table
-# 			| 'Description'       |
-# 			| 'Basic Partner terms, TRY' |
-# 		And I select current line in "List" table
-# 		And I click Select button of "Legal name" field
-# 		And I go to line in "List" table
-# 			| 'Description' |
-# 			| 'Company Ferron BP'  |
-# 		And I select current line in "List" table
-# 	* Select Store
-# 		And I click Select button of "Store" field
-# 		And I go to line in "List" table
-# 			| 'Description' |
-# 			| 'Store 01'  |
-# 		And I select current line in "List" table
-# 	When check the product selection form with price information in Sales invoice
-# 	And I click the button named "FormPostAndClose"
-# 	* Save check
-# 		And "List" table contains lines
-# 			| 'Partner'     |'Σ'          |
-# 			| 'Ferron BP'   | '2 050,00'  |
-# 	And I close all client application windows
-
-
-
-
-
-
+	
 Scenario: _300505 check connection to Sales invoice report "Related documents"
 	Given I open hyperlink "e1cib/list/Document.SalesInvoice"
 	* Form report Related documents

@@ -446,7 +446,327 @@ Scenario: _2060003 check auto link button in the SI
 			| '4' | ''         | 'Revenue'      | 'Basic Price Types'       | 'Boots'   | '36/18SD'  | 'Front office'            | 'No'                 | ''                   | '65,000' | 'pcs'  | '6 940,68'   | '8 400,00' | '18%' | ''              | '38 559,32'  | '45 500,00'    | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | 'Sales order 3 dated 27.01.2021 19:50:45' |
 		Then the number of "ItemList" table lines is "равно" "4"
 		And I close all client application windows
+
+Scenario: _2060004 check link/unlink form in the SRO
+	* Open form for create SRO
+		Given I open hyperlink "e1cib/list/Document.SalesReturnOrder"
+		And I click the button named "FormCreate"
+	* Filling in the main details of the document
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| Description  |
+			| Main Company | 
+		And I select current line in "List" table
+		And I click Select button of "Store" field
+		And I go to line in "List" table
+			| Description |
+			| Store 01  |
+		And I select current line in "List" table
+		And I click Select button of "Partner" field
+		And I click "List" button
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Crystal'     |
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Company Adel'     |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Basic Partner terms, TRY'     |
+		And I select current line in "List" table
+		And I move to "Other" tab
+		And I click Choice button of the field named "Branch"
+		And I go to line in "List" table
+			| 'Description'             |
+			| 'Distribution department' |
+		And I select current line in "List" table		
+	* Select items from basis documents
+		And in the table "ItemList" I click "Add basis documents" button
+		And I go to line in "BasisesTree" table
+			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
+			| 'TRY'      | '700,00' | '2,000'    | 'Boots (37/18SD)'   | 'pcs'  | 'No'  |
+		And I change "Use" checkbox in "BasisesTree" table
+		And I finish line editing in "BasisesTree" table
+		And I go to line in "BasisesTree" table
+			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
+			| 'TRY'      | '520,00' | '4,000'    | 'Dress (M/White)'   | 'pcs'  | 'No'  |
+		And I change "Use" checkbox in "BasisesTree" table
+		And I finish line editing in "BasisesTree" table
+		And I go to line in "BasisesTree" table
+			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
+			| 'TRY'      | '700,00' | '1,000'    | 'Boots (37/18SD)'   | 'pcs'  | 'No'  |
+		And I change "Use" checkbox in "BasisesTree" table
+		And I finish line editing in "BasisesTree" table
+		And I click "Ok" button
+		And I click "Show row key" button
+		And I click "Save" button		
+	* Check RowIDInfo
+		And "RowIDInfo" table contains lines
+			| '#' | 'Basis'                                       | 'Next step' | 'Q'     | 'Current step' |
+			| '1' | 'Sales invoice 102 dated 05.03.2021 12:57:59' | 'SR'        | '1,000' | 'SRO&SR'       |
+			| '2' | 'Sales invoice 101 dated 05.03.2021 12:56:38' | 'SR'        | '2,000' | 'SRO&SR'       |
+			| '3' | 'Sales invoice 101 dated 05.03.2021 12:56:38' | 'SR'        | '4,000' | 'SRO&SR'       |
+		Then the number of "RowIDInfo" table lines is "равно" "3"
+	* Unlink line
+		And in the table "ItemList" I click "Link unlink basis documents" button		
+		Then "Link / unlink document row" window is opened
+		And I set checkbox "Linked documents"
+		And I go to line in "ItemListRows" table
+			| '#' | 'Quantity' | 'Row presentation' | 'Store'    | 'Unit' |
+			| '2' | '2,000'    | 'Boots (37/18SD)'   | 'Store 01' | 'pcs'  |
+		And I activate field named "ItemListRowsRowPresentation" in "ItemListRows" table
+		And I go to line in "ResultsTree" table
+			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' |
+			| 'TRY'      | '700,00' | '2,000'    | 'Boots (37/18SD)'   | 'pcs'  |
+		And I click "Unlink" button
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'  | 'Q'     | 'Unit' | 'Sales invoice'                               | 'Item key' |
+			| 'Boots' | '1,000' | 'pcs'  | 'Sales invoice 102 dated 05.03.2021 12:57:59' | '37/18SD'  |
+			| 'Boots' | '2,000' | 'pcs'  | ''                                            | '37/18SD'  |
+			| 'Dress' | '4,000' | 'pcs'  | 'Sales invoice 101 dated 05.03.2021 12:56:38' | 'M/White'  |	
+	* Link line
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		And I go to line in "ItemListRows" table
+			| '#' | 'Quantity' | 'Row presentation' | 'Store'    | 'Unit' |
+			| '2' | '2,000'    | 'Boots (37/18SD)'   | 'Store 01' | 'pcs'  |
+		And I set checkbox "Linked documents"
+		And I activate field named "ItemListRowsRowPresentation" in "ItemListRows" table
+		And I go to line in "BasisesTree" table
+			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' |
+			| 'TRY'      | '700,00' | '2,000'    | 'Boots (37/18SD)'   | 'pcs'  |
+		And I click "Link" button
+		And I click "Ok" button
+		And I click "Save" button
+		And "RowIDInfo" table contains lines
+			| '#' | 'Basis'                                       | 'Next step' | 'Q'     | 'Current step' |
+			| '1' | 'Sales invoice 102 dated 05.03.2021 12:57:59' | 'SR'        | '1,000' | 'SRO&SR'       |
+			| '2' | 'Sales invoice 101 dated 05.03.2021 12:56:38' | 'SR'        | '2,000' | 'SRO&SR'       |
+			| '3' | 'Sales invoice 101 dated 05.03.2021 12:56:38' | 'SR'        | '4,000' | 'SRO&SR'       |
+		Then the number of "RowIDInfo" table lines is "равно" "3"
+		And "ItemList" table contains lines
+			| 'Item'  | 'Q'     | 'Unit' | 'Sales invoice'                               | 'Item key' |
+			| 'Boots' | '1,000' | 'pcs'  | 'Sales invoice 102 dated 05.03.2021 12:57:59' | '37/18SD'  |
+			| 'Boots' | '2,000' | 'pcs'  | 'Sales invoice 101 dated 05.03.2021 12:56:38' | '37/18SD'  |
+			| 'Dress' | '4,000' | 'pcs'  | 'Sales invoice 101 dated 05.03.2021 12:56:38' | 'M/White'  |
+	* Delete string, add it again, change unit
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' | 'Q' | 'Store'    |
+			| 'Boots' | '37/18SD'  | '2,000'    | 'Store 01' |
+		And in the table "ItemList" I click the button named "ItemListContextMenuDelete"
+		And in the table "ItemList" I click "Add basis documents" button
+		And I go to line in "BasisesTree" table
+			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
+			| 'TRY'      | '700,00' | '2,000'    | 'Boots (37/18SD)'   | 'pcs'  | 'No'  |
+		And I change "Use" checkbox in "BasisesTree" table
+		And I finish line editing in "BasisesTree" table
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'  | 'Q'     | 'Unit' | 'Sales invoice'                               | 'Item key' |
+			| 'Boots' | '1,000' | 'pcs'  | 'Sales invoice 102 dated 05.03.2021 12:57:59' | '37/18SD'  |
+			| 'Boots' | '2,000' | 'pcs'  | 'Sales invoice 101 dated 05.03.2021 12:56:38' | '37/18SD'  |
+			| 'Dress' | '4,000' | 'pcs'  | 'Sales invoice 101 dated 05.03.2021 12:56:38' | 'M/White'  |
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' | 'Q'     | 'Store'    |
+			| 'Boots' | '37/18SD'  | '2,000' | 'Store 01' |
+		And I activate "Unit" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click choice button of "Unit" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Boots (12 pcs)' |
+		And I select current line in "List" table
+		And I click "Save" button
+		And "RowIDInfo" table contains lines
+			| '#' | 'Basis'                                       | 'Next step' | 'Q'     | 'Current step' |
+			| '1' | 'Sales invoice 102 dated 05.03.2021 12:57:59' | 'SR'        | '1,000' | 'SRO&SR'       |
+			| '2' | 'Sales invoice 101 dated 05.03.2021 12:56:38' | 'SR'        | '4,000' | 'SRO&SR'       |
+			| '3' | 'Sales invoice 101 dated 05.03.2021 12:56:38' | 'SR'        | '24,000' | 'SRO&SR'       |
+		Then the number of "RowIDInfo" table lines is "равно" "3"
+	* Unlink all lines
+		And in the table "ItemList" I click "Link unlink basis documents" button
+		And I set checkbox "Linked documents"
+		And in the table "ResultsTree" I click "Unlink all" button
+		And "BasisesTree" table contains lines
+			| 'Row presentation'                            | 'Quantity' | 'Unit' | 'Price'  | 'Currency' |
+			| 'Sales invoice 101 dated 05.03.2021 12:56:38' | ''         | ''     | ''       | ''         |
+			| 'Boots (37/18SD)'                             | '2,000'    | 'pcs'  | '700,00' | 'TRY'      |
+			| 'Sales invoice 102 dated 05.03.2021 12:57:59' | ''         | ''     | ''       | ''         |
+			| 'Boots (37/18SD)'                             | '1,000'    | 'pcs'  | '700,00' | 'TRY'      |		
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Store'    | 'Quantity in base unit' | 'Item'  | 'Q'     | 'Unit'           | 'Tax amount' | 'Price'    | 'VAT' | 'Net amount' | 'Total amount' | 'Sales invoice' | 'Revenue type' | 'Item key' | 'Cancel' | 'Cancel reason' |
+			| 'Store 01' | '1,000'                 | 'Boots' | '1,000' | 'pcs'            | '113,71'     | '700,00'   | '18%' | '586,29'     | '700,00'       | ''              | 'Revenue'      | '37/18SD'  | 'No'     | ''              |
+			| 'Store 01' | '4,000'                 | 'Dress' | '4,000' | 'pcs'            | '337,88'     | '520,00'   | '18%' | '1 742,12'   | '2 080,00'     | ''              | 'Revenue'      | 'M/White'  | 'No'     | ''              |
+			| 'Store 01' | '24,000'                | 'Boots' | '2,000' | 'Boots (12 pcs)' | '2 562,71'   | '8 400,00' | '18%' | '14 237,29'  | '16 800,00'    | ''              | 'Revenue'      | '37/18SD'  | 'No'     | ''              |
+		Then the number of "ItemList" table lines is "равно" "3"					
+		And I close all client application windows
 		
+Scenario: _2060005 check link/unlink form in the SR
+	* Open form for create SR
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.SalesReturn"
+		And I click the button named "FormCreate"
+	* Filling in the main details of the document
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| Description  |
+			| Main Company | 
+		And I select current line in "List" table
+		And I click Select button of "Store" field
+		And I go to line in "List" table
+			| Description |
+			| Store 01  |
+		And I select current line in "List" table
+		And I click Select button of "Partner" field
+		And I click "List" button
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Crystal'     |
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Company Adel'     |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Basic Partner terms, TRY'     |
+		And I select current line in "List" table
+		And I move to "Other" tab
+		And I click Choice button of the field named "Branch"
+		And I go to line in "List" table
+			| 'Description'             |
+			| 'Distribution department' |
+		And I select current line in "List" table		
+	* Select items from basis documents
+		And I click "Add basis documents" button
+		And I go to line in "BasisesTree" table
+			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
+			| 'TRY'      | '700,00' | '2,000'    | 'Boots (37/18SD)'   | 'pcs'  | 'No'  |
+		And I change "Use" checkbox in "BasisesTree" table
+		And I finish line editing in "BasisesTree" table
+		And I go to line in "BasisesTree" table
+			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
+			| 'TRY'      | '520,00' | '4,000'    | 'Dress (M/White)'   | 'pcs'  | 'No'  |
+		And I change "Use" checkbox in "BasisesTree" table
+		And I finish line editing in "BasisesTree" table
+		And I go to line in "BasisesTree" table
+			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
+			| 'TRY'      | '700,00' | '1,000'    | 'Boots (37/18SD)'   | 'pcs'  | 'No'  |
+		And I change "Use" checkbox in "BasisesTree" table
+		And I finish line editing in "BasisesTree" table
+		And I click "Ok" button
+		And I click "Show row key" button
+		And I click "Save" button		
+	* Check RowIDInfo
+		And "RowIDInfo" table contains lines
+			| '#' | 'Basis'                                       | 'Next step' | 'Q'     | 'Current step' |
+			| '1' | 'Sales invoice 102 dated 05.03.2021 12:57:59' | ''          | '1,000' | 'SRO&SR'       |
+			| '2' | 'Sales invoice 101 dated 05.03.2021 12:56:38' | ''          | '2,000' | 'SRO&SR'       |
+			| '3' | 'Sales invoice 101 dated 05.03.2021 12:56:38' | ''          | '4,000' | 'SRO&SR'       |
+		Then the number of "RowIDInfo" table lines is "равно" "3"
+	* Unlink line
+		And I click "Link unlink basis documents" button		
+		Then "Link / unlink document row" window is opened
+		And I set checkbox "Linked documents"
+		And I go to line in "ItemListRows" table
+			| '#' | 'Quantity' | 'Row presentation' | 'Store'    | 'Unit' |
+			| '2' | '2,000'    | 'Boots (37/18SD)'   | 'Store 01' | 'pcs'  |
+		And I activate field named "ItemListRowsRowPresentation" in "ItemListRows" table
+		And I go to line in "ResultsTree" table
+			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' |
+			| 'TRY'      | '700,00' | '2,000'    | 'Boots (37/18SD)'   | 'pcs'  |
+		And I click "Unlink" button
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'  | 'Q'     | 'Unit' | 'Sales invoice'                               | 'Item key' |
+			| 'Boots' | '1,000' | 'pcs'  | 'Sales invoice 102 dated 05.03.2021 12:57:59' | '37/18SD'  |
+			| 'Boots' | '2,000' | 'pcs'  | ''                                            | '37/18SD'  |
+			| 'Dress' | '4,000' | 'pcs'  | 'Sales invoice 101 dated 05.03.2021 12:56:38' | 'M/White'  |	
+	* Link line
+		And I click "Link unlink basis documents" button
+		And I go to line in "ItemListRows" table
+			| '#' | 'Quantity' | 'Row presentation' | 'Store'    | 'Unit' |
+			| '2' | '2,000'    | 'Boots (37/18SD)'   | 'Store 01' | 'pcs'  |
+		And I set checkbox "Linked documents"
+		And I activate field named "ItemListRowsRowPresentation" in "ItemListRows" table
+		And I go to line in "BasisesTree" table
+			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' |
+			| 'TRY'      | '700,00' | '2,000'    | 'Boots (37/18SD)'   | 'pcs'  |
+		And I click "Link" button
+		And I click "Ok" button
+		And I click "Save" button
+		And "RowIDInfo" table contains lines
+			| '#' | 'Basis'                                       | 'Next step' | 'Q'     | 'Current step' |
+			| '1' | 'Sales invoice 102 dated 05.03.2021 12:57:59' | ''          | '1,000' | 'SRO&SR'       |
+			| '2' | 'Sales invoice 101 dated 05.03.2021 12:56:38' | ''          | '2,000' | 'SRO&SR'       |
+			| '3' | 'Sales invoice 101 dated 05.03.2021 12:56:38' | ''          | '4,000' | 'SRO&SR'       |
+		Then the number of "RowIDInfo" table lines is "равно" "3"
+		And "ItemList" table contains lines
+			| 'Item'  | 'Q'     | 'Unit' | 'Sales invoice'                               | 'Item key' |
+			| 'Boots' | '1,000' | 'pcs'  | 'Sales invoice 102 dated 05.03.2021 12:57:59' | '37/18SD'  |
+			| 'Boots' | '2,000' | 'pcs'  | 'Sales invoice 101 dated 05.03.2021 12:56:38' | '37/18SD'  |
+			| 'Dress' | '4,000' | 'pcs'  | 'Sales invoice 101 dated 05.03.2021 12:56:38' | 'M/White'  |
+	* Delete string, add it again, change unit
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' | 'Q' | 'Store'    |
+			| 'Boots' | '37/18SD'  | '2,000'    | 'Store 01' |
+		And in the table "ItemList" I click the button named "ItemListContextMenuDelete"
+		And I click "Add basis documents" button
+		And I go to line in "BasisesTree" table
+			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
+			| 'TRY'      | '700,00' | '2,000'    | 'Boots (37/18SD)'   | 'pcs'  | 'No'  |
+		And I change "Use" checkbox in "BasisesTree" table
+		And I finish line editing in "BasisesTree" table
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'  | 'Q'     | 'Unit' | 'Sales invoice'                               | 'Item key' |
+			| 'Boots' | '1,000' | 'pcs'  | 'Sales invoice 102 dated 05.03.2021 12:57:59' | '37/18SD'  |
+			| 'Boots' | '2,000' | 'pcs'  | 'Sales invoice 101 dated 05.03.2021 12:56:38' | '37/18SD'  |
+			| 'Dress' | '4,000' | 'pcs'  | 'Sales invoice 101 dated 05.03.2021 12:56:38' | 'M/White'  |
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' | 'Q'     | 'Store'    |
+			| 'Boots' | '37/18SD'  | '2,000' | 'Store 01' |
+		And I activate "Unit" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click choice button of "Unit" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'Boots (12 pcs)' |
+		And I select current line in "List" table
+		And I click "Save" button
+		And "RowIDInfo" table contains lines
+			| '#' | 'Basis'                                       | 'Next step' | 'Q'      | 'Current step' |
+			| '1' | 'Sales invoice 102 dated 05.03.2021 12:57:59' | ''          | '1,000'  | 'SRO&SR'       |
+			| '2' | 'Sales invoice 101 dated 05.03.2021 12:56:38' | ''          | '4,000'  | 'SRO&SR'       |
+			| '3' | 'Sales invoice 101 dated 05.03.2021 12:56:38' | ''          | '24,000' | 'SRO&SR'       |
+		Then the number of "RowIDInfo" table lines is "равно" "3"
+	* Unlink all lines
+		And I click "Link unlink basis documents" button
+		And I set checkbox "Linked documents"
+		And in the table "ResultsTree" I click "Unlink all" button
+		And "BasisesTree" table contains lines
+			| 'Row presentation'                            | 'Quantity' | 'Unit' | 'Price'  | 'Currency' |
+			| 'Sales invoice 101 dated 05.03.2021 12:56:38' | ''         | ''     | ''       | ''         |
+			| 'Boots (37/18SD)'                             | '2,000'    | 'pcs'  | '700,00' | 'TRY'      |
+			| 'Sales invoice 102 dated 05.03.2021 12:57:59' | ''         | ''     | ''       | ''         |
+			| 'Boots (37/18SD)'                             | '1,000'    | 'pcs'  | '700,00' | 'TRY'      |		
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Store'    | 'Quantity in base unit' | 'Item'  | 'Q'     | 'Unit'           | 'Tax amount' | 'Price'    | 'VAT' | 'Net amount' | 'Total amount' | 'Sales invoice' | 'Revenue type' | 'Item key' |
+			| 'Store 01' | '1,000'                 | 'Boots' | '1,000' | 'pcs'            | '113,71'     | '700,00'   | '18%' | '586,29'     | '700,00'       | ''              | 'Revenue'      | '37/18SD'  |
+			| 'Store 01' | '4,000'                 | 'Dress' | '4,000' | 'pcs'            | '337,88'     | '520,00'   | '18%' | '1 742,12'   | '2 080,00'     | ''              | 'Revenue'      | 'M/White'  |
+			| 'Store 01' | '24,000'                | 'Boots' | '2,000' | 'Boots (12 pcs)' | '2 562,71'   | '8 400,00' | '18%' | '14 237,29'  | '16 800,00'    | ''              | 'Revenue'      | '37/18SD'  |
+		Then the number of "ItemList" table lines is "равно" "3"					
+		And I close all client application windows
+
+
 Scenario: _2060007 select items from basis documents in the PI
 	* Open form for create PI
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
@@ -500,6 +820,305 @@ Scenario: _2060007 select items from basis documents in the PI
 		And I close all client application windows
 
 
+Scenario: _2060008 check link/unlink form in the PRO
+	* Open form for create PRO
+		Given I open hyperlink "e1cib/list/Document.PurchaseReturnOrder"
+		And I click the button named "FormCreate"
+	* Filling in the main details of the document
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| Description  |
+			| Main Company | 
+		And I select current line in "List" table
+		And I click Select button of "Partner" field
+		And I click "List" button
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Crystal'     |
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Company Adel'     |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Vendor, TRY'     |
+		And I select current line in "List" table
+		And I click Select button of "Store" field
+		And I go to line in "List" table
+			| Description |
+			| Store 02  |
+		And I select current line in "List" table	
+	* Select items from basis documents
+		And I click the button named "AddBasisDocuments"
+		And I go to line in "BasisesTree" table
+			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
+			| 'TRY'      | '520,00' | '10,000'   | 'Dress (M/White)'  | 'pcs'  | 'No'  |
+		And I change "Use" checkbox in "BasisesTree" table
+		And I finish line editing in "BasisesTree" table
+		And I go to line in "BasisesTree" table
+			| 'Currency' | 'Price'    | 'Quantity' | 'Row presentation' | 'Unit'           | 'Use' |
+			| 'TRY'      | '8 400,00' | '2,000'    | 'Boots (36/18SD)'  | 'Boots (12 pcs)' | 'No'  |
+		And I change "Use" checkbox in "BasisesTree" table
+		And I finish line editing in "BasisesTree" table
+		And I go to line in "BasisesTree" table
+			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
+			| 'TRY'      | '520,00' | '3,000'    | 'Dress (M/White)'   | 'pcs'  | 'No'  |
+		And I change "Use" checkbox in "BasisesTree" table
+		And I finish line editing in "BasisesTree" table
+		And I click "Ok" button
+		And I click "Show row key" button
+		And I click "Save" button		
+	* Check RowIDInfo
+		And "RowIDInfo" table contains lines
+			| '#' | 'Basis'                                          | 'Next step' | 'Q'      | 'Current step' |
+			| '1' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' | 'PR'        | '10,000' | 'PRO&PR'       |
+			| '2' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' | 'PR'        | '3,000'  | 'PRO&PR'       |
+			| '3' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' | 'PR'        | '24,000' | 'PRO&PR'       |
+		Then the number of "RowIDInfo" table lines is "равно" "3"
+	* Unlink line
+		And I click the button named "LinkUnlinkBasisDocuments"			
+		Then "Link / unlink document row" window is opened
+		And I set checkbox "Linked documents"
+		And I go to line in "ItemListRows" table
+			| '#' | 'Quantity' | 'Row presentation' | 'Store'    | 'Unit' |
+			| '2' | '3,000'    | 'Dress (M/White)'   | 'Store 02' | 'pcs'  |
+		And I activate field named "ItemListRowsRowPresentation" in "ItemListRows" table
+		And I click "Unlink" button
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'  | 'Item key' | 'Q'      | 'Unit'           | 'Purchase invoice'                               |
+			| 'Dress' | 'M/White'  | '10,000' | 'pcs'            | 'Purchase invoice 101 dated 05.03.2021 12:14:08' |
+			| 'Dress' | 'M/White'  | '3,000'  | 'pcs'            | ''                                               |
+			| 'Boots' | '36/18SD'  | '2,000'  | 'Boots (12 pcs)' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' |				
+	* Link line
+		And I click the button named "LinkUnlinkBasisDocuments"	
+		And I go to line in "ItemListRows" table
+			| '#' | 'Quantity' | 'Row presentation' | 'Store'    | 'Unit' |
+			| '2' | '3,000'    | 'Dress (M/White)'   | 'Store 02' | 'pcs'  |
+		And I set checkbox "Linked documents"
+		And I activate field named "ItemListRowsRowPresentation" in "ItemListRows" table
+		And I go to line in "BasisesTree" table
+			| 'Currency' | 'Quantity' | 'Row presentation' | 'Unit' |
+			| 'TRY'      | '3,000'    | 'Dress (M/White)'  | 'pcs'  |
+		And I click "Link" button
+		And I click "Ok" button
+		And I click "Save" button
+		And "RowIDInfo" table contains lines
+			| '#' | 'Basis'                                          | 'Next step' | 'Q'      | 'Current step' |
+			| '1' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' | 'PR'        | '10,000' | 'PRO&PR'       |
+			| '2' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' | 'PR'        | '3,000'  | 'PRO&PR'       |
+			| '3' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' | 'PR'        | '24,000' | 'PRO&PR'       |
+		Then the number of "RowIDInfo" table lines is "равно" "3"
+		And "ItemList" table contains lines
+			| 'Item'  | 'Item key' | 'Q'      | 'Unit'           | 'Purchase invoice'                               |
+			| 'Dress' | 'M/White'  | '10,000' | 'pcs'            | 'Purchase invoice 101 dated 05.03.2021 12:14:08' |
+			| 'Dress' | 'M/White'  | '3,000'  | 'pcs'            | 'Purchase invoice 101 dated 05.03.2021 12:14:08' |
+			| 'Boots' | '36/18SD'  | '2,000'  | 'Boots (12 pcs)' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' |
+	* Delete string, add it again, change unit
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' | 'Q'     | 'Store'    |
+			| 'Dress' | 'M/White'  | '3,000' | 'Store 02' |
+		And in the table "ItemList" I click the button named "ItemListContextMenuDelete"
+		And I click the button named "AddBasisDocuments"
+		And I go to line in "BasisesTree" table
+			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
+			| 'TRY'      | '520,00' | '3,000'    | 'Dress (M/White)'   | 'pcs'  | 'No'  |
+		And I change "Use" checkbox in "BasisesTree" table
+		And I finish line editing in "BasisesTree" table
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'  | 'Item key' | 'Q'      | 'Unit'           | 'Purchase invoice'                               |
+			| 'Dress' | 'M/White'  | '10,000' | 'pcs'            | 'Purchase invoice 101 dated 05.03.2021 12:14:08' |
+			| 'Dress' | 'M/White'  | '3,000'  | 'pcs'            | 'Purchase invoice 101 dated 05.03.2021 12:14:08' |
+			| 'Boots' | '36/18SD'  | '2,000'  | 'Boots (12 pcs)' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' |
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' | 'Q'     | 'Store'    |
+			| 'Boots' | '36/18SD'  | '2,000' | 'Store 02' |
+		And I activate "Unit" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click choice button of "Unit" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'pcs' |
+		And I select current line in "List" table
+		And I click "Save" button
+		And "RowIDInfo" table contains lines
+			| '#' | 'Basis'                                          | 'Next step' | 'Q'      | 'Current step' |
+			| '1' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' | 'PR'        | '10,000' | 'PRO&PR'       |
+			| '2' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' | 'PR'        | '2,000'  | 'PRO&PR'       |
+			| '3' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' | 'PR'        | '3,000' | 'PRO&PR'       |
+		Then the number of "RowIDInfo" table lines is "равно" "3"
+	* Unlink all lines
+		And I click the button named "LinkUnlinkBasisDocuments"	
+		And I set checkbox "Linked documents"
+		And in the table "ResultsTree" I click "Unlink all" button
+		And "BasisesTree" table contains lines
+			| 'Row presentation'                               | 'Quantity' | 'Unit' | 'Price'  | 'Currency' |
+			| 'Purchase invoice 101 dated 05.03.2021 12:14:08' | ''         | ''     | ''       | ''         |
+			| 'Dress (M/White)'                                | '10,000'   | 'pcs'  | '520,00' | 'TRY'      |
+			| 'Dress (M/White)'                                | '3,000'    | 'pcs'  | '520,00' | 'TRY'      |			
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Store'    | 'Quantity in base unit' | '#' | 'Item'  | 'Item key' | 'Cancel' | 'Q'      | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Purchase invoice' | 'Net amount' | 'Total amount' | 'Expense type' |
+			| 'Store 02' | '10,000'                | '1' | 'Dress' | 'M/White'  | 'No'     | '10,000' | 'pcs'  | '936,00'     | '520,00' | '18%' | ''                 | '5 200,00'   | '6 136,00'     | ''             |
+			| 'Store 02' | '2,000'                 | '2' | 'Boots' | '36/18SD'  | 'No'     | '2,000'  | 'pcs'  | '252,00'     | '700,00' | '18%' | ''                 | '1 400,00'   | '1 652,00'     | ''             |
+			| 'Store 02' | '3,000'                 | '3' | 'Dress' | 'M/White'  | 'No'     | '3,000'  | 'pcs'  | '280,80'     | '520,00' | '18%' | ''                 | '1 560,00'   | '1 840,80'     | ''             |		
+		Then the number of "ItemList" table lines is "равно" "3"					
+		And I close all client application windows
+
+
+Scenario: _2060008 check link/unlink form in the PR
+	* Open form for create PR
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
+		And I click the button named "FormCreate"
+	* Filling in the main details of the document
+		And I click Select button of "Company" field
+		And I go to line in "List" table
+			| Description  |
+			| Main Company | 
+		And I select current line in "List" table
+		And I click Select button of "Partner" field
+		And I click "List" button
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Crystal'     |
+		And I select current line in "List" table
+		And I click Select button of "Legal name" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Company Adel'     |
+		And I select current line in "List" table
+		And I click Select button of "Partner term" field
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Vendor, TRY'     |
+		And I select current line in "List" table
+		And I click Select button of "Store" field
+		And I go to line in "List" table
+			| Description |
+			| Store 02  |
+		And I select current line in "List" table	
+	* Select items from basis documents
+		And I click the button named "AddBasisDocuments"
+		And I go to line in "BasisesTree" table
+			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
+			| 'TRY'      | '520,00' | '10,000'   | 'Dress (M/White)'  | 'pcs'  | 'No'  |
+		And I change "Use" checkbox in "BasisesTree" table
+		And I finish line editing in "BasisesTree" table
+		And I go to line in "BasisesTree" table
+			| 'Currency' | 'Price'    | 'Quantity' | 'Row presentation' | 'Unit'           | 'Use' |
+			| 'TRY'      | '8 400,00' | '2,000'    | 'Boots (36/18SD)'  | 'Boots (12 pcs)' | 'No'  |
+		And I change "Use" checkbox in "BasisesTree" table
+		And I finish line editing in "BasisesTree" table
+		And I go to line in "BasisesTree" table
+			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
+			| 'TRY'      | '520,00' | '3,000'    | 'Dress (M/White)'   | 'pcs'  | 'No'  |
+		And I change "Use" checkbox in "BasisesTree" table
+		And I finish line editing in "BasisesTree" table
+		And I click "Ok" button
+		And I click "Show row key" button
+		And I click "Save" button		
+	* Check RowIDInfo
+		And "RowIDInfo" table contains lines
+			| '#' | 'Basis'                                          | 'Next step' | 'Q'      | 'Current step' |
+			| '1' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' | ''          | '10,000' | 'PRO&PR'       |
+			| '2' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' | ''          | '3,000'  | 'PRO&PR'       |
+			| '3' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' | ''          | '24,000' | 'PRO&PR'       |
+		Then the number of "RowIDInfo" table lines is "равно" "3"
+	* Unlink line
+		And I click the button named "LinkUnlinkBasisDocuments"			
+		Then "Link / unlink document row" window is opened
+		And I set checkbox "Linked documents"
+		And I go to line in "ItemListRows" table
+			| '#' | 'Quantity' | 'Row presentation' | 'Store'    | 'Unit' |
+			| '2' | '3,000'    | 'Dress (M/White)'   | 'Store 02' | 'pcs'  |
+		And I activate field named "ItemListRowsRowPresentation" in "ItemListRows" table
+		And I click "Unlink" button
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'  | 'Item key' | 'Q'      | 'Unit'           | 'Purchase invoice'                               |
+			| 'Dress' | 'M/White'  | '10,000' | 'pcs'            | 'Purchase invoice 101 dated 05.03.2021 12:14:08' |
+			| 'Dress' | 'M/White'  | '3,000'  | 'pcs'            | ''                                               |
+			| 'Boots' | '36/18SD'  | '2,000'  | 'Boots (12 pcs)' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' |				
+	* Link line
+		And I click the button named "LinkUnlinkBasisDocuments"	
+		And I go to line in "ItemListRows" table
+			| '#' | 'Quantity' | 'Row presentation' | 'Store'    | 'Unit' |
+			| '2' | '3,000'    | 'Dress (M/White)'   | 'Store 02' | 'pcs'  |
+		And I set checkbox "Linked documents"
+		And I activate field named "ItemListRowsRowPresentation" in "ItemListRows" table
+		And I go to line in "BasisesTree" table
+			| 'Currency' | 'Quantity' | 'Row presentation' | 'Unit' |
+			| 'TRY'      | '3,000'    | 'Dress (M/White)'  | 'pcs'  |
+		And I click "Link" button
+		And I click "Ok" button
+		And I click "Save" button
+		And "RowIDInfo" table contains lines
+			| '#' | 'Basis'                                          | 'Next step' | 'Q'      | 'Current step' |
+			| '1' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' | ''          | '10,000' | 'PRO&PR'       |
+			| '2' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' | ''          | '3,000'  | 'PRO&PR'       |
+			| '3' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' | ''          | '24,000' | 'PRO&PR'       |
+		Then the number of "RowIDInfo" table lines is "равно" "3"
+		And "ItemList" table contains lines
+			| 'Item'  | 'Item key' | 'Q'      | 'Unit'           | 'Purchase invoice'                               |
+			| 'Dress' | 'M/White'  | '10,000' | 'pcs'            | 'Purchase invoice 101 dated 05.03.2021 12:14:08' |
+			| 'Dress' | 'M/White'  | '3,000'  | 'pcs'            | 'Purchase invoice 101 dated 05.03.2021 12:14:08' |
+			| 'Boots' | '36/18SD'  | '2,000'  | 'Boots (12 pcs)' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' |
+	* Delete string, add it again, change unit
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' | 'Q'     | 'Store'    |
+			| 'Dress' | 'M/White'  | '3,000' | 'Store 02' |
+		And in the table "ItemList" I click the button named "ItemListContextMenuDelete"
+		And I click the button named "AddBasisDocuments"
+		And I go to line in "BasisesTree" table
+			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
+			| 'TRY'      | '520,00' | '3,000'    | 'Dress (M/White)'   | 'pcs'  | 'No'  |
+		And I change "Use" checkbox in "BasisesTree" table
+		And I finish line editing in "BasisesTree" table
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Item'  | 'Item key' | 'Q'      | 'Unit'           | 'Purchase invoice'                               |
+			| 'Dress' | 'M/White'  | '10,000' | 'pcs'            | 'Purchase invoice 101 dated 05.03.2021 12:14:08' |
+			| 'Dress' | 'M/White'  | '3,000'  | 'pcs'            | 'Purchase invoice 101 dated 05.03.2021 12:14:08' |
+			| 'Boots' | '36/18SD'  | '2,000'  | 'Boots (12 pcs)' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' |
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' | 'Q'     | 'Store'    |
+			| 'Boots' | '36/18SD'  | '2,000' | 'Store 02' |
+		And I activate "Unit" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I click choice button of "Unit" attribute in "ItemList" table
+		And I go to line in "List" table
+			| 'Description'    |
+			| 'pcs' |
+		And I select current line in "List" table
+		And I click "Save" button
+		And "RowIDInfo" table contains lines
+			| '#' | 'Basis'                                          | 'Next step' | 'Q'      | 'Current step' |
+			| '1' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' | ''          | '10,000' | 'PRO&PR'       |
+			| '2' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' | ''          | '2,000'  | 'PRO&PR'       |
+			| '3' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' | ''          | '3,000'  | 'PRO&PR'       |
+		Then the number of "RowIDInfo" table lines is "равно" "3"
+	* Unlink all lines
+		And I click the button named "LinkUnlinkBasisDocuments"	
+		And I set checkbox "Linked documents"
+		And in the table "ResultsTree" I click "Unlink all" button
+		And "BasisesTree" table contains lines
+			| 'Row presentation'                               | 'Quantity' | 'Unit' | 'Price'  | 'Currency' |
+			| 'Purchase invoice 101 dated 05.03.2021 12:14:08' | ''         | ''     | ''       | ''         |
+			| 'Dress (M/White)'                                | '10,000'   | 'pcs'  | '520,00' | 'TRY'      |
+			| 'Dress (M/White)'                                | '3,000'    | 'pcs'  | '520,00' | 'TRY'      |			
+		And I click "Ok" button
+		And "ItemList" table contains lines
+			| 'Store'    | 'Quantity in base unit' | '#' | 'Item'  | 'Item key' | 'Q'      | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Purchase invoice' | 'Net amount' | 'Total amount' | 'Expense type' |
+			| 'Store 02' | '10,000'                | '1' | 'Dress' | 'M/White'  | '10,000' | 'pcs'  | '936,00'     | '520,00' | '18%' | ''                 | '5 200,00'   | '6 136,00'     | ''             |
+			| 'Store 02' | '2,000'                 | '2' | 'Boots' | '36/18SD'  | '2,000'  | 'pcs'  | '252,00'     | '700,00' | '18%' | ''                 | '1 400,00'   | '1 652,00'     | ''             |
+			| 'Store 02' | '3,000'                 | '3' | 'Dress' | 'M/White'  | '3,000'  | 'pcs'  | '280,80'     | '520,00' | '18%' | ''                 | '1 560,00'   | '1 840,80'     | ''             |
+		Then the number of "ItemList" table lines is "равно" "3"					
+		And I close all client application windows
 
 Scenario: _2060010 select items from basis documents in the SI
 	* Open form for create SI

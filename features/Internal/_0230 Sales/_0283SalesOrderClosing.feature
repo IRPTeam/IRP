@@ -163,6 +163,39 @@ Scenario: _0230002 create and check filling Sales order closing (SO partially sh
 			| 'Distribution department' | 'Basic Price Types'       | 'Boots'   | 'No'                 | '24,000' | 'pcs'  | '2 562,71'   | '8 400,00' | ''              | '14 237,29'  | '16 800,00'    | 'Store 02' | 'Revenue'      | ''       | '37/18SD'  | 'Purchase'           | 'Yes'    | '09.02.2021'    | ''              |
 			| 'Front office'            | 'en description is empty' | 'Service' | 'No'                 | '1,000'  | 'pcs'  | '15,25'      | '100,00'   | ''              | '84,75'      | '100,00'       | 'Store 02' | 'Revenue'      | ''       | 'Interner' | ''                   | 'Yes'    | '09.02.2021'    | ''              |
 		Then the number of "ItemList" table lines is "equal" "3"
+		And I go to line in "ItemList" table
+			| '#' |
+			| '1' |
+		And I select current line in "ItemList" table
+		And I click choice button of "Cancel reason" attribute in "ItemList" table
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| '#' |
+			| '2' |
+		And I select current line in "ItemList" table
+		And I click choice button of "Cancel reason" attribute in "ItemList" table
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| '#' |
+			| '3' |
+		And I select current line in "ItemList" table
+		And I click choice button of "Cancel reason" attribute in "ItemList" table
+		And I select current line in "List" table
+		And I finish line editing in "ItemList" table
+		And I click "Post and close" button
+	* Check SO mark
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And "List" table contains lines
+			| 'Number' | 'Closed' |
+			| '32'     | 'Yes'    |
+	* Repost SO
+		And I go to line in "List" table
+			| 'Number' |
+			| '32' |
+		And in the table "List" I click the button named "ListContextMenuPost"
+		Then user message window does not contain messages
 		And I close all client application windows
 
 

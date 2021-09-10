@@ -15,7 +15,6 @@ Procedure CheckUniqueIDBeforeWrite(Source, Cancel) Export
 	DataLockItem.Mode = DataLockMode.Shared;
 	DataLock.Lock();
 	Try
-		//@skip-warning
 		Str = New Structure(Source.UniqueID);
 	Except
 		Cancel = True;

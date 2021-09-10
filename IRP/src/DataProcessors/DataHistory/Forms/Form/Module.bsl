@@ -1,4 +1,3 @@
-
 &AtClient
 Procedure SaveSettings(Command)
 	SaveSettingsAtServer();
@@ -24,10 +23,10 @@ Procedure FillTree()
 		If Not Metadata[MetaRow.Key].Count() Then
 			Continue;
 		EndIf;
-		
+
 		NewRow = MetadataTree.GetItems().Add();
 		NewRow.Name = MetaRow.Key;
-		
+
 		For Each ObRow In Metadata[MetaRow.Key] Do
 			AddRow = NewRow.GetItems().Add();
 			AddRow.Name = ObRow.Name;
@@ -35,16 +34,16 @@ Procedure FillTree()
 			If Settings = Undefined Then
 				AddRow.Use = ObRow.DataHistory = Metadata.ObjectProperties.DataHistoryUse.Use;
 			Else
-				AddRow.Use = Settings.Use;				
+				AddRow.Use = Settings.Use;
 			EndIf;
 		EndDo;
-		
+
 	EndDo;
 EndProcedure
 
 &AtServer
 Function FillMetadataStructure()
-	Structure = New Structure;
+	Structure = New Structure();
 	Structure.Insert("BusinessProcesses");
 	Structure.Insert("CalculationRegisters");
 	Structure.Insert("Catalogs");
@@ -57,7 +56,7 @@ Function FillMetadataStructure()
 	Structure.Insert("InformationRegisters");
 	Structure.Insert("Sequences");
 	Structure.Insert("Tasks");
-	Return  Structure;
+	Return Structure;
 EndFunction
 
 &AtServer
@@ -65,14 +64,14 @@ Procedure SaveSettingsAtServer()
 	For Each Row In MetadataTree.GetItems() Do
 		For Each MetaRow In Row.GetItems() Do
 			If MetaRow.Use Then
-				DataHistorySet = New DataHistorySettings;
+				DataHistorySet = New DataHistorySettings();
 				DataHistorySet.Use = MetaRow.Use;
-				
+
 				DataHistory.SetSettings(Metadata[Row.Name][MetaRow.Name], DataHistorySet);
 			Else
 				DataHistory.SetSettings(Metadata[Row.Name][MetaRow.Name], Undefined);
 			EndIf;
-		
+
 		EndDo;
 	EndDo;
 	FillTree();
@@ -80,7 +79,7 @@ EndProcedure
 
 &AtServerNoContext
 Procedure UpdateDataHistoryAtServer()
-	DataProcessors.DataHistory.UpdateDataHistory();	
+	DataProcessors.DataHistory.UpdateDataHistory();
 EndProcedure
 
 #EndRegion

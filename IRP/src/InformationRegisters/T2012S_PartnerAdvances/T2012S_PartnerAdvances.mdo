@@ -31,6 +31,7 @@
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
+    <fillValue xsi:type="core:UndefinedValue"/>
   </resources>
   <dimensions uuid="3b56cf2d-9e82-4404-adbf-ff621f7fe6c8">
     <name>Company</name>
@@ -44,6 +45,7 @@
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
+    <fillValue xsi:type="core:UndefinedValue"/>
   </dimensions>
   <dimensions uuid="e579278c-a8cb-40bd-bacf-7be11cd4d6b7">
     <name>Branch</name>
@@ -73,6 +75,7 @@
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
+    <fillValue xsi:type="core:UndefinedValue"/>
   </dimensions>
   <dimensions uuid="19330cb0-8c04-45e3-8382-16e9bc16328b">
     <name>LegalName</name>
@@ -86,6 +89,7 @@
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
+    <fillValue xsi:type="core:UndefinedValue"/>
   </dimensions>
   <dimensions uuid="fbcabb85-9537-4457-8127-3ec7c9ab9b0d">
     <name>Partner</name>
@@ -99,6 +103,7 @@
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
+    <fillValue xsi:type="core:UndefinedValue"/>
   </dimensions>
   <dimensions uuid="809076eb-ea2b-48f5-a6ea-9c4ec35f0dba">
     <name>IsVendorAdvance</name>
@@ -139,14 +144,14 @@
       <value>Advances document</value>
     </synonym>
     <type>
-      <types>DocumentRef.BankPayment</types>
       <types>DocumentRef.CashPayment</types>
-      <types>DocumentRef.CashReceipt</types>
-      <types>DocumentRef.BankReceipt</types>
-      <types>DocumentRef.OpeningEntry</types>
       <types>DocumentRef.DebitNote</types>
       <types>DocumentRef.CreditNote</types>
+      <types>DocumentRef.BankReceipt</types>
       <types>DocumentRef.PurchaseReturn</types>
+      <types>DocumentRef.BankPayment</types>
+      <types>DocumentRef.CashReceipt</types>
+      <types>DocumentRef.OpeningEntry</types>
       <types>DocumentRef.SalesReturn</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>

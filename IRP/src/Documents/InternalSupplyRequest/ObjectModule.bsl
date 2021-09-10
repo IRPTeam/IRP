@@ -1,14 +1,13 @@
-
 Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	If DataExchange.Load Then
 		Return;
-	EndIf;	
+	EndIf;
 EndProcedure
 
 Procedure OnWrite(Cancel)
 	If DataExchange.Load Then
 		Return;
-	EndIf;	
+	EndIf;
 EndProcedure
 
 Procedure BeforeDelete(Cancel)
@@ -31,5 +30,5 @@ EndProcedure
 
 Procedure OnCopy(CopiedObject)
 	LinkedTables = New Array();
-	DocumentsServer.SetNewTableUUID(ItemList, LinkedTables);	
+	DocumentsServer.SetNewTableUUID(ItemList, LinkedTables);
 EndProcedure

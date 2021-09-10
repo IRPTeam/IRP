@@ -8,10 +8,8 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:MultiLanguageDataPath">
-      <paths xsi:type="form:DataPath">
-        <segments>Object.Code</segments>
-      </paths>
+    <dataPath xsi:type="form:DataPath">
+      <segments>Object.Code</segments>
     </dataPath>
     <extendedTooltip>
       <name>CodeExtendedTooltip</name>
@@ -60,10 +58,8 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:MultiLanguageDataPath">
-      <paths xsi:type="form:DataPath">
-        <segments>Object.Description</segments>
-      </paths>
+    <dataPath xsi:type="form:DataPath">
+      <segments>Object.Description</segments>
     </dataPath>
     <extendedTooltip>
       <name>DescriptionExtendedTooltip</name>
@@ -112,10 +108,8 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:MultiLanguageDataPath">
-      <paths xsi:type="form:DataPath">
-        <segments>Object.Name</segments>
-      </paths>
+    <dataPath xsi:type="form:DataPath">
+      <segments>Object.Name</segments>
     </dataPath>
     <extendedTooltip>
       <name>NameExtendedTooltip</name>
@@ -164,10 +158,8 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:MultiLanguageDataPath">
-      <paths xsi:type="form:DataPath">
-        <segments>Object.Surname</segments>
-      </paths>
+    <dataPath xsi:type="form:DataPath">
+      <segments>Object.Surname</segments>
     </dataPath>
     <extendedTooltip>
       <name>SurnameExtendedTooltip</name>
@@ -350,12 +342,12 @@
       <showInFooter>true</showInFooter>
       <extInfo xsi:type="form:InputFieldExtInfo">
         <handlers>
-          <event>StartChoice</event>
-          <name>PartnerStartChoice</name>
-        </handlers>
-        <handlers>
           <event>EditTextChange</event>
           <name>PartnerEditTextChange</name>
+        </handlers>
+        <handlers>
+          <event>StartChoice</event>
+          <name>PartnerStartChoice</name>
         </handlers>
         <autoMaxWidth>true</autoMaxWidth>
         <autoMaxHeight>true</autoMaxHeight>
@@ -408,12 +400,12 @@
       <showInFooter>true</showInFooter>
       <extInfo xsi:type="form:InputFieldExtInfo">
         <handlers>
-          <event>StartChoice</event>
-          <name>LegalNameStartChoice</name>
-        </handlers>
-        <handlers>
           <event>EditTextChange</event>
           <name>LegalNameEditTextChange</name>
+        </handlers>
+        <handlers>
+          <event>StartChoice</event>
+          <name>LegalNameStartChoice</name>
         </handlers>
         <autoMaxWidth>true</autoMaxWidth>
         <autoMaxHeight>true</autoMaxHeight>
@@ -466,12 +458,12 @@
       <showInFooter>true</showInFooter>
       <extInfo xsi:type="form:InputFieldExtInfo">
         <handlers>
-          <event>StartChoice</event>
-          <name>AgreementStartChoice</name>
-        </handlers>
-        <handlers>
           <event>EditTextChange</event>
           <name>AgreementEditTextChange</name>
+        </handlers>
+        <handlers>
+          <event>StartChoice</event>
+          <name>AgreementStartChoice</name>
         </handlers>
         <autoMaxWidth>true</autoMaxWidth>
         <autoMaxHeight>true</autoMaxHeight>
@@ -508,6 +500,7 @@
     <type>UsualGroup</type>
     <extInfo xsi:type="form:UsualGroupExtInfo">
       <group>Vertical</group>
+      <behavior>Auto</behavior>
       <representation>WeakSeparation</representation>
       <showLeftMargin>true</showLeftMargin>
       <united>true</united>
@@ -565,16 +558,16 @@
   </commandInterface>
   <extInfo xsi:type="form:CatalogFormExtInfo">
     <handlers>
+      <event>OnReadAtServer</event>
+      <name>OnReadAtServer</name>
+    </handlers>
+    <handlers>
       <event>BeforeWriteAtServer</event>
       <name>BeforeWriteAtServer</name>
     </handlers>
     <handlers>
       <event>OnWriteAtServer</event>
       <name>OnWriteAtServer</name>
-    </handlers>
-    <handlers>
-      <event>OnReadAtServer</event>
-      <name>OnReadAtServer</name>
     </handlers>
   </extInfo>
 </form:Form>

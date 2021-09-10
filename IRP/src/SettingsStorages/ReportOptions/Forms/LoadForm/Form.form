@@ -30,10 +30,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>OptionsList.DefaultPicture</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>OptionsList.DefaultPicture</segments>
           </dataPath>
           <titleLocation>None</titleLocation>
           <extendedTooltip>
@@ -82,10 +80,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>OptionsList.isCurrentOption</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>OptionsList.isCurrentOption</segments>
           </dataPath>
           <extendedTooltip>
             <name>OptionsListisCurrentOptionExtendedTooltip</name>
@@ -127,10 +123,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>OptionsList.ReportOption</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>OptionsList.ReportOption</segments>
           </dataPath>
           <extendedTooltip>
             <name>OptionsListReportOptionExtendedTooltip</name>
@@ -179,10 +173,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>OptionsList.Shared</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>OptionsList.Shared</segments>
           </dataPath>
           <extendedTooltip>
             <name>OptionsListSharedExtendedTooltip</name>
@@ -224,10 +216,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>OptionsList.Author</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>OptionsList.Author</segments>
           </dataPath>
           <extendedTooltip>
             <name>OptionsListAuthorExtendedTooltip</name>
@@ -276,10 +266,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>OptionsList.OptionKey</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>OptionsList.OptionKey</segments>
           </dataPath>
           <extendedTooltip>
             <name>OptionsListOptionKeyExtendedTooltip</name>
@@ -351,6 +339,7 @@
             <autoMaxWidth>true</autoMaxWidth>
             <autoMaxHeight>true</autoMaxHeight>
             <placementArea>UserCmds</placementArea>
+            <toolTipRepresentation>Auto</toolTipRepresentation>
             <representationInContextMenu>Auto</representationInContextMenu>
           </items>
           <visible>true</visible>
@@ -596,10 +585,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>StandardOptions.isCurrentOption</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>StandardOptions.isCurrentOption</segments>
           </dataPath>
           <extendedTooltip>
             <name>StandardOptionsisCurrentOptionExtendedTooltip</name>
@@ -645,10 +632,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>StandardOptions.Presentation</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>StandardOptions.Presentation</segments>
           </dataPath>
           <extendedTooltip>
             <name>StandardOptionsPresentationExtendedTooltip</name>
@@ -696,10 +681,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>StandardOptions.OptionKey</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>StandardOptions.OptionKey</segments>
           </dataPath>
           <extendedTooltip>
             <name>StandardOptionsOptionKeyExtendedTooltip</name>
@@ -965,7 +948,7 @@
     </extendedTooltip>
     <type>Pages</type>
     <extInfo xsi:type="form:PagesGroupExtInfo">
-      <pagesRepresentation>TabsOnTop</pagesRepresentation>
+      <pagesRepresentation>Auto</pagesRepresentation>
       <currentRowUse>Auto</currentRowUse>
     </extInfo>
   </items>
@@ -1001,6 +984,7 @@
       <autoMaxWidth>true</autoMaxWidth>
       <autoMaxHeight>true</autoMaxHeight>
       <placementArea>UserCmds</placementArea>
+      <toolTipRepresentation>Auto</toolTipRepresentation>
       <representationInContextMenu>Auto</representationInContextMenu>
     </items>
     <visible>true</visible>

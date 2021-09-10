@@ -1,21 +1,19 @@
-
 #Region FormEventHandlers
 
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	LocalizationEvents.CreateMainFormItemDescription(ThisObject, "GroupDescriptions");
-	
-	Items.AttributesInterfaceGroup.Visible =
-		Object.Ref = PredefinedValue("Catalog.AddAttributeAndPropertySets.Catalog_Items")
-		Or Object.Ref = PredefinedValue("Catalog.AddAttributeAndPropertySets.Catalog_Partners");
-	
-	IsCatalog_ItemKeys =
-		Object.Ref = PredefinedValue("Catalog.AddAttributeAndPropertySets.Catalog_ItemKeys")
+
+	Items.AttributesInterfaceGroup.Visible = Object.Ref = PredefinedValue(
+		"Catalog.AddAttributeAndPropertySets.Catalog_Items") Or Object.Ref = PredefinedValue(
+		"Catalog.AddAttributeAndPropertySets.Catalog_Partners");
+
+	IsCatalog_ItemKeys = Object.Ref = PredefinedValue("Catalog.AddAttributeAndPropertySets.Catalog_ItemKeys")
 		Or Object.Ref = PredefinedValue("Catalog.AddAttributeAndPropertySets.Catalog_PriceKeys");
-	
+
 	Items.GroupAttributesItemKeys.Visible = IsCatalog_ItemKeys;
 	Items.GroupAttributes.Visible = Not IsCatalog_ItemKeys;
-	
+
 	If IsCatalog_ItemKeys Then
 		OnlyAffectPricing = Object.Ref = PredefinedValue("Catalog.AddAttributeAndPropertySets.Catalog_PriceKeys");
 		FillAttributesTree(GetItemTypesTree(), ThisObject.AttributesTree, OnlyAffectPricing);
@@ -34,7 +32,7 @@ EndProcedure
 &AtServer
 Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
 	If Not (CurrentObject.Ref = PredefinedValue("Catalog.AddAttributeAndPropertySets.Catalog_Items")
-			Or CurrentObject.Ref = PredefinedValue("Catalog.AddAttributeAndPropertySets.Catalog_Partners")) Then
+		Or CurrentObject.Ref = PredefinedValue("Catalog.AddAttributeAndPropertySets.Catalog_Partners")) Then
 		For Each Row In CurrentObject.Attributes Do
 			Row.InterfaceGroup = Undefined;
 		EndDo;
@@ -73,16 +71,11 @@ EndProcedure
 &AtClient
 Procedure AttributesTreeOnActivateRow(Item)
 	CurrentData = Items.AttributesTree.CurrentData;
-	Items.EditItemType.Enabled =
-		CurrentData <> Undefined
-		And ValueIsFilled(CurrentData.ItemType)
+	Items.EditItemType.Enabled = CurrentData <> Undefined And ValueIsFilled(CurrentData.ItemType)
 		And Not ServiceSystemServer.GetObjectAttribute(CurrentData.ItemType, "IsFolder");
-	
-	Items.DeleteItemType.Enabled =
-		CurrentData <> Undefined
-		And ValueIsFilled(CurrentData.ItemType)
-		And ValueIsFilled(CurrentData.Attribute)
-		And Not ServiceSystemServer.GetObjectAttribute(CurrentData.ItemType, "IsFolder");
+
+	Items.DeleteItemType.Enabled = CurrentData <> Undefined And ValueIsFilled(CurrentData.ItemType) And ValueIsFilled(
+		CurrentData.Attribute) And Not ServiceSystemServer.GetObjectAttribute(CurrentData.ItemType, "IsFolder");
 EndProcedure
 
 &AtClient
@@ -90,17 +83,16 @@ Procedure AttributesBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Paramete
 	If Clone Then
 		Cancel = True;
 		CurrentData = Items.Attributes.CurrentData;
-		If Not CopiedAttribute.IsEmpty()
-			Or Not CurrentData.IsConditionSet Then
+		If Not CopiedAttribute.IsEmpty() Or Not CurrentData.IsConditionSet Then
 			Return;
-		EndIf;		
+		EndIf;
 		NewRow = Object.Attributes.Add();
 		FillPropertyValues(NewRow, CurrentData);
 		NewRow.Unprocessed = True;
 		CopiedAttribute = Items.Attributes.CurrentData.Attribute;
 		Items.Attributes.CurrentRow = NewRow.GetID();
 		AttachIdleHandler("CopyAttributesRow", 0.1, True);
-		Items.Attributes.ChangeRow();		
+		Items.Attributes.ChangeRow();
 	EndIf;
 EndProcedure
 
@@ -109,10 +101,9 @@ Procedure PropertiesBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Paramete
 	If Clone Then
 		Cancel = True;
 		CurrentData = Items.Properties.CurrentData;
-		If Not CopiedAttribute.IsEmpty()
-			Or Not CurrentData.IsConditionSet Then
+		If Not CopiedAttribute.IsEmpty() Or Not CurrentData.IsConditionSet Then
 			Return;
-		EndIf;		
+		EndIf;
 		NewRow = Object.Properties.Add();
 		FillPropertyValues(NewRow, CurrentData);
 		NewRow.Unprocessed = True;
@@ -159,10 +150,9 @@ Procedure DeleteItemType(Command)
 	If CurrentData = Undefined Then
 		Return;
 	EndIf;
-	
-	If ValueIsFilled(CurrentData.ItemType)
-		And ValueIsFilled(CurrentData.Attribute) Then
-		
+
+	If ValueIsFilled(CurrentData.ItemType) And ValueIsFilled(CurrentData.Attribute) Then
+
 		DeleteItemTypeAtServer(CurrentData.ItemType, CurrentData.Attribute);
 		UpdateAttributesTree();
 	EndIf;
@@ -186,15 +176,15 @@ EndProcedure
 Function GetItemTypesTree()
 	Query = New Query();
 	Query.Text =
-		"SELECT
-		|	ItemTypes.Ref AS ItemType,
-		|	ItemTypes.IsFolder AS isFolder
-		|FROM
-		|	Catalog.ItemTypes AS ItemTypes
-		|WHERE
-		|	NOT ItemTypes.DeletionMark
-		|AUTOORDER";
-	
+	"SELECT
+	|	ItemTypes.Ref AS ItemType,
+	|	ItemTypes.IsFolder AS isFolder
+	|FROM
+	|	Catalog.ItemTypes AS ItemTypes
+	|WHERE
+	|	NOT ItemTypes.DeletionMark
+	|AUTOORDER";
+
 	QueryResult = Query.Execute();
 	Return QueryResult.Unload(QueryResultIteration.ByGroupsWithHierarchy);
 EndFunction
@@ -246,7 +236,7 @@ Procedure SetCondition(TableName, ColumnName, AddInfo = Undefined)
 	EndIf;
 	AddInfo.Insert("TableName", TableName);
 	AddInfo.Insert("ColumnName", ColumnName);
-	
+
 	If Not ValueIsFilled(Object.Ref) Or ThisObject.Modified Then
 		QuestionToUserNotify = New NotifyDescription("SetConditionNotify", ThisObject, AddInfo);
 		ShowQueryBox(QuestionToUserNotify, R().QuestionToUser_001, QuestionDialogMode.YesNo);
@@ -262,9 +252,9 @@ Procedure SetConditionNotify(Result, AddInfo = Undefined) Export
 		If CurrentRow = Undefined Then
 			Return;
 		EndIf;
-		
+
 		AddInfo.Insert("Element", CurrentRow[AddInfo.ColumnName]);
-		
+
 		Notify = New NotifyDescription("OnFinishEditFilter", ThisObject, AddInfo);
 		OpeningParameters = New Structure();
 		OpeningParameters.Insert("SavedSettings", GetSettings(CurrentRow[AddInfo.ColumnName], AddInfo));
@@ -298,7 +288,7 @@ Procedure SaveSettings(Element, Settings, AddInfo = Undefined)
 	CatalogObject = Object.Ref.GetObject();
 	ArrayOfRows = CatalogObject[AddInfo.TableName].FindRows(Filter);
 	For Each Row In ArrayOfRows Do
-		
+
 		SettingsIsSet = False;
 		If Settings <> Undefined Then
 			For Each FilterItem In Settings.Filter.Items Do
@@ -308,7 +298,7 @@ Procedure SaveSettings(Element, Settings, AddInfo = Undefined)
 				EndIf;
 			EndDo;
 		EndIf;
-		
+
 		If SettingsIsSet Then
 			Row.Condition = New ValueStorage(Settings);
 			Row.IsConditionSet = 1;
@@ -316,7 +306,7 @@ Procedure SaveSettings(Element, Settings, AddInfo = Undefined)
 			Row.Condition = Undefined;
 			Row.IsConditionSet = 0;
 		EndIf;
-		
+
 	EndDo;
 	CatalogObject.Write();
 	ThisObject.Read();
@@ -346,21 +336,20 @@ EndProcedure
 
 &AtServer
 Procedure CopyAttributesPropertiesRowAtServer(AddInfo)
-	SourceFilter = New Structure;
+	SourceFilter = New Structure();
 	SourceFilter.Insert(AddInfo.ColumnName, CopiedAttribute);
-	SourceFilter.Insert("Unprocessed", False);	
+	SourceFilter.Insert("Unprocessed", False);
 	FoundSourceRows = Object[AddInfo.TableName].FindRows(SourceFilter);
-	
-	DestinationFilter = New Structure;
+
+	DestinationFilter = New Structure();
 	DestinationFilter.Insert(AddInfo.ColumnName, CopiedAttribute);
-	DestinationFilter.Insert("Unprocessed", True);	
+	DestinationFilter.Insert("Unprocessed", True);
 	FoundDestinationRows = Object[AddInfo.TableName].FindRows(DestinationFilter);
-	
-	If FoundSourceRows.Count()
-		And FoundDestinationRows.Count() Then
+
+	If FoundSourceRows.Count() And FoundDestinationRows.Count() Then
 		DestinationRow = FoundDestinationRows[0];
 		SourceRow = FoundSourceRows[0];
-		If IsBlankString(SourceRow.ConditionData) Then			
+		If IsBlankString(SourceRow.ConditionData) Then
 			ConditionData = GetSettings(SourceRow[AddInfo.ColumnName], AddInfo);
 			DestinationRow.ConditionData = CommonFunctionsServer.SerializeXMLUseXDTO(ConditionData);
 		Else
@@ -368,19 +357,19 @@ Procedure CopyAttributesPropertiesRowAtServer(AddInfo)
 		EndIf;
 		DestinationRow.Unprocessed = False;
 	EndIf;
-	
-	CopiedAttribute = ChartsOfCharacteristicTypes.AddAttributeAndProperty.EmptyRef();	
+
+	CopiedAttribute = ChartsOfCharacteristicTypes.AddAttributeAndProperty.EmptyRef();
 EndProcedure
 
 &AtServer
 Procedure FillExtensionAttributesListAtServer()
 	MetadataName = StrReplace(Object.PredefinedDataName, "_", ".");
-	ObjectMetadata = Metadata.FindByFullName(MetadataName);	
+	ObjectMetadata = Metadata.FindByFullName(MetadataName);
 	For Each Attribute In ObjectMetadata.Attributes Do
-		If Not StrFind(Attribute.Name, "_") Then 
+		If Not StrFind(Attribute.Name, "_") Then
 			Continue;
 		EndIf;
-		AttributeFilter = New Structure;
+		AttributeFilter = New Structure();
 		AttributeFilter.Insert("Attribute", Attribute.Name);
 		FoundRows = Object.ExtensionAttributes.FindRows(AttributeFilter);
 		If FoundRows.Count() Then

@@ -55,10 +55,8 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:MultiLanguageDataPath">
-      <paths xsi:type="form:DataPath">
-        <segments>Record.DisableRule</segments>
-      </paths>
+    <dataPath xsi:type="form:DataPath">
+      <segments>Record.DisableRule</segments>
     </dataPath>
     <extendedTooltip>
       <name>DisableRuleExtendedTooltip</name>
@@ -100,10 +98,8 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:MultiLanguageDataPath">
-      <paths xsi:type="form:DataPath">
-        <segments>Record.Type</segments>
-      </paths>
+    <dataPath xsi:type="form:DataPath">
+      <segments>Record.Type</segments>
     </dataPath>
     <handlers>
       <event>OnChange</event>
@@ -157,10 +153,8 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:MultiLanguageDataPath">
-      <paths xsi:type="form:DataPath">
-        <segments>Record.Attribute</segments>
-      </paths>
+    <dataPath xsi:type="form:DataPath">
+      <segments>Record.Attribute</segments>
     </dataPath>
     <handlers>
       <event>OnChange</event>
@@ -214,10 +208,8 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:MultiLanguageDataPath">
-      <paths xsi:type="form:DataPath">
-        <segments>Record.ComparisonType</segments>
-      </paths>
+    <dataPath xsi:type="form:DataPath">
+      <segments>Record.ComparisonType</segments>
     </dataPath>
     <extendedTooltip>
       <name>ComparisonTypeExtendedTooltip</name>
@@ -270,10 +262,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>Record.Value</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>Record.Value</segments>
       </dataPath>
       <extendedTooltip>
         <name>ValueExtendedTooltip</name>
@@ -323,10 +313,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>Record.SetValueAsCode</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>Record.SetValueAsCode</segments>
       </dataPath>
       <handlers>
         <event>OnChange</event>
@@ -391,6 +379,7 @@
     <type>UsualGroup</type>
     <extInfo xsi:type="form:UsualGroupExtInfo">
       <group>HorizontalIfPossible</group>
+      <behavior>Auto</behavior>
       <showLeftMargin>true</showLeftMargin>
       <united>true</united>
       <throughAlign>Auto</throughAlign>
@@ -405,10 +394,8 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:MultiLanguageDataPath">
-      <paths xsi:type="form:DataPath">
-        <segments>Record.LockDataModificationReasons</segments>
-      </paths>
+    <dataPath xsi:type="form:DataPath">
+      <segments>Record.LockDataModificationReasons</segments>
     </dataPath>
     <extendedTooltip>
       <name>LockDataModificationReasonsExtendedTooltip</name>

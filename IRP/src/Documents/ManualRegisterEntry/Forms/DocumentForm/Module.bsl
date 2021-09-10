@@ -64,8 +64,6 @@ EndProcedure
 Procedure DateOnChange(Item)
 	DocumentModuleClient.DateOnChange(Object, ThisObject, Item);
 EndProcedure
-
-
 #EndRegion
 
 #Region FormTableItemsEventHandlers
@@ -134,7 +132,7 @@ EndProcedure
 &AtClient
 Procedure GeneratedFormCommandActionByName(Command) Export
 	ExternalCommandsClient.GeneratedFormCommandActionByName(Object, ThisObject, Command.Name);
-	GeneratedFormCommandActionByNameServer(Command.Name);	
+	GeneratedFormCommandActionByNameServer(Command.Name);
 EndProcedure
 
 &AtServer

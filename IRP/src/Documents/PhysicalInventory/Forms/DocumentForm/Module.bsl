@@ -13,7 +13,7 @@ Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefin
 	If EventName = "NewBarcode" And IsInputAvailable() Then
 		SearchByBarcode(Undefined, Parameter);
 	EndIf;
-	If EventName = "CreatedPhysicalCountByLocations" AND Source = Object.Ref Then
+	If EventName = "CreatedPhysicalCountByLocations" And Source = Object.Ref Then
 		UpdatePhysicalCountByLocationsAtServer();
 	EndIf;
 EndProcedure
@@ -76,12 +76,10 @@ Procedure ItemListItemKeyOnChange(Item)
 	If CurrentRow = Undefined Then
 		Return;
 	EndIf;
-	
+
 	CalculationSettings = New Structure();
 	CalculationSettings.Insert("UpdateUnit");
-	CalculationStringsClientServer.CalculateItemsRow(Object,
-		CurrentRow,
-		CalculationSettings);
+	CalculationStringsClientServer.CalculateItemsRow(Object, CurrentRow, CalculationSettings);
 EndProcedure
 
 &AtClient
@@ -115,7 +113,7 @@ Procedure ItemListPhysCountOnChange(Item)
 	If CurrentRow = Undefined Then
 		Return;
 	EndIf;
-	
+
 	CurrentRow.Difference = CurrentRow.PhysCount - CurrentRow.ExpCount;
 EndProcedure
 
@@ -156,14 +154,13 @@ EndProcedure
 Procedure ItemListSelection(Item, RowSelected, Field, StandardProcessing)
 	If Upper(Field.Name) = Upper("ItemListPhysicalCountByLocationPresentation") Then
 		CurrentData = Items.ItemList.CurrentData;
-		If CurrentData  = Undefined Then
+		If CurrentData = Undefined Then
 			Return;
 		EndIf;
 		StandardProcessing = False;
 		If ValueIsFilled(CurrentData.PhysicalCountByLocation) Then
-			OpenForm("Document.PhysicalCountByLocation.ObjectForm", 
-					New Structure("Key", CurrentData.PhysicalCountByLocation), 
-					ThisObject);
+			OpenForm("Document.PhysicalCountByLocation.ObjectForm", New Structure("Key",
+				CurrentData.PhysicalCountByLocation), ThisObject);
 		EndIf;
 	EndIf;
 EndProcedure
@@ -174,14 +171,14 @@ Procedure SetResponsiblePerson(Command)
 	If Not SelectedRows.Count() Then
 		Return;
 	EndIf;
-	
+
 	Filter = New Structure("Employee", True);
-	
+
 	OpenFormParameters = New Structure("ChoiceMode, CloseOnChoice, Filter", True, True, Filter);
-	
-	OnChoiceNotify = New NotifyDescription("OnChoiceResponsiblePerson", ThisObject, 
-	New Structure("SelectedRows", SelectedRows));
-	
+
+	OnChoiceNotify = New NotifyDescription("OnChoiceResponsiblePerson", ThisObject, New Structure("SelectedRows",
+		SelectedRows));
+
 	OpenForm("Catalog.Partners.ChoiceForm", OpenFormParameters, ThisObject, , , , OnChoiceNotify);
 EndProcedure
 
@@ -190,7 +187,7 @@ Procedure OnChoiceResponsiblePerson(Result, AdditionalsParameters) Export
 	If Result = Undefined Then
 		Return;
 	EndIf;
-	
+
 	For Each RowID In AdditionalsParameters.SelectedRows Do
 		Row = Object.ItemList.FindByID(RowID);
 		If Not ValueIsFilled(Row.ResponsiblePerson) Then
@@ -286,7 +283,7 @@ EndProcedure
 &AtClient
 Procedure GeneratedFormCommandActionByName(Command) Export
 	ExternalCommandsClient.GeneratedFormCommandActionByName(Object, ThisObject, Command.Name);
-	GeneratedFormCommandActionByNameServer(Command.Name);	
+	GeneratedFormCommandActionByNameServer(Command.Name);
 EndProcedure
 
 &AtServer
@@ -300,4 +297,3 @@ EndProcedure
 Procedure ShowRowKey(Command)
 	DocumentsClient.ShowRowKey(ThisObject);
 EndProcedure
-

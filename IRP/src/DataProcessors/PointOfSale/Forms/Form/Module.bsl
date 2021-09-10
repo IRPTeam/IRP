@@ -1,4 +1,3 @@
-
 &AtClient
 Var Component Export;
 
@@ -25,8 +24,8 @@ EndProcedure
 Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefined) Export
 	If Source = ThisObject Then
 		DocRetailSalesReceiptClient.NotificationProcessing(Object, ThisObject, EventName, Parameter, Source);
-	EndIf;	
-	
+	EndIf;
+
 	If EventName = "NewBarcode" And IsInputAvailable() Then
 		SearchByBarcode(Undefined, Parameter);
 	EndIf;
@@ -105,7 +104,7 @@ Procedure ItemListTotalAmountOnChange(Item, AddInfo = Undefined) Export
 	CurrentData = ThisObject.Items.ItemList.CurrentData;
 	If CurrentData = Undefined Then
 		Return;
-	EndIf;	
+	EndIf;
 	TaxesClient.CalculateReverseTaxOnChangeTotalAmount(Object, ThisObject, CurrentData);
 EndProcedure
 
@@ -122,7 +121,8 @@ EndProcedure
 #Region SerialLotNumbers
 &AtClient
 Procedure ItemListSerialLotNumbersPresentationStartChoice(Item, ChoiceData, StandardProcessing, AddInfo = Undefined) Export
-	DocRetailSalesReceiptClient.ItemListSerialLotNumbersPresentationStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+	DocRetailSalesReceiptClient.ItemListSerialLotNumbersPresentationStartChoice(Object, ThisObject, Item, ChoiceData,
+		StandardProcessing);
 EndProcedure
 
 &AtClient
@@ -186,9 +186,9 @@ Procedure AddItemKeyToItemList()
 	EndIf;
 	ItemKeysSelectionAtServer(CurrentData.Ref);
 	ItemListOnStartEdit(Items.ItemList, True, False);
-	ItemListOnChange(Items.ItemList);	
+	ItemListOnChange(Items.ItemList);
 	ItemListItemKeyOnChange(Items.ItemList);
-	
+
 	BuildDetailedInformation(?(CurrentData = Undefined, Undefined, CurrentData.Ref));
 EndProcedure
 
@@ -215,45 +215,40 @@ Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
 		NotifyParameters.Insert("Form", ThisObject);
 		NotifyParameters.Insert("Object", Object);
 		Items.DetailedInformation.document.getElementById("text").innerHTML = "";
-		DocumentsClient.PickupItemsEnd(AdditionalParameters.FoundedItems, NotifyParameters)
+		DocumentsClient.PickupItemsEnd(AdditionalParameters.FoundedItems, NotifyParameters);
 	Else
-		DetailedInformation = "<span style=""color:red;"">" + StrTemplate(R().S_019, StrConcat(AdditionalParameters.Barcodes, ",")) + "</span>";
+		DetailedInformation = "<span style=""color:red;"">" + StrTemplate(R().S_019, StrConcat(
+			AdditionalParameters.Barcodes, ",")) + "</span>";
 		Items.DetailedInformation.document.getElementById("text").innerHTML = DetailedInformation;
 	EndIf;
 EndProcedure
 
 &AtClient
 Procedure qPayment(Command)
-	
+
 	Object.Date = CommonFunctionsServer.GetCurrentSessionDate();
-	
+
 	If Not CheckFilling() Then
 		Cancel = True;
 		Return;
-	EndIf;	
-	
+	EndIf;
+
 	Cancel = False;
 	DPPointOfSaleClient.BeforePayment(ThisObject, Cancel);
-	
+
 	If Cancel Then
 		Return;
 	EndIf;
-	
+
 	OpenFormNotifyDescription = New NotifyDescription("PaymentFormClose", ThisObject);
-	ObjectParameters = New Structure;
+	ObjectParameters = New Structure();
 	ObjectParameters.Insert("Amount", Object.ItemList.Total("TotalAmount"));
 	ObjectParameters.Insert("Branch", Object.Branch);
 	ObjectParameters.Insert("Workstation", Workstation);
-	OpenFormParameters = New Structure;
+	OpenFormParameters = New Structure();
 	OpenFormParameters.Insert("Parameters", ObjectParameters);
-	OpenForm("DataProcessor.PointOfSale.Form.Payment"
-				, OpenFormParameters
-				, ThisObject
-				, UUID
-				, 
-				, 
-				, OpenFormNotifyDescription
-				, FormWindowOpeningMode.LockWholeInterface);
+	OpenForm("DataProcessor.PointOfSale.Form.Payment", OpenFormParameters, ThisObject, UUID, , ,
+		OpenFormNotifyDescription, FormWindowOpeningMode.LockWholeInterface);
 EndProcedure
 
 &AtClient
@@ -291,8 +286,8 @@ EndProcedure
 Procedure SearchCustomer(Command)
 
 	Notify = New NotifyDescription("SetRetailCustomer", ThisObject);
-	OpenForm("Catalog.RetailCustomers.Form.QuickSearch",  
-				New Structure("RetailCustomer", Object.RetailCustomer), , , , , Notify, FormWindowOpeningMode.LockOwnerWindow);
+	OpenForm("Catalog.RetailCustomers.Form.QuickSearch", New Structure("RetailCustomer", Object.RetailCustomer), , , ,
+		, Notify, FormWindowOpeningMode.LockOwnerWindow);
 
 EndProcedure
 
@@ -300,15 +295,16 @@ EndProcedure
 Procedure SetRetailCustomer(Value, AddInfo = Undefined) Export
 	If ValueIsFilled(Value) Then
 		Object.RetailCustomer = Value;
-		DocRetailSalesReceiptClient.RetailCustomerPointOfSaleOnChange(Object, ThisObject, ThisObject.Items.RetailCustomer);
+		DocRetailSalesReceiptClient.RetailCustomerPointOfSaleOnChange(Object, ThisObject,
+			ThisObject.Items.RetailCustomer);
 	EndIf;
 EndProcedure
 
 &AtClient
 Procedure ItemListDrag(Item, DragParameters, StandardProcessing, Row, Field)
-	
+
 	AddItemKeyToItemList();
-	
+
 EndProcedure
 
 #Region SpecialOffers
@@ -317,15 +313,13 @@ EndProcedure
 
 &AtClient
 Procedure SetSpecialOffers(Command)
-	OffersClient.OpenFormPickupSpecialOffers_ForDocument(Object,
-		ThisObject,
-		"SpecialOffersEditFinish_ForDocument");
+	OffersClient.OpenFormPickupSpecialOffers_ForDocument(Object, ThisObject, "SpecialOffersEditFinish_ForDocument");
 EndProcedure
 
 &AtClient
 Procedure SpecialOffersEditFinish_ForDocument(Result, AdditionalParameters) Export
 	OffersClient.SpecialOffersEditFinish_ForDocument(Result, Object, ThisObject, AdditionalParameters);
-	
+
 EndProcedure
 
 #EndRegion
@@ -334,9 +328,7 @@ EndProcedure
 
 &AtClient
 Procedure SetSpecialOffersAtRow(Command)
-	OffersClient.OpenFormPickupSpecialOffers_ForRow(Object,
-		Items.ItemList.CurrentData,
-		ThisObject,
+	OffersClient.OpenFormPickupSpecialOffers_ForRow(Object, Items.ItemList.CurrentData, ThisObject,
 		"SpecialOffersEditFinish_ForRow");
 EndProcedure
 
@@ -358,15 +350,15 @@ EndProcedure
 
 &AtClient
 Procedure ConnectBarcodeScanners()
-	HardwareParameters = New Structure;
+	HardwareParameters = New Structure();
 	HardwareParameters.Insert("Workstation", Workstation);
 	HardwareParameters.Insert("EquipmentType", PredefinedValue("Enum.EquipmentTypes.BarcodeScanner"));
-	HardwareParameters.Insert("ConnectionNotify" , New NotifyDescription("ConnectHardware_End", ThisObject));		                                 
+	HardwareParameters.Insert("ConnectionNotify", New NotifyDescription("ConnectHardware_End", ThisObject));
 	HardwareClient.BeginConnectEquipment(HardwareParameters);
 EndProcedure
 
 &AtClient
-Procedure ConnectHardware_End(Result, Param) Export	
+Procedure ConnectHardware_End(Result, Param) Export
 	If Result.Result Then
 		Status(R().Eq_004);
 	Else
@@ -383,7 +375,7 @@ Procedure UpdateHTMLPictures() Export
 	If Not Items.ItemPicture.Visible Then
 		Return;
 	EndIf;
-	
+
 	If CurrentItem = Items.ItemList Then
 		CurrentRow = Items.ItemList.CurrentData;
 	ElsIf CurrentItem = Items.ItemsPickup Then
@@ -391,11 +383,11 @@ Procedure UpdateHTMLPictures() Export
 	Else
 		CurrentRow = Undefined;
 	EndIf;
-	
+
 	If CurrentRow = Undefined Then
 		Return;
 	EndIf;
-	
+
 	ItemPicture = GetURL(GetPictureFile(CurrentRow.Item), "Preview");
 EndProcedure
 
@@ -417,12 +409,10 @@ EndFunction
 
 &AtClient
 Procedure PaymentFormClose(Result, AdditionalData) Export
-	
+
 	If Result = Undefined Then
 		Return;
 	EndIf;
-	
-	
 	CashbackAmount = WriteTransaction(Result);
 	DetailedInformation = R().S_030 + ": " + Format(CashbackAmount, "NFD=2; NZ=0;");
 	Items.DetailedInformation.document.getElementById("text").innerHTML = DetailedInformation;
@@ -451,12 +441,11 @@ EndProcedure
 &AtServer
 Function WriteTransaction(Result)
 	OneHundred = 100;
-	If Result = Undefined 
-		Or Not Result.Payments.Count() Then
+	If Result = Undefined Or Not Result.Payments.Count() Then
 		Return 0;
 	EndIf;
 	Payments = Result.Payments.Unload();
-	ZeroAmountFilter = New Structure;
+	ZeroAmountFilter = New Structure();
 	ZeroAmountFilter.Insert("Amount", 0);
 	ZeroAmountFoundRows = Payments.FindRows(ZeroAmountFilter);
 	ZeroAmountRows = New Array();
@@ -465,22 +454,22 @@ Function WriteTransaction(Result)
 	EndDo;
 	For Each Row In ZeroAmountRows Do
 		Payments.Delete(Row);
-	EndDo; 
+	EndDo;
 	For Each Row In Payments Do
 		If Row.Percent Then
 			Row.Commission = Row.Amount * Row.Percent / OneHundred;
-		EndIf; 
+		EndIf;
 	EndDo;
-	
+
 	ObjectValue = FormAttributeToValue("Object");
 	ObjectValue.Date = CommonFunctionsServer.GetCurrentSessionDate();
 	ObjectValue.Payments.Load(Payments);
 	DPPointOfSaleServer.BeforePostingDocument(ObjectValue);
-		
+
 	ObjectValue.Write(DocumentWriteMode.Posting);
-	DocRef = ObjectValue.Ref;	
+	DocRef = ObjectValue.Ref;
 	DPPointOfSaleServer.AfterPostingDocument(DocRef);
-	CashAmountFilter = New Structure;
+	CashAmountFilter = New Structure();
 	CashAmountFilter.Insert("PaymentTypeEnum", PredefinedValue("Enum.PaymentTypes.Cash"));
 	CashAmountFoundRows = Payments.FindRows(CashAmountFilter);
 	CashbackAmount = 0;
@@ -518,24 +507,23 @@ EndProcedure
 
 &AtServer
 Function AfterItemChoice(Val ChoicedItem, AddToItemList = False)
-	ReturnValue = False;	
-	Query = New Query;
+	ReturnValue = False;
+	Query = New Query();
 	Query.Text = "SELECT
-	|	CatalogItemKeys.Ref AS Ref,
-	|	CatalogItemKeys.Ref AS Presentation
-	|FROM
-	|	Catalog.ItemKeys AS CatalogItemKeys
-	|WHERE
-	|	CatalogItemKeys.Item = &Item
-	|	AND NOT CatalogItemKeys.DeletionMark
-	|ORDER BY
-	|	Ref";
+				 |	CatalogItemKeys.Ref AS Ref,
+				 |	CatalogItemKeys.Ref AS Presentation
+				 |FROM
+				 |	Catalog.ItemKeys AS CatalogItemKeys
+				 |WHERE
+				 |	CatalogItemKeys.Item = &Item
+				 |	AND NOT CatalogItemKeys.DeletionMark
+				 |ORDER BY
+				 |	Ref";
 	Query.SetParameter("Item", ChoicedItem);
 	QueryExecute = Query.Execute();
 	QueryUnload = QueryExecute.Unload();
 	ItemKeysPickup.Load(QueryUnload);
-	If QueryUnload.Count() = 1
-		And AddToItemList Then
+	If QueryUnload.Count() = 1 And AddToItemList Then
 		ItemKeysSelectionAtServer(QueryUnload[0].Ref);
 		ReturnValue = True;
 	EndIf;
@@ -544,7 +532,7 @@ EndFunction
 
 &AtServer
 Procedure ItemKeysSelectionAtServer(Val ChoicedItemKey)
-	ItemListFilter = New Structure;
+	ItemListFilter = New Structure();
 	ItemListFilter.Insert("ItemKey", ChoicedItemKey);
 	FoundRows = Object.ItemList.FindRows(ItemListFilter);
 	If FoundRows.Count() Then
@@ -554,7 +542,7 @@ Procedure ItemKeysSelectionAtServer(Val ChoicedItemKey)
 		NewRow.ItemKey = ChoicedItemKey;
 		NewRow.Item = ChoicedItemKey.Item;
 	EndIf;
-	NewRow.Quantity = NewRow.Quantity + 1;	
+	NewRow.Quantity = NewRow.Quantity + 1;
 	NewRow.TotalAmount = NewRow.Quantity * NewRow.Price;
 	Items.ItemList.CurrentRow = NewRow.GetID();
 	EnabledPaymentButton();
@@ -583,16 +571,13 @@ Procedure BuildDetailedInformation(ItemKey)
 		InfoItem = FoundItemKeyRow.Item;
 		InfoPrice = FoundItemKeyRow.Price;
 		InfoOffersAmount = InfoOffersAmount + FoundItemKeyRow.OffersAmount;
-		InfoQuantity = InfoQuantity + FoundItemKeyRow.Quantity;		
+		InfoQuantity = InfoQuantity + FoundItemKeyRow.Quantity;
 		InfoTotalAmount = InfoTotalAmount + FoundItemKeyRow.TotalAmount;
 	EndDo;
-	DetailedInformation = String(InfoItem)
-						+ ?(ValueIsFilled(ItemKey), " [" + String(ItemKey) + "]", "]")
-						+ " " + InfoQuantity
-						+ " x " + Format(InfoPrice, "NFD=2; NZ=0.00;")
-						+ ?(ValueIsFilled(InfoOffersAmount), "-" + Format(InfoOffersAmount, "NFD=2; NZ=0.00;"), "")
-						+ " = " + Format(InfoTotalAmount, "NFD=2; NZ=0.00;");
-	Items.DetailedInformation.document.getElementById("text").innerHTML = DetailedInformation;						
+	DetailedInformation = String(InfoItem) + ?(ValueIsFilled(ItemKey), " [" + String(ItemKey) + "]", "]") + " " + InfoQuantity
+		+ " x " + Format(InfoPrice, "NFD=2; NZ=0.00;") + ?(ValueIsFilled(InfoOffersAmount), "-" + Format(
+		InfoOffersAmount, "NFD=2; NZ=0.00;"), "") + " = " + Format(InfoTotalAmount, "NFD=2; NZ=0.00;");
+	Items.DetailedInformation.document.getElementById("text").innerHTML = DetailedInformation;
 EndProcedure
 
 &AtClient
@@ -634,21 +619,21 @@ EndProcedure
 
 &AtServer
 Procedure Taxes_CreateFormControls() Export
-	
-	ColumnFieldParameters = New Structure;
+
+	ColumnFieldParameters = New Structure();
 	ColumnFieldParameters.Insert("Visible", False);
-	
-    TaxesParameters = TaxesServer.GetCreateFormControlsParameters();
-    TaxesParameters.Date = Object.Date;
-    TaxesParameters.Company = Object.Company;
-    TaxesParameters.PathToTable = "Object.ItemList";
-    TaxesParameters.ItemParent = ThisObject.Items.ItemList;
-    TaxesParameters.ColumnOffset = ThisObject.Items.ItemListOffersAmount;
-    TaxesParameters.ItemListName = "ItemList";
-    TaxesParameters.TaxListName = "TaxList";
-    TaxesParameters.TotalAmountColumnName = "ItemListTotalAmount";
-    TaxesParameters.ColumnFieldParameters = ColumnFieldParameters;
-    TaxesServer.CreateFormControls(Object, ThisObject, TaxesParameters);
+
+	TaxesParameters = TaxesServer.GetCreateFormControlsParameters();
+	TaxesParameters.Date = Object.Date;
+	TaxesParameters.Company = Object.Company;
+	TaxesParameters.PathToTable = "Object.ItemList";
+	TaxesParameters.ItemParent = ThisObject.Items.ItemList;
+	TaxesParameters.ColumnOffset = ThisObject.Items.ItemListOffersAmount;
+	TaxesParameters.ItemListName = "ItemList";
+	TaxesParameters.TaxListName = "TaxList";
+	TaxesParameters.TotalAmountColumnName = "ItemListTotalAmount";
+	TaxesParameters.ColumnFieldParameters = ColumnFieldParameters;
+	TaxesServer.CreateFormControls(Object, ThisObject, TaxesParameters);
 EndProcedure
 
 &AtServer

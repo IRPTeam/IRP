@@ -26,7 +26,7 @@ Procedure SetCondition(TableName, ColumnName, AddInfo = Undefined)
 	EndIf;
 	AddInfo.Insert("TableName", TableName);
 	AddInfo.Insert("ColumnName", ColumnName);
-	
+
 	If Not ValueIsFilled(Object.Ref) Or ThisObject.Modified Then
 		QuestionToUserNotify = New NotifyDescription("SetConditionNotify", ThisObject, AddInfo);
 		ShowQueryBox(QuestionToUserNotify, R().QuestionToUser_001, QuestionDialogMode.YesNo);
@@ -42,9 +42,9 @@ Procedure SetConditionNotify(Result, AddInfo = Undefined) Export
 		If CurrentRow = Undefined Then
 			Return;
 		EndIf;
-		
+
 		AddInfo.Insert("Element", CurrentRow[AddInfo.ColumnName]);
-		
+
 		Notify = New NotifyDescription("OnFinishEditFilter", ThisObject, AddInfo);
 		OpeningParameters = New Structure();
 		OpeningParameters.Insert("SavedSettings", GetSettings(CurrentRow[AddInfo.ColumnName], AddInfo));
@@ -78,7 +78,7 @@ Procedure SaveSettings(Element, Settings, AddAttributesMap, AddInfo = Undefined)
 	CatalogObject = Object.Ref.GetObject();
 	ArrayOfRows = CatalogObject[AddInfo.TableName].FindRows(Filter);
 	For Each Row In ArrayOfRows Do
-		
+
 		SettingsIsSet = False;
 		If Settings <> Undefined Then
 			For Each FilterItem In Settings.Filter.Items Do
@@ -88,16 +88,15 @@ Procedure SaveSettings(Element, Settings, AddAttributesMap, AddInfo = Undefined)
 				EndIf;
 			EndDo;
 		EndIf;
-		
+
 		If SettingsIsSet Then
-			Row.Condition = New ValueStorage(
-					New Structure("Settings, AddAttributesMap", Settings, AddAttributesMap));
+			Row.Condition = New ValueStorage(New Structure("Settings, AddAttributesMap", Settings, AddAttributesMap));
 			Row.IsConditionSet = 1;
 		Else
 			Row.Condition = Undefined;
 			Row.IsConditionSet = 0;
 		EndIf;
-		
+
 	EndDo;
 	CatalogObject.Write();
 	ThisObject.Read();

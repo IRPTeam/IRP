@@ -13,14 +13,12 @@ EndProcedure
 #Region ItemCompany
 
 Procedure CompanyOnChange(Object, Form, Item) Export
-	RefillData = New Structure;		
+	RefillData = New Structure();
 	If ValueIsFilled(Object.Sender) Then
 		TransferParameters = New Structure("Company", Object.Company);
 		CustomParameters = CatCashAccountsClient.DefaultCustomParameters(TransferParameters);
-		CustomParameters.Filters.Add(DocumentsClientServer.CreateFilterItem("Ref",
-																			Object.Sender,
-																			ComparisonType.Equal,
-																			DataCompositionComparisonType.Equal));
+		CustomParameters.Filters.Add(DocumentsClientServer.CreateFilterItem("Ref", Object.Sender, ComparisonType.Equal,
+			DataCompositionComparisonType.Equal));
 		GetDefaultChoiceRef = CatCashAccountsServer.GetDefaultChoiceRef(CustomParameters);
 		If Object.Sender <> GetDefaultChoiceRef Then
 			RefillData.Insert("Sender", PredefinedValue("Catalog.CashAccounts.EmptyRef"));
@@ -29,17 +27,15 @@ Procedure CompanyOnChange(Object, Form, Item) Export
 	If ValueIsFilled(Object.Receiver) Then
 		TransferParameters = New Structure("Company", Object.Company);
 		CustomParameters = CatCashAccountsClient.DefaultCustomParameters(TransferParameters);
-		CustomParameters.Filters.Add(DocumentsClientServer.CreateFilterItem("Ref",
-																			Object.Receiver,
-																			ComparisonType.Equal,
-																			DataCompositionComparisonType.Equal));
+		CustomParameters.Filters.Add(DocumentsClientServer.CreateFilterItem("Ref", Object.Receiver, ComparisonType.Equal,
+			DataCompositionComparisonType.Equal));
 		GetDefaultChoiceRef = CatCashAccountsServer.GetDefaultChoiceRef(CustomParameters);
 		If Object.Receiver <> GetDefaultChoiceRef Then
 			RefillData.Insert("Receiver", PredefinedValue("Catalog.CashAccounts.EmptyRef"));
 		EndIf;
-	EndIf;		
+	EndIf;
 	If RefillData.Count() Then
-		NotifyParameters = New Structure;
+		NotifyParameters = New Structure();
 		NotifyParameters.Insert("Form", Form);
 		NotifyParameters.Insert("Object", Object);
 		NotifyParameters.Insert("RefillData", RefillData);
@@ -63,20 +59,20 @@ Procedure CompanyOnChangeEnd(Result, AdditionalParameters) Export
 		EndDo;
 		DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 	Else
-		Object.Company = CommonFunctionsClientServer.GetObjectPreviousValue(Object, Form, "Company");	
-	EndIf;	
+		Object.Company = CommonFunctionsClientServer.GetObjectPreviousValue(Object, Form, "Company");
+	EndIf;
 EndProcedure
 
 Procedure CompanyStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
 	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
-	
+
 	OpenSettings.ArrayOfFilters = New Array();
-	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", 
-																		False, DataCompositionComparisonType.Equal));
-	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("OurCompany", 
-																		True, DataCompositionComparisonType.Equal));
+	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", False,
+		DataCompositionComparisonType.Equal));
+	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("OurCompany", True,
+		DataCompositionComparisonType.Equal));
 	OpenSettings.FillingData = New Structure("OurCompany", True);
-	
+
 	DocumentsClient.CompanyStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
 EndProcedure
 
@@ -139,13 +135,12 @@ EndProcedure
 
 Procedure SendAmountOnChange(Object, Form, Item) Export
 	CommonFunctionsClientServer.SetFormItemModifiedByUser(Form, Item.Name);
-	FillReceiveAmountBySendAmount(Object, Form);  
+	FillReceiveAmountBySendAmount(Object, Form);
 EndProcedure
 
 Procedure FillReceiveAmountBySendAmount(Object, Form)
-	If Not CommonFunctionsClientServer.IsFormItemModifiedByUser(Form, "ReceiveAmount")
-		And ValueIsFilled(Object.SendCurrency) = ValueIsFilled(Object.ReceiveCurrency)
-		And Object.SendCurrency = Object.ReceiveCurrency Then
+	If Not CommonFunctionsClientServer.IsFormItemModifiedByUser(Form, "ReceiveAmount") And ValueIsFilled(
+		Object.SendCurrency) = ValueIsFilled(Object.ReceiveCurrency) And Object.SendCurrency = Object.ReceiveCurrency Then
 		Object.ReceiveAmount = Object.SendAmount;
 	EndIf;
 EndProcedure
@@ -157,9 +152,8 @@ EndProcedure
 Procedure SenderEditTextChange(Object, Form, Item, Text, StandardProcessing) Export
 	DefaultEditTextParameters = New Structure("Company", Object.Company);
 	EditTextParameters = CatCashAccountsClient.GetDefaultEditTextParameters(DefaultEditTextParameters);
-	EditTextParameters.Filters.Add(DocumentsClientServer.CreateFilterItem("Type",
-																		PredefinedValue("Enum.CashAccountTypes.Transit"),
-																		ComparisonType.NotEqual));
+	EditTextParameters.Filters.Add(DocumentsClientServer.CreateFilterItem("Type", PredefinedValue(
+		"Enum.CashAccountTypes.Transit"), ComparisonType.NotEqual));
 	Item.ChoiceParameters = CatCashAccountsClient.FixedArrayOfChoiceParameters(EditTextParameters);
 EndProcedure
 
@@ -173,11 +167,9 @@ Procedure SenderStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) 
 	StandardProcessing = False;
 	DefaultStartChoiceParameters = New Structure("Company", Object.Company);
 	StartChoiceParameters = CatCashAccountsClient.GetDefaultStartChoiceParameters(DefaultStartChoiceParameters);
-	StartChoiceParameters.CustomParameters.Filters.Add(DocumentsClientServer.CreateFilterItem("Type",
-																		PredefinedValue("Enum.CashAccountTypes.Transit"),
-																		,
-																		DataCompositionComparisonType.NotEqual));
-	OpenForm(StartChoiceParameters.FormName, StartChoiceParameters, Item, Form.UUID, , Form.URL);	
+	StartChoiceParameters.CustomParameters.Filters.Add(DocumentsClientServer.CreateFilterItem("Type", PredefinedValue(
+		"Enum.CashAccountTypes.Transit"), , DataCompositionComparisonType.NotEqual));
+	OpenForm(StartChoiceParameters.FormName, StartChoiceParameters, Item, Form.UUID, , Form.URL);
 EndProcedure
 
 #EndRegion
@@ -185,15 +177,15 @@ EndProcedure
 #Region CashAdvanceHolder
 Procedure CashAdvanceHolderStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
 	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
-	
+
 	OpenSettings.ArrayOfFilters = New Array();
-	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", 
-																		True, DataCompositionComparisonType.NotEqual));
-	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Employee", 
-																		True, DataCompositionComparisonType.Equal));
+	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True,
+		DataCompositionComparisonType.NotEqual));
+	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Employee", True,
+		DataCompositionComparisonType.Equal));
 	OpenSettings.FormParameters = New Structure();
 	OpenSettings.FillingData = New Structure("Customer", True);
-	
+
 	DocumentsClient.PartnerStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
 EndProcedure
 
@@ -202,8 +194,8 @@ Procedure CashAdvanceHolderTextChange(Object, Form, Item, Text, StandardProcessi
 	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
 	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Employee", True, ComparisonType.Equal));
 	AdditionalParameters = New Structure();
-	DocumentsClient.PartnerEditTextChange(Object, Form, Item, Text, StandardProcessing,
-		ArrayOfFilters, AdditionalParameters);
+	DocumentsClient.PartnerEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters,
+		AdditionalParameters);
 EndProcedure
 #EndRegion
 
@@ -212,9 +204,8 @@ EndProcedure
 Procedure ReceiverEditTextChange(Object, Form, Item, Text, StandardProcessing) Export
 	DefaultEditTextParameters = New Structure("Company", Object.Company);
 	EditTextParameters = CatCashAccountsClient.GetDefaultEditTextParameters(DefaultEditTextParameters);
-	EditTextParameters.Filters.Add(DocumentsClientServer.CreateFilterItem("Type",
-																		PredefinedValue("Enum.CashAccountTypes.Transit"),
-																		ComparisonType.NotEqual));
+	EditTextParameters.Filters.Add(DocumentsClientServer.CreateFilterItem("Type", PredefinedValue(
+		"Enum.CashAccountTypes.Transit"), ComparisonType.NotEqual));
 	Item.ChoiceParameters = CatCashAccountsClient.FixedArrayOfChoiceParameters(EditTextParameters);
 EndProcedure
 
@@ -240,10 +231,8 @@ Procedure ReceiverStartChoice(Object, Form, Item, ChoiceData, StandardProcessing
 	StandardProcessing = False;
 	DefaultStartChoiceParameters = New Structure("Company", Object.Company);
 	StartChoiceParameters = CatCashAccountsClient.GetDefaultStartChoiceParameters(DefaultStartChoiceParameters);
-	StartChoiceParameters.CustomParameters.Filters.Add(DocumentsClientServer.CreateFilterItem("Type",
-																		PredefinedValue("Enum.CashAccountTypes.Transit"),
-																		,
-																		DataCompositionComparisonType.NotEqual));
+	StartChoiceParameters.CustomParameters.Filters.Add(DocumentsClientServer.CreateFilterItem("Type", PredefinedValue(
+		"Enum.CashAccountTypes.Transit"), , DataCompositionComparisonType.NotEqual));
 	OpenForm(StartChoiceParameters.FormName, StartChoiceParameters, Item, Form.UUID, , Form.URL);
 EndProcedure
 
@@ -252,7 +241,7 @@ EndProcedure
 #Region ItemSenderCurrency
 
 Procedure SetSenderCurrency(Object, Form)
-	ObjectSenderCurrency = ServiceSystemServer.GetObjectAttribute(Object.Sender, "Currency"); 
+	ObjectSenderCurrency = ServiceSystemServer.GetObjectAttribute(Object.Sender, "Currency");
 	If ValueIsFilled(ObjectSenderCurrency) Then
 		Object.SendCurrency = ObjectSenderCurrency;
 	EndIf;
@@ -264,7 +253,7 @@ EndProcedure
 #Region ItemReceiverCurrency
 
 Procedure SetReceiverCurrency(Object, Form)
-	ObjectReceiverCurrency = ServiceSystemServer.GetObjectAttribute(Object.Receiver, "Currency"); 
+	ObjectReceiverCurrency = ServiceSystemServer.GetObjectAttribute(Object.Receiver, "Currency");
 	If ValueIsFilled(ObjectReceiverCurrency) Then
 		Object.ReceiveCurrency = ObjectReceiverCurrency;
 	EndIf;

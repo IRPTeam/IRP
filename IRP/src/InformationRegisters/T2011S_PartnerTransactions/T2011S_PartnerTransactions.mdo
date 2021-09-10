@@ -31,6 +31,7 @@
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
+    <fillValue xsi:type="core:UndefinedValue"/>
   </resources>
   <dimensions uuid="cc2db816-1ed5-4b49-ac44-74e37e88c55c">
     <name>Company</name>
@@ -44,6 +45,7 @@
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
+    <fillValue xsi:type="core:UndefinedValue"/>
   </dimensions>
   <dimensions uuid="e95decaf-0d49-463b-b561-8f8c8c01db27">
     <name>Branch</name>
@@ -73,6 +75,7 @@
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
+    <fillValue xsi:type="core:UndefinedValue"/>
   </dimensions>
   <dimensions uuid="8c1063d5-2468-42a7-aa53-6ad00af8baa3">
     <name>LegalName</name>
@@ -86,6 +89,7 @@
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
+    <fillValue xsi:type="core:UndefinedValue"/>
   </dimensions>
   <dimensions uuid="63cc2c76-6470-4be6-9299-c30d8350ebbd">
     <name>Partner</name>
@@ -99,6 +103,7 @@
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
+    <fillValue xsi:type="core:UndefinedValue"/>
   </dimensions>
   <dimensions uuid="fc974364-f111-4b03-a842-f04717c5824d">
     <name>Agreement</name>
@@ -112,6 +117,7 @@
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
+    <fillValue xsi:type="core:UndefinedValue"/>
   </dimensions>
   <dimensions uuid="a687611c-024b-4b0a-9f77-021f1ef5b182">
     <name>IsVendorTransaction</name>
@@ -185,13 +191,13 @@
     </synonym>
     <type>
       <types>DocumentRef.CashTransferOrder</types>
-      <types>DocumentRef.OpeningEntry</types>
       <types>DocumentRef.PurchaseInvoice</types>
-      <types>DocumentRef.SalesInvoice</types>
-      <types>DocumentRef.SalesReturn</types>
-      <types>DocumentRef.PurchaseReturn</types>
       <types>DocumentRef.DebitNote</types>
       <types>DocumentRef.CreditNote</types>
+      <types>DocumentRef.PurchaseReturn</types>
+      <types>DocumentRef.OpeningEntry</types>
+      <types>DocumentRef.SalesReturn</types>
+      <types>DocumentRef.SalesInvoice</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

@@ -31,6 +31,7 @@
     <type>UsualGroup</type>
     <extInfo xsi:type="form:UsualGroupExtInfo">
       <group>Vertical</group>
+      <behavior>Auto</behavior>
       <representation>WeakSeparation</representation>
       <showLeftMargin>true</showLeftMargin>
       <united>true</united>
@@ -59,10 +60,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>List.Barcode</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>List.Barcode</segments>
       </dataPath>
       <defaultItem>true</defaultItem>
       <extendedTooltip>
@@ -108,10 +107,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>List.ItemKey</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>List.ItemKey</segments>
       </dataPath>
       <extendedTooltip>
         <name>ItemKeyExtendedTooltip</name>
@@ -156,10 +153,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>List.SerialLotNumber</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>List.SerialLotNumber</segments>
       </dataPath>
       <extendedTooltip>
         <name>SerialLotNumberExtendedTooltip</name>
@@ -204,10 +199,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>List.Unit</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>List.Unit</segments>
       </dataPath>
       <extendedTooltip>
         <name>UnitExtendedTooltip</name>
@@ -250,10 +243,8 @@
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible/>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>List.Presentation</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>List.Presentation</segments>
       </dataPath>
       <extendedTooltip>
         <name>PresentationExtendedTooltip</name>

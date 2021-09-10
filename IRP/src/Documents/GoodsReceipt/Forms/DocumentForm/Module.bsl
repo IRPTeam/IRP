@@ -34,13 +34,13 @@ EndProcedure
 Procedure SetVisibilityAvailability(Object, Form) Export
 	Form.Items.AddBasisDocuments.Enabled = Not Form.ReadOnly;
 	Form.Items.LinkUnlinkBasisDocuments.Enabled = Not Form.ReadOnly;
-	
+
 	PartnerVisible = (Object.TransactionType = PredefinedValue("Enum.GoodsReceiptTransactionTypes.ReturnFromCustomer")
-			OR Object.TransactionType = PredefinedValue("Enum.GoodsReceiptTransactionTypes.Purchase"));
-	Form.Items.LegalName.Enabled = PartnerVisible AND ValueIsFilled(Object.Partner);
+		Or Object.TransactionType = PredefinedValue("Enum.GoodsReceiptTransactionTypes.Purchase"));
+	Form.Items.LegalName.Enabled = PartnerVisible And ValueIsFilled(Object.Partner);
 	Form.Items.Partner.Visible   = PartnerVisible;
 	Form.Items.LegalName.Visible = PartnerVisible;
-#If Client Then	
+#If Client Then
 	For Each Row In Object.ItemList Do
 		If ValueIsFilled(Row.ReceiptBasis) Then
 			Row.ReceiptBasisCurrency = ServiceSystemServer.GetCompositeObjectAttribute(Row.ReceiptBasis, "Currency");
@@ -55,7 +55,7 @@ EndProcedure
 Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefined) Export
 	If EventName = "UpdateAddAttributeAndPropertySets" Then
 		AddAttributesCreateFormControl();
-	EndIf;	
+	EndIf;
 	If EventName = "NewBarcode" And IsInputAvailable() Then
 		SearchByBarcode(Undefined, Parameter);
 	EndIf;
@@ -125,12 +125,10 @@ Procedure ItemListItemKeyOnChange(Item)
 	If CurrentRow = Undefined Then
 		Return;
 	EndIf;
-	
+
 	CalculationSettings = New Structure();
 	CalculationSettings.Insert("UpdateUnit");
-	CalculationStringsClientServer.CalculateItemsRow(Object,
-		CurrentRow,
-		CalculationSettings);
+	CalculationStringsClientServer.CalculateItemsRow(Object, CurrentRow, CalculationSettings);
 EndProcedure
 
 #Region ItemCompany
@@ -271,7 +269,7 @@ EndProcedure
 &AtClient
 Procedure GeneratedFormCommandActionByName(Command) Export
 	ExternalCommandsClient.GeneratedFormCommandActionByName(Object, ThisObject, Command.Name);
-	GeneratedFormCommandActionByNameServer(Command.Name);	
+	GeneratedFormCommandActionByNameServer(Command.Name);
 EndProcedure
 
 &AtServer
@@ -286,39 +284,33 @@ EndProcedure
 &AtClient
 Function GetLinkedDocumentsFilter()
 	Filter = New Structure();
-	Filter.Insert("Company"         , Object.Company);
-	Filter.Insert("Branch"          , Object.Branch);
-	Filter.Insert("Partner"         , Object.Partner);
-	Filter.Insert("LegalName"       , Object.LegalName);
-	Filter.Insert("TransactionType" , Object.TransactionType);
-	Filter.Insert("Ref"             , Object.Ref);
+	Filter.Insert("Company", Object.Company);
+	Filter.Insert("Branch", Object.Branch);
+	Filter.Insert("Partner", Object.Partner);
+	Filter.Insert("LegalName", Object.LegalName);
+	Filter.Insert("TransactionType", Object.TransactionType);
+	Filter.Insert("Ref", Object.Ref);
 	Return Filter;
 EndFunction
 
 &AtClient
 Procedure LinkUnlinkBasisDocuments(Command)
 	FormParameters = New Structure();
-	FormParameters.Insert("Filter"           , GetLinkedDocumentsFilter());
-	FormParameters.Insert("SelectedRowInfo"  , RowIDInfoClient.GetSelectedRowInfo(Items.ItemList.CurrentData));
-	FormParameters.Insert("TablesInfo"       , RowIDInfoClient.GetTablesInfo(Object));
-	OpenForm("CommonForm.LinkUnlinkDocumentRows"
-		, FormParameters, , , ,
-		, New NotifyDescription("AddOrLinkUnlinkDocumentRowsContinue", ThisObject)
-		, FormWindowOpeningMode.LockOwnerWindow);
+	FormParameters.Insert("Filter", GetLinkedDocumentsFilter());
+	FormParameters.Insert("SelectedRowInfo", RowIDInfoClient.GetSelectedRowInfo(Items.ItemList.CurrentData));
+	FormParameters.Insert("TablesInfo", RowIDInfoClient.GetTablesInfo(Object));
+	OpenForm("CommonForm.LinkUnlinkDocumentRows", FormParameters, , , , ,
+		New NotifyDescription("AddOrLinkUnlinkDocumentRowsContinue", ThisObject), FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
 
 &AtClient
-Procedure AddBasisDocuments(Command)	
+Procedure AddBasisDocuments(Command)
 	FormParameters = New Structure();
-	FormParameters.Insert("Filter"           , GetLinkedDocumentsFilter());
-	FormParameters.Insert("TablesInfo"       , RowIDInfoClient.GetTablesInfo(Object));
-	OpenForm("CommonForm.AddLinkedDocumentRows"
-		, FormParameters, , , ,
-		, New NotifyDescription("AddOrLinkUnlinkDocumentRowsContinue", ThisObject)
-		, FormWindowOpeningMode.LockOwnerWindow);
+	FormParameters.Insert("Filter", GetLinkedDocumentsFilter());
+	FormParameters.Insert("TablesInfo", RowIDInfoClient.GetTablesInfo(Object));
+	OpenForm("CommonForm.AddLinkedDocumentRows", FormParameters, , , , ,
+		New NotifyDescription("AddOrLinkUnlinkDocumentRowsContinue", ThisObject), FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
-
-
 &AtClient
 Procedure AddOrLinkUnlinkDocumentRowsContinue(Result, AdditionalParameters) Export
 	If Result = Undefined Then

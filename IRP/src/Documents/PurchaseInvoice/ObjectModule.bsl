@@ -1,8 +1,7 @@
-
 Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	If DataExchange.Load Then
 		Return;
-	EndIf;	
+	EndIf;
 
 	ThisObject.DocumentAmount = ThisObject.ItemList.Total("TotalAmount");
 EndProcedure
@@ -10,7 +9,7 @@ EndProcedure
 Procedure OnWrite(Cancel)
 	If DataExchange.Load Then
 		Return;
-	EndIf;	
+	EndIf;
 EndProcedure
 
 Procedure BeforeDelete(Cancel)
@@ -36,24 +35,24 @@ EndProcedure
 
 Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 	If DocumentsServer.CheckItemListStores(ThisObject) Then
-		Cancel = True;	
+		Cancel = True;
 	EndIf;
-	
+
 	If Not SerialLotNumbersServer.CheckFilling(ThisObject) Then
 		Cancel = True;
-	EndIf;	
+	EndIf;
 	For Each Row In ThisObject.ItemList Do
 		ItemKeyRow = New Structure();
-		ItemKeyRow.Insert("LineNumber"  , Row.LineNumber);
-		ItemKeyRow.Insert("Key"         , Row.Key);
-		ItemKeyRow.Insert("Item"        , Row.ItemKey.Item);
-		ItemKeyRow.Insert("ItemKey"     , Row.ItemKey);
+		ItemKeyRow.Insert("LineNumber", Row.LineNumber);
+		ItemKeyRow.Insert("Key", Row.Key);
+		ItemKeyRow.Insert("Item", Row.ItemKey.Item);
+		ItemKeyRow.Insert("ItemKey", Row.ItemKey);
 		ItemKeyRow.Insert("QuantityUnit", Row.Unit);
-		ItemKeyRow.Insert("Unit"        , ?(ValueIsFilled(Row.ItemKey.Unit), Row.ItemKey.Unit, Row.ItemKey.Item.Unit));
-		ItemKeyRow.Insert("Quantity"    , Row.Quantity);
-		
+		ItemKeyRow.Insert("Unit", ?(ValueIsFilled(Row.ItemKey.Unit), Row.ItemKey.Unit, Row.ItemKey.Item.Unit));
+		ItemKeyRow.Insert("Quantity", Row.Quantity);
+
 		DocumentsServer.RecalculateQuantityInRow(ItemKeyRow);
-		
+
 		ArrayOfRows = ThisObject.GoodsReceipts.FindRows(New Structure("Key", ItemKeyRow.Key));
 		If Not ArrayOfRows.Count() Then
 			Continue;
@@ -71,16 +70,16 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 
 		If TotalQuantity_GoodsReceipt < ItemKeyRow.Quantity Then
 			Cancel = True;
-			CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_081, ItemKeyRow.LineNumber, ItemKeyRow.Item,
-				ItemKeyRow.ItemKey, ItemKeyRow.Quantity, TotalQuantity_GoodsReceipt), "ItemList[" + Format((ItemKeyRow.LineNumber - 1),
-				"NZ=0; NG=0;") + "].Quantity", ThisObject);
+			CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_081, ItemKeyRow.LineNumber,
+				ItemKeyRow.Item, ItemKeyRow.ItemKey, ItemKeyRow.Quantity, TotalQuantity_GoodsReceipt), "ItemList["
+				+ Format((ItemKeyRow.LineNumber - 1), "NZ=0; NG=0;") + "].Quantity", ThisObject);
 		EndIf;
 
 		If TotalQuantity_GoodsReceipt > ItemKeyRow.Quantity Then
 			Cancel = True;
-			CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_082, ItemKeyRow.LineNumber, ItemKeyRow.Item,
-				ItemKeyRow.ItemKey, ItemKeyRow.Quantity, TotalQuantity_GoodsReceipt), "ItemList[" + Format((ItemKeyRow.LineNumber - 1),
-				"NZ=0; NG=0;") + "].Quantity", ThisObject);
+			CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_082, ItemKeyRow.LineNumber,
+				ItemKeyRow.Item, ItemKeyRow.ItemKey, ItemKeyRow.Quantity, TotalQuantity_GoodsReceipt), "ItemList["
+				+ Format((ItemKeyRow.LineNumber - 1), "NZ=0; NG=0;") + "].Quantity", ThisObject);
 
 		EndIf;
 	EndDo;

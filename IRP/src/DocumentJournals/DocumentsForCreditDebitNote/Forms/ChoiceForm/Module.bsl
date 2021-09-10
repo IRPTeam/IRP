@@ -32,11 +32,11 @@ Function GetSelectedData()
 		Return Undefined;
 	EndIf;
 	SelectedData = New Structure();
-	SelectedData.Insert("BasisDocument" , CurrentData.Ref);
-	SelectedData.Insert("Partner"       , CurrentData.Partner);
-	SelectedData.Insert("Agreement"     , CurrentData.Agreement);
-	SelectedData.Insert("Currency"      , CurrentData.Currency);
-	SelectedData.Insert("LegalName"     , CurrentData.LegalName);
-	SelectedData.Insert("Amount"        , CurrentData.DocumentAmount);
+	SelectedData.Insert("BasisDocument", CurrentData.Ref);
+	SelectedData.Insert("Partner", CurrentData.Partner);
+	SelectedData.Insert("Agreement", CurrentData.Agreement);
+	SelectedData.Insert("Currency", CurrentData.Currency);
+	SelectedData.Insert("LegalName", CurrentData.LegalName);
+	SelectedData.Insert("Amount", CurrentData.DocumentAmount);
 	Return SelectedData;
 EndFunction

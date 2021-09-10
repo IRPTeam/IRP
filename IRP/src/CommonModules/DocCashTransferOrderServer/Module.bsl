@@ -24,13 +24,12 @@ EndProcedure
 #EndRegion
 
 Procedure SetGroupItemsList(Object, Form)
-	AttributesArray = New Array;
+	AttributesArray = New Array();
 	AttributesArray.Add("Company");
 	DocumentsServer.DeleteUnavailableTitleItemNames(AttributesArray);
 	For Each Atr In AttributesArray Do
-		Form.GroupItems.Add(Atr, ?(ValueIsFilled(Form.Items[Atr].Title),
-				Form.Items[Atr].Title,
-				Object.Ref.Metadata().Attributes[Atr].Synonym + ":" + Chars.NBSp));
+		Form.GroupItems.Add(Atr, ?(ValueIsFilled(Form.Items[Atr].Title), Form.Items[Atr].Title,
+			Object.Ref.Metadata().Attributes[Atr].Synonym + ":" + Chars.NBSp));
 	EndDo;
 EndProcedure
 
@@ -53,11 +52,9 @@ EndProcedure
 #Region CommonFunctions
 
 Function UseCashAdvanceHolder(Val Object) Export
-	If Object.Sender.Type = Enums.CashAccountTypes.Cash 
-		And Object.Receiver.Type = Enums.CashAccountTypes.Cash 
-		And ValueIsFilled(Object.SendCurrency)
-		And ValueIsFilled(Object.ReceiveCurrency) 
-		And Object.SendCurrency <> Object.ReceiveCurrency Then
+	If Object.Sender.Type = Enums.CashAccountTypes.Cash And Object.Receiver.Type = Enums.CashAccountTypes.Cash
+		And ValueIsFilled(Object.SendCurrency) And ValueIsFilled(Object.ReceiveCurrency) And Object.SendCurrency
+		<> Object.ReceiveCurrency Then
 		Return True;
 	EndIf;
 	Return False;
@@ -68,7 +65,7 @@ EndFunction
 Function GetInfoForFillingCashReceipt(Ref) Export
 	Result = New Structure("Ref, CashAccount, Company, Currency, CurrencyExchange");
 	Query = New Query();
-	Query.Text = 
+	Query.Text =
 	"SELECT
 	|	CashTransferOrder.Receiver AS CashAccount,
 	|	CashTransferOrder.Company,
@@ -91,7 +88,7 @@ EndFunction
 Function GetInfoForFillingCashPayment(Ref) Export
 	Result = New Structure("Ref, CashAccount, Company, Currency");
 	Query = New Query();
-	Query.Text = 
+	Query.Text =
 	"SELECT
 	|	CashTransferOrder.Sender AS CashAccount,
 	|	CashTransferOrder.Company,
@@ -113,7 +110,7 @@ EndFunction
 Function GetInfoForFillingBankReceipt(Ref) Export
 	Result = New Structure("Ref, Account, Company, Currency, CurrencyExchange");
 	Query = New Query();
-	Query.Text = 
+	Query.Text =
 	"SELECT
 	|	CashTransferOrder.Receiver AS Account,
 	|	CashTransferOrder.Company,
@@ -136,7 +133,7 @@ EndFunction
 Function GetInfoForFillingBankPayment(Ref) Export
 	Result = New Structure("Ref, Account, Company, Currency, CurrencyExchange");
 	Query = New Query();
-	Query.Text = 
+	Query.Text =
 	"SELECT
 	|	CashTransferOrder.Sender AS Account,
 	|	CashTransferOrder.Company,

@@ -11,10 +11,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>Object.Code</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>Object.Code</segments>
       </dataPath>
       <extendedTooltip>
         <name>CodeExtendedTooltip</name>
@@ -78,6 +76,7 @@
     <type>UsualGroup</type>
     <extInfo xsi:type="form:UsualGroupExtInfo">
       <group>HorizontalIfPossible</group>
+      <behavior>Auto</behavior>
       <showLeftMargin>true</showLeftMargin>
       <united>true</united>
       <throughAlign>Auto</throughAlign>
@@ -92,10 +91,8 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:MultiLanguageDataPath">
-      <paths xsi:type="form:DataPath">
-        <segments>Object.Parent</segments>
-      </paths>
+    <dataPath xsi:type="form:DataPath">
+      <segments>Object.Parent</segments>
     </dataPath>
     <extendedTooltip>
       <name>ParentExtendedTooltip</name>
@@ -144,10 +141,8 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:MultiLanguageDataPath">
-      <paths xsi:type="form:DataPath">
-        <segments>Object.PathToExtDataProcForTest</segments>
-      </paths>
+    <dataPath xsi:type="form:DataPath">
+      <segments>Object.PathToExtDataProcForTest</segments>
     </dataPath>
     <extendedTooltip>
       <name>PathToExtDataProcForTestExtendedTooltip</name>
@@ -196,10 +191,8 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:MultiLanguageDataPath">
-      <paths xsi:type="form:DataPath">
-        <segments>Object.Name</segments>
-      </paths>
+    <dataPath xsi:type="form:DataPath">
+      <segments>Object.Name</segments>
     </dataPath>
     <extendedTooltip>
       <name>NameExtendedTooltip</name>
@@ -248,10 +241,8 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:MultiLanguageDataPath">
-      <paths xsi:type="form:DataPath">
-        <segments>Object.UnsafeMode</segments>
-      </paths>
+    <dataPath xsi:type="form:DataPath">
+      <segments>Object.UnsafeMode</segments>
     </dataPath>
     <extendedTooltip>
       <name>UnsafeModeExtendedTooltip</name>
@@ -316,6 +307,7 @@
       <autoMaxWidth>true</autoMaxWidth>
       <autoMaxHeight>true</autoMaxHeight>
       <placementArea>UserCmds</placementArea>
+      <toolTipRepresentation>Auto</toolTipRepresentation>
     </items>
     <items xsi:type="form:Button">
       <name>FormExportExtDataProc</name>
@@ -345,6 +337,7 @@
       <autoMaxWidth>true</autoMaxWidth>
       <autoMaxHeight>true</autoMaxHeight>
       <placementArea>UserCmds</placementArea>
+      <toolTipRepresentation>Auto</toolTipRepresentation>
       <representationInContextMenu>Auto</representationInContextMenu>
     </items>
     <visible>true</visible>

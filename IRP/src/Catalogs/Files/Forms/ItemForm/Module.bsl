@@ -43,7 +43,7 @@ EndProcedure
 &AtServer
 Procedure SetVisible()
 	IsPicture = PictureViewerServer.IsPictureFile(Object.Volume);
-	
+
 	Items.Height.Visible = IsPicture;
 	Items.Width.Visible = IsPicture;
 	Items.SizeBytes.Visible = IsPicture;
@@ -57,21 +57,20 @@ Function CreatePictureParameters()
 	PictureParameters.Insert("FileID", Object.FileID);
 	PictureParameters.Insert("isFilledVolume", Object.Volume <> Catalogs.IntegrationSettings.EmptyRef());
 	PictureParameters.Insert("GETIntegrationSettings", Object.Volume.GETIntegrationSettings);
-	PictureParameters.Insert("isLocalPictureURL", 
-	Object.Volume.GETIntegrationSettings.IntegrationType = Enums.IntegrationType.LocalFileStorage);
+	PictureParameters.Insert("isLocalPictureURL", Object.Volume.GETIntegrationSettings.IntegrationType
+		= Enums.IntegrationType.LocalFileStorage);
 	PictureParameters.Insert("URI", Object.URI);
-	
-	Return PictureParameters;		
-EndFunction	
+
+	Return PictureParameters;
+EndFunction
 
 &AtClient
 Procedure ShowPicture()
 	If Not Object.Volume.IsEmpty() And PictureViewerServer.IsPictureFile(Object.Volume) Then
-		PictureParameters = CreatePictureParameters();	
-		
-		ThisObject.PictureViewHTML = "<html><img src=""" + 
-				PictureViewerClient.GetPictureURL(PictureParameters) + 
-				""" height=""100%""></html>";
+		PictureParameters = CreatePictureParameters();
+
+		ThisObject.PictureViewHTML = "<html><img src=""" + PictureViewerClient.GetPictureURL(PictureParameters)
+			+ """ height=""100%""></html>";
 	EndIf;
 EndProcedure
 

@@ -376,7 +376,6 @@
     <commandParameterType>
       <types>CatalogRef.Items</types>
     </commandParameterType>
-    <shortcut></shortcut>
   </commands>
   <commands uuid="b00c47bb-8914-4d6c-8844-bf797375de3c">
     <name>UpdateItemKeysDescription</name>
@@ -390,6 +389,5 @@
     </commandParameterType>
     <modifiesData>true</modifiesData>
     <representation>Auto</representation>
-    <shortcut></shortcut>
   </commands>
 </mdclass:Catalog>

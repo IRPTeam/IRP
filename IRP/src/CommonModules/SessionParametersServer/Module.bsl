@@ -1,16 +1,15 @@
-
 Procedure SessionParametersSetting(RequiredParameters) Export
-	
+
 	If RequiredParameters = Undefined Then
 		SessionParameters.ConnectionSettings = Catalogs.DataBaseStatus.GetOrCreateDataBaseStatusInfo();
 		StyleName = SessionParameters.ConnectionSettings.SelectedStyle;
 		If Not Metadata.Styles.Find(StyleName) = Undefined Then
 			MainStyle = StyleLib[StyleName];
 		EndIf;
-		
-		Return;	
+
+		Return;
 	EndIf;
-	
+
 	If RequiredParameters.Find("LocalizationCode") <> Undefined Then
 		SessionParameters.LocalizationCode = Metadata.DefaultLanguage.LanguageCode;
 	EndIf;
@@ -22,7 +21,7 @@ Procedure SessionParametersSetting(RequiredParameters) Export
 	EndIf;
 	If Saas.isAreaActive() Then
 		CurrentUser = UsersEvent.SessionParametersSetCurrentUser();
-		If RequiredParameters.Find("CurrentUser") <> Undefined Then		
+		If RequiredParameters.Find("CurrentUser") <> Undefined Then
 			SessionParameters.CurrentUser = CurrentUser;
 		EndIf;
 		If RequiredParameters.Find("CurrentUserPartner") <> Undefined Then
@@ -58,7 +57,7 @@ Procedure SessionParametersSetting(RequiredParameters) Export
 		EndIf;
 	EndIf;
 	If RequiredParameters.Find("ConnectedAddDataProc") <> Undefined Then
-		SessionParameters.ConnectedAddDataProc = New FixedStructure;
+		SessionParameters.ConnectedAddDataProc = New FixedStructure();
 	EndIf;
 EndProcedure
 
@@ -68,14 +67,14 @@ EndFunction
 
 Function OurCompanies()
 	OurCompanies = New Array();
-	Query = New Query;
+	Query = New Query();
 	Query.Text = "SELECT ALLOWED
-	|	Companies.Ref
-	|FROM
-	|	Catalog.Companies AS Companies
-	|WHERE
-	|	Companies.OurCompany";
+				 |	Companies.Ref
+				 |FROM
+				 |	Catalog.Companies AS Companies
+				 |WHERE
+				 |	Companies.OurCompany";
 	QueryUnload = Query.Execute().Unload();
-	OurCompanies = QueryUnload.UnloadColumn("Ref");		
+	OurCompanies = QueryUnload.UnloadColumn("Ref");
 	Return New FixedArray(OurCompanies);
 EndFunction

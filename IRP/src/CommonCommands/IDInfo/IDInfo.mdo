@@ -13,5 +13,4 @@
   <picture xsi:type="core:PictureRef">
     <picture>CommonPicture.IDInfo</picture>
   </picture>
-  <shortcut></shortcut>
 </mdclass:CommonCommand>

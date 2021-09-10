@@ -14,14 +14,14 @@ EndProcedure
 
 Procedure CompanyStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
 	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
-	
+
 	OpenSettings.ArrayOfFilters = New Array();
-	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", 
-																		True, DataCompositionComparisonType.NotEqual));
-	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("OurCompany", 
-																		True, DataCompositionComparisonType.Equal));
+	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True,
+		DataCompositionComparisonType.NotEqual));
+	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("OurCompany", True,
+		DataCompositionComparisonType.Equal));
 	OpenSettings.FillingData = New Structure("OurCompany", True);
-	
+
 	DocumentsClient.CompanyStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
 EndProcedure
 
@@ -61,12 +61,11 @@ EndProcedure
 #Region PickUpItems
 
 Procedure PickupItemsEnd(Result, AdditionalParameters) Export
-	If NOT ValueIsFilled(Result)
-		OR Not AdditionalParameters.Property("Object")
-		OR Not AdditionalParameters.Property("Form") Then
+	If Not ValueIsFilled(Result) Or Not AdditionalParameters.Property("Object") Or Not AdditionalParameters.Property(
+		"Form") Then
 		Return;
 	EndIf;
-	
+
 	FilterString = "Item, ItemKey, Unit";
 	FilterStructure = New Structure(FilterString);
 	For Each ResultElement In Result Do
@@ -84,22 +83,22 @@ Procedure PickupItemsEnd(Result, AdditionalParameters) Export
 EndProcedure
 
 Procedure OpenPickupItems(Object, Form, Command) Export
-	NotifyParameters = New Structure;
+	NotifyParameters = New Structure();
 	NotifyParameters.Insert("Object", Object);
 	NotifyParameters.Insert("Form", Form);
 	NotifyDescription = New NotifyDescription("PickupItemsEnd", DocInternalSupplyRequestClient, NotifyParameters);
-	OpenFormParameters = New Structure;
-	StoreArray = New Array;
+	OpenFormParameters = New Structure();
+	StoreArray = New Array();
 	StoreArray.Add(Object.Store);
 	If Not StoreArray.Count() And ValueIsFilled(Form.CurrentStore) Then
 		StoreArray.Add(Form.CurrentStore);
 	EndIf;
-	
+
 	If Command.AssociatedTable <> Undefined Then
 		OpenFormParameters.Insert("AssociatedTableName", Command.AssociatedTable.Name);
 		OpenFormParameters.Insert("Object", Object);
 	EndIf;
-	
+
 	OpenFormParameters.Insert("Stores", StoreArray);
 	OpenFormParameters.Insert("EndPeriod", CommonFunctionsServer.GetCurrentSessionDate());
 	OpenForm("CommonForm.PickUpItems", OpenFormParameters, Form, , , , NotifyDescription);
@@ -126,11 +125,11 @@ Procedure ItemListItemOnChange(Object, Form, Item = Undefined) Export
 		Return;
 	EndIf;
 	CurrentRow.ItemKey = CatItemsServer.GetItemKeyByItem(CurrentRow.Item);
-	If ValueIsFilled(CurrentRow.ItemKey)
-		And ServiceSystemServer.GetObjectAttribute(CurrentRow.ItemKey, "Item") <> CurrentRow.Item Then
+	If ValueIsFilled(CurrentRow.ItemKey) And ServiceSystemServer.GetObjectAttribute(CurrentRow.ItemKey, "Item")
+		<> CurrentRow.Item Then
 		CurrentRow.ItemKey = Undefined;
 	EndIf;
-	
+
 	CalculationSettings = New Structure();
 	CalculationSettings.Insert("UpdateUnit");
 	CalculationStringsClientServer.CalculateItemsRow(Object, CurrentRow, CalculationSettings);
@@ -152,7 +151,7 @@ Procedure ItemListQuantityOnChange(Object, Form, Item) Export
 		Return;
 	EndIf;
 	Actions = New Structure("CalculateQuantityInBaseUnit");
-	CalculationStringsClientServer.CalculateItemsRow(Object, CurrentData, Actions);	
+	CalculationStringsClientServer.CalculateItemsRow(Object, CurrentData, Actions);
 EndProcedure
 
 Procedure ItemListUnitOnChange(Object, Form, Item) Export
@@ -161,7 +160,7 @@ Procedure ItemListUnitOnChange(Object, Form, Item) Export
 		Return;
 	EndIf;
 	Actions = New Structure("CalculateQuantityInBaseUnit");
-	CalculationStringsClientServer.CalculateItemsRow(Object, CurrentData, Actions);	
+	CalculationStringsClientServer.CalculateItemsRow(Object, CurrentData, Actions);
 EndProcedure
 
 Procedure SearchByBarcode(Barcode, Object, Form) Export

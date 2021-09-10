@@ -26,6 +26,7 @@
     <type>UsualGroup</type>
     <extInfo xsi:type="form:UsualGroupExtInfo">
       <group>HorizontalIfPossible</group>
+      <behavior>Auto</behavior>
       <showLeftMargin>true</showLeftMargin>
       <united>true</united>
       <throughAlign>Auto</throughAlign>
@@ -40,10 +41,8 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:MultiLanguageDataPath">
-      <paths xsi:type="form:DataPath">
-        <segments>Object.FormPosition</segments>
-      </paths>
+    <dataPath xsi:type="form:DataPath">
+      <segments>Object.FormPosition</segments>
     </dataPath>
     <extendedTooltip>
       <name>FormPositionExtendedTooltip</name>
@@ -105,10 +104,8 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:MultiLanguageDataPath">
-      <paths xsi:type="form:DataPath">
-        <segments>Object.Behavior</segments>
-      </paths>
+    <dataPath xsi:type="form:DataPath">
+      <segments>Object.Behavior</segments>
     </dataPath>
     <extendedTooltip>
       <name>BehaviourExtendedTooltip</name>
@@ -157,10 +154,8 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:MultiLanguageDataPath">
-      <paths xsi:type="form:DataPath">
-        <segments>Object.ChildFormItemsGroup</segments>
-      </paths>
+    <dataPath xsi:type="form:DataPath">
+      <segments>Object.ChildFormItemsGroup</segments>
     </dataPath>
     <handlers>
       <event>OnChange</event>
@@ -213,10 +208,8 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:MultiLanguageDataPath">
-      <paths xsi:type="form:DataPath">
-        <segments>Object.Collapsed</segments>
-      </paths>
+    <dataPath xsi:type="form:DataPath">
+      <segments>Object.Collapsed</segments>
     </dataPath>
     <extendedTooltip>
       <name>CollapsedExtendedTooltip</name>
@@ -258,10 +251,8 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:MultiLanguageDataPath">
-      <paths xsi:type="form:DataPath">
-        <segments>Picture</segments>
-      </paths>
+    <dataPath xsi:type="form:DataPath">
+      <segments>Picture</segments>
     </dataPath>
     <extendedTooltip>
       <name>PictureExtendedTooltip</name>

@@ -1,4 +1,3 @@
-
 &AtClient
 Procedure ObjectAttributeTextEditEnd(Item)
 	FillFilterList();
@@ -47,7 +46,7 @@ EndProcedure
 &AtClient
 Procedure FillByRow()
 	If Items.List.CurrentRow = Undefined Then
-		Return;	
+		Return;
 	EndIf;
 	FillDataOnServer(Items.List.CurrentData.Ref);
 EndProcedure
@@ -70,22 +69,22 @@ EndProcedure
 
 &AtServerNoContext
 Function RetailCustomerByCode(Code)
-	Query = New Query;
+	Query = New Query();
 	Query.Text =
-		"SELECT
-		|	RetailCustomers.Ref
-		|FROM
-		|	Catalog.RetailCustomers AS RetailCustomers
-		|WHERE
-		|	RetailCustomers.Code = &Code";
-	
+	"SELECT
+	|	RetailCustomers.Ref
+	|FROM
+	|	Catalog.RetailCustomers AS RetailCustomers
+	|WHERE
+	|	RetailCustomers.Code = &Code";
+
 	Query.SetParameter("Code", Code);
 	Result = Query.Execute();
 	If Result.IsEmpty() Then
 		Return Catalogs.RetailCustomers.EmptyRef();
 	Else
 		Return Result.Unload()[0].Ref;
-	EndIf;		
+	EndIf;
 EndFunction
 
 &AtClient

@@ -22,7 +22,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 		ThisObject.CurrencyType = "Multi";
 	EndIf;
 	If Parameters.Property("CurrencyType") Then
-		CurrencyType = Parameters.CurrencyType;	
+		CurrencyType = Parameters.CurrencyType;
 	EndIf;
 	ExtensionServer.AddAttributesFromExtensions(ThisObject, Object.Ref);
 EndProcedure
@@ -59,8 +59,8 @@ Procedure TransitAccountStartChoice(Item, ChoiceData, StandardProcessing)
 	StandardProcessing = False;
 	DefaultStartChoiceParameters = New Structure("Company", Object.Company);
 	StartChoiceParameters = CatCashAccountsClient.GetDefaultStartChoiceParameters(DefaultStartChoiceParameters);
-	Filter = DocumentsClientServer.CreateFilterItem("Type",	
-				PredefinedValue("Enum.CashAccountTypes.Transit"), , DataCompositionComparisonType.Equal);
+	Filter = DocumentsClientServer.CreateFilterItem("Type", PredefinedValue("Enum.CashAccountTypes.Transit"), ,
+		DataCompositionComparisonType.Equal);
 	StartChoiceParameters.CustomParameters.Filters.Add(Filter);
 	StartChoiceParameters.FillingData.Insert("Type", PredefinedValue("Enum.CashAccountTypes.Transit"));
 	OpenForm(StartChoiceParameters.FormName, StartChoiceParameters, Item, ThisObject.UUID, , ThisObject.URL);
@@ -70,8 +70,8 @@ EndProcedure
 Procedure TransitAccountEditTextChange(Item, Text, StandardProcessing)
 	DefaultEditTextParameters = New Structure("Company", Object.Company);
 	EditTextParameters = CatCashAccountsClient.GetDefaultEditTextParameters(DefaultEditTextParameters);
-	Filter = DocumentsClientServer.CreateFilterItem("Type",
-		PredefinedValue("Enum.CashAccountTypes.Transit"), ComparisonType.Equal);
+	Filter = DocumentsClientServer.CreateFilterItem("Type", PredefinedValue("Enum.CashAccountTypes.Transit"),
+		ComparisonType.Equal);
 	EditTextParameters.Filters.Add(Filter);
 	Item.ChoiceParameters = CatCashAccountsClient.FixedArrayOfChoiceParameters(EditTextParameters);
 EndProcedure

@@ -948,6 +948,5 @@
     </commandParameterType>
     <modifiesData>true</modifiesData>
     <representation>Auto</representation>
-    <shortcut></shortcut>
   </commands>
 </mdclass:Document>

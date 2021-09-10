@@ -19,27 +19,27 @@ Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefin
 	If EventName = "UpdateAddAttributeAndPropertySets" Then
 		AddAttributesCreateFormControl();
 	EndIf;
-	
+
 	If Not Source = ThisObject Then
 		Return;
 	EndIf;
-	
+
 	DocPurchaseOrderClosingClient.NotificationProcessing(Object, ThisObject, EventName, Parameter, Source);
-	
-	ServerData = Undefined;		
+
+	ServerData = Undefined;
 	If TypeOf(Parameter) = Type("Structure") And Parameter.Property("AddInfo") Then
 		ServerData = CommonFunctionsClientServer.GetFromAddInfo(Parameter.AddInfo, "ServerData");
 	EndIf;
-	
+
 	If EventName = "NewBarcode" And IsInputAvailable() Then
 		SearchByBarcode(Undefined, Parameter);
 	EndIf;
-	
+
 	If Upper(EventName) = Upper("CallbackHandler") Then
 		UpdateTotalAmounts();
 		CurrenciesClient.CalculateAmount(Object, ThisObject);
 		CurrenciesClient.SetRatePresentation(Object, ThisObject);
-				
+
 		If ServerData <> Undefined Then
 			CurrenciesClient.SetVisibleRows(Object, ThisObject, Parameter.AddInfo);
 		EndIf;
@@ -99,13 +99,13 @@ Procedure UpdateTotalAmounts()
 		EndIf;
 		ThisObject.TotalNetAmount = ThisObject.TotalNetAmount + Row.NetAmount;
 		ThisObject.TotalTotalAmount = ThisObject.TotalTotalAmount + Row.TotalAmount;
-		
+
 		ArrayOfTaxesRows = Object.TaxList.FindRows(New Structure("Key", Row.Key));
 		For Each RowTax In ArrayOfTaxesRows Do
-			ThisObject.TotalTaxAmount = ThisObject.TotalTaxAmount 
-			+ ?(RowTax.IncludeToTotalAmount, RowTax.ManualAmount, 0);
+			ThisObject.TotalTaxAmount = ThisObject.TotalTaxAmount + ?(RowTax.IncludeToTotalAmount, RowTax.ManualAmount,
+				0);
 		EndDo;
-			
+
 		ArrayOfOffersRows = Object.SpecialOffers.FindRows(New Structure("Key", Row.Key));
 		For Each RowOffer In ArrayOfOffersRows Do
 			ThisObject.TotalOffersAmount = ThisObject.TotalOffersAmount + RowOffer.Amount;
@@ -263,8 +263,6 @@ EndProcedure
 Procedure ItemListNetAmountOnChange(Item)
 	UpdateTotalAmounts();
 EndProcedure
-
-
 &AtClient
 Procedure ItemListDontCalculateRowOnChange(Item)
 	DocPurchaseOrderClosingClient.ItemListDontCalculateRowOnChange(Object, ThisObject, Item);
@@ -277,7 +275,8 @@ EndProcedure
 
 &AtClient
 Procedure ItemListExpenseTypeStartChoice(Item, ChoiceData, StandardProcessing)
-	DocPurchaseOrderClosingClient.ItemListExpenseTypeStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+	DocPurchaseOrderClosingClient.ItemListExpenseTypeStartChoice(Object, ThisObject, Item, ChoiceData,
+		StandardProcessing);
 EndProcedure
 
 &AtClient
@@ -370,9 +369,7 @@ EndProcedure
 
 &AtClient
 Procedure SetSpecialOffers(Command)
-	OffersClient.OpenFormPickupSpecialOffers_ForDocument(Object,
-		ThisObject,
-		"SpecialOffersEditFinish_ForDocument");
+	OffersClient.OpenFormPickupSpecialOffers_ForDocument(Object, ThisObject, "SpecialOffersEditFinish_ForDocument");
 EndProcedure
 
 &AtClient
@@ -392,9 +389,7 @@ EndProcedure
 
 &AtClient
 Procedure SetSpecialOffersAtRow(Command)
-	OffersClient.OpenFormPickupSpecialOffers_ForRow(Object,
-		Items.ItemList.CurrentData,
-		ThisObject,
+	OffersClient.OpenFormPickupSpecialOffers_ForRow(Object, Items.ItemList.CurrentData, ThisObject,
 		"SpecialOffersEditFinish_ForRow");
 EndProcedure
 
@@ -435,7 +430,7 @@ EndProcedure
 
 &AtClient
 Procedure TaxValueOnChange(Item) Export
-	DocPurchaseOrderClosingClient.ItemListTaxValueOnChange(Object, ThisObject, Item);	
+	DocPurchaseOrderClosingClient.ItemListTaxValueOnChange(Object, ThisObject, Item);
 EndProcedure
 
 &AtServer
@@ -522,7 +517,7 @@ EndProcedure
 &AtClient
 Procedure GeneratedFormCommandActionByName(Command) Export
 	ExternalCommandsClient.GeneratedFormCommandActionByName(Object, ThisObject, Command.Name);
-	GeneratedFormCommandActionByNameServer(Command.Name);	
+	GeneratedFormCommandActionByNameServer(Command.Name);
 EndProcedure
 
 &AtServer

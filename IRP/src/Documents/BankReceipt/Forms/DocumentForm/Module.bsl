@@ -20,7 +20,7 @@ EndProcedure
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	DocBankReceiptServer.OnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
-	LibraryLoader.RegisterLibrary(Object, ThisObject, Currencies_GetDeclaration(Object, ThisObject));	
+	LibraryLoader.RegisterLibrary(Object, ThisObject, Currencies_GetDeclaration(Object, ThisObject));
 EndProcedure
 
 &AtServer
@@ -109,12 +109,14 @@ EndProcedure
 
 &AtClient
 Procedure PaymentListFinancialMovementTypeStartChoice(Item, ChoiceData, StandardProcessing)
-	DocBankReceiptClient.PaymentListFinancialMovementTypeStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+	DocBankReceiptClient.PaymentListFinancialMovementTypeStartChoice(Object, ThisObject, Item, ChoiceData,
+		StandardProcessing);
 EndProcedure
 
 &AtClient
 Procedure PaymentListFinancialMovementTypeEditTextChange(Item, Text, StandardProcessing)
-	DocBankReceiptClient.PaymentListFinancialMovementTypeEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+	DocBankReceiptClient.PaymentListFinancialMovementTypeEditTextChange(Object, ThisObject, Item, Text,
+		StandardProcessing);
 EndProcedure
 
 #Region ItemPartner
@@ -209,8 +211,8 @@ EndProcedure
 &AtClient
 Procedure CurrencyOnChange(Item, AddInfo = Undefined) Export
 	If CashTransferOrdersInPaymentList(Object.Currency) And Object.Currency <> CurrentCurrency Then
-		ShowQueryBox(New NotifyDescription("CurrencyOnChangeContinue", ThisObject),
-			R().QuestionToUser_008,	QuestionDialogMode.YesNoCancel);
+		ShowQueryBox(New NotifyDescription("CurrencyOnChangeContinue", ThisObject), R().QuestionToUser_008,
+			QuestionDialogMode.YesNoCancel);
 		Return;
 	EndIf;
 	DocBankReceiptClient.CurrencyOnChange(Object, ThisObject, Item);
@@ -237,8 +239,8 @@ EndProcedure
 Procedure AccountOnChange(Item, AddInfo = Undefined) Export
 	AccountCurrency = ServiceSystemServer.GetObjectAttribute(Object.Account, "Currency");
 	If CashTransferOrdersInPaymentList(AccountCurrency) And AccountCurrency <> CurrentCurrency Then
-		ShowQueryBox(New NotifyDescription("AccountOnChangeContinue", ThisObject),
-			R().QuestionToUser_008,	QuestionDialogMode.YesNoCancel);
+		ShowQueryBox(New NotifyDescription("AccountOnChangeContinue", ThisObject), R().QuestionToUser_008,
+			QuestionDialogMode.YesNoCancel);
 		Return;
 	EndIf;
 	DocBankReceiptClient.AccountOnChange(Object, ThisObject, Item);
@@ -274,10 +276,8 @@ Procedure TransitAccountStartChoice(Item, ChoiceData, StandardProcessing)
 	StandardProcessing = False;
 	DefaultStartChoiceParameters = New Structure("Company", Object.Company);
 	StartChoiceParameters = CatCashAccountsClient.GetDefaultStartChoiceParameters(DefaultStartChoiceParameters);
-	StartChoiceParameters.CustomParameters.Filters.Add(DocumentsClientServer.CreateFilterItem("Type",
-																		PredefinedValue("Enum.CashAccountTypes.Transit"),
-																		,
-																		DataCompositionComparisonType.Equal));
+	StartChoiceParameters.CustomParameters.Filters.Add(DocumentsClientServer.CreateFilterItem("Type", PredefinedValue(
+		"Enum.CashAccountTypes.Transit"), , DataCompositionComparisonType.Equal));
 	StartChoiceParameters.FillingData.Insert("Type", PredefinedValue("Enum.CashAccountTypes.Transit"));
 	OpenForm(StartChoiceParameters.FormName, StartChoiceParameters, Item, ThisObject.UUID, , ThisObject.URL);
 EndProcedure
@@ -286,9 +286,8 @@ EndProcedure
 Procedure TransitAccountEditTextChange(Item, Text, StandardProcessing)
 	DefaultEditTextParameters = New Structure("Company", Object.Company);
 	EditTextParameters = CatCashAccountsClient.GetDefaultEditTextParameters(DefaultEditTextParameters);
-	EditTextParameters.Filters.Add(DocumentsClientServer.CreateFilterItem("Type",
-																		PredefinedValue("Enum.CashAccountTypes.Transit"),
-																		ComparisonType.Equal));
+	EditTextParameters.Filters.Add(DocumentsClientServer.CreateFilterItem("Type", PredefinedValue(
+		"Enum.CashAccountTypes.Transit"), ComparisonType.Equal));
 	Item.ChoiceParameters = CatCashAccountsClient.FixedArrayOfChoiceParameters(EditTextParameters);
 EndProcedure
 
@@ -344,29 +343,33 @@ EndProcedure
 Function Currencies_GetDeclaration(Object, Form)
 	Declaration = LibraryLoader.GetDeclarationInfo();
 	Declaration.LibraryName = "LibraryCurrencies";
-	
+
 	LibraryLoader.AddActionHandler(Declaration, "Currencies_OnOpen", "OnOpen", Form);
 	LibraryLoader.AddActionHandler(Declaration, "Currencies_AfterWriteAtServer", "AfterWriteAtServer", Form);
 	LibraryLoader.AddActionHandler(Declaration, "Currencies_AfterWrite", "AfterWrite", Form);
-	
+
 	ArrayOfItems_MainTable = New Array();
 	ArrayOfItems_MainTable.Add(Form.Items.PaymentList);
-	LibraryLoader.AddActionHandler(Declaration, "Currencies_MainTableBeforeDeleteRow", "BeforeDeleteRow", ArrayOfItems_MainTable);
-	LibraryLoader.AddActionHandler(Declaration, "Currencies_MainTableOnActivateRow", "OnActivateRow", ArrayOfItems_MainTable);
-	
+	LibraryLoader.AddActionHandler(Declaration, "Currencies_MainTableBeforeDeleteRow", "BeforeDeleteRow",
+		ArrayOfItems_MainTable);
+	LibraryLoader.AddActionHandler(Declaration, "Currencies_MainTableOnActivateRow", "OnActivateRow",
+		ArrayOfItems_MainTable);
+
 	ArrayOfItems_MainTableColumns = New Array();
 	ArrayOfItems_MainTableColumns.Add(Form.Items.PaymentListPartner);
 	ArrayOfItems_MainTableColumns.Add(Form.Items.PaymentListAgreement);
 	ArrayOfItems_MainTableColumns.Add(Form.Items.PaymentListBasisDocument);
 	ArrayOfItems_MainTableColumns.Add(Form.Items.PaymentListPayer);
 	ArrayOfItems_MainTableColumns.Add(Form.Items.PaymentListPlaningTransactionBasis);
-	LibraryLoader.AddActionHandler(Declaration, "Currencies_MainTableColumnOnChange", "OnChange", ArrayOfItems_MainTableColumns);
-	
+	LibraryLoader.AddActionHandler(Declaration, "Currencies_MainTableColumnOnChange", "OnChange",
+		ArrayOfItems_MainTableColumns);
+
 	ArrayOfItems_MainTableAmount = New Array();
 	ArrayOfItems_MainTableAmount.Add(Form.Items.PaymentListAmount);
 	ArrayOfItems_MainTableAmount.Add(Form.Items.PaymentListAmountExchange);
-	LibraryLoader.AddActionHandler(Declaration, "Currencies_MainTableAmountOnChange", "OnChange", ArrayOfItems_MainTableAmount);
-	
+	LibraryLoader.AddActionHandler(Declaration, "Currencies_MainTableAmountOnChange", "OnChange",
+		ArrayOfItems_MainTableAmount);
+
 	ArrayOfItems_Header = New Array();
 	ArrayOfItems_Header.Add(Form.Items.Company);
 	ArrayOfItems_Header.Add(Form.Items.Date);
@@ -374,11 +377,11 @@ Function Currencies_GetDeclaration(Object, Form)
 	ArrayOfItems_Header.Add(Form.Items.Currency);
 	ArrayOfItems_Header.Add(Form.Items.CurrencyExchange);
 	LibraryLoader.AddActionHandler(Declaration, "Currencies_HeaderOnChange", "OnChange", ArrayOfItems_Header);
-	
+
 	LibraryData = New Structure();
 	LibraryData.Insert("Version", "1.0");
 	LibraryLoader.PutData(Declaration, LibraryData);
-	
+
 	Return Declaration;
 EndFunction
 
@@ -393,7 +396,7 @@ EndProcedure
 Procedure Currencies_AfterWriteAtServer(CurrentObject, WriteParameters, AddInfo = Undefined) Export
 	CurrenciesClientServer.AfterWriteAtServer(Object, ThisObject, CurrentObject, WriteParameters, AddInfo);
 EndProcedure
-	
+
 &AtClient
 Procedure Currencies_AfterWrite(WriteParameters, AddInfo = Undefined) Export
 	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "Currencies_CurrentTableName", "PaymentList");
@@ -427,7 +430,7 @@ Procedure Currencies_HeaderOnChange(Item, AddInfo = Undefined) Export
 	ArrayOfTableNames.Add("PaymentList");
 	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "Currencies_ArrayOfTableNames", ArrayOfTableNames);
 	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "Currencies_CurrentTableName", "PaymentList");
-	
+
 	CurrenciesClientServer.HeaderOnChange(Object, ThisObject, Item, AddInfo);
 EndProcedure
 
@@ -483,22 +486,13 @@ EndProcedure
 
 &AtServer
 Procedure Currencies_FillCurrencyTable(RowKey, Currency, AgreementInfo) Export
-	
+
 	If ValueIsFilled(Object.CurrencyExchange) And Object.CurrencyExchange <> Object.Currency Then
-		CurrenciesServer.FillCurrencyTable(Object, 
-	                                       Object.Date, 
-	                                       Object.Company, 
-	                                       Object.CurrencyExchange, 
-	                                       RowKey,
-	                                       AgreementInfo);
+		CurrenciesServer.FillCurrencyTable(Object, Object.Date, Object.Company, Object.CurrencyExchange, RowKey,
+			AgreementInfo);
 	EndIf;
 
-	CurrenciesServer.FillCurrencyTable(Object, 
-	                                   Object.Date, 
-	                                   Object.Company, 
-	                                   Currency, 
-	                                   RowKey,
-	                                   AgreementInfo);
+	CurrenciesServer.FillCurrencyTable(Object, Object.Date, Object.Company, Currency, RowKey, AgreementInfo);
 EndProcedure
 
 &AtServer
@@ -522,7 +516,8 @@ Procedure Currencies_CalculateRate(Amount, MovementType, RowKey) Export
 	If ValueIsFilled(Object.CurrencyExchange) And Object.CurrencyExchange <> Object.Currency Then
 		OwnerRow = CurrenciesClientServer.FindRowByUUID(Object, "PaymentList", RowKey);
 		If OwnerRow <> Undefined Then
-			CurrenciesServer.CalculateRate(Object, OwnerRow.AmountExchange, MovementType, RowKey, Object.CurrencyExchange);
+			CurrenciesServer.CalculateRate(Object, OwnerRow.AmountExchange, MovementType, RowKey,
+				Object.CurrencyExchange);
 		EndIf;
 	EndIf;
 	CurrenciesServer.CalculateRate(Object, Amount, MovementType, RowKey, Object.Currency);
@@ -534,7 +529,7 @@ EndProcedure
 
 &AtClient
 Procedure ShowRowKey(Command)
-	DocumentsClient.ShowRowKey(ThisObject);	
+	DocumentsClient.ShowRowKey(ThisObject);
 EndProcedure
 
 #Region Common
@@ -542,10 +537,9 @@ EndProcedure
 &AtClient
 Procedure ClearCashTransferOrders(Val CashTransferOrderCurrency) Export
 	For Each Row In Object.PaymentList Do
-		If ValueIsFilled(Row.PlaningTransactionBasis)
-			And TypeOf(Row.PlaningTransactionBasis) = Type("DocumentRef.CashTransferOrder")
-			And ServiceSystemServer.GetObjectAttribute(Row.PlaningTransactionBasis, "ReceiveCurrency") 
-																					<> CashTransferOrderCurrency Then
+		If ValueIsFilled(Row.PlaningTransactionBasis) And TypeOf(Row.PlaningTransactionBasis) = Type(
+			"DocumentRef.CashTransferOrder") And ServiceSystemServer.GetObjectAttribute(Row.PlaningTransactionBasis,
+			"ReceiveCurrency") <> CashTransferOrderCurrency Then
 			Row.PlaningTransactionBasis = Undefined;
 		EndIf;
 	EndDo;
@@ -555,10 +549,9 @@ EndProcedure
 Function CashTransferOrdersInPaymentList(Val CashTransferOrderCurrency)
 	Answer = False;
 	For Each Row In Object.PaymentList Do
-		If ValueIsFilled(Row.PlaningTransactionBasis)
-			And TypeOf(Row.PlaningTransactionBasis) = Type("DocumentRef.CashTransferOrder")
-			And ServiceSystemServer.GetObjectAttribute(Row.PlaningTransactionBasis, "ReceiveCurrency") 
-																					<> CashTransferOrderCurrency Then
+		If ValueIsFilled(Row.PlaningTransactionBasis) And TypeOf(Row.PlaningTransactionBasis) = Type(
+			"DocumentRef.CashTransferOrder") And ServiceSystemServer.GetObjectAttribute(Row.PlaningTransactionBasis,
+			"ReceiveCurrency") <> CashTransferOrderCurrency Then
 			Answer = True;
 			Break;
 		EndIf;
@@ -587,7 +580,7 @@ EndProcedure
 &AtClient
 Procedure GeneratedFormCommandActionByName(Command) Export
 	ExternalCommandsClient.GeneratedFormCommandActionByName(Object, ThisObject, Command.Name);
-	GeneratedFormCommandActionByNameServer(Command.Name);	
+	GeneratedFormCommandActionByNameServer(Command.Name);
 EndProcedure
 
 &AtServer

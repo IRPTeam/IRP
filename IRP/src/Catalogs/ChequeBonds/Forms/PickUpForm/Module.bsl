@@ -7,23 +7,23 @@ EndProcedure
 
 &AtClient
 Procedure OnOpen(Cancel)
-	
+
 	NewFilter = List.Filter.Items.Add(Type("DataCompositionFilterItem"));
-	
+
 	NewFilter.LeftValue = New DataCompositionField("Status");
 	NewFilter.ComparisonType = DataCompositionComparisonType.InList;
 	NewFilter.RightValue = StatusSelection;
 	NewFilter.Use = False;
-	
+
 	FilterByStatusIndex = List.Filter.Items.IndexOf(NewFilter);
-	
+
 	NewFilter = List.Filter.Items.Add(Type("DataCompositionFilterItem"));
-	
+
 	NewFilter.LeftValue = New DataCompositionField("Type");
 	NewFilter.ComparisonType = DataCompositionComparisonType.Equal;
 	NewFilter.RightValue = ChequeBondType;
 	NewFilter.Use = True;
-	
+
 	FilterByChequeBondType = List.Filter.Items.IndexOf(NewFilter);
 EndProcedure
 
@@ -33,15 +33,15 @@ EndProcedure
 &AtClient
 Procedure ListSelection(Item, RowSelected, Field, StandardProcessing)
 	StandardProcessing = False;
-	
+
 	CurrentRow = Items.List.CurrentData;
 	If CurrentRow = Undefined Then
 		Return;
 	EndIf;
-	
+
 	NewRow = PickedCheckBonds.Add();
 	FillPropertyValues(NewRow, CurrentRow);
-	
+
 EndProcedure
 
 &AtClient
@@ -67,14 +67,14 @@ Procedure SetFilterByStatus()
 	If List.Filter.Items.Count() = 0 Then
 		Return;
 	EndIf;
-	
+
 	Filter = List.Filter.Items[FilterByStatusIndex];
 	Filter.RightValue 	= StatusSelection;
 	Filter.Use 			= StatusCheck;
-	
+
 	Filter = List.Filter.Items[FilterByChequeBondType];
 	Filter.RightValue 	= ChequeBondType;
-	
+
 EndProcedure
 #EndRegion
 

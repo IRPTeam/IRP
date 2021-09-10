@@ -20,7 +20,7 @@ Procedure AddExtDataProcEnd(Result, Address, FileName, Parameters) Export
 	If Not Result Then
 		Return;
 	EndIf;
-	
+
 	ThisObject.DataProcStorageAddress = TransferFileToServer(New BinaryData(FileName), ThisObject.UUID);
 	ThisObject.Modified = True;
 	Object.PathToExtDataProcForTest = FileName;
@@ -53,17 +53,17 @@ Procedure ChooseDirectoryEnding(Result, AddParameters) Export
 	If Result = Undefined Then
 		Return;
 	EndIf;
-	
+
 	If Result.Count() >= 1 Then
 		PathToDirectory = Result[0];
 	EndIf;
-	
+
 	BinaryDataPointer = GetFileFromStorage();
-	
+
 	If Not ValueIsFilled(BinaryDataPointer) Then
 		Return;
 	EndIf;
-	
+
 	BinaryData = GetFromTempStorage(BinaryDataPointer);
 	BinaryData.Write(PathToDirectory + "\" + Object.Name + ".epf");
 EndProcedure
@@ -72,12 +72,12 @@ EndProcedure
 Function GetFileFromStorage()
 	Query = New Query();
 	Query.Text =
-		"SELECT
-		|	ExternalDataProc.DataProcStorage AS DataProcStorage
-		|FROM
-		|	Catalog.ExternalDataProc AS ExternalDataProc
-		|WHERE
-		|	ExternalDataProc.Ref = &Ref";
+	"SELECT
+	|	ExternalDataProc.DataProcStorage AS DataProcStorage
+	|FROM
+	|	Catalog.ExternalDataProc AS ExternalDataProc
+	|WHERE
+	|	ExternalDataProc.Ref = &Ref";
 	Query.SetParameter("Ref", Object.Ref);
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();

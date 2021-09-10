@@ -21,10 +21,8 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:MultiLanguageDataPath">
-          <paths xsi:type="form:DataPath">
-            <segments>Object.Amount</segments>
-          </paths>
+        <dataPath xsi:type="form:DataPath">
+          <segments>Object.Amount</segments>
         </dataPath>
         <extendedTooltip>
           <name>AmountExtendedTooltip</name>
@@ -143,6 +141,7 @@
       <extInfo xsi:type="form:UsualGroupExtInfo">
         <group>HorizontalIfPossible</group>
         <horizontalAlign>Left</horizontalAlign>
+        <behavior>Auto</behavior>
         <representation>NormalSeparation</representation>
         <showLeftMargin>true</showLeftMargin>
         <united>true</united>
@@ -183,6 +182,7 @@
         <font>Style.NormalTextFont</font>
         <height>20.0</height>
       </font>
+      <toolTipRepresentation>Auto</toolTipRepresentation>
       <representationInContextMenu>Auto</representationInContextMenu>
     </items>
     <visible>true</visible>
@@ -214,6 +214,7 @@
     <extInfo xsi:type="form:UsualGroupExtInfo">
       <group>HorizontalIfPossible</group>
       <horizontalAlign>Right</horizontalAlign>
+      <behavior>Auto</behavior>
       <showLeftMargin>true</showLeftMargin>
       <united>true</united>
       <throughAlign>Auto</throughAlign>
@@ -281,10 +282,8 @@
             <userVisible>
               <common>true</common>
             </userVisible>
-            <dataPath xsi:type="form:MultiLanguageDataPath">
-              <paths xsi:type="form:DataPath">
-                <segments>Payments.PaymentType</segments>
-              </paths>
+            <dataPath xsi:type="form:DataPath">
+              <segments>Payments.PaymentType</segments>
             </dataPath>
             <extendedTooltip>
               <name>PaymentsPaymentTypeExtendedTooltip</name>
@@ -336,10 +335,8 @@
             <userVisible>
               <common>true</common>
             </userVisible>
-            <dataPath xsi:type="form:MultiLanguageDataPath">
-              <paths xsi:type="form:DataPath">
-                <segments>Payments.Amount</segments>
-              </paths>
+            <dataPath xsi:type="form:DataPath">
+              <segments>Payments.Amount</segments>
             </dataPath>
             <extendedTooltip>
               <name>PaymentsAmountExtendedTooltip</name>
@@ -394,10 +391,8 @@
             <userVisible>
               <common>true</common>
             </userVisible>
-            <dataPath xsi:type="form:MultiLanguageDataPath">
-              <paths xsi:type="form:DataPath">
-                <segments>Payments.AmountString</segments>
-              </paths>
+            <dataPath xsi:type="form:DataPath">
+              <segments>Payments.AmountString</segments>
             </dataPath>
             <extendedTooltip>
               <name>PaymentsAmountStringExtendedTooltip</name>
@@ -431,10 +426,8 @@
             <showInHeader>true</showInHeader>
             <headerHorizontalAlign>Left</headerHorizontalAlign>
             <showInFooter>true</showInFooter>
-            <footerDataPath xsi:type="form:MultiLanguageDataPath">
-              <paths xsi:type="form:DataPath">
-                <segments>PaymentsAmountTotal</segments>
-              </paths>
+            <footerDataPath xsi:type="form:DataPath">
+              <segments>PaymentsAmountTotal</segments>
             </footerDataPath>
             <footerFont xsi:type="core:FontDef">
               <height>16.0</height>
@@ -458,10 +451,8 @@
             <userVisible>
               <common>true</common>
             </userVisible>
-            <dataPath xsi:type="form:MultiLanguageDataPath">
-              <paths xsi:type="form:DataPath">
-                <segments>Payments.PaymentTypeEnum</segments>
-              </paths>
+            <dataPath xsi:type="form:DataPath">
+              <segments>Payments.PaymentTypeEnum</segments>
             </dataPath>
             <extendedTooltip>
               <name>PaymentsPaymentTypeEnumExtendedTooltip</name>
@@ -711,6 +702,7 @@
         <type>UsualGroup</type>
         <extInfo xsi:type="form:UsualGroupExtInfo">
           <group>Vertical</group>
+          <behavior>Auto</behavior>
           <showLeftMargin>true</showLeftMargin>
           <united>true</united>
           <throughAlign>Auto</throughAlign>
@@ -765,6 +757,7 @@
               <font xsi:type="core:FontDef">
                 <height>14.0</height>
               </font>
+              <toolTipRepresentation>Auto</toolTipRepresentation>
               <representationInContextMenu>Auto</representationInContextMenu>
             </items>
             <items xsi:type="form:Decoration">
@@ -855,6 +848,7 @@
                 <underline>false</underline>
                 <strikeout>false</strikeout>
               </font>
+              <toolTipRepresentation>Auto</toolTipRepresentation>
               <representationInContextMenu>Auto</representationInContextMenu>
             </items>
             <items xsi:type="form:Button">
@@ -901,6 +895,7 @@
                 <underline>false</underline>
                 <strikeout>false</strikeout>
               </font>
+              <toolTipRepresentation>Auto</toolTipRepresentation>
               <representationInContextMenu>Auto</representationInContextMenu>
             </items>
             <items xsi:type="form:Button">
@@ -947,6 +942,7 @@
                 <underline>false</underline>
                 <strikeout>false</strikeout>
               </font>
+              <toolTipRepresentation>Auto</toolTipRepresentation>
               <representationInContextMenu>Auto</representationInContextMenu>
             </items>
             <items xsi:type="form:Button">
@@ -993,6 +989,7 @@
                 <underline>false</underline>
                 <strikeout>false</strikeout>
               </font>
+              <toolTipRepresentation>Auto</toolTipRepresentation>
               <representationInContextMenu>Auto</representationInContextMenu>
             </items>
             <visible>true</visible>
@@ -1018,6 +1015,7 @@
             <type>UsualGroup</type>
             <extInfo xsi:type="form:UsualGroupExtInfo">
               <group>Vertical</group>
+              <behavior>Auto</behavior>
               <representation>WeakSeparation</representation>
               <showLeftMargin>true</showLeftMargin>
               <united>true</united>
@@ -1068,6 +1066,7 @@
               <font xsi:type="core:FontDef">
                 <height>14.0</height>
               </font>
+              <toolTipRepresentation>Auto</toolTipRepresentation>
               <representationInContextMenu>Auto</representationInContextMenu>
             </items>
             <items xsi:type="form:Decoration">
@@ -1158,6 +1157,7 @@
                 <underline>false</underline>
                 <strikeout>false</strikeout>
               </font>
+              <toolTipRepresentation>Auto</toolTipRepresentation>
               <representationInContextMenu>Auto</representationInContextMenu>
             </items>
             <items xsi:type="form:Button">
@@ -1204,6 +1204,7 @@
                 <underline>false</underline>
                 <strikeout>false</strikeout>
               </font>
+              <toolTipRepresentation>Auto</toolTipRepresentation>
               <representationInContextMenu>Auto</representationInContextMenu>
             </items>
             <items xsi:type="form:Button">
@@ -1250,6 +1251,7 @@
                 <underline>false</underline>
                 <strikeout>false</strikeout>
               </font>
+              <toolTipRepresentation>Auto</toolTipRepresentation>
               <representationInContextMenu>Auto</representationInContextMenu>
             </items>
             <items xsi:type="form:Button">
@@ -1299,6 +1301,7 @@
                 <underline>false</underline>
                 <strikeout>false</strikeout>
               </font>
+              <toolTipRepresentation>Auto</toolTipRepresentation>
               <representationInContextMenu>Auto</representationInContextMenu>
             </items>
             <visible>true</visible>
@@ -1324,6 +1327,7 @@
             <type>UsualGroup</type>
             <extInfo xsi:type="form:UsualGroupExtInfo">
               <group>Vertical</group>
+              <behavior>Auto</behavior>
               <representation>WeakSeparation</representation>
               <showLeftMargin>true</showLeftMargin>
               <united>true</united>
@@ -1374,6 +1378,7 @@
               <picture xsi:type="core:PictureRef">
                 <picture>CommonPicture.Finance</picture>
               </picture>
+              <toolTipRepresentation>Auto</toolTipRepresentation>
               <representationInContextMenu>Auto</representationInContextMenu>
             </items>
             <items xsi:type="form:Decoration">
@@ -1464,6 +1469,7 @@
                 <underline>false</underline>
                 <strikeout>false</strikeout>
               </font>
+              <toolTipRepresentation>Auto</toolTipRepresentation>
               <representationInContextMenu>Auto</representationInContextMenu>
             </items>
             <items xsi:type="form:Button">
@@ -1510,6 +1516,7 @@
                 <underline>false</underline>
                 <strikeout>false</strikeout>
               </font>
+              <toolTipRepresentation>Auto</toolTipRepresentation>
               <representationInContextMenu>Auto</representationInContextMenu>
             </items>
             <items xsi:type="form:Button">
@@ -1556,6 +1563,7 @@
                 <underline>false</underline>
                 <strikeout>false</strikeout>
               </font>
+              <toolTipRepresentation>Auto</toolTipRepresentation>
               <representationInContextMenu>Auto</representationInContextMenu>
             </items>
             <items xsi:type="form:Button">
@@ -1605,6 +1613,7 @@
                 <underline>false</underline>
                 <strikeout>false</strikeout>
               </font>
+              <toolTipRepresentation>Auto</toolTipRepresentation>
               <representationInContextMenu>Auto</representationInContextMenu>
             </items>
             <visible>true</visible>
@@ -1630,6 +1639,7 @@
             <type>UsualGroup</type>
             <extInfo xsi:type="form:UsualGroupExtInfo">
               <group>Vertical</group>
+              <behavior>Auto</behavior>
               <representation>WeakSeparation</representation>
               <showLeftMargin>true</showLeftMargin>
               <united>true</united>
@@ -1680,6 +1690,7 @@
               <picture xsi:type="core:PictureRef">
                 <picture>CommonPicture.Purchase</picture>
               </picture>
+              <toolTipRepresentation>Auto</toolTipRepresentation>
               <representationInContextMenu>Auto</representationInContextMenu>
             </items>
             <items xsi:type="form:Decoration">
@@ -1766,6 +1777,7 @@
                 <underline>false</underline>
                 <strikeout>false</strikeout>
               </font>
+              <toolTipRepresentation>Auto</toolTipRepresentation>
               <representationInContextMenu>Auto</representationInContextMenu>
             </items>
             <items xsi:type="form:Button">
@@ -1815,6 +1827,7 @@
                 <underline>false</underline>
                 <strikeout>false</strikeout>
               </font>
+              <toolTipRepresentation>Auto</toolTipRepresentation>
               <representationInContextMenu>Auto</representationInContextMenu>
             </items>
             <visible>true</visible>
@@ -1840,6 +1853,7 @@
             <type>UsualGroup</type>
             <extInfo xsi:type="form:UsualGroupExtInfo">
               <group>Vertical</group>
+              <behavior>Auto</behavior>
               <representation>WeakSeparation</representation>
               <showLeftMargin>true</showLeftMargin>
               <united>true</united>
@@ -1876,6 +1890,7 @@
             <group>AlwaysHorizontal</group>
             <horizontalSpacing>Half</horizontalSpacing>
             <verticalSpacing>Half</verticalSpacing>
+            <behavior>Auto</behavior>
             <showLeftMargin>true</showLeftMargin>
             <united>true</united>
             <backColor xsi:type="core:ColorRef">
@@ -1912,6 +1927,7 @@
         <type>UsualGroup</type>
         <extInfo xsi:type="form:UsualGroupExtInfo">
           <group>HorizontalIfPossible</group>
+          <behavior>Auto</behavior>
           <showLeftMargin>true</showLeftMargin>
           <united>true</united>
           <throughAlign>Auto</throughAlign>
@@ -1950,6 +1966,7 @@
       <extInfo xsi:type="form:UsualGroupExtInfo">
         <group>AlwaysHorizontal</group>
         <horizontalAlign>Right</horizontalAlign>
+        <behavior>Auto</behavior>
         <showLeftMargin>true</showLeftMargin>
         <united>true</united>
         <throughAlign>Auto</throughAlign>
@@ -1988,6 +2005,7 @@
     <extInfo xsi:type="form:UsualGroupExtInfo">
       <group>Vertical</group>
       <horizontalAlign>Center</horizontalAlign>
+      <behavior>Auto</behavior>
       <showLeftMargin>true</showLeftMargin>
       <united>true</united>
       <throughAlign>Auto</throughAlign>
@@ -2008,10 +2026,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>Object.Cashback</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>Object.Cashback</segments>
       </dataPath>
       <extendedTooltip>
         <name>CashbackExtendedTooltip</name>
@@ -2128,6 +2144,7 @@
     <type>UsualGroup</type>
     <extInfo xsi:type="form:UsualGroupExtInfo">
       <group>HorizontalIfPossible</group>
+      <behavior>Auto</behavior>
       <representation>NormalSeparation</representation>
       <showLeftMargin>true</showLeftMargin>
       <united>true</united>

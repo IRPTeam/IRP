@@ -1,16 +1,18 @@
 Procedure EditMultilineText(ItemName, Form, AddInfo = Undefined) Export
-	OpenForm("CommonForm.EditMultilineText", New Structure("ItemName", ItemName), Form, , , , New NotifyDescription("OnEditedMultilineTextEnd", ThisObject, New Structure("Form, ItemName", Form, ItemName)), FormWindowOpeningMode.LockOwnerWindow);
+	OpenForm("CommonForm.EditMultilineText", New Structure("ItemName", ItemName), Form, , , ,
+		New NotifyDescription("OnEditedMultilineTextEnd", ThisObject, New Structure("Form, ItemName", Form, ItemName)),
+		FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
 
 Procedure OnEditedMultilineTextEnd(Result, AdditionalParameters) Export
-	If Result = Undefined Then 
+	If Result = Undefined Then
 		Return;
 	EndIf;
 	If AdditionalParameters.Form.Object[AdditionalParameters.ItemName] <> Result Then
 		AdditionalParameters.Form.Modified = True;
 	EndIf;
 	AdditionalParameters.Form.Object[AdditionalParameters.ItemName] = Result;
-	DocumentsClient.SetTextOfDescriptionAtForm(AdditionalParameters.Form.Object, AdditionalParameters.Form);	
+	DocumentsClient.SetTextOfDescriptionAtForm(AdditionalParameters.Form.Object, AdditionalParameters.Form);
 EndProcedure
 
 // Procedure wich add string In table, or add quantity to exist one
@@ -25,11 +27,11 @@ EndProcedure
 // 	AddInfo       - any		 - any additional info
 Function AddRowAtObjectTable(SettingsInfo, AddInfo = Undefined) Export
 	Table = SettingsInfo.Object[SettingsInfo.Settings.Name];
-	
+
 	FillPropertyValues(SettingsInfo.Settings.Search, SettingsInfo.RowData);
-	
+
 	SearchRow = Table.FindRows(SettingsInfo.Settings.Search);
-	
+
 	If SearchRow.Count() Then
 		NewStr = SearchRow[0];
 		SourceQuantity = NewStr.Quantity;
@@ -43,11 +45,11 @@ Function AddRowAtObjectTable(SettingsInfo, AddInfo = Undefined) Export
 		NewStr = Table.Add();
 		FillPropertyValues(NewStr, SettingsInfo.RowData);
 	EndIf;
-	
+
 	If Not ValueIsFilled(NewStr.Key) Then
 		NewStr.Key = New UUID();
 	EndIf;
-	
+
 	Return NewStr;
 EndFunction
 

@@ -11,21 +11,19 @@ Procedure AfterWriteAtServer(Form, CurrentObject, WriteParameters, AddInfo = Und
 			Break;
 		EndIf;
 	EndDo;
-	
+
 	If Not HaveAttribute Then
 		Return;
 	EndIf;
-	
+
 	ArrayOfAttributes = StrSplit(Form["ListOfIDInfoAttributes"], ",");
 	For Each AttributeName In ArrayOfAttributes Do
 		If Not ValueIsFilled(AttributeName) Then
 			Continue;
 		EndIf;
-		
-		UpdateIDInfoTypeValue(CurrentObject.Ref
-			, GetIDInfoRefByUniqueID(NameToUniqueId(AttributeName))
-			, Form[AttributeName]
-			, Undefined);
+
+		UpdateIDInfoTypeValue(CurrentObject.Ref, GetIDInfoRefByUniqueID(NameToUniqueId(AttributeName)),
+			Form[AttributeName], Undefined);
 	EndDo;
 EndProcedure
 
@@ -37,7 +35,7 @@ Procedure CreateFormControls(Form, GroupNameForPlacement = "GroupContactInformat
 		ArrayForDelete = New Array();
 		ArrayForDelete.Add("ListOfIDInfoAttributes");
 		For Each AttrName In StrSplit(Form.ListOfIDInfoAttributes, ",") Do
-			If Not ValueIsFilled(AttrName) Then 
+			If Not ValueIsFilled(AttrName) Then
 				Continue;
 			EndIf;
 			ArrayForDelete.Add(AttrName);
@@ -48,64 +46,59 @@ Procedure CreateFormControls(Form, GroupNameForPlacement = "GroupContactInformat
 			Form.ChangeAttributes( , ArrayForDelete);
 		EndIf;
 	EndIf;
-	
+
 	Attributes = New Array();
 	FormAttributesInfo = New Array();
 	SetName = GetSetName(Form.Object.Ref, AddInfo);
 	ObjectAttributes = ObjectAttributes(Form.Object.Ref, SetName, AddInfo);
-	
+
 	ArrayOfNames = New Array();
-	
+
 	For Each Row In ObjectAttributes Do
 		AttributeInfo = AttributeAndPropertyInfo(Row.IDInfoType, AddInfo);
-		Attributes.Add(New FormAttribute(AttributeInfo.Name,
-				AttributeInfo.Type, ,
-				AttributeInfo.Title,
-				AttributeInfo.StoredData));
+		Attributes.Add(New FormAttribute(AttributeInfo.Name, AttributeInfo.Type, , AttributeInfo.Title,
+			AttributeInfo.StoredData));
 		FormAttributesInfo.Add(AttributeInfo);
 		ArrayOfNames.Add(AttributeInfo.Name);
 	EndDo;
-	
+
 	Attributes.Add(New FormAttribute("ListOfIDInfoAttributes", New TypeDescription("String")));
 	Form.ChangeAttributes(Attributes);
-	
+
 	Form["ListOfIDInfoAttributes"] = StrConcat(ArrayOfNames, ",");
-	
+
 	Query = New Query();
 	Query.Text =
-		"SELECT
-		|	IDInfo.Object,
-		|	IDInfo.IDInfoType,
-		|	IDInfo.Value,
-		|	IDInfo.Info,
-		|	IDInfo.Country
-		|FROM
-		|	InformationRegister.IDInfo AS IDInfo
-		|WHERE
-		|	IDInfo.Object = &Object";
+	"SELECT
+	|	IDInfo.Object,
+	|	IDInfo.IDInfoType,
+	|	IDInfo.Value,
+	|	IDInfo.Info,
+	|	IDInfo.Country
+	|FROM
+	|	InformationRegister.IDInfo AS IDInfo
+	|WHERE
+	|	IDInfo.Object = &Object";
 	Query.SetParameter("Object", Form.Object.Ref);
 	QueryResult = Query.Execute();
 	IDInfoValueTable = QueryResult.Unload();
-	
+
 	For Each Row In IDInfoValueTable Do
 		AttributeInfo = AttributeAndPropertyInfo(Row.IDInfoType, AddInfo);
-		If NotSavedAttrValues.Property(AttributeInfo.Name) 
-			And ValueIsFilled(NotSavedAttrValues[AttributeInfo.Name]) Then
+		If NotSavedAttrValues.Property(AttributeInfo.Name) And ValueIsFilled(NotSavedAttrValues[AttributeInfo.Name]) Then
 			Form[AttributeInfo.Name] = NotSavedAttrValues[AttributeInfo.Name];
 			Continue;
 		EndIf;
 		FillPropertyValues(Form, New Structure(AttributeInfo.Name, Row.Value));
 	EndDo;
-	
+
 	For Each AttrInfo In FormAttributesInfo Do
-		NewFormElement = Form.Items.Add(AttrInfo.Name,
-				Type("FormField"),
-				Form.Items[GroupNameForPlacement]);
+		NewFormElement = Form.Items.Add(AttrInfo.Name, Type("FormField"), Form.Items[GroupNameForPlacement]);
 		NewFormElement.DataPath = AttrInfo.Path;
 		NewFormElement.Type = FormFieldType.InputField;
 		NewFormElement.ReadOnly = AttrInfo.Ref.ReadOnly;
 		NewFormElement.OpenButton = True;
-		
+
 		NewFormElement.SetAction("Opening", "IDInfoOpening");
 	EndDo;
 EndProcedure
@@ -131,7 +124,7 @@ Function GetCollectionOfIDInfo(Ref, AllItems, SetName, AddInfo = Undefined)
 			If StructureOfCondition.Property("AddAttributesMap") Then
 				ReplaceItemsFromFilter(StructureOfCondition);
 			EndIf;
-			
+
 			NewFilter = StructureOfCondition.Settings.Filter.Items.Add(Type("DataCompositionFilterItem"));
 			LeftValue = New DataCompositionField("Ref");
 			NewFilter.LeftValue = LeftValue;
@@ -158,8 +151,8 @@ Procedure ReplaceItemsFromFilter(StructureOfCondition) Export
 			ArrayOfParts = StrSplit(String(Field.LeftValue), ".");
 			NeedCountOfParts = 2;
 			If ArrayOfParts.Count() >= NeedCountOfParts Then
-				NewField = New DataCompositionField(ArrayOfParts[0] + "."
-						+ "[" + String(StructureOfCondition.AddAttributesMap.Get(ArrayOfParts[1])) + "]");
+				NewField = New DataCompositionField(ArrayOfParts[0] + "." + "[" + String(
+					StructureOfCondition.AddAttributesMap.Get(ArrayOfParts[1])) + "]");
 				Field.LeftValue = NewField;
 			EndIf;
 		EndIf;
@@ -203,17 +196,16 @@ EndFunction
 
 Function GetRefsByCondition(DCSTemplate, Settings, AddInfo = Undefined) Export
 	Composer = New DataCompositionTemplateComposer();
-	Template = Composer.Execute(DCSTemplate, Settings, , ,
-			Type("DataCompositionValueCollectionTemplateGenerator"));
-	
+	Template = Composer.Execute(DCSTemplate, Settings, , , Type("DataCompositionValueCollectionTemplateGenerator"));
+
 	Processor = New DataCompositionProcessor();
 	Processor.Initialize(Template);
-	
+
 	Output = New DataCompositionResultValueCollectionOutputProcessor();
 	Result = New ValueTable();
 	Output.SetObject(Result);
 	Output.Output(Processor);
-	
+
 	Return Result;
 EndFunction
 
@@ -258,13 +250,13 @@ EndFunction
 Function GetIDInfoRefByUniqueID(UniqueID, AddInfo = Undefined) Export
 	Query = New Query();
 	Query.Text =
-		"SELECT
-		|	IDInfoTypes.Ref AS Ref
-		|FROM
-		|	ChartOfCharacteristicTypes.IDInfoTypes AS IDInfoTypes
-		|WHERE
-		|	IDInfoTypes.UniqueID = &UniqueID";
-	
+	"SELECT
+	|	IDInfoTypes.Ref AS Ref
+	|FROM
+	|	ChartOfCharacteristicTypes.IDInfoTypes AS IDInfoTypes
+	|WHERE
+	|	IDInfoTypes.UniqueID = &UniqueID";
+
 	Query.SetParameter("UniqueID", UniqueID);
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
@@ -276,14 +268,14 @@ Function GetIDInfoRefByUniqueID(UniqueID, AddInfo = Undefined) Export
 EndFunction
 
 Function GetRelatedIDInfoTypes(IDInfoType, Ref, AddInfo = Undefined) Export
-	
+
 	ArrayOfIDInfoTypes = New Array();
 	For Each Row In IDInfoType.RelatedValues Do
 		ArrayOfIDInfoTypes.Add(Row.IDInfoType);
 	EndDo;
-	
+
 	IDInfoTypeValues = GetIDInfoTypeValues(Ref, ArrayOfIDInfoTypes);
-	
+
 	ArrayOfResult = New Array();
 	For Each Row In IDInfoTypeValues Do
 		Structure = New Structure();
@@ -296,39 +288,39 @@ Function GetRelatedIDInfoTypes(IDInfoType, Ref, AddInfo = Undefined) Export
 EndFunction
 
 Function GetIDInfoTypeValues(Ref, ArrayOfIDInfoTypes = Undefined, AddInfo = Undefined) Export
-	
+
 	SetName = StrReplace(Ref.Metadata().FullName(), ".", "_");
 	SetRef = Catalogs.IDInfoSets[SetName];
-	
+
 	Query = New Query();
 	Query.Text =
-		"SELECT
-		|	IDInfoTypes.IDInfoType AS IDInfoType
-		|INTO IDInfo
-		|FROM
-		|	Catalog.IDInfoSets.IDInfoTypes AS IDInfoTypes
-		|WHERE
-		|	IDInfoTypes.Ref = &SetRef
-		|	AND CASE
-		|		WHEN &Filter_ArrayOfIDInfoTypes
-		|			THEN IDInfoTypes.IDInfoType IN (&ArrayOfIDInfoTypes)
-		|		ELSE TRUE
-		|	END
-		|;
-		|////////////////////////////////////////////////////////////////////////////////
-		|SELECT
-		|	IDInfoRegister.Value AS Value,
-		|	IDInfo.IDInfoType AS IDInfoType,
-		|	IDInfoRegister.Country AS Country
-		|FROM
-		|	IDInfo AS IDInfo
-		|		LEFT JOIN InformationRegister.IDInfo AS IDInfoRegister
-		|		ON IDInfo.IDInfoType = IDInfoRegister.IDInfoType
-		|		AND (IDInfoRegister.Object = &Object)";
-	
+	"SELECT
+	|	IDInfoTypes.IDInfoType AS IDInfoType
+	|INTO IDInfo
+	|FROM
+	|	Catalog.IDInfoSets.IDInfoTypes AS IDInfoTypes
+	|WHERE
+	|	IDInfoTypes.Ref = &SetRef
+	|	AND CASE
+	|		WHEN &Filter_ArrayOfIDInfoTypes
+	|			THEN IDInfoTypes.IDInfoType IN (&ArrayOfIDInfoTypes)
+	|		ELSE TRUE
+	|	END
+	|;
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	IDInfoRegister.Value AS Value,
+	|	IDInfo.IDInfoType AS IDInfoType,
+	|	IDInfoRegister.Country AS Country
+	|FROM
+	|	IDInfo AS IDInfo
+	|		LEFT JOIN InformationRegister.IDInfo AS IDInfoRegister
+	|		ON IDInfo.IDInfoType = IDInfoRegister.IDInfoType
+	|		AND (IDInfoRegister.Object = &Object)";
+
 	Query.SetParameter("Object", Ref);
 	Query.SetParameter("SetRef", SetRef);
-	
+
 	If ArrayOfIDInfoTypes = Undefined Then
 		Query.SetParameter("Filter_ArrayOfIDInfoTypes", False);
 		Query.SetParameter("ArrayOfIDInfoTypes", New Array());
@@ -336,10 +328,10 @@ Function GetIDInfoTypeValues(Ref, ArrayOfIDInfoTypes = Undefined, AddInfo = Unde
 		Query.SetParameter("Filter_ArrayOfIDInfoTypes", True);
 		Query.SetParameter("ArrayOfIDInfoTypes", ArrayOfIDInfoTypes);
 	EndIf;
-	
+
 	QueryResult = Query.Execute();
 	QueryTable = QueryResult.Unload();
-	
+
 	Return QueryTable;
 EndFunction
 
@@ -352,12 +344,12 @@ Function GetIDInfoTypeValue(Ref, ArrayOfIDInfoTypes, AddInfo = Undefined) Export
 EndFunction
 
 Procedure SaveIDInfoTypeValues(Ref, ValueTable, AddInfo = Undefined) Export
-	
+
 	RecordSet = InformationRegisters.IDInfo.CreateRecordSet();
 	RecordSet.Filter.Object.Set(Ref);
 	ValueTable.Columns.Add("Object");
 	ValueTable.FillValues(Ref, "Object");
-	
+
 	ArrayForDelete = New Array();
 	For Each Row In ValueTable Do
 		If Not ValueIsFilled(Row.Value) Then
@@ -367,19 +359,19 @@ Procedure SaveIDInfoTypeValues(Ref, ValueTable, AddInfo = Undefined) Export
 	For Each Item In ArrayForDelete Do
 		ValueTable.Delete(Item);
 	EndDo;
-	
+
 	RecordSet.Load(ValueTable);
 	RecordSet.Write();
 EndProcedure
 
 Procedure UpdateIDInfoTypeValue(Ref, IDInfoType, Value, Country, AddInfo = Undefined) Export
-	
+
 	RecordSet = InformationRegisters.IDInfo.CreateRecordSet();
 	RecordSet.Filter.Object.Set(Ref);
 	RecordSet.Filter.IDInfoType.Set(IDInfoType);
-	
+
 	tmpCountry = Undefined;
-	
+
 	RecordSet.Read();
 	If RecordSet.Count() Then
 		Record = RecordSet[0];
@@ -392,7 +384,7 @@ Procedure UpdateIDInfoTypeValue(Ref, IDInfoType, Value, Country, AddInfo = Undef
 	Record.IDInfoType = IDInfoType;
 	Record.Value = Value;
 	Record.Country = tmpCountry;
-	
+
 	RecordSet.Write();
 EndProcedure
 
@@ -404,9 +396,6 @@ Procedure EndEditIDInfo(Ref, Result, Parameters, AddInfo = Undefined) Export
 EndProcedure
 
 Function IsUpdateIDInfoTypeValue(Result)
-	Return Result.Property("StructuredAddressRef")
-		And Result.Property("StructuredAddress")
-		And ValueIsFilled(Result.StructuredAddressRef)
-		And ValueIsFilled(Result.StructuredAddress);
+	Return Result.Property("StructuredAddressRef") And Result.Property("StructuredAddress") And ValueIsFilled(
+		Result.StructuredAddressRef) And ValueIsFilled(Result.StructuredAddress);
 EndFunction
-

@@ -8,10 +8,8 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:MultiLanguageDataPath">
-      <paths xsi:type="form:DataPath">
-        <segments>Password</segments>
-      </paths>
+    <dataPath xsi:type="form:DataPath">
+      <segments>Password</segments>
     </dataPath>
     <extendedTooltip>
       <name>PasswordExtendedTooltip</name>
@@ -62,10 +60,8 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:MultiLanguageDataPath">
-      <paths xsi:type="form:DataPath">
-        <segments>ConfirmPassword</segments>
-      </paths>
+    <dataPath xsi:type="form:DataPath">
+      <segments>ConfirmPassword</segments>
     </dataPath>
     <extendedTooltip>
       <name>ConfirmPasswordExtendedTooltip</name>
@@ -116,10 +112,8 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:MultiLanguageDataPath">
-      <paths xsi:type="form:DataPath">
-        <segments>GeneratedValue</segments>
-      </paths>
+    <dataPath xsi:type="form:DataPath">
+      <segments>GeneratedValue</segments>
     </dataPath>
     <extendedTooltip>
       <name>GeneratedValueExtendedTooltip</name>
@@ -193,6 +187,7 @@
       <autoMaxWidth>true</autoMaxWidth>
       <autoMaxHeight>true</autoMaxHeight>
       <placementArea>UserCmds</placementArea>
+      <toolTipRepresentation>Auto</toolTipRepresentation>
       <representationInContextMenu>Auto</representationInContextMenu>
     </items>
     <items xsi:type="form:Button">
@@ -223,6 +218,7 @@
       <autoMaxWidth>true</autoMaxWidth>
       <autoMaxHeight>true</autoMaxHeight>
       <placementArea>UserCmds</placementArea>
+      <toolTipRepresentation>Auto</toolTipRepresentation>
       <representationInContextMenu>Auto</representationInContextMenu>
     </items>
     <items xsi:type="form:Button">
@@ -253,6 +249,7 @@
       <autoMaxWidth>true</autoMaxWidth>
       <autoMaxHeight>true</autoMaxHeight>
       <placementArea>UserCmds</placementArea>
+      <toolTipRepresentation>Auto</toolTipRepresentation>
       <representationInContextMenu>Auto</representationInContextMenu>
     </items>
     <visible>true</visible>

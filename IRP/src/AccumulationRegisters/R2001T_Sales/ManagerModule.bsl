@@ -1,11 +1,9 @@
-
-
 #Region Service
 Function GetLockFields(Data) Export
 	Result = New Structure();
 	Result.Insert("RegisterName", "AccumulationRegister.R2001T_Sales");
 	LockInfo = New Structure("Data, Fields", Data, PostingServer.GetLockFieldsMap(GetLockFieldNames()));
-	Result.Insert("LockInfo", LockInfo);	
+	Result.Insert("LockInfo", LockInfo);
 	Return Result;
 EndFunction
 

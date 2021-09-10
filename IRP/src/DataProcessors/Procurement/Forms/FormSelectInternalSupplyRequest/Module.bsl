@@ -1,11 +1,10 @@
-
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	For Each Row In Parameters.ArrayOfSupplyRequest Do
 		NewRow = ThisObject.TableOfInternalSupplyRequest.Add();
 		NewRow.InternalSupplyRequest = Row.InternalSupplyRequest;
 		NewRow.RowKey = Row.RowKey;
-		NewRow.Quantity = Row.Quantity; 
+		NewRow.Quantity = Row.Quantity;
 		NewRow.ProcurementDate = Row.ProcurementDate;
 		NewRow.Use = True;
 	EndDo;

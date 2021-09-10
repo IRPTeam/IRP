@@ -3,12 +3,12 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing, Form, Parameters) Export
 	If Parameters.Property("FillingData", FillingData) Then
 		Form.FillingData = CommonFunctionsServer.SerializeXMLUseXDTO(FillingData);
 	EndIf;
-	
+
 	If Parameters.Property("FormTitle") Then
-		Form.Title = Parameters.FormTitle;	
+		Form.Title = Parameters.FormTitle;
 		Form.AutoTitle = False;
 	EndIf;
-	
+
 	If Form.FormName = "Catalog.CashAccounts.Form.ChoiceForm" Then
 		If Parameters.Property("CustomParameters") Then
 			CustomParameters = Parameters.CustomParameters;
@@ -16,9 +16,9 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing, Form, Parameters) Export
 			Form.List.QueryText = CommonFunctionsServer.GetQueryText("Catalog.CashAccounts", , CustomParameters.Fields);
 			CommonFunctionsClientServer.SetListFilters(Form.List, CustomParameters.Filters);
 			SetListComplexFilters(Form.List, CustomParameters.ComplexFilters);
-		EndIf;		
+		EndIf;
 	EndIf;
-	
+
 EndProcedure
 
 Function GetCashAccountByCompany(Company, CustomParameters) Export
@@ -32,7 +32,7 @@ Function GetDefaultChoiceRef(Parameters) Export
 	QueryTable = CommonFunctionsServer.QueryTable("Catalog.CashAccounts", CatCashAccountsServer, Parameters);
 	If QueryTable.Count() = 1 Then
 		Return QueryTable[0].Ref;
-	Else 
+	Else
 		If Parameters.Property("CashAccount") Then
 			Rows = QueryTable.FindRows(New Structure("Ref", Parameters.CashAccount));
 			If Rows.Count() = 0 Then
@@ -43,15 +43,15 @@ Function GetDefaultChoiceRef(Parameters) Export
 		Else
 			Return PredefinedValue("Catalog.CashAccounts.EmptyRef");
 		EndIf;
-	EndIf;	
+	EndIf;
 EndFunction
 
 Function GetCashAccountInfo(CashAccount) Export
 	Return Catalogs.CashAccounts.GetCashAccountInfo(CashAccount);
 EndFunction
 
-Procedure SetQueryComplexFilters(Query, QueryParameters) Export	
-	ParametersArray = New Array;
+Procedure SetQueryComplexFilters(Query, QueryParameters) Export
+	ParametersArray = New Array();
 	For Each QueryParameter In QueryParameters Do
 		UseCustomFilter = True;
 		If QueryParameter.FieldName = "ByCompanyWithEmpty" Then
@@ -67,18 +67,19 @@ Procedure SetQueryComplexFilters(Query, QueryParameters) Export
 		EndIf;
 		If UseCustomFilter Then
 			ParametersArray.Add(QueryParameter.FieldName);
-			For Each ValueItem In QueryParameter.Value Do 
+			For Each ValueItem In QueryParameter.Value Do
 				Query.SetParameter(ValueItem.Key, ValueItem.Value);
 			EndDo;
 		EndIf;
 	EndDo;
-	Query.Text = Query.Text + ?(ParametersArray.Count(), Chars.LF + "	AND ", "") + StrConcat(ParametersArray, Chars.LF + "	AND ");
+	Query.Text = Query.Text + ?(ParametersArray.Count(), Chars.LF + "	AND ", "") + StrConcat(ParametersArray,
+		Chars.LF + "	AND ");
 	Query.Text = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Query.Text);
 EndProcedure
 
 Procedure SetListComplexFilters(List, QueryParameters) Export
 	Filters = List.Filter.Items;
-	For Each QueryParameter In QueryParameters Do		
+	For Each QueryParameter In QueryParameters Do
 		If QueryParameter.FieldName = "ByCompanyWithEmpty" Then
 			FilterItemGroup = Filters.Add(Type("DataCompositionFilterItemGroup"));
 			FilterItemGroup.Use = True;

@@ -1,13 +1,12 @@
 Procedure ChoiceDataGetProcessing(ChoiceData, Parameters, StandardProcessing)
-	
-	If TypeOf(Parameters) <> Type("Structure")
-		Or Not ValueIsFilled(Parameters.SearchString)
+
+	If TypeOf(Parameters) <> Type("Structure") Or Not ValueIsFilled(Parameters.SearchString)
 		Or Not Parameters.Filter.Property("AdditionalParameters") Then
 		Return;
 	EndIf;
-	
+
 	StandardProcessing = False;
-	
+
 	QueryTable = GetChoiceDataTable(Parameters);
 	ChoiceData = New ValueList();
 	For Each Row In QueryTable Do
@@ -17,17 +16,17 @@ EndProcedure
 
 Function GetChoiceDataTable(Parameters) Export
 	Filter = "
-		|	AND CASE
-		|		WHEN &FilterByPartnerHierarchy
-		|			THEN Table.Ref IN (&CompaniesByPartnerHierarchy)
-		|		ELSE TRUE
-		|	END";
-	Settings = New Structure;
+			 |	AND CASE
+			 |		WHEN &FilterByPartnerHierarchy
+			 |			THEN Table.Ref IN (&CompaniesByPartnerHierarchy)
+			 |		ELSE TRUE
+			 |	END";
+	Settings = New Structure();
 	Settings.Insert("MetadataObject", Metadata.Catalogs.Companies);
 	Settings.Insert("Filter", Filter);
-	
+
 	QueryBuilderText = CommonFormActionsServer.QuerySearchInputByString(Settings);
-		
+
 	QueryBuilder = New QueryBuilder(QueryBuilderText);
 	QueryBuilder.FillSettings();
 	If TypeOf(Parameters) = Type("Structure") And Parameters.Filter.Property("CustomSearchFilter") Then
@@ -40,12 +39,12 @@ Function GetChoiceDataTable(Parameters) Export
 		EndDo;
 	EndIf;
 	Query = QueryBuilder.GetQuery();
-	
+
 	Query.SetParameter("SearchString", Parameters.SearchString);
-	
+
 	AdditionalParameters = CommonFunctionsServer.DeserializeXMLUseXDTO(Parameters.Filter.AdditionalParameters);
 	QueryParametersStr = New Structure("FilterByPartnerHierarchy,
-			|CompaniesByPartnerHierarchy", False, New Array);
+									   |CompaniesByPartnerHierarchy", False, New Array());
 	FillPropertyValues(QueryParametersStr, AdditionalParameters);
 	If QueryParametersStr.FilterByPartnerHierarchy Then
 		CompaniesByPartnerHierarchy = Catalogs.Partners.GetCompaniesForPartner(AdditionalParameters.Partner);
@@ -54,16 +53,16 @@ Function GetChoiceDataTable(Parameters) Export
 	For Each QueryParameter In QueryParametersStr Do
 		Query.SetParameter(QueryParameter.Key, QueryParameter.Value);
 	EndDo;
-	
+
 	Return Query.Execute().Unload();
 EndFunction
 
 Function GetDefaultChoiceRef(Parameters) Export
 	QueryTable = GetChoiceDataTable(New Structure("SearchString, Filter", "", Parameters));
-	
+
 	If QueryTable.Count() = 1 Then
 		Return QueryTable[0].Ref;
-	Else 
+	Else
 		If Parameters.Property("LegalName") Then
 			Rows = QueryTable.FindRows(New Structure("Ref", Parameters.LegalName));
 			If Rows.Count() = 0 Then
@@ -91,7 +90,7 @@ EndFunction
 
 Function GetCurrenciesByType(CompanyRef, Type)
 	Query = New Query();
-	Query.Text = 
+	Query.Text =
 	"SELECT
 	|	CompaniesCurrencies.MovementType AS CurrencyMovementType
 	|FROM

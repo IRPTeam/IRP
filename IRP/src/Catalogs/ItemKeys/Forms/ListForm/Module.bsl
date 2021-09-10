@@ -3,9 +3,9 @@ Var HTMLWindowPictures, HTMLWindowAddAttributes Export;
 
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
-	
+
 	ThisObject.List.QueryText = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(ThisObject.List.QueryText);
-	
+
 	If Parameters.Property("CustomFilter") Then
 		For Each KeyValue In Parameters.CustomFilter Do
 			FilterItem = ThisObject.List.Filter.Items.Add(Type("DataCompositionFilterItem"));
@@ -19,21 +19,22 @@ EndProcedure
 &AtClient
 Procedure OnOpen(Cancel)
 	PictureViewerClient.UpdateObjectPictures(ThisObject, PredefinedValue("Catalog.ItemKeys.EmptyRef"));
-	AddAttributesAndPropertiesClient.UpdateObjectAddAttributeHTML(ThisObject, PredefinedValue("Catalog.ItemKeys.EmptyRef"));
+	AddAttributesAndPropertiesClient.UpdateObjectAddAttributeHTML(ThisObject, PredefinedValue(
+		"Catalog.ItemKeys.EmptyRef"));
 EndProcedure
 
 &AtClient
 Procedure ListOnActivateRow(Item)
-	If NOT HTMLWindowPictures = Undefined Then
+	If Not HTMLWindowPictures = Undefined Then
 		HTMLWindowPictures.clearAll();
 		AttachIdleHandler("UpdateHTMLPictures", 0.1, True);
 	EndIf;
 
-	If NOT HTMLWindowAddAttributes = Undefined Then
+	If Not HTMLWindowAddAttributes = Undefined Then
 		HTMLWindowAddAttributes.clearAll();
 		AttachIdleHandler("UpdateHTMLAddAttributes", 0.1, True);
 	EndIf;
-	
+
 EndProcedure
 
 #Region HTML
@@ -53,10 +54,10 @@ EndProcedure
 &AtClient
 Procedure UpdateHTMLPictures() Export
 	CurrentRow = Items.List.CurrentData;
-	If CurrentRow = Undefined OR Not CurrentRow.Property("Ref") Then
+	If CurrentRow = Undefined Or Not CurrentRow.Property("Ref") Then
 		Return;
 	EndIf;
-	
+
 	PictureInfo = PictureViewerClient.PicturesInfoForSlider(CurrentRow.Ref, UUID);
 	JSON = CommonFunctionsServer.SerializeJSON(PictureInfo);
 	HTMLWindowPictures.fillSlider(JSON);
@@ -65,14 +66,14 @@ EndProcedure
 &AtClient
 Procedure UpdateHTMLAddAttributes() Export
 	CurrentRow = Items.List.CurrentData;
-	If CurrentRow = Undefined OR Not CurrentRow.Property("Ref") Then
+	If CurrentRow = Undefined Or Not CurrentRow.Property("Ref") Then
 		Return;
 	EndIf;
-	
+
 	AddAttributeInfo = AddAttributesAndPropertiesClient.AddAttributeInfoForHTML(CurrentRow.Ref, UUID);
 	JSON = CommonFunctionsServer.SerializeJSON(AddAttributeInfo);
 	HTMLWindowAddAttributes.fillData(JSON);
-	
+
 EndProcedure
 
 &AtClient

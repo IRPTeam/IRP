@@ -1,9 +1,8 @@
-
 Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	If DataExchange.Load Then
 		Return;
-	EndIf;	
-	
+	EndIf;
+
 	If TransactionType = Enums.GoodsReceiptTransactionTypes.InventoryTransfer Then
 		Partner = Undefined;
 		LegalName = Undefined;
@@ -13,7 +12,7 @@ EndProcedure
 Procedure OnWrite(Cancel)
 	If DataExchange.Load Then
 		Return;
-	EndIf;	
+	EndIf;
 EndProcedure
 
 Procedure BeforeDelete(Cancel)
@@ -23,15 +22,15 @@ Procedure BeforeDelete(Cancel)
 EndProcedure
 
 Procedure Posting(Cancel, PostingMode)
-	
+
 	PostingServer.Post(ThisObject, Cancel, PostingMode, ThisObject.AdditionalProperties);
-	
+
 EndProcedure
 
 Procedure UndoPosting(Cancel)
-	
+
 	UndopostingServer.Undopost(ThisObject, Cancel, ThisObject.AdditionalProperties);
-	
+
 EndProcedure
 
 Procedure Filling(FillingData, FillingText, StandardProcessing)
@@ -41,19 +40,19 @@ Procedure Filling(FillingData, FillingText, StandardProcessing)
 //			FillPropertyValues(ThisObject, FillingData, "Company, Partner, LegalName");
 //			RowIDInfoServer.AddLinkedDocumentRows(ThisObject, FillingData);
 //		Else
-			FillPropertyValues(ThisObject, FillingData, RowIDInfoServer.GetSeperatorColumns(ThisObject.Metadata()));
-			RowIDInfoServer.AddLinkedDocumentRows(ThisObject, FillingData);
+		FillPropertyValues(ThisObject, FillingData, RowIDInfoServer.GetSeperatorColumns(ThisObject.Metadata()));
+		RowIDInfoServer.AddLinkedDocumentRows(ThisObject, FillingData);
 //		EndIf;
 	EndIf;
 EndProcedure
 
 Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 	If DocumentsServer.CheckItemListStores(ThisObject) Then
-		Cancel = True;	
+		Cancel = True;
 	EndIf;
-	
+
 	Query = New Query();
-	Query.Text = 
+	Query.Text =
 	"SELECT
 	|	tmp.ReceiptBasis AS ReceiptBasis
 	|into tmp

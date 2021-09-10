@@ -1,17 +1,16 @@
-
 Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	If DataExchange.Load Then
 		Return;
-	EndIf;	
+	EndIf;
 
 	If ThisObject.PriceListType <> Enums.PriceListTypes.PriceByItemKeys Then
 		ThisObject.ItemKeyList.Clear();
 	EndIf;
-	
+
 	If ThisObject.PriceListType <> Enums.PriceListTypes.PriceByItems Then
 		ThisObject.ItemList.Clear();
 	EndIf;
-	
+
 	If ThisObject.PriceListType <> Enums.PriceListTypes.PriceByProperties Then
 		ThisObject.DataSet.Clear();
 		ThisObject.DataPrice.Clear();
@@ -21,7 +20,7 @@ EndProcedure
 Procedure OnWrite(Cancel)
 	If DataExchange.Load Then
 		Return;
-	EndIf;	
+	EndIf;
 EndProcedure
 
 Procedure BeforeDelete(Cancel)

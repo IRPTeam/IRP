@@ -20,10 +20,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>DataMapping.Info</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>DataMapping.Info</segments>
       </dataPath>
       <extendedTooltip>
         <name>DataMappingInfoExtendedTooltip</name>
@@ -73,10 +71,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>DataMapping.Value</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>DataMapping.Value</segments>
       </dataPath>
       <extendedTooltip>
         <name>DataMappingValueExtendedTooltip</name>
@@ -126,10 +122,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>DataMapping.Ref</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>DataMapping.Ref</segments>
       </dataPath>
       <extendedTooltip>
         <name>DataMappingRefExtendedTooltip</name>
@@ -372,6 +366,7 @@
       <autoMaxWidth>true</autoMaxWidth>
       <autoMaxHeight>true</autoMaxHeight>
       <placementArea>UserCmds</placementArea>
+      <toolTipRepresentation>Auto</toolTipRepresentation>
       <representationInContextMenu>Auto</representationInContextMenu>
     </items>
     <visible>true</visible>

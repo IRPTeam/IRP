@@ -1,10 +1,9 @@
-
 #Region FormEventHandlers
 
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	AddAttributesAndPropertiesServer.OnCreateAtServer(ThisObject);
-	LocalizationEvents.CreateMainFormItemDescription(ThisObject, "GroupDescriptions");	
+	LocalizationEvents.CreateMainFormItemDescription(ThisObject, "GroupDescriptions");
 	If Parameters.Key.IsEmpty() Then
 		If Parameters.FillingValues.Property("Managers") Then
 			Items.Managers.Visible = False;

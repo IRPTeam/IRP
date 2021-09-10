@@ -7,8 +7,8 @@ EndProcedure
 Procedure OnWrite(Cancel)
 	If DataExchange.Load Then
 		Return;
-	EndIf;	
-	
+	EndIf;
+
 	If ThisObject.Type = Enums.TaxType.Amount Then
 		ThisObject.TaxRates.Clear();
 		RecordSet = InformationRegisters.TaxSettings.CreateRecordSet();

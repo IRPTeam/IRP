@@ -1,8 +1,7 @@
 Function GetLockFields(Data) Export
 	Result = New Structure();
 	Result.Insert("RegisterName", "AccumulationRegister.R4036B_IncomingStocksRequested");
-	Result.Insert("LockInfo", New Structure("Data, Fields", 
-	Data, PostingServer.GetLockFieldsMap(GetLockFieldNames())));
+	Result.Insert("LockInfo", New Structure("Data, Fields", Data, PostingServer.GetLockFieldsMap(GetLockFieldNames())));
 	Return Result;
 EndFunction
 
@@ -11,18 +10,20 @@ Function GetLockFieldNames() Export
 EndFunction
 
 Function GetExistsRecords(Ref, RecordType = Undefined, AddInfo = Undefined) Export
-	Return PostingServer.GetExistsRecordsFromAccRegister(Ref, "AccumulationRegister.R4036B_IncomingStocksRequested", RecordType, AddInfo);
+	Return PostingServer.GetExistsRecordsFromAccRegister(Ref, "AccumulationRegister.R4036B_IncomingStocksRequested",
+		RecordType, AddInfo);
 EndFunction
 
-Function CheckBalance(Ref, ItemList_InDocument, Records_InDocument, Records_Exists, RecordType, Unposting, AddInfo = Undefined) Export
+Function CheckBalance(Ref, ItemList_InDocument, Records_InDocument, Records_Exists, RecordType, Unposting,
+	AddInfo = Undefined) Export
 
 	If Not PostingServer.CheckingBalanceIsRequired(Ref, "R4036B_IncomingStocksRequested") Then
 		Return True;
 	EndIf;
-	
+
 	Query = New Query();
-	Query.TempTablesManager = 
-	PostingServer.PrepareRecordsTables(GetLockFieldNames(), "ItemKey", ItemList_InDocument, Records_InDocument, Records_Exists, Unposting, AddInfo);
+	Query.TempTablesManager = PostingServer.PrepareRecordsTables(GetLockFieldNames(), "ItemKey", ItemList_InDocument,
+		Records_InDocument, Records_Exists, Unposting, AddInfo);
 	Query.Text =
 	"SELECT
 	|	ItemList.ItemKey.Item AS Item,
@@ -57,20 +58,22 @@ Function CheckBalance(Ref, ItemList_InDocument, Records_InDocument, Records_Exis
 	|	RegisterBalance.QuantityBalance < 0
 	|ORDER BY
 	|	LineNumber";
-	Query.SetParameter("Unposting" , Unposting);
+	Query.SetParameter("Unposting", Unposting);
 	QueryResult = Query.Execute();
 	QueryTable = QueryResult.Unload();
-	
+
 	Error = False;
 	If QueryTable.Count() Then
 		Error = True;
 		ErrorParameters = New Structure();
-		ErrorParameters.Insert("GroupColumns"  , "Order, IncomingStore, RequesterStore, Requester, ItemKey, Item, LackOfBalance");
-		ErrorParameters.Insert("SumColumns"    , "Quantity");
-		ErrorParameters.Insert("FilterColumns" , "Order, IncomingStore, RequesterStore, Requester, ItemKey, Item, LackOfBalance");
-		ErrorParameters.Insert("Operation"     , "Incoming requested");
-		ErrorParameters.Insert("RecordType"    , RecordType);
+		ErrorParameters.Insert("GroupColumns",
+			"Order, IncomingStore, RequesterStore, Requester, ItemKey, Item, LackOfBalance");
+		ErrorParameters.Insert("SumColumns", "Quantity");
+		ErrorParameters.Insert("FilterColumns",
+			"Order, IncomingStore, RequesterStore, Requester, ItemKey, Item, LackOfBalance");
+		ErrorParameters.Insert("Operation", "Incoming requested");
+		ErrorParameters.Insert("RecordType", RecordType);
 		PostingServer.ShowPostingErrorMessage(QueryTable, ErrorParameters, AddInfo);
 	EndIf;
 	Return Not Error;
-EndFunction	
+EndFunction

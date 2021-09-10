@@ -21,20 +21,20 @@ Procedure CompanyOnChange(Object, Form, Item) Export
 	DefaultCustomParameters = New Structure("Company", Object.Company);
 	CustomParameters = CatCashAccountsClient.DefaultCustomParameters(DefaultCustomParameters);
 	CustomParameters.Insert("CashAccount", Object.Account);
-    Object.Account = CatCashAccountsServer.GetCashAccountByCompany(Object.Company, CustomParameters);
+	Object.Account = CatCashAccountsServer.GetCashAccountByCompany(Object.Company, CustomParameters);
 	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 EndProcedure
 
 Procedure CompanyStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
 	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
-	
+
 	OpenSettings.ArrayOfFilters = New Array();
-	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", 
-																	True, DataCompositionComparisonType.NotEqual));
-	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("OurCompany", 
-																	True, DataCompositionComparisonType.Equal));
+	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True,
+		DataCompositionComparisonType.NotEqual));
+	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("OurCompany", True,
+		DataCompositionComparisonType.Equal));
 	OpenSettings.FillingData = New Structure("OurCompany", True);
-	
+
 	DocumentsClient.CompanyStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
 EndProcedure
 
@@ -99,20 +99,16 @@ Procedure AccountStartChoice(Object, Form, Item, ChoiceData, StandardProcessing)
 	StandardProcessing = False;
 	DefaultStartChoiceParameters = New Structure("Company", Object.Company);
 	StartChoiceParameters = CatCashAccountsClient.GetDefaultStartChoiceParameters(DefaultStartChoiceParameters);
-	StartChoiceParameters.CustomParameters.Filters.Add(DocumentsClientServer.CreateFilterItem("Type",
-														PredefinedValue("Enum.CashAccountTypes.Transit"),
-														ComparisonType.NotEqual,
-														DataCompositionComparisonType.NotEqual));
+	StartChoiceParameters.CustomParameters.Filters.Add(DocumentsClientServer.CreateFilterItem("Type", PredefinedValue(
+		"Enum.CashAccountTypes.Transit"), ComparisonType.NotEqual, DataCompositionComparisonType.NotEqual));
 	OpenForm(StartChoiceParameters.FormName, StartChoiceParameters, Item, Form.UUID, , Form.URL);
 EndProcedure
 
 Procedure AccountEditTextChange(Object, Form, Item, Text, StandardProcessing) Export
 	DefaultEditTextParameters = New Structure("Company", Object.Company);
 	EditTextParameters = CatCashAccountsClient.GetDefaultEditTextParameters(DefaultEditTextParameters);
-	EditTextParameters.Filters.Add(DocumentsClientServer.CreateFilterItem("Type",
-														PredefinedValue("Enum.CashAccountTypes.Transit"),
-														ComparisonType.NotEqual,
-														DataCompositionComparisonType.NotEqual));
+	EditTextParameters.Filters.Add(DocumentsClientServer.CreateFilterItem("Type", PredefinedValue(
+		"Enum.CashAccountTypes.Transit"), ComparisonType.NotEqual, DataCompositionComparisonType.NotEqual));
 	Item.ChoiceParameters = CatCashAccountsClient.FixedArrayOfChoiceParameters(EditTextParameters);
 EndProcedure
 
@@ -138,24 +134,24 @@ EndProcedure
 
 Procedure PaymentListPartnerOnChange(Object, Form, Item) Export
 	CurrentData = Form.Items.PaymentList.CurrentData;
-	
+
 	If CurrentData = Undefined Then
 		Return;
 	EndIf;
-		
+
 	If ValueIsFilled(CurrentData.Partner) Then
 		CurrentData.Payee = DocumentsServer.GetLegalNameByPartner(CurrentData.Partner, CurrentData.Payee);
-		CurrentData.PartnerBankAccount = 
-		DocumentsServer.GetBankAccountByPartner(CurrentData.Partner, CurrentData.Payee, Object.Currency);
+		CurrentData.PartnerBankAccount = DocumentsServer.GetBankAccountByPartner(CurrentData.Partner,
+			CurrentData.Payee, Object.Currency);
 	EndIf;
 EndProcedure
 
 Procedure PaymentListPartnerStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
 	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
-	
+
 	OpenSettings.ArrayOfFilters = New Array();
-	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", 
-																	True, DataCompositionComparisonType.NotEqual));
+	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True,
+		DataCompositionComparisonType.NotEqual));
 	OpenSettings.FormParameters = New Structure();
 	If ValueIsFilled(Form.Items.PaymentList.CurrentData.Payee) Then
 		OpenSettings.FormParameters.Insert("Company", Form.Items.PaymentList.CurrentData.Payee);
@@ -173,8 +169,8 @@ Procedure PaymentListPartnerEditTextChange(Object, Form, Item, Text, StandardPro
 		AdditionalParameters.Insert("Company", Form.Items.PaymentList.CurrentData.Payee);
 		AdditionalParameters.Insert("FilterPartnersByCompanies", True);
 	EndIf;
-	DocumentsClient.PartnerEditTextChange(Object, Form, Item, Text, StandardProcessing, 
-				ArrayOfFilters, AdditionalParameters);
+	DocumentsClient.PartnerEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters,
+		AdditionalParameters);
 EndProcedure
 
 #EndRegion
@@ -190,17 +186,17 @@ EndProcedure
 
 Procedure PaymentListPayeeStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
 	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
-	
+
 	OpenSettings.ArrayOfFilters = New Array();
-	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", 
-																		True, DataCompositionComparisonType.NotEqual));
+	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True,
+		DataCompositionComparisonType.NotEqual));
 	OpenSettings.FormParameters = New Structure();
 	If ValueIsFilled(Form.Items.PaymentList.CurrentData.Partner) Then
 		OpenSettings.FormParameters.Insert("Partner", Form.Items.PaymentList.CurrentData.Partner);
 		OpenSettings.FormParameters.Insert("FilterByPartnerHierarchy", True);
 	EndIf;
 	OpenSettings.FillingData = New Structure("Partner", Form.Items.PaymentList.CurrentData.Partner);
-	
+
 	DocumentsClient.CompanyStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
 EndProcedure
 
@@ -212,8 +208,8 @@ Procedure PaymentListPayeeEditTextChange(Object, Form, Item, Text, StandardProce
 		AdditionalParameters.Insert("Partner", Form.Items.PaymentList.CurrentData.Partner);
 		AdditionalParameters.Insert("FilterByPartnerHierarchy", True);
 	EndIf;
-	DocumentsClient.CompanyEditTextChange(Object, Form, Item, Text, StandardProcessing, 
-				ArrayOfFilters, AdditionalParameters);
+	DocumentsClient.CompanyEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters,
+		AdditionalParameters);
 EndProcedure
 
 #EndRegion

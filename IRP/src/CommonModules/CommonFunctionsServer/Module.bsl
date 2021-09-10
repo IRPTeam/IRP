@@ -1,4 +1,3 @@
-
 Function IsPrimitiveValue(Value) Export
 	Return Metadata.FindByType(TypeOf(Value)) = Undefined;
 EndFunction
@@ -51,7 +50,8 @@ Function DeserializeJSONUseXDTO(Value, AddInfo = Undefined) Export
 	Return Result;
 EndFunction
 
-Function SerializeXMLUseXDTOFactory(Value, LocalName = Undefined, URI = Undefined, AddInfo = Undefined, WSName = Undefined) Export
+Function SerializeXMLUseXDTOFactory(Value, LocalName = Undefined, URI = Undefined, AddInfo = Undefined,
+	WSName = Undefined) Export
 	Writer = New XMLWriter();
 	Writer.SetString();
 	XDTOFactoryObject(WSName).WriteXML(Writer, Value, LocalName, URI);
@@ -129,9 +129,9 @@ Function FormHaveAttribute(Form, AttributeName) Export
 EndFunction
 
 Function XSLTransformation(XML, XSLT) Export
-	XSLTransform = New XSLTransform;
-    XSLTransform.LoadFromString(XSLT);
-    Return XSLTransform.TransformFromString(XML);
+	XSLTransform = New XSLTransform();
+	XSLTransform.LoadFromString(XSLT);
+	Return XSLTransform.TransformFromString(XML);
 EndFunction
 
 #Region QueryBuilder
@@ -142,29 +142,29 @@ Function QueryTable(ObjectName, ObjectServerModule, CustomParameters) Export
 	QueryBuilder.FillSettings();
 	SetQueryBuilderFilters(QueryBuilder, CustomParameters.Filters);
 	Query = QueryBuilder.GetQuery();
-	ObjectServerModule.SetQueryComplexFilters(Query, CustomParameters.ComplexFilters);	
+	ObjectServerModule.SetQueryComplexFilters(Query, CustomParameters.ComplexFilters);
 	QueryTable = Query.Execute().Unload();
 	Return QueryTable;
 EndFunction
 
 Function GetQueryText(ObjectName, QueryOptionsString, Fields) Export
-	QueryTextArray = New Array;		
-	QueryTextArray.Add("SELECT " + QueryOptionsString);		
+	QueryTextArray = New Array();
+	QueryTextArray.Add("SELECT " + QueryOptionsString);
 
-	QueryFieldsArray = New Array;
+	QueryFieldsArray = New Array();
 	For Each Field In Fields Do
 		QueryFieldsArray.Add("Table." + Field.Value + ?(Field.Key <> Field.Value, " AS " + Field.Key, ""));
-	EndDo;	
+	EndDo;
 	QueryFieldsString = StrConcat(QueryFieldsArray, "," + Chars.LF);
-	
+
 	QueryFieldsString = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(QueryFieldsString);
 	QueryTextArray.Add(QueryFieldsString);
-	
+
 	QueryTextArray.Add("FROM " + ObjectName + " AS Table");
 	QueryTextArray.Add("WHERE");
 	QueryTextArray.Add("TRUE");
-	QueryText = StrConcat(QueryTextArray, Chars.LF);	
-	
+	QueryText = StrConcat(QueryTextArray, Chars.LF);
+
 	Return QueryText;
 EndFunction
 
@@ -180,7 +180,7 @@ Procedure SetQueryBuilderFilters(QueryBuilder, QueryFilters)
 		FilterItem.Use = True;
 		FilterItem.ComparisonType = QueryFilter.ComparisonType;
 		FilterItem.Value = QueryFilter.Value;
-	EndDo;	
+	EndDo;
 EndProcedure
 
 #EndRegion

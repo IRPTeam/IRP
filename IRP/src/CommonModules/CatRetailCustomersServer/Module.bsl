@@ -1,13 +1,12 @@
-
 Function GetRetailCustomerInfo(RetailCustomer, AddInfo = Undefined) Export
 	RetailCustomerInfo = New Structure();
-	RetailCustomerInfo.Insert("UsePartnerTransactions" , RetailCustomer.UsePartnerTransactions);
-	RetailCustomerInfo.Insert("UsePartnerInfo"         , RetailCustomer.UsePartnerInfo);
-	
-	RetailCustomerInfo.Insert("Partner"   , Undefined);
-	RetailCustomerInfo.Insert("LegalName" , Undefined);
-	RetailCustomerInfo.Insert("Agreement" , Undefined);
-	
+	RetailCustomerInfo.Insert("UsePartnerTransactions", RetailCustomer.UsePartnerTransactions);
+	RetailCustomerInfo.Insert("UsePartnerInfo", RetailCustomer.UsePartnerInfo);
+
+	RetailCustomerInfo.Insert("Partner", Undefined);
+	RetailCustomerInfo.Insert("LegalName", Undefined);
+	RetailCustomerInfo.Insert("Agreement", Undefined);
+
 	If RetailCustomerInfo.UsePartnerTransactions Then
 		If Not RetailCustomerInfo.UsePartnerInfo Then
 			FillPropertyValues(RetailCustomerInfo, GetPartnerInfoFromUserSettinfs());
@@ -19,11 +18,9 @@ Function GetRetailCustomerInfo(RetailCustomer, AddInfo = Undefined) Export
 	Else
 		FillPropertyValues(RetailCustomerInfo, GetPartnerInfoFromUserSettinfs());
 	EndIf;
-	
-	RetailCustomerInfo.Insert("ManagerSegment",
-	DocumentsServer.GetManagerSegmentByPartner(RetailCustomerInfo.Partner));
-	RetailCustomerInfo.Insert("AgreementInfo",
-	CatAgreementsServer.GetAgreementInfo(RetailCustomerInfo.Agreement));
+
+	RetailCustomerInfo.Insert("ManagerSegment", DocumentsServer.GetManagerSegmentByPartner(RetailCustomerInfo.Partner));
+	RetailCustomerInfo.Insert("AgreementInfo", CatAgreementsServer.GetAgreementInfo(RetailCustomerInfo.Agreement));
 	Return RetailCustomerInfo;
 EndFunction
 
@@ -32,15 +29,15 @@ Function GetPartnerInfoFromUserSettinfs()
 	FilterParameters = New Structure();
 	FilterParameters.Insert("MetadataObject", Metadata.Documents.RetailSalesReceipt);
 	UserSettings = UserSettingsServer.GetUserSettings(SessionParameters.CurrentUser, FilterParameters);
-		
+
 	Data = New Structure();
 	For Each Row In UserSettings Do
-		If Row.KindOfAttribute = Enums.KindsOfAttributes.Regular
-			Or Row.KindOfAttribute = Enums.KindsOfAttributes.Common Then
+		If Row.KindOfAttribute = Enums.KindsOfAttributes.Regular Or Row.KindOfAttribute
+			= Enums.KindsOfAttributes.Common Then
 			Data.Insert(Row.AttributeName, Row.Value);
 		EndIf;
 	EndDo;
-		
+
 	If Data.Property("Partner") Then
 		Result.Partner = Data.Partner;
 	EndIf;
@@ -52,5 +49,3 @@ Function GetPartnerInfoFromUserSettinfs()
 	EndIf;
 	Return Result;
 EndFunction
-	
-

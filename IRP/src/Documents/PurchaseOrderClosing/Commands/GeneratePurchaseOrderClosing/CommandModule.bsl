@@ -1,4 +1,3 @@
-
 &AtClient
 Procedure CommandProcessing(CommandParameter, CommandExecuteParameters)
 	Param = New Structure();
@@ -8,6 +7,6 @@ Procedure CommandProcessing(CommandParameter, CommandExecuteParameters)
 	Else
 		Param.Insert("FillingValues", New Structure("PurchaseOrder", CommandParameter));
 	EndIf;
-	
-	OpenForm("Document.PurchaseOrderClosing.ObjectForm", Param, , New UUID())
+
+	OpenForm("Document.PurchaseOrderClosing.ObjectForm", Param, , New UUID());
 EndProcedure

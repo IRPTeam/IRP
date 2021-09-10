@@ -1,16 +1,16 @@
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	ThisObject.Ref = Parameters.Ref;
-	
+
 	DCSTemplate = IDInfoServer.GetDCSTemplate(ThisObject.Ref.PredefinedDataName);
 	Address = PutToTempStorage(DCSTemplate);
 	ThisObject.SettingsComposer.Initialize(New DataCompositionAvailableSettingsSource(Address));
-	
+
 	If Parameters.SavedSettings = Undefined Then
 		ThisObject.SettingsComposer.LoadSettings(DCSTemplate.DefaultSettings);
 	Else
-		If TypeOf(Parameters.SavedSettings) = Type("Structure")
-			And Parameters.SavedSettings.Property("AddAttributesMap") Then
+		If TypeOf(Parameters.SavedSettings) = Type("Structure") And Parameters.SavedSettings.Property(
+			"AddAttributesMap") Then
 			IDInfoServer.ReplaceItemsFromFilter(Parameters.SavedSettings);
 			ThisObject.SettingsComposer.LoadSettings(Parameters.SavedSettings.Settings);
 		Else
@@ -42,17 +42,17 @@ EndProcedure
 &AtServer
 Function PrepareResult()
 	Settings = ThisObject.SettingsComposer.GetSettings();
-	
+
 	AddAttributesMap = New Map();
 	ArrayOfFields = New Array();
 	ExtractItemsFromFilter(Settings.Filter.Items, ArrayOfFields);
-	
+
 	For Each Row In ArrayOfFields Do
 		If Not IsObjectAttribute(Row, ThisObject.Ref) Then
 			AddAttributesMap.Insert(Row, GetAddAttributeBuPresentation(Row));
 		EndIf;
 	EndDo;
-	
+
 	Result = New Structure();
 	Result.Insert("Settings", Settings);
 	Result.Insert("AddAttributesMap", AddAttributesMap);
@@ -92,17 +92,17 @@ EndFunction
 Function GetAddAttributeBuPresentation(Val Presentation)
 	Query = New Query();
 	Query.Text =
-		"SELECT
-		|	AddAttributeAndProperty.Ref
-		|FROM
-		|	ChartOfCharacteristicTypes.AddAttributeAndProperty AS AddAttributeAndProperty
-		|WHERE
-		|	AddAttributeAndProperty.Description_en = &Description";
+	"SELECT
+	|	AddAttributeAndProperty.Ref
+	|FROM
+	|	ChartOfCharacteristicTypes.AddAttributeAndProperty AS AddAttributeAndProperty
+	|WHERE
+	|	AddAttributeAndProperty.Description_en = &Description";
 	Query.Text = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(Query.Text, "AddAttributeAndProperty");
 	Presentation = StrReplace(Presentation, "[", "");
 	Presentation = StrReplace(Presentation, "]", "");
 	Query.SetParameter("Description", TrimAll(Presentation));
-	
+
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
 	If QuerySelection.Next() Then

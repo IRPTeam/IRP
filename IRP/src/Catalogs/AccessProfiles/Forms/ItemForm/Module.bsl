@@ -20,24 +20,24 @@ Procedure UpdateRolesAtServer()
 		If Role = Metadata.Roles.FilterForUserSettings Then
 			Continue;
 		EndIf;
-		
+
 		If Saas.isSaasMode() And Role = Metadata.Roles.FullAccess Then
 			Continue;
 		EndIf;
-		
+
 		ExtRole = Role.ConfigurationExtension();
 		NameExt = ?(ExtRole = Undefined, "IRP", ExtRole.Name);
-		
+
 		If ThisObject.Roles.FindRows(New Structure("Role, Configuration", Role.Name, NameExt)).Count() Then
 			Continue;
 		EndIf;
-		
+
 		StrRole = Roles.Add();
 		StrRole.Role = Role.Name;
 		StrRole.Presentation = Role.Presentation();
-		
+
 		StrRole.Configuration = NameExt;
-		
+
 		Filter = New Structure("Role, Configuration", StrRole.Role, StrRole.Configuration);
 		StrRole.Use = Object.Roles.FindRows(Filter).Count() > 0;
 	EndDo;

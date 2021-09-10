@@ -10,7 +10,7 @@ Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefin
 	If EventName = "UpdateAddAttributeAndPropertySets" Then
 		AddAttributesCreateFormControl();
 	EndIf;
-	
+
 	If EventName = "NewBarcode" And IsInputAvailable() Then
 		SearchByBarcode(Undefined, Parameter);
 	EndIf;
@@ -84,7 +84,8 @@ EndProcedure
 
 &AtClient
 Procedure ItemListBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
-	DocStockAdjustmentAsSurplusClient.ItemListBeforeAddRow(Object, ThisObject, Item, Cancel, Clone, Parent, IsFolder, Parameter);
+	DocStockAdjustmentAsSurplusClient.ItemListBeforeAddRow(Object, ThisObject, Item, Cancel, Clone, Parent, IsFolder,
+		Parameter);
 EndProcedure
 
 &AtClient
@@ -104,12 +105,14 @@ EndProcedure
 
 &AtClient
 Procedure ItemListSerialLotNumbersPresentationStartChoice(Item, ChoiceData, StandardProcessing, AddInfo = Undefined) Export
-	DocStockAdjustmentAsSurplusClient.ItemListSerialLotNumbersPresentationStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+	DocStockAdjustmentAsSurplusClient.ItemListSerialLotNumbersPresentationStartChoice(Object, ThisObject, Item,
+		ChoiceData, StandardProcessing);
 EndProcedure
 
 &AtClient
 Procedure ItemListSerialLotNumbersPresentationClearing(Item, StandardProcessing)
-	DocStockAdjustmentAsSurplusClient.ItemListSerialLotNumbersPresentationClearing(Object, ThisObject, Item, StandardProcessing);
+	DocStockAdjustmentAsSurplusClient.ItemListSerialLotNumbersPresentationClearing(Object, ThisObject, Item,
+		StandardProcessing);
 EndProcedure
 
 &AtClient
@@ -129,12 +132,14 @@ EndProcedure
 
 &AtClient
 Procedure ItemListRevenueTypeStartChoice(Item, ChoiceData, StandardProcessing)
-	DocStockAdjustmentAsSurplusClient.ItemListRevenueTypeStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+	DocStockAdjustmentAsSurplusClient.ItemListRevenueTypeStartChoice(Object, ThisObject, Item, ChoiceData,
+		StandardProcessing);
 EndProcedure
 
 &AtClient
 Procedure ItemListRevenueTypeEditTextChange(Item, Text, StandardProcessing)
-	DocStockAdjustmentAsSurplusClient.ItemListRevenueTypeEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+	DocStockAdjustmentAsSurplusClient.ItemListRevenueTypeEditTextChange(Object, ThisObject, Item, Text,
+		StandardProcessing);
 EndProcedure
 
 #Region ItemCompany
@@ -219,7 +224,7 @@ EndProcedure
 &AtClient
 Procedure GeneratedFormCommandActionByName(Command) Export
 	ExternalCommandsClient.GeneratedFormCommandActionByName(Object, ThisObject, Command.Name);
-	GeneratedFormCommandActionByNameServer(Command.Name);	
+	GeneratedFormCommandActionByNameServer(Command.Name);
 EndProcedure
 
 &AtServer
@@ -234,37 +239,31 @@ EndProcedure
 &AtClient
 Function GetLinkedDocumentsFilter()
 	Filter = New Structure();
-	Filter.Insert("Company" , Object.Company);
-	Filter.Insert("Branch"  , Object.Branch);
-	Filter.Insert("Store"   , Object.Store);
-	Filter.Insert("Ref"     , Object.Ref);
+	Filter.Insert("Company", Object.Company);
+	Filter.Insert("Branch", Object.Branch);
+	Filter.Insert("Store", Object.Store);
+	Filter.Insert("Ref", Object.Ref);
 	Return Filter;
 EndFunction
 
 &AtClient
 Procedure LinkUnlinkBasisDocuments(Command)
 	FormParameters = New Structure();
-	FormParameters.Insert("Filter"           , GetLinkedDocumentsFilter());
-	FormParameters.Insert("SelectedRowInfo"  , RowIDInfoClient.GetSelectedRowInfo(Items.ItemList.CurrentData));
-	FormParameters.Insert("TablesInfo"       , RowIDInfoClient.GetTablesInfo(Object));
-	OpenForm("CommonForm.LinkUnlinkDocumentRows"
-		, FormParameters, , , ,
-		, New NotifyDescription("AddOrLinkUnlinkDocumentRowsContinue", ThisObject)
-		, FormWindowOpeningMode.LockOwnerWindow);
+	FormParameters.Insert("Filter", GetLinkedDocumentsFilter());
+	FormParameters.Insert("SelectedRowInfo", RowIDInfoClient.GetSelectedRowInfo(Items.ItemList.CurrentData));
+	FormParameters.Insert("TablesInfo", RowIDInfoClient.GetTablesInfo(Object));
+	OpenForm("CommonForm.LinkUnlinkDocumentRows", FormParameters, , , , ,
+		New NotifyDescription("AddOrLinkUnlinkDocumentRowsContinue", ThisObject), FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
 
 &AtClient
-Procedure AddBasisDocuments(Command)	
+Procedure AddBasisDocuments(Command)
 	FormParameters = New Structure();
-	FormParameters.Insert("Filter"           , GetLinkedDocumentsFilter());
-	FormParameters.Insert("TablesInfo"       , RowIDInfoClient.GetTablesInfo(Object));
-	OpenForm("CommonForm.AddLinkedDocumentRows"
-		, FormParameters, , , ,
-		, New NotifyDescription("AddOrLinkUnlinkDocumentRowsContinue", ThisObject)
-		, FormWindowOpeningMode.LockOwnerWindow);
+	FormParameters.Insert("Filter", GetLinkedDocumentsFilter());
+	FormParameters.Insert("TablesInfo", RowIDInfoClient.GetTablesInfo(Object));
+	OpenForm("CommonForm.AddLinkedDocumentRows", FormParameters, , , , ,
+		New NotifyDescription("AddOrLinkUnlinkDocumentRowsContinue", ThisObject), FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
-
-
 &AtClient
 Procedure AddOrLinkUnlinkDocumentRowsContinue(Result, AdditionalParameters) Export
 	If Result = Undefined Then

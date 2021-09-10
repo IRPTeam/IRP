@@ -14,16 +14,16 @@ EndProcedure
 
 &AtClient
 Procedure ListOnActivateRow(Item)
-	If NOT HTMLWindowPictures = Undefined Then
+	If Not HTMLWindowPictures = Undefined Then
 		HTMLWindowPictures.clearAll();
 		AttachIdleHandler("UpdateHTMLPictures", 0.1, True);
 	EndIf;
 
-	If NOT HTMLWindowAddAttributes = Undefined Then
+	If Not HTMLWindowAddAttributes = Undefined Then
 		HTMLWindowAddAttributes.clearAll();
 		AttachIdleHandler("UpdateHTMLAddAttributes", 0.1, True);
 	EndIf;
-	
+
 EndProcedure
 
 #Region HTML
@@ -43,10 +43,10 @@ EndProcedure
 &AtClient
 Procedure UpdateHTMLPictures() Export
 	CurrentRow = Items.List.CurrentData;
-	If CurrentRow = Undefined OR Not CurrentRow.Property("Ref") Then
+	If CurrentRow = Undefined Or Not CurrentRow.Property("Ref") Then
 		Return;
 	EndIf;
-	
+
 	PictureInfo = PictureViewerClient.PicturesInfoForSlider(CurrentRow.Ref, UUID);
 	JSON = CommonFunctionsServer.SerializeJSON(PictureInfo);
 	HTMLWindowPictures.fillSlider(JSON);
@@ -55,14 +55,14 @@ EndProcedure
 &AtClient
 Procedure UpdateHTMLAddAttributes() Export
 	CurrentRow = Items.List.CurrentData;
-	If CurrentRow = Undefined OR Not CurrentRow.Property("Ref") Then
+	If CurrentRow = Undefined Or Not CurrentRow.Property("Ref") Then
 		Return;
 	EndIf;
-	
+
 	AddAttributeInfo = AddAttributesAndPropertiesClient.AddAttributeInfoForHTML(CurrentRow.Ref, UUID);
 	JSON = CommonFunctionsServer.SerializeJSON(AddAttributeInfo);
 	HTMLWindowAddAttributes.fillData(JSON);
-	
+
 EndProcedure
 
 &AtClient

@@ -14,13 +14,13 @@ Procedure SetSettings(Command)
 	If CurrentRow = Undefined Then
 		Return;
 	EndIf;
-	
+
 	Info = AddDataProcServer.AddDataProcInfo(CurrentRow.ExternalDataProc);
 	Info.Insert("Settings", ThisObject.AddressResult);
 	Info.Insert("ExternalDataProcRef", CurrentRow.ExternalDataProc);
 	Info.Insert("Country", CurrentRow.Country);
 	CallMethodAddDataProc(Info);
-	
+
 	NotifyDescription = New NotifyDescription("OpenFormAddDataProcEnd", ThisObject);
 	AddDataProcClient.OpenFormAddDataProc(Info, NotifyDescription, "Settings");
 EndProcedure
@@ -42,8 +42,7 @@ EndProcedure
 &AtServer
 Procedure OpenFormAddDataProcEndServer(Result)
 	Obj = FormAttributeToValue("Object");
-	Obj.ExternalDataProcess[ThisObject.RowNumber - 1].Settings =
-		New ValueStorage(Result, New Deflation(9));
+	Obj.ExternalDataProcess[ThisObject.RowNumber - 1].Settings = New ValueStorage(Result, New Deflation(9));
 	Obj.Write();
 	PutToTempStorage(Result, ThisObject.AddressResult);
 	ValueToFormAttribute(Obj, "Object");

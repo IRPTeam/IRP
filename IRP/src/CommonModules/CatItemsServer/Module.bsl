@@ -15,11 +15,11 @@ Function GetItemKeyUnit(Val ItemKey) Export
 EndFunction
 
 Function StoreMustHave(Value) Export
-	
+
 	If Not ValueIsFilled(Value) Then
 		Return True;
 	EndIf;
-	
+
 	If TypeOf(Value) = Type("CatalogRef.Items") Then
 		Return Not Value.ItemType.Type = PredefinedValue("Enum.ItemTypes.Service");
 	ElsIf TypeOf(Value) = Type("CatalogRef.ItemKeys") Then
@@ -29,5 +29,5 @@ Function StoreMustHave(Value) Export
 	Else
 		Return False;
 	EndIf;
-	
+
 EndFunction

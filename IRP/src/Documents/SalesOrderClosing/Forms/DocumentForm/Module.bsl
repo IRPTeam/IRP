@@ -1,11 +1,10 @@
-
 #Region FormEvents
 
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	DocSalesOrderClosingServer.OnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
 	If Parameters.Key.IsEmpty() Then
-		SetVisibilityAvailability(Object, ThisObject);	
+		SetVisibilityAvailability(Object, ThisObject);
 	EndIf;
 	ThisObject.TaxAndOffersCalculated = True;
 	SetConditionalAppearance();
@@ -22,32 +21,32 @@ Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefin
 	If EventName = "UpdateAddAttributeAndPropertySets" Then
 		AddAttributesCreateFormControl();
 	EndIf;
-	
+
 	If Not Source = ThisObject Then
 		Return;
 	EndIf;
-	
+
 	DocSalesOrderClosingClient.NotificationProcessing(Object, ThisObject, EventName, Parameter, Source);
-	
-	ServerData = Undefined;		
+
+	ServerData = Undefined;
 	If TypeOf(Parameter) = Type("Structure") And Parameter.Property("AddInfo") Then
 		ServerData = CommonFunctionsClientServer.GetFromAddInfo(Parameter.AddInfo, "ServerData");
 	EndIf;
-		
+
 	If EventName = "NewBarcode" And IsInputAvailable() Then
 		SearchByBarcode(Undefined, Parameter);
 	EndIf;
-	
+
 	If Upper(EventName) = Upper("CallbackHandler") Then
 		UpdateTotalAmounts();
-		
+
 		CurrenciesClient.CalculateAmount(Object, ThisObject);
 		CurrenciesClient.SetRatePresentation(Object, ThisObject);
-				
+
 		If ServerData <> Undefined Then
 			CurrenciesClient.SetVisibleRows(Object, ThisObject, Parameter.AddInfo);
 		EndIf;
-	EndIf;	
+	EndIf;
 EndProcedure
 
 &AtClient
@@ -91,24 +90,24 @@ EndProcedure
 
 &AtServer
 Procedure SetConditionalAppearance()
-	
+
 	AppearanceElement = ConditionalAppearance.Items.Add();
-	
+
 	FieldElement = AppearanceElement.Fields.Items.Add();
 	FieldElement.Field = New DataCompositionField(Items.ItemListProcurementMethod.Name);
-	
+
 	FilterElementGroup = AppearanceElement.Filter.Items.Add(Type("DataCompositionFilterItemGroup"));
 	FilterElementGroup.GroupType = DataCompositionFilterItemsGroupType.AndGroup;
-	
+
 	FilterElement = FilterElementGroup.Items.Add(Type("DataCompositionFilterItem"));
 	FilterElement.LeftValue = New DataCompositionField("Object.ItemList.ItemType");
 	FilterElement.ComparisonType = DataCompositionComparisonType.Equal;
 	FilterElement.RightValue = Enums.ItemTypes.Product;
-	
+
 	FilterElement = FilterElementGroup.Items.Add(Type("DataCompositionFilterItem"));
 	FilterElement.LeftValue = New DataCompositionField("Object.ItemList.ProcurementMethod");
 	FilterElement.ComparisonType = DataCompositionComparisonType.NotFilled;
-	
+
 	AppearanceElement.Appearance.SetParameterValue("MarkIncomplete", True);
 EndProcedure
 
@@ -124,13 +123,13 @@ Procedure UpdateTotalAmounts()
 		EndIf;
 		ThisObject.TotalNetAmount = ThisObject.TotalNetAmount + Row.NetAmount;
 		ThisObject.TotalTotalAmount = ThisObject.TotalTotalAmount + Row.TotalAmount;
-		
+
 		ArrayOfTaxesRows = Object.TaxList.FindRows(New Structure("Key", Row.Key));
 		For Each RowTax In ArrayOfTaxesRows Do
-			ThisObject.TotalTaxAmount = ThisObject.TotalTaxAmount 
-			+ ?(RowTax.IncludeToTotalAmount, RowTax.ManualAmount, 0);
+			ThisObject.TotalTaxAmount = ThisObject.TotalTaxAmount + ?(RowTax.IncludeToTotalAmount, RowTax.ManualAmount,
+				0);
 		EndDo;
-			
+
 		ArrayOfOffersRows = Object.SpecialOffers.FindRows(New Structure("Key", Row.Key));
 		For Each RowOffer In ArrayOfOffersRows Do
 			ThisObject.TotalOffersAmount = ThisObject.TotalOffersAmount + RowOffer.Amount;
@@ -281,7 +280,7 @@ EndProcedure
 
 &AtClient
 Procedure ItemListTaxAmountOnChange(Item)
-	DocSalesOrderClosingClient.ItemListTaxAmountOnChange(Object, ThisObject, Item);	
+	DocSalesOrderClosingClient.ItemListTaxAmountOnChange(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient
@@ -392,9 +391,7 @@ EndProcedure
 
 &AtClient
 Procedure SetSpecialOffers(Command)
-	OffersClient.OpenFormPickupSpecialOffers_ForDocument(Object,
-		ThisObject,
-		"SpecialOffersEditFinish_ForDocument");
+	OffersClient.OpenFormPickupSpecialOffers_ForDocument(Object, ThisObject, "SpecialOffersEditFinish_ForDocument");
 EndProcedure
 
 &AtClient
@@ -414,9 +411,7 @@ EndProcedure
 
 &AtClient
 Procedure SetSpecialOffersAtRow(Command)
-	OffersClient.OpenFormPickupSpecialOffers_ForRow(Object,
-		Items.ItemList.CurrentData,
-		ThisObject,
+	OffersClient.OpenFormPickupSpecialOffers_ForRow(Object, Items.ItemList.CurrentData, ThisObject,
 		"SpecialOffersEditFinish_ForRow");
 EndProcedure
 
@@ -496,7 +491,8 @@ EndProcedure
 &AtClient
 Procedure CurrenciesSelection(Item, RowSelected, Field, StandardProcessing, AddInfo = Undefined)
 	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "ExecuteAtClient", True);
-	CurrenciesClient.CurrenciesTable_Selection(Object, ThisObject, Item, RowSelected, Field, StandardProcessing, AddInfo);
+	CurrenciesClient.CurrenciesTable_Selection(Object, ThisObject, Item, RowSelected, Field, StandardProcessing,
+		AddInfo);
 EndProcedure
 
 &AtClient
@@ -548,7 +544,7 @@ EndProcedure
 &AtClient
 Procedure GeneratedFormCommandActionByName(Command) Export
 	ExternalCommandsClient.GeneratedFormCommandActionByName(Object, ThisObject, Command.Name);
-	GeneratedFormCommandActionByNameServer(Command.Name);	
+	GeneratedFormCommandActionByNameServer(Command.Name);
 EndProcedure
 
 &AtServer
@@ -575,9 +571,9 @@ Procedure FillByOrderAtServer()
 	Else
 		SalesOrderData = DocSalesOrderClosingServer.GetSalesOrderInfo(Object.SalesOrder);
 	EndIf;
-	
+
 	FillPropertyValues(Object, SalesOrderData.SalesOrderInfo);
-	
+
 	For Each Table In SalesOrderData.Tables Do
 		Object[Table.Key].Load(Table.Value);
 	EndDo;

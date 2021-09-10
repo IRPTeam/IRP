@@ -8,10 +8,8 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:MultiLanguageDataPath">
-      <paths xsi:type="form:DataPath">
-        <segments>Object.Code</segments>
-      </paths>
+    <dataPath xsi:type="form:DataPath">
+      <segments>Object.Code</segments>
     </dataPath>
     <extendedTooltip>
       <name>CodeExtendedTooltip</name>
@@ -60,10 +58,8 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:MultiLanguageDataPath">
-      <paths xsi:type="form:DataPath">
-        <segments>Object.Parent</segments>
-      </paths>
+    <dataPath xsi:type="form:DataPath">
+      <segments>Object.Parent</segments>
     </dataPath>
     <extendedTooltip>
       <name>ParentExtendedTooltip</name>
@@ -112,10 +108,8 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:MultiLanguageDataPath">
-      <paths xsi:type="form:DataPath">
-        <segments>Object.RefValue</segments>
-      </paths>
+    <dataPath xsi:type="form:DataPath">
+      <segments>Object.RefValue</segments>
     </dataPath>
     <extendedTooltip>
       <name>RefValueExtendedTooltip</name>
@@ -164,10 +158,8 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:MultiLanguageDataPath">
-      <paths xsi:type="form:DataPath">
-        <segments>Object.SimpleValue</segments>
-      </paths>
+    <dataPath xsi:type="form:DataPath">
+      <segments>Object.SimpleValue</segments>
     </dataPath>
     <extendedTooltip>
       <name>SimpleValueExtendedTooltip</name>
@@ -216,10 +208,8 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:MultiLanguageDataPath">
-      <paths xsi:type="form:DataPath">
-        <segments>Object.UniqueID</segments>
-      </paths>
+    <dataPath xsi:type="form:DataPath">
+      <segments>Object.UniqueID</segments>
     </dataPath>
     <extendedTooltip>
       <name>UniqueIDExtendedTooltip</name>
@@ -280,10 +270,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>Object.ParametersTable.LineNumber</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>Object.ParametersTable.LineNumber</segments>
       </dataPath>
       <extendedTooltip>
         <name>ParametersTableLineNumberExtendedTooltip</name>
@@ -328,10 +316,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>Object.ParametersTable.Key</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>Object.ParametersTable.Key</segments>
       </dataPath>
       <extendedTooltip>
         <name>ParametersTableKeyExtendedTooltip</name>
@@ -380,10 +366,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>Object.ParametersTable.RefValue</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>Object.ParametersTable.RefValue</segments>
       </dataPath>
       <extendedTooltip>
         <name>ParametersTableRefValueExtendedTooltip</name>
@@ -432,10 +416,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>Object.ParametersTable.SimpleValue</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>Object.ParametersTable.SimpleValue</segments>
       </dataPath>
       <extendedTooltip>
         <name>ParametersTableSimpleValueExtendedTooltip</name>

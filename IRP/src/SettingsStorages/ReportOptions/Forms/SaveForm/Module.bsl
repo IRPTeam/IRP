@@ -1,4 +1,3 @@
-
 #Region Events
 
 #Region FormEvents
@@ -7,12 +6,12 @@
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	ThisObject.ObjectKey = Parameters.ObjectKey;
 	ThisObject.CurrentSettingsKey = Parameters.CurrentSettingsKey;
-	
+
 	OptionsList.Parameters.SetParameterValue("ObjectKey", ThisObject.ObjectKey);
 	OptionsList.Parameters.SetParameterValue("CurrentSettingsKey", ThisObject.CurrentSettingsKey);
 	OptionsList.Parameters.SetParameterValue("Author", SessionParameters.CurrentUser);
-		
-	Items.OptionsList.CurrentRow = Catalogs.ReportOptions.FindByCode(ThisObject.CurrentSettingsKey);	
+
+	Items.OptionsList.CurrentRow = Catalogs.ReportOptions.FindByCode(ThisObject.CurrentSettingsKey);
 EndProcedure
 
 &AtClient
@@ -44,7 +43,7 @@ EndProcedure
 &AtClient
 Procedure SaveAs(Command)
 	Notify = New NotifyDescription("SaveAsEnd", ThisObject);
-	ShowInputString(Notify, "", R().SuggestionToUser_4 , 128);
+	ShowInputString(Notify, "", R().SuggestionToUser_4, 128);
 EndProcedure
 
 &AtClient
@@ -58,14 +57,14 @@ EndProcedure
 #Region Private
 
 &AtClient
-Procedure SaveSettingAtClient()	
+Procedure SaveSettingAtClient()
 	CurrentData = Items.OptionsList.CurrentData;
 	If CurrentData = Undefined Then
 		Notify = New NotifyDescription("SaveAsEnd", ThisObject);
 		ShowInputString(Notify, "", R().SuggestionToUser_3, 150);
 	Else
 		If CurrentData.Author = SessionParametersServer.GetSessionParameter("CurrentUser") Then
-			OptionDescriptionParameters = New Structure;
+			OptionDescriptionParameters = New Structure();
 			OptionDescriptionParameters.Insert("ReportOption", CurrentData.ReportOption);
 			OptionDescription = New NotifyDescription("OverwriteQuestionEnd", ThisObject, OptionDescriptionParameters);
 			QueryText = R().QuestionToUser_020;
@@ -73,9 +72,9 @@ Procedure SaveSettingAtClient()
 			ShowQueryBox(OptionDescription, QueryText, QueryButtons);
 		Else
 			Notify = New NotifyDescription("SaveAsEnd", ThisObject);
-			OptionDescription = ServiceSystemServer.GetObjectAttribute(CurrentData.ReportOption, "Description"); 
+			OptionDescription = ServiceSystemServer.GetObjectAttribute(CurrentData.ReportOption, "Description");
 			ShowInputString(Notify, OptionDescription, R().SuggestionToUser_3, 150);
-		EndIf;		
+		EndIf;
 	EndIf;
 EndProcedure
 
@@ -99,10 +98,11 @@ Procedure SaveChosenSetting(Val OptionDescription, Val ReportOption = Undefined)
 		UsersValueList.LoadValues(Users);
 		OpenFormParameters = New Structure();
 		OpenFormParameters.Insert("Users", UsersValueList);
-		OpenForm("CommonForm.ShareToUsers", OpenFormParameters, ThisObject, ThisObject.UUID, , , Notify, FormWindowOpeningMode.LockOwnerWindow);
+		OpenForm("CommonForm.ShareToUsers", OpenFormParameters, ThisObject, ThisObject.UUID, , , Notify,
+			FormWindowOpeningMode.LockOwnerWindow);
 	Else
 		CloseForm(OptionKey);
-	EndIf;	
+	EndIf;
 EndProcedure
 
 &AtServer
@@ -123,8 +123,7 @@ EndProcedure
 Procedure ShareEndAtServer(Val OptionKey, Val Parameters)
 	ReportOption = Catalogs.ReportOptions.FindByCode(OptionKey);
 	Users = Parameters.Users.UnloadValues();
-	If Users.Count()
-		And Users.Find(SessionParameters.CurrentUser) = Undefined Then
+	If Users.Count() And Users.Find(SessionParameters.CurrentUser) = Undefined Then
 		Users.Add(SessionParameters.CurrentUser);
 	EndIf;
 	InformationRegisters.SharedReportOptions.SetUsersToReportOption(ReportOption, Users);
@@ -135,7 +134,7 @@ Procedure OverwriteQuestionEnd(Result, AdditionalParameters) Export
 	If Result = DialogReturnCode.Yes Then
 		OptionDescription = ServiceSystemServer.GetObjectAttribute(AdditionalParameters.ReportOption, "Description");
 		SaveChosenSetting(OptionDescription, AdditionalParameters.ReportOption);
-	EndIf
+	EndIf;
 EndProcedure
 
 &AtServer
@@ -150,7 +149,7 @@ Function SaveChosenSettingAtServer(Val OptionDescription, Val ReportOption)
 		ReportOptionObj.Write();
 	Else
 		OptionKey = ReportOption.Code;
-	EndIf;	
+	EndIf;
 	Return OptionKey;
 EndFunction
 
@@ -179,10 +178,10 @@ Procedure ShowMarkedForDeleteReportOptions()
 			EditedFilterItem = OptionsList.Filter.Items.Add(Type("DataCompositionFilterItem"));
 		EndIf;
 		EditedFilterItem.LeftValue = LeftValue;
-		EditedFilterItem.ComparisonType = DataCompositionComparisonType.Equal; 
+		EditedFilterItem.ComparisonType = DataCompositionComparisonType.Equal;
 		EditedFilterItem.ViewMode = DataCompositionSettingsItemViewMode.Inaccessible;
-    	EditedFilterItem.RightValue = False;
-	EndIf;	
+		EditedFilterItem.RightValue = False;
+	EndIf;
 EndProcedure
 
 #EndRegion

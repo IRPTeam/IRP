@@ -6,7 +6,7 @@ Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 		Form.CurrentCurrency = Object.Currency;
 		Form.CurrentAccount = Object.Account;
 		Form.CurrentTransactionType = Object.TransactionType;
-		
+
 		SetGroupItemsList(Object, Form);
 		DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 	EndIf;
@@ -18,7 +18,7 @@ Procedure AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters) Expor
 	Form.CurrentAccount = CurrentObject.Account;
 	Form.CurrentTransactionType = Object.TransactionType;
 	DocumentsServer.FillPaymentList(Object);
-	
+
 	DocumentsClientServer.ChangeTitleGroupTitle(CurrentObject, Form);
 EndProcedure
 
@@ -27,7 +27,7 @@ Procedure OnReadAtServer(Object, Form, CurrentObject) Export
 	Form.CurrentAccount = CurrentObject.Account;
 	Form.CurrentTransactionType = Object.TransactionType;
 	DocumentsServer.FillPaymentList(Object);
-	
+
 	If Not Form.GroupItems.Count() Then
 		SetGroupItemsList(Object, Form);
 	EndIf;
@@ -54,9 +54,9 @@ Function GetDocumentTable_CashTransferOrder(ArrayOfBasisDocuments, EndOfDate = U
 	Else
 		Query.SetParameter("EndOfDate", EndOfDate);
 	EndIf;
-	
+
 	Query.Execute();
-	Query.Text = 
+	Query.Text =
 	"SELECT
 	|	tmp.BasedOn AS BasedOn,
 	|	tmp.TransactionType AS TransactionType,
@@ -77,95 +77,94 @@ Function GetDocumentTable_CashTransferOrder(ArrayOfBasisDocuments, EndOfDate = U
 EndFunction
 
 Function GetDocumentTable_CashTransferOrder_QueryText() Export
-	Return
-	"SELECT ALLOWED
-	|	""CashTransferOrder"" AS BasedOn,
-	|	CASE
-	|		WHEN Doc.SendCurrency = Doc.ReceiveCurrency
-	|			THEN VALUE(Enum.IncomingPaymentTransactionType.CashTransferOrder)
-	|		ELSE VALUE(Enum.IncomingPaymentTransactionType.CurrencyExchange)
-	|	END AS TransactionType,
-	|	R3035T_CashPlanningTurnovers.Company AS Company,
-	|	R3035T_CashPlanningTurnovers.Account AS Account,
-	|	R3035T_CashPlanningTurnovers.Currency AS Currency,
-	|	R3035T_CashPlanningTurnovers.FinancialMovementType AS FinancialMovementType,
-	|	Doc.SendCurrency AS CurrencyExchange,
-	|	CashInTransitBalance.AmountBalance AS Amount,
-	|	R3035T_CashPlanningTurnovers.BasisDocument AS PlaningTransactionBasis
-	|INTO tmp_IncomingMoney
-	|FROM
-	|	AccumulationRegister.R3035T_CashPlanning.Turnovers(, &EndOfDate,,
-	|		CashFlowDirection = VALUE(Enum.CashFlowDirections.Incoming)
-	|	AND CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
-	|	AND CASE
-	|		WHEN &UseArrayOfBasisDocuments
-	|			THEN BasisDocument IN (&ArrayOfBasisDocuments)
-	|		ELSE TRUE
-	|	END) AS R3035T_CashPlanningTurnovers
-	|		INNER JOIN Document.CashTransferOrder AS Doc
-	|		ON R3035T_CashPlanningTurnovers.BasisDocument = Doc.Ref
-	|		LEFT JOIN AccumulationRegister.CashInTransit.Balance(&EndOfDate,
-	|			CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
-	|		AND CASE
-	|			WHEN &UseArrayOfBasisDocuments
-	|				THEN BasisDocument IN (&ArrayOfBasisDocuments)
-	|			ELSE TRUE
-	|		END) AS CashInTransitBalance
-	|		ON R3035T_CashPlanningTurnovers.BasisDocument = CashInTransitBalance.BasisDocument
-	|WHERE
-	|	R3035T_CashPlanningTurnovers.Account.Type = VALUE(Enum.CashAccountTypes.Bank)
-	|	AND R3035T_CashPlanningTurnovers.AmountTurnover > 0
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	R3035T_CashPlanning.Company AS Company,
-	|	Doc.SendCurrency AS SendCurrency,
-	|	R3035T_CashPlanning.BasisDocument AS BasisDocument,
-	|	CAST(R3035T_CashPlanning.Recorder AS Document.BankPayment).TransitAccount AS TransitAccount,
-	|	-SUM(R3035T_CashPlanning.Amount) AS Amount
-	|INTO tmp_OutgoingMoney
-	|FROM
-	|	AccumulationRegister.R3035T_CashPlanning AS R3035T_CashPlanning
-	|		INNER JOIN Document.CashTransferOrder AS Doc
-	|		ON R3035T_CashPlanning.BasisDocument = Doc.Ref
-	|		AND R3035T_CashPlanning.CashFlowDirection = VALUE(Enum.CashFlowDirections.Outgoing)
-	|		AND
-	|			R3035T_CashPlanning.CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
-	|		AND CASE
-	|			WHEN &UseArrayOfBasisDocuments
-	|				THEN R3035T_CashPlanning.BasisDocument IN (&ArrayOfBasisDocuments)
-	|			ELSE TRUE
-	|		END
-	|		AND R3035T_CashPlanning.Account.Type = VALUE(Enum.CashAccountTypes.Bank)
-	|		AND R3035T_CashPlanning.Amount < 0
-	|GROUP BY
-	|	R3035T_CashPlanning.Company,
-	|	Doc.SendCurrency,
-	|	R3035T_CashPlanning.BasisDocument,
-	|	CAST(R3035T_CashPlanning.Recorder AS Document.BankPayment).TransitAccount
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	tmp_IncomingMoney.BasedOn AS BasedOn,
-	|	tmp_IncomingMoney.TransactionType AS TransactionType,
-	|	tmp_IncomingMoney.Company AS Company,
-	|	tmp_IncomingMoney.Account AS Account,
-	|	tmp_IncomingMoney.Currency AS Currency,
-	|	tmp_IncomingMoney.FinancialMovementType AS FinancialMovementType,
-	|	tmp_IncomingMoney.CurrencyExchange AS CurrencyExchange,
-	|	tmp_IncomingMoney.Amount AS Amount,
-	|	tmp_IncomingMoney.PlaningTransactionBasis AS PlaningTransactionBasis,
-	|	tmp_OutgoingMoney.TransitAccount AS TransitAccount,
-	|	tmp_OutgoingMoney.Amount AS AmountExchange
-	|INTO tmp_CashTransferOrder
-	|FROM
-	|	tmp_IncomingMoney AS tmp_IncomingMoney
-	|		LEFT JOIN tmp_OutgoingMoney AS tmp_OutgoingMoney
-	|		ON tmp_IncomingMoney.Company = tmp_OutgoingMoney.Company
-	|		AND tmp_IncomingMoney.CurrencyExchange = tmp_OutgoingMoney.SendCurrency
-	|		AND tmp_IncomingMoney.PlaningTransactionBasis = tmp_OutgoingMoney.BasisDocument";
+	Return "SELECT ALLOWED
+		   |	""CashTransferOrder"" AS BasedOn,
+		   |	CASE
+		   |		WHEN Doc.SendCurrency = Doc.ReceiveCurrency
+		   |			THEN VALUE(Enum.IncomingPaymentTransactionType.CashTransferOrder)
+		   |		ELSE VALUE(Enum.IncomingPaymentTransactionType.CurrencyExchange)
+		   |	END AS TransactionType,
+		   |	R3035T_CashPlanningTurnovers.Company AS Company,
+		   |	R3035T_CashPlanningTurnovers.Account AS Account,
+		   |	R3035T_CashPlanningTurnovers.Currency AS Currency,
+		   |	R3035T_CashPlanningTurnovers.FinancialMovementType AS FinancialMovementType,
+		   |	Doc.SendCurrency AS CurrencyExchange,
+		   |	CashInTransitBalance.AmountBalance AS Amount,
+		   |	R3035T_CashPlanningTurnovers.BasisDocument AS PlaningTransactionBasis
+		   |INTO tmp_IncomingMoney
+		   |FROM
+		   |	AccumulationRegister.R3035T_CashPlanning.Turnovers(, &EndOfDate,,
+		   |		CashFlowDirection = VALUE(Enum.CashFlowDirections.Incoming)
+		   |	AND CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
+		   |	AND CASE
+		   |		WHEN &UseArrayOfBasisDocuments
+		   |			THEN BasisDocument IN (&ArrayOfBasisDocuments)
+		   |		ELSE TRUE
+		   |	END) AS R3035T_CashPlanningTurnovers
+		   |		INNER JOIN Document.CashTransferOrder AS Doc
+		   |		ON R3035T_CashPlanningTurnovers.BasisDocument = Doc.Ref
+		   |		LEFT JOIN AccumulationRegister.CashInTransit.Balance(&EndOfDate,
+		   |			CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
+		   |		AND CASE
+		   |			WHEN &UseArrayOfBasisDocuments
+		   |				THEN BasisDocument IN (&ArrayOfBasisDocuments)
+		   |			ELSE TRUE
+		   |		END) AS CashInTransitBalance
+		   |		ON R3035T_CashPlanningTurnovers.BasisDocument = CashInTransitBalance.BasisDocument
+		   |WHERE
+		   |	R3035T_CashPlanningTurnovers.Account.Type = VALUE(Enum.CashAccountTypes.Bank)
+		   |	AND R3035T_CashPlanningTurnovers.AmountTurnover > 0
+		   |;
+		   |
+		   |////////////////////////////////////////////////////////////////////////////////
+		   |SELECT
+		   |	R3035T_CashPlanning.Company AS Company,
+		   |	Doc.SendCurrency AS SendCurrency,
+		   |	R3035T_CashPlanning.BasisDocument AS BasisDocument,
+		   |	CAST(R3035T_CashPlanning.Recorder AS Document.BankPayment).TransitAccount AS TransitAccount,
+		   |	-SUM(R3035T_CashPlanning.Amount) AS Amount
+		   |INTO tmp_OutgoingMoney
+		   |FROM
+		   |	AccumulationRegister.R3035T_CashPlanning AS R3035T_CashPlanning
+		   |		INNER JOIN Document.CashTransferOrder AS Doc
+		   |		ON R3035T_CashPlanning.BasisDocument = Doc.Ref
+		   |		AND R3035T_CashPlanning.CashFlowDirection = VALUE(Enum.CashFlowDirections.Outgoing)
+		   |		AND
+		   |			R3035T_CashPlanning.CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
+		   |		AND CASE
+		   |			WHEN &UseArrayOfBasisDocuments
+		   |				THEN R3035T_CashPlanning.BasisDocument IN (&ArrayOfBasisDocuments)
+		   |			ELSE TRUE
+		   |		END
+		   |		AND R3035T_CashPlanning.Account.Type = VALUE(Enum.CashAccountTypes.Bank)
+		   |		AND R3035T_CashPlanning.Amount < 0
+		   |GROUP BY
+		   |	R3035T_CashPlanning.Company,
+		   |	Doc.SendCurrency,
+		   |	R3035T_CashPlanning.BasisDocument,
+		   |	CAST(R3035T_CashPlanning.Recorder AS Document.BankPayment).TransitAccount
+		   |;
+		   |
+		   |////////////////////////////////////////////////////////////////////////////////
+		   |SELECT
+		   |	tmp_IncomingMoney.BasedOn AS BasedOn,
+		   |	tmp_IncomingMoney.TransactionType AS TransactionType,
+		   |	tmp_IncomingMoney.Company AS Company,
+		   |	tmp_IncomingMoney.Account AS Account,
+		   |	tmp_IncomingMoney.Currency AS Currency,
+		   |	tmp_IncomingMoney.FinancialMovementType AS FinancialMovementType,
+		   |	tmp_IncomingMoney.CurrencyExchange AS CurrencyExchange,
+		   |	tmp_IncomingMoney.Amount AS Amount,
+		   |	tmp_IncomingMoney.PlaningTransactionBasis AS PlaningTransactionBasis,
+		   |	tmp_OutgoingMoney.TransitAccount AS TransitAccount,
+		   |	tmp_OutgoingMoney.Amount AS AmountExchange
+		   |INTO tmp_CashTransferOrder
+		   |FROM
+		   |	tmp_IncomingMoney AS tmp_IncomingMoney
+		   |		LEFT JOIN tmp_OutgoingMoney AS tmp_OutgoingMoney
+		   |		ON tmp_IncomingMoney.Company = tmp_OutgoingMoney.Company
+		   |		AND tmp_IncomingMoney.CurrencyExchange = tmp_OutgoingMoney.SendCurrency
+		   |		AND tmp_IncomingMoney.PlaningTransactionBasis = tmp_OutgoingMoney.BasisDocument";
 EndFunction
 
 Function GetDocumentTable_CashTransferOrder_ForClient(ArrayOfBasisDocuments, ObjectRef = Undefined) Export
@@ -177,16 +176,16 @@ Function GetDocumentTable_CashTransferOrder_ForClient(ArrayOfBasisDocuments, Obj
 	ValueTable = GetDocumentTable_CashTransferOrder(ArrayOfBasisDocuments, EndOfDate);
 	For Each Row In ValueTable Do
 		NewRow = New Structure();
-		NewRow.Insert("BasedOn"					, Row.BasedOn);
-		NewRow.Insert("TransactionType" 		, Row.TransactionType);
-		NewRow.Insert("Company"					, Row.Company);
-		NewRow.Insert("Account"					, Row.Account);
-		NewRow.Insert("Currency"				, Row.Currency);
-		NewRow.Insert("CurrencyExchange"		, Row.CurrencyExchange);
-		NewRow.Insert("Amount"					, Row.Amount);
-		NewRow.Insert("PlaningTransactionBasis"	, Row.PlaningTransactionBasis);
-		NewRow.Insert("TransitAccount"			, Row.TransitAccount);
-		NewRow.Insert("AmountExchange"			, Row.AmountExchange);
+		NewRow.Insert("BasedOn", Row.BasedOn);
+		NewRow.Insert("TransactionType", Row.TransactionType);
+		NewRow.Insert("Company", Row.Company);
+		NewRow.Insert("Account", Row.Account);
+		NewRow.Insert("Currency", Row.Currency);
+		NewRow.Insert("CurrencyExchange", Row.CurrencyExchange);
+		NewRow.Insert("Amount", Row.Amount);
+		NewRow.Insert("PlaningTransactionBasis", Row.PlaningTransactionBasis);
+		NewRow.Insert("TransitAccount", Row.TransitAccount);
+		NewRow.Insert("AmountExchange", Row.AmountExchange);
 		ArrayOfResults.Add(NewRow);
 	EndDo;
 	Return ArrayOfResults;
@@ -197,16 +196,15 @@ EndFunction
 #Region GroupTitle
 
 Procedure SetGroupItemsList(Object, Form)
-	AttributesArray = New Array;
+	AttributesArray = New Array();
 	AttributesArray.Add("Company");
 	AttributesArray.Add("Account");
 	AttributesArray.Add("TransactionType");
 	AttributesArray.Add("Currency");
 	DocumentsServer.DeleteUnavailableTitleItemNames(AttributesArray);
 	For Each Atr In AttributesArray Do
-		Form.GroupItems.Add(Atr, ?(ValueIsFilled(Form.Items[Atr].Title),
-				Form.Items[Atr].Title,
-				Object.Ref.Metadata().Attributes[Atr].Synonym + ":" + Chars.NBSp));
+		Form.GroupItems.Add(Atr, ?(ValueIsFilled(Form.Items[Atr].Title), Form.Items[Atr].Title,
+			Object.Ref.Metadata().Attributes[Atr].Synonym + ":" + Chars.NBSp));
 	EndDo;
 EndProcedure
 

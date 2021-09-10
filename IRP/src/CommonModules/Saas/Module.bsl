@@ -3,7 +3,7 @@ Function SeparationUsed() Export
 EndFunction
 
 Function isAreaActive() Export
-	AreaMode = NOT Saas.SeparationUsed() OR (Saas.SeparationUsed() AND SessionParameters.IDUse);
+	AreaMode = Not Saas.SeparationUsed() Or (Saas.SeparationUsed() And SessionParameters.IDUse);
 	Return AreaMode;
 EndFunction
 
@@ -32,12 +32,12 @@ Function CurrentAreaStatus() Export
 EndFunction
 
 Procedure AreaUpdate() Export
-	
-	If Not SeparationUsed() Then 
+
+	If Not SeparationUsed() Then
 		Return;
 	EndIf;
-	
-	Query = New Query;
+
+	Query = New Query();
 	Query.Text =
 	"SELECT
 	|	DataAreas.Ref AS Ref,
@@ -53,11 +53,11 @@ Procedure AreaUpdate() Export
 	|	DataAreas.DataAreaStatus = VALUE(Enum.DataAreaStatus.AreaPreparation)
 	|	AND NOT DataAreas.DeletionMark
 	|	AND DataAreas.Code > 0";
-	
+
 	QueryResult = Query.Execute();
-	
+
 	CurrentArea = QueryResult.Select();
-	
+
 	While CurrentArea.Next() Do
 		// Change area
 		AreaSettings = New Structure("ID", CurrentArea.Code);
@@ -86,13 +86,13 @@ Procedure AreaUpdate() Export
 		// logout area
 		AreaSettings = New Structure("ID", 0);
 		SetSeparationParameters(AreaSettings);
-		
+
 		CurrentAreaObject = CurrentArea.Ref.GetObject();
 		CurrentAreaObject.DataAreaStatus = Enums.DataAreaStatus.Working;
 		CurrentAreaObject.Write();
-		
+
 	EndDo;
-	
+
 EndProcedure
 
 Function CurrentAreaID() Export
@@ -101,7 +101,7 @@ EndFunction
 
 Function GetCurrencyMovementType_Legal() Export
 	Query = New Query();
-	Query.Text = 
+	Query.Text =
 	"SELECT
 	|	CurrencyMovementType.Ref
 	|FROM

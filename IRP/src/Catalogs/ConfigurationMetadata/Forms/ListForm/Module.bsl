@@ -1,4 +1,3 @@
-
 #Region FormCommandsEventHandlers
 
 &AtClient
@@ -7,4 +6,3 @@ Procedure RefillMetadata(Command)
 EndProcedure
 
 #EndRegion
-

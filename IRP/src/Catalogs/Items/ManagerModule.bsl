@@ -1,38 +1,37 @@
 Function GetArrayOfItemKeysByItem(Item) Export
-	Query = New Query(
-			"SELECT ALLOWED
-			|	ItemKeys.Ref
-			|FROM
-			|	Catalog.ItemKeys AS ItemKeys
-			|WHERE
-			|	ItemKeys.Item = &Item");
+	Query = New Query("SELECT ALLOWED
+					  |	ItemKeys.Ref
+					  |FROM
+					  |	Catalog.ItemKeys AS ItemKeys
+					  |WHERE
+					  |	ItemKeys.Item = &Item");
 	Query.SetParameter("Item", Item);
 	Return Query.Execute().Unload().UnloadColumn("Ref");
 EndFunction
 
 Function GetTableOfItemKeysInfoByItems(Items) Export
-	Query = New Query;
+	Query = New Query();
 	Query.Text = "SELECT
-		|	ItemKeys.Ref AS ItemKey,
-		|	CASE
-		|		WHEN ItemKeys.Unit = VALUE(Catalog.Units.EmptyRef)
-		|			THEN ItemKeys.Item.Unit
-		|		ELSE ItemKeys.Unit
-		|	END AS Unit,
-		|	ItemKeys.Unit AS ItemKeyUnit,
-		|	ItemKeys.Item.Unit AS ItemUnit,
-		|	NOT ItemKeys.Specification = VALUE(Catalog.Specifications.EmptyRef) AS hasSpecification,
-		|	ItemKeys.Item,
-		|	ItemKeys.AffectPricingMD5
-		|FROM
-		|	Catalog.ItemKeys AS ItemKeys
-		|WHERE
-		|	NOT ItemKeys.DeletionMark
-		|	AND
-		|	NOT ItemKeys.Item.DeletionMark
-		|	AND ItemKeys.Item In (&Items)";
-	
+				 |	ItemKeys.Ref AS ItemKey,
+				 |	CASE
+				 |		WHEN ItemKeys.Unit = VALUE(Catalog.Units.EmptyRef)
+				 |			THEN ItemKeys.Item.Unit
+				 |		ELSE ItemKeys.Unit
+				 |	END AS Unit,
+				 |	ItemKeys.Unit AS ItemKeyUnit,
+				 |	ItemKeys.Item.Unit AS ItemUnit,
+				 |	NOT ItemKeys.Specification = VALUE(Catalog.Specifications.EmptyRef) AS hasSpecification,
+				 |	ItemKeys.Item,
+				 |	ItemKeys.AffectPricingMD5
+				 |FROM
+				 |	Catalog.ItemKeys AS ItemKeys
+				 |WHERE
+				 |	NOT ItemKeys.DeletionMark
+				 |	AND
+				 |	NOT ItemKeys.Item.DeletionMark
+				 |	AND ItemKeys.Item In (&Items)";
+
 	Query.SetParameter("Items", Items);
 	Return Query.Execute().Unload();
-	
+
 EndFunction

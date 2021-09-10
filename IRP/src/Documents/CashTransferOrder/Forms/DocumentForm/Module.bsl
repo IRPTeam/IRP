@@ -15,7 +15,7 @@ EndProcedure
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	LibraryLoader.RegisterLibrary(Object, ThisObject, Currencies_GetDeclaration(Object, ThisObject));
-	
+
 	DocCashTransferOrderServer.OnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
 	If Not ValueIsFilled(Object.Ref) Then
 		Object.SendUUID = New UUID();
@@ -96,7 +96,8 @@ EndProcedure
 
 &AtClient
 Procedure SendFinancialMovementTypeStartChoice(Item, ChoiceData, StandardProcessing)
-	DocCashTransferOrderClient.FinancialMovementTypeStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+	DocCashTransferOrderClient.FinancialMovementTypeStartChoice(Object, ThisObject, Item, ChoiceData,
+		StandardProcessing);
 EndProcedure
 
 &AtClient
@@ -106,7 +107,8 @@ EndProcedure
 
 &AtClient
 Procedure ReceiveFinancialMovementTypeStartChoice(Item, ChoiceData, StandardProcessing)
-	DocCashTransferOrderClient.FinancialMovementTypeStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+	DocCashTransferOrderClient.FinancialMovementTypeStartChoice(Object, ThisObject, Item, ChoiceData,
+		StandardProcessing);
 EndProcedure
 
 &AtClient
@@ -184,17 +186,18 @@ EndProcedure
 Function Currencies_GetDeclaration(Object, Form)
 	Declaration = LibraryLoader.GetDeclarationInfo();
 	Declaration.LibraryName = "LibraryCurrencies";
-	
+
 	LibraryLoader.AddActionHandler(Declaration, "Currencies_OnOpen", "OnOpen", Form);
 	LibraryLoader.AddActionHandler(Declaration, "Currencies_AfterWriteAtServer", "AfterWriteAtServer", Form);
 	LibraryLoader.AddActionHandler(Declaration, "Currencies_AfterWrite", "AfterWrite", Form);
 	LibraryLoader.AddActionHandler(Declaration, "Currencies_NotificationProcessing", "NotificationProcessing", Form);
-	
+
 	ArrayOfItems_MainTableAmount = New Array();
 	ArrayOfItems_MainTableAmount.Add(Form.Items.SendAmount);
 	ArrayOfItems_MainTableAmount.Add(Form.Items.ReceiveAmount);
-	LibraryLoader.AddActionHandler(Declaration, "Currencies_MainTableAmountOnChange", "OnChange", ArrayOfItems_MainTableAmount);
-	
+	LibraryLoader.AddActionHandler(Declaration, "Currencies_MainTableAmountOnChange", "OnChange",
+		ArrayOfItems_MainTableAmount);
+
 	ArrayOfItems_Header = New Array();
 	ArrayOfItems_Header.Add(Form.Items.SendCurrency);
 	ArrayOfItems_Header.Add(Form.Items.ReceiveCurrency);
@@ -203,7 +206,7 @@ Function Currencies_GetDeclaration(Object, Form)
 	ArrayOfItems_Header.Add(Form.Items.Sender);
 	ArrayOfItems_Header.Add(Form.Items.Receiver);
 	LibraryLoader.AddActionHandler(Declaration, "Currencies_HeaderOnChange", "OnChange", ArrayOfItems_Header);
-	
+
 	LibraryData = New Structure();
 	LibraryData.Insert("Version", "3.0");
 	LibraryLoader.PutData(Declaration, LibraryData);
@@ -221,7 +224,7 @@ EndProcedure
 Procedure Currencies_AfterWriteAtServer(CurrentObject, WriteParameters, AddInfo = Undefined) Export
 	CurrenciesClientServer.AfterWriteAtServer(Object, ThisObject, CurrentObject, WriteParameters, AddInfo);
 EndProcedure
-	
+
 &AtClient
 Procedure Currencies_AfterWrite(WriteParameters, AddInfo = Undefined) Export
 	CurrenciesClientServer.AfterWrite(Object, ThisObject, WriteParameters, AddInfo);
@@ -294,18 +297,10 @@ EndProcedure
 
 &AtServer
 Procedure Currencies_FillCurrencyTable(RowKey, Currency, AgreementInfo) Export
-	CurrenciesServer.FillCurrencyTable(Object, 
-	                                   Object.Date, 
-	                                   Object.Company, 
-	                                   Object.SendCurrency, 
-	                                   Object.SendUUID,
-	                                   AgreementInfo);
-	CurrenciesServer.FillCurrencyTable(Object, 
-	                                   Object.Date, 
-	                                   Object.Company, 
-	                                   Object.ReceiveCurrency, 
-	                                   Object.ReceiveUUID,
-	                                   AgreementInfo);
+	CurrenciesServer.FillCurrencyTable(Object, Object.Date, Object.Company, Object.SendCurrency, Object.SendUUID,
+		AgreementInfo);
+	CurrenciesServer.FillCurrencyTable(Object, Object.Date, Object.Company, Object.ReceiveCurrency, Object.ReceiveUUID,
+		AgreementInfo);
 EndProcedure
 
 &AtServer
@@ -347,7 +342,7 @@ EndProcedure
 &AtClient
 Procedure GeneratedFormCommandActionByName(Command) Export
 	ExternalCommandsClient.GeneratedFormCommandActionByName(Object, ThisObject, Command.Name);
-	GeneratedFormCommandActionByNameServer(Command.Name);	
+	GeneratedFormCommandActionByNameServer(Command.Name);
 EndProcedure
 
 &AtServer

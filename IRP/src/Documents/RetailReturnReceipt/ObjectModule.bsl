@@ -1,7 +1,7 @@
 Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	If DataExchange.Load Then
 		Return;
-	EndIf;	
+	EndIf;
 
 	ThisObject.DocumentAmount = ThisObject.ItemList.Total("TotalAmount");
 EndProcedure
@@ -9,7 +9,7 @@ EndProcedure
 Procedure OnWrite(Cancel)
 	If DataExchange.Load Then
 		Return;
-	EndIf;	
+	EndIf;
 EndProcedure
 
 Procedure BeforeDelete(Cancel)
@@ -18,12 +18,12 @@ Procedure BeforeDelete(Cancel)
 	EndIf;
 EndProcedure
 
-Procedure Posting(Cancel, PostingMode)	
-	PostingServer.Post(ThisObject, Cancel, PostingMode, ThisObject.AdditionalProperties);	
+Procedure Posting(Cancel, PostingMode)
+	PostingServer.Post(ThisObject, Cancel, PostingMode, ThisObject.AdditionalProperties);
 EndProcedure
 
-Procedure UndoPosting(Cancel)	
-	UndopostingServer.Undopost(ThisObject, Cancel, ThisObject.AdditionalProperties);	
+Procedure UndoPosting(Cancel)
+	UndopostingServer.Undopost(ThisObject, Cancel, ThisObject.AdditionalProperties);
 EndProcedure
 
 Procedure Filling(FillingData, FillingText, StandardProcessing)
@@ -39,24 +39,24 @@ Procedure OnCopy(CopiedObject)
 	LinkedTables.Add(TaxList);
 	LinkedTables.Add(Currencies);
 	LinkedTables.Add(SerialLotNumbers);
-	DocumentsServer.SetNewTableUUID(ItemList, LinkedTables);	
+	DocumentsServer.SetNewTableUUID(ItemList, LinkedTables);
 EndProcedure
 
 Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 	If DocumentsServer.CheckItemListStores(ThisObject) Then
-		Cancel = True;	
+		Cancel = True;
 	EndIf;
-	
+
 	If Not SerialLotNumbersServer.CheckFilling(ThisObject) Then
 		Cancel = True;
-	EndIf;	
-	
+	EndIf;
+
 	ItemList_TotalAmount = ThisObject.ItemList.Total("TotalAmount");
 	Payments_Amount = ThisObject.Payments.Total("Amount");
-	If  ItemList_TotalAmount <> Payments_Amount  Then
-		Cancel = True;		
-		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_079, 
-		Format(Payments_Amount, "NFD=2; NN=;"), Format(ItemList_TotalAmount, "NFD=2; NN=;")));
+	If ItemList_TotalAmount <> Payments_Amount Then
+		Cancel = True;
+		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_079, Format(Payments_Amount, "NFD=2; NN=;"),
+			Format(ItemList_TotalAmount, "NFD=2; NN=;")));
 	EndIf;
-	
+
 EndProcedure

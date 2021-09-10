@@ -62,12 +62,10 @@ Procedure OwnerSelectChange()
 		Object.SerialLotNumberOwner = ThisObject[OwnerSelect];
 	EndIf;
 EndProcedure
-
-
 &AtServer
 Procedure FillParamsOnCreate()
-	OwnerSelect = "Manual";	
-	
+	OwnerSelect = "Manual";
+
 	If Parameters.Property("ItemType") Then
 		ItemType = Parameters.ItemType;
 	EndIf;
@@ -79,7 +77,7 @@ Procedure FillParamsOnCreate()
 	EndIf;
 	If Parameters.Property("Barcode") Then
 		Barcode = Parameters.Barcode;
-	EndIf;	
+	EndIf;
 	If Not ItemType.IsEmpty() Then
 		Items.OwnerSelect.ChoiceList.Add("ItemType", ItemType);
 		OwnerSelect = "ItemType";
@@ -101,7 +99,4 @@ Procedure FillParamsOnCreate()
 		Items.OwnerSelect.ChoiceList.Delete(0);
 	EndIf;
 EndProcedure
-
-
-
 #EndRegion

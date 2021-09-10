@@ -15,16 +15,16 @@ EndFunction
 Function GetFileStorageInfo(URLAlias)
 	Query = New Query();
 	Query.Text =
-		"SELECT
-		|	FileStoragesInfo.Description AS PathForSave,
-		|	FileStoragesInfo.URLAlias AS URLAlias
-		|FROM
-		|	Catalog.FileStoragesInfo AS FileStoragesInfo
-		|WHERE
-		|	FileStoragesInfo.URLAlias = &URLAlias";
-	
+	"SELECT
+	|	FileStoragesInfo.Description AS PathForSave,
+	|	FileStoragesInfo.URLAlias AS URLAlias
+	|FROM
+	|	Catalog.FileStoragesInfo AS FileStoragesInfo
+	|WHERE
+	|	FileStoragesInfo.URLAlias = &URLAlias";
+
 	Query.SetParameter("URLAlias", URLAlias);
-	
+
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
 	Result = New Structure("PathForSave, URLAlias");
@@ -37,8 +37,6 @@ EndFunction
 Function GetFileFromFileStorage(PathForSave, FileName)
 	Return New BinaryData(PathForSave + ?(StrEndsWith(PathForSave, "\"), "", "\") + FileName);
 EndFunction
-
-
 Function CreateErrorResponse(HttpResponse, Message)
 	ErrorResponse = ErrorResponse();
 	ErrorResponse.Success = False;
@@ -62,7 +60,7 @@ EndFunction
 // POST
 Function FileTransferPOST(Request)
 	HttpResponse = New HTTPServiceResponse(200);
-	
+
 	FileName = "";
 	Storage = "";
 	URLParameters = New Map(Request.URLParameters);
@@ -73,27 +71,27 @@ Function FileTransferPOST(Request)
 	If Not ValueIsFilled(FileName) Or Not ValueIsFilled(Storage) Then
 		Return CreateErrorResponse(HttpResponse, R().S_014);
 	EndIf;
-	
+
 	FileStorageInfo = GetFileStorageInfo(Storage);
 	If Not ValueIsFilled(FileStorageInfo.PathForSave) Then
 		Return CreateErrorResponse(HttpResponse, R().S_015);
 	EndIf;
-	
+
 	GetUnusedFiles = Request.QueryOptions.Get("get_unused_files");
 	If GetUnusedFiles <> Undefined Then
 		Try
-			Return CreateSuccessResponse(HttpResponse,
-				New Structure("ArrayOfUnusedFiles", IntegrationServer.GetArrayOfUnusedFiles(FileStorageInfo.PathForSave)));
+			Return CreateSuccessResponse(HttpResponse, New Structure("ArrayOfUnusedFiles",
+				IntegrationServer.GetArrayOfUnusedFiles(FileStorageInfo.PathForSave)));
 		Except
 			Return CreateErrorResponse(HttpResponse, String(ErrorDescription()));
 		EndTry;
 	EndIf;
-	
+
 	DeleteUnusedFiles = Request.QueryOptions.Get("delete_unused_files");
 	If DeleteUnusedFiles <> Undefined Then
 		Try
-			IntegrationServer.DeleteUnusedFiles(FileStorageInfo.PathForSave
-				, CommonFunctionsServer.DeserializeJSON(Request.GetBodyAsString()).ArrayOfFilesID);
+			IntegrationServer.DeleteUnusedFiles(FileStorageInfo.PathForSave, CommonFunctionsServer.DeserializeJSON(
+				Request.GetBodyAsString()).ArrayOfFilesID);
 			Return CreateSuccessResponse(HttpResponse);
 		Except
 			Return CreateErrorResponse(HttpResponse, String(ErrorDescription()));
@@ -110,23 +108,23 @@ Function FileTransferPOST(Request)
 			Return CreateErrorResponse(HttpResponse, String(ErrorDescription()));
 		EndTry;
 	EndIf;
-	
+
 	Result = New Structure();
 	Try
-		IntegrationServer.SaveFileToFileStorage(FileStorageInfo.PathForSave, FileName
-			, PictureViewerServer.ScalePicture(Request.GetBodyAsBinaryData(), SizePxNumber));
+		IntegrationServer.SaveFileToFileStorage(FileStorageInfo.PathForSave, FileName, PictureViewerServer.ScalePicture(
+			Request.GetBodyAsBinaryData(), SizePxNumber));
 		Result.Insert("URI", FileName);
 	Except
 		Return CreateErrorResponse(HttpResponse, String(ErrorDescription()));
 	EndTry;
-	
+
 	Return CreateSuccessResponse(HttpResponse, Result);
 EndFunction
 
 // GET
 Function FileTransferGET(Request)
 	HttpResponse = New HTTPServiceResponse(200);
-	
+
 	FileName = "";
 	Storage = "";
 	URLParameters = New Map(Request.URLParameters);
@@ -137,14 +135,14 @@ Function FileTransferGET(Request)
 	If Not ValueIsFilled(Storage) Then
 		Return CreateErrorResponse(HttpResponse, R().S_014);
 	EndIf;
-	
+
 	FileStorageInfo = GetFileStorageInfo(Storage);
 	If Not ValueIsFilled(FileStorageInfo.PathForSave) Then
 		Return CreateErrorResponse(HttpResponse, R().S_015);
 	EndIf;
-	
-	If StrEndsWith(Upper(TrimAll(Request.RelativeURL)), "JPEG") 
-		Or StrEndsWith(Upper(TrimAll(Request.RelativeURL)), "JPG") Then
+
+	If StrEndsWith(Upper(TrimAll(Request.RelativeURL)), "JPEG") Or StrEndsWith(Upper(TrimAll(Request.RelativeURL)),
+		"JPG") Then
 		HttpResponse.Headers.Insert("Content-type", "image/jpg");
 	ElsIf StrEndsWith(Upper(TrimAll(Request.RelativeURL)), "PNG") Then
 		HttpResponse.Headers.Insert("Content-type", "image/PNG");
@@ -157,14 +155,14 @@ Function FileTransferGET(Request)
 	Else
 		HttpResponse.Headers.Insert("Content-type", "text/plain");
 	EndIf;
-	
+
 	Try
-		BinaryData = GetFileFromFileStorage(FileStorageInfo.PathForSave, FileName + StrReplace(URLParameters.Get("*"), "/", "\"));
+		BinaryData = GetFileFromFileStorage(FileStorageInfo.PathForSave, FileName + StrReplace(URLParameters.Get("*"),
+			"/", "\"));
 	Except
 		Return CreateErrorResponse(HttpResponse, String(ErrorDescription()));
 	EndTry;
-	
+
 	HttpResponse.SetBodyFromBinaryData(BinaryData);
 	Return HttpResponse;
 EndFunction
-

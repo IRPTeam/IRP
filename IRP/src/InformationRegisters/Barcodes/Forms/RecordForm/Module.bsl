@@ -4,22 +4,22 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 		ItemFilter = Parameters.Item;
 		UseItemFilter = True;
 	EndIf;
-	
+
 	If UseItemFilter Then
-		ChoiceParameterLinks = New Array;
+		ChoiceParameterLinks = New Array();
 		For Each ChoiceParameterLink In Items.ItemKey.ChoiceParameterLinks Do
 			ChoiceParameterLinks.Add(ChoiceParameterLink);
 		EndDo;
 		ChoiceParameterLinks.Add(New ChoiceParameterLink("Filter.Item", "ItemFilter"));
 		Items.ItemKey.ChoiceParameterLinks = New FixedArray(ChoiceParameterLinks);
 	EndIf;
-	
+
 	ItemKeyItem = ServiceSystemServer.GetObjectAttribute(Record.ItemKey, "Item");
-	
+
 	If Not ValueIsFilled(Record.Unit) And ValueIsFilled(Record.ItemKey) Then
 		Record.Unit = CatItemsServer.GetItemKeyUnit(Record.ItemKey);
 	EndIf;
-	
+
 EndProcedure
 
 &AtServer
@@ -32,4 +32,3 @@ Procedure ItemKeyOnChange(Item)
 	ItemKeyItem = ServiceSystemServer.GetObjectAttribute(Record.ItemKey, "Item");
 	Record.Unit = CatItemsServer.GetItemKeyUnit(Record.ItemKey);
 EndProcedure
-

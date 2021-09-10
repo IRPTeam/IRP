@@ -9,28 +9,20 @@ EndProcedure
 Procedure SetListFilters(List, QueryFilters) Export
 	Filters = List.Filter.Items;
 	For Each Filter In QueryFilters Do
-		SetFilterItem(Filters,
-						Filter.FieldName,
-						Filter.Value,
-						Filter.DataCompositionComparisonType);
+		SetFilterItem(Filters, Filter.FieldName, Filter.Value, Filter.DataCompositionComparisonType);
 	EndDo;
 EndProcedure
 
-Procedure SetFilterItem(FilterItems,
-		Val FieldName,
-		Val RightValue,
-		Val ComparisonType,
-		Val Use = True) Export
-	
+Procedure SetFilterItem(FilterItems, Val FieldName, Val RightValue, Val ComparisonType, Val Use = True) Export
+
 	If ComparisonType = Undefined Then
 		ComparisonType = DataCompositionComparisonType.Equal;
 	EndIf;
-	
+
 	Field = New DataCompositionField(FieldName);
 	FilterItem = Undefined;
 	For Each Element In FilterItems Do
-		If TypeOf(Element) = Type("DataCompositionFilterItem")
-			And Element.LeftValue = Field Then
+		If TypeOf(Element) = Type("DataCompositionFilterItem") And Element.LeftValue = Field Then
 			FilterItem = Element;
 			Break;
 		EndIf;
@@ -38,12 +30,12 @@ Procedure SetFilterItem(FilterItems,
 	If FilterItem = Undefined Then
 		FilterItem = FilterItems.Add(Type("DataCompositionFilterItem"));
 	EndIf;
-	
+
 	FilterItem.LeftValue = Field;
 	FilterItem.Use = Use;
 	FilterItem.ComparisonType = ComparisonType;
 	FilterItem.RightValue = RightValue;
-	
+
 EndProcedure
 
 Function CompositionComparisonTypeToComparisonType(CompositionComparisonType) Export
@@ -62,7 +54,7 @@ Function ObjectHasProperty(Object, Property) Export
 	If TypeOf(Object) = Type("Structure") Then
 		Return Object.Property(Property);
 	EndIf;
-	
+
 	NewUUID = New UUID();
 	Str = New Structure(Property, NewUUID);
 	FillPropertyValues(Str, Object);
@@ -95,52 +87,52 @@ Procedure DeleteFromAddInfo(AddInfo, Key) Export
 	If TypeOf(AddInfo) = Type("Structure") And AddInfo.Property(Key) Then
 		AddInfo.Delete(Key);
 	EndIf;
-EndProcedure	
+EndProcedure
 
 Function GetStructureOfProperty(Object, AddInfo = Undefined) Export
-	
+
 	ServerData = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "ServerData");
 	If ServerData = Undefined Then
 		MetaDataStructure = ServiceSystemServer.GetMetaDataStructure(Object.Ref);
 	Else
 		MetaDataStructure = ServerData.MetaDataStructure;
-	EndIf;	
-	
+	EndIf;
+
 	CacheObject = New Structure();
 	CacheObject.Insert("Attributes", MetaDataStructure.Attributes);
 
 	FillPropertyValues(CacheObject.Attributes, Object);
 
 	CacheObject.Insert("TabularSections", New Array());
-	
+
 	For Each TabularSectionMap In MetaDataStructure.TabularSections Do
 		TabularSection = TabularSectionMap.Value;
 		CacheRows = New Map();
 		For Each Row In Object[TabularSection.Name] Do
 			NewRow = New Structure();
 			For Each Attribute In TabularSection.Attributes Do
-				NewRow.Insert(Attribute.Key);	
+				NewRow.Insert(Attribute.Key);
 			EndDo;
 			CacheRows.Insert(Row.LineNumber, NewRow);
-			FillPropertyValues(CacheRows[Row.LineNumber], Row); 
+			FillPropertyValues(CacheRows[Row.LineNumber], Row);
 		EndDo;
 		CacheObject.Insert(TabularSection.Name, CacheRows);
 		CacheObject.TabularSections.Add(TabularSection.Name);
 	EndDo;
-	
+
 	Return CacheObject;
 EndFunction
 
 Procedure FillStructureInObject(Structure, Object) Export
-	
+
 	FillPropertyValues(Object, Structure.Attributes);
-		
+
 	For Each TabularSection In Structure.TabularSections Do
 		CacheRows = Structure[TabularSection];
 		For Each Row In Object[TabularSection] Do
 			If CacheRows[Row.LineNumber] = Undefined Then
 				Continue;
-			EndIf;	
+			EndIf;
 			FillPropertyValues(Row, CacheRows[Row.LineNumber]);
 		EndDo;
 	EndDo;

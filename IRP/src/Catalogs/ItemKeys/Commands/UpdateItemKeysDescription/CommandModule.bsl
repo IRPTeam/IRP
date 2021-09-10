@@ -1,4 +1,3 @@
-
 &AtClient
 Procedure CommandProcessing(CommandParameter, CommandExecuteParameters)
 	UpdateAllDescriptions();
@@ -14,6 +13,6 @@ Procedure UpdateAllDescriptions()
 		Catalogs.ItemKeys.UpdateDescriptions(ItemKey, DescriptionUpdated);
 		If DescriptionUpdated Then
 			ItemKey.Write();
-		EndIf;			
+		EndIf;
 	EndDo;
 EndProcedure

@@ -40,15 +40,15 @@ Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
 	If ThisObject.RecordType <> "ItemType" Then
 		CurrentObject.ItemType = Undefined;
 	EndIf;
-	
+
 	If ThisObject.RecordType <> "Item" Then
 		CurrentObject.Item = Undefined;
 	EndIf;
-	
+
 	If ThisObject.RecordType <> "ItemKey" Then
 		CurrentObject.ItemKey = Undefined;
 	EndIf;
-	
+
 	If ThisObject.RecordType <> "Agreement" Then
 		CurrentObject.Agreement = Undefined;
 	EndIf;
@@ -71,4 +71,3 @@ EndProcedure
 Procedure TaxOnChange(Item)
 	FillTaxRateChoiceList();
 EndProcedure
-

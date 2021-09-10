@@ -11,7 +11,7 @@ Procedure BeforeWrite(Cancel)
 			Row.SearchLiteral = String(Row.Value);
 		EndIf;
 	EndDo;
-	
+
 	ThisObject.SpecificationAffectPricingMD5.Clear();
 	
 	// Unique MD5
@@ -19,11 +19,11 @@ Procedure BeforeWrite(Cancel)
 		ValueTable = New ValueTable();
 		ValueTable.Columns.Add("SpecificationUniqueMD5");
 		ValueTable.Columns.Add("Item");
-		
+
 		NewRow = ValueTable.Add();
 		NewRow.SpecificationUniqueMD5 = ThisObject.Specification.UniqueMD5;
 		NewRow.Item = String(ThisObject.Item.UUID());
-		
+
 		ThisObject.UniqueMD5 = AddAttributesAndPropertiesServer.GetMD5ForValueTable(ValueTable);
 		If ValueIsFilled(UniqueID.FindRefByUniqueMD5(ThisObject, ThisObject.UniqueMD5)) Then
 			Cancel = True;
@@ -34,7 +34,7 @@ Procedure BeforeWrite(Cancel)
 		ValueTable.Columns.Add("Property");
 		ValueTable.Columns.Add("Value");
 		ValueTable.Columns.Add("Item");
-			
+
 		If Not ThisObject.AddAttributes.Count() Then
 			NewRow = ValueTable.Add();
 			NewRow.Property = ChartsOfCharacteristicTypes.AddAttributeAndProperty.EmptyRef();
@@ -48,29 +48,29 @@ Procedure BeforeWrite(Cancel)
 				NewRow.Item = ThisObject.Item;
 			EndDo;
 		EndIf;
-			
+
 		ThisObject.UniqueMD5 = AddAttributesAndPropertiesServer.GetMD5ByAddAttributes(ValueTable);
 		If ValueIsFilled(UniqueID.FindRefByUniqueMD5(ThisObject, ThisObject.UniqueMD5)) Then
 			Cancel = True;
 			CommonFunctionsClientServer.ShowUsersMessage(R().Error_065);
 		EndIf;
 	EndIf;
-	
+
 	If Cancel Then
 		Return;
 	EndIf;
-	
+
 	If AdditionalProperties.Property("SynchronizeAffectPricingMD5")
 		And AdditionalProperties.SynchronizeAffectPricingMD5 Then
-		
+
 		If AdditionalProperties.Property("AffectPricingMD5") Then
 			SetAffectPricingMD5(AdditionalProperties.AffectPricingMD5);
 		EndIf;
-		
+
 		If AdditionalProperties.Property("TableOfAffectPricingMD5") Then
 			SetSpecificationAffectPricingMD5(AdditionalProperties.TableOfAffectPricingMD5);
 		EndIf;
-		
+
 	Else
 		If ValueIsFilled(ThisObject.Item) And ValueIsFilled(ThisObject.Item.ItemType) Then
 			If ValueIsFilled(ThisObject.Specification) Then
@@ -78,43 +78,35 @@ Procedure BeforeWrite(Cancel)
 				// Set
 				If ThisObject.Specification.Type = Enums.SpecificationType.Set Then
 					SetSpecificationAffectPricingMD5(
-						Catalogs.ItemKeys.CalculateMD5ForSet(ThisObject.Specification.DataQuantity.Unload()
-							, ThisObject.Specification.DataSet.Unload()
-							, ThisObject.Item
-							, ThisObject.Item.ItemType));
+						Catalogs.ItemKeys.CalculateMD5ForSet(ThisObject.Specification.DataQuantity.Unload(),
+						ThisObject.Specification.DataSet.Unload(), ThisObject.Item, ThisObject.Item.ItemType));
 				EndIf;
 				
 				// Bundle	
 				If ThisObject.Specification.Type = Enums.SpecificationType.Bundle Then
 					SetSpecificationAffectPricingMD5(
-						Catalogs.ItemKeys.CalculateMD5ForBundle(ThisObject.Specification.DataQuantity.Unload()
-							, ThisObject.Specification.DataSet.Unload()
-							, ThisObject.Item
-							, ThisObject.Item.ItemType));
+						Catalogs.ItemKeys.CalculateMD5ForBundle(ThisObject.Specification.DataQuantity.Unload(),
+						ThisObject.Specification.DataSet.Unload(), ThisObject.Item, ThisObject.Item.ItemType));
 				EndIf;
-				
+
 			Else
 				
 				// Regular
 				SetAffectPricingMD5(
-					AddAttributesAndPropertiesServer.GetAffectPricingMD5(ThisObject.Item
-						, ThisObject.Item.ItemType
-						, ThisObject.AddAttributes.Unload()));
+					AddAttributesAndPropertiesServer.GetAffectPricingMD5(ThisObject.Item, ThisObject.Item.ItemType,
+					ThisObject.AddAttributes.Unload()));
 			EndIf;
 		EndIf;
 	EndIf;
-	
+
 	Catalogs.ItemKeys.UpdateDescriptions(ThisObject);
-	
+
 EndProcedure
-
-
-
 Procedure OnWrite(Cancel)
 	If DataExchange.Load Then
 		Return;
 	EndIf;
-	
+
 	RefreshReusableValues();
 EndProcedure
 

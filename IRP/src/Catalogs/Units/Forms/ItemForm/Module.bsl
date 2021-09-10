@@ -1,4 +1,3 @@
-
 #Region FormEvents
 
 &AtServer
@@ -54,7 +53,7 @@ EndProcedure
 
 &AtServer
 Function ListLockAttribute()
-	Array = New Array;
+	Array = New Array();
 	Array.Add("Item");
 	Array.Add("BasisUnit");
 	Array.Add("Quantity");

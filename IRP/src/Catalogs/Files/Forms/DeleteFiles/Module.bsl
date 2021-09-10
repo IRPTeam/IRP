@@ -37,10 +37,10 @@ Procedure FindUnusedFilesAtClient()
 	If Not PictureViewerServer.IsPictureFile(ThisObject.Volume) Then
 		Raise StrTemplate(R().Error_034, Volume);
 	EndIf;
-	
+
 	IntegrationSettings = PictureViewerServer.GetIntegrationSettingsPicture(Volume);
 	ArrayOfUnusedFilesID = PictureViewerClient.GetArrayOfUnusedFiles(IntegrationSettings.POSTIntegrationSettings);
-	
+
 	ThisObject.Files.Clear();
 	For Each ItemOfArray In ArrayOfUnusedFilesID Do
 		NewRow = ThisObject.Files.Add();
@@ -57,19 +57,17 @@ Procedure FilesIDSelection(Item, RowSelected, Field, StandardProcessing)
 		Return;
 	EndIf;
 	IntegrationSettings = PictureViewerServer.GetIntegrationSettingsPicture(Volume);
-	PictureTempAddress = PictureViewerClient.GetPictureAndPutToTempStorage(ThisObject.UUID
-			, CurrentData.FileURI
-			, IntegrationSettings[CurrentData.GETSettingName]);
-	
-	OpenForm("CommonForm.PictureViewerFormRegular"
-		, New Structure("PictureTempAddress", PictureTempAddress)
-		, ThisObject, , , , , FormWindowOpeningMode.LockOwnerWindow);
+	PictureTempAddress = PictureViewerClient.GetPictureAndPutToTempStorage(ThisObject.UUID, CurrentData.FileURI,
+		IntegrationSettings[CurrentData.GETSettingName]);
+
+	OpenForm("CommonForm.PictureViewerFormRegular", New Structure("PictureTempAddress", PictureTempAddress),
+		ThisObject, , , , , FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
 
 &AtClient
 Procedure DeleteUnusedFiles(Command)
 	IntegrationSettings = PictureViewerServer.GetIntegrationSettingsPicture(Volume);
-	
+
 	ArrayOfUnusedFilesID = PrepareDeletionFilesID();
 	For Each Row In ArrayOfUnusedFilesID Do
 		PictureViewerClient.DeleteUnusedFiles(Row.ArrayOfFilesID, IntegrationSettings[Row.POSTSettingName]);

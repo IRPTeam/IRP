@@ -57,6 +57,7 @@
     <types>DocumentRef.PhysicalCountByLocation</types>
     <types>DocumentRef.StockAdjustmentAsSurplus</types>
     <types>DocumentRef.StockAdjustmentAsWriteOff</types>
+    <types>CatalogRef.PartnerItems</types>
     <types>DocumentRef.Bundling</types>
     <types>DocumentRef.RetailSalesReceipt</types>
     <types>CatalogRef.Items</types>
@@ -87,6 +88,5 @@
     <types>CatalogRef.ChequeBonds</types>
     <types>CatalogRef.BusinessUnits</types>
     <types>DocumentRef.CashExpense</types>
-    <types>CatalogRef.PartnerItems</types>
   </type>
 </mdclass:DefinedType>

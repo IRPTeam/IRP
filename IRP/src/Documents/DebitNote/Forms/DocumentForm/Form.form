@@ -132,6 +132,7 @@
         <type>UsualGroup</type>
         <extInfo xsi:type="form:UsualGroupExtInfo">
           <group>HorizontalIfPossible</group>
+          <behavior>Auto</behavior>
           <showLeftMargin>true</showLeftMargin>
           <united>true</united>
           <throughAlign>Auto</throughAlign>
@@ -261,6 +262,7 @@
         <type>UsualGroup</type>
         <extInfo xsi:type="form:UsualGroupExtInfo">
           <group>HorizontalIfPossible</group>
+          <behavior>Auto</behavior>
           <showLeftMargin>true</showLeftMargin>
           <united>true</united>
           <throughAlign>Auto</throughAlign>
@@ -290,6 +292,7 @@
       <type>UsualGroup</type>
       <extInfo xsi:type="form:UsualGroupExtInfo">
         <group>Vertical</group>
+        <behavior>Auto</behavior>
         <showLeftMargin>true</showLeftMargin>
         <united>true</united>
         <throughAlign>Auto</throughAlign>
@@ -310,10 +313,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.Company</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.Company</segments>
           </dataPath>
           <handlers>
             <event>OnChange</event>
@@ -374,10 +375,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Description</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Description</segments>
           </dataPath>
           <extendedTooltip>
             <name>DescriptionExtendedTooltip</name>
@@ -442,6 +441,7 @@
         <type>UsualGroup</type>
         <extInfo xsi:type="form:UsualGroupExtInfo">
           <group>Vertical</group>
+          <behavior>Auto</behavior>
           <showLeftMargin>true</showLeftMargin>
           <united>true</united>
           <throughAlign>Auto</throughAlign>
@@ -471,6 +471,7 @@
       <type>UsualGroup</type>
       <extInfo xsi:type="form:UsualGroupExtInfo">
         <group>HorizontalIfPossible</group>
+        <behavior>Auto</behavior>
         <showLeftMargin>true</showLeftMargin>
         <united>true</united>
         <throughAlign>Auto</throughAlign>
@@ -504,6 +505,7 @@
     <type>UsualGroup</type>
     <extInfo xsi:type="form:UsualGroupExtInfo">
       <group>Vertical</group>
+      <behavior>Auto</behavior>
       <showLeftMargin>true</showLeftMargin>
       <united>true</united>
       <throughAlign>Auto</throughAlign>
@@ -536,10 +538,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.Transactions.LineNumber</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.Transactions.LineNumber</segments>
           </dataPath>
           <extendedTooltip>
             <name>TransactionsLineNumberExtendedTooltip</name>
@@ -584,10 +584,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.Transactions.Partner</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.Transactions.Partner</segments>
           </dataPath>
           <handlers>
             <event>OnChange</event>
@@ -648,10 +646,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.Transactions.LegalName</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.Transactions.LegalName</segments>
           </dataPath>
           <handlers>
             <event>OnChange</event>
@@ -712,10 +708,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.Transactions.Agreement</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.Transactions.Agreement</segments>
           </dataPath>
           <handlers>
             <event>OnChange</event>
@@ -825,10 +819,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.Transactions.BasisDocument</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.Transactions.BasisDocument</segments>
           </dataPath>
           <extendedTooltip>
             <name>TransactionsBasisDocumentExtendedTooltip</name>
@@ -876,10 +868,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.Transactions.Currency</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.Transactions.Currency</segments>
           </dataPath>
           <handlers>
             <event>OnChange</event>
@@ -932,10 +922,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.Transactions.Amount</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.Transactions.Amount</segments>
           </dataPath>
           <handlers>
             <event>OnChange</event>
@@ -988,10 +976,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.Transactions.ProfitLossCenter</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.Transactions.ProfitLossCenter</segments>
           </dataPath>
           <extendedTooltip>
             <name>TransactionsProfitLossCenterExtendedTooltip</name>
@@ -1040,10 +1026,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.Transactions.RevenueType</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.Transactions.RevenueType</segments>
           </dataPath>
           <extendedTooltip>
             <name>TransactionsRevenueTypeExtendedTooltip</name>
@@ -1100,10 +1084,8 @@
           <userVisible>
             <common>true</common>
           </userVisible>
-          <dataPath xsi:type="form:MultiLanguageDataPath">
-            <paths xsi:type="form:DataPath">
-              <segments>Object.Transactions.AdditionalAnalytic</segments>
-            </paths>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.Transactions.AdditionalAnalytic</segments>
           </dataPath>
           <extendedTooltip>
             <name>TransactionsAdditionalAnalyticExtendedTooltip</name>
@@ -1356,10 +1338,8 @@
             <userVisible>
               <common>true</common>
             </userVisible>
-            <dataPath xsi:type="form:MultiLanguageDataPath">
-              <paths xsi:type="form:DataPath">
-                <segments>Object.Currencies.MovementType</segments>
-              </paths>
+            <dataPath xsi:type="form:DataPath">
+              <segments>Object.Currencies.MovementType</segments>
             </dataPath>
             <extendedTooltip>
               <name>TransactionsCurrenciesMovementTypeExtendedTooltip</name>
@@ -1409,10 +1389,8 @@
             <userVisible>
               <common>true</common>
             </userVisible>
-            <dataPath xsi:type="form:MultiLanguageDataPath">
-              <paths xsi:type="form:DataPath">
-                <segments>Object.Currencies.MovementType.Type</segments>
-              </paths>
+            <dataPath xsi:type="form:DataPath">
+              <segments>Object.Currencies.MovementType.Type</segments>
             </dataPath>
             <extendedTooltip>
               <name>TransactionsCurrenciesMovementTypeTypeExtendedTooltip</name>
@@ -1462,10 +1440,8 @@
             <userVisible>
               <common>true</common>
             </userVisible>
-            <dataPath xsi:type="form:MultiLanguageDataPath">
-              <paths xsi:type="form:DataPath">
-                <segments>Object.Currencies.CurrencyFrom</segments>
-              </paths>
+            <dataPath xsi:type="form:DataPath">
+              <segments>Object.Currencies.CurrencyFrom</segments>
             </dataPath>
             <extendedTooltip>
               <name>TransactionsCurrenciesCurrencyFromExtendedTooltip</name>
@@ -1515,10 +1491,8 @@
             <userVisible>
               <common>true</common>
             </userVisible>
-            <dataPath xsi:type="form:MultiLanguageDataPath">
-              <paths xsi:type="form:DataPath">
-                <segments>Object.Currencies.MovementType.Currency</segments>
-              </paths>
+            <dataPath xsi:type="form:DataPath">
+              <segments>Object.Currencies.MovementType.Currency</segments>
             </dataPath>
             <extendedTooltip>
               <name>TransactionsCurrenciesMovementTypeCurrencyExtendedTooltip</name>
@@ -1568,10 +1542,8 @@
             <userVisible>
               <common>true</common>
             </userVisible>
-            <dataPath xsi:type="form:MultiLanguageDataPath">
-              <paths xsi:type="form:DataPath">
-                <segments>Object.Currencies.ShowReverseRate</segments>
-              </paths>
+            <dataPath xsi:type="form:DataPath">
+              <segments>Object.Currencies.ShowReverseRate</segments>
             </dataPath>
             <extendedTooltip>
               <name>TransactionsCurrenciesShowReverseRateExtendedTooltip</name>
@@ -1622,10 +1594,8 @@
             <userVisible>
               <common>true</common>
             </userVisible>
-            <dataPath xsi:type="form:MultiLanguageDataPath">
-              <paths xsi:type="form:DataPath">
-                <segments>Object.Currencies.RatePresentation</segments>
-              </paths>
+            <dataPath xsi:type="form:DataPath">
+              <segments>Object.Currencies.RatePresentation</segments>
             </dataPath>
             <handlers>
               <event>OnChange</event>
@@ -1678,10 +1648,8 @@
             <userVisible>
               <common>true</common>
             </userVisible>
-            <dataPath xsi:type="form:MultiLanguageDataPath">
-              <paths xsi:type="form:DataPath">
-                <segments>Object.Currencies.Multiplicity</segments>
-              </paths>
+            <dataPath xsi:type="form:DataPath">
+              <segments>Object.Currencies.Multiplicity</segments>
             </dataPath>
             <handlers>
               <event>OnChange</event>
@@ -1734,10 +1702,8 @@
             <userVisible>
               <common>true</common>
             </userVisible>
-            <dataPath xsi:type="form:MultiLanguageDataPath">
-              <paths xsi:type="form:DataPath">
-                <segments>Object.Currencies.Amount</segments>
-              </paths>
+            <dataPath xsi:type="form:DataPath">
+              <segments>Object.Currencies.Amount</segments>
             </dataPath>
             <handlers>
               <event>OnChange</event>
@@ -2045,10 +2011,8 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:MultiLanguageDataPath">
-          <paths xsi:type="form:DataPath">
-            <segments>Object.Number</segments>
-          </paths>
+        <dataPath xsi:type="form:DataPath">
+          <segments>Object.Number</segments>
         </dataPath>
         <extendedTooltip>
           <name>NumberExtendedTooltip</name>
@@ -2097,10 +2061,8 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:MultiLanguageDataPath">
-          <paths xsi:type="form:DataPath">
-            <segments>Object.Date</segments>
-          </paths>
+        <dataPath xsi:type="form:DataPath">
+          <segments>Object.Date</segments>
         </dataPath>
         <handlers>
           <event>OnChange</event>
@@ -2195,10 +2157,8 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:MultiLanguageDataPath">
-          <paths xsi:type="form:DataPath">
-            <segments>Object.Branch</segments>
-          </paths>
+        <dataPath xsi:type="form:DataPath">
+          <segments>Object.Branch</segments>
         </dataPath>
         <extendedTooltip>
           <name>BranchExtendedTooltip</name>
@@ -2247,10 +2207,8 @@
         <userVisible>
           <common>true</common>
         </userVisible>
-        <dataPath xsi:type="form:MultiLanguageDataPath">
-          <paths xsi:type="form:DataPath">
-            <segments>Object.Author</segments>
-          </paths>
+        <dataPath xsi:type="form:DataPath">
+          <segments>Object.Author</segments>
         </dataPath>
         <extendedTooltip>
           <name>AuthorExtendedTooltip</name>
@@ -2347,7 +2305,7 @@
     </extendedTooltip>
     <type>Pages</type>
     <extInfo xsi:type="form:PagesGroupExtInfo">
-      <pagesRepresentation>TabsOnTop</pagesRepresentation>
+      <pagesRepresentation>Auto</pagesRepresentation>
       <currentRowUse>Auto</currentRowUse>
     </extInfo>
   </items>

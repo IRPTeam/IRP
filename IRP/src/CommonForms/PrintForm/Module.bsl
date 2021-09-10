@@ -1,4 +1,3 @@
-
 #Region FormEventHandlers
 
 &AtClient
@@ -30,6 +29,4 @@ EndProcedure
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	Result = Parameters.Result;
 EndProcedure
-
-
 #EndRegion

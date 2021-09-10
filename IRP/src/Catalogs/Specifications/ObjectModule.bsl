@@ -1,11 +1,10 @@
-
 Procedure BeforeWrite(Cancel)
 	If DataExchange.Load Then
 		Return;
 	EndIf;
-	
+
 	Query = New Query();
-	Query.Text = 
+	Query.Text =
 	"SELECT
 	|	SpecificationsDataSet.Key AS Key,
 	|	SpecificationsDataSet.Item AS Item,
@@ -47,7 +46,7 @@ Procedure OnWrite(Cancel)
 	If DataExchange.Load Then
 		Return;
 	EndIf;
-	
+
 	If Not (ThisObject.AdditionalProperties.Property("SynchronizeAffectPricingMD5")
 		And Not ThisObject.AdditionalProperties.SynchronizeAffectPricingMD5) Then
 		Catalogs.ItemKeys.SynchronizeAffectPricingMD5BySpecification(ThisObject.Ref);

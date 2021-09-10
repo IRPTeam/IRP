@@ -1,4 +1,3 @@
-
 &AtClient
 Procedure CommandProcessing(CommandParameter, CommandExecuteParameters)
 	For Each Ref In CommandParameter Do

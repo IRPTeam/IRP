@@ -8,10 +8,8 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:MultiLanguageDataPath">
-      <paths xsi:type="form:DataPath">
-        <segments>Object.Code</segments>
-      </paths>
+    <dataPath xsi:type="form:DataPath">
+      <segments>Object.Code</segments>
     </dataPath>
     <extendedTooltip>
       <name>CodeExtendedTooltip</name>
@@ -60,10 +58,8 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:MultiLanguageDataPath">
-      <paths xsi:type="form:DataPath">
-        <segments>Object.Item</segments>
-      </paths>
+    <dataPath xsi:type="form:DataPath">
+      <segments>Object.Item</segments>
     </dataPath>
     <extendedTooltip>
       <name>ItemExtendedTooltip</name>
@@ -113,10 +109,8 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:MultiLanguageDataPath">
-      <paths xsi:type="form:DataPath">
-        <segments>Object.Item.ItemType</segments>
-      </paths>
+    <dataPath xsi:type="form:DataPath">
+      <segments>Object.Item.ItemType</segments>
     </dataPath>
     <extendedTooltip>
       <name>ItemTypeExtendedTooltip</name>
@@ -162,10 +156,8 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:MultiLanguageDataPath">
-      <paths xsi:type="form:DataPath">
-        <segments>Object.AffectPricingMD5</segments>
-      </paths>
+    <dataPath xsi:type="form:DataPath">
+      <segments>Object.AffectPricingMD5</segments>
     </dataPath>
     <extendedTooltip>
       <name>AffectPricingMD5ExtendedTooltip</name>

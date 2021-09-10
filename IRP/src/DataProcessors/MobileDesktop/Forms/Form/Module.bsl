@@ -1,4 +1,3 @@
-
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	ExtensionServer.AddAttributesFromExtensions(ThisObject, DataProcessors.MobileDesktop, Items.PageAddInfo);
@@ -13,18 +12,18 @@ EndProcedure
 
 &AtServer
 Procedure ItemOnChangeAtServer()
-	Query = New Query;
-	Query.Text = 
-		"SELECT
-		|	ItemKeys.Ref AS Ref
-		|FROM
-		|	Catalog.ItemKeys AS ItemKeys
-		|WHERE
-		|	ItemKeys.Item = &Item
-		|	AND NOT ItemKeys.DeletionMark";
-	
+	Query = New Query();
+	Query.Text =
+	"SELECT
+	|	ItemKeys.Ref AS Ref
+	|FROM
+	|	Catalog.ItemKeys AS ItemKeys
+	|WHERE
+	|	ItemKeys.Item = &Item
+	|	AND NOT ItemKeys.DeletionMark";
+
 	Query.SetParameter("Item", Item);
-	
+
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
 	If QuerySelection.Next() Then
@@ -32,7 +31,7 @@ Procedure ItemOnChangeAtServer()
 	Else
 		ItemKey = Catalogs.ItemKeys.EmptyRef();
 	EndIf;
-	
+
 EndProcedure
 
 &AtServer
@@ -42,7 +41,7 @@ Procedure SetPictureView()
 		If ArrayOfFiles[0].isPreviewSet Then
 			PictureDecoration = GetURL(ArrayOfFiles[0], "Preview");
 		EndIf;
-		
+
 	Else
 		ArrayOfFiles = PictureViewerServer.GetPicturesByObjectRefAsArrayOfRefs(ItemKey);
 		If ArrayOfFiles.Count() And ArrayOfFiles[0].isPreviewSet Then
@@ -57,7 +56,7 @@ EndProcedure
 &AtClient
 Procedure ItemOnChange(ItemData)
 	ItemOnChangeAtServer();
-	Row = New Structure;
+	Row = New Structure();
 	Row.Insert("Item", Item);
 	Row.Insert("ItemKey", ItemKey);
 	Row.Insert("Barcode", "");
@@ -70,7 +69,7 @@ EndProcedure
 
 &AtClient
 Procedure ItemKeyOnChange(ItemData)
-	Row = New Structure;
+	Row = New Structure();
 	Row.Insert("Item", Item);
 	Row.Insert("ItemKey", ItemKey);
 	Row.Insert("Barcode", "");
@@ -84,9 +83,9 @@ EndProcedure
 &AtClient
 Procedure SearchByBarcode(Command, Barcode = "")
 	AddInfo = New Structure();
-	#If MobileClient Then
-		AddInfo.Insert("MobileModule", ThisObject);
-	#EndIf
+#If MobileClient Then
+	AddInfo.Insert("MobileModule", ThisObject);
+#EndIf
 	DocumentsClient.SearchByBarcode(Barcode, Object, ThisObject, ThisObject, , AddInfo);
 EndProcedure
 
@@ -96,19 +95,20 @@ Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
 	NotifyParameters = New Structure();
 	NotifyParameters.Insert("Form", ThisObject);
 	NotifyParameters.Insert("Object", Object);
-	
+
 	If AdditionalParameters.FoundedItems.Count() Then
-		#If MobileClient Then
+#If MobileClient Then
 		MultimediaTools.CloseBarcodeScanning();
-		#EndIf
+#EndIf
 	Else
-		#If NOT MobileClient Then
+#If Not MobileClient Then
 		For Each Row In AdditionalParameters.Barcodes Do
 			CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().S_019, Row));
 		EndDo;
-		#EndIf
-	EndIf;
-	
+#EndIf
+	EndIf
+	;
+
 	For Each Row In AdditionalParameters.FoundedItems Do
 		FillData(Row);
 	EndDo;
@@ -143,8 +143,7 @@ EndProcedure
 Procedure ShowStatus()
 	Items.OK.Representation = ButtonRepresentation.Text;
 	Items.NotOK.Representation = ButtonRepresentation.Text;
-	If Not ValueIsFilled(Item) OR
-		Not ValueIsFilled(ItemKey) Then
+	If Not ValueIsFilled(Item) Or Not ValueIsFilled(ItemKey) Then
 		Return;
 	EndIf;
 	Reg = InformationRegisters.BarcodeScanInfoCheck.CreateRecordSet();
@@ -160,8 +159,7 @@ EndProcedure
 
 &AtServer
 Procedure WriteReg(Status)
-	If Not ValueIsFilled(Item) OR
-		Not ValueIsFilled(ItemKey) Then
+	If Not ValueIsFilled(Item) Or Not ValueIsFilled(ItemKey) Then
 		Return;
 	EndIf;
 	Reg = InformationRegisters.BarcodeScanInfoCheck.CreateRecordSet();
@@ -173,7 +171,7 @@ Procedure WriteReg(Status)
 	NewReg.Status = Status;
 	NewReg.User = SessionParameters.CurrentUser;
 	Reg.Write(True);
-	
+
 	Items.OK.Representation = ?(Status, ButtonRepresentation.PictureAndText, ButtonRepresentation.Text);
 	Items.NotOK.Representation = ?(Not Status, ButtonRepresentation.PictureAndText, ButtonRepresentation.Text);
 EndProcedure

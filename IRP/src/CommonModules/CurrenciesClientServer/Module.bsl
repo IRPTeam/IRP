@@ -1,18 +1,16 @@
-
 #Region EVENT_HANDLERS
 
 #Region OnOpen
 
 Procedure OnOpen(Object, Form, Cancel, AddInfo = Undefined) Export
-	LibraryLoader.CallHandler(GetCallHandlerParameters(Object, Form, "Currencies_OnOpen", AddInfo), 
-	Cancel);
+	LibraryLoader.CallHandler(GetCallHandlerParameters(Object, Form, "Currencies_OnOpen", AddInfo), Cancel);
 	LibraryData = GetLibraryData(Object, Form, AddInfo);
-	
+
 	If Not ValueIsFilled(Object.Ref) Then
 		Form.Currencies_HeaderOnChange(Undefined, AddInfo);
 		Return;
 	EndIf;
-	
+
 	If LibraryData.Version = "1.0" Then
 		OnOpen_1_0(Object, Form, Cancel, LibraryData, AddInfo);
 	ElsIf LibraryData.Version = "2.0" Then
@@ -44,7 +42,7 @@ EndProcedure
 
 Procedure AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters, AddInfo = Undefined) Export
 	LibraryLoader.CallHandler(GetCallHandlerParameters(Object, Form, "Currencies_AfterWriteAtServer", AddInfo),
-	CurrentObject, WriteParameters);
+		CurrentObject, WriteParameters);
 	LibraryData = GetLibraryData(Object, Form, AddInfo);
 	If LibraryData.Version = "1.0" Then
 		AfterWriteAtServer_1_0(Object, Form, CurrentObject, WriteParameters, LibraryData, AddInfo);
@@ -76,8 +74,8 @@ EndProcedure
 #Region AfterWrite
 
 Procedure AfterWrite(Object, Form, WriteParameters, AddInfo = Undefined) Export
-	LibraryLoader.CallHandler(GetCallHandlerParameters(Object, Form, "Currencies_AfterWrite", AddInfo), 
-	AddInfo, WriteParameters);
+	LibraryLoader.CallHandler(GetCallHandlerParameters(Object, Form, "Currencies_AfterWrite", AddInfo), AddInfo,
+		WriteParameters);
 	LibraryData = GetLibraryData(Object, Form, AddInfo);
 	If LibraryData.Version = "1.0" Then
 		AfterWrite_1_0(Object, Form, WriteParameters, LibraryData, AddInfo);
@@ -116,8 +114,8 @@ EndProcedure
 
 Procedure NotificationProcessing(Object, Form, EventName, Parameter, Source, AddInfo = Undefined) Export
 	LibraryLoader.CallHandler(GetCallHandlerParameters(Object, Form, "Currencies_NotificationProcessing", AddInfo),
-	EventName, Parameter, Source);
-	
+		EventName, Parameter, Source);
+
 	If Upper(EventName) <> Upper("CallbackHandler") Then
 		Return;
 	EndIf;
@@ -144,7 +142,8 @@ Procedure NotificationProcessing_1_0(Object, Form, EventName, Parameter, Source,
 	For Each TableName In ArrayOfTableNames Do
 		Names = ReplacePropertyNames(TableName, LibraryData);
 		For Each Row In Object[TableName] Do
-			Form.Currencies_FillCurrencyTable(Row.Key, ExtractCurrency(Object, Row), ExtractAgreement(Object, Form, Row));
+			Form.Currencies_FillCurrencyTable(Row.Key, ExtractCurrency(Object, Row), ExtractAgreement(Object, Form,
+				Row));
 			Form.Currencies_CalculateAmount(Row[Names.Columns.Amount], Row.Key);
 		EndDo;
 	EndDo;
@@ -157,7 +156,7 @@ Procedure NotificationProcessing_1_0(Object, Form, EventName, Parameter, Source,
 		Form.Currencies_SetVisibleCurrenciesRow(Undefined);
 		Return;
 	EndIf;
-	
+
 	Form.Currencies_UpdateRatePresentation();
 	Form.Currencies_SetVisibleCurrenciesRow(CurrentData.Key);
 EndProcedure
@@ -181,8 +180,8 @@ EndProcedure
 
 Procedure MainTableOnActivateRow(Object, Form, Item, Addinfo = Undefined) Export
 	LibraryLoader.CallHandler(GetCallHandlerParameters(Object, Form, "Currencies_MainTableOnActivateRow", AddInfo),
-	Item);
-	
+		Item);
+
 	CurrentData = Form.Items[?(TypeOf(Item) = Type("String"), Item, Item.Name)].CurrentData;
 	If CurrentData = Undefined Then
 		Form.Currencies_SetVisibleCurrenciesRow(Undefined);
@@ -193,8 +192,8 @@ EndProcedure
 
 Procedure MainTableBeforeDeleteRow(Object, Form, Item, AddInfo = Undefined) Export
 	LibraryLoader.CallHandler(GetCallHandlerParameters(Object, Form, "Currencies_MainTableBeforeDeleteRow", AddInfo),
-	Item);
-	
+		Item);
+
 	CurrentData = Form.Items[Item.Name].CurrentData;
 	If CurrentData = Undefined Then
 		Return;
@@ -203,13 +202,13 @@ Procedure MainTableBeforeDeleteRow(Object, Form, Item, AddInfo = Undefined) Expo
 EndProcedure
 
 Procedure MainTableColumnOnChange(Object, Form, Item, AddInfo = Undefined) Export
-	LibraryLoader.CallHandler(GetCallHandlerParameters(Object, Form, "Currencies_MainTableColumnOnChange", AddInfo), 
-	Item);
-	
+	LibraryLoader.CallHandler(GetCallHandlerParameters(Object, Form, "Currencies_MainTableColumnOnChange", AddInfo),
+		Item);
+
 	TableName = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "Currencies_CurrentTableName");
 	LibraryData = GetLibraryData(Object, Form, AddInfo);
 	Names = ReplacePropertyNames(TableName, LibraryData);
-	
+
 	If ValueIsFilled(TableName) Then
 		CurrentData = Form.Items[TableName].CurrentData;
 	Else
@@ -219,14 +218,14 @@ Procedure MainTableColumnOnChange(Object, Form, Item, AddInfo = Undefined) Expor
 		Form.Currencies_SetVisibleCurrenciesRow(Undefined);
 		Return;
 	EndIf;
-	
+
 	AgreementInfo = Undefined;
 	If CurrentData.Property("Agreement") Then
 		AgreementInfo = CatAgreementsServer.GetAgreementInfo(CurrentData.Agreement);
 	EndIf;
-	
+
 	Form.Currencies_ClearCurrenciesTable(CurrentData.Key);
-	Form.Currencies_FillCurrencyTable(CurrentData.Key,  ExtractCurrency(Object, CurrentData), AgreementInfo);
+	Form.Currencies_FillCurrencyTable(CurrentData.Key, ExtractCurrency(Object, CurrentData), AgreementInfo);
 	Form.Currencies_CalculateAmount(CurrentData[Names.Columns.Amount], CurrentData.Key);
 	Form.Currencies_UpdateRatePresentation();
 	Form.Currencies_SetVisibleCurrenciesRow(CurrentData.Key);
@@ -235,9 +234,8 @@ EndProcedure
 #Region HeaderOnChange
 
 Procedure HeaderOnChange(Object, Form, Item, AddInfo = Undefined) Export
-	LibraryLoader.CallHandler(GetCallHandlerParameters(Object, Form, "Currencies_HeaderOnChange", AddInfo),
-	Item);
-	
+	LibraryLoader.CallHandler(GetCallHandlerParameters(Object, Form, "Currencies_HeaderOnChange", AddInfo), Item);
+
 	Form.Currencies_ClearCurrenciesTable(Undefined);
 	ArrayOfTableNames = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "Currencies_ArrayOfTableNames");
 	LibraryData = GetLibraryData(Object, Form, AddInfo);
@@ -256,11 +254,12 @@ Procedure HeaderOnChange_1_0(Object, Form, Item, ArrayOfTableNames, LibraryData,
 	For Each TableName In ArrayOfTableNames Do
 		Names = ReplacePropertyNames(TableName, LibraryData);
 		For Each Row In Object[TableName] Do
-			Form.Currencies_FillCurrencyTable(Row.Key, ExtractCurrency(Object, Row), ExtractAgreement(Object, Form, Row));
+			Form.Currencies_FillCurrencyTable(Row.Key, ExtractCurrency(Object, Row), ExtractAgreement(Object, Form,
+				Row));
 			Form.Currencies_CalculateAmount(Row[Names.Columns.Amount], Row.Key);
 		EndDo;
 	EndDo;
-	
+
 	TableName = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "Currencies_CurrentTableName");
 	If Not ValueIsFilled(TableName) Then
 		Return;
@@ -277,7 +276,8 @@ EndProcedure
 Procedure HeaderOnChange_2_0(Object, Form, Item, ArrayOfTableNames, LibraryData, AddInfo)
 	For Each TableName In ArrayOfTableNames Do
 		Names = ReplacePropertyNames(TableName, LibraryData);
-		Form.Currencies_FillCurrencyTable(Form.UUID, ExtractCurrency(Object, Object), ExtractAgreement(Object, Form, Object));
+		Form.Currencies_FillCurrencyTable(Form.UUID, ExtractCurrency(Object, Object), ExtractAgreement(Object, Form,
+			Object));
 		Form.Currencies_CalculateAmount(Object[TableName].Total(Names.Columns.Amount), Form.UUID);
 	EndDo;
 	Form.Currencies_UpdateRatePresentation();
@@ -297,9 +297,8 @@ EndProcedure
 
 Procedure MainTableAmountOnChange(Object, Form, Item, AddInfo = Undefined) Export
 	LibraryLoader.CallHandler(
-	GetCallHandlerParameters(Object, Form, "Currencies_MainTableAmountOnChange", AddInfo),
-	Item);
-	
+	GetCallHandlerParameters(Object, Form, "Currencies_MainTableAmountOnChange", AddInfo), Item);
+
 	LibraryData = GetLibraryData(Object, Form, AddInfo);
 	If LibraryData.Version = "1.0" Then
 		MainTableAmountOnChange_1_0(Object, Form, Item, LibraryData, AddInfo);
@@ -419,4 +418,3 @@ Procedure UpdateRatePresentation_CurrencyInRow(Object) Export
 EndProcedure
 
 #EndRegion
-

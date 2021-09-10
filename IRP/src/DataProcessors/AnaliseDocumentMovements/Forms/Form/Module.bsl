@@ -1,4 +1,3 @@
-
 &AtClient
 Procedure FillMovements(Command)
 	FillMovementsAtServer();
@@ -17,24 +16,24 @@ Procedure FillMovementsAtServer()
 			EndIf;
 		EndDo;
 	EndDo;
-	
+
 	For Each Document In Metadata.Documents Do
 		Ref = Documents[Document.Name].EmptyRef();
 		ParametersStructure = Documents[Document.Name].GetInformationAboutMovements(Ref);
-		
-		ParametersInfo = New Array;
+
+		ParametersInfo = New Array();
 		For Each Param In ParametersStructure.QueryParameters Do
 			ParametersInfo.Add(Param.Key + ": " + TypeOf(Param.Value));
 		EndDo;
 		ParametersInfo = StrConcat(ParametersInfo, Chars.LF);
-		
+
 		TotalQueryArray = ParametersStructure.QueryTextsSecondaryTables;
 		For Each El In ParametersStructure.QueryTextsMasterTables Do
 			TotalQueryArray.Add(El);
 		EndDo;
 		TotalQueryArray.Add("SELECT NULL");
-		QuerySchema = New QuerySchema;
-		QuerySchema.SetQueryText(StrConcat(TotalQueryArray, Chars.LF+ Chars.LF + ";" + Chars.LF + Chars.LF));
+		QuerySchema = New QuerySchema();
+		QuerySchema.SetQueryText(StrConcat(TotalQueryArray, Chars.LF + Chars.LF + ";" + Chars.LF + Chars.LF));
 		For Each Batch In QuerySchema.QueryBatch Do
 			If TypeOf(Batch) = Type("QuerySchemaTableDropQuery") Then
 				Continue;
@@ -43,16 +42,16 @@ Procedure FillMovementsAtServer()
 			If Not FindRows.Count() Then
 				Continue;
 			EndIf;
-			Conditions = New Array;
+			Conditions = New Array();
 			For Index = 0 To Batch.Operators.Count() - 1 Do
 				Operator = Batch.Operators[Index];
 				RecordType = "";
-				
+
 				For Each SelectedField In Operator.SelectedFields Do
 					If Lower(SelectedField) = Lower("VALUE(AccumulationRecordType.Receipt)") Then
 						FindRows[0].Receipt = True;
 						RecordType = "Receipt";
-					ElsIf 	Lower(SelectedField) = Lower("VALUE(AccumulationRecordType.Expense)") Then
+					ElsIf Lower(SelectedField) = Lower("VALUE(AccumulationRecordType.Expense)") Then
 						FindRows[0].Expense = True;
 						RecordType = "Expense";
 					EndIf;
@@ -68,7 +67,7 @@ Procedure FillMovementsAtServer()
 			FindRows[0].Query = Batch.GetQueryText();
 			FindRows[0].Parameters = ParametersInfo;
 		EndDo;
-	
+
 	EndDo;
 EndProcedure
 
@@ -82,28 +81,28 @@ EndProcedure
 Function GenerateFeatureTemplateAtServer()
 	AllDocument = Object.Info.Unload();
 	AllDocument.GroupBy("Document");
-	
+
 	HeadTemplate = DataProcessors.AnaliseDocumentMovements.GetTemplate("FeatureTemplate").GetText();
 	RowTemplate = DataProcessors.AnaliseDocumentMovements.GetTemplate("FeatureRowTemplate").GetText();
-	
-	FeatureArray = New Array;
+
+	FeatureArray = New Array();
 	FeatureNumber = 0;
 	For Each DocumentRow In AllDocument Do
 		FeatureNumber = FeatureNumber + 1;
 		StrParam = New Structure("DocumentSynonym, DocumentName, FeatureNumber, RegisterSynonym");
-		StrParam.DocumentSynonym = Metadata.Documents[DocumentRow.Document].Synonym; 
+		StrParam.DocumentSynonym = Metadata.Documents[DocumentRow.Document].Synonym;
 		StrParam.DocumentName = DocumentRow.Document;
 		StrParam.FeatureNumber = FeatureNumber;
 		StrParam.RegisterSynonym = "";
-		
+
 		FeatureArray.Add(ReplaceTemplate(HeadTemplate, StrParam));
-		
+
 		FindReg = Object.Info.FindRows(New Structure("Document", DocumentRow.Document));
 		For Each RegRow In FindReg Do
 			FeatureNumber = FeatureNumber + 1;
 			StrParam.FeatureNumber = FeatureNumber;
 			StrParam.RegisterSynonym = Metadata.AccumulationRegisters[RegRow.Register].Synonym;
-			
+
 			FeatureArray.Add(ReplaceTemplate(RowTemplate, StrParam));
 		EndDo;
 	EndDo;
@@ -112,9 +111,9 @@ EndFunction
 
 &AtServer
 Function ReplaceTemplate(Val Template, StrParam)
-	
+
 	For Each Elem In StrParam Do
-		Template = StrReplace(Template, "#" + Elem.Key + "#", Elem.Value);		
+		Template = StrReplace(Template, "#" + Elem.Key + "#", Elem.Value);
 	EndDo;
 	Return Template;
 EndFunction

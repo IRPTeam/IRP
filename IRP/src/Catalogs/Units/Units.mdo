@@ -224,6 +224,5 @@
       <types>CatalogRef.Items</types>
     </commandParameterType>
     <representation>Auto</representation>
-    <shortcut></shortcut>
   </commands>
 </mdclass:Catalog>

@@ -11,10 +11,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>Object.Code</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>Object.Code</segments>
       </dataPath>
       <extendedTooltip>
         <name>CodeExtendedTooltip</name>
@@ -78,6 +76,7 @@
     <type>UsualGroup</type>
     <extInfo xsi:type="form:UsualGroupExtInfo">
       <group>HorizontalIfPossible</group>
+      <behavior>Auto</behavior>
       <showLeftMargin>true</showLeftMargin>
       <united>true</united>
       <throughAlign>Auto</throughAlign>
@@ -118,10 +117,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>Roles.Use</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>Roles.Use</segments>
       </dataPath>
       <extendedTooltip>
         <name>RolesUseExtendedTooltip</name>
@@ -162,10 +159,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>Roles.Role</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>Roles.Role</segments>
       </dataPath>
       <extendedTooltip>
         <name>RolesRoleExtendedTooltip</name>
@@ -214,10 +209,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>Roles.Configuration</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>Roles.Configuration</segments>
       </dataPath>
       <extendedTooltip>
         <name>RolesConfigurationExtendedTooltip</name>
@@ -266,10 +259,8 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>Roles.Presentation</segments>
-        </paths>
+      <dataPath xsi:type="form:DataPath">
+        <segments>Roles.Presentation</segments>
       </dataPath>
       <extendedTooltip>
         <name>RolesPresentationExtendedTooltip</name>
@@ -341,6 +332,7 @@
         <autoMaxWidth>true</autoMaxWidth>
         <autoMaxHeight>true</autoMaxHeight>
         <placementArea>UserCmds</placementArea>
+        <toolTipRepresentation>Auto</toolTipRepresentation>
       </items>
       <visible>true</visible>
       <enabled>true</enabled>

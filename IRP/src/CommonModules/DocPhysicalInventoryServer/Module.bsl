@@ -27,12 +27,12 @@ EndProcedure
 
 #EndRegion
 
-#Region Public 
+#Region Public
 &AtServer
 Function GetArrayOfInstance(GenerateParameters) Export
 	Result = New Array();
 	If GenerateParameters.UseResponsiblePersonByRow Then
-		Query = New Query;
+		Query = New Query();
 		Query.Text =
 		"SELECT
 		|	PhysicalInventoryItemList.Key AS Key,
@@ -62,10 +62,10 @@ Function GetArrayOfInstance(GenerateParameters) Export
 		QuerySelection  = QueryResult.Select(QueryResultIteration.ByGroups);
 
 		While QuerySelection.Next() Do
-			Instance = New Structure("ResponsiblePerson, ItemList", QuerySelection.ResponsiblePerson, New Array);
+			Instance = New Structure("ResponsiblePerson, ItemList", QuerySelection.ResponsiblePerson, New Array());
 			QuerySelectionDetails = QuerySelection.Select();
 			While QuerySelectionDetails.Next() Do
-				ItemListRow = New Structure;
+				ItemListRow = New Structure();
 				ItemListRow.Insert("Key", QuerySelectionDetails.Key);
 				ItemListRow.Insert("ItemKey", QuerySelectionDetails.ItemKey);
 				ItemListRow.Insert("Unit", QuerySelectionDetails.Unit);
@@ -77,25 +77,25 @@ Function GetArrayOfInstance(GenerateParameters) Export
 			Result.Add(Instance);
 		EndDo;
 	Else
-		Instance = New Structure("ResponsiblePerson, ItemList", Undefined, New Array);
+		Instance = New Structure("ResponsiblePerson, ItemList", Undefined, New Array());
 		For Index = 1 To GenerateParameters.CountDocsToCreate Do
 			Result.Add(Instance);
 		EndDo;
 	EndIf;
-	
+
 	Return Result;
 EndFunction
 
 Procedure UpdatePhysicalCountByLocations(Object, Form) Export
 	Form.PhysicalCountByLocationList.Parameters.SetParameterValue("PhysicalInventoryRef", Object.Ref);
 	LinkedPhysicalCountByLocation = Documents.PhysicalCountByLocation.GetLinkedPhysicalCountByLocation(Object.Ref);
-	
+
 	For Each Row In Object.ItemList Do
 		Row.PhysicalCountByLocation = Undefined;
 		Row.PhysicalCountByLocationPresentation = Undefined;
 		Row.Locked = False;
 	EndDo;
-	
+
 	For Each Row In LinkedPhysicalCountByLocation Do
 		For Each LinkedRow In Object.ItemList.FindRows(New Structure("Key", Row.Key)) Do
 			LinkedRow.PhysicalCountByLocation = Row.Ref;
@@ -103,7 +103,7 @@ Procedure UpdatePhysicalCountByLocations(Object, Form) Export
 			LinkedRow.Locked = True;
 		EndDo;
 	EndDo;
-	
+
 	Form.Items.GroupPhysicalCountByLocation.Visible = LinkedPhysicalCountByLocation.Count() > 0;
 	Form.Items.ItemListPhysicalCountByLocationPresentation.Visible = LinkedPhysicalCountByLocation.Count() > 0;
 EndProcedure
@@ -120,14 +120,13 @@ EndProcedure
 #Region GroupTitle
 
 Procedure SetGroupItemsList(Object, Form)
-	AttributesArray = New Array;
+	AttributesArray = New Array();
 	AttributesArray.Add("Store");
 	AttributesArray.Add("Status");
 	DocumentsServer.DeleteUnavailableTitleItemNames(AttributesArray);
 	For Each Atr In AttributesArray Do
-		Form.GroupItems.Add(Atr, ?(ValueIsFilled(Form.Items[Atr].Title),
-				Form.Items[Atr].Title,
-				Object.Ref.Metadata().Attributes[Atr].Synonym + ":" + Chars.NBSp));
+		Form.GroupItems.Add(Atr, ?(ValueIsFilled(Form.Items[Atr].Title), Form.Items[Atr].Title,
+			Object.Ref.Metadata().Attributes[Atr].Synonym + ":" + Chars.NBSp));
 	EndDo;
 EndProcedure
 
@@ -160,7 +159,7 @@ Function HavePhysicalCountByLocation(PhysicalInventoryRef) Export
 		Return False;
 	EndIf;
 	Query = New Query();
-	Query.Text = 
+	Query.Text =
 	"SELECT TOP 1
 	|	PhysicalCountByLocation.Ref
 	|FROM

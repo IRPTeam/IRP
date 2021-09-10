@@ -1,22 +1,22 @@
-
 Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	If DataExchange.Load Then
 		Return;
-	EndIf;	
+	EndIf;
 
-	ThisObject.DocumentAmount = ThisObject.ItemList.Total("TotalAmount");	
-	
+	ThisObject.DocumentAmount = ThisObject.ItemList.Total("TotalAmount");
+
 	Payments_Amount = ThisObject.Payments.Total("Amount");
-	If  ThisObject.DocumentAmount <> Payments_Amount  Then
-		Cancel = True;		
-		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_095, Payments_Amount, ThisObject.DocumentAmount));
+	If ThisObject.DocumentAmount <> Payments_Amount Then
+		Cancel = True;
+		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_095, Payments_Amount,
+			ThisObject.DocumentAmount));
 	EndIf;
 EndProcedure
 
 Procedure OnWrite(Cancel)
 	If DataExchange.Load Then
 		Return;
-	EndIf;	
+	EndIf;
 EndProcedure
 
 Procedure BeforeDelete(Cancel)

@@ -3,9 +3,9 @@
 Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 	DocumentsServer.OnCreateAtServer(Object, Form, Cancel, StandardProcessing);
 	If Form.Parameters.Key.IsEmpty() Then
-		If ValueIsFilled(Object.Account) And ValueIsFilled(Object.Account.Currency)
-			And Not ValueIsFilled(Object.Currency) Then
-				Object.Currency = Object.Account.Currency;
+		If ValueIsFilled(Object.Account) And ValueIsFilled(Object.Account.Currency) And Not ValueIsFilled(
+			Object.Currency) Then
+			Object.Currency = Object.Account.Currency;
 		EndIf;
 		SetGroupItemsList(Object, Form);
 		DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
@@ -28,7 +28,7 @@ EndProcedure
 #Region GroupTitle
 
 Procedure SetGroupItemsList(Object, Form)
-	AttributesArray = New Array;
+	AttributesArray = New Array();
 	AttributesArray.Add("Company");
 	AttributesArray.Add("Account");
 	AttributesArray.Add("Currency");
@@ -36,9 +36,8 @@ Procedure SetGroupItemsList(Object, Form)
 	AttributesArray.Add("Status");
 	DocumentsServer.DeleteUnavailableTitleItemNames(AttributesArray);
 	For Each Atr In AttributesArray Do
-		Form.GroupItems.Add(Atr, ?(ValueIsFilled(Form.Items[Atr].Title),
-				Form.Items[Atr].Title,
-				Object.Ref.Metadata().Attributes[Atr].Synonym + ":" + Chars.NBSp));
+		Form.GroupItems.Add(Atr, ?(ValueIsFilled(Form.Items[Atr].Title), Form.Items[Atr].Title,
+			Object.Ref.Metadata().Attributes[Atr].Synonym + ":" + Chars.NBSp));
 	EndDo;
 EndProcedure
 

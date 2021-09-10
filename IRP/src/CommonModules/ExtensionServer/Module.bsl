@@ -1,10 +1,10 @@
-#Region Service 
+#Region Service
 
 Procedure InstallExtention(Name, ExtensionData, OverWrite = True) Export
 	If ExtensionData = Undefined Then
 		Return;
 	EndIf;
-	
+
 	ArrayExt = ConfigurationExtensions.Get(New Structure("Name", Name));
 	If ArrayExt.Count() Then
 		If Not OverWrite Then
@@ -26,20 +26,19 @@ EndProcedure
 
 Procedure AddAttributesFromExtensions(Form, MetaTypeOrRef, ItemElement = Undefined) Export
 	ElementParent = Undefined;
-	
+
 	If Not ItemElement = Undefined Then
 		If TypeOf(ItemElement) = Type("FormGroup") Then
 			If ItemElement.Type = FormGroupType.Pages Then
 				ElementParent  = Form.Items.Add("ExtAttributes", Type("FormGroup"), ItemElement);
 				ElementParent.Type = FormGroupType.Page;
 				ElementParent.Title = R().Form_029;
-			ElsIf ItemElement.Type = FormGroupType.Page
-				Or ItemElement.Type = FormGroupType.UsualGroup Then
+			ElsIf ItemElement.Type = FormGroupType.Page Or ItemElement.Type = FormGroupType.UsualGroup Then
 				ElementParent = ItemElement;
 			EndIf;
 		EndIf;
 	EndIf;
-	
+
 	ObjectMetadata = Metadata.FindByType(TypeOf(MetaTypeOrRef));
 	AttributesList = Catalogs.AddAttributeAndPropertySets.GetExtensionAttributesListByObjectMetadata(ObjectMetadata);
 	FormGroups = AddAttributesAndPropertiesServer.FormGroups(AttributesList);
@@ -49,7 +48,7 @@ Procedure AddAttributesFromExtensions(Form, MetaTypeOrRef, ItemElement = Undefin
 		EndDo;
 	EndIf;
 	AddAttributesAndPropertiesServer.CreateFormGroups(Form, FormGroups);
-	
+
 	For Each Attribute In AttributesList Do
 		If ValueIsFilled(Attribute.InterfaceGroup) Then
 			ParentName = "_" + StrReplace(Attribute.InterfaceGroup.UUID(), "-", "");
@@ -59,27 +58,27 @@ Procedure AddAttributesFromExtensions(Form, MetaTypeOrRef, ItemElement = Undefin
 		Else
 			Parent = Form;
 		EndIf;
-		
+
 		NewAttribute = Form.Items.Add(Attribute.Attribute, Type("FormField"), Parent);
 		NewAttribute.Type = FormFieldType.InputField;
 		NewAttribute.DataPath = "Object." + Attribute.Attribute;
 	EndDo;
-	
+
 	For Each TabularSection In ObjectMetadata.TabularSections Do
 		For Each Column In TabularSection.Attributes Do
-			If Not StrFind(Column.Name, "_") Then 
+			If Not StrFind(Column.Name, "_") Then
 				Continue;
 			EndIf;
 			Parent = Form.Items.Find(TabularSection.Name);
 			If Parent = Undefined Then
 				Continue;
 			EndIf;
-			
+
 			NewColumn = Form.Items.Add(Column.Name, Type("FormField"), Parent);
 			NewColumn.Type = FormFieldType.InputField;
 			NewColumn.DataPath = "Object." + TabularSection.Name + "." + Column.Name;
 		EndDo;
-	EndDo;	
+	EndDo;
 EndProcedure
 
 #EndRegion

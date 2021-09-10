@@ -21,7 +21,7 @@ Function PostingGetLockDataSource(Ref, Cancel, PostingMode, Parameters, AddInfo 
 EndFunction
 
 Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo = Undefined) Export
-	Tables = Parameters.DocumentDataTables;	
+	Tables = Parameters.DocumentDataTables;
 	QueryArray = GetQueryTextsMasterTables();
 	PostingServer.SetRegisters(Tables, Ref);
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
@@ -71,7 +71,7 @@ EndProcedure
 #EndRegion
 
 Function GetInformationAboutMovements(Ref) Export
-	Str = New Structure;
+	Str = New Structure();
 	Str.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
 	Str.Insert("QueryTextsMasterTables", GetQueryTextsMasterTables());
 	Str.Insert("QueryTextsSecondaryTables", GetQueryTextsSecondaryTables());
@@ -85,60 +85,58 @@ Function GetAdditionalQueryParameters(Ref)
 EndFunction
 
 Function GetQueryTextsSecondaryTables(Parameters = Undefined)
-	QueryArray = New Array;
+	QueryArray = New Array();
 	QueryArray.Add(OffsetOfAdvances(Parameters));
 	Return QueryArray;
 EndFunction
 
 Function GetQueryTextsMasterTables()
-	QueryArray = New Array;
+	QueryArray = New Array();
 	QueryArray.Add(T2010S_OffsetOfAdvances());
 	QueryArray.Add(T2013S_OffsetOfAging());
 	Return QueryArray;
 EndFunction
 
 Function T2010S_OffsetOfAdvances()
-	Return
-		"SELECT
-		|	*
-		|INTO T2010S_OffsetOfAdvances
-		|FROM
-		|	OffsetOfAdvances
-		|WHERE
-		|	TRUE";
+	Return "SELECT
+		   |	*
+		   |INTO T2010S_OffsetOfAdvances
+		   |FROM
+		   |	OffsetOfAdvances
+		   |WHERE
+		   |	TRUE";
 EndFunction
 
 Function T2013S_OffsetOfAging()
-	Return
-		"SELECT
-		|	*
-		|INTO T2013S_OffsetOfAging
-		|FROM
-		|	OffsetOfAging
-		|WHERE
-		|	TRUE";
+	Return "SELECT
+		   |	*
+		   |INTO T2013S_OffsetOfAging
+		   |FROM
+		   |	OffsetOfAging
+		   |WHERE
+		   |	TRUE";
 EndFunction
 
 Function OffsetOfAdvances(Parameters)
 	If Parameters = Undefined Then
 		Return CustomersAdvancesClosingQueryText();
 	EndIf;
-	
+
 	ClearSelfRecords(Parameters.Object.Ref);
-	
-	If Parameters.Property("Unposting") And Parameters.Unposting Then	
+
+	If Parameters.Property("Unposting") And Parameters.Unposting Then
 		Return CustomersAdvancesClosingQueryText();
-	Endif;
-	
+	EndIf;
+
 	OffsetOfAdvanceFull = InformationRegisters.T2010S_OffsetOfAdvances.CreateRecordSet().UnloadColumns();
 	OffsetOfAdvanceFull.Columns.Delete(OffsetOfAdvanceFull.Columns.PointInTime);
-	
+
 	OffsetOfAgingFull = InformationRegisters.T2013S_OffsetOfAging.CreateRecordSet().UnloadColumns();
 	OffsetOfAgingFull.Columns.Delete(OffsetOfAgingFull.Columns.PointInTime);
 	
 	// CustomersTransactions
 	Query = New Query();
-	Query.Text = 
+	Query.Text =
 	"SELECT
 	|	PartnerAdvances.Recorder AS Recorder,
 	|	PartnerAdvances.Recorder.Date AS RecorderDate,
@@ -213,11 +211,9 @@ Function OffsetOfAdvances(Parameters)
 	|ORDER BY
 	|	tmp.RecorderDate";
 	Query.SetParameter("BeginOfPeriod", Parameters.Object.BeginOfPeriod);
-	Query.SetParameter("EndOfPeriod"  , Parameters.Object.EndOfPeriod);
-	Query.SetParameter("Company"      , Parameters.Object.Company);
-	Query.SetParameter("Branch"       , Parameters.Object.Branch);
-	
-	
+	Query.SetParameter("EndOfPeriod", Parameters.Object.EndOfPeriod);
+	Query.SetParameter("Company", Parameters.Object.Company);
+	Query.SetParameter("Branch", Parameters.Object.Branch);
 	QueryTable = Query.Execute().Unload();
 	For Each Row In QueryTable Do
 		Parameters.Insert("RecorderPointInTime", Row.Recorder.PointInTime());
@@ -225,36 +221,36 @@ Function OffsetOfAdvances(Parameters)
 			Create_CustomersTransactions(Row.Recorder, Parameters);
 			Create_CustomersAging(Row.Recorder, Parameters);
 			OffsetOfPartnersServer.Customers_OnTransaction(Parameters);
-			
+
 			UseKeyForAdvance = False;
 			If OffsetOfPartnersServer.IsDebitCreditNote(Row.Recorder) Then
 				UseKeyForAdvance = True;
 			EndIf;
-			
+
 			Write_AdvancesAndTransactions(Row.Recorder, Parameters, OffsetOfAdvanceFull, UseKeyForAdvance);
 			Write_PartnersAging(Row.Recorder, Parameters, OffsetOfAgingFull);
 			Drop_Table(Parameters, "CustomersTransactions");
 			Drop_Table(Parameters, "Aging");
-			
+
 			Drop_Table(Parameters, "OffsetOfAdvanceFromCustomers");
 			Drop_Table(Parameters, "OffsetOfAging");
 		EndIf;
-		
+
 		If Row.IsCustomerAdvanceOrPayment Then
 			Create_AdvancesFromCustomers(Row.Recorder, Parameters);
 			Create_PaymentFromCustomers(Row.Recorder, Parameters);
 			OffsetOfPartnersServer.Customers_OnMoneyMovements(Parameters);
-			
+
 			UseKeyForAdvance = True;
 			If OffsetOfPartnersServer.IsReturn(Row.Recorder) Then
 				UseKeyForAdvance = False;
 			EndIf;
-			
+
 			Write_AdvancesAndTransactions(Row.Recorder, Parameters, OffsetOfAdvanceFull, UseKeyForAdvance);
 			Write_PartnersAging(Row.Recorder, Parameters, OffsetOfAgingFull);
 			
 			// Due as advance
-			If CommonFunctionsClientServer.ObjectHasProperty(Row.Recorder, "DueAsAdvance") 
+			If CommonFunctionsClientServer.ObjectHasProperty(Row.Recorder, "DueAsAdvance")
 				And Row.Recorder.DueAsAdvance Then
 				OffsetOfPartnersServer.Customers_DueAsAdvance(Parameters);
 				Write_AdvancesAndTransactions_DueAsAdvance(Row.Recorder, Parameters, OffsetOfAdvanceFull);
@@ -262,19 +258,19 @@ Function OffsetOfAdvances(Parameters)
 				Drop_Table(Parameters, "TransactionsBalance");
 				Drop_Table(Parameters, "DueAsAdvanceFromCustomers");
 			EndIf;
-			
+
 			Drop_Table(Parameters, "CustomersTransactions");
 			Drop_Table(Parameters, "AdvancesFromCustomers");
-			
+
 			Drop_Table(Parameters, "OffsetOfAdvanceFromCustomers");
 			Drop_Table(Parameters, "OffsetOfAging");
 		EndIf;
-		
+
 	EndDo;
-		
+
 	Query = New Query();
 	Query.TempTablesManager = Parameters.TempTablesManager;
-	Query.Text = 
+	Query.Text =
 	"SELECT
 	|	OffsetOfAdvanceFull.Period,
 	|	OffsetOfAdvanceFull.Document,
@@ -369,28 +365,27 @@ Function OffsetOfAdvances(Parameters)
 	|	tmpOffsetOfAging.Agreement,
 	|	tmpOffsetOfAging.Invoice,
 	|	tmpOffsetOfAging.PaymentDate";
-	
+
 	Query.SetParameter("OffsetOfAdvanceFull", OffsetOfAdvanceFull);
 	Query.SetParameter("OffsetOfAgingFull", OffsetOfAgingFull);
-	
-	Query.Execute(); 
-	
+
+	Query.Execute();
+
 	Return CustomersAdvancesClosingQueryText();
 EndFunction
 
 Function CustomersAdvancesClosingQueryText()
-	Return 
-		"SELECT *
-		|INTO OffsetOfAdvancesEmpty
-		|FROM
-		|	Document.VendorsAdvancesClosing AS OffsetOfAdvance
-		|WHERE
-		|	FALSE";
-EndFunction	
+	Return "SELECT *
+		   |INTO OffsetOfAdvancesEmpty
+		   |FROM
+		   |	Document.VendorsAdvancesClosing AS OffsetOfAdvance
+		   |WHERE
+		   |	FALSE";
+EndFunction
 
 Procedure ClearSelfRecords(Ref)
 	Query = New Query();
-	Query.Text = 
+	Query.Text =
 	"SELECT
 	|	R2020B_AdvancesFromCustomers.Recorder
 	|FROM
@@ -424,7 +419,7 @@ Procedure ClearSelfRecords(Ref)
 	|	R5011B_CustomersAging.Recorder";
 	Query.SetParameter("Ref", Ref);
 	QueryResults = Query.ExecuteBatch();
-	
+
 	For Each Row In QueryResults[0].Unload() Do
 		RecordSet = AccumulationRegisters.R2020B_AdvancesFromCustomers.CreateRecordSet();
 		RecordSet.Filter.Recorder.Set(Row.Recorder);
@@ -440,7 +435,7 @@ Procedure ClearSelfRecords(Ref)
 		EndDo;
 		RecordSet.Write();
 	EndDo;
-	
+
 	For Each Row In QueryResults[1].Unload() Do
 		RecordSet = AccumulationRegisters.R2021B_CustomersTransactions.CreateRecordSet();
 		RecordSet.Filter.Recorder.Set(Row.Recorder);
@@ -456,7 +451,7 @@ Procedure ClearSelfRecords(Ref)
 		EndDo;
 		RecordSet.Write();
 	EndDo;
-	
+
 	For Each Row In QueryResults[2].Unload() Do
 		RecordSet = AccumulationRegisters.R5011B_CustomersAging.CreateRecordSet();
 		RecordSet.Filter.Recorder.Set(Row.Recorder);
@@ -487,7 +482,7 @@ EndProcedure
 Procedure Create_CustomersTransactions(Recorder, Parameters)
 	Query = New Query();
 	Query.TempTablesManager = Parameters.TempTablesManager;
-	Query.Text = 
+	Query.Text =
 	"SELECT
 	|	PartnerTransactions.Period,
 	|	PartnerTransactions.Company,
@@ -566,10 +561,10 @@ Procedure Create_CustomersTransactions(Recorder, Parameters)
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|DROP tmpCustomersTransactions";
-	Query.SetParameter("Period", New Boundary(Parameters.RecorderPointInTime, BoundaryType.Including));	
+	Query.SetParameter("Period", New Boundary(Parameters.RecorderPointInTime, BoundaryType.Including));
 	Query.SetParameter("Recorder", Recorder);
 	Query.SetParameter("IsDebitCreditNote", OffsetOfPartnersServer.IsDebitCreditNote(Recorder));
-	Query.Execute(); 
+	Query.Execute();
 EndProcedure
 
 // Aging
@@ -584,7 +579,7 @@ EndProcedure
 Procedure Create_CustomersAging(Recorder, Parameters)
 	Query = New Query();
 	Query.TempTablesManager = Parameters.TempTablesManager;
-	Query.Text = 
+	Query.Text =
 	"SELECT
 	|	R5011B_CustomersAging.Period,
 	|	R5011B_CustomersAging.Company,
@@ -608,7 +603,7 @@ EndProcedure
 Procedure Create_PaymentFromCustomers(Recorder, Parameters)
 	Query = New Query();
 	Query.TempTablesManager = Parameters.TempTablesManager;
-	Query.Text = 
+	Query.Text =
 	"SELECT
 	|	PartnerTransactions.Period,
 	|	PartnerTransactions.Company,
@@ -638,7 +633,7 @@ Procedure Create_PaymentFromCustomers(Recorder, Parameters)
 	|	PartnerTransactions.TransactionDocument,
 	|	PartnerTransactions.Key";
 	Query.SetParameter("Recorder", Recorder);
-	Query.Execute(); 
+	Query.Execute();
 EndProcedure
 
 // AdvancesFromCustomers
@@ -653,7 +648,7 @@ EndProcedure
 Procedure Create_AdvancesFromCustomers(Recorder, Parameters)
 	Query = New Query();
 	Query.TempTablesManager = Parameters.TempTablesManager;
-	Query.Text = 
+	Query.Text =
 	"SELECT
 	|	PartnerAdvances.Period,
 	|	PartnerAdvances.Company,
@@ -694,7 +689,7 @@ EndProcedure
 Procedure Write_AdvancesAndTransactions_DueAsAdvance(Recorder, Parameters, OffsetOfAdvanceFull)
 	Query = New Query();
 	Query.TempTablesManager = Parameters.TempTablesManager;
-	Query.Text = 
+	Query.Text =
 	"SELECT
 	|	DueAsAdvanceFromCustomers.Period,
 	|	DueAsAdvanceFromCustomers.Company,
@@ -715,54 +710,52 @@ Procedure Write_AdvancesAndTransactions_DueAsAdvance(Recorder, Parameters, Offse
 	|	DueAsAdvanceFromCustomers AS DueAsAdvanceFromCustomers";
 	Query.SetParameter("CustomersAdvancesClosing", Parameters.Object.Ref);
 	Query.SetParameter("Document", Recorder);
-	
+
 	QueryTable = Query.Execute().Unload();
-	
+
 	RecordSet_AdvancesFromCustomers = AccumulationRegisters.R2020B_AdvancesFromCustomers.CreateRecordSet();
 	RecordSet_AdvancesFromCustomers.Filter.Recorder.Set(Recorder);
 	TableAdvances = RecordSet_AdvancesFromCustomers.UnloadColumns();
 	TableAdvances.Columns.Delete(TableAdvances.Columns.PointInTime);
-	
-	
 	RecordSet_CustomersTransactions = AccumulationRegisters.R2021B_CustomersTransactions.CreateRecordSet();
 	RecordSet_CustomersTransactions.Filter.Recorder.Set(Recorder);
 	TableTransactions = RecordSet_CustomersTransactions.UnloadColumns();
 	TableTransactions.Columns.Delete(TableTransactions.Columns.PointInTime);
-	
+
 	For Each Row In QueryTable Do
-				
+
 		FillPropertyValues(OffsetOfAdvanceFull.Add(), Row);
-		
+
 		NewRow_Advances = TableAdvances.Add();
 		FillPropertyValues(NewRow_Advances, Row);
 		NewRow_Advances.RecordType = AccumulationRecordType.Expense;
 		NewRow_Advances.Basis = Row.AdvancesDocument;
-			
+
 		NewRow_Transactions = TableTransactions.Add();
 		FillPropertyValues(NewRow_Transactions, Row);
 		NewRow_Transactions.RecordType = AccumulationRecordType.Expense;
 		NewRow_Transactions.Basis = Row.TransactionDocument;
-	
+
 	EndDo;
 	
 	// Currency calculation
 	CurrenciesParameters = New Structure();
-	
+
 	PostingDataTables = New Map();
-	
-	PostingDataTables.Insert(RecordSet_AdvancesFromCustomers,   New Structure("RecordSet", TableAdvances));
+
+	PostingDataTables.Insert(RecordSet_AdvancesFromCustomers, New Structure("RecordSet", TableAdvances));
 	PostingDataTables.Insert(RecordSet_CustomersTransactions, New Structure("RecordSet", TableTransactions));
-	
+
 	ArrayOfPostingInfo = New Array();
 	For Each DataTable In PostingDataTables Do
 		ArrayOfPostingInfo.Add(DataTable);
 	EndDo;
-	
+
 	CurrenciesParameters.Insert("Object", Recorder);
 	CurrenciesParameters.Insert("ArrayOfPostingInfo", ArrayOfPostingInfo);
-	
+
 	CurrenciesServer.PreparePostingDataTables(CurrenciesParameters, Undefined);
-	
+
 	For Each ItemOfPostingInfo In ArrayOfPostingInfo Do
 		If TypeOf(ItemOfPostingInfo.Key) = Type("AccumulationRegisterRecordSet.R2020B_AdvancesFromCustomers") Then
 			RecordSet_AdvancesFromCustomers.Read();
@@ -772,7 +765,7 @@ Procedure Write_AdvancesAndTransactions_DueAsAdvance(Recorder, Parameters, Offse
 			RecordSet_AdvancesFromCustomers.SetActive(True);
 			RecordSet_AdvancesFromCustomers.Write();
 		EndIf;
-	
+
 		If TypeOf(ItemOfPostingInfo.Key) = Type("AccumulationRegisterRecordSet.R2021B_CustomersTransactions") Then
 			RecordSet_CustomersTransactions.Read();
 			For Each Row In ItemOfPostingInfo.Value.RecordSet Do
@@ -797,7 +790,7 @@ EndProcedure
 Procedure Write_AdvancesAndTransactions(Recorder, Parameters, OffsetOfAdvanceFull, UseKeyForAdvance = False)
 	Query = New Query();
 	Query.TempTablesManager = Parameters.TempTablesManager;
-	Query.Text = 
+	Query.Text =
 	"SELECT
 	|	OffsetOfAdvance.Period,
 	|	OffsetOfAdvance.Company,
@@ -817,58 +810,56 @@ Procedure Write_AdvancesAndTransactions(Recorder, Parameters, OffsetOfAdvanceFul
 	|	OffsetOfAdvanceFromCustomers AS OffsetOfAdvance";
 	Query.SetParameter("CustomersAdvancesClosing", Parameters.Object.Ref);
 	Query.SetParameter("Document", Recorder);
-	
+
 	QueryTable = Query.Execute().Unload();
-	
+
 	RecordSet_AdvancesFromCustomers = AccumulationRegisters.R2020B_AdvancesFromCustomers.CreateRecordSet();
 	RecordSet_AdvancesFromCustomers.Filter.Recorder.Set(Recorder);
 	TableAdvances = RecordSet_AdvancesFromCustomers.UnloadColumns();
 	TableAdvances.Columns.Delete(TableAdvances.Columns.PointInTime);
-	
-	
 	RecordSet_CustomersTransactions = AccumulationRegisters.R2021B_CustomersTransactions.CreateRecordSet();
 	RecordSet_CustomersTransactions.Filter.Recorder.Set(Recorder);
 	TableTransactions = RecordSet_CustomersTransactions.UnloadColumns();
 	TableTransactions.Columns.Delete(TableTransactions.Columns.PointInTime);
-	
+
 	If UseKeyForAdvance Then
 		TableAdvances.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	EndIf;
-	
+
 	For Each Row In QueryTable Do
-				
+
 		FillPropertyValues(OffsetOfAdvanceFull.Add(), Row);
-		
+
 		NewRow_Advances = TableAdvances.Add();
 		FillPropertyValues(NewRow_Advances, Row);
 		NewRow_Advances.RecordType = AccumulationRecordType.Expense;
 		NewRow_Advances.Basis = Row.AdvancesDocument;
-			
+
 		NewRow_Transactions = TableTransactions.Add();
 		FillPropertyValues(NewRow_Transactions, Row);
 		NewRow_Transactions.RecordType = AccumulationRecordType.Expense;
 		NewRow_Transactions.Basis = Row.TransactionDocument;
-	
+
 	EndDo;
 	
 	// Currency calculation
 	CurrenciesParameters = New Structure();
-	
+
 	PostingDataTables = New Map();
-	
-	PostingDataTables.Insert(RecordSet_AdvancesFromCustomers,   New Structure("RecordSet", TableAdvances));
+
+	PostingDataTables.Insert(RecordSet_AdvancesFromCustomers, New Structure("RecordSet", TableAdvances));
 	PostingDataTables.Insert(RecordSet_CustomersTransactions, New Structure("RecordSet", TableTransactions));
-	
+
 	ArrayOfPostingInfo = New Array();
 	For Each DataTable In PostingDataTables Do
 		ArrayOfPostingInfo.Add(DataTable);
 	EndDo;
-	
+
 	CurrenciesParameters.Insert("Object", Recorder);
 	CurrenciesParameters.Insert("ArrayOfPostingInfo", ArrayOfPostingInfo);
-	
+
 	CurrenciesServer.PreparePostingDataTables(CurrenciesParameters, Undefined);
-	
+
 	For Each ItemOfPostingInfo In ArrayOfPostingInfo Do
 		If TypeOf(ItemOfPostingInfo.Key) = Type("AccumulationRegisterRecordSet.R2020B_AdvancesFromCustomers") Then
 			RecordSet_AdvancesFromCustomers.Read();
@@ -878,7 +869,7 @@ Procedure Write_AdvancesAndTransactions(Recorder, Parameters, OffsetOfAdvanceFul
 			RecordSet_AdvancesFromCustomers.SetActive(True);
 			RecordSet_AdvancesFromCustomers.Write();
 		EndIf;
-	
+
 		If TypeOf(ItemOfPostingInfo.Key) = Type("AccumulationRegisterRecordSet.R2021B_CustomersTransactions") Then
 			RecordSet_CustomersTransactions.Read();
 			For Each Row In ItemOfPostingInfo.Value.RecordSet Do
@@ -902,7 +893,7 @@ EndProcedure
 Procedure Write_PartnersAging(Recorder, Parameters, OffsetOfAgingFull)
 	Query = New Query();
 	Query.TempTablesManager = Parameters.TempTablesManager;
-	Query.Text = 
+	Query.Text =
 	"SELECT
 	|	OffsetOfAging.Period,
 	|	OffsetOfAging.Company,
@@ -920,24 +911,24 @@ Procedure Write_PartnersAging(Recorder, Parameters, OffsetOfAgingFull)
 	|	OffsetOfAging AS OffsetOfAging";
 	Query.SetParameter("AgingClosing", Parameters.Object.Ref);
 	Query.SetParameter("Document", Recorder);
-	
+
 	QueryTable = Query.Execute().Unload();
-	
+
 	RecordSet_Aging = AccumulationRegisters.R5011B_CustomersAging.CreateRecordSet();
 	RecordSet_Aging.Filter.Recorder.Set(Recorder);
 	TableAging = RecordSet_Aging.UnloadColumns();
 	TableAging.Columns.Delete(TableAging.Columns.PointInTime);
-		
+
 	For Each Row In QueryTable Do
-				
+
 		FillPropertyValues(OffsetOfAgingFull.Add(), Row);
-		
+
 		NewRow_Advances = TableAging.Add();
 		FillPropertyValues(NewRow_Advances, Row);
 		NewRow_Advances.RecordType = AccumulationRecordType.Expense;
-	
+
 	EndDo;
-	
+
 	RecordSet_Aging.Read();
 	For Each Row In TableAging Do
 		FillPropertyValues(RecordSet_Aging.Add(), Row);

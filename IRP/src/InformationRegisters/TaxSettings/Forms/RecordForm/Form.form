@@ -8,10 +8,8 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:MultiLanguageDataPath">
-      <paths xsi:type="form:DataPath">
-        <segments>RecordType</segments>
-      </paths>
+    <dataPath xsi:type="form:DataPath">
+      <segments>RecordType</segments>
     </dataPath>
     <titleLocation>None</titleLocation>
     <handlers>
@@ -60,10 +58,8 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:MultiLanguageDataPath">
-      <paths xsi:type="form:DataPath">
-        <segments>Record.Period</segments>
-      </paths>
+    <dataPath xsi:type="form:DataPath">
+      <segments>Record.Period</segments>
     </dataPath>
     <extendedTooltip>
       <name>PeriodExtendedTooltip</name>
@@ -112,10 +108,8 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:MultiLanguageDataPath">
-      <paths xsi:type="form:DataPath">
-        <segments>Record.Company</segments>
-      </paths>
+    <dataPath xsi:type="form:DataPath">
+      <segments>Record.Company</segments>
     </dataPath>
     <extendedTooltip>
       <name>CompanyExtendedTooltip</name>
@@ -164,10 +158,8 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:MultiLanguageDataPath">
-      <paths xsi:type="form:DataPath">
-        <segments>Record.Tax</segments>
-      </paths>
+    <dataPath xsi:type="form:DataPath">
+      <segments>Record.Tax</segments>
     </dataPath>
     <handlers>
       <event>OnChange</event>
@@ -220,10 +212,8 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:MultiLanguageDataPath">
-      <paths xsi:type="form:DataPath">
-        <segments>Record.ItemType</segments>
-      </paths>
+    <dataPath xsi:type="form:DataPath">
+      <segments>Record.ItemType</segments>
     </dataPath>
     <extendedTooltip>
       <name>ItemTypeExtendedTooltip</name>
@@ -272,10 +262,8 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:MultiLanguageDataPath">
-      <paths xsi:type="form:DataPath">
-        <segments>Record.Item</segments>
-      </paths>
+    <dataPath xsi:type="form:DataPath">
+      <segments>Record.Item</segments>
     </dataPath>
     <extendedTooltip>
       <name>ItemExtendedTooltip</name>
@@ -324,10 +312,8 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:MultiLanguageDataPath">
-      <paths xsi:type="form:DataPath">
-        <segments>Record.ItemKey</segments>
-      </paths>
+    <dataPath xsi:type="form:DataPath">
+      <segments>Record.ItemKey</segments>
     </dataPath>
     <extendedTooltip>
       <name>ItemKeyExtendedTooltip</name>
@@ -376,10 +362,8 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:MultiLanguageDataPath">
-      <paths xsi:type="form:DataPath">
-        <segments>Record.Agreement</segments>
-      </paths>
+    <dataPath xsi:type="form:DataPath">
+      <segments>Record.Agreement</segments>
     </dataPath>
     <extendedTooltip>
       <name>AgreementExtendedTooltip</name>
@@ -428,10 +412,8 @@
     <userVisible>
       <common>true</common>
     </userVisible>
-    <dataPath xsi:type="form:MultiLanguageDataPath">
-      <paths xsi:type="form:DataPath">
-        <segments>Record.TaxRate</segments>
-      </paths>
+    <dataPath xsi:type="form:DataPath">
+      <segments>Record.TaxRate</segments>
     </dataPath>
     <extendedTooltip>
       <name>TaxRateExtendedTooltip</name>

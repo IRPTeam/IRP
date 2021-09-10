@@ -1,4 +1,3 @@
-
 Procedure BeforeWrite(Cancel)
 	If DataExchange.Load Then
 		Return;
@@ -9,7 +8,7 @@ Procedure OnWrite(Cancel)
 	If DataExchange.Load Then
 		Return;
 	EndIf;
-	
+
 	ExternalDataProcNames = New Structure();
 	For Each KeyValue In SessionParameters.ConnectedAddDataProc Do
 		If KeyValue.Key <> ThisObject.Name Then

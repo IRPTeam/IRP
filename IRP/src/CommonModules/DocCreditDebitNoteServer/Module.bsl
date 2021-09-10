@@ -28,13 +28,12 @@ EndProcedure
 #Region GroupTitle
 
 Procedure SetGroupItemsList(Object, Form)
-	AttributesArray = New Array;
+	AttributesArray = New Array();
 	AttributesArray.Add("Company");
 	DocumentsServer.DeleteUnavailableTitleItemNames(AttributesArray);
 	For Each Atr In AttributesArray Do
-		Form.GroupItems.Add(Atr, ?(ValueIsFilled(Form.Items[Atr].Title),
-				Form.Items[Atr].Title,
-				Object.Ref.Metadata().Attributes[Atr].Synonym + ":" + Chars.NBSp));
+		Form.GroupItems.Add(Atr, ?(ValueIsFilled(Form.Items[Atr].Title), Form.Items[Atr].Title,
+			Object.Ref.Metadata().Attributes[Atr].Synonym + ":" + Chars.NBSp));
 	EndDo;
 EndProcedure
 
@@ -62,8 +61,7 @@ EndProcedure
 
 Function IsBasisDocumentReadOnly(ArrayOfAgreements) Export
 	For Each ItemOfAgreements In ArrayOfAgreements Do
-		ItemOfAgreements.ReadOnly = 
-		ItemOfAgreements.Agreement.ApArPostingDetail <> Enums.ApArPostingDetail.ByDocuments;
+		ItemOfAgreements.ReadOnly = ItemOfAgreements.Agreement.ApArPostingDetail <> Enums.ApArPostingDetail.ByDocuments;
 	EndDo;
 	Return ArrayOfAgreements;
 EndFunction

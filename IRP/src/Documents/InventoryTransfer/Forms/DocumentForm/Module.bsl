@@ -113,11 +113,6 @@ Procedure ItemListItemEditTextChange(Item, Text, StandardProcessing)
 	DocInventoryTransferClient.ItemListItemEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
 EndProcedure
 
-&AtClient
-Procedure OpenScanForm(Command)
-	DocumentsClient.OpenScanForm(Object, ThisObject, Command);
-EndProcedure
-
 #Region ItemCompany
 
 &AtClient
@@ -217,6 +212,11 @@ Procedure SearchByBarcode(Command, Barcode = "")
 	DocInventoryTransferClient.SearchByBarcode(Barcode, Object, ThisObject);
 EndProcedure
 
+&AtClient
+Procedure OpenScanForm(Command)
+	DocumentsClient.OpenScanForm(Object, ThisObject, Command);
+EndProcedure
+
 #Region AddAttributes
 
 &AtClient
@@ -304,6 +304,7 @@ EndProcedure
 #EndRegion
 
 #Region Service
+
 &AtClient
 Function GetProccessingModule() Export
 	Str = New Structure;

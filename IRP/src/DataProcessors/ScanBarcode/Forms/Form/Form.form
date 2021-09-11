@@ -517,16 +517,16 @@
           <name>ItemListCommandBar</name>
           <id>6</id>
           <items xsi:type="form:Button">
-            <name>SearchByBarcode</name>
-            <id>35</id>
+            <name>ItemListSearchByBarcode</name>
+            <id>132</id>
             <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>
               <common>true</common>
             </userVisible>
             <extendedTooltip>
-              <name>SearchByBarcodeExtendedTooltip</name>
-              <id>36</id>
+              <name>ItemListSearchByBarcodeExtendedTooltip</name>
+              <id>133</id>
               <visible>true</visible>
               <enabled>true</enabled>
               <userVisible>
@@ -539,11 +539,9 @@
                 <horizontalAlign>Left</horizontalAlign>
               </extInfo>
             </extendedTooltip>
-            <type>UsualButton</type>
             <commandName>Form.Command.SearchByBarcode</commandName>
             <representation>Auto</representation>
             <autoMaxWidth>true</autoMaxWidth>
-            <height>1</height>
             <autoMaxHeight>true</autoMaxHeight>
             <placementArea>UserCmds</placementArea>
             <toolTipRepresentation>Auto</toolTipRepresentation>
@@ -1406,6 +1404,10 @@
   <handlers>
     <event>OnCreateAtServer</event>
     <name>OnCreateAtServer</name>
+  </handlers>
+  <handlers>
+    <event>OnOpen</event>
+    <name>OnOpen</name>
   </handlers>
   <autoTitle>true</autoTitle>
   <autoUrl>true</autoUrl>

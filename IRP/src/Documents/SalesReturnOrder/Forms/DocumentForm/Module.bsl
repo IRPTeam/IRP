@@ -364,6 +364,11 @@ Procedure SearchByBarcode(Command, Barcode = "")
 EndProcedure
 
 &AtClient
+Procedure OpenScanForm(Command)
+	DocumentsClient.OpenScanForm(Object, ThisObject, Command);
+EndProcedure
+
+&AtClient
 Procedure DecorationStatusHistoryClick(Item)
 	ObjectStatusesClient.OpenHistoryByStatus(Object.Ref, ThisObject);
 EndProcedure
@@ -494,5 +499,17 @@ Procedure AddOrLinkUnlinkDocumentRowsContinueAtServer(Result)
 		RowIDInfoServer.AddLinkedDocumentRows(Object, Result.FillingValues);
 	EndIf;
 EndProcedure
+
+#EndRegion
+
+#Region Service
+
+&AtClient
+Function GetProccessingModule() Export
+	Str = New Structure;
+	Str.Insert("Client", DocSalesReturnOrderClient);
+	Str.Insert("Server", DocSalesReturnOrderServer);
+	Return Str;
+EndFunction
 
 #EndRegion

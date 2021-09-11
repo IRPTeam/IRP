@@ -1720,7 +1720,17 @@ EndProcedure
 
 #EndRegion
 
-#Region ItemListItemsOnChange
+#Region ItemList
+
+Function GetCurrentRowDataList(List, CurrentRow) Export
+	ReturnRow = CurrentRow;
+	If CurrentRow = Undefined Then
+		ReturnRow = List.CurrentData;
+	Else
+		Return CurrentRow;
+	EndIf;
+	Return ReturnRow;
+EndFunction
 
 Procedure ItemListCalculateRowAmounts_QuantityChange(Object, Form, CurrentData, Item, Module = Undefined,
 	AddInfo = Undefined) Export

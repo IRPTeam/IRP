@@ -1,3 +1,4 @@
+
 #Region FormEvents
 
 &AtServer
@@ -522,6 +523,11 @@ Procedure SearchByBarcode(Command, Barcode = "")
 EndProcedure
 
 &AtClient
+Procedure OpenScanForm(Command)
+	DocumentsClient.OpenScanForm(Object, ThisObject, Command);
+EndProcedure
+
+&AtClient
 Procedure DecorationStatusHistoryClick(Item)
 	ObjectStatusesClient.OpenHistoryByStatus(Object.Ref, ThisObject);
 EndProcedure
@@ -598,5 +604,17 @@ EndProcedure
 Procedure GeneratedFormCommandActionByNameServer(CommandName) Export
 	ExternalCommandsServer.GeneratedFormCommandActionByName(Object, ThisObject, CommandName);
 EndProcedure
+
+#EndRegion
+
+#Region Service
+
+&AtClient
+Function GetProccessingModule() Export
+	Str = New Structure;
+	Str.Insert("Client", DocSalesOrderClient);
+	Str.Insert("Server", DocSalesOrderServer);
+	Return Str;
+EndFunction
 
 #EndRegion

@@ -1,16 +1,21 @@
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	Object.Basis = Parameters.Basis;
-	FillItemList();
 
 	SetParameters("User", SessionParameters.CurrentUser);
 	SetParameters("Basis", Object.Basis);
 	SetParameters("OnlyMy", OnlyMy);
 EndProcedure
 
+&AtClient
+Procedure OnOpen(Cancel)
+	FillItemList(FormOwner.Object);
+EndProcedure
+
 &AtServer
-Procedure FillItemList()
-	Object.ItemList.Load(InformationRegisters.T1010S_ScannedBarcode.GetCommonTable(Object.Basis));
+Procedure FillItemList(Val Owner)
+	VT = Owner.ItemList.Unload();
+	Object.ItemList.Load(InformationRegisters.T1010S_ScannedBarcode.GetCommonTable(Object.Basis, VT));
 EndProcedure
 
 &AtClient
@@ -35,9 +40,8 @@ Procedure Done(Command)
 			NewRow =  FormOwner.Object.ItemList.Add();
 			FillPropertyValues(NewRow, Row);
 			NewRow.Quantity = Row.ScannedQuantity;      
-			FormOwner.Items.ItemList.CurrentRow = NewRow.GetID();
 			ClientModule.ItemListOnChange(FormOwner.Object, FormOwner);
-			ClientModule.ItemListQuantityOnChange(FormOwner.Object, FormOwner);
+			ClientModule.ItemListQuantityOnChange(FormOwner.Object, FormOwner, FormOwner.Items.ItemList, NewRow);
 		ElsIf Row.ScannedQuantity = 0 Then
 			RowsToDelete = FormOwner.Object.ItemList.FindRows(New Structure("ItemKey", Row.ItemKey));
 			For Each RowToDelete In RowsToDelete Do
@@ -49,13 +53,13 @@ Procedure Done(Command)
 			RowsWithDiff = FormOwner.Object.ItemList.FindRows(New Structure("ItemKey", Row.ItemKey));
 			RowWithDiff = RowsWithDiff[0];
 			RowWithDiff.Quantity = RowWithDiff.Quantity - Diff;
-			DocInventoryTransferClient.ItemListQuantityOnChange(FormOwner.Object, FormOwner, FormOwner.Items.ItemList);
+			ClientModule.ItemListQuantityOnChange(FormOwner.Object, FormOwner, FormOwner.Items.ItemList, NewRow);
 		ElsIf Row.Quantity < Row.ScannedQuantity Then       
 			Diff = Row.ScannedQuantity - Row.Quantity; 
 			RowsWithDiff = FormOwner.Object.ItemList.FindRows(New Structure("ItemKey", Row.ItemKey));
 			RowWithDiff = RowsWithDiff[0];
 			RowWithDiff.Quantity = RowWithDiff.Quantity + Diff;
-			DocInventoryTransferClient.ItemListQuantityOnChange(FormOwner.Object, FormOwner, FormOwner.Items.ItemList);
+			ClientModule.ItemListQuantityOnChange(FormOwner.Object, FormOwner, FormOwner.Items.ItemList, NewRow);
 		Else
 			Continue;
 		EndIf;
@@ -72,12 +76,12 @@ EndProcedure
 
 &AtClient
 Procedure ScanHistoryOnChange(Item)
-	FillItemList();
+	FillItemList(FormOwner.Object);
 EndProcedure
 
 &AtClient
 Procedure ItemListRefreshRequestProcessing(Item)
-	FillItemList();
+	FillItemList(FormOwner.Object);
 EndProcedure
 &AtClient
 Procedure NotificationProcessing(EventName, Parameter, Source)

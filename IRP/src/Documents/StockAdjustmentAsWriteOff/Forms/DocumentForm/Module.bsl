@@ -205,6 +205,11 @@ Procedure SearchByBarcode(Command, Barcode = "")
 	DocStockAdjustmentAsWriteOffClient.SearchByBarcode(Barcode, Object, ThisObject);
 EndProcedure
 
+&AtClient
+Procedure OpenScanForm(Command)
+	DocumentsClient.OpenScanForm(Object, ThisObject, Command);
+EndProcedure
+
 #Region AddAttributes
 
 &AtClient
@@ -281,5 +286,17 @@ Procedure AddOrLinkUnlinkDocumentRowsContinueAtServer(Result)
 		RowIDInfoServer.AddLinkedDocumentRows(Object, Result.FillingValues);
 	EndIf;
 EndProcedure
+
+#EndRegion
+
+#Region Service
+
+&AtClient
+Function GetProccessingModule() Export
+	Str = New Structure;
+	Str.Insert("Client", DocStockAdjustmentAsWriteOffClient);
+	Str.Insert("Server", DocStockAdjustmentAsWriteOffServer);
+	Return Str;
+EndFunction
 
 #EndRegion

@@ -27,9 +27,42 @@ EndProcedure
 
 &AtClient
 Procedure Done(Command)
+	ClientModule = FormOwner.GetProccessingModule().Client;   
 	For Each Row In Object.ItemList Do
-		// TODO: Finish export data
-	EndDo;
+		If Row.Quantity = Row.ScannedQuantity Then
+			Continue; 
+		ElsIf Row.Quantity = 0 Then             
+			NewRow =  FormOwner.Object.ItemList.Add();
+			FillPropertyValues(NewRow, Row);
+			NewRow.Quantity = Row.ScannedQuantity;      
+			FormOwner.Items.ItemList.CurrentRow = NewRow.GetID();
+			ClientModule.ItemListOnChange(FormOwner.Object, FormOwner);
+			ClientModule.ItemListQuantityOnChange(FormOwner.Object, FormOwner);
+		ElsIf Row.ScannedQuantity = 0 Then
+			RowsToDelete = FormOwner.Object.ItemList.FindRows(New Structure("ItemKey", Row.ItemKey));
+			For Each RowToDelete In RowsToDelete Do
+				FormOwner.Object.ItemList.Delete(RowToDelete);
+			EndDo;   
+			ClientModule.ItemListAfterDeleteRow(FormOwner.Object, FormOwner, FormOwner.Items.ItemList);
+		ElsIf Row.Quantity > Row.ScannedQuantity Then
+			Diff = Row.Quantity - Row.ScannedQuantity;
+			RowsWithDiff = FormOwner.Object.ItemList.FindRows(New Structure("ItemKey", Row.ItemKey));
+			RowWithDiff = RowsWithDiff[0];
+			RowWithDiff.Quantity = RowWithDiff.Quantity - Diff;
+			DocInventoryTransferClient.ItemListQuantityOnChange(FormOwner.Object, FormOwner, FormOwner.Items.ItemList);
+		ElsIf Row.Quantity < Row.ScannedQuantity Then       
+			Diff = Row.ScannedQuantity - Row.Quantity; 
+			RowsWithDiff = FormOwner.Object.ItemList.FindRows(New Structure("ItemKey", Row.ItemKey));
+			RowWithDiff = RowsWithDiff[0];
+			RowWithDiff.Quantity = RowWithDiff.Quantity + Diff;
+			DocInventoryTransferClient.ItemListQuantityOnChange(FormOwner.Object, FormOwner, FormOwner.Items.ItemList);
+		Else
+			Continue;
+		EndIf;
+	EndDo;        
+	
+	FormOwner.Modified = True;
+	Close();
 EndProcedure
 
 &AtClient
@@ -61,6 +94,12 @@ EndProcedure
 
 &AtClient
 Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
+
+	If Not AdditionalParameters.FoundedItems.Count()
+		And AdditionalParameters.Barcodes.Count() Then
+		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().S_019, AdditionalParameters.Barcodes[0]));
+		Return;
+	EndIf;
 
 	NotifyParameters = New Structure();
 	NotifyParameters.Insert("Form", ThisObject);

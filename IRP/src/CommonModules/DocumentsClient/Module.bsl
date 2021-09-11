@@ -442,6 +442,7 @@ EndProcedure
 
 #Region ItemCurrency
 
+
 Procedure CurrencyOnChange2(Object, Form, Module, Item = Undefined, Settings = Undefined, AddInfo = Undefined) Export
 	CommonFunctionsClientServer.DeleteFromAddInfo(AddInfo, "ServerData");
 	CurrencySettings = Module.CurrencySettings(Object, Form);
@@ -1532,6 +1533,25 @@ Procedure SearchByBarcodeEnd(Result, Parameters) Export
 		DocumentModule.PickupItemsEnd(Parameters.FoundedItems, Parameters);
 	Else
 		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().S_019, StrConcat(Parameters.Barcodes, ",")));
+	EndIf;
+EndProcedure
+
+Procedure OpenScanForm(Object, Form, Module) Export
+	NotifyParameters = New Structure;
+	NotifyParameters.Insert("Object", Object);
+	NotifyParameters.Insert("Form", Form);
+	NotifyDescription = New NotifyDescription("OpenScanFormEnd", ThisObject, NotifyParameters);
+	OpenFormParameters = New Structure;
+	OpenFormParameters.Insert("Basis", Object.Ref);
+	OpenForm("DataProcessor.ScanBarcode.Form.Form", OpenFormParameters, Form, , , , NotifyDescription, FormWindowOpeningMode.LockOwnerWindow);
+EndProcedure
+
+Procedure OpenScanFormEnd(Result, AdditionalParameters) Export
+	If Not ValueIsFilled(Result) 
+		Or Not AdditionalParameters.Property("Object") 
+		Or Not AdditionalParameters.Property("Form") Then
+			
+		Return;
 	EndIf;
 EndProcedure
 

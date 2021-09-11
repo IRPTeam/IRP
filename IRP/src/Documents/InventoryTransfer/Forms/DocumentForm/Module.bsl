@@ -113,6 +113,11 @@ Procedure ItemListItemEditTextChange(Item, Text, StandardProcessing)
 	DocInventoryTransferClient.ItemListItemEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
 EndProcedure
 
+&AtClient
+Procedure OpenScanForm(Command)
+	DocumentsClient.OpenScanForm(Object, ThisObject, Command);
+EndProcedure
+
 #Region ItemCompany
 
 &AtClient
@@ -295,5 +300,16 @@ Procedure AddOrLinkUnlinkDocumentRowsContinueAtServer(Result)
 		RowIDInfoServer.AddLinkedDocumentRows(Object, Result.FillingValues);
 	EndIf;
 EndProcedure
+
+#EndRegion
+
+#Region Service
+&AtClient
+Function GetProccessingModule() Export
+	Str = New Structure;
+	Str.Insert("Client", DocInventoryTransferClient);
+	Str.Insert("Server", DocInventoryTransferServer);
+	Return Str;
+EndFunction
 
 #EndRegion

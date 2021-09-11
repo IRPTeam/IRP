@@ -91,14 +91,6 @@ EndProcedure
 
 #EndRegion
 
-Procedure OpenScanFormEnd(Result, AdditionalParameters) Export
-	If Not ValueIsFilled(Result) Or Not AdditionalParameters.Property("Object") Or Not AdditionalParameters.Property(
-		"Form") Then
-		Return;
-	EndIf;
-
-EndProcedure
-
 Procedure ItemListAfterDeleteRow(Object, Form, Item) Export
 	DocumentsClient.ItemListAfterDeleteRow(Object, Form, Item);
 EndProcedure
@@ -138,7 +130,7 @@ Procedure ItemListItemEditTextChange(Object, Form, Item, Text, StandardProcessin
 	DocumentsClient.ItemEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters);
 EndProcedure
 
-Procedure ItemListQuantityOnChange(Object, Form, Item) Export
+Procedure ItemListQuantityOnChange(Object, Form, Item = Undefined) Export
 	CurrentData = Form.Items.ItemList.CurrentData;
 	If CurrentData = Undefined Then
 		Return;
@@ -154,6 +146,10 @@ Procedure ItemListUnitOnChange(Object, Form, Item) Export
 	EndIf;
 	Actions = New Structure("CalculateQuantityInBaseUnit");
 	CalculationStringsClientServer.CalculateItemsRow(Object, CurrentData, Actions);
+EndProcedure
+
+Procedure OpenScanForm(Object, Form, Command) Export
+	DocumentsClient.OpenScanForm(Object, Form, ThisObject);
 EndProcedure
 
 #Region GroupTitle

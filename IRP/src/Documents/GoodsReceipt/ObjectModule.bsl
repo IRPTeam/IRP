@@ -40,8 +40,10 @@ Procedure Filling(FillingData, FillingText, StandardProcessing)
 //			FillPropertyValues(ThisObject, FillingData, "Company, Partner, LegalName");
 //			RowIDInfoServer.AddLinkedDocumentRows(ThisObject, FillingData);
 //		Else
-		FillPropertyValues(ThisObject, FillingData, RowIDInfoServer.GetSeperatorColumns(ThisObject.Metadata()));
-		RowIDInfoServer.AddLinkedDocumentRows(ThisObject, FillingData);
+		If FillingData.Property("Company") Then
+			FillPropertyValues(ThisObject, FillingData, RowIDInfoServer.GetSeperatorColumns(ThisObject.Metadata()));
+			RowIDInfoServer.AddLinkedDocumentRows(ThisObject, FillingData);
+		EndIf;
 //		EndIf;
 	EndIf;
 EndProcedure

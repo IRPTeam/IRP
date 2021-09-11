@@ -2,12 +2,8 @@ Procedure OnOpen(Object, Form, Cancel, AddInfo = Undefined) Export
 	DocumentsClient.SetTextOfDescriptionAtForm(Object, Form);
 EndProcedure
 
-Procedure ItemListOnChange(Object, Form, Item = Undefined, CalculationSettings = Undefined) Export
-	For Each Row In Object.ItemList Do
-		If Not ValueIsFilled(Row.Key) Then
-			Row.Key = New UUID();
-		EndIf;
-	EndDo;
+Procedure ItemListOnChange(Object, Form, Item = Undefined, CurrentRowData = Undefined) Export
+	DocumentsClient.FillRowIDInItemList(Object);
 EndProcedure
 
 Procedure ItemListItemOnChange(Object, Form, Item = Undefined) Export

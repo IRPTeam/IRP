@@ -92,12 +92,8 @@ Procedure ItemListAfterDeleteRow(Object, Form, Item) Export
 	SerialLotNumberClient.UpdateSerialLotNumbersTree(Object, Form);
 EndProcedure
 
-Procedure ItemListOnChange(Object, Form, Item, AddInfo = Undefined) Export
-	For Each Row In Object.ItemList Do
-		If Not ValueIsFilled(Row.Key) Then
-			Row.Key = New UUID();
-		EndIf;
-	EndDo;
+Procedure ItemListOnChange(Object, Form, Item = Undefined, CurrentRowData = Undefined) Export
+	DocumentsClient.FillRowIDInItemList(Object);
 	CurrenciesClient.CalculateAmount(Object, Form);
 EndProcedure
 

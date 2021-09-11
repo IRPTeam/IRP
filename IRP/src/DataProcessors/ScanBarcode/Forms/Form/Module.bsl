@@ -40,7 +40,7 @@ Procedure Done(Command)
 			NewRow =  FormOwner.Object.ItemList.Add();
 			FillPropertyValues(NewRow, Row);
 			NewRow.Quantity = Row.ScannedQuantity;      
-			ClientModule.ItemListOnChange(FormOwner.Object, FormOwner);
+			ClientModule.ItemListOnChange(FormOwner.Object, FormOwner, FormOwner.Items.ItemList, NewRow);
 			ClientModule.ItemListQuantityOnChange(FormOwner.Object, FormOwner, FormOwner.Items.ItemList, NewRow);
 		ElsIf Row.ScannedQuantity = 0 Then
 			RowsToDelete = FormOwner.Object.ItemList.FindRows(New Structure("ItemKey", Row.ItemKey));

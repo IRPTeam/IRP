@@ -168,18 +168,16 @@ Procedure ItemListItemOnChange(Object, Form, Item = Undefined, CurrentRowData = 
 	CalculationStringsClientServer.CalculateItemsRow(Object, CurrentData, CalculationSettings);
 EndProcedure
 
-Procedure ItemListOnChange(Object, Form, Item = Undefined, CalculationSettings = Undefined) Export
-	For Each Row In Object.ItemList Do
-		If Not ValueIsFilled(Row.Key) Then
-			Row.Key = New UUID();
-		EndIf;
-	EndDo;
+Procedure ItemListOnChange(Object, Form, Item = Undefined, CurrentRowData = Undefined) Export
+	DocumentsClient.FillRowIDInItemList(Object);
+	CurrentData = DocumentsClient.GetCurrentRowDataList(Form.Items.ItemList, CurrentRowData);
+	
+	If Form.Items.ItemList.CurrentItem <> Undefined And Form.Items.ItemList.CurrentItem.Name = "ItemListStore" Then
+		DocumentsClient.SetCurrentStore(Object, Form, Form.Items.ItemList.CurrentData.Store);
+	EndIf;
 
-	If Form.Items.ItemList.CurrentData <> Undefined Then
-		If Form.Items.ItemList.CurrentItem <> Undefined And Form.Items.ItemList.CurrentItem.Name = "ItemListStore" Then
-			DocumentsClient.SetCurrentStore(Object, Form, Form.Items.ItemList.CurrentData.Store);
-		EndIf;
-		DocumentsClient.FillUnfilledStoreInRow(Object, Form.Items.ItemList, Form.CurrentStore);
+	If Not CurrentData = Undefined Then
+		DocumentsClient.FillUnfilledStoreInRow(Object, CurrentData, Form.CurrentStore);
 	EndIf;
 
 	ObjectData = DocumentsClientServer.GetStructureFillStores();
@@ -310,8 +308,8 @@ Procedure ItemListItemEditTextChange(Object, Form, Item, Text, StandardProcessin
 EndProcedure
 
 Procedure PickupItemsEnd(Result, AdditionalParameters) Export
-	If Not ValueIsFilled(Result) Or Not AdditionalParameters.Property("Object") Or Not AdditionalParameters.Property(
-		"Form") Then
+	If Not ValueIsFilled(Result) Or Not AdditionalParameters.Property("Object") 
+		Or Not AdditionalParameters.Property("Form") Then
 		Return;
 	EndIf;
 

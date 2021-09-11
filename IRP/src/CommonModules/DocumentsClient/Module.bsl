@@ -791,13 +791,13 @@ Procedure SetCurrentStore(Object, Form, Store, AddInfo = Undefined) Export
 	EndIf;
 EndProcedure
 
-Procedure FillUnfilledStoreInRow(Object, Item, Store) Export
-	If ValueIsFilled(Item.CurrentData.Store) Then
+Procedure FillUnfilledStoreInRow(Object, CurrentData, Store) Export
+	If ValueIsFilled(CurrentData.Store) Then
 		Return;
 	EndIf;
 
-	If CatItemsServer.StoreMustHave(Item.CurrentData.Item) Then
-		IdentifyRow = Item.CurrentRow;
+	If CatItemsServer.StoreMustHave(CurrentData.Item) Then
+		IdentifyRow = CurrentData.GetID();
 		RowItemList = Object.ItemList.FindByID(IdentifyRow);
 		RowItemList.Store = Store;
 	EndIf;
@@ -1730,6 +1730,14 @@ Function GetCurrentRowDataList(List, CurrentRow) Export
 		Return CurrentRow;
 	EndIf;
 	Return ReturnRow;
+EndFunction
+
+Function FillRowIDInItemList(Object) Export
+	For Each Row In Object.ItemList Do
+		If Not ValueIsFilled(Row.Key) Then
+			Row.Key = New UUID();
+		EndIf;
+	EndDo;
 EndFunction
 
 Procedure ItemListCalculateRowAmounts_QuantityChange(Object, Form, CurrentData, Item, Module = Undefined,

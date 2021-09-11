@@ -207,7 +207,7 @@ EndProcedure
 
 &AtClient
 Procedure ItemListQuantityOnChange(Item, AddInfo = Undefined) Export
-	DocPurchaseInvoiceClient.ItemListQuantityOnChange(Object, ThisObject, Item, AddInfo);
+	DocPurchaseInvoiceClient.ItemListQuantityOnChange(Object, ThisObject, Item, Undefined, AddInfo);
 EndProcedure
 
 &AtClient

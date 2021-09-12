@@ -108,7 +108,7 @@ Procedure ItemListOnActivateRow(Object, Form, Item = Undefined, CurrentRowData =
 		DocumentsClient.SetCurrentStore(Object, Form, CurrentData.Store);
 	EndIf;
 
-	If ValueIsFilled(CurrentData.PriceType) And CurrentData.PriceType <> Form.CurrentPriceType And CurrentRow.PriceType
+	If ValueIsFilled(CurrentData.PriceType) And CurrentData.PriceType <> Form.CurrentPriceType And CurrentData.PriceType
 		<> PredefinedValue("Catalog.PriceTypes.ManualPriceType") Then
 		DocumentsClient.SetCurrentPriceType(Form, CurrentData.PriceType);
 	EndIf;

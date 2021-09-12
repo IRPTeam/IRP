@@ -1746,13 +1746,13 @@ Function GetCurrentRowDataList(List, CurrentRow) Export
 	Return ReturnRow;
 EndFunction
 
-Function FillRowIDInItemList(Object) Export
+Procedure FillRowIDInItemList(Object) Export
 	For Each Row In Object.ItemList Do
 		If Not ValueIsFilled(Row.Key) Then
 			Row.Key = New UUID();
 		EndIf;
 	EndDo;
-EndFunction
+EndProcedure
 
 Procedure ItemListCalculateRowAmounts_QuantityChange(Object, Form, CurrentData, Item, Module = Undefined,
 	AddInfo = Undefined) Export

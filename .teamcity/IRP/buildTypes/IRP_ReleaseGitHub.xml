@@ -14,7 +14,6 @@
     </options>
     <disabled-settings>
       <setting-ref ref="RUNNER_17" />
-      <setting-ref ref="TRIGGER_6" />
     </disabled-settings>
     <parameters>
       <param name="env.CurrentVersion" value="" />

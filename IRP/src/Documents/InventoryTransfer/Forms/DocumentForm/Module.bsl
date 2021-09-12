@@ -212,6 +212,11 @@ Procedure SearchByBarcode(Command, Barcode = "")
 	DocInventoryTransferClient.SearchByBarcode(Barcode, Object, ThisObject);
 EndProcedure
 
+&AtClient
+Procedure OpenScanForm(Command)
+	DocumentsClient.OpenScanForm(Object, ThisObject, Command);
+EndProcedure
+
 #Region AddAttributes
 
 &AtClient
@@ -295,5 +300,17 @@ Procedure AddOrLinkUnlinkDocumentRowsContinueAtServer(Result)
 		RowIDInfoServer.AddLinkedDocumentRows(Object, Result.FillingValues);
 	EndIf;
 EndProcedure
+
+#EndRegion
+
+#Region Service
+
+&AtClient
+Function GetProcessingModule() Export
+	Str = New Structure;
+	Str.Insert("Client", DocInventoryTransferClient);
+	Str.Insert("Server", DocInventoryTransferServer);
+	Return Str;
+EndFunction
 
 #EndRegion

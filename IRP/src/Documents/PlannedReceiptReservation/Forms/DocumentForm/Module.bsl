@@ -266,3 +266,15 @@ Procedure AddOrLinkUnlinkDocumentRowsContinueAtServer(Result)
 EndProcedure
 
 #EndRegion
+
+#Region Service
+
+&AtClient
+Function GetProcessingModule() Export
+	Str = New Structure;
+	Str.Insert("Client", DocPlannedReceiptReservationClient);
+	Str.Insert("Server", DocPlannedReceiptReservationServer);
+	Return Str;
+EndFunction
+
+#EndRegion

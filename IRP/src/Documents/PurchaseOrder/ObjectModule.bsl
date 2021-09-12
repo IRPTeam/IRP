@@ -54,38 +54,18 @@ Procedure UndoPosting(Cancel)
 EndProcedure
 
 Procedure Filling(FillingData, FillingText, StandardProcessing)
-	If TypeOf(FillingData) = Type("Structure") Then
-		If FillingData.Property("BasedOn") And FillingData.BasedOn = "InternalSupplyRequest" Then
-			Filling_BasedOn(FillingData);
-		Else
-			FillPropertyValues(ThisObject, FillingData, RowIDInfoServer.GetSeperatorColumns(ThisObject.Metadata()));
-			RowIDInfoServer.AddLinkedDocumentRows(ThisObject, FillingData);
-		EndIf;
+	If TypeOf(FillingData) = Type("Structure") And FillingData.Property("BasedOn") Then
+		FillPropertyValues(ThisObject, FillingData, RowIDInfoServer.GetSeperatorColumns(ThisObject.Metadata()));
+		RowIDInfoServer.AddLinkedDocumentRows(ThisObject, FillingData);
 	EndIf;
 EndProcedure
 
-Procedure Filling_BasedOn(FillingData)
-	ThisObject.Company = FillingData.Company;
-	For Each Row In FillingData.ItemList Do
-		NewRow = ThisObject.ItemList.Add();
-		FillPropertyValues(NewRow, Row);
-		If Not ValueIsFilled(NewRow.Key) Then
-			NewRow.Key = New UUID();
-		EndIf;
-		If ValueIsFilled(Row.Unit) And ValueIsFilled(Row.Unit.Quantity) Then
-			NewRow.Quantity = Row.Quantity / Row.Unit.Quantity;
-		EndIf;
-	EndDo;
-EndProcedure
-
 Procedure OnCopy(CopiedObject)
-
 	LinkedTables = New Array();
 	LinkedTables.Add(SpecialOffers);
 	LinkedTables.Add(TaxList);
 	LinkedTables.Add(Currencies);
 	DocumentsServer.SetNewTableUUID(ItemList, LinkedTables);
-
 EndProcedure
 
 Procedure FillCheckProcessing(Cancel, CheckedAttributes)

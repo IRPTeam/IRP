@@ -71,10 +71,11 @@ EndFunction
 // 
 // Parameters:
 //  Basis - DocumentRef - Any basis document ref
+//  CurrentOwnnerItemList - ValueTable - Current item list at form owner
 // 
 // Returns:
 //  ValueTable - All scanned barcode with Item key and Items
-Function GetCommonTable(Basis) Export
+Function GetCommonTable(Basis, CurrentOwnnerItemList) Export
 
 	Query = New Query();
 	Query.Text =
@@ -140,7 +141,7 @@ Function GetCommonTable(Basis) Export
 	|	VTAll.Unit";
 
 	Query.SetParameter("Basis", Basis);
-	Query.SetParameter("DocumentItemList", Basis.ItemList.Unload());
+	Query.SetParameter("DocumentItemList", CurrentOwnnerItemList);
 
 	QueryResult = Query.Execute().Unload();
 

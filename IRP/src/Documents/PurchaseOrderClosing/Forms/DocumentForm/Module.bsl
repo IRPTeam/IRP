@@ -458,6 +458,11 @@ Procedure SearchByBarcode(Command, Barcode = "")
 EndProcedure
 
 &AtClient
+Procedure OpenScanForm(Command)
+	DocumentsClient.OpenScanForm(Object, ThisObject, Command);
+EndProcedure
+
+&AtClient
 Procedure ShowRowKey(Command)
 	DocumentsClient.ShowRowKey(ThisObject);
 EndProcedure
@@ -524,5 +529,17 @@ EndProcedure
 Procedure GeneratedFormCommandActionByNameServer(CommandName) Export
 	ExternalCommandsServer.GeneratedFormCommandActionByName(Object, ThisObject, CommandName);
 EndProcedure
+
+#EndRegion
+
+#Region Service
+
+&AtClient
+Function GetProcessingModule() Export
+	Str = New Structure;
+	Str.Insert("Client", DocPurchaseOrderClosingClient);
+	Str.Insert("Server", DocPurchaseOrderClosingServer);
+	Return Str;
+EndFunction
 
 #EndRegion

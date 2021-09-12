@@ -109,20 +109,4 @@
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>
   </forms>
-  <commands uuid="ebca45db-29be-484e-abe5-d3c3fad386c2">
-    <name>ScannedForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Scan items</value>
-    </synonym>
-    <group>CommandGroup.Service</group>
-    <commandParameterType>
-      <types>DefinedType.typeObjectWithItemList</types>
-    </commandParameterType>
-    <modifiesData>true</modifiesData>
-    <representation>Auto</representation>
-    <picture xsi:type="core:PictureRef">
-      <picture>CommonPicture.BarcodePicture</picture>
-    </picture>
-  </commands>
 </mdclass:DataProcessor>

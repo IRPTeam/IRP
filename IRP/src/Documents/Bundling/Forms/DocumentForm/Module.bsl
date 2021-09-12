@@ -163,6 +163,11 @@ Procedure SearchByBarcode(Command, Barcode = "")
 EndProcedure
 
 &AtClient
+Procedure OpenScanForm(Command)
+	DocumentsClient.OpenScanForm(Object, ThisObject, Command);
+EndProcedure
+
+&AtClient
 Procedure StoreOnChange(Item)
 	DocBundlingClient.StoreOnChange(Object, ThisObject, Item);
 EndProcedure
@@ -228,5 +233,17 @@ EndProcedure
 Procedure GeneratedFormCommandActionByNameServer(CommandName) Export
 	ExternalCommandsServer.GeneratedFormCommandActionByName(Object, ThisObject, CommandName);
 EndProcedure
+
+#EndRegion
+
+#Region Service
+
+&AtClient
+Function GetProcessingModule() Export
+	Str = New Structure;
+	Str.Insert("Client", DocBundlingClient);
+	Str.Insert("Server", DocBundlingServer);
+	Return Str;
+EndFunction
 
 #EndRegion

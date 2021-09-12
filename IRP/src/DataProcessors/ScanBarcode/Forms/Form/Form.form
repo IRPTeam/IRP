@@ -1,49 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form:Form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:form="http://g5.1c.ru/v8/dt/form">
-  <items xsi:type="form:Decoration">
-    <name>Decoration1</name>
-    <id>123</id>
-    <title>
-      <key>en</key>
-      <value>4</value>
-    </title>
-    <visible>true</visible>
-    <enabled>true</enabled>
-    <userVisible>
-      <common>true</common>
-    </userVisible>
-    <extendedTooltip>
-      <name>Decoration1ExtendedTooltip</name>
-      <id>125</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-        <common>true</common>
-      </userVisible>
-      <type>Label</type>
-      <autoMaxWidth>true</autoMaxWidth>
-      <autoMaxHeight>true</autoMaxHeight>
-      <extInfo xsi:type="form:LabelDecorationExtInfo">
-        <horizontalAlign>Left</horizontalAlign>
-      </extInfo>
-    </extendedTooltip>
-    <contextMenu>
-      <name>Decoration1ContextMenu</name>
-      <id>124</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-        <common>true</common>
-      </userVisible>
-      <autoFill>true</autoFill>
-    </contextMenu>
-    <type>Label</type>
-    <autoMaxWidth>true</autoMaxWidth>
-    <autoMaxHeight>true</autoMaxHeight>
-    <extInfo xsi:type="form:LabelDecorationExtInfo">
-      <horizontalAlign>Left</horizontalAlign>
-    </extInfo>
-  </items>
   <items xsi:type="form:FormField">
     <name>Basis</name>
     <id>1</id>
@@ -562,7 +518,7 @@
           <id>6</id>
           <items xsi:type="form:Button">
             <name>SearchByBarcode</name>
-            <id>35</id>
+            <id>132</id>
             <visible>true</visible>
             <enabled>true</enabled>
             <userVisible>
@@ -570,7 +526,7 @@
             </userVisible>
             <extendedTooltip>
               <name>SearchByBarcodeExtendedTooltip</name>
-              <id>36</id>
+              <id>133</id>
               <visible>true</visible>
               <enabled>true</enabled>
               <userVisible>
@@ -583,11 +539,40 @@
                 <horizontalAlign>Left</horizontalAlign>
               </extInfo>
             </extendedTooltip>
-            <type>UsualButton</type>
             <commandName>Form.Command.SearchByBarcode</commandName>
             <representation>Auto</representation>
             <autoMaxWidth>true</autoMaxWidth>
-            <height>1</height>
+            <autoMaxHeight>true</autoMaxHeight>
+            <placementArea>UserCmds</placementArea>
+            <toolTipRepresentation>Auto</toolTipRepresentation>
+            <representationInContextMenu>Auto</representationInContextMenu>
+          </items>
+          <items xsi:type="form:Button">
+            <name>ItemListEnterCountOnScan</name>
+            <id>134</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <extendedTooltip>
+              <name>ItemListEnterCountOnScanExtendedTooltip</name>
+              <id>135</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <type>Label</type>
+              <autoMaxWidth>true</autoMaxWidth>
+              <autoMaxHeight>true</autoMaxHeight>
+              <extInfo xsi:type="form:LabelDecorationExtInfo">
+                <horizontalAlign>Left</horizontalAlign>
+              </extInfo>
+            </extendedTooltip>
+            <commandName>Form.Command.EnterCountOnScan</commandName>
+            <representation>Auto</representation>
+            <autoMaxWidth>true</autoMaxWidth>
             <autoMaxHeight>true</autoMaxHeight>
             <placementArea>UserCmds</placementArea>
             <toolTipRepresentation>Auto</toolTipRepresentation>
@@ -1448,6 +1433,10 @@
     <name>NotificationProcessing</name>
   </handlers>
   <handlers>
+    <event>OnOpen</event>
+    <name>OnOpen</name>
+  </handlers>
+  <handlers>
     <event>OnCreateAtServer</event>
     <name>OnCreateAtServer</name>
   </handlers>
@@ -1531,6 +1520,23 @@ WHERE
       <common>true</common>
     </edit>
   </attributes>
+  <attributes>
+    <name>ByOneScan</name>
+    <title>
+      <key>en</key>
+      <value>By one scan</value>
+    </title>
+    <id>4</id>
+    <valueType>
+      <types>Boolean</types>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
+  </attributes>
   <formCommands>
     <name>SearchByBarcode</name>
     <id>1</id>
@@ -1578,6 +1584,23 @@ WHERE
     <action xsi:type="form:FormCommandHandlerContainer">
       <handler>
         <name>Done</name>
+      </handler>
+    </action>
+    <currentRowUse>Auto</currentRowUse>
+  </formCommands>
+  <formCommands>
+    <name>EnterCountOnScan</name>
+    <title>
+      <key>en</key>
+      <value>+1</value>
+    </title>
+    <id>4</id>
+    <use>
+      <common>true</common>
+    </use>
+    <action xsi:type="form:FormCommandHandlerContainer">
+      <handler>
+        <name>EnterCountOnScan</name>
       </handler>
     </action>
     <currentRowUse>Auto</currentRowUse>

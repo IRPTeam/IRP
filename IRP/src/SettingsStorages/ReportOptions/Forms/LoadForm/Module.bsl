@@ -66,8 +66,13 @@ EndProcedure
 
 &AtClient
 Procedure LoadChosenSetting(Val OptionKey)
-	Close(New SettingsChoice(OptionKey));
+	Close(GetSettingsChoice(OptionKey));
 EndProcedure
+
+&AtServer
+Function GetSettingsChoice(Val OptionKey)
+	Return New SettingsChoice(OptionKey);
+EndFunction
 
 &AtClient
 Procedure ShowMarkedForDeletion(Command)

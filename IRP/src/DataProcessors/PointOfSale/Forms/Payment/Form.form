@@ -141,7 +141,6 @@
       <extInfo xsi:type="form:UsualGroupExtInfo">
         <group>HorizontalIfPossible</group>
         <horizontalAlign>Left</horizontalAlign>
-        <behavior>Auto</behavior>
         <representation>NormalSeparation</representation>
         <showLeftMargin>true</showLeftMargin>
         <united>true</united>
@@ -214,7 +213,6 @@
     <extInfo xsi:type="form:UsualGroupExtInfo">
       <group>HorizontalIfPossible</group>
       <horizontalAlign>Right</horizontalAlign>
-      <behavior>Auto</behavior>
       <showLeftMargin>true</showLeftMargin>
       <united>true</united>
       <throughAlign>Auto</throughAlign>
@@ -702,7 +700,6 @@
         <type>UsualGroup</type>
         <extInfo xsi:type="form:UsualGroupExtInfo">
           <group>Vertical</group>
-          <behavior>Auto</behavior>
           <showLeftMargin>true</showLeftMargin>
           <united>true</united>
           <throughAlign>Auto</throughAlign>
@@ -1015,7 +1012,6 @@
             <type>UsualGroup</type>
             <extInfo xsi:type="form:UsualGroupExtInfo">
               <group>Vertical</group>
-              <behavior>Auto</behavior>
               <representation>WeakSeparation</representation>
               <showLeftMargin>true</showLeftMargin>
               <united>true</united>
@@ -1327,7 +1323,6 @@
             <type>UsualGroup</type>
             <extInfo xsi:type="form:UsualGroupExtInfo">
               <group>Vertical</group>
-              <behavior>Auto</behavior>
               <representation>WeakSeparation</representation>
               <showLeftMargin>true</showLeftMargin>
               <united>true</united>
@@ -1639,7 +1634,6 @@
             <type>UsualGroup</type>
             <extInfo xsi:type="form:UsualGroupExtInfo">
               <group>Vertical</group>
-              <behavior>Auto</behavior>
               <representation>WeakSeparation</representation>
               <showLeftMargin>true</showLeftMargin>
               <united>true</united>
@@ -1853,7 +1847,6 @@
             <type>UsualGroup</type>
             <extInfo xsi:type="form:UsualGroupExtInfo">
               <group>Vertical</group>
-              <behavior>Auto</behavior>
               <representation>WeakSeparation</representation>
               <showLeftMargin>true</showLeftMargin>
               <united>true</united>
@@ -1890,7 +1883,6 @@
             <group>AlwaysHorizontal</group>
             <horizontalSpacing>Half</horizontalSpacing>
             <verticalSpacing>Half</verticalSpacing>
-            <behavior>Auto</behavior>
             <showLeftMargin>true</showLeftMargin>
             <united>true</united>
             <backColor xsi:type="core:ColorRef">
@@ -1927,7 +1919,6 @@
         <type>UsualGroup</type>
         <extInfo xsi:type="form:UsualGroupExtInfo">
           <group>HorizontalIfPossible</group>
-          <behavior>Auto</behavior>
           <showLeftMargin>true</showLeftMargin>
           <united>true</united>
           <throughAlign>Auto</throughAlign>
@@ -1966,7 +1957,6 @@
       <extInfo xsi:type="form:UsualGroupExtInfo">
         <group>AlwaysHorizontal</group>
         <horizontalAlign>Right</horizontalAlign>
-        <behavior>Auto</behavior>
         <showLeftMargin>true</showLeftMargin>
         <united>true</united>
         <throughAlign>Auto</throughAlign>
@@ -2005,7 +1995,6 @@
     <extInfo xsi:type="form:UsualGroupExtInfo">
       <group>Vertical</group>
       <horizontalAlign>Center</horizontalAlign>
-      <behavior>Auto</behavior>
       <showLeftMargin>true</showLeftMargin>
       <united>true</united>
       <throughAlign>Auto</throughAlign>
@@ -2144,7 +2133,6 @@
     <type>UsualGroup</type>
     <extInfo xsi:type="form:UsualGroupExtInfo">
       <group>HorizontalIfPossible</group>
-      <behavior>Auto</behavior>
       <representation>NormalSeparation</representation>
       <showLeftMargin>true</showLeftMargin>
       <united>true</united>

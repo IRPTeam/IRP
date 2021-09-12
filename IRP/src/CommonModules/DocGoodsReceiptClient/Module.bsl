@@ -126,8 +126,8 @@ EndProcedure
 
 #Region Unit
 
-Procedure ItemListUnitOnChange(Object, Form, Item, AddInfo = Undefined) Export
-	CurrentData = Form.Items.ItemList.CurrentData;
+Procedure ItemListUnitOnChange(Object, Form, Item = Undefined, CurrentRowData = Undefined) Export
+	CurrentData = DocumentsClient.GetCurrentRowDataList(Form.Items.ItemList, CurrentRowData);
 	If CurrentData = Undefined Then
 		Return;
 	EndIf;
@@ -139,8 +139,8 @@ EndProcedure
 
 #Region Quantity
 
-Procedure ItemListQuantityOnChange(Object, Form, Item, AddInfo = Undefined) Export
-	CurrentData = Form.Items.ItemList.CurrentData;
+Procedure ItemListQuantityOnChange(Object, Form, Item = Undefined, CurrentRowData = Undefined) Export
+	CurrentData = DocumentsClient.GetCurrentRowDataList(Form.Items.ItemList, CurrentRowData);
 	If CurrentData = Undefined Then
 		Return;
 	EndIf;
@@ -152,34 +152,32 @@ EndProcedure
 
 #EndRegion
 
-Procedure ItemListItemOnChange(Object, Form, Item = Undefined) Export
-	CurrentRow = Form.Items.ItemList.CurrentData;
-	If CurrentRow = Undefined Then
+Procedure ItemListItemOnChange(Object, Form, Item = Undefined, CurrentRowData = Undefined) Export
+	CurrentData = DocumentsClient.GetCurrentRowDataList(Form.Items.ItemList, CurrentRowData);
+	If CurrentData = Undefined Then
 		Return;
 	EndIf;
-	CurrentRow.ItemKey = CatItemsServer.GetItemKeyByItem(CurrentRow.Item);
-	If ValueIsFilled(CurrentRow.ItemKey) And ServiceSystemServer.GetObjectAttribute(CurrentRow.ItemKey, "Item")
-		<> CurrentRow.Item Then
-		CurrentRow.ItemKey = Undefined;
+	CurrentData.ItemKey = CatItemsServer.GetItemKeyByItem(CurrentData.Item);
+	If ValueIsFilled(CurrentData.ItemKey) 
+		And ServiceSystemServer.GetObjectAttribute(CurrentData.ItemKey, "Item")	<> CurrentData.Item Then
+		CurrentData.ItemKey = Undefined;
 	EndIf;
 
 	CalculationSettings = New Structure();
 	CalculationSettings.Insert("UpdateUnit");
-	CalculationStringsClientServer.CalculateItemsRow(Object, CurrentRow, CalculationSettings);
+	CalculationStringsClientServer.CalculateItemsRow(Object, CurrentData, CalculationSettings);
 EndProcedure
 
-Procedure ItemListOnChange(Object, Form, Item = Undefined, CalculationSettings = Undefined) Export
-	For Each Row In Object.ItemList Do
-		If Not ValueIsFilled(Row.Key) Then
-			Row.Key = New UUID();
-		EndIf;
-	EndDo;
+Procedure ItemListOnChange(Object, Form, Item = Undefined, CurrentRowData = Undefined) Export
+	DocumentsClient.FillRowIDInItemList(Object);
+	CurrentData = DocumentsClient.GetCurrentRowDataList(Form.Items.ItemList, CurrentRowData);
+	
+	If Form.Items.ItemList.CurrentItem <> Undefined And Form.Items.ItemList.CurrentItem.Name = "ItemListStore" Then
+		DocumentsClient.SetCurrentStore(Object, Form, Form.Items.ItemList.CurrentData.Store);
+	EndIf;
 
-	If Form.Items.ItemList.CurrentData <> Undefined Then
-		If Form.Items.ItemList.CurrentItem <> Undefined And Form.Items.ItemList.CurrentItem.Name = "ItemListStore" Then
-			DocumentsClient.SetCurrentStore(Object, Form, Form.Items.ItemList.CurrentData.Store);
-		EndIf;
-		DocumentsClient.FillUnfilledStoreInRow(Object, Form.Items.ItemList, Form.CurrentStore);
+	If Not CurrentData = Undefined Then
+		DocumentsClient.FillUnfilledStoreInRow(Object, CurrentData, Form.CurrentStore);
 	EndIf;
 
 	ObjectData = DocumentsClientServer.GetStructureFillStores();
@@ -192,15 +190,15 @@ Procedure ItemListAfterDeleteRow(Object, Form, Item) Export
 	DocumentsClient.ItemListAfterDeleteRow(Object, Form, Item);
 EndProcedure
 
-Procedure ItemListOnActivateRow(Object, Form, Item) Export
-	If Form.Items.ItemList.CurrentData = Undefined Then
+Procedure ItemListOnActivateRow(Object, Form, Item, CurrentRowData = Undefined) Export
+	CurrentData = DocumentsClient.GetCurrentRowDataList(Form.Items.ItemList, CurrentRowData);
+	
+	If CurrentData = Undefined Then
 		Return;
 	EndIf;
 
-	CurrentRow = Form.Items.ItemList.CurrentData;
-
-	If ValueIsFilled(CurrentRow.Store) And CurrentRow.Store <> Form.CurrentStore Then
-		DocumentsClient.SetCurrentStore(Object, Form, CurrentRow.Store);
+	If ValueIsFilled(CurrentData.Store) And CurrentData.Store <> Form.CurrentStore Then
+		DocumentsClient.SetCurrentStore(Object, Form, CurrentData.Store);
 	EndIf;
 EndProcedure
 
@@ -310,8 +308,8 @@ Procedure ItemListItemEditTextChange(Object, Form, Item, Text, StandardProcessin
 EndProcedure
 
 Procedure PickupItemsEnd(Result, AdditionalParameters) Export
-	If Not ValueIsFilled(Result) Or Not AdditionalParameters.Property("Object") Or Not AdditionalParameters.Property(
-		"Form") Then
+	If Not ValueIsFilled(Result) Or Not AdditionalParameters.Property("Object") 
+		Or Not AdditionalParameters.Property("Form") Then
 		Return;
 	EndIf;
 
@@ -354,10 +352,8 @@ Procedure PickupItemsEnd(Result, AdditionalParameters) Export
 	SerialLotNumberListOnChange(Object, Form, Undefined);
 EndProcedure
 
-Procedure ItemListBeforeDeleteRow(Object, Form, Item, Cancel) Export
-
-	CurrentData = Form.Items.ItemList.CurrentData;
-
+Procedure ItemListBeforeDeleteRow(Object, Form, Item, Cancel, CurrentRowData = Undefined) Export
+	CurrentData = DocumentsClient.GetCurrentRowDataList(Form.Items.ItemList, CurrentRowData);
 	If CurrentData = Undefined Then
 		Return;
 	EndIf;

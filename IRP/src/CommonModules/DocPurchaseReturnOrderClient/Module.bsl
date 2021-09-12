@@ -71,29 +71,25 @@ Procedure ItemListAfterDeleteRow(Object, Form, Item) Export
 	DocumentsClient.ItemListAfterDeleteRow(Object, Form, Item);
 EndProcedure
 
-Procedure ItemListOnChange(Object, Form, Item = Undefined, CalculationSettings = Undefined) Export
-	For Each Row In Object.ItemList Do
-		If Not ValueIsFilled(Row.Key) Then
-			Row.Key = New UUID();
-		EndIf;
-	EndDo;
+Procedure ItemListOnChange(Object, Form, Item = Undefined, CurrentRowData = Undefined) Export
+	DocumentsClient.FillRowIDInItemList(Object);
 	CurrenciesClient.CalculateAmount(Object, Form);
 	RowIDInfoClient.UpdateQuantity(Object, Form);
 EndProcedure
 
-Procedure ItemListOnActivateRow(Object, Form, Item) Export
-	CurrentRow = Form.Items.ItemList.CurrentData;
+Procedure ItemListOnActivateRow(Object, Form, Item = Undefined, CurrentRowData = Undefined) Export
+	CurrentData = DocumentsClient.GetCurrentRowDataList(Form.Items.ItemList, CurrentRowData);
 
-	If CurrentRow = Undefined Then
+	If CurrentData = Undefined Then
 		Return;
 	EndIf;
 
-	If ValueIsFilled(CurrentRow.Store) And CurrentRow.Store <> Form.CurrentStore Then
-		DocumentsClient.SetCurrentStore(Object, Form, CurrentRow.Store);
+	If ValueIsFilled(CurrentData.Store) And CurrentData.Store <> Form.CurrentStore Then
+		DocumentsClient.SetCurrentStore(Object, Form, CurrentData.Store);
 	EndIf;
 
-	If ValueIsFilled(CurrentRow.PriceType) And CurrentRow.PriceType <> Form.CurrentPriceType Then
-		DocumentsClient.SetCurrentPriceType(Form, CurrentRow.PriceType);
+	If ValueIsFilled(CurrentData.PriceType) And CurrentData.PriceType <> Form.CurrentPriceType Then
+		DocumentsClient.SetCurrentPriceType(Form, CurrentData.PriceType);
 	EndIf;
 EndProcedure
 
@@ -220,8 +216,8 @@ EndFunction
 
 #Region Quantity
 
-Procedure ItemListQuantityOnChange(Object, Form, Item, AddInfo = Undefined) Export
-	CurrentData = Form.Items.ItemList.CurrentData;
+Procedure ItemListQuantityOnChange(Object, Form, Item = Undefined, CurrentRowData = Undefined, AddInfo = Undefined) Export
+	CurrentData = DocumentsClient.GetCurrentRowDataList(Form.Items.ItemList, CurrentRowData);
 	If CurrentData = Undefined Then
 		Return;
 	EndIf;
@@ -237,8 +233,8 @@ EndProcedure
 
 #Region Price
 
-Procedure ItemListPriceOnChange(Object, Form, Item, AddInfo = Undefined) Export
-	CurrentData = Form.Items.ItemList.CurrentData;
+Procedure ItemListPriceOnChange(Object, Form, Item = Undefined, CurrentRowData = Undefined, AddInfo = Undefined) Export
+	CurrentData = DocumentsClient.GetCurrentRowDataList(Form.Items.ItemList, CurrentRowData);
 	If CurrentData = Undefined Then
 		Return;
 	EndIf;
@@ -253,8 +249,8 @@ EndProcedure
 
 #Region TotalAmount
 
-Procedure ItemListTotalAmountOnChange(Object, Form, Item, AddInfo = Undefined) Export
-	CurrentData = Form.Items.ItemList.CurrentData;
+Procedure ItemListTotalAmountOnChange(Object, Form, Item = Undefined, CurrentRowData = Undefined, AddInfo = Undefined) Export
+	CurrentData = DocumentsClient.GetCurrentRowDataList(Form.Items.ItemList, CurrentRowData);
 	If CurrentData = Undefined Then
 		Return;
 	EndIf;
@@ -272,8 +268,8 @@ EndProcedure
 
 #Region TaxAmount
 
-Procedure ItemListTaxAmountOnChange(Object, Form, Item, AddInfo = Undefined) Export
-	CurrentData = Form.Items.ItemList.CurrentData;
+Procedure ItemListTaxAmountOnChange(Object, Form, Item = Undefined, CurrentRowData = Undefined, AddInfo = Undefined) Export
+	CurrentData = DocumentsClient.GetCurrentRowDataList(Form.Items.ItemList, CurrentRowData);
 	If CurrentData = Undefined Then
 		Return;
 	EndIf;
@@ -288,8 +284,8 @@ EndProcedure
 
 #Region DontCalculateRow
 
-Procedure ItemListDontCalculateRowOnChange(Object, Form, Item, AddInfo = Undefined) Export
-	CurrentData = Form.Items.ItemList.CurrentData;
+Procedure ItemListDontCalculateRowOnChange(Object, Form, Item = Undefined, CurrentRowData = Undefined, AddInfo = Undefined) Export
+	CurrentData = DocumentsClient.GetCurrentRowDataList(Form.Items.ItemList, CurrentRowData);
 	If CurrentData = Undefined Then
 		Return;
 	EndIf;
@@ -307,8 +303,8 @@ EndProcedure
 
 #Region TaxValue
 
-Procedure ItemListTaxValueOnChange(Object, Form, Item, AddInfo = Undefined) Export
-	CurrentData = Form.Items.ItemList.CurrentData;
+Procedure ItemListTaxValueOnChange(Object, Form, Item = Undefined, CurrentRowData = Undefined, AddInfo = Undefined) Export
+	CurrentData = DocumentsClient.GetCurrentRowDataList(Form.Items.ItemList, CurrentRowData);
 	If CurrentData = Undefined Then
 		Return;
 	EndIf;

@@ -10,7 +10,7 @@ Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 	AddCommonAttributesToForm(Object, Form);
 
 	If SessionParameters.isMobile Then
-		DocumentServerMobile.OnCreateAtServer(Object, Form, Cancel, StandardProcessing);
+		DocumentsServerMobile.OnCreateAtServer(Object, Form, Cancel, StandardProcessing);
 	Else
 		If Form.Items.Find("GroupTitleCollapsed") <> Undefined Then
 			DocumentsClientServer.ChangeTitleCollapse(Object, Form, Not ValueIsFilled(Object.Ref));

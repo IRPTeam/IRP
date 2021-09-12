@@ -88,8 +88,8 @@ find /c "Distribution files successfully created" %env.LogFile1C% && ( echo Succ
       <build-trigger id="TRIGGER_6" type="buildDependencyTrigger">
         <parameters>
           <param name="afterSuccessfulBuildOnly" value="true" />
-          <param name="branchFilter" value="+:&lt;default&gt;" />
-          <param name="dependsOn" value="Irp_Build" />
+          <param name="branchFilter" value="+:*multilang" />
+          <param name="dependsOn" value="IRP_BuildCF" />
         </parameters>
       </build-trigger>
     </build-triggers>

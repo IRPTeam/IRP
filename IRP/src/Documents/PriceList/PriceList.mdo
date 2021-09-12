@@ -334,6 +334,34 @@
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
+    <attributes uuid="5dc05a1d-ed46-4b54-a307-ef8ead317253">
+      <name>InputUnit</name>
+      <synonym>
+        <key>en</key>
+        <value>Input unit</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.Units</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="abd6138b-55f3-45b0-9bd0-a12fefba134c">
+      <name>InputPrice</name>
+      <synonym>
+        <key>en</key>
+        <value>Input price</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeQuantity</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
   </tabularSections>
   <tabularSections uuid="5b369985-7c3b-4181-acba-3f11456c3344">
     <producedTypes>

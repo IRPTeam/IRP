@@ -343,17 +343,20 @@ Function GetDataPrice()
 	TableOfResult.Columns.Add("Item");
 	TableOfResult.Columns.Add("Price");
 	TableOfResult.Columns.Add("Key");
-
+	TableOfResult.Columns.Add("InputUnit");
+	TableOfResult.Columns.Add("InputPrice");
+	
 	TableOfKeys = Object.DataSet.Unload();
 	TableOfKeys.GroupBy("Key");
 
 	For Each Row In TableOfKeys Do
-		For Each RowPrice In Object.DataPrice.Unload(New Structure("Key", Row.Key), "Item, Price, Key") Do
+		For Each RowPrice In Object.DataPrice.Unload(New Structure("Key", Row.Key), 
+			"Item, Price, Key, InputUnit, InputPrice") Do
 			NewRow = TableOfResult.Add();
 			FillPropertyValues(NewRow, RowPrice);
 		EndDo;
 	EndDo;
-	TableOfResult.GroupBy("Item, Price, Key");
+	TableOfResult.GroupBy("Item, Price, Key, InputUnit, InputPrice");
 	Return TableOfResult;
 EndFunction
 
@@ -447,8 +450,16 @@ Procedure DrawFormTablePriceKeyList()
 		EndDo;
 
 	EndIf;
+
+	// Create columns InputPrice	
+	NewColumn_InputPrice = New FormAttribute("InputPrice", Metadata.DefinedTypes.typePrice.Type, Table.Name, "Input price");
+	ArrayOfAttributes.Add(NewColumn_InputPrice);
+	
+	Table.Columns.Add(
+			New Structure("Name, DataPath, OwnerName, FormName", NewColumn_InputPrice.Name, Table.Name + "."
+		+ NewColumn_InputPrice.Name, Undefined, ""));
 		
-		// Create columns Price	
+	// Create columns Price	
 	NewColumn_Price = New FormAttribute("Price", Metadata.DefinedTypes.typePrice.Type, Table.Name, "Price");
 	ArrayOfAttributes.Add(NewColumn_Price);
 
@@ -456,6 +467,7 @@ Procedure DrawFormTablePriceKeyList()
 			New Structure("Name, DataPath, OwnerName, FormName", NewColumn_Price.Name, Table.Name + "."
 		+ NewColumn_Price.Name, Undefined, ""));
 
+	
 	ThisObject.ChangeAttributes(ArrayOfAttributes);
 		
 		// Form columns	
@@ -486,11 +498,13 @@ Procedure DrawFormTablePriceKeyList()
 	DataPrice = GetDataPrice();
 	For Each Row In DataPrice Do
 		NewRow = ThisObject.PriceKeyList.Add();
-		NewRow.Price = Row.Price;
-		NewRow.Item = Row.Item;
-
+		NewRow.Price      = Row.Price;
+		NewRow.Item       = Row.Item;
+		NewRow.InputUnit  = Row.InputUnit;
+		NewRow.InputPrice = Row.InputPrice;
+		
 		For Each Column In SavedDataStructure.Fields.Table.Columns Do
-			If Column.Name = "Price" Then
+			If Column.Name = "Price" Or Column.Name = "InputPrice" Then
 				Continue;
 			EndIf;
 			NewRow[Column.Name] = GetAttributeValue(Row.Key, ThisObject[Column.OwnerName]);
@@ -520,16 +534,18 @@ Procedure SaveTablePriceKeyList(Cancel, CurrentObject, WriteParameters)
 
 	For Each Row In ThisObject.PriceKeyList Do
 		NewRowPrice = CurrentObject.DataPrice.Add();
-		NewRowPrice.Key = New UUID();
-		NewRowPrice.Price = Row.Price;
-		NewRowPrice.Item = Row.Item;
+		NewRowPrice.Key        = New UUID();
+		NewRowPrice.Price      = Row.Price;
+		NewRowPrice.Item       = Row.Item;
+		NewRowPrice.InputUnit  = Row.InputUnit;
+		NewRowPrice.InputPrice = Row.InputPrice;
 
 		If SavedDataStructure.Fields.Table.Columns.Count() <= 1 Then
 			NewRow = CurrentObject.DataSet.Add();
 			NewRow.Key = NewRowPrice.Key;
 		Else
 			For Each Column In SavedDataStructure.Fields.Table.Columns Do
-				If Column.Name = "Price" Then
+				If Column.Name = "Price" Or Column.Name = "InputPrice" Then
 					Continue;
 				EndIf;
 				NewRow = CurrentObject.DataSet.Add();

@@ -26,6 +26,7 @@
       <commands>Document.ShipmentConfirmation.StandardCommand.OpenList</commands>
       <commands>Document.GoodsReceipt.StandardCommand.OpenList</commands>
       <commands>Document.InventoryTransfer.StandardCommand.OpenList</commands>
+      <commands>Document.SalesOrder.StandardCommand.OpenList</commands>
     </placementFragments>
     <placementFragments>
       <group>ActionsPanelCreate</group>
@@ -40,6 +41,7 @@
       <commands>Document.GoodsReceipt.StandardCommand.OpenList</commands>
       <commands>Document.ShipmentConfirmation.StandardCommand.OpenList</commands>
       <commands>Document.InventoryTransfer.StandardCommand.OpenList</commands>
+      <commands>Document.SalesOrder.StandardCommand.OpenList</commands>
     </orderFragments>
   </commandsOrder>
 </cmi:CommandInterface>

@@ -8,6 +8,13 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 EndProcedure
 
 &AtClient
+Procedure EnterCountOnScan(Command)
+	Items.ItemListEnterCountOnScan.Check = Not Items.ItemListEnterCountOnScan.Check;
+	ByOneScan = Items.ItemListEnterCountOnScan.Check; 
+EndProcedure
+
+
+&AtClient
 Procedure OnOpen(Cancel)
 	FillItemList(FormOwner.Object);
 EndProcedure
@@ -97,7 +104,7 @@ Procedure SearchByBarcode(Command, Barcode = "")
 EndProcedure
 
 &AtClient
-Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
+Async Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
 
 	If Not AdditionalParameters.FoundedItems.Count()
 		And AdditionalParameters.Barcodes.Count() Then
@@ -111,7 +118,11 @@ Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
 
 	ItemListRow = Undefined;
 	For Each Row In AdditionalParameters.FoundedItems Do
-
+#If Not WebClient Then		
+		If Not ByOneScan Then
+			Row.Quantity = Await InputNumberAsync(0, R().QuestionToUser_018);
+		EndIf;
+#EndIf
 		Filter = New Structure();
 		Filter.Insert("ItemKey", Row.ItemKey);
 		Filter.Insert("Unit", Row.Unit);

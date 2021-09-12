@@ -1536,7 +1536,21 @@ Procedure SearchByBarcodeEnd(Result, Parameters) Export
 	EndIf;
 EndProcedure
 
-Procedure OpenScanForm(Object, Form, Module) Export
+Async Procedure OpenScanForm(Object, Form, Module) Export
+	
+	If Object.Ref.isEmpty() Then
+#If WebClient Then
+		Form.Write();
+#Else				
+		Answer = Await DoQueryBoxAsync(R().InfoMessage_004, QuestionDialogMode.OKCancel);
+		If Answer = DialogReturnCode.OK Then 
+			Form.Write();
+		Else
+			Return;
+		EndIf;
+#EndIf
+	EndIf;
+	
 	NotifyParameters = New Structure;
 	NotifyParameters.Insert("Object", Object);
 	NotifyParameters.Insert("Form", Form);

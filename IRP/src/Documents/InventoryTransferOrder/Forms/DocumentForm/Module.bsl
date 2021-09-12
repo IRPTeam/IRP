@@ -298,7 +298,7 @@ EndProcedure
 #Region Service
 
 &AtClient
-Function GetProccessingModule() Export
+Function GetProcessingModule() Export
 	Str = New Structure;
 	Str.Insert("Client", DocInventoryTransferOrderClient);
 	Str.Insert("Server", DocInventoryTransferOrderServer);

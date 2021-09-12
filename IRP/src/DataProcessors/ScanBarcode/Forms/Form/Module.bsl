@@ -39,7 +39,7 @@ EndProcedure
 
 &AtClient
 Procedure Done(Command)
-	ClientModule = FormOwner.GetProccessingModule().Client;   
+	ClientModule = FormOwner.GetProcessingModule().Client;   
 	For Each Row In Object.ItemList Do
 		If Row.Quantity = Row.ScannedQuantity Then
 			Continue; 

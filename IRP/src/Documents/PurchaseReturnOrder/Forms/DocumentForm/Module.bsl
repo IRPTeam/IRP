@@ -506,7 +506,7 @@ EndProcedure
 #Region Service
 
 &AtClient
-Function GetProccessingModule() Export
+Function GetProcessingModule() Export
 	Str = New Structure;
 	Str.Insert("Client", DocPurchaseReturnOrderClient);
 	Str.Insert("Server", DocPurchaseReturnOrderServer);

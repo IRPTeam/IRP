@@ -589,7 +589,7 @@ EndProcedure
 #Region Service
 
 &AtClient
-Function GetProccessingModule() Export
+Function GetProcessingModule() Export
 	Str = New Structure;
 	Str.Insert("Client", DocSalesInvoiceClient);
 	Str.Insert("Server", DocSalesInvoiceServer);

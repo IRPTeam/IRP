@@ -292,7 +292,7 @@ EndProcedure
 #Region Service
 
 &AtClient
-Function GetProccessingModule() Export
+Function GetProcessingModule() Export
 	Str = New Structure;
 	Str.Insert("Client", DocUnbundlingClient);
 	Str.Insert("Server", DocUnbundlingServer);

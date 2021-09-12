@@ -22,7 +22,6 @@
     <typesFilterValue xsi:type="core:ReferenceValue">
       <value>Catalog.AddAttributeAndPropertySets.Document_InventoryTransfer</value>
     </typesFilterValue>
-    <dataPathField>-1</dataPathField>
     <characteristicValues>InformationRegister.AddProperties</characteristicValues>
     <objectField>InformationRegister.AddProperties.Dimension.Object</objectField>
     <typeField>InformationRegister.AddProperties.Dimension.Property</typeField>
@@ -35,7 +34,6 @@
     <typesFilterValue xsi:type="core:ReferenceValue">
       <value>Catalog.AddAttributeAndPropertySets.Document_InventoryTransfer</value>
     </typesFilterValue>
-    <dataPathField>-1</dataPathField>
     <characteristicValues>Document.InventoryTransfer.TabularSection.AddAttributes</characteristicValues>
     <objectField>Document.InventoryTransfer.TabularSection.AddAttributes.StandardAttribute.Ref</objectField>
     <typeField>Document.InventoryTransfer.TabularSection.AddAttributes.Attribute.Property</typeField>

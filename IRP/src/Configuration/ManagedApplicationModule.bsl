@@ -1,7 +1,7 @@
 Var globalEquipments Export;
 
 Procedure OnStart()
-	isMobile = True;
+	isMobile = False;
 #If MobileAppClient Or MobileClient Or MobileAppServer Then
 	isMobile = True;
 #EndIf

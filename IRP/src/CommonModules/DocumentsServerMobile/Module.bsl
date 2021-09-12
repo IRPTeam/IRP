@@ -15,13 +15,13 @@ Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 		Form.Items.GroupTitleItems.Group = ChildFormItemsGroup.Vertical;
 		Form.Items.Move(NewItem, MainPages, MainPages.ChildItems[0]);
 		Form.Items.Move(Form.Items.GroupTitle, NewItem);
+		Form.Items.Move(Form.Items.FormPostAndClose, NewItem);
 		MainPages.PagesRepresentation = FormPagesRepresentation.TabsOnBottom;		
 	EndIf;
 	
-	If Form.Items.Find("ItemListOpenPickupItems") <> Undefined Then
-		Form.Items.ItemListOpenPickupItems.Visible = False;
+	If Form.Items.Find("GroupBottom") <> Undefined Then
+		Form.Items.GroupBottom.Visible = False;
 	EndIf;
-	
 	If Form.Items.Find("ItemListOpenPickupItems") <> Undefined Then
 		Form.Items.ItemListOpenPickupItems.Visible = False;
 	EndIf;

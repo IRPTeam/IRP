@@ -1404,7 +1404,7 @@ Scenario: _0154105 check filling in and refilling Purchase order
 				| '296,61' | 'Shirt'    | '18%' | '38/Black'  | '2,000' | '90,49'      | 'pcs'  | '502,73'     | '593,22'       | 'Store 03' |
 	* Check filling in prices and calculate taxes when adding items via barcode search
 		* Add item via barcodes
-			And I click "ItemListSearchByBarcode" button
+			And I click "SearchByBarcode" button
 			And I input "2202283739" text in "InputFld" field
 			And Delay 2
 			And I click "OK" button
@@ -5405,7 +5405,7 @@ Scenario: _0154141 check filling in and refilling Purchase order closing
 				| '296,61' | 'Shirt'    | '18%' | '38/Black'  | '2,000' | '90,49'      | 'pcs'  | '502,73'     | '593,22'       | 'Store 03' |
 	* Check filling in prices and calculate taxes when adding items via barcode search
 		* Add item via barcodes
-			And I click "ItemListSearchByBarcode" button
+			And I click "SearchByBarcode" button
 			And I input "2202283739" text in "InputFld" field
 			And Delay 2
 			And I click "OK" button

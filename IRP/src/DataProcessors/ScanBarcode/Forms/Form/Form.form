@@ -517,7 +517,7 @@
           <name>ItemListCommandBar</name>
           <id>6</id>
           <items xsi:type="form:Button">
-            <name>ItemListSearchByBarcode</name>
+            <name>SearchByBarcode</name>
             <id>132</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -525,7 +525,7 @@
               <common>true</common>
             </userVisible>
             <extendedTooltip>
-              <name>ItemListSearchByBarcodeExtendedTooltip</name>
+              <name>SearchByBarcodeExtendedTooltip</name>
               <id>133</id>
               <visible>true</visible>
               <enabled>true</enabled>

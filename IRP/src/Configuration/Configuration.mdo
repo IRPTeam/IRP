@@ -120,21 +120,28 @@
   <subsystems>Subsystem.UniqueID</subsystems>
   <subsystems>Subsystem.Retail</subsystems>
   <styles>Style.TestDataBase</styles>
+  <commonPictures>CommonPicture.AccountingFlags</commonPictures>
   <commonPictures>CommonPicture.AddDataProc</commonPictures>
   <commonPictures>CommonPicture.AddProperties</commonPictures>
+  <commonPictures>CommonPicture.Attributes</commonPictures>
   <commonPictures>CommonPicture.AutoTest</commonPictures>
   <commonPictures>CommonPicture.Barcode</commonPictures>
   <commonPictures>CommonPicture.BarcodePicture</commonPictures>
   <commonPictures>CommonPicture.CashOk</commonPictures>
   <commonPictures>CommonPicture.Cloud</commonPictures>
+  <commonPictures>CommonPicture.CommonAttributes</commonPictures>
   <commonPictures>CommonPicture.CurrencyRateDirection</commonPictures>
   <commonPictures>CommonPicture.Delivery</commonPictures>
+  <commonPictures>CommonPicture.Dimensions</commonPictures>
   <commonPictures>CommonPicture.DocumentStatuses</commonPictures>
   <commonPictures>CommonPicture.EmptyPicture</commonPictures>
   <commonPictures>CommonPicture.Finance</commonPictures>
   <commonPictures>CommonPicture.IconCollection1</commonPictures>
   <commonPictures>CommonPicture.IconCollection2</commonPictures>
   <commonPictures>CommonPicture.IconCollection3</commonPictures>
+  <commonPictures>CommonPicture.IconCollection4</commonPictures>
+  <commonPictures>CommonPicture.IconCollection5</commonPictures>
+  <commonPictures>CommonPicture.IconCollection6</commonPictures>
   <commonPictures>CommonPicture.IDInfo</commonPictures>
   <commonPictures>CommonPicture.Info</commonPictures>
   <commonPictures>CommonPicture.Integration</commonPictures>
@@ -149,25 +156,18 @@
   <commonPictures>CommonPicture.QRPicture</commonPictures>
   <commonPictures>CommonPicture.Quantity</commonPictures>
   <commonPictures>CommonPicture.RadioButton</commonPictures>
+  <commonPictures>CommonPicture.Recalculations</commonPictures>
   <commonPictures>CommonPicture.Reports</commonPictures>
   <commonPictures>CommonPicture.Retail</commonPictures>
   <commonPictures>CommonPicture.Sales</commonPictures>
   <commonPictures>CommonPicture.SerialNumber</commonPictures>
+  <commonPictures>CommonPicture.SessionParameter</commonPictures>
   <commonPictures>CommonPicture.Settings</commonPictures>
   <commonPictures>CommonPicture.Share</commonPictures>
   <commonPictures>CommonPicture.SpecialOffer</commonPictures>
+  <commonPictures>CommonPicture.StandardAttributes</commonPictures>
   <commonPictures>CommonPicture.Store</commonPictures>
   <commonPictures>CommonPicture.Total</commonPictures>
-  <commonPictures>CommonPicture.IconCollection4</commonPictures>
-  <commonPictures>CommonPicture.CommonAttributes</commonPictures>
-  <commonPictures>CommonPicture.Attributes</commonPictures>
-  <commonPictures>CommonPicture.Dimensions</commonPictures>
-  <commonPictures>CommonPicture.StandardAttributes</commonPictures>
-  <commonPictures>CommonPicture.SessionParameter</commonPictures>
-  <commonPictures>CommonPicture.AccountingFlags</commonPictures>
-  <commonPictures>CommonPicture.Recalculations</commonPictures>
-  <commonPictures>CommonPicture.IconCollection5</commonPictures>
-  <commonPictures>CommonPicture.IconCollection6</commonPictures>
   <sessionParameters>SessionParameter.ClientType</sessionParameters>
   <sessionParameters>SessionParameter.ConnectedAddDataProc</sessionParameters>
   <sessionParameters>SessionParameter.ConnectionSettings</sessionParameters>

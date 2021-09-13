@@ -569,6 +569,8 @@ Procedure AddOrLinkUnlinkDocumentRowsContinue(Result, AdditionalParameters) Expo
 	DocumentsClient.SetLockedRowsForItemListByTradeDocuments(Object, ThisObject, "GoodsReceipts");
 	DocumentsClient.UpdateTradeDocumentsTree(Object, ThisObject, "GoodsReceipts", "GoodsReceiptsTree",
 		"QuantityInGoodsReceipt");
+	SerialLotNumberClient.UpdateSerialLotNumbersPresentation(Object);
+	SerialLotNumberClient.UpdateSerialLotNumbersTree(Object, ThisObject);
 EndProcedure
 
 &AtServer

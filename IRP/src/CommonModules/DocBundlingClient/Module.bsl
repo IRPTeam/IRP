@@ -8,28 +8,24 @@ EndProcedure
 
 #Region Item
 
-Procedure ItemListOnChange(Object, Form, Item = Undefined, CalculationSettings = Undefined) Export
-	For Each Row In Object.ItemList Do
-		If Not ValueIsFilled(Row.Key) Then
-			Row.Key = New UUID();
-		EndIf;
-	EndDo;
+Procedure ItemListOnChange(Object, Form, Item = Undefined, CurrentRowData = Undefined) Export
+	DocumentsClient.FillRowIDInItemList(Object);
 EndProcedure
 
-Procedure ItemListItemOnChange(Object, Form, Item = Undefined) Export
-	CurrentRow = Form.Items.ItemList.CurrentData;
-	If CurrentRow = Undefined Then
+Procedure ItemListItemOnChange(Object, Form, Item = Undefined, CurrentRowData = Undefined) Export
+	CurrentData = DocumentsClient.GetCurrentRowDataList(Form.Items.ItemList, CurrentRowData);
+	If CurrentData = Undefined Then
 		Return;
 	EndIf;
-	CurrentRow.ItemKey = CatItemsServer.GetItemKeyByItem(CurrentRow.Item);
-	If ValueIsFilled(CurrentRow.ItemKey) And ServiceSystemServer.GetObjectAttribute(CurrentRow.ItemKey, "Item")
-		<> CurrentRow.Item Then
-		CurrentRow.ItemKey = Undefined;
+	CurrentData.ItemKey = CatItemsServer.GetItemKeyByItem(CurrentData.Item);
+	If ValueIsFilled(CurrentData.ItemKey) 
+		And ServiceSystemServer.GetObjectAttribute(CurrentData.ItemKey, "Item")	<> CurrentData.Item Then
+		CurrentData.ItemKey = Undefined;
 	EndIf;
 
 	CalculationSettings = New Structure();
 	CalculationSettings.Insert("UpdateUnit");
-	CalculationStringsClientServer.CalculateItemsRow(Object, CurrentRow, CalculationSettings);
+	CalculationStringsClientServer.CalculateItemsRow(Object, CurrentData, CalculationSettings);
 EndProcedure
 
 Procedure ItemListItemStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
@@ -106,8 +102,8 @@ Procedure UnitOnChange(Object, Form, Item) Export
 		Object.Quantity);
 EndProcedure
 
-Procedure ItemListQuantityOnChange(Object, Form, Item) Export
-	CurrentData = Form.Items.ItemList.CurrentData;
+Procedure ItemListQuantityOnChange(Object, Form, Item = Undefined, CurrentRowData = Undefined) Export
+	CurrentData = DocumentsClient.GetCurrentRowDataList(Form.Items.ItemList, CurrentRowData);
 	If CurrentData = Undefined Then
 		Return;
 	EndIf;
@@ -115,8 +111,8 @@ Procedure ItemListQuantityOnChange(Object, Form, Item) Export
 	CalculationStringsClientServer.CalculateItemsRow(Object, CurrentData, Actions);
 EndProcedure
 
-Procedure ItemListUnitOnChange(Object, Form, Item) Export
-	CurrentData = Form.Items.ItemList.CurrentData;
+Procedure ItemListUnitOnChange(Object, Form, Item = Undefined, CurrentRowData = Undefined) Export
+	CurrentData = DocumentsClient.GetCurrentRowDataList(Form.Items.ItemList, CurrentRowData);
 	If CurrentData = Undefined Then
 		Return;
 	EndIf;

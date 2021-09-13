@@ -81,16 +81,15 @@ Procedure SearchByBarcode(Barcode, Object, Form, ClientModule, AddInfo = Undefin
 			Return;
 		EndIf;
 #Else
-			ShowInputString(NotifyDescription, "", DescriptionField);
+		ShowInputString(NotifyDescription, "", DescriptionField);
 #EndIf
 	Else
 #If MobileClient Then
 		MobileBarcodeModule.ScanBarcodeEndMobile(Barcode, True, "", NotifyParameters);
 #Else
-			ExecuteNotifyProcessing(NotifyDescription, Barcode);
+		ExecuteNotifyProcessing(NotifyDescription, Barcode);
 #EndIf
-	EndIf
-	;
+	EndIf;
 EndProcedure
 
 Procedure CloseMobileScanner() Export

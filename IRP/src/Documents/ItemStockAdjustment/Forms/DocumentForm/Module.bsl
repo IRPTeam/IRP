@@ -140,6 +140,11 @@ Procedure SearchByBarcode(Barcode = "")
 	DocItemStockAdjustmentClient.SearchByBarcode(Barcode, Object, ThisObject);
 EndProcedure
 
+&AtClient
+Procedure OpenScanForm(Command)
+	DocumentsClient.OpenScanForm(Object, ThisObject, Command);
+EndProcedure
+
 #Region GroupTitleDecorations
 
 &AtClient
@@ -201,5 +206,17 @@ Procedure GeneratedFormCommandActionByNameServer(CommandName) Export
 EndProcedure
 
 #EndRegion
+
+#EndRegion
+
+#Region Service
+
+&AtClient
+Function GetProcessingModule() Export
+	Str = New Structure;
+	Str.Insert("Client", DocItemStockAdjustmentClient);
+	Str.Insert("Server", DocItemStockAdjustmentServer);
+	Return Str;
+EndFunction
 
 #EndRegion

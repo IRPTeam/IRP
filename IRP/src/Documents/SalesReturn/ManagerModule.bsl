@@ -133,93 +133,94 @@ EndFunction
 
 Function ItemList()
 	Return "SELECT
-		   |	RowIDInfo.Ref AS Ref,
-		   |	RowIDInfo.Key AS Key,
-		   |	MAX(RowIDInfo.RowID) AS RowID
-		   |INTO TableRowIDInfo
-		   |FROM
-		   |	Document.SalesReturn.RowIDInfo AS RowIDInfo
-		   |WHERE
-		   |	RowIDInfo.Ref = &Ref
-		   |GROUP BY
-		   |	RowIDInfo.Ref,
-		   |	RowIDInfo.Key
-		   |;
-		   |
-		   |////////////////////////////////////////////////////////////////////////////////
-		   |SELECT
-		   |	GoodsReceipts.Key,
-		   |	GoodsReceipts.GoodsReceipt
-		   |INTO GoodsReceipts
-		   |FROM
-		   |	Document.SalesReturn.GoodsReceipts AS GoodsReceipts
-		   |WHERE
-		   |	GoodsReceipts.Ref = &Ref
-		   |GROUP BY
-		   |	GoodsReceipts.Key,
-		   |	GoodsReceipts.GoodsReceipt
-		   |;
-		   |
-		   |////////////////////////////////////////////////////////////////////////////////
-		   |SELECT
-		   |	ItemList.Ref.Company AS Company,
-		   |	ItemList.Store AS Store,
-		   |	ItemList.UseGoodsReceipt AS UseGoodsReceipt,
-		   |	ItemList.ItemKey AS ItemKey,
-		   |	ItemList.SalesReturnOrder AS SalesReturnOrder,
-		   |	NOT ItemList.SalesReturnOrder.Ref IS NULL AS SalesReturnOrderExists,
-		   |	ItemList.Ref AS SalesReturn,
-		   |	CASE
-		   |		WHEN ItemList.Ref.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
-		   |			THEN CASE
-		   |				WHEN ItemList.SalesInvoice.Ref IS NULL
-		   |					THEN ItemList.Ref
-		   |				ELSE ItemList.SalesInvoice
-		   |			END
-		   |		ELSE UNDEFINED
-		   |	END AS BasisDocument,
-		   |	ItemList.Ref AS AdvanceBasis,
-		   |	ItemList.Ref.DueAsAdvance AS DueAsAdvance,
-		   |	ItemList.QuantityInBaseUnit AS Quantity,
-		   |	ItemList.TotalAmount AS Amount,
-		   |	ItemList.Ref.Partner AS Partner,
-		   |	ItemList.Ref.LegalName AS LegalName,
-		   |	CASE
-		   |		WHEN ItemList.Ref.Agreement.Kind = VALUE(Enum.AgreementKinds.Regular)
-		   |		AND ItemList.Ref.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByStandardAgreement)
-		   |			THEN ItemList.Ref.Agreement.StandardAgreement
-		   |		ELSE ItemList.Ref.Agreement
-		   |	END AS Agreement,
-		   |	ISNULL(ItemList.Ref.Currency, VALUE(Catalog.Currencies.EmptyRef)) AS Currency,
-		   |	ItemList.Ref.Date AS Period,
-		   |	CASE
-		   |		WHEN ItemList.SalesInvoice.Ref IS NULL
-		   |		OR VALUETYPE(ItemList.SalesInvoice) <> TYPE(Document.SalesInvoice)
-		   |			THEN ItemList.Ref
-		   |		ELSE ItemList.SalesInvoice
-		   |	END AS SalesInvoice,
-		   |	ItemList.SalesInvoice AS AgingSalesInvoice,
-		   |	TableRowIDInfo.RowID AS RowKey,
-		   |	NOT GoodsReceipts.Key IS NULL AS GoodsReceiptExists,
-		   |	GoodsReceipts.GoodsReceipt,
-		   |	ItemList.NetAmount,
-		   |	ItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS IsService,
-		   |	ItemList.ReturnReason,
-		   |	ItemList.ProfitLossCenter AS ProfitLossCenter,
-		   |	ItemList.RevenueType AS RevenueType,
-		   |	ItemList.AdditionalAnalytic AS AdditionalAnalytic,
-		   |	ItemList.Ref.Branch AS Branch,
-		   |	ItemList.Ref.LegalNameContract AS LegalNameContract,
-		   |	ItemList.OffersAmount
-		   |INTO ItemList
-		   |FROM
-		   |	Document.SalesReturn.ItemList AS ItemList
-		   |		LEFT JOIN GoodsReceipts AS GoodsReceipts
-		   |		ON ItemList.Key = GoodsReceipts.Key
-		   |		LEFT JOIN TableRowIDInfo AS TableRowIDInfo
-		   |		ON ItemList.Key = TableRowIDInfo.Key
-		   |WHERE
-		   |	ItemList.Ref = &Ref";
+	|	RowIDInfo.Ref AS Ref,
+	|	RowIDInfo.Key AS Key,
+	|	MAX(RowIDInfo.RowID) AS RowID
+	|INTO TableRowIDInfo
+	|FROM
+	|	Document.SalesReturn.RowIDInfo AS RowIDInfo
+	|WHERE
+	|	RowIDInfo.Ref = &Ref
+	|GROUP BY
+	|	RowIDInfo.Ref,
+	|	RowIDInfo.Key
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	GoodsReceipts.Key,
+	|	GoodsReceipts.GoodsReceipt
+	|INTO GoodsReceipts
+	|FROM
+	|	Document.SalesReturn.GoodsReceipts AS GoodsReceipts
+	|WHERE
+	|	GoodsReceipts.Ref = &Ref
+	|GROUP BY
+	|	GoodsReceipts.Key,
+	|	GoodsReceipts.GoodsReceipt
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	ItemList.Ref.Company AS Company,
+	|	ItemList.Store AS Store,
+	|	ItemList.UseGoodsReceipt AS UseGoodsReceipt,
+	|	ItemList.ItemKey AS ItemKey,
+	|	ItemList.SalesReturnOrder AS SalesReturnOrder,
+	|	NOT ItemList.SalesReturnOrder.Ref IS NULL AS SalesReturnOrderExists,
+	|	ItemList.Ref AS SalesReturn,
+	|	CASE
+	|		WHEN ItemList.Ref.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
+	|			THEN CASE
+	|				WHEN ItemList.SalesInvoice.Ref IS NULL
+	|					THEN ItemList.Ref
+	|				ELSE ItemList.SalesInvoice
+	|			END
+	|		ELSE UNDEFINED
+	|	END AS BasisDocument,
+	|	ItemList.Ref AS AdvanceBasis,
+	|	ItemList.Ref.DueAsAdvance AS DueAsAdvance,
+	|	ItemList.QuantityInBaseUnit AS Quantity,
+	|	ItemList.TotalAmount AS Amount,
+	|	ItemList.Ref.Partner AS Partner,
+	|	ItemList.Ref.LegalName AS LegalName,
+	|	CASE
+	|		WHEN ItemList.Ref.Agreement.Kind = VALUE(Enum.AgreementKinds.Regular)
+	|		AND ItemList.Ref.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByStandardAgreement)
+	|			THEN ItemList.Ref.Agreement.StandardAgreement
+	|		ELSE ItemList.Ref.Agreement
+	|	END AS Agreement,
+	|	ISNULL(ItemList.Ref.Currency, VALUE(Catalog.Currencies.EmptyRef)) AS Currency,
+	|	ItemList.Ref.Date AS Period,
+	|	CASE
+	|		WHEN ItemList.SalesInvoice.Ref IS NULL
+	|		OR VALUETYPE(ItemList.SalesInvoice) <> TYPE(Document.SalesInvoice)
+	|			THEN ItemList.Ref
+	|		ELSE ItemList.SalesInvoice
+	|	END AS SalesInvoice,
+	|	ItemList.SalesInvoice AS AgingSalesInvoice,
+	|	TableRowIDInfo.RowID AS RowKey,
+	|	NOT GoodsReceipts.Key IS NULL AS GoodsReceiptExists,
+	|	GoodsReceipts.GoodsReceipt,
+	|	ItemList.NetAmount,
+	|	ItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS IsService,
+	|	ItemList.ReturnReason,
+	|	ItemList.ProfitLossCenter AS ProfitLossCenter,
+	|	ItemList.RevenueType AS RevenueType,
+	|	ItemList.AdditionalAnalytic AS AdditionalAnalytic,
+	|	ItemList.Ref.Branch AS Branch,
+	|	ItemList.Ref.LegalNameContract AS LegalNameContract,
+	|	ItemList.OffersAmount,
+	|	ItemList.PriceType
+	|INTO ItemList
+	|FROM
+	|	Document.SalesReturn.ItemList AS ItemList
+	|		LEFT JOIN GoodsReceipts AS GoodsReceipts
+	|		ON ItemList.Key = GoodsReceipts.Key
+	|		LEFT JOIN TableRowIDInfo AS TableRowIDInfo
+	|		ON ItemList.Key = TableRowIDInfo.Key
+	|WHERE
+	|	ItemList.Ref = &Ref";
 EndFunction
 
 Function GoodReceiptInfo()

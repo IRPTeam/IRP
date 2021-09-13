@@ -363,6 +363,11 @@ Procedure SearchByBarcode(Command, Barcode = "")
 EndProcedure
 
 &AtClient
+Procedure OpenScanForm(Command)
+	DocumentsClient.OpenScanForm(Object, ThisObject, Command);
+EndProcedure
+
+&AtClient
 Procedure ShowRowKey(Command)
 	DocumentsClient.ShowRowKey(ThisObject);
 EndProcedure
@@ -514,5 +519,17 @@ Procedure AddOrLinkUnlinkDocumentRowsContinueAtServer(Result)
 		RowIDInfoServer.AddLinkedDocumentRows(Object, Result.FillingValues);
 	EndIf;
 EndProcedure
+
+#EndRegion
+
+#Region Service
+
+&AtClient
+Function GetProcessingModule() Export
+	Str = New Structure;
+	Str.Insert("Client", DocPurchaseReturnClient);
+	Str.Insert("Server", DocPurchaseReturnServer);
+	Return Str;
+EndFunction
 
 #EndRegion

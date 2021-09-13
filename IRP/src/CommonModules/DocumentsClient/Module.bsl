@@ -442,6 +442,7 @@ EndProcedure
 
 #Region ItemCurrency
 
+
 Procedure CurrencyOnChange2(Object, Form, Module, Item = Undefined, Settings = Undefined, AddInfo = Undefined) Export
 	CommonFunctionsClientServer.DeleteFromAddInfo(AddInfo, "ServerData");
 	CurrencySettings = Module.CurrencySettings(Object, Form);
@@ -790,13 +791,13 @@ Procedure SetCurrentStore(Object, Form, Store, AddInfo = Undefined) Export
 	EndIf;
 EndProcedure
 
-Procedure FillUnfilledStoreInRow(Object, Item, Store) Export
-	If ValueIsFilled(Item.CurrentData.Store) Then
+Procedure FillUnfilledStoreInRow(Object, CurrentData, Store) Export
+	If ValueIsFilled(CurrentData.Store) Then
 		Return;
 	EndIf;
 
-	If CatItemsServer.StoreMustHave(Item.CurrentData.Item) Then
-		IdentifyRow = Item.CurrentRow;
+	If CatItemsServer.StoreMustHave(CurrentData.Item) Then
+		IdentifyRow = CurrentData.GetID();
 		RowItemList = Object.ItemList.FindByID(IdentifyRow);
 		RowItemList.Store = Store;
 	EndIf;
@@ -1535,6 +1536,39 @@ Procedure SearchByBarcodeEnd(Result, Parameters) Export
 	EndIf;
 EndProcedure
 
+Async Procedure OpenScanForm(Object, Form, Module) Export
+	
+	If Object.Ref.isEmpty() Then
+#If WebClient Then
+		Form.Write();
+#Else				
+		Answer = Await DoQueryBoxAsync(R().InfoMessage_004, QuestionDialogMode.OKCancel);
+		If Answer = DialogReturnCode.OK Then 
+			Form.Write();
+		Else
+			Return;
+		EndIf;
+#EndIf
+	EndIf;
+	
+	NotifyParameters = New Structure;
+	NotifyParameters.Insert("Object", Object);
+	NotifyParameters.Insert("Form", Form);
+	NotifyDescription = New NotifyDescription("OpenScanFormEnd", ThisObject, NotifyParameters);
+	OpenFormParameters = New Structure;
+	OpenFormParameters.Insert("Basis", Object.Ref);
+	OpenForm("DataProcessor.ScanBarcode.Form.Form", OpenFormParameters, Form, , , , NotifyDescription, FormWindowOpeningMode.LockOwnerWindow);
+EndProcedure
+
+Procedure OpenScanFormEnd(Result, AdditionalParameters) Export
+	If Not ValueIsFilled(Result) 
+		Or Not AdditionalParameters.Property("Object") 
+		Or Not AdditionalParameters.Property("Form") Then
+			
+		Return;
+	EndIf;
+EndProcedure
+
 #EndRegion
 
 #Region Common
@@ -1700,7 +1734,25 @@ EndProcedure
 
 #EndRegion
 
-#Region ItemListItemsOnChange
+#Region ItemList
+
+Function GetCurrentRowDataList(List, CurrentRow) Export
+	ReturnRow = CurrentRow;
+	If CurrentRow = Undefined Then
+		ReturnRow = List.CurrentData;
+	Else
+		Return CurrentRow;
+	EndIf;
+	Return ReturnRow;
+EndFunction
+
+Procedure FillRowIDInItemList(Object) Export
+	For Each Row In Object.ItemList Do
+		If Not ValueIsFilled(Row.Key) Then
+			Row.Key = New UUID();
+		EndIf;
+	EndDo;
+EndProcedure
 
 Procedure ItemListCalculateRowAmounts_QuantityChange(Object, Form, CurrentData, Item, Module = Undefined,
 	AddInfo = Undefined) Export

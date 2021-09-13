@@ -3,13 +3,24 @@
 Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 	If Form.Items.Find("GroupTitleDecorations") <> Undefined Then
 		Form.Items.GroupTitleDecorations.Visible = False;
-		NewItem = Form.Items.Add("PageHead", Type("FormGroup"), Form.Items.GroupMainPages);
+		If Form.Items.Find("GroupMainPages") <> Undefined Then
+			MainPages = Form.Items.GroupMainPages;
+		Else
+			MainPages = Form.Items.Pages;
+		EndIf;
+		
+		NewItem = Form.Items.Add("PageHead", Type("FormGroup"), MainPages);
 		NewItem.Type = FormGroupType.Page;
 		NewItem.Title = R().Form_035;
 		Form.Items.GroupTitleItems.Group = ChildFormItemsGroup.Vertical;
-		Form.Items.Move(NewItem, Form.Items.GroupMainPages, Form.Items.GroupMainPages.ChildItems[0]);
+		Form.Items.Move(NewItem, MainPages, MainPages.ChildItems[0]);
 		Form.Items.Move(Form.Items.GroupTitle, NewItem);
-		Form.Items.GroupMainPages.PagesRepresentation = FormPagesRepresentation.TabsOnBottom;
+		Form.Items.Move(Form.Items.FormPostAndClose, NewItem);
+		MainPages.PagesRepresentation = FormPagesRepresentation.TabsOnBottom;		
+	EndIf;
+	
+	If Form.Items.Find("GroupBottom") <> Undefined Then
+		Form.Items.GroupBottom.Visible = False;
 	EndIf;
 	If Form.Items.Find("ItemListOpenPickupItems") <> Undefined Then
 		Form.Items.ItemListOpenPickupItems.Visible = False;

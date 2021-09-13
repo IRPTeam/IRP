@@ -1645,7 +1645,7 @@ Scenario: check the barcode search in the purchase/purchase returns
 		| Description |
 		| Ferron BP     |
 	And I select current line in "List" table
-	And I click the button named "ItemListSearchByBarcode"
+	And I click the button named "SearchByBarcode"
 	And I input "2202283713" text in "InputFld" field
 	And I click "OK" button
 	* Check adding an items and filling in the price in the tabular part

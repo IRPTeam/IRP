@@ -803,6 +803,7 @@
     <horizontalStretch>true</horizontalStretch>
     <verticalStretch>true</verticalStretch>
     <fileDragMode>AsFileRef</fileDragMode>
+    <currentRowUse>SelectionPresentationAndChoice</currentRowUse>
   </items>
   <autoCommandBar>
     <name>FormCommandBar</name>
@@ -1226,7 +1227,7 @@
     <name>GenerateForCurrent</name>
     <title>
       <key>en</key>
-      <value>Generate for current</value>
+      <value>For current</value>
     </title>
     <id>7</id>
     <use>

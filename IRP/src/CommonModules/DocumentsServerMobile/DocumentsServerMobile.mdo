@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mdclass:CommonModule xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="54a441a3-6fb1-4dc3-bc35-ef44b63c2fff">
-  <name>DocumentServerMobile</name>
+  <name>DocumentsServerMobile</name>
   <synonym>
     <key>en</key>
-    <value>Document server mobile</value>
+    <value>Documents server mobile</value>
   </synonym>
   <server>true</server>
 </mdclass:CommonModule>

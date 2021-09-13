@@ -32,7 +32,6 @@ Procedure UndoPosting(Cancel)
 EndProcedure
 
 Procedure Filling(FillingData, FillingText, StandardProcessing)
-
 	If FillingData = Undefined Then
 		Return;
 	EndIf;

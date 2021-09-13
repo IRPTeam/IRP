@@ -157,6 +157,11 @@ Procedure SearchByBarcode(Command, Barcode = "")
 EndProcedure
 
 &AtClient
+Procedure OpenScanForm(Command)
+	DocumentsClient.OpenScanForm(Object, ThisObject, Command);
+EndProcedure
+
+&AtClient
 Procedure ShowRowKey(Command)
 	DocumentsClient.ShowRowKey(ThisObject);
 EndProcedure
@@ -187,5 +192,17 @@ EndProcedure
 Procedure AddAttributesCreateFormControl()
 	AddAttributesAndPropertiesServer.CreateFormControls(ThisObject);
 EndProcedure
+
+#EndRegion
+
+#Region Service
+
+&AtClient
+Function GetProcessingModule() Export
+	Str = New Structure;
+	Str.Insert("Client", DocInternalSupplyRequestClient);
+	Str.Insert("Server", DocInternalSupplyRequestServer);
+	Return Str;
+EndFunction
 
 #EndRegion

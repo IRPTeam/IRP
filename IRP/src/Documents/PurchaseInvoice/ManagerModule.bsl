@@ -332,19 +332,25 @@ Function SerialLotNumbers()
 EndFunction
 
 Function IncomingStocksReal()
-	Return "SELECT
-		   |	ItemList.Period,
-		   |	ItemList.Store,
-		   |	ItemList.ItemKey,
-		   |	ItemList.PurchaseOrder AS Order,
-		   |	ItemList.Quantity
-		   |INTO IncomingStocksReal
-		   |FROM
-		   |	ItemList AS ItemList
-		   |WHERE
-		   |	NOT ItemList.IsService
-		   |	AND NOT ItemList.UseGoodsReceipt
-		   |	AND NOT ItemList.GoodsReceiptExists";
+	Return 
+		"SELECT
+		|	ItemList.Period,
+		|	ItemList.Store,
+		|	ItemList.ItemKey,
+		|	ItemList.PurchaseOrder AS Order,
+		|	SUM(ItemList.Quantity) AS Quantity
+		|INTO IncomingStocksReal
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	NOT ItemList.IsService
+		|	AND NOT ItemList.UseGoodsReceipt
+		|	AND NOT ItemList.GoodsReceiptExists
+		|GROUP BY
+		|	ItemList.ItemKey,
+		|	ItemList.Period,
+		|	ItemList.PurchaseOrder,
+		|	ItemList.Store";
 EndFunction
 
 Function R1001T_Purchases()

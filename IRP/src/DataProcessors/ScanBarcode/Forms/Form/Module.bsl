@@ -116,38 +116,58 @@ Async Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
 	NotifyParameters.Insert("Form", ThisObject);
 	NotifyParameters.Insert("Object", ThisObject);
 
-	ItemListRow = Undefined;
 	For Each Row In AdditionalParameters.FoundedItems Do
 #If Not WebClient Then		
 		If Not ByOneScan Then
-			Row.Quantity = Await InputNumberAsync(0, R().QuestionToUser_018);
+			Filter = New Structure();
+			Filter.Insert("ItemKey", Row.ItemKey);
+			Filter.Insert("Unit", Row.Unit);
+			SearchInItemList = Object.ItemList.FindRows(Filter);
+			Row.Insert("CurrentQuantity", 0);
+			Row.Insert("Diff", 0);
+			Row.Insert("QunatityAtDocument", 0);
+			If SearchInItemList.Count() Then
+				Row.QunatityAtDocument = SearchInItemList[0].Quantity;
+				Row.CurrentQuantity = SearchInItemList[0].ScannedQuantity;
+				Row.Diff = Row.QunatityAtDocument - Row.CurrentQuantity;
+			EndIf;
+			NotifyOnClosing = New NotifyDescription("OnEditQuantityEnd", ThisObject);
+			OpenForm("DataProcessor.ScanBarcode.Form.RowForm", New Structure("FillingData" ,Row), ThisObject, , , , NotifyOnClosing);
 		EndIf;
 #EndIf
-		Filter = New Structure();
-		Filter.Insert("ItemKey", Row.ItemKey);
-		Filter.Insert("Unit", Row.Unit);
-
-		SearchInItemList = Object.ItemList.FindRows(Filter);
-
-		If SearchInItemList.Count() Then
-			ItemListRow = SearchInItemList[0];
-			ItemListRow.ScannedQuantity = ItemListRow.ScannedQuantity + Row.Quantity;
-		Else
-			ItemListRow = Object.ItemList.Add();
-			ItemListRow.Item = Row.Item;
-			ItemListRow.ItemKey = Row.ItemKey;
-			ItemListRow.Unit = Row.Unit;
-			ItemListRow.ScannedQuantity = Row.Quantity;
-		EndIf;
-
-		SaveBarcode(Object.Basis, Row.Barcode, Row.Quantity);
-		Modified = True;
+		OnEditQuantityEnd(Row);
 	EndDo;
 
+EndProcedure
+
+&AtClient
+Procedure OnEditQuantityEnd(Row, AddInfo = Undefined) Export
+	If Row = Undefined Then
+		Return;
+	EndIf;
+		
+	Filter = New Structure();
+	Filter.Insert("ItemKey", Row.ItemKey);
+	Filter.Insert("Unit", Row.Unit);
+	SearchInItemList = Object.ItemList.FindRows(Filter);
+	If SearchInItemList.Count() Then
+		ItemListRow = SearchInItemList[0];
+		ItemListRow.ScannedQuantity = ItemListRow.ScannedQuantity + Row.Quantity;
+	Else
+		ItemListRow = Object.ItemList.Add();
+		ItemListRow.Item = Row.Item;
+		ItemListRow.ItemKey = Row.ItemKey;
+		ItemListRow.Unit = Row.Unit;
+		ItemListRow.ScannedQuantity = Row.Quantity;
+	EndIf;
+
+	SaveBarcode(Object.Basis, Row.Barcode, Row.Quantity);
+	Modified = True;
+	
 	If Not ItemListRow = Undefined Then
 		Items.ItemList.CurrentRow = ItemListRow.GetID();
 	EndIf;
-
+	
 EndProcedure
 
 &AtClient

@@ -1535,4 +1535,14 @@ Procedure SetRegisters(Tables, DocumentRef, UseOldRegisters = False) Export
 	EndDo;
 EndProcedure
 
+Function Exists_R4014B_SerialLotNumber() Export
+	Return 
+		"SELECT *
+		|	INTO R4014B_SerialLotNumber_Exists
+		|FROM
+		|	AccumulationRegister.R4014B_SerialLotNumber AS R4014B_SerialLotNumber
+		|WHERE
+		|	R4014B_SerialLotNumber.Recorder = &Ref";
+EndFunction
+	
 #EndRegion

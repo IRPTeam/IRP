@@ -77,9 +77,19 @@ EndProcedure
 #Region CheckAfterWrite
 
 Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
+	Unposting = ?(Parameters.Property("Unposting"), Parameters.Unposting, False);
+	AccReg = AccumulationRegisters;
+	LineNumberAndItemKeyFromItemList = PostingServer.GetLineNumberAndItemKeyFromItemList(Ref, "Document.StockAdjustmentAsWriteOff.ItemList");
+	
 	Parameters.Insert("RecordType", AccumulationRecordType.Expense);
-	PostingServer.CheckBalance_AfterWrite(Ref, Cancel, Parameters, "Document.StockAdjustmentAsWriteOff.ItemList",
-		AddInfo);
+	PostingServer.CheckBalance_AfterWrite(Ref, Cancel, Parameters, "Document.StockAdjustmentAsWriteOff.ItemList", AddInfo);
+	
+	If Not Cancel And Not AccReg.R4014B_SerialLotNumber.CheckBalance(Ref, LineNumberAndItemKeyFromItemList, 
+		PostingServer.GetQueryTableByName("R4014B_SerialLotNumber", Parameters), 
+		PostingServer.GetQueryTableByName("R4014B_SerialLotNumber_Exists", Parameters),
+		AccumulationRecordType.Expense, Unposting, AddInfo) Then
+		Cancel = True;
+	EndIf;
 EndProcedure
 
 #EndRegion
@@ -106,6 +116,7 @@ Function GetQueryTextsSecondaryTables()
 	QueryArray.Add(SerialLotNumbers());
 	QueryArray.Add(PostingServer.Exists_R4011B_FreeStocks());
 	QueryArray.Add(PostingServer.Exists_R4010B_ActualStocks());
+	QueryArray.Add(PostingServer.Exists_R4014B_SerialLotNumber());
 	Return QueryArray;
 EndFunction
 

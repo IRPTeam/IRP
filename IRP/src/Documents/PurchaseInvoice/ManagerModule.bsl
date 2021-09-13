@@ -95,8 +95,8 @@ Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
 
 	PostingServer.CheckBalance_AfterWrite(Ref, Cancel, Parameters, "Document.PurchaseInvoice.ItemList", AddInfo);
 
-	LineNumberAndItemKeyFromItemList = PostingServer.GetLineNumberAndItemKeyFromItemList(Ref,
-		"Document.PurchaseInvoice.ItemList");
+	LineNumberAndItemKeyFromItemList = PostingServer.GetLineNumberAndItemKeyFromItemList(Ref, "Document.PurchaseInvoice.ItemList");
+	
 	If Not Cancel And Not AccReg.R4035B_IncomingStocks.CheckBalance(Ref, LineNumberAndItemKeyFromItemList,
 		PostingServer.GetQueryTableByName("R4035B_IncomingStocks", Parameters), PostingServer.GetQueryTableByName(
 		"Exists_R4035B_IncomingStocks", Parameters), AccumulationRecordType.Expense, Unposting, AddInfo) Then
@@ -107,6 +107,13 @@ Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
 		PostingServer.GetQueryTableByName("R4036B_IncomingStocksRequested", Parameters),
 		PostingServer.GetQueryTableByName("Exists_R4036B_IncomingStocksRequested", Parameters),
 		AccumulationRecordType.Expense, Unposting, AddInfo) Then
+		Cancel = True;
+	EndIf;
+	
+	If Not Cancel And Not AccReg.R4014B_SerialLotNumber.CheckBalance(Ref, LineNumberAndItemKeyFromItemList, 
+		PostingServer.GetQueryTableByName("R4014B_SerialLotNumber", Parameters), 
+		PostingServer.GetQueryTableByName("R4014B_SerialLotNumber_Exists", Parameters),
+		AccumulationRecordType.Receipt, Unposting, AddInfo) Then
 		Cancel = True;
 	EndIf;
 EndProcedure
@@ -138,6 +145,7 @@ Function GetQueryTextsSecondaryTables()
 	QueryArray.Add(PostingServer.Exists_R4010B_ActualStocks());
 	QueryArray.Add(Exists_R4035B_IncomingStocks());
 	QueryArray.Add(Exists_R4036B_IncomingStocksRequested());
+	QueryArray.Add(PostingServer.Exists_R4014B_SerialLotNumber());
 	Return QueryArray;
 EndFunction
 

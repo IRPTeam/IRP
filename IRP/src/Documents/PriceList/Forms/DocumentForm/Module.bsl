@@ -1,3 +1,4 @@
+
 #Region FormEventHandlers
 
 &AtServer
@@ -26,8 +27,7 @@ EndProcedure
 
 &AtClient
 Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefined) Export
-	If EventName = "UpdateAffectPricing" And Object.PriceListType = PredefinedValue(
-		"Enum.PriceListTypes.PriceByProperties") Then
+	If EventName = "UpdateAffectPricing" And Object.PriceListType = PredefinedValue("Enum.PriceListTypes.PriceByProperties") Then
 		DrawFormTablePriceKeyList();
 	EndIf;
 	If EventName = "UpdateAddAttributeAndPropertySets" Then
@@ -84,6 +84,34 @@ Procedure PriceKeyListItemEditTextChange(Item, Text, StandardProcessing)
 	DocPriceListClient.PriceKeyListItemEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
 EndProcedure
 
+&AtClient
+Procedure PriceKeyListItemOnChange(Item)
+	CurrentData = Items.PriceKeyList.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	CurrentData.InputUnit = GetInputUnit(CurrentData.Item);
+	CurrentData.Price = CalculatePrice(CurrentData.InputPrice, CurrentData.InputUnit);
+EndProcedure
+
+&AtClient
+Procedure PriceKeyListInputPriceOnChange(Item)
+	CurrentData = Items.PriceKeyList.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	CurrentData.Price = CalculatePrice(CurrentData.InputPrice, CurrentData.InputUnit);	
+EndProcedure
+
+&AtClient
+Procedure PriceKeyListInputUnitOnChange(Item)
+	CurrentData = Items.PriceKeyList.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	CurrentData.Price = CalculatePrice(CurrentData.InputPrice, CurrentData.InputUnit);	
+EndProcedure
+
 #EndRegion
 
 #Region ItemKeyList
@@ -98,7 +126,6 @@ Procedure ItemKeyListOnStartEdit(Item, NewRow, Clone)
 	If NewRow Or Clone Then
 		CurrentData.Key = New UUID();
 	EndIf;
-
 EndProcedure
 
 &AtClient
@@ -109,6 +136,34 @@ EndProcedure
 &AtClient
 Procedure ItemKeyListItemEditTextChange(Item, Text, StandardProcessing)
 	DocPriceListClient.ItemKeyListItemEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure ItemKeyListItemKeyOnChange(Item)
+	CurrentData = Items.ItemKeyList.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	CurrentData.InputUnit = GetInputUnit(CurrentData.ItemKey);
+	CurrentData.Price = CalculatePrice(CurrentData.InputPrice, CurrentData.InputUnit);
+EndProcedure
+
+&AtClient
+Procedure ItemKeyListInputPriceOnChange(Item)
+	CurrentData = Items.ItemKeyList.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	CurrentData.Price = CalculatePrice(CurrentData.InputPrice, CurrentData.InputUnit);	
+EndProcedure
+
+&AtClient
+Procedure ItemKeyListInputUnitOnChange(Item)
+	CurrentData = Items.ItemKeyList.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	CurrentData.Price = CalculatePrice(CurrentData.InputPrice, CurrentData.InputUnit);	
 EndProcedure
 
 #EndRegion
@@ -125,7 +180,56 @@ Procedure ItemListItemEditTextChange(Item, Text, StandardProcessing)
 	DocPriceListClient.ItemListItemEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
 EndProcedure
 
+&AtClient
+Procedure ItemListItemOnChange(Item)
+	CurrentData = Items.ItemList.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	CurrentData.InputUnit = GetInputUnit(CurrentData.Item);
+	CurrentData.Price = CalculatePrice(CurrentData.InputPrice, CurrentData.InputUnit);		
+EndProcedure
+
+&AtClient
+Procedure ItemListInputPriceOnChange(Item)
+	CurrentData = Items.ItemList.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	CurrentData.Price = CalculatePrice(CurrentData.InputPrice, CurrentData.InputUnit);	
+EndProcedure
+
+&AtClient
+Procedure ItemListInputUnitOnChange(Item)
+	CurrentData = Items.ItemList.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	CurrentData.Price = CalculatePrice(CurrentData.InputPrice, CurrentData.InputUnit);	
+EndProcedure
+
 #EndRegion
+
+&AtServer
+Function GetInputUnit(Item_ItemKey)
+	If TypeOf(Item_ItemKey) = Type("CatalogRef.Items") Then
+		Return Item_ItemKey.Unit;
+	ElsIf TypeOf(Item_ItemKey) = Type("CatalogRef.ItemKeys") Then
+		If ValueIsFilled(Item_ItemKey.Unit) Then
+			Return Item_ItemKey.Unit;
+		Else
+			Return Item_ItemKey.Item.Unit;
+		EndIf;
+	EndIf;
+EndFunction
+
+&AtServer
+Function CalculatePrice(InputPrice, InputUnit)
+	If Not ValueIsFilled(InputUnit) Then
+		Return 0;
+	EndIf;
+	Return InputUnit.Quantity * InputPrice; 
+EndFunction
 
 #EndRegion
 
@@ -482,6 +586,11 @@ Procedure DrawFormTablePriceKeyList()
 		NewFormColumn.Type = FormFieldType.InputField;
 		NewFormColumn.DataPath = Table.Name + "." + Column.Name;
 		NewFormColumn.AutoMarkIncomplete = True;
+		
+		If Upper(Column.Name) = Upper("InputPrice") Then
+			NewFormColumn.SetAction("OnChange", "PriceKeyListInputPriceOnChange");
+			NewFormColumn.AutoMarkIncomplete = False;
+		EndIf;
 
 		Column.FormName = NewFormColumn.Name;
 

@@ -75,10 +75,12 @@ Function GetAdditionalQueryParameters(Ref)
 	StrParams.Insert("Ref", Ref);
 	
 	PricesByProperties = New ValueTable();
-	PricesByProperties.Columns.Add("PriceList" , New TypeDescription("DocumentRef.PriceList"));
-	PricesByProperties.Columns.Add("PriceKey"  , New TypeDescription("CatalogRef.PriceKeys"));
-	PricesByProperties.Columns.Add("Item"      , New TypeDescription("CatalogRef.Items"));
-	PricesByProperties.Columns.Add("Price"     , New TypeDescription(Metadata.DefinedTypes.typePrice.Type));
+	PricesByProperties.Columns.Add("PriceList"  , New TypeDescription("DocumentRef.PriceList"));
+	PricesByProperties.Columns.Add("PriceKey"   , New TypeDescription("CatalogRef.PriceKeys"));
+	PricesByProperties.Columns.Add("Item"       , New TypeDescription("CatalogRef.Items"));
+	PricesByProperties.Columns.Add("InputUnit"  , New TypeDescription("CatalogRef.Units"));
+	PricesByProperties.Columns.Add("InputPrice" , New TypeDescription(Metadata.DefinedTypes.typePrice.Type));
+	PricesByProperties.Columns.Add("Price"      , New TypeDescription(Metadata.DefinedTypes.typePrice.Type));
 
 	If Ref.PriceListType = Enums.PriceListTypes.PriceByProperties Then
 		PricesByProperties = Catalogs.PriceKeys.GetTableByPriceList(Ref);
@@ -107,6 +109,8 @@ Function PricesByItemKeys()
 	|	PriceListItemKeyList.Ref.Date AS Period,
 	|	PriceListItemKeyList.Ref.PriceType AS PriceType,
 	|	PriceListItemKeyList.ItemKey,
+	|	PriceListItemKeyList.InputUnit,
+	|	PriceListItemKeyList.InputPrice,
 	|	PriceListItemKeyList.Price
 	|INTO PricesByItemKeys
 	|FROM
@@ -121,6 +125,8 @@ Function PricesByItems()
 	|	PriceListItemList.Ref.Date AS Period,
 	|	PriceListItemList.Ref.PriceType AS PriceType,
 	|	PriceListItemList.Item,
+	|	PriceListItemList.InputUnit,
+	|	PriceListItemList.InputPrice,
 	|	PriceListItemList.Price
 	|INTO PricesByItems
 	|FROM
@@ -135,6 +141,8 @@ Function PricesByProperties()
 	|	PricesByProperties.PriceList,
 	|	PricesByProperties.PriceKey,
 	|	PricesByProperties.Item,
+	|	PricesByProperties.InputUnit,
+	|	PricesByProperties.InputPrice,
 	|	PricesByProperties.Price
 	|INTO tmp
 	|FROM
@@ -145,6 +153,8 @@ Function PricesByProperties()
 	|	tmp.PriceList,
 	|	tmp.PriceKey,
 	|	tmp.Item,
+	|	tmp.InputUnit,
+	|	tmp.InputPrice,
 	|	tmp.Price,
 	|	DocPriceList.Date AS Period,
 	|	DocPriceList.PriceType

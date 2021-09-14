@@ -155,7 +155,7 @@ Scenario:_800021 check serial lot number control in the Sales invoice
 			And I finish line editing in "ItemList" table
 			And I click "Post" button
 			Then "1C:Enterprise" window is opened
-			And I click the button named "OK"
+			And I click "Ok" button
 			Then I wait that in user messages the "Line No. [1] [Phone A Brown] Serial lot number remaining: 5 . Required: 6 . Lacking: 1 ." substring will appear in 10 seconds
 		* Change quantity and post SI
 			And I activate field named "ItemListQuantity" in "ItemList" table
@@ -251,7 +251,7 @@ Scenario:_800022 check remaining stock control in the Retail sales receipt
 			And I finish line editing in "Payments" table
 			And I move to "Item list" tab
 			And I click "Post" button
-			And I click the button named "OK"			
+			And I click "Ok" button		
 		* Check serial lot numbers balance control
 			Then I wait that in user messages the "Line No. [1] [Phone A Brown] Serial lot number remaining: 0 . Required: 7 . Lacking: 7 ." substring will appear in 10 seconds
 		* Change serial lot number and post Retail sales receipt

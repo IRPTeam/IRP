@@ -1212,27 +1212,6 @@
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
   <formCommands>
-    <name>Done</name>
-    <title>
-      <key>en</key>
-      <value>Done</value>
-    </title>
-    <id>3</id>
-    <use>
-      <common>true</common>
-    </use>
-    <picture xsi:type="core:PictureRef">
-      <picture>StdPicture.AppearanceCheckBox</picture>
-    </picture>
-    <action xsi:type="form:FormCommandHandlerContainer">
-      <handler>
-        <name>Done</name>
-      </handler>
-    </action>
-    <representation>TextPicture</representation>
-    <currentRowUse>Auto</currentRowUse>
-  </formCommands>
-  <formCommands>
     <name>ButtonGoodsReceipt</name>
     <title>
       <key>en</key>

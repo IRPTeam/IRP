@@ -115,6 +115,7 @@ Function GetQueryTextsSecondaryTables()
 	QueryArray.Add(Payments());
 	QueryArray.Add(RetailSales());
 	QueryArray.Add(OffersInfo());
+	QueryArray.Add(SerialLotNumbers());
 	QueryArray.Add(PostingServer.Exists_R4011B_FreeStocks());
 	QueryArray.Add(PostingServer.Exists_R4010B_ActualStocks());
 	QueryArray.Add(PostingServer.Exists_R4014B_SerialLotNumber());
@@ -134,6 +135,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R2002T_SalesReturns());
 	QueryArray.Add(R2021B_CustomersTransactions());
 	QueryArray.Add(R5010B_ReconciliationStatement());
+	QueryArray.Add(R4014B_SerialLotNumber());
 	Return QueryArray;
 EndFunction
 
@@ -336,6 +338,38 @@ Function RetailSales()
 		   |INTO RetailSales
 		   |FROM
 		   |	tmpRetailSales AS tmpRetailSales";
+EndFunction
+
+Function SerialLotNumbers()
+	Return 
+		"SELECT
+		|	SerialLotNumbers.Ref.Date AS Period,
+		|	SerialLotNumbers.Ref.Company AS Company,
+		|	SerialLotNumbers.Ref.Branch AS Branch,
+		|	SerialLotNumbers.Key,
+		|	SerialLotNumbers.SerialLotNumber,
+		|	SerialLotNumbers.Quantity,
+		|	ItemList.ItemKey AS ItemKey
+		|INTO SerialLotNumbers
+		|FROM
+		|	Document.RetailReturnReceipt.SerialLotNumbers AS SerialLotNumbers
+		|		LEFT JOIN Document.RetailReturnReceipt.ItemList AS ItemList
+		|		ON SerialLotNumbers.Key = ItemList.Key
+		|		AND ItemList.Ref = &Ref
+		|WHERE
+		|	SerialLotNumbers.Ref = &Ref";
+EndFunction
+
+Function R4014B_SerialLotNumber()
+	Return 
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	*
+		|INTO R4014B_SerialLotNumber
+		|FROM
+		|	SerialLotNumbers AS SerialLotNumbers
+		|WHERE
+		|	TRUE";
 EndFunction
 
 Function R2001T_Sales()

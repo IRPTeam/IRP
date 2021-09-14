@@ -29,7 +29,6 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 #Region NewRegisterPosting
 	Tables = Parameters.DocumentDataTables;
 
-	Parameters.Insert("ConsiderStocksRequested", True);
 	IncomingStocksServer.ClosureIncomingStocks(Parameters);
 
 	QueryArray = GetQueryTextsMasterTables();

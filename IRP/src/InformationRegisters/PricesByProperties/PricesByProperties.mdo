@@ -33,6 +33,34 @@
     <dataHistory>Use</dataHistory>
     <fillValue xsi:type="core:UndefinedValue"/>
   </resources>
+  <resources uuid="79dc091a-d30f-4333-99b9-5758dd3db8e3">
+    <name>InputUnit</name>
+    <synonym>
+      <key>en</key>
+      <value>Input unit</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Units</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </resources>
+  <resources uuid="29bab198-34ea-404b-9e0c-84b66668a09c">
+    <name>InputPrice</name>
+    <synonym>
+      <key>en</key>
+      <value>Input price</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeQuantity</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </resources>
   <dimensions uuid="87618126-d7ba-4dfa-94f6-69849f2862f3">
     <name>PriceType</name>
     <synonym>

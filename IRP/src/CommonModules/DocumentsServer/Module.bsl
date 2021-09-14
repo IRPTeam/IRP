@@ -1,8 +1,8 @@
 #Region FormEvents
 
 Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
-	If Not Object.Ref.Metadata().TabularSections.Find("AddAttributes") = Undefined And Not Form.Items.Find(
-		"GroupOther") = Undefined Then
+	If Not Object.Ref.Metadata().TabularSections.Find("AddAttributes") = Undefined 
+		And Not Form.Items.Find("GroupOther") = Undefined Then
 		AddAttributesAndPropertiesServer.OnCreateAtServer(Form, "GroupOther");
 		ExtensionServer.AddAttributesFromExtensions(Form, Object.Ref, Form.Items.GroupOther);
 	EndIf;

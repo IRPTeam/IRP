@@ -493,6 +493,8 @@ Procedure AddOrLinkUnlinkDocumentRowsContinue(Result, AdditionalParameters) Expo
 	ThisObject.Modified = True;
 	AddOrLinkUnlinkDocumentRowsContinueAtServer(Result);
 	Taxes_CreateFormControls();
+	SerialLotNumberClient.UpdateSerialLotNumbersPresentation(Object);
+	SerialLotNumberClient.UpdateSerialLotNumbersTree(Object, ThisObject);
 EndProcedure
 
 &AtServer

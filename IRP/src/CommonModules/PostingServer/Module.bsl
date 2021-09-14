@@ -1462,6 +1462,9 @@ Function UseRegister(Name) Export
 EndFunction
 
 Procedure ExecuteQuery(Ref, QueryArray, Parameters) Export
+	If Not QueryArray.Count() Then
+		Return;
+	EndIf;
 	Query = New Query();
 	Query.TempTablesManager = Parameters.TempTablesManager;
 	Query.SetParameter("Ref", Ref);

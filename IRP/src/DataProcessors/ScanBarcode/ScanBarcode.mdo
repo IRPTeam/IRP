@@ -109,4 +109,13 @@
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>
   </forms>
+  <forms uuid="5888f1d9-2318-47b4-a37a-e4b37214bb73">
+    <name>RowForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Row form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
 </mdclass:DataProcessor>

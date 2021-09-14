@@ -15,7 +15,11 @@ Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 		Form.Items.GroupTitleItems.Group = ChildFormItemsGroup.Vertical;
 		Form.Items.Move(NewItem, MainPages, MainPages.ChildItems[0]);
 		Form.Items.Move(Form.Items.GroupTitle, NewItem);
-		Form.Items.Move(Form.Items.FormPostAndClose, NewItem);
+		
+		If Form.Items.Find("FormPostAndClose") <> Undefined Then
+			Form.Items.Move(Form.Items.FormPostAndClose, NewItem);
+		EndIf;
+		
 		MainPages.PagesRepresentation = FormPagesRepresentation.TabsOnBottom;		
 	EndIf;
 	

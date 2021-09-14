@@ -1,9 +1,11 @@
 Function GetTableByPriceList(PriceListRef, AddInfo = Undefined) Export
 	ResultTable = New ValueTable();
-	ResultTable.Columns.Add("PriceList", New TypeDescription("DocumentRef.PriceList"));
-	ResultTable.Columns.Add("PriceKey", New TypeDescription("CatalogRef.PriceKeys"));
-	ResultTable.Columns.Add("Item", New TypeDescription("CatalogRef.Items"));
-	ResultTable.Columns.Add("Price", New TypeDescription(Metadata.DefinedTypes.typePrice.Type));
+	ResultTable.Columns.Add("PriceList"  , New TypeDescription("DocumentRef.PriceList"));
+	ResultTable.Columns.Add("PriceKey"   , New TypeDescription("CatalogRef.PriceKeys"));
+	ResultTable.Columns.Add("Item"       , New TypeDescription("CatalogRef.Items"));
+	ResultTable.Columns.Add("InputUnit"  , New TypeDescription("CatalogRef.Units"));
+	ResultTable.Columns.Add("Price"      , New TypeDescription(Metadata.DefinedTypes.typePrice.Type));
+	ResultTable.Columns.Add("InputPrice" , New TypeDescription(Metadata.DefinedTypes.typePrice.Type));
 
 	Query = New Query();
 	Query.Text =
@@ -13,7 +15,9 @@ Function GetTableByPriceList(PriceListRef, AddInfo = Undefined) Export
 	|	PriceListDataSet.Key,
 	|   PriceListDataSet.Ref AS PriceList,
 	|	PriceListDataPrice.Price,
-	|	PriceListDataPrice.Item
+	|	PriceListDataPrice.Item,
+	|	PriceListDataPrice.InputUnit,
+	|	PriceListDataPrice.InputPrice
 	|FROM
 	|	Document.PriceList.DataSet AS PriceListDataSet
 	|		INNER JOIN Document.PriceList.DataPrice AS PriceListDataPrice
@@ -33,9 +37,12 @@ Function GetTableByPriceList(PriceListRef, AddInfo = Undefined) Export
 	For Each QueryTableCopyRow In QueryTableCopy Do
 		Filter = New Structure("Key", QueryTableCopyRow.Key);
 		TableOfProperties = QueryTable.Copy(Filter);
-		Price = TableOfProperties[0].Price;
-		Item = TableOfProperties[0].Item;
-		PriceList = TableOfProperties[0].PriceList;
+		Price      = TableOfProperties[0].Price;
+		Item       = TableOfProperties[0].Item;
+		PriceList  = TableOfProperties[0].PriceList;
+		InputUnit  = TableOfProperties[0].InputUnit;
+		InputPrice = TableOfProperties[0].InputPrice;
+		
 		TableOfProperties.GroupBy("Attribute, Value");
 
 		ArrayOfItemKeys = FindOrCreateRefByProperties(TableOfProperties, Item, AddInfo);
@@ -48,10 +55,12 @@ Function GetTableByPriceList(PriceListRef, AddInfo = Undefined) Export
 		PriceKey = ArrayOfItemKeys[0];
 
 		NewRowResultTable = ResultTable.Add();
-		NewRowResultTable.PriceKey = PriceKey;
-		NewRowResultTable.Price = Price;
-		NewRowResultTable.Item = Item;
-		NewRowResultTable.PriceList = PriceList;
+		NewRowResultTable.PriceKey   = PriceKey;
+		NewRowResultTable.Price      = Price;
+		NewRowResultTable.Item       = Item;
+		NewRowResultTable.PriceList  = PriceList;
+		NewRowResultTable.InputUnit  = InputUnit;
+		NewRowResultTable.InputPrice = InputPrice;		
 	EndDo;
 
 	Return ResultTable;

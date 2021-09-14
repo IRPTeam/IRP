@@ -1,3 +1,4 @@
+
 #Region FormEventHandlers
 
 &AtServer
@@ -26,8 +27,7 @@ EndProcedure
 
 &AtClient
 Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefined) Export
-	If EventName = "UpdateAffectPricing" And Object.PriceListType = PredefinedValue(
-		"Enum.PriceListTypes.PriceByProperties") Then
+	If EventName = "UpdateAffectPricing" And Object.PriceListType = PredefinedValue("Enum.PriceListTypes.PriceByProperties") Then
 		DrawFormTablePriceKeyList();
 	EndIf;
 	If EventName = "UpdateAddAttributeAndPropertySets" Then
@@ -84,6 +84,34 @@ Procedure PriceKeyListItemEditTextChange(Item, Text, StandardProcessing)
 	DocPriceListClient.PriceKeyListItemEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
 EndProcedure
 
+&AtClient
+Procedure PriceKeyListItemOnChange(Item)
+	CurrentData = Items.PriceKeyList.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	CurrentData.InputUnit = GetInputUnit(CurrentData.Item);
+	CurrentData.Price = CalculatePrice(CurrentData.InputPrice, CurrentData.InputUnit);
+EndProcedure
+
+&AtClient
+Procedure PriceKeyListInputPriceOnChange(Item)
+	CurrentData = Items.PriceKeyList.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	CurrentData.Price = CalculatePrice(CurrentData.InputPrice, CurrentData.InputUnit);	
+EndProcedure
+
+&AtClient
+Procedure PriceKeyListInputUnitOnChange(Item)
+	CurrentData = Items.PriceKeyList.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	CurrentData.Price = CalculatePrice(CurrentData.InputPrice, CurrentData.InputUnit);	
+EndProcedure
+
 #EndRegion
 
 #Region ItemKeyList
@@ -98,7 +126,6 @@ Procedure ItemKeyListOnStartEdit(Item, NewRow, Clone)
 	If NewRow Or Clone Then
 		CurrentData.Key = New UUID();
 	EndIf;
-
 EndProcedure
 
 &AtClient
@@ -109,6 +136,34 @@ EndProcedure
 &AtClient
 Procedure ItemKeyListItemEditTextChange(Item, Text, StandardProcessing)
 	DocPriceListClient.ItemKeyListItemEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure ItemKeyListItemKeyOnChange(Item)
+	CurrentData = Items.ItemKeyList.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	CurrentData.InputUnit = GetInputUnit(CurrentData.ItemKey);
+	CurrentData.Price = CalculatePrice(CurrentData.InputPrice, CurrentData.InputUnit);
+EndProcedure
+
+&AtClient
+Procedure ItemKeyListInputPriceOnChange(Item)
+	CurrentData = Items.ItemKeyList.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	CurrentData.Price = CalculatePrice(CurrentData.InputPrice, CurrentData.InputUnit);	
+EndProcedure
+
+&AtClient
+Procedure ItemKeyListInputUnitOnChange(Item)
+	CurrentData = Items.ItemKeyList.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	CurrentData.Price = CalculatePrice(CurrentData.InputPrice, CurrentData.InputUnit);	
 EndProcedure
 
 #EndRegion
@@ -125,7 +180,56 @@ Procedure ItemListItemEditTextChange(Item, Text, StandardProcessing)
 	DocPriceListClient.ItemListItemEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
 EndProcedure
 
+&AtClient
+Procedure ItemListItemOnChange(Item)
+	CurrentData = Items.ItemList.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	CurrentData.InputUnit = GetInputUnit(CurrentData.Item);
+	CurrentData.Price = CalculatePrice(CurrentData.InputPrice, CurrentData.InputUnit);		
+EndProcedure
+
+&AtClient
+Procedure ItemListInputPriceOnChange(Item)
+	CurrentData = Items.ItemList.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	CurrentData.Price = CalculatePrice(CurrentData.InputPrice, CurrentData.InputUnit);	
+EndProcedure
+
+&AtClient
+Procedure ItemListInputUnitOnChange(Item)
+	CurrentData = Items.ItemList.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	CurrentData.Price = CalculatePrice(CurrentData.InputPrice, CurrentData.InputUnit);	
+EndProcedure
+
 #EndRegion
+
+&AtServer
+Function GetInputUnit(Item_ItemKey)
+	If TypeOf(Item_ItemKey) = Type("CatalogRef.Items") Then
+		Return Item_ItemKey.Unit;
+	ElsIf TypeOf(Item_ItemKey) = Type("CatalogRef.ItemKeys") Then
+		If ValueIsFilled(Item_ItemKey.Unit) Then
+			Return Item_ItemKey.Unit;
+		Else
+			Return Item_ItemKey.Item.Unit;
+		EndIf;
+	EndIf;
+EndFunction
+
+&AtServer
+Function CalculatePrice(InputPrice, InputUnit)
+	If Not ValueIsFilled(InputUnit) Then
+		Return 0;
+	EndIf;
+	Return InputUnit.Quantity * InputPrice; 
+EndFunction
 
 #EndRegion
 
@@ -343,17 +447,20 @@ Function GetDataPrice()
 	TableOfResult.Columns.Add("Item");
 	TableOfResult.Columns.Add("Price");
 	TableOfResult.Columns.Add("Key");
-
+	TableOfResult.Columns.Add("InputUnit");
+	TableOfResult.Columns.Add("InputPrice");
+	
 	TableOfKeys = Object.DataSet.Unload();
 	TableOfKeys.GroupBy("Key");
 
 	For Each Row In TableOfKeys Do
-		For Each RowPrice In Object.DataPrice.Unload(New Structure("Key", Row.Key), "Item, Price, Key") Do
+		For Each RowPrice In Object.DataPrice.Unload(New Structure("Key", Row.Key), 
+			"Item, Price, Key, InputUnit, InputPrice") Do
 			NewRow = TableOfResult.Add();
 			FillPropertyValues(NewRow, RowPrice);
 		EndDo;
 	EndDo;
-	TableOfResult.GroupBy("Item, Price, Key");
+	TableOfResult.GroupBy("Item, Price, Key, InputUnit, InputPrice");
 	Return TableOfResult;
 EndFunction
 
@@ -447,8 +554,16 @@ Procedure DrawFormTablePriceKeyList()
 		EndDo;
 
 	EndIf;
+
+	// Create columns InputPrice	
+	NewColumn_InputPrice = New FormAttribute("InputPrice", Metadata.DefinedTypes.typePrice.Type, Table.Name, "Input price");
+	ArrayOfAttributes.Add(NewColumn_InputPrice);
+	
+	Table.Columns.Add(
+			New Structure("Name, DataPath, OwnerName, FormName", NewColumn_InputPrice.Name, Table.Name + "."
+		+ NewColumn_InputPrice.Name, Undefined, ""));
 		
-		// Create columns Price	
+	// Create columns Price	
 	NewColumn_Price = New FormAttribute("Price", Metadata.DefinedTypes.typePrice.Type, Table.Name, "Price");
 	ArrayOfAttributes.Add(NewColumn_Price);
 
@@ -456,6 +571,7 @@ Procedure DrawFormTablePriceKeyList()
 			New Structure("Name, DataPath, OwnerName, FormName", NewColumn_Price.Name, Table.Name + "."
 		+ NewColumn_Price.Name, Undefined, ""));
 
+	
 	ThisObject.ChangeAttributes(ArrayOfAttributes);
 		
 		// Form columns	
@@ -470,6 +586,11 @@ Procedure DrawFormTablePriceKeyList()
 		NewFormColumn.Type = FormFieldType.InputField;
 		NewFormColumn.DataPath = Table.Name + "." + Column.Name;
 		NewFormColumn.AutoMarkIncomplete = True;
+		
+		If Upper(Column.Name) = Upper("InputPrice") Then
+			NewFormColumn.SetAction("OnChange", "PriceKeyListInputPriceOnChange");
+			NewFormColumn.AutoMarkIncomplete = False;
+		EndIf;
 
 		Column.FormName = NewFormColumn.Name;
 
@@ -486,11 +607,13 @@ Procedure DrawFormTablePriceKeyList()
 	DataPrice = GetDataPrice();
 	For Each Row In DataPrice Do
 		NewRow = ThisObject.PriceKeyList.Add();
-		NewRow.Price = Row.Price;
-		NewRow.Item = Row.Item;
-
+		NewRow.Price      = Row.Price;
+		NewRow.Item       = Row.Item;
+		NewRow.InputUnit  = Row.InputUnit;
+		NewRow.InputPrice = Row.InputPrice;
+		
 		For Each Column In SavedDataStructure.Fields.Table.Columns Do
-			If Column.Name = "Price" Then
+			If Column.Name = "Price" Or Column.Name = "InputPrice" Then
 				Continue;
 			EndIf;
 			NewRow[Column.Name] = GetAttributeValue(Row.Key, ThisObject[Column.OwnerName]);
@@ -520,16 +643,18 @@ Procedure SaveTablePriceKeyList(Cancel, CurrentObject, WriteParameters)
 
 	For Each Row In ThisObject.PriceKeyList Do
 		NewRowPrice = CurrentObject.DataPrice.Add();
-		NewRowPrice.Key = New UUID();
-		NewRowPrice.Price = Row.Price;
-		NewRowPrice.Item = Row.Item;
+		NewRowPrice.Key        = New UUID();
+		NewRowPrice.Price      = Row.Price;
+		NewRowPrice.Item       = Row.Item;
+		NewRowPrice.InputUnit  = Row.InputUnit;
+		NewRowPrice.InputPrice = Row.InputPrice;
 
 		If SavedDataStructure.Fields.Table.Columns.Count() <= 1 Then
 			NewRow = CurrentObject.DataSet.Add();
 			NewRow.Key = NewRowPrice.Key;
 		Else
 			For Each Column In SavedDataStructure.Fields.Table.Columns Do
-				If Column.Name = "Price" Then
+				If Column.Name = "Price" Or Column.Name = "InputPrice" Then
 					Continue;
 				EndIf;
 				NewRow = CurrentObject.DataSet.Add();

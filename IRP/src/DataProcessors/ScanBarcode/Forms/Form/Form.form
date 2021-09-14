@@ -724,12 +724,41 @@
         <contextMenu>
           <name>ItemListContextMenu</name>
           <id>5</id>
+          <items xsi:type="form:Button">
+            <name>ItemListContextMenuChange</name>
+            <id>136</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <extendedTooltip>
+              <name>ItemListContextMenuChangeExtendedTooltip</name>
+              <id>137</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <type>Label</type>
+              <autoMaxWidth>true</autoMaxWidth>
+              <autoMaxHeight>true</autoMaxHeight>
+              <extInfo xsi:type="form:LabelDecorationExtInfo">
+                <horizontalAlign>Left</horizontalAlign>
+              </extInfo>
+            </extendedTooltip>
+            <commandName>Form.Item.ItemList.StandardCommand.Change</commandName>
+            <representation>Auto</representation>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <placementArea>UserCmds</placementArea>
+            <representationInContextMenu>Auto</representationInContextMenu>
+          </items>
           <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
             <common>true</common>
           </userVisible>
-          <autoFill>true</autoFill>
         </contextMenu>
         <changeRowSet>true</changeRowSet>
         <changeRowOrder>true</changeRowOrder>
@@ -753,6 +782,7 @@
         <enableDrag>true</enableDrag>
         <fileDragMode>AsFileRef</fileDragMode>
         <refreshRequest>PullFromTop</refreshRequest>
+        <currentRowUse>SelectionPresentation</currentRowUse>
         <rowFilter xsi:type="core:UndefinedValue"/>
       </items>
       <visible>true</visible>

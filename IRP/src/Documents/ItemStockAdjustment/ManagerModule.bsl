@@ -68,8 +68,30 @@ EndProcedure
 #Region CheckAfterWrite
 
 Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
+	Unposting = ?(Parameters.Property("Unposting"), Parameters.Unposting, False);
+	AccReg = AccumulationRegisters;
+	LineNumberAndItemKeyFromItemList = PostingServer.GetLineNumberAndItemKeyFromItemList(Ref, "Document.ItemStockAdjustment.ItemList");
+
 	Parameters.Insert("RecordType", AccumulationRecordType.Expense);
 	PostingServer.CheckBalance_AfterWrite(Ref, Cancel, Parameters, "Document.ItemStockAdjustment.ItemList", AddInfo);
+	
+	Filter = New Structure("RecordType", AccumulationRecordType.Receipt);
+	
+	If Not Cancel And Not AccReg.R4014B_SerialLotNumber.CheckBalance(Ref, LineNumberAndItemKeyFromItemList, 
+		PostingServer.GetQueryTableByName("R4014B_SerialLotNumber", Parameters).Copy(Filter), 
+		PostingServer.GetQueryTableByName("R4014B_SerialLotNumber_Exists", Parameters).Copy(Filter),
+		Filter.RecordType, Unposting, AddInfo) Then
+		Cancel = True;
+	EndIf;
+	
+	Filter = New Structure("RecordType", AccumulationRecordType.Expense);
+	
+	If Not Cancel And Not AccReg.R4014B_SerialLotNumber.CheckBalance(Ref, LineNumberAndItemKeyFromItemList, 
+		PostingServer.GetQueryTableByName("R4014B_SerialLotNumber", Parameters).Copy(Filter), 
+		PostingServer.GetQueryTableByName("R4014B_SerialLotNumber_Exists", Parameters).Copy(Filter),
+		Filter.RecordType, Unposting, AddInfo) Then
+		Cancel = True;
+	EndIf;
 EndProcedure
 
 #EndRegion
@@ -94,6 +116,7 @@ Function GetQueryTextsSecondaryTables()
 	QueryArray.Add(ItemList());
 	QueryArray.Add(PostingServer.Exists_R4011B_FreeStocks());
 	QueryArray.Add(PostingServer.Exists_R4010B_ActualStocks());
+	QueryArray.Add(PostingServer.Exists_R4014B_SerialLotNumber());
 	Return QueryArray;
 EndFunction
 

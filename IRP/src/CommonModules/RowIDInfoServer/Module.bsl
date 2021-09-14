@@ -6086,6 +6086,10 @@ Procedure LinkTables(Object, FillingValue, LinkRow, TableNames, ArrayOfExcluding
 					If ArrayOfExcludingKeys.Find(LinkRow.Key) = Undefined Then
 						Object[TableName].Delete(DeletionRow);
 					EndIf;
+				ElsIf Upper(TableName) = Upper("SerialLotNumbers") Then
+					If FillingValue.Property(TableName) And FillingValue[TableName].Count() Then
+						Object[TableName].Delete(DeletionRow);
+					EndIf;
 				Else
 					Object[TableName].Delete(DeletionRow);
 				EndIf;
@@ -6099,15 +6103,15 @@ Procedure LinkTables(Object, FillingValue, LinkRow, TableNames, ArrayOfExcluding
 		EndIf;
 
 		For Each Row In FillingValue[TableName] Do
-			If Row.Key = LinkRow.Key Then
-				If Upper(TableName) = Upper("SpecialOffers") Or Upper(TableName) = Upper("TaxList") Then
-
-					If ArrayOfExcludingKeys.Find(LinkRow.Key) = Undefined Then
-						FillPropertyValues(Object[TableName].Add(), Row);
-					EndIf;
-				Else
+			If Row.Key <> LinkRow.Key Then
+				Continue;
+			EndIf;
+			If Upper(TableName) = Upper("SpecialOffers") Or Upper(TableName) = Upper("TaxList") Then
+				If ArrayOfExcludingKeys.Find(LinkRow.Key) = Undefined Then
 					FillPropertyValues(Object[TableName].Add(), Row);
 				EndIf;
+			Else
+				FillPropertyValues(Object[TableName].Add(), Row);
 			EndIf;
 		EndDo;
 	EndDo;

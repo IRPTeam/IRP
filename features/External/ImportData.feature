@@ -1793,3 +1793,45 @@ Scenario: Create catalog PartnerItems objects
 		| 'e1cib/data/Catalog.PartnerItems?ref=b76e892a86cabee011ebf4483f49e197' | 'False'        | '2'    | 'e1cib/data/Catalog.Partners?ref=aa78120ed92fbced11eaf113ba6c1871' | 'QN10998' | 'e1cib/data/Catalog.Items?ref=aa78120ed92fbced11eaf115bcc9c5f3' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c5fd' | 'Dress M/White Kalipso' | ''                 | ''               | 'Dress M/White Kalipso TR' |
 		| 'e1cib/data/Catalog.PartnerItems?ref=b76e892a86cabee011ebf4483f49e198' | 'False'        | '3'    | 'e1cib/data/Catalog.Partners?ref=aa78120ed92fbced11eaf113ba6c1870' | 'QN301'   | 'e1cib/data/Catalog.Items?ref=aa78120ed92fbced11eaf115bcc9c5f3' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c5fd' | 'Dress M/White Ferron'  | ''                 | ''               | 'Dress M/White Ferron TR'  |
 
+Scenario: Create catalog SerialLotNumbers objects (for Phone)
+
+	And I check or create catalog "SerialLotNumbers" objects:
+		| 'Ref'                                                                      | 'DeletionMark' | 'Code' | 'Description' | 'SerialLotNumberOwner'                                             | 'Inactive' |
+		| 'e1cib/data/Catalog.SerialLotNumbers?ref=b76fba77ffd4077e11ec15161117f5ea' | 'False'        | 1      | '12345678'    | 'e1cib/data/Catalog.ItemKeys?ref=b76fba77ffd4077e11ec15161117f5e2' | 'False'    |
+		| 'e1cib/data/Catalog.SerialLotNumbers?ref=b76fba77ffd4077e11ec15161117f5eb' | 'False'        | 2      | '12345679'    | 'e1cib/data/Catalog.ItemKeys?ref=b76fba77ffd4077e11ec15161117f5e3' | 'False'    |
+		| 'e1cib/data/Catalog.SerialLotNumbers?ref=b76fba77ffd4077e11ec15161117f5ec' | 'False'        | 3      | '12345670'    | 'e1cib/data/Catalog.ItemKeys?ref=b76fba77ffd4077e11ec15161117f5e4' | 'False'    |
+		| 'e1cib/data/Catalog.SerialLotNumbers?ref=b76fba77ffd4077e11ec15161117f5ed' | 'False'        | 4      | '13456778'    | 'e1cib/data/Catalog.ItemKeys?ref=b76fba77ffd4077e11ec15161117f5e2' | 'False'    |
+
+Scenario: Create Item with SerialLotNumbers (Phone)
+
+	And I check or create catalog "Items" objects:
+		| 'Ref'                                                           | 'DeletionMark' | 'Code' | 'ItemType'                                                          | 'Unit'                                                          | 'MainPricture'                          | 'Vendor' | 'ItemID' | 'PackageUnit' | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'Height' | 'Length' | 'Volume' | 'Weight' | 'Width' |
+		| 'e1cib/data/Catalog.Items?ref=b76fba77ffd4077e11ec15161117f5e1' | 'False'        | 19     | 'e1cib/data/Catalog.ItemTypes?ref=b76fba77ffd4077e11ec15161117f5e0' | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | 'ValueStorage:AQEIAAAAAAAAAO+7v3siVSJ9' | ''       | ''       | ''            | 'Phone A'        | ''                 | ''               | ''               |          |          |          |          |         |
+
+	And I check or create catalog "ItemTypes" objects:
+		| 'Ref'                                                               | 'DeletionMark' | 'Parent' | 'IsFolder' | 'Code' | 'Type'                   | 'UseSerialLotNumber' | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'UniqueID'                          |
+		| 'e1cib/data/Catalog.ItemTypes?ref=b76fba77ffd4077e11ec15161117f5e0' | 'False'        | ''       | 'False'    | 12     | 'Enum.ItemTypes.Product' | 'True'               | 'Phones'         | ''                 | ''               | ''               | '_03b15d3fc19f499b924879810d0147ba' |
+
+	And I refill object tabular section "AvailableAttributes":
+		| 'Ref'                                                               | 'Attribute'                                                                                          | 'AffectPricing' | 'Required' | 'ShowInHTML' |
+		| 'e1cib/data/Catalog.ItemTypes?ref=b76fba77ffd4077e11ec15161117f5e0' | 'e1cib/data/ChartOfCharacteristicTypes.AddAttributeAndProperty?ref=aa78120ed92fbced11eaf114c59ef034' | 'False'         | 'False'    | 'False'      |
+
+	And I check or create catalog "ItemKeys" objects:
+		| 'Ref'                                                              | 'DeletionMark' | 'Code' | 'Item'                                                          | 'Unit' | 'Specification' | 'AffectPricingMD5' | 'UniqueMD5'                                       | 'ItemKeyID' | 'Description_en' | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'Height' | 'Length' | 'Volume' | 'Weight' | 'Width' |
+		| 'e1cib/data/Catalog.ItemKeys?ref=b76fba77ffd4077e11ec15161117f5e2' | 'False'        | 34     | 'e1cib/data/Catalog.Items?ref=b76fba77ffd4077e11ec15161117f5e1' | ''     | ''              | ''                 | 'EC F2 A5 85 B8 EF 7F FA B4 62 F7 2E 72 3B 7C D8' | ''          | 'Brown'          | 'Brown'            | 'Brown'          | 'Brown TR'       |          |          |          |          |         |
+		| 'e1cib/data/Catalog.ItemKeys?ref=b76fba77ffd4077e11ec15161117f5e3' | 'False'        | 35     | 'e1cib/data/Catalog.Items?ref=b76fba77ffd4077e11ec15161117f5e1' | ''     | ''              | ''                 | '91 2E 5D C4 9A 84 A4 FD 52 FF F4 D5 37 1C 1B CD' | ''          | 'Blue'           | 'Blue'             | 'Blue'           | 'Blue TR'        |          |          |          |          |         |
+		| 'e1cib/data/Catalog.ItemKeys?ref=b76fba77ffd4077e11ec15161117f5e4' | 'False'        | 36     | 'e1cib/data/Catalog.Items?ref=b76fba77ffd4077e11ec15161117f5e1' | ''     | ''              | ''                 | 'AB 1F 23 3B 82 36 B5 62 0B AC 18 E4 E1 59 A4 A2' | ''          | 'White'          | 'White'            | 'White'          | 'White TR'       |          |          |          |          |         |
+
+	And I refill object tabular section "AddAttributes":
+		| 'Ref'                                                              | 'Property'                                                                                           | 'Value'                                                                                 | 'SearchLiteral' |
+		| 'e1cib/data/Catalog.ItemKeys?ref=b76fba77ffd4077e11ec15161117f5e2' | 'e1cib/data/ChartOfCharacteristicTypes.AddAttributeAndProperty?ref=aa78120ed92fbced11eaf114c59ef034' | 'e1cib/data/Catalog.AddAttributeAndPropertyValues?ref=aa78120ed92fbced11eaf115bcc9c5dd' | ''              |
+		| 'e1cib/data/Catalog.ItemKeys?ref=b76fba77ffd4077e11ec15161117f5e3' | 'e1cib/data/ChartOfCharacteristicTypes.AddAttributeAndProperty?ref=aa78120ed92fbced11eaf114c59ef034' | 'e1cib/data/Catalog.AddAttributeAndPropertyValues?ref=aa78120ed92fbced11eaf115bcc9c5dc' | ''              |
+		| 'e1cib/data/Catalog.ItemKeys?ref=b76fba77ffd4077e11ec15161117f5e4' | 'e1cib/data/ChartOfCharacteristicTypes.AddAttributeAndProperty?ref=aa78120ed92fbced11eaf114c59ef034' | 'e1cib/data/Catalog.AddAttributeAndPropertyValues?ref=aa78120ed92fbced11eaf115bcc9c5de' | ''              |
+
+	And I check or create catalog "SerialLotNumbers" objects:
+		| 'Ref'                                                                      | 'DeletionMark' | 'Code' | 'Description' | 'SerialLotNumberOwner'                                             | 'Inactive' |
+		| 'e1cib/data/Catalog.SerialLotNumbers?ref=b76fba77ffd4077e11ec15161117f5ea' | 'False'        | 1      | '12345678'    | 'e1cib/data/Catalog.ItemKeys?ref=b76fba77ffd4077e11ec15161117f5e2' | 'False'    |
+		| 'e1cib/data/Catalog.SerialLotNumbers?ref=b76fba77ffd4077e11ec15161117f5eb' | 'False'        | 2      | '12345679'    | 'e1cib/data/Catalog.ItemKeys?ref=b76fba77ffd4077e11ec15161117f5e3' | 'False'    |
+		| 'e1cib/data/Catalog.SerialLotNumbers?ref=b76fba77ffd4077e11ec15161117f5ec' | 'False'        | 3      | '12345670'    | 'e1cib/data/Catalog.ItemKeys?ref=b76fba77ffd4077e11ec15161117f5e4' | 'False'    |
+		| 'e1cib/data/Catalog.SerialLotNumbers?ref=b76fba77ffd4077e11ec15161117f5ed' | 'False'        | 4      | '13456778'    | 'e1cib/data/Catalog.ItemKeys?ref=b76fba77ffd4077e11ec15161117f5e2' | 'False'    |
+

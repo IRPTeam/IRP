@@ -63,6 +63,8 @@ Scenario: _2060001 preparation
 		When Create information register TaxSettings (Sales tax)
 		When Create information register Taxes records (Sales tax)
 		When add sales tax settings 
+	When Create Item with SerialLotNumbers (Phone)
+	When Create document Purchase order objects (with SerialLotNumber)
 	When Create document PurchaseInvoice objects (linked)
 	And I execute 1C:Enterprise script at server
 			| "Documents.PurchaseInvoice.FindByNumber(102).GetObject().Write(DocumentWriteMode.Posting);" |
@@ -1712,8 +1714,166 @@ Scenario: _2060018 check link form in the PI with 2 lines with the same items
 		And I close all client application windows
 		
 
+Scenario: _2060019 check link form in the PI with Serial Lot number
+	* Post test PO
+		And I execute 1C:Enterprise script at server
+			| "Documents.PurchaseOrder.FindByNumber(1053).GetObject().Write(DocumentWriteMode.Posting);" |
+	* Create PI
+		* Open form for create PI
+			Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+			And I click the button named "FormCreate"
+		* Filling in the main details of the document
+			And I click Select button of "Partner" field
+			And I click "List" button
+			And I go to line in "List" table
+				| 'Description' |
+				| 'DFC'     |
+			And I select current line in "List" table
+			And I click Select button of "Legal name" field
+			And I go to line in "List" table
+				| 'Description' |
+				| 'DFC'     |
+			And I select current line in "List" table
+			And I click Select button of "Partner term" field
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Partner term vendor DFC'     |
+			And I select current line in "List" table
+			And I activate field named "ItemListLineNumber" in "ItemList" table		
+			And I click Select button of "Company" field
+			And I go to line in "List" table
+				| 'Description'  |
+				| 'Main Company' | 
+			And I select current line in "List" table
+			And I click Select button of "Store" field
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Store 03'  |
+			And I select current line in "List" table
+		* Add items	
+			And I click the button named "Add"
+			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Phone A'       |
+			And I select current line in "List" table
+			And I activate field named "ItemListItemKey" in "ItemList" table
+			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+			And I go to line in "List" table
+				| 'Item'  | 'Item key' |
+				| 'Phone A' | 'Brown'  |
+			And I select current line in "List" table
+			And I activate field named "ItemListQuantity" in "ItemList" table
+			And I input "2,000" text in the field named "ItemListQuantity" of "ItemList" table
+			And I input "500,00" text in the field named "ItemListPrice" of "ItemList" table
+			And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table
+			And in the table "SerialLotNumbers" I click the button named "SerialLotNumbersAdd"
+			And I click choice button of "Serial lot number" attribute in "SerialLotNumbers" table
+			And I activate field named "Owner" in "List" table
+			And I go to line in "List" table
+				| 'Owner' | 'Reference' | 'Serial number' |
+				| 'Brown' | '13456778'  | '13456778'      |
+			And I select current line in "List" table
+			And I activate "Quantity" field in "SerialLotNumbers" table
+			And I input "1,000" text in "Quantity" field of "SerialLotNumbers" table
+			And I finish line editing in "SerialLotNumbers" table
+			And in the table "SerialLotNumbers" I click the button named "SerialLotNumbersAdd"
+			And I click choice button of "Serial lot number" attribute in "SerialLotNumbers" table
+			And I activate field named "Owner" in "List" table
+			And I go to line in "List" table
+				| 'Owner' | 'Reference' |
+				| 'Brown' | '12345678'  |
+			And I select current line in "List" table
+			And I activate "Quantity" field in "SerialLotNumbers" table
+			And I input "1,000" text in "Quantity" field of "SerialLotNumbers" table
+			And I finish line editing in "SerialLotNumbers" table
+			And I click "Ok" button		
+			And I finish line editing in "ItemList" table
+			And I click the button named "Add"
+			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Phone A'       |
+			And I select current line in "List" table
+			And I activate field named "ItemListItemKey" in "ItemList" table
+			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+			And I go to line in "List" table
+				| 'Item'    | 'Item key' |
+				| 'Phone A' | 'White'  |
+			And I select current line in "List" table
+			And I activate field named "ItemListQuantity" in "ItemList" table
+			And I input "1,000" text in the field named "ItemListQuantity" of "ItemList" table
+			And I input "560,00" text in the field named "ItemListPrice" of "ItemList" table
+			And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table
+			And in the table "SerialLotNumbers" I click the button named "SerialLotNumbersAdd"
+			And I click choice button of "Serial lot number" attribute in "SerialLotNumbers" table
+			And I activate field named "Owner" in "List" table
+			And I go to line in "List" table
+				| 'Owner' | 'Serial number' |
+				| 'White' | '12345670'      |
+			And I select current line in "List" table
+			And I activate "Quantity" field in "SerialLotNumbers" table
+			And I input "1,000" text in "Quantity" field of "SerialLotNumbers" table
+			And I finish line editing in "SerialLotNumbers" table
+			And I click "Ok" button	
+			And I finish line editing in "ItemList" table
+			And I click the button named "Add"
+			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Phone A'       |
+			And I select current line in "List" table
+			And I activate field named "ItemListItemKey" in "ItemList" table
+			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+			And I go to line in "List" table
+				| 'Item'    | 'Item key' |
+				| 'Phone A' | 'Brown'  |
+			And I select current line in "List" table
+			And I activate field named "ItemListQuantity" in "ItemList" table
+			And I input "1,000" text in the field named "ItemListQuantity" of "ItemList" table
+			And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table
+			And in the table "SerialLotNumbers" I click the button named "SerialLotNumbersAdd"
+			And I click choice button of "Serial lot number" attribute in "SerialLotNumbers" table
+			And I activate field named "Owner" in "List" table
+			And I go to line in "List" table
+				| 'Owner' | 'Reference' | 'Serial number' |
+				| 'Brown' | '13456778'  | '13456778'      |
+			And I select current line in "List" table
+			And I activate "Quantity" field in "SerialLotNumbers" table
+			And I input "2,000" text in "Quantity" field of "SerialLotNumbers" table
+			And I finish line editing in "SerialLotNumbers" table
+			And I click "Ok" button	
+			And I finish line editing in "ItemList" table
+			And I click the button named "Add"
+			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
+			And I go to line in "List" table
+				| 'Description' |
+				| 'Router'       |
+			And I select current line in "List" table
+			And I activate field named "ItemListItemKey" in "ItemList" table
+			And I click choice button of the attribute named "ItemListItemKey" in "ItemList" table
+			And I go to line in "List" table
+				| 'Item'    | 'Item key' |
+				| 'Router' | 'Router'  |
+			And I select current line in "List" table
+			And I activate field named "ItemListQuantity" in "ItemList" table
+			And I input "1,000" text in the field named "ItemListQuantity" of "ItemList" table
+			And I finish line editing in "ItemList" table
+	* Link PI with PO (auto link)
+		And I click "Link unlink basis documents" button
+		And in the table "BasisesTree" I click "Auto link" button
+		And I click "Ok" button
+	* Check tab
+		And "ItemList" table became equal
+			| '#' | 'Price type'              | 'Item'    | 'Item key' | 'Profit loss center' | 'Dont calculate row' | 'Tax amount' | 'Unit' | 'Serial lot numbers' | 'Q'     | 'Price'  | 'VAT' | 'Offers amount' | 'Total amount' | 'Additional analytic' | 'Internal supply request' | 'Store'    | 'Delivery date' | 'Expense type' | 'Purchase order'                                 | 'Detail' | 'Sales order' | 'Net amount' | 'Use goods receipt' |
+			| '1' | 'en description is empty' | 'Phone A' | 'Brown'    | ''                   | 'No'                 | '180,00'     | 'pcs'  | '13456778; 12345678' | '2,000' | '500,00' | '18%' | ''              | '1 180,00'     | ''                    | ''                        | 'Store 03' | ''              | ''             | 'Purchase order 1 053 dated 14.09.2021 07:47:34' | ''       | ''            | '1 000,00'   | 'Yes'               |
+			| '2' | 'en description is empty' | 'Phone A' | 'White'    | ''                   | 'No'                 | '100,80'     | 'pcs'  | '12345670'           | '1,000' | '560,00' | '18%' | ''              | '660,80'       | ''                    | ''                        | 'Store 03' | ''              | ''             | 'Purchase order 1 053 dated 14.09.2021 07:47:34' | ''       | ''            | '560,00'     | 'Yes'               |
+			| '3' | 'en description is empty' | 'Phone A' | 'Brown'    | ''                   | 'No'                 | '90,00'      | 'pcs'  | '13456778'           | '1,000' | '500,00' | '18%' | ''              | '590,00'       | ''                    | ''                        | 'Store 03' | ''              | ''             | 'Purchase order 1 053 dated 14.09.2021 07:47:34' | ''       | ''            | '500,00'     | 'Yes'               |
+			| '4' | 'en description is empty' | 'Router'  | 'Router'   | ''                   | 'No'                 | '18,00'      | 'pcs'  | ''                   | '1,000' | '100,00' | '18%' | ''              | '118,00'       | ''                    | ''                        | 'Store 03' | ''              | ''             | 'Purchase order 1 053 dated 14.09.2021 07:47:34' | ''       | ''            | '100,00'     | 'Yes'               |
+		And I close all client application windows
 	
 Scenario: _2060020 check button Show quantity in base unit in the Link form
+	And I close all client application windows
 	* Open form for create SC
 		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
 		And I click the button named "FormCreate"

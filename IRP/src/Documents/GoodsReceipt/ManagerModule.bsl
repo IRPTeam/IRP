@@ -29,7 +29,6 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 #Region NewRegisterPosting
 	Tables = Parameters.DocumentDataTables;
 
-	Parameters.Insert("ConsiderStocksRequested", True);
 	IncomingStocksServer.ClosureIncomingStocks(Parameters);
 
 	QueryArray = GetQueryTextsMasterTables();
@@ -213,17 +212,23 @@ Function ItemList()
 EndFunction
 
 Function IncomingStocksReal()
-	Return "SELECT
-		   |	ItemList.Period,
-		   |	ItemList.Store,
-		   |	ItemList.ItemKey,
-		   |	ItemList.PurchaseOrder AS Order,
-		   |	ItemList.Quantity
-		   |INTO IncomingStocksReal
-		   |FROM
-		   |	ItemList AS ItemList
-		   |WHERE
-		   |	TRUE";
+	Return 
+		"SELECT
+		|	ItemList.Period,
+		|	ItemList.Store,
+		|	ItemList.ItemKey,
+		|	ItemList.PurchaseOrder AS Order,
+		|	SUM(ItemList.Quantity) AS Quantity
+		|INTO IncomingStocksReal
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	TRUE
+		|GROUP BY
+		|	ItemList.ItemKey,
+		|	ItemList.Period,
+		|	ItemList.PurchaseOrder,
+		|	ItemList.Store";
 EndFunction
 Function R1011B_PurchaseOrdersReceipt()
 	Return "SELECT

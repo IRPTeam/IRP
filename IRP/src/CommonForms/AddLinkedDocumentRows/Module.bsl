@@ -37,7 +37,6 @@ EndProcedure
 
 &AtServer
 Procedure FillBasisesTree()
-	;
 	ThisObject.BasisesTree.GetItems().Clear();
 	BasisesTable = RowIDInfoServer.GetBasises(ThisObject.MainFilter.Ref, ThisObject.MainFilter);
 

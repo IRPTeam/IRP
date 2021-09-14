@@ -149,16 +149,19 @@ Function ItemList()
 EndFunction
 
 Function R4035B_IncomingStocks()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		   |	ItemList.Period,
-		   |	ItemList.IncomingStore AS Store,
-		   |	ItemList.ItemKey,
-		   |	ItemList.IncomingDocument AS Order,
-		   |	ItemList.Quantity
-		   |INTO R4035B_IncomingStocks
-		   |FROM
-		   |	ItemList AS ItemList";
+	Return 
+		"SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	ItemList.Period,
+		|	ItemList.IncomingStore AS Store,
+		|	ItemList.ItemKey,
+		|	ItemList.IncomingDocument AS Order,
+		|	ItemList.Quantity
+		|INTO R4035B_IncomingStocks
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	TRUE";
 EndFunction
 
 Function R4035B_IncomingStocks_Exists()
@@ -171,18 +174,37 @@ Function R4035B_IncomingStocks_Exists()
 EndFunction
 
 Function R4036B_IncomingStocksRequested()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	ItemList.Period,
-		   |	ItemList.RequesterStore AS IncomingStore,
-		   |	ItemList.RequesterStore,
-		   |	ItemList.ItemKey,
-		   |	ItemList.IncomingDocument AS Order,
-		   |	ItemList.Requester,
-		   |	ItemList.Quantity
-		   |INTO R4036B_IncomingStocksRequested
-		   |FROM 
-		   |	ItemList AS ItemList";
+	Return 
+		"SELECT
+		|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		|	ItemList.Period,
+		|	ItemList.RequesterStore AS IncomingStore,
+		|	ItemList.RequesterStore,
+		|	ItemList.ItemKey,
+		|	ItemList.IncomingDocument AS Order,
+		|	ItemList.Requester,
+		|	ItemList.Quantity
+		|INTO R4036B_IncomingStocksRequested
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	TRUE
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Receipt),
+		|	ItemList.Period,
+		|	ItemList.IncomingStore,
+		|	ItemList.IncomingStore,
+		|	ItemList.ItemKey,
+		|	ItemList.IncomingDocument,
+		|	ItemList.Requester,
+		|	ItemList.Quantity
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	ItemList.RequesterStore <> ItemList.IncomingStore";
 EndFunction
 
 Function R4036B_IncomingStocksRequested_Exists()

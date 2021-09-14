@@ -677,6 +677,7 @@
   <dataProcessors>DataProcessor.PrintLabels</dataProcessors>
   <dataProcessors>DataProcessor.Procurement</dataProcessors>
   <dataProcessors>DataProcessor.ScanBarcode</dataProcessors>
+  <dataProcessors>DataProcessor.StoreKeeperWorkspace</dataProcessors>
   <informationRegisters>InformationRegister.AddProperties</informationRegisters>
   <informationRegisters>InformationRegister.AttachedFiles</informationRegisters>
   <informationRegisters>InformationRegister.Barcodes</informationRegisters>

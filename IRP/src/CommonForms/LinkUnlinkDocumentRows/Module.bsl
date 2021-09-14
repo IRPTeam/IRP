@@ -1,7 +1,9 @@
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	ThisObject.MainFilter = Parameters.Filter;
-	ThisObject.CurrentLineNumber = Parameters.SelectedRowInfo.SelectedRow.LineNumber;
+	If Parameters.SelectedRowInfo.SelectedRow <> Undefined Then
+		ThisObject.CurrentLineNumber = Parameters.SelectedRowInfo.SelectedRow.LineNumber;
+	EndIf;
 	ResultsTableTmp = ThisObject.ResultsTable.Unload().CopyColumns();
 	For Each RowIdInfo In Parameters.TablesInfo.RowIDInfoRows Do
 		If Not ValueIsFilled(RowIdInfo.CurrentStep) Then
@@ -25,8 +27,10 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	ThisObject.ResultsTable.Load(ResultsTableTmp);
 
 	FillItemListRows(Parameters.TablesInfo.ItemListRows);
-	FillResultsTree(Parameters.SelectedRowInfo.SelectedRow);
-	FillBasisesTree(Parameters.SelectedRowInfo);
+	If Parameters.SelectedRowInfo.SelectedRow <> Undefined Then
+		FillResultsTree(Parameters.SelectedRowInfo.SelectedRow);
+		FillBasisesTree(Parameters.SelectedRowInfo);
+	EndIf;
 EndProcedure
 
 &AtClient
@@ -74,8 +78,13 @@ EndProcedure
 &AtClient
 Procedure RefreshTrees()
 	SelectedRowInfo = RowIDInfoClient.GetSelectedRowInfo(Items.ItemListRows.CurrentData);
+	If SelectedRowInfo.SelectedRow = Undefined Then
+		Return;
+	EndIf;
+	
 	FillResultsTree(SelectedRowInfo.SelectedRow);
 	FillBasisesTree(SelectedRowInfo);
+	
 	ExpandAllTrees();
 	RowID = Undefined;
 	SetCurrentRowInResultsTree(ThisObject.ResultsTree.GetItems(), SelectedRowInfo.SelectedRow.Key, RowID);

@@ -877,4 +877,88 @@ Scenario: _016011 check price calculation in the documents
 			| 'Item'  | 'Price'  | 'Item key' | 'Price type'        | 'Q'     |
 			| 'Dress' | '572,00' | 'XS/Blue'  | 'Dependent Price New' | '1,000' |
 		
-	
+Scenario: _016012 price calculation when change input price in the Price list (by item key)	
+	* Opening  price list
+		Given I open hyperlink "e1cib/list/Document.PriceList"
+		And I click the button named "FormCreate"
+	* Filling in the details of the price list by item key
+		And I change "Set price" radio button value to "By Item keys"
+		And I input "Basic price" text in "Description" field
+		And I click Select button of "Price type" field
+		And I go to line in "List" table
+				| 'Description' |
+				| 'Basic Price Types'  |
+		And I select current line in "List" table
+	* Filling in prices by item key by price type Basic Price Types
+		And I move to "Item keys" tab
+		And I click the button named "ItemKeyListAdd"
+		And I click choice button of "Item" attribute in "ItemKeyList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Dress'       |
+		And I select current line in "List" table
+		And I activate "Item key" field in "ItemKeyList" table
+		And I click choice button of "Item key" attribute in "ItemKeyList" table
+		And I go to line in "List" table
+			| 'Item key' |
+			| 'XL/Green'  |
+		And I select current line in "List" table
+	* Check Input unit
+		And "ItemKeyList" table contains lines
+			| 'Input price' | 'Item'  | 'Item key' | 'Input unit' | 'Price' |
+			| ''            | 'Dress' | 'XL/Green' | 'pcs'        | ''      |
+	* Check Price calculation when change input price
+		And I select current line in "ItemKeyList" table
+		And I click choice button of the attribute named "ItemKeyListInputUnit" in "ItemKeyList" table
+		And I go to line in "List" table
+			| 'Description'       |
+			| 'box Dress (8 pcs)' |
+		And I select current line in "List" table
+		And I finish line editing in "ItemKeyList" table
+		And I move to the next attribute
+		And I activate field named "ItemKeyListInputPrice" in "ItemKeyList" table
+		And I select current line in "ItemKeyList" table
+		And I input "500,000" text in the field named "ItemKeyListInputPrice" of "ItemKeyList" table
+		And I finish line editing in "ItemKeyList" table
+		And I move to the next attribute
+		And "ItemKeyList" table became equal
+			| '#' | 'Input price' | 'Item'  | 'Item key' | 'Input unit'        | 'Price'    |
+			| '1' | '500,000'     | 'Dress' | 'XL/Green' | 'box Dress (8 pcs)' | '4 000,00' |
+		And I activate field named "ItemKeyListInputPrice" in "ItemKeyList" table
+		And I select current line in "ItemKeyList" table
+		And I input "600,000" text in the field named "ItemKeyListInputPrice" of "ItemKeyList" table
+		And I finish line editing in "ItemKeyList" table
+		And I move to the next attribute
+		And "ItemKeyList" table contains lines
+			| '#' | 'Input price' | 'Item'  | 'Item key' | 'Input unit'        | 'Price'    |
+			| '1' | '600,000'     | 'Dress' | 'XL/Green' | 'box Dress (8 pcs)' | '4 800,00' |	
+	* Check Price calculation when change Input unit
+		And I activate field named "ItemKeyListInputUnit" in "ItemKeyList" table
+		And I select current line in "ItemKeyList" table
+		And I click choice button of the attribute named "ItemKeyListInputUnit" in "ItemKeyList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'pcs'         |
+		And I select current line in "List" table
+		And I finish line editing in "ItemKeyList" table
+		And "ItemKeyList" table became equal
+			| '#' | 'Input price' | 'Item'  | 'Item key' | 'Input unit' | 'Price'  |
+			| '1' | '600,000'     | 'Dress' | 'XL/Green' | 'pcs'        | '600,00' |
+		And I close all client application windows
+		
+		
+		
+		
+				
+		
+				
+		
+		
+						
+		
+				
+		
+		
+				
+		
+		

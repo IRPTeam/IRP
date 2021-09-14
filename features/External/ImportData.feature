@@ -1783,6 +1783,22 @@ Scenario: Create catalog LegalNameContracts objects
 		| 'e1cib/data/Catalog.LegalNameContracts?ref=b76d88abafbd4c5e11ebf1c694dd9b44' | 'False'        | '2'    | 'Contract Ferron BP New'  | '01.07.2021 00:00:00' | '01.01.0001 00:00:00' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf116b32709a2' | 'e1cib/data/Catalog.PartnersBankAccounts?ref=b75dad46e66c4c2c11eb4522c1c161a1' |
 		| 'e1cib/data/Catalog.LegalNameContracts?ref=b76d88abafbd4c5e11ebf1c989218108' | 'False'        | '3'    | 'Contract Kalipso'        | '01.01.2021 00:00:00' | '01.01.0001 00:00:00' | 'e1cib/data/Catalog.Companies?ref=aa78120ed92fbced11eaf116b32709a3' | 'e1cib/data/Catalog.PartnersBankAccounts?ref=b75dad46e66c4c2c11eb451e00a38c06' |
 
+Scenario: Create CustomUserSettings objects (CheckSerialLotNumber balance)
+
+	And I check or create chart of characteristic types "CustomUserSettings" objects:
+		| 'Ref'                                                                                           | 'DeletionMark' | 'IsCommon' | 'Description_en'                      | 'Description_hash' | 'Description_ru' | 'Description_tr' | 'UniqueID'                            |
+		| 'e1cib/data/ChartOfCharacteristicTypes.CustomUserSettings?ref=b76fba77ffd4077e11ec1560bcfa025c' | 'False'        | 'False'    | 'CheckBalance_R4014B_SerialLotNumber' | ''                 | ''               | ''               | 'CheckBalance_R4014B_SerialLotNumber' |
+
+	And I refill object tabular section "RefersToObjects":
+		| 'Ref'                                                                                           | 'FullName'                    | 'Synonym'              |
+		| 'e1cib/data/ChartOfCharacteristicTypes.CustomUserSettings?ref=b76fba77ffd4077e11ec1560bcfa025c' | 'Document.RetailSalesReceipt' | 'Retail sales receipt' |
+		| 'e1cib/data/ChartOfCharacteristicTypes.CustomUserSettings?ref=b76fba77ffd4077e11ec1560bcfa025c' | 'Document.SalesInvoice'       | 'Sales invoice'        |
+
+	And I check or create information register "UserSettings" records:
+		| 'UserOrGroup'  | 'MetadataObject'               | 'AttributeName'                       | 'KindOfAttribute'                | 'Value'                                                                 |
+		| '$$IdCI$$'     | 'Document.RetailSalesReceipt'  | 'CheckBalance_R4014B_SerialLotNumber' | 'Enum.KindsOfAttributes.Custom'  | 'True'                                                                  |
+		| '$$IdCI$$'     | 'Document.SalesInvoice'        | 'CheckBalance_R4014B_SerialLotNumber' | 'Enum.KindsOfAttributes.Custom'  | 'True'                                                                  |
+
 
 
 Scenario: Create catalog PartnerItems objects

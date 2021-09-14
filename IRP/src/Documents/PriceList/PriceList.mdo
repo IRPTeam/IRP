@@ -174,6 +174,34 @@
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
+    <attributes uuid="2060bd7f-988f-49a2-8241-28cea61bf98e">
+      <name>InputUnit</name>
+      <synonym>
+        <key>en</key>
+        <value>Input unit</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.Units</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="20ee52eb-cbb7-4aaa-9c1c-8ab634130022">
+      <name>InputPrice</name>
+      <synonym>
+        <key>en</key>
+        <value>Input price</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeQuantity</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
   </tabularSections>
   <tabularSections uuid="cf78f241-c59f-4947-aedf-f1ec28c4eeda">
     <producedTypes>
@@ -222,6 +250,34 @@
       </synonym>
       <type>
         <types>DefinedType.typePrice</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="30c56c3a-2c5f-4204-b89f-27f44238099e">
+      <name>InputUnit</name>
+      <synonym>
+        <key>en</key>
+        <value>Input unit</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.Units</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="aff0fe3f-78f9-4dfc-9eb1-35f1a179bf20">
+      <name>InputPrice</name>
+      <synonym>
+        <key>en</key>
+        <value>Input price</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeQuantity</types>
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
@@ -328,6 +384,34 @@
       </synonym>
       <type>
         <types>DefinedType.typeItem</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="5dc05a1d-ed46-4b54-a307-ef8ead317253">
+      <name>InputUnit</name>
+      <synonym>
+        <key>en</key>
+        <value>Input unit</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.Units</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="abd6138b-55f3-45b0-9bd0-a12fefba134c">
+      <name>InputPrice</name>
+      <synonym>
+        <key>en</key>
+        <value>Input price</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeQuantity</types>
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>

@@ -34,6 +34,10 @@
       <commands>Document.ShipmentConfirmation.StandardCommand.Create</commands>
       <commands>Document.InventoryTransfer.StandardCommand.Create</commands>
     </placementFragments>
+    <placementFragments>
+      <group>ActionsPanelTools</group>
+      <commands>DataProcessor.StoreKeeperWorkspace.StandardCommand.Open</commands>
+    </placementFragments>
   </commandsPlacement>
   <commandsOrder>
     <orderFragments>

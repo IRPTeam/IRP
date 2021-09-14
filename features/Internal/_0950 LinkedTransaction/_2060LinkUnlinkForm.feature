@@ -65,8 +65,6 @@ Scenario: _2060001 preparation
 		When add sales tax settings 
 	When Create Item with SerialLotNumbers (Phone)
 	When Create document Purchase order objects (with SerialLotNumber)
-	And I execute 1C:Enterprise script at server
-			| "Documents.PurchaseOrder.FindByNumber(1053).GetObject().Write(DocumentWriteMode.Posting);" |
 	When Create document PurchaseInvoice objects (linked)
 	And I execute 1C:Enterprise script at server
 			| "Documents.PurchaseInvoice.FindByNumber(102).GetObject().Write(DocumentWriteMode.Posting);" |
@@ -1717,6 +1715,9 @@ Scenario: _2060018 check link form in the PI with 2 lines with the same items
 		
 
 Scenario: _2060019 check link form in the PI with Serial Lot number
+	* Post test PO
+		And I execute 1C:Enterprise script at server
+			| "Documents.PurchaseOrder.FindByNumber(1053).GetObject().Write(DocumentWriteMode.Posting);" |
 	* Create PI
 		* Open form for create PI
 			Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"

@@ -65,11 +65,15 @@ Scenario:_800020 preparation (remaining stock control)
 		When Create information register UserSettings records (Retail document)
 	When create payment terminal
 	When create PaymentTypes
-	When create bank terms
+	Given I open hyperlink "e1cib/list/Catalog.BankTerms"
+	If "List" table does not contain lines Then
+		| "Description" |
+		| 'Bank term 01' |
+			When create bank terms
 	* Workstation
 		If "List" table does not contain lines Then
-			| "Description" |
-			| "Bank term 01" |
+			| 'Description' |
+			| 'Bank term 01' |
 			When create Workstation
 	When Create catalog SerialLotNumbers objects (for Phone)
 	When Create Item with SerialLotNumbers (Phone)
@@ -247,6 +251,7 @@ Scenario:_800022 check remaining stock control in the Retail sales receipt
 			And I finish line editing in "Payments" table
 			And I move to "Item list" tab
 			And I click "Post" button
+			And I click the button named "OK"			
 		* Check serial lot numbers balance control
 			Then I wait that in user messages the "Line No. [1] [Phone A Brown] Serial lot number remaining: 0 . Required: 7 . Lacking: 7 ." substring will appear in 10 seconds
 		* Change serial lot number and post Retail sales receipt

@@ -1,7 +1,7 @@
 ﻿#language: en
 @tree
 @Positive
-@Sales
+@PlannedReceiptReservation
 
 Functionality: planned receipt reservation
 
@@ -52,54 +52,35 @@ Scenario: _0242000 preparation (planned receipt reservation)
 		When Create document SalesOrder objects (SI before SC, not Use shipment sheduling)
 	And I execute 1C:Enterprise script at server
 			| "Documents.SalesOrder.FindByNumber(31).GetObject().Write(DocumentWriteMode.Posting);" |
-	When Create document PurchaseOrder objects (check reservation)
+	When Create document SalesOrder objects (check reservation)
+	And I execute 1C:Enterprise script at server
+			| "Documents.SalesOrder.FindByNumber(1081).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.SalesOrder.FindByNumber(1082).GetObject().Write(DocumentWriteMode.Posting);" |
+	When Create document PlannedReceiptReservation objects (check reservation)
+	And I execute 1C:Enterprise script at server
+			| "Documents.PlannedReceiptReservation.FindByNumber(2).GetObject().Write(DocumentWriteMode.Posting);" |
+	When Create document PurchaseOrder, PurchaseInvoice, GoodsReceipt objects (check reservation)
 	And I execute 1C:Enterprise script at server
 			| "Documents.PurchaseOrder.FindByNumber(31).GetObject().Write(DocumentWriteMode.Posting);" |
-	
+			
 
-Scenario: _0242001 create planned receipt reservation
-	* Open planned receipt reservation
-		Given I open hyperlink 'e1cib/list/Document.PlannedReceiptReservation'
-		And I click the button named "FormCreate"
-	* Filling in main info
-		And I click Select button of "Company" field
+Scenario: _0242001 create planned receipt reservation based on SO
+	* Select SO
+		Given I open hyperlink 'e1cib/list/Document.SalesOrder'
 		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' |
-		And I select current line in "List" table
+			| 'Number' |
+			| '1 082'  |
+		And I click the button named "FormDocumentPlannedReceiptReservationGenerate"
+		And I click "Ok" button
+	* Filling in items tab
 		And I click Select button of "Store (incoming)" field
 		And I go to line in "List" table
 			| 'Description' |
 			| 'Store 02'    |
 		And I select current line in "List" table
-		And I click Select button of "Requester" field
-		And I go to line in "List" table
-			| 'Number' |
-			| '31'     |
-		And I select current line in "List" table
-	* Filling in items tab
-		And in the table "ItemList" I click the button named "ItemListAdd"
-		And I click choice button of "Item" attribute in "ItemList" table
-		And I go to line in "List" table
-			| 'Description' | 
-			| 'Shirt'       |
-		And I select current line in "List" table
-		And I activate "Item key" field in "ItemList" table
-		And I click choice button of "Item key" attribute in "ItemList" table
-		And I go to line in "List" table
-			| 'Item'  | 'Item key' |
-			| 'Shirt' | '36/Red'   |
-		And I select current line in "List" table
-		And I activate "Store (requester)" field in "ItemList" table
-		And I click choice button of "Store (requester)" attribute in "ItemList" table
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 02'    |
-		And I select current line in "List" table
-		And I activate "Quantity" field in "ItemList" table
-		And I input "10,000" text in "Quantity" field of "ItemList" table
-		And I finish line editing in "ItemList" table
-		And I activate "Incoming document" field in "ItemList" table
+		And "ItemList" table contains lines
+			| '#' | 'Item'  | 'Item key' | 'Unit' | 'Store (requester)' | 'Quantity' | 'Incoming document' |
+			| '1' | 'Shirt' | '36/Red'   | 'pcs'  | 'Store 02'          | '10,000'   | ''                  |
 		And I select current line in "ItemList" table
 		And I click choice button of "Incoming document" attribute in "ItemList" table
 		And I go to line in "" table
@@ -111,6 +92,9 @@ Scenario: _0242001 create planned receipt reservation
 			| '31'     |
 		And I select current line in "List" table
 		And I finish line editing in "ItemList" table
+		And I move to "Other" tab
+		And I input "01.09.2021 00:00:00" text in the field named "Date"
+		And I activate field named "ItemListLineNumber" in "ItemList" table	
 		And I click the button named "FormPost"
 		And I delete "$$NumberPlannedReceiptReservation0242001$$" variable
 		And I delete "$$PlannedReceiptReservation0242001$$" variable
@@ -122,8 +106,64 @@ Scenario: _0242001 create planned receipt reservation
 			| 'Number'                |
 			| '$$NumberPlannedReceiptReservation0242001$$' |
 		And I close all client application windows
+
+Scenario: _0242005 check reservation (SO-Planned reservation - PO - GR-PI/PI-GR)
+	* Post documents
+		And I execute 1C:Enterprise script at server
+			| "Documents.PurchaseInvoice.FindByNumber(32).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.GoodsReceipt.FindByNumber(32).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.GoodsReceipt.FindByNumber(33).GetObject().Write(DocumentWriteMode.Posting);" |
+			| "Documents.GoodsReceipt.FindByNumber(34).GetObject().Write(DocumentWriteMode.Posting);" |
+	* Check R4035B_IncomingStocks
+		Given I open hyperlink "e1cib/list/AccumulationRegister.R4035B_IncomingStocks"
+		And "List" table contains lines
+			| 'Period'              | 'Recorder'                                                | 'Line number' | 'Store'    | 'Item key' | 'Order'                                       | 'Quantity' |
+			| '08.02.2021 15:11:30' | 'Purchase order 31 dated 08.02.2021 15:11:30'             | '1'           | 'Store 02' | '36/Red'   | 'Purchase order 31 dated 08.02.2021 15:11:30' | '30,000'   |
+			| '08.02.2021 15:11:30' | 'Purchase order 31 dated 08.02.2021 15:11:30'             | '2'           | 'Store 02' | '38/18SD'  | 'Purchase order 31 dated 08.02.2021 15:11:30' | '50,000'   |
+			| '08.02.2021 15:11:30' | 'Purchase order 31 dated 08.02.2021 15:11:30'             | '3'           | 'Store 02' | 'XS/Blue'  | 'Purchase order 31 dated 08.02.2021 15:11:30' | '50,000'   |
+			| '01.09.2021 00:00:00' | 'Planned receipt reservation 3 dated 01.09.2021 00:00:00' | '1'           | 'Store 02' | '36/Red'   | 'Purchase order 31 dated 08.02.2021 15:11:30' | '10,000'   |
+			| '01.09.2021 12:00:00' | 'Planned receipt reservation 2 dated 01.09.2021 12:00:00' | '1'           | 'Store 02' | '36/Red'   | 'Purchase order 31 dated 08.02.2021 15:11:30' | '4,000'    |
+			| '01.09.2021 12:00:00' | 'Planned receipt reservation 2 dated 01.09.2021 12:00:00' | '2'           | 'Store 02' | 'XS/Blue'  | 'Purchase order 31 dated 08.02.2021 15:11:30' | '8,000'    |
+			| '14.09.2021 10:26:02' | 'Goods receipt 32 dated 14.09.2021 10:26:02'              | '1'           | 'Store 02' | '36/Red'   | 'Purchase order 31 dated 08.02.2021 15:11:30' | '1,000'    |
+			| '14.09.2021 10:31:48' | 'Goods receipt 34 dated 14.09.2021 10:31:48'              | '1'           | 'Store 02' | 'XS/Blue'  | 'Purchase order 31 dated 08.02.2021 15:11:30' | '42,000'   |
+		Then the number of "List" table lines is "равно" "8"
+	* Check R4035B_IncomingStocks	
+		Given I open hyperlink "e1cib/list/AccumulationRegister.R4036B_IncomingStocksRequested"
+		And "List" table contains lines
+			| 'Period'              | 'Recorder'                                                | 'Line number' | 'Incoming store' | 'Requester store' | 'Item key' | 'Order'                                       | 'Requester'                                   | 'Quantity' |
+			| '01.09.2021 00:00:00' | 'Planned receipt reservation 3 dated 01.09.2021 00:00:00' | '1'           | 'Store 02'       | 'Store 02'        | '36/Red'   | 'Purchase order 31 dated 08.02.2021 15:11:30' | 'Sales order 31 dated 27.01.2021 19:50:45'    | '10,000'   |
+			| '01.09.2021 12:00:00' | 'Planned receipt reservation 2 dated 01.09.2021 12:00:00' | '1'           | 'Store 02'       | 'Store 02'        | '36/Red'   | 'Purchase order 31 dated 08.02.2021 15:11:30' | 'Sales order 1 081 dated 28.01.2021 10:10:29' | '4,000'    |
+			| '14.09.2021 10:26:02' | 'Goods receipt 32 dated 14.09.2021 10:26:02'              | '1'           | 'Store 02'       | 'Store 02'        | '36/Red'   | 'Purchase order 31 dated 08.02.2021 15:11:30' | 'Sales order 31 dated 27.01.2021 19:50:45'    | '10,000'   |
+			| '14.09.2021 10:26:02' | 'Goods receipt 32 dated 14.09.2021 10:26:02'              | '2'           | 'Store 02'       | 'Store 02'        | '36/Red'   | 'Purchase order 31 dated 08.02.2021 15:11:30' | 'Sales order 1 081 dated 28.01.2021 10:10:29' | '4,000'    |
+		Then the number of "List" table lines is "равно" "4"
+	*  Check R4011B_FreeStocks
+		Given I open hyperlink "e1cib/list/AccumulationRegister.R4011B_FreeStocks"
+		And "List" table contains lines
+			| 'Period'              | 'Recorder'                                   | 'Line number' | 'Store'    | 'Item key' | 'Quantity' |
+			| '14.09.2021 10:26:02' | 'Goods receipt 32 dated 14.09.2021 10:26:02' | '1'           | 'Store 02' | '36/Red'   | '10,000'   |
+			| '14.09.2021 10:26:02' | 'Goods receipt 32 dated 14.09.2021 10:26:02' | '2'           | 'Store 02' | '36/Red'   | '5,000'    |
+			| '14.09.2021 10:26:02' | 'Goods receipt 32 dated 14.09.2021 10:26:02' | '3'           | 'Store 02' | '36/Red'   | '10,000'   |
+			| '14.09.2021 10:26:02' | 'Goods receipt 32 dated 14.09.2021 10:26:02' | '4'           | 'Store 02' | '36/Red'   | '4,000'    |
+	* Check R4010B_ActualStocks
+		Given I open hyperlink "e1cib/list/AccumulationRegister.R4010B_ActualStocks"
+		And "List" table contains lines
+			| 'Period'              | 'Recorder'                                   | 'Line number' | 'Store'    | 'Item key' | 'Quantity' |
+			| '14.09.2021 10:26:02' | 'Goods receipt 32 dated 14.09.2021 10:26:02' | '1'           | 'Store 02' | '36/Red'   | '10,000'   |
+			| '14.09.2021 10:26:02' | 'Goods receipt 32 dated 14.09.2021 10:26:02' | '2'           | 'Store 02' | '36/Red'   | '5,000'    |
+			| '14.09.2021 10:30:51' | 'Goods receipt 33 dated 14.09.2021 10:30:51' | '1'           | 'Store 02' | 'XS/Blue'  | '7,000'    |
+			| '14.09.2021 10:31:48' | 'Goods receipt 34 dated 14.09.2021 10:31:48' | '1'           | 'Store 02' | 'XS/Blue'  | '43,000'   |
+		
+		
+				
+		
+				
+		
+				
 				
 
+
+
+	
 				
 		
 	

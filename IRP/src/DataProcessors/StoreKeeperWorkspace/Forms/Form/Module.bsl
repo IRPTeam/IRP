@@ -6,6 +6,12 @@ Procedure NotificationProcessing(EventName, Parameter, Source)
 EndProcedure
 
 &AtClient
+Procedure GoodsInTransitIncomingRefreshRequestProcessing(Item)
+	GoodsInTransitIncomingRefreshRequestProcessingAtServer();
+EndProcedure
+
+
+&AtClient
 Procedure SearchByBarcode(Command, Barcode = "")
 	AddInfo = New Structure("ClientModule", ThisObject);
 	DocumentsClient.SearchByBarcode(Barcode, ThisObject, ThisObject, ThisObject, , AddInfo);
@@ -54,6 +60,8 @@ Procedure GoodsInTransitIncomingRefreshRequestProcessingAtServer()
 	Query.SetParameter("ItemKey", ItemKey);
 	QueryResult = Query.Execute().Unload();
 	GoodsInTransitIncoming.Load(QueryResult);
+	
+	Items.PagesSettings.CurrentPage = Items.GroupGoodsReceipt;
 EndProcedure
 
 &AtServer
@@ -164,7 +172,7 @@ Procedure CreateDocuments(Val StructureRow, CreateGoodsReceipt, CreateInventoryT
 	If CreateGoodsReceipt Then
 		DocGoodsReceipt = GoodsReceipt.Ref;
 	EndIf;
-	Items.ButtonPages.CurrentPage = Items.GroupDocuments;
+	Items.PagesSettings.CurrentPage = Items.PageSettings;
 EndProcedure
 
 

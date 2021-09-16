@@ -22,6 +22,7 @@
   <content>Document.PurchaseOrderClosing</content>
   <content>Catalog.LegalNameContracts</content>
   <content>Catalog.PartnerItems</content>
+  <subsystems>Pricing</subsystems>
   <subsystems>Purchase</subsystems>
   <subsystems>PurchaseReturn</subsystems>
 </mdclass:Subsystem>

@@ -923,7 +923,7 @@ Scenario: _016012 price calculation when change input price in the Price list (b
 		And I move to the next attribute
 		And "ItemKeyList" table became equal
 			| '#' | 'Input price' | 'Item'  | 'Item key' | 'Input unit'        | 'Price'    |
-			| '1' | '500,000'     | 'Dress' | 'XL/Green' | 'box Dress (8 pcs)' | '4 000,00' |
+			| '1' | '500,000'     | 'Dress' | 'XL/Green' | 'box Dress (8 pcs)' | '62,50' |
 		And I activate field named "ItemKeyListInputPrice" in "ItemKeyList" table
 		And I select current line in "ItemKeyList" table
 		And I input "600,000" text in the field named "ItemKeyListInputPrice" of "ItemKeyList" table
@@ -931,7 +931,7 @@ Scenario: _016012 price calculation when change input price in the Price list (b
 		And I move to the next attribute
 		And "ItemKeyList" table contains lines
 			| '#' | 'Input price' | 'Item'  | 'Item key' | 'Input unit'        | 'Price'    |
-			| '1' | '600,000'     | 'Dress' | 'XL/Green' | 'box Dress (8 pcs)' | '4 800,00' |	
+			| '1' | '600,000'     | 'Dress' | 'XL/Green' | 'box Dress (8 pcs)' | '75,00' |	
 	* Check Price calculation when change Input unit
 		And I activate field named "ItemKeyListInputUnit" in "ItemKeyList" table
 		And I select current line in "ItemKeyList" table

@@ -155,6 +155,10 @@ Procedure ItemListSelection(Object, Form, Item, RowSelected, Field, StandardProc
 	EndIf;
 EndProcedure
 
+Procedure ItemListBeforeDeleteRow(Object, Form, Item, Cancel, AddInfo = Undefined) Export
+	RowIDInfoClient.ItemListBeforeDeleteRow(Object, Form, Item, Cancel, AddInfo);	
+EndProcedure
+
 #EndRegion
 
 #Region ItemListItemsEvents

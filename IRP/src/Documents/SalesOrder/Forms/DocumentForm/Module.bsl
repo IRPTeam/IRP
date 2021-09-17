@@ -27,7 +27,6 @@ Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefin
 		If Source <> ThisObject Then
 			LockLinkedRows();
 		EndIf;
-		//RowIDInfoClient.NotificationProcessing(Object, ThisObject, EventName, Parameter, Source, AddInfo);
 	EndIf;
 	
 	If Not Source = ThisObject Then
@@ -618,6 +617,16 @@ EndProcedure
 
 #EndRegion
 
+#Region LinkedDocuments
+
+&AtServer
+Procedure LockLinkedRows()
+	RowIDInfoServer.LockLinkedRows(Object, ThisObject);
+	RowIDInfoServer.SetAppearance(Object, ThisObject);
+EndProcedure
+
+#EndRegion
+
 #Region Service
 
 &AtClient
@@ -630,7 +639,3 @@ EndFunction
 
 #EndRegion
 
-Procedure LockLinkedRows()
-	RowIDInfoServer.LockLinkedRows(Object, ThisObject);
-	RowIDInfoServer.SetAppearance(Object, ThisObject);
-EndProcedure

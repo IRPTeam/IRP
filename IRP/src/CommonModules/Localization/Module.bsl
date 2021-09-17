@@ -367,6 +367,11 @@ Function Strings(Lang) Export
 	// %2 - Boots
 	// %3 - Red XL
 	Strings.Insert("Error_096", NStr("en = 'Can not delete linked row [%1] [%2] [%3]'", Lang));
+
+	// %1 - 1
+	// %2 - Boots
+	// %3 - Red XL
+	Strings.Insert("Error_097", NStr("en = 'Wrong linked row [%1] [%2] [%3]'", Lang));
 	
 #EndRegion
 

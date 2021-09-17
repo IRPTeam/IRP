@@ -7307,6 +7307,8 @@ EndFunction
 
 #Region LockLinkedRows
 
+#Region EventHandlers
+
 Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 	SetAppearance(Object, Form);	
 EndProcedure
@@ -7319,11 +7321,134 @@ Procedure OnReadAtServer(Object, Form, CurrentObject) Export
 	LockLinkedRows(Object, Form);
 EndProcedure
 
+Procedure FillCheckProcessing(Object, Cancel, LinkedFilter, RowIDInfoTable, ItemListTable) Export
+	Query = New Query();
+	Query.Text =
+	"SELECT
+	|	BasisesTable.RowID,
+	|	BasisesTable.RowRef,
+	|	BasisesTable.Basis,
+	|	BasisesTable.BasisKey,
+	|	BasisesTable.CurrentStep,
+	|	BasisesTable.ItemKey,
+	|	BasisesTable.Store
+	|INTO BasisesTable
+	|FROM
+	|	&BasisesTable AS BasisesTable
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	RowIDInfo.Key,
+	|	RowIDInfo.RowID,
+	|	RowIDInfo.RowRef,
+	|	RowIDInfo.Basis,
+	|	RowIDInfo.BasisKey,
+	|	RowIDInfo.CurrentStep
+	|INTO RowIDInfo
+	|FROM
+	|	&RowIDInfo AS RowIDInfo
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	ItemList.Key,
+	|	ItemList.LineNumber,
+	|	ItemList.ItemKey,
+	|	ItemList.Store
+	|INTO ItemList
+	|FROM
+	|	&ItemList AS ItemList
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	MIN(RowIDInfo.Key) AS Key,
+	|	RowIDInfo.RowID,
+	|	RowIDInfo.RowRef,
+	|	RowIDInfo.Basis,
+	|	RowIDInfo.BasisKey,
+	|	RowIDInfo.CurrentStep
+	|INTO RowIDInfoGrouped
+	|FROM
+	|	RowIDInfo AS RowIDInfo
+	|WHERE
+	|	RowIDInfo.CurrentStep <> VALUE(Catalog.MovementRules.EmptyRef)
+	|GROUP BY
+	|	RowIDInfo.Basis,
+	|	RowIDInfo.BasisKey,
+	|	RowIDInfo.CurrentStep,
+	|	RowIDInfo.RowID,
+	|	RowIDInfo.RowRef
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	RowIDInfoGrouped.Key,
+	|	RowIDInfoGrouped.RowID,
+	|	RowIDInfoGrouped.RowRef,
+	|	RowIDInfoGrouped.Basis,
+	|	RowIDInfoGrouped.BasisKey,
+	|	RowIDInfoGrouped.CurrentStep,
+	|	ItemList.ItemKey,
+	|	ItemList.Store
+	|INTO RowIDInfoFull
+	|FROM
+	|	RowIDInfoGrouped AS RowIDInfoGrouped
+	|		LEFT JOIN ItemList AS ItemList
+	|		ON RowIDInfoGrouped.Key = ItemList.Key
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	RowIDInfoFull.Key
+	|INTO WrongLinkedRows
+	|FROM
+	|	RowIDInfoFull AS RowIDInfoFull
+	|		LEFT JOIN BasisesTable AS BasisesTable
+	|		ON RowIDInfoFull.RowID = BasisesTable.RowID
+	|		AND RowIDInfoFull.RowRef = BasisesTable.RowRef
+	|		AND RowIDInfoFull.Basis = BasisesTable.Basis
+	|		AND RowIDInfoFull.BasisKey = BasisesTable.BasisKey
+	|		AND RowIDInfoFull.CurrentStep = BasisesTable.CurrentStep
+	|		AND RowIDInfoFull.ItemKey = BasisesTable.ItemKey
+	|		AND RowIDInfoFull.Store = BasisesTable.Store
+	|WHERE
+	|	BasisesTable.RowID IS NULL
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	ItemList.ItemKey,
+	|	ItemList.LineNumber
+	|FROM
+	|	ItemList AS ItemList
+	|		INNER JOIN WrongLinkedRows AS WrongLinkedRows
+	|		ON ItemList.Key = WrongLinkedRows.Key"; 
+
+	BasisesTable = RowIDInfoServer.GetBasises(Object.Ref, LinkedFilter);
+	Query.SetParameter("BasisesTable", BasisesTable);
+	Query.SetParameter("RowIDInfo", RowIDInfoTable);
+	Query.SetParameter("ItemList", ItemListTable);
+	
+	QueryResult = Query.Execute();
+	QueryTable = QueryResult.Unload();
+	
+	For Each Row In QueryTable Do
+		Cancel = True;
+		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_097, 
+			Row.LineNumber, Row.ItemKey.Item, Row.ItemKey),
+				"ItemList[" + Format((Row.LineNumber - 1), "NZ=0; NG=0;") + "].IsLinked", Object);
+	EndDo;
+EndProcedure
+
+#EndRegion
+
 Procedure LockLinkedRows(Object, Form) Export
 	RowIDInfoTable = Object.RowIDInfo.Unload(,"Key, RowID");
 	RowIDInfoTable.GroupBy("Key, RowID");
 	
-	LinkedKeys = GetLinkedKeys(RowIDInfoTable);
+	LinkedKeys = GetLinkedKeys(RowIDInfoTable, Object.Ref);
 	Form.DependentDocs.LoadValues(LinkedKeys.DependentDocs);
 	For Each Row In Object.ItemList Do
 		If LinkedKeys.Keys.Find(Row.Key) <> Undefined Then
@@ -7335,12 +7460,13 @@ Procedure LockLinkedRows(Object, Form) Export
 	EndDo;
 EndProcedure
 
-Function GetLinkedKeys(RowIDInfoTable) Export
+Function GetLinkedKeys(RowIDInfoTable, Ref)
 	Query = New Query();
 	Query.Text = 
 	"SELECT
 	|	RowIDInfoTable.Key AS Key,
-	|	RowIDInfoTable.RowID AS RowID
+	|	RowIDInfoTable.RowID AS RowID,
+	|	&Ref AS Basis
 	|INTO RowIDInfoTable
 	|FROM
 	|	&RowIDInfoTable AS RowIDInfoTable
@@ -7356,6 +7482,7 @@ Function GetLinkedKeys(RowIDInfoTable) Export
 	|		INNER JOIN AccumulationRegister.TM1010B_RowIDMovements AS TM1010B_RowIDMovements
 	|		ON RowIDInfoTable.RowID = TM1010B_RowIDMovements.RowID
 	|		AND TM1010B_RowIDMovements.RecordType = VALUE(AccumulationRecordType.Expense)
+	|		AND RowIDInfoTable.Basis = TM1010B_RowIDMovements.Basis
 	|GROUP BY
 	|	RowIDInfoTable.Key,
 	|	TM1010B_RowIDMovements.Recorder
@@ -7371,6 +7498,7 @@ Function GetLinkedKeys(RowIDInfoTable) Export
 	|		INNER JOIN AccumulationRegister.TM1010T_RowIDMovements AS TM1010T_RowIDMovements
 	|		ON RowIDInfoTable.RowID = TM1010T_RowIDMovements.RowID
 	|		AND TM1010T_RowIDMovements.Quantity < 0
+	|		AND RowIDInfoTable.Basis = TM1010T_RowIDMovements.Basis
 	|GROUP BY
 	|	RowIDInfoTable.Key,
 	|	TM1010T_RowIDMovements.Recorder
@@ -7391,19 +7519,8 @@ Function GetLinkedKeys(RowIDInfoTable) Export
 	|FROM
 	|	tmpTM1010T_RowIDMovements AS tmpTM1010T_RowIDMovements";
 
-	If TypeOf(RowIDInfoTable) = Type("Array") Then
-		Table = New ValueTable();
-		Table.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
-		Table.Columns.Add("RowID", Metadata.DefinedTypes.typeRowID.Type);
-		For Each Row In RowIDInfoTable Do
-			FillPropertyValues(Table.Add(), Row);
-		EndDo;
-		Table.GroupBy("Key, RowID");
-		Query.SetParameter("RowIDInfoTable", Table);
-	Else
-		Query.SetParameter("RowIDInfoTable", RowIDInfoTable);
-	EndIf;
-	
+	Query.SetParameter("RowIDInfoTable", RowIDInfoTable);
+	Query.SetParameter("Ref", Ref);
 	QueryResult = Query.Execute();
 	QueryTable = QueryResult.Unload();
 	KeysTable = QueryTable.Copy();

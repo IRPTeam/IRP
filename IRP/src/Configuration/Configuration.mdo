@@ -369,6 +369,7 @@
   <commonModules>CommonModule.PostingServer</commonModules>
   <commonModules>CommonModule.RowIDInfoClient</commonModules>
   <commonModules>CommonModule.RowIDInfoServer</commonModules>
+  <commonModules>CommonModule.RowIDInfoClientServer</commonModules>
   <commonModules>CommonModule.Saas</commonModules>
   <commonModules>CommonModule.SaasClient</commonModules>
   <commonModules>CommonModule.ScheduledJobsForExtentions</commonModules>

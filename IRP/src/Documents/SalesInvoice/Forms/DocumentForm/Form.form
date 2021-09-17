@@ -927,6 +927,59 @@
           <name>ItemListGroupLockedRowLineNumber</name>
           <id>873</id>
           <items xsi:type="form:FormField">
+            <name>ItemListIsLinked</name>
+            <id>1161</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <dataPath xsi:type="form:DataPath">
+              <segments>Object.ItemList.IsLinked</segments>
+            </dataPath>
+            <titleLocation>None</titleLocation>
+            <extendedTooltip>
+              <name>ItemListIsLinkedExtendedTooltip</name>
+              <id>1163</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <type>Label</type>
+              <autoMaxWidth>true</autoMaxWidth>
+              <autoMaxHeight>true</autoMaxHeight>
+              <extInfo xsi:type="form:LabelDecorationExtInfo">
+                <horizontalAlign>Left</horizontalAlign>
+              </extInfo>
+            </extendedTooltip>
+            <contextMenu>
+              <name>ItemListIsLinkedContextMenu</name>
+              <id>1162</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <autoFill>true</autoFill>
+            </contextMenu>
+            <type>PictureField</type>
+            <editMode>Enter</editMode>
+            <showInHeader>true</showInHeader>
+            <headerHorizontalAlign>Left</headerHorizontalAlign>
+            <showInFooter>true</showInFooter>
+            <extInfo xsi:type="form:ImageFieldExtInfo">
+              <autoMaxWidth>true</autoMaxWidth>
+              <autoMaxHeight>true</autoMaxHeight>
+              <horizontalStretch>true</horizontalStretch>
+              <verticalStretch>true</verticalStretch>
+              <valuesPicture xsi:type="core:PictureRef">
+                <picture>StdPicture.GotoURL</picture>
+              </valuesPicture>
+              <fileDragMode>AsFileRef</fileDragMode>
+            </extInfo>
+          </items>
+          <items xsi:type="form:FormField">
             <name>ItemListLockedRow</name>
             <id>875</id>
             <visible>true</visible>
@@ -2395,6 +2448,10 @@
         <handlers>
           <event>OnChange</event>
           <name>ItemListOnChange</name>
+        </handlers>
+        <handlers>
+          <event>BeforeDeleteRow</event>
+          <name>ItemListBeforeDeleteRow</name>
         </handlers>
         <searchStringAddition>
           <visible>true</visible>
@@ -8157,6 +8214,23 @@
           <common>true</common>
         </edit>
       </columns>
+      <columns>
+        <name>IsLinked</name>
+        <title>
+          <key>en</key>
+          <value>Is linked</value>
+        </title>
+        <id>173</id>
+        <valueType>
+          <types>Boolean</types>
+        </valueType>
+        <view>
+          <common>true</common>
+        </view>
+        <edit>
+          <common>true</common>
+        </edit>
+      </columns>
     </additionalColumns>
   </attributes>
   <attributes>
@@ -8743,6 +8817,43 @@
       </edit>
     </columns>
   </attributes>
+  <attributes>
+    <name>IsLinked</name>
+    <title>
+      <key>en</key>
+      <value>Is linked</value>
+    </title>
+    <id>171</id>
+    <valueType>
+      <types>Boolean</types>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
+  </attributes>
+  <attributes>
+    <name>DependentDocs</name>
+    <title>
+      <key>en</key>
+      <value>Dependent docs</value>
+    </title>
+    <id>172</id>
+    <valueType>
+      <types>ValueList</types>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
+    <extInfo xsi:type="form:ValueListExtInfo">
+      <itemValueType/>
+    </extInfo>
+  </attributes>
   <formCommands>
     <name>SetSpecialOffersAtRow</name>
     <title>
@@ -8857,7 +8968,6 @@
       </handler>
     </action>
     <representation>Picture</representation>
-    <modifiesStoredData>true</modifiesStoredData>
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
   <formCommands>
@@ -8879,7 +8989,6 @@
       </handler>
     </action>
     <representation>Picture</representation>
-    <modifiesStoredData>true</modifiesStoredData>
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
   <formCommands>

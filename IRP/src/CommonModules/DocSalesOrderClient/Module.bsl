@@ -94,8 +94,8 @@ Procedure AfterWriteAtClient(Object, Form, WriteParameters, AddInfo = Undefined)
 #If Not MobileClient And Not MobileAppClient Then
 		Status(Object.Ref, , MessageText);
 #EndIf
-	EndIf
-	;
+	EndIf;
+	RowIDInfoClient.AfterWriteAtClient(Object, Form, WriteParameters, AddInfo);
 EndProcedure
 
 #EndRegion
@@ -146,6 +146,11 @@ Procedure ItemListSelection(Object, Form, Item, RowSelected, Field, StandardProc
 		EndIf;
 	EndIf;
 EndProcedure
+
+Procedure ItemListBeforeDeleteRow(Object, Form, Item, Cancel, AddInfo = Undefined) Export
+	RowIDInfoClient.ItemListBeforeDeleteRow(Object, Form, Item, Cancel, AddInfo);	
+EndProcedure
+
 
 #EndRegion
 

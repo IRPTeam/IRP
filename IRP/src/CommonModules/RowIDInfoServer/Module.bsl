@@ -2,23 +2,53 @@ Procedure Posting_RowID(Source, Cancel, PostingMode) Export
 	If Source.Metadata().TabularSections.Find("RowIDInfo") = Undefined Then
 		Return;
 	EndIf;
-
+	
+	ItemList_InDocument = GetRowIDwithLineNumbers(Source);	
+	Records_InDocument = GetRecordsInDocument(Source).TM1010B_RowIDMovements;
+	Records_Exists = AccumulationRegisters.TM1010B_RowIDMovements.GetExistsRecords(Source.Ref);
+	
 	If Source.Metadata().Attributes.Find("Status") <> Undefined Then
 		StatusInfo = ObjectStatusesServer.GetLastStatusInfo(Source.Ref);
 		If Not StatusInfo.Posting Then
+			Unposting = True;
+			Source.RegisterRecords.TM1010B_RowIDMovements.Clear();
+			Source.RegisterRecords.TM1010B_RowIDMovements.Write();
+			CheckAfterWrite(Source, Cancel, ItemList_InDocument, Records_InDocument, Records_Exists, Unposting);
 			Return;
 		EndIf;
 	EndIf;
+	
+	Unposting = False;
+	Source.RegisterRecords.TM1010B_RowIDMovements.Load(Records_InDocument);
+	Source.RegisterRecords.TM1010B_RowIDMovements.Write();
+	
+	CheckAfterWrite(Source, Cancel, ItemList_InDocument, Records_InDocument, Records_Exists, Unposting);	
 
-	Posting_TM1010B_RowIDMovements(Source, Cancel, PostingMode);
+	If Not Cancel Then
+		If Is(Source).SI Or Is(Source).PI Or Is(Source).RSR Then
+			Posting_TM1010T_RowIDMovements_Invoice(Source, Cancel, PostingMode);
+		EndIf;
 
-	If Is(Source).SI Or Is(Source).PI Or Is(Source).RSR Then
-		Posting_TM1010T_RowIDMovements_Invoice(Source, Cancel, PostingMode);
+		If Is(Source).SR Or Is(Source).SRO Or Is(Source).PR Or Is(Source).PRO Or Is(Source).RRR Then
+			Posting_TM1010T_RowIDMovements_Return(Source, Cancel, PostingMode);
+		EndIf;
 	EndIf;
+EndProcedure
 
-	If Is(Source).SR Or Is(Source).SRO Or Is(Source).PR Or Is(Source).PRO Or Is(Source).RRR Then
-		Posting_TM1010T_RowIDMovements_Return(Source, Cancel, PostingMode);
+Procedure UndoPosting_RowIDUndoPosting(Source, Cancel) Export
+	If Source.Metadata().TabularSections.Find("RowIDInfo") = Undefined Then
+		Return;
 	EndIf;
+	
+	Records_Exists = AccumulationRegisters.TM1010B_RowIDMovements.GetExistsRecords(Source.Ref);
+	Records_InDocument  = GetRecordsInDocument(Source).TM1010B_RowIDMovements;
+	ItemList_InDocument = GetRowIDwithLineNumbers(Source);
+	
+	Unposting = True;
+	Source.RegisterRecords.TM1010B_RowIDMovements.Clear();
+	Source.RegisterRecords.TM1010B_RowIDMovements.Write();
+	
+	CheckAfterWrite(Source, Cancel, ItemList_InDocument, Records_InDocument, Records_Exists, Unposting);
 EndProcedure
 
 Procedure Posting_TM1010T_RowIDMovements_Return(Source, Cancel, PostingMode)
@@ -98,103 +128,141 @@ Procedure Posting_TM1010T_RowIDMovements_Invoice(Source, Cancel, PostingMode)
 	Source.RegisterRecords.TM1010T_RowIDMovements.Load(QueryResult);
 EndProcedure
 
-Procedure Posting_TM1010B_RowIDMovements(Source, Cancel, PostingMode)
+Procedure CheckAfterWrite(Source, Cancel, ItemList_InDocument, Records_InDocument, Records_Exists, Unposting)
+	Filter = New Structure("RecordType", AccumulationRecordType.Expense);
+	If Not Cancel And Not AccumulationRegisters.TM1010B_RowIDMovements.CheckBalance(Source.Ref, ItemList_InDocument, 
+			Records_InDocument.Copy(Filter), 
+			Records_Exists.Copy(Filter), 
+			Filter.RecordType, Unposting) Then
+		Cancel = True;
+	EndIf;
+	
+	Filter = New Structure("RecordType", AccumulationRecordType.Receipt);
+	If Not Cancel And Not AccumulationRegisters.TM1010B_RowIDMovements.CheckBalance(Source.Ref, ItemList_InDocument, 
+			Records_InDocument.Copy(Filter), 
+			Records_Exists.Copy(Filter), 
+			Filter.RecordType, Unposting) Then
+		Cancel = True;
+	EndIf;
+EndProcedure
+
+Function GetRowIDwithLineNumbers(Source)
 	Query = New Query();
-	Query.Text = "SELECT
-				 |	Table.Ref AS Recorder,
-				 |	Table.Ref.Date AS Period, 
-				 |	Table.RowID,
-				 |	Table.CurrentStep,
-				 | 	Table.Basis,
-				 |	Table.RowRef,
-				 |	SUM(Table.Quantity) AS Quantity
-				 |INTO RowIDMovements
-				 |FROM
-				 |	Document." + Source.Metadata().Name + ".RowIDInfo AS Table
-															|WHERE
-															|	Table.Ref = &Ref
-															|GROUP BY
-															|	Table.Ref,
-															|	Table.Ref.Date, 
-															|	Table.RowID,
-															|	Table.CurrentStep,
-															| 	Table.Basis,
-															|	Table.RowRef
-															|;
-															|//////////////////////////////////////////////////////////////////////////////////
-															|SELECT
-															|	Table.Ref AS Recorder,
-															|	Table.Ref.Date AS Period, 
-															|	Table.RowID,
-															|	Table.NextStep,
-															| 	Table.Basis,
-															|	Table.RowRef,
-															|	Table.Quantity
-															|INTO RowIDMovementsFull
-															|FROM
-															|	Document." + Source.Metadata().Name + ".RowIDInfo AS Table
-																									   |WHERE
-																									   |	Table.Ref = &Ref
-																									   |;
-																									   |////////////////////////////////////////////////////////////////////////////////
-																									   |SELECT
-																									   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
-																									   |	Table.Recorder,
-																									   |	Table.Period,
-																									   |	Table.RowID,
-																									   |	Table.CurrentStep AS Step,
-																									   |	CASE
-																									   |		WHEN Table.Basis.Ref IS NULL
-																									   |			THEN &Ref
-																									   |		ELSE Table.Basis
-																									   |	END AS Basis,
-																									   |	Table.RowRef,
-																									   |	CASE
-																									   |		WHEN ISNULL(TM1010B_RowIDMovements.QuantityBalance, 0) < Table.Quantity
-																									   |			THEN ISNULL(TM1010B_RowIDMovements.QuantityBalance, 0)
-																									   |		ELSE Table.Quantity
-																									   |	END AS Quantity
-																									   |FROM
-																									   |	RowIDMovements AS Table
-																									   |		INNER JOIN AccumulationRegister.TM1010B_RowIDMovements.Balance(&Period, (RowID, Step, Basis, RowRef) IN
-																									   |			(SELECT
-																									   |				Table.RowID,
-																									   |				Table.CurrentStep,
-																									   |				Table.Basis,
-																									   |				Table.RowRef
-																									   |			FROM
-																									   |				RowIDMovements AS Table
-																									   |			WHERE
-																									   |				NOT Table.CurrentStep = VALUE(Catalog.MovementRules.EmptyRef))) AS TM1010B_RowIDMovements
-																									   |		ON TM1010B_RowIDMovements.RowID = Table.RowID
-																									   |		AND TM1010B_RowIDMovements.Step = Table.CurrentStep
-																									   |		AND TM1010B_RowIDMovements.Basis = Table.Basis
-																									   |		AND TM1010B_RowIDMovements.RowRef = Table.RowRef
-																									   |WHERE
-																									   |	NOT Table.CurrentStep = VALUE(Catalog.MovementRules.EmptyRef)
-																									   |
-																									   |UNION ALL
-																									   |
-																									   |SELECT
-																									   |	VALUE(AccumulationRecordType.Receipt),
-																									   |	Table.Recorder,
-																									   |	Table.Period,
-																									   |	Table.RowID,
-																									   |	Table.NextStep AS Step,
-																									   |	&Ref,
-																									   |	Table.RowRef,
-																									   |	Table.Quantity
-																									   |FROM
-																									   |	RowIDMovementsFull AS Table
-																									   |WHERE
-																									   |	NOT Table.NextStep = VALUE(Catalog.MovementRules.EmptyRef)";
+	Query.Text = 
+	"SELECT
+	|	RowIDInfo.RowID AS RowID,
+	|	MIN(ItemList.LineNumber) AS LineNumber,
+	|	MIN(ItemList.ItemKey) AS ItemKey
+	|FROM
+	|	Document." + Source.Metadata().Name + ".RowIDInfo AS RowIDInfo
+	|		INNER JOIN Document." + Source.Metadata().Name + ".ItemList AS ItemList
+	|		ON RowIDInfo.Ref = &Ref
+	|		AND ItemList.Ref = &Ref
+	|		AND RowIDInfo.Key = ItemList.Key
+	|GROUP BY
+	|	RowIDInfo.RowID";
+	Query.SetParameter("Ref", Source.Ref);
+	QueryResult = Query.Execute();
+	QueryTable = QueryResult.Unload();
+	Return QueryTable;
+EndFunction
+
+Function GetRecordsInDocument(Source)
+	Query = New Query();
+	Query.Text = 
+		"SELECT
+		|	Table.Ref AS Recorder,
+		|	Table.Ref.Date AS Period, 
+		|	Table.RowID,
+		|	Table.CurrentStep,
+		| 	Table.Basis,
+		|	Table.RowRef,
+		|	SUM(Table.Quantity) AS Quantity
+		|INTO RowIDMovements
+		|FROM
+		|	Document." + Source.Metadata().Name + ".RowIDInfo AS Table
+		|WHERE
+		|	Table.Ref = &Ref
+		|GROUP BY
+		|	Table.Ref,
+		|	Table.Ref.Date, 
+		|	Table.RowID,
+		|	Table.CurrentStep,
+		| 	Table.Basis,
+		|	Table.RowRef
+		|;
+		|//////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	Table.Ref AS Recorder,
+		|	Table.Ref.Date AS Period, 
+		|	Table.RowID,
+		|	Table.NextStep,
+		| 	Table.Basis,
+		|	Table.RowRef,
+		|	Table.Quantity
+		|INTO RowIDMovementsFull
+		|FROM
+		|	Document." + Source.Metadata().Name + ".RowIDInfo AS Table
+		|WHERE
+		|	Table.Ref = &Ref
+		|;
+		|////////////////////////////////////////////////////////////////////////////////
+		|SELECT
+		|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		|	Table.Recorder,
+		|	Table.Period,
+		|	Table.RowID,
+		|	Table.CurrentStep AS Step,
+		|	CASE
+		|		WHEN Table.Basis.Ref IS NULL
+		|			THEN &Ref
+		|		ELSE Table.Basis
+		|	END AS Basis,
+		|	Table.RowRef,
+		|	CASE
+		|		WHEN ISNULL(TM1010B_RowIDMovements.QuantityBalance, 0) < Table.Quantity
+		|			THEN ISNULL(TM1010B_RowIDMovements.QuantityBalance, 0)
+		|		ELSE Table.Quantity
+		|	END AS Quantity
+		|FROM
+		|	RowIDMovements AS Table
+		|		INNER JOIN AccumulationRegister.TM1010B_RowIDMovements.Balance(&Period, (RowID, Step, Basis, RowRef) IN
+		|			(SELECT
+		|				Table.RowID,
+		|				Table.CurrentStep,
+		|				Table.Basis,
+		|				Table.RowRef
+		|			FROM
+		|				RowIDMovements AS Table
+		|			WHERE
+		|				NOT Table.CurrentStep = VALUE(Catalog.MovementRules.EmptyRef))) AS TM1010B_RowIDMovements
+		|		ON TM1010B_RowIDMovements.RowID = Table.RowID
+		|		AND TM1010B_RowIDMovements.Step = Table.CurrentStep
+		|		AND TM1010B_RowIDMovements.Basis = Table.Basis
+		|		AND TM1010B_RowIDMovements.RowRef = Table.RowRef
+		|WHERE
+		|	NOT Table.CurrentStep = VALUE(Catalog.MovementRules.EmptyRef)
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	VALUE(AccumulationRecordType.Receipt),
+		|	Table.Recorder,
+		|	Table.Period,
+		|	Table.RowID,
+		|	Table.NextStep AS Step,
+		|	&Ref,
+		|	Table.RowRef,
+		|	Table.Quantity
+		|FROM
+		|	RowIDMovementsFull AS Table
+		|WHERE
+		|	NOT Table.NextStep = VALUE(Catalog.MovementRules.EmptyRef)";
 
 	Query.SetParameter("Ref", Source.Ref);
 	Query.SetParameter("Period", New Boundary(Source.Ref.PointInTime(), BoundaryType.Excluding));
-
-	QueryResult = Query.Execute().Unload();
-	Source.RegisterRecords.TM1010B_RowIDMovements.Load(QueryResult);
-EndProcedure
+	Return New Structure("TM1010B_RowIDMovements", Query.Execute().Unload());
+EndFunction
 
 Procedure BeforeWrite_RowID(Source, Cancel, WriteMode, PostingMode) Export
 	If Source.DataExchange.Load Then
@@ -3615,6 +3683,23 @@ EndProcedure
 
 #Region ApplyFilterSets
 
+//[SI] header
+//Company
+//Branch
+//Partner
+//LegalName
+//Agreement
+//Currency
+//PriceIncludeTax
+//Store
+//Status
+
+//[SI] item list
+//Item
+//ItemKey
+//Store
+//ProcurementMethod
+
 Procedure ApplyFilterSet_SO_ForSI(Query)
 	Query.Text =
 	"SELECT
@@ -6290,8 +6375,7 @@ Function ConvertDataToFillingValues(DocReceiverMetadata, ExtractedData) Export
 				EndIf;
 
 				For Each Row_DepTable In DepTable Do
-					FillingValues[TableName_Refreshable].Add(ValueTableRowToStructure(
-						Tables[TableName_Refreshable].Columns, Row_DepTable));
+					FillingValues[TableName_Refreshable].Add(ValueTableRowToStructure(Tables[TableName_Refreshable].Columns, Row_DepTable));
 				EndDo;
 			EndDo;
 		EndDo;
@@ -6308,8 +6392,7 @@ Function ConvertDataToFillingValues(DocReceiverMetadata, ExtractedData) Export
 			EndIf;
 
 			For Each Row_DepTable In DepTable Do
-				FillingValues[TableName_Refreshable].Add(ValueTableRowToStructure(
-					Tables[TableName_Refreshable].Columns, Row_DepTable));
+				FillingValues[TableName_Refreshable].Add(ValueTableRowToStructure(Tables[TableName_Refreshable].Columns, Row_DepTable));
 			EndDo;
 		EndDo;
 		FillingValues.Insert("BasedOn", True);
@@ -7174,37 +7257,44 @@ EndFunction
 Function Is(Source)
 	TypeOf = TypeOf(Source);
 	Result = New Structure();
-	Result.Insert("SO", TypeOf = Type("DocumentObject.SalesOrder") Or TypeOf = Type("DocumentRef.SalesOrder"));
-	Result.Insert("SI", TypeOf = Type("DocumentObject.SalesInvoice") Or TypeOf = Type("DocumentRef.SalesInvoice"));
-	Result.Insert("SC", TypeOf = Type("DocumentObject.ShipmentConfirmation") Or TypeOf = Type(
-		"DocumentRef.ShipmentConfirmation"));
-	Result.Insert("PO", TypeOf = Type("DocumentObject.PurchaseOrder") Or TypeOf = Type("DocumentRef.PurchaseOrder"));
-	Result.Insert("PI", TypeOf = Type("DocumentObject.PurchaseInvoice") Or TypeOf = Type("DocumentRef.PurchaseInvoice"));
-	Result.Insert("GR", TypeOf = Type("DocumentObject.GoodsReceipt") Or TypeOf = Type("DocumentRef.GoodsReceipt"));
-	Result.Insert("ITO", TypeOf = Type("DocumentObject.InventoryTransferOrder") Or TypeOf = Type(
-		"DocumentRef.InventoryTransferOrder"));
-	Result.Insert("IT", TypeOf = Type("DocumentObject.InventoryTransfer") Or TypeOf = Type(
-		"DocumentRef.InventoryTransfer"));
-	Result.Insert("ISR", TypeOf = Type("DocumentObject.InternalSupplyRequest") Or TypeOf = Type(
-		"DocumentRef.InternalSupplyRequest"));
-	Result.Insert("PhysicalInventory", TypeOf = Type("DocumentObject.PhysicalInventory") Or TypeOf = Type(
-		"DocumentRef.PhysicalInventory"));
-	Result.Insert("StockAdjustmentAsSurplus", TypeOf = Type("DocumentObject.StockAdjustmentAsSurplus") Or TypeOf = Type(
-		"DocumentRef.StockAdjustmentAsSurplus"));
-	Result.Insert("StockAdjustmentAsWriteOff", TypeOf = Type("DocumentObject.StockAdjustmentAsWriteOff") Or TypeOf
-		= Type("DocumentRef.StockAdjustmentAsWriteOff"));
-	Result.Insert("PR", TypeOf = Type("DocumentObject.PurchaseReturn") Or TypeOf = Type("DocumentRef.PurchaseReturn"));
-	Result.Insert("PRO", TypeOf = Type("DocumentObject.PurchaseReturnOrder") Or TypeOf = Type(
-		"DocumentRef.PurchaseReturnOrder"));
-	Result.Insert("SR", TypeOf = Type("DocumentObject.SalesReturn") Or TypeOf = Type("DocumentRef.SalesReturn"));
-	Result.Insert("SRO", TypeOf = Type("DocumentObject.SalesReturnOrder") Or TypeOf = Type(
-		"DocumentRef.SalesReturnOrder"));
-	Result.Insert("RSR", TypeOf = Type("DocumentObject.RetailSalesReceipt") Or TypeOf = Type(
-		"DocumentRef.RetailSalesReceipt"));
-	Result.Insert("RRR", TypeOf = Type("DocumentObject.RetailReturnReceipt") Or TypeOf = Type(
-		"DocumentRef.RetailReturnReceipt"));
-	Result.Insert("PRR", TypeOf = Type("DocumentObject.PlannedReceiptReservation") Or TypeOf = Type(
-		"DocumentRef.PlannedReceiptReservation"));
+	Result.Insert("SO", TypeOf = Type("DocumentObject.SalesOrder") 
+	                 Or TypeOf = Type("DocumentRef.SalesOrder"));
+	Result.Insert("SI", TypeOf = Type("DocumentObject.SalesInvoice") 
+	                 Or TypeOf = Type("DocumentRef.SalesInvoice"));
+	Result.Insert("SC", TypeOf = Type("DocumentObject.ShipmentConfirmation") 
+	                 Or TypeOf = Type("DocumentRef.ShipmentConfirmation"));
+	Result.Insert("PO", TypeOf = Type("DocumentObject.PurchaseOrder") 
+	                 Or TypeOf = Type("DocumentRef.PurchaseOrder"));
+	Result.Insert("PI", TypeOf = Type("DocumentObject.PurchaseInvoice") 
+	                 Or TypeOf = Type("DocumentRef.PurchaseInvoice"));
+	Result.Insert("GR", TypeOf = Type("DocumentObject.GoodsReceipt") 
+	                 Or TypeOf = Type("DocumentRef.GoodsReceipt"));
+	Result.Insert("ITO", TypeOf = Type("DocumentObject.InventoryTransferOrder") 
+	                  Or TypeOf = Type("DocumentRef.InventoryTransferOrder"));
+	Result.Insert("IT", TypeOf = Type("DocumentObject.InventoryTransfer") 
+	                 Or TypeOf = Type("DocumentRef.InventoryTransfer"));
+	Result.Insert("ISR", TypeOf = Type("DocumentObject.InternalSupplyRequest") 
+	                  Or TypeOf = Type("DocumentRef.InternalSupplyRequest"));
+	Result.Insert("PhysicalInventory", TypeOf = Type("DocumentObject.PhysicalInventory") 
+	                                Or TypeOf = Type("DocumentRef.PhysicalInventory"));
+	Result.Insert("StockAdjustmentAsSurplus", TypeOf = Type("DocumentObject.StockAdjustmentAsSurplus") 
+	                                       Or TypeOf = Type("DocumentRef.StockAdjustmentAsSurplus"));
+	Result.Insert("StockAdjustmentAsWriteOff", TypeOf = Type("DocumentObject.StockAdjustmentAsWriteOff") 
+	                                        Or TypeOf = Type("DocumentRef.StockAdjustmentAsWriteOff"));
+	Result.Insert("PR", TypeOf = Type("DocumentObject.PurchaseReturn") 
+	                 Or TypeOf = Type("DocumentRef.PurchaseReturn"));
+	Result.Insert("PRO", TypeOf = Type("DocumentObject.PurchaseReturnOrder") 
+	                  Or TypeOf = Type("DocumentRef.PurchaseReturnOrder"));
+	Result.Insert("SR", TypeOf = Type("DocumentObject.SalesReturn") 
+	                 Or TypeOf = Type("DocumentRef.SalesReturn"));
+	Result.Insert("SRO", TypeOf = Type("DocumentObject.SalesReturnOrder") 
+	                  Or TypeOf = Type("DocumentRef.SalesReturnOrder"));
+	Result.Insert("RSR", TypeOf = Type("DocumentObject.RetailSalesReceipt") 
+	                  Or TypeOf = Type("DocumentRef.RetailSalesReceipt"));
+	Result.Insert("RRR", TypeOf = Type("DocumentObject.RetailReturnReceipt") 
+	                  Or TypeOf = Type("DocumentRef.RetailReturnReceipt"));
+	Result.Insert("PRR", TypeOf = Type("DocumentObject.PlannedReceiptReservation") 
+	                  Or TypeOf = Type("DocumentRef.PlannedReceiptReservation"));
 
 	Return Result;
 EndFunction
@@ -7214,3 +7304,231 @@ Function ConvertQuantityToQuantityInBaseUnit(ItemKey, Unit, Quantity) Export
 EndFunction
 
 #EndRegion
+
+#Region LockLinkedRows
+
+Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
+	SetAppearance(Object, Form);	
+EndProcedure
+
+Procedure AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters) Export
+	LockLinkedRows(Object, Form);		
+EndProcedure
+
+Procedure OnReadAtServer(Object, Form, CurrentObject) Export
+	LockLinkedRows(Object, Form);
+EndProcedure
+
+Procedure LockLinkedRows(Object, Form) Export
+	RowIDInfoTable = Object.RowIDInfo.Unload(,"Key, RowID");
+	RowIDInfoTable.GroupBy("Key, RowID");
+	
+	LinkedKeys = GetLinkedKeys(RowIDInfoTable);
+	Form.DependentDocs.LoadValues(LinkedKeys.DependentDocs);
+	For Each Row In Object.ItemList Do
+		If LinkedKeys.Keys.Find(Row.Key) <> Undefined Then
+			Row.IsLinked = True;
+			Form.IsLinked = True;
+		Else
+			Row.IsLinked = False;
+		EndIf;
+	EndDo;
+EndProcedure
+
+Function GetLinkedKeys(RowIDInfoTable) Export
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	RowIDInfoTable.Key AS Key,
+	|	RowIDInfoTable.RowID AS RowID
+	|INTO RowIDInfoTable
+	|FROM
+	|	&RowIDInfoTable AS RowIDInfoTable
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	RowIDInfoTable.Key,
+	|	TM1010B_RowIDMovements.Recorder
+	|INTO tmpTM1010B_RowIDMovements
+	|FROM
+	|	RowIDInfoTable AS RowIDInfoTable
+	|		INNER JOIN AccumulationRegister.TM1010B_RowIDMovements AS TM1010B_RowIDMovements
+	|		ON RowIDInfoTable.RowID = TM1010B_RowIDMovements.RowID
+	|		AND TM1010B_RowIDMovements.RecordType = VALUE(AccumulationRecordType.Expense)
+	|GROUP BY
+	|	RowIDInfoTable.Key,
+	|	TM1010B_RowIDMovements.Recorder
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	RowIDInfoTable.Key,
+	|	TM1010T_RowIDMovements.Recorder
+	|INTO tmpTM1010T_RowIDMovements
+	|FROM
+	|	RowIDInfoTable AS RowIDInfoTable
+	|		INNER JOIN AccumulationRegister.TM1010T_RowIDMovements AS TM1010T_RowIDMovements
+	|		ON RowIDInfoTable.RowID = TM1010T_RowIDMovements.RowID
+	|		AND TM1010T_RowIDMovements.Quantity < 0
+	|GROUP BY
+	|	RowIDInfoTable.Key,
+	|	TM1010T_RowIDMovements.Recorder
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	tmpTM1010B_RowIDMovements.Key,
+	|	tmpTM1010B_RowIDMovements.Recorder
+	|FROM
+	|	tmpTM1010B_RowIDMovements AS tmpTM1010B_RowIDMovements
+	|
+	|UNION
+	|
+	|SELECT
+	|	tmpTM1010T_RowIDMovements.Key,
+	|	tmpTM1010T_RowIDMovements.Recorder
+	|FROM
+	|	tmpTM1010T_RowIDMovements AS tmpTM1010T_RowIDMovements";
+
+	If TypeOf(RowIDInfoTable) = Type("Array") Then
+		Table = New ValueTable();
+		Table.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+		Table.Columns.Add("RowID", Metadata.DefinedTypes.typeRowID.Type);
+		For Each Row In RowIDInfoTable Do
+			FillPropertyValues(Table.Add(), Row);
+		EndDo;
+		Table.GroupBy("Key, RowID");
+		Query.SetParameter("RowIDInfoTable", Table);
+	Else
+		Query.SetParameter("RowIDInfoTable", RowIDInfoTable);
+	EndIf;
+	
+	QueryResult = Query.Execute();
+	QueryTable = QueryResult.Unload();
+	KeysTable = QueryTable.Copy();
+	KeysTable.GroupBy("Key");
+	
+	DependentDocsTable = New ValueTable();
+	DependentDocsTable.Columns.Add("Doc");
+	For Each Row In QueryTable Do
+		For Each KeyValue In Is(Row.Recorder) Do
+			If KeyValue.Value Then
+				DependentDocsTable.Add().Doc = KeyValue.Key;
+				Break;
+			EndIf;
+		EndDo;
+	EndDo;
+	DependentDocsTable.GroupBy("Doc");
+	Return New Structure("Keys, DependentDocs", 
+		KeysTable.UnloadColumn("Key"), DependentDocsTable.UnloadColumn("Doc"));
+EndFunction
+
+Procedure SetAppearance(Object, Form) Export
+	ArrayForDelete = New Array();
+	For Each Row In Form.ConditionalAppearance.Items Do
+		If Row.Presentation = "FieldsToLock" Then
+			ArrayForDelete.Add(Row);
+		EndIf;
+	EndDo;
+	For Each ItemForDelete In ArrayForDelete Do
+		Form.ConditionalAppearance.Items.Delete(ItemForDelete);
+	EndDo;
+	
+	// Item list
+	Element = Form.ConditionalAppearance.Items.Add();
+	Element.Presentation = "FieldsToLock";
+	Element.Fields.Items.Add().Field = New DataCompositionField("ItemListItem");
+	Element.Fields.Items.Add().Field = New DataCompositionField("ItemListItemKey");
+	Element.Fields.Items.Add().Field = New DataCompositionField("ItemListStore");
+	
+	Filter = Element.Filter.Items.Add(Type("DataCompositionFilterItem"));
+	Filter.LeftValue = New DataCompositionField("Object.ItemList.IsLinked");
+	Filter.ComparisonType = DataCompositionComparisonType.Equal;
+	Filter.RightValue = True;
+	
+	Element.Appearance.SetParameterValue("ReadOnly", True);
+	Element.Appearance.SetParameterValue("BackColor", StyleColors.FieldAlternativeBackColor);
+	
+	// Header
+	Element = Form.ConditionalAppearance.Items.Add();
+	Element.Presentation = "FieldsToLock";
+	Element.Fields.Items.Add().Field = New DataCompositionField("Company");
+	Element.Fields.Items.Add().Field = New DataCompositionField("Store");
+	Element.Fields.Items.Add().Field = New DataCompositionField("Partner");
+	
+	Filter = Element.Filter.Items.Add(Type("DataCompositionFilterItem"));
+	Filter.LeftValue = New DataCompositionField("IsLinked");
+	Filter.ComparisonType = DataCompositionComparisonType.Equal;
+	Filter.RightValue = True;
+	
+	Element.Appearance.SetParameterValue("ReadOnly", True);
+	Element.Appearance.SetParameterValue("BackColor", StyleColors.FieldAlternativeBackColor);
+EndProcedure
+
+Function GetFieldsToLock(Ref, ArrayOfDependentDocs)
+	Is = Is(Ref);
+	
+	If Is.SO Then
+		 
+	EndIf;
+	
+	If Is.SI Then
+	EndIf;
+	
+	If Is.SC Then 
+	EndIf;
+	
+	If Is.PO Then 
+	EndIf;
+	
+	If Is.PI Then 
+	EndIf;
+	
+	If Is.GR Then 
+	EndIf;
+	
+	If Is.ITO Then 
+	EndIf;
+	
+	If Is.IT Then 
+	EndIf;
+	
+	If Is.ISR Then 
+	EndIf;
+	
+	If Is.PhysicalInventory Then 
+	EndIf;
+	
+	If Is.StockAdjustmentAsSurplus Then 
+	EndIf;
+	
+	If Is.StockAdjustmentAsWriteOff Then 
+	EndIf;
+	
+	If Is.PR Then 
+	EndIf;
+	
+	If Is.PRO Then 
+	EndIf;
+	
+	If Is.SR Then 
+	EndIf;
+	
+	If Is.SRO Then 
+	EndIf;
+	
+	If Is.RSR Then 
+	EndIf;
+	
+	If Is.RRR Then 
+	EndIf;
+	
+	If Is.PRR Then 
+	EndIf;
+
+EndFunction
+
+#EndRegion
+
+

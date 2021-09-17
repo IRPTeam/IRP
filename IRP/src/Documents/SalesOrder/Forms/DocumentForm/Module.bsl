@@ -23,6 +23,13 @@ Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefin
 		AddAttributesCreateFormControl();
 	EndIf;
 
+	If EventName = "LockLinkedRows" Then
+		If Source <> ThisObject Then
+			LockLinkedRows();
+		EndIf;
+		//RowIDInfoClient.NotificationProcessing(Object, ThisObject, EventName, Parameter, Source, AddInfo);
+	EndIf;
+	
 	If Not Source = ThisObject Then
 		Return;
 	EndIf;
@@ -97,7 +104,6 @@ EndProcedure
 Procedure SetConditionalAppearance()
 
 	AppearanceElement = ConditionalAppearance.Items.Add();
-
 	FieldElement = AppearanceElement.Fields.Items.Add();
 	FieldElement.Field = New DataCompositionField(Items.ItemListProcurementMethod.Name);
 
@@ -233,6 +239,11 @@ EndProcedure
 &AtClient
 Procedure ItemListSelection(Item, RowSelected, Field, StandardProcessing)
 	DocSalesOrderClient.ItemListSelection(Object, ThisObject, Item, RowSelected, Field, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure ItemListBeforeDeleteRow(Item, Cancel)
+	DocSalesOrderClient.ItemListBeforeDeleteRow(Object, ThisObject, Item, Cancel);	
 EndProcedure
 
 #EndRegion
@@ -618,3 +629,8 @@ Function GetProcessingModule() Export
 EndFunction
 
 #EndRegion
+
+Procedure LockLinkedRows()
+	RowIDInfoServer.LockLinkedRows(Object, ThisObject);
+	RowIDInfoServer.SetAppearance(Object, ThisObject);
+EndProcedure

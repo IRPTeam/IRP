@@ -362,7 +362,12 @@ Function Strings(Lang) Export
 	// %1 - 100.00 
 	// %2 - 120.00
 	Strings.Insert("Error_095", NStr("en = 'Payment amount [%1] and sales amount [%2] not match'", Lang));
-
+	
+	// %1 - 1
+	// %2 - Boots
+	// %3 - Red XL
+	Strings.Insert("Error_096", NStr("en = 'Can not delete linked row [%1] [%2] [%3]'", Lang));
+	
 #EndRegion
 
 #Region InfoMessages

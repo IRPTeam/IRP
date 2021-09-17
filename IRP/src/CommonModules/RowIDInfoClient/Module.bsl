@@ -175,3 +175,48 @@ Procedure ExpandTree(Tree, TreeRows) Export
 		ExpandTree(Tree, ItemTreeRows.GetItems());
 	EndDo;
 EndProcedure
+
+#Region LockLinkedRows
+
+Procedure AfterWriteAtClient(Object, Form, WriteParameters, AddInfo = Undefined) Export
+	Notify("LockLinkedRows", WriteParameters, Form);	
+EndProcedure
+
+//Procedure NotificationProcessing(Object, Form, EventName, Parameter, Source, AddInfo = Undefined) Export
+//	If Source <> Form Then
+//		LockLinkedRows(Object, Form);
+//		//RowIDInfoServer.SetAppearance(Object, Form);
+//	EndIf;
+//EndProcedure
+
+Procedure ItemListBeforeDeleteRow(Object, Form, Item, Cancel, AddInfo = Undefined) Export
+	For Each SelectedRow In Form.Items.ItemList.SelectedRows Do
+		ItemListRow = Object.ItemList.FindByID(SelectedRow);
+		If ItemListRow.IsLinked Then
+			Cancel = True;
+			CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_096,
+					ItemListRow.LineNumber, ItemListRow.Item, ItemListRow.ItemKey), 
+					"Object.ItemList[" + Format((ItemListRow.LineNumber - 1), "NZ=0; NG=0;") + "].IsLinked", Form);
+		EndIf;
+	EndDo;
+EndProcedure
+
+//Procedure LockLinkedRows(Object, Form) Export
+//	ArrayOfKeys = New Array();
+//	For Each Row In Object.RowIDInfo Do
+//		ArrayOfKeys.Add(New Structure("Key, RowID", Row.Key, Row.RowID));
+//	EndDo;
+//	LinkedKeys = RowIDInfoServer.GetLinkedKeys(ArrayOfKeys);
+//	Form.DependentDocs.LoadValues(LinkedKeys.DependentDocs);
+//	For Each Row In Object.ItemList Do
+//		If LinkedKeys.Keys.Find(Row.Key) <> Undefined Then
+//			Row.IsLinked = True;
+//			Form.IsLinked = True;
+//		Else
+//			Row.IsLinked = False;
+//		EndIf;
+//	EndDo;
+//EndProcedure
+
+#EndRegion
+

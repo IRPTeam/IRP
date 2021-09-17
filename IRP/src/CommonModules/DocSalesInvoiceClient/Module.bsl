@@ -98,6 +98,7 @@ Procedure AfterWriteAtClient(Object, Form, WriteParameters, AddInfo = Undefined)
 	DocumentsClient.SetLockedRowsForItemListByTradeDocuments(Object, Form, "ShipmentConfirmations");
 	DocumentsClient.UpdateTradeDocumentsTree(Object, Form, "ShipmentConfirmations", "ShipmentConfirmationsTree",
 		"QuantityInShipmentConfirmation");
+	RowIDInfoClient.AfterWriteAtClient(Object, Form, WriteParameters, AddInfo);
 EndProcedure
 
 #EndRegion

@@ -86,8 +86,7 @@ EndProcedure
 &AtClientAtServerNoContext
 Procedure SetVisibilityAvailability(Object, Form) Export
 	Form.Items.AddBasisDocuments.Enabled = Not Form.ReadOnly;
-	Form.Items.LinkUnlinkBasisDocuments.Enabled = Not Form.ReadOnly;
-
+	Form.Items.LinkUnlinkBasisDocuments.Enabled = Not Form.ReadOnly;	
 	Form.Items.LegalName.Enabled = ValueIsFilled(Object.Partner);
 EndProcedure
 
@@ -539,22 +538,6 @@ EndProcedure
 
 #Region LinkedDocuments
 
-//&AtClient
-//Function GetLinkedDocumentsFilter()
-//	Filter = New Structure();
-//	Filter.Insert("Company", Object.Company);
-//	Filter.Insert("Branch", Object.Branch);
-//	Filter.Insert("Partner", Object.Partner);
-//	Filter.Insert("LegalName", Object.LegalName);
-//	Filter.Insert("Agreement", Object.Agreement);
-//	Filter.Insert("Currency", Object.Currency);
-//	Filter.Insert("PriceIncludeTax", Object.PriceIncludeTax);
-//	Filter.Insert("TransactionType", PredefinedValue("Enum.ShipmentConfirmationTransactionTypes.Sales"));
-//	Filter.Insert("ProcurementMethod", PredefinedValue("Enum.ProcurementMethods.Purchase"));
-//	Filter.Insert("Ref", Object.Ref);
-//	Return Filter;
-//EndFunction
-
 &AtClient
 Procedure LinkUnlinkBasisDocuments(Command)
 	FormParameters = New Structure();
@@ -573,6 +556,7 @@ Procedure AddBasisDocuments(Command)
 	OpenForm("CommonForm.AddLinkedDocumentRows", FormParameters, , , , ,
 		New NotifyDescription("AddOrLinkUnlinkDocumentRowsContinue", ThisObject), FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
+
 &AtClient
 Procedure AddOrLinkUnlinkDocumentRowsContinue(Result, AdditionalParameters) Export
 	If Result = Undefined Then
@@ -595,6 +579,7 @@ Procedure AddOrLinkUnlinkDocumentRowsContinueAtServer(Result)
 	ElsIf Result.Operation = "AddLinkedDocumentRows" Then
 		RowIDInfoServer.AddLinkedDocumentRows(Object, Result.FillingValues);
 	EndIf;
+	LockLinkedRows();
 EndProcedure
 
 &AtServer

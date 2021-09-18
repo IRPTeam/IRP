@@ -3683,22 +3683,27 @@ EndProcedure
 
 #Region ApplyFilterSets
 
-//[SI] header
-//Company
-//Branch
-//Partner
-//LegalName
-//Agreement
-//Currency
-//PriceIncludeTax
-//Store
-//Status
+#Region Document_SO
 
-//[SI] item list
-//Item
-//ItemKey
-//Store
-//ProcurementMethod
+Function GetFileldsToLock_SO_ItemList()
+	Return "Item, ItemKey, Store, ProcurementMethod, Cancel, CancelReason";
+EndFunction
+
+Function GetFieldsToLock_SO_ForSI()
+	Return "Company, Branch, Store, Partner, LegalName, Agreement, Currency, PriceIncludeTax, Store, Status";
+EndFunction
+
+Function GetFieldsToLock_SO_ForPRR()
+	Return "Company, Branch, Store";
+EndFunction
+
+Function GetFieldsToLock_SO_ForSC()
+	Return "Company, Branch, Store, Partner, LegalName";
+EndFunction
+
+Function GetFieldsToLock_SO_ForPO_ForPI()
+	Return "Company, Branch, Store";
+EndFunction
 
 Procedure ApplyFilterSet_SO_ForSI(Query)
 	Query.Text =
@@ -3918,6 +3923,8 @@ Procedure ApplyFilterSet_SO_ForPO_ForPI(Query)
 	|			END))) AS RowIDMovements";
 	Query.Execute();
 EndProcedure
+
+#EndRegion
 
 Procedure ApplyFilterSet_SC_ForSI(Query)
 	Query.Text =
@@ -7254,6 +7261,30 @@ EndFunction
 
 #Region Service
 
+Function DocAliases()
+	Result = New Structure();
+	Result.Insert("SO"  , "SalesOrder");
+	Result.Insert("SI"  , "SalesInvoice");
+	Result.Insert("SC"  , "ShipmentConfirmation");
+	Result.Insert("PO"  , "PurchaseOrder");
+	Result.Insert("PI"  , "PurchaseInvoice");
+	Result.Insert("GR"  , "GoodsReceipt");
+	Result.Insert("ITO" , "InventoryTransferOrder");
+	Result.Insert("IT"  , "InventoryTransfer");
+	Result.Insert("ISR" , "InternalSupplyRequest");
+	Result.Insert("PR"  , "PurchaseReturn");
+	Result.Insert("PRO" , "PurchaseReturnOrder");
+	Result.Insert("SR"  , "SalesReturn");
+	Result.Insert("SRO" , "SalesReturnOrder");
+	Result.Insert("RSR" , "RetailSalesReceipt");
+	Result.Insert("RRR" , "RetailReturnReceipt");
+	Result.Insert("PRR" , "PlannedReceiptReservation");
+	Result.Insert("PhysicalInventory"         , "PhysicalInventory");
+	Result.Insert("StockAdjustmentAsSurplus"  , "StockAdjustmentAsSurplus");
+	Result.Insert("StockAdjustmentAsWriteOff" , "StockAdjustmentAsWriteOff");
+	Return Result;
+EndFunction
+
 Function Is(Source)
 	TypeOf = TypeOf(Source);
 	Result = New Structure();
@@ -7322,6 +7353,7 @@ Procedure OnReadAtServer(Object, Form, CurrentObject) Export
 EndProcedure
 
 Procedure FillCheckProcessing(Object, Cancel, LinkedFilter, RowIDInfoTable, ItemListTable) Export
+	// check internal links
 	Query = New Query();
 	Query.Text =
 	"SELECT
@@ -7438,29 +7470,53 @@ Procedure FillCheckProcessing(Object, Cancel, LinkedFilter, RowIDInfoTable, Item
 		Cancel = True;
 		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_097, 
 			Row.LineNumber, Row.ItemKey.Item, Row.ItemKey),
-				"ItemList[" + Format((Row.LineNumber - 1), "NZ=0; NG=0;") + "].IsLinked", Object);
+				"ItemList[" + Format((Row.LineNumber - 1), "NZ=0; NG=0;") + "].IsInternalLinked", Object);
 	EndDo;
 EndProcedure
 
 #EndRegion
 
 Procedure LockLinkedRows(Object, Form) Export
+	InternalLinkedKeys = GetInternalLinkedKeys(Object);
+	
 	RowIDInfoTable = Object.RowIDInfo.Unload(,"Key, RowID");
 	RowIDInfoTable.GroupBy("Key, RowID");
-	
-	LinkedKeys = GetLinkedKeys(RowIDInfoTable, Object.Ref);
-	Form.DependentDocs.LoadValues(LinkedKeys.DependentDocs);
 	For Each Row In Object.ItemList Do
-		If LinkedKeys.Keys.Find(Row.Key) <> Undefined Then
-			Row.IsLinked = True;
-			Form.IsLinked = True;
+		If Not RowIDInfoTable.FindRows(New Structure("Key", Row.Key)).Count() Then
+			NewRow = RowIDInfoTable.Add();
+			NewRow.Key = Row.Key;
+			NewRow.RowID = Row.Key;
+		EndIf;
+	EndDo;
+	
+	ExternalLinkedKeys = GetExternalLinkedKeys(RowIDInfoTable, Object.Ref);
+	Form.DependentDocs.LoadValues(ExternalLinkedKeys.DependentDocs);
+	For Each Row In Object.ItemList Do
+		If ExternalLinkedKeys.Keys.Find(Row.Key) <> Undefined Then
+			Row.IsExternalLinked = True;
+			Form.IsExternalLinked = True;
 		Else
-			Row.IsLinked = False;
+			Row.IsExternalLinked = False;
+		EndIf;
+		If InternalLinkedKeys.Find(Row.Key) <> Undefined Then
+			Row.IsInternalLinked = True;
+		Else
+			Row.IsInternalLinked = False;
 		EndIf;
 	EndDo;
 EndProcedure
 
-Function GetLinkedKeys(RowIDInfoTable, Ref)
+Function GetInternalLinkedKeys(Object)
+	ArrayOfKeys = New Array();
+	For Each Row In Object.RowIDInfo Do
+		If ValueIsFilled(Row.CurrentStep) Then
+			ArrayOfKeys.Add(Row.Key);
+		EndIf;
+	EndDo;
+	Return ArrayOfKeys;
+EndFunction
+
+Function GetExternalLinkedKeys(RowIDInfoTable, Ref)
 	Query = New Query();
 	Query.Text = 
 	"SELECT
@@ -7528,10 +7584,11 @@ Function GetLinkedKeys(RowIDInfoTable, Ref)
 	
 	DependentDocsTable = New ValueTable();
 	DependentDocsTable.Columns.Add("Doc");
+	DocAliases = DocAliases();
 	For Each Row In QueryTable Do
 		For Each KeyValue In Is(Row.Recorder) Do
 			If KeyValue.Value Then
-				DependentDocsTable.Add().Doc = KeyValue.Key;
+				DependentDocsTable.Add().Doc = DocAliases[KeyValue.Key];
 				Break;
 			EndIf;
 		EndDo;
@@ -7551,43 +7608,60 @@ Procedure SetAppearance(Object, Form) Export
 	For Each ItemForDelete In ArrayForDelete Do
 		Form.ConditionalAppearance.Items.Delete(ItemForDelete);
 	EndDo;
+	If Not ValueIsFilled(Object.Ref) Then
+		Return;
+	EndIf;
+	
+	FieldsToLock = GetFieldsToLock(Object.Ref, Form.DependentDocs.UnloadValues());
 	
 	// Item list
 	Element = Form.ConditionalAppearance.Items.Add();
 	Element.Presentation = "FieldsToLock";
-	Element.Fields.Items.Add().Field = New DataCompositionField("ItemListItem");
-	Element.Fields.Items.Add().Field = New DataCompositionField("ItemListItemKey");
-	Element.Fields.Items.Add().Field = New DataCompositionField("ItemListStore");
-	
+	For Each FieldName In FieldsToLock.ItemList Do
+		Element.Fields.Items.Add().Field = New DataCompositionField("ItemList" + FieldName);
+	EndDo;
 	Filter = Element.Filter.Items.Add(Type("DataCompositionFilterItem"));
-	Filter.LeftValue = New DataCompositionField("Object.ItemList.IsLinked");
+	Filter.LeftValue = New DataCompositionField("Object.ItemList.IsExternalLinked");
 	Filter.ComparisonType = DataCompositionComparisonType.Equal;
 	Filter.RightValue = True;
 	
+	Element.Appearance.SetParameterValue("BackColor", StyleColors.AuxiliaryNavigationColor);
 	Element.Appearance.SetParameterValue("ReadOnly", True);
-	Element.Appearance.SetParameterValue("BackColor", StyleColors.FieldAlternativeBackColor);
 	
 	// Header
 	Element = Form.ConditionalAppearance.Items.Add();
 	Element.Presentation = "FieldsToLock";
-	Element.Fields.Items.Add().Field = New DataCompositionField("Company");
-	Element.Fields.Items.Add().Field = New DataCompositionField("Store");
-	Element.Fields.Items.Add().Field = New DataCompositionField("Partner");
+	For Each FieldName In FieldsToLock.Header Do
+		Element.Fields.Items.Add().Field = New DataCompositionField(FieldName);
+		Form.Items[FieldName].ReadOnly = True;
+	EndDo;
 	
 	Filter = Element.Filter.Items.Add(Type("DataCompositionFilterItem"));
-	Filter.LeftValue = New DataCompositionField("IsLinked");
+	Filter.LeftValue = New DataCompositionField("IsExternalLinked");
 	Filter.ComparisonType = DataCompositionComparisonType.Equal;
 	Filter.RightValue = True;
 	
-	Element.Appearance.SetParameterValue("ReadOnly", True);
-	Element.Appearance.SetParameterValue("BackColor", StyleColors.FieldAlternativeBackColor);
+	Element.Appearance.SetParameterValue("TextColor", WebColors.Gray);
 EndProcedure
 
 Function GetFieldsToLock(Ref, ArrayOfDependentDocs)
-	Is = Is(Ref);
+	Table_ItemList = New ValueTable();
+	Table_ItemList.Columns.Add("FieldName");
 	
+	Table_Header = New ValueTable();
+	Table_Header.Columns.Add("FieldName");
+	
+	Is = Is(Ref);
+	DocAliases = DocAliases();
 	If Is.SO Then
-		 
+		AddArrayToFieldsTable(Table_ItemList, GetFileldsToLock_SO_ItemList());
+		
+		AddArrayToFieldsTable(Table_Header, ?(IsDependent(ArrayOfDependentDocs, DocAliases.SI), 
+			GetFieldsToLock_SO_ForSI(), Undefined));
+		
+		AddArrayToFieldsTable(Table_Header, ?(IsDependent(ArrayOfDependentDocs, DocAliases.SC), 
+			GetFieldsToLock_SO_ForSC(), Undefined));
+			
 	EndIf;
 	
 	If Is.SI Then
@@ -7643,8 +7717,27 @@ Function GetFieldsToLock(Ref, ArrayOfDependentDocs)
 	
 	If Is.PRR Then 
 	EndIf;
-
+	
+	Table_ItemList.GroupBy("FieldName");
+	Table_Header.GroupBy("FieldName");
+	Return New Structure("Header, ItemList", 
+		Table_Header.UnloadColumn("FieldName"), 
+		Table_ItemList.UnloadColumn("FieldName"));
 EndFunction
+
+Function IsDependent(ArrayOfDependentDocs, DocName)
+	Return ArrayOfDependentDocs.Find(DocName) <> Undefined;
+EndFunction
+
+Procedure AddArrayToFieldsTable(TableOfFields, FieldNames)
+	If FieldNames = Undefined Then
+		Return;
+	EndIf;
+	ArrayOfFields = StrSplit(FieldNames, ",");
+	For Each FieldName In ArrayOfFields Do
+		TableOfFields.Add().FieldName = TrimAll(FieldName);
+	EndDo;
+EndProcedure
 
 #EndRegion
 

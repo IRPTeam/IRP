@@ -104,11 +104,12 @@ Function GetItemListRows(ItemList, Object) Export
 	ItemListRows = New Array();
 	For Each Row In ItemList Do
 		NewRow = New Structure();
-		NewRow.Insert("LineNumber", Row.LineNumber);
-		NewRow.Insert("Key", Row.Key);
-		NewRow.Insert("Item", Row.Item);
-		NewRow.Insert("ItemKey", Row.ItemKey);
-		NewRow.Insert("Unit", Row.Unit);
+		NewRow.Insert("LineNumber" , Row.LineNumber);
+		NewRow.Insert("Key"        , Row.Key);
+		NewRow.Insert("Item"       , Row.Item);
+		NewRow.Insert("ItemKey"    , Row.ItemKey);
+		NewRow.Insert("Unit"       , Row.Unit);
+		NewRow.Insert("Quantity"   , Row.Quantity);
 		If CommonFunctionsClientServer.ObjectHasProperty(Row, "Store") Then
 			NewRow.Insert("Store", Row.Store);
 		ElsIf CommonFunctionsClientServer.ObjectHasProperty(Object, "Store") Then
@@ -116,7 +117,11 @@ Function GetItemListRows(ItemList, Object) Export
 		Else
 			NewRow.Insert("Store", Undefined);
 		EndIf;
-		NewRow.Insert("Quantity", Row.Quantity);
+		If CommonFunctionsClientServer.ObjectHasProperty(Row, "IsExternalLinked") Then
+			NewRow.Insert("IsExternalLinked", Row.IsExternalLinked);
+		Else
+			NewRow.Insert("IsExternalLinked", False);
+		EndIf;
 		ItemListRows.Add(NewRow);
 	EndDo;
 	Return ItemListRows;
@@ -187,11 +192,11 @@ EndProcedure
 Procedure ItemListBeforeDeleteRow(Object, Form, Item, Cancel, AddInfo = Undefined) Export
 	For Each SelectedRow In Form.Items.ItemList.SelectedRows Do
 		ItemListRow = Object.ItemList.FindByID(SelectedRow);
-		If ItemListRow.IsLinked Then
+		If ItemListRow.IsExternalLinked Then
 			Cancel = True;
 			CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_096,
 					ItemListRow.LineNumber, ItemListRow.Item, ItemListRow.ItemKey), 
-					"Object.ItemList[" + Format((ItemListRow.LineNumber - 1), "NZ=0; NG=0;") + "].IsLinked", Form);
+					"Object.ItemList[" + Format((ItemListRow.LineNumber - 1), "NZ=0; NG=0;") + "].IsExternalLinked", Form);
 		EndIf;
 	EndDo;
 EndProcedure

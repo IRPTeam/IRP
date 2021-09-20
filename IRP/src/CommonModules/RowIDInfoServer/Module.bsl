@@ -3683,29 +3683,68 @@ Procedure EnableRequiredFilterSets(FilterSets, Query, QueryArray)
 	EndIf;
 EndProcedure
 
+
+Function GetFieldsToLock_ExternalLink(DocAliase, ExternalDocAliase)
+	Result = New Structure("Header, ItemList");
+	Aliases = DocAliases();
+	If DocAliase = Aliases.SO Then
+		
+		If ExternalDocAliase = Aliases.SI Then
+			Result.Header   = "Company, Branch, Store, Partner, LegalName, Agreement, Currency, PriceIncludeTax, Status";
+			Result.ItemList = "Item, ItemKey, Store, ProcurementMethod, Cancel, CancelReason";
+		ElsIf ExternalDocAliase = Aliases.SC Then
+			Result.Header   = "Company, Branch, Store, Partner, LegalName, Status, ItemListSetProcurementMethods";
+			Result.ItemList = "Item, ItemKey, Store, ProcurementMethod, Cancel, CancelReason";
+		EndIf;
+		
+	ElsIf DocAliase = Aliases.SI Then
+		
+		If ExternalDocAliase = Aliases.SC Then
+			Result.Header   = "Company, Branch, Store, Partner, LegalName";
+			Result.ItemList = "Item, ItemKey, Store, UseShipmentConfirmation, SalesOrder";
+		EndIf;
+	
+	ElsIf DocAliase = Aliases.SC Then
+		
+		If ExternalDocAliase = Aliases.SI Then
+			Result.Header   = "Company, Branch, Store, Partner, LegalName, TransactionType";
+			Result.ItemList = "Item, ItemKey, Store, ShipmentBasis, SalesOrder, SalesInvoice, InventoryTransferOrder,
+				|InventoryTransfer, PurchaseReturnOrder, PurchaseReturn";		
+		EndIf;
+	
+	EndIf;
+	Return Result;
+EndFunction
+
+Function GetFieldsToLock_InternalLink(DocAliase, InternalDocAliase)
+	Result = New Structure("Header, ItemList");
+	Aliases = DocAliases();
+	If DocAliase = Aliases.SI Then
+		
+		If InternalDocAliase = Aliases.SO Then
+			Result.Header   = "Company, Branch, Store, Partner, LegalName, Agreement, Currency, PriceIncludeTax, Store";
+			Result.ItemList = "Item, ItemKey, Store, SalesOrder";
+		ElsIf InternalDocAliase = Aliases.SC Then
+			Result.Header   = "Company, Branch, Store, Partner, LegalName";
+			Result.ItemList = "Item, ItemKey, Store, UseShipmentConfirmation, SalesOrder";
+		EndIf;
+	
+	ElsIf DocAliase = Aliases.SC Then
+		
+		If InternalDocAliase = Aliases.SO Or InternalDocAliase = Aliases.SI Then
+			Result.Header   = "Company, Branch, Store, Partner, LegalName, TransactionType";
+			Result.ItemList = "Item, ItemKey, Store, ShipmentBasis, SalesOrder, SalesInvoice, InventoryTransferOrder,
+				|InventoryTransfer, PurchaseReturnOrder, PurchaseReturn";
+		EndIf;
+		
+	EndIf;
+	
+	Return Result;
+EndFunction
+
 #Region ApplyFilterSets
 
 #Region Document_SO
-
-Function GetFileldsToLock_SO_Ext_ItemList()
-	Return "Item, ItemKey, Store, ProcurementMethod, Cancel, CancelReason";
-EndFunction
-
-Function GetFieldsToLock_SO_ExtSI()
-	Return "Company, Branch, Store, Partner, LegalName, Agreement, Currency, PriceIncludeTax, Status";
-EndFunction
-
-Function GetFieldsToLock_SO_ExtPRR()
-	Return "Company, Branch, Store";
-EndFunction
-
-Function GetFieldsToLock_SO_ExtSC()
-	Return "Company, Branch, Store, Partner, LegalName";
-EndFunction
-
-Function GetFieldsToLock_SO_ExtPO_ExtPI()
-	Return "Company, Branch, Store";
-EndFunction
 
 Procedure ApplyFilterSet_SO_ForSI(Query)
 	Query.Text =
@@ -3930,26 +3969,6 @@ EndProcedure
 
 #Region Document_SI
 
-Function GetFieldsToLock_SI_IntSO_ItemList()
-	Return "Item, ItemKey, Store, SalesOrder";
-EndFunction
-
-Function GetFieldsToLock_SI_IntSO()
-	Return "Company, Branch, Store, Partner, LegalName, Agreement, Currency, PriceIncludeTax, Store";
-EndFunction
-
-Function GetFieldsToLock_SI_IntSC_ItemList()
-	Return "Item, ItemKey, Store, UseShipmentConfirmation, SalesOrder";
-EndFunction
-
-Function GetFieldsToLock_SI_IntSC()
-	Return "Company, Branch, Store, Partner, LegalName";
-EndFunction
-
-//Function GetFieldsToLock_SI_ForSR_ForSRO()
-//	Return "Company, Branch, Partner, LegalName, Agreement, Currency, PriceIncludeTax";
-//EndFunction
-
 Procedure ApplyFilterSet_SI_ForSC(Query)
 	Query.Text =
 	"SELECT
@@ -4077,6 +4096,8 @@ EndProcedure
 
 #EndRegion
 
+#Region Document_SC
+
 Procedure ApplyFilterSet_SC_ForSI(Query)
 	Query.Text =
 	"SELECT
@@ -4133,6 +4154,65 @@ Procedure ApplyFilterSet_SC_ForSI(Query)
 	|			END))) AS RowIDMovements";
 	Query.Execute();
 EndProcedure
+
+Procedure ApplyFilterSet_SC_ForPR(Query)
+	Query.Text =
+	"SELECT
+	|	RowIDMovements.RowID,
+	|	RowIDMovements.Step,
+	|	RowIDMovements.Basis,
+	|	RowIDMovements.RowRef,
+	|	RowIDMovements.QuantityBalance AS Quantity
+	|INTO RowIDMovements_SC_ForPR
+	|FROM
+	|	AccumulationRegister.TM1010B_RowIDMovements.Balance(&Period, Step IN (&StepArray)
+	|	AND (Basis IN (&Basises)
+	|	OR RowRef.Basis IN (&Basises)
+	|	OR RowRef IN
+	|		(SELECT
+	|			RowRef.Ref AS Ref
+	|		FROM
+	|			Catalog.RowIDs AS RowRef
+	|		WHERE
+	|			CASE
+	|				WHEN &Filter_Company
+	|					THEN RowRef.Company = &Company
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Branch
+	|					THEN RowRef.Branch = &Branch
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Partner
+	|					THEN RowRef.Partner = &Partner
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_LegalName
+	|					THEN RowRef.LegalName = &LegalName
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_TransactionType
+	|					THEN RowRef.TransactionTypeSC = &TransactionType
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_ItemKey
+	|					THEN RowRef.ItemKey = &ItemKey
+	|				ELSE TRUE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Store
+	|					THEN RowRef.Store = &Store
+	|				ELSE TRUE
+	|			END))) AS RowIDMovements";
+	Query.Execute();
+EndProcedure
+
+#EndRegion
 
 Procedure ApplyFilterSet_PO_ForPI(Query)
 	Query.Text =
@@ -4660,63 +4740,6 @@ Procedure ApplyFilterSet_PhysicalInventory_ForSurplus_ForWriteOff(Query)
 	Query.Execute();
 EndProcedure
 
-Procedure ApplyFilterSet_SC_ForPR(Query)
-	Query.Text =
-	"SELECT
-	|	RowIDMovements.RowID,
-	|	RowIDMovements.Step,
-	|	RowIDMovements.Basis,
-	|	RowIDMovements.RowRef,
-	|	RowIDMovements.QuantityBalance AS Quantity
-	|INTO RowIDMovements_SC_ForPR
-	|FROM
-	|	AccumulationRegister.TM1010B_RowIDMovements.Balance(&Period, Step IN (&StepArray)
-	|	AND (Basis IN (&Basises)
-	|	OR RowRef.Basis IN (&Basises)
-	|	OR RowRef IN
-	|		(SELECT
-	|			RowRef.Ref AS Ref
-	|		FROM
-	|			Catalog.RowIDs AS RowRef
-	|		WHERE
-	|			CASE
-	|				WHEN &Filter_Company
-	|					THEN RowRef.Company = &Company
-	|				ELSE FALSE
-	|			END
-	|			AND CASE
-	|				WHEN &Filter_Branch
-	|					THEN RowRef.Branch = &Branch
-	|				ELSE FALSE
-	|			END
-	|			AND CASE
-	|				WHEN &Filter_Partner
-	|					THEN RowRef.Partner = &Partner
-	|				ELSE FALSE
-	|			END
-	|			AND CASE
-	|				WHEN &Filter_LegalName
-	|					THEN RowRef.LegalName = &LegalName
-	|				ELSE FALSE
-	|			END
-	|			AND CASE
-	|				WHEN &Filter_TransactionType
-	|					THEN RowRef.TransactionTypeSC = &TransactionType
-	|				ELSE FALSE
-	|			END
-	|			AND CASE
-	|				WHEN &Filter_ItemKey
-	|					THEN RowRef.ItemKey = &ItemKey
-	|				ELSE TRUE
-	|			END
-	|			AND CASE
-	|				WHEN &Filter_Store
-	|					THEN RowRef.Store = &Store
-	|				ELSE TRUE
-	|			END))) AS RowIDMovements";
-	Query.Execute();
-EndProcedure
-
 Procedure ApplyFilterSet_GR_ForSR(Query)
 	Query.Text =
 	"SELECT
@@ -5021,7 +5044,6 @@ Procedure ApplyFilterSet_SRO_ForSR(Query)
 	|			END))) AS RowIDMovements";
 	Query.Execute();
 EndProcedure
-
 
 Procedure ApplyFilterSet_PI_ForPR_ForPRO(Query)
 	Query.Text =
@@ -7368,6 +7390,9 @@ EndFunction
 #Region EventHandlers
 
 Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
+	If Form.Parameters.Key.IsEmpty() Then
+		LockLinkedRows(Object, Form);
+	EndIf;
 	SetAppearance(Object, Form);	
 EndProcedure
 
@@ -7741,15 +7766,31 @@ Procedure AddAppearance_Header(Object, Form, FieldsToLock)
 	
 	// Reset ReadOnly
 	For Each FieldName In Form.LockedFields Do
-		Form.Items.Find(FieldName).ReadOnly = False;
+		FormElement = Form.Items.Find(FieldName);
+		If FormElement <> Undefined Then
+			If TypeOf(FormElement) = Type("FormButton") Then
+				FormElement.Enabled = True;
+			Else
+				FormElement.ReadOnly = False;
+			EndIf;
+		EndIf;
 	EndDo;
 	Form.LockedFields.Clear();
 	
 	// Set ReadOnly
 	For Each FieldName In FieldsToLock.Header Do
 		Element.Fields.Items.Add().Field = New DataCompositionField(FieldName);
-		If Form.Items.Find(FieldName) <> Undefined And Not Form.Items[FieldName].ReadOnly Then
-			Form.Items[FieldName].ReadOnly = True;
+		FormElement = Form.Items.Find(FieldName);
+		If FormElement <> Undefined Then
+			If TypeOf(FormElement) = Type("FormButton") Then
+				If FormElement.Enabled Then
+					FormElement.Enabled = False;
+				EndIf;
+			Else 
+				If Not FormElement.ReadOnly Then
+					FormElement.ReadOnly = True;
+				EndIf;
+			EndIf;
 			Form.LockedFields.Add(FieldName);
 		EndIf;
 	EndDo;
@@ -7816,20 +7857,35 @@ Function GetFieldsToLock_ExternalLinkedDocs(Ref, ArrayOfExternalLinkedDocs)
 	Is = Is(Ref);
 	DocAliases = DocAliases();
 	If Is.SO Then
-		AddArrayToFieldsTable(Table_ItemList, GetFileldsToLock_SO_Ext_ItemList(), DocAliases.SI);
 		
-		AddArrayToFieldsTable(Table_Header, ?(AliasIsPresent(ArrayOfExternalLinkedDocs, DocAliases.SI), 
-			GetFieldsToLock_SO_ExtSI(), Undefined), DocAliases.SI);
+		If AliasIsPresent(ArrayOfExternalLinkedDocs, DocAliases.SI) Then
+			Fields = GetFieldsToLock_ExternalLink(DocAliases.SO, DocAliases.SI);
+			AddArrayToFieldsTable(Table_Header   , Fields.Header   , DocAliases.SI);
+			AddArrayToFieldsTable(Table_ItemList , Fields.ItemList , DocAliases.SI);
+		EndIf;
 		
-		AddArrayToFieldsTable(Table_Header, ?(AliasIsPresent(ArrayOfExternalLinkedDocs, DocAliases.SC), 
-			GetFieldsToLock_SO_ExtSC(), Undefined), DocAliases.SC);
+		If AliasIsPresent(ArrayOfExternalLinkedDocs, DocAliases.SC) Then
+			Fields = GetFieldsToLock_ExternalLink(DocAliases.SO, DocAliases.SC);
+			AddArrayToFieldsTable(Table_Header   , Fields.Header   , DocAliases.SC);
+			AddArrayToFieldsTable(Table_ItemList , Fields.ItemList , DocAliases.SC);
+		EndIf;
 			
 	EndIf;
 	
 	If Is.SI Then
+		If AliasIsPresent(ArrayOfExternalLinkedDocs, DocAliases.SC) Then
+			Fields = GetFieldsToLock_ExternalLink(DocAliases.SI, DocAliases.SC);
+			AddArrayToFieldsTable(Table_Header   , Fields.Header   , DocAliases.SC);
+			AddArrayToFieldsTable(Table_ItemList , Fields.ItemList , DocAliases.SC);
+		EndIf;
 	EndIf;
 	
 	If Is.SC Then 
+		If AliasIsPresent(ArrayOfExternalLinkedDocs, DocAliases.SI) Then
+			Fields = GetFieldsToLock_ExternalLink(DocAliases.SC, DocAliases.SI);
+			AddArrayToFieldsTable(Table_Header   , Fields.Header   , DocAliases.SI);
+			AddArrayToFieldsTable(Table_ItemList , Fields.ItemList , DocAliases.SI);
+		EndIf;
 	EndIf;
 	
 	If Is.PO Then 
@@ -7895,18 +7951,35 @@ Function GetFieldsToLock_InternalLinkedDocs(Ref, ArrayOfInternalLinkedDocs)
 	Is = Is(Ref);
 	DocAliases = DocAliases();
 	If Is.SI Then
-		AddArrayToFieldsTable(Table_ItemList, ?(AliasIsPresent(ArrayOfInternalLinkedDocs, DocAliases.SO), 
-			GetFieldsToLock_SI_IntSO_ItemList(), Undefined), DocAliases.SO);
-		AddArrayToFieldsTable(Table_Header,   ?(AliasIsPresent(ArrayOfInternalLinkedDocs, DocAliases.SO), 
-			GetFieldsToLock_SI_IntSO(), Undefined), DocAliases.SO);
 		
-		AddArrayToFieldsTable(Table_ItemList, ?(AliasIsPresent(ArrayOfInternalLinkedDocs, DocAliases.SC), 
-			GetFieldsToLock_SI_IntSC_ItemList(), Undefined), DocAliases.SC);
-		AddArrayToFieldsTable(Table_Header,   ?(AliasIsPresent(ArrayOfInternalLinkedDocs, DocAliases.SC), 
-			GetFieldsToLock_SI_IntSC(), Undefined), DocAliases.SC);
+		If AliasIsPresent(ArrayOfInternalLinkedDocs, DocAliases.SO) Then
+			Fields = GetFieldsToLock_InternalLink(DocAliases.SI, DocAliases.SO);
+			AddArrayToFieldsTable(Table_Header   , Fields.Header   , DocAliases.SO);
+			AddArrayToFieldsTable(Table_ItemList , Fields.ItemList , DocAliases.SO);
+		EndIf;
+		
+		If AliasIsPresent(ArrayOfInternalLinkedDocs, DocAliases.SC) Then
+			Fields = GetFieldsToLock_InternalLink(DocAliases.SI, DocAliases.SC);
+			AddArrayToFieldsTable(Table_Header   , Fields.Header   , DocAliases.SC);
+			AddArrayToFieldsTable(Table_ItemList , Fields.ItemList , DocAliases.SC);
+		EndIf;
+		
 	EndIf;
 	
 	If Is.SC Then 
+		
+		If AliasIsPresent(ArrayOfInternalLinkedDocs, DocAliases.SO) Then
+			Fields = GetFieldsToLock_InternalLink(DocAliases.SC, DocAliases.SO);
+			AddArrayToFieldsTable(Table_Header   , Fields.Header   , DocAliases.SO);
+			AddArrayToFieldsTable(Table_ItemList , Fields.ItemList , DocAliases.SO);
+		EndIf;
+		
+		If AliasIsPresent(ArrayOfInternalLinkedDocs, DocAliases.SI) Then
+			Fields = GetFieldsToLock_InternalLink(DocAliases.SC, DocAliases.SI);
+			AddArrayToFieldsTable(Table_Header   , Fields.Header   , DocAliases.SI);
+			AddArrayToFieldsTable(Table_ItemList , Fields.ItemList , DocAliases.SI);
+		EndIf;
+	
 	EndIf;
 	
 	If Is.PO Then 

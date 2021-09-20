@@ -363,6 +363,8 @@ Function Strings(Lang) Export
 	// %2 - 120.00
 	Strings.Insert("Error_095", NStr("en = 'Payment amount [%1] and sales amount [%2] not match'", Lang));
 
+	Strings.Insert("Error_096", NStr("en = 'Select any document'", Lang));
+
 #EndRegion
 
 #Region InfoMessages

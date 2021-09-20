@@ -121,7 +121,7 @@ EndProcedure
 &AtClient
 Procedure CreateDocumentGoodsReceipt(Command)
 	If Items.GoodsInTransitIncoming.CurrentData = Undefined Then
-		CommonFunctionsClientServer.ShowUsersMessage(R().MF_Error_010);
+		CommonFunctionsClientServer.ShowUsersMessage(R().Error_096);
 		Return;
 	EndIf;
 	

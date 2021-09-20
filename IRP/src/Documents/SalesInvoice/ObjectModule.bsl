@@ -86,8 +86,10 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 		EndIf;
 	EndDo;
 	
-	LinkedFilter = RowIDInfoClientServer.GetLinkedDocumentsFilter_SI(ThisObject);
-	RowIDInfoTable = ThisObject.RowIDInfo.Unload();
-	ItemListTable = ThisObject.ItemList.Unload(,"Key, LineNumber, ItemKey, Store");
-	RowIDInfoServer.FillCheckProcessing(ThisObject, Cancel, LinkedFilter, RowIDInfoTable, ItemListTable);
+	If Not Cancel = True Then
+		LinkedFilter = RowIDInfoClientServer.GetLinkedDocumentsFilter_SI(ThisObject);
+		RowIDInfoTable = ThisObject.RowIDInfo.Unload();
+		ItemListTable = ThisObject.ItemList.Unload(,"Key, LineNumber, ItemKey, Store");
+		RowIDInfoServer.FillCheckProcessing(ThisObject, Cancel, LinkedFilter, RowIDInfoTable, ItemListTable);
+	EndIf;
 EndProcedure

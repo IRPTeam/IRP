@@ -13,6 +13,7 @@ Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 		DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 	EndIf;
 	FillTransactionTypeChoiceList(Form);
+	RowIDInfoServer.OnCreateAtServer(Object, Form, Cancel, StandardProcessing);
 EndProcedure
 
 Procedure AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters) Export
@@ -23,6 +24,7 @@ Procedure AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters) Expor
 	DocumentsClientServer.FillStores(ObjectData, Form);
 
 	DocumentsClientServer.ChangeTitleGroupTitle(CurrentObject, Form);
+	RowIDInfoServer.AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters);
 EndProcedure
 
 Procedure OnReadAtServer(Object, Form, CurrentObject) Export
@@ -37,6 +39,7 @@ Procedure OnReadAtServer(Object, Form, CurrentObject) Export
 	EndIf;
 	DocumentsClientServer.ChangeTitleGroupTitle(CurrentObject, Form);
 	Form.ReadOnly = SalesInvoiceIsExists(Object.Ref);
+	RowIDInfoServer.OnReadAtServer(Object, Form, CurrentObject);
 EndProcedure
 
 #EndRegion

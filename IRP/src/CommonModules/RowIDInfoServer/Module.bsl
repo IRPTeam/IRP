@@ -53,27 +53,28 @@ EndProcedure
 
 Procedure Posting_TM1010T_RowIDMovements_Return(Source, Cancel, PostingMode)
 	Query = New Query();
-	Query.Text = "SELECT
-				 |	RowIDInfo.Ref.Date AS Period,
-				 |	RowIDInfo.Ref AS Recorder,
-				 |	RowIDInfo.RowID,
-				 |	RowIDInfo.CurrentStep AS Step,
-				 |	- RowIDInfo.Quantity AS Quantity,
-				 |	RowIDInfo.Basis AS Basis,
-				 |	RowIDInfo.RowRef
-				 |FROM
-				 |	Document." + Source.Metadata().Name + ".RowIDInfo AS RowIDInfo
-															|WHERE
-															|	RowIDInfo.Ref = &Ref
-															|	AND RowIDInfo.CurrentStep = &CurrentStep
-															|GROUP BY
-															|	RowIDInfo.Ref.Date,
-															|	RowIDInfo.Ref,
-															|	RowIDInfo.RowID,
-															|	RowIDInfo.CurrentStep,
-															|	RowIDInfo.Quantity,
-															|	RowIDInfo.Basis,
-															|	RowIDInfo.RowRef";
+	Query.Text = 
+	"SELECT
+	|	RowIDInfo.Ref.Date AS Period,
+	|	RowIDInfo.Ref AS Recorder,
+	|	RowIDInfo.RowID,
+	|	RowIDInfo.CurrentStep AS Step,
+	|	- RowIDInfo.Quantity AS Quantity,
+	|	RowIDInfo.Basis AS Basis,
+	|	RowIDInfo.RowRef
+	|FROM
+	|	Document." + Source.Metadata().Name + ".RowIDInfo AS RowIDInfo
+	|WHERE
+	|	RowIDInfo.Ref = &Ref
+	|	AND RowIDInfo.CurrentStep = &CurrentStep
+	|GROUP BY
+	|	RowIDInfo.Ref.Date,
+	|	RowIDInfo.Ref,
+	|	RowIDInfo.RowID,
+	|	RowIDInfo.CurrentStep,
+	|	RowIDInfo.Quantity,
+	|	RowIDInfo.Basis,
+	|	RowIDInfo.RowRef";
 	Query.SetParameter("Ref", Source.Ref);
 
 	CurrentStep = Undefined;
@@ -93,24 +94,25 @@ EndProcedure
 
 Procedure Posting_TM1010T_RowIDMovements_Invoice(Source, Cancel, PostingMode)
 	Query = New Query();
-	Query.Text = "SELECT
-				 |	RowIDInfo.Ref.Date AS Period,
-				 |	RowIDInfo.Ref AS Recorder,
-				 |	RowIDInfo.RowID,
-				 |	&NextStep AS Step,
-				 |	RowIDInfo.Quantity,
-				 |	RowIDInfo.Ref AS Basis,
-				 |	RowIDInfo.RowRef
-				 |FROM
-				 |	Document." + Source.Metadata().Name + ".RowIDInfo AS RowIDInfo
-															|WHERE
-															|	RowIDInfo.Ref = &Ref
-															|GROUP BY
-															|	RowIDInfo.Ref.Date,
-															|	RowIDInfo.Ref,
-															|	RowIDInfo.RowID,
-															|	RowIDInfo.Quantity,
-															|	RowIDInfo.RowRef";
+	Query.Text = 
+	"SELECT
+	|	RowIDInfo.Ref.Date AS Period,
+	|	RowIDInfo.Ref AS Recorder,
+	|	RowIDInfo.RowID,
+	|	&NextStep AS Step,
+	|	RowIDInfo.Quantity,
+	|	RowIDInfo.Ref AS Basis,
+	|	RowIDInfo.RowRef
+	|FROM
+	|	Document." + Source.Metadata().Name + ".RowIDInfo AS RowIDInfo
+	|WHERE
+	|	RowIDInfo.Ref = &Ref
+	|GROUP BY
+	|	RowIDInfo.Ref.Date,
+	|	RowIDInfo.Ref,
+	|	RowIDInfo.RowID,
+	|	RowIDInfo.Quantity,
+	|	RowIDInfo.RowRef";
 	Query.SetParameter("Ref", Source.Ref);
 
 	NextStep = Undefined;
@@ -3685,23 +3687,23 @@ EndProcedure
 
 #Region Document_SO
 
-Function GetFileldsToLock_SO_ItemList()
+Function GetFileldsToLock_SO_Ext_ItemList()
 	Return "Item, ItemKey, Store, ProcurementMethod, Cancel, CancelReason";
 EndFunction
 
-Function GetFieldsToLock_SO_ForSI()
-	Return "Company, Branch, Store, Partner, LegalName, Agreement, Currency, PriceIncludeTax, Store, Status";
+Function GetFieldsToLock_SO_ExtSI()
+	Return "Company, Branch, Store, Partner, LegalName, Agreement, Currency, PriceIncludeTax, Status";
 EndFunction
 
-Function GetFieldsToLock_SO_ForPRR()
+Function GetFieldsToLock_SO_ExtPRR()
 	Return "Company, Branch, Store";
 EndFunction
 
-Function GetFieldsToLock_SO_ForSC()
+Function GetFieldsToLock_SO_ExtSC()
 	Return "Company, Branch, Store, Partner, LegalName";
 EndFunction
 
-Function GetFieldsToLock_SO_ForPO_ForPI()
+Function GetFieldsToLock_SO_ExtPO_ExtPI()
 	Return "Company, Branch, Store";
 EndFunction
 
@@ -3926,7 +3928,29 @@ EndProcedure
 
 #EndRegion
 
-Procedure ApplyFilterSet_SC_ForSI(Query)
+#Region Document_SI
+
+Function GetFieldsToLock_SI_IntSO_ItemList()
+	Return "Item, ItemKey, Store, SalesOrder";
+EndFunction
+
+Function GetFieldsToLock_SI_IntSO()
+	Return "Company, Branch, Store, Partner, LegalName, Agreement, Currency, PriceIncludeTax, Store";
+EndFunction
+
+Function GetFieldsToLock_SI_IntSC_ItemList()
+	Return "Item, ItemKey, Store, UseShipmentConfirmation, SalesOrder";
+EndFunction
+
+Function GetFieldsToLock_SI_IntSC()
+	Return "Company, Branch, Store, Partner, LegalName";
+EndFunction
+
+//Function GetFieldsToLock_SI_ForSR_ForSRO()
+//	Return "Company, Branch, Partner, LegalName, Agreement, Currency, PriceIncludeTax";
+//EndFunction
+
+Procedure ApplyFilterSet_SI_ForSC(Query)
 	Query.Text =
 	"SELECT
 	|	RowIDMovements.RowID,
@@ -3934,7 +3958,7 @@ Procedure ApplyFilterSet_SC_ForSI(Query)
 	|	RowIDMovements.Basis,
 	|	RowIDMovements.RowRef,
 	|	RowIDMovements.QuantityBalance AS Quantity
-	|INTO RowIDMovements_SC_ForSI
+	|INTO RowIDMovements_SI_ForSC
 	|FROM
 	|	AccumulationRegister.TM1010B_RowIDMovements.Balance(&Period, Step IN (&StepArray)
 	|	AND (Basis IN (&Basises)
@@ -3983,7 +4007,77 @@ Procedure ApplyFilterSet_SC_ForSI(Query)
 	Query.Execute();
 EndProcedure
 
-Procedure ApplyFilterSet_SI_ForSC(Query)
+Procedure ApplyFilterSet_SI_ForSR_ForSRO(Query)
+	Query.Text =
+	"SELECT
+	|	RowIDMovements.RowID,
+	|	RowIDMovements.Step,
+	|	RowIDMovements.Basis,
+	|	RowIDMovements.RowRef,
+	|	RowIDMovements.QuantityTurnover AS Quantity
+	|INTO RowIDMovements_SI_ForSR_ForSRO
+	|FROM
+	|	AccumulationRegister.TM1010T_RowIDMovements.Turnovers(, &Period,, Step IN (&StepArray)
+	|	AND (Basis IN (&Basises)
+	|	OR RowRef IN
+	|		(SELECT
+	|			RowRef.Ref AS Ref
+	|		FROM
+	|			Catalog.RowIDs AS RowRef
+	|		WHERE
+	|			CASE
+	|				WHEN &Filter_Company
+	|					THEN RowRef.Company = &Company
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Branch
+	|					THEN RowRef.Branch = &Branch
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Partner
+	|					THEN RowRef.Partner = &Partner
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_LegalName
+	|					THEN RowRef.LegalName = &LegalName
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Agreement
+	|					THEN RowRef.Agreement = &Agreement
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Currency
+	|					THEN RowRef.Currency = &Currency
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_PriceIncludeTax
+	|					THEN RowRef.PriceIncludeTax = &PriceIncludeTax
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_ItemKey
+	|					THEN RowRef.ItemKey = &ItemKey
+	|				ELSE TRUE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Store
+	|					THEN RowRef.Store = &Store
+	|				ELSE TRUE
+	|			END))) AS RowIDMovements
+	|WHERE
+	|	RowIDMovements.QuantityTurnover > 0";
+	Query.Execute();
+EndProcedure
+
+#EndRegion
+
+Procedure ApplyFilterSet_SC_ForSI(Query)
 	Query.Text =
 	"SELECT
 	|	RowIDMovements.RowID,
@@ -3991,7 +4085,7 @@ Procedure ApplyFilterSet_SI_ForSC(Query)
 	|	RowIDMovements.Basis,
 	|	RowIDMovements.RowRef,
 	|	RowIDMovements.QuantityBalance AS Quantity
-	|INTO RowIDMovements_SI_ForSC
+	|INTO RowIDMovements_SC_ForSI
 	|FROM
 	|	AccumulationRegister.TM1010B_RowIDMovements.Balance(&Period, Step IN (&StepArray)
 	|	AND (Basis IN (&Basises)
@@ -4928,73 +5022,6 @@ Procedure ApplyFilterSet_SRO_ForSR(Query)
 	Query.Execute();
 EndProcedure
 
-Procedure ApplyFilterSet_SI_ForSR_ForSRO(Query)
-	Query.Text =
-	"SELECT
-	|	RowIDMovements.RowID,
-	|	RowIDMovements.Step,
-	|	RowIDMovements.Basis,
-	|	RowIDMovements.RowRef,
-	|	RowIDMovements.QuantityTurnover AS Quantity
-	|INTO RowIDMovements_SI_ForSR_ForSRO
-	|FROM
-	|	AccumulationRegister.TM1010T_RowIDMovements.Turnovers(, &Period,, Step IN (&StepArray)
-	|	AND (Basis IN (&Basises)
-	|	OR RowRef IN
-	|		(SELECT
-	|			RowRef.Ref AS Ref
-	|		FROM
-	|			Catalog.RowIDs AS RowRef
-	|		WHERE
-	|			CASE
-	|				WHEN &Filter_Company
-	|					THEN RowRef.Company = &Company
-	|				ELSE FALSE
-	|			END
-	|			AND CASE
-	|				WHEN &Filter_Branch
-	|					THEN RowRef.Branch = &Branch
-	|				ELSE FALSE
-	|			END
-	|			AND CASE
-	|				WHEN &Filter_Partner
-	|					THEN RowRef.Partner = &Partner
-	|				ELSE FALSE
-	|			END
-	|			AND CASE
-	|				WHEN &Filter_LegalName
-	|					THEN RowRef.LegalName = &LegalName
-	|				ELSE FALSE
-	|			END
-	|			AND CASE
-	|				WHEN &Filter_Agreement
-	|					THEN RowRef.Agreement = &Agreement
-	|				ELSE FALSE
-	|			END
-	|			AND CASE
-	|				WHEN &Filter_Currency
-	|					THEN RowRef.Currency = &Currency
-	|				ELSE FALSE
-	|			END
-	|			AND CASE
-	|				WHEN &Filter_PriceIncludeTax
-	|					THEN RowRef.PriceIncludeTax = &PriceIncludeTax
-	|				ELSE FALSE
-	|			END
-	|			AND CASE
-	|				WHEN &Filter_ItemKey
-	|					THEN RowRef.ItemKey = &ItemKey
-	|				ELSE TRUE
-	|			END
-	|			AND CASE
-	|				WHEN &Filter_Store
-	|					THEN RowRef.Store = &Store
-	|				ELSE TRUE
-	|			END))) AS RowIDMovements
-	|WHERE
-	|	RowIDMovements.QuantityTurnover > 0";
-	Query.Execute();
-EndProcedure
 
 Procedure ApplyFilterSet_PI_ForPR_ForPRO(Query)
 	Query.Text =
@@ -7477,8 +7504,42 @@ EndProcedure
 #EndRegion
 
 Procedure LockLinkedRows(Object, Form) Export
-	InternalLinkedKeys = GetInternalLinkedKeys(Object);
+	LockInternalLinkedRows(Object, Form);
+	If ValueIsFilled(Object.Ref) Then
+		LockExternalLinkedRows(Object, Form);
+	EndIf;
+EndProcedure
+
+Procedure LockInternalLinkedRows(Object, Form)
+	RowIDInfoTable = Object.RowIDInfo.Unload(,"Key, RowID, Basis, BasisKey, RowRef");
+	RowIDInfoTable.GroupBy("Key, RowID, Basis, BasisKey, RowRef");
 	
+	ArrayForDelete = New Array();
+	For Each Row In RowIDInfoTable Do
+		If Not ValueIsFilled(Row.Basis) Then
+			ArrayForDelete.Add(Row);
+		EndIf;
+	EndDo;
+	For Each ItemForDelete In ArrayForDelete Do
+		RowIDInfoTable.Delete(ItemForDelete);
+	EndDo;
+	
+	InternalLinkedData = GetInternalLinkedKeys(RowIDInfoTable, Object.Ref);
+	Form.InternalLinkedDocs.LoadValues(InternalLinkedData.InternalLinkedDocs);
+	
+	For Each Row In Object.ItemList Do
+		Data = InternalLinkedData.Keys.FindRows(New Structure("Key", Row.Key));
+		If Data.Count() Then
+			Row.IsInternalLinked = True;
+			Row.InternalLinks = Data[0].InternalLinks;
+		Else
+			Row.IsInternalLinked = False;
+			Row.InternalLinks = "";			
+		EndIf;
+	EndDo;
+EndProcedure
+
+Procedure LockExternalLinkedRows(Object, Form)
 	RowIDInfoTable = Object.RowIDInfo.Unload(,"Key, RowID");
 	RowIDInfoTable.GroupBy("Key, RowID");
 	For Each Row In Object.ItemList Do
@@ -7488,45 +7549,88 @@ Procedure LockLinkedRows(Object, Form) Export
 			NewRow.RowID = Row.Key;
 		EndIf;
 	EndDo;
+	ExternalLinkedData = GetExternalLinkedKeys(RowIDInfoTable, Object.Ref);
+	Form.ExternalLinkedDocs.LoadValues(ExternalLinkedData.ExternalLinkedDocs);
 	
-	ExternalLinkedKeys = GetExternalLinkedKeys(RowIDInfoTable, Object.Ref);
-	Form.DependentDocs.LoadValues(ExternalLinkedKeys.DependentDocs);
 	For Each Row In Object.ItemList Do
-		If ExternalLinkedKeys.Keys.Find(Row.Key) <> Undefined Then
+		Data = ExternalLinkedData.Keys.FindRows(New Structure("Key", Row.Key));
+		If Data.Count() Then
 			Row.IsExternalLinked = True;
-			Form.IsExternalLinked = True;
+			Row.ExternalLinks = Data[0].ExternalLinks;
 		Else
 			Row.IsExternalLinked = False;
+			Row.ExternalLinks = "";			
 		EndIf;
-		If InternalLinkedKeys.Find(Row.Key) <> Undefined Then
-			Row.IsInternalLinked = True;
-		Else
-			Row.IsInternalLinked = False;
-		EndIf;
-	EndDo;
+	EndDo;	
 EndProcedure
 
-Function GetInternalLinkedKeys(Object)
-	ArrayOfKeys = New Array();
-	For Each Row In Object.RowIDInfo Do
-		If ValueIsFilled(Row.CurrentStep) Then
-			ArrayOfKeys.Add(Row.Key);
+Function GetInternalLinkedKeys(RowIDInfoTable, Ref)
+	ResultTable = New ValueTable();
+	ResultTable.Columns.Add("Key");
+	ResultTable.Columns.Add("Recorder");
+	
+	For Each Row In RowIDInfoTable Do		
+		If Row.Basis <> Row.RowRef.Basis Then
+			GetBasisInfoRecursive(Row.Basis, Row.BasisKey, Row.RowID, ResultTable, Row.Key);
+		Else
+			NewRow = ResultTable.Add();
+			NewRow.Key = Row.Key;
+			NewRow.Recorder = Row.Basis;			
 		EndIf;
 	EndDo;
-	Return ArrayOfKeys;
+	
+	KeysTable = ResultTable.Copy();
+	KeysTable.GroupBy("Key");
+	KeysTable.Columns.Add("InternalLinks");
+	KeysTable.FillValues("", "InternalLinks");
+	
+	InternalLinkedDocsTable = New ValueTable();
+	InternalLinkedDocsTable.Columns.Add("Doc");
+	
+	DocAliases = DocAliases();
+	
+	For Each Row In ResultTable Do
+		For Each KeyValue In Is(Row.Recorder) Do
+			If KeyValue.Value Then
+				InternalLinkedDocsTable.Add().Doc = DocAliases[KeyValue.Key];
+				KeysTableRow = KeysTable.FindRows(New Structure("Key", Row.Key))[0];
+				KeysTableRow.InternalLinks = KeysTableRow.InternalLinks + " " + DocAliases[KeyValue.Key];
+				Break;
+			EndIf;
+		EndDo;
+	EndDo;
+	InternalLinkedDocsTable.GroupBy("Doc");
+	Return New Structure("Keys, InternalLinkedDocs", KeysTable, InternalLinkedDocsTable.UnloadColumn("Doc"));
 EndFunction
+
+Procedure GetBasisInfoRecursive(Basis, BasisKey, RowID, ResultTable, Key)
+	BasisInfo = GetBasisesInfo(Basis, BasisKey, RowID);
+	If BasisInfo.Basis = Undefined Then
+		Return;
+	EndIf;
+	NewRow = ResultTable.Add();
+	NewRow.Key = Key;
+	NewRow.Recorder = BasisInfo.Basis;
+	
+	If BasisInfo.Basis <> BasisInfo.RowRef.Basis Then
+		NewRow = ResultTable.Add();
+		NewRow.Key = Key;
+		NewRow.Recorder = BasisInfo.ParentBasis;
+		GetBasisInfoRecursive(BasisInfo.Basis, BasisInfo.BasisKey, RowID, ResultTable, Key)
+	EndIf;
+EndProcedure
 
 Function GetExternalLinkedKeys(RowIDInfoTable, Ref)
 	Query = New Query();
 	Query.Text = 
 	"SELECT
 	|	RowIDInfoTable.Key AS Key,
-	|	RowIDInfoTable.RowID AS RowID,
-	|	&Ref AS Basis
+	|	RowIDInfoTable.RowID AS RowID
 	|INTO RowIDInfoTable
 	|FROM
 	|	&RowIDInfoTable AS RowIDInfoTable
 	|;
+	|
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
@@ -7538,11 +7642,13 @@ Function GetExternalLinkedKeys(RowIDInfoTable, Ref)
 	|		INNER JOIN AccumulationRegister.TM1010B_RowIDMovements AS TM1010B_RowIDMovements
 	|		ON RowIDInfoTable.RowID = TM1010B_RowIDMovements.RowID
 	|		AND TM1010B_RowIDMovements.RecordType = VALUE(AccumulationRecordType.Expense)
-	|		AND RowIDInfoTable.Basis = TM1010B_RowIDMovements.Basis
+	|		AND TM1010B_RowIDMovements.Recorder <> &Ref
+	|		AND TM1010B_RowIDMovements.Recorder.PointInTime > &PointInTime
 	|GROUP BY
 	|	RowIDInfoTable.Key,
 	|	TM1010B_RowIDMovements.Recorder
 	|;
+	|
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
@@ -7554,11 +7660,13 @@ Function GetExternalLinkedKeys(RowIDInfoTable, Ref)
 	|		INNER JOIN AccumulationRegister.TM1010T_RowIDMovements AS TM1010T_RowIDMovements
 	|		ON RowIDInfoTable.RowID = TM1010T_RowIDMovements.RowID
 	|		AND TM1010T_RowIDMovements.Quantity < 0
-	|		AND RowIDInfoTable.Basis = TM1010T_RowIDMovements.Basis
+	|		AND TM1010T_RowIDMovements.Recorder <> &Ref
+	|		AND TM1010T_RowIDMovements.Recorder.PointInTime > &PointInTime
 	|GROUP BY
 	|	RowIDInfoTable.Key,
 	|	TM1010T_RowIDMovements.Recorder
 	|;
+	|
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
@@ -7577,26 +7685,35 @@ Function GetExternalLinkedKeys(RowIDInfoTable, Ref)
 
 	Query.SetParameter("RowIDInfoTable", RowIDInfoTable);
 	Query.SetParameter("Ref", Ref);
+	Query.SetParameter("PointInTime", Ref.PointInTime());
 	QueryResult = Query.Execute();
 	QueryTable = QueryResult.Unload();
 	KeysTable = QueryTable.Copy();
 	KeysTable.GroupBy("Key");
+		
+	KeysTable.Columns.Add("ExternalLinks");
+	KeysTable.FillValues("", "ExternalLinks");
 	
-	DependentDocsTable = New ValueTable();
-	DependentDocsTable.Columns.Add("Doc");
+	ExternalLinkedDocsTable = New ValueTable();
+	ExternalLinkedDocsTable.Columns.Add("Doc");
+	
 	DocAliases = DocAliases();
+	
 	For Each Row In QueryTable Do
 		For Each KeyValue In Is(Row.Recorder) Do
 			If KeyValue.Value Then
-				DependentDocsTable.Add().Doc = DocAliases[KeyValue.Key];
+				ExternalLinkedDocsTable.Add().Doc = DocAliases[KeyValue.Key];
+				KeysTableRow = KeysTable.FindRows(New Structure("Key", Row.Key))[0];
+				KeysTableRow.ExternalLinks = KeysTableRow.ExternalLinks + " " + DocAliases[KeyValue.Key];
 				Break;
 			EndIf;
 		EndDo;
 	EndDo;
-	DependentDocsTable.GroupBy("Doc");
-	Return New Structure("Keys, DependentDocs", 
-		KeysTable.UnloadColumn("Key"), DependentDocsTable.UnloadColumn("Doc"));
+	ExternalLinkedDocsTable.GroupBy("Doc");
+	Return New Structure("Keys, ExternalLinkedDocs", KeysTable, ExternalLinkedDocsTable.UnloadColumn("Doc"));
 EndFunction
+
+#Region ConditionalAppearance
 
 Procedure SetAppearance(Object, Form) Export
 	ArrayForDelete = New Array();
@@ -7608,59 +7725,104 @@ Procedure SetAppearance(Object, Form) Export
 	For Each ItemForDelete In ArrayForDelete Do
 		Form.ConditionalAppearance.Items.Delete(ItemForDelete);
 	EndDo;
-	If Not ValueIsFilled(Object.Ref) Then
-		Return;
-	EndIf;
 	
-	FieldsToLock = GetFieldsToLock(Object.Ref, Form.DependentDocs.UnloadValues());
+	FieldsToLock = GetFieldsToLock(Object,Form);
 	
-	// Item list
-	Element = Form.ConditionalAppearance.Items.Add();
-	Element.Presentation = "FieldsToLock";
-	For Each FieldName In FieldsToLock.ItemList Do
-		Element.Fields.Items.Add().Field = New DataCompositionField("ItemList" + FieldName);
-	EndDo;
-	Filter = Element.Filter.Items.Add(Type("DataCompositionFilterItem"));
-	Filter.LeftValue = New DataCompositionField("Object.ItemList.IsExternalLinked");
-	Filter.ComparisonType = DataCompositionComparisonType.Equal;
-	Filter.RightValue = True;
+	AddAppearance_Header(Object, Form, FieldsToLock.All);
 	
-	Element.Appearance.SetParameterValue("BackColor", StyleColors.AuxiliaryNavigationColor);
-	Element.Appearance.SetParameterValue("ReadOnly", True);
-	
+	AddAppearance_ItemList(Object, Form, FieldsToLock.Internal, "InternalLinks");
+	AddAppearance_ItemList(Object, Form, FieldsToLock.External, "ExternalLinks");	
+EndProcedure
+
+Procedure AddAppearance_Header(Object, Form, FieldsToLock)
 	// Header
 	Element = Form.ConditionalAppearance.Items.Add();
 	Element.Presentation = "FieldsToLock";
+	
+	// Reset ReadOnly
+	For Each FieldName In Form.LockedFields Do
+		Form.Items.Find(FieldName).ReadOnly = False;
+	EndDo;
+	Form.LockedFields.Clear();
+	
+	// Set ReadOnly
 	For Each FieldName In FieldsToLock.Header Do
 		Element.Fields.Items.Add().Field = New DataCompositionField(FieldName);
-		Form.Items[FieldName].ReadOnly = True;
+		If Form.Items.Find(FieldName) <> Undefined And Not Form.Items[FieldName].ReadOnly Then
+			Form.Items[FieldName].ReadOnly = True;
+			Form.LockedFields.Add(FieldName);
+		EndIf;
 	EndDo;
-	
-	Filter = Element.Filter.Items.Add(Type("DataCompositionFilterItem"));
-	Filter.LeftValue = New DataCompositionField("IsExternalLinked");
-	Filter.ComparisonType = DataCompositionComparisonType.Equal;
-	Filter.RightValue = True;
-	
+		
 	Element.Appearance.SetParameterValue("TextColor", WebColors.Gray);
 EndProcedure
 
-Function GetFieldsToLock(Ref, ArrayOfDependentDocs)
+Procedure AddAppearance_ItemList(Object, Form, FieldsToLock, Condition)
+	// Item list
+	For Each Row In FieldsToLock.ItemList Do
+		Element = Form.ConditionalAppearance.Items.Add();
+		Element.Presentation = "FieldsToLock";
+		Element.Fields.Items.Add().Field = New DataCompositionField("ItemList" + Row.FieldName);
+	
+		Filter = Element.Filter.Items.Add(Type("DataCompositionFilterItem"));
+		Filter.LeftValue = New DataCompositionField("Object.ItemList." + Condition);
+		Filter.ComparisonType = DataCompositionComparisonType.Contains;
+		Filter.RightValue = Row.LinkedDoc;
+	
+		Element.Appearance.SetParameterValue("BackColor", WebColors.AliceBlue);
+		Element.Appearance.SetParameterValue("ReadOnly", True);
+	EndDo;
+EndProcedure
+
+#EndRegion
+
+#Region FieldsToLock
+
+Function GetFieldsToLock(Object, Form)
+	FieldsToLock_ExternalLinkedDocs = New Structure("Header, ItemList", New Array(), New Array());
+	FieldsToLock_InternalLinkedDocs = New Structure("Header, ItemList", New Array(), New Array());
+	FieldsToLock_All                = New Structure("Header, ItemList", New Array(), New Array());
+	
+	If ValueIsFilled(Object.Ref) Then
+		FieldsToLock_ExternalLinkedDocs = GetFieldsToLock_ExternalLinkedDocs(Object.Ref, Form.ExternalLinkedDocs.UnloadValues());
+	EndIf;
+		
+	FieldsToLock_InternalLinkedDocs = GetFieldsToLock_InternalLinkedDocs(Object.Ref, Form.InternalLinkedDocs.UnloadValues());
+	
+	AllFields_Header = New ValueTable();
+	AllFields_Header.Columns.Add("FieldName");
+	For Each Row In FieldsToLock_ExternalLinkedDocs.Header Do
+		AllFields_Header.Add().FieldName = Row.FieldName;
+	EndDo;
+	For Each Row In FieldsToLock_InternalLinkedDocs.Header Do
+		AllFields_Header.Add().FieldName = Row.FieldName;
+	EndDo;
+	AllFields_Header.GroupBy("FieldName");
+	FieldsToLock_All.Header = AllFields_Header.UnloadColumn("FieldName");
+	
+	Return New Structure("External, Internal, All", 
+		FieldsToLock_ExternalLinkedDocs, FieldsToLock_InternalLinkedDocs, FieldsToLock_All);
+EndFunction
+
+Function GetFieldsToLock_ExternalLinkedDocs(Ref, ArrayOfExternalLinkedDocs)
 	Table_ItemList = New ValueTable();
 	Table_ItemList.Columns.Add("FieldName");
+	Table_ItemList.Columns.Add("LinkedDoc");
 	
 	Table_Header = New ValueTable();
 	Table_Header.Columns.Add("FieldName");
+	Table_Header.Columns.Add("LinkedDoc");
 	
 	Is = Is(Ref);
 	DocAliases = DocAliases();
 	If Is.SO Then
-		AddArrayToFieldsTable(Table_ItemList, GetFileldsToLock_SO_ItemList());
+		AddArrayToFieldsTable(Table_ItemList, GetFileldsToLock_SO_Ext_ItemList(), DocAliases.SI);
 		
-		AddArrayToFieldsTable(Table_Header, ?(IsDependent(ArrayOfDependentDocs, DocAliases.SI), 
-			GetFieldsToLock_SO_ForSI(), Undefined));
+		AddArrayToFieldsTable(Table_Header, ?(AliasIsPresent(ArrayOfExternalLinkedDocs, DocAliases.SI), 
+			GetFieldsToLock_SO_ExtSI(), Undefined), DocAliases.SI);
 		
-		AddArrayToFieldsTable(Table_Header, ?(IsDependent(ArrayOfDependentDocs, DocAliases.SC), 
-			GetFieldsToLock_SO_ForSC(), Undefined));
+		AddArrayToFieldsTable(Table_Header, ?(AliasIsPresent(ArrayOfExternalLinkedDocs, DocAliases.SC), 
+			GetFieldsToLock_SO_ExtSC(), Undefined), DocAliases.SC);
 			
 	EndIf;
 	
@@ -7718,26 +7880,103 @@ Function GetFieldsToLock(Ref, ArrayOfDependentDocs)
 	If Is.PRR Then 
 	EndIf;
 	
-	Table_ItemList.GroupBy("FieldName");
-	Table_Header.GroupBy("FieldName");
-	Return New Structure("Header, ItemList", 
-		Table_Header.UnloadColumn("FieldName"), 
-		Table_ItemList.UnloadColumn("FieldName"));
+	Return New Structure("Header, ItemList", Table_Header, Table_ItemList);
 EndFunction
 
-Function IsDependent(ArrayOfDependentDocs, DocName)
-	Return ArrayOfDependentDocs.Find(DocName) <> Undefined;
+Function GetFieldsToLock_InternalLinkedDocs(Ref, ArrayOfInternalLinkedDocs)
+	Table_ItemList = New ValueTable();
+	Table_ItemList.Columns.Add("FieldName");
+	Table_ItemList.Columns.Add("LinkedDoc");
+	
+	Table_Header = New ValueTable();
+	Table_Header.Columns.Add("FieldName");
+	Table_Header.Columns.Add("LinkedDoc");
+	
+	Is = Is(Ref);
+	DocAliases = DocAliases();
+	If Is.SI Then
+		AddArrayToFieldsTable(Table_ItemList, ?(AliasIsPresent(ArrayOfInternalLinkedDocs, DocAliases.SO), 
+			GetFieldsToLock_SI_IntSO_ItemList(), Undefined), DocAliases.SO);
+		AddArrayToFieldsTable(Table_Header,   ?(AliasIsPresent(ArrayOfInternalLinkedDocs, DocAliases.SO), 
+			GetFieldsToLock_SI_IntSO(), Undefined), DocAliases.SO);
+		
+		AddArrayToFieldsTable(Table_ItemList, ?(AliasIsPresent(ArrayOfInternalLinkedDocs, DocAliases.SC), 
+			GetFieldsToLock_SI_IntSC_ItemList(), Undefined), DocAliases.SC);
+		AddArrayToFieldsTable(Table_Header,   ?(AliasIsPresent(ArrayOfInternalLinkedDocs, DocAliases.SC), 
+			GetFieldsToLock_SI_IntSC(), Undefined), DocAliases.SC);
+	EndIf;
+	
+	If Is.SC Then 
+	EndIf;
+	
+	If Is.PO Then 
+	EndIf;
+	
+	If Is.PI Then 
+	EndIf;
+	
+	If Is.GR Then 
+	EndIf;
+	
+	If Is.ITO Then 
+	EndIf;
+	
+	If Is.IT Then 
+	EndIf;
+	
+	If Is.ISR Then 
+	EndIf;
+	
+	If Is.PhysicalInventory Then 
+	EndIf;
+	
+	If Is.StockAdjustmentAsSurplus Then 
+	EndIf;
+	
+	If Is.StockAdjustmentAsWriteOff Then 
+	EndIf;
+	
+	If Is.PR Then 
+	EndIf;
+	
+	If Is.PRO Then 
+	EndIf;
+	
+	If Is.SR Then 
+	EndIf;
+	
+	If Is.SRO Then 
+	EndIf;
+	
+	If Is.RSR Then 
+	EndIf;
+	
+	If Is.RRR Then 
+	EndIf;
+	
+	If Is.PRR Then 
+	EndIf;
+	
+	Return New Structure("Header, ItemList", Table_Header, Table_ItemList);
 EndFunction
 
-Procedure AddArrayToFieldsTable(TableOfFields, FieldNames)
+Function AliasIsPresent(ArrayOfLinkedDocs, Alias)
+	Return ArrayOfLinkedDocs.Find(Alias) <> Undefined;
+EndFunction
+
+Procedure AddArrayToFieldsTable(TableOfFields, FieldNames, LinkedDoc)
 	If FieldNames = Undefined Then
 		Return;
 	EndIf;
 	ArrayOfFields = StrSplit(FieldNames, ",");
 	For Each FieldName In ArrayOfFields Do
-		TableOfFields.Add().FieldName = TrimAll(FieldName);
+		NewRow = TableOfFields.Add();
+		NewRow.FieldName = TrimAll(FieldName);
+		NewRow.LinkedDoc = LinkedDoc;
 	EndDo;
 EndProcedure
+
+#EndRegion
 
 #EndRegion
 

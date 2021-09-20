@@ -215,6 +215,7 @@ EndProcedure
 Procedure ItemListAfterDeleteRow(Item)
 	DocSalesOrderClient.ItemListAfterDeleteRow(Object, ThisObject, Item);
 	UpdateTotalAmounts();
+	LockLinkedRows();
 EndProcedure
 
 &AtClient

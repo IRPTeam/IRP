@@ -63,6 +63,7 @@ Scenario: _0156000 preparation
 		When Create catalog Hardware objects  (Test)
 		When Create catalog Workstations objects  (Test)
 		When Create catalog ItemSegments objects
+		When Create information register Barcodes records
 		When Create catalog PaymentTypes objects
 		When update ItemKeys
 	* Add plugin for taxes calculation

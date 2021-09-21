@@ -813,7 +813,7 @@ Scenario: _150017 price calculation when change input price in the Price list (b
 		And I move to the next attribute
 		And "ItemList"  table contains lines
 			| '#' | 'Input price' | 'Item'  | 'Input unit'        | 'Price'    |
-			| '1' | '500,000'     | 'Dress' | 'box Dress (8 pcs)' | '4 000,00' |
+			| '1' | '500,000'     | 'Dress' | 'box Dress (8 pcs)' | '62,50' |
 		And I activate field named "ItemListInputPrice" in "ItemList" table
 		And I select current line in "ItemList" table
 		And I input "600,000" text in the field named "ItemListInputPrice" of "ItemList" table
@@ -821,7 +821,7 @@ Scenario: _150017 price calculation when change input price in the Price list (b
 		And I move to the next attribute
 		And "ItemList" table contains lines
 			| '#' | 'Input price' | 'Item'  | 'Input unit'        | 'Price'    |
-			| '1' | '600,000'     | 'Dress' | 'box Dress (8 pcs)' | '4 800,00' |
+			| '1' | '600,000'     | 'Dress' | 'box Dress (8 pcs)' | '75,00' |
 	* Check Price calculation when change Input unit
 		And I activate field named "ItemListInputUnit" in "ItemList" table
 		And I select current line in "ItemList" table
@@ -909,7 +909,7 @@ Scenario: _150018 price calculation when change input price in the Price list (b
 		And I move to the next attribute
 		And "PriceKeyList"  table contains lines
 			| 'Item'  | 'Input unit'        | 'Size' | 'Color' | 'Input price' | 'Price'    |
-			| 'Dress' | 'box Dress (8 pcs)' | 'XS'   | 'Blue'  | '500,00'     | '4 000,00' |
+			| 'Dress' | 'box Dress (8 pcs)' | 'XS'   | 'Blue'  | '500,00'     | '62,50' |
 		And I activate field "Input price" in "PriceKeyList" table
 		And I select current line in "PriceKeyList" table
 		And I input "600,000" text in "Input price" field of "PriceKeyList" table
@@ -917,7 +917,7 @@ Scenario: _150018 price calculation when change input price in the Price list (b
 		And I move to the next attribute
 		And "PriceKeyList" table contains lines
 			| 'Item'  | 'Input unit'        | 'Size' | 'Color' | 'Input price' | 'Price'    |
-			| 'Dress' | 'box Dress (8 pcs)' | 'XS'   | 'Blue'  | '600,00'     | '4 800,00' |
+			| 'Dress' | 'box Dress (8 pcs)' | 'XS'   | 'Blue'  | '600,00'     | '75,00' |
 	* Check Price calculation when change Input unit
 		And I activate field named "PriceKeyListInputUnit" in "PriceKeyList" table
 		And I select current line in "PriceKeyList" table

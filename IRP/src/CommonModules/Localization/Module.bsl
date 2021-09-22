@@ -373,6 +373,21 @@ Function Strings(Lang) Export
 	// %3 - Red XL
 	Strings.Insert("Error_097", NStr("en = 'Wrong linked row [%1] [%2] [%3]'", Lang));
 	
+	// %1 - 1
+	// %2 - Store
+	// %3 - Store 01
+	// %4 - Store 02
+	Strings.Insert("Error_098", NStr("en = 'Wrong linked row [%1] for column [%2] used value [%3] wrong value [%4]'", Lang));
+	
+	// %1 - Partner
+	// %2 - Partner 01
+	// %3 - Partner 02
+	Strings.Insert("Error_099", NStr("en = 'Wrong linked data [%1] used value [%2] wrong value [%3]'", Lang));
+	
+	// %1 - Value 01
+	// %2 - Value 02
+	Strings.Insert("Error_100", NStr("en = 'Wrong linked data, used value [%1] wrong value [%2]'", Lang));
+	
 #EndRegion
 
 #Region InfoMessages

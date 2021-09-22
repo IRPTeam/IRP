@@ -271,44 +271,50 @@ Procedure BeforeWrite_RowID(Source, Cancel, WriteMode, PostingMode) Export
 		Return;
 	EndIf;
 
+BeginTransaction();
 	If Is(Source).SO Then
-		FillRowID_SO(Source);
+		FillRowID_SO(Source, Cancel);
 	ElsIf Is(Source).SI Then
-		FillRowID_SI(Source);
+		FillRowID_SI(Source, Cancel);
 	ElsIf Is(Source).SC Then
-		FillRowID_SC(Source);
+		FillRowID_SC(Source, Cancel);
 	ElsIf Is(Source).PO Then
-		FillRowID_PO(Source);
+		FillRowID_PO(Source, Cancel);
 	ElsIf Is(Source).PI Then
-		FillRowID_PI(Source);
+		FillRowID_PI(Source, Cancel);
 	ElsIf Is(Source).GR Then
-		FillRowID_GR(Source);
+		FillRowID_GR(Source, Cancel);
 	ElsIf Is(Source).ITO Then
-		FillRowID_ITO(Source);
+		FillRowID_ITO(Source, Cancel);
 	ElsIf Is(Source).IT Then
-		FillRowID_IT(Source);
+		FillRowID_IT(Source, Cancel);
 	ElsIf Is(Source).ISR Then
-		FillRowID_ISR(Source);
+		FillRowID_ISR(Source, Cancel);
 	ElsIf Is(Source).PhysicalInventory Then
-		FillRowID_PhysicalInventory(Source);
+		FillRowID_PhysicalInventory(Source, Cancel);
 	ElsIf Is(Source).StockAdjustmentAsSurplus Then
-		FillRowID_StockAdjustmentAsSurplus(Source);
+		FillRowID_StockAdjustmentAsSurplus(Source, Cancel);
 	ElsIf Is(Source).StockAdjustmentAsWriteOff Then
-		FillRowID_StockAdjustmentAsWriteOff(Source);
+		FillRowID_StockAdjustmentAsWriteOff(Source, Cancel);
 	ElsIf Is(Source).PR Then
-		FillRowID_PR(Source);
+		FillRowID_PR(Source, Cancel);
 	ElsIf Is(Source).PRO Then
-		FillRowID_PRO(Source);
+		FillRowID_PRO(Source, Cancel);
 	ElsIf Is(Source).SR Then
-		FillRowID_SR(Source);
+		FillRowID_SR(Source, Cancel);
 	ElsIf Is(Source).SRO Then
-		FillRowID_SRO(Source);
+		FillRowID_SRO(Source, Cancel);
 	ElsIf Is(Source).RSR Then
-		FillRowID_RSR(Source);
+		FillRowID_RSR(Source, Cancel);
 	ElsIf Is(Source).RRR Then
-		FillRowID_RRR(Source);
+		FillRowID_RRR(Source, Cancel);
 	ElsIf Is(Source).PRR Then
-		FillRowID_PRR(Source);
+		FillRowID_PRR(Source, Cancel);
+	EndIf;
+	If Cancel = True Then
+		RollbackTransaction();
+	Else
+		CommitTransaction();
 	EndIf;
 EndProcedure
 
@@ -329,9 +335,8 @@ Procedure OnWrite_RowID(Source, Cancel) Export
 		ElsIf Row.RowRef.Basis = Source.Ref Then
 			RowItemList = Source.ItemList.FindRows(New Structure("Key", Row.Key))[0];
 			RowRefObject = Row.RowRef.GetObject();
-			UpdateRowIDCatalog(Source, Row, RowItemList, RowRefObject);
-		EndIf
-		;
+			UpdateRowIDCatalog(Source, Row, RowItemList, RowRefObject, Cancel);
+		EndIf;
 	EndDo;
 EndProcedure
 
@@ -339,7 +344,7 @@ EndProcedure
 
 #Region FillRowID
 
-Procedure FillRowID_SO(Source)
+Procedure FillRowID_SO(Source, Cancel)
 	ArrayForDelete = New Array();
 	For Each Row In Source.RowIDInfo Do
 		If Row.NextStep = Catalogs.MovementRules.PRR Then
@@ -366,7 +371,7 @@ Procedure FillRowID_SO(Source)
 			Continue;
 		EndIf;
 
-		FillRowID(Source, Row, RowItemList);
+		FillRowID(Source, Row, RowItemList, Cancel);
 		Row.NextStep = GetNextStep_SO(Source, RowItemList, Row);
 
 		If RowItemList.ProcurementMethod = Enums.ProcurementMethods.IncomingReserve Then
@@ -378,13 +383,13 @@ Procedure FillRowID_SO(Source)
 	EndDo;
 EndProcedure
 
-Procedure FillRowID_SI(Source)
+Procedure FillRowID_SI(Source, Cancel)
 	For Each RowItemList In Source.ItemList Do
 		Row = Undefined;
 		IDInfoRows = Source.RowIDInfo.FindRows(New Structure("Key", RowItemList.Key));
 		If IDInfoRows.Count() = 0 Then
 			Row = Source.RowIDInfo.Add();
-			FillRowID(Source, Row, RowItemList);
+			FillRowID(Source, Row, RowItemList, Cancel);
 			Row.NextStep = GetNextStep_SI(Source, RowItemList, Row);
 		Else
 			For Each Row In IDInfoRows Do
@@ -392,20 +397,20 @@ Procedure FillRowID_SI(Source)
 					Row.NextStep = GetNextStep_SI(Source, RowItemList, Row);
 					Continue;
 				EndIf;
-				FillRowID(Source, Row, RowItemList);
+				FillRowID(Source, Row, RowItemList, Cancel);
 				Row.NextStep = GetNextStep_SI(Source, RowItemList, Row);
 			EndDo;
 		EndIf;
 	EndDo;
 EndProcedure
 
-Procedure FillRowID_SC(Source)
+Procedure FillRowID_SC(Source, Cancel)
 	For Each RowItemList In Source.ItemList Do
 		Row = Undefined;
 		IDInfoRows = Source.RowIDInfo.FindRows(New Structure("Key", RowItemList.Key));
 		If IDInfoRows.Count() = 0 Then
 			Row = Source.RowIDInfo.Add();
-			FillRowID(Source, Row, RowItemList);
+			FillRowID(Source, Row, RowItemList, Cancel);
 			Row.NextStep = GetNextStep_SC(Source, RowItemList, Row);
 		Else
 
@@ -448,7 +453,7 @@ Procedure FillRowID_SC(Source)
 	EndDo;
 EndProcedure
 
-Procedure FillRowID_PO(Source)
+Procedure FillRowID_PO(Source, Cancel)
 	For Each RowItemList In Source.ItemList Do
 		Row = Undefined;
 		IDInfoRows = Source.RowIDInfo.FindRows(New Structure("Key", RowItemList.Key));
@@ -460,7 +465,7 @@ Procedure FillRowID_PO(Source)
 		EndIf;
 		If IDInfoRows.Count() = 0 Then
 			Row = Source.RowIDInfo.Add();
-			FillRowID(Source, Row, RowItemList);
+			FillRowID(Source, Row, RowItemList, Cancel);
 			Row.NextStep = GetNextStep_PO(Source, RowItemList, Row);
 		Else
 			For Each Row In IDInfoRows Do
@@ -468,20 +473,20 @@ Procedure FillRowID_PO(Source)
 					Row.NextStep = GetNextStep_PO(Source, RowItemList, Row);
 					Continue;
 				EndIf;
-				FillRowID(Source, Row, RowItemList);
+				FillRowID(Source, Row, RowItemList, Cancel);
 				Row.NextStep = GetNextStep_PO(Source, RowItemList, Row);
 			EndDo;
 		EndIf;
 	EndDo;
 EndProcedure
 
-Procedure FillRowID_PI(Source)
+Procedure FillRowID_PI(Source, Cancel)
 	For Each RowItemList In Source.ItemList Do
 		Row = Undefined;
 		IDInfoRows = Source.RowIDInfo.FindRows(New Structure("Key", RowItemList.Key));
 		If IDInfoRows.Count() = 0 Then
 			Row = Source.RowIDInfo.Add();
-			FillRowID(Source, Row, RowItemList);
+			FillRowID(Source, Row, RowItemList, Cancel);
 			Row.NextStep = GetNextStep_PI(Source, RowItemList, Row);
 		Else
 			For Each Row In IDInfoRows Do
@@ -489,7 +494,7 @@ Procedure FillRowID_PI(Source)
 					Row.NextStep = GetNextStep_PI(Source, RowItemList, Row);
 					Continue;
 				EndIf;
-				FillRowID(Source, Row, RowItemList);
+				FillRowID(Source, Row, RowItemList, Cancel);
 				Row.NextStep = GetNextStep_PI(Source, RowItemList, Row);
 			EndDo;
 		EndIf;
@@ -517,13 +522,13 @@ Procedure FillRowID_PI(Source)
 	EndDo;
 EndProcedure
 
-Procedure FillRowID_GR(Source)
+Procedure FillRowID_GR(Source, Cancel)
 	For Each RowItemList In Source.ItemList Do
 		Row = Undefined;
 		IDInfoRows = Source.RowIDInfo.FindRows(New Structure("Key", RowItemList.Key));
 		If IDInfoRows.Count() = 0 Then
 			Row = Source.RowIDInfo.Add();
-			FillRowID(Source, Row, RowItemList);
+			FillRowID(Source, Row, RowItemList, Cancel);
 			Row.NextStep = GetNextStep_GR(Source, RowItemList, Row);
 		Else
 
@@ -587,13 +592,13 @@ Procedure FillRowID_GR(Source)
 	EndDo;
 EndProcedure
 
-Procedure FillRowID_ITO(Source)
+Procedure FillRowID_ITO(Source, Cancel)
 	For Each RowItemList In Source.ItemList Do
 		Row = Undefined;
 		IDInfoRows = Source.RowIDInfo.FindRows(New Structure("Key", RowItemList.Key));
 		If IDInfoRows.Count() = 0 Then
 			Row = Source.RowIDInfo.Add();
-			FillRowID(Source, Row, RowItemList);
+			FillRowID(Source, Row, RowItemList, Cancel);
 			Row.NextStep = GetNextStep_ITO(Source, RowItemList, Row);
 		Else
 			For Each Row In IDInfoRows Do
@@ -601,14 +606,14 @@ Procedure FillRowID_ITO(Source)
 					Row.NextStep = GetNextStep_ITO(Source, RowItemList, Row);
 					Continue;
 				EndIf;
-				FillRowID(Source, Row, RowItemList);
+				FillRowID(Source, Row, RowItemList, Cancel);
 				Row.NextStep = GetNextStep_ITO(Source, RowItemList, Row);
 			EndDo;
 		EndIf;
 	EndDo;
 EndProcedure
 
-Procedure FillRowID_IT(Source)
+Procedure FillRowID_IT(Source, Cancel)
 	For Each RowItemList In Source.ItemList Do
 		IDInfoRows = Source.RowIDInfo.FindRows(New Structure("Key", RowItemList.Key));
 		For Each Row In IDInfoRows Do
@@ -627,7 +632,7 @@ Procedure FillRowID_IT(Source)
 		IDInfoRows = Source.RowIDInfo.FindRows(New Structure("Key", RowItemList.Key));
 		If IDInfoRows.Count() = 0 Then
 			Row = Source.RowIDInfo.Add();
-			FillRowID(Source, Row, RowItemList);
+			FillRowID(Source, Row, RowItemList, Cancel);
 			Row.NextStep = GetNextStep_IT(Source, RowItemList, Row);
 		Else
 			Row = IDInfoRows[0];
@@ -667,7 +672,7 @@ Procedure FillRowID_IT(Source)
 	EndDo;
 EndProcedure
 
-Procedure FillRowID_ISR(Source)
+Procedure FillRowID_ISR(Source, Cancel)
 	For Each RowItemList In Source.ItemList Do
 		Row = Undefined;
 		IDInfoRows = Source.RowIDInfo.FindRows(New Structure("Key", RowItemList.Key));
@@ -677,12 +682,12 @@ Procedure FillRowID_ISR(Source)
 			Row = IDInfoRows[0];
 		EndIf;
 
-		FillRowID(Source, Row, RowItemList);
+		FillRowID(Source, Row, RowItemList, Cancel);
 		Row.NextStep = GetNextStep_ISR(Source, RowItemList, Row);
 	EndDo;
 EndProcedure
 
-Procedure FillRowID_PhysicalInventory(Source)
+Procedure FillRowID_PhysicalInventory(Source, Cancel)
 	For Each RowItemList In Source.ItemList Do
 		Row = Undefined;
 		IDInfoRows = Source.RowIDInfo.FindRows(New Structure("Key", RowItemList.Key));
@@ -692,18 +697,18 @@ Procedure FillRowID_PhysicalInventory(Source)
 			Row = IDInfoRows[0];
 		EndIf;
 
-		FillRowID(Source, Row, RowItemList);
+		FillRowID(Source, Row, RowItemList, Cancel);
 		Row.NextStep = GetNextStep_PhysicalInventory(Source, RowItemList, Row);
 	EndDo;
 EndProcedure
 
-Procedure FillRowID_StockAdjustmentAsSurplus(Source)
+Procedure FillRowID_StockAdjustmentAsSurplus(Source, Cancel)
 	For Each RowItemList In Source.ItemList Do
 		Row = Undefined;
 		IDInfoRows = Source.RowIDInfo.FindRows(New Structure("Key", RowItemList.Key));
 		If IDInfoRows.Count() = 0 Then
 			Row = Source.RowIDInfo.Add();
-			FillRowID(Source, Row, RowItemList);
+			FillRowID(Source, Row, RowItemList, Cancel);
 			Row.NextStep = GetNextStep_StockAdjustmentAsSurplus(Source, RowItemList, Row);
 		Else
 			For Each Row In IDInfoRows Do
@@ -711,20 +716,20 @@ Procedure FillRowID_StockAdjustmentAsSurplus(Source)
 					Row.NextStep = GetNextStep_StockAdjustmentAsSurplus(Source, RowItemList, Row);
 					Continue;
 				EndIf;
-				FillRowID(Source, Row, RowItemList);
+				FillRowID(Source, Row, RowItemList, Cancel);
 				Row.NextStep = GetNextStep_StockAdjustmentAsSurplus(Source, RowItemList, Row);
 			EndDo;
 		EndIf;
 	EndDo;
 EndProcedure
 
-Procedure FillRowID_StockAdjustmentAsWriteOff(Source)
+Procedure FillRowID_StockAdjustmentAsWriteOff(Source, Cancel)
 	For Each RowItemList In Source.ItemList Do
 		Row = Undefined;
 		IDInfoRows = Source.RowIDInfo.FindRows(New Structure("Key", RowItemList.Key));
 		If IDInfoRows.Count() = 0 Then
 			Row = Source.RowIDInfo.Add();
-			FillRowID(Source, Row, RowItemList);
+			FillRowID(Source, Row, RowItemList, Cancel);
 			Row.NextStep = GetNextStep_StockAdjustmentAsWriteOff(Source, RowItemList, Row);
 		Else
 			For Each Row In IDInfoRows Do
@@ -732,20 +737,20 @@ Procedure FillRowID_StockAdjustmentAsWriteOff(Source)
 					Row.NextStep = GetNextStep_StockAdjustmentAsWriteOff(Source, RowItemList, Row);
 					Continue;
 				EndIf;
-				FillRowID(Source, Row, RowItemList);
+				FillRowID(Source, Row, RowItemList, Cancel);
 				Row.NextStep = GetNextStep_StockAdjustmentAsWriteOff(Source, RowItemList, Row);
 			EndDo;
 		EndIf;
 	EndDo;
 EndProcedure
 
-Procedure FillRowID_PR(Source)
+Procedure FillRowID_PR(Source, Cancel)
 	For Each RowItemList In Source.ItemList Do
 		Row = Undefined;
 		IDInfoRows = Source.RowIDInfo.FindRows(New Structure("Key", RowItemList.Key));
 		If IDInfoRows.Count() = 0 Then
 			Row = Source.RowIDInfo.Add();
-			FillRowID(Source, Row, RowItemList);
+			FillRowID(Source, Row, RowItemList, Cancel);
 			Row.NextStep = GetNextStep_PR(Source, RowItemList, Row);
 		Else
 			For Each Row In IDInfoRows Do
@@ -753,20 +758,20 @@ Procedure FillRowID_PR(Source)
 					Row.NextStep = GetNextStep_PR(Source, RowItemList, Row);
 					Continue;
 				EndIf;
-				FillRowID(Source, Row, RowItemList);
+				FillRowID(Source, Row, RowItemList, Cancel);
 				Row.NextStep = GetNextStep_PR(Source, RowItemList, Row);
 			EndDo;
 		EndIf;
 	EndDo;
 EndProcedure
 
-Procedure FillRowID_PRO(Source)
+Procedure FillRowID_PRO(Source, Cancel)
 	For Each RowItemList In Source.ItemList Do
 		Row = Undefined;
 		IDInfoRows = Source.RowIDInfo.FindRows(New Structure("Key", RowItemList.Key));
 		If IDInfoRows.Count() = 0 Then
 			Row = Source.RowIDInfo.Add();
-			FillRowID(Source, Row, RowItemList);
+			FillRowID(Source, Row, RowItemList, Cancel);
 			Row.NextStep = GetNextStep_PRO(Source, RowItemList, Row);
 		Else
 			For Each Row In IDInfoRows Do
@@ -774,20 +779,20 @@ Procedure FillRowID_PRO(Source)
 					Row.NextStep = GetNextStep_PRO(Source, RowItemList, Row);
 					Continue;
 				EndIf;
-				FillRowID(Source, Row, RowItemList);
+				FillRowID(Source, Row, RowItemList, Cancel);
 				Row.NextStep = GetNextStep_PRO(Source, RowItemList, Row);
 			EndDo;
 		EndIf;
 	EndDo;
 EndProcedure
 
-Procedure FillRowID_SR(Source)
+Procedure FillRowID_SR(Source, Cancel)
 	For Each RowItemList In Source.ItemList Do
 		Row = Undefined;
 		IDInfoRows = Source.RowIDInfo.FindRows(New Structure("Key", RowItemList.Key));
 		If IDInfoRows.Count() = 0 Then
 			Row = Source.RowIDInfo.Add();
-			FillRowID(Source, Row, RowItemList);
+			FillRowID(Source, Row, RowItemList, Cancel);
 			Row.NextStep = GetNextStep_SR(Source, RowItemList, Row);
 		Else
 			For Each Row In IDInfoRows Do
@@ -795,20 +800,20 @@ Procedure FillRowID_SR(Source)
 					Row.NextStep = GetNextStep_SR(Source, RowItemList, Row);
 					Continue;
 				EndIf;
-				FillRowID(Source, Row, RowItemList);
+				FillRowID(Source, Row, RowItemList, Cancel);
 				Row.NextStep = GetNextStep_SR(Source, RowItemList, Row);
 			EndDo;
 		EndIf;
 	EndDo;
 EndProcedure
 
-Procedure FillRowID_SRO(Source)
+Procedure FillRowID_SRO(Source, Cancel)
 	For Each RowItemList In Source.ItemList Do
 		Row = Undefined;
 		IDInfoRows = Source.RowIDInfo.FindRows(New Structure("Key", RowItemList.Key));
 		If IDInfoRows.Count() = 0 Then
 			Row = Source.RowIDInfo.Add();
-			FillRowID(Source, Row, RowItemList);
+			FillRowID(Source, Row, RowItemList, Cancel);
 			Row.NextStep = GetNextStep_SRO(Source, RowItemList, Row);
 		Else
 			For Each Row In IDInfoRows Do
@@ -816,20 +821,20 @@ Procedure FillRowID_SRO(Source)
 					Row.NextStep = GetNextStep_SRO(Source, RowItemList, Row);
 					Continue;
 				EndIf;
-				FillRowID(Source, Row, RowItemList);
+				FillRowID(Source, Row, RowItemList, Cancel);
 				Row.NextStep = GetNextStep_SRO(Source, RowItemList, Row);
 			EndDo;
 		EndIf;
 	EndDo;
 EndProcedure
 
-Procedure FillRowID_RSR(Source)
+Procedure FillRowID_RSR(Source, Cancel)
 	For Each RowItemList In Source.ItemList Do
 		Row = Undefined;
 		IDInfoRows = Source.RowIDInfo.FindRows(New Structure("Key", RowItemList.Key));
 		If IDInfoRows.Count() = 0 Then
 			Row = Source.RowIDInfo.Add();
-			FillRowID(Source, Row, RowItemList);
+			FillRowID(Source, Row, RowItemList, Cancel);
 			Row.NextStep = GetNextStep_RSR(Source, RowItemList, Row);
 		Else
 			For Each Row In IDInfoRows Do
@@ -837,20 +842,20 @@ Procedure FillRowID_RSR(Source)
 					Row.NextStep = GetNextStep_RSR(Source, RowItemList, Row);
 					Continue;
 				EndIf;
-				FillRowID(Source, Row, RowItemList);
+				FillRowID(Source, Row, RowItemList, Cancel);
 				Row.NextStep = GetNextStep_RSR(Source, RowItemList, Row);
 			EndDo;
 		EndIf;
 	EndDo;
 EndProcedure
 
-Procedure FillRowID_RRR(Source)
+Procedure FillRowID_RRR(Source, Cancel)
 	For Each RowItemList In Source.ItemList Do
 		Row = Undefined;
 		IDInfoRows = Source.RowIDInfo.FindRows(New Structure("Key", RowItemList.Key));
 		If IDInfoRows.Count() = 0 Then
 			Row = Source.RowIDInfo.Add();
-			FillRowID(Source, Row, RowItemList);
+			FillRowID(Source, Row, RowItemList, Cancel);
 			Row.NextStep = GetNextStep_RRR(Source, RowItemList, Row);
 		Else
 			For Each Row In IDInfoRows Do
@@ -858,20 +863,20 @@ Procedure FillRowID_RRR(Source)
 					Row.NextStep = GetNextStep_RRR(Source, RowItemList, Row);
 					Continue;
 				EndIf;
-				FillRowID(Source, Row, RowItemList);
+				FillRowID(Source, Row, RowItemList, Cancel);
 				Row.NextStep = GetNextStep_RRR(Source, RowItemList, Row);
 			EndDo;
 		EndIf;
 	EndDo;
 EndProcedure
 
-Procedure FillRowID_PRR(Source)
+Procedure FillRowID_PRR(Source, Cancel)
 	For Each RowItemList In Source.ItemList Do
 		Row = Undefined;
 		IDInfoRows = Source.RowIDInfo.FindRows(New Structure("Key", RowItemList.Key));
 		If IDInfoRows.Count() = 0 Then
 			Row = Source.RowIDInfo.Add();
-			FillRowID(Source, Row, RowItemList);
+			FillRowID(Source, Row, RowItemList, Cancel);
 			Row.NextStep = GetNextStep_PRR(Source, RowItemList, Row);
 		Else
 			For Each Row In IDInfoRows Do
@@ -879,7 +884,7 @@ Procedure FillRowID_PRR(Source)
 					Row.NextStep = GetNextStep_PRR(Source, RowItemList, Row);
 					Continue;
 				EndIf;
-				FillRowID(Source, Row, RowItemList);
+				FillRowID(Source, Row, RowItemList, Cancel);
 				Row.NextStep = GetNextStep_PRR(Source, RowItemList, Row);
 			EndDo;
 		EndIf;
@@ -1030,7 +1035,7 @@ EndFunction
 
 #EndRegion
 
-Procedure FillRowID(Source, Row, RowItemList)
+Procedure FillRowID(Source, Row, RowItemList, Cancel)
 	Row.Key      = RowItemList.Key;
 	Row.RowID    = RowItemList.Key;
 	If CommonFunctionsClientServer.ObjectHasProperty(RowItemList, "Difference") Then
@@ -1038,10 +1043,10 @@ Procedure FillRowID(Source, Row, RowItemList)
 	Else
 		Row.Quantity = RowItemList.QuantityInBaseUnit;
 	EndIf;
-	Row.RowRef = FindOrCreateRowIDRef(Source, Row, RowItemList);
+	Row.RowRef = FindOrCreateRowIDRef(Source, Row, RowItemList, Cancel);
 EndProcedure
 
-Function FindOrCreateRowIDRef(Source, Row, RowItemList)
+Function FindOrCreateRowIDRef(Source, Row, RowItemList, Cancel)
 	Query = New Query();
 	Query.Text =
 	"SELECT
@@ -1059,11 +1064,19 @@ Function FindOrCreateRowIDRef(Source, Row, RowItemList)
 	Else
 		RowRefObject = Catalogs.RowIDs.CreateItem();
 	EndIf;
-	UpdateRowIDCatalog(Source, Row, RowItemList, RowRefObject);
+	UpdateRowIDCatalog(Source, Row, RowItemList, RowRefObject, Cancel);
 	Return RowRefObject.Ref;
 EndFunction
 
-Procedure UpdateRowIDCatalog(Source, Row, RowItemList, RowRefObject)
+Procedure UpdateRowIDCatalog(Source, Row, RowItemList, RowRefObject, Cancel)
+	FieldsForCheckRowRef = Undefined;
+	CachedObjectBefore   = Undefined;
+	CachedObjectAfter    = Undefined;
+	If ValueIsFilled(Source.Ref) Then
+		FieldsForCheckRowRef = GetFieldsForCheckRowRef(Source, RowRefObject);
+		CachedObjectBefore   = GetRowRefCache(RowRefObject, FieldsForCheckRowRef);
+	EndIf;
+	
 	FillPropertyValues(RowRefObject, Source);
 	FillPropertyValues(RowRefObject, RowItemList);
 
@@ -1087,9 +1100,145 @@ Procedure UpdateRowIDCatalog(Source, Row, RowItemList, RowRefObject)
 	ElsIf Is(Source).SR Then
 		RowRefObject.TransactionTypeGR = Enums.GoodsReceiptTransactionTypes.ReturnFromCustomer;
 	EndIf;
-
-	RowRefObject.Write();
+	
+	If ValueIsFilled(Source.Ref) Then
+		CachedObjectAfter = GetRowRefCache(RowRefObject, FieldsForCheckRowRef);
+		IsDifference = IsDifferenceInCachedObjects(CachedObjectBefore, CachedObjectAfter, FieldsForCheckRowRef);
+		If IsDifference.Difference Then
+			Cancel = True;
+			
+			// show user message
+			For Each Difference In IsDifference.Fields Do
+				If ValueIsFilled(Difference.DataPath) Then
+					If Find(Difference.DataPath, "ItemList") <> 0 Then
+						CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_098, 
+							RowItemList.LineNumber, Difference.FieldName, Difference.ValueBefore, Difference.ValueAfter),
+							"ItemList[" + Format((RowItemList.LineNumber - 1), "NZ=0; NG=0;") + "]." 
+							+ StrReplace(Difference.DataPath, "ItemList.", ""), Source);
+					Else
+						CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_099,
+							Difference.FieldName, Difference.ValueBefore, Difference.ValueAfter),
+							Difference.DataPath, Source);
+					EndIf;
+				Else
+					CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_100,
+						Difference.ValueBefore, Difference.ValueAfter));
+				EndIf;
+			EndDo;
+		EndIf;
+	EndIf;
+	
+	If Not Cancel Then
+		RowRefObject.Write();
+	EndIf;
 EndProcedure
+
+Function GetFieldsForCheckRowRef(Source, RowRefObject)
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	TM1010B_RowIDMovements.Recorder
+	|INTO tmpRecorders
+	|FROM
+	|	AccumulationRegister.TM1010B_RowIDMovements AS TM1010B_RowIDMovements
+	|WHERE
+	|	TM1010B_RowIDMovements.RowRef = &RowRef
+	|	AND TM1010B_RowIDMovements.RecordType = VALUE(AccumulationRecordType.Expense)
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	TM1010T_RowIDMovements.Recorder
+	|FROM
+	|	AccumulationRegister.TM1010T_RowIDMovements AS TM1010T_RowIDMovements
+	|WHERE
+	|	TM1010T_RowIDMovements.RowRef = &RowRef
+	|	AND TM1010T_RowIDMovements.Quantity < 0
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	tmpRecorders.Recorder
+	|FROM
+	|	tmpRecorders AS tmpRecorders
+	|GROUP BY
+	|	tmpRecorders.Recorder";
+	Query.SetParameter("RowRef", RowRefObject.Ref);
+	QueryResult = Query.Execute();
+	QueryTable = QueryResult.Unload();
+	
+	ExternalLinkedDocsTable = New ValueTable();
+	ExternalLinkedDocsTable.Columns.Add("Doc");
+	
+	DocAliases = DocAliases();
+	
+	For Each Row In QueryTable Do
+		For Each KeyValue In Is(Row.Recorder) Do
+			If KeyValue.Value Then
+				ExternalLinkedDocsTable.Add().Doc = DocAliases[KeyValue.Key];
+				Break;
+			EndIf;
+		EndDo;
+	EndDo;
+	ExternalLinkedDocsTable.GroupBy("Doc");
+	
+	FieldsToLock_ExternalLinkedDocs =
+	GetFieldsToLock_ExternalLinkedDocs(Source.Ref, ExternalLinkedDocsTable.UnloadColumn("Doc"));
+	
+	AllFields = New ValueTable();
+	AllFields.Columns.Add("FieldName");
+	AllFields.Columns.Add("DataPath");
+	IsFieldName = True;
+	For Each Row In FieldsToLock_ExternalLinkedDocs.RowRefFilter Do
+		If IsFieldName Then
+			NewRow = AllFields.Add();
+			NewRow.FieldName = Row.FieldName;
+			IsFieldName = False;
+		Else
+			NewRow.DataPath = Row.FieldName;
+			IsFieldName = True;
+		EndIf;
+	EndDo;
+	If AllFields.Count() Then
+		AllFields.Add().FieldName = "RowID";
+		AllFields.Add().FieldName = "Basis";
+	EndIf;
+	
+	AllFields.GroupBy("FieldName, DataPath");
+	Return AllFields;
+EndFunction
+
+Function GetRowRefCache(RowRefObject, FieldsForCheckRowRef)
+	CachedObject = New Structure();
+	For Each Row In FieldsForCheckRowRef Do
+		CachedObject.Insert(TrimAll(Row.FieldName), RowRefObject[TrimAll(Row.FieldName)]);
+	EndDo;
+	Return CachedObject;
+EndFunction
+
+Function IsDifferenceInCachedObjects(CachedObjectBefore, CachedObjectAfter, FieldsForCheck)
+	Result = New Structure("Difference, Fields");
+	Fields = New Array();
+	For Each Row In FieldsForCheck Do
+		ValueBefore = CachedObjectBefore[Row.FieldName];
+		ValueAfter  = CachedObjectAfter[Row.FieldName];
+		
+		If Not ValueIsFilled(ValueBefore) Then
+			If ValueIsFilled(ValueAfter) Then
+				Fields.Add(New Structure("FieldName, DataPath, ValueBefore, ValueAfter", 
+					Row.FieldName, Row.DataPath, ValueBefore, ValueAfter));
+			EndIf;
+		Else // is filled
+			If ValueBefore <> ValueAfter Then
+				Fields.Add(New Structure("FieldName, DataPath, ValueBefore, ValueAfter", 
+					Row.FieldName, Row.DataPath, ValueBefore, ValueAfter));
+			EndIf;
+		EndIf;
+	EndDo;
+	Result.Difference = Fields.Count() > 0;
+	Result.Fields     = Fields;
+	Return Result;
+EndFunction
 
 Function GetBalanceQuantity(Source, Row)
 	Query = New Query();
@@ -3685,16 +3834,35 @@ EndProcedure
 
 
 Function GetFieldsToLock_ExternalLink(DocAliase, ExternalDocAliase)
-	Result = New Structure("Header, ItemList");
+	Result = New Structure("Header, ItemList, RowRefFilter");
 	Aliases = DocAliases();
 	If DocAliase = Aliases.SO Then
 		
 		If ExternalDocAliase = Aliases.SI Then
 			Result.Header   = "Company, Branch, Store, Partner, LegalName, Agreement, Currency, PriceIncludeTax, Status";
 			Result.ItemList = "Item, ItemKey, Store, ProcurementMethod, Cancel, CancelReason";
+			// Attribute name, Data path (use for show user message)
+			Result.RowRefFilter = "Company          , Company,
+								  |Branch           , Branch,
+								  |Partner          , Partner,
+								  |LegalName        , LegalName,
+								  |Agreement        , Agreement,
+								  |Currency         , Currency,
+								  |PriceIncludeTax  , PriceIncludeTax,
+								  |ItemKey          , ItemList.ItemKey,
+								  |Store            , ItemList.Store";
+			
 		ElsIf ExternalDocAliase = Aliases.SC Then
-			Result.Header   = "Company, Branch, Store, Partner, LegalName, Status, ItemListSetProcurementMethods";
-			Result.ItemList = "Item, ItemKey, Store, ProcurementMethod, Cancel, CancelReason";
+			Result.Header       = "Company, Branch, Store, Partner, LegalName, Status, ItemListSetProcurementMethods";
+			Result.ItemList     = "Item, ItemKey, Store, ProcurementMethod, Cancel, CancelReason";
+			// Attribute name, Data path (use for show user message)
+			Result.RowRefFilter = "Company          , Company,
+								  |Branch           , Branch,
+								  |Partner          , Partner,
+								  |LegalName        , LegalName,
+								  |TransactionTypeSC, ,
+								  |ItemKey          , ItemList.ItemKey,
+								  |Store            , ItemList.Store";
 		EndIf;
 		
 	ElsIf DocAliase = Aliases.SI Then
@@ -3702,6 +3870,14 @@ Function GetFieldsToLock_ExternalLink(DocAliase, ExternalDocAliase)
 		If ExternalDocAliase = Aliases.SC Then
 			Result.Header   = "Company, Branch, Store, Partner, LegalName";
 			Result.ItemList = "Item, ItemKey, Store, UseShipmentConfirmation, SalesOrder";
+			// Attribute name, Data path (use for show user message)
+			Result.RowRefFilter = "Company          , Company,
+								  |Branch           , Branch,
+								  |Partner          , Partner,
+								  |LegalName        , LegalName,
+								  |TransactionTypeSC, ,
+								  |ItemKey          , ItemList.ItemKey,
+								  |Store            , ItemList.Store";
 		EndIf;
 	
 	ElsIf DocAliase = Aliases.SC Then
@@ -3709,7 +3885,15 @@ Function GetFieldsToLock_ExternalLink(DocAliase, ExternalDocAliase)
 		If ExternalDocAliase = Aliases.SI Then
 			Result.Header   = "Company, Branch, Store, Partner, LegalName, TransactionType";
 			Result.ItemList = "Item, ItemKey, Store, ShipmentBasis, SalesOrder, SalesInvoice, InventoryTransferOrder,
-				|InventoryTransfer, PurchaseReturnOrder, PurchaseReturn";		
+				|InventoryTransfer, PurchaseReturnOrder, PurchaseReturn";
+			// Attribute name, Data path (use for show user message)
+			Result.RowRefFilter = "Company          , Company,
+								  |Branch           , Branch,
+								  |Partner          , Partner,
+								  |LegalName        , LegalName,
+								  |TransactionTypeSC, ,
+								  |ItemKey          , ItemList.ItemKey,
+								  |Store            , ItemList.Store";
 		EndIf;
 	
 	EndIf;
@@ -7854,20 +8038,26 @@ Function GetFieldsToLock_ExternalLinkedDocs(Ref, ArrayOfExternalLinkedDocs)
 	Table_Header.Columns.Add("FieldName");
 	Table_Header.Columns.Add("LinkedDoc");
 	
+	Table_RowRefFilter = New ValueTable();
+	Table_RowRefFilter.Columns.Add("FieldName");
+	Table_RowRefFilter.Columns.Add("LinkedDoc");
+	
 	Is = Is(Ref);
 	DocAliases = DocAliases();
 	If Is.SO Then
 		
 		If AliasIsPresent(ArrayOfExternalLinkedDocs, DocAliases.SI) Then
 			Fields = GetFieldsToLock_ExternalLink(DocAliases.SO, DocAliases.SI);
-			AddArrayToFieldsTable(Table_Header   , Fields.Header   , DocAliases.SI);
-			AddArrayToFieldsTable(Table_ItemList , Fields.ItemList , DocAliases.SI);
+			AddArrayToFieldsTable(Table_Header       , Fields.Header       , DocAliases.SI);
+			AddArrayToFieldsTable(Table_ItemList     , Fields.ItemList     , DocAliases.SI);
+			AddArrayToFieldsTable(Table_RowRefFilter , Fields.RowRefFilter , DocAliases.SI);
 		EndIf;
 		
 		If AliasIsPresent(ArrayOfExternalLinkedDocs, DocAliases.SC) Then
 			Fields = GetFieldsToLock_ExternalLink(DocAliases.SO, DocAliases.SC);
-			AddArrayToFieldsTable(Table_Header   , Fields.Header   , DocAliases.SC);
-			AddArrayToFieldsTable(Table_ItemList , Fields.ItemList , DocAliases.SC);
+			AddArrayToFieldsTable(Table_Header       , Fields.Header       , DocAliases.SC);
+			AddArrayToFieldsTable(Table_ItemList     , Fields.ItemList     , DocAliases.SC);
+			AddArrayToFieldsTable(Table_RowRefFilter , Fields.RowRefFilter , DocAliases.SC);
 		EndIf;
 			
 	EndIf;
@@ -7875,16 +8065,18 @@ Function GetFieldsToLock_ExternalLinkedDocs(Ref, ArrayOfExternalLinkedDocs)
 	If Is.SI Then
 		If AliasIsPresent(ArrayOfExternalLinkedDocs, DocAliases.SC) Then
 			Fields = GetFieldsToLock_ExternalLink(DocAliases.SI, DocAliases.SC);
-			AddArrayToFieldsTable(Table_Header   , Fields.Header   , DocAliases.SC);
-			AddArrayToFieldsTable(Table_ItemList , Fields.ItemList , DocAliases.SC);
+			AddArrayToFieldsTable(Table_Header       , Fields.Header       , DocAliases.SC);
+			AddArrayToFieldsTable(Table_ItemList     , Fields.ItemList     , DocAliases.SC);
+			AddArrayToFieldsTable(Table_RowRefFilter , Fields.RowRefFilter , DocAliases.SC);
 		EndIf;
 	EndIf;
 	
 	If Is.SC Then 
 		If AliasIsPresent(ArrayOfExternalLinkedDocs, DocAliases.SI) Then
 			Fields = GetFieldsToLock_ExternalLink(DocAliases.SC, DocAliases.SI);
-			AddArrayToFieldsTable(Table_Header   , Fields.Header   , DocAliases.SI);
-			AddArrayToFieldsTable(Table_ItemList , Fields.ItemList , DocAliases.SI);
+			AddArrayToFieldsTable(Table_Header       , Fields.Header       , DocAliases.SI);
+			AddArrayToFieldsTable(Table_ItemList     , Fields.ItemList     , DocAliases.SI);
+			AddArrayToFieldsTable(Table_RowRefFilter , Fields.RowRefFilter , DocAliases.SI);
 		EndIf;
 	EndIf;
 	
@@ -7936,7 +8128,7 @@ Function GetFieldsToLock_ExternalLinkedDocs(Ref, ArrayOfExternalLinkedDocs)
 	If Is.PRR Then 
 	EndIf;
 	
-	Return New Structure("Header, ItemList", Table_Header, Table_ItemList);
+	Return New Structure("Header, ItemList, RowRefFilter", Table_Header, Table_ItemList, Table_RowRefFilter);
 EndFunction
 
 Function GetFieldsToLock_InternalLinkedDocs(Ref, ArrayOfInternalLinkedDocs)

@@ -3497,8 +3497,7 @@
         </title>
         <id>10</id>
         <valueType>
-          <types>String</types>
-          <stringQualifiers/>
+          <types>Boolean</types>
         </valueType>
         <view>
           <common>true</common>
@@ -3533,9 +3532,7 @@
         <id>12</id>
         <valueType>
           <types>String</types>
-          <stringQualifiers>
-            <length>10</length>
-          </stringQualifiers>
+          <stringQualifiers/>
         </valueType>
         <view>
           <common>true</common>

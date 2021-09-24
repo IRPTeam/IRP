@@ -228,7 +228,6 @@
   <commonModules>CommonModule.CatRetailCustomersClient</commonModules>
   <commonModules>CommonModule.CatRetailCustomersServer</commonModules>
   <commonModules>CommonModule.CatUserGroupsServer</commonModules>
-  <commonModules>CommonModule.CommonFilesServer</commonModules>
   <commonModules>CommonModule.CommonFormActions</commonModules>
   <commonModules>CommonModule.CommonFormActionsServer</commonModules>
   <commonModules>CommonModule.CommonFunctionsClientServer</commonModules>

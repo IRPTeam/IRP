@@ -3832,97 +3832,391 @@ Procedure EnableRequiredFilterSets(FilterSets, Query, QueryArray)
 	EndIf;
 EndProcedure
 
+// External link
 
 Function GetFieldsToLock_ExternalLink(DocAliase, ExternalDocAliase)
-	Result = New Structure("Header, ItemList, RowRefFilter");
 	Aliases = DocAliases();
 	If DocAliase = Aliases.SO Then
-		
-		If ExternalDocAliase = Aliases.SI Then
-			Result.Header   = "Company, Branch, Store, Partner, LegalName, Agreement, Currency, PriceIncludeTax, Status";
-			Result.ItemList = "Item, ItemKey, Store, ProcurementMethod, Cancel, CancelReason";
-			// Attribute name, Data path (use for show user message)
-			Result.RowRefFilter = "Company          , Company,
-								  |Branch           , Branch,
-								  |Partner          , Partner,
-								  |LegalName        , LegalName,
-								  |Agreement        , Agreement,
-								  |Currency         , Currency,
-								  |PriceIncludeTax  , PriceIncludeTax,
-								  |ItemKey          , ItemList.ItemKey,
-								  |Store            , ItemList.Store";
-			
-		ElsIf ExternalDocAliase = Aliases.SC Then
-			Result.Header       = "Company, Branch, Store, Partner, LegalName, Status, ItemListSetProcurementMethods";
-			Result.ItemList     = "Item, ItemKey, Store, ProcurementMethod, Cancel, CancelReason";
-			// Attribute name, Data path (use for show user message)
-			Result.RowRefFilter = "Company          , Company,
-								  |Branch           , Branch,
-								  |Partner          , Partner,
-								  |LegalName        , LegalName,
-								  |TransactionTypeSC, ,
-								  |ItemKey          , ItemList.ItemKey,
-								  |Store            , ItemList.Store";
-		EndIf;
-		
+		Return GetFieldsToLock_ExternalLink_SO(ExternalDocAliase, Aliases);
 	ElsIf DocAliase = Aliases.SI Then
-		
-		If ExternalDocAliase = Aliases.SC Then
-			Result.Header   = "Company, Branch, Store, Partner, LegalName";
-			Result.ItemList = "Item, ItemKey, Store, UseShipmentConfirmation, SalesOrder";
-			// Attribute name, Data path (use for show user message)
-			Result.RowRefFilter = "Company          , Company,
-								  |Branch           , Branch,
-								  |Partner          , Partner,
-								  |LegalName        , LegalName,
-								  |TransactionTypeSC, ,
-								  |ItemKey          , ItemList.ItemKey,
-								  |Store            , ItemList.Store";
-		EndIf;
-	
+		Return GetFieldsToLock_ExternalLink_SI(ExternalDocAliase, Aliases);
 	ElsIf DocAliase = Aliases.SC Then
+		Return GetFieldsToLock_ExternalLink_SC(ExternalDocAliase, Aliases);
+	ElsIf DocAliase = Aliases.PO Then
+		Return GetFieldsToLock_ExternalLink_PO(ExternalDocAliase, Aliases);
+	ElsIf DocAliase = Aliases.PI Then
+		Return GetFieldsToLock_ExternalLink_PI(ExternalDocAliase, Aliases);
+	ElsIf DocAliase = Aliases.GR Then
+		Return GetFieldsToLock_ExternalLink_GR(ExternalDocAliase, Aliases);
+	ElsIf DocAliase = Aliases.ITO Then
+		Return GetFieldsToLock_ExternalLink_ITO(ExternalDocAliase, Aliases);
+	ElsIf DocAliase = Aliases.IT Then
+		Return GetFieldsToLock_ExternalLink_IT(ExternalDocAliase, Aliases);
+	ElsIf DocAliase = Aliases.ISR Then
+		Return GetFieldsToLock_ExternalLink_ISR(ExternalDocAliase, Aliases);
+	ElsIf DocAliase = Aliases.PhysicalInventory Then
+		Return GetFieldsToLock_ExternalLink_PhysicalInventory(ExternalDocAliase, Aliases);
+	ElsIf DocAliase = Aliases.PR Then
+		Return GetFieldsToLock_ExternalLink_PR(ExternalDocAliase, Aliases);
+	ElsIf DocAliase = Aliases.PRO Then
+		Return GetFieldsToLock_ExternalLink_PRO(ExternalDocAliase, Aliases);
+	ElsIf DocAliase = Aliases.SR Then
+		Return GetFieldsToLock_ExternalLink_SR(ExternalDocAliase, Aliases);
+	ElsIf DocAliase = Aliases.SRO Then
+		Return GetFieldsToLock_ExternalLink_SRO(ExternalDocAliase, Aliases);
+	ElsIf DocAliase = Aliases.RSR Then
+		Return GetFieldsToLock_ExternalLink_RSR(ExternalDocAliase, Aliases);
+	Else
+		Raise StrTemplate("Not supported External link for [%1]", DocAliase);
+	EndIf;
+	Return Undefined;
+EndFunction
+
+// [OK]
+Function GetFieldsToLock_ExternalLink_SO(ExternalDocAliase, Aliases)
+	Result = New Structure("Header, ItemList, RowRefFilter");
+	If ExternalDocAliase = Aliases.SI Then
+		Result.Header   = "Company, Branch, Store, Partner, LegalName, Agreement, Currency, PriceIncludeTax, Status,
+			|ItemListSetProcurementMethods";
+		Result.ItemList = "Item, ItemKey, Store, ProcurementMethod, Cancel, CancelReason";
+		// Attribute name, Data path (use for show user message)
+		Result.RowRefFilter = "Company           , Company,
+							  |Branch            , Branch,
+							  |Partner           , Partner,
+							  |LegalName         , LegalName,
+							  |Agreement         , Agreement,
+							  |Currency          , Currency,
+							  |PriceIncludeTax   , PriceIncludeTax,
+							  |ProcurementMethod , ItemList.ProcurementMethod,
+							  |ItemKey           , ItemList.ItemKey,
+							  |Store             , ItemList.Store";
 		
-		If ExternalDocAliase = Aliases.SI Then
-			Result.Header   = "Company, Branch, Store, Partner, LegalName, TransactionType";
-			Result.ItemList = "Item, ItemKey, Store, ShipmentBasis, SalesOrder, SalesInvoice, InventoryTransferOrder,
-				|InventoryTransfer, PurchaseReturnOrder, PurchaseReturn";
-			// Attribute name, Data path (use for show user message)
-			Result.RowRefFilter = "Company          , Company,
-								  |Branch           , Branch,
-								  |Partner          , Partner,
-								  |LegalName        , LegalName,
-								  |TransactionTypeSC, ,
-								  |ItemKey          , ItemList.ItemKey,
-								  |Store            , ItemList.Store";
-		EndIf;
-	
+	ElsIf ExternalDocAliase = Aliases.PRR Then
+		Result.Header   = "Company, Branch, Store, Status,ItemListSetProcurementMethods";
+		Result.ItemList = "Item, ItemKey, Store, ProcurementMethod, Cancel, CancelReason";
+		// Attribute name, Data path (use for show user message)
+		Result.RowRefFilter = "Company           , Company,
+							  |Branch            , Branch,
+							  |ProcurementMethod , ItemList.ProcurementMethod,
+							  |ItemKey           , ItemList.ItemKey,
+							  |Store             , ItemList.Store";
+		
+	ElsIf ExternalDocAliase = Aliases.SC Then
+		Result.Header       = "Company, Branch, Store, Partner, LegalName, Status, ItemListSetProcurementMethods";
+		Result.ItemList     = "Item, ItemKey, Store, ProcurementMethod, Cancel, CancelReason";
+		// Attribute name, Data path (use for show user message)
+		Result.RowRefFilter = "Company          , Company,
+							  |Branch           , Branch,
+							  |Partner          , Partner,
+							  |LegalName        , LegalName,
+							  |TransactionTypeSC, ,
+							  |ItemKey          , ItemList.ItemKey,
+							  |Store            , ItemList.Store";
+		
+	ElsIf ExternalDocAliase = Aliases.PO Or ExternalDocAliase = Aliases.PI Then
+		Result.Header   = "Company, Branch, Store, Status, ItemListSetProcurementMethods";
+		Result.ItemList = "Item, ItemKey, Store, ProcurementMethod, Cancel, CancelReason";
+		// Attribute name, Data path (use for show user message)
+		Result.RowRefFilter = "Company           , Company,
+							  |Branch            , Branch,
+							  |ProcurementMethod , ItemList.ProcurementMethod,
+							  |ItemKey           , ItemList.ItemKey,
+							  |Store             , ItemList.Store";
+	Else
+		Raise StrTemplate("Not supported External link for [SO] to [%1]", ExternalDocAliase);
 	EndIf;
 	Return Result;
 EndFunction
 
+Function GetFieldsToLock_ExternalLink_SI(ExternalDocAliase, Aliases)
+	Result = New Structure("Header, ItemList, RowRefFilter");
+	If ExternalDocAliase = Aliases.SC Then
+		Result.Header   = "Company, Branch, Store, Partner, LegalName";
+		Result.ItemList = "Item, ItemKey, Store, UseShipmentConfirmation, SalesOrder";
+		// Attribute name, Data path (use for show user message)
+		Result.RowRefFilter = "Company          , Company,
+							  |Branch           , Branch,
+							  |Partner          , Partner,
+							  |LegalName        , LegalName,
+							  |TransactionTypeSC, ,
+							  |ItemKey          , ItemList.ItemKey,
+							  |Store            , ItemList.Store";
+	
+	ElsIf ExternalDocAliase = Aliases.SRO Or ExternalDocAliase = Aliases.SR Then
+		Result.Header   = "Company, Branch, Store, Partner, LegalName, Agreement, Currency, PriceIncludeTax, Status,
+			|ItemListSetProcurementMethods";
+		Result.ItemList = "Item, ItemKey, Store, ProcurementMethod, Cancel, CancelReason";
+		// Attribute name, Data path (use for show user message)
+		Result.RowRefFilter = "Company           , Company,
+							  |Branch            , Branch,
+							  |Partner           , Partner,
+							  |LegalName         , LegalName,
+							  |Agreement         , Agreement,
+							  |Currency          , Currency,
+							  |PriceIncludeTax   , PriceIncludeTax,
+							  |ProcurementMethod , ItemList.ProcurementMethod,
+							  |ItemKey           , ItemList.ItemKey,
+							  |Store             , ItemList.Store";
+	Else
+		Raise StrTemplate("Not supported External link for [SI] to [%1]", ExternalDocAliase);
+	EndIf;
+	Return Result;
+EndFunction
+
+Function GetFieldsToLock_ExternalLink_SC(ExternalDocAliase, Aliases)
+	Result = New Structure("Header, ItemList, RowRefFilter");
+	If ExternalDocAliase = Aliases.SI Then
+		Result.Header   = "Company, Branch, Store, Partner, LegalName, TransactionType";
+		Result.ItemList = "Item, ItemKey, Store, ShipmentBasis, SalesOrder, SalesInvoice, InventoryTransferOrder,
+			|InventoryTransfer, PurchaseReturnOrder, PurchaseReturn";
+		// Attribute name, Data path (use for show user message)
+		Result.RowRefFilter = "Company          , Company,
+							  |Branch           , Branch,
+							  |Partner          , Partner,
+							  |LegalName        , LegalName,
+							  |TransactionTypeSC, ,
+							  |ItemKey          , ItemList.ItemKey,
+							  |Store            , ItemList.Store";
+	Else
+		Raise StrTemplate("Not supported External link for [SC] to [%1]", ExternalDocAliase);
+	EndIf;
+	Return Result;
+EndFunction
+
+Function GetFieldsToLock_ExternalLink_PO(ExternalDocAliase, Aliases)
+	Result = New Structure("Header, ItemList, RowRefFilter");
+	Raise StrTemplate("Not supported External link for [PO] to [%1]", ExternalDocAliase);
+	Return Result;
+EndFunction
+
+Function GetFieldsToLock_ExternalLink_PI(ExternalDocAliase, Aliases)
+	Result = New Structure("Header, ItemList, RowRefFilter");
+	Raise StrTemplate("Not supported External link for [PI] to [%1]", ExternalDocAliase);
+	Return Result;
+EndFunction
+
+Function GetFieldsToLock_ExternalLink_GR(ExternalDocAliase, Aliases)
+	Result = New Structure("Header, ItemList, RowRefFilter");
+	Raise StrTemplate("Not supported External link for [GR] to [%1]", ExternalDocAliase);
+	Return Result;
+EndFunction
+
+Function GetFieldsToLock_ExternalLink_ITO(ExternalDocAliase, Aliases)
+	Result = New Structure("Header, ItemList, RowRefFilter");
+	Raise StrTemplate("Not supported External link for [ITO] to [%1]", ExternalDocAliase);
+	Return Result;
+EndFunction
+
+Function GetFieldsToLock_ExternalLink_IT(ExternalDocAliase, Aliases)
+	Result = New Structure("Header, ItemList, RowRefFilter");
+	Raise StrTemplate("Not supported External link for [IT] to [%1]", ExternalDocAliase);
+	Return Result;
+EndFunction
+
+Function GetFieldsToLock_ExternalLink_ISR(ExternalDocAliase, Aliases)
+	Result = New Structure("Header, ItemList, RowRefFilter");
+	Raise StrTemplate("Not supported External link for [ISR] to [%1]", ExternalDocAliase);
+	Return Result;
+EndFunction
+
+Function GetFieldsToLock_ExternalLink_PhysicalInventory(ExternalDocAliase, Aliases)
+	Result = New Structure("Header, ItemList, RowRefFilter");
+	Raise StrTemplate("Not supported External link for [PhysicalInventory] to [%1]", ExternalDocAliase);
+	Return Result;
+EndFunction
+
+Function GetFieldsToLock_ExternalLink_PR(ExternalDocAliase, Aliases)
+	Result = New Structure("Header, ItemList, RowRefFilter");
+	Raise StrTemplate("Not supported External link for [PR] to [%1]", ExternalDocAliase);
+	Return Result;
+EndFunction
+
+Function GetFieldsToLock_ExternalLink_PRO(ExternalDocAliase, Aliases)
+	Result = New Structure("Header, ItemList, RowRefFilter");
+	Raise StrTemplate("Not supported External link for [PRO] to [%1]", ExternalDocAliase);
+	Return Result;
+EndFunction
+
+Function GetFieldsToLock_ExternalLink_SR(ExternalDocAliase, Aliases)
+	Result = New Structure("Header, ItemList, RowRefFilter");
+	Raise StrTemplate("Not supported External link for [SR] to [%1]", ExternalDocAliase);
+	Return Result;
+EndFunction
+
+Function GetFieldsToLock_ExternalLink_SRO(ExternalDocAliase, Aliases)
+	Result = New Structure("Header, ItemList, RowRefFilter");
+	If ExternalDocAliase = Aliases.SR Then
+		Result.Header   = "Company, Branch, Store, Partner, LegalName, Agreement, Currency, PriceIncludeTax, Status";
+		Result.ItemList = "Item, ItemKey, Store, Cancel, CancelReason";
+		// Attribute name, Data path (use for show user message)
+		Result.RowRefFilter = "Company          , Company,
+							  |Branch           , Branch,
+							  |Partner          , Partner,
+							  |LegalName        , LegalName,
+							  |Agreement        , Agreement,
+							  |Currency         , Currency,
+							  |PriceIncludeTax  , PriceIncludeTax,
+							  |ItemKey          , ItemList.ItemKey,
+							  |Store            , ItemList.Store";
+		
+	Else
+		Raise StrTemplate("Not supported External link for [SRO] to [%1]", ExternalDocAliase);
+	EndIf;
+	Return Result;
+EndFunction
+
+Function GetFieldsToLock_ExternalLink_RSR(ExternalDocAliase, Aliases)
+	Result = New Structure("Header, ItemList, RowRefFilter");
+	Raise StrTemplate("Not supported External link for [RSR] to [%1]", ExternalDocAliase);
+	Return Result;
+EndFunction
+
+// Internal link
+
 Function GetFieldsToLock_InternalLink(DocAliase, InternalDocAliase)
-	Result = New Structure("Header, ItemList");
 	Aliases = DocAliases();
 	If DocAliase = Aliases.SI Then
-		
-		If InternalDocAliase = Aliases.SO Then
-			Result.Header   = "Company, Branch, Store, Partner, LegalName, Agreement, Currency, PriceIncludeTax, Store";
-			Result.ItemList = "Item, ItemKey, Store, SalesOrder";
-		ElsIf InternalDocAliase = Aliases.SC Then
-			Result.Header   = "Company, Branch, Store, Partner, LegalName";
-			Result.ItemList = "Item, ItemKey, Store, UseShipmentConfirmation, SalesOrder";
-		EndIf;
-	
+		Return GetFieldsToLock_InternalLink_SI(InternalDocAliase, Aliases);
 	ElsIf DocAliase = Aliases.SC Then
-		
-		If InternalDocAliase = Aliases.SO Or InternalDocAliase = Aliases.SI Then
-			Result.Header   = "Company, Branch, Store, Partner, LegalName, TransactionType";
-			Result.ItemList = "Item, ItemKey, Store, ShipmentBasis, SalesOrder, SalesInvoice, InventoryTransferOrder,
-				|InventoryTransfer, PurchaseReturnOrder, PurchaseReturn";
-		EndIf;
-		
+		Return GetFieldsToLock_InternalLink_SC(InternalDocAliase, Aliases);
+	ElsIf DocAliase = Aliases.PO Then
+		Return GetFieldsToLock_InternalLink_PO(InternalDocAliase, Aliases);
+	ElsIf DocAliase = Aliases.PI Then
+		Return GetFieldsToLock_InternalLink_PI(InternalDocAliase, Aliases);
+	ElsIf DocAliase = Aliases.GR Then
+		Return GetFieldsToLock_InternalLink_GR(InternalDocAliase, Aliases);
+	ElsIf DocAliase = Aliases.ITO Then
+		Return GetFieldsToLock_InternalLink_ITO(InternalDocAliase, Aliases);
+	ElsIf DocAliase = Aliases.IT Then
+		Return GetFieldsToLock_InternalLink_IT(InternalDocAliase, Aliases);
+	ElsIf DocAliase = Aliases.StockAdjustmentAsSurplus Then
+		Return GetFieldsToLock_InternalLink_StockAdjustmentAsSurplus(InternalDocAliase, Aliases);
+	ElsIf DocAliase = Aliases.StockAdjustmentAsWriteOff Then
+		Return GetFieldsToLock_InternalLink_StockAdjustmentAsWriteOff(InternalDocAliase, Aliases);
+	ElsIf DocAliase = Aliases.PR Then
+		Return GetFieldsToLock_InternalLink_PRO(InternalDocAliase, Aliases);
+	ElsIf DocAliase = Aliases.SR Then
+		Return GetFieldsToLock_InternalLink_SR(InternalDocAliase, Aliases);
+	ElsIf DocAliase = Aliases.SRO Then
+		Return GetFieldsToLock_InternalLink_SRO(InternalDocAliase, Aliases);
+	ElsIf DocAliase = Aliases.RRR Then
+		Return GetFieldsToLock_InternalLink_RRR(InternalDocAliase, Aliases);
+	ElsIf DocAliase = Aliases.PRR Then
+		Return GetFieldsToLock_InternalLink_PRR(InternalDocAliase, Aliases);
+	Else
+		Raise StrTemplate("Not supported Internal link for [%1]", DocAliase);
 	EndIf;
+	Return Undefined;
+EndFunction
+
+Function GetFieldsToLock_InternalLink_SI(InternalDocAliase, Aliases)
+	Result = New Structure("Header, ItemList");
+	If InternalDocAliase = Aliases.SO Then
+		Result.Header   = "Company, Branch, Store, Partner, LegalName, Agreement, Currency, PriceIncludeTax, Store";
+		Result.ItemList = "Item, ItemKey, Store, SalesOrder";
+	ElsIf InternalDocAliase = Aliases.SC Then
+		Result.Header   = "Company, Branch, Store, Partner, LegalName";
+		Result.ItemList = "Item, ItemKey, Store, UseShipmentConfirmation, SalesOrder";
+	Else
+		Raise StrTemplate("Not supported Internal link for [SI] to [%1]", InternalDocAliase);
+	EndIf;
+	Return Result;
+EndFunction
 	
+Function GetFieldsToLock_InternalLink_SC(InternalDocAliase, Aliases)
+	Result = New Structure("Header, ItemList");
+	If InternalDocAliase = Aliases.SO Or InternalDocAliase = Aliases.SI Then
+		Result.Header   = "Company, Branch, Store, Partner, LegalName, TransactionType";
+		Result.ItemList = "Item, ItemKey, Store, ShipmentBasis, SalesOrder, SalesInvoice, InventoryTransferOrder,
+			|InventoryTransfer, PurchaseReturnOrder, PurchaseReturn";
+	Else
+		Raise StrTemplate("Not supported Internal link for [SC] to [%1]", InternalDocAliase);
+	EndIf;
+	Return Result;
+EndFunction
+
+Function GetFieldsToLock_InternalLink_PO(InternalDocAliase, Aliases)
+	Result = New Structure("Header, ItemList");
+	Raise StrTemplate("Not supported Internal link for [PO] to [%1]", InternalDocAliase);
+	Return Result;
+EndFunction
+
+Function GetFieldsToLock_InternalLink_PI(InternalDocAliase, Aliases)
+	Result = New Structure("Header, ItemList");
+	Raise StrTemplate("Not supported Internal link for [PI] to [%1]", InternalDocAliase);
+	Return Result;
+EndFunction
+
+Function GetFieldsToLock_InternalLink_GR(InternalDocAliase, Aliases)
+	Result = New Structure("Header, ItemList");
+	Raise StrTemplate("Not supported Internal link for [GR] to [%1]", InternalDocAliase);
+	Return Result;
+EndFunction
+
+Function GetFieldsToLock_InternalLink_ITO(InternalDocAliase, Aliases)
+	Result = New Structure("Header, ItemList");
+	Raise StrTemplate("Not supported Internal link for [ITO] to [%1]", InternalDocAliase);
+	Return Result;
+EndFunction
+
+Function GetFieldsToLock_InternalLink_IT(InternalDocAliase, Aliases)
+	Result = New Structure("Header, ItemList");
+	Raise StrTemplate("Not supported Internal link for [IT] to [%1]", InternalDocAliase);
+	Return Result;
+EndFunction
+
+Function GetFieldsToLock_InternalLink_StockAdjustmentAsSurplus(InternalDocAliase, Aliases)
+	Result = New Structure("Header, ItemList");
+	Raise StrTemplate("Not supported Internal link for [StockAdjustmentAsSurplus] to [%1]", InternalDocAliase);
+	Return Result;
+EndFunction
+
+Function GetFieldsToLock_InternalLink_StockAdjustmentAsWriteOff(InternalDocAliase, Aliases)
+	Result = New Structure("Header, ItemList");
+	Raise StrTemplate("Not supported Internal link for [StockAdjustmentAsWriteOff] to [%1]", InternalDocAliase);
+	Return Result;
+EndFunction
+
+Function GetFieldsToLock_InternalLink_PRO(InternalDocAliase, Aliases)
+	Result = New Structure("Header, ItemList");
+	Raise StrTemplate("Not supported Internal link for [PRO] to [%1]", InternalDocAliase);
+	Return Result;
+EndFunction
+
+Function GetFieldsToLock_InternalLink_SR(InternalDocAliase, Aliases)
+	Result = New Structure("Header, ItemList");
+	If InternalDocAliase = Aliases.SRO Then
+		Result.Header   = "Company, Branch, Store, Partner, LegalName, Agreement, Currency, PriceIncludeTax";
+		Result.ItemList = "Item, ItemKey, Store, SalesInvoice, SalesReturnOrder";
+	ElsIf InternalDocAliase = Aliases.SI Then
+		Result.Header   = "Company, Branch, Store, Partner, LegalName, Agreement, Currency, PriceIncludeTax";
+		Result.ItemList = "Item, ItemKey, Store, SalesInvoice, SalesReturnOrder";
+	Else
+		Raise StrTemplate("Not supported Internal link for [SR] to [%1]", InternalDocAliase);
+	EndIf;
+	Return Result;
+EndFunction
+
+Function GetFieldsToLock_InternalLink_SRO(InternalDocAliase, Aliases)
+	Result = New Structure("Header, ItemList");
+	If InternalDocAliase = Aliases.SI Then
+		Result.Header   = "Company, Branch, Store, Partner, LegalName, Agreement, Currency, PriceIncludeTax, Status";
+		Result.ItemList = "Item, ItemKey, Store, SalesInvoice";
+	Else
+		Raise StrTemplate("Not supported Internal link for [SRO] to [%1]", InternalDocAliase);
+	EndIf;
+	Return Result;
+EndFunction
+
+Function GetFieldsToLock_InternalLink_RRR(InternalDocAliase, Aliases)
+	Result = New Structure("Header, ItemList");
+	Raise StrTemplate("Not supported Internal link for [RRR] to [%1]", InternalDocAliase);
+	Return Result;
+EndFunction
+
+Function GetFieldsToLock_InternalLink_PRR(InternalDocAliase, Aliases)
+	Result = New Structure("Header, ItemList");
+	Raise StrTemplate("Not supported Internal link for [PRR] to [%1]", InternalDocAliase);
 	Return Result;
 EndFunction
 
@@ -4381,6 +4675,77 @@ Procedure ApplyFilterSet_SC_ForPR(Query)
 	|			AND CASE
 	|				WHEN &Filter_TransactionType
 	|					THEN RowRef.TransactionTypeSC = &TransactionType
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_ItemKey
+	|					THEN RowRef.ItemKey = &ItemKey
+	|				ELSE TRUE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Store
+	|					THEN RowRef.Store = &Store
+	|				ELSE TRUE
+	|			END))) AS RowIDMovements";
+	Query.Execute();
+EndProcedure
+
+#EndRegion
+
+#Region Document_SRO
+
+Procedure ApplyFilterSet_SRO_ForSR(Query)
+	Query.Text =
+	"SELECT
+	|	RowIDMovements.RowID,
+	|	RowIDMovements.Step,
+	|	RowIDMovements.Basis,
+	|	RowIDMovements.RowRef,
+	|	RowIDMovements.QuantityBalance AS Quantity
+	|INTO RowIDMovements_SRO_ForSR
+	|FROM
+	|	AccumulationRegister.TM1010B_RowIDMovements.Balance(&Period, Step IN (&StepArray)
+	|	AND (Basis IN (&Basises)
+	|	OR RowRef.Basis IN (&Basises)
+	|	OR RowRef IN
+	|		(SELECT
+	|			RowRef.Ref AS Ref
+	|		FROM
+	|			Catalog.RowIDs AS RowRef
+	|		WHERE
+	|			CASE
+	|				WHEN &Filter_Company
+	|					THEN RowRef.Company = &Company
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Branch
+	|					THEN RowRef.Branch = &Branch
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Partner
+	|					THEN RowRef.Partner = &Partner
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_LegalName
+	|					THEN RowRef.LegalName = &LegalName
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Agreement
+	|					THEN RowRef.Agreement = &Agreement
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Currency
+	|					THEN RowRef.Currency = &Currency
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_PriceIncludeTax
+	|					THEN RowRef.PriceIncludeTax = &PriceIncludeTax
 	|				ELSE FALSE
 	|			END
 	|			AND CASE
@@ -5104,73 +5469,6 @@ Procedure ApplyFilterSet_PRO_ForPR(Query)
 	|	RowIDMovements.RowRef,
 	|	RowIDMovements.QuantityBalance AS Quantity
 	|INTO RowIDMovements_PRO_ForPR
-	|FROM
-	|	AccumulationRegister.TM1010B_RowIDMovements.Balance(&Period, Step IN (&StepArray)
-	|	AND (Basis IN (&Basises)
-	|	OR RowRef.Basis IN (&Basises)
-	|	OR RowRef IN
-	|		(SELECT
-	|			RowRef.Ref AS Ref
-	|		FROM
-	|			Catalog.RowIDs AS RowRef
-	|		WHERE
-	|			CASE
-	|				WHEN &Filter_Company
-	|					THEN RowRef.Company = &Company
-	|				ELSE FALSE
-	|			END
-	|			AND CASE
-	|				WHEN &Filter_Branch
-	|					THEN RowRef.Branch = &Branch
-	|				ELSE FALSE
-	|			END
-	|			AND CASE
-	|				WHEN &Filter_Partner
-	|					THEN RowRef.Partner = &Partner
-	|				ELSE FALSE
-	|			END
-	|			AND CASE
-	|				WHEN &Filter_LegalName
-	|					THEN RowRef.LegalName = &LegalName
-	|				ELSE FALSE
-	|			END
-	|			AND CASE
-	|				WHEN &Filter_Agreement
-	|					THEN RowRef.Agreement = &Agreement
-	|				ELSE FALSE
-	|			END
-	|			AND CASE
-	|				WHEN &Filter_Currency
-	|					THEN RowRef.Currency = &Currency
-	|				ELSE FALSE
-	|			END
-	|			AND CASE
-	|				WHEN &Filter_PriceIncludeTax
-	|					THEN RowRef.PriceIncludeTax = &PriceIncludeTax
-	|				ELSE FALSE
-	|			END
-	|			AND CASE
-	|				WHEN &Filter_ItemKey
-	|					THEN RowRef.ItemKey = &ItemKey
-	|				ELSE TRUE
-	|			END
-	|			AND CASE
-	|				WHEN &Filter_Store
-	|					THEN RowRef.Store = &Store
-	|				ELSE TRUE
-	|			END))) AS RowIDMovements";
-	Query.Execute();
-EndProcedure
-
-Procedure ApplyFilterSet_SRO_ForSR(Query)
-	Query.Text =
-	"SELECT
-	|	RowIDMovements.RowID,
-	|	RowIDMovements.Step,
-	|	RowIDMovements.Basis,
-	|	RowIDMovements.RowRef,
-	|	RowIDMovements.QuantityBalance AS Quantity
-	|INTO RowIDMovements_SRO_ForSR
 	|FROM
 	|	AccumulationRegister.TM1010B_RowIDMovements.Balance(&Period, Step IN (&StepArray)
 	|	AND (Basis IN (&Basises)
@@ -7957,6 +8255,8 @@ Procedure AddAppearance_Header(Object, Form, FieldsToLock)
 			Else
 				FormElement.ReadOnly = False;
 			EndIf;
+		Else
+			Raise StrTemplate("Not found form elemment: %1", FieldName);
 		EndIf;
 	EndDo;
 	Form.LockedFields.Clear();
@@ -7976,6 +8276,8 @@ Procedure AddAppearance_Header(Object, Form, FieldsToLock)
 				EndIf;
 			EndIf;
 			Form.LockedFields.Add(FieldName);
+		Else
+			Raise StrTemplate("Not found form elemment: %1", FieldName);
 		EndIf;
 	EndDo;
 		
@@ -7985,9 +8287,15 @@ EndProcedure
 Procedure AddAppearance_ItemList(Object, Form, FieldsToLock, Condition)
 	// Item list
 	For Each Row In FieldsToLock.ItemList Do
+		FieldName = "ItemList" + Row.FieldName;
+		FormElement = Form.Items.Find(FieldName);
+		If FormElement = Undefined Then
+			Raise StrTemplate("Not found form elemment: %1", FieldName);
+		EndIf;
+		
 		Element = Form.ConditionalAppearance.Items.Add();
 		Element.Presentation = "FieldsToLock";
-		Element.Fields.Items.Add().Field = New DataCompositionField("ItemList" + Row.FieldName);
+		Element.Fields.Items.Add().Field = New DataCompositionField(FieldName);
 	
 		Filter = Element.Filter.Items.Add(Type("DataCompositionFilterItem"));
 		Filter.LeftValue = New DataCompositionField("Object.ItemList." + Condition);
@@ -8042,93 +8350,87 @@ Function GetFieldsToLock_ExternalLinkedDocs(Ref, ArrayOfExternalLinkedDocs)
 	Table_RowRefFilter.Columns.Add("FieldName");
 	Table_RowRefFilter.Columns.Add("LinkedDoc");
 	
+	Tables = New Structure("Header, ItemList, RowRefFilter", Table_Header, Table_ItemList, Table_RowRefFilter);
+	
 	Is = Is(Ref);
 	DocAliases = DocAliases();
+	
 	If Is.SO Then
-		
-		If AliasIsPresent(ArrayOfExternalLinkedDocs, DocAliases.SI) Then
-			Fields = GetFieldsToLock_ExternalLink(DocAliases.SO, DocAliases.SI);
-			AddArrayToFieldsTable(Table_Header       , Fields.Header       , DocAliases.SI);
-			AddArrayToFieldsTable(Table_ItemList     , Fields.ItemList     , DocAliases.SI);
-			AddArrayToFieldsTable(Table_RowRefFilter , Fields.RowRefFilter , DocAliases.SI);
-		EndIf;
-		
-		If AliasIsPresent(ArrayOfExternalLinkedDocs, DocAliases.SC) Then
-			Fields = GetFieldsToLock_ExternalLink(DocAliases.SO, DocAliases.SC);
-			AddArrayToFieldsTable(Table_Header       , Fields.Header       , DocAliases.SC);
-			AddArrayToFieldsTable(Table_ItemList     , Fields.ItemList     , DocAliases.SC);
-			AddArrayToFieldsTable(Table_RowRefFilter , Fields.RowRefFilter , DocAliases.SC);
-		EndIf;
-			
+		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.SO, DocAliases.PRR);
+		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.SO, DocAliases.PI);
+		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.SO, DocAliases.PO);
+		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.SO, DocAliases.SI);
+		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.SO, DocAliases.SC);
 	EndIf;
 	
 	If Is.SI Then
-		If AliasIsPresent(ArrayOfExternalLinkedDocs, DocAliases.SC) Then
-			Fields = GetFieldsToLock_ExternalLink(DocAliases.SI, DocAliases.SC);
-			AddArrayToFieldsTable(Table_Header       , Fields.Header       , DocAliases.SC);
-			AddArrayToFieldsTable(Table_ItemList     , Fields.ItemList     , DocAliases.SC);
-			AddArrayToFieldsTable(Table_RowRefFilter , Fields.RowRefFilter , DocAliases.SC);
-		EndIf;
+		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.SI, DocAliases.SR);
+		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.SI, DocAliases.SRO);
+		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.SI, DocAliases.SC);
 	EndIf;
 	
-	If Is.SC Then 
-		If AliasIsPresent(ArrayOfExternalLinkedDocs, DocAliases.SI) Then
-			Fields = GetFieldsToLock_ExternalLink(DocAliases.SC, DocAliases.SI);
-			AddArrayToFieldsTable(Table_Header       , Fields.Header       , DocAliases.SI);
-			AddArrayToFieldsTable(Table_ItemList     , Fields.ItemList     , DocAliases.SI);
-			AddArrayToFieldsTable(Table_RowRefFilter , Fields.RowRefFilter , DocAliases.SI);
-		EndIf;
+	If Is.SC Then
+		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.SC, DocAliases.PR);
+		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.SC, DocAliases.SI);
 	EndIf;
 	
-	If Is.PO Then 
+	If Is.PO Then
+		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.PO, DocAliases.GR);
+		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.PO, DocAliases.PI);
 	EndIf;
 	
-	If Is.PI Then 
+	If Is.PI Then
+		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.PI, DocAliases.GR);
+		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.PI, DocAliases.PR);
+		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.PI, DocAliases.PRO);
 	EndIf;
 	
-	If Is.GR Then 
+	If Is.GR Then
+		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.GR, DocAliases.PI);
+		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.GR, DocAliases.SR);
 	EndIf;
 	
-	If Is.ITO Then 
+	If Is.ITO Then
+		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.ITO, DocAliases.IT);
 	EndIf;
 	
-	If Is.IT Then 
+	If Is.IT Then
+		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.IT, DocAliases.GR);
+		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.IT, DocAliases.SC);
 	EndIf;
 	
-	If Is.ISR Then 
+	If Is.ISR Then
+		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.ISR, DocAliases.ITO);
+		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.ISR, DocAliases.PI);
+		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.ISR, DocAliases.PO);
 	EndIf;
 	
-	If Is.PhysicalInventory Then 
+	If Is.PhysicalInventory Then
+		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.PhysicalInventory, DocAliases.StockAdjustmentAsSurplus);
+		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.PhysicalInventory, DocAliases.StockAdjustmentAsWriteOff);
 	EndIf;
 	
-	If Is.StockAdjustmentAsSurplus Then 
+	If Is.PR Then
+		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.PR, DocAliases.SC);
 	EndIf;
 	
-	If Is.StockAdjustmentAsWriteOff Then 
+	If Is.PRO Then
+		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.PRO, DocAliases.PR);
 	EndIf;
 	
-	If Is.PR Then 
+	If Is.SR Then
+		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.SR, DocAliases.GR);
 	EndIf;
 	
-	If Is.PRO Then 
+	If Is.SRO Then
+		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.SRO, DocAliases.SR);
 	EndIf;
 	
-	If Is.SR Then 
+	If Is.RSR Then
+		FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliases.RSR, DocAliases.RRR);
 	EndIf;
 	
-	If Is.SRO Then 
-	EndIf;
-	
-	If Is.RSR Then 
-	EndIf;
-	
-	If Is.RRR Then 
-	EndIf;
-	
-	If Is.PRR Then 
-	EndIf;
-	
-	Return New Structure("Header, ItemList, RowRefFilter", Table_Header, Table_ItemList, Table_RowRefFilter);
+	Return Tables;
 EndFunction
 
 Function GetFieldsToLock_InternalLinkedDocs(Ref, ArrayOfInternalLinkedDocs)
@@ -8140,90 +8442,104 @@ Function GetFieldsToLock_InternalLinkedDocs(Ref, ArrayOfInternalLinkedDocs)
 	Table_Header.Columns.Add("FieldName");
 	Table_Header.Columns.Add("LinkedDoc");
 	
+	Tables = New Structure("Header, ItemList", Table_Header, Table_ItemList);
+	
 	Is = Is(Ref);
 	DocAliases = DocAliases();
 	If Is.SI Then
-		
-		If AliasIsPresent(ArrayOfInternalLinkedDocs, DocAliases.SO) Then
-			Fields = GetFieldsToLock_InternalLink(DocAliases.SI, DocAliases.SO);
-			AddArrayToFieldsTable(Table_Header   , Fields.Header   , DocAliases.SO);
-			AddArrayToFieldsTable(Table_ItemList , Fields.ItemList , DocAliases.SO);
-		EndIf;
-		
-		If AliasIsPresent(ArrayOfInternalLinkedDocs, DocAliases.SC) Then
-			Fields = GetFieldsToLock_InternalLink(DocAliases.SI, DocAliases.SC);
-			AddArrayToFieldsTable(Table_Header   , Fields.Header   , DocAliases.SC);
-			AddArrayToFieldsTable(Table_ItemList , Fields.ItemList , DocAliases.SC);
-		EndIf;
-		
+		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.SI, DocAliases.SO);
+		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.SI, DocAliases.SC);
 	EndIf;
 	
 	If Is.SC Then 
-		
-		If AliasIsPresent(ArrayOfInternalLinkedDocs, DocAliases.SO) Then
-			Fields = GetFieldsToLock_InternalLink(DocAliases.SC, DocAliases.SO);
-			AddArrayToFieldsTable(Table_Header   , Fields.Header   , DocAliases.SO);
-			AddArrayToFieldsTable(Table_ItemList , Fields.ItemList , DocAliases.SO);
-		EndIf;
-		
-		If AliasIsPresent(ArrayOfInternalLinkedDocs, DocAliases.SI) Then
-			Fields = GetFieldsToLock_InternalLink(DocAliases.SC, DocAliases.SI);
-			AddArrayToFieldsTable(Table_Header   , Fields.Header   , DocAliases.SI);
-			AddArrayToFieldsTable(Table_ItemList , Fields.ItemList , DocAliases.SI);
-		EndIf;
-	
+		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.SC, DocAliases.IT);
+		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.SC, DocAliases.PR);
+		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.SC, DocAliases.SI);
+		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.SC, DocAliases.SO);
 	EndIf;
 	
-	If Is.PO Then 
+	If Is.PO Then
+		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.PO, DocAliases.ISR);
+		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.PO, DocAliases.SO);
 	EndIf;
 	
-	If Is.PI Then 
+	If Is.PI Then
+		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.PI, DocAliases.GR);
+		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.PI, DocAliases.ISR);
+		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.PI, DocAliases.PO);
+		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.PI, DocAliases.SO);
 	EndIf;
 	
-	If Is.GR Then 
+	If Is.GR Then
+		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.GR, DocAliases.IT);
+		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.GR, DocAliases.PI);
+		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.GR, DocAliases.PO);
+		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.GR, DocAliases.SR);
 	EndIf;
 	
-	If Is.ITO Then 
+	If Is.ITO Then
+		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.ITO, DocAliases.ISR);
 	EndIf;
 	
-	If Is.IT Then 
+	If Is.IT Then
+		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.IT, DocAliases.ITO);
 	EndIf;
 	
-	If Is.ISR Then 
+	If Is.StockAdjustmentAsSurplus Then
+		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.StockAdjustmentAsSurplus, DocAliases.PhysicalInventory);
 	EndIf;
 	
-	If Is.PhysicalInventory Then 
+	If Is.StockAdjustmentAsWriteOff Then
+		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.StockAdjustmentAsWriteOff, DocAliases.PhysicalInventory);
 	EndIf;
 	
-	If Is.StockAdjustmentAsSurplus Then 
+	If Is.PR Then
+		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.PR, DocAliases.PI);
+		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.PR, DocAliases.PRO);
+		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.PR, DocAliases.SC);
 	EndIf;
 	
-	If Is.StockAdjustmentAsWriteOff Then 
-	EndIf;
-	
-	If Is.PR Then 
-	EndIf;
-	
-	If Is.PRO Then 
+	If Is.PRO Then
+		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.PRO, DocAliases.PI);
 	EndIf;
 	
 	If Is.SR Then 
+		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.SR, DocAliases.SRO);
+		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.SR, DocAliases.SI);
+		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.SR, DocAliases.GR);
 	EndIf;
 	
-	If Is.SRO Then 
-	EndIf;
-	
-	If Is.RSR Then 
+	If Is.SRO Then
+		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.SRO, DocAliases.SI);
 	EndIf;
 	
 	If Is.RRR Then 
+		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.RRR, DocAliases.RSR);
 	EndIf;
 	
 	If Is.PRR Then 
+		FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliases.PRR, DocAliases.SO);
 	EndIf;
 	
-	Return New Structure("Header, ItemList", Table_Header, Table_ItemList);
+	Return Tables;
 EndFunction
+
+Procedure FillTables_ExternalLink(Tables, ArrayOfExternalLinkedDocs, DocAliase, ExternalDocAliase)
+	If AliasIsPresent(ArrayOfExternalLinkedDocs, ExternalDocAliase) Then
+		Fields = GetFieldsToLock_ExternalLink(DocAliase, ExternalDocAliase);
+		AddArrayToFieldsTable(Tables.Header       , Fields.Header       , ExternalDocAliase);
+		AddArrayToFieldsTable(Tables.ItemList     , Fields.ItemList     , ExternalDocAliase);
+		AddArrayToFieldsTable(Tables.RowRefFilter , Fields.RowRefFilter , ExternalDocAliase);
+	EndIf;
+EndProcedure
+
+Procedure FillTables_InternalLink(Tables, ArrayOfInternalLinkedDocs, DocAliase, InternalDocAliase)
+	If AliasIsPresent(ArrayOfInternalLinkedDocs, InternalDocAliase) Then
+		Fields = GetFieldsToLock_InternalLink(DocAliase, InternalDocAliase);
+		AddArrayToFieldsTable(Tables.Header   , Fields.Header   , InternalDocAliase);
+		AddArrayToFieldsTable(Tables.ItemList , Fields.ItemList , InternalDocAliase);
+	EndIf;
+EndProcedure
 
 Function AliasIsPresent(ArrayOfLinkedDocs, Alias)
 	Return ArrayOfLinkedDocs.Find(Alias) <> Undefined;

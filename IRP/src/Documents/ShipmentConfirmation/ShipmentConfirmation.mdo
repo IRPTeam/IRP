@@ -527,7 +527,6 @@
       <types>DocumentRef.SalesInvoice</types>
     </commandParameterType>
     <parameterUseMode>Multiple</parameterUseMode>
-    <modifiesData>true</modifiesData>
     <representation>Auto</representation>
   </commands>
 </mdclass:Document>

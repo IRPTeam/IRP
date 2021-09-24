@@ -21,6 +21,7 @@ Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 		DocumentsServer.FillSpecialOffersCache(Object, Form, "PurchaseInvoice");
 	EndIf;
 	Form.Taxes_CreateFormControls();
+	RowIDInfoServer.OnCreateAtServer(Object, Form, Cancel, StandardProcessing);
 EndProcedure
 
 Procedure AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters) Export
@@ -39,6 +40,7 @@ Procedure AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters) Expor
 	CurrenciesServer.SetVisibleCurrenciesRow(Object, Undefined, True);
 	Form.Taxes_CreateFormControls();
 	DocumentsServer.FillSpecialOffersCache(Object, Form, "PurchaseInvoice");
+	RowIDInfoServer.AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters);
 EndProcedure
 
 Procedure OnReadAtServer(Object, Form, CurrentObject) Export
@@ -60,6 +62,7 @@ Procedure OnReadAtServer(Object, Form, CurrentObject) Export
 	CurrenciesServer.SetVisibleCurrenciesRow(Object, Undefined, True);
 	Form.Taxes_CreateFormControls();
 	DocumentsServer.FillSpecialOffersCache(Object, Form, "PurchaseInvoice");
+	RowIDInfoServer.OnReadAtServer(Object, Form, CurrentObject);
 EndProcedure
 
 #Region ListFormEvents

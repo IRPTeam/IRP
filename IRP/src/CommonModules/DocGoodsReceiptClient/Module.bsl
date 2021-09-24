@@ -1,3 +1,4 @@
+
 Procedure OnOpen(Object, Form, Cancel, AddInfo = Undefined) Export
 
 	DocumentsClient.SetTextOfDescriptionAtForm(Object, Form);
@@ -6,6 +7,10 @@ Procedure OnOpen(Object, Form, Cancel, AddInfo = Undefined) Export
 	ItemListOnChange(Object, Form);
 #EndIf
 
+EndProcedure
+
+Procedure AfterWriteAtClient(Object, Form, WriteParameters, AddInfo = Undefined) Export
+	RowIDInfoClient.AfterWriteAtClient(Object, Form, WriteParameters, AddInfo);
 EndProcedure
 
 #Region ItemCompany
@@ -200,6 +205,10 @@ Procedure ItemListOnActivateRow(Object, Form, Item, CurrentRowData = Undefined) 
 	If ValueIsFilled(CurrentData.Store) And CurrentData.Store <> Form.CurrentStore Then
 		DocumentsClient.SetCurrentStore(Object, Form, CurrentData.Store);
 	EndIf;
+EndProcedure
+
+Procedure ItemListBeforeDeleteRow(Object, Form, Item, Cancel, AddInfo = Undefined) Export
+	RowIDInfoClient.ItemListBeforeDeleteRow(Object, Form, Item, Cancel, AddInfo);	
 EndProcedure
 
 Procedure SerialLotNumberListOnChange(Object, Form, Item = Undefined) Export

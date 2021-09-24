@@ -113,3 +113,39 @@ Function GetLinkedDocumentsFilter_PR(Object) Export
 	Filter.Insert("Ref"             , Object.Ref);
 	Return Filter;
 EndFunction
+
+Function GetLinkedDocumentsFilter_IT(Object) Export
+	Filter = New Structure();
+	Filter.Insert("Company"       , Object.Company);
+	Filter.Insert("Branch"        , Object.Branch);
+	Filter.Insert("StoreSender"   , Object.StoreSender);
+	Filter.Insert("StoreReceiver" , Object.StoreReceiver);
+	Filter.Insert("Ref"           , Object.Ref);
+	Return Filter;
+EndFunction
+
+Function GetLinkedDocumentsFilter_ITO(Object) Export
+	Filter = New Structure();
+	Filter.Insert("Company" , Object.Company);
+	Filter.Insert("Branch"  , Object.Branch);
+	Filter.Insert("Ref"     , Object.Ref);
+	Return Filter;
+EndFunction
+
+Function GetLinkedDocumentsFilter_StockAdjustmentAsSurplus(Object) Export
+	Filter = New Structure();
+	Filter.Insert("Company" , Object.Company);
+	Filter.Insert("Branch"  , Object.Branch);
+	Filter.Insert("Store"   , Object.Store);
+	Filter.Insert("Ref"     , Object.Ref);
+	Return Filter;
+EndFunction
+
+Function GetLinkedDocumentsFilter_StockAdjustmentAsWriteOff(Object) Export
+	Filter = New Structure();
+	Filter.Insert("Company" , Object.Company);
+	Filter.Insert("Branch"  , Object.Branch);
+	Filter.Insert("Store"   , Object.Store);
+	Filter.Insert("Ref"     , Object.Ref);
+	Return Filter;
+EndFunction

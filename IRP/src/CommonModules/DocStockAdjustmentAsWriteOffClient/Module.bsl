@@ -6,6 +6,11 @@ EndProcedure
 
 Procedure AfterWriteAtClient(Object, Form, WriteParameters, AddInfo = Undefined) Export
 	SerialLotNumberClient.UpdateSerialLotNumbersPresentation(Object, AddInfo);
+	RowIDInfoClient.AfterWriteAtClient(Object, Form, WriteParameters, AddInfo);
+EndProcedure
+
+Procedure ItemListBeforeDeleteRow(Object, Form, Item, Cancel, AddInfo = Undefined) Export
+	RowIDInfoClient.ItemListBeforeDeleteRow(Object, Form, Item, Cancel, AddInfo);	
 EndProcedure
 
 Procedure ItemListOnChange(Object, Form, Item = Undefined, CurrentRowData = Undefined) Export

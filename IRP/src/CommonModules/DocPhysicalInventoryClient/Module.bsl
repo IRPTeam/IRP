@@ -2,6 +2,14 @@ Procedure OnOpen(Object, Form, Cancel, AddInfo = Undefined) Export
 	DocumentsClient.SetTextOfDescriptionAtForm(Object, Form);
 EndProcedure
 
+Procedure AfterWriteAtClient(Object, Form, WriteParameters, AddInfo = Undefined) Export
+	RowIDInfoClient.AfterWriteAtClient(Object, Form, WriteParameters, AddInfo);
+EndProcedure
+
+Procedure ItemListBeforeDeleteRow(Object, Form, Item, Cancel, AddInfo = Undefined) Export
+	RowIDInfoClient.ItemListBeforeDeleteRow(Object, Form, Item, Cancel, AddInfo);	
+EndProcedure
+
 Procedure ItemListOnChange(Object, Form, Item = Undefined, CurrentRowData = Undefined) Export
 	DocumentsClient.FillRowIDInItemList(Object);
 	RowIDInfoClient.UpdateQuantity(Object, Form);

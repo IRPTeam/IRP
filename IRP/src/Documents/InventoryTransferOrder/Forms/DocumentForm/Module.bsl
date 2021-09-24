@@ -14,6 +14,12 @@ Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefin
 	If EventName = "NewBarcode" And IsInputAvailable() Then
 		SearchByBarcode(Undefined, Parameter);
 	EndIf;
+	
+	If EventName = "LockLinkedRows" Then
+		If Source <> ThisObject Then
+			LockLinkedRows();
+		EndIf;
+	EndIf;
 EndProcedure
 
 &AtServer
@@ -53,6 +59,7 @@ EndProcedure
 &AtClient
 Procedure ItemListAfterDeleteRow(Item)
 	DocInventoryTransferOrderClient.ItemListAfterDeleteRow(Object, ThisObject, Item);
+	LockLinkedRows();
 EndProcedure
 
 &AtClient
@@ -242,6 +249,12 @@ EndProcedure
 &AtClient
 Procedure AfterWrite(WriteParameters)
 	Notify("WriteProcurementOrder", , ThisObject);
+	DocInventoryTransferOrderClient.AfterWriteAtClient(Object, ThisObject, WriteParameters);
+EndProcedure
+
+&AtClient
+Procedure ItemListBeforeDeleteRow(Item, Cancel)
+	DocInventoryTransferOrderClient.ItemListBeforeDeleteRow(Object, ThisObject, Item, Cancel);
 EndProcedure
 
 #EndRegion
@@ -249,18 +262,9 @@ EndProcedure
 #Region LinkedDocuments
 
 &AtClient
-Function GetLinkedDocumentsFilter()
-	Filter = New Structure();
-	Filter.Insert("Company", Object.Company);
-	Filter.Insert("Branch", Object.Branch);
-	Filter.Insert("Ref", Object.Ref);
-	Return Filter;
-EndFunction
-
-&AtClient
 Procedure LinkUnlinkBasisDocuments(Command)
 	FormParameters = New Structure();
-	FormParameters.Insert("Filter", GetLinkedDocumentsFilter());
+	FormParameters.Insert("Filter", RowIDInfoClientServer.GetLinkedDocumentsFilter_ITO(Object));
 	FormParameters.Insert("SelectedRowInfo", RowIDInfoClient.GetSelectedRowInfo(Items.ItemList.CurrentData));
 	FormParameters.Insert("TablesInfo", RowIDInfoClient.GetTablesInfo(Object));
 	OpenForm("CommonForm.LinkUnlinkDocumentRows", FormParameters, , , , ,
@@ -270,7 +274,7 @@ EndProcedure
 &AtClient
 Procedure AddBasisDocuments(Command)
 	FormParameters = New Structure();
-	FormParameters.Insert("Filter", GetLinkedDocumentsFilter());
+	FormParameters.Insert("Filter", RowIDInfoClientServer.GetLinkedDocumentsFilter_ITO(Object));
 	FormParameters.Insert("TablesInfo", RowIDInfoClient.GetTablesInfo(Object));
 	OpenForm("CommonForm.AddLinkedDocumentRows", FormParameters, , , , ,
 		New NotifyDescription("AddOrLinkUnlinkDocumentRowsContinue", ThisObject), FormWindowOpeningMode.LockOwnerWindow);
@@ -291,6 +295,13 @@ Procedure AddOrLinkUnlinkDocumentRowsContinueAtServer(Result)
 	ElsIf Result.Operation = "AddLinkedDocumentRows" Then
 		RowIDInfoServer.AddLinkedDocumentRows(Object, Result.FillingValues);
 	EndIf;
+	LockLinkedRows();
+EndProcedure
+
+&AtServer
+Procedure LockLinkedRows()
+	RowIDInfoServer.LockLinkedRows(Object, ThisObject);
+	RowIDInfoServer.SetAppearance(Object, ThisObject);
 EndProcedure
 
 #EndRegion

@@ -10,11 +10,19 @@ Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefin
 	If EventName = "UpdateAddAttributeAndPropertySets" Then
 		AddAttributesCreateFormControl();
 	EndIf;
+	
 	If EventName = "NewBarcode" And IsInputAvailable() Then
 		SearchByBarcode(Undefined, Parameter);
 	EndIf;
+	
 	If EventName = "CreatedPhysicalCountByLocations" And Source = Object.Ref Then
 		UpdatePhysicalCountByLocationsAtServer();
+	EndIf;
+	
+	If EventName = "LockLinkedRows" Then
+		If Source <> ThisObject Then
+			LockLinkedRows();
+		EndIf;
 	EndIf;
 EndProcedure
 
@@ -22,6 +30,12 @@ EndProcedure
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	DocPhysicalInventoryServer.OnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
 EndProcedure
+
+&AtClient
+Procedure AfterWrite(WriteParameters)
+	DocPhysicalInventoryClient.AfterWriteAtClient(Object, ThisObject, WriteParameters);
+EndProcedure
+
 
 &AtServer
 Procedure OnReadAtServer(CurrentObject)
@@ -56,6 +70,7 @@ EndProcedure
 &AtClient
 Procedure ItemListAfterDeleteRow(Item)
 	DocPhysicalInventoryClient.ItemListAfterDeleteRow(Object, ThisObject, Item);
+	LockLinkedRows();
 EndProcedure
 
 &AtClient
@@ -131,6 +146,7 @@ Procedure ItemListBeforeDeleteRow(Item, Cancel)
 	If CurrentData.Locked Then
 		Cancel = True;
 	EndIf;
+	DocPhysicalInventoryClient.ItemListBeforeDeleteRow(Object, ThisObject, Item, Cancel);
 EndProcedure
 
 &AtClient
@@ -292,6 +308,12 @@ Procedure GeneratedFormCommandActionByNameServer(CommandName) Export
 EndProcedure
 
 #EndRegion
+
+&AtServer
+Procedure LockLinkedRows()
+	RowIDInfoServer.LockLinkedRows(Object, ThisObject);
+	RowIDInfoServer.SetAppearance(Object, ThisObject);
+EndProcedure
 
 &AtClient
 Procedure ShowRowKey(Command)

@@ -1,3 +1,12 @@
+
+Procedure AfterWriteAtClient(Object, Form, WriteParameters, AddInfo = Undefined) Export
+	RowIDInfoClient.AfterWriteAtClient(Object, Form, WriteParameters, AddInfo);
+EndProcedure
+
+Procedure ItemListBeforeDeleteRow(Object, Form, Item, Cancel, AddInfo = Undefined) Export
+	RowIDInfoClient.ItemListBeforeDeleteRow(Object, Form, Item, Cancel, AddInfo);	
+EndProcedure
+
 #Region ItemCompany
 
 Procedure CompanyOnChange(Object, Form, Item) Export

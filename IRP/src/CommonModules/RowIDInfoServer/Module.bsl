@@ -4094,6 +4094,8 @@ Function GetFieldsToLock_InternalLink(DocAliase, InternalDocAliase)
 	ElsIf DocAliase = Aliases.StockAdjustmentAsWriteOff Then
 		Return GetFieldsToLock_InternalLink_StockAdjustmentAsWriteOff(InternalDocAliase, Aliases);
 	ElsIf DocAliase = Aliases.PR Then
+		Return GetFieldsToLock_InternalLink_PR(InternalDocAliase, Aliases);
+	ElsIf DocAliase = Aliases.PRO Then
 		Return GetFieldsToLock_InternalLink_PRO(InternalDocAliase, Aliases);
 	ElsIf DocAliase = Aliases.SR Then
 		Return GetFieldsToLock_InternalLink_SR(InternalDocAliase, Aliases);
@@ -4109,20 +4111,6 @@ Function GetFieldsToLock_InternalLink(DocAliase, InternalDocAliase)
 	Return Undefined;
 EndFunction
 
-Function GetFieldsToLock_InternalLink_SI(InternalDocAliase, Aliases)
-	Result = New Structure("Header, ItemList");
-	If InternalDocAliase = Aliases.SO Then
-		Result.Header   = "Company, Branch, Store, Partner, LegalName, Agreement, Currency, PriceIncludeTax, Store";
-		Result.ItemList = "Item, ItemKey, Store, SalesOrder";
-	ElsIf InternalDocAliase = Aliases.SC Then
-		Result.Header   = "Company, Branch, Store, Partner, LegalName";
-		Result.ItemList = "Item, ItemKey, Store, UseShipmentConfirmation, SalesOrder";
-	Else
-		Raise StrTemplate("Not supported Internal link for [SI] to [%1]", InternalDocAliase);
-	EndIf;
-	Return Result;
-EndFunction
-	
 Function GetFieldsToLock_InternalLink_SC(InternalDocAliase, Aliases)
 	Result = New Structure("Header, ItemList");
 	If InternalDocAliase = Aliases.SO Or InternalDocAliase = Aliases.SI Then
@@ -4162,37 +4150,6 @@ EndFunction
 Function GetFieldsToLock_InternalLink_StockAdjustmentAsWriteOff(InternalDocAliase, Aliases)
 	Result = New Structure("Header, ItemList");
 	Raise StrTemplate("Not supported Internal link for [StockAdjustmentAsWriteOff] to [%1]", InternalDocAliase);
-	Return Result;
-EndFunction
-
-Function GetFieldsToLock_InternalLink_PRO(InternalDocAliase, Aliases)
-	Result = New Structure("Header, ItemList");
-	Raise StrTemplate("Not supported Internal link for [PRO] to [%1]", InternalDocAliase);
-	Return Result;
-EndFunction
-
-Function GetFieldsToLock_InternalLink_SR(InternalDocAliase, Aliases)
-	Result = New Structure("Header, ItemList");
-	If InternalDocAliase = Aliases.SRO Then
-		Result.Header   = "Company, Branch, Store, Partner, LegalName, Agreement, Currency, PriceIncludeTax";
-		Result.ItemList = "Item, ItemKey, Store, SalesInvoice, SalesReturnOrder";
-	ElsIf InternalDocAliase = Aliases.SI Then
-		Result.Header   = "Company, Branch, Store, Partner, LegalName, Agreement, Currency, PriceIncludeTax";
-		Result.ItemList = "Item, ItemKey, Store, SalesInvoice, SalesReturnOrder";
-	Else
-		Raise StrTemplate("Not supported Internal link for [SR] to [%1]", InternalDocAliase);
-	EndIf;
-	Return Result;
-EndFunction
-
-Function GetFieldsToLock_InternalLink_SRO(InternalDocAliase, Aliases)
-	Result = New Structure("Header, ItemList");
-	If InternalDocAliase = Aliases.SI Then
-		Result.Header   = "Company, Branch, Store, Partner, LegalName, Agreement, Currency, PriceIncludeTax, Status";
-		Result.ItemList = "Item, ItemKey, Store, SalesInvoice";
-	Else
-		Raise StrTemplate("Not supported Internal link for [SRO] to [%1]", InternalDocAliase);
-	EndIf;
 	Return Result;
 EndFunction
 
@@ -4434,6 +4391,20 @@ EndProcedure
 #EndRegion
 
 #Region Document_SI
+
+Function GetFieldsToLock_InternalLink_SI(InternalDocAliase, Aliases)
+	Result = New Structure("Header, ItemList");
+	If InternalDocAliase = Aliases.SO Then
+		Result.Header   = "Company, Branch, Store, Partner, LegalName, Agreement, Currency, PriceIncludeTax, Store";
+		Result.ItemList = "Item, ItemKey, Store, SalesOrder";
+	ElsIf InternalDocAliase = Aliases.SC Then
+		Result.Header   = "Company, Branch, Store, Partner, LegalName";
+		Result.ItemList = "Item, ItemKey, Store, UseShipmentConfirmation, SalesOrder";
+	Else
+		Raise StrTemplate("Not supported Internal link for [SI] to [%1]", InternalDocAliase);
+	EndIf;
+	Return Result;
+EndFunction
 
 Procedure ApplyFilterSet_SI_ForSC(Query)
 	Query.Text =
@@ -4681,6 +4652,17 @@ EndProcedure
 #EndRegion
 
 #Region Document_SRO
+
+Function GetFieldsToLock_InternalLink_SRO(InternalDocAliase, Aliases)
+	Result = New Structure("Header, ItemList");
+	If InternalDocAliase = Aliases.SI Then
+		Result.Header   = "Company, Branch, Store, Partner, LegalName, Agreement, Currency, PriceIncludeTax, Status";
+		Result.ItemList = "Item, ItemKey, Store, SalesInvoice";
+	Else
+		Raise StrTemplate("Not supported Internal link for [SRO] to [%1]", InternalDocAliase);
+	EndIf;
+	Return Result;
+EndFunction
 
 Procedure ApplyFilterSet_SRO_ForSR(Query)
 	Query.Text =
@@ -5452,6 +5434,24 @@ Procedure ApplyFilterSet_PhysicalInventory_ForSurplus_ForWriteOff(Query)
 	Query.Execute();
 EndProcedure
 
+#Region Document_PR
+
+Function GetFieldsToLock_InternalLink_PR(InternalDocAliase, Aliases)
+	Result = New Structure("Header, ItemList");
+	If InternalDocAliase = Aliases.PI Then
+		Result.Header   = "Company, Branch, Store, Partner, LegalName, Agreement, Currency, PriceIncludeTax, Store";
+		Result.ItemList = "Item, ItemKey, Store, PurchaseInvoice, PurchaseReturnOrder";
+	ElsIf InternalDocAliase = Aliases.PRO Then
+		Result.Header   = "Company, Branch, Store, Partner, LegalName, Agreement, Currency, PriceIncludeTax, Store";
+		Result.ItemList = "Item, ItemKey, Store, PurchaseInvoice, PurchaseReturnOrder";
+	ElsIf InternalDocAliase = Aliases.SC Then
+		Result.Header   = "Company, Branch, Store, Partner, LegalName";
+		Result.ItemList = "Item, ItemKey, Store, UseShipmentConfirmation, PurchaseInvoice, PurchaseReturnOrder";
+	Else
+		Raise StrTemplate("Not supported Internal link for [PR] to [%1]", InternalDocAliase);
+	EndIf;
+	Return Result;
+EndFunction
 
 Procedure ApplyFilterSet_PR_ForSC(Query)
 	Query.Text =
@@ -5510,6 +5510,27 @@ Procedure ApplyFilterSet_PR_ForSC(Query)
 	Query.Execute();
 EndProcedure
 
+#EndRegion
+
+#Region Document_SR
+
+Function GetFieldsToLock_InternalLink_SR(InternalDocAliase, Aliases)
+	Result = New Structure("Header, ItemList");
+	If InternalDocAliase = Aliases.SI Then
+		Result.Header   = "Company, Branch, Store, Partner, LegalName, Agreement, Currency, PriceIncludeTax";
+		Result.ItemList = "Item, ItemKey, Store, SalesInvoice, SalesReturnOrder";
+	ElsIf InternalDocAliase = Aliases.SRO Then
+		Result.Header   = "Company, Branch, Store, Partner, LegalName, Agreement, Currency, PriceIncludeTax";
+		Result.ItemList = "Item, ItemKey, Store, SalesInvoice, SalesReturnOrder";
+	ElsIf InternalDocAliase = Aliases.GR Then
+		Result.Header   = "Company, Branch, Store, Partner, LegalName";
+		Result.ItemList = "Item, ItemKey, Store, UseGoodsReceipt, SalesInvoice, SalesReturnOrder";
+	Else
+		Raise StrTemplate("Not supported Internal link for [SR] to [%1]", InternalDocAliase);
+	EndIf;
+	Return Result;
+EndFunction
+
 Procedure ApplyFilterSet_SR_ForGR(Query)
 	Query.Text =
 	"SELECT
@@ -5566,6 +5587,21 @@ Procedure ApplyFilterSet_SR_ForGR(Query)
 	|			END))) AS RowIDMovements";
 	Query.Execute();
 EndProcedure
+
+#EndRegion
+
+#Region Document_PRO
+
+Function GetFieldsToLock_InternalLink_PRO(InternalDocAliase, Aliases)
+	Result = New Structure("Header, ItemList");
+	If InternalDocAliase = Aliases.PI Then
+		Result.Header   = "Company, Branch, Store, Partner, LegalName, Agreement, Currency, PriceIncludeTax, Store";
+		Result.ItemList = "Item, ItemKey, Store, PurchaseInvoice";
+	Else
+		Raise StrTemplate("Not supported Internal link for [PRO] to [%1]", InternalDocAliase);
+	EndIf;
+	Return Result;
+EndFunction
 
 Procedure ApplyFilterSet_PRO_ForPR(Query)
 	Query.Text =
@@ -5633,6 +5669,8 @@ Procedure ApplyFilterSet_PRO_ForPR(Query)
 	|			END))) AS RowIDMovements";
 	Query.Execute();
 EndProcedure
+
+#EndRegion
 
 Procedure ApplyFilterSet_RSR_ForRRR(Query)
 	Query.Text =

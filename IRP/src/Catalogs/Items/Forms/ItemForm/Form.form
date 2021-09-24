@@ -1362,14 +1362,6 @@
         <index>4</index>
       </cmiFragmentRecord>
       <cmiFragmentRecord>
-        <command>InformationRegister.AttachedFiles.StandardCommand.OpenByValue.Owner</command>
-        <commandParameter xsi:type="form:DataPath">
-          <segments>Object.Ref</segments>
-        </commandParameter>
-        <group>FormNavigationPanelGoTo</group>
-        <index>5</index>
-      </cmiFragmentRecord>
-      <cmiFragmentRecord>
         <command>InformationRegister.BarcodeScanInfoCheck.StandardCommand.OpenByValue.Item</command>
         <commandParameter xsi:type="form:DataPath">
           <segments>Object.Ref</segments>

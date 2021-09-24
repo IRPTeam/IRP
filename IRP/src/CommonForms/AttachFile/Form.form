@@ -454,10 +454,6 @@
             <event>Drag</event>
             <name>UploadDrag</name>
           </handlers>
-          <handlers>
-            <event>Click</event>
-            <name>UploadClick</name>
-          </handlers>
           <width>15</width>
           <height>6</height>
           <nonselectedPictureText>
@@ -643,8 +639,7 @@
     </title>
     <id>2</id>
     <valueType>
-      <types>String</types>
-      <stringQualifiers/>
+      <types>DefinedType.typeFilesOwner</types>
     </valueType>
     <view>
       <common>true</common>

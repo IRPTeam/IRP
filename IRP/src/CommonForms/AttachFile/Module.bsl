@@ -43,16 +43,35 @@ EndProcedure
 
 &AtClient
 Async Procedure AttachFileToOwner(FileIDs)
-	FilesAtServer = Await PutFilesToServerAsync( , , FileIDs);	
-	SaveFiles(FilesAtServer);
-EndProcedure
-
-&AtServer
-Procedure SaveFiles(FilesAtServer) 
-	
+	FilesAtServer = Await PutFilesToServerAsync( , , FileIDs, UUID);	
+	StrParam = New Structure("Ref, UUID", Owner, UUID);
+	For Each File In FilesAtServer Do
+		PictureViewerClient.AddFile(File, DefaultFilesStorageVolume, StrParam);
+	EndDo;
+	NotifyChanged(Type("InformationRegisterRecordKey.AttachedFiles"));
 EndProcedure
 
 &AtClient
 Procedure DownloadFile(Command)
-	//TODO: Insert the handler content
+	If Items.FileList.CurrentData = Undefined Then
+		Return;
+	EndIf;
+	PictureParameters = CreatePictureParameters(Items.FileList.CurrentData.File);
+	PictureURL = PictureViewerClient.GetPictureURL(PictureParameters);
+	GetFileFromServerAsync(PictureURL, PictureParameters.Description, New GetFilesDialogParameters());
 EndProcedure
+
+&AtServer
+Function CreatePictureParameters(File)
+	PictureParameters = New Structure();
+	PictureParameters.Insert("Ref", File.Ref);
+	PictureParameters.Insert("Description", File.Description);
+	PictureParameters.Insert("FileID", File.FileID);
+	PictureParameters.Insert("isFilledVolume", File.Volume <> Catalogs.IntegrationSettings.EmptyRef());
+	PictureParameters.Insert("GETIntegrationSettings", File.Volume.GETIntegrationSettings);
+	PictureParameters.Insert("isLocalPictureURL", File.Volume.GETIntegrationSettings.IntegrationType
+		= Enums.IntegrationType.LocalFileStorage);
+	PictureParameters.Insert("URI", File.URI);
+
+	Return PictureParameters;
+EndFunction

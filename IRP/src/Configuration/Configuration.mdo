@@ -228,6 +228,7 @@
   <commonModules>CommonModule.CatRetailCustomersClient</commonModules>
   <commonModules>CommonModule.CatRetailCustomersServer</commonModules>
   <commonModules>CommonModule.CatUserGroupsServer</commonModules>
+  <commonModules>CommonModule.CommonFilesServer</commonModules>
   <commonModules>CommonModule.CommonFormActions</commonModules>
   <commonModules>CommonModule.CommonFormActionsServer</commonModules>
   <commonModules>CommonModule.CommonFunctionsClientServer</commonModules>
@@ -319,9 +320,9 @@
   <commonModules>CommonModule.DocStockAdjustmentAsWriteOffServer</commonModules>
   <commonModules>CommonModule.DocumentsClient</commonModules>
   <commonModules>CommonModule.DocumentsClientServer</commonModules>
-  <commonModules>CommonModule.DocumentsServerMobile</commonModules>
   <commonModules>CommonModule.DocumentsGenerationServer</commonModules>
   <commonModules>CommonModule.DocumentsServer</commonModules>
+  <commonModules>CommonModule.DocumentsServerMobile</commonModules>
   <commonModules>CommonModule.DocUnbundlingClient</commonModules>
   <commonModules>CommonModule.DocUnbundlingServer</commonModules>
   <commonModules>CommonModule.DPPointOfSaleClient</commonModules>
@@ -476,9 +477,11 @@
   <commonCommands>CommonCommand.OpenPartnersVendor</commonCommands>
   <commonCommands>CommonCommand.OpenVendorAgreements</commonCommands>
   <commonCommands>CommonCommand.UpdateAllUserRoles</commonCommands>
+  <commonCommands>CommonCommand.AttachedFiles</commonCommands>
   <commandGroups>CommandGroup.Service</commandGroups>
   <commandGroups>CommandGroup.Print</commandGroups>
   <constants>Constant.ConnectionStatus</constants>
+  <constants>Constant.DefaultFilesStorageVolume</constants>
   <constants>Constant.DefaultPictureStorageVolume</constants>
   <constants>Constant.NotFirstStart</constants>
   <constants>Constant.SaasMode</constants>
@@ -507,6 +510,7 @@
   <commonForms>CommonForm.UpdateItemListInfo</commonForms>
   <commonForms>CommonForm.LinkUnlinkDocumentRows</commonForms>
   <commonForms>CommonForm.AddLinkedDocumentRows</commonForms>
+  <commonForms>CommonForm.AttachFile</commonForms>
   <catalogs>Catalog.AccessGroups</catalogs>
   <catalogs>Catalog.AccessProfiles</catalogs>
   <catalogs>Catalog.AddAttributeAndPropertySets</catalogs>

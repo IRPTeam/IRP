@@ -15,6 +15,7 @@
     <value>Attached files</value>
   </synonym>
   <useStandardCommands>true</useStandardCommands>
+  <defaultListForm>InformationRegister.AttachedFiles.Form.ListForm</defaultListForm>
   <dataLockControlMode>Managed</dataLockControlMode>
   <resources uuid="21dca71f-b68c-4283-bb07-94fb7a86dd8f">
     <name>Priority</name>
@@ -62,10 +63,10 @@
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <fillChecking>ShowError</fillChecking>
+    <denyIncompleteValues>true</denyIncompleteValues>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
     <fillValue xsi:type="core:UndefinedValue"/>
-    <master>true</master>
     <mainFilter>true</mainFilter>
   </dimensions>
   <dimensions uuid="dd894eb2-bc76-4f09-bfe7-5c4f650512ad">
@@ -80,9 +81,19 @@
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <fillChecking>ShowError</fillChecking>
+    <denyIncompleteValues>true</denyIncompleteValues>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
     <fillValue xsi:type="core:UndefinedValue"/>
     <mainFilter>true</mainFilter>
   </dimensions>
+  <forms uuid="308cb34e-5d44-4f52-889f-df4b77c8189f">
+    <name>ListForm</name>
+    <synonym>
+      <key>en</key>
+      <value>List form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
 </mdclass:InformationRegister>

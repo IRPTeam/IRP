@@ -24,5 +24,6 @@
   <content>Catalog.ItemKeys</content>
   <content>Catalog.InterfaceGroups</content>
   <content>Catalog.PartnerItems</content>
+  <content>CommonCommand.AttachedFiles</content>
   <parentSubsystem>Subsystem.Service</parentSubsystem>
 </mdclass:Subsystem>

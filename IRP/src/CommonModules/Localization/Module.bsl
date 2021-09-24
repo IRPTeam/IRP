@@ -364,7 +364,7 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_095", NStr("en = 'Payment amount [%1] and sales amount [%2] not match'", Lang));
 
 	Strings.Insert("Error_096", NStr("en = 'Select any document'", Lang));
-
+	Strings.Insert("Error_097", NStr("en = 'Default file storage volume is not set.'", Lang));
 #EndRegion
 
 #Region InfoMessages
@@ -457,6 +457,7 @@ Function Strings(Lang) Export
 	Strings.Insert("QuestionToUser_019", NStr("en = 'Do you want to update payment term?'", Lang));
 	Strings.Insert("QuestionToUser_020", NStr("en = 'Do you want to overwrite saved option?'", Lang));
 	Strings.Insert("QuestionToUser_021", NStr("en = 'Do you want to close this form? All changes will be lost.'", Lang));
+	Strings.Insert("QuestionToUser_022", NStr("en = 'Do you want to upload this files: '", Lang) + Chars.LF + "%1");
 #EndRegion
 
 #Region SuggestionToUser

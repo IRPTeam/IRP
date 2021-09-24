@@ -4135,12 +4135,6 @@ Function GetFieldsToLock_InternalLink_SC(InternalDocAliase, Aliases)
 	Return Result;
 EndFunction
 
-Function GetFieldsToLock_InternalLink_PO(InternalDocAliase, Aliases)
-	Result = New Structure("Header, ItemList");
-	Raise StrTemplate("Not supported Internal link for [PO] to [%1]", InternalDocAliase);
-	Return Result;
-EndFunction
-
 Function GetFieldsToLock_InternalLink_GR(InternalDocAliase, Aliases)
 	Result = New Structure("Header, ItemList");
 	Raise StrTemplate("Not supported Internal link for [GR] to [%1]", InternalDocAliase);
@@ -4440,26 +4434,6 @@ EndProcedure
 #EndRegion
 
 #Region Document_SI
-
-Function GetFieldsToLock_InternalLink_PI(InternalDocAliase, Aliases)
-	Result = New Structure("Header, ItemList");
-	If InternalDocAliase = Aliases.PO Then
-		Result.Header   = "Company, Branch, Partner, LegalName, Agreement, Currency, PriceIncludeTax, Store";
-		Result.ItemList = "Item, ItemKey, Store, PurchaseOrder, SalesOrder, InternalSupplyRequest";
-	ElsIf InternalDocAliase = Aliases.GR Then
-		Result.Header   = "Company, Branch, Partner, LegalName, Store";
-		Result.ItemList = "Item, ItemKey, Store, PurchaseOrder, SalesOrder, InternalSupplyRequest";
-	ElsIf InternalDocAliase = Aliases.SO Then
-		Result.Header   = "Company, Branch, Store";
-		Result.ItemList = "Item, ItemKey, Store, PurchaseOrder, SalesOrder, InternalSupplyRequest";
-	ElsIf InternalDocAliase = Aliases.ISR Then
-		Result.Header   = "Company, Branch, Store";
-		Result.ItemList = "Item, ItemKey, Store, PurchaseOrder, SalesOrder, InternalSupplyRequest";
-	Else
-		Raise StrTemplate("Not supported Internal link for [PI] to [%1]", InternalDocAliase);
-	EndIf;
-	Return Result;
-EndFunction
 
 Procedure ApplyFilterSet_SI_ForSC(Query)
 	Query.Text =
@@ -4779,6 +4753,20 @@ EndProcedure
 
 #Region Document_PO
 
+Function GetFieldsToLock_InternalLink_PO(InternalDocAliase, Aliases)
+	Result = New Structure("Header, ItemList");
+	If InternalDocAliase = Aliases.ISR Then
+		Result.Header   = "Company, Branch, Store";
+		Result.ItemList = "Item, ItemKey, Store, PurchaseBasis, SalesOrder, InternalSupplyRequest";
+	ElsIf InternalDocAliase = Aliases.SO Then
+		Result.Header   = "Company, Branch, Store";
+		Result.ItemList = "Item, ItemKey, Store, PurchaseBasis, SalesOrder, InternalSupplyRequest";
+	Else
+		Raise StrTemplate("Not supported Internal link for [PO] to [%1]", InternalDocAliase);
+	EndIf;
+	Return Result;
+EndFunction
+
 Procedure ApplyFilterSet_PO_ForPI(Query)
 	Query.Text =
 	"SELECT
@@ -4904,6 +4892,8 @@ EndProcedure
 
 #EndRegion
 
+#Region Document_GR
+
 Procedure ApplyFilterSet_GR_ForSI_ForSC(Query)
 	Query.Text =
 	"SELECT
@@ -4938,43 +4928,6 @@ Procedure ApplyFilterSet_GR_ForSI_ForSC(Query)
 	|					THEN RowRef.Store = &Store
 	|				ELSE TRUE
 	|			END))) AS RowIDMovements";
-	Query.Execute();
-EndProcedure
-
-Procedure ApplyFIlterSet_PI_ForSI_ForSC(Query)
-	Query.Text =
-	"SELECT
-	|	RowIDMovements.RowID,
-	|	RowIDMovements.Step,
-	|	RowIDMovements.Basis,
-	|	RowIDMovements.RowRef,
-	|	RowIDMovements.QuantityBalance AS Quantity
-	|INTO RowIDMovements_PI_ForSI_ForSC
-	|FROM
-	|	AccumulationRegister.TM1010B_RowIDMovements.Balance(&Period, Step IN (&StepArray)
-	|	AND Basis IN (&Basises)
-	|	OR RowRef.Basis IN (&Basises)
-	|	OR RowRef IN
-	|		(SELECT
-	|			RowRef.Ref AS Ref
-	|		FROM
-	|			Catalog.RowIDs AS RowRef
-	|		WHERE
-	|			CASE
-	|				WHEN &Filter_ProcurementMethod
-	|					THEN RowRef.ProcurementMethod = &ProcurementMethod
-	|				ELSE FALSE
-	|			END
-	|			AND CASE
-	|				WHEN &Filter_ItemKey
-	|					THEN RowRef.ItemKey = &ItemKey
-	|				ELSE TRUE
-	|			END
-	|			AND CASE
-	|				WHEN &Filter_Store
-	|					THEN RowRef.Store = &Store
-	|				ELSE TRUE
-	|			END)) AS RowIDMovements";
 	Query.Execute();
 EndProcedure
 
@@ -5035,6 +4988,87 @@ Procedure ApplyFilterSet_GR_ForPI(Query)
 	Query.Execute();
 EndProcedure
 
+Procedure ApplyFilterSet_GR_ForSR(Query)
+	Query.Text =
+	"SELECT
+	|	RowIDMovements.RowID,
+	|	RowIDMovements.Step,
+	|	RowIDMovements.Basis,
+	|	RowIDMovements.RowRef,
+	|	RowIDMovements.QuantityBalance AS Quantity
+	|INTO RowIDMovements_GR_ForSR
+	|FROM
+	|	AccumulationRegister.TM1010B_RowIDMovements.Balance(&Period, Step IN (&StepArray)
+	|	AND (Basis IN (&Basises)
+	|	OR RowRef.Basis IN (&Basises)
+	|	OR RowRef IN
+	|		(SELECT
+	|			RowRef.Ref AS Ref
+	|		FROM
+	|			Catalog.RowIDs AS RowRef
+	|		WHERE
+	|			CASE
+	|				WHEN &Filter_Company
+	|					THEN RowRef.Company = &Company
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Branch
+	|					THEN RowRef.Branch = &Branch
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Partner
+	|					THEN RowRef.Partner = &Partner
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_LegalName
+	|					THEN RowRef.LegalName = &LegalName
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_TransactionType
+	|					THEN RowRef.TransactionTypeGR = &TransactionType
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_ItemKey
+	|					THEN RowRef.ItemKey = &ItemKey
+	|				ELSE TRUE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Store
+	|					THEN RowRef.Store = &Store
+	|				ELSE TRUE
+	|			END))) AS RowIDMovements";
+	Query.Execute();
+EndProcedure
+
+#EndRegion
+
+#Region Document_PI
+
+Function GetFieldsToLock_InternalLink_PI(InternalDocAliase, Aliases)
+	Result = New Structure("Header, ItemList");
+	If InternalDocAliase = Aliases.PO Then
+		Result.Header   = "Company, Branch, Partner, LegalName, Agreement, Currency, PriceIncludeTax, Store";
+		Result.ItemList = "Item, ItemKey, Store, PurchaseOrder, SalesOrder, InternalSupplyRequest";
+	ElsIf InternalDocAliase = Aliases.GR Then
+		Result.Header   = "Company, Branch, Partner, LegalName, Store";
+		Result.ItemList = "Item, ItemKey, Store, PurchaseOrder, SalesOrder, InternalSupplyRequest";
+	ElsIf InternalDocAliase = Aliases.SO Then
+		Result.Header   = "Company, Branch, Store";
+		Result.ItemList = "Item, ItemKey, Store, PurchaseOrder, SalesOrder, InternalSupplyRequest";
+	ElsIf InternalDocAliase = Aliases.ISR Then
+		Result.Header   = "Company, Branch, Store";
+		Result.ItemList = "Item, ItemKey, Store, PurchaseOrder, SalesOrder, InternalSupplyRequest";
+	Else
+		Raise StrTemplate("Not supported Internal link for [PI] to [%1]", InternalDocAliase);
+	EndIf;
+	Return Result;
+EndFunction
+
 Procedure ApplyFilterSet_PI_ForGR(Query)
 	Query.Text =
 	"SELECT
@@ -5091,6 +5125,113 @@ Procedure ApplyFilterSet_PI_ForGR(Query)
 	|			END))) AS RowIDMovements";
 	Query.Execute();
 EndProcedure
+
+Procedure ApplyFilterSet_PI_ForPR_ForPRO(Query)
+	Query.Text =
+	"SELECT
+	|	RowIDMovements.RowID,
+	|	RowIDMovements.Step,
+	|	RowIDMovements.Basis,
+	|	RowIDMovements.RowRef,
+	|	RowIDMovements.QuantityTurnover AS Quantity
+	|INTO RowIDMovements_PI_ForPR_ForPRO
+	|FROM
+	|	AccumulationRegister.TM1010T_RowIDMovements.Turnovers(, &Period,, Step IN (&StepArray)
+	|	AND (Basis IN (&Basises)
+	|	OR RowRef IN
+	|		(SELECT
+	|			RowRef.Ref AS Ref
+	|		FROM
+	|			Catalog.RowIDs AS RowRef
+	|		WHERE
+	|			CASE
+	|				WHEN &Filter_Company
+	|					THEN RowRef.Company = &Company
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Branch
+	|					THEN RowRef.Branch = &Branch
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Partner
+	|					THEN RowRef.Partner = &Partner
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_LegalName
+	|					THEN RowRef.LegalName = &LegalName
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Agreement
+	|					THEN RowRef.Agreement = &Agreement
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Currency
+	|					THEN RowRef.Currency = &Currency
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_PriceIncludeTax
+	|					THEN RowRef.PriceIncludeTax = &PriceIncludeTax
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_ItemKey
+	|					THEN RowRef.ItemKey = &ItemKey
+	|				ELSE TRUE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Store
+	|					THEN RowRef.Store = &Store
+	|				ELSE TRUE
+	|			END))) AS RowIDMovements
+	|WHERE
+	|	RowIDMovements.QuantityTurnover > 0";
+	Query.Execute();
+EndProcedure
+
+Procedure ApplyFIlterSet_PI_ForSI_ForSC(Query)
+	Query.Text =
+	"SELECT
+	|	RowIDMovements.RowID,
+	|	RowIDMovements.Step,
+	|	RowIDMovements.Basis,
+	|	RowIDMovements.RowRef,
+	|	RowIDMovements.QuantityBalance AS Quantity
+	|INTO RowIDMovements_PI_ForSI_ForSC
+	|FROM
+	|	AccumulationRegister.TM1010B_RowIDMovements.Balance(&Period, Step IN (&StepArray)
+	|	AND Basis IN (&Basises)
+	|	OR RowRef.Basis IN (&Basises)
+	|	OR RowRef IN
+	|		(SELECT
+	|			RowRef.Ref AS Ref
+	|		FROM
+	|			Catalog.RowIDs AS RowRef
+	|		WHERE
+	|			CASE
+	|				WHEN &Filter_ProcurementMethod
+	|					THEN RowRef.ProcurementMethod = &ProcurementMethod
+	|				ELSE FALSE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_ItemKey
+	|					THEN RowRef.ItemKey = &ItemKey
+	|				ELSE TRUE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Store
+	|					THEN RowRef.Store = &Store
+	|				ELSE TRUE
+	|			END)) AS RowIDMovements";
+	Query.Execute();
+EndProcedure
+
+#EndRegion
 
 Procedure ApplyFIlterSet_ITO_ForIT(Query)
 	Query.Text =
@@ -5235,6 +5376,8 @@ Procedure ApplyFilterSet_IT_ForGR(Query)
 	Query.Execute();
 EndProcedure
 
+#Region Document_ISR
+
 Procedure ApplyFilterSet_ISR_ForITO_ForPO_ForPI(Query)
 	Query.Text =
 	"SELECT
@@ -5276,6 +5419,8 @@ Procedure ApplyFilterSet_ISR_ForITO_ForPO_ForPI(Query)
 	Query.Execute();
 EndProcedure
 
+#EndRegion
+
 Procedure ApplyFilterSet_PhysicalInventory_ForSurplus_ForWriteOff(Query)
 	Query.Text =
 	"SELECT
@@ -5307,62 +5452,6 @@ Procedure ApplyFilterSet_PhysicalInventory_ForSurplus_ForWriteOff(Query)
 	Query.Execute();
 EndProcedure
 
-Procedure ApplyFilterSet_GR_ForSR(Query)
-	Query.Text =
-	"SELECT
-	|	RowIDMovements.RowID,
-	|	RowIDMovements.Step,
-	|	RowIDMovements.Basis,
-	|	RowIDMovements.RowRef,
-	|	RowIDMovements.QuantityBalance AS Quantity
-	|INTO RowIDMovements_GR_ForSR
-	|FROM
-	|	AccumulationRegister.TM1010B_RowIDMovements.Balance(&Period, Step IN (&StepArray)
-	|	AND (Basis IN (&Basises)
-	|	OR RowRef.Basis IN (&Basises)
-	|	OR RowRef IN
-	|		(SELECT
-	|			RowRef.Ref AS Ref
-	|		FROM
-	|			Catalog.RowIDs AS RowRef
-	|		WHERE
-	|			CASE
-	|				WHEN &Filter_Company
-	|					THEN RowRef.Company = &Company
-	|				ELSE FALSE
-	|			END
-	|			AND CASE
-	|				WHEN &Filter_Branch
-	|					THEN RowRef.Branch = &Branch
-	|				ELSE FALSE
-	|			END
-	|			AND CASE
-	|				WHEN &Filter_Partner
-	|					THEN RowRef.Partner = &Partner
-	|				ELSE FALSE
-	|			END
-	|			AND CASE
-	|				WHEN &Filter_LegalName
-	|					THEN RowRef.LegalName = &LegalName
-	|				ELSE FALSE
-	|			END
-	|			AND CASE
-	|				WHEN &Filter_TransactionType
-	|					THEN RowRef.TransactionTypeGR = &TransactionType
-	|				ELSE FALSE
-	|			END
-	|			AND CASE
-	|				WHEN &Filter_ItemKey
-	|					THEN RowRef.ItemKey = &ItemKey
-	|				ELSE TRUE
-	|			END
-	|			AND CASE
-	|				WHEN &Filter_Store
-	|					THEN RowRef.Store = &Store
-	|				ELSE TRUE
-	|			END))) AS RowIDMovements";
-	Query.Execute();
-EndProcedure
 
 Procedure ApplyFilterSet_PR_ForSC(Query)
 	Query.Text =
@@ -5542,74 +5631,6 @@ Procedure ApplyFilterSet_PRO_ForPR(Query)
 	|					THEN RowRef.Store = &Store
 	|				ELSE TRUE
 	|			END))) AS RowIDMovements";
-	Query.Execute();
-EndProcedure
-
-Procedure ApplyFilterSet_PI_ForPR_ForPRO(Query)
-	Query.Text =
-	"SELECT
-	|	RowIDMovements.RowID,
-	|	RowIDMovements.Step,
-	|	RowIDMovements.Basis,
-	|	RowIDMovements.RowRef,
-	|	RowIDMovements.QuantityTurnover AS Quantity
-	|INTO RowIDMovements_PI_ForPR_ForPRO
-	|FROM
-	|	AccumulationRegister.TM1010T_RowIDMovements.Turnovers(, &Period,, Step IN (&StepArray)
-	|	AND (Basis IN (&Basises)
-	|	OR RowRef IN
-	|		(SELECT
-	|			RowRef.Ref AS Ref
-	|		FROM
-	|			Catalog.RowIDs AS RowRef
-	|		WHERE
-	|			CASE
-	|				WHEN &Filter_Company
-	|					THEN RowRef.Company = &Company
-	|				ELSE FALSE
-	|			END
-	|			AND CASE
-	|				WHEN &Filter_Branch
-	|					THEN RowRef.Branch = &Branch
-	|				ELSE FALSE
-	|			END
-	|			AND CASE
-	|				WHEN &Filter_Partner
-	|					THEN RowRef.Partner = &Partner
-	|				ELSE FALSE
-	|			END
-	|			AND CASE
-	|				WHEN &Filter_LegalName
-	|					THEN RowRef.LegalName = &LegalName
-	|				ELSE FALSE
-	|			END
-	|			AND CASE
-	|				WHEN &Filter_Agreement
-	|					THEN RowRef.Agreement = &Agreement
-	|				ELSE FALSE
-	|			END
-	|			AND CASE
-	|				WHEN &Filter_Currency
-	|					THEN RowRef.Currency = &Currency
-	|				ELSE FALSE
-	|			END
-	|			AND CASE
-	|				WHEN &Filter_PriceIncludeTax
-	|					THEN RowRef.PriceIncludeTax = &PriceIncludeTax
-	|				ELSE FALSE
-	|			END
-	|			AND CASE
-	|				WHEN &Filter_ItemKey
-	|					THEN RowRef.ItemKey = &ItemKey
-	|				ELSE TRUE
-	|			END
-	|			AND CASE
-	|				WHEN &Filter_Store
-	|					THEN RowRef.Store = &Store
-	|				ELSE TRUE
-	|			END))) AS RowIDMovements
-	|WHERE
-	|	RowIDMovements.QuantityTurnover > 0";
 	Query.Execute();
 EndProcedure
 

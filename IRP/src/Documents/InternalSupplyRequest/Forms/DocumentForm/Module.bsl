@@ -16,6 +16,11 @@ Procedure AfterWriteAtServer(CurrentObject, WriteParameters)
 EndProcedure
 
 &AtClient
+Procedure AfterWrite(WriteParameters)
+	DocInternalSupplyRequestClient.AfterWriteAtClient(Object, ThisObject, WriteParameters);
+EndProcedure
+
+&AtClient
 Procedure OnOpen(Cancel)
 	DocInternalSupplyRequestClient.OnOpen(Object, ThisObject, Cancel);
 EndProcedure
@@ -34,8 +39,16 @@ EndProcedure
 Procedure NotificationProcessing(EventName, Parameter, Source)
 	If EventName = "NewBarcode" And IsInputAvailable() Then
 		SearchByBarcode(Undefined, Parameter);
-	ElsIf EventName = "UpdateAddAttributeAndPropertySets" Then
+	EndIf;
+	
+	If EventName = "UpdateAddAttributeAndPropertySets" Then
 		AddAttributesCreateFormControl();
+	EndIf;
+	
+	If EventName = "LockLinkedRows" Then
+		If Source <> ThisObject Then
+			LockLinkedRows();
+		EndIf;
 	EndIf;
 EndProcedure
 #EndRegion
@@ -89,8 +102,14 @@ Procedure ItemListOnChange(Item, AddInfo = Undefined) Export
 EndProcedure
 
 &AtClient
+Procedure ItemListBeforeDeleteRow(Item, Cancel)
+	DocInternalSupplyRequestClient.ItemListBeforeDeleteRow(Object, ThisObject, Item, Cancel);
+EndProcedure
+
+&AtClient
 Procedure ItemListAfterDeleteRow(Item)
 	DocInternalSupplyRequestClient.ItemListAfterDeleteRow(Object, ThisObject, Item);
+	LockLinkedRows();
 EndProcedure
 
 &AtClient
@@ -191,6 +210,16 @@ EndProcedure
 &AtServer
 Procedure AddAttributesCreateFormControl()
 	AddAttributesAndPropertiesServer.CreateFormControls(ThisObject);
+EndProcedure
+
+#EndRegion
+
+#Region LinkedDocuments
+
+&AtServer
+Procedure LockLinkedRows()
+	RowIDInfoServer.LockLinkedRows(Object, ThisObject);
+	RowIDInfoServer.SetAppearance(Object, ThisObject);
 EndProcedure
 
 #EndRegion

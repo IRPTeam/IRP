@@ -1,5 +1,10 @@
+
 Procedure OnOpen(Object, Form, Cancel, AddInfo = Undefined) Export
 	Return;
+EndProcedure
+
+Procedure AfterWriteAtClient(Object, Form, WriteParameters, AddInfo = Undefined) Export
+	RowIDInfoClient.AfterWriteAtClient(Object, Form, WriteParameters, AddInfo);
 EndProcedure
 
 #Region ItemCompany
@@ -109,6 +114,10 @@ EndProcedure
 Procedure ItemListOnChange(Object, Form, Item = Undefined, CalculationSettings = Undefined) Export
 	DocumentsClient.FillRowIDInItemList(Object);
 	RowIDInfoClient.UpdateQuantity(Object, Form);
+EndProcedure
+
+Procedure ItemListBeforeDeleteRow(Object, Form, Item, Cancel, AddInfo = Undefined) Export
+	RowIDInfoClient.ItemListBeforeDeleteRow(Object, Form, Item, Cancel, AddInfo);	
 EndProcedure
 
 Procedure ItemListAfterDeleteRow(Object, Form, Item) Export

@@ -4141,12 +4141,6 @@ Function GetFieldsToLock_InternalLink_PO(InternalDocAliase, Aliases)
 	Return Result;
 EndFunction
 
-Function GetFieldsToLock_InternalLink_PI(InternalDocAliase, Aliases)
-	Result = New Structure("Header, ItemList");
-	Raise StrTemplate("Not supported Internal link for [PI] to [%1]", InternalDocAliase);
-	Return Result;
-EndFunction
-
 Function GetFieldsToLock_InternalLink_GR(InternalDocAliase, Aliases)
 	Result = New Structure("Header, ItemList");
 	Raise StrTemplate("Not supported Internal link for [GR] to [%1]", InternalDocAliase);
@@ -4446,6 +4440,26 @@ EndProcedure
 #EndRegion
 
 #Region Document_SI
+
+Function GetFieldsToLock_InternalLink_PI(InternalDocAliase, Aliases)
+	Result = New Structure("Header, ItemList");
+	If InternalDocAliase = Aliases.PO Then
+		Result.Header   = "Company, Branch, Partner, LegalName, Agreement, Currency, PriceIncludeTax, Store";
+		Result.ItemList = "Item, ItemKey, Store, PurchaseOrder, SalesOrder, InternalSupplyRequest";
+	ElsIf InternalDocAliase = Aliases.GR Then
+		Result.Header   = "Company, Branch, Partner, LegalName, Store";
+		Result.ItemList = "Item, ItemKey, Store, PurchaseOrder, SalesOrder, InternalSupplyRequest";
+	ElsIf InternalDocAliase = Aliases.SO Then
+		Result.Header   = "Company, Branch, Store";
+		Result.ItemList = "Item, ItemKey, Store, PurchaseOrder, SalesOrder, InternalSupplyRequest";
+	ElsIf InternalDocAliase = Aliases.ISR Then
+		Result.Header   = "Company, Branch, Store";
+		Result.ItemList = "Item, ItemKey, Store, PurchaseOrder, SalesOrder, InternalSupplyRequest";
+	Else
+		Raise StrTemplate("Not supported Internal link for [PI] to [%1]", InternalDocAliase);
+	EndIf;
+	Return Result;
+EndFunction
 
 Procedure ApplyFilterSet_SI_ForSC(Query)
 	Query.Text =
@@ -4763,6 +4777,8 @@ EndProcedure
 
 #EndRegion
 
+#Region Document_PO
+
 Procedure ApplyFilterSet_PO_ForPI(Query)
 	Query.Text =
 	"SELECT
@@ -4885,6 +4901,8 @@ Procedure ApplyFilterSet_PO_ForGR(Query)
 	|			END))) AS RowIDMovements";
 	Query.Execute();
 EndProcedure
+
+#EndRegion
 
 Procedure ApplyFilterSet_GR_ForSI_ForSC(Query)
 	Query.Text =
@@ -8256,7 +8274,7 @@ Procedure AddAppearance_Header(Object, Form, FieldsToLock)
 				FormElement.ReadOnly = False;
 			EndIf;
 		Else
-			Raise StrTemplate("Not found form elemment: %1", FieldName);
+			Raise StrTemplate("Not found form element: %1", FieldName);
 		EndIf;
 	EndDo;
 	Form.LockedFields.Clear();
@@ -8277,7 +8295,7 @@ Procedure AddAppearance_Header(Object, Form, FieldsToLock)
 			EndIf;
 			Form.LockedFields.Add(FieldName);
 		Else
-			Raise StrTemplate("Not found form elemment: %1", FieldName);
+			Raise StrTemplate("Not found form element: %1", FieldName);
 		EndIf;
 	EndDo;
 		
@@ -8290,7 +8308,7 @@ Procedure AddAppearance_ItemList(Object, Form, FieldsToLock, Condition)
 		FieldName = "ItemList" + Row.FieldName;
 		FormElement = Form.Items.Find(FieldName);
 		If FormElement = Undefined Then
-			Raise StrTemplate("Not found form elemment: %1", FieldName);
+			Raise StrTemplate("Not found form element: %1", FieldName);
 		EndIf;
 		
 		Element = Form.ConditionalAppearance.Items.Add();

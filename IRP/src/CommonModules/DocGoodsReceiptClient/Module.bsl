@@ -207,10 +207,6 @@ Procedure ItemListOnActivateRow(Object, Form, Item, CurrentRowData = Undefined) 
 	EndIf;
 EndProcedure
 
-Procedure ItemListBeforeDeleteRow(Object, Form, Item, Cancel, AddInfo = Undefined) Export
-	RowIDInfoClient.ItemListBeforeDeleteRow(Object, Form, Item, Cancel, AddInfo);	
-EndProcedure
-
 Procedure SerialLotNumberListOnChange(Object, Form, Item = Undefined) Export
 	For Each Row In Object.SerialLotNumbers Do
 #If MobileClient Then
@@ -373,7 +369,7 @@ Procedure ItemListBeforeDeleteRow(Object, Form, Item, Cancel, CurrentRowData = U
 	For Each Row In SerialLotNumberListExistingRows Do
 		Object.SerialLotNumbers.Delete(Row);
 	EndDo;
-
+	RowIDInfoClient.ItemListBeforeDeleteRow(Object, Form, Item, Cancel);
 EndProcedure
 
 Procedure SearchByBarcode(Barcode, Object, Form) Export

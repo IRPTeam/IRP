@@ -4111,48 +4111,6 @@ Function GetFieldsToLock_InternalLink(DocAliase, InternalDocAliase)
 	Return Undefined;
 EndFunction
 
-Function GetFieldsToLock_InternalLink_SC(InternalDocAliase, Aliases)
-	Result = New Structure("Header, ItemList");
-	If InternalDocAliase = Aliases.SO Or InternalDocAliase = Aliases.SI Then
-		Result.Header   = "Company, Branch, Store, Partner, LegalName, TransactionType";
-		Result.ItemList = "Item, ItemKey, Store, ShipmentBasis, SalesOrder, SalesInvoice, InventoryTransferOrder,
-			|InventoryTransfer, PurchaseReturnOrder, PurchaseReturn";
-	Else
-		Raise StrTemplate("Not supported Internal link for [SC] to [%1]", InternalDocAliase);
-	EndIf;
-	Return Result;
-EndFunction
-
-Function GetFieldsToLock_InternalLink_GR(InternalDocAliase, Aliases)
-	Result = New Structure("Header, ItemList");
-	Raise StrTemplate("Not supported Internal link for [GR] to [%1]", InternalDocAliase);
-	Return Result;
-EndFunction
-
-Function GetFieldsToLock_InternalLink_ITO(InternalDocAliase, Aliases)
-	Result = New Structure("Header, ItemList");
-	Raise StrTemplate("Not supported Internal link for [ITO] to [%1]", InternalDocAliase);
-	Return Result;
-EndFunction
-
-Function GetFieldsToLock_InternalLink_IT(InternalDocAliase, Aliases)
-	Result = New Structure("Header, ItemList");
-	Raise StrTemplate("Not supported Internal link for [IT] to [%1]", InternalDocAliase);
-	Return Result;
-EndFunction
-
-Function GetFieldsToLock_InternalLink_StockAdjustmentAsSurplus(InternalDocAliase, Aliases)
-	Result = New Structure("Header, ItemList");
-	Raise StrTemplate("Not supported Internal link for [StockAdjustmentAsSurplus] to [%1]", InternalDocAliase);
-	Return Result;
-EndFunction
-
-Function GetFieldsToLock_InternalLink_StockAdjustmentAsWriteOff(InternalDocAliase, Aliases)
-	Result = New Structure("Header, ItemList");
-	Raise StrTemplate("Not supported Internal link for [StockAdjustmentAsWriteOff] to [%1]", InternalDocAliase);
-	Return Result;
-EndFunction
-
 Function GetFieldsToLock_InternalLink_RRR(InternalDocAliase, Aliases)
 	Result = New Structure("Header, ItemList");
 	Raise StrTemplate("Not supported Internal link for [RRR] to [%1]", InternalDocAliase);
@@ -4165,7 +4123,7 @@ Function GetFieldsToLock_InternalLink_PRR(InternalDocAliase, Aliases)
 	Return Result;
 EndFunction
 
-#Region ApplyFilterSets
+#Region FilterSets
 
 #Region Document_SO
 
@@ -4535,6 +4493,23 @@ EndProcedure
 
 #Region Document_SC
 
+Function GetFieldsToLock_InternalLink_SC(InternalDocAliase, Aliases)
+	Result = New Structure("Header, ItemList");
+	If InternalDocAliase = Aliases.SO 
+		Or InternalDocAliase = Aliases.SI 
+		Or InternalDocAliase = Aliases.PR
+		Or InternalDocAliase = Aliases.PRO
+		Or InternalDocAliase = Aliases.IT
+		Or InternalDocAliase = Aliases.ITO Then
+		Result.Header   = "Company, Branch, Store, Partner, LegalName, TransactionType";
+		Result.ItemList = "Item, ItemKey, Store, ShipmentBasis, SalesOrder, SalesInvoice, InventoryTransferOrder,
+			|InventoryTransfer, PurchaseReturnOrder, PurchaseReturn";
+	Else
+		Raise StrTemplate("Not supported Internal link for [SC] to [%1]", InternalDocAliase);
+	EndIf;
+	Return Result;
+EndFunction
+
 Procedure ApplyFilterSet_SC_ForSI(Query)
 	Query.Text =
 	"SELECT
@@ -4876,6 +4851,24 @@ EndProcedure
 
 #Region Document_GR
 
+Function GetFieldsToLock_InternalLink_GR(InternalDocAliase, Aliases)
+	Result = New Structure("Header, ItemList");
+	If InternalDocAliase = Aliases.PO 
+		Or InternalDocAliase = Aliases.PI 
+		Or InternalDocAliase = Aliases.SR
+		Or InternalDocAliase = Aliases.SRO
+		Or InternalDocAliase = Aliases.IT
+		Or InternalDocAliase = Aliases.ITO Then
+		Result.Header   = "Company, Branch, Store, Partner, LegalName, TransactionType";
+		Result.ItemList = "Item, ItemKey, Store, ReceiptBasis, SalesOrder, PurchaseOrder, PurchaseInvoice, 
+			|InternalSupplyRequest, InventoryTransferOrder, SalesReturn, SalesReturnOrder,
+			|InventoryTransfer, SalesInvoice";
+	Else
+		Raise StrTemplate("Not supported Internal link for [GR] to [%1]", InternalDocAliase);
+	EndIf;
+	Return Result;
+EndFunction
+
 Procedure ApplyFilterSet_GR_ForSI_ForSC(Query)
 	Query.Text =
 	"SELECT
@@ -5215,6 +5208,19 @@ EndProcedure
 
 #EndRegion
 
+#Region Document_ITO
+
+Function GetFieldsToLock_InternalLink_ITO(InternalDocAliase, Aliases)
+	Result = New Structure("Header, ItemList");
+	If InternalDocAliase = Aliases.ISR Then
+		Result.Header   = "Company, Branch, StoreReceiver";
+		Result.ItemList = "Item, ItemKey, InternalSupplyRequest, PurchaseOrder";
+	Else
+		Raise StrTemplate("Not supported Internal link for [ITO] to [%1]", InternalDocAliase);
+	EndIf;
+	Return Result;
+EndFunction
+
 Procedure ApplyFIlterSet_ITO_ForIT(Query)
 	Query.Text =
 	"SELECT
@@ -5265,6 +5271,21 @@ Procedure ApplyFIlterSet_ITO_ForIT(Query)
 	|			END)) AS RowIDMovements";
 	Query.Execute();
 EndProcedure
+
+#EndRegion
+
+#Region Document_IT
+
+Function GetFieldsToLock_InternalLink_IT(InternalDocAliase, Aliases)
+	Result = New Structure("Header, ItemList");
+	If InternalDocAliase = Aliases.ITO Then
+		Result.Header   = "Company, Branch, StoreSender, StoreReceiver";
+		Result.ItemList = "Item, ItemKey, InventoryTransferOrder";
+	Else
+		Raise StrTemplate("Not supported Internal link for [IT] to [%1]", InternalDocAliase);
+	EndIf;
+	Return Result;
+EndFunction
 
 Procedure ApplyFilterSet_IT_ForSC(Query)
 	Query.Text =
@@ -5358,6 +5379,8 @@ Procedure ApplyFilterSet_IT_ForGR(Query)
 	Query.Execute();
 EndProcedure
 
+#EndRegion
+
 #Region Document_ISR
 
 Procedure ApplyFilterSet_ISR_ForITO_ForPO_ForPI(Query)
@@ -5402,37 +5425,6 @@ Procedure ApplyFilterSet_ISR_ForITO_ForPO_ForPI(Query)
 EndProcedure
 
 #EndRegion
-
-Procedure ApplyFilterSet_PhysicalInventory_ForSurplus_ForWriteOff(Query)
-	Query.Text =
-	"SELECT
-	|	RowIDMovements.RowID,
-	|	RowIDMovements.Step,
-	|	RowIDMovements.Basis,
-	|	RowIDMovements.RowRef,
-	|	RowIDMovements.QuantityBalance AS Quantity
-	|INTO RowIDMovements_PhysicalInventory_ForSurplus_ForWriteOff
-	|FROM
-	|	AccumulationRegister.TM1010B_RowIDMovements.Balance(&Period, Step IN (&StepArray)
-	|	AND (Basis IN (&Basises)
-	|	OR RowRef IN
-	|		(SELECT
-	|			RowRef.Ref AS Ref
-	|		FROM
-	|			Catalog.RowIDs AS RowRef
-	|		WHERE
-	|			CASE
-	|				WHEN &Filter_ItemKey
-	|					THEN RowRef.ItemKey = &ItemKey
-	|				ELSE TRUE
-	|			END
-	|			AND CASE
-	|				WHEN &Filter_Store
-	|					THEN RowRef.Store = &Store
-	|				ELSE FALSE
-	|			END))) AS RowIDMovements";
-	Query.Execute();
-EndProcedure
 
 #Region Document_PR
 
@@ -5672,6 +5664,8 @@ EndProcedure
 
 #EndRegion
 
+#Region Document_RSR
+
 Procedure ApplyFilterSet_RSR_ForRRR(Query)
 	Query.Text =
 	"SELECT
@@ -5739,6 +5733,73 @@ Procedure ApplyFilterSet_RSR_ForRRR(Query)
 	|	RowIDMovements.QuantityTurnover > 0";
 	Query.Execute();
 EndProcedure
+
+#EndRegion
+
+#Region Document_StockAdjustmentAsSurplus
+
+Function GetFieldsToLock_InternalLink_StockAdjustmentAsSurplus(InternalDocAliase, Aliases)
+	Result = New Structure("Header, ItemList");
+	If InternalDocAliase = Aliases.PhysicalInventory Then
+		Result.Header   = "Company, Branch, Store";
+		Result.ItemList = "Item, ItemKey,BasisDocument, PhysicalInventory";
+	Else
+		Raise StrTemplate("Not supported Internal link for [StockAdjustmentAsSurplus] to [%1]", InternalDocAliase);
+	EndIf;
+	Return Result;
+EndFunction
+
+#EndRegion
+
+#Region Document_StockAdjustmentAsWriteOff
+
+Function GetFieldsToLock_InternalLink_StockAdjustmentAsWriteOff(InternalDocAliase, Aliases)
+	Result = New Structure("Header, ItemList");
+	If InternalDocAliase = Aliases.PhysicalInventory Then
+		Result.Header   = "Company, Branch, Store";
+		Result.ItemList = "Item, ItemKey,BasisDocument, PhysicalInventory";
+	Else
+		Raise StrTemplate("Not supported Internal link for [StockAdjustmentAsWriteOff] to [%1]", InternalDocAliase);
+	EndIf;
+	Return Result;
+EndFunction
+
+#EndRegion
+
+#Region Document_PhysicalInventory
+
+Procedure ApplyFilterSet_PhysicalInventory_ForSurplus_ForWriteOff(Query)
+	Query.Text =
+	"SELECT
+	|	RowIDMovements.RowID,
+	|	RowIDMovements.Step,
+	|	RowIDMovements.Basis,
+	|	RowIDMovements.RowRef,
+	|	RowIDMovements.QuantityBalance AS Quantity
+	|INTO RowIDMovements_PhysicalInventory_ForSurplus_ForWriteOff
+	|FROM
+	|	AccumulationRegister.TM1010B_RowIDMovements.Balance(&Period, Step IN (&StepArray)
+	|	AND (Basis IN (&Basises)
+	|	OR RowRef IN
+	|		(SELECT
+	|			RowRef.Ref AS Ref
+	|		FROM
+	|			Catalog.RowIDs AS RowRef
+	|		WHERE
+	|			CASE
+	|				WHEN &Filter_ItemKey
+	|					THEN RowRef.ItemKey = &ItemKey
+	|				ELSE TRUE
+	|			END
+	|			AND CASE
+	|				WHEN &Filter_Store
+	|					THEN RowRef.Store = &Store
+	|				ELSE FALSE
+	|			END))) AS RowIDMovements";
+	Query.Execute();
+EndProcedure
+
+#EndRegion
 
 #Region GetDataByFilterSet
 

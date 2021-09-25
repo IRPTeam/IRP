@@ -149,3 +149,26 @@ Function GetLinkedDocumentsFilter_StockAdjustmentAsWriteOff(Object) Export
 	Filter.Insert("Ref"     , Object.Ref);
 	Return Filter;
 EndFunction
+
+Function GetLinkedDocumentsFilter_PRR(Object) Export
+	Filter = New Structure();
+	Filter.Insert("Company"           , Object.Company);
+	Filter.Insert("Branch"            , Object.Branch);
+	Filter.Insert("Requester"         , Object.Requester);
+	Filter.Insert("ProcurementMethod" , PredefinedValue("Enum.ProcurementMethods.IncomingReserve"));
+	Filter.Insert("Ref"               , Object.Ref);
+	Return Filter;
+EndFunction
+
+Function GetLinkedDocumentsFilter_RRR(Object) Export
+	Filter = New Structure();
+	Filter.Insert("Company"         , Object.Company);
+	Filter.Insert("Branch"          , Object.Branch);
+	Filter.Insert("Partner"         , Object.Partner);
+	Filter.Insert("LegalName"       , Object.LegalName);
+	Filter.Insert("Agreement"       , Object.Agreement);
+	Filter.Insert("Currency"        , Object.Currency);
+	Filter.Insert("PriceIncludeTax" , Object.PriceIncludeTax);
+	Filter.Insert("Ref"             , Object.Ref);
+	Return Filter;
+EndFunction

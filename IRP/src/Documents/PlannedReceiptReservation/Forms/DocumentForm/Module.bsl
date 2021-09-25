@@ -7,6 +7,16 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	EndIf;
 EndProcedure
 
+&AtClient
+Procedure AfterWrite(WriteParameters)
+	DocPlannedReceiptReservationClient.AfterWriteAtClient(Object, ThisObject, WriteParameters);
+EndProcedure
+
+&AtClient
+Procedure ItemListBeforeDeleteRow(Item, Cancel)
+	DocPlannedReceiptReservationClient.ItemListBeforeDeleteRow(Object, ThisObject, Item, Cancel);
+EndProcedure
+
 &AtServer
 Procedure OnReadAtServer(CurrentObject)
 	DocPlannedReceiptReservationServer.OnReadAtServer(Object, ThisObject, CurrentObject);
@@ -33,6 +43,12 @@ EndProcedure
 Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefined) Export
 	If EventName = "UpdateAddAttributeAndPropertySets" Then
 		AddAttributesCreateFormControl();
+	EndIf;
+	
+	If EventName = "LockLinkedRows" Then
+		If Source <> ThisObject Then
+			LockLinkedRows();
+		EndIf;
 	EndIf;
 EndProcedure
 
@@ -94,6 +110,7 @@ EndProcedure
 &AtClient
 Procedure ItemListAfterDeleteRow(Item)
 	DocPlannedReceiptReservationClient.ItemListAfterDeleteRow(Object, ThisObject, Item);
+	LockLinkedRows();
 EndProcedure
 
 #Region Item
@@ -219,20 +236,9 @@ EndProcedure
 #Region LinkedDocuments
 
 &AtClient
-Function GetLinkedDocumentsFilter()
-	Filter = New Structure();
-	Filter.Insert("Company", Object.Company);
-	Filter.Insert("Branch", Object.Branch);
-	Filter.Insert("Requester", Object.Requester);
-	Filter.Insert("ProcurementMethod", PredefinedValue("Enum.ProcurementMethods.IncomingReserve"));
-	Filter.Insert("Ref", Object.Ref);
-	Return Filter;
-EndFunction
-
-&AtClient
 Procedure LinkUnlinkBasisDocuments(Command)
 	FormParameters = New Structure();
-	FormParameters.Insert("Filter", GetLinkedDocumentsFilter());
+	FormParameters.Insert("Filter", RowIDInfoClientServer.GetLinkedDocumentsFilter_PRR(Object));
 	FormParameters.Insert("SelectedRowInfo", RowIDInfoClient.GetSelectedRowInfo(Items.ItemList.CurrentData));
 	FormParameters.Insert("TablesInfo", RowIDInfoClient.GetTablesInfo(Object));
 	OpenForm("CommonForm.LinkUnlinkDocumentRows", FormParameters, , , , ,
@@ -242,7 +248,7 @@ EndProcedure
 &AtClient
 Procedure AddBasisDocuments(Command)
 	FormParameters = New Structure();
-	FormParameters.Insert("Filter", GetLinkedDocumentsFilter());
+	FormParameters.Insert("Filter", RowIDInfoClientServer.GetLinkedDocumentsFilter_PRR(Object));
 	FormParameters.Insert("TablesInfo", RowIDInfoClient.GetTablesInfo(Object));
 	OpenForm("CommonForm.AddLinkedDocumentRows", FormParameters, , , , ,
 		New NotifyDescription("AddOrLinkUnlinkDocumentRowsContinue", ThisObject), FormWindowOpeningMode.LockOwnerWindow);
@@ -263,6 +269,13 @@ Procedure AddOrLinkUnlinkDocumentRowsContinueAtServer(Result)
 	ElsIf Result.Operation = "AddLinkedDocumentRows" Then
 		RowIDInfoServer.AddLinkedDocumentRows(Object, Result.FillingValues);
 	EndIf;
+	LockLinkedRows();
+EndProcedure
+
+&AtServer
+Procedure LockLinkedRows()
+	RowIDInfoServer.LockLinkedRows(Object, ThisObject);
+	RowIDInfoServer.SetAppearance(Object, ThisObject);
 EndProcedure
 
 #EndRegion

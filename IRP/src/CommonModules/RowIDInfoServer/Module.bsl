@@ -2538,31 +2538,33 @@ EndFunction
 
 Function ExtractData_FromIT(BasisesTable, DataReceiver, AddInfo = Undefined)
 	Query = New Query(GetQueryText_BasisesTable());
-	Query.Text = Query.Text + "SELECT ALLOWED
-							  |	%1
-							  |	""InventoryTransfer"" AS BasedOn,
-							  |	UNDEFINED AS Ref,
-							  |	ItemList.Ref AS InventoryTransfer,
-							  |	ItemList.InventoryTransferOrder AS InventoryTransferOrder,
-							  |	ItemList.Ref.Company AS Company,
-							  |	ItemList.Ref AS ShipmentBasis,
-							  |	ItemList.Ref AS ReceiptBasis,
-							  |	ItemList.Ref.%2 AS Store,
-							  |	%3 AS TransactionType,
-							  |	ItemList.ItemKey.Item AS Item,
-							  |	ItemList.ItemKey AS ItemKey,
-							  |	0 AS Quantity,
-							  |	BasisesTable.Key,
-							  |	BasisesTable.Unit AS Unit,
-							  |	BasisesTable.BasisUnit AS BasisUnit,
-							  |	BasisesTable.QuantityInBaseUnit AS QuantityInBaseUnit
-							  |FROM
-							  |	BasisesTable AS BasisesTable
-							  |		LEFT JOIN Document.InventoryTransfer.ItemList AS ItemList
-							  |		ON BasisesTable.Basis = ItemList.Ref
-							  |		AND BasisesTable.BasisKey = ItemList.Key
-							  |ORDER BY
-							  |	ItemList.LineNumber";
+	Query.Text = Query.Text + 
+	"SELECT ALLOWED
+	|	%1
+	|	""InventoryTransfer"" AS BasedOn,
+	|	UNDEFINED AS Ref,
+	|	ItemList.Ref AS InventoryTransfer,
+	|	ItemList.InventoryTransferOrder AS InventoryTransferOrder,
+	|	ItemList.Ref.Company AS Company,
+	|	ItemList.Ref.Branch AS Branch,
+	|	ItemList.Ref AS ShipmentBasis,
+	|	ItemList.Ref AS ReceiptBasis,
+	|	ItemList.Ref.%2 AS Store,
+	|	%3 AS TransactionType,
+	|	ItemList.ItemKey.Item AS Item,
+	|	ItemList.ItemKey AS ItemKey,
+	|	0 AS Quantity,
+	|	BasisesTable.Key,
+	|	BasisesTable.Unit AS Unit,
+	|	BasisesTable.BasisUnit AS BasisUnit,
+	|	BasisesTable.QuantityInBaseUnit AS QuantityInBaseUnit
+	|FROM
+	|	BasisesTable AS BasisesTable
+	|		LEFT JOIN Document.InventoryTransfer.ItemList AS ItemList
+	|		ON BasisesTable.Basis = ItemList.Ref
+	|		AND BasisesTable.BasisKey = ItemList.Key
+	|ORDER BY
+	|	ItemList.LineNumber";
 
 	StoreName = "UNDEFINED";
 	TransactionType = "UNDEFINED";
@@ -3982,7 +3984,7 @@ EndFunction
 //ok
 Function GetFieldsToLock_ExternalLink_PO(ExternalDocAliase, Aliases)
 	Result = New Structure("Header, ItemList, RowRefFilter");
-		If ExternalDocAliase = Aliases.PI Then
+	If ExternalDocAliase = Aliases.PI Then
 		Result.Header   = "Company, Branch, Store, Partner, LegalName, Agreement, Currency, PriceIncludeTax, Status";
 		Result.ItemList = "Item, ItemKey, Store, Cancel, CancelReason, PurchaseBasis, SalesOrder, InternalSupplyRequest";
 		// Attribute name, Data path (use for show user message)
@@ -4083,7 +4085,7 @@ Function GetFieldsToLock_ExternalLink_ITO(ExternalDocAliase, Aliases)
 	EndIf;
 	Return Result;
 EndFunction
-
+//ok
 Function GetFieldsToLock_ExternalLink_IT(ExternalDocAliase, Aliases)
 	Result = New Structure("Header, ItemList, RowRefFilter");
 	If ExternalDocAliase = Aliases.SC Then
@@ -4110,34 +4112,96 @@ Function GetFieldsToLock_ExternalLink_IT(ExternalDocAliase, Aliases)
 	EndIf;
 	Return Result;
 EndFunction
-
+//ok
 Function GetFieldsToLock_ExternalLink_ISR(ExternalDocAliase, Aliases)
 	Result = New Structure("Header, ItemList, RowRefFilter");
-	Raise StrTemplate("Not supported External link for [ISR] to [%1]", ExternalDocAliase);
+	If ExternalDocAliase = Aliases.ITO Or ExternalDocAliase = Aliases.PI Or ExternalDocAliase = Aliases.PO Then
+		Result.Header   = "Company, Branch, Store";
+		Result.ItemList = "Item, ItemKey";
+		// Attribute name, Data path (use for show user message)
+		Result.RowRefFilter = "Company           , Company,
+							  |Branch            , Branch,
+							  |Store             , Store,
+							  |ItemKey           , ItemList.ItemKey";
+	Else
+		Raise StrTemplate("Not supported External link for [ISR] to [%1]", ExternalDocAliase);
+	EndIf;
 	Return Result;
 EndFunction
-
+//ok
 Function GetFieldsToLock_ExternalLink_PhysicalInventory(ExternalDocAliase, Aliases)
 	Result = New Structure("Header, ItemList, RowRefFilter");
-	Raise StrTemplate("Not supported External link for [PhysicalInventory] to [%1]", ExternalDocAliase);
+	If ExternalDocAliase = Aliases.StockAdjustmentAsSurplus 
+		Or ExternalDocAliase = Aliases.StockAdjustmentAsWriteOff Then
+		Result.Header   = "Store, Status, FillExpCount, UpdateExpCount, UpdatePhysCount";
+		Result.ItemList = "Item, ItemKey";
+		// Attribute name, Data path (use for show user message)
+		Result.RowRefFilter = "Store   , Store,
+							  |ItemKey , ItemList.ItemKey";
+	Else
+		Raise StrTemplate("Not supported External link for [PhysicalInventory] to [%1]", ExternalDocAliase);
+	EndIf;
 	Return Result;
 EndFunction
-
+//ok
 Function GetFieldsToLock_ExternalLink_PR(ExternalDocAliase, Aliases)
 	Result = New Structure("Header, ItemList, RowRefFilter");
-	Raise StrTemplate("Not supported External link for [PR] to [%1]", ExternalDocAliase);
+	If ExternalDocAliase = Aliases.SC Then
+		Result.Header   = "Company, Branch, Store, Partner, LegalName";
+		Result.ItemList = "Item, ItemKey, Store, UseShipmentConfirmation, PurchaseInvoice, PurchaseReturnOrder";
+		// Attribute name, Data path (use for show user message)
+		Result.RowRefFilter = "Company          , Company,
+							  |Branch           , Branch,
+							  |Partner          , Partner,
+							  |LegalName        , LegalName,
+							  |TransactionTypeSC, ,
+							  |ItemKey          , ItemList.ItemKey,
+							  |Store            , ItemList.Store";
+	
+	Else
+		Raise StrTemplate("Not supported External link for [PR] to [%1]", ExternalDocAliase);
+	EndIf;
 	Return Result;
 EndFunction
 
 Function GetFieldsToLock_ExternalLink_PRO(ExternalDocAliase, Aliases)
 	Result = New Structure("Header, ItemList, RowRefFilter");
-	Raise StrTemplate("Not supported External link for [PRO] to [%1]", ExternalDocAliase);
+	If ExternalDocAliase = Aliases.PR Then
+		Result.Header   = "Company, Branch, Store, Partner, LegalName, Agreement, Currency, PriceIncludeTax, Status";
+		Result.ItemList = "Item, ItemKey, Store, Cancel, PurchaseInvoice";
+		// Attribute name, Data path (use for show user message)
+		Result.RowRefFilter = "Company           , Company,
+							  |Branch            , Branch,
+							  |Partner           , Partner,
+							  |LegalName         , LegalName,
+							  |Agreement         , Agreement,
+							  |Currency          , Currency,
+							  |PriceIncludeTax   , PriceIncludeTax,
+							  |ItemKey           , ItemList.ItemKey,
+							  |Store             , ItemList.Store";
+	
+	Else
+		Raise StrTemplate("Not supported External link for [PRO] to [%1]", ExternalDocAliase);
+	EndIf;
 	Return Result;
 EndFunction
 
 Function GetFieldsToLock_ExternalLink_SR(ExternalDocAliase, Aliases)
 	Result = New Structure("Header, ItemList, RowRefFilter");
-	Raise StrTemplate("Not supported External link for [SR] to [%1]", ExternalDocAliase);
+	If ExternalDocAliase = Aliases.GR Then
+		Result.Header       = "Company, Branch, Store, Partner, LegalName";
+		Result.ItemList     = "Item, ItemKey, Store, UseGoodsReceipt, SalesReturnOrder, SalesInvoice";
+		// Attribute name, Data path (use for show user message)
+		Result.RowRefFilter = "Company          , Company,
+							  |Branch           , Branch,
+							  |Partner          , Partner,
+							  |LegalName        , LegalName,
+							  |TransactionTypeGR, ,
+							  |ItemKey          , ItemList.ItemKey,
+							  |Store            , ItemList.Store";
+	Else
+		Raise StrTemplate("Not supported External link for [SR] to [%1]", ExternalDocAliase);
+	EndIf;
 	Return Result;
 EndFunction
 
@@ -4156,7 +4220,6 @@ Function GetFieldsToLock_ExternalLink_SRO(ExternalDocAliase, Aliases)
 							  |PriceIncludeTax  , PriceIncludeTax,
 							  |ItemKey          , ItemList.ItemKey,
 							  |Store            , ItemList.Store";
-		
 	Else
 		Raise StrTemplate("Not supported External link for [SRO] to [%1]", ExternalDocAliase);
 	EndIf;

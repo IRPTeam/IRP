@@ -38,7 +38,9 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 	If Not Cancel = True Then
 		LinkedFilter = RowIDInfoClientServer.GetLinkedDocumentsFilter_StockAdjustmentAsSurplus(ThisObject);
 		RowIDInfoTable = ThisObject.RowIDInfo.Unload();
-		ItemListTable = ThisObject.ItemList.Unload(,"Key, LineNumber, ItemKey, Store");
+		ItemListTable = ThisObject.ItemList.Unload(,"Key, LineNumber, ItemKey");
+		ItemListTable.Columns.Add("Store", New TypeDescription("CatalogRef.Stores"));
+		ItemListTable.FillValues(ThisObject.Store, "Store");
 		RowIDInfoServer.FillCheckProcessing(ThisObject, Cancel, LinkedFilter, RowIDInfoTable, ItemListTable);
 	EndIf;
 EndProcedure

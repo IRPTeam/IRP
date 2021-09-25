@@ -133,7 +133,7 @@ Scenario: _0156012 Store keeper workspace (try create GR without IT)
 	* Try create GR
 		And I click "Create Goods receipt" button	
 		Then there are lines in TestClient message log
-			|'Select any production planing'|
+			|'Select any document'|
 		And I close all client application windows
 
 

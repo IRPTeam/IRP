@@ -12,5 +12,6 @@
   <content>Document.PriceList</content>
   <content>5a2a8a1f-b29b-4352-9833-04e70902c2cb</content>
   <content>Document.ManualRegisterEntry</content>
+  <content>CommonCommand.AttachedFiles</content>
   <parentSubsystem>Subsystem.Service</parentSubsystem>
 </mdclass:Subsystem>

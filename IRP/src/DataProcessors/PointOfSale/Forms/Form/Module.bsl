@@ -418,6 +418,7 @@ Procedure PaymentFormClose(Result, AdditionalData) Export
 	Items.DetailedInformation.document.getElementById("text").innerHTML = DetailedInformation;
 
 	NewTransaction();
+	Modified = False;
 EndProcedure
 
 &AtClient

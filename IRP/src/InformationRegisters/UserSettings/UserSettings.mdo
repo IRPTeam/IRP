@@ -16,6 +16,14 @@
   </synonym>
   <useStandardCommands>true</useStandardCommands>
   <dataLockControlMode>Managed</dataLockControlMode>
+  <recordPresentation>
+    <key>en</key>
+    <value>User default settings</value>
+  </recordPresentation>
+  <listPresentation>
+    <key>en</key>
+    <value>User defaults settings</value>
+  </listPresentation>
   <resources uuid="67edf6ff-8a5a-403b-a302-278d9d6f3338">
     <name>KindOfAttribute</name>
     <synonym>

@@ -19,6 +19,10 @@
   <writeMode>RecorderSubordinate</writeMode>
   <dataLockControlMode>Managed</dataLockControlMode>
   <enableTotalsSliceLast>true</enableTotalsSliceLast>
+  <listPresentation>
+    <key>en</key>
+    <value>Prices by item keys</value>
+  </listPresentation>
   <resources uuid="2d85560b-591e-44df-915a-a48a537d12c1">
     <name>Price</name>
     <synonym>

@@ -18,6 +18,14 @@
   <defaultListForm>InformationRegister.ObjectStatuses.Form.ListForm</defaultListForm>
   <informationRegisterPeriodicity>Second</informationRegisterPeriodicity>
   <dataLockControlMode>Managed</dataLockControlMode>
+  <recordPresentation>
+    <key>en</key>
+    <value>Object status history</value>
+  </recordPresentation>
+  <listPresentation>
+    <key>en</key>
+    <value>Objects status history</value>
+  </listPresentation>
   <resources uuid="e902f15c-866c-4f74-8871-6f7ea3e87ccd">
     <name>Status</name>
     <synonym>

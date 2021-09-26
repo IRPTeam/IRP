@@ -202,12 +202,12 @@ $VanessaRun = {
     $text = "{
     'AllureReport': {
         'DataAllureMarks': [],
-        'attachactiveformdatatotheallurereport': true,
+        'attachactiveformdatatotheallurereport': false,
         'attachallformsdatatotheallurereport': false,
-        'attachdataoftheoperatingsystemprocessestotheallurereport': true,
-        'attacheventlogtotheallurereport': true,
-        'attachnetworkconnectiondatatotheallurereport': true,
-        'attachvariablestotheallurereport': true,
+        'attachdataoftheoperatingsystemprocessestotheallurereport': false,
+        'attacheventlogtotheallurereport': false,
+        'attachnetworkconnectiondatatotheallurereport': false,
+        'attachvariablestotheallurereport': false,
         'reportlevel1': '#report.epic=;catalog1',
         'reportlevel2': '#report.feature=;catalog2',
         'reportlevel3': '#report.story=;scenarioname',

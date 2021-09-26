@@ -225,10 +225,10 @@ EndFunction
 
 &AtServer
 Function CalculatePrice(InputPrice, InputUnit)
-	If Not ValueIsFilled(InputUnit) Then
+	If Not ValueIsFilled(InputUnit) Or InputUnit.Quantity = 0 Then
 		Return 0;
 	EndIf;
-	Return InputUnit.Quantity * InputPrice; 
+	Return InputPrice / InputUnit.Quantity; 
 EndFunction
 
 #EndRegion

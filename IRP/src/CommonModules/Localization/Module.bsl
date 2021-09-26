@@ -388,6 +388,9 @@ Function Strings(Lang) Export
 	// %2 - Value 02
 	Strings.Insert("Error_100", NStr("en = 'Wrong linked data, used value [%1] wrong value [%2]'", Lang));
 	
+	Strings.Insert("Error_101", NStr("en = 'Select any document'", Lang));
+	Strings.Insert("Error_102", NStr("en = 'Default file storage volume is not set.'", Lang));
+
 #EndRegion
 
 #Region InfoMessages
@@ -480,6 +483,7 @@ Function Strings(Lang) Export
 	Strings.Insert("QuestionToUser_019", NStr("en = 'Do you want to update payment term?'", Lang));
 	Strings.Insert("QuestionToUser_020", NStr("en = 'Do you want to overwrite saved option?'", Lang));
 	Strings.Insert("QuestionToUser_021", NStr("en = 'Do you want to close this form? All changes will be lost.'", Lang));
+	Strings.Insert("QuestionToUser_022", NStr("en = 'Do you want to upload this files: '", Lang) + Chars.LF + "%1");
 #EndRegion
 
 #Region SuggestionToUser

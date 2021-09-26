@@ -42,7 +42,7 @@ EndProcedure
 
 &AtServer
 Procedure SetVisible()
-	IsPicture = PictureViewerServer.IsPictureFile(Object.Volume);
+	IsPicture = PictureViewerServer.isImage("." + Object.Extension);
 
 	Items.Height.Visible = IsPicture;
 	Items.Width.Visible = IsPicture;
@@ -66,7 +66,7 @@ EndFunction
 
 &AtClient
 Procedure ShowPicture()
-	If Not Object.Volume.IsEmpty() And PictureViewerServer.IsPictureFile(Object.Volume) Then
+	If Not Object.Volume.IsEmpty() And PictureViewerServer.isImage("." + Object.Extension) Then
 		PictureParameters = CreatePictureParameters();
 
 		ThisObject.PictureViewHTML = "<html><img src=""" + PictureViewerClient.GetPictureURL(PictureParameters)
@@ -76,7 +76,7 @@ EndProcedure
 
 &AtClient
 Procedure Upload(Command)
-	PictureViewerClient.Upload(ThisObject, Object, Object.Volume);
+	PictureViewerClient.Upload(ThisObject, Object);
 EndProcedure
 
 &AtClient

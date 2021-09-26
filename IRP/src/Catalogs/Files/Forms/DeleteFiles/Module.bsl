@@ -34,10 +34,6 @@ EndProcedure
 
 &AtClient
 Procedure FindUnusedFilesAtClient()
-	If Not PictureViewerServer.IsPictureFile(ThisObject.Volume) Then
-		Raise StrTemplate(R().Error_034, Volume);
-	EndIf;
-
 	IntegrationSettings = PictureViewerServer.GetIntegrationSettingsPicture(Volume);
 	ArrayOfUnusedFilesID = PictureViewerClient.GetArrayOfUnusedFiles(IntegrationSettings.POSTIntegrationSettings);
 

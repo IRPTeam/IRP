@@ -69,42 +69,40 @@ Procedure DeleteUnusedFiles(ArrayOfFilesID, PostIntegrationSettings) Export
 	EndIf;
 EndProcedure
 
-Procedure Upload(Form, Object, Volume) Export
-
-	If Not PictureViewerServer.IsPictureFile(Volume) Then
-		Raise R().Error_040;
-	EndIf;
+Async Procedure Upload(Form, Object) Export
 	StrParam = New Structure("Ref, UUID", Object.Ref, Form.UUID);
-	Notify = New NotifyDescription("SelectFileEnd", ThisObject, StrParam);
 	OpenFileDialog = New FileDialog(FileDialogMode.Open);
 	OpenFileDialog.Multiselect = False;
 	OpenFileDialog.Filter = PictureViewerClientServer.FilterForPicturesDialog();
-	BeginPuttingFiles(Notify, , OpenFileDialog, True, Form.UUID);
+	FileRef = Await PutFileToServerAsync(, , , , Form.UUID);
+	AddFile(FileRef, Undefined, StrParam);
 EndProcedure
 
 Function UploadPicture(File, Volume) Export
-
-	md5 = String(PictureViewerServer.MD5ByBinaryData(File.Location));
+	
+	md5 = String(PictureViewerServer.MD5ByBinaryData(File.Address));
 	FileRef = PictureViewerServer.GetFileRefByMD5(md5);
 	If ValueIsFilled(FileRef) Then
 		Return PictureViewerServer.GetFileInfo(FileRef);
 	EndIf;
-	RequestBody = GetFromTempStorage(File.Location);
+	RequestBody = GetFromTempStorage(File.Address);
 
-	If PictureViewerServer.IsPictureFile(Volume) Then
+	If PictureViewerServer.isImage(File.FileRef.Extension) Then
 		PictureScaleSize = 200;
 		FileInfo = PictureViewerServer.UpdatePictureInfoAndGetPreview(RequestBody, PictureScaleSize);
+		IntegrationSettings = PictureViewerServer.GetIntegrationSettingsPicture();
 	Else
 		FileInfo = PictureViewerClientServer.FileInfo();
+		IntegrationSettings = PictureViewerServer.GetIntegrationSettingsFile();
 	EndIf;
 
-	IntegrationSettings = PictureViewerServer.GetIntegrationSettingsPicture();
+	
 
 	FileID = String(New UUID());
 	FileInfo.FileID = FileID;
-	FileInfo.FileName = File.Name;
+	FileInfo.FileName = File.FileRef.Name;
 	FileInfo.MD5 = md5;
-	FileInfo.Extension = StrSplit(File.Name, ".")[StrSplit(File.Name, ".").UBound()];
+	FileInfo.Extension = StrReplace(File.FileRef.Extension, ".", "");
 
 	ConnectionSettings = IntegrationClientServer.ConnectionSetting(
 			ServiceSystemServer.GetObjectAttribute(IntegrationSettings.POSTIntegrationSettings, "UniqueID"));
@@ -249,7 +247,7 @@ EndFunction
 Procedure HTMLEvent(Form, Object, Val Data, AddInfo = Undefined) Export
 	Data = CommonFunctionsServer.DeserializeJSON(Data);
 	If Data.value = "add_picture" Then
-		Upload(Form, Object, PictureViewerServer.GetIntegrationSettingsPicture().DefaultPictureStorageVolume);
+		Upload(Form, Object);
 	ElsIf Data.value = "addImagesFromGallery" Then
 		NotifyOnClose = New NotifyDescription("AddPictureFromGallery", ThisObject, New Structure("Object, Form",
 			Object, Form));
@@ -305,20 +303,24 @@ Procedure UpdateHTMLPicture(Item, Form) Export
 	HTMLWindow.fillSlider(JSON);
 EndProcedure
 
-Procedure SelectFileEnd(Files, AdditionalParameters) Export
-	If Files = Undefined Then
+Procedure AddFile(File, Val Volume, AdditionalParameters) Export
+	If File = Undefined Then
 		Return;
-	EndIf;
-	If Files.Count() > 1 Then
-		Raise R().Error_035;
 	EndIf;
 
 	Ref = AdditionalParameters.Ref;
 
-	DefaultPictureStorageVolume = PictureViewerServer.GetIntegrationSettingsPicture().DefaultPictureStorageVolume;
-	FileInfo = UploadPicture(Files[0], DefaultPictureStorageVolume);
+	If Volume = Undefined Then
+		If PictureViewerServer.isImage(File.FileRef.Extension) Then
+			Volume = PictureViewerServer.GetIntegrationSettingsPicture().DefaultPictureStorageVolume;
+		Else
+			Volume = PictureViewerServer.GetIntegrationSettingsFile().DefaultFilesStorageVolume;
+		EndIf;
+	EndIf;
+
+	FileInfo = UploadPicture(File, Volume);
 	If FileInfo.Success Then
-		PictureViewerServer.CreateAndLinkFileToObject(DefaultPictureStorageVolume, FileInfo, Ref);
+		PictureViewerServer.CreateAndLinkFileToObject(Volume, FileInfo, Ref);
 		Notify("UpdateObjectPictures_AddNewOne", FileInfo.Ref, AdditionalParameters.UUID);
 	EndIf;
 EndProcedure

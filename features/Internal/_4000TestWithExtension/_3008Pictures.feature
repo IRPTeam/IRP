@@ -259,10 +259,11 @@ Scenario: _300103 item pictures upload
         And I select external file "#workingDir#/features/Internal/_4000TestWithExtension/reddress.png"
         And I click "add_picture" button
     * Check adding picture 
-        And In this window I click command interface button "Attached files"
-        And "List" table contains lines
-            | 'Owner'    | 'File'      |
-            | 'Dress'    | 'reddress.png' |
+        And I click "Attached files" button	
+        And "FileList" table contains lines
+            | 'File'         |
+            | 'reddress.png' |
+        And I close current window
     * Add one more picture
         And In this window I click command interface button "Main"
         And I select external file "#workingDir#/features/Internal/_4000TestWithExtension/dressblue.jpg"
@@ -270,12 +271,12 @@ Scenario: _300103 item pictures upload
         And I click "update_slider" button
         Then system warning window does not appear	
     * Check adding picture 
-        And In this window I click command interface button "Attached files"
+        And I click "Attached files" button	
         And I click "Refresh" button
-        And "List" table contains lines
-            | 'Owner'    | 'File'          |
-            | 'Dress'    | 'reddress.png'     |
-            | 'Dress'    | 'dressblue.jpg' |
+        And "FileList" table contains lines
+            | 'File'          |
+            | 'reddress.png'  |
+            | 'dressblue.jpg' |
         And I close all client application windows
 
 
@@ -297,10 +298,10 @@ Scenario: _300107 item key pictures upload
         And I select external file "#workingDir#/features/Internal/_4000TestWithExtension/dresswhite.jpg"
         And I click "add_picture" button
     * Check adding picture
-        And In this window I click command interface button "Attached files"
-        And "List" table contains lines
-            | 'Owner'   | 'File'      |
-            | 'M/White' | 'dresswhite.jpg' |
+        And I click "Attached files" button	
+        And "FileList" table contains lines
+            | 'File'           |
+            | 'dresswhite.jpg' |
         And I close all client application windows
 
 

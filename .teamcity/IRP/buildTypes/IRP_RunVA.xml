@@ -265,7 +265,7 @@ $VanessaRun = {
     'filtertags': [],
     'getactiveformdataonerror': true,
     'getallformsdataonerror': true,
-    'htmlcreate': true,
+    'htmlcreate': false,
     'ignoretags': ['IgnoreOnCIMainBuild', 'Negative'],
     'junitcreatereport': false,
 	'JUnitReport': {},

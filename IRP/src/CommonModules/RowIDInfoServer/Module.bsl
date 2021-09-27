@@ -6100,7 +6100,7 @@ Function GetFieldsToLock_InternalLink_PR(InternalDocAliase, Aliases)
 		Result.ItemList = "Item, ItemKey, Store, PurchaseInvoice, PurchaseReturnOrder";
 	ElsIf InternalDocAliase = Aliases.SC Then
 		Result.Header   = "Company, Branch, Store, Partner, LegalName";
-		Result.ItemList = "Item, ItemKey, Store, UseShipmentConfirmation, PurchaseInvoice, PurchaseReturnOrder";
+		Result.ItemList = "Item, ItemKey, Store, UseShipmentConfirmation, PurchaseReturnOrder";
 	Else
 		Raise StrTemplate("Not supported Internal link for [PR] to [%1]", InternalDocAliase);
 	EndIf;
@@ -6111,7 +6111,7 @@ Function GetFieldsToLock_ExternalLink_PR(ExternalDocAliase, Aliases)
 	Result = New Structure("Header, ItemList, RowRefFilter");
 	If ExternalDocAliase = Aliases.SC Then
 		Result.Header   = "Company, Branch, Store, Partner, LegalName";
-		Result.ItemList = "Item, ItemKey, Store, UseShipmentConfirmation, PurchaseInvoice, PurchaseReturnOrder";
+		Result.ItemList = "Item, ItemKey, Store, UseShipmentConfirmation, PurchaseReturnOrder";
 		// Attribute name, Data path (use for show user message)
 		Result.RowRefFilter = "Company          , Company,
 							  |Branch           , Branch,
@@ -6226,7 +6226,7 @@ Function GetFieldsToLock_InternalLink_SR(InternalDocAliase, Aliases)
 		Result.ItemList = "Item, ItemKey, Store, SalesInvoice, SalesReturnOrder";
 	ElsIf InternalDocAliase = Aliases.GR Then
 		Result.Header   = "Company, Branch, Store, Partner, LegalName";
-		Result.ItemList = "Item, ItemKey, Store, UseGoodsReceipt, SalesInvoice, SalesReturnOrder";
+		Result.ItemList = "Item, ItemKey, Store, UseGoodsReceipt, SalesReturnOrder";
 	Else
 		Raise StrTemplate("Not supported Internal link for [SR] to [%1]", InternalDocAliase);
 	EndIf;
@@ -6237,7 +6237,7 @@ Function GetFieldsToLock_ExternalLink_SR(ExternalDocAliase, Aliases)
 	Result = New Structure("Header, ItemList, RowRefFilter");
 	If ExternalDocAliase = Aliases.GR Then
 		Result.Header       = "Company, Branch, Store, Partner, LegalName";
-		Result.ItemList     = "Item, ItemKey, Store, UseGoodsReceipt, SalesReturnOrder, SalesInvoice";
+		Result.ItemList     = "Item, ItemKey, Store, UseGoodsReceipt, SalesReturnOrder";
 		// Attribute name, Data path (use for show user message)
 		Result.RowRefFilter = "Company          , Company,
 							  |Branch           , Branch,

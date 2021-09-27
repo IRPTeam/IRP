@@ -274,7 +274,7 @@ $VanessaRun = {
     'logstepstotext': true,
     'logtogr': true,
     'logtotext': true,
-    'markdowncreate': true,
+    'markdowncreate': false,
     'onerrorscreenshot': true,
     'onerrorscreenshoteverywindow': false,
     'screencaptureaddinmethod': 2,

@@ -194,7 +194,8 @@ Function ItemListItemKeySettings(Object, Form, AddInfo = Undefined) Export
 	Actions = New Structure();
 	Actions.Insert("UpdateRowPriceType", "UpdateRowPriceType");
 	Actions.Insert("UpdateRowUnit", "UpdateRowUnit");
-
+	Actions.Insert("UpdateRowUseGoodsReceipt", "UpdateRowUseGoodsReceipt");
+	
 	AfterActionsCalculateSettings = New Structure();
 	AfterActionsCalculateSettings.Insert("UpdatePrice", New Structure("Period, PriceType", Form.Object.Date,
 		Form.CurrentPriceType));

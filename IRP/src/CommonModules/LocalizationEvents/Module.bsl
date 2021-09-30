@@ -1,15 +1,27 @@
+// @strict-types
+
 #Region Public
 
+// Find data for input string choice data get processing.
+// 
+// Parameters:
+//  Source - CatalogManagerCatalogName, ChartOfCharacteristicTypesManagerChartOfCharacteristicTypesName - Source
+//  ChoiceData - ValueList - Choice data
+//  Parameters - Structure - Parameters:
+//  * SearchString - String - Search string
+//  * Filter - Structure - Filter:
+//  	** CustomSearchFilter - String - Serialized array
+//  StandardProcessing - Boolean - Standard processing
 Procedure FindDataForInputStringChoiceDataGetProcessing(Source, ChoiceData, Parameters, StandardProcessing) Export
-
+	
 	If Not StandardProcessing Or Not ValueIsFilled(Parameters.SearchString) Then
 		Return;
 	EndIf;
 
 	StandardProcessing = False;
-
-	MetadataObject = Metadata.FindByType(Type(Source));
-	Settings = New Structure();
+	
+	MetadataObject = Source.EmptyRef().Metadata();
+	Settings = New Structure(); 
 	Settings.Insert("MetadataObject", MetadataObject);
 	Settings.Insert("Filter", "");
 	QueryBuilderText = CommonFormActionsServer.QuerySearchInputByString(Settings);
@@ -25,7 +37,8 @@ Procedure FindDataForInputStringChoiceDataGetProcessing(Source, ChoiceData, Para
 
 	UseObjectWithDeletionMark = True;
 	If UserSettings.Count() Then
-		UseObjectWithDeletionMark = UserSettings[0].Value;
+		// @skip-check invocation-parameter-type-intersect
+		UseObjectWithDeletionMark = Boolean(UserSettings[0].Value);
 	EndIf;
 
 	If Not UseObjectWithDeletionMark Then
@@ -75,12 +88,27 @@ Procedure FindDataForInputStringChoiceDataGetProcessing(Source, ChoiceData, Para
 	EndDo;
 EndProcedure
 
+// Replace description localization prefix.
+// 
+// Parameters:
+//  QueryText - String - Query text
+//  TableName - String - Table name
+// 
+// Returns:
+//  String - Replace description localization prefix
 Function ReplaceDescriptionLocalizationPrefix(QueryText, TableName = "Table") Export
 	QueryField = "CASE WHEN %1.Description_%2 = """" THEN %1.Description_en ELSE %1.Description_%2 END ";
 	QueryField = StrTemplate(QueryField, TableName, LocalizationReuse.GetLocalizationCode());
 	Return StrReplace(QueryText, StrTemplate("%1.Description_en", TableName), QueryField);
 EndFunction
 
+// Get catalog presentation.
+// 
+// Parameters:
+//  Source - CatalogManager, ChartOfCharacteristicTypesManager - Source
+//  Data - Structure - Data
+//  Presentation - String - Presentation
+//  StandardProcessing - Boolean - Standard processing
 Procedure GetCatalogPresentation(Source, Data, Presentation, StandardProcessing) Export
 	If Not StandardProcessing Then
 		Return;
@@ -88,24 +116,24 @@ Procedure GetCatalogPresentation(Source, Data, Presentation, StandardProcessing)
 	StandardProcessing = False;
 	SourceType = TypeOf(Source);
 	If SourceType = Type("CatalogManager.Currencies") Then
-		Presentation = Data.Code;
+		Presentation = String(Data.Code);
 	ElsIf SourceType = Type("CatalogManager.PriceKeys") Then
 		Presentation = LocalizationReuse.CatalogDescriptionWithAddAttributes(Data.Ref);
 		If IsBlankString(Presentation) Then
 			Presentation = StrTemplate(R().Error_005, LocalizationReuse.UserLanguageCode());
 		EndIf;
 	ElsIf Data.Property("Description") Then
-		Presentation = Data["Description"];
+		Presentation = String(Data["Description"]);
 	ElsIf Data.Property("FullDescription") Then
-		Presentation = Data["FullDescription"];
+		Presentation = String(Data["FullDescription"]);
 	Else
-		Presentation = Data["Description_" + LocalizationReuse.UserLanguageCode()];
+		Presentation = String(Data["Description_" + LocalizationReuse.UserLanguageCode()]);
 		If Presentation = "" Then
 			For Each KeyData In Data Do
 				If KeyData.Value = "" Then
 					Continue;
 				EndIf;
-				Presentation = KeyData.Value;
+				Presentation = String(KeyData.Value);
 				Break;
 			EndDo;
 
@@ -120,8 +148,14 @@ Procedure RefreshReusableValuesBeforeWrite(Source, Cancel) Export
 	RefreshReusableValues();
 EndProcedure
 
+// Create main form item description.
+// 
+// Parameters:
+//  Form - ClientApplicationForm - Form
+//  GroupName - String - Group name
+//  AddInfo - Undefined, Structure - Add info
 Procedure CreateMainFormItemDescription(Form, GroupName, AddInfo = Undefined) Export
-	ParentGroup = Form.Items.Find(GroupName);
+	ParentGroup = Form.Items.Find(GroupName); // FormGroup, FormGroupExtensionForAUsualGroup
 	ParentGroup.Group = ChildFormItemsGroup.Vertical;
 
 	If ParentGroup = Undefined Then
@@ -153,8 +187,15 @@ Procedure CreateMainFormItemDescription(Form, GroupName, AddInfo = Undefined) Ex
 	EndDo;
 EndProcedure
 
+// Create sub form item description.
+// 
+// Parameters:
+//  Form - ClientApplicationForm - Form
+//  Values Values
+//  GroupName - String - Group name
+//  AddInfo - Undefined - Add info
 Procedure CreateSubFormItemDescription(Form, Values, GroupName, AddInfo = Undefined) Export
-	ParentGroup = Form.Items.Find(GroupName);
+	ParentGroup = Form.Items.Find(GroupName); // FormGroup, FormGroupExtensionForAUsualGroup
 	ParentGroup.Group = ChildFormItemsGroup.Vertical;
 
 	If ParentGroup = Undefined Then
@@ -186,6 +227,12 @@ Procedure CreateSubFormItemDescription(Form, Values, GroupName, AddInfo = Undefi
 	EndDo;
 EndProcedure
 
+// Get catalog presentation fields presentation fields get processing.
+// 
+// Parameters:
+//  Source - CatalogManagerCatalogName, ChartOfCharacteristicTypesManagerChartOfCharacteristicTypesName - Source
+//  Fields - Array - Fields
+//  StandardProcessing - Boolean - Standard processing
 Procedure GetCatalogPresentationFieldsPresentationFieldsGetProcessing(Source, Fields, StandardProcessing) Export
 	If Not StandardProcessing Then
 		Return;
@@ -194,6 +241,11 @@ Procedure GetCatalogPresentationFieldsPresentationFieldsGetProcessing(Source, Fi
 	Fields = LocalizationServer.FieldsListForDescriptions(String(Source));
 EndProcedure
 
+// Before write descriptions check filling.
+// 
+// Parameters:
+//  Source - CatalogObjectCatalogName, ChartOfCharacteristicTypesObjectChartOfCharacteristicTypesName, ExchangePlanObjectExchangePlanName - Source
+//  Cancel - Boolean - Cancel
 Procedure BeforeWrite_DescriptionsCheckFilling(Source, Cancel) Export
 	If Source.DataExchange.Load Then
 		Return;
@@ -202,6 +254,12 @@ Procedure BeforeWrite_DescriptionsCheckFilling(Source, Cancel) Export
 	CheckDescriptionDuplicate(Source, Cancel);
 EndProcedure
 
+// Fill check processing description check filling.
+// 
+// Parameters:
+//  Source - CatalogObjectCatalogName, ChartOfCharacteristicTypesObjectChartOfCharacteristicTypesName, ExchangePlanObjectExchangePlanName - Source
+//  Cancel - Boolean - Cancel
+//  CheckedAttributes - Array - Checked attributes
 Procedure FillCheckProcessing_DescriptionCheckFilling(Source, Cancel, CheckedAttributes) Export
 	CheckDescriptionFilling(Source, Cancel);
 	CheckDescriptionDuplicate(Source, Cancel);
@@ -211,9 +269,17 @@ EndProcedure
 
 #Region Private
 
+// Check description filling.
+// 
+// Parameters:
+//  Source - CatalogObjectCatalogName, ChartOfCharacteristicTypesObjectChartOfCharacteristicTypesName, ExchangePlanObjectExchangePlanName - Source
+//  Cancel - Boolean - Cancel
 Procedure CheckDescriptionFilling(Source, Cancel)
-	If Cancel Or TypeOf(Source) = Type("Structure")
-		Or Not CatConfigurationMetadataServer.CheckDescriptionFillingEnabled(Source)
+	If Cancel Then
+		Return;
+	EndIf;
+	
+	If Not CatConfigurationMetadataServer.CheckDescriptionFillingEnabled(Source)
 		Or Not LocalizationReuse.UseMultiLanguage(Source.Metadata().FullName()) Then
 		Return;
 	EndIf;
@@ -231,25 +297,33 @@ Procedure CheckDescriptionFilling(Source, Cancel)
 	EndIf;
 EndProcedure
 
+// Check description duplicate.
+// 
+// Parameters:
+//  Source - CatalogObjectCatalogName, ChartOfCharacteristicTypesObjectChartOfCharacteristicTypesName, ExchangePlanObjectExchangePlanName - Source
+//  Cancel - Boolean - Cancel
 Procedure CheckDescriptionDuplicate(Source, Cancel)
-	If Cancel Or TypeOf(Source) = Type("Structure")
-		Or Not CatConfigurationMetadataServer.CheckDescriptionDuplicateEnabled(Source) Then
+	If Cancel Then
+		Return;
+	EndIf;
+
+	If Not CatConfigurationMetadataServer.CheckDescriptionDuplicateEnabled(Source) Then
 		Return;
 	EndIf;
 
 	SourceMetadata = Source.Metadata();
 	UseMultiLanguage = LocalizationReuse.UseMultiLanguage(SourceMetadata.FullName());
+	AllDescription = New Array(); // Array of string
 	If UseMultiLanguage Then
 		AllDescription = LocalizationReuse.AllDescription();
 	Else
-		AllDescription = New Array();
 		If ServiceSystemClientServer.ObjectHasAttribute("Description", Source) And ValueIsFilled(Source.Description) Then
 			AllDescription.Add("Description");
 		EndIf;
 	EndIf;
-	QueryFieldsSection = New Array();
-	QueryConditionsSection = New Array();
-	DescriptionAttributes = New Array();
+	QueryFieldsSection = New Array(); // Array of string
+	QueryConditionsSection = New Array(); // Array of string
+	DescriptionAttributes = New Array(); // Array of string
 
 	Query = New Query();
 	Query.Text = "SELECT

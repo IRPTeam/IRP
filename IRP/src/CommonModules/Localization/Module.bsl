@@ -1,3 +1,12 @@
+// @strict-types
+
+// Strings.
+// 
+// Parameters:
+//  Lang - String - Lang
+// 
+// Returns:
+//  Structure - Strings
 Function Strings(Lang) Export
 
 	Strings = New Structure();
@@ -541,8 +550,12 @@ Function Strings(Lang) Export
 	Return Strings;
 EndFunction
 
+// Predefined descriptions.
+// 
+// Parameters:
+//  Strings - Structure - Strings
+//  CodeLanguage - String - Code language
 Procedure PredefinedDescriptions(Strings, CodeLanguage)
-
 	Strings.Insert("Description_A001", NStr("en = 'Catalog Partner terms'", CodeLanguage));
 	Strings.Insert("Description_A003", NStr("en = 'Catalog Business units'", CodeLanguage));
 	Strings.Insert("Description_A004", NStr("en = 'Catalog Cash accounts'", CodeLanguage));

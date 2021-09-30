@@ -203,7 +203,7 @@ $VanessaRun = {
     'AllureReport': {
         'DataAllureMarks': [],
         'attachactiveformdatatotheallurereport': true,
-        'attachallformsdatatotheallurereport': false,
+        'attachallformsdatatotheallurereport': true,
         'attachdataoftheoperatingsystemprocessestotheallurereport': true,
         'attacheventlogtotheallurereport': true,
         'attachnetworkconnectiondatatotheallurereport': true,
@@ -250,7 +250,7 @@ $VanessaRun = {
                 'PortTestClient': $startPort
             }
         ],
-        'runtestclientwithmaximizedwindow': false,
+        'runtestclientwithmaximizedwindow': true,
         'testclienttimeout': 60
     },
     'Version': '1.2.034',
@@ -259,8 +259,8 @@ $VanessaRun = {
     'addtofeaturefilter': true,
     'allurecreatereport': true,
     'closetestclient': $CloseVA,
-    'collectdataoftheoperatingsystemprocesses': false,
-    'collectnetworkconnectiondata': false,
+    'collectdataoftheoperatingsystemprocesses': true,
+    'collectnetworkconnectiondata': true,
     'cucumbercreatereport': false,
     'filtertags': [],
     'getactiveformdataonerror': true,
@@ -271,7 +271,7 @@ $VanessaRun = {
 	'JUnitReport': {},
     'librarycatalogs': [],
     'logerrorstotext': true,
-    'logstepstotext': false,
+    'logstepstotext': true,
     'logtogr': true,
     'logtotext': true,
     'markdowncreate': false,

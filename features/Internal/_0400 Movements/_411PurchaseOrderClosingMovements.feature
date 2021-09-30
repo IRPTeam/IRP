@@ -263,6 +263,25 @@ Scenario: _041167 check Purchase order closing movements by the Register  "R1012
 			| ''                                                     | 'Receipt'     | '$$DatePurchaseOrderClosing37$$' | '1'         | '150'    | '127,12'     | 'Main Company' | 'Front office' | 'Purchase order 37 dated 09.03.2021 14:29:00' | 'TRY'      | '38/Black' | 'b5d168e5-e60d-44c9-9168-b13a2695077f' |
 		And I close all client application windows
 
+Scenario: _041168 check Purchase order closing movements by the Register  "TM1010B Row ID movements"
+	* Select Purchase order closing
+		Given I open hyperlink "e1cib/list/Document.PurchaseOrderClosing"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '$$NumberPurchaseOrderClosing37$$' |
+	* Check movements by the Register  "TM1010B Row ID movements" 
+		And I click "Registrations report" button
+		And I select "TM1010B Row ID movements" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| '$$PurchaseOrderClosing37$$'           | ''            | ''                               | ''          | ''                                     | ''      | ''                                            | ''                                     |
+			| 'Document registrations records'       | ''            | ''                               | ''          | ''                                     | ''      | ''                                            | ''                                     |
+			| 'Register  "TM1010B Row ID movements"' | ''            | ''                               | ''          | ''                                     | ''      | ''                                            | ''                                     |
+			| ''                                     | 'Record type' | 'Period'                         | 'Resources' | 'Dimensions'                           | ''      | ''                                            | ''                                     |
+			| ''                                     | ''            | ''                               | 'Quantity'  | 'Row ID'                               | 'Step'  | 'Basis'                                       | 'Row ref'                              |
+			| ''                                     | 'Receipt'     | '$$DatePurchaseOrderClosing37$$' | '-64'       | '0e65d648-bd28-47a2-84dc-e260219c1395' | 'PI&GR' | 'Purchase order 37 dated 09.03.2021 14:29:00' | '0e65d648-bd28-47a2-84dc-e260219c1395' |
+			| ''                                     | 'Receipt'     | '$$DatePurchaseOrderClosing37$$' | '-1'        | 'da5e404f-fed0-41c5-81dc-b8eadd89e699' | 'PI'    | 'Purchase order 37 dated 09.03.2021 14:29:00' | 'da5e404f-fed0-41c5-81dc-b8eadd89e699' |
+		And I close all client application windows
 
 Scenario: _041169 Purchase order closing clear posting/mark for deletion
 	* Select Purchase order closing

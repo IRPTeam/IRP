@@ -118,7 +118,7 @@ EndFunction
 //  AddInfo - Undefined - Add info
 // 
 // Returns:
-//  Array - All description
+//  Array of String - All description
 Function AllDescription(AddInfo = Undefined) Export
 	Array = New Array();
 	For Each Description In Metadata.CommonAttributes Do
@@ -173,7 +173,7 @@ EndFunction
 //  Source - CatalogManager - Source
 // 
 // Returns:
-//  Array - Fields list for descriptions
+//  Array of String - Fields list for descriptions
 Function FieldsListForDescriptions(Val Source) Export
 	Fields = New Array();
 	If Source = "CatalogManager.Currencies" Then

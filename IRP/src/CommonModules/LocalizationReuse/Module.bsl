@@ -77,7 +77,7 @@ EndFunction
 //  SourceType - CatalogManager - Source type
 // 
 // Returns:
-//  Array - Fields list for descriptions
+//  Array of String - Fields list for descriptions
 Function FieldsListForDescriptions(Val SourceType) Export
 	Return LocalizationServer.FieldsListForDescriptions(SourceType);
 EndFunction

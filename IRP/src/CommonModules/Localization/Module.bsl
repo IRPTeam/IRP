@@ -6,7 +6,7 @@
 //  Lang - String - Lang
 // 
 // Returns:
-//  Structure - Strings
+//  see Strings - Strings
 Function Strings(Lang) Export
 
 	Strings = New Structure();

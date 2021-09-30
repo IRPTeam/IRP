@@ -11,6 +11,8 @@
 //  * SearchString - String - Search string
 //  * Filter - Structure - Filter:
 //  	** CustomSearchFilter - String - Serialized array
+//  	** Key - String - Key
+//  	** Value - String - Value
 //  StandardProcessing - Boolean - Standard processing
 Procedure FindDataForInputStringChoiceDataGetProcessing(Source, ChoiceData, Parameters, StandardProcessing) Export
 	
@@ -48,30 +50,30 @@ Procedure FindDataForInputStringChoiceDataGetProcessing(Source, ChoiceData, Para
 		NewFilter.Value = True;
 	EndIf;
 
-	If TypeOf(Parameters) = Type("Structure") Then
-		For Each Filter In Parameters.Filter Do
-			If Upper(Filter.Key) = Upper("CustomSearchFilter") Then
-				ArrayOfFilters = CommonFunctionsServer.DeserializeXMLUseXDTO(Parameters.Filter.CustomSearchFilter);
-				For Each Filter In ArrayOfFilters Do
-					NewFilter = QueryBuilder.Filter.Add("Ref." + Filter.FieldName);
-					NewFilter.Use = True;
-					NewFilter.ComparisonType = Filter.ComparisonType;
-					NewFilter.Value = Filter.Value;
-				EndDo;
-			Else
-				NewFilter = QueryBuilder.Filter.Add("Ref." + Filter.Key);
+	For Each Filter In Parameters.Filter Do
+		FilterKey = Filter.Key; // String
+		If Upper(FilterKey) = Upper("CustomSearchFilter") Then
+			ArrayOfFilters = CommonFunctionsServer.DeserializeXMLUseXDTO(Parameters.Filter.CustomSearchFilter); // Array of see NewCustomSearchFilter
+			For Each FilterRow In ArrayOfFilters Do
+				NewFilter = QueryBuilder.Filter.Add("Ref." + FilterRow.FieldName);
 				NewFilter.Use = True;
-				NewFilter.ComparisonType = ComparisonType.Equal;
-				NewFilter.Value = Filter.Value;
-			EndIf;
-		EndDo;
-	EndIf;
+				NewFilter.ComparisonType = FilterRow.ComparisonType;
+				NewFilter.Value = FilterRow.Value;
+			EndDo;
+		Else
+			NewFilter = QueryBuilder.Filter.Add("Ref." + Filter.Key);
+			NewFilter.Use = True;
+			NewFilter.ComparisonType = ComparisonType.Equal;
+			NewFilter.Value = Filter.Value;
+		EndIf;
+	EndDo;
 	Query = QueryBuilder.GetQuery();
 
 	Query.SetParameter("SearchString", Parameters.SearchString);
-
+	QueryTable = GetItemsBySearchString(Query);
+	
 	ChoiceData = New ValueList();
-	QueryTable = Query.Execute().Unload();
+	
 	For Each Row In QueryTable Do
 		If Not ChoiceData.FindByValue(Row.Ref) = Undefined Then
 			Continue;
@@ -87,6 +89,19 @@ Procedure FindDataForInputStringChoiceDataGetProcessing(Source, ChoiceData, Para
 		EndIf;
 	EndDo;
 EndProcedure
+
+// Get items by search string.
+// 
+// Parameters:
+//  Query - Query - Query
+// 
+// Returns:
+//  ValueTable - Get items by search string:
+//		* Ref - CatalogRef.Items
+//		* Presentation - String
+Function GetItemsBySearchString(Query)
+	Return Query.Execute().Unload();
+EndFunction
 
 // Replace description localization prefix.
 // 
@@ -106,7 +121,11 @@ EndFunction
 // 
 // Parameters:
 //  Source - CatalogManager, ChartOfCharacteristicTypesManager - Source
-//  Data - Structure - Data
+//  Data - Structure - Data:
+//  	* Code - String, Number - Code
+//  	* Ref - CatalogRefCatalogName
+//  	* Description - String
+//  	* FullDescription - String
 //  Presentation - String - Presentation
 //  StandardProcessing - Boolean - Standard processing
 Procedure GetCatalogPresentation(Source, Data, Presentation, StandardProcessing) Export
@@ -123,9 +142,9 @@ Procedure GetCatalogPresentation(Source, Data, Presentation, StandardProcessing)
 			Presentation = StrTemplate(R().Error_005, LocalizationReuse.UserLanguageCode());
 		EndIf;
 	ElsIf Data.Property("Description") Then
-		Presentation = String(Data["Description"]);
+		Presentation = String(Data.Description);
 	ElsIf Data.Property("FullDescription") Then
-		Presentation = String(Data["FullDescription"]);
+		Presentation = String(Data.FullDescription);
 	Else
 		Presentation = String(Data["Description_" + LocalizationReuse.UserLanguageCode()]);
 		If Presentation = "" Then
@@ -144,6 +163,11 @@ Procedure GetCatalogPresentation(Source, Data, Presentation, StandardProcessing)
 	EndIf;
 EndProcedure
 
+// Refresh reusable values before write.
+// 
+// Parameters:
+//  Source - CatalogObjectCatalogName, ChartOfCharacteristicTypesObjectChartOfCharacteristicTypesName - Source
+//  Cancel - Boolean - Cancel
 Procedure RefreshReusableValuesBeforeWrite(Source, Cancel) Export
 	RefreshReusableValues();
 EndProcedure
@@ -191,7 +215,7 @@ EndProcedure
 // 
 // Parameters:
 //  Form - ClientApplicationForm - Form
-//  Values Values
+//  Values - Structure - All lang description
 //  GroupName - String - Group name
 //  AddInfo - Undefined - Add info
 Procedure CreateSubFormItemDescription(Form, Values, GroupName, AddInfo = Undefined) Export
@@ -369,5 +393,26 @@ Procedure CheckDescriptionDuplicate(Source, Cancel)
 		EndIf;
 	EndDo;
 EndProcedure
+
+#EndRegion
+
+#Region Declaration
+
+// Custom search filter.
+// 
+// Returns:
+//  Structure - Custom search filter:
+// * FieldName - String
+// * Value - Undefined
+// * ComparisonType - ComparisonType
+// * DataCompositionComparisonType - Undefined
+Function NewCustomSearchFilter()
+	Structure = New Structure;
+	Structure.Insert("FieldName", "");
+	Structure.Insert("Value", Undefined);
+	Structure.Insert("ComparisonType", ComparisonType.Equal);
+	Structure.Insert("DataCompositionComparisonType", Undefined);
+	Return Structure;
+EndFunction
 
 #EndRegion

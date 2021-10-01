@@ -365,6 +365,8 @@ Function Strings(Lang) Export
 
 	Strings.Insert("Error_096", NStr("en = 'Select any document'", Lang));
 	Strings.Insert("Error_097", NStr("en = 'Default file storage volume is not set.'", Lang));
+	
+	Strings.Insert("Error_098", NStr("en = 'Document [%1] have negative stock balance'", Lang));
 #EndRegion
 
 #Region InfoMessages

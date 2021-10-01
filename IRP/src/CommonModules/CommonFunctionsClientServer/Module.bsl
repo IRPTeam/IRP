@@ -72,14 +72,14 @@ Procedure PutToAddInfo(AddInfo, Key, Value) Export
 	EndIf;
 EndProcedure
 
-Function GetFromAddInfo(AddInfo, Key) Export
+Function GetFromAddInfo(AddInfo, Key, DefaultValue = Undefined) Export
 	If TypeOf(AddInfo) <> Type("Structure") Then
-		Return Undefined;
+		Return ?(DefaultValue = Undefined, Undefined, DefaultValue);
 	EndIf;
 	If AddInfo.Property(Key) Then
 		Return AddInfo[Key];
 	Else
-		Return Undefined;
+		Return ?(DefaultValue = Undefined, Undefined, DefaultValue);;
 	EndIf;
 EndFunction
 

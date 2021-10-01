@@ -1,27 +1,51 @@
+
 Procedure Post(DocObject, Cancel, PostingMode, AddInfo = Undefined) Export
 
 	If Cancel Then
 		Return;
 	EndIf;
+	
+	Parameters = GetPostingParameters(DocObject, PostingMode, AddInfo);
+	
+	If Parameters.Cancel Then
+		Cancel = True;
+		Return;
+	EndIf;
+	
+	// Multi currency integration
+	CurrenciesServer.PreparePostingDataTables(Parameters, Undefined, AddInfo);
 
+	RegisteredRecords = RegisterRecords(DocObject, Parameters.PostingDataTables, Parameters.Object.RegisterRecords);
+	Parameters.Insert("RegisteredRecords", RegisteredRecords);
+
+	Parameters.Module.PostingCheckAfterWrite(DocObject.Ref, Cancel, PostingMode, Parameters, AddInfo);
+EndProcedure
+
+Function GetPostingParameters(DocObject, PostingMode, AddInfo = Undefined)
+	Cancel = False;
+	
 	Parameters = New Structure();
+	Parameters.Insert("Cancel", Cancel);
 	Parameters.Insert("Object", DocObject);
 	Parameters.Insert("IsReposting", False);
 	Parameters.Insert("PointInTime", DocObject.PointInTime());
 	Parameters.Insert("TempTablesManager", New TempTablesManager());
 
 	Module = Documents[DocObject.Ref.Metadata().Name];
-
+	Parameters.Insert("Module", Module);
+	
 	DocumentDataTables = Module.PostingGetDocumentDataTables(DocObject.Ref, Cancel, PostingMode, Parameters, AddInfo);
 	Parameters.Insert("DocumentDataTables", DocumentDataTables);
 	If Cancel Then
-		Return;
+		Parameters.Cancel = True;
+		Return Parameters;
 	EndIf;
 
 	LockDataSources = Module.PostingGetLockDataSource(DocObject.Ref, Cancel, PostingMode, Parameters, AddInfo);
 	Parameters.Insert("LockDataSources", LockDataSources);
 	If Cancel Then
-		Return;
+		Parameters.Cancel = True;
+		Return Parameters;
 	EndIf;
 	
 	// Save pointers to locks
@@ -35,7 +59,8 @@ Procedure Post(DocObject, Cancel, PostingMode, AddInfo = Undefined) Export
 
 	Module.PostingCheckBeforeWrite(DocObject.Ref, Cancel, PostingMode, Parameters, AddInfo);
 	If Cancel Then
-		Return;
+		Parameters.Cancel = True;
+		Return Parameters;
 	EndIf;
 
 	PostingDataTables = Module.PostingGetPostingDataTables(DocObject.Ref, Cancel, PostingMode, Parameters, AddInfo);
@@ -44,51 +69,8 @@ Procedure Post(DocObject, Cancel, PostingMode, AddInfo = Undefined) Export
 	Else
 		Parameters.Insert("PostingDataTables", PostingDataTables);
 	EndIf;
-	If Cancel Then
-		Return;
-	EndIf;
-
-	For Each KeyValue In PostingDataTables Do
-		RegisterMetadata = KeyValue.Key.Metadata();
-		RegisterName = RegisterMetadata.Name;
-
-		If Metadata.AccumulationRegisters.Find(RegisterName) = Undefined Then
-			Continue;
-		EndIf;
-
-		RecordInfo = KeyValue.Value;
-		If RecordInfo.RecordSet.Columns.Find("RowKey") = Undefined Or RegisterMetadata.Dimensions.Find("RowKey") = Undefined
-			Or Not RecordInfo.RecordSet.Count() Then
-			Continue;
-		EndIf;
-
-		RecordsForExpense = New ValueTable();
-		If RecordInfo.Property("RecordType") And RecordInfo.RecordType = AccumulationRecordType.Expense Then
-			RecordsForExpense = RecordInfo.RecordSet.Copy();
-			RecordInfo.RecordSet.Columns.Add("RecordType");
-			RecordInfo.RecordSet.FillValues(AccumulationRecordType.Expense, "RecordType");
-			RecordInfo.Delete("RecordType");
-		Else
-			If RecordInfo.RecordSet.Columns.Find("RecordType") <> Undefined Then
-				RecordsForExpense = RecordInfo.RecordSet.Copy(New Structure("RecordType",
-					AccumulationRecordType.Expense));
-			EndIf;
-		EndIf;
-
-		If Not RecordsForExpense.Count() Then
-			Continue;
-		EndIf;
-	EndDo;
-	
-	// Multi currency integration
-	CurrenciesServer.PreparePostingDataTables(Parameters, Undefined, AddInfo);
-
-	RegisteredRecords = RegisterRecords(DocObject, PostingDataTables, Parameters.Object.RegisterRecords);
-	Parameters.Insert("RegisteredRecords", RegisteredRecords);
-
-	Module.PostingCheckAfterWrite(DocObject.Ref, Cancel, PostingMode, Parameters, AddInfo);
-
-EndProcedure
+	Return Parameters;
+EndFunction
 
 Function SetLock(LockDataSources)
 	DataLock = New DataLock();
@@ -374,501 +356,6 @@ Function CreateTable(RegisterMetadata) Export
 	Return Table;
 EndFunction
 
-Function GetTable_OffsetOfAdvance_OnTransaction(PointInTime, QueryTableParameter, DocumentName) Export
-	Query = New Query();
-	If DocumentName = "PaymentDocument" Then
-		Query.Text = GetQueryText_OffsetOfAdvanceToSuppliers_OnTransaction();
-	ElsIf DocumentName = "ReceiptDocument" Then
-		Query.Text = GetQueryText_OffsetOfAdvanceFromCustomers_OnTransaction();
-	Else
-		Return New ValueTable();
-	EndIf;
-
-	Query.SetParameter("Period", PointInTime);
-	Query.SetParameter("QueryTable", QueryTableParameter);
-
-	QueryResult = Query.Execute();
-	QueryTable = QueryResult.Unload();
-
-	QueryTable_OffsetOfAdvance = QueryTable.CopyColumns();
-
-	QueryTable_Grupped = QueryTable.Copy();
-
-	FilterByColumns = "Period, 
-					  |Company,
-					  |Partner, 
-					  |LegalName, 
-					  |Currency, 
-					  |DocumentAmount, 
-					  |BasisDocument, 
-					  |Agreement, 
-					  |Amount";
-	QueryTable_Grupped.GroupBy(FilterByColumns);
-	For Each Row In QueryTable_Grupped Do
-		NeedWriteOff = Row.DocumentAmount;
-		Filter = New Structure(FilterByColumns);
-		FillPropertyValues(Filter, Row);
-		ArrayOfRows = QueryTable.FindRows(Filter);
-		For Each ItemOfArray In ArrayOfRows Do
-			If Not ItemOfArray.AmountBalance > 0 Then
-				Continue;
-			EndIf;
-			CanWriteOff = Min(ItemOfArray.AmountBalance, NeedWriteOff);
-			NeedWriteOff = NeedWriteOff - CanWriteOff;
-			ItemOfArray.AmountBalance = ItemOfArray.AmountBalance - CanWriteOff;
-
-			NewRow = QueryTable_OffsetOfAdvance.Add();
-			FillPropertyValues(NewRow, Row);
-
-			NewRow[DocumentName] = ItemOfArray[DocumentName];
-			NewRow.Amount = CanWriteOff;
-			If NeedWriteOff = 0 Then
-				Break;
-			EndIf;
-		EndDo;
-	EndDo;
-	Return QueryTable_OffsetOfAdvance;
-EndFunction
-
-Function GetTable_OffsetOfAdvance_OnAdvance(PointInTime, TableOfAdvances, TableOfTransactions, DocumentName) Export
-	Query = New Query();
-	If DocumentName = "PaymentDocument" Then
-		Query.Text = GetQueryText_OffsetOfAdvanceToSuppliers_OnAdvance();
-	ElsIf DocumentName = "ReceiptDocument" Then
-		Query.Text = GetQueryText_OffsetOfAdvanceFromCustomers_OnAdvance();
-	Else
-		Return New ValueTable();
-	EndIf;
-
-	TableOfAdvances.GroupBy("Period, Company, Partner, LegalName, Currency, Key," + DocumentName, "Amount");
-
-	Query.SetParameter("Period", PointInTime);
-	Query.SetParameter("QueryTable", TableOfAdvances);
-
-	QueryResult = Query.Execute();
-	QueryTable = QueryResult.Unload();
-
-	FilterByColumns = "Company,
-					  |Partner,
-					  |Agreement,
-					  |LegalName,
-					  |Currency,
-					  |Basisdocument";
-	For Each Row In TableOfTransactions Do
-		Filter = New Structure(FilterByColumns);
-		FillPropertyValues(Filter, Row);
-		ArrayOfRows = QueryTable.FindRows(Filter);
-		For Each ItemOfArray In ArrayOfRows Do
-			If ItemOfArray.AmountBalance < Row.Amount Then
-				ItemOfArray.AmountBalance = 0;
-			Else
-				ItemOfArray.AmountBalance = ItemOfArray.AmountBalance - Row.Amount;
-			EndIf;
-		EndDo;
-	EndDo;
-
-	Query = New Query();
-	Query.Text = "SELECT
-				 |	QueryTable.Period,
-				 |	QueryTable.Company,
-				 |	QueryTable.Partner,
-				 |	QueryTable.LegalName,
-				 |	QueryTable.Currency,
-				 |	QueryTable." + DocumentName + ",
-													|	QueryTable.Key,
-													|	QueryTable.DocumentAmount,
-													|	QueryTable.BasisDocument,
-													|	QueryTable.Agreement,
-													|	QueryTable.AmountBalance,
-													|	QueryTable.Amount
-													|INTO tmp
-													|FROM
-													|	&QueryTable AS QueryTable
-													|;
-													|
-													|////////////////////////////////////////////////////////////////////////////////
-													|SELECT
-													|	tmp.Period,
-													|	tmp.Company,
-													|	tmp.Partner,
-													|	tmp.LegalName,
-													|	tmp.Currency,
-													|	tmp." + DocumentName + ",
-																				|	tmp.Key,
-																				|	tmp.DocumentAmount,
-																				|	tmp.BasisDocument,
-																				|	tmp.Agreement,
-																				|	tmp.AmountBalance AS AmountBalance,
-																				|	ISNULL(AgingBalance.AmountBalance,0) AS AgingAmountBalance,
-																				|	CASE
-																				|		WHEN tmp.BasisDocument.Date IS NULL
-																				|			THEN DATETIME(1, 1, 1)
-																				|		ELSE ISNULL(AgingBalance.PaymentDate, tmp.BasisDocument.Date)
-																				|	END AS PriorityDate,
-																				|	tmp.Amount
-																				|FROM
-																				|	tmp AS tmp
-																				|		LEFT JOIN AccumulationRegister.Aging.Balance(&Period, (Company, Partner, Agreement, Invoice, Currency) IN
-																				|			(SELECT
-																				|				tmp.Company,
-																				|				tmp.Partner,
-																				|				tmp.Agreement,
-																				|				tmp.BasisDocument,
-																				|				tmp.Currency
-																				|			FROM
-																				|				tmp AS tmp)) AS AgingBalance
-																				|		ON tmp.Company = AgingBalance.Company
-																				|		AND tmp.Partner = AgingBalance.Partner
-																				|		AND tmp.Agreement = AgingBalance.Agreement
-																				|		AND tmp.BasisDocument = AgingBalance.Invoice
-																				|		AND tmp.Currency = tmp.Currency
-																				|ORDER BY
-																				|	PriorityDate";
-	Query.SetParameter("Period", PointInTime);
-	Query.SetParameter("QueryTable", QueryTable);
-
-	QueryResult = Query.Execute();
-	QueryTable_Aging = QueryResult.Unload();
-
-	FilterByColumns = "Period,
-					  |Company,
-					  |Partner,
-					  |LegalName,
-					  |Currency,
-					  |" + DocumentName + ",
-										  |DocumentAmount,
-										  |BasisDocument,
-										  |Agreement,
-										  |AmountBalance,
-										  |Amount";
-
-	For Each Row In QueryTable Do
-		NeedWriteOff = Row.AmountBalance;
-		If NeedWriteOff = 0 Then
-			Continue;
-		EndIf;
-		Filter = New Structure(FilterByColumns);
-		FillPropertyValues(Filter, Row);
-		ArrayOfRows = QueryTable_Aging.FindRows(Filter);
-		For Each ItemOfArray In ArrayOfRows Do
-			If Not ItemOfArray.AgingAmountBalance > 0 Then
-				Continue;
-			EndIf;
-			CanWriteOff = Min(ItemOfArray.AgingAmountBalance, NeedWriteOff);
-			NeedWriteOff = NeedWriteOff - CanWriteOff;
-			ItemOfArray.AgingAmountBalance = ItemOfArray.AgingAmountBalance - CanWriteOff;
-			ItemOfArray.AmountBalance = CanWriteOff;
-			If NeedWriteOff = 0 Then
-				Break;
-			EndIf;
-		EndDo;
-	EndDo;
-
-	QueryTable_OffsetOfAdvance = QueryTable_Aging.CopyColumns();
-	QueryTable_Grupped = QueryTable_Aging.Copy();
-
-	FilterByColumns = "Period, 
-					  |Company,
-					  |Partner, 
-					  |LegalName, 
-					  |Currency, 
-					  |DocumentAmount, 
-					  |" + DocumentName + ", 
-										  |Key,
-										  |Amount";
-	QueryTable_Grupped.GroupBy(FilterByColumns);
-	For Each Row In QueryTable_Grupped Do
-		NeedWriteOff = Row.DocumentAmount;
-		If NeedWriteOff = 0 Then
-			Continue;
-		EndIf;
-		Filter = New Structure(FilterByColumns);
-		FillPropertyValues(Filter, Row);
-		ArrayOfRows = QueryTable_Aging.FindRows(Filter);
-
-		For Each ItemOfArray In ArrayOfRows Do
-			If Not ItemOfArray.AmountBalance > 0 Then
-				Continue;
-			EndIf;
-			CanWriteOff = Min(ItemOfArray.AmountBalance, NeedWriteOff);
-			NeedWriteOff = NeedWriteOff - CanWriteOff;
-			ItemOfArray.AmountBalance = ItemOfArray.AmountBalance - CanWriteOff;
-
-			NewRow = QueryTable_OffsetOfAdvance.Add();
-			FillPropertyValues(NewRow, Row);
-
-			NewRow[DocumentName] = ItemOfArray[DocumentName];
-			NewRow.Amount        = CanWriteOff;
-			NewRow.Agreement     = ItemOfArray.Agreement;
-			NewRow.BasisDocument = ItemOfArray.BasisDocument;
-			If NeedWriteOff = 0 Then
-				Break;
-			EndIf;
-		EndDo;
-	EndDo;
-	Return QueryTable_OffsetOfAdvance;
-EndFunction
-
-Function GetQueryText_OffsetOfAdvanceToSuppliers_OnAdvance()
-	Return "SELECT
-		   |	AdvanceToSuppliers.Period,
-		   |	AdvanceToSuppliers.Company,
-		   |	AdvanceToSuppliers.Partner,
-		   |	AdvanceToSuppliers.LegalName,
-		   |	AdvanceToSuppliers.Currency,
-		   |	AdvanceToSuppliers.Amount AS DocumentAmount,
-		   |	AdvanceToSuppliers.PaymentDocument,
-		   |	AdvanceToSuppliers.Key
-		   |INTO AdvanceToSuppliers
-		   |FROM
-		   |	&QueryTable AS AdvanceToSuppliers
-		   |;
-		   |
-		   |
-		   |////////////////////////////////////////////////////////////////////////////////
-		   |SELECT
-		   |	AdvanceToSuppliers.Period,
-		   |	AdvanceToSuppliers.Company,
-		   |	AdvanceToSuppliers.Partner,
-		   |	AdvanceToSuppliers.LegalName,
-		   |	AdvanceToSuppliers.Currency,
-		   |	AdvanceToSuppliers.PaymentDocument,
-		   |	AdvanceToSuppliers.Key,
-		   |	SUM(AdvanceToSuppliers.DocumentAmount) AS DocumentAmount,
-		   |	PartnerApTransactionsBalance.BasisDocument,
-		   |	PartnerApTransactionsBalance.Agreement,
-		   |	SUM(PartnerApTransactionsBalance.AmountBalance) AS AmountBalance,
-		   |	0 AS Amount
-		   |FROM
-		   |	AccumulationRegister.PartnerApTransactions.Balance(&Period, (Company, Partner, LegalName, Currency,
-		   |		CurrencyMovementType) IN
-		   |		(SELECT
-		   |			AdvanceToSuppliers.Company,
-		   |			AdvanceToSuppliers.Partner,
-		   |			AdvanceToSuppliers.LegalName,
-		   |			AdvanceToSuppliers.Currency,
-		   |			VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
-		   |		FROM
-		   |			AdvanceToSuppliers AS AdvanceToSuppliers)) AS PartnerApTransactionsBalance
-		   |		INNER JOIN AdvanceToSuppliers AS AdvanceToSuppliers
-		   |		ON AdvanceToSuppliers.Company = PartnerApTransactionsBalance.Company
-		   |		AND AdvanceToSuppliers.Partner = PartnerApTransactionsBalance.Partner
-		   |		AND AdvanceToSuppliers.LegalName = PartnerApTransactionsBalance.LegalName
-		   |		AND AdvanceToSuppliers.Currency = PartnerApTransactionsBalance.Currency
-		   |GROUP BY
-		   |	AdvanceToSuppliers.Period,
-		   |	AdvanceToSuppliers.Company,
-		   |	AdvanceToSuppliers.Partner,
-		   |	AdvanceToSuppliers.LegalName,
-		   |	AdvanceToSuppliers.Currency,
-		   |	AdvanceToSuppliers.PaymentDocument,
-		   |	AdvanceToSuppliers.Key,
-		   |	PartnerApTransactionsBalance.BasisDocument,
-		   |	PartnerApTransactionsBalance.Agreement
-		   |ORDER BY
-		   |	AdvanceToSuppliers.Period,
-		   |	PartnerApTransactionsBalance.BasisDocument.Date";
-EndFunction
-
-Function GetQueryText_OffsetOfAdvanceFromCustomers_OnAdvance()
-	Return "SELECT
-		   |	AdvanceFromCustomers.Period,
-		   |	AdvanceFromCustomers.Company,
-		   |	AdvanceFromCustomers.Partner,
-		   |	AdvanceFromCustomers.LegalName,
-		   |	AdvanceFromCustomers.Currency,
-		   |	AdvanceFromCustomers.Amount AS DocumentAmount,
-		   |	AdvanceFromCustomers.ReceiptDocument,
-		   |	AdvanceFromCustomers.Key
-		   |INTO AdvanceFromCustomers
-		   |FROM
-		   |	&QueryTable AS AdvanceFromCustomers
-		   |;
-		   |
-		   |
-		   |////////////////////////////////////////////////////////////////////////////////
-		   |SELECT
-		   |	AdvanceFromCustomers.Period,
-		   |	AdvanceFromCustomers.Company,
-		   |	AdvanceFromCustomers.Partner,
-		   |	AdvanceFromCustomers.LegalName,
-		   |	AdvanceFromCustomers.Currency,
-		   |	AdvanceFromCustomers.ReceiptDocument,
-		   |	AdvanceFromCustomers.Key,
-		   |	SUM(AdvanceFromCustomers.DocumentAmount) AS DocumentAmount,
-		   |	PartnerArTransactionsBalance.BasisDocument,
-		   |	PartnerArTransactionsBalance.Agreement,
-		   |	SUM(PartnerArTransactionsBalance.AmountBalance) AS AmountBalance,
-		   |	0 AS Amount
-		   |FROM
-		   |	AccumulationRegister.PartnerArTransactions.Balance(&Period, (Company, Partner, LegalName, Currency,
-		   |		CurrencyMovementType) IN
-		   |		(SELECT
-		   |			AdvanceFromCustomers.Company,
-		   |			AdvanceFromCustomers.Partner,
-		   |			AdvanceFromCustomers.LegalName,
-		   |			AdvanceFromCustomers.Currency,
-		   |			VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
-		   |		FROM
-		   |			AdvanceFromCustomers AS AdvanceFromCustomers)) AS PartnerArTransactionsBalance
-		   |		INNER JOIN AdvanceFromCustomers AS AdvanceFromCustomers
-		   |		ON AdvanceFromCustomers.Company = PartnerArTransactionsBalance.Company
-		   |		AND AdvanceFromCustomers.Partner = PartnerArTransactionsBalance.Partner
-		   |		AND AdvanceFromCustomers.LegalName = PartnerArTransactionsBalance.LegalName
-		   |		AND AdvanceFromCustomers.Currency = PartnerArTransactionsBalance.Currency
-		   |GROUP BY
-		   |	AdvanceFromCustomers.Period,
-		   |	AdvanceFromCustomers.Company,
-		   |	AdvanceFromCustomers.Partner,
-		   |	AdvanceFromCustomers.LegalName,
-		   |	AdvanceFromCustomers.Currency,
-		   |	AdvanceFromCustomers.ReceiptDocument,
-		   |	AdvanceFromCustomers.Key,
-		   |	PartnerArTransactionsBalance.BasisDocument,
-		   |	PartnerArTransactionsBalance.Agreement
-		   |ORDER BY
-		   |	AdvanceFromCustomers.Period,
-		   |	PartnerArTransactionsBalance.BasisDocument.Date";
-EndFunction
-
-Function GetQueryText_OffsetOfAdvanceToSuppliers_OnTransaction()
-	Return "SELECT
-		   |	TransactionsAP.Period,
-		   |	TransactionsAP.Company,
-		   |	TransactionsAP.Partner,
-		   |	TransactionsAP.LegalName,
-		   |	TransactionsAP.Currency,
-		   |	TransactionsAP.DocumentAmount,
-		   |	TransactionsAP.BasisDocument,
-		   |	TransactionsAP.Agreement
-		   |INTO TransactionsAP
-		   |FROM
-		   |	&QueryTable AS TransactionsAP
-		   |;
-		   |
-		   |////////////////////////////////////////////////////////////////////////////////
-		   |SELECT
-		   |	TransactionsAP.Period,
-		   |	TransactionsAP.Company,
-		   |	TransactionsAP.Partner,
-		   |	TransactionsAP.LegalName,
-		   |	TransactionsAP.Currency,
-		   |	AdvanceToSuppliersBalance.PaymentDocument,
-		   |	SUM(TransactionsAP.DocumentAmount) AS DocumentAmount,
-		   |	TransactionsAP.BasisDocument,
-		   |	TransactionsAP.Agreement,
-		   |	SUM(AdvanceToSuppliersBalance.AmountBalance) AS AmountBalance,
-		   |	0 AS Amount
-		   |FROM
-		   |	AccumulationRegister.AdvanceToSuppliers.Balance(&Period, (Company, Partner, LegalName, Currency,
-		   |		CurrencyMovementType) IN
-		   |		(SELECT
-		   |			TransactionsAP.Company,
-		   |			TransactionsAP.Partner,
-		   |			TransactionsAP.LegalName,
-		   |			TransactionsAP.Currency,
-		   |			VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
-		   |		FROM
-		   |			TransactionsAP AS TransactionsAP)) AS AdvanceToSuppliersBalance
-		   |		LEFT JOIN TransactionsAP AS TransactionsAP
-		   |		ON AdvanceToSuppliersBalance.Company = TransactionsAP.Company
-		   |		AND AdvanceToSuppliersBalance.Partner = TransactionsAP.Partner
-		   |		AND AdvanceToSuppliersBalance.LegalName = TransactionsAP.LegalName
-		   |		AND AdvanceToSuppliersBalance.Currency = TransactionsAP.Currency
-		   |		AND
-		   |			AdvanceToSuppliersBalance.CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
-		   |GROUP BY
-		   |	TransactionsAP.Period,
-		   |	TransactionsAP.Company,
-		   |	TransactionsAP.Partner,
-		   |	TransactionsAP.LegalName,
-		   |	TransactionsAP.Currency,
-		   |	TransactionsAP.BasisDocument,
-		   |	TransactionsAP.Agreement,
-		   |	AdvanceToSuppliersBalance.PaymentDocument
-		   |ORDER BY
-		   |	AdvanceToSuppliersBalance.PaymentDocument.Date,
-		   |	TransactionsAP.Period";
-EndFunction
-
-Function GetQueryText_OffsetOfAdvanceFromCustomers_OnTransaction()
-	Return "SELECT
-		   |	TransactionsAR.Period,
-		   |	TransactionsAR.Company,
-		   |	TransactionsAR.Partner,
-		   |	TransactionsAR.LegalName,
-		   |	TransactionsAR.Currency,
-		   |	TransactionsAR.DocumentAmount,
-		   |	TransactionsAR.BasisDocument,
-		   |	TransactionsAR.Agreement
-		   |INTO TransactionsAR
-		   |FROM
-		   |	&QueryTable AS TransactionsAR
-		   |;
-		   |
-		   |////////////////////////////////////////////////////////////////////////////////
-		   |SELECT
-		   |	TransactionsAR.Period,
-		   |	TransactionsAR.Company,
-		   |	TransactionsAR.Partner,
-		   |	TransactionsAR.LegalName,
-		   |	TransactionsAR.Currency,
-		   |	AdvanceFromCustomersBalance.ReceiptDocument,
-		   |	SUM(TransactionsAR.DocumentAmount) AS DocumentAmount,
-		   |	TransactionsAR.BasisDocument,
-		   |	TransactionsAR.Agreement,
-		   |	SUM(AdvanceFromCustomersBalance.AmountBalance) AS AmountBalance,
-		   |	0 AS Amount
-		   |FROM
-		   |	AccumulationRegister.AdvanceFromCustomers.Balance(&Period, (Company, Partner, LegalName, Currency,
-		   |		CurrencyMovementType) IN
-		   |		(SELECT
-		   |			TransactionsAR.Company,
-		   |			TransactionsAR.Partner,
-		   |			TransactionsAR.LegalName,
-		   |			TransactionsAR.Currency,
-		   |			VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
-		   |		FROM
-		   |			TransactionsAR AS TransactionsAR)) AS AdvanceFromCustomersBalance
-		   |		LEFT JOIN TransactionsAR AS TransactionsAR
-		   |		ON AdvanceFromCustomersBalance.Company = TransactionsAR.Company
-		   |		AND AdvanceFromCustomersBalance.Partner = TransactionsAR.Partner
-		   |		AND AdvanceFromCustomersBalance.LegalName = TransactionsAR.LegalName
-		   |		AND AdvanceFromCustomersBalance.Currency = TransactionsAR.Currency
-		   |		AND
-		   |			AdvanceFromCustomersBalance.CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
-		   |GROUP BY
-		   |	TransactionsAR.Period,
-		   |	TransactionsAR.Company,
-		   |	TransactionsAR.Partner,
-		   |	TransactionsAR.LegalName,
-		   |	TransactionsAR.Currency,
-		   |	TransactionsAR.BasisDocument,
-		   |	TransactionsAR.Agreement,
-		   |	AdvanceFromCustomersBalance.ReceiptDocument
-		   |ORDER BY
-		   |	AdvanceFromCustomersBalance.ReceiptDocument.Date,
-		   |	TransactionsAR.Period";
-EndFunction
-
-Function OffsetOfAdvanceByVendorAgreement(PartnerArTransactions_OffsetOfAdvance) Export
-	For Each Row In PartnerArTransactions_OffsetOfAdvance Do
-		If Row.Agreement.Type = Enums.AgreementTypes.Vendor Then
-			Return True;
-		EndIf;
-	EndDo;
-	Return False;
-EndFunction
-
-Function OffsetOfAdvanceByCustomerAgreement(PartnerApTransactions_OffsetOfAdvance) Export
-	For Each Row In PartnerApTransactions_OffsetOfAdvance Do
-		If Row.Agreement.Type = Enums.AgreementTypes.Customer Then
-			Return True;
-		EndIf;
-	EndDo;
-	Return False;
-EndFunction
-
 Procedure ShowPostingErrorMessage(QueryTable, Parameters, AddInfo = Undefined) Export
 	If QueryTable.Columns.Find("Unposting") = Undefined Then
 		QueryTable.Columns.Add("Unposting");
@@ -887,7 +374,10 @@ Procedure ShowPostingErrorMessage(QueryTable, Parameters, AddInfo = Undefined) E
 
 	QueryTableCopy = QueryTable.Copy();
 	QueryTableCopy.GroupBy(Parameters.GroupColumns + ", Unposting", Parameters.SumColumns);
-
+	
+	FastCheck = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "FastCheck", False);
+	ArrayOfPostingErrorMessages = New Array();
+	
 	For Each Row In QueryTableCopy Do
 		Filter = New Structure(Parameters.FilterColumns);
 		FillPropertyValues(Filter, Row);
@@ -920,8 +410,13 @@ Procedure ShowPostingErrorMessage(QueryTable, Parameters, AddInfo = Undefined) E
 				MessageText = StrTemplate(R().Error_068, LineNumber, Row.Item, Row.ItemKey, Parameters.Operation,
 					RemainsQuantity, Row.Quantity, LackOfBalance, BasisUnit);
 			EndIf;
-			CommonFunctionsClientServer.ShowUsersMessage(
-			MessageText, TableDataPath + "[" + (LineNumber - 1) + "].Quantity", "Object.ItemList");
+			
+			If FastCheck Then
+				ArrayOfPostingErrorMessages.Add(MessageText);
+			Else
+				CommonFunctionsClientServer.ShowUsersMessage(
+				MessageText, TableDataPath + "[" + (LineNumber - 1) + "].Quantity", "Object.ItemList");
+			EndIf;
 			// Delete row
 		Else
 			If ValueIsFilled(ErrorQuantityField) Then
@@ -932,15 +427,23 @@ Procedure ShowPostingErrorMessage(QueryTable, Parameters, AddInfo = Undefined) E
 					MessageText = StrTemplate(R().Error_090, Row.Item, Row.ItemKey, Parameters.Operation,
 						RemainsQuantity, Row.Quantity, LackOfBalance, BasisUnit);
 				EndIf;
-				CommonFunctionsClientServer.ShowUsersMessage(
-				MessageText, ErrorQuantityField);
+				If FastCheck Then
+					ArrayOfPostingErrorMessages.Add(MessageText);
+				Else
+					CommonFunctionsClientServer.ShowUsersMessage(MessageText, ErrorQuantityField);
+				EndIf;
 			Else
 				MessageText = StrTemplate(R().Error_068, LineNumbers, Row.Item, Row.ItemKey, Parameters.Operation,
 					LackOfBalance, 0, LackOfBalance, BasisUnit);
-				CommonFunctionsClientServer.ShowUsersMessage(MessageText);
+				If FastCheck Then
+					ArrayOfPostingErrorMessages.Add(MessageText);
+				Else
+					CommonFunctionsClientServer.ShowUsersMessage(MessageText);
+				EndIf;
 			EndIf;
 		EndIf;
 	EndDo;
+	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "ArrayOfPostingErrorMessages", ArrayOfPostingErrorMessages);
 EndProcedure
 
 Procedure AddColumnsToAccountsStatementTable(Table) Export
@@ -994,8 +497,7 @@ Function GetLineNumberAndItemKeyFromItemList(Ref, FullTableName) Export
 	DocumentName = ArrayOfNameParts[1];
 	TabularSectionName = ArrayOfNameParts[2];
 
-	IsStoreInTabularSection = Metadata.Documents[DocumentName].TabularSections[TabularSectionName].Attributes.Find(
-		"Store") <> Undefined;
+	IsStoreInTabularSection = Metadata.Documents[DocumentName].TabularSections[TabularSectionName].Attributes.Find("Store") <> Undefined;
 
 	Query = New Query();
 	Query.Text =
@@ -1236,8 +738,10 @@ EndProcedure
 
 Function CheckBalance_R4011B_FreeStocks(Ref, Tables, RecordType, Unposting, AddInfo = Undefined) Export
 	Parameters = New Structure();
-	Parameters.Insert("RegisterName", "R4011B_FreeStocks");
-	Parameters.Insert("Operation", "R4011B_FreeStocks");
+	Parameters.Insert("RegisterName"      , "R4011B_FreeStocks");
+	Parameters.Insert("Operation"         , "R4011B_FreeStocks");
+	Parameters.Insert("FastCheck"         , CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "FastCheck", False));
+	Parameters.Insert("TempTablesManager" , New TempTablesManager());
 	Return CheckBalance(Ref, Parameters, Tables, RecordType, Unposting, AddInfo);
 EndFunction
 
@@ -1252,8 +756,10 @@ EndFunction
 
 Function CheckBalance_R4010B_ActualStocks(Ref, Tables, RecordType, Unposting, AddInfo = Undefined) Export
 	Parameters = New Structure();
-	Parameters.Insert("RegisterName", "R4010B_ActualStocks");
-	Parameters.Insert("Operation", "R4010B_ActualStocks");
+	Parameters.Insert("RegisterName"      , "R4010B_ActualStocks");
+	Parameters.Insert("Operation"         , "R4010B_ActualStocks");
+	Parameters.Insert("FastCheck"         , CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "FastCheck", False));
+	Parameters.Insert("TempTablesManager" , New TempTablesManager());
 	Return CheckBalance(Ref, Parameters, Tables, RecordType, Unposting, AddInfo);
 EndFunction
 
@@ -1267,20 +773,82 @@ Function Exists_R4010B_ActualStocks() Export
 EndFunction
 
 Function CheckBalance(Ref, Parameters, Tables, RecordType, Unposting, AddInfo = Undefined)
-	BalancePeriod = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "BalancePeriod");
-	If Not ValueIsFilled(BalancePeriod) Then
-		BalancePeriod = New Boundary(Ref.PointInTime(), BoundaryType.Including);
-	EndIf;
-	Parameters.Insert("BalancePeriod", BalancePeriod);
-	If CheckBalance_ExecuteQuery(Ref, Parameters, Tables, RecordType, Unposting, AddInfo) Then
+	Result = New Structure("IsOk", True);
+	Parameters.Insert("BalancePeriod", CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "BalancePeriod",
+		New Boundary(Ref.PointInTime(), BoundaryType.Including)));
+	CheckResult = CheckBalance_ExecuteQuery(Ref, Parameters, Tables, RecordType, Unposting, AddInfo);
+	If CheckResult.IsOk Then
+		If RecordType = AccumulationRecordType.Expense Or Parameters.FastCheck Then
+			Return Result.IsOk;
+		EndIf;
+		
+		// Only for Receipt Full check
 		Parameters.BalancePeriod = Undefined;
-		Return CheckBalance_ExecuteQuery(Ref, Parameters, Tables, RecordType, Unposting, AddInfo);
+		Parameters.Insert("TempTablesManager" , New TempTablesManager());
+		CheckResult = CheckBalance_ExecuteQuery(Ref, Parameters, Tables, RecordType, Unposting, AddInfo);
+		If CheckResult.IsOk Then
+			Return CheckAllExpenses(Parameters).IsOk;
+		Else
+			Result.IsOk = False;
+			Return Result.IsOk;
+		EndIf;
+	Else
+		Result.IsOk = False;
+		Return Result.IsOk;
 	EndIf;
-	Return False;
+EndFunction
+
+Function GetExpenseRecorders(Parameters)
+	Query = New Query();
+	Query.TempTablesManager = Parameters.TempTablesManager;
+	Query.Text =
+	"SELECT
+	|	BalanceRegister.Recorder,
+	|	BalanceRegister.Recorder.PointInTime
+	|FROM
+	|	AccumulationRegister.%1 AS BalanceRegister
+	|		INNER JOIN Records_All_Grouped AS Records_All_Grouped
+	|		ON Records_All_Grouped.Store = BalanceRegister.Store
+	|		AND Records_All_Grouped.ItemKey = BalanceRegister.ItemKey
+	|		AND BalanceRegister.RecordType = VALUE(AccumulationRecordType.Expense)
+	|GROUP BY
+	|	BalanceRegister.Recorder,
+	|	BalanceRegister.Recorder.PointInTime
+	|ORDER BY
+	|	BalanceRegister.Recorder.PointInTime";
+	Query.Text = StrTemplate(Query.Text, Parameters.RegisterName);
+	QueryResut = Query.Execute();
+	QueryTable = QueryResut.Unload();
+	Return QueryTable;
+EndFunction
+
+Function CheckAllExpenses(Parameters)
+	Result = New Structure("IsOk", True);
+	TableOfExpenseRecorders = GetExpenseRecorders(Parameters);
+	For Each RowExpenseRecorders In TableOfExpenseRecorders Do
+		CheckAddInfo = New Structure("FastCheck", True);
+		PostingParameters = GetPostingParameters(RowExpenseRecorders.Recorder.GetObject(), DocumentPostingMode.Regular, CheckAddInfo);
+		Cancel = False;
+		PostingParameters.Module.CheckAfterWrite_R4010B_R4011B(RowExpenseRecorders.Recorder, Cancel, PostingParameters, CheckAddInfo);
+		If Cancel Then
+			// Message with error
+			CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_098, String(RowExpenseRecorders.Recorder)));
+			ArrayOfPostingErrorMessages = CommonFunctionsClientServer.GetFromAddInfo(CheckAddInfo, "ArrayOfPostingErrorMessages", New Array());
+			If ArrayOfPostingErrorMessages.Count() Then
+				For Each PostingErrorMessage In ArrayOfPostingErrorMessages Do
+					CommonFunctionsClientServer.ShowUsersMessage(PostingErrorMessage);
+				EndDo;
+			EndIf;
+			Result.IsOk = False;
+			Return Result;
+		EndIf;
+	EndDo;
+	Return Result;
 EndFunction
 
 Function CheckBalance_ExecuteQuery(Ref, Parameters, Tables, RecordType, Unposting, AddInfo = Undefined)
 	Query = New Query();
+	Query.TempTablesManager = Parameters.TempTablesManager;
 	Query.Text =
 	"SELECT
 	|	ItemList.ItemKey,
@@ -1377,7 +945,7 @@ Function CheckBalance_ExecuteQuery(Ref, Parameters, Tables, RecordType, Unpostin
 	|INTO Lack
 	|FROM
 	|	Records_All_Grouped AS Records_All_Grouped
-	|		LEFT JOIN AccumulationRegister.%1.Balance(%2, (Store, ItemKey) IN
+	|		LEFT JOIN AccumulationRegister.%1.Balance(&Period, (Store, ItemKey) IN
 	|			(SELECT
 	|				Records_All_Grouped.Store,
 	|				Records_All_Grouped.ItemKey
@@ -1415,8 +983,7 @@ Function CheckBalance_ExecuteQuery(Ref, Parameters, Tables, RecordType, Unpostin
 	|	Lack.Quantity,
 	|	Lack.LackOfBalance,
 	|	Lack.Unposting";
-	PeriodTypeParameter = GetPeriodType(Query, Parameters);
-	Query.Text = StrTemplate(Query.Text, Parameters.RegisterName, PeriodTypeParameter);
+	Query.Text = StrTemplate(Query.Text, Parameters.RegisterName);
 
 	Query.SetParameter("Period", Parameters.BalancePeriod);
 	Query.SetParameter("ItemList_InDocument", Tables.ItemList_InDocument);
@@ -1425,16 +992,17 @@ Function CheckBalance_ExecuteQuery(Ref, Parameters, Tables, RecordType, Unpostin
 	Query.SetParameter("Unposting", Unposting);
 	QueryResult = Query.Execute();
 	QueryTable = QueryResult.Unload();
-
-	Error = False;
+	
+	Result = New Structure("IsOk", True);
+	
 	If QueryTable.Count() Then
-		Error = True;
+		Result.IsOk = False;
 		ErrorParameters = New Structure();
-		ErrorParameters.Insert("GroupColumns", "ItemKey, Item, LackOfBalance");
-		ErrorParameters.Insert("SumColumns", "Quantity");
-		ErrorParameters.Insert("FilterColumns", "ItemKey, Item, LackOfBalance");
-		ErrorParameters.Insert("Operation", Parameters.Operation);
-		ErrorParameters.Insert("RecordType", RecordType);
+		ErrorParameters.Insert("GroupColumns"  , "ItemKey, Item, LackOfBalance");
+		ErrorParameters.Insert("SumColumns"    , "Quantity");
+		ErrorParameters.Insert("FilterColumns" , "ItemKey, Item, LackOfBalance");
+		ErrorParameters.Insert("Operation"     , Parameters.Operation);
+		ErrorParameters.Insert("RecordType"    , RecordType);
 
 		TableDataPath = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "TableDataPath");
 		If ValueIsFilled(TableDataPath) Then
@@ -1448,11 +1016,7 @@ Function CheckBalance_ExecuteQuery(Ref, Parameters, Tables, RecordType, Unpostin
 
 		ShowPostingErrorMessage(QueryTable, ErrorParameters, AddInfo);
 	EndIf;
-	Return Not Error;
-EndFunction
-
-Function GetPeriodType(Query, Parameters)
-	Return "";
+	Return Result;
 EndFunction
 
 #Region NewRegistersPosting

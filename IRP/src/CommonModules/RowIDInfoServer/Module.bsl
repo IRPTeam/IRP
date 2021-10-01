@@ -8265,27 +8265,69 @@ EndFunction
 Function Is(Source)
 	TypeOf = TypeOf(Source);
 	Result = New Structure();
-	Result.Insert("SO", TypeOf = Type("DocumentObject.SalesOrder") Or TypeOf = Type("DocumentRef.SalesOrder"));
-	Result.Insert("SI", TypeOf = Type("DocumentObject.SalesInvoice") Or TypeOf = Type("DocumentRef.SalesInvoice"));
-	Result.Insert("SC", TypeOf = Type("DocumentObject.ShipmentConfirmation") Or TypeOf = Type("DocumentRef.ShipmentConfirmation"));
-	Result.Insert("PO", TypeOf = Type("DocumentObject.PurchaseOrder") Or TypeOf = Type("DocumentRef.PurchaseOrder"));
-	Result.Insert("PI", TypeOf = Type("DocumentObject.PurchaseInvoice") Or TypeOf = Type("DocumentRef.PurchaseInvoice"));
-	Result.Insert("GR", TypeOf = Type("DocumentObject.GoodsReceipt") Or TypeOf = Type("DocumentRef.GoodsReceipt"));
-	Result.Insert("ITO", TypeOf = Type("DocumentObject.InventoryTransferOrder") Or TypeOf = Type("DocumentRef.InventoryTransferOrder"));
-	Result.Insert("IT", TypeOf = Type("DocumentObject.InventoryTransfer") Or TypeOf = Type("DocumentRef.InventoryTransfer"));
-	Result.Insert("ISR", TypeOf = Type("DocumentObject.InternalSupplyRequest") Or TypeOf = Type("DocumentRef.InternalSupplyRequest"));
-	Result.Insert("PhysicalInventory", TypeOf = Type("DocumentObject.PhysicalInventory") Or TypeOf = Type("DocumentRef.PhysicalInventory"));
-	Result.Insert("StockAdjustmentAsSurplus", TypeOf = Type("DocumentObject.StockAdjustmentAsSurplus") Or TypeOf = Type("DocumentRef.StockAdjustmentAsSurplus"));
-	Result.Insert("StockAdjustmentAsWriteOff", TypeOf = Type("DocumentObject.StockAdjustmentAsWriteOff") Or TypeOf = Type("DocumentRef.StockAdjustmentAsWriteOff"));
-	Result.Insert("PR", TypeOf = Type("DocumentObject.PurchaseReturn") Or TypeOf = Type("DocumentRef.PurchaseReturn"));
-	Result.Insert("PRO", TypeOf = Type("DocumentObject.PurchaseReturnOrder") Or TypeOf = Type("DocumentRef.PurchaseReturnOrder"));
-	Result.Insert("SR", TypeOf = Type("DocumentObject.SalesReturn") Or TypeOf = Type("DocumentRef.SalesReturn"));
-	Result.Insert("SRO", TypeOf = Type("DocumentObject.SalesReturnOrder") Or TypeOf = Type("DocumentRef.SalesReturnOrder"));
-	Result.Insert("RSR", TypeOf = Type("DocumentObject.RetailSalesReceipt") Or TypeOf = Type("DocumentRef.RetailSalesReceipt"));
-	Result.Insert("RRR", TypeOf = Type("DocumentObject.RetailReturnReceipt") Or TypeOf = Type("DocumentRef.RetailReturnReceipt"));
-	Result.Insert("PRR", TypeOf = Type("DocumentObject.PlannedReceiptReservation") Or TypeOf = Type("DocumentRef.PlannedReceiptReservation"));
-	Result.Insert("SOC", TypeOf = Type("DocumentObject.SalesOrderClosing") Or TypeOf = Type("DocumentRef.SalesOrderClosing"));
-	Result.Insert("POC", TypeOf = Type("DocumentObject.PurchaseOrderClosing") Or TypeOf = Type("DocumentRef.PurchaseOrderClosing"));
+	Result.Insert("SO",
+		TypeOf = Type("DocumentObject.SalesOrder")
+		Or TypeOf = Type("DocumentRef.SalesOrder"));
+	Result.Insert("SI",
+		TypeOf = Type("DocumentObject.SalesInvoice")
+		Or TypeOf = Type("DocumentRef.SalesInvoice"));
+	Result.Insert("SC",
+		TypeOf = Type("DocumentObject.ShipmentConfirmation")
+		Or TypeOf = Type("DocumentRef.ShipmentConfirmation"));
+	Result.Insert("PO",
+		TypeOf = Type("DocumentObject.PurchaseOrder")
+		Or TypeOf = Type("DocumentRef.PurchaseOrder"));
+	Result.Insert("PI",
+		TypeOf = Type("DocumentObject.PurchaseInvoice")
+		Or TypeOf = Type("DocumentRef.PurchaseInvoice"));
+	Result.Insert("GR",
+		TypeOf = Type("DocumentObject.GoodsReceipt")
+		Or TypeOf = Type("DocumentRef.GoodsReceipt"));
+	Result.Insert("ITO",
+		TypeOf = Type("DocumentObject.InventoryTransferOrder")
+		Or TypeOf = Type("DocumentRef.InventoryTransferOrder"));
+	Result.Insert("IT",
+		TypeOf = Type("DocumentObject.InventoryTransfer")
+		Or TypeOf = Type("DocumentRef.InventoryTransfer"));
+	Result.Insert("ISR",
+		TypeOf = Type("DocumentObject.InternalSupplyRequest")
+		Or TypeOf = Type("DocumentRef.InternalSupplyRequest"));
+	Result.Insert("PhysicalInventory",
+		TypeOf = Type("DocumentObject.PhysicalInventory")
+		Or TypeOf = Type("DocumentRef.PhysicalInventory"));
+	Result.Insert("StockAdjustmentAsSurplus",
+		TypeOf = Type("DocumentObject.StockAdjustmentAsSurplus")
+		Or TypeOf = Type("DocumentRef.StockAdjustmentAsSurplus"));
+	Result.Insert("StockAdjustmentAsWriteOff",
+		TypeOf = Type("DocumentObject.StockAdjustmentAsWriteOff")
+		Or TypeOf = Type("DocumentRef.StockAdjustmentAsWriteOff"));
+	Result.Insert("PR",
+		TypeOf = Type("DocumentObject.PurchaseReturn")
+		Or TypeOf = Type("DocumentRef.PurchaseReturn"));
+	Result.Insert("PRO",
+		TypeOf = Type("DocumentObject.PurchaseReturnOrder")
+		Or TypeOf = Type("DocumentRef.PurchaseReturnOrder"));
+	Result.Insert("SR",
+		TypeOf = Type("DocumentObject.SalesReturn")
+		Or TypeOf = Type("DocumentRef.SalesReturn"));
+	Result.Insert("SRO",
+		TypeOf = Type("DocumentObject.SalesReturnOrder")
+		Or TypeOf = Type("DocumentRef.SalesReturnOrder"));
+	Result.Insert("RSR",
+		TypeOf = Type("DocumentObject.RetailSalesReceipt")
+		Or TypeOf = Type("DocumentRef.RetailSalesReceipt"));
+	Result.Insert("RRR",
+		TypeOf = Type("DocumentObject.RetailReturnReceipt")
+		Or TypeOf = Type("DocumentRef.RetailReturnReceipt"));
+	Result.Insert("PRR",
+		TypeOf = Type("DocumentObject.PlannedReceiptReservation")
+		Or TypeOf = Type("DocumentRef.PlannedReceiptReservation"));
+	Result.Insert("SOC",
+		TypeOf = Type("DocumentObject.SalesOrderClosing")
+		Or TypeOf = Type("DocumentRef.SalesOrderClosing"));
+	Result.Insert("POC",
+		TypeOf = Type("DocumentObject.PurchaseOrderClosing")
+		Or TypeOf = Type("DocumentRef.PurchaseOrderClosing"));
 	Return Result;
 EndFunction
 

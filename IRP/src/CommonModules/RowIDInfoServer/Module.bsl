@@ -1,4 +1,12 @@
 Procedure Posting_RowID(Source, Cancel, PostingMode) Export
+	If Is(Source).SOC Then
+		Posting_TM1010B_RowIDMovements_SOC(Source, Cancel, PostingMode);
+	EndIf;
+	
+	If Is(Source).POC Then
+		Posting_TM1010B_RowIDMovements_POC(Source, Cancel, PostingMode);
+	EndIf;
+	
 	If Source.Metadata().TabularSections.Find("RowIDInfo") = Undefined Then
 		Return;
 	EndIf;
@@ -50,6 +58,110 @@ Procedure UndoPosting_RowIDUndoPosting(Source, Cancel) Export
 	Source.RegisterRecords.TM1010B_RowIDMovements.Write();
 	
 	CheckAfterWrite(Source, Cancel, ItemList_InDocument, Records_InDocument, Records_Exists, Unposting);
+EndProcedure
+
+Procedure Posting_TM1010B_RowIDMovements_SOC(Source, Cancel, PostingMode)
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	SalesOrderItemList.Ref.Date AS Period,
+	|	SalesOrderItemList.Ref.SalesOrder AS Order,
+	|	SalesOrderItemList.Key AS RowKey,
+	|	SalesOrderItemList.Cancel AS IsCanceled
+	|INTO ItemList
+	|FROM
+	|	Document.SalesOrderClosing.ItemList AS SalesOrderItemList
+	|WHERE
+	|	SalesOrderItemList.Ref = &Ref
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	RowIDInfo.RowID,
+	|	RowIDInfo.NextStep AS Step,
+	|	ItemList.Order AS Basis,
+	|	RowIDInfo.RowRef
+	|INTO RowIDInfo
+	|FROM
+	|	Document.SalesOrder.RowIDInfo AS RowIDInfo
+	|		INNER JOIN ItemList
+	|		ON RowIDInfo.Ref = ItemList.Order
+	|		AND RowIDInfo.Key = ItemList.RowKey
+	|		AND ItemList.IsCanceled
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	&Period AS Period,
+	|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+	|	-TM1010B_RowIDMovementsBalance.QuantityBalance AS Quantity,
+	|	*
+	|FROM
+	|	AccumulationRegister.TM1010B_RowIDMovements.Balance(&BalancePeriod, (RowID, Step, Basis, RowRef) IN
+	|		(SELECT
+	|			RowIDInfo.RowID,
+	|			RowIDInfo.Step,
+	|			RowIDInfo.Basis,
+	|			RowIDInfo.RowRef
+	|		FROM
+	|			RowIDInfo AS RowIDInfo)) AS TM1010B_RowIDMovementsBalance";
+	Query.SetParameter("Ref", Source.Ref);
+	Query.SetParameter("Period", Source.Ref.Date);
+	Query.SetParameter("BalancePeriod", New Boundary(Source.Ref.PointInTime(), BoundaryType.Excluding));
+	QueryResult = Query.Execute().Unload();
+	Source.RegisterRecords.TM1010B_RowIDMovements.Load(QueryResult);
+EndProcedure
+
+Procedure Posting_TM1010B_RowIDMovements_POC(Source, Cancel, PostingMode)
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	PurchaseOrderItems.Ref.Date AS Period,
+	|	PurchaseOrderItems.Ref.PurchaseOrder AS Order,
+	|	PurchaseOrderItems.Key AS RowKey,
+	|	PurchaseOrderItems.Cancel AS IsCanceled
+	|INTO ItemList
+	|FROM
+	|	Document.PurchaseOrderClosing.ItemList AS PurchaseOrderItems
+	|WHERE
+	|	PurchaseOrderItems.Ref = &Ref
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	RowIDInfo.RowID,
+	|	RowIDInfo.NextStep AS Step,
+	|	ItemList.Order AS Basis,
+	|	RowIDInfo.RowRef
+	|INTO RowIDInfo
+	|FROM
+	|	Document.PurchaseOrder.RowIDInfo AS RowIDInfo
+	|		INNER JOIN ItemList
+	|		ON RowIDInfo.Ref = ItemList.Order
+	|		AND RowIDInfo.Key = ItemList.RowKey
+	|		AND ItemList.IsCanceled
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	&Period AS Period,
+	|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+	|	-TM1010B_RowIDMovementsBalance.QuantityBalance AS Quantity,
+	|	*
+	|FROM
+	|	AccumulationRegister.TM1010B_RowIDMovements.Balance(&BalancePeriod, (RowID, Step, Basis, RowRef) IN
+	|		(SELECT
+	|			RowIDInfo.RowID,
+	|			RowIDInfo.Step,
+	|			RowIDInfo.Basis,
+	|			RowIDInfo.RowRef
+	|		FROM
+	|			RowIDInfo AS RowIDInfo)) AS TM1010B_RowIDMovementsBalance";
+	Query.SetParameter("Ref", Source.Ref);
+	Query.SetParameter("Period", Source.Ref.Date);
+	Query.SetParameter("BalancePeriod", New Boundary(Source.Ref.PointInTime(), BoundaryType.Excluding));
+	QueryResult = Query.Execute().Unload();
+	Source.RegisterRecords.TM1010B_RowIDMovements.Load(QueryResult);
 EndProcedure
 
 Procedure Posting_TM1010T_RowIDMovements_Return(Source, Cancel, PostingMode)
@@ -8153,45 +8265,27 @@ EndFunction
 Function Is(Source)
 	TypeOf = TypeOf(Source);
 	Result = New Structure();
-	Result.Insert("SO", TypeOf = Type("DocumentObject.SalesOrder") 
-	                 Or TypeOf = Type("DocumentRef.SalesOrder"));
-	Result.Insert("SI", TypeOf = Type("DocumentObject.SalesInvoice") 
-	                 Or TypeOf = Type("DocumentRef.SalesInvoice"));
-	Result.Insert("SC", TypeOf = Type("DocumentObject.ShipmentConfirmation") 
-	                 Or TypeOf = Type("DocumentRef.ShipmentConfirmation"));
-	Result.Insert("PO", TypeOf = Type("DocumentObject.PurchaseOrder") 
-	                 Or TypeOf = Type("DocumentRef.PurchaseOrder"));
-	Result.Insert("PI", TypeOf = Type("DocumentObject.PurchaseInvoice") 
-	                 Or TypeOf = Type("DocumentRef.PurchaseInvoice"));
-	Result.Insert("GR", TypeOf = Type("DocumentObject.GoodsReceipt") 
-	                 Or TypeOf = Type("DocumentRef.GoodsReceipt"));
-	Result.Insert("ITO", TypeOf = Type("DocumentObject.InventoryTransferOrder") 
-	                  Or TypeOf = Type("DocumentRef.InventoryTransferOrder"));
-	Result.Insert("IT", TypeOf = Type("DocumentObject.InventoryTransfer") 
-	                 Or TypeOf = Type("DocumentRef.InventoryTransfer"));
-	Result.Insert("ISR", TypeOf = Type("DocumentObject.InternalSupplyRequest") 
-	                  Or TypeOf = Type("DocumentRef.InternalSupplyRequest"));
-	Result.Insert("PhysicalInventory", TypeOf = Type("DocumentObject.PhysicalInventory") 
-	                                Or TypeOf = Type("DocumentRef.PhysicalInventory"));
-	Result.Insert("StockAdjustmentAsSurplus", TypeOf = Type("DocumentObject.StockAdjustmentAsSurplus") 
-	                                       Or TypeOf = Type("DocumentRef.StockAdjustmentAsSurplus"));
-	Result.Insert("StockAdjustmentAsWriteOff", TypeOf = Type("DocumentObject.StockAdjustmentAsWriteOff") 
-	                                        Or TypeOf = Type("DocumentRef.StockAdjustmentAsWriteOff"));
-	Result.Insert("PR", TypeOf = Type("DocumentObject.PurchaseReturn") 
-	                 Or TypeOf = Type("DocumentRef.PurchaseReturn"));
-	Result.Insert("PRO", TypeOf = Type("DocumentObject.PurchaseReturnOrder") 
-	                  Or TypeOf = Type("DocumentRef.PurchaseReturnOrder"));
-	Result.Insert("SR", TypeOf = Type("DocumentObject.SalesReturn") 
-	                 Or TypeOf = Type("DocumentRef.SalesReturn"));
-	Result.Insert("SRO", TypeOf = Type("DocumentObject.SalesReturnOrder") 
-	                  Or TypeOf = Type("DocumentRef.SalesReturnOrder"));
-	Result.Insert("RSR", TypeOf = Type("DocumentObject.RetailSalesReceipt") 
-	                  Or TypeOf = Type("DocumentRef.RetailSalesReceipt"));
-	Result.Insert("RRR", TypeOf = Type("DocumentObject.RetailReturnReceipt") 
-	                  Or TypeOf = Type("DocumentRef.RetailReturnReceipt"));
-	Result.Insert("PRR", TypeOf = Type("DocumentObject.PlannedReceiptReservation") 
-	                  Or TypeOf = Type("DocumentRef.PlannedReceiptReservation"));
-
+	Result.Insert("SO", TypeOf = Type("DocumentObject.SalesOrder") Or TypeOf = Type("DocumentRef.SalesOrder"));
+	Result.Insert("SI", TypeOf = Type("DocumentObject.SalesInvoice") Or TypeOf = Type("DocumentRef.SalesInvoice"));
+	Result.Insert("SC", TypeOf = Type("DocumentObject.ShipmentConfirmation") Or TypeOf = Type("DocumentRef.ShipmentConfirmation"));
+	Result.Insert("PO", TypeOf = Type("DocumentObject.PurchaseOrder") Or TypeOf = Type("DocumentRef.PurchaseOrder"));
+	Result.Insert("PI", TypeOf = Type("DocumentObject.PurchaseInvoice") Or TypeOf = Type("DocumentRef.PurchaseInvoice"));
+	Result.Insert("GR", TypeOf = Type("DocumentObject.GoodsReceipt") Or TypeOf = Type("DocumentRef.GoodsReceipt"));
+	Result.Insert("ITO", TypeOf = Type("DocumentObject.InventoryTransferOrder") Or TypeOf = Type("DocumentRef.InventoryTransferOrder"));
+	Result.Insert("IT", TypeOf = Type("DocumentObject.InventoryTransfer") Or TypeOf = Type("DocumentRef.InventoryTransfer"));
+	Result.Insert("ISR", TypeOf = Type("DocumentObject.InternalSupplyRequest") Or TypeOf = Type("DocumentRef.InternalSupplyRequest"));
+	Result.Insert("PhysicalInventory", TypeOf = Type("DocumentObject.PhysicalInventory") Or TypeOf = Type("DocumentRef.PhysicalInventory"));
+	Result.Insert("StockAdjustmentAsSurplus", TypeOf = Type("DocumentObject.StockAdjustmentAsSurplus") Or TypeOf = Type("DocumentRef.StockAdjustmentAsSurplus"));
+	Result.Insert("StockAdjustmentAsWriteOff", TypeOf = Type("DocumentObject.StockAdjustmentAsWriteOff") Or TypeOf = Type("DocumentRef.StockAdjustmentAsWriteOff"));
+	Result.Insert("PR", TypeOf = Type("DocumentObject.PurchaseReturn") Or TypeOf = Type("DocumentRef.PurchaseReturn"));
+	Result.Insert("PRO", TypeOf = Type("DocumentObject.PurchaseReturnOrder") Or TypeOf = Type("DocumentRef.PurchaseReturnOrder"));
+	Result.Insert("SR", TypeOf = Type("DocumentObject.SalesReturn") Or TypeOf = Type("DocumentRef.SalesReturn"));
+	Result.Insert("SRO", TypeOf = Type("DocumentObject.SalesReturnOrder") Or TypeOf = Type("DocumentRef.SalesReturnOrder"));
+	Result.Insert("RSR", TypeOf = Type("DocumentObject.RetailSalesReceipt") Or TypeOf = Type("DocumentRef.RetailSalesReceipt"));
+	Result.Insert("RRR", TypeOf = Type("DocumentObject.RetailReturnReceipt") Or TypeOf = Type("DocumentRef.RetailReturnReceipt"));
+	Result.Insert("PRR", TypeOf = Type("DocumentObject.PlannedReceiptReservation") Or TypeOf = Type("DocumentRef.PlannedReceiptReservation"));
+	Result.Insert("SOC", TypeOf = Type("DocumentObject.SalesOrderClosing") Or TypeOf = Type("DocumentRef.SalesOrderClosing"));
+	Result.Insert("POC", TypeOf = Type("DocumentObject.PurchaseOrderClosing") Or TypeOf = Type("DocumentRef.PurchaseOrderClosing"));
 	Return Result;
 EndFunction
 

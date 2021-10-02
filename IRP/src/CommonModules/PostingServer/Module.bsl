@@ -774,8 +774,10 @@ EndFunction
 
 Function CheckBalance(Ref, Parameters, Tables, RecordType, Unposting, AddInfo = Undefined)
 	Result = New Structure("IsOk", True);
-	Parameters.Insert("BalancePeriod", CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "BalancePeriod",
-		New Boundary(Ref.PointInTime(), BoundaryType.Including)));
+	//Parameters.Insert("BalancePeriod", CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "BalancePeriod",
+	//	New Boundary(Ref.PointInTime(), BoundaryType.Including)));
+	Parameters.Insert("BalancePeriod", Undefined);
+	
 	CheckResult = CheckBalance_ExecuteQuery(Ref, Parameters, Tables, RecordType, Unposting, AddInfo);
 	If CheckResult.IsOk Then
 		If RecordType = AccumulationRecordType.Expense Or Parameters.FastCheck Then

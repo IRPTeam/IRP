@@ -74,12 +74,12 @@ EndProcedure
 
 Function GetFromAddInfo(AddInfo, Key, DefaultValue = Undefined) Export
 	If TypeOf(AddInfo) <> Type("Structure") Then
-		Return ?(DefaultValue = Undefined, Undefined, DefaultValue);
+		Return DefaultValue;
 	EndIf;
 	If AddInfo.Property(Key) Then
 		Return AddInfo[Key];
 	Else
-		Return ?(DefaultValue = Undefined, Undefined, DefaultValue);;
+		Return DefaultValue;
 	EndIf;
 EndFunction
 

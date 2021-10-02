@@ -787,7 +787,8 @@ Function CheckBalance(Ref, Parameters, Tables, RecordType, Unposting, AddInfo = 
 		Parameters.Insert("TempTablesManager" , New TempTablesManager());
 		CheckResult = CheckBalance_ExecuteQuery(Ref, Parameters, Tables, RecordType, Unposting, AddInfo);
 		If CheckResult.IsOk Then
-			Return CheckAllExpenses(Parameters).IsOk;
+			Return Result.IsOk;
+			//Return CheckAllExpenses(Parameters).IsOk;
 		Else
 			Result.IsOk = False;
 			Return Result.IsOk;

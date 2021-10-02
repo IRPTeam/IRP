@@ -6,8 +6,8 @@
 //  LangCode - String - Lang code
 // 
 // Returns:
-//  Structure - Strings
-Function Strings(Val LangCode = "") Export
+//  see LocalizationStrings - Strings
+Function LocalizationStrings(Val LangCode = "") Export
 	If IsBlankString(LangCode) Then
 		LangCode = Metadata.DefaultLanguage.LanguageCode;
 	EndIf;

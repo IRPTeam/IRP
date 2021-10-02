@@ -6,9 +6,9 @@
 //  LangCode - String - Lang code
 // 
 // Returns:
-//  Structure - Localization.Strings() - Strings
+//  see Strings - Strings
 Function Strings(LangCode) Export
-	Return LocalizationServer.Strings(LangCode);
+	Return LocalizationServer.LocalizationStrings(LangCode);
 EndFunction 
 
 // Catalog description.

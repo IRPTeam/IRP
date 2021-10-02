@@ -406,7 +406,7 @@ EndProcedure
 // * Value - Undefined
 // * ComparisonType - ComparisonType
 // * DataCompositionComparisonType - Undefined
-Function NewCustomSearchFilter()
+Function NewCustomSearchFilter() Export
 	Structure = New Structure;
 	Structure.Insert("FieldName", "");
 	Structure.Insert("Value", Undefined);

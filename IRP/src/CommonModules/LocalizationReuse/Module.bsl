@@ -6,7 +6,7 @@
 //  LangCode - String - Lang code
 // 
 // Returns:
-//  see Strings - Strings
+// 	see Localization.Strings
 Function Strings(LangCode) Export
 	Return LocalizationServer.LocalizationStrings(LangCode);
 EndFunction 

@@ -6,7 +6,7 @@
 //  LangCode - String - Lang code
 // 
 // Returns:
-// 	see LocalizationReuse.Strings - Localizations strings
+//	see Localization.Strings
 Function R(LangCode = "") Export
 	If IsBlankString(LangCode) Then
 		LangCode = String(LocalizationReuse.GetSessionParameter("InterfaceLocalizationCode"));

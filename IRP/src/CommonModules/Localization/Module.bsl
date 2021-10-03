@@ -137,7 +137,6 @@
 //	* Error_087 - String - Parent can not be empty
 //	* Error_088 - String - Basis unit has to be filled, if item filter used.
 //	* Error_089 - String - Description%1 "%2" is already in use.
-//	* Error_090 - String - %1 is undefined.
 //	* Error_090 - String - [%1 %2] %3 remaining: %4 %7. Required: %5 %7. Lacking: %6 %7.
 //	* Error_091 - String - Only Administrator can create users.
 //	* Error_092 - String - Can not use %1 role in SaaS mode
@@ -146,6 +145,7 @@
 //	* Error_095 - String - Payment amount [%1] and sales amount [%2] not match
 //	* Error_096 - String - Select any document
 //	* Error_097 - String - Default file storage volume is not set.
+//	* Error_098 - String - %1 is undefined.
 //	* InfoMessage_001 - String - The "%1" document does not fully match the "%2" document because there is already another "%1" document that partially covered this "%2" document.
 //	* InfoMessage_002 - String - Object %1 created.
 //	* InfoMessage_003 - String - This is a service form.
@@ -568,7 +568,6 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_088", NStr("en = 'Basis unit has to be filled, if item filter used.'", Lang));
 
 	Strings.Insert("Error_089", NStr("en = 'Description%1 ""%2"" is already in use.'", Lang));
-	Strings.Insert("Error_090", NStr("en = '%1 is undefined.'", Lang));
 	
 	// %1 - Boots
 	// %2 - Red XL
@@ -591,6 +590,7 @@ Function Strings(Lang) Export
 
 	Strings.Insert("Error_096", NStr("en = 'Select any document'", Lang));
 	Strings.Insert("Error_097", NStr("en = 'Default file storage volume is not set.'", Lang));
+	Strings.Insert("Error_098", NStr("en = '%1 is undefined.'", Lang));
 #EndRegion
 
 #Region InfoMessages

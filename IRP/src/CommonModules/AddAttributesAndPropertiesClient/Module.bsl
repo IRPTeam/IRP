@@ -35,8 +35,9 @@ EndProcedure
 // Set required at all sets end.
 // 
 // Parameters:
-//  Result Result
-//  AddionalParameters Addional parameters
+//  Result - Boolean, Undefined - Result
+//  AddionalParameters - Structure - Addional parameters:
+//		* Object - FormDataStructure
 Procedure SetRequiredAtAllSetsEnd(Result, AddionalParameters) Export
 	If Result = Undefined Then
 		Return;

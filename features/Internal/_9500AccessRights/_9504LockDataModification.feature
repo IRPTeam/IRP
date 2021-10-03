@@ -444,7 +444,7 @@ Scenario: 9504062 create rules for documents (number of days from the current da
 		And I input "number of days from the current date for all objects" text in "ENG" field
 		And I set checkbox "Set one rule for all objects"
 		And I set checkbox "For all users"
-		Then "Lock data modification reasons (create) *" window is opened
+		Then "Lock data modification reason (create) *" window is opened
 		And in the table "RuleList" I click the button named "RuleListAdd"
 		And I select "Sales order" exact value from "Type" drop-down list in "RuleList" table
 		And I move to the next attribute

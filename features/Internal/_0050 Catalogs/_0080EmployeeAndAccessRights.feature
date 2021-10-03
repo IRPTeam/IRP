@@ -404,7 +404,7 @@ Scenario: _008007 adding employees to the Region 1 and to the Region 2 segment f
 				| 'Description' |
 				| 'Region 1'  |
 			And I select current line in "List" table
-			Then "Partner segments content (create) *" window is opened
+			Then "Partner segment content (create) *" window is opened
 			And I click Select button of "Partner" field
 			And Delay 5
 			And I go to line in "List" table

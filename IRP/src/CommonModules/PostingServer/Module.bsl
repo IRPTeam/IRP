@@ -774,11 +774,10 @@ EndFunction
 
 Function CheckBalance(Ref, Parameters, Tables, RecordType, Unposting, AddInfo = Undefined)
 	If RecordType = AccumulationRecordType.Expense Then
-//		Parameters.Insert("BalancePeriod", CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "BalancePeriod",
-//			New Boundary(Ref.PointInTime(), BoundaryType.Including)));
-//		CheckResult = CheckBalance_ExecuteQuery(Ref, Parameters, Tables, RecordType, Unposting, AddInfo);
-//		Return CheckResult.IsOk;
-		return true;
+		Parameters.Insert("BalancePeriod", CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "BalancePeriod",
+			New Boundary(Ref.PointInTime(), BoundaryType.Including)));
+		CheckResult = CheckBalance_ExecuteQuery(Ref, Parameters, Tables, RecordType, Unposting, AddInfo);
+		Return CheckResult.IsOk;
 	Else // Receipt
 		If Parameters.FastCheck Then
 			Return True;
@@ -786,93 +785,61 @@ Function CheckBalance(Ref, Parameters, Tables, RecordType, Unposting, AddInfo = 
 		Parameters.Insert("BalancePeriod"     , Undefined);
 		Parameters.Insert("TempTablesManager" , New TempTablesManager());
 		CheckResult = CheckBalance_ExecuteQuery(Ref, Parameters, Tables, RecordType, Unposting, AddInfo);
-		return CheckResult.IsOk;
-//		If CheckResult.IsOk Then
-//			//ExpensesCheckResult = CheckAllExpenses(Parameters);
-//			//Return ExpensesCheckResult.IsOk;
-//			Return True;
-//		EndIf;
+		If CheckResult.IsOk Then
+			ExpensesCheckResult = CheckAllExpenses(Parameters);
+			Return ExpensesCheckResult.IsOk;
+		EndIf;
 	EndIf;
 	Return False;
-	
-//------------------------------------------------------------------------------------------------------------	
-//	Result = New Structure("IsOk", True);
-//	//Parameters.Insert("BalancePeriod", CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "BalancePeriod",
-//	//	New Boundary(Ref.PointInTime(), BoundaryType.Including)));
-//	Parameters.Insert("BalancePeriod", Undefined);
-//	
-//	CheckResult = CheckBalance_ExecuteQuery(Ref, Parameters, Tables, RecordType, Unposting, AddInfo);
-//	
-//	If CheckResult.IsOk Then
-//		If RecordType = AccumulationRecordType.Expense Or Parameters.FastCheck Then
-//			Return Result.IsOk;
-//		EndIf;
-//		
-//		// Only for Receipt Full check
-//		Parameters.BalancePeriod = Undefined;
-//		Parameters.Insert("TempTablesManager" , New TempTablesManager());
-//		CheckResult = CheckBalance_ExecuteQuery(Ref, Parameters, Tables, RecordType, Unposting, AddInfo);
-//		
-//		If CheckResult.IsOk Then
-//			Return Result.IsOk;
-//			//Return CheckAllExpenses(Parameters).IsOk;
-//		Else
-//			Result.IsOk = False;
-//			Return Result.IsOk;
-//		EndIf;
-//	Else
-//		Result.IsOk = False;
-//		Return Result.IsOk;
-//	EndIf;
 EndFunction
 
-//Function GetExpenseRecorders(Parameters)
-//	Query = New Query();
-//	Query.TempTablesManager = Parameters.TempTablesManager;
-//	Query.Text =
-//	"SELECT
-//	|	BalanceRegister.Recorder,
-//	|	BalanceRegister.Recorder.PointInTime
-//	|FROM
-//	|	AccumulationRegister.%1 AS BalanceRegister
-//	|		INNER JOIN Records_All_Grouped AS Records_All_Grouped
-//	|		ON Records_All_Grouped.Store = BalanceRegister.Store
-//	|		AND Records_All_Grouped.ItemKey = BalanceRegister.ItemKey
-//	|		AND BalanceRegister.RecordType = VALUE(AccumulationRecordType.Expense)
-//	|GROUP BY
-//	|	BalanceRegister.Recorder,
-//	|	BalanceRegister.Recorder.PointInTime
-//	|ORDER BY
-//	|	BalanceRegister.Recorder.PointInTime DESC";
-//	Query.Text = StrTemplate(Query.Text, Parameters.RegisterName);
-//	QueryResut = Query.Execute();
-//	QueryTable = QueryResut.Unload();
-//	Return QueryTable;
-//EndFunction
+Function GetExpenseRecorders(Parameters)
+	Query = New Query();
+	Query.TempTablesManager = Parameters.TempTablesManager;
+	Query.Text =
+	"SELECT
+	|	BalanceRegister.Recorder,
+	|	BalanceRegister.Recorder.PointInTime
+	|FROM
+	|	AccumulationRegister.%1 AS BalanceRegister
+	|		INNER JOIN Records_All_Grouped AS Records_All_Grouped
+	|		ON Records_All_Grouped.Store = BalanceRegister.Store
+	|		AND Records_All_Grouped.ItemKey = BalanceRegister.ItemKey
+	|		AND BalanceRegister.RecordType = VALUE(AccumulationRecordType.Expense)
+	|GROUP BY
+	|	BalanceRegister.Recorder,
+	|	BalanceRegister.Recorder.PointInTime
+	|ORDER BY
+	|	BalanceRegister.Recorder.PointInTime DESC";
+	Query.Text = StrTemplate(Query.Text, Parameters.RegisterName);
+	QueryResut = Query.Execute();
+	QueryTable = QueryResut.Unload();
+	Return QueryTable;
+EndFunction
 
-//Function CheckAllExpenses(Parameters)
-//	Result = New Structure("IsOk", True);
-//	TableOfExpenseRecorders = GetExpenseRecorders(Parameters);
-//	For Each RowExpenseRecorders In TableOfExpenseRecorders Do
-//		CheckAddInfo = New Structure("FastCheck", True);
-//		PostingParameters = GetPostingParameters(RowExpenseRecorders.Recorder.GetObject(), DocumentPostingMode.Regular, CheckAddInfo);
-//		Cancel = False;
-//		PostingParameters.Module.CheckAfterWrite_R4010B_R4011B(RowExpenseRecorders.Recorder, Cancel, PostingParameters, CheckAddInfo);
-//		If Cancel Then
-//			// Message with error
-//			CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_098, String(RowExpenseRecorders.Recorder)));
-//			ArrayOfPostingErrorMessages = CommonFunctionsClientServer.GetFromAddInfo(CheckAddInfo, "ArrayOfPostingErrorMessages", New Array());
-//			If ArrayOfPostingErrorMessages.Count() Then
-//				For Each PostingErrorMessage In ArrayOfPostingErrorMessages Do
-//					CommonFunctionsClientServer.ShowUsersMessage(PostingErrorMessage);
-//				EndDo;
-//			EndIf;
-//			Result.IsOk = False;
-//			Return Result;
-//		EndIf;
-//	EndDo;
-//	Return Result;
-//EndFunction
+Function CheckAllExpenses(Parameters)
+	Result = New Structure("IsOk", True);
+	TableOfExpenseRecorders = GetExpenseRecorders(Parameters);
+	For Each RowExpenseRecorders In TableOfExpenseRecorders Do
+		CheckAddInfo = New Structure("FastCheck", True);
+		PostingParameters = GetPostingParameters(RowExpenseRecorders.Recorder.GetObject(), DocumentPostingMode.Regular, CheckAddInfo);
+		Cancel = False;
+		PostingParameters.Module.CheckAfterWrite_R4010B_R4011B(RowExpenseRecorders.Recorder, Cancel, PostingParameters, CheckAddInfo);
+		If Cancel Then
+			// Message with error
+			CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_098, String(RowExpenseRecorders.Recorder)));
+			ArrayOfPostingErrorMessages = CommonFunctionsClientServer.GetFromAddInfo(CheckAddInfo, "ArrayOfPostingErrorMessages", New Array());
+			If ArrayOfPostingErrorMessages.Count() Then
+				For Each PostingErrorMessage In ArrayOfPostingErrorMessages Do
+					CommonFunctionsClientServer.ShowUsersMessage(PostingErrorMessage);
+				EndDo;
+			EndIf;
+			Result.IsOk = False;
+			Return Result;
+		EndIf;
+	EndDo;
+	Return Result;
+EndFunction
 
 Function CheckBalance_ExecuteQuery(Ref, Parameters, Tables, RecordType, Unposting, AddInfo = Undefined)
 	Query = New Query();

@@ -773,32 +773,55 @@ Function Exists_R4010B_ActualStocks() Export
 EndFunction
 
 Function CheckBalance(Ref, Parameters, Tables, RecordType, Unposting, AddInfo = Undefined)
-	Result = New Structure("IsOk", True);
-	//Parameters.Insert("BalancePeriod", CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "BalancePeriod",
-	//	New Boundary(Ref.PointInTime(), BoundaryType.Including)));
-	Parameters.Insert("BalancePeriod", Undefined);
-	
-	CheckResult = CheckBalance_ExecuteQuery(Ref, Parameters, Tables, RecordType, Unposting, AddInfo);
-	If CheckResult.IsOk Then
-		If RecordType = AccumulationRecordType.Expense Or Parameters.FastCheck Then
-			Return Result.IsOk;
-		EndIf;
-		
-		// Only for Receipt Full check
-		Parameters.BalancePeriod = Undefined;
-		Parameters.Insert("TempTablesManager" , New TempTablesManager());
+	If RecordType = AccumulationRecordType.Expense Then
+		Parameters.Insert("BalancePeriod", CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "BalancePeriod",
+			New Boundary(Ref.PointInTime(), BoundaryType.Including)));
 		CheckResult = CheckBalance_ExecuteQuery(Ref, Parameters, Tables, RecordType, Unposting, AddInfo);
-		If CheckResult.IsOk Then
-			Return Result.IsOk;
-			//Return CheckAllExpenses(Parameters).IsOk;
-		Else
-			Result.IsOk = False;
-			Return Result.IsOk;
-		EndIf;
-	Else
-		Result.IsOk = False;
-		Return Result.IsOk;
+		Return CheckResult.IsOk;
+	Else // Receipt
+//		If Not Parameters.FastCheck Then
+//			Parameters.Insert("BalancePeriod"     , Undefined);
+//			Parameters.Insert("TempTablesManager" , New TempTablesManager());
+//			CheckResult = CheckBalance_ExecuteQuery(Ref, Parameters, Tables, RecordType, Unposting, AddInfo);
+//			If CheckResult.IsOk Then
+//				//ExpensesCheckResult = CheckAllExpenses(Parameters);
+//				//Return ExpensesCheckResult.IsOk;
+//				Return True;
+//			EndIf;
+//		EndIf;
+	Return True;
 	EndIf;
+	//Return False;
+	
+//------------------------------------------------------------------------------------------------------------	
+//	Result = New Structure("IsOk", True);
+//	//Parameters.Insert("BalancePeriod", CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "BalancePeriod",
+//	//	New Boundary(Ref.PointInTime(), BoundaryType.Including)));
+//	Parameters.Insert("BalancePeriod", Undefined);
+//	
+//	CheckResult = CheckBalance_ExecuteQuery(Ref, Parameters, Tables, RecordType, Unposting, AddInfo);
+//	
+//	If CheckResult.IsOk Then
+//		If RecordType = AccumulationRecordType.Expense Or Parameters.FastCheck Then
+//			Return Result.IsOk;
+//		EndIf;
+//		
+//		// Only for Receipt Full check
+//		Parameters.BalancePeriod = Undefined;
+//		Parameters.Insert("TempTablesManager" , New TempTablesManager());
+//		CheckResult = CheckBalance_ExecuteQuery(Ref, Parameters, Tables, RecordType, Unposting, AddInfo);
+//		
+//		If CheckResult.IsOk Then
+//			Return Result.IsOk;
+//			//Return CheckAllExpenses(Parameters).IsOk;
+//		Else
+//			Result.IsOk = False;
+//			Return Result.IsOk;
+//		EndIf;
+//	Else
+//		Result.IsOk = False;
+//		Return Result.IsOk;
+//	EndIf;
 EndFunction
 
 //Function GetExpenseRecorders(Parameters)

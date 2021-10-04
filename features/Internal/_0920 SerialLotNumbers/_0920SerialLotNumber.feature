@@ -376,12 +376,12 @@ Scenario: _092003 check serial lot number in the Retail return receipt
 		And I select current line in "ItemList" table
 		When I Check the steps for Exception
         |"And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table"|
-		And I move to "Other" tab
-		And I click Select button of "Branch" field
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Shop 01'     |
-		And I select current line in "List" table	
+		# And I move to "Other" tab
+		# And I click Select button of "Branch" field
+		# And I go to line in "List" table
+		# 	| 'Description' |
+		# 	| 'Shop 01'     |
+		# And I select current line in "List" table	
 	* Post Retail return receipt and check movements in the register Retail sales
 		And I click the button named "FormPost"
 		And I delete "$$RetailReturnReceipt092003$$" variable

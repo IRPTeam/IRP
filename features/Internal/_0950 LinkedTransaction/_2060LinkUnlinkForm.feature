@@ -147,7 +147,9 @@ Scenario: _2060001 preparation
 	When Create PO and GR for link
 	And I execute 1C:Enterprise script at server
 			| "Documents.PurchaseOrder.FindByNumber(1052).GetObject().Write(DocumentWriteMode.Posting);"|
-			| "Documents.GoodsReceipt.FindByNumber(1053).GetObject().Write(DocumentWriteMode.Posting);" |		
+			| "Documents.GoodsReceipt.FindByNumber(1053).GetObject().Write(DocumentWriteMode.Posting);" |	
+	When Create catalog CancelReturnReasons objects
+		
 
 			
 	

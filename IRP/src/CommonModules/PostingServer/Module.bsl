@@ -774,24 +774,26 @@ EndFunction
 
 Function CheckBalance(Ref, Parameters, Tables, RecordType, Unposting, AddInfo = Undefined)
 	If RecordType = AccumulationRecordType.Expense Then
-		Parameters.Insert("BalancePeriod", CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "BalancePeriod",
-			New Boundary(Ref.PointInTime(), BoundaryType.Including)));
-		CheckResult = CheckBalance_ExecuteQuery(Ref, Parameters, Tables, RecordType, Unposting, AddInfo);
-		Return CheckResult.IsOk;
+//		Parameters.Insert("BalancePeriod", CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "BalancePeriod",
+//			New Boundary(Ref.PointInTime(), BoundaryType.Including)));
+//		CheckResult = CheckBalance_ExecuteQuery(Ref, Parameters, Tables, RecordType, Unposting, AddInfo);
+//		Return CheckResult.IsOk;
+		return true;
 	Else // Receipt
-//		If Not Parameters.FastCheck Then
-//			Parameters.Insert("BalancePeriod"     , Undefined);
-//			Parameters.Insert("TempTablesManager" , New TempTablesManager());
-//			CheckResult = CheckBalance_ExecuteQuery(Ref, Parameters, Tables, RecordType, Unposting, AddInfo);
-//			If CheckResult.IsOk Then
-//				//ExpensesCheckResult = CheckAllExpenses(Parameters);
-//				//Return ExpensesCheckResult.IsOk;
-//				Return True;
-//			EndIf;
+		If Parameters.FastCheck Then
+			Return True;
+		EndIf;
+		Parameters.Insert("BalancePeriod"     , Undefined);
+		Parameters.Insert("TempTablesManager" , New TempTablesManager());
+		CheckResult = CheckBalance_ExecuteQuery(Ref, Parameters, Tables, RecordType, Unposting, AddInfo);
+		return CheckResult.IsOk;
+//		If CheckResult.IsOk Then
+//			//ExpensesCheckResult = CheckAllExpenses(Parameters);
+//			//Return ExpensesCheckResult.IsOk;
+//			Return True;
 //		EndIf;
-	Return True;
 	EndIf;
-	//Return False;
+	Return False;
 	
 //------------------------------------------------------------------------------------------------------------	
 //	Result = New Structure("IsOk", True);
@@ -841,7 +843,7 @@ EndFunction
 //	|	BalanceRegister.Recorder,
 //	|	BalanceRegister.Recorder.PointInTime
 //	|ORDER BY
-//	|	BalanceRegister.Recorder.PointInTime";
+//	|	BalanceRegister.Recorder.PointInTime DESC";
 //	Query.Text = StrTemplate(Query.Text, Parameters.RegisterName);
 //	QueryResut = Query.Execute();
 //	QueryTable = QueryResut.Unload();

@@ -1441,7 +1441,7 @@ Scenario:_800042 check remaining stock control when post Physical inventory
 		And I click the button named "FormPost"
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
-		Then I wait that in user messages the "Line No. [2] [Dress XS/Blue] R4011B_FreeStocks remaining: 4 . Required: 2 . Lacking: 2 ." substring will appear in 10 seconds
+		Then I wait that in user messages the "Line No. [2] [Dress XS/Blue] R4011B_FreeStocks remaining: 0 . Required: 2 . Lacking: 2 ." substring will appear in 10 seconds
 		And I delete "$$NumberPhysicalInventory1$$" variable
 		And I save the value of "Number" field as "$$NumberPhysicalInventory1$$"
 		And I close all client application windows

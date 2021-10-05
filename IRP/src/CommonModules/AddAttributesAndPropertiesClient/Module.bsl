@@ -1,12 +1,4 @@
-// @strict-types
 
-// Add attribute start choice.
-// 
-// Parameters:
-//  Form - ClientApplicationForm - Form
-//  Item - FormField, CheckBox - Item
-//  StandardProcessing - Boolean - Standard processing
-//  AddInfo - Undefined - Add info
 Procedure AddAttributeStartChoice(Form, Item, StandardProcessing, AddInfo = Undefined) Export
 	If TypeOf(Form[Item.Name]) = Type("CatalogRef.AddAttributeAndPropertyValues") Then
 		StandardProcessing = False;
@@ -17,12 +9,6 @@ Procedure AddAttributeStartChoice(Form, Item, StandardProcessing, AddInfo = Unde
 	EndIf;
 EndProcedure
 
-// Set required at all sets.
-// 
-// Parameters:
-//  Object - FormDataStructure - Object
-//  Form - ClientApplicationForm - Form
-//  Command - FormCommand - Command
 Procedure SetRequiredAtAllSets(Object, Form, Command) Export
 	Types = New TypeDescription("Boolean");
 	NotifyParameters = New Structure();
@@ -32,12 +18,6 @@ Procedure SetRequiredAtAllSets(Object, Form, Command) Export
 	ShowInputValue(Notify, False, R().SuggestionToUser_1, Types);
 EndProcedure
 
-// Set required at all sets end.
-// 
-// Parameters:
-//  Result - Boolean, Undefined - Result
-//  AddionalParameters - Structure - Addional parameters:
-//		* Object - FormDataStructure
 Procedure SetRequiredAtAllSetsEnd(Result, AddionalParameters) Export
 	If Result = Undefined Then
 		Return;
@@ -47,24 +27,11 @@ Procedure SetRequiredAtAllSetsEnd(Result, AddionalParameters) Export
 EndProcedure
 
 #Region HTML
-// Update object add attribute HTML.
-// 
-// Parameters:
-//  Form Form
-//  OwnerRef Owner ref
+
 Procedure UpdateObjectAddAttributeHTML(Form, OwnerRef) Export
 	Form.AddAttributeViewHTML = AddAttributesAndPropertiesServer.HTMLAddAttributes();
 EndProcedure
 
-// Add attribute info for HTML.
-// 
-// Parameters:
-//  ItemRef Item ref
-//  UUID UUID
-//  FileRef - Undefined - File ref
-// 
-// Returns:
-//  Map - Add attribute info for HTML
 Function AddAttributeInfoForHTML(ItemRef, UUID, FileRef = Undefined) Export
 	Filter = New Structure("ShowInHTML", True);
 	Str = AddAttributesAndPropertiesServer.PrepareDataForHTML(ItemRef, Filter);

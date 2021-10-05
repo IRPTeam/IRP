@@ -80,9 +80,9 @@ Procedure FindDataForInputStringChoiceDataGetProcessing(Source, ChoiceData, Para
 		EndIf;
 		If Row.Sort = 0 Then
 			If IsBlankString(Row.Ref.ItemID) Then
-				ChoiceData.Add(Row.Ref, Row.Presentation, , PictureLib.Price);
+				ChoiceData.Add(Row.Ref, Row.Presentation, False, PictureLib.Price);
 			Else
-				ChoiceData.Add(Row.Ref, "(" + Row.Ref.ItemID + ") " + Row.Presentation, , PictureLib.Price);
+				ChoiceData.Add(Row.Ref, "(" + Row.Ref.ItemID + ") " + Row.Presentation, False, PictureLib.Price);
 			EndIf;
 		Else
 			ChoiceData.Add(Row.Ref, Row.Presentation);

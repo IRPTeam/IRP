@@ -25,55 +25,60 @@ EndProcedure
 
 &AtClient
 Procedure ListOnActivateRow(Item)
-	If Not HTMLWindowPictures = Undefined Then
-		HTMLWindowPictures.clearAll();
-		AttachIdleHandler("UpdateHTMLPictures", 0.1, True);
-	EndIf;
-
-	If Not HTMLWindowAddAttributes = Undefined Then
-		HTMLWindowAddAttributes.clearAll();
-		AttachIdleHandler("UpdateHTMLAddAttributes", 0.1, True);
-	EndIf;
-
+	HTMLOnActivateRow();
 EndProcedure
 
 #Region HTML
 &AtClient
-Procedure PictureViewerHTMLDocumentComplete(Item)
-	HTMLWindowPictures = PictureViewerClient.InfoDocumentComplete(Item);
-	HTMLWindowPictures.displayTarget("toolbar", False);
-	AttachIdleHandler("UpdateHTMLPictures", 0.1, True);
+Async Procedure HTMLOnActivateRow()
+	If Not HTMLWindowPictures = Undefined Then
+		HTMLWindowPictures.clearAll();
+		UpdateHTMLPictures();
+	EndIf;
+
+	If Not HTMLWindowAddAttributes = Undefined Then
+		HTMLWindowAddAttributes.clearAll();
+		UpdateHTMLAddAttributes();
+	EndIf;
 EndProcedure
 
 &AtClient
-Procedure AddAttributesHTMLDocumentComplete(Item)
-	HTMLWindowAddAttributes = PictureViewerClient.InfoDocumentComplete(Item);
-	AttachIdleHandler("UpdateHTMLAddAttributes", 0.1, True);
+Async Procedure PictureViewerHTMLDocumentComplete(Item)
+	If HTMLWindowPictures = Undefined Then
+		HTMLWindowPictures = PictureViewerClient.InfoDocumentComplete(Item);
+		HTMLWindowPictures.displayTarget("toolbar", False);
+		UpdateHTMLPictures();
+	EndIf;
 EndProcedure
 
 &AtClient
-Procedure UpdateHTMLPictures() Export
+Async Procedure AddAttributesHTMLDocumentComplete(Item)
+	If HTMLWindowAddAttributes = Undefined Then
+		HTMLWindowAddAttributes = PictureViewerClient.InfoDocumentComplete(Item);
+		UpdateHTMLAddAttributes();
+	EndIf;
+EndProcedure
+
+&AtClient
+Async Procedure UpdateHTMLPictures() Export
 	CurrentRow = Items.List.CurrentData;
 	If CurrentRow = Undefined Or Not CurrentRow.Property("Ref") Then
 		Return;
 	EndIf;
 
-	PictureInfo = PictureViewerClient.PicturesInfoForSlider(CurrentRow.Ref, UUID);
-	JSON = CommonFunctionsServer.SerializeJSON(PictureInfo);
+	JSON = PictureViewerClient.PicturesInfoForSlider(CurrentRow.Ref, UUID);
 	HTMLWindowPictures.fillSlider(JSON);
 EndProcedure
 
 &AtClient
-Procedure UpdateHTMLAddAttributes() Export
+Async Procedure UpdateHTMLAddAttributes() Export
 	CurrentRow = Items.List.CurrentData;
 	If CurrentRow = Undefined Or Not CurrentRow.Property("Ref") Then
 		Return;
 	EndIf;
 
-	AddAttributeInfo = AddAttributesAndPropertiesClient.AddAttributeInfoForHTML(CurrentRow.Ref, UUID);
-	JSON = CommonFunctionsServer.SerializeJSON(AddAttributeInfo);
+	JSON = AddAttributesAndPropertiesClient.AddAttributeInfoForHTML(CurrentRow.Ref, UUID);
 	HTMLWindowAddAttributes.fillData(JSON);
-
 EndProcedure
 
 &AtClient
@@ -82,5 +87,4 @@ Procedure NotificationProcessing(EventName, Parameter, Source)
 		UpdateHTMLPictures();
 	EndIf;
 EndProcedure
-
 #EndRegion

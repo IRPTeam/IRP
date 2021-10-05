@@ -875,7 +875,7 @@ Function PrepareDataForHTML(ItemRef, Filter = Undefined) Export
 		Str.Name = String(AttributeRow.Attribute);
 		Str.Type = String(AttributeRow.ValueType);
 		Str.Value = String(AttributeRow.Value);
-		Str.Icon = AttributeRow.Attribute.Icon.Get();
+		Str.Icon = GetURL(AttributeRow.Attribute, "Icon");
 		ReadyArrayAttributes.Add(Str);
 	EndDo;
 
@@ -885,15 +885,16 @@ Function PrepareDataForHTML(ItemRef, Filter = Undefined) Export
 		Str.Name = String(PropertyRow.Attribute);
 		Str.Type = String(PropertyRow.ValueType);
 		Str.Value = String(PropertyRow.Value);
-		Str.Icon = PropertyRow.Attribute.Icon.Get();
+		Str.Icon = GetURL(PropertyRow.Attribute, "Icon");
 		ReadyArrayProperties.Add(Str);
 	EndDo;
 
 	Str = New Map();
 	Str.Insert("Properties", ReadyArrayProperties);
 	Str.Insert("Attributes", ReadyArrayAttributes);
-
-	Return Str;
+	
+	JSON = CommonFunctionsServer.SerializeJSON(Str);
+	Return JSON;
 EndFunction
 
 Procedure EventSubscriptionOnCopy(Source, CopiedObject) Export

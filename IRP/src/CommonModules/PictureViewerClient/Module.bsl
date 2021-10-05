@@ -170,39 +170,31 @@ EndFunction
 
 Function PicturesInfoForSlider(ItemRef, UUID, FileRef = Undefined, UseFullSizePhoto = False) Export
 
-	Pictures = PictureViewerServer.PicturesInfoForSlider(ItemRef, FileRef);
-
-	PicArray = New Array();
-	For Each Picture In Pictures Do
-		Map = New Structure("Src, Preview, ID");
-		If UseFullSizePhoto Then
+	Pictures = PictureViewerServer.PicturesInfoForSlider(ItemRef, FileRef, UseFullSizePhoto);
+	
+	If UseFullSizePhoto Then
+		PicArray = New Array();
+		For Each Picture In Pictures Do
+			PictureStructure = New Structure("Src, Preview, ID");
+			
 			ProcessingCommonModule = Eval(Picture.PictureURLStructure.ProcessingModule);
 			Picture.Src = ProcessingCommonModule.PreparePictureURL(
 								Picture.PictureURLStructure.IntegrationSettings, Picture.Src, UUID);
 			If Picture.SrcBD = Undefined Then
-				Map.Src = Picture.Src;
+				PictureStructure.Src = Picture.Src;
 			Else
-				Map.Src = PutToTempStorage(Picture.SrcBD, UUID);
+				PictureStructure.Src = PutToTempStorage(Picture.SrcBD, UUID);
 			EndIf;
-		Else
-			Map.Src = PutToTempStorage(Picture.PreviewBD, UUID);
-		EndIf;
-		If Picture.PreviewBD = Undefined Then
-			If Not ValueIsFilled(Picture.Preview) Then
-				Map.Preview = Picture.Src;
-			Else
-				Map.Preview = Picture.Preview;
-			EndIf;
-		Else
-			Map.Preview = PutToTempStorage(Picture.PreviewBD, UUID);
-		EndIf;
+			PictureStructure.Preview = PictureStructure.Preview;
 
-		Map.ID = Picture.ID;
-		PicArray.Add(Map);
-	EndDo;
-
-	Str = New Structure("Pictures", PicArray);
-
+			PictureStructure.ID = Picture.ID;
+			PicArray.Add(PictureStructure);
+			Str = New Structure("Pictures", PicArray);
+		EndDo;	
+	Else
+		Str = Pictures; // String - JSON String
+	EndIf;
+	
 	Return Str;
 
 EndFunction
@@ -296,10 +288,9 @@ Procedure AddPictureFromGallery(ClosureResult, AdditionalParameters) Export
 	EndIf;
 EndProcedure
 
-Procedure UpdateHTMLPicture(Item, Form) Export
+Async Procedure UpdateHTMLPicture(Item, Form) Export
 	HTMLWindow = PictureViewerClient.InfoDocumentComplete(Item);
-	PictureInfo = PictureViewerClient.PicturesInfoForSlider(Form.Object.Ref, Form.UUID);
-	JSON = CommonFunctionsServer.SerializeJSON(PictureInfo);
+	JSON = PictureViewerClient.PicturesInfoForSlider(Form.Object.Ref, Form.UUID);
 	HTMLWindow.fillSlider(JSON);
 EndProcedure
 

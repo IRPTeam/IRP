@@ -115,8 +115,7 @@ Function GetPicturesByObjectRef(OwnerRef, DirectLink = False, FileRef = Undefine
 		|	Catalog.ItemKeys AS ItemKeys
 		|WHERE
 		|	ItemKeys.Item = &Owner
-		|	AND
-		|	NOT ItemKeys.DeletionMark
+		|	AND NOT ItemKeys.DeletionMark
 		|
 		|UNION ALL
 		|
@@ -126,7 +125,11 @@ Function GetPicturesByObjectRef(OwnerRef, DirectLink = False, FileRef = Undefine
 		|	Catalog.Items AS Items
 		|WHERE
 		|	Items.Ref = &Owner
+		|
+		|INDEX BY
+		|	Ref
 		|;
+		|
 		|////////////////////////////////////////////////////////////////////////////////
 		|SELECT DISTINCT
 		|	AttachedFiles.File AS Ref,
@@ -375,32 +378,42 @@ Function GetFileInfo(FileRef) Export
 	Return FileInfo;
 EndFunction
 
-Function PicturesInfoForSlider(ItemRef, FileRef = Undefined) Export
+Function PicturesInfoForSlider(ItemRef, FileRef = Undefined, UseFullSizePhoto = False) Export
 
 	Pictures = PictureViewerServer.GetPicturesByObjectRef(ItemRef, , FileRef);
 
-	PicArray = New Array();
-	For Each Picture In Pictures Do
-		Map = New Structure("Src, SrcBD, Preview, PreviewBD, ID, PictureURLStructure");
-		PicInfo = GetPictureURL(Picture);
-		Map.PictureURLStructure = PicInfo;
-		Map.Src = PicInfo.PictureURL;
-		If PicInfo.isLocalPictureURL Then
-			Try
-				Map.SrcBD = New BinaryData(Map.Src);
-			Except
-				EmptyPic = New Picture();
-				Map.SrcBD = EmptyPic.GetBinaryData();
-			EndTry;
-		EndIf;
-		If Picture.Ref.isPreviewSet Then
-			Map.PreviewBD = Picture.Ref.Preview.Get();
-		EndIf;
-		Map.ID = Picture.FileID;
-		PicArray.Add(Map);
-	EndDo;
-
-	Return PicArray;
+	If UseFullSizePhoto Then
+		PicArray = New Array();
+		For Each Picture In Pictures Do
+			PictureStructure = New Structure("Src, SrcBD, ID, PictureURLStructure, Preview");
+			PicInfo = GetPictureURL(Picture);
+			PictureStructure.PictureURLStructure = PicInfo;
+			PictureStructure.Src = PicInfo.PictureURL;
+			If PicInfo.isLocalPictureURL Then
+				Try
+					PictureStructure.SrcBD = New BinaryData(PictureStructure.Src);
+				Except
+					EmptyPic = New Picture();
+					PictureStructure.SrcBD = EmptyPic.GetBinaryData();
+				EndTry;
+			EndIf;
+			PictureStructure.ID = Picture.FileID;
+			PictureStructure.Preview = GetURL(Picture.Ref, "Preview");
+			PicArray.Add(PictureStructure);
+		EndDo;
+	Else
+		PicArray = New Array();
+		For Each Picture In Pictures Do
+			PictureStructure = New Structure("Src, SrcBD, ID, PictureURLStructure, Preview");
+			PictureStructure.Src = GetURL(Picture.Ref, "Preview");
+			PictureStructure.ID = Picture.FileID;
+			PictureStructure.Preview = GetURL(Picture.Ref, "Preview");
+			PicArray.Add(PictureStructure);
+		EndDo;
+		Pictures = New Structure("Pictures", PicArray);
+		PicArray = CommonFunctionsServer.SerializeJSON(Pictures);
+	EndIf;
+	Return PicArray; // JSON, Array
 
 EndFunction
 

@@ -367,7 +367,7 @@ Scenario: _2067013 change quantity in the linked string in the ISR (one session)
 		And I finish line editing in "ItemList" table
 		And I click "Post and close" button
 		Then user message window does not contain messages
-		Then "Internal supply request" window is opened
+		Then "Internal supply requests" window is opened
 		And I close all client application windows
 
 Scenario: _2067014 change quantity in the linked string in the ITO (one session)
@@ -522,7 +522,7 @@ Scenario: _2067019 unpost ISR with linked strings (one session)
 			|'Line No. [1] [Dress XS/Blue] RowID movements remaining: 5 . Required: 0 . Lacking: 5 .'|
 			|'Line No. [2] [Trousers 38/Yellow] RowID movements remaining: 10 . Required: 0 . Lacking: 10 .'|
 			|'Line No. [3] [Trousers 36/Yellow] RowID movements remaining: 15 . Required: 0 . Lacking: 15 .'|
-			|'Line No. [4] [Shirt 36/Red] RowID movements remaining: 10 . Required: 0 . Lacking: 10 .'|		
+			|'Line No. [4] [Shirt 36/Red] RowID movements remaining: 11 . Required: 0 . Lacking: 11 .'|		
 		And I close all client application windows
 
 Scenario: _2067020 unpost ITO with linked strings (one session)
@@ -592,7 +592,7 @@ Scenario: _2067036 delete ISR with linked strings (one session)
 			|'Line No. [1] [Dress XS/Blue] RowID movements remaining: 5 . Required: 0 . Lacking: 5 .'|
 			|'Line No. [2] [Trousers 38/Yellow] RowID movements remaining: 10 . Required: 0 . Lacking: 10 .'|
 			|'Line No. [3] [Trousers 36/Yellow] RowID movements remaining: 15 . Required: 0 . Lacking: 15 .'|
-			|'Line No. [4] [Shirt 36/Red] RowID movements remaining: 10 . Required: 0 . Lacking: 10 .'|		
+			|'Line No. [4] [Shirt 36/Red] RowID movements remaining: 11 . Required: 0 . Lacking: 11 .'|		
 	And I close all client application windows	
 
 Scenario: _2067037 delete ITO with linked strings (one session)

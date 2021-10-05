@@ -18,6 +18,10 @@
   <informationRegisterPeriodicity>RecorderPosition</informationRegisterPeriodicity>
   <writeMode>RecorderSubordinate</writeMode>
   <dataLockControlMode>Managed</dataLockControlMode>
+  <listPresentation>
+    <key>en</key>
+    <value>Bundles content</value>
+  </listPresentation>
   <resources uuid="619bc356-6709-4982-a405-5f6d402386f0">
     <name>Quantity</name>
     <synonym>

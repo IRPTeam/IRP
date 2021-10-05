@@ -16,6 +16,14 @@
   </synonym>
   <useStandardCommands>true</useStandardCommands>
   <dataLockControlMode>Managed</dataLockControlMode>
+  <recordPresentation>
+    <key>en</key>
+    <value>Item segment content</value>
+  </recordPresentation>
+  <listPresentation>
+    <key>en</key>
+    <value>Item segments content</value>
+  </listPresentation>
   <dimensions uuid="5154e93f-9298-49ae-bee3-ba4b78f8b6cc">
     <name>Segment</name>
     <synonym>

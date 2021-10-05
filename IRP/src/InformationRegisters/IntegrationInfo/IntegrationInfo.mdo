@@ -16,6 +16,14 @@
   </synonym>
   <useStandardCommands>true</useStandardCommands>
   <dataLockControlMode>Managed</dataLockControlMode>
+  <recordPresentation>
+    <key>en</key>
+    <value>Integration additional information</value>
+  </recordPresentation>
+  <listPresentation>
+    <key>en</key>
+    <value>Integration additional informations</value>
+  </listPresentation>
   <resources uuid="d2a5b90d-55df-4a3e-82cb-c3e52fa5f31f">
     <name>Value</name>
     <synonym>

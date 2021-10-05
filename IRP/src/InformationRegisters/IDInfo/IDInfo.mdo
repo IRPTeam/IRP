@@ -15,6 +15,14 @@
     <value>Contact info</value>
   </synonym>
   <dataLockControlMode>Managed</dataLockControlMode>
+  <recordPresentation>
+    <key>en</key>
+    <value>Contact info</value>
+  </recordPresentation>
+  <listPresentation>
+    <key>en</key>
+    <value>Contacts info</value>
+  </listPresentation>
   <resources uuid="f704a578-563f-49d8-85f9-8232e7b2f17e">
     <name>Value</name>
     <synonym>

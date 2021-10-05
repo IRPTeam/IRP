@@ -1,13 +1,11 @@
+
 Procedure AddAttributeStartChoice(Form, Item, StandardProcessing, AddInfo = Undefined) Export
 	If TypeOf(Form[Item.Name]) = Type("CatalogRef.AddAttributeAndPropertyValues") Then
 		StandardProcessing = False;
-
-		PropertyOwner = Form[Item.Name + "_owner"];
-		If PropertyOwner <> Undefined Then
-			Filter = New Structure("Owner", PropertyOwner);
-			OpenArgs = New Structure("Filter", Filter);
-			OpenForm("Catalog.AddAttributeAndPropertyValues.ChoiceForm", OpenArgs, Item);
-		EndIf;
+		PropertyOwner = Form[Item.Name + "_owner"]; // ChartOfCharacteristicTypesRef.AddAttributeAndProperty 
+		Filter = New Structure("Owner", PropertyOwner);
+		OpenArgs = New Structure("Filter", Filter);
+		OpenForm("Catalog.AddAttributeAndPropertyValues.ChoiceForm", OpenArgs, Item);
 	EndIf;
 EndProcedure
 
@@ -29,6 +27,7 @@ Procedure SetRequiredAtAllSetsEnd(Result, AddionalParameters) Export
 EndProcedure
 
 #Region HTML
+
 Procedure UpdateObjectAddAttributeHTML(Form, OwnerRef) Export
 	Form.AddAttributeViewHTML = AddAttributesAndPropertiesServer.HTMLAddAttributes();
 EndProcedure

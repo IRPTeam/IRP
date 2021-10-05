@@ -1,4 +1,11 @@
 {
   "version": 1,
-  "settings": {}
+  "settings": {
+    "structure-consructor-too-many-keys": {
+      "enabled": false
+    },
+    "common-module-type": {
+      "enabled": false
+    }
+  }
 }

@@ -19,6 +19,10 @@
   <informationRegisterPeriodicity>RecorderPosition</informationRegisterPeriodicity>
   <writeMode>RecorderSubordinate</writeMode>
   <dataLockControlMode>Managed</dataLockControlMode>
+  <listPresentation>
+    <key>en</key>
+    <value>T2010S Offset of advances</value>
+  </listPresentation>
   <resources uuid="580e721d-032f-40a3-982e-edab43cce854">
     <name>Amount</name>
     <synonym>

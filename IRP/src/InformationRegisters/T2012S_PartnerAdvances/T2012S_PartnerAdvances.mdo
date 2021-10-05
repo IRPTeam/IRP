@@ -19,6 +19,10 @@
   <informationRegisterPeriodicity>RecorderPosition</informationRegisterPeriodicity>
   <writeMode>RecorderSubordinate</writeMode>
   <dataLockControlMode>Managed</dataLockControlMode>
+  <listPresentation>
+    <key>en</key>
+    <value>T2012S Partner advances</value>
+  </listPresentation>
   <resources uuid="a191a1d2-563a-4f8d-8cde-2e88938cf59d">
     <name>Amount</name>
     <synonym>

@@ -1194,9 +1194,14 @@ Procedure UpdateRowIDCatalog(Source, Row, RowItemList, RowRefObject, Cancel)
 		CachedObjectBefore   = GetRowRefCache(RowRefObject, FieldsForCheckRowRef);
 	EndIf;
 	
+	Is = Is(Source);
+	If Is.SC And Is(RowRefObject.Basis).ISR Then
+		FillPropertyValues(RowRefObject, RowItemList,,"Store");
+	Else
+		FillPropertyValues(RowRefObject, RowItemList);
+	EndIf;	
 	FillPropertyValues(RowRefObject, Source);
-	FillPropertyValues(RowRefObject, RowItemList);
-
+	
 	RowRefObject.RowID       = Row.RowID;
 	RowRefObject.Description = Row.RowID;
 	

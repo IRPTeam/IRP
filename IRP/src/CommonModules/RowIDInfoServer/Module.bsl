@@ -6738,7 +6738,7 @@ EndFunction
 Function GetFieldsToLock_InternalLink_StockAdjustmentAsSurplus(InternalDocAliase, Aliases)
 	Result = New Structure("Header, ItemList");
 	If InternalDocAliase = Aliases.PhysicalInventory Then
-		Result.Header   = "Company, Branch, Store";
+		Result.Header   = "Store";
 		Result.ItemList = "Item, ItemKey,BasisDocument, PhysicalInventory";
 	Else
 		Raise StrTemplate("Not supported Internal link for [StockAdjustmentAsSurplus] to [%1]", InternalDocAliase);
@@ -6753,7 +6753,7 @@ EndFunction
 Function GetFieldsToLock_InternalLink_StockAdjustmentAsWriteOff(InternalDocAliase, Aliases)
 	Result = New Structure("Header, ItemList");
 	If InternalDocAliase = Aliases.PhysicalInventory Then
-		Result.Header   = "Company, Branch, Store";
+		Result.Header   = "Store";
 		Result.ItemList = "Item, ItemKey,BasisDocument, PhysicalInventory";
 	Else
 		Raise StrTemplate("Not supported Internal link for [StockAdjustmentAsWriteOff] to [%1]", InternalDocAliase);

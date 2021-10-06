@@ -16,12 +16,13 @@ EndFunction
 
 Function GetLinkedDocumentsFilter_SC(Object) Export
 	Filter = New Structure();
-	Filter.Insert("Company"        , Object.Company);
-	Filter.Insert("Branch"         , Object.Branch);
-	Filter.Insert("Partner"        , Object.Partner);
-	Filter.Insert("LegalName"      , Object.LegalName);
-	Filter.Insert("TransactionType", Object.TransactionType);
-	Filter.Insert("Ref"            , Object.Ref);
+	Filter.Insert("Company"           , Object.Company);
+	Filter.Insert("Branch"            , Object.Branch);
+	Filter.Insert("Partner"           , Object.Partner);
+	Filter.Insert("LegalName"         , Object.LegalName);
+	Filter.Insert("TransactionType"   , Object.TransactionType);
+	Filter.Insert("ProcurementMethod" , PredefinedValue("Enum.ProcurementMethods.Purchase"));
+	Filter.Insert("Ref"               , Object.Ref);
 	Return Filter;
 EndFunction
 

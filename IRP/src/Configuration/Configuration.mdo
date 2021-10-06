@@ -713,6 +713,7 @@
   <informationRegisters>InformationRegister.Taxes</informationRegisters>
   <informationRegisters>InformationRegister.TaxSettings</informationRegisters>
   <informationRegisters>InformationRegister.UserSettings</informationRegisters>
+  <informationRegisters>InformationRegister.T3010S_RowIDInfo</informationRegisters>
   <accumulationRegisters>AccumulationRegister.CashInTransit</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1001T_Purchases</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1002T_PurchaseReturns</accumulationRegisters>

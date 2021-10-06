@@ -7821,51 +7821,31 @@ Procedure CreateBasisesTreeReverseRecursive(BasisesInfo, TreeRows, Level)
 		If Not NewTreeRow.Rows.Count() Then
 			NewTreeRow.LastRow = True;
 		EndIf;
-
 	EndIf;
 EndProcedure
 
 Function GetBasisesInfo(Basis, BasisKey, RowID)
 	Query = New Query();
-	
-	Is = Is(Basis);
-	If Is.SO Then
-		Query.Text = GetBasisesInfoQueryText_SO();
-	ElsIf Is.SI Then
-		Query.Text = GetBasisesInfoQueryText_SI();
-	ElsIf Is.SC Then
-		Query.Text = GetBasisesInfoQueryText_SC();
-	ElsIf Is.PO Then
-		Query.Text = GetBasisesInfoQueryText_PO();
-	ElsIf Is.PI Then
-		Query.Text = GetBasisesInfoQueryText_PI();
-	ElsIf Is.GR Then
-		Query.Text = GetBasisesInfoQueryText_GR();
-	ElsIf Is.ITO Then
-		Query.Text = GetBasisesInfoQueryText_ITO();
-	ElsIf Is.IT Then
-		Query.Text = GetBasisesInfoQueryText_IT();
-	ElsIf Is.ISR Then
-		Query.Text = GetBasisesInfoQueryText_ISR();
-	ElsIf Is.PhysicalInventory Then
-		Query.Text = GetBasisesInfoQueryText_PhysicalInventory();
-	ElsIf Is.PR Then
-		Query.Text = GetBasisesInfoQueryText_PR();
-	ElsIf Is.PRO Then
-		Query.Text = GetBasisesInfoQueryText_PRO();
-	ElsIf Is.SR Then
-		Query.Text = GetBasisesInfoQueryText_SR();
-	ElsIf Is.SRO Then
-		Query.Text = GetBasisesInfoQueryText_SRO();
-	ElsIf Is.RSR Then
-		Query.Text = GetBasisesInfoQueryText_RSR();
-	ElsIf Is.RRR Then
-		Query.Text = GetBasisesInfoQueryText_RRR();
-	EndIf;
-
-	Query.SetParameter("Basis", Basis);
-	Query.SetParameter("BasisKey", BasisKey);
-	Query.SetParameter("RowID", RowID);
+	Query.Text = 
+		"SELECT
+		|	RowIDInfo.Recorder AS Basis,
+		|	RowIDInfo.RowRef AS RowRef,
+		|	RowIDInfo.BasisKey AS BasisKey,
+		|	RowIDInfo.RowID AS RowID,
+		|	RowIDInfo.Basis AS ParentBasis,
+		|	RowIDInfo.Key AS Key,
+		|	RowIDInfo.Price AS Price,
+		|	RowIDInfo.Currency AS Currency,
+		|	RowIDInfo.Unit AS Unit
+		|FROM
+		|	InformationRegister.T3010S_RowIDInfo AS RowIDInfo
+		|WHERE
+		|	RowIDInfo.Recorder = &Basis
+		|	AND RowIDInfo.Key = &BasisKey
+		|	AND RowIDInfo.RowID = &RowID";
+	Query.SetParameter("Basis"    , Basis);
+	Query.SetParameter("BasisKey" , BasisKey);
+	Query.SetParameter("RowID"    , RowID);
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
 	BasisInfo = New Structure("Key, Basis, RowRef, RowID, ParentBasis, BasisKey, Price, Currency, Unit");
@@ -7875,372 +7855,33 @@ Function GetBasisesInfo(Basis, BasisKey, RowID)
 	Return BasisInfo;
 EndFunction
 
-Function GetBasisesInfoQueryText_SO()
-	Return "SELECT
-		   |	RowIDInfo.Ref AS Basis,
-		   |	RowIDInfo.RowRef AS RowRef,
-		   |	RowIDInfo.BasisKey AS BasisKey,
-		   |	RowIDInfo.RowID AS RowID,
-		   |	RowIDInfo.Basis AS ParentBasis,
-		   |	ItemList.Key AS Key,
-		   |	ItemList.Price AS Price,
-		   |	ItemList.Ref.Currency AS Currency,
-		   |	ItemList.Unit AS Unit
-		   |FROM
-		   |	Document.SalesOrder.ItemList AS ItemList
-		   |		INNER JOIN Document.SalesOrder.RowIDInfo AS RowIDInfo
-		   |		ON RowIDInfo.Ref = &Basis
-		   |		AND ItemList.Ref = &Basis
-		   |		AND RowIDInfo.Key = &BasisKey
-		   |		AND ItemList.Key = &BasisKey
-		   |		AND RowIDInfo.Key = ItemList.Key
-		   |		AND RowIDInfo.Ref = ItemList.Ref
-		   |		AND RowIDInfo.RowID = &RowID";
-EndFunction
-
-Function GetBasisesInfoQueryText_SC()
-	Return "SELECT
-		   |	RowIDInfo.Ref AS Basis,
-		   |	RowIDInfo.RowRef AS RowRef,
-		   |	RowIDInfo.BasisKey AS BasisKey,
-		   |	RowIDInfo.RowID AS RowID,
-		   |	RowIDInfo.Basis AS ParentBasis,
-		   |	ItemList.Key AS Key,
-		   |	0 AS Price,
-		   |	UNDEFINED AS Currency,
-		   |	ItemList.Unit AS Unit
-		   |FROM
-		   |	Document.ShipmentConfirmation.ItemList AS ItemList
-		   |		INNER JOIN Document.ShipmentConfirmation.RowIDInfo AS RowIDInfo
-		   |		ON RowIDInfo.Ref = &Basis
-		   |		AND ItemList.Ref = &Basis
-		   |		AND RowIDInfo.Key = &BasisKey
-		   |		AND ItemList.Key = &BasisKey
-		   |		AND RowIDInfo.Key = ItemList.Key
-		   |		AND RowIDInfo.Ref = ItemList.Ref
-		   |		AND RowIDInfo.RowID = &RowID";
-EndFunction
-
-Function GetBasisesInfoQueryText_SI()
-	Return "SELECT
-		   |	RowIDInfo.Ref AS Basis,
-		   |	RowIDInfo.RowRef AS RowRef,
-		   |	RowIDInfo.BasisKey AS BasisKey,
-		   |	RowIDInfo.RowID AS RowID,
-		   |	RowIDInfo.Basis AS ParentBasis,
-		   |	ItemList.Key AS Key,
-		   |	ItemList.Price AS Price,
-		   |	ItemList.Ref.Currency AS Currency,
-		   |	ItemList.Unit AS Unit
-		   |FROM
-		   |	Document.SalesInvoice.ItemList AS ItemList
-		   |		INNER JOIN Document.SalesInvoice.RowIDInfo AS RowIDInfo
-		   |		ON RowIDInfo.Ref = &Basis
-		   |		AND ItemList.Ref = &Basis
-		   |		AND RowIDInfo.Key = &BasisKey
-		   |		AND ItemList.Key = &BasisKey
-		   |		AND RowIDInfo.Key = ItemList.Key
-		   |		AND RowIDInfo.Ref = ItemList.Ref
-		   |		AND RowIDInfo.RowID = &RowID";
-EndFunction
-
-Function GetBasisesInfoQueryText_PO()
-	Return "SELECT
-		   |	RowIDInfo.Ref AS Basis,
-		   |	RowIDInfo.RowRef AS RowRef,
-		   |	RowIDInfo.BasisKey AS BasisKey,
-		   |	RowIDInfo.RowID AS RowID,
-		   |	RowIDInfo.Basis AS ParentBasis,
-		   |	ItemList.Key AS Key,
-		   |	ItemList.Price AS Price,
-		   |	ItemList.Ref.Currency AS Currency,
-		   |	ItemList.Unit AS Unit
-		   |FROM
-		   |	Document.PurchaseOrder.ItemList AS ItemList
-		   |		INNER JOIN Document.PurchaseOrder.RowIDInfo AS RowIDInfo
-		   |		ON RowIDInfo.Ref = &Basis
-		   |		AND ItemList.Ref = &Basis
-		   |		AND RowIDInfo.Key = &BasisKey
-		   |		AND ItemList.Key = &BasisKey
-		   |		AND RowIDInfo.Key = ItemList.Key
-		   |		AND RowIDInfo.Ref = ItemList.Ref
-		   |		AND RowIDInfo.RowID = &RowID";
-EndFunction
-
-Function GetBasisesInfoQueryText_GR()
-	Return "SELECT
-		   |	RowIDInfo.Ref AS Basis,
-		   |	RowIDInfo.RowRef AS RowRef,
-		   |	RowIDInfo.BasisKey AS BasisKey,
-		   |	RowIDInfo.RowID AS RowID,
-		   |	RowIDInfo.Basis AS ParentBasis,
-		   |	ItemList.Key AS Key,
-		   |	0 AS Price,
-		   |	UNDEFINED AS Currency,
-		   |	ItemList.Unit AS Unit
-		   |FROM
-		   |	Document.GoodsReceipt.ItemList AS ItemList
-		   |		INNER JOIN Document.GoodsReceipt.RowIDInfo AS RowIDInfo
-		   |		ON RowIDInfo.Ref = &Basis
-		   |		AND ItemList.Ref = &Basis
-		   |		AND RowIDInfo.Key = &BasisKey
-		   |		AND ItemList.Key = &BasisKey
-		   |		AND RowIDInfo.Key = ItemList.Key
-		   |		AND RowIDInfo.Ref = ItemList.Ref
-		   |		AND RowIDInfo.RowID = &RowID";
-EndFunction
-
-Function GetBasisesInfoQueryText_PI()
-	Return "SELECT
-		   |	RowIDInfo.Ref AS Basis,
-		   |	RowIDInfo.RowRef AS RowRef,
-		   |	RowIDInfo.BasisKey AS BasisKey,
-		   |	RowIDInfo.RowID AS RowID,
-		   |	RowIDInfo.Basis AS ParentBasis,
-		   |	ItemList.Key AS Key,
-		   |	ItemList.Price AS Price,
-		   |	ItemList.Ref.Currency AS Currency,
-		   |	ItemList.Unit AS Unit
-		   |FROM
-		   |	Document.PurchaseInvoice.ItemList AS ItemList
-		   |		INNER JOIN Document.PurchaseInvoice.RowIDInfo AS RowIDInfo
-		   |		ON RowIDInfo.Ref = &Basis
-		   |		AND ItemList.Ref = &Basis
-		   |		AND RowIDInfo.Key = &BasisKey
-		   |		AND ItemList.Key = &BasisKey
-		   |		AND RowIDInfo.Key = ItemList.Key
-		   |		AND RowIDInfo.Ref = ItemList.Ref
-		   |		AND RowIDInfo.RowID = &RowID";
-EndFunction
-
-Function GetBasisesInfoQueryText_ITO()
-	Return "SELECT
-		   |	RowIDInfo.Ref AS Basis,
-		   |	RowIDInfo.RowRef AS RowRef,
-		   |	RowIDInfo.BasisKey AS BasisKey,
-		   |	RowIDInfo.RowID AS RowID,
-		   |	RowIDInfo.Basis AS ParentBasis,
-		   |	ItemList.Key AS Key,
-		   |	0 AS Price,
-		   |	UNDEFINED AS Currency,
-		   |	ItemList.Unit AS Unit
-		   |FROM
-		   |	Document.InventoryTransferOrder.ItemList AS ItemList
-		   |		INNER JOIN Document.InventoryTransferOrder.RowIDInfo AS RowIDInfo
-		   |		ON RowIDInfo.Ref = &Basis
-		   |		AND ItemList.Ref = &Basis
-		   |		AND RowIDInfo.Key = &BasisKey
-		   |		AND ItemList.Key = &BasisKey
-		   |		AND RowIDInfo.Key = ItemList.Key
-		   |		AND RowIDInfo.Ref = ItemList.Ref
-		   |		AND RowIDInfo.RowID = &RowID";
-EndFunction
-
-Function GetBasisesInfoQueryText_IT()
-	Return "SELECT
-		   |	RowIDInfo.Ref AS Basis,
-		   |	RowIDInfo.RowRef AS RowRef,
-		   |	RowIDInfo.BasisKey AS BasisKey,
-		   |	RowIDInfo.RowID AS RowID,
-		   |	RowIDInfo.Basis AS ParentBasis,
-		   |	ItemList.Key AS Key,
-		   |	0 AS Price,
-		   |	UNDEFINED AS Currency,
-		   |	ItemList.Unit AS Unit
-		   |FROM
-		   |	Document.InventoryTransfer.ItemList AS ItemList
-		   |		INNER JOIN Document.InventoryTransfer.RowIDInfo AS RowIDInfo
-		   |		ON RowIDInfo.Ref = &Basis
-		   |		AND ItemList.Ref = &Basis
-		   |		AND RowIDInfo.Key = &BasisKey
-		   |		AND ItemList.Key = &BasisKey
-		   |		AND RowIDInfo.Key = ItemList.Key
-		   |		AND RowIDInfo.Ref = ItemList.Ref
-		   |		AND RowIDInfo.RowID = &RowID";
-EndFunction
-
-Function GetBasisesInfoQueryText_ISR()
-	Return "SELECT
-		   |	RowIDInfo.Ref AS Basis,
-		   |	RowIDInfo.RowRef AS RowRef,
-		   |	RowIDInfo.BasisKey AS BasisKey,
-		   |	RowIDInfo.RowID AS RowID,
-		   |	RowIDInfo.Basis AS ParentBasis,
-		   |	ItemList.Key AS Key,
-		   |	0 AS Price,
-		   |	UNDEFINED AS Currency,
-		   |	ItemList.Unit AS Unit
-		   |FROM
-		   |	Document.InternalSupplyRequest.ItemList AS ItemList
-		   |		INNER JOIN Document.InternalSupplyRequest.RowIDInfo AS RowIDInfo
-		   |		ON RowIDInfo.Ref = &Basis
-		   |		AND ItemList.Ref = &Basis
-		   |		AND RowIDInfo.Key = &BasisKey
-		   |		AND ItemList.Key = &BasisKey
-		   |		AND RowIDInfo.Key = ItemList.Key
-		   |		AND RowIDInfo.Ref = ItemList.Ref
-		   |		AND RowIDInfo.RowID = &RowID";
-EndFunction
-
-Function GetBasisesInfoQueryText_PhysicalInventory()
-	Return "SELECT
-		   |	RowIDInfo.Ref AS Basis,
-		   |	RowIDInfo.RowRef AS RowRef,
-		   |	RowIDInfo.BasisKey AS BasisKey,
-		   |	RowIDInfo.RowID AS RowID,
-		   |	RowIDInfo.Basis AS ParentBasis,
-		   |	ItemList.Key AS Key,
-		   |	0 AS Price,
-		   |	UNDEFINED AS Currency,
-		   |	ItemList.Unit AS Unit
-		   |FROM
-		   |	Document.PhysicalInventory.ItemList AS ItemList
-		   |		INNER JOIN Document.PhysicalInventory.RowIDInfo AS RowIDInfo
-		   |		ON RowIDInfo.Ref = &Basis
-		   |		AND ItemList.Ref = &Basis
-		   |		AND RowIDInfo.Key = &BasisKey
-		   |		AND ItemList.Key = &BasisKey
-		   |		AND RowIDInfo.Key = ItemList.Key
-		   |		AND RowIDInfo.Ref = ItemList.Ref
-		   |		AND RowIDInfo.RowID = &RowID";
-EndFunction
-
-Function GetBasisesInfoQueryText_PR()
-	Return "SELECT
-		   |	RowIDInfo.Ref AS Basis,
-		   |	RowIDInfo.RowRef AS RowRef,
-		   |	RowIDInfo.BasisKey AS BasisKey,
-		   |	RowIDInfo.RowID AS RowID,
-		   |	RowIDInfo.Basis AS ParentBasis,
-		   |	ItemList.Key AS Key,
-		   |	ItemList.Price AS Price,
-		   |	ItemList.Ref.Currency AS Currency,
-		   |	ItemList.Unit AS Unit
-		   |FROM
-		   |	Document.PurchaseReturn.ItemList AS ItemList
-		   |		INNER JOIN Document.PurchaseReturn.RowIDInfo AS RowIDInfo
-		   |		ON RowIDInfo.Ref = &Basis
-		   |		AND ItemList.Ref = &Basis
-		   |		AND RowIDInfo.Key = &BasisKey
-		   |		AND ItemList.Key = &BasisKey
-		   |		AND RowIDInfo.Key = ItemList.Key
-		   |		AND RowIDInfo.Ref = ItemList.Ref
-		   |		AND RowIDInfo.RowID = &RowID";
-EndFunction
-
-Function GetBasisesInfoQueryText_PRO()
-	Return "SELECT
-		   |	RowIDInfo.Ref AS Basis,
-		   |	RowIDInfo.RowRef AS RowRef,
-		   |	RowIDInfo.BasisKey AS BasisKey,
-		   |	RowIDInfo.RowID AS RowID,
-		   |	RowIDInfo.Basis AS ParentBasis,
-		   |	ItemList.Key AS Key,
-		   |	ItemList.Price AS Price,
-		   |	ItemList.Ref.Currency AS Currency,
-		   |	ItemList.Unit AS Unit
-		   |FROM
-		   |	Document.PurchaseReturnOrder.ItemList AS ItemList
-		   |		INNER JOIN Document.PurchaseReturnOrder.RowIDInfo AS RowIDInfo
-		   |		ON RowIDInfo.Ref = &Basis
-		   |		AND ItemList.Ref = &Basis
-		   |		AND RowIDInfo.Key = &BasisKey
-		   |		AND ItemList.Key = &BasisKey
-		   |		AND RowIDInfo.Key = ItemList.Key
-		   |		AND RowIDInfo.Ref = ItemList.Ref
-		   |		AND RowIDInfo.RowID = &RowID";
-EndFunction
-
-Function GetBasisesInfoQueryText_SR()
-	Return "SELECT
-		   |	RowIDInfo.Ref AS Basis,
-		   |	RowIDInfo.RowRef AS RowRef,
-		   |	RowIDInfo.BasisKey AS BasisKey,
-		   |	RowIDInfo.RowID AS RowID,
-		   |	RowIDInfo.Basis AS ParentBasis,
-		   |	ItemList.Key AS Key,
-		   |	ItemList.Price AS Price,
-		   |	ItemList.Ref.Currency AS Currency,
-		   |	ItemList.Unit AS Unit
-		   |FROM
-		   |	Document.SalesReturn.ItemList AS ItemList
-		   |		INNER JOIN Document.SalesReturn.RowIDInfo AS RowIDInfo
-		   |		ON RowIDInfo.Ref = &Basis
-		   |		AND ItemList.Ref = &Basis
-		   |		AND RowIDInfo.Key = &BasisKey
-		   |		AND ItemList.Key = &BasisKey
-		   |		AND RowIDInfo.Key = ItemList.Key
-		   |		AND RowIDInfo.Ref = ItemList.Ref
-		   |		AND RowIDInfo.RowID = &RowID";
-EndFunction
-
-Function GetBasisesInfoQueryText_SRO()
-	Return "SELECT
-		   |	RowIDInfo.Ref AS Basis,
-		   |	RowIDInfo.RowRef AS RowRef,
-		   |	RowIDInfo.BasisKey AS BasisKey,
-		   |	RowIDInfo.RowID AS RowID,
-		   |	RowIDInfo.Basis AS ParentBasis,
-		   |	ItemList.Key AS Key,
-		   |	ItemList.Price AS Price,
-		   |	ItemList.Ref.Currency AS Currency,
-		   |	ItemList.Unit AS Unit
-		   |FROM
-		   |	Document.SalesReturnOrder.ItemList AS ItemList
-		   |		INNER JOIN Document.SalesReturnOrder.RowIDInfo AS RowIDInfo
-		   |		ON RowIDInfo.Ref = &Basis
-		   |		AND ItemList.Ref = &Basis
-		   |		AND RowIDInfo.Key = &BasisKey
-		   |		AND ItemList.Key = &BasisKey
-		   |		AND RowIDInfo.Key = ItemList.Key
-		   |		AND RowIDInfo.Ref = ItemList.Ref
-		   |		AND RowIDInfo.RowID = &RowID";
-EndFunction
-
-Function GetBasisesInfoQueryText_RSR()
-	Return "SELECT
-		   |	RowIDInfo.Ref AS Basis,
-		   |	RowIDInfo.RowRef AS RowRef,
-		   |	RowIDInfo.BasisKey AS BasisKey,
-		   |	RowIDInfo.RowID AS RowID,
-		   |	RowIDInfo.Basis AS ParentBasis,
-		   |	ItemList.Key AS Key,
-		   |	ItemList.Price AS Price,
-		   |	ItemList.Ref.Currency AS Currency,
-		   |	ItemList.Unit AS Unit
-		   |FROM
-		   |	Document.RetailSalesReceipt.ItemList AS ItemList
-		   |		INNER JOIN Document.RetailSalesReceipt.RowIDInfo AS RowIDInfo
-		   |		ON RowIDInfo.Ref = &Basis
-		   |		AND ItemList.Ref = &Basis
-		   |		AND RowIDInfo.Key = &BasisKey
-		   |		AND ItemList.Key = &BasisKey
-		   |		AND RowIDInfo.Key = ItemList.Key
-		   |		AND RowIDInfo.Ref = ItemList.Ref
-		   |		AND RowIDInfo.RowID = &RowID";
-EndFunction
-
-Function GetBasisesInfoQueryText_RRR()
-	Return "SELECT
-		   |	RowIDInfo.Ref AS Basis,
-		   |	RowIDInfo.RowRef AS RowRef,
-		   |	RowIDInfo.BasisKey AS BasisKey,
-		   |	RowIDInfo.RowID AS RowID,
-		   |	RowIDInfo.Basis AS ParentBasis,
-		   |	ItemList.Key AS Key,
-		   |	ItemList.Price AS Price,
-		   |	ItemList.Ref.Currency AS Currency,
-		   |	ItemList.Unit AS Unit
-		   |FROM
-		   |	Document.RetailReturnReceipt.ItemList AS ItemList
-		   |		INNER JOIN Document.RetailReturnReceipt.RowIDInfo AS RowIDInfo
-		   |		ON RowIDInfo.Ref = &Basis
-		   |		AND ItemList.Ref = &Basis
-		   |		AND RowIDInfo.Key = &BasisKey
-		   |		AND ItemList.Key = &BasisKey
-		   |		AND RowIDInfo.Key = ItemList.Key
-		   |		AND RowIDInfo.Ref = ItemList.Ref
-		   |		AND RowIDInfo.RowID = &RowID";
+Function GetChildrenInfo(Basis, BasisKey, RowID)
+	Query = New Query();
+	Query.Text = 
+		"SELECT
+		|	RowIDInfo.Recorder AS Children,
+		|	RowIDInfo.RowRef AS RowRef,
+		|	RowIDInfo.RowID AS RowID,
+		|	RowIDInfo.Key AS BasisKey
+		|FROM 
+		|	InformationRegister.T3010S_RowIDInfo AS RowIDInfo
+		|WHERE
+		|	RowIDInfo.Basis = &Basis
+		|	AND RowIDInfo.BasisKey = &BasisKey
+		|	AND RowIDInfo.RowID = &RowID";
+	Query.SetParameter("Basis"    , Basis);
+	Query.SetParameter("BasisKey" , BasisKey);
+	Query.SetParameter("RowID"    , RowID);
+	QueryResult = Query.Execute();
+	QuerySelection = QueryResult.Select();
+	
+	ArrayOfChildrenInfo = New Array();
+	While QuerySelection.Next() Do
+		ChildrenInfo = New Structure("Children, RowRef, RowID, BasisKey");
+		FillPropertyValues(ChildrenInfo, QuerySelection);
+		ArrayOfChildrenInfo.Add(ChildrenInfo);
+	EndDo;
+	Return ArrayOfChildrenInfo;
 EndFunction
 
 #EndRegion
@@ -8535,6 +8176,15 @@ Procedure LockExternalLinkedRows(Object, Form)
 			NewRow.RowID = Row.Key;
 		EndIf;
 	EndDo;
+	ArrayOfTypes = New Array();
+	ArrayOfTypes.Add(TypeOf(Object.Ref));
+	RowIDInfoTable.Columns.Add("Basis", New TypeDescription(ArrayOfTypes));
+	RowIDInfoTable.Columns.Add("BasisKey", Metadata.DefinedTypes.typeRowID.Type);
+	For Each Row In RowIDInfoTable Do
+		Row.Basis = Object.Ref;
+		Row.BasisKey = Row.Key;
+	EndDo;
+	
 	ExternalLinkedData = GetExternalLinkedKeys(RowIDInfoTable, Object.Ref);
 	Form.ExternalLinkedDocs.LoadValues(ExternalLinkedData.ExternalLinkedDocs);
 	
@@ -8555,13 +8205,13 @@ Function GetInternalLinkedKeys(RowIDInfoTable, Ref)
 	ResultTable.Columns.Add("Key");
 	ResultTable.Columns.Add("Recorder");
 	
-	For Each Row In RowIDInfoTable Do		
+	For Each Row In RowIDInfoTable Do
 		If Row.Basis <> Row.RowRef.Basis Then
 			GetBasisInfoRecursive(Row.Basis, Row.BasisKey, Row.RowID, ResultTable, Row.Key);
 		Else
 			NewRow = ResultTable.Add();
 			NewRow.Key = Row.Key;
-			NewRow.Recorder = Row.Basis;			
+			NewRow.Recorder = Row.Basis;
 		EndIf;
 	EndDo;
 	
@@ -8607,76 +8257,16 @@ Procedure GetBasisInfoRecursive(Basis, BasisKey, RowID, ResultTable, Key)
 EndProcedure
 
 Function GetExternalLinkedKeys(RowIDInfoTable, Ref)
-	Query = New Query();
-	Query.Text = 
-	"SELECT
-	|	RowIDInfoTable.Key AS Key,
-	|	RowIDInfoTable.RowID AS RowID
-	|INTO RowIDInfoTable
-	|FROM
-	|	&RowIDInfoTable AS RowIDInfoTable
-	|;
-	|
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	RowIDInfoTable.Key,
-	|	TM1010B_RowIDMovements.Recorder
-	|INTO tmpTM1010B_RowIDMovements
-	|FROM
-	|	RowIDInfoTable AS RowIDInfoTable
-	|		INNER JOIN AccumulationRegister.TM1010B_RowIDMovements AS TM1010B_RowIDMovements
-	|		ON RowIDInfoTable.RowID = TM1010B_RowIDMovements.RowID
-	|		AND TM1010B_RowIDMovements.RecordType = VALUE(AccumulationRecordType.Expense)
-	|		AND TM1010B_RowIDMovements.Recorder <> &Ref
-	|		AND TM1010B_RowIDMovements.Recorder.PointInTime > &PointInTime
-	|GROUP BY
-	|	RowIDInfoTable.Key,
-	|	TM1010B_RowIDMovements.Recorder
-	|;
-	|
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	RowIDInfoTable.Key,
-	|	TM1010T_RowIDMovements.Recorder
-	|INTO tmpTM1010T_RowIDMovements
-	|FROM
-	|	RowIDInfoTable AS RowIDInfoTable
-	|		INNER JOIN AccumulationRegister.TM1010T_RowIDMovements AS TM1010T_RowIDMovements
-	|		ON RowIDInfoTable.RowID = TM1010T_RowIDMovements.RowID
-	|		AND TM1010T_RowIDMovements.Quantity < 0
-	|		AND TM1010T_RowIDMovements.Recorder <> &Ref
-	|		AND TM1010T_RowIDMovements.Recorder.PointInTime > &PointInTime
-	|GROUP BY
-	|	RowIDInfoTable.Key,
-	|	TM1010T_RowIDMovements.Recorder
-	|;
-	|
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	tmpTM1010B_RowIDMovements.Key,
-	|	tmpTM1010B_RowIDMovements.Recorder
-	|FROM
-	|	tmpTM1010B_RowIDMovements AS tmpTM1010B_RowIDMovements
-	|
-	|UNION
-	|
-	|SELECT
-	|	tmpTM1010T_RowIDMovements.Key,
-	|	tmpTM1010T_RowIDMovements.Recorder
-	|FROM
-	|	tmpTM1010T_RowIDMovements AS tmpTM1010T_RowIDMovements";
-
-	Query.SetParameter("RowIDInfoTable", RowIDInfoTable);
-	Query.SetParameter("Ref", Ref);
-	Query.SetParameter("PointInTime", Ref.PointInTime());
-	QueryResult = Query.Execute();
-	QueryTable = QueryResult.Unload();
-	KeysTable = QueryTable.Copy();
+	ResultTable = New ValueTable();
+	ResultTable.Columns.Add("Key");
+	ResultTable.Columns.Add("Recorder");
+	
+	For Each Row In RowIDInfoTable Do
+		GetChildrenInfoRecursive(Row.Basis, Row.BasisKey, Row.RowID, ResultTable, Row.Key);
+	EndDo;
+	
+	KeysTable = ResultTable.Copy();
 	KeysTable.GroupBy("Key");
-		
 	KeysTable.Columns.Add("ExternalLinks");
 	KeysTable.FillValues("", "ExternalLinks");
 	
@@ -8685,7 +8275,7 @@ Function GetExternalLinkedKeys(RowIDInfoTable, Ref)
 	
 	DocAliases = DocAliases();
 	
-	For Each Row In QueryTable Do
+	For Each Row In ResultTable Do
 		For Each KeyValue In Is(Row.Recorder) Do
 			If KeyValue.Value Then
 				ExternalLinkedDocsTable.Add().Doc = DocAliases[KeyValue.Key];
@@ -8698,6 +8288,17 @@ Function GetExternalLinkedKeys(RowIDInfoTable, Ref)
 	ExternalLinkedDocsTable.GroupBy("Doc");
 	Return New Structure("Keys, ExternalLinkedDocs", KeysTable, ExternalLinkedDocsTable.UnloadColumn("Doc"));
 EndFunction
+
+Procedure GetChildrenInfoRecursive(Basis, BasisKey, RowID, ResultTable, Key)
+	ArrayOfChildrenInfo = GetChildrenInfo(Basis, BasisKey, RowID);
+	For Each ChildrenInfo In ArrayOfChildrenInfo Do
+		NewRow = ResultTable.Add();
+		NewRow.Key = Key;
+		NewRow.Recorder = ChildrenInfo.Children;
+	
+		GetChildrenInfoRecursive(ChildrenInfo.Children, ChildrenInfo.BasisKey, RowID, ResultTable, Key);
+	EndDo;
+EndProcedure
 
 #Region ConditionalAppearance
 

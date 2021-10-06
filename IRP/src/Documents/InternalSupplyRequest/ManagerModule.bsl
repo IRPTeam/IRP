@@ -88,8 +88,29 @@ EndFunction
 
 Function GetQueryTextsMasterTables()
 	QueryArray = New Array();
-
+	QueryArray.Add(T3010S_RowIDInfo());
 	Return QueryArray;
+EndFunction
+
+Function T3010S_RowIDInfo()
+	Return
+		"SELECT
+		|	RowIDInfo.RowRef AS RowRef,
+		|	RowIDInfo.BasisKey AS BasisKey,
+		|	RowIDInfo.RowID AS RowID,
+		|	RowIDInfo.Basis AS Basis,
+		|	ItemList.Key AS Key,
+		|	0 AS Price,
+		|	UNDEFINED AS Currency,
+		|	ItemList.Unit AS Unit
+		|INTO T3010S_RowIDInfo
+		|FROM
+		|	Document.InternalSupplyRequest.ItemList AS ItemList
+		|		INNER JOIN Document.InternalSupplyRequest.RowIDInfo AS RowIDInfo
+		|		ON RowIDInfo.Ref = &Ref
+		|		AND ItemList.Ref = &Ref
+		|		AND RowIDInfo.Key = ItemList.Key
+		|		AND RowIDInfo.Ref = ItemList.Ref";
 EndFunction
 
 #EndRegion

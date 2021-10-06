@@ -136,6 +136,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R2021B_CustomersTransactions());
 	QueryArray.Add(R5010B_ReconciliationStatement());
 	QueryArray.Add(R4014B_SerialLotNumber());
+	QueryArray.Add(T3010S_RowIDInfo());
 	Return QueryArray;
 EndFunction
 
@@ -576,6 +577,27 @@ Function R5010B_ReconciliationStatement()
 		   |	ItemList.LegalNameContract,
 		   |	ItemList.Currency,
 		   |	ItemList.Period";
+EndFunction
+
+Function T3010S_RowIDInfo()
+	Return
+		"SELECT
+		|	RowIDInfo.RowRef AS RowRef,
+		|	RowIDInfo.BasisKey AS BasisKey,
+		|	RowIDInfo.RowID AS RowID,
+		|	RowIDInfo.Basis AS Basis,
+		|	ItemList.Key AS Key,
+		|	ItemList.Price AS Price,
+		|	ItemList.Ref.Currency AS Currency,
+		|	ItemList.Unit AS Unit
+		|INTO T3010S_RowIDInfo
+		|FROM
+		|	Document.RetailReturnReceipt.ItemList AS ItemList
+		|		INNER JOIN Document.RetailReturnReceipt.RowIDInfo AS RowIDInfo
+		|		ON RowIDInfo.Ref = &Ref
+		|		AND ItemList.Ref = &Ref
+		|		AND RowIDInfo.Key = ItemList.Key
+		|		AND RowIDInfo.Ref = ItemList.Ref";
 EndFunction
 
 #EndRegion

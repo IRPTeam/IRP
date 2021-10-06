@@ -1936,47 +1936,49 @@ EndFunction
 
 Function ExtractData_FromSC(BasisesTable, DataReceiver, AddInfo = Undefined)
 	Query = New Query(GetQueryText_BasisesTable());
-	Query.Text = Query.Text + "SELECT ALLOWED
-							  |	""ShipmentConfirmation"" AS BasedOn,
-							  |	UNDEFINED AS Ref,
-							  |	ItemList.Ref.Company AS Company,
-							  |	ItemList.Ref.Partner AS Partner,
-							  |	ItemList.Ref.LegalName AS LegalName,
-							  |	ItemList.Store AS Store,
-							  |	ItemList.ItemKey.Item AS Item,
-							  |	ItemList.ItemKey AS ItemKey,
-							  |	TRUE AS UseShipmentConfirmation,
-							  |	0 AS Quantity,
-							  |	BasisesTable.Key,
-							  |	BasisesTable.Unit AS Unit,
-							  |	BasisesTable.BasisUnit AS BasisUnit,
-							  |	BasisesTable.QuantityInBaseUnit AS QuantityInBaseUnit
-							  |FROM
-							  |	BasisesTable AS BasisesTable
-							  |		LEFT JOIN Document.ShipmentConfirmation.ItemList AS ItemList
-							  |		ON BasisesTable.Basis = ItemList.Ref
-							  |		AND BasisesTable.BasisKey = ItemList.Key
-							  |ORDER BY
-							  |	ItemList.LineNumber
-							  |;
-							  |
-							  |////////////////////////////////////////////////////////////////////////////////
-							  |SELECT DISTINCT
-							  |	UNDEFINED AS Ref,
-							  |	ItemList.Store AS Store,
-							  |	ItemList.ItemKey.Item AS Item,
-							  |	ItemList.ItemKey AS ItemKey,
-							  |	BasisesTable.Unit AS Unit,
-							  |	BasisesTable.Key,
-							  |	BasisesTable.BasisKey,
-							  |	BasisesTable.Basis AS ShipmentConfirmation,
-							  |	BasisesTable.QuantityInBaseUnit AS Quantity,
-							  |	BasisesTable.QuantityInBaseUnit AS QuantityInShipmentConfirmation
-							  |FROM
-							  |	BasisesTable AS BasisesTable
-							  |		LEFT JOIN Document.ShipmentConfirmation.ItemList AS ItemList
-							  |		ON BasisesTable.Basis = ItemList.Ref
-							  |		AND BasisesTable.BasisKey = ItemList.Key";
+	Query.Text = Query.Text + 
+	"SELECT ALLOWED
+	|	""ShipmentConfirmation"" AS BasedOn,
+	|	UNDEFINED AS Ref,
+	|	ItemList.Ref.Company AS Company,
+	|	ItemList.Ref.Branch AS Branch,
+	|	ItemList.Ref.Partner AS Partner,
+	|	ItemList.Ref.LegalName AS LegalName,
+	|	ItemList.Store AS Store,
+	|	ItemList.ItemKey.Item AS Item,
+	|	ItemList.ItemKey AS ItemKey,
+	|	TRUE AS UseShipmentConfirmation,
+	|	0 AS Quantity,
+	|	BasisesTable.Key,
+	|	BasisesTable.Unit AS Unit,
+	|	BasisesTable.BasisUnit AS BasisUnit,
+	|	BasisesTable.QuantityInBaseUnit AS QuantityInBaseUnit
+	|FROM
+	|	BasisesTable AS BasisesTable
+	|		LEFT JOIN Document.ShipmentConfirmation.ItemList AS ItemList
+	|		ON BasisesTable.Basis = ItemList.Ref
+	|		AND BasisesTable.BasisKey = ItemList.Key
+	|ORDER BY
+	|	ItemList.LineNumber
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT DISTINCT
+	|	UNDEFINED AS Ref,
+	|	ItemList.Store AS Store,
+	|	ItemList.ItemKey.Item AS Item,
+	|	ItemList.ItemKey AS ItemKey,
+	|	BasisesTable.Unit AS Unit,
+	|	BasisesTable.Key,
+	|	BasisesTable.BasisKey,
+	|	BasisesTable.Basis AS ShipmentConfirmation,
+	|	BasisesTable.QuantityInBaseUnit AS Quantity,
+	|	BasisesTable.QuantityInBaseUnit AS QuantityInShipmentConfirmation
+	|FROM
+	|	BasisesTable AS BasisesTable
+	|		LEFT JOIN Document.ShipmentConfirmation.ItemList AS ItemList
+	|		ON BasisesTable.Basis = ItemList.Ref
+	|		AND BasisesTable.BasisKey = ItemList.Key";
 
 	Query.SetParameter("BasisesTable", BasisesTable);
 	QueryResults = Query.ExecuteBatch();
@@ -2433,47 +2435,49 @@ EndFunction
 
 Function ExtractData_FromGR(BasisesTable, DataReceiver, AddInfo = Undefined)
 	Query = New Query(GetQueryText_BasisesTable());
-	Query.Text = Query.Text + "SELECT ALLOWED
-							  |	""GoodsReceipt"" AS BasedOn,
-							  |	UNDEFINED AS Ref,
-							  |	ItemList.Ref.Company AS Company,
-							  |	ItemList.Ref.Partner AS Partner,
-							  |	ItemList.Ref.LegalName AS LegalName,
-							  |	ItemList.Store AS Store,
-							  |	ItemList.ItemKey.Item AS Item,
-							  |	ItemList.ItemKey AS ItemKey,
-							  |	TRUE AS UseGoodsReceipt,
-							  |	0 AS Quantity,
-							  |	BasisesTable.Key,
-							  |	BasisesTable.Unit AS Unit,
-							  |	BasisesTable.BasisUnit AS BasisUnit,
-							  |	BasisesTable.QuantityInBaseUnit AS QuantityInBaseUnit
-							  |FROM
-							  |	BasisesTable AS BasisesTable
-							  |		LEFT JOIN Document.GoodsReceipt.ItemList AS ItemList
-							  |		ON BasisesTable.Basis = ItemList.Ref
-							  |		AND BasisesTable.BasisKey = ItemList.Key
-							  |ORDER BY
-							  |	ItemList.LineNumber
-							  |;
-							  |
-							  |////////////////////////////////////////////////////////////////////////////////
-							  |SELECT DISTINCT
-							  |	UNDEFINED AS Ref,
-							  |	ItemList.Store AS Store,
-							  |	ItemList.ItemKey.Item AS Item,
-							  |	ItemList.ItemKey AS ItemKey,
-							  |	BasisesTable.Unit AS Unit,
-							  |	BasisesTable.Key,
-							  |	BasisesTable.BasisKey,
-							  |	BasisesTable.Basis AS GoodsReceipt,
-							  |	BasisesTable.QuantityInBaseUnit AS Quantity,
-							  |	BasisesTable.QuantityInBaseUnit AS QuantityInGoodsReceipt
-							  |FROM
-							  |	BasisesTable AS BasisesTable
-							  |		LEFT JOIN Document.GoodsReceipt.ItemList AS ItemList
-							  |		ON BasisesTable.Basis = ItemList.Ref
-							  |		AND BasisesTable.BasisKey = ItemList.Key";
+	Query.Text = Query.Text + 
+	"SELECT ALLOWED
+	|	""GoodsReceipt"" AS BasedOn,
+	|	UNDEFINED AS Ref,
+	|	ItemList.Ref.Company AS Company,
+	|	ItemList.Ref.Branch AS Branch,
+	|	ItemList.Ref.Partner AS Partner,
+	|	ItemList.Ref.LegalName AS LegalName,
+	|	ItemList.Store AS Store,
+	|	ItemList.ItemKey.Item AS Item,
+	|	ItemList.ItemKey AS ItemKey,
+	|	TRUE AS UseGoodsReceipt,
+	|	0 AS Quantity,
+	|	BasisesTable.Key,
+	|	BasisesTable.Unit AS Unit,
+	|	BasisesTable.BasisUnit AS BasisUnit,
+	|	BasisesTable.QuantityInBaseUnit AS QuantityInBaseUnit
+	|FROM
+	|	BasisesTable AS BasisesTable
+	|		LEFT JOIN Document.GoodsReceipt.ItemList AS ItemList
+	|		ON BasisesTable.Basis = ItemList.Ref
+	|		AND BasisesTable.BasisKey = ItemList.Key
+	|ORDER BY
+	|	ItemList.LineNumber
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT DISTINCT
+	|	UNDEFINED AS Ref,
+	|	ItemList.Store AS Store,
+	|	ItemList.ItemKey.Item AS Item,
+	|	ItemList.ItemKey AS ItemKey,
+	|	BasisesTable.Unit AS Unit,
+	|	BasisesTable.Key,
+	|	BasisesTable.BasisKey,
+	|	BasisesTable.Basis AS GoodsReceipt,
+	|	BasisesTable.QuantityInBaseUnit AS Quantity,
+	|	BasisesTable.QuantityInBaseUnit AS QuantityInGoodsReceipt
+	|FROM
+	|	BasisesTable AS BasisesTable
+	|		LEFT JOIN Document.GoodsReceipt.ItemList AS ItemList
+	|		ON BasisesTable.Basis = ItemList.Ref
+	|		AND BasisesTable.BasisKey = ItemList.Key";
 
 	Query.SetParameter("BasisesTable", BasisesTable);
 	QueryResults = Query.ExecuteBatch();

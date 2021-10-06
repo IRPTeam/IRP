@@ -354,7 +354,7 @@ Scenario: _2067013 change quantity in the linked string in the ISR (one session)
 		And I input "8,000" text in "Quantity" field of "ItemList" table
 		And I click "Post" button
 		Then "1C:Enterprise" window is opened
-		And I click the button named "OK"
+		And I click "OK" button
 		Then there are lines in TestClient message log
 			|'Line No. [4] [Shirt 36/Red] RowID movements remaining: 10 . Required: 8 . Lacking: 2 .'|
 	* Change quantity (more then ITO)
@@ -367,7 +367,7 @@ Scenario: _2067013 change quantity in the linked string in the ISR (one session)
 		And I finish line editing in "ItemList" table
 		And I click "Post and close" button
 		Then user message window does not contain messages
-		Then "Internal supply request" window is opened
+		Then "Internal supply requests" window is opened
 		And I close all client application windows
 
 Scenario: _2067014 change quantity in the linked string in the ITO (one session)
@@ -387,7 +387,7 @@ Scenario: _2067014 change quantity in the linked string in the ITO (one session)
 		And I input "7,000" text in "Quantity" field of "ItemList" table
 		And I click "Post" button
 		Then "1C:Enterprise" window is opened
-		And I click the button named "OK"
+		And I click "OK" button
 		Then there are lines in TestClient message log
 			|'Line No. [4] [Shirt 36/Red] RowID movements remaining: 8 . Required: 7 . Lacking: 1 .'|
 	* Change quantity (more then IT)
@@ -422,7 +422,7 @@ Scenario: _2067015 change quantity in the linked string in the IT (one session)
 		And I input "7,000" text in "Quantity" field of "ItemList" table
 		And I click "Post" button
 		Then "1C:Enterprise" window is opened
-		And I click the button named "OK"
+		And I click "OK" button
 		Then there are lines in TestClient message log
 			|'Line No. [3] [Shirt 36/Red] RowID movements remaining: 8 . Required: 7 . Lacking: 1 .'|
 	* Change quantity (more then SC,GR)
@@ -516,13 +516,13 @@ Scenario: _2067019 unpost ISR with linked strings (one session)
 		And I activate field named "Date" in "List" table
 		And in the table "List" I click the button named "ListContextMenuUndoPosting"
 		Then "1C:Enterprise" window is opened
-		And I click the button named "OK"
+		And I click "OK" button
 	* Check message
 		Then there are lines in TestClient message log
 			|'Line No. [1] [Dress XS/Blue] RowID movements remaining: 5 . Required: 0 . Lacking: 5 .'|
 			|'Line No. [2] [Trousers 38/Yellow] RowID movements remaining: 10 . Required: 0 . Lacking: 10 .'|
 			|'Line No. [3] [Trousers 36/Yellow] RowID movements remaining: 15 . Required: 0 . Lacking: 15 .'|
-			|'Line No. [4] [Shirt 36/Red] RowID movements remaining: 10 . Required: 0 . Lacking: 10 .'|		
+			|'Line No. [4] [Shirt 36/Red] RowID movements remaining: 11 . Required: 0 . Lacking: 11 .'|		
 		And I close all client application windows
 
 Scenario: _2067020 unpost ITO with linked strings (one session)
@@ -536,7 +536,7 @@ Scenario: _2067020 unpost ITO with linked strings (one session)
 		And I activate field named "Date" in "List" table
 		And in the table "List" I click the button named "ListContextMenuUndoPosting"
 		Then "1C:Enterprise" window is opened
-		And I click the button named "OK"
+		And I click "OK" button
 	* Check message
 		Then there are lines in TestClient message log
 			|'Line No. [2] [Trousers 38/Yellow] RowID movements remaining: 10 . Required: 0 . Lacking: 10 .'|
@@ -559,7 +559,7 @@ Scenario: _2067021 unpost IT with linked strings (one session)
 		And I activate field named "Date" in "List" table
 		And in the table "List" I click the button named "ListContextMenuUndoPosting"
 		Then "1C:Enterprise" window is opened
-		And I click the button named "OK"
+		And I click "OK" button
 	* Check message
 		Then there are lines in TestClient message log
 			|'Line No. [1] [Trousers 38/Yellow] RowID movements remaining: 9 . Required: 0 . Lacking: 9 .'|
@@ -586,13 +586,13 @@ Scenario: _2067036 delete ISR with linked strings (one session)
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button
 		Then "1C:Enterprise" window is opened
-		And I click the button named "OK"
+		And I click "OK" button
 	* Check message
 		Then there are lines in TestClient message log
 			|'Line No. [1] [Dress XS/Blue] RowID movements remaining: 5 . Required: 0 . Lacking: 5 .'|
 			|'Line No. [2] [Trousers 38/Yellow] RowID movements remaining: 10 . Required: 0 . Lacking: 10 .'|
 			|'Line No. [3] [Trousers 36/Yellow] RowID movements remaining: 15 . Required: 0 . Lacking: 15 .'|
-			|'Line No. [4] [Shirt 36/Red] RowID movements remaining: 10 . Required: 0 . Lacking: 10 .'|		
+			|'Line No. [4] [Shirt 36/Red] RowID movements remaining: 11 . Required: 0 . Lacking: 11 .'|		
 	And I close all client application windows	
 
 Scenario: _2067037 delete ITO with linked strings (one session)
@@ -608,7 +608,7 @@ Scenario: _2067037 delete ITO with linked strings (one session)
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button
 		Then "1C:Enterprise" window is opened
-		And I click the button named "OK"
+		And I click "OK" button
 	* Check message
 		Then there are lines in TestClient message log
 			|'Line No. [2] [Trousers 38/Yellow] RowID movements remaining: 10 . Required: 0 . Lacking: 10 .'|
@@ -632,7 +632,7 @@ Scenario: _2067038 delete IT with linked strings (one session)
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button
 		Then "1C:Enterprise" window is opened
-		And I click the button named "OK"
+		And I click "OK" button
 	* Check message
 		Then there are lines in TestClient message log
 			|'Line No. [1] [Trousers 38/Yellow] RowID movements remaining: 9 . Required: 0 . Lacking: 9 .'|

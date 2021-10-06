@@ -285,7 +285,7 @@ Scenario: _2069006 check locking tab in the Retail return receipt with linked do
 // 		And I move to "Item list" tab		
 // 		And I click "Post" button
 // 		Then "1C:Enterprise" window is opened
-// 		And I click the button named "OK"
+// 		And I click "OK" button
 // 		Then there are lines in TestClient message log
 // 			|'Line No. [2] [Shirt 36/Red] RowID movements remaining: 4 . Required: 3 . Lacking: 1 .'|
 // 	* Change quantity (more then RRR)
@@ -341,7 +341,7 @@ Scenario: _2069015 delete linked string in the Retail sales receipt (one session
 // 		And I activate field named "Date" in "List" table
 // 		And in the table "List" I click the button named "ListContextMenuUndoPosting"
 // 		Then "1C:Enterprise" window is opened
-// 		And I click the button named "OK"
+// 		And I click "OK" button
 // 	* Check message
 // 		Then there are lines in TestClient message log
 // 			|'Line No. [1] [Dress XS/Blue] RowID movements remaining: 8 . Required: 0 . Lacking: 8 .'|
@@ -361,7 +361,7 @@ Scenario: _2069015 delete linked string in the Retail sales receipt (one session
 // 		Then "1C:Enterprise" window is opened
 // 		And I click "Yes" button
 // 		Then "1C:Enterprise" window is opened
-// 		And I click the button named "OK"
+// 		And I click "OK" button
 // 	* Check message
 // 		Then there are lines in TestClient message log
 // 			|'Line No. [1] [Dress XS/Blue] RowID movements remaining: 8 . Required: 0 . Lacking: 8 .'|

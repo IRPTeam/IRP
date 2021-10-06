@@ -207,10 +207,12 @@ Scenario: _022501 create SC with transaction type return to vendor and create Pu
 		And I save the window as "$$PurchaseReturn022501$$"
 		And I save the value of "Number" field as "$$NumberPurchaseReturn022501$$"
 		And I save the value of the field named "Date" as  "$$DatePurchaseReturn022501$$"
+		Then user message window does not contain messages
 		And I close current window
 
 
 Scenario: _022502 check link/unlink when add items to Purchase return from SC
+	And I close all client application windows
 	* Save SC Row key 
 		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
 		And I go to line in "List" table

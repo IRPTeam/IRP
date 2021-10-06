@@ -231,7 +231,7 @@ Scenario: _2068010 change quantity in the linked string in the Physical inventor
 		And I finish line editing in "ItemList" table
 		And I click "Post" button
 		Then "1C:Enterprise" window is opened
-		And I click the button named "OK"
+		And I click "OK" button
 		Then there are lines in TestClient message log
 			|'Line No. [1] [Dress XS/Blue] RowID movements remaining: 5 . Required: 4 . Lacking: 1 .'|
 	* Change quantity (more then surplus)
@@ -256,7 +256,7 @@ Scenario: _2068010 change quantity in the linked string in the Physical inventor
 		And I finish line editing in "ItemList" table
 		And I click "Post" button
 		Then "1C:Enterprise" window is opened
-		And I click the button named "OK"
+		And I click "OK" button
 		Then there are lines in TestClient message log
 			|'Line No. [2] [Dress Dress/A-8] RowID movements remaining: 3 . Required: 2 . Lacking: 1 .'|
 	* Change quantity (more then write off)
@@ -302,7 +302,7 @@ Scenario: _2068019 unpost Physical inventory with linked strings (one session)
 		And I activate field named "Date" in "List" table
 		And in the table "List" I click the button named "ListContextMenuUndoPosting"
 		Then "1C:Enterprise" window is opened
-		And I click the button named "OK"
+		And I click "OK" button
 	* Check message
 		Then there are lines in TestClient message log
 			|'Line No. [1] [Dress XS/Blue] RowID movements remaining: 5 . Required: 0 . Lacking: 5 .'|
@@ -322,7 +322,7 @@ Scenario: _2068020 delete Physical inventory with linked strings (one session)
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button
 		Then "1C:Enterprise" window is opened
-		And I click the button named "OK"
+		And I click "OK" button
 	* Check message
 		Then there are lines in TestClient message log
 			|'Line No. [1] [Dress XS/Blue] RowID movements remaining: 5 . Required: 0 . Lacking: 5 .'|

@@ -646,7 +646,7 @@ Scenario: _2066010 change quantity in the linked string in the PO (one session)
 		And I finish line editing in "ItemList" table
 		And I click "Post" button
 		Then "1C:Enterprise" window is opened
-		And I click the button named "OK"
+		And I click "OK" button
 		Then there are lines in TestClient message log
 			|'Line No. [3] [Shirt 36/Red] RowID movements remaining: 10 . Required: 9 . Lacking: 1 .'|
 	* Change quantity (more then PI)
@@ -687,7 +687,7 @@ Scenario: _2066011 change quantity in the linked string in the PI, GR after PI, 
 		And I finish line editing in "ItemList" table
 		And I click "Post" button
 		Then "1C:Enterprise" window is opened
-		And I click the button named "OK"
+		And I click "OK" button
 		Then there are lines in TestClient message log
 			|'Line No. [1] [Boots 37/18SD] RowID movements remaining: 12 . Required: 1 . Lacking: 11 .'|
 	* Change quantity (more then GR, GR exist)
@@ -721,7 +721,7 @@ Scenario: _2066013 change quantity in the linked string in the GR, GR before PI 
 		And I input "8,000" text in "Quantity" field of "ItemList" table
 		And I click "Post" button
 		Then "1C:Enterprise" window is opened
-		And I click the button named "OK"
+		And I click "OK" button
 		Then there are lines in TestClient message log
 			|'Line No. [2] [Shirt 36/Red] RowID movements remaining: 10 . Required: 8 . Lacking: 2 .'|
 	* Change quantity (more then PI)
@@ -813,7 +813,7 @@ Scenario: _2066019 unpost PO with linked strings (one session)
 		And I activate field named "Date" in "List" table
 		And in the table "List" I click the button named "ListContextMenuUndoPosting"
 		Then "1C:Enterprise" window is opened
-		And I click the button named "OK"
+		And I click "OK" button
 	* Check message
 		Then there are lines in TestClient message log
 			|'Line No. [1] [Dress XS/Blue] RowID movements remaining: 1 . Required: 0 . Lacking: 1 .'|
@@ -833,7 +833,7 @@ Scenario: _2066020 unpost PI with linked strings (one session)
 		And I activate field named "Date" in "List" table
 		And in the table "List" I click the button named "ListContextMenuUndoPosting"
 		Then "1C:Enterprise" window is opened
-		And I click the button named "OK"
+		And I click "OK" button
 	* Check message
 		Then there are lines in TestClient message log
 			|'Line No. [1] [Boots 37/18SD] RowID movements remaining: 12 . Required: 0 . Lacking: 12 .'|
@@ -850,7 +850,7 @@ Scenario: _2066021 unpost GR with linked strings (one session)
 		And I activate field named "Date" in "List" table
 		And in the table "List" I click the button named "ListContextMenuUndoPosting"
 		Then "1C:Enterprise" window is opened
-		And I click the button named "OK"
+		And I click "OK" button
 	* Check message
 		Then there are lines in TestClient message log
 			|'Line No. [3] [Boots 37/18SD] RowID movements remaining: 12 . Required: 0 . Lacking: 12 .'|
@@ -871,7 +871,7 @@ Scenario: _2066023 delete PO with linked strings (one session)
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button
 		Then "1C:Enterprise" window is opened
-		And I click the button named "OK"
+		And I click "OK" button
 	* Check message
 		Then there are lines in TestClient message log
 			|'Line No. [1] [Dress XS/Blue] RowID movements remaining: 1 . Required: 0 . Lacking: 1 .'|
@@ -893,7 +893,7 @@ Scenario: _2066024 delete PI with linked strings (one session)
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button
 		Then "1C:Enterprise" window is opened
-		And I click the button named "OK"
+		And I click "OK" button
 	* Check message
 		Then there are lines in TestClient message log
 			|'Line No. [1] [Boots 37/18SD] RowID movements remaining: 12 . Required: 0 . Lacking: 12 .'|
@@ -912,7 +912,7 @@ Scenario: _2066025 delete GR with linked strings (one session)
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button
 		Then "1C:Enterprise" window is opened
-		And I click the button named "OK"
+		And I click "OK" button
 	* Check message
 		Then there are lines in TestClient message log
 			|'Line No. [3] [Boots 37/18SD] RowID movements remaining: 12 . Required: 0 . Lacking: 12 .'|
@@ -1177,7 +1177,7 @@ Scenario: _2066033 unpost PRO with linked strings (one session)
 		And I activate field named "Date" in "List" table
 		And in the table "List" I click the button named "ListContextMenuUndoPosting"
 		Then "1C:Enterprise" window is opened
-		And I click the button named "OK"
+		And I click "OK" button
 	* Check message
 		Then there are lines in TestClient message log
 			|'Line No. [1] [Shirt 36/Red] RowID movements remaining: 7 . Required: 0 . Lacking: 7 .'|
@@ -1195,7 +1195,7 @@ Scenario: _2066034 unpost PR with linked strings (one session)
 		And I activate field named "Date" in "List" table
 		And in the table "List" I click the button named "ListContextMenuUndoPosting"
 		Then "1C:Enterprise" window is opened
-		And I click the button named "OK"
+		And I click "OK" button
 	* Check message
 		Then there are lines in TestClient message log
 			|'Line No. [1] [Shirt 36/Red] RowID movements remaining: 7 . Required: 0 . Lacking: 7 .'|				
@@ -1215,7 +1215,7 @@ Scenario: _2066035 delete PRO with linked strings (one session)
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button
 		Then "1C:Enterprise" window is opened
-		And I click the button named "OK"
+		And I click "OK" button
 	* Check message
 		Then there are lines in TestClient message log
 			|'Line No. [1] [Shirt 36/Red] RowID movements remaining: 7 . Required: 0 . Lacking: 7 .'|
@@ -1235,7 +1235,7 @@ Scenario: _2066036 delete PR with linked strings (one session)
 		Then "1C:Enterprise" window is opened
 		And I click "Yes" button
 		Then "1C:Enterprise" window is opened
-		And I click the button named "OK"
+		And I click "OK" button
 	* Check message
 		Then there are lines in TestClient message log
 			|'Line No. [1] [Shirt 36/Red] RowID movements remaining: 7 . Required: 0 . Lacking: 7 .'|
@@ -1302,7 +1302,7 @@ Scenario: _2066039 change quantity in the linked string in the PRO (one session)
 		And I input "5,000" text in "Q" field of "ItemList" table
 		And I click "Post" button
 		Then "1C:Enterprise" window is opened
-		And I click the button named "OK"
+		And I click "OK" button
 		Then there are lines in TestClient message log
 			|'Line No. [1] [Shirt 36/Red] RowID movements remaining: 7 . Required: 5 . Lacking: 2 .'|
 	* Change quantity (more then PR)
@@ -1335,7 +1335,7 @@ Scenario: _2066040 change quantity in the linked string in the PR (one session)
 		And I input "5,000" text in "Q" field of "ItemList" table
 		And I click "Post" button
 		Then "1C:Enterprise" window is opened
-		And I click the button named "OK"
+		And I click "OK" button
 		Then there are lines in TestClient message log
 			|'Line No. [1] [Shirt 36/Red] RowID movements remaining: 7 . Required: 5 . Lacking: 2 .'|
 	* Change quantity (more then SC)

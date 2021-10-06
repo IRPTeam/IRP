@@ -492,8 +492,6 @@ Scenario: _2065010 change quantity in the linked string in the SO (one session)
 		And I finish line editing in "ItemList" table
 		And I click "Post" button
 		Then "1C:Enterprise" window is opened
-		And In this window I click command interface button "OK"
-		Then "1C:Enterprise" window is opened
 		And I click "OK" button	
 		Then there are lines in TestClient message log
 			|'Line No. [3] [Shirt 36/Red] RowID movements remaining: 10 . Required: 9 . Lacking: 1 .'|

@@ -483,14 +483,16 @@ Function AttributeOwnerName(Attribute, AddInfo = Undefined)
 EndFunction
 
 Function GetDCSTemplate(PredefinedDataName, AddInfo = Undefined) Export
+	TableName = StrReplace(PredefinedDataName, "_", ".");
+	ObjectName = StrSplit(PredefinedDataName, "_");
 	If StrStartsWith(PredefinedDataName, "Catalog") Then
-		TableName = StrReplace(PredefinedDataName, "_", ".");
 		Template = Catalogs.AddAttributeAndPropertySets.GetTemplate("DCS_Catalog");
-		Template.DataSets[0].Items[0].Query = StrTemplate(Template.DataSets[0].Items[0].Query, TableName);
+		Template.DataSets[0].Items[0].Query = StrReplace(Template.DataSets[0].Items[0].Query, "&TableName", TableName);
+		Template.DataSets[0].Items.DataSet2.Fields.Find("Ref").ValueType = New TypeDescription("CatalogRef." + ObjectName[1]);
 	ElsIf StrStartsWith(PredefinedDataName, "Document") Then
-		TableName = StrReplace(PredefinedDataName, "_", ".");
 		Template = Catalogs.AddAttributeAndPropertySets.GetTemplate("DCS_Document");
-		Template.DataSets[0].Query = StrTemplate(Template.DataSets[0].Query, TableName);
+		Template.DataSets[0].Query = StrReplace(Template.DataSets[0].Query, "&TableName", TableName);
+		Template.DataSets[0].Fields.Find("Ref").ValueType = New TypeDescription("DocumentRef." + ObjectName[1]);
 	Else
 		Raise R().Error_004;
 	EndIf;

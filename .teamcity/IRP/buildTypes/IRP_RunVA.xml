@@ -226,17 +226,17 @@ $VanessaRun = {
     'Lang': 'en',
     'ModelingCreateReport': false,
     'RunningScripts': {
-        'SpacingStepSpecifiedUser': 0.1,
+        'SpacingStepSpecifiedUser': 0.5,
         'dosleepusingping': false,
         'makestepsasync': false,
-        'numberofattemptstoperformanaction': 3,
+        'numberofattemptstoperformanaction': 10,
         'pauseonwindowopening': 0,
         'pendingequalfailed': true,
         'safeexecutionofsteps': false,
         'showrownumberonerror': false,
         'stoponerror': $StopOnError,
         'timeoutforasynchronoussteps': 0,
-        'timetofindwindow': 5,
+        'timetofindwindow': 20,
         'updatestatistics': false,
         'updatetreewhenscenariostarts': false
     },
@@ -251,7 +251,7 @@ $VanessaRun = {
             }
         ],
         'runtestclientwithmaximizedwindow': true,
-        'testclienttimeout': 60
+        'testclienttimeout': 120
     },
     'Version': '1.2.034',
     'VersionVA': 'ver 1.2.034',

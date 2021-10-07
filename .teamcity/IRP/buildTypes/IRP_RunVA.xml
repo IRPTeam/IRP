@@ -235,7 +235,7 @@ $VanessaRun = {
         'safeexecutionofsteps': false,
         'showrownumberonerror': false,
         'stoponerror': $StopOnError,
-        'timeoutforasynchronoussteps': 10,
+        'timeoutforasynchronoussteps': 2,
         'timetofindwindow': 20,
         'updatestatistics': false,
         'updatetreewhenscenariostarts': false

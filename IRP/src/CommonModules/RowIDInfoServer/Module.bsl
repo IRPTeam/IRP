@@ -7823,7 +7823,7 @@ Procedure CreateBasisesTreeReverseRecursive(BasisesInfo, TreeRows, Level)
 	EndIf;
 EndProcedure
 
-Function GetBasisesInfo(Basis, BasisKey, RowID)
+Function GetBasisesInfo(Basis, BasisKey, RowID) Export
 	Query = New Query();
 	Query.Text = 
 		"SELECT
@@ -7865,7 +7865,7 @@ Procedure CreateChildrenTree(Basis, BasisKey, RowID, ChildrenTreeRows) Export
 	EndDo;
 EndProcedure
 
-Function GetChildrenInfo(Basis, BasisKey, RowID)
+Function GetChildrenInfo(Basis, BasisKey, RowID) Export
 	Query = New Query();
 	Query.Text = 
 		"SELECT

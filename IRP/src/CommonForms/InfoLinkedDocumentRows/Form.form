@@ -2517,23 +2517,6 @@
       <common>true</common>
     </edit>
   </attributes>
-  <attributes>
-    <name>BasisKey</name>
-    <title>
-      <key>en</key>
-      <value>Basis key</value>
-    </title>
-    <id>70</id>
-    <valueType>
-      <types>DefinedType.typeRowID</types>
-    </valueType>
-    <view>
-      <common>true</common>
-    </view>
-    <edit>
-      <common>true</common>
-    </edit>
-  </attributes>
   <formCommands>
     <name>ShowRowKey</name>
     <title>

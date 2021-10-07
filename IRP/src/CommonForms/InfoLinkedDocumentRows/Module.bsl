@@ -1,7 +1,6 @@
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	ThisObject.Ref = Parameters.Ref;
-	ThisObject.BasisKey = Parameters.SelectedRowInfo.SelectedRow.Key;
 	ResultsTableTmp = ThisObject.ResultsTable.Unload().CopyColumns();
 	For Each RowIdInfo In Parameters.TablesInfo.RowIDInfoRows Do
 		If Not ValueIsFilled(RowIdInfo.CurrentStep) Then
@@ -23,7 +22,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	EndDo;
 	ResultsTableTmp.GroupBy(StrConcat(ArrayOfColumns, ","));
 	ThisObject.ResultsTable.Load(ResultsTableTmp);
-	FillBasisesTree();
+	FillBasisesTree(Parameters.SelectedRowInfo);
 EndProcedure
 
 &AtClient
@@ -37,7 +36,7 @@ Procedure ExpandAllTrees() Export
 EndProcedure
 
 &AtServer
-Procedure FillBasisesTree()
+Procedure FillBasisesTree(SelectedRowInfo)
 	ThisObject.BasisesTree.GetItems().Clear();
 
 	TmpBasisTable = ThisObject.ResultsTable.Unload();
@@ -54,9 +53,17 @@ Procedure FillBasisesTree()
 		ThisObject.BasisesTree.GetItems());
 	LastRow = Undefined;
 	GetLastRowRecursive(ThisObject.BasisesTree.GetItems(), LastRow);
-	If LastRow <> Undefined Then
-		RowIDInfoServer.CreateChildrenTree(ThisObject.Ref, ThisObject.BasisKey, LastRow.RowID, LastRow.GetItems());
+	If LastRow = Undefined Then
+		BasisesInfo = RowIDInfoServer.GetBasisesInfo(ThisObject.Ref, SelectedRowInfo.SelectedRow.Key, 
+			SelectedRowInfo.SelectedRow.Key);
+		LastRow = ThisObject.BasisesTree.GetItems().Add();
+		
+		FillPropertyValues(LastRow, SelectedRowInfo.SelectedRow);
+		FillPropertyValues(LastRow, BasisesInfo);
+		LastRow.RowPresentation = String(LastRow.Item) + " (" + String(LastRow.ItemKey) + ")";
 	EndIf;
+	
+	RowIDInfoServer.CreateChildrenTree(ThisObject.Ref, SelectedRowInfo.SelectedRow.Key, LastRow.RowID, LastRow.GetItems());
 EndProcedure
 
 &AtServer

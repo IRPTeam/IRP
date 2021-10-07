@@ -90,19 +90,22 @@ Function GetSelectedRowInfo(CurrentData) Export
 	Return Result;
 EndFunction
 
-Function GetTablesInfo(Object = Undefined) Export
+Function GetTablesInfo(Object = Undefined, FilterKey = Undefined) Export
 	TablesInfo = New Structure("ItemListRows, RowIDInfoRows", New Array(), New Array());
 	If Object = Undefined Then
 		Return TablesInfo;
 	EndIf;
-	TablesInfo.ItemListRows  = GetItemListRows(Object.ItemList, Object);
-	TablesInfo.RowIDInfoRows = GetRowIDInfoRows(Object.RowIDInfo, Object);
+	TablesInfo.ItemListRows  = GetItemListRows(Object.ItemList, Object, FilterKey);
+	TablesInfo.RowIDInfoRows = GetRowIDInfoRows(Object.RowIDInfo, Object, FilterKey);
 	Return TablesInfo;
 EndFunction
 
-Function GetItemListRows(ItemList, Object) Export
+Function GetItemListRows(ItemList, Object, FilterKey = Undefined) Export
 	ItemListRows = New Array();
 	For Each Row In ItemList Do
+		If FilterKey <> Undefined And Row.Key <> FilterKey Then
+			Continue;
+		EndIf;
 		NewRow = New Structure();
 		NewRow.Insert("LineNumber" , Row.LineNumber);
 		NewRow.Insert("Key"        , Row.Key);
@@ -127,9 +130,12 @@ Function GetItemListRows(ItemList, Object) Export
 	Return ItemListRows;
 EndFunction
 
-Function GetRowIDInfoRows(RowIDInfo, Object)
+Function GetRowIDInfoRows(RowIDInfo, Object, FilterKey = Undefined)
 	RowIDInfoRows = New Array();
 	For Each Row In RowIDInfo Do
+		If FilterKey <> Undefined And Row.Key <> FilterKey Then
+			Continue;
+		EndIf;
 		NewRow = New Structure();
 		NewRow.Insert("Key", Row.Key);
 		NewRow.Insert("RowID", Row.RowID);
@@ -199,6 +205,33 @@ Procedure ItemListBeforeDeleteRow(Object, Form, Item, Cancel, AddInfo = Undefine
 					"Object.ItemList[" + Format((ItemListRow.LineNumber - 1), "NZ=0; NG=0;") + "].IsExternalLinked", Form);
 		EndIf;
 	EndDo;
+EndProcedure
+
+Procedure ItemListOnStartEdit(Object, Form, Item, NewRow, Clone, AddInfo = Undefined) Export
+	CurrentData = Item.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	If Clone Then
+		CurrentData.IsExternalLinked = False;
+		CurrentData.IsInternalLinked = False;
+		CurrentData.ExternalLinks = Undefined;
+		CurrentData.InternalLinks = Undefined;
+	EndIf;
+EndProcedure
+
+Procedure ItemListSelection(Object, Form, Item, RowSelected, Field, StandardProcessing, AddInfo = Undefined) Export
+	If Upper(Field.Name) = Upper("ItemListIsInternalLinked") 
+		Or Upper(Field.Name) = Upper("ItemListIsExternalLinked") Then
+		CurrentData = Form.Items.ItemList.CurrentData;
+		If CurrentData <> Undefined Then
+			FormParameters = New Structure();
+			FormParameters.Insert("SelectedRowInfo", RowIDInfoClient.GetSelectedRowInfo(CurrentData));
+			FormParameters.Insert("TablesInfo"     , RowIDInfoClient.GetTablesInfo(Object, CurrentData.Key));
+			FormParameters.Insert("Ref"            , Object.Ref);
+			OpenForm("CommonForm.InfoLinkedDocumentRows", FormParameters, , , , , , FormWindowOpeningMode.LockOwnerWindow);
+		EndIf;
+	EndIf;
 EndProcedure
 
 #EndRegion

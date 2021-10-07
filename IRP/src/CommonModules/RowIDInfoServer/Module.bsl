@@ -7663,8 +7663,7 @@ EndFunction
 
 #Region BasisesTree
 
-&AtServer
-Function CreateBasisesTree(TreeReverseInfo, BasisesTable, ResultsTable, BasisesTreeRows) Export
+Procedure CreateBasisesTree(TreeReverseInfo, BasisesTable, ResultsTable, BasisesTreeRows) Export
 	TreeReverse = TreeReverseInfo.Tree;
 
 	BasisTable = New ValueTable();
@@ -7679,7 +7678,7 @@ Function CreateBasisesTree(TreeReverseInfo, BasisesTable, ResultsTable, BasisesT
 
 	LastRows = TreeReverse.Rows.FindRows(New Structure("LastRow", True), True);
 	If Not LastRows.Count() Then
-		Return Undefined;
+		Return;
 	EndIf;
 
 	For Each LastRow In LastRows Do
@@ -7757,7 +7756,7 @@ Function CreateBasisesTree(TreeReverseInfo, BasisesTable, ResultsTable, BasisesT
 		CreateBasisesTree(TreeReverseInfo, BasisesTable, ResultsTable, NewBasisesTreeRow.GetItems());
 
 	EndDo; // BasisTable
-EndFunction
+EndProcedure
 
 Function CreateBasisesTreeReverse(BasisesTable) Export
 	Tree = New ValueTree();
@@ -7854,6 +7853,17 @@ Function GetBasisesInfo(Basis, BasisKey, RowID)
 	EndIf;
 	Return BasisInfo;
 EndFunction
+
+Procedure CreateChildrenTree(Basis, BasisKey, RowID, ChildrenTreeRows) Export
+	ArrayOfChildrenInfo = GetChildrenInfo(Basis, BasisKey, RowID);
+	For Each ChildrenInfo In ArrayOfChildrenInfo Do
+		NewChildrenTreeRow = ChildrenTreeRows.Add();
+		NewChildrenTreeRow.Picture = 1;
+		NewChildrenTreeRow.RowPresentation = String(ChildrenInfo.Children);
+		CreateChildrenTree(ChildrenInfo.Children, ChildrenInfo.BasisKey, ChildrenInfo.RowID, 
+			NewChildrenTreeRow.GetItems());
+	EndDo;
+EndProcedure
 
 Function GetChildrenInfo(Basis, BasisKey, RowID)
 	Query = New Query();
@@ -8137,6 +8147,11 @@ Procedure LockLinkedRows(Object, Form) Export
 	EndIf;
 EndProcedure
 
+Procedure UnlockLinkedRows(Object, Form) Export
+	ClearAppearance_Header(Object, Form);
+	ClearAppearance_ItemList(Object, Form);
+EndProcedure
+
 Procedure LockInternalLinkedRows(Object, Form)
 	RowIDInfoTable = Object.RowIDInfo.Unload(,"Key, RowID, Basis, BasisKey, RowRef");
 	RowIDInfoTable.GroupBy("Key, RowID, Basis, BasisKey, RowRef");
@@ -8303,6 +8318,15 @@ EndProcedure
 #Region ConditionalAppearance
 
 Procedure SetAppearance(Object, Form) Export
+	ClearAppearance_Header(Object, Form);
+	ClearAppearance_ItemList(Object, Form);
+	FieldsToLock = GetFieldsToLock(Object,Form);
+	AddAppearance_Header(Object, Form, FieldsToLock.All);
+	AddAppearance_ItemList(Object, Form, FieldsToLock.Internal, "InternalLinks");
+	AddAppearance_ItemList(Object, Form, FieldsToLock.External, "ExternalLinks");	
+EndProcedure
+
+Procedure ClearAppearance_ItemList(Object, Form) Export
 	ArrayForDelete = New Array();
 	For Each Row In Form.ConditionalAppearance.Items Do
 		If Row.Presentation = "FieldsToLock" Then
@@ -8311,21 +8335,10 @@ Procedure SetAppearance(Object, Form) Export
 	EndDo;
 	For Each ItemForDelete In ArrayForDelete Do
 		Form.ConditionalAppearance.Items.Delete(ItemForDelete);
-	EndDo;
-	
-	FieldsToLock = GetFieldsToLock(Object,Form);
-	
-	AddAppearance_Header(Object, Form, FieldsToLock.All);
-	
-	AddAppearance_ItemList(Object, Form, FieldsToLock.Internal, "InternalLinks");
-	AddAppearance_ItemList(Object, Form, FieldsToLock.External, "ExternalLinks");	
+	EndDo;	
 EndProcedure
 
-Procedure AddAppearance_Header(Object, Form, FieldsToLock)
-	// Header
-	Element = Form.ConditionalAppearance.Items.Add();
-	Element.Presentation = "FieldsToLock";
-	
+Procedure ClearAppearance_Header(Object, Form) Export
 	// Reset ReadOnly
 	For Each FieldName In Form.LockedFields Do
 		FormElement = Form.Items.Find(FieldName);
@@ -8340,6 +8353,12 @@ Procedure AddAppearance_Header(Object, Form, FieldsToLock)
 		EndIf;
 	EndDo;
 	Form.LockedFields.Clear();
+EndProcedure
+
+Procedure AddAppearance_Header(Object, Form, FieldsToLock)
+	// Header
+	Element = Form.ConditionalAppearance.Items.Add();
+	Element.Presentation = "FieldsToLock";
 	
 	// Set ReadOnly
 	For Each FieldName In FieldsToLock.Header Do

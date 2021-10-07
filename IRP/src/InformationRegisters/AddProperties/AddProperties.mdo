@@ -15,6 +15,14 @@
     <value>Add properties</value>
   </synonym>
   <dataLockControlMode>Managed</dataLockControlMode>
+  <recordPresentation>
+    <key>en</key>
+    <value>Add property</value>
+  </recordPresentation>
+  <listPresentation>
+    <key>en</key>
+    <value>Add properties</value>
+  </listPresentation>
   <resources uuid="1eb0cbdc-acff-4879-b2c7-5c801d7b2483">
     <name>Value</name>
     <synonym>

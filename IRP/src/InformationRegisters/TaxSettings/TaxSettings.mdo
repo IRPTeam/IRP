@@ -19,6 +19,14 @@
   <informationRegisterPeriodicity>Day</informationRegisterPeriodicity>
   <dataLockControlMode>Managed</dataLockControlMode>
   <enableTotalsSliceLast>true</enableTotalsSliceLast>
+  <recordPresentation>
+    <key>en</key>
+    <value>Tax rate setting</value>
+  </recordPresentation>
+  <listPresentation>
+    <key>en</key>
+    <value>Tax rate settings</value>
+  </listPresentation>
   <resources uuid="7f385d0d-f444-4b7b-ab2e-ad808d3b099a">
     <name>TaxRate</name>
     <synonym>

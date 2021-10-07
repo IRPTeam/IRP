@@ -295,7 +295,7 @@
       </extInfo>
     </items>
     <items xsi:type="form:FormField">
-      <name>PlaningDate</name>
+      <name>PlaningPeriod</name>
       <id>31</id>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -303,10 +303,10 @@
         <common>true</common>
       </userVisible>
       <dataPath xsi:type="form:DataPath">
-        <segments>List.PlaningDate</segments>
+        <segments>List.PlanningPeriod</segments>
       </dataPath>
       <extendedTooltip>
-        <name>PlaningDateExtendedTooltip</name>
+        <name>PlaningPeriodExtendedTooltip</name>
         <id>33</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -321,7 +321,7 @@
         </extInfo>
       </extendedTooltip>
       <contextMenu>
-        <name>PlaningDateContextMenu</name>
+        <name>PlaningPeriodContextMenu</name>
         <id>32</id>
         <visible>true</visible>
         <enabled>true</enabled>

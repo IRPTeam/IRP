@@ -305,7 +305,7 @@ Scenario: _017005 check movements by status and status history of a Purchase Ord
 		And I delete "$$DatePurchaseOrderWait017005$$" variable
 		And I save the value of "Number" field as "$$NumberPurchaseOrder017005$$"
 		And I save the window as "$$PurchaseOrder017005$$"
-		And I save the value of the field named "Date" as  "$$DatePurchaseOrderWait017005$$"
+		And I save "{Left(CurrentDate(), 16)}" in "$$DatePurchaseOrderWait017005$$" variable
 		And I close current window
 	* Check the absence of movements Purchase Order N101 by register PurchaseOrders
 		Given I open hyperlink "e1cib/list/AccumulationRegister.R1010T_PurchaseOrders"
@@ -325,11 +325,11 @@ Scenario: _017005 check movements by status and status history of a Purchase Ord
 		And I click the hyperlink named "DecorationStatusHistory"
 		And "List" table contains lines
 			| 'Object'                  | 'Status'   | 'Period'                         |
-			| '$$PurchaseOrder017005$$' | 'Wait'     |'$$DatePurchaseOrderWait017005$$' |
+			| '$$PurchaseOrder017005$$' | 'Wait'     |'$$DatePurchaseOrderWait017005$$*' |
 			| '$$PurchaseOrder017005$$' | 'Approved' |'*'                               |
 		And "List" table does not contain lines
 			| 'Object'                  | 'Status'   | 'Period'                         |
-			| '$$PurchaseOrder017005$$' | 'Approved' |'$$DatePurchaseOrderWait017005$$' |
+			| '$$PurchaseOrder017005$$' | 'Approved' |'$$DatePurchaseOrderWait017005$$*' |
 		And I close current window
 		And I click the button named "FormPostAndClose"
 		And I close current window

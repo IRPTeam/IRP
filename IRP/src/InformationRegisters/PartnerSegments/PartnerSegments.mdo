@@ -16,6 +16,14 @@
   </synonym>
   <useStandardCommands>true</useStandardCommands>
   <dataLockControlMode>Managed</dataLockControlMode>
+  <recordPresentation>
+    <key>en</key>
+    <value>Partner segment content</value>
+  </recordPresentation>
+  <listPresentation>
+    <key>en</key>
+    <value>Partner segments content</value>
+  </listPresentation>
   <dimensions uuid="53831403-55b9-489e-840c-53c917b9803d">
     <name>Segment</name>
     <synonym>

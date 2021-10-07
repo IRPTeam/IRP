@@ -19,6 +19,10 @@
   <informationRegisterPeriodicity>RecorderPosition</informationRegisterPeriodicity>
   <writeMode>RecorderSubordinate</writeMode>
   <dataLockControlMode>Managed</dataLockControlMode>
+  <listPresentation>
+    <key>en</key>
+    <value>T2011S Partner transactions</value>
+  </listPresentation>
   <resources uuid="bc6793c3-28b8-47e3-a5d7-bad570ff6a88">
     <name>Amount</name>
     <synonym>

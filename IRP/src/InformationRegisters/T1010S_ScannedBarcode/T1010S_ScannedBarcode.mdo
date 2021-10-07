@@ -19,6 +19,14 @@
   <defaultRecordForm>InformationRegister.T1010S_ScannedBarcode.Form.RecordForm</defaultRecordForm>
   <informationRegisterPeriodicity>Second</informationRegisterPeriodicity>
   <dataLockControlMode>Managed</dataLockControlMode>
+  <recordPresentation>
+    <key>en</key>
+    <value>Scanned barcode</value>
+  </recordPresentation>
+  <listPresentation>
+    <key>en</key>
+    <value>Scanned barcodes</value>
+  </listPresentation>
   <resources uuid="ad9b3ba1-2a02-4039-a2ad-4a1037bec2b5">
     <name>Barcode</name>
     <synonym>

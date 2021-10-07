@@ -78,6 +78,10 @@
 				</v8:item>
 			</title>
 		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>PriceType</dataPath>
+			<field>PriceType</field>
+		</field>
 		<dataSource>DataSource1</dataSource>
 		<query>SELECT
 	Barcodes.ItemKey AS ItemKey,
@@ -89,7 +93,11 @@ WHERE
 	Barcodes.ItemKey.Specification &lt;&gt; VALUE(Catalog.Specifications.EmptyRef)
 GROUP BY
 	Barcodes.ItemKey
+
+INDEX BY
+	ItemKey
 ;
+
 ////////////////////////////////////////////////////////////////////////////////
  SELECT TOP 1
 	ItemKeys.Item AS Item,

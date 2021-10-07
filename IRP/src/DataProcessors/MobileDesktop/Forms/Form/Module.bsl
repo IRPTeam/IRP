@@ -106,8 +106,7 @@ Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
 			CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().S_019, Row));
 		EndDo;
 #EndIf
-	EndIf
-	;
+	EndIf;
 
 	For Each Row In AdditionalParameters.FoundedItems Do
 		FillData(Row);

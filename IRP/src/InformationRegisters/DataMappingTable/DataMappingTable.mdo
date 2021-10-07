@@ -16,6 +16,14 @@
   </synonym>
   <useStandardCommands>true</useStandardCommands>
   <dataLockControlMode>Managed</dataLockControlMode>
+  <recordPresentation>
+    <key>en</key>
+    <value>Data mapping table</value>
+  </recordPresentation>
+  <listPresentation>
+    <key>en</key>
+    <value>Data mapping tables</value>
+  </listPresentation>
   <resources uuid="6167ec7a-3b1f-4320-a1d4-19e7c0c3b158">
     <name>Target</name>
     <synonym>

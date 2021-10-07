@@ -19,6 +19,10 @@
   <informationRegisterPeriodicity>RecorderPosition</informationRegisterPeriodicity>
   <writeMode>RecorderSubordinate</writeMode>
   <dataLockControlMode>Managed</dataLockControlMode>
+  <listPresentation>
+    <key>en</key>
+    <value>T2013S Offset of aging</value>
+  </listPresentation>
   <resources uuid="92494cd2-9b11-4dd3-87ef-121fb5bd5aa5">
     <name>Amount</name>
     <synonym>

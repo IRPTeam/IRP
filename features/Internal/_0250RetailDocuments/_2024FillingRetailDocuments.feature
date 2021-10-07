@@ -148,7 +148,7 @@ Scenario: _0154100 preparation ( filling documents)
 		And I click "Save" button
 		And In this window I click command interface button "Branch bank terms"
 		And I click the button named "FormCreate"
-		Then "Branch bank terms (create)" window is opened
+		Then "Branch bank term (create)" window is opened
 		And I click Select button of "Branch" field
 		And I go to line in "List" table
 			| 'Description' |

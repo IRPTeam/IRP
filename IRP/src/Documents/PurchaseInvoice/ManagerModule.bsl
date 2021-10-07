@@ -174,6 +174,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R1022B_VendorsPaymentPlanning());
 	QueryArray.Add(T2011S_PartnerTransactions());
 	QueryArray.Add(R5022T_Expenses());
+	QueryArray.Add(T3010S_RowIDInfo());
 	Return QueryArray;
 EndFunction
 
@@ -848,6 +849,27 @@ Function R5022T_Expenses()
 		   |	ItemList AS ItemList
 		   |WHERE
 		   |	ItemList.IsService";
+EndFunction
+
+Function T3010S_RowIDInfo()
+	Return
+		"SELECT
+		|	RowIDInfo.RowRef AS RowRef,
+		|	RowIDInfo.BasisKey AS BasisKey,
+		|	RowIDInfo.RowID AS RowID,
+		|	RowIDInfo.Basis AS Basis,
+		|	ItemList.Key AS Key,
+		|	ItemList.Price AS Price,
+		|	ItemList.Ref.Currency AS Currency,
+		|	ItemList.Unit AS Unit
+		|INTO T3010S_RowIDInfo
+		|FROM
+		|	Document.PurchaseInvoice.ItemList AS ItemList
+		|		INNER JOIN Document.PurchaseInvoice.RowIDInfo AS RowIDInfo
+		|		ON RowIDInfo.Ref = &Ref
+		|		AND ItemList.Ref = &Ref
+		|		AND RowIDInfo.Key = ItemList.Key
+		|		AND RowIDInfo.Ref = ItemList.Ref";
 EndFunction
 
 #EndRegion

@@ -1907,7 +1907,7 @@ Scenario:  _0154149 create Cash statement
 			| '#' | 'Account'      | 'Amount' | 'Commission' | 'Payment terminal'    | 'Payment type' | 'Percent' |
 			| '2' | 'Transit Main' | '200,00' | '12,90'      | 'Payment terminal 01' | 'Card 01'      | '1,00'    |
 		And I delete a line in "Payments" table
-		And I input "01.09.2020 15:31:04" text in "Date" field
+		And I input "01.09.2020 17:31:04" text in "Date" field
 		And I click the button named "FormPost"
 		And I delete "$$NumberRetailReturnReceipt01541493$$" variable
 		And I delete "$$RetailReturnReceipt01541493$$" variable

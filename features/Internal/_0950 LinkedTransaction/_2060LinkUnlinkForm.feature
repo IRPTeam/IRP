@@ -1683,7 +1683,7 @@ Scenario: _2060018 check link form in the PI with 2 lines with the same items
 			| '1' | '9,000'    | 'Scarf (XS/Red)'   | 'Store 03' | 'pcs'  |
 		And I go to line in "BasisesTree" table
 			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' |
-			| 'TRY'      | '100,00' | '10,000'   | 'Dress (S/Yellow)' | 'pcs'  |
+			| 'TRY'      | '100,00' | '10,000'   | 'Scarf (XS/Red)' | 'pcs'  |
 		And in the table "BasisesTree" I click the button named "Link"
 		And I go to line in "ItemListRows" table
 			| '#' | 'Quantity' | 'Row presentation' | 'Store'    | 'Unit' |
@@ -1696,7 +1696,7 @@ Scenario: _2060018 check link form in the PI with 2 lines with the same items
 			| 'Goods receipt 1 053 dated 07.09.2021 21:34:43' |
 		And I go to line in "BasisesTree" table
 			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' |
-			| 'TRY'      | '100,00' | '10,000'   | 'Dress (S/Yellow)' | 'pcs'  |
+			| 'TRY'      | '100,00' | '10,000'   | 'Scarf (XS/Red)' | 'pcs'  |
 		And in the table "BasisesTree" I click the button named "Link"
 		And I click "Ok" button
 		And "ItemList" table contains lines

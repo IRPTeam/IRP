@@ -228,7 +228,7 @@ $VanessaRun = {
     'RunningScripts': {
         'SpacingStepSpecifiedUser': 0.1,
         'dosleepusingping': false,
-        'makestepsasync': true,
+        'makestepsasync': false,
         'numberofattemptstoperformanaction': 10,
         'pauseonwindowopening': 0,
         'pendingequalfailed': true,

@@ -226,7 +226,7 @@ $VanessaRun = {
     'Lang': 'en',
     'ModelingCreateReport': false,
     'RunningScripts': {
-        'SpacingStepSpecifiedUser': 0,
+        'SpacingStepSpecifiedUser': 0.1,
         'dosleepusingping': false,
         'makestepsasync': true,
         'numberofattemptstoperformanaction': 10,

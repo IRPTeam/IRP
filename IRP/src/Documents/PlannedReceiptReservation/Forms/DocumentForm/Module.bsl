@@ -108,6 +108,16 @@ Procedure ItemListOnChange(Item) Export
 EndProcedure
 
 &AtClient
+Procedure ItemListSelection(Item, RowSelected, Field, StandardProcessing)
+	DocPlannedReceiptReservationClient.ItemListSelection(Object, ThisObject, Item, RowSelected, Field, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure ItemListOnStartEdit(Item, NewRow, Clone)
+	DocPlannedReceiptReservationClient.ItemListOnStartEdit(Object, ThisObject, Item, NewRow, Clone);
+EndProcedure
+
+&AtClient
 Procedure ItemListAfterDeleteRow(Item)
 	DocPlannedReceiptReservationClient.ItemListAfterDeleteRow(Object, ThisObject, Item);
 	LockLinkedRows();

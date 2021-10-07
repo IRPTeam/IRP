@@ -78,10 +78,13 @@ Procedure ItemListOnChange(Item, AddInfo = Undefined) Export
 EndProcedure
 
 &AtClient
+Procedure ItemListSelection(Item, RowSelected, Field, StandardProcessing)
+	DocStockAdjustmentAsSurplusClient.ItemListSelection(Object, ThisObject, Item, RowSelected, Field, StandardProcessing);
+EndProcedure
+
+&AtClient
 Procedure ItemListOnStartEdit(Item, NewRow, Clone)
-	If Clone Then
-		Item.CurrentData.Key = New UUID();
-	EndIf;
+	DocStockAdjustmentAsSurplusClient.ItemListOnStartEdit(Object, ThisObject, Item, NewRow, Clone);
 EndProcedure
 
 &AtClient

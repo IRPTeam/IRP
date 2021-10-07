@@ -2297,6 +2297,10 @@
           <event>BeforeDeleteRow</event>
           <name>ItemListBeforeDeleteRow</name>
         </handlers>
+        <handlers>
+          <event>Selection</event>
+          <name>ItemListSelection</name>
+        </handlers>
         <searchStringAddition>
           <visible>true</visible>
           <enabled>true</enabled>

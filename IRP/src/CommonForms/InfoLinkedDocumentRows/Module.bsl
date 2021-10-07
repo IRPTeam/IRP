@@ -66,6 +66,26 @@ Procedure FillBasisesTree(SelectedRowInfo)
 	RowIDInfoServer.CreateChildrenTree(ThisObject.Ref, SelectedRowInfo.SelectedRow.Key, LastRow.RowID, LastRow.GetItems());
 EndProcedure
 
+&AtClient
+Procedure BasisesTreeSelection(Item, RowSelected, Field, StandardProcessing)
+	StandardProcessing = False;
+	CurrentData = Items.BasisesTree.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	If Not ValueIsFilled(CurrentData.DocRef) Then
+		Return;
+	EndIf;
+	OpenParameters = New Structure();
+	OpenParameters.Insert("Key", CurrentData.DocRef);
+	OpenForm(GetMetadataFullName(CurrentData.DocRef) + ".ObjectForm", OpenParameters);
+EndProcedure
+
+&AtServerNoContext
+Function GetMetadataFullName(Ref)
+	Return Ref.Metadata().FullName();
+EndFunction
+
 &AtServer
 Procedure GetLastRowRecursive(TreeItems, LastRow)
 	For Each Row In TreeItems Do

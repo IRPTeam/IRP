@@ -7699,7 +7699,11 @@ Procedure CreateBasisesTree(TreeReverseInfo, BasisesTable, ResultsTable, Basises
 		NewBasisesTreeRow = BasisesTreeRows.Add();
 		NewBasisesTreeRow.Picture = 1;
 		NewBasisesTreeRow.RowPresentation = String(RowBasis.Basis);
-
+		
+		If NewBasisesTreeRow.Property("DocRef") Then
+			NewBasisesTreeRow.DocRef = RowBasis.Basis;
+		EndIf;
+		
 		FillPropertyValues(NewBasisesTreeRow, RowBasis);
 
 		For Each RowFilter In FilterTable.FindRows(New Structure("Basis", RowBasis.Basis)) Do
@@ -7860,6 +7864,9 @@ Procedure CreateChildrenTree(Basis, BasisKey, RowID, ChildrenTreeRows) Export
 		NewChildrenTreeRow = ChildrenTreeRows.Add();
 		NewChildrenTreeRow.Picture = 1;
 		NewChildrenTreeRow.RowPresentation = String(ChildrenInfo.Children);
+		If NewChildrenTreeRow.Property("DocRef") Then
+			NewChildrenTreeRow.DocRef = ChildrenInfo.Children;
+		EndIf;
 		CreateChildrenTree(ChildrenInfo.Children, ChildrenInfo.BasisKey, ChildrenInfo.RowID, 
 			NewChildrenTreeRow.GetItems());
 	EndDo;

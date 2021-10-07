@@ -751,6 +751,56 @@
         <textEdit>true</textEdit>
       </extInfo>
     </items>
+    <items xsi:type="form:FormField">
+      <name>BasisesTreeDocRef</name>
+      <id>588</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <dataPath xsi:type="form:DataPath">
+        <segments>BasisesTree.DocRef</segments>
+      </dataPath>
+      <extendedTooltip>
+        <name>BasisesTreeDocRefExtendedTooltip</name>
+        <id>590</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <type>Label</type>
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <extInfo xsi:type="form:LabelDecorationExtInfo">
+          <horizontalAlign>Left</horizontalAlign>
+        </extInfo>
+      </extendedTooltip>
+      <contextMenu>
+        <name>BasisesTreeDocRefContextMenu</name>
+        <id>589</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <autoFill>true</autoFill>
+      </contextMenu>
+      <type>InputField</type>
+      <editMode>Enter</editMode>
+      <showInHeader>true</showInHeader>
+      <headerHorizontalAlign>Left</headerHorizontalAlign>
+      <showInFooter>true</showInFooter>
+      <extInfo xsi:type="form:InputFieldExtInfo">
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <wrap>true</wrap>
+        <chooseType>true</chooseType>
+        <typeDomainEnabled>true</typeDomainEnabled>
+        <textEdit>true</textEdit>
+      </extInfo>
+    </items>
     <autoCommandBar>
       <name>BasisesTreeCommandBar</name>
       <id>456</id>
@@ -768,6 +818,10 @@
     <handlers>
       <event>BeforeDeleteRow</event>
       <name>BasisesTreeBeforeDeleteRow</name>
+    </handlers>
+    <handlers>
+      <event>Selection</event>
+      <name>BasisesTreeSelection</name>
     </handlers>
     <searchStringAddition>
       <visible>true</visible>
@@ -2253,6 +2307,23 @@
       <id>67</id>
       <valueType>
         <types>Boolean</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>DocRef</name>
+      <title>
+        <key>en</key>
+        <value>Doc ref</value>
+      </title>
+      <id>72</id>
+      <valueType>
+        <types>DocumentRef</types>
       </valueType>
       <view>
         <common>true</common>

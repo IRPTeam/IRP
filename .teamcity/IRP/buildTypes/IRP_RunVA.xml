@@ -228,14 +228,14 @@ $VanessaRun = {
     'RunningScripts': {
         'SpacingStepSpecifiedUser': 0.2,
         'dosleepusingping': false,
-        'makestepsasync': false,
+        'makestepsasync': true,
         'numberofattemptstoperformanaction': 10,
         'pauseonwindowopening': 0,
         'pendingequalfailed': true,
         'safeexecutionofsteps': false,
         'showrownumberonerror': false,
         'stoponerror': $StopOnError,
-        'timeoutforasynchronoussteps': 0,
+        'timeoutforasynchronoussteps': 10,
         'timetofindwindow': 20,
         'updatestatistics': false,
         'updatetreewhenscenariostarts': false

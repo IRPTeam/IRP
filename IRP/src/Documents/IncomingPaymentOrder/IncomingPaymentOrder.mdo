@@ -439,6 +439,10 @@
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
+      <choiceParameterLinks>
+        <name>Filter.Owner</name>
+        <field>Document.IncomingPaymentOrder.TabularSection.AddAttributes.Attribute.Property</field>
+      </choiceParameterLinks>
       <dataHistory>Use</dataHistory>
     </attributes>
   </tabularSections>

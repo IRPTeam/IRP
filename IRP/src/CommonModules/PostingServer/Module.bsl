@@ -375,9 +375,9 @@ Procedure ShowPostingErrorMessage(QueryTable, Parameters, AddInfo = Undefined) E
 	QueryTableCopy = QueryTable.Copy();
 	QueryTableCopy.GroupBy(Parameters.GroupColumns + ", Unposting", Parameters.SumColumns);
 	
-	FastCheck = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "FastCheck", False);
+	CheckExpenseRecorders = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "CheckExpenseRecorders", False);
 	ArrayOfPostingErrorMessages = New Array();
-	
+	QuantityColumnName = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "QuantityColumnName", "Quantity");
 	For Each Row In QueryTableCopy Do
 		Filter = New Structure(Parameters.FilterColumns);
 		FillPropertyValues(Filter, Row);
@@ -411,11 +411,11 @@ Procedure ShowPostingErrorMessage(QueryTable, Parameters, AddInfo = Undefined) E
 					RemainsQuantity, Row.Quantity, LackOfBalance, BasisUnit);
 			EndIf;
 			
-			If FastCheck Then
+			If CheckExpenseRecorders Then
 				ArrayOfPostingErrorMessages.Add(MessageText);
 			Else
 				CommonFunctionsClientServer.ShowUsersMessage(
-				MessageText, TableDataPath + "[" + (LineNumber - 1) + "].Quantity", "Object.ItemList");
+				MessageText, TableDataPath + "[" + (LineNumber - 1) + "]." + QuantityColumnName, "Object.ItemList");
 			EndIf;
 			// Delete row
 		Else
@@ -427,7 +427,7 @@ Procedure ShowPostingErrorMessage(QueryTable, Parameters, AddInfo = Undefined) E
 					MessageText = StrTemplate(R().Error_090, Row.Item, Row.ItemKey, Parameters.Operation,
 						RemainsQuantity, Row.Quantity, LackOfBalance, BasisUnit);
 				EndIf;
-				If FastCheck Then
+				If CheckExpenseRecorders Then
 					ArrayOfPostingErrorMessages.Add(MessageText);
 				Else
 					CommonFunctionsClientServer.ShowUsersMessage(MessageText, ErrorQuantityField);
@@ -435,7 +435,7 @@ Procedure ShowPostingErrorMessage(QueryTable, Parameters, AddInfo = Undefined) E
 			Else
 				MessageText = StrTemplate(R().Error_068, LineNumbers, Row.Item, Row.ItemKey, Parameters.Operation,
 					LackOfBalance, 0, LackOfBalance, BasisUnit);
-				If FastCheck Then
+				If CheckExpenseRecorders Then
 					ArrayOfPostingErrorMessages.Add(MessageText);
 				Else
 					CommonFunctionsClientServer.ShowUsersMessage(MessageText);
@@ -444,27 +444,6 @@ Procedure ShowPostingErrorMessage(QueryTable, Parameters, AddInfo = Undefined) E
 		EndIf;
 	EndDo;
 	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "ArrayOfPostingErrorMessages", ArrayOfPostingErrorMessages);
-EndProcedure
-
-Procedure AddColumnsToAccountsStatementTable(Table) Export
-	If Table.Columns.Find("RecordType") = Undefined Then
-		Table.Columns.Add("RecordType", New TypeDescription("AccumulationRecordType"));
-	EndIf;
-	If Table.Columns.Find("BasisDocument") = Undefined Then
-		Table.Columns.Add("BasisDocument", Metadata.DefinedTypes.typeAccountStatementBasises.Type);
-	EndIf;
-	If Table.Columns.Find("AdvanceToSuppliers") = Undefined Then
-		Table.Columns.Add("AdvanceToSuppliers", Metadata.DefinedTypes.typeAmount.Type);
-	EndIf;
-	If Table.Columns.Find("AdvanceFromCustomers") = Undefined Then
-		Table.Columns.Add("AdvanceFromCustomers", Metadata.DefinedTypes.typeAmount.Type);
-	EndIf;
-	If Table.Columns.Find("TransactionAR") = Undefined Then
-		Table.Columns.Add("TransactionAR", Metadata.DefinedTypes.typeAmount.Type);
-	EndIf;
-	If Table.Columns.Find("TransactionAP") = Undefined Then
-		Table.Columns.Add("TransactionAP", Metadata.DefinedTypes.typeAmount.Type);
-	EndIf;
 EndProcedure
 
 Procedure UUIDToString(QueryTable, RowKeyUUID = "RowKeyUUID", RowKeyString = "RowKey") Export
@@ -514,8 +493,7 @@ Function GetLineNumberAndItemKeyFromItemList(Ref, FullTableName) Export
 		QueryStoreField = "ItemList.Store AS Store,";
 	Else
 		QueryStoreField = "VALUE(Catalog.Stores.EmptyRef) AS Store,";
-	EndIf
-	;
+	EndIf;
 	Query.Text = StrTemplate(Query.Text, QueryStoreField, FullTableName);
 	Query.SetParameter("Ref", Ref);
 	QueryResult = Query.Execute();
@@ -738,10 +716,11 @@ EndProcedure
 
 Function CheckBalance_R4011B_FreeStocks(Ref, Tables, RecordType, Unposting, AddInfo = Undefined) Export
 	Parameters = New Structure();
-	Parameters.Insert("RegisterName"      , "R4011B_FreeStocks");
-	Parameters.Insert("Operation"         , "R4011B_FreeStocks");
-	Parameters.Insert("FastCheck"         , CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "FastCheck", False));
-	Parameters.Insert("TempTablesManager" , New TempTablesManager());
+	Parameters.Insert("RegisterName"         , "R4011B_FreeStocks");
+	Parameters.Insert("Operation"            , "R4011B_FreeStocks");
+	Parameters.Insert("CheckExpenseRecorders",
+		CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "CheckExpenseRecorders", False));
+	Parameters.Insert("TempTablesManager"    , New TempTablesManager());
 	Return CheckBalance(Ref, Parameters, Tables, RecordType, Unposting, AddInfo);
 EndFunction
 
@@ -756,10 +735,11 @@ EndFunction
 
 Function CheckBalance_R4010B_ActualStocks(Ref, Tables, RecordType, Unposting, AddInfo = Undefined) Export
 	Parameters = New Structure();
-	Parameters.Insert("RegisterName"      , "R4010B_ActualStocks");
-	Parameters.Insert("Operation"         , "R4010B_ActualStocks");
-	Parameters.Insert("FastCheck"         , CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "FastCheck", False));
-	Parameters.Insert("TempTablesManager" , New TempTablesManager());
+	Parameters.Insert("RegisterName"         , "R4010B_ActualStocks");
+	Parameters.Insert("Operation"            , "R4010B_ActualStocks");
+	Parameters.Insert("CheckExpenseRecorders",
+		CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "CheckExpenseRecorders", False));
+	Parameters.Insert("TempTablesManager"    , New TempTablesManager());
 	Return CheckBalance(Ref, Parameters, Tables, RecordType, Unposting, AddInfo);
 EndFunction
 
@@ -777,9 +757,18 @@ Function CheckBalance(Ref, Parameters, Tables, RecordType, Unposting, AddInfo = 
 		Parameters.Insert("BalancePeriod", CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "BalancePeriod",
 			New Boundary(Ref.PointInTime(), BoundaryType.Including)));
 		CheckResult = CheckBalance_ExecuteQuery(Ref, Parameters, Tables, RecordType, Unposting, AddInfo);
-		Return CheckResult.IsOk;
+		If CheckResult.IsOk Then
+			If Not Parameters.CheckExpenseRecorders Then
+				Parameters.Insert("BalancePeriod"     , Undefined);
+				Parameters.Insert("TempTablesManager" , New TempTablesManager());
+				CheckResult = CheckBalance_ExecuteQuery(Ref, Parameters, Tables, RecordType, Unposting, AddInfo);
+				Return CheckResult.IsOk;
+			Else
+				Return CheckResult.IsOk;
+			EndIf;
+		EndIf;
 	Else // Receipt
-		If Parameters.FastCheck Then
+		If Parameters.CheckExpenseRecorders Then
 			Return True;
 		EndIf;
 		Parameters.Insert("BalancePeriod"     , Undefined);
@@ -821,14 +810,17 @@ Function CheckAllExpenses(Parameters)
 	Result = New Structure("IsOk", True);
 	TableOfExpenseRecorders = GetExpenseRecorders(Parameters);
 	For Each RowExpenseRecorders In TableOfExpenseRecorders Do
-		CheckAddInfo = New Structure("FastCheck", True);
-		PostingParameters = GetPostingParameters(RowExpenseRecorders.Recorder.GetObject(), DocumentPostingMode.Regular, CheckAddInfo);
+		CheckAddInfo = New Structure("CheckExpenseRecorders", True);
+		PostingParameters = GetPostingParameters(RowExpenseRecorders.Recorder.GetObject(),
+			DocumentPostingMode.Regular, CheckAddInfo);
 		Cancel = False;
-		PostingParameters.Module.CheckAfterWrite_R4010B_R4011B(RowExpenseRecorders.Recorder, Cancel, PostingParameters, CheckAddInfo);
+		PostingParameters.Module.CheckAfterWrite_R4010B_R4011B(RowExpenseRecorders.Recorder,
+			Cancel, PostingParameters, CheckAddInfo);
 		If Cancel Then
 			// Message with error
 			CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_098, String(RowExpenseRecorders.Recorder)));
-			ArrayOfPostingErrorMessages = CommonFunctionsClientServer.GetFromAddInfo(CheckAddInfo, "ArrayOfPostingErrorMessages", New Array());
+			ArrayOfPostingErrorMessages = CommonFunctionsClientServer.GetFromAddInfo(CheckAddInfo,
+				"ArrayOfPostingErrorMessages", New Array());
 			If ArrayOfPostingErrorMessages.Count() Then
 				For Each PostingErrorMessage In ArrayOfPostingErrorMessages Do
 					CommonFunctionsClientServer.ShowUsersMessage(PostingErrorMessage);

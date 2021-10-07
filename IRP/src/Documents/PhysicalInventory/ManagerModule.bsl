@@ -76,6 +76,7 @@ Procedure CheckAfterWrite_R4010B_R4011B(Ref, Cancel, Parameters, AddInfo = Undef
 			New Boundary(New PointInTime(StatusInfo.Period, Ref), BoundaryType.Including));
 	EndIf;
 	
+	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "QuantityColumnName", "Difference");
 	If Not (Parameters.Property("Unposting") And Parameters.Unposting) Then
 		// is posting
 		FreeStocksTable   =  PostingServer.GetQueryTableByName("R4011B_FreeStocks", Parameters, True);

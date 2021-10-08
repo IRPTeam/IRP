@@ -4102,13 +4102,14 @@ Function GetFieldsToLock_ExternalLink_SO(ExternalDocAliase, Aliases)
 		Result.Header       = "Company, Branch, Store, Partner, LegalName, Status, ItemListSetProcurementMethods";
 		Result.ItemList     = "Item, ItemKey, Store, ProcurementMethod, Cancel, CancelReason";
 		// Attribute name, Data path (use for show user message)
-		Result.RowRefFilter = "Company          , Company,
-							  |Branch           , Branch,
-							  |Partner          , Partner,
-							  |LegalName        , LegalName,
+		Result.RowRefFilter = "Company           , Company,
+							  |Branch            , Branch,
+							  |Partner           , Partner,
+							  |LegalName         , LegalName,
 							  |TransactionTypeSC, ,
-							  |ItemKey          , ItemList.ItemKey,
-							  |Store            , ItemList.Store";
+							  |ProcurementMethod , ItemList.ProcurementMethod,
+							  |ItemKey           , ItemList.ItemKey,
+							  |Store             , ItemList.Store";
 		
 	ElsIf ExternalDocAliase = Aliases.PO Or ExternalDocAliase = Aliases.PI Then
 		Result.Header   = "Company, Branch, Store, Status, ItemListSetProcurementMethods";

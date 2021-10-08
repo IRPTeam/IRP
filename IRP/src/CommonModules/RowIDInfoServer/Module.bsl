@@ -442,14 +442,46 @@ Procedure OnWrite_RowID(Source, Cancel) Export
 	If Source.Metadata().TabularSections.Find("RowIDInfo") = Undefined Then
 		Return;
 	EndIf;
-
+	
+	TableOfDifferenceFields = New ValueTable();
+	TableOfDifferenceFields.Columns.Add("FieldName");
+	TableOfDifferenceFields.Columns.Add("DataPath");
+	TableOfDifferenceFields.Columns.Add("LineNumber");
+	TableOfDifferenceFields.Columns.Add("ValueBefore");
+	TableOfDifferenceFields.Columns.Add("ValueAfter");
+	
 	For Each Row In Source.RowIDInfo Do
 		RowItemList = Source.ItemList.FindRows(New Structure("Key", Row.Key))[0];
 		RowRefObject = Row.RowRef.GetObject();
 		If Not ValueIsFilled(Row.RowRef.Basis) Then
 			RowRefObject.Basis = Source.Ref;
 		EndIf;
-		UpdateRowIDCatalog(Source, Row, RowItemList, RowRefObject, Cancel);
+		ArrayOfDifferenceFields = UpdateRowIDCatalog(Source, Row, RowItemList, RowRefObject, Cancel);
+		For Each ItemOfDifferenceFields In ArrayOfDifferenceFields Do
+			NewRow = TableOfDifferenceFields.Add();
+			FillPropertyValues(NewRow, ItemOfDifferenceFields);
+			If Find(ItemOfDifferenceFields.DataPath, "ItemList") = 0 Then
+				NewRow.LineNumber = 0;
+			EndIf;
+		EndDo;
+	EndDo;
+	TableOfDifferenceFields.GroupBy("FieldName, DataPath, LineNumber, ValueBefore, ValueAfter");
+	For Each Difference In TableOfDifferenceFields Do
+		If ValueIsFilled(Difference.DataPath) Then
+			If Find(Difference.DataPath, "ItemList") <> 0 Then
+				CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_098, 
+					Difference.LineNumber, Difference.FieldName, Difference.ValueBefore, Difference.ValueAfter),
+					"ItemList[" + Format((Difference.LineNumber - 1), "NZ=0; NG=0;") + "]." 
+					+ StrReplace(Difference.DataPath, "ItemList.", ""), Source);
+			Else
+				CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_099,
+					Difference.FieldName, Difference.ValueBefore, Difference.ValueAfter),
+					Difference.DataPath, Source);
+			EndIf;
+		Else
+			CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_100,
+				Difference.ValueBefore, Difference.ValueAfter));
+		EndIf;
 	EndDo;
 EndProcedure
 
@@ -1185,7 +1217,7 @@ Function FindOrCreateRowIDRef(RowID)
 	Return RowRefObject.Ref;
 EndFunction
 
-Procedure UpdateRowIDCatalog(Source, Row, RowItemList, RowRefObject, Cancel)
+Function UpdateRowIDCatalog(Source, Row, RowItemList, RowRefObject, Cancel)
 	FieldsForCheckRowRef = Undefined;
 	CachedObjectBefore   = Undefined;
 	CachedObjectAfter    = Undefined;
@@ -1229,29 +1261,20 @@ Procedure UpdateRowIDCatalog(Source, Row, RowItemList, RowRefObject, Cancel)
 		RowRefObject.StoreReceiver = Source.StoreReceiver;
 	EndIf;
 	
+	ArrayOfDifferenceFields = New Array();
 	If ValueIsFilled(Source.Ref) Then
 		CachedObjectAfter = GetRowRefCache(RowRefObject, FieldsForCheckRowRef);
 		IsDifference = IsDifferenceInCachedObjects(CachedObjectBefore, CachedObjectAfter, FieldsForCheckRowRef);
 		If IsDifference.Difference Then
 			Cancel = True;
-			
-			// show user message
 			For Each Difference In IsDifference.Fields Do
-				If ValueIsFilled(Difference.DataPath) Then
-					If Find(Difference.DataPath, "ItemList") <> 0 Then
-						CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_098, 
-							RowItemList.LineNumber, Difference.FieldName, Difference.ValueBefore, Difference.ValueAfter),
-							"ItemList[" + Format((RowItemList.LineNumber - 1), "NZ=0; NG=0;") + "]." 
-							+ StrReplace(Difference.DataPath, "ItemList.", ""), Source);
-					Else
-						CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_099,
-							Difference.FieldName, Difference.ValueBefore, Difference.ValueAfter),
-							Difference.DataPath, Source);
-					EndIf;
-				Else
-					CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_100,
-						Difference.ValueBefore, Difference.ValueAfter));
-				EndIf;
+				ItemOfDifferenceFields = New Structure();
+				ItemOfDifferenceFields.Insert("FieldName"   , Difference.FieldName);
+				ItemOfDifferenceFields.Insert("DataPath"    , Difference.DataPath);
+				ItemOfDifferenceFields.Insert("LineNumber"  , RowItemList.LineNumber);
+				ItemOfDifferenceFields.Insert("ValueBefore" , Difference.ValueBefore);
+				ItemOfDifferenceFields.Insert("ValueAfter"  ,Difference.ValueAfter);
+				ArrayOfDifferenceFields.Add(ItemOfDifferenceFields);
 			EndDo;
 		EndIf;
 	EndIf;
@@ -1259,7 +1282,8 @@ Procedure UpdateRowIDCatalog(Source, Row, RowItemList, RowRefObject, Cancel)
 	If Not Cancel Then
 		RowRefObject.Write();
 	EndIf;
-EndProcedure
+	Return ArrayOfDifferenceFields;
+EndFunction
 
 Function GetFieldsForCheckRowRef(Source, RowRefObject)
 	Query = New Query();

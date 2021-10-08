@@ -101,7 +101,7 @@ Procedure ItemListOnStartEdit(Object, Form, Item, NewRow, Clone, AddInfo = Undef
 	If Clone Then
 		CurrentData.Key = New UUID();
 	EndIf;
-	DocumentsClient.TableOnStartEdit(Object, ThisObject, "Object.ItemList", Item, NewRow, Clone);
+	DocumentsClient.TableOnStartEdit(Object, Form, "Object.ItemList", Item, NewRow, Clone);
 	RowIDInfoClient.ItemListOnStartEdit(Object, Form, Item, NewRow, Clone, AddInfo);
 EndProcedure
 

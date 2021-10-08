@@ -491,6 +491,7 @@
   <constants>Constant.UseCompanies</constants>
   <constants>Constant.UseItemKey</constants>
   <constants>Constant.UseLockDataModification</constants>
+  <constants>Constant.EnableLinkedRowsIntegrity</constants>
   <commonForms>CommonForm.DataMappingForm</commonForms>
   <commonForms>CommonForm.EditAddProperties</commonForms>
   <commonForms>CommonForm.EditDescriptions</commonForms>

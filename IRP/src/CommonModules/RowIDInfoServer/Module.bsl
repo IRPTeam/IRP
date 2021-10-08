@@ -246,6 +246,10 @@ Procedure Posting_TM1010T_RowIDMovements_Invoice(Source, Cancel, PostingMode)
 EndProcedure
 
 Procedure CheckAfterWrite(Source, Cancel, ItemList_InDocument, Records_InDocument, Records_Exists, Unposting)
+	If Not LinkedRowsIntegrityIsEnable() Then
+		Return;
+	EndIf;
+	
 	Filter = New Structure("RecordType", AccumulationRecordType.Expense);
 	If Not Cancel And Not AccumulationRegisters.TM1010B_RowIDMovements.CheckBalance(Source.Ref, ItemList_InDocument, 
 			Records_InDocument.Copy(Filter), 
@@ -1262,20 +1266,22 @@ Function UpdateRowIDCatalog(Source, Row, RowItemList, RowRefObject, Cancel)
 	EndIf;
 	
 	ArrayOfDifferenceFields = New Array();
-	If ValueIsFilled(Source.Ref) Then
-		CachedObjectAfter = GetRowRefCache(RowRefObject, FieldsForCheckRowRef);
-		IsDifference = IsDifferenceInCachedObjects(CachedObjectBefore, CachedObjectAfter, FieldsForCheckRowRef);
-		If IsDifference.Difference Then
-			Cancel = True;
-			For Each Difference In IsDifference.Fields Do
-				ItemOfDifferenceFields = New Structure();
-				ItemOfDifferenceFields.Insert("FieldName"   , Difference.FieldName);
-				ItemOfDifferenceFields.Insert("DataPath"    , Difference.DataPath);
-				ItemOfDifferenceFields.Insert("LineNumber"  , RowItemList.LineNumber);
-				ItemOfDifferenceFields.Insert("ValueBefore" , Difference.ValueBefore);
-				ItemOfDifferenceFields.Insert("ValueAfter"  ,Difference.ValueAfter);
-				ArrayOfDifferenceFields.Add(ItemOfDifferenceFields);
-			EndDo;
+	If LinkedRowsIntegrityIsEnable() Then
+		If ValueIsFilled(Source.Ref) Then
+			CachedObjectAfter = GetRowRefCache(RowRefObject, FieldsForCheckRowRef);
+			IsDifference = IsDifferenceInCachedObjects(CachedObjectBefore, CachedObjectAfter, FieldsForCheckRowRef);
+			If IsDifference.Difference Then
+				Cancel = True;
+				For Each Difference In IsDifference.Fields Do
+					ItemOfDifferenceFields = New Structure();
+					ItemOfDifferenceFields.Insert("FieldName"   , Difference.FieldName);
+					ItemOfDifferenceFields.Insert("DataPath"    , Difference.DataPath);
+					ItemOfDifferenceFields.Insert("LineNumber"  , RowItemList.LineNumber);
+					ItemOfDifferenceFields.Insert("ValueBefore" , Difference.ValueBefore);
+					ItemOfDifferenceFields.Insert("ValueAfter"  ,Difference.ValueAfter);
+					ArrayOfDifferenceFields.Add(ItemOfDifferenceFields);
+				EndDo;
+			EndIf;
 		EndIf;
 	EndIf;
 	
@@ -8031,6 +8037,11 @@ EndFunction
 
 #Region LockLinkedRows
 
+Function LinkedRowsIntegrityIsEnable()
+	Return True;
+	//Return Constants.EnableLinkedRowsIntegrity.Get();
+EndFunction
+
 #Region EventHandlers
 
 Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
@@ -8049,6 +8060,9 @@ Procedure OnReadAtServer(Object, Form, CurrentObject) Export
 EndProcedure
 
 Procedure FillCheckProcessing(Object, Cancel, LinkedFilter, RowIDInfoTable, ItemListTable) Export
+	If Not LinkedRowsIntegrityIsEnable() Then
+		Return;
+	EndIf;
 	// check internal links
 	Query = New Query();
 	Query.Text =
@@ -8173,6 +8187,10 @@ EndProcedure
 #EndRegion
 
 Procedure LockLinkedRows(Object, Form) Export
+	If Not LinkedRowsIntegrityIsEnable() Then
+		Return;
+	EndIf;
+	
 	LockInternalLinkedRows(Object, Form);
 	If ValueIsFilled(Object.Ref) Then
 		LockExternalLinkedRows(Object, Form);

@@ -277,6 +277,10 @@
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
+      <choiceParameterLinks>
+        <name>Filter.Owner</name>
+        <field>Catalog.ItemKeys.TabularSection.AddAttributes.Attribute.Property</field>
+      </choiceParameterLinks>
       <dataHistory>Use</dataHistory>
     </attributes>
     <attributes uuid="e53a367f-90d3-4a96-ad79-25b5f4a2d993">

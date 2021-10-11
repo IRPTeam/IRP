@@ -18,6 +18,14 @@
   <createOnInput>DontUse</createOnInput>
   <dataLockControlMode>Managed</dataLockControlMode>
   <fullTextSearch>Use</fullTextSearch>
+  <objectPresentation>
+    <key>en</key>
+    <value>Custom user setting</value>
+  </objectPresentation>
+  <listPresentation>
+    <key>en</key>
+    <value>Custom user settings</value>
+  </listPresentation>
   <type>
     <types>CatalogRef.Companies</types>
     <types>Boolean</types>

@@ -108,6 +108,16 @@ Procedure ItemListOnChange(Item) Export
 EndProcedure
 
 &AtClient
+Procedure ItemListSelection(Item, RowSelected, Field, StandardProcessing)
+	DocPlannedReceiptReservationClient.ItemListSelection(Object, ThisObject, Item, RowSelected, Field, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure ItemListOnStartEdit(Item, NewRow, Clone)
+	DocPlannedReceiptReservationClient.ItemListOnStartEdit(Object, ThisObject, Item, NewRow, Clone);
+EndProcedure
+
+&AtClient
 Procedure ItemListAfterDeleteRow(Item)
 	DocPlannedReceiptReservationClient.ItemListAfterDeleteRow(Object, ThisObject, Item);
 	LockLinkedRows();
@@ -276,6 +286,21 @@ EndProcedure
 Procedure LockLinkedRows()
 	RowIDInfoServer.LockLinkedRows(Object, ThisObject);
 	RowIDInfoServer.SetAppearance(Object, ThisObject);
+EndProcedure
+
+&AtServer
+Procedure UnlockLockLinkedRows()
+	RowIDInfoServer.UnlockLinkedRows(Object, ThisObject);
+EndProcedure
+
+&AtClient
+Procedure FromUnlockLinkedRows(Command)
+	Items.FormUnlockLinkedRows.Check = Not Items.FormUnlockLinkedRows.Check;
+	If Items.FormUnlockLinkedRows.Check Then
+		UnlockLockLinkedRows();
+	Else
+		LockLinkedRows();
+	EndIf;
 EndProcedure
 
 #EndRegion

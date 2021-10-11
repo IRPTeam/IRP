@@ -18,6 +18,14 @@
   <defaultRecordForm>InformationRegister.Barcodes.Form.RecordForm</defaultRecordForm>
   <defaultListForm>InformationRegister.Barcodes.Form.ListForm</defaultListForm>
   <dataLockControlMode>Managed</dataLockControlMode>
+  <recordPresentation>
+    <key>en</key>
+    <value>Item barcode</value>
+  </recordPresentation>
+  <listPresentation>
+    <key>en</key>
+    <value>Item barcodes</value>
+  </listPresentation>
   <resources uuid="aa86891f-2265-4581-8672-22f39d95004e">
     <name>ItemKey</name>
     <synonym>

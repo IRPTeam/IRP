@@ -18,6 +18,14 @@
   <informationRegisterPeriodicity>Second</informationRegisterPeriodicity>
   <mainFilterOnPeriod>true</mainFilterOnPeriod>
   <dataLockControlMode>Managed</dataLockControlMode>
+  <recordPresentation>
+    <key>en</key>
+    <value>Currency rate</value>
+  </recordPresentation>
+  <listPresentation>
+    <key>en</key>
+    <value>Currency rates</value>
+  </listPresentation>
   <resources uuid="a6129b2c-aedf-4ead-abdd-824477778f4f">
     <name>Multiplicity</name>
     <synonym>

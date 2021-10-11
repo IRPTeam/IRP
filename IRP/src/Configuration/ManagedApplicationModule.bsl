@@ -1,4 +1,6 @@
-Var globalEquipments Export;
+// @strict-types
+
+Var globalEquipments Export; // see NewEquipments
 
 Procedure OnStart()
 	isMobile = False;
@@ -37,14 +39,26 @@ Procedure OnStart()
 EndProcedure
 
 Procedure BeforeStart(Cancel)
+	
 	AreaStatus = SaasClient.CurrentAreaStatus();
 	If AreaStatus.isError Then
 		Cancel = True;
 		Raise AreaStatus.Status;
 	EndIf;
 
+	globalEquipments = NewEquipments();
+
+EndProcedure
+
+// New equipments.
+// 
+// Returns:
+//  Structure - New equipments:
+// * Drivers - Map -
+// * ConnectionSettings - Array -
+Function NewEquipments()
 	globalEquipments = New Structure();
 	globalEquipments.Insert("Drivers", New Map());
 	globalEquipments.Insert("ConnectionSettings", New Array());
-
-EndProcedure
+	Return globalEquipments;
+EndFunction

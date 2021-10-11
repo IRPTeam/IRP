@@ -15,6 +15,33 @@ Procedure ItemListOnChange(Object, Form, Item = Undefined, CurrentRowData = Unde
 	RowIDInfoClient.UpdateQuantity(Object, Form);
 EndProcedure
 
+Procedure ItemListSelection(Object, Form, Item, RowSelected, Field, StandardProcessing, AddInfo = Undefined) Export
+	If Upper(Field.Name) = Upper("ItemListPhysicalCountByLocationPresentation") Then
+		CurrentData = Form.Items.ItemList.CurrentData;
+		If CurrentData = Undefined Then
+			Return;
+		EndIf;
+		StandardProcessing = False;
+		If ValueIsFilled(CurrentData.PhysicalCountByLocation) Then
+			OpenForm("Document.PhysicalCountByLocation.ObjectForm", New Structure("Key",
+				CurrentData.PhysicalCountByLocation), Form);
+		EndIf;
+	EndIf;
+	
+	RowIDInfoClient.ItemListSelection(Object, Form, Item, RowSelected, Field, StandardProcessing, AddInfo);
+EndProcedure
+
+Procedure ItemListOnStartEdit(Object, Form, Item, NewRow, Clone, AddInfo = Undefined) Export
+	CurrentData = Item.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	If Clone Then
+		CurrentData.Key = New UUID();
+	EndIf;
+	RowIDInfoClient.ItemListOnStartEdit(Object, Form, Item, NewRow, Clone, AddInfo);
+EndProcedure
+
 Procedure ItemListAfterDeleteRow(Object, Form, Item) Export
 	DocumentsClient.ItemListAfterDeleteRow(Object, Form, Item);
 EndProcedure

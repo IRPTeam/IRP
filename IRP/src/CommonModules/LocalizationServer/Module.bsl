@@ -1,4 +1,13 @@
-Function Strings(LangCode = "") Export
+// @strict-types
+
+// Strings.
+// 
+// Parameters:
+//  LangCode - String - Lang code
+// 
+// Returns:
+//  see LocalizationStrings - Strings
+Function LocalizationStrings(Val LangCode = "") Export
 	If IsBlankString(LangCode) Then
 		LangCode = Metadata.DefaultLanguage.LanguageCode;
 	EndIf;
@@ -40,18 +49,27 @@ Function Strings(LangCode = "") Export
 	Return Strings;
 EndFunction
 
-Function CatalogDescription(Ref, LangCode = "", AddInfo = Undefined) Export
+// Catalog description.
+// 
+// Parameters:
+//  Ref - CatalogRef - Ref
+//  LangCode - String - Lang code
+//  AddInfo - Undefined, Structure - Add info
+// 
+// Returns:
+//  String - Catalog description
+Function CatalogDescription(Val Ref, Val LangCode = "", AddInfo = Undefined) Export
 	LangCode = ?(ValueIsFilled(LangCode), LangCode, LocalizationReuse.GetLocalizationCode());
 	Presentation = "";
 	TypeOfRef = TypeOf(Ref);
 	If TypeOfRef = Type("String") Or TypeOfRef = Type("Date") Or TypeOfRef = Type("Number") Then
 		Presentation = String(Ref);
 	ElsIf Not UseMultiLanguage(Ref.Metadata().FullName(), LangCode, AddInfo) Then
-		Presentation = Strings(Ref);
-	ElsIf Not IsBlankString(Ref["Description_" + LangCode]) Then
-		Presentation = Ref["Description_" + LangCode];
+		Presentation = String(Ref);
+	ElsIf Not IsBlankString(String(Ref["Description_" + LangCode])) Then
+		Presentation = String(Ref["Description_" + LangCode]);
 	ElsIf Not IsBlankString(Ref["Description_en"]) Then
-		Presentation = Ref["Description_en"];
+		Presentation = String(Ref["Description_en"]);
 	Else
 		Presentation = "";
 	EndIf;
@@ -59,7 +77,16 @@ Function CatalogDescription(Ref, LangCode = "", AddInfo = Undefined) Export
 	Return Presentation;
 EndFunction
 
-Function CatalogDescriptionWithAddAttributes(Ref, LangCode = "", AddInfo = Undefined) Export
+// Catalog description with additional attributes.
+// 
+// Parameters:
+//  Ref - CatalogRef - Ref
+//  LangCode - String - Lang code
+//  AddInfo - Undefined, Structure - Add info
+// 
+// Returns:
+//  String - Catalog description
+Function CatalogDescriptionWithAddAttributes(Val Ref, Val LangCode = "", AddInfo = Undefined) Export
 
 	Presentation = "";
 	LangCode = ?(ValueIsFilled(LangCode), LangCode, LocalizationReuse.UserLanguageCode());
@@ -85,6 +112,13 @@ Function CatalogDescriptionWithAddAttributes(Ref, LangCode = "", AddInfo = Undef
 	Return Presentation;
 EndFunction
 
+// All description.
+// 
+// Parameters:
+//  AddInfo - Undefined - Add info
+// 
+// Returns:
+//  Array of String - All description
 Function AllDescription(AddInfo = Undefined) Export
 	Array = New Array();
 	For Each Description In Metadata.CommonAttributes Do
@@ -95,7 +129,16 @@ Function AllDescription(AddInfo = Undefined) Export
 	Return Array;
 EndFunction
 
-Function UseMultiLanguage(MetadataFullName, LangCode = "", AddInfo = Undefined) Export
+// Use multi language.
+// 
+// Parameters:
+//  MetadataFullName - String - Metadata full name
+//  LangCode - String - Lang code
+//  AddInfo - Undefined, Structure - Add info
+// 
+// Returns:
+//  Boolean - Use multi language
+Function UseMultiLanguage(Val MetadataFullName, Val LangCode = "", AddInfo = Undefined) Export
 	LangCode = ?(ValueIsFilled(LangCode), LangCode, LocalizationReuse.UserLanguageCode());
 	MetadataFullName = StrReplace(MetadataFullName, "Manager.", ".");
 	MetadataObject = Metadata.FindByFullName(MetadataFullName);
@@ -103,9 +146,9 @@ Function UseMultiLanguage(MetadataFullName, LangCode = "", AddInfo = Undefined) 
 	Content = DescriptionAttr.Content.Find(MetadataObject);
 
 	If Not Content = Undefined Then
-		If Content.Use = Metadata.ObjectProperties.CommonAttributeUse.Use Or (Content.Use
-			= Metadata.ObjectProperties.CommonAttributeUse.Auto And DescriptionAttr.AutoUse
-			= Metadata.ObjectProperties.CommonAttributeAutoUse.Use) Then
+		If Content.Use = Metadata.ObjectProperties.CommonAttributeUse.Use 
+			Or (Content.Use = Metadata.ObjectProperties.CommonAttributeUse.Auto 
+				And DescriptionAttr.AutoUse = Metadata.ObjectProperties.CommonAttributeAutoUse.Use) Then
 			Return True;
 		EndIf;
 	EndIf;
@@ -113,10 +156,24 @@ Function UseMultiLanguage(MetadataFullName, LangCode = "", AddInfo = Undefined) 
 	Return False;
 EndFunction
 
+// Get localization code.
+// 
+// Parameters:
+//  AddInfo - Undefined - Add info
+// 
+// Returns:
+//  String - Get localization code
 Function GetLocalizationCode(AddInfo = Undefined) Export
 	Return TrimAll(SessionParameters.LocalizationCode);
 EndFunction
 
+// Fields list for descriptions.
+// 
+// Parameters:
+//  Source - CatalogManager - Source
+// 
+// Returns:
+//  Array of String - Fields list for descriptions
 Function FieldsListForDescriptions(Val Source) Export
 	Fields = New Array();
 	If Source = "CatalogManager.Currencies" Then

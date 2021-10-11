@@ -18,6 +18,10 @@
   <informationRegisterPeriodicity>Second</informationRegisterPeriodicity>
   <writeMode>RecorderSubordinate</writeMode>
   <dataLockControlMode>Managed</dataLockControlMode>
+  <listPresentation>
+    <key>en</key>
+    <value>Price by property</value>
+  </listPresentation>
   <resources uuid="d67860eb-ed5c-4881-893e-91f56dff119b">
     <name>Price</name>
     <synonym>

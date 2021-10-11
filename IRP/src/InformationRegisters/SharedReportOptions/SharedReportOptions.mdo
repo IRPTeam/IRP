@@ -16,6 +16,14 @@
   </synonym>
   <useStandardCommands>true</useStandardCommands>
   <dataLockControlMode>Managed</dataLockControlMode>
+  <recordPresentation>
+    <key>en</key>
+    <value>Shared report option</value>
+  </recordPresentation>
+  <listPresentation>
+    <key>en</key>
+    <value>Shared report options</value>
+  </listPresentation>
   <dimensions uuid="d2a85367-f829-4205-8703-2be39bef8ba2">
     <name>User</name>
     <synonym>

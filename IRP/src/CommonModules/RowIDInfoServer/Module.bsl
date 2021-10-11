@@ -246,6 +246,10 @@ Procedure Posting_TM1010T_RowIDMovements_Invoice(Source, Cancel, PostingMode)
 EndProcedure
 
 Procedure CheckAfterWrite(Source, Cancel, ItemList_InDocument, Records_InDocument, Records_Exists, Unposting)
+	If Not LinkedRowsIntegrityIsEnable() Then
+		Return;
+	EndIf;
+	
 	Filter = New Structure("RecordType", AccumulationRecordType.Expense);
 	If Not Cancel And Not AccumulationRegisters.TM1010B_RowIDMovements.CheckBalance(Source.Ref, ItemList_InDocument, 
 			Records_InDocument.Copy(Filter), 
@@ -442,14 +446,46 @@ Procedure OnWrite_RowID(Source, Cancel) Export
 	If Source.Metadata().TabularSections.Find("RowIDInfo") = Undefined Then
 		Return;
 	EndIf;
-
+	
+	TableOfDifferenceFields = New ValueTable();
+	TableOfDifferenceFields.Columns.Add("FieldName");
+	TableOfDifferenceFields.Columns.Add("DataPath");
+	TableOfDifferenceFields.Columns.Add("LineNumber");
+	TableOfDifferenceFields.Columns.Add("ValueBefore");
+	TableOfDifferenceFields.Columns.Add("ValueAfter");
+	
 	For Each Row In Source.RowIDInfo Do
 		RowItemList = Source.ItemList.FindRows(New Structure("Key", Row.Key))[0];
 		RowRefObject = Row.RowRef.GetObject();
 		If Not ValueIsFilled(Row.RowRef.Basis) Then
 			RowRefObject.Basis = Source.Ref;
 		EndIf;
-		UpdateRowIDCatalog(Source, Row, RowItemList, RowRefObject, Cancel);
+		ArrayOfDifferenceFields = UpdateRowIDCatalog(Source, Row, RowItemList, RowRefObject, Cancel);
+		For Each ItemOfDifferenceFields In ArrayOfDifferenceFields Do
+			NewRow = TableOfDifferenceFields.Add();
+			FillPropertyValues(NewRow, ItemOfDifferenceFields);
+			If Find(ItemOfDifferenceFields.DataPath, "ItemList") = 0 Then
+				NewRow.LineNumber = 0;
+			EndIf;
+		EndDo;
+	EndDo;
+	TableOfDifferenceFields.GroupBy("FieldName, DataPath, LineNumber, ValueBefore, ValueAfter");
+	For Each Difference In TableOfDifferenceFields Do
+		If ValueIsFilled(Difference.DataPath) Then
+			If Find(Difference.DataPath, "ItemList") <> 0 Then
+				CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_098, 
+					Difference.LineNumber, Difference.FieldName, Difference.ValueBefore, Difference.ValueAfter),
+					"ItemList[" + Format((Difference.LineNumber - 1), "NZ=0; NG=0;") + "]." 
+					+ StrReplace(Difference.DataPath, "ItemList.", ""), Source);
+			Else
+				CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_099,
+					Difference.FieldName, Difference.ValueBefore, Difference.ValueAfter),
+					Difference.DataPath, Source);
+			EndIf;
+		Else
+			CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_100,
+				Difference.ValueBefore, Difference.ValueAfter));
+		EndIf;
 	EndDo;
 EndProcedure
 
@@ -1185,7 +1221,7 @@ Function FindOrCreateRowIDRef(RowID)
 	Return RowRefObject.Ref;
 EndFunction
 
-Procedure UpdateRowIDCatalog(Source, Row, RowItemList, RowRefObject, Cancel)
+Function UpdateRowIDCatalog(Source, Row, RowItemList, RowRefObject, Cancel)
 	FieldsForCheckRowRef = Undefined;
 	CachedObjectBefore   = Undefined;
 	CachedObjectAfter    = Undefined;
@@ -1229,37 +1265,31 @@ Procedure UpdateRowIDCatalog(Source, Row, RowItemList, RowRefObject, Cancel)
 		RowRefObject.StoreReceiver = Source.StoreReceiver;
 	EndIf;
 	
-	If ValueIsFilled(Source.Ref) Then
-		CachedObjectAfter = GetRowRefCache(RowRefObject, FieldsForCheckRowRef);
-		IsDifference = IsDifferenceInCachedObjects(CachedObjectBefore, CachedObjectAfter, FieldsForCheckRowRef);
-		If IsDifference.Difference Then
-			Cancel = True;
-			
-			// show user message
-			For Each Difference In IsDifference.Fields Do
-				If ValueIsFilled(Difference.DataPath) Then
-					If Find(Difference.DataPath, "ItemList") <> 0 Then
-						CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_098, 
-							RowItemList.LineNumber, Difference.FieldName, Difference.ValueBefore, Difference.ValueAfter),
-							"ItemList[" + Format((RowItemList.LineNumber - 1), "NZ=0; NG=0;") + "]." 
-							+ StrReplace(Difference.DataPath, "ItemList.", ""), Source);
-					Else
-						CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_099,
-							Difference.FieldName, Difference.ValueBefore, Difference.ValueAfter),
-							Difference.DataPath, Source);
-					EndIf;
-				Else
-					CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_100,
-						Difference.ValueBefore, Difference.ValueAfter));
-				EndIf;
-			EndDo;
+	ArrayOfDifferenceFields = New Array();
+	If LinkedRowsIntegrityIsEnable() Then
+		If ValueIsFilled(Source.Ref) Then
+			CachedObjectAfter = GetRowRefCache(RowRefObject, FieldsForCheckRowRef);
+			IsDifference = IsDifferenceInCachedObjects(CachedObjectBefore, CachedObjectAfter, FieldsForCheckRowRef);
+			If IsDifference.Difference Then
+				Cancel = True;
+				For Each Difference In IsDifference.Fields Do
+					ItemOfDifferenceFields = New Structure();
+					ItemOfDifferenceFields.Insert("FieldName"   , Difference.FieldName);
+					ItemOfDifferenceFields.Insert("DataPath"    , Difference.DataPath);
+					ItemOfDifferenceFields.Insert("LineNumber"  , RowItemList.LineNumber);
+					ItemOfDifferenceFields.Insert("ValueBefore" , Difference.ValueBefore);
+					ItemOfDifferenceFields.Insert("ValueAfter"  ,Difference.ValueAfter);
+					ArrayOfDifferenceFields.Add(ItemOfDifferenceFields);
+				EndDo;
+			EndIf;
 		EndIf;
 	EndIf;
 	
 	If Not Cancel Then
 		RowRefObject.Write();
 	EndIf;
-EndProcedure
+	Return ArrayOfDifferenceFields;
+EndFunction
 
 Function GetFieldsForCheckRowRef(Source, RowRefObject)
 	Query = New Query();
@@ -4078,13 +4108,14 @@ Function GetFieldsToLock_ExternalLink_SO(ExternalDocAliase, Aliases)
 		Result.Header       = "Company, Branch, Store, Partner, LegalName, Status, ItemListSetProcurementMethods";
 		Result.ItemList     = "Item, ItemKey, Store, ProcurementMethod, Cancel, CancelReason";
 		// Attribute name, Data path (use for show user message)
-		Result.RowRefFilter = "Company          , Company,
-							  |Branch           , Branch,
-							  |Partner          , Partner,
-							  |LegalName        , LegalName,
+		Result.RowRefFilter = "Company           , Company,
+							  |Branch            , Branch,
+							  |Partner           , Partner,
+							  |LegalName         , LegalName,
 							  |TransactionTypeSC, ,
-							  |ItemKey          , ItemList.ItemKey,
-							  |Store            , ItemList.Store";
+							  |ProcurementMethod , ItemList.ProcurementMethod,
+							  |ItemKey           , ItemList.ItemKey,
+							  |Store             , ItemList.Store";
 		
 	ElsIf ExternalDocAliase = Aliases.PO Or ExternalDocAliase = Aliases.PI Then
 		Result.Header   = "Company, Branch, Store, Status, ItemListSetProcurementMethods";
@@ -7663,8 +7694,7 @@ EndFunction
 
 #Region BasisesTree
 
-&AtServer
-Function CreateBasisesTree(TreeReverseInfo, BasisesTable, ResultsTable, BasisesTreeRows) Export
+Procedure CreateBasisesTree(TreeReverseInfo, BasisesTable, ResultsTable, BasisesTreeRows) Export
 	TreeReverse = TreeReverseInfo.Tree;
 
 	BasisTable = New ValueTable();
@@ -7679,7 +7709,7 @@ Function CreateBasisesTree(TreeReverseInfo, BasisesTable, ResultsTable, BasisesT
 
 	LastRows = TreeReverse.Rows.FindRows(New Structure("LastRow", True), True);
 	If Not LastRows.Count() Then
-		Return Undefined;
+		Return;
 	EndIf;
 
 	For Each LastRow In LastRows Do
@@ -7700,7 +7730,11 @@ Function CreateBasisesTree(TreeReverseInfo, BasisesTable, ResultsTable, BasisesT
 		NewBasisesTreeRow = BasisesTreeRows.Add();
 		NewBasisesTreeRow.Picture = 1;
 		NewBasisesTreeRow.RowPresentation = String(RowBasis.Basis);
-
+		
+		If NewBasisesTreeRow.Property("DocRef") Then
+			NewBasisesTreeRow.DocRef = RowBasis.Basis;
+		EndIf;
+		
 		FillPropertyValues(NewBasisesTreeRow, RowBasis);
 
 		For Each RowFilter In FilterTable.FindRows(New Structure("Basis", RowBasis.Basis)) Do
@@ -7757,7 +7791,7 @@ Function CreateBasisesTree(TreeReverseInfo, BasisesTable, ResultsTable, BasisesT
 		CreateBasisesTree(TreeReverseInfo, BasisesTable, ResultsTable, NewBasisesTreeRow.GetItems());
 
 	EndDo; // BasisTable
-EndFunction
+EndProcedure
 
 Function CreateBasisesTreeReverse(BasisesTable) Export
 	Tree = New ValueTree();
@@ -7824,7 +7858,7 @@ Procedure CreateBasisesTreeReverseRecursive(BasisesInfo, TreeRows, Level)
 	EndIf;
 EndProcedure
 
-Function GetBasisesInfo(Basis, BasisKey, RowID)
+Function GetBasisesInfo(Basis, BasisKey, RowID) Export
 	Query = New Query();
 	Query.Text = 
 		"SELECT
@@ -7855,7 +7889,21 @@ Function GetBasisesInfo(Basis, BasisKey, RowID)
 	Return BasisInfo;
 EndFunction
 
-Function GetChildrenInfo(Basis, BasisKey, RowID)
+Procedure CreateChildrenTree(Basis, BasisKey, RowID, ChildrenTreeRows) Export
+	ArrayOfChildrenInfo = GetChildrenInfo(Basis, BasisKey, RowID);
+	For Each ChildrenInfo In ArrayOfChildrenInfo Do
+		NewChildrenTreeRow = ChildrenTreeRows.Add();
+		NewChildrenTreeRow.Picture = 1;
+		NewChildrenTreeRow.RowPresentation = String(ChildrenInfo.Children);
+		If NewChildrenTreeRow.Property("DocRef") Then
+			NewChildrenTreeRow.DocRef = ChildrenInfo.Children;
+		EndIf;
+		CreateChildrenTree(ChildrenInfo.Children, ChildrenInfo.BasisKey, ChildrenInfo.RowID, 
+			NewChildrenTreeRow.GetItems());
+	EndDo;
+EndProcedure
+
+Function GetChildrenInfo(Basis, BasisKey, RowID) Export
 	Query = New Query();
 	Query.Text = 
 		"SELECT
@@ -7989,6 +8037,11 @@ EndFunction
 
 #Region LockLinkedRows
 
+Function LinkedRowsIntegrityIsEnable()
+	Return True;
+	//Return Constants.EnableLinkedRowsIntegrity.Get();
+EndFunction
+
 #Region EventHandlers
 
 Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
@@ -8007,6 +8060,9 @@ Procedure OnReadAtServer(Object, Form, CurrentObject) Export
 EndProcedure
 
 Procedure FillCheckProcessing(Object, Cancel, LinkedFilter, RowIDInfoTable, ItemListTable) Export
+	If Not LinkedRowsIntegrityIsEnable() Then
+		Return;
+	EndIf;
 	// check internal links
 	Query = New Query();
 	Query.Text =
@@ -8131,10 +8187,19 @@ EndProcedure
 #EndRegion
 
 Procedure LockLinkedRows(Object, Form) Export
+	If Not LinkedRowsIntegrityIsEnable() Then
+		Return;
+	EndIf;
+	
 	LockInternalLinkedRows(Object, Form);
 	If ValueIsFilled(Object.Ref) Then
 		LockExternalLinkedRows(Object, Form);
 	EndIf;
+EndProcedure
+
+Procedure UnlockLinkedRows(Object, Form) Export
+	ClearAppearance_Header(Object, Form);
+	ClearAppearance_ItemList(Object, Form);
 EndProcedure
 
 Procedure LockInternalLinkedRows(Object, Form)
@@ -8303,6 +8368,15 @@ EndProcedure
 #Region ConditionalAppearance
 
 Procedure SetAppearance(Object, Form) Export
+	ClearAppearance_Header(Object, Form);
+	ClearAppearance_ItemList(Object, Form);
+	FieldsToLock = GetFieldsToLock(Object,Form);
+	AddAppearance_Header(Object, Form, FieldsToLock.All);
+	AddAppearance_ItemList(Object, Form, FieldsToLock.Internal, "InternalLinks");
+	AddAppearance_ItemList(Object, Form, FieldsToLock.External, "ExternalLinks");	
+EndProcedure
+
+Procedure ClearAppearance_ItemList(Object, Form) Export
 	ArrayForDelete = New Array();
 	For Each Row In Form.ConditionalAppearance.Items Do
 		If Row.Presentation = "FieldsToLock" Then
@@ -8311,21 +8385,10 @@ Procedure SetAppearance(Object, Form) Export
 	EndDo;
 	For Each ItemForDelete In ArrayForDelete Do
 		Form.ConditionalAppearance.Items.Delete(ItemForDelete);
-	EndDo;
-	
-	FieldsToLock = GetFieldsToLock(Object,Form);
-	
-	AddAppearance_Header(Object, Form, FieldsToLock.All);
-	
-	AddAppearance_ItemList(Object, Form, FieldsToLock.Internal, "InternalLinks");
-	AddAppearance_ItemList(Object, Form, FieldsToLock.External, "ExternalLinks");	
+	EndDo;	
 EndProcedure
 
-Procedure AddAppearance_Header(Object, Form, FieldsToLock)
-	// Header
-	Element = Form.ConditionalAppearance.Items.Add();
-	Element.Presentation = "FieldsToLock";
-	
+Procedure ClearAppearance_Header(Object, Form) Export
 	// Reset ReadOnly
 	For Each FieldName In Form.LockedFields Do
 		FormElement = Form.Items.Find(FieldName);
@@ -8340,6 +8403,12 @@ Procedure AddAppearance_Header(Object, Form, FieldsToLock)
 		EndIf;
 	EndDo;
 	Form.LockedFields.Clear();
+EndProcedure
+
+Procedure AddAppearance_Header(Object, Form, FieldsToLock)
+	// Header
+	Element = Form.ConditionalAppearance.Items.Add();
+	Element.Presentation = "FieldsToLock";
 	
 	// Set ReadOnly
 	For Each FieldName In FieldsToLock.Header Do

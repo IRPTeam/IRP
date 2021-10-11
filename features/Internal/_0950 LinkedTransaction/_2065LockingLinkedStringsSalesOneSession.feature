@@ -11,6 +11,7 @@ Functionality: locking linked strings (SO,SI,SC,SRO,SR)
 
 Scenario: _2065001 preparation (locking linked strings)
 	When set True value to the constant
+	And I set "True" value to the constant "EnableLinkedRowsIntegrity"
 	And I close TestClient session
 	Given I open new TestClient session or connect the existing one
 	* Load info
@@ -1279,3 +1280,24 @@ Scenario: _2065051 check locking tab in the Planned receipt reservation with lin
 			When I Check the steps for Exception
 				|'And I click choice button of "Store (requester)" attribute in "ItemList" table'|
 		And I close all client application windows	
+
+
+Scenario: _2065071 open link info
+	* Select SO
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I go to line in "List" table
+			| 'Number' |
+			| '35'     |
+		And I select current line in "List" table		
+	* Open link info
+		Then "Sales order * dated *" window is opened
+		And I activate "Is external linked" field in "ItemList" table
+		And I select current line in "ItemList" table
+		Then "Info linked document rows" window is opened
+		And I expand current line in "BasisesTree" table
+		And I expand a line in "BasisesTree" table
+			| 'Doc ref'                                            | 'Row presentation'                                   |
+			| 'Shipment confirmation 36 dated 23.09.2021 10:20:59' | 'Shipment confirmation 36 dated 23.09.2021 10:20:59' |
+		
+				
+

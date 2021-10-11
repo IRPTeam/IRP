@@ -108,11 +108,12 @@
   <defaultPresentation>AsDescription</defaultPresentation>
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>
+  <defaultObjectForm>Catalog.RowIDs.Form.ItemForm</defaultObjectForm>
   <attributes uuid="d1438373-f6eb-4b5a-9ae6-a036c668d603">
-    <name>Agreement</name>
+    <name>AgreementSales</name>
     <synonym>
       <key>en</key>
-      <value>Partner term</value>
+      <value>Partner term (Sales)</value>
     </synonym>
     <type>
       <types>CatalogRef.Agreements</types>
@@ -140,10 +141,10 @@
     <dataHistory>Use</dataHistory>
   </attributes>
   <attributes uuid="6bc4a204-5c5d-4221-9af7-227a547e24a1">
-    <name>Currency</name>
+    <name>CurrencySales</name>
     <synonym>
       <key>en</key>
-      <value>Currency</value>
+      <value>Currency (Sales)</value>
     </synonym>
     <type>
       <types>CatalogRef.Currencies</types>
@@ -156,10 +157,10 @@
     <dataHistory>Use</dataHistory>
   </attributes>
   <attributes uuid="b3a9e561-72a6-4cb9-a148-bd105f86da90">
-    <name>LegalName</name>
+    <name>LegalNameSales</name>
     <synonym>
       <key>en</key>
-      <value>Legal name</value>
+      <value>Legal name (Sales)</value>
     </synonym>
     <type>
       <types>CatalogRef.Companies</types>
@@ -172,10 +173,10 @@
     <dataHistory>Use</dataHistory>
   </attributes>
   <attributes uuid="92b1dc6d-6cb7-4022-91e3-8860e878e22a">
-    <name>Partner</name>
+    <name>PartnerSales</name>
     <synonym>
       <key>en</key>
-      <value>Partner</value>
+      <value>Partner (Sales)</value>
     </synonym>
     <type>
       <types>CatalogRef.Partners</types>
@@ -188,10 +189,10 @@
     <dataHistory>Use</dataHistory>
   </attributes>
   <attributes uuid="e03c8729-1525-4318-a1bd-2ca8732f620b">
-    <name>PriceIncludeTax</name>
+    <name>PriceIncludeTaxSales</name>
     <synonym>
       <key>en</key>
-      <value>Price includes tax</value>
+      <value>Price includes tax (Sales)</value>
     </synonym>
     <type>
       <types>Boolean</types>
@@ -411,4 +412,92 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="2c75300d-a052-41c5-9a04-d95eda280216">
+    <name>AgreementPurchases</name>
+    <synonym>
+      <key>en</key>
+      <value>Partner term (Purchases)</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Agreements</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <createOnInput>DontUse</createOnInput>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <indexing>Index</indexing>
+  </attributes>
+  <attributes uuid="66c82d9b-4afc-4660-bc58-8dfde4332066">
+    <name>PartnerPurchases</name>
+    <synonym>
+      <key>en</key>
+      <value>Partner (Purchases)</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Partners</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <indexing>Index</indexing>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="d589b99f-4e03-41c2-8b0b-7233550ae3a6">
+    <name>LegalNamePurchases</name>
+    <synonym>
+      <key>en</key>
+      <value>Legal name (Purchases)</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Companies</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <indexing>Index</indexing>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="6b212c34-98b3-4ee1-b975-d67438fdd351">
+    <name>PriceIncludeTaxPurchases</name>
+    <synonym>
+      <key>en</key>
+      <value>Price includes tax (Purchases)</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <indexing>Index</indexing>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="fe2c7008-aade-4fc9-bdc7-966d37247a41">
+    <name>CurrencyPurchases</name>
+    <synonym>
+      <key>en</key>
+      <value>Currency (Purchases)</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Currencies</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <indexing>Index</indexing>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <forms uuid="651805ba-bc1e-443a-8ae5-b2b855347771">
+    <name>ItemForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Item form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
 </mdclass:Catalog>

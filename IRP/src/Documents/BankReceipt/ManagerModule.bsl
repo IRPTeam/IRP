@@ -670,11 +670,8 @@ Function R5010B_ReconciliationStatement()
 		   |FROM
 		   |	PaymentList AS PaymentList
 		   |WHERE
-		   |	NOT PaymentList.IsMoneyTransfer
-		   |	AND
-		   |	NOT PaymentList.IsMoneyExchange
-		   |	AND
-		   |	NOT PaymentList.TransferFromPOS
+		   |	PaymentList.IsPaymentFromCustomer
+		   |	OR PaymentList.IsReturnFromVendor
 		   |GROUP BY
 		   |	PaymentList.Company,
 		   |	PaymentList.Branch,

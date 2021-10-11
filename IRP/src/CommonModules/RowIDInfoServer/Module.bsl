@@ -4748,18 +4748,31 @@ EndFunction
 
 Function GetFieldsToLock_ExternalLink_SC(ExternalDocAliase, Aliases)
 	Result = New Structure("Header, ItemList, RowRefFilter");
-	If ExternalDocAliase = Aliases.SI Or ExternalDocAliase = Aliases.PR Then
+	If ExternalDocAliase = Aliases.SI Then 
 		Result.Header   = "Company, Branch, Store, Partner, LegalName, TransactionType";
 		Result.ItemList = "Item, ItemKey, Store, ShipmentBasis, SalesOrder, SalesInvoice, InventoryTransferOrder,
 			|InventoryTransfer, PurchaseReturnOrder, PurchaseReturn";
 		// Attribute name, Data path (use for show user message)
-		Result.RowRefFilter = "Company          , Company,
-							  |Branch           , Branch,
-							  |Partner          , Partner,
-							  |LegalName        , LegalName,
-							  |TransactionTypeSC, ,
-							  |ItemKey          , ItemList.ItemKey,
-							  |Store            , ItemList.Store";
+		Result.RowRefFilter = "Company           , Company,
+							  |Branch            , Branch,
+							  |PartnerSales      , Partner,
+							  |LegalNameSales    , LegalName,
+							  |TransactionTypeSC , ,
+							  |ItemKey           , ItemList.ItemKey,
+							  |Store             , ItemList.Store";
+	ElsIf ExternalDocAliase = Aliases.PR Then
+		Result.Header   = "Company, Branch, Store, Partner, LegalName, TransactionType";
+		Result.ItemList = "Item, ItemKey, Store, ShipmentBasis, SalesOrder, SalesInvoice, InventoryTransferOrder,
+			|InventoryTransfer, PurchaseReturnOrder, PurchaseReturn";
+		// Attribute name, Data path (use for show user message)
+		Result.RowRefFilter = "Company            , Company,
+							  |Branch             , Branch,
+							  |PartnerPurchases   , Partner,
+							  |LegalNamePurchases , LegalName,
+							  |TransactionTypeSC  , ,
+							  |ItemKey            , ItemList.ItemKey,
+							  |Store              , ItemList.Store";
+	
 	Else
 		Raise StrTemplate("Not supported External link for [SC] to [%1]", ExternalDocAliase);
 	EndIf;
@@ -4853,13 +4866,13 @@ Procedure ApplyFilterSet_SC_ForPR(Query)
 	|				ELSE FALSE
 	|			END
 	|			AND CASE
-	|				WHEN &Filter_Partner
-	|					THEN RowRef.Partner = &Partner
+	|				WHEN &Filter_PartnerPurchases
+	|					THEN RowRef.PartnerPurchases = &PartnerPurchases
 	|				ELSE FALSE
 	|			END
 	|			AND CASE
-	|				WHEN &Filter_LegalName
-	|					THEN RowRef.LegalName = &LegalName
+	|				WHEN &Filter_LegalNamePurchases
+	|					THEN RowRef.LegalNamePurchases = &LegalNamePurchases
 	|				ELSE FALSE
 	|			END
 	|			AND CASE
@@ -5321,19 +5334,32 @@ EndFunction
 
 Function GetFieldsToLock_ExternalLink_GR(ExternalDocAliase, Aliases)
 	Result = New Structure("Header, ItemList, RowRefFilter");
-	If ExternalDocAliase = Aliases.PI Or ExternalDocAliase = Aliases.SR Then
-	Result.Header   = "Company, Branch, Store, Partner, LegalName, TransactionType";
-	Result.ItemList = "Item, ItemKey, Store, ReceiptBasis, SalesOrder, PurchaseInvoice, 
-		|PurchaseOrder, InternalSupplyRequest, InventoryTransferOrder, SalesReturn, SalesReturnOrder,
-		|InventoryTransfer, SalesInvoice";
-	// Attribute name, Data path (use for show user message)
-	Result.RowRefFilter = "Company          , Company,
-						  |Branch           , Branch,
-						  |Partner          , Partner,
-						  |LegalName        , LegalName,
-						  |TransactionTypeGR, ,
-						  |ItemKey          , ItemList.ItemKey,
-						  |Store            , ItemList.Store";
+	If ExternalDocAliase = Aliases.PI Then
+		Result.Header   = "Company, Branch, Store, Partner, LegalName, TransactionType";
+		Result.ItemList = "Item, ItemKey, Store, ReceiptBasis, SalesOrder, PurchaseInvoice, 
+			|PurchaseOrder, InternalSupplyRequest, InventoryTransferOrder, SalesReturn, SalesReturnOrder,
+			|InventoryTransfer, SalesInvoice";
+		// Attribute name, Data path (use for show user message)
+		Result.RowRefFilter = "Company        , Company,
+						  |Branch             , Branch,
+						  |PartnerPurchases   , Partner,
+						  |LegalNamePurchases , LegalName,
+						  |TransactionTypeGR  , ,
+						  |ItemKey            , ItemList.ItemKey,
+						  |Store              , ItemList.Store";
+	ElsIf ExternalDocAliase = Aliases.SR Then
+		Result.Header   = "Company, Branch, Store, Partner, LegalName, TransactionType";
+		Result.ItemList = "Item, ItemKey, Store, ReceiptBasis, SalesOrder, PurchaseInvoice, 
+			|PurchaseOrder, InternalSupplyRequest, InventoryTransferOrder, SalesReturn, SalesReturnOrder,
+			|InventoryTransfer, SalesInvoice";
+		// Attribute name, Data path (use for show user message)
+		Result.RowRefFilter = "Company       , Company,
+						  |Branch            , Branch,
+						  |PartnerSales      , Partner,
+						  |LegalNameSales    , LegalName,
+						  |TransactionTypeGR , ,
+						  |ItemKey           , ItemList.ItemKey,
+						  |Store             , ItemList.Store";
 	Else
 		Raise StrTemplate("Not supported External link for [GR] to [%1]", ExternalDocAliase);
 	EndIf;
@@ -5407,13 +5433,13 @@ Procedure ApplyFilterSet_GR_ForPI(Query)
 	|				ELSE FALSE
 	|			END
 	|			AND CASE
-	|				WHEN &Filter_Partner
-	|					THEN RowRef.Partner = &Partner
+	|				WHEN &Filter_PartnerPurchases
+	|					THEN RowRef.PartnerPurchases = &PartnerPurchases
 	|				ELSE FALSE
 	|			END
 	|			AND CASE
-	|				WHEN &Filter_LegalName
-	|					THEN RowRef.LegalName = &LegalName
+	|				WHEN &Filter_LegalNamePurchases
+	|					THEN RowRef.LegalNamePurchases = &LegalNamePurchases
 	|				ELSE FALSE
 	|			END
 	|			AND CASE
@@ -5464,8 +5490,8 @@ Procedure ApplyFilterSet_GR_ForSR(Query)
 	|				ELSE FALSE
 	|			END
 	|			AND CASE
-	|				WHEN &Filter_Partner
-	|					THEN RowRef.Partner = &Partner
+	|				WHEN &Filter_PartnerSales
+	|					THEN RowRef.PartnerSales = &PartnerSales
 	|				ELSE FALSE
 	|			END
 	|			AND CASE

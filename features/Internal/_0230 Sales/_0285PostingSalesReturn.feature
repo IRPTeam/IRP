@@ -96,11 +96,11 @@ Scenario: _028501 create document Sales return based on SI (without SRO)
 		// Then the form attribute named "Branch" became equal to "Distribution department"
 	* Check items tab
 		And "ItemList" table contains lines
-		| '#' | 'Item'  | 'Item key' | 'Dont calculate row' | 'Serial lot numbers' | 'Q'     | 'Unit'           | 'Tax amount' | 'Price'    | 'VAT' | 'Offers amount' | 'Net amount' | 'Use goods receipt' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Sales return order' | 'Sales invoice'                               | 'Revenue type' |
-		| '1' | 'Shirt' | '38/Black' | 'No'                 | ''                   | '2,000' | 'pcs'            | '113,71'     | '350,00'   | '18%' | ''              | '586,29'     | 'No'                | '700,00'       | ''                    | 'Store 01' | ''                   | 'Sales invoice 101 dated 05.03.2021 12:56:38' | 'Revenue'      |
-		| '2' | 'Boots' | '36/18SD'  | 'No'                 | ''                   | '2,000' | 'Boots (12 pcs)' | '2 729,05'   | '8 400,00' | '18%' | ''              | '14 070,95'  | 'No'                | '16 800,00'    | ''                    | 'Store 01' | ''                   | 'Sales invoice 101 dated 05.03.2021 12:56:38' | 'Revenue'      |
-		| '3' | 'Boots' | '37/18SD'  | 'No'                 | ''                   | '2,000' | 'pcs'            | '227,42'     | '700,00'   | '18%' | ''              | '1 172,58'   | 'No'                | '1 400,00'     | ''                    | 'Store 01' | ''                   | 'Sales invoice 101 dated 05.03.2021 12:56:38' | 'Revenue'      |
-		| '4' | 'Dress' | 'M/White'  | 'No'                 | ''                   | '4,000' | 'pcs'            | '337,88'     | '520,00'   | '18%' | ''              | '1 742,12'   | 'No'                | '2 080,00'     | ''                    | 'Store 01' | ''                   | 'Sales invoice 101 dated 05.03.2021 12:56:38' | 'Revenue'      |
+		| '#' | 'Item'  | 'Item key' | 'Dont calculate row' | 'Serial lot numbers' | 'Q'     | 'Unit'           | 'Tax amount' | 'Price'    | 'VAT' | 'Offers amount' | 'Net amount' | 'Use goods receipt' | 'Total amount' | 'Additional analytic' | 'Store'    | 'Sales return order' | 'Sales invoice'                               | 'Revenue type' | 'Use goods receipt' |
+		| '1' | 'Shirt' | '38/Black' | 'No'                 | ''                   | '2,000' | 'pcs'            | '113,71'     | '350,00'   | '18%' | ''              | '586,29'     | 'No'                | '700,00'       | ''                    | 'Store 01' | ''                   | 'Sales invoice 101 dated 05.03.2021 12:56:38' | 'Revenue'      | 'No'                |
+		| '2' | 'Boots' | '36/18SD'  | 'No'                 | ''                   | '2,000' | 'Boots (12 pcs)' | '2 729,05'   | '8 400,00' | '18%' | ''              | '14 070,95'  | 'No'                | '16 800,00'    | ''                    | 'Store 01' | ''                   | 'Sales invoice 101 dated 05.03.2021 12:56:38' | 'Revenue'      | 'No'                |
+		| '3' | 'Boots' | '37/18SD'  | 'No'                 | ''                   | '2,000' | 'pcs'            | '227,42'     | '700,00'   | '18%' | ''              | '1 172,58'   | 'No'                | '1 400,00'     | ''                    | 'Store 01' | ''                   | 'Sales invoice 101 dated 05.03.2021 12:56:38' | 'Revenue'      | 'No'                |
+		| '4' | 'Dress' | 'M/White'  | 'No'                 | ''                   | '4,000' | 'pcs'            | '337,88'     | '520,00'   | '18%' | ''              | '1 742,12'   | 'No'                | '2 080,00'     | ''                    | 'Store 01' | ''                   | 'Sales invoice 101 dated 05.03.2021 12:56:38' | 'Revenue'      | 'No'                |
 	And I click the button named "FormPost"
 	And I delete "$$NumberSalesReturn028501$$" variable
 	And I delete "$$SalesReturn028501$$" variable
@@ -741,6 +741,25 @@ Scenario: _300511 check connection to SalesReturn report "Related documents"
 		And Delay 1
 	Then "Related documents" window is opened
 	And I close all client application windows
+
+Scenario: _300512 check Use GR filling from store when create SR based on SI
+	* Select SI
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I go to line in "List" table
+			| 'Number' |
+			| '103'     |
+		And I select current line in "List" table
+	* Create SR and check Use GR filling
+		And I click "Sales return" button
+		And I click "Ok" button
+		And "ItemList" table became equal
+			| 'Item'  | 'Item key' | 'Use goods receipt' |
+			| 'Dress' | 'M/White'  | 'Yes'               |
+			| 'Boots' | '36/18SD'  | 'Yes'               |
+			| 'Boots' | '37/18SD'  | 'Yes'               |
+			| 'Dress' | 'S/Yellow' | 'Yes'               |
+		And I close all client application windows
+		
 
 Scenario: _999999 close TestClient session
 	And I close TestClient session

@@ -1027,9 +1027,9 @@ Scenario: _2060008 check link/unlink form in the PR
 	* Check RowIDInfo
 		And "RowIDInfo" table contains lines
 			| '#' | 'Basis'                                          | 'Next step' | 'Q'      | 'Current step' |
-			| '1' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' | ''          | '10,000' | 'PRO&PR'       |
-			| '2' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' | ''          | '3,000'  | 'PRO&PR'       |
-			| '3' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' | ''          | '24,000' | 'PRO&PR'       |
+			| '1' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' | 'SC'          | '10,000' | 'PRO&PR'       |
+			| '2' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' | 'SC'          | '3,000'  | 'PRO&PR'       |
+			| '3' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' | 'SC'          | '24,000' | 'PRO&PR'       |
 		Then the number of "RowIDInfo" table lines is "равно" "3"
 	* Unlink line
 		And I click the button named "LinkUnlinkBasisDocuments"			
@@ -1061,9 +1061,9 @@ Scenario: _2060008 check link/unlink form in the PR
 		And I click "Save" button
 		And "RowIDInfo" table contains lines
 			| '#' | 'Basis'                                          | 'Next step' | 'Q'      | 'Current step' |
-			| '1' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' | ''          | '10,000' | 'PRO&PR'       |
-			| '2' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' | ''          | '3,000'  | 'PRO&PR'       |
-			| '3' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' | ''          | '24,000' | 'PRO&PR'       |
+			| '1' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' | 'SC'          | '10,000' | 'PRO&PR'       |
+			| '2' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' | 'SC'          | '3,000'  | 'PRO&PR'       |
+			| '3' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' | 'SC'          | '24,000' | 'PRO&PR'       |
 		Then the number of "RowIDInfo" table lines is "равно" "3"
 		And "ItemList" table contains lines
 			| 'Item'  | 'Item key' | 'Q'      | 'Unit'           | 'Purchase invoice'                               |
@@ -1100,9 +1100,9 @@ Scenario: _2060008 check link/unlink form in the PR
 		And I click "Save" button
 		And "RowIDInfo" table contains lines
 			| '#' | 'Basis'                                          | 'Next step' | 'Q'      | 'Current step' |
-			| '1' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' | ''          | '10,000' | 'PRO&PR'       |
-			| '2' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' | ''          | '2,000'  | 'PRO&PR'       |
-			| '3' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' | ''          | '3,000'  | 'PRO&PR'       |
+			| '1' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' | 'SC'          | '10,000' | 'PRO&PR'       |
+			| '2' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' | 'SC'          | '2,000'  | 'PRO&PR'       |
+			| '3' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' | 'SC'          | '3,000'  | 'PRO&PR'       |
 		Then the number of "RowIDInfo" table lines is "равно" "3"
 	* Unlink all lines
 		And I click the button named "LinkUnlinkBasisDocuments"	

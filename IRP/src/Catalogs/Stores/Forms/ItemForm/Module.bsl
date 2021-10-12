@@ -33,59 +33,13 @@ EndProcedure
 
 &AtClient
 Procedure UseGoodsReceiptOnChange(Item)
-	If Not Object.UseGoodsReceipt And ValueIsFilled(Object.Ref) Then
-		If CheckGoodsInTransitIncoming() Then
-			Object.UseGoodsReceipt = True;
-			ThisObject.Modified = False;
-			ShowMessageBox( , StrTemplate(R().Error_053, String(Object.Ref)));
-		EndIf;
-	EndIf;
+	Return;
 EndProcedure
 
 &AtClient
 Procedure UseShipmentConfirmationOnChange(Item)
-	If Not Object.UseShipmentConfirmation And ValueIsFilled(Object.Ref) Then
-		If CheckGoodsInTransitOutgoing() Then
-			Object.UseShipmentConfirmation = True;
-			ThisObject.Modified = False;
-			ShowMessageBox( , StrTemplate(R().Error_052, String(Object.Ref)));
-		EndIf;
-	EndIf;
+	Return;
 EndProcedure
-
-&AtServer
-Function CheckGoodsInTransitIncoming()
-
-	Query = New Query();
-	Query.Text =
-	"SELECT TOP 1
-	|	GoodsInTransitIncoming.ReceiptBasis
-	|FROM
-	|	AccumulationRegister.GoodsInTransitIncoming AS GoodsInTransitIncoming
-	|WHERE
-	|	GoodsInTransitIncoming.Store = &Store";
-
-	Query.SetParameter("Store", Object.Ref);
-
-	Return Not Query.Execute().IsEmpty();
-
-EndFunction
-
-&AtServer
-Function CheckGoodsInTransitOutgoing()
-	Query = New Query();
-	Query.Text =
-	"SELECT TOP 1
-	|	GoodsInTransitOutgoing.ShipmentBasis
-	|FROM
-	|	AccumulationRegister.GoodsInTransitOutgoing AS GoodsInTransitOutgoing
-	|WHERE
-	|	GoodsInTransitOutgoing.Store = &Store";
-
-	Query.SetParameter("Store", Object.Ref);
-
-	Return Not Query.Execute().IsEmpty();
-EndFunction
 
 &AtClient
 Procedure DescriptionOpening(Item, StandardProcessing) Export

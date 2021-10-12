@@ -17,6 +17,14 @@
   <useStandardCommands>true</useStandardCommands>
   <defaultListForm>InformationRegister.SavedItems.Form.ListForm</defaultListForm>
   <dataLockControlMode>Managed</dataLockControlMode>
+  <recordPresentation>
+    <key>en</key>
+    <value>Saved item</value>
+  </recordPresentation>
+  <listPresentation>
+    <key>en</key>
+    <value>Saved items</value>
+  </listPresentation>
   <resources uuid="89ea664a-b951-40f4-8993-a3b455fe509b">
     <name>Item</name>
     <synonym>

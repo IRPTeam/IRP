@@ -17,6 +17,14 @@
   <useStandardCommands>true</useStandardCommands>
   <editType>InDialog</editType>
   <dataLockControlMode>Managed</dataLockControlMode>
+  <recordPresentation>
+    <key>en</key>
+    <value>Lock data modification rule</value>
+  </recordPresentation>
+  <listPresentation>
+    <key>en</key>
+    <value>Lock data modification rules</value>
+  </listPresentation>
   <resources uuid="bb15699f-b1d9-4f67-a1e7-fa780d9c4a3d">
     <name>Attribute</name>
     <synonym>

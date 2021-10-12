@@ -6,7 +6,11 @@
 	<object>
 		<name>Configuration.IRP</name>
 		<right>
-			<name>WebClient</name>
+			<name>DataAdministration</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Administration</name>
 			<value>true</value>
 		</right>
 	</object>

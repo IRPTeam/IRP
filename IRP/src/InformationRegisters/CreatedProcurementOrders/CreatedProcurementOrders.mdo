@@ -17,6 +17,14 @@
   <useStandardCommands>true</useStandardCommands>
   <editType>InDialog</editType>
   <dataLockControlMode>Managed</dataLockControlMode>
+  <recordPresentation>
+    <key>en</key>
+    <value>Created procurement order</value>
+  </recordPresentation>
+  <listPresentation>
+    <key>en</key>
+    <value>Created procurement orders</value>
+  </listPresentation>
   <dimensions uuid="2839d916-f331-4c01-bce0-f77301d97ab9">
     <name>Order</name>
     <synonym>

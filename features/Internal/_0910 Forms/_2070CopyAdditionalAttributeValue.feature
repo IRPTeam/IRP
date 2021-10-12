@@ -347,6 +347,11 @@ Scenario: _207003 copy additional atribute row in sets (isConditionSet)
 		And I click "Yes" button
 		And in the table "SettingsFilter" I click the button named "SettingsFilterAddFilterItem"
 		And I click choice button of the attribute named "SettingsFilterLeftValue" in "SettingsFilter" table
+		Then "Select field" window is opened
+		And I go to line in "Source" table
+			| 'Available fields' |
+			| 'Ref'              |
+		And I expand current line in "Source" table
 		And I go to line in "Source" table
 			| 'Available fields' |
 			| 'ENG'              |

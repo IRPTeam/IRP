@@ -18,6 +18,14 @@
   <defaultRecordForm>InformationRegister.Taxes.Form.RecordForm</defaultRecordForm>
   <informationRegisterPeriodicity>Day</informationRegisterPeriodicity>
   <dataLockControlMode>Managed</dataLockControlMode>
+  <recordPresentation>
+    <key>en</key>
+    <value>Company tax</value>
+  </recordPresentation>
+  <listPresentation>
+    <key>en</key>
+    <value>Company taxes</value>
+  </listPresentation>
   <resources uuid="f51ef633-7048-483b-a625-da52e21085f4">
     <name>Use</name>
     <synonym>

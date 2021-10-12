@@ -19,6 +19,14 @@
   <createOnInput>DontUse</createOnInput>
   <dataLockControlMode>Managed</dataLockControlMode>
   <fullTextSearch>Use</fullTextSearch>
+  <objectPresentation>
+    <key>en</key>
+    <value>Export Data Exchange plan</value>
+  </objectPresentation>
+  <listPresentation>
+    <key>en</key>
+    <value>Export Data Exchange plans</value>
+  </listPresentation>
   <codeLength>9</codeLength>
   <codeAllowedLength>Variable</codeAllowedLength>
   <descriptionLength>25</descriptionLength>

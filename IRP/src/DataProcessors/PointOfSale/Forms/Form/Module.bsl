@@ -9,7 +9,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	HTMLTextTemplate = GetCommonTemplate("HTMLTextField").GetText();
 	Workstation = SessionParametersServer.GetSessionParameter("Workstation");
 	If Workstation.IsEmpty() Then
-		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_090, "Workstation"));
+		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_098, "Workstation"));
 	EndIf;
 EndProcedure
 

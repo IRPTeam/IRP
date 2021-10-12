@@ -251,7 +251,7 @@ $VanessaRun = {
             }
         ],
         'runtestclientwithmaximizedwindow': true,
-        'testclienttimeout': 60
+        'testclienttimeout': 120
     },
     'Version': '1.2.034',
     'VersionVA': 'ver 1.2.034',

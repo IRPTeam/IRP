@@ -17,6 +17,14 @@
   <useStandardCommands>true</useStandardCommands>
   <editType>InDialog</editType>
   <dataLockControlMode>Managed</dataLockControlMode>
+  <recordPresentation>
+    <key>en</key>
+    <value>Info check</value>
+  </recordPresentation>
+  <listPresentation>
+    <key>en</key>
+    <value>Info check</value>
+  </listPresentation>
   <resources uuid="3a42492d-21f8-4dc0-99b6-9691901e995b">
     <name>Status</name>
     <synonym>

@@ -75,6 +75,16 @@ find /c "completed successfully" %env.LogFile1C% && ( echo Success ) || ( echo "
           <param name="teamcity.file.content.replacer.wildcards" value="+:IRP\src\CommonModules\HardwareClient\Module.bsl" />
         </parameters>
       </extension>
+      <extension id="BUILD_EXT_11" type="BuildFailureOnMetric">
+        <parameters>
+          <param name="metricKey" value="BuildDurationNetTime" />
+          <param name="metricThreshold" value="1200" />
+          <param name="metricUnits" value="metricUnitsDefault" />
+          <param name="moreOrLess" value="more" />
+          <param name="stopBuildOnFailure" value="true" />
+          <param name="withBuildAnchor" value="false" />
+        </parameters>
+      </extension>
     </build-extensions>
     <cleanup />
   </settings>

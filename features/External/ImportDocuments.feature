@@ -767,6 +767,7 @@ Scenario: Create document Unbundling objects
 		| 'e1cib/data/Document.Unbundling?ref=aa78120ed92fbced11eaf11df09c894b' | '100877b7-5772-4487-aa3b-27be07f95a37' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf11df09c894a' | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | '2'        | '2'        |
 		| 'e1cib/data/Document.Unbundling?ref=aa78120ed92fbced11eaf11df09c894b' | '0da85fa0-30c7-4966-addd-de6a2d000b95' | 'e1cib/data/Catalog.ItemKeys?ref=aa78120ed92fbced11eaf115bcc9c5fe' | 'e1cib/data/Catalog.Units?ref=aa78120ed92fbced11eaf113ba6c1862' | '2'        | '2'        |
 
+	And Delay 10
 	And I execute 1C:Enterprise script at server
  			| "Documents.Unbundling.FindByNumber(1).GetObject().Write(DocumentWriteMode.Posting);" |
 

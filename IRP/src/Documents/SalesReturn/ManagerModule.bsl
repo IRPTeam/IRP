@@ -140,6 +140,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R5021T_Revenues());
 	QueryArray.Add(T2012S_PartnerAdvances());
 	QueryArray.Add(R5011B_CustomersAging());
+	QueryArray.Add(R5022T_Expenses());
 	Return QueryArray;
 EndFunction
 
@@ -219,6 +220,7 @@ Function ItemList()
 	|	ItemList.ReturnReason,
 	|	ItemList.ProfitLossCenter AS ProfitLossCenter,
 	|	ItemList.RevenueType AS RevenueType,
+	|	ItemList.ExpenseType AS ExpenseType,
 	|	ItemList.AdditionalAnalytic AS AdditionalAnalytic,
 	|	ItemList.Ref.Branch AS Branch,
 	|	ItemList.Ref.LegalNameContract AS LegalNameContract,
@@ -669,3 +671,17 @@ Function R5021T_Revenues()
 		   |WHERE
 		   |	TRUE";
 EndFunction
+
+Function R5022T_Expenses()
+	Return
+		"SELECT
+		|	*,
+		|	ItemList.NetAmount AS Amount,
+		|	ItemList.Amount AS AmountWithTaxes
+		|INTO R5022T_Expenses
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	ItemList.DueAsAdvance";
+EndFunction
+		

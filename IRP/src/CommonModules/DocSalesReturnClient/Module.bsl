@@ -361,7 +361,7 @@ EndProcedure
 
 #EndRegion
 
-#Region RevenueType
+#Region ExpenseType
 
 Procedure ItemListExpenseTypeStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
 	DocumentsClient.ExpenseTypeStartChoice(Object, Form, Item, ChoiceData, StandardProcessing);

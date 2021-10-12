@@ -87,6 +87,11 @@ EndProcedure
 &AtClient
 Procedure DueAsAdvanceOnChange(Item)
 	SetVisibilityAvailability(Object, ThisObject);
+	If Not Object.DueAsAdvance Then
+		For Each Row In Object.ItemList Do
+			Row.ExpenseType = Undefined;
+		EndDo;
+	EndIf;
 EndProcedure
 
 #EndRegion

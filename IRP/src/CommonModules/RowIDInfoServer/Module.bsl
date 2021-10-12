@@ -5495,8 +5495,8 @@ Procedure ApplyFilterSet_GR_ForSR(Query)
 	|				ELSE FALSE
 	|			END
 	|			AND CASE
-	|				WHEN &Filter_LegalName
-	|					THEN RowRef.LegalName = &LegalName
+	|				WHEN &Filter_LegalNameSales
+	|					THEN RowRef.LegalNameSales = &LegalNameSales
 	|				ELSE FALSE
 	|			END
 	|			AND CASE

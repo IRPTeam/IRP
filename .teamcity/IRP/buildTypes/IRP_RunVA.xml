@@ -25,7 +25,7 @@
       <param name="env.RunSaasMode" value="false" spec="checkbox uncheckedValue='false' display='normal' checkedValue='true'" />
       <param name="env.SaasTag" value="SaasPrepare" />
       <param name="env.SonarParamCover" value="" />
-      <param name="env.StartDebug" value="true" spec="checkbox uncheckedValue='false' display='normal' checkedValue='true'" />
+      <param name="env.StartDebug" value="false" spec="checkbox uncheckedValue='false' display='normal' checkedValue='true'" />
       <param name="env.StopOnError" value="false" spec="checkbox uncheckedValue='false' display='normal' checkedValue='true'" />
       <param name="env.StreamCount" value="3" />
       <param name="env.TR_Bank_Key" value="credentialsJSON:8036a633-0c14-4d64-991c-b98b36c82dd1" spec="password display='normal' readOnly='true'" />

@@ -8094,8 +8094,7 @@ EndFunction
 #Region LockLinkedRows
 
 Function LinkedRowsIntegrityIsEnable()
-	Return True;
-	//Return Constants.EnableLinkedRowsIntegrity.Get();
+	Return Constants.EnableLinkedRowsIntegrity.Get();
 EndFunction
 
 #Region EventHandlers

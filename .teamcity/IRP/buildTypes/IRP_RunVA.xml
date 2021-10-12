@@ -730,15 +730,6 @@ Compress-Archive -Path "allure-report/*" -DestinationPath "allure-report.zip"]]>
           <param name="teamcity.file.content.replacer.wildcards" value="**/*.feature" />
         </parameters>
       </extension>
-      <extension id="BUILD_EXT_38" type="BuildFailureOnMetric">
-        <parameters>
-          <param name="metricKey" value="BuildDurationNetTime" />
-          <param name="metricThreshold" value="10800" />
-          <param name="metricUnits" value="metricUnitsDefault" />
-          <param name="moreOrLess" value="more" />
-          <param name="withBuildAnchor" value="false" />
-        </parameters>
-      </extension>
     </build-extensions>
     <artifact-dependencies>
       <dependency id="ARTIFACT_DEPENDENCY_2" sourceBuildTypeId="ExternalDataProcessor_ExtConvertToCfe" cleanDestination="false">

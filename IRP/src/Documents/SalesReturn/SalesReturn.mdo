@@ -657,6 +657,20 @@
       <maxValue xsi:type="core:UndefinedValue"/>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
+    <attributes uuid="c33665ef-2e94-4380-88ff-a9d83587af12">
+      <name>ExpenseType</name>
+      <synonym>
+        <key>en</key>
+        <value>Expense type</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.ExpenseAndRevenueTypes</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
   </tabularSections>
   <tabularSections uuid="f7fdf31f-fafd-4287-9cec-2e46be7ee60e">
     <producedTypes>

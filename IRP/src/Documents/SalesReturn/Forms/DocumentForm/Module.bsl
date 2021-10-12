@@ -80,8 +80,13 @@ EndProcedure
 Procedure SetVisibilityAvailability(Object, Form) Export
 	Form.Items.AddBasisDocuments.Enabled = Not Form.ReadOnly;
 	Form.Items.LinkUnlinkBasisDocuments.Enabled = Not Form.ReadOnly;
-
 	Form.Items.LegalName.Enabled = ValueIsFilled(Object.Partner);
+	Form.Items.ItemListExpenseType.Visible = Object.DueAsAdvance;
+EndProcedure
+
+&AtClient
+Procedure DueAsAdvanceOnChange(Item)
+	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
 #EndRegion
@@ -233,6 +238,16 @@ EndProcedure
 &AtClient
 Procedure ItemListRevenueTypeEditTextChange(Item, Text, StandardProcessing)
 	DocSalesReturnClient.ItemListRevenueTypeEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure ItemListExpenseTypeStartChoice(Item, ChoiceData, StandardProcessing)
+	DocSalesReturnClient.ItemListExpenseTypeStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure ItemListExpenseTypeEditTextChange(Item, Text, StandardProcessing)
+	DocSalesReturnClient.ItemListExpenseTypeEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
 EndProcedure
 
 #EndRegion

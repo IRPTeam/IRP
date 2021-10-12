@@ -169,6 +169,13 @@ Copy-Item -Path "$workingDir/TempDB/1Cv8.1CD" -Destination "$workingDir/$FolderF
 Compress-Archive -Path "$workingDir/$FolderForAllArtefact/AllSteps/Template/1Cv8.1CD" -DestinationPath "$workingDir/Template.zip"
 Write-Host "##teamcity[publishArtifacts 'Template.zip => DataBase']"
 
+function RemoveAllVirtualDesktops {
+    if ((Get-DesktopCount) -gt 1) {
+        do {
+            Remove-Desktop
+        } while ((Get-DesktopCount) -gt 1)
+    }
+}
 
 $VanessaRun = {
     Param($elementTag, $startPort, $CurrentID, $RunSaasMode, $workingDir, $FeaturePath, $DebugString, $OScriptLib, $FolderForAllArtefact, $PathTo1CPlatform, $PassTo1C, $LoginTo1C, $StopOnError, $CloseVA, $AllureBatFilePath)
@@ -466,7 +473,7 @@ $VanessaRun = {
 #	Write-Host "##teamcity[importData type='junit' path='$FolderForAllArtefact/AllSteps/$elementTag/junit']"
 
 }
-
+RemoveAllVirtualDesktops
 $JobArray = @{}
 $JobTimes = @{}
 $CurrentID = 0
@@ -552,7 +559,8 @@ do {
             $JobArray.Remove($listToDelete)
         }
 } while ($JobArray.count)
-$JobTimes]]></param>
+$JobTimes
+RemoveAllVirtualDesktops]]></param>
           <param name="jetbrains_powershell_script_mode" value="CODE" />
           <param name="teamcity.step.mode" value="default" />
         </parameters>

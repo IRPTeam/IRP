@@ -563,7 +563,10 @@ Function R5010B_ReconciliationStatement()
 		   |	*
 		   |INTO R5010B_ReconciliationStatement
 		   |FROM
-		   |	PaymentList";
+		   |	PaymentList AS PaymentList
+		   |WHERE
+		   |	PaymentList.IsPaymentToVendor
+		   |	OR PaymentList.IsReturnToCustomer";
 EndFunction
 
 Function R3010B_CashOnHand()

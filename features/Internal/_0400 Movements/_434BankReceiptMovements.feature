@@ -249,6 +249,28 @@ Scenario: _043403 check Bank receipt movements by the Register "R5010 Reconcilia
 			| 'Register  "R5010 Reconciliation statement'   |                  
 	And I close all client application windows
 
+Scenario: _043404 check Bank receipt movements by the Register "R5010 Reconciliation statement" (Return from vendor)
+	And I close all client application windows
+	* Select Bank receipt
+		Given I open hyperlink "e1cib/list/Document.BankReceipt"
+		And I go to line in "List" table
+			| 'Number'    |
+			| '516'       |
+	* Check movements by the Register  "R5010 Reconciliation statement" 
+		And I click "Registrations report" button
+		And I select "R5010 Reconciliation statement" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Bank receipt 516 dated 02.09.2021 14:30:07' | ''            | ''                    | ''          | ''             | ''             | ''         | ''                  | ''                    |
+			| 'Document registrations records'             | ''            | ''                    | ''          | ''             | ''             | ''         | ''                  | ''                    |
+			| 'Register  "R5010 Reconciliation statement"' | ''            | ''                    | ''          | ''             | ''             | ''         | ''                  | ''                    |
+			| ''                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''         | ''                  | ''                    |
+			| ''                                           | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'       | 'Currency' | 'Legal name'        | 'Legal name contract' |
+			| ''                                           | 'Expense'     | '02.09.2021 14:30:07' | '100'       | 'Main Company' | 'Front office' | 'TRY'      | 'Company Ferron BP' | ''                    |
+			| ''                                           | 'Expense'     | '02.09.2021 14:30:07' | '200'       | 'Main Company' | 'Front office' | 'TRY'      | 'DFC'               | ''                    |		
+	And I close all client application windows
+
+
 Scenario: _043410 check Bank receipt movements by the Register "R2021 Customer transactions" (basis document exist)
 	And I close all client application windows
 	* Select Bank receipt (payment from customer)

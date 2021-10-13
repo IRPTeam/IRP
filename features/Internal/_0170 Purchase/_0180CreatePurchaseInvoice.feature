@@ -471,11 +471,6 @@ Scenario: _018005 create Purchase invoice based on Internal supply request
 			| '2' | '$$Rov2PurchaseInvoice018005$$' | 'Internal supply request 117 dated 12.02.2021 14:39:38' | '$$Rov2InternalSupplyRequestr017006$$' | 'GR'     | '50,000' | '$$Rov2InternalSupplyRequestr017006$$' | 'ITO&PO&PI'    | '$$Rov2InternalSupplyRequestr017006$$' |
 		Then the number of "RowIDInfo" table lines is "равно" "2"
 		* Filling in the main details of the document
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| 'Description'  |
-				| 'Main Company' | 
-			And I select current line in "List" table
 			And I click Select button of "Partner" field
 			And I go to line in "List" table
 				| 'Description'  |

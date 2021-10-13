@@ -30,6 +30,11 @@ Procedure AfterWriteAtServer(CurrentObject, WriteParameters)
 	DocGoodsReceiptServer.AfterWriteAtServer(Object, ThisObject, CurrentObject, WriteParameters);
 EndProcedure
 
+&AtClient
+Procedure AfterWrite(WriteParameters)
+	DocGoodsReceiptClient.AfterWriteAtClient(Object, ThisObject, WriteParameters);
+EndProcedure
+
 &AtClientAtServerNoContext
 Procedure SetVisibilityAvailability(Object, Form) Export
 	Form.Items.AddBasisDocuments.Enabled = Not Form.ReadOnly;
@@ -58,6 +63,12 @@ Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefin
 	EndIf;
 	If EventName = "NewBarcode" And IsInputAvailable() Then
 		SearchByBarcode(Undefined, Parameter);
+	EndIf;
+		
+	If EventName = "LockLinkedRows" Then
+		If Source <> ThisObject Then
+			LockLinkedRows();
+		EndIf;
 	EndIf;
 EndProcedure
 
@@ -88,8 +99,19 @@ Procedure ItemListOnChange(Item, AddInfo = Undefined) Export
 EndProcedure
 
 &AtClient
+Procedure ItemListSelection(Item, RowSelected, Field, StandardProcessing)
+	DocGoodsReceiptClient.ItemListSelection(Object, ThisObject, Item, RowSelected, Field, StandardProcessing);
+EndProcedure
+
+&AtClient
 Procedure ItemListAfterDeleteRow(Item)
 	DocGoodsReceiptClient.ItemListAfterDeleteRow(Object, ThisObject, Item);
+	LockLinkedRows();
+EndProcedure
+
+&AtClient
+Procedure ItemListBeforeDeleteRow(Item, Cancel)
+	DocGoodsReceiptClient.ItemListBeforeDeleteRow(Object, ThisObject, Item, Cancel);
 EndProcedure
 
 &AtClient
@@ -109,9 +131,7 @@ EndProcedure
 
 &AtClient
 Procedure ItemListOnStartEdit(Item, NewRow, Clone)
-	If Clone Then
-		Item.CurrentData.Key = New UUID();
-	EndIf;
+	DocGoodsReceiptClient.ItemListOnStartEdit(Object, ThisObject, Item, NewRow, Clone);
 EndProcedure
 
 &AtClient
@@ -287,21 +307,9 @@ EndProcedure
 #Region LinkedDocuments
 
 &AtClient
-Function GetLinkedDocumentsFilter()
-	Filter = New Structure();
-	Filter.Insert("Company", Object.Company);
-	Filter.Insert("Branch", Object.Branch);
-	Filter.Insert("Partner", Object.Partner);
-	Filter.Insert("LegalName", Object.LegalName);
-	Filter.Insert("TransactionType", Object.TransactionType);
-	Filter.Insert("Ref", Object.Ref);
-	Return Filter;
-EndFunction
-
-&AtClient
 Procedure LinkUnlinkBasisDocuments(Command)
 	FormParameters = New Structure();
-	FormParameters.Insert("Filter", GetLinkedDocumentsFilter());
+	FormParameters.Insert("Filter", RowIDInfoClientServer.GetLinkedDocumentsFilter_GR(Object));
 	FormParameters.Insert("SelectedRowInfo", RowIDInfoClient.GetSelectedRowInfo(Items.ItemList.CurrentData));
 	FormParameters.Insert("TablesInfo", RowIDInfoClient.GetTablesInfo(Object));
 	OpenForm("CommonForm.LinkUnlinkDocumentRows", FormParameters, , , , ,
@@ -311,7 +319,7 @@ EndProcedure
 &AtClient
 Procedure AddBasisDocuments(Command)
 	FormParameters = New Structure();
-	FormParameters.Insert("Filter", GetLinkedDocumentsFilter());
+	FormParameters.Insert("Filter", RowIDInfoClientServer.GetLinkedDocumentsFilter_GR(Object));
 	FormParameters.Insert("TablesInfo", RowIDInfoClient.GetTablesInfo(Object));
 	OpenForm("CommonForm.AddLinkedDocumentRows", FormParameters, , , , ,
 		New NotifyDescription("AddOrLinkUnlinkDocumentRowsContinue", ThisObject), FormWindowOpeningMode.LockOwnerWindow);
@@ -331,6 +339,28 @@ Procedure AddOrLinkUnlinkDocumentRowsContinueAtServer(Result)
 		RowIDInfoServer.LinkUnlinkDocumentRows(Object, Result.FillingValues);
 	ElsIf Result.Operation = "AddLinkedDocumentRows" Then
 		RowIDInfoServer.AddLinkedDocumentRows(Object, Result.FillingValues);
+	EndIf;
+	LockLinkedRows();
+EndProcedure
+
+&AtServer
+Procedure LockLinkedRows()
+	RowIDInfoServer.LockLinkedRows(Object, ThisObject);
+	RowIDInfoServer.SetAppearance(Object, ThisObject);
+EndProcedure
+
+&AtServer
+Procedure UnlockLockLinkedRows()
+	RowIDInfoServer.UnlockLinkedRows(Object, ThisObject);
+EndProcedure
+
+&AtClient
+Procedure FromUnlockLinkedRows(Command)
+	Items.FormUnlockLinkedRows.Check = Not Items.FormUnlockLinkedRows.Check;
+	If Items.FormUnlockLinkedRows.Check Then
+		UnlockLockLinkedRows();
+	Else
+		LockLinkedRows();
 	EndIf;
 EndProcedure
 

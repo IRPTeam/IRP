@@ -8,12 +8,14 @@ Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 		DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 		UpdatePhysicalCountByLocations(Object, Form);
 	EndIf;
+	RowIDInfoServer.OnCreateAtServer(Object, Form, Cancel, StandardProcessing);
 EndProcedure
 
 Procedure AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters) Export
 	DocumentsServer.FillItemList(Object, Form);
 	DocumentsClientServer.ChangeTitleGroupTitle(CurrentObject, Form);
 	UpdatePhysicalCountByLocations(Object, Form);
+	RowIDInfoServer.AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters);
 EndProcedure
 
 Procedure OnReadAtServer(Object, Form, CurrentObject) Export
@@ -23,6 +25,7 @@ Procedure OnReadAtServer(Object, Form, CurrentObject) Export
 	EndIf;
 	DocumentsClientServer.ChangeTitleGroupTitle(CurrentObject, Form);
 	UpdatePhysicalCountByLocations(Object, Form);
+	RowIDInfoServer.OnReadAtServer(Object, Form, CurrentObject);
 EndProcedure
 
 #EndRegion

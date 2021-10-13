@@ -7,11 +7,13 @@ Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 		SetGroupItemsList(Object, Form);
 		DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 	EndIf;
+	RowIDInfoServer.OnCreateAtServer(Object, Form, Cancel, StandardProcessing);
 EndProcedure
 
 Procedure AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters) Export
 	DocumentsServer.FillItemList(Object, Form);
 	DocumentsClientServer.ChangeTitleGroupTitle(CurrentObject, Form);
+	RowIDInfoServer.AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters);
 EndProcedure
 
 Procedure OnReadAtServer(Object, Form, CurrentObject) Export
@@ -20,6 +22,7 @@ Procedure OnReadAtServer(Object, Form, CurrentObject) Export
 		SetGroupItemsList(Object, Form);
 	EndIf;
 	DocumentsClientServer.ChangeTitleGroupTitle(CurrentObject, Form);
+	RowIDInfoServer.OnReadAtServer(Object, Form, CurrentObject);
 EndProcedure
 
 #EndRegion

@@ -3216,7 +3216,8 @@ Procedure ShowRowKey(Form) Export
 				|GroupCostAllocationDetail, CostRowsRowID, AllocationRowsBasisRowID, AllocationRowsRowID, CostDocumentsKey,
 				|AllocationDocumentsKey, CostRowsTreeRowID, DocumentRowsBasisRowID, DocumentRowsRowID, ResultTreeRowID,
 				|PaymentListKey,
-				|TaxList";
+				|TaxList,
+				|ItemListInternalLinks, ItemListExternalLinks, InternalLinkedDocs, ExternalLinkedDocs";
 
 	ArrayOfItemNames = StrSplit(ItemNames, ",");
 	For Each ItemName In ArrayOfItemNames Do

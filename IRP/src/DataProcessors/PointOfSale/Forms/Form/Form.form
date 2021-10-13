@@ -4171,6 +4171,76 @@ WHERE
           <common>true</common>
         </edit>
       </columns>
+      <columns>
+        <name>IsExternalLinked</name>
+        <title>
+          <key>en</key>
+          <value>Is external linked</value>
+        </title>
+        <id>172</id>
+        <valueType>
+          <types>Boolean</types>
+        </valueType>
+        <view>
+          <common>true</common>
+        </view>
+        <edit>
+          <common>true</common>
+        </edit>
+      </columns>
+      <columns>
+        <name>IsInternalLinked</name>
+        <title>
+          <key>en</key>
+          <value>Is internal linked</value>
+        </title>
+        <id>173</id>
+        <valueType>
+          <types>Boolean</types>
+        </valueType>
+        <view>
+          <common>true</common>
+        </view>
+        <edit>
+          <common>true</common>
+        </edit>
+      </columns>
+      <columns>
+        <name>ExternalLinks</name>
+        <title>
+          <key>en</key>
+          <value>External links</value>
+        </title>
+        <id>174</id>
+        <valueType>
+          <types>String</types>
+          <stringQualifiers/>
+        </valueType>
+        <view>
+          <common>true</common>
+        </view>
+        <edit>
+          <common>true</common>
+        </edit>
+      </columns>
+      <columns>
+        <name>InternalLinks</name>
+        <title>
+          <key>en</key>
+          <value>Internal links</value>
+        </title>
+        <id>175</id>
+        <valueType>
+          <types>String</types>
+          <stringQualifiers/>
+        </valueType>
+        <view>
+          <common>true</common>
+        </view>
+        <edit>
+          <common>true</common>
+        </edit>
+      </columns>
     </additionalColumns>
   </attributes>
   <attributes>
@@ -4649,6 +4719,66 @@ WHERE
     <edit>
       <common>true</common>
     </edit>
+  </attributes>
+  <attributes>
+    <name>ExternalLinkedDocs</name>
+    <title>
+      <key>en</key>
+      <value>External linked docs</value>
+    </title>
+    <id>169</id>
+    <valueType>
+      <types>ValueList</types>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
+    <extInfo xsi:type="form:ValueListExtInfo">
+      <itemValueType/>
+    </extInfo>
+  </attributes>
+  <attributes>
+    <name>InternalLinkedDocs</name>
+    <title>
+      <key>en</key>
+      <value>Internal linked docs</value>
+    </title>
+    <id>170</id>
+    <valueType>
+      <types>ValueList</types>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
+    <extInfo xsi:type="form:ValueListExtInfo">
+      <itemValueType/>
+    </extInfo>
+  </attributes>
+  <attributes>
+    <name>LockedFields</name>
+    <title>
+      <key>en</key>
+      <value>Locked fields</value>
+    </title>
+    <id>171</id>
+    <valueType>
+      <types>ValueList</types>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
+    <extInfo xsi:type="form:ValueListExtInfo">
+      <itemValueType/>
+    </extInfo>
   </attributes>
   <formCommands>
     <name>qPayment</name>

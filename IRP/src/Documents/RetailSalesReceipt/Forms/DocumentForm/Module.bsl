@@ -20,6 +20,12 @@ Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefin
 		AddAttributesCreateFormControl();
 	EndIf;
 
+	If EventName = "LockLinkedRows" Then
+		If Source <> ThisObject Then
+			LockLinkedRows();
+		EndIf;
+	EndIf;
+
 	If Not Source = ThisObject Then
 		Return;
 	EndIf;
@@ -58,6 +64,11 @@ EndProcedure
 &AtClient
 Procedure AfterWrite(WriteParameters, AddInfo = Undefined) Export
 	DocRetailSalesReceiptClient.AfterWriteAtClient(Object, ThisObject, WriteParameters);
+EndProcedure
+
+&AtClient
+Procedure ItemListBeforeDeleteRow(Item, Cancel)
+	DocRetailSalesReceiptClient.ItemListBeforeDeleteRow(Object, ThisObject, Item, Cancel);
 EndProcedure
 
 &AtServer
@@ -148,6 +159,7 @@ EndProcedure
 &AtClient
 Procedure ItemListAfterDeleteRow(Item)
 	DocRetailSalesReceiptClient.ItemListAfterDeleteRow(Object, ThisObject, Item);
+	LockLinkedRows();
 EndProcedure
 
 &AtClient
@@ -157,10 +169,7 @@ EndProcedure
 
 &AtClient
 Procedure ItemListOnStartEdit(Item, NewRow, Clone)
-	If Clone Then
-		Item.CurrentData.Key = New UUID();
-	EndIf;
-	DocumentsClient.TableOnStartEdit(Object, ThisObject, "Object.ItemList", Item, NewRow, Clone);
+	DocRetailSalesReceiptClient.ItemListOnStartEdit(Object, ThisObject, Item, NewRow, Clone);
 EndProcedure
 
 &AtClient
@@ -489,6 +498,27 @@ Procedure GeneratedFormCommandActionByNameServer(CommandName) Export
 EndProcedure
 
 #EndRegion
+
+&AtServer
+Procedure LockLinkedRows()
+	RowIDInfoServer.LockLinkedRows(Object, ThisObject);
+	RowIDInfoServer.SetAppearance(Object, ThisObject);
+EndProcedure
+
+&AtServer
+Procedure UnlockLockLinkedRows()
+	RowIDInfoServer.UnlockLinkedRows(Object, ThisObject);
+EndProcedure
+
+&AtClient
+Procedure FromUnlockLinkedRows(Command)
+	Items.FormUnlockLinkedRows.Check = Not Items.FormUnlockLinkedRows.Check;
+	If Items.FormUnlockLinkedRows.Check Then
+		UnlockLockLinkedRows();
+	Else
+		LockLinkedRows();
+	EndIf;
+EndProcedure
 
 #Region Service
 

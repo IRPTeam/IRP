@@ -587,11 +587,36 @@ Function Strings(Lang) Export
 	// %1 - 100.00 
 	// %2 - 120.00
 	Strings.Insert("Error_095", NStr("en = 'Payment amount [%1] and sales amount [%2] not match'", Lang));
+	
+	// %1 - 1
+	// %2 - Boots
+	// %3 - Red XL
+	Strings.Insert("Error_096", NStr("en = 'Can not delete linked row [%1] [%2] [%3]'", Lang));
 
-	Strings.Insert("Error_096", NStr("en = 'Select any document'", Lang));
-	Strings.Insert("Error_097", NStr("en = 'Default file storage volume is not set.'", Lang));
-	Strings.Insert("Error_098", NStr("en = 'Document [%1] have negative stock balance'", Lang));
-	Strings.Insert("Error_099", NStr("en = '%1 is undefined.'", Lang));
+	// %1 - 1
+	// %2 - Boots
+	// %3 - Red XL
+	Strings.Insert("Error_097", NStr("en = 'Wrong linked row [%1] [%2] [%3]'", Lang));
+	
+	// %1 - 1
+	// %2 - Store
+	// %3 - Store 01
+	// %4 - Store 02
+	Strings.Insert("Error_098", NStr("en = 'Wrong linked row [%1] for column [%2] used value [%3] wrong value [%4]'", Lang));
+	
+	// %1 - Partner
+	// %2 - Partner 01
+	// %3 - Partner 02
+	Strings.Insert("Error_099", NStr("en = 'Wrong linked data [%1] used value [%2] wrong value [%3]'", Lang));
+	
+	// %1 - Value 01
+	// %2 - Value 02
+	Strings.Insert("Error_100", NStr("en = 'Wrong linked data, used value [%1] wrong value [%2]'", Lang));
+	
+	Strings.Insert("Error_101", NStr("en = 'Select any document'", Lang));
+	Strings.Insert("Error_102", NStr("en = 'Default file storage volume is not set.'", Lang));
+	Strings.Insert("Error_103", NStr("en = '%1 is undefined.'", Lang));
+	Strings.Insert("Error_104", NStr("en = 'Document [%1] have negative stock balance'", Lang));
 #EndRegion
 
 #Region InfoMessages

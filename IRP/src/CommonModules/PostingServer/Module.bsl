@@ -526,7 +526,11 @@ Function GetExistsRecordsFromAccRegister(Ref, RegisterFullName, RecordType = Und
 	Query.Text = StrTemplate(Query.Text, RegisterFullName);
 	Query.SetParameter("Recorder", Ref);
 	Query.SetParameter("Filter_RecordType", RecordType <> Undefined);
-	Query.SetParameter("RecordType", RecordType);
+	If RecordType = Undefined Then
+		Query.SetParameter("RecordType", AccumulationRecordType.Expense);
+	Else
+		Query.SetParameter("RecordType", RecordType);
+	EndIf;
 	QueryResult = Query.Execute();
 	Return QueryResult.Unload();
 EndFunction
@@ -818,7 +822,7 @@ Function CheckAllExpenses(Parameters)
 			Cancel, PostingParameters, CheckAddInfo);
 		If Cancel Then
 			// Message with error
-			CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_098, String(RowExpenseRecorders.Recorder)));
+			CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_104, String(RowExpenseRecorders.Recorder)));
 			ArrayOfPostingErrorMessages = CommonFunctionsClientServer.GetFromAddInfo(CheckAddInfo,
 				"ArrayOfPostingErrorMessages", New Array());
 			If ArrayOfPostingErrorMessages.Count() Then

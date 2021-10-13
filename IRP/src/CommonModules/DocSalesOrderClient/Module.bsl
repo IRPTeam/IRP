@@ -94,8 +94,8 @@ Procedure AfterWriteAtClient(Object, Form, WriteParameters, AddInfo = Undefined)
 #If Not MobileClient And Not MobileAppClient Then
 		Status(Object.Ref, , MessageText);
 #EndIf
-	EndIf
-	;
+	EndIf;
+	RowIDInfoClient.AfterWriteAtClient(Object, Form, WriteParameters, AddInfo);
 EndProcedure
 
 #EndRegion
@@ -111,6 +111,18 @@ Procedure ItemListOnChange(Object, Form, Item = Undefined, CurrentRowData = Unde
 	DocumentsClient.FillDeliveryDates(Object, Form);
 	CurrenciesClient.CalculateAmount(Object, Form);
 	RowIDInfoClient.UpdateQuantity(Object, Form);
+EndProcedure
+
+Procedure ItemListOnStartEdit(Object, Form, Item, NewRow, Clone, AddInfo = Undefined) Export
+	CurrentData = Item.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	If Clone Then
+		CurrentData.Key = New UUID();
+	EndIf;
+	DocumentsClient.TableOnStartEdit(Object, Form, "Object.ItemList", Item, NewRow, Clone);
+	RowIDInfoClient.ItemListOnStartEdit(Object, Form, Item, NewRow, Clone, AddInfo);
 EndProcedure
 
 Procedure ItemListOnActivateRow(Object, Form, Item = Undefined, CurrentRowData = Undefined) Export
@@ -145,7 +157,13 @@ Procedure ItemListSelection(Object, Form, Item, RowSelected, Field, StandardProc
 			TaxesClient.ChangeTaxAmount2(Object, Form, Parameters, StandardProcessing, AddInfo);
 		EndIf;
 	EndIf;
+	RowIDInfoClient.ItemListSelection(Object, Form, Item, RowSelected, Field, StandardProcessing, AddInfo);
 EndProcedure
+
+Procedure ItemListBeforeDeleteRow(Object, Form, Item, Cancel, AddInfo = Undefined) Export
+	RowIDInfoClient.ItemListBeforeDeleteRow(Object, Form, Item, Cancel, AddInfo);	
+EndProcedure
+
 
 #EndRegion
 

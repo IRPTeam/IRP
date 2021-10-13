@@ -397,9 +397,7 @@ Scenario: create PurchaseInvoice018001 based on PurchaseOrder017001
 			Then the form attribute named "LegalName" became equal to "Company Ferron BP"
 			Then the form attribute named "Agreement" became equal to "Vendor Ferron, TRY"
 			Then the form attribute named "Store" became equal to "Store 01"
-		* Filling in the main details of the document
-			And I click Select button of "Company" field
-			And I select current line in "List" table
+			Then the form attribute named "Company" became equal to "Main Company"
 		* Check filling items table
 			And I move to "Item list" tab
 			And "ItemList" table contains lines
@@ -438,9 +436,6 @@ Scenario: create PurchaseInvoice018006 based on PurchaseOrder017003
 			Then the form attribute named "LegalName" became equal to "Company Ferron BP"
 			Then the form attribute named "Agreement" became equal to "Vendor Ferron, USD"
 			Then the form attribute named "Store" became equal to "Store 02"
-		* Filling in the main details of the document
-			And I click Select button of "Company" field
-			And I select current line in "List" table
 		* Check filling items table
 			And I move to "Item list" tab
 			And "ItemList" table contains lines
@@ -1139,11 +1134,7 @@ Scenario: create PurchaseReturn022314
 		Then the form attribute named "Agreement" became equal to "Vendor Ferron, USD"
 		Then the form attribute named "LegalName" became equal to "Company Ferron BP"
 		Then the form attribute named "Company" became equal to "Main Company"
-	And I click Select button of "Store" field
-	And I go to line in "List" table
-		| 'Description' |
-		| 'Store 02'  |
-	And I select current line in "List" table
+		Then the form attribute named "Store" became equal to "Store 02"
 	And I click the button named "FormPost"
 	And I delete "$$NumberPurchaseReturn022314$$" variable
 	And I delete "$$PurchaseReturn022314$$" variable

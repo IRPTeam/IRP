@@ -376,12 +376,12 @@ Scenario: _092003 check serial lot number in the Retail return receipt
 		And I select current line in "ItemList" table
 		When I Check the steps for Exception
         |"And I click choice button of the attribute named "ItemListSerialLotNumbersPresentation" in "ItemList" table"|
-		And I move to "Other" tab
-		And I click Select button of "Branch" field
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Shop 01'     |
-		And I select current line in "List" table	
+		# And I move to "Other" tab
+		# And I click Select button of "Branch" field
+		# And I go to line in "List" table
+		# 	| 'Description' |
+		# 	| 'Shop 01'     |
+		# And I select current line in "List" table	
 	* Post Retail return receipt and check movements in the register Retail sales
 		And I click the button named "FormPost"
 		And I delete "$$RetailReturnReceipt092003$$" variable
@@ -390,15 +390,15 @@ Scenario: _092003 check serial lot number in the Retail return receipt
 		And I select "R2050 Retail sales" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-			| '$$RetailReturnReceipt092003$$'  | ''       | ''          | ''       | ''           | ''              | ''             | ''        | ''         | ''                             | ''          | ''                  | ''        |
-			| 'Document registrations records' | ''       | ''          | ''       | ''           | ''              | ''             | ''        | ''         | ''                             | ''          | ''                  | ''        |
-			| 'Register  "R2050 Retail sales"' | ''       | ''          | ''       | ''           | ''              | ''             | ''        | ''         | ''                             | ''          | ''                  | ''        |
-			| ''                               | 'Period' | 'Resources' | ''       | ''           | ''              | 'Dimensions'   | ''        | ''         | ''                             | ''          | ''                  | ''        |
-			| ''                               | ''       | 'Quantity'  | 'Amount' | 'Net amount' | 'Offers amount' | 'Company'      | 'Branch'  | 'Store'    | 'Retail sales receipt'         | 'Item key'  | 'Serial lot number' | 'Row key' |
-			| ''                               | '*'      | '-2'        | '-800'   | '-677,97'    | ''              | 'Main Company' | 'Shop 01' | 'Store 01' | '$$RetailSalesReceipt092002$$' | '38/Yellow' | '99098809009998'    | '*'       |
-			| ''                               | '*'      | '-1'        | '-400'   | '-338,98'    | ''              | 'Main Company' | 'Shop 01' | 'Store 01' | '$$RetailSalesReceipt092002$$' | '38/Yellow' | '99098809009999'    | '*'       |
-			| ''                               | '*'      | '-1'        | '650'    | '550,85'     | ''              | 'Main Company' | 'Shop 01' | 'Store 01' | '$$RetailSalesReceipt092002$$' | '38/18SD'   | ''                  | '*'       |
-			| ''                               | '*'      | '-1'        | '700'    | '593,22'     | ''              | 'Main Company' | 'Shop 01' | 'Store 01' | '$$RetailSalesReceipt092002$$' | '37/18SD'   | ''                  | '*'       |
+			| '$$RetailReturnReceipt092003$$'  | ''       | ''          | ''       | ''           | ''              | ''             | ''       | ''         | ''                             | ''          | ''                  | ''        |
+			| 'Document registrations records' | ''       | ''          | ''       | ''           | ''              | ''             | ''       | ''         | ''                             | ''          | ''                  | ''        |
+			| 'Register  "R2050 Retail sales"' | ''       | ''          | ''       | ''           | ''              | ''             | ''       | ''         | ''                             | ''          | ''                  | ''        |
+			| ''                               | 'Period' | 'Resources' | ''       | ''           | ''              | 'Dimensions'   | ''       | ''         | ''                             | ''          | ''                  | ''        |
+			| ''                               | ''       | 'Quantity'  | 'Amount' | 'Net amount' | 'Offers amount' | 'Company'      | 'Branch' | 'Store'    | 'Retail sales receipt'         | 'Item key'  | 'Serial lot number' | 'Row key' |
+			| ''                               | '*'      | '-2'        | '-800'   | '-677,97'    | ''              | 'Main Company' | ''       | 'Store 01' | '$$RetailSalesReceipt092002$$' | '38/Yellow' | '99098809009998'    | '*'       |
+			| ''                               | '*'      | '-1'        | '-400'   | '-338,98'    | ''              | 'Main Company' | ''       | 'Store 01' | '$$RetailSalesReceipt092002$$' | '38/Yellow' | '99098809009999'    | '*'       |
+			| ''                               | '*'      | '-1'        | '650'    | '550,85'     | ''              | 'Main Company' | ''       | 'Store 01' | '$$RetailSalesReceipt092002$$' | '38/18SD'   | ''                  | '*'       |
+			| ''                               | '*'      | '-1'        | '700'    | '593,22'     | ''              | 'Main Company' | ''       | 'Store 01' | '$$RetailSalesReceipt092002$$' | '37/18SD'   | ''                  | '*'       |
 	* Сhange the quantity and check that the quantity of the serial lot numbers matches the quantity in the document
 		And I activate "$$RetailReturnReceipt092003$$" window
 		And I go to line in "ItemList" table
@@ -446,14 +446,14 @@ Scenario: _092003 check serial lot number in the Retail return receipt
 		And I select "R2050 Retail sales" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
-			| '$$RetailReturnReceipt092003$$'  | ''       | ''          | ''       | ''           | ''              | ''             | ''        | ''         | ''                             | ''          | ''                  | ''        |
-			| 'Document registrations records' | ''       | ''          | ''       | ''           | ''              | ''             | ''        | ''         | ''                             | ''          | ''                  | ''        |
-			| 'Register  "R2050 Retail sales"' | ''       | ''          | ''       | ''           | ''              | ''             | ''        | ''         | ''                             | ''          | ''                  | ''        |
-			| ''                               | 'Period' | 'Resources' | ''       | ''           | ''              | 'Dimensions'   | ''        | ''         | ''                             | ''          | ''                  | ''        |
-			| ''                               | ''       | 'Quantity'  | 'Amount' | 'Net amount' | 'Offers amount' | 'Company'      | 'Branch'  | 'Store'    | 'Retail sales receipt'         | 'Item key'  | 'Serial lot number' | 'Row key' |
-			| ''                               | '*'      | '-1'        | '-400'   | '-338,98'    | ''              | 'Main Company' | 'Shop 01' | 'Store 01' | '$$RetailSalesReceipt092002$$' | '38/Yellow' | '99098809009998'    | '*'       |
-			| ''                               | '*'      | '-1'        | '650'    | '550,85'     | ''              | 'Main Company' | 'Shop 01' | 'Store 01' | '$$RetailSalesReceipt092002$$' | '38/18SD'   | ''                  | '*'       |
-			| ''                               | '*'      | '-1'        | '700'    | '593,22'     | ''              | 'Main Company' | 'Shop 01' | 'Store 01' | '$$RetailSalesReceipt092002$$' | '37/18SD'   | ''                  | '*'       |
+			| '$$RetailReturnReceipt092003$$'  | ''       | ''          | ''       | ''           | ''              | ''             | ''       | ''         | ''                             | ''          | ''                  | ''        |
+			| 'Document registrations records' | ''       | ''          | ''       | ''           | ''              | ''             | ''       | ''         | ''                             | ''          | ''                  | ''        |
+			| 'Register  "R2050 Retail sales"' | ''       | ''          | ''       | ''           | ''              | ''             | ''       | ''         | ''                             | ''          | ''                  | ''        |
+			| ''                               | 'Period' | 'Resources' | ''       | ''           | ''              | 'Dimensions'   | ''       | ''         | ''                             | ''          | ''                  | ''        |
+			| ''                               | ''       | 'Quantity'  | 'Amount' | 'Net amount' | 'Offers amount' | 'Company'      | 'Branch' | 'Store'    | 'Retail sales receipt'         | 'Item key'  | 'Serial lot number' | 'Row key' |
+			| ''                               | '*'      | '-1'        | '-400'   | '-338,98'    | ''              | 'Main Company' | ''       | 'Store 01' | '$$RetailSalesReceipt092002$$' | '38/Yellow' | '99098809009998'    | '*'       |
+			| ''                               | '*'      | '-1'        | '650'    | '550,85'     | ''              | 'Main Company' | ''       | 'Store 01' | '$$RetailSalesReceipt092002$$' | '38/18SD'   | ''                  | '*'       |
+			| ''                               | '*'      | '-1'        | '700'    | '593,22'     | ''              | 'Main Company' | ''       | 'Store 01' | '$$RetailSalesReceipt092002$$' | '37/18SD'   | ''                  | '*'       |
 	* Check the message to the user when the serial number was not filled in
 		And I activate "$$RetailReturnReceipt092003$$" window
 		And I click the button named "Add"

@@ -55,6 +55,7 @@ Scenario: _0230000 preparation (Sales order closing)
 		When Create document SalesOrder objects (SI before SC for check closing)
 		And I execute 1C:Enterprise script at server
  			| "Documents.SalesOrder.FindByNumber(32).GetObject().Write(DocumentWriteMode.Posting);" |
+		
 
 Scenario: _0230001 create and check filling Sales order closing (SO not shipped)
 	* Create Sales order closing 

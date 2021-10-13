@@ -1,3 +1,4 @@
+
 Procedure OnOpen(Object, Form, Cancel, AddInfo = Undefined) Export
 
 	DocumentsClient.SetTextOfDescriptionAtForm(Object, Form);
@@ -6,6 +7,10 @@ Procedure OnOpen(Object, Form, Cancel, AddInfo = Undefined) Export
 	ItemListOnChange(Object, Form);
 #EndIf
 
+EndProcedure
+
+Procedure AfterWriteAtClient(Object, Form, WriteParameters, AddInfo = Undefined) Export
+	RowIDInfoClient.AfterWriteAtClient(Object, Form, WriteParameters, AddInfo);
 EndProcedure
 
 #Region ItemCompany
@@ -186,6 +191,21 @@ Procedure ItemListOnChange(Object, Form, Item = Undefined, CurrentRowData = Unde
 	RowIDInfoClient.UpdateQuantity(Object, Form);
 EndProcedure
 
+Procedure ItemListSelection(Object, Form, Item, RowSelected, Field, StandardProcessing, AddInfo = Undefined) Export
+	RowIDInfoClient.ItemListSelection(Object, Form, Item, RowSelected, Field, StandardProcessing, AddInfo);
+EndProcedure
+
+Procedure ItemListOnStartEdit(Object, Form, Item, NewRow, Clone, AddInfo = Undefined) Export
+	CurrentData = Item.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	If Clone Then
+		CurrentData.Key = New UUID();
+	EndIf;
+	RowIDInfoClient.ItemListOnStartEdit(Object, Form, Item, NewRow, Clone, AddInfo);
+EndProcedure
+
 Procedure ItemListAfterDeleteRow(Object, Form, Item) Export
 	DocumentsClient.ItemListAfterDeleteRow(Object, Form, Item);
 EndProcedure
@@ -200,23 +220,6 @@ Procedure ItemListOnActivateRow(Object, Form, Item, CurrentRowData = Undefined) 
 	If ValueIsFilled(CurrentData.Store) And CurrentData.Store <> Form.CurrentStore Then
 		DocumentsClient.SetCurrentStore(Object, Form, CurrentData.Store);
 	EndIf;
-EndProcedure
-
-Procedure SerialLotNumberListOnChange(Object, Form, Item = Undefined) Export
-	For Each Row In Object.SerialLotNumbers Do
-#If MobileClient Then
-		ItemListFilterStructure = New Structure();
-		ItemListFilterStructure.Insert("Key", Row.KeyRef);
-		ItemListExistingRows = Object.ItemList.FindRows(ItemListFilterStructure);
-		If ItemListExistingRows.Count() Then
-			ItemListExistingRow = ItemListExistingRows[0];
-			Row.ItemKey = ItemListExistingRow.ItemKey;
-			Row.Item = ItemListExistingRow.Item;
-			Row.Title = "" + Row.Item + " " + Row.ItemKey + " " + Row.SerialLotNumber;
-		EndIf;
-#EndIf
-	EndDo
-	;
 EndProcedure
 
 Procedure DescriptionClick(Object, Form, Item, StandardProcessing) Export
@@ -307,64 +310,13 @@ Procedure ItemListItemEditTextChange(Object, Form, Item, Text, StandardProcessin
 	DocumentsClient.ItemEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters);
 EndProcedure
 
-Procedure PickupItemsEnd(Result, AdditionalParameters) Export
-	If Not ValueIsFilled(Result) Or Not AdditionalParameters.Property("Object") 
-		Or Not AdditionalParameters.Property("Form") Then
-		Return;
-	EndIf;
-
-	Object = AdditionalParameters.Object;
-	Form = AdditionalParameters.Form;
-
-	ItemListFilterString = "Item, ItemKey, Unit, Barcode";
-	ItemListFilterStructure = New Structure(ItemListFilterString);
-
-	SerialLotNumberListString = "SerialLotNumber";
-	SerialLotNumberListFilterStructure = New Structure(SerialLotNumberListString);
-
-	For Each ResultElement In Result Do
-
-		FillPropertyValues(ItemListFilterStructure, ResultElement);
-		ExistingRows = Object.ItemList.FindRows(ItemListFilterStructure);
-		If ExistingRows.Count() Then
-			Row = ExistingRows[0];
-		Else
-			Row = Object.ItemList.Add();
-			FillPropertyValues(Row, ResultElement, ItemListFilterString);
-			Row.Store = Form.Store;
-			Row.Key = New UUID();
-		EndIf;
-		Row.Quantity = Row.Quantity + ResultElement.Quantity;
-
-		FillPropertyValues(SerialLotNumberListFilterStructure, ResultElement);
-		SerialLotNumberListExistingRows = Object.SerialLotNumbers.FindRows(SerialLotNumberListFilterStructure);
-		If SerialLotNumberListExistingRows.Count() Then
-			SerialLotNumberListRow = SerialLotNumberListExistingRows[0];
-		Else
-			SerialLotNumberListRow = Object.SerialLotNumbers.Add();
-			FillPropertyValues(SerialLotNumberListRow, ResultElement, SerialLotNumberListString);
-		EndIf;
-		SerialLotNumberListRow.KeyRef = Row.Key;
-		SerialLotNumberListRow.Quantity = SerialLotNumberListRow.Quantity + ResultElement.Quantity;
-
-	EndDo;
-	ItemListOnChange(Object, Form, Undefined, Undefined);
-	SerialLotNumberListOnChange(Object, Form, Undefined);
-EndProcedure
-
 Procedure ItemListBeforeDeleteRow(Object, Form, Item, Cancel, CurrentRowData = Undefined) Export
 	CurrentData = DocumentsClient.GetCurrentRowDataList(Form.Items.ItemList, CurrentRowData);
 	If CurrentData = Undefined Then
 		Return;
 	EndIf;
 
-	SerialLotNumberListFilterStructure = New Structure();
-	SerialLotNumberListFilterStructure.Insert("KeyRef", CurrentData.Key);
-	SerialLotNumberListExistingRows = Object.SerialLotNumbers.FindRows(SerialLotNumberListFilterStructure);
-	For Each Row In SerialLotNumberListExistingRows Do
-		Object.SerialLotNumbers.Delete(Row);
-	EndDo;
-
+	RowIDInfoClient.ItemListBeforeDeleteRow(Object, Form, Item, Cancel);
 EndProcedure
 
 Procedure SearchByBarcode(Barcode, Object, Form) Export

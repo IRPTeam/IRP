@@ -128,9 +128,14 @@ Procedure GenerateReportForOneDocument(DocumentRef, Result, Template, MainTitleA
 				PutExpenseReceipt = True;
 
 			EndIf;
-
-			StringPeriod = ", Period";
-			FieldPresentations.Insert("Period", "Period");
+			
+			For Each StandardAttr In ObjectProperty.StandardAttributes Do
+				If Upper(StandardAttr.Name) = Upper("Period") Then
+					StringPeriod = ", Period";
+					FieldPresentations.Insert("Period", "Period");
+					Break;
+				EndIf;
+			EndDo;
 
 			ListOfResources = GetListOfFields(ObjectProperty.Resources, FieldPresentations);
 			ListOfDimensions = GetListOfFields(ObjectProperty.Dimensions, FieldPresentations);
@@ -243,12 +248,12 @@ Procedure PutDataProcessing(DocumentRef, ArrayOfFields, FieldPresentations, Repo
 
 	If Not ValueIsFilled(ReportBuilder.Text) Then
 		ListOfFields = GetListOfFieldsByData(ArrayOfFields);
-		ReportBuilder.Text = "SELECT ALLOWED " + ListOfFields + "
-																|{SELECT " + ListOfFields + "}
-																							|FROM " + RegisterName + " AS reg
-																													 |WHERE reg.Recorder = &Recorder
-																													 |ORDER BY "
-			+ ListOfFields;
+		ReportBuilder.Text = 
+			"SELECT ALLOWED " + ListOfFields + "
+			|{SELECT " + ListOfFields + "}
+			|FROM " + RegisterName + " AS reg
+			|WHERE reg.Recorder = &Recorder
+			|ORDER BY " + ListOfFields;
 		ReportBuilder.Parameters.Insert("Recorder", DocumentRef);
 	EndIf;
 

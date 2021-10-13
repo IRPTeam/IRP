@@ -129,6 +129,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R4022B_StockTransferOrdersShipment());
 	QueryArray.Add(R4032B_GoodsInTransitOutgoing());
 	QueryArray.Add(R4034B_GoodsShipmentSchedule());
+	QueryArray.Add(T3010S_RowIDInfo());
 	Return QueryArray;
 EndFunction
 
@@ -550,6 +551,27 @@ Function R4034B_GoodsShipmentSchedule()
 		   |	ItemList.SalesOrderExists
 		   |	AND ItemList.SalesOrder.UseItemsShipmentScheduling";
 
+EndFunction
+
+Function T3010S_RowIDInfo()
+	Return
+		"SELECT
+		|	RowIDInfo.RowRef AS RowRef,
+		|	RowIDInfo.BasisKey AS BasisKey,
+		|	RowIDInfo.RowID AS RowID,
+		|	RowIDInfo.Basis AS Basis,
+		|	ItemList.Key AS Key,
+		|	0 AS Price,
+		|	UNDEFINED AS Currency,
+		|	ItemList.Unit AS Unit
+		|INTO T3010S_RowIDInfo
+		|FROM
+		|	Document.ShipmentConfirmation.ItemList AS ItemList
+		|		INNER JOIN Document.ShipmentConfirmation.RowIDInfo AS RowIDInfo
+		|		ON RowIDInfo.Ref = &Ref
+		|		AND ItemList.Ref = &Ref
+		|		AND RowIDInfo.Key = ItemList.Key
+		|		AND RowIDInfo.Ref = ItemList.Ref";
 EndFunction
 
 #EndRegion

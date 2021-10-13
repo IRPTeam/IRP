@@ -80,11 +80,16 @@ Procedure AfterWriteAtClient(Object, Form, WriteParameters, AddInfo = Undefined)
 	DocumentsClient.AfterWriteAtClientPutServerDataToAddInfo(Object, Form, AddInfo);
 	CurrenciesClient.SetVisibleRows(Object, ThisObject, AddInfo);
 	SerialLotNumberClient.UpdateSerialLotNumbersPresentation(Object, AddInfo);
+	RowIDInfoClient.AfterWriteAtClient(Object, Form, WriteParameters, AddInfo);
 EndProcedure
 
 #EndRegion
 
 #Region ItemListEvents
+
+Procedure ItemListBeforeDeleteRow(Object, Form, Item, Cancel, AddInfo = Undefined) Export
+	RowIDInfoClient.ItemListBeforeDeleteRow(Object, Form, Item, Cancel, AddInfo);	
+EndProcedure
 
 Procedure ItemListAfterDeleteRow(Object, Form, Item) Export
 	DocumentsClient.ItemListAfterDeleteRow(Object, Form, Item);
@@ -95,6 +100,18 @@ EndProcedure
 Procedure ItemListOnChange(Object, Form, Item = Undefined, CurrentRowData = Undefined) Export
 	DocumentsClient.FillRowIDInItemList(Object);
 	CurrenciesClient.CalculateAmount(Object, Form);
+EndProcedure
+
+Procedure ItemListOnStartEdit(Object, Form, Item, NewRow, Clone, AddInfo = Undefined) Export
+	CurrentData = Item.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	If Clone Then
+		CurrentData.Key = New UUID();
+	EndIf;
+	DocumentsClient.TableOnStartEdit(Object, Form, "Object.ItemList", Item, NewRow, Clone);
+	RowIDInfoClient.ItemListOnStartEdit(Object, Form, Item, NewRow, Clone, AddInfo);
 EndProcedure
 
 Procedure ItemListOnActivateRow(Object, Form, Item = Undefined, CurrentRowData = Undefined) Export
@@ -126,6 +143,7 @@ Procedure ItemListSelection(Object, Form, Item, RowSelected, Field, StandardProc
 			TaxesClient.ChangeTaxAmount2(Object, Form, Parameters, StandardProcessing, AddInfo);
 		EndIf;
 	EndIf;
+	RowIDInfoClient.ItemListSelection(Object, Form, Item, RowSelected, Field, StandardProcessing, AddInfo);
 EndProcedure
 
 #EndRegion

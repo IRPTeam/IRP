@@ -123,6 +123,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray = New Array();
 	QueryArray.Add(R2010T_SalesOrders());
 	QueryArray.Add(R2012B_SalesOrdersInvoiceClosing());
+	QueryArray.Add(T3010S_RowIDInfo());
 	Return QueryArray;
 EndFunction
 
@@ -176,6 +177,27 @@ Function R2012B_SalesOrdersInvoiceClosing()
 		   |WHERE
 		   |	NOT ItemList.isCanceled";
 
+EndFunction
+
+Function T3010S_RowIDInfo()
+	Return
+		"SELECT
+		|	RowIDInfo.RowRef AS RowRef,
+		|	RowIDInfo.BasisKey AS BasisKey,
+		|	RowIDInfo.RowID AS RowID,
+		|	RowIDInfo.Basis AS Basis,
+		|	ItemList.Key AS Key,
+		|	ItemList.Price AS Price,
+		|	ItemList.Ref.Currency AS Currency,
+		|	ItemList.Unit AS Unit
+		|INTO T3010S_RowIDInfo
+		|FROM
+		|	Document.SalesReturnOrder.ItemList AS ItemList
+		|		INNER JOIN Document.SalesReturnOrder.RowIDInfo AS RowIDInfo
+		|		ON RowIDInfo.Ref = &Ref
+		|		AND ItemList.Ref = &Ref
+		|		AND RowIDInfo.Key = ItemList.Key
+		|		AND RowIDInfo.Ref = ItemList.Ref";
 EndFunction
 
 #EndRegion

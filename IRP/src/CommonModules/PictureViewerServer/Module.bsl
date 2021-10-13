@@ -223,7 +223,7 @@ Function GetIntegrationSettingsFile(Val FileStorageVolume = Undefined) Export
 		FileStorageVolume = Constants.DefaultFilesStorageVolume.Get();
 	EndIf;
 	If Not ValueIsFilled(FileStorageVolume) Then
-		Raise R().Error_097;
+		Raise R().Error_102;
 	EndIf;
 	Result = New Structure();
 	Result.Insert("DefaultFilesStorageVolume", FileStorageVolume);

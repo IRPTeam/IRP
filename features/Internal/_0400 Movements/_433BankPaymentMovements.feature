@@ -179,7 +179,7 @@ Scenario: _043302 check Bank payment movements by the Register "R5010 Reconcilia
 			| ''                                           | 'Receipt'     | '07.09.2020 19:16:43' | '1 000'     | 'Main Company' | ''             | 'TRY'        | 'Company Ferron BP' |'Contract Ferron BP' |
 	And I close all client application windows
 
-Scenario: _043303 check Bank payment movements by the Register "R5010 Reconciliation statement" (cash transfer, currency exchange)
+Scenario: _043303 check absence Bank payment movements by the Register "R5010 Reconciliation statement" (cash transfer, currency exchange)
 	And I close all client application windows
 	* Select Bank payment (cash transfer)
 		Given I open hyperlink "e1cib/list/Document.BankPayment"
@@ -418,6 +418,29 @@ Scenario: _043320 check Bank payment movements by the Register "R3010 Cash on ha
 			| ''                                           | 'Expense'     | '02.09.2021 14:24:44' | '100'       | 'Main Company' | 'Distribution department' | 'Bank account, TRY' | 'TRY'      | 'Local currency'               | 'No'                   |
 			| ''                                           | 'Expense'     | '02.09.2021 14:24:44' | '100'       | 'Main Company' | 'Distribution department' | 'Bank account, TRY' | 'TRY'      | 'en description is empty'      | 'No'                   |		
 	And I close all client application windows
+
+Scenario: _043321 check Bank payment movements by the Register "R5010 Reconciliation statement" (return to customer)
+	And I close all client application windows
+	* Select Bank payment
+		Given I open hyperlink "e1cib/list/Document.BankPayment"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '326'       |
+	* Check movements by the Register  "R5010 Reconciliation statement" 
+		And I click "Registrations report" button
+		And I select "R5010 Reconciliation statement" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Bank payment 326 dated 02.09.2021 14:24:44' | ''            | ''                    | ''          | ''             | ''                        | ''         | ''                | ''                    |
+			| 'Document registrations records'             | ''            | ''                    | ''          | ''             | ''                        | ''         | ''                | ''                    |
+			| 'Register  "R5010 Reconciliation statement"' | ''            | ''                    | ''          | ''             | ''                        | ''         | ''                | ''                    |
+			| ''                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                        | ''         | ''                | ''                    |
+			| ''                                           | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'                  | 'Currency' | 'Legal name'      | 'Legal name contract' |
+			| ''                                           | 'Receipt'     | '02.09.2021 14:24:44' | '100'       | 'Main Company' | 'Distribution department' | 'TRY'      | 'Company Kalipso' | ''                    |				
+	And I close all client application windows
+
+
+
 
 Scenario: _043330 Bank payment clear posting/mark for deletion
 	And I close all client application windows

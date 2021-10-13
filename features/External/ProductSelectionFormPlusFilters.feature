@@ -398,7 +398,7 @@ Scenario: check the product selection form with price information in Purchase in
 			| 'Dress'    | '*'      | 'S/Yellow'  | 'Store 01' | '1,000' | '*'             | '*'          | 'pcs' | '*'           | '*'            |
 			| 'Trousers' | '*'      | '38/Yellow' | 'Store 01' | '2,000' | '*'             | '*'          | 'pcs' | '*'           | '*'            |
 	* Add one more line to the order through the Add button
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
 			| Description |
@@ -532,7 +532,7 @@ Scenario: check the product selection form with price information in Purchase or
 			| 'Dress'    | '*'      | 'S/Yellow'  | 'Store 01' | '1,000' | '*'             | '*'          | 'pcs' | '*'           | '*'            |
 			| 'Trousers' | '*'      | '38/Yellow' | 'Store 01' | '2,000' | '*'             | '*'          | 'pcs' | '*'           | '*'            |
 	* Add one more line to the order through the Add button
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
 			| Description |

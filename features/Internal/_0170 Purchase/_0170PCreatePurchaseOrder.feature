@@ -240,7 +240,7 @@ Scenario: _017005 check movements by status and status history of a Purchase Ord
 	* Check the default status "Wait"
 		Then the form attribute named "Status" became equal to "Wait"
 	* Filling in items table
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |
@@ -253,7 +253,7 @@ Scenario: _017005 check movements by status and status history of a Purchase Ord
 			| 'M/White'  |
 		And I select current line in "List" table
 		And I finish line editing in "ItemList" table
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |
@@ -266,7 +266,7 @@ Scenario: _017005 check movements by status and status history of a Purchase Ord
 			| 'L/Green'  |
 		And I select current line in "List" table
 		And I finish line editing in "ItemList" table
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |
@@ -561,7 +561,7 @@ Scenario: _017101 check input item key by line in the Purchase order
 			| Company Ferron BP |
 		And I select current line in "List" table
 	* Check input item key line by line
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
 			| Description |
@@ -608,7 +608,7 @@ Scenario: _017102 check for the creation of the missing item key from the Purcha
 		And I select current line in "List" table
 	* Creating an item key when filling out the tabular part
 		And I move to "Item list" tab
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
 			| Description |
@@ -664,7 +664,7 @@ Scenario: _017105 filter when selecting item key in the purchase order document
 			| Company Ferron BP |
 		And I select current line in "List" table
 	* Filter check on item key when filling out the commodity part
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
 			| Description |
@@ -770,7 +770,7 @@ Scenario: _019903 add line in Purchase order and chek movements changes
 		And Delay 2
 		And I select current line in "List" table
 		And I move to "Item list" tab
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |
@@ -791,7 +791,7 @@ Scenario: _019903 add line in Purchase order and chek movements changes
 		And I input "195,00" text in "Price" field of "ItemList" table
 		And I input "Store 03" text in "Store" field of "ItemList" table
 		And I finish line editing in "ItemList" table
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |
@@ -831,7 +831,7 @@ Scenario: _019904 add package in Purchase order and chek movements (conversion t
 		And I move to "Item list" tab
 		And I go to the last line in "ItemList" table
 		And I delete current line in "ItemList" table
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |

@@ -748,7 +748,7 @@ Scenario:_800017 check remaining stock control in the Stock adjustment as write 
 				| 'Description' |
 				| 'Store 01'    |
 			And I select current line in "List" table
-			And I click the button named "Add"
+			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
 				| 'Description' |
@@ -774,7 +774,7 @@ Scenario:_800017 check remaining stock control in the Stock adjustment as write 
 				| 'Expense'     |
 			And I select current line in "List" table		
 			And I finish line editing in "ItemList" table
-			And I click the button named "Add"
+			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
 				| 'Description' |
@@ -802,7 +802,7 @@ Scenario:_800017 check remaining stock control in the Stock adjustment as write 
 				| 'Description' |
 				| 'Expense'     |
 			And I select current line in "List" table	
-			And I click the button named "Add"
+			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
 				| 'Description' |
@@ -922,7 +922,7 @@ Scenario:_800020 check remaining stock control in the Purchase return
 				| 'Description' |
 				| 'Store 01'    |
 			And I select current line in "List" table
-			And I click the button named "Add"
+			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
 				| 'Description' |
@@ -938,7 +938,7 @@ Scenario:_800020 check remaining stock control in the Purchase return
 			And I activate "Q" field in "ItemList" table
 			And I input "10,000" text in "Q" field of "ItemList" table
 			And I finish line editing in "ItemList" table
-			And I click the button named "Add"
+			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
 				| 'Description' |
@@ -955,7 +955,7 @@ Scenario:_800020 check remaining stock control in the Purchase return
 			And I activate "Q" field in "ItemList" table
 			And I input "110,000" text in "Q" field of "ItemList" table
 			And I finish line editing in "ItemList" table
-			And I click the button named "Add"
+			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
 				| 'Description' |
@@ -1061,7 +1061,7 @@ Scenario:_800022 check remaining stock control in the shipment confirmation
 				| 'Description' |
 				| 'Store 02'    |
 			And I select current line in "List" table
-			And I click the button named "Add"
+			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
 				| 'Description' |
@@ -1077,7 +1077,7 @@ Scenario:_800022 check remaining stock control in the shipment confirmation
 			And I activate "Quantity" field in "ItemList" table
 			And I input "10,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
-			And I click the button named "Add"
+			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
 				| 'Description' |
@@ -1094,7 +1094,7 @@ Scenario:_800022 check remaining stock control in the shipment confirmation
 			And I activate "Quantity" field in "ItemList" table
 			And I input "110,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
-			And I click the button named "Add"
+			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
 				| 'Description' |

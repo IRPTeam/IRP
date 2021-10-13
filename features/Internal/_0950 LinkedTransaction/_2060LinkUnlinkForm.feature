@@ -1400,7 +1400,7 @@ Scenario: _2060016 check price in the PI when link document with different price
 			| 'Store 03'  |
 		And I select current line in "List" table
 	* Add items
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |
@@ -1413,7 +1413,7 @@ Scenario: _2060016 check price in the PI when link document with different price
 			| 'Dress' | 'XS/Blue' |
 		And I select current line in "List" table
 		And I finish line editing in "ItemList" table
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |
@@ -1643,7 +1643,7 @@ Scenario: _2060018 check link form in the PI with 2 lines with the same items
 			| 'Store 03'  |
 		And I select current line in "List" table
 	* Add items	
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |
@@ -1658,7 +1658,7 @@ Scenario: _2060018 check link form in the PI with 2 lines with the same items
 		And I activate field named "ItemListQuantity" in "ItemList" table
 		And I input "9,000" text in the field named "ItemListQuantity" of "ItemList" table
 		And I finish line editing in "ItemList" table
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |
@@ -1751,7 +1751,7 @@ Scenario: _2060019 check link form in the PI with Serial Lot number
 				| 'Store 03'  |
 			And I select current line in "List" table
 		* Add items	
-			And I click the button named "Add"
+			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
 				| 'Description' |
@@ -1789,7 +1789,7 @@ Scenario: _2060019 check link form in the PI with Serial Lot number
 			And I finish line editing in "SerialLotNumbers" table
 			And I click "Ok" button		
 			And I finish line editing in "ItemList" table
-			And I click the button named "Add"
+			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
 				| 'Description' |
@@ -1817,7 +1817,7 @@ Scenario: _2060019 check link form in the PI with Serial Lot number
 			And I finish line editing in "SerialLotNumbers" table
 			And I click "Ok" button	
 			And I finish line editing in "ItemList" table
-			And I click the button named "Add"
+			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
 				| 'Description' |
@@ -1844,7 +1844,7 @@ Scenario: _2060019 check link form in the PI with Serial Lot number
 			And I finish line editing in "SerialLotNumbers" table
 			And I click "Ok" button	
 			And I finish line editing in "ItemList" table
-			And I click the button named "Add"
+			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
 				| 'Description' |
@@ -1908,7 +1908,7 @@ Scenario: _2060020 check button Show quantity in base unit in the Link form
 		And I select current line in "List" table	
 	* Filling in Item tab
 		And I move to "Items" tab
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |
@@ -1933,7 +1933,7 @@ Scenario: _2060020 check button Show quantity in base unit in the Link form
 		And I activate field named "Description" in "List" table
 		And I select current line in "List" table
 		And I finish line editing in "ItemList" table
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |

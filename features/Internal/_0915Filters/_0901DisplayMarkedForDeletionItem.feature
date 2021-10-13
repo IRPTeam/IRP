@@ -35,7 +35,7 @@ Scenario: _090200 preparation (display of items marked for deletion)
 Scenario: _090201 check that the items marked for deletion is not displayed in the PurchaseOrder
 	Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 	And I click the button named "FormCreate"
-	And I click the button named "Add"
+	And in the table "ItemList" I click the button named "ItemListAdd"
 	And I click choice button of "Item" attribute in "ItemList" table
 	And "List" table does not contain lines
 		| Description          |
@@ -45,7 +45,7 @@ Scenario: _090201 check that the items marked for deletion is not displayed in t
 Scenario: _090202 check that the items marked for deletion is not displayed in the Purchase invoice
 	Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 	And I click the button named "FormCreate"
-	And I click the button named "Add"
+	And in the table "ItemList" I click the button named "ItemListAdd"
 	And I click choice button of "Item" attribute in "ItemList" table
 	And "List" table does not contain lines
 		| Description       |
@@ -76,7 +76,7 @@ Scenario: _090204 check that the items marked for deletion is not displayed in t
 Scenario: _090205 check that the items marked for deletion is not displayed in the Inventory transfer
 	Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
 	And I click the button named "FormCreate"
-	And I click the button named "Add"
+	And in the table "ItemList" I click the button named "ItemListAdd"
 	And I click choice button of "Item" attribute in "ItemList" table
 	And "List" table does not contain lines
 		| Description       |
@@ -106,7 +106,7 @@ Scenario: _090207 check that the items marked for deletion is not displayed in t
 Scenario: _090208 check that the items marked for deletion is not displayed in the Purchase return order
 	Given I open hyperlink "e1cib/list/Document.PurchaseReturnOrder"
 	And I click the button named "FormCreate"
-	And I click the button named "Add"
+	And in the table "ItemList" I click the button named "ItemListAdd"
 	And I click choice button of "Item" attribute in "ItemList" table
 	And "List" table does not contain lines
 		| Description       |
@@ -116,7 +116,7 @@ Scenario: _090208 check that the items marked for deletion is not displayed in t
 Scenario: _090209 check that the items marked for deletion is not displayed in the Purchase return
 	Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
 	And I click the button named "FormCreate"
-	And I click the button named "Add"
+	And in the table "ItemList" I click the button named "ItemListAdd"
 	And I click choice button of "Item" attribute in "ItemList" table
 	And "List" table does not contain lines
 		| Description       |
@@ -126,7 +126,7 @@ Scenario: _090209 check that the items marked for deletion is not displayed in t
 Scenario: _090210 check that the items marked for deletion is not displayed in the Sales Return
 	Given I open hyperlink "e1cib/list/Document.SalesReturn"
 	And I click the button named "FormCreate"
-	And I click the button named "Add"
+	And in the table "ItemList" I click the button named "ItemListAdd"
 	And I click choice button of "Item" attribute in "ItemList" table
 	And "List" table does not contain lines
 		| Description       |
@@ -156,7 +156,7 @@ Scenario: _090212 check that the items marked for deletion is not displayed in t
 Scenario: _090213 check that the items marked for deletion is not displayed in the Shipment Confirmation
 	Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
 	And I click the button named "FormCreate"
-	And I click the button named "Add"
+	And in the table "ItemList" I click the button named "ItemListAdd"
 	And I click choice button of "Item" attribute in "ItemList" table
 	And "List" table does not contain lines
 		| Description       |

@@ -221,7 +221,7 @@ Scenario: _030008 create Special Offer Rule RangeDiscount
 	* Filling special offer rule: Basic Partner terms TRY, Dress,3
 		And I click "Set settings" button
 		And I click Select button of "Partner terms" field
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Value" attribute in "ValueList" table
 		And I go to line in "List" table
 		| 'Description'             |
@@ -268,7 +268,7 @@ Scenario: _030008 create Special Offer Rule RangeDiscount
 	* Filling special offer rule: Basic Partner terms TRY, Trousers
 		And I click "Set settings" button
 		And I click Select button of "Partner terms" field
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Value" attribute in "ValueList" table
 		And I go to line in "List" table
 		| 'Description'             |
@@ -694,7 +694,7 @@ Scenario: _030013 create Special Offer Rules (Partner term)
 	And I select "Partner terms in list" exact value from "Rule type" drop-down list
 	And I click Select button of "Partner terms" field
 	And Delay 2
-	And I click the button named "Add"
+	And in the table "ItemList" I click the button named "ItemListAdd"
 	And I click choice button of "Value" attribute in "ValueList" table
 	And I go to line in "List" table
 		| 'Description'             |
@@ -702,7 +702,7 @@ Scenario: _030013 create Special Offer Rules (Partner term)
 	And I select current line in "List" table
 	And Delay 1
 	And I finish line editing in "ValueList" table
-	And I click the button named "Add"
+	And in the table "ItemList" I click the button named "ItemListAdd"
 	And I click choice button of "Value" attribute in "ValueList" table
 	And I go to line in "List" table
 		| 'Description'             |
@@ -721,7 +721,7 @@ Scenario: _030013 create Special Offer Rules (Partner term)
 	And I select "Partner terms in list" exact value from "Rule type" drop-down list
 	And I click Select button of "Partner terms" field
 	And Delay 2
-	And I click the button named "Add"
+	And in the table "ItemList" I click the button named "ItemListAdd"
 	And I click choice button of "Value" attribute in "ValueList" table
 	And I go to line in "List" table
 		| 'Description'             |

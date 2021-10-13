@@ -1308,7 +1308,7 @@ Scenario:  _0154148 check that the Retail return receipt amount and the amount o
 			| 'Description'     |
 			| 'Retail customer' |
 		And I select current line in "List" table
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |
@@ -1357,7 +1357,7 @@ Scenario:  _0154148 check that the Retail return receipt amount and the amount o
 		And I click the button named "FormPost"
 		Then I wait that in user messages the "Payment amount [720,00] and return amount [700,00] not match" substring will appear in 10 seconds
 		And I move to "Item list" tab
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |
@@ -2124,7 +2124,7 @@ Scenario: _0154154 check filling in and refilling Retail return receipt
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Store" became equal to "Store 02"
 	* Check the item key autofill when adding Item (Item has one item key)
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |
@@ -2136,7 +2136,7 @@ Scenario: _0154154 check filling in and refilling Retail return receipt
 	* Check filling in prices when adding an Item and selecting an item key
 		* Filling in item and item key
 			And I delete a line in "ItemList" table
-			And I click the button named "Add"
+			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
 				| 'Description' |
@@ -2169,7 +2169,7 @@ Scenario: _0154154 check filling in and refilling Retail return receipt
 				| 'Trousers' | '400,00' | '38/Yellow' | '1,000' | 'pcs'  | 'Store 01' |
 	* Check filling in prices on new lines at agreement reselection
 		* Add line
-			And I click the button named "Add"
+			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
 				| 'Description' |
@@ -3032,7 +3032,7 @@ Scenario: _0154170 check function DontCalculateRow in the Retail return receipt
 		And I move to "Item list" tab
 	* Check filling in prices when adding an Item and selecting an item key
 		* Filling in item and item key
-			And I click the button named "Add"	
+			And in the table "ItemList" I click the button named "ItemListAdd"	
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
 				| 'Description' |
@@ -3046,7 +3046,7 @@ Scenario: _0154170 check function DontCalculateRow in the Retail return receipt
 			And I select current line in "List" table
 			And I input "2,000" text in "Q" field of "ItemList" table
 			And I finish line editing in "ItemList" table
-			And I click the button named "Add"	
+			And in the table "ItemList" I click the button named "ItemListAdd"	
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
 				| 'Description' |
@@ -3137,7 +3137,7 @@ Scenario: _0154170 check function DontCalculateRow in the Retail return receipt
 			And the editing text of form attribute named "ItemListTotalTaxAmount" became equal to "647,00"
 			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "4 199,00"
 		* Add new line and check calculation
-			And I click the button named "Add"		
+			And in the table "ItemList" I click the button named "ItemListAdd"		
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
 				| 'Description' |
@@ -3327,7 +3327,7 @@ Scenario: _0154172 check tax and net amount calculation when change total amount
 		And I remove checkbox "Price includes tax"
 		And I move to "Item list" tab			
 	* Filling in item and item key
-		And I click the button named "Add"	
+		And in the table "ItemList" I click the button named "ItemListAdd"	
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |
@@ -3341,7 +3341,7 @@ Scenario: _0154172 check tax and net amount calculation when change total amount
 		And I select current line in "List" table
 		And I input "2,000" text in "Q" field of "ItemList" table
 		And I finish line editing in "ItemList" table
-		And I click the button named "Add"	
+		And in the table "ItemList" I click the button named "ItemListAdd"	
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |

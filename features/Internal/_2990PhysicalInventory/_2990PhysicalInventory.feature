@@ -808,7 +808,7 @@ Scenario: _2990009 check for updates Update Exp Count
 		And in the table "ItemList" I click the button named "ItemListContextMenuDelete"
 		Then the number of "ItemList" table lines is "меньше или равно" 1
 	* Add one more line without stock remains
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |
@@ -1035,7 +1035,7 @@ Scenario: _2990010 create Physical inventory and Physical count by location with
 				| 'Main Company'   |
 			And I select current line in "List" table
 		* Add items
-			And I click the button named "Add"
+			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
 				| 'Description' |

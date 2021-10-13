@@ -223,7 +223,7 @@ Scenario: _060005 create Purchase invoice with the type of settlements under sta
 			And I select current line in "List" table
 		* Adding items to Purchase Invoice
 			And I move to "Item list" tab
-			And I click the button named "Add"
+			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
 				| 'Description' |

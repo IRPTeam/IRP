@@ -85,7 +85,7 @@ Scenario: _022501 create SC with transaction type return to vendor and create Pu
 			| 'Store 02'    |
 		And I select current line in "List" table
 	* Filling in items info
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |
@@ -100,7 +100,7 @@ Scenario: _022501 create SC with transaction type return to vendor and create Pu
 		And I activate "Quantity" field in "ItemList" table
 		And I input "5,000" text in "Quantity" field of "ItemList" table
 		And I finish line editing in "ItemList" table
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |

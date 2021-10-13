@@ -247,9 +247,19 @@ Procedure HTMLEvent(Form, Object, Val Data, AddInfo = Undefined) Export
 	ElsIf Data.value = "update_slider" Then
 		Notify("UpdateObjectPictures_UpdateAll", , Form.UUID);
 	ElsIf Data.value = "remove_picture" Then
-		FileRef = PictureViewerServer.GetFileRefByFileID(Data.ID);
-		PictureViewerServer.UnlinkFileFromObject(FileRef.Ref, Object.Ref);
+		FileInfo = PictureViewerServer.GetFileRefByFileID(Data.ID);
+		PictureViewerServer.UnlinkFileFromObject(FileInfo.Ref, Object.Ref);
 		Notify("UpdateObjectPictures_Delete", Data.ID, Form.UUID);
+	ElsIf Data.value = "zoom_img" Then
+		FileInfo = PictureViewerServer.GetFileRefByFileID(Data.ID);
+		OpenValueAsync(FileInfo.Ref);
+	ElsIf Data.value = "change_priority" Then
+		FileInfo = PictureViewerServer.GetFileRefByFileID(Data.ID);
+		Rise = Number(Data.priority);
+		PictureViewerServer.ChangePriorityFile(Object.Ref, FileInfo.Ref, Rise);
+		Notify("UpdateObjectPictures_UpdateAll", , Form.UUID);
+	Else
+		Return;
 	EndIf;
 EndProcedure
 

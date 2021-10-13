@@ -138,7 +138,8 @@ Function GetPicturesByObjectRef(OwnerRef, DirectLink = False, FileRef = Undefine
 		|	AttachedFiles.File.Volume.GETIntegrationSettings AS GETIntegrationSettings,
 		|	AttachedFiles.File.Volume.GETIntegrationSettings.IntegrationType = VALUE(Enum.IntegrationType.LocalFileStorage) AS
 		|		isLocalPictureURL,
-		|	AttachedFiles.File.URI AS URI
+		|	AttachedFiles.File.URI AS URI,
+		|	AttachedFiles.Priority AS Priority
 		|FROM
 		|	InformationRegister.AttachedFiles AS AttachedFiles
 		|		INNER JOIN tmp AS tmp
@@ -148,7 +149,10 @@ Function GetPicturesByObjectRef(OwnerRef, DirectLink = False, FileRef = Undefine
 		|		When &ByOneFile
 		|			THEN AttachedFiles.File = &File
 		|		ELSE TRUE
-		|	END";
+		|	END
+		|
+		|ORDER BY
+		|	Priority";
 	Else
 		Query.Text =
 		"SELECT
@@ -158,7 +162,8 @@ Function GetPicturesByObjectRef(OwnerRef, DirectLink = False, FileRef = Undefine
 		|	AttachedFiles.File.Volume.GETIntegrationSettings AS GETIntegrationSettings,
 		|	AttachedFiles.File.Volume.GETIntegrationSettings.IntegrationType = VALUE(Enum.IntegrationType.LocalFileStorage) AS
 		|		isLocalPictureURL,
-		|	AttachedFiles.File.URI AS URI
+		|	AttachedFiles.File.URI AS URI,
+		|	AttachedFiles.Priority AS Priority
 		|FROM
 		|	InformationRegister.AttachedFiles AS AttachedFiles
 		|WHERE
@@ -167,7 +172,10 @@ Function GetPicturesByObjectRef(OwnerRef, DirectLink = False, FileRef = Undefine
 		|		When &ByOneFile
 		|			THEN AttachedFiles.File = &File
 		|		ELSE TRUE
-		|	END";
+		|	END
+		|
+		|ORDER BY
+		|	Priority";
 	EndIf;
 	Query.SetParameter("Owner", OwnerRef);
 	Query.SetParameter("File", FileRef);
@@ -324,15 +332,93 @@ Function CreateFile(Volume, FileInfo) Export
 	Return FileObject.Ref;
 EndFunction
 
-Procedure LinkFileToObject(FileRef, OwnerRef) Export
+Procedure LinkFileToObject(FileRef, OwnerRef, Val Priority = Undefined) Export
+	
+	If Priority = Undefined Then
+		Query = New Query;
+		Query.Text =
+			"SELECT TOP 1
+			|	AttachedFiles.Priority AS Priority
+			|FROM
+			|	InformationRegister.AttachedFiles AS AttachedFiles
+			|WHERE
+			|	AttachedFiles.Owner = &Owner
+			|
+			|ORDER BY
+			|	Priority DESC";
+		
+		Query.SetParameter("Owner", OwnerRef);
+		QueryResult = Query.Execute().Select();
+		Priority = 0;
+		If QueryResult.Next() Then
+			Priority = QueryResult.Priority + 1;
+		EndIf;
+	
+	EndIf;
 	RecordSet = InformationRegisters.AttachedFiles.CreateRecordSet();
 	RecordSet.Filter.Owner.Set(OwnerRef);
 	RecordSet.Filter.File.Set(FileRef);
 	NewRecord = RecordSet.Add();
 	NewRecord.Owner = OwnerRef;
 	NewRecord.File = FileRef;
+	NewRecord.Priority = Priority;
 	NewRecord.CreationDate = CurrentUniversalDate();
 	RecordSet.Write();
+EndProcedure
+
+// Change priority file.
+// 
+// Parameters:
+//  OwnerRef - DefinedType.typeAddPropertyOwners - Owner ref
+//  FileRef - CatalogRef.Files - File ref
+//  Rise - Number - Rise [1, -1], if > 0 then rise
+Procedure ChangePriorityFile(OwnerRef, FileRef, Rise = 0) Export
+	
+	If Rise = 0 Then
+		Return;
+	EndIf;
+	
+	Query = New Query;
+	Query.Text =
+		"SELECT
+		|	AttachedFiles.Priority AS Priority,
+		|	AttachedFiles.Priority AS NewPriority,
+		|	AttachedFiles.File
+		|FROM
+		|	InformationRegister.AttachedFiles AS AttachedFiles
+		|WHERE
+		|	AttachedFiles.Owner = &Owner
+		|
+		|ORDER BY
+		|	Priority";
+	
+	Query.SetParameter("Owner", OwnerRef);
+	FilesPriorityList = Query.Execute().Unload();
+	For Index = 0 To FilesPriorityList.Count() - 1 Do
+		FilesPriorityList[Index].NewPriority = Index;
+	EndDo;
+
+	FindFile = FilesPriorityList.FindRows(New Structure("File", FileRef));
+	CurrentPriority = FindFile[0].NewPriority;
+	NewPriority = CurrentPriority - Rise;
+	FindFile[0].NewPriority = NewPriority;
+	If Rise > 0 Then
+		For Index = NewPriority To CurrentPriority - 1 Do
+			FilesPriorityList[Index].NewPriority = FilesPriorityList[Index].NewPriority + 1;
+		EndDo;
+	Else
+		For Index = CurrentPriority + 1 To NewPriority Do
+			FilesPriorityList[Index].NewPriority = FilesPriorityList[Index].NewPriority - 1;
+		EndDo;
+	EndIf;
+	
+	For Index = 0 To FilesPriorityList.Count() - 1 Do
+		If Not FilesPriorityList[Index].NewPriority = FilesPriorityList[Index].Priority Then
+			LinkFileToObject(FilesPriorityList[Index].File, OwnerRef, FilesPriorityList[Index].NewPriority);			
+		EndIf;
+	EndDo;
+	
+
 EndProcedure
 
 Procedure UnlinkFileFromObject(FileRef, OwnerRef) Export
@@ -385,7 +471,7 @@ Function PicturesInfoForSlider(ItemRef, FileRef = Undefined, UseFullSizePhoto = 
 	If UseFullSizePhoto Then
 		PicArray = New Array();
 		For Each Picture In Pictures Do
-			PictureStructure = New Structure("Src, SrcBD, ID, PictureURLStructure, Preview");
+			PictureStructure = New Structure("Src, SrcBD, ID, PictureURLStructure, Preview, Text");
 			PicInfo = GetPictureURL(Picture);
 			PictureStructure.PictureURLStructure = PicInfo;
 			PictureStructure.Src = PicInfo.PictureURL;
@@ -397,6 +483,7 @@ Function PicturesInfoForSlider(ItemRef, FileRef = Undefined, UseFullSizePhoto = 
 					PictureStructure.SrcBD = EmptyPic.GetBinaryData();
 				EndTry;
 			EndIf;
+			PictureStructure.Text = Picture.Ref.Description;
 			PictureStructure.ID = Picture.FileID;
 			PictureStructure.Preview = GetURL(Picture.Ref, "Preview");
 			PicArray.Add(PictureStructure);
@@ -404,8 +491,9 @@ Function PicturesInfoForSlider(ItemRef, FileRef = Undefined, UseFullSizePhoto = 
 	Else
 		PicArray = New Array();
 		For Each Picture In Pictures Do
-			PictureStructure = New Structure("Src, SrcBD, ID, PictureURLStructure, Preview");
+			PictureStructure = New Structure("Src, SrcBD, ID, PictureURLStructure, Preview, Text");
 			PictureStructure.Src = GetURL(Picture.Ref, "Preview");
+			PictureStructure.Text = Picture.Ref.Description;
 			PictureStructure.ID = Picture.FileID;
 			PictureStructure.Preview = GetURL(Picture.Ref, "Preview");
 			PicArray.Add(PictureStructure);

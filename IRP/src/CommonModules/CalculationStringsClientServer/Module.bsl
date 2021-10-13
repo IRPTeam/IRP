@@ -838,7 +838,15 @@ Procedure DoTableActions(Object, Form, Settings, Actions, AddInfo = Undefined) E
 		If Action.Key = "UpdateTotalAmount" Then
 			UpdateTotalAmount(Object, Form, Settings);
 		EndIf;
-
+		
+		If Action.Key = "UpdateRowUseGoodsReceipt" Then
+			UpdateRowUseGoodsReceipt(Object, Form, Settings);
+		EndIf;
+		
+		If Action.Key = "UpdateRowUseShipmentConfirmation" Then
+			UpdateRowUseShipmentConfirmation(Object, Form, Settings);
+		EndIf;
+		
 	EndDo;
 
 EndProcedure
@@ -957,6 +965,26 @@ EndProcedure
 
 Procedure UpdateTotalAmount(Object, Form, Settings) Export
 	Return;
+EndProcedure
+
+Procedure UpdateRowUseGoodsReceipt(Object, Form, Settings) Export
+	CurrentData = Settings.Rows[0];
+	If ValueIsFilled(CurrentData.Store) And CommonFunctionsClientServer.ObjectHasProperty(CurrentData, "UseGoodsReceipt") Then
+		StoreInfo = DocumentsServer.GetStoreInfo(CurrentData.Store, CurrentData.ItemKey);
+		If Not StoreInfo.IsService Then
+			CurrentData.UseGoodsReceipt = StoreInfo.UseGoodsReceipt;
+		EndIf;
+	EndIf;
+EndProcedure
+
+Procedure UpdateRowUseShipmentConfirmation(Object, Form, Settings) Export
+	CurrentData = Settings.Rows[0];
+	If ValueIsFilled(CurrentData.Store) And CommonFunctionsClientServer.ObjectHasProperty(CurrentData, "UseShipmentConfirmation") Then
+		StoreInfo = DocumentsServer.GetStoreInfo(CurrentData.Store, CurrentData.ItemKey);
+		If Not StoreInfo.IsService Then
+			CurrentData.UseShipmentConfirmation = StoreInfo.UseShipmentConfirmation;
+		EndIf;
+	EndIf;
 EndProcedure
 
 #EndRegion

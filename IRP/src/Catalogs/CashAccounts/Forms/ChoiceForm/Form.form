@@ -85,6 +85,15 @@
             <value>Enum.CashAccountTypes.EnumValue.Transit</value>
           </value>
         </choiceList>
+        <choiceList>
+          <presentation>
+            <key>en</key>
+            <value>POS</value>
+          </presentation>
+          <value xsi:type="core:ReferenceValue">
+            <value>Enum.CashAccountTypes.EnumValue.POS</value>
+          </value>
+        </choiceList>
       </extInfo>
     </items>
     <visible>true</visible>

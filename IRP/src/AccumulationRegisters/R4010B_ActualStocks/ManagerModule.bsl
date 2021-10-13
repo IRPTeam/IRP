@@ -12,12 +12,10 @@ Function GetLockFieldNames() Export
 EndFunction
 
 Function GetExistsRecords(Ref, RecordType = Undefined, AddInfo = Undefined) Export
-	Return PostingServer.GetExistsRecordsFromAccRegister(Ref, "AccumulationRegister.R4010B_ActualStocks", RecordType,
-		AddInfo);
+	Return PostingServer.GetExistsRecordsFromAccRegister(Ref, "AccumulationRegister.R4010B_ActualStocks", RecordType, AddInfo);
 EndFunction
 
-Function CheckBalance(Ref, ItemList_InDocument, Records_InDocument, Records_Exists, RecordType, Unposting,
-	AddInfo = Undefined) Export
+Function CheckBalance(Ref, ItemList_InDocument, Records_InDocument, Records_Exists, RecordType, Unposting, AddInfo = Undefined) Export
 
 	If Not PostingServer.CheckingBalanceIsRequired(Ref, "CheckBalance_R4010B_ActualStocks") Then
 		Return True;

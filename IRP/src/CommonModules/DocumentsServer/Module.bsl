@@ -923,3 +923,14 @@ Function GetItemAndItemKeyByPartnerItem(PartnerItem) Export
 	Result.ItemKey = PartnerItem.ItemKey;
 	Return Result;
 EndFunction
+
+Function GetStoreInfo(Store, ItemKey) Export
+	Result = New Structure();
+	Result.Insert("IsService", True);
+	If ValueIsFilled(ItemKey) Then
+		Result.IsService = (ItemKey.Item.ItemType.Type = Enums.ItemTypes.Service);
+	ENdIf;
+	Result.Insert("UseGoodsReceipt", Store.UseGoodsReceipt);
+	Result.Insert("UseShipmentConfirmation", Store.UseShipmentConfirmation);
+	Return Result;
+EndFunction

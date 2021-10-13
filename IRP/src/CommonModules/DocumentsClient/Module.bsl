@@ -758,6 +758,18 @@ Procedure StoreOnChangeContinue(Answer, AdditionalParameters, AddInfo = Undefine
 
 		For Each Row In AdditionalParameters.Rows Do
 			Row.Store = Form.Store;
+			If ValueIsFilled(Row.Store) And CommonFunctionsClientServer.ObjectHasProperty(Row, "UseShipmentConfirmation") Then
+				StoreInfo = DocumentsServer.GetStoreInfo(Row.Store, Row.ItemKey);
+				If Not StoreInfo.IsService Then
+					Row.UseShipmentConfirmation = StoreInfo.UseShipmentConfirmation;
+				EndIf;
+			EndIf;
+			If ValueIsFilled(Row.Store) And CommonFunctionsClientServer.ObjectHasProperty(Row, "UseGoodsReceipt") Then
+				StoreInfo = DocumentsServer.GetStoreInfo(Row.Store, Row.ItemKey);
+				If Not StoreInfo.IsService Then
+					Row.UseGoodsReceipt = StoreInfo.UseGoodsReceipt;
+				EndIf;
+			EndIf;
 		EndDo;
 
 		Form.Items.Store.InputHint = "";
@@ -1929,20 +1941,10 @@ Procedure ChangeCashAccount(Object, Form, Settings) Export
 	EndIf;
 EndProcedure
 
-Procedure ChangeShipmentConfirmationsBeforeSalesInvoice(Object, Form, Settings) Export
-	Object.ShipmentConfirmationsBeforeSalesInvoice
-				= ServiceSystemServer.GetObjectAttribute(Object.Partner, "ShipmentConfirmationsBeforeSalesInvoice");
-EndProcedure
-
 Procedure ChangeDeliveryDate(Object, Form, Settings) Export
 	Form.DeliveryDate = Settings.AgreementInfo.DeliveryDate;
 
 	DeliveryDateOnChange(Object, Form);
-EndProcedure
-
-Procedure ChangeGoodsReceiptBeforePurchaseInvoice(Object, Form, Settings) Export
-	Object.GoodsReceiptBeforePurchaseInvoice 
-				= ServiceSystemServer.GetObjectAttribute(Object.Partner, "GoodsReceiptBeforePurchaseInvoice");
 EndProcedure
 
 Procedure ChangeCurrency(Object, Form, Settings, AddInfo = Undefined) Export
@@ -2267,16 +2269,6 @@ Procedure DoTitleActions(Object, Form, Settings, Actions, AddInfo = Undefined) E
 
 		If Action.Key = "UpdateCurrency" Then
 			UpdateCurrency(Object, Form, Settings);
-			Continue;
-		EndIf;
-
-		If Action.Key = "ChangeShipmentConfirmationsBeforeSalesInvoice" Then
-			ChangeShipmentConfirmationsBeforeSalesInvoice(Object, Form, Settings);
-			Continue;
-		EndIf;
-
-		If Action.Key = "ChangeGoodsReceiptBeforePurchaseInvoice" Then
-			ChangeGoodsReceiptBeforePurchaseInvoice(Object, Form, Settings);
 			Continue;
 		EndIf;
 

@@ -34,16 +34,7 @@ EndProcedure
 
 Function AddAttributeInfoForHTML(ItemRef, UUID, FileRef = Undefined) Export
 	Filter = New Structure("ShowInHTML", True);
-	Str = AddAttributesAndPropertiesServer.PrepareDataForHTML(ItemRef, Filter);
-
-	For Each Row In Str.Get("Properties") Do
-		Row.Icon = PutToTempStorage(Row.Icon, UUID);
-	EndDo;
-	For Each Row In Str.Get("Attributes") Do
-		Row.Icon = PutToTempStorage(Row.Icon, UUID);
-	EndDo;
-	Return Str;
-
+	Return AddAttributesAndPropertiesServer.PrepareDataForHTML(ItemRef, Filter);
 EndFunction
 
 #EndRegion

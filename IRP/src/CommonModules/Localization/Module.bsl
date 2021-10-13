@@ -616,7 +616,7 @@ Function Strings(Lang) Export
 	Strings.Insert("Error_101", NStr("en = 'Select any document'", Lang));
 	Strings.Insert("Error_102", NStr("en = 'Default file storage volume is not set.'", Lang));
 	Strings.Insert("Error_103", NStr("en = '%1 is undefined.'", Lang));
-
+	Strings.Insert("Error_104", NStr("en = 'Document [%1] have negative stock balance'", Lang));
 #EndRegion
 
 #Region InfoMessages

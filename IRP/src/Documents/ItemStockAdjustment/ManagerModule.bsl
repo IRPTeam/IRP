@@ -72,8 +72,7 @@ Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
 	AccReg = AccumulationRegisters;
 	LineNumberAndItemKeyFromItemList = PostingServer.GetLineNumberAndItemKeyFromItemList(Ref, "Document.ItemStockAdjustment.ItemList");
 
-	Parameters.Insert("RecordType", AccumulationRecordType.Expense);
-	PostingServer.CheckBalance_AfterWrite(Ref, Cancel, Parameters, "Document.ItemStockAdjustment.ItemList", AddInfo);
+	CheckAfterWrite_R4010B_R4011B(Ref, Cancel, Parameters, AddInfo);
 	
 	Filter = New Structure("RecordType", AccumulationRecordType.Receipt);
 	
@@ -92,6 +91,38 @@ Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
 		Filter.RecordType, Unposting, AddInfo) Then
 		Cancel = True;
 	EndIf;
+EndProcedure
+
+Procedure CheckAfterWrite_R4010B_R4011B(Ref, Cancel, Parameters, AddInfo = Undefined) Export
+	If Not (Parameters.Property("Unposting") And Parameters.Unposting) Then
+		// is posting
+		FreeStocksTable   =  PostingServer.GetQueryTableByName("R4011B_FreeStocks", Parameters, True);
+		ActualStocksTable =  PostingServer.GetQueryTableByName("R4010B_ActualStocks", Parameters, True);
+		Exists_FreeStocksTable   =  PostingServer.GetQueryTableByName("Exists_R4011B_FreeStocks", Parameters, True);
+		Exists_ActualStocksTable =  PostingServer.GetQueryTableByName("Exists_R4010B_ActualStocks", Parameters, True);
+
+		Filter = New Structure("RecordType", AccumulationRecordType.Expense);
+
+		CommonFunctionsClientServer.PutToAddInfo(AddInfo, "R4011B_FreeStocks", FreeStocksTable.Copy(Filter));
+		CommonFunctionsClientServer.PutToAddInfo(AddInfo, "R4010B_ActualStocks", ActualStocksTable.Copy(Filter));
+		CommonFunctionsClientServer.PutToAddInfo(AddInfo, "Exists_R4011B_FreeStocks", Exists_FreeStocksTable.Copy(Filter));
+		CommonFunctionsClientServer.PutToAddInfo(AddInfo, "Exists_R4010B_ActualStocks", Exists_ActualStocksTable.Copy(Filter));
+
+		Parameters.Insert("RecordType", Filter.RecordType);
+		PostingServer.CheckBalance_AfterWrite(Ref, Cancel, Parameters, "Document.ItemStockAdjustment.ItemList", AddInfo);
+		Filter = New Structure("RecordType", AccumulationRecordType.Receipt);
+
+		CommonFunctionsClientServer.PutToAddInfo(AddInfo, "R4011B_FreeStocks", FreeStocksTable.Copy(Filter));
+		CommonFunctionsClientServer.PutToAddInfo(AddInfo, "R4010B_ActualStocks", ActualStocksTable.Copy(Filter));
+		CommonFunctionsClientServer.PutToAddInfo(AddInfo, "Exists_R4011B_FreeStocks", Exists_FreeStocksTable.Copy(Filter));
+		CommonFunctionsClientServer.PutToAddInfo(AddInfo, "Exists_R4010B_ActualStocks", Exists_ActualStocksTable.Copy(Filter));
+
+		Parameters.Insert("RecordType", Filter.RecordType);
+		PostingServer.CheckBalance_AfterWrite(Ref, Cancel, Parameters, "Document.ItemStockAdjustment.ItemList", AddInfo);
+	Else
+		// is unposting
+		PostingServer.CheckBalance_AfterWrite(Ref, Cancel, Parameters, "Document.ItemStockAdjustment.ItemList", AddInfo);
+	EndIf;	
 EndProcedure
 
 #EndRegion

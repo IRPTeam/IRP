@@ -32,8 +32,7 @@ EndProcedure
 &AtClient
 Procedure AddAttributesHTMLDocumentComplete(Item)
 	HTMLWindow = PictureViewerClient.InfoDocumentComplete(Item);
-	AddAttributeInfo = AddAttributesAndPropertiesClient.AddAttributeInfoForHTML(Object.Ref, UUID);
-	JSON = CommonFunctionsServer.SerializeJSON(AddAttributeInfo);
+	JSON = AddAttributesAndPropertiesClient.AddAttributeInfoForHTML(Object.Ref, UUID);
 	HTMLWindow.fillData(JSON);
 EndProcedure
 
@@ -42,12 +41,12 @@ EndProcedure
 #Region PictureViewer
 
 &AtClient
-Procedure PictureViewHTMLDocumentComplete(Item)
+Async Procedure PictureViewHTMLDocumentComplete(Item)
 	PictureViewerClient.UpdateHTMLPicture(Item, ThisObject);
 EndProcedure
 
 &AtClient
-Procedure PictureViewHTMLOnClick(Item, EventData, StandardProcessing)
+Async Procedure PictureViewHTMLOnClick(Item, EventData, StandardProcessing)
 	PictureViewerClient.PictureViewHTMLOnClick(ThisObject, Item, EventData, StandardProcessing);
 EndProcedure
 

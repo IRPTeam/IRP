@@ -1905,6 +1905,8 @@ Function ExtractData_FromSI(BasisesTable, DataReceiver, AddInfo = Undefined)
 							  |	ItemList.Detail AS Detail,
 							  |	ItemList.Store.UseShipmentConfirmation
 							  |	AND NOT ItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS UseShipmentConfirmation,
+							  |	ItemList.Store.UseGoodsReceipt
+							  |	AND NOT ItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS UseGoodsReceipt,
 							  |	VALUE(Enum.ShipmentConfirmationTransactionTypes.Sales) AS TransactionType,
 							  |	0 AS Quantity,
 							  |	ISNULL(ItemList.QuantityInBaseUnit, 0) AS OriginalQuantity,
@@ -2402,6 +2404,8 @@ Function ExtractData_FromPI(BasisesTable, DataReceiver, AddInfo = Undefined)
 							  |	ItemList.ExpenseType AS ExpenseType,
 							  |	ItemList.AdditionalAnalytic AS AdditionalAnalytic,
 							  |	ItemList.Detail AS Detail,
+							  |	ItemList.Store.UseShipmentConfirmation
+							  |	AND NOT ItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS UseShipmentConfirmation,
 							  |	ItemList.Store.UseGoodsReceipt
 							  |	AND NOT ItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS UseGoodsReceipt,
 							  |	VALUE(Enum.GoodsReceiptTransactionTypes.Purchase) AS TransactionType,

@@ -37,6 +37,8 @@
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>
   <defaultObjectForm>Catalog.UnitsOfMeasurement.Form.ItemForm</defaultObjectForm>
+  <defaultListForm>Catalog.UnitsOfMeasurement.Form.ListForm</defaultListForm>
+  <defaultChoiceForm>Catalog.UnitsOfMeasurement.Form.ChoiceForm</defaultChoiceForm>
   <attributes uuid="bb100a4b-60c6-448a-b812-8c62687c76fc">
     <name>Symbol</name>
     <synonym>
@@ -62,6 +64,24 @@
     <synonym>
       <key>en</key>
       <value>Item form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="2b9b9211-f52b-4877-8700-460d7850856b">
+    <name>ListForm</name>
+    <synonym>
+      <key>en</key>
+      <value>List form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="9f8c599a-16d4-4d9c-9dc4-4c75f03cab77">
+    <name>ChoiceForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Choice form</value>
     </synonym>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>

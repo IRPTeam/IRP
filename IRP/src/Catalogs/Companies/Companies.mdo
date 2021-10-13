@@ -206,6 +206,10 @@
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
+      <choiceParameterLinks>
+        <name>Filter.Owner</name>
+        <field>Catalog.Companies.TabularSection.AddAttributes.Attribute.Property</field>
+      </choiceParameterLinks>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>

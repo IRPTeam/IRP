@@ -103,8 +103,8 @@ Scenario: _2070002 check locking header in the SO with linked documents (several
 		And I click "OK" button
 		Then there are lines in TestClient message log
 			|'Wrong linked data [Company] used value [Main Company] wrong value [Second Company]'|
-			|'Wrong linked data [Partner] used value [Ferron BP] wrong value [Kalipso]'|
-			|'Wrong linked data [LegalName] used value [Company Ferron BP] wrong value [Company Kalipso]'|
+			|'Wrong linked data [PartnerSales] used value [Ferron BP] wrong value [Kalipso]'|
+			|'Wrong linked data [LegalNameSales] used value [Company Ferron BP] wrong value [Company Kalipso]'|
 			|'Wrong linked row [1] for column [Store] used value [Store 02] wrong value [Store 03]'|
 		And I close all client application windows
 

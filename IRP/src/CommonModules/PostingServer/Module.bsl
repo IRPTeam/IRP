@@ -822,7 +822,7 @@ Function CheckAllExpenses(Parameters)
 			Cancel, PostingParameters, CheckAddInfo);
 		If Cancel Then
 			// Message with error
-			CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_098, String(RowExpenseRecorders.Recorder)));
+			CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_104, String(RowExpenseRecorders.Recorder)));
 			ArrayOfPostingErrorMessages = CommonFunctionsClientServer.GetFromAddInfo(CheckAddInfo,
 				"ArrayOfPostingErrorMessages", New Array());
 			If ArrayOfPostingErrorMessages.Count() Then

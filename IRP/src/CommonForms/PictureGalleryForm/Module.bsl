@@ -9,13 +9,8 @@ Function GetPicturesRefs()
 	Query.Text =
 	"SELECT
 	|	Files.Ref,
-	|	Files.Description,
 	|	Files.FileID,
-	|	NOT Files.Volume = VALUE(Catalog.IntegrationSettings.EmptyRef) AS isFilledVolume,
-	|	Files.Volume.GETIntegrationSettings AS GETIntegrationSettings,
-	|	Files.Volume.GETIntegrationSettings.IntegrationType = VALUE(Enum.IntegrationType.LocalFileStorage) AS
-	|		isLocalPictureURL,
-	|	Files.URI,
+	|	Files.Description,
 	|	Files.isPreviewSet
 	|FROM
 	|	Catalog.Files AS Files
@@ -27,11 +22,11 @@ Function GetPicturesRefs()
 
 	While QuerySelection.Next() Do
 		Map = New Structure("ID, Src, Name, Preview, isPreviewSet");
-		PicInfo = PictureViewerServer.GetPictureURL(QuerySelection);
-		Map.Src = PicInfo.PictureURL;
-		Map.isPreviewSet = QuerySelection.isPreviewSet;
 		If QuerySelection.isPreviewSet Then
-			Map.Preview = QuerySelection.Ref.Preview.Get();
+			URL = GetURL(QuerySelection.Ref, "Preview");
+			Map.Src = URL;
+			Map.isPreviewSet = True;
+			Map.Preview = URL;
 		EndIf;
 		Map.ID = QuerySelection.FileID;
 		Map.Name = QuerySelection.Description;
@@ -41,27 +36,22 @@ Function GetPicturesRefs()
 	Map = New Structure();
 	Map.Insert("Pictures", ArrayOfResult);
 
-	Return Map;
+	JSON = CommonFunctionsServer.SerializeJSON(Map);
+	Return JSON;
 EndFunction
 
 &AtClient
 Procedure HTMLGalleryDocumentComplete(Item)
 	HTMLWindow = PictureViewerClient.InfoDocumentComplete(Item);
-	PicturesArray = GetPicturesRefs();
-
-	For Each Pic In PicturesArray.Pictures Do
-		If Pic.isPreviewSet Then
-			Pic.Preview = PutToTempStorage(Pic.Preview, UUID);
-		EndIf;
-	EndDo;
-
-	JSON = CommonFunctionsServer.SerializeJSON(PicturesArray);
+	JSON = GetPicturesRefs();
 	HTMLWindow.fillImageGallery(JSON);
 EndProcedure
 
 &AtClient
 Procedure HTMLGalleryOnClick(Item, EventData, StandardProcessing)
-	StandardProcessing = EventData.Href = Undefined;
+	If Not EventData.Href = Undefined Then
+		StandardProcessing = False;
+	EndIf;
 
 	If EventData.Button = Undefined Or Not EventData.Button.Id = "call1CEvent" Then
 		Return;

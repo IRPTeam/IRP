@@ -147,7 +147,9 @@ Scenario: _2060001 preparation
 	When Create PO and GR for link
 	And I execute 1C:Enterprise script at server
 			| "Documents.PurchaseOrder.FindByNumber(1052).GetObject().Write(DocumentWriteMode.Posting);"|
-			| "Documents.GoodsReceipt.FindByNumber(1053).GetObject().Write(DocumentWriteMode.Posting);" |		
+			| "Documents.GoodsReceipt.FindByNumber(1053).GetObject().Write(DocumentWriteMode.Posting);" |	
+	When Create catalog CancelReturnReasons objects
+		
 
 			
 	
@@ -1027,9 +1029,9 @@ Scenario: _2060008 check link/unlink form in the PR
 	* Check RowIDInfo
 		And "RowIDInfo" table contains lines
 			| '#' | 'Basis'                                          | 'Next step' | 'Q'      | 'Current step' |
-			| '1' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' | ''          | '10,000' | 'PRO&PR'       |
-			| '2' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' | ''          | '3,000'  | 'PRO&PR'       |
-			| '3' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' | ''          | '24,000' | 'PRO&PR'       |
+			| '1' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' | 'SC'          | '10,000' | 'PRO&PR'       |
+			| '2' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' | 'SC'          | '3,000'  | 'PRO&PR'       |
+			| '3' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' | 'SC'          | '24,000' | 'PRO&PR'       |
 		Then the number of "RowIDInfo" table lines is "равно" "3"
 	* Unlink line
 		And I click the button named "LinkUnlinkBasisDocuments"			
@@ -1061,9 +1063,9 @@ Scenario: _2060008 check link/unlink form in the PR
 		And I click "Save" button
 		And "RowIDInfo" table contains lines
 			| '#' | 'Basis'                                          | 'Next step' | 'Q'      | 'Current step' |
-			| '1' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' | ''          | '10,000' | 'PRO&PR'       |
-			| '2' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' | ''          | '3,000'  | 'PRO&PR'       |
-			| '3' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' | ''          | '24,000' | 'PRO&PR'       |
+			| '1' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' | 'SC'          | '10,000' | 'PRO&PR'       |
+			| '2' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' | 'SC'          | '3,000'  | 'PRO&PR'       |
+			| '3' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' | 'SC'          | '24,000' | 'PRO&PR'       |
 		Then the number of "RowIDInfo" table lines is "равно" "3"
 		And "ItemList" table contains lines
 			| 'Item'  | 'Item key' | 'Q'      | 'Unit'           | 'Purchase invoice'                               |
@@ -1100,9 +1102,9 @@ Scenario: _2060008 check link/unlink form in the PR
 		And I click "Save" button
 		And "RowIDInfo" table contains lines
 			| '#' | 'Basis'                                          | 'Next step' | 'Q'      | 'Current step' |
-			| '1' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' | ''          | '10,000' | 'PRO&PR'       |
-			| '2' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' | ''          | '2,000'  | 'PRO&PR'       |
-			| '3' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' | ''          | '3,000'  | 'PRO&PR'       |
+			| '1' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' | 'SC'          | '10,000' | 'PRO&PR'       |
+			| '2' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' | 'SC'          | '2,000'  | 'PRO&PR'       |
+			| '3' | 'Purchase invoice 101 dated 05.03.2021 12:14:08' | 'SC'          | '3,000'  | 'PRO&PR'       |
 		Then the number of "RowIDInfo" table lines is "равно" "3"
 	* Unlink all lines
 		And I click the button named "LinkUnlinkBasisDocuments"	
@@ -1681,7 +1683,7 @@ Scenario: _2060018 check link form in the PI with 2 lines with the same items
 			| '1' | '9,000'    | 'Scarf (XS/Red)'   | 'Store 03' | 'pcs'  |
 		And I go to line in "BasisesTree" table
 			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' |
-			| 'TRY'      | '100,00' | '10,000'   | 'Dress (S/Yellow)' | 'pcs'  |
+			| 'TRY'      | '100,00' | '10,000'   | 'Scarf (XS/Red)' | 'pcs'  |
 		And in the table "BasisesTree" I click the button named "Link"
 		And I go to line in "ItemListRows" table
 			| '#' | 'Quantity' | 'Row presentation' | 'Store'    | 'Unit' |
@@ -1694,7 +1696,7 @@ Scenario: _2060018 check link form in the PI with 2 lines with the same items
 			| 'Goods receipt 1 053 dated 07.09.2021 21:34:43' |
 		And I go to line in "BasisesTree" table
 			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' |
-			| 'TRY'      | '100,00' | '10,000'   | 'Dress (S/Yellow)' | 'pcs'  |
+			| 'TRY'      | '100,00' | '10,000'   | 'Scarf (XS/Red)' | 'pcs'  |
 		And in the table "BasisesTree" I click the button named "Link"
 		And I click "Ok" button
 		And "ItemList" table contains lines

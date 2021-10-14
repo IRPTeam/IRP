@@ -269,6 +269,7 @@ Scenario: _020013 check movements by status and status history of an Inventory T
 			And I select current line in "List" table
 			And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
 			And I select "Send" exact value from "Status" drop-down list
+			And Delay 2
 			And I click the button named "FormPostAndClose"
 			And I close current window
 			Given I open hyperlink "e1cib/list/AccumulationRegister.R4020T_StockTransferOrders"
@@ -289,7 +290,7 @@ Scenario: _020013 check movements by status and status history of an Inventory T
 			And "List" table contains lines
 				| 'Object'                         | 'Status'   |
 				| '$$InventoryTransferOrder020013$$' | 'Wait' |
-				| '$$InventoryTransferOrder020013$$' | 'Send'     |
+				| '$$InventoryTransferOrder020013$$' | 'Approved'     |
 				| '$$InventoryTransferOrder020013$$' | 'Receive'  |
 			And I close current window
 			And I click the button named "FormPostAndClose"

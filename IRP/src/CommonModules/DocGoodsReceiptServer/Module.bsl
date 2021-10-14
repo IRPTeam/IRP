@@ -14,6 +14,7 @@ Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 	EndIf;
 
 	FillTransactionTypeChoiceList(Form);
+	RowIDInfoServer.OnCreateAtServer(Object, Form, Cancel, StandardProcessing);
 EndProcedure
 
 Procedure AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters) Export
@@ -24,6 +25,7 @@ Procedure AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters) Expor
 
 	FillItemList(Object, Form);
 	DocumentsClientServer.ChangeTitleGroupTitle(CurrentObject, Form);
+	RowIDInfoServer.AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters);
 EndProcedure
 
 Procedure OnReadAtServer(Object, Form, CurrentObject) Export
@@ -37,7 +39,7 @@ Procedure OnReadAtServer(Object, Form, CurrentObject) Export
 	EndIf;
 
 	DocumentsClientServer.ChangeTitleGroupTitle(CurrentObject, Form);
-	Form.ReadOnly = PurchaseInvoiceIsExists(Object.Ref);
+	RowIDInfoServer.OnReadAtServer(Object, Form, CurrentObject);
 EndProcedure
 
 #EndRegion
@@ -101,34 +103,3 @@ Procedure FillTransactionTypeChoiceList(Form)
 		Metadata.Enums.GoodsReceiptTransactionTypes.EnumValues.InventoryTransfer.Synonym);
 
 EndProcedure
-
-Function PurchaseInvoiceIsExists(GoodsReceiptRef)
-	If Not ValueIsFilled(GoodsReceiptRef) Then
-		Return False;
-	EndIf;
-
-	Filter = New Structure();
-	Filter.Insert("MetadataObject", GoodsReceiptRef.Metadata());
-	Filter.Insert("AttributeName", "EditIfPurchaseInvoiceExists");
-	UserSettings = UserSettingsServer.GetUserSettings(Undefined, Filter);
-	If UserSettings.Count() And UserSettings[0].Value = True Then
-		Return False;
-	EndIf;
-	Query = New Query();
-	Query.Text =
-	"SELECT ALLOWED TOP 1
-	|	PurchaseInvoiceGoodsReceipts.GoodsReceipt
-	|FROM
-	|	Document.PurchaseInvoice.GoodsReceipts AS PurchaseInvoiceGoodsReceipts
-	|WHERE
-	|	PurchaseInvoiceGoodsReceipts.GoodsReceipt = &GoodsReceipt
-	|	AND PurchaseInvoiceGoodsReceipts.Ref.Posted
-	|	AND NOT PurchaseInvoiceGoodsReceipts.Ref.DeletionMark";
-	Query.SetParameter("GoodsReceipt", GoodsReceiptRef);
-	QuerySelection = Query.Execute().Select();
-	If QuerySelection.Next() Then
-		Return True;
-	Else
-		Return False;
-	EndIf;
-EndFunction

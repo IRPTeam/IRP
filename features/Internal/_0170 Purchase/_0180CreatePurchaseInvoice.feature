@@ -102,10 +102,10 @@ Scenario: _018001 create document Purchase Invoice based on order (partial quant
 		Then the form attribute named "Store" became equal to "Store 02"
 		And "ItemList" table became equal
 			| '#' | 'Profit loss center' | 'Price type'              | 'Item'     | 'Item key'  | 'Dont calculate row' | 'Tax amount' | 'Unit'           | 'Serial lot numbers' | 'Q'      | 'Price'  | 'VAT' | 'Offers amount' | 'Total amount' | 'Additional analytic' | 'Internal supply request' | 'Store'    | 'Delivery date' | 'Expense type' | 'Purchase order'                               | 'Detail' | 'Sales order' | 'Net amount' | 'Use goods receipt' |
-			| '1' | 'Front office'  | 'en description is empty' | 'Dress'    | 'S/Yellow'  | 'No'                 | '137,29'     | 'pcs'            | ''                   | '10,000' | '100,00' | '18%' | '100,00'        | '900,00'       | ''                    | ''                        | 'Store 02' | '12.02.2021'    | ''             | 'Purchase order 217 dated 12.02.2021 12:45:05' | ''       | ''            | '762,71'     | 'Yes'               |
-			| '2' | 'Front office'  | 'en description is empty' | 'Trousers' | '36/Yellow' | 'No'                 | '137,29'     | 'pcs'            | ''                   | '5,000'  | '200,00' | '18%' | '100,00'        | '900,00'       | ''                    | ''                        | 'Store 02' | '12.02.2021'    | ''             | 'Purchase order 217 dated 12.02.2021 12:45:05' | ''       | ''            | '762,71'     | 'Yes'               |
-			| '3' | 'Front office'  | 'en description is empty' | 'Trousers' | '36/Yellow' | 'No'                 | '256,27'     | 'pcs'            | ''                   | '8,000'  | '210,00' | '18%' | ''              | '1 680,00'     | ''                    | ''                        | 'Store 02' | '12.02.2021'    | ''             | 'Purchase order 217 dated 12.02.2021 12:45:05' | ''       | ''            | '1 423,73'   | 'Yes'               |
-			| '4' | ''              | 'en description is empty' | 'Boots'    | '36/18SD'   | 'No'                 | '1 830,51'   | 'Boots (12 pcs)' | ''                   | '5,000'  | '200,00' | '18%' | ''              | '12 000,00'    | ''                    | ''                        | 'Store 02' | '12.02.2021'    | ''             | 'Purchase order 217 dated 12.02.2021 12:45:05' | ''       | ''            | '10 169,49'  | 'Yes'               |
+			| '1' | 'Front office'       | 'en description is empty' | 'Dress'    | 'S/Yellow'  | 'No'                 | '137,29'     | 'pcs'            | ''                   | '10,000' | '100,00' | '18%' | '100,00'        | '900,00'       | ''                    | ''                        | 'Store 02' | '12.02.2021'    | ''             | 'Purchase order 217 dated 12.02.2021 12:45:05' | ''       | ''            | '762,71'     | 'Yes'               |
+			| '2' | 'Front office'       | 'en description is empty' | 'Trousers' | '36/Yellow' | 'No'                 | '137,29'     | 'pcs'            | ''                   | '5,000'  | '200,00' | '18%' | '100,00'        | '900,00'       | ''                    | ''                        | 'Store 02' | '12.02.2021'    | ''             | 'Purchase order 217 dated 12.02.2021 12:45:05' | ''       | ''            | '762,71'     | 'Yes'               |
+			| '3' | 'Front office'       | 'en description is empty' | 'Trousers' | '36/Yellow' | 'No'                 | '256,27'     | 'pcs'            | ''                   | '8,000'  | '210,00' | '18%' | ''              | '1 680,00'     | ''                    | ''                        | 'Store 02' | '12.02.2021'    | ''             | 'Purchase order 217 dated 12.02.2021 12:45:05' | ''       | ''            | '1 423,73'   | 'Yes'               |
+			| '4' | ''                   | 'en description is empty' | 'Boots'    | '36/18SD'   | 'No'                 | '1 830,51'   | 'Boots (12 pcs)' | ''                   | '5,000'  | '200,00' | '18%' | ''              | '12 000,00'    | ''                    | ''                        | 'Store 02' | '12.02.2021'    | ''             | 'Purchase order 217 dated 12.02.2021 12:45:05' | ''       | ''            | '10 169,49'  | 'Yes'               |
 		And "SpecialOffers" table contains lines
 			| '#' | 'Amount' |
 			| '1' | '100,00' |
@@ -471,11 +471,6 @@ Scenario: _018005 create Purchase invoice based on Internal supply request
 			| '2' | '$$Rov2PurchaseInvoice018005$$' | 'Internal supply request 117 dated 12.02.2021 14:39:38' | '$$Rov2InternalSupplyRequestr017006$$' | 'GR'     | '50,000' | '$$Rov2InternalSupplyRequestr017006$$' | 'ITO&PO&PI'    | '$$Rov2InternalSupplyRequestr017006$$' |
 		Then the number of "RowIDInfo" table lines is "равно" "2"
 		* Filling in the main details of the document
-			And I click Select button of "Company" field
-			And I go to line in "List" table
-				| 'Description'  |
-				| 'Main Company' | 
-			And I select current line in "List" table
 			And I click Select button of "Partner" field
 			And I go to line in "List" table
 				| 'Description'  |

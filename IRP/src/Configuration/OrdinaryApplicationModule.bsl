@@ -11,7 +11,6 @@ Procedure OnStart()
 	If Not Saas.isAreaActive() And (Saas.isAreaActive() And Not Saas.CurrentAreaID() = 0) Then
 
 		If Not ServiceSystemServer.GetConstantValue("NotFirstStart") Then
-			FillingFromClassifiers.FillDescriptionOfPredefinedCatalogs();
 			ServiceSystemServer.SetConstantValue("NotFirstStart", True);
 		EndIf;
 

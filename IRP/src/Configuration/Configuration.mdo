@@ -331,7 +331,6 @@
   <commonModules>CommonModule.ExtensionServer</commonModules>
   <commonModules>CommonModule.ExternalCommandsClient</commonModules>
   <commonModules>CommonModule.ExternalCommandsServer</commonModules>
-  <commonModules>CommonModule.FillingFromClassifiers</commonModules>
   <commonModules>CommonModule.FillingWithDefaultDataEvent</commonModules>
   <commonModules>CommonModule.FillingWithDefaultDataReuse</commonModules>
   <commonModules>CommonModule.FormItemsSize</commonModules>
@@ -501,7 +500,6 @@
   <commonForms>CommonForm.EditUserSettings</commonForms>
   <commonForms>CommonForm.HTMLField</commonForms>
   <commonForms>CommonForm.MainSettings</commonForms>
-  <commonForms>CommonForm.PickUpDocuments</commonForms>
   <commonForms>CommonForm.PickupItems</commonForms>
   <commonForms>CommonForm.PickupSpecialOffers</commonForms>
   <commonForms>CommonForm.PictureGalleryForm</commonForms>

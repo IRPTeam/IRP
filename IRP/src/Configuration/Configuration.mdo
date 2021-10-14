@@ -331,7 +331,6 @@
   <commonModules>CommonModule.ExtensionServer</commonModules>
   <commonModules>CommonModule.ExternalCommandsClient</commonModules>
   <commonModules>CommonModule.ExternalCommandsServer</commonModules>
-  <commonModules>CommonModule.FillingFromClassifiers</commonModules>
   <commonModules>CommonModule.FillingWithDefaultDataEvent</commonModules>
   <commonModules>CommonModule.FillingWithDefaultDataReuse</commonModules>
   <commonModules>CommonModule.FormItemsSize</commonModules>

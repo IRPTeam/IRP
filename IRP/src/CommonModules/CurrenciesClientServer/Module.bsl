@@ -418,3 +418,23 @@ Procedure UpdateRatePresentation_CurrencyInRow(Object) Export
 EndProcedure
 
 #EndRegion
+
+#Region Refactoring
+
+// Use in documents: BankPayment
+
+Procedure SetVisibleCurrenciesRow(Object, Form) Export //,CurrentDataKey) Export
+	CurrentDataKey = Undefined;
+#IF Client THEN
+	CurrentData = Form.Items.PaymentList.CurrentData;
+	If CurrentData <> Undefined Then
+		CurrentDataKey = CurrentData.Key;
+	EndIf;
+#ENDIF
+//	MovementTypeCurrencyMap = CurrenciesServer.GetMovementTypeCurrencyMap(Object);
+//	For Each Row In Object.Currencies Do
+//		Row.IsVisible = (Row.Key = CurrentDataKey And Row.CurrencyFrom <> Row.MovementType.Currency);
+//	EndDo;
+EndProcedure
+
+#EndRegion

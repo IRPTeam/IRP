@@ -435,3 +435,17 @@ Procedure CalculateAmount_CurrencyInRow(Object, Amount, RowKey)
 EndProcedure
 
 #EndRegion
+
+#Region Refactoring
+
+// Use in documents: BankPayment
+
+Procedure UpdateRatePresentation(Object, Form) Export
+	For Each Row In Object.Currencies Do
+		Row.RatePresentation = ?(Row.ShowReverseRate, Row.ReverseRate, Row.Rate);
+	EndDo;
+EndProcedure
+
+
+#EndRegion
+

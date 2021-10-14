@@ -21,6 +21,7 @@ Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 		DocumentsServer.FillSpecialOffersCache(Object, Form, "SalesInvoice");
 	EndIf;
 	Form.Taxes_CreateFormControls();
+	RowIDInfoServer.OnCreateAtServer(Object, Form, Cancel, StandardProcessing);
 EndProcedure
 
 Procedure AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters) Export
@@ -39,6 +40,7 @@ Procedure AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters) Expor
 	CurrenciesServer.SetVisibleCurrenciesRow(Object, Undefined, True);
 	Form.Taxes_CreateFormControls();
 	DocumentsServer.FillSpecialOffersCache(Object, Form, "SalesInvoice");
+	RowIDInfoServer.AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters);
 EndProcedure
 
 Procedure OnCreateAtServerMobile(Object, Form, Cancel, StandardProcessing) Export
@@ -74,6 +76,7 @@ Procedure OnReadAtServer(Object, Form, CurrentObject) Export
 	CurrenciesServer.SetVisibleCurrenciesRow(Object, Undefined, True);
 	Form.Taxes_CreateFormControls();
 	DocumentsServer.FillSpecialOffersCache(Object, Form, "SalesInvoice");
+	RowIDInfoServer.OnReadAtServer(Object, Form, CurrentObject);
 EndProcedure
 
 Procedure BeforeWrite(Object, Form, Cancel, WriteMode, PostingMode) Export

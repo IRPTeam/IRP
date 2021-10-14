@@ -21,8 +21,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 		PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
 #EndRegion
 		Return Tables;
-	EndIf
-	;
+	EndIf;
 
 	Parameters.IsReposting = False;
 
@@ -102,9 +101,8 @@ Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
 		CommonFunctionsClientServer.PutToAddInfo(AddInfo, "BalancePeriod",
 			New Boundary(New PointInTime(StatusInfo.Period, Ref), BoundaryType.Including));
 	EndIf;
-
-	Parameters.Insert("RecordType", AccumulationRecordType.Expense);
-	PostingServer.CheckBalance_AfterWrite(Ref, Cancel, Parameters, "Document.SalesOrder.ItemList", AddInfo);
+	
+	CheckAfterWrite_R4010B_R4011B(Ref, Cancel, Parameters, AddInfo);
 
 	If Not Cancel And Not AccReg.R4037B_PlannedReceiptReservationRequests.CheckBalance(Ref,
 		LineNumberAndItemKeyFromItemList, PostingServer.GetQueryTableByName("R4037B_PlannedReceiptReservationRequests",
@@ -112,6 +110,11 @@ Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
 		AccumulationRecordType.Receipt, Unposting, AddInfo) Then
 		Cancel = True;
 	EndIf;
+EndProcedure
+
+Procedure CheckAfterWrite_R4010B_R4011B(Ref, Cancel, Parameters, AddInfo = Undefined) Export
+	Parameters.Insert("RecordType", AccumulationRecordType.Expense);
+	PostingServer.CheckBalance_AfterWrite(Ref, Cancel, Parameters, "Document.SalesOrder.ItemList", AddInfo);
 EndProcedure
 
 #EndRegion
@@ -153,6 +156,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R4034B_GoodsShipmentSchedule());
 	QueryArray.Add(R2022B_CustomersPaymentPlanning());
 	QueryArray.Add(R4037B_PlannedReceiptReservationRequests());
+	QueryArray.Add(T3010S_RowIDInfo());
 	Return QueryArray;
 EndFunction
 
@@ -351,6 +355,27 @@ Function R4037B_PlannedReceiptReservationRequests_Exists()
 		   |	AccumulationRegister.R4037B_PlannedReceiptReservationRequests AS R4037B_PlannedReceiptReservationRequests
 		   |WHERE
 		   |	R4037B_PlannedReceiptReservationRequests.Recorder = &Ref";
+EndFunction
+
+Function T3010S_RowIDInfo()
+	Return
+		"SELECT
+		|	RowIDInfo.RowRef AS RowRef,
+		|	RowIDInfo.BasisKey AS BasisKey,
+		|	RowIDInfo.RowID AS RowID,
+		|	RowIDInfo.Basis AS Basis,
+		|	ItemList.Key AS Key,
+		|	ItemList.Price AS Price,
+		|	ItemList.Ref.Currency AS Currency,
+		|	ItemList.Unit AS Unit
+		|INTO T3010S_RowIDInfo
+		|FROM
+		|	Document.SalesOrder.ItemList AS ItemList
+		|		INNER JOIN Document.SalesOrder.RowIDInfo AS RowIDInfo
+		|		ON RowIDInfo.Ref = &Ref
+		|		AND ItemList.Ref = &Ref
+		|		AND RowIDInfo.Key = ItemList.Key
+		|		AND RowIDInfo.Ref = ItemList.Ref";
 EndFunction
 
 #EndRegion

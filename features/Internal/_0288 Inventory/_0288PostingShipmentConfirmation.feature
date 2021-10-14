@@ -700,16 +700,19 @@ Scenario: _028831 check link/unlink form in the SC (Purchase return)
 		And I select current line in "List" table
 	* Select items from basis documents
 		And I click the button named "AddBasisDocuments"		
-		And "BasisesTree" table became equal
+		And "BasisesTree" table contains lines
 			| 'Row presentation'                              | 'Use' | 'Quantity' | 'Unit'           | 'Price'  | 'Currency' |
 			| 'Purchase return 351 dated 24.03.2021 16:08:15' | 'No'  | ''         | ''               | ''       | ''         |
 			| 'Dress (XS/Blue)'                                | 'No'  | '1,000'    | 'pcs'            | '200,00' | 'TRY'      |
 			| 'Boots (36/18SD)'                                | 'No'  | '2,000'    | 'Boots (12 pcs)' | '220,00' | 'TRY'      |
 		And I go to line in "BasisesTree" table
+			| 'Row presentation'                              | 'Use' |
+			| 'Purchase return 351 dated 24.03.2021 16:08:15' | 'No'  |	
+		And I go to line in "BasisesTree" table
 			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
 			| 'TRY'      | '200,00' | '1,000'    | 'Dress (XS/Blue)'   | 'pcs'  | 'No'  |	
 		And I change "Use" checkbox in "BasisesTree" table
-		And I finish line editing in "BasisesTree" table
+		And I finish line editing in "BasisesTree" table	
 		And I go to line in "BasisesTree" table
 			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit'           | 'Use' |
 			| 'TRY'      | '220,00' | '2,000'    | 'Boots (36/18SD)'   | 'Boots (12 pcs)' | 'No'  |

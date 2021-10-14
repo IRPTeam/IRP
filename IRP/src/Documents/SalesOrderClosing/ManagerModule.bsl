@@ -68,7 +68,10 @@ EndProcedure
 #Region CheckAfterWrite
 
 Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
-	Parameters.Insert("RecordType", AccumulationRecordType.Receipt);
+	CheckAfterWrite_R4010B_R4011B(Ref, Cancel, Parameters, AddInfo);
+EndProcedure
+
+Procedure CheckAfterWrite_R4010B_R4011B(Ref, Cancel, Parameters, AddInfo = Undefined) Export
 	PostingServer.CheckBalance_AfterWrite(Ref, Cancel, Parameters, "Document.SalesOrderClosing.ItemList", AddInfo);
 EndProcedure
 

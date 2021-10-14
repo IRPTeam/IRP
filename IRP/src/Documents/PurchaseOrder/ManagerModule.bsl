@@ -147,6 +147,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R4033B_GoodsReceiptSchedule());
 	QueryArray.Add(R4035B_IncomingStocks());
 	QueryArray.Add(R1022B_VendorsPaymentPlanning());
+	QueryArray.Add(T3010S_RowIDInfo());
 	Return QueryArray;
 EndFunction
 
@@ -353,6 +354,27 @@ Function Exists_R4035B_IncomingStocks()
 		   |	AccumulationRegister.R4035B_IncomingStocks AS R4035B_IncomingStocks
 		   |WHERE
 		   |	R4035B_IncomingStocks.Recorder = &Ref";
+EndFunction
+
+Function T3010S_RowIDInfo()
+	Return
+		"SELECT
+		|	RowIDInfo.RowRef AS RowRef,
+		|	RowIDInfo.BasisKey AS BasisKey,
+		|	RowIDInfo.RowID AS RowID,
+		|	RowIDInfo.Basis AS Basis,
+		|	ItemList.Key AS Key,
+		|	ItemList.Price AS Price,
+		|	ItemList.Ref.Currency AS Currency,
+		|	ItemList.Unit AS Unit
+		|INTO T3010S_RowIDInfo
+		|FROM
+		|	Document.PurchaseOrder.ItemList AS ItemList
+		|		INNER JOIN Document.PurchaseOrder.RowIDInfo AS RowIDInfo
+		|		ON RowIDInfo.Ref = &Ref
+		|		AND ItemList.Ref = &Ref
+		|		AND RowIDInfo.Key = ItemList.Key
+		|		AND RowIDInfo.Ref = ItemList.Ref";
 EndFunction
 
 #EndRegion

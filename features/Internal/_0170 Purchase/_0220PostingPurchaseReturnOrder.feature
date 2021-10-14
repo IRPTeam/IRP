@@ -96,13 +96,7 @@ Scenario: _022001 create document Purchase return order, store use Shipment conf
 		Then the form attribute named "Agreement" became equal to "Vendor Ferron, USD"
 		Then the form attribute named "Description" became equal to "Click to enter description"
 		Then the form attribute named "Company" became equal to "Main Company"
-	* Select store
-		And I click Select button of "Store" field
-		Then "Stores" window is opened
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Store 02'  |
-		And I select current line in "List" table
+		Then the form attribute named "Store" became equal to "Store 02"
 		And I select "Approved" exact value from "Status" drop-down list
 	And I select "Wait" exact value from "Status" drop-down list
 	And I move to "Item list" tab

@@ -164,6 +164,9 @@ When Create information register TaxSettings records (test data base)
 When Create information register UserSettings records (test data base)
 When Create document CashStatement objects  (test data base)
 When Create catalog PartnerItems objects (test data base)
+* Posting first documents
+	And I execute 1C:Enterprise script at server
+			| "Documents.GoodsReceipt.FindByNumber(4).GetObject().Write(DocumentWriteMode.Posting);" |
 * Posting Opening entry
 		Given I open hyperlink "e1cib/list/Document.OpeningEntry"
 		Then "Opening entries" window is opened
@@ -197,11 +200,18 @@ When Create catalog PartnerItems objects (test data base)
 		Then I select all lines of "List" table
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And Delay "3"
+		And I close all client application windows
 * Posting Sales return
 		Given I open hyperlink "e1cib/list/Document.SalesReturn"
 		Then I select all lines of "List" table
 		And in the table "List" I click the button named "ListContextMenuPost"
  		And Delay "3"
+* Posting PurchaseReturnOrder
+		Given I open hyperlink "e1cib/list/Document.PurchaseReturnOrder"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuPost"
+ 		And Delay "3"
+		And I close all client application windows
 * Posting Purchase return
 		Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
 		Then I select all lines of "List" table
@@ -217,6 +227,7 @@ When Create catalog PartnerItems objects (test data base)
 		Then I select all lines of "List" table
 		And in the table "List" I click the button named "ListContextMenuPost"
  		And Delay "3"
+		And I close all client application windows
 * Posting Inventory transfer
 		Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
 		Then I select all lines of "List" table
@@ -330,11 +341,6 @@ When Create catalog PartnerItems objects (test data base)
  		And Delay "3"
 * Posting OutgoingPaymentOrder
 		Given I open hyperlink "e1cib/list/Document.OutgoingPaymentOrder"
-		Then I select all lines of "List" table
-		And in the table "List" I click the button named "ListContextMenuPost"
- 		And Delay "3"
-* Posting PurchaseReturnOrder
-		Given I open hyperlink "e1cib/list/Document.PurchaseReturnOrder"
 		Then I select all lines of "List" table
 		And in the table "List" I click the button named "ListContextMenuPost"
  		And Delay "3"

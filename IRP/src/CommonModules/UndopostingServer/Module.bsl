@@ -38,6 +38,9 @@ Procedure Undopost(DocObject, Cancel, AddInfo = Undefined) Export
 	EndIf;
 
 	For Each RecordSet In DocObject.RegisterRecords Do
+		If Upper(RecordSet.Metadata().Name) = Upper("TM1010B_RowIDMovements") Then
+			Continue;
+		EndIf;
 		RecordSet.Clear();
 		RecordSet.Write();
 	EndDo;

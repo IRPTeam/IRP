@@ -742,5 +742,24 @@ Scenario: _300511 check connection to SalesReturn report "Related documents"
 	Then "Related documents" window is opened
 	And I close all client application windows
 
+Scenario: _300512 check Use GR filling from store when create SR based on SI
+	* Select SI
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
+		And I go to line in "List" table
+			| 'Number' |
+			| '103'     |
+		And I select current line in "List" table
+	* Create SR and check Use GR filling
+		And I click "Sales return" button
+		And I click "Ok" button
+		And "ItemList" table became equal
+			| 'Item'  | 'Item key' | 'Use goods receipt' |
+			| 'Dress' | 'M/White'  | 'Yes'               |
+			| 'Boots' | '36/18SD'  | 'Yes'               |
+			| 'Boots' | '37/18SD'  | 'Yes'               |
+			| 'Dress' | 'S/Yellow' | 'Yes'               |
+		And I close all client application windows
+		
+
 Scenario: _999999 close TestClient session
 	And I close TestClient session

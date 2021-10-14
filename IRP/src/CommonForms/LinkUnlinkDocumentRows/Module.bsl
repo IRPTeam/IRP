@@ -102,8 +102,7 @@ Procedure FillItemListRows(ItemListRows)
 		NewRow.Picture = 0;
 
 		If ValueIsFilled(NewRow.ItemKey) And ValueIsFilled(NewRow.Unit) And ValueIsFilled(NewRow.Quantity) Then
-			ConvertationResult = RowIDInfoServer.ConvertQuantityToQuantityInBaseUnit(NewRow.ItemKey, NewRow.Unit,
-				NewRow.Quantity);
+			ConvertationResult = RowIDInfoServer.ConvertQuantityToQuantityInBaseUnit(NewRow.ItemKey, NewRow.Unit, NewRow.Quantity);
 
 			NewRow.QuantityInBaseUnit =  ConvertationResult.QuantityInBaseUnit;
 			NewRow.BasisUnit          =  ConvertationResult.BasisUnit;
@@ -142,8 +141,8 @@ Procedure SetAlreadyLinkedInfo(TreeRows, Key)
 	For Each TreeRow In TreeRows Do
 		If TreeRow.DeepLevel And Key = TreeRow.Key Then
 			ThisObject.LinkedRowID = TreeRow.RowID;
-			If TypeOf(TreeRow.Basis) = Type("DocumentRef.ShipmentConfirmation") Or TypeOf(TreeRow.Basis) = Type(
-				"DocumentRef.GoodsReceipt") Then
+			If TypeOf(TreeRow.Basis) = Type("DocumentRef.ShipmentConfirmation") 
+				Or TypeOf(TreeRow.Basis) = Type("DocumentRef.GoodsReceipt") Then
 				ThisObject.ShipingReceipt = True;
 			Else
 				ThisObject.ShipingReceipt = False;
@@ -261,6 +260,11 @@ Function IsCanLink(ItemListRowsData = Undefined, BasisesTreeData = Undefined)
 			Return Result;
 		EndIf;
 	EndIf;
+	
+	If ItemListRowsData.IsExternalLinked Then
+		Return Result;
+	EndIf;
+	
 	If BasisesTreeData = Undefined Then
 		BasisesTreeData = Items.BasisesTree.CurrentData;
 		If BasisesTreeData = Undefined Then
@@ -271,12 +275,12 @@ Function IsCanLink(ItemListRowsData = Undefined, BasisesTreeData = Undefined)
 	If Not BasisesTreeData.DeepLevel Then
 		Return Result;
 	EndIf;
-
+	
 	Result.IsCan = True;
-	Result.Insert("Key", ItemListRowsData.Key);
-	Result.Insert("Item", ItemListRowsData.Item);
-	Result.Insert("ItemKey", ItemListRowsData.ItemKey);
-	Result.Insert("Store", ItemListRowsData.Store);
+	Result.Insert("Key"     , ItemListRowsData.Key);
+	Result.Insert("Item"    , ItemListRowsData.Item);
+	Result.Insert("ItemKey" , ItemListRowsData.ItemKey);
+	Result.Insert("Store"   , ItemListRowsData.Store);
 
 	If ValueIsFilled(ItemListRowsData.ItemKey) And ValueIsFilled(ItemListRowsData.Unit) And ValueIsFilled(
 		ItemListRowsData.Quantity) Then
@@ -296,11 +300,11 @@ Function IsCanLink(ItemListRowsData = Undefined, BasisesTreeData = Undefined)
 		Result.Insert("Unit", BasisesTreeData.Unit);
 	EndIf;
 
-	Result.Insert("RowRef", BasisesTreeData.RowRef);
-	Result.Insert("CurrentStep", BasisesTreeData.CurrentStep);
-	Result.Insert("Basis", BasisesTreeData.Basis);
-	Result.Insert("BasisKey", BasisesTreeData.BasisKey);
-	Result.Insert("RowID", BasisesTreeData.RowID);
+	Result.Insert("RowRef"      , BasisesTreeData.RowRef);
+	Result.Insert("CurrentStep" , BasisesTreeData.CurrentStep);
+	Result.Insert("Basis"       , BasisesTreeData.Basis);
+	Result.Insert("BasisKey"    , BasisesTreeData.BasisKey);
+	Result.Insert("RowID"       , BasisesTreeData.RowID);
 	Return Result;
 EndFunction
 
@@ -320,13 +324,13 @@ EndProcedure
 
 &AtClient
 Procedure Unlink(Command)
-	LinkInfo = IsCanUnlink();
-	If Not LinkInfo.IsCan Then
+	UnlinkInfo = IsCanUnlink();
+	If Not UnlinkInfo.IsCan Then
 		Return;
 	EndIf;
 
 	Filter = New Structure("Key, RowID, BasisKey");
-	FillPropertyValues(Filter, LinkInfo);
+	FillPropertyValues(Filter, UnlinkInfo);
 
 	For Each Row In ThisObject.ResultsTable.FindRows(Filter) Do
 		ThisObject.ResultsTable.Delete(Row);
@@ -338,25 +342,56 @@ EndProcedure
 
 &AtClient
 Procedure UnlinkAll(Command)
-	ThisObject.ResultsTable.Clear();
+	ArrayForDelete = New Array();
+	For Each Row In ThisObject.ResultsTable Do
+		UnlinkInfo = IsCanUnlink(Row);
+		If UnlinkInfo.IsCan Then
+			ArrayForDelete.Add(Row);
+		EndIf;
+	EndDo;
+	For Each ItemForDelete In ArrayForDelete Do
+		ThisObject.ResultsTable.Delete(ItemForDelete);
+	EndDo;
 	RefreshTrees();
 	SetIsLinkedItemListRows();
 EndProcedure
 
 &AtClient
-Function IsCanUnlink()
+Function IsCanUnlink(ResultsTableData = Undefined)
 	Result = New Structure("IsCan", False);
 
-	ResultsTreeCurrentData = Items.ResultsTree.CurrentData;
-	If ResultsTreeCurrentData = Undefined Then
+	If ResultsTableData = Undefined Then
+		ResultsTreeData = Items.ResultsTree.CurrentData;
+		If ResultsTreeData = Undefined Then
+			Return Result;
+		EndIf;
+	Else
+		ArrayOfItemListRows = ThisObject.ItemListRows.FindRows(New Structure("Key", ResultsTableData.Key));
+		For Each ItemOfItemListRows In ArrayOfItemListRows Do
+			If ItemOfItemListRows.IsExternalLinked Then
+				Return Result;
+			EndIf;
+		EndDo;
+		
+		Result.IsCan = True;
+		Result.Insert("Key"      , ResultsTableData.Key);
+		Result.Insert("RowID"    , ResultsTableData.RowID);
+		Result.Insert("BasisKey" , ResultsTableData.BasisKey);
 		Return Result;
 	EndIf;
-
-	If ResultsTreeCurrentData.DeepLevel Then
+	
+	ArrayOfItemListRows = ThisObject.ItemListRows.FindRows(New Structure("Key", ResultsTreeData.Key));
+	For Each ItemOfItemListRows In ArrayOfItemListRows Do
+		If ItemOfItemListRows.IsExternalLinked Then
+			Return Result;
+		EndIf;
+	EndDo;
+	
+	If ResultsTreeData.DeepLevel Then
 		Result.IsCan = True;
-		Result.Insert("Key", ResultsTreeCurrentData.Key);
-		Result.Insert("RowID", ResultsTreeCurrentData.RowID);
-		Result.Insert("BasisKey", ResultsTreeCurrentData.BasisKey);
+		Result.Insert("Key"      , ResultsTreeData.Key);
+		Result.Insert("RowID"    , ResultsTreeData.RowID);
+		Result.Insert("BasisKey" , ResultsTreeData.BasisKey);
 	EndIf;
 	Return Result;
 EndFunction
@@ -388,9 +423,9 @@ Function CreateBasisesTable(SelectedRowInfo)
 	// filter by already linked
 	For Each Row In AlredyLinkedRows Do
 		Filter = New Structure();
-		Filter.Insert("RowID", Row.RowID);
-		Filter.Insert("BasisKey", Row.BasisKey);
-		Filter.Insert("Basis", Row.Basis);
+		Filter.Insert("RowID"    , Row.RowID);
+		Filter.Insert("BasisKey" , Row.BasisKey);
+		Filter.Insert("Basis"    , Row.Basis);
 		ArrayAlredyLinked = BasisesTable.FindRows(Filter);
 		For Each ItemArray In ArrayAlredyLinked Do
 			BasisesTable.Delete(ItemArray);
@@ -406,8 +441,8 @@ Function CreateBasisesTable(SelectedRowInfo)
 				Continue;
 			EndIf;
 			If ThisObject.ShipingReceipt Then
-				If Not (TypeOf(Row.Basis) = Type("DocumentRef.ShipmentConfirmation") Or TypeOf(Row.Basis) = Type(
-					"DocumentRef.GoodsReceipt")) Then
+				If Not (TypeOf(Row.Basis) = Type("DocumentRef.ShipmentConfirmation") 
+					Or TypeOf(Row.Basis) = Type("DocumentRef.GoodsReceipt")) Then
 					ArrayForDelete.Add(Row);
 				EndIf;
 			Else

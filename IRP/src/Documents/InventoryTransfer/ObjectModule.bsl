@@ -36,4 +36,11 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 		CommonFunctionsClientServer.ShowUsersMessage(R().Error_094, "UseGoodsReceipt");
 		Cancel = True;
 	EndIf;
+	If Not Cancel = True Then
+		LinkedFilter = RowIDInfoClientServer.GetLinkedDocumentsFilter_IT(ThisObject);
+		RowIDInfoTable = ThisObject.RowIDInfo.Unload();
+		ItemListTable = ThisObject.ItemList.Unload(,"Key, LineNumber, ItemKey");
+		ItemListTable.Columns.Add("Store", New TypeDescription("CatalogRef.Stores"));
+		RowIDInfoServer.FillCheckProcessing(ThisObject, Cancel, LinkedFilter, RowIDInfoTable, ItemListTable);
+	EndIf;
 EndProcedure

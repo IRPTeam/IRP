@@ -201,6 +201,27 @@ Scenario: _043503 check Cash payment movements by the Register "R1020 Advances t
 			| ''                                         | 'Receipt'     | '05.04.2021 12:40:00' | '1 000'     | 'Main Company' | 'Front office' | 'en description is empty'      | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Cash payment 1 dated 05.04.2021 12:40:00' | 'No'                   | ''                         |
 	And I close all client application windows
 
+Scenario: _043504 check Cash payment movements by the Register "Return to customer" (return to customer)
+	* Select Cash payment
+		Given I open hyperlink "e1cib/list/Document.CashPayment"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '327' |
+	* Check movements by the Register  "R5010 Reconciliation statement" 
+		And I click "Registrations report" button
+		And I select "R5010 Reconciliation statement" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Cash payment 327 dated 02.09.2021 14:09:26' | ''            | ''                    | ''          | ''             | ''             | ''         | ''                  | ''                    |
+			| 'Document registrations records'             | ''            | ''                    | ''          | ''             | ''             | ''         | ''                  | ''                    |
+			| 'Register  "R5010 Reconciliation statement"' | ''            | ''                    | ''          | ''             | ''             | ''         | ''                  | ''                    |
+			| ''                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''         | ''                  | ''                    |
+			| ''                                           | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'       | 'Currency' | 'Legal name'        | 'Legal name contract' |
+			| ''                                           | 'Receipt'     | '02.09.2021 14:09:26' | '450'       | 'Main Company' | 'Front office' | 'USD'      | 'Company Ferron BP' | ''                    |			
+	And I close all client application windows
+
+
+
 Scenario: _043514 check Cash payment movements by the Register "R3035 Cash planning" (payment to vendor, with planning transaction basis)
 	* Select Cash payment
 		Given I open hyperlink "e1cib/list/Document.CashPayment"
@@ -306,6 +327,38 @@ Scenario: _043520 check Cash payment movements by the Register "R3010 Cash on ha
 			| ''                                           | 'Expense'     | '02.09.2021 14:09:26' | '2 532,38'  | 'Main Company' | 'Front office' | 'Cash desk №1' | 'TRY'      | 'Local currency'               | 'No'                   |		
 	And I close all client application windows
 
+
+Scenario: _043521 check absence Cash payment movements by the Register "R5010 Reconciliation statement" (cash transfer order)
+	And I close all client application windows
+	* Select Cash payment
+		Given I open hyperlink "e1cib/list/Document.CashPayment"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '2' |
+		And I select current line in "List" table
+	* Check movements by the Register  "R5010 Reconciliation statement" 
+		And I click "Registrations report" button
+		And I select "R5010 Reconciliation statement" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document does not contain values
+			| 'R5010 Reconciliation statement'   | 
+	And I close all client application windows
+
+Scenario: _043522 check absence Cash payment movements by the Register "R5010 Reconciliation statement" (Currency exchange)
+	And I close all client application windows
+	* Select Cash payment
+		Given I open hyperlink "e1cib/list/Document.CashPayment"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '325' |
+		And I select current line in "List" table
+	* Check movements by the Register  "R5010 Reconciliation statement" 
+		And I click "Registrations report" button
+		And I select "R5010 Reconciliation statement" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document does not contain values
+			| 'R5010 Reconciliation statement'   | 
+	And I close all client application windows
 
 Scenario: _043530 Cash payment clear posting/mark for deletion
 	And I close all client application windows

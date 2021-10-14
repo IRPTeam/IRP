@@ -372,6 +372,7 @@ Scenario: _0154136 create document Retail Return Receipt based on RetailSalesRec
 		Then the form attribute named "Agreement" became equal to "Retail partner term"
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Store" became equal to "Store 01"
+		Then the form attribute named "Branch" became equal to "Shop 01"
 		And "ItemList" table contains lines
 			| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Q'     | 'Offers amount' | 'Tax amount' | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    | 'Retail sales receipt'         |
 			| '350,00' | 'Shirt' | '18%' | '38/Black' | '2,000' | ''              | '106,78'     | 'pcs'  | '593,22'     | '700,00'        | 'Store 01' | '$$RetailSalesReceipt015413$$' |
@@ -408,12 +409,6 @@ Scenario: _0154136 create document Retail Return Receipt based on RetailSalesRec
 			| 'Price'  | 'Item'  | 'VAT' | 'Item key' | 'Q'     | 'Offers amount' | 'Tax amount' | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    | 'Retail sales receipt'         |
 			| '350,00' | 'Shirt' | '18%' | '38/Black' | '1,000' | ''              | '53,39'      | 'pcs'  | '296,61'     | '350,00'       | 'Store 01' | '$$RetailSalesReceipt015413$$' |
 			| '550,00' | 'Dress' | '18%' | 'L/Green'  | '1,000' | ''              | '83,90'      | 'pcs'  | '466,10'     | '550,00'       | 'Store 01' | '$$RetailSalesReceipt015413$$' |
-		And I move to "Other" tab
-		And I click Select button of "Branch" field
-		And I go to line in "List" table
-			| 'Description'  |
-			| 'Shop 01' |
-		And I select current line in "List" table
 	* Post Retail return receipt
 		And I click the button named "FormPost"
 		And I delete "$$NumberRetailReturnReceipt0154136$$" variable
@@ -1886,11 +1881,6 @@ Scenario:  _0154149 create Cash statement
 		And I go to line in "Payments" table
 			| '#' | 'Account'      | 'Amount' | 'Commission' | 'Payment terminal'    | 'Payment type' | 'Percent' |
 			| '2' | 'Transit Main' | '200,00' | '12,90'      | 'Payment terminal 01' | 'Card 01'      | '1,00'    |
-		And I click Select button of "Branch" field
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Shop 01'     |
-		And I select current line in "List" table
 		And I input "01.09.2020 13:40:04" text in "Date" field
 		And I click the button named "FormPost"
 		And I delete "$$NumberRetailReturnReceipt01541494$$" variable
@@ -1917,12 +1907,7 @@ Scenario:  _0154149 create Cash statement
 			| '#' | 'Account'      | 'Amount' | 'Commission' | 'Payment terminal'    | 'Payment type' | 'Percent' |
 			| '2' | 'Transit Main' | '200,00' | '12,90'      | 'Payment terminal 01' | 'Card 01'      | '1,00'    |
 		And I delete a line in "Payments" table
-		And I click Select button of "Branch" field
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Shop 01'     |
-		And I select current line in "List" table
-		And I input "01.09.2020 15:31:04" text in "Date" field
+		And I input "01.09.2020 17:31:04" text in "Date" field
 		And I click the button named "FormPost"
 		And I delete "$$NumberRetailReturnReceipt01541493$$" variable
 		And I delete "$$RetailReturnReceipt01541493$$" variable
@@ -1935,11 +1920,6 @@ Scenario:  _0154149 create Cash statement
 			| '$$NumberRetailSalesReceipt01541491$$'      |
 		And I click the button named "FormDocumentRetailReturnReceiptGenarate"
 		And I click "Ok" button	
-		And I click Select button of "Branch" field
-		And I go to line in "List" table
-			| 'Description' |
-			| 'Shop 01'     |
-		And I select current line in "List" table
 		And I input "01.09.2020 16:55:04" text in "Date" field
 		And I click the button named "FormPost"
 		And I delete "$$NumberRetailReturnReceipt01541491$$" variable

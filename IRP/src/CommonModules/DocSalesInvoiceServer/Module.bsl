@@ -14,6 +14,7 @@ Procedure AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters) Expor
 	CurrenciesServer.UpdateRatePresentation(Object);
 	CurrenciesServer.SetVisibleCurrenciesRow(Object, Undefined, True);
 	Form.Taxes_CreateFormControls();
+	RowIDInfoServer.AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters);
 EndProcedure
 
 Procedure BeforeWrite(Object, Form, Cancel, WriteMode, PostingMode) Export
@@ -41,6 +42,7 @@ Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 	EndIf;
 	Form.Taxes_CreateFormControls();
 	DocumentsServer.ShowUserMessageOnCreateAtServer(Form);
+	RowIDInfoServer.OnCreateAtServer(Object, Form, Cancel, StandardProcessing);
 EndProcedure
 
 Procedure CalculateTableAtServer(Form, Object) Export
@@ -90,6 +92,7 @@ Procedure OnReadAtServer(Object, Form, CurrentObject) Export
 	CurrenciesServer.UpdateRatePresentation(Object);
 	CurrenciesServer.SetVisibleCurrenciesRow(Object, Undefined, True);
 	Form.Taxes_CreateFormControls();
+	RowIDInfoServer.OnReadAtServer(Object, Form, CurrentObject);
 EndProcedure
 
 #EndRegion

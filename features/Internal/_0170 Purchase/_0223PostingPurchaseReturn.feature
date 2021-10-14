@@ -524,5 +524,22 @@ Scenario: _300509 check connection to PurchaseReturn report "Related documents"
 	And I close all client application windows
 
 
+Scenario: _300512 check Use GR filling from store when create PR based on PI
+	And I close all client application windows
+	* Select PI
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
+		And I go to line in "List" table
+			| 'Number' |
+			| '$$NumberPurchaseInvoice018006$$'     |
+		And I select current line in "List" table
+	* Create PR and check Use SC filling
+		And I click "Purchase return" button
+		And I click "Ok" button
+		And "ItemList" table became equal
+			| 'Item'  | 'Item key' | 'Use shipment confirmation' |
+			| 'Dress' | 'L/Green'  | 'Yes'                       |
+		And I close all client application windows
+		
+
 Scenario: _999999 close TestClient session
 	And I close TestClient session

@@ -215,7 +215,7 @@ Scenario:_800005 check remaining stock control in the Sales order
 			And I click the button named "FormPost"
 			Then "1C:Enterprise" window is opened
 			And I click "OK" button
-			Then I wait that in user messages the "Line No. [2] [Dress Dress/A-8] R4011B_FreeStocks remaining: 98 . Required: 110 . Lacking: 12 ." substring will appear in 10 seconds
+			Then I wait that in user messages the "Line No. [2] [Dress Dress/A-8] R4011B_FreeStocks remaining: 100 . Required: 110 . Lacking: 10 ." substring will appear in 10 seconds
 			Then I wait that in user messages the "Line No. [3] [Trousers 38/Yellow] R4011B_FreeStocks remaining: 0 . Required: 1 . Lacking: 1 ." substring will appear in 10 seconds
 		* Check remaining stock control (store use SC and GR)	
 			And I click Choice button of the field named "Store"
@@ -377,7 +377,7 @@ Scenario:_800008 check remaining stock control in the Sales invoice (without SO)
 			And I click the button named "FormPost"
 			Then "1C:Enterprise" window is opened
 			And I click "OK" button
-			Then I wait that in user messages the "Line No. [2] [Dress Dress/A-8] R4011B_FreeStocks remaining: 98 . Required: 110 . Lacking: 12 ." substring will appear in 10 seconds
+			Then I wait that in user messages the "Line No. [2] [Dress Dress/A-8] R4011B_FreeStocks remaining: 100 . Required: 110 . Lacking: 10 ." substring will appear in 10 seconds
 			Then I wait that in user messages the "Line No. [3] [Trousers 38/Yellow] R4011B_FreeStocks remaining: 0 . Required: 1 . Lacking: 1 ." substring will appear in 10 seconds
 		* Check remaining stock control (store use SC and GR)	
 			And I click Choice button of the field named "Store"
@@ -387,19 +387,8 @@ Scenario:_800008 check remaining stock control in the Sales invoice (without SO)
 			And I activate "Description" field in "List" table
 			And I select current line in "List" table
 			And I click "OK" button
-			And I click the button named "FormPost"
-			Then "1C:Enterprise" window is opened
-			And I click "OK" button
-			Then I wait that in user messages the "Line No. [2] [Dress Dress/A-8] R4011B_FreeStocks remaining: 100 . Required: 110 . Lacking: 10 ." substring will appear in 10 seconds
-			Then I wait that in user messages the "Line No. [3] [Trousers 38/Yellow] R4011B_FreeStocks remaining: 0 . Required: 1 . Lacking: 1 ." substring will appear in 10 seconds
-		* Check remaining stock control (store use SC and does not use GR)	
-			And I click Choice button of the field named "Store"
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Store 08'    |
-			And I activate "Description" field in "List" table
-			And I select current line in "List" table
-			And I click "OK" button
+			And for each line of "ItemList" table I do
+				And I remove "Use shipment confirmation" checkbox in "ItemList" table			
 			And I click the button named "FormPost"
 			Then "1C:Enterprise" window is opened
 			And I click "OK" button
@@ -530,7 +519,7 @@ Scenario:_800011 check remaining stock control in the Retail sales receipt
 		* Check remaining stock control (store does not use SC and GR)
 			Then "1C:Enterprise" window is opened
 			And I click "OK" button
-			Then I wait that in user messages the "Line No. [2] [Dress Dress/A-8] R4011B_FreeStocks remaining: 98 . Required: 110 . Lacking: 12 ." substring will appear in 10 seconds
+			Then I wait that in user messages the "Line No. [2] [Dress Dress/A-8] R4011B_FreeStocks remaining: 100 . Required: 110 . Lacking: 10 ." substring will appear in 10 seconds
 			Then I wait that in user messages the "Line No. [3] [Trousers 38/Yellow] R4011B_FreeStocks remaining: 0 . Required: 1 . Lacking: 1 ." substring will appear in 10 seconds
 		* Check remaining stock control (store use SC and GR)	
 			And I click Choice button of the field named "Store"
@@ -675,7 +664,7 @@ Scenario:_800014 check remaining stock control in the Bundling
 			And I click the button named "FormPost"
 			Then "1C:Enterprise" window is opened
 			And I click "OK" button
-			Then I wait that in user messages the "Line No. [2] [Dress Dress/A-8] R4011B_FreeStocks remaining: 98 . Required: 110 . Lacking: 12 ." substring will appear in 10 seconds
+			Then I wait that in user messages the "Line No. [2] [Dress Dress/A-8] R4011B_FreeStocks remaining: 100 . Required: 110 . Lacking: 10 ." substring will appear in 10 seconds
 			Then I wait that in user messages the "Line No. [3] [Trousers 38/Yellow] R4011B_FreeStocks remaining: 0 . Required: 1 . Lacking: 1 ." substring will appear in 10 seconds
 		* Check remaining stock control (store use SC and GR)	
 			And I click Choice button of the field named "Store"
@@ -833,7 +822,7 @@ Scenario:_800017 check remaining stock control in the Stock adjustment as write 
 			And I click the button named "FormPost"
 			Then "1C:Enterprise" window is opened
 			And I click "OK" button
-			Then I wait that in user messages the "Line No. [2] [Dress Dress/A-8] R4010B_ActualStocks remaining: 98 . Required: 110 . Lacking: 12 ." substring will appear in 10 seconds
+			Then I wait that in user messages the "Line No. [2] [Dress Dress/A-8] R4010B_ActualStocks remaining: 100 . Required: 110 . Lacking: 10 ." substring will appear in 10 seconds
 			Then I wait that in user messages the "Line No. [3] [Trousers 38/Yellow] R4010B_ActualStocks remaining: 0 . Required: 1 . Lacking: 1 ." substring will appear in 10 seconds
 		* Check remaining stock control (store use SC and GR)	
 			And I click Choice button of the field named "Store"
@@ -970,45 +959,6 @@ Scenario:_800020 check remaining stock control in the Purchase return
 			And I activate "Item key" field in "List" table
 			And I select current line in "List" table		
 		* Check remaining stock control (store does not use SC and GR)
-			And I click the button named "FormPost"
-			Then "1C:Enterprise" window is opened
-			And I click "OK" button
-			Then I wait that in user messages the "Line No. [2] [Dress Dress/A-8] R4011B_FreeStocks remaining: 98 . Required: 110 . Lacking: 12 ." substring will appear in 10 seconds
-			Then I wait that in user messages the "Line No. [3] [Trousers 38/Yellow] R4011B_FreeStocks remaining: 0 . Required: 1 . Lacking: 1 ." substring will appear in 10 seconds
-		* Check remaining stock control (store use SC and GR)	
-			And I click Choice button of the field named "Store"
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Store 02'    |
-			And I activate "Description" field in "List" table
-			And I select current line in "List" table
-			And I click "OK" button
-			And I click the button named "FormPost"
-			Then "1C:Enterprise" window is opened
-			And I click "OK" button
-			Then I wait that in user messages the "Line No. [2] [Dress Dress/A-8] R4011B_FreeStocks remaining: 100 . Required: 110 . Lacking: 10 ." substring will appear in 10 seconds
-			Then I wait that in user messages the "Line No. [3] [Trousers 38/Yellow] R4011B_FreeStocks remaining: 0 . Required: 1 . Lacking: 1 ." substring will appear in 10 seconds
-		* Check remaining stock control (store use SC and does not use GR)	
-			And I click Choice button of the field named "Store"
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Store 08'    |
-			And I activate "Description" field in "List" table
-			And I select current line in "List" table
-			And I click "OK" button
-			And I click the button named "FormPost"
-			Then "1C:Enterprise" window is opened
-			And I click "OK" button
-			Then I wait that in user messages the "Line No. [2] [Dress Dress/A-8] R4011B_FreeStocks remaining: 100 . Required: 110 . Lacking: 10 ." substring will appear in 10 seconds
-			Then I wait that in user messages the "Line No. [3] [Trousers 38/Yellow] R4011B_FreeStocks remaining: 0 . Required: 1 . Lacking: 1 ." substring will appear in 10 seconds
-		* Check remaining stock control (store use GR and does not use SC)	
-			And I click Choice button of the field named "Store" 
-			And I go to line in "List" table
-				| 'Description' |
-				| 'Store 07'    |
-			And I activate "Description" field in "List" table
-			And I select current line in "List" table
-			And I click "OK" button
 			And I click the button named "FormPost"
 			Then "1C:Enterprise" window is opened
 			And I click "OK" button
@@ -1168,7 +1118,7 @@ Scenario:_800032 check remaining stock control when unpost/change Unbundling
 		And I click the button named "FormPost"
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
-		Then I wait that in user messages the "[Dress Dress/A-8] R4011B_FreeStocks remaining: 100 . Required: 105 . Lacking: 5 ." substring will appear in 10 seconds
+		Then I wait that in user messages the "[Dress Dress/A-8] R4011B_FreeStocks remaining: 102 . Required: 105 . Lacking: 3 ." substring will appear in 10 seconds
 	* Change quantity back
 		And I input "10,000" text in "Quantity" field
 		And I save "CurrentDate() - 10800" in "$$$$PreviousDate1$$$$" variable
@@ -1441,7 +1391,7 @@ Scenario:_800042 check remaining stock control when post Physical inventory
 		And I click the button named "FormPost"
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
-		Then I wait that in user messages the "Line No. [2] [Dress XS/Blue] R4011B_FreeStocks remaining: 4 . Required: 2 . Lacking: 2 ." substring will appear in 10 seconds
+		Then I wait that in user messages the "Line No. [2] [Dress XS/Blue] R4011B_FreeStocks remaining: 0 . Required: 2 . Lacking: 2 ." substring will appear in 10 seconds
 		And I delete "$$NumberPhysicalInventory1$$" variable
 		And I save the value of "Number" field as "$$NumberPhysicalInventory1$$"
 		And I close all client application windows
@@ -1618,7 +1568,7 @@ Scenario:_800046 check remaining stock control when post/change Inventory transf
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
 		Then I wait that in user messages the "Line No. [1] [Shirt 36/Red] R4011B_FreeStocks remaining: 0 . Required: 25 . Lacking: 25 ." substring will appear in 10 seconds
-		Then I wait that in user messages the "Line No. [2] [Shirt 38/Black] R4011B_FreeStocks remaining: 4 . Required: 20 . Lacking: 16 ." substring will appear in 10 seconds
+		Then I wait that in user messages the "Line No. [2] [Shirt 38/Black] R4011B_FreeStocks remaining: 3 . Required: 20 . Lacking: 17 ." substring will appear in 10 seconds
 		And I delete "$$NumberInventoryTransferOrder1$$" variable
 		And I save the value of "Number" field as "$$NumberInventoryTransferOrder1$$"
 	* Try to post Inventory transfer order (no balance to write off), status Wait

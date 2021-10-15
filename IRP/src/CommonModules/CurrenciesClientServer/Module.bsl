@@ -421,20 +421,48 @@ EndProcedure
 
 #Region Refactoring
 
-// Use in documents: BankPayment
+Function GetParameters_BP(Object, Row) Export
+	Parameters = New Structure();
+	Parameters.Insert("Ref"            , Object.Ref);
+	Parameters.Insert("Date"           , Object.Date);
+	Parameters.Insert("Company"        , Object.Company);
+	Parameters.Insert("Currency"       , Object.Currency);
+	Parameters.Insert("Agreement"      , Row.Agreement);
+	Parameters.Insert("RowKey"         , Row.Key);
+	Parameters.Insert("DocumentAmount" , Row.Amount);
+	Parameters.Insert("Currencies"     , GetCurrenciesTable_Refactoring(Object.Currencies, Row.Key));
+	Return Parameters;
+EndFunction
 
-Procedure SetVisibleCurrenciesRow(Object, Form) Export //,CurrentDataKey) Export
-	CurrentDataKey = Undefined;
-#IF Client THEN
-	CurrentData = Form.Items.PaymentList.CurrentData;
-	If CurrentData <> Undefined Then
-		CurrentDataKey = CurrentData.Key;
+Function GetCurrenciesTable_Refactoring(Currencies, RowKey = Undefined)
+	ArrayOfCurrenciesRows = New Array();
+	For Each Row In Currencies Do
+		If RowKey <> Undefined And Row.Key <> RowKey Then
+			Continue;
+		EndIf;
+		CurrenciesRow = New Structure("Key, CurrencyFrom, Rate, ReverseRate, ShowReverseRate, Multiplicity, MovementType, Amount");
+		FillPropertyValues(CurrenciesRow, Row);
+		ArrayOfCurrenciesRows.Add(CurrenciesRow);
+	EndDo;
+	Return ArrayOfCurrenciesRows;
+EndFunction
+
+Procedure CalculateAmount_Refactoring(CurrenciesTable, DocumentAmount) Export
+	For Each Row In CurrenciesTable Do
+		If Row.Multiplicity = 0 Or Row.Rate = 0 Then
+			Row.Amount = 0;
+			Continue;
+		EndIf;
+		CalculateAmountByRow_Refactoring(Row, DocumentAmount);
+	EndDo;
+EndProcedure
+
+Procedure CalculateAmountByRow_Refactoring(CurrenciesRow, DocumentAmount) Export
+	If CurrenciesRow.ShowReverseRate = True Then
+		CurrenciesRow.Amount = (DocumentAmount / CurrenciesRow.ReverseRate) / CurrenciesRow.Multiplicity;
+	Else
+		CurrenciesRow.Amount = (DocumentAmount * CurrenciesRow.Rate) / CurrenciesRow.Multiplicity;
 	EndIf;
-#ENDIF
-//	MovementTypeCurrencyMap = CurrenciesServer.GetMovementTypeCurrencyMap(Object);
-//	For Each Row In Object.Currencies Do
-//		Row.IsVisible = (Row.Key = CurrentDataKey And Row.CurrencyFrom <> Row.MovementType.Currency);
-//	EndDo;
 EndProcedure
 
 #EndRegion

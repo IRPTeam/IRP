@@ -80,7 +80,7 @@ Procedure SetVisibilityAvailability(Object, Form) Export
 //		CurrentDataKey = CurrentData.Key;
 //	EndIf;
 //#ENDIF
-	CurrenciesClientServer.SetVisibleCurrenciesRow(Object, Form);//, CurrentDataKey);
+	//CurrenciesClientServer.SetVisibleCurrenciesRow(Object, Form);//, CurrentDataKey);
 EndProcedure
 
 #Region FormItemsEvents
@@ -615,3 +615,18 @@ Procedure GeneratedFormCommandActionByNameServer(CommandName) Export
 EndProcedure
 
 #EndRegion
+
+&AtClient
+Procedure EditCurrencies(Command)
+	CurrentData = ThisObject.Items.PaymentList.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	FormParameters = CurrenciesClientServer.GetParameters_BP(Object, CurrentData);
+	NotifyParameters = New Structure();
+	NotifyParameters.Insert("Object", Object);
+	NotifyParameters.Insert("Form"  , ThisObject);
+	Notify = New NotifyDescription("EditCurrenciesContinue", CurrenciesClient, NotifyParameters);
+	OpenForm("CommonForm.EditCurrencies", FormParameters, , , , ,Notify, FormWindowOpeningMode.LockOwnerWindow);
+EndProcedure
+

@@ -6,7 +6,6 @@ EndProcedure
 
 Procedure OnOpen(Object, Form, Cancel, AddInfo = Undefined) Export
 	DocumentsClient.SetTextOfDescriptionAtForm(Object, Form);
-	CurrenciesClient.UpdateRatePresentation(Object, Form);
 EndProcedure
 
 Procedure SetAvailability(Object, Form) Export

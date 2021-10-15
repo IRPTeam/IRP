@@ -135,7 +135,6 @@ Procedure FillItemList(Object, Form = Undefined) Export
 	For Each Row In Object.ItemList Do
 		RowMap.Insert(Row.Key, Row);
 		Row.Item = Row.ItemKey.Item;
-		//
 		If TypeOf(Object.Ref) = Type("DocumentRef.SalesOrder") Then
 			Row.ItemType = Row.Item.ItemType.Type;
 		EndIf;
@@ -159,7 +158,6 @@ Procedure FillItemList(Object, Form = Undefined) Export
 
 	While SelectionDetailRecords.Next() Do
 		RowMap[SelectionDetailRecords.Key].Item = SelectionDetailRecords.Item;
-		//
 		If TypeOf(Object.Ref) = Type("DocumentRef.SalesOrder") Then
 			RowMap[SelectionDetailRecords.Key].ItemType = RowMap[SelectionDetailRecords.Key].Item.ItemType.Type;
 		EndIf;
@@ -438,10 +436,6 @@ EndProcedure
 Function PrepareServerData(Parameters) Export
 	Result = New Structure();
 
-	If Parameters.Property("ArrayOfMovementsTypes") Then
-		Result.Insert("ArrayOfCurrenciesByMovementTypes", GetCurrencyByMovementType(Parameters.ArrayOfMovementsTypes));
-	EndIf;
-
 	If Parameters.Property("TaxesCache") Then
 		ArrayOfTaxInfo = New Array();
 		RequireCallCreateTaxesFormControls = True;
@@ -546,28 +540,6 @@ Function PrepareServerData(Parameters) Export
 		Result.Insert("AgreementInfo_PriceType_Presentation", String(AgreementInfo.PriceType));
 	EndIf;
 
-	If Parameters.Property("GetArrayOfCurrenciesRows") Then
-		If Result.Property("AgreementInfo") Then
-			AgreementInfo = Result.AgreementInfo;
-		Else
-			AgreementInfo = CatAgreementsServer.GetAgreementInfo(Parameters.GetArrayOfCurrenciesRows.Agreement);
-		EndIf;
-		Result.Insert("ArrayOfCurrenciesRows", GetArrayOfCurrenciesRows(AgreementInfo,
-			Parameters.GetArrayOfCurrenciesRows));
-	EndIf;
-
-	If Parameters.Property("GetArrayOfCurrenciesRowsForAllTable") Then
-		ArrayOfCurrenciesRows = New Array();
-		For Each Row In Parameters.GetArrayOfCurrenciesRowsForAllTable Do
-			PartOfArrayOfCurrenciesRows = GetArrayOfCurrenciesRows(CatAgreementsServer.GetAgreementInfo(Row.Agreement),
-				Row);
-			For Each ItemOfPart In PartOfArrayOfCurrenciesRows Do
-				ArrayOfCurrenciesRows.Add(ItemOfPart);
-			EndDo;
-		EndDo;
-		Result.Insert("ArrayOfCurrenciesRows", ArrayOfCurrenciesRows);
-	EndIf;
-
 	If Parameters.Property("GetMetaDataStructure") Then
 		Result.Insert("MetaDataStructure", ServiceSystemServer.GetMetaDataStructure(
 			Parameters.GetMetaDataStructure.Ref));
@@ -658,40 +630,6 @@ Function PrepareServerData(Parameters) Export
 	EndIf;
 
 	Return Result;
-EndFunction
-
-Function GetArrayOfCurrenciesRows(AgreementInfo, Parameters)
-	CurrenciesColumns = Metadata.Documents.PurchaseInvoice.TabularSections.Currencies.Attributes;
-	CurrenciesTable = New ValueTable();
-	CurrenciesTable.Columns.Add("Key", CurrenciesColumns.Key.Type);
-	CurrenciesTable.Columns.Add("CurrencyFrom", CurrenciesColumns.CurrencyFrom.Type);
-	CurrenciesTable.Columns.Add("Rate", CurrenciesColumns.Rate.Type);
-	CurrenciesTable.Columns.Add("ReverseRate", CurrenciesColumns.ReverseRate.Type);
-	CurrenciesTable.Columns.Add("ShowReverseRate", CurrenciesColumns.ShowReverseRate.Type);
-	CurrenciesTable.Columns.Add("Multiplicity", CurrenciesColumns.Multiplicity.Type);
-	CurrenciesTable.Columns.Add("MovementType", CurrenciesColumns.MovementType.Type);
-	CurrenciesTable.Columns.Add("Amount", CurrenciesColumns.Amount.Type);
-
-	CurrenciesServer.FillCurrencyTable(New Structure("Currencies", CurrenciesTable), Parameters.Date, Parameters.Company,
-		Parameters.Currency, Parameters.UUID, AgreementInfo);
-
-	ArrayOfCurrenciesRows = New Array();
-	For Each RowCurrenciesTable In CurrenciesTable Do
-		NewRow = New Structure("Key, CurrencyFrom, Rate, ReverseRate, ShowReverseRate, Multiplicity, MovementType, Amount");
-		FillPropertyValues(NewRow, RowCurrenciesTable);
-		ArrayOfCurrenciesRows.Add(NewRow);
-	EndDo;
-
-	Return ArrayOfCurrenciesRows;
-EndFunction
-
-Function GetCurrencyByMovementType(ArrayOfMovementsTypes)
-	ArrayOfCurrenciesByMovementTypes = New Array();
-	For Each MovementType In ArrayOfMovementsTypes Do
-		ArrayOfCurrenciesByMovementTypes.Add(New Structure("MovementType, Currency", MovementType,
-			MovementType.Currency));
-	EndDo;
-	Return ArrayOfCurrenciesByMovementTypes;
 EndFunction
 
 Function GetStructureOfTaxRates(Tax, Date, Company, Parameters)

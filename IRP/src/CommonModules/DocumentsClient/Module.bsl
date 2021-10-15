@@ -353,7 +353,6 @@ Procedure AgreementOnChange(Object, Form, Module, Item = Undefined, Settings = U
 		AgreementInfo = CatAgreementsServer.GetAgreementInfo(Object.Agreement);
 	Else
 		AgreementInfo = ServerData.AgreementInfo;
-		CurrenciesClient.FullRefreshTable(Object, Form, AddInfo);
 	EndIf;
 
 	Settings.Insert("CurrentValuesStructure", CurrentValuesStructure);
@@ -449,11 +448,6 @@ Procedure CurrencyOnChange2(Object, Form, Module, Item = Undefined, Settings = U
 	If CurrencySettings.Property("PutServerDataToAddInfo") And CurrencySettings.PutServerDataToAddInfo Then
 		Module.CurrencyOnChangePutServerDataToAddInfo(Object, Form, AddInfo);
 	EndIf;
-	CurrencySettings = Module.CurrencySettings(Object, Form, AddInfo);
-	ServerData = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "ServerData");
-	If ServerData <> Undefined Then
-		CurrenciesClient.FullRefreshTable(Object, Form, AddInfo);
-	EndIf;
 EndProcedure
 
 #EndRegion
@@ -495,7 +489,6 @@ Procedure CompanyOnChange(Object, Form, Module, Item = Undefined, Settings = Und
 			Form.Taxes_CreateFormControls();
 		EndIf;
 	Else
-		CurrenciesClient.FullRefreshTable(Object, Form, AddInfo);
 		If ServerData.RequireCallCreateTaxesFormControls Then
 			ServerData.ArrayOfTaxInfo = Form.Taxes_CreateFormControls();
 		EndIf;
@@ -963,7 +956,6 @@ Procedure DateOnChange(Object, Form, Module, Item = Undefined, Settings = Undefi
 			Form.Taxes_CreateFormControls();
 		EndIf;
 	Else
-		CurrenciesClient.FullRefreshTable(Object, Form, AddInfo);
 		If ServerData.RequireCallCreateTaxesFormControls Then
 			ServerData.ArrayOfTaxInfo = Form.Taxes_CreateFormControls();
 		EndIf;
@@ -1086,11 +1078,6 @@ Procedure ShowUserQueryBoxContinue(Result, AdditionalParameters) Export
 		EndIf;
 
 		Form.Modified = False;
-
-		If AdditionalParameters.Property("AddInfo") Then
-			CurrenciesClient.SetSurfaceTable(Object, Form, AdditionalParameters.AddInfo);
-		EndIf;
-
 		Return;
 	EndIf;
 
@@ -2598,14 +2585,6 @@ EndProcedure
 #Region PrepareServerData
 
 Procedure CommonParametersToServer(Object, Form, ParametersToServer, AddInfo = Undefined)
-
-	If Object.Property("Currencies") Then
-		ArrayOfMovementsTypes = New Array();
-		For Each Row In Object.Currencies Do
-			ArrayOfMovementsTypes.Add(Row.MovementType);
-		EndDo;
-		ParametersToServer.Insert("ArrayOfMovementsTypes", ArrayOfMovementsTypes);
-	EndIf;
 	If Object.Property("ItemList") Then
 		GetItemKeysWithSerialLotNumbers(Object, ParametersToServer);
 	EndIf;
@@ -2639,14 +2618,6 @@ Procedure OnOpenPutServerDataToAddInfo(Object, Form, AddInfo = Undefined) Export
 	OnChangeItemName = "OnOpen";
 	ParametersToServer = New Structure();
 	CommonParametersToServer(Object, Form, ParametersToServer, AddInfo);
-
-	ArrayOfCurrenciesRowsParameters = New Structure();
-	ArrayOfCurrenciesRowsParameters.Insert("Agreement", Object.Agreement);
-	ArrayOfCurrenciesRowsParameters.Insert("Date", Object.Date);
-	ArrayOfCurrenciesRowsParameters.Insert("Company", Object.Company);
-	ArrayOfCurrenciesRowsParameters.Insert("Currency", Object.Currency);
-	ArrayOfCurrenciesRowsParameters.Insert("UUID", Form.UUID);
-	ParametersToServer.Insert("GetArrayOfCurrenciesRows", ArrayOfCurrenciesRowsParameters);
 
 	AgreementInfoParameters = New Structure();
 	AgreementInfoParameters.Insert("Agreement", Object.Agreement);
@@ -2914,14 +2885,6 @@ Procedure PartnerOnChangePutServerDataToAddInfo(Object, Form, AddInfo = Undefine
 	ParametersToServer = New Structure();
 	CommonParametersToServer(Object, Form, ParametersToServer, AddInfo);
 
-	ArrayOfCurrenciesRowsParameters = New Structure();
-	ArrayOfCurrenciesRowsParameters.Insert("Agreement", Object.Agreement);
-	ArrayOfCurrenciesRowsParameters.Insert("Date", Object.Date);
-	ArrayOfCurrenciesRowsParameters.Insert("Company", Object.Company);
-	ArrayOfCurrenciesRowsParameters.Insert("Currency", Object.Currency);
-	ArrayOfCurrenciesRowsParameters.Insert("UUID", Form.UUID);
-	ParametersToServer.Insert("GetArrayOfCurrenciesRows", ArrayOfCurrenciesRowsParameters);
-
 	ArrayOfTaxRatesParameters = New Structure();
 	ArrayOfTaxRatesParameters.Insert("Agreement", Object.Agreement);
 	ParametersToServer.TaxesCache.Insert("GetArrayOfTaxRates", ArrayOfTaxRatesParameters);
@@ -2995,14 +2958,6 @@ Procedure AgreementOnChangePutServerDataToAddInfo(Object, Form, AddInfo = Undefi
 	ParametersToServer = New Structure();
 	CommonParametersToServer(Object, Form, ParametersToServer, AddInfo);
 
-	ArrayOfCurrenciesRowsParameters = New Structure();
-	ArrayOfCurrenciesRowsParameters.Insert("Agreement", Object.Agreement);
-	ArrayOfCurrenciesRowsParameters.Insert("Date", Object.Date);
-	ArrayOfCurrenciesRowsParameters.Insert("Company", Object.Company);
-	ArrayOfCurrenciesRowsParameters.Insert("Currency", Object.Currency);
-	ArrayOfCurrenciesRowsParameters.Insert("UUID", Form.UUID);
-	ParametersToServer.Insert("GetArrayOfCurrenciesRows", ArrayOfCurrenciesRowsParameters);
-
 	ArrayOfTaxRatesParameters = New Structure();
 	ArrayOfTaxRatesParameters.Insert("Agreement", Object.Agreement);
 	ParametersToServer.TaxesCache.Insert("GetArrayOfTaxRates", ArrayOfTaxRatesParameters);
@@ -3034,14 +2989,6 @@ Procedure CurrencyOnChangePutServerDataToAddInfo(Object, Form, AddInfo = Undefin
 	ParametersToServer = New Structure();
 	CommonParametersToServer(Object, Form, ParametersToServer, AddInfo);
 
-	ArrayOfCurrenciesRowsParameters = New Structure();
-	ArrayOfCurrenciesRowsParameters.Insert("Agreement", Object.Agreement);
-	ArrayOfCurrenciesRowsParameters.Insert("Date", Object.Date);
-	ArrayOfCurrenciesRowsParameters.Insert("Company", Object.Company);
-	ArrayOfCurrenciesRowsParameters.Insert("Currency", Object.Currency);
-	ArrayOfCurrenciesRowsParameters.Insert("UUID", Form.UUID);
-	ParametersToServer.Insert("GetArrayOfCurrenciesRows", ArrayOfCurrenciesRowsParameters);
-
 	AgreementInfoParameters = New Structure();
 	AgreementInfoParameters.Insert("Agreement", Object.Agreement);
 	ParametersToServer.Insert("GetAgreementInfo", AgreementInfoParameters);
@@ -3064,14 +3011,6 @@ Procedure CompanyOnChangePutServerDataToAddInfo(Object, Form, AddInfo = Undefine
 	OnChangeItemName = "Company";
 	ParametersToServer = New Structure();
 	CommonParametersToServer(Object, Form, ParametersToServer, AddInfo);
-
-	ArrayOfCurrenciesRowsParameters = New Structure();
-	ArrayOfCurrenciesRowsParameters.Insert("Agreement", Object.Agreement);
-	ArrayOfCurrenciesRowsParameters.Insert("Date", Object.Date);
-	ArrayOfCurrenciesRowsParameters.Insert("Company", Object.Company);
-	ArrayOfCurrenciesRowsParameters.Insert("Currency", Object.Currency);
-	ArrayOfCurrenciesRowsParameters.Insert("UUID", Form.UUID);
-	ParametersToServer.Insert("GetArrayOfCurrenciesRows", ArrayOfCurrenciesRowsParameters);
 
 	AgreementInfoParameters = New Structure();
 	AgreementInfoParameters.Insert("Agreement", Object.Agreement);
@@ -3133,14 +3072,6 @@ Procedure DateOnChangePutServerDataToAddInfo(Object, Form, AddInfo = Undefined) 
 	OnChangeItemName = "Date";
 	ParametersToServer = New Structure();
 	CommonParametersToServer(Object, Form, ParametersToServer, AddInfo);
-
-	ArrayOfCurrenciesRowsParameters = New Structure();
-	ArrayOfCurrenciesRowsParameters.Insert("Agreement", Object.Agreement);
-	ArrayOfCurrenciesRowsParameters.Insert("Date", Object.Date);
-	ArrayOfCurrenciesRowsParameters.Insert("Company", Object.Company);
-	ArrayOfCurrenciesRowsParameters.Insert("Currency", Object.Currency);
-	ArrayOfCurrenciesRowsParameters.Insert("UUID", Form.UUID);
-	ParametersToServer.Insert("GetArrayOfCurrenciesRows", ArrayOfCurrenciesRowsParameters);
 
 	MetaDataStructureParameters = New Structure();
 	MetaDataStructureParameters.Insert("Ref", Object.Ref);

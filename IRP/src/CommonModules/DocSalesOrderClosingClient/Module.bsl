@@ -168,7 +168,7 @@ Function ItemListItemSettings(Object, Form, AddInfo = Undefined) Export
 	Actions.Insert("UpdateItemType", "UpdateItemType");
 
 	AfterActionsCalculateSettings = New Structure();
-	PriceDate = CalculationStringsClientServer.GetPriceDateByRefAndDate(Object.Ref, Object.Date);
+	PriceDate = CalculationStringsClientServer.GetSliceLastDateByRefAndDate(Object.Ref, Object.Date);
 	AfterActionsCalculateSettings.Insert("UpdatePrice", New Structure("Period, PriceType", PriceDate,
 		Form.CurrentPriceType));
 
@@ -204,7 +204,7 @@ Function ItemListItemKeySettings(Object, Form, AddInfo = Undefined) Export
 	Actions.Insert("UpdateProcurementMethod", "UpdateProcurementMethod");
 
 	AfterActionsCalculateSettings = New Structure();
-	PriceDate = CalculationStringsClientServer.GetPriceDateByRefAndDate(Object.Ref, Object.Date);
+	PriceDate = CalculationStringsClientServer.GetSliceLastDateByRefAndDate(Object.Ref, Object.Date);
 	AfterActionsCalculateSettings.Insert("UpdatePrice", New Structure("Period, PriceType", PriceDate,
 		Form.CurrentPriceType));
 
@@ -697,7 +697,7 @@ Function DateSettings(Object, Form, AddInfo = Undefined) Export
 	Actions.Insert("ChangeDeliveryDate", "ChangeDeliveryDate");
 
 	AfterActionsCalculateSettings = New Structure();
-	PriceDate = CalculationStringsClientServer.GetPriceDateByRefAndDate(Object.Ref, Object.Date);
+	PriceDate = CalculationStringsClientServer.GetSliceLastDateByRefAndDate(Object.Ref, Object.Date);
 	AfterActionsCalculateSettings.Insert("UpdatePrice", New Structure("Period, PriceType", PriceDate,
 		Form.CurrentPriceType));
 

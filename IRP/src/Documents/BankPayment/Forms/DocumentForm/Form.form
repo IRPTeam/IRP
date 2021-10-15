@@ -1560,7 +1560,7 @@
           <name>PaymentListCommandBar</name>
           <id>27</id>
           <items xsi:type="form:Button">
-            <name>PaymentListEditCurrencies</name>
+            <name>EditCurrencies</name>
             <id>273</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -1568,7 +1568,7 @@
               <common>true</common>
             </userVisible>
             <extendedTooltip>
-              <name>PaymentListEditCurrenciesExtendedTooltip</name>
+              <name>EditCurrenciesExtendedTooltip</name>
               <id>274</id>
               <visible>true</visible>
               <enabled>true</enabled>
@@ -2303,6 +2303,49 @@
             <typeDomainEnabled>true</typeDomainEnabled>
             <textEdit>true</textEdit>
           </extInfo>
+        </items>
+        <items xsi:type="form:FormField">
+          <name>CurrenciesIsFixed</name>
+          <id>317</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <dataPath xsi:type="form:DataPath">
+            <segments>Object.Currencies.IsFixed</segments>
+          </dataPath>
+          <extendedTooltip>
+            <name>CurrenciesIsFixedExtendedTooltip</name>
+            <id>319</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <type>Label</type>
+            <autoMaxWidth>true</autoMaxWidth>
+            <autoMaxHeight>true</autoMaxHeight>
+            <extInfo xsi:type="form:LabelDecorationExtInfo">
+              <horizontalAlign>Left</horizontalAlign>
+            </extInfo>
+          </extendedTooltip>
+          <contextMenu>
+            <name>CurrenciesIsFixedContextMenu</name>
+            <id>318</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <autoFill>true</autoFill>
+          </contextMenu>
+          <type>CheckBoxField</type>
+          <editMode>Enter</editMode>
+          <showInHeader>true</showInHeader>
+          <headerHorizontalAlign>Left</headerHorizontalAlign>
+          <showInFooter>true</showInFooter>
+          <extInfo xsi:type="form:CheckBoxFieldExtInfo"/>
         </items>
         <items xsi:type="form:FormField">
           <name>CurrenciesCurrencyFrom</name>

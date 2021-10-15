@@ -1126,7 +1126,7 @@ Procedure ShowUserQueryBoxContinue(Result, AdditionalParameters) Export
 	If Result.Property("UpdatePrices") Then
 
 		Settings.CalculateSettings = New Structure();
-		PriceDate = CalculationStringsClientServer.GetPriceDateByRefAndDate(Object.Ref, Object.Date);
+		PriceDate = CalculationStringsClientServer.GetSliceLastDateByRefAndDate(Object.Ref, Object.Date);
 		Settings.CalculateSettings.Insert("UpdatePrice", New Structure("Period, PriceType", PriceDate,
 			Form.CurrentPriceType));
 
@@ -1195,7 +1195,7 @@ Procedure PickupItemsEnd(Result, AddInfo) Export
 	CalculationSettings = New Structure();
 	If Object.Property("Agreement") Then
 		AgreementInfo = CatAgreementsServer.GetAgreementInfo(Object.Agreement);
-		PriceDate = CalculationStringsClientServer.GetPriceDateByRefAndDate(Object.Ref, Object.Date);
+		PriceDate = CalculationStringsClientServer.GetSliceLastDateByRefAndDate(Object.Ref, Object.Date);
 		CalculationSettings.Insert("UpdatePrice", New Structure("Period, PriceType", PriceDate,
 			AgreementInfo.PriceType));
 		FilterString = "Item, ItemKey, Unit, Price";
@@ -2416,7 +2416,7 @@ Procedure ItemListUnitOnChange(Object, Form, Module, Item = Undefined, Settings 
 	EndIf;
 
 	Settings.CalculateSettings.Insert("UpdatePrice");
-	PriceDate = CalculationStringsClientServer.GetPriceDateByRefAndDate(Object.Ref, Object.Date);
+	PriceDate = CalculationStringsClientServer.GetSliceLastDateByRefAndDate(Object.Ref, Object.Date);
 	Settings.CalculateSettings.UpdatePrice = New Structure("Period, PriceType", PriceDate, Form.CurrentPriceType);
 
 	ItemListCalculateRowsAmounts(Object, Form, Settings, Undefined, AddInfo);
@@ -2455,7 +2455,7 @@ Procedure ItemListPriceTypeOnChange(Object, Form, Module, Item = Undefined, Sett
 
 	Settings.CalculateSettings.Insert("UpdatePrice");
 	Settings.CalculateSettings.UpdatePrice = New Structure("Period, PriceType",
-		CalculationStringsClientServer.GetPriceDateByRefAndDate(Object.Ref, Object.Date), Form.CurrentPriceType);
+		CalculationStringsClientServer.GetSliceLastDateByRefAndDate(Object.Ref, Object.Date), Form.CurrentPriceType);
 
 	ItemListCalculateRowsAmounts(Object, Form, Settings, Undefined, AddInfo);
 EndProcedure

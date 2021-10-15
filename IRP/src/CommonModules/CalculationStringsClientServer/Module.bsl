@@ -746,7 +746,7 @@ Function IsPricesChanged(Object, Form, Settings, AddInfo = Undefined) Export
 	ListCache = DataCollectionToArrayOfStructures(Object.ItemList, GetColumnNames_ItemList());
 
 	CalculationSettings = New Structure();
-	PriceDate = GetPriceDateByRefAndDate(Object.Ref, Object.Date);
+	PriceDate = GetSliceLastDateByRefAndDate(Object.Ref, Object.Date);
 	CalculationSettings.Insert("UpdatePrice", New Structure("Period, PriceType", PriceDate, Form.CurrentPriceType));
 
 	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "UpdateRowsAfterCalculate", False);
@@ -764,7 +764,7 @@ Function IsPricesChanged(Object, Form, Settings, AddInfo = Undefined) Export
 	Return False;
 EndFunction
 
-Function GetPriceDateByRefAndDate(Ref, Date) Export
+Function GetSliceLastDateByRefAndDate(Ref, Date) Export
 	If Not ValueIsFilled(Ref) Then
 		If Not ValueIsFilled(Date) Then
 			Return CurrentDate();

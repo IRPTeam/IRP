@@ -434,18 +434,43 @@ Function GetParameters_BP(Object, Row) Export
 	Return Parameters;
 EndFunction
 
-Function GetCurrenciesTable_Refactoring(Currencies, RowKey = Undefined)
+Function GetCurrenciesTable_Refactoring(Currencies, RowKey = Undefined) Export
 	ArrayOfCurrenciesRows = New Array();
 	For Each Row In Currencies Do
 		If RowKey <> Undefined And Row.Key <> RowKey Then
 			Continue;
 		EndIf;
-		CurrenciesRow = New Structure("Key, CurrencyFrom, Rate, ReverseRate, ShowReverseRate, Multiplicity, MovementType, Amount");
+		CurrenciesRow = New Structure("Key, IsFixed, CurrencyFrom, Rate, ReverseRate,
+			|ShowReverseRate, Multiplicity, MovementType, Amount");
 		FillPropertyValues(CurrenciesRow, Row);
 		ArrayOfCurrenciesRows.Add(CurrenciesRow);
 	EndDo;
 	Return ArrayOfCurrenciesRows;
 EndFunction
+
+Procedure DeleteUnusedRowsFromCurrenciesTable_Refactoring(Currencies, MainTable) Export
+	ArrayForDelete = New Array();
+	For Each Row In Currencies Do
+		If Not MainTable.FindRows(New Structure("Key", Row.Key)).Count() Then
+			ArrayForDelete.Add(Row);
+		EndIf;
+	EndDo;
+	For Each ItemForDelete In ArrayForDelete Do
+		Currencies.Delete(ItemForDelete);
+	EndDo;
+EndProcedure
+
+Procedure DeleteRowsByKeyFromCurrenciesTable_Refactoring(Currencies, RowKey) Export
+	ArrayForDelete = New Array();
+	For Each Row In Currencies Do
+		If Row.Key = RowKey Then
+			ArrayForDelete.Add(Row);
+		EndIf;
+	EndDo;
+	For Each ItemForDelete In ArrayForDelete Do
+		Currencies.Delete(ItemForDelete);
+	EndDo;
+EndProcedure
 
 Procedure CalculateAmount_Refactoring(CurrenciesTable, DocumentAmount) Export
 	For Each Row In CurrenciesTable Do

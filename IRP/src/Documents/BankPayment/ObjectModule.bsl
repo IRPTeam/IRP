@@ -2,7 +2,14 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	If DataExchange.Load Then
 		Return;
 	EndIf;
-
+	
+	CurrenciesClientServer.DeleteUnusedRowsFromCurrenciesTable_Refactoring(ThisObject.Currencies, ThisObject.PaymentList);
+	For Each Row In ThisObject.PaymentList Do
+		Parameters = CurrenciesClientServer.GetParameters_BP(ThisObject, Row);
+		CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable_Refactoring(ThisObject.Currencies, Row.Key);
+		CurrenciesServer.UpdateCurrencyTable_Refactoring(Parameters, ThisObject.Currencies);
+	EndDo;
+	
 	ThisObject.DocumentAmount = ThisObject.PaymentList.Total("Amount");
 EndProcedure
 

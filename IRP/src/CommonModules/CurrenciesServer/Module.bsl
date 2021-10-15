@@ -440,6 +440,7 @@ EndProcedure
 Procedure UpdateCurrencyTable_Refactoring(Parameters, CurrenciesTable) Export
 	EmptyCurrenciesTable = New ValueTable();
 	EmptyCurrenciesTable.Columns.Add("Key");
+	EmptyCurrenciesTable.Columns.Add("IsFixed");
 	EmptyCurrenciesTable.Columns.Add("CurrencyFrom");
 	EmptyCurrenciesTable.Columns.Add("Rate");
 	EmptyCurrenciesTable.Columns.Add("ReverseRate");
@@ -448,7 +449,7 @@ Procedure UpdateCurrencyTable_Refactoring(Parameters, CurrenciesTable) Export
 	EmptyCurrenciesTable.Columns.Add("MovementType");
 	EmptyCurrenciesTable.Columns.Add("Amount");
 	
-	RatePeriod    = CalculationStringsClientServer.GetPriceDateByRefAndDate(Parameters.Ref, Parameters.Date);
+	RatePeriod    = CalculationStringsClientServer.GetSliceLastDateByRefAndDate(Parameters.Ref, Parameters.Date);
 	AgreementInfo = CatAgreementsServer.GetAgreementInfo(Parameters.Agreement);
 	
 	// Agreement currency
@@ -493,11 +494,15 @@ Procedure UpdateCurrencyTable_Refactoring(Parameters, CurrenciesTable) Export
 		Filter = New Structure("Key, CurrencyFrom, MovementType");
 		FillPropertyValues(Filter, Row);
 		ArrayOfRows = EmptyCurrenciesTable.FindRows(Filter);
-		If ArrayOfRows.Count() Then
+		If ArrayOfRows.Count() And Row.IsFixed Then
 			NewRow = CurrenciesTable.Add();
 			FillPropertyValues(NewRow, Row);
-			NewRow.RatePresentation = ?(Row.ShowReverseRate = True, Row.ReverseRate, Row.Rate);
-			NewRow.IsVisible = (Row.CurrencyFrom <> Row.MovementType.Currency);
+			If CommonFunctionsClientServer.ObjectHasProperty(NewRow, "RatePresentation") Then
+				NewRow.RatePresentation = ?(Row.ShowReverseRate = True, Row.ReverseRate, Row.Rate);
+			EndIf;
+			If CommonFunctionsClientServer.ObjectHasProperty(NewRow, "IsVisible") Then
+				NewRow.IsVisible = (Row.CurrencyFrom <> Row.MovementType.Currency);
+			EndIf;
 		EndIf;
 	EndDo;
 	
@@ -508,18 +513,31 @@ Procedure UpdateCurrencyTable_Refactoring(Parameters, CurrenciesTable) Export
 		If Not ArrayOfRows.Count() Then
 			NewRow = CurrenciesTable.Add();
 			FillPropertyValues(NewRow, Row);
-			NewRow.RatePresentation = ?(Row.ShowReverseRate = True, Row.ReverseRate, Row.Rate);
-			NewRow.IsVisible = (Row.CurrencyFrom <> Row.MovementType.Currency);
+			If CommonFunctionsClientServer.ObjectHasProperty(NewRow, "RatePresentation") Then
+				NewRow.RatePresentation = ?(Row.ShowReverseRate = True, Row.ReverseRate, Row.Rate);
+			EndIf;
+			If CommonFunctionsClientServer.ObjectHasProperty(NewRow, "IsVisible") Then
+				NewRow.IsVisible = (Row.CurrencyFrom <> Row.MovementType.Currency);
+			EndIf;
+			If CommonFunctionsClientServer.ObjectHasProperty(NewRow, "RateOrigin") Then
+				NewRow.RateOrigin = Row.Rate;
+			EndIf;
+			If CommonFunctionsClientServer.ObjectHasProperty(NewRow, "ReverseRateOrigin") Then
+				NewRow.ReverseRateOrigin = Row.ReverseRate;
+			EndIf;
+			If CommonFunctionsClientServer.ObjectHasProperty(NewRow, "MultiplicityOrigin") Then
+				NewRow.MultiplicityOrigin = Row.Multiplicity;
+			EndIf;
 		Else
 			For Each ItemOfArray In ArrayOfRows Do
-				If Not ValueIsFilled(ItemOfArray.Rate) Then
-					ItemOfArray.Rate = Row.Rate;
+				If CommonFunctionsClientServer.ObjectHasProperty(NewRow, "RateOrigin") Then
+					ItemOfArray.RateOrigin = Row.Rate;
 				EndIf;
-				If Not ValueIsFilled(ItemOfArray.ReverseRate) Then
-					ItemOfArray.ReverseRate = Row.ReverseRate;
+				If CommonFunctionsClientServer.ObjectHasProperty(NewRow, "ReverseRateOrigin") Then
+					ItemOfArray.ReverseRateOrigin = Row.ReverseRate;
 				EndIf;
-				If Not ValueIsFilled(ItemOfArray.Multiplicity) Then
-					ItemOfArray.Multiplicity = Row.Multiplicity;
+				If CommonFunctionsClientServer.ObjectHasProperty(NewRow, "MultiplicityOrigin") Then
+					ItemOfArray.MultiplicityOrigin = Row.Multiplicity;
 				EndIf;
 				CurrenciesClientServer.CalculateAmountByRow_Refactoring(ItemOfArray, Parameters.DocumentAmount);
 			EndDo;

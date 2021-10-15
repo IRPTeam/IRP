@@ -51,7 +51,7 @@ Procedure CalculateTableAtServer(Form, Object) Export
 		If ValueIsFilled(Object.Agreement) Then
 
 			CalculationSettings = CalculationStringsClientServer.GetCalculationSettings();
-			PriceDate = CalculationStringsClientServer.GetPriceDateByRefAndDate(Object.Ref, Object.Date);
+			PriceDate = CalculationStringsClientServer.GetSliceLastDateByRefAndDate(Object.Ref, Object.Date);
 			CalculationSettings.Insert("UpdatePrice", New Structure("Period, PriceType", PriceDate,
 				Object.Agreement.PriceType));
 

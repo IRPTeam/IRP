@@ -10,7 +10,7 @@ EndProcedure
 &AtClient
 Procedure Ok(Command)
 	Result = New Structure();
-	Result.Insert("Currencies", CurrenciesClient.GetCurrenciesTable_Refactoring(ThisObject.Currencies));
+	Result.Insert("Currencies", CurrenciesClientServer.GetCurrenciesTable_Refactoring(ThisObject.Currencies));
 	Result.Insert("RowKey", ThisObject.RowKey);
 	Close(Result);
 EndProcedure
@@ -22,15 +22,24 @@ EndProcedure
 
 &AtClient
 Procedure CurrenciesSelection(Item, RowSelected, Field, StandardProcessing)
-	If Upper(Field.Name) <> Upper("CurrenciesShowReverseRate") Then
-		Return;
-	EndIf;
 	CurrentData = ThisObject.Items.Currencies.CurrentData;
 	If CurrentData = Undefined Then
 		Return;
 	EndIf;
-	CurrentData.ShowReverseRate = Not CurrentData.ShowReverseRate;
-	CurrentData.RatePresentation = ?(CurrentData.ShowReverseRate, CurrentData.ReverseRate, CurrentData.Rate);
+	If Upper(Field.Name) = Upper("CurrenciesShowReverseRate") Then
+		CurrentData.ShowReverseRate = Not CurrentData.ShowReverseRate;
+		CurrentData.RatePresentation = ?(CurrentData.ShowReverseRate, CurrentData.ReverseRate, CurrentData.Rate);
+	EndIf;
+	If Upper(Field.Name) = Upper("CurrenciesIsFixed") Then
+		CurrentData.IsFixed = Not CurrentData.IsFixed;
+	Endif;
+	If Not CurrentData.IsFixed Then
+		CurrentData.Rate             = CurrentData.RateOrigin;
+		CurrentData.ReverseRate      = CurrentData.ReverseRateOrigin;
+		CurrentData.Multiplicity     = CurrentData.MultiplicityOrigin;
+		CurrentData.RatePresentation = ?(CurrentData.ShowReverseRate, CurrentData.ReverseRate, CurrentData.Rate);
+		CurrenciesClientServer.CalculateAmount_Refactoring(ThisObject.Currencies, ThisObject.DocumentAmount);
+	EndIf;
 EndProcedure
 
 &AtClient
@@ -63,11 +72,17 @@ Procedure CurrenciesRatePresentationOnChange(Item)
 		EndIf;
 	EndIf;
 	CurrenciesClientServer.CalculateAmount_Refactoring(ThisObject.Currencies, ThisObject.DocumentAmount);
+	CurrentData.IsFixed = True;
 EndProcedure
 
 &AtClient
 Procedure CurrenciesMultiplicityOnChange(Item)
+	CurrentData = ThisObject.Items.Currencies.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
 	CurrenciesClientServer.CalculateAmount_Refactoring(ThisObject.Currencies, ThisObject.DocumentAmount);
+	CurrentData.IsFixed = True;
 EndProcedure
 
 &AtClient
@@ -85,4 +100,5 @@ Procedure CurrenciesAmountOnChange(Item)
 	CurrentData.Rate = CurrentData.Amount * CurrentData.Multiplicity / ThisObject.DocumentAmount;
 	CurrentData.ReverseRate = ThisObject.DocumentAmount / (CurrentData.Amount * CurrentData.Multiplicity);
 	CurrentData.RatePresentation = ?(CurrentData.ShowReverseRate, CurrentData.ReverseRate, CurrentData.Rate);
+	CurrentData.IsFixed = True;
 EndProcedure

@@ -196,13 +196,4 @@
     <fillValue xsi:type="core:UndefinedValue"/>
     <mainFilter>true</mainFilter>
   </dimensions>
-  <forms uuid="ab616530-682b-4442-9ec3-2e901d198407">
-    <name>RecordForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Record form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
 </mdclass:InformationRegister>

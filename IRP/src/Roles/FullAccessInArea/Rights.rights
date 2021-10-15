@@ -12842,13 +12842,6 @@
 		</right>
 	</object>
 	<object>
-		<name>CommonForm.PickUpDocuments</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
 		<name>Subsystem.SalesAR</name>
 		<right>
 			<name>View</name>

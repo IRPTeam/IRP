@@ -70,7 +70,11 @@ Procedure AreaUpdate() Export
 		
 		// User
 		User = Catalogs.Users.CreateItem();
-		DescriptionStructure = FillingFromClassifiers.DescriptionStructure(CurrentArea.AdminLogin);
+		DescriptionStructure = New Structure();
+		DescriptionStructure.Insert("Description_" + LocalizationReuse.GetLocalizationCode(), CurrentArea.AdminLogin);
+		DescriptionStructure.Insert("Description_en", CurrentArea.AdminLogin);
+		DescriptionStructure.Insert("Description", CurrentArea.AdminLogin);
+
 		FillPropertyValues(User, DescriptionStructure);
 		If ValueIsFilled(CurrentArea.AdminLocalization) Then
 			User.LocalizationCode = CurrentArea.AdminLocalization;

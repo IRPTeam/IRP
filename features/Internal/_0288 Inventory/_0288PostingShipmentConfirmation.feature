@@ -567,7 +567,7 @@ Scenario: _028830 check link/unlink form in the SC
 			| 'Distribution department' |
 		And I select current line in "List" table			
 	* Select items from basis documents
-		And I click "AddBasisDocuments" button
+		And in the table "ItemList" I click "Add basis documents" button
 		And I expand current line in "BasisesTree" table
 		And I expand a line in "BasisesTree" table
 			| 'Row presentation'                            | 'Use' |
@@ -599,7 +599,7 @@ Scenario: _028830 check link/unlink form in the SC
 		| '2' | 'Sales invoice 101 dated 05.03.2021 12:56:38' | ''          | '2,000' | 'SC'           |
 		| '3' | 'Sales invoice 103 dated 05.03.2021 12:59:44' | ''          | '2,000' | 'SC'           |
 	* Unlink line
-		And I click "LinkUnlinkBasisDocuments" button
+		And in the table "ItemList" I click "Link unlink basis documents" button
 		Then "Link / unlink document row" window is opened
 		And I go to line in "ItemListRows" table
 			| '#' | 'Quantity' | 'Row presentation' | 'Store'    | 'Unit' |
@@ -614,7 +614,7 @@ Scenario: _028830 check link/unlink form in the SC
 			| 'Boots' | '37/18SD'  | 'Sales invoice 101 dated 05.03.2021 12:56:38' |
 			| 'Boots' | '37/18SD'  | ''                                            |
 	* Link line
-		And I click "LinkUnlinkBasisDocuments" button
+		And in the table "ItemList" I click "Link unlink basis documents" button
 		And I go to line in "ItemListRows" table
 			| '#' | 'Quantity' | 'Row presentation' | 'Store'    | 'Unit' |
 			| '3' | '2,000'    | 'Boots (37/18SD)'   | 'Store 02' | 'pcs'  |
@@ -642,7 +642,8 @@ Scenario: _028830 check link/unlink form in the SC
 			| 'Item'  | 'Item key' | 'Quantity' | 'Store'    |
 			| 'Boots' | '37/18SD'  | '2,000'    | 'Store 02' |
 		And in the table "ItemList" I click the button named "ItemListContextMenuDelete"
-		And I click "AddBasisDocuments" button
+		
+		And in the table "ItemList" I click "Add basis documents" button
 		And I go to line in "BasisesTree" table
 			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
 			| 'TRY'      | '648,15' | '2,000'    | 'Boots (37/18SD)'   | 'pcs'  | 'No'  |

@@ -3,11 +3,11 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 		Return;
 	EndIf;
 	
-	CurrenciesClientServer.DeleteUnusedRowsFromCurrenciesTable_Refactoring(ThisObject.Currencies, ThisObject.PaymentList);
+	CurrenciesClientServer.DeleteUnusedRowsFromCurrenciesTable(ThisObject.Currencies, ThisObject.PaymentList);
 	For Each Row In ThisObject.PaymentList Do
 		Parameters = CurrenciesClientServer.GetParameters_BP(ThisObject, Row);
-		CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable_Refactoring(ThisObject.Currencies, Row.Key);
-		CurrenciesServer.UpdateCurrencyTable_Refactoring(Parameters, ThisObject.Currencies);
+		CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, Row.Key);
+		CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
 	EndDo;
 	
 	ThisObject.DocumentAmount = ThisObject.PaymentList.Total("Amount");

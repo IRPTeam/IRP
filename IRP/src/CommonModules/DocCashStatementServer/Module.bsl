@@ -93,17 +93,7 @@ Procedure FillTransactions(Object, AddInfo = Undefined) Export
 	QueryResult = Query.Execute().Unload();
 	Object.PaymentList.Load(QueryResult);
 
-	Object.Currencies.Clear();
-	For Each Row In Object.PaymentList Do
-		Row.Key = New UUID();
-		If Row.Account.Type = Enums.CashAccountTypes.POS Then
-			CurrenciesServer.FillCurrencyTable(Object, Object.Date, Object.Company, Row.Currency, Row.Key, Undefined);
-			CurrenciesServer.CalculateAmount(Object, Row.Amount, Row.Key, Undefined);
-		EndIf;
-	EndDo;
-
 	RecalculateClosingBalance(Object);
-
 EndProcedure
 
 Procedure RecalculateClosingBalance(Object)

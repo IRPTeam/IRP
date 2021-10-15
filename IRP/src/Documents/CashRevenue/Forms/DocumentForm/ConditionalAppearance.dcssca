@@ -187,45 +187,4 @@
 			</dcscor:item>
 		</appearance>
 	</item>
-	<item>
-		<selection>
-			<item>
-				<field>PaymentListCurrenciesMovementType</field>
-			</item>
-			<item>
-				<field>PaymentListCurrenciesMovementTypeType</field>
-			</item>
-			<item>
-				<field>PaymentListCurrenciesCurrencyFrom</field>
-			</item>
-			<item>
-				<field>PaymentListCurrenciesMovementTypeCurrency</field>
-			</item>
-			<item>
-				<field>PaymentListCurrenciesShowReverseRate</field>
-			</item>
-			<item>
-				<field>PaymentListCurrenciesRatePresentation</field>
-			</item>
-			<item>
-				<field>PaymentListCurrenciesMultiplicity</field>
-			</item>
-			<item>
-				<field>PaymentListCurrenciesAmount</field>
-			</item>
-		</selection>
-		<filter>
-			<item xsi:type="FilterItemComparison">
-				<left xsi:type="dcscor:Field">Object.Currencies.IsVisible</left>
-				<comparisonType>Equal</comparisonType>
-				<right xsi:type="xs:boolean">false</right>
-			</item>
-		</filter>
-		<appearance>
-			<dcscor:item xsi:type="SettingsParameterValue">
-				<dcscor:parameter>Visible</dcscor:parameter>
-				<dcscor:value xsi:type="xs:boolean">false</dcscor:value>
-			</dcscor:item>
-		</appearance>
-	</item>
 </ConditionalAppearance>

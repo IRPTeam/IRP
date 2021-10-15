@@ -26,23 +26,8 @@ Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefin
 
 	DocPurchaseOrderClosingClient.NotificationProcessing(Object, ThisObject, EventName, Parameter, Source);
 
-	ServerData = Undefined;
-	If TypeOf(Parameter) = Type("Structure") And Parameter.Property("AddInfo") Then
-		ServerData = CommonFunctionsClientServer.GetFromAddInfo(Parameter.AddInfo, "ServerData");
-	EndIf;
-
 	If EventName = "NewBarcode" And IsInputAvailable() Then
 		SearchByBarcode(Undefined, Parameter);
-	EndIf;
-
-	If Upper(EventName) = Upper("CallbackHandler") Then
-		UpdateTotalAmounts();
-		CurrenciesClient.CalculateAmount(Object, ThisObject);
-		CurrenciesClient.SetRatePresentation(Object, ThisObject);
-
-		If ServerData <> Undefined Then
-			CurrenciesClient.SetVisibleRows(Object, ThisObject, Parameter.AddInfo);
-		EndIf;
 	EndIf;
 EndProcedure
 
@@ -465,40 +450,6 @@ EndProcedure
 &AtClient
 Procedure ShowRowKey(Command)
 	DocumentsClient.ShowRowKey(ThisObject);
-EndProcedure
-
-#EndRegion
-
-#Region Currencies
-
-&AtClient
-Procedure CurrenciesSelection(Item, RowSelected, Field, StandardProcessing)
-	CurrenciesClient.CurrenciesTable_Selection(Object, ThisObject, Item, RowSelected, Field, StandardProcessing);
-EndProcedure
-
-&AtClient
-Procedure CurrenciesRatePresentationOnChange(Item)
-	CurrenciesClient.CurrenciesTable_RatePresentationOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure CurrenciesMultiplicityOnChange(Item)
-	CurrenciesClient.CurrenciesTable_MultiplicityOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure CurrenciesAmountOnChange(Item)
-	CurrenciesClient.CurrenciesTable_AmountOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure CurrenciesBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
-	Cancel = True;
-EndProcedure
-
-&AtClient
-Procedure CurrenciesBeforeDeleteRow(Item, Cancel)
-	Cancel = True;
 EndProcedure
 
 #EndRegion

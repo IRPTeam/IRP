@@ -74,12 +74,6 @@ Procedure OnOpen(Object, Form, Cancel, AddInfo = Undefined) Export
 #If AtClient Then
 	DocumentsClient.SetTextOfDescriptionAtForm(Object, Form);
 #EndIf
-
-	If ValueIsFilled(Object.Ref) Then
-		CurrenciesClient.SetSurfaceTable(Object, Form, AddInfo);
-	Else
-		CurrenciesClient.FullRefreshTable(Object, Form, AddInfo);
-	EndIf;
 EndProcedure
 
 Procedure NotificationProcessing(Object, Form, EventName, Parameter, Source, AddInfo = Undefined) Export
@@ -88,7 +82,6 @@ EndProcedure
 
 Procedure AfterWriteAtClient(Object, Form, WriteParameters, AddInfo = Undefined) Export
 	DocumentsClient.AfterWriteAtClientPutServerDataToAddInfo(Object, Form, AddInfo);
-	CurrenciesClient.SetVisibleRows(Object, ThisObject, AddInfo);
 	RowIDInfoClient.AfterWriteAtClient(Object, Form, WriteParameters, AddInfo);
 EndProcedure
 
@@ -103,7 +96,6 @@ EndProcedure
 Procedure ItemListOnChange(Object, Form, Item = Undefined, CurrentRowData = Undefined) Export
 	DocumentsClient.FillRowIDInItemList(Object);
 	DocumentsClient.FillDeliveryDates(Object, Form);
-	CurrenciesClient.CalculateAmount(Object, Form);
 	RowIDInfoClient.UpdateQuantity(Object, Form);
 EndProcedure
 

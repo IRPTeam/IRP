@@ -2185,7 +2185,6 @@
       <items xsi:type="form:Table">
         <name>Currencies</name>
         <id>277</id>
-        <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
           <common>true</common>

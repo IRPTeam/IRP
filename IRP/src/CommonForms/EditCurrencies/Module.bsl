@@ -3,7 +3,7 @@
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	ThisObject.DocumentAmount = Parameters.DocumentAmount;
 	ThisObject.RowKey = Parameters.RowKey;
-	CurrenciesServer.UpdateCurrencyTable_Refactoring(Parameters, ThisObject.Currencies);
+	CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
 	ThisObject.Currencies.Sort("MovementType");
 	For Each Row In ThisObject.Currencies Do
 		Row.RatePresentation = ?(Row.ShowReverseRate, Row.ReverseRate, Row.Rate);
@@ -13,7 +13,7 @@ EndProcedure
 &AtClient
 Procedure Ok(Command)
 	Result = New Structure();
-	Result.Insert("Currencies", CurrenciesClientServer.GetCurrenciesTable_Refactoring(ThisObject.Currencies));
+	Result.Insert("Currencies", CurrenciesClientServer.GetCurrenciesTable(ThisObject.Currencies));
 	Result.Insert("RowKey", ThisObject.RowKey);
 	Close(Result);
 EndProcedure
@@ -41,7 +41,7 @@ Procedure CurrenciesSelection(Item, RowSelected, Field, StandardProcessing)
 		CurrentData.ReverseRate      = CurrentData.ReverseRateOrigin;
 		CurrentData.Multiplicity     = CurrentData.MultiplicityOrigin;
 		CurrentData.RatePresentation = ?(CurrentData.ShowReverseRate, CurrentData.ReverseRate, CurrentData.Rate);
-		CurrenciesClientServer.CalculateAmount_Refactoring(ThisObject.Currencies, ThisObject.DocumentAmount);
+		CurrenciesClientServer.CalculateAmount(ThisObject.Currencies, ThisObject.DocumentAmount);
 	EndIf;
 EndProcedure
 
@@ -74,7 +74,7 @@ Procedure CurrenciesRatePresentationOnChange(Item)
 			CurrentData.ReverseRate = 1 / CurrentData.RatePresentation;
 		EndIf;
 	EndIf;
-	CurrenciesClientServer.CalculateAmount_Refactoring(ThisObject.Currencies, ThisObject.DocumentAmount);
+	CurrenciesClientServer.CalculateAmount(ThisObject.Currencies, ThisObject.DocumentAmount);
 	CurrentData.IsFixed = True;
 EndProcedure
 
@@ -84,7 +84,7 @@ Procedure CurrenciesMultiplicityOnChange(Item)
 	If CurrentData = Undefined Then
 		Return;
 	EndIf;
-	CurrenciesClientServer.CalculateAmount_Refactoring(ThisObject.Currencies, ThisObject.DocumentAmount);
+	CurrenciesClientServer.CalculateAmount(ThisObject.Currencies, ThisObject.DocumentAmount);
 	CurrentData.IsFixed = True;
 EndProcedure
 

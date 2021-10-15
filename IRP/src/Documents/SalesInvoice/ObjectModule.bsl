@@ -4,8 +4,8 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	EndIf;
 
 	Parameters = CurrenciesClientServer.GetParameters_SI(ThisObject);
-	CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable_Refactoring(ThisObject.Currencies);
-	CurrenciesServer.UpdateCurrencyTable_Refactoring(Parameters, ThisObject.Currencies);
+	CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies);
+	CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
 
 	ThisObject.DocumentAmount = ThisObject.ItemList.Total("TotalAmount");
 EndProcedure

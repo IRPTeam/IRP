@@ -108,9 +108,9 @@ Procedure PreparePostingDataTables(Parameters, CurrencyTable, AddInfo = Undefine
 							ArrayOfCurrencies = CurrencyTable.FindRows(
 							New Structure("Key, MovementType", RowPaymentList.Key, RowMovementTypes.MovementType));
 							If Not ArrayOfCurrencies.Count() Then
-								NewRow = AddRowToCurrencyTable_Refactoring(Parameters.Object.Date, CurrencyTable, RowPaymentList.Key,
+								NewRow = AddRowToCurrencyTable(Parameters.Object.Date, CurrencyTable, RowPaymentList.Key,
 									Parameters.Object.Currency, RowMovementTypes.MovementType);
-								CurrenciesClientServer.CalculateAmountByRow_Refactoring(NewRow, RowMovementTypes.Amount);
+								CurrenciesClientServer.CalculateAmountByRow(NewRow, RowMovementTypes.Amount);
 							EndIf;
 						EndIf;
 					EndDo;
@@ -313,9 +313,7 @@ Function ExpandTable(TempTableManager, RecordSet, UseAgreementMovementType, UseC
 	Return QueryTable;
 EndFunction
 
-#Region Refactoring
-
-Procedure UpdateCurrencyTable_Refactoring(Parameters, CurrenciesTable) Export
+Procedure UpdateCurrencyTable(Parameters, CurrenciesTable) Export
 	EmptyCurrenciesTable = New ValueTable();
 	EmptyCurrenciesTable.Columns.Add("Key");
 	EmptyCurrenciesTable.Columns.Add("IsFixed");
@@ -332,7 +330,7 @@ Procedure UpdateCurrencyTable_Refactoring(Parameters, CurrenciesTable) Export
 	
 	// Agreement currency
 	If AgreementInfo <> Undefined And ValueIsFilled(AgreementInfo.Ref) Then
-		AddRowToCurrencyTable_Refactoring(RatePeriod,
+		AddRowToCurrencyTable(RatePeriod,
 			EmptyCurrenciesTable,
 			Parameters.RowKey,
 			Parameters.Currency,
@@ -341,7 +339,7 @@ Procedure UpdateCurrencyTable_Refactoring(Parameters, CurrenciesTable) Export
 	
 	// Legal currency
 	For Each ItemOfArray In Catalogs.Companies.GetLegalCurrencies(Parameters.Company) Do
-		AddRowToCurrencyTable_Refactoring(RatePeriod,
+		AddRowToCurrencyTable(RatePeriod,
 			EmptyCurrenciesTable,
 			Parameters.RowKey,
 			Parameters.Currency,
@@ -350,7 +348,7 @@ Procedure UpdateCurrencyTable_Refactoring(Parameters, CurrenciesTable) Export
 	
 	// Reporting currency
 	For Each ItemOfArray In Catalogs.Companies.GetReportingCurrencies(Parameters.Company) Do
-		AddRowToCurrencyTable_Refactoring(RatePeriod,
+		AddRowToCurrencyTable(RatePeriod,
 			EmptyCurrenciesTable,
 			Parameters.RowKey,
 			Parameters.Currency,
@@ -359,14 +357,14 @@ Procedure UpdateCurrencyTable_Refactoring(Parameters, CurrenciesTable) Export
 	
 	// Budgeting currency
 	For Each ItemOfArray In Catalogs.Companies.GetBudgetingCurrencies(Parameters.Company) Do
-		AddRowToCurrencyTable_Refactoring(RatePeriod,
+		AddRowToCurrencyTable(RatePeriod,
 			EmptyCurrenciesTable,
 			Parameters.RowKey,
 			Parameters.Currency,
 			ItemOfArray.CurrencyMovementType);
 	EndDo;
 	
-	CurrenciesClientServer.CalculateAmount_Refactoring(EmptyCurrenciesTable, Parameters.DocumentAmount);
+	CurrenciesClientServer.CalculateAmount(EmptyCurrenciesTable, Parameters.DocumentAmount);
 	
 	For Each Row In Parameters.Currencies Do
 		Filter = New Structure("Key, CurrencyFrom, MovementType");
@@ -430,13 +428,13 @@ Procedure UpdateCurrencyTable_Refactoring(Parameters, CurrenciesTable) Export
 				If CommonFunctionsClientServer.ObjectHasProperty(NewRow, "MultiplicityOrigin") Then
 					ItemOfArray.MultiplicityOrigin = Row.Multiplicity;
 				EndIf;
-				CurrenciesClientServer.CalculateAmountByRow_Refactoring(ItemOfArray, Parameters.DocumentAmount);
+				CurrenciesClientServer.CalculateAmountByRow(ItemOfArray, Parameters.DocumentAmount);
 			EndDo;
 		EndIf;
 	EndDo;
 EndProcedure
 
-Function AddRowToCurrencyTable_Refactoring(RatePeriod, CurrenciesTable, RowKey, CurrencyFrom, CurrencyMovementType)
+Function AddRowToCurrencyTable(RatePeriod, CurrenciesTable, RowKey, CurrencyFrom, CurrencyMovementType)
 	NewRow = CurrenciesTable.Add();
 	NewRow.Key = RowKey;
 	NewRow.CurrencyFrom = CurrencyFrom;
@@ -458,6 +456,3 @@ Function AddRowToCurrencyTable_Refactoring(RatePeriod, CurrenciesTable, RowKey, 
 	EndIf;
 	Return NewRow;
 EndFunction
-
-#EndRegion
-

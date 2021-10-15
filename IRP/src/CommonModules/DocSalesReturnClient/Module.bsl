@@ -49,12 +49,6 @@ Procedure OnOpen(Object, Form, Cancel, AddInfo = Undefined) Export
 	DocumentsClient.SetTextOfDescriptionAtForm(Object, Form);
 #EndIf
 
-	If ValueIsFilled(Object.Ref) Then
-		CurrenciesClient.SetSurfaceTable(Object, Form, AddInfo);
-	Else
-		CurrenciesClient.FullRefreshTable(Object, Form, AddInfo);
-	EndIf;
-
 	SerialLotNumberClient.UpdateSerialLotNumbersPresentation(Object);
 	SerialLotNumberClient.UpdateSerialLotNumbersTree(Object, Form);
 	DocumentsClient.SetLockedRowsForItemListByTradeDocuments(Object, Form, "GoodsReceipts");
@@ -68,7 +62,6 @@ EndProcedure
 
 Procedure AfterWriteAtClient(Object, Form, WriteParameters, AddInfo = Undefined) Export
 	DocumentsClient.AfterWriteAtClientPutServerDataToAddInfo(Object, Form, AddInfo);
-	CurrenciesClient.SetVisibleRows(Object, ThisObject, AddInfo);
 	SerialLotNumberClient.UpdateSerialLotNumbersPresentation(Object, AddInfo);
 	DocumentsClient.SetLockedRowsForItemListByTradeDocuments(Object, Form, "GoodsReceipts");
 	DocumentsClient.UpdateTradeDocumentsTree(Object, Form, "GoodsReceipts", "GoodsReceiptsTree",
@@ -91,7 +84,6 @@ EndProcedure
 
 Procedure ItemListOnChange(Object, Form, Item = Undefined, CurrentRowData = Undefined) Export
 	DocumentsClient.FillRowIDInItemList(Object);
-	CurrenciesClient.CalculateAmount(Object, Form);
 	RowIDInfoClient.UpdateQuantity(Object, Form);
 EndProcedure
 

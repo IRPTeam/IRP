@@ -33,7 +33,6 @@ EndProcedure
 
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
-	LibraryLoader.RegisterLibrary(Object, ThisObject, Currencies_GetDeclaration(Object, ThisObject));
 	DocOpeningEntryServer.OnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
 	If Parameters.Key.IsEmpty() Then
 		SetVisibleCustomersPaymentTerms(Object, ThisObject);
@@ -206,86 +205,23 @@ EndProcedure
 
 &AtClient
 Procedure GroupPagesOnCurrentPageChange(Item, CurrentPage)
-	CurrentTableName = GetCurrentTableName(CurrentPage);
-	If ValueIsFilled(CurrentTableName) Then
-		Currencies_MainTableOnActivateRow(CurrentTableName);
-	EndIf;
+	Return;
 EndProcedure
 
 &AtClient
 Procedure GroupAdvanceFromCustomersAndToSuppliersOnCurrentPageChange(Item, CurrentPage)
-	CurrentTableName = GetCurrentTableName_Advance(CurrentPage.Name);
-	If CurrentTableName <> Undefined Then
-		Currencies_MainTableOnActivateRow(CurrentTableName);
-	EndIf;
+	Return;
 EndProcedure
-
-&AtClient
-Function GetCurrentTableName_Advance(PageName)
-	If PageName = "GroupFromCustomers" Then
-		Return "AdvanceFromCustomers";
-	ElsIf PageName = "GroupToSuppliers" Then
-		Return "AdvanceToSuppliers";
-	Else
-		Return Undefined;
-	EndIf;
-EndFunction
 
 &AtClient
 Procedure GroupAccountPayableByAgreementsAndByDocumentsOnCurrentPageChange(Item, CurrentPage)
-	CurrentTableName = GetCurrentTableName_AccountPayable(CurrentPage.Name);
-	If CurrentTableName <> Undefined Then
-		Currencies_MainTableOnActivateRow(CurrentTableName);
-	EndIf;
+	Return;
 EndProcedure
-
-&AtClient
-Function GetCurrentTableName_AccountPayable(PageName)
-	If PageName = "GroupAccountPayableByAgreements" Then
-		Return "AccountPayableByAgreements";
-	ElsIf PageName = "GroupAccountPayableByDocuments" Then
-		Return "AccountPayableByDocuments";
-	Else
-		Return Undefined;
-	EndIf;
-EndFunction
 
 &AtClient
 Procedure GroupAccountReceivableByAgreementsAndByDocumentsOnCurrentPageChange(Item, CurrentPage)
-	CurrentTableName = GetCurrentTableName_AccountReceivable(CurrentPage.Name);
-	If CurrentTableName <> Undefined Then
-		Currencies_MainTableOnActivateRow(CurrentTableName);
-	EndIf;
+	Return;
 EndProcedure
-
-&AtClient
-Function GetCurrentTableName_AccountReceivable(PageName)
-	If PageName = "GroupAccountReceivableByAgreements" Then
-		Return "AccountReceivableByAgreements";
-	ElsIf PageName = "GroupAccountReceivableByDocuments" Then
-		Return "AccountReceivableByDocuments";
-	Else
-		Return Undefined;
-	EndIf;
-EndFunction
-
-&AtClient
-Function GetCurrentTableName(CurrentPage)
-	If CurrentPage.Name = "GroupAdvance" Then
-		PageName = CurrentPage.ChildItems.GroupAdvanceFromCustomersAndToSuppliers.CurrentPage.Name;
-		Return GetCurrentTableName_Advance(PageName);
-	ElsIf CurrentPage.Name = "GroupAccountPayable" Then
-		PageName = CurrentPage.ChildItems.GroupAccountPayableByAgreementsAndByDocuments.CurrentPage.Name;
-		Return GetCurrentTableName_AccountPayable(PageName);
-	ElsIf CurrentPage.Name = "GroupAccountReceivable" Then
-		PageName = CurrentPage.ChildItems.GroupAccountReceivableByAgreementsAndByDocuments.CurrentPage.Name;
-		Return GetCurrentTableName_AccountReceivable(PageName);
-	ElsIf CurrentPage.Name = "GroupAccountBalance" Then
-		Return "AccountBalance";
-	Else
-		Return Undefined;
-	EndIf;
-EndFunction
 
 &AtClient
 Procedure MainTableLegalNameStartChoice(Item, ChoiceData, StandardProcessing)
@@ -612,209 +548,6 @@ Procedure AgreementOnChange(Item, AddInfo = Undefined) Export
 	AgreementInfo = CatAgreementsServer.GetAgreementInfo(CurrentData.Agreement);
 	CurrentData.Currency = AgreementInfo.Currency;
 EndProcedure
-
-#Region Currencies
-
-#Region Currencies_Library_Loader
-
-&AtServerNoContext
-Function Currencies_GetDeclaration(Object, Form)
-	Declaration = LibraryLoader.GetDeclarationInfo();
-	Declaration.LibraryName = "LibraryCurrencies";
-
-	LibraryLoader.AddActionHandler(Declaration, "Currencies_OnOpen", "OnOpen", Form);
-	LibraryLoader.AddActionHandler(Declaration, "Currencies_AfterWriteAtServer", "AfterWriteAtServer", Form);
-	LibraryLoader.AddActionHandler(Declaration, "Currencies_AfterWrite", "AfterWrite", Form);
-
-	ArrayOfItems_MainTable = New Array();
-	ArrayOfItems_MainTable.Add(Form.Items.AccountBalance);
-	ArrayOfItems_MainTable.Add(Form.Items.AdvanceFromCustomers);
-	ArrayOfItems_MainTable.Add(Form.Items.AdvanceToSuppliers);
-	ArrayOfItems_MainTable.Add(Form.Items.AccountPayableByAgreements);
-	ArrayOfItems_MainTable.Add(Form.Items.AccountPayableByDocuments);
-	ArrayOfItems_MainTable.Add(Form.Items.AccountReceivableByAgreements);
-	ArrayOfItems_MainTable.Add(Form.Items.AccountReceivableByDocuments);
-	LibraryLoader.AddActionHandler(Declaration, "Currencies_MainTableBeforeDeleteRow", "BeforeDeleteRow",
-		ArrayOfItems_MainTable);
-	LibraryLoader.AddActionHandler(Declaration, "Currencies_MainTableOnActivateRow", "OnActivateRow",
-		ArrayOfItems_MainTable);
-
-	ArrayOfItems_MainTableColumns = New Array();
-	ArrayOfItems_MainTableColumns.Add(Form.Items.AccountBalanceCurrency);
-	ArrayOfItems_MainTableColumns.Add(Form.Items.AdvanceFromCustomersCurrency);
-	ArrayOfItems_MainTableColumns.Add(Form.Items.AdvanceToSuppliersCurrency);
-	ArrayOfItems_MainTableColumns.Add(Form.Items.AccountPayableByAgreementsCurrency);
-	ArrayOfItems_MainTableColumns.Add(Form.Items.AccountPayableByDocumentsCurrency);
-	ArrayOfItems_MainTableColumns.Add(Form.Items.AccountReceivableByAgreementsCurrency);
-	ArrayOfItems_MainTableColumns.Add(Form.Items.AccountReceivableByDocumentsCurrency);
-
-	ArrayOfItems_MainTableColumns.Add(Form.Items.AccountBalanceAccount);
-
-	ArrayOfItems_MainTableColumns.Add(Form.Items.AccountPayableByAgreementsAgreement);
-	ArrayOfItems_MainTableColumns.Add(Form.Items.AccountPayableByDocumentsAgreement);
-	ArrayOfItems_MainTableColumns.Add(Form.Items.AccountReceivableByAgreementsAgreement);
-	ArrayOfItems_MainTableColumns.Add(Form.Items.AccountReceivableByDocumentsAgreement);
-
-	ArrayOfItems_MainTableColumns.Add(Form.Items.AccountPayableByAgreementsPartner);
-	ArrayOfItems_MainTableColumns.Add(Form.Items.AccountPayableByDocumentsPartner);
-	ArrayOfItems_MainTableColumns.Add(Form.Items.AccountReceivableByAgreementsPartner);
-	ArrayOfItems_MainTableColumns.Add(Form.Items.AccountReceivableByDocumentsPartner);
-	LibraryLoader.AddActionHandler(Declaration, "Currencies_MainTableColumnOnChange", "OnChange",
-		ArrayOfItems_MainTableColumns);
-
-	ArrayOfItems_MainTableAmount = New Array();
-	ArrayOfItems_MainTableAmount.Add(Form.Items.AccountBalanceAmount);
-	ArrayOfItems_MainTableAmount.Add(Form.Items.AdvanceFromCustomersAmount);
-	ArrayOfItems_MainTableAmount.Add(Form.Items.AdvanceToSuppliersAmount);
-	ArrayOfItems_MainTableAmount.Add(Form.Items.AccountPayableByAgreementsAmount);
-	ArrayOfItems_MainTableAmount.Add(Form.Items.AccountPayableByDocumentsAmount);
-	ArrayOfItems_MainTableAmount.Add(Form.Items.AccountReceivableByAgreementsAmount);
-	ArrayOfItems_MainTableAmount.Add(Form.Items.AccountReceivableByDocumentsAmount);
-	LibraryLoader.AddActionHandler(Declaration, "Currencies_MainTableAmountOnChange", "OnChange",
-		ArrayOfItems_MainTableAmount);
-
-	ArrayOfItems_Header = New Array();
-	ArrayOfItems_Header.Add(Form.Items.Company);
-	ArrayOfItems_Header.Add(Form.Items.Date);
-	LibraryLoader.AddActionHandler(Declaration, "Currencies_HeaderOnChange", "OnChange", ArrayOfItems_Header);
-
-	LibraryData = New Structure();
-	LibraryData.Insert("Version", "1.0");
-	LibraryLoader.PutData(Declaration, LibraryData);
-
-	Return Declaration;
-EndFunction
-
-#Region Currencies_Event_Handlers
-
-&AtClient
-Procedure Currencies_OnOpen(Cancel, AddInfo = Undefined) Export
-	CurrenciesClientServer.OnOpen(Object, ThisObject, Cancel, AddInfo);
-EndProcedure
-
-&AtServer
-Procedure Currencies_AfterWriteAtServer(CurrentObject, WriteParameters, AddInfo = Undefined) Export
-	CurrenciesClientServer.AfterWriteAtServer(Object, ThisObject, CurrentObject, WriteParameters, AddInfo);
-EndProcedure
-
-&AtClient
-Procedure Currencies_AfterWrite(WriteParameters, AddInfo = Undefined) Export
-	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "Currencies_CurrentTableName", GetCurrentTableName(
-		Items.GroupPages.CurrentPage));
-	CurrenciesClientServer.AfterWrite(Object, ThisObject, WriteParameters, AddInfo);
-EndProcedure
-
-&AtClient
-Procedure Currencies_MainTableBeforeDeleteRow(Item, AddInfo = Undefined) Export
-	CurrenciesClientServer.MainTableBeforeDeleteRow(Object, ThisObject, Item, AddInfo);
-EndProcedure
-
-&AtClient
-Procedure Currencies_MainTableOnActivateRow(Item, AddInfo = Undefined) Export
-	CurrenciesClientServer.MainTableOnActivateRow(Object, ThisObject, Item, AddInfo);
-EndProcedure
-
-&AtClient
-Procedure Currencies_MainTableColumnOnChange(Item, AddInfo = Undefined) Export
-	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "Currencies_CurrentTableName", Item.Parent.Name);
-	CurrenciesClientServer.MainTableColumnOnChange(Object, ThisObject, Item, AddInfo);
-EndProcedure
-
-&AtClient
-Procedure Currencies_MainTableAmountOnChange(Item, AddInfo = Undefined) Export
-	CurrenciesClientServer.MainTableAmountOnChange(Object, ThisObject, Item, AddInfo);
-EndProcedure
-
-&AtClient
-Procedure Currencies_HeaderOnChange(Item, AddInfo = Undefined) Export
-	ArrayOfTableNames = New Array();
-	ArrayOfTableNames.Add("AccountBalance");
-	ArrayOfTableNames.Add("AdvanceFromCustomers");
-	ArrayOfTableNames.Add("AdvanceToSuppliers");
-	ArrayOfTableNames.Add("AccountPayableByAgreements");
-	ArrayOfTableNames.Add("AccountPayableByDocuments");
-	ArrayOfTableNames.Add("AccountReceivableByAgreements");
-	ArrayOfTableNames.Add("AccountReceivableByDocuments");
-	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "Currencies_ArrayOfTableNames", ArrayOfTableNames);
-	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "Currencies_CurrentTableName", GetCurrentTableName(
-		Items.GroupPages.CurrentPage));
-
-	CurrenciesClientServer.HeaderOnChange(Object, ThisObject, Item, AddInfo);
-EndProcedure
-
-#EndRegion
-
-#EndRegion
-
-#Region Currencies_TableCurrencies_Events
-
-&AtClient
-Procedure CurrenciesSelection(Item, RowSelected, Field, StandardProcessing)
-	CurrenciesClient.CurrenciesTable_Selection(Object, ThisObject, Item, RowSelected, Field, StandardProcessing);
-EndProcedure
-
-&AtClient
-Procedure CurrenciesBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
-	Cancel = True;
-EndProcedure
-
-&AtClient
-Procedure CurrenciesBeforeDeleteRow(Item, Cancel)
-	Cancel = True;
-EndProcedure
-
-&AtClient
-Procedure CurrenciesRatePresentationOnChange(Item)
-	CurrenciesClient.CurrenciesTable_RatePresentationOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure CurrenciesMultiplicityOnChange(Item)
-	CurrenciesClient.CurrenciesTable_MultiplicityOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure CurrenciesAmountOnChange(Item)
-	CurrenciesClient.CurrenciesTable_AmountOnChange(Object, ThisObject, Item);
-EndProcedure
-
-#EndRegion
-
-#Region Currencies_Server_API
-
-&AtServer
-Procedure Currencies_SetVisibleCurrenciesRow(RowKey, IgnoreRowKey = False) Export
-	CurrenciesServer.SetVisibleCurrenciesRow(Object, RowKey, IgnoreRowKey);
-EndProcedure
-
-&AtServer
-Procedure Currencies_ClearCurrenciesTable(RowKey = Undefined) Export
-	CurrenciesServer.ClearCurrenciesTable(Object, RowKey);
-EndProcedure
-
-&AtServer
-Procedure Currencies_FillCurrencyTable(RowKey, Currency, AgreementInfo) Export
-	CurrenciesServer.FillCurrencyTable(Object, Object.Date, Object.Company, Currency, RowKey, AgreementInfo);
-EndProcedure
-
-&AtServer
-Procedure Currencies_UpdateRatePresentation() Export
-	CurrenciesServer.UpdateRatePresentation(Object);
-EndProcedure
-
-&AtServer
-Procedure Currencies_CalculateAmount(Amount, RowKey) Export
-	CurrenciesServer.CalculateAmount(Object, Amount, RowKey);
-EndProcedure
-
-&AtServer
-Procedure Currencies_CalculateRate(Amount, MovementType, RowKey) Export
-	CurrenciesServer.CalculateRate(Object, Amount, MovementType, RowKey);
-EndProcedure
-
-#EndRegion
-
-#EndRegion
 
 #Region AddAttributes
 

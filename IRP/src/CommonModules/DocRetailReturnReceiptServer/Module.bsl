@@ -37,8 +37,6 @@ Procedure AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters) Expor
 	DocumentsClientServer.FillStores(ObjectData, Form);
 
 	DocumentsClientServer.ChangeTitleGroupTitle(CurrentObject, Form);
-	CurrenciesServer.UpdateRatePresentation(Object);
-	CurrenciesServer.SetVisibleCurrenciesRow(Object, Undefined, True);
 	Form.Taxes_CreateFormControls();
 	DocumentsServer.FillSpecialOffersCache(Object, Form, "RetailSalesReceipt");
 	RowIDInfoServer.AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters);
@@ -59,8 +57,6 @@ Procedure OnReadAtServer(Object, Form, CurrentObject) Export
 		SetGroupItemsList(Object, Form);
 	EndIf;
 	DocumentsClientServer.ChangeTitleGroupTitle(CurrentObject, Form);
-	CurrenciesServer.UpdateRatePresentation(Object);
-	CurrenciesServer.SetVisibleCurrenciesRow(Object, Undefined, True);
 	Form.Taxes_CreateFormControls();
 	DocumentsServer.FillSpecialOffersCache(Object, Form, "RetailSalesReceipt");
 	RowIDInfoServer.OnReadAtServer(Object, Form, CurrentObject);

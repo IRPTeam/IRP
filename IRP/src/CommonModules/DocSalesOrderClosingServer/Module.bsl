@@ -50,8 +50,6 @@ Procedure AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters) Expor
 
 	DocumentsServer.FillItemList(Object);
 	DocumentsClientServer.ChangeTitleGroupTitle(CurrentObject, Form);
-	CurrenciesServer.UpdateRatePresentation(Object);
-	CurrenciesServer.SetVisibleCurrenciesRow(Object, Undefined, True);
 	Form.Taxes_CreateFormControls();
 EndProcedure
 
@@ -70,8 +68,6 @@ Procedure OnReadAtServer(Object, Form, CurrentObject) Export
 		SetGroupItemsList(Object, Form);
 	EndIf;
 	DocumentsClientServer.ChangeTitleGroupTitle(CurrentObject, Form);
-	CurrenciesServer.UpdateRatePresentation(Object);
-	CurrenciesServer.SetVisibleCurrenciesRow(Object, Undefined, True);
 	Form.Taxes_CreateFormControls();
 EndProcedure
 

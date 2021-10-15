@@ -108,9 +108,9 @@ Procedure PreparePostingDataTables(Parameters, CurrencyTable, AddInfo = Undefine
 							ArrayOfCurrencies = CurrencyTable.FindRows(
 							New Structure("Key, MovementType", RowPaymentList.Key, RowMovementTypes.MovementType));
 							If Not ArrayOfCurrencies.Count() Then
-								NewRow = AddRowToCurrencyTable(Parameters.Object.Date, CurrencyTable, RowPaymentList.Key,
+								NewRow = AddRowToCurrencyTable_Refactoring(Parameters.Object.Date, CurrencyTable, RowPaymentList.Key,
 									Parameters.Object.Currency, RowMovementTypes.MovementType);
-								CalculateAmountByRow(NewRow, RowMovementTypes.Amount);
+								CurrenciesClientServer.CalculateAmountByRow_Refactoring(NewRow, RowMovementTypes.Amount);
 							EndIf;
 						EndIf;
 					EndDo;
@@ -313,128 +313,6 @@ Function ExpandTable(TempTableManager, RecordSet, UseAgreementMovementType, UseC
 	Return QueryTable;
 EndFunction
 
-Procedure FillCurrencyTable(Object, Date, Company, Currency, RowKey, AgreementInfo) Export
-	
-	// Agreement currency
-	If AgreementInfo <> Undefined And ValueIsFilled(AgreementInfo.Ref) Then
-		AddRowToCurrencyTable(Date, Object.Currencies, RowKey, Currency, AgreementInfo.CurrencyMovementType);
-	EndIf;
-	
-	// Legal currency
-	For Each ItemOfArray In Catalogs.Companies.GetLegalCurrencies(Company) Do
-		AddRowToCurrencyTable(Date, Object.Currencies, RowKey, Currency, ItemOfArray.CurrencyMovementType);
-	EndDo;
-	
-	// Reporting currency
-	For Each ItemOfArray In Catalogs.Companies.GetReportingCurrencies(Company) Do
-		AddRowToCurrencyTable(Date, Object.Currencies, RowKey, Currency, ItemOfArray.CurrencyMovementType);
-	EndDo;
-	
-	// Budgeting currency
-	For Each ItemOfArray In Catalogs.Companies.GetBudgetingCurrencies(Company) Do
-		AddRowToCurrencyTable(Date, Object.Currencies, RowKey, Currency, ItemOfArray.CurrencyMovementType);
-	EndDo;
-EndProcedure
-
-Function AddRowToCurrencyTable(Date, CurrenciesTable, RowKey, CurrencyFrom, CurrencyMovementType) Export
-	NewRow = CurrenciesTable.Add();
-	NewRow.Key = RowKey;
-	NewRow.CurrencyFrom = CurrencyFrom;
-	NewRow.MovementType = CurrencyMovementType;
-	If Not CurrencyMovementType.DeferredCalculation Then
-		CurrencyInfo = Catalogs.Currencies.GetCurrencyInfo(Date, CurrencyFrom, CurrencyMovementType.Currency,
-			CurrencyMovementType.Source);
-		If Not ValueIsFilled(CurrencyInfo.Rate) Then
-			NewRow.Rate = 0;
-			NewRow.ReverseRate = 0;
-			NewRow.Multiplicity = 0;
-		Else
-			NewRow.Rate = CurrencyInfo.Rate;
-			NewRow.ReverseRate = 1 / CurrencyInfo.Rate;
-			NewRow.Multiplicity = CurrencyInfo.Multiplicity;
-		EndIf;
-	EndIf;
-	Return NewRow;
-EndFunction
-
-Procedure ClearCurrenciesTable(Object, RowKey) Export
-	If RowKey = Undefined Then
-		Object.Currencies.Clear();
-	Else
-		ArrayForDelete = New Array();
-		For Each Row In Object.Currencies Do
-			If Row.Key = RowKey Then
-				ArrayForDelete.Add(Row);
-			EndIf;
-		EndDo;
-		For Each ItemForDelete In ArrayForDelete Do
-			Object.Currencies.Delete(ItemForDelete);
-		EndDo;
-	EndIf;
-EndProcedure
-
-Procedure CalculateAmount(Object, DocumentAmount, RowKeyFilter, CurrencyFilter = Undefined) Export
-	For Each Row In Object.Currencies Do
-		If RowKeyFilter <> Undefined And Row.Key <> RowKeyFilter Then
-			Continue;
-		EndIf;
-		If CurrencyFilter <> Undefined And Row.CurrencyFrom <> CurrencyFilter Then
-			Continue;
-		EndIf;
-
-		If Row.Multiplicity = 0 Or Row.Rate = 0 Then
-			Row.Amount = 0;
-			Continue;
-		EndIf;
-		CalculateAmountByRow(Row, DocumentAmount);
-	EndDo;
-EndProcedure
-
-Procedure CalculateAmountByRow(Row, DocumentAmount) Export
-	If Row.ShowReverseRate Then
-		Row.Amount = (DocumentAmount / Row.ReverseRate) / Row.Multiplicity;
-	Else
-		Row.Amount = (DocumentAmount * Row.Rate) / Row.Multiplicity;
-	EndIf;
-EndProcedure
-
-Procedure CalculateRate(Object, DocumentAmount, MovementType, RowKeyFilter, CurrencyFilter = Undefined) Export
-	For Each Row In Object.Currencies Do
-		If Row.MovementType <> MovementType Then
-			Continue;
-		EndIf;
-		If RowKeyFilter <> Undefined And Row.Key <> RowKeyFilter Then
-			Continue;
-		EndIf;
-		If CurrencyFilter <> Undefined And Row.CurrencyFrom <> CurrencyFilter Then
-			Continue;
-		EndIf;
-
-		If Row.Amount = 0 Or Row.Multiplicity = 0 Then
-			Row.Rate = 0;
-			Continue;
-		EndIf;
-		Row.Rate = Row.Amount * Row.Multiplicity / DocumentAmount;
-		Row.ReverseRate = DocumentAmount / (Row.Amount * Row.Multiplicity);
-	EndDo;
-EndProcedure
-
-Procedure UpdateRatePresentation(Object) Export
-	For Each Row In Object.Currencies Do
-		Row.RatePresentation = ?(Row.ShowReverseRate, Row.ReverseRate, Row.Rate);
-	EndDo;
-EndProcedure
-
-Procedure SetVisibleCurrenciesRow(Object, RowKey, IgnoreRowKey) Export
-	For Each Row In Object.Currencies Do
-		If IgnoreRowKey Then
-			Row.IsVisible = Row.CurrencyFrom <> Row.MovementType.Currency;
-		Else
-			Row.IsVisible = Row.Key = RowKey And Row.CurrencyFrom <> Row.MovementType.Currency;
-		EndIf;
-	EndDo;
-EndProcedure
-
 #Region Refactoring
 
 Procedure UpdateCurrencyTable_Refactoring(Parameters, CurrenciesTable) Export
@@ -513,6 +391,19 @@ Procedure UpdateCurrencyTable_Refactoring(Parameters, CurrenciesTable) Export
 		If Not ArrayOfRows.Count() Then
 			NewRow = CurrenciesTable.Add();
 			FillPropertyValues(NewRow, Row);
+			
+			ShowReverseRate = False;
+			For Each ItemOfArray In Parameters.Currencies Do
+				If ItemOfArray.Key = Filter.Key
+					And ItemOfArray.CurrencyFrom = Filter.CurrencyFrom
+					And ItemOfArray.MovementType = Filter.MovementType
+					And ItemOfArray.ShowReverseRate Then
+						ShowReverseRate = True;
+						Break;
+				EndIf;
+			EndDo;
+			NewRow.ShowReverseRate = ShowReverseRate;
+			
 			If CommonFunctionsClientServer.ObjectHasProperty(NewRow, "RatePresentation") Then
 				NewRow.RatePresentation = ?(Row.ShowReverseRate = True, Row.ReverseRate, Row.Rate);
 			EndIf;
@@ -545,7 +436,7 @@ Procedure UpdateCurrencyTable_Refactoring(Parameters, CurrenciesTable) Export
 	EndDo;
 EndProcedure
 
-Procedure AddRowToCurrencyTable_Refactoring(RatePeriod, CurrenciesTable, RowKey, CurrencyFrom, CurrencyMovementType)
+Function AddRowToCurrencyTable_Refactoring(RatePeriod, CurrenciesTable, RowKey, CurrencyFrom, CurrencyMovementType)
 	NewRow = CurrenciesTable.Add();
 	NewRow.Key = RowKey;
 	NewRow.CurrencyFrom = CurrencyFrom;
@@ -565,7 +456,8 @@ Procedure AddRowToCurrencyTable_Refactoring(RatePeriod, CurrenciesTable, RowKey,
 			NewRow.Multiplicity = CurrencyInfo.Multiplicity;
 		EndIf;
 	EndIf;
-EndProcedure
+	Return NewRow;
+EndFunction
 
 #EndRegion
 

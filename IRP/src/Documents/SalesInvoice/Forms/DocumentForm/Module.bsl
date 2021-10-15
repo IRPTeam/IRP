@@ -10,7 +10,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 EndProcedure
 
 &AtClient
-Procedure OnOpen(Cancel, AddInfo = Undefined) Export
+Procedure OnOpen(Cancel)
 	DocSalesInvoiceClient.OnOpen(Object, ThisObject, Cancel);
 EndProcedure
 
@@ -48,12 +48,12 @@ Procedure OnWriteAtServer(Cancel, CurrentObject, WriteParameters)
 EndProcedure
 
 &AtClient
-Procedure AfterWrite(WriteParameters, AddInfo = Undefined) Export
+Procedure AfterWrite(WriteParameters)
 	DocSalesInvoiceClient.AfterWriteAtClient(Object, ThisObject, WriteParameters);
 EndProcedure
 
 &AtServer
-Procedure AfterWriteAtServer(CurrentObject, WriteParameters, AddInfo = Undefined) Export
+Procedure AfterWriteAtServer(CurrentObject, WriteParameters)
 	DocSalesInvoiceServer.AfterWriteAtServer(Object, ThisObject, CurrentObject, WriteParameters);
 	SetVisibilityAvailability(CurrentObject, ThisObject);
 EndProcedure
@@ -74,13 +74,14 @@ Procedure SetVisibilityAvailability(Object, Form) Export
 	Form.Items.AddBasisDocuments.Enabled = Not Form.ReadOnly;
 	Form.Items.LinkUnlinkBasisDocuments.Enabled = Not Form.ReadOnly;	
 	Form.Items.LegalName.Enabled = ValueIsFilled(Object.Partner);
+	Form.Items.EditCurrencies.Enabled = Not Form.ReadOnly;
 EndProcedure
 
 #EndRegion
 
 #Region FormItemsEvents
 &AtClient
-Procedure DateOnChange(Item, AddInfo = Undefined) Export
+Procedure DateOnChange(Item)
 	DocSalesInvoiceClient.DateOnChange(Object, ThisObject, Item);
 EndProcedure
 
@@ -95,13 +96,13 @@ Procedure DeliveryDateOnChange(Item)
 EndProcedure
 
 &AtClient
-Procedure PartnerOnChange(Item, AddInfo = Undefined) Export
+Procedure PartnerOnChange(Item)
 	DocSalesInvoiceClient.PartnerOnChange(Object, ThisObject, Item);
 	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
 &AtClient
-Procedure LegalNameOnChange(Item, AddInfo = Undefined) Export
+Procedure LegalNameOnChange(Item)
 	DocSalesInvoiceClient.LegalNameOnChange(Object, ThisObject, Item);
 EndProcedure
 
@@ -111,12 +112,12 @@ Procedure LegalNameContractOnChange(Item)
 EndProcedure
 
 &AtClient
-Procedure AgreementOnChange(Item, AddInfo = Undefined) Export
+Procedure AgreementOnChange(Item)
 	DocSalesInvoiceClient.AgreementOnChange(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient
-Procedure CompanyOnChange(Item, AddInfo = Undefined) Export
+Procedure CompanyOnChange(Item)
 	DocSalesInvoiceClient.CompanyOnChange(Object, ThisObject, Item);
 EndProcedure
 
@@ -146,7 +147,7 @@ Procedure ItemListAfterDeleteRow(Item)
 EndProcedure
 
 &AtClient
-Procedure ItemListOnChange(Item, AddInfo = Undefined) Export
+Procedure ItemListOnChange(Item)
 	DocSalesInvoiceClient.ItemListOnChange(Object, ThisObject, Item);
 EndProcedure
 
@@ -175,7 +176,7 @@ EndProcedure
 #Region ItemListItemsEvents
 
 &AtClient
-Procedure ItemListItemOnChange(Item, AddInfo = Undefined) Export
+Procedure ItemListItemOnChange(Item)
 	DocSalesInvoiceClient.ItemListItemOnChange(Object, ThisObject, Item);
 EndProcedure
 
@@ -190,32 +191,32 @@ Procedure ItemListItemEditTextChange(Item, Text, StandardProcessing)
 EndProcedure
 
 &AtClient
-Procedure ItemListItemKeyOnChange(Item, AddInfo = Undefined) Export
+Procedure ItemListItemKeyOnChange(Item)
 	DocSalesInvoiceClient.ItemListItemKeyOnChange(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient
-Procedure ItemListPriceTypeOnChange(Item, AddInfo = Undefined) Export
+Procedure ItemListPriceTypeOnChange(Item)
 	DocSalesInvoiceClient.ItemListPriceTypeOnChange(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient
-Procedure ItemListUnitOnChange(Item, AddInfo = Undefined) Export
+Procedure ItemListUnitOnChange(Item)
 	DocSalesInvoiceClient.ItemListUnitOnChange(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient
-Procedure ItemListQuantityOnChange(Item, AddInfo = Undefined) Export
+Procedure ItemListQuantityOnChange(Item)
 	DocSalesInvoiceClient.ItemListQuantityOnChange(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient
-Procedure ItemListPriceOnChange(Item, AddInfo = Undefined) Export
+Procedure ItemListPriceOnChange(Item)
 	DocSalesInvoiceClient.ItemListPriceOnChange(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient
-Procedure ItemListTotalAmountOnChange(Item, AddInfo = Undefined) Export
+Procedure ItemListTotalAmountOnChange(Item)
 	DocSalesInvoiceClient.ItemListTotalAmountOnChange(Object, ThisObject, Item);
 EndProcedure
 
@@ -235,7 +236,7 @@ Procedure ItemListStoreOnChange(Item)
 EndProcedure
 
 &AtClient
-Procedure ItemListSerialLotNumbersPresentationStartChoice(Item, ChoiceData, StandardProcessing, AddInfo = Undefined) Export
+Procedure ItemListSerialLotNumbersPresentationStartChoice(Item, ChoiceData, StandardProcessing)
 	DocSalesInvoiceClient.ItemListSerialLotNumbersPresentationStartChoice(Object, ThisObject, Item, ChoiceData,
 		StandardProcessing);
 EndProcedure
@@ -348,7 +349,6 @@ EndProcedure
 &AtClient
 Procedure SpecialOffersEditFinish_ForDocument(Result, AdditionalParameters) Export
 	OffersClient.SpecialOffersEditFinish_ForDocument(Result, Object, ThisObject, AdditionalParameters);
-
 EndProcedure
 
 #EndRegion
@@ -561,3 +561,13 @@ Function GetProcessingModule() Export
 EndFunction
 
 #EndRegion
+
+&AtClient
+Procedure EditCurrencies(Command)
+	FormParameters = CurrenciesClientServer.GetParameters_SI(Object);
+	NotifyParameters = New Structure();
+	NotifyParameters.Insert("Object", Object);
+	NotifyParameters.Insert("Form"  , ThisObject);
+	Notify = New NotifyDescription("EditCurrenciesContinue", CurrenciesClient, NotifyParameters);
+	OpenForm("CommonForm.EditCurrencies", FormParameters, , , , ,Notify, FormWindowOpeningMode.LockOwnerWindow);
+EndProcedure

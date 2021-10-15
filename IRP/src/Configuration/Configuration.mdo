@@ -348,7 +348,6 @@
   <commonModules>CommonModule.IntegrationServerReuse</commonModules>
   <commonModules>CommonModule.JorDocumentsClient</commonModules>
   <commonModules>CommonModule.JorDocumentsServer</commonModules>
-  <commonModules>CommonModule.LibraryLoader</commonModules>
   <commonModules>CommonModule.Localization</commonModules>
   <commonModules>CommonModule.LocalizationClient</commonModules>
   <commonModules>CommonModule.LocalizationClientServer</commonModules>

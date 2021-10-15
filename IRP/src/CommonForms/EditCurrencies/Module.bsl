@@ -5,6 +5,9 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	ThisObject.RowKey = Parameters.RowKey;
 	CurrenciesServer.UpdateCurrencyTable_Refactoring(Parameters, ThisObject.Currencies);
 	ThisObject.Currencies.Sort("MovementType");
+	For Each Row In ThisObject.Currencies Do
+		Row.RatePresentation = ?(Row.ShowReverseRate, Row.ReverseRate, Row.Rate);
+	EndDo;
 EndProcedure
 
 &AtClient

@@ -1656,7 +1656,7 @@ Scenario: check the barcode search in the purchase/purchase returns
 
 Scenario: check the barcode search in storage operations documents	
 	And I click the button named "FormCreate"
-	And in the table "ItemList" I click "SearchByBarcode" button
+	And in the table "ItemList" I click "Search by barcode" button
 	And I input "2202283713" text in "InputFld" field
 	And I click "OK" button
 	* Check adding an items and filling in the price in the tabular part

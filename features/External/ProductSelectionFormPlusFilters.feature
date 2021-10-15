@@ -398,7 +398,7 @@ Scenario: check the product selection form with price information in Purchase in
 			| 'Dress'    | '*'      | 'S/Yellow'  | 'Store 01' | '1,000' | '*'             | '*'          | 'pcs' | '*'           | '*'            |
 			| 'Trousers' | '*'      | '38/Yellow' | 'Store 01' | '2,000' | '*'             | '*'          | 'pcs' | '*'           | '*'            |
 	* Add one more line to the order through the Add button
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
 			| Description |
@@ -532,7 +532,7 @@ Scenario: check the product selection form with price information in Purchase or
 			| 'Dress'    | '*'      | 'S/Yellow'  | 'Store 01' | '1,000' | '*'             | '*'          | 'pcs' | '*'           | '*'            |
 			| 'Trousers' | '*'      | '38/Yellow' | 'Store 01' | '2,000' | '*'             | '*'          | 'pcs' | '*'           | '*'            |
 	* Add one more line to the order through the Add button
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
 			| Description |
@@ -1656,15 +1656,17 @@ Scenario: check the barcode search in the purchase/purchase returns
 
 Scenario: check the barcode search in storage operations documents	
 	And I click the button named "FormCreate"
-	And I click "SearchByBarcode" button
+	And in the table "ItemList" I click the button named "SearchByBarcode"
 	And I input "2202283713" text in "InputFld" field
 	And I click "OK" button
 	* Check adding an items and filling in the price in the tabular part
 		And "ItemList" table contains lines
 			| 'Item'    |'Item key'     | 'Unit' |
-			|'Dress' |'S/Yellow'  | 'pcs'  |
+			|'Dress'    |'S/Yellow'  | 'pcs'  |
 	And I close all client application windows
-
+	
+	
+		
 
 Scenario: check the barcode search in the product bundling documents
 	And I click the button named "FormCreate"

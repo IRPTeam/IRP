@@ -404,7 +404,7 @@ Scenario: _0154040 check the Deleting of the store field value by line with the 
 			| 'Description' |
 			| 'Store 01'    |
 		And I select current line in "List" table
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |
@@ -443,7 +443,7 @@ Scenario: _0154041 check impossibility deleting of the store field by line with 
 			| 'Description' |
 			| 'Store 01'    |
 		And I select current line in "List" table
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |
@@ -482,7 +482,7 @@ Scenario: _0154042 check the Deleting of the store field value by line with the 
 			| 'Description' |
 			| 'Store 01'    |
 		And I select current line in "List" table
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |
@@ -521,7 +521,7 @@ Scenario: _0154043 check impossibility deleting of the store field by line with 
 			| 'Description' |
 			| 'Store 01'    |
 		And I select current line in "List" table
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |
@@ -599,7 +599,7 @@ Scenario: _0154045 check impossibility deleting of the store field by line with 
 			| 'Description' |
 			| 'Store 01'    |
 		And I select current line in "List" table
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |
@@ -638,7 +638,7 @@ Scenario: _0154046 check impossibility deleting of the store field by line with 
 			| 'Description' |
 			| 'Store 01'    |
 		And I select current line in "List" table
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |
@@ -677,7 +677,7 @@ Scenario: _0154047 check impossibility deleting of the store field by line with 
 			| 'Description' |
 			| 'Store 01'    |
 		And I select current line in "List" table
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |
@@ -756,7 +756,7 @@ Scenario: _0154049 check impossibility deleting of the store field by line with 
 			| 'Description' |
 			| 'Store 02'    |
 		And I select current line in "List" table
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |
@@ -1099,7 +1099,7 @@ Scenario: _012016 check row key when cloning a string in Purchase order
 			| 'Store 02'     |
 		And I select current line in "List" table
 	* Filling in Purchase order
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |
@@ -1164,7 +1164,7 @@ Scenario: _012017 check row key when cloning a string in Shipment confirmation
 			| 'Company Ferron BP' |
 		And I select current line in "List" table
 	* Filling in Shipment confirmation
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |
@@ -1298,7 +1298,7 @@ Scenario: _012021 check row key when cloning a string in Purchase invoice
 			| 'Store 02'     |
 		And I select current line in "List" table
 	* Filling in Purchase invoice
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |

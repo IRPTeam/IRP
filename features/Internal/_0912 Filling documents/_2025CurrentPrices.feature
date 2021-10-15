@@ -128,7 +128,7 @@ Scenario: _01202504 check current price in the Purchase order
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And I click the button named "FormCreate"
 	* Add product
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |
@@ -159,7 +159,7 @@ Scenario: _01202504 check current price in the Purchase invoice
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		And I click the button named "FormCreate"
 	* Add product
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |

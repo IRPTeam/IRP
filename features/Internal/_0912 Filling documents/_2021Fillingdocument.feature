@@ -1310,7 +1310,7 @@ Scenario: _0154105 check filling in and refilling Purchase order
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Store" became equal to "Store 02"
 	* Check the item key autofill when adding Item (Item has one item key)
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |
@@ -1322,7 +1322,7 @@ Scenario: _0154105 check filling in and refilling Purchase order
 	* Check filling in prices when adding an Item and selecting an item key
 		* Filling in item and item key
 			And I delete a line in "ItemList" table
-			And I click the button named "Add"
+			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
 				| 'Description' |
@@ -1357,7 +1357,7 @@ Scenario: _0154105 check filling in and refilling Purchase order
 				| 'Trousers' | '400,00' | '38/Yellow' | '1,000' | 'pcs'  | 'Store 03' |
 	* Check filling in prices on new lines at agreement reselection
 		* Add line
-			And I click the button named "Add"
+			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
 				| 'Description' |
@@ -1701,7 +1701,7 @@ Scenario: _0154106 check filling in and refilling Purchase invoice
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Store" became equal to "Store 02"
 	* Check the item key autofill when adding Item (Item has one item key)
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |
@@ -1713,7 +1713,7 @@ Scenario: _0154106 check filling in and refilling Purchase invoice
 	* Check filling in prices when adding an Item and selecting an item key
 		* Filling in item and item key
 			And I delete a line in "ItemList" table
-			And I click the button named "Add"
+			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
 				| 'Description' |
@@ -1746,7 +1746,7 @@ Scenario: _0154106 check filling in and refilling Purchase invoice
 				| 'Trousers' | '400,00' | '38/Yellow' | '1,000' | 'pcs'  | 'Store 03' |
 	* Check filling in prices on new lines at agreement reselection
 		* Add line
-			And I click the button named "Add"
+			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
 				| 'Description' |
@@ -5311,7 +5311,7 @@ Scenario: _0154141 check filling in and refilling Purchase order closing
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Store" became equal to "Store 02"
 	* Check the item key autofill when adding Item (Item has one item key)
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |
@@ -5323,7 +5323,7 @@ Scenario: _0154141 check filling in and refilling Purchase order closing
 	* Check filling in prices when adding an Item and selecting an item key
 		* Filling in item and item key
 			And I delete a line in "ItemList" table
-			And I click the button named "Add"
+			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
 				| 'Description' |
@@ -5358,7 +5358,7 @@ Scenario: _0154141 check filling in and refilling Purchase order closing
 				| 'Trousers' | '400,00' | '38/Yellow' | '1,000' | 'pcs'  | 'Store 03' |
 	* Check filling in prices on new lines at agreement reselection
 		* Add line
-			And I click the button named "Add"
+			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
 				| 'Description' |
@@ -5644,7 +5644,7 @@ Scenario: _0154150 check function DontCalculateRow in the Purchase order
 		And I select current line in "List" table
 	* Check filling in prices when adding an Item and selecting an item key
 		* Filling in item and item key
-			And I click the button named "Add"
+			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
 				| 'Description' |
@@ -5658,7 +5658,7 @@ Scenario: _0154150 check function DontCalculateRow in the Purchase order
 			And I select current line in "List" table
 			And I input "2,000" text in "Q" field of "ItemList" table
 			And I finish line editing in "ItemList" table
-			And I click the button named "Add"
+			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
 				| 'Description' |
@@ -5749,7 +5749,7 @@ Scenario: _0154150 check function DontCalculateRow in the Purchase order
 			And the editing text of form attribute named "ItemListTotalTaxAmount" became equal to "647,00"
 			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "4 199,00"
 		* Add new line and check calculation
-			And I click the button named "Add"
+			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
 				| 'Description' |
@@ -5823,7 +5823,7 @@ Scenario: _0154151 check function DontCalculateRow in the Purchase invoice
 		And I select current line in "List" table
 	* Check filling in prices when adding an Item and selecting an item key
 		* Filling in item and item key
-			And I click the button named "Add"
+			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
 				| 'Description' |
@@ -5837,7 +5837,7 @@ Scenario: _0154151 check function DontCalculateRow in the Purchase invoice
 			And I select current line in "List" table
 			And I input "2,000" text in "Q" field of "ItemList" table
 			And I finish line editing in "ItemList" table
-			And I click the button named "Add"
+			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
 				| 'Description' |
@@ -5928,7 +5928,7 @@ Scenario: _0154151 check function DontCalculateRow in the Purchase invoice
 			And the editing text of form attribute named "ItemListTotalTaxAmount" became equal to "647,00"
 			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "4 199,00"
 		* Add new line and check calculation
-			And I click the button named "Add"
+			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
 				| 'Description' |
@@ -6004,7 +6004,7 @@ Scenario: _0154152 check function DontCalculateRow in the Purchase return
 		And I select current line in "List" table
 	* Check filling in prices when adding an Item and selecting an item key
 		* Filling in item and item key
-			And I click the button named "Add"
+			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
 				| 'Description' |
@@ -6018,7 +6018,7 @@ Scenario: _0154152 check function DontCalculateRow in the Purchase return
 			And I select current line in "List" table
 			And I input "2,000" text in "Q" field of "ItemList" table
 			And I finish line editing in "ItemList" table
-			And I click the button named "Add"
+			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
 				| 'Description' |
@@ -6109,7 +6109,7 @@ Scenario: _0154152 check function DontCalculateRow in the Purchase return
 			And the editing text of form attribute named "ItemListTotalTaxAmount" became equal to "647,00"
 			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "4 199,00"
 		* Add new line and check calculation
-			And I click the button named "Add"
+			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
 				| 'Description' |
@@ -6170,7 +6170,7 @@ Scenario: _0154153 check function DontCalculateRow in the Purchase return order
 		And I select current line in "List" table
 	* Check filling in prices when adding an Item and selecting an item key
 		* Filling in item and item key
-			And I click the button named "Add"
+			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
 				| 'Description' |
@@ -6184,7 +6184,7 @@ Scenario: _0154153 check function DontCalculateRow in the Purchase return order
 			And I select current line in "List" table
 			And I input "2,000" text in "Q" field of "ItemList" table
 			And I finish line editing in "ItemList" table
-			And I click the button named "Add"
+			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
 				| 'Description' |
@@ -6275,7 +6275,7 @@ Scenario: _0154153 check function DontCalculateRow in the Purchase return order
 			And the editing text of form attribute named "ItemListTotalTaxAmount" became equal to "647,00"
 			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "4 199,00"
 		* Add new line and check calculation
-			And I click the button named "Add"
+			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
 				| 'Description' |
@@ -6740,7 +6740,7 @@ Scenario: _0154156 check function DontCalculateRow in the Sales return
 		And I move to "Item list" tab
 	* Check filling in prices when adding an Item and selecting an item key
 		* Filling in item and item key
-			And I click the button named "Add"
+			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
 				| 'Description' |
@@ -6754,7 +6754,7 @@ Scenario: _0154156 check function DontCalculateRow in the Sales return
 			And I select current line in "List" table
 			And I input "2,000" text in "Q" field of "ItemList" table
 			And I finish line editing in "ItemList" table
-			And I click the button named "Add"
+			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
 				| 'Description' |
@@ -6845,7 +6845,7 @@ Scenario: _0154156 check function DontCalculateRow in the Sales return
 			And the editing text of form attribute named "ItemListTotalTaxAmount" became equal to "647,00"
 			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "4 199,00"
 		* Add new line and check calculation
-			And I click the button named "Add"
+			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
 				| 'Description' |
@@ -7084,7 +7084,7 @@ Scenario: _0154160 check tax and net amount calculation when change total amount
 			| 'Main Company'         |
 		And I select current line in "List" table
 	* Filling in item and item key
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |
@@ -7098,7 +7098,7 @@ Scenario: _0154160 check tax and net amount calculation when change total amount
 		And I select current line in "List" table
 		And I input "2,000" text in "Q" field of "ItemList" table
 		And I finish line editing in "ItemList" table
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |
@@ -7207,7 +7207,7 @@ Scenario: _0154161 check tax and net amount calculation when change total amount
 			| 'Main Company'         |
 		And I select current line in "List" table
 	* Filling in item and item key
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |
@@ -7221,7 +7221,7 @@ Scenario: _0154161 check tax and net amount calculation when change total amount
 		And I select current line in "List" table
 		And I input "2,000" text in "Q" field of "ItemList" table
 		And I finish line editing in "ItemList" table
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |
@@ -7330,7 +7330,7 @@ Scenario: _0154162 check tax and net amount calculation when change total amount
 			| 'Main Company'         |
 		And I select current line in "List" table
 	* Filling in item and item key
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |
@@ -7344,7 +7344,7 @@ Scenario: _0154162 check tax and net amount calculation when change total amount
 		And I select current line in "List" table
 		And I input "2,000" text in "Q" field of "ItemList" table
 		And I finish line editing in "ItemList" table
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |
@@ -7453,7 +7453,7 @@ Scenario: _0154163 check tax and net amount calculation when change total amount
 			| 'Main Company'         |
 		And I select current line in "List" table
 	* Filling in item and item key
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |
@@ -7467,7 +7467,7 @@ Scenario: _0154163 check tax and net amount calculation when change total amount
 		And I select current line in "List" table
 		And I input "2,000" text in "Q" field of "ItemList" table
 		And I finish line editing in "ItemList" table
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |
@@ -7579,7 +7579,7 @@ Scenario: _0154164 check tax and net amount calculation when change total amount
 		And I remove checkbox "Price includes tax"
 		And I move to "Item list" tab			
 	* Filling in item and item key
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |
@@ -7593,7 +7593,7 @@ Scenario: _0154164 check tax and net amount calculation when change total amount
 		And I select current line in "List" table
 		And I input "2,000" text in "Q" field of "ItemList" table
 		And I finish line editing in "ItemList" table
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |
@@ -7828,7 +7828,7 @@ Scenario: _0154167 check tax rate recalculation when change partner term (Purcha
 		And I remove checkbox "Price includes tax"
 	* Check tax rate recalculation
 		And I move to "Item list" tab
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |
@@ -7898,7 +7898,7 @@ Scenario: _0154168 check tax rate recalculation when change partner term (Purcha
 		And I remove checkbox "Price includes tax"
 	* Check tax rate recalculation
 		And I move to "Item list" tab
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |
@@ -7966,7 +7966,7 @@ Scenario: _0154170 select Partner items in the PO
 			| 'Main Company'         |
 		And I select current line in "List" table
 	* Select partner items
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Partner item" attribute in "ItemList" table
 		And I go to line in "List" table
 			| 'Description'          |
@@ -7975,7 +7975,7 @@ Scenario: _0154170 select Partner items in the PO
 		And "ItemList" table contains lines
 			| 'Partner item'         | 'Cancel' | 'Item key' | 'Price type'        | 'Item'  | 'Dont calculate row' | 'Q'     | 'Unit' | 'VAT' |
 			| 'Dress M/White Ferron' | 'No'     | 'M/White'  | 'Vendor price, TRY' | 'Dress' | 'No'                 | '1,000' | 'pcs'  | '18%' |
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I select "xs" from "Partner item" drop-down list by string in "ItemList" table
 		And "ItemList" table contains lines
 			| 'Partner item'         | 'Cancel' | 'Item key' | 'Price type'        | 'Item'  | 'Dont calculate row' | 'Q'     | 'Unit' | 'VAT' |

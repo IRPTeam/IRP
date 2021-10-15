@@ -172,7 +172,7 @@ Scenario: _2067006 check locking tab in the ITO with linked documents (one sessi
 			| '51'     |
 		And I select current line in "List" table
 	* Add one more string
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |
@@ -268,7 +268,7 @@ Scenario: _2067007 check locking tab in the IT with linked documents (one sessio
 			| '51'     |
 		And I select current line in "List" table
 	* Add one more string
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |

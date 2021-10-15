@@ -489,7 +489,7 @@ Scenario: _2990006 create Stock adjustment as surplus based on Physical inventor
 		And I select current line in "List" table	
 	* Filling ItemList tab and check link/unlink line
 		* Add item from Physical inventory
-			And I click "AddBasisDocuments" button
+			And in the table "ItemList" I click "Add basis documents" button
 			And I go to line in "BasisesTree" table
 				| 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
 				| '5,000'    | 'Dress (S/Yellow)'  | 'pcs'  | 'No'  |
@@ -529,7 +529,7 @@ Scenario: _2990006 create Stock adjustment as surplus based on Physical inventor
 				| '1' | '$$Rov1StockAdjustmentAsSurplus2990006$$' | '$$PhysicalInventory2990004$$' | '$$Rov1PhysicalInventory2990004$$' | ''          | '5,000' | '$$Rov1PhysicalInventory2990004$$' | 'Stock adjustment as surplus' | '$$Rov1PhysicalInventory2990004$$' |
 			Then the number of "RowIDInfo" table lines is "равно" "1"
 		* Unlink line and check Row ID info tab
-			And I click "LinkUnlinkBasisDocuments" button
+			And in the table "ItemList" I click "Link unlink basis documents" button			
 			And I set checkbox "Linked documents"		
 			And I activate field named "ItemListRowsRowPresentation" in "ItemListRows" table
 			And I go to line in "ResultsTree" table
@@ -547,7 +547,7 @@ Scenario: _2990006 create Stock adjustment as surplus based on Physical inventor
 			Then the number of "RowIDInfo" table lines is "равно" "1"
 		* Link line and check Row ID info tab
 			And I move to "Items" tab
-			And I click "LinkUnlinkBasisDocuments" button
+			And in the table "ItemList" I click "Link unlink basis documents" button
 			And I go to line in "BasisesTree" table
 				| 'Quantity' | 'Row presentation' | 'Unit' |
 				| '5,000'    | 'Dress (S/Yellow)'  | 'pcs'  |
@@ -593,7 +593,7 @@ Scenario: _2990007 create Stock adjustment as write off based on Physical invent
 		And I select current line in "List" table
 	* Filling ItemList tab and check link/unlink line
 		* Add item from Physical inventory
-			And I click "AddBasisDocuments" button
+			And in the table "ItemList" I click "Add basis documents" button
 			And I go to line in "BasisesTree" table
 				| 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
 				| '2,000'    | 'Dress (XS/Blue)'  | 'pcs'  | 'No'  |
@@ -633,7 +633,7 @@ Scenario: _2990007 create Stock adjustment as write off based on Physical invent
 				| '1' | '$$Rov1StockAdjustmentAsWriteOff2990007$$' | '$$PhysicalInventory2990004$$' | '$$Rov2PhysicalInventory2990004$$' | ''          | '2,000' | '$$Rov2PhysicalInventory2990004$$' | 'Stock adjustment as write off' | '$$Rov2PhysicalInventory2990004$$' |
 			Then the number of "RowIDInfo" table lines is "равно" "1"
 		* Unlink line and check Row ID info tab
-			And I click "LinkUnlinkBasisDocuments" button
+			And in the table "ItemList" I click "Link unlink basis documents" button
 			And I activate field named "ItemListRowsRowPresentation" in "ItemListRows" table
 			And I set checkbox "Linked documents"	
 			And I go to line in "ResultsTree" table
@@ -651,7 +651,7 @@ Scenario: _2990007 create Stock adjustment as write off based on Physical invent
 			Then the number of "RowIDInfo" table lines is "равно" "1"
 		* Link line and check Row ID info tab
 			And I move to "Items" tab
-			And I click "LinkUnlinkBasisDocuments" button
+			And in the table "ItemList" I click "Link unlink basis documents" button
 			And I go to line in "BasisesTree" table
 				| 'Quantity' | 'Row presentation' | 'Unit' |
 				| '2,000'    | 'Dress (XS/Blue)'  | 'pcs'  |

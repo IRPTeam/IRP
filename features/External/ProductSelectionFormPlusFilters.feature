@@ -1656,15 +1656,17 @@ Scenario: check the barcode search in the purchase/purchase returns
 
 Scenario: check the barcode search in storage operations documents	
 	And I click the button named "FormCreate"
-	And in the table "ItemList" I click "Search by barcode" button
+	And in the table "ItemList" I click the button named "SearchByBarcode"
 	And I input "2202283713" text in "InputFld" field
 	And I click "OK" button
 	* Check adding an items and filling in the price in the tabular part
 		And "ItemList" table contains lines
 			| 'Item'    |'Item key'     | 'Unit' |
-			|'Dress' |'S/Yellow'  | 'pcs'  |
+			|'Dress'    |'S/Yellow'  | 'pcs'  |
 	And I close all client application windows
-
+	
+	
+		
 
 Scenario: check the barcode search in the product bundling documents
 	And I click the button named "FormCreate"

@@ -564,7 +564,7 @@ EndFunction
 
 &AtClient
 Procedure EditCurrencies(Command)
-	FormParameters = CurrenciesClientServer.GetParameters_SI(Object);
+	FormParameters = CurrenciesClientServer.GetParameters_V3(Object);
 	NotifyParameters = New Structure();
 	NotifyParameters.Insert("Object", Object);
 	NotifyParameters.Insert("Form"  , ThisObject);

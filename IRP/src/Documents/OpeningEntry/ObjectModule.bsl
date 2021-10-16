@@ -2,6 +2,67 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	If DataExchange.Load Then
 		Return;
 	EndIf;
+	TotalTable = New ValueTable();
+	TotalTable.Columns.Add("Key");
+	For Each Row In ThisObject.AccountBalance Do
+		TotalTable.Add().Key = Row.Key;
+	EndDo;
+	For Each Row In ThisObject.AdvanceFromCustomers Do
+		TotalTable.Add().Key = Row.Key;
+	EndDo;
+	For Each Row In ThisObject.AdvanceToSuppliers Do
+		TotalTable.Add().Key = Row.Key;
+	EndDo;
+	For Each Row In ThisObject.AccountReceivableByAgreements Do
+		TotalTable.Add().Key = Row.Key;
+	EndDo;
+	For Each Row In ThisObject.AccountReceivableByDocuments Do
+		TotalTable.Add().Key = Row.Key;
+	EndDo;
+	For Each Row In ThisObject.AccountPayableByAgreements Do
+		TotalTable.Add().Key = Row.Key;
+	EndDo;
+	For Each Row In ThisObject.AccountPayableByDocuments Do
+		TotalTable.Add().Key = Row.Key;
+	EndDo;
+	
+	CurrenciesClientServer.DeleteUnusedRowsFromCurrenciesTable(ThisObject.Currencies, TotalTable);
+	
+	For Each Row In ThisObject.AccountBalance Do
+		Parameters = CurrenciesClientServer.GetParameters_V6(ThisObject, Row);
+		CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, Row.Key);
+		CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
+	EndDo;
+	For Each Row In ThisObject.AdvanceFromCustomers Do
+		Parameters = CurrenciesClientServer.GetParameters_V6(ThisObject, Row);
+		CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, Row.Key);
+		CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
+	EndDo;
+	For Each Row In ThisObject.AdvanceToSuppliers Do
+		Parameters = CurrenciesClientServer.GetParameters_V6(ThisObject, Row);
+		CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, Row.Key);
+		CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
+	EndDo;
+	For Each Row In ThisObject.AccountReceivableByAgreements Do
+		Parameters = CurrenciesClientServer.GetParameters_V4(ThisObject, Row);
+		CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, Row.Key);
+		CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
+	EndDo;
+	For Each Row In ThisObject.AccountReceivableByDocuments Do
+		Parameters = CurrenciesClientServer.GetParameters_V4(ThisObject, Row);
+		CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, Row.Key);
+		CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
+	EndDo;
+	For Each Row In ThisObject.AccountPayableByAgreements Do
+		Parameters = CurrenciesClientServer.GetParameters_V4(ThisObject, Row);
+		CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, Row.Key);
+		CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
+	EndDo;
+	For Each Row In ThisObject.AccountPayableByDocuments Do
+		Parameters = CurrenciesClientServer.GetParameters_V4(ThisObject, Row);
+		CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, Row.Key);
+		CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
+	EndDo;
 EndProcedure
 
 Procedure OnWrite(Cancel)

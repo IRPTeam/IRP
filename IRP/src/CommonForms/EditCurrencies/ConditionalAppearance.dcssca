@@ -3,31 +3,31 @@
 	<item>
 		<selection>
 			<item>
-				<field>CurrenciesIsFixed</field>
+				<field>CurrenciesTableIsFixed</field>
 			</item>
 			<item>
-				<field>CurrenciesMovementType</field>
+				<field>CurrenciesTableMovementType</field>
 			</item>
 			<item>
-				<field>CurrenciesMovementTypeType</field>
+				<field>CurrenciesTableMovementTypeType</field>
 			</item>
 			<item>
-				<field>CurrenciesCurrencyFrom</field>
+				<field>CurrenciesTableCurrencyFrom</field>
 			</item>
 			<item>
-				<field>CurrenciesMovementTypeCurrency</field>
+				<field>CurrenciesTableMovementTypeCurrency</field>
 			</item>
 			<item>
-				<field>CurrenciesShowReverseRate</field>
+				<field>CurrenciesTableShowReverseRate</field>
 			</item>
 			<item>
-				<field>CurrenciesRatePresentation</field>
+				<field>CurrenciesTableRatePresentation</field>
 			</item>
 			<item>
-				<field>CurrenciesMultiplicity</field>
+				<field>CurrenciesTableMultiplicity</field>
 			</item>
 			<item>
-				<field>CurrenciesAmount</field>
+				<field>CurrenciesTableAmount</field>
 			</item>
 		</selection>
 		<filter>

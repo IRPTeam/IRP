@@ -19,6 +19,9 @@ EndProcedure
 
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
+	If Parameters.Key.IsEmpty() Then
+		SetVisibilityAvailability(Object, ThisObject);
+	EndIf;
 	DocIncomingPaymentOrderServer.OnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
 EndProcedure
 
@@ -34,11 +37,18 @@ EndProcedure
 &AtServer
 Procedure OnReadAtServer(CurrentObject)
 	DocIncomingPaymentOrderServer.OnReadAtServer(Object, ThisObject, CurrentObject);
+	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
 &AtServer
 Procedure AfterWriteAtServer(CurrentObject, WriteParameters, AddInfo = Undefined) Export
 	DocIncomingPaymentOrderServer.AfterWriteAtServer(Object, ThisObject, CurrentObject, WriteParameters);
+	SetVisibilityAvailability(Object, ThisObject);
+EndProcedure
+
+&AtClientAtServerNoContext
+Procedure SetVisibilityAvailability(Object, Form) Export
+	Form.Items.EditCurrencies.Enabled = Not Form.ReadOnly;
 EndProcedure
 
 #EndRegion
@@ -208,3 +218,22 @@ Procedure GeneratedFormCommandActionByNameServer(CommandName) Export
 EndProcedure
 
 #EndRegion
+
+&AtClient
+Procedure ShowRowKey(Command)
+	DocumentsClient.ShowRowKey(ThisObject);
+EndProcedure
+
+&AtClient
+Procedure EditCurrencies(Command)
+	CurrentData = ThisObject.Items.PaymentList.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	FormParameters = CurrenciesClientServer.GetParameters_V5(Object, CurrentData);
+	NotifyParameters = New Structure();
+	NotifyParameters.Insert("Object", Object);
+	NotifyParameters.Insert("Form"  , ThisObject);
+	Notify = New NotifyDescription("EditCurrenciesContinue", CurrenciesClient, NotifyParameters);
+	OpenForm("CommonForm.EditCurrencies", FormParameters, , , , ,Notify, FormWindowOpeningMode.LockOwnerWindow);
+EndProcedure

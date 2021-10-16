@@ -24,16 +24,16 @@ Procedure Cancel(Command)
 EndProcedure
 
 &AtClient
-Procedure CurrenciesSelection(Item, RowSelected, Field, StandardProcessing)
-	CurrentData = ThisObject.Items.Currencies.CurrentData;
+Procedure CurrenciesTableSelection(Item, RowSelected, Field, StandardProcessing)
+	CurrentData = ThisObject.Items.CurrenciesTable.CurrentData;
 	If CurrentData = Undefined Then
 		Return;
 	EndIf;
-	If Upper(Field.Name) = Upper("CurrenciesShowReverseRate") Then
+	If Upper(Field.Name) = Upper("CurrenciesTableShowReverseRate") Then
 		CurrentData.ShowReverseRate = Not CurrentData.ShowReverseRate;
 		CurrentData.RatePresentation = ?(CurrentData.ShowReverseRate, CurrentData.ReverseRate, CurrentData.Rate);
 	EndIf;
-	If Upper(Field.Name) = Upper("CurrenciesIsFixed") Then
+	If Upper(Field.Name) = Upper("CurrenciesTableIsFixed") Then
 		CurrentData.IsFixed = Not CurrentData.IsFixed;
 	Endif;
 	If Not CurrentData.IsFixed Then
@@ -46,18 +46,18 @@ Procedure CurrenciesSelection(Item, RowSelected, Field, StandardProcessing)
 EndProcedure
 
 &AtClient
-Procedure CurrenciesBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
+Procedure CurrenciesTableBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
 	Cancel = True;
 EndProcedure
 
 &AtClient
-Procedure CurrenciesBeforeDeleteRow(Item, Cancel)
+Procedure CurrenciesTableBeforeDeleteRow(Item, Cancel)
 	Cancel = True;
 EndProcedure
 
 &AtClient
-Procedure CurrenciesRatePresentationOnChange(Item)
-	CurrentData = ThisObject.Items.Currencies.CurrentData;
+Procedure CurrenciesTableRatePresentationOnChange(Item)
+	CurrentData = ThisObject.Items.CurrenciesTable.CurrentData;
 	If CurrentData = Undefined Then
 		Return;
 	EndIf;
@@ -79,8 +79,8 @@ Procedure CurrenciesRatePresentationOnChange(Item)
 EndProcedure
 
 &AtClient
-Procedure CurrenciesMultiplicityOnChange(Item)
-	CurrentData = ThisObject.Items.Currencies.CurrentData;
+Procedure CurrenciesTableMultiplicityOnChange(Item)
+	CurrentData = ThisObject.Items.CurrenciesTable.CurrentData;
 	If CurrentData = Undefined Then
 		Return;
 	EndIf;
@@ -89,8 +89,8 @@ Procedure CurrenciesMultiplicityOnChange(Item)
 EndProcedure
 
 &AtClient
-Procedure CurrenciesAmountOnChange(Item)
-	CurrentData = ThisObject.Items.Currencies.CurrentData;
+Procedure CurrenciesTableAmountOnChange(Item)
+	CurrentData = ThisObject.Items.CurrenciesTable.CurrentData;
 	If CurrentData = Undefined Then
 		Return;
 	EndIf;
@@ -105,3 +105,9 @@ Procedure CurrenciesAmountOnChange(Item)
 	CurrentData.RatePresentation = ?(CurrentData.ShowReverseRate, CurrentData.ReverseRate, CurrentData.Rate);
 	CurrentData.IsFixed = True;
 EndProcedure
+
+&AtClient
+Procedure ShowRowKey(Command)
+	DocumentsClient.ShowRowKey(ThisObject);
+EndProcedure
+

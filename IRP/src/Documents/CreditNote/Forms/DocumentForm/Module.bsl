@@ -3,15 +3,20 @@
 &AtServer
 Procedure AfterWriteAtServer(CurrentObject, WriteParameters, AddInfo = Undefined) Export
 	DocCreditDebitNoteServer.AfterWriteAtServer(Object, ThisObject, CurrentObject, WriteParameters);
+	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
 &AtServer
 Procedure OnReadAtServer(CurrentObject)
 	DocCreditDebitNoteServer.OnReadAtServer(Object, ThisObject, CurrentObject);
+	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
+	If Parameters.Key.IsEmpty() Then
+		SetVisibilityAvailability(Object, ThisObject);
+	EndIf;
 	DocCreditDebitNoteServer.OnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
 EndProcedure
 
@@ -35,6 +40,11 @@ Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefin
 	If EventName = "UpdateAddAttributeAndPropertySets" Then
 		AddAttributesCreateFormControl();
 	EndIf;
+EndProcedure
+
+&AtClientAtServerNoContext
+Procedure SetVisibilityAvailability(Object, Form) Export
+	Form.Items.EditCurrencies.Enabled = Not Form.ReadOnly;
 EndProcedure
 
 #EndRegion
@@ -242,3 +252,22 @@ Procedure AddAttributesCreateFormControl()
 EndProcedure
 
 #EndRegion
+
+&AtClient
+Procedure ShowRowKey(Command)
+	DocumentsClient.ShowRowKey(ThisObject);
+EndProcedure
+
+&AtClient
+Procedure EditCurrencies(Command)
+	CurrentData = ThisObject.Items.Transactions.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	FormParameters = CurrenciesClientServer.GetParameters_V4(Object, CurrentData);
+	NotifyParameters = New Structure();
+	NotifyParameters.Insert("Object", Object);
+	NotifyParameters.Insert("Form"  , ThisObject);
+	Notify = New NotifyDescription("EditCurrenciesContinue", CurrenciesClient, NotifyParameters);
+	OpenForm("CommonForm.EditCurrencies", FormParameters, , , , ,Notify, FormWindowOpeningMode.LockOwnerWindow);
+EndProcedure

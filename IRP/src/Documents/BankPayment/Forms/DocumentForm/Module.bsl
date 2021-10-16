@@ -39,40 +39,40 @@ EndProcedure
 
 #EndRegion
 
-//&AtClientAtServerNoContext
-//Procedure SetVisibilityAvailability(Object, Form) Export
-//	ArrayAll = New Array();
-//	ArrayByType = New Array();
-//	DocBankPaymentServer.FillAttributesByType(Object.TransactionType, ArrayAll, ArrayByType);
-//	DocumentsClientServer.SetVisibilityItemsByArray(Form.Items, ArrayAll, ArrayByType);
-//
-//	If Object.TransactionType = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CurrencyExchange")
-//		Or Object.TransactionType = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CashTransferOrder") Then
-//		BasedOnCashTransferOrder = False;
-//		BasedOnCashTransferOrder = False;
-//		For Each Row In Object.PaymentList Do
-//			If TypeOf(Row.PlaningTransactionBasis) = Type("DocumentRef.CashTransferOrder") And ValueIsFilled(
-//				Row.PlaningTransactionBasis) Then
-//				BasedOnCashTransferOrder = True;
-//				Break;
-//			EndIf;
-//		EndDo;
-//		Form.Items.Account.ReadOnly = BasedOnCashTransferOrder And ValueIsFilled(Object.Account);
-//		Form.Items.Company.ReadOnly = BasedOnCashTransferOrder And ValueIsFilled(Object.Company);
-//		Form.Items.Currency.ReadOnly = BasedOnCashTransferOrder And ValueIsFilled(Object.Currency);
-//
-//		ArrayTypes = New Array();
-//		ArrayTypes.Add(Type("DocumentRef.CashTransferOrder"));
-//		Form.Items.PaymentListPlaningTransactionBasis.TypeRestriction = New TypeDescription(ArrayTypes);
-//	Else
-//		ArrayTypes = New Array();
-//		ArrayTypes.Add(Type("DocumentRef.CashTransferOrder"));
-//		ArrayTypes.Add(Type("DocumentRef.IncomingPaymentOrder"));
-//		ArrayTypes.Add(Type("DocumentRef.OutgoingPaymentOrder"));
-//		Form.Items.PaymentListPlaningTransactionBasis.TypeRestriction = New TypeDescription(ArrayTypes);
-//	EndIf;
-//	Form.Items.EditCurrencies.Enabled = Not Form.ReadOnly;
-//EndProcedure
+&AtClientAtServerNoContext
+Procedure SetVisibilityAvailability(Object, Form) Export
+	ArrayAll = New Array();
+	ArrayByType = New Array();
+	DocBankPaymentServer.FillAttributesByType(Object.TransactionType, ArrayAll, ArrayByType);
+	DocumentsClientServer.SetVisibilityItemsByArray(Form.Items, ArrayAll, ArrayByType);
+
+	If Object.TransactionType = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CurrencyExchange")
+		Or Object.TransactionType = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CashTransferOrder") Then
+		BasedOnCashTransferOrder = False;
+		BasedOnCashTransferOrder = False;
+		For Each Row In Object.PaymentList Do
+			If TypeOf(Row.PlaningTransactionBasis) = Type("DocumentRef.CashTransferOrder") And ValueIsFilled(
+				Row.PlaningTransactionBasis) Then
+				BasedOnCashTransferOrder = True;
+				Break;
+			EndIf;
+		EndDo;
+		Form.Items.Account.ReadOnly = BasedOnCashTransferOrder And ValueIsFilled(Object.Account);
+		Form.Items.Company.ReadOnly = BasedOnCashTransferOrder And ValueIsFilled(Object.Company);
+		Form.Items.Currency.ReadOnly = BasedOnCashTransferOrder And ValueIsFilled(Object.Currency);
+
+		ArrayTypes = New Array();
+		ArrayTypes.Add(Type("DocumentRef.CashTransferOrder"));
+		Form.Items.PaymentListPlaningTransactionBasis.TypeRestriction = New TypeDescription(ArrayTypes);
+	Else
+		ArrayTypes = New Array();
+		ArrayTypes.Add(Type("DocumentRef.CashTransferOrder"));
+		ArrayTypes.Add(Type("DocumentRef.IncomingPaymentOrder"));
+		ArrayTypes.Add(Type("DocumentRef.OutgoingPaymentOrder"));
+		Form.Items.PaymentListPlaningTransactionBasis.TypeRestriction = New TypeDescription(ArrayTypes);
+	EndIf;
+	Form.Items.EditCurrencies.Enabled = Not Form.ReadOnly;
+EndProcedure
 
 #Region FormItemsEvents
 &AtClient
@@ -439,7 +439,7 @@ Procedure EditCurrencies(Command)
 	If CurrentData = Undefined Then
 		Return;
 	EndIf;
-	FormParameters = CurrenciesClientServer.GetParameters_BP(Object, CurrentData);
+	FormParameters = CurrenciesClientServer.GetParameters_V1(Object, CurrentData);
 	NotifyParameters = New Structure();
 	NotifyParameters.Insert("Object", Object);
 	NotifyParameters.Insert("Form"  , ThisObject);

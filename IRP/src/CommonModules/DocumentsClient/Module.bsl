@@ -3149,7 +3149,10 @@ Procedure ShowRowKey(Form) Export
 				|PaymentListKey,
 				|TaxList,
 				|ItemListInternalLinks, ItemListExternalLinks, InternalLinkedDocs, ExternalLinkedDocs,
-				|Currencies";
+				|Currencies, CurrenciesTableKey,
+				|InventoryKey, AccountBalanceKey, AdvanceFromCustomersKey, AdvanceToSuppliersKey,
+				|AccountPayableByAgreementsKey, AccountPayableByDocumentsKey, VendorsPaymentTermsKey,
+				|AccountReceivableByAgreementsKey, AccountReceivableByDocumentsKey, CustomersPaymentTermsKey";
 
 	ArrayOfItemNames = StrSplit(ItemNames, ",");
 	For Each ItemName In ArrayOfItemNames Do

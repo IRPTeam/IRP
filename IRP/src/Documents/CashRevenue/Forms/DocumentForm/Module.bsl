@@ -233,7 +233,6 @@ EndProcedure
 &AtClient
 Procedure CompanyOnChange(Item, AddInfo = Undefined) Export
 	DocCashExpenseRevenueClient.CompanyOnChange(Object, ThisObject, Item);
-	//Taxes_CreateFormControls();
 EndProcedure
 
 &AtClient
@@ -312,7 +311,7 @@ Procedure EditCurrencies(Command)
 	If CurrentData = Undefined Then
 		Return;
 	EndIf;
-	FormParameters = CurrenciesClientServer.GetParameters_BP(Object, CurrentData);
+	FormParameters = CurrenciesClientServer.GetParameters_V2(Object, CurrentData);
 	NotifyParameters = New Structure();
 	NotifyParameters.Insert("Object", Object);
 	NotifyParameters.Insert("Form"  , ThisObject);

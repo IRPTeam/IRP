@@ -81,6 +81,7 @@ Procedure SetVisibilityAvailability(Object, Form) Export
 		Form.ReadOnly = True;
 	EndIf;
 	Form.Items.GroupHead.Visible = Not Form.ClosingOrder.IsEmpty();
+	Form.Items.EditCurrencies.Enabled = Not Form.ReadOnly;
 EndProcedure
 
 &AtServer
@@ -597,3 +598,12 @@ EndFunction
 
 #EndRegion
 
+&AtClient
+Procedure EditCurrencies(Command)
+	FormParameters = CurrenciesClientServer.GetParameters_V3(Object);
+	NotifyParameters = New Structure();
+	NotifyParameters.Insert("Object", Object);
+	NotifyParameters.Insert("Form"  , ThisObject);
+	Notify = New NotifyDescription("EditCurrenciesContinue", CurrenciesClient, NotifyParameters);
+	OpenForm("CommonForm.EditCurrencies", FormParameters, , , , ,Notify, FormWindowOpeningMode.LockOwnerWindow);
+EndProcedure

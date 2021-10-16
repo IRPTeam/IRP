@@ -3,7 +3,7 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 		Return;
 	EndIf;
 
-	Parameters = CurrenciesClientServer.GetParameters_SI(ThisObject);
+	Parameters = CurrenciesClientServer.GetParameters_V3(ThisObject);
 	CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies);
 	CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
 

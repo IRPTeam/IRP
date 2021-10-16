@@ -4,6 +4,7 @@
 Procedure AfterWriteAtServer(CurrentObject, WriteParameters, AddInfo = Undefined) Export
 	DocOpeningEntryServer.AfterWriteAtServer(Object, ThisObject, CurrentObject, WriteParameters);
 	FillItemList();
+	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
 &AtClient
@@ -37,6 +38,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	If Parameters.Key.IsEmpty() Then
 		SetVisibleCustomersPaymentTerms(Object, ThisObject);
 		SetVisibleVendorsPaymentTerms(Object, ThisObject);
+		SetVisibilityAvailability(Object, ThisObject);
 	EndIf;
 EndProcedure
 
@@ -118,6 +120,7 @@ Procedure OnReadAtServer(CurrentObject) Export
 	FillItemList();
 	SetVisibleCustomersPaymentTerms(Object, ThisObject);
 	SetVisibleVendorsPaymentTerms(Object, ThisObject);
+	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
 &AtClient
@@ -671,7 +674,7 @@ Procedure SetVisibleCustomersPaymentTerms(Object, Form, CurrentData = Undefined)
 		If CurrentData = Undefined Then
 			Row.IsVisible = False;
 		Else
-			Row.IsVisible = True;//Row.Key = CurrentData.Key;
+			Row.IsVisible = True;
 		EndIf;
 	EndDo;
 EndProcedure
@@ -685,4 +688,118 @@ Procedure SetVisibleVendorsPaymentTerms(Object, Form, CurrentData = Undefined)
 			Row.IsVisible = True;//Row.Key = CurrentData.Key;
 		EndIf;
 	EndDo;
+EndProcedure
+
+&AtClientAtServerNoContext
+Procedure SetVisibilityAvailability(Object, Form) Export
+	Form.Items.EditCurrenciesAccountBalance.Enabled = Not Form.ReadOnly;
+	Form.Items.EditCurrenciesAdvanceFromCustomers.Enabled = Not Form.ReadOnly;
+	Form.Items.EditCurrenciesAdvanceToSuppliers.Enabled = Not Form.ReadOnly;
+	Form.Items.EditCurrenciesAccountReceivableByAgreements.Enabled = Not Form.ReadOnly;
+	Form.Items.EditCurrenciesAccountReceivableByDocuments.Enabled = Not Form.ReadOnly;
+	Form.Items.EditCurrenciesAccountPayableByAgreements.Enabled = Not Form.ReadOnly;
+	Form.Items.EditCurrenciesAccountPayableByDocuments.Enabled = Not Form.ReadOnly;
+EndProcedure
+
+&AtClient
+Procedure ShowRowKey(Command)
+	DocumentsClient.ShowRowKey(ThisObject);
+EndProcedure
+
+&AtClient
+Procedure EditCurrenciesAccountBalance(Command)
+	CurrentData = ThisObject.Items.AccountBalance.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	FormParameters = CurrenciesClientServer.GetParameters_V6(Object, CurrentData);
+	NotifyParameters = New Structure();
+	NotifyParameters.Insert("Object", Object);
+	NotifyParameters.Insert("Form"  , ThisObject);
+	Notify = New NotifyDescription("EditCurrenciesContinue", CurrenciesClient, NotifyParameters);
+	OpenForm("CommonForm.EditCurrencies", FormParameters, , , , ,Notify, FormWindowOpeningMode.LockOwnerWindow);
+EndProcedure
+
+&AtClient
+Procedure EditCurrenciesAdvanceFromCustomers(Command)
+	CurrentData = ThisObject.Items.AdvanceFromCustomers.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	FormParameters = CurrenciesClientServer.GetParameters_V6(Object, CurrentData);
+	NotifyParameters = New Structure();
+	NotifyParameters.Insert("Object", Object);
+	NotifyParameters.Insert("Form"  , ThisObject);
+	Notify = New NotifyDescription("EditCurrenciesContinue", CurrenciesClient, NotifyParameters);
+	OpenForm("CommonForm.EditCurrencies", FormParameters, , , , ,Notify, FormWindowOpeningMode.LockOwnerWindow);
+EndProcedure
+
+&AtClient
+Procedure EditCurrenciesAdvanceToSuppliers(Command)
+	CurrentData = ThisObject.Items.AdvanceToSuppliers.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	FormParameters = CurrenciesClientServer.GetParameters_V6(Object, CurrentData);
+	NotifyParameters = New Structure();
+	NotifyParameters.Insert("Object", Object);
+	NotifyParameters.Insert("Form"  , ThisObject);
+	Notify = New NotifyDescription("EditCurrenciesContinue", CurrenciesClient, NotifyParameters);
+	OpenForm("CommonForm.EditCurrencies", FormParameters, , , , ,Notify, FormWindowOpeningMode.LockOwnerWindow);
+EndProcedure
+
+&AtClient
+Procedure EditCurrenciesAccountReceivableByAgreements(Command)
+	CurrentData = ThisObject.Items.AccountReceivableByAgreements.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	FormParameters = CurrenciesClientServer.GetParameters_V4(Object, CurrentData);
+	NotifyParameters = New Structure();
+	NotifyParameters.Insert("Object", Object);
+	NotifyParameters.Insert("Form"  , ThisObject);
+	Notify = New NotifyDescription("EditCurrenciesContinue", CurrenciesClient, NotifyParameters);
+	OpenForm("CommonForm.EditCurrencies", FormParameters, , , , ,Notify, FormWindowOpeningMode.LockOwnerWindow);
+EndProcedure
+
+&AtClient
+Procedure EditCurrenciesAccountReceivableByDocuments(Command)
+	CurrentData = ThisObject.Items.AccountReceivableByDocuments.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	FormParameters = CurrenciesClientServer.GetParameters_V4(Object, CurrentData);
+	NotifyParameters = New Structure();
+	NotifyParameters.Insert("Object", Object);
+	NotifyParameters.Insert("Form"  , ThisObject);
+	Notify = New NotifyDescription("EditCurrenciesContinue", CurrenciesClient, NotifyParameters);
+	OpenForm("CommonForm.EditCurrencies", FormParameters, , , , ,Notify, FormWindowOpeningMode.LockOwnerWindow);
+EndProcedure
+
+&AtClient
+Procedure EditCurrenciesAccountPayableByAgreements(Command)
+	CurrentData = ThisObject.Items.AccountPayableByAgreements.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	FormParameters = CurrenciesClientServer.GetParameters_V4(Object, CurrentData);
+	NotifyParameters = New Structure();
+	NotifyParameters.Insert("Object", Object);
+	NotifyParameters.Insert("Form"  , ThisObject);
+	Notify = New NotifyDescription("EditCurrenciesContinue", CurrenciesClient, NotifyParameters);
+	OpenForm("CommonForm.EditCurrencies", FormParameters, , , , ,Notify, FormWindowOpeningMode.LockOwnerWindow);
+EndProcedure
+
+&AtClient
+Procedure EditCurrenciesAccountPayableByDocuments(Command)
+	CurrentData = ThisObject.Items.AccountPayableByDocuments.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	FormParameters = CurrenciesClientServer.GetParameters_V4(Object, CurrentData);
+	NotifyParameters = New Structure();
+	NotifyParameters.Insert("Object", Object);
+	NotifyParameters.Insert("Form"  , ThisObject);
+	Notify = New NotifyDescription("EditCurrenciesContinue", CurrenciesClient, NotifyParameters);
+	OpenForm("CommonForm.EditCurrencies", FormParameters, , , , ,Notify, FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure

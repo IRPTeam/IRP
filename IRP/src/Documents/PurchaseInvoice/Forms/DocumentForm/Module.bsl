@@ -72,8 +72,8 @@ EndProcedure
 Procedure SetVisibilityAvailability(Object, Form) Export
 	Form.Items.AddBasisDocuments.Enabled = Not Form.ReadOnly;
 	Form.Items.LinkUnlinkBasisDocuments.Enabled = Not Form.ReadOnly;
-
 	Form.Items.LegalName.Enabled = ValueIsFilled(Object.Partner);
+	Form.Items.EditCurrencies.Enabled = Not Form.ReadOnly;
 EndProcedure
 
 #EndRegion
@@ -557,3 +557,13 @@ Function GetProcessingModule() Export
 EndFunction
 
 #EndRegion
+
+&AtClient
+Procedure EditCurrencies(Command)
+	FormParameters = CurrenciesClientServer.GetParameters_V3(Object);
+	NotifyParameters = New Structure();
+	NotifyParameters.Insert("Object", Object);
+	NotifyParameters.Insert("Form"  , ThisObject);
+	Notify = New NotifyDescription("EditCurrenciesContinue", CurrenciesClient, NotifyParameters);
+	OpenForm("CommonForm.EditCurrencies", FormParameters, , , , ,Notify, FormWindowOpeningMode.LockOwnerWindow);
+EndProcedure

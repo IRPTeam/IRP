@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form:Form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:form="http://g5.1c.ru/v8/dt/form">
   <items xsi:type="form:Table">
-    <name>Currencies</name>
+    <name>CurrenciesTable</name>
     <id>5</id>
     <visible>true</visible>
     <enabled>true</enabled>
@@ -13,7 +13,56 @@
     </dataPath>
     <titleLocation>None</titleLocation>
     <items xsi:type="form:FormField">
-      <name>CurrenciesIsFixed</name>
+      <name>CurrenciesTableKey</name>
+      <id>63</id>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <dataPath xsi:type="form:DataPath">
+        <segments>Currencies.Key</segments>
+      </dataPath>
+      <extendedTooltip>
+        <name>CurrenciesTableKeyExtendedTooltip</name>
+        <id>65</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <type>Label</type>
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <extInfo xsi:type="form:LabelDecorationExtInfo">
+          <horizontalAlign>Left</horizontalAlign>
+        </extInfo>
+      </extendedTooltip>
+      <contextMenu>
+        <name>CurrenciesTableKeyContextMenu</name>
+        <id>64</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <autoFill>true</autoFill>
+      </contextMenu>
+      <type>InputField</type>
+      <editMode>Enter</editMode>
+      <showInHeader>true</showInHeader>
+      <headerHorizontalAlign>Left</headerHorizontalAlign>
+      <showInFooter>true</showInFooter>
+      <extInfo xsi:type="form:InputFieldExtInfo">
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <wrap>true</wrap>
+        <chooseType>true</chooseType>
+        <typeDomainEnabled>true</typeDomainEnabled>
+        <textEdit>true</textEdit>
+      </extInfo>
+    </items>
+    <items xsi:type="form:FormField">
+      <name>CurrenciesTableIsFixed</name>
       <id>60</id>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -23,8 +72,9 @@
       <dataPath xsi:type="form:DataPath">
         <segments>Currencies.IsFixed</segments>
       </dataPath>
+      <titleLocation>None</titleLocation>
       <extendedTooltip>
-        <name>CurrenciesIsFixedExtendedTooltip</name>
+        <name>CurrenciesTableIsFixedExtendedTooltip</name>
         <id>62</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -39,7 +89,7 @@
         </extInfo>
       </extendedTooltip>
       <contextMenu>
-        <name>CurrenciesIsFixedContextMenu</name>
+        <name>CurrenciesTableIsFixedContextMenu</name>
         <id>61</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -65,7 +115,7 @@
       </extInfo>
     </items>
     <items xsi:type="form:FormField">
-      <name>CurrenciesMovementType</name>
+      <name>CurrenciesTableMovementType</name>
       <id>36</id>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -80,8 +130,9 @@
           <segments>Currencies.MovementType</segments>
         </paths>
       </dataPath>
+      <titleLocation>None</titleLocation>
       <extendedTooltip>
-        <name>CurrenciesMovementTypeExtendedTooltip</name>
+        <name>CurrenciesTableMovementTypeExtendedTooltip</name>
         <id>38</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -96,7 +147,7 @@
         </extInfo>
       </extendedTooltip>
       <contextMenu>
-        <name>CurrenciesMovementTypeContextMenu</name>
+        <name>CurrenciesTableMovementTypeContextMenu</name>
         <id>37</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -121,7 +172,7 @@
       </extInfo>
     </items>
     <items xsi:type="form:FormField">
-      <name>CurrenciesMovementTypeType</name>
+      <name>CurrenciesTableMovementTypeType</name>
       <id>42</id>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -131,8 +182,9 @@
       <dataPath xsi:type="form:DataPath">
         <segments>Currencies.MovementType.Type</segments>
       </dataPath>
+      <titleLocation>None</titleLocation>
       <extendedTooltip>
-        <name>CurrenciesMovementTypeTypeExtendedTooltip</name>
+        <name>CurrenciesTableMovementTypeTypeExtendedTooltip</name>
         <id>44</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -147,7 +199,7 @@
         </extInfo>
       </extendedTooltip>
       <contextMenu>
-        <name>CurrenciesMovementTypeTypeContextMenu</name>
+        <name>CurrenciesTableMovementTypeTypeContextMenu</name>
         <id>43</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -172,8 +224,12 @@
       </extInfo>
     </items>
     <items xsi:type="form:FormField">
-      <name>CurrenciesCurrencyFrom</name>
+      <name>CurrenciesTableCurrencyFrom</name>
       <id>21</id>
+      <title>
+        <key>en</key>
+        <value>From</value>
+      </title>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -188,7 +244,7 @@
         </paths>
       </dataPath>
       <extendedTooltip>
-        <name>CurrenciesCurrencyFromExtendedTooltip</name>
+        <name>CurrenciesTableCurrencyFromExtendedTooltip</name>
         <id>23</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -203,7 +259,7 @@
         </extInfo>
       </extendedTooltip>
       <contextMenu>
-        <name>CurrenciesCurrencyFromContextMenu</name>
+        <name>CurrenciesTableCurrencyFromContextMenu</name>
         <id>22</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -229,8 +285,12 @@
       </extInfo>
     </items>
     <items xsi:type="form:FormField">
-      <name>CurrenciesMovementTypeCurrency</name>
+      <name>CurrenciesTableMovementTypeCurrency</name>
       <id>45</id>
+      <title>
+        <key>en</key>
+        <value>To</value>
+      </title>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -240,7 +300,7 @@
         <segments>Currencies.MovementType.Currency</segments>
       </dataPath>
       <extendedTooltip>
-        <name>CurrenciesMovementTypeCurrencyExtendedTooltip</name>
+        <name>CurrenciesTableMovementTypeCurrencyExtendedTooltip</name>
         <id>47</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -255,7 +315,7 @@
         </extInfo>
       </extendedTooltip>
       <contextMenu>
-        <name>CurrenciesMovementTypeCurrencyContextMenu</name>
+        <name>CurrenciesTableMovementTypeCurrencyContextMenu</name>
         <id>46</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -281,7 +341,7 @@
       </extInfo>
     </items>
     <items xsi:type="form:FormField">
-      <name>CurrenciesShowReverseRate</name>
+      <name>CurrenciesTableShowReverseRate</name>
       <id>30</id>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -296,8 +356,9 @@
           <segments>Currencies.ShowReverseRate</segments>
         </paths>
       </dataPath>
+      <titleLocation>None</titleLocation>
       <extendedTooltip>
-        <name>CurrenciesShowReverseRateExtendedTooltip</name>
+        <name>CurrenciesTableShowReverseRateExtendedTooltip</name>
         <id>32</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -312,7 +373,7 @@
         </extInfo>
       </extendedTooltip>
       <contextMenu>
-        <name>CurrenciesShowReverseRateContextMenu</name>
+        <name>CurrenciesTableShowReverseRateContextMenu</name>
         <id>31</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -338,8 +399,12 @@
       </extInfo>
     </items>
     <items xsi:type="form:FormField">
-      <name>CurrenciesRatePresentation</name>
+      <name>CurrenciesTableRatePresentation</name>
       <id>48</id>
+      <title>
+        <key>en</key>
+        <value>Rate</value>
+      </title>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -350,10 +415,10 @@
       </dataPath>
       <handlers>
         <event>OnChange</event>
-        <name>CurrenciesRatePresentationOnChange</name>
+        <name>CurrenciesTableRatePresentationOnChange</name>
       </handlers>
       <extendedTooltip>
-        <name>CurrenciesRatePresentationExtendedTooltip</name>
+        <name>CurrenciesTableRatePresentationExtendedTooltip</name>
         <id>50</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -368,7 +433,7 @@
         </extInfo>
       </extendedTooltip>
       <contextMenu>
-        <name>CurrenciesRatePresentationContextMenu</name>
+        <name>CurrenciesTableRatePresentationContextMenu</name>
         <id>49</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -392,7 +457,7 @@
       </extInfo>
     </items>
     <items xsi:type="form:FormField">
-      <name>CurrenciesMultiplicity</name>
+      <name>CurrenciesTableMultiplicity</name>
       <id>33</id>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -409,10 +474,10 @@
       </dataPath>
       <handlers>
         <event>OnChange</event>
-        <name>CurrenciesMultiplicityOnChange</name>
+        <name>CurrenciesTableMultiplicityOnChange</name>
       </handlers>
       <extendedTooltip>
-        <name>CurrenciesMultiplicityExtendedTooltip</name>
+        <name>CurrenciesTableMultiplicityExtendedTooltip</name>
         <id>35</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -427,7 +492,7 @@
         </extInfo>
       </extendedTooltip>
       <contextMenu>
-        <name>CurrenciesMultiplicityContextMenu</name>
+        <name>CurrenciesTableMultiplicityContextMenu</name>
         <id>34</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -451,7 +516,7 @@
       </extInfo>
     </items>
     <items xsi:type="form:FormField">
-      <name>CurrenciesAmount</name>
+      <name>CurrenciesTableAmount</name>
       <id>39</id>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -468,10 +533,10 @@
       </dataPath>
       <handlers>
         <event>OnChange</event>
-        <name>CurrenciesAmountOnChange</name>
+        <name>CurrenciesTableAmountOnChange</name>
       </handlers>
       <extendedTooltip>
-        <name>CurrenciesAmountExtendedTooltip</name>
+        <name>CurrenciesTableAmountExtendedTooltip</name>
         <id>41</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -486,7 +551,7 @@
         </extInfo>
       </extendedTooltip>
       <contextMenu>
-        <name>CurrenciesAmountContextMenu</name>
+        <name>CurrenciesTableAmountContextMenu</name>
         <id>40</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -510,7 +575,7 @@
       </extInfo>
     </items>
     <autoCommandBar>
-      <name>CurrenciesCommandBar</name>
+      <name>CurrenciesTableCommandBar</name>
       <id>6</id>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -521,15 +586,15 @@
     </autoCommandBar>
     <handlers>
       <event>Selection</event>
-      <name>CurrenciesSelection</name>
+      <name>CurrenciesTableSelection</name>
     </handlers>
     <handlers>
       <event>BeforeAddRow</event>
-      <name>CurrenciesBeforeAddRow</name>
+      <name>CurrenciesTableBeforeAddRow</name>
     </handlers>
     <handlers>
       <event>BeforeDeleteRow</event>
-      <name>CurrenciesBeforeDeleteRow</name>
+      <name>CurrenciesTableBeforeDeleteRow</name>
     </handlers>
     <searchStringAddition>
       <visible>true</visible>
@@ -537,10 +602,10 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <name>CurrenciesSearchString</name>
+      <name>CurrenciesTableSearchString</name>
       <id>9</id>
       <extendedTooltip>
-        <name>CurrenciesSearchStringExtendedTooltip</name>
+        <name>CurrenciesTableSearchStringExtendedTooltip</name>
         <id>11</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -555,7 +620,7 @@
         </extInfo>
       </extendedTooltip>
       <contextMenu>
-        <name>CurrenciesSearchStringContextMenu</name>
+        <name>CurrenciesTableSearchStringContextMenu</name>
         <id>10</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -574,10 +639,10 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <name>CurrenciesViewStatus</name>
+      <name>CurrenciesTableViewStatus</name>
       <id>15</id>
       <extendedTooltip>
-        <name>CurrenciesViewStatusExtendedTooltip</name>
+        <name>CurrenciesTableViewStatusExtendedTooltip</name>
         <id>17</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -592,7 +657,7 @@
         </extInfo>
       </extendedTooltip>
       <contextMenu>
-        <name>CurrenciesViewStatusContextMenu</name>
+        <name>CurrenciesTableViewStatusContextMenu</name>
         <id>16</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -612,10 +677,10 @@
       <userVisible>
         <common>true</common>
       </userVisible>
-      <name>CurrenciesSearchControl</name>
+      <name>CurrenciesTableSearchControl</name>
       <id>12</id>
       <extendedTooltip>
-        <name>CurrenciesSearchControlExtendedTooltip</name>
+        <name>CurrenciesTableSearchControlExtendedTooltip</name>
         <id>14</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -630,7 +695,7 @@
         </extInfo>
       </extendedTooltip>
       <contextMenu>
-        <name>CurrenciesSearchControlContextMenu</name>
+        <name>CurrenciesTableSearchControlContextMenu</name>
         <id>13</id>
         <visible>true</visible>
         <enabled>true</enabled>
@@ -645,7 +710,7 @@
       </extInfo>
     </searchControlAddition>
     <extendedTooltip>
-      <name>CurrenciesExtendedTooltip</name>
+      <name>CurrenciesTableExtendedTooltip</name>
       <id>8</id>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -660,7 +725,7 @@
       </extInfo>
     </extendedTooltip>
     <contextMenu>
-      <name>CurrenciesContextMenu</name>
+      <name>CurrenciesTableContextMenu</name>
       <id>7</id>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -675,6 +740,7 @@
     <autoMaxHeight>true</autoMaxHeight>
     <autoMaxRowsCount>true</autoMaxRowsCount>
     <selectionMode>MultiRow</selectionMode>
+    <header>true</header>
     <headerHeight>1</headerHeight>
     <footerHeight>1</footerHeight>
     <horizontalScrollBar>AutoUse</horizontalScrollBar>
@@ -682,7 +748,6 @@
     <horizontalLines>true</horizontalLines>
     <verticalLines>true</verticalLines>
     <searchOnInput>Auto</searchOnInput>
-    <initialListView>Auto</initialListView>
     <horizontalStretch>true</horizontalStretch>
     <verticalStretch>true</verticalStretch>
     <fileDragMode>AsFileRef</fileDragMode>
@@ -751,6 +816,37 @@
       <placementArea>UserCmds</placementArea>
       <representationInContextMenu>Auto</representationInContextMenu>
     </items>
+    <items xsi:type="form:Button">
+      <name>FormShowRowKey</name>
+      <id>66</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <extendedTooltip>
+        <name>FormShowRowKeyExtendedTooltip</name>
+        <id>67</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <type>Label</type>
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <extInfo xsi:type="form:LabelDecorationExtInfo">
+          <horizontalAlign>Left</horizontalAlign>
+        </extInfo>
+      </extendedTooltip>
+      <commandName>Form.Command.ShowRowKey</commandName>
+      <representation>Auto</representation>
+      <autoMaxWidth>true</autoMaxWidth>
+      <autoMaxHeight>true</autoMaxHeight>
+      <placementArea>UserCmds</placementArea>
+      <representationInContextMenu>Auto</representationInContextMenu>
+      <locationInCommandBar>InAdditionalSubmenu</locationInCommandBar>
+    </items>
     <visible>true</visible>
     <enabled>true</enabled>
     <userVisible>
@@ -806,10 +902,6 @@
     </columns>
     <columns>
       <name>CurrencyFrom</name>
-      <title>
-        <key>en</key>
-        <value>Currency from</value>
-      </title>
       <id>3</id>
       <valueType>
         <types>CatalogRef.Currencies</types>
@@ -1096,6 +1188,26 @@
     <action xsi:type="form:FormCommandHandlerContainer">
       <handler>
         <name>Cancel</name>
+      </handler>
+    </action>
+    <currentRowUse>Auto</currentRowUse>
+  </formCommands>
+  <formCommands>
+    <name>ShowRowKey</name>
+    <title>
+      <key>en</key>
+      <value>Show row key</value>
+    </title>
+    <id>3</id>
+    <use>
+      <common>true</common>
+    </use>
+    <picture xsi:type="core:PictureRef">
+      <picture>StdPicture.GetURL</picture>
+    </picture>
+    <action xsi:type="form:FormCommandHandlerContainer">
+      <handler>
+        <name>ShowRowKey</name>
       </handler>
     </action>
     <currentRowUse>Auto</currentRowUse>

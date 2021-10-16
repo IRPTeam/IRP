@@ -20,7 +20,7 @@ EndProcedure
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	If Parameters.Key.IsEmpty() Then
-		SetVisibilityAvailability();
+		SetVisibilityAvailability(Object, ThisObject);
 	EndIf;
 	DocCashPaymentServer.OnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
 EndProcedure
@@ -28,21 +28,21 @@ EndProcedure
 &AtServer
 Procedure OnReadAtServer(CurrentObject)
 	DocCashPaymentServer.OnReadAtServer(Object, ThisObject, CurrentObject);
-	SetVisibilityAvailability();
+	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
 &AtServer
 Procedure AfterWriteAtServer(CurrentObject, WriteParameters, AddInfo = Undefined) Export
 	DocCashPaymentServer.AfterWriteAtServer(Object, ThisObject, CurrentObject, WriteParameters);
-	SetVisibilityAvailability();
+	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
-&AtServer
-Procedure SetVisibilityAvailability() Export
+&AtClientAtServerNoContext
+Procedure SetVisibilityAvailability(Object, Form) Export
 	ArrayAll = New Array();
 	ArrayByType = New Array();
 	DocCashPaymentServer.FillAttributesByType(Object.TransactionType, ArrayAll, ArrayByType);
-	DocumentsClientServer.SetVisibilityItemsByArray(ThisObject.Items, ArrayAll, ArrayByType);
+	DocumentsClientServer.SetVisibilityItemsByArray(Form.Items, ArrayAll, ArrayByType);
 
 	If Object.TransactionType = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CurrencyExchange")
 		Or Object.TransactionType = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CashTransferOrder") Then
@@ -55,20 +55,21 @@ Procedure SetVisibilityAvailability() Export
 				Break;
 			EndIf;
 		EndDo;
-		ThisObject.Items.CashAccount.ReadOnly = BasedOnCashTransferOrder And ValueIsFilled(Object.CashAccount);
-		ThisObject.Items.Company.ReadOnly = BasedOnCashTransferOrder And ValueIsFilled(Object.Company);
-		ThisObject.Items.Currency.ReadOnly = BasedOnCashTransferOrder And ValueIsFilled(Object.Currency);
+		Form.Items.CashAccount.ReadOnly = BasedOnCashTransferOrder And ValueIsFilled(Object.CashAccount);
+		Form.Items.Company.ReadOnly = BasedOnCashTransferOrder And ValueIsFilled(Object.Company);
+		Form.Items.Currency.ReadOnly = BasedOnCashTransferOrder And ValueIsFilled(Object.Currency);
 
 		ArrayTypes = New Array();
 		ArrayTypes.Add(Type("DocumentRef.CashTransferOrder"));
-		ThisObject.Items.PaymentListPlaningTransactionBasis.TypeRestriction = New TypeDescription(ArrayTypes);
+		Form.Items.PaymentListPlaningTransactionBasis.TypeRestriction = New TypeDescription(ArrayTypes);
 	Else
 		ArrayTypes = New Array();
 		ArrayTypes.Add(Type("DocumentRef.CashTransferOrder"));
 		ArrayTypes.Add(Type("DocumentRef.IncomingPaymentOrder"));
 		ArrayTypes.Add(Type("DocumentRef.OutgoingPaymentOrder"));
-		ThisObject.Items.PaymentListPlaningTransactionBasis.TypeRestriction = New TypeDescription(ArrayTypes);
+		Form.Items.PaymentListPlaningTransactionBasis.TypeRestriction = New TypeDescription(ArrayTypes);
 	EndIf;
+	Form.Items.EditCurrencies.Enabled = Not Form.ReadOnly;
 EndProcedure
 
 #EndRegion
@@ -293,7 +294,7 @@ EndProcedure
 
 &AtClient
 Procedure TransactionTypeOnChange(Item, AddInfo = Undefined) Export
-	SetVisibilityAvailability();
+	SetVisibilityAvailability(Object, ThisObject);
 	DocCashPaymentClient.TransactionTypeOnChange(Object, ThisObject, Item);
 EndProcedure
 
@@ -394,3 +395,17 @@ Procedure GeneratedFormCommandActionByNameServer(CommandName) Export
 EndProcedure
 
 #EndRegion
+
+&AtClient
+Procedure EditCurrencies(Command)
+	CurrentData = ThisObject.Items.PaymentList.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	FormParameters = CurrenciesClientServer.GetParameters_BP(Object, CurrentData);
+	NotifyParameters = New Structure();
+	NotifyParameters.Insert("Object", Object);
+	NotifyParameters.Insert("Form"  , ThisObject);
+	Notify = New NotifyDescription("EditCurrenciesContinue", CurrenciesClient, NotifyParameters);
+	OpenForm("CommonForm.EditCurrencies", FormParameters, , , , ,Notify, FormWindowOpeningMode.LockOwnerWindow);
+EndProcedure

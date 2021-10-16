@@ -106,6 +106,11 @@ Procedure PaymentListBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Paramet
 EndProcedure
 
 &AtClient
+Procedure PaymentListAfterDeleteRow(Item)
+	DocCashExpenseRevenueClient.PaymentListAfterDeleteRow(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
 Procedure PaymentListTotalAmountOnChange(Item, AddInfo = Undefined) Export
 	DocCashExpenseRevenueClient.PaymentListTotalAmountOnChange(Object, ThisObject, Item);
 EndProcedure

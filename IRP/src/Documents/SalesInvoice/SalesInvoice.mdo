@@ -963,20 +963,6 @@
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
-    <attributes uuid="40cc04f0-b633-44cd-aceb-ab004345e671">
-      <name>IsFixed1</name>
-      <synonym>
-        <key>en</key>
-        <value>Is fixed1</value>
-      </synonym>
-      <type>
-        <types>Boolean</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
   </tabularSections>
   <tabularSections uuid="5313e99e-c5c4-4237-8694-01be49d19103">
     <producedTypes>

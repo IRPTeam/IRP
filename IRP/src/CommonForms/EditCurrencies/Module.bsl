@@ -1,13 +1,55 @@
 
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
+	ThisObject.Ref            = Parameters.Ref;
+	ThisObject.Date           = Parameters.Date;
+	ThisObject.Company        = Parameters.Company;
+	ThisObject.Currency       = Parameters.Currency;
+	ThisObject.Agreement      = Parameters.Agreement;
+	ThisObject.RowKey         = Parameters.RowKey;
 	ThisObject.DocumentAmount = Parameters.DocumentAmount;
-	ThisObject.RowKey = Parameters.RowKey;
-	CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
+	For Each Row In Parameters.Currencies Do
+		FillPropertyValues(ThisObject.CurrenciesFromDocument.Add(), Row);
+	EndDo;
+	UpdateAtServer();
+EndProcedure
+
+&AtServer
+Procedure UpdateAtServer()
+	For Each Row In ThisObject.Currencies Do
+		Filter = New Structure("CurrencyFrom, MovementType");
+		FillPropertyValues(Filter, Row);
+		ArrayOfRows = ThisObject.CurrenciesFromDocument.FindRows(Filter);
+		If ArrayOfRows.Count() Then
+			For Each ItemOfArray In ArrayOfRows Do
+				FillPropertyValues(ItemOfArray, Row);
+			EndDo;
+		Else
+			FillPropertyValues(ThisObject.CurrenciesFromDocument.Add(), Row);
+		EndIf;
+	EndDo;
+	
+	UpdateParameters = New Structure();
+	UpdateParameters.Insert("Ref"            , ThisObject.Ref);
+	UpdateParameters.Insert("Date"           , ThisObject.Date);
+	UpdateParameters.Insert("Company"        , ThisObject.Company);
+	UpdateParameters.Insert("Currency"       , ThisObject.Currency);
+	UpdateParameters.Insert("Agreement"      , ThisObject.Agreement);
+	UpdateParameters.Insert("RowKey"         , ThisObject.RowKey);
+	UpdateParameters.Insert("DocumentAmount" , ThisObject.DocumentAmount);
+	UpdateParameters.Insert("Currencies"     ,
+		CurrenciesClientServer.GetCurrenciesTable(ThisObject.CurrenciesFromDocument));
+	
+	ThisObject.Currencies.Clear();	
+	CurrenciesServer.UpdateCurrencyTable(UpdateParameters, ThisObject.Currencies);
 	ThisObject.Currencies.Sort("MovementType");
 	For Each Row In ThisObject.Currencies Do
 		Row.RatePresentation = ?(Row.ShowReverseRate, Row.ReverseRate, Row.Rate);
 	EndDo;
+	VisibleRows = ThisObject.Currencies.FindRows(New Structure("IsVisible", True));
+	If VisibleRows.Count() Then
+		ThisObject.Items.CurrenciesTable.CurrentRow = VisibleRows[0].GetID();
+	EndIf;
 EndProcedure
 
 &AtClient
@@ -22,6 +64,30 @@ EndProcedure
 Procedure Cancel(Command)
 	Close(Undefined);
 EndProcedure
+
+&AtClient
+Procedure Update(Command)
+	UpdateAtServer();
+EndProcedure
+
+&AtClient
+Procedure CurrencyRates(Command)
+	CurrentData = ThisObject.Items.CurrenciesTable.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	FormParameters = GetCurrencyRatesParameters(CurrentData.CurrencyFrom, CurrentData.MovementType);
+	OpenForm("InformationRegister.CurrencyRates.ListForm", FormParameters, , , , ,, FormWindowOpeningMode.LockOwnerWindow);
+EndProcedure
+
+&AtServerNoContext
+Function GetCurrencyRatesParameters(CurrencyFrom, MovementType)
+	Filter = New Structure();
+	Filter.Insert("CurrencyFrom" , CurrencyFrom);
+	Filter.Insert("CurrencyTo"   , MovementType.Currency);
+	Filter.Insert("Source"       , MovementType.Source);
+	Return New Structure("Filter", Filter);
+EndFunction
 
 &AtClient
 Procedure CurrenciesTableSelection(Item, RowSelected, Field, StandardProcessing)

@@ -230,7 +230,7 @@ Procedure EditCurrenciesSender(Command)
 	NotifyParameters.Insert("Object", Object);
 	NotifyParameters.Insert("Form"  , ThisObject);
 	Notify = New NotifyDescription("EditCurrenciesContinue", CurrenciesClient, NotifyParameters);
-	OpenForm("CommonForm.EditCurrencies", FormParameters, , , , ,Notify, FormWindowOpeningMode.LockOwnerWindow);
+	OpenForm("CommonForm.EditCurrencies", FormParameters, , , , , Notify, FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
 
 &AtClient
@@ -241,7 +241,5 @@ Procedure EditCurrenciesReceiver(Command)
 	NotifyParameters.Insert("Object", Object);
 	NotifyParameters.Insert("Form"  , ThisObject);
 	Notify = New NotifyDescription("EditCurrenciesContinue", CurrenciesClient, NotifyParameters);
-	OpenForm("CommonForm.EditCurrencies", FormParameters, , , , ,Notify, FormWindowOpeningMode.LockOwnerWindow);
+	OpenForm("CommonForm.EditCurrencies", FormParameters, , , , , Notify, FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
-
-

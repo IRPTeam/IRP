@@ -392,10 +392,7 @@ Procedure UpdateCurrencyTable(Parameters, CurrenciesTable) Export
 			
 			ShowReverseRate = False;
 			For Each ItemOfArray In Parameters.Currencies Do
-				If ItemOfArray.Key = Filter.Key
-					And ItemOfArray.CurrencyFrom = Filter.CurrencyFrom
-					And ItemOfArray.MovementType = Filter.MovementType
-					And ItemOfArray.ShowReverseRate Then
+				If CurrencyRowMatchFilter(ItemOfArray, Filter) And ItemOfArray.ShowReverseRate Then
 						ShowReverseRate = True;
 						Break;
 				EndIf;
@@ -455,4 +452,10 @@ Function AddRowToCurrencyTable(RatePeriod, CurrenciesTable, RowKey, CurrencyFrom
 		EndIf;
 	EndIf;
 	Return NewRow;
+EndFunction
+
+Function CurrencyRowMatchFilter(CurrencyRow, Filter)
+	Return CurrencyRow.Key = Filter.Key
+		And CurrencyRow.CurrencyFrom = Filter.CurrencyFrom
+		And CurrencyRow.MovementType = Filter.MovementType;
 EndFunction

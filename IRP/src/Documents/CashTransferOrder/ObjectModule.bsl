@@ -2,6 +2,14 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	If DataExchange.Load Then
 		Return;
 	EndIf;
+	
+	If Not ValueIsFilled(ThisObject.SendUUID) Then
+		ThisObject.SendUUID = New UUID();
+	EndIf;
+	If Not ValueIsFilled(ThisObject.ReceiveUUID) Then
+		ThisObject.ReceiveUUID = New UUID();
+	EndIf;
+	
 	TotalTable = New ValueTable();
 	TotalTable.Columns.Add("Key");
 	TotalTable.Add().Key = ThisObject.SendUUID;

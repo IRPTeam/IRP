@@ -77,7 +77,7 @@ Procedure CurrencyRates(Command)
 		Return;
 	EndIf;
 	FormParameters = GetCurrencyRatesParameters(CurrentData.CurrencyFrom, CurrentData.MovementType);
-	OpenForm("InformationRegister.CurrencyRates.ListForm", FormParameters, , , , ,, FormWindowOpeningMode.LockOwnerWindow);
+	OpenForm("InformationRegister.CurrencyRates.ListForm", FormParameters, , , , , , FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
 
 &AtServerNoContext
@@ -101,7 +101,7 @@ Procedure CurrenciesTableSelection(Item, RowSelected, Field, StandardProcessing)
 	EndIf;
 	If Upper(Field.Name) = Upper("CurrenciesTableIsFixed") Then
 		CurrentData.IsFixed = Not CurrentData.IsFixed;
-	Endif;
+	EndIf;
 	If Not CurrentData.IsFixed Then
 		CurrentData.Rate             = CurrentData.RateOrigin;
 		CurrentData.ReverseRate      = CurrentData.ReverseRateOrigin;
@@ -176,4 +176,3 @@ EndProcedure
 Procedure ShowRowKey(Command)
 	DocumentsClient.ShowRowKey(ThisObject);
 EndProcedure
-

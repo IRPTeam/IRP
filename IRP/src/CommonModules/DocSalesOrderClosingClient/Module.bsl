@@ -405,7 +405,6 @@ Function PartnerSettings(Object, Form, AddInfo = Undefined) Export
 	Actions.Insert("ChangeManagerSegment", "ChangeManagerSegment");
 	Actions.Insert("ChangeLegalName", "ChangeLegalName");
 	Actions.Insert("ChangeAgreement", "ChangeAgreement");
-	Actions.Insert("ChangeShipmentConfirmationsBeforeSalesInvoice", "ChangeShipmentConfirmationsBeforeSalesInvoice");
 
 	Settings.Actions = Actions;
 	Settings.ObjectAttributes 	= "Company, Currency, PriceIncludeTax, Agreement, LegalName, ManagerSegment";

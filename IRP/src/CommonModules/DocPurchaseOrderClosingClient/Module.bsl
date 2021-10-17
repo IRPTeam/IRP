@@ -393,7 +393,6 @@ Function PartnerSettings(Object, Form, AddInfo = Undefined) Export
 	Actions = New Structure();
 	Actions.Insert("ChangeLegalName", "ChangeLegalName");
 	Actions.Insert("ChangeAgreement", "ChangeAgreement");
-	Actions.Insert("ChangeGoodsReceiptBeforePurchaseInvoice", "ChangeGoodsReceiptBeforePurchaseInvoice");
 	Settings.Actions = Actions;
 
 	Settings.ObjectAttributes 	= "Company, Currency, PriceIncludeTax, Agreement, LegalName";
@@ -451,7 +450,6 @@ Function AgreementSettings(Object, Form, AddInfo = Undefined) Export
 	Actions.Insert("ChangePriceIncludeTax", "ChangePriceIncludeTax");
 	Actions.Insert("ChangeStore", "ChangeStore");
 	Actions.Insert("ChangeDeliveryDate", "ChangeDeliveryDate");
-	Actions.Insert("ChangeGoodsReceiptBeforePurchaseInvoice", "ChangeGoodsReceiptBeforePurchaseInvoice");
 	Actions.Insert("ChangeTaxRates", "ChangeTaxRates");
 
 	Settings.Actions = Actions;

@@ -219,21 +219,6 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
-  <attributes uuid="60e5183f-f49e-4e41-98cc-0eba5ee12cbe">
-    <name>ShipmentConfirmationsBeforeSalesInvoice</name>
-    <synonym>
-      <key>en</key>
-      <value>Shipment confirmations before sales invoice</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
   <attributes uuid="d05bdf43-ab26-43a2-b25f-f027a66c56fc">
     <name>UseItemsShipmentScheduling</name>
     <synonym>

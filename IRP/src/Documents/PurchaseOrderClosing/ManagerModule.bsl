@@ -119,7 +119,6 @@ Function ItemList()
 		   |	PurchaseOrderItems.Ref.Company AS Company,
 		   |	PurchaseOrderItems.Store AS Store,
 		   |	PurchaseOrderItems.Store.UseGoodsReceipt AS UseGoodsReceipt,
-		   |	PurchaseOrderItems.Ref.GoodsReceiptBeforePurchaseInvoice AS GoodsReceiptBeforePurchaseInvoice,
 		   |	PurchaseOrderItems.Ref.PurchaseOrder AS Order,
 		   |	PurchaseOrderItems.PurchaseBasis AS PurchaseBasis,
 		   |	PurchaseOrderItems.ItemKey.Item AS Item,

@@ -629,7 +629,6 @@
   <documents>Document.VendorsAdvancesClosing</documents>
   <documentJournals>DocumentJournal.DocumentsForIncomingPayment</documentJournals>
   <documentJournals>DocumentJournal.DocumentsForOutgoingPayment</documentJournals>
-  <documentJournals>DocumentJournal.DocumentsForCreditDebitNote</documentJournals>
   <documentJournals>DocumentJournal.AllDocuments</documentJournals>
   <enums>Enum.AgreementKinds</enums>
   <enums>Enum.AgreementTypes</enums>

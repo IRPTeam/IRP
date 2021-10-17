@@ -251,24 +251,6 @@
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
-    <attributes uuid="cbe6f940-0e6a-4bb1-bfb0-cca3a95a7767">
-      <name>BasisDocument</name>
-      <synonym>
-        <key>en</key>
-        <value>Basis document</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeAccountStatementBasises</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <choiceParameterLinks>
-        <name>Filter.Company</name>
-        <field>Document.CreditNote.Attribute.Company</field>
-      </choiceParameterLinks>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
     <attributes uuid="5c4d3bf2-61d6-4ec0-8dd5-9096fc3ab346">
       <name>LegalName</name>
       <synonym>

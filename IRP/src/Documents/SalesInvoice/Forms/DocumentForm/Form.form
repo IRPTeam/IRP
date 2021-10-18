@@ -8396,7 +8396,7 @@
           <horizontalAlign>Left</horizontalAlign>
         </extInfo>
       </extendedTooltip>
-      <commandName>Form.Command.HowHiddenTables</commandName>
+      <commandName>Form.Command.ShowHiddenTables</commandName>
       <representation>Auto</representation>
       <autoMaxWidth>true</autoMaxWidth>
       <autoMaxHeight>true</autoMaxHeight>
@@ -9476,10 +9476,10 @@
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
   <formCommands>
-    <name>HowHiddenTables</name>
+    <name>ShowHiddenTables</name>
     <title>
       <key>en</key>
-      <value>How hidden tables</value>
+      <value>Show hidden tables</value>
     </title>
     <id>15</id>
     <use>
@@ -9490,7 +9490,7 @@
     </picture>
     <action xsi:type="form:FormCommandHandlerContainer">
       <handler>
-        <name>HowHiddenTables</name>
+        <name>ShowHiddenTables</name>
       </handler>
     </action>
     <currentRowUse>Auto</currentRowUse>

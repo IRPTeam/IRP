@@ -3131,6 +3131,11 @@ EndProcedure
 
 #Region Utility
 
+Procedure ShowHiddenTables(Object, Form) Export
+	FormParameters = New Structure("DocumentRef", Object.Ref);
+	OpenForm("CommonForm.EditHiddenTables", FormParameters, Form, , , , , FormWindowOpeningMode.LockOwnerWindow);
+EndProcedure
+
 Procedure ShowRowKey(Form) Export
 	ItemNames = "ItemListKey, SpecialOffersKey,
 				|ItemListRowsKey,

@@ -573,9 +573,7 @@ Procedure EditCurrencies(Command)
 EndProcedure
 
 &AtClient
-Procedure HowHiddenTables(Command)
-	FormParameters = New Structure();
-	FormParameters.Insert("Form", ThisObject);
-	OpenForm("CommonForm.EditHiddenTables", FormParameters, ThisObject, , ThisObject.Window, , , FormWindowOpeningMode.Independent);
+Procedure ShowHiddenTables(Command)
+	DocumentsClient.ShowHiddenTables(Object, ThisObject);
 EndProcedure
 

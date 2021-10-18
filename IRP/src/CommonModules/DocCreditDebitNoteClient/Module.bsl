@@ -105,12 +105,6 @@ Procedure TransactionsAgreementOnChange(Object, Form, Item, AddInfo = Undefined)
 	EndIf;
 	AgreementInfo = CatAgreementsServer.GetAgreementInfo(CurrentData.Agreement);
 
-	If AgreementInfo.ApArPostingDetail <> PredefinedValue("Enum.ApArPostingDetail.ByDocuments")
-		Or CurrentData.Agreement <> ServiceSystemServer.GetCompositeObjectAttribute(CurrentData.BasisDocument,
-		"Agreement") Then
-		CurrentData.BasisDocument = Undefined;
-	EndIf;
-
 	If CurrentData.Currency <> AgreementInfo.Currency Then
 		CurrentData.Currency = AgreementInfo.Currency;
 		TransactionsCurrencyOnChange(Object, Form, Undefined);

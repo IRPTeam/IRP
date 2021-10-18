@@ -79,6 +79,7 @@ EndProcedure
 &AtClient
 Procedure PaymentListOnChange(Item)
 	DocCashReceiptClient.PaymentListOnChange(Object, ThisObject, Item);
+	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
 &AtClient

@@ -39,6 +39,41 @@ EndProcedure
 
 &AtClientAtServerNoContext
 Procedure SetVisibilityAvailability(Object, Form) Export
+	ArrayAll = New Array();
+	ArrayByType = New Array();
+	DocBankReceiptServer.FillAttributesByType(Object.TransactionType, ArrayAll, ArrayByType);
+	DocumentsClientServer.SetVisibilityItemsByArray(Form.Items, ArrayAll, ArrayByType);
+
+	If Object.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.CurrencyExchange")
+		Or Object.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.CashTransferOrder")
+		Or Object.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.TransferFromPOS") Then
+		BasedOnCashTransferOrder = False;
+		For Each Row In Object.PaymentList Do
+			If TypeOf(Row.PlaningTransactionBasis) = Type("DocumentRef.CashTransferOrder") And ValueIsFilled(
+				Row.PlaningTransactionBasis) Then
+				BasedOnCashTransferOrder = True;
+				Break;
+			EndIf;
+		EndDo;
+		Form.Items.CurrencyExchange.ReadOnly = BasedOnCashTransferOrder And ValueIsFilled(Object.CurrencyExchange);
+		Form.Items.Account.ReadOnly = BasedOnCashTransferOrder And ValueIsFilled(Object.Account);
+		Form.Items.Company.ReadOnly = BasedOnCashTransferOrder And ValueIsFilled(Object.Company);
+		Form.Items.Currency.ReadOnly = BasedOnCashTransferOrder And ValueIsFilled(Object.Currency);
+
+		ArrayTypes = New Array();
+		If Object.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.TransferFromPOS") Then
+			ArrayTypes.Add(Type("DocumentRef.CashStatement"));
+		Else
+			ArrayTypes.Add(Type("DocumentRef.CashTransferOrder"));
+		EndIf;
+		Form.Items.PaymentListPlaningTransactionBasis.TypeRestriction = New TypeDescription(ArrayTypes);
+	Else
+		ArrayTypes = New Array();
+		ArrayTypes.Add(Type("DocumentRef.CashTransferOrder"));
+		ArrayTypes.Add(Type("DocumentRef.IncomingPaymentOrder"));
+		ArrayTypes.Add(Type("DocumentRef.OutgoingPaymentOrder"));
+		Form.Items.PaymentListPlaningTransactionBasis.TypeRestriction = New TypeDescription(ArrayTypes);
+	EndIf;
 	Form.Items.EditCurrencies.Enabled = Not Form.ReadOnly;
 EndProcedure
 
@@ -49,6 +84,7 @@ EndProcedure
 &AtClient
 Procedure PaymentListOnChange(Item)
 	DocBankReceiptClient.PaymentListOnChange(Object, ThisObject, Item);
+	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
 &AtClient
@@ -307,6 +343,7 @@ EndProcedure
 &AtClient
 Procedure TransactionTypeOnChange(Item)
 	DocBankReceiptClient.TransactionTypeOnChange(Object, ThisObject, Item);
+	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
 #EndRegion

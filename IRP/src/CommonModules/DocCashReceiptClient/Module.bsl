@@ -8,24 +8,6 @@ Procedure OnOpen(Object, Form, Cancel, AddInfo = Undefined) Export
 	DocumentsClient.SetTextOfDescriptionAtForm(Object, Form);
 EndProcedure
 
-Procedure SetAvailability(Object, Form) Export
-	If Object.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.CurrencyExchange")
-		Or Object.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.CashTransferOrder") Then
-		BasedOnCashTransferOrder = False;
-		For Each Row In Object.PaymentList Do
-			If TypeOf(Row.PlaningTransactionBasis) = Type("DocumentRef.CashTransferOrder") And ValueIsFilled(
-				Row.PlaningTransactionBasis) Then
-				BasedOnCashTransferOrder = True;
-				Break;
-			EndIf;
-		EndDo;
-		Form.Items.CurrencyExchange.ReadOnly = BasedOnCashTransferOrder And ValueIsFilled(Object.CurrencyExchange);
-		Form.Items.CashAccount.ReadOnly 	 = BasedOnCashTransferOrder And ValueIsFilled(Object.CashAccount);
-		Form.Items.Company.ReadOnly 		 = BasedOnCashTransferOrder And ValueIsFilled(Object.Company);
-		Form.Items.Currency.ReadOnly 		 = BasedOnCashTransferOrder And ValueIsFilled(Object.Currency);
-	EndIf;
-EndProcedure
-
 #EndRegion
 
 #Region FormItemsEvents
@@ -79,7 +61,7 @@ Procedure CleanDataByTransactionTypeContinue(Result, AdditionalParameters) Expor
 		EndDo;
 	Else
 		Object.TransactionType = Form.CurrentTransactionType;
-		Form.SetVisibilityAvailability();
+		Form.SetVisibilityAvailability(Object, Form);
 	EndIf;
 
 	Form.CurrentTransactionType = Object.TransactionType;
@@ -198,7 +180,6 @@ Procedure PaymentListOnChange(Object, Form, Item) Export
 			Row.Key = New UUID();
 		EndIf;
 	EndDo;
-	SetAvailability(Object, Form);
 EndProcedure
 
 Procedure PaymentListBasisDocumentOnChange(Object, Form, Item) Export

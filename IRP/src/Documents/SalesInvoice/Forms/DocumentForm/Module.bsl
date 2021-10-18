@@ -147,7 +147,7 @@ Procedure ItemListAfterDeleteRow(Item)
 EndProcedure
 
 &AtClient
-Procedure ItemListOnChange(Item)
+Procedure ItemListOnChange(Item) Export
 	DocSalesInvoiceClient.ItemListOnChange(Object, ThisObject, Item);
 EndProcedure
 

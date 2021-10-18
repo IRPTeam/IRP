@@ -87,6 +87,7 @@ EndProcedure
 &AtClient
 Procedure PaymentListOnChange(Item)
 	DocBankPaymentClient.PaymentListOnChange(Object, ThisObject, Item);
+	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
 &AtClient

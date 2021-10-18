@@ -6,45 +6,6 @@ EndProcedure
 
 Procedure OnOpen(Object, Form, Cancel, AddInfo = Undefined) Export
 	DocumentsClient.SetTextOfDescriptionAtForm(Object, Form);
-	SetAvailability(Object, Form);
-EndProcedure
-
-Procedure SetAvailability(Object, Form) Export
-	ArrayAll = New Array();
-	ArrayByType = New Array();
-	DocBankReceiptServer.FillAttributesByType(Object.TransactionType, ArrayAll, ArrayByType);
-	DocumentsClientServer.SetVisibilityItemsByArray(Form.Items, ArrayAll, ArrayByType);
-
-	If Object.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.CurrencyExchange")
-		Or Object.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.CashTransferOrder")
-		Or Object.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.TransferFromPOS") Then
-		BasedOnCashTransferOrder = False;
-		For Each Row In Object.PaymentList Do
-			If TypeOf(Row.PlaningTransactionBasis) = Type("DocumentRef.CashTransferOrder") And ValueIsFilled(
-				Row.PlaningTransactionBasis) Then
-				BasedOnCashTransferOrder = True;
-				Break;
-			EndIf;
-		EndDo;
-		Form.Items.CurrencyExchange.ReadOnly = BasedOnCashTransferOrder And ValueIsFilled(Object.CurrencyExchange);
-		Form.Items.Account.ReadOnly = BasedOnCashTransferOrder And ValueIsFilled(Object.Account);
-		Form.Items.Company.ReadOnly = BasedOnCashTransferOrder And ValueIsFilled(Object.Company);
-		Form.Items.Currency.ReadOnly = BasedOnCashTransferOrder And ValueIsFilled(Object.Currency);
-
-		ArrayTypes = New Array();
-		If Object.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.TransferFromPOS") Then
-			ArrayTypes.Add(Type("DocumentRef.CashStatement"));
-		Else
-			ArrayTypes.Add(Type("DocumentRef.CashTransferOrder"));
-		EndIf;
-		Form.Items.PaymentListPlaningTransactionBasis.TypeRestriction = New TypeDescription(ArrayTypes);
-	Else
-		ArrayTypes = New Array();
-		ArrayTypes.Add(Type("DocumentRef.CashTransferOrder"));
-		ArrayTypes.Add(Type("DocumentRef.IncomingPaymentOrder"));
-		ArrayTypes.Add(Type("DocumentRef.OutgoingPaymentOrder"));
-		Form.Items.PaymentListPlaningTransactionBasis.TypeRestriction = New TypeDescription(ArrayTypes);
-	EndIf;
 EndProcedure
 
 #EndRegion
@@ -72,7 +33,6 @@ EndFunction
 #Region ItemTransactionType
 
 Procedure TransactionTypeOnChange(Object, Form, Item) Export
-	SetAvailability(Object, Form);
 	CleanDataByTransactionType(Object, Form);
 	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 EndProcedure
@@ -107,7 +67,7 @@ Procedure CleanDataByTransactionTypeContinue(Result, AdditionalParameters) Expor
 	Else
 		Object.TransactionType = Form.CurrentTransactionType;
 		SetTransitAccount(Object, Form);
-		SetAvailability(Object, Form);
+		Form.SetVisibilityAvailability(Object, Form);
 	EndIf;
 
 	Form.CurrentTransactionType = Object.TransactionType;
@@ -211,7 +171,6 @@ Procedure PaymentListOnChange(Object, Form, Item) Export
 			Row.Key = New UUID();
 		EndIf;
 	EndDo;
-	SetAvailability(Object, Form);
 EndProcedure
 
 Procedure PaymentListOnActivateRow(Object, Form, Item) Export

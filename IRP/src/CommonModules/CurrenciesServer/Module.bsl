@@ -444,7 +444,7 @@ Function AddRowToCurrencyTable(RatePeriod, CurrenciesTable, RowKey, CurrencyFrom
 		If Not ValueIsFilled(CurrencyInfo.Rate) Then
 			NewRow.Rate = 0;
 			NewRow.ReverseRate = 0;
-			NewRow.Multiplicity = 0;
+			NewRow.Multiplicity = 1;
 		Else
 			NewRow.Rate = CurrencyInfo.Rate;
 			NewRow.ReverseRate = 1 / CurrencyInfo.Rate;

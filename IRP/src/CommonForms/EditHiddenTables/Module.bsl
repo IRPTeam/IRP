@@ -102,3 +102,6 @@ DocumentTables.Insert("ShipmentConfirmations" , False);
 DocumentTables.Insert("GoodsReceipts"         , False);
 DocumentTables.Insert("PaymentTerms"          , False);
 DocumentTables.Insert("AddAttributes"         , False);
+DocumentTables.Insert("DataSet"               , False);
+DocumentTables.Insert("DataPrice"             , False);
+

@@ -117,7 +117,7 @@ Scenario: _024001 create document Sales Invoice based on sales order (partial qu
 			| '2' | '175,00' |
 
 		Then the number of "PaymentTerms" table lines is "равно" 0
-		And "ObjectCurrencies" table became equal
+		And "CurrenciesTable" table became equal
 			| 'Movement type'      | 'Type'         | 'Currency from' | 'Currency' | 'Rate presentation' | 'Multiplicity' | 'Amount'   |
 			| 'TRY'                | 'Partner term' | 'TRY'           | 'TRY'      | '1'                 | '1'            | '45 819'   |
 			| 'Local currency'     | 'Legal'        | 'TRY'           | 'TRY'      | '1'                 | '1'            | '45 819'   |
@@ -294,7 +294,7 @@ Scenario: _024003 copy SI (based on SO) and check filling in Row Id info table (
 			| '2' | 'Distribution department' | 'Basic Price Types' | 'Shirt' | '36/Red'   | 'No'                 | ''                   | '5,000' | 'pcs'            | '240,25'     | '350,00'   | '18%' | '175,00'        | '1 334,75'   | '1 575,00'     | ''                    | 'Store 02' | '27.01.2021'    | 'Yes'                       | ''       | ''            | 'Revenue'      |
 			| '3' | 'Front office'            | 'Basic Price Types' | 'Boots' | '36/18SD'  | 'No'                 | ''                   | '5,000' | 'Boots (12 pcs)' | '6 406,78'   | '8 400,00' | '18%' | ''              | '35 593,22'  | '42 000,00'    | ''                    | 'Store 02' | '27.01.2021'    | 'No'                        | ''       | ''            | 'Revenue'      |
 
-		And "ObjectCurrencies" table became equal
+		And "CurrenciesTable" table became equal
 			| 'Movement type'      | 'Type'         | 'Currency from' | 'Currency' | 'Rate presentation' | 'Multiplicity' | 'Amount'   |
 			| 'TRY'                | 'Partner term' | 'TRY'           | 'TRY'      | '1'                 | '1'            | '44 095'   |
 			| 'Local currency'     | 'Legal'        | 'TRY'           | 'TRY'      | '1'                 | '1'            | '44 095'   |

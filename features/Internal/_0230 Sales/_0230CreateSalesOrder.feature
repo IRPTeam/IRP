@@ -186,7 +186,7 @@ Scenario: _023003 copy SO and check filling in Row Id info table
 			| '#' | 'Profit loss center'           | 'Price type'        | 'Item'     | 'Dont calculate row' | 'Q'     | 'Unit' | 'Tax amount' | 'Price'  | 'VAT' | 'Offers amount' | 'Net amount' | 'Total amount' | 'Store'    | 'Revenue type' | 'Detail' | 'Procurement method' | 'Item key'  | 'Cancel' | 'Cancel reason' |
 			| '1' | 'Distribution department' | 'Basic Price Types' | 'Dress'    | 'No'                 | '5,000' | 'pcs'  | '419,49'     | '550,00' | '18%' | ''              | '2 330,51'   | '2 750,00'     | 'Store 01' | 'Revenue'      | '123'    | 'Stock'              | 'L/Green'   | 'No'     | ''              |
 			| '2' | 'Distribution department' | 'Basic Price Types' | 'Trousers' | 'No'                 | '4,000' | 'pcs'  | '244,07'     | '400,00' | '18%' | ''              | '1 355,93'   | '1 600,00'     | 'Store 01' | 'Revenue'      | ''       | 'Stock'              | '36/Yellow' | 'No'     | ''              |
-		And "ObjectCurrencies" table became equal
+		And "CurrenciesTable" table became equal
 			| 'Movement type'      | 'Type'         | 'Currency from' | 'Currency' | 'Rate presentation' | 'Multiplicity' | 'Amount' |
 			| 'TRY'                | 'Partner term' | 'TRY'           | 'TRY'      | '1'                 | '1'            | '4 350'  |
 			| 'Local currency'     | 'Legal'        | 'TRY'           | 'TRY'      | '1'                 | '1'            | '4 350'  |

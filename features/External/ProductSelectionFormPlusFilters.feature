@@ -1701,3 +1701,4 @@ Scenario: check the barcode search in the Item stock adjustment
 			| 'Item' |'Item key (surplus)'     | 'Unit' |
 			|'Dress' |'S/Yellow'               | 'pcs'  |
 	And I close all client application windows
+	

@@ -179,7 +179,7 @@ Scenario: _017003 copy PO and check filling in Row Id info table
 			| '1' | ''              | 'en description is empty' | 'Dress'    | 'M/White'   | 'No'                 | '3 050,85'   | '100,000' | 'pcs'  | '200,00' | '18%' | ''              | '16 949,15'  | '20 000,00'    | ''                        | 'Store 01' | ''             | ''       | ''            | 'No'     | ''               | ''              |
 			| '2' | ''              | 'en description is empty' | 'Dress'    | 'L/Green'   | 'No'                 | '6 406,78'   | '200,000' | 'pcs'  | '210,00' | '18%' | ''              | '35 593,22'  | '42 000,00'    | ''                        | 'Store 01' | ''             | ''       | ''            | 'No'     | ''               | ''              |
 			| '3' | ''              | 'en description is empty' | 'Trousers' | '36/Yellow' | 'No'                 | '11 440,68'  | '300,000' | 'pcs'  | '250,00' | '18%' | ''              | '63 559,32'  | '75 000,00'    | ''                        | 'Store 01' | ''             | ''       | ''            | 'No'     | ''               | ''              |
-		And "ObjectCurrencies" table became equal
+		And "CurrenciesTable" table became equal
 			| 'Movement type'      | 'Type'         | 'Currency from' | 'Currency' | 'Rate presentation' | 'Multiplicity' | 'Amount'    |
 			| 'TRY'                | 'Partner term' | 'TRY'           | 'TRY'      | '1'                 | '1'            | '137 000'   |
 			| 'Local currency'     | 'Legal'        | 'TRY'           | 'TRY'      | '1'                 | '1'            | '137 000'   |

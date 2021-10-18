@@ -285,7 +285,7 @@ Scenario: _018003 copy PI (based on PO) and check filling in Row Id info table (
 			| '3' | 'Front office'  | 'en description is empty' | 'Trousers' | '36/Yellow' | 'No'                 | '256,27'     | 'pcs'            | ''                   | '8,000' | '210,00' | '18%' | ''              | '1 680,00'     | ''                    | ''                        | 'Store 02' | '12.02.2021'    | ''             | ''               | ''       | ''            | '1 423,73'   | 'Yes'               |
 			| '4' | ''              | 'en description is empty' | 'Boots'    | '36/18SD'   | 'No'                 | '1 830,51'   | 'Boots (12 pcs)' | ''                   | '5,000' | '200,00' | '18%' | ''              | '12 000,00'    | ''                    | ''                        | 'Store 02' | '12.02.2021'    | ''             | ''               | ''       | ''            | '10 169,49'  | 'No'                |
 
-		And "ObjectCurrencies" table became equal
+		And "CurrenciesTable" table became equal
 			| 'Movement type'      | 'Type'         | 'Currency from' | 'Currency' | 'Rate presentation' | 'Multiplicity' | 'Amount'   |
 			| 'TRY'                | 'Partner term' | 'TRY'           | 'TRY'      | '1'                 | '1'            | '14 980'   |
 			| 'Local currency'     | 'Legal'        | 'TRY'           | 'TRY'      | '1'                 | '1'            | '14 980'   |

@@ -571,3 +571,11 @@ Procedure EditCurrencies(Command)
 	Notify = New NotifyDescription("EditCurrenciesContinue", CurrenciesClient, NotifyParameters);
 	OpenForm("CommonForm.EditCurrencies", FormParameters, , , , , Notify, FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
+
+&AtClient
+Procedure HowHiddenTables(Command)
+	FormParameters = New Structure();
+	FormParameters.Insert("Form", ThisObject);
+	OpenForm("CommonForm.EditHiddenTables", FormParameters, ThisObject, , ThisObject.Window, , , FormWindowOpeningMode.Independent);
+EndProcedure
+

@@ -653,12 +653,13 @@ Scenario: _0154101 check filling in and refilling Sales order
 				| '520,00' | 'Dress' | 'XS/Blue'  | '84,47'      | '1%'       | '1,000' | 'pcs'  | '435,53'     | '520,00'       | 'Store 01' |
 		* Check filling in currency tab
 			And I click "Save" button
-			And I move to the tab named "GroupCurrencies"
-			And "ObjectCurrencies" table became equal
-			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
-			| 'TRY'                | 'Partner term' | 'TRY'           | 'TRY'      | '1'                 | '1 770'  | '1'            |
-			| 'Local currency'     | 'Legal'     | 'TRY'           | 'TRY'      | '1'                 | '1 770'  | '1'            |
-			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,1712'            | '303,02' | '1'            |
+			And in the table "ItemList" I click "Edit currencies" button
+			And "CurrenciesTable" table became equal
+				| 'Movement type'      | 'Type'         | 'To'  | 'From' | 'Multiplicity' | 'Rate'   | 'Amount' |
+				| 'Reporting currency' | 'Reporting'    | 'USD' | 'TRY'  | '1'            | '0,1712' | '303,02' |
+				| 'Local currency'     | 'Legal'        | 'TRY' | 'TRY'  | '1'            | '1'      | '1 770'  |
+				| 'TRY'                | 'Partner term' | 'TRY' | 'TRY'  | '1'            | '1'      | '1 770'  |
+			And I close current window	
 		* Check recalculate Total amount and Net amount when change Tax rate
 			* Price includes tax
 				And I move to "Item list" tab
@@ -1052,12 +1053,13 @@ Scenario: _0154102 check filling in and refilling Sales invoice
 				| '550,00' | 'Dress' | 'L/Green'  | '89,35'      | '1%'       | '1,000' | 'pcs'  | '460,65'     | '550,00'       | 'Store 01' |
 				| '520,00' | 'Dress' | 'XS/Blue'  | '84,47'      | '1%'       | '1,000' | 'pcs'  | '435,53'     | '520,00'       | 'Store 01' |
 		* Check filling in currency tab
-			And I move to the tab named "GroupCurrencies"
-			And "ObjectCurrencies" table became equal
-			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
-			| 'TRY'                | 'Partner term' | 'TRY'           | 'TRY'         | '1'                 | '1 770'  | '1'            |
-			| 'Local currency'     | 'Legal'     | 'TRY'           | 'TRY'         | '1'                 | '1 770'  | '1'            |
-			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'         | '0,1712'            | '303,02' | '1'            |
+			And in the table "ItemList" I click "Edit currencies" button
+			And "CurrenciesTable" table became equal
+				| 'Movement type'      | 'Type'         | 'To'  | 'From' | 'Multiplicity' | 'Rate'   | 'Amount' |
+				| 'Reporting currency' | 'Reporting'    | 'USD' | 'TRY'  | '1'            | '0,1712' | '303,02' |
+				| 'Local currency'     | 'Legal'        | 'TRY' | 'TRY'  | '1'            | '1'      | '1 770'  |
+				| 'TRY'                | 'Partner term' | 'TRY' | 'TRY'  | '1'            | '1'      | '1 770'  |
+			And I close current window
 		* Check recalculate Total amount and Net amount when change Tax rate
 			* Price includes tax
 				And I move to "Item list" tab
@@ -1166,13 +1168,13 @@ Scenario: _0154103 check Sales order when changing date
 			| 'Sale autum, TRY'               |
 		And I close "Partner terms" window
 	* Check the recount of the currency table when the date is changed
-		And I move to the tab named "GroupCurrencies"
-		And "ObjectCurrencies" table became equal
-		| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
-		| 'TRY'                | 'Partner term' | 'TRY'           | 'TRY'      | '1'                 | '1 000'  | '1'            |
-		| 'Local currency'     | 'Legal'     | 'TRY'           | 'TRY'      | '1'                 | '1 000'  | '1'            |
-		| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,2000'            | '200,00' | '1'            |
-
+		And in the table "ItemList" I click "Edit currencies" button
+		And "CurrenciesTable" table became equal
+			| 'Movement type'      | 'Type'         | 'To'  | 'From' | 'Multiplicity' | 'Rate'   | 'Amount' |
+			| 'Reporting currency' | 'Reporting'    | 'USD' | 'TRY'  | '1'            | '0,2000' | '200,00' |
+			| 'Local currency'     | 'Legal'        | 'TRY' | 'TRY'  | '1'            | '1'      | '1 000'  |
+			| 'TRY'                | 'Partner term' | 'TRY' | 'TRY'  | '1'            | '1'      | '1 000'  |
+		
 Scenario: _0154104 check Sales invoice when changing date
 	* Open the Sales invoice creation form
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
@@ -1232,13 +1234,13 @@ Scenario: _0154104 check Sales invoice when changing date
 		| 'Sale autum, TRY'               |
 		And I close "Partner terms" window
 	* Check the recount of the currency table when the date is changed
-		And I move to the tab named "GroupCurrencies"
-		And "ObjectCurrencies" table became equal
-		| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
-		| 'TRY'                | 'Partner term' | 'TRY'           | 'TRY'      | '1'                 | '1 000'  | '1'            |
-		| 'Local currency'     | 'Legal'     | 'TRY'           | 'TRY'      | '1'                 | '1 000'  | '1'            |
-		| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,2000'            | '200,00' | '1'            |
-
+		And in the table "ItemList" I click "Edit currencies" button
+		And "CurrenciesTable" table became equal
+			| 'Movement type'      | 'Type'         | 'To'  | 'From' | 'Multiplicity' | 'Rate'   | 'Amount' |
+			| 'Reporting currency' | 'Reporting'    | 'USD' | 'TRY'  | '1'            | '0,2000' | '200,00' |
+			| 'Local currency'     | 'Legal'        | 'TRY' | 'TRY'  | '1'            | '1'      | '1 000'  |
+			| 'TRY'                | 'Partner term' | 'TRY' | 'TRY'  | '1'            | '1'      | '1 000'  |
+		
 Scenario: _0154105 check filling in and refilling Purchase order
 	* Open the Purchase order creation form
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
@@ -1500,12 +1502,13 @@ Scenario: _0154105 check filling in and refilling Purchase order
 				| '550,00' | 'Dress' | '18%' | 'L/Green'  | '1,000' | '99,00'      | 'pcs'  | '550,00'     | '649,00'       | 'Store 03' |
 				| '520,00' | 'Dress' | '18%' | 'XS/Blue'  | '1,000' | '93,60'      | 'pcs'  | '520,00'     | '613,60'       | 'Store 03' |
 		* Check filling in currency tab
-			And I move to the tab named "GroupCurrencies"
-			And "ObjectCurrencies" table became equal
-			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount'  | 'Multiplicity' |
-			| 'TRY'                | 'Partner term' | 'TRY'           | 'TRY'      | '1'                 | '2 088,6' | '1'            |
-			| 'Local currency'     | 'Legal'     | 'TRY'           | 'TRY'      | '1'                 | '2 088,6' | '1'            |
-			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,1712'            | '357,57'  | '1'            |
+			And in the table "ItemList" I click "Edit currencies" button
+			And "CurrenciesTable" table became equal
+				| 'Movement type'      | 'Type'         | 'To'  | 'From' | 'Multiplicity' | 'Rate'   | 'Amount'  |
+				| 'Reporting currency' | 'Reporting'    | 'USD' | 'TRY'  | '1'            | '0,1712' | '357,57'  |
+				| 'Local currency'     | 'Legal'        | 'TRY' | 'TRY'  | '1'            | '1'      | '2 088,6' |
+				| 'TRY'                | 'Partner term' | 'TRY' | 'TRY'  | '1'            | '1'      | '2 088,6' |
+			And I close current window
 		* Check recalculate Total amount and Net amount when change Tax rate
 			* Price includes tax
 				And I move to "Other" tab
@@ -1888,7 +1891,7 @@ Scenario: _0154106 check filling in and refilling Purchase invoice
 				| '520,00' | 'Dress' | '18%' | 'XS/Blue'  | '1,000' | '93,60'      | 'pcs'  | '520,00'     | '613,60'       | 'Store 03' |
 		* Check filling in currency tab
 			And I move to the tab named "GroupCurrencies"
-			And "ObjectCurrencies" table became equal
+			And "CurrenciesTable" table became equal
 			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount'  | 'Multiplicity' |
 			| 'TRY'                | 'Partner term' | 'TRY'           | 'TRY'      | '1'                 | '2 088,6' | '1'            |
 			| 'Local currency'     | 'Legal'     | 'TRY'           | 'TRY'      | '1'                 | '2 088,6' | '1'            |
@@ -5123,7 +5126,7 @@ Scenario: _0154140 check filling in and refilling Sales order closing
 		* Check filling in currency tab
 			And I click "Save" button
 			And I move to the tab named "GroupCurrencies"
-			And "ObjectCurrencies" table became equal
+			And "CurrenciesTable" table became equal
 			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
 			| 'TRY'                | 'Partner term' | 'TRY'           | 'TRY'      | '1'                 | '1 770'  | '1'            |
 			| 'Local currency'     | 'Legal'     | 'TRY'           | 'TRY'      | '1'                 | '1 770'  | '1'            |
@@ -5502,7 +5505,7 @@ Scenario: _0154141 check filling in and refilling Purchase order closing
 				| '520,00' | 'Dress' | '18%' | 'XS/Blue'  | '1,000' | '93,60'      | 'pcs'  | '520,00'     | '613,60'       | 'Store 03' |
 		* Check filling in currency tab
 			And I move to the tab named "GroupCurrencies"
-			And "ObjectCurrencies" table became equal
+			And "CurrenciesTable" table became equal
 			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount'  | 'Multiplicity' |
 			| 'TRY'                | 'Partner term' | 'TRY'           | 'TRY'      | '1'                 | '2 088,6' | '1'            |
 			| 'Local currency'     | 'Legal'     | 'TRY'           | 'TRY'      | '1'                 | '2 088,6' | '1'            |

@@ -676,6 +676,7 @@
   <reports>Report.DocumentRegistrationsReport</reports>
   <reports>Report.ItemsInfo</reports>
   <reports>Report.PriceInfo</reports>
+  <reports>Report.D0010_ItemsInfo</reports>
   <dataProcessors>DataProcessor.AnaliseDocumentMovements</dataProcessors>
   <dataProcessors>DataProcessor.DataHistory</dataProcessors>
   <dataProcessors>DataProcessor.MobileDesktop</dataProcessors>

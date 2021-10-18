@@ -755,7 +755,6 @@ Scenario: _090407 create Shipment confirmation for several Sales order with diff
 			And I finish line editing in "ItemList" table
 		* Tick Shipment confirmation before Sales invoice and post an order
 			And I move to "Other" tab
-			And I set checkbox "Shipment confirmations before sales invoice"
 			* Change the document number
 				And I input "800" text in "Number" field
 				Then "1C:Enterprise" window is opened
@@ -837,7 +836,6 @@ Scenario: _090407 create Shipment confirmation for several Sales order with diff
 			And I finish line editing in "ItemList" table
 		* Tick Shipment confirmation before Sales invoice and post an order
 			And I move to "Other" tab
-			And I set checkbox "Shipment confirmations before sales invoice"
 			* Change the document number
 				And I input "801" text in "Number" field
 				Then "1C:Enterprise" window is opened
@@ -907,7 +905,6 @@ Scenario: _090407 create Shipment confirmation for several Sales order with diff
 Scenario: _090408 create one Sales order - several Shipment confirmation - one Sales invoice
 	* Create Sales order
 		When create the first test SO for a test on the creation mechanism based on
-		And I set checkbox "Shipment confirmations before sales invoice"
 		And I click the button named "FormPost"
 		And I delete "$$NumberSalesOrder090408$$" variable
 		And I delete "$$SalesOrder090408$$" variable

@@ -38,6 +38,7 @@ Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefin
 	If EventName = "NewBarcode" And IsInputAvailable() Then
 		SearchByBarcode(Undefined, Parameter);
 	EndIf;
+	
 	If Upper(EventName) = Upper("CallbackHandler") Then
 		UpdateTotalAmounts();
 	EndIf;

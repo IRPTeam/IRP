@@ -38,6 +38,9 @@ Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefin
 	If EventName = "NewBarcode" And IsInputAvailable() Then
 		SearchByBarcode(Undefined, Parameter);
 	EndIf;
+	If Upper(EventName) = Upper("CallbackHandler") Then
+		UpdateTotalAmounts();
+	EndIf;
 EndProcedure
 
 &AtClient
@@ -121,8 +124,7 @@ Procedure UpdateTotalAmounts()
 
 		ArrayOfTaxesRows = Object.TaxList.FindRows(New Structure("Key", Row.Key));
 		For Each RowTax In ArrayOfTaxesRows Do
-			ThisObject.TotalTaxAmount = ThisObject.TotalTaxAmount + ?(RowTax.IncludeToTotalAmount, RowTax.ManualAmount,
-				0);
+			ThisObject.TotalTaxAmount = ThisObject.TotalTaxAmount + ?(RowTax.IncludeToTotalAmount, RowTax.ManualAmount, 0);
 		EndDo;
 
 		ArrayOfOffersRows = Object.SpecialOffers.FindRows(New Structure("Key", Row.Key));

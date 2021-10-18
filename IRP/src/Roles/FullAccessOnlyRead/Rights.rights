@@ -1469,17 +1469,6 @@
 		</right>
 	</object>
 	<object>
-		<name>Report.ItemsInfo</name>
-		<right>
-			<name>Use</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
 		<name>Subsystem.Treasury.Subsystem.CashTransactions</name>
 		<right>
 			<name>View</name>

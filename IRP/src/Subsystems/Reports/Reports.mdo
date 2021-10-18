@@ -10,7 +10,6 @@
   <picture xsi:type="core:PictureRef">
     <picture>CommonPicture.Reports</picture>
   </picture>
-  <content>Report.ItemsInfo</content>
   <content>Report.D0010_ItemsInfo</content>
   <subsystems>Sales</subsystems>
   <subsystems>Purchase</subsystems>

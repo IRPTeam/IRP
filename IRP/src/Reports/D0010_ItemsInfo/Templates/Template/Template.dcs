@@ -9,12 +9,13 @@
 		<field xsi:type="DataSetFieldField">
 			<dataPath>File</dataPath>
 			<field>File</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>File</v8:content>
+				</v8:item>
+			</title>
 			<appearance>
-				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
-					<dcscor:use>false</dcscor:use>
-					<dcscor:parameter>Picture</dcscor:parameter>
-					<dcscor:value xsi:type="v8ui:Picture"/>
-				</dcscor:item>
 				<dcscor:item xsi:type="dcsset:SettingsParameterValue">
 					<dcscor:use>false</dcscor:use>
 					<dcscor:parameter>PictureOutput</dcscor:parameter>
@@ -25,22 +26,52 @@
 		<field xsi:type="DataSetFieldField">
 			<dataPath>Item</dataPath>
 			<field>Item</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Item</v8:content>
+				</v8:item>
+			</title>
 		</field>
 		<field xsi:type="DataSetFieldField">
 			<dataPath>ItemKey</dataPath>
 			<field>ItemKey</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Item key</v8:content>
+				</v8:item>
+			</title>
 		</field>
 		<field xsi:type="DataSetFieldField">
 			<dataPath>Barcode</dataPath>
 			<field>Barcode</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Barcode</v8:content>
+				</v8:item>
+			</title>
 		</field>
 		<field xsi:type="DataSetFieldField">
 			<dataPath>SerialLotNumber</dataPath>
 			<field>SerialLotNumber</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Item serial/lot number</v8:content>
+				</v8:item>
+			</title>
 		</field>
 		<field xsi:type="DataSetFieldField">
 			<dataPath>Unit</dataPath>
 			<field>Unit</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Unit</v8:content>
+				</v8:item>
+			</title>
 		</field>
 		<dataSource>DataSource1</dataSource>
 		<query>SELECT ALLOWED
@@ -115,7 +146,6 @@ FROM
 				<v8:content>Char LF</v8:content>
 			</v8:item>
 		</title>
-		<valueType/>
 		<value xsi:type="xs:string"/>
 		<useRestriction>false</useRestriction>
 		<expression>"
@@ -140,8 +170,6 @@ FROM
 					<dcsset:field>Barcode</dcsset:field>
 				</dcsset:item>
 			</dcsset:selection>
-			<dcsset:filter>
-			</dcsset:filter>
 			<dcsset:conditionalAppearance>
 				<dcsset:item>
 					<dcsset:selection>
@@ -153,27 +181,16 @@ FROM
 						<dcsset:item xsi:type="dcsset:FilterItemComparison">
 							<dcsset:left xsi:type="dcscor:Field">SerialLotNumber</dcsset:left>
 							<dcsset:comparisonType>NotFilled</dcsset:comparisonType>
-							<dcsset:right xsi:nil="true"/>
 						</dcsset:item>
 					</dcsset:filter>
 					<dcsset:appearance>
-						<dcscor:item xsi:type="dcsset:SettingsParameterValue">
-							<dcscor:parameter>PictureSize</dcscor:parameter>
-							<dcscor:value xmlns:mxl="http://v8.1c.ru/8.2/data/spreadsheet" xsi:type="mxl:PictureSize">Stretch</dcscor:value>
-						</dcscor:item>
 						<dcscor:item xsi:type="dcsset:SettingsParameterValue">
 							<dcscor:parameter>PictureOutput</dcscor:parameter>
 							<dcscor:value xsi:type="dcsset:DataCompositionPictureOutputType">OutputByRef</dcscor:value>
 						</dcscor:item>
 						<dcscor:item xsi:type="dcsset:SettingsParameterValue">
-							<dcscor:use>false</dcscor:use>
-							<dcscor:parameter>MaximumWidth</dcscor:parameter>
-							<dcscor:value xsi:type="xs:decimal">0</dcscor:value>
-						</dcscor:item>
-						<dcscor:item xsi:type="dcsset:SettingsParameterValue">
-							<dcscor:use>false</dcscor:use>
-							<dcscor:parameter>MaximumHeight</dcscor:parameter>
-							<dcscor:value xsi:type="xs:decimal">0</dcscor:value>
+							<dcscor:parameter>PictureSize</dcscor:parameter>
+							<dcscor:value xmlns:mxl="http://v8.1c.ru/8.2/data/spreadsheet" xsi:type="mxl:PictureSize">Stretch</dcscor:value>
 						</dcscor:item>
 					</dcsset:appearance>
 				</dcsset:item>
@@ -220,6 +237,8 @@ FROM
 						<dcsset:field>Item</dcsset:field>
 						<dcsset:groupType>Items</dcsset:groupType>
 						<dcsset:periodAdditionType>None</dcsset:periodAdditionType>
+						<dcsset:periodAdditionBegin xsi:type="xs:dateTime">0001-01-01T00:00:00</dcsset:periodAdditionBegin>
+						<dcsset:periodAdditionEnd xsi:type="xs:dateTime">0001-01-01T00:00:00</dcsset:periodAdditionEnd>
 					</dcsset:item>
 				</dcsset:groupItems>
 				<dcsset:order>
@@ -234,13 +253,14 @@ FROM
 							<dcsset:field>ItemKey</dcsset:field>
 							<dcsset:groupType>Items</dcsset:groupType>
 							<dcsset:periodAdditionType>None</dcsset:periodAdditionType>
+							<dcsset:periodAdditionBegin xsi:type="xs:dateTime">0001-01-01T00:00:00</dcsset:periodAdditionBegin>
+							<dcsset:periodAdditionEnd xsi:type="xs:dateTime">0001-01-01T00:00:00</dcsset:periodAdditionEnd>
 						</dcsset:item>
 					</dcsset:groupItems>
 					<dcsset:filter>
 						<dcsset:item xsi:type="dcsset:FilterItemComparison">
 							<dcsset:left xsi:type="dcscor:Field">ItemKey</dcsset:left>
 							<dcsset:comparisonType>Filled</dcsset:comparisonType>
-							<dcsset:right xsi:nil="true"/>
 						</dcsset:item>
 					</dcsset:filter>
 					<dcsset:order>
@@ -261,13 +281,14 @@ FROM
 								<dcsset:field>SerialLotNumber</dcsset:field>
 								<dcsset:groupType>Items</dcsset:groupType>
 								<dcsset:periodAdditionType>None</dcsset:periodAdditionType>
+								<dcsset:periodAdditionBegin xsi:type="xs:dateTime">0001-01-01T00:00:00</dcsset:periodAdditionBegin>
+								<dcsset:periodAdditionEnd xsi:type="xs:dateTime">0001-01-01T00:00:00</dcsset:periodAdditionEnd>
 							</dcsset:item>
 						</dcsset:groupItems>
 						<dcsset:filter>
 							<dcsset:item xsi:type="dcsset:FilterItemComparison">
 								<dcsset:left xsi:type="dcscor:Field">SerialLotNumber</dcsset:left>
 								<dcsset:comparisonType>Filled</dcsset:comparisonType>
-								<dcsset:right xsi:nil="true"/>
 							</dcsset:item>
 						</dcsset:filter>
 						<dcsset:order>
@@ -281,8 +302,6 @@ FROM
 								<dcsset:field>Barcode</dcsset:field>
 							</dcsset:item>
 						</dcsset:selection>
-						<dcsset:conditionalAppearance>
-						</dcsset:conditionalAppearance>
 						<dcsset:outputParameters>
 							<dcscor:item xsi:type="dcsset:SettingsParameterValue">
 								<dcscor:parameter>FilterOutput</dcscor:parameter>

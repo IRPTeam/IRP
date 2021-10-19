@@ -7,7 +7,7 @@
   <name>D0010_ItemsInfo</name>
   <synonym>
     <key>en</key>
-    <value>D0010 items info</value>
+    <value>D0010 Items info</value>
   </synonym>
   <useStandardCommands>true</useStandardCommands>
   <mainDataCompositionSchema>Report.D0010_ItemsInfo.Template.Template</mainDataCompositionSchema>

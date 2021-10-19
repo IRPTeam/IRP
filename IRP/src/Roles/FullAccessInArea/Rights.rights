@@ -199,6 +199,73 @@
 		</right>
 	</object>
 	<object>
+		<name>Document.VendorsAdvancesClosing</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Insert</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Update</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Delete</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Posting</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>UndoPosting</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InteractiveInsert</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Edit</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InteractiveSetDeletionMark</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InteractiveClearDeletionMark</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InteractivePosting</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InteractivePostingRegular</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InteractiveUndoPosting</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InteractiveChangeOfPosted</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InputByString</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Subsystem.Treasury.Subsystem.Taxes</name>
 		<right>
 			<name>View</name>
@@ -519,6 +586,29 @@
 		</right>
 	</object>
 	<object>
+		<name>InformationRegister.T2013S_OffsetOfAging</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Update</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Edit</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>TotalsControl</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Subsystem.SalesAR.Subsystem.Pricing</name>
 		<right>
 			<name>View</name>
@@ -819,6 +909,49 @@
 		</right>
 		<right>
 			<name>SwitchToDataHistoryVersion</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Catalog.LegalNameContracts</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Insert</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Update</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Delete</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InteractiveInsert</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Edit</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InteractiveSetDeletionMark</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InteractiveClearDeletionMark</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InputByString</name>
 			<value>true</value>
 		</right>
 	</object>
@@ -1144,6 +1277,51 @@
 		</right>
 	</object>
 	<object>
+		<name>AccumulationRegister.R2022B_CustomersPaymentPlanning</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Update</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Edit</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>TotalsControl</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>DataProcessor.ScanBarcode</name>
+		<right>
+			<name>Use</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>DataProcessor.StoreKeeperWorkspace</name>
+		<right>
+			<name>Use</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>HTTPService.FileTransferService.URLTemplate.FileTransfer.Method.GET</name>
 		<right>
 			<name>Use</name>
@@ -1309,6 +1487,29 @@
 		</right>
 		<right>
 			<name>SwitchToDataHistoryVersion</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>AccumulationRegister.TM1010B_RowIDMovements</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Update</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Edit</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>TotalsControl</name>
 			<value>true</value>
 		</right>
 	</object>
@@ -1504,6 +1705,13 @@
 		</right>
 	</object>
 	<object>
+		<name>CommonForm.AddLinkedDocumentRows</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>DocumentJournal.AllDocuments</name>
 		<right>
 			<name>Read</name>
@@ -1522,6 +1730,29 @@
 		</right>
 		<right>
 			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>AccumulationRegister.R4037B_PlannedReceiptReservationRequests</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Update</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Edit</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>TotalsControl</name>
 			<value>true</value>
 		</right>
 	</object>
@@ -1641,6 +1872,29 @@
 		<right>
 			<name>Edit</name>
 			<value>false</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.T2010S_OffsetOfAdvances</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Update</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Edit</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>TotalsControl</name>
+			<value>true</value>
 		</right>
 	</object>
 	<object>
@@ -2117,6 +2371,20 @@
 		</right>
 	</object>
 	<object>
+		<name>CommonForm.LinkUnlinkDocumentRows</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Subsystem.PurchaseAP.Subsystem.Pricing</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Catalog.Items.Command.OpenItemsList</name>
 		<right>
 			<name>View</name>
@@ -2528,6 +2796,73 @@
 		</right>
 		<right>
 			<name>Edit</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Document.CustomersAdvancesClosing</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Insert</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Update</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Delete</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Posting</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>UndoPosting</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InteractiveInsert</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Edit</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InteractiveSetDeletionMark</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InteractiveClearDeletionMark</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InteractivePosting</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InteractivePostingRegular</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InteractiveUndoPosting</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InteractiveChangeOfPosted</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InputByString</name>
 			<value>true</value>
 		</right>
 	</object>
@@ -2953,6 +3288,29 @@
 		</right>
 	</object>
 	<object>
+		<name>InformationRegister.T3010S_RowIDInfo</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Update</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Edit</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>TotalsControl</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.CashPayment.Command.GenerateCashPayment</name>
 		<right>
 			<name>View</name>
@@ -3075,6 +3433,13 @@
 		</right>
 		<right>
 			<name>TotalsControl</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>CommonForm.InfoLinkedDocumentRows</name>
+		<right>
+			<name>View</name>
 			<value>true</value>
 		</right>
 	</object>
@@ -3245,6 +3610,29 @@
 		<name>Subsystem.PurchaseAP.Subsystem.PurchaseReturn</name>
 		<right>
 			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.T1010S_ScannedBarcode</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Update</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Edit</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>TotalsControl</name>
 			<value>true</value>
 		</right>
 	</object>
@@ -3860,6 +4248,17 @@
 		</right>
 	</object>
 	<object>
+		<name>Report.AllRegistersMovement</name>
+		<right>
+			<name>Use</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>AccumulationRegister.R4020T_StockTransferOrders</name>
 		<right>
 			<name>Read</name>
@@ -4209,6 +4608,49 @@
 		</right>
 		<right>
 			<name>SwitchToDataHistoryVersion</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Catalog.PlanningPeriods</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Insert</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Update</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Delete</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InteractiveInsert</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Edit</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InteractiveSetDeletionMark</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InteractiveClearDeletionMark</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InputByString</name>
 			<value>true</value>
 		</right>
 	</object>
@@ -5734,6 +6176,29 @@
 		</right>
 	</object>
 	<object>
+		<name>InformationRegister.T2011S_PartnerTransactions</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Update</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Edit</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>TotalsControl</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Catalog.Files</name>
 		<right>
 			<name>Read</name>
@@ -5931,6 +6396,20 @@
 	</object>
 	<object>
 		<name>Subsystem.SalesAR.Subsystem.Sales</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Subsystem.Reports.Subsystem.Finance</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Subsystem.Reports.Subsystem.Inventory</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -7403,6 +7882,29 @@
 		</right>
 	</object>
 	<object>
+		<name>InformationRegister.T2012S_PartnerAdvances</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Update</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Edit</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>TotalsControl</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>CommonCommand.IDInfo</name>
 		<right>
 			<name>View</name>
@@ -7985,6 +8487,13 @@
 		</right>
 	</object>
 	<object>
+		<name>Subsystem.Reports.Subsystem.Purchase</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>CommonCommand.OpenVendorAgreements</name>
 		<right>
 			<name>View</name>
@@ -8423,6 +8932,49 @@
 		</right>
 		<right>
 			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Catalog.RowIDs</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Insert</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Update</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Delete</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InteractiveInsert</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Edit</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InteractiveSetDeletionMark</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InteractiveClearDeletionMark</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InputByString</name>
 			<value>true</value>
 		</right>
 	</object>
@@ -9661,6 +10213,25 @@
 		</right>
 	</object>
 	<object>
+		<name>Constant.DefaultFilesStorageVolume</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Update</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Edit</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>AccumulationRegister.R5041B_TaxesPayable</name>
 		<right>
 			<name>Read</name>
@@ -9821,6 +10392,29 @@
 		</right>
 	</object>
 	<object>
+		<name>AccumulationRegister.TM1010T_RowIDMovements</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Update</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Edit</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>TotalsControl</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Catalog.Partners</name>
 		<right>
 			<name>Read</name>
@@ -9933,6 +10527,17 @@
 		</right>
 		<right>
 			<name>TotalsControl</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Report.D0010_ItemsInfo</name>
+		<right>
+			<name>Use</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
 			<value>true</value>
 		</right>
 	</object>
@@ -10144,6 +10749,13 @@
 		</right>
 	</object>
 	<object>
+		<name>CommonCommand.AttachedFiles</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.PriceList</name>
 		<right>
 			<name>Read</name>
@@ -10250,6 +10862,29 @@
 		<name>CommonForm.PickupItems</name>
 		<right>
 			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>AccumulationRegister.R5012B_VendorsAging</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Update</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Edit</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>TotalsControl</name>
 			<value>true</value>
 		</right>
 	</object>
@@ -10458,6 +11093,17 @@
 		</right>
 		<right>
 			<name>SwitchToDataHistoryVersion</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Report.D2001_Sales</name>
+		<right>
+			<name>Use</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
 			<value>true</value>
 		</right>
 	</object>
@@ -10744,6 +11390,13 @@
 		</right>
 	</object>
 	<object>
+		<name>CommonForm.AttachFile</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Catalog.ItemTypes</name>
 		<right>
 			<name>Read</name>
@@ -10956,6 +11609,29 @@
 		</right>
 		<right>
 			<name>Edit</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>AccumulationRegister.R1022B_VendorsPaymentPlanning</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Update</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Edit</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>TotalsControl</name>
 			<value>true</value>
 		</right>
 	</object>
@@ -11187,6 +11863,24 @@
 		</right>
 	</object>
 	<object>
+		<name>DataProcessor.AnaliseDocumentMovements</name>
+		<right>
+			<name>Use</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Subsystem.Saas</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Constant.UseCompanies</name>
 		<right>
 			<name>Read</name>
@@ -11403,6 +12097,49 @@
 		</right>
 		<right>
 			<name>Edit</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Catalog.PartnerItems</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Insert</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Update</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Delete</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InteractiveInsert</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Edit</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InteractiveSetDeletionMark</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InteractiveClearDeletionMark</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InputByString</name>
 			<value>true</value>
 		</right>
 	</object>
@@ -13048,6 +13785,49 @@
 		</right>
 	</object>
 	<object>
+		<name>Catalog.MovementRules</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Insert</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Update</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Delete</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InteractiveInsert</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Edit</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InteractiveSetDeletionMark</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InteractiveClearDeletionMark</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>InputByString</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>AccumulationRegister.R4021B_StockTransferOrdersReceipt</name>
 		<right>
 			<name>Read</name>
@@ -13710,6 +14490,25 @@
 		</right>
 	</object>
 	<object>
+		<name>Constant.EnableLinkedRowsIntegrity</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Update</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>Edit</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>CommonForm.EditDescriptions</name>
 		<right>
 			<name>View</name>
@@ -13871,6 +14670,13 @@
 		</right>
 		<right>
 			<name>SwitchToDataHistoryVersion</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Subsystem.Reports.Subsystem.Sales</name>
+		<right>
+			<name>View</name>
 			<value>true</value>
 		</right>
 	</object>
@@ -14071,801 +14877,6 @@
 		</right>
 		<right>
 			<name>SwitchToDataHistoryVersion</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Report.D0010_ItemsInfo</name>
-		<right>
-			<name>Use</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Catalog.PlanningPeriods</name>
-		<right>
-			<name>InputByString</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Update</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>InteractiveClearDeletionMark</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Edit</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Insert</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>InteractiveInsert</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>InteractiveSetDeletionMark</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Delete</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Catalog.LegalNameContracts</name>
-		<right>
-			<name>InputByString</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Update</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>InteractiveClearDeletionMark</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Edit</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Insert</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>InteractiveInsert</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>InteractiveSetDeletionMark</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Delete</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Catalog.MovementRules</name>
-		<right>
-			<name>InputByString</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Update</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>InteractiveClearDeletionMark</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Edit</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Insert</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>InteractiveInsert</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>InteractiveSetDeletionMark</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Delete</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Catalog.PartnerItems</name>
-		<right>
-			<name>InputByString</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Update</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>InteractiveClearDeletionMark</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Edit</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Insert</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>InteractiveInsert</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>InteractiveSetDeletionMark</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Delete</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Catalog.RowIDs</name>
-		<right>
-			<name>InputByString</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Update</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>InteractiveClearDeletionMark</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Edit</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Insert</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>InteractiveInsert</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>InteractiveSetDeletionMark</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Delete</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>InformationRegister.T2013S_OffsetOfAging</name>
-		<right>
-			<name>Edit</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>TotalsControl</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Update</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Report.AllRegistersMovement</name>
-		<right>
-			<name>Use</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>DataProcessor.ScanBarcode</name>
-		<right>
-			<name>Use</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>InformationRegister.T3010S_RowIDInfo</name>
-		<right>
-			<name>Edit</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>TotalsControl</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Update</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>AccumulationRegister.R2022B_CustomersPaymentPlanning</name>
-		<right>
-			<name>TotalsControl</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Edit</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Update</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>AccumulationRegister.R4037B_PlannedReceiptReservationRequests</name>
-		<right>
-			<name>TotalsControl</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Edit</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Update</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Subsystem.Reports.Subsystem.Purchase</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>InformationRegister.T2012S_PartnerAdvances</name>
-		<right>
-			<name>Edit</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>TotalsControl</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Update</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>CommonForm.LinkUnlinkDocumentRows</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Subsystem.Saas</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>InformationRegister.T1010S_ScannedBarcode</name>
-		<right>
-			<name>Edit</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>TotalsControl</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Update</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>CommonCommand.AttachedFiles</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Constant.EnableLinkedRowsIntegrity</name>
-		<right>
-			<name>Edit</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Update</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Subsystem.PurchaseAP.Subsystem.Pricing</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>AccumulationRegister.R1022B_VendorsPaymentPlanning</name>
-		<right>
-			<name>TotalsControl</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Edit</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Update</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Subsystem.Reports.Subsystem.Sales</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>AccumulationRegister.TM1010B_RowIDMovements</name>
-		<right>
-			<name>TotalsControl</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Edit</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Update</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>CommonForm.AddLinkedDocumentRows</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Subsystem.Reports.Subsystem.Finance</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>CommonForm.AttachFile</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>AccumulationRegister.R5012B_VendorsAging</name>
-		<right>
-			<name>TotalsControl</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Edit</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Update</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>AccumulationRegister.TM1010T_RowIDMovements</name>
-		<right>
-			<name>TotalsControl</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Edit</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Update</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>CommonForm.InfoLinkedDocumentRows</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Constant.DefaultFilesStorageVolume</name>
-		<right>
-			<name>Edit</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Update</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>InformationRegister.T2011S_PartnerTransactions</name>
-		<right>
-			<name>Edit</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>TotalsControl</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Update</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>DataProcessor.AnaliseDocumentMovements</name>
-		<right>
-			<name>Use</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Subsystem.Reports.Subsystem.Inventory</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>DataProcessor.StoreKeeperWorkspace</name>
-		<right>
-			<name>Use</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>InformationRegister.T2010S_OffsetOfAdvances</name>
-		<right>
-			<name>Edit</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>TotalsControl</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Update</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.CustomersAdvancesClosing</name>
-		<right>
-			<name>Posting</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>InputByString</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Update</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>InteractiveClearDeletionMark</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>UndoPosting</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Edit</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>InteractivePostingRegular</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Insert</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>InteractiveInsert</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Delete</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>InteractivePosting</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>InteractiveChangeOfPosted</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>InteractiveUndoPosting</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>InteractiveSetDeletionMark</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.VendorsAdvancesClosing</name>
-		<right>
-			<name>Posting</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>InputByString</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Update</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>InteractiveClearDeletionMark</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>UndoPosting</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Edit</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>InteractivePostingRegular</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Insert</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>InteractiveInsert</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Delete</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>InteractivePosting</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>InteractiveChangeOfPosted</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>InteractiveUndoPosting</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>InteractiveSetDeletionMark</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Read</name>
 			<value>true</value>
 		</right>
 	</object>

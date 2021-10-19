@@ -11,6 +11,7 @@
     <picture>CommonPicture.Reports</picture>
   </picture>
   <content>Report.D0010_ItemsInfo</content>
+  <content>Report.D2001_Sales</content>
   <subsystems>Sales</subsystems>
   <subsystems>Purchase</subsystems>
   <subsystems>Inventory</subsystems>

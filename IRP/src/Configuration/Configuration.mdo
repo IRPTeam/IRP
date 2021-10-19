@@ -678,6 +678,7 @@
   <reports>Report.D0010_ItemsInfo</reports>
   <reports>Report.D2001_Sales</reports>
   <reports>Report.D1001_Purchases</reports>
+  <reports>Report.D4010_ActualStocks</reports>
   <dataProcessors>DataProcessor.AnaliseDocumentMovements</dataProcessors>
   <dataProcessors>DataProcessor.DataHistory</dataProcessors>
   <dataProcessors>DataProcessor.MobileDesktop</dataProcessors>

@@ -14891,4 +14891,15 @@
 			<value>true</value>
 		</right>
 	</object>
+	<object>
+		<name>Report.D4010_ActualStocks</name>
+		<right>
+			<name>Use</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
 </Rights>

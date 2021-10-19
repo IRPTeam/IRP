@@ -13,6 +13,7 @@
   <content>Report.D0010_ItemsInfo</content>
   <content>Report.D2001_Sales</content>
   <content>Report.D1001_Purchases</content>
+  <content>Report.D4010_ActualStocks</content>
   <subsystems>Sales</subsystems>
   <subsystems>Purchase</subsystems>
   <subsystems>Inventory</subsystems>

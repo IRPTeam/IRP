@@ -7,5 +7,6 @@
   </synonym>
   <includeHelpInContents>true</includeHelpInContents>
   <includeInCommandInterface>true</includeInCommandInterface>
+  <content>Report.D4010_ActualStocks</content>
   <parentSubsystem>Subsystem.Reports</parentSubsystem>
 </mdclass:Subsystem>

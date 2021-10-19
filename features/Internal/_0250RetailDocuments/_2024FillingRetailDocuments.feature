@@ -3538,10 +3538,10 @@ Scenario: _0154190 check filling in Retail sales receipt when copying
 			| '520,00' | ''           | 'Cash'         | ''                 | ''          | 'Cash desk №2' | ''        |
 		And in the table "ItemList" I click "Edit currencies" button
 		And "CurrenciesTable" table became equal
-			| 'Movement type'      | 'Type'         | 'To'  | 'From' | 'Rate'   | 'Multiplicity' | 'Amount' |
-			| 'Reporting currency' | 'Reporting'    | 'USD' | 'TRY'  | '0,1712' | '1'            | '89,02'  |
-			| 'TRY'                | 'Partner term' | 'TRY' | 'TRY'  | '1'      | '1'            | '520'    |
-			| 'Local currency'     | 'Legal'        | 'TRY' | 'TRY'  | '1'      | '1'            | '520'    |
+			| 'Movement type'      | 'Type'         | 'To'  | 'From' | 'Multiplicity' | 'Rate'   | 'Amount' |
+			| 'Reporting currency' | 'Reporting'    | 'USD' | 'TRY'  | '1'            | '0,1712' | '89,02'  |
+			| 'Local currency'     | 'Legal'        | 'TRY' | 'TRY'  | '1'            | '1'      | '520'    |
+			| 'TRY'                | 'Partner term' | 'TRY' | 'TRY'  | '1'            | '1'      | '520'    |	
 		And I close current window
 		Then the form attribute named "Branch" became equal to "Shop 01"
 		Then the form attribute named "Author" became equal to "CI"

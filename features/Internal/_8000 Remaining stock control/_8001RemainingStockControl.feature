@@ -285,8 +285,7 @@ Scenario:_800005 check remaining stock control in the Sales order
 				| 'Trousers' | '38/Yellow' |
 			And I select current line in "ItemList" table
 			And I select "Stock" exact value from "Procurement method" drop-down list in "ItemList" table
-			And I move to "Other" tab
-			And I set checkbox "Shipment confirmations before sales invoice"	
+			And I move to "Other" tab	
 			And I click the button named "FormPost"
 			Then "1C:Enterprise" window is opened
 			And I click "OK" button

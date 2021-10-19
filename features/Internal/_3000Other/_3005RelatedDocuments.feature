@@ -80,7 +80,6 @@ Scenario: _300521 check post/unpost/mark for deletion from report "Related docum
 				| '2 Region'    |
 			And I select current line in "List" table
 			And I move to "Other" tab
-			And I set checkbox "Shipment confirmations before sales invoice"
 			And I click the button named "FormPost"
 			And I delete "$$NumberSalesOrder300521$$" variable
 			And I delete "$$SalesOrder300521$$" variable

@@ -203,7 +203,6 @@ Scenario: _1000000 preparation (credit limit)
 			And I finish line editing in "ItemList" table
 		* Specify shipping scheme and document number
 			And I move to "Other" tab
-			And I set checkbox "Shipment confirmations before sales invoice"
 			And I click the button named "FormPost"
 			And I delete "$$SalesOrder20400012$$" variable
 			And I delete "$$NumberSalesOrder20400012$$" variable

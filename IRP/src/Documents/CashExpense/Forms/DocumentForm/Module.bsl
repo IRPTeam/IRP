@@ -54,8 +54,13 @@ Procedure BeforeWrite(Cancel, WriteParameters)
 	Return;
 EndProcedure
 
+&AtClient
+Procedure FormSetVisibilityAvailability() Export
+	SetVisibilityAvailability(Object, ThisObject);
+EndProcedure
+
 &AtClientAtServerNoContext
-Procedure SetVisibilityAvailability(Object, Form) Export
+Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.PaymentListCurrency.ReadOnly = ValueIsFilled(Form.Currency);
 	Form.Items.EditCurrencies.Enabled = Not Form.ReadOnly;
 EndProcedure

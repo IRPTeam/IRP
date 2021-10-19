@@ -690,15 +690,20 @@ Procedure SetVisibleVendorsPaymentTerms(Object, Form, CurrentData = Undefined)
 	EndDo;
 EndProcedure
 
+&AtClient
+Procedure FormSetVisibilityAvailability() Export
+	SetVisibilityAvailability(Object, ThisObject);
+EndProcedure
+
 &AtClientAtServerNoContext
-Procedure SetVisibilityAvailability(Object, Form) Export
-	Form.Items.EditCurrenciesAccountBalance.Enabled = Not Form.ReadOnly;
-	Form.Items.EditCurrenciesAdvanceFromCustomers.Enabled = Not Form.ReadOnly;
-	Form.Items.EditCurrenciesAdvanceToSuppliers.Enabled = Not Form.ReadOnly;
+Procedure SetVisibilityAvailability(Object, Form)
+	Form.Items.EditCurrenciesAccountBalance.Enabled                = Not Form.ReadOnly;
+	Form.Items.EditCurrenciesAdvanceFromCustomers.Enabled          = Not Form.ReadOnly;
+	Form.Items.EditCurrenciesAdvanceToSuppliers.Enabled            = Not Form.ReadOnly;
 	Form.Items.EditCurrenciesAccountReceivableByAgreements.Enabled = Not Form.ReadOnly;
-	Form.Items.EditCurrenciesAccountReceivableByDocuments.Enabled = Not Form.ReadOnly;
-	Form.Items.EditCurrenciesAccountPayableByAgreements.Enabled = Not Form.ReadOnly;
-	Form.Items.EditCurrenciesAccountPayableByDocuments.Enabled = Not Form.ReadOnly;
+	Form.Items.EditCurrenciesAccountReceivableByDocuments.Enabled  = Not Form.ReadOnly;
+	Form.Items.EditCurrenciesAccountPayableByAgreements.Enabled    = Not Form.ReadOnly;
+	Form.Items.EditCurrenciesAccountPayableByDocuments.Enabled     = Not Form.ReadOnly;
 EndProcedure
 
 &AtClient

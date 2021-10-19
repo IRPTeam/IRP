@@ -46,8 +46,13 @@ Procedure DescriptionClick(Item, StandardProcessing)
 	DocOutgoingPaymentOrderClient.DescriptionClick(Object, ThisObject, Item, StandardProcessing);
 EndProcedure
 
+&AtClient
+Procedure FormSetVisibilityAvailability() Export
+	SetVisibilityAvailability(Object, ThisObject);
+EndProcedure
+
 &AtClientAtServerNoContext
-Procedure SetVisibilityAvailability(Object, Form) Export
+Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.EditCurrencies.Enabled = Not Form.ReadOnly;
 EndProcedure
 

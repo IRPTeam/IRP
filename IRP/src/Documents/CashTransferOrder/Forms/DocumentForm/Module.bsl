@@ -41,8 +41,22 @@ Procedure OnOpen(Cancel, AddInfo = Undefined) Export
 	DocCashTransferOrderClient.OnOpen(Object, ThisObject, Cancel);
 EndProcedure
 
+&AtClient
+Procedure FormSetVisibilityAvailability() Export
+	SetVisibilityAvailability(Object, ThisObject);
+EndProcedure
+
 &AtClientAtServerNoContext
-Procedure SetVisibilityAvailability(Object, Form) Export
+Procedure SetVisibilityAvailability(Object, Form)
+	If DocCashTransferOrderServer.UseCashAdvanceHolder(Object) Then
+		Form.Items.CashAdvanceHolder.Visible = True;
+	Else
+		Form.Items.CashAdvanceHolder.Visible = False;
+		If Object.Ref.isEmpty() Then
+			Object.CashAdvanceHolder = PredefinedValue("Catalog.Partners.EmptyRef");
+		EndIf;
+	EndIf;
+	
 	Form.Items.EditCurrenciesSender.Enabled = Not Form.ReadOnly;
 	Form.Items.EditCurrenciesReceiver.Enabled = Not Form.ReadOnly;
 EndProcedure
@@ -51,12 +65,12 @@ EndProcedure
 
 &AtClient
 Procedure SendCurrencyOnChange(Item, AddInfo = Undefined) Export
-	DocCashTransferOrderClient.SetVisibilityAvailability(Object, ThisObject);
+	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
 &AtClient
 Procedure ReceiveCurrencyOnChange(Item, AddInfo = Undefined) Export
-	DocCashTransferOrderClient.SetVisibilityAvailability(Object, ThisObject);
+	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
 #Region ItemCompany
@@ -96,11 +110,13 @@ EndProcedure
 &AtClient
 Procedure SenderOnChange(Item, AddInfo = Undefined) Export
 	DocCashTransferOrderClient.SenderOnChange(Object, ThisObject, Item);
+	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
 &AtClient
 Procedure ReceiverOnChange(Item, AddInfo = Undefined) Export
 	DocCashTransferOrderClient.ReceiverOnChange(Object, ThisObject, Item);
+	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
 &AtClient

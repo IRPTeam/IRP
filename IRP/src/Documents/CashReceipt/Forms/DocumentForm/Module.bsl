@@ -37,8 +37,13 @@ Procedure OnOpen(Cancel, AddInfo = Undefined) Export
 	DocCashReceiptClient.OnOpen(Object, ThisObject, Cancel);
 EndProcedure
 
+&AtClient
+Procedure FormSetVisibilityAvailability() Export
+	SetVisibilityAvailability(Object, ThisObject);
+EndProcedure
+
 &AtClientAtServerNoContext
-Procedure SetVisibilityAvailability(Object, Form) Export
+Procedure SetVisibilityAvailability(Object, Form)
 	ArrayAll = New Array();
 	ArrayByType = New Array();
 	DocCashReceiptServer.FillAttributesByType(Object.TransactionType, ArrayAll, ArrayByType);

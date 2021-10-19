@@ -61,7 +61,7 @@ Procedure CleanDataByTransactionTypeContinue(Result, AdditionalParameters) Expor
 		EndDo;
 	Else
 		Object.TransactionType = Form.CurrentTransactionType;
-		Form.SetVisibilityAvailability(Object, Form);
+		Form.FormSetVisibilityAvailability();
 	EndIf;
 
 	Form.CurrentTransactionType = Object.TransactionType;

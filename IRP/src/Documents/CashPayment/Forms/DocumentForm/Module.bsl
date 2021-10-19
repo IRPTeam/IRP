@@ -37,8 +37,13 @@ Procedure AfterWriteAtServer(CurrentObject, WriteParameters, AddInfo = Undefined
 	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
+&AtClient
+Procedure FormSetVisibilityAvailability() Export
+	SetVisibilityAvailability(Object, ThisObject);
+EndProcedure
+
 &AtClientAtServerNoContext
-Procedure SetVisibilityAvailability(Object, Form) Export
+Procedure SetVisibilityAvailability(Object, Form)
 	ArrayAll = New Array();
 	ArrayByType = New Array();
 	DocCashPaymentServer.FillAttributesByType(Object.TransactionType, ArrayAll, ArrayByType);

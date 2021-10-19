@@ -93,9 +93,13 @@ Scenario: _051001 create Cash payment based on Purchase invoice
 		And "PaymentList" table contains lines
 			| 'Partner'   | 'Payee'             | 'Partner term'          | 'Amount'     | 'Basis document'      |
 			| 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | '137 000,00' | '$$PurchaseInvoice018001$$' |
-		And "PaymentListCurrencies" table contains lines
-			| 'Movement type'      | 'Amount'    | 'Multiplicity' |
-			| 'Reporting currency' | '23 454,40' | '1'            |
+		And in the table "PaymentList" I click "Edit currencies" button
+		And "CurrenciesTable" table became equal
+			| 'Movement type'      | 'Type'         | 'To'  | 'From' | 'Multiplicity' | 'Rate'   | 'Amount'    |
+			| 'Reporting currency' | 'Reporting'    | 'USD' | 'TRY'  | '1'            | '0,1712' | '23 454,40' |
+			| 'Local currency'     | 'Legal'        | 'TRY' | 'TRY'  | '1'            | '1'      | '137 000'   |
+			| 'TRY'                | 'Partner term' | 'TRY' | 'TRY'  | '1'            | '1'      | '137 000'   |
+		And I close current window
 	* Data overflow check
 		And I click Select button of "Cash account" field
 		And I go to line in "List" table

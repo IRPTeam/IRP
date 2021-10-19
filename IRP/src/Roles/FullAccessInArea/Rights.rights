@@ -14902,4 +14902,26 @@
 			<value>true</value>
 		</right>
 	</object>
+	<object>
+		<name>Report.D4011_FreeStocks</name>
+		<right>
+			<name>Use</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Report.D4012_StockReservation</name>
+		<right>
+			<name>Use</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
 </Rights>

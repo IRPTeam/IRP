@@ -84,6 +84,7 @@ EndProcedure
 Procedure UndoPosting(Cancel)
 	UndopostingServer.Undopost(ThisObject, Cancel, ThisObject.AdditionalProperties);
 EndProcedure
+
 Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 	For Each Row In ThisObject.AccountReceivableByDocuments Do
 		ArrayOfPaymentTerms = ThisObject.CustomersPaymentTerms.FindRows(New Structure("Key", Row.Key));

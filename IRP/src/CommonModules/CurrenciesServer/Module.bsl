@@ -314,16 +314,18 @@ Function ExpandTable(TempTableManager, RecordSet, UseAgreementMovementType, UseC
 EndFunction
 
 Procedure UpdateCurrencyTable(Parameters, CurrenciesTable) Export
+	Columns = Parameters.Ref.Metadata().TabularSections.Currencies.Attributes;
 	EmptyCurrenciesTable = New ValueTable();
-	EmptyCurrenciesTable.Columns.Add("Key");
-	EmptyCurrenciesTable.Columns.Add("IsFixed");
-	EmptyCurrenciesTable.Columns.Add("CurrencyFrom");
-	EmptyCurrenciesTable.Columns.Add("Rate");
-	EmptyCurrenciesTable.Columns.Add("ReverseRate");
-	EmptyCurrenciesTable.Columns.Add("ShowReverseRate");
-	EmptyCurrenciesTable.Columns.Add("Multiplicity");
-	EmptyCurrenciesTable.Columns.Add("MovementType");
-	EmptyCurrenciesTable.Columns.Add("Amount");
+	EmptyCurrenciesTable.Columns.Add("Key"             , Columns.Key.Type);
+	EmptyCurrenciesTable.Columns.Add("IsFixed"         , Columns.IsFixed.Type);
+	EmptyCurrenciesTable.Columns.Add("CurrencyFrom"    , Columns.CurrencyFrom.Type);
+	EmptyCurrenciesTable.Columns.Add("Rate"            , Columns.Rate.Type);
+	EmptyCurrenciesTable.Columns.Add("ReverseRate"     , Columns.ReverseRate.Type);
+	EmptyCurrenciesTable.Columns.Add("ShowReverseRate" , Columns.ShowReverseRate.Type);
+	EmptyCurrenciesTable.Columns.Add("Multiplicity"    , Columns.Multiplicity.Type);
+	EmptyCurrenciesTable.Columns.Add("MovementType"    , Columns.MovementType.Type);
+	EmptyCurrenciesTable.Columns.Add("Amount"          , Columns.Amount.Type);
+
 	
 	RatePeriod    = CalculationStringsClientServer.GetSliceLastDateByRefAndDate(Parameters.Ref, Parameters.Date);
 	AgreementInfo = CatAgreementsServer.GetAgreementInfo(Parameters.Agreement);

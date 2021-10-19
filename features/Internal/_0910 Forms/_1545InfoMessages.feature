@@ -211,7 +211,6 @@ Scenario: _154509 message when trying to re-create Sales invoice based on Shipme
 		When adding the items to the sales order (Dress and Trousers)
 		And I move to "Other" tab
 		And I expand "More" group
-		And I set checkbox "Shipment confirmations before sales invoice"
 		And I click the button named "FormPost"
 		And I delete "$$NumberSalesOrder154503$$" variable
 		And I delete "$$SalesOrder154503$$" variable
@@ -572,7 +571,6 @@ Scenario: _154518 message when trying to re-create Shipment confirmation based o
 	* Change the document number
 		And I move to "Other" tab
 		And I expand "More" group
-		And I set checkbox "Shipment confirmations before sales invoice"
 		And I click the button named "FormPost"
 		And I delete "$$NumberSalesOrder154507$$" variable
 		And I delete "$$SalesOrder154507$$" variable
@@ -1102,7 +1100,6 @@ Scenario: _015450 check message output for SO when trying to create a purchase o
 			And I select "Approved" exact value from "Status" drop-down list
 			And I click the button named "FormPost"
 		* Check a tick 'Shipment confirmations before sales invoice'
-			And I set checkbox "Shipment confirmations before sales invoice"
 			And I click the button named "FormPost"
 		* Create SC for string with procurement method Stock
 			And I click the button named "FormDocumentShipmentConfirmationGenerate"

@@ -1048,7 +1048,6 @@ Scenario: _090313 create Goods receipt for Purchase order with different legal n
 # should be created 2 Goods receipt
 	* Create Purchase order 140
 		When create the first test PO for a test on the creation mechanism based on
-		And I set checkbox named "GoodsReceiptBeforePurchaseInvoice"
 		And I click the button named "FormPost"
 		And I delete "$$NumberPurchaseOrder0903N140$$" variable
 		And I delete "$$PurchaseOrder0903N140$$" variable
@@ -1058,7 +1057,6 @@ Scenario: _090313 create Goods receipt for Purchase order with different legal n
 	* Create Purchase order 141
 		When create the second test PO for a test on the creation mechanism based on
 		And I move to "Other" tab
-		And I set checkbox named "GoodsReceiptBeforePurchaseInvoice"
 		And I click the button named "FormPost"
 		And I delete "$$NumberPurchaseOrder0903N141$$" variable
 		And I delete "$$PurchaseOrder0903N141$$" variable
@@ -1162,7 +1160,6 @@ Scenario: _090314 create Goods receipt for several Purchase order with different
 			And I select current line in "List" table
 			And I move to "Other" tab
 			And I expand "More" group
-			And I set checkbox named "GoodsReceiptBeforePurchaseInvoice"
 			And I go to line in "ItemList" table
 			| 'Item'  |'Item key' |
 			| 'Dress' |'M/White'  |
@@ -1212,7 +1209,6 @@ Scenario: _090314 create Goods receipt for several Purchase order with different
 			And I select current line in "List" table
 			And I move to "Other" tab
 			And I expand "More" group
-			And I set checkbox named "GoodsReceiptBeforePurchaseInvoice"
 			And I go to line in "ItemList" table
 			| 'Item'  |'Item key' |
 			| 'Dress' |'M/White'  |
@@ -1317,7 +1313,6 @@ Scenario: _090315 create Goods receipt for several Purchase order with different
 			And I select current line in "List" table
 			And I move to "Other" tab
 			And I expand "More" group
-			And I set checkbox named "GoodsReceiptBeforePurchaseInvoice"
 			And I go to line in "ItemList" table
 			| 'Item'  |'Item key' |
 			| 'Dress' |'M/White'  |
@@ -1364,7 +1359,6 @@ Scenario: _090315 create Goods receipt for several Purchase order with different
 			And I select current line in "List" table
 			And I move to "Other" tab
 			And I expand "More" group
-			And I set checkbox named "GoodsReceiptBeforePurchaseInvoice"
 			And I go to line in "ItemList" table
 			| 'Item'  |'Item key' |
 			| 'Dress' |'M/White'  |
@@ -1439,7 +1433,6 @@ Scenario: _090316 create Goods receipt for several Purchase order with different
 			And I click "OK" button
 			And I move to "Other" tab
 			And I expand "More" group
-			And I set checkbox named "GoodsReceiptBeforePurchaseInvoice"
 			And I go to line in "ItemList" table
 			| 'Item'  |'Item key' |
 			| 'Dress' |'M/White'  |
@@ -1486,7 +1479,6 @@ Scenario: _090316 create Goods receipt for several Purchase order with different
 			And I select current line in "List" table
 			And I move to "Other" tab
 			And I expand "More" group
-			And I set checkbox named "GoodsReceiptBeforePurchaseInvoice"
 			And I go to line in "ItemList" table
 			| 'Item'  |'Item key' |
 			| 'Dress' |'M/White'  |
@@ -1565,7 +1557,6 @@ Scenario: _090317 create Goods receipt for several Purchase order with different
 			And I select current line in "List" table
 			And I move to "Other" tab
 			And I expand "More" group
-			And I set checkbox named "GoodsReceiptBeforePurchaseInvoice"
 			And I go to line in "ItemList" table
 			| 'Item'  |'Item key' |
 			| 'Dress' |'M/White'  |
@@ -1612,7 +1603,6 @@ Scenario: _090317 create Goods receipt for several Purchase order with different
 			And I select current line in "List" table
 			And I move to "Other" tab
 			And I expand "More" group
-			And I set checkbox named "GoodsReceiptBeforePurchaseInvoice"
 			And I go to line in "ItemList" table
 			| 'Item'  |'Item key' |
 			| 'Dress' |'M/White'  |
@@ -1995,7 +1985,6 @@ Scenario: _090323 create one Purchase order - several Goods receipt - one Purcha
 			And I delete "$$PurchaseOrder090323$$" variable
 			And I save the value of "Number" field as "$$NumberPurchaseOrder090323$$"
 			And I save the window as "$$PurchaseOrder090323$$"
-			And I set checkbox "Goods receipt before purchase invoice"
 			And I click the button named "FormPostAndClose"
 	* Create 3 Goods receipt
 		* First GR

@@ -12,7 +12,7 @@ EndProcedure
 
 &AtClient
 Procedure OnOpen(Cancel)
-	TaxesClient.ExpandTaxTree(ThisObject.Items.TaxTree, ThisObject.TaxTree.GetItems());
+	ExpandTaxTree(ThisObject.Items.TaxTree, ThisObject.TaxTree.GetItems());
 EndProcedure
 
 &AtClient
@@ -51,8 +51,44 @@ Procedure TaxTreeManualAmountOnChange(Item)
 
 	CreateTaxTree();
 
-	TaxesClient.ExpandTaxTree(ThisObject.Items.TaxTree, ThisObject.TaxTree.GetItems());
-	ThisObject.Items.TaxTree.CurrentRow = TaxesClient.FindRowInTree(Filter, ThisObject.TaxTree);
+	ExpandTaxTree(ThisObject.Items.TaxTree, ThisObject.TaxTree.GetItems());
+	ThisObject.Items.TaxTree.CurrentRow = FindRowInTree(Filter, ThisObject.TaxTree);
+EndProcedure
+
+&AtClient
+Function FindRowInTree(Filter, Tree)
+	RowID = Undefined;
+	FindRowInTreeRecursive(Filter, Tree.GetItems(), RowID);
+	Return RowID;
+EndFunction
+
+&AtClient
+Procedure FindRowInTreeRecursive(Filter, TreeRows, RowID)
+	For Each Row In TreeRows Do
+		If RowID <> Undefined Then
+			Return;
+		EndIf;
+		Founded = True;
+		For Each ItemOfFilter In Filter Do
+			If Row[ItemOfFilter.Key] <> Filter[ItemOfFilter.Key] Then
+				Founded = False;
+				Break;
+			EndIf;
+		EndDo;
+		If Founded Then
+			RowID = Row.GetID();
+		EndIf;
+		If RowID = Undefined Then
+			FindRowInTreeRecursive(Filter, Row.GetItems(), RowID);
+		EndIf;
+	EndDo;
+EndProcedure
+
+&AtClient
+Procedure ExpandTaxTree(Tree, TreeRows) Export
+	For Each ItemTreeRows In TreeRows Do
+		Tree.Expand(ItemTreeRows.GetID());
+	EndDo;
 EndProcedure
 
 &AtClient

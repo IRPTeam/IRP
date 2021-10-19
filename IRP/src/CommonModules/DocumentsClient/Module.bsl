@@ -2463,6 +2463,38 @@ Procedure ItemListStoreOnChange(Object, Form, Module, Item = Undefined, Settings
 	DocumentsClientServer.FillStores(ObjectData, Form);
 EndProcedure
 
+Procedure PaymentListProfitLossCenterOnChange(Object, Form, Module, CurrentRow, Item = Undefined, Settings = Undefined, AddInfo = Undefined) Export
+	CommonFunctionsClientServer.DeleteFromAddInfo(AddInfo, "ServerData");
+	PaymentListProfitLossCenterSettings = Module.PaymentListProfitLossCenterSettings(Object, Form);
+	If PaymentListProfitLossCenterSettings.Property("PutServerDataToAddInfo") And PaymentListProfitLossCenterSettings.PutServerDataToAddInfo Then
+		Module.PaymentListProfitLossCenterOnChangePutServerDataToAddInfo(Object, Form, CurrentRow, AddInfo);
+	EndIf;
+	PaymentListProfitLossCenterSettings = Module.PaymentListProfitLossCenterSettings(Object, Form, AddInfo);
+
+	If Settings = Undefined Then
+		Settings = GetSettingsStructure(Module);
+	EndIf;
+
+	Settings.Insert("ObjectAttributes", PaymentListProfitLossCenterSettings.ObjectAttributes);
+
+	Settings.Insert("Rows", New Array());
+	Settings.Rows.Add(CurrentRow);
+	Settings.CalculateSettings = TaxesClient.GetCalculateRowsActions();
+
+	CalculationStringsClientServer.DoTableActions(Object, Form, Settings, PaymentListProfitLossCenterSettings.Actions, AddInfo);
+
+	If Item = Undefined Then
+		Return;
+	EndIf;
+
+	For Each AfterActionsCalculateSettingsItem In PaymentListProfitLossCenterSettings.AfterActionsCalculateSettings Do
+		Settings.CalculateSettings.Insert(AfterActionsCalculateSettingsItem.Key,
+			AfterActionsCalculateSettingsItem.Value);
+	EndDo;
+
+	ItemListCalculateRowsAmounts(Object, Form, Settings, Undefined, AddInfo);
+EndProcedure
+
 #EndRegion
 
 #Region PaymentListItemsEvents
@@ -2707,6 +2739,23 @@ Procedure ItemListSerialLotNumbersPutServerDataToAddInfo(Object, Form, AddInfo =
 	ServerData.Insert("OnChangeItemName", OnChangeItemName);
 	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "ServerData", ServerData);
 EndProcedure
+
+#Region ProfitLossCenter
+
+Procedure PaymentListProfitLossCenterOnChangePutServerDataToAddInfo(Object, Form, CurrentRow, AddInfo = Undefined) Export
+	OnChangeItemName = "PaymentListProfitLossCenter";
+	ParametersToServer = New Structure();
+	CommonParametersToServer(Object, Form, ParametersToServer, AddInfo);
+
+	ArrayOfTaxRatesParameters = New Structure();
+	ParametersToServer.TaxesCache.Insert("GetArrayOfTaxRates", ArrayOfTaxRatesParameters);
+
+	ServerData = DocumentsServer.PrepareServerData(ParametersToServer);
+	ServerData.Insert("OnChangeItemName", OnChangeItemName);
+	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "ServerData", ServerData);
+EndProcedure
+
+#EndRegion
 
 #Region PriceType
 

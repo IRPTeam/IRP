@@ -5,6 +5,9 @@ Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 		SetGroupItemsList(Object, Form);
 		DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 	EndIf;
+	// [NEW CODE]
+	Form.Taxes_CreateFormControls();
+	//--
 EndProcedure
 
 Procedure OnReadAtServer(Object, Form, CurrentObject) Export
@@ -19,13 +22,17 @@ Procedure OnReadAtServer(Object, Form, CurrentObject) Export
 	EndIf;
 
 	DocumentsClientServer.ChangeTitleGroupTitle(CurrentObject, Form);
-
+	// [NEW CODE]
+	Form.Taxes_CreateFormControls();
+	//--
 EndProcedure
 
 Procedure AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters) Export
 
 	DocumentsClientServer.ChangeTitleGroupTitle(CurrentObject, Form);
-
+	// [NEW CODE]
+	Form.Taxes_CreateFormControls();
+	//--
 EndProcedure
 #EndRegion
 

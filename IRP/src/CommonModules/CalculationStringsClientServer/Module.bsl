@@ -103,7 +103,7 @@ Procedure FillDataCollectionByArrayOfStructures(DataCollection, ArrayOfStructure
 EndProcedure
 
 Function CalculateItemsRows(Object, Form, ItemRows, Actions, ArrayOfTaxInfo = Undefined, AddInfo = Undefined) Export
-	Result = New Structure("ItemList, TaxList, SpecialOffers");
+	Result = New Structure("ItemList, PaymentList, TaxList, SpecialOffers");
 	If Not Actions.Count() Then
 		Return Result;
 	EndIf;
@@ -153,6 +153,9 @@ Function CalculateItemsRows(Object, Form, ItemRows, Actions, ArrayOfTaxInfo = Un
 		EndDo;
 		If Object.Property("ItemList") Then
 			Result.ItemList      = Object.ItemList;
+		EndIf;
+		If Object.Property("PaymentList") Then
+			Result.PaymentList   = Object.PaymentList;
 		EndIf;
 		If Object.Property("TaxList") Then
 			Result.TaxList       = Object.TaxList;

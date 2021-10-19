@@ -224,22 +224,37 @@ Procedure PaymentListCurrencyOnChange(Object, Form) Export
 
 EndProcedure
 
-Procedure PaymentListNetAmountOnChange(Object, Form, Item) Export
-	CurrentData = Form.Items.PaymentList.CurrentData;
+Procedure PaymentListNetAmountOnChange(Object, Form, Item = Undefined, CurrentRowData = Undefined, AddInfo = Undefined) Export
+	
+	// [NEW CODE]
+	CurrentData = DocumentsClient.GetCurrentRowDataList(Form.Items.PaymentList, CurrentRowData);
 	If CurrentData = Undefined Then
 		Return;
 	EndIf;
-
-	Settings = New Structure();
-	Actions = GetCalculateRowsActions();
-	Actions.Delete("CalculateTaxByTotalAmount");
-	Actions.Delete("CalculateNetAmountByTotalAmount");
-	Settings.Insert("Actions", Actions);
-	Rows = New Array();
-	Rows.Add(CurrentData);
-	Settings.Insert("Rows", Rows);
-	CalculateItemsRows(Object, Form, Settings);
+	DocumentsClient.ItemListCalculateRowAmounts_NetAmountChange(Object, Form, CurrentData, Item, ThisObject, AddInfo);
+	//--
+	
+//	CurrentData = Form.Items.PaymentList.CurrentData;
+//	If CurrentData = Undefined Then
+//		Return;
+//	EndIf;
+//
+//	Settings = New Structure();
+//	Actions = GetCalculateRowsActions();
+//	Actions.Delete("CalculateTaxByTotalAmount");
+//	Actions.Delete("CalculateNetAmountByTotalAmount");
+//	Settings.Insert("Actions", Actions);
+//	Rows = New Array();
+//	Rows.Add(CurrentData);
+//	Settings.Insert("Rows", Rows);
+//	CalculateItemsRows(Object, Form, Settings);
 EndProcedure
+
+// [NEW CODE]
+Procedure ItemListNetAmountPutServerDataToAddInfo(Object, Form, CurrentData, AddInfo = Undefined) Export
+	DocumentsClient.ItemListNetAmountPutServerDataToAddInfo(Object, Form, CurrentData, AddInfo);
+EndProcedure
+//--
 
 Procedure PaymentListTotalAmountOnChange(Object, Form, Item = Undefined, CurrentRowData = Undefined, AddInfo = Undefined) Export
 

@@ -13,7 +13,7 @@ Function GetCalculateRowsActions() Export
 	Return Actions;
 EndFunction
 
-Procedure CalculateReverseTaxOnChangeTotalAmount(Object, Form, CurrentData, AddInfo = Undefined) Export
+Function GetArrayOfTaxInfoFromServerData(Object, Form, AddInfo)
 	ArrayOfTaxInfo = Undefined;
 	ServerData = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "ServerData");
 	If ServerData = Undefined Then
@@ -23,6 +23,24 @@ Procedure CalculateReverseTaxOnChangeTotalAmount(Object, Form, CurrentData, AddI
 	Else
 		ArrayOfTaxInfo = ServerData.ArrayOfTaxInfo;
 	EndIf;
+	Return ArrayOfTaxInfo;
+EndFunction
+
+Procedure CalculateReverseTaxOnChangeNetAmount(Object, Form, CurrentData, AddInfo = Undefined) Export
+	ArrayOfTaxInfo = GetArrayOfTaxInfoFromServerData(Object, Form, AddInfo);
+	
+	ArrayRows = New Array();
+	ArrayRows.Add(CurrentData);
+	
+	Actions = New Structure();
+	Actions.Insert("CalculateTaxByNetAmount");
+	Actions.Insert("CalculateTotalAmountByNetAmount");
+	
+	CalculationStringsClientServer.CalculateItemsRows(Object, Form, ArrayRows, Actions, ArrayOfTaxInfo, AddInfo);
+EndProcedure
+
+Procedure CalculateReverseTaxOnChangeTotalAmount(Object, Form, CurrentData, AddInfo = Undefined) Export
+	ArrayOfTaxInfo = GetArrayOfTaxInfoFromServerData(Object, Form, AddInfo);
 
 	If Object.Property("PriceIncludeTax") And Object.PriceIncludeTax Then
 		CalculationStringsClientServer.CalculateTaxReverse_PriceIncludeTax(Object, CurrentData, ArrayOfTaxInfo);
@@ -36,9 +54,11 @@ Procedure CalculateReverseTaxOnChangeTotalAmount(Object, Form, CurrentData, AddI
 
 	ArrayRows = New Array();
 	ArrayRows.Add(CurrentData);
-
-	CalculationStringsClientServer.CalculateItemsRows(Object, Form, ArrayRows,
-		New Structure("CalculateNetAmountAsTotalAmountMinusTaxAmount"), ArrayOfTaxInfo, AddInfo);
+	
+	Actions = New Structure();
+	Actions.Insert("CalculateNetAmountAsTotalAmountMinusTaxAmount");
+	
+	CalculationStringsClientServer.CalculateItemsRows(Object, Form, ArrayRows, Actions, ArrayOfTaxInfo, AddInfo);
 EndProcedure
 
 Procedure CalculateTaxOnChangeTaxValue(Object, Form, CurrentData, Item, AddInfo = Undefined) Export

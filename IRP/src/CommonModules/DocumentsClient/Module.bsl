@@ -1782,6 +1782,15 @@ Procedure ItemListCalculateRowAmounts_TotalAmountChange(Object, Form, CurrentDat
 	TaxesClient.CalculateReverseTaxOnChangeTotalAmount(Object, Form, CurrentData, AddInfo);
 EndProcedure
 
+Procedure ItemListCalculateRowAmounts_NetAmountChange(Object, Form, CurrentData, Item, Module = Undefined,
+	AddInfo = Undefined) Export
+	CommonFunctionsClientServer.DeleteFromAddInfo(AddInfo, "ServerData");
+	If Module <> Undefined Then
+		Module.ItemListNetAmountPutServerDataToAddInfo(Object, Form, CurrentData, AddInfo);
+	EndIf;
+	TaxesClient.CalculateReverseTaxOnChangeNetAmount(Object, Form, CurrentData, AddInfo);
+EndProcedure
+
 Procedure ItemListCalculateRowAmounts_TaxAmountChange(Object, Form, CurrentData, Item, Module = Undefined,
 	AddInfo = Undefined) Export
 	CommonFunctionsClientServer.DeleteFromAddInfo(AddInfo, "ServerData");
@@ -2817,6 +2826,20 @@ EndProcedure
 
 Procedure ItemListTotalAmountPutServerDataToAddInfo(Object, Form, CurrentData, AddInfo = Undefined) Export
 	OnChangeItemName = "ItemListTotalAmount";
+	ParametersToServer = New Structure();
+	CommonParametersToServer(Object, Form, ParametersToServer, AddInfo);
+
+	ServerData = DocumentsServer.PrepareServerData(ParametersToServer);
+	ServerData.Insert("OnChangeItemName", OnChangeItemName);
+	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "ServerData", ServerData);
+EndProcedure
+
+#EndRegion
+
+#Region NetAmount
+
+Procedure ItemListNetAmountPutServerDataToAddInfo(Object, Form, CurrentData, AddInfo = Undefined) Export
+	OnChangeItemName = "ItemListNetAmount";
 	ParametersToServer = New Structure();
 	CommonParametersToServer(Object, Form, ParametersToServer, AddInfo);
 

@@ -620,21 +620,20 @@ EndProcedure
 
 &AtServer
 Procedure Taxes_CreateFormControls() Export
-	Return;
-//	ColumnFieldParameters = New Structure();
-//	ColumnFieldParameters.Insert("Visible", False);
-//
-//	TaxesParameters = TaxesServer.GetCreateFormControlsParameters();
-//	TaxesParameters.Date = Object.Date;
-//	TaxesParameters.Company = Object.Company;
-//	TaxesParameters.PathToTable = "Object.ItemList";
-//	TaxesParameters.ItemParent = ThisObject.Items.ItemList;
-//	TaxesParameters.ColumnOffset = ThisObject.Items.ItemListOffersAmount;
-//	TaxesParameters.ItemListName = "ItemList";
-//	TaxesParameters.TaxListName = "TaxList";
-//	TaxesParameters.TotalAmountColumnName = "ItemListTotalAmount";
-//	TaxesParameters.ColumnFieldParameters = ColumnFieldParameters;
-//	TaxesServer.CreateFormControls(Object, ThisObject, TaxesParameters);
+	ColumnFieldParameters = New Structure();
+	ColumnFieldParameters.Insert("Visible", False);
+
+	TaxesParameters = TaxesServer.GetCreateFormControlsParameters();
+	TaxesParameters.Date = Object.Date;
+	TaxesParameters.Company = Object.Company;
+	TaxesParameters.PathToTable = "Object.ItemList";
+	TaxesParameters.ItemParent = ThisObject.Items.ItemList;
+	TaxesParameters.ColumnOffset = ThisObject.Items.ItemListOffersAmount;
+	TaxesParameters.ItemListName = "ItemList";
+	TaxesParameters.TaxListName = "TaxList";
+	TaxesParameters.TotalAmountColumnName = "ItemListTotalAmount";
+	TaxesParameters.ColumnFieldParameters = ColumnFieldParameters;
+	TaxesServer.CreateFormControls(Object, ThisObject, TaxesParameters);
 EndProcedure
 
 &AtServer

@@ -586,7 +586,7 @@ Function GetArrayOfTaxInfo(Object, Form)
 	Return ServerData.ArrayOfTaxInfo;	
 EndFunction
 
-Function GetCreateFormControlsParameters()
+Function GetCreateFormControlsParameters() Export
 	Return New Structure("Date
 						 |, Company
 						 |, PathToTable

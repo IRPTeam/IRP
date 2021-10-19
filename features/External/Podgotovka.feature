@@ -248,7 +248,7 @@ Scenario: create PurchaseOrder017001
 			| 'Store 01'  |
 		And I select current line in "List" table
 	* Filling in items table
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
 				| Description |
@@ -261,7 +261,7 @@ Scenario: create PurchaseOrder017001
 			| 'M/White'  |
 		And I select current line in "List" table
 		And I finish line editing in "ItemList" table
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
 				| Description |
@@ -275,7 +275,7 @@ Scenario: create PurchaseOrder017001
 			| 'L/Green'  |
 		And I select current line in "List" table
 		And I finish line editing in "ItemList" table
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		Then "Items" window is opened
 		And I go to line in "List" table
@@ -354,7 +354,7 @@ Scenario: create PurchaseOrder017003
 				| 'Store 02'  |
 			And I select current line in "List" table
 		* Filling in items table
-			And I click the button named "Add"
+			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
 				| Description |
@@ -561,7 +561,7 @@ Scenario: create InventoryTransferOrder020001
 			And I select current line in "List" table
 		* Filling in items table
 			And I move to "Item list" tab
-			And I click the button named "Add"
+			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
 				| Description |
@@ -578,7 +578,7 @@ Scenario: create InventoryTransferOrder020001
 			And I move to the next attribute
 			And I input "50,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
-			And I click the button named "Add"
+			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
 				| Description |
@@ -626,7 +626,7 @@ Scenario: create InventoryTransferOrder020004
 		And I select current line in "List" table
 	* Filling in items table
 		And I move to "Item list" tab
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
 			| Description |
@@ -674,7 +674,7 @@ Scenario: create InventoryTransferOrder020007
 		And I select current line in "List" table
 	* Filling in items table
 		And I move to "Item list" tab
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
 			| Description |
@@ -722,7 +722,7 @@ Scenario: create InventoryTransferOrder020010
 		And I select current line in "List" table
 	* Filling in items table
 		And I move to "Item list" tab
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
 			| Description |
@@ -1163,7 +1163,7 @@ Scenario: create InventoryTransfer021030
 		| 'Main Company' |
 	And I select current line in "List" table
 	And I move to "Items" tab
-	And I click the button named "Add"
+	And in the table "ItemList" I click the button named "ItemListAdd"
 	And I click choice button of "Item" attribute in "ItemList" table
 	And I go to line in "List" table
 		| 'Description' |

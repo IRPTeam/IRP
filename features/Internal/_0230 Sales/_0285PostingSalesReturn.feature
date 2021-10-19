@@ -305,7 +305,7 @@ Scenario: _028509 create Sales return without bases document
 			| 'Store 01'  |
 		And I select current line in "List" table
 	* Filling in items table
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |
@@ -318,7 +318,7 @@ Scenario: _028509 create Sales return without bases document
 			| 'M/White'  |
 		And I select current line in "List" table
 		And I finish line editing in "ItemList" table
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |
@@ -332,7 +332,7 @@ Scenario: _028509 create Sales return without bases document
 			| 'L/Green'  |
 		And I select current line in "List" table
 		And I finish line editing in "ItemList" table
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		Then "Items" window is opened
 		And I go to line in "List" table

@@ -152,7 +152,7 @@ Scenario: _029103 create a Purchase order for service
 			| Vendor Ferron, TRY |
 		And I select current line in "List" table
 	* Filling in items table
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
 			| Description |
@@ -263,7 +263,7 @@ Scenario: _029106 create a Purchase invoice for service and product (based on Pu
 				| Vendor Ferron, TRY |
 			And I select current line in "List" table
 		* Filling in items table ((add product and service))
-			And I click the button named "Add"
+			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
 				| Description |
@@ -289,7 +289,7 @@ Scenario: _029106 create a Purchase invoice for service and product (based on Pu
 			And I select current line in "ItemList" table
 			And I input "100,00" text in "Price" field of "ItemList" table
 			And I finish line editing in "ItemList" table
-			And I click the button named "Add"
+			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
 				| Description |
@@ -620,7 +620,7 @@ Scenario: _029142 create Purchase return for service and product without Purchas
 			| 'Description'             |
 			| 'Store 03' |
 		And I select current line in "List" table
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |
@@ -630,7 +630,7 @@ Scenario: _029142 create Purchase return for service and product without Purchas
 		And I select current line in "ItemList" table
 		And I input "200,00" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |
@@ -716,7 +716,7 @@ Scenario: _029150 create Retail return receipt for service and product
 					| 'Description'       |
 					| 'Basic Partner terms, TRY' |
 			And I select current line in "List" table
-			And I click the button named "Add"
+			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
 				| 'Description' |
@@ -726,7 +726,7 @@ Scenario: _029150 create Retail return receipt for service and product
 			And I select current line in "ItemList" table
 			And I input "200,00" text in "Price" field of "ItemList" table
 			And I finish line editing in "ItemList" table
-			And I click the button named "Add"
+			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
 				| 'Description' |

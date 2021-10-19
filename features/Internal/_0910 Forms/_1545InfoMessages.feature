@@ -149,7 +149,7 @@ Scenario: _154500 preparation (information messages)
 # 				| 'Store 02'  |
 # 			And I select current line in "List" table
 # 		* Filling in items table
-# 			And I click the button named "Add"
+# 			And in the table "ItemList" I click the button named "ItemListAdd"
 # 			And I click choice button of "Item" attribute in "ItemList" table
 # 			And I go to line in "List" table
 # 				| 'Description' |
@@ -312,7 +312,7 @@ Scenario: _154510 message when trying to re-create Purchase invoice based on Goo
 				| 'Store 02'  |
 			And I select current line in "List" table
 		* Filling in items table
-			And I click the button named "Add"
+			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
 				| 'Description' |
@@ -398,7 +398,7 @@ Scenario: _154512 message when trying to re-create Purchase invoice based on Pur
 				| 'Store 02'  |
 			And I select current line in "List" table
 		* Filling in items table
-			And I click the button named "Add"
+			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
 				| 'Description' |
@@ -462,7 +462,7 @@ Scenario: _154514 message when trying to re-create Goods receipt based on Purcha
 				| 'Store 02'  |
 			And I select current line in "List" table
 		* Filling in items table
-			And I click the button named "Add"
+			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
 				| 'Description' |
@@ -718,7 +718,7 @@ Scenario: _154526 message when trying to create Goods receipt based on Purchase 
 			And I click Select button of "Legal name" field
 			And I select current line in "List" table
 		* Filling in items tab
-			And I click the button named "Add"
+			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
 				| 'Description' |
@@ -971,7 +971,7 @@ Scenario: _154530 message when trying to re-create Purchase order/Inventory tran
 # 				| Store 03  |
 # 			And I select current line in "List" table
 # 		* Filling in items table
-# 			And I click the button named "Add"
+# 			And in the table "ItemList" I click the button named "ItemListAdd"
 # 			And I click choice button of "Item" attribute in "ItemList" table
 # 			And I go to line in "List" table
 # 				| 'Description' |

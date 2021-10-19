@@ -125,7 +125,7 @@ Scenario: _029201 create Purchase order based on Sales order
 		And I finish line editing in "ItemList" table
 		And I select "Approved" exact value from "Status" drop-down list
 	* Add items from SO 503
-		And I click "AddBasisDocuments" button
+		And in the table "ItemList" I click "Add basis documents" button
 		And I go to line in "BasisesTree" table
 			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
 			| 'TRY'      | '520,00' | '10,000'   | 'Dress (XS/Blue)'   | 'pcs'  | 'No'  |
@@ -162,7 +162,7 @@ Scenario: _029201 create Purchase order based on Sales order
 		And I input "20,00" text in "Q" field of "ItemList" table
 		And I finish line editing in "ItemList" table
 	* Add one more item
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |

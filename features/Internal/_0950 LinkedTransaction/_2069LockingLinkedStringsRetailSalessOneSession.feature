@@ -184,7 +184,7 @@ Scenario: _2069006 check locking tab in the Retail return receipt with linked do
 			| '51'     | 
 		And I select current line in "List" table
 	* Add new string
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |

@@ -532,7 +532,7 @@ Scenario: _018012 Purchase invoice creation without PO
 		And I select current line in "List" table
 	* Filling in items table
 		And I move to "Item list" tab
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |
@@ -548,7 +548,7 @@ Scenario: _018012 Purchase invoice creation without PO
 		And I input "10,000" text in "Q" field of "ItemList" table
 		And I input "200,00" text in "Price" field of "ItemList" table
 		And I finish line editing in "ItemList" table
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
 			| Description |

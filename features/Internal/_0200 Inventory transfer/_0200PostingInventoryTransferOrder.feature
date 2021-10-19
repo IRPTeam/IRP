@@ -215,7 +215,7 @@ Scenario: _020013 check movements by status and status history of an Inventory T
 			Then the form attribute named "Status" became equal to "Wait"
 		* Filling in items table
 			And I move to "Item list" tab
-			And I click the button named "Add"
+			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
 				| Description |

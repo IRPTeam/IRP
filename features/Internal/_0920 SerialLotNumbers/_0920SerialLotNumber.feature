@@ -456,7 +456,7 @@ Scenario: _092003 check serial lot number in the Retail return receipt
 			| ''                               | '*'      | '-1'        | '700'    | '593,22'     | ''              | 'Main Company' | ''       | 'Store 01' | '$$RetailSalesReceipt092002$$' | '37/18SD'   | ''                  | '*'       |
 	* Check the message to the user when the serial number was not filled in
 		And I activate "$$RetailReturnReceipt092003$$" window
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |
@@ -832,7 +832,7 @@ Scenario: _092005 check serial lot number in the Sales return
 			| ''                                     | 'Receipt'     | '*'      | '1'         | 'Main Company' | '*'      | '38/Yellow' | '99098809009911'    |
 	* Check the message to the user when the serial number was not filled in
 		And I activate "$$SalesReturn092005$$" window
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |
@@ -913,7 +913,7 @@ Scenario: _092006 check serial lot number in the PurchaseInvoice
 			| 'Store 01'    |
 		And I select current line in "List" table
 	* Add items (first item with serial lot number, second - without serial lot number)
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |
@@ -927,7 +927,7 @@ Scenario: _092006 check serial lot number in the PurchaseInvoice
 			| 'Trousers' | '38/Yellow' |
 		And I select current line in "List" table
 		And I input "400,00" text in "Price" field of "ItemList" table	
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |
@@ -1020,7 +1020,7 @@ Scenario: _0920061 check serial lot number controls in the PurchaseInvoice
 			| 'Store 01'    |
 		And I select current line in "List" table
 	* Add items (first item with serial lot number, second - without serial lot number)
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |
@@ -1034,7 +1034,7 @@ Scenario: _0920061 check serial lot number controls in the PurchaseInvoice
 			| 'Trousers' | '38/Yellow' |
 		And I select current line in "List" table
 		And I input "400,00" text in "Price" field of "ItemList" table	
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |
@@ -1136,7 +1136,7 @@ Scenario: _0920061 check serial lot number controls in the PurchaseInvoice
 		And I close current window
 	* Check the message to the user when the serial number was not filled in
 		And I activate "$$PurchaseInvoice0920061$$" window
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |
@@ -1218,7 +1218,7 @@ Scenario: _092007 check serial lot number in the PurchaseReturn
 			| 'Store 01'    |
 		And I select current line in "List" table
 	* Add items (first item with serial lot number, second - without serial lot number)
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |
@@ -1232,7 +1232,7 @@ Scenario: _092007 check serial lot number in the PurchaseReturn
 			| 'Trousers' | '38/Yellow' |
 		And I select current line in "List" table
 		And I input "400,00" text in "Price" field of "ItemList" table	
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |
@@ -1324,7 +1324,7 @@ Scenario: _0920071 check serial lot number controls in the PurchaseReturn
 			| 'Store 01'    |
 		And I select current line in "List" table
 	* Add items (first item with serial lot number, second - without serial lot number)
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |
@@ -1338,7 +1338,7 @@ Scenario: _0920071 check serial lot number controls in the PurchaseReturn
 			| 'Trousers' | '38/Yellow' |
 		And I select current line in "List" table
 		And I input "400,00" text in "Price" field of "ItemList" table	
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |
@@ -1447,7 +1447,7 @@ Scenario: _0920071 check serial lot number controls in the PurchaseReturn
 		And I close current window
 	* Check the message to the user when the serial number was not filled in
 		And I activate "$$PurchaseReturn0920071$$" window
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |
@@ -1679,7 +1679,7 @@ Scenario: _092009 check serial lot number in the Stock adjustment as surplus
 			| 'Store 02'    |
 		And I select current line in "List" table
 	* Add items (first item with serial lot number, second - without serial lot number)
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |
@@ -1702,7 +1702,7 @@ Scenario: _092009 check serial lot number in the Stock adjustment as surplus
 			| 'Revenue' |
 		And I select current line in "List" table
 		And I input "1,00" text in "Quantity" field of "ItemList" table
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |
@@ -1785,7 +1785,7 @@ Scenario: _0920091 check serial lot number controls in the Stock adjustment as s
 			| 'Store 02'    |
 		And I select current line in "List" table
 	* Add items (first item with serial lot number, second - without serial lot number)
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |
@@ -1808,7 +1808,7 @@ Scenario: _0920091 check serial lot number controls in the Stock adjustment as s
 			| 'Revenue' |
 		And I select current line in "List" table
 		And I input "1,00" text in "Quantity" field of "ItemList" table
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |
@@ -1912,7 +1912,7 @@ Scenario: _0920091 check serial lot number controls in the Stock adjustment as s
 		And I close current window
 	* Check the message to the user when the serial number was not filled in
 		And I activate "$$StockAdjustmentAsSurplus0920091$$" window
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |
@@ -1991,7 +1991,7 @@ Scenario: _092010 check serial lot number in the Stock adjustment as write off
 			| 'Store 02'    |
 		And I select current line in "List" table
 	* Add items (first item with serial lot number, second - without serial lot number)
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |
@@ -2014,7 +2014,7 @@ Scenario: _092010 check serial lot number in the Stock adjustment as write off
 			| 'Expense' |
 		And I select current line in "List" table
 		And I input "1,00" text in "Quantity" field of "ItemList" table
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |
@@ -2097,7 +2097,7 @@ Scenario: _09200101 check serial lot number controls in the Stock adjustment as 
 			| 'Store 02'    |
 		And I select current line in "List" table
 	* Add items (first item with serial lot number, second - without serial lot number)
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |
@@ -2120,7 +2120,7 @@ Scenario: _09200101 check serial lot number controls in the Stock adjustment as 
 			| 'Expense' |
 		And I select current line in "List" table
 		And I input "1,00" text in "Quantity" field of "ItemList" table
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |
@@ -2224,7 +2224,7 @@ Scenario: _09200101 check serial lot number controls in the Stock adjustment as 
 		And I close current window
 	* Check the message to the user when the serial number was not filled in
 		And I activate "$$StockAdjustmentAsWriteOff09200101$$" window
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |

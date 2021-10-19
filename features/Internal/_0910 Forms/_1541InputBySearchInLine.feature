@@ -159,7 +159,7 @@ Scenario: _0154053 check item and item key input by search in line in a document
 		Given I open hyperlink "e1cib/list/Document.SalesReturn"
 		And I click the button named "FormCreate"
 	* Item and item key input by search in line
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I select "boo" from "Item" drop-down list by string in "ItemList" table
 		And I activate "Item key" field in "ItemList" table
 		And I select "36" from "Item key" drop-down list by string in "ItemList" table
@@ -183,7 +183,7 @@ Scenario: _0154054 check item and item key input by search in line in a document
 		Given I open hyperlink "e1cib/list/Document.Purchaseinvoice"
 		And I click the button named "FormCreate"
 	* Item and item key input by search in line
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I select "boo" from "Item" drop-down list by string in "ItemList" table
 		And I activate "Item key" field in "ItemList" table
 		And I select "36" from "Item key" drop-down list by string in "ItemList" table
@@ -191,7 +191,7 @@ Scenario: _0154054 check item and item key input by search in line in a document
 		And "ItemList" table contains lines
 		| 'Item'     | 'Item key'  |
 		| 'Boots'    | '36/18SD' |
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I input "J22001" text in "Item" field of "ItemList" table		
 		And in "ItemList" table drop-down list "Item" is equal to:
 			|" (J22001) Jacket J22001 "|
@@ -207,7 +207,7 @@ Scenario: _0154055 check item and item key input by search in line in a document
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And I click the button named "FormCreate"
 	* Item and item key input by search in line
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I select "boo" from "Item" drop-down list by string in "ItemList" table
 		And I activate "Item key" field in "ItemList" table
 		And I select "36" from "Item key" drop-down list by string in "ItemList" table
@@ -255,7 +255,7 @@ Scenario: _0154057 check item and item key input by search in line in a document
 		Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
 		And I click the button named "FormCreate"
 	* Item and item key input by search in line
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I select "boo" from "Item" drop-down list by string in "ItemList" table
 		And I activate "Item key" field in "ItemList" table
 		And I select "36" from "Item key" drop-down list by string in "ItemList" table
@@ -667,7 +667,7 @@ Scenario: _0154070 check partner, legal name, Partner term, company and store in
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Store" became equal to "Store 01"
 	* Expense type input by search in line
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |
@@ -706,7 +706,7 @@ Scenario: _0154071 check partner, legal name, Partner term, company and store in
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Store" became equal to "Store 01"
 	* Expense type input by search in line
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |
@@ -1248,7 +1248,7 @@ Scenario: _0154094 check store, company, tabular part input by search in line in
 		Then the form attribute named "Store" became equal to "Store 02"
 		Then the form attribute named "Company" became equal to "Main Company"
 	* Profit loss center, expence type input by search in line
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I activate "Profit loss center" field in "ItemList" table
 		And I select "log" from "Profit loss center" drop-down list by string in "ItemList" table
 		And I move to the next attribute
@@ -1279,7 +1279,7 @@ Scenario: _0154095 check store, company, tabular part input by search in line in
 		Then the form attribute named "Store" became equal to "Store 02"
 		Then the form attribute named "Company" became equal to "Main Company"
 	* Profit loss center, expence type input by search in line
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I activate "Profit loss center" field in "ItemList" table
 		And I select "log" from "Profit loss center" drop-down list by string in "ItemList" table
 		And I move to the next attribute
@@ -1587,7 +1587,7 @@ Scenario: _01540111 check partner, legal name, Partner term, company and store i
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Store" became equal to "Store 01"
 	* Expense type input by search in line
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |
@@ -1611,7 +1611,7 @@ Scenario: _01540112 check item and item key input by search in line in a documen
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrderClosing"
 		And I click the button named "FormCreate"
 	* Item and item key input by search in line
-		And I click the button named "Add"		
+		And in the table "ItemList" I click the button named "ItemListAdd"		
 		And I select "boo" from "Item" drop-down list by string in "ItemList" table
 		And I activate "Item key" field in "ItemList" table
 		And I select "36" from "Item key" drop-down list by string in "ItemList" table
@@ -1619,7 +1619,7 @@ Scenario: _01540112 check item and item key input by search in line in a documen
 		And "ItemList" table contains lines
 		| 'Item'     | 'Item key'  |
 		| 'Boots'    | '36/18SD' |
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I input "J22001" text in "Item" field of "ItemList" table		
 		And drop-down list "Item" is equal to:
 		| (J22001) Jacket J22001 |

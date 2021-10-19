@@ -391,7 +391,7 @@ Scenario: _150004 check the price calculation according to the specification (ba
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And I click the button named "FormCreate"
 		* Add item
-			And I click the button named "Add"
+			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
 				| Description |
@@ -422,7 +422,7 @@ Scenario: _150004 check the price calculation according to the specification (ba
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		And I click the button named "FormCreate"
 		* Add item
-			And I click the button named "Add"
+			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
 				| Description |
@@ -522,7 +522,7 @@ Scenario: _150004 check the price calculation for the bandle (based on the prope
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And I click the button named "FormCreate"
 		* Add item
-			And I click the button named "Add"
+			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
 				| Description |
@@ -552,7 +552,7 @@ Scenario: _150004 check the price calculation for the bandle (based on the prope
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		And I click the button named "FormCreate"
 		* Add item
-			And I click the button named "Add"
+			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
 				| Description |
@@ -644,7 +644,7 @@ Scenario: _150005 price check by properties
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 		And I click the button named "FormCreate"
 		* Add item
-			And I click the button named "Add"
+			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
 				| Description |
@@ -674,7 +674,7 @@ Scenario: _150005 price check by properties
 		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 		And I click the button named "FormCreate"
 		* Add item
-			And I click the button named "Add"
+			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
 				| Description |

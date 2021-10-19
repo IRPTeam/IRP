@@ -52,7 +52,7 @@ Scenario: _300400 preparation (product / service selection filter)
 Scenario: _300401 check filter on the choice of services in the document Purchase order
 	Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
 	And I click the button named "FormCreate"
-	And I click the button named "Add"
+	And in the table "ItemList" I click the button named "ItemListAdd"
 	And I click choice button of "Item" attribute in "ItemList" table
 	And "List" table contains lines
 		| Description          |
@@ -64,7 +64,7 @@ Scenario: _300401 check filter on the choice of services in the document Purchas
 Scenario: _300402 check filter on the choice of services in the document Purchase invoice
 	Given I open hyperlink "e1cib/list/Document.PurchaseInvoice"
 	And I click the button named "FormCreate"
-	And I click the button named "Add"
+	And in the table "ItemList" I click the button named "ItemListAdd"
 	And I click choice button of "Item" attribute in "ItemList" table
 	And "List" table contains lines
 		| Description          |
@@ -103,7 +103,7 @@ Scenario: _300404 check filter on the choice of services in the document Sales i
 Scenario: _300405 check filter on the choice of services in the document Inventory transfer
 	Given I open hyperlink "e1cib/list/Document.InventoryTransfer"
 	And I click the button named "FormCreate"
-	And I click the button named "Add"
+	And in the table "ItemList" I click the button named "ItemListAdd"
 	And I click choice button of "Item" attribute in "ItemList" table
 	And "List" table does not contain lines
 		| Description          |
@@ -113,7 +113,7 @@ Scenario: _300405 check filter on the choice of services in the document Invento
 Scenario: _300406 check filter on the choice of services in the document Inventory transfer order
 	Given I open hyperlink "e1cib/list/Document.InventoryTransferOrder"
 	And I click the button named "FormCreate"
-	And I click the button named "Add"
+	And in the table "ItemList" I click the button named "ItemListAdd"
 	And I click choice button of "Item" attribute in "ItemList" table
 	And "List" table does not contain lines
 		| Description          |
@@ -134,7 +134,7 @@ Scenario: _300407 check filter on the choice of services in the document Interna
 Scenario: _300408 check filter on the choice of services in the document Purchase return order
 	Given I open hyperlink "e1cib/list/Document.PurchaseReturnOrder"
 	And I click the button named "FormCreate"
-	And I click the button named "Add"
+	And in the table "ItemList" I click the button named "ItemListAdd"
 	And I click choice button of "Item" attribute in "ItemList" table
 	And "List" table contains lines
 		| Description          |
@@ -146,7 +146,7 @@ Scenario: _300408 check filter on the choice of services in the document Purchas
 Scenario: _300409 check filter on the choice of services in the document Purchase return
 	Given I open hyperlink "e1cib/list/Document.PurchaseReturn"
 	And I click the button named "FormCreate"
-	And I click the button named "Add"
+	And in the table "ItemList" I click the button named "ItemListAdd"
 	And I click choice button of "Item" attribute in "ItemList" table
 	And "List" table contains lines
 		| Description          |
@@ -158,7 +158,7 @@ Scenario: _300409 check filter on the choice of services in the document Purchas
 Scenario: _300410 check filter on the choice of services in the document Sales Return
 	Given I open hyperlink "e1cib/list/Document.SalesReturn"
 	And I click the button named "FormCreate"
-	And I click the button named "Add"
+	And in the table "ItemList" I click the button named "ItemListAdd"
 	And I click choice button of "Item" attribute in "ItemList" table
 	And "List" table contains lines
 		| Description          |
@@ -192,7 +192,7 @@ Scenario: _300412 check filter on the choice of services in the document GoodsRe
 Scenario: _300413 check filter on the choice of services in the document Shipment Confirmation
 	Given I open hyperlink "e1cib/list/Document.ShipmentConfirmation"
 	And I click the button named "FormCreate"
-	And I click the button named "Add"
+	And in the table "ItemList" I click the button named "ItemListAdd"
 	And I click choice button of "Item" attribute in "ItemList" table
 	And "List" table does not contain lines
 		| Description          |

@@ -53,7 +53,7 @@ Scenario: _034001 check the Document discount in Purchase order
 				| 'Store 01'  |
 			And I select current line in "List" table
 		* Filling in items table
-			And I click the button named "Add"
+			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
 				| 'Description' |
@@ -66,7 +66,7 @@ Scenario: _034001 check the Document discount in Purchase order
 				| 'M/White'  |
 			And I select current line in "List" table
 			And I finish line editing in "ItemList" table
-			And I click the button named "Add"
+			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
 				| 'Description' |
@@ -80,7 +80,7 @@ Scenario: _034001 check the Document discount in Purchase order
 				| 'L/Green'  |
 			And I select current line in "List" table
 			And I finish line editing in "ItemList" table
-			And I click the button named "Add"
+			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
 				| 'Description' |
@@ -175,7 +175,7 @@ Scenario: _034002 check the Document discount in Purchase invoice
 				| 'Store 01'  |
 			And I select current line in "List" table
 		* Filling in items table
-			And I click the button named "Add"
+			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
 				| 'Description' |
@@ -188,7 +188,7 @@ Scenario: _034002 check the Document discount in Purchase invoice
 				| 'M/White'  |
 			And I select current line in "List" table
 			And I finish line editing in "ItemList" table
-			And I click the button named "Add"
+			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
 				| 'Description' |
@@ -202,7 +202,7 @@ Scenario: _034002 check the Document discount in Purchase invoice
 				| 'L/Green'  |
 			And I select current line in "List" table
 			And I finish line editing in "ItemList" table
-			And I click the button named "Add"
+			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
 				| 'Description' |

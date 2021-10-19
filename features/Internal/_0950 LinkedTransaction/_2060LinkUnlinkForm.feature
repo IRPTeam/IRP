@@ -187,7 +187,7 @@ Scenario: _2060002 check link/unlink form in the SC
 			| 'Distribution department' |
 		And I select current line in "List" table		
 	* Select items from basis documents
-		And I click "AddBasisDocuments" button
+		And in the table "ItemList" I click "Add basis documents" button
 		And I expand current line in "BasisesTree" table
 		And I expand a line in "BasisesTree" table
 			| 'Row presentation'                            | 'Use'                                         |
@@ -220,7 +220,7 @@ Scenario: _2060002 check link/unlink form in the SC
 		| '3' | 'Sales invoice 103 dated 05.03.2021 12:59:44' | ''          | '2,000' | 'SC'           |
 		Then the number of "RowIDInfo" table lines is "равно" "3"
 	* Unlink line
-		And I click "LinkUnlinkBasisDocuments" button
+		And in the table "ItemList" I click "Link unlink basis documents" button
 		Then "Link / unlink document row" window is opened
 		And I set checkbox "Linked documents"
 		And I go to line in "ItemListRows" table
@@ -241,7 +241,7 @@ Scenario: _2060002 check link/unlink form in the SC
 			| 'Boots' | '37/18SD'  | 'Sales invoice 101 dated 05.03.2021 12:56:38' |
 			| 'Boots' | '37/18SD'  | ''                                            |
 	* Link line
-		And I click "LinkUnlinkBasisDocuments" button
+		And in the table "ItemList" I click "Link unlink basis documents" button
 		And I go to line in "ItemListRows" table
 			| '#' | 'Quantity' | 'Row presentation' | 'Store'    | 'Unit' |
 			| '3' | '2,000'    | 'Boots (37/18SD)'   | 'Store 02' | 'pcs'  |
@@ -271,7 +271,7 @@ Scenario: _2060002 check link/unlink form in the SC
 			| 'Item'  | 'Item key' | 'Quantity' | 'Store'    |
 			| 'Boots' | '37/18SD'  | '2,000'    | 'Store 02' |
 		And in the table "ItemList" I click the button named "ItemListContextMenuDelete"
-		And I click "AddBasisDocuments" button
+		And in the table "ItemList" I click "Add basis documents" button
 		And I go to line in "BasisesTree" table
 			| 'Currency' | 'Price'  | 'Quantity' | 'Row presentation' | 'Unit' | 'Use' |
 			| 'TRY'      | '648,15' | '2,000'    | 'Boots (37/18SD)'   | 'pcs'  | 'No'  |
@@ -300,7 +300,7 @@ Scenario: _2060002 check link/unlink form in the SC
 			| '3' | 'Sales invoice 103 dated 05.03.2021 12:59:44' | ''          | '24,000' | 'SC'          |
 		Then the number of "RowIDInfo" table lines is "равно" "3"
 	* Add all items from SI
-		And I click "AddBasisDocuments" button
+		And in the table "ItemList" I click "Add basis documents" button
 		And I go to line in "BasisesTree" table
 			| 'Row presentation'                            | 'Use' |
 			| 'Sales invoice 103 dated 05.03.2021 12:59:44' | 'No'  |
@@ -315,7 +315,7 @@ Scenario: _2060002 check link/unlink form in the SC
 			| 'Store 02' | 'Boots' | '36/18SD'  | '2,000'    | 'Sales invoice 103 dated 05.03.2021 12:59:44' | 'Boots (12 pcs)' |
 			| 'Store 02' | 'Dress' | 'S/Yellow' | '8,000'    | 'Sales invoice 103 dated 05.03.2021 12:59:44' | 'pcs'            |
 	* Unlink all lines
-		And I click "LinkUnlinkBasisDocuments" button
+		And in the table "ItemList" I click "Link unlink basis documents" button
 		And I set checkbox "Linked documents"
 		And in the table "ResultsTree" I click "Unlink all" button
 		And "BasisesTree" table became equal
@@ -1402,7 +1402,7 @@ Scenario: _2060016 check price in the PI when link document with different price
 			| 'Store 03'  |
 		And I select current line in "List" table
 	* Add items
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |
@@ -1415,7 +1415,7 @@ Scenario: _2060016 check price in the PI when link document with different price
 			| 'Dress' | 'XS/Blue' |
 		And I select current line in "List" table
 		And I finish line editing in "ItemList" table
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |
@@ -1645,7 +1645,7 @@ Scenario: _2060018 check link form in the PI with 2 lines with the same items
 			| 'Store 03'  |
 		And I select current line in "List" table
 	* Add items	
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |
@@ -1660,7 +1660,7 @@ Scenario: _2060018 check link form in the PI with 2 lines with the same items
 		And I activate field named "ItemListQuantity" in "ItemList" table
 		And I input "9,000" text in the field named "ItemListQuantity" of "ItemList" table
 		And I finish line editing in "ItemList" table
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |
@@ -1753,7 +1753,7 @@ Scenario: _2060019 check link form in the PI with Serial Lot number
 				| 'Store 03'  |
 			And I select current line in "List" table
 		* Add items	
-			And I click the button named "Add"
+			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
 				| 'Description' |
@@ -1791,7 +1791,7 @@ Scenario: _2060019 check link form in the PI with Serial Lot number
 			And I finish line editing in "SerialLotNumbers" table
 			And I click "Ok" button		
 			And I finish line editing in "ItemList" table
-			And I click the button named "Add"
+			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
 				| 'Description' |
@@ -1819,7 +1819,7 @@ Scenario: _2060019 check link form in the PI with Serial Lot number
 			And I finish line editing in "SerialLotNumbers" table
 			And I click "Ok" button	
 			And I finish line editing in "ItemList" table
-			And I click the button named "Add"
+			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
 				| 'Description' |
@@ -1846,7 +1846,7 @@ Scenario: _2060019 check link form in the PI with Serial Lot number
 			And I finish line editing in "SerialLotNumbers" table
 			And I click "Ok" button	
 			And I finish line editing in "ItemList" table
-			And I click the button named "Add"
+			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
 				| 'Description' |
@@ -1910,7 +1910,7 @@ Scenario: _2060020 check button Show quantity in base unit in the Link form
 		And I select current line in "List" table	
 	* Filling in Item tab
 		And I move to "Items" tab
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |
@@ -1935,7 +1935,7 @@ Scenario: _2060020 check button Show quantity in base unit in the Link form
 		And I activate field named "Description" in "List" table
 		And I select current line in "List" table
 		And I finish line editing in "ItemList" table
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |
@@ -1959,7 +1959,7 @@ Scenario: _2060020 check button Show quantity in base unit in the Link form
 		And I activate field named "Description" in "List" table
 		And I select current line in "List" table
 	* Check button Show quantity in base unit in the Link form
-		And I click "LinkUnlinkBasisDocuments" button
+		And in the table "ItemList" I click "Link unlink basis documents" button
 		And I set checkbox "Show quantity in basis unit"
 		And "ItemListRows" table contains lines
 			| 'Row presentation' | 'Unit'              | 'Quantity' | 'Unit (basis)' | 'Quantity (basis)' | 'Store'    |

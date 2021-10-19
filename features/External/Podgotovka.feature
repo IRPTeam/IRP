@@ -194,7 +194,7 @@ Scenario: add Plugin for tax calculation
 			Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		* Addition of Plugin sessing for calculating Tax types for Turkey (VAT)
 			And I click the button named "FormCreate"
-			And I select external file "C:\Users\Severnity\Desktop\ExtDataProc\TaxCalculateVAT_TR.epf"
+			And I select external file "#workingDir#/DataProcessor/TaxCalculateVAT_TR.epf"
 			And I click the button named "FormAddExtDataProc"
 			And I input "" text in "Path to plugin for test" field
 			And I input "TaxCalculateVAT_TR" text in "Name" field
@@ -1346,7 +1346,7 @@ Scenario: add sales tax settings
 Scenario: add test extension
 	Given I open hyperlink "e1cib/list/Catalog.Extensions"
 	And I click the button named "FormCreate"
-	And I select external file "C:\Users\Severnity\Desktop\ExtDataProc\IRP_TestExtension.cfe"
+	And I select external file "#workingDir#/DataProcessor/IRP_TestExtension.cfe"
 	And I click "Add file" button
 	And I input "TestExtension" text in "Description" field
 	And I click the button named "FormWriteAndClose"
@@ -1357,7 +1357,7 @@ Scenario: add test extension
 Scenario: add Additional Functionality extension
 	Given I open hyperlink "e1cib/list/Catalog.Extensions"
 	And I click the button named "FormCreate"
-	And I select external file "C:\Users\Severnity\Desktop\ExtDataProc\IRP_AdditionalFunctionality.cfe"
+	And I select external file "#workingDir#/DataProcessor/IRP_AdditionalFunctionality.cfe"
 	And I click "Add file" button
 	And Delay 2
 	And I input "AdditionalFunctionality" text in "Description" field
@@ -1578,7 +1578,7 @@ Scenario: add Plugin for document discount
 			Given I open hyperlink "e1cib/list/Catalog.ExternalDataProc"
 		* Addition of Plugin sessing for calculating Tax types for Turkey (VAT)
 			And I click the button named "FormCreate"
-			And I select external file "C:\Users\Severnity\Desktop\ExtDataProc\DocumentDiscount.epf"
+			And I select external file "#workingDir#/DataProcessor/DocumentDiscount.epf"
 			And I click the button named "FormAddExtDataProc"
 			And I input "" text in "Path to plugin for test" field
 			And I input "DocumentDiscount" text in "Name" field

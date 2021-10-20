@@ -31,7 +31,7 @@ EndProcedure
 #EndRegion
 
 #Region Public
-&AtServer
+
 Function GetArrayOfInstance(GenerateParameters) Export
 	Result = New Array();
 	If GenerateParameters.UseResponsiblePersonByRow Then

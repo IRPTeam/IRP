@@ -2656,7 +2656,7 @@
       </userVisible>
       <title>
         <key>en</key>
-        <value>Group rules</value>
+        <value>Rules</value>
       </title>
       <extendedTooltip>
         <name>GroupRulesExtendedTooltip</name>

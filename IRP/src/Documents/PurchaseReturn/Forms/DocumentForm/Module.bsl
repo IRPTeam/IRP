@@ -316,22 +316,22 @@ EndProcedure
 
 &AtClient
 Procedure DecorationGroupTitleCollapsedPictureClick(Item)
-	DocumentsClient.DecorationGroupTitleCollapsedPictureClick(Object, ThisObject, Item);
+	DocPurchaseReturnClient.DecorationGroupTitleCollapsedPictureClick(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient
 Procedure DecorationGroupTitleCollapsedLabelClick(Item)
-	DocumentsClient.DecorationGroupTitleCollapsedLabelClick(Object, ThisObject, Item);
+	DocPurchaseReturnClient.DecorationGroupTitleCollapsedLabelClick(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient
 Procedure DecorationGroupTitleUncollapsedPictureClick(Item)
-	DocumentsClient.DecorationGroupTitleUncollapsedPictureClick(Object, ThisObject, Item);
+	DocPurchaseReturnClient.DecorationGroupTitleUncollapsedPictureClick(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient
 Procedure DecorationGroupTitleUncollapsedLabelClick(Item)
-	DocumentsClient.DecorationGroupTitleUncollapsedLabelClick(Object, ThisObject, Item);
+	DocPurchaseReturnClient.DecorationGroupTitleUncollapsedLabelClick(Object, ThisObject, Item);
 EndProcedure
 
 #EndRegion

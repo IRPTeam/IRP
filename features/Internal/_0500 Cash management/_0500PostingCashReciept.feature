@@ -101,9 +101,13 @@ Scenario: _050001 create Cash receipt based on Sales invoice
 		And "PaymentList" table contains lines
 			| 'Partner'   | 'Partner term'             | 'Amount'   | 'Payer'             | 'Basis document'   | 'Planning transaction basis' |
 			| 'Ferron BP' | 'Basic Partner terms, TRY' | '4 350,00' | 'Company Ferron BP' | '$$SalesInvoice024001$$' | ''                          |
-		And "CurrenciesPaymentList" table contains lines
-			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
-			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,1712'            | '744,72' | '1'            |
+		And in the table "PaymentList" I click "Edit currencies" button
+		And "CurrenciesTable" table became equal
+			| 'Movement type'      | 'Type'         | 'To'  | 'From' | 'Multiplicity' | 'Rate'   | 'Amount' |
+			| 'Reporting currency' | 'Reporting'    | 'USD' | 'TRY'  | '1'            | '0,1712' | '744,72' |
+			| 'Local currency'     | 'Legal'        | 'TRY' | 'TRY'  | '1'            | '1'      | '4 350'  |
+			| 'TRY'                | 'Partner term' | 'TRY' | 'TRY'  | '1'            | '1'      | '4 350'  |
+		And I close current window	
 	* Check account selection and saving 
 		And I click Select button of "Cash account" field
 		And I go to line in "List" table
@@ -117,9 +121,13 @@ Scenario: _050001 create Cash receipt based on Sales invoice
 		And "PaymentList" table contains lines
 			| 'Partner'   | 'Partner term'             | 'Amount'   | 'Payer'             | 'Basis document'   | 'Planning transaction basis' |
 			| 'Ferron BP' | 'Basic Partner terms, TRY' | '4 350,00' | 'Company Ferron BP' | '$$SalesInvoice024001$$' | ''                          |
-		And "CurrenciesPaymentList" table contains lines
-			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
-			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,1712'            | '744,72' | '1'            |
+		And in the table "PaymentList" I click "Edit currencies" button
+		And "CurrenciesTable" table became equal
+			| 'Movement type'      | 'Type'         | 'To'  | 'From' | 'Multiplicity' | 'Rate'   | 'Amount' |
+			| 'Reporting currency' | 'Reporting'    | 'USD' | 'TRY'  | '1'            | '0,1712' | '744,72' |
+			| 'Local currency'     | 'Legal'        | 'TRY' | 'TRY'  | '1'            | '1'      | '4 350'  |
+			| 'TRY'                | 'Partner term' | 'TRY' | 'TRY'  | '1'            | '1'      | '4 350'  |
+		And I close current window		
 		Then the form attribute named "DocumentAmount" became equal to "4 350,00"
 	* Change of Partner term and basis document
 		And I select current line in "PaymentList" table

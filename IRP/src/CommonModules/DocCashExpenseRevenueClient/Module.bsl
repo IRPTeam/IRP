@@ -9,17 +9,9 @@ EndProcedure
 #Region FormItemsEvents
 
 Procedure DateOnChange(Object, Form, Item, AddInfo = Undefined) Export
-
-//#If Not MobileClient Then
-//	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
-//#EndIf
-
-// [NEW CODE]
 	DocumentsClient.DateOnChange(Object, Form, Thisobject, Item, Undefined, AddInfo);
-//--
 EndProcedure
 
-// [NEW CODE]
 Procedure DateOnChangePutServerDataToAddInfo(Object, Form, AddInfo = Undefined) Export
 	DocumentsClient.DateOnChangePutServerDataToAddInfo(Object, Form, AddInfo);
 EndProcedure
@@ -45,8 +37,6 @@ Function DateSettings(Object, Form, AddInfo = Undefined) Export
 	Settings.AfterActionsCalculateSettings = AfterActionsCalculateSettings;
 	Return Settings;
 EndFunction
-
-//--
 
 Procedure CompanyOnChange(Object, Form, Item) Export
 	DocumentsClient.CompanyOnChange(Object, Form, ThisObject, Item);
@@ -74,10 +64,6 @@ Function CompanySettings(Object, Form, AddInfo = Undefined) Export
 	CalculateSettings.Insert("CalculateTotalAmountByNetAmount");
 	Settings.CalculateSettings = CalculateSettings;
 	
-//	Actions = GetCalculateRowsActions();
-//	Actions.Delete("CalculateTaxByTotalAmount");
-//	Actions.Delete("CalculateNetAmountByTotalAmount");
-//	Settings.CalculateSettings = Actions;
 	Return Settings;
 EndFunction
 
@@ -156,7 +142,6 @@ EndProcedure
 
 #EndRegion
 
-// [NEW CODE]
 #Region TaxAmount
 
 Procedure ItemListTaxAmountOnChange(Object, Form, Item = Undefined, CurrentRowData = Undefined, AddInfo = Undefined) Export
@@ -189,12 +174,9 @@ EndProcedure
 
 #EndRegion
 
-//--
-
 #Region PaymentListEvents
 
 Procedure PaymentListSelection(Object, Form, Item, RowSelected, Field, StandardProcessing, AddInfo = Undefined) Export
-	// [NEW CODE]
 	If Upper(Field.Name) = Upper("PaymentListTaxAmount") Then
 		CurrentData = Form.Items.PaymentList.CurrentData;
 		If CurrentData <> Undefined Then
@@ -206,7 +188,6 @@ Procedure PaymentListSelection(Object, Form, Item, RowSelected, Field, StandardP
 			TaxesClient.ChangeTaxAmount2(Object, Form, Parameters, StandardProcessing, AddInfo);
 		EndIf;
 	EndIf;
-	//--
 EndProcedure
 
 Procedure PaymentListOnStartEdit(Object, Form, Item, NewRow, Clone) Export
@@ -217,23 +198,12 @@ Procedure PaymentListOnStartEdit(Object, Form, Item, NewRow, Clone) Export
 
 	If Clone Then
 		CurrentData.Key = New UUID();
-		
-		// [NEW CODE]
 		Settings = New Structure();
 
 		Settings.Insert("Rows", New Array());
 		Settings.Rows.Add(CurrentData);
 
 		Settings.Insert("CalculateSettings", New Structure("CalculateTax, CalculateTotalAmount"));
-		//--
-		//Settings = New Structure();
-		//Actions = New Structure();
-		//Actions.Insert("CalculateTax");
-		//Actions.Insert("CalculateTotalAmount");
-		//Settings.Insert("Actions", Actions);
-		//Rows = New Array();
-		//Rows.Add(CurrentData);
-		//Settings.Insert("Rows", Rows);
 		CalculateItemsRows(Object, Form, Settings);
 		Return;
 	EndIf;
@@ -250,11 +220,9 @@ Procedure PaymentListBeforeAddRow(Object, Form, Item, Cancel, Clone, Parent, IsF
 	NewRow.Currency = Form.Currency;
 	Form.Items.PaymentList.ChangeRow();
 	PaymentListOnChange(Object, Form, Item);
-	// [NEW CODE]
 	If ValueIsFilled(NewRow.ProfitLossCenter) Then
 		PaymentListProfitLossCenterOnChange(Object, Form, Item, NewRow);
 	EndIf;
-	//--
 EndProcedure
 
 Procedure PaymentListOnChange(Object, Form, Item) Export
@@ -267,117 +235,46 @@ EndProcedure
 
 Procedure PaymentListAfterDeleteRow(Object, Form, Item) Export
 	CalculationStringsClientServer.ClearDependentData(Object, New Structure("TableParent", "PaymentList"));
-//	Form.Taxes_CreateTaxTree();
 EndProcedure
 
 Procedure PaymentListCurrencyOnChange(Object, Form) Export
 	Return;
-//	CurrentData = Form.Items.PaymentList.CurrentData;
-//
-//	If CurrentData = Undefined Then
-//		Return;
-//	EndIf;
-//
 EndProcedure
 
 Procedure PaymentListNetAmountOnChange(Object, Form, Item = Undefined, CurrentRowData = Undefined, AddInfo = Undefined) Export
-	
-	// [NEW CODE]
 	CurrentData = DocumentsClient.GetCurrentRowDataList(Form.Items.PaymentList, CurrentRowData);
 	If CurrentData = Undefined Then
 		Return;
 	EndIf;
 	DocumentsClient.ItemListCalculateRowAmounts_NetAmountChange(Object, Form, CurrentData, Item, ThisObject, AddInfo);
-	//--
-	
-//	CurrentData = Form.Items.PaymentList.CurrentData;
-//	If CurrentData = Undefined Then
-//		Return;
-//	EndIf;
-//
-//	Settings = New Structure();
-//	Actions = GetCalculateRowsActions();
-//	Actions.Delete("CalculateTaxByTotalAmount");
-//	Actions.Delete("CalculateNetAmountByTotalAmount");
-//	Settings.Insert("Actions", Actions);
-//	Rows = New Array();
-//	Rows.Add(CurrentData);
-//	Settings.Insert("Rows", Rows);
-//	CalculateItemsRows(Object, Form, Settings);
 EndProcedure
 
-// [NEW CODE]
 Procedure ItemListNetAmountPutServerDataToAddInfo(Object, Form, CurrentData, AddInfo = Undefined) Export
 	DocumentsClient.ItemListNetAmountPutServerDataToAddInfo(Object, Form, CurrentData, AddInfo);
 EndProcedure
-//--
 
 Procedure PaymentListTotalAmountOnChange(Object, Form, Item = Undefined, CurrentRowData = Undefined, AddInfo = Undefined) Export
-
-	// [NEW CODE]
 	CurrentData = DocumentsClient.GetCurrentRowDataList(Form.Items.PaymentList, CurrentRowData);
 	If CurrentData = Undefined Then
 		Return;
 	EndIf;
 	DocumentsClient.ItemListCalculateRowAmounts_TotalAmountChange(Object, Form, CurrentData, Item, ThisObject, AddInfo);
-	//
-
-//	CurrentData = Form.Items.PaymentList.CurrentData;
-//	If CurrentData = Undefined Then
-//		Return;
-//	EndIf;
-//
-//	Settings = New Structure();
-//	Actions = GetCalculateRowsActions();
-//	Actions.Delete("CalculateTotalAmountByNetAmount");
-//	Actions.Delete("CalculateTaxByNetAmount");
-//
-//	Settings.Insert("Actions", Actions);
-//	Rows = New Array();
-//	Rows.Add(CurrentData);
-//	Settings.Insert("Rows", Rows);
-//	CalculateItemsRows(Object, Form, Settings);
 EndProcedure
 
-// [NEW CODE]
 Procedure ItemListTotalAmountPutServerDataToAddInfo(Object, Form, CurrentData, AddInfo = Undefined) Export
 	DocumentsClient.ItemListTotalAmountPutServerDataToAddInfo(Object, Form, CurrentData, AddInfo);
 EndProcedure
-//--
-
-//Function GetCalculateRowsActions() Export
-//	Actions = New Structure();
-//	Actions.Insert("CalculateTaxByTotalAmount");
-//	Actions.Insert("CalculateTaxByNetAmount");
-//	Actions.Insert("CalculateTotalAmountByNetAmount");
-//	Actions.Insert("CalculateNetAmountByTotalAmount");
-//	Return Actions;
-//EndFunction
 
 Procedure CalculateItemsRows(Object, Form, Settings, Item = Undefined, AddInfo = Undefined) Export
-	// [NEW CODE]
 	ArrayOfTaxInfo = TaxesClient.GetArrayOfTaxInfoFromServerData(Object, Form, AddInfo);
 	CalculationStringsClientServer.CalculateItemsRows(Object, Form, Settings.Rows, Settings.CalculateSettings, 
 		ArrayOfTaxInfo, AddInfo);
-	//--
-
-//	CalculationStringsClientServer.CalculateItemsRows(Object, Form, Settings.Rows, Settings.Actions,
-//		TaxesClient.GetArrayOfTaxInfo(Form));
 EndProcedure
-
-//Function GetArrayOfTaxInfo(Form) Export
-//	SavedData = TaxesClientServer.GetSavedData(Form, TaxesServer.GetAttributeNames().CacheName);
-//	If SavedData.Property("ArrayOfColumnsInfo") Then
-//		Return SavedData.ArrayOfColumnsInfo;
-//	EndIf;
-//	Return New Array();
-//EndFunction
 
 Function CurrencySettings(Object, Form, AddInfo = Undefined) Export
 	Return New Structure();
 EndFunction
 
-// [NEW CODE]
 #Region ProfitLossCenter
 
 Procedure PaymentListProfitLossCenterOnChange(Object, Form, Item = Undefined, CurrentRowData = Undefined, AddInfo = Undefined) Export
@@ -411,8 +308,6 @@ Function PaymentListProfitLossCenterSettings(Object, Form, AddInfo = Undefined) 
 EndFunction
 
 #EndRegion
-
-//--
 
 #Region FinancialMovementType
 

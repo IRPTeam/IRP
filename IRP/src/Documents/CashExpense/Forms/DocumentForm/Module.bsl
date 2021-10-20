@@ -11,8 +11,6 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 		SetVisibilityAvailability(Object, ThisObject);
 	EndIf;
 	DocCashExpenseRevenueServer.OnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);
-//	Taxes_CreateFormControls();
-//	Taxes_CreateTaxTree();
 EndProcedure
 
 &AtServer
@@ -33,10 +31,6 @@ EndProcedure
 
 &AtClient
 Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefined) Export
-//	If EventName = "CalculateTaxByNetAmount" Or EventName = "CalculateTaxByTotalAmount" Or EventName = "CalculateTax" Then
-//		Taxes_CreateTaxTree();
-//		TaxesClient.ExpandTaxTree(ThisObject.Items.TaxTree, ThisObject.TaxTree.GetItems());
-//	EndIf;
 	If EventName = "UpdateAddAttributeAndPropertySets" Then
 		AddAttributesCreateFormControl();
 	EndIf;
@@ -45,7 +39,6 @@ EndProcedure
 &AtServer
 Procedure AfterWriteAtServer(CurrentObject, WriteParameters, AddInfo = Undefined) Export
 	DocCashExpenseRevenueServer.AfterWriteAtServer(Object, ThisObject, CurrentObject, WriteParameters);
-//	Taxes_CreateFormControls();
 	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
@@ -153,12 +146,10 @@ Procedure PaymentListFinancialMovementTypeEditTextChange(Item, Text, StandardPro
 		StandardProcessing);
 EndProcedure
 
-// [NEW CODE]
 &AtClient
 Procedure PaymentListProfitLossCenterOnChange(Item)
 	DocCashExpenseRevenueClient.PaymentListProfitLossCenterOnChange(Object, ThisObject, Item);
 EndProcedure
-//--
 
 &AtClient
 Procedure DescriptionClick(Item, StandardProcessing)
@@ -170,94 +161,18 @@ EndProcedure
 #Region Taxes
 &AtClient
 Procedure TaxValueOnChange(Item) Export
-
-	// [NEW CODE]
 	DocCashExpenseRevenueClient.ItemListTaxValueOnChange(Object, ThisObject, Item);
-	//--
-
-//	CurrentData = Items.PaymentList.CurrentData;
-//	If CurrentData = Undefined Then
-//		Return;
-//	EndIf;
-//	PutToTaxTable_(Item.Name, CurrentData.Key, CurrentData[Item.Name]);
-//
-//	Settings = New Structure();
-//	Settings.Insert("Rows", New Array());
-//	Settings.Insert("CalculateSettings");
-//	Settings.CalculateSettings = New Structure("CalculateTax, CalculateTotalAmount, CalculateNetAmount");
-//	Settings.Rows.Add(CurrentData);
-//	DocumentsClient.ItemListCalculateRowsAmounts(Object, ThisObject, Settings);
 EndProcedure
-
-//&AtServer
-//Procedure PutToTaxTable_(ItemName, Key, Value)
-//	TaxesServer.PutToTaxTableByColumnName(ThisObject, Key, ItemName, Value);
-//EndProcedure
-
-//&AtClient
-//Procedure TaxTreeBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
-//	Cancel = True;
-//EndProcedure
-
-//&AtClient
-//Procedure TaxTreeOnChange(Item)
-//	CurrentData = Items.TaxTree.CurrentData;
-//	If CurrentData = Undefined Then
-//		Return;
-//	EndIf;
-//	Filter = TaxesClient.ChangeTaxAmount(Object, ThisObject, CurrentData, Object.PaymentList,
-//		TaxesClient.GetCalculateRowsActions());
-//	Taxes_CreateTaxTree();
-//	TaxesClient.ExpandTaxTree(ThisObject.Items.TaxTree, ThisObject.TaxTree.GetItems());
-//	ThisObject.Items.TaxTree.CurrentRow = TaxesClient.FindRowInTree(Filter, ThisObject.TaxTree);
-//EndProcedure
-
-//&AtClient
-//Procedure TaxTreeBeforeDeleteRow(Item, Cancel)
-//	Cancel = True;
-//EndProcedure
 
 &AtServer
 Function Taxes_CreateFormControls(AddInfo = Undefined) Export
-//Procedure Taxes_CreateFormControls() Export
-	
-	// [NEW CODE]
 	Return TaxesServer.CreateFormControls_PaymentList(Object, ThisObject, AddInfo);
-	//--
-	//
-//	TaxesParameters = TaxesServer.GetCreateFormControlsParameters();
-//	TaxesParameters.Date = Object.Date;
-//	TaxesParameters.Company = Object.Company;
-//	TaxesParameters.PathToTable = "Object.PaymentList";
-//	TaxesParameters.ItemParent = ThisObject.Items.PaymentList;
-//	TaxesParameters.ColumnOffset = ThisObject.Items.PaymentListNetAmount;
-//	TaxesParameters.ItemListName = "PaymentList";
-//	TaxesParameters.TaxListName = "TaxList";
-//	TaxesServer.CreateFormControls(Object, ThisObject, TaxesParameters);
-//EndProcedure
 EndFunction
 
 &AtClient
 Procedure PaymentListTaxAmountOnChange(Item)
-	// [NEW CODE]
 	DocCashExpenseRevenueClient.ItemListTaxAmountOnChange(Object, ThisObject, Item);
-	//--
 EndProcedure
-
-
-//&AtServer
-//Procedure Taxes_CreateTaxTree() Export
-//	TaxesTreeParameters = TaxesServer.GetCreateTaxTreeParameters();
-//	TaxesTreeParameters.MetadataMainList = Metadata.Documents.CashExpense.TabularSections.PaymentList;
-//	TaxesTreeParameters.MetadataTaxList = Metadata.Documents.CashExpense.TabularSections.TaxList;
-//	TaxesTreeParameters.ObjectMainList = Object.PaymentList;
-//	TaxesTreeParameters.ObjectTaxList = Object.TaxList;
-//	TaxesTreeParameters.MainListColumns = "Key, ProfitLossCenter, ExpenseType, Currency";
-//	TaxesTreeParameters.Level1Columns = "Tax, Currency";
-//	TaxesTreeParameters.Level2Columns = "Key, ProfitLossCenter, ExpenseType, TaxRate";
-//	TaxesTreeParameters.Level3Columns = "Key, Analytics";
-//	TaxesServer.CreateTaxTree(Object, ThisObject, TaxesTreeParameters);
-//EndProcedure
 
 #EndRegion
 

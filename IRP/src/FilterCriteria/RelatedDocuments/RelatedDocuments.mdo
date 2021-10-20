@@ -49,8 +49,6 @@
   <content>Document.StockAdjustmentAsSurplus.TabularSection.ItemList.Attribute.BasisDocument</content>
   <content>Document.RetailSalesReceipt.Attribute.BasisDocument</content>
   <content>Document.RetailReturnReceipt.TabularSection.ItemList.Attribute.RetailSalesReceipt</content>
-  <content>Document.CreditNote.TabularSection.Transactions.Attribute.BasisDocument</content>
-  <content>Document.DebitNote.TabularSection.Transactions.Attribute.BasisDocument</content>
   <content>Document.SalesInvoice.TabularSection.ShipmentConfirmations.Attribute.ShipmentConfirmation</content>
   <content>Document.PurchaseInvoice.TabularSection.GoodsReceipts.Attribute.GoodsReceipt</content>
   <content>Document.InventoryTransferOrder.TabularSection.ItemList.Attribute.PurchaseOrder</content>

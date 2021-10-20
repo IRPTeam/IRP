@@ -211,7 +211,6 @@ Scenario: _154509 message when trying to re-create Sales invoice based on Shipme
 		When adding the items to the sales order (Dress and Trousers)
 		And I move to "Other" tab
 		And I expand "More" group
-		And I set checkbox "Shipment confirmations before sales invoice"
 		And I click the button named "FormPost"
 		And I delete "$$NumberSalesOrder154503$$" variable
 		And I delete "$$SalesOrder154503$$" variable
@@ -335,7 +334,6 @@ Scenario: _154510 message when trying to re-create Purchase invoice based on Goo
 			And I finish line editing in "ItemList" table
 			And I move to "Other" tab
 			And I expand "More" group
-			And I set checkbox "Goods receipt before purchase invoice"
 		And I click the button named "FormPost"
 		And I delete "$$NumberPurchaseOrder154505$$" variable
 		And I delete "$$PurchaseOrder154505$$" variable
@@ -485,7 +483,6 @@ Scenario: _154514 message when trying to re-create Goods receipt based on Purcha
 			And I finish line editing in "ItemList" table
 			And I move to "Other" tab
 			And I expand "More" group
-			And I set checkbox "Goods receipt before purchase invoice"
 		And I click the button named "FormPost"
 		And I delete "$$NumberPurchaseOrder154506$$" variable
 		And I delete "$$PurchaseOrder154506$$" variable
@@ -572,7 +569,6 @@ Scenario: _154518 message when trying to re-create Shipment confirmation based o
 	* Change the document number
 		And I move to "Other" tab
 		And I expand "More" group
-		And I set checkbox "Shipment confirmations before sales invoice"
 		And I click the button named "FormPost"
 		And I delete "$$NumberSalesOrder154507$$" variable
 		And I delete "$$SalesOrder154507$$" variable
@@ -1101,9 +1097,6 @@ Scenario: _015450 check message output for SO when trying to create a purchase o
 		* Change of document status
 			And I select "Approved" exact value from "Status" drop-down list
 			And I click the button named "FormPost"
-		* Check a tick 'Shipment confirmations before sales invoice'
-			And I set checkbox "Shipment confirmations before sales invoice"
-			And I click the button named "FormPost"
 		* Create SC for string with procurement method Stock
 			And I click the button named "FormDocumentShipmentConfirmationGenerate"
 			And I click "Ok" button
@@ -1144,7 +1137,6 @@ Scenario: _015450 check message output for SO when trying to create a purchase o
 				| 'Item'     | 'Item key'  |
 				| 'Trousers' | '38/Yellow' |
 			And I move to "Other" tab
-			And I set checkbox "Goods receipt before purchase invoice"
 			And I click the button named "FormPost"
 			And I delete "$$NumberPurchaseOrder0154513$$" variable
 			And I delete "$$PurchaseOrder0154513$$" variable

@@ -330,12 +330,13 @@ Scenario: _0154135 create document Retail Sales Receipt
 			And I finish line editing in "Payments" table			
 		* Check filling in currency tab
 			And I click "Save" button
-			And I move to the tab named "GroupCurrencies"
-			And "ObjectCurrencies" table became equal
-			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
-			| 'TRY'                | 'Partner term' | 'TRY'           | 'TRY'      | '1'                 | '1 770'  | '1'            |
-			| 'Local currency'     | 'Legal'     | 'TRY'           | 'TRY'      | '1'                 | '1 770'  | '1'            |
-			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,1712'            | '303,02' | '1'            |
+			And in the table "ItemList" I click "Edit currencies" button
+			And "CurrenciesTable" table became equal
+				| 'Movement type'      | 'Type'         | 'To'  | 'From' | 'Multiplicity' | 'Rate'   | 'Amount' |
+				| 'Reporting currency' | 'Reporting'    | 'USD' | 'TRY'  | '1'            | '0,1712' | '303,02' |
+				| 'Local currency'     | 'Legal'        | 'TRY' | 'TRY'  | '1'            | '1'      | '1 770'  |
+				| 'TRY'                | 'Partner term' | 'TRY' | 'TRY'  | '1'            | '1'      | '1 770'  |
+			And I close current window
 		* Post Retail sales receipt
 			And I delete "$$NumberRetailSalesReceipt0154135$$" variable
 			And I delete "$$RetailSalesReceipt015413$$" variable
@@ -2286,12 +2287,13 @@ Scenario: _0154154 check filling in and refilling Retail return receipt
 			| '520,00' | 'Dress' | '18%' | 'XS/Blue'  | '1,000' | 'pcs'  | 'No'                 | '79,32'      | '440,68'     | '520,00'       | 'Store 01' |
 		* Check filling in currency tab
 			And I click "Save" button
-			And I move to the tab named "GroupCurrencies"
-			And "ObjectCurrencies" table became equal
-			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
-			| 'TRY'                | 'Partner term' | 'TRY'           | 'TRY'      | '1'                 | '1 770'  | '1'            |
-			| 'Local currency'     | 'Legal'     | 'TRY'           | 'TRY'      | '1'                 | '1 770'  | '1'            |
-			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,1712'            | '303,02' | '1'            |
+			And in the table "ItemList" I click "Edit currencies" button
+			And "CurrenciesTable" table became equal
+				| 'Movement type'      | 'Type'         | 'To'  | 'From' | 'Multiplicity' | 'Rate'   | 'Amount' |
+				| 'Reporting currency' | 'Reporting'    | 'USD' | 'TRY'  | '1'            | '0,1712' | '303,02' |
+				| 'Local currency'     | 'Legal'        | 'TRY' | 'TRY'  | '1'            | '1'      | '1 770'  |
+				| 'TRY'                | 'Partner term' | 'TRY' | 'TRY'  | '1'            | '1'      | '1 770'  |
+			And I close current window
 		* Check recalculate Total amount and Net amount when change Tax rate
 			* Price includes tax
 				And I move to "Item list" tab
@@ -2627,12 +2629,13 @@ Scenario: _0154155 check filling in and refilling Retail sales receipt
 			And I input "1 770,00" text in "Amount" field of "Payments" table
 		* Check filling in currency tab
 			And I click "Save" button
-			And I move to the tab named "GroupCurrencies"
-			And "ObjectCurrencies" table became equal
-			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
-			| 'TRY'                | 'Partner term' | 'TRY'           | 'TRY'      | '1'                 | '1 770'  | '1'            |
-			| 'Local currency'     | 'Legal'     | 'TRY'           | 'TRY'      | '1'                 | '1 770'  | '1'            |
-			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,1712'            | '303,02' | '1'            |
+			And in the table "ItemList" I click "Edit currencies" button
+			And "CurrenciesTable" table became equal
+				| 'Movement type'      | 'Type'         | 'To'  | 'From' | 'Multiplicity' | 'Rate'   | 'Amount' |
+				| 'Reporting currency' | 'Reporting'    | 'USD' | 'TRY'  | '1'            | '0,1712' | '303,02' |
+				| 'Local currency'     | 'Legal'        | 'TRY' | 'TRY'  | '1'            | '1'      | '1 770'  |
+				| 'TRY'                | 'Partner term' | 'TRY' | 'TRY'  | '1'            | '1'      | '1 770'  |
+			And I close current window
 		* Check recalculate Total amount and Net amount when change Tax rate
 			* Price includes tax
 				And I move to "Item list" tab
@@ -2780,14 +2783,13 @@ Scenario: _0154156 check Retail sales receipt when changing date
 		| 'Sale autum, TRY'               |
 		And I close "Partner terms" window
 	* Check the recount of the currency table when the date is changed
-		And I move to the tab named "GroupCurrencies"
-		And "ObjectCurrencies" table became equal
-		| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
-		| 'TRY'                | 'Partner term' | 'TRY'           | 'TRY'      | '1'                 | '1 000'  | '1'            |
-		| 'Local currency'     | 'Legal'     | 'TRY'           | 'TRY'      | '1'                 | '1 000'  | '1'            |
-		| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,2000'            | '200,00' | '1'            |
-
-
+		And in the table "ItemList" I click "Edit currencies" button
+		And "CurrenciesTable" table became equal
+			| 'Movement type'      | 'Type'         | 'To'  | 'From' | 'Multiplicity' | 'Rate'   | 'Amount' |
+			| 'Reporting currency' | 'Reporting'    | 'USD' | 'TRY'  | '1'            | '0,2000' | '200,00' |
+			| 'Local currency'     | 'Legal'        | 'TRY' | 'TRY'  | '1'            | '1'      | '1 000'  |
+			| 'TRY'                | 'Partner term' | 'TRY' | 'TRY'  | '1'            | '1'      | '1 000'  |
+		
 
 Scenario: _0154158 check function DontCalculateRow in the Retail sales receipt
 	* Open the Retail sales receipt creation form
@@ -3534,11 +3536,13 @@ Scenario: _0154190 check filling in Retail sales receipt when copying
 		And "Payments" table became equal
 			| 'Amount' | 'Commission' | 'Payment type' | 'Payment terminal' | 'Bank term' | 'Account'      | 'Percent' |
 			| '520,00' | ''           | 'Cash'         | ''                 | ''          | 'Cash desk №2' | ''        |
-		And "ObjectCurrencies" table became equal
-			| 'Movement type'      | 'Type'         | 'Currency from' | 'Currency' | 'Rate presentation' | 'Multiplicity' | 'Amount' |
-			| 'TRY'                | 'Partner term' | 'TRY'           | 'TRY'      | '1'                 | '1'            | '520'    |
-			| 'Local currency'     | 'Legal'        | 'TRY'           | 'TRY'      | '1'                 | '1'            | '520'    |
-			| 'Reporting currency' | 'Reporting'    | 'TRY'           | 'USD'      | '0,1712'            | '1'            | '89,02'  |
+		And in the table "ItemList" I click "Edit currencies" button
+		And "CurrenciesTable" table became equal
+			| 'Movement type'      | 'Type'         | 'To'  | 'From' | 'Multiplicity' | 'Rate'   | 'Amount' |
+			| 'Reporting currency' | 'Reporting'    | 'USD' | 'TRY'  | '1'            | '0,1712' | '89,02'  |
+			| 'Local currency'     | 'Legal'        | 'TRY' | 'TRY'  | '1'            | '1'      | '520'    |
+			| 'TRY'                | 'Partner term' | 'TRY' | 'TRY'  | '1'            | '1'      | '520'    |	
+		And I close current window
 		Then the form attribute named "Branch" became equal to "Shop 01"
 		Then the form attribute named "Author" became equal to "CI"
 		Then the form attribute named "PriceIncludeTax" became equal to "Yes"

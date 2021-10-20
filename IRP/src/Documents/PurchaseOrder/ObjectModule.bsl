@@ -3,8 +3,11 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 		Return;
 	EndIf;
 
-	ThisObject.DocumentAmount = CalculationServer.CalculateDocumentAmount(ItemList);
+	Parameters = CurrenciesClientServer.GetParameters_V3(ThisObject);
+	CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies);
+	CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
 
+	ThisObject.DocumentAmount = CalculationServer.CalculateDocumentAmount(ItemList);
 EndProcedure
 
 Procedure OnWrite(Cancel)

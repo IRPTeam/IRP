@@ -2,11 +2,10 @@
 
 Procedure OnOpen(Object, Form, Cancel, AddInfo = Undefined) Export
 	DocumentsClient.SetTextOfDescriptionAtForm(Object, Form);
-	CurrenciesClient.OnOpen(Object, Form, AddInfo);
 EndProcedure
 
 Procedure AfterWriteAtClient(Object, Form, WriteParameters, AddInfo = Undefined) Export
-	CurrenciesClient.AfterWriteAtClient(Object, Form, "Transactions", AddInfo);
+	Return;
 EndProcedure
 
 #EndRegion
@@ -15,7 +14,6 @@ EndProcedure
 
 Procedure DateOnChange(Object, Form, Item, AddInfo = Undefined) Export
 	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
-	CurrenciesClient.DateOnChange(Object, Form, "Transactions", AddInfo);
 EndProcedure
 
 #EndRegion
@@ -24,7 +22,6 @@ EndProcedure
 
 Procedure CompanyOnChange(Object, Form, Item, AddInfo = Undefined) Export
 	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
-	CurrenciesClient.CompanyOnChange(Object, Form, "Transactions", AddInfo);
 EndProcedure
 
 Procedure CompanyStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
@@ -108,17 +105,10 @@ Procedure TransactionsAgreementOnChange(Object, Form, Item, AddInfo = Undefined)
 	EndIf;
 	AgreementInfo = CatAgreementsServer.GetAgreementInfo(CurrentData.Agreement);
 
-	If AgreementInfo.ApArPostingDetail <> PredefinedValue("Enum.ApArPostingDetail.ByDocuments")
-		Or CurrentData.Agreement <> ServiceSystemServer.GetCompositeObjectAttribute(CurrentData.BasisDocument,
-		"Agreement") Then
-		CurrentData.BasisDocument = Undefined;
-	EndIf;
-
 	If CurrentData.Currency <> AgreementInfo.Currency Then
 		CurrentData.Currency = AgreementInfo.Currency;
 		TransactionsCurrencyOnChange(Object, Form, Undefined);
 	EndIf;
-	CurrenciesClient.AgreementOnChange(Object, Form, "Transactions", AddInfo);
 	DocCreditDebitNoteClientServer.SetBasisDocumentReadOnly(Object, CurrentData);
 EndProcedure
 
@@ -221,7 +211,7 @@ EndProcedure
 
 &AtClient
 Procedure TransactionsCurrencyOnChange(Object, Form, Item, AddInfo = Undefined) Export
-	CurrenciesClient.CurrencyOnChange(Object, Form, "Transactions", AddInfo);
+	Return;
 EndProcedure
 
 #EndRegion
@@ -230,7 +220,7 @@ EndProcedure
 
 &AtClient
 Procedure TransactionsAmountOnChange(Object, Form, Item, AddInfo = Undefined) Export
-	CurrenciesClient.AmountOnChange(Object, Form, "Transactions", AddInfo);
+	Return;
 EndProcedure
 
 #EndRegion
@@ -238,11 +228,11 @@ EndProcedure
 #Region Transactions
 
 Procedure TransactionsBeforeDeleteRow(Object, Form, Item, Cancel, AddInfo = Undefined) Export
-	CurrenciesClient.BeforeDeleteRow(Object, Form, "Transactions", AddInfo);
+	Return;
 EndProcedure
 
 Procedure TransactionsOnActivateRow(Object, Form, Item, AddInfo = Undefined) Export
-	CurrenciesClient.OnActivateRow(Object, Form, "Transactions", AddInfo);
+	Return;
 EndProcedure
 
 #Region ExpenseType

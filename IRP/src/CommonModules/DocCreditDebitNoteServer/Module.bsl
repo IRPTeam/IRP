@@ -11,7 +11,6 @@ EndProcedure
 
 Procedure AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters) Export
 	DocumentsClientServer.ChangeTitleGroupTitle(CurrentObject, Form);
-	CurrenciesServer.UpdateRatePresentation(Object);
 	DocCreditDebitNoteClientServer.SetBasisDocumentReadOnly(Object, Undefined);
 EndProcedure
 

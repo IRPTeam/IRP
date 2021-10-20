@@ -3,47 +3,6 @@
 	<item>
 		<selection>
 			<item>
-				<field>CurrenciesPaymentListMovementType</field>
-			</item>
-			<item>
-				<field>CurrenciesPaymentListMovementTypeType</field>
-			</item>
-			<item>
-				<field>CurrenciesPaymentListCurrencyFrom</field>
-			</item>
-			<item>
-				<field>CurrenciesPaymentListMovementTypeCurrency</field>
-			</item>
-			<item>
-				<field>CurrenciesPaymentListShowReverseRate</field>
-			</item>
-			<item>
-				<field>CurrenciesPaymentListRatePresentation</field>
-			</item>
-			<item>
-				<field>CurrenciesPaymentListMultiplicity</field>
-			</item>
-			<item>
-				<field>CurrenciesPaymentListAmount</field>
-			</item>
-		</selection>
-		<filter>
-			<item xsi:type="FilterItemComparison">
-				<left xsi:type="dcscor:Field">Object.Currencies.IsVisible</left>
-				<comparisonType>Equal</comparisonType>
-				<right xsi:type="xs:boolean">false</right>
-			</item>
-		</filter>
-		<appearance>
-			<dcscor:item xsi:type="SettingsParameterValue">
-				<dcscor:parameter>Visible</dcscor:parameter>
-				<dcscor:value xsi:type="xs:boolean">false</dcscor:value>
-			</dcscor:item>
-		</appearance>
-	</item>
-	<item>
-		<selection>
-			<item>
 				<field>PaymentListBasisDocument</field>
 			</item>
 		</selection>

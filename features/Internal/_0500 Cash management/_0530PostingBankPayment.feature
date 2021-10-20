@@ -95,9 +95,13 @@ Scenario: _053001 create Bank payment based on Purchase invoice
 		And "PaymentList" table contains lines
 			| 'Partner'   | 'Payee'             | 'Partner term'          | 'Amount'     | 'Basis document'      |
 			| 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | '136 000,00' | '$$PurchaseInvoice018001$$' |
-		And "PaymentListCurrencies" table contains lines
-			| 'Movement type'      | 'Amount'    | 'Multiplicity' |
-			| 'Reporting currency' | '23 283,20' | '1'            |
+		And in the table "PaymentList" I click "Edit currencies" button
+		And "CurrenciesTable" table became equal
+			| 'Movement type'      | 'Type'         | 'To'  | 'From' | 'Multiplicity' | 'Rate'   | 'Amount'    |
+			| 'Reporting currency' | 'Reporting'    | 'USD' | 'TRY'  | '1'            | '0,1712' | '23 283,20' |
+			| 'Local currency'     | 'Legal'        | 'TRY' | 'TRY'  | '1'            | '1'      | '136 000'   |
+			| 'TRY'                | 'Partner term' | 'TRY' | 'TRY'  | '1'            | '1'      | '136 000'   |
+		And I close current window
 	* Data overflow check
 		And I click Select button of "Account" field
 		And I go to line in "List" table
@@ -110,9 +114,13 @@ Scenario: _053001 create Bank payment based on Purchase invoice
 		And "PaymentList" table contains lines
 			| 'Partner'   | 'Payee'             | 'Partner term'          | 'Amount'     | 'Basis document'      |
 			| 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | '136 000,00' | '$$PurchaseInvoice018001$$' |
-		And "PaymentListCurrencies" table contains lines
-			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount'    | 'Multiplicity' |
-			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,1712'            | '23 283,20' | '1'            |
+		And in the table "PaymentList" I click "Edit currencies" button
+		And "CurrenciesTable" table became equal
+			| 'Movement type'      | 'Type'         | 'To'  | 'From' | 'Multiplicity' | 'Rate'   | 'Amount'    |
+			| 'Reporting currency' | 'Reporting'    | 'USD' | 'TRY'  | '1'            | '0,1712' | '23 283,20' |
+			| 'Local currency'     | 'Legal'        | 'TRY' | 'TRY'  | '1'            | '1'      | '136 000'   |
+			| 'TRY'                | 'Partner term' | 'TRY' | 'TRY'  | '1'            | '1'      | '136 000'   |
+		And I close current window
 	* Check calculation Document amount
 		Then the form attribute named "DocumentAmount" became equal to "136 000,00"
 	* Change in basis document

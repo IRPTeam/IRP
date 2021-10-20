@@ -169,6 +169,7 @@
   <commonPictures>CommonPicture.Store</commonPictures>
   <commonPictures>CommonPicture.Total</commonPictures>
   <commonPictures>CommonPicture.Unlock</commonPictures>
+  <commonPictures>CommonPicture.EditCurrencies</commonPictures>
   <sessionParameters>SessionParameter.ClientType</sessionParameters>
   <sessionParameters>SessionParameter.ConnectedAddDataProc</sessionParameters>
   <sessionParameters>SessionParameter.ConnectionSettings</sessionParameters>
@@ -347,7 +348,6 @@
   <commonModules>CommonModule.IntegrationServerReuse</commonModules>
   <commonModules>CommonModule.JorDocumentsClient</commonModules>
   <commonModules>CommonModule.JorDocumentsServer</commonModules>
-  <commonModules>CommonModule.LibraryLoader</commonModules>
   <commonModules>CommonModule.Localization</commonModules>
   <commonModules>CommonModule.LocalizationClient</commonModules>
   <commonModules>CommonModule.LocalizationClientServer</commonModules>
@@ -514,6 +514,8 @@
   <commonForms>CommonForm.AddLinkedDocumentRows</commonForms>
   <commonForms>CommonForm.AttachFile</commonForms>
   <commonForms>CommonForm.InfoLinkedDocumentRows</commonForms>
+  <commonForms>CommonForm.EditCurrencies</commonForms>
+  <commonForms>CommonForm.EditHiddenTables</commonForms>
   <catalogs>Catalog.AccessGroups</catalogs>
   <catalogs>Catalog.AccessProfiles</catalogs>
   <catalogs>Catalog.AddAttributeAndPropertySets</catalogs>
@@ -628,7 +630,6 @@
   <documents>Document.VendorsAdvancesClosing</documents>
   <documentJournals>DocumentJournal.DocumentsForIncomingPayment</documentJournals>
   <documentJournals>DocumentJournal.DocumentsForOutgoingPayment</documentJournals>
-  <documentJournals>DocumentJournal.DocumentsForCreditDebitNote</documentJournals>
   <documentJournals>DocumentJournal.AllDocuments</documentJournals>
   <enums>Enum.AgreementKinds</enums>
   <enums>Enum.AgreementTypes</enums>

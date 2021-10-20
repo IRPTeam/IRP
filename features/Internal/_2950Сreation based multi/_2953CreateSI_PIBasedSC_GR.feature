@@ -93,7 +93,6 @@ Scenario: _090501 creation of Sales invoice based on Shipment confirmation (one 
 		And I finish line editing in "ItemList" table
 		And I move to "Other" tab
 		And I expand "More" group
-		And I set checkbox "Shipment confirmations before sales invoice"
 		And I click Choice button of the field named "Store"
 		And I go to line in "List" table
 			| 'Description' |
@@ -160,7 +159,6 @@ Scenario: _090502 create a purchase invoice based on Goods receipt (one to one)
 		And I click the button named "FormPost"
 		And I move to "Other" tab
 		And I expand "More" group
-		And I set checkbox "Goods receipt before purchase invoice"
 		And I click the button named "FormPost"
 		And I click the button named "FormDocumentGoodsReceiptGenerate"	
 		And I click "Ok" button
@@ -205,7 +203,6 @@ Scenario: _090503 create Sales invoice based on several Shipment confirmation
 		And I finish line editing in "ItemList" table
 		And I move to "Other" tab
 		And I expand "More" group
-		And I set checkbox "Shipment confirmations before sales invoice"
 		And I click Choice button of the field named "Store"
 		And I go to line in "List" table
 			| 'Description' |
@@ -252,7 +249,6 @@ Scenario: _090503 create Sales invoice based on several Shipment confirmation
 		And I finish line editing in "ItemList" table
 		And I move to "Other" tab
 		And I expand "More" group
-		And I set checkbox "Shipment confirmations before sales invoice"
 		And I click Choice button of the field named "Store"
 		And I go to line in "List" table
 			| 'Description' |
@@ -304,7 +300,6 @@ Scenario: _090503 create Sales invoice based on several Shipment confirmation
 		And I finish line editing in "ItemList" table
 		And I move to "Other" tab
 		And I expand "More" group
-		And I set checkbox "Shipment confirmations before sales invoice"
 		And I click Choice button of the field named "Store"
 		And I go to line in "List" table
 			| 'Description' |
@@ -410,7 +405,6 @@ Scenario: _090504 create Purchase invoice based on several Goods receipt
 		And I click the button named "FormPost"
 		And I move to "Other" tab
 		And I expand "More" group
-		And I set checkbox "Goods receipt before purchase invoice"
 		* Change the document number to 2023
 			And I input "2023" text in "Number" field
 			Then "1C:Enterprise" window is opened
@@ -469,7 +463,6 @@ Scenario: _090504 create Purchase invoice based on several Goods receipt
 		And I click the button named "FormPost"
 		And I move to "Other" tab
 		And I expand "More" group
-		And I set checkbox "Goods receipt before purchase invoice"
 		* Change the document number to 2024
 			And I input "2024" text in "Number" field
 			Then "1C:Enterprise" window is opened
@@ -528,7 +521,6 @@ Scenario: _090504 create Purchase invoice based on several Goods receipt
 		And I click the button named "FormPost"
 		And I move to "Other" tab
 		And I expand "More" group
-		And I set checkbox "Goods receipt before purchase invoice"
 		* Change the document number to 2025
 			And I input "2025" text in "Number" field
 			Then "1C:Enterprise" window is opened
@@ -616,7 +608,6 @@ Scenario: _090505 creation of Sales invoice based on several Shipment confirmati
 		And I finish line editing in "ItemList" table
 		And I move to "Other" tab
 		And I expand "More" group
-		And I set checkbox "Shipment confirmations before sales invoice"
 		And I click the button named "FormPost"
 		And I click the button named "FormDocumentShipmentConfirmationGenerate"
 		And I click "OK" button
@@ -656,7 +647,6 @@ Scenario: _090505 creation of Sales invoice based on several Shipment confirmati
 		And I finish line editing in "ItemList" table
 		And I move to "Other" tab
 		And I expand "More" group
-		And I set checkbox "Shipment confirmations before sales invoice"
 		And I click Choice button of the field named "Store"
 		And I go to line in "List" table
 			| 'Description' |
@@ -769,7 +759,6 @@ Scenario: _090506 create Purchase invoice based on several Goods receipt
 		And I click the button named "FormPost"
 		And I move to "Other" tab
 		And I expand "More" group
-		And I set checkbox "Goods receipt before purchase invoice"
 		And I click the button named "FormPost"
 		And I click the button named "FormDocumentGoodsReceiptGenerate"	
 		And I click "Ok" button
@@ -823,7 +812,6 @@ Scenario: _090506 create Purchase invoice based on several Goods receipt
 		And I click the button named "FormPost"
 		And I move to "Other" tab
 		And I expand "More" group
-		And I set checkbox "Goods receipt before purchase invoice"
 		And I click the button named "FormPost"
 		And I click the button named "FormDocumentGoodsReceiptGenerate"	
 		And I click "Ok" button

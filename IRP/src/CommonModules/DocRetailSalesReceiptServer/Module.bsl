@@ -11,8 +11,6 @@ Procedure AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters) Expor
 	DocumentsClientServer.FillStores(ObjectData, Form);
 
 	DocumentsClientServer.ChangeTitleGroupTitle(CurrentObject, Form);
-	CurrenciesServer.UpdateRatePresentation(Object);
-	CurrenciesServer.SetVisibleCurrenciesRow(Object, Undefined, True);
 	Form.Taxes_CreateFormControls();
 	RowIDInfoServer.AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters);
 EndProcedure
@@ -52,7 +50,7 @@ Procedure CalculateTableAtServer(Form, Object) Export
 		If ValueIsFilled(Object.Agreement) Then
 
 			CalculationSettings = CalculationStringsClientServer.GetCalculationSettings();
-			PriceDate = CalculationStringsClientServer.GetPriceDateByRefAndDate(Object.Ref, Object.Date);
+			PriceDate = CalculationStringsClientServer.GetSliceLastDateByRefAndDate(Object.Ref, Object.Date);
 			CalculationSettings.Insert("UpdatePrice", New Structure("Period, PriceType", PriceDate,
 				Object.Agreement.PriceType));
 
@@ -88,8 +86,6 @@ Procedure OnReadAtServer(Object, Form, CurrentObject) Export
 		SetGroupItemsList(Object, Form);
 	EndIf;
 	DocumentsClientServer.ChangeTitleGroupTitle(CurrentObject, Form);
-	CurrenciesServer.UpdateRatePresentation(Object);
-	CurrenciesServer.SetVisibleCurrenciesRow(Object, Undefined, True);
 	Form.Taxes_CreateFormControls();
 	RowIDInfoServer.OnReadAtServer(Object, Form, CurrentObject);
 EndProcedure

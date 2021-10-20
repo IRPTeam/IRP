@@ -32,23 +32,12 @@ Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefin
 
 	DocPurchaseOrderClient.NotificationProcessing(Object, ThisObject, EventName, Parameter, Source);
 
-	ServerData = Undefined;
-	If TypeOf(Parameter) = Type("Structure") And Parameter.Property("AddInfo") Then
-		ServerData = CommonFunctionsClientServer.GetFromAddInfo(Parameter.AddInfo, "ServerData");
-	EndIf;
-
 	If EventName = "NewBarcode" And IsInputAvailable() Then
 		SearchByBarcode(Undefined, Parameter);
 	EndIf;
-
+	
 	If Upper(EventName) = Upper("CallbackHandler") Then
 		UpdateTotalAmounts();
-		CurrenciesClient.CalculateAmount(Object, ThisObject);
-		CurrenciesClient.SetRatePresentation(Object, ThisObject);
-
-		If ServerData <> Undefined Then
-			CurrenciesClient.SetVisibleRows(Object, ThisObject, Parameter.AddInfo);
-		EndIf;
 	EndIf;
 EndProcedure
 
@@ -88,8 +77,13 @@ Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
 	AddAttributesAndPropertiesServer.BeforeWriteAtServer(ThisObject, Cancel, CurrentObject, WriteParameters);
 EndProcedure
 
+&AtClient
+Procedure FormSetVisibilityAvailability() Export
+	SetVisibilityAvailability(Object, ThisObject);
+EndProcedure
+
 &AtClientAtServerNoContext
-Procedure SetVisibilityAvailability(Object, Form) Export
+Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.AddBasisDocuments.Enabled = Not Form.ReadOnly;
 	Form.Items.LinkUnlinkBasisDocuments.Enabled = Not Form.ReadOnly;
 
@@ -98,6 +92,7 @@ Procedure SetVisibilityAvailability(Object, Form) Export
 		Form.ReadOnly = True;
 	EndIf;
 	Form.Items.GroupHead.Visible = Not Form.ClosingOrder.IsEmpty();
+	Form.Items.EditCurrencies.Enabled = Not Form.ReadOnly;
 EndProcedure
 
 &AtClient
@@ -522,40 +517,6 @@ EndProcedure
 
 #EndRegion
 
-#Region Currencies
-
-&AtClient
-Procedure CurrenciesSelection(Item, RowSelected, Field, StandardProcessing)
-	CurrenciesClient.CurrenciesTable_Selection(Object, ThisObject, Item, RowSelected, Field, StandardProcessing);
-EndProcedure
-
-&AtClient
-Procedure CurrenciesRatePresentationOnChange(Item)
-	CurrenciesClient.CurrenciesTable_RatePresentationOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure CurrenciesMultiplicityOnChange(Item)
-	CurrenciesClient.CurrenciesTable_MultiplicityOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure CurrenciesAmountOnChange(Item)
-	CurrenciesClient.CurrenciesTable_AmountOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure CurrenciesBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
-	Cancel = True;
-EndProcedure
-
-&AtClient
-Procedure CurrenciesBeforeDeleteRow(Item, Cancel)
-	Cancel = True;
-EndProcedure
-
-#EndRegion
-
 #Region AddAttributes
 
 &AtClient
@@ -659,3 +620,18 @@ Function GetProcessingModule() Export
 EndFunction
 
 #EndRegion
+
+&AtClient
+Procedure EditCurrencies(Command)
+	FormParameters = CurrenciesClientServer.GetParameters_V3(Object);
+	NotifyParameters = New Structure();
+	NotifyParameters.Insert("Object", Object);
+	NotifyParameters.Insert("Form"  , ThisObject);
+	Notify = New NotifyDescription("EditCurrenciesContinue", CurrenciesClient, NotifyParameters);
+	OpenForm("CommonForm.EditCurrencies", FormParameters, , , , , Notify, FormWindowOpeningMode.LockOwnerWindow);
+EndProcedure
+
+&AtClient
+Procedure ShowHiddenTables(Command)
+	DocumentsClient.ShowHiddenTables(Object, ThisObject);
+EndProcedure

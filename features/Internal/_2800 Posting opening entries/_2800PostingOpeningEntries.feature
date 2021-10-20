@@ -148,86 +148,38 @@ Scenario: _400001 opening entry account balance
 		And I input "8 000,00" text in "Amount" field of "AccountBalance" table
 		And I finish line editing in "AccountBalance" table
 	* Check filling in currency rate
-		* Filling in currency rate Cash desk №2
-			And I go to line in "AccountBalance" table
-				| 'Account'      | 'Amount'   | 'Currency' |
-				| 'Cash desk №2' | '1 000,00' | 'USD'      |
-			And I go to line in "CurrenciesAccountBalance" table
-				| 'From' | 'Movement type'  | 'To'  | 'Type'  |
-				| 'USD'  | 'Local currency' | 'TRY' | 'Legal' |
-			And I input "5,6275" text in the field named "CurrenciesAccountBalanceRatePresentation" of "CurrenciesAccountBalance" table
-			And I input "1" text in the field named "CurrenciesAccountBalanceMultiplicity" of "CurrenciesAccountBalance" table
-			And I activate "Amount" field in "CurrenciesAccountBalance" table
-			And I finish line editing in "CurrenciesAccountBalance" table
 		* Filling in currency rate Cash desk №3
 			And I go to line in "AccountBalance" table
 				| 'Account'      | 'Amount'   | 'Currency' |
 				| 'Cash desk №3' | '1 000,00' | 'EUR'      |
 			And I activate "Account" field in "AccountBalance" table
-			And I go to line in "CurrenciesAccountBalance" table
-				| 'From' | 'Movement type'  | 'To'  | 'Type'  |
-				| 'EUR'  | 'Local currency' | 'TRY' | 'Legal' |
-			And I select current line in "CurrenciesAccountBalance" table
-			And I input "5,6883" text in the field named "CurrenciesAccountBalanceRatePresentation" of "CurrenciesAccountBalance" table
-			And I finish line editing in "CurrenciesAccountBalance" table
-			And I go to line in "CurrenciesAccountBalance" table
-				| 'From' | 'Movement type'      | 'To'  | 'Type'      |
-				| 'EUR'  | 'Reporting currency' | 'USD' | 'Reporting' |
-			And I select current line in "CurrenciesAccountBalance" table
-			And I input "1,1000" text in the field named "CurrenciesAccountBalanceRatePresentation" of "CurrenciesAccountBalance" table
-			And I finish line editing in "CurrenciesAccountBalance" table
-			And I go to line in "CurrenciesAccountBalance" table
-				| 'From' | 'Movement type'  | 'Type'  |
-				| 'EUR'  | 'Local currency' | 'Legal' |
-			And I select current line in "CurrenciesAccountBalance" table
-			And I input "1" text in the field named "CurrenciesAccountBalanceMultiplicity" of "CurrenciesAccountBalance" table
-			And I finish line editing in "CurrenciesAccountBalance" table
-			And I go to line in "CurrenciesAccountBalance" table
-				| 'From' | 'Movement type'      | 'Rate'   | 'To'  | 'Type'      |
-				| 'EUR'  | 'Reporting currency' | '1,1000' | 'USD' | 'Reporting' |
-			And I select current line in "CurrenciesAccountBalance" table
-			And I input "1" text in the field named "CurrenciesAccountBalanceMultiplicity" of "CurrenciesAccountBalance" table
-			And I finish line editing in "CurrenciesAccountBalance" table
-		* Filling in currency rate Bank account, USD
-			And I go to line in "AccountBalance" table
-				| 'Account'           | 'Currency' |
-				| 'Bank account, USD' | 'USD'      |
-			And I select current line in "CurrenciesAccountBalance" table
-			And I go to line in "CurrenciesAccountBalance" table
-				| 'From' | 'Movement type'  | 'To'  | 'Type'  |
-				| 'USD'  | 'Local currency' | 'TRY' | 'Legal' |
-			And I input "5,6883" text in the field named "CurrenciesAccountBalanceRatePresentation" of "CurrenciesAccountBalance" table
-			And I input "1" text in the field named "CurrenciesAccountBalanceMultiplicity" of "CurrenciesAccountBalance" table
-			And I activate "Amount" field in "CurrenciesAccountBalance" table
-			And I finish line editing in "CurrenciesAccountBalance" table
+			And in the table "AccountBalance" I click "Edit currencies account balance" button
+			And I activate "Rate" field in "CurrenciesTable" table
+			And I input "5,6883" text in "Rate" field of "CurrenciesTable" table
+			And I finish line editing in "CurrenciesTable" table
+			And I go to line in "CurrenciesTable" table
+				| 'From' | 'Movement type'      | 'Multiplicity' | 'To'  | 'Type'      |
+				| 'EUR'  | 'Reporting currency' | '1'            | 'USD' | 'Reporting' |
+			And I select current line in "CurrenciesTable" table
+			And I input "1,1000" text in "Rate" field of "CurrenciesTable" table
+			And I finish line editing in "CurrenciesTable" table
+			And I click "Ok" button		
 		* Filling in currency rate Bank account, EUR
 			And I go to line in "AccountBalance" table
 				| 'Account'           | 'Currency' |
 				| 'Bank account, EUR' | 'EUR'      |
-			And I go to line in "CurrenciesAccountBalance" table
-				| 'From' | 'Movement type'  | 'To'  | 'Type'  |
-				| 'EUR'  | 'Local currency' | 'TRY' | 'Legal' |
-			And I select current line in "CurrenciesAccountBalance" table
-			And I input "5,6883" text in the field named "CurrenciesAccountBalanceRatePresentation" of "CurrenciesAccountBalance" table
-			And I finish line editing in "CurrenciesAccountBalance" table
-			And I go to line in "CurrenciesAccountBalance" table
-				| 'From' | 'Movement type'      | 'To'  | 'Type'      |
-				| 'EUR'  | 'Reporting currency' | 'USD' | 'Reporting' |
-			And I select current line in "CurrenciesAccountBalance" table
-			And I input "1,1000" text in the field named "CurrenciesAccountBalanceRatePresentation" of "CurrenciesAccountBalance" table
-			And I finish line editing in "CurrenciesAccountBalance" table
-			And I go to line in "CurrenciesAccountBalance" table
-				| 'From' | 'Movement type'  | 'To'  | 'Type'  |
-				| 'EUR'  | 'Local currency' | 'TRY' | 'Legal' |
-			And I select current line in "CurrenciesAccountBalance" table
-			And I input "1" text in the field named "CurrenciesAccountBalanceMultiplicity" of "CurrenciesAccountBalance" table
-			And I finish line editing in "CurrenciesAccountBalance" table
-			And I go to line in "CurrenciesAccountBalance" table
-				| 'From' | 'Movement type'      | 'Rate'   | 'To'  | 'Type'      |
-				| 'EUR'  | 'Reporting currency' | '1,1000' | 'USD' | 'Reporting' |
-			And I select current line in "CurrenciesAccountBalance" table
-			And I input "1" text in the field named "CurrenciesAccountBalanceMultiplicity" of "CurrenciesAccountBalance" table
-			And I finish line editing in "CurrenciesAccountBalance" table
+			And I activate "Account" field in "AccountBalance" table
+			And in the table "AccountBalance" I click "Edit currencies account balance" button
+			And I activate "Rate" field in "CurrenciesTable" table
+			And I input "5,6883" text in "Rate" field of "CurrenciesTable" table
+			And I finish line editing in "CurrenciesTable" table
+			And I go to line in "CurrenciesTable" table
+				| 'From' | 'Movement type'      | 'Multiplicity' | 'To'  | 'Type'      |
+				| 'EUR'  | 'Reporting currency' | '1'            | 'USD' | 'Reporting' |
+			And I select current line in "CurrenciesTable" table
+			And I input "1,1000" text in "Rate" field of "CurrenciesTable" table
+			And I finish line editing in "CurrenciesTable" table
+			And I click "Ok" button		
 	* Post document
 		And I click the button named "FormPost"
 		And I delete "$$NumberOpeningEntry400001$$" variable
@@ -623,16 +575,13 @@ Scenario: _400004 opening entry Vendors transaction by partner terms (vendors)
 			And I input "100,00" text in "Amount" field of "AccountPayableByAgreements" table
 			And I finish line editing in "AccountPayableByAgreements" table
 		* Check calculation Reporting currency
-			And I go to line in "CurrenciesAccountPayableByAgreements" table
-			| 'Movement type'      | 'Type'      |
-			| 'Reporting currency' | 'Reporting' |
-			And I select current line in "CurrenciesAccountPayableByAgreements" table
-			And I input "0,1712" text in the field named "CurrenciesAccountPayableByAgreementsRatePresentation" of "CurrenciesAccountPayableByAgreements" table
-			And I input "1" text in the field named "CurrenciesAccountPayableByAgreementsMultiplicity" of "CurrenciesAccountPayableByAgreements" table
-			And I finish line editing in "CurrenciesAccountPayableByAgreements" table
-			And "CurrenciesAccountPayableByDocuments" table contains lines
-			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate'   | 'Amount' | 'Multiplicity' |
-			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,1712' | '17,12'  | '1'            |
+			And in the table "AccountPayableByAgreements" I click "Edit currencies account payable by agreements" button
+			And "CurrenciesTable" table became equal
+				| 'Movement type'      | 'Type'         | 'To'  | 'From' | 'Multiplicity' | 'Rate'   | 'Amount' |
+				| 'Reporting currency' | 'Reporting'    | 'USD' | 'TRY'  | '1'            | '0,1712' | '17,12'  |
+				| 'Local currency'     | 'Legal'        | 'TRY' | 'TRY'  | '1'            | '1'      | '100'    |
+				| 'TRY'                | 'Partner term' | 'TRY' | 'TRY'  | '1'            | '1'      | '100'    |
+			And I click "Ok" button		
 	* Post document
 		And I click the button named "FormPost"
 		And I delete "$$NumberOpeningEntry400004$$" variable
@@ -709,16 +658,13 @@ Scenario: _400005 opening entry Customers transactions by partner terms (custome
 			And I input "100,00" text in "Amount" field of "AccountReceivableByAgreements" table
 			And I finish line editing in "AccountReceivableByAgreements" table
 		* Check calculation Reporting currency
-			And I go to line in "CurrenciesAccountReceivableByAgreements" table
-				| 'Movement type'      | 'Type'      |
-				| 'Reporting currency' | 'Reporting' |
-			And I select current line in "CurrenciesAccountReceivableByAgreements" table
-			And I input "0,1712" text in the field named "CurrenciesAccountReceivableByAgreementsRatePresentation" of "CurrenciesAccountReceivableByAgreements" table
-			And I input "1" text in the field named "CurrenciesAccountReceivableByAgreementsMultiplicity" of "CurrenciesAccountReceivableByAgreements" table
-			And I finish line editing in "CurrenciesAccountReceivableByAgreements" table
-			And "CurrenciesAccountReceivableByDocuments" table contains lines
-				| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate'   | 'Amount' | 'Multiplicity' |
-				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,1712' | '17,12'  | '1'            |
+			And in the table "AccountReceivableByAgreements" I click "Edit currencies account receivable by agreements" button
+			And "CurrenciesTable" table became equal
+				| 'Movement type'      | 'Type'         | 'To'  | 'From' | 'Multiplicity' | 'Rate'   | 'Amount' |
+				| 'Reporting currency' | 'Reporting'    | 'USD' | 'TRY'  | '1'            | '0,1712' | '17,12'  |
+				| 'Local currency'     | 'Legal'        | 'TRY' | 'TRY'  | '1'            | '1'      | '100'    |
+				| 'TRY'                | 'Partner term' | 'TRY' | 'TRY'  | '1'            | '1'      | '100'    |
+			And I click "Ok" button	
 	* Post document
 		And I click the button named "FormPost"
 		And I delete "$$NumberOpeningEntry400005$$" variable
@@ -762,16 +708,6 @@ Scenario: _400008 check the entry of the account balance, inventory balance, cus
 		And I activate field named "AccountBalanceAmount" in "AccountBalance" table
 		And I input "1 000,00" text in "Amount" field of "AccountBalance" table
 		And I finish line editing in "AccountBalance" table
-		And I go to line in "AccountBalance" table
-			| 'Account'      | 'Amount'   | 'Currency' |
-			| 'Cash desk №2' | '1 000,00' | 'USD'      |
-		And I go to line in "CurrenciesAccountBalance" table
-			| 'From' | 'Movement type'  | 'To'  | 'Type'  |
-			| 'USD'  | 'Local currency' | 'TRY' | 'Legal' |
-		And I input "0,1756" text in the field named "CurrenciesAccountBalanceRatePresentation" of "CurrenciesAccountBalance" table
-		And I input "1" text in the field named "CurrenciesAccountBalanceMultiplicity" of "CurrenciesAccountBalance" table
-		And I activate "Amount" field in "CurrenciesAccountBalance" table
-		And I finish line editing in "CurrenciesAccountBalance" table
 	* Filling in the tabular part Inventory
 		And I move to "Inventory" tab
 		And in the table "Inventory" I click the button named "InventoryAdd"
@@ -867,14 +803,6 @@ Scenario: _400008 check the entry of the account balance, inventory balance, cus
 			And I activate "Amount" field in "AccountPayableByAgreements" table
 			And I input "111,00" text in "Amount" field of "AccountPayableByAgreements" table
 			And I finish line editing in "AccountPayableByAgreements" table
-		* Check calculation Reporting currency
-			And I go to line in "CurrenciesAccountPayableByAgreements" table
-			| 'Movement type'      | 'Type'      |
-			| 'Reporting currency' | 'Reporting' |
-			And I select current line in "CurrenciesAccountPayableByAgreements" table
-			And I input "5,8400" text in the field named "CurrenciesAccountPayableByAgreementsRatePresentation" of "CurrenciesAccountPayableByAgreements" table
-			And I input "1" text in the field named "CurrenciesAccountPayableByAgreementsMultiplicity" of "CurrenciesAccountPayableByAgreements" table
-			And I finish line editing in "CurrenciesAccountPayableByAgreements" table
 	* Filling in Account receivable by agreements
 		* Filling in partner and Legal name
 			And I move to "Account receivable" tab
@@ -908,13 +836,13 @@ Scenario: _400008 check the entry of the account balance, inventory balance, cus
 			And I input "151,00" text in "Amount" field of "AccountReceivableByAgreements" table
 			And I finish line editing in "AccountReceivableByAgreements" table
 		* Check calculation Reporting currency
-			And I go to line in "CurrenciesAccountReceivableByAgreements" table
-				| 'Movement type'      | 'Type'      |
-				| 'Reporting currency' | 'Reporting' |
-			And I select current line in "CurrenciesAccountReceivableByAgreements" table
-			And I input "5,8400" text in the field named "CurrenciesAccountReceivableByAgreementsRatePresentation" of "CurrenciesAccountReceivableByAgreements" table
-			And I input "1" text in the field named "CurrenciesAccountReceivableByAgreementsMultiplicity" of "CurrenciesAccountReceivableByAgreements" table
-			And I finish line editing in "CurrenciesAccountReceivableByAgreements" table
+			And in the table "AccountReceivableByAgreements" I click "Edit currencies account receivable by agreements" button
+			And "CurrenciesTable" table became equal
+				| 'Movement type'      | 'Type'         | 'To'  | 'From' | 'Multiplicity' | 'Rate'   | 'Amount' |
+				| 'Reporting currency' | 'Reporting'    | 'USD' | 'TRY'  | '1'            | '0,1712' | '25,85'  |
+				| 'Local currency'     | 'Legal'        | 'TRY' | 'TRY'  | '1'            | '1'      | '151'    |
+				| 'TRY'                | 'Partner term' | 'TRY' | 'TRY'  | '1'            | '1'      | '151'    |
+			And I close current window			
 			And I click the button named "FormPost"
 			And I delete "$$NumberOpeningEntry400008$$" variable
 			And I delete "$$OpeningEntry400008$$" variable
@@ -1013,6 +941,7 @@ Scenario: _400009 check the entry of the Vendors/Customers transactions by docum
 		And I input "200,00" text in the field named "VendorsPaymentTermsAmount" of "VendorsPaymentTerms" table
 		And I finish line editing in "VendorsPaymentTerms" table
 	* Check filling in
+		And I click "Show row key" button	
 		And I go to line in "AccountPayableByDocuments" table
 			| '#' |
 			| '1' |

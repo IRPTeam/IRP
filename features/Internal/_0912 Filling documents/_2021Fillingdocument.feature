@@ -5925,8 +5925,7 @@ Scenario: _0154150 check function DontCalculateRow in the Purchase order
 				| '520,00' | 'Dress'    | '18%' | 'M/White'   | '2,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | '187,20'     | '1 040,00'   | '1 227,20'     | 'Store 03' |
 		* Check calculation when set "Price includes tax" checkbox
 			And I move to "Other" tab
-			And I set checkbox "Price includes tax"
-			And I remove checkbox "Goods receipt before purchase invoice"			
+			And I set checkbox "Price includes tax"		
 			And I move to "Item list" tab
 			And "ItemList" table contains lines
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Price type'        | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |

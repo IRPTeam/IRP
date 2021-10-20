@@ -13,7 +13,7 @@ Function GetCalculateRowsActions() Export
 	Return Actions;
 EndFunction
 
-Function GetArrayOfTaxInfoFromServerData(Object, Form, AddInfo)
+Function GetArrayOfTaxInfoFromServerData(Object, Form, AddInfo) Export
 	ArrayOfTaxInfo = Undefined;
 	ServerData = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "ServerData");
 	If ServerData = Undefined Then

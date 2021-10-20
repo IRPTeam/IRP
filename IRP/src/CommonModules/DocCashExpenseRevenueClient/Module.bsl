@@ -8,19 +8,59 @@ EndProcedure
 
 #Region FormItemsEvents
 
-Procedure DateOnChange(Object, Form, Item) Export
+Procedure DateOnChange(Object, Form, Item, AddInfo = Undefined) Export
 
-#If Not MobileClient Then
-	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
-#EndIf
+//#If Not MobileClient Then
+//	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
+//#EndIf
 
+// [NEW CODE]
+	DocumentsClient.DateOnChange(Object, Form, Thisobject, Item, Undefined, AddInfo);
+//--
 EndProcedure
+
+// [NEW CODE]
+Procedure DateOnChangePutServerDataToAddInfo(Object, Form, AddInfo = Undefined) Export
+	DocumentsClient.DateOnChangePutServerDataToAddInfo(Object, Form, AddInfo);
+EndProcedure
+
+Function DateSettings(Object, Form, AddInfo = Undefined) Export
+	If AddInfo = Undefined Then
+		Return New Structure("PutServerDataToAddInfo", True);
+	EndIf;
+	
+	Settings = New Structure("Actions, ObjectAttributes, FormAttributes, CalculateSettings, AfterActionsCalculateSettings");
+	Actions = New Structure();
+	Settings.Insert("TableName", "PaymentList");
+	Settings.Actions = Actions;
+	Settings.ObjectAttributes = "Company, Account";
+	Settings.FormAttributes = "";
+	
+	CalculateSettings = New Structure();
+	CalculateSettings.Insert("CalculateTaxByNetAmount");
+	CalculateSettings.Insert("CalculateTotalAmountByNetAmount");
+	Settings.CalculateSettings = CalculateSettings;
+	
+	AfterActionsCalculateSettings = New Structure();
+	Settings.AfterActionsCalculateSettings = AfterActionsCalculateSettings;
+	Return Settings;
+EndFunction
+
+//--
 
 Procedure CompanyOnChange(Object, Form, Item) Export
 	DocumentsClient.CompanyOnChange(Object, Form, ThisObject, Item);
 EndProcedure
 
+Procedure CompanyOnChangePutServerDataToAddInfo(Object, Form, AddInfo = Undefined) Export
+	DocumentsClient.CompanyOnChangePutServerDataToAddInfo(Object, Form, AddInfo);
+EndProcedure
+
 Function CompanySettings(Object, Form, AddInfo = Undefined) Export
+	If AddInfo = Undefined Then
+		Return New Structure("PutServerDataToAddInfo", True);
+	EndIf;
+	
 	Settings = New Structure("Actions, ObjectAttributes, FormAttributes, CalculateSettings");
 	Actions = New Structure();
 	Actions.Insert("ChangeAccount", "ChangeAccount");
@@ -28,10 +68,16 @@ Function CompanySettings(Object, Form, AddInfo = Undefined) Export
 	Settings.Actions = Actions;
 	Settings.ObjectAttributes = "Company, Account";
 	Settings.FormAttributes = "";
-	Actions = GetCalculateRowsActions();
-	Actions.Delete("CalculateTaxByTotalAmount");
-	Actions.Delete("CalculateNetAmountByTotalAmount");
-	Settings.CalculateSettings = Actions;
+	
+	CalculateSettings = New Structure();
+	CalculateSettings.Insert("CalculateTaxByNetAmount");
+	CalculateSettings.Insert("CalculateTotalAmountByNetAmount");
+	Settings.CalculateSettings = CalculateSettings;
+	
+//	Actions = GetCalculateRowsActions();
+//	Actions.Delete("CalculateTaxByTotalAmount");
+//	Actions.Delete("CalculateNetAmountByTotalAmount");
+//	Settings.CalculateSettings = Actions;
 	Return Settings;
 EndFunction
 
@@ -171,13 +217,23 @@ Procedure PaymentListOnStartEdit(Object, Form, Item, NewRow, Clone) Export
 
 	If Clone Then
 		CurrentData.Key = New UUID();
-
+		
+		// [NEW CODE]
 		Settings = New Structure();
-		Actions = New Structure("CalculateTax");
-		Settings.Insert("Actions", Actions);
-		Rows = New Array();
-		Rows.Add(CurrentData);
-		Settings.Insert("Rows", Rows);
+
+		Settings.Insert("Rows", New Array());
+		Settings.Rows.Add(CurrentData);
+
+		Settings.Insert("CalculateSettings", New Structure("CalculateTax, CalculateTotalAmount"));
+		//--
+		//Settings = New Structure();
+		//Actions = New Structure();
+		//Actions.Insert("CalculateTax");
+		//Actions.Insert("CalculateTotalAmount");
+		//Settings.Insert("Actions", Actions);
+		//Rows = New Array();
+		//Rows.Add(CurrentData);
+		//Settings.Insert("Rows", Rows);
 		CalculateItemsRows(Object, Form, Settings);
 		Return;
 	EndIf;
@@ -215,13 +271,13 @@ Procedure PaymentListAfterDeleteRow(Object, Form, Item) Export
 EndProcedure
 
 Procedure PaymentListCurrencyOnChange(Object, Form) Export
-
-	CurrentData = Form.Items.PaymentList.CurrentData;
-
-	If CurrentData = Undefined Then
-		Return;
-	EndIf;
-
+	Return;
+//	CurrentData = Form.Items.PaymentList.CurrentData;
+//
+//	If CurrentData = Undefined Then
+//		Return;
+//	EndIf;
+//
 EndProcedure
 
 Procedure PaymentListNetAmountOnChange(Object, Form, Item = Undefined, CurrentRowData = Undefined, AddInfo = Undefined) Export
@@ -289,27 +345,33 @@ Procedure ItemListTotalAmountPutServerDataToAddInfo(Object, Form, CurrentData, A
 EndProcedure
 //--
 
-Function GetCalculateRowsActions() Export
-	Actions = New Structure();
-	Actions.Insert("CalculateTaxByTotalAmount");
-	Actions.Insert("CalculateTaxByNetAmount");
-	Actions.Insert("CalculateTotalAmountByNetAmount");
-	Actions.Insert("CalculateNetAmountByTotalAmount");
-	Return Actions;
-EndFunction
+//Function GetCalculateRowsActions() Export
+//	Actions = New Structure();
+//	Actions.Insert("CalculateTaxByTotalAmount");
+//	Actions.Insert("CalculateTaxByNetAmount");
+//	Actions.Insert("CalculateTotalAmountByNetAmount");
+//	Actions.Insert("CalculateNetAmountByTotalAmount");
+//	Return Actions;
+//EndFunction
 
-Procedure CalculateItemsRows(Object, Form, Settings) Export
-	CalculationStringsClientServer.CalculateItemsRows(Object, Form, Settings.Rows, Settings.Actions,
-		TaxesClient.GetArrayOfTaxInfo(Form));
+Procedure CalculateItemsRows(Object, Form, Settings, Item = Undefined, AddInfo = Undefined) Export
+	// [NEW CODE]
+	ArrayOfTaxInfo = TaxesClient.GetArrayOfTaxInfoFromServerData(Object, Form, AddInfo);
+	CalculationStringsClientServer.CalculateItemsRows(Object, Form, Settings.Rows, Settings.CalculateSettings, 
+		ArrayOfTaxInfo, AddInfo);
+	//--
+
+//	CalculationStringsClientServer.CalculateItemsRows(Object, Form, Settings.Rows, Settings.Actions,
+//		TaxesClient.GetArrayOfTaxInfo(Form));
 EndProcedure
 
-Function GetArrayOfTaxInfo(Form) Export
-	SavedData = TaxesClientServer.GetSavedData(Form, TaxesServer.GetAttributeNames().CacheName);
-	If SavedData.Property("ArrayOfColumnsInfo") Then
-		Return SavedData.ArrayOfColumnsInfo;
-	EndIf;
-	Return New Array();
-EndFunction
+//Function GetArrayOfTaxInfo(Form) Export
+//	SavedData = TaxesClientServer.GetSavedData(Form, TaxesServer.GetAttributeNames().CacheName);
+//	If SavedData.Property("ArrayOfColumnsInfo") Then
+//		Return SavedData.ArrayOfColumnsInfo;
+//	EndIf;
+//	Return New Array();
+//EndFunction
 
 Function CurrencySettings(Object, Form, AddInfo = Undefined) Export
 	Return New Structure();

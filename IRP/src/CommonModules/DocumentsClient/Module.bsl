@@ -928,7 +928,6 @@ EndProcedure
 #Region ItemDate
 
 Procedure DateOnChange(Object, Form, Module, Item = Undefined, Settings = Undefined, AddInfo = Undefined) Export
-
 	CommonFunctionsClientServer.DeleteFromAddInfo(AddInfo, "ServerData");
 	DateSettings = Module.DateSettings(Object, Form);
 	If DateSettings.Property("PutServerDataToAddInfo") And DateSettings.PutServerDataToAddInfo Then
@@ -983,36 +982,38 @@ Procedure DateOnChange(Object, Form, Module, Item = Undefined, Settings = Undefi
 	FillPropertyValues(CurrentValuesStructure, Form, Settings.FormAttributes);
 
 	PartnerInfo = New Structure();
-	If ServerData = Undefined Then
-		PartnerInfo.Insert("ManagerSegment", DocumentsServer.GetManagerSegmentByPartner(Object.Partner));
-		PartnerInfo.Insert("LegalName", DocumentsServer.GetLegalNameByPartner(Object.Partner, Object.LegalName));
+	If Object.Property("Partner") And Object.Property("Agreement") And Object.Property("LegalName") Then
+		If ServerData = Undefined Then
+			PartnerInfo.Insert("ManagerSegment", DocumentsServer.GetManagerSegmentByPartner(Object.Partner));
+			PartnerInfo.Insert("LegalName"     , DocumentsServer.GetLegalNameByPartner(Object.Partner, Object.LegalName));
 
-		AgreementParameters = New Structure();
-		AgreementParameters.Insert("Partner", Object.Partner);
-		AgreementParameters.Insert("Agreement", Object.Agreement);
-		AgreementParameters.Insert("CurrentDate", Object.Date);
-		AgreementParameters.Insert("AgreementType", DateSettings.AgreementType);
+			AgreementParameters = New Structure();
+			AgreementParameters.Insert("Partner"      , Object.Partner);
+			AgreementParameters.Insert("Agreement"    , Object.Agreement);
+			AgreementParameters.Insert("CurrentDate"  , Object.Date);
+			AgreementParameters.Insert("AgreementType", DateSettings.AgreementType);
 
-		PartnerInfo.Insert("Agreement", DocumentsServer.GetAgreementByPartner(AgreementParameters));
-		AgreementInfo = CatAgreementsServer.GetAgreementInfo(PartnerInfo.Agreement);
-	Else
-		PartnerInfo.Insert("ManagerSegment", ServerData.ManagerSegmentByPartner);
-		PartnerInfo.Insert("LegalName", ServerData.LegalNameByPartner);
-
-		If DateSettings.AgreementType = ServerData.AgreementTypes_Customer Then
-			PartnerInfo.Insert("Agreement", ServerData.AgreementByPartner_Customer);
-			AgreementInfo = ServerData.AgreementInfoByPartner_Customer;
-		ElsIf DateSettings.AgreementType = ServerData.AgreementTypes_Vendor Then
-			PartnerInfo.Insert("Agreement", ServerData.AgreementByPartner_Vendor);
-			AgreementInfo = ServerData.AgreementInfoByPartner_Vendor;
+			PartnerInfo.Insert("Agreement", DocumentsServer.GetAgreementByPartner(AgreementParameters));
+			AgreementInfo = CatAgreementsServer.GetAgreementInfo(PartnerInfo.Agreement);
 		Else
-			Raise "Not supported Agreement type";
+			PartnerInfo.Insert("ManagerSegment", ServerData.ManagerSegmentByPartner);
+			PartnerInfo.Insert("LegalName"     , ServerData.LegalNameByPartner);
+
+			If DateSettings.AgreementType = ServerData.AgreementTypes_Customer Then
+				PartnerInfo.Insert("Agreement", ServerData.AgreementByPartner_Customer);
+				AgreementInfo = ServerData.AgreementInfoByPartner_Customer;
+			ElsIf DateSettings.AgreementType = ServerData.AgreementTypes_Vendor Then
+				PartnerInfo.Insert("Agreement", ServerData.AgreementByPartner_Vendor);
+				AgreementInfo = ServerData.AgreementInfoByPartner_Vendor;
+			Else
+				Raise "Not supported Agreement type";
+			EndIf;
 		EndIf;
 	EndIf;
-
+	
 	Settings.Insert("CurrentValuesStructure", CurrentValuesStructure);
-	Settings.Insert("PartnerInfo", PartnerInfo);
-	Settings.Insert("AgreementInfo", AgreementInfo);
+	Settings.Insert("PartnerInfo"           , PartnerInfo);
+	Settings.Insert("AgreementInfo"         , AgreementInfo);
 
 	DoTitleActions(Object, Form, Settings, DateSettings.Actions);
 
@@ -1037,8 +1038,12 @@ Procedure DateOnChange(Object, Form, Module, Item = Undefined, Settings = Undefi
 		ShowUserQueryBox(Object, Form, Settings, AddInfo);
 	Else
 		Settings.Insert("Rows", Object[DateSettings.TableName]);
-		Form.CurrentPartner = Object.Partner;
-		Form.CurrentAgreement = Object.Agreement;
+		If Object.Property("Partner") Then
+			Form.CurrentPartner = Object.Partner;
+		EndIf;
+		If Object.Property("Agreement") Then
+			Form.CurrentAgreement = Object.Agreement;
+		EndIf;
 		Form.CurrentDate = Object.Date;
 		CalculateTable(Object, Form, Settings, AddInfo);
 	EndIf;
@@ -1846,17 +1851,9 @@ Procedure ItemListCalculateRowAmounts(Object, Form, CurrentData, Module = Undefi
 EndProcedure
 
 Procedure ItemListCalculateRowsAmounts(Object, Form, Settings, Item = Undefined, AddInfo = Undefined) Export
-	ArrayOfTaxInfo = Undefined;
-	ServerData = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "ServerData");
-	If ServerData = Undefined Then
-		If ServiceSystemClientServer.ObjectHasAttribute("TaxList", Object) Then
-			ArrayOfTaxInfo = TaxesClient.GetArrayOfTaxInfo(Form);
-		EndIf;
-	Else
-		ArrayOfTaxInfo = ServerData.ArrayOfTaxInfo;
-	EndIf;
+	ArrayOfTaxInfo = TaxesClient.GetArrayOfTaxInfoFromServerData(Object, Form, AddInfo);
 
-	CalculationStringsClientServer.CalculateItemsRows(Object, Form, Settings.Rows, Settings.CalculateSettings,
+	CalculationStringsClientServer.CalculateItemsRows(Object, Form, Settings.Rows, Settings.CalculateSettings, 
 		ArrayOfTaxInfo, AddInfo);
 	If Not ArrayOfTaxInfo = Undefined Then
 		Form.TaxAndOffersCalculated = False;
@@ -3083,15 +3080,17 @@ Procedure CompanyOnChangePutServerDataToAddInfo(Object, Form, AddInfo = Undefine
 	OnChangeItemName = "Company";
 	ParametersToServer = New Structure();
 	CommonParametersToServer(Object, Form, ParametersToServer, AddInfo);
-
-	AgreementInfoParameters = New Structure();
-	AgreementInfoParameters.Insert("Agreement", Object.Agreement);
-	ParametersToServer.Insert("GetAgreementInfo", AgreementInfoParameters);
-
-	PaymentTermsParameters = New Structure();
-	PaymentTermsParameters.Insert("Agreement", Object.Agreement);
-	ParametersToServer.Insert("GetPaymentTerms", PaymentTermsParameters);
-
+	
+	If Object.Property("Agreement") Then
+		AgreementInfoParameters = New Structure();
+		AgreementInfoParameters.Insert("Agreement", Object.Agreement);
+		ParametersToServer.Insert("GetAgreementInfo", AgreementInfoParameters);
+	
+		PaymentTermsParameters = New Structure();
+		PaymentTermsParameters.Insert("Agreement", Object.Agreement);
+		ParametersToServer.Insert("GetPaymentTerms", PaymentTermsParameters);
+	EndIf;
+	
 	ServerData = DocumentsServer.PrepareServerData(ParametersToServer);
 	ServerData.Insert("OnChangeItemName", OnChangeItemName);
 	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "ServerData", ServerData);
@@ -3149,26 +3148,34 @@ Procedure DateOnChangePutServerDataToAddInfo(Object, Form, AddInfo = Undefined) 
 	MetaDataStructureParameters.Insert("Ref", Object.Ref);
 	ParametersToServer.Insert("GetMetaDataStructure", MetaDataStructureParameters);
 
-	ManagerSegmentByPartnerParameters = New Structure();
-	ManagerSegmentByPartnerParameters.Insert("Partner", Object.Partner);
-	ParametersToServer.Insert("GetManagerSegmentByPartner", ManagerSegmentByPartnerParameters);
-
-	LegalNameByPartnerParameters = New Structure();
-	LegalNameByPartnerParameters.Insert("Partner", Object.Partner);
-	LegalNameByPartnerParameters.Insert("LegalName", Object.LegalName);
-	ParametersToServer.Insert("GetLegalNameByPartner", LegalNameByPartnerParameters);
-
-	AgreementByPartnerParameters = New Structure();
-	AgreementByPartnerParameters.Insert("Partner", Object.Partner);
-	AgreementByPartnerParameters.Insert("Agreement", Object.Agreement);
-	AgreementByPartnerParameters.Insert("Date", Object.Date);
-	AgreementByPartnerParameters.Insert("WithAgreementInfo", True);
-	ParametersToServer.Insert("GetAgreementByPartner", AgreementByPartnerParameters);
-
-	PaymentTermsParameters = New Structure();
-	PaymentTermsParameters.Insert("Agreement", Object.Agreement);
-	ParametersToServer.Insert("GetPaymentTerms", PaymentTermsParameters);
-
+	If Object.Property("Partner") Then
+		ManagerSegmentByPartnerParameters = New Structure();
+		ManagerSegmentByPartnerParameters.Insert("Partner", Object.Partner);
+		ParametersToServer.Insert("GetManagerSegmentByPartner", ManagerSegmentByPartnerParameters);
+	EndIf;
+	
+	If Object.Property("Partner") And Object.Property("LegalName") Then
+		LegalNameByPartnerParameters = New Structure();
+		LegalNameByPartnerParameters.Insert("Partner", Object.Partner);
+		LegalNameByPartnerParameters.Insert("LegalName", Object.LegalName);
+		ParametersToServer.Insert("GetLegalNameByPartner", LegalNameByPartnerParameters);
+	EndIf;
+	
+	If Object.Property("Partner") And Object.Property("Agreement") Then
+		AgreementByPartnerParameters = New Structure();
+		AgreementByPartnerParameters.Insert("Partner", Object.Partner);
+		AgreementByPartnerParameters.Insert("Agreement", Object.Agreement);
+		AgreementByPartnerParameters.Insert("Date", Object.Date);
+		AgreementByPartnerParameters.Insert("WithAgreementInfo", True);
+		ParametersToServer.Insert("GetAgreementByPartner", AgreementByPartnerParameters);
+	EndIf;
+	
+	If Object.Property("Agreement") Then
+		PaymentTermsParameters = New Structure();
+		PaymentTermsParameters.Insert("Agreement", Object.Agreement);
+		ParametersToServer.Insert("GetPaymentTerms", PaymentTermsParameters);
+	EndIf;
+	
 	ServerData = DocumentsServer.PrepareServerData(ParametersToServer);
 	ServerData.Insert("OnChangeItemName", OnChangeItemName);
 	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "ServerData", ServerData);

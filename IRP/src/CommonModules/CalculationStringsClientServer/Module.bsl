@@ -62,6 +62,16 @@ Function GetColumnNames_ItemList(ArrayOfTaxInfo = Undefined) Export
 	Return ColumnNames;
 EndFunction
 
+Function GetColumnNames_PaymentList(ArrayOfTaxInfo = Undefined) Export
+	ColumnNames = "Key, TotalAmount, NetAmount, TaxAmount";
+	If ArrayOfTaxInfo <> Undefined Then
+		For Each ItemOfTaxInfo In ArrayOfTaxInfo Do
+			ColumnNames = ColumnNames + "," + ItemOfTaxInfo.Name;
+		EndDo;
+	EndIf;
+	Return ColumnNames;
+EndFunction
+
 Function GetColumnNames_TaxList() Export
 	Return "Key, Tax, Analytics, TaxRate, Amount, IncludeToTotalAmount, ManualAmount";
 EndFunction
@@ -119,46 +129,87 @@ Function CalculateItemsRows(Object, Form, ItemRows, Actions, ArrayOfTaxInfo = Un
 		EndIf;
 
 		CommonFunctionsClientServer.DeleteFromAddInfo(AddInfo, "UpdateRowsAfterCalculate");
-
-		ColumnNames_ItemList      = GetColumnNames_ItemList(ArrayOfTaxInfo);
-		ColumnNames_TaxList       = GetColumnNames_TaxList();
-		ColumnNames_SpecialOffers = GetColumnNames_SpecialOffers();
-
-		ArrayOfRows_ItemList      = DataCollectionToArrayOfStructures(ItemRows, ColumnNames_ItemList);
-		ArrayOfRows_TaxList       = DataCollectionToArrayOfStructures(Object.TaxList, ColumnNames_TaxList);
-		ArrayOfRows_SpecialOffers = DataCollectionToArrayOfStructures(Object.SpecialOffers, ColumnNames_SpecialOffers);
-
+		
+		IsItemListExists      = Object.Property("ItemList");
+		IsPaymentListExists   = Object.Property("PaymentList");
+		IsTaxListExists       = Object.Property("TaxList");
+		IsSpecialOffersExists = Object.Property("SpecialOffers");
+		
 		ObjectAsStructure = New Structure("Date, Company, Partner, Agreement, PriceIncludeTax");
 		FillPropertyValues(ObjectAsStructure, Object);
 		ObjectAsStructure.Insert("Ref", Object.Ref);
-		ObjectAsStructure.Insert("ItemList", ArrayOfRows_ItemList);
-		ObjectAsStructure.Insert("TaxList", ArrayOfRows_TaxList);
-		ObjectAsStructure.Insert("SpecialOffers", ArrayOfRows_SpecialOffers);
-
+		
+		If IsItemListExists Then
+			ColumnNames_ItemList = GetColumnNames_ItemList(ArrayOfTaxInfo);
+			ArrayOfRows_ItemList = DataCollectionToArrayOfStructures(ItemRows, ColumnNames_ItemList);
+			ObjectAsStructure.Insert("ItemList", ArrayOfRows_ItemList);
+		EndIf;
+		
+		If IsPaymentListExists Then
+			ColumnNames_PaymentList = GetColumnNames_PaymentList(ArrayOfTaxInfo);
+			ArrayOfRows_PaymentList = DataCollectionToArrayOfStructures(ItemRows, ColumnNames_PaymentList);
+			ObjectAsStructure.Insert("PaymentList", ArrayOfRows_PaymentList);
+		EndIf;
+		
+		If IsTaxListExists Then
+			ColumnNames_TaxList = GetColumnNames_TaxList();
+			ArrayOfRows_TaxList = DataCollectionToArrayOfStructures(Object.TaxList, ColumnNames_TaxList);
+			ObjectAsStructure.Insert("TaxList", ArrayOfRows_TaxList);
+		EndIf;
+		
+		If IsSpecialOffersExists Then
+			ColumnNames_SpecialOffers = GetColumnNames_SpecialOffers();
+			ArrayOfRows_SpecialOffers = DataCollectionToArrayOfStructures(Object.SpecialOffers, ColumnNames_SpecialOffers);
+			ObjectAsStructure.Insert("SpecialOffers", ArrayOfRows_SpecialOffers);
+		EndIf;
+		
 		CalculationServer.CalculateItemsRows(ObjectAsStructure, Undefined, Actions, ArrayOfTaxInfo, AddInfo);
-
-		Result.ItemList      = ObjectAsStructure.ItemList;
-		Result.TaxList       = ObjectAsStructure.TaxList;
-		Result.SpecialOffers = ObjectAsStructure.SpecialOffers;
-
+		
+		If IsItemListExists Then
+			Result.ItemList = ObjectAsStructure.ItemList;
+		EndIf;
+		
+		If IsPaymentListExists Then
+			Result.PaymentList = ObjectAsStructure.PaymentList;
+		EndIf;
+		
+		If IsTaxListExists Then
+			Result.TaxList = ObjectAsStructure.TaxList;
+		EndIf;
+		
+		If IsSpecialOffersExists Then
+			Result.SpecialOffers = ObjectAsStructure.SpecialOffers;
+		EndIf;
+		
 		If UpdateRowsAfterCalculate Then
-			UpdateDataCollectionByArrayOfStructures(Object.ItemList, ObjectAsStructure.ItemList, ColumnNames_ItemList);
-			FillDataCollectionByArrayOfStructures(Object.TaxList, ObjectAsStructure.TaxList, ColumnNames_TaxList);
-			FillDataCollectionByArrayOfStructures(Object.SpecialOffers, ObjectAsStructure.SpecialOffers,
-				ColumnNames_SpecialOffers);
+			If IsItemListExists Then
+				UpdateDataCollectionByArrayOfStructures(Object.ItemList, ObjectAsStructure.ItemList, ColumnNames_ItemList);
+			EndIf;
+			
+			If IsPaymentListExists Then
+				UpdateDataCollectionByArrayOfStructures(Object.PaymentList, ObjectAsStructure.PaymentList, ColumnNames_PaymentList);
+			EndIf;
+			
+			If IsTaxListExists Then
+				FillDataCollectionByArrayOfStructures(Object.TaxList, ObjectAsStructure.TaxList, ColumnNames_TaxList);
+			EndIf;
+			
+			If IsSpecialOffersExists Then
+				FillDataCollectionByArrayOfStructures(Object.SpecialOffers, ObjectAsStructure.SpecialOffers, ColumnNames_SpecialOffers);
+			EndIf;
 		EndIf;
 	Else
 		For Each ItemRow In ItemRows Do
 			CalculateItemsRow(Object, ItemRow, Actions, ArrayOfTaxInfo, AddInfo);
 		EndDo;
 		If Object.Property("ItemList") Then
-			Result.ItemList      = Object.ItemList;
+			Result.ItemList = Object.ItemList;
 		EndIf;
 		If Object.Property("PaymentList") Then
-			Result.PaymentList   = Object.PaymentList;
+			Result.PaymentList = Object.PaymentList;
 		EndIf;
 		If Object.Property("TaxList") Then
-			Result.TaxList       = Object.TaxList;
+			Result.TaxList = Object.TaxList;
 		EndIf;
 		If Object.Property("SpecialOffers") Then
 			Result.SpecialOffers = Object.SpecialOffers;

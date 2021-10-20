@@ -674,8 +674,13 @@
   <enums>Enum.TypeExternalObject</enums>
   <reports>Report.AllRegistersMovement</reports>
   <reports>Report.DocumentRegistrationsReport</reports>
-  <reports>Report.ItemsInfo</reports>
   <reports>Report.PriceInfo</reports>
+  <reports>Report.D0010_ItemsInfo</reports>
+  <reports>Report.D2001_Sales</reports>
+  <reports>Report.D1001_Purchases</reports>
+  <reports>Report.D4010_ActualStocks</reports>
+  <reports>Report.D4011_FreeStocks</reports>
+  <reports>Report.D4012_StockReservation</reports>
   <dataProcessors>DataProcessor.AnaliseDocumentMovements</dataProcessors>
   <dataProcessors>DataProcessor.DataHistory</dataProcessors>
   <dataProcessors>DataProcessor.MobileDesktop</dataProcessors>

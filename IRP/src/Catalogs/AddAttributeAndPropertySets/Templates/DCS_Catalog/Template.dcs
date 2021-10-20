@@ -31,7 +31,6 @@
 			<field xsi:type="DataSetFieldField">
 				<dataPath>Ref</dataPath>
 				<field>Ref</field>
-				<valueType/>
 			</field>
 			<dataSource>DataSource1</dataSource>
 			<query>SELECT

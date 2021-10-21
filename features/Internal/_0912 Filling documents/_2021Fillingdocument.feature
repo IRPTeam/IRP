@@ -3427,14 +3427,9 @@ Scenario: _0154116 check filling in and refilling Cash expence
 			| 'Net amount' | 'Expense type'             | 'Currency' | 'VAT' | 'Tax amount' | 'Total amount' |
 			| '186,44'     | 'Telephone communications' | 'TRY'      | '18%' | '33,56'      | '220,00'       |
 	* Check the recalculation of Total amount when Tax changes
-		And I move to "Tax list" tab
-		And I activate "Manual amount" field in "TaxTree" table
-		And I go to line in "TaxTree" table
-			| 'Profit loss center'     |
-			| 'Accountants office' |
-		And I select current line in "TaxTree" table
-		And I input "33,55" text in "Manual amount" field of "TaxTree" table
-		And I finish line editing in "TaxTree" table
+		And I select current line in "PaymentList" table
+		And I input "33,55" text in the field named "PaymentListTaxAmount" of "PaymentList" table
+		And I finish line editing in "PaymentList" table	
 		And I move to "Payment list" tab
 		And "PaymentList" table contains lines
 			| 'Net amount' | 'Expense type'               | 'Currency' | 'VAT' | 'Tax amount' | 'Total amount' |
@@ -3472,18 +3467,14 @@ Scenario: _0154116 check filling in and refilling Cash expence
 		And I activate "VAT" field in "PaymentList" table
 		And I select "18%" exact value from "VAT" drop-down list in "PaymentList" table
 		And I input "200,00" text in the field named "PaymentListNetAmount" of "PaymentList" table
-		And I expand a line in "TaxTree" table
-			| 'Amount' | 'Currency' | 'Manual amount' | 'Tax' |
-			| '69,66'  | 'TRY'      | '69,55'         | 'VAT' |
 		And I finish line editing in "PaymentList" table
 	* Manual tax correction by line
-		And I move to "Tax list" tab
-		And I go to line in "TaxTree" table
-			| 'Amount' | 'Profit loss center' | 'Currency' |
-			| '36,00'  | 'Front office'  | 'TRY'      |
-		And I select current line in "TaxTree" table
-		And I input "38,00" text in "Manual amount" field of "TaxTree" table
-		And I finish line editing in "TaxTree" table
+		And I go to line in "PaymentList" table
+			| 'Expense type' | 'Net amount' | 'Tax amount' | 'Total amount' | 'VAT' |
+			| 'Software'     | '200,00'     | '36,00'      | '236,00'       | '18%' |
+		And I select current line in "PaymentList" table
+		And I input "38,00" text in the field named "PaymentListTaxAmount" of "PaymentList" table
+		And I finish line editing in "PaymentList" table	
 		And I move to "Payment list" tab
 		And "PaymentList" table contains lines
 			| 'Net amount' | 'Profit loss center'      | 'Expense type'             | 'Currency' | 'VAT' | 'Tax amount' | 'Total amount' |
@@ -3594,7 +3585,7 @@ Scenario: _0154116 check filling in and refilling Cash expence
 		And I close current window
 	* Change of currency on the first line and check of form on currencies
 		And I go to line in "PaymentList" table
-			| 'Net amount' | 'Profit loss center'      | 'Expense type' | 'Currency' | 'VAT' | 'Tax amount' | 'Total amount' |
+			| 'Net amount' | 'Profit loss center' | 'Expense type' | 'Currency' | 'VAT' | 'Tax amount' | 'Total amount' |
 			| '200,00'     | 'Front office'       | 'Software'     | 'TRY'      | '18%' | '36,00'      | '236,00'       |
 		And I click choice button of the attribute named "PaymentListCurrency" in "PaymentList" table
 		And I go to line in "List" table
@@ -3619,10 +3610,6 @@ Scenario: _0154116 check filling in and refilling Cash expence
 		And "PaymentList" table contains lines
 			| 'Net amount' | 'Profit loss center' | 'Expense type' | 'Currency' | 'VAT' | 'Tax amount' | 'Total amount' |
 			| '200,00'     | 'Front office'       | 'Software'     | 'USD'      | '8%'  | '16,00'      | '216,00'       |
-		And "TaxTree" table contains lines
-			| 'Tax' | 'Currency' | 'Profit loss center' | 'Amount' | 'Expense type' | 'Tax rate' | 'Manual amount' |
-			| 'VAT' | 'USD'      | ''                   | '16,00'  | ''             | ''         | '16,00'         |
-			| 'VAT' | 'USD'      | 'Front office'       | '16,00'  | 'Software'     | '8%'       | '16,00'         |
 	And I close all client application windows
 
 
@@ -3681,15 +3668,10 @@ Scenario: _0154117 check filling in and refilling Cash revenue
 			| 'Net amount' | 'Revenue type'             | 'Currency' | 'VAT' | 'Tax amount' | 'Total amount' |
 			| '186,44'     | 'Telephone communications' | 'TRY'      | '18%' | '33,56'      | '220,00'       |
 	* Check the recalculation of Total amount when Tax changes
-		And I move to "Tax list" tab
-		And I activate "Manual amount" field in "TaxTree" table
-		And I go to line in "TaxTree" table
-		| 'Profit loss center'     |
-		| 'Accountants office' |
-		And I select current line in "TaxTree" table
-		And I input "33,55" text in "Manual amount" field of "TaxTree" table
-		And I finish line editing in "TaxTree" table
-		And I move to "Payment list" tab
+		And I activate field named "PaymentListTaxAmount" in "PaymentList" table
+		And I select current line in "PaymentList" table
+		And I input "33,55" text in the field named "PaymentListTaxAmount" of "PaymentList" table
+		And I finish line editing in "PaymentList" table
 		And "PaymentList" table contains lines
 		| 'Net amount' | 'Revenue type'               | 'Currency' | 'VAT' | 'Tax amount' | 'Total amount' |
 		| '186,44'     | 'Telephone communications'   | 'TRY'      | '18%' | '33,55'      | '219,99'       |
@@ -3726,18 +3708,13 @@ Scenario: _0154117 check filling in and refilling Cash revenue
 		And I activate "VAT" field in "PaymentList" table
 		And I select "18%" exact value from "VAT" drop-down list in "PaymentList" table
 		And I input "200,00" text in the field named "PaymentListNetAmount" of "PaymentList" table
-		And I expand a line in "TaxTree" table
-			| 'Amount' | 'Currency' | 'Manual amount' | 'Tax' |
-			| '69,66'  | 'TRY'      | '69,55'         | 'VAT' |
 		And I finish line editing in "PaymentList" table
 	* Manual tax correction by line
-		And I move to "Tax list" tab
-		And I go to line in "TaxTree" table
-			| 'Amount' | 'Profit loss center' | 'Currency' |
-			| '36,00'  | 'Front office'  | 'TRY'      |
-		And I select current line in "TaxTree" table
-		And I input "38,00" text in "Manual amount" field of "TaxTree" table
-		And I finish line editing in "TaxTree" table
+		And I go to line in "PaymentList" table
+			| 'Profit loss center' | 'Revenue type' |
+			| 'Front office'       | 'Software'     |
+		And I input "38,00" text in the field named "PaymentListTaxAmount" of "PaymentList" table
+		And I finish line editing in "PaymentList" table	
 		And I move to "Payment list" tab
 		And "PaymentList" table contains lines
 			| 'Net amount' | 'Profit loss center'      | 'Revenue type'             | 'Currency' | 'VAT' | 'Tax amount' | 'Total amount' |
@@ -3796,10 +3773,6 @@ Scenario: _0154117 check filling in and refilling Cash revenue
 		And "PaymentList" table contains lines
 			| 'Net amount' | 'Revenue type' | 'Total amount' | 'Currency' | 'VAT' | 'Tax amount' |
 			| '200,00'     | 'Software'     | '216,00'       | 'TRY'      | '8%'  | '16,00'      |
-		And "TaxTree" table contains lines
-			| 'Tax' | 'Tax rate' | 'Currency' | 'Amount' | 'Manual amount' |
-			| 'VAT' | ''         | 'TRY'      | '16,00'  | '16,00'         |
-			| 'VAT'    | '8%'    | 'TRY'         | '16,00'  | '16,00'         |
 		And I close all client application windows
 
 Scenario: _0154118 check the details cleaning on the form Cash receipt 

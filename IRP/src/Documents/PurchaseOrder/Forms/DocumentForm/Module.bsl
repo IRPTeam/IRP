@@ -36,7 +36,7 @@ Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefin
 		SearchByBarcode(Undefined, Parameter);
 	EndIf;
 	
-	If Upper(EventName) = Upper("CallbackHandler") Then
+	If Upper(EventName) = Upper("CalculationStrngsComplete") Then
 		UpdateTotalAmounts();
 	EndIf;
 EndProcedure

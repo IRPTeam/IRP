@@ -229,7 +229,7 @@ Function CalculateItemsRows(Object, Form, ItemRows, Actions, ArrayOfTaxInfo = Un
 		Notify(Action.Key, NotifyStructure, Form);
 	EndDo;
 
-	Notify("CallbackHandler", New Structure("AddInfo", AddInfo), Form);
+	Notify("CalculationStrngsComplete", New Structure("AddInfo", AddInfo), Form);
 
 #EndIf
 	Return Result;
@@ -401,6 +401,7 @@ Procedure UpdateInfoStringWithOffers(Object, ItemRow, AddInfo = Undefined)
 EndProcedure
 
 #Region Region
+
 Procedure UpdateInfoString(ItemRow) Export
 	ItemRow.Info = BuildInfoString(ItemRow);
 EndProcedure

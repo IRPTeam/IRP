@@ -82,6 +82,73 @@ Procedure SetGroupItemsList(Object, Form)
 	EndDo;
 EndProcedure
 
+Procedure FillAttributesByType(Ref, TransactionType, ArrayAll, ArrayByType) Export
+	Is = Is(Ref);
+	StrAll = "Account, TransitAccount, CashAccount, Company, Currency, TransactionType, Description,
+	|Payee, Payer, CurrencyExchange,
+	|PaymentList.BasisDocument,
+	|PaymentList.Partner,
+	|PaymentList.PlaningTransactionBasis,
+	|PaymentList.Agreement,
+	|PaymentList.LegalNameContract,
+	|PaymentList.Amount,
+	|PaymentList.Payee,
+	|PaymentList.Payer,
+	|PaymentList.AmountExchange,
+	|PaymentList.POSAccount";
+	
+	ArrayAll = New Array();
+	For Each ArrayItem In StrSplit(StrAll, ",") Do
+		ArrayAll.Add(StrReplace(TrimAll(ArrayItem),Chars.NBSp,""));
+	EndDo;
+	
+	If TransactionType = Enums.OutgoingPaymentTransactionTypes.CashTransferOrder 
+		Or TransactionType = Enums.IncomingPaymentTransactionType.CashTransferOrder Then
+		StrByType = "Account, CashAccount, Company, Currency, TransactionType, Description,
+		|PaymentList.PlaningTransactionBasis,
+		|PaymentList.Amount";
+	ElsIf TransactionType = Enums.OutgoingPaymentTransactionTypes.CurrencyExchange
+		Or TransactionType = Enums.IncomingPaymentTransactionType.CurrencyExchange Then
+		StrByType = "Account, TransitAccount, CashAccount, Company, Currency, CurrencyExchange, TransactionType, Description,
+		|PaymentList.PlaningTransactionBasis,
+		|PaymentList.Amount";
+		If Is.CashPayment Then
+			StrByType = StrByType + ", PaymentList.Partner";
+		EndIf;
+		If Is.CashReceipt Then
+			StrByType = StrByType + ", PaymentList.Partner, PaymentList.AmountExchange";
+		EndIf;
+		If Is.BankReceipt Then
+			StrByType = StrByType + ", PaymentList.AmountExchange";
+		EndIf;
+	ElsIf TransactionType = Enums.OutgoingPaymentTransactionTypes.PaymentToVendor 
+		Or TransactionType = Enums.OutgoingPaymentTransactionTypes.ReturnToCustomer
+		Or TransactionType = Enums.IncomingPaymentTransactionType.PaymentFromCustomer
+		Or TransactionType = Enums.IncomingPaymentTransactionType.ReturnFromVendor Then
+		StrByType = "Account, CashAccount, Company, Currency, Payee, Payer, TransactionType, Description,
+		|PaymentList.BasisDocument,
+		|PaymentList.Partner,
+		|PaymentList.Agreement,
+		|PaymentList.Payee,
+		|PaymentList.Payer,
+		|PaymentList.PlaningTransactionBasis,
+		|PaymentList.Amount,
+		|PaymentList.LegalNameContract";
+	ElsIf TransactionType = Enums.IncomingPaymentTransactionType.TransferFromPOS Then
+		StrByType = "Account, Company, Currency, TransactionType, Description,
+		|PaymentList.PlaningTransactionBasis,
+		|PaymentList.Amount,
+		|PaymentList.POSAccount";
+	Else
+		StrByType = "Company, Currency, TransactionType,
+		|PaymentList.Amount";
+	EndIf;
+	ArrayByType = New Array();
+	For Each ArrayItem In StrSplit(StrByType, ",") Do
+		ArrayByType.Add(StrReplace(TrimAll(ArrayItem),Chars.NBSp,""));
+	EndDo;
+EndProcedure
+
 Function Is(Object)
 	Result = New Structure();
 	Result.Insert("BankPayment", TypeOf(Object.Ref) = Type("DocumentRef.BankPayment"));

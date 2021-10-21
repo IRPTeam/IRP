@@ -46,7 +46,7 @@ EndProcedure
 Procedure SetVisibilityAvailability(Object, Form)
 	ArrayAll = New Array();
 	ArrayByType = New Array();
-	DocBankReceiptServer.FillAttributesByType(Object.TransactionType, ArrayAll, ArrayByType);
+	DocBankReceiptServer.FillAttributesByType(Object.Ref, Object.TransactionType, ArrayAll, ArrayByType);
 	DocumentsClientServer.SetVisibilityItemsByArray(Form.Items, ArrayAll, ArrayByType);
 
 	If Object.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.CurrencyExchange")

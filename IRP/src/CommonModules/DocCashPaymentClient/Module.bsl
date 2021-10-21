@@ -54,7 +54,7 @@ Procedure CleanDataByTransactionTypeContinue(Result, AdditionalParameters) Expor
 	If Result = DialogReturnCode.OK Then
 		ArrayAll = New Array();
 		ArrayByType = New Array();
-		DocCashPaymentServer.FillAttributesByType(AdditionalParameters.Object.TransactionType, ArrayAll, ArrayByType);
+		DocCashPaymentServer.FillAttributesByType(Object.Ref, Object.TransactionType, ArrayAll, ArrayByType);
 		DocumentsClientServer.CleanDataByArray(AdditionalParameters.Object, ArrayAll, ArrayByType);
 		For Each Row In Object.PaymentList Do
 			Row.PlaningTransactionBasis = Undefined;

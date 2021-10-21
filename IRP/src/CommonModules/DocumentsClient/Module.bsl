@@ -485,7 +485,7 @@ Procedure CompanyOnChange(Object, Form, Module, Item = Undefined, Settings = Und
 	Settings.Insert("FormAttributes", CompanySettings.FormAttributes);
 
 	If ServerData = Undefined Then
-		If ServiceSystemClientServer.ObjectHasAttribute("TaxList", Object) Then
+		If CommonFunctionsClientServer.ObjectHasProperty(Object, "TaxList") Then
 			Form.Taxes_CreateFormControls();
 		EndIf;
 	Else
@@ -951,7 +951,7 @@ Procedure DateOnChange(Object, Form, Module, Item = Undefined, Settings = Undefi
 	Settings.Insert("FormAttributes", DateSettings.FormAttributes);
 
 	If ServerData = Undefined Then
-		If ServiceSystemClientServer.ObjectHasAttribute("TaxList", Object) Then
+		If CommonFunctionsClientServer.ObjectHasProperty(Object, "TaxList") Then
 			Form.Taxes_CreateFormControls();
 		EndIf;
 	Else

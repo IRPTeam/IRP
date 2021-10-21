@@ -22,7 +22,7 @@ Procedure ClearDependentData(Object, AddInfo = Undefined) Export
 		TableName = AddInfo.TableParent;
 	EndIf;
 
-	If ServiceSystemClientServer.ObjectHasAttribute("TaxList", Object) Then
+	If CommonFunctionsClientServer.ObjectHasProperty(Object, "TaxList") Then
 		ArrayForDelete = New Array();
 
 		For Each Row In Object.TaxList Do
@@ -36,7 +36,7 @@ Procedure ClearDependentData(Object, AddInfo = Undefined) Export
 		EndDo;
 	EndIf;
 
-	If ServiceSystemClientServer.ObjectHasAttribute("SpecialOffers", Object) Then
+	If CommonFunctionsClientServer.ObjectHasProperty(Object, "SpecialOffers") Then
 		ArrayForDelete = New Array();
 		For Each Row In Object.SpecialOffers Do
 			If ValueIsFilled(Row.Offer) And CalculationServer.OfferHaveManualInputValue(Row.Offer)

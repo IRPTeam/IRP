@@ -22,7 +22,7 @@ Procedure FillingWithDefaultDataFilling(Source, FillingData, FillingText, Standa
 	EndDo;
 
 	For Each KeyValue In Data Do
-		If ServiceSystemClientServer.ObjectHasAttribute(KeyValue.Key, Source) Then
+		If CommonFunctionsClientServer.ObjectHasProperty(Source, KeyValue.Key) Then
 			If TypeOf(Source[KeyValue.Key]) = Type("Boolean") And Not Source[KeyValue.Key] Then
 				Source[KeyValue.Key] = KeyValue.Value;
 			ElsIf Not ValueIsFilled(Source[KeyValue.Key]) Or Force Then

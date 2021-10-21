@@ -194,7 +194,7 @@ Procedure CleanDataByArray(Object, Val ArrayAll, Val ArrayVisible) Export
 				EndIf;
 			EndDo;
 		Else
-			If ServiceSystemClientServer.ObjectHasAttribute(ArrayElement, Object) Then
+			If CommonFunctionsClientServer.ObjectHasProperty(Object, ArrayElement) Then
 				Object[ArrayElement] = Undefined;
 			EndIf;
 		EndIf;

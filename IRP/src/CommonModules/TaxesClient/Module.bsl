@@ -17,7 +17,7 @@ Function GetArrayOfTaxInfoFromServerData(Object, Form, AddInfo) Export
 	ArrayOfTaxInfo = Undefined;
 	ServerData = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "ServerData");
 	If ServerData = Undefined Then
-		If ServiceSystemClientServer.ObjectHasAttribute("TaxList", Object) Then
+		If CommonFunctionsClientServer.ObjectHasProperty(Object, "TaxList") Then
 			ArrayOfTaxInfo = TaxesClient.GetArrayOfTaxInfo(Form);
 		EndIf;
 	Else

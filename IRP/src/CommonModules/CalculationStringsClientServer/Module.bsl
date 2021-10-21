@@ -229,7 +229,7 @@ Function CalculateItemsRows(Object, Form, ItemRows, Actions, ArrayOfTaxInfo = Un
 		Notify(Action.Key, NotifyStructure, Form);
 	EndDo;
 
-	Notify("CalculationStrngsComplete", New Structure("AddInfo", AddInfo), Form);
+	Notify("CalculationStringsComplete", New Structure("AddInfo", AddInfo), Form);
 
 #EndIf
 	Return Result;

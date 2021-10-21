@@ -119,7 +119,7 @@ Procedure AccountOnChangeContinue(Result, AdditionalParameters) Export
 	Else
 		Raise R().Error_032;
 	EndIf;
-	Notify("CalculationStrngsComplete", Undefined, Form);
+	Notify("CalculationStringsComplete", Undefined, Form);
 EndProcedure
 
 Procedure AccountStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export

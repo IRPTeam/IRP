@@ -35,7 +35,82 @@ Procedure OnReadAtServer(Object, Form, CurrentObject) Export
 EndProcedure
 
 Procedure FillAttributesByType(TransactionType, ArrayAll, ArrayByType) Export
-	Documents.BankReceipt.FillAttributesByType(TransactionType, ArrayAll, ArrayByType);
+	ArrayAll = New Array();
+	ArrayAll.Add("Account");
+	ArrayAll.Add("Company");
+	ArrayAll.Add("Currency");
+	ArrayAll.Add("TransactionType");
+	ArrayAll.Add("CurrencyExchange");
+	ArrayAll.Add("Payer");
+	ArrayAll.Add("PaymentList.Agreement");
+	ArrayAll.Add("TransitAccount");
+	ArrayAll.Add("Description");
+
+	ArrayAll.Add("PaymentList.BasisDocument");
+	ArrayAll.Add("PaymentList.Partner");
+	ArrayAll.Add("PaymentList.Payer");
+	ArrayAll.Add("PaymentList.PlaningTransactionBasis");
+	ArrayAll.Add("PaymentList.Amount");
+	ArrayAll.Add("PaymentList.AmountExchange");
+	ArrayAll.Add("PaymentList.POSAccount");
+	ArrayAll.Add("PaymentList.LegalNameContract");
+
+	ArrayByType = New Array();
+	If TransactionType = Enums.IncomingPaymentTransactionType.CashTransferOrder Then
+		ArrayByType.Add("Account");
+		ArrayByType.Add("Company");
+		ArrayByType.Add("Currency");
+		ArrayByType.Add("TransactionType");
+		ArrayByType.Add("Description");
+
+		ArrayByType.Add("PaymentList.PlaningTransactionBasis");
+		ArrayByType.Add("PaymentList.Amount");
+	ElsIf TransactionType = Enums.IncomingPaymentTransactionType.TransferFromPOS Then
+		ArrayByType.Add("Account");
+		ArrayByType.Add("Company");
+		ArrayByType.Add("Currency");
+		ArrayByType.Add("TransactionType");
+		ArrayByType.Add("Description");
+
+		ArrayByType.Add("PaymentList.PlaningTransactionBasis");
+		ArrayByType.Add("PaymentList.Amount");
+		ArrayByType.Add("PaymentList.POSAccount");
+	ElsIf TransactionType = Enums.IncomingPaymentTransactionType.CurrencyExchange Then
+		ArrayByType.Add("Account");
+		ArrayByType.Add("Company");
+		ArrayByType.Add("Currency");
+		ArrayByType.Add("TransactionType");
+		ArrayByType.Add("CurrencyExchange");
+		ArrayByType.Add("TransitAccount");
+		ArrayByType.Add("Description");
+
+		ArrayByType.Add("PaymentList.PlaningTransactionBasis");
+		ArrayByType.Add("PaymentList.Amount");
+		ArrayByType.Add("PaymentList.AmountExchange");
+
+	ElsIf TransactionType = Enums.IncomingPaymentTransactionType.PaymentFromCustomer Or TransactionType
+		= Enums.IncomingPaymentTransactionType.ReturnFromVendor Then
+		ArrayByType.Add("Account");
+		ArrayByType.Add("Company");
+		ArrayByType.Add("Currency");
+		ArrayByType.Add("TransactionType");
+		ArrayByType.Add("Payer");
+		ArrayByType.Add("Description");
+
+		ArrayByType.Add("PaymentList.BasisDocument");
+		ArrayByType.Add("PaymentList.Partner");
+		ArrayByType.Add("PaymentList.Payer");
+		ArrayByType.Add("PaymentList.PlaningTransactionBasis");
+		ArrayByType.Add("PaymentList.Amount");
+		ArrayByType.Add("PaymentList.Agreement");
+		ArrayByType.Add("PaymentList.LegalNameContract");
+	Else // empty
+		ArrayByType.Add("Company");
+		ArrayByType.Add("Currency");
+		ArrayByType.Add("TransactionType");
+
+		ArrayByType.Add("PaymentList.Amount");
+	EndIf;
 EndProcedure
 
 #EndRegion

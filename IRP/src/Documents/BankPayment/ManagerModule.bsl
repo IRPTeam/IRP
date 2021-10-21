@@ -222,72 +222,8 @@ EndProcedure
 
 #EndRegion
 
-Procedure FillAttributesByType(TransactionType, ArrayAll, ArrayByType) Export
-
-	ArrayAll = New Array();
-	ArrayAll.Add("Account");
-	ArrayAll.Add("Company");
-	ArrayAll.Add("Currency");
-	ArrayAll.Add("TransactionType");
-	ArrayAll.Add("Payee");
-	ArrayAll.Add("PaymentList.Agreement");
-	ArrayAll.Add("TransitAccount");
-	ArrayAll.Add("Description");
-
-	ArrayAll.Add("PaymentList.BasisDocument");
-	ArrayAll.Add("PaymentList.Partner");
-	ArrayAll.Add("PaymentList.Payee");
-	ArrayAll.Add("PaymentList.PlaningTransactionBasis");
-	ArrayAll.Add("PaymentList.Amount");
-	ArrayAll.Add("PaymentList.LegalNameContract");
-
-	ArrayByType = New Array();
-	If TransactionType = Enums.OutgoingPaymentTransactionTypes.CashTransferOrder Then
-		ArrayByType.Add("Account");
-		ArrayByType.Add("Company");
-		ArrayByType.Add("Currency");
-		ArrayByType.Add("TransactionType");
-		ArrayByType.Add("Description");
-
-		ArrayByType.Add("PaymentList.PlaningTransactionBasis");
-		ArrayByType.Add("PaymentList.Amount");
-	ElsIf TransactionType = Enums.OutgoingPaymentTransactionTypes.CurrencyExchange Then
-		ArrayByType.Add("Account");
-		ArrayByType.Add("Company");
-		ArrayByType.Add("Currency");
-		ArrayByType.Add("TransactionType");
-		ArrayByType.Add("TransitAccount");
-		ArrayByType.Add("Description");
-
-		ArrayByType.Add("PaymentList.PlaningTransactionBasis");
-		ArrayByType.Add("PaymentList.Amount");
-	ElsIf TransactionType = Enums.OutgoingPaymentTransactionTypes.PaymentToVendor Or TransactionType
-		= Enums.OutgoingPaymentTransactionTypes.ReturnToCustomer Then
-		ArrayByType.Add("Account");
-		ArrayByType.Add("Company");
-		ArrayByType.Add("Currency");
-		ArrayByType.Add("TransactionType");
-		ArrayByType.Add("Payee");
-		ArrayByType.Add("Description");
-
-		ArrayByType.Add("PaymentList.BasisDocument");
-		ArrayByType.Add("PaymentList.Partner");
-		ArrayByType.Add("PaymentList.Payee");
-		ArrayByType.Add("PaymentList.Agreement");
-		ArrayByType.Add("PaymentList.PlaningTransactionBasis");
-		ArrayByType.Add("PaymentList.Amount");
-		ArrayByType.Add("PaymentList.LegalNameContract");
-	Else // empty
-		ArrayByType.Add("Company");
-		ArrayByType.Add("Currency");
-		ArrayByType.Add("TransactionType");
-
-		ArrayByType.Add("PaymentList.Amount");
-	EndIf;
-
-EndProcedure
-
 #Region NewRegistersPosting
+
 Function GetInformationAboutMovements(Ref) Export
 	Str = New Structure();
 	Str.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));

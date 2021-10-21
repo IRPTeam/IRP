@@ -305,6 +305,39 @@ EndProcedure
 
 #EndRegion
 
+#Region SpecialOffers
+
+#Region Offers_for_document
+
+&AtClient
+Procedure SetSpecialOffers(Command)
+	OffersClient.OpenFormPickupSpecialOffers_ForDocument(Object, ThisObject, "SpecialOffersEditFinish_ForDocument");
+EndProcedure
+
+&AtClient
+Procedure SpecialOffersEditFinish_ForDocument(Result, AdditionalParameters) Export
+	OffersClient.SpecialOffersEditFinish_ForDocument(Result, Object, ThisObject, AdditionalParameters);
+EndProcedure
+
+#EndRegion
+
+#Region Offers_for_row
+
+&AtClient
+Procedure SetSpecialOffersAtRow(Command)
+	OffersClient.OpenFormPickupSpecialOffers_ForRow(Object, Items.ItemList.CurrentData, ThisObject,
+		"SpecialOffersEditFinish_ForRow");
+EndProcedure
+
+&AtClient
+Procedure SpecialOffersEditFinish_ForRow(Result, AdditionalParameters) Export
+	OffersClient.SpecialOffersEditFinish_ForRow(Result, Object, ThisObject, AdditionalParameters);
+EndProcedure
+
+#EndRegion
+
+#EndRegion
+
 #Region DescriptionEvents
 
 &AtClient

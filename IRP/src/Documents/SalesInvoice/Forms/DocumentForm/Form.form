@@ -2740,7 +2740,7 @@
           <name>ItemListContextMenu</name>
           <id>48</id>
           <items xsi:type="form:Button">
-            <name>ItemListContextMenuSetSpecialOffersAtRow</name>
+            <name>SetSpecialOffersAtRow</name>
             <id>165</id>
             <visible>true</visible>
             <enabled>true</enabled>
@@ -2748,7 +2748,7 @@
               <common>true</common>
             </userVisible>
             <extendedTooltip>
-              <name>ItemListContextMenuSetSpecialOffersAtRowExtendedTooltip</name>
+              <name>SetSpecialOffersAtRowExtendedTooltip</name>
               <id>166</id>
               <visible>true</visible>
               <enabled>true</enabled>

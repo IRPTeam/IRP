@@ -680,6 +680,19 @@
       <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
     </attributes>
+    <attributes uuid="f7c4f876-aeb7-4562-b30f-89b6e4d615b4">
+      <name>Percent</name>
+      <synonym>
+        <key>en</key>
+        <value>Percent</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typePercent</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+    </attributes>
   </tabularSections>
   <tabularSections uuid="8d85da71-fa81-4795-b348-a25e38892bdc">
     <producedTypes>

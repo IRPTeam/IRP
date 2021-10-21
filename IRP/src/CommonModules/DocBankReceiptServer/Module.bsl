@@ -1,37 +1,15 @@
 #Region FormEvents
 
 Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
-	DocumentsServer.OnCreateAtServer(Object, Form, Cancel, StandardProcessing);
-	If Form.Parameters.Key.IsEmpty() Then
-		Form.CurrentCurrency = Object.Currency;
-		Form.CurrentAccount = Object.Account;
-		Form.CurrentTransactionType = Object.TransactionType;
-
-		SetGroupItemsList(Object, Form);
-		DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
-	EndIf;
-	DocumentsServer.FillPaymentList(Object);
-EndProcedure
-
-Procedure AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters) Export
-	Form.CurrentCurrency = CurrentObject.Currency;
-	Form.CurrentAccount = CurrentObject.Account;
-	Form.CurrentTransactionType = Object.TransactionType;
-	DocumentsServer.FillPaymentList(Object);
-
-	DocumentsClientServer.ChangeTitleGroupTitle(CurrentObject, Form);
+	MoneyDocumentsServer.OnCreateAtServer(Object, Form, Cancel, StandardProcessing);
 EndProcedure
 
 Procedure OnReadAtServer(Object, Form, CurrentObject) Export
-	Form.CurrentCurrency = CurrentObject.Currency;
-	Form.CurrentAccount = CurrentObject.Account;
-	Form.CurrentTransactionType = Object.TransactionType;
-	DocumentsServer.FillPaymentList(Object);
+	MoneyDocumentsServer.OnReadAtServer(Object, Form, CurrentObject);
+EndProcedure
 
-	If Not Form.GroupItems.Count() Then
-		SetGroupItemsList(Object, Form);
-	EndIf;
-	DocumentsClientServer.ChangeTitleGroupTitle(CurrentObject, Form);
+Procedure AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters) Export
+	MoneyDocumentsServer.AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters);
 EndProcedure
 
 Procedure FillAttributesByType(TransactionType, ArrayAll, ArrayByType) Export
@@ -265,23 +243,6 @@ Function GetDocumentTable_CashTransferOrder_ForClient(ArrayOfBasisDocuments, Obj
 	EndDo;
 	Return ArrayOfResults;
 EndFunction
-
-#EndRegion
-
-#Region GroupTitle
-
-Procedure SetGroupItemsList(Object, Form)
-	AttributesArray = New Array();
-	AttributesArray.Add("Company");
-	AttributesArray.Add("Account");
-	AttributesArray.Add("TransactionType");
-	AttributesArray.Add("Currency");
-	DocumentsServer.DeleteUnavailableTitleItemNames(AttributesArray);
-	For Each Atr In AttributesArray Do
-		Form.GroupItems.Add(Atr, ?(ValueIsFilled(Form.Items[Atr].Title), Form.Items[Atr].Title,
-			Object.Ref.Metadata().Attributes[Atr].Synonym + ":" + Chars.NBSp));
-	EndDo;
-EndProcedure
 
 #EndRegion
 

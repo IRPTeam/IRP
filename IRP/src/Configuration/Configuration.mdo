@@ -391,6 +391,7 @@
   <commonModules>CommonModule.UsersEvent</commonModules>
   <commonModules>CommonModule.WorkstationClient</commonModules>
   <commonModules>CommonModule.WorkstationServer</commonModules>
+  <commonModules>CommonModule.MoneyDocumentsServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>

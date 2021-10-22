@@ -360,7 +360,7 @@ Procedure PaymentListBasisDocumentStartChoiceEnd(Result, AdditionalParameters) E
 	CurrentData = Form.Items.PaymentList.CurrentData;
 	If CurrentData <> Undefined Then
 		CurrentData.BasisDocument = Result.BasisDocument;
-		CurrentData.Amount        = Result.Amount;
+		CurrentData.TotalAmount   = Result.Amount;
 	EndIf;
 EndProcedure
 
@@ -413,7 +413,7 @@ Procedure PaymentListPlaningTransactionBasisOnChange(Object, Form, Item) Export
 			ArrayOfPlaningTransactionBasises, Object.Ref);
 		If ArrayOfBalance.Count() Then
 			RowOfBalance = ArrayOfBalance[0];
-			CurrentData.Amount = RowOfBalance.Amount;
+			CurrentData.TotalAmount = RowOfBalance.Amount;
 		EndIf;
 	EndIf;
 

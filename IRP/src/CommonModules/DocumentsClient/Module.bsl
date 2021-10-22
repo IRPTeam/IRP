@@ -2514,7 +2514,6 @@ Procedure PaymentListOnStartEdit(Object, Form, Item, NewRow, Clone) Export
 
 	If Clone Then
 		CurrentData.Key = New UUID();
-		CalculateTotalAmount(Object, Form);
 	EndIf;
 EndProcedure
 

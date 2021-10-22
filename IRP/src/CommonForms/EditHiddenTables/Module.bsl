@@ -104,4 +104,3 @@ DocumentTables.Insert("PaymentTerms"          , False);
 DocumentTables.Insert("AddAttributes"         , False);
 DocumentTables.Insert("DataSet"               , False);
 DocumentTables.Insert("DataPrice"             , False);
-

@@ -66,8 +66,7 @@ Function GetLinkedPhysicalCountByLocation(PhysicalInventoryRef, AddInfo = Undefi
 	|	Document.PhysicalCountByLocation.ItemList AS PhysicalCountByLocationItemList
 	|WHERE
 	|	PhysicalCountByLocationItemList.Ref.PhysicalInventory = &PhysicalInventoryRef
-	|	AND
-	|	NOT PhysicalCountByLocationItemList.Ref.DeletionMark";
+	|	AND NOT PhysicalCountByLocationItemList.Ref.DeletionMark";
 	Query.SetParameter("PhysicalInventoryRef", PhysicalInventoryRef);
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();

@@ -1140,157 +1140,121 @@ Scenario: _2990010 create Physical inventory and Physical count by location with
 			And I select "In processing" exact value from "Status" drop-down list
 			And I click the button named "FormPostAndClose"
 
-# Scenario: _2990011 refilling Physical inventory based on Physical count by location list
-# 	And I close all client application windows
-# 	* Open Physical count by location list
-# 		Given I open hyperlink "e1cib/list/Document.PhysicalCountByLocation"
-# 	* Filling in Phys. count  in the first Physical count by location and select status that make movements
-# 		And I go to line in "List" table
-# 			| 'Number' | 'Status'   | 'Store'    |
-# 			| '1'      | 'Prepared' | 'Store 05' |
-# 		And I select current line in "List" table
-# 		And I activate "Phys. count" field in "ItemList" table
-# 		And I input "124,000" text in "Phys. count" field of "ItemList" table
-# 		And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
-# 		And I select "Done" exact value from "Status" drop-down list
-# 		And I click "Save and close" button
-# 		And Delay 2
-# 	* Filling in Phys. count  in the second Physical count by location and select status that does not make movements
-# 		Given I open hyperlink "e1cib/list/Document.PhysicalCountByLocation"
-# 		And I go to line in "List" table
-# 			| 'Number' | 'Status'   | 'Store'    |
-# 			| '2'      | 'Prepared' | 'Store 05' |
-# 		And I select current line in "List" table
-# 		And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
-# 		And I activate "Phys. count" field in "ItemList" table
-# 		And I select current line in "ItemList" table
-# 		And I input "197,000" text in "Phys. count" field of "ItemList" table
-# 		And I finish line editing in "ItemList" table
-# 		And I select "In processing" exact value from "Status" drop-down list
-# 		And I click "Save and close" button
-# 		And Delay 2
-# 	* Filling in Phys. count  in the third Physical count by location and select status that make movements
-# 		Given I open hyperlink "e1cib/list/Document.PhysicalCountByLocation"
-# 		And I go to line in "List" table
-# 			| 'Number' | 'Status'   | 'Store'    |
-# 			| '3'      | 'Prepared' | 'Store 05' |
-# 		And I select current line in "List" table
-# 		And I go to line in "ItemList" table
-# 			| 'Item'  | 'Item key' | 'Unit' |
-# 			| 'Dress' | 'M/White'  | 'pcs'  |
-# 		And I activate "Phys. count" field in "ItemList" table
-# 		And I input "10,000" text in "Phys. count" field of "ItemList" table
-# 		And I finish line editing in "ItemList" table
-# 		And I go to line in "ItemList" table
-# 			| 'Item'  | 'Item key' | 'Unit' |
-# 			| 'Shirt' | '36/Red'   | 'pcs'  |
-# 		And I select current line in "ItemList" table
-# 		And I input "7,000" text in "Phys. count" field of "ItemList" table
-# 		And I finish line editing in "ItemList" table
-# 		And I go to line in "ItemList" table
-# 			| 'Item'  | 'Item key' | 'Unit' |
-# 			| 'Boots' | '36/18SD'  | 'pcs'  |
-# 		And I select current line in "ItemList" table
-# 		And I input "4,000" text in "Phys. count" field of "ItemList" table
-# 		And I finish line editing in "ItemList" table
-# 		And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
-# 		And I select "Done" exact value from "Status" drop-down list
-# 		And I click "Save and close" button
-# 		And Delay 2
-# 		And I close all client application windows
-# 	* Filling in Physical inventory with the results of the first and third Physical count by location
-# 		Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
-# 		And I go to line in "List" table
-# 			| 'Number' |
-# 			| '$$NumberPhysicalInventory2990010$$'      |
-# 		And I select current line in "List" table
-# 		And I click "Update phys. count" button
-# 		And "ItemList" table contains lines
-# 		| 'Phys. count' | 'Item'  | 'Difference' | 'Item key' | 'Exp. count' | 'Unit' | 'Responsible person' | 'Physical count' |
-# 		| '10,000'      | 'Dress' | '2,000'      | 'M/White'  | '8,000'      | 'pcs'  | 'Anna Petrova'       | '#3 date*'       |
-# 		| '7,000'       | 'Shirt' | ''           | '36/Red'   | '7,000'      | 'pcs'  | 'Anna Petrova'       | '#3 date*'       |
-# 		| '4,000'       | 'Boots' | ''           | '36/18SD'  | '4,000'      | 'pcs'  | 'Anna Petrova'       | '#3 date*'       |
-# 		| '124,000'     | 'Dress' | '-1,000'     | 'S/Yellow' | '125,000'    | 'pcs'  | 'Anna Petrova'       | '#1 date*'       |
-# 		| ''            | 'Dress' | '-206,000'   | 'XS/Blue'  | '206,000'    | 'pcs'  | 'Arina Brown'        | '#2 date*'       |
-# 		And I click "Save" button
-# 	* Check that you cannot close the inventory without closed Physical count by location
-# 		And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
-# 		And I select "Done" exact value from "Status" drop-down list
-# 		And I click the button named "FormPost"
-# 		Then I wait that in user messages the 'There are "Physical count by location" documents that are not closed.' substring will appear in 30 seconds
-# 	* Check that Physical count by location are not created and their statuses do not change
-# 		And I select "In processing" exact value from "Status" drop-down list
-# 		And I click "Physical count by location" button
-# 		And I move to "Physical count by location" tab
-# 		And "PhysicalCountByLocationList" table contains lines
-# 		| 'Reference'                     | 'Status'        |
-# 		| 'Location count 1*' | 'Done'          |
-# 		| 'Location count 2*' | 'In processing' |
-# 		| 'Location count 3*' | 'Done'          |
-# 		And I close all client application windows
-# 	* Closing the second Physical count by location and refilling Physical inventory
-# 		Given I open hyperlink "e1cib/list/Document.PhysicalCountByLocation"
-# 		And I go to line in "List" table
-# 			| 'Number' |
-# 			| '2'      |
-# 		And I select current line in "List" table
-# 		And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
-# 		And I select "Done" exact value from "Status" drop-down list
-# 		And I click "Save and close" button
-# 		Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
-# 		And I go to line in "List" table
-# 			| 'Number' |
-# 			| '$$NumberPhysicalInventory2990010$$'      |
-# 		And I select current line in "List" table
-# 		And I click "Update phys. count" button
-# 		And "ItemList" table contains lines
-# 		| 'Phys. count' | 'Item'  | 'Difference' | 'Item key' | 'Exp. count' | 'Unit' | 'Responsible person' | 'Physical count' |
-# 		| '10,000'      | 'Dress' | '2,000'      | 'M/White'  | '8,000'      | 'pcs'  | 'Anna Petrova'       | '#3 date:*'      |
-# 		| '7,000'       | 'Shirt' | ''           | '36/Red'   | '7,000'      | 'pcs'  | 'Anna Petrova'       | '#3 date:*'      |
-# 		| '4,000'       | 'Boots' | ''           | '36/18SD'  | '4,000'      | 'pcs'  | 'Anna Petrova'       | '#3 date:*'      |
-# 		| '124,000'     | 'Dress' | '-1,000'     | 'S/Yellow' | '125,000'    | 'pcs'  | 'Anna Petrova'       | '#1 date:*'      |
-# 		| '197,000'     | 'Dress' | '-9,000'     | 'XS/Blue'  | '206,000'    | 'pcs'  | 'Arina Brown'        | '#2 date:*'      |
-# 		And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
-# 		And I select "Done" exact value from "Status" drop-down list
-# 		And I click the button named "FormPost"
-# 	* Check movements Physical inventory
-# 		And I click "Registrations report" button
-# 		And I select "Stock adjustment as surplus" exact value from "Register" drop-down list
-# 		And I click "Generate report" button
-# 		And "ResultTable" spreadsheet document contains lines:
-# 		| '$$PhysicalInventory2990010$$'            | ''            | ''       | ''          | ''           | ''                             | ''         |
-# 		| 'Document registrations records'          | ''            | ''       | ''          | ''           | ''                             | ''         |
-# 		| 'Register  "Stock adjustment as surplus"' | ''            | ''       | ''          | ''           | ''                             | ''         |
-# 		| ''                                        | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''                             | ''         |
-# 		| ''                                        | ''            | ''       | 'Quantity'  | 'Store'      | 'Basis document'               | 'Item key' |
-# 		| ''                                        | 'Receipt'     | '*'      | '2'         | 'Store 05'   | '$$PhysicalInventory2990010$$' | 'M/White'  |
-# 		And I select "Stock reservation" exact value from "Register" drop-down list
-# 		And I click "Generate report" button
-# 		And "ResultTable" spreadsheet document contains lines:
-# 		| 'Register  "Stock reservation"' | ''            | ''       | ''          | ''           | ''         | '' |
-# 		| ''                              | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''         | '' |
-# 		| ''                              | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key' | '' |
-# 		| ''                              | 'Receipt'     | '*'      | '2'         | 'Store 05'   | 'M/White'  | '' |
-# 		| ''                              | 'Expense'     | '*'      | '1'         | 'Store 05'   | 'S/Yellow' | '' |
-# 		| ''                              | 'Expense'     | '*'      | '9'         | 'Store 05'   | 'XS/Blue'  | '' |
-# 		And I select "Stock adjustment as write-off" exact value from "Register" drop-down list
-# 		And I click "Generate report" button
-# 		And "ResultTable" spreadsheet document contains lines:
-# 		| 'Register  "Stock adjustment as write-off"' | ''            | ''       | ''          | ''           | ''                             | ''         |
-# 		| ''                                          | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''                             | ''         |
-# 		| ''                                          | ''            | ''       | 'Quantity'  | 'Store'      | 'Basis document'               | 'Item key' |
-# 		| ''                                          | 'Receipt'     | '*'      | '1'         | 'Store 05'   | '$$PhysicalInventory2990010$$' | 'S/Yellow' |
-# 		| ''                                          | 'Receipt'     | '*'      | '9'         | 'Store 05'   | '$$PhysicalInventory2990010$$' | 'XS/Blue'  |
-# 		And I select "Stock balance" exact value from "Register" drop-down list
-# 		And I click "Generate report" button
-# 		And "ResultTable" spreadsheet document contains lines:
-# 		| 'Register  "Stock balance"'                 | ''            | ''       | ''          | ''           | ''                             | ''         |
-# 		| ''                                          | 'Record type' | 'Period' | 'Resources' | 'Dimensions' | ''                             | ''         |
-# 		| ''                                          | ''            | ''       | 'Quantity'  | 'Store'      | 'Item key'                     | ''         |
-# 		| ''                                          | 'Receipt'     | '*'      | '2'         | 'Store 05'   | 'M/White'                      | ''         |
-# 		| ''                                          | 'Expense'     | '*'      | '1'         | 'Store 05'   | 'S/Yellow'                     | ''         |
-# 		| ''                                          | 'Expense'     | '*'      | '9'         | 'Store 05'   | 'XS/Blue'                      | ''         |
-# 		And I close all client application windows
+Scenario: _2990011 refilling Physical inventory based on Physical count by location list
+	And I close all client application windows
+	* Open Physical count by location list
+		Given I open hyperlink "e1cib/list/Document.PhysicalCountByLocation"
+	* Filling in Phys. count  in the first Physical count by location and select status that make movements
+		And I go to line in "List" table
+			| 'Number' | 'Status'   | 'Store'    |
+			| '1'      | 'Prepared' | 'Store 05' |
+		And I select current line in "List" table
+		And I activate "Phys. count" field in "ItemList" table
+		And I input "124,000" text in "Phys. count" field of "ItemList" table
+		And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
+		And I select "Done" exact value from "Status" drop-down list
+		And I click "Save and close" button
+		And Delay 2
+	* Filling in Phys. count  in the second Physical count by location and select status that does not make movements
+		Given I open hyperlink "e1cib/list/Document.PhysicalCountByLocation"
+		And I go to line in "List" table
+			| 'Number' | 'Status'   | 'Store'    |
+			| '2'      | 'Prepared' | 'Store 05' |
+		And I select current line in "List" table
+		And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
+		And I activate "Phys. count" field in "ItemList" table
+		And I select current line in "ItemList" table
+		And I input "197,000" text in "Phys. count" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I select "In processing" exact value from "Status" drop-down list
+		And I click "Save and close" button
+		And Delay 2
+	* Filling in Phys. count  in the third Physical count by location and select status that make movements
+		Given I open hyperlink "e1cib/list/Document.PhysicalCountByLocation"
+		And I go to line in "List" table
+			| 'Number' | 'Status'   | 'Store'    |
+			| '3'      | 'Prepared' | 'Store 05' |
+		And I select current line in "List" table
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' | 'Unit' |
+			| 'Dress' | 'M/White'  | 'pcs'  |
+		And I activate "Phys. count" field in "ItemList" table
+		And I input "10,000" text in "Phys. count" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' | 'Unit' |
+			| 'Shirt' | '36/Red'   | 'pcs'  |
+		And I select current line in "ItemList" table
+		And I input "7,000" text in "Phys. count" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I go to line in "ItemList" table
+			| 'Item'  | 'Item key' | 'Unit' |
+			| 'Boots' | '36/18SD'  | 'pcs'  |
+		And I select current line in "ItemList" table
+		And I input "4,000" text in "Phys. count" field of "ItemList" table
+		And I finish line editing in "ItemList" table
+		And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
+		And I select "Done" exact value from "Status" drop-down list
+		And I click "Save and close" button
+		And Delay 2
+		And I close all client application windows
+	* Filling in Physical inventory with the results of the first and third Physical count by location
+		Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
+		And I go to line in "List" table
+			| 'Number' |
+			| '$$NumberPhysicalInventory2990010$$'      |
+		And I select current line in "List" table
+		And I click "Update phys. count" button
+		And "ItemList" table contains lines
+		| 'Phys. count' | 'Item'  | 'Difference' | 'Item key' | 'Exp. count' | 'Unit' | 'Responsible person' | 'Physical count' |
+		| '10,000'      | 'Dress' | '2,000'      | 'M/White'  | '8,000'      | 'pcs'  | 'Anna Petrova'       | '3 date*'       |
+		| '7,000'       | 'Shirt' | ''           | '36/Red'   | '7,000'      | 'pcs'  | 'Anna Petrova'       | '3 date*'       |
+		| '4,000'       | 'Boots' | ''           | '36/18SD'  | '4,000'      | 'pcs'  | 'Anna Petrova'       | '3 date*'       |
+		| '124,000'     | 'Dress' | '-1,000'     | 'S/Yellow' | '125,000'    | 'pcs'  | 'Anna Petrova'       | '1 date*'       |
+		| ''            | 'Dress' | '-202,000'   | 'XS/Blue'  | '202,000'    | 'pcs'  | 'Arina Brown'        | '2 date*'       |
+		And I click "Save" button
+	* Check that you cannot close the inventory without closed Physical count by location
+		And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
+		And I select "Done" exact value from "Status" drop-down list
+		And I click the button named "FormPost"
+		Then I wait that in user messages the 'There are "Physical count by location" documents that are not closed.' substring will appear in 30 seconds
+	* Check that Physical count by location are not created and their statuses do not change
+		And I select "In processing" exact value from "Status" drop-down list
+		And I click "Physical count by location" button
+		And I move to "Physical count by location" tab
+		And "PhysicalCountByLocationList" table contains lines
+		| 'Reference'                     | 'Status'        |
+		| 'Location count 1*' | 'Done'          |
+		| 'Location count 2*' | 'In processing' |
+		| 'Location count 3*' | 'Done'          |
+		And I close all client application windows
+	* Closing the second Physical count by location and refilling Physical inventory
+		Given I open hyperlink "e1cib/list/Document.PhysicalCountByLocation"
+		And I go to line in "List" table
+			| 'Number' |
+			| '2'      |
+		And I select current line in "List" table
+		And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
+		And I select "Done" exact value from "Status" drop-down list
+		And I click "Save and close" button
+		Given I open hyperlink "e1cib/list/Document.PhysicalInventory"
+		And I go to line in "List" table
+			| 'Number' |
+			| '$$NumberPhysicalInventory2990010$$'      |
+		And I select current line in "List" table
+		And I click "Update phys. count" button
+		And "ItemList" table contains lines
+		| 'Phys. count' | 'Item'  | 'Difference' | 'Item key' | 'Exp. count' | 'Unit' | 'Responsible person' | 'Physical count' |
+		| '10,000'      | 'Dress' | '2,000'      | 'M/White'  | '8,000'      | 'pcs'  | 'Anna Petrova'       | '3 date:*'      |
+		| '7,000'       | 'Shirt' | ''           | '36/Red'   | '7,000'      | 'pcs'  | 'Anna Petrova'       | '3 date:*'      |
+		| '4,000'       | 'Boots' | ''           | '36/18SD'  | '4,000'      | 'pcs'  | 'Anna Petrova'       | '3 date:*'      |
+		| '124,000'     | 'Dress' | '-1,000'     | 'S/Yellow' | '125,000'    | 'pcs'  | 'Anna Petrova'       | '1 date:*'      |
+		| '197,000'     | 'Dress' | '-5,000'     | 'XS/Blue'  | '202,000'    | 'pcs'  | 'Arina Brown'        | '2 date:*'      |
+		And I click the hyperlink named "DecorationGroupTitleCollapsedPicture"
+		And I select "Done" exact value from "Status" drop-down list
+		And I click the button named "FormPost"
+		Then user message window does not contain messages
+		And I close all client application windows
 
 # Scenario: _2990012 check the opening of the status history in Physical inventory and Physical count by location
 # 	And I close all client application windows

@@ -376,7 +376,6 @@
   <commonModules>CommonModule.SerialLotNumberClient</commonModules>
   <commonModules>CommonModule.SerialLotNumbersServer</commonModules>
   <commonModules>CommonModule.ServiceSystemClient</commonModules>
-  <commonModules>CommonModule.ServiceSystemClientServer</commonModules>
   <commonModules>CommonModule.ServiceSystemServer</commonModules>
   <commonModules>CommonModule.SessionParametersServer</commonModules>
   <commonModules>CommonModule.TaxesClient</commonModules>
@@ -390,6 +389,7 @@
   <commonModules>CommonModule.UsersEvent</commonModules>
   <commonModules>CommonModule.WorkstationClient</commonModules>
   <commonModules>CommonModule.WorkstationServer</commonModules>
+  <commonModules>CommonModule.MoneyDocumentsServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>

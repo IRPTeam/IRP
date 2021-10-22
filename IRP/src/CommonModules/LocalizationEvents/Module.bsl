@@ -341,7 +341,7 @@ Procedure CheckDescriptionDuplicate(Source, Cancel)
 	If UseMultiLanguage Then
 		AllDescription = LocalizationReuse.AllDescription();
 	Else
-		If ServiceSystemClientServer.ObjectHasAttribute("Description", Source) And ValueIsFilled(Source.Description) Then
+		If CommonFunctionsClientServer.ObjectHasProperty(Source, "Description") And ValueIsFilled(Source.Description) Then
 			AllDescription.Add("Description");
 		EndIf;
 	EndIf;

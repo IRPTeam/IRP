@@ -377,11 +377,6 @@ Function GetTaxRatesByTax(Tax) Export
 	Return Query.Execute().Unload().UnloadColumn("TaxRate");
 EndFunction
 
-Procedure PutToTaxTableByColumnName(Form, Key, ColumnName, Value) Export
-	AttrNames = GetAttributeNames();
-	PutToTaxTable(Form, Key, GetTaxByColumnName(Form, AttrNames.CacheName, ColumnName), Value);
-EndProcedure
-
 Procedure PutToTaxTable(Form, Key, Tax, Value)
 	AttrNames = GetAttributeNames();
 	Filter = New Structure("Key, Tax", Key, Tax);
@@ -399,7 +394,7 @@ Procedure PutToTaxTable(Form, Key, Tax, Value)
 	TaxTableRow.Value = Value;
 EndProcedure
 
-Function GetFromTaxTable(Form, Key, Tax) Export
+Function GetFromTaxTable(Form, Key, Tax)
 	AttrNames = GetAttributeNames();
 	Filter = New Structure("Key, Tax", Key, Tax);
 	ArrayOfRowsTaxTable = Form[AttrNames.TableName].FindRows(Filter);
@@ -545,6 +540,7 @@ Procedure CreateFormControls(Object, Form, Parameters) Export
 	SetSavedData(Form, AttrNames.CacheName, New Structure("ArrayOfColumnsInfo", ArrayOfColumnsInfo));
 EndProcedure
 
+// [REFACTORING CreateFormControls_ItemList]
 Function CreateFormControls_RetailDocuments(Object, Form, AddInfo) Export
 	TaxesParameters = GetCreateFormControlsParameters();
 	TaxesParameters.Date                  = Object.Date;
@@ -558,16 +554,36 @@ Function CreateFormControls_RetailDocuments(Object, Form, AddInfo) Export
 
 	CreateFormControls(Object, Form, TaxesParameters);
 	
+	Return GetArrayOfTaxInfo(Object, Form);
+EndFunction
+
+Function CreateFormControls_PaymentList(Object, Form, AddInfo) Export
+	TaxesParameters = GetCreateFormControlsParameters();
+	TaxesParameters.Date                  = Object.Date;
+	TaxesParameters.Company               = Object.Company;
+	TaxesParameters.PathToTable           = "Object.PaymentList";
+	TaxesParameters.ItemParent            = Form.Items.PaymentList;
+	TaxesParameters.ColumnOffset          = Form.Items.PaymentListCurrency;
+	TaxesParameters.ItemListName          = "PaymentList";
+	TaxesParameters.TaxListName           = "TaxList";
+	TaxesParameters.TotalAmountColumnName = "PaymentListTotalAmount";
+
+	CreateFormControls(Object, Form, TaxesParameters);
+	
+	Return GetArrayOfTaxInfo(Object, Form);
+EndFunction
+
+Function GetArrayOfTaxInfo(Object, Form)
 	// update tax cache after rebuild form controls
 	TaxesCache = New Structure();
-	TaxesCache.Insert("Cache", Form.TaxesCache);
-	TaxesCache.Insert("Ref", Object.Ref);
-	TaxesCache.Insert("Date", Object.Date);
-	TaxesCache.Insert("Company", Object.Company);
+	TaxesCache.Insert("Cache"   , Form.TaxesCache);
+	TaxesCache.Insert("Ref"     , Object.Ref);
+	TaxesCache.Insert("Date"    , Object.Date);
+	TaxesCache.Insert("Company" , Object.Company);
 
 	ParametersToServer = New Structure("TaxesCache", TaxesCache);
 	ServerData = DocumentsServer.PrepareServerData(ParametersToServer);
-	Return ServerData.ArrayOfTaxInfo;
+	Return ServerData.ArrayOfTaxInfo;	
 EndFunction
 
 Function GetCreateFormControlsParameters() Export
@@ -591,166 +607,6 @@ EndFunction
 
 Procedure SetSavedData(Form, AttributeName, SavedDataStructure)
 	Form[AttributeName] = CommonFunctionsServer.SerializeXMLUseXDTO(SavedDataStructure);
-EndProcedure
-
-Function GetTaxByColumnName(Form, CacheName, ColumnName)
-	SavedDataStructure = TaxesClientServer.GetSavedData(Form, CacheName);
-	For Each ItemOfColumnsInfo In SavedDataStructure.ArrayOfColumnsInfo Do
-		If ItemOfColumnsInfo.Name = ColumnName Then
-			Return ItemOfColumnsInfo.Tax;
-		EndIf;
-	EndDo;
-	Raise StrTemplate(R().Error_042, ColumnName);
-EndFunction
-
-Function GetEmptyTaxTable(MetadataTaxList)
-	TaxList = New ValueTable();
-	TaxList.Columns.Add("Key", MetadataTaxList.Attributes.Key.Type);
-	TaxList.Columns.Add("Tax", MetadataTaxList.Attributes.Tax.Type);
-	TaxList.Columns.Add("Analytics", MetadataTaxList.Attributes.Analytics.Type);
-	TaxList.Columns.Add("TaxRate", MetadataTaxList.Attributes.TaxRate.Type);
-	TaxList.Columns.Add("ManualAmount", MetadataTaxList.Attributes.ManualAmount.Type);
-	TaxList.Columns.Add("Amount", MetadataTaxList.Attributes.Amount.Type);
-	TaxList.Columns.Add("IncludeToTotalAmount", MetadataTaxList.Attributes.IncludeToTotalAmount.Type);
-
-	Return TaxList;
-EndFunction
-
-Function GetCreateTaxTreeParameters() Export
-	Parameters = New Structure();
-	Parameters.Insert("MetadataMainList");
-	Parameters.Insert("MetadataTaxList");
-	Parameters.Insert("ObjectMainList");
-	Parameters.Insert("ObjectTaxList");
-	Parameters.Insert("MainListColumns");
-	Parameters.Insert("Level1Columns");
-	Parameters.Insert("Level2Columns");
-	Parameters.Insert("Level3Columns");
-	Return Parameters;
-EndFunction
-
-Procedure CreateTaxTree(Object, Form, Parameters) Export
-
-	PaymentList = New ValueTable();
-	ColumnCollection = Parameters.ObjectMainList.Unload().Columns;
-	For Each ColumnName In StrSplit(Parameters.MainListColumns, ",") Do
-		PaymentList.Columns.Add(TrimAll(ColumnName), ColumnCollection[TrimAll(ColumnName)].ValueType);
-	EndDo;
-
-	For Each Row In Parameters.ObjectMainList Do
-		FillPropertyValues(PaymentList.Add(), Row);
-	EndDo;
-
-	TaxList = GetEmptyTaxTable(Parameters.MetadataTaxList);
-
-	For Each Row In Parameters.ObjectTaxList Do
-		FillPropertyValues(TaxList.Add(), Row);
-	EndDo;
-
-	Query = New Query();
-	Query.Text =
-	"SELECT *
-	|INTO PaymentList
-	|FROM
-	|	&PaymentList AS PaymentList
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	TaxList.Key,
-	|	TaxList.Tax,
-	|	TaxList.Analytics,
-	|	TaxList.TaxRate,
-	|	TaxList.ManualAmount,
-	|	TaxList.Amount,
-	|	TaxList.IncludeToTotalAmount
-	|INTO TaxList
-	|FROM
-	|	&TaxList AS TaxList
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	TaxList.Key AS Key,
-	|	TaxList.Tax AS Tax,
-	|	TaxList.Analytics AS Analytics,
-	|	PaymentList.*,
-	|	TaxList.TaxRate AS TaxRate,
-	|	TaxList.ManualAmount AS ManualAmount,
-	|	TaxList.Amount AS Amount,
-	|	CASE
-	|		WHEN TaxList.IncludeToTotalAmount
-	|			THEN TaxList.Amount
-	|		ELSE 0
-	|	END AS TotalAmount,
-	|	CASE
-	|		WHEN TaxList.IncludeToTotalAmount
-	|			THEN TaxList.ManualAmount
-	|		ELSE 0
-	|	END AS TotalManualAmount
-	|FROM
-	|	TaxList AS TaxList
-	|		INNER JOIN PaymentList AS PaymentList
-	|		ON TaxList.Key = PaymentList.Key";
-	Query.SetParameter("PaymentList", PaymentList);
-	Query.SetParameter("TaxList", TaxList);
-
-	QueryTable = Query.Execute().Unload();
-	Table1 = QueryTable.Copy();
-
-	Table1.GroupBy(Parameters.Level1Columns, "TotalManualAmount, TotalAmount");
-
-	Form.TaxTree.GetItems().Clear();
-	For Each Row1 In Table1 Do
-		// Level-1
-		NewRow1 = Form.TaxTree.GetItems().Add();
-		FillPropertyValues(NewRow1, Row1);
-		NewRow1.Amount = Row1.TotalAmount;
-		NewRow1.ManualAmount = Row1.TotalManualAmount;
-		NewRow1.Level = 1;
-		NewRow1.ReadOnly = True;
-		NewRow1.PictureEdit = 1;
-
-		Filter1 = New Structure(Parameters.Level1Columns);
-		FillPropertyValues(Filter1, Row1);
-		Table2 = QueryTable.Copy(Filter1);
-
-		Table2.GroupBy(Parameters.Level2Columns, "TotalManualAmount, TotalAmount");
-
-		For Each Row2 In Table2 Do
-			// Level-2
-			NewRow2 = NewRow1.GetItems().Add();
-			FillPropertyValues(NewRow2, Row1);
-			FillPropertyValues(NewRow2, Row2);
-
-			NewRow2.Amount = Row2.TotalAmount;
-			NewRow2.ManualAmount = Row2.TotalManualAmount;
-			NewRow2.Level = 2;
-			If Not ValueIsFilled(Row2.TaxRate) Then
-				NewRow2.ReadOnly = True;
-				NewRow2.PictureEdit = 1;
-			EndIf;
-			Filter2 = New Structure(Parameters.Level1Columns + ", " + Parameters.Level2Columns);
-			FillPropertyValues(Filter2, Row1);
-			FillPropertyValues(Filter2, Row2);
-
-			Table3 = QueryTable.Copy(Filter2);
-			Table3.GroupBy(Parameters.Level3Columns, "ManualAmount, Amount");
-
-			For Each Row3 In Table3 Do
-				// Level-3
-				If ValueIsFilled(Row3.Analytics) Then
-					NewRow2.ReadOnly = True;
-					NewRow2.PictureEdit = 1;
-					NewRow3 = NewRow2.GetItems().Add();
-					FillPropertyValues(NewRow3, Row1);
-					FillPropertyValues(NewRow3, Row2);
-					FillPropertyValues(NewRow3, Row3);
-					NewRow3.Level = 3;
-				EndIf;
-			EndDo;
-		EndDo;
-	EndDo;
 EndProcedure
 
 Function GetDocumentsWithTax() Export

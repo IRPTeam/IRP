@@ -1993,7 +1993,7 @@
             <common>true</common>
           </userVisible>
           <dataPath xsi:type="form:DataPath">
-            <segments>Object.DocumentAmount</segments>
+            <segments>Object.PaymentList.TotalAmount</segments>
           </dataPath>
           <extendedTooltip>
             <name>DocumentAmountExtendedTooltip</name>

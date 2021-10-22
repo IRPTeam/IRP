@@ -99,7 +99,7 @@ EndProcedure
 
 &AtClient
 Procedure PaymentListAfterDeleteRow(Item)
-	DocumentsClient.CalculateTotalAmount(Object, ThisObject);
+	Return;
 EndProcedure
 
 &AtClient
@@ -113,7 +113,7 @@ Procedure PaymentListBasisDocumentOnChange(Item, AddInfo = Undefined) Export
 EndProcedure
 &AtClient
 Procedure PaymentListAmountOnChange(Item, AddInfo = Undefined) Export
-	DocumentsClient.CalculateTotalAmount(Object, ThisObject);
+	Return;
 EndProcedure
 
 &AtClient

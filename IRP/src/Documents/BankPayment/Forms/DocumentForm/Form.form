@@ -2375,7 +2375,7 @@
             <common>true</common>
           </userVisible>
           <dataPath xsi:type="form:DataPath">
-            <segments>Object.DocumentAmount</segments>
+            <segments>Object.PaymentList.TotalTotalAmount</segments>
           </dataPath>
           <extendedTooltip>
             <name>DocumentAmountExtendedTooltip</name>

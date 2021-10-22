@@ -2565,12 +2565,6 @@ Procedure TransactionBasisStartChoice(Object, Form, Item, ChoiceData, StandardPr
 
 EndProcedure
 
-Procedure CalculateTotalAmount(Object, Form) Export
-
-	Object.DocumentAmount = Object.PaymentList.Total("Amount");
-
-EndProcedure
-
 #EndRegion
 
 #Region DocumentsPurchasingAndSales

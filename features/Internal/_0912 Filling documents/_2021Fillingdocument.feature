@@ -3427,6 +3427,7 @@ Scenario: _0154116 check filling in and refilling Cash expence
 			| 'Net amount' | 'Expense type'             | 'Currency' | 'VAT' | 'Tax amount' | 'Total amount' |
 			| '186,44'     | 'Telephone communications' | 'TRY'      | '18%' | '33,56'      | '220,00'       |
 	* Check the recalculation of Total amount when Tax changes
+		And I activate field named "PaymentListTaxAmount" in "PaymentList" table
 		And I select current line in "PaymentList" table
 		And I input "33,55" text in the field named "PaymentListTaxAmount" of "PaymentList" table
 		And I finish line editing in "PaymentList" table	

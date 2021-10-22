@@ -837,6 +837,7 @@ Procedure FillRowID_ISR(Source, Cancel)
 EndProcedure
 
 Procedure FillRowID_PhysicalInventory(Source, Cancel)
+	ArrayForDelete = New Array();
 	For Each RowItemList In Source.ItemList Do
 		Row = Undefined;
 		IDInfoRows = Source.RowIDInfo.FindRows(New Structure("Key", RowItemList.Key));
@@ -848,6 +849,12 @@ Procedure FillRowID_PhysicalInventory(Source, Cancel)
 
 		FillRowID(Row, RowItemList);
 		Row.NextStep = GetNextStep_PhysicalInventory(Source, RowItemList, Row);
+		If Not ValueIsFilled(Row.Quantity) Then
+			ArrayForDelete.Add(Row);
+		EndIf;
+	EndDo;
+	For Each ItemForDelete In ArrayForDelete Do
+		Source.RowIDInfo.Delete(ItemForDelete);
 	EndDo;
 EndProcedure
 

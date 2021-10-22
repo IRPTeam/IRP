@@ -169,6 +169,7 @@
   <commonPictures>CommonPicture.Store</commonPictures>
   <commonPictures>CommonPicture.Total</commonPictures>
   <commonPictures>CommonPicture.Unlock</commonPictures>
+  <commonPictures>CommonPicture.EditCurrencies</commonPictures>
   <sessionParameters>SessionParameter.ClientType</sessionParameters>
   <sessionParameters>SessionParameter.ConnectedAddDataProc</sessionParameters>
   <sessionParameters>SessionParameter.ConnectionSettings</sessionParameters>
@@ -256,7 +257,6 @@
   <commonModules>CommonModule.DocCreditDebitNoteClient</commonModules>
   <commonModules>CommonModule.DocCreditDebitNoteClientServer</commonModules>
   <commonModules>CommonModule.DocCreditDebitNoteServer</commonModules>
-  <commonModules>CommonModule.DocExpenseClient</commonModules>
   <commonModules>CommonModule.DocGoodsReceiptClient</commonModules>
   <commonModules>CommonModule.DocGoodsReceiptServer</commonModules>
   <commonModules>CommonModule.DocIncomingPaymentOrderClient</commonModules>
@@ -331,7 +331,6 @@
   <commonModules>CommonModule.ExtensionServer</commonModules>
   <commonModules>CommonModule.ExternalCommandsClient</commonModules>
   <commonModules>CommonModule.ExternalCommandsServer</commonModules>
-  <commonModules>CommonModule.FillingFromClassifiers</commonModules>
   <commonModules>CommonModule.FillingWithDefaultDataEvent</commonModules>
   <commonModules>CommonModule.FillingWithDefaultDataReuse</commonModules>
   <commonModules>CommonModule.FormItemsSize</commonModules>
@@ -348,7 +347,6 @@
   <commonModules>CommonModule.IntegrationServerReuse</commonModules>
   <commonModules>CommonModule.JorDocumentsClient</commonModules>
   <commonModules>CommonModule.JorDocumentsServer</commonModules>
-  <commonModules>CommonModule.LibraryLoader</commonModules>
   <commonModules>CommonModule.Localization</commonModules>
   <commonModules>CommonModule.LocalizationClient</commonModules>
   <commonModules>CommonModule.LocalizationClientServer</commonModules>
@@ -378,7 +376,6 @@
   <commonModules>CommonModule.SerialLotNumberClient</commonModules>
   <commonModules>CommonModule.SerialLotNumbersServer</commonModules>
   <commonModules>CommonModule.ServiceSystemClient</commonModules>
-  <commonModules>CommonModule.ServiceSystemClientServer</commonModules>
   <commonModules>CommonModule.ServiceSystemServer</commonModules>
   <commonModules>CommonModule.SessionParametersServer</commonModules>
   <commonModules>CommonModule.TaxesClient</commonModules>
@@ -392,6 +389,7 @@
   <commonModules>CommonModule.UsersEvent</commonModules>
   <commonModules>CommonModule.WorkstationClient</commonModules>
   <commonModules>CommonModule.WorkstationServer</commonModules>
+  <commonModules>CommonModule.MoneyDocumentsServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>
@@ -501,7 +499,6 @@
   <commonForms>CommonForm.EditUserSettings</commonForms>
   <commonForms>CommonForm.HTMLField</commonForms>
   <commonForms>CommonForm.MainSettings</commonForms>
-  <commonForms>CommonForm.PickUpDocuments</commonForms>
   <commonForms>CommonForm.PickupItems</commonForms>
   <commonForms>CommonForm.PickupSpecialOffers</commonForms>
   <commonForms>CommonForm.PictureGalleryForm</commonForms>
@@ -516,6 +513,8 @@
   <commonForms>CommonForm.AddLinkedDocumentRows</commonForms>
   <commonForms>CommonForm.AttachFile</commonForms>
   <commonForms>CommonForm.InfoLinkedDocumentRows</commonForms>
+  <commonForms>CommonForm.EditCurrencies</commonForms>
+  <commonForms>CommonForm.EditHiddenTables</commonForms>
   <catalogs>Catalog.AccessGroups</catalogs>
   <catalogs>Catalog.AccessProfiles</catalogs>
   <catalogs>Catalog.AddAttributeAndPropertySets</catalogs>
@@ -630,7 +629,6 @@
   <documents>Document.VendorsAdvancesClosing</documents>
   <documentJournals>DocumentJournal.DocumentsForIncomingPayment</documentJournals>
   <documentJournals>DocumentJournal.DocumentsForOutgoingPayment</documentJournals>
-  <documentJournals>DocumentJournal.DocumentsForCreditDebitNote</documentJournals>
   <documentJournals>DocumentJournal.AllDocuments</documentJournals>
   <enums>Enum.AgreementKinds</enums>
   <enums>Enum.AgreementTypes</enums>
@@ -676,8 +674,13 @@
   <enums>Enum.TypeExternalObject</enums>
   <reports>Report.AllRegistersMovement</reports>
   <reports>Report.DocumentRegistrationsReport</reports>
-  <reports>Report.ItemsInfo</reports>
   <reports>Report.PriceInfo</reports>
+  <reports>Report.D0010_ItemsInfo</reports>
+  <reports>Report.D2001_Sales</reports>
+  <reports>Report.D1001_Purchases</reports>
+  <reports>Report.D4010_ActualStocks</reports>
+  <reports>Report.D4011_FreeStocks</reports>
+  <reports>Report.D4012_StockReservation</reports>
   <dataProcessors>DataProcessor.AnaliseDocumentMovements</dataProcessors>
   <dataProcessors>DataProcessor.DataHistory</dataProcessors>
   <dataProcessors>DataProcessor.MobileDesktop</dataProcessors>

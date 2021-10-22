@@ -290,7 +290,7 @@ Scenario: _051011 check the display of the header of the collapsible group in Ca
 Scenario: _052012 check the display of the header of the collapsible group in Bank Receipt
 	Given I open hyperlink "e1cib/list/Document.BankReceipt"
 	When check the display of the header of the collapsible group in bank payments documents
-	Then the field named "DecorationGroupTitleUncollapsedLabel" value contains "Company: Main Company   Account: Bank account, USD   Transaction type: Payment from customer   Currency: USD   " text
+	Then the field named "DecorationGroupTitleUncollapsedLabel" value contains "Company: Main Company   Account: Bank account, USD   Currency: USD   Transaction type: Payment from customer   " text	
 	And I click the hyperlink named "DecorationGroupTitleUncollapsedLabel"
 	When I Check the steps for Exception
         |'And I click Select button of  "Company" field'|
@@ -301,7 +301,7 @@ Scenario: _052012 check the display of the header of the collapsible group in Ba
 Scenario: _053012 check the display of the header of the collapsible group in Bank payment
 	Given I open hyperlink "e1cib/list/Document.BankPayment"
 	When check the display of the header of the collapsible group in bank payments documents
-	Then the field named "DecorationGroupTitleUncollapsedLabel" value contains "Company: Main Company   Account: Bank account, USD   Transaction type: Payment to the vendor   Currency: USD   " text
+	Then the field named "DecorationGroupTitleUncollapsedLabel" value contains "Company: Main Company   Account: Bank account, USD   Currency: USD   Transaction type: Payment to the vendor   " text
 	And I click the hyperlink named "DecorationGroupTitleUncollapsedLabel"
 	When I Check the steps for Exception
         |'And I click Select button of  "Company" field'|

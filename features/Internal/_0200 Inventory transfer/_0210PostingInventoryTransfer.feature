@@ -300,7 +300,7 @@ Scenario: _021024 create document Inventory Transfer (without ITO)
 		| 'Main Company' |
 	And I select current line in "List" table
 	And I move to "Items" tab
-	And I click the button named "Add"
+	And in the table "ItemList" I click the button named "ItemListAdd"
 	And I click choice button of "Item" attribute in "ItemList" table
 	And I go to line in "List" table
 		| 'Description' |

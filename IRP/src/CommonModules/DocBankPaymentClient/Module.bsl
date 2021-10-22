@@ -8,23 +8,6 @@ Procedure OnOpen(Object, Form, Cancel, AddInfo = Undefined) Export
 	DocumentsClient.SetTextOfDescriptionAtForm(Object, Form);
 EndProcedure
 
-Procedure SetAvailability(Object, Form) Export
-	If Object.TransactionType = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CurrencyExchange")
-		Or Object.TransactionType = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CashTransferOrder") Then
-		BasedOnCashTransferOrder = False;
-		For Each Row In Object.PaymentList Do
-			If TypeOf(Row.PlaningTransactionBasis) = Type("DocumentRef.CashTransferOrder") And ValueIsFilled(
-				Row.PlaningTransactionBasis) Then
-				BasedOnCashTransferOrder = True;
-				Break;
-			EndIf;
-		EndDo;
-		Form.Items.Account.ReadOnly = BasedOnCashTransferOrder And ValueIsFilled(Object.Account);
-		Form.Items.Company.ReadOnly = BasedOnCashTransferOrder And ValueIsFilled(Object.Company);
-		Form.Items.Currency.ReadOnly = BasedOnCashTransferOrder And ValueIsFilled(Object.Currency);
-	EndIf;
-EndProcedure
-
 #EndRegion
 
 #Region FormItemsEvents
@@ -73,15 +56,15 @@ Procedure CleanDataByTransactionTypeContinue(Result, AdditionalParameters) Expor
 	If Result = DialogReturnCode.OK Then
 		ArrayAll = New Array();
 		ArrayByType = New Array();
-		DocBankPaymentServer.FillAttributesByType(AdditionalParameters.Object.TransactionType, ArrayAll, ArrayByType);
-		DocumentsClientServer.CleanDataByArray(AdditionalParameters.Object, ArrayAll, ArrayByType);
+		DocBankPaymentServer.FillAttributesByType(Object.Ref, Object.TransactionType, ArrayAll, ArrayByType);
+		DocumentsClientServer.CleanDataByArray(Object, ArrayAll, ArrayByType);
 		For Each Row In Object.PaymentList Do
 			Row.PlaningTransactionBasis = Undefined;
 		EndDo;
 	Else
 		Object.TransactionType = Form.CurrentTransactionType;
 		SetTransitAccount(Object, Form);
-		Form.SetVisibilityAvailability();
+		Form.FormSetVisibilityAvailability();
 	EndIf;
 
 	Form.CurrentTransactionType = Object.TransactionType;
@@ -185,7 +168,6 @@ Procedure PaymentListOnChange(Object, Form, Item) Export
 			Row.Key = New UUID();
 		EndIf;
 	EndDo;
-	SetAvailability(Object, Form);
 EndProcedure
 
 Procedure PaymentListOnActivateRow(Object, Form, Item) Export

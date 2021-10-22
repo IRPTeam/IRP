@@ -189,10 +189,12 @@ Procedure CleanDataByArray(Object, Val ArrayAll, Val ArrayVisible) Export
 			TableName = Left(ArrayElement, StrFind(ArrayElement, ".") - 1);
 			ItemName = StrReplace(ArrayElement, TableName + ".", "");
 			For Each Row In Object[TableName] Do
-				Row[ItemName] = Undefined;
+				If CommonFunctionsClientServer.ObjectHasProperty(Row, ItemName) Then
+					Row[ItemName] = Undefined;
+				EndIf;
 			EndDo;
 		Else
-			If ServiceSystemClientServer.ObjectHasAttribute(ArrayElement, Object) Then
+			If CommonFunctionsClientServer.ObjectHasProperty(Object, ArrayElement) Then
 				Object[ArrayElement] = Undefined;
 			EndIf;
 		EndIf;

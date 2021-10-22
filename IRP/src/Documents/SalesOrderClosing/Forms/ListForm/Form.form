@@ -155,6 +155,10 @@
     <items xsi:type="form:FormField">
       <name>SalesOrder</name>
       <id>43</id>
+      <title>
+        <key>en</key>
+        <value>Sales order</value>
+      </title>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -417,6 +421,10 @@
     <items xsi:type="form:FormField">
       <name>Store</name>
       <id>46</id>
+      <title>
+        <key>en</key>
+        <value>Store</value>
+      </title>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -521,6 +529,10 @@
     <items xsi:type="form:FormField">
       <name>Ref</name>
       <id>28</id>
+      <title>
+        <key>en</key>
+        <value>Ref</value>
+      </title>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
@@ -804,7 +816,6 @@
 	SalesOrderClosing.ManagerSegment,
 	SalesOrderClosing.Partner,
 	SalesOrderClosing.PriceIncludeTax,
-	SalesOrderClosing.ShipmentConfirmationsBeforeSalesInvoice,
 	SalesOrderClosing.UseItemsShipmentScheduling,
 	SalesOrderClosing.SalesOrder,
 	SalesOrderClosing.CloseOrder,
@@ -835,7 +846,6 @@ GROUP BY
 	SalesOrderClosing.ManagerSegment,
 	SalesOrderClosing.Partner,
 	SalesOrderClosing.PriceIncludeTax,
-	SalesOrderClosing.ShipmentConfirmationsBeforeSalesInvoice,
 	SalesOrderClosing.UseItemsShipmentScheduling,
 	SalesOrderClosing.SalesOrder,
 	SalesOrderClosing.CloseOrder,

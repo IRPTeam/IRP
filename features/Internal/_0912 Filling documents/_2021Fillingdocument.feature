@@ -653,12 +653,13 @@ Scenario: _0154101 check filling in and refilling Sales order
 				| '520,00' | 'Dress' | 'XS/Blue'  | '84,47'      | '1%'       | '1,000' | 'pcs'  | '435,53'     | '520,00'       | 'Store 01' |
 		* Check filling in currency tab
 			And I click "Save" button
-			And I move to the tab named "GroupCurrencies"
-			And "ObjectCurrencies" table became equal
-			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
-			| 'TRY'                | 'Partner term' | 'TRY'           | 'TRY'      | '1'                 | '1 770'  | '1'            |
-			| 'Local currency'     | 'Legal'     | 'TRY'           | 'TRY'      | '1'                 | '1 770'  | '1'            |
-			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,1712'            | '303,02' | '1'            |
+			And in the table "ItemList" I click "Edit currencies" button
+			And "CurrenciesTable" table became equal
+				| 'Movement type'      | 'Type'         | 'To'  | 'From' | 'Multiplicity' | 'Rate'   | 'Amount' |
+				| 'Reporting currency' | 'Reporting'    | 'USD' | 'TRY'  | '1'            | '0,1712' | '303,02' |
+				| 'Local currency'     | 'Legal'        | 'TRY' | 'TRY'  | '1'            | '1'      | '1 770'  |
+				| 'TRY'                | 'Partner term' | 'TRY' | 'TRY'  | '1'            | '1'      | '1 770'  |
+			And I close current window	
 		* Check recalculate Total amount and Net amount when change Tax rate
 			* Price includes tax
 				And I move to "Item list" tab
@@ -1052,12 +1053,13 @@ Scenario: _0154102 check filling in and refilling Sales invoice
 				| '550,00' | 'Dress' | 'L/Green'  | '89,35'      | '1%'       | '1,000' | 'pcs'  | '460,65'     | '550,00'       | 'Store 01' |
 				| '520,00' | 'Dress' | 'XS/Blue'  | '84,47'      | '1%'       | '1,000' | 'pcs'  | '435,53'     | '520,00'       | 'Store 01' |
 		* Check filling in currency tab
-			And I move to the tab named "GroupCurrencies"
-			And "ObjectCurrencies" table became equal
-			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
-			| 'TRY'                | 'Partner term' | 'TRY'           | 'TRY'         | '1'                 | '1 770'  | '1'            |
-			| 'Local currency'     | 'Legal'     | 'TRY'           | 'TRY'         | '1'                 | '1 770'  | '1'            |
-			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'         | '0,1712'            | '303,02' | '1'            |
+			And in the table "ItemList" I click "Edit currencies" button
+			And "CurrenciesTable" table became equal
+				| 'Movement type'      | 'Type'         | 'To'  | 'From' | 'Multiplicity' | 'Rate'   | 'Amount' |
+				| 'Reporting currency' | 'Reporting'    | 'USD' | 'TRY'  | '1'            | '0,1712' | '303,02' |
+				| 'Local currency'     | 'Legal'        | 'TRY' | 'TRY'  | '1'            | '1'      | '1 770'  |
+				| 'TRY'                | 'Partner term' | 'TRY' | 'TRY'  | '1'            | '1'      | '1 770'  |
+			And I close current window
 		* Check recalculate Total amount and Net amount when change Tax rate
 			* Price includes tax
 				And I move to "Item list" tab
@@ -1166,13 +1168,13 @@ Scenario: _0154103 check Sales order when changing date
 			| 'Sale autum, TRY'               |
 		And I close "Partner terms" window
 	* Check the recount of the currency table when the date is changed
-		And I move to the tab named "GroupCurrencies"
-		And "ObjectCurrencies" table became equal
-		| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
-		| 'TRY'                | 'Partner term' | 'TRY'           | 'TRY'      | '1'                 | '1 000'  | '1'            |
-		| 'Local currency'     | 'Legal'     | 'TRY'           | 'TRY'      | '1'                 | '1 000'  | '1'            |
-		| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,2000'            | '200,00' | '1'            |
-
+		And in the table "ItemList" I click "Edit currencies" button
+		And "CurrenciesTable" table became equal
+			| 'Movement type'      | 'Type'         | 'To'  | 'From' | 'Multiplicity' | 'Rate'   | 'Amount' |
+			| 'Reporting currency' | 'Reporting'    | 'USD' | 'TRY'  | '1'            | '0,2000' | '200,00' |
+			| 'Local currency'     | 'Legal'        | 'TRY' | 'TRY'  | '1'            | '1'      | '1 000'  |
+			| 'TRY'                | 'Partner term' | 'TRY' | 'TRY'  | '1'            | '1'      | '1 000'  |
+		
 Scenario: _0154104 check Sales invoice when changing date
 	* Open the Sales invoice creation form
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
@@ -1232,13 +1234,13 @@ Scenario: _0154104 check Sales invoice when changing date
 		| 'Sale autum, TRY'               |
 		And I close "Partner terms" window
 	* Check the recount of the currency table when the date is changed
-		And I move to the tab named "GroupCurrencies"
-		And "ObjectCurrencies" table became equal
-		| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
-		| 'TRY'                | 'Partner term' | 'TRY'           | 'TRY'      | '1'                 | '1 000'  | '1'            |
-		| 'Local currency'     | 'Legal'     | 'TRY'           | 'TRY'      | '1'                 | '1 000'  | '1'            |
-		| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,2000'            | '200,00' | '1'            |
-
+		And in the table "ItemList" I click "Edit currencies" button
+		And "CurrenciesTable" table became equal
+			| 'Movement type'      | 'Type'         | 'To'  | 'From' | 'Multiplicity' | 'Rate'   | 'Amount' |
+			| 'Reporting currency' | 'Reporting'    | 'USD' | 'TRY'  | '1'            | '0,2000' | '200,00' |
+			| 'Local currency'     | 'Legal'        | 'TRY' | 'TRY'  | '1'            | '1'      | '1 000'  |
+			| 'TRY'                | 'Partner term' | 'TRY' | 'TRY'  | '1'            | '1'      | '1 000'  |
+		
 Scenario: _0154105 check filling in and refilling Purchase order
 	* Open the Purchase order creation form
 		Given I open hyperlink "e1cib/list/Document.PurchaseOrder"
@@ -1310,7 +1312,7 @@ Scenario: _0154105 check filling in and refilling Purchase order
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Store" became equal to "Store 02"
 	* Check the item key autofill when adding Item (Item has one item key)
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |
@@ -1322,7 +1324,7 @@ Scenario: _0154105 check filling in and refilling Purchase order
 	* Check filling in prices when adding an Item and selecting an item key
 		* Filling in item and item key
 			And I delete a line in "ItemList" table
-			And I click the button named "Add"
+			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
 				| 'Description' |
@@ -1357,7 +1359,7 @@ Scenario: _0154105 check filling in and refilling Purchase order
 				| 'Trousers' | '400,00' | '38/Yellow' | '1,000' | 'pcs'  | 'Store 03' |
 	* Check filling in prices on new lines at agreement reselection
 		* Add line
-			And I click the button named "Add"
+			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
 				| 'Description' |
@@ -1500,12 +1502,13 @@ Scenario: _0154105 check filling in and refilling Purchase order
 				| '550,00' | 'Dress' | '18%' | 'L/Green'  | '1,000' | '99,00'      | 'pcs'  | '550,00'     | '649,00'       | 'Store 03' |
 				| '520,00' | 'Dress' | '18%' | 'XS/Blue'  | '1,000' | '93,60'      | 'pcs'  | '520,00'     | '613,60'       | 'Store 03' |
 		* Check filling in currency tab
-			And I move to the tab named "GroupCurrencies"
-			And "ObjectCurrencies" table became equal
-			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount'  | 'Multiplicity' |
-			| 'TRY'                | 'Partner term' | 'TRY'           | 'TRY'      | '1'                 | '2 088,6' | '1'            |
-			| 'Local currency'     | 'Legal'     | 'TRY'           | 'TRY'      | '1'                 | '2 088,6' | '1'            |
-			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,1712'            | '357,57'  | '1'            |
+			And in the table "ItemList" I click "Edit currencies" button
+			And "CurrenciesTable" table became equal
+				| 'Movement type'      | 'Type'         | 'To'  | 'From' | 'Multiplicity' | 'Rate'   | 'Amount'  |
+				| 'Reporting currency' | 'Reporting'    | 'USD' | 'TRY'  | '1'            | '0,1712' | '357,57'  |
+				| 'Local currency'     | 'Legal'        | 'TRY' | 'TRY'  | '1'            | '1'      | '2 088,6' |
+				| 'TRY'                | 'Partner term' | 'TRY' | 'TRY'  | '1'            | '1'      | '2 088,6' |
+			And I close current window
 		* Check recalculate Total amount and Net amount when change Tax rate
 			* Price includes tax
 				And I move to "Other" tab
@@ -1701,7 +1704,7 @@ Scenario: _0154106 check filling in and refilling Purchase invoice
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Store" became equal to "Store 02"
 	* Check the item key autofill when adding Item (Item has one item key)
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |
@@ -1713,7 +1716,7 @@ Scenario: _0154106 check filling in and refilling Purchase invoice
 	* Check filling in prices when adding an Item and selecting an item key
 		* Filling in item and item key
 			And I delete a line in "ItemList" table
-			And I click the button named "Add"
+			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
 				| 'Description' |
@@ -1746,7 +1749,7 @@ Scenario: _0154106 check filling in and refilling Purchase invoice
 				| 'Trousers' | '400,00' | '38/Yellow' | '1,000' | 'pcs'  | 'Store 03' |
 	* Check filling in prices on new lines at agreement reselection
 		* Add line
-			And I click the button named "Add"
+			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
 				| 'Description' |
@@ -1887,12 +1890,13 @@ Scenario: _0154106 check filling in and refilling Purchase invoice
 				| '550,00' | 'Dress' | '18%' | 'L/Green'  | '1,000' | '99,00'      | 'pcs'  | '550,00'     | '649,00'       | 'Store 03' |
 				| '520,00' | 'Dress' | '18%' | 'XS/Blue'  | '1,000' | '93,60'      | 'pcs'  | '520,00'     | '613,60'       | 'Store 03' |
 		* Check filling in currency tab
-			And I move to the tab named "GroupCurrencies"
-			And "ObjectCurrencies" table became equal
-			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount'  | 'Multiplicity' |
-			| 'TRY'                | 'Partner term' | 'TRY'           | 'TRY'      | '1'                 | '2 088,6' | '1'            |
-			| 'Local currency'     | 'Legal'     | 'TRY'           | 'TRY'      | '1'                 | '2 088,6' | '1'            |
-			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,1712'            | '357,57'  | '1'            |
+			And in the table "ItemList" I click "Edit currencies" button
+			And "CurrenciesTable" table became equal
+				| 'Movement type'      | 'Type'         | 'To'  | 'From' | 'Multiplicity' | 'Rate'   | 'Amount'  |
+				| 'Reporting currency' | 'Reporting'    | 'USD' | 'TRY'  | '1'            | '0,1712' | '357,57'  |
+				| 'Local currency'     | 'Legal'        | 'TRY' | 'TRY'  | '1'            | '1'      | '2 088,6' |
+				| 'TRY'                | 'Partner term' | 'TRY' | 'TRY'  | '1'            | '1'      | '2 088,6' |
+			And I close current window
 		* Check tax recalculation when choosing a tax rate manually
 			And I go to line in "ItemList" table
 				| 'Item'  | 'Item key' |
@@ -2085,7 +2089,7 @@ Scenario: _0154107 check filling in and refilling Cash receipt (transaction type
 		And I select current line in "List" table
 		And I click choice button of "Partner term" attribute in "PaymentList" table
 		And I go to line in "List" table
-			| 'Description'           |
+			| 'Description'                               |
 			| 'Posting by Standard Partner term Customer' |
 		And I select current line in "List" table
 	* Check the addition of a base document without selecting a base document
@@ -2095,33 +2099,53 @@ Scenario: _0154107 check filling in and refilling Cash receipt (transaction type
 			|'Given form with "Documents for incoming payment" header is opened in the active window'|
 	* Check the currency form connection
 		And I go to line in "PaymentList" table
-			| 'Partner'   | 'Payer'             |
+			| 'Partner' | 'Payer'           |
 			| 'Kalipso' | 'Company Kalipso' |
 		And I select current line in "PaymentList" table
 		And I input "100,00" text in "Amount" field of "PaymentList" table
 		And I finish line editing in "PaymentList" table
-			And I go to line in "PaymentList" table
+		And in the table "PaymentList" I click "Edit currencies" button
+		And "CurrenciesTable" table became equal
+			| 'Movement type'      | 'Type'      | 'To'  | 'From' | 'Multiplicity' | 'Rate'   | 'Amount' |
+			| 'Local currency'     | 'Legal'     | 'TRY' | 'TRY'  | '1'            | '1'      | '100'    |
+			| 'Reporting currency' | 'Reporting' | 'USD' | 'TRY'  | '1'            | '0,1712' | '17,12'  |	
+		And I close current window	
+		And I go to line in "PaymentList" table
 			| 'Partner'   | 'Payer'             |
 			| 'Nicoletta' | 'Company Nicoletta' |
 		And I select current line in "PaymentList" table
 		And I input "200,00" text in "Amount" field of "PaymentList" table
 		And I finish line editing in "PaymentList" table
-		And "CurrenciesPaymentList" table contains lines
-			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
-			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,1712'            | '17,12'  | '1'            |
-			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,1712'            | '34,24'  | '1'            |
+		And in the table "PaymentList" I click "Edit currencies" button
+		And "CurrenciesTable" table became equal
+			| 'Movement type'      | 'Type'         | 'To'  | 'From' | 'Multiplicity' | 'Rate'   | 'Amount' |
+			| 'Reporting currency' | 'Reporting'    | 'USD' | 'TRY'  | '1'            | '0,1712' | '34,24'  |
+			| 'Local currency'     | 'Legal'        | 'TRY' | 'TRY'  | '1'            | '1'      | '200'    |
+			| 'TRY'                | 'Partner term' | 'TRY' | 'TRY'  | '1'            | '1'      | '200'    |
+		And I close current window	
 	* Check the recalculation at the rate in case of date change
 		And I move to "Other" tab
 		And I input "01.11.2018  0:00:00" text in "Date" field
 		And I move to "Payments" tab
-		And "CurrenciesPaymentList" table contains lines
-		| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
-		| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '*'                | '20*'    | '1'            |
-		| 'Local currency'     | 'Legal'     | 'TRY'           | 'TRY'      | '1'                 | '100'    | '1'            |
-		| 'TRY'                | 'Partner term' | 'TRY'           | 'TRY'      | '1'                 | '200'    | '1'            |
-		| 'Local currency'     | 'Legal'     | 'TRY'           | 'TRY'      | '1'                 | '200'    | '1'            |
-		| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '*'                 | '40*'     | '1'            |
-		And Delay 5
+		And I go to line in "PaymentList" table
+			| 'Partner'   | 'Payer'             |
+			| 'Nicoletta' | 'Company Nicoletta' |
+		And in the table "PaymentList" I click "Edit currencies" button
+		And "CurrenciesTable" table became equal
+			| 'Movement type'      | 'Type'         | 'To'  | 'From' | 'Multiplicity' | 'Rate'   | 'Amount' |
+			| 'Reporting currency' | 'Reporting'    | 'USD' | 'TRY'  | '1'            | '0,2000' | '40,00'  |
+			| 'Local currency'     | 'Legal'        | 'TRY' | 'TRY'  | '1'            | '1'      | '200'    |
+			| 'TRY'                | 'Partner term' | 'TRY' | 'TRY'  | '1'            | '1'      | '200'    |
+		And I close current window	
+		And I go to line in "PaymentList" table
+			| 'Partner' | 'Payer'           |
+			| 'Kalipso' | 'Company Kalipso' |
+		And in the table "PaymentList" I click "Edit currencies" button
+		And "CurrenciesTable" table became equal
+			| 'Movement type'      | 'Type'      | 'To'  | 'From' | 'Multiplicity' | 'Rate'   | 'Amount' |
+			| 'Local currency'     | 'Legal'     | 'TRY' | 'TRY'  | '1'            | '1'      | '100'    |
+			| 'Reporting currency' | 'Reporting' | 'USD' | 'TRY'  | '1'            | '0,2000' | '20,00'  |
+		And I close current window	
 	* Check that it is impossible to post the document without a completed basis document when choosing a partner term with Ap-Ar By documents
 		And I go to line in "PaymentList" table
 			| 'Partner'   | 'Payer'             |
@@ -2349,26 +2373,54 @@ Scenario: _0154109 check filling in and refilling Bank receipt (transaction type
 		And I select current line in "PaymentList" table
 		And I input "200,00" text in "Amount" field of "PaymentList" table
 		And I finish line editing in "PaymentList" table
-		And "CurrenciesPaymentList" table contains lines
-			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
-			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,1712'            | '17,12'  | '1'            |
-			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,1712'            | '34,24'  | '1'            |
+		And I go to line in "PaymentList" table
+			| 'Partner' | 'Payer'           |
+			| 'Kalipso' | 'Company Kalipso' |
+		And I select current line in "PaymentList" table
+		And I input "100,00" text in "Amount" field of "PaymentList" table
+		And I finish line editing in "PaymentList" table
+		And in the table "PaymentList" I click "Edit currencies" button
+		And "CurrenciesTable" table became equal
+			| 'Movement type'      | 'Type'      | 'To'  | 'From' | 'Multiplicity' | 'Rate'   | 'Amount' |
+			| 'Local currency'     | 'Legal'     | 'TRY' | 'TRY'  | '1'            | '1'      | '100'    |
+			| 'Reporting currency' | 'Reporting' | 'USD' | 'TRY'  | '1'            | '0,1712' | '17,12'  |	
+		And I close current window	
+		And I go to line in "PaymentList" table
+			| 'Partner'   | 'Payer'             |
+			| 'Nicoletta' | 'Company Nicoletta' |
+		And I select current line in "PaymentList" table
+		And I input "200,00" text in "Amount" field of "PaymentList" table
+		And I finish line editing in "PaymentList" table
+		And in the table "PaymentList" I click "Edit currencies" button
+		And "CurrenciesTable" table became equal
+			| 'Movement type'      | 'Type'         | 'To'  | 'From' | 'Multiplicity' | 'Rate'   | 'Amount' |
+			| 'Reporting currency' | 'Reporting'    | 'USD' | 'TRY'  | '1'            | '0,1712' | '34,24'  |
+			| 'Local currency'     | 'Legal'        | 'TRY' | 'TRY'  | '1'            | '1'      | '200'    |
+			| 'TRY'                | 'Partner term' | 'TRY' | 'TRY'  | '1'            | '1'      | '200'    |
+		And I close current window
 	* Check the recalculation at the rate in case of date change
 		And I move to "Other" tab
 		And I input "01.11.2018  0:00:00" text in "Date" field
 		And I move to "Payments" tab
 		And I go to line in "PaymentList" table
-		| 'Amount' | 'Partner'   | 'Payer'             |
-		| '200,00' | 'Nicoletta' | 'Company Nicoletta' |
-		And "CurrenciesPaymentList" table contains lines
-		| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
-		| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,2000'                | '40,00'  | '1'            |
+			| 'Partner'   | 'Payer'             |
+			| 'Nicoletta' | 'Company Nicoletta' |
+		And in the table "PaymentList" I click "Edit currencies" button
+		And "CurrenciesTable" table became equal
+			| 'Movement type'      | 'Type'         | 'To'  | 'From' | 'Multiplicity' | 'Rate'   | 'Amount' |
+			| 'Reporting currency' | 'Reporting'    | 'USD' | 'TRY'  | '1'            | '0,2000' | '40,00'  |
+			| 'Local currency'     | 'Legal'        | 'TRY' | 'TRY'  | '1'            | '1'      | '200'    |
+			| 'TRY'                | 'Partner term' | 'TRY' | 'TRY'  | '1'            | '1'      | '200'    |
+		And I close current window	
 		And I go to line in "PaymentList" table
-		| 'Amount' | 'Partner'   | 'Payer'             |
-		| '100,00' | 'Kalipso' | 'Company Kalipso' |
-		And "CurrenciesPaymentList" table contains lines
-		| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
-		| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,2000'                | '20,00'  | '1'            |
+			| 'Partner' | 'Payer'           |
+			| 'Kalipso' | 'Company Kalipso' |
+		And in the table "PaymentList" I click "Edit currencies" button
+		And "CurrenciesTable" table became equal
+			| 'Movement type'      | 'Type'      | 'To'  | 'From' | 'Multiplicity' | 'Rate'   | 'Amount' |
+			| 'Local currency'     | 'Legal'     | 'TRY' | 'TRY'  | '1'            | '1'      | '100'    |
+			| 'Reporting currency' | 'Reporting' | 'USD' | 'TRY'  | '1'            | '0,2000' | '20,00'  |
+		And I close current window	
 	* Check that it is impossible to post the document without a completed basis document when choosing a partner term with Ap-Ar By documents
 		And I go to line in "PaymentList" table
 			| 'Partner'   | 'Payer'             |
@@ -2608,7 +2660,7 @@ Scenario: _0154111 check filling in and refilling Cash payment (transaction type
 		And I select current line in "PaymentList" table
 		And I input "100,00" text in "Amount" field of "PaymentList" table
 		And I finish line editing in "PaymentList" table
-			And I go to line in "PaymentList" table
+		And I go to line in "PaymentList" table
 			| 'Partner'   | 'Payee'             |
 			| 'Veritas'   | 'Company Veritas '  |
 		And I select current line in "PaymentList" table
@@ -2617,15 +2669,22 @@ Scenario: _0154111 check filling in and refilling Cash payment (transaction type
 		And I go to line in "PaymentList" table
 			| 'Partner'   |
 			| 'Ferron BP' |
-		And "PaymentListCurrencies" table contains lines
-			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
-			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,1712'             | '17,12'  | '1'            |
+		And in the table "PaymentList" I click "Edit currencies" button
+		And "CurrenciesTable" table became equal
+			| 'Movement type'      | 'Type'      | 'To'  | 'From' | 'Multiplicity' | 'Rate'   | 'Amount' |
+			| 'Local currency'     | 'Legal'     | 'TRY' | 'TRY'  | '1'            | '1'      | '100'    |
+			| 'Reporting currency' | 'Reporting' | 'USD' | 'TRY'  | '1'            | '0,1712' | '17,12'  |
+		And I close current window		
 		And I go to line in "PaymentList" table
 			| 'Partner'   |
 			| 'Veritas' |
-		And "PaymentListCurrencies" table contains lines
-			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
-			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,1712'            | '34,24'  | '1'            |
+		And in the table "PaymentList" I click "Edit currencies" button
+		And "CurrenciesTable" table became equal
+			| 'Movement type'      | 'Type'         | 'To'  | 'From' | 'Multiplicity' | 'Rate'   | 'Amount' |
+			| 'Reporting currency' | 'Reporting'    | 'USD' | 'TRY'  | '1'            | '0,1712' | '34,24'  |
+			| 'Local currency'     | 'Legal'        | 'TRY' | 'TRY'  | '1'            | '1'      | '200'    |
+			| 'TRY'                | 'Partner term' | 'TRY' | 'TRY'  | '1'            | '1'      | '200'    |		
+		And I close current window	
 	* Check the recalculation at the rate in case of date change
 		And I move to "Other" tab
 		And I input "01.11.2018  0:00:00" text in "Date" field
@@ -2633,15 +2692,22 @@ Scenario: _0154111 check filling in and refilling Cash payment (transaction type
 		And I go to line in "PaymentList" table
 			| 'Partner'   |
 			| 'Ferron BP' |
-		And "PaymentListCurrencies" table contains lines
-			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
-			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,2000'                | '20,00'  | '1'            |
+		And in the table "PaymentList" I click "Edit currencies" button
+		And "CurrenciesTable" table became equal
+			| 'Movement type'      | 'Type'      | 'To'  | 'From' | 'Multiplicity' | 'Rate'   | 'Amount' |
+			| 'Local currency'     | 'Legal'     | 'TRY' | 'TRY'  | '1'            | '1'      | '100'    |
+			| 'Reporting currency' | 'Reporting' | 'USD' | 'TRY'  | '1'            | '0,2000' | '20,00'  |
+		And I close current window	
 		And I go to line in "PaymentList" table
 			| 'Partner'   |
 			| 'Veritas' |
-		And "PaymentListCurrencies" table contains lines
-			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
-			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,2000'                | '40*'     | '1'            |
+		And in the table "PaymentList" I click "Edit currencies" button
+		And "CurrenciesTable" table became equal
+			| 'Movement type'      | 'Type'         | 'To'  | 'From' | 'Multiplicity' | 'Rate'   | 'Amount' |
+			| 'Reporting currency' | 'Reporting'    | 'USD' | 'TRY'  | '1'            | '0,2000' | '40,00'  |
+			| 'Local currency'     | 'Legal'        | 'TRY' | 'TRY'  | '1'            | '1'      | '200'    |
+			| 'TRY'                | 'Partner term' | 'TRY' | 'TRY'  | '1'            | '1'      | '200'    |
+		And I close current window		
 	* Check that it is impossible to post the document without a completed basis document when choosing a partner term with Ap-Ar By documents
 		And I go to line in "PaymentList" table
 			| 'Partner'   | 'Payee'             |
@@ -2872,7 +2938,7 @@ Scenario: _0154113 check filling in and refilling Bank payment (transaction type
 		And I select current line in "PaymentList" table
 		And I input "100,00" text in "Amount" field of "PaymentList" table
 		And I finish line editing in "PaymentList" table
-			And I go to line in "PaymentList" table
+		And I go to line in "PaymentList" table
 			| 'Partner'   | 'Payee'             |
 			| 'Veritas'   | 'Company Veritas '  |
 		And I select current line in "PaymentList" table
@@ -2881,15 +2947,22 @@ Scenario: _0154113 check filling in and refilling Bank payment (transaction type
 		And I go to line in "PaymentList" table
 			| 'Partner'   |
 			| 'Ferron BP' |
-		And "PaymentListCurrencies" table contains lines
-			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
-			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,1712'             | '17,12'  | '1'            |
+		And in the table "PaymentList" I click "Edit currencies" button
+		And "CurrenciesTable" table became equal
+			| 'Movement type'      | 'Type'      | 'To'  | 'From' | 'Multiplicity' | 'Rate'   | 'Amount' |
+			| 'Local currency'     | 'Legal'     | 'TRY' | 'TRY'  | '1'            | '1'      | '100'    |
+			| 'Reporting currency' | 'Reporting' | 'USD' | 'TRY'  | '1'            | '0,1712' | '17,12'  |
+		And I close current window		
 		And I go to line in "PaymentList" table
 			| 'Partner'   |
 			| 'Veritas' |
-		And "PaymentListCurrencies" table contains lines
-			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
-			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,1712'            | '34,24'  | '1'            |
+		And in the table "PaymentList" I click "Edit currencies" button
+		And "CurrenciesTable" table became equal
+			| 'Movement type'      | 'Type'         | 'To'  | 'From' | 'Multiplicity' | 'Rate'   | 'Amount' |
+			| 'Reporting currency' | 'Reporting'    | 'USD' | 'TRY'  | '1'            | '0,1712' | '34,24'  |
+			| 'Local currency'     | 'Legal'        | 'TRY' | 'TRY'  | '1'            | '1'      | '200'    |
+			| 'TRY'                | 'Partner term' | 'TRY' | 'TRY'  | '1'            | '1'      | '200'    |		
+		And I close current window	
 	* Check the recalculation at the rate in case of date change
 		And I move to "Other" tab
 		And I input "01.11.2018  0:00:00" text in "Date" field
@@ -2897,15 +2970,22 @@ Scenario: _0154113 check filling in and refilling Bank payment (transaction type
 		And I go to line in "PaymentList" table
 			| 'Partner'   |
 			| 'Ferron BP' |
-		And "PaymentListCurrencies" table contains lines
-			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
-			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,2000'                | '20,00'  | '1'            |
+		And in the table "PaymentList" I click "Edit currencies" button
+		And "CurrenciesTable" table became equal
+			| 'Movement type'      | 'Type'      | 'To'  | 'From' | 'Multiplicity' | 'Rate'   | 'Amount' |
+			| 'Local currency'     | 'Legal'     | 'TRY' | 'TRY'  | '1'            | '1'      | '100'    |
+			| 'Reporting currency' | 'Reporting' | 'USD' | 'TRY'  | '1'            | '0,2000' | '20,00'  |
+		And I close current window	
 		And I go to line in "PaymentList" table
 			| 'Partner'   |
 			| 'Veritas' |
-		And "PaymentListCurrencies" table contains lines
-			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
-			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,2000'                | '40*'     | '1'            |
+		And in the table "PaymentList" I click "Edit currencies" button
+		And "CurrenciesTable" table became equal
+			| 'Movement type'      | 'Type'         | 'To'  | 'From' | 'Multiplicity' | 'Rate'   | 'Amount' |
+			| 'Reporting currency' | 'Reporting'    | 'USD' | 'TRY'  | '1'            | '0,2000' | '40,00'  |
+			| 'Local currency'     | 'Legal'        | 'TRY' | 'TRY'  | '1'            | '1'      | '200'    |
+			| 'TRY'                | 'Partner term' | 'TRY' | 'TRY'  | '1'            | '1'      | '200'    |
+		And I close current window
 	* Check that it is impossible to post the document without a completed basis document when choosing a partner term with Ap-Ar By documents
 		And I go to line in "PaymentList" table
 			| 'Partner'   | 'Payee'             |
@@ -3152,13 +3232,19 @@ Scenario: _0154115 check filling in and refilling Cash transfer order
 	* Check form by currency
 			And I input "584,00" text in "Receive amount" field
 			And I move to the next attribute
-			And "ObjectCurrencies" table contains lines
-			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
-			| 'Local currency'     | 'Legal'     | 'USD'           | 'TRY'      | '5,6275'            | '562,75' | '1'            |
-			| 'Reporting currency' | 'Reporting' | 'USD'           | 'USD'      | '1'                 | '100'    | '1'            |
-			| 'Local currency'     | 'Legal'     | 'TRY'           | 'TRY'      | '1'                 | '584'    | '1'            |
-			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,1712'            | '99,98' | '1'            |
-
+			And I click the button named "EditCurrenciesSender"
+			And "CurrenciesTable" table became equal
+				| 'Movement type'      | 'Type'      | 'To'  | 'From' | 'Multiplicity' | 'Rate'   | 'Amount' |
+				| 'Local currency'     | 'Legal'     | 'TRY' | 'USD'  | '1'            | '5,6275' | '562,75' |
+				| 'Reporting currency' | 'Reporting' | 'USD' | 'USD'  | '1'            | '1'      | '100'    |
+			And I close current window
+			And I click the button named "EditCurrenciesReceiver"
+			And "CurrenciesTable" table became equal
+				| 'Movement type'      | 'Type'      | 'To'  | 'From' | 'Multiplicity' | 'Rate'   | 'Amount' |
+				| 'Local currency'     | 'Legal'     | 'TRY' | 'TRY'  | '1'            | '1'      | '584'    |
+				| 'Reporting currency' | 'Reporting' | 'USD' | 'TRY'  | '1'            | '0,1712' | '99,98'  |
+			And I close all client application windows
+	
 Scenario: _01541151 check that the amount sent and received in Cash transfer order is the same
 	* Check cash transfer between two cash account
 		* Open form Cash transfer order
@@ -3341,14 +3427,10 @@ Scenario: _0154116 check filling in and refilling Cash expence
 			| 'Net amount' | 'Expense type'             | 'Currency' | 'VAT' | 'Tax amount' | 'Total amount' |
 			| '186,44'     | 'Telephone communications' | 'TRY'      | '18%' | '33,56'      | '220,00'       |
 	* Check the recalculation of Total amount when Tax changes
-		And I move to "Tax list" tab
-		And I activate "Manual amount" field in "TaxTree" table
-		And I go to line in "TaxTree" table
-			| 'Profit loss center'     |
-			| 'Accountants office' |
-		And I select current line in "TaxTree" table
-		And I input "33,55" text in "Manual amount" field of "TaxTree" table
-		And I finish line editing in "TaxTree" table
+		And I activate field named "PaymentListTaxAmount" in "PaymentList" table
+		And I select current line in "PaymentList" table
+		And I input "33,55" text in the field named "PaymentListTaxAmount" of "PaymentList" table
+		And I finish line editing in "PaymentList" table	
 		And I move to "Payment list" tab
 		And "PaymentList" table contains lines
 			| 'Net amount' | 'Expense type'               | 'Currency' | 'VAT' | 'Tax amount' | 'Total amount' |
@@ -3364,9 +3446,12 @@ Scenario: _0154116 check filling in and refilling Cash expence
 			| 'Net amount' | 'Expense type'                     | 'Currency' | 'VAT' | 'Tax amount' | 'Total amount' |
 			| '187,00'     | 'Telephone communications'         | 'TRY'      | '18%' | '33,55'      | '220,55'       |
 	* Check the currency form connection
-		And "PaymentListCurrencies" table contains lines
-			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
-			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,1712'            | '37,76'  | '1'            |
+		And in the table "PaymentList" I click "Edit currencies" button	
+		And "CurrenciesTable" table became equal
+			| 'Movement type'      | 'Type'      | 'To'  | 'From' | 'Multiplicity' | 'Rate'   | 'Amount' |
+			| 'Local currency'     | 'Legal'     | 'TRY' | 'TRY'  | '1'            | '1'      | '220,55' |
+			| 'Reporting currency' | 'Reporting' | 'USD' | 'TRY'  | '1'            | '0,1712' | '37,76'  |
+		And I close current window		
 	* Add one more line
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
 		And I click choice button of the attribute named "PaymentListProfitLossCenter" in "PaymentList" table
@@ -3383,18 +3468,14 @@ Scenario: _0154116 check filling in and refilling Cash expence
 		And I activate "VAT" field in "PaymentList" table
 		And I select "18%" exact value from "VAT" drop-down list in "PaymentList" table
 		And I input "200,00" text in the field named "PaymentListNetAmount" of "PaymentList" table
-		And I expand a line in "TaxTree" table
-			| 'Amount' | 'Currency' | 'Manual amount' | 'Tax' |
-			| '69,66'  | 'TRY'      | '69,55'         | 'VAT' |
 		And I finish line editing in "PaymentList" table
 	* Manual tax correction by line
-		And I move to "Tax list" tab
-		And I go to line in "TaxTree" table
-			| 'Amount' | 'Profit loss center' | 'Currency' |
-			| '36,00'  | 'Front office'  | 'TRY'      |
-		And I select current line in "TaxTree" table
-		And I input "38,00" text in "Manual amount" field of "TaxTree" table
-		And I finish line editing in "TaxTree" table
+		And I go to line in "PaymentList" table
+			| 'Expense type' | 'Net amount' | 'Tax amount' | 'Total amount' | 'VAT' |
+			| 'Software'     | '200,00'     | '36,00'      | '236,00'       | '18%' |
+		And I select current line in "PaymentList" table
+		And I input "38,00" text in the field named "PaymentListTaxAmount" of "PaymentList" table
+		And I finish line editing in "PaymentList" table	
 		And I move to "Payment list" tab
 		And "PaymentList" table contains lines
 			| 'Net amount' | 'Profit loss center'      | 'Expense type'             | 'Currency' | 'VAT' | 'Tax amount' | 'Total amount' |
@@ -3447,15 +3528,23 @@ Scenario: _0154116 check filling in and refilling Cash expence
 			| 'Main Company' |
 		And I select current line in "List" table
 		* Exchange rate change in the form by currency
-			And I go to line in "PaymentListCurrencies" table
-			| 'Amount' | 'Currency' | 'Currency from' | 'Movement type'      | 'Multiplicity' | 'Rate presentation' | 'Type'      |
-			| '40,40'  | 'USD'      | 'TRY'           | 'Reporting currency' | '1'            | '0,1712'            | 'Reporting' |
-			And I activate field named "PaymentListCurrenciesAmount" in "PaymentListCurrencies" table
-			And I select current line in "PaymentListCurrencies" table
-			And I input "50,00" text in the field named "PaymentListCurrenciesAmount" of "PaymentListCurrencies" table
-			And I go to line in "PaymentListCurrencies" table
-			| 'Amount' | 'Currency' | 'Currency from' | 'Movement type'      | 'Multiplicity' | 'Rate presentation' | 'Type'      |
-			| '50,00'  | 'USD'      | 'TRY'           | 'Reporting currency' | '1'            | '0,2119'            | 'Reporting' |
+			And in the table "PaymentList" I click "Edit currencies" button
+			And "CurrenciesTable" table contains lines
+				| 'Movement type'      | 'Type'      | 'To'  | 'From' | 'Multiplicity' | 'Rate'   | 'Amount' |
+				| 'Local currency'     | 'Legal'     | 'TRY' | 'TRY'  | '1'            | '1'      | '236'    |
+				| 'Reporting currency' | 'Reporting' | 'USD' | 'TRY'  | '1'            | '0,1712' | '40,40'  |
+			And I close current window
+			And in the table "PaymentList" I click "Edit currencies" button
+			And I activate "Amount" field in "CurrenciesTable" table
+			And I select current line in "CurrenciesTable" table
+			And I input "50,00" text in "Amount" field of "CurrenciesTable" table
+			And I finish line editing in "CurrenciesTable" table
+			And I finish line editing in "CurrenciesTable" table		
+			And "CurrenciesTable" table became equal
+				| 'Movement type'      | 'Type'      | 'To'  | 'From' | 'Multiplicity' | 'Rate'   | 'Amount' |
+				| 'Local currency'     | 'Legal'     | 'TRY' | 'TRY'  | '1'            | '1'      | '236'    |
+				| 'Reporting currency' | 'Reporting' | 'USD' | 'TRY'  | '1'            | '0,2119' | '50,00'  |		
+			And I close current window	
 	* Add one more line with different cureency
 		And I click Select button of "Account" field
 		And I go to line in "List" table
@@ -3489,12 +3578,15 @@ Scenario: _0154116 check filling in and refilling Cash expence
 			| 'Net amount' | 'Profit loss center'      | 'Expense type' | 'Currency' | 'VAT' | 'Tax amount' | 'Total amount' |
 			| '100,00'     | 'Accountants office' | 'Software'     | 'USD'      | '0%'  | ''           | '100,00'       |
 	* Check the addition of a line to the form by currency
-		And I go to line in "PaymentListCurrencies" table
-		| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
-		| 'Local currency'     | 'Legal'     | 'USD'           | 'TRY'      | '5,6275'             | '562,75' | '1'            |
+		And in the table "PaymentList" I click "Edit currencies" button
+		And "CurrenciesTable" table became equal
+			| 'Movement type'      | 'Type'      | 'To'  | 'From' | 'Multiplicity' | 'Rate'   | 'Amount' |
+			| 'Local currency'     | 'Legal'     | 'TRY' | 'USD'  | '1'            | '5,6275' | '562,75' |
+			| 'Reporting currency' | 'Reporting' | 'USD' | 'USD'  | '1'            | '1'      | '100'    |
+		And I close current window
 	* Change of currency on the first line and check of form on currencies
 		And I go to line in "PaymentList" table
-			| 'Net amount' | 'Profit loss center'      | 'Expense type' | 'Currency' | 'VAT' | 'Tax amount' | 'Total amount' |
+			| 'Net amount' | 'Profit loss center' | 'Expense type' | 'Currency' | 'VAT' | 'Tax amount' | 'Total amount' |
 			| '200,00'     | 'Front office'       | 'Software'     | 'TRY'      | '18%' | '36,00'      | '236,00'       |
 		And I click choice button of the attribute named "PaymentListCurrency" in "PaymentList" table
 		And I go to line in "List" table
@@ -3504,22 +3596,21 @@ Scenario: _0154116 check filling in and refilling Cash expence
 		And I go to line in "PaymentList" table
 			| 'Net amount' | 'Profit loss center'      | 'Expense type' | 'Currency' | 'VAT' | 'Tax amount' | 'Total amount' |
 			| '200,00'     | 'Front office'       | 'Software'     | 'USD'      | '18%' | '36,00'      | '236,00'       |
-		And I go to line in "PaymentListCurrencies" table
-			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount'   | 'Multiplicity' |
-			| 'Local currency'     | 'Legal'     | 'USD'           | 'TRY'      | '5,6275'            | '1 328,09' | '1'            |
+		And in the table "PaymentList" I click "Edit currencies" button
+		And "CurrenciesTable" table became equal
+			| 'Movement type'      | 'Type'      | 'To'  | 'From' | 'Multiplicity' | 'Rate'   | 'Amount'   |
+			| 'Local currency'     | 'Legal'     | 'TRY' | 'USD'  | '1'            | '5,6275' | '1 328,09' |
+			| 'Reporting currency' | 'Reporting' | 'USD' | 'USD'  | '1'            | '1'      | '236'      |
+		And I close current window
 	* Manual correction of tax rate and check of tax calculations
 		And I go to line in "PaymentList" table
 			| 'Profit loss center' | 'Currency' | 'Expense type' | 'Net amount' | 'Tax amount' | 'Total amount' | 'VAT' |
-			| 'Front office'  | 'USD'      | 'Software'     | '200,00'     | '36,00'      | '236,00'       | '18%' |
+			| 'Front office'       | 'USD'      | 'Software'     | '200,00'     | '36,00'      | '236,00'       | '18%' |
 		And I select current line in "PaymentList" table
 		And I select "8%" exact value from "VAT" drop-down list in "PaymentList" table
 		And "PaymentList" table contains lines
 			| 'Net amount' | 'Profit loss center' | 'Expense type' | 'Currency' | 'VAT' | 'Tax amount' | 'Total amount' |
-			| '200,00'     | 'Front office'  | 'Software'     | 'USD'      | '8%'  | '16,00'      | '216,00'       |
-		And "TaxTree" table contains lines
-			| 'Tax' | 'Currency' | 'Profit loss center' | 'Amount' | 'Expense type' | 'Tax rate' | 'Manual amount' |
-			| 'VAT' | 'USD'      | ''              | '16,00'  | ''             | ''         | '16,00'         |
-			| 'VAT' | 'USD'      | 'Front office'  | '16,00'  | 'Software'     | '8%'       | '16,00'         |
+			| '200,00'     | 'Front office'       | 'Software'     | 'USD'      | '8%'  | '16,00'      | '216,00'       |
 	And I close all client application windows
 
 
@@ -3578,15 +3669,10 @@ Scenario: _0154117 check filling in and refilling Cash revenue
 			| 'Net amount' | 'Revenue type'             | 'Currency' | 'VAT' | 'Tax amount' | 'Total amount' |
 			| '186,44'     | 'Telephone communications' | 'TRY'      | '18%' | '33,56'      | '220,00'       |
 	* Check the recalculation of Total amount when Tax changes
-		And I move to "Tax list" tab
-		And I activate "Manual amount" field in "TaxTree" table
-		And I go to line in "TaxTree" table
-		| 'Profit loss center'     |
-		| 'Accountants office' |
-		And I select current line in "TaxTree" table
-		And I input "33,55" text in "Manual amount" field of "TaxTree" table
-		And I finish line editing in "TaxTree" table
-		And I move to "Payment list" tab
+		And I activate field named "PaymentListTaxAmount" in "PaymentList" table
+		And I select current line in "PaymentList" table
+		And I input "33,55" text in the field named "PaymentListTaxAmount" of "PaymentList" table
+		And I finish line editing in "PaymentList" table
 		And "PaymentList" table contains lines
 		| 'Net amount' | 'Revenue type'               | 'Currency' | 'VAT' | 'Tax amount' | 'Total amount' |
 		| '186,44'     | 'Telephone communications'   | 'TRY'      | '18%' | '33,55'      | '219,99'       |
@@ -3601,9 +3687,12 @@ Scenario: _0154117 check filling in and refilling Cash revenue
 		| 'Net amount' | 'Revenue type'                     | 'Currency' | 'VAT' | 'Tax amount' | 'Total amount' |
 		| '187,00'     | 'Telephone communications'         | 'TRY'      | '18%' | '33,55'      | '220,55'       |
 	* Check the currency form connection
-		And "PaymentListCurrencies" table contains lines
-		| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
-		| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,1712'            | '37,76'  | '1'            |
+		And in the table "PaymentList" I click "Edit currencies" button
+		And "CurrenciesTable" table became equal
+			| 'Movement type'      | 'Type'      | 'To'  | 'From' | 'Multiplicity' | 'Rate'   | 'Amount' |
+			| 'Local currency'     | 'Legal'     | 'TRY' | 'TRY'  | '1'            | '1'      | '220,55' |
+			| 'Reporting currency' | 'Reporting' | 'USD' | 'TRY'  | '1'            | '0,1712' | '37,76'  |
+		And I close current window
 	* Add one more line
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
 		And I click choice button of the attribute named "PaymentListProfitLossCenter" in "PaymentList" table
@@ -3620,18 +3709,13 @@ Scenario: _0154117 check filling in and refilling Cash revenue
 		And I activate "VAT" field in "PaymentList" table
 		And I select "18%" exact value from "VAT" drop-down list in "PaymentList" table
 		And I input "200,00" text in the field named "PaymentListNetAmount" of "PaymentList" table
-		And I expand a line in "TaxTree" table
-			| 'Amount' | 'Currency' | 'Manual amount' | 'Tax' |
-			| '69,66'  | 'TRY'      | '69,55'         | 'VAT' |
 		And I finish line editing in "PaymentList" table
 	* Manual tax correction by line
-		And I move to "Tax list" tab
-		And I go to line in "TaxTree" table
-			| 'Amount' | 'Profit loss center' | 'Currency' |
-			| '36,00'  | 'Front office'  | 'TRY'      |
-		And I select current line in "TaxTree" table
-		And I input "38,00" text in "Manual amount" field of "TaxTree" table
-		And I finish line editing in "TaxTree" table
+		And I go to line in "PaymentList" table
+			| 'Profit loss center' | 'Revenue type' |
+			| 'Front office'       | 'Software'     |
+		And I input "38,00" text in the field named "PaymentListTaxAmount" of "PaymentList" table
+		And I finish line editing in "PaymentList" table	
 		And I move to "Payment list" tab
 		And "PaymentList" table contains lines
 			| 'Net amount' | 'Profit loss center'      | 'Revenue type'             | 'Currency' | 'VAT' | 'Tax amount' | 'Total amount' |
@@ -3690,10 +3774,6 @@ Scenario: _0154117 check filling in and refilling Cash revenue
 		And "PaymentList" table contains lines
 			| 'Net amount' | 'Revenue type' | 'Total amount' | 'Currency' | 'VAT' | 'Tax amount' |
 			| '200,00'     | 'Software'     | '216,00'       | 'TRY'      | '8%'  | '16,00'      |
-		And "TaxTree" table contains lines
-			| 'Tax' | 'Tax rate' | 'Currency' | 'Amount' | 'Manual amount' |
-			| 'VAT' | ''         | 'TRY'      | '16,00'  | '16,00'         |
-			| 'VAT'    | '8%'    | 'TRY'         | '16,00'  | '16,00'         |
 		And I close all client application windows
 
 Scenario: _0154118 check the details cleaning on the form Cash receipt 
@@ -4612,33 +4692,48 @@ Scenario: _0154131  check currency form in  Bank Receipt
 			And I finish line editing in "PaymentList" table
 	* Check form by currency
 		* Basic recalculation at the rate
-			And I go to line in "CurrenciesPaymentList" table
-				| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
-				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,1712'            | '34,24'  | '1'            |
+			And in the table "PaymentList" I click "Edit currencies" button
+			And "CurrenciesTable" table became equal
+				| 'Movement type'      | 'Type'      | 'To'  | 'From' | 'Multiplicity' | 'Rate'   | 'Amount' |
+				| 'Local currency'     | 'Legal'     | 'TRY' | 'TRY'  | '1'            | '1'      | '200'    |
+				| 'Reporting currency' | 'Reporting' | 'USD' | 'TRY'  | '1'            | '0,1712' | '34,24'  |	
+			And I close current window		
 		* Recalculation of Rate presentation when changing Amount
-			And I input "35,00" text in the field named "CurrenciesPaymentListAmount" of "CurrenciesPaymentList" table
-			And I finish line editing in "CurrenciesPaymentList" table
-			And I go to line in "CurrenciesPaymentList" table
-				| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
-				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,1750'            | '35,00'  | '1'            |
+			And in the table "PaymentList" I click "Edit currencies" button
+			And I input "35,00" text in "Amount" field of "CurrenciesTable" table
+			And I finish line editing in "CurrenciesTable" table
+			And "CurrenciesTable" table became equal
+				| 'Movement type'      | 'Type'      | 'To'  | 'From' | 'Multiplicity' | 'Rate'   | 'Amount' |
+				| 'Local currency'     | 'Legal'     | 'TRY' | 'TRY'  | '1'            | '1'      | '200'    |
+				| 'Reporting currency' | 'Reporting' | 'USD' | 'TRY'  | '1'            | '0,1750' | '35,00'  |
+			And I close current window			
 		* Recount Amount when changing Multiplicity
-			And I input "2" text in "Multiplicity" field of "CurrenciesPaymentList" table
-			And I finish line editing in "CurrenciesPaymentList" table
-			And I go to line in "CurrenciesPaymentList" table
-				| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
-				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,1750'            | '17,50'  | '2'            |
+			And in the table "PaymentList" I click "Edit currencies" button
+			And I input "2" text in "Multiplicity" field of "CurrenciesTable" table
+			And I finish line editing in "CurrenciesTable" table
+			And "CurrenciesTable" table became equal
+				| 'Movement type'      | 'Type'      | 'To'  | 'From' | 'Multiplicity' | 'Rate'   | 'Amount' |
+				| 'Local currency'     | 'Legal'     | 'TRY' | 'TRY'  | '1'            | '1'      | '200'    |
+				| 'Reporting currency' | 'Reporting' | 'USD' | 'TRY'  | '2'            | '0,1712' | '17,12'  |
+			And I close current window
 		* Recount Amount when changing Multiplicity
-			And I input "0,1667" text in "Rate presentation" field of "CurrenciesPaymentList" table
-			And I finish line editing in "CurrenciesPaymentList" table
-			And I go to line in "CurrenciesPaymentList" table
-				| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
-				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,1667'            | '16,67'  | '2'            |
+			And in the table "PaymentList" I click "Edit currencies" button
+			And I input "0,1667" text in "Rate" field of "CurrenciesTable" table
+			And I finish line editing in "CurrenciesTable" table
+			And "CurrenciesTable" table became equal
+				| 'Movement type'      | 'Type'      | 'To'  | 'From' | 'Multiplicity' | 'Rate'   | 'Amount' |
+				| 'Local currency'     | 'Legal'     | 'TRY' | 'TRY'  | '1'            | '1'      | '200'    |
+				| 'Reporting currency' | 'Reporting' | 'USD' | 'TRY'  | '1'            | '0,1667' | '33,34'  |
+			And I close current window
 		* Recount Amount when changing payment amount
 			And I input "250,00" text in the field named "PaymentListAmount" of "PaymentList" table
-			And I finish line editing in "CurrenciesPaymentList" table
-			And I go to line in "CurrenciesPaymentList" table
-				| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
-				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,1667'            | '20,84'  | '2'            |
+			And I finish line editing in "PaymentList" table
+			And in the table "PaymentList" I click "Edit currencies" button
+			And "CurrenciesTable" table became equal
+				| 'Movement type'      | 'Type'      | 'To'  | 'From' | 'Multiplicity' | 'Rate'   | 'Amount' |
+				| 'Local currency'     | 'Legal'     | 'TRY' | 'TRY'  | '1'            | '1'      | '250'    |
+				| 'Reporting currency' | 'Reporting' | 'USD' | 'TRY'  | '1'            | '0,1712' | '42,80'  |
+			And I close current window
 		* Check the standard currency rate when adding the next line
 			And in the table "PaymentList" I click the button named "PaymentListAdd"
 			And I click Clear button of the attribute named "PaymentListPayer" in "PaymentList"
@@ -4653,21 +4748,24 @@ Scenario: _0154131  check currency form in  Bank Receipt
 				| 'Company Veritas ' |
 			And I select current line in "List" table
 			And I input "200,00" text in "Amount" field of "PaymentList" table
-			And I go to line in "CurrenciesPaymentList" table
-				| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
-				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,1712'            | '34,24'  | '1'            |
+			And in the table "PaymentList" I click "Edit currencies" button
+			And "CurrenciesTable" table became equal
+				| 'Movement type'      | 'Type'         | 'To'  | 'From' | 'Multiplicity' | 'Rate'   | 'Amount' |
+				| 'Reporting currency' | 'Reporting'    | 'USD' | 'TRY'  | '1'            | '0,1712' | '34,24'  |
+				| 'Local currency'     | 'Legal'        | 'TRY' | 'TRY'  | '1'            | '1'      | '200'    |
+				| 'TRY'                | 'Partner term' | 'TRY' | 'TRY'  | '1'            | '1'      | '200'    |
+			And I close current window		
 		* Recount when currency changes
 			And I click Select button of "Account" field
 			And I go to line in "List" table
 				| 'Currency' | 'Description'       |
 				| 'USD'      | 'Bank account, USD' |
 			And I select current line in "List" table
-			And I go to line in "CurrenciesPaymentList" table
-				| 'Movement type'  | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount'   | 'Multiplicity' |
-				| 'TRY'            | 'Partner term' | 'USD'           | 'TRY'      | '5,6275'             | '1 125,50' | '1'            |
-			And I go to line in "CurrenciesPaymentList" table
-				| 'Movement type'  | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount'   | 'Multiplicity' |
-				| 'TRY'            | 'Partner term' | 'USD'           | 'TRY'      | '5,6275'             | '1 125,50' | '1'            |
+			And in the table "PaymentList" I click "Edit currencies" button
+			And "CurrenciesTable" table contains lines
+				| 'Movement type'      | 'Type'         | 'To'  | 'From' | 'Multiplicity' | 'Rate'   | 'Amount'   |
+				| 'Local currency'     | 'Legal'        | 'TRY' | 'USD'  | '1'            | '5,6275' | '1 125,50' |
+				| 'TRY'                | 'Partner term' | 'TRY' | 'USD'  | '1'            | '5,6275' | '1 125,50' |			
 		# * Reverse rate display check
 		# 	Given double click at "reverse" picture
 		# 	And I go to line in "PaymentList" table
@@ -4707,33 +4805,48 @@ Scenario: _0154132  check currency form in Incoming payment order
 			And I finish line editing in "PaymentList" table
 	* Check form by currency
 		* Basic recalculation at the rate
-			And I go to line in "PaymentListCurrencies" table
-				| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
-				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,1712'            | '34,24'  | '1'            |
+			And in the table "PaymentList" I click "Edit currencies" button
+			And "CurrenciesTable" table became equal
+				| 'Movement type'      | 'Type'      | 'To'  | 'From' | 'Multiplicity' | 'Rate'   | 'Amount' |
+				| 'Local currency'     | 'Legal'     | 'TRY' | 'TRY'  | '1'            | '1'      | '200'    |
+				| 'Reporting currency' | 'Reporting' | 'USD' | 'TRY'  | '1'            | '0,1712' | '34,24'  |	
+			And I close current window	
 		* Recalculation of Rate presentation when changing Amount
-			And I input "35,00" text in the field named "PaymentListCurrenciesAmount" of "PaymentListCurrencies" table
-			And I finish line editing in "PaymentListCurrencies" table
-			And I go to line in "PaymentListCurrencies" table
-				| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
-				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,1750'            | '35,00'  | '1'            |
+			And in the table "PaymentList" I click "Edit currencies" button
+			And I input "35,00" text in "Amount" field of "CurrenciesTable" table
+			And I finish line editing in "CurrenciesTable" table
+			And "CurrenciesTable" table became equal
+				| 'Movement type'      | 'Type'      | 'To'  | 'From' | 'Multiplicity' | 'Rate'   | 'Amount' |
+				| 'Local currency'     | 'Legal'     | 'TRY' | 'TRY'  | '1'            | '1'      | '200'    |
+				| 'Reporting currency' | 'Reporting' | 'USD' | 'TRY'  | '1'            | '0,1750' | '35,00'  |
+			And I close current window			
 		* Recount Amount when changing Multiplicity
-			And I input "2" text in "Multiplicity" field of "PaymentListCurrencies" table
-			And I finish line editing in "PaymentListCurrencies" table
-			And I go to line in "PaymentListCurrencies" table
-				| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
-				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,1750'            | '17,50'  | '2'            |
+			And in the table "PaymentList" I click "Edit currencies" button
+			And I input "2" text in "Multiplicity" field of "CurrenciesTable" table
+			And I finish line editing in "CurrenciesTable" table
+			And "CurrenciesTable" table became equal
+				| 'Movement type'      | 'Type'      | 'To'  | 'From' | 'Multiplicity' | 'Rate'   | 'Amount' |
+				| 'Local currency'     | 'Legal'     | 'TRY' | 'TRY'  | '1'            | '1'      | '200'    |
+				| 'Reporting currency' | 'Reporting' | 'USD' | 'TRY'  | '2'            | '0,1712' | '17,12'  |
+			And I close current window
 		* Recount Amount when changing Multiplicity Rate presentation
-			And I input "0,2000" text in "Rate presentation" field of "PaymentListCurrencies" table
-			And I finish line editing in "PaymentListCurrencies" table
-			And I go to line in "PaymentListCurrencies" table
-				| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
-				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,2000'            | '20,00'  | '2'            |
+			And in the table "PaymentList" I click "Edit currencies" button
+			And I input "0,1667" text in "Rate" field of "CurrenciesTable" table
+			And I finish line editing in "CurrenciesTable" table
+			And "CurrenciesTable" table became equal
+				| 'Movement type'      | 'Type'      | 'To'  | 'From' | 'Multiplicity' | 'Rate'   | 'Amount' |
+				| 'Local currency'     | 'Legal'     | 'TRY' | 'TRY'  | '1'            | '1'      | '200'    |
+				| 'Reporting currency' | 'Reporting' | 'USD' | 'TRY'  | '1'            | '0,1667' | '33,34'  |
+			And I close current window
 		* Recount Amount when changing payment amount
 			And I input "250,00" text in the field named "PaymentListAmount" of "PaymentList" table
-			And I finish line editing in "PaymentListCurrencies" table
-			And I go to line in "PaymentListCurrencies" table
-				| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
-				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,2000'            | '25,00'  | '2'            |
+			And I finish line editing in "PaymentList" table
+			And in the table "PaymentList" I click "Edit currencies" button
+			And "CurrenciesTable" table became equal
+				| 'Movement type'      | 'Type'      | 'To'  | 'From' | 'Multiplicity' | 'Rate'   | 'Amount' |
+				| 'Local currency'     | 'Legal'     | 'TRY' | 'TRY'  | '1'            | '1'      | '250'    |
+				| 'Reporting currency' | 'Reporting' | 'USD' | 'TRY'  | '1'            | '0,1712' | '42,80'  |
+			And I close current window
 		* Check the standard currency rate when adding the next line
 			And in the table "PaymentList" I click the button named "PaymentListAdd"
 			And I click choice button of "Partner" attribute in "PaymentList" table
@@ -4747,21 +4860,21 @@ Scenario: _0154132  check currency form in Incoming payment order
 				| 'Company Veritas ' |
 			And I select current line in "List" table
 			And I input "200,00" text in "Amount" field of "PaymentList" table
-			And I go to line in "PaymentListCurrencies" table
-				| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
-				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,1712'            | '34,24'  | '1'            |
+			And in the table "PaymentList" I click "Edit currencies" button
+			And "CurrenciesTable" table contains lines
+				| 'Movement type'      | 'Type'         | 'To'  | 'From' | 'Multiplicity' | 'Rate'   | 'Amount' |
+				| 'Reporting currency' | 'Reporting'    | 'USD' | 'TRY'  | '1'            | '0,1712' | '34,24'  |
+			And I close current window
 		* Recount when currency changes
 			And I click Select button of "Account" field
 			And I go to line in "List" table
 				| 'Currency' | 'Description'       |
 				| 'USD'      | 'Bank account, USD' |
 			And I select current line in "List" table
-			And I go to line in "PaymentListCurrencies" table
-				| 'Movement type'             | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount'   | 'Multiplicity' |
-				| 'Local currency'            | 'Legal'     | 'USD'           | 'TRY'      | '5,6275'             | '1 125,50' | '1'            |
-			And I go to line in "PaymentListCurrencies" table
-				| 'Movement type'             | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount'   | 'Multiplicity' |
-				| 'Local currency'            | 'Legal'     | 'USD'           | 'TRY'      | '5,6275'             | '1 125,50' | '1'            |
+			And in the table "PaymentList" I click "Edit currencies" button
+			And "CurrenciesTable" table contains lines
+				| 'Movement type'      | 'Type'         | 'To'  | 'From' | 'Multiplicity' | 'Rate'   | 'Amount'   |
+				| 'Local currency'     | 'Legal'        | 'TRY' | 'USD'  | '1'            | '5,6275' | '1 125,50' |	
 		# * Reverse rate display check 
 		# 	Given double click at "reverse" picture
 		# 	And I go to line in "PaymentList" table
@@ -4800,34 +4913,48 @@ Scenario: _0154133  check currency form in Outgoing payment order
 			And I input "200,00" text in "Amount" field of "PaymentList" table
 			And I finish line editing in "PaymentList" table
 	* Check form by currency
-		* Basic recalculation at the rate
-			And I go to line in "PaymentListCurrencies" table
-				| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
-				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,1712'            | '34,24'  | '1'            |
+			And in the table "PaymentList" I click "Edit currencies" button
+			And "CurrenciesTable" table became equal
+				| 'Movement type'      | 'Type'      | 'To'  | 'From' | 'Multiplicity' | 'Rate'   | 'Amount' |
+				| 'Local currency'     | 'Legal'     | 'TRY' | 'TRY'  | '1'            | '1'      | '200'    |
+				| 'Reporting currency' | 'Reporting' | 'USD' | 'TRY'  | '1'            | '0,1712' | '34,24'  |	
+			And I close current window
 		* Recalculation of Rate presentation when changing Amount
-			And I input "35,00" text in the field named "PaymentListCurrenciesAmount" of "PaymentListCurrencies" table
-			And I finish line editing in "PaymentListCurrencies" table
-			And I go to line in "PaymentListCurrencies" table
-				| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
-				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,1750'            | '35,00'  | '1'            |
+			And in the table "PaymentList" I click "Edit currencies" button
+			And I input "35,00" text in "Amount" field of "CurrenciesTable" table
+			And I finish line editing in "CurrenciesTable" table
+			And "CurrenciesTable" table became equal
+				| 'Movement type'      | 'Type'      | 'To'  | 'From' | 'Multiplicity' | 'Rate'   | 'Amount' |
+				| 'Local currency'     | 'Legal'     | 'TRY' | 'TRY'  | '1'            | '1'      | '200'    |
+				| 'Reporting currency' | 'Reporting' | 'USD' | 'TRY'  | '1'            | '0,1750' | '35,00'  |
+			And I close current window	
 		* Recount Amount when changing Multiplicity
-			And I input "2" text in "Multiplicity" field of "PaymentListCurrencies" table
-			And I finish line editing in "PaymentListCurrencies" table
-			And I go to line in "PaymentListCurrencies" table
-				| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
-				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,1750'            | '17,50'  | '2'            |
+			And in the table "PaymentList" I click "Edit currencies" button
+			And I input "2" text in "Multiplicity" field of "CurrenciesTable" table
+			And I finish line editing in "CurrenciesTable" table
+			And "CurrenciesTable" table became equal
+				| 'Movement type'      | 'Type'      | 'To'  | 'From' | 'Multiplicity' | 'Rate'   | 'Amount' |
+				| 'Local currency'     | 'Legal'     | 'TRY' | 'TRY'  | '1'            | '1'      | '200'    |
+				| 'Reporting currency' | 'Reporting' | 'USD' | 'TRY'  | '2'            | '0,1712' | '17,12'  |
+			And I close current window
 		* Recount Amount when changing Multiplicity Rate presentation
-			And I input "0,2000" text in "Rate presentation" field of "PaymentListCurrencies" table
-			And I finish line editing in "PaymentListCurrencies" table
-			And I go to line in "PaymentListCurrencies" table
-				| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
-				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,2000'            | '20,00'  | '2'            |
+			And in the table "PaymentList" I click "Edit currencies" button
+			And I input "0,1667" text in "Rate" field of "CurrenciesTable" table
+			And I finish line editing in "CurrenciesTable" table
+			And "CurrenciesTable" table became equal
+				| 'Movement type'      | 'Type'      | 'To'  | 'From' | 'Multiplicity' | 'Rate'   | 'Amount' |
+				| 'Local currency'     | 'Legal'     | 'TRY' | 'TRY'  | '1'            | '1'      | '200'    |
+				| 'Reporting currency' | 'Reporting' | 'USD' | 'TRY'  | '1'            | '0,1667' | '33,34'  |
+			And I close current window
 		* Recount Amount when changing payment amount
 			And I input "250,00" text in the field named "PaymentListAmount" of "PaymentList" table
-			And I finish line editing in "PaymentListCurrencies" table
-			And I go to line in "PaymentListCurrencies" table
-				| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
-				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,2000'            | '25,00'  | '2'            |
+			And I finish line editing in "PaymentList" table
+			And in the table "PaymentList" I click "Edit currencies" button
+			And "CurrenciesTable" table became equal
+				| 'Movement type'      | 'Type'      | 'To'  | 'From' | 'Multiplicity' | 'Rate'   | 'Amount' |
+				| 'Local currency'     | 'Legal'     | 'TRY' | 'TRY'  | '1'            | '1'      | '250'    |
+				| 'Reporting currency' | 'Reporting' | 'USD' | 'TRY'  | '1'            | '0,1712' | '42,80'  |
+			And I close current window
 		* Check the standard currency rate when adding the next line
 			And in the table "PaymentList" I click the button named "PaymentListAdd"
 			And I click choice button of "Partner" attribute in "PaymentList" table
@@ -4841,21 +4968,21 @@ Scenario: _0154133  check currency form in Outgoing payment order
 				| 'Company Veritas ' |
 			And I select current line in "List" table
 			And I input "200,00" text in "Amount" field of "PaymentList" table
-			And I go to line in "PaymentListCurrencies" table
-				| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
-				| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,1712'            | '34,24'  | '1'            |
+			And in the table "PaymentList" I click "Edit currencies" button
+			And "CurrenciesTable" table contains lines
+				| 'Movement type'      | 'Type'         | 'To'  | 'From' | 'Multiplicity' | 'Rate'   | 'Amount' |
+				| 'Reporting currency' | 'Reporting'    | 'USD' | 'TRY'  | '1'            | '0,1712' | '34,24'  |
+			And I close current window
 		* Recount when currency changes
 			And I click Select button of "Account" field
 			And I go to line in "List" table
 				| 'Currency' | 'Description'       |
 				| 'USD'      | 'Bank account, USD' |
 			And I select current line in "List" table
-			And I go to line in "PaymentListCurrencies" table
-				| 'Movement type'             | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount'   | 'Multiplicity' |
-				| 'Local currency'            | 'Legal'     | 'USD'           | 'TRY'      | '5,6275'             | '1 125,50' | '1'            |
-			And I go to line in "PaymentListCurrencies" table
-				| 'Movement type'             | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount'   | 'Multiplicity' |
-				| 'Local currency'            | 'Legal'     | 'USD'           | 'TRY'      | '5,6275'             | '1 125,50' | '1'            |
+			And in the table "PaymentList" I click "Edit currencies" button
+			And "CurrenciesTable" table contains lines
+				| 'Movement type'      | 'Type'         | 'To'  | 'From' | 'Multiplicity' | 'Rate'   | 'Amount'   |
+				| 'Local currency'     | 'Legal'        | 'TRY' | 'USD'  | '1'            | '5,6275' | '1 125,50' |	
 		# * Reverse rate display check 
 		# 	Given double click at "reverse" picture
 		# 	And I go to line in "PaymentList" table
@@ -5122,12 +5249,13 @@ Scenario: _0154140 check filling in and refilling Sales order closing
 				| '520,00' | 'Dress' | 'XS/Blue'  | '84,47'      | '1%'       | '1,000' | 'pcs'  | '435,53'     | '520,00'       | 'Store 01' |
 		* Check filling in currency tab
 			And I click "Save" button
-			And I move to the tab named "GroupCurrencies"
-			And "ObjectCurrencies" table became equal
-			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount' | 'Multiplicity' |
-			| 'TRY'                | 'Partner term' | 'TRY'           | 'TRY'      | '1'                 | '1 770'  | '1'            |
-			| 'Local currency'     | 'Legal'     | 'TRY'           | 'TRY'      | '1'                 | '1 770'  | '1'            |
-			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,1712'            | '303,02' | '1'            |
+			And in the table "ItemList" I click "Edit currencies" button
+			And "CurrenciesTable" table became equal
+				| 'Movement type'      | 'Type'         | 'To'  | 'From' | 'Multiplicity' | 'Rate'   | 'Amount' |
+				| 'Reporting currency' | 'Reporting'    | 'USD' | 'TRY'  | '1'            | '0,1712' | '303,02' |
+				| 'Local currency'     | 'Legal'        | 'TRY' | 'TRY'  | '1'            | '1'      | '1 770'  |
+				| 'TRY'                | 'Partner term' | 'TRY' | 'TRY'  | '1'            | '1'      | '1 770'  |
+			And I close current window			
 		* Check recalculate Total amount and Net amount when change Tax rate
 			* Price includes tax
 				And I move to "Item list" tab
@@ -5311,7 +5439,7 @@ Scenario: _0154141 check filling in and refilling Purchase order closing
 		Then the form attribute named "Company" became equal to "Main Company"
 		Then the form attribute named "Store" became equal to "Store 02"
 	* Check the item key autofill when adding Item (Item has one item key)
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |
@@ -5323,7 +5451,7 @@ Scenario: _0154141 check filling in and refilling Purchase order closing
 	* Check filling in prices when adding an Item and selecting an item key
 		* Filling in item and item key
 			And I delete a line in "ItemList" table
-			And I click the button named "Add"
+			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
 				| 'Description' |
@@ -5358,7 +5486,7 @@ Scenario: _0154141 check filling in and refilling Purchase order closing
 				| 'Trousers' | '400,00' | '38/Yellow' | '1,000' | 'pcs'  | 'Store 03' |
 	* Check filling in prices on new lines at agreement reselection
 		* Add line
-			And I click the button named "Add"
+			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
 				| 'Description' |
@@ -5501,12 +5629,13 @@ Scenario: _0154141 check filling in and refilling Purchase order closing
 				| '550,00' | 'Dress' | '18%' | 'L/Green'  | '1,000' | '99,00'      | 'pcs'  | '550,00'     | '649,00'       | 'Store 03' |
 				| '520,00' | 'Dress' | '18%' | 'XS/Blue'  | '1,000' | '93,60'      | 'pcs'  | '520,00'     | '613,60'       | 'Store 03' |
 		* Check filling in currency tab
-			And I move to the tab named "GroupCurrencies"
-			And "ObjectCurrencies" table became equal
-			| 'Movement type'      | 'Type'      | 'Currency from' | 'Currency' | 'Rate presentation' | 'Amount'  | 'Multiplicity' |
-			| 'TRY'                | 'Partner term' | 'TRY'           | 'TRY'      | '1'                 | '2 088,6' | '1'            |
-			| 'Local currency'     | 'Legal'     | 'TRY'           | 'TRY'      | '1'                 | '2 088,6' | '1'            |
-			| 'Reporting currency' | 'Reporting' | 'TRY'           | 'USD'      | '0,1712'            | '357,57'  | '1'            |
+			And in the table "ItemList" I click "Edit currencies" button
+			And "CurrenciesTable" table became equal
+				| 'Movement type'      | 'Type'         | 'To'  | 'From' | 'Multiplicity' | 'Rate'   | 'Amount'  |
+				| 'Reporting currency' | 'Reporting'    | 'USD' | 'TRY'  | '1'            | '0,1712' | '357,57'  |
+				| 'Local currency'     | 'Legal'        | 'TRY' | 'TRY'  | '1'            | '1'      | '2 088,6' |
+				| 'TRY'                | 'Partner term' | 'TRY' | 'TRY'  | '1'            | '1'      | '2 088,6' |
+			And I close current window
 		* Check recalculate Total amount and Net amount when change Tax rate
 			* Price includes tax
 				And I move to "Other" tab
@@ -5644,7 +5773,7 @@ Scenario: _0154150 check function DontCalculateRow in the Purchase order
 		And I select current line in "List" table
 	* Check filling in prices when adding an Item and selecting an item key
 		* Filling in item and item key
-			And I click the button named "Add"
+			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
 				| 'Description' |
@@ -5658,7 +5787,7 @@ Scenario: _0154150 check function DontCalculateRow in the Purchase order
 			And I select current line in "List" table
 			And I input "2,000" text in "Q" field of "ItemList" table
 			And I finish line editing in "ItemList" table
-			And I click the button named "Add"
+			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
 				| 'Description' |
@@ -5749,7 +5878,7 @@ Scenario: _0154150 check function DontCalculateRow in the Purchase order
 			And the editing text of form attribute named "ItemListTotalTaxAmount" became equal to "647,00"
 			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "4 199,00"
 		* Add new line and check calculation
-			And I click the button named "Add"
+			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
 				| 'Description' |
@@ -5770,8 +5899,7 @@ Scenario: _0154150 check function DontCalculateRow in the Purchase order
 				| '520,00' | 'Dress'    | '18%' | 'M/White'   | '2,000' | 'Basic Price Types' | 'pcs'  | 'No'                 | '187,20'     | '1 040,00'   | '1 227,20'     | 'Store 03' |
 		* Check calculation when set "Price includes tax" checkbox
 			And I move to "Other" tab
-			And I set checkbox "Price includes tax"
-			And I remove checkbox "Goods receipt before purchase invoice"			
+			And I set checkbox "Price includes tax"		
 			And I move to "Item list" tab
 			And "ItemList" table contains lines
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Price type'        | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' | 'Store'    |
@@ -5823,7 +5951,7 @@ Scenario: _0154151 check function DontCalculateRow in the Purchase invoice
 		And I select current line in "List" table
 	* Check filling in prices when adding an Item and selecting an item key
 		* Filling in item and item key
-			And I click the button named "Add"
+			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
 				| 'Description' |
@@ -5837,7 +5965,7 @@ Scenario: _0154151 check function DontCalculateRow in the Purchase invoice
 			And I select current line in "List" table
 			And I input "2,000" text in "Q" field of "ItemList" table
 			And I finish line editing in "ItemList" table
-			And I click the button named "Add"
+			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
 				| 'Description' |
@@ -5928,7 +6056,7 @@ Scenario: _0154151 check function DontCalculateRow in the Purchase invoice
 			And the editing text of form attribute named "ItemListTotalTaxAmount" became equal to "647,00"
 			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "4 199,00"
 		* Add new line and check calculation
-			And I click the button named "Add"
+			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
 				| 'Description' |
@@ -6004,7 +6132,7 @@ Scenario: _0154152 check function DontCalculateRow in the Purchase return
 		And I select current line in "List" table
 	* Check filling in prices when adding an Item and selecting an item key
 		* Filling in item and item key
-			And I click the button named "Add"
+			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
 				| 'Description' |
@@ -6018,7 +6146,7 @@ Scenario: _0154152 check function DontCalculateRow in the Purchase return
 			And I select current line in "List" table
 			And I input "2,000" text in "Q" field of "ItemList" table
 			And I finish line editing in "ItemList" table
-			And I click the button named "Add"
+			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
 				| 'Description' |
@@ -6109,7 +6237,7 @@ Scenario: _0154152 check function DontCalculateRow in the Purchase return
 			And the editing text of form attribute named "ItemListTotalTaxAmount" became equal to "647,00"
 			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "4 199,00"
 		* Add new line and check calculation
-			And I click the button named "Add"
+			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
 				| 'Description' |
@@ -6170,7 +6298,7 @@ Scenario: _0154153 check function DontCalculateRow in the Purchase return order
 		And I select current line in "List" table
 	* Check filling in prices when adding an Item and selecting an item key
 		* Filling in item and item key
-			And I click the button named "Add"
+			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
 				| 'Description' |
@@ -6184,7 +6312,7 @@ Scenario: _0154153 check function DontCalculateRow in the Purchase return order
 			And I select current line in "List" table
 			And I input "2,000" text in "Q" field of "ItemList" table
 			And I finish line editing in "ItemList" table
-			And I click the button named "Add"
+			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
 				| 'Description' |
@@ -6275,7 +6403,7 @@ Scenario: _0154153 check function DontCalculateRow in the Purchase return order
 			And the editing text of form attribute named "ItemListTotalTaxAmount" became equal to "647,00"
 			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "4 199,00"
 		* Add new line and check calculation
-			And I click the button named "Add"
+			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
 				| 'Description' |
@@ -6488,8 +6616,7 @@ Scenario: _0154154 check function DontCalculateRow in the Sales order
 				| '520,00' | 'Dress'    | '18%' | 'M/White'   | '1,000' | 'pcs'  | 'No'                 | '84,47'      | '435,53'     | '520,00'       |
 		* Check calculation when remove "Price includes tax" checkbox
 			And I move to "Other" tab
-			And I remove checkbox "Price includes tax"
-			And I remove checkbox "Shipment confirmations before sales invoice"			
+			And I remove checkbox "Price includes tax"	
 			And I move to "Item list" tab
 			And "ItemList" table contains lines
 				| 'Price'  | 'Item'     | 'VAT' | 'Item key'  | 'Q'     | 'Unit' | 'Dont calculate row' | 'Tax amount' | 'Net amount' | 'Total amount' |
@@ -6740,7 +6867,7 @@ Scenario: _0154156 check function DontCalculateRow in the Sales return
 		And I move to "Item list" tab
 	* Check filling in prices when adding an Item and selecting an item key
 		* Filling in item and item key
-			And I click the button named "Add"
+			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
 				| 'Description' |
@@ -6754,7 +6881,7 @@ Scenario: _0154156 check function DontCalculateRow in the Sales return
 			And I select current line in "List" table
 			And I input "2,000" text in "Q" field of "ItemList" table
 			And I finish line editing in "ItemList" table
-			And I click the button named "Add"
+			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
 				| 'Description' |
@@ -6845,7 +6972,7 @@ Scenario: _0154156 check function DontCalculateRow in the Sales return
 			And the editing text of form attribute named "ItemListTotalTaxAmount" became equal to "647,00"
 			And the editing text of form attribute named "ItemListTotalTotalAmount" became equal to "4 199,00"
 		* Add new line and check calculation
-			And I click the button named "Add"
+			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 			And I go to line in "List" table
 				| 'Description' |
@@ -7084,7 +7211,7 @@ Scenario: _0154160 check tax and net amount calculation when change total amount
 			| 'Main Company'         |
 		And I select current line in "List" table
 	* Filling in item and item key
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |
@@ -7098,7 +7225,7 @@ Scenario: _0154160 check tax and net amount calculation when change total amount
 		And I select current line in "List" table
 		And I input "2,000" text in "Q" field of "ItemList" table
 		And I finish line editing in "ItemList" table
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |
@@ -7207,7 +7334,7 @@ Scenario: _0154161 check tax and net amount calculation when change total amount
 			| 'Main Company'         |
 		And I select current line in "List" table
 	* Filling in item and item key
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |
@@ -7221,7 +7348,7 @@ Scenario: _0154161 check tax and net amount calculation when change total amount
 		And I select current line in "List" table
 		And I input "2,000" text in "Q" field of "ItemList" table
 		And I finish line editing in "ItemList" table
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |
@@ -7330,7 +7457,7 @@ Scenario: _0154162 check tax and net amount calculation when change total amount
 			| 'Main Company'         |
 		And I select current line in "List" table
 	* Filling in item and item key
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |
@@ -7344,7 +7471,7 @@ Scenario: _0154162 check tax and net amount calculation when change total amount
 		And I select current line in "List" table
 		And I input "2,000" text in "Q" field of "ItemList" table
 		And I finish line editing in "ItemList" table
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |
@@ -7453,7 +7580,7 @@ Scenario: _0154163 check tax and net amount calculation when change total amount
 			| 'Main Company'         |
 		And I select current line in "List" table
 	* Filling in item and item key
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |
@@ -7467,7 +7594,7 @@ Scenario: _0154163 check tax and net amount calculation when change total amount
 		And I select current line in "List" table
 		And I input "2,000" text in "Q" field of "ItemList" table
 		And I finish line editing in "ItemList" table
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |
@@ -7579,7 +7706,7 @@ Scenario: _0154164 check tax and net amount calculation when change total amount
 		And I remove checkbox "Price includes tax"
 		And I move to "Item list" tab			
 	* Filling in item and item key
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |
@@ -7593,7 +7720,7 @@ Scenario: _0154164 check tax and net amount calculation when change total amount
 		And I select current line in "List" table
 		And I input "2,000" text in "Q" field of "ItemList" table
 		And I finish line editing in "ItemList" table
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of the attribute named "ItemListItem" in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |
@@ -7828,7 +7955,7 @@ Scenario: _0154167 check tax rate recalculation when change partner term (Purcha
 		And I remove checkbox "Price includes tax"
 	* Check tax rate recalculation
 		And I move to "Item list" tab
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |
@@ -7898,7 +8025,7 @@ Scenario: _0154168 check tax rate recalculation when change partner term (Purcha
 		And I remove checkbox "Price includes tax"
 	* Check tax rate recalculation
 		And I move to "Item list" tab
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Item" attribute in "ItemList" table
 		And I go to line in "List" table
 			| 'Description' |
@@ -7966,7 +8093,7 @@ Scenario: _0154170 select Partner items in the PO
 			| 'Main Company'         |
 		And I select current line in "List" table
 	* Select partner items
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I click choice button of "Partner item" attribute in "ItemList" table
 		And I go to line in "List" table
 			| 'Description'          |
@@ -7975,7 +8102,7 @@ Scenario: _0154170 select Partner items in the PO
 		And "ItemList" table contains lines
 			| 'Partner item'         | 'Cancel' | 'Item key' | 'Price type'        | 'Item'  | 'Dont calculate row' | 'Q'     | 'Unit' | 'VAT' |
 			| 'Dress M/White Ferron' | 'No'     | 'M/White'  | 'Vendor price, TRY' | 'Dress' | 'No'                 | '1,000' | 'pcs'  | '18%' |
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I select "xs" from "Partner item" drop-down list by string in "ItemList" table
 		And "ItemList" table contains lines
 			| 'Partner item'         | 'Cancel' | 'Item key' | 'Price type'        | 'Item'  | 'Dont calculate row' | 'Q'     | 'Unit' | 'VAT' |

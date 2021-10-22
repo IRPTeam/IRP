@@ -22,7 +22,7 @@ Procedure ClearDependentData(Object, AddInfo = Undefined) Export
 		TableName = AddInfo.TableParent;
 	EndIf;
 
-	If ServiceSystemClientServer.ObjectHasAttribute("TaxList", Object) Then
+	If CommonFunctionsClientServer.ObjectHasProperty(Object, "TaxList") Then
 		ArrayForDelete = New Array();
 
 		For Each Row In Object.TaxList Do
@@ -36,7 +36,7 @@ Procedure ClearDependentData(Object, AddInfo = Undefined) Export
 		EndDo;
 	EndIf;
 
-	If ServiceSystemClientServer.ObjectHasAttribute("SpecialOffers", Object) Then
+	If CommonFunctionsClientServer.ObjectHasProperty(Object, "SpecialOffers") Then
 		ArrayForDelete = New Array();
 		For Each Row In Object.SpecialOffers Do
 			If ValueIsFilled(Row.Offer) And CalculationServer.OfferHaveManualInputValue(Row.Offer)
@@ -54,6 +54,16 @@ EndProcedure
 Function GetColumnNames_ItemList(ArrayOfTaxInfo = Undefined) Export
 	ColumnNames = "Key, Unit, Price, PriceType, ItemKey, Quantity, OffersAmount, 
 				  |TotalAmount, NetAmount, TaxAmount, Info, Barcode, DontCalculateRow, QuantityInBaseUnit";
+	If ArrayOfTaxInfo <> Undefined Then
+		For Each ItemOfTaxInfo In ArrayOfTaxInfo Do
+			ColumnNames = ColumnNames + "," + ItemOfTaxInfo.Name;
+		EndDo;
+	EndIf;
+	Return ColumnNames;
+EndFunction
+
+Function GetColumnNames_PaymentList(ArrayOfTaxInfo = Undefined) Export
+	ColumnNames = "Key, TotalAmount, NetAmount, TaxAmount";
 	If ArrayOfTaxInfo <> Undefined Then
 		For Each ItemOfTaxInfo In ArrayOfTaxInfo Do
 			ColumnNames = ColumnNames + "," + ItemOfTaxInfo.Name;
@@ -103,7 +113,7 @@ Procedure FillDataCollectionByArrayOfStructures(DataCollection, ArrayOfStructure
 EndProcedure
 
 Function CalculateItemsRows(Object, Form, ItemRows, Actions, ArrayOfTaxInfo = Undefined, AddInfo = Undefined) Export
-	Result = New Structure("ItemList, TaxList, SpecialOffers");
+	Result = New Structure("ItemList, PaymentList, TaxList, SpecialOffers");
 	If Not Actions.Count() Then
 		Return Result;
 	EndIf;
@@ -119,43 +129,87 @@ Function CalculateItemsRows(Object, Form, ItemRows, Actions, ArrayOfTaxInfo = Un
 		EndIf;
 
 		CommonFunctionsClientServer.DeleteFromAddInfo(AddInfo, "UpdateRowsAfterCalculate");
-
-		ColumnNames_ItemList      = GetColumnNames_ItemList(ArrayOfTaxInfo);
-		ColumnNames_TaxList       = GetColumnNames_TaxList();
-		ColumnNames_SpecialOffers = GetColumnNames_SpecialOffers();
-
-		ArrayOfRows_ItemList      = DataCollectionToArrayOfStructures(ItemRows, ColumnNames_ItemList);
-		ArrayOfRows_TaxList       = DataCollectionToArrayOfStructures(Object.TaxList, ColumnNames_TaxList);
-		ArrayOfRows_SpecialOffers = DataCollectionToArrayOfStructures(Object.SpecialOffers, ColumnNames_SpecialOffers);
-
+		
+		IsItemListExists      = Object.Property("ItemList");
+		IsPaymentListExists   = Object.Property("PaymentList");
+		IsTaxListExists       = Object.Property("TaxList");
+		IsSpecialOffersExists = Object.Property("SpecialOffers");
+		
 		ObjectAsStructure = New Structure("Date, Company, Partner, Agreement, PriceIncludeTax");
 		FillPropertyValues(ObjectAsStructure, Object);
 		ObjectAsStructure.Insert("Ref", Object.Ref);
-		ObjectAsStructure.Insert("ItemList", ArrayOfRows_ItemList);
-		ObjectAsStructure.Insert("TaxList", ArrayOfRows_TaxList);
-		ObjectAsStructure.Insert("SpecialOffers", ArrayOfRows_SpecialOffers);
-
+		
+		If IsItemListExists Then
+			ColumnNames_ItemList = GetColumnNames_ItemList(ArrayOfTaxInfo);
+			ArrayOfRows_ItemList = DataCollectionToArrayOfStructures(ItemRows, ColumnNames_ItemList);
+			ObjectAsStructure.Insert("ItemList", ArrayOfRows_ItemList);
+		EndIf;
+		
+		If IsPaymentListExists Then
+			ColumnNames_PaymentList = GetColumnNames_PaymentList(ArrayOfTaxInfo);
+			ArrayOfRows_PaymentList = DataCollectionToArrayOfStructures(ItemRows, ColumnNames_PaymentList);
+			ObjectAsStructure.Insert("PaymentList", ArrayOfRows_PaymentList);
+		EndIf;
+		
+		If IsTaxListExists Then
+			ColumnNames_TaxList = GetColumnNames_TaxList();
+			ArrayOfRows_TaxList = DataCollectionToArrayOfStructures(Object.TaxList, ColumnNames_TaxList);
+			ObjectAsStructure.Insert("TaxList", ArrayOfRows_TaxList);
+		EndIf;
+		
+		If IsSpecialOffersExists Then
+			ColumnNames_SpecialOffers = GetColumnNames_SpecialOffers();
+			ArrayOfRows_SpecialOffers = DataCollectionToArrayOfStructures(Object.SpecialOffers, ColumnNames_SpecialOffers);
+			ObjectAsStructure.Insert("SpecialOffers", ArrayOfRows_SpecialOffers);
+		EndIf;
+		
 		CalculationServer.CalculateItemsRows(ObjectAsStructure, Undefined, Actions, ArrayOfTaxInfo, AddInfo);
-
-		Result.ItemList      = ObjectAsStructure.ItemList;
-		Result.TaxList       = ObjectAsStructure.TaxList;
-		Result.SpecialOffers = ObjectAsStructure.SpecialOffers;
-
+		
+		If IsItemListExists Then
+			Result.ItemList = ObjectAsStructure.ItemList;
+		EndIf;
+		
+		If IsPaymentListExists Then
+			Result.PaymentList = ObjectAsStructure.PaymentList;
+		EndIf;
+		
+		If IsTaxListExists Then
+			Result.TaxList = ObjectAsStructure.TaxList;
+		EndIf;
+		
+		If IsSpecialOffersExists Then
+			Result.SpecialOffers = ObjectAsStructure.SpecialOffers;
+		EndIf;
+		
 		If UpdateRowsAfterCalculate Then
-			UpdateDataCollectionByArrayOfStructures(Object.ItemList, ObjectAsStructure.ItemList, ColumnNames_ItemList);
-			FillDataCollectionByArrayOfStructures(Object.TaxList, ObjectAsStructure.TaxList, ColumnNames_TaxList);
-			FillDataCollectionByArrayOfStructures(Object.SpecialOffers, ObjectAsStructure.SpecialOffers,
-				ColumnNames_SpecialOffers);
+			If IsItemListExists Then
+				UpdateDataCollectionByArrayOfStructures(Object.ItemList, ObjectAsStructure.ItemList, ColumnNames_ItemList);
+			EndIf;
+			
+			If IsPaymentListExists Then
+				UpdateDataCollectionByArrayOfStructures(Object.PaymentList, ObjectAsStructure.PaymentList, ColumnNames_PaymentList);
+			EndIf;
+			
+			If IsTaxListExists Then
+				FillDataCollectionByArrayOfStructures(Object.TaxList, ObjectAsStructure.TaxList, ColumnNames_TaxList);
+			EndIf;
+			
+			If IsSpecialOffersExists Then
+				FillDataCollectionByArrayOfStructures(Object.SpecialOffers, ObjectAsStructure.SpecialOffers, ColumnNames_SpecialOffers);
+			EndIf;
 		EndIf;
 	Else
 		For Each ItemRow In ItemRows Do
 			CalculateItemsRow(Object, ItemRow, Actions, ArrayOfTaxInfo, AddInfo);
 		EndDo;
 		If Object.Property("ItemList") Then
-			Result.ItemList      = Object.ItemList;
+			Result.ItemList = Object.ItemList;
+		EndIf;
+		If Object.Property("PaymentList") Then
+			Result.PaymentList = Object.PaymentList;
 		EndIf;
 		If Object.Property("TaxList") Then
-			Result.TaxList       = Object.TaxList;
+			Result.TaxList = Object.TaxList;
 		EndIf;
 		If Object.Property("SpecialOffers") Then
 			Result.SpecialOffers = Object.SpecialOffers;
@@ -175,7 +229,7 @@ Function CalculateItemsRows(Object, Form, ItemRows, Actions, ArrayOfTaxInfo = Un
 		Notify(Action.Key, NotifyStructure, Form);
 	EndDo;
 
-	Notify("CallbackHandler", New Structure("AddInfo", AddInfo), Form);
+	Notify("CalculationStringsComplete", New Structure("AddInfo", AddInfo), Form);
 
 #EndIf
 	Return Result;
@@ -347,6 +401,7 @@ Procedure UpdateInfoStringWithOffers(Object, ItemRow, AddInfo = Undefined)
 EndProcedure
 
 #Region Region
+
 Procedure UpdateInfoString(ItemRow) Export
 	ItemRow.Info = BuildInfoString(ItemRow);
 EndProcedure
@@ -746,7 +801,7 @@ Function IsPricesChanged(Object, Form, Settings, AddInfo = Undefined) Export
 	ListCache = DataCollectionToArrayOfStructures(Object.ItemList, GetColumnNames_ItemList());
 
 	CalculationSettings = New Structure();
-	PriceDate = GetPriceDateByRefAndDate(Object.Ref, Object.Date);
+	PriceDate = GetSliceLastDateByRefAndDate(Object.Ref, Object.Date);
 	CalculationSettings.Insert("UpdatePrice", New Structure("Period, PriceType", PriceDate, Form.CurrentPriceType));
 
 	CommonFunctionsClientServer.PutToAddInfo(AddInfo, "UpdateRowsAfterCalculate", False);
@@ -764,7 +819,7 @@ Function IsPricesChanged(Object, Form, Settings, AddInfo = Undefined) Export
 	Return False;
 EndFunction
 
-Function GetPriceDateByRefAndDate(Ref, Date) Export
+Function GetSliceLastDateByRefAndDate(Ref, Date) Export
 	If Not ValueIsFilled(Ref) Then
 		If Not ValueIsFilled(Date) Then
 			Return CurrentDate();

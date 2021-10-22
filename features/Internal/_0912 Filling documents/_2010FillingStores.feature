@@ -224,14 +224,14 @@ Scenario: _201003 check filling in Store field in the document Purchase order
 			| 'Vendor Ferron, TRY' |
 		And I select current line in "List" table
 	* Filling in items tab
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I select "dre" from "Item" drop-down list by string in "ItemList" table
 		And I activate "Item key" field in "ItemList" table
 		And I select "xs" from "Item key" drop-down list by string in "ItemList" table
 		And I activate "Q" field in "ItemList" table
 		And I input "2,000" text in "Q" field of "ItemList" table
 		And I finish line editing in "ItemList" table
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I select "sh" from "Item" drop-down list by string in "ItemList" table
 		And I activate "Item key" field in "ItemList" table
 		And I select "36" from "Item key" drop-down list by string in "ItemList" table
@@ -302,14 +302,14 @@ Scenario: _201004 check filling in Store field in the document Purchase invoice
 			| 'Vendor Ferron, TRY' |
 		And I select current line in "List" table
 	* Filling in items tab
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I select "dre" from "Item" drop-down list by string in "ItemList" table
 		And I activate "Item key" field in "ItemList" table
 		And I select "xs" from "Item key" drop-down list by string in "ItemList" table
 		And I activate "Q" field in "ItemList" table
 		And I input "2,000" text in "Q" field of "ItemList" table
 		And I finish line editing in "ItemList" table
-		And I click the button named "Add"
+		And in the table "ItemList" I click the button named "ItemListAdd"
 		And I select "sh" from "Item" drop-down list by string in "ItemList" table
 		And I activate "Item key" field in "ItemList" table
 		And I select "36" from "Item key" drop-down list by string in "ItemList" table
@@ -371,7 +371,7 @@ Scenario: _201005 check filling in Store field in the Shipment confirmation
 			| 'Store 03'    |
 			And I select current line in "List" table
 		* Add first line with the product
-			And I click the button named "Add"
+			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
 			| 'Description' |
@@ -387,7 +387,7 @@ Scenario: _201005 check filling in Store field in the Shipment confirmation
 			And I input "2,000" text in "Quantity" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 		* Add second line
-			And I click the button named "Add"
+			And in the table "ItemList" I click the button named "ItemListAdd"
 			And I click choice button of "Item" attribute in "ItemList" table
 			And I go to line in "List" table
 			| 'Description' |

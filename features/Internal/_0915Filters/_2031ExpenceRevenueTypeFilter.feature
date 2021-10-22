@@ -102,7 +102,7 @@ Scenario: _0203102 check filters in the Sales invoice
 Scenario: _0203103 check filters in the Purchase order
 	Given I open hyperlink 'e1cib/list/Document.PurchaseOrder'
 	And I click the button named "FormCreate"
-	And I click the button named "Add"
+	And in the table "ItemList" I click the button named "ItemListAdd"
 	And I activate "Expense type" field in "ItemList" table
 	And I select current line in "ItemList" table
 	And I click choice button of "Expense type" attribute in "ItemList" table
@@ -120,7 +120,7 @@ Scenario: _0203103 check filters in the Purchase order
 Scenario: _0203104 check filters in the Purchase invoice
 	Given I open hyperlink 'e1cib/list/Document.PurchaseInvoice'
 	And I click the button named "FormCreate"
-	And I click the button named "Add"
+	And in the table "ItemList" I click the button named "ItemListAdd"
 	And I activate "Expense type" field in "ItemList" table
 	And I select current line in "ItemList" table
 	And I click choice button of "Expense type" attribute in "ItemList" table
@@ -138,7 +138,7 @@ Scenario: _0203104 check filters in the Purchase invoice
 Scenario: _0203105 check filters in the Stock adjustment as surplus
 	Given I open hyperlink 'e1cib/list/Document.StockAdjustmentAsSurplus'
 	And I click the button named "FormCreate"
-	And I click the button named "Add"
+	And in the table "ItemList" I click the button named "ItemListAdd"
 	And I activate "Revenue type" field in "ItemList" table
 	And I select current line in "ItemList" table
 	And I click choice button of "Revenue type" attribute in "ItemList" table
@@ -156,7 +156,7 @@ Scenario: _0203105 check filters in the Stock adjustment as surplus
 Scenario: _0203106 check filters in the Stock adjustment as write off
 	Given I open hyperlink 'e1cib/list/Document.StockAdjustmentAsWriteOff'
 	And I click the button named "FormCreate"
-	And I click the button named "Add"
+	And in the table "ItemList" I click the button named "ItemListAdd"
 	And I activate "Expense type" field in "ItemList" table
 	And I select current line in "ItemList" table
 	And I click choice button of "Expense type" attribute in "ItemList" table

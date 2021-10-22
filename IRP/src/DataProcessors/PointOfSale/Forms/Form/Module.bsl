@@ -620,7 +620,6 @@ EndProcedure
 
 &AtServer
 Procedure Taxes_CreateFormControls() Export
-
 	ColumnFieldParameters = New Structure();
 	ColumnFieldParameters.Insert("Visible", False);
 

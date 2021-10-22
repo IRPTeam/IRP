@@ -442,13 +442,6 @@
 		</right>
 	</object>
 	<object>
-		<name>Catalog.Partners.Attribute.ShipmentConfirmationsBeforeSalesInvoice</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
 		<name>Document.CashStatement.Attribute.Company</name>
 		<right>
 			<name>View</name>
@@ -532,13 +525,6 @@
 			<name>Read</name>
 			<value>true</value>
 		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Catalog.Partners.Attribute.GoodsReceiptBeforePurchaseInvoice</name>
 		<right>
 			<name>View</name>
 			<value>true</value>

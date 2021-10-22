@@ -62,12 +62,6 @@ Procedure OnOpen(Object, Form, Cancel, AddInfo = Undefined) Export
 	DocumentsClient.SetTextOfDescriptionAtForm(Object, Form);
 #EndIf
 
-	If ValueIsFilled(Object.Ref) Then
-		CurrenciesClient.SetSurfaceTable(Object, Form, AddInfo);
-	Else
-		CurrenciesClient.FullRefreshTable(Object, Form, AddInfo);
-	EndIf;
-
 	SerialLotNumberClient.UpdateSerialLotNumbersPresentation(Object, AddInfo);
 	SerialLotNumberClient.UpdateSerialLotNumbersTree(Object, Form);
 EndProcedure
@@ -78,7 +72,6 @@ EndProcedure
 
 Procedure AfterWriteAtClient(Object, Form, WriteParameters, AddInfo = Undefined) Export
 	DocumentsClient.AfterWriteAtClientPutServerDataToAddInfo(Object, Form, AddInfo);
-	CurrenciesClient.SetVisibleRows(Object, ThisObject, AddInfo);
 	SerialLotNumberClient.UpdateSerialLotNumbersPresentation(Object, AddInfo);
 	RowIDInfoClient.AfterWriteAtClient(Object, Form, WriteParameters, AddInfo);
 EndProcedure
@@ -99,7 +92,6 @@ EndProcedure
 
 Procedure ItemListOnChange(Object, Form, Item = Undefined, CurrentRowData = Undefined) Export
 	DocumentsClient.FillRowIDInItemList(Object);
-	CurrenciesClient.CalculateAmount(Object, Form);
 EndProcedure
 
 Procedure ItemListOnStartEdit(Object, Form, Item, NewRow, Clone, AddInfo = Undefined) Export
@@ -189,7 +181,7 @@ Function ItemListItemSettings(Object, Form, AddInfo = Undefined) Export
 	Actions.Insert("UpdateItemKey", "UpdateItemKey");
 
 	AfterActionsCalculateSettings = New Structure();
-	PriceDate = CalculationStringsClientServer.GetPriceDateByRefAndDate(Object.Ref, Object.Date);
+	PriceDate = CalculationStringsClientServer.GetSliceLastDateByRefAndDate(Object.Ref, Object.Date);
 	AfterActionsCalculateSettings.Insert("UpdatePrice", New Structure("Period, PriceType", PriceDate,
 		Form.CurrentPriceType));
 
@@ -221,7 +213,7 @@ Function ItemListItemKeySettings(Object, Form, AddInfo = Undefined) Export
 	Actions.Insert("UpdateRowUnit", "UpdateRowUnit");
 
 	AfterActionsCalculateSettings = New Structure();
-	PriceDate = CalculationStringsClientServer.GetPriceDateByRefAndDate(Object.Ref, Object.Date);
+	PriceDate = CalculationStringsClientServer.GetSliceLastDateByRefAndDate(Object.Ref, Object.Date);
 	AfterActionsCalculateSettings.Insert("UpdatePrice", New Structure("Period, PriceType", PriceDate,
 		Form.CurrentPriceType));
 
@@ -767,7 +759,7 @@ Function DateSettings(Object, Form, AddInfo = Undefined) Export
 	Actions.Insert("ChangeAgreement", "ChangeAgreement");
 
 	AfterActionsCalculateSettings = New Structure();
-	PriceDate = CalculationStringsClientServer.GetPriceDateByRefAndDate(Object.Ref, Object.Date);
+	PriceDate = CalculationStringsClientServer.GetSliceLastDateByRefAndDate(Object.Ref, Object.Date);
 	AfterActionsCalculateSettings.Insert("UpdatePrice", New Structure("Period, PriceType", PriceDate,
 		Form.CurrentPriceType));
 

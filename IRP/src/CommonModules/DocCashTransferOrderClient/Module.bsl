@@ -5,7 +5,6 @@ Procedure OnOpen(Object, Form, Cancel, AddInfo = Undefined) Export
 	If Not ValueIsFilled(Object.Ref) Then
 		CheckFillData(Object, Form);
 	EndIf;
-	SetVisibilityAvailability(Object, Form);
 EndProcedure
 
 #EndRegion
@@ -160,7 +159,6 @@ EndProcedure
 Procedure SenderOnChange(Object, Form, Item) Export
 	CommonFunctionsClientServer.SetFormItemModifiedByUser(Form, Item.Name);
 	SetSenderCurrency(Object, Form);
-	SetVisibilityAvailability(Object, Form);
 EndProcedure
 
 Procedure SenderStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
@@ -213,18 +211,6 @@ Procedure ReceiverOnChange(Object, Form, Item) Export
 	CommonFunctionsClientServer.SetFormItemModifiedByUser(Form, Item.Name);
 	SetReceiverCurrency(Object, Form);
 	FillReceiveAmountBySendAmount(Object, Form);
-	SetVisibilityAvailability(Object, Form);
-EndProcedure
-
-Procedure SetVisibilityAvailability(Object, Form) Export
-	If DocCashTransferOrderServer.UseCashAdvanceHolder(Object) Then
-		Form.Items.CashAdvanceHolder.Visible = True;
-	Else
-		Form.Items.CashAdvanceHolder.Visible = False;
-		If Object.Ref.isEmpty() Then
-			Object.CashAdvanceHolder = PredefinedValue("Catalog.Partners.EmptyRef");
-		EndIf;
-	EndIf;
 EndProcedure
 
 Procedure ReceiverStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export

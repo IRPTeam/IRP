@@ -126,7 +126,6 @@ Scenario: _1000000 preparation (credit limit)
 			And I finish line editing in "ItemList" table
 		* Specify shipping scheme
 			And I move to "Other" tab
-			And I remove checkbox "Shipment confirmations before sales invoice"
 			And I click the button named "FormPost"
 			And I delete "$$SalesOrder20400011$$" variable
 			And I delete "$$NumberSalesOrder20400011$$" variable
@@ -203,7 +202,6 @@ Scenario: _1000000 preparation (credit limit)
 			And I finish line editing in "ItemList" table
 		* Specify shipping scheme and document number
 			And I move to "Other" tab
-			And I set checkbox "Shipment confirmations before sales invoice"
 			And I click the button named "FormPost"
 			And I delete "$$SalesOrder20400012$$" variable
 			And I delete "$$NumberSalesOrder20400012$$" variable
@@ -278,9 +276,6 @@ Scenario: _1000000 preparation (credit limit)
 				| 'Boots (12 pcs)' |
 			And I select current line in "List" table
 			And I finish line editing in "ItemList" table
-		* Specify shipping scheme
-			And I move to "Other" tab
-			And I remove checkbox "Shipment confirmations before sales invoice"
 			And I click the button named "FormPost"
 			And I delete "$$SalesOrder20400014$$" variable
 			And I delete "$$NumberSalesOrder20400014$$" variable

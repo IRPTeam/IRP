@@ -46,8 +46,13 @@ Procedure UsePartnerInfoOnChange(Item)
 	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
+&AtClient
+Procedure FormSetVisibilityAvailability() Export
+	SetVisibilityAvailability(Object, ThisObject);
+EndProcedure
+
 &AtClientAtServerNoContext
-Procedure SetVisibilityAvailability(Object, Form) Export
+Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.GroupPartnerInfo.Visible = Object.UsePartnerTransactions;
 
 	Form.Items.Partner.Visible     = Object.UsePartnerInfo;

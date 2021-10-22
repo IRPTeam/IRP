@@ -51,8 +51,6 @@ Procedure AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters) Expor
 
 	DocumentsServer.FillItemList(Object);
 	DocumentsClientServer.ChangeTitleGroupTitle(CurrentObject, Form);
-	CurrenciesServer.UpdateRatePresentation(Object);
-	CurrenciesServer.SetVisibleCurrenciesRow(Object, Undefined, True);
 	Form.Taxes_CreateFormControls();
 	RowIDInfoServer.AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters);
 EndProcedure
@@ -72,8 +70,6 @@ Procedure OnReadAtServer(Object, Form, CurrentObject) Export
 		SetGroupItemsList(Object, Form);
 	EndIf;
 	DocumentsClientServer.ChangeTitleGroupTitle(CurrentObject, Form);
-	CurrenciesServer.UpdateRatePresentation(Object);
-	CurrenciesServer.SetVisibleCurrenciesRow(Object, Undefined, True);
 	Form.Taxes_CreateFormControls();
 	RowIDInfoServer.OnReadAtServer(Object, Form, CurrentObject);
 EndProcedure
@@ -232,7 +228,6 @@ Function GetSalesOrderForClosing(SalesOrder, AddInfo = Undefined) Export
 	|	SalesOrder.ManagerSegment AS ManagerSegment,
 	|	SalesOrder.Partner AS Partner,
 	|	SalesOrder.PriceIncludeTax AS PriceIncludeTax,
-	|	SalesOrder.ShipmentConfirmationsBeforeSalesInvoice AS ShipmentConfirmationsBeforeSalesInvoice,
 	|	SalesOrder.Status AS Status,
 	|	SalesOrder.UseItemsShipmentScheduling AS UseItemsShipmentScheduling,
 	|	SalesOrder.Author AS Author,
@@ -382,7 +377,6 @@ Function GetSalesOrderInfo(SalesOrder, AddInfo = Undefined) Export
 	|	SalesOrder.ManagerSegment,
 	|	SalesOrder.Partner,
 	|	SalesOrder.PriceIncludeTax,
-	|	SalesOrder.ShipmentConfirmationsBeforeSalesInvoice,
 	|	SalesOrder.Status,
 	|	SalesOrder.UseItemsShipmentScheduling,
 	|	SalesOrder.Author,

@@ -128,7 +128,6 @@ Function ItemList()
 	Return "SELECT
 		   |	SalesOrderItemList.Ref.Date AS Period,
 		   |	SalesOrderItemList.Ref.Company AS Company,
-		   |	SalesOrderItemList.Ref.ShipmentConfirmationsBeforeSalesInvoice AS ShipmentConfirmationsBeforeSalesInvoice,
 		   |	SalesOrderItemList.Store AS Store,
 		   |	SalesOrderItemList.Store.UseShipmentConfirmation AS UseShipmentConfirmation,
 		   |	SalesOrderItemList.ItemKey AS ItemKey,

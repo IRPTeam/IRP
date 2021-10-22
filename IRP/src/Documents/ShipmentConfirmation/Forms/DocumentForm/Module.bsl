@@ -52,8 +52,13 @@ Procedure OnReadAtServer(CurrentObject)
 	SetVisibilityAvailability(CurrentObject, ThisObject);
 EndProcedure
 
+&AtClient
+Procedure FormSetVisibilityAvailability() Export
+	SetVisibilityAvailability(Object, ThisObject);
+EndProcedure
+
 &AtClientAtServerNoContext
-Procedure SetVisibilityAvailability(Object, Form) Export
+Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.AddBasisDocuments.Enabled = Not Form.ReadOnly;
 	Form.Items.LinkUnlinkBasisDocuments.Enabled = Not Form.ReadOnly;
 
@@ -360,5 +365,10 @@ Function GetProcessingModule() Export
 	Str.Insert("Server", DocShipmentConfirmationServer);
 	Return Str;
 EndFunction
+
+&AtClient
+Procedure ShowHiddenTables(Command)
+	DocumentsClient.ShowHiddenTables(Object, ThisObject);
+EndProcedure
 
 #EndRegion

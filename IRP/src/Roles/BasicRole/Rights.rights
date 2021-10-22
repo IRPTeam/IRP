@@ -479,6 +479,13 @@
 		</right>
 	</object>
 	<object>
+		<name>Constant.DefaultFilesStorageVolume</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>ExchangePlan.ED_ExchangePlan</name>
 		<right>
 			<name>Read</name>
@@ -493,6 +500,13 @@
 		</right>
 		<right>
 			<name>Set</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>CommonCommand.AttachedFiles</name>
+		<right>
+			<name>View</name>
 			<value>true</value>
 		</right>
 	</object>
@@ -586,13 +600,6 @@
 		</right>
 	</object>
 	<object>
-		<name>CommonForm.PickUpDocuments</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
 		<name>CommonForm.PictureViewerFormRegular</name>
 		<right>
 			<name>View</name>
@@ -652,20 +659,6 @@
 		</right>
 		<right>
 			<name>Set</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Constant.DefaultFilesStorageVolume</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>CommonCommand.AttachedFiles</name>
-		<right>
-			<name>View</name>
 			<value>true</value>
 		</right>
 	</object>

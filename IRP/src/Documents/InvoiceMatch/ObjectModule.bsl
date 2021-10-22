@@ -2,13 +2,6 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	If DataExchange.Load Then
 		Return;
 	EndIf;
-
-	For Each Row In ThisObject.Transactions Do
-		CurrenciesServer.CalculateAmount(ThisObject, Row.Amount, Row.Key);
-	EndDo;
-	For Each Row In ThisObject.Advances Do
-		CurrenciesServer.CalculateAmount(ThisObject, Row.Amount, Row.Key);
-	EndDo;
 EndProcedure
 
 Procedure OnWrite(Cancel)

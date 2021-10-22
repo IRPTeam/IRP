@@ -406,13 +406,7 @@ EndProcedure
 
 &AtServer
 Procedure CurrencyOnChangeAtServer()
-	Object.Currencies.Clear();
-	For Each Row In Object.Transactions Do
-		CurrenciesServer.FillCurrencyTable(Object, Object.Date, Object.Company, Row.Currency, Row.Key, Row.Agreement);
-	EndDo;
-	For Each Row In Object.Advances Do
-		CurrenciesServer.FillCurrencyTable(Object, Object.Date, Object.Company, Row.Currency, Row.Key, Undefined);
-	EndDo;
+	Return;
 EndProcedure
 
 #EndRegion

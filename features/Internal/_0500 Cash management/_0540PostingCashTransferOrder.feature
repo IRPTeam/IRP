@@ -423,7 +423,7 @@ Scenario: _054006 create Cash transfer order (from Cash/Bank accounts to bank ac
 			| $$NumberCashTransferOrder054006$$      | Cash desk №1 | Bank account, USD | Main Company |
 		And I click the button named "FormDocumentCashPaymentGenerateCashPayment"
 		* Check the filling of the tabular part
-			And "PaymentList" table contains lines
+		And "PaymentList" table contains lines
 			| 'Planning transaction basis'  | 'Amount' |
 			| '$$CashTransferOrder054006$$' | '500,00' |
 		And I click the button named "FormPost"
@@ -441,8 +441,8 @@ Scenario: _054006 create Cash transfer order (from Cash/Bank accounts to bank ac
 		And I click the button named "FormDocumentBankReceiptGenarateBankReceipt"
 		And Delay 5
 		* Check the filling of the tabular part
-			And I move to "Payments" tab
-			And "PaymentList" table contains lines
+		And I move to "Payments" tab
+		And "PaymentList" table contains lines
 			| 'Amount' | 'Planning transaction basis'  |
 			| '500,00' | '$$CashTransferOrder054006$$' |
 		And I click the button named "FormPost"

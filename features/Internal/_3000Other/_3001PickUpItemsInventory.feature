@@ -80,7 +80,7 @@ Scenario: _3001000 preparation
 					And I select current line in "List" table
 				* Filling in items table
 					And I move to "Item list" tab
-					And I click the button named "Add"
+					And in the table "ItemList" I click the button named "ItemListAdd"
 					And I click choice button of "Item" attribute in "ItemList" table
 					And I go to line in "List" table
 						| 'Description' |
@@ -98,7 +98,7 @@ Scenario: _3001000 preparation
 					And I input "100,000" text in "Price" field of "ItemList" table
 					And I set "Use goods receipt" checkbox in "ItemList" table				
 					And I finish line editing in "ItemList" table
-					And I click the button named "Add"
+					And in the table "ItemList" I click the button named "ItemListAdd"
 					And I click choice button of "Item" attribute in "ItemList" table
 					And I go to line in "List" table
 						| 'Description' |
@@ -116,7 +116,7 @@ Scenario: _3001000 preparation
 					And I input "100,000" text in "Price" field of "ItemList" table
 					And I set "Use goods receipt" checkbox in "ItemList" table	
 					And I finish line editing in "ItemList" table
-					And I click the button named "Add"
+					And in the table "ItemList" I click the button named "ItemListAdd"
 					And I click choice button of "Item" attribute in "ItemList" table
 					And I go to line in "List" table
 						| 'Description' |
@@ -134,7 +134,7 @@ Scenario: _3001000 preparation
 					And I input "100,000" text in "Price" field of "ItemList" table
 					And I set "Use goods receipt" checkbox in "ItemList" table	
 					And I finish line editing in "ItemList" table
-					And I click the button named "Add"
+					And in the table "ItemList" I click the button named "ItemListAdd"
 					And I click choice button of "Item" attribute in "ItemList" table
 					And I go to line in "List" table
 						| 'Description' |
@@ -207,7 +207,7 @@ Scenario: _3001000 preparation
 					And I select current line in "List" table
 				* Filling in items table
 					And I move to "Item list" tab
-					And I click the button named "Add"
+					And in the table "ItemList" I click the button named "ItemListAdd"
 					And I click choice button of "Item" attribute in "ItemList" table
 					And I go to line in "List" table
 						| 'Description' |
@@ -224,7 +224,7 @@ Scenario: _3001000 preparation
 					And I activate "Price" field in "ItemList" table
 					And I input "100,000" text in "Price" field of "ItemList" table
 					And I finish line editing in "ItemList" table
-					And I click the button named "Add"
+					And in the table "ItemList" I click the button named "ItemListAdd"
 					And I click choice button of "Item" attribute in "ItemList" table
 					And I go to line in "List" table
 						| 'Description' |

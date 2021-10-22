@@ -87,8 +87,6 @@ Scenario: _095001 preparation
 			And I input "15,000" text in "Q" field of "ItemList" table
 			And I finish line editing in "ItemList" table
 			And I move to "Other" tab
-			And I expand "Currencies" group
-			And I move to the tab named "GroupCurrencies"
 			And I expand "More" group
 			And I input "01.01.2020  10:00:00" text in "Date" field
 			And Delay 1
@@ -118,7 +116,7 @@ Scenario: _095001 preparation
 				And I select current line in "List" table
 			* Adding items to Purchase Invoice
 				And I move to "Item list" tab
-				And I click the button named "Add"
+				And in the table "ItemList" I click the button named "ItemListAdd"
 				And I click choice button of "Item" attribute in "ItemList" table
 				And I go to line in "List" table
 				| 'Description' |
@@ -169,7 +167,7 @@ Scenario: _095001 preparation
 				And I select current line in "List" table
 			* Adding items to Purchase Invoice
 				And I move to "Item list" tab
-				And I click the button named "Add"
+				And in the table "ItemList" I click the button named "ItemListAdd"
 				And I click choice button of "Item" attribute in "ItemList" table
 				And I go to line in "List" table
 					| 'Description' |

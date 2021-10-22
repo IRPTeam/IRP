@@ -92,6 +92,10 @@
 			<name>View</name>
 			<value>true</value>
 		</right>
+		<right>
+			<name>InputByString</name>
+			<value>true</value>
+		</right>
 	</object>
 	<object>
 		<name>Subsystem.Treasury.Subsystem.Taxes</name>
@@ -128,17 +132,6 @@
 	</object>
 	<object>
 		<name>AccumulationRegister.R5022T_Expenses</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>DocumentJournal.DocumentsForCreditDebitNote</name>
 		<right>
 			<name>Read</name>
 			<value>true</value>
@@ -315,6 +308,17 @@
 		</right>
 	</object>
 	<object>
+		<name>Catalog.LegalNameContracts</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Document.Labeling</name>
 		<right>
 			<name>Read</name>
@@ -435,6 +439,28 @@
 		<name>AccumulationRegister.R2022B_CustomersPaymentPlanning</name>
 		<right>
 			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>DataProcessor.ScanBarcode</name>
+		<right>
+			<name>Use</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>DataProcessor.StoreKeeperWorkspace</name>
+		<right>
+			<name>Use</name>
 			<value>true</value>
 		</right>
 		<right>
@@ -590,6 +616,13 @@
 		</right>
 	</object>
 	<object>
+		<name>CommonForm.AddLinkedDocumentRows</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>DocumentJournal.AllDocuments</name>
 		<right>
 			<name>Read</name>
@@ -604,6 +637,17 @@
 		<name>Report.PriceInfo</name>
 		<right>
 			<name>Use</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>AccumulationRegister.R4037B_PlannedReceiptReservationRequests</name>
+		<right>
+			<name>Read</name>
 			<value>true</value>
 		</right>
 		<right>
@@ -850,6 +894,20 @@
 	</object>
 	<object>
 		<name>CommonForm.EditMultilineText</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>CommonForm.LinkUnlinkDocumentRows</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Subsystem.PurchaseAP.Subsystem.Pricing</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -1224,6 +1282,17 @@
 		</right>
 	</object>
 	<object>
+		<name>InformationRegister.T3010S_RowIDInfo</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>CommonForm.DataMappingForm</name>
 		<right>
 			<name>View</name>
@@ -1270,6 +1339,13 @@
 			<name>Read</name>
 			<value>true</value>
 		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>CommonForm.InfoLinkedDocumentRows</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -1352,6 +1428,17 @@
 	</object>
 	<object>
 		<name>Subsystem.PurchaseAP.Subsystem.PurchaseReturn</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>InformationRegister.T1010S_ScannedBarcode</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -1461,17 +1548,6 @@
 		</right>
 		<right>
 			<name>ViewDataHistory</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Report.ItemsInfo</name>
-		<right>
-			<name>Use</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
 			<value>true</value>
 		</right>
 	</object>
@@ -1600,6 +1676,17 @@
 		</right>
 	</object>
 	<object>
+		<name>Report.AllRegistersMovement</name>
+		<right>
+			<name>Use</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>AccumulationRegister.R4020T_StockTransferOrders</name>
 		<right>
 			<name>Read</name>
@@ -1717,6 +1804,17 @@
 		</right>
 		<right>
 			<name>ViewDataHistory</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Catalog.PlanningPeriods</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
 			<value>true</value>
 		</right>
 	</object>
@@ -2856,6 +2954,13 @@
 		</right>
 	</object>
 	<object>
+		<name>CommonCommand.UpdateAllUserRoles</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>SessionParameter.ConnectedAddDataProc</name>
 		<right>
 			<name>Get</name>
@@ -3424,6 +3529,10 @@
 			<name>View</name>
 			<value>true</value>
 		</right>
+		<right>
+			<name>InputByString</name>
+			<value>true</value>
+		</right>
 	</object>
 	<object>
 		<name>Constant.UseLockDataModification</name>
@@ -3708,6 +3817,17 @@
 		</right>
 	</object>
 	<object>
+		<name>Constant.DefaultFilesStorageVolume</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>AccumulationRegister.R5041B_TaxesPayable</name>
 		<right>
 			<name>Read</name>
@@ -3831,6 +3951,17 @@
 		</right>
 	</object>
 	<object>
+		<name>Report.D0010_ItemsInfo</name>
+		<right>
+			<name>Use</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Subsystem.Service.Subsystem.Documents</name>
 		<right>
 			<name>View</name>
@@ -3906,6 +4037,13 @@
 		</right>
 		<right>
 			<name>Set</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>CommonCommand.AttachedFiles</name>
+		<right>
+			<name>View</name>
 			<value>true</value>
 		</right>
 	</object>
@@ -4023,6 +4161,17 @@
 		</right>
 		<right>
 			<name>ViewDataHistory</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Report.D2001_Sales</name>
+		<right>
+			<name>Use</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
 			<value>true</value>
 		</right>
 	</object>
@@ -4181,6 +4330,13 @@
 		</right>
 	</object>
 	<object>
+		<name>CommonForm.AttachFile</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Catalog.ItemTypes</name>
 		<right>
 			<name>Read</name>
@@ -4325,6 +4481,17 @@
 		</right>
 	</object>
 	<object>
+		<name>DataProcessor.AnaliseDocumentMovements</name>
+		<right>
+			<name>Use</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>Subsystem.Saas</name>
 		<right>
 			<name>View</name>
@@ -4402,6 +4569,17 @@
 	</object>
 	<object>
 		<name>CommonAttribute.ID</name>
+		<right>
+			<name>View</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Catalog.PartnerItems</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
 		<right>
 			<name>View</name>
 			<value>true</value>
@@ -4882,13 +5060,6 @@
 		</right>
 	</object>
 	<object>
-		<name>CommonForm.PickUpDocuments</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
 		<name>Subsystem.SalesAR</name>
 		<right>
 			<name>View</name>
@@ -5205,6 +5376,33 @@
 		</right>
 	</object>
 	<object>
+		<name>Configuration.IRP</name>
+		<right>
+			<name>MainWindowModeNormal</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>MainWindowModeWorkplace</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>MainWindowModeEmbeddedWorkplace</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>MainWindowModeFullscreenWorkplace</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>MainWindowModeKiosk</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>AnalyticsSystemClient</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
 		<name>InformationRegister.TaxSettings</name>
 		<right>
 			<name>Read</name>
@@ -5224,6 +5422,17 @@
 		</right>
 		<right>
 			<name>ViewDataHistory</name>
+			<value>true</value>
+		</right>
+	</object>
+	<object>
+		<name>Constant.EnableLinkedRowsIntegrity</name>
+		<right>
+			<name>Read</name>
+			<value>true</value>
+		</right>
+		<right>
+			<name>View</name>
 			<value>true</value>
 		</right>
 	</object>
@@ -5368,328 +5577,46 @@
 		</right>
 	</object>
 	<object>
-		<name>Subsystem.PurchaseAP.Subsystem.Pricing</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Constant.DefaultFilesStorageVolume</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Catalog.PlanningPeriods</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Catalog.PartnerItems</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>CommonForm.AttachFile</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>InformationRegister.T1010S_ScannedBarcode</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>DataProcessor.ScanBarcode</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
+		<name>Report.D1001_Purchases</name>
 		<right>
 			<name>Use</name>
 			<value>true</value>
 		</right>
-	</object>
-	<object>
-		<name>CommonForm.LinkUnlinkDocumentRows</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
 		</right>
 	</object>
 	<object>
-		<name>AccumulationRegister.R4037B_PlannedReceiptReservationRequests</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Catalog.LegalNameContracts</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>DataProcessor.AnaliseDocumentMovements</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
+		<name>Report.D4010_ActualStocks</name>
 		<right>
 			<name>Use</name>
 			<value>true</value>
 		</right>
-	</object>
-	<object>
-		<name>CommonCommand.AttachedFiles</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
 		</right>
 	</object>
 	<object>
-		<name>CommonCommand.UpdateAllUserRoles</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>CommonForm.AddLinkedDocumentRows</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>DataProcessor.StoreKeeperWorkspace</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
+		<name>Report.D4011_FreeStocks</name>
 		<right>
 			<name>Use</name>
 			<value>true</value>
 		</right>
-	</object>
-	<object>
-		<name>Report.AllRegistersMovement</name>
 		<right>
 			<name>View</name>
 			<value>true</value>
 		</right>
+	</object>
+	<object>
+		<name>Report.D4012_StockReservation</name>
 		<right>
 			<name>Use</name>
 			<value>true</value>
 		</right>
-	</object>
-	<object>
-		<name>CommonForm.LinkUnlinkDocumentRows</name>
 		<right>
 			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>CommonCommand.UpdateAllUserRoles</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>InformationRegister.T1010S_ScannedBarcode</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Catalog.PlanningPeriods</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>CommonCommand.AttachedFiles</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>DataProcessor.StoreKeeperWorkspace</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Use</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>InformationRegister.T3010S_RowIDInfo</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Catalog.PartnerItems</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>AccumulationRegister.R4037B_PlannedReceiptReservationRequests</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Catalog.LegalNameContracts</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>CommonForm.AddLinkedDocumentRows</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>CommonForm.AttachFile</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Constant.DefaultFilesStorageVolume</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Report.AllRegistersMovement</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Use</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>DataProcessor.ScanBarcode</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Use</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Subsystem.PurchaseAP.Subsystem.Pricing</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>DataProcessor.AnaliseDocumentMovements</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Use</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Constant.EnableLinkedRowsIntegrity</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>Read</name>
 			<value>true</value>
 		</right>
 	</object>

@@ -159,6 +159,7 @@ EndProcedure
 #EndRegion
 
 #Region Taxes
+
 &AtClient
 Procedure TaxValueOnChange(Item) Export
 	DocCashExpenseRevenueClient.ItemListTaxValueOnChange(Object, ThisObject, Item);

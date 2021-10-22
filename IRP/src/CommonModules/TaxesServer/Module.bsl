@@ -563,7 +563,7 @@ Function CreateFormControls_PaymentList(Object, Form, AddInfo) Export
 	TaxesParameters.Company               = Object.Company;
 	TaxesParameters.PathToTable           = "Object.PaymentList";
 	TaxesParameters.ItemParent            = Form.Items.PaymentList;
-	TaxesParameters.ColumnOffset          = Form.Items.PaymentListCurrency;
+	TaxesParameters.ColumnOffset          = Form.Items.PaymentListNetAmount;
 	TaxesParameters.ItemListName          = "PaymentList";
 	TaxesParameters.TaxListName           = "TaxList";
 	TaxesParameters.TotalAmountColumnName = "PaymentListTotalAmount";

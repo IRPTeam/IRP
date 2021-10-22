@@ -102,12 +102,17 @@ EndProcedure
 
 &AtClient
 Procedure PaymentListOnStartEdit(Item, NewRow, Clone)
-	DocumentsClient.PaymentListOnStartEdit(Object, ThisObject, Item, NewRow, Clone);
+	DocBankPaymentClient.PaymentListOnStartEdit(Object, ThisObject, Item, NewRow, Clone);
 EndProcedure
 
 &AtClient
 Procedure PaymentListAfterDeleteRow(Item)
-	DocumentsClient.CalculateTotalAmount(Object, ThisObject);
+	DocBankPaymentClient.PaymentListAfterDeleteRow(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure PaymentListSelection(Item, RowSelected, Field, StandardProcessing)
+	DocBankPaymentClient.PaymentListSelection(Object, ThisObject, Item, RowSelected, Field, StandardProcessing);
 EndProcedure
 
 &AtClient
@@ -121,8 +126,13 @@ Procedure PaymentListBasisDocumentOnChange(Item)
 EndProcedure
 
 &AtClient
-Procedure PaymentListAmountOnChange(Item)
-	DocumentsClient.CalculateTotalAmount(Object, ThisObject);
+Procedure PaymentListTotalAmountOnChange(Item)
+	DocBankPaymentClient.PaymentListTotalAmountOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure PaymentListNetAmountOnChange(Item)
+	DocBankPaymentClient.PaymentListNetAmountOnChange(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient
@@ -343,6 +353,26 @@ EndProcedure
 
 #EndRegion
 
+#Region Taxes
+
+&AtClient
+Procedure TaxValueOnChange(Item) Export
+	DocBankPaymentClient.ItemListTaxValueOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtServer
+Function Taxes_CreateFormControls(AddInfo = Undefined) Export
+	Return TaxesServer.CreateFormControls_PaymentList(Object, ThisObject, AddInfo);
+EndFunction
+
+&AtClient
+Procedure PaymentListTaxAmountOnChange(Item)
+	DocBankPaymentClient.ItemListTaxAmountOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+
 #Region ItemDescription
 
 &AtClient
@@ -445,7 +475,7 @@ Procedure EditCurrencies(Command)
 	If CurrentData = Undefined Then
 		Return;
 	EndIf;
-	FormParameters = CurrenciesClientServer.GetParameters_V1(Object, CurrentData);
+	FormParameters = CurrenciesClientServer.GetParameters_V8(Object, CurrentData);
 	NotifyParameters = New Structure();
 	NotifyParameters.Insert("Object", Object);
 	NotifyParameters.Insert("Form"  , ThisObject);

@@ -275,7 +275,7 @@ Procedure CurrencyOnChangeContinue(Answer, AdditionalParameters) Export
 		ClearCashTransferOrders(Object.Currency);
 		CurrentCurrency = Object.Currency;
 		DocBankReceiptClient.CurrencyOnChange(Object, ThisObject, Items.Currency);
-		Notify("CalculationStrngsComplete", Undefined, ThisObject);
+		Notify("CalculationStringsComplete", Undefined, ThisObject);
 	Else
 		Object.Currency = CurrentCurrency;
 	EndIf;
@@ -302,7 +302,7 @@ Procedure AccountOnChangeContinue(Answer, AdditionalParameters) Export
 		CurrentAccount = Object.Account;
 		DocBankReceiptClient.AccountOnChange(Object, ThisObject, Items.Currency);
 		ClearCashTransferOrders(Object.Currency);
-		Notify("CalculationStrngsComplete", Undefined, ThisObject);
+		Notify("CalculationStringsComplete", Undefined, ThisObject);
 	Else
 		Object.Account = CurrentAccount;
 	EndIf;

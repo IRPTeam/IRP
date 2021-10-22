@@ -190,6 +190,6 @@ Procedure UpdateTaxList(Object, Form, Key, ArrayOfTaxListRows, AddInfo = Undefin
 		CalculationStringsClientServer.CalculateItemsRows(Object, Form, ArrayOfItemListRows, Actions,
 			ServerData.ArrayOfTaxInfo, AddInfo);
 	Else
-		Notify("CalculationStrngsComplete", New Structure("AddInfo", AddInfo), Form);
+		Notify("CalculationStringsComplete", New Structure("AddInfo", AddInfo), Form);
 	EndIf;
 EndProcedure

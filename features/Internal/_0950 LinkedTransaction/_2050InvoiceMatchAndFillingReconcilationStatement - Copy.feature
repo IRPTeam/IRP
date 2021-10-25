@@ -146,8 +146,8 @@ Scenario: _2050001 preparation
 				| Crystal   |
 			And I select current line in "List" table
 		* Filling in amount in a tabular part
-			And I activate "Amount" field in "PaymentList" table
-			And I input "1000,00" text in "Amount" field of "PaymentList" table
+			And I activate "Total amount" field in "PaymentList" table
+			And I input "1000,00" text in "Total amount" field of "PaymentList" table
 			And I finish line editing in "PaymentList" table
 		And I click the button named "FormPost"
 		And I delete "$$BankPayment2050001$$" variable

@@ -2890,10 +2890,10 @@ Scenario: _0154113 check filling in and refilling Bank payment (transaction type
 		And I activate "Basis document" field in "PaymentList" table
 		And I select current line in "PaymentList" table
 		And "List" table does not contain lines
-			| 'Document' 	| 'Amount'| 'Company'      | 'Legal name'        | 'Partner'   |
+			| 'Document' 	| 'TotalAmount'| 'Company'      | 'Legal name'        | 'Partner'   |
 			| '$$PurchaseInvoice30004$$'	| '4 000,00'       | 'Main Company' | 'Company Ferron BP' | 'Ferron BP' |
 		And I go to line in "List" table
-		| 'Document' 	| 'Amount' | 'Company'      | 'Legal name'        | 'Partner'   |
+		| 'Document' 	| 'TotalAmount' | 'Company'      | 'Legal name'        | 'Partner'   |
 		| '$$PurchaseInvoice29604$$'	| '13 000,00'       | 'Main Company' | 'Company Ferron BP' | 'Ferron BP' |
 		And I click "Select" button
 	* Check clearing basis document when clearing partner term
@@ -2901,7 +2901,7 @@ Scenario: _0154113 check filling in and refilling Bank payment (transaction type
 		And I click Clear button of "Partner term" field
 		And I finish line editing in "PaymentList" table
 		And "PaymentList" table contains lines
-			| 'Partner'   | 'Partner term' | 'Amount' | 'Payee'             | 'Basis document' |
+			| 'Partner'   | 'Partner term' | 'TotalAmount' | 'Payee'             | 'Basis document' |
 			| 'Ferron BP' | ''          | '13 000,00'       | 'Company Ferron BP' | ''               |
 	* Check the addition of a base document without selecting a base document
 		When I Check the steps for Exception
@@ -3015,16 +3015,16 @@ Scenario: _0154114 total amount calculation in Bank payment
 		And I select current line in "List" table
 	* Check the Total amount calculation when adding rows
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
-		And I activate field named "PaymentListAmount" in "PaymentList" table
-		And I input "200,00" text in the field named "PaymentListAmount" of "PaymentList" table
+		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
+		And I input "200,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 		And I finish line editing in "PaymentList" table
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
-		And I activate field named "PaymentListAmount" in "PaymentList" table
-		And I input "50,00" text in the field named "PaymentListAmount" of "PaymentList" table
+		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
+		And I input "50,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 		And I finish line editing in "PaymentList" table
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
-		And I activate field named "PaymentListAmount" in "PaymentList" table
-		And I input "180,00" text in the field named "PaymentListAmount" of "PaymentList" table
+		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
+		And I input "180,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 		And I finish line editing in "PaymentList" table
 		And the editing text of form attribute named "DocumentAmount" became equal to "430,00"
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
@@ -3055,19 +3055,19 @@ Scenario: _0154114 total amount calculation in Bank payment
 		And the editing text of form attribute named "DocumentAmount" became equal to "13 430,00"		
 	* Check the Total amount re-calculation when deleting rows
 		And I go to line in "PaymentList" table
-		| 'Amount' |
+		| 'Total amount' |
 		| '50,00'  |
 		And I delete a line in "PaymentList" table
 		And the editing text of form attribute named "DocumentAmount" became equal to "13 380,00"
 	* Check the Total amount calculation when adding rows
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
-		And I activate field named "PaymentListAmount" in "PaymentList" table
-		And I input "80,00" text in the field named "PaymentListAmount" of "PaymentList" table
+		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
+		And I input "80,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 		And I finish line editing in "PaymentList" table
 		And the editing text of form attribute named "DocumentAmount" became equal to "13 460,00"
 	* Copy line and check Total amount calculation
 		And I go to line in "PaymentList" table
-			| 'Amount'    | 'Partner'   | 'Partner term'       | 'Payee'             |
+			| 'Total amount'    | 'Partner'   | 'Partner term'       | 'Payee'             |
 			| '13 000,00' | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Company Ferron BP' |
 		And I activate "Partner term" field in "PaymentList" table
 		And in the table "PaymentList" I click the button named "PaymentListContextMenuCopy"
@@ -3985,7 +3985,7 @@ Scenario: _0154121 check the details cleaning on the form Bank payment when re-s
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
 		And "PaymentList" table contains lines
-		| '#' | 'Amount' | 'Planning transaction basis' |
+		| '#' | 'Total amount' | 'Planning transaction basis' |
 		| '1' | ''       | ''                          |
 		* Check filling in Transit account from Accountant
 			Then the form attribute named "TransitAccount" became equal to "Transit Main"
@@ -3993,7 +3993,7 @@ Scenario: _0154121 check the details cleaning on the form Bank payment when re-s
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
 		And "PaymentList" table contains lines
-		| '#' | 'Partner'   | 'Partner term' | 'Amount' | 'Payee' | 'Basis document' | 'Planning transaction basis' |
+		| '#' | 'Partner'   | 'Partner term' | 'Total amount' | 'Payee' | 'Basis document' | 'Planning transaction basis' |
 		| '1' | ''          | ''          | ''       | ''      | ''               | ''                          |
 		Then the form attribute named "TransitAccount" became equal to ""
 	* Check clearing fields 'Partner' when re-selecting the type of operation to Cash transfer order
@@ -4004,7 +4004,7 @@ Scenario: _0154121 check the details cleaning on the form Bank payment when re-s
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
 		And "PaymentList" table contains lines
-		| '#' | 'Partner' | 'Partner term' | 'Amount' | 'Payee' | 'Basis document' | 'Planning transaction basis' |
+		| '#' | 'Partner' | 'Partner term' | 'Total amount' | 'Payee' | 'Basis document' | 'Planning transaction basis' |
 		| '1' | ''        | ''          | ''       | ''      | ''               | ''                          |
 		And I close all client application windows
 
@@ -4184,7 +4184,7 @@ Scenario: _0154125 check the selection by Planing transaction basis in Bank paym
 		| 'Number' | 'Sender'            | 'Company'      | 'Send currency' |
 		| '$$NumberCashTransferOrder01541003$$'     | 'Bank account, TRY' | 'Main Company' | 'TRY'           |
 		And I click the button named "FormChoose"
-		And I input "100,00" text in the field named "PaymentListAmount" of "PaymentList" table
+		And I input "100,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 	* Check that the selected document is in BankPayment
 		And "PaymentList" table contains lines
 		| 'Amount' | 'Planning transaction basis' |
@@ -4198,7 +4198,7 @@ Scenario: _0154125 check the selection by Planing transaction basis in Bank paym
 		| 'Number' | 'Sender'            | 'Company'      | 'Send currency' |
 		| '$$NumberCashTransferOrder01541003$$'     | 'Bank account, TRY' | 'Main Company' | 'TRY'           |
 		And I click the button named "FormChoose"
-		And I input "100,00" text in the field named "PaymentListAmount" of "PaymentList" table
+		And I input "100,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 	* Check that a document that is already selected is displayed in the Planning transaction basis selection form when post Bank Payment
 		And I click the button named "FormPost"
 		And I select current line in "PaymentList" table
@@ -4209,12 +4209,12 @@ Scenario: _0154125 check the selection by Planing transaction basis in Bank paym
 		| 'Number' | 'Sender'            | 'Company'      | 'Send currency' |
 		| '$$NumberCashTransferOrder01541003$$'     | 'Bank account, TRY' | 'Main Company' | 'TRY'           |
 		And I click the button named "FormChoose"
-		And I input "100,00" text in the field named "PaymentListAmount" of "PaymentList" table
+		And I input "100,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 	* Check that the Planing transaction basis selection form displays the document that has already been selected earlier (line deleted)
 		And I select current line in "PaymentList" table
 		And in the table "PaymentList" I click "Delete" button
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
-		And I input "200,00" text in the field named "PaymentListAmount" of "PaymentList" table
+		And I input "200,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 		And I click choice button of "Planning transaction basis" attribute in "PaymentList" table
 		And I save number of "List" table lines as "Q"
 		Then "Q" variable is equal to 1
@@ -4222,7 +4222,7 @@ Scenario: _0154125 check the selection by Planing transaction basis in Bank paym
 		| 'Number' | 'Sender'            | 'Company'      | 'Send currency' |
 		| '$$NumberCashTransferOrder01541003$$'     | 'Bank account, TRY' | 'Main Company' | 'TRY'           |
 		And I click the button named "FormChoose"
-		And I input "200,00" text in the field named "PaymentListAmount" of "PaymentList" table
+		And I input "200,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 		And I click the button named "FormPost"
 		And I save the value of "Number" field as "Number"
 	* Check not clearing Planning transaction basis in case of cancellation when changing the type of transaction
@@ -4234,7 +4234,7 @@ Scenario: _0154125 check the selection by Planing transaction basis in Bank paym
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
 		And "PaymentList" table contains lines
-		| 'Amount' | 'Planning transaction basis' |
+		| 'Total amount' | 'Planning transaction basis' |
 		| '200,00' | ''                          |
 	And I close all client application windows
 	
@@ -4504,7 +4504,7 @@ Scenario: _0154129 check the selection by Planing transaction basis in BankPayme
 		| 'Number' | 'Sender'              | 'Company'      | 'Send currency' |
 		| '$$NumberCashTransferOrder01541004$$'     | 'Bank account 2, EUR' | 'Main Company' | 'EUR'           |
 		And I click the button named "FormChoose"
-		And I input "100,00" text in the field named "PaymentListAmount" of "PaymentList" table
+		And I input "100,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 	* Check that the selected document is in BankPayment
 		And "PaymentList" table contains lines
 		| 'Amount' | 'Planning transaction basis' |
@@ -4539,7 +4539,7 @@ Scenario: _0154129 check the selection by Planing transaction basis in BankPayme
 		| 'Number' | 'Sender'              | 'Company'      | 'Send currency' |
 		| '$$NumberCashTransferOrder01541004$$'     | 'Bank account 2, EUR' | 'Main Company' | 'EUR'           |
 		And I click the button named "FormChoose"
-		And I input "200,00" text in the field named "PaymentListAmount" of "PaymentList" table
+		And I input "200,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 		And I click the button named "FormPost"
 	* Check not clearing Planning transaction basis in case of cancellation when changing the type of transaction
 		And I select "Currency exchange" exact value from "Transaction type" drop-down list
@@ -4550,7 +4550,7 @@ Scenario: _0154129 check the selection by Planing transaction basis in BankPayme
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
 		And "PaymentList" table contains lines
-		| 'Amount' | 'Planning transaction basis' |
+		| 'Total amount' | 'Planning transaction basis' |
 		| '200,00' | ''                          |
 	And I close all client application windows
 
@@ -4656,7 +4656,7 @@ Scenario: _053014 check the display of details on the form Bank payment with the
 		Then the form attribute named "TransitAccount" became equal to "Transit Main"
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
 		And "PaymentList" table contains lines
-			| '#' | 'Amount' | 'Planning transaction basis' |
+			| '#' | 'Total amount' | 'Planning transaction basis' |
 			| '1' | ''       | ''                          |
 
 

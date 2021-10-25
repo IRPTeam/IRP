@@ -53,10 +53,10 @@ Procedure Filling(FillingData, FillingText, StandardProcessing)
 EndProcedure
 
 Procedure Filling_BasedOn(FillingData)
-	ThisObject.Company = FillingData.Company;
-	ThisObject.Account = FillingData.Account;
-	ThisObject.TransitAccount = FillingData.TransitAccount;
-	ThisObject.Currency = FillingData.Currency;
+	ThisObject.Company         = FillingData.Company;
+	ThisObject.Account         = FillingData.Account;
+	ThisObject.TransitAccount  = FillingData.TransitAccount;
+	ThisObject.Currency        = FillingData.Currency;
 	ThisObject.TransactionType = FillingData.TransactionType;
 	For Each Row In FillingData.PaymentList Do
 		NewRow = ThisObject.PaymentList.Add();

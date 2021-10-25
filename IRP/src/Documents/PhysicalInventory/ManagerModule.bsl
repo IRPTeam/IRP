@@ -141,13 +141,12 @@ Function GetQueryTextFillPhysCount_ByItemList()
 		   |		Document.PhysicalInventory.ItemList AS PhysicalInventoryItemList
 		   |	WHERE
 		   |		PhysicalInventoryItemList.Ref = &Ref
-		   |	
 		   |	GROUP BY
 		   |		PhysicalInventoryItemList.ItemKey,
 		   |		PhysicalInventoryItemList.Unit
-		   |	
+		   |
 		   |	UNION ALL
-		   |	
+		   |
 		   |	SELECT
 		   |		PhysicalCountByLocationItemList.ItemKey,
 		   |		PhysicalCountByLocationItemList.Unit,
@@ -158,11 +157,10 @@ Function GetQueryTextFillPhysCount_ByItemList()
 		   |	WHERE
 		   |		PhysicalCountByLocationItemList.Ref.PhysicalInventory = &Ref
 		   |		AND NOT PhysicalCountByLocationItemList.Ref.DeletionMark
-		   |	
+		   |		AND PhysicalCountByLocationItemList.Ref.Status.Posting
 		   |	GROUP BY
 		   |		PhysicalCountByLocationItemList.ItemKey,
 		   |		PhysicalCountByLocationItemList.Unit) AS NestedSelect
-		   |
 		   |GROUP BY
 		   |	NestedSelect.ItemKey.Item,
 		   |	NestedSelect.ItemKey,

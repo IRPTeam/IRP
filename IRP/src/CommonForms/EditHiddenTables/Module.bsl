@@ -35,7 +35,7 @@ EndProcedure
 Procedure CreateDocumentTables(DocumentTables)
 	Tables = New ValueTable();
 	Tables.Columns.Add("TableName");
-	Tables.Columns.Add("TableCoumns");
+	Tables.Columns.Add("TableColumns");
 	ArrayOfAttributes = New Array();
 	DocumentMetadata = ThisObject.DocumentRef.Metadata();
 	For Each KeyValue In DocumentTables Do
@@ -53,7 +53,7 @@ Procedure CreateDocumentTables(DocumentTables)
 				ArrayOfAttributes.Add(New FormAttribute(Column.Name, Column.Type, TableName, Column.Synonym));
 				TableColumns.Add(Column.Name);
 			EndDo;
-			NewTable.TableCoumns = TableColumns;
+			NewTable.TableColumns = TableColumns;
 		EndIf;
 	EndDo;
 	
@@ -66,7 +66,7 @@ Procedure CreateDocumentTables(DocumentTables)
 		ItemGroup.Behavior = UsualGroupBehavior.Collapsible;
 		ItemTable = ThisObject.Items.Add(Table.TableName, Type("FormTable"), ItemGroup);
 		ItemTable.DataPath = Table.TableName;
-		For Each ColumnName In Table.TableCoumns Do
+		For Each ColumnName In Table.TableColumns Do
 			ItemColumn = ThisObject.Items.Add(Table.TableName + ColumnName, Type("FormField"), ItemTable);
 			ItemColumn.Type = FormFieldType.InputField;
 			ItemColumn.DataPath = Table.TableName + "." + ColumnName;
@@ -104,4 +104,3 @@ DocumentTables.Insert("PaymentTerms"          , False);
 DocumentTables.Insert("AddAttributes"         , False);
 DocumentTables.Insert("DataSet"               , False);
 DocumentTables.Insert("DataPrice"             , False);
-

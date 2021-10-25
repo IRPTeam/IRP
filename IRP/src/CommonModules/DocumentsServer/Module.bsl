@@ -32,40 +32,6 @@ EndProcedure
 
 #EndRegion
 
-#Region CommandGenerateDocument
-
-Function SplitBasisDocuments(Refs) Export
-	ReturnValue = New Array();
-	SplitTable = New ValueTable();
-	ArrayColumns = New Array();
-	ArrayColumns.Add("Partner");
-	ArrayColumns.Add("LegalName");
-	ArrayColumns.Add("Agreement");
-	ArrayColumns.Add("Company");
-	SplitFilter = New Structure();
-	For Each ArrayItem In ArrayColumns Do
-		SplitTable.Columns.Add(ArrayItem);
-		SplitFilter.Insert(ArrayItem, "");
-	EndDo;
-	SplitTable.Columns.Add("Refs", New TypeDescription("Array"));
-	For Each Ref In Refs Do
-		FillPropertyValues(SplitFilter, Ref);
-		FoundedRows = SplitTable.FindRows(SplitFilter);
-		If FoundedRows.Count() Then
-			SplitTableRow = FoundedRows.Get(0);
-		Else
-			SplitTableRow = SplitTable.Add();
-		EndIf;
-		FillPropertyValues(SplitTableRow, Ref);
-		SplitTableRow.Refs.Add(Ref);
-	EndDo;
-	For Each SplitRow In SplitTable Do
-		ReturnValue.Add(SplitRow.Refs);
-	EndDo;
-	Return ReturnValue;
-EndFunction
-#EndRegion
-
 #Region Stores
 
 Function GetCurrentStore(ObjectData) Export

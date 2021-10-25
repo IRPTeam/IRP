@@ -1,18 +1,18 @@
 #Region FormEvents
 
-Procedure AfterWriteAtClient(Object, Form, WriteParameters) Export
-	Return;
-EndProcedure
-
 Procedure OnOpen(Object, Form, Cancel, AddInfo = Undefined) Export
 	DocumentsClient.SetTextOfDescriptionAtForm(Object, Form);
+EndProcedure
+
+Procedure AfterWriteAtClient(Object, Form, WriteParameters) Export
+	Return;
 EndProcedure
 
 #EndRegion
 
 #Region FormItemsEvents
 
-Procedure DateOnChange(Object, Form, Item) Export
+Procedure DateOnChange(Object, Form, Item, AddInfo = Undefined) Export
 	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 EndProcedure
 
@@ -386,7 +386,6 @@ Procedure PaymentListBasisDocumentStartChoiceEnd(Result, AdditionalParameters) E
 	If CurrentData <> Undefined Then
 		CurrentData.BasisDocument = Result.BasisDocument;
 		CurrentData.Amount        = Result.Amount;
-		DocumentsClient.CalculateTotalAmount(Form.Object, Form);
 	EndIf;
 EndProcedure
 

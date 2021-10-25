@@ -8,6 +8,8 @@ EndProcedure
 
 #Region FormItemsEvents
 
+#Region ItemDate
+
 Procedure DateOnChange(Object, Form, Item, AddInfo = Undefined) Export
 	DocumentsClient.DateOnChange(Object, Form, Thisobject, Item, Undefined, AddInfo);
 EndProcedure
@@ -23,6 +25,7 @@ Function DateSettings(Object, Form, AddInfo = Undefined) Export
 	
 	Settings = New Structure("Actions, ObjectAttributes, FormAttributes, CalculateSettings, AfterActionsCalculateSettings");
 	Actions = New Structure();
+	
 	Settings.Insert("TableName", "PaymentList");
 	Settings.Actions = Actions;
 	Settings.ObjectAttributes = "Company, Account";
@@ -38,8 +41,12 @@ Function DateSettings(Object, Form, AddInfo = Undefined) Export
 	Return Settings;
 EndFunction
 
-Procedure CompanyOnChange(Object, Form, Item) Export
-	DocumentsClient.CompanyOnChange(Object, Form, ThisObject, Item);
+#EndRegion
+
+#Region ItemCompany
+
+Procedure CompanyOnChange(Object, Form, Item, AddInfo = Undefined) Export
+	DocumentsClient.CompanyOnChange(Object, Form, ThisObject, Item, Undefined, AddInfo);
 EndProcedure
 
 Procedure CompanyOnChangePutServerDataToAddInfo(Object, Form, AddInfo = Undefined) Export
@@ -66,6 +73,8 @@ Function CompanySettings(Object, Form, AddInfo = Undefined) Export
 	
 	Return Settings;
 EndFunction
+
+#EndRegion
 
 #EndRegion
 
@@ -205,7 +214,6 @@ Procedure PaymentListOnStartEdit(Object, Form, Item, NewRow, Clone) Export
 
 		Settings.Insert("CalculateSettings", New Structure("CalculateTax, CalculateTotalAmount"));
 		CalculateItemsRows(Object, Form, Settings);
-		Return;
 	EndIf;
 EndProcedure
 
@@ -344,5 +352,25 @@ Procedure PaymentListRevenueTypeEditTextChange(Object, Form, Item, Text, Standar
 EndProcedure
 
 #EndRegion
+
+#EndRegion
+
+#Region GroupTitleDecorationsEvents
+
+Procedure DecorationGroupTitleCollapsedPictureClick(Object, Form, Item) Export
+	DocumentsClientServer.ChangeTitleCollapse(Object, Form, True);
+EndProcedure
+
+Procedure DecorationGroupTitleCollapsedLabelClick(Object, Form, Item) Export
+	DocumentsClientServer.ChangeTitleCollapse(Object, Form, True);
+EndProcedure
+
+Procedure DecorationGroupTitleUncollapsedPictureClick(Object, Form, Item) Export
+	DocumentsClientServer.ChangeTitleCollapse(Object, Form, False);
+EndProcedure
+
+Procedure DecorationGroupTitleUncollapsedLabelClick(Object, Form, Item) Export
+	DocumentsClientServer.ChangeTitleCollapse(Object, Form, False);
+EndProcedure
 
 #EndRegion

@@ -9,6 +9,7 @@ Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 	EndIf;
 	FillPaymentList(Object, Is);
 	Taxes_CreateFormControls(Form, Is);
+	CalculateTableAtServer(Form, Object, Is);
 EndProcedure
 
 Procedure OnReadAtServer(Object, Form, CurrentObject) Export
@@ -147,6 +148,19 @@ Procedure FillAttributesByType(Ref, TransactionType, ArrayAll, ArrayByType) Expo
 	For Each ArrayItem In StrSplit(StrByType, ",") Do
 		ArrayByType.Add(StrReplace(TrimAll(ArrayItem),Chars.NBSp,""));
 	EndDo;
+EndProcedure
+
+Procedure CalculateTableAtServer(Form, Object, Is)
+	If Form.Parameters.FillingValues.Property("BasedOn") And Is.BankPayment Then
+		SavedData = TaxesClientServer.GetSavedData(Form, TaxesServer.GetAttributeNames().CacheName);
+		If SavedData.Property("ArrayOfColumnsInfo") Then
+			TaxInfo = SavedData.ArrayOfColumnsInfo;
+		EndIf;
+		CalculationSettings = New Structure();
+		CalculationSettings.Insert("CalculateTaxByTotalAmount");
+		CalculationSettings.Insert("CalculateNetAmountByTotalAmount");
+		CalculationStringsClientServer.CalculateItemsRows(Object, Form, Object.PaymentList, CalculationSettings, TaxInfo);
+	EndIf;
 EndProcedure
 
 Function Is(Object)

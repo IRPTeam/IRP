@@ -532,7 +532,7 @@ Scenario: _054007 create Cash transfer order from bank account to Cash account (
 		And I click the button named "FormDocumentBankPaymentGenarateBankPayment"
 		* Check the filling of the tabular part
 			And "PaymentList" table contains lines
-			| 'Planning transaction basis' | 'Amount' |
+			| 'Planning transaction basis' | 'Total amount' |
 			| '$$CashTransferOrder054007$$'     | '100,00' |
 		And I click the button named "FormPost"
 		And I delete "$$NumberBankPayment054007$$" variable
@@ -833,6 +833,7 @@ Scenario: _054009 currency exchange within one Cash/Bank accounts with exchange 
 			| 'Number' | 'Receive amount' |
 			| '$$NumberCashTransferOrder054009$$'      | '200,00'         |
 		And I select current line in "List" table
+		And Delay 10
 		And I click the button named "FormDocumentCashReceiptGenarateCashReceipt"
 		And I click choice button of "Partner" attribute in "PaymentList" table
 		And I go to line in "List" table
@@ -935,7 +936,7 @@ Scenario: _054012 exchange currency from bank account (Cash Transfer Order)
 			| 'Number'                            | 'Receive amount' |
 			| '$$NumberCashTransferOrder054012$$' | '175,00'         |
 		And I click the button named "FormDocumentBankPaymentGenarateBankPayment"
-		And I input "1150,00" text in "Amount" field of "PaymentList" table
+		And I input "1150,00" text in "Total amount" field of "PaymentList" table
 		And I finish line editing in "PaymentList" table
 		And I click the button named "FormPost"
 		And I delete "$$NumberBankPayment054012$$" variable

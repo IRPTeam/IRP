@@ -321,8 +321,8 @@ Scenario: _1002009 create Cash payment and check Aging register movements
 					| 'Amount' | 'Company'      | 'Legal name'      | 'Partner' | 'Document'               |
 					| '4 000,00' | 'Main Company' | 'Company Ferron BP' | 'Ferron BP' | '$$PurchaseInvoiceAging$$' |
 				And I click "Select" button
-				And I activate field named "PaymentListAmount" in "PaymentList" table
-				And I input "200,00" text in the field named "PaymentListAmount" of "PaymentList" table
+				And I activate field named "PaymentListTotalAmount" in "PaymentList" table
+				And I input "200,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 				And I finish line editing in "PaymentList" table
 			And I click the button named "FormPost"
 			And I delete "$$NumberBankPayment1002015$$" variable
@@ -527,7 +527,7 @@ Scenario: _1020050 check the offset of Purchase invoice advance (type of settlem
 					| 'Description' |
 					| 'Ferron BP'   |
 				And I select current line in "List" table
-				And I input "80,00" text in the field named "PaymentListAmount" of "PaymentList" table
+				And I input "80,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 				And I finish line editing in "PaymentList" table
 			And I click the button named "FormPost"
 			And I delete "$$NumberBankPayment1000050$$" variable
@@ -593,7 +593,7 @@ Scenario: _1020050 check the offset of Purchase invoice advance (type of settlem
 					| 'Description' |
 					| 'Ferron BP'   |
 				And I select current line in "List" table
-				And I input "550,00" text in the field named "PaymentListAmount" of "PaymentList" table
+				And I input "550,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 				And I finish line editing in "PaymentList" table
 			And I click the button named "FormPost"
 			And I delete "$$NumberBankPayment10000501$$" variable

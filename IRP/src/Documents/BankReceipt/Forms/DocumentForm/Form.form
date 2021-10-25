@@ -2954,6 +2954,41 @@
       <common>true</common>
     </edit>
   </attributes>
+  <attributes>
+    <name>TaxAndOffersCalculated</name>
+    <title>
+      <key>en</key>
+      <value>Tax and offers calculated</value>
+    </title>
+    <id>12</id>
+    <valueType>
+      <types>Boolean</types>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
+  </attributes>
+  <attributes>
+    <name>CurrentDate</name>
+    <title>
+      <key>en</key>
+      <value>Current date</value>
+    </title>
+    <id>13</id>
+    <valueType>
+      <types>Date</types>
+      <dateQualifiers/>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
+  </attributes>
   <formCommands>
     <name>ShowRowKey</name>
     <title>

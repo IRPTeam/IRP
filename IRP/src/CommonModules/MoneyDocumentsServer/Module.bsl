@@ -63,7 +63,9 @@ Procedure FillPaymentList(Object, Is)
 EndProcedure
 
 Procedure Taxes_CreateFormControls(Form, Is)
-	If Is.CashExpense Or Is.CashRevenue Or Is.BankPayment Or Is.BankReceipt Then
+	If Is.CashExpense Or Is.CashRevenue 
+		Or Is.BankPayment Or Is.BankReceipt 
+		Or Is.CashPayment Then
 		Form.Taxes_CreateFormControls();
 	EndIf;
 EndProcedure

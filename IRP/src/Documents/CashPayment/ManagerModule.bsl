@@ -77,7 +77,7 @@ Function GetQueryTextCashPaymentPaymentList()
 		   |	CashPaymentPaymentList.Partner AS Partner,
 		   |	CashPaymentPaymentList.Payee AS Payee,
 		   |	CashPaymentPaymentList.Ref.Date AS Period,
-		   |	CashPaymentPaymentList.Amount AS Amount,
+		   |	CashPaymentPaymentList.TotalAmount AS Amount,
 		   |	CASE
 		   |		WHEN VALUETYPE(CashPaymentPaymentList.PlaningTransactionBasis) = TYPE(Document.CashTransferOrder)
 		   |		AND
@@ -293,7 +293,7 @@ Function PaymentList()
 		   |	END AS IsAdvance,
 		   |	PaymentList.PlaningTransactionBasis AS PlaningTransactionBasis,
 		   |	PaymentList.Partner.Employee AS IsEmployee,
-		   |	PaymentList.Amount,
+		   |	PaymentList.TotalAmount AS Amount,
 		   |	PaymentList.FinancialMovementType AS FinancialMovementType,
 		   |	PaymentList.Ref.TransactionType = VALUE(Enum.OutgoingPaymentTransactionTypes.PaymentToVendor) AS IsPaymentToVendor,
 		   |	PaymentList.Ref.TransactionType = VALUE(Enum.OutgoingPaymentTransactionTypes.CurrencyExchange) AS IsCurrencyExchange,

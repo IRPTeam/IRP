@@ -540,8 +540,7 @@ Procedure CreateFormControls(Object, Form, Parameters) Export
 	SetSavedData(Form, AttrNames.CacheName, New Structure("ArrayOfColumnsInfo", ArrayOfColumnsInfo));
 EndProcedure
 
-// [REFACTORING CreateFormControls_ItemList]
-Function CreateFormControls_RetailDocuments(Object, Form, AddInfo) Export
+Function CreateFormControls_ItemList(Object, Form, AddInfo) Export
 	TaxesParameters = GetCreateFormControlsParameters();
 	TaxesParameters.Date                  = Object.Date;
 	TaxesParameters.Company               = Object.Company;

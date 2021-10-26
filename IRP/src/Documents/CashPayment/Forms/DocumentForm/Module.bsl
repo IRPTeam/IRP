@@ -77,11 +77,6 @@ Procedure SetVisibilityAvailability(Object, Form)
 		Form.Items.PaymentListPlaningTransactionBasis.TypeRestriction = New TypeDescription(ArrayTypes);
 	EndIf;
 	Form.Items.EditCurrencies.Enabled = Not Form.ReadOnly;
-	
-	
-	
-	
-	
 EndProcedure
 
 #Region ItemDate
@@ -173,30 +168,6 @@ Procedure CashAccountEditTextChange(Item, Text, StandardProcessing)
 EndProcedure
 
 #EndRegion
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 #Region ItemTransactionType
 

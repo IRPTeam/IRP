@@ -77,11 +77,6 @@ Procedure SetVisibilityAvailability(Object, Form)
 		Form.Items.PaymentListPlaningTransactionBasis.TypeRestriction = New TypeDescription(ArrayTypes);
 	EndIf;
 	Form.Items.EditCurrencies.Enabled = Not Form.ReadOnly;
-	
-	
-	
-	
-	
 EndProcedure
 
 #Region ItemDate
@@ -296,7 +291,6 @@ Procedure PaymentListPlaningTransactionBasisStartChoice(Item, ChoiceData, Standa
 EndProcedure
 
 #EndRegion
-
 
 &AtClient
 Procedure PaymentListExpenseTypeStartChoice(Item, ChoiceData, StandardProcessing)

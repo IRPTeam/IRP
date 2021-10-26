@@ -297,7 +297,6 @@ EndProcedure
 
 #EndRegion
 
-
 &AtClient
 Procedure PaymentListExpenseTypeStartChoice(Item, ChoiceData, StandardProcessing)
 	DocBankReceiptClient.PaymentListExpenseTypeStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);

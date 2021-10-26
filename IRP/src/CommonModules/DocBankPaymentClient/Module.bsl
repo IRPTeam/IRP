@@ -457,10 +457,6 @@ Procedure PaymentListPlaningTransactionBasisOnChange(Object, Form, Item) Export
 			Object.Currency = CashTransferOrderInfo.Currency;
 		EndIf;
 
-
-
-
-
 		ArrayOfPlaningTransactionBasises = New Array();
 		ArrayOfPlaningTransactionBasises.Add(CurrentData.PlaningTransactionBasis);
 		ArrayOfBalance = DocBankPaymentServer.GetDocumentTable_CashTransferOrder_ForClient(
@@ -516,11 +512,6 @@ Procedure TransactionBasisStartChoice(Object, Form, Item, ChoiceData, StandardPr
 	If Object.TransactionType = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CurrencyExchange") Then
 		OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("IsCurrencyExchange", True,
 			DataCompositionComparisonType.Equal));
-
-
-
-
-
 
 		DocumentsClient.TransactionBasisStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
 	ElsIf Object.TransactionType = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CashTransferOrder") Then

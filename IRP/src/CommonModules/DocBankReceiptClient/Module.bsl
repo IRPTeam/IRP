@@ -423,7 +423,7 @@ Procedure PaymentListBasisDocumentStartChoiceEnd(Result, AdditionalParameters) E
 	CurrentData = Form.Items.PaymentList.CurrentData;
 	If CurrentData <> Undefined Then
 		CurrentData.BasisDocument = Result.BasisDocument;
-		CurrentData.AmountTotal   = Result.Amount;
+		CurrentData.TotalAmount   = Result.Amount;
 	EndIf;
 EndProcedure
 
@@ -445,9 +445,6 @@ Procedure PaymentListPlaningTransactionBasisOnChange(Object, Form, Item) Export
 		If Not ValueIsFilled(Object.Account) Then
 			Object.Account = CashTransferOrderInfo.Account;
 		EndIf;
-
-
-
 
 		If Not ValueIsFilled(Object.Company) Then
 			Object.Company = CashTransferOrderInfo.Company;

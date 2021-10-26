@@ -325,23 +325,11 @@ Procedure CleanDataByTransactionTypeContinue(Result, AdditionalParameters) Expor
 	Form.CurrentTransactionType = Object.TransactionType;
 EndProcedure
 
-
-
-
-
-
-
-
-
 #EndRegion
 
 #Region ItemCashAccount
 
 Procedure AccountOnChange(Object, Form, Item) Export
-	
-	
-	
-	
 	
 	Form.CurrentAccount = Object.CashAccount;
 	
@@ -444,9 +432,6 @@ Procedure PaymentListPlaningTransactionBasisOnChange(Object, Form, Item) Export
 			CurrentData.PlaningTransactionBasis);
 		If Not ValueIsFilled(Object.CashAccount) Then
 			Object.CashAccount = CashTransferOrderInfo.CashAccount;
-			
-			
-			
 		EndIf;
 
 		If Not ValueIsFilled(Object.Company) Then
@@ -456,11 +441,7 @@ Procedure PaymentListPlaningTransactionBasisOnChange(Object, Form, Item) Export
 		If Not ValueIsFilled(Object.Currency) Then
 			Object.Currency = CashTransferOrderInfo.Currency;
 		EndIf;
-
-
-
-
-
+		
 		ArrayOfPlaningTransactionBasises = New Array();
 		ArrayOfPlaningTransactionBasises.Add(CurrentData.PlaningTransactionBasis);
 		ArrayOfBalance = DocCashPaymentServer.GetDocumentTable_CashTransferOrder_ForClient(
@@ -516,11 +497,6 @@ Procedure TransactionBasisStartChoice(Object, Form, Item, ChoiceData, StandardPr
 	If Object.TransactionType = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CurrencyExchange") Then
 		OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("IsCurrencyExchange", True,
 			DataCompositionComparisonType.Equal));
-
-
-
-
-
 
 		DocumentsClient.TransactionBasisStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
 	ElsIf Object.TransactionType = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CashTransferOrder") Then

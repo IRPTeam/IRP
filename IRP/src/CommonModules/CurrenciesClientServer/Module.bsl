@@ -1,17 +1,4 @@
 
-Function GetParameters_V1(Object, Row) Export
-	Parameters = New Structure();
-	Parameters.Insert("Ref"            , Object.Ref);
-	Parameters.Insert("Date"           , Object.Date);
-	Parameters.Insert("Company"        , Object.Company);
-	Parameters.Insert("Currency"       , Object.Currency);
-	Parameters.Insert("Agreement"      , Row.Agreement);
-	Parameters.Insert("RowKey"         , Row.Key);
-	Parameters.Insert("DocumentAmount" , Row.Amount);
-	Parameters.Insert("Currencies"     , GetCurrenciesTable(Object.Currencies, Row.Key));
-	Return Parameters;
-EndFunction
-
 Function GetParameters_V2(Object, Row) Export
 	Parameters = New Structure();
 	Parameters.Insert("Ref"            , Object.Ref);

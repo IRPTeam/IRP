@@ -79,163 +79,12 @@ Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.EditCurrencies.Enabled = Not Form.ReadOnly;
 EndProcedure
 
-#Region FormItemsEvents
+#Region ItemDate
+
 &AtClient
 Procedure DateOnChange(Item)
 	DocBankPaymentClient.DateOnChange(Object, ThisObject, Item);
 EndProcedure
-
-#EndRegion
-
-#Region ItemPaymentList
-
-&AtClient
-Procedure PaymentListOnChange(Item)
-	DocBankPaymentClient.PaymentListOnChange(Object, ThisObject, Item);
-	SetVisibilityAvailability(Object, ThisObject);
-EndProcedure
-
-&AtClient
-Procedure PaymentListOnActivateRow(Item)
-	DocBankPaymentClient.PaymentListOnActivateRow(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure PaymentListOnStartEdit(Item, NewRow, Clone)
-	DocBankPaymentClient.PaymentListOnStartEdit(Object, ThisObject, Item, NewRow, Clone);
-EndProcedure
-
-&AtClient
-Procedure PaymentListAfterDeleteRow(Item)
-	DocBankPaymentClient.PaymentListAfterDeleteRow(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure PaymentListSelection(Item, RowSelected, Field, StandardProcessing)
-	DocBankPaymentClient.PaymentListSelection(Object, ThisObject, Item, RowSelected, Field, StandardProcessing);
-EndProcedure
-
-&AtClient
-Procedure PaymentListBasisDocumentStartChoice(Item, ChoiceData, StandardProcessing)
-	DocBankPaymentClient.PaymentListBasisDocumentStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
-EndProcedure
-
-&AtClient
-Procedure PaymentListBasisDocumentOnChange(Item)
-	DocBankPaymentClient.PaymentListBasisDocumentOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure PaymentListTotalAmountOnChange(Item)
-	DocBankPaymentClient.PaymentListTotalAmountOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure PaymentListNetAmountOnChange(Item)
-	DocBankPaymentClient.PaymentListNetAmountOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure PaymentListPlaningTransactionBasisOnChange(Item)
-	DocBankPaymentClient.PaymentListPlaningTransactionBasisOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure PaymentListPlaningTransactionBasisStartChoice(Item, ChoiceData, StandardProcessing)
-	DocBankPaymentClient.TransactionBasisStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
-EndProcedure
-
-&AtClient
-Procedure PaymentListOnActivateCell(Item)
-	DocBankPaymentClient.OnActiveCell(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure PaymentListBeforeRowChange(Item, Cancel)
-	DocBankPaymentClient.OnActiveCell(Object, ThisObject, Item, Cancel);
-EndProcedure
-
-&AtClient
-Procedure PaymentListBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
-	DocBankPaymentClient.PaymentListBeforeAddRow(Object, ThisObject, Item, Cancel, Clone, Parent, IsFolder, Parameter);
-EndProcedure
-
-&AtClient
-Procedure PaymentListExpenseTypeStartChoice(Item, ChoiceData, StandardProcessing)
-	DocBankPaymentClient.PaymentListExpenseTypeStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
-EndProcedure
-
-&AtClient
-Procedure PaymentListExpenseTypeEditTextChange(Item, Text, StandardProcessing)
-	DocBankPaymentClient.PaymentListExpenseTypeEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
-EndProcedure
-
-&AtClient
-Procedure PaymentListFinancialMovementTypeStartChoice(Item, ChoiceData, StandardProcessing)
-	DocBankPaymentClient.PaymentListFinancialMovementTypeStartChoice(Object, ThisObject, Item, ChoiceData,
-		StandardProcessing);
-EndProcedure
-
-&AtClient
-Procedure PaymentListFinancialMovementTypeEditTextChange(Item, Text, StandardProcessing)
-	DocBankPaymentClient.PaymentListFinancialMovementTypeEditTextChange(Object, ThisObject, Item, Text,
-		StandardProcessing);
-EndProcedure
-
-#Region Partner
-
-&AtClient
-Procedure PaymentListPartnerOnChange(Item)
-	DocBankPaymentClient.PaymentListPartnerOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure PaymentListPartnerStartChoice(Item, ChoiceData, StandardProcessing)
-	DocBankPaymentClient.PaymentListPartnerStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
-EndProcedure
-
-&AtClient
-Procedure PaymentListPartnerEditTextChange(Item, Text, StandardProcessing)
-	DocBankPaymentClient.PaymentListPartnerEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
-EndProcedure
-
-#EndRegion
-
-#Region Payee
-&AtClient
-Procedure PaymentListPayeeOnChange(Item)
-	DocBankPaymentClient.PaymentListPayeeOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure PaymentListPayeeStartChoice(Item, ChoiceData, StandardProcessing)
-	DocBankPaymentClient.PaymentListPayeeStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
-EndProcedure
-
-&AtClient
-Procedure PaymentListPayeeEditTextChange(Item, Text, StandardProcessing)
-	DocBankPaymentClient.PaymentListPayeeEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
-EndProcedure
-
-#EndRegion
-
-#Region Agreement
-&AtClient
-Procedure PaymentListAgreementOnChange(Item)
-	DocBankPaymentClient.PaymentListAgreementOnChange(Object, ThisObject, Item);
-EndProcedure
-
-&AtClient
-Procedure PaymentListAgreementStartChoice(Item, ChoiceData, StandardProcessing)
-	DocBankPaymentClient.AgreementStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
-EndProcedure
-
-&AtClient
-Procedure PaymentListAgreementEditTextChange(Item, Text, StandardProcessing)
-	DocBankPaymentClient.AgreementTextChange(Object, ThisObject, Item, Text, StandardProcessing);
-EndProcedure
-
-#EndRegion
 
 #EndRegion
 
@@ -321,6 +170,7 @@ EndProcedure
 #EndRegion
 
 #Region ItemTransitAccount
+
 &AtClient
 Procedure TransitAccountStartChoice(Item, ChoiceData, StandardProcessing)
 	StandardProcessing = False;
@@ -343,13 +193,183 @@ EndProcedure
 
 #EndRegion
 
-#Region ItemTransactionTypeOnChange
+#Region ItemTransactionType
 
 &AtClient
 Procedure TransactionTypeOnChange(Item)
 	SetVisibilityAvailability(Object, ThisObject);
 	DocBankPaymentClient.TransactionTypeOnChange(Object, ThisObject, Item);
 EndProcedure
+
+#EndRegion
+
+#Region ItemPaymentList
+
+&AtClient
+Procedure PaymentListOnChange(Item)
+	DocBankPaymentClient.PaymentListOnChange(Object, ThisObject, Item);
+	SetVisibilityAvailability(Object, ThisObject);
+EndProcedure
+
+&AtClient
+Procedure PaymentListOnActivateRow(Item)
+	DocBankPaymentClient.PaymentListOnActivateRow(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure PaymentListOnStartEdit(Item, NewRow, Clone)
+	DocBankPaymentClient.PaymentListOnStartEdit(Object, ThisObject, Item, NewRow, Clone);
+EndProcedure
+
+&AtClient
+Procedure PaymentListAfterDeleteRow(Item)
+	DocBankPaymentClient.PaymentListAfterDeleteRow(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure PaymentListSelection(Item, RowSelected, Field, StandardProcessing)
+	DocBankPaymentClient.PaymentListSelection(Object, ThisObject, Item, RowSelected, Field, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure PaymentListOnActivateCell(Item)
+	DocBankPaymentClient.OnActiveCell(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure PaymentListBeforeRowChange(Item, Cancel)
+	DocBankPaymentClient.OnActiveCell(Object, ThisObject, Item, Cancel);
+EndProcedure
+
+&AtClient
+Procedure PaymentListBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
+	DocBankPaymentClient.PaymentListBeforeAddRow(Object, ThisObject, Item, Cancel, Clone, Parent, IsFolder, Parameter);
+EndProcedure
+
+#Region BasisDocumetn
+
+&AtClient
+Procedure PaymentListBasisDocumentOnChange(Item)
+	DocBankPaymentClient.PaymentListBasisDocumentOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure PaymentListBasisDocumentStartChoice(Item, ChoiceData, StandardProcessing)
+	DocBankPaymentClient.PaymentListBasisDocumentStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region TotalAmount
+
+&AtClient
+Procedure PaymentListTotalAmountOnChange(Item)
+	DocBankPaymentClient.PaymentListTotalAmountOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region NetAmount
+
+&AtClient
+Procedure PaymentListNetAmountOnChange(Item)
+	DocBankPaymentClient.PaymentListNetAmountOnChange(Object, ThisObject, Item);
+EndProcedure
+
+#EndRegion
+
+#Region PlanningTransactionBasis
+
+&AtClient
+Procedure PaymentListPlaningTransactionBasisOnChange(Item)
+	DocBankPaymentClient.PaymentListPlaningTransactionBasisOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure PaymentListPlaningTransactionBasisStartChoice(Item, ChoiceData, StandardProcessing)
+	DocBankPaymentClient.TransactionBasisStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+&AtClient
+Procedure PaymentListExpenseTypeStartChoice(Item, ChoiceData, StandardProcessing)
+	DocBankPaymentClient.PaymentListExpenseTypeStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure PaymentListExpenseTypeEditTextChange(Item, Text, StandardProcessing)
+	DocBankPaymentClient.PaymentListExpenseTypeEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure PaymentListFinancialMovementTypeStartChoice(Item, ChoiceData, StandardProcessing)
+	DocBankPaymentClient.PaymentListFinancialMovementTypeStartChoice(Object, ThisObject, Item, ChoiceData,
+		StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure PaymentListFinancialMovementTypeEditTextChange(Item, Text, StandardProcessing)
+	DocBankPaymentClient.PaymentListFinancialMovementTypeEditTextChange(Object, ThisObject, Item, Text,
+		StandardProcessing);
+EndProcedure
+
+#Region Partner
+
+&AtClient
+Procedure PaymentListPartnerOnChange(Item)
+	DocBankPaymentClient.PaymentListPartnerOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure PaymentListPartnerStartChoice(Item, ChoiceData, StandardProcessing)
+	DocBankPaymentClient.PaymentListPartnerStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure PaymentListPartnerEditTextChange(Item, Text, StandardProcessing)
+	DocBankPaymentClient.PaymentListPartnerEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region Payee
+
+&AtClient
+Procedure PaymentListPayeeOnChange(Item)
+	DocBankPaymentClient.PaymentListPayeeOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure PaymentListPayeeStartChoice(Item, ChoiceData, StandardProcessing)
+	DocBankPaymentClient.PaymentListPayeeStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure PaymentListPayeeEditTextChange(Item, Text, StandardProcessing)
+	DocBankPaymentClient.PaymentListPayeeEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
+#Region Agreement
+
+&AtClient
+Procedure PaymentListAgreementOnChange(Item)
+	DocBankPaymentClient.PaymentListAgreementOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure PaymentListAgreementStartChoice(Item, ChoiceData, StandardProcessing)
+	DocBankPaymentClient.AgreementStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure PaymentListAgreementEditTextChange(Item, Text, StandardProcessing)
+	DocBankPaymentClient.AgreementTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+#EndRegion
 
 #EndRegion
 
@@ -371,7 +391,6 @@ Procedure PaymentListTaxAmountOnChange(Item)
 EndProcedure
 
 #EndRegion
-
 
 #Region ItemDescription
 

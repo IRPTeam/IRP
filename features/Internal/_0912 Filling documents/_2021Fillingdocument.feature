@@ -2890,10 +2890,10 @@ Scenario: _0154113 check filling in and refilling Bank payment (transaction type
 		And I activate "Basis document" field in "PaymentList" table
 		And I select current line in "PaymentList" table
 		And "List" table does not contain lines
-			| 'Document' 	| 'TotalAmount'| 'Company'      | 'Legal name'        | 'Partner'   |
+			| 'Document' 	                | 'Total amount'   | 'Company'      | 'Legal name'        | 'Partner'   |
 			| '$$PurchaseInvoice30004$$'	| '4 000,00'       | 'Main Company' | 'Company Ferron BP' | 'Ferron BP' |
 		And I go to line in "List" table
-		| 'Document' 	| 'TotalAmount' | 'Company'      | 'Legal name'        | 'Partner'   |
+		| 'Document' 	                | 'Total amount'    | 'Company'      | 'Legal name'        | 'Partner'   |
 		| '$$PurchaseInvoice29604$$'	| '13 000,00'       | 'Main Company' | 'Company Ferron BP' | 'Ferron BP' |
 		And I click "Select" button
 	* Check clearing basis document when clearing partner term
@@ -2901,8 +2901,8 @@ Scenario: _0154113 check filling in and refilling Bank payment (transaction type
 		And I click Clear button of "Partner term" field
 		And I finish line editing in "PaymentList" table
 		And "PaymentList" table contains lines
-			| 'Partner'   | 'Partner term' | 'TotalAmount' | 'Payee'             | 'Basis document' |
-			| 'Ferron BP' | ''          | '13 000,00'       | 'Company Ferron BP' | ''               |
+			| 'Partner'   | 'Partner term' | 'Total amount'    | 'Payee'             | 'Basis document' |
+			| 'Ferron BP' | ''             | '13 000,00'       | 'Company Ferron BP' | ''               |
 	* Check the addition of a base document without selecting a base document
 		When I Check the steps for Exception
 			|'And I click choice button of "Basis document" attribute in "PaymentList" table'|
@@ -2936,20 +2936,20 @@ Scenario: _0154113 check filling in and refilling Bank payment (transaction type
 			| 'Partner'   | 'Payee'             |
 			| 'Ferron BP' | 'Company Ferron BP' |
 		And I select current line in "PaymentList" table
-		And I input "100,00" text in "Amount" field of "PaymentList" table
+		And I input "100,00" text in "Total amount" field of "PaymentList" table
 		And I finish line editing in "PaymentList" table
 		And I go to line in "PaymentList" table
 			| 'Partner'   | 'Payee'             |
 			| 'Veritas'   | 'Company Veritas '  |
 		And I select current line in "PaymentList" table
-		And I input "200,00" text in "Amount" field of "PaymentList" table
+		And I input "200,00" text in "Total amount" field of "PaymentList" table
 		And I finish line editing in "PaymentList" table
 		And I go to line in "PaymentList" table
 			| 'Partner'   |
 			| 'Ferron BP' |
 		And in the table "PaymentList" I click "Edit currencies" button
 		And "CurrenciesTable" table became equal
-			| 'Movement type'      | 'Type'      | 'To'  | 'From' | 'Multiplicity' | 'Rate'   | 'Amount' |
+			| 'Movement type'      | 'Type'      | 'To'  | 'From' | 'Multiplicity' | 'Rate'   | 'Total amount' |
 			| 'Local currency'     | 'Legal'     | 'TRY' | 'TRY'  | '1'            | '1'      | '100'    |
 			| 'Reporting currency' | 'Reporting' | 'USD' | 'TRY'  | '1'            | '0,1712' | '17,12'  |
 		And I close current window		
@@ -4178,24 +4178,24 @@ Scenario: _0154125 check the selection by Planing transaction basis in Bank paym
 		And I save number of "List" table lines as "Q"
 		Then "Q" variable is equal to 1
 		And "List" table contains lines
-		| 'Number' | 'Sender'            | 'Company'      | 'Send currency' |
+		| 'Number'                                  | 'Sender'            | 'Company'      | 'Send currency' |
 		| '$$NumberCashTransferOrder01541003$$'     | 'Bank account, TRY' | 'Main Company' | 'TRY'           |
 		And I go to line in "List" table
-		| 'Number' | 'Sender'            | 'Company'      | 'Send currency' |
+		| 'Number'                                  | 'Sender'            | 'Company'      | 'Send currency' |
 		| '$$NumberCashTransferOrder01541003$$'     | 'Bank account, TRY' | 'Main Company' | 'TRY'           |
 		And I click the button named "FormChoose"
 		And I input "100,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 	* Check that the selected document is in BankPayment
 		And "PaymentList" table contains lines
-		| 'Amount' | 'Planning transaction basis' |
-		| '100,00' | '$$CashTransferOrder01541003$$'   |
+		| 'Total amount' | 'Planning transaction basis'      |
+		| '100,00'       | '$$CashTransferOrder01541003$$'   |
 	* Check that a document that is already selected is displayed in the Planning transaction basis selection form
 		And I select current line in "PaymentList" table
 		And I click choice button of "Planning transaction basis" attribute in "PaymentList" table
 		And I save number of "List" table lines as "Q"
 		Then "Q" variable is equal to 1
 		And I go to line in "List" table
-		| 'Number' | 'Sender'            | 'Company'      | 'Send currency' |
+		| 'Number'                                  | 'Sender'            | 'Company'      | 'Send currency' |
 		| '$$NumberCashTransferOrder01541003$$'     | 'Bank account, TRY' | 'Main Company' | 'TRY'           |
 		And I click the button named "FormChoose"
 		And I input "100,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
@@ -4206,7 +4206,7 @@ Scenario: _0154125 check the selection by Planing transaction basis in Bank paym
 		And I save number of "List" table lines as "Q"
 		Then "Q" variable is equal to 1
 		And I go to line in "List" table
-		| 'Number' | 'Sender'            | 'Company'      | 'Send currency' |
+		| 'Number'                                  | 'Sender'            | 'Company'      | 'Send currency' |
 		| '$$NumberCashTransferOrder01541003$$'     | 'Bank account, TRY' | 'Main Company' | 'TRY'           |
 		And I click the button named "FormChoose"
 		And I input "100,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
@@ -4219,7 +4219,7 @@ Scenario: _0154125 check the selection by Planing transaction basis in Bank paym
 		And I save number of "List" table lines as "Q"
 		Then "Q" variable is equal to 1
 		And I go to line in "List" table
-		| 'Number' | 'Sender'            | 'Company'      | 'Send currency' |
+		| 'Number'                                  | 'Sender'            | 'Company'      | 'Send currency' |
 		| '$$NumberCashTransferOrder01541003$$'     | 'Bank account, TRY' | 'Main Company' | 'TRY'           |
 		And I click the button named "FormChoose"
 		And I input "200,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
@@ -4235,7 +4235,7 @@ Scenario: _0154125 check the selection by Planing transaction basis in Bank paym
 		And I click "OK" button
 		And "PaymentList" table contains lines
 		| 'Total amount' | 'Planning transaction basis' |
-		| '200,00' | ''                          |
+		| '200,00'       | ''                          |
 	And I close all client application windows
 	
 
@@ -4501,22 +4501,22 @@ Scenario: _0154129 check the selection by Planing transaction basis in BankPayme
 		And I save number of "List" table lines as "Q"
 		Then "Q" variable is equal to 1
 		And "List" table contains lines
-		| 'Number' | 'Sender'              | 'Company'      | 'Send currency' |
-		| '$$NumberCashTransferOrder01541004$$'     | 'Bank account 2, EUR' | 'Main Company' | 'EUR'           |
+			| 'Number'                                  | 'Sender'              | 'Company'      | 'Send currency' |
+			| '$$NumberCashTransferOrder01541004$$'     | 'Bank account 2, EUR' | 'Main Company' | 'EUR'           |
 		And I click the button named "FormChoose"
 		And I input "100,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 	* Check that the selected document is in BankPayment
 		And "PaymentList" table contains lines
-		| 'Amount' | 'Planning transaction basis' |
-		| '100,00' | '$$CashTransferOrder01541004$$'   |
+			| 'Total amount' | 'Planning transaction basis'      |
+			| '100,00'       | '$$CashTransferOrder01541004$$'   |
 	* Check that a document that is already selected is displayed in the Planning transaction basis selection form
 		And I select current line in "PaymentList" table
 		And I click choice button of "Planning transaction basis" attribute in "PaymentList" table
 		And I save number of "List" table lines as "Q"
 		Then "Q" variable is equal to 1
 		And "List" table contains lines
-		| 'Number' | 'Sender'              | 'Company'      | 'Send currency' |
-		| '$$NumberCashTransferOrder01541004$$'     | 'Bank account 2, EUR' | 'Main Company' | 'EUR'           |
+			| 'Number'                                  | 'Sender'              | 'Company'      | 'Send currency' |
+			| '$$NumberCashTransferOrder01541004$$'     | 'Bank account 2, EUR' | 'Main Company' | 'EUR'           |
 		And I click the button named "FormChoose"
 	* Check that a document that is already selected is displayed in the Planning transaction basis selection form when Bank Payment posted
 		And I click the button named "FormPost"
@@ -4525,8 +4525,8 @@ Scenario: _0154129 check the selection by Planing transaction basis in BankPayme
 		And I save number of "List" table lines as "Q"
 		Then "Q" variable is equal to 1
 		And "List" table contains lines
-		| 'Number' | 'Sender'              | 'Company'      | 'Send currency' |
-		| '$$NumberCashTransferOrder01541004$$'     | 'Bank account 2, EUR' | 'Main Company' | 'EUR'           |
+			| 'Number'                                  | 'Sender'              | 'Company'      | 'Send currency' |
+			| '$$NumberCashTransferOrder01541004$$'     | 'Bank account 2, EUR' | 'Main Company' | 'EUR'           |
 		And I click the button named "FormChoose"
 	* Check that the Planing transaction basis selection form displays the document that has already been selected earlier (line deleted)
 		And I select current line in "PaymentList" table
@@ -4536,8 +4536,8 @@ Scenario: _0154129 check the selection by Planing transaction basis in BankPayme
 		And I save number of "List" table lines as "Q"
 		Then "Q" variable is equal to 1
 		And "List" table contains lines
-		| 'Number' | 'Sender'              | 'Company'      | 'Send currency' |
-		| '$$NumberCashTransferOrder01541004$$'     | 'Bank account 2, EUR' | 'Main Company' | 'EUR'           |
+			| 'Number'                                  | 'Sender'              | 'Company'      | 'Send currency' |
+			| '$$NumberCashTransferOrder01541004$$'     | 'Bank account 2, EUR' | 'Main Company' | 'EUR'           |
 		And I click the button named "FormChoose"
 		And I input "200,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 		And I click the button named "FormPost"
@@ -4550,8 +4550,8 @@ Scenario: _0154129 check the selection by Planing transaction basis in BankPayme
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
 		And "PaymentList" table contains lines
-		| 'Total amount' | 'Planning transaction basis' |
-		| '200,00' | ''                          |
+			| 'Total amount' | 'Planning transaction basis' |
+			| '200,00'       | ''                          |
 	And I close all client application windows
 
 Scenario: _0154130 check the selection by Planing transaction basis in Bank Receipt in case of cash transfer

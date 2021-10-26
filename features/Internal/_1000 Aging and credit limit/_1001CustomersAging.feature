@@ -590,7 +590,7 @@ Scenario: _1000050 check the offset of Sales invoice advance (type of settlement
 					| 'Description' |
 					| 'Kalipso'   |
 				And I select current line in "List" table
-				And I input "80,00" text in the field named "PaymentListAmount" of "PaymentList" table
+				And I input "80,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 				And I finish line editing in "PaymentList" table
 			And I click the button named "FormPost"
 			And I delete "$$NumberBankReceipt1000050$$" variable
@@ -656,7 +656,7 @@ Scenario: _1000050 check the offset of Sales invoice advance (type of settlement
 					| 'Description' |
 					| 'Kalipso'   |
 				And I select current line in "List" table
-				And I input "550,00" text in the field named "PaymentListAmount" of "PaymentList" table
+				And I input "550,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 				And I finish line editing in "PaymentList" table
 			And I click the button named "FormPost"
 			And I delete "$$NumberBankReceipt10000501$$" variable

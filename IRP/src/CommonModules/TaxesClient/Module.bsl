@@ -95,7 +95,7 @@ Procedure CalculateTaxOnChangeTaxValue(Object, Form, CurrentData, Item, AddInfo 
 		New Structure("CalculateTax, CalculateTotalAmount, CalculateNetAmount"), ServerData.ArrayOfTaxInfo, AddInfo);
 EndProcedure
 
-Procedure ChangeTaxAmount2(Object, Form, Parameters, StandardProcessing, AddInfo = Undefined) Export
+Procedure ChangeTaxAmount(Object, Form, Parameters, StandardProcessing, AddInfo = Undefined) Export
 	ServerData = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "ServerData");
 	If ServerData.ArrayOfTaxInfo.Count() = 1 And Object.TaxList.FindRows(New Structure("Key",
 		Parameters.CurrentData.Key)).Count() = 1 Then

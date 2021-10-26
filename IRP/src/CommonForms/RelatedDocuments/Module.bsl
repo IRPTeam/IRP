@@ -359,16 +359,16 @@ Procedure OutputChildrenDocuments(TreeRow)
 	Query = New Query();
 	For Each KeyValue In CacheByDocumentTypes Do
 
-		Query.Text = Query.Text + ?(Query.Text = "", "
-													 |SELECT ALLOWED", "
-																	   |UNION ALL
-																	   |SELECT") + "
-																				   |Ref, Presentation, Posted, DeletionMark, 
-																				   |" + ?(GetFromCache(KeyValue.Key,
-			"Attributes")["DocumentAmount"], "DocumentAmount", 0) + " AS Amount				
-																	|FROM Document." + KeyValue.Key + "
-																									  |WHERE Ref In (&"
-			+ KeyValue.Key + ")";
+		Query.Text = Query.Text + ?(Query.Text = "", 
+		"
+		|SELECT ALLOWED", "
+		|UNION ALL
+		|SELECT") + "
+		|Ref, Presentation, Posted, DeletionMark, 
+		|" 
+		+ ?(GetFromCache(KeyValue.Key,"Attributes")["DocumentAmount"], "DocumentAmount", 0) + " AS Amount				
+		|FROM Document." + KeyValue.Key + "
+		|WHERE Ref In (&" + KeyValue.Key + ")";
 
 		Query.SetParameter(KeyValue.Key, KeyValue.Value.ArrayOfRefs);
 	EndDo;

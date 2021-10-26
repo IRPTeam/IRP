@@ -9,10 +9,22 @@
 		<field xsi:type="DataSetFieldField">
 			<dataPath>Barcode</dataPath>
 			<field>Barcode</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Barcode</v8:content>
+				</v8:item>
+			</title>
 		</field>
 		<field xsi:type="DataSetFieldField">
 			<dataPath>Item</dataPath>
 			<field>Item</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Item</v8:content>
+				</v8:item>
+			</title>
 		</field>
 		<field xsi:type="DataSetFieldField">
 			<dataPath>ItemKey</dataPath>
@@ -27,6 +39,12 @@
 		<field xsi:type="DataSetFieldField">
 			<dataPath>Price</dataPath>
 			<field>Price</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Price</v8:content>
+				</v8:item>
+			</title>
 		</field>
 		<field xsi:type="DataSetFieldField">
 			<dataPath>BarcodePicture</dataPath>
@@ -81,6 +99,12 @@
 		<field xsi:type="DataSetFieldField">
 			<dataPath>PriceType</dataPath>
 			<field>PriceType</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Price type</v8:content>
+				</v8:item>
+			</title>
 		</field>
 		<dataSource>DataSource1</dataSource>
 		<query>SELECT

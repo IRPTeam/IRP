@@ -90,7 +90,7 @@ Procedure OnComposeResult(ResultDocument, DetailsData, StandardProcessing)
 	|	Table.ItemKey AS ItemKey,
 	|	Table.PriceType AS PriceType,
 	|	Table.Price AS Price
-	|into tmpAllPrices
+	|INTO tmpAllPrices
 	|FROM
 	|	tmpPriceDefinitionTypes AS tmpPriceDefinitionTypes
 	|		LEFT JOIN (SELECT
@@ -124,7 +124,7 @@ Procedure OnComposeResult(ResultDocument, DetailsData, StandardProcessing)
 	|	Table.Item AS Item,
 	|	Table.ItemKey AS ItemKey,
 	|	Table.PriceType AS PriceType
-	|into tmpPriorityPrices
+	|INTO tmpPriorityPrices
 	|FROM
 	|	tmpAllPrices AS Table
 	|WHERE
@@ -143,13 +143,13 @@ Procedure OnComposeResult(ResultDocument, DetailsData, StandardProcessing)
 	|	Table.PriceDefinitionReason AS PriceDefinitionReason,
 	|	CASE
 	|		WHEN Table.PriceDefinitionType = &ByItemKeys
-	|			THEN ""Item key = ""
+	|			THEN &ItemKeyName
 	|		WHEN Table.PriceDefinitionType = &ByProperties
-	|			THEN ""Property = ""
+	|			THEN &PropertyName
 	|		WHEN Table.PriceDefinitionType = &ByItems
-	|			THEN ""Item = ""
+	|			THEN &ItemName
 	|		WHEN Table.PriceDefinitionType = """"
-	|			THEN ""Specification""
+	|			THEN &SpecificationName
 	|		ELSE """"
 	|	END AS PriceDefinitionReasonString,
 	|	Table.Item AS Item,
@@ -163,6 +163,11 @@ Procedure OnComposeResult(ResultDocument, DetailsData, StandardProcessing)
 	|		AND Table.Item = tmpPriorityPrices.Item
 	|		AND Table.ItemKey = tmpPriorityPrices.ItemKey
 	|		AND Table.PriceType = tmpPriorityPrices.PriceType";
+	Query.SetParameter("ItemKeyName", R().R_001);
+	Query.SetParameter("PropertyName", R().R_002);
+	Query.SetParameter("ItemName", R().R_003);
+	Query.SetParameter("SpecificationName", R().R_004);
+	
 	PriceInfoTable = Query.Execute().Unload();	
 		
 	///////////////////////////

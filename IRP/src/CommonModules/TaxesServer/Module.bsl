@@ -492,7 +492,7 @@ Procedure CreateFormControls(Object, Form, Parameters) Export
 	If ValueIsFilled(Parameters.InvisibleColumnsIfNotTaxes) Then
 		ArrayOfAmountColumns = StrSplit(Parameters.InvisibleColumnsIfNotTaxes, ",");
 		For Each AmountColumn In ArrayOfAmountColumns Do
-			Form.Items[TrimAll(AmountColumn)].Visible = ArrayOfTaxes.Count() > 1;
+			Form.Items[TrimAll(AmountColumn)].Visible = ArrayOfTaxes.Count();
 		EndDo;
 	EndIf;
 	

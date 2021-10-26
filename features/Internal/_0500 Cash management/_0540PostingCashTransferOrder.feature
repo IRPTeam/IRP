@@ -166,8 +166,8 @@ Scenario: _054003 create Cash payment and Cash receipt based on Cash transfer or
 	And I click the button named "FormDocumentCashPaymentGenerateCashPayment"
 	* Check the filling of the tabular part
 		And "PaymentList" table contains lines
-		| 'Planning transaction basis'    | 'Amount' |
-		| '$$CashTransferOrder054001$$'             | '500,00' |
+		| 'Planning transaction basis'  | 'Total amount' |
+		| '$$CashTransferOrder054001$$' | '500,00'       |
 	And I click the button named "FormPost"
 	And I delete "$$NumberCashPayment054003$$" variable
 	And I delete "$$CashPayment054003$$" variable
@@ -309,8 +309,8 @@ Scenario: _054005 create Cash receipt and Cash payment based on Cash transfer or
 	And I click the button named "FormDocumentCashPaymentGenerateCashPayment"
 	* Check the filling of the tabular part
 		And "PaymentList" table contains lines
-		| 'Planning transaction basis'    | 'Amount' |
-		| '$$CashTransferOrder054004$$'             | '200,00' |
+		| 'Planning transaction basis'  | 'Total amount' |
+		| '$$CashTransferOrder054004$$' | '200,00'       |
 	* Filling in the employee responsible for curremcy exchange
 		And I click choice button of "Partner" attribute in "PaymentList" table
 		And I go to line in "List" table
@@ -424,7 +424,7 @@ Scenario: _054006 create Cash transfer order (from Cash/Bank accounts to bank ac
 		And I click the button named "FormDocumentCashPaymentGenerateCashPayment"
 		* Check the filling of the tabular part
 		And "PaymentList" table contains lines
-			| 'Planning transaction basis'  | 'Amount' |
+			| 'Planning transaction basis'  | 'Total amount' |
 			| '$$CashTransferOrder054006$$' | '500,00' |
 		And I click the button named "FormPost"
 		And I delete "$$NumberCashPayment054006$$" variable
@@ -443,7 +443,7 @@ Scenario: _054006 create Cash transfer order (from Cash/Bank accounts to bank ac
 		* Check the filling of the tabular part
 		And I move to "Payments" tab
 		And "PaymentList" table contains lines
-			| 'Amount' | 'Planning transaction basis'  |
+			| 'Total amount' | 'Planning transaction basis'  |
 			| '500,00' | '$$CashTransferOrder054006$$' |
 		And I click the button named "FormPost"
 		And I delete "$$NumberBankReceipt054006$$" variable
@@ -658,7 +658,7 @@ Scenario: _054008 currency exchange within one Cash/Bank accounts with exchange 
 			| 'Description' |
 			| 'Daniel Smith' |
 		And I select current line in "List" table
-		And I input "650,00" text in "Amount" field of "PaymentList" table
+		And I input "650,00" text in "Total amount" field of "PaymentList" table
 		And I finish line editing in "PaymentList" table
 		And I click the button named "FormPost"
 		And I delete "$$NumberCashPayment054008$$" variable
@@ -697,7 +697,7 @@ Scenario: _054008 currency exchange within one Cash/Bank accounts with exchange 
 			| 'Daniel Smith' |
 		And I select current line in "List" table
 		And "PaymentList" table contains lines
-			| 'Partner'     | 'Amount'  | 'Planning transaction basis'    |
+			| 'Partner'     | 'Total amount'  | 'Planning transaction basis'    |
 			| 'Daniel Smith' | '500,00'  | '$$CashTransferOrder054008$$'             |
 		And I click the button named "FormPost"
 		And I delete "$$NumberCashPayment0540081$$" variable
@@ -818,7 +818,7 @@ Scenario: _054009 currency exchange within one Cash/Bank accounts with exchange 
 			| 'Description' |
 			| 'Daniel Smith' |
 		And I select current line in "List" table
-		And I input "1315,00" text in "Amount" field of "PaymentList" table
+		And I input "1315,00" text in "Total amount" field of "PaymentList" table
 		And I finish line editing in "PaymentList" table
 		And I click the button named "FormPost"
 		And I delete "$$NumberCashPayment054009$$" variable
@@ -953,7 +953,7 @@ Scenario: _054012 exchange currency from bank account (Cash Transfer Order)
 		And I click the button named "FormDocumentBankReceiptGenarateBankReceipt"
 		And I activate "Amount exchange" field in "PaymentList" table
 		And I input "1150,00" text in "Amount exchange" field of "PaymentList" table
-		And I input "175,00" text in "Amount" field of "PaymentList" table
+		And I input "175,00" text in "Total amount" field of "PaymentList" table
 		And I click the button named "FormPost"
 		And I delete "$$NumberBankReceipt054012$$" variable
 		And I delete "$$BankReceipt054012$$" variable

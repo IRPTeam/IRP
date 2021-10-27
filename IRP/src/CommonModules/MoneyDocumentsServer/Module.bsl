@@ -63,9 +63,7 @@ Procedure FillPaymentList(Object, Is)
 EndProcedure
 
 Procedure Taxes_CreateFormControls(Form, Is)
-	If Is.CashExpense Or Is.CashRevenue 
-		Or Is.BankPayment Or Is.BankReceipt 
-		Or Is.CashPayment Or Is.CashReceipt Then
+	If IsSupportTaxes(Is) Then
 		Form.Taxes_CreateFormControls();
 	EndIf;
 EndProcedure
@@ -153,7 +151,7 @@ Procedure FillAttributesByType(Ref, TransactionType, ArrayAll, ArrayByType) Expo
 EndProcedure
 
 Procedure CalculateTableAtServer(Form, Object, Is)
-	If Form.Parameters.FillingValues.Property("BasedOn") And Is.BankPayment Then
+	If Form.Parameters.FillingValues.Property("BasedOn") And IsSupportTaxes(Is) Then
 		SavedData = TaxesClientServer.GetSavedData(Form, TaxesServer.GetAttributeNames().CacheName);
 		If SavedData.Property("ArrayOfColumnsInfo") Then
 			TaxInfo = SavedData.ArrayOfColumnsInfo;
@@ -164,6 +162,12 @@ Procedure CalculateTableAtServer(Form, Object, Is)
 		CalculationStringsClientServer.CalculateItemsRows(Object, Form, Object.PaymentList, CalculationSettings, TaxInfo);
 	EndIf;
 EndProcedure
+
+Function IsSupportTaxes(Is)
+	Return Is.CashExpense Or Is.CashRevenue 
+		Or Is.BankPayment Or Is.BankReceipt 
+		Or Is.CashPayment Or Is.CashReceipt;
+EndFunction
 
 Function Is(Object)
 	Result = New Structure();

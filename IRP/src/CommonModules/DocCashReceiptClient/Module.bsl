@@ -389,8 +389,9 @@ Procedure PaymentListBasisDocumentStartChoice(Object, Form, Item, ChoiceData, St
 	Parameters.Filter.Insert("Company", Object.Company);
 
 	Parameters.Insert("FilterFromCurrentData", "Partner, Agreement");
-
-	Notify = New NotifyDescription("PaymentListBasisDocumentStartChoiceEnd", ThisObject, New Structure("Form", Form));
+	
+	NotifyParameters = New Structure("Object, Form", Object, Form);
+	Notify = New NotifyDescription("PaymentListBasisDocumentStartChoiceEnd", ThisObject, NotifyParameters);
 	Parameters.Insert("Notify", Notify);
 	Parameters.Insert("TableName", "DocumentsForIncomingPayment");
 	Parameters.Insert("OpeningEntryTableName1", "AccountPayableByDocuments");
@@ -405,10 +406,22 @@ Procedure PaymentListBasisDocumentStartChoiceEnd(Result, AdditionalParameters) E
 		Return;
 	EndIf;
 	Form = AdditionalParameters.Form;
+	Object = AdditionalParameters.Object;
 	CurrentData = Form.Items.PaymentList.CurrentData;
 	If CurrentData <> Undefined Then
 		CurrentData.BasisDocument = Result.BasisDocument;
 		CurrentData.TotalAmount   = Result.Amount;
+		
+		Settings = New Structure();
+		Settings.Insert("Rows", New Array());
+		Settings.Rows.Add(CurrentData);
+		
+		CalculationSettings = New Structure();
+		CalculationSettings.Insert("CalculateTaxByTotalAmount");
+		CalculationSettings.Insert("CalculateNetAmountByTotalAmount");
+		
+		Settings.Insert("CalculateSettings", CalculationSettings);
+		CalculateItemsRows(Object, Form, Settings);
 	EndIf;
 EndProcedure
 
@@ -452,6 +465,17 @@ Procedure PaymentListPlaningTransactionBasisOnChange(Object, Form, Item) Export
 			CurrentData.Partner = RowOfBalance.Partner;
 			CurrentData.TotalAmount = RowOfBalance.Amount;
 			CurrentData.AmountExchange = RowOfBalance.AmountExchange;
+			
+			Settings = New Structure();
+			Settings.Insert("Rows", New Array());
+			Settings.Rows.Add(CurrentData);
+		
+			CalculationSettings = New Structure();
+			CalculationSettings.Insert("CalculateTaxByTotalAmount");
+			CalculationSettings.Insert("CalculateNetAmountByTotalAmount");
+	
+			Settings.Insert("CalculateSettings", CalculationSettings);
+			CalculateItemsRows(Object, Form, Settings);
 		EndIf;
 	EndIf;
 	DocumentsClient.PaymentListPlaningTransactionBasisOnChange(Object, Form, Item);

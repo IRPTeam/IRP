@@ -92,7 +92,7 @@ Procedure FillAttributesByType(Ref, TransactionType, ArrayAll, ArrayByType) Expo
 	|PaymentList.PlaningTransactionBasis,
 	|PaymentList.Agreement,
 	|PaymentList.LegalNameContract,
-	|PaymentList.Amount,
+	|PaymentList.TotalAmount,
 	|PaymentList.Payee,
 	|PaymentList.Payer,
 	|PaymentList.AmountExchange,
@@ -107,12 +107,12 @@ Procedure FillAttributesByType(Ref, TransactionType, ArrayAll, ArrayByType) Expo
 		Or TransactionType = Enums.IncomingPaymentTransactionType.CashTransferOrder Then
 		StrByType = "Account, CashAccount, Company, Currency, TransactionType, Description,
 		|PaymentList.PlaningTransactionBasis,
-		|PaymentList.Amount";
+		|PaymentList.TotalAmount";
 	ElsIf TransactionType = Enums.OutgoingPaymentTransactionTypes.CurrencyExchange
 		Or TransactionType = Enums.IncomingPaymentTransactionType.CurrencyExchange Then
 		StrByType = "Account, TransitAccount, CashAccount, Company, Currency, CurrencyExchange, TransactionType, Description,
 		|PaymentList.PlaningTransactionBasis,
-		|PaymentList.Amount";
+		|PaymentList.TotalAmount";
 		If Is.CashPayment Then
 			StrByType = StrByType + ", PaymentList.Partner";
 		EndIf;
@@ -133,16 +133,16 @@ Procedure FillAttributesByType(Ref, TransactionType, ArrayAll, ArrayByType) Expo
 		|PaymentList.Payee,
 		|PaymentList.Payer,
 		|PaymentList.PlaningTransactionBasis,
-		|PaymentList.Amount,
+		|PaymentList.TotalAmount,
 		|PaymentList.LegalNameContract";
 	ElsIf TransactionType = Enums.IncomingPaymentTransactionType.TransferFromPOS Then
 		StrByType = "Account, Company, Currency, TransactionType, Description,
 		|PaymentList.PlaningTransactionBasis,
-		|PaymentList.Amount,
+		|PaymentList.TotalAmount,
 		|PaymentList.POSAccount";
 	Else
 		StrByType = "Company, Currency, TransactionType,
-		|PaymentList.Amount";
+		|PaymentList.TotalAmount";
 	EndIf;
 	ArrayByType = New Array();
 	For Each ArrayItem In StrSplit(StrByType, ",") Do

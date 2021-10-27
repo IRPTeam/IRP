@@ -207,15 +207,18 @@ Function GetTaxRatesForItemKey(Parameters, AddInfo = Undefined) Export
 	|	NOT Taxes_Companies.TaxRate IS NULL";
 
 	ItemKeys = New ValueTable();
-	ItemKeys.Columns.Add("Company", New TypeDescription("CatalogRef.Companies"));
-	ItemKeys.Columns.Add("ItemKey", New TypeDescription("CatalogRef.ItemKeys"));
-	ItemKeys.Columns.Add("Tax", New TypeDescription("CatalogRef.Taxes"));
+	ItemKeys.Columns.Add("Company" , New TypeDescription("CatalogRef.Companies"));
+	ItemKeys.Columns.Add("ItemKey" , New TypeDescription("CatalogRef.ItemKeys"));
+	ItemKeys.Columns.Add("Tax"     , New TypeDescription("CatalogRef.Taxes"));
+	
 	NewRow = ItemKeys.Add();
 	NewRow.Company = Parameters.Company;
 	NewRow.ItemKey = Parameters.ItemKey;
 	NewRow.Tax = Parameters.Tax;
-	Query.SetParameter("ItemKeys", ItemKeys);
-	Query.SetParameter("Date", Parameters.Date);
+	
+	Query.SetParameter("ItemKeys" , ItemKeys);
+	Query.SetParameter("Date"     , Parameters.Date);
+	
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
 
@@ -223,13 +226,13 @@ Function GetTaxRatesForItemKey(Parameters, AddInfo = Undefined) Export
 
 	While QuerySelection.Next() Do
 		Result = New Structure();
-		Result.Insert("Company", QuerySelection.Company);
-		Result.Insert("Tax", QuerySelection.Tax);
-		Result.Insert("ItemKey", QuerySelection.ItemKey);
-		Result.Insert("Item", QuerySelection.Item);
-		Result.Insert("ItemType", QuerySelection.ItemType);
-		Result.Insert("TaxRate", QuerySelection.TaxRate);
-		Result.Insert("Rate", QuerySelection.Rate);
+		Result.Insert("Company"  , QuerySelection.Company);
+		Result.Insert("Tax"      , QuerySelection.Tax);
+		Result.Insert("ItemKey"  , QuerySelection.ItemKey);
+		Result.Insert("Item"     , QuerySelection.Item);
+		Result.Insert("ItemType" , QuerySelection.ItemType);
+		Result.Insert("TaxRate"  , QuerySelection.TaxRate);
+		Result.Insert("Rate"     , QuerySelection.Rate);
 		ArrayOfTaxes.Add(Result);
 	EndDo;
 	Return ArrayOfTaxes;
@@ -249,10 +252,11 @@ Function GetTaxRatesForAgreement(Parameters, AddInfo = Undefined) Export
 	|	AND Tax = &Tax
 	|	AND Agreement = &Agreement) AS TaxRatesSliceLast";
 
-	Query.SetParameter("Date", Parameters.Date);
-	Query.SetParameter("Company", Parameters.Company);
-	Query.SetParameter("Agreement", Parameters.Agreement);
-	Query.SetParameter("Tax", Parameters.Tax);
+	Query.SetParameter("Date"      , Parameters.Date);
+	Query.SetParameter("Company"   , Parameters.Company);
+	Query.SetParameter("Agreement" , Parameters.Agreement);
+	Query.SetParameter("Tax"       , Parameters.Tax);
+	
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
 
@@ -260,11 +264,11 @@ Function GetTaxRatesForAgreement(Parameters, AddInfo = Undefined) Export
 
 	While QuerySelection.Next() Do
 		Result = New Structure();
-		Result.Insert("Company", QuerySelection.Company);
-		Result.Insert("Tax", QuerySelection.Tax);
-		Result.Insert("Agreement", QuerySelection.Agreement);
-		Result.Insert("TaxRate", QuerySelection.TaxRate);
-		Result.Insert("Rate", QuerySelection.Rate);
+		Result.Insert("Company"   , QuerySelection.Company);
+		Result.Insert("Tax"       , QuerySelection.Tax);
+		Result.Insert("Agreement" , QuerySelection.Agreement);
+		Result.Insert("TaxRate"   , QuerySelection.TaxRate);
+		Result.Insert("Rate"      , QuerySelection.Rate);
 		ArrayOfTaxes.Add(Result);
 	EndDo;
 	Return ArrayOfTaxes;
@@ -286,9 +290,10 @@ Function GetTaxRatesForCompany(Parameters, AddInfo = Undefined) Export
 	|	AND ItemType = VALUE(Catalog.ItemTypes.EmptyRef)
 	|	AND Agreement = VALUE(Catalog.Agreements.EmptyRef)) AS TaxRatesSliceLast";
 
-	Query.SetParameter("Date", Parameters.Date);
-	Query.SetParameter("Company", Parameters.Company);
-	Query.SetParameter("Tax", Parameters.Tax);
+	Query.SetParameter("Date"    , Parameters.Date);
+	Query.SetParameter("Company" , Parameters.Company);
+	Query.SetParameter("Tax"     , Parameters.Tax);
+	
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
 
@@ -296,10 +301,10 @@ Function GetTaxRatesForCompany(Parameters, AddInfo = Undefined) Export
 
 	While QuerySelection.Next() Do
 		Result = New Structure();
-		Result.Insert("Company", QuerySelection.Company);
-		Result.Insert("Tax", QuerySelection.Tax);
-		Result.Insert("TaxRate", QuerySelection.TaxRate);
-		Result.Insert("Rate", QuerySelection.Rate);
+		Result.Insert("Company" , QuerySelection.Company);
+		Result.Insert("Tax"     , QuerySelection.Tax);
+		Result.Insert("TaxRate" , QuerySelection.TaxRate);
+		Result.Insert("Rate"    , QuerySelection.Rate);
 		ArrayOfTaxes.Add(Result);
 	EndDo;
 	Return ArrayOfTaxes;
@@ -349,16 +354,18 @@ Function GetTaxesByCompany(Date, Company) Export
 	|	TaxesSliceLast.Use
 	|ORDER BY
 	|	TaxesSliceLast.Priority";
-	Query.SetParameter("Date", Date);
-	Query.SetParameter("Company", Company);
-	ArrayOfResults = New Array();
+	Query.SetParameter("Date"    , Date);
+	Query.SetParameter("Company" , Company);
+	
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
+	
+	ArrayOfResults = New Array();
 	While QuerySelection.Next() Do
 		TaxInfo = New Structure();
-		TaxInfo.Insert("Tax", QuerySelection.Tax);
-		TaxInfo.Insert("Type", QuerySelection.Type);
-		TaxInfo.Insert("UseDocuments", QuerySelection.UseDocuments.Unload());
+		TaxInfo.Insert("Tax"          , QuerySelection.Tax);
+		TaxInfo.Insert("Type"         , QuerySelection.Type);
+		TaxInfo.Insert("UseDocuments" , QuerySelection.UseDocuments.Unload());
 		ArrayOfResults.Add(TaxInfo);
 	EndDo;
 	Return ArrayOfResults;
@@ -389,8 +396,8 @@ Procedure PutToTaxTable(Form, Key, Tax, Value)
 	Else
 		Raise StrTemplate(R().Error_041, Filter.Key, Filter.Tax);
 	EndIf;
-	TaxTableRow.Key = Filter.Key;
-	TaxTableRow.Tax = Filter.Tax;
+	TaxTableRow.Key   = Filter.Key;
+	TaxTableRow.Tax   = Filter.Tax;
 	TaxTableRow.Value = Value;
 EndProcedure
 
@@ -421,8 +428,7 @@ Procedure CreateFormControls(Object, Form, Parameters) Export
 	If Not CommonFunctionsServer.FormHaveAttribute(Form, AttrNames.TableName) Then
 		ArrayOfNewAttribute = New Array();
 		ArrayOfNewAttribute.Add(New FormAttribute(AttrNames.TableName, New TypeDescription("ValueTable")));
-		ArrayOfNewAttribute.Add(New FormAttribute("Key", New TypeDescription(Metadata.DefinedTypes.typeRowID.Type),
-			AttrNames.TableName));
+		ArrayOfNewAttribute.Add(New FormAttribute("Key", New TypeDescription(Metadata.DefinedTypes.typeRowID.Type), AttrNames.TableName));
 		ArrayOfNewAttribute.Add(New FormAttribute("Tax", New TypeDescription("CatalogRef.Taxes"), AttrNames.TableName));
 
 		ArrayOfValueTypes = New Array();
@@ -478,11 +484,18 @@ Procedure CreateFormControls(Object, Form, Parameters) Export
 			ArrayOfTaxes.Add(ItemOfAllTaxes);
 		EndIf;
 	EndDo;
-
+	
 	If ValueIsFilled(Parameters.TotalAmountColumnName) And ArrayOfTaxes.Count() Then
-		Form.Items[Parameters.TotalAmountColumnName].ReadOnly = Not ArrayOfTaxes.Count() = 1;
+		Form.Items[Parameters.TotalAmountColumnName].ReadOnly = ArrayOfTaxes.Count() <> 1;
 	EndIf;
-
+	
+	If ValueIsFilled(Parameters.InvisibleColumnsIfNotTaxes) Then
+		ArrayOfAmountColumns = StrSplit(Parameters.InvisibleColumnsIfNotTaxes, ",");
+		For Each AmountColumn In ArrayOfAmountColumns Do
+			Form.Items[TrimAll(AmountColumn)].Visible = ArrayOfTaxes.Count();
+		EndDo;
+	EndIf;
+	
 	ArrayOfColumns = New Array();
 	ArrayOfColumnsInfo = New Array();
 	ArrayOfActualTax = New Array();
@@ -540,8 +553,7 @@ Procedure CreateFormControls(Object, Form, Parameters) Export
 	SetSavedData(Form, AttrNames.CacheName, New Structure("ArrayOfColumnsInfo", ArrayOfColumnsInfo));
 EndProcedure
 
-// [REFACTORING CreateFormControls_ItemList]
-Function CreateFormControls_RetailDocuments(Object, Form, AddInfo) Export
+Function CreateFormControls_ItemList(Object, Form, AddInfo) Export
 	TaxesParameters = GetCreateFormControlsParameters();
 	TaxesParameters.Date                  = Object.Date;
 	TaxesParameters.Company               = Object.Company;
@@ -551,7 +563,7 @@ Function CreateFormControls_RetailDocuments(Object, Form, AddInfo) Export
 	TaxesParameters.ItemListName          = "ItemList";
 	TaxesParameters.TaxListName           = "TaxList";
 	TaxesParameters.TotalAmountColumnName = "ItemListTotalAmount";
-
+	TaxesParameters.InvisibleColumnsIfNotTaxes = "ItemListTaxAmount";
 	CreateFormControls(Object, Form, TaxesParameters);
 	
 	Return GetArrayOfTaxInfo(Object, Form);
@@ -563,11 +575,11 @@ Function CreateFormControls_PaymentList(Object, Form, AddInfo) Export
 	TaxesParameters.Company               = Object.Company;
 	TaxesParameters.PathToTable           = "Object.PaymentList";
 	TaxesParameters.ItemParent            = Form.Items.PaymentList;
-	TaxesParameters.ColumnOffset          = Form.Items.PaymentListCurrency;
+	TaxesParameters.ColumnOffset          = Form.Items.PaymentListNetAmount;
 	TaxesParameters.ItemListName          = "PaymentList";
 	TaxesParameters.TaxListName           = "TaxList";
 	TaxesParameters.TotalAmountColumnName = "PaymentListTotalAmount";
-
+	TaxesParameters.InvisibleColumnsIfNotTaxes = "PaymentListTaxAmount, PaymentListNetAmount";
 	CreateFormControls(Object, Form, TaxesParameters);
 	
 	Return GetArrayOfTaxInfo(Object, Form);
@@ -587,15 +599,18 @@ Function GetArrayOfTaxInfo(Object, Form)
 EndFunction
 
 Function GetCreateFormControlsParameters() Export
-	Return New Structure("Date
-						 |, Company
-						 |, PathToTable
-						 |, ItemParent
-						 |, ColumnOffset
-						 |, ItemListName
-						 |, TaxListName
-						 |, TotalAmountColumnName
-						 |, ColumnFieldParameters");
+	Parameters = New Structure();
+	Parameters.Insert("Date");
+	Parameters.Insert("Company");
+	Parameters.Insert("PathToTable");
+	Parameters.Insert("ItemParent");
+	Parameters.Insert("ColumnOffset");
+	Parameters.Insert("ItemListName");
+	Parameters.Insert("TaxListName");
+	Parameters.Insert("TotalAmountColumnName");
+	Parameters.Insert("ColumnFieldParameters");
+	Parameters.Insert("InvisibleColumnsIfNotTaxes");
+	Return Parameters;
 EndFunction
 
 Function GetAttributeNames() Export

@@ -9,6 +9,7 @@ Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 	EndIf;
 	FillPaymentList(Object, Is);
 	Taxes_CreateFormControls(Form, Is);
+	CalculateTableAtServer(Form, Object, Is);
 EndProcedure
 
 Procedure OnReadAtServer(Object, Form, CurrentObject) Export
@@ -62,7 +63,7 @@ Procedure FillPaymentList(Object, Is)
 EndProcedure
 
 Procedure Taxes_CreateFormControls(Form, Is)
-	If Is.CashExpense Or Is.CashRevenue Then
+	If IsSupportTaxes(Is) Then
 		Form.Taxes_CreateFormControls();
 	EndIf;
 EndProcedure
@@ -91,7 +92,7 @@ Procedure FillAttributesByType(Ref, TransactionType, ArrayAll, ArrayByType) Expo
 	|PaymentList.PlaningTransactionBasis,
 	|PaymentList.Agreement,
 	|PaymentList.LegalNameContract,
-	|PaymentList.Amount,
+	|PaymentList.TotalAmount,
 	|PaymentList.Payee,
 	|PaymentList.Payer,
 	|PaymentList.AmountExchange,
@@ -106,12 +107,12 @@ Procedure FillAttributesByType(Ref, TransactionType, ArrayAll, ArrayByType) Expo
 		Or TransactionType = Enums.IncomingPaymentTransactionType.CashTransferOrder Then
 		StrByType = "Account, CashAccount, Company, Currency, TransactionType, Description,
 		|PaymentList.PlaningTransactionBasis,
-		|PaymentList.Amount";
+		|PaymentList.TotalAmount";
 	ElsIf TransactionType = Enums.OutgoingPaymentTransactionTypes.CurrencyExchange
 		Or TransactionType = Enums.IncomingPaymentTransactionType.CurrencyExchange Then
 		StrByType = "Account, TransitAccount, CashAccount, Company, Currency, CurrencyExchange, TransactionType, Description,
 		|PaymentList.PlaningTransactionBasis,
-		|PaymentList.Amount";
+		|PaymentList.TotalAmount";
 		If Is.CashPayment Then
 			StrByType = StrByType + ", PaymentList.Partner";
 		EndIf;
@@ -132,22 +133,41 @@ Procedure FillAttributesByType(Ref, TransactionType, ArrayAll, ArrayByType) Expo
 		|PaymentList.Payee,
 		|PaymentList.Payer,
 		|PaymentList.PlaningTransactionBasis,
-		|PaymentList.Amount,
+		|PaymentList.TotalAmount,
 		|PaymentList.LegalNameContract";
 	ElsIf TransactionType = Enums.IncomingPaymentTransactionType.TransferFromPOS Then
 		StrByType = "Account, Company, Currency, TransactionType, Description,
 		|PaymentList.PlaningTransactionBasis,
-		|PaymentList.Amount,
+		|PaymentList.TotalAmount,
 		|PaymentList.POSAccount";
 	Else
 		StrByType = "Company, Currency, TransactionType,
-		|PaymentList.Amount";
+		|PaymentList.TotalAmount";
 	EndIf;
 	ArrayByType = New Array();
 	For Each ArrayItem In StrSplit(StrByType, ",") Do
 		ArrayByType.Add(StrReplace(TrimAll(ArrayItem),Chars.NBSp,""));
 	EndDo;
 EndProcedure
+
+Procedure CalculateTableAtServer(Form, Object, Is)
+	If Form.Parameters.FillingValues.Property("BasedOn") And IsSupportTaxes(Is) Then
+		SavedData = TaxesClientServer.GetSavedData(Form, TaxesServer.GetAttributeNames().CacheName);
+		If SavedData.Property("ArrayOfColumnsInfo") Then
+			TaxInfo = SavedData.ArrayOfColumnsInfo;
+		EndIf;
+		CalculationSettings = New Structure();
+		CalculationSettings.Insert("CalculateTaxByTotalAmount");
+		CalculationSettings.Insert("CalculateNetAmountByTotalAmount");
+		CalculationStringsClientServer.CalculateItemsRows(Object, Form, Object.PaymentList, CalculationSettings, TaxInfo);
+	EndIf;
+EndProcedure
+
+Function IsSupportTaxes(Is)
+	Return Is.CashExpense Or Is.CashRevenue 
+		Or Is.BankPayment Or Is.BankReceipt 
+		Or Is.CashPayment Or Is.CashReceipt;
+EndFunction
 
 Function Is(Object)
 	Result = New Structure();

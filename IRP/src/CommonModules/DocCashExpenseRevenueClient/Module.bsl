@@ -8,6 +8,8 @@ EndProcedure
 
 #Region FormItemsEvents
 
+#Region ItemDate
+
 Procedure DateOnChange(Object, Form, Item, AddInfo = Undefined) Export
 	DocumentsClient.DateOnChange(Object, Form, Thisobject, Item, Undefined, AddInfo);
 EndProcedure
@@ -23,6 +25,7 @@ Function DateSettings(Object, Form, AddInfo = Undefined) Export
 	
 	Settings = New Structure("Actions, ObjectAttributes, FormAttributes, CalculateSettings, AfterActionsCalculateSettings");
 	Actions = New Structure();
+	
 	Settings.Insert("TableName", "PaymentList");
 	Settings.Actions = Actions;
 	Settings.ObjectAttributes = "Company, Account";
@@ -38,8 +41,12 @@ Function DateSettings(Object, Form, AddInfo = Undefined) Export
 	Return Settings;
 EndFunction
 
-Procedure CompanyOnChange(Object, Form, Item) Export
-	DocumentsClient.CompanyOnChange(Object, Form, ThisObject, Item);
+#EndRegion
+
+#Region ItemCompany
+
+Procedure CompanyOnChange(Object, Form, Item, AddInfo = Undefined) Export
+	DocumentsClient.CompanyOnChange(Object, Form, ThisObject, Item, Undefined, AddInfo);
 EndProcedure
 
 Procedure CompanyOnChangePutServerDataToAddInfo(Object, Form, AddInfo = Undefined) Export
@@ -66,6 +73,8 @@ Function CompanySettings(Object, Form, AddInfo = Undefined) Export
 	
 	Return Settings;
 EndFunction
+
+#EndRegion
 
 #EndRegion
 
@@ -185,7 +194,7 @@ Procedure PaymentListSelection(Object, Form, Item, RowSelected, Field, StandardP
 			Parameters.Insert("CurrentData", CurrentData);
 			Parameters.Insert("Item", Item);
 			Parameters.Insert("Field", Field);
-			TaxesClient.ChangeTaxAmount2(Object, Form, Parameters, StandardProcessing, AddInfo);
+			TaxesClient.ChangeTaxAmount(Object, Form, Parameters, StandardProcessing, AddInfo);
 		EndIf;
 	EndIf;
 EndProcedure
@@ -205,7 +214,6 @@ Procedure PaymentListOnStartEdit(Object, Form, Item, NewRow, Clone) Export
 
 		Settings.Insert("CalculateSettings", New Structure("CalculateTax, CalculateTotalAmount"));
 		CalculateItemsRows(Object, Form, Settings);
-		Return;
 	EndIf;
 EndProcedure
 

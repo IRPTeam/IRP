@@ -93,7 +93,7 @@ Scenario: _053001 create Bank payment based on Purchase invoice
 		Then the form attribute named "TransactionType" became equal to "Payment to the vendor"
 		Then the form attribute named "Currency" became equal to "TRY"
 		And "PaymentList" table contains lines
-			| 'Partner'   | 'Payee'             | 'Partner term'          | 'Amount'     | 'Basis document'      |
+			| 'Partner'   | 'Payee'             | 'Partner term'          | 'Total amount'     | 'Basis document'      |
 			| 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | '136 000,00' | '$$PurchaseInvoice018001$$' |
 		And in the table "PaymentList" I click "Edit currencies" button
 		And "CurrenciesTable" table became equal
@@ -112,7 +112,7 @@ Scenario: _053001 create Bank payment based on Purchase invoice
 		Then the form attribute named "Account" became equal to "Bank account, TRY"
 		Then the form attribute named "TransactionType" became equal to "Payment to the vendor"
 		And "PaymentList" table contains lines
-			| 'Partner'   | 'Payee'             | 'Partner term'          | 'Amount'     | 'Basis document'      |
+			| 'Partner'   | 'Payee'             | 'Partner term'          | 'Total amount'     | 'Basis document'      |
 			| 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | '136 000,00' | '$$PurchaseInvoice018001$$' |
 		And in the table "PaymentList" I click "Edit currencies" button
 		And "CurrenciesTable" table became equal
@@ -132,12 +132,12 @@ Scenario: _053001 create Bank payment based on Purchase invoice
 		And I click "Select" button
 		And in "PaymentList" table I move to the next cell
 	* Change in payment amount
-		And I activate field named "PaymentListAmount" in "PaymentList" table
+		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
 		And I select current line in "PaymentList" table
-		And I input "20 000,00" text in the field named "PaymentListAmount" of "PaymentList" table
+		And I input "20 000,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 		And I finish line editing in "PaymentList" table
 		And "PaymentList" table contains lines
-			| 'Partner'   | 'Payee'             | 'Partner term'          | 'Amount'     | 'Basis document'      |
+			| 'Partner'   | 'Payee'             | 'Partner term'          | 'Total amount'     | 'Basis document'      |
 			| 'Ferron BP' | 'Company Ferron BP' | 'Vendor Ferron, TRY' | '20 000,00' | '$$PurchaseInvoice29604$$' |
 	And I close all client application windows
 
@@ -193,13 +193,13 @@ Scenario: _053001 create Bank payment (independently)
 			And I select current line in "PaymentList" table
 			# temporarily
 			And I go to line in "List" table
-				| 'Amount' | 'Company'      | 'Legal name'        | 'Partner'   |
-				| '136 000,00'       | 'Main Company' | 'Company Ferron BP' | 'Ferron BP' |
+				| 'Amount'     | 'Company'      | 'Legal name'        | 'Partner'   |
+				| '136 000,00' | 'Main Company' | 'Company Ferron BP' | 'Ferron BP' |
 			And I click "Select" button
 		# temporarily
 		* Filling in amount in a tabular part
-			And I activate "Amount" field in "PaymentList" table
-			And I input "1000,00" text in "Amount" field of "PaymentList" table
+			And I activate "Total amount" field in "PaymentList" table
+			And I input "1000,00" text in "Total amount" field of "PaymentList" table
 			And I finish line editing in "PaymentList" table
 		* Select movement type
 			And I activate "Financial movement type" field in "PaymentList" table
@@ -273,8 +273,8 @@ Scenario: _053001 create Bank payment (independently)
 			And I click "Select" button
 		# temporarily
 		* Filling in amount in a tabular part
-			And I activate "Amount" field in "PaymentList" table
-			And I input "20,00" text in "Amount" field of "PaymentList" table
+			And I activate "Total amount" field in "PaymentList" table
+			And I input "20,00" text in "Total amount" field of "PaymentList" table
 			And I finish line editing in "PaymentList" table
 		And I click the button named "FormPost"
 		And I delete "$$NumberBankPayment0530012$$" variable
@@ -327,8 +327,8 @@ Scenario: _053001 create Bank payment (independently)
 				| 'Vendor Ferron, USD' |
 			And I select current line in "List" table
 		* Filling in amount in a tabular part
-			And I activate "Amount" field in "PaymentList" table
-			And I input "150,00" text in "Amount" field of "PaymentList" table
+			And I activate "Total amount" field in "PaymentList" table
+			And I input "150,00" text in "Total amount" field of "PaymentList" table
 			And I finish line editing in "PaymentList" table
 		And I click the button named "FormPost"
 		And I delete "$$NumberBankPayment0530013$$" variable
@@ -413,7 +413,7 @@ Scenario: _053013 check the display of details on the form Bank payment with the
 			| Kalipso |
 		And I select current line in "List" table
 		And "PaymentList" table contains lines
-			| '#' | Partner | Amount | Payee              | Basis document | Planning transaction basis |
+			| '#' | Partner | Total amount | Payee              | Basis document | Planning transaction basis |
 			| '1' | Kalipso | ''     | Company Kalipso    | ''             | ''                        |
 
 
@@ -436,12 +436,12 @@ Scenario: _053015 check the display of details on the form Bank payment with the
 		And form attribute named "TransitAccount" is unavailable
 	* Check the display of the tabular part
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
-		And I input "100,00" text in "Amount" field of "PaymentList" table
+		And I input "100,00" text in "Total amount" field of "PaymentList" table
 		And I finish line editing in "PaymentList" table
 		If "PaymentList" table does not contain column named "Payee" Then
 		If "PaymentList" table does not contain column named "Partner" Then
 		And "PaymentList" table contains lines
-			| '#' | 'Amount' | 'Planning transaction basis' |
+			| '#' | 'Total amount' | 'Planning transaction basis' |
 			| '1' | '100,00' | ''                          |
 
 

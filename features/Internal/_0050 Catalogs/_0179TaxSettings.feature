@@ -99,9 +99,6 @@ Scenario: _017902 filling in catalog 'Tax types'
 		And I select "Cash revenue" exact value from "Document name" drop-down list in "UseDocuments" table
 		And I finish line editing in "UseDocuments" table
 		And in the table "UseDocuments" I click the button named "UseDocumentsAdd"
-		And I select "Cash revenue" exact value from "Document name" drop-down list in "UseDocuments" table
-		And I finish line editing in "UseDocuments" table
-		And in the table "UseDocuments" I click the button named "UseDocumentsAdd"
 		And I select "Purchase return" exact value from "Document name" drop-down list in "UseDocuments" table
 		And I finish line editing in "UseDocuments" table
 		And in the table "UseDocuments" I click the button named "UseDocumentsAdd"
@@ -112,6 +109,18 @@ Scenario: _017902 filling in catalog 'Tax types'
 		And I finish line editing in "UseDocuments" table
 		And in the table "UseDocuments" I click the button named "UseDocumentsAdd"
 		And I select "Sales return" exact value from "Document name" drop-down list in "UseDocuments" table
+		And I finish line editing in "UseDocuments" table
+		And in the table "UseDocuments" I click the button named "UseDocumentsAdd"
+		And I select "Bank receipt" exact value from "Document name" drop-down list in "UseDocuments" table
+		And I finish line editing in "UseDocuments" table
+		And in the table "UseDocuments" I click the button named "UseDocumentsAdd"
+		And I select "Cash receipt" exact value from "Document name" drop-down list in "UseDocuments" table
+		And I finish line editing in "UseDocuments" table
+		And in the table "UseDocuments" I click the button named "UseDocumentsAdd"
+		And I select "Bank payment" exact value from "Document name" drop-down list in "UseDocuments" table
+		And I finish line editing in "UseDocuments" table
+		And in the table "UseDocuments" I click the button named "UseDocumentsAdd"
+		And I select "Cash payment" exact value from "Document name" drop-down list in "UseDocuments" table
 		And I finish line editing in "UseDocuments" table
 		And I click "Save" button
 		And I click "Settings" button

@@ -2514,7 +2514,6 @@ Procedure PaymentListOnStartEdit(Object, Form, Item, NewRow, Clone) Export
 
 	If Clone Then
 		CurrentData.Key = New UUID();
-		CalculateTotalAmount(Object, Form);
 	EndIf;
 EndProcedure
 
@@ -2562,12 +2561,6 @@ Procedure TransactionBasisStartChoice(Object, Form, Item, ChoiceData, StandardPr
 	EndIf;
 
 	OpenChoiceForm(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
-
-EndProcedure
-
-Procedure CalculateTotalAmount(Object, Form) Export
-
-	Object.DocumentAmount = Object.PaymentList.Total("Amount");
 
 EndProcedure
 

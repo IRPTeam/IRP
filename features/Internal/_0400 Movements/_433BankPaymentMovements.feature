@@ -214,11 +214,7 @@ Scenario: _043304 check Bank payment movements by the Register "R1021 Vendors tr
 		And I go to line in "List" table
 			| 'Number'  |'Date'               |
 			| '1'       |'07.09.2020 19:16:43'|
-		And I select current line in "List" table
-		And I select current line in "PaymentList" table
-		And I click choice button of "Partner term" attribute in "PaymentList" table
-		And I select current line in "List" table
-		And I click "Post" button			
+		And I select current line in "List" table		
 	* Check movements by the Register  "R1021 Vendors transactions" 
 		And I click "Registrations report" button
 		And I select "R1021 Vendors transactions" exact value from "Register" drop-down list

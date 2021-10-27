@@ -1931,10 +1931,10 @@ Scenario: _090322 create Purchase invoice for several Purchase order with differ
 			And I save the window as "$$PurchaseInvoice0903N149$$"
 		If the field named "Company" is equal to "Second Company" Then
 			And "ItemList" table contains lines
-				| 'Item'     | 'Price'  | 'Item key'  | 'Store'    | 'Unit' | 'Q'      |'Offers amount'|'Tax amount'| 'Total amount' | 'Purchase order'      |
-				| 'Dress'    | '200,00' | 'M/White'   | 'Store 02' | 'pcs'  | '20,000' | ''            | ''         | '4 000,00'     | '$$PurchaseOrder0903N148$$' |
-				| 'Dress'    | '210,00' | 'L/Green'   | 'Store 02' | 'pcs'  | '20,000' | ''            | ''         | '4 200,00'     | '$$PurchaseOrder0903N148$$' |
-				| 'Trousers' | '210,00' | '36/Yellow' | 'Store 02' | 'pcs'  | '30,000' | ''            | ''         | '6 300,00'     | '$$PurchaseOrder0903N148$$' |
+				| 'Item'     | 'Price'  | 'Item key'  | 'Store'    | 'Unit' | 'Q'      |'Offers amount'| 'Total amount' | 'Purchase order'      |
+				| 'Dress'    | '200,00' | 'M/White'   | 'Store 02' | 'pcs'  | '20,000' | ''            | '4 000,00'     | '$$PurchaseOrder0903N148$$' |
+				| 'Dress'    | '210,00' | 'L/Green'   | 'Store 02' | 'pcs'  | '20,000' | ''            | '4 200,00'     | '$$PurchaseOrder0903N148$$' |
+				| 'Trousers' | '210,00' | '36/Yellow' | 'Store 02' | 'pcs'  | '30,000' | ''            | '6 300,00'     | '$$PurchaseOrder0903N148$$' |
 			And I click the button named "FormPost"
 			And I delete "$$NumberPurchaseInvoice0903N150$$" variable
 			And I delete "$$PurchaseInvoice0903N150$$" variable
@@ -1958,10 +1958,10 @@ Scenario: _090322 create Purchase invoice for several Purchase order with differ
 			And I save the window as "$$PurchaseInvoice0903N149$$"
 		If the field named "Company" is equal to "Second Company" Then
 			And "ItemList" table contains lines
-				| 'Item'     | 'Price'  | 'Item key'  | 'Store'    | 'Unit' | 'Q'      |'Offers amount'|'Tax amount'| 'Total amount' | 'Purchase order'      |
-				| 'Dress'    | '200,00' | 'M/White'   | 'Store 02' | 'pcs'  | '20,000' | ''            | ''         | '4 000,00'     | '$$PurchaseOrder0903N148$$' |
-				| 'Dress'    | '210,00' | 'L/Green'   | 'Store 02' | 'pcs'  | '20,000' | ''            | ''         | '4 200,00'     | '$$PurchaseOrder0903N148$$' |
-				| 'Trousers' | '210,00' | '36/Yellow' | 'Store 02' | 'pcs'  | '30,000' | ''            | ''         | '6 300,00'     | '$$PurchaseOrder0903N148$$' |
+				| 'Item'     | 'Price'  | 'Item key'  | 'Store'    | 'Unit' | 'Q'      |'Offers amount'| 'Total amount' | 'Purchase order'      |
+				| 'Dress'    | '200,00' | 'M/White'   | 'Store 02' | 'pcs'  | '20,000' | ''            | '4 000,00'     | '$$PurchaseOrder0903N148$$' |
+				| 'Dress'    | '210,00' | 'L/Green'   | 'Store 02' | 'pcs'  | '20,000' | ''            | '4 200,00'     | '$$PurchaseOrder0903N148$$' |
+				| 'Trousers' | '210,00' | '36/Yellow' | 'Store 02' | 'pcs'  | '30,000' | ''            | '6 300,00'     | '$$PurchaseOrder0903N148$$' |
 			And I click the button named "FormPost"
 			And I delete "$$NumberPurchaseInvoice0903N150$$" variable
 			And I delete "$$PurchaseInvoice0903N150$$" variable

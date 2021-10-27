@@ -150,8 +150,8 @@ Scenario: _060003 create Cash receipt with the type of settlements under standar
 				| 'Description'                            |
 				| 'Posting by Standard Partner term Customer' |
 			And I select current line in "List" table
-			And I activate field named "PaymentListAmount" in "PaymentList" table
-			And I input "11 000,00" text in the field named "PaymentListAmount" of "PaymentList" table
+			And I activate field named "PaymentListTotalAmount" in "PaymentList" table
+			And I input "11 000,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 			And I finish line editing in "PaymentList" table
 		And I click the button named "FormPost"
 		And I delete "$$NumberCashReceipt060003$$" variable

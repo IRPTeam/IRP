@@ -113,7 +113,7 @@ Procedure ItemListSelection(Object, Form, Item, RowSelected, Field, StandardProc
 			Parameters.Insert("CurrentData", CurrentData);
 			Parameters.Insert("Item", Item);
 			Parameters.Insert("Field", Field);
-			TaxesClient.ChangeTaxAmount2(Object, Form, Parameters, StandardProcessing, AddInfo);
+			TaxesClient.ChangeTaxAmount(Object, Form, Parameters, StandardProcessing, AddInfo);
 		EndIf;
 	EndIf;
 EndProcedure

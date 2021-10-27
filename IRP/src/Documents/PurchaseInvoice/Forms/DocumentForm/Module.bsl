@@ -428,7 +428,7 @@ EndProcedure
 
 &AtServer
 Function Taxes_CreateFormControls(AddInfo = Undefined) Export
-	Return TaxesServer.CreateFormControls_RetailDocuments(Object, ThisObject, AddInfo);
+	Return TaxesServer.CreateFormControls_ItemList(Object, ThisObject, AddInfo);
 EndFunction
 
 #EndRegion

@@ -68,23 +68,6 @@ Scenario: _0154100 preparation ( filling documents)
 		When Create information register TaxSettings (Sales tax)
 		When Create information register Taxes records (Sales tax)
 		When Create catalog RetailCustomers objects (check POS)
-	* Tax settings
-		Given I open hyperlink "e1cib/list/Catalog.Taxes"
-		And I go to line in "List" table
-			| 'Description' |
-			| 'VAT'         |
-		And I select current line in "List" table
-		And I move to "Use documents" tab
-		And in the table "UseDocuments" I click the button named "UseDocumentsAdd"
-		And I select "Retail sales receipt" exact value from "Document name" drop-down list in "UseDocuments" table
-		And I finish line editing in "UseDocuments" table
-		And I go to line in "UseDocuments" table
-			| 'Document name'      |
-			| 'RetailSalesReceipt' |
-		And in the table "UseDocuments" I click the button named "UseDocumentsAdd"
-		And I select "Retail return receipt" exact value from "Document name" drop-down list in "UseDocuments" table
-		And I finish line editing in "UseDocuments" table
-		And I click "Save and close" button
 	* Create payment terminal
 		Given I open hyperlink "e1cib/list/Catalog.PaymentTerminals"
 		And I click the button named "FormCreate"
@@ -2770,8 +2753,8 @@ Scenario: _0154156 check Retail sales receipt when changing date
 		Then "Update item list info" window is opened
 		And I click "OK" button
 		And "ItemList" table contains lines
-			| 'Item'  | 'Price'    | 'Item key' | 'Q'     | 'Tax amount' | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
-			| 'Dress' | '1 000,00' | 'M/Brown'  | '1,000' | ''           | 'pcs'  | '1 000,00'     | '1 000,00'     | 'Store 01' |
+			| 'Item'  | 'Price'    | 'Item key' | 'Q'     | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
+			| 'Dress' | '1 000,00' | 'M/Brown'  | '1,000' | 'pcs'  | '1 000,00'   | '1 000,00'     | 'Store 01' |
 	* Check the list of partner terms
 		And I click Select button of "Partner term" field
 		And "List" table contains lines
@@ -2789,9 +2772,12 @@ Scenario: _0154156 check Retail sales receipt when changing date
 			| 'Reporting currency' | 'Reporting'    | 'USD' | 'TRY'  | '1'            | '0,2000' | '200,00' |
 			| 'Local currency'     | 'Legal'        | 'TRY' | 'TRY'  | '1'            | '1'      | '1 000'  |
 			| 'TRY'                | 'Partner term' | 'TRY' | 'TRY'  | '1'            | '1'      | '1 000'  |
+		And I close all client application windows
+		
 		
 
 Scenario: _0154158 check function DontCalculateRow in the Retail sales receipt
+	And I close all client application windows
 	* Open the Retail sales receipt creation form
 		Given I open hyperlink "e1cib/list/Document.RetailSalesReceipt"
 		And I click the button named "FormCreate"

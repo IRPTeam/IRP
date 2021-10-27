@@ -456,8 +456,8 @@ Scenario: _1000002 check credit limit when post Sales invoice based on Sales ord
 			| 'Crystal'     |
 		And I activate "Description" field in "List" table
 		And I select current line in "List" table
-		And I activate field named "PaymentListAmount" in "PaymentList" table
-		And I input "3 500,00" text in the field named "PaymentListAmount" of "PaymentList" table
+		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
+		And I input "3 500,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 		And I finish line editing in "PaymentList" table
 		And I click the button named "FormPost"
 		And I input current date in "Date" field
@@ -613,8 +613,8 @@ Scenario: _1000003 check credit limit when post	Sales invoice based in Shipment 
 			| 'Kalipso'     |
 		And I activate "Description" field in "List" table
 		And I select current line in "List" table
-		And I activate field named "PaymentListAmount" in "PaymentList" table
-		And I input "10 000,00" text in the field named "PaymentListAmount" of "PaymentList" table
+		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
+		And I input "10 000,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 		And I finish line editing in "PaymentList" table
 		And I finish line editing in "PaymentList" table
 		And I click the button named "FormPostAndClose"

@@ -1155,8 +1155,9 @@ Scenario: _0154103 check Sales order when changing date
 		Then the form attribute named "Prices" became equal to "Yes"
 		And I click "OK" button
 		And "ItemList" table contains lines
-			| 'Item'  | 'Price'    | 'Item key' | 'Q'     | 'Tax amount' | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
-			| 'Dress' | '1 000,00' | 'M/Brown'  | '1,000' | ''           | 'pcs'  | '1 000,00'     | '1 000,00'     | 'Store 01' |
+			| 'Item'  | 'Price'    | 'Item key' | 'Q'     | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
+			| 'Dress' | '1 000,00' | 'M/Brown'  | '1,000' | 'pcs'  | '1 000,00'     | '1 000,00'     | 'Store 01' |
+		If "ItemList" table does not contain "Tax amount" column Then
 	* Check the list of partner terms
 		And I click Select button of "Partner term" field
 		And "List" table contains lines
@@ -1221,8 +1222,9 @@ Scenario: _0154104 check Sales invoice when changing date
 		Then "Update item list info" window is opened
 		And I click "OK" button
 		And "ItemList" table contains lines
-			| 'Item'  | 'Price'    | 'Item key' | 'Q'     | 'Tax amount' | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
-			| 'Dress' | '1 000,00' | 'M/Brown'  | '1,000' | ''           | 'pcs'  | '1 000,00'     | '1 000,00'     | 'Store 01' |
+			| 'Item'  | 'Price'    | 'Item key' | 'Q'     | 'Unit' | 'Net amount' | 'Total amount' | 'Store'    |
+			| 'Dress' | '1 000,00' | 'M/Brown'  | '1,000' | 'pcs'  | '1 000,00'     | '1 000,00'     | 'Store 01' |
+		If "ItemList" table does not contain "Tax amount" column Then
 	* Check the list of partner terms
 		And I click Select button of "Partner term" field
 		And "List" table contains lines
@@ -2067,8 +2069,8 @@ Scenario: _0154107 check filling in and refilling Cash receipt (transaction type
 		And I click Clear button of "Partner term" field
 		And I finish line editing in "PaymentList" table
 		And "PaymentList" table contains lines
-			| 'Partner' | 'Partner term' | 'Amount' | 'Payer'           | 'Basis document' |
-			| 'Kalipso' | ''             | '11 000,00'       | 'Company Kalipso' | ''               |
+			| 'Partner' | 'Partner term' | 'Total amount' | 'Payer'           | 'Basis document' |
+			| 'Kalipso' | ''             | '11 000,00'    | 'Company Kalipso' | ''               |
 	* Check the addition of a base document without selecting a base document
 		When I Check the steps for Exception
 			|'And I click choice button of "Basis document" attribute in "PaymentList" table'|
@@ -2102,7 +2104,7 @@ Scenario: _0154107 check filling in and refilling Cash receipt (transaction type
 			| 'Partner' | 'Payer'           |
 			| 'Kalipso' | 'Company Kalipso' |
 		And I select current line in "PaymentList" table
-		And I input "100,00" text in "Amount" field of "PaymentList" table
+		And I input "100,00" text in "Total amount" field of "PaymentList" table
 		And I finish line editing in "PaymentList" table
 		And in the table "PaymentList" I click "Edit currencies" button
 		And "CurrenciesTable" table became equal
@@ -2114,7 +2116,7 @@ Scenario: _0154107 check filling in and refilling Cash receipt (transaction type
 			| 'Partner'   | 'Payer'             |
 			| 'Nicoletta' | 'Company Nicoletta' |
 		And I select current line in "PaymentList" table
-		And I input "200,00" text in "Amount" field of "PaymentList" table
+		And I input "200,00" text in "Total amount" field of "PaymentList" table
 		And I finish line editing in "PaymentList" table
 		And in the table "PaymentList" I click "Edit currencies" button
 		And "CurrenciesTable" table became equal
@@ -2175,16 +2177,16 @@ Scenario: _0154108 total amount calculation in Cash receipt
 		And I select current line in "List" table			
 	* Check the Total amount calculation when adding rows
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
-		And I activate field named "PaymentListAmount" in "PaymentList" table
-		And I input "200,00" text in the field named "PaymentListAmount" of "PaymentList" table
+		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
+		And I input "200,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 		And I finish line editing in "PaymentList" table
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
-		And I activate field named "PaymentListAmount" in "PaymentList" table
-		And I input "50,00" text in the field named "PaymentListAmount" of "PaymentList" table
+		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
+		And I input "50,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 		And I finish line editing in "PaymentList" table
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
-		And I activate field named "PaymentListAmount" in "PaymentList" table
-		And I input "180,00" text in the field named "PaymentListAmount" of "PaymentList" table
+		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
+		And I input "180,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 		And I finish line editing in "PaymentList" table
 		And the editing text of form attribute named "DocumentAmount" became equal to "430,00"
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
@@ -2208,20 +2210,20 @@ Scenario: _0154108 total amount calculation in Cash receipt
 		And the editing text of form attribute named "DocumentAmount" became equal to "984,66"		
 	* Check the Total amount re-calculation when deleting rows
 		And I go to line in "PaymentList" table
-			| 'Amount' |
+			| 'Total amount' |
 			| '50,00'  |
 		And I delete a line in "PaymentList" table
 		And the editing text of form attribute named "DocumentAmount" became equal to "934,66"
 	* Check the Total amount calculation when adding rows
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
-		And I activate field named "PaymentListAmount" in "PaymentList" table
-		And I input "80,00" text in the field named "PaymentListAmount" of "PaymentList" table
+		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
+		And I input "80,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 		And I finish line editing in "PaymentList" table
 		And the editing text of form attribute named "DocumentAmount" became equal to "1 014,66"
 	* Copy line and check Total amount calculation
 		And I go to line in "PaymentList" table
-			| 'Amount' | 'Partner' | 'Partner term'                     | 'Payer'           |
-			| '554,66' | 'Kalipso' | 'Basic Partner terms, without VAT' | 'Company Kalipso' |
+			| 'Total amount' | 'Partner' | 'Partner term'                     | 'Payer'           |
+			| '554,66'       | 'Kalipso' | 'Basic Partner terms, without VAT' | 'Company Kalipso' |
 		And I activate "Partner term" field in "PaymentList" table
 		And in the table "PaymentList" I click the button named "PaymentListContextMenuCopy"
 		And the editing text of form attribute named "DocumentAmount" became equal to "1 569,32"
@@ -2330,7 +2332,7 @@ Scenario: _0154109 check filling in and refilling Bank receipt (transaction type
 		And I click Clear button of "Partner term" field
 		And I finish line editing in "PaymentList" table
 		And "PaymentList" table contains lines
-			| 'Partner'   | 'Partner term' | 'Amount' | 'Payer'             | 'Basis document' |
+			| 'Partner'   | 'Partner term' | 'Total amount' | 'Payer'             | 'Basis document' |
 			| 'Kalipso' | ''          | '11 000,00'       | 'Company Kalipso' | ''               |
 	* Check the addition of a base document without selecting a base document
 		When I Check the steps for Exception
@@ -2365,19 +2367,19 @@ Scenario: _0154109 check filling in and refilling Bank receipt (transaction type
 			| 'Partner'   | 'Payer'             |
 			| 'Kalipso' | 'Company Kalipso' |
 		And I select current line in "PaymentList" table
-		And I input "100,00" text in "Amount" field of "PaymentList" table
+		And I input "100,00" text in "Total amount" field of "PaymentList" table
 		And I finish line editing in "PaymentList" table
 		And I go to line in "PaymentList" table
 			| 'Partner'   | 'Payer'             |
 			| 'Nicoletta' | 'Company Nicoletta' |
 		And I select current line in "PaymentList" table
-		And I input "200,00" text in "Amount" field of "PaymentList" table
+		And I input "200,00" text in "Total amount" field of "PaymentList" table
 		And I finish line editing in "PaymentList" table
 		And I go to line in "PaymentList" table
 			| 'Partner' | 'Payer'           |
 			| 'Kalipso' | 'Company Kalipso' |
 		And I select current line in "PaymentList" table
-		And I input "100,00" text in "Amount" field of "PaymentList" table
+		And I input "100,00" text in "Total amount" field of "PaymentList" table
 		And I finish line editing in "PaymentList" table
 		And in the table "PaymentList" I click "Edit currencies" button
 		And "CurrenciesTable" table became equal
@@ -2389,7 +2391,7 @@ Scenario: _0154109 check filling in and refilling Bank receipt (transaction type
 			| 'Partner'   | 'Payer'             |
 			| 'Nicoletta' | 'Company Nicoletta' |
 		And I select current line in "PaymentList" table
-		And I input "200,00" text in "Amount" field of "PaymentList" table
+		And I input "200,00" text in "Total amount" field of "PaymentList" table
 		And I finish line editing in "PaymentList" table
 		And in the table "PaymentList" I click "Edit currencies" button
 		And "CurrenciesTable" table became equal
@@ -2450,16 +2452,16 @@ Scenario: _0154110 total amount calculation in Bank receipt
 		And I select current line in "List" table			
 	* Check the Total amount calculation when adding rows
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
-		And I activate field named "PaymentListAmount" in "PaymentList" table
-		And I input "200,00" text in the field named "PaymentListAmount" of "PaymentList" table
+		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
+		And I input "200,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 		And I finish line editing in "PaymentList" table
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
-		And I activate field named "PaymentListAmount" in "PaymentList" table
-		And I input "50,00" text in the field named "PaymentListAmount" of "PaymentList" table
+		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
+		And I input "50,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 		And I finish line editing in "PaymentList" table
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
-		And I activate field named "PaymentListAmount" in "PaymentList" table
-		And I input "180,00" text in the field named "PaymentListAmount" of "PaymentList" table
+		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
+		And I input "180,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 		And I finish line editing in "PaymentList" table
 		And the editing text of form attribute named "DocumentAmount" became equal to "430,00"
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
@@ -2483,20 +2485,20 @@ Scenario: _0154110 total amount calculation in Bank receipt
 		And the editing text of form attribute named "DocumentAmount" became equal to "984,66"		
 	* Check the Total amount re-calculation when deleting rows
 		And I go to line in "PaymentList" table
-		| 'Amount' |
+		| 'Total amount' |
 		| '50,00'  |
 		And I delete a line in "PaymentList" table
 		And the editing text of form attribute named "DocumentAmount" became equal to "934,66"
 	* Check the Total amount calculation when adding rows
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
-		And I activate field named "PaymentListAmount" in "PaymentList" table
-		And I input "80,00" text in the field named "PaymentListAmount" of "PaymentList" table
+		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
+		And I input "80,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 		And I finish line editing in "PaymentList" table
 		And the editing text of form attribute named "DocumentAmount" became equal to "1 014,66"
 	* Copy line and check Total amount calculation
 		And I go to line in "PaymentList" table
-			| 'Amount' | 'Partner' | 'Partner term'                     | 'Payer'           |
-			| '554,66' | 'Kalipso' | 'Basic Partner terms, without VAT' | 'Company Kalipso' |
+			| 'Total amount' | 'Partner' | 'Partner term'                     | 'Payer'           |
+			| '554,66'       | 'Kalipso' | 'Basic Partner terms, without VAT' | 'Company Kalipso' |
 		And I activate "Partner term" field in "PaymentList" table
 		And in the table "PaymentList" I click the button named "PaymentListContextMenuCopy"
 		And the editing text of form attribute named "DocumentAmount" became equal to "1 569,32"
@@ -2623,8 +2625,8 @@ Scenario: _0154111 check filling in and refilling Cash payment (transaction type
 		And I click Clear button of "Partner term" field
 		And I finish line editing in "PaymentList" table
 		And "PaymentList" table contains lines
-			| 'Partner'   | 'Partner term' | 'Amount' | 'Payee'             | 'Basis document' |
-			| 'Ferron BP' | ''          | '13 000,00'       | 'Company Ferron BP' | ''               |
+			| 'Partner'   | 'Partner term' | 'Total amount' | 'Payee'             | 'Basis document' |
+			| 'Ferron BP' | ''             | '13 000,00'    | 'Company Ferron BP' | ''               |
 	* Check the addition of a base document without selecting a base document
 		When I Check the steps for Exception
 			|'And I click choice button of "Basis document" attribute in "PaymentList" table'|
@@ -2658,13 +2660,13 @@ Scenario: _0154111 check filling in and refilling Cash payment (transaction type
 			| 'Partner'   | 'Payee'             |
 			| 'Ferron BP' | 'Company Ferron BP' |
 		And I select current line in "PaymentList" table
-		And I input "100,00" text in "Amount" field of "PaymentList" table
+		And I input "100,00" text in "Total amount" field of "PaymentList" table
 		And I finish line editing in "PaymentList" table
 		And I go to line in "PaymentList" table
 			| 'Partner'   | 'Payee'             |
 			| 'Veritas'   | 'Company Veritas '  |
 		And I select current line in "PaymentList" table
-		And I input "200,00" text in "Amount" field of "PaymentList" table
+		And I input "200,00" text in "Total amount" field of "PaymentList" table
 		And I finish line editing in "PaymentList" table
 		And I go to line in "PaymentList" table
 			| 'Partner'   |
@@ -2737,16 +2739,16 @@ Scenario: _0154112 total amount calculation in Cash payment
 		And I select current line in "List" table
 	* Check the Total amount calculation when adding rows
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
-		And I activate field named "PaymentListAmount" in "PaymentList" table
-		And I input "200,00" text in the field named "PaymentListAmount" of "PaymentList" table
+		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
+		And I input "200,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 		And I finish line editing in "PaymentList" table
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
-		And I activate field named "PaymentListAmount" in "PaymentList" table
-		And I input "50,00" text in the field named "PaymentListAmount" of "PaymentList" table
+		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
+		And I input "50,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 		And I finish line editing in "PaymentList" table
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
-		And I activate field named "PaymentListAmount" in "PaymentList" table
-		And I input "180,00" text in the field named "PaymentListAmount" of "PaymentList" table
+		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
+		And I input "180,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 		And I finish line editing in "PaymentList" table
 		And the editing text of form attribute named "DocumentAmount" became equal to "430,00"
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
@@ -2777,20 +2779,20 @@ Scenario: _0154112 total amount calculation in Cash payment
 		And the editing text of form attribute named "DocumentAmount" became equal to "13 430,00"		
 	* Check the Total amount re-calculation when deleting rows
 		And I go to line in "PaymentList" table
-		| 'Amount' |
+		| 'Total amount' |
 		| '50,00'  |
 		And I delete a line in "PaymentList" table
 		And the editing text of form attribute named "DocumentAmount" became equal to "13 380,00"
 	* Check the Total amount calculation when adding rows
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
-		And I activate field named "PaymentListAmount" in "PaymentList" table
-		And I input "80,00" text in the field named "PaymentListAmount" of "PaymentList" table
+		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
+		And I input "80,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 		And I finish line editing in "PaymentList" table
 		And the editing text of form attribute named "DocumentAmount" became equal to "13 460,00"
 	* Copy line and check Total amount calculation
 		And I go to line in "PaymentList" table
-			| 'Amount'    | 'Partner'   | 'Partner term'       | 'Payee'             |
-			| '13 000,00' | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Company Ferron BP' |
+			| 'Total amount' | 'Partner'   | 'Partner term'       | 'Payee'             |
+			| '13 000,00'    | 'Ferron BP' | 'Vendor Ferron, TRY' | 'Company Ferron BP' |
 		And I activate "Partner term" field in "PaymentList" table
 		And in the table "PaymentList" I click the button named "PaymentListContextMenuCopy"
 		And the editing text of form attribute named "DocumentAmount" became equal to "26 460,00"
@@ -2890,10 +2892,10 @@ Scenario: _0154113 check filling in and refilling Bank payment (transaction type
 		And I activate "Basis document" field in "PaymentList" table
 		And I select current line in "PaymentList" table
 		And "List" table does not contain lines
-			| 'Document' 	                | 'Total amount'   | 'Company'      | 'Legal name'        | 'Partner'   |
+			| 'Document' 	                | 'Amount'   | 'Company'      | 'Legal name'        | 'Partner'   |
 			| '$$PurchaseInvoice30004$$'	| '4 000,00'       | 'Main Company' | 'Company Ferron BP' | 'Ferron BP' |
 		And I go to line in "List" table
-		| 'Document' 	                | 'Total amount'    | 'Company'      | 'Legal name'        | 'Partner'   |
+		| 'Document' 	                | 'Amount'    | 'Company'      | 'Legal name'        | 'Partner'   |
 		| '$$PurchaseInvoice29604$$'	| '13 000,00'       | 'Main Company' | 'Company Ferron BP' | 'Ferron BP' |
 		And I click "Select" button
 	* Check clearing basis document when clearing partner term
@@ -2949,7 +2951,7 @@ Scenario: _0154113 check filling in and refilling Bank payment (transaction type
 			| 'Ferron BP' |
 		And in the table "PaymentList" I click "Edit currencies" button
 		And "CurrenciesTable" table became equal
-			| 'Movement type'      | 'Type'      | 'To'  | 'From' | 'Multiplicity' | 'Rate'   | 'Total amount' |
+			| 'Movement type'      | 'Type'      | 'To'  | 'From' | 'Multiplicity' | 'Rate'   | 'Amount' |
 			| 'Local currency'     | 'Legal'     | 'TRY' | 'TRY'  | '1'            | '1'      | '100'    |
 			| 'Reporting currency' | 'Reporting' | 'USD' | 'TRY'  | '1'            | '0,1712' | '17,12'  |
 		And I close current window		
@@ -3812,14 +3814,14 @@ Scenario: _0154118 check the details cleaning on the form Cash receipt
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
 		And "PaymentList" table contains lines
-		| '#' | 'Partner'   | 'Amount' | 'Amount exchange' | 'Planning transaction basis' |
-		| '1' | 'Nicoletta' | ''       | ''                | ''                          |
+		| '#' | 'Partner'   | 'Total amount' | 'Amount exchange' | 'Planning transaction basis' |
+		| '1' | 'Nicoletta' | ''             | ''                | ''                           |
 		And I select "Payment from customer" exact value from "Transaction type" drop-down list
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
 		And "PaymentList" table contains lines
-		| '#' | 'Partner'   | 'Partner term' | 'Amount' | 'Payer' | 'Basis document' | 'Planning transaction basis' |
-		| '1' | 'Nicoletta' | ''          | ''       | ''      | ''               | ''                          |
+		| '#' | 'Partner'   | 'Partner term' | 'Total amount' | 'Payer' | 'Basis document' | 'Planning transaction basis' |
+		| '1' | 'Nicoletta' | ''             | ''             | ''      | ''               | ''                           |
 	* Check clearing fields 'Partner' when re-selecting the type of operation to Cash transfer order
 		And I select "Cash transfer order" exact value from "Transaction type" drop-down list
 		Then "1C:Enterprise" window is opened
@@ -3828,8 +3830,8 @@ Scenario: _0154118 check the details cleaning on the form Cash receipt
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
 		And "PaymentList" table contains lines
-		| '#' | 'Partner' | 'Partner term' | 'Amount' | 'Payer' | 'Basis document' | 'Planning transaction basis' |
-		| '1' | ''        | ''          | ''       | ''      | ''               | ''                          |
+		| '#' | 'Partner' | 'Partner term' | 'Total amount' | 'Payer' | 'Basis document' | 'Planning transaction basis' |
+		| '1' | ''        | ''             | ''             | ''      | ''               | ''                           |
 		And I close all client application windows
 
 
@@ -3869,14 +3871,14 @@ Scenario: _0154119 check the details cleaning on the form Cash payment when re-s
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
 		And "PaymentList" table contains lines
-		| '#' | 'Partner'   | 'Amount' | 'Planning transaction basis' |
-		| '1' | 'Nicoletta' | ''       | ''                          |
+		| '#' | 'Partner'   | 'Total amount' | 'Planning transaction basis' |
+		| '1' | 'Nicoletta' | ''             | ''                           |
 		And I select "Payment to the vendor" exact value from "Transaction type" drop-down list
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
 		And "PaymentList" table contains lines
-		| '#' | 'Partner'   | 'Partner term' | 'Amount' | 'Payee' | 'Basis document' | 'Planning transaction basis' |
-		| '1' | 'Nicoletta' | ''          | ''       | ''      | ''               | ''                          |
+		| '#' | 'Partner'   | 'Partner term' | 'Total amount' | 'Payee' | 'Basis document' | 'Planning transaction basis' |
+		| '1' | 'Nicoletta' | ''             | ''             | ''      | ''               | ''                           |
 	* Check clearing fields 'Partner' when re-selecting the type of operation to Cash transfer order
 		And I select "Cash transfer order" exact value from "Transaction type" drop-down list
 		Then "1C:Enterprise" window is opened
@@ -3885,8 +3887,8 @@ Scenario: _0154119 check the details cleaning on the form Cash payment when re-s
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
 		And "PaymentList" table contains lines
-		| '#' | 'Partner' | 'Partner term' | 'Amount' | 'Payee' | 'Basis document' | 'Planning transaction basis' |
-		| '1' | ''        | ''          | ''       | ''      | ''               | ''                          |
+		| '#' | 'Partner' | 'Partner term' | 'Total amount' | 'Payee' | 'Basis document' | 'Planning transaction basis' |
+		| '1' | ''        | ''             | ''             | ''      | ''               | ''                           |
 		And I close all client application windows
 
 Scenario: _0154120 check the details cleaning on the form Bank receipt when re-selecting the type of operation
@@ -3925,16 +3927,16 @@ Scenario: _0154120 check the details cleaning on the form Bank receipt when re-s
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
 		And "PaymentList" table contains lines
-		| '#' | 'Amount' | 'Amount exchange' | 'Planning transaction basis' |
-		| '1' | ''       | ''                | ''                          |
+			| '#' | 'Total amount' | 'Amount exchange' | 'Planning transaction basis' |
+			| '1' | ''             | ''                | ''                           |
 		* Check filling in Transit account form Accountant
 			Then the form attribute named "TransitAccount" became equal to "Transit Main"
 		And I select "Payment from customer" exact value from "Transaction type" drop-down list
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
 		And "PaymentList" table contains lines
-		| '#' | 'Partner'   | 'Partner term' | 'Amount' | 'Payer' | 'Basis document' | 'Planning transaction basis' |
-		| '1' | ''          | ''          | ''       | ''      | ''               | ''                          |
+			| '#' | 'Partner' | 'Partner term' | 'Total amount' | 'Payer' | 'Basis document' | 'Planning transaction basis' |
+			| '1' | ''        | ''             | ''             | ''      | ''               | ''                           |
 		Then the form attribute named "TransitAccount" became equal to ""
 	* Check clearing fields 'Partner' when re-selecting the type of operation to Cash transfer order
 		And I select "Cash transfer order" exact value from "Transaction type" drop-down list
@@ -3944,8 +3946,8 @@ Scenario: _0154120 check the details cleaning on the form Bank receipt when re-s
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
 		And "PaymentList" table contains lines
-		| '#' | 'Partner' | 'Partner term' | 'Amount' | 'Payer' | 'Basis document' | 'Planning transaction basis' |
-		| '1' | ''        | ''          | ''       | ''      | ''               | ''                          |
+			| '#' | 'Partner' | 'Partner term' | 'Total amount' | 'Payer' | 'Basis document' | 'Planning transaction basis' |
+			| '1' | ''        | ''             | ''             | ''      | ''               | ''                           |
 		And I close all client application windows
 
 
@@ -4257,7 +4259,7 @@ Scenario: _0154126 check the selection by Planing transaction basis in BankRecei
 		And I select current line in "List" table
 	* Check the selection by Planing transaction basis
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
-		And I input "100,00" text in the field named "PaymentListAmount" of "PaymentList" table
+		And I input "100,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 		And I click choice button of "Planning transaction basis" attribute in "PaymentList" table
 		And I save number of "List" table lines as "Q"
 		Then "Q" variable is equal to 1
@@ -4265,11 +4267,11 @@ Scenario: _0154126 check the selection by Planing transaction basis in BankRecei
 		| 'Number' | 'Sender'            | 'Send currency' | 'Company'      |
 		| '$$NumberCashTransferOrder01541003$$'     | 'Bank account, TRY' | 'TRY'              | 'Main Company' |
 		And I click the button named "FormChoose"
-		And I input "100,00" text in the field named "PaymentListAmount" of "PaymentList" table
+		And I input "100,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 	* Check that the selected document is in BankPayment
 		And "PaymentList" table contains lines
-		| 'Amount' | 'Planning transaction basis' |
-		| '100,00' | '$$CashTransferOrder01541003$$'   |
+		| 'Total amount' | 'Planning transaction basis'    |
+		| '100,00'       | '$$CashTransferOrder01541003$$' |
 	* Check that a document that is already selected is displayed in the Planning transaction basis selection form
 		And I select current line in "PaymentList" table
 		And I click choice button of "Planning transaction basis" attribute in "PaymentList" table
@@ -4279,7 +4281,7 @@ Scenario: _0154126 check the selection by Planing transaction basis in BankRecei
 		| 'Number' | 'Sender'            | 'Send currency'    | 'Company'      |
 		| '$$NumberCashTransferOrder01541003$$'     | 'Bank account, TRY' | 'TRY'              | 'Main Company' |
 		And I click the button named "FormChoose"
-		And I input "100,00" text in the field named "PaymentListAmount" of "PaymentList" table
+		And I input "100,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 	* Check that a document that is already selected is displayed in the Planning transaction basis selection form (Bank Receipt posted)
 		And I click the button named "FormPost"
 		And I select current line in "PaymentList" table
@@ -4287,10 +4289,10 @@ Scenario: _0154126 check the selection by Planing transaction basis in BankRecei
 		And I save number of "List" table lines as "Q"
 		Then "Q" variable is equal to 1
 		And "List" table contains lines
-		| 'Number' | 'Sender'            | 'Send currency' | 'Company'      |
-		| '$$NumberCashTransferOrder01541003$$'     | 'Bank account, TRY' | 'TRY'              | 'Main Company' |
+		| 'Number'                              | 'Sender'            | 'Send currency' | 'Company'      |
+		| '$$NumberCashTransferOrder01541003$$' | 'Bank account, TRY' | 'TRY'           | 'Main Company' |
 		And I click the button named "FormChoose"
-		And I input "100,00" text in the field named "PaymentListAmount" of "PaymentList" table
+		And I input "100,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 	* Check that the Planing transaction basis selection form displays the document that has already been selected earlier (line deleted)
 		And I select current line in "PaymentList" table
 		And in the table "PaymentList" I click "Delete" button
@@ -4302,7 +4304,7 @@ Scenario: _0154126 check the selection by Planing transaction basis in BankRecei
 		| 'Number' | 'Sender'            | 'Send currency' | 'Company'      |
 		| '$$NumberCashTransferOrder01541003$$'     | 'Bank account, TRY' | 'TRY'              | 'Main Company' |
 		And I click the button named "FormChoose"
-		And I input "200,00" text in the field named "PaymentListAmount" of "PaymentList" table
+		And I input "200,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 		And I click the button named "FormPost"
 	* Check not clearing Planning transaction basis in case of cancellation when changing the type of transaction
 		And I select "Cash transfer order" exact value from "Transaction type" drop-down list
@@ -4313,7 +4315,7 @@ Scenario: _0154126 check the selection by Planing transaction basis in BankRecei
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
 		And "PaymentList" table contains lines
-		| 'Amount' | 'Planning transaction basis' |
+		| 'Total amount' | 'Planning transaction basis' |
 		| '200,00' | ''                          |
 	And I close all client application windows
 
@@ -4348,10 +4350,10 @@ Scenario: _0154127 check the selection by Planing transaction basis in Cash Paym
 		| 'Number' | 'Sender'       | 'Company'      | 'Send currency' |
 		| '$$NumberCashTransferOrder01541002$$'     | 'Cash desk №2' | 'Main Company' | 'USD'           |
 		And I click the button named "FormChoose"
-		And I input "100,00" text in the field named "PaymentListAmount" of "PaymentList" table
+		And I input "100,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 	* Check that the selected document is in Cash Payment
 		And "PaymentList" table contains lines
-		| 'Amount' | 'Planning transaction basis' |
+		| 'Total amount' | 'Planning transaction basis' |
 		| '100,00' | '$$CashTransferOrder01541002$$'   |
 	* Check that a document that is already selected is displayed in the Planning transaction basis selection form
 		And I select current line in "PaymentList" table
@@ -4383,7 +4385,7 @@ Scenario: _0154127 check the selection by Planing transaction basis in Cash Paym
 		| 'Number' | 'Sender'       | 'Company'      | 'Send currency' |
 		| '$$NumberCashTransferOrder01541002$$'     | 'Cash desk №2' | 'Main Company' | 'USD'           |
 		And I click the button named "FormChoose"
-		And I input "200,00" text in the field named "PaymentListAmount" of "PaymentList" table
+		And I input "200,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 		And I click the button named "FormPost"
 	* Check not clearing Planning transaction basis in case of cancellation when changing the type of transaction
 		And I select "Cash transfer order" exact value from "Transaction type" drop-down list
@@ -4394,7 +4396,7 @@ Scenario: _0154127 check the selection by Planing transaction basis in Cash Paym
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
 		And "PaymentList" table contains lines
-		| 'Amount' | 'Planning transaction basis' |
+		| 'Total amount' | 'Planning transaction basis' |
 		| '200,00' | ''                          |
 	And I close all client application windows
 
@@ -4426,22 +4428,22 @@ Scenario: _0154128 check the selection by Planing transaction basis in CashRecei
 		And I save number of "List" table lines as "Q"
 		Then "Q" variable is equal to 1
 		And "List" table contains lines
-			| 'Number' | 'Sender'       | 'Send currency'    | 'Company'      |
-			| '$$NumberCashTransferOrder01541002$$'     | 'Cash desk №2' | 'USD'              | 'Main Company' |
+			| 'Number'                              | 'Sender'       | 'Send currency' | 'Company'      |
+			| '$$NumberCashTransferOrder01541002$$' | 'Cash desk №2' | 'USD'           | 'Main Company' |
 		And I click the button named "FormChoose"
-		And I input "100,00" text in the field named "PaymentListAmount" of "PaymentList" table
+		And I input "100,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 	* Check that the selected document is in CashReceipt
 		And "PaymentList" table contains lines
-			| 'Amount' | 'Planning transaction basis' |
-			| '100,00' | '$$CashTransferOrder01541002$$'   |
+			| 'Total amount' | 'Planning transaction basis'    |
+			| '100,00'       | '$$CashTransferOrder01541002$$' |
 	* Check that a document that is already selected is displayed in the Planning transaction basis selection form
 		And I select current line in "PaymentList" table
 		And I click choice button of "Planning transaction basis" attribute in "PaymentList" table
 		And I save number of "List" table lines as "Q"
 		Then "Q" variable is equal to 1
 		And "List" table contains lines
-			| 'Number' | 'Sender'       | 'Send currency'    | 'Company'      |
-			| '$$NumberCashTransferOrder01541002$$'     | 'Cash desk №2' | 'USD'              | 'Main Company' |
+			| 'Number'                              | 'Sender'       | 'Send currency' | 'Company'      |
+			| '$$NumberCashTransferOrder01541002$$' | 'Cash desk №2' | 'USD'           | 'Main Company' |
 		And I click the button named "FormChoose"
 	* Check that a document that is already selected is displayed in the Planning transaction basis selection form when Cash Receipt posted 
 		And I click the button named "FormPost"
@@ -4450,8 +4452,8 @@ Scenario: _0154128 check the selection by Planing transaction basis in CashRecei
 		And I save number of "List" table lines as "Q"
 		Then "Q" variable is equal to 1
 		And "List" table contains lines
-		| 'Number' | 'Sender'       | 'Send currency'    | 'Company'      |
-		| '$$NumberCashTransferOrder01541002$$'     | 'Cash desk №2' | 'USD'              | 'Main Company' |
+		| 'Number'                              | 'Sender'       | 'Send currency' | 'Company'      |
+		| '$$NumberCashTransferOrder01541002$$' | 'Cash desk №2' | 'USD'           | 'Main Company' |
 		And I click the button named "FormChoose"
 	* Check that the Planing transaction basis selection form displays the document that has already been selected earlier (line deleted)
 		And I select current line in "PaymentList" table
@@ -4461,10 +4463,10 @@ Scenario: _0154128 check the selection by Planing transaction basis in CashRecei
 		And I save number of "List" table lines as "Q"
 		Then "Q" variable is equal to 1
 		And "List" table contains lines
-		| 'Number' | 'Sender'       | 'Send currency'    | 'Company'      |
-		| '$$NumberCashTransferOrder01541002$$'     | 'Cash desk №2' | 'USD'              | 'Main Company' |
+		| 'Number'                              | 'Sender'       | 'Send currency' | 'Company'      |
+		| '$$NumberCashTransferOrder01541002$$' | 'Cash desk №2' | 'USD'           | 'Main Company' |
 		And I click the button named "FormChoose"
-		And I input "200,00" text in the field named "PaymentListAmount" of "PaymentList" table
+		And I input "200,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 		And I click the button named "FormPost"
 	* Check not clearing Planning transaction basis in case of cancellation when changing the type of transaction
 		And I select "Cash transfer order" exact value from "Transaction type" drop-down list
@@ -4475,8 +4477,8 @@ Scenario: _0154128 check the selection by Planing transaction basis in CashRecei
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
 		And "PaymentList" table contains lines
-		| 'Amount' | 'Planning transaction basis' |
-		| '200,00' | ''                          |
+		| 'Total amount' | 'Planning transaction basis' |
+		| '200,00'       | ''                           |
 	And I close all client application windows
 
 Scenario: _0154129 check the selection by Planing transaction basis in BankPayment in case of cash transfer
@@ -4579,10 +4581,10 @@ Scenario: _0154130 check the selection by Planing transaction basis in Bank Rece
 		| 'Number' | 'Sender'              | 'Send currency'    | 'Company'      |
 		| '$$NumberCashTransferOrder01541004$$'     | 'Bank account 2, EUR' | 'EUR'              | 'Main Company' |
 		And I click the button named "FormChoose"
-		And I input "100,00" text in the field named "PaymentListAmount" of "PaymentList" table
+		And I input "100,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 	* Check that the selected document is in BankReceipt
 		And "PaymentList" table contains lines
-		| 'Amount' | 'Planning transaction basis' |
+		| 'Total amount' | 'Planning transaction basis' |
 		| '100,00' | '$$CashTransferOrder01541004$$'   |
 	* Check that a document that is already selected is displayed in the Planning transaction basis selection form
 		And I select current line in "PaymentList" table
@@ -4590,8 +4592,8 @@ Scenario: _0154130 check the selection by Planing transaction basis in Bank Rece
 		And I save number of "List" table lines as "Q"
 		Then "Q" variable is equal to 1
 		And "List" table contains lines
-		| 'Number' | 'Sender'              | 'Send currency'    | 'Company'      |
-		| '$$NumberCashTransferOrder01541004$$'     | 'Bank account 2, EUR' | 'EUR'              | 'Main Company' |
+		| 'Number'                              | 'Sender'              | 'Send currency' | 'Company'      |
+		| '$$NumberCashTransferOrder01541004$$' | 'Bank account 2, EUR' | 'EUR'           | 'Main Company' |
 		And I click the button named "FormChoose"
 	* Check that a document that is already selected is displayed in the Planning transaction basis selection form when Bank Receipt posted
 		And I click the button named "FormPost"
@@ -4600,8 +4602,8 @@ Scenario: _0154130 check the selection by Planing transaction basis in Bank Rece
 		And I save number of "List" table lines as "Q"
 		Then "Q" variable is equal to 1
 		And "List" table contains lines
-		| 'Number' | 'Sender'              | 'Send currency'    | 'Company'      |
-		| '$$NumberCashTransferOrder01541004$$'     | 'Bank account 2, EUR' | 'EUR'              | 'Main Company' |
+		| 'Number'                              | 'Sender'              | 'Send currency' | 'Company'      |
+		| '$$NumberCashTransferOrder01541004$$' | 'Bank account 2, EUR' | 'EUR'           | 'Main Company' |
 		And I click the button named "FormChoose"
 	* Check that the Planing transaction basis selection form displays the document that has already been selected earlier (line deleted)
 		And I select current line in "PaymentList" table
@@ -4611,10 +4613,10 @@ Scenario: _0154130 check the selection by Planing transaction basis in Bank Rece
 		And I save number of "List" table lines as "Q"
 		Then "Q" variable is equal to 1
 		And "List" table contains lines
-		| 'Number' | 'Sender'              | 'Send currency'    | 'Company'      |
-		| '$$NumberCashTransferOrder01541004$$'     | 'Bank account 2, EUR' | 'EUR'              | 'Main Company' |
+		| 'Number'                              | 'Sender'              | 'Send currency' | 'Company'      |
+		| '$$NumberCashTransferOrder01541004$$' | 'Bank account 2, EUR' | 'EUR'           | 'Main Company' |
 		And I click the button named "FormChoose"
-		And I input "200,00" text in the field named "PaymentListAmount" of "PaymentList" table
+		And I input "200,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 		And I click the button named "FormPost"
 	* Check not clearing Planning transaction basis in case of cancellation when changing the type of transaction
 		And I select "Currency exchange" exact value from "Transaction type" drop-down list
@@ -4625,8 +4627,8 @@ Scenario: _0154130 check the selection by Planing transaction basis in Bank Rece
 		Then "1C:Enterprise" window is opened
 		And I click "OK" button
 		And "PaymentList" table contains lines
-		| 'Amount' | 'Planning transaction basis' |
-		| '200,00' | ''                          |
+		| 'Total amount' | 'Planning transaction basis' |
+		| '200,00'       | ''                           |
 	And I close all client application windows
 
 Scenario: _053014 check the display of details on the form Bank payment with the type of operation Currency exchange
@@ -4688,7 +4690,7 @@ Scenario: _0154131  check currency form in  Bank Receipt
 				| 'Description' |
 				| 'NDB'         |
 			And I select current line in "List" table
-			And I input "200,00" text in "Amount" field of "PaymentList" table
+			And I input "200,00" text in "Total amount" field of "PaymentList" table
 			And I finish line editing in "PaymentList" table
 	* Check form by currency
 		* Basic recalculation at the rate
@@ -4726,7 +4728,7 @@ Scenario: _0154131  check currency form in  Bank Receipt
 				| 'Reporting currency' | 'Reporting' | 'USD' | 'TRY'  | '1'            | '0,1667' | '33,34'  |
 			And I close current window
 		* Recount Amount when changing payment amount
-			And I input "250,00" text in the field named "PaymentListAmount" of "PaymentList" table
+			And I input "250,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 			And I finish line editing in "PaymentList" table
 			And in the table "PaymentList" I click "Edit currencies" button
 			And "CurrenciesTable" table became equal
@@ -4747,7 +4749,7 @@ Scenario: _0154131  check currency form in  Bank Receipt
 				| 'Description'      |
 				| 'Company Veritas ' |
 			And I select current line in "List" table
-			And I input "200,00" text in "Amount" field of "PaymentList" table
+			And I input "200,00" text in "Total amount" field of "PaymentList" table
 			And in the table "PaymentList" I click "Edit currencies" button
 			And "CurrenciesTable" table became equal
 				| 'Movement type'      | 'Type'         | 'To'  | 'From' | 'Multiplicity' | 'Rate'   | 'Amount' |

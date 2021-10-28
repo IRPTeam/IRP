@@ -82,7 +82,9 @@ Procedure OnOpen(Object, Form, Cancel, AddInfo = Undefined) Export
 EndProcedure
 
 Procedure NotificationProcessing(Object, Form, EventName, Parameter, Source, AddInfo = Undefined) Export
-	DocumentsClient.CalculatePaymentTermDateAndAmount(Object, Form, AddInfo);
+	If EventName = "CalculationStringsComplete" Then
+		DocumentsClient.CalculatePaymentTermDateAndAmount(Object, Form, AddInfo);
+	EndIf;
 EndProcedure
 
 Procedure AfterWriteAtClient(Object, Form, WriteParameters, AddInfo = Undefined) Export
@@ -105,6 +107,7 @@ Procedure ItemListAfterDeleteRow(Object, Form, Item, AddInfo = Undefined) Export
 	DocumentsClient.ClearTradeDocumentsTable(Object, Form, "GoodsReceipts");
 	DocumentsClient.UpdateTradeDocumentsTree(Object, Form, "GoodsReceipts", "GoodsReceiptsTree",
 		"QuantityInGoodsReceipt");
+	DocumentsClient.CalculatePaymentTermDateAndAmount(Object, Form, AddInfo);
 EndProcedure
 
 Procedure ItemListOnChange(Object, Form, Item = Undefined, CurrentRowData = Undefined) Export

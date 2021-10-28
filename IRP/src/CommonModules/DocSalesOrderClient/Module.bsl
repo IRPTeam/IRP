@@ -76,7 +76,9 @@ Procedure OnOpen(Object, Form, Cancel, AddInfo = Undefined) Export
 EndProcedure
 
 Procedure NotificationProcessing(Object, Form, EventName, Parameter, Source, AddInfo = Undefined) Export
-	DocumentsClient.CalculatePaymentTermDateAndAmount(Object, Form, AddInfo);
+	If EventName = "CalculationStringsComplete" Then
+		DocumentsClient.CalculatePaymentTermDateAndAmount(Object, Form, AddInfo);
+	EndIf;
 EndProcedure
 
 Procedure AfterWriteAtClient(Object, Form, WriteParameters, AddInfo = Undefined) Export
@@ -95,8 +97,9 @@ EndProcedure
 
 #Region ItemListEvents
 
-Procedure ItemListAfterDeleteRow(Object, Form, Item) Export
+Procedure ItemListAfterDeleteRow(Object, Form, Item, AddInfo = Undefined) Export
 	DocumentsClient.ItemListAfterDeleteRow(Object, Form, Item);
+	DocumentsClient.CalculatePaymentTermDateAndAmount(Object, Form, AddInfo);
 EndProcedure
 
 Procedure ItemListOnChange(Object, Form, Item = Undefined, CurrentRowData = Undefined) Export

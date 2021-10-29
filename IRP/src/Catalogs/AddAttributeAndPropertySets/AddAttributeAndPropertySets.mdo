@@ -797,6 +797,35 @@
       <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
     </attributes>
+    <attributes uuid="459ea82b-eda8-406b-bf96-e808bc73d004">
+      <name>Condition</name>
+      <synonym>
+        <key>en</key>
+        <value>Condition</value>
+      </synonym>
+      <type>
+        <types>ValueStorage</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="b0e89822-73e0-4299-9eb8-96e0f293ddb3">
+      <name>IsConditionSet</name>
+      <synonym>
+        <key>en</key>
+        <value>Is condition set</value>
+      </synonym>
+      <type>
+        <types>Number</types>
+        <numberQualifiers>
+          <precision>10</precision>
+        </numberQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+    </attributes>
     <attributes uuid="ec630a45-e714-4875-b9cb-b1d97ee41fd9">
       <name>InterfaceGroup</name>
       <synonym>

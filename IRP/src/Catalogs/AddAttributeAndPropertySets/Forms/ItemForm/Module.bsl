@@ -18,8 +18,6 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 		OnlyAffectPricing = Object.Ref = PredefinedValue("Catalog.AddAttributeAndPropertySets.Catalog_PriceKeys");
 		FillAttributesTree(GetItemTypesTree(), ThisObject.AttributesTree, OnlyAffectPricing);
 	EndIf;
-	//ExtensionServer.AddAttributesFromExtensions(ThisObject, Object.Ref, Items.Pages);
-
 EndProcedure
 
 &AtClient
@@ -37,26 +35,22 @@ Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
 			Row.InterfaceGroup = Undefined;
 		EndDo;
 	EndIf;
-	For Each Row In Object.Attributes Do
+	WriteCondition(CurrentObject, "Attributes"          , "Attribute");
+	WriteCondition(CurrentObject, "Properties"          , "Property");
+	WriteCondition(CurrentObject, "ExtensionAttributes" , "Attribute");
+EndProcedure
+
+&AtServer
+Procedure WriteCondition(CurrentObject, TableName, ColumnName)
+	For Each Row In Object[TableName] Do
 		If Not IsBlankString(Row.ConditionData) Then
-			FilterRow = New Structure("Attribute", Row.Attribute);
-			CurrentObjectRows = CurrentObject.Attributes.FindRows(FilterRow);
-			CurrentObjectRow = CurrentObjectRows[0];
-			ConditionData = CommonFunctionsServer.DeserializeXMLUseXDTO(Row.ConditionData);
-			CurrentObjectRow.Condition = New ValueStorage(ConditionData, New Deflation(9));
+			ConditionData  = CommonFunctionsServer.DeserializeXMLUseXDTO(Row.ConditionData);
+			FilterRow = New Structure(ColumnName, Row[ColumnName]);
+			CurrentObject[TableName].FindRows(FilterRow)[0].Condition = 
+				New ValueStorage(ConditionData, New Deflation(9));
 			Row.ConditionData = "";
 		EndIf;
-	EndDo;
-	For Each Row In Object.Properties Do
-		If Not IsBlankString(Row.ConditionData) Then
-			FilterRow = New Structure("Property", Row.Property);
-			CurrentObjectRows = CurrentObject.Properties.FindRows(FilterRow);
-			CurrentObjectRow = CurrentObjectRows[0];
-			ConditionData = CommonFunctionsServer.DeserializeXMLUseXDTO(Row.ConditionData);
-			CurrentObjectRow.Condition = New ValueStorage(ConditionData, New Deflation(9));
-			Row.ConditionData = "";
-		EndIf;
-	EndDo;
+	EndDo;	
 EndProcedure
 
 &AtClient
@@ -82,17 +76,7 @@ EndProcedure
 Procedure AttributesBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
 	If Clone Then
 		Cancel = True;
-		CurrentData = Items.Attributes.CurrentData;
-		If Not CopiedAttribute.IsEmpty() Or Not CurrentData.IsConditionSet Then
-			Return;
-		EndIf;
-		NewRow = Object.Attributes.Add();
-		FillPropertyValues(NewRow, CurrentData);
-		NewRow.Unprocessed = True;
-		CopiedAttribute = Items.Attributes.CurrentData.Attribute;
-		Items.Attributes.CurrentRow = NewRow.GetID();
-		AttachIdleHandler("CopyAttributesRow", 0.1, True);
-		Items.Attributes.ChangeRow();
+		BeforeAddRowIsClone("Attributes", "Attribute", "CopyAttributesRow");
 	EndIf;
 EndProcedure
 
@@ -100,18 +84,31 @@ EndProcedure
 Procedure PropertiesBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
 	If Clone Then
 		Cancel = True;
-		CurrentData = Items.Properties.CurrentData;
-		If Not CopiedAttribute.IsEmpty() Or Not CurrentData.IsConditionSet Then
-			Return;
-		EndIf;
-		NewRow = Object.Properties.Add();
-		FillPropertyValues(NewRow, CurrentData);
-		NewRow.Unprocessed = True;
-		CopiedAttribute = Items.Properties.CurrentData.Property;
-		Items.Properties.CurrentRow = NewRow.GetID();
-		AttachIdleHandler("CopyPropertiesRow", 0.1, True);
-		Items.Properties.ChangeRow();
+		BeforeAddRowIsClone("Properties", "Property", "CopyPropertiesRow");
 	EndIf;
+EndProcedure
+
+&AtClient
+Procedure ExtensionAttributesBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
+	If Clone Then
+		Cancel = True;
+		BeforeAddRowIsClone("ExtensionAttributes", "Attribute", "CopyExtensionAttributesRow");
+	EndIf;
+EndProcedure
+
+&AtClient
+Procedure BeforeAddRowIsClone(TableName, ColumnName, AttachIdleHandler)
+	CurrentData = Items[TableName].CurrentData;
+	If ValueIsFilled(ThisObject.CopiedAttribute) Or Not CurrentData.IsConditionSet Then
+		Return;
+	EndIf;
+	ThisObject.CopiedAttribute = CurrentData[ColumnName];
+	NewRow = Object[TableName].Add();
+	FillPropertyValues(NewRow, CurrentData);
+	NewRow.Unprocessed = True;
+	Items[TableName].CurrentRow = NewRow.GetID();
+	AttachIdleHandler(AttachIdleHandler, 0.1, True);
+	Items[TableName].ChangeRow();
 EndProcedure
 
 #EndRegion
@@ -126,6 +123,11 @@ EndProcedure
 &AtClient
 Procedure SetConditionProperty(Command)
 	SetCondition("Properties", "Property");
+EndProcedure
+
+&AtClient
+Procedure SetConditionExtensionAttribute(Command)
+	SetCondition("ExtensionAttributes", "Attribute");
 EndProcedure
 
 &AtClient
@@ -230,51 +232,47 @@ Procedure UpdateAttributesTreeAtServer()
 EndProcedure
 
 &AtClient
-Procedure SetCondition(TableName, ColumnName, AddInfo = Undefined)
-	If AddInfo = Undefined Then
-		AddInfo = New Structure();
+Procedure SetCondition(TableName, ColumnName)
+	CurrentData = Items[TableName].CurrentData;
+	If CurrentData = Undefined Then
+		Return;
 	EndIf;
-	AddInfo.Insert("TableName", TableName);
-	AddInfo.Insert("ColumnName", ColumnName);
-
+	NotifyParameters = New Structure();
+	NotifyParameters.Insert("TableName"   , TableName);
+	NotifyParameters.Insert("ColumnName"  , ColumnName);
+	NotifyParameters.Insert("CurrentData" , CurrentData[ColumnName]);
+	
 	If Not ValueIsFilled(Object.Ref) Or ThisObject.Modified Then
-		QuestionToUserNotify = New NotifyDescription("SetConditionNotify", ThisObject, AddInfo);
-		ShowQueryBox(QuestionToUserNotify, R().QuestionToUser_001, QuestionDialogMode.YesNo);
+		Notify = New NotifyDescription("SetConditionNotify", ThisObject, NotifyParameters);
+		ShowQueryBox(Notify, R().QuestionToUser_001, QuestionDialogMode.YesNo);
 	Else
-		SetConditionNotify(DialogReturnCode.Yes, AddInfo);
+		SetConditionNotify(DialogReturnCode.Yes, NotifyParameters);
 	EndIf;
 EndProcedure
 
 &AtClient
-Procedure SetConditionNotify(Result, AddInfo = Undefined) Export
+Procedure SetConditionNotify(Result, AdditionalParameters) Export
 	If Result = DialogReturnCode.Yes And Write() Then
-		CurrentRow = Items[AddInfo.TableName].CurrentData;
-		If CurrentRow = Undefined Then
-			Return;
-		EndIf;
-
-		AddInfo.Insert("Element", CurrentRow[AddInfo.ColumnName]);
-
-		Notify = New NotifyDescription("OnFinishEditFilter", ThisObject, AddInfo);
+		Notify = New NotifyDescription("OnFinishEditFilter", ThisObject, AdditionalParameters);
 		OpeningParameters = New Structure();
-		OpeningParameters.Insert("SavedSettings", GetSettings(CurrentRow[AddInfo.ColumnName], AddInfo));
+		OpeningParameters.Insert("SavedSettings", GetSettings(AdditionalParameters));
 		OpeningParameters.Insert("Ref", Object.Ref);
 		OpenForm("Catalog.AddAttributeAndPropertySets.Form.EditCondition", OpeningParameters, ThisObject, , , , Notify);
 	EndIf;
 EndProcedure
 
 &AtClient
-Procedure OnFinishEditFilter(Result, AddInfo = Undefined) Export
+Procedure OnFinishEditFilter(Result, AdditionalParameters) Export
 	If TypeOf(Result) = Type("Structure") Then
-		SaveSettings(AddInfo.Element, Result.Settings, AddInfo);
+		SaveSettings(AdditionalParameters, Result.Settings);
 	EndIf;
 EndProcedure
 
 &AtServer
-Function GetSettings(Element, AddInfo = Undefined)
-	Filter = New Structure(AddInfo.ColumnName, Element);
+Function GetSettings(Parameters)
+	Filter = New Structure(Parameters.ColumnName, Parameters.CurrentData);
 	CatalogObject = Object.Ref.GetObject();
-	ArrayOfRows = CatalogObject[AddInfo.TableName].FindRows(Filter);
+	ArrayOfRows = CatalogObject[Parameters.TableName].FindRows(Filter);
 	If ArrayOfRows.Count() Then
 		Return ArrayOfRows[0].Condition.Get();
 	Else
@@ -283,10 +281,10 @@ Function GetSettings(Element, AddInfo = Undefined)
 EndFunction
 
 &AtServer
-Procedure SaveSettings(Element, Settings, AddInfo = Undefined)
-	Filter = New Structure(AddInfo.ColumnName, Element);
+Procedure SaveSettings(Parameters, Settings)
+	Filter = New Structure(Parameters.ColumnName, Parameters.CurrentData);
 	CatalogObject = Object.Ref.GetObject();
-	ArrayOfRows = CatalogObject[AddInfo.TableName].FindRows(Filter);
+	ArrayOfRows = CatalogObject[Parameters.TableName].FindRows(Filter);
 	For Each Row In ArrayOfRows Do
 
 		SettingsIsSet = False;
@@ -313,44 +311,47 @@ Procedure SaveSettings(Element, Settings, AddInfo = Undefined)
 EndProcedure
 
 &AtClient
-Procedure CopyAttributesRow()
-	If CopiedAttribute.IsEmpty() Then
-		Return;
+Procedure CopyAttributesRow() Export
+	If ValueIsFilled(ThisObject.CopiedAttribute) Then
+		CopyAttributesPropertiesRowAtServer(New Structure("TableName, ColumnName",
+			"Attributes", "Attribute"));
 	EndIf;
-	AddInfo = New Structure();
-	AddInfo.Insert("TableName", "Attributes");
-	AddInfo.Insert("ColumnName", "Attribute");
-	CopyAttributesPropertiesRowAtServer(AddInfo);
 EndProcedure
 
 &AtClient
-Procedure CopyPropertiesRow()
-	If CopiedAttribute.IsEmpty() Then
-		Return;
+Procedure CopyPropertiesRow() Export
+	If ThisObject.CopiedAttribute.IsEmpty() Then
+		CopyAttributesPropertiesRowAtServer(New Structure("TableName, ColumnName",
+			"Properties", "Property"));
 	EndIf;
-	AddInfo = New Structure();
-	AddInfo.Insert("TableName", "Properties");
-	AddInfo.Insert("ColumnName", "Property");
-	CopyAttributesPropertiesRowAtServer(AddInfo);
+EndProcedure
+
+&AtClient
+Procedure CopyExtensionAttributesRow() Export
+	If ValueIsFilled(ThisObject.CopiedAttribute) Then
+		CopyAttributesPropertiesRowAtServer(New Structure("TableName, ColumnName",
+			"ExtensionAttributes", "Attribute"));
+	EndIf;
 EndProcedure
 
 &AtServer
-Procedure CopyAttributesPropertiesRowAtServer(AddInfo)
+Procedure CopyAttributesPropertiesRowAtServer(Parameters)
 	SourceFilter = New Structure();
-	SourceFilter.Insert(AddInfo.ColumnName, CopiedAttribute);
+	SourceFilter.Insert(Parameters.ColumnName, ThisObject.CopiedAttribute);
 	SourceFilter.Insert("Unprocessed", False);
-	FoundSourceRows = Object[AddInfo.TableName].FindRows(SourceFilter);
+	FoundSourceRows = Object[Parameters.TableName].FindRows(SourceFilter);
 
 	DestinationFilter = New Structure();
-	DestinationFilter.Insert(AddInfo.ColumnName, CopiedAttribute);
+	DestinationFilter.Insert(Parameters.ColumnName, ThisObject.CopiedAttribute);
 	DestinationFilter.Insert("Unprocessed", True);
-	FoundDestinationRows = Object[AddInfo.TableName].FindRows(DestinationFilter);
+	FoundDestinationRows = Object[Parameters.TableName].FindRows(DestinationFilter);
 
 	If FoundSourceRows.Count() And FoundDestinationRows.Count() Then
 		DestinationRow = FoundDestinationRows[0];
 		SourceRow = FoundSourceRows[0];
 		If IsBlankString(SourceRow.ConditionData) Then
-			ConditionData = GetSettings(SourceRow[AddInfo.ColumnName], AddInfo);
+			Parameters.Insert("CurrentData", SourceRow[Parameters.ColumnName]);
+			ConditionData = GetSettings(Parameters);
 			DestinationRow.ConditionData = CommonFunctionsServer.SerializeXMLUseXDTO(ConditionData);
 		Else
 			DestinationRow.ConditionData = SourceRow.ConditionData;
@@ -358,7 +359,7 @@ Procedure CopyAttributesPropertiesRowAtServer(AddInfo)
 		DestinationRow.Unprocessed = False;
 	EndIf;
 
-	CopiedAttribute = ChartsOfCharacteristicTypes.AddAttributeAndProperty.EmptyRef();
+	ThisObject.CopiedAttribute = ChartsOfCharacteristicTypes.AddAttributeAndProperty.EmptyRef();
 EndProcedure
 
 &AtServer

@@ -240,10 +240,6 @@ Scenario: _043610 check Cash receipt movements by the Register "R2021 Customer t
 			| 'Number'  |
 			| '1' |
 		And I select current line in "List" table
-		And I select current line in "PaymentList" table
-		And I click choice button of "Partner term" attribute in "PaymentList" table
-		And I select current line in "List" table
-		And I click "Post" button	
 	* Check movements by the Register  "R2021 Customer transactions" 
 		And I click "Registrations report" button
 		And I select "R2021 Customer transactions" exact value from "Register" drop-down list

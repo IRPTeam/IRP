@@ -139,7 +139,7 @@ Function JoinDocumentsStructure(ArrayOfTables)
 			NewRow.Insert("Agreement", RowPaymentList.Agreement);
 			NewRow.Insert("Partner", RowPaymentList.Partner);
 			NewRow.Insert("Payer", RowPaymentList.Payer);
-			NewRow.Insert("Amount", RowPaymentList.Amount);
+			NewRow.Insert("TotalAmount", RowPaymentList.Amount);
 			NewRow.Insert("AmountExchange", RowPaymentList.AmountExchange);
 			NewRow.Insert("PlaningTransactionBasis", RowPaymentList.PlaningTransactionBasis);
 			NewRow.Insert("FinancialMovementType", RowPaymentList.FinancialMovementType);

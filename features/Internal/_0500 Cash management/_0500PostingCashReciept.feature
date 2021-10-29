@@ -99,7 +99,7 @@ Scenario: _050001 create Cash receipt based on Sales invoice
 		Then the form attribute named "TransactionType" became equal to "Payment from customer"
 		Then the form attribute named "Currency" became equal to "TRY"
 		And "PaymentList" table contains lines
-			| 'Partner'   | 'Partner term'             | 'Amount'   | 'Payer'             | 'Basis document'   | 'Planning transaction basis' |
+			| 'Partner'   | 'Partner term'             | 'Total amount'   | 'Payer'             | 'Basis document'   | 'Planning transaction basis' |
 			| 'Ferron BP' | 'Basic Partner terms, TRY' | '4 350,00' | 'Company Ferron BP' | '$$SalesInvoice024001$$' | ''                          |
 		And in the table "PaymentList" I click "Edit currencies" button
 		And "CurrenciesTable" table became equal
@@ -119,7 +119,7 @@ Scenario: _050001 create Cash receipt based on Sales invoice
 		Then the form attribute named "TransactionType" became equal to "Payment from customer"
 		Then the form attribute named "Currency" became equal to "TRY"
 		And "PaymentList" table contains lines
-			| 'Partner'   | 'Partner term'             | 'Amount'   | 'Payer'             | 'Basis document'   | 'Planning transaction basis' |
+			| 'Partner'   | 'Partner term'             | 'Total amount'   | 'Payer'             | 'Basis document'   | 'Planning transaction basis' |
 			| 'Ferron BP' | 'Basic Partner terms, TRY' | '4 350,00' | 'Company Ferron BP' | '$$SalesInvoice024001$$' | ''                          |
 		And in the table "PaymentList" I click "Edit currencies" button
 		And "CurrenciesTable" table became equal
@@ -141,16 +141,16 @@ Scenario: _050001 create Cash receipt based on Sales invoice
 		And I activate "Basis document" field in "PaymentList" table
 		And I select current line in "PaymentList" table
 		And I go to line in "List" table
-			| 'Company'      | 'Amount' | 'Legal name'        | 'Partner'   |
-			| 'Main Company' | '11 099,93'       | 'Company Ferron BP' | 'Ferron BP' |
+			| 'Company'      | 'Amount'    | 'Legal name'        | 'Partner'   |
+			| 'Main Company' | '11 099,93' | 'Company Ferron BP' | 'Ferron BP' |
 		And I click "Select" button
 	* Change in payment amount
-		And I activate field named "PaymentListAmount" in "PaymentList" table
+		And I activate field named "PaymentListTotalAmount" in "PaymentList" table
 		And I select current line in "PaymentList" table
-		And I input "20 000,00" text in the field named "PaymentListAmount" of "PaymentList" table
+		And I input "20 000,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 		And I finish line editing in "PaymentList" table
 		And "PaymentList" table contains lines
-			| 'Partner'   | 'Partner term'                     | 'Amount'    | 'Payer'             | 'Basis document'  |
+			| 'Partner'   | 'Partner term'                     | 'Total amount'    | 'Payer'             | 'Basis document'  |
 			| 'Ferron BP' | 'Basic Partner terms, without VAT' | '20 000,00' | 'Company Ferron BP' | '$$SalesInvoice024008$$' |
 	And I close all client application windows
 
@@ -207,8 +207,8 @@ Scenario: _050001 create Cash receipt (independently)
 				| '4 350,00'         | 'Main Company' | 'Company Ferron BP' | 'Ferron BP' |
 			And I click "Select" button
 		* Filling in amount in a tabular part
-			And I activate "Amount" field in "PaymentList" table
-			And I input "100,00" text in "Amount" field of "PaymentList" table
+			And I activate "Total amount" field in "PaymentList" table
+			And I input "100,00" text in "Total amount" field of "PaymentList" table
 			And I finish line editing in "PaymentList" table
 		* Select movement type
 			And I activate "Financial movement type" field in "PaymentList" table
@@ -277,8 +277,8 @@ Scenario: _050001 create Cash receipt (independently)
 				| '4 250,00'        | 'Main Company' | 'Company Ferron BP' | 'Ferron BP' |
 			And I click "Select" button
 		* Filling in amount in a tabular part
-			And I activate "Amount" field in "PaymentList" table
-			And I input "100,00" text in "Amount" field of "PaymentList" table
+			And I activate "Total amount" field in "PaymentList" table
+			And I input "100,00" text in "Total amount" field of "PaymentList" table
 			And I finish line editing in "PaymentList" table
 		And I click the button named "FormPost"
 		And I delete "$$NumberCashReceipt0500012$$" variable
@@ -342,8 +342,8 @@ Scenario: _050001 create Cash receipt (independently)
 			And I click "Select" button
 		# temporarily
 		* Filling in amount in a tabular part
-			And I activate "Amount" field in "PaymentList" table
-			And I input "50,00" text in "Amount" field of "PaymentList" table
+			And I activate "Total amount" field in "PaymentList" table
+			And I input "50,00" text in "Total amount" field of "PaymentList" table
 			And I finish line editing in "PaymentList" table
 		And I click the button named "FormPost"
 		And I delete "$$NumberCashReceipt0500013$$" variable
@@ -429,7 +429,7 @@ Scenario: _050013 check the display of details on the form Cash receipt with the
 			| Kalipso |
 		And I select current line in "List" table
 		And "PaymentList" table contains lines
-		| # | Partner | Amount | Payer                | Basis document | Planning transaction basis |
+		| # | Partner | Total amount | Payer                | Basis document | Planning transaction basis |
 		| 1 | Kalipso | ''     | Company Kalipso    | ''             | ''                        |
 
 
@@ -449,11 +449,11 @@ Scenario: _050014 check the display of details on the form Cash receipt with the
 		And form attribute named "CurrencyExchange" is available
 	* And I check the display of the tabular part
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
-		And I input "100,00" text in "Amount" field of "PaymentList" table
+		And I input "100,00" text in "Total amount" field of "PaymentList" table
 		And I activate "Amount exchange" field in "PaymentList" table
 		And I input "2 000,00" text in "Amount exchange" field of "PaymentList" table
 		And "PaymentList" table contains lines
-			| '#' | 'Partner' | 'Amount' | 'Amount exchange' | 'Planning transaction basis' |
+			| '#' | 'Partner' | 'Total amount' | 'Amount exchange' | 'Planning transaction basis' |
 			| '1' | ''        | '100,00' | '2 000,00'        | ''                          |
 
 
@@ -473,12 +473,12 @@ Scenario: _050015 check the display of details on the form Cash receipt with the
 		And form attribute named "CurrencyExchange" is unavailable
 	* And I check the display of the tabular part
 		And in the table "PaymentList" I click the button named "PaymentListAdd"
-		And I input "100,00" text in "Amount" field of "PaymentList" table
+		And I input "100,00" text in "Total amount" field of "PaymentList" table
 		And I finish line editing in "PaymentList" table
 		If "PaymentList" table does not contain column named "Payer" Then
 		If "PaymentList" table does not contain column named "Partner" Then
 		And "PaymentList" table contains lines
-		| '#' | 'Amount' | 'Planning transaction basis' |
+		| '#' | 'Total amount' | 'Planning transaction basis' |
 		| '1' | '100,00' | ''                          |
 
 

@@ -157,8 +157,8 @@ Scenario: _060203 create Cash receipt (partner term with Ar details by partner t
 				| 'Description'              |
 				| 'Partner Kalipso Customer' |
 			And I select current line in "List" table
-			And I activate field named "PaymentListAmount" in "PaymentList" table
-			And I input "11 000,00" text in the field named "PaymentListAmount" of "PaymentList" table
+			And I activate field named "PaymentListTotalAmount" in "PaymentList" table
+			And I input "11 000,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 			And I finish line editing in "PaymentList" table
 		And I click the button named "FormPost"
 		And I delete "$$NumberCashReceipt060203$$" variable
@@ -214,8 +214,8 @@ Scenario: _0602031 create Bank receipt (partner term with Ar details by partner 
 				| 'Description'              |
 				| 'Partner Kalipso Customer' |
 			And I select current line in "List" table
-			And I activate field named "PaymentListAmount" in "PaymentList" table
-			And I input "11 000,00" text in the field named "PaymentListAmount" of "PaymentList" table
+			And I activate field named "PaymentListTotalAmount" in "PaymentList" table
+			And I input "11 000,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 			And I finish line editing in "PaymentList" table
 		And I click the button named "FormPost"
 		And I delete "$$NumberBankReceipt0602031$$" variable
@@ -351,8 +351,8 @@ Scenario: _060206 create Cash payment (partner term with Ap details by partner t
 				| 'Description'     |
 				| 'Vendor Ferron 1' |
 			And I select current line in "List" table
-			And I activate field named "PaymentListAmount" in "PaymentList" table
-			And I input "11 000,00" text in the field named "PaymentListAmount" of "PaymentList" table
+			And I activate field named "PaymentListTotalAmount" in "PaymentList" table
+			And I input "11 000,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 			And I finish line editing in "PaymentList" table
 			And I click the button named "FormPost"
 			And I delete "$$NumberCashPayment060206$$" variable
@@ -410,8 +410,8 @@ Scenario: _060208 create Bank payment (partner term with Ap details by partner t
 				| 'Description'                            |
 				| 'Vendor Ferron 1' |
 			And I select current line in "List" table
-			And I activate field named "PaymentListAmount" in "PaymentList" table
-			And I input "11 000,00" text in the field named "PaymentListAmount" of "PaymentList" table
+			And I activate field named "PaymentListTotalAmount" in "PaymentList" table
+			And I input "11 000,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 			And I finish line editing in "PaymentList" table
 			And I click the button named "FormPost"
 			And I delete "$$NumberBankPayment060208$$" variable

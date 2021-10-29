@@ -1,21 +1,106 @@
 #Region FormEvents
 
-Procedure AfterWriteAtClient(Object, Form, WriteParameters) Export
-	Return;
-EndProcedure
-
 Procedure OnOpen(Object, Form, Cancel, AddInfo = Undefined) Export
 	DocumentsClient.SetTextOfDescriptionAtForm(Object, Form);
 EndProcedure
 
-#EndRegion
-
-#Region FormItemsEvents
-
-Procedure DateOnChange(Object, Form, Item) Export
-	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
+Procedure AfterWriteAtClient(Object, Form, WriteParameters) Export
+	Return;
 EndProcedure
 
+#EndRegion
+
+#Region ItemDate
+
+Procedure DateOnChange(Object, Form, Item, AddInfo = Undefined) Export
+	DocumentsClient.DateOnChange(Object, Form, Thisobject, Item, Undefined, AddInfo);
+EndProcedure
+
+Procedure DateOnChangePutServerDataToAddInfo(Object, Form, AddInfo = Undefined) Export
+	DocumentsClient.DateOnChangePutServerDataToAddInfo(Object, Form, AddInfo);
+EndProcedure
+
+Function DateSettings(Object, Form, AddInfo = Undefined) Export
+	If AddInfo = Undefined Then
+		Return New Structure("PutServerDataToAddInfo", True);
+	EndIf;
+	
+	Settings = New Structure("Actions, ObjectAttributes, FormAttributes, CalculateSettings, AfterActionsCalculateSettings");
+	Actions = New Structure();
+	
+	Settings.Insert("TableName", "PaymentList");
+	Settings.Actions = Actions;
+	Settings.ObjectAttributes = "Company, Account";
+	Settings.FormAttributes = "";
+	
+	CalculateSettings = New Structure();
+	CalculateSettings.Insert("CalculateTaxByNetAmount");
+	CalculateSettings.Insert("CalculateTotalAmountByNetAmount");
+	Settings.CalculateSettings = CalculateSettings;
+	
+	AfterActionsCalculateSettings = New Structure();
+	Settings.AfterActionsCalculateSettings = AfterActionsCalculateSettings;
+	Return Settings;
+EndFunction
+
+#EndRegion
+
+#Region ItemCompany
+
+Procedure CompanyOnChange(Object, Form, Item, AddInfo = Undefined) Export
+	DocumentsClient.CompanyOnChange(Object, Form, ThisObject, Item, Undefined, AddInfo);
+EndProcedure
+
+Procedure CompanyOnChangePutServerDataToAddInfo(Object, Form, AddInfo = Undefined) Export
+	DocumentsClient.CompanyOnChangePutServerDataToAddInfo(Object, Form, AddInfo);
+EndProcedure
+
+Function CompanySettings(Object, Form, AddInfo = Undefined) Export
+	If AddInfo = Undefined Then
+		Return New Structure("PutServerDataToAddInfo", True);
+	EndIf;
+	
+	Settings = New Structure("Actions, ObjectAttributes, FormAttributes, CalculateSettings");
+	Actions = New Structure();
+	Actions.Insert("ChangeAccount", "ChangeAccount");
+	Settings.Insert("TableName", "PaymentList");
+	Settings.Actions = Actions;
+	Settings.ObjectAttributes = "Company, Account";
+	Settings.FormAttributes = "";
+	
+	CalculateSettings = New Structure();
+	CalculateSettings.Insert("CalculateTaxByNetAmount");
+	CalculateSettings.Insert("CalculateTotalAmountByNetAmount");
+	Settings.CalculateSettings = CalculateSettings;
+	
+	Settings.Insert("AccountType", PredefinedValue("Enum.CashAccountTypes.Bank"));
+	Return Settings;
+EndFunction
+
+Procedure CompanyStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
+	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
+
+	OpenSettings.ArrayOfFilters = New Array();
+	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True,
+		DataCompositionComparisonType.NotEqual));
+	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("OurCompany", True,
+		DataCompositionComparisonType.Equal));
+	OpenSettings.FillingData = New Structure("OurCompany", True);
+
+	DocumentsClient.CompanyStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
+EndProcedure
+
+Procedure CompanyEditTextChange(Object, Form, Item, Text, StandardProcessing) Export
+	ArrayOfFilters = New Array();
+	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
+	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("OurCompany", True, ComparisonType.Equal));
+	DocumentsClient.CompanyEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters);
+EndProcedure
+
+#EndRegion
+
+#Region ItemCurrency
+	
 Procedure CurrencyOnChange(Object, Form, Item) Export
 	Form.CurrentCurrency = Object.Currency;
 	AccountCurrency = ServiceSystemServer.GetObjectAttribute(Object.Account, "Currency");
@@ -25,6 +110,176 @@ Procedure CurrencyOnChange(Object, Form, Item) Export
 	EndIf;
 
 	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
+EndProcedure
+
+#EndRegion
+
+#Region NetAmount
+
+Procedure PaymentListNetAmountOnChange(Object, Form, Item = Undefined, CurrentRowData = Undefined, AddInfo = Undefined) Export
+	CurrentData = DocumentsClient.GetCurrentRowDataList(Form.Items.PaymentList, CurrentRowData);
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	DocumentsClient.ItemListCalculateRowAmounts_NetAmountChange(Object, Form, CurrentData, Item, ThisObject, AddInfo);
+EndProcedure
+
+Procedure ItemListNetAmountPutServerDataToAddInfo(Object, Form, CurrentData, AddInfo = Undefined) Export
+	DocumentsClient.ItemListNetAmountPutServerDataToAddInfo(Object, Form, CurrentData, AddInfo);
+EndProcedure
+
+#EndRegion
+
+#Region TotalAmount
+
+Procedure PaymentListTotalAmountOnChange(Object, Form, Item = Undefined, CurrentRowData = Undefined, AddInfo = Undefined) Export
+	CurrentData = DocumentsClient.GetCurrentRowDataList(Form.Items.PaymentList, CurrentRowData);
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	DocumentsClient.ItemListCalculateRowAmounts_TotalAmountChange(Object, Form, CurrentData, Item, ThisObject, AddInfo);
+EndProcedure
+
+Procedure ItemListTotalAmountPutServerDataToAddInfo(Object, Form, CurrentData, AddInfo = Undefined) Export
+	DocumentsClient.ItemListTotalAmountPutServerDataToAddInfo(Object, Form, CurrentData, AddInfo);
+EndProcedure
+
+#EndRegion
+
+#Region TaxAmount
+
+Procedure ItemListTaxAmountOnChange(Object, Form, Item = Undefined, CurrentRowData = Undefined, AddInfo = Undefined) Export
+	CurrentData = DocumentsClient.GetCurrentRowDataList(Form.Items.PaymentList, CurrentRowData);
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	DocumentsClient.ItemListCalculateRowAmounts_TaxAmountChange(Object, Form, CurrentData, Item, ThisObject, AddInfo);
+EndProcedure
+
+Procedure ItemListTaxAmountPutServerDataToAddInfo(Object, Form, CurrentData, AddInfo = Undefined) Export
+	DocumentsClient.ItemListTaxAmountPutServerDataToAddInfo(Object, Form, CurrentData, AddInfo);
+EndProcedure
+
+#EndRegion
+
+#Region TaxValue
+
+Procedure ItemListTaxValueOnChange(Object, Form, Item = Undefined, CurrentRowData = Undefined, AddInfo = Undefined) Export
+	CurrentData = DocumentsClient.GetCurrentRowDataList(Form.Items.PaymentList, CurrentRowData);
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	DocumentsClient.ItemListCalculateRowAmounts_TaxValueChange(Object, Form, CurrentData, Item, ThisObject, AddInfo);
+EndProcedure
+
+Procedure ItemListTaxValuePutServerDataToAddInfo(Object, Form, CurrentData, AddInfo = Undefined) Export
+	DocumentsClient.ItemListTaxValuePutServerDataToAddInfo(Object, Form, CurrentData, AddInfo);
+EndProcedure
+
+#EndRegion
+
+#Region PaymentList
+
+Procedure PaymentListSelection(Object, Form, Item, RowSelected, Field, StandardProcessing, AddInfo = Undefined) Export
+	If Upper(Field.Name) = Upper("PaymentListTaxAmount") Then
+		CurrentData = Form.Items.PaymentList.CurrentData;
+		If CurrentData <> Undefined Then
+			DocumentsClient.ItemListSelectionPutServerDataToAddInfo(Object, Form, AddInfo);
+			Parameters = New Structure();
+			Parameters.Insert("CurrentData", CurrentData);
+			Parameters.Insert("Item", Item);
+			Parameters.Insert("Field", Field);
+			TaxesClient.ChangeTaxAmount(Object, Form, Parameters, StandardProcessing, AddInfo);
+		EndIf;
+	EndIf;
+EndProcedure
+
+Procedure PaymentListOnStartEdit(Object, Form, Item, NewRow, Clone) Export
+	CurrentData = Form.Items.PaymentList.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+
+	If Clone Then
+		CurrentData.Key = New UUID();
+		Settings = New Structure();
+
+		Settings.Insert("Rows", New Array());
+		Settings.Rows.Add(CurrentData);
+
+		Settings.Insert("CalculateSettings", New Structure("CalculateTax, CalculateTotalAmount"));
+		CalculateItemsRows(Object, Form, Settings);
+		Return;
+	EndIf;
+EndProcedure
+
+Procedure PaymentListAfterDeleteRow(Object, Form, Item) Export
+	CalculationStringsClientServer.ClearDependentData(Object, New Structure("TableParent", "PaymentList"));
+EndProcedure
+
+Procedure PaymentListOnChange(Object, Form, Item) Export
+	For Each Row In Object.PaymentList Do
+		If Not ValueIsFilled(Row.Key) Then
+			Row.Key = New UUID();
+		EndIf;
+	EndDo;
+EndProcedure
+
+Procedure PaymentListOnActivateRow(Object, Form, Item) Export
+	Return;
+EndProcedure
+
+Procedure PaymentListBeforeAddRow(Object, Form, Item, Cancel, Clone, Parent, IsFolder, Parameter) Export
+	If Clone Then
+		Return;
+	EndIf;
+	Cancel = True;
+	NewRow = Object.PaymentList.Add();
+	Form.Items.PaymentList.CurrentRow = NewRow.GetID();
+	UserSettingsClient.FillingRowFromSettings(Object, "Object.PaymentList", NewRow, True);
+	Form.Items.PaymentList.ChangeRow();
+	PaymentListOnChange(Object, Form, Item);
+	If Not Saas.SeparationUsed() Then
+		NewRow.Partner = DocumentsServer.GetPartnerByLegalName(NewRow.Payee, NewRow.Partner);
+		PaymentListPartnerOnChange(Object, Form, Item);
+	EndIf;
+EndProcedure
+
+Procedure OnActiveCell(Object, Form, Item, Cancel = Undefined) Export
+	If Item.CurrentItem = Undefined Then
+		Return;
+	EndIf;
+
+	CurrentData = Item.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+
+	CanModify = True;
+
+	If Item.CurrentItem.Name = "PaymentListBasisDocument" Then
+
+		AgreementInfo = CatAgreementsServer.GetAgreementInfo(CurrentData.Agreement);
+		If Not AgreementInfo.ApArPostingDetail = PredefinedValue("Enum.ApArPostingDetail.ByDocuments") Then
+			CanModify = False;
+		EndIf;
+
+		If Cancel <> Undefined Then
+			If Not CanModify Then
+				Cancel = True;
+			EndIf;
+		Else
+			Item.CurrentItem.ReadOnly = Not CanModify;
+		EndIf;
+	EndIf;
+EndProcedure
+
+#EndRegion
+
+Procedure CalculateItemsRows(Object, Form, Settings, Item = Undefined, AddInfo = Undefined) Export
+	ArrayOfTaxInfo = TaxesClient.GetArrayOfTaxInfoFromServerData(Object, Form, AddInfo);
+	CalculationStringsClientServer.CalculateItemsRows(Object, Form, Settings.Rows, Settings.CalculateSettings, 
+		ArrayOfTaxInfo, AddInfo);
 EndProcedure
 
 #Region ItemTransactionType
@@ -80,47 +335,6 @@ EndProcedure
 
 #EndRegion
 
-#Region ItemCompany
-
-Procedure CompanyOnChange(Object, Form, Item) Export
-	DocumentsClient.CompanyOnChange(Object, Form, ThisObject, Item);
-EndProcedure
-
-Function CompanySettings(Object, Form, AddInfo = Undefined) Export
-	Settings = New Structure("Actions, ObjectAttributes, FormAttributes, CalculateSettings");
-	Actions = New Structure();
-	Actions.Insert("ChangeAccount", "ChangeAccount");
-	Settings.Insert("TableName", "PaymentList");
-	Settings.Actions = Actions;
-	Settings.ObjectAttributes = "Company, Account";
-	Settings.FormAttributes = "";
-	Settings.CalculateSettings = New Structure();
-	Settings.Insert("AccountType", PredefinedValue("Enum.CashAccountTypes.Bank"));
-	Return Settings;
-EndFunction
-
-Procedure CompanyStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
-	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
-
-	OpenSettings.ArrayOfFilters = New Array();
-	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True,
-		DataCompositionComparisonType.NotEqual));
-	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("OurCompany", True,
-		DataCompositionComparisonType.Equal));
-	OpenSettings.FillingData = New Structure("OurCompany", True);
-
-	DocumentsClient.CompanyStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
-EndProcedure
-
-Procedure CompanyEditTextChange(Object, Form, Item, Text, StandardProcessing) Export
-	ArrayOfFilters = New Array();
-	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
-	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("OurCompany", True, ComparisonType.Equal));
-	DocumentsClient.CompanyEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters);
-EndProcedure
-
-#EndRegion
-
 #Region ItemAccount
 
 Procedure AccountOnChange(Object, Form, Item = Undefined) Export
@@ -160,18 +374,18 @@ EndProcedure
 
 #EndRegion
 
-#Region ItemPaymentList
+#Region ItemBasisDocument
 
-Procedure PaymentListOnChange(Object, Form, Item) Export
-	For Each Row In Object.PaymentList Do
-		If Not ValueIsFilled(Row.Key) Then
-			Row.Key = New UUID();
-		EndIf;
-	EndDo;
-EndProcedure
+Procedure PaymentListBasisDocumentOnChange(Object, Form, Item) Export
+	CurrentData = Form.Items.PaymentList.CurrentData;
 
-Procedure PaymentListOnActivateRow(Object, Form, Item) Export
-	Return;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+
+	If Not ValueIsFilled(CurrentData.BasisDocument) Then
+		CurrentData.BasisDocument = Undefined;
+	EndIf;
 EndProcedure
 
 Procedure PaymentListBasisDocumentStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
@@ -190,8 +404,9 @@ Procedure PaymentListBasisDocumentStartChoice(Object, Form, Item, ChoiceData, St
 	Parameters.Filter.Insert("Company", Object.Company);
 
 	Parameters.Insert("FilterFromCurrentData", "Partner, Agreement");
-
-	Notify = New NotifyDescription("PaymentListBasisDocumentStartChoiceEnd", ThisObject, New Structure("Form", Form));
+	
+	NotifyParameters = New Structure("Object, Form", Object, Form);
+	Notify = New NotifyDescription("PaymentListBasisDocumentStartChoiceEnd", ThisObject, NotifyParameters);
 	Parameters.Insert("Notify", Notify);
 	Parameters.Insert("TableName", "DocumentsForOutgoingPayment");
 	Parameters.Insert("OpeningEntryTableName1", "AccountPayableByDocuments");
@@ -206,30 +421,28 @@ Procedure PaymentListBasisDocumentStartChoiceEnd(Result, AdditionalParameters) E
 		Return;
 	EndIf;
 	Form = AdditionalParameters.Form;
+	Object = AdditionalParameters.Object;
 	CurrentData = Form.Items.PaymentList.CurrentData;
 	If CurrentData <> Undefined Then
 		CurrentData.BasisDocument = Result.BasisDocument;
-		CurrentData.Amount        = Result.Amount;
-		DocumentsClient.CalculateTotalAmount(Form.Object, Form);
+		CurrentData.TotalAmount   = Result.Amount;
+		
+		Settings = New Structure();
+		Settings.Insert("Rows", New Array());
+		Settings.Rows.Add(CurrentData);
+		
+		CalculationSettings = New Structure();
+		CalculationSettings.Insert("CalculateTaxByTotalAmount");
+		CalculationSettings.Insert("CalculateNetAmountByTotalAmount");
+	
+		Settings.Insert("CalculateSettings", CalculationSettings);
+		CalculateItemsRows(Object, Form, Settings);
 	EndIf;
 EndProcedure
 
-Procedure PaymentListBeforeAddRow(Object, Form, Item, Cancel, Clone, Parent, IsFolder, Parameter) Export
-	If Clone Then
-		Return;
-	EndIf;
-	Cancel = True;
-	NewRow = Object.PaymentList.Add();
-	Form.Items.PaymentList.CurrentRow = NewRow.GetID();
-	UserSettingsClient.FillingRowFromSettings(Object, "Object.PaymentList", NewRow, True);
-	Form.Items.PaymentList.ChangeRow();
-	PaymentListOnChange(Object, Form, Item);
-	CurrentData = Form.Items.PaymentList.CurrentData;
-	If CurrentData <> Undefined And Not Saas.SeparationUsed() Then
-		CurrentData.Partner = DocumentsServer.GetPartnerByLegalName(CurrentData.Payee, CurrentData.Partner);
-		PaymentListPartnerOnChange(Object, Form, Item);
-	EndIf;
-EndProcedure
+#EndRegion
+
+#Region PlanningTransactionBasis
 
 Procedure PaymentListPlaningTransactionBasisOnChange(Object, Form, Item) Export
 	CurrentData = Form.Items.PaymentList.CurrentData;
@@ -245,8 +458,7 @@ Procedure PaymentListPlaningTransactionBasisOnChange(Object, Form, Item) Export
 		If Not ValueIsFilled(Object.Account) Then
 			Object.Account = CashTransferOrderInfo.Account;
 			If Object.TransactionType = PredefinedValue("Enum.OutgoingPaymentTransactionTypes.CurrencyExchange") Then
-				Object.TransitAccount = ServiceSystemServer.GetCompositeObjectAttribute(Object.Account,
-					"TransitAccount");
+				Object.TransitAccount = ServiceSystemServer.GetCompositeObjectAttribute(Object.Account,"TransitAccount");
 			EndIf;
 		EndIf;
 
@@ -264,7 +476,18 @@ Procedure PaymentListPlaningTransactionBasisOnChange(Object, Form, Item) Export
 			ArrayOfPlaningTransactionBasises, Object.Ref);
 		If ArrayOfBalance.Count() Then
 			RowOfBalance = ArrayOfBalance[0];
-			CurrentData.Amount = RowOfBalance.Amount;
+			CurrentData.TotalAmount = RowOfBalance.Amount;
+			
+			Settings = New Structure();
+			Settings.Insert("Rows", New Array());
+			Settings.Rows.Add(CurrentData);
+		
+			CalculationSettings = New Structure();
+			CalculationSettings.Insert("CalculateTaxByTotalAmount");
+			CalculationSettings.Insert("CalculateNetAmountByTotalAmount");
+	
+			Settings.Insert("CalculateSettings", CalculationSettings);
+			CalculateItemsRows(Object, Form, Settings);
 		EndIf;
 	EndIf;
 
@@ -322,34 +545,7 @@ Procedure TransactionBasisStartChoice(Object, Form, Item, ChoiceData, StandardPr
 	EndIf;
 EndProcedure
 
-Procedure OnActiveCell(Object, Form, Item, Cancel = Undefined) Export
-	If Item.CurrentItem = Undefined Then
-		Return;
-	EndIf;
-
-	CurrentData = Item.CurrentData;
-	If CurrentData = Undefined Then
-		Return;
-	EndIf;
-
-	CanModify = True;
-
-	If Item.CurrentItem.Name = "PaymentListBasisDocument" Then
-
-		AgreementInfo = CatAgreementsServer.GetAgreementInfo(CurrentData.Agreement);
-		If Not AgreementInfo.ApArPostingDetail = PredefinedValue("Enum.ApArPostingDetail.ByDocuments") Then
-			CanModify = False;
-		EndIf;
-
-		If Cancel <> Undefined Then
-			If Not CanModify Then
-				Cancel = True;
-			EndIf;
-		Else
-			Item.CurrentItem.ReadOnly = Not CanModify;
-		EndIf;
-	EndIf;
-EndProcedure
+#EndRegion
 
 #Region Partner
 
@@ -366,18 +562,23 @@ Procedure PaymentListPartnerOnChange(Object, Form, Item) Export
 
 	If ValueIsFilled(CurrentData.Partner) Then
 		CurrentData.Payee = DocumentsServer.GetLegalNameByPartner(CurrentData.Partner, CurrentData.Payee);
-
 		AgreementParameters = New Structure();
-		AgreementParameters.Insert("Partner", CurrentData.Partner);
-		AgreementParameters.Insert("Agreement", CurrentData.Agreement);
-		AgreementParameters.Insert("CurrentDate", Object.Date);
-		AgreementParameters.Insert("ArrayOfFilters", New Array());
+		AgreementParameters.Insert("Partner"        , CurrentData.Partner);
+		AgreementParameters.Insert("Agreement"      , CurrentData.Agreement);
+		AgreementParameters.Insert("CurrentDate"    , Object.Date);
+		AgreementParameters.Insert("ArrayOfFilters" , New Array());
 		AgreementParameters.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True,
 			ComparisonType.NotEqual));
 		NewAgreement = DocumentsServer.GetAgreementByPartner(AgreementParameters);
-		If Not CurrentData.Agreement = NewAgreement Then
+		If CurrentData.Agreement <> NewAgreement Then
 			CurrentData.Agreement = NewAgreement;
 			PaymentListAgreementOnChange(Object, Form);
+		Else
+			Settings = New Structure();
+			Settings.Insert("Rows", New Array());
+			Settings.Rows.Add(CurrentData);
+			Settings.Insert("CalculateSettings", New Structure("CalculateTax, CalculateTotalAmount"));
+			CalculateItemsRows(Object, Form, Settings);
 		EndIf;
 	EndIf;
 EndProcedure
@@ -411,45 +612,6 @@ EndProcedure
 
 #EndRegion
 
-#Region Payee
-
-Procedure PaymentListPayeeOnChange(Object, Form, Item) Export
-	CurrentData = Form.Items.PaymentList.CurrentData;
-	If ValueIsFilled(CurrentData.Payee) Then
-		CurrentData.Partner = DocumentsServer.GetPartnerByLegalName(CurrentData.Payee, CurrentData.Partner);
-	EndIf;
-EndProcedure
-
-Procedure PaymentListPayeeStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
-	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
-
-	OpenSettings.ArrayOfFilters = New Array();
-	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True,
-		DataCompositionComparisonType.NotEqual));
-	OpenSettings.FormParameters = New Structure();
-	If ValueIsFilled(Form.Items.PaymentList.CurrentData.Partner) Then
-		OpenSettings.FormParameters.Insert("Partner", Form.Items.PaymentList.CurrentData.Partner);
-		OpenSettings.FormParameters.Insert("FilterByPartnerHierarchy", True);
-	EndIf;
-	OpenSettings.FillingData = New Structure("Partner", Form.Items.PaymentList.CurrentData.Partner);
-
-	DocumentsClient.CompanyStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
-EndProcedure
-
-Procedure PaymentListPayeeEditTextChange(Object, Form, Item, Text, StandardProcessing) Export
-	ArrayOfFilters = New Array();
-	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
-	AdditionalParameters = New Structure();
-	If ValueIsFilled(Form.Items.PaymentList.CurrentData.Partner) Then
-		AdditionalParameters.Insert("Partner", Form.Items.PaymentList.CurrentData.Partner);
-		AdditionalParameters.Insert("FilterByPartnerHierarchy", True);
-	EndIf;
-	DocumentsClient.CompanyEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters,
-		AdditionalParameters);
-EndProcedure
-
-#EndRegion
-
 #Region Agreement
 
 Procedure PaymentListAgreementOnChange(Object, Form, Item = Undefined) Export
@@ -462,13 +624,17 @@ Procedure PaymentListAgreementOnChange(Object, Form, Item = Undefined) Export
 	AgreementInfo = CatAgreementsServer.GetAgreementInfo(CurrentData.Agreement);
 
 	CurrentData.ApArPostingDetail = AgreementInfo.ApArPostingDetail;
-	If Not AgreementInfo.ApArPostingDetail = PredefinedValue("Enum.ApArPostingDetail.ByDocuments") Then
+	If AgreementInfo.ApArPostingDetail <> PredefinedValue("Enum.ApArPostingDetail.ByDocuments") Then
 		CurrentData.BasisDocument = Undefined;
-	ElsIf Not CurrentData.BasisDocument = Undefined And Not ServiceSystemServer.GetObjectAttribute(
+	ElsIf CurrentData.BasisDocument <> Undefined And Not ServiceSystemServer.GetObjectAttribute(
 		CurrentData.BasisDocument, "Agreement") = CurrentData.Agreement Then
 		CurrentData.BasisDocument = Undefined;
 	EndIf;
-
+	Settings = New Structure();
+	Settings.Insert("Rows", New Array());
+	Settings.Rows.Add(CurrentData);
+	Settings.Insert("CalculateSettings", New Structure("CalculateTax, CalculateTotalAmount"));
+	CalculateItemsRows(Object, Form, Settings);
 EndProcedure
 
 Procedure AgreementStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
@@ -544,7 +710,42 @@ EndProcedure
 
 #EndRegion
 
-#EndRegion
+#Region Payee
+
+Procedure PaymentListPayeeOnChange(Object, Form, Item) Export
+	CurrentData = Form.Items.PaymentList.CurrentData;
+	If ValueIsFilled(CurrentData.Payee) Then
+		CurrentData.Partner = DocumentsServer.GetPartnerByLegalName(CurrentData.Payee, CurrentData.Partner);
+	EndIf;
+EndProcedure
+
+Procedure PaymentListPayeeStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
+	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
+
+	OpenSettings.ArrayOfFilters = New Array();
+	OpenSettings.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True,
+		DataCompositionComparisonType.NotEqual));
+	OpenSettings.FormParameters = New Structure();
+	If ValueIsFilled(Form.Items.PaymentList.CurrentData.Partner) Then
+		OpenSettings.FormParameters.Insert("Partner", Form.Items.PaymentList.CurrentData.Partner);
+		OpenSettings.FormParameters.Insert("FilterByPartnerHierarchy", True);
+	EndIf;
+	OpenSettings.FillingData = New Structure("Partner", Form.Items.PaymentList.CurrentData.Partner);
+
+	DocumentsClient.CompanyStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, OpenSettings);
+EndProcedure
+
+Procedure PaymentListPayeeEditTextChange(Object, Form, Item, Text, StandardProcessing) Export
+	ArrayOfFilters = New Array();
+	ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True, ComparisonType.NotEqual));
+	AdditionalParameters = New Structure();
+	If ValueIsFilled(Form.Items.PaymentList.CurrentData.Partner) Then
+		AdditionalParameters.Insert("Partner", Form.Items.PaymentList.CurrentData.Partner);
+		AdditionalParameters.Insert("FilterByPartnerHierarchy", True);
+	EndIf;
+	DocumentsClient.CompanyEditTextChange(Object, Form, Item, Text, StandardProcessing, ArrayOfFilters,
+		AdditionalParameters);
+EndProcedure
 
 #EndRegion
 
@@ -556,8 +757,6 @@ Procedure DescriptionClick(Object, Form, Item, StandardProcessing) Export
 EndProcedure
 
 #EndRegion
-
-#Region GroupTitle
 
 #Region GroupTitleDecorationsEvents
 
@@ -575,25 +774,6 @@ EndProcedure
 
 Procedure DecorationGroupTitleUncollapsedLabelClick(Object, Form, Item) Export
 	DocumentsClient.ChangeTitleCollapse(Object, Form, False);
-EndProcedure
-
-#EndRegion
-
-#EndRegion
-
-#Region Common
-
-Procedure PaymentListBasisDocumentOnChange(Object, Form, Item) Export
-	CurrentData = Form.Items.PaymentList.CurrentData;
-
-	If CurrentData = Undefined Then
-		Return;
-	EndIf;
-
-	If Not ValueIsFilled(CurrentData.BasisDocument) Then
-		CurrentData.BasisDocument = Undefined;
-	EndIf;
-
 EndProcedure
 
 #EndRegion

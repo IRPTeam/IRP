@@ -292,8 +292,8 @@ Scenario: _1000009 create Cash receipt and check Aging register movements
 				| 'Amount' | 'Company'      | 'Legal name'      | 'Partner' | 'Document'               |
 				| '550,00'          | 'Main Company' | 'Company Kalipso' | 'Kalipso' | '$$SalesInvoice0240162$$' |
 			And I click "Select" button
-			And I activate field named "PaymentListAmount" in "PaymentList" table
-			And I input "550,00" text in the field named "PaymentListAmount" of "PaymentList" table
+			And I activate field named "PaymentListTotalAmount" in "PaymentList" table
+			And I input "550,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 			And I finish line editing in "PaymentList" table
 		And I click the button named "FormPost"
 		And I delete "$$NumberCashReceipt1000009$$" variable
@@ -376,8 +376,8 @@ Scenario: _1000015 create Bank receipt and check Aging register movements
 					| 'Amount' | 'Company'      | 'Legal name'      | 'Partner' | 'Document'               |
 					| '550,00'          | 'Main Company' | 'Company Kalipso' | 'Kalipso' | '$$SalesInvoice024016$$' |
 				And I click "Select" button
-				And I activate field named "PaymentListAmount" in "PaymentList" table
-				And I input "200,00" text in the field named "PaymentListAmount" of "PaymentList" table
+				And I activate field named "PaymentListTotalAmount" in "PaymentList" table
+				And I input "200,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 				And I finish line editing in "PaymentList" table
 				And in the table "PaymentList" I click the button named "PaymentListAdd"
 				And I click choice button of "Partner" attribute in "PaymentList" table
@@ -385,7 +385,7 @@ Scenario: _1000015 create Bank receipt and check Aging register movements
 					| 'Description' |
 					| 'Kalipso'   |
 				And I select current line in "List" table
-				And I input "250,00" text in the field named "PaymentListAmount" of "PaymentList" table
+				And I input "250,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 			And I click the button named "FormPost"
 			And I delete "$$NumberBankReceipt1000015$$" variable
 			And I delete "$$BankReceipt1000015$$" variable
@@ -590,7 +590,7 @@ Scenario: _1000050 check the offset of Sales invoice advance (type of settlement
 					| 'Description' |
 					| 'Kalipso'   |
 				And I select current line in "List" table
-				And I input "80,00" text in the field named "PaymentListAmount" of "PaymentList" table
+				And I input "80,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 				And I finish line editing in "PaymentList" table
 			And I click the button named "FormPost"
 			And I delete "$$NumberBankReceipt1000050$$" variable
@@ -623,7 +623,7 @@ Scenario: _1000050 check the offset of Sales invoice advance (type of settlement
 					| 'Description' |
 					| 'Kalipso'   |
 				And I select current line in "List" table
-				And I input "50,00" text in the field named "PaymentListAmount" of "PaymentList" table
+				And I input "50,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 				And I finish line editing in "PaymentList" table
 			And I click the button named "FormPost"
 			And I delete "$$NumberCashReceipt1000050$$" variable
@@ -656,7 +656,7 @@ Scenario: _1000050 check the offset of Sales invoice advance (type of settlement
 					| 'Description' |
 					| 'Kalipso'   |
 				And I select current line in "List" table
-				And I input "550,00" text in the field named "PaymentListAmount" of "PaymentList" table
+				And I input "550,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 				And I finish line editing in "PaymentList" table
 			And I click the button named "FormPost"
 			And I delete "$$NumberBankReceipt10000501$$" variable
@@ -716,7 +716,7 @@ Scenario: _1000050 check the offset of Sales invoice advance (type of settlement
 					| 'Description' |
 					| 'Kalipso'   |
 				And I select current line in "List" table
-				And I input "550,00" text in the field named "PaymentListAmount" of "PaymentList" table
+				And I input "550,00" text in the field named "PaymentListTotalAmount" of "PaymentList" table
 				And I finish line editing in "PaymentList" table
 			And I click the button named "FormPost"
 			And I delete "$$NumberCashReceipt10000505$$" variable

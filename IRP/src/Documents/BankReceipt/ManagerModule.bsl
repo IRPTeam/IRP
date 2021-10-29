@@ -80,7 +80,7 @@ Function GetQueryTextBankReceiptPaymentList()
 		   |	BankReceiptPaymentList.Partner AS Partner,
 		   |	BankReceiptPaymentList.Payer AS Payer,
 		   |	BankReceiptPaymentList.Ref.Date AS Period,
-		   |	BankReceiptPaymentList.Amount AS Amount,
+		   |	BankReceiptPaymentList.TotalAmount AS Amount,
 		   |	BankReceiptPaymentList.AmountExchange AS AmountExchange,
 		   |	CASE
 		   |		WHEN VALUETYPE(BankReceiptPaymentList.PlaningTransactionBasis) = TYPE(Document.CashTransferOrder)
@@ -344,7 +344,7 @@ Function PaymentList()
 		   |	PaymentList.Partner AS Partner,
 		   |	PaymentList.Payer AS Payer,
 		   |	PaymentList.Ref.Date AS Period,
-		   |	PaymentList.Amount AS Amount,
+		   |	PaymentList.TotalAmount AS Amount,
 		   |	PaymentList.AmountExchange AS AmountExchange,
 		   |	CASE
 		   |		WHEN VALUETYPE(PaymentList.PlaningTransactionBasis) = TYPE(Document.CashTransferOrder)

@@ -5,12 +5,12 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	
 	CurrenciesClientServer.DeleteUnusedRowsFromCurrenciesTable(ThisObject.Currencies, ThisObject.PaymentList);
 	For Each Row In ThisObject.PaymentList Do
-		Parameters = CurrenciesClientServer.GetParameters_V1(ThisObject, Row);
+		Parameters = CurrenciesClientServer.GetParameters_V8(ThisObject, Row);
 		CurrenciesClientServer.DeleteRowsByKeyFromCurrenciesTable(ThisObject.Currencies, Row.Key);
 		CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
 	EndDo;
 	
-	ThisObject.DocumentAmount = ThisObject.PaymentList.Total("Amount");
+	ThisObject.DocumentAmount = ThisObject.PaymentList.Total("TotalAmount");
 EndProcedure
 
 Procedure OnWrite(Cancel)
@@ -53,14 +53,14 @@ Procedure Filling(FillingData, FillingText, StandardProcessing)
 EndProcedure
 
 Procedure Filling_BasedOn(FillingData)
-	ThisObject.Company = FillingData.Company;
-	ThisObject.Account = FillingData.Account;
-	ThisObject.TransitAccount = FillingData.TransitAccount;
-	ThisObject.Currency = FillingData.Currency;
+	ThisObject.Company         = FillingData.Company;
+	ThisObject.Account         = FillingData.Account;
+	ThisObject.TransitAccount  = FillingData.TransitAccount;
+	ThisObject.Currency        = FillingData.Currency;
 	ThisObject.TransactionType = FillingData.TransactionType;
 	For Each Row In FillingData.PaymentList Do
 		NewRow = ThisObject.PaymentList.Add();
 		FillPropertyValues(NewRow, Row);
 	EndDo;
-	ThisObject.DocumentAmount = ThisObject.PaymentList.Total("Amount");
+	ThisObject.DocumentAmount = ThisObject.PaymentList.Total("TotalAmount");
 EndProcedure

@@ -1231,6 +1231,8 @@ Procedure PickupItemsEnd(Result, AddInfo) Export
 
 		If Row.Property("Quantity") Then
 			Row.Quantity = Row.Quantity + ResultElement.Quantity;
+			Actions = New Structure("CalculateQuantityInBaseUnit");
+			CalculationStringsClientServer.CalculateItemsRow(Object, Row, Actions);
 		ElsIf Row.Property("PhysCount") And Row.Property("Difference") Then
 			Row.PhysCount = Row.PhysCount + ResultElement.Quantity;
 			Row.Difference = Row.PhysCount - Row.ExpCount;

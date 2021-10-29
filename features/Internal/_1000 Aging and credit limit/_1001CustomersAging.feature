@@ -777,3 +777,88 @@ Scenario: _1000050 check the offset of Sales invoice advance (type of settlement
 				| '$$SalesInvoice024016$$'  | 'TRY'      | 'Main Company' | ''       | 'Kalipso' | '550,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '*'            | ''                                                       |
 				| '$$SalesInvoice024016$$'  | 'TRY'      | 'Main Company' | ''       | 'Kalipso' | '550,00' | 'Basic Partner terms, without VAT' | '$$SalesInvoice024016$$'  | '*'            | 'Customers advance closing 4 dated 21.04.2021 12:00:00' |
 			And I close all client application windows	
+
+Scenario: _1000055 check Aging sum when delete row from SI
+	* Create SI
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.SalesInvoice" 
+		And I click the button named "FormCreate" 
+		* Filling in customer information
+			And I click Select button of "Partner" field 
+			And I go to line in "List" table 
+					| 'Description' |
+					| 'Kalipso'     |
+			And I select current line in "List" table 
+			And I click Select button of "Partner term" field 
+			And I go to line in "List" table 
+					| 'Description'                      |
+					| 'Basic Partner terms, without VAT' |
+			And I select current line in "List" table 
+		* Select store
+			And I click Select button of "Store" field 
+			And I go to line in "List" table 
+					| 'Description' |
+					| 'Store 01'    |
+			And I select current line in "List" table 
+			And I click Select button of "Legal name" field 
+			And I activate "Description" field in "List" table 
+			And I select current line in "List" table 
+		* Filling in items table
+			And in the table "ItemList" I click the button named "ItemListAdd" 
+			And I click choice button of "Item" attribute in "ItemList" table 
+			And I go to line in "List" table 
+					| 'Description' |
+					| 'Dress'       |
+			And I select current line in "List" table 
+			And I activate "Item key" field in "ItemList" table 
+			And I click choice button of "Item key" attribute in "ItemList" table 
+			And I go to line in "List" table 
+					| 'Item key' |
+					| 'L/Green'  |
+			And I select current line in "List" table 
+			And I activate "Q" field in "ItemList" table 
+			And I input "1,000" text in "Q" field of "ItemList" table 
+			And I finish line editing in "ItemList" table 
+			And I activate field named "ItemListItemKey" in "ItemList" table
+			And in the table "ItemList" I click the button named "ItemListContextMenuCopy"
+			And I go to line in "ItemList" table 
+					|'#'| 'Item' |
+					|'2'| 'Dress'       |
+			And I activate "Price" field in "ItemList" table
+			And I input "900,00" text in "Price" field of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And "PaymentTerms" table contains lines
+				| 'Amount'   | 'Calculation type'     | 'Due period, days' | 'Proportion of payment' |
+				| '1 612,00' | 'Post-shipment credit' | '14'               | '100,00'                |			
+		* Delete first string and check Aging sum
+			And I go to line in "ItemList" table 
+				|'#'| 'Item' |
+				|'1'| 'Dress'       |
+			And in the table "ItemList" I click the button named "ItemListContextMenuDelete"
+			And "PaymentTerms" table contains lines
+				| 'Amount'   | 'Calculation type'     | 'Due period, days' | 'Proportion of payment' |
+				| '1 062,00' | 'Post-shipment credit' | '14'               | '100,00'                |	
+		* Add string and check aging sum
+			And I go to line in "ItemList" table 
+				|'#'| 'Item' |
+				|'1'| 'Dress'       |
+			And in the table "ItemList" I click the button named "ItemListContextMenuCopy"
+			And "PaymentTerms" table contains lines
+				| 'Amount'   | 'Calculation type'     | 'Due period, days' | 'Proportion of payment' |
+				| '2 124,00' | 'Post-shipment credit' | '14'               | '100,00'                |
+		* Post SI, delete string and check aging sum
+			And I click "Post" button			
+			And I go to line in "ItemList" table 
+				|'#'| 'Item' |
+				|'1'| 'Dress'       |
+			And in the table "ItemList" I click the button named "ItemListContextMenuDelete"
+			And "PaymentTerms" table contains lines
+				| 'Amount'   | 'Calculation type'     | 'Due period, days' | 'Proportion of payment' |
+				| '1 062,00' | 'Post-shipment credit' | '14'               | '100,00'                |
+			And I close all client application windows
+			
+
+						
+
+			
+						

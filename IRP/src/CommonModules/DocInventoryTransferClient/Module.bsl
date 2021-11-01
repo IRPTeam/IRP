@@ -47,6 +47,58 @@ Procedure DescriptionClick(Object, Form, Item, StandardProcessing) Export
 	CommonFormActions.EditMultilineText(Item.Name, Form);
 EndProcedure
 
+#Region PickUpItems
+
+Procedure OpenPickupItems(Object, Form, Command) Export
+	NotifyParameters = New Structure();
+	NotifyParameters.Insert("Object", Object);
+	NotifyParameters.Insert("Form", Form);
+	NotifyDescription = New NotifyDescription("PickupItemsEnd", DocInventoryTransferClient, NotifyParameters);
+	OpenFormParameters = New Structure();
+	StoreArray = New Array();
+	StoreArray.Add(Object.StoreSender);
+	ReceiverStoreArray = New Array();
+	ReceiverStoreArray.Add(Object.StoreReceiver);
+
+	If Not StoreArray.Count() And ValueIsFilled(Form.CurrentStore) Then
+		StoreArray.Add(Form.CurrentStore);
+	EndIf;
+
+	If Command.AssociatedTable <> Undefined Then
+		OpenFormParameters.Insert("AssociatedTableName", Command.AssociatedTable.Name);
+		OpenFormParameters.Insert("Object", Object);
+	EndIf;
+
+	OpenFormParameters.Insert("Stores", StoreArray);
+	OpenFormParameters.Insert("ReceiverStores", ReceiverStoreArray);
+	OpenFormParameters.Insert("EndPeriod", CommonFunctionsServer.GetCurrentSessionDate());
+	OpenForm("CommonForm.PickUpItems", OpenFormParameters, Form, , , , NotifyDescription);
+EndProcedure
+
+Procedure PickupItemsEnd(Result, AdditionalParameters) Export
+	If Not ValueIsFilled(Result) Or Not AdditionalParameters.Property("Object") 
+		Or Not AdditionalParameters.Property("Form") Then
+		Return;
+	EndIf;
+
+	FilterString = "Item, ItemKey, Unit";
+	FilterStructure = New Structure(FilterString);
+	For Each ResultElement In Result Do
+		FillPropertyValues(FilterStructure, ResultElement);
+		ExistingRows = AdditionalParameters.Object.ItemList.FindRows(FilterStructure);
+		If ExistingRows.Count() Then
+			Row = ExistingRows[0];
+		Else
+			Row = AdditionalParameters.Object.ItemList.Add();
+			FillPropertyValues(Row, ResultElement, FilterString);
+		EndIf;
+		Row.Quantity = Row.Quantity + ResultElement.Quantity;
+	EndDo;
+	ItemListOnChange(AdditionalParameters.Object, AdditionalParameters.Form);
+EndProcedure
+
+#EndRegion
+
 Procedure ItemListAfterDeleteRow(Object, Form, Item) Export
 	DocumentsClient.ItemListAfterDeleteRow(Object, Form, Item);
 EndProcedure
@@ -151,14 +203,6 @@ Procedure StoreReceiverOnChange(Object, Form, Item) Export
 	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 EndProcedure
 
-#Region PickUpItems
-
-Procedure OpenPickupItems(Object, Form, Command) Export
-	DocumentsClient.OpenPickupItems(Object, Form, Command);
+Procedure SearchByBarcode(Barcode, Object, Form, DocumentClientModule = Undefined, PriceType = Undefined, AddInfo = Undefined) Export
+	DocumentsClient.SearchByBarcode(Barcode, Object, Form, DocumentClientModule, PriceType, AddInfo);
 EndProcedure
-
-Procedure SearchByBarcode(Barcode, Object, Form) Export
-	DocumentsClient.SearchByBarcode(Barcode, Object, Form);
-EndProcedure
-
-#EndRegion

@@ -251,67 +251,67 @@ Scenario: _150003 check that the current prices are displayed in the Item
 	* Open price report (tab Price info)
 		And In this window I click command interface button "Price info"
 		Then "Result" spreadsheet document is equal by template
-			| 'Prices on*'       | ''          | ''                  | ''                       | ''                        | ''                    | ''                    | ''                       |
-			| ''                 | ''          | ''                  | ''                       | ''                        | ''                    | ''                    | ''                       |
-			| 'Item'             | 'Item Key'  | 'Basic Price Types' | ''                       | 'Basic Price without VAT' | ''                    | 'Dependent Price New' | ''                       |
-			| ''                 | ''          | 'Price'             | 'Reason'                 | 'Price'                   | 'Reason'              | 'Price'               | 'Reason'                 |
-			| 'Dress'            | 'S/Yellow'  | '550'               | 'Item key = S/Yellow'    | '466,1'                   | 'Item key = S/Yellow' | '605'                 | 'Item key = S/Yellow'    |
-			| 'Dress'            | 'XS/Blue'   | '520'               | 'Item key = XS/Blue'     | '440,68'                  | 'Item key = XS/Blue'  | '572'                 | 'Item key = XS/Blue'     |
-			| 'Dress'            | 'M/White'   | '520'               | 'Item key = M/White'     | '440,68'                  | 'Item key = M/White'  | '572'                 | 'Item key = M/White'     |
-			| 'Dress'            | 'L/Green'   | '550'               | 'Item key = L/Green'     | '466,1'                   | 'Item key = L/Green'  | '605'                 | 'Item key = L/Green'     |
-			| 'Dress'            | 'XL/Green'  | '550'               | 'Item key = XL/Green'    | '466,1'                   | 'Item key = XL/Green' | '605'                 | 'Item key = XL/Green'    |
-			| 'Dress'            | 'Dress/A-8' | '3 000'             | 'SpecificationDress/A-8' | ''                        | ''                    | '3 300'               | 'SpecificationDress/A-8' |
-			| 'Dress'            | 'XXL/Red'   | '700'               | 'Item = Dress'           | ''                        | ''                    | ''                    | ''                      |
-			| 'Dress'            | 'M/Brown'   | '700'               | 'Item = Dress'           | ''                        | ''                    | ''                    | ''                      |
-			| ''                 | ''          | ''                  | ''                       | ''                        | ''                    | ''                    | ''                       |
-			| 'All prices'       | ''          | ''                  | ''                       | ''                        | ''                    | ''                    | ''                       |
-			| ''                 | ''          | ''                  | ''                       | ''                        | ''                    | ''                    | ''                       |
-			| 'Item'             | 'Item Key'  | 'Basic Price Types' | ''                       | 'Basic Price without VAT' | ''                    | 'Dependent Price New' | ''                       |
-			| ''                 | ''          | ''                  | ''                       | ''                        | ''                    | ''                    | ''                       |
-			| '1. By item keys'  | ''          | ''                  | ''                       | ''                        | ''                    | ''                    | ''                       |
-			| 'Dress'            | 'S/Yellow'  | '550'               | ''                       | '466,1'                   | ''                    | '605'                 | ''                       |
-			| 'Dress'            | 'XS/Blue'   | '520'               | ''                       | '440,68'                  | ''                    | '572'                 | ''                       |
-			| 'Dress'            | 'M/White'   | '520'               | ''                       | '440,68'                  | ''                    | '572'                 | ''                       |
-			| 'Dress'            | 'L/Green'   | '550'               | ''                       | '466,1'                   | ''                    | '605'                 | ''                       |
-			| 'Dress'            | 'XL/Green'  | '550'               | ''                       | '466,1'                   | ''                    | '605'                 | ''                       |
-			| '2. By properties' | ''          | ''                  | ''                       | ''                        | ''                    | ''                    | ''                       |
-			| 'Dress'            | 'S/Yellow'  | '300'               | ''                       | ''                        | ''                    | ''                    | ''                       |
-			| 'Dress'            | 'L/Green'   | '350'               | ''                       | ''                        | ''                    | ''                    | ''                       |
-			| '3. By items'      | ''          | ''                  | ''                       | ''                        | ''                    | ''                    | ''                       |
-			| 'Dress'            | 'S/Yellow'  | '700'               | ''                       | ''                        | ''                    | ''                    | ''                       |
-			| 'Dress'            | 'XS/Blue'   | '700'               | ''                       | ''                        | ''                    | ''                    | ''                       |
-			| 'Dress'            | 'M/White'   | '700'               | ''                       | ''                        | ''                    | ''                    | ''                       |
-			| 'Dress'            | 'L/Green'   | '700'               | ''                       | ''                        | ''                    | ''                    | ''                       |
-			| 'Dress'            | 'XL/Green'  | '700'               | ''                       | ''                        | ''                    | ''                    | ''                       |
-			| 'Dress'            | 'XXL/Red'   | '700'               | ''                       | ''                        | ''                    | ''                    | ''                       |
-			| 'Dress'            | 'M/Brown'   | '700'               | ''                       | ''                        | ''                    | ''                    | ''                       |
+			| 'Prices on*'       | ''          | ''                  | ''                          | ''                        | ''                    | ''                    | ''                          |
+			| ''                 | ''          | ''                  | ''                          | ''                        | ''                    | ''                    | ''                          |
+			| 'Item'             | 'Item Key'  | 'Basic Price Types' | ''                          | 'Basic Price without VAT' | ''                    | 'Dependent Price New' | ''                          |
+			| ''                 | ''          | 'Price'             | 'Reason'                    | 'Price'                   | 'Reason'              | 'Price'               | 'Reason'                    |
+			| 'Dress'            | 'S/Yellow'  | '550'               | 'Item key = S/Yellow'       | '466,1'                   | 'Item key = S/Yellow' | '605'                 | 'Item key = S/Yellow'       |
+			| 'Dress'            | 'XS/Blue'   | '520'               | 'Item key = XS/Blue'        | '440,68'                  | 'Item key = XS/Blue'  | '572'                 | 'Item key = XS/Blue'        |
+			| 'Dress'            | 'M/White'   | '520'               | 'Item key = M/White'        | '440,68'                  | 'Item key = M/White'  | '572'                 | 'Item key = M/White'        |
+			| 'Dress'            | 'L/Green'   | '550'               | 'Item key = L/Green'        | '466,1'                   | 'Item key = L/Green'  | '605'                 | 'Item key = L/Green'        |
+			| 'Dress'            | 'XL/Green'  | '550'               | 'Item key = XL/Green'       | '466,1'                   | 'Item key = XL/Green' | '605'                 | 'Item key = XL/Green'       |
+			| 'Dress'            | 'Dress/A-8' | '3 000'             | 'Specification = Dress/A-8' | ''                        | ''                    | '3 300'               | 'Specification = Dress/A-8' |
+			| 'Dress'            | 'XXL/Red'   | '700'               | 'Item = Dress'              | ''                        | ''                    | ''                    | ''                          |
+			| 'Dress'            | 'M/Brown'   | '700'               | 'Item = Dress'              | ''                        | ''                    | ''                    | ''                          |
+			| ''                 | ''          | ''                  | ''                          | ''                        | ''                    | ''                    | ''                          |
+			| 'All prices'       | ''          | ''                  | ''                          | ''                        | ''                    | ''                    | ''                          |
+			| ''                 | ''          | ''                  | ''                          | ''                        | ''                    | ''                    | ''                          |
+			| 'Item'             | 'Item Key'  | 'Basic Price Types' | ''                          | 'Basic Price without VAT' | ''                    | 'Dependent Price New' | ''                          |
+			| ''                 | ''          | ''                  | ''                          | ''                        | ''                    | ''                    | ''                          |
+			| '1. By item keys'  | ''          | ''                  | ''                          | ''                        | ''                    | ''                    | ''                          |
+			| 'Dress'            | 'S/Yellow'  | '550'               | ''                          | '466,1'                   | ''                    | '605'                 | ''                          |
+			| 'Dress'            | 'XS/Blue'   | '520'               | ''                          | '440,68'                  | ''                    | '572'                 | ''                          |
+			| 'Dress'            | 'M/White'   | '520'               | ''                          | '440,68'                  | ''                    | '572'                 | ''                          |
+			| 'Dress'            | 'L/Green'   | '550'               | ''                          | '466,1'                   | ''                    | '605'                 | ''                          |
+			| 'Dress'            | 'XL/Green'  | '550'               | ''                          | '466,1'                   | ''                    | '605'                 | ''                          |
+			| '2. By properties' | ''          | ''                  | ''                          | ''                        | ''                    | ''                    | ''                          |
+			| 'Dress'            | 'S/Yellow'  | '300'               | ''                          | ''                        | ''                    | ''                    | ''                          |
+			| 'Dress'            | 'L/Green'   | '350'               | ''                          | ''                        | ''                    | ''                    | ''                          |
+			| '3. By items'      | ''          | ''                  | ''                          | ''                        | ''                    | ''                    | ''                          |
+			| 'Dress'            | 'S/Yellow'  | '700'               | ''                          | ''                        | ''                    | ''                    | ''                          |
+			| 'Dress'            | 'XS/Blue'   | '700'               | ''                          | ''                        | ''                    | ''                    | ''                          |
+			| 'Dress'            | 'M/White'   | '700'               | ''                          | ''                        | ''                    | ''                    | ''                          |
+			| 'Dress'            | 'L/Green'   | '700'               | ''                          | ''                        | ''                    | ''                    | ''                          |
+			| 'Dress'            | 'XL/Green'  | '700'               | ''                          | ''                        | ''                    | ''                    | ''                          |
+			| 'Dress'            | 'XXL/Red'   | '700'               | ''                          | ''                        | ''                    | ''                    | ''                          |
+			| 'Dress'            | 'M/Brown'   | '700'               | ''                          | ''                        | ''                    | ''                    | ''                          |
 		* Check to display the current prices at an earlier date
 			And I input "12.12.2019" text in "on date" field
 			And I click "Refresh" button
 			Then "Result" spreadsheet document is equal by template
-			| 'Prices on 12.12.2019' | ''          | ''                  | ''                       | ''                        | ''                    |
-			| ''                     | ''          | ''                  | ''                       | ''                        | ''                    |
-			| 'Item'                 | 'Item Key'  | 'Basic Price Types' | ''                       | 'Basic Price without VAT' | ''                    |
-			| ''                     | ''          | 'Price'             | 'Reason'                 | 'Price'                   | 'Reason'              |
-			| 'Dress'                | 'S/Yellow'  | '550'               | 'Item key = S/Yellow'    | '466,1'                   | 'Item key = S/Yellow' |
-			| 'Dress'                | 'XS/Blue'   | '520'               | 'Item key = XS/Blue'     | '440,68'                  | 'Item key = XS/Blue'  |
-			| 'Dress'                | 'M/White'   | '520'               | 'Item key = M/White'     | '440,68'                  | 'Item key = M/White'  |
-			| 'Dress'                | 'L/Green'   | '550'               | 'Item key = L/Green'     | '466,1'                   | 'Item key = L/Green'  |
-			| 'Dress'                | 'XL/Green'  | '550'               | 'Item key = XL/Green'    | '466,1'                   | 'Item key = XL/Green' |
-			| 'Dress'                | 'Dress/A-8' | '3 000'             | 'SpecificationDress/A-8' | ''                        | ''                    |
-			| ''                     | ''          | ''                  | ''                       | ''                        | ''                    |
-			| 'All prices'           | ''          | ''                  | ''                       | ''                        | ''                    |
-			| ''                     | ''          | ''                  | ''                       | ''                        | ''                    |
-			| 'Item'                 | 'Item Key'  | 'Basic Price Types' | ''                       | 'Basic Price without VAT' | ''                    |
-			| ''                     | ''          | ''                  | ''                       | ''                        | ''                    |
-			| '1. By item keys'      | ''          | ''                  | ''                       | ''                        | ''                    |
-			| 'Dress'                | 'S/Yellow'  | '550'               | ''                       | '466,1'                   | ''                    |
-			| 'Dress'                | 'XS/Blue'   | '520'               | ''                       | '440,68'                  | ''                    |
-			| 'Dress'                | 'M/White'   | '520'               | ''                       | '440,68'                  | ''                    |
-			| 'Dress'                | 'L/Green'   | '550'               | ''                       | '466,1'                   | ''                    |
-			| 'Dress'                | 'XL/Green'  | '550'               | ''                       | '466,1'                   | ''                    |
-			| '2. By properties'     | ''          | ''                  | ''                       | ''                        | ''                    |
-			| '3. By items'          | ''          | ''                  | ''                       | ''                        | ''                    |
+			| 'Prices on 12.12.2019' | ''          | ''                  | ''                          | ''                        | ''                    |
+			| ''                     | ''          | ''                  | ''                          | ''                        | ''                    |
+			| 'Item'                 | 'Item Key'  | 'Basic Price Types' | ''                          | 'Basic Price without VAT' | ''                    |
+			| ''                     | ''          | 'Price'             | 'Reason'                    | 'Price'                   | 'Reason'              |
+			| 'Dress'                | 'S/Yellow'  | '550'               | 'Item key = S/Yellow'       | '466,1'                   | 'Item key = S/Yellow' |
+			| 'Dress'                | 'XS/Blue'   | '520'               | 'Item key = XS/Blue'        | '440,68'                  | 'Item key = XS/Blue'  |
+			| 'Dress'                | 'M/White'   | '520'               | 'Item key = M/White'        | '440,68'                  | 'Item key = M/White'  |
+			| 'Dress'                | 'L/Green'   | '550'               | 'Item key = L/Green'        | '466,1'                   | 'Item key = L/Green'  |
+			| 'Dress'                | 'XL/Green'  | '550'               | 'Item key = XL/Green'       | '466,1'                   | 'Item key = XL/Green' |
+			| 'Dress'                | 'Dress/A-8' | '3 000'             | 'Specification = Dress/A-8' | ''                        | ''                    |
+			| ''                     | ''          | ''                  | ''                          | ''                        | ''                    |
+			| 'All prices'           | ''          | ''                  | ''                          | ''                        | ''                    |
+			| ''                     | ''          | ''                  | ''                          | ''                        | ''                    |
+			| 'Item'                 | 'Item Key'  | 'Basic Price Types' | ''                          | 'Basic Price without VAT' | ''                    |
+			| ''                     | ''          | ''                  | ''                          | ''                        | ''                    |
+			| '1. By item keys'      | ''          | ''                  | ''                          | ''                        | ''                    |
+			| 'Dress'                | 'S/Yellow'  | '550'               | ''                          | '466,1'                   | ''                    |
+			| 'Dress'                | 'XS/Blue'   | '520'               | ''                          | '440,68'                  | ''                    |
+			| 'Dress'                | 'M/White'   | '520'               | ''                          | '440,68'                  | ''                    |
+			| 'Dress'                | 'L/Green'   | '550'               | ''                          | '466,1'                   | ''                    |
+			| 'Dress'                | 'XL/Green'  | '550'               | ''                          | '466,1'                   | ''                    |
+			| '2. By properties'     | ''          | ''                  | ''                          | ''                        | ''                    |
+			| '3. By items'          | ''          | ''                  | ''                          | ''                        | ''                    |
 
 
 

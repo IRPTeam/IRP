@@ -659,13 +659,19 @@ Function QueryByItemPriceInfo(ItemList, Period, AddInfo = Undefined) Export
 	Return QuerySelection;
 EndFunction
 
-Function ItemUnitInfo(ItemKey) Export
-	If ValueIsFilled(ItemKey) Then
-		If ValueIsFilled(ItemKey.Unit) Then
-			Return New Structure("Unit", ItemKey.Unit);
-		EndIf;
-		If ValueIsFilled(ItemKey.Item) Then
-			Return New Structure("Unit", ItemKey.Item.Unit);
+Function ItemUnitInfo(ItemKeyOrItem) Export
+	If ValueIsFilled(ItemKeyOrItem) Then
+		If TypeOf(ItemKeyOrItem) = Type("CatalogRef.Items") Then
+			Return New Structure("Unit", ItemKeyOrItem.Unit);
+		ElsIf TypeOf(ItemKeyOrItem) = Type("CatalogRef.ItemKeys") Then
+			If ValueIsFilled(ItemKeyOrItem.Unit) Then
+				Return New Structure("Unit", ItemKeyOrItem.Unit);
+			EndIf;
+			If ValueIsFilled(ItemKeyOrItem.Item) Then
+				Return New Structure("Unit", ItemKeyOrItem.Item.Unit);
+			EndIf;
+		Else
+			Raise "Unsupported type";
 		EndIf;
 	EndIf;
 	Return New Structure("Unit", Undefined);

@@ -310,6 +310,8 @@ Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
 				NewItemKeyListRow.ItemKey = ItemData.ItemKey;
 				NewItemKeyListRow.Item = ItemData.Item;
 				NewItemKeyListRow.Key = New UUID();
+				UnitInfo = GetItemInfo.ItemUnitInfo(ItemData.ItemKey);
+				NewItemKeyListRow.InputUnit = UnitInfo.Unit;
 				Items.ItemKeyList.CurrentRow = NewItemKeyListRow.GetID();
 			EndIf;
 		ElsIf Object.PriceListType = PredefinedValue("Enum.PriceListTypes.PriceByItems") Then
@@ -319,14 +321,15 @@ Procedure SearchByBarcodeEnd(Result, AdditionalParameters) Export
 			Else
 				NewItemListRow = Object.ItemList.Add();
 				NewItemListRow.Item = ItemData.Item;
+				UnitInfo = GetItemInfo.ItemUnitInfo(ItemData.Item);
+				NewItemListRow.InputUnit = UnitInfo.Unit;
 				Items.ItemList.CurrentRow = NewItemListRow.GetID();
 			EndIf;
 		Else
 			Return;
 		EndIf;
 	Else
-		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().S_019, StrConcat(AdditionalParameters.Barcodes,
-			",")));
+		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().S_019, StrConcat(AdditionalParameters.Barcodes, ",")));
 	EndIf;
 EndProcedure
 #EndRegion

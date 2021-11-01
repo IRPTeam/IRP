@@ -56,6 +56,7 @@
   <defaultObjectForm>Catalog.CashAccounts.Form.ItemForm</defaultObjectForm>
   <defaultListForm>Catalog.CashAccounts.Form.ListForm</defaultListForm>
   <defaultChoiceForm>Catalog.CashAccounts.Form.ChoiceForm</defaultChoiceForm>
+  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
   <attributes uuid="f853a165-64c1-427c-8e98-e23be321eafb">
     <name>Currency</name>
     <synonym>

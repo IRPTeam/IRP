@@ -1616,9 +1616,16 @@ Scenario: check the barcode search in the sales documents + price and tax fillin
 	And I input "2202283705" text in "InputFld" field
 	And I click "OK" button
 	* Check adding an items and filling in the price in the tabular part
+		And I click "Show row key" button		
 		And "ItemList" table contains lines
-			| 'Item'  | 'Price'  | 'Item key' |'Q'     | 'Unit' | 'Total amount' |
-			|'Dress' |'520,00' | 'XS/Blue'  |'1,000' | 'pcs'  | '520,00'       |
+			| 'Item'  | 'Price'  | 'Item key' | 'Q'     | 'Unit' | 'Total amount' | 'Quantity in base unit' |
+			| 'Dress' | '520,00' | 'XS/Blue'  | '1,000' | 'pcs'  | '520,00'       | '1,000'                |
+		And in the table "ItemList" I click "SearchByBarcode" button
+		And I input "2202283705" text in "InputFld" field
+		And I click "OK" button
+		And "ItemList" table contains lines
+			| 'Item'  | 'Price'  | 'Item key' | 'Q'     | 'Unit' | 'Total amount' | 'Quantity in base unit' |
+			| 'Dress' | '520,00' | 'XS/Blue'  | '2,000' | 'pcs'  | '1 040,00'       | '2,000'                |
 	And I close all client application windows
 
 Scenario: check the barcode search on the return documents
@@ -1632,9 +1639,16 @@ Scenario: check the barcode search on the return documents
 	And I input "2202283705" text in "InputFld" field
 	And I click "OK" button
 	* Check the items adding
+		And I click "Show row key" button
 		And "ItemList" table contains lines
-			| 'Item'  | 'Item key' |'Q'     | 'Unit' |
-			|'Dress' | 'XS/Blue' |'1,000' | 'pcs'  |
+			| 'Item'  | 'Item key' | 'Q'     | 'Unit' | 'Quantity in base unit' |
+			| 'Dress' | 'XS/Blue'  | '1,000' | 'pcs'  | '1,000'                 |
+		And I click "SearchByBarcode" button
+		And I input "2202283705" text in "InputFld" field
+		And I click "OK" button
+		And "ItemList" table contains lines
+			| 'Item'  | 'Item key' | 'Q'     | 'Unit' | 'Quantity in base unit' |
+			| 'Dress' | 'XS/Blue'  | '2,000' | 'pcs'  | '2,000'                 |
 	And I close all client application windows
 
 
@@ -1649,9 +1663,16 @@ Scenario: check the barcode search in the purchase/purchase returns
 	And I input "2202283713" text in "InputFld" field
 	And I click "OK" button
 	* Check adding an items and filling in the price in the tabular part
+		And I click "Show row key" button
 		And "ItemList" table contains lines
-			| 'Item'  |'Item key' |'Q'     | 'Unit' |
-			|'Dress' |'S/Yellow'  |'1,000' | 'pcs'  |
+			| 'Item'  |'Item key' |'Q'     | 'Unit' | 'Quantity in base unit' |
+			|'Dress' |'S/Yellow'  |'1,000' | 'pcs'  | '1,000'                 |
+		And I click the button named "SearchByBarcode"
+		And I input "2202283713" text in "InputFld" field
+		And I click "OK" button
+		And "ItemList" table contains lines
+			| 'Item'  |'Item key' |'Q'     | 'Unit' | 'Quantity in base unit' |
+			|'Dress' |'S/Yellow'  |'2,000' | 'pcs'  | '2,000'                 |
 	And I close all client application windows
 
 Scenario: check the barcode search in storage operations documents	
@@ -1660,9 +1681,16 @@ Scenario: check the barcode search in storage operations documents
 	And I input "2202283713" text in "InputFld" field
 	And I click "OK" button
 	* Check adding an items and filling in the price in the tabular part
+		And I click "Show row key" button
 		And "ItemList" table contains lines
-			| 'Item'    |'Item key'     | 'Unit' |
-			|'Dress'    |'S/Yellow'  | 'pcs'  |
+			| 'Item'  | 'Item key' | 'Unit' | 'Quantity' | 'Quantity in base unit' |
+			| 'Dress' | 'S/Yellow' | 'pcs'  | '1,000'    | '1,000'                 |
+		And in the table "ItemList" I click the button named "SearchByBarcode"
+		And I input "2202283713" text in "InputFld" field
+		And I click "OK" button
+		And "ItemList" table contains lines
+			| 'Item'  | 'Item key' | 'Unit' | 'Quantity' | 'Quantity in base unit' |
+			| 'Dress' | 'S/Yellow' | 'pcs'  | '2,000'    | '2,000'                 |
 	And I close all client application windows
 	
 	
@@ -1675,9 +1703,16 @@ Scenario: check the barcode search in the product bundling documents
 	And I input "2202283713" text in "InputFld" field
 	And I click "OK" button
 	* Check adding an items and filling in the price in the tabular part
+		And I click "Show row key" button
 		And "ItemList" table contains lines
-			| 'Item'  |'Item key' |'Quantity'     | 'Unit' |
-			|'Dress' |'S/Yellow'  |'1,000' | 'pcs'  |
+			| 'Item'  | 'Item key' | 'Quantity' | 'Unit' | 'Quantity in base unit' |
+			| 'Dress' | 'S/Yellow' | '1,000'    | 'pcs'  | '1,000'                 |
+		And in the table "ItemList" I click "SearchByBarcode" button
+		And I input "2202283713" text in "InputFld" field
+		And I click "OK" button
+		And "ItemList" table contains lines
+			| 'Item'  | 'Item key' | 'Quantity' | 'Unit' | 'Quantity in base unit' |
+			| 'Dress' | 'S/Yellow' | '2,000'    | 'pcs'  | '2,000'                 |
 	And I close all client application windows
 
 Scenario: check the barcode search in the PhysicalInventory documents
@@ -1686,9 +1721,16 @@ Scenario: check the barcode search in the PhysicalInventory documents
 	And I input "2202283713" text in "InputFld" field
 	And I click "OK" button
 	* Check adding an items and filling in tabular part
+		And I click "Show row key" button
 		And "ItemList" table contains lines
-			| 'Item'    |'Item key'     | 'Unit' |
-			|'Dress' |'S/Yellow'  | 'pcs'  |
+			| 'Item'  | 'Item key' | 'Unit' | 'Phys. count' | 
+			| 'Dress' | 'S/Yellow' | 'pcs'  | '1,000'       |
+		And I click "SearchByBarcode" button
+		And I input "2202283713" text in "InputFld" field
+		And I click "OK" button
+		And "ItemList" table contains lines
+			| 'Item'  | 'Item key' | 'Unit' | 'Phys. count' |
+			| 'Dress' | 'S/Yellow' | 'pcs'  | '2,000'       |
 	And I close all client application windows
 
 Scenario: check the barcode search in the Item stock adjustment
@@ -1697,8 +1739,15 @@ Scenario: check the barcode search in the Item stock adjustment
 	And I input "2202283713" text in "InputFld" field
 	And I click "OK" button
 	* Check adding an items and filling in the price in the tabular part
+		And I click "Show row key" button
 		And "ItemList" table contains lines
-			| 'Item' |'Item key (surplus)'     | 'Unit' |
-			|'Dress' |'S/Yellow'               | 'pcs'  |
+			| 'Item' |'Item key (surplus)'     | 'Unit' | 'Quantity' | 'Quantity in base unit' |
+			|'Dress' |'S/Yellow'               | 'pcs'  | '1,000'    | '1,000'                 |
+		And I click "SearchByBarcode" button
+		And I input "2202283713" text in "InputFld" field
+		And I click "OK" button
+		And "ItemList" table contains lines
+			| 'Item' |'Item key (surplus)'     | 'Unit' | 'Quantity' | 'Quantity in base unit' |
+			|'Dress' |'S/Yellow'               | 'pcs'  | '2,000'    | '2,000'                 |
 	And I close all client application windows
 	

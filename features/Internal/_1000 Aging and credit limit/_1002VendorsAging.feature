@@ -682,3 +682,84 @@ Scenario: _1020050 check the offset of Purchase invoice advance (type of settlem
 				| '$$DatePurchaseInvoice0240164$$' | '$$PurchaseInvoice0240164$$' | 'TRY'      | 'Main Company' | ''       | 'Ferron BP' | '4 000,00' | 'Vendor Ferron, TRY' | '$$PurchaseInvoice0240164$$' | '$$DatePaymentTermsPurchaseInvoiceAging$$' | ''                                                     |
 				| '$$DateCashPayment10000505$$'    | '$$CashPayment10000505$$'    | 'TRY'      | 'Main Company' | ''       | 'Ferron BP' | '4 000,00' | 'Vendor Ferron, TRY' | '$$PurchaseInvoice0240164$$' | '$$DatePaymentTermsPurchaseInvoiceAging$$' | 'Vendors advances closing 4 dated 28.04.2021 22:00:00' |
 			And I close all client application windows	
+
+
+Scenario: _1000055 check Aging sum when delete row from PI
+	* Create PI
+		And I close all client application windows
+		Given I open hyperlink "e1cib/list/Document.PurchaseInvoice" 
+		And I click the button named "FormCreate" 
+		* Filling in customer information
+			And I click Select button of "Partner" field 
+			And I go to line in "List" table 
+					| 'Description' |
+					| 'Ferron BP'     |
+			And I select current line in "List" table 
+			And I click Select button of "Partner term" field 
+			And I go to line in "List" table 
+					| 'Description'                      |
+					| 'Vendor Ferron, TRY' |
+			And I select current line in "List" table 
+		* Select store
+			And I click Select button of "Store" field 
+			And I go to line in "List" table 
+					| 'Description' |
+					| 'Store 02'    |
+			And I select current line in "List" table 
+			And I click Select button of "Legal name" field 
+			And I activate "Description" field in "List" table 
+			And I select current line in "List" table 
+		* Filling in items table
+			And in the table "ItemList" I click the button named "ItemListAdd" 
+			And I click choice button of "Item" attribute in "ItemList" table 
+			And I go to line in "List" table 
+					| 'Description' |
+					| 'Dress'       |
+			And I select current line in "List" table 
+			And I activate "Item key" field in "ItemList" table 
+			And I click choice button of "Item key" attribute in "ItemList" table 
+			And I go to line in "List" table 
+					| 'Item key' |
+					| 'L/Green'  |
+			And I select current line in "List" table 
+			And I activate "Q" field in "ItemList" table 
+			And I input "1,000" text in "Q" field of "ItemList" table 
+			And I input "900,00" text in "Price" field of "ItemList" table 
+			And I finish line editing in "ItemList" table 
+			And I activate field named "ItemListItemKey" in "ItemList" table
+			And in the table "ItemList" I click the button named "ItemListContextMenuCopy"
+			And I go to line in "ItemList" table 
+					|'#'| 'Item' |
+					|'2'| 'Dress'       |
+			And I activate "Price" field in "ItemList" table
+			And I input "600,00" text in "Price" field of "ItemList" table
+			And I finish line editing in "ItemList" table
+			And "PaymentTerms" table contains lines
+				| 'Amount'   | 'Calculation type'     | 'Due period, days' | 'Proportion of payment' |
+				| '1 500,00' | 'Post-shipment credit' | '7'               | '100,00'                |			
+		* Delete first string and check Aging sum
+			And I go to line in "ItemList" table 
+				|'#'| 'Item' |
+				|'1'| 'Dress'       |
+			And in the table "ItemList" I click the button named "ItemListContextMenuDelete"
+			And "PaymentTerms" table contains lines
+				| 'Amount' | 'Calculation type'     | 'Due period, days' | 'Proportion of payment' |
+				| '600,00' | 'Post-shipment credit' | '7'                | '100,00'                |
+		* Add string and check aging sum
+			And I go to line in "ItemList" table 
+				|'#'| 'Item' |
+				|'1'| 'Dress'       |
+			And in the table "ItemList" I click the button named "ItemListContextMenuCopy"
+			And "PaymentTerms" table contains lines
+				| 'Amount'   | 'Calculation type'     | 'Due period, days' | 'Proportion of payment' |
+				| '1 200,00' | 'Post-shipment credit' | '7'                | '100,00'                |
+		* Post PI, delete string and check aging sum
+			And I click "Post" button			
+			And I go to line in "ItemList" table 
+				|'#'| 'Item' |
+				|'1'| 'Dress'       |
+			And in the table "ItemList" I click the button named "ItemListContextMenuDelete"
+			And "PaymentTerms" table contains lines
+				| 'Amount' | 'Calculation type'     | 'Due period, days' | 'Proportion of payment' |
+				| '600,00' | 'Post-shipment credit' | '7'                | '100,00'                |
+			And I close all client application windows

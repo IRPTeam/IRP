@@ -86,9 +86,16 @@ Scenario: _300706 barcode check in Purchase invoice
 	And I input "2202283713" text in "InputFld" field
 	And I click "OK" button
 	* Check adding an items and filling in the price in the tabular part
+		And I click "Show row key" button
 		And "ItemList" table contains lines
-			| 'Item'  |'Item key' |'Q'     | 'Unit' |
-			| 'Dress' |'S/Yellow'  |'1,000' | 'pcs'  |
+			| 'Item'  | 'Item key' | 'Q'     | 'Unit' | 'Quantity in base unit' |
+			| 'Dress' | 'S/Yellow' | '1,000' | 'pcs'  | '1,000'                 |
+		And I click "SearchByBarcode" button
+		And I input "2202283713" text in "InputFld" field
+		And I click "OK" button
+		And "ItemList" table contains lines
+			| 'Item'  | 'Item key' | 'Q'     | 'Unit' | 'Quantity in base unit' |
+			| 'Dress' | 'S/Yellow' | '2,000' | 'pcs'  | '2,000'                 |
 	And I close all client application windows
 
 Scenario: _300707 barcode check in Purchase return order
@@ -143,7 +150,18 @@ Scenario: _300720 barcode check in PhysicalInventory
 
 Scenario: _300721 barcode check in PhysicalCountByLocation
 	Given I open hyperlink "e1cib/list/Document.PhysicalCountByLocation"
-	When check the barcode search in storage operations documents
+	And I click the button named "FormCreate"
+	And in the table "ItemList" I click the button named "SearchByBarcode"
+	And I input "2202283713" text in "InputFld" field
+	And I click "OK" button
+	And in the table "ItemList" I click the button named "SearchByBarcode"
+	And I input "2202283713" text in "InputFld" field
+	And I click "OK" button
+	And "ItemList" table became equal
+		| '#' | 'Exp. count' | 'Item'  | 'Item key' | 'Unit' | 'Difference' | 'Phys. count' |
+		| '1' | ''           | 'Dress' | 'S/Yellow' | 'pcs'  | '2,000'      | '2,000'       |
+	And I close all client application windows
+
 
 Scenario: _300722 barcode check in Item stock adjustment
 	Given I open hyperlink "e1cib/list/Document.ItemStockAdjustment"

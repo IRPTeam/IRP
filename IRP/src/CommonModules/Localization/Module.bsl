@@ -709,7 +709,7 @@ Function Strings(Lang) Export
 	Strings.Insert("QuestionToUser_019", NStr("en = 'Do you want to update payment term?'", Lang));
 	Strings.Insert("QuestionToUser_020", NStr("en = 'Do you want to overwrite saved option?'", Lang));
 	Strings.Insert("QuestionToUser_021", NStr("en = 'Do you want to close this form? All changes will be lost.'", Lang));
-	Strings.Insert("QuestionToUser_022", NStr("en = 'Do you want to upload this files: '", Lang) + Chars.LF + "%1");
+	Strings.Insert("QuestionToUser_022", NStr("en = 'Do you want to upload this files'", Lang) + ": " + Chars.LF + "%1");
 #EndRegion
 
 #Region SuggestionToUser
@@ -788,6 +788,13 @@ Function Strings(Lang) Export
 
 #Region SalesOrderStatusReport
 	Strings.Insert("SOR_1", NStr("en = 'Not enough items in free stock'", Lang));
+#EndRegion
+
+#Region Report
+	Strings.Insert("R_001", NStr("en = 'Item key'", Lang) + " = ");
+	Strings.Insert("R_002", NStr("en = 'Property'", Lang) + " = ");
+	Strings.Insert("R_003", NStr("en = 'Item'", Lang) + " = ");
+	Strings.Insert("R_004", NStr("en = 'Specification'", Lang) + " = ");
 #EndRegion
 
 	Return Strings;

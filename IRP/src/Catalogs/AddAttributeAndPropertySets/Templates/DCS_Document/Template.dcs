@@ -9,6 +9,12 @@
 		<field xsi:type="DataSetFieldField">
 			<dataPath>Ref</dataPath>
 			<field>Ref</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Ref</v8:content>
+				</v8:item>
+			</title>
 		</field>
 		<dataSource>DataSource1</dataSource>
 		<query>SELECT 

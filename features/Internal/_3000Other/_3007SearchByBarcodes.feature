@@ -177,16 +177,16 @@ Scenario: _300723 barcode check in Price list
 			And I input "2202283713" text in "InputFld" field
 			And I click "OK" button
 			And "ItemKeyList" table contains lines
-				| 'Item'  | 'Item key' | 'Price' |
-				| 'Dress' | 'S/Yellow' | ''      |
+				| 'Item'  | 'Item key' | 'Price' | 'Input unit' |
+				| 'Dress' | 'S/Yellow' | ''      | 'pcs'      |
 		* Add second string
 			And I click the button named "SearchByBarcode"
 			And I input "978020137962" text in "InputFld" field
 			And I click "OK" button
 			And "ItemKeyList" table contains lines
-				| 'Item'  | 'Item key' | 'Price' |
-				| 'Dress' | 'S/Yellow' | ''      |
-				| 'Boots' | '37/18SD'  | ''      |
+				| 'Item'  | 'Item key' | 'Price' | 'Input unit' |
+				| 'Dress' | 'S/Yellow' | ''      | 'pcs'      |
+				| 'Boots' | '37/18SD'  | ''      | 'pcs'      |
 		* Check active string when scan the same item
 			And I go to line in "ItemKeyList" table
 				| 'Item'  | 'Item key' |
@@ -195,8 +195,8 @@ Scenario: _300723 barcode check in Price list
 			And I input "2202283713" text in "InputFld" field
 			And I click "OK" button
 			And the current line of "ItemKeyList" table is equal to
-				| 'Item'  | 'Item key' | 'Price' |
-				| 'Dress' | 'S/Yellow' | ''      |
+				| 'Item'  | 'Item key' | 'Price' | 'Input unit' |
+				| 'Dress' | 'S/Yellow' | ''      | 'pcs'      |
 			And I close all client application windows
 	* By item
 		Given I open hyperlink "e1cib/list/Document.PriceList"
@@ -207,16 +207,16 @@ Scenario: _300723 barcode check in Price list
 			And I input "2202283713" text in "InputFld" field
 			And I click "OK" button
 			And "ItemList" table contains lines
-				| 'Item'  | 'Price' |
-				| 'Dress' | ''      |
+				| 'Item'  | 'Price' | 'Input unit' |
+				| 'Dress' | ''      | 'pcs'      |
 		* Add second string
 			And I click the button named "SearchByBarcodeItem"
 			And I input "978020137962" text in "InputFld" field
 			And I click "OK" button
 			And "ItemList" table contains lines
-				| 'Item'  | 'Price' |
-				| 'Dress' | ''      |
-				| 'Boots' | ''      |
+				| 'Item'  | 'Price' | 'Input unit' |
+				| 'Dress' | ''      | 'pcs'      |
+				| 'Boots' | ''      | 'pcs'      |
 		* Check active string when scan the same item
 			And I go to line in "ItemList" table
 				| 'Item'  |
@@ -225,8 +225,8 @@ Scenario: _300723 barcode check in Price list
 			And I input "2202283713" text in "InputFld" field
 			And I click "OK" button
 			And the current line of "ItemList" table is equal to
-				| 'Item'  | 'Price' |
-				| 'Dress' | ''      |
+				| 'Item'  | 'Price' | 'Input unit' |
+				| 'Dress' | ''      | 'pcs'      |
 		And I close all client application windows
 		
 		

@@ -40,7 +40,8 @@ Procedure AddAttributesFromExtensions(Form, MetaTypeOrRef, ItemElement = Undefin
 	EndIf;
 
 	ObjectMetadata = Metadata.FindByType(TypeOf(MetaTypeOrRef));
-	AttributesList = Catalogs.AddAttributeAndPropertySets.GetExtensionAttributesListByObjectMetadata(ObjectMetadata);
+	AttributesList = Catalogs.AddAttributeAndPropertySets.GetExtensionAttributesListByObjectMetadata(ObjectMetadata,
+		MetaTypeOrRef);
 	FormGroups = AddAttributesAndPropertiesServer.FormGroups(AttributesList);
 	If ElementParent <> Undefined Then
 		For Each FormGroup In FormGroups Do

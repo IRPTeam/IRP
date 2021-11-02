@@ -1,6 +1,5 @@
 #Region Public
 
-//
 Procedure SynchronizeItemKeysAttributes() Export
 	Query = New Query();
 	Query.Text =
@@ -17,7 +16,6 @@ Procedure SynchronizeItemKeysAttributes() Export
 	SynchronizeAttributes(Catalogs.AddAttributeAndPropertySets.Catalog_ItemKeys, ArrayOfAttributes);
 EndProcedure
 
-//
 Procedure SynchronizePriceKeysAttributes() Export
 	Query = New Query();
 	Query.Text =
@@ -35,21 +33,21 @@ Procedure SynchronizePriceKeysAttributes() Export
 	SynchronizeAttributes(Catalogs.AddAttributeAndPropertySets.Catalog_PriceKeys, ArrayOfAttributes);
 EndProcedure
 
-//
-Function GetExtensionAttributesListByObjectMetadata(ObjectMetadata) Export
-	ObjectDataName = StrReplace(ObjectMetadata.FullName(), ".", "_");
+Function GetExtensionAttributesListByObjectMetadata(ObjectMetadata, Ref) Export
+	PredefinedDataName = StrReplace(ObjectMetadata.FullName(), ".", "_");
 
 	Query = New Query();
-	Query.Text = "SELECT
-				 |	AddAttributeAndPropertySets.Ref,
-				 |	AddAttributeAndPropertySets.PredefinedDataName
-				 |FROM
-				 |	Catalog.AddAttributeAndPropertySets AS AddAttributeAndPropertySets
-				 |WHERE
-				 |	AddAttributeAndPropertySets.Predefined";
+	Query.Text =
+	"SELECT
+	|	AddAttributeAndPropertySets.Ref,
+	|	AddAttributeAndPropertySets.PredefinedDataName
+	|FROM
+	|	Catalog.AddAttributeAndPropertySets AS AddAttributeAndPropertySets
+	|WHERE
+	|	AddAttributeAndPropertySets.Predefined";
 	PredefinedAddAttributeAndPropertySets = Query.Execute().Unload();
 	PredefinedNameFilter = New Structure();
-	PredefinedNameFilter.Insert("PredefinedDataName", ObjectDataName);
+	PredefinedNameFilter.Insert("PredefinedDataName", PredefinedDataName);
 	FoundRefs = PredefinedAddAttributeAndPropertySets.FindRows(PredefinedNameFilter);
 	If FoundRefs.Count() Then
 		AddAttributeAndPropertySetRef = FoundRefs[0].Ref;
@@ -62,20 +60,56 @@ Function GetExtensionAttributesListByObjectMetadata(ObjectMetadata) Export
 		AttributeNames.Add(Attribute.Name);
 	EndDo;
 	Query = New Query();
-	Query.Text = "SELECT
-				 |	ExtensionAttributes.Attribute AS Attribute,
-				 |	ExtensionAttributes.InterfaceGroup,
-				 |	ExtensionAttributes.Required,
-				 |	ExtensionAttributes.ShowInHTML
-				 |FROM
-				 |	Catalog.AddAttributeAndPropertySets.ExtensionAttributes AS ExtensionAttributes
-				 |WHERE
-				 |	ExtensionAttributes.Show
-				 |	AND ExtensionAttributes.Attribute IN (&AttributeNames)
-				 |	AND ExtensionAttributes.Ref = &AddAttributeAndPropertySetRef";
-	Query.SetParameter("AttributeNames", AttributeNames);
-	Query.SetParameter("AddAttributeAndPropertySetRef", AddAttributeAndPropertySetRef);
-	Return Query.Execute().Unload();
+	Query.Text = 
+	"SELECT
+	|	ExtensionAttributes.Attribute AS Attribute,
+	|	ExtensionAttributes.InterfaceGroup,
+	|	ExtensionAttributes.Required,
+	|	ExtensionAttributes.ShowInHTML,
+	|	ExtensionAttributes.IsConditionSet,
+	|	ExtensionAttributes.Condition
+	|FROM
+	|	Catalog.AddAttributeAndPropertySets.ExtensionAttributes AS ExtensionAttributes
+	|WHERE
+	|	ExtensionAttributes.Show
+	|	AND ExtensionAttributes.Attribute IN (&AttributeNames)
+	|	AND ExtensionAttributes.Ref = &AddAttributeAndPropertySetRef";
+	Query.SetParameter("AttributeNames"                , AttributeNames);
+	Query.SetParameter("AddAttributeAndPropertySetRef" , AddAttributeAndPropertySetRef);
+	QueryResult = Query.Execute();
+	QueryTable = QueryResult.Unload();
+	
+	ArrayForDelete = New Array();
+	For Each Row In QueryTable Do
+		If Row.IsConditionSet Then
+			Settings = Row.Condition.Get();
+			NewFilter = Settings.Filter.Items.Add(Type("DataCompositionFilterItem"));
+			NewFilter.LeftValue = New DataCompositionField("Ref");
+			NewFilter.Use = True;
+			NewFilter.ComparisonType = DataCompositionComparisonType.Equal;
+			NewFilter.RightValue = Ref;
+			
+			Template = AddAttributesAndPropertiesServer.GetDCSTemplate(PredefinedDataName);
+			
+			ExternalDataSet = New ValueTable();
+			If TypeOf(Ref) = Type("CatalogRef.Items") Then
+				ExternalDataSet.Columns.Add("ItemType" , New TypeDescription("CatalogRef.ItemTypes"));
+				ExternalDataSet.Columns.Add("Ref"      , New TypeDescription("CatalogRef.Items"));
+				NewRow = ExternalDataSet.Add();
+				NewRow.ItemType = Ref.ItemType;
+				NewRow.Ref = Ref;
+			EndIf;
+			RefsByConditions = AddAttributesAndPropertiesServer.GetRefsByCondition(Template, Settings, ExternalDataSet);
+			If Not RefsByConditions.Count() Then
+				ArrayForDelete.Add(Row);
+			EndIf;
+		EndIf;
+	EndDo;
+	
+	For Each ItemForDelete In ArrayForDelete Do
+		QueryTable.Delete(ItemForDelete);
+	EndDo;
+	Return QueryTable;
 EndFunction
 
 #EndRegion

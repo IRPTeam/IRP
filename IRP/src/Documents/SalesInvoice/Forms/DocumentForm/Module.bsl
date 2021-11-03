@@ -102,7 +102,8 @@ EndProcedure
 
 &AtClient
 Procedure PartnerOnChange(Item)
-	DocSalesInvoiceClient.PartnerOnChange(Object, ThisObject, Item);
+	//DocSalesInvoiceClient.PartnerOnChange(Object, ThisObject, Item);
+	ViewClient_V2.PartnerOnChange(Object, ThisObject);
 	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 

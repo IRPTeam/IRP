@@ -8,7 +8,7 @@ Procedure PartnerOnChange(Object, Form) Export
 	Parameters = New Structure();
 	Parameters.Insert("Object"       , Object);
 	Parameters.Insert("Form"         , Form);
-	Parameters.Insert("ClientModule" , ThisObject);
+	Parameters.Insert("ViewModule" , ThisObject);
 	ControllerClientServer_V2.PartnerOnChange(Parameters);
 EndProcedure
 

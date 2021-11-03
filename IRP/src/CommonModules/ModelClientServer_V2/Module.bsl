@@ -6,7 +6,7 @@
 
 #Region ENTRY_POINTS
 
-Procedure PartnerEntryPoint(Parameters, Module) Export
+Procedure PartnerEntryPoint(Parameters, ControllerModule) Export
 	EntryPointName = "PartnerEntryPoint";
 	InitCache(Parameters, EntryPointName);
 	// При изменении Partner могут изменится:
@@ -15,31 +15,32 @@ Procedure PartnerEntryPoint(Parameters, Module) Export
 	// ManagerSegment - НЕ РЕАЛИЗОВАНО
 	
 	Chain = GetChain();
-	Module.PartnerEventChain(Parameters, Chain);
-	ProceedChain(Chain, Module);
+	ControllerModule.PartnerEventChain(Parameters, Chain);
+	ProceedChain(Parameters, ControllerModule, Chain);
 	
 	// проверяем что кэш был инициализирован из этой EntryPoint
 	// и если это так и мы дошли до конца процедуры то значит что ChainComplete 
 	If Parameters.EntryPointName = EntryPointName Then
-		Module.OnChainComplete(Parameters);
+		ControllerModule.OnChainComplete(Parameters);
 	EndIf;
 EndProcedure
 
-Procedure LegalNameEntryPoint(Parameters, Module) Export
+Procedure LegalNameEntryPoint(Parameters, ControllerModule) Export
 	EntryPointName = "LegalNameEntryPoint";
 	InitCache(Parameters, EntryPointName);
 	// При изменении LegalName никакие другие реквизиты не меняются
-	Chain = New Structure();
-	Module.LegalNameEventChain(Parameters, Chain);
+	Chain = GetChain();
+	ControllerModule.LegalNameEventChain(Parameters, Chain);
+	ProceedChain(Parameters, ControllerModule, Chain);
 	
 	// проверяем что кэш был инициализирован из этой EntryPoint
 	// и если это так и мы дошли до конца процедуры то значит что ChainComplete 
 	If Parameters.EntryPointName = EntryPointName Then
-		Module.OnChainComplete(Parameters);
+		ControllerModule.OnChainComplete(Parameters);
 	EndIf;
 EndProcedure
 
-Procedure AgreementEntryPoint(Parameters, Module) Export
+Procedure AgreementEntryPoint(Parameters, ControllerModule) Export
 	EntryPointName = "AgreementEntryPoint";
 	InitCache(Parameters, EntryPointName);
 	
@@ -54,13 +55,13 @@ Procedure AgreementEntryPoint(Parameters, Module) Export
 	// TaxRates - НЕ РЕАЛИЗОВАНО
 	
 	Chain = GetChain();
-	Module.AgreementEventChain(Parameters, Chain);
-	ProceedChain(Chain, Module);
+	ControllerModule.AgreementEventChain(Parameters, Chain);
+	ProceedChain(Parameters, ControllerModule, Chain);
 	
 	// проверяем что кэш был инициализирован из этой EntryPoint
 	// и если это так и мы дошли до конца процедуры то значит что ChainComplete 
 	If Parameters.EntryPointName = EntryPointName Then
-		Module.OnChainComplete(Parameters);
+		ControllerModule.OnChainComplete(Parameters);
 	EndIf;
 EndProcedure
 
@@ -75,45 +76,37 @@ Function GetChain()
 	Return Chain;
 EndFunction
 
-Procedure ProceedChain(Chain, Module)
+Procedure ProceedChain(Parameters, ControllerModule, Chain)
 	If Chain.LegalName.NeedChange Then
 		Results = New Array();
-		For Each Parameters In Chain.LegalName.Parameters Do
-			Results.Add(LegalNameChange(Parameters, Module));
+		For Each Param In Chain.LegalName.Parameters Do
+			Results.Add(LegalNameChange(Param));
 		EndDo;
-		For Each Result In Results Do
-			Module.SetLegalName(Result.Parameters, Result.Value);
-		EndDo;
+		ControllerModule.SetLegalName(Parameters, Results);
 	EndIf;
 	
 	If Chain.Agreement.NeedChange Then
 		Results = New Array();
-		For Each Parameters In Chain.Agreement.Parameters Do
-			Results.Add(AgreementChange(Chain.Agreement.Parameters, Module));
+		For Each Param In Chain.Agreement.Parameters Do
+			Results.Add(AgreementChange(Param));
 		EndDo;
-		For Each Result In Results Do
-			Module.SetAgreement(Result.Parameters, Result.Value);
-		EndDo;
+		ControllerModule.SetAgreement(Parameters, Results);
 	EndIf;
 	
 	If Chain.Company.NeedChange Then
 		Results = New Array();
-		For Each Parameters In Chain.Company.Parameters Do
-			Results.Add(CompanyChange(Chain.Company.Parameters, Module));
+		For Each Param In Chain.Company.Parameters Do
+			Results.Add(CompanyChange(Param));
 		EndDo;
-		For Each Result In Results Do
-			Module.SetCompany(Result.Parameters, Result.Value);
-		EndDo;
+		ControllerModule.SetCompany(Parameters, Results);
 	EndIf;
 	
 	If Chain.PriceType.NeedChange Then
 		Results = New Array();
-		For Each Parameters In Chain.PriceType.Parameters Do
-			Results.Add(PriceTypeChange(Chain.PriceType.Parameters, Module));
+		For Each Param In Chain.PriceType.Parameters Do
+			Results.Add(PriceTypeChange(Param));
 		EndDo;
-		For Each Result In Results Do
-			Module.SetPriceType(Result.Parameters, Result.Value);
-		EndDo;
+		ControllerModule.SetPriceType(Parameters, Results);
 	EndIf;
 EndProcedure
 
@@ -134,7 +127,7 @@ Function LegalNameParameters() Export
 	Return Parameters;
 EndFunction
 
-Function LegalNameChange(Parameters, Module)
+Function LegalNameChange(Parameters)
 	Result = New Structure();
 	NewLegalName = DocumentsServer.GetLegalNameByPartner(Parameters.Partner, Parameters.LegalName);
 	Result.Insert("Value"      , NewLegalName);
@@ -163,7 +156,7 @@ Function AgreementParameters() Export
 	Return Parameters;
 EndFunction
 
-Function AgreementChange(Parameters, Module)
+Function AgreementChange(Parameters)
 	Result = New Structure();
 	AgreementParameters = New Structure();
 	AgreementParameters.Insert("Partner"       , Parameters.Partner);
@@ -194,7 +187,7 @@ Function CompanyParameters() Export
 	Return Parameters;
 EndFunction
 
-Function CompanyChange(Parameters, Module)
+Function CompanyChange(Parameters)
 	Result = New Structure();
 	NewCompany = CatAgreementsServer.GetAgreementInfo(Parameters.Agreement).Company;
 	Result.Insert("Value"      , NewCompany);
@@ -220,7 +213,7 @@ Function PriceTypeParameters() Export
 	Return Parameters;
 EndFunction
 
-Function PriceTypeChange(Parameters, Module)
+Function PriceTypeChange(Parameters)
 	Result = New Structure();
 	NewPriceType = CatAgreementsServer.GetAgreementInfo(Parameters.Agreement).PriceType;
 	Result.Insert("Value"      , NewPriceType);

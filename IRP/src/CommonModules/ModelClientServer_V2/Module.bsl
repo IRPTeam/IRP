@@ -6,228 +6,476 @@
 
 #Region ENTRY_POINTS
 
-Procedure PartnerEntryPoint(Parameters, ControllerModule) Export
-	EntryPointName = "PartnerEntryPoint";
+Procedure EntryPoint(EntryPointName, Parameters) Export
 	InitCache(Parameters, EntryPointName);
-	// При изменении Partner могут изменится:
-	// LegalName
-	// Agreement
-	// ManagerSegment - НЕ РЕАЛИЗОВАНО
-	
 	Chain = GetChain();
-	ControllerModule.PartnerEventChain(Parameters, Chain);
-	ProceedChain(Parameters, ControllerModule, Chain);
+	Parameters.ControllerModule.EnableChainLinks(EntryPointName, Parameters, Chain);
+	ExecuteChain(Parameters, Chain);
 	
 	// проверяем что кэш был инициализирован из этой EntryPoint
 	// и если это так и мы дошли до конца процедуры то значит что ChainComplete 
 	If Parameters.EntryPointName = EntryPointName Then
-		ControllerModule.OnChainComplete(Parameters);
+		Parameters.ControllerModule.OnChainComplete(Parameters);
 	EndIf;
 EndProcedure
 
-Procedure LegalNameEntryPoint(Parameters, ControllerModule) Export
-	EntryPointName = "LegalNameEntryPoint";
+Procedure Init_API(EntryPointName, Parameters) Export
 	InitCache(Parameters, EntryPointName);
-	// При изменении LegalName никакие другие реквизиты не меняются
-	Chain = GetChain();
-	ControllerModule.LegalNameEventChain(Parameters, Chain);
-	ProceedChain(Parameters, ControllerModule, Chain);
-	
-	// проверяем что кэш был инициализирован из этой EntryPoint
-	// и если это так и мы дошли до конца процедуры то значит что ChainComplete 
-	If Parameters.EntryPointName = EntryPointName Then
-		ControllerModule.OnChainComplete(Parameters);
-	EndIf;
-EndProcedure
-
-Procedure AgreementEntryPoint(Parameters, ControllerModule) Export
-	EntryPointName = "AgreementEntryPoint";
-	InitCache(Parameters, EntryPointName);
-	
-	// При изменении Agreement могут изменится:
-	// Company
-	// PriceType - НЕ РЕАЛИЗОВАНО
-	// Currency - НЕ РЕАЛИЗОВАНО
-	// PriceIncludeTax - НЕ РЕАЛИЗОВАНО
-	// Store - НЕ РЕАЛИЗОВАНО
-	// DeliveryDate - НЕ РЕАЛИЗОВАНО
-	// PaymentTerm - НЕ РЕАЛИЗОВАНО
-	// TaxRates - НЕ РЕАЛИЗОВАНО
-	
-	Chain = GetChain();
-	ControllerModule.AgreementEventChain(Parameters, Chain);
-	ProceedChain(Parameters, ControllerModule, Chain);
-	
-	// проверяем что кэш был инициализирован из этой EntryPoint
-	// и если это так и мы дошли до конца процедуры то значит что ChainComplete 
-	If Parameters.EntryPointName = EntryPointName Then
-		ControllerModule.OnChainComplete(Parameters);
-	EndIf;
 EndProcedure
 
 #EndRegion
 
+#Region Chain
+
 Function GetChain()
+	StrChainLinks = "LegalName, Agreement, Company, PriceType, Price, Calculations";
 	Chain = New Structure();
-	LegalNameInfo(Chain);
-	AgreementInfo(Chain);
-	CompanyInfo(Chain);
-	PriceTypeInfo(Chain);
+	Segments = StrSplit(StrChainLinks, ",");
+	For Each Segment In Segments Do
+		Chain.Insert(TrimAll(Segment), GetChainLink());
+	EndDo;
 	Return Chain;
 EndFunction
 
-Procedure ProceedChain(Parameters, ControllerModule, Chain)
-	If Chain.LegalName.NeedChange Then
-		Results = New Array();
-		For Each Param In Chain.LegalName.Parameters Do
-			Results.Add(LegalNameChange(Param));
-		EndDo;
-		ControllerModule.SetLegalName(Parameters, Results);
-	EndIf;
-	
-	If Chain.Agreement.NeedChange Then
-		Results = New Array();
-		For Each Param In Chain.Agreement.Parameters Do
-			Results.Add(AgreementChange(Param));
-		EndDo;
-		ControllerModule.SetAgreement(Parameters, Results);
-	EndIf;
-	
-	If Chain.Company.NeedChange Then
-		Results = New Array();
-		For Each Param In Chain.Company.Parameters Do
-			Results.Add(CompanyChange(Param));
-		EndDo;
-		ControllerModule.SetCompany(Parameters, Results);
-	EndIf;
-	
-	If Chain.PriceType.NeedChange Then
-		Results = New Array();
-		For Each Param In Chain.PriceType.Parameters Do
-			Results.Add(PriceTypeChange(Param));
-		EndDo;
-		ControllerModule.SetPriceType(Parameters, Results);
-	EndIf;
+Function RouteExecutor(Name, Options)
+	If    Name = "LegalName" Then Return LegalNameExecute(Options);
+	ElsIf Name = "Agreement" Then Return AgreementExecute(Options);
+	ElsIf Name = "Company"   Then Return CompanyExecute(Options);
+	ElsIf Name = "PriceType" Then Return PriceTypeExecute(Options);
+	ElsIf Name = "Price" Then Return PriceExecute(Options);
+	Else Raise StrTemplate("Route executor error [%1]", Name); EndIf;
+EndFunction
+
+Procedure RouteSetter(Name, Parameters, Results)
+	If    Name = "LegalName" Then Parameters.ControllerModule.SetLegalName(Parameters, Results);
+	ElsIf Name = "Agreement" Then Parameters.ControllerModule.SetAgreement(Parameters, Results);
+	ElsIf Name = "Company"   Then Parameters.ControllerModule.SetCompany(Parameters, Results);
+	ElsIf Name = "PriceType" Then Parameters.ControllerModule.SetPriceType(Parameters, Results);
+	ElsIf Name = "Price"     Then Parameters.ControllerModule.SetPrice(Parameters, Results);
+	Else Raise StrTemplate("Route setter error [%1]", Name); EndIf;
 EndProcedure
+
+Function GetChainLink()
+	ChainLink = New Structure();
+	ChainLink.Insert("Enable", False);
+	ChainLink.Insert("Options", New Array());
+	Return ChainLink; 
+EndFunction
+
+Function GetChainLinkOptions(StrOptions)
+	Options = New Structure();
+	Options.Insert("Key");
+	Segments = StrSplit(StrOptions, ",");
+	For Each Segment In Segments Do
+		If ValueIsFilled(Segment) Then
+			Options.Insert(TrimAll(Segment));
+		EndIf;
+	EndDo;
+	Return Options;
+EndFunction
+
+Function GetChainLinkResult(Options, Value)
+	Result = New Structure();
+	Result.Insert("Value"   , Value);
+	Result.Insert("Options" , Options);
+	Return Result;
+EndFunction
+
+Procedure ExecuteChain(Parameters, Chain)
+	For Each ChainLink in Chain Do
+		Name = ChainLink.Key;
+		If Chain[Name].Enable Then
+			Results = New Array();
+			For Each Options In Chain[Name].Options Do
+				Results.Add(RouteExecutor(Name, Options));
+			EndDo;
+			RouteSetter(Name, Parameters, Results);
+		EndIf;
+	EndDo;
+EndProcedure
+
+#EndRegion
 
 #Region LEGAL_NAME
 
-Procedure LegalNameInfo(Chain)
-	LegalName = New Structure();
-	LegalName.Insert("NeedChange", False);
-	LegalName.Insert("Parameters", New Array());
-	Chain.Insert("LegalName", LegalName);
-EndProcedure
-
-Function LegalNameParameters() Export
-	Parameters = New Structure();
-	Parameters.Insert("Key");
-	Parameters.Insert("Partner");
-	Parameters.Insert("LegalName");
-	Return Parameters;
+Function LegalNameOptions() Export
+	Return GetChainLinkOptions("Partner, LegalName");
 EndFunction
 
-Function LegalNameChange(Parameters)
-	Result = New Structure();
-	NewLegalName = DocumentsServer.GetLegalNameByPartner(Parameters.Partner, Parameters.LegalName);
-	Result.Insert("Value"      , NewLegalName);
-	Result.Insert("Parameters" , Parameters);
-	Return Result;
+Function LegalNameExecute(Options)
+	NewLegalName = DocumentsServer.GetLegalNameByPartner(Options.Partner, Options.LegalName);
+	Return GetChainLinkResult(Options, NewLegalName);
 EndFunction
 
 #EndRegion
 
 #Region AGREEMENT
 
-Procedure AgreementInfo(Chain)
-	Agreement = New Structure();
-	Agreement.Insert("NeedChange", False);
-	Agreement.Insert("Parameters", New Array());
-	Chain.Insert("Agreement", Agreement);
-EndProcedure
-
-Function AgreementParameters() Export
-	Parameters = New Structure();
-	Parameters.Insert("Key");
-	Parameters.Insert("Partner");
-	Parameters.Insert("Agreement");
-	Parameters.Insert("Date");
-	Parameters.Insert("AgreementType");
-	Return Parameters;
+Function AgreementOptions() Export
+	Return GetChainLinkOptions("Partner, Agreement, CurrentDate, AgreementType");
 EndFunction
 
-Function AgreementChange(Parameters)
-	Result = New Structure();
-	AgreementParameters = New Structure();
-	AgreementParameters.Insert("Partner"       , Parameters.Partner);
-	AgreementParameters.Insert("Agreement"     , Parameters.Agreement);
-	AgreementParameters.Insert("CurrentDate"   , Parameters.Date);
-	AgreementParameters.Insert("AgreementType" , Parameters.AgreementType);
-	NewAgreement = DocumentsServer.GetAgreementByPartner(AgreementParameters);
-	Result.Insert("Value"      , NewAgreement);
-	Result.Insert("Parameters" , Parameters);
-	Return Result;
+Function AgreementExecute(Options)
+	NewAgreement = DocumentsServer.GetAgreementByPartner(Options);
+	Return GetChainLinkResult(Options, NewAgreement);
 EndFunction
 
 #EndRegion
 
 #Region COMPANY
 
-Procedure CompanyInfo(Chain)
-	Company = New Structure();
-	Company.Insert("NeedChange", False);
-	Company.Insert("Parameters", New Array());
-	Chain.Insert("Company", Company);
-EndProcedure
-
-Function CompanyParameters() Export
-	Parameters = New Structure();
-	Parameters.Insert("Key");
-	Parameters.Insert("Agreement");
-	Return Parameters;
+Function CompanyOptions() Export
+	Return GetChainLinkOptions("Agreement");
 EndFunction
 
-Function CompanyChange(Parameters)
-	Result = New Structure();
-	NewCompany = CatAgreementsServer.GetAgreementInfo(Parameters.Agreement).Company;
-	Result.Insert("Value"      , NewCompany);
-	Result.Insert("Parameters" , Parameters);
-	Return Result;
+Function CompanyExecute(Options)
+	NewCompany = CatAgreementsServer.GetAgreementInfo(Options.Agreement).Company;
+	Return GetChainLinkResult(Options, NewCompany);
 EndFunction
 
 #EndRegion
 
 #Region PRICE_TYPE
 
-Procedure PriceTypeInfo(Chain)
-	PriceType = New Structure();
-	PriceType.Insert("NeedChange", False);
-	PriceType.Insert("Parameters", New Array());
-	Chain.Insert("PriceType", PriceType);
-EndProcedure
-
-Function PriceTypeParameters() Export
-	Parameters = New Structure();
-	Parameters.Insert("Key");
-	Parameters.Insert("Agreement");
-	Return Parameters;
+Function PriceTypeOptions() Export
+	Return GetChainLinkOptions("Agreement");
 EndFunction
 
-Function PriceTypeChange(Parameters)
-	Result = New Structure();
-	NewPriceType = CatAgreementsServer.GetAgreementInfo(Parameters.Agreement).PriceType;
-	Result.Insert("Value"      , NewPriceType);
-	Result.Insert("Parameters" , Parameters);
-	Return Result;
+Function PriceTypeExecute(Options)
+	NewPriceType = CatAgreementsServer.GetAgreementInfo(Options.Agreement).PriceType;
+	Return GetChainLinkResult(Options, NewPriceType);
 EndFunction
 
 #EndRegion
 
+#Region PRICE
+
+Function PriceOptions() Export
+	Return GetChainLinkOptions("Ref, Date, PriceType, ItemKey, Unit");
+EndFunction
+
+Function PriceExecute(Options)
+	Period = CalculationStringsClientServer.GetSliceLastDateByRefAndDate(Options.Ref, Options.Date);
+	PriceParameters = New Structure();
+	PriceParameters.Insert("Period"       , Period);
+	PriceParameters.Insert("PriceType"    , PredefinedValue("Catalog.PriceTypes.ManualPriceType"));
+	PriceParameters.Insert("RowPriceType" , Options.PriceType);
+	PriceParameters.Insert("ItemKey"      , Options.ItemKey);
+	PriceParameters.Insert("Unit"         , Options.Unit);
+	PriceInfo = GetItemInfo.ItemPriceInfo(PriceParameters);
+	NewPrice = ?(PriceInfo = Undefined, 0, PriceInfo.Price);
+	Return GetChainLinkResult(Options, NewPrice);
+EndFunction
+
+#EndRegion
+
+Function CalculationsOptions() Export
+	Options = GetChainLinkOptions("");
+	AmountOptions = New Structure();
+	AmountOptions.Insert("DontCalculateRow", False);
+	AmountOptions.Insert("NetAmount"       , 0);
+	AmountOptions.Insert("OffersAmount"    , 0);
+	AmountOptions.Insert("TaxAmount"       , 0);
+	AmountOptions.Insert("TotalAmount"     , 0);
+	AmountOptions.Insert("AmountOptions", AmountOptions);
+	
+	PriceOptions = New Structure("PriceType, Price, Quantity, QuantityInBaseUnit");
+	Options.Insert("PriceOptions", PriceOptions);
+	
+	TaxOptions = New Structure("ItemKey, PriceIncludeTax");
+	// TaxList columns: Key, Tax, Analytics, TaxRate, Amount, IncludeToTotalAmount, ManualAmount
+	// CalculationsOptions_TaxOptions_TaxList
+	TaxOptions.Insert("TaxList", New Array());
+	Options.Insert("TaxOptions", TaxOptions);
+	
+	Options.Insert("CalculateTotalAmount"            , New Structure("Enable", False));
+	Options.Insert("CalculateTotalAmountByNetAmount" , New Structure("Enable", False));
+	
+	Options.Insert("CalculateNetAmount"                            , New Structure("Enable", False));
+	Options.Insert("CalculateNetAmountByTotalAmount"               , New Structure("Enable", False));
+	Options.Insert("CalculateNetAmountAsTotalAmountMinusTaxAmount" , New Structure("Enable", False));
+	
+	Options.Insert("CalculateTax"              , New Structure("Enable", False));
+	Options.Insert("CalculateTaxByNetAmount"   , New Structure("Enable", False));
+	Options.Insert("CalculateTaxByTotalAmount" , New Structure("Enable", False));
+	
+	Return Options;
+EndFunction
+
+Function CalculationsOptions_TaxOptions_TaxList() Export
+	Return New Structure("Key, Tax, Analytics, TaxRate, Amount, IncludeToTotalAmount, ManualAmount");
+EndFunction
+
+Function CalculationsExecute(Options)
+//Procedure CalculateItemsRow(Object, ItemRow, Actions, ArrayOfTaxInfo = Undefined, AddInfo = Undefined) Export
+	IsCalculatedRow = Not Options.AmountOptions.DontCalculateRow;
+	
+//	If Actions.Property("UpdateUnit") Then
+//		UpdateUnit(Object, ItemRow, AddInfo);
+//	EndIf;
+
+//	If Actions.Property("UpdateRowUnit") Then
+//		UpdateRowUnit(Object, ItemRow, AddInfo);
+//	EndIf;
+
+//	If Actions.Property("CalculateQuantityInBaseUnit") Then
+//		CalculateQuantityInBaseUnit(Object, ItemRow, AddInfo);
+//	EndIf;
+
+//	If Actions.Property("ChangePriceType") Then
+//		ChangePriceType(Object, ItemRow, Actions.ChangePriceType, AddInfo);
+//	EndIf;
+
+//	If Actions.Property("UpdatePrice") Then //
+//		UpdatePrice(Object, ItemRow, Actions.UpdatePrice, AddInfo);
+//	EndIf;
+
+//	If Actions.Property("RecalculateAppliedOffers") Then
+//		RecalculateAppliedOffers(Object, ItemRow, AddInfo);
+//	EndIf;
+
+//	If Actions.Property("CalculateSpecialOffers") Then //
+//		CalculateSpecialOffers(Object, ItemRow, AddInfo);
+//	EndIf;
+	
+	
+	
+	
+	Result = New Structure();
+	Result.Insert("NetAmount"    , Options.AmountOptions.NetAmount);
+	Result.Insert("OffersAmount" , Options.AmountOptions.OffersAmount);
+	Result.Insert("TaxAmount"    , Options.AmountOptions.TaxAmount);
+	Result.Insert("TotalAmount"  , Options.AmountOptions.TotalAmount);
+	
+	If Options.TaxOptions.PriceIncludeTax <> Undefined Then
+		If Options.TaxOptions.PriceIncludeTax Then
+			If Options.CalculateTotalAmount.Enable And IsCalculatedRow Then
+				Result.TotalAmount = CalculateTotalAmount_PriceIncludeTax(Options.PriceOptions, Result);
+			EndIf;
+
+			If Options.CalculateTax.Enable And IsCalculatedRow Then
+				//CalculateTax_PriceIncludeTax(Object, ItemRow, ArrayOfTaxInfo, AddInfo);
+			EndIf;
+
+			If Options.CalculateNetAmountAsTotalAmountMinusTaxAmount.Enable And IsCalculatedRow Then
+				Result.NetAmount = CalculateNetAmount_PriceIncludeTax(Options.PriceOptions, Result);
+			EndIf;
+
+			If Options.CalculateNetAmount.Enable And IsCalculatedRow Then
+				Result.NetAmount = CalculateNetAmount_PriceIncludeTax(Options.PriceOptions, Result);
+			EndIf;
+		Else
+			If Options.CalculateNetAmountAsTotalAmountMinusTaxAmount.Enable And IsCalculatedRow Then
+				//CalculateNetAmountAsTotalAmountMinusTaxAmount_PriceNotIncludeTax(Object, ItemRow, AddInfo);
+			EndIf;
+
+			If Options.CalculateNetAmount.Enable And IsCalculatedRow Then
+				//CalculateNetAmount_PriceNotIncludeTax(Object, ItemRow, AddInfo);
+			EndIf;
+
+			If Options.CalculateTax.Enable And IsCalculatedRow Then
+				//CalculateTax_PriceNotIncludeTax(Object, ItemRow, ArrayOfTaxInfo, AddInfo);
+			EndIf;
+
+			If Options.CalculateTotalAmount.Enable And IsCalculatedRow Then
+				Result.TotalAmount = CalculateTotalAmount_PriceNotIncludeTax(Options.PriceOptions, Result);
+			EndIf;
+		EndIf;
+	Else
+		If Options.CalculateTax.Enable And IsCalculatedRow Then
+			//CalculateTaxManualPriority(Object, ItemRow, False, ArrayOfTaxInfo, False, AddInfo);
+		EndIf;
+
+		If Options.CalculateTotalAmount.Enable And IsCalculatedRow Then
+			Result.TotalAmount = CalculateTotalAmount_PriceNotIncludeTax(Options.PriceOptions, Result);
+		EndIf;
+
+		If Options.CalculateTaxByNetAmount.Enable And IsCalculatedRow Then
+			//CalculateTaxManualPriority(Object, ItemRow, False, ArrayOfTaxInfo, False, AddInfo);
+		EndIf;
+
+		If Options.CalculateTaxByTotalAmount.Enable And IsCalculatedRow Then
+			//CalculateTaxManualPriority(Object, ItemRow, True, ArrayOfTaxInfo, False, AddInfo);
+		EndIf;
+
+		If Options.CalculateNetAmountAsTotalAmountMinusTaxAmount.Enable And IsCalculatedRow Then
+			Result.NetAmount = CalculateNetAmount_PriceIncludeTax(Options.PriceOptions, Result);
+		EndIf;
+
+		If Options.CalculateNetAmountByTotalAmount.Enable And IsCalculatedRow Then
+			Result.NetAmount = CalculateNetAmount_PriceIncludeTax(Options.PriceOptions, Result);
+		EndIf;
+
+		If Options.CalculateTotalAmountByNetAmount.Enable And IsCalculatedRow Then
+			Result.TotalAmount = CalculateTotalAmount_PriceNotIncludeTax(Options.PriceOptions, Result);
+		EndIf;
+	EndIf;
+//	If Actions.Property("UpdateInfoString") Then
+//		UpdateInfoString(ItemRow);
+//	EndIf;
+//
+//	If Actions.Property("UpdateInfoStringWithOffers") Then
+//		UpdateInfoStringWithOffers(Object, ItemRow, AddInfo);
+//	EndIf;
+//
+//	If Actions.Property("UpdateBarcode") Then
+//		UpdateBarcode(Object, ItemRow, AddInfo);
+//	EndIf;
+EndFunction
+
+Function CalculateTotalAmount_PriceIncludeTax(PriceOptions, Result)
+	If PriceOptions.Price <> Undefined Then
+		Return _CalculateAmount(PriceOptions, Result) - Result.OffersAmount;
+	Else
+		Return Result.NetAmount;
+	EndIf;
+EndFunction
+
+Function CalculateTotalAmount_PriceNotIncludeTax(PriceOptions, Result)
+	Return Result.NetAmount + Result.TaxAmount;
+EndFunction
+
+Function CalculateNetAmount_PriceIncludeTax(PriceOptions, Result)
+	If PriceOptions.Price <> Undefined Then
+		Return _CalculateAmount(PriceOptions, Result) - Result.TaxAmount - Result.OffersAmount;
+	Else
+		Return (Result.TotalAmount - Result.TaxAmount - Result.OffersAmount);
+	EndIf;
+EndFunction
+
+Function _CalculateAmount(PriceOptions, Result)
+	If PriceOptions.PriceType <> Undefined And PriceOptions.QuantityInBaseUnit <> Undefined 
+		And PriceOptions.PriceType = PredefinedValue("Catalog.PriceTypes.ManualPriceType") Then
+		
+		Return PriceOptions.Price * PriceOptions.QuantityInBaseUnit;
+	ElsIf PriceOptions.Quantity <> Undefined Then
+		Return PriceOptions.Price * PriceOptions.Quantity;
+	EndIf;
+	Return Result.TotalAmount;
+EndFunction
+
+// НЕДОПИСАНО
+//
+//Procedure CalculateTax_PriceIncludeTax(Object, ItemRow, ArrayOfTaxInfo, AddInfo = Undefined)
+//	CalculateTax(Object, ItemRow, True, ArrayOfTaxInfo, False, AddInfo);
+//EndProcedure
+//
+////Procedure CalculateTax(Object, ItemRow, PriceIncludeTax, ArrayOfTaxInfo, Reverse, AddInfo = Undefined)
+//Procedure CalculateTax(TaxOptions, Result)
+//	// ArrayOfTaxInfo
+//	// - Name (column name)
+//	// - Tax
+//	//CachedColumns = "Key, Tax, Analytics, TaxRate, Amount, ManualAmount";
+//	
+//	//TaxListCache is TaxOptions.TaxList
+//	//TaxListCache = DeleteRowsInDependedTable(Object, "TaxList", ItemRow.Key, CachedColumns);
+//
+//	CheckedColumns = "Key, Tax, Analytics, TaxRate";
+//	ArrayOfCheckedColumns = StrSplit(CheckedColumns, ",");
+//
+//	If ArrayOfTaxInfo = Undefined Then
+//		Return;
+//	EndIf;
+//
+//	If TaxOptions.ItemKey <> Undefined And Not ValueIsFilled(TaxOptions.ItemKey) Then
+//		Return;
+//	EndIf;
+//	//If CommonFunctionsClientServer.ObjectHasProperty(ItemRow, "ItemKey") And Not ValueIsFilled(ItemRow.ItemKey) Then
+//	//	Return;
+//	//EndIf;
+//
+//	For Each ItemOfTaxInfo In ArrayOfTaxInfo Do
+//
+//		TaxTypeIsRate = True;
+//		If ItemOfTaxInfo.Property("TaxTypeIsRate") Then
+//			TaxTypeIsRate = ItemOfTaxInfo.TaxTypeIsRate;
+//		Else
+//			TaxTypeIsRate = (ItemOfTaxInfo.Type = PredefinedValue("Enum.TaxType.Rate"));
+//		EndIf;
+//
+//		If TaxTypeIsRate And Not ValueIsFilled(ItemRow[ItemOfTaxInfo.Name]) Then
+//
+//			ArrayOfTaxRates = New Array();
+//			If ItemOfTaxInfo.Property("ArrayOfTaxRates") Then
+//				ArrayOfTaxRates = ItemOfTaxInfo.ArrayOfTaxRates;
+//			Else
+//
+//				If CommonFunctionsClientServer.ObjectHasProperty(Object, "Agreement") Then
+//					Parameters = New Structure();
+//					Parameters.Insert("Date", Object.Date);
+//					Parameters.Insert("Company", Object.Company);
+//					Parameters.Insert("Tax", ItemOfTaxInfo.Tax);
+//					Parameters.Insert("Agreement", Object.Agreement);
+//					ArrayOfTaxRates = TaxesServer.GetTaxRatesForAgreement(Parameters);
+//				EndIf;
+//
+//				If Not ArrayOfTaxRates.Count() Then
+//					Parameters = New Structure();
+//					Parameters.Insert("Date", Object.Date);
+//					Parameters.Insert("Company", Object.Company);
+//					Parameters.Insert("Tax", ItemOfTaxInfo.Tax);
+//
+//					If CommonFunctionsClientServer.ObjectHasProperty(ItemRow, "ItemKey") Then
+//						Parameters.Insert("ItemKey", ItemRow.ItemKey);
+//					Else
+//						Parameters.Insert("ItemKey", PredefinedValue("Catalog.ItemKeys.EmptyRef"));
+//					EndIf;
+//
+//					ArrayOfTaxRates = TaxesServer.GetTaxRatesForItemKey(Parameters);
+//				EndIf;
+//			EndIf;
+//			If ArrayOfTaxRates.Count() Then
+//				ItemRow[ItemOfTaxInfo.Name] = ArrayOfTaxRates[0].TaxRate;
+//			EndIf;
+//		EndIf;
+//
+//		TaxParameters = GetTaxCalculationParameters(Object, ItemRow, ItemOfTaxInfo, PriceIncludeTax, Reverse, AddInfo);
+//
+//		ArrayOfResultsTaxCalculation = TaxesServer.CalculateTax(TaxParameters);
+//
+//		For Each RowOfResult In ArrayOfResultsTaxCalculation Do
+//			NewTax = Object.TaxList.Add();
+//			NewTax.Key = ItemRow.Key;
+//			NewTax.Tax = RowOfResult.Tax;
+//			NewTax.Analytics = RowOfResult.Analytics;
+//			NewTax.TaxRate = RowOfResult.TaxRate;
+//			NewTax.Amount = RowOfResult.Amount;
+//			NewTax.IncludeToTotalAmount = RowOfResult.IncludeToTotalAmount;
+//
+//			CachedRow = FindRowInCache(TaxListCache, NewTax, ArrayOfCheckedColumns);
+//
+//			If CachedRow = Undefined Then
+//				NewTax.ManualAmount = NewTax.Amount;
+//			Else
+//				NewTax.ManualAmount = ?(CachedRow.Amount = NewTax.Amount, CachedRow.ManualAmount, NewTax.Amount);
+//			EndIf;
+//		EndDo;
+//	EndDo;
+//
+//	ItemRow.TaxAmount = GetTotalAmountByDependedTable(Object, "TaxList", ItemRow.Key);
+//EndProcedure
+//
+//Function DeleteRowsInDependedTable(Object, DependedTableName, MainTableKey, CachedColumns = Undefined)
+//	DependedRows = Object[DependedTableName].FindRows(New Structure("Key", MainTableKey));
+//	Cache = New Array();
+//	ArrayOfCachedColumns = StrSplit(CachedColumns, ",");
+//	For Each Row In DependedRows Do
+//		CacheRow = New Structure();
+//		For Each ItemOfCachedColumns In ArrayOfCachedColumns Do
+//			CacheRow.Insert(TrimAll(ItemOfCachedColumns), Row[TrimAll(ItemOfCachedColumns)]);
+//		EndDo;
+//		Cache.Add(CacheRow);
+//		Object[DependedTableName].Delete(Row);
+//	EndDo;
+//	Return Cache;
+//EndFunction
+
 // все измененные данные хранятся в кэше, для возможности откатить изменения, если пользователь откажется от изменений
 // кэш инициализируется только один раз внезависимости от того какой именно EntryPoint использован
-Procedure InitCache(Parameters, EntryPointName)
+Procedure InitCache(Parameters, EntryPointName) Export
 	If Not Parameters.Property("Cache") Then
 		Parameters.Insert("Cache", New Structure());
 		Parameters.Insert("EntryPointName", EntryPointName);
+		Parameters.Insert("ViewNotify"    , New Array());
 	EndIf;
 EndProcedure

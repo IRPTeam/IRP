@@ -257,7 +257,7 @@ Procedure CalculateItemsRow(Object, ItemRow, Actions, ArrayOfTaxInfo = Undefined
 		ChangePriceType(Object, ItemRow, Actions.ChangePriceType, AddInfo);
 	EndIf;
 
-	If Actions.Property("UpdatePrice") Then
+	If Actions.Property("UpdatePrice") Then //
 		UpdatePrice(Object, ItemRow, Actions.UpdatePrice, AddInfo);
 	EndIf;
 
@@ -265,7 +265,7 @@ Procedure CalculateItemsRow(Object, ItemRow, Actions, ArrayOfTaxInfo = Undefined
 		RecalculateAppliedOffers(Object, ItemRow, AddInfo);
 	EndIf;
 
-	If Actions.Property("CalculateSpecialOffers") Then
+	If Actions.Property("CalculateSpecialOffers") Then //
 		CalculateSpecialOffers(Object, ItemRow, AddInfo);
 	EndIf;
 

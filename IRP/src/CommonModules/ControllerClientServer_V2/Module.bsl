@@ -5,40 +5,71 @@
 // никаких запросов к БД и расчетов тут делать нельзя, модифицировать форму задавать вопросы пользователю и т.д нельзя 
 // только чтение из объекта и запись в объект
 
+Procedure EnableChainLinks(EntryPointName, Parameters, Chain) Export
+	RouteEnableChainLinks(EntryPointName, Parameters, Chain);
+EndProcedure
+
+Procedure Setter(EntryPointName, DataPath, Parameters, Results, ViewNotify = Undefined) Export
+	IsChanged = False;
+	For Each Result In Results Do
+		If SetProperty(Parameters, Result, DataPath) Then
+			IsChanged = True;
+		EndIf;
+	EndDo;
+	If IsChanged Then
+//		#IF Client THEN
+			//If Parameters.ViewModule <> Undefined And ViewNotify <> Undefined Then
+			If ViewNotify <> Undefined Then
+				// переадресация в клиентский модуль, вызов был с клиента, на форме что то надо обновить
+				// вызывать будем потом когда завершится вся цепочка действий
+				Parameters.ViewNotify.Add(ViewNotify);
+			EndIf;
+//		#ENDIF
+		ModelClientServer_V2.EntryPoint(EntryPointName, Parameters);
+	EndIf;
+EndProcedure
+
+Procedure RouteEnableChainLinks(EntryPointName, Parameters, Chain)
+	If    EntryPointName = "PartnerEntryPoint"   Then PartnerEnableChainLinks(Parameters, Chain);
+	ElsIf EntryPointName = "AgreementEntryPoint" Then AgreementEnableChainLinks(Parameters, Chain);
+	Else Raise StrTemplate("Route enable chain links error [%1]", EntryPointName); EndIf;
+EndProcedure
+
 #Region PARTNER
 
 // Client Event handler, вызывается из модуля ViewClient_V2
 Procedure PartnerOnChange(Parameters) Export
-	ModelClientServer_V2.PartnerEntryPoint(Parameters, ThisObject);
+	ModelClientServer_V2.EntryPoint("PartnerEntryPoint", Parameters);
 EndProcedure
 
-Procedure PartnerEventChain(Parameters, Chain) Export
+Procedure PartnerEnableChainLinks(Parameters, Chain)
 	// При изменении партнера нужно изменить LegalName
-	Chain.LegalName.NeedChange = True;
+	Chain.LegalName.Enable = True;
 	// эти данные (параметры) нужны для получения LegalName
-	LegalNameParameters = ModelClientServer_V2.LegalNameParameters();
-	LegalNameParameters.Partner   = GetProperty(Parameters.Cache, Parameters.Object, "Partner");
-	LegalNameParameters.LegalName = GetProperty(Parameters.Cache, Parameters.Object, "LegalName");;
-	Chain.LegalName.Parameters.Add(LegalNameParameters);
+	LegalNameOptions = ModelClientServer_V2.LegalNameOptions();
+	LegalNameOptions.Partner   = GetProperty(Parameters, "Partner");
+	LegalNameOptions.LegalName = GetProperty(Parameters, "LegalName");;
+	Chain.LegalName.Options.Add(LegalNameOptions);
 	
 	// При изменении партнера нужно изменить Agreement
-	Chain.Agreement.NeedChange = True;
+	Chain.Agreement.Enable = True;
 	// эти данные (параметры) нужны для получения Agreement
-	AgreementParameters = ModelClientServer_V2.AgreementParameters();
-	AgreementParameters.Partner       = GetProperty(Parameters.Cache, Parameters.Object, "Partner");
-	AgreementParameters.Agreement     = GetProperty(Parameters.Cache, Parameters.Object, "Agreement");
-	AgreementParameters.Date          = GetProperty(Parameters.Cache, Parameters.Object, "Date");
-	AgreementParameters.AgreementType = PredefinedValue("Enum.AgreementTypes.Customer");
-	Chain.Agreement.Parameters.Add(AgreementParameters);
+	AgreementOptions = ModelClientServer_V2.AgreementOptions();
+	AgreementOptions.Partner       = GetProperty(Parameters, "Partner");
+	AgreementOptions.Agreement     = GetProperty(Parameters, "Agreement");
+	AgreementOptions.Date          = GetProperty(Parameters, "Date");
+	AgreementOptions.AgreementType = PredefinedValue("Enum.AgreementTypes.Customer");
+	Chain.Agreement.Options.Add(AgreementOptions);
 EndProcedure
 
-//Function SetPartner(Object, Value) Export
-//	#IF Client THEN
-//		// можно задавать вопросы пользователю, управлять видимостью доступностью элемнтов формы
-//		// нужна переадресация в клиентский модуль
-//	#ENDIF
-//	Return False;
-//EndFunction
+Procedure SetPartner_API(Parameters, Results) Export
+	ModelClientServer_V2.Init_API("PartnerEntryPoint", Parameters);
+	SetPartner(Parameters, Results);
+EndProcedure
+
+Procedure SetPartner(Parameters, Results) Export
+	Setter("PartnerEntryPoint", "Partner", Parameters, Results);
+EndProcedure
 
 #EndRegion
 
@@ -46,32 +77,11 @@ EndProcedure
 
 // Client Event handler вызывается из модуля ViewClient_V2
 Procedure LegalNameOnChange(Parameters) Export
-	ModelClientServer_V2.LegalNameEntryPoint(Parameters, ThisObject);
+	ModelClientServer_V2.EntryPoint("LegalNameEntryPoint", Parameters);
 EndProcedure
 
-Procedure LegalNameEventChain(Parameters, Chain) Export
-	// При изменении LegalName никакие другие реквизиты не меняются, цепочки нет
-	Return;
-EndProcedure
-
-// Setter
 Procedure SetLegalName(Parameters, Results) Export
-	// LegalName находится в шапке поэтому используем DataPath = LegalName
-	IsChanged = False;
-	For Each Result In Results Do
-		If SetProperty(Parameters, Result, "LegalName") Then
-			IsChanged = True;
-		EndIf;
-	EndDo;
-	If IsChanged Then
-		#IF Client THEN
-			If Parameters.ViewModule <> Undefined Then
-				// переадресация в клиентский модуль, вызов был с клиента, на форме что то надо обновить
-				 Parameters.ViewModule.OnSetLegalName(Parameters);
-			EndIf;
-		#ENDIF
-		ModelClientServer_V2.LegalNameEntryPoint(Parameters, ThisObject);
-	EndIf;
+	Setter("LegalNameEntryPoint", "LegalName", Parameters, Results, "OnSetLegalName");
 EndProcedure
 
 #EndRegion
@@ -80,42 +90,33 @@ EndProcedure
 
 // Client Event handler вызывается из модуля ViewClient_V2
 Procedure AgreementOnChange(Parameters) Export
-	ModelClientServer_V2.AgreementEntryPoint(Parameters, ThisObject);
+	ModelClientServer_V2.EntryPoint("AgreementEntryPoint", Parameters);
 EndProcedure
 
-Procedure AgreementEventChain(Parameters, Chain) Export
+Procedure AgreementEnableChainLinks(Parameters, Chain) Export
 	// При изменении Agreement нужно изменить Company
-	Chain.Company.NeedChange = True;
+	Chain.Company.Enable = True;
 	// Эти данные (параметры) нужны для получения Company
-	CompanyParameters = ModelClientServer_V2.CompanyParameters();
-	CompanyParameters.Agreement = GetProperty(Parameters.Cache, Parameters.Object, "Agreement");
-	Chain.Company.Parameters.Add(CompanyParameters);
+	CompanyOptions = ModelClientServer_V2.CompanyOptions();
+	CompanyOptions.Agreement = GetProperty(Parameters, "Agreement");
+	Chain.Company.Options.Add(CompanyOptions);
 	
 	// При изменении Agreement нужно изменить PriceType
-	Chain.PriceType.NeedChange = True;
+	Chain.PriceType.Enable = True;
 	// Эти данные (параметры) нужны для получения PriceType
 	// PriceType находится в табличной части ItemList, така как это уровень данных то беремиз этой табличной части
 	For Each Row In Parameters.Object.ItemList Do
-		PriceTypeParameters = ModelClientServer_V2.PriceTypeParameters();
-		PriceTypeParameters.Agreement = GetProperty(Parameters.Cache, Parameters.Object, "Agreement");
+		PriceTypeOptions = ModelClientServer_V2.PriceTypeOptions();
+		PriceTypeOptions.Agreement = GetProperty(Parameters, "Agreement");
 		// ключ нужен что бы потом, когда вернутся результаты из модуля Model идентифицировать строку,
 		// для реквизитов в шапке ключ можно не заполнять, шапка только одна
-		PriceTypeParameters.Key = Row.Key;
-		Chain.PriceType.Parameters.Add(PriceTypeParameters);
+		PriceTypeOptions.Key = Row.Key;
+		Chain.PriceType.Options.Add(PriceTypeOptions);
 	EndDo;
 EndProcedure
 
 Procedure SetAgreement(Parameters, Results) Export
-	// Agreement находится в шапке поэтому используем DataPath = Agreement 
-	IsChanged = False;
-	For Each Result In Results Do
-		If SetProperty(Parameters, Result, "Agreement") Then
-			IsChanged = True;
-		EndIf;
-	EndDo;
-	If IsChanged Then
-		ModelClientServer_V2.AgreementEntryPoint(Parameters, ThisObject);
-	EndIf;
+	Setter("AgreementEntryPoint", "Agreement", Parameters, Results);
 EndProcedure
 
 #EndRegion
@@ -123,33 +124,83 @@ EndProcedure
 #Region COMPANY
 
 Procedure SetCompany(Parameters, Results) Export
-	// Comapny находится в шапке поэтому используем DataPath = Company
-	IsChanged = False;
-	For Each Result In Results Do
-		If SetProperty(Parameters, Result, "Company") Then
-			IsChanged = True;
-		EndIf;
-	EndDo;
-	If IsChanged Then
-		//ModelClientServer_V2.CompanyEntryPoint(Parameters, ThisObject);
-	EndIf;
+	Setter("CompanyEntryPoint", "Company", Parameters, Results);
 EndProcedure
 
 #EndRegion
 
 #Region ITEM_LIST_PRICE_TYPE
 
+Procedure ItemListPriceTypeOnChange(Parameters) Export
+	ModelClientServer_V2.EntryPoint("PriceTypeEntryPoint", Parameters);
+EndProcedure
+
+Procedure PriceTypeEnableChainLinks(Parameters, Chain) Export
+	Chain.Price.Enable = True;
+	Rows = Parameters.Object.ItemList;
+	If Parameters.Property("Rows") Then
+		// расчет только для конкретных строк, переданных в параметре
+		Rows = Parameters.Rows;
+	EndIf;
+	For Each Row In Rows Do
+		PriceOptions = ModelClientServer_V2.PriceOptions();
+		PriceOptions.Ref        = Parameters.Object.Ref;
+		PriceOptions.Date       = GetProperty(Parameters, "Date");
+		PriceOptions.PriceType  = GetProperty(Parameters, "ItemList.PriceType", Row.Key);
+		PriceOptions.ItemKey    = GetProperty(Parameters, "ItemList.ItemKey"  , Row.Key);
+		PriceOptions.Unit       = GetProperty(Parameters, "ItemList.Unit"     , Row.Key);
+		PriceOptions.Key        = Row.Key;
+		Chain.Price.Options.Add(PriceOptions);
+	EndDo;
+EndProcedure
+
 // Устанавливает PriceType в табличную часть ItemList
 Procedure SetPriceType(Parameters, Results) Export
-	IsChanged = False;
-	For Each Result In Results Do
-		If SetProperty(Parameters, Result, "ItemList.PriceType") Then
-			IsChanged = True;
-		EndIf;
-	EndDo;
-	If IsChanged Then
-	//ModelClientServer_V2.PriceTypeEntryPoint(Parameters, ThisObject);
+	Setter("PriceTypeEntryPoint", "ItemList.PriceType", Parameters, Results);
+EndProcedure
+
+#EndRegion
+
+#Region ITEM_LIST_PRICE
+
+Procedure ItemListPriceOnChange(Parameters) Export
+	ModelClientServer_V2.EntryPoint("PriceEntryPoint", Parameters);
+EndProcedure
+
+Procedure PriceEnableChainLinks(Parameters, Chain) Export
+	Rows = Parameters.Object.ItemList;
+	If Parameters.Property("Rows") Then
+		// расчет только для конкретных строк, переданных в параметре
+		Rows = Parameters.Rows;
 	EndIf;
+	For Each Row In Rows Do
+		// при изменении цены нужно пересчитать NetAmount, TotalAmount, TaxAmount, OffersAmount
+		CalculationsOptions = ModelClientServer_V2.CalculationsOptions();
+		
+		CalculationsOptions.CalculateNetAmount.Enable   = True;
+		CalculationsOptions.CalculateTax.Enable         = True;
+		CalculationsOptions.CalculateTotalAmount.Enable = True;
+		
+		CalculationsOptions.AmountOptions.DontCalculateRow = GetProperty(Parameters, "ItemList.DontCalculateRow", Row.Key);
+		CalculationsOptions.AmountOptions.NetAmount        = GetProperty(Parameters, "ItemList.NetAmount"    , Row.Key);
+		CalculationsOptions.AmountOptions.OffersAmount     = GetProperty(Parameters, "ItemList.OffersAmount" , Row.Key);
+		CalculationsOptions.AmountOptions.TotalAmount      = GetProperty(Parameters, "ItemList.TotalAmount"  , Row.Key);
+		
+		CalculationsOptions.PriceOptions.Price              = GetProperty(Parameters, "ItemList.Price"              , Row.Key);
+		CalculationsOptions.PriceOptions.PriceType          = GetProperty(Parameters, "ItemList.PriceType"          , Row.Key);
+		CalculationsOptions.PriceOptions.Quantity           = GetProperty(Parameters, "ItemList.Quantity"           , Row.Key);
+		CalculationsOptions.PriceOptions.QuantityInBaseUnit = GetProperty(Parameters, "ItemList.QuantityInBaseUnit" , Row.Key);
+		
+		CalculationsOptions.TaxOptions.PriceIncludeTax  = GetProperty(Parameters, "PriceIncludeTax", Row.Key);
+		
+		CalculationsOptions.Key = Row.Key;
+		
+		Chain.Calculatios.Add(CalculationsOptions);
+	EndDo;
+EndProcedure
+
+Procedure SetPrice(Parameters, Results) Export
+	Setter("PriceEntryPoint", "ItemList.Price", Parameters, Results);
 EndProcedure
 
 #EndRegion
@@ -183,28 +234,28 @@ Procedure CommitChainChanges(Parameters) Export
 EndProcedure
 
 // параметр Key используется когда DataPath указывает на реквизит табличной части, например ItemList.PriceType
-Function GetProperty(Cache, Object, DataPath, Key = Undefined)
+Function GetProperty(Parameters, DataPath, Key = Undefined)
 	Segments = StrSplit(DataPath, ".");
 	If Segments.Count() = 1 Then // это реквизит шапки, он указывается без точки, например Company
-		If Cache.Property(DataPath) Then
-			Return Cache[DataPath];
+		If Parameters.Cache.Property(DataPath) Then
+			Return Parameters.Cache[DataPath];
 		Else
-			Return Object[DataPath];
+			Return Parameters.Object[DataPath];
 		EndIf;
 	ElsIf Segments.Count() = 2 Then // это реквизит табличной части, состоит из двух частей разделенных точкой ItemList.PriceType
 		TableName = Segments[0];
 		ColumnName = Segments[1];
 		
 		RowByKey = Undefined;
-		If Cache.Property(TableName) Then
-			For Each Row In Cache[TableName] Do
+		If Parameters.Cache.Property(TableName) Then
+			For Each Row In Parameters.Cache[TableName] Do
 				If Row.Key = Key Then
 					RowByKey = Row;
 				EndIf;
 			EndDo;
 		EndIf;
 		If RowByKey = Undefined Then
-			RowByKey = Object[TableName].FindRows(New Structure("Key", Key))[0];
+			RowByKey = Parameters.Object[TableName].FindRows(New Structure("Key", Key))[0];
 		EndIf;
 		Return RowByKey[ColumnName];
 	Else
@@ -219,7 +270,7 @@ Function SetProperty(Parameters, Result, DataPath)
 	// что бы получить значение из коллекции нужно искать его по ключу
 	_Key   = Result.Parameters.Key;
 	_Value = Result.Value;
-	If GetProperty(Parameters.Cache, Parameters.Object, DataPath, _Key) = _Value Then
+	If GetProperty(Parameters, DataPath, _Key) = _Value Then
 		Return False; // Свойство не изменилось
 	EndIf;
 	// измененные свойства сохраняются в кэш

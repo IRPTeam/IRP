@@ -52,3 +52,21 @@ Function CreateDocument(State, DocumentName) Export
 	
 	Return State;
 EndFunction
+
+Procedure TEST(PartnerRef) Export
+	Doc = Documents.PurchaseInvoice.CreateDocument();
+	Doc.Date = CurrentDate();
+	Results = New Array();
+	Result = New Structure();
+	Result.Insert("Value"      , PartnerRef);
+	Result.Insert("Parameters" , New Structure("Key"));
+	Results.Add(Result);
+	
+	Parameters1 = New Structure("Object", Doc);
+	Parameters1.Insert("ControllerModule", ControllerClientServer_V2);
+	
+	ControllerClientServer_V2.Compile();
+	ControllerClientServer_V2.SetPartner_API(Parameters1, Results);
+	Doc.Write();
+EndProcedure
+

@@ -262,6 +262,8 @@ EndFunction
 
 #Region PriceType
 
+//==================================================================================================
+
 Procedure ItemListPriceTypeOnChange(Object, Form, Item, AddInfo = Undefined) Export
 	DocumentsClient.ItemListPriceTypeOnChange(Object, Form, ThisObject, Item, Undefined, AddInfo);
 EndProcedure

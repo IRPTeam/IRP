@@ -8,15 +8,55 @@
 
 Procedure EntryPoint(EntryPointName, Parameters) Export
 	InitCache(Parameters, EntryPointName);
-	Chain = GetChain();
-	Parameters.ControllerModule.EnableChainLinks(EntryPointName, Parameters, Chain);
-	ExecuteChain(Parameters, Chain);
+	Parameters.EntryPointNameCounter.Add(EntryPointName);
+	
+#IF Client THEN
+	TmpParameters = New Structure("Form, Object", Parameters.Form, Parameters.Object);
+	Parameters.Form = Undefined;
+#ENDIF
+	// переносим выполнение на сервер
+	ModelServer_V2.ServerEntryPoint(Parameters, EntryPointName);
+	//ServerEntryPoint(Parameters, EntryPointName);
+	
+#IF Client THEN
+	Parameters.Form   = TmpParameters.Form;
+	Parameters.Object = TmpParameters.Object;
+	LoadControllerModule(Parameters);
+	LoadViewModule(Parameters);
+#ENDIF
 	
 	// проверяем что кэш был инициализирован из этой EntryPoint
 	// и если это так и мы дошли до конца процедуры то значит что ChainComplete 
 	If Parameters.EntryPointName = EntryPointName Then
 		Parameters.ControllerModule.OnChainComplete(Parameters);
 	EndIf;
+EndProcedure
+
+Procedure ServerEntryPoint(Parameters, EntryPointName) Export
+	LoadControllerModule(Parameters);	
+	Chain = GetChain();
+	Parameters.ControllerModule.EnableChainLinks(EntryPointName, Parameters, Chain);
+	ExecuteChain(Parameters, Chain);
+	
+	If Parameters.EntryPointName = EntryPointName Then
+		UnloadControllerModule(Parameters);
+	EndIf;	
+EndProcedure
+
+Procedure LoadControllerModule(Parameters)
+	If Parameters.ControllerModule = Undefined Then
+		Parameters.ControllerModule = Eval(Parameters.ControllerModuleName);
+	EndIf;
+EndProcedure
+
+Procedure LoadViewModule(Parameters)
+	If Parameters.ViewModule = Undefined Then
+		Parameters.ViewModule = Eval(Parameters.ViewModuleName);
+	EndIf;
+EndProcedure
+
+Procedure UnloadControllerModule(Parameters)
+	Parameters.ControllerModule = Undefined;
 EndProcedure
 
 Procedure Init_API(EntryPointName, Parameters) Export
@@ -486,7 +526,10 @@ EndFunction
 Procedure InitCache(Parameters, EntryPointName) Export
 	If Not Parameters.Property("Cache") Then
 		Parameters.Insert("Cache", New Structure());
-		Parameters.Insert("EntryPointName", EntryPointName);
-		Parameters.Insert("ViewNotify"    , New Array());
+		Parameters.Insert("EntryPointName"   , EntryPointName);
+		Parameters.Insert("ViewNotify"       , New Array());
+		Parameters.Insert("ControllerModule" , Undefined);
+		Parameters.Insert("ViewModule"       , Undefined);
+		Parameters.Insert("EntryPointNameCounter"   , New Array());
 	EndIf;
 EndProcedure

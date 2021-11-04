@@ -394,6 +394,7 @@
   <commonModules>CommonModule.ModelClientServer_V2</commonModules>
   <commonModules>CommonModule.ViewClient_V2</commonModules>
   <commonModules>CommonModule.ControllerClientServer_V2</commonModules>
+  <commonModules>CommonModule.ModelServer_V2</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>

@@ -8,8 +8,8 @@ Function GetParameters(Object, Form, Rows = Undefined)
 	Parameters = New Structure();
 	Parameters.Insert("Object"           , Object);
 	Parameters.Insert("Form"             , Form);
-	Parameters.Insert("ViewModule"       , ViewClient_V2);
-	Parameters.Insert("ControllerModule" , ControllerClientServer_V2);
+	Parameters.Insert("ViewModuleName"       , "ViewClient_V2");
+	Parameters.Insert("ControllerModuleName" , "ControllerClientServer_V2");
 	If Rows <> Undefined And Rows.Count() Then
 		Parameters.Insert("Rows", Rows);
 	EndIf;
@@ -22,7 +22,10 @@ Function GetRowsByCurrentData(Form, TableName, CurrentData)
 		CurrentData = Form.Items[TableName].CurrentData;
 	EndIf;
 	If CurrentData <> Undefined Then
-		Rows.Add(CurrentData);
+		Columns = "Key, PriceType, Price, NetAmount, OffersAmount, TaxAmount, TotalAmount";
+		Row = New Structure(Columns);
+		FillPropertyValues(Row, CurrentData);
+		Rows.Add(Row);
 	EndIf;
 	Return Rows;
 EndFunction

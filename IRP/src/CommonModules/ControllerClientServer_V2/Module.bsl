@@ -10,14 +10,15 @@ Procedure EnableChainLinks(EntryPointName, Parameters, Chain) Export
 EndProcedure
 
 Procedure RouteEnableChainLinks(EntryPointName, Parameters, Chain)
-	If    EntryPointName = "PartnerEntryPoint"   Then PartnerEnableChainLinks(Parameters, Chain);
-	ElsIf EntryPointName = "AgreementEntryPoint" Then AgreementEnableChainLinks(Parameters, Chain);
-	ElsIf EntryPointName = "PriceTypeEntryPoint" Then PriceTypeEnableChainLinks(Parameters, Chain);
-	ElsIf EntryPointName = "PriceEntryPoint"     Then PriceEnableChainLinks(Parameters, Chain);
-	ElsIf EntryPointName = "NetAmountEntryPointEntryPoint"    Then NetAmountEntryPointEnableChainLinks(Parameters, Chain);
-	ElsIf EntryPointName = "TaxAmountEntryPointEntryPoint"    Then TaxAmountEntryPointEnableChainLinks(Parameters, Chain);
-	ElsIf EntryPointName = "OffersAmountEntryPointEntryPoint" Then OffersAmountEntryPointEnableChainLinks(Parameters, Chain);
-	ElsIf EntryPointName = "TotalAmountEntryPointEntryPoint"  Then TotalAmountEntryPointEnableChainLinks(Parameters, Chain);
+	   If EntryPointName = "CompanyEntryPoint"      Then CompanyEnableChainLinks(Parameters, Chain);
+	ElsIf EntryPointName = "PartnerEntryPoint"      Then PartnerEnableChainLinks(Parameters, Chain);
+	ElsIf EntryPointName = "AgreementEntryPoint"    Then AgreementEnableChainLinks(Parameters, Chain);
+	ElsIf EntryPointName = "PriceTypeEntryPoint"    Then PriceTypeEnableChainLinks(Parameters, Chain);
+	ElsIf EntryPointName = "PriceEntryPoint"        Then PriceEnableChainLinks(Parameters, Chain);
+	ElsIf EntryPointName = "NetAmountEntryPoint"    Then NetAmountEntryPointEnableChainLinks(Parameters, Chain);
+	ElsIf EntryPointName = "TaxAmountEntryPoint"    Then TaxAmountEntryPointEnableChainLinks(Parameters, Chain);
+	ElsIf EntryPointName = "OffersAmountEntryPoint" Then OffersAmountEntryPointEnableChainLinks(Parameters, Chain);
+	ElsIf EntryPointName = "TotalAmountEntryPoint"  Then TotalAmountEntryPointEnableChainLinks(Parameters, Chain);
 	Else Raise StrTemplate("Route enable chain links error [%1]", EntryPointName); EndIf;
 EndProcedure
 
@@ -43,7 +44,7 @@ Procedure PartnerEnableChainLinks(Parameters, Chain)
 	AgreementOptions = ModelClientServer_V2.AgreementOptions();
 	AgreementOptions.Partner       = GetProperty(Parameters, "Partner");
 	AgreementOptions.Agreement     = GetProperty(Parameters, "Agreement");
-	AgreementOptions.Date          = GetProperty(Parameters, "Date");
+	AgreementOptions.CurrentDate   = GetProperty(Parameters, "Date");
 	AgreementOptions.AgreementType = PredefinedValue("Enum.AgreementTypes.Customer");
 	Chain.Agreement.Options.Add(AgreementOptions);
 EndProcedure
@@ -108,6 +109,10 @@ EndProcedure
 #EndRegion
 
 #Region COMPANY
+
+Procedure CompanyEnableChainLinks(Parameters, Chain) Export
+	Return;
+EndProcedure
 
 Procedure SetCompany(Parameters, Results) Export
 	Setter("CompanyEntryPoint", "Company", Parameters, Results);
@@ -229,10 +234,10 @@ Procedure TotalAmountEntryPointEnableChainLinks(Parameters, Chain)
 EndProcedure
 
 Procedure SetCalculations(Parameters, Results) Export
-	Setter("NetAmountEntryPoint"   , "ItemList.NetAmount"   , Parameters, Results);
-	Setter("TaxAmountEntryPoint"   , "ItemList.TaxAmount"   , Parameters, Results);
-	Setter("OffersAmountEntryPoint", "ItemList.OffersAmount", Parameters, Results);
-	Setter("TotalAmountEntryPoint" , "ItemList.TotalAmount" , Parameters, Results);
+	Setter("NetAmountEntryPoint"   , "ItemList.NetAmount"   , Parameters, Results, , "NetAmount");
+	Setter("TaxAmountEntryPoint"   , "ItemList.TaxAmount"   , Parameters, Results, , "TaxAmount");
+	Setter("OffersAmountEntryPoint", "ItemList.OffersAmount", Parameters, Results, , "OffersAmount");
+	Setter("TotalAmountEntryPoint" , "ItemList.TotalAmount" , Parameters, Results, , "TotalAmount");
 EndProcedure
 
 #EndRegion
@@ -264,23 +269,32 @@ Procedure CommitChainChanges(Parameters) Export
 		EndIf;
 	EndDo;
 	#IF Client THEN
+		If Parameters.ViewNotify.Count() And Parameters.ViewModule Then
+			Raise "View module undefined";
+		EndIf;
 		For Each ViewNotify In Parameters.ViewNotify Do
 			Execute StrTemplate("%1.%2(Parameters);", Parameters.ViewModule, ViewNotify);
 		EndDo;
 	#ENDIF
 EndProcedure
 
-Procedure Setter(EntryPointName, DataPath, Parameters, Results, ViewNotify = Undefined)
+Procedure Setter(EntryPointName, DataPath, Parameters, Results, ViewNotify = Undefined, ValueDataPath = Undefined)
 	IsChanged = False;
 	For Each Result In Results Do
-		If SetProperty(Parameters, Result, DataPath) Then
+		_Key   = Result.Options.Key;
+		If ValueIsFilled(ValueDataPath) Then
+			_Value = Result.Value[ValueDataPath];
+		Else
+			_Value = Result.Value;
+		EndIf;
+		If SetProperty(Parameters, DataPath, _Key, _Value) Then
 			IsChanged = True;
 		EndIf;
 	EndDo;
 	If IsChanged Then
 		If ViewNotify <> Undefined Then
 			// переадресация в клиентский модуль, вызов был с клиента, на форме что то надо обновить
-			// вызывать будем потом когда завершится вся цепочка действий
+			// вызывать будем потом когда завершится вся цепочка действий, и изменения будут перенесены с кэша в объект
 			Parameters.ViewNotify.Add(ViewNotify);
 		EndIf;
 		ModelClientServer_V2.EntryPoint(EntryPointName, Parameters);
@@ -323,10 +337,8 @@ EndFunction
 
 // Устанавливает свойства по переданному DataPath, например ItemList.PriceType или Company
 // возвращает True если хотябы одно свойство было изменено
-Function SetProperty(Parameters, Result, DataPath)
+Function SetProperty(Parameters, DataPath, _Key, _Value)
 	// что бы получить значение из коллекции нужно искать его по ключу
-	_Key   = Result.Options.Key;
-	_Value = Result.Value;
 	If GetProperty(Parameters, DataPath, _Key) = _Value Then
 		Return False; // Свойство не изменилось
 	EndIf;
@@ -340,10 +352,20 @@ Function SetProperty(Parameters, Result, DataPath)
 		If Not Parameters.Cache.Property(TableName) Then
 			Parameters.Cache.Insert(TableName, New Array());
 		EndIf;
-		NewRow = New Structure();
-		NewRow.Insert("Key"      , _Key);
-		NewRow.Insert(ColumnName , _Value);
-		Parameters.Cache[TableName].Add(NewRow);
+		IsRowExists = False;
+		For Each Row In Parameters.Cache[TableName] Do
+			If Row.Key = _Key Then
+				Row.Insert(ColumnName, _Value);
+				IsRowExists = True;
+				Break;
+			EndIf;
+		EndDo;
+		If Not IsRowExists Then
+			NewRow = New Structure();
+			NewRow.Insert("Key"      , _Key);
+			NewRow.Insert(ColumnName , _Value);
+			Parameters.Cache[TableName].Add(NewRow);
+		EndIf;
 	Else
 		// реквизитов с таким путем не бывает
 		Raise StrTemplate("Wrong data path [%1]", DataPath);

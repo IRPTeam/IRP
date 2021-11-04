@@ -171,13 +171,14 @@ EndFunction
 
 Function CalculationsOptions() Export
 	Options = GetChainLinkOptions("");
+	
 	AmountOptions = New Structure();
 	AmountOptions.Insert("DontCalculateRow", False);
 	AmountOptions.Insert("NetAmount"       , 0);
 	AmountOptions.Insert("OffersAmount"    , 0);
 	AmountOptions.Insert("TaxAmount"       , 0);
 	AmountOptions.Insert("TotalAmount"     , 0);
-	AmountOptions.Insert("AmountOptions", AmountOptions);
+	Options.Insert("AmountOptions", AmountOptions);
 	
 	PriceOptions = New Structure("PriceType, Price, Quantity, QuantityInBaseUnit");
 	Options.Insert("PriceOptions", PriceOptions);

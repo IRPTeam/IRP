@@ -32,6 +32,8 @@ EndProcedure
 Procedure RouteEnableChainLinks(EntryPointName, Parameters, Chain)
 	If    EntryPointName = "PartnerEntryPoint"   Then PartnerEnableChainLinks(Parameters, Chain);
 	ElsIf EntryPointName = "AgreementEntryPoint" Then AgreementEnableChainLinks(Parameters, Chain);
+	ElsIf EntryPointName = "PriceTypeEntryPoint" Then PriceTypeEnableChainLinks(Parameters, Chain);
+	ElsIf EntryPointName = "PriceEntryPoint"     Then PriceEnableChainLinks(Parameters, Chain);
 	Else Raise StrTemplate("Route enable chain links error [%1]", EntryPointName); EndIf;
 EndProcedure
 
@@ -184,6 +186,7 @@ Procedure PriceEnableChainLinks(Parameters, Chain) Export
 		CalculationsOptions.AmountOptions.DontCalculateRow = GetProperty(Parameters, "ItemList.DontCalculateRow", Row.Key);
 		CalculationsOptions.AmountOptions.NetAmount        = GetProperty(Parameters, "ItemList.NetAmount"    , Row.Key);
 		CalculationsOptions.AmountOptions.OffersAmount     = GetProperty(Parameters, "ItemList.OffersAmount" , Row.Key);
+		CalculationsOptions.AmountOptions.TaxAmount        = GetProperty(Parameters, "ItemList.TaxAmount"    , Row.Key);
 		CalculationsOptions.AmountOptions.TotalAmount      = GetProperty(Parameters, "ItemList.TotalAmount"  , Row.Key);
 		
 		CalculationsOptions.PriceOptions.Price              = GetProperty(Parameters, "ItemList.Price"              , Row.Key);
@@ -201,6 +204,14 @@ EndProcedure
 
 Procedure SetPrice(Parameters, Results) Export
 	Setter("PriceEntryPoint", "ItemList.Price", Parameters, Results);
+EndProcedure
+
+#EndRegion
+
+#Region NET_OFFERS_TAX_AMOUNTS
+
+Procedure SetCalculations(Parameters, Results) Export
+
 EndProcedure
 
 #EndRegion
@@ -268,7 +279,7 @@ EndFunction
 // возвращает True если хотябы одно свойство было изменено
 Function SetProperty(Parameters, Result, DataPath)
 	// что бы получить значение из коллекции нужно искать его по ключу
-	_Key   = Result.Parameters.Key;
+	_Key   = Result.Options.Key;
 	_Value = Result.Value;
 	If GetProperty(Parameters, DataPath, _Key) = _Value Then
 		Return False; // Свойство не изменилось

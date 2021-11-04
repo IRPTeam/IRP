@@ -19,7 +19,7 @@ EndFunction
 Function GetRowsByCurrentData(Form, TableName, CurrentData)
 	Rows = New Array();
 	If CurrentData = Undefined Then
-		CurrentData = Form[TableName].CurrentData;
+		CurrentData = Form.Items[TableName].CurrentData;
 	EndIf;
 	If CurrentData <> Undefined Then
 		Rows.Add(CurrentData);

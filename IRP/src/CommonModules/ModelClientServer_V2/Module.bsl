@@ -38,20 +38,22 @@ Function GetChain()
 EndFunction
 
 Function RouteExecutor(Name, Options)
-	If    Name = "LegalName" Then Return LegalNameExecute(Options);
-	ElsIf Name = "Agreement" Then Return AgreementExecute(Options);
-	ElsIf Name = "Company"   Then Return CompanyExecute(Options);
-	ElsIf Name = "PriceType" Then Return PriceTypeExecute(Options);
-	ElsIf Name = "Price" Then Return PriceExecute(Options);
+	If    Name = "LegalName"    Then Return LegalNameExecute(Options);
+	ElsIf Name = "Agreement"    Then Return AgreementExecute(Options);
+	ElsIf Name = "Company"      Then Return CompanyExecute(Options);
+	ElsIf Name = "PriceType"    Then Return PriceTypeExecute(Options);
+	ElsIf Name = "Price"        Then Return PriceExecute(Options);
+	ElsIf Name = "Calculations" Then Return CalculationsExecute(Options);
 	Else Raise StrTemplate("Route executor error [%1]", Name); EndIf;
 EndFunction
 
 Procedure RouteSetter(Name, Parameters, Results)
-	If    Name = "LegalName" Then Parameters.ControllerModule.SetLegalName(Parameters, Results);
-	ElsIf Name = "Agreement" Then Parameters.ControllerModule.SetAgreement(Parameters, Results);
-	ElsIf Name = "Company"   Then Parameters.ControllerModule.SetCompany(Parameters, Results);
-	ElsIf Name = "PriceType" Then Parameters.ControllerModule.SetPriceType(Parameters, Results);
-	ElsIf Name = "Price"     Then Parameters.ControllerModule.SetPrice(Parameters, Results);
+	If    Name = "LegalName"    Then Parameters.ControllerModule.SetLegalName(Parameters, Results);
+	ElsIf Name = "Agreement"    Then Parameters.ControllerModule.SetAgreement(Parameters, Results);
+	ElsIf Name = "Company"      Then Parameters.ControllerModule.SetCompany(Parameters, Results);
+	ElsIf Name = "PriceType"    Then Parameters.ControllerModule.SetPriceType(Parameters, Results);
+	ElsIf Name = "Price"        Then Parameters.ControllerModule.SetPrice(Parameters, Results);
+	ElsIf Name = "Calculations" Then Parameters.ControllerModule.SetCalculations(Parameters, Results);
 	Else Raise StrTemplate("Route setter error [%1]", Name); EndIf;
 EndProcedure
 
@@ -87,7 +89,7 @@ Procedure ExecuteChain(Parameters, Chain)
 		If Chain[Name].Enable Then
 			Results = New Array();
 			For Each Options In Chain[Name].Options Do
-				Results.Add(RouteExecutor(Name, Options));
+				Results.Add(GetChainLinkResult(Options, RouteExecutor(Name, Options)));
 			EndDo;
 			RouteSetter(Name, Parameters, Results);
 		EndIf;
@@ -103,8 +105,7 @@ Function LegalNameOptions() Export
 EndFunction
 
 Function LegalNameExecute(Options)
-	NewLegalName = DocumentsServer.GetLegalNameByPartner(Options.Partner, Options.LegalName);
-	Return GetChainLinkResult(Options, NewLegalName);
+	Return DocumentsServer.GetLegalNameByPartner(Options.Partner, Options.LegalName);
 EndFunction
 
 #EndRegion
@@ -116,8 +117,7 @@ Function AgreementOptions() Export
 EndFunction
 
 Function AgreementExecute(Options)
-	NewAgreement = DocumentsServer.GetAgreementByPartner(Options);
-	Return GetChainLinkResult(Options, NewAgreement);
+	Return DocumentsServer.GetAgreementByPartner(Options);
 EndFunction
 
 #EndRegion
@@ -129,8 +129,7 @@ Function CompanyOptions() Export
 EndFunction
 
 Function CompanyExecute(Options)
-	NewCompany = CatAgreementsServer.GetAgreementInfo(Options.Agreement).Company;
-	Return GetChainLinkResult(Options, NewCompany);
+	Return CatAgreementsServer.GetAgreementInfo(Options.Agreement).Company;
 EndFunction
 
 #EndRegion
@@ -142,8 +141,7 @@ Function PriceTypeOptions() Export
 EndFunction
 
 Function PriceTypeExecute(Options)
-	NewPriceType = CatAgreementsServer.GetAgreementInfo(Options.Agreement).PriceType;
-	Return GetChainLinkResult(Options, NewPriceType);
+	Return CatAgreementsServer.GetAgreementInfo(Options.Agreement).PriceType;
 EndFunction
 
 #EndRegion
@@ -163,8 +161,7 @@ Function PriceExecute(Options)
 	PriceParameters.Insert("ItemKey"      , Options.ItemKey);
 	PriceParameters.Insert("Unit"         , Options.Unit);
 	PriceInfo = GetItemInfo.ItemPriceInfo(PriceParameters);
-	NewPrice = ?(PriceInfo = Undefined, 0, PriceInfo.Price);
-	Return GetChainLinkResult(Options, NewPrice);
+	Return ?(PriceInfo = Undefined, 0, PriceInfo.Price);
 EndFunction
 
 #EndRegion
@@ -196,9 +193,9 @@ Function CalculationsOptions() Export
 	Options.Insert("CalculateNetAmountByTotalAmount"               , New Structure("Enable", False));
 	Options.Insert("CalculateNetAmountAsTotalAmountMinusTaxAmount" , New Structure("Enable", False));
 	
-	Options.Insert("CalculateTax"              , New Structure("Enable", False));
-	Options.Insert("CalculateTaxByNetAmount"   , New Structure("Enable", False));
-	Options.Insert("CalculateTaxByTotalAmount" , New Structure("Enable", False));
+	Options.Insert("CalculateTaxAmount"              , New Structure("Enable", False));
+	Options.Insert("CalculateTaxAmountByNetAmount"   , New Structure("Enable", False));
+	Options.Insert("CalculateTaxAmountByTotalAmount" , New Structure("Enable", False));
 	
 	Return Options;
 EndFunction
@@ -254,7 +251,7 @@ Function CalculationsExecute(Options)
 				Result.TotalAmount = CalculateTotalAmount_PriceIncludeTax(Options.PriceOptions, Result);
 			EndIf;
 
-			If Options.CalculateTax.Enable And IsCalculatedRow Then
+			If Options.CalculateTaxAmount.Enable And IsCalculatedRow Then
 				//CalculateTax_PriceIncludeTax(Object, ItemRow, ArrayOfTaxInfo, AddInfo);
 			EndIf;
 
@@ -267,14 +264,14 @@ Function CalculationsExecute(Options)
 			EndIf;
 		Else
 			If Options.CalculateNetAmountAsTotalAmountMinusTaxAmount.Enable And IsCalculatedRow Then
-				//CalculateNetAmountAsTotalAmountMinusTaxAmount_PriceNotIncludeTax(Object, ItemRow, AddInfo);
+				Result.NetAmount = CalculateNetAmountAsTotalAmountMinusTaxAmount_PriceNotIncludeTax(Options.PriceOptions, Result);
 			EndIf;
 
 			If Options.CalculateNetAmount.Enable And IsCalculatedRow Then
-				//CalculateNetAmount_PriceNotIncludeTax(Object, ItemRow, AddInfo);
+				Result.NetAmount = CalculateNetAmount_PriceNotIncludeTax(Options.PriceOptions, Result);
 			EndIf;
 
-			If Options.CalculateTax.Enable And IsCalculatedRow Then
+			If Options.CalculateTaxAmount.Enable And IsCalculatedRow Then
 				//CalculateTax_PriceNotIncludeTax(Object, ItemRow, ArrayOfTaxInfo, AddInfo);
 			EndIf;
 
@@ -283,7 +280,7 @@ Function CalculationsExecute(Options)
 			EndIf;
 		EndIf;
 	Else
-		If Options.CalculateTax.Enable And IsCalculatedRow Then
+		If Options.CalculateTaxAmount.Enable And IsCalculatedRow Then
 			//CalculateTaxManualPriority(Object, ItemRow, False, ArrayOfTaxInfo, False, AddInfo);
 		EndIf;
 
@@ -291,11 +288,11 @@ Function CalculationsExecute(Options)
 			Result.TotalAmount = CalculateTotalAmount_PriceNotIncludeTax(Options.PriceOptions, Result);
 		EndIf;
 
-		If Options.CalculateTaxByNetAmount.Enable And IsCalculatedRow Then
+		If Options.CalculateTaxAmountByNetAmount.Enable And IsCalculatedRow Then
 			//CalculateTaxManualPriority(Object, ItemRow, False, ArrayOfTaxInfo, False, AddInfo);
 		EndIf;
 
-		If Options.CalculateTaxByTotalAmount.Enable And IsCalculatedRow Then
+		If Options.CalculateTaxAmountByTotalAmount.Enable And IsCalculatedRow Then
 			//CalculateTaxManualPriority(Object, ItemRow, True, ArrayOfTaxInfo, False, AddInfo);
 		EndIf;
 
@@ -322,6 +319,7 @@ Function CalculationsExecute(Options)
 //	If Actions.Property("UpdateBarcode") Then
 //		UpdateBarcode(Object, ItemRow, AddInfo);
 //	EndIf;
+	Return Result;
 EndFunction
 
 Function CalculateTotalAmount_PriceIncludeTax(PriceOptions, Result)
@@ -342,6 +340,18 @@ Function CalculateNetAmount_PriceIncludeTax(PriceOptions, Result)
 	Else
 		Return (Result.TotalAmount - Result.TaxAmount - Result.OffersAmount);
 	EndIf;
+EndFunction
+
+Function CalculateNetAmount_PriceNotIncludeTax(PriceOptions, Result)
+	If PriceOptions.Price <> Undefined Then
+		Return _CalculateAmount(PriceOptions, Result) - Result.OffersAmount;
+	Else
+		Return Result.TotalAmount;
+	EndIf;
+EndFunction
+
+Function CalculateNetAmountAsTotalAmountMinusTaxAmount_PriceNotIncludeTax(PriceOptions, Result)
+	Return Result.TotalAmount - Result.TaxAmount - Result.OffersAmount;
 EndFunction
 
 Function _CalculateAmount(PriceOptions, Result)

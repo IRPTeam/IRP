@@ -9,31 +9,15 @@ Procedure EnableChainLinks(EntryPointName, Parameters, Chain) Export
 	RouteEnableChainLinks(EntryPointName, Parameters, Chain);
 EndProcedure
 
-Procedure Setter(EntryPointName, DataPath, Parameters, Results, ViewNotify = Undefined) Export
-	IsChanged = False;
-	For Each Result In Results Do
-		If SetProperty(Parameters, Result, DataPath) Then
-			IsChanged = True;
-		EndIf;
-	EndDo;
-	If IsChanged Then
-//		#IF Client THEN
-			//If Parameters.ViewModule <> Undefined And ViewNotify <> Undefined Then
-			If ViewNotify <> Undefined Then
-				// переадресация в клиентский модуль, вызов был с клиента, на форме что то надо обновить
-				// вызывать будем потом когда завершится вся цепочка действий
-				Parameters.ViewNotify.Add(ViewNotify);
-			EndIf;
-//		#ENDIF
-		ModelClientServer_V2.EntryPoint(EntryPointName, Parameters);
-	EndIf;
-EndProcedure
-
 Procedure RouteEnableChainLinks(EntryPointName, Parameters, Chain)
 	If    EntryPointName = "PartnerEntryPoint"   Then PartnerEnableChainLinks(Parameters, Chain);
 	ElsIf EntryPointName = "AgreementEntryPoint" Then AgreementEnableChainLinks(Parameters, Chain);
 	ElsIf EntryPointName = "PriceTypeEntryPoint" Then PriceTypeEnableChainLinks(Parameters, Chain);
 	ElsIf EntryPointName = "PriceEntryPoint"     Then PriceEnableChainLinks(Parameters, Chain);
+	ElsIf EntryPointName = "NetAmountEntryPointEntryPoint"    Then NetAmountEntryPointEnableChainLinks(Parameters, Chain);
+	ElsIf EntryPointName = "TaxAmountEntryPointEntryPoint"    Then TaxAmountEntryPointEnableChainLinks(Parameters, Chain);
+	ElsIf EntryPointName = "OffersAmountEntryPointEntryPoint" Then OffersAmountEntryPointEnableChainLinks(Parameters, Chain);
+	ElsIf EntryPointName = "TotalAmountEntryPointEntryPoint"  Then TotalAmountEntryPointEnableChainLinks(Parameters, Chain);
 	Else Raise StrTemplate("Route enable chain links error [%1]", EntryPointName); EndIf;
 EndProcedure
 
@@ -170,6 +154,7 @@ Procedure ItemListPriceOnChange(Parameters) Export
 EndProcedure
 
 Procedure PriceEnableChainLinks(Parameters, Chain) Export
+	Chain.Calculations.Enable = True;
 	Rows = Parameters.Object.ItemList;
 	If Parameters.Property("Rows") Then
 		// расчет только для конкретных строк, переданных в параметре
@@ -180,10 +165,11 @@ Procedure PriceEnableChainLinks(Parameters, Chain) Export
 		CalculationsOptions = ModelClientServer_V2.CalculationsOptions();
 		
 		CalculationsOptions.CalculateNetAmount.Enable   = True;
-		CalculationsOptions.CalculateTax.Enable         = True;
 		CalculationsOptions.CalculateTotalAmount.Enable = True;
+		CalculationsOptions.CalculateTaxAmount.Enable   = False; // расчет налогов еще не написан
 		
 		CalculationsOptions.AmountOptions.DontCalculateRow = GetProperty(Parameters, "ItemList.DontCalculateRow", Row.Key);
+		
 		CalculationsOptions.AmountOptions.NetAmount        = GetProperty(Parameters, "ItemList.NetAmount"    , Row.Key);
 		CalculationsOptions.AmountOptions.OffersAmount     = GetProperty(Parameters, "ItemList.OffersAmount" , Row.Key);
 		CalculationsOptions.AmountOptions.TaxAmount        = GetProperty(Parameters, "ItemList.TaxAmount"    , Row.Key);
@@ -198,7 +184,7 @@ Procedure PriceEnableChainLinks(Parameters, Chain) Export
 		
 		CalculationsOptions.Key = Row.Key;
 		
-		Chain.Calculatios.Add(CalculationsOptions);
+		Chain.Calculations.Options.Add(CalculationsOptions);
 	EndDo;
 EndProcedure
 
@@ -208,10 +194,45 @@ EndProcedure
 
 #EndRegion
 
-#Region NET_OFFERS_TAX_AMOUNTS
+#Region NET_OFFERS_TAX_TOTAL_AMOUNTS
+
+Procedure ItemListNetAmountOnChange(Parameters) Export
+	ModelClientServer_V2.EntryPoint("NetAmountEntryPoint", Parameters);
+EndProcedure
+
+Procedure NetAmountEntryPointEnableChainLinks(Parameters, Chain)
+	Return;
+EndProcedure
+
+Procedure ItemListTaxAmountOnChange(Parameters) Export
+	ModelClientServer_V2.EntryPoint("TaxAmountEntryPoint", Parameters);
+EndProcedure
+
+Procedure TaxAmountEntryPointEnableChainLinks(Parameters, Chain)
+	Return;
+EndProcedure
+
+Procedure ItemListOffersAmountOnChange(Parameters) Export
+	ModelClientServer_V2.EntryPoint("OffersAmountEntryPoint", Parameters);
+EndProcedure
+
+Procedure OffersAmountEntryPointEnableChainLinks(Parameters, Chain)
+	Return;
+EndProcedure
+
+Procedure ItemListTotalAmountOnChange(Parameters) Export
+	ModelClientServer_V2.EntryPoint("TotalAmountEntryPoint", Parameters);
+EndProcedure
+
+Procedure TotalAmountEntryPointEnableChainLinks(Parameters, Chain)
+	Return;
+EndProcedure
 
 Procedure SetCalculations(Parameters, Results) Export
-
+	Setter("NetAmountEntryPoint"   , "ItemList.NetAmount"   , Parameters, Results);
+	Setter("TaxAmountEntryPoint"   , "ItemList.TaxAmount"   , Parameters, Results);
+	Setter("OffersAmountEntryPoint", "ItemList.OffersAmount", Parameters, Results);
+	Setter("TotalAmountEntryPoint" , "ItemList.TotalAmount" , Parameters, Results);
 EndProcedure
 
 #EndRegion
@@ -242,6 +263,28 @@ Procedure CommitChainChanges(Parameters) Export
 			Parameters.Object[Property.Key] = Property.Value; // это реквизит шапки
 		EndIf;
 	EndDo;
+	#IF Client THEN
+		For Each ViewNotify In Parameters.ViewNotify Do
+			Execute StrTemplate("%1.%2(Parameters);", Parameters.ViewModule, ViewNotify);
+		EndDo;
+	#ENDIF
+EndProcedure
+
+Procedure Setter(EntryPointName, DataPath, Parameters, Results, ViewNotify = Undefined)
+	IsChanged = False;
+	For Each Result In Results Do
+		If SetProperty(Parameters, Result, DataPath) Then
+			IsChanged = True;
+		EndIf;
+	EndDo;
+	If IsChanged Then
+		If ViewNotify <> Undefined Then
+			// переадресация в клиентский модуль, вызов был с клиента, на форме что то надо обновить
+			// вызывать будем потом когда завершится вся цепочка действий
+			Parameters.ViewNotify.Add(ViewNotify);
+		EndIf;
+		ModelClientServer_V2.EntryPoint(EntryPointName, Parameters);
+	EndIf;
 EndProcedure
 
 // параметр Key используется когда DataPath указывает на реквизит табличной части, например ItemList.PriceType
@@ -260,6 +303,9 @@ Function GetProperty(Parameters, DataPath, Key = Undefined)
 		RowByKey = Undefined;
 		If Parameters.Cache.Property(TableName) Then
 			For Each Row In Parameters.Cache[TableName] Do
+				If Not Row.Property(ColumnName) Then
+					Continue;
+				EndIf;
 				If Row.Key = Key Then
 					RowByKey = Row;
 				EndIf;

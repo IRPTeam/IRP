@@ -265,8 +265,7 @@ EndFunction
 //==================================================================================================
 
 Procedure ItemListPriceTypeOnChange(Object, Form, Item, AddInfo = Undefined) Export
-	ViewClient_V2.ItemListPriceTypeOnChange(Object, Form);
-	//DocumentsClient.ItemListPriceTypeOnChange(Object, Form, ThisObject, Item, Undefined, AddInfo);
+	DocumentsClient.ItemListPriceTypeOnChange(Object, Form, ThisObject, Item, Undefined, AddInfo);
 EndProcedure
 
 Procedure ItemListPriceTypeOnChangePutServerDataToAddInfo(Object, Form, AddInfo = Undefined) Export

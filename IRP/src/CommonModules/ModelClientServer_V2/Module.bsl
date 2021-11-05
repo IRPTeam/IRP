@@ -43,26 +43,6 @@ Procedure ServerEntryPoint(Parameters, EntryPointName) Export
 	EndIf;	
 EndProcedure
 
-Procedure LoadControllerModule(Parameters)
-	If Parameters.ControllerModule = Undefined Then
-		Parameters.ControllerModule = Eval(Parameters.ControllerModuleName);
-	EndIf;
-EndProcedure
-
-Procedure LoadViewModule(Parameters)
-	If Parameters.ViewModule = Undefined Then
-		Parameters.ViewModule = Eval(Parameters.ViewModuleName);
-	EndIf;
-EndProcedure
-
-Procedure UnloadControllerModule(Parameters)
-	Parameters.ControllerModule = Undefined;
-EndProcedure
-
-Procedure Init_API(EntryPointName, Parameters) Export
-	InitCache(Parameters, EntryPointName);
-EndProcedure
-
 #EndRegion
 
 #Region Chain
@@ -202,7 +182,7 @@ EndFunction
 #EndRegion
 
 Function CalculationsOptions() Export
-	Options = GetChainLinkOptions("");
+	Options = GetChainLinkOptions("Ref");
 	
 	AmountOptions = New Structure();
 	AmountOptions.Insert("DontCalculateRow", False);
@@ -215,9 +195,8 @@ Function CalculationsOptions() Export
 	PriceOptions = New Structure("PriceType, Price, Quantity, QuantityInBaseUnit");
 	Options.Insert("PriceOptions", PriceOptions);
 	
-	TaxOptions = New Structure("ItemKey, PriceIncludeTax");
+	TaxOptions = New Structure("ItemKey, PriceIncludeTax, ArrayOfTaxInfo, TaxRates");
 	// TaxList columns: Key, Tax, Analytics, TaxRate, Amount, IncludeToTotalAmount, ManualAmount
-	// CalculationsOptions_TaxOptions_TaxList
 	TaxOptions.Insert("TaxList", New Array());
 	Options.Insert("TaxOptions", TaxOptions);
 	
@@ -271,14 +250,13 @@ Function CalculationsExecute(Options)
 //		CalculateSpecialOffers(Object, ItemRow, AddInfo);
 //	EndIf;
 	
-	
-	
-	
 	Result = New Structure();
 	Result.Insert("NetAmount"    , Options.AmountOptions.NetAmount);
 	Result.Insert("OffersAmount" , Options.AmountOptions.OffersAmount);
 	Result.Insert("TaxAmount"    , Options.AmountOptions.TaxAmount);
 	Result.Insert("TotalAmount"  , Options.AmountOptions.TotalAmount);
+	Result.Insert("TaxRates"     , Options.TaxOptions.TaxRates);
+	Result.Insert("TaxList"      , New Array());
 	
 	If Options.TaxOptions.PriceIncludeTax <> Undefined Then
 		If Options.TaxOptions.PriceIncludeTax Then
@@ -287,7 +265,7 @@ Function CalculationsExecute(Options)
 			EndIf;
 
 			If Options.CalculateTaxAmount.Enable And IsCalculatedRow Then
-				//CalculateTax_PriceIncludeTax(Object, ItemRow, ArrayOfTaxInfo, AddInfo);
+				CalculateTax_PriceIncludeTax(Options, Options.TaxOptions, Result);
 			EndIf;
 
 			If Options.CalculateNetAmountAsTotalAmountMinusTaxAmount.Enable And IsCalculatedRow Then
@@ -402,123 +380,112 @@ EndFunction
 
 // НЕДОПИСАНО
 //
-//Procedure CalculateTax_PriceIncludeTax(Object, ItemRow, ArrayOfTaxInfo, AddInfo = Undefined)
-//	CalculateTax(Object, ItemRow, True, ArrayOfTaxInfo, False, AddInfo);
-//EndProcedure
-//
-////Procedure CalculateTax(Object, ItemRow, PriceIncludeTax, ArrayOfTaxInfo, Reverse, AddInfo = Undefined)
-//Procedure CalculateTax(TaxOptions, Result)
-//	// ArrayOfTaxInfo
-//	// - Name (column name)
-//	// - Tax
-//	//CachedColumns = "Key, Tax, Analytics, TaxRate, Amount, ManualAmount";
-//	
-//	//TaxListCache is TaxOptions.TaxList
-//	//TaxListCache = DeleteRowsInDependedTable(Object, "TaxList", ItemRow.Key, CachedColumns);
-//
-//	CheckedColumns = "Key, Tax, Analytics, TaxRate";
-//	ArrayOfCheckedColumns = StrSplit(CheckedColumns, ",");
-//
-//	If ArrayOfTaxInfo = Undefined Then
-//		Return;
-//	EndIf;
-//
-//	If TaxOptions.ItemKey <> Undefined And Not ValueIsFilled(TaxOptions.ItemKey) Then
-//		Return;
-//	EndIf;
-//	//If CommonFunctionsClientServer.ObjectHasProperty(ItemRow, "ItemKey") And Not ValueIsFilled(ItemRow.ItemKey) Then
-//	//	Return;
-//	//EndIf;
-//
-//	For Each ItemOfTaxInfo In ArrayOfTaxInfo Do
-//
-//		TaxTypeIsRate = True;
-//		If ItemOfTaxInfo.Property("TaxTypeIsRate") Then
-//			TaxTypeIsRate = ItemOfTaxInfo.TaxTypeIsRate;
-//		Else
-//			TaxTypeIsRate = (ItemOfTaxInfo.Type = PredefinedValue("Enum.TaxType.Rate"));
-//		EndIf;
-//
-//		If TaxTypeIsRate And Not ValueIsFilled(ItemRow[ItemOfTaxInfo.Name]) Then
-//
-//			ArrayOfTaxRates = New Array();
-//			If ItemOfTaxInfo.Property("ArrayOfTaxRates") Then
-//				ArrayOfTaxRates = ItemOfTaxInfo.ArrayOfTaxRates;
-//			Else
-//
-//				If CommonFunctionsClientServer.ObjectHasProperty(Object, "Agreement") Then
-//					Parameters = New Structure();
-//					Parameters.Insert("Date", Object.Date);
-//					Parameters.Insert("Company", Object.Company);
-//					Parameters.Insert("Tax", ItemOfTaxInfo.Tax);
-//					Parameters.Insert("Agreement", Object.Agreement);
-//					ArrayOfTaxRates = TaxesServer.GetTaxRatesForAgreement(Parameters);
-//				EndIf;
-//
-//				If Not ArrayOfTaxRates.Count() Then
-//					Parameters = New Structure();
-//					Parameters.Insert("Date", Object.Date);
-//					Parameters.Insert("Company", Object.Company);
-//					Parameters.Insert("Tax", ItemOfTaxInfo.Tax);
-//
-//					If CommonFunctionsClientServer.ObjectHasProperty(ItemRow, "ItemKey") Then
-//						Parameters.Insert("ItemKey", ItemRow.ItemKey);
-//					Else
-//						Parameters.Insert("ItemKey", PredefinedValue("Catalog.ItemKeys.EmptyRef"));
-//					EndIf;
-//
-//					ArrayOfTaxRates = TaxesServer.GetTaxRatesForItemKey(Parameters);
-//				EndIf;
-//			EndIf;
-//			If ArrayOfTaxRates.Count() Then
-//				ItemRow[ItemOfTaxInfo.Name] = ArrayOfTaxRates[0].TaxRate;
-//			EndIf;
-//		EndIf;
-//
-//		TaxParameters = GetTaxCalculationParameters(Object, ItemRow, ItemOfTaxInfo, PriceIncludeTax, Reverse, AddInfo);
-//
-//		ArrayOfResultsTaxCalculation = TaxesServer.CalculateTax(TaxParameters);
-//
-//		For Each RowOfResult In ArrayOfResultsTaxCalculation Do
-//			NewTax = Object.TaxList.Add();
-//			NewTax.Key = ItemRow.Key;
-//			NewTax.Tax = RowOfResult.Tax;
-//			NewTax.Analytics = RowOfResult.Analytics;
-//			NewTax.TaxRate = RowOfResult.TaxRate;
-//			NewTax.Amount = RowOfResult.Amount;
-//			NewTax.IncludeToTotalAmount = RowOfResult.IncludeToTotalAmount;
-//
-//			CachedRow = FindRowInCache(TaxListCache, NewTax, ArrayOfCheckedColumns);
-//
-//			If CachedRow = Undefined Then
-//				NewTax.ManualAmount = NewTax.Amount;
-//			Else
-//				NewTax.ManualAmount = ?(CachedRow.Amount = NewTax.Amount, CachedRow.ManualAmount, NewTax.Amount);
-//			EndIf;
-//		EndDo;
-//	EndDo;
-//
-//	ItemRow.TaxAmount = GetTotalAmountByDependedTable(Object, "TaxList", ItemRow.Key);
-//EndProcedure
-//
-//Function DeleteRowsInDependedTable(Object, DependedTableName, MainTableKey, CachedColumns = Undefined)
-//	DependedRows = Object[DependedTableName].FindRows(New Structure("Key", MainTableKey));
-//	Cache = New Array();
-//	ArrayOfCachedColumns = StrSplit(CachedColumns, ",");
-//	For Each Row In DependedRows Do
-//		CacheRow = New Structure();
-//		For Each ItemOfCachedColumns In ArrayOfCachedColumns Do
-//			CacheRow.Insert(TrimAll(ItemOfCachedColumns), Row[TrimAll(ItemOfCachedColumns)]);
-//		EndDo;
-//		Cache.Add(CacheRow);
-//		Object[DependedTableName].Delete(Row);
-//	EndDo;
-//	Return Cache;
-//EndFunction
+Procedure CalculateTax_PriceIncludeTax(Options, TaxOptions, Result)
+	CalculateTax(Options, TaxOptions, Result, False);
+EndProcedure
+
+Procedure CalculateTax(Options, TaxOptions, Result, Reverse)
+	ArrayOfTaxInfo = TaxOptions.ArrayOfTaxInfo;
+	If TaxOptions.ArrayOfTaxInfo = Undefined Then
+		Return;
+	EndIf;
+	
+	If TaxOptions.ItemKey <> Undefined And Not ValueIsFilled(TaxOptions.ItemKey) Then
+		Return;
+	EndIf;
+	
+	For Each ItemOfTaxInfo In ArrayOfTaxInfo Do
+		If ItemOfTaxInfo.Type = PredefinedValue("Enum.TaxType.Rate") And Not ValueIsFilled(Result.TaxRates[ItemOfTaxInfo.Name]) Then
+			DefaultTaxRate = GetDefaultTaxRate(Options, TaxOptions, ItemOfTaxInfo);
+			If DefaultTaxRate = Undefined Then
+				Continue;
+			EndIf;
+			Result.TaxRates[ItemOfTaxInfo.Name] = DefaultTaxRate;
+		EndIf;
+		
+		TaxParameters = New Structure();
+		TaxParameters.Insert("Tax"             , ItemOfTaxInfo.Tax);
+		TaxParameters.Insert("TaxRateOrAmount" , Result.TaxRates[ItemOfTaxInfo.Name]);
+		TaxParameters.Insert("PriceIncludeTax" , TaxOptions.PriceIncludeTax);
+		TaxParameters.Insert("Key"             , Options.Key);
+		TaxParameters.Insert("TotalAmount"     , Result.TotalAmount);
+		TaxParameters.Insert("NetAmount"       , Result.NetAmount);
+		TaxParameters.Insert("Ref"             , Options.Ref);
+		TaxParameters.Insert("Reverse"         , Reverse);
+		
+		ArrayOfResultsTaxCalculation = TaxesServer.CalculateTax(TaxParameters);
+		
+		TaxAmount = 0;
+		For Each RowOfResult In ArrayOfResultsTaxCalculation Do
+			NewTax = New Structure();
+			NewTax.Insert("Key", Options.Key);
+			NewTax.Insert("Tax", ?(ValueIsFilled(RowOfResult.Tax), 
+				RowOfResult.Tax, PredefinedValue("Catalog.Taxes.EmptyRef")));
+			NewTax.Insert("Analytics", ?(ValueIsFilled(RowOfResult.Analytics), 
+				RowOfResult.Analytics, PredefinedValue("Catalog.TaxAnalytics.EmptyRef")));
+			NewTax.Insert("TaxRate", ?(ValueIsFilled(RowOfResult.TaxRate), 
+				RowOfResult.TaxRate, PredefinedValue("Catalog.TaxRates.EmptyRef")));
+			NewTax.Insert("Amount", ?(ValueIsFilled(RowOfResult.Amount),
+				RowOfResult.Amount, 0));
+			NewTax.Insert("IncludeToTotalAmount" , ?(ValueIsFilled(RowOfResult.IncludeToTotalAmount),
+				RowOfResult.IncludeToTotalAmount, False));
+			
+			ManualAmount = 0;
+			For Each RowTaxList In TaxOptions.TaxList Do
+				If RowTaxList.Key = NewTax.Key
+					And RowTaxList.Tax = NewTax.Tax 
+					And RowTaxList.Analytics = NewTax.Analytics
+					And RowTaxList.TaxRate = NewTax.TaxRate Then
+					
+					ManualAmount = ?(RowTaxList.Amount = NewTax.Amount, RowTaxList.ManualAmount, NewTax.Amount);
+				EndIf;
+			EndDo;
+			If ManualAmount = 0 Then
+				ManualAmount = NewTax.Amount;
+			EndIf;
+			NewTax.Insert("ManualAmount", ManualAmount);
+			Result.TaxList.Add(NewTax);
+			If RowOfResult.IncludeToTotalAmount Then
+				TaxAmount = Round(TaxAmount + NewTax.ManualAmount, 2);
+			EndIf;
+		EndDo;
+	EndDo;
+
+	Result.TaxAmount = TaxAmount;
+EndProcedure
+
+Function GetDefaultTaxRate(Options, TaxOptions, ItemOfTaxInfo)
+	ArrayOfTaxRates = New Array();
+	If TaxOptions.Agreement <> Undefined Then
+		Parameters = New Structure();
+		Parameters.Insert("Date"      , TaxOptions.Date);
+		Parameters.Insert("Company"   , TaxOptions.Company);
+		Parameters.Insert("Tax"       , ItemOfTaxInfo.Tax);
+		Parameters.Insert("Agreement" , TaxOptions.Agreement);
+		ArrayOfTaxRates = TaxesServer.GetTaxRatesForAgreement(Parameters);
+	EndIf;
+
+	If Not ArrayOfTaxRates.Count() Then
+		Parameters = New Structure();
+		Parameters.Insert("Date"    , TaxOptions.Date);
+		Parameters.Insert("Company" , TaxOptions.Company);
+		Parameters.Insert("Tax"     , ItemOfTaxInfo.Tax);
+		If TaxOptions.ItemKey <> Undefined Then
+			Parameters.Insert("ItemKey", TaxOptions.ItemKey);
+		Else
+			Parameters.Insert("ItemKey", PredefinedValue("Catalog.ItemKeys.EmptyRef"));
+		EndIf;
+		ArrayOfTaxRates = TaxesServer.GetTaxRatesForItemKey(Parameters);
+	EndIf;
+	If ArrayOfTaxRates.Count() Then
+		Return ArrayOfTaxRates[0].TaxRate;
+	EndIf;
+	Return Undefined;
+EndFunction
 
 // все измененные данные хранятся в кэше, для возможности откатить изменения, если пользователь откажется от изменений
 // кэш инициализируется только один раз внезависимости от того какой именно EntryPoint использован
-Procedure InitCache(Parameters, EntryPointName) Export
+Procedure InitCache(Parameters, EntryPointName)
 	If Not Parameters.Property("Cache") Then
 		Parameters.Insert("Cache", New Structure());
 		Parameters.Insert("EntryPointName"   , EntryPointName);
@@ -527,4 +494,24 @@ Procedure InitCache(Parameters, EntryPointName) Export
 		Parameters.Insert("ViewModule"       , Undefined);
 		Parameters.Insert("EntryPointNameCounter"   , New Array());
 	EndIf;
+EndProcedure
+
+Procedure LoadControllerModule(Parameters)
+	If Parameters.ControllerModule = Undefined Then
+		Parameters.ControllerModule = Eval(Parameters.ControllerModuleName);
+	EndIf;
+EndProcedure
+
+Procedure LoadViewModule(Parameters)
+	If Parameters.ViewModule = Undefined Then
+		Parameters.ViewModule = Eval(Parameters.ViewModuleName);
+	EndIf;
+EndProcedure
+
+Procedure UnloadControllerModule(Parameters)
+	Parameters.ControllerModule = Undefined;
+EndProcedure
+
+Procedure Init_API(EntryPointName, Parameters) Export
+	InitCache(Parameters, EntryPointName);
 EndProcedure

@@ -185,11 +185,12 @@ Procedure PriceEnableChainLinks(Parameters, Chain) Export
 	EndIf;
 	For Each Row In Rows Do
 		// при изменении цены нужно пересчитать NetAmount, TotalAmount, TaxAmount, OffersAmount
-		CalculationsOptions = ModelClientServer_V2.CalculationsOptions();
+		CalculationsOptions     = ModelClientServer_V2.CalculationsOptions();
+		CalculationsOptions.Ref = Parameters.Object.Ref;
 		
 		CalculationsOptions.CalculateNetAmount.Enable   = True;
 		CalculationsOptions.CalculateTotalAmount.Enable = True;
-		CalculationsOptions.CalculateTaxAmount.Enable   = False; // расчет налогов еще не написан
+		CalculationsOptions.CalculateTaxAmount.Enable   = True;
 		
 		CalculationsOptions.AmountOptions.DontCalculateRow = GetProperty(Parameters, "ItemList.DontCalculateRow", Row.Key);
 		
@@ -203,7 +204,11 @@ Procedure PriceEnableChainLinks(Parameters, Chain) Export
 		CalculationsOptions.PriceOptions.Quantity           = GetProperty(Parameters, "ItemList.Quantity"           , Row.Key);
 		CalculationsOptions.PriceOptions.QuantityInBaseUnit = GetProperty(Parameters, "ItemList.QuantityInBaseUnit" , Row.Key);
 		
-		CalculationsOptions.TaxOptions.PriceIncludeTax  = GetProperty(Parameters, "PriceIncludeTax", Row.Key);
+		CalculationsOptions.TaxOptions.PriceIncludeTax  = GetProperty(Parameters, "PriceIncludeTax");
+		CalculationsOptions.TaxOptions.ItemKey          = GetProperty(Parameters, "ItemList.ItemKey", Row.Key);
+		CalculationsOptions.TaxOptions.ArrayOfTaxInfo   = Parameters.ArrayOfTaxInfo;
+		CalculationsOptions.TaxOptions.TaxRates         = Row.TaxRates;
+		CalculationsOptions.TaxOptions.TaxList          = Row.TaxList;
 		
 		CalculationsOptions.Key = Row.Key;
 		
@@ -256,6 +261,26 @@ Procedure SetCalculations(Parameters, Results) Export
 	Setter("TaxAmountEntryPoint"   , "ItemList.TaxAmount"   , Parameters, Results, , "TaxAmount");
 	Setter("OffersAmountEntryPoint", "ItemList.OffersAmount", Parameters, Results, , "OffersAmount");
 	Setter("TotalAmountEntryPoint" , "ItemList.TotalAmount" , Parameters, Results, , "TotalAmount");
+	// табличная часть TaxList кэщируется целиком, потом так же целтком переносится в докумнт
+	For Each Result In Results Do
+		If Result.Options.CalculateTaxAmount.Enable Then
+			If Not Parameters.Cache.Property("TaxList") Then
+				Parameters.Cache.Insert("TaxList", New Array());
+			EndIf;
+			// удаляем из кэша старые строки
+			Count = Parameters.Cache.TaxList.Count();
+			For i = 1 To Count Do
+				ArrayItem = Parameters.Cache.TaxList[Count - i];
+				If ArrayItem.Key = Result.Options.Key Then
+					Parameters.Cache.TaxList.Delete(ArrayItem);
+				EndIf;
+			EndDo;
+			
+			For Each Row In Result.Value.TaxList Do
+				Parameters.Cache.TaxList.Add(Row);
+			EndDo;
+		EndIf;
+	EndDo;
 EndProcedure
 
 #EndRegion
@@ -278,7 +303,23 @@ EndProcedure
 // Переносит изменения из Cache в Object
 Procedure CommitChainChanges(Parameters) Export
 	For Each Property In Parameters.Cache Do
-		If TypeOf(Property.Value) = Type("Array") Then // это табличная часть
+		If Upper(Property.Key) = Upper("TaxList") Then
+			// табличная часть налогов переносится целиком
+			For Each Row In Property.Value Do
+				Count = Parameters.Cache.TaxList.Count();
+				For i = 1 To Count Do
+					ArrayItem = Parameters.Object.TaxList[Count - i];
+					If ArrayItem.Key = Row.Key Then
+						Parameters.Object.TaxList.Delete(ArrayItem);
+					EndIf;
+				EndDo;
+			EndDo;
+			For Each Row In Property.Value Do
+				FillPropertyValues(Parameters.Object.TaxList.Add(), Row);
+			EndDo;
+		
+		// Табличные части ItemList и PaymentList переносятся построчно так как Key в строках уникален
+		ElsIf TypeOf(Property.Value) = Type("Array") Then // это табличная часть
 			For Each Row In Property.Value Do
 				FillPropertyValues(Parameters.Object[Property.Key].FindRows(New Structure("Key", Row.Key))[0], Row);
 			EndDo;
@@ -286,6 +327,7 @@ Procedure CommitChainChanges(Parameters) Export
 			Parameters.Object[Property.Key] = Property.Value; // это реквизит шапки
 		EndIf;
 	EndDo;
+	// уведомление клиента о том что данные были изменены
 	#IF Client THEN
 		If Parameters.ViewNotify.Count() And Parameters.ViewModule = Undefined Then
 			Raise "View module undefined";
@@ -315,7 +357,9 @@ Procedure Setter(EntryPointName, DataPath, Parameters, Results, ViewNotify = Und
 			// вызывать будем потом когда завершится вся цепочка действий, и изменения будут перенесены с кэша в объект
 			Parameters.ViewNotify.Add(ViewNotify);
 		EndIf;
-		ModelClientServer_V2.EntryPoint(EntryPointName, Parameters);
+		If ValueIsFilled(EntryPointName) Then
+			ModelClientServer_V2.EntryPoint(EntryPointName, Parameters);
+		EndIf;
 	EndIf;
 EndProcedure
 
@@ -323,6 +367,9 @@ EndProcedure
 Function GetProperty(Parameters, DataPath, Key = Undefined)
 	Segments = StrSplit(DataPath, ".");
 	If Segments.Count() = 1 Then // это реквизит шапки, он указывается без точки, например Company
+		If ValueIsFilled(Key) Then
+			Raise StrTemplate("Key [%1] not allowed for data path [%2]", Key, DataPath);
+		EndIf;
 		If Parameters.Cache.Property(DataPath) Then
 			Return Parameters.Cache[DataPath];
 		Else

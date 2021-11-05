@@ -1,9 +1,10 @@
-Function GetSavedData(Form, AttributeName) Export
-	If ValueIsFilled(Form[AttributeName]) Then
-		SavedDataStructure = CommonFunctionsServer.DeserializeXMLUseXDTO(Form[AttributeName]);
+
+Function GetTaxesCache(Form) Export
+	If ValueIsFilled(Form.TaxesCache) Then
+		SavedDataStructure = CommonFunctionsServer.DeserializeXMLUseXDTO(Form.TaxesCache);
 	Else
 		SavedDataStructure = New Structure();
-		SavedDataStructure.Insert("ArrayOfColumnsInfo", New Array());
+		SavedDataStructure.Insert("ArrayOfTaxInfo", New Array());
 	EndIf;
 	Return SavedDataStructure;
 EndFunction

@@ -152,14 +152,14 @@ EndProcedure
 
 Procedure CalculateTableAtServer(Form, Object, Is)
 	If Form.Parameters.FillingValues.Property("BasedOn") And IsSupportTaxes(Is) Then
-		SavedData = TaxesClientServer.GetSavedData(Form, TaxesServer.GetAttributeNames().CacheName);
-		If SavedData.Property("ArrayOfColumnsInfo") Then
-			TaxInfo = SavedData.ArrayOfColumnsInfo;
+		SavedData = TaxesClientServer.GetTaxesCache(Form);
+		If SavedData.Property("ArrayOfTaxInfo") Then
+			ArrayOfTaxInfo = SavedData.ArrayOfTaxInfo;
 		EndIf;
 		CalculationSettings = New Structure();
 		CalculationSettings.Insert("CalculateTaxByTotalAmount");
 		CalculationSettings.Insert("CalculateNetAmountByTotalAmount");
-		CalculationStringsClientServer.CalculateItemsRows(Object, Form, Object.PaymentList, CalculationSettings, TaxInfo);
+		CalculationStringsClientServer.CalculateItemsRows(Object, Form, Object.PaymentList, CalculationSettings, ArrayOfTaxInfo);
 	EndIf;
 EndProcedure
 

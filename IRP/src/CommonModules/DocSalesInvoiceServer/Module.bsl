@@ -62,11 +62,11 @@ Procedure CalculateTableAtServer(Form, Object) Export
 				EndIf;
 			EndDo;
 
-			SavedData = TaxesClientServer.GetSavedData(Form, TaxesServer.GetAttributeNames().CacheName);
-			If SavedData.Property("ArrayOfColumnsInfo") Then
-				TaxInfo = SavedData.ArrayOfColumnsInfo;
+			SavedData = TaxesClientServer.GetTaxesCache(Form);
+			If SavedData.Property("ArrayOfTaxInfo") Then
+				ArrayOfTaxInfo = SavedData.ArrayOfTaxInfo;
 			EndIf;
-			CalculationStringsClientServer.CalculateItemsRows(Object, Form, CalculateRows, CalculationSettings, TaxInfo);
+			CalculationStringsClientServer.CalculateItemsRows(Object, Form, CalculateRows, CalculationSettings, ArrayOfTaxInfo);
 
 		EndIf;
 	EndIf;

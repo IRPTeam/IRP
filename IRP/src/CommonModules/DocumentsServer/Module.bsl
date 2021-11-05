@@ -411,8 +411,8 @@ Function PrepareServerData(Parameters) Export
 			ArrayOfTaxesInCache = New Array();
 
 			SavedData = CommonFunctionsServer.DeserializeXMLUseXDTO(Parameters.TaxesCache.Cache);
-			If SavedData.Property("ArrayOfColumnsInfo") Then
-				ArrayOfTaxInfo = SavedData.ArrayOfColumnsInfo;
+			If SavedData.Property("ArrayOfTaxInfo") Then
+				ArrayOfTaxInfo = SavedData.ArrayOfTaxInfo;
 				For Each ItemOfTaxInfo In ArrayOfTaxInfo Do
 					ItemOfTaxInfo.Insert("TaxTypeIsRate", ItemOfTaxInfo.Type = Enums.TaxType.Rate);
 					If Parameters.TaxesCache.Property("GetArrayOfTaxRates") Then

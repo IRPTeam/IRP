@@ -385,12 +385,11 @@ Function GetTaxRatesByTax(Tax) Export
 EndFunction
 
 Procedure PutToTaxTable(Form, Key, Tax, Value)
-	AttrNames = GetAttributeNames();
 	Filter = New Structure("Key, Tax", Key, Tax);
-	ArrayOfRowsTaxTable = Form[AttrNames.TableName].FindRows(Filter);
+	ArrayOfRowsTaxTable = Form.TaxesTable.FindRows(Filter);
 	TaxTableRow = Undefined;
 	If ArrayOfRowsTaxTable.Count() = 0 Then
-		TaxTableRow = Form[AttrNames.TableName].Add();
+		TaxTableRow = Form.TaxesTable.Add();
 	ElsIf ArrayOfRowsTaxTable.Count() = 1 Then
 		TaxTableRow = ArrayOfRowsTaxTable[0];
 	Else
@@ -402,9 +401,8 @@ Procedure PutToTaxTable(Form, Key, Tax, Value)
 EndProcedure
 
 Function GetFromTaxTable(Form, Key, Tax)
-	AttrNames = GetAttributeNames();
 	Filter = New Structure("Key, Tax", Key, Tax);
-	ArrayOfRowsTaxTable = Form[AttrNames.TableName].FindRows(Filter);
+	ArrayOfRowsTaxTable = Form.TaxesTable.FindRows(Filter);
 	If ArrayOfRowsTaxTable.Count() = 1 Then
 		Return ArrayOfRowsTaxTable[0].Value;
 	ElsIf ArrayOfRowsTaxTable.Count() > 1 Then
@@ -416,30 +414,27 @@ Function GetFromTaxTable(Form, Key, Tax)
 EndFunction
 
 Procedure CreateFormControls(Object, Form, Parameters) Export
-
-	AttrNames = GetAttributeNames();
-
-	If Not CommonFunctionsServer.FormHaveAttribute(Form, AttrNames.CacheName) Then
+	If Not CommonFunctionsServer.FormHaveAttribute(Form, "TaxesCache") Then
 		ArrayOfNewAttribute = New Array();
-		ArrayOfNewAttribute.Add(New FormAttribute(AttrNames.CacheName, New TypeDescription("String")));
+		ArrayOfNewAttribute.Add(New FormAttribute("TaxesCache", New TypeDescription("String")));
 		Form.ChangeAttributes(ArrayOfNewAttribute);
 	EndIf;
 
-	If Not CommonFunctionsServer.FormHaveAttribute(Form, AttrNames.TableName) Then
+	If Not CommonFunctionsServer.FormHaveAttribute(Form, "TaxesTable") Then
 		ArrayOfNewAttribute = New Array();
-		ArrayOfNewAttribute.Add(New FormAttribute(AttrNames.TableName, New TypeDescription("ValueTable")));
-		ArrayOfNewAttribute.Add(New FormAttribute("Key", New TypeDescription(Metadata.DefinedTypes.typeRowID.Type), AttrNames.TableName));
-		ArrayOfNewAttribute.Add(New FormAttribute("Tax", New TypeDescription("CatalogRef.Taxes"), AttrNames.TableName));
+		ArrayOfNewAttribute.Add(New FormAttribute("TaxesTable", New TypeDescription("ValueTable")));
+		ArrayOfNewAttribute.Add(New FormAttribute("Key", New TypeDescription(Metadata.DefinedTypes.typeRowID.Type), "TaxesTable"));
+		ArrayOfNewAttribute.Add(New FormAttribute("Tax", New TypeDescription("CatalogRef.Taxes"), "TaxesTable"));
 
 		ArrayOfValueTypes = New Array();
 		ArrayOfValueTypes.Add(Type("CatalogRef.TaxRates"));
 		ArrayOfValueTypes.Add(Metadata.DefinedTypes.typeAmount.Type.Types()[0]);
 
-		ArrayOfNewAttribute.Add(New FormAttribute("Value", New TypeDescription(ArrayOfValueTypes), AttrNames.TableName));
+		ArrayOfNewAttribute.Add(New FormAttribute("Value", New TypeDescription(ArrayOfValueTypes), "TaxesTable"));
 		Form.ChangeAttributes(ArrayOfNewAttribute);
 	EndIf;
 
-	Form[AttrNames.TableName].Clear();
+	Form.TaxesTable.Clear();
 
 	BufferTable = New ValueTable();
 	BufferTable.Columns.Add("Key");
@@ -463,11 +458,11 @@ Procedure CreateFormControls(Object, Form, Parameters) Export
 			RowBufferTable.TaxRate, RowBufferTable.Amount));
 	EndDo;
 
-	SavedDataStructure = TaxesClientServer.GetSavedData(Form, AttrNames.CacheName);
+	SavedDataStructure = TaxesClientServer.GetTaxesCache(Form);
 	
 	// Delete
 	ArrayOfDeleteAttribute = New Array();
-	For Each ItemOfColumnsInfo In SavedDataStructure.ArrayOfColumnsInfo Do
+	For Each ItemOfColumnsInfo In SavedDataStructure.ArrayOfTaxInfo Do
 		ArrayOfDeleteAttribute.Add(ItemOfColumnsInfo.DataPath);
 		Form.Items.Delete(Form.Items[ItemOfColumnsInfo.Name]);
 	EndDo;
@@ -497,7 +492,7 @@ Procedure CreateFormControls(Object, Form, Parameters) Export
 	EndIf;
 	
 	ArrayOfColumns = New Array();
-	ArrayOfColumnsInfo = New Array();
+	ArrayOfTaxInfo = New Array();
 	ArrayOfActualTax = New Array();
 	For Each ItemOfTaxes In ArrayOfTaxes Do
 		ColumnInfo = New Structure();
@@ -511,7 +506,7 @@ Procedure CreateFormControls(Object, Form, Parameters) Export
 		EndIf;
 		ArrayOfColumns.Add(New FormAttribute(ColumnInfo.Name, ColumnType, Parameters.PathToTable, String(
 			ItemOfTaxes.Tax), True));
-		ArrayOfColumnsInfo.Add(ColumnInfo);
+		ArrayOfTaxInfo.Add(ColumnInfo);
 		ArrayOfActualTax.Add(ItemOfTaxes.Tax);
 	EndDo;
 	Form.ChangeAttributes(ArrayOfColumns);
@@ -526,15 +521,15 @@ Procedure CreateFormControls(Object, Form, Parameters) Export
 		Object[Parameters.TaxListName].Delete(ItemOfDeleteRowsFromTaxList);
 	EndDo;
 
-	For Each ItemOfColumnsInfo In ArrayOfColumnsInfo Do
-		NewColumn = Form.Items.Insert(ItemOfColumnsInfo.Name, Type("FormField"), Parameters.ItemParent,
+	For Each ItemOfTaxInfo In ArrayOfTaxInfo Do
+		NewColumn = Form.Items.Insert(ItemOfTaxInfo.Name, Type("FormField"), Parameters.ItemParent,
 			Parameters.ColumnOffset);
 		NewColumn.Type = FormFieldType.InputField;
 		NewColumn.DataPath = Parameters.PathToTable + "." + NewColumn.Name;
-		ItemOfColumnsInfo.Insert("DataPath", NewColumn.DataPath);
-		If ItemOfColumnsInfo.Type = Enums.TaxType.Rate Then
+		ItemOfTaxInfo.Insert("DataPath", NewColumn.DataPath);
+		If ItemOfTaxInfo.Type = Enums.TaxType.Rate Then
 			NewColumn.ListChoiceMode = True;
-			NewColumn.ChoiceList.LoadValues(GetTaxRatesByTax(ItemOfColumnsInfo.Tax));
+			NewColumn.ChoiceList.LoadValues(GetTaxRatesByTax(ItemOfTaxInfo.Tax));
 		EndIf;
 		NewColumn.SetAction("OnChange", "TaxValueOnChange");
 		If ValueIsFilled(Parameters.ColumnFieldParameters) Then
@@ -546,11 +541,11 @@ Procedure CreateFormControls(Object, Form, Parameters) Export
 	
 	// Update columns
 	For Each RowItemList In Object[Parameters.ItemListName] Do
-		For Each ItemOfColumnsInfo In ArrayOfColumnsInfo Do
-			RowItemList[ItemOfColumnsInfo.Name] = GetFromTaxTable(Form, RowItemList.Key, ItemOfColumnsInfo.Tax);
+		For Each ItemOfTaxInfo In ArrayOfTaxInfo Do
+			RowItemList[ItemOfTaxInfo.Name] = GetFromTaxTable(Form, RowItemList.Key, ItemOfTaxInfo.Tax);
 		EndDo;
 	EndDo;
-	SetSavedData(Form, AttrNames.CacheName, New Structure("ArrayOfColumnsInfo", ArrayOfColumnsInfo));
+	Form.TaxesCache = CommonFunctionsServer.SerializeXMLUseXDTO(New Structure("ArrayOfTaxInfo", ArrayOfTaxInfo));
 EndProcedure
 
 Function CreateFormControls_ItemList(Object, Form, AddInfo) Export
@@ -612,17 +607,6 @@ Function GetCreateFormControlsParameters() Export
 	Parameters.Insert("InvisibleColumnsIfNotTaxes");
 	Return Parameters;
 EndFunction
-
-Function GetAttributeNames() Export
-	Names = New Structure();
-	Names.Insert("CacheName", "TaxesCache");
-	Names.Insert("TableName", "TaxesTable");
-	Return Names;
-EndFunction
-
-Procedure SetSavedData(Form, AttributeName, SavedDataStructure)
-	Form[AttributeName] = CommonFunctionsServer.SerializeXMLUseXDTO(SavedDataStructure);
-EndProcedure
 
 Function GetDocumentsWithTax() Export
 	List = New ValueList();

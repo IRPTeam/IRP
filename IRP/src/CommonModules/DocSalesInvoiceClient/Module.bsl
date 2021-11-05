@@ -265,24 +265,25 @@ EndFunction
 //==================================================================================================
 
 Procedure ItemListPriceTypeOnChange(Object, Form, Item, AddInfo = Undefined) Export
-	DocumentsClient.ItemListPriceTypeOnChange(Object, Form, ThisObject, Item, Undefined, AddInfo);
+	ViewClient_V2.ItemListPriceTypeOnChange(Object, Form);
+	//DocumentsClient.ItemListPriceTypeOnChange(Object, Form, ThisObject, Item, Undefined, AddInfo);
 EndProcedure
 
-Procedure ItemListPriceTypeOnChangePutServerDataToAddInfo(Object, Form, AddInfo = Undefined) Export
-	DocumentsClient.ItemListPriceTypeOnChangePutServerDataToAddInfo(Object, Form, AddInfo);
-EndProcedure
+//Procedure ItemListPriceTypeOnChangePutServerDataToAddInfo(Object, Form, AddInfo = Undefined) Export
+//	DocumentsClient.ItemListPriceTypeOnChangePutServerDataToAddInfo(Object, Form, AddInfo);
+//EndProcedure
 
-Function ItemListPriceTypeSettings(Object, Form, AddInfo = Undefined) Export
-	If AddInfo = Undefined Then
-		Return New Structure("PutServerDataToAddInfo", True);
-	EndIf;
-
-	Settings = New Structure("Actions, ObjectAttributes, FormAttributes");
-	Settings.Actions = New Structure();
-	Settings.ObjectAttributes = "";
-	Settings.FormAttributes = "";
-	Return Settings;
-EndFunction
+//Function ItemListPriceTypeSettings(Object, Form, AddInfo = Undefined) Export
+//	If AddInfo = Undefined Then
+//		Return New Structure("PutServerDataToAddInfo", True);
+//	EndIf;
+//
+//	Settings = New Structure("Actions, ObjectAttributes, FormAttributes");
+//	Settings.Actions = New Structure();
+//	Settings.ObjectAttributes = "";
+//	Settings.FormAttributes = "";
+//	Return Settings;
+//EndFunction
 
 #EndRegion
 

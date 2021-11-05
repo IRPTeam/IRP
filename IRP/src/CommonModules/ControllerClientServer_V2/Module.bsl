@@ -12,6 +12,7 @@ EndProcedure
 Procedure RouteEnableChainLinks(EntryPointName, Parameters, Chain)
 	   If EntryPointName = "CompanyEntryPoint"      Then CompanyEnableChainLinks(Parameters, Chain);
 	ElsIf EntryPointName = "PartnerEntryPoint"      Then PartnerEnableChainLinks(Parameters, Chain);
+	ElsIf EntryPointName = "LegalNameEntryPoint"    Then LegalNameEnableChainLinks(Parameters, Chain);
 	ElsIf EntryPointName = "AgreementEntryPoint"    Then AgreementEnableChainLinks(Parameters, Chain);
 	ElsIf EntryPointName = "PriceTypeEntryPoint"    Then PriceTypeEnableChainLinks(Parameters, Chain);
 	ElsIf EntryPointName = "PriceEntryPoint"        Then PriceEnableChainLinks(Parameters, Chain);
@@ -32,6 +33,7 @@ EndProcedure
 Procedure PartnerEnableChainLinks(Parameters, Chain)
 	// При изменении партнера нужно изменить LegalName
 	Chain.LegalName.Enable = True;
+	Chain.LegalName.Setter = "SetLegalName";
 	// эти данные (параметры) нужны для получения LegalName
 	LegalNameOptions = ModelClientServer_V2.LegalNameOptions();
 	LegalNameOptions.Partner   = GetProperty(Parameters, "Partner");
@@ -40,6 +42,8 @@ Procedure PartnerEnableChainLinks(Parameters, Chain)
 	
 	// При изменении партнера нужно изменить Agreement
 	Chain.Agreement.Enable = True;
+	Chain.Agreement.Setter = "SetAgreement"
+	;
 	// эти данные (параметры) нужны для получения Agreement
 	AgreementOptions = ModelClientServer_V2.AgreementOptions();
 	AgreementOptions.Partner       = GetProperty(Parameters, "Partner");
@@ -67,6 +71,10 @@ Procedure LegalNameOnChange(Parameters) Export
 	ModelClientServer_V2.EntryPoint("LegalNameEntryPoint", Parameters);
 EndProcedure
 
+Procedure LegalNameEnableChainLinks(Parameters, Chain)
+	Return;
+EndProcedure
+
 Procedure SetLegalName(Parameters, Results) Export
 	Setter("LegalNameEntryPoint", "LegalName", Parameters, Results, "OnSetLegalName");
 EndProcedure
@@ -83,13 +91,19 @@ EndProcedure
 Procedure AgreementEnableChainLinks(Parameters, Chain) Export
 	// При изменении Agreement нужно изменить Company
 	Chain.Company.Enable = True;
+	Chain.Company.Setter =  "SetCompany";
+	
 	// Эти данные (параметры) нужны для получения Company
 	CompanyOptions = ModelClientServer_V2.CompanyOptions();
 	CompanyOptions.Agreement = GetProperty(Parameters, "Agreement");
+	CompanyOptions.Company   = GetProperty(Parameters, "Company");
+	
 	Chain.Company.Options.Add(CompanyOptions);
 	
 	// При изменении Agreement нужно изменить PriceType
 	Chain.PriceType.Enable = True;
+	Chain.PriceType.Setter = "SetPriceType";
+	
 	// Эти данные (параметры) нужны для получения PriceType
 	// PriceType находится в табличной части ItemList, така как это уровень данных то беремиз этой табличной части
 	For Each Row In Parameters.Object.ItemList Do
@@ -128,6 +142,8 @@ EndProcedure
 
 Procedure PriceTypeEnableChainLinks(Parameters, Chain) Export
 	Chain.Price.Enable = True;
+	Chain.Price.Setter = "SetPrice";
+	
 	Rows = Parameters.Object.ItemList;
 	If Parameters.Property("Rows") Then
 		// расчет только для конкретных строк, переданных в параметре
@@ -160,6 +176,8 @@ EndProcedure
 
 Procedure PriceEnableChainLinks(Parameters, Chain) Export
 	Chain.Calculations.Enable = True;
+	Chain.Calculations.Setter = "SetCalculations";
+	
 	Rows = Parameters.Object.ItemList;
 	If Parameters.Property("Rows") Then
 		// расчет только для конкретных строк, переданных в параметре
@@ -269,11 +287,11 @@ Procedure CommitChainChanges(Parameters) Export
 		EndIf;
 	EndDo;
 	#IF Client THEN
-		If Parameters.ViewNotify.Count() And Parameters.ViewModule Then
+		If Parameters.ViewNotify.Count() And Parameters.ViewModule = Undefined Then
 			Raise "View module undefined";
 		EndIf;
 		For Each ViewNotify In Parameters.ViewNotify Do
-			Execute StrTemplate("%1.%2(Parameters);", Parameters.ViewModule, ViewNotify);
+			Execute StrTemplate("%1.%2(Parameters);", Parameters.ViewModuleName, ViewNotify);
 		EndDo;
 	#ENDIF
 EndProcedure

@@ -87,20 +87,11 @@ Function RouteExecutor(Name, Options)
 	Else Raise StrTemplate("Route executor error [%1]", Name); EndIf;
 EndFunction
 
-Procedure RouteSetter(Name, Parameters, Results)
-	If    Name = "LegalName"    Then Parameters.ControllerModule.SetLegalName(Parameters, Results);
-	ElsIf Name = "Agreement"    Then Parameters.ControllerModule.SetAgreement(Parameters, Results);
-	ElsIf Name = "Company"      Then Parameters.ControllerModule.SetCompany(Parameters, Results);
-	ElsIf Name = "PriceType"    Then Parameters.ControllerModule.SetPriceType(Parameters, Results);
-	ElsIf Name = "Price"        Then Parameters.ControllerModule.SetPrice(Parameters, Results);
-	ElsIf Name = "Calculations" Then Parameters.ControllerModule.SetCalculations(Parameters, Results);
-	Else Raise StrTemplate("Route setter error [%1]", Name); EndIf;
-EndProcedure
-
 Function GetChainLink()
 	ChainLink = New Structure();
-	ChainLink.Insert("Enable", False);
+	ChainLink.Insert("Enable" , False);
 	ChainLink.Insert("Options", New Array());
+	ChainLink.Insert("Setter" , Undefined);
 	Return ChainLink; 
 EndFunction
 
@@ -131,7 +122,7 @@ Procedure ExecuteChain(Parameters, Chain)
 			For Each Options In Chain[Name].Options Do
 				Results.Add(GetChainLinkResult(Options, RouteExecutor(Name, Options)));
 			EndDo;
-			RouteSetter(Name, Parameters, Results);
+			Execute StrTemplate("%1.%2(Parameters, Results);", Parameters.ControllerModuleName, Chain[Name].Setter);
 		EndIf;
 	EndDo;
 EndProcedure
@@ -165,11 +156,15 @@ EndFunction
 #Region COMPANY
 
 Function CompanyOptions() Export
-	Return GetChainLinkOptions("Agreement");
+	Return GetChainLinkOptions("Agreement, Company");
 EndFunction
 
 Function CompanyExecute(Options)
-	Return CatAgreementsServer.GetAgreementInfo(Options.Agreement).Company;
+	If ValueIsFilled(Options.Company) Then
+		Return Options.Company;
+	Else
+		Return CatAgreementsServer.GetAgreementInfo(Options.Agreement).Company;
+	EndIf;
 EndFunction
 
 #EndRegion

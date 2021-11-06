@@ -78,6 +78,10 @@ Procedure OnOpen(Object, Form, Cancel, AddInfo = Undefined) Export
 	DocumentsClient.SetLockedRowsForItemListByTradeDocuments(Object, Form, "ShipmentConfirmations");
 	DocumentsClient.UpdateTradeDocumentsTree(Object, Form, "ShipmentConfirmations", "ShipmentConfirmationsTree",
 		"QuantityInShipmentConfirmation");
+		
+//
+ViewClient_V2.OnOpen(Object, Form);
+//
 EndProcedure
 
 Procedure NotificationProcessing(Object, Form, EventName, Parameter, Source, AddInfo = Undefined) Export
@@ -474,32 +478,33 @@ EndProcedure
 #Region ItemPartner
 
 Procedure PartnerOnChange(Object, Form, Item, AddInfo = Undefined) Export
-	DocumentsClient.PartnerOnChange(Object, Form, ThisObject, Item, Undefined, AddInfo);
+	ViewClient_V2.PartnerOnChange(Object, Form);
+//	DocumentsClient.PartnerOnChange(Object, Form, ThisObject, Item, Undefined, AddInfo);
 EndProcedure
 
-Procedure PartnerOnChangePutServerDataToAddInfo(Object, Form, AddInfo = Undefined) Export
-	DocumentsClient.PartnerOnChangePutServerDataToAddInfo(Object, Form, AddInfo);
-EndProcedure
+//Procedure PartnerOnChangePutServerDataToAddInfo(Object, Form, AddInfo = Undefined) Export
+//	DocumentsClient.PartnerOnChangePutServerDataToAddInfo(Object, Form, AddInfo);
+//EndProcedure
 
-Function PartnerSettings(Object, Form, AddInfo = Undefined) Export
-	If AddInfo = Undefined Then
-		Return New Structure("PutServerDataToAddInfo", True);
-	EndIf;
-	ServerData = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "ServerData");
-
-	Settings = New Structure("Actions, ObjectAttributes, FormAttributes, AgreementType");
-
-	Actions = New Structure();
-	Actions.Insert("ChangeManagerSegment", "ChangeManagerSegment");
-	Actions.Insert("ChangeLegalName", "ChangeLegalName");
-	Actions.Insert("ChangeAgreement", "ChangeAgreement");
-	Settings.Actions = Actions;
-
-	Settings.ObjectAttributes 	= "Company, Currency, PriceIncludeTax, Agreement, LegalName, ManagerSegment";
-	Settings.FormAttributes		= "CurrentPriceType";
-	Settings.AgreementType      = ServerData.AgreementTypes_Customer;
-	Return Settings;
-EndFunction
+//Function PartnerSettings(Object, Form, AddInfo = Undefined) Export
+//	If AddInfo = Undefined Then
+//		Return New Structure("PutServerDataToAddInfo", True);
+//	EndIf;
+//	ServerData = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "ServerData");
+//
+//	Settings = New Structure("Actions, ObjectAttributes, FormAttributes, AgreementType");
+//
+//	Actions = New Structure();
+//	Actions.Insert("ChangeManagerSegment", "ChangeManagerSegment");
+//	Actions.Insert("ChangeLegalName", "ChangeLegalName");
+//	Actions.Insert("ChangeAgreement", "ChangeAgreement");
+//	Settings.Actions = Actions;
+//
+//	Settings.ObjectAttributes 	= "Company, Currency, PriceIncludeTax, Agreement, LegalName, ManagerSegment";
+//	Settings.FormAttributes		= "CurrentPriceType";
+//	Settings.AgreementType      = ServerData.AgreementTypes_Customer;
+//	Return Settings;
+//EndFunction
 
 Procedure PartnerStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
 	OpenSettings = DocumentsClient.GetOpenSettingsStructure();

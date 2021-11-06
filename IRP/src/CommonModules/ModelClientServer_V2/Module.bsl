@@ -7,7 +7,7 @@
 #Region ENTRY_POINTS
 
 Procedure EntryPoint(StepsEnablerName, Parameters) Export
-	InitCache(StepsEnablerName, Parameters);
+	InitEntryPoint(StepsEnablerName, Parameters);
 	Parameters.StepsEnablerNameCounter.Add(StepsEnablerName);
 	
 #IF Client THEN
@@ -45,29 +45,6 @@ EndProcedure
 #EndRegion
 
 #Region Chain
-
-Function GetChain()
-	Chain = New Structure();
-	Chain.Insert("LegalName"        ,GetChainLink("LegalNameExecute"));
-	Chain.Insert("Agreement"        ,GetChainLink("AgreementExecute"));
-	Chain.Insert("Company"          ,GetChainLink("CompanyExecute"));
-	Chain.Insert("PriceType"        ,GetChainLink("PriceTypeExecute"));
-	Chain.Insert("PriceTypeAsManual",GetChainLink("PriceTypeAsManualExecute"));
-	Chain.Insert("Price"            ,GetChainLink("PriceExecute"));
-	Chain.Insert("Calculations"     ,GetChainLink("CalculationsExecute"));
-	Return Chain;
-EndFunction
-
-//Function RouteExecutor(Name, Options)
-//	If    Name = "LegalName"    Then Return LegalNameExecute(Options);
-//	ElsIf Name = "Agreement"    Then Return AgreementExecute(Options);
-//	ElsIf Name = "Company"      Then Return CompanyExecute(Options);
-//	ElsIf Name = "PriceType"    Then Return PriceTypeExecute(Options);
-//	ElsIf Name = "PriceTypeAsManual" Then Return PriceTypeAsManualExecute(Options);
-//	ElsIf Name = "Price"        Then Return PriceExecute(Options);
-//	ElsIf Name = "Calculations" Then Return CalculationsExecute(Options);
-//	Else Raise StrTemplate("Route executor error [%1]", Name); EndIf;
-//EndFunction
 
 Function GetChainLink(ExecutorName)
 	ChainLink = New Structure();
@@ -111,6 +88,34 @@ Procedure ExecuteChain(Parameters, Chain)
 		EndIf;
 	EndDo;
 EndProcedure
+
+Function GetChain()
+	Chain = New Structure();
+	Chain.Insert("ChangeManagerSegmentByPartner", GetChainLink("ChangeManagerSegmentByPartnerExecute"));
+	Chain.Insert("LegalName"        , GetChainLink("LegalNameExecute"));
+	Chain.Insert("Agreement"        , GetChainLink("AgreementExecute"));
+	Chain.Insert("Company"          , GetChainLink("CompanyExecute"));
+	Chain.Insert("FillStoresInList" , GetChainLink("FillStoresInListExecute"));
+	Chain.Insert("ChangeUseShipmentConfirmationByStore" , GetChainLink("ChangeUseShipmentConfirmationByStoreExecute"));
+	Chain.Insert("ChangeUseGoodsReceiptByStore"         , GetChainLink("ChangeUseGoodsReceiptByStoreExecute"));
+	Chain.Insert("PriceType"        , GetChainLink("PriceTypeExecute"));
+	Chain.Insert("PriceTypeAsManual", GetChainLink("PriceTypeAsManualExecute"));
+	Chain.Insert("Price"            , GetChainLink("PriceExecute"));
+	Chain.Insert("Calculations"     , GetChainLink("CalculationsExecute"));
+	Return Chain;
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_MANAGER_SEGMENT_BY_PARTNER
+
+Function ChangeManagerSegmentByPartnerOptions() Export
+	Return GetChainLinkOptions("Partner");
+EndFunction
+
+Function ChangeManagerSegmentByPartnerExecute(Options) Export
+	Return DocumentsServer.GetManagerSegmentByPartner(Options.Partner);
+EndFunction
 
 #EndRegion
 
@@ -200,6 +205,50 @@ Function PriceExecute(Options) Export
 EndFunction
 
 #EndRegion
+
+#Region STORE
+
+Function ChangeUseShipmentConfirmationByStoreOptions() Export
+	Return GetChainLinkOptions("Store, ItemKey");
+EndFunction
+
+Function ChangeUseGoodsReceiptByStoreOptions() Export
+	Return GetChainLinkOptions("Store, ItemKey");
+EndFunction
+
+// устанавливает значение true\false в UseShipmentConfirmation, значение берется из склада 
+Function ChangeUseShipmentConfirmationByStoreExecute(Options) Export
+	Return ChangeOrderSchemeByStore(Options, "UseShipmentConfirmation");
+EndFunction
+
+// устанавливает значение true\false в UseGoodsReceipt, значение берется из склада
+Function ChangeUseGoodsReceiptByStoreExecute(Options) Export
+	Return ChangeOrderSchemeByStore(Options, "UseGoodsReceipt");
+EndFunction
+
+Function ChangeOrderSchemeByStore(Options, ReceiptShipment)
+	If Not ValueIsFilled(Options.Store) Then
+		Return False;
+	EndIf;
+	StoreInfo = DocumentsServer.GetStoreInfo(Options.Store, Options.ItemKey);
+	If ValueIsFilled(Options.ItemKey) Then
+		Return Not StoreInfo.IsService And StoreInfo[ReceiptShipment];
+	EndIf;
+	Return StoreInfo[ReceiptShipment];
+EndFunction
+
+Function FillStoresInListOptions() Export
+	Return GetChainLinkOptions("Store");
+EndFunction
+
+// заполняет Store в табличной части, тем Store что передан в параметре
+Function FillStoresInListExecute(Options) Export
+	Return Options.Store;
+EndFunction
+
+#EndRegion
+
+#Region CALCULATIONS
 
 Function CalculationsOptions() Export
 	Options = GetChainLinkOptions("Ref");
@@ -542,13 +591,13 @@ Function GetDefaultTaxRate(Options, TaxOptions, ItemOfTaxInfo)
 	Return Undefined;
 EndFunction
 
+#EndRegion
+
 // все измененные данные хранятся в кэше, для возможности откатить изменения, если пользователь откажется от изменений
 // кэш инициализируется только один раз внезависимости от того какой именно EntryPoint использован
-Procedure InitCache(StepsEnablerName, Parameters)
-	If Not Parameters.Property("Cache") Then
-		Parameters.Insert("Cache", New Structure());
+Procedure InitEntryPoint(StepsEnablerName, Parameters)
+	If Not Parameters.Property("StepsEnablerName") Then
 		Parameters.Insert("StepsEnablerName"      , StepsEnablerName);
-		Parameters.Insert("ViewNotify"            , New Array());
 		Parameters.Insert("ControllerModule"      , Undefined);
 		Parameters.Insert("ViewModule"            , Undefined);
 		Parameters.Insert("StepsEnablerNameCounter" , New Array());
@@ -572,5 +621,5 @@ Procedure UnloadControllerModule(Parameters)
 EndProcedure
 
 Procedure Init_API(StepsEnablerName, Parameters) Export
-	InitCache(StepsEnablerName, Parameters);
+	InitEntryPoint(StepsEnablerName, Parameters);
 EndProcedure

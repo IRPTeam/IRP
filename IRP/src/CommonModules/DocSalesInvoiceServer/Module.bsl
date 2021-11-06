@@ -20,6 +20,9 @@ Procedure BeforeWrite(Object, Form, Cancel, WriteMode, PostingMode) Export
 EndProcedure
 
 Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
+	//
+	ViewServer_V2.OnCreateAtServer(Object, Form);
+	//
 	DocumentsServer.OnCreateAtServer(Object, Form, Cancel, StandardProcessing);
 	If Form.Parameters.Key.IsEmpty() Then
 		Form.CurrentPartner    = Object.Partner;

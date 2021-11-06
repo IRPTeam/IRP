@@ -10,6 +10,15 @@
 
 // Client Event handler, вызывается из модуля ViewClient_V2
 Procedure PartnerOnChange(Parameters) Export
+	
+	If Parameters.ObjectPropertyBeforeChange <> Undefined Then
+		DataPath          = Parameters.ObjectPropertyBeforeChange.DataPath;
+		ValueBeforeChange = Parameters.ObjectPropertyBeforeChange.ValueBeforeChange;
+		CurrentValue      = GetProperty(Parameters, DataPath);
+		Parameters.Object[DataPath] = ValueBeforeChange;
+		SetProperty(Parameters, DataPath, , CurrentValue);
+	EndIf;
+	
 	ModelClientServer_V2.EntryPoint("PartnerStepsEnabler", Parameters);
 EndProcedure
 
@@ -25,8 +34,7 @@ Procedure PartnerStepsEnabler(Parameters, Chain) Export
 	
 	// При изменении партнера нужно изменить Agreement
 	Chain.Agreement.Enable = True;
-	Chain.Agreement.Setter = "SetAgreement"
-	;
+	Chain.Agreement.Setter = "SetAgreement";
 	// эти данные (параметры) нужны для получения Agreement
 	AgreementOptions = ModelClientServer_V2.AgreementOptions();
 	AgreementOptions.Partner       = GetProperty(Parameters, "Partner");
@@ -34,6 +42,12 @@ Procedure PartnerStepsEnabler(Parameters, Chain) Export
 	AgreementOptions.CurrentDate   = GetProperty(Parameters, "Date");
 	AgreementOptions.AgreementType = PredefinedValue("Enum.AgreementTypes.Customer");
 	Chain.Agreement.Options.Add(AgreementOptions);
+	
+	Chain.ChangeManagerSegmentByPartner.Enable = True;
+	Chain.ChangeManagerSegmentByPartner.Setter = "SetManagerSegment";
+	Options = ModelClientServer_V2.ChangeManagerSegmentByPartnerOptions();
+	Options.Partner = GetProperty(Parameters, "Partner");
+	Chain.ChangeManagerSegmentByPartner.Options.Add(Options);
 EndProcedure
 
 Procedure SetPartner_API(Parameters, Results) Export
@@ -51,6 +65,7 @@ EndProcedure
 
 // Client Event handler вызывается из модуля ViewClient_V2
 Procedure LegalNameOnChange(Parameters) Export
+	AddViewNotify("OnSetLegalNameNotify", Parameters);
 	ModelClientServer_V2.EntryPoint("LegalNameStepsEnabler", Parameters);
 EndProcedure
 
@@ -103,6 +118,18 @@ Procedure SetAgreement(Parameters, Results) Export
 	Setter("AgreementStepsEnabler", "Agreement", Parameters, Results);
 EndProcedure
 
+#EndRegion
+
+#Region MANAGER_SEGMENT
+
+Procedure ManagerSegmentStepsEnabler(Parameters, Chain) Export
+	Return;
+EndProcedure
+
+Procedure SetManagerSegment(Parameters, Results) Export
+	Setter("ManagerSegmentStepsEnabler", "ManagerSegment", Parameters, Results);
+EndProcedure
+	
 #EndRegion
 
 #Region COMPANY
@@ -348,6 +375,7 @@ EndProcedure
 #Region ITEM_LIST_QUANTITY
 
 Procedure ItemListQuantityOnChange(Parameters) Export
+	AddViewNotify("OnSetItemListQuantityNotify", Parameters);
 	ModelClientServer_V2.EntryPoint("ItemListQuantityStepsEnabler", Parameters);
 EndProcedure
 
@@ -356,7 +384,7 @@ Procedure ItemListQuantityStepsEnabler(Parameters, Chain) Export
 EndProcedure
 
 Procedure SetQuantity(Parameters, Results) Export
-	Setter("ItemListQuantityStepsEnabler", "ItemList.Quantity", Parameters, Results, "OnSetQuantityNotify");
+	Setter("ItemListQuantityStepsEnabler", "ItemList.Quantity", Parameters, Results, "OnSetItemListQuantityNotify");
 EndProcedure
 
 #EndRegion
@@ -440,15 +468,19 @@ Procedure Setter(StepsEnablerName, DataPath, Parameters, Results, ViewNotify = U
 		EndIf;
 	EndDo;
 	If IsChanged Then
-		If ViewNotify <> Undefined Then
-			// переадресация в клиентский модуль, вызов был с клиента, на форме что то надо обновить
-			// вызывать будем потом когда завершится вся цепочка действий, и изменения будут перенесены с кэша в объект
-			Parameters.ViewNotify.Add(ViewNotify);
-		EndIf;
+		AddViewNotify(ViewNotify, Parameters);
 		If ValueIsFilled(StepsEnablerName) Then
 			ModelClientServer_V2.EntryPoint(StepsEnablerName, Parameters);
 		EndIf;
 	EndIf;
+EndProcedure
+
+Procedure AddViewNotify(ViewNotify, Parameters)
+	If Parameters.Property("ViewNotify") And ViewNotify <> Undefined Then
+		// переадресация в клиентский модуль, вызов был с клиента, на форме что то надо обновить
+		// вызывать будем потом когда завершится вся цепочка действий, и изменения будут перенесены с кэша в объект
+		Parameters.ViewNotify.Add(ViewNotify);
+	EndIf;	
 EndProcedure
 
 // параметр Key используется когда DataPath указывает на реквизит табличной части, например ItemList.PriceType

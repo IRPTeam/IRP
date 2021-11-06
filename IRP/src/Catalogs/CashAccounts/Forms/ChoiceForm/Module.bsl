@@ -4,18 +4,29 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	ThisObject.List.QueryText = LocalizationEvents.ReplaceDescriptionLocalizationPrefix(ThisObject.List.QueryText);
 
 	For Each FilterItem In List.Filter.Items Do
-		If TypeOf(FilterItem) = Type("DataCompositionFilterItem") And FilterItem.LeftValue
-			= New DataCompositionField("Type") And ValueIsFilled(FilterItem.RightValue) Then
-			CashAccountTypeFilter = FilterItem.RightValue;
-			Items.CashAccountTypeFilter.Visible = FilterItem.ComparisonType <> DataCompositionComparisonType.Equal;
-			If FilterItem.ComparisonType = DataCompositionComparisonType.NotEqual Then
-				FoundedItemList = Items.CashAccountTypeFilter.ChoiceList.FindByValue(FilterItem.RightValue);
-				If FoundedItemList <> Undefined Then
-					Items.CashAccountTypeFilter.ChoiceList.Delete(FoundedItemList);
-				EndIf;
+		If TypeOf(FilterItem) = Type("DataCompositionFilterItem") 
+			And FilterItem.LeftValue = New DataCompositionField("Type") Then
+		
+			If FilterItem.ComparisonType = DataCompositionComparisonType.Equal Then
+				ThisObject.CashAccountTypeFilter = FilterItem.RightValue;
+				Items.CashAccountTypeFilter.Visible = False;
+			ElsIf FilterItem.ComparisonType = DataCompositionComparisonType.NotEqual Then
+				DeleteFilterItemFromCashAccountTypeFilter(FilterItem.RightValue);
+			ElsIf FilterItem.ComparisonType = DataCompositionComparisonType.NotInList Then
+				For Each FIlterValue In FilterItem.RightValue Do
+					DeleteFilterItemFromCashAccountTypeFilter(FIlterValue.Value);
+				EndDo;
 			EndIf;
 		EndIf;
 	EndDo;
+EndProcedure
+
+&AtServer
+Procedure DeleteFilterItemFromCashAccountTypeFilter(FilterValue)
+	FilterItem = Items.CashAccountTypeFilter.ChoiceList.FindByValue(FilterValue);
+	If FilterItem <> Undefined Then
+		Items.CashAccountTypeFilter.ChoiceList.Delete(FilterItem);
+	EndIf;
 EndProcedure
 
 &AtClient
@@ -26,6 +37,13 @@ EndProcedure
 
 &AtClient
 Procedure CashAccountTypeFilterOnChange(Item)
-	CommonFunctionsClientServer.SetFilterItem(List.Filter.Items, "Type", CashAccountTypeFilter,
-		DataCompositionComparisonType.Equal, ValueIsFilled(CashAccountTypeFilter));
+	If Not ValueIsFilled(CashAccountTypeFilter) Then
+		CommonFunctionsClientServer.SetFilterItem(List.Filter.Items, "Type",
+			Items.CashAccountTypeFilter.ChoiceList.UnloadValues(),
+			DataCompositionComparisonType.InList, True);
+	Else
+		CommonFunctionsClientServer.SetFilterItem(List.Filter.Items, "Type",
+			CashAccountTypeFilter,
+			DataCompositionComparisonType.Equal, ValueIsFilled(CashAccountTypeFilter));
+	EndIf;
 EndProcedure

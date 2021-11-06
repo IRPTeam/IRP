@@ -1,4 +1,4 @@
 
-Procedure ServerEntryPoint(Parameters, EntryPointName) Export
-	ModelClientServer_V2.ServerEntryPoint(Parameters, EntryPointName);
+Procedure ServerEntryPoint(StepsEnablerName, Parameters) Export
+	ModelClientServer_V2.ServerEntryPoint(StepsEnablerName, Parameters);
 EndProcedure

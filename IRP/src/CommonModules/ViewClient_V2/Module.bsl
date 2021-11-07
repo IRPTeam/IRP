@@ -4,56 +4,58 @@
 // В ЭТОМ МОДУЛЕ ТОЛЬКО МОДИФИКАЦИЯ ФОРМЫ, ВПРОСЫ ПОЛЬЗОВАТЕЛЮ и прочие клиентские вещи
 // ДЕЛАТЬ ИЗМЕНЕНИЯ объекта нельзя только чтение
 
-Function GetParameters(Object, Form, Rows = Undefined, PropertyDataPath = Undefined)
+Function GetParameters(Object, Form, Rows = Undefined, ObjectPropertyDataPath = Undefined, FormPropertyDataPath = Undefined)
 	Parameters = New Structure();
 	// параметры для Client 
 	Parameters.Insert("Object"         , Object);
 	Parameters.Insert("Form"           , Form);
-	// кэш для реквизитов формы
-	Parameters.Insert("FormCache"      , New Structure());
+	Parameters.Insert("CacheForm"      , New Structure()); // кэш для реквизитов формы
 	Parameters.Insert("ViewNotify"     , New Array());
 	Parameters.Insert("ViewModuleName" , "ViewClient_V2");
-	Parameters.Insert("ObjectPropertyBeforeChange" , Undefined);
 	
-	// параметры для Client Server
+	Parameters.Insert("ObjectPropertyNamesBeforeChange" , GetObjectPropertyNamesBegoreChange());
+	Parameters.Insert("ObjectPropertyBeforeChange"      , Undefined);
+	
+	Parameters.Insert("FormPropertyNamesBeforeChange"   , GetFormPropertyNamesBegoreChange());
+	Parameters.Insert("FormPropertyBeforeChange"        , Undefined);
+	
+	// параметры для Server + Client
 	// кэш для реквизитов объекта
 	Parameters.Insert("Cache", New Structure());
 	Parameters.Insert("ControllerModuleName" , "ControllerClientServer_V2");
 	
 	//PropertyDataPath - имя реквизита для которого надо получить значение до изменения
-	If PropertyDataPath <> Undefined Then
+	If ObjectPropertyDataPath <> Undefined Or FormPropertyDataPath <> Undefined Then
 		CacheBeforeChange = CommonFunctionsServer.DeserializeXMLUseXDTO(Form.CacheBeforeChange);
-		
-		If Not CacheBeforeChange.CacheObject.Property(PropertyDataPath) Then
-			Raise StrTemplate("Property by DataPath [%1] not found in CacheBeforeChange", PropertyDataPath);
+		If ObjectPropertyDataPath <> Undefined Then
+			Parameters.ObjectPropertyBeforeChange = GetCacheBeforeChange(CacheBeforeChange.CacheObject, ObjectPropertyDataPath);
 		EndIf;
-		// значение которое было в реквизите до того как он был изменен
-		ObjectValueBeforeChange = CacheBeforeChange.CacheObject[PropertyDataPath];
-		ObjectPropertyBeforeChange = New Structure();
-		ObjectPropertyBeforeChange.Insert("DataPath"          , PropertyDataPath);
-		ObjectPropertyBeforeChange.Insert("ValueBeforeChange" , ObjectValueBeforeChange);
-		Parameters.ObjectPropertyBeforeChange = ObjectPropertyBeforeChange;
+		If FormPropertyDataPath <> Undefined Then
+			Parameters.FormPropertyBeforeChange = GetCacheBeforeChange(CacheBeforeChange.CacheForm, FormPropertyDataPath);
+		EndIf;
 	EndIf;
 	
-	// это используется только для ItemList
-	If Rows = Undefined Then
-		Rows = Object.ItemList;
-	EndIf;
-		
 	// налоги
 	ArrayOfTaxInfo = TaxesClient.GetArrayOfTaxInfo(Form);
 	Parameters.Insert("ArrayOfTaxInfo", ArrayOfTaxInfo);
 	
 	ArrayOfRows = New Array();
 	// это имена колонок из ItemList
-	ItemListColumns = "Key, ItemKey, PriceType, Price, NetAmount, OffersAmount, TaxAmount, TotalAmount";
+	ColumnNames    = ViewServer_V2.GetColumnsOfTable(Object, "ItemList, TaxList");
+	TableColumns   = ColumnNames[0];
+	TaxListColumns = ColumnNames[1];
+	
+	// если не переданы конкретные строки то используем все что естьв таблице, реализовано только для ItemList
+	Rows = ?(Rows = Undefined, Object.ItemList, Rows);
+	
+	// строку таблицы нельзя передать на сервер, поэтому помещаем данные в массив структур
 	For Each Row In Rows Do
-		NewRow = New Structure(ItemListColumns);
+		NewRow = New Structure(TableColumns);
 		FillPropertyValues(NewRow, Row);
-			
+		ArrayOfRows.Add(NewRow);
+		
 		// налоги
 		ArrayOfRowsTaxList = New Array();
-		TaxListColumns = "Key, Tax, Analytics, TaxRate, Amount, IncludeToTotalAmount, ManualAmount";
 		For Each TaxRow In Object.TaxList.FindRows(New Structure("Key", Row.Key)) Do
 			NewRowTaxList = New Structure(TaxListColumns);
 			FillPropertyValues(NewRowTaxList, TaxRow);
@@ -66,8 +68,6 @@ Function GetParameters(Object, Form, Rows = Undefined, PropertyDataPath = Undefi
 		EndDo;
 		NewRow.Insert("TaxRates", TaxRates);
 		NewRow.Insert("TaxList" , ArrayOfRowsTaxList);
-			
-		ArrayOfRows.Add(NewRow);
 	EndDo;
 	If ArrayOfRows.Count() Then
 		Parameters.Insert("Rows", ArrayOfRows);
@@ -86,16 +86,34 @@ Function GetRowsByCurrentData(Form, TableName, CurrentData)
 	Return Rows;
 EndFunction
 
+Function GetCacheBeforeChange(Cache, DataPath)
+	If Not Cache.Property(DataPath) Then
+		Raise StrTemplate("Property by DataPath [%1] not found in CacheBeforeChange", DataPath);
+	EndIf;
+	// значение которое было в реквизите до того как он был изменен
+	ValueBeforeChange = Cache[DataPath];
+	Return New Structure("DataPath, ValueBeforeChange", DataPath, ValueBeforeChange);
+EndFunction
+
+// возвращает список реквизитов объекта для которых нужно получить значение до изменения
+Function GetObjectPropertyNamesBegoreChange()
+	Return "Partner";
+EndFunction
+
+// возвращает список реквизитов формы для которых нужно получить значение до изменения
+Function GetFormPropertyNamesBegoreChange()
+	Return "Store";
+EndFunction
+
 // хранит значения реквизитов до изменения
 Procedure UpdateCacheBeforeChange(Object, Form)
 	// реквизиты Object которые нужно кэшировать, для табличных частей не реализовано
-	ObjectProperties = "Partner";
-	CacheObject = New Structure(ObjectProperties);
+	CacheObject = New Structure(GetObjectPropertyNamesBegoreChange());
 	FillPropertyValues(CacheObject, Object);
 	
 	// реквизиты Form которые нужно кэшировать
-	FormProperties = "Store";
-	CacheForm = New Structure(FormProperties);
+	CacheForm = New Structure(GetFormPropertyNamesBegoreChange());
+	FillPropertyValues(CacheForm, Form);
 	
 	CacheBeforeChange = New Structure("CacheObject, CacheForm", CacheObject, CacheForm);
 	Form.CacheBeforeChange = CommonFunctionsServer.SerializeXMLUseXDTO(CacheBeforeChange);
@@ -118,14 +136,30 @@ Procedure TestQuestionContinue(Result, Parameters) Export
 	EndIf;
 EndProcedure
 
+#Region FORM
+
 Procedure OnOpen(Object, Form) Export
 	UpdateCacheBeforeChange(Object, Form);
 EndProcedure
 
+#EndRegion
+
 #Region STORE
 
 Procedure StoreOnChange(Object, Form) Export
-	Return; // недописано, это реквизит формы
+	ControllerClientServer_V2.StoreOnChange(GetParameters(Object, Form, , , "Store"));
+EndProcedure
+
+Procedure OnSetStoreNotify(Parameters) Export
+	StoreArray = New Array();
+	For Each Row In Parameters.Object.ItemList Do
+		If ValueIsFilled(Row.Store) And StoreArray.Find(Row.Store) = Undefined Then
+			StoreArray.Add(Row.Store);
+		EndIf;
+	EndDo;
+	If StoreArray.Count() > 1 Then
+		Parameters.Form.Items.Store.InputHint = StrConcat(StoreArray, "; ");
+	EndIf;
 EndProcedure
 
 #EndRegion
@@ -174,6 +208,11 @@ EndProcedure
 Procedure ItemListTotalAmountOnChange(Object, Form, CurrentData = Undefined) Export
 	Rows = GetRowsByCurrentData(Form, "ItemList", CurrentData);
 	ControllerClientServer_V2.ItemListTotalAmountOnChange(GetParameters(Object, Form, Rows));
+EndProcedure
+
+Procedure ItemListStoreOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "ItemList", CurrentData);
+	ControllerClientServer_V2.ItemListStoreOnChange(GetParameters(Object, Form, Rows));
 EndProcedure
 
 #Region ITEM_LIST_QUANTITY

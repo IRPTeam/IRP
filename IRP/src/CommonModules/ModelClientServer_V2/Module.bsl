@@ -12,7 +12,14 @@ Procedure EntryPoint(StepsEnablerName, Parameters) Export
 	
 #IF Client THEN
 	TmpParameters = New Structure("Form, Object", Parameters.Form, Parameters.Object);
-	Parameters.Form = Undefined;
+	If ValueIsFilled(Parameters.FormPropertyNamesBeforeChange) Then
+		// превращаем форму в структуру, что бы на сервере были доступны реквизиты формы, из них нужно читать данные
+		TmpForm = New Structure(Parameters.FormPropertyNamesBeforeChange);
+		FillPropertyValues(TmpForm, TmpParameters.Form);
+		Parameters.Form = TmpForm;
+	Else
+		Parameters.Form = Undefined;
+	EndIf;
 #ENDIF
 	// переносим выполнение на сервер
 	ModelServer_V2.ServerEntryPoint(StepsEnablerName, Parameters);
@@ -96,6 +103,7 @@ Function GetChain()
 	Chain.Insert("Agreement"        , GetChainLink("AgreementExecute"));
 	Chain.Insert("Company"          , GetChainLink("CompanyExecute"));
 	Chain.Insert("FillStoresInList" , GetChainLink("FillStoresInListExecute"));
+	Chain.Insert("ChangeStoreInHeaderByStoresInList"    , GetChainLink("ChangeStoreInHeaderByStoresInListExecute"));
 	Chain.Insert("ChangeUseShipmentConfirmationByStore" , GetChainLink("ChangeUseShipmentConfirmationByStoreExecute"));
 	Chain.Insert("ChangeUseGoodsReceiptByStore"         , GetChainLink("ChangeUseGoodsReceiptByStoreExecute"));
 	Chain.Insert("PriceType"        , GetChainLink("PriceTypeExecute"));
@@ -238,12 +246,36 @@ Function ChangeOrderSchemeByStore(Options, ReceiptShipment)
 EndFunction
 
 Function FillStoresInListOptions() Export
-	Return GetChainLinkOptions("Store");
+	Return GetChainLinkOptions("Store, StoreInList");
 EndFunction
 
-// заполняет Store в табличной части, тем Store что передан в параметре
+// заполняет Store в табличной части, тем Store что передан в параметре если переданный склад заполнен
+// если не заполнен то оставляет тот склад что указан в табличной части
 Function FillStoresInListExecute(Options) Export
-	Return Options.Store;
+	If Not ValueIsFilled(Options.Store) Then
+		Return Options.StoreInList;
+	Else
+		Return Options.Store;
+	EndIf;
+EndFunction
+
+Function ChangeStoreInHeaderByStoresInListOptions() Export
+	Return GetChainLinkOptions("ArrayOfStoresInList");
+EndFunction
+
+Function ChangeStoreInHeaderByStoresInListExecute(Options) Export
+	// сделаем массив с кладов только с уникальными значениями
+	ArrayOfStoresUnique = New Array();
+	For Each Store In Options.ArrayOfStoresInList Do
+		If ValueIsFilled(Store) And ArrayOfStoresUnique.Find(Store) = Undefined Then
+			ArrayOfStoresUnique.Add(Store);
+		EndIf;
+	EndDo;
+	If ArrayOfStoresUnique.Count() = 1 Then
+		Return ArrayOfStoresUnique[0];
+	Else
+		Return Undefined;
+	EndIf;
 EndFunction
 
 #EndRegion

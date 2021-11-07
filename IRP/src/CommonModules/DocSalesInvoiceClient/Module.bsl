@@ -430,7 +430,8 @@ EndProcedure
 #Region Store
 
 Procedure ItemListStoreOnChange(Object, Form, Item, AddInfo = Undefined) Export
-	DocumentsClient.ItemListStoreOnChange(Object, Form, ThisObject, Item);
+	ViewClient_V2.ItemListStoreOnChange(Object, Form);
+	//DocumentsClient.ItemListStoreOnChange(Object, Form, ThisObject, Item);
 EndProcedure
 
 #EndRegion
@@ -719,27 +720,28 @@ EndProcedure
 #Region StoreEvents
 
 Procedure StoreOnChange(Object, Form, Item, AddInfo = Undefined) Export
-	DocumentsClient.StoreOnChange(Object, Form, ThisObject, Item, Undefined, AddInfo);
+	ViewClient_V2.StoreOnChange(Object, Form);
+	//DocumentsClient.StoreOnChange(Object, Form, ThisObject, Item, Undefined, AddInfo);
 EndProcedure
 
-Procedure StoreOnChangePutServerDataToAddInfo(Object, Form, AddInfo = Undefined) Export
-	DocumentsClient.StoreOnChangePutServerDataToAddInfo(Object, Form, AddInfo);
-EndProcedure
-
-Function StoreSettings(Object, Form, AddInfo = Undefined) Export
-	If AddInfo = Undefined Then
-		Return New Structure("PutServerDataToAddInfo", True);
-	EndIf;
-
-	Settings = New Structure("Actions, ObjectAttributes, FormAttributes");
-
-	Actions = New Structure();
-	Actions.Insert("UpdateStore", "UpdateStore");
-	Settings.Actions = Actions;
-	Settings.ObjectAttributes = "Company";
-	Settings.FormAttributes = "Store, CurrentPriceType";
-	Return Settings;
-EndFunction
+//Procedure StoreOnChangePutServerDataToAddInfo(Object, Form, AddInfo = Undefined) Export
+//	DocumentsClient.StoreOnChangePutServerDataToAddInfo(Object, Form, AddInfo);
+//EndProcedure
+//
+//Function StoreSettings(Object, Form, AddInfo = Undefined) Export
+//	If AddInfo = Undefined Then
+//		Return New Structure("PutServerDataToAddInfo", True);
+//	EndIf;
+//
+//	Settings = New Structure("Actions, ObjectAttributes, FormAttributes");
+//
+//	Actions = New Structure();
+//	Actions.Insert("UpdateStore", "UpdateStore");
+//	Settings.Actions = Actions;
+//	Settings.ObjectAttributes = "Company";
+//	Settings.FormAttributes = "Store, CurrentPriceType";
+//	Return Settings;
+//EndFunction
 
 #EndRegion
 

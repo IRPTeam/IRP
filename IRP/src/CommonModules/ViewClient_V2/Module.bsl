@@ -55,8 +55,13 @@ Function GetParameters(Object, Form, TableName = Undefined, Rows = Undefined, Ob
 			ArrayOfTableNames.Add("TaxList");
 		EndIf;
 		ColumnNames    = ViewServer_V2.GetColumnsOfTable(Object, StrConcat(ArrayOfTableNames, ","));
+		// в 0 индексе будут колонки основной таблицы ItemList, PaymentList и т.д
 		TableColumns   = ColumnNames[0];
-		TaxListColumns = ColumnNames[1];
+		
+		// в 1 индексе будут колонки табличной части TaxList
+		If ArrayOfTableNames.Find("TaxList") <> Undefined Then
+			TaxListColumns = ColumnNames[1];
+		EndIf;
 	EndIf;
 	
 	// строку таблицы нельзя передать на сервер, поэтому помещаем данные в массив структур
@@ -67,12 +72,14 @@ Function GetParameters(Object, Form, TableName = Undefined, Rows = Undefined, Ob
 		
 		// налоги
 		ArrayOfRowsTaxList = New Array();
-		For Each TaxRow In Object.TaxList.FindRows(New Structure("Key", Row.Key)) Do
-			NewRowTaxList = New Structure(TaxListColumns);
-			FillPropertyValues(NewRowTaxList, TaxRow);
-			ArrayOfRowsTaxList.Add(NewRowTaxList);
-		EndDo;
-			
+		If ArrayOfTableNames.Find("TaxList") <> Undefined Then
+			For Each TaxRow In Object.TaxList.FindRows(New Structure("Key", Row.Key)) Do
+				NewRowTaxList = New Structure(TaxListColumns);
+				FillPropertyValues(NewRowTaxList, TaxRow);
+				ArrayOfRowsTaxList.Add(NewRowTaxList);
+			EndDo;
+		EndIf;
+		
 		TaxRates = New Structure();
 		For Each ItemOfTaxInfo In ArrayOfTaxInfo Do
 			TaxRates.Insert(ItemOfTaxInfo.Name, Row[ItemOfTaxInfo.Name]);

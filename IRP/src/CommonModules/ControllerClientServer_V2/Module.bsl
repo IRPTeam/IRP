@@ -5,6 +5,172 @@
 // никаких запросов к БД и расчетов тут делать нельзя, модифицировать форму задавать вопросы пользователю и т.д нельзя 
 // только чтение из объекта и запись в объект
 
+#Region ITEM_ITEMKEY_UNIT_QUANTITYINBASEUNIT
+
+// Вызывается при изменении Item в табличной части ItemList
+Procedure ItemListItemOnChange(Parameters) Export
+	// Запускаем процесс изменения документа
+	// Первым параметром указываем имя процедуры в которой включаем нужные шаги вычислений
+	ModelClientServer_V2.EntryPoint("ItemListItemStepsEnabler", Parameters);
+EndProcedure
+
+// Включает необходимые шаги при изменении Item
+Procedure ItemListItemStepsEnabler(Parameters, Chain) Export
+	// При изменении Item нужно изменить ItemKey
+	Chain.ChangeItemKeyByItem.Enable = True;
+	
+	// В процедуру SetItemListItemKey будет передано вычисленное значение ItemKey
+	Chain.ChangeItemKeyByItem.Setter = "SetItemListItemKey";
+	
+	// так как реквизит Item находится в табличной части ItemList то нужно обработать строки табличной части
+	For Each Row In GetRows(Parameters, "ItemList") Do
+		Options = ModelClientServer_V2.ChangeItemKeyByItemOptions();
+		// если реквизит находится в табличной части, в данном случае в ItemList то в 3-ем параметре нужно передать 
+		// Key - это ключ строки, он нужен для ее идентификации
+		Options.Item = GetPropertyObject(Parameters, "ItemList.Item", Row.Key);
+		
+		// Когда параметры заполняем из табличной части то обязательно нужно заполнятб поле Key
+		// без этого параметра не получится идентифицировать строку и вернуть в нее значение
+		Options.Key = Row.Key;
+		
+		Chain.ChangeItemKeyByItem.Options.Add(Options);
+	EndDo;
+EndProcedure
+
+// Вызывается при изменении ItemKey в табличной части ItemList
+Procedure ItemListItemKeyOnChange(Parameters) Export
+	// Запускаем процесс изменения документа
+	// Первым параметром указываем имя процедуры в которой включаем нужные шаги вычислений
+	ModelClientServer_V2.EntryPoint("ItemListItemKeyStepsEnabler", Parameters);
+EndProcedure
+
+// Включает необходимые шаги при изменении ItemKey
+Procedure ItemListItemKeyStepsEnabler(Parameters, Chain) Export
+	// При изменении ItemKey нужно изменить Unit
+	Chain.ChangeUnitByItemKey.Enable = True;
+	
+	// В процедуру SetItemListUnit будет передано вычисленное значение Unit
+	Chain.ChangeUnitByItemKey.Setter = "SetItemListUnit";
+	
+	// так как реквизит ItemKey находится в табличной части ItemList то нужно обработать строки табличной части
+	For Each Row In GetRows(Parameters, "ItemList") Do
+		Options = ModelClientServer_V2.ChangeUnitByItemKeyOptions();
+		// если реквизит находится в табличной части, в данном случае в ItemList то в 3-ем параметре нужно передать 
+		// Key - это ключ строки, он нужен для ее идентификации
+		Options.ItemKey = GetPropertyObject(Parameters, "ItemList.ItemKey", Row.Key);
+		
+		// Когда параметры заполняем из табличной части то обязательно нужно заполнятб поле Key
+		// без этого параметра не получится идентифицировать строку и вернуть в нее значение
+		Options.Key = Row.Key;
+		
+		Chain.ChangeUnitByItemKey.Options.Add(Options);
+	EndDo;
+EndProcedure
+
+// Вызывается когда в реквизит ItemKey программно пишется значение
+Procedure SetItemListItemKey(Parameters, Results) Export
+	// При изменении ItemKey нужно выполнить действия, изменить Unit
+	// поэтому первым параметром передаем имя процедуры которая включит шаги которые нужно сделать после изменения ItemKey
+	
+	// Вторым параметром передаем путь к данным, куда надо установить значение, для реквизитов табличных частей
+	// имеет вид ИмяТабличнойчасти.ИмяРеквизита
+	SetterObject("ItemListItemKeyStepsEnabler", "ItemList.ItemKey", Parameters, Results);
+EndProcedure
+
+// Вызывается при изменении Unit в табличной части ItemList
+Procedure ItemListUnitOnChange(Parameters) Export
+	// Запускаем процесс изменения документа
+	// Первым параметром указываем имя процедуры в которой включаем нужные шаги вычислений
+	ModelClientServer_V2.EntryPoint("ItemListUnitStepsEnabler", Parameters);
+EndProcedure
+
+// Включает необходимые шаги при изменении Unit
+Procedure ItemListUnitStepsEnabler(Parameters, Chain) Export
+	// При изменении Unit нужно изменить QuantityInBaseUnit
+	// воспользуемся логикой Calculations
+	Chain.Calculations.Enable = True;
+	// в эту процедуру будет возвращен результат выполнения Calculations
+	Chain.Calculations.Setter = "SetItemListQuantityInBaseUnit";
+	
+	// так как реквизит Unit находится в табличной части ItemList то нужно обработать строки табличной части
+	For Each Row In GetRows(Parameters, "ItemList") Do
+		
+		CalculationsOptions     = ModelClientServer_V2.CalculationsOptions();
+		CalculationsOptions.Ref = Parameters.Object.Ref;
+		
+		// нужно посчитать только QuantityInBaseUnit, остальные расчеты (NetAmount, TotalAmount) не нужны
+		// поэтому включаем только один расчет
+		CalculationsOptions.CalculateQuantityInBaseUnit.Enable   = True;
+		
+		// эти параметры логики Calculations нужны для расчета QuantityInBaseUnit
+		CalculationsOptions.QuantityOptions.ItemKey = GetPropertyObject(Parameters, "ItemList.ItemKey", Row.Key);
+		CalculationsOptions.QuantityOptions.Unit    = GetPropertyObject(Parameters, "ItemList.Unit", Row.Key);
+		CalculationsOptions.QuantityOptions.Quantity           = GetPropertyObject(Parameters, "ItemList.Quantity"           , Row.Key);
+		CalculationsOptions.QuantityOptions.QuantityInBaseUnit = GetPropertyObject(Parameters, "ItemList.QuantityInBaseUnit" , Row.Key);
+		
+		// указываем ключ строки для идентификации при возвращении результата расчета
+		CalculationsOptions.Key = Row.Key;
+		
+		Chain.Calculations.Options.Add(CalculationsOptions);
+	EndDo;
+EndProcedure
+
+// Вызывается когда в реквизит Unit программно пишется значение
+Procedure SetItemListUnit(Parameters, Results) Export
+	// При изменении Unit нужно выполнить действия, изменить QuantityInBaseUnit
+	// поэтому первым параметром передаем имя процедуры которая включит шаги которые нужно сделать после изменения Unit
+	
+	// Вторым параметром передаем путь к данным, куда надо установить значение, для реквизитов табличных частей
+	// имеет вид ИмяТабличнойчасти.ИмяРеквизита
+	SetterObject("ItemListUnitStepsEnabler", "ItemList.Unit", Parameters, Results);
+EndProcedure
+
+// Вызывается при изменениие Quantity, для тех докуметов в которых нет сумм (NetAmount, TotalAmount)
+Procedure ItemListQuantityWitoutAmountOnChange(Parameters) Export
+	// Запускаем процесс изменения документа
+	// Первым параметром указываем имя процедуры в которой включаем нужные шаги вычислений
+	ModelClientServer_V2.EntryPoint("ItemListQuantityWithoutAmountStepsEnabler", Parameters);
+EndProcedure
+
+Procedure ItemListQuantityWithoutAmountStepsEnabler(Parameters, Chain) Export
+	// При изменении Quantity нужно изменить QuantityInBaseUnit
+	// воспользуемся логикой Calculations
+	Chain.Calculations.Enable = True;
+	// в эту процедуру будет возвращен результат выполнения Calculations
+	Chain.Calculations.Setter = "SetItemListQuantityInBaseUnit";
+	
+	// так как реквизит Quantity находится в табличной части ItemList то нужно обработать строки табличной части
+	For Each Row In GetRows(Parameters, "ItemList") Do
+		
+		CalculationsOptions     = ModelClientServer_V2.CalculationsOptions();
+		CalculationsOptions.Ref = Parameters.Object.Ref;
+		
+		// нужно посчитать только QuantityInBaseUnit, остальные расчеты (NetAmount, TotalAmount) не нужны
+		// поэтому включаем только один расчет
+		CalculationsOptions.CalculateQuantityInBaseUnit.Enable   = True;
+		
+		// эти параметры логики Calculations нужны для расчета QuantityInBaseUnit
+		CalculationsOptions.QuantityOptions.ItemKey = GetPropertyObject(Parameters, "ItemList.ItemKey", Row.Key);
+		CalculationsOptions.QuantityOptions.Unit    = GetPropertyObject(Parameters, "ItemList.Unit", Row.Key);
+		CalculationsOptions.QuantityOptions.Quantity           = GetPropertyObject(Parameters, "ItemList.Quantity"           , Row.Key);
+		CalculationsOptions.QuantityOptions.QuantityInBaseUnit = GetPropertyObject(Parameters, "ItemList.QuantityInBaseUnit" , Row.Key);
+		
+		// указываем ключ строки для идентификации при возвращении результата расчета
+		CalculationsOptions.Key = Row.Key;
+		
+		Chain.Calculations.Options.Add(CalculationsOptions);
+	EndDo;
+EndProcedure
+
+// Вызывается когда произведен расчет QuantityInBaseUnit для того чтобы поместить расчет в реквизит
+Procedure SetItemListQuantityInBaseUnit(Parameters, Results) Export
+	// логика Calculation возвращает не просто значение а структуру, поэтому в 5-ом параметре указываем ключ структуры
+	// по которому можно извлечь результат вычислений, в данном случае ключ будет QuantityInBaseUnit
+	SetterObject(Undefined, "ItemList.QuantityInBaseUnit" , Parameters, Results, , "QuantityInBaseUnit");
+EndProcedure
+
+#EndRegion
+
 #Region ACCOUNT_SENDER
 
 // Вызывается при изменении реквизита Sender в документе CashTransferOrder

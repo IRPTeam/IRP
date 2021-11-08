@@ -162,6 +162,38 @@ EndProcedure
 
 #EndRegion
 
+#Region ITEM_ITEMKEY_UNIT_QUANTITYINBASEUNIT
+
+// При изменении реквизитов Item, ItemKey, Unit, Quantity нет никаких изменений формы, 
+// видимость и доступность не изменяется, поэтому обработчиков событий OnSet() нет
+
+// Вызывается при изменении реквизита Item в табличной части ItemList
+Procedure ItemListItemOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "ItemList", CurrentData);
+	ControllerClientServer_V2.ItemListItemOnChange(GetParameters(Object, Form, "ItemList", Rows));
+EndProcedure
+
+// Вызывается при изменении реквизита ItemKey в табличной части ItemList
+Procedure ItemListItemKeyOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "ItemList", CurrentData);
+	ControllerClientServer_V2.ItemListItemKeyOnChange(GetParameters(Object, Form, "ItemList", Rows));
+EndProcedure
+
+// Вызывается при изменении реквизита Unit в табличной части ItemList
+Procedure ItemListUnitOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "ItemList", CurrentData);
+	ControllerClientServer_V2.ItemListUnitOnChange(GetParameters(Object, Form, "ItemList", Rows));
+EndProcedure
+
+// Вызывается при изменении реквизита Quantity в табличной части ItemList
+// в тех случаях когда в табличной части ItemList нет сумм (NetAmount, TotalAmount)
+Procedure ItemListQuantityWithoutAmountOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "ItemList", CurrentData);
+	ControllerClientServer_V2.ItemListQuantityWitoutAmountOnChange(GetParameters(Object, Form, "ItemList", Rows));
+EndProcedure
+
+#EndRegion
+
 #Region ACCOUNT_SENDER
 
 // Вызывается при изменении реквизита Sender

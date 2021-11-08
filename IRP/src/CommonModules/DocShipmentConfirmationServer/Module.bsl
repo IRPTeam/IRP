@@ -14,6 +14,7 @@ Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 	EndIf;
 	FillTransactionTypeChoiceList(Form);
 	RowIDInfoServer.OnCreateAtServer(Object, Form, Cancel, StandardProcessing);
+	ViewServer_V2.OnCreateAtServer(Object, Form);
 EndProcedure
 
 Procedure AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters) Export

@@ -1,6 +1,7 @@
 
 Procedure OnOpen(Object, Form, Cancel, AddInfo = Undefined) Export
 	DocumentsClient.SetTextOfDescriptionAtForm(Object, Form);
+	ViewClient_V2.OnOpen(Object, Form);
 EndProcedure
 
 Procedure AfterWriteAtClient(Object, Form, WriteParameters, AddInfo = Undefined) Export
@@ -119,19 +120,20 @@ EndProcedure
 #EndRegion
 
 Procedure ItemListItemOnChange(Object, Form, Item = Undefined, CurrentRowData = Undefined) Export
-	CurrentData = DocumentsClient.GetCurrentRowDataList(Form.Items.ItemList, CurrentRowData);
-	If CurrentData = Undefined Then
-		Return;
-	EndIf;
-	CurrentData.ItemKey = CatItemsServer.GetItemKeyByItem(CurrentData.Item);
-	If ValueIsFilled(CurrentData.ItemKey) 
-		And ServiceSystemServer.GetObjectAttribute(CurrentData.ItemKey, "Item")	<> CurrentData.Item Then
-		CurrentData.ItemKey = Undefined;
-	EndIf;
-
-	CalculationSettings = New Structure();
-	CalculationSettings.Insert("UpdateUnit");
-	CalculationStringsClientServer.CalculateItemsRow(Object, CurrentData, CalculationSettings);
+	ViewClient_V2.ItemListItemOnChange(Object, Form);
+//	CurrentData = DocumentsClient.GetCurrentRowDataList(Form.Items.ItemList, CurrentRowData);
+//	If CurrentData = Undefined Then
+//		Return;
+//	EndIf;
+//	CurrentData.ItemKey = CatItemsServer.GetItemKeyByItem(CurrentData.Item);
+//	If ValueIsFilled(CurrentData.ItemKey) 
+//		And ServiceSystemServer.GetObjectAttribute(CurrentData.ItemKey, "Item")	<> CurrentData.Item Then
+//		CurrentData.ItemKey = Undefined;
+//	EndIf;
+//
+//	CalculationSettings = New Structure();
+//	CalculationSettings.Insert("UpdateUnit");
+//	CalculationStringsClientServer.CalculateItemsRow(Object, CurrentData, CalculationSettings);
 EndProcedure
 
 Procedure ItemListOnChange(Object, Form, Item = Undefined, CurrentRowData = Undefined) Export
@@ -292,12 +294,13 @@ EndProcedure
 #Region Unit
 
 Procedure ItemListUnitOnChange(Object, Form, Item = Undefined, CurrentRowData = Undefined, AddInfo = Undefined) Export
-	CurrentData = DocumentsClient.GetCurrentRowDataList(Form.Items.ItemList, CurrentRowData);
-	If CurrentData = Undefined Then
-		Return;
-	EndIf;
-	Actions = New Structure("CalculateQuantityInBaseUnit");
-	CalculationStringsClientServer.CalculateItemsRow(Object, CurrentData, Actions);
+	ViewClient_V2.ItemListUnitOnChange(Object, Form);
+//	CurrentData = DocumentsClient.GetCurrentRowDataList(Form.Items.ItemList, CurrentRowData);
+//	If CurrentData = Undefined Then
+//		Return;
+//	EndIf;
+//	Actions = New Structure("CalculateQuantityInBaseUnit");
+//	CalculationStringsClientServer.CalculateItemsRow(Object, CurrentData, Actions);
 EndProcedure
 
 #EndRegion
@@ -305,12 +308,13 @@ EndProcedure
 #Region Quantity
 
 Procedure ItemListQuantityOnChange(Object, Form, Item = Undefined, CurrentRowData = Undefined, AddInfo = Undefined) Export
-	CurrentData = DocumentsClient.GetCurrentRowDataList(Form.Items.ItemList, CurrentRowData);
-	If CurrentData = Undefined Then
-		Return;
-	EndIf;
-	Actions = New Structure("CalculateQuantityInBaseUnit");
-	CalculationStringsClientServer.CalculateItemsRow(Object, CurrentData, Actions);
+	ViewClient_V2.ItemListQuantityWithoutAmountOnChange(Object, Form);
+//	CurrentData = DocumentsClient.GetCurrentRowDataList(Form.Items.ItemList, CurrentRowData);
+//	If CurrentData = Undefined Then
+//		Return;
+//	EndIf;
+//	Actions = New Structure("CalculateQuantityInBaseUnit");
+//	CalculationStringsClientServer.CalculateItemsRow(Object, CurrentData, Actions);
 EndProcedure
 
 #EndRegion

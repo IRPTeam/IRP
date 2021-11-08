@@ -102,6 +102,8 @@ Function GetChain()
 	Chain.Insert("LegalName"        , GetChainLink("LegalNameExecute"));
 	Chain.Insert("Agreement"        , GetChainLink("AgreementExecute"));
 	Chain.Insert("Company"          , GetChainLink("CompanyExecute"));
+	Chain.Insert("ChangeItemKeyByItem"    , GetChainLink("ChangeItemKeyByItemExecute"));
+	Chain.Insert("ChangeUnitByItemKey"    , GetChainLink("ChangeUnitByItemKeyExecute"));
 	Chain.Insert("ChangeCurrencyByAccount", GetChainLink("ChangeCurrencyByAccountExecute"));
 	Chain.Insert("FillStoresInList" , GetChainLink("FillStoresInListExecute"));
 	Chain.Insert("ChangeStoreInHeaderByStoresInList"    , GetChainLink("ChangeStoreInHeaderByStoresInListExecute"));
@@ -112,6 +114,39 @@ Function GetChain()
 	Chain.Insert("Price"            , GetChainLink("PriceExecute"));
 	Chain.Insert("Calculations"     , GetChainLink("CalculationsExecute"));
 	Return Chain;
+EndFunction
+
+#EndRegion
+
+#Region ITEM_ITEMKEY_UNIT_QUANTITYINBASEUNIT
+
+// При изменении Item изменяется ItemKey при изменении ItemKey изменяется Unit который может изменить QuantityInBaseUnit
+// этот код может применятся во всех документах где есть Item, ItemKey, Unit, QuantityInBaseUnit, Quantity
+
+// Параметры которые нужны для вычисления ItemKey
+Function ChangeItemKeyByItemOptions() Export
+	Return GetChainLinkOptions("Item");
+EndFunction
+
+// Возвращает ItemKey по Item который передан в параметре Options.Item
+Function ChangeItemKeyByItemExecute(Options) Export
+	If Not ValueIsFilled(Options.Item) Then
+		// когда Item не заполнен ItemKey тоже будет пустым
+		Return Undefined;
+	EndIf;
+	Return CatItemsServer.GetItemKeyByItem(Options.Item);
+EndFunction
+
+// Для вычисления Unit нужен только ItemKey
+Function ChangeUnitByItemKeyOptions() Export
+	Return GetChainLinkOptions("ItemKey");
+EndFunction
+
+// Возвращает Unit по ItemKey который передан в параметре Options.ItemKey
+Function ChangeUnitByItemKeyExecute(Options) Export
+	// вычисление Unit возлагаем на функцию ItemUnitInfo() вся логика получения Unit в ней
+	UnitInfo = GetItemInfo.ItemUnitInfo(Options.ItemKey);
+	Return UnitInfo.Unit;
 EndFunction
 
 #EndRegion

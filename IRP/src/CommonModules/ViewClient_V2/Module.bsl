@@ -40,17 +40,23 @@ Function GetParameters(Object, Form, TableName = Undefined, Rows = Undefined, Ob
 	Parameters.Insert("ArrayOfTaxInfo", ArrayOfTaxInfo);
 	
 	ArrayOfRows = New Array();
-	// это имена колонок из ItemList
-	ColumnNames    = ViewServer_V2.GetColumnsOfTable(Object, "ItemList, TaxList");
-	TableColumns   = ColumnNames[0];
-	TaxListColumns = ColumnNames[1];
 	
 	// если не переданы конкретные строки то используем все что естьв таблице, реализовано только для ItemList
 	If Rows = Undefined And ValueIsFilled(TableName) Then
 		Rows = Object[TableName];
 	EndIf;
+	
 	If Rows = Undefined Then
 		Rows = New Array();
+	Else
+		ArrayOfTableNames = New Array();
+		ArrayOfTableNames.Add(TableName);
+		If CommonFunctionsClientServer.ObjectHasProperty(Object, "TaxList") Then
+			ArrayOfTableNames.Add("TaxList");
+		EndIf;
+		ColumnNames    = ViewServer_V2.GetColumnsOfTable(Object, StrConcat(ArrayOfTableNames, ","));
+		TableColumns   = ColumnNames[0];
+		TaxListColumns = ColumnNames[1];
 	EndIf;
 	
 	// строку таблицы нельзя передать на сервер, поэтому помещаем данные в массив структур
@@ -102,7 +108,7 @@ EndFunction
 
 // возвращает список реквизитов объекта для которых нужно получить значение до изменения
 Function GetObjectPropertyNamesBegoreChange()
-	Return "Partner";
+	Return "Partner, Sender, Receiver";
 EndFunction
 
 // возвращает список реквизитов формы для которых нужно получить значение до изменения
@@ -145,6 +151,102 @@ EndProcedure
 
 Procedure OnOpen(Object, Form) Export
 	UpdateCacheBeforeChange(Object, Form);
+EndProcedure
+
+#EndRegion
+
+#Region ACCOUNT_SENDER
+
+// Вызывается при изменении реквизита Sender
+Procedure AccountSenerOnChange(Object, Form) Export
+	ControllerClientServer_V2.AccountSenderOnChange(GetParameters(Object, Form, , ,"Sender"));
+EndProcedure
+
+// В старом коде при изменении ПОЛЬЗОВАТЕЛЕМ реквизита Sender вызывалась процедура
+// CommonFunctionsClientServer.SetFormItemModifiedByUser(Form, Item.Name);
+// эта процедура нужна для работы с формой,
+// эта процедура вызывается только если ПОЛЬЗОВАТЕЛЬ изменил этот реквизит, при программном изменении она не вызывается
+Procedure OnSetAccountSenderNotify_IsUserChange(Parameters) Export
+	CommonFunctionsClientServer.SetFormItemModifiedByUser(Parameters.Form, "Sender");
+	
+	SetSendCurrencyReadOnly(Parameters);
+EndProcedure
+
+// Эта процедура вызывается только при программом изменении реквизита Receiver
+Procedure OnSetAccountSenderNotify_IsProgrammChange(Parameters) Export
+	SetSendCurrencyReadOnly(Parameters);
+EndProcedure
+
+// код для установки значения ReadOnly в поле Receive currency
+// весь код для управления видимстью доступностью формы нуно собрать в одну процедуру
+// размазывать вот так по модулям не правильно
+Procedure SetSendCurrencyReadOnly(Parameters)
+	AccountSenderCurrency = ServiceSystemServer.GetObjectAttribute(Parameters.Object.Sender, "Currency");
+	Parameters.Form.Items.SendCurrency.ReadOnly = ValueIsFilled(AccountSenderCurrency);
+EndProcedure
+
+#EndRegion
+
+#Region CURRENCY_SENDER
+
+//В старом коде при ПРОГРАММНОМ изменении реквизита SendCurrency вызывался код 
+//Form.Items.SendCurrency.ReadOnly = ValueIsFilled(ObjectSendCurrency);
+// эта процедура нужна для работы с формой,
+// эта процедура вызывается только если ПРОГРАММНО изменен реквизит, при пользовтаельском изменении она не вызывается
+Procedure OnSetSendCurrencyNotify_IsProgrammChange(Parameters) Export
+	// смысл кода в том что если у Account заполнено Currency то поле ReadOnly
+	// этот код
+	// Form.Items.SendCurrency.ReadOnly = ValueIsFilled(ObjectSendCurrency);
+	// будем выполнять при изменении Account, потому что ReadOnly зависит не от значения Currency а от значения Account
+	Return;
+EndProcedure
+
+#EndRegion
+
+#Region ACCOUNT_RECEIVER
+
+// Вызывается при изменении реквизита Receiver
+Procedure AccountReceiverOnChange(Object, Form) Export
+	ControllerClientServer_V2.AccountReceiverOnChange(GetParameters(Object, Form, , ,"Receiver"));
+EndProcedure
+
+// В старом коде при изменении ПОЛЬЗОВАТЕЛЕМ реквизита Receiver вызывалась процедура
+// CommonFunctionsClientServer.SetFormItemModifiedByUser(Form, Item.Name);
+// эта процедура нужна для работы с формой,
+// эта процедура вызывается только если ПОЛЬЗОВАТЕЛЬ изменил этот реквизит, при программном изменении она не вызывается
+Procedure OnSetAccountReceiverNotify_IsUserChange(Parameters) Export
+	CommonFunctionsClientServer.SetFormItemModifiedByUser(Parameters.Form, "Receiver");
+	
+	SetReceiveCurrencyReadOnly(Parameters);
+EndProcedure
+
+// Эта процедура вызывается только при программом изменении реквизита Receiver
+Procedure OnSetAccountReceiverNotify_IsProgrammChange(Parameters) Export
+	SetReceiveCurrencyReadOnly(Parameters);
+EndProcedure
+
+// код для установки значения ReadOnly в поле Receive currency
+// весь код для управления видимстью доступностью формы нуно собрать в одну процедуру
+// размазывать вот так по модулям не правильно
+Procedure SetReceiveCurrencyReadOnly(Parameters)
+	AccountReceiverCurrency = ServiceSystemServer.GetObjectAttribute(Parameters.Object.Receiver, "Currency");
+	Parameters.Form.Items.ReceiveCurrency.ReadOnly = ValueIsFilled(AccountReceiverCurrency);
+EndProcedure
+
+#EndRegion
+
+#Region CURRENCY_RECEIVER
+
+//В старом коде при ПРОГРАММНОМ изменении реквизита ReceiveCurrency вызывался код 
+//Form.Items.ReceiveCurrency.ReadOnly = ValueIsFilled(ObjectReceiverCurrency);
+// эта процедура нужна для работы с формой,
+// эта процедура вызывается только если ПРОГРАММНО изменен реквизит, при пользовтаельском изменении она не вызывается
+Procedure OnSetReceiveCurrencyNotify_IsProgrammChange(Parameters) Export
+	// смысл кода в том что если у Account заполнено Currency то поле ReadOnly
+	// этот код
+	// Form.Items.ReceiveCurrency.ReadOnly = ValueIsFilled(ObjectReceiverCurrency);
+	// будем выполнять при изменении Account, потому что ReadOnly зависит не от значения Currency а от значения Account
+	Return;
 EndProcedure
 
 #EndRegion

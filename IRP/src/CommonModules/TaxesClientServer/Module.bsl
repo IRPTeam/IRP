@@ -1,6 +1,6 @@
 
 Function GetTaxesCache(Form) Export
-	If ValueIsFilled(Form.TaxesCache) Then
+	If CommonFunctionsClientServer.ObjectHasProperty(Form, "TaxesCache") And ValueIsFilled(Form.TaxesCache) Then
 		SavedDataStructure = CommonFunctionsServer.DeserializeXMLUseXDTO(Form.TaxesCache);
 	Else
 		SavedDataStructure = New Structure();

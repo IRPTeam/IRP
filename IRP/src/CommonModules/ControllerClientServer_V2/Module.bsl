@@ -5,6 +5,100 @@
 // никаких запросов к БД и расчетов тут делать нельзя, модифицировать форму задавать вопросы пользователю и т.д нельзя 
 // только чтение из объекта и запись в объект
 
+#Region ACCOUNT_SENDER
+
+// Вызывается при изменении реквизита Sender в документе CashTransferOrder
+Procedure AccountSenderOnChange(Parameters) Export
+	// процедура для запоминания значения реквизита перед изменением
+	ProceedObjectPropertyBeforeChange(Parameters);
+	
+	// Процедура OnSetAccountReceiverNotify_IsUserChange будет вызывана только если пользователь изменит реквизит
+	// при программом изменении вызывана не будет
+	AddViewNotify("OnSetAccountSenderNotify_IsUserChange", Parameters);
+	
+	// Запускаем процесс изменения документа
+	// Первым параметром указываем имя процедуры в которой включаем нужные шаги вычислений
+	ModelClientServer_V2.EntryPoint("AccountSenderStepsEnabler", Parameters);
+EndProcedure
+
+Procedure AccountSenderStepsEnabler(Parameters, Chain) Export
+	// При изменении реквизита Sender нужно изменить Currency
+	Chain.ChangeCurrencyByAccount.Enable = True;
+	// Указывает процедуру SetSendCurrency, в нее будет передано расчитаное значение Currency 
+	Chain.ChangeCurrencyByAccount.Setter = "SetSendCurrency";
+	
+	// Для вычисления Currency нужно заполнить параметр Account
+	// значение лежит в реквизите Sender, читать из реквизитов нужно функцией GetPropertyObject()
+	Options = ModelClientServer_V2.ChangeCurrencyByAccountOptions();
+	Options.Account = GetPropertyObject(Parameters, "Sender");
+	// Currency которая уже указана в документе, нужна если в Account будет пустая Currency
+	Options.CurrentCurrency = GetPropertyObject(Parameters, "SendCurrency");
+	Chain.ChangeCurrencyByAccount.Options.Add(Options);
+EndProcedure
+
+#EndRegion
+
+#Region CURRENCY_SENDER
+
+// При изменении реквизита SendCurrency изменений других реквизитов объекта не происходит
+// проэтому нет процедуры OnChange только SetSendCurrency, что бы можно было программно устанавливать значения
+
+// Устанавливает значение в реквизит SendCurrency
+Procedure SetSendCurrency(Parameters, Results) Export
+	// Процедура OnSetSendCurrencyNotify_IsProgrammChange 
+	// будет вызывана при программном изменении реквизита SendCurrency
+	
+	SetterObject(Undefined, "SendCurrency", Parameters, Results, "OnSetSendCurrencyNotify_IsProgrammChange");
+EndProcedure
+
+#EndRegion
+
+#Region ACCOUNT_RECEIVER
+
+// Вызывается при изменении реквизита Receiver в документе CashTransferOrder
+Procedure AccountReceiverOnChange(Parameters) Export
+	// процедура для запоминания значения реквизита перед изменением
+	ProceedObjectPropertyBeforeChange(Parameters);
+	
+	// Процедура OnSetAccountReceiverNotify_IsUserChange будет вызывана только если пользователь изменит реквизит
+	// при программом изменении вызывана не будет
+	AddViewNotify("OnSetAccountReceiverNotify_IsUserChange", Parameters);
+	
+	// Запускаем процесс изменения документа
+	// Первым параметром указываем имя процедуры в которой включаем нужные шаги вычислений
+	ModelClientServer_V2.EntryPoint("AccountReceiverStepsEnabler", Parameters);
+EndProcedure
+
+Procedure AccountReceiverStepsEnabler(Parameters, Chain) Export
+	// При изменении реквизита Receiver нужно изменить Currency
+	Chain.ChangeCurrencyByAccount.Enable = True;
+	// Указывает процедуру SetReceiveCurrency, в нее будет передано расчитаное значение Currency 
+	Chain.ChangeCurrencyByAccount.Setter = "SetReceiveCurrency";
+	
+	// Для вычисления Currency нужно заполнить параметр Account
+	// значение лежит в реквизите Receiver, читать из реквизитов нужно функцией GetPropertyObject()
+	Options = ModelClientServer_V2.ChangeCurrencyByAccountOptions();
+	Options.Account = GetPropertyObject(Parameters, "Receiver");
+	// Currency которая уже указана в документе, нужна если в Account будет пустая Currency
+	Options.CurrentCurrency = GetPropertyObject(Parameters, "ReceiveCurrency");
+	Chain.ChangeCurrencyByAccount.Options.Add(Options);
+EndProcedure
+
+#EndRegion
+
+#Region CURRENCY_RECEIVER
+
+// При изменении реквизита ReceiveCurrency изменений других реквизитов объекта не происходит
+// проэтому нет процедуры OnChange только SetReceiveCurrency, что бы можно было программно устанавливать значения
+
+// Устанавливает значение в реквизит ReceiveCurrency
+Procedure SetReceiveCurrency(Parameters, Results) Export
+	// Процедура OnSetReceiveCurrencyNotify_IsProgrammChange 
+	// будет вызывана при программном изменении реквизита ReceiveCurrency
+	SetterObject(Undefined, "ReceiveCurrency", Parameters, Results, "OnSetReceiveCurrencyNotify_IsProgrammChange");
+EndProcedure
+
+#EndRegion
 
 #Region PARTNER
 

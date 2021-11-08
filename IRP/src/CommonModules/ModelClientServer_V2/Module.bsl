@@ -102,6 +102,7 @@ Function GetChain()
 	Chain.Insert("LegalName"        , GetChainLink("LegalNameExecute"));
 	Chain.Insert("Agreement"        , GetChainLink("AgreementExecute"));
 	Chain.Insert("Company"          , GetChainLink("CompanyExecute"));
+	Chain.Insert("ChangeCurrencyByAccount", GetChainLink("ChangeCurrencyByAccountExecute"));
 	Chain.Insert("FillStoresInList" , GetChainLink("FillStoresInListExecute"));
 	Chain.Insert("ChangeStoreInHeaderByStoresInList"    , GetChainLink("ChangeStoreInHeaderByStoresInListExecute"));
 	Chain.Insert("ChangeUseShipmentConfirmationByStore" , GetChainLink("ChangeUseShipmentConfirmationByStoreExecute"));
@@ -111,6 +112,26 @@ Function GetChain()
 	Chain.Insert("Price"            , GetChainLink("PriceExecute"));
 	Chain.Insert("Calculations"     , GetChainLink("CalculationsExecute"));
 	Return Chain;
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_CURRENCY_BY_ACCOUNT
+
+// Параметры которые нужны для вычисления Currency, в этом случае достаточно только Account
+// если в Account не будет указана Currency то останется CurrentCurrency (та что уже указана в документе)
+Function ChangeCurrencyByAccountOptions() Export
+	Return GetChainLinkOptions("Account, CurrentCurrency");
+EndFunction
+
+// Возвращает Currency которая указана в Account
+// если в Account пусто возвращает Currency которая уже указана в документе (параметр CurrentCurrency)
+Function ChangeCurrencyByAccountExecute(Options) Export
+	Currency = ServiceSystemServer.GetObjectAttribute(Options.Account, "Currency");
+	If ValueIsFilled(Currency) Then
+		Return Currency;
+	EndIf;
+	Return Options.CurrentCurrency;
 EndFunction
 
 #EndRegion

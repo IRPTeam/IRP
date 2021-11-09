@@ -128,6 +128,11 @@ Procedure ItemListItemOnChange(Item)
 EndProcedure
 
 &AtClient
+Procedure ItemListBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
+	ViewClient_V2.ItemListBeforeAddRow(Object, ThisObject, Cancel, Clone);
+EndProcedure
+
+&AtClient
 Procedure ItemListItemKeyOnChange(Item)
 	ViewClient_V2.ItemListItemKeyOnChange(Object, ThisObject);
 //	CurrentRow = Items.ItemList.CurrentData;

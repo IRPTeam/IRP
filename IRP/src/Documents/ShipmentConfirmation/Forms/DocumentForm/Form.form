@@ -1985,6 +1985,10 @@
           <event>Selection</event>
           <name>ItemListSelection</name>
         </handlers>
+        <handlers>
+          <event>BeforeAddRow</event>
+          <name>ItemListBeforeAddRow</name>
+        </handlers>
         <searchStringAddition>
           <visible>true</visible>
           <enabled>true</enabled>

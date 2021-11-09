@@ -5,14 +5,72 @@
 // никаких запросов к БД и расчетов тут делать нельзя, модифицировать форму задавать вопросы пользователю и т.д нельзя 
 // только чтение из объекта и запись в объект
 
+Function BindSteps(DefaulStepsEnabler, DataPath, Binding, Parameters)
+	MetadataBinding = New Map();
+	If Binding <> Undefined Then
+		For Each KeyValue In Binding Do
+			MetadataName = KeyValue.Key;
+			MetadataBinding.Insert(StrTemplate("%1.%2", MetadataName, DataPath), Binding[MetadataName]);
+		EndDo;
+	EndIf;
+	FullDataPath = StrTemplate("%1.%2", Parameters.ObjectMetadataInfo.MetadataName, DataPath);
+	StepsEnabler = MetadataBinding.Get(FullDataPath);
+	Result = New Structure();
+	Result.Insert("FullDataPath" , FullDataPath);
+	Result.Insert("StepsEnabler" , ?(StepsEnabler = Undefined, DefaulStepsEnabler, StepsEnabler));
+	Result.Insert("DataPath", DataPath);
+	Return Result;
+EndFunction
+
+Procedure AddNewRow(TableName, Parameters) Export
+	NewRow = Parameters.Rows[0];
+	UserSettingsClientServer.FillingRowFromSettings(Parameters.Object, StrTemplate("Object.%1", TableName), NewRow, True);
+	Bindings = GetAllBindings(Parameters);
+	ForceCommintChanges = True;
+	For Each ColumnName In StrSplit(Parameters.ObjectMetadataInfo.Tables[TableName].Columns, ",") Do
+		If ValueIsFilled(NewRow[ColumnName]) Then
+			DataPath = StrTemplate("%1.%2", TableName, ColumnName);
+			SetPropertyObject(Parameters, DataPath, NewRow.Key, NewRow[ColumnName]);
+			Binding = Bindings.Get(DataPath);
+			If Binding <> Undefined Then
+				ForceCommintChanges = False;
+				ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+			EndIf;
+		EndIf;
+	EndDo;
+	If ForceCommintChanges Then
+		CommitChainChanges(Parameters);
+	EndIf;
+EndProcedure
+
+Function GetAllBindings(Parameters)
+	Binding = New Map();
+	Binding.Insert("ItemList.Item", ItemListItemSptepsBinding(Parameters));
+	Return Binding;
+EndFunction
+
 #Region ITEM_ITEMKEY_UNIT_QUANTITYINBASEUNIT
 
 // Вызывается при изменении Item в табличной части ItemList
 Procedure ItemListItemOnChange(Parameters) Export
 	// Запускаем процесс изменения документа
 	// Первым параметром указываем имя процедуры в которой включаем нужные шаги вычислений
-	ModelClientServer_V2.EntryPoint("ItemListItemStepsEnabler", Parameters);
+	Binding = ItemListItemSptepsBinding(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
 EndProcedure
+
+Procedure SetItemListItem(Parameters, Results) Export
+	Binding = ItemListItemSptepsBinding(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+Function ItemListItemSptepsBinding(Parameters)
+	DataPath = "ItemList.Item";
+	Binding = New Structure();
+	Binding.Insert("ShipmentConfirmation", "ItemListItemStepsEnabler");
+	Binding.Insert("SalesInvoice"        , "ItemListItemStepsEnabler");
+	Return BindSteps("ItemListItemStepsEnabler", DataPath, Binding, Parameters);
+EndFunction
 
 // Включает необходимые шаги при изменении Item
 Procedure ItemListItemStepsEnabler(Parameters, Chain) Export
@@ -792,12 +850,11 @@ Procedure ProceedFormPropertyBeforeChange(Parameters)
 EndProcedure
 
 Function GetRows(Parameters, TableName)
-	Rows = Parameters.Object[TableName];
 	If Parameters.Property("Rows") Then
 		// расчет только для конкретных строк, переданных в параметре
-		Rows = Parameters.Rows;
+		Return Parameters.Rows;
 	EndIf;
-	Return Rows;
+	Return Parameters.Object[TableName];;
 EndFunction
 
 Procedure SetterForm(StepsEnablerName, DataPath, Parameters, Results, ViewNotify = Undefined, ValueDataPath = Undefined)
@@ -872,6 +929,7 @@ Function GetProperty(Cache, Source, DataPath, Key)
 				EndIf;
 				If Row.Key = Key Then
 					RowByKey = Row;
+					Break;
 				EndIf;
 			EndDo;
 		EndIf;
@@ -886,14 +944,16 @@ Function GetProperty(Cache, Source, DataPath, Key)
 EndFunction
 
 Function SetPropertyObject(Parameters, DataPath, _Key, _Value)
-	If GetPropertyObject(Parameters, DataPath, _Key) = _Value Then
+	PropertyValue = GetPropertyObject(Parameters, DataPath, _Key);
+	If ?(ValueIsFilled(PropertyValue), PropertyValue, Undefined) = ?(ValueIsFilled(_Value), _Value, Undefined) Then
 		Return False; // Свойство не изменилось
 	EndIf;
 	Return SetProperty(Parameters.Cache, DataPath, _Key, _Value);
 EndFunction
 
 Function SetPropertyForm(Parameters, DataPath, _Key, _Value)
-	If GetPropertyForm(Parameters, DataPath, _Key) = _Value Then
+	PropertyValue = GetPropertyForm(Parameters, DataPath, _Key);
+	If ?(ValueIsFilled(PropertyValue), PropertyValue, Undefined) = ?(ValueIsFilled(_Value), _Value, Undefined) Then
 		Return False; // Свойство не изменилось
 	EndIf;
 	Return SetProperty(Parameters.CacheForm, DataPath, _Key, _Value);

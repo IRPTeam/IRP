@@ -4,10 +4,11 @@
 // В ЭТОМ МОДУЛЕ ТОЛЬКО МОДИФИКАЦИЯ ФОРМЫ, ВПРОСЫ ПОЛЬЗОВАТЕЛЮ и прочие клиентские вещи
 // ДЕЛАТЬ ИЗМЕНЕНИЯ объекта нельзя только чтение
 
-Function GetParameters(Object, Form, TableName = Undefined, Rows = Undefined, ObjectPropertyDataPath = Undefined, FormPropertyDataPath = Undefined)
+Function GetParameters(Object, Form, TableName = "", Rows = Undefined, 
+						ObjectPropertyDataPathBeforeChange = "", 
+						FormPropertyDataPathBeforeChange = "")
 	Parameters = New Structure();
 	// параметры для Client 
-	Parameters.Insert("Object"         , Object);
 	Parameters.Insert("Form"           , Form);
 	Parameters.Insert("CacheForm"      , New Structure()); // кэш для реквизитов формы
 	Parameters.Insert("ViewNotify"     , New Array());
@@ -21,17 +22,19 @@ Function GetParameters(Object, Form, TableName = Undefined, Rows = Undefined, Ob
 	
 	// параметры для Server + Client
 	// кэш для реквизитов объекта
-	Parameters.Insert("Cache", New Structure());
+	Parameters.Insert("Object" , Object);
+	Parameters.Insert("Cache"  , New Structure());
 	Parameters.Insert("ControllerModuleName" , "ControllerClientServer_V2");
 	
-	//PropertyDataPath - имя реквизита для которого надо получить значение до изменения
-	If ObjectPropertyDataPath <> Undefined Or FormPropertyDataPath <> Undefined Then
+	// параметры для Client
+	// PropertyDataPath - имя реквизита для которого надо получить значение до изменения
+	If ValueIsFilled(ObjectPropertyDataPathBeforeChange) Or ValueIsFilled(FormPropertyDataPathBeforeChange) Then
 		CacheBeforeChange = CommonFunctionsServer.DeserializeXMLUseXDTO(Form.CacheBeforeChange);
-		If ObjectPropertyDataPath <> Undefined Then
-			Parameters.ObjectPropertyBeforeChange = GetCacheBeforeChange(CacheBeforeChange.CacheObject, ObjectPropertyDataPath);
+		If ValueIsFilled(ObjectPropertyDataPathBeforeChange) Then
+			Parameters.ObjectPropertyBeforeChange = GetCacheBeforeChange(CacheBeforeChange.CacheObject, ObjectPropertyDataPathBeforeChange);
 		EndIf;
-		If FormPropertyDataPath <> Undefined Then
-			Parameters.FormPropertyBeforeChange = GetCacheBeforeChange(CacheBeforeChange.CacheForm, FormPropertyDataPath);
+		If ValueIsFilled(FormPropertyDataPathBeforeChange) Then
+			Parameters.FormPropertyBeforeChange = GetCacheBeforeChange(CacheBeforeChange.CacheForm, FormPropertyDataPathBeforeChange);
 		EndIf;
 	EndIf;
 	
@@ -39,42 +42,38 @@ Function GetParameters(Object, Form, TableName = Undefined, Rows = Undefined, Ob
 	ArrayOfTaxInfo = TaxesClient.GetArrayOfTaxInfo(Form);
 	Parameters.Insert("ArrayOfTaxInfo", ArrayOfTaxInfo);
 	
-	ArrayOfRows = New Array();
+	// получаем колонки из табличных частей
+	ArrayOfTableNames = New Array();
+	If TableName <> Undefined Then
+		ArrayOfTableNames.Add(TableName);
+	EndIf;	
+	If CommonFunctionsClientServer.ObjectHasProperty(Object, "TaxList") Then
+		ArrayOfTableNames.Add("TaxList");
+	EndIf;
+	ObjectMetadataInfo = ViewServer_V2.GetObjectMetadataInfo(Object, StrConcat(ArrayOfTableNames, ","));
+	// Server
+	Parameters.Insert("ObjectMetadataInfo", ObjectMetadataInfo);
 	
-	// если не переданы конкретные строки то используем все что естьв таблице, реализовано только для ItemList
+	// если не переданы конкретные строки то используем все что есть в таблице c именем TableName
 	If Rows = Undefined And ValueIsFilled(TableName) Then
 		Rows = Object[TableName];
 	EndIf;
-	
 	If Rows = Undefined Then
 		Rows = New Array();
-	Else
-		ArrayOfTableNames = New Array();
-		ArrayOfTableNames.Add(TableName);
-		If CommonFunctionsClientServer.ObjectHasProperty(Object, "TaxList") Then
-			ArrayOfTableNames.Add("TaxList");
-		EndIf;
-		ColumnNames    = ViewServer_V2.GetColumnsOfTable(Object, StrConcat(ArrayOfTableNames, ","));
-		// в 0 индексе будут колонки основной таблицы ItemList, PaymentList и т.д
-		TableColumns   = ColumnNames[0];
-		
-		// в 1 индексе будут колонки табличной части TaxList
-		If ArrayOfTableNames.Find("TaxList") <> Undefined Then
-			TaxListColumns = ColumnNames[1];
-		EndIf;
 	EndIf;
 	
 	// строку таблицы нельзя передать на сервер, поэтому помещаем данные в массив структур
+	ArrayOfRows = New Array();
 	For Each Row In Rows Do
-		NewRow = New Structure(TableColumns);
+		NewRow = New Structure(ObjectMetadataInfo.Tables[TableName].Columns);
 		FillPropertyValues(NewRow, Row);
 		ArrayOfRows.Add(NewRow);
 		
 		// налоги
 		ArrayOfRowsTaxList = New Array();
-		If ArrayOfTableNames.Find("TaxList") <> Undefined Then
+		If ObjectMetadataInfo.Property("TaxListColumns") Then
 			For Each TaxRow In Object.TaxList.FindRows(New Structure("Key", Row.Key)) Do
-				NewRowTaxList = New Structure(TaxListColumns);
+				NewRowTaxList = New Structure(ObjectMetadataInfo.Tables.TaxList.Columns);
 				FillPropertyValues(NewRowTaxList, TaxRow);
 				ArrayOfRowsTaxList.Add(NewRowTaxList);
 			EndDo;
@@ -87,6 +86,7 @@ Function GetParameters(Object, Form, TableName = Undefined, Rows = Undefined, Ob
 		NewRow.Insert("TaxRates", TaxRates);
 		NewRow.Insert("TaxList" , ArrayOfRowsTaxList);
 	EndDo;
+	
 	If ArrayOfRows.Count() Then
 		Parameters.Insert("Rows", ArrayOfRows);
 	EndIf;
@@ -154,10 +154,43 @@ Procedure TestQuestionContinue(Result, Parameters) Export
 	EndIf;
 EndProcedure
 
+Function AddOrCopyRow(Object, Form, TableName, Cancel, Clone, OriginRow)
+	Cancel = True;
+	NewRow = Object.ItemList.Add();
+	If Clone Then // Copy()
+		OriginRows = GetRowsByCurrentData(Form, TableName, OriginRow);
+		If Not OriginRows.Count() Then
+			Raise "Not found origin row for clone";
+		EndIf;
+		FillPropertyValues(NewRow, OriginRows[0]);
+		NewRow.Key = String(New UUID());
+	Else // Add()
+		NewRow.Key = String(New UUID());
+		Rows = GetRowsByCurrentData(Form, TableName, NewRow);
+		Parameters = GetParameters(Object, Form, TableName, Rows);
+		ControllerClientServer_V2.AddNewRow(TableName, Parameters);
+	EndIf;
+	Return NewRow;
+EndFunction
+
 #Region FORM
 
 Procedure OnOpen(Object, Form) Export
 	UpdateCacheBeforeChange(Object, Form);
+EndProcedure
+
+#EndRegion
+
+#Region ITEM_LIST
+
+Procedure ItemListBeforeAddRow(Object, Form, Cancel, Clone, CurrentData = Undefined) Export
+	NewRow = AddOrCopyRow(Object, Form, "ItemList", Cancel, Clone, CurrentData);
+	Form.Items.ItemList.CurrentRow = NewRow.GetID();
+EndProcedure
+
+Procedure ItemListAfterDeleteRow(Object, Form) Export
+	// Удалить строки из подчиненных таблиц
+	Return;
 EndProcedure
 
 #EndRegion

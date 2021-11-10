@@ -172,7 +172,7 @@ Procedure UpdateCacheBeforeChange(Object, Form)
 EndProcedure
 
 Procedure OnChainComplete(Parameters) Export
-	If Parameters.EventCaller = "StoreOnUserChange" Then
+	If Parameters.EventCaller = "StoreOnUserChange" And NeedQueryStoreOnUserChange(Parameters) Then
 		If Parameters.ObjectMetadataInfo.MetadataName = "ShipmentConfirmation" Then
 			// Вопрос про изменение склада в табличной части
 			NotifyParameters = New Structure("Parameters", Parameters);
@@ -185,6 +185,17 @@ Procedure OnChainComplete(Parameters) Export
 		UpdateCacheBeforeChange(Parameters.Object, Parameters.Form);
 	EndIf;
 EndProcedure
+
+Function NeedQueryStoreOnUserChange(Parameters)
+	If Parameters.Cache.Property("ItemList") Then
+		For Each Row In Parameters.Cache.ItemList Do
+			If Row.Property("Store") And ValueIsFilled(Row.Store) Then
+				Return True;
+			EndIf;
+		EndDo;
+	EndIf;
+	Return False;
+EndFunction
 
 Procedure StoreOnUserChangeContinue(Answer, NotifyPrameters) Export
 	If Answer = DialogReturnCode.Yes Then

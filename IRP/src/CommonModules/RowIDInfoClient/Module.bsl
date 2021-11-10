@@ -207,6 +207,7 @@ Procedure ItemListBeforeDeleteRow(Object, Form, Item, Cancel, AddInfo = Undefine
 	EndDo;
 EndProcedure
 
+// Deprecated
 Procedure ItemListOnStartEdit(Object, Form, Item, NewRow, Clone, AddInfo = Undefined) Export
 	CurrentData = Item.CurrentData;
 	If CurrentData = Undefined Then

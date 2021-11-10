@@ -213,11 +213,26 @@ Function AddOrCopyRow(Object, Form, TableName, Cancel, Clone, OriginRow)
 		If Not OriginRows.Count() Then
 			Raise "Not found origin row for clone";
 		EndIf;
-		FillPropertyValues(NewRow, OriginRows[0]);
 		NewRow.Key = String(New UUID());
+		Rows       = GetRowsByCurrentData(Form, TableName, NewRow);
+		Parameters = GetParameters(Object, Form, TableName, Rows);
+		
+		// колонки которые не нужно копировать
+		ArrayOfExcludeProperties = New Array();
+		ArrayOfExcludeProperties.Add("Key");
+		If Parameters.ObjectMetadataInfo.DependencyTables.Find("RowIDInfo") <> Undefined Then
+			// эти колонки реквизиты формы
+			ArrayOfExcludeProperties.Add("IsExternalLinked");
+			ArrayOfExcludeProperties.Add("IsInternalLinked");
+			ArrayOfExcludeProperties.Add("ExternalLinks");
+			ArrayOfExcludeProperties.Add("InternalLinks");
+		EndIf;
+		
+		FillPropertyValues(NewRow, OriginRows[0], ,StrConcat(ArrayOfExcludeProperties, ","));
+		
 	Else // Add()
 		NewRow.Key = String(New UUID());
-		Rows = GetRowsByCurrentData(Form, TableName, NewRow);
+		Rows       = GetRowsByCurrentData(Form, TableName, NewRow);
 		Parameters = GetParameters(Object, Form, TableName, Rows);
 		ControllerClientServer_V2.AddNewRow(TableName, Parameters);
 	EndIf;

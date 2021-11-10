@@ -256,6 +256,7 @@ Procedure ItemListSelection(Object, Form, Item, RowSelected, Field, StandardProc
 EndProcedure
 
 Procedure ItemListOnStartEdit(Object, Form, Item, NewRow, Clone, AddInfo = Undefined) Export
+	Return;
 	//CurrentData = Item.CurrentData;
 	//If CurrentData = Undefined Then
 	//	Return;
@@ -263,7 +264,7 @@ Procedure ItemListOnStartEdit(Object, Form, Item, NewRow, Clone, AddInfo = Undef
 	//If Clone Then
 	//	CurrentData.Key = New UUID();
 	//EndIf;
-	RowIDInfoClient.ItemListOnStartEdit(Object, Form, Item, NewRow, Clone, AddInfo);
+	//RowIDInfoClient.ItemListOnStartEdit(Object, Form, Item, NewRow, Clone, AddInfo);
 EndProcedure
 
 Procedure ItemListAfterDeleteRow(Object, Form, Item) Export

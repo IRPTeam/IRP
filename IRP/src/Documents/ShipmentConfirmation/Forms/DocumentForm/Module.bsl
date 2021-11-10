@@ -123,18 +123,23 @@ Procedure ItemListOnStartEdit(Item, NewRow, Clone)
 EndProcedure
 
 &AtClient
+Procedure ItemListStoreOnChange(Item)
+	DocShipmentConfirmationClient.ItemListStoreOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
 Procedure ItemListItemOnChange(Item)
 	DocShipmentConfirmationClient.ItemListItemOnChange(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient
 Procedure ItemListBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
-	ViewClient_V2.ItemListBeforeAddRow(Object, ThisObject, Cancel, Clone);
+	DocShipmentConfirmationClient.ItemListBeforeAddRow(Object, ThisObject, Item, Cancel, Clone, Parent, IsFolder, Parameter);
 EndProcedure
 
 &AtClient
 Procedure ItemListItemKeyOnChange(Item)
-	ViewClient_V2.ItemListItemKeyOnChange(Object, ThisObject);
+	DocShipmentConfirmationClient.ItemListItemKeyOnChange(Object, ThisObject, Item);
 //	CurrentRow = Items.ItemList.CurrentData;
 //	If CurrentRow = Undefined Then
 //		Return;

@@ -1,6 +1,7 @@
 
 Procedure OnOpen(Object, Form, Cancel, AddInfo = Undefined) Export
 	DocumentsClient.SetTextOfDescriptionAtForm(Object, Form);
+	
 	ViewClient_V2.OnOpen(Object, Form);
 EndProcedure
 
@@ -11,7 +12,8 @@ EndProcedure
 #Region ItemCompany
 
 Procedure CompanyOnChange(Object, Form, Item) Export
-	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
+	ViewClient_V2.CompanyOnChange(Object, Form);
+	//DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 EndProcedure
 
 Procedure CompanyStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
@@ -39,8 +41,9 @@ EndProcedure
 #Region ItemPartner
 
 Procedure PartnerOnChange(Object, Form, Item) Export
-	Object.LegalName = DocumentsServer.GetLegalNameByPartner(Object.Partner, Object.LegalName);
-	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
+	ViewClient_V2.PartnerOnChange(Object, Form);
+	//Object.LegalName = DocumentsServer.GetLegalNameByPartner(Object.Partner, Object.LegalName);
+	//DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 EndProcedure
 
 Procedure PartnerStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
@@ -87,7 +90,8 @@ EndProcedure
 #Region ItemLegalName
 
 Procedure LegalNameOnChange(Object, Form, Item) Export
-	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
+	ViewClient_V2.LegalNameOnChange(Object, Form);
+	//DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 EndProcedure
 
 Procedure LegalNameStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
@@ -119,6 +123,68 @@ EndProcedure
 
 #EndRegion
 
+#Region Store
+
+//Procedure SetCurrentStore(Form, Store) Export
+//	Form.CurrentStore = Store;
+//EndProcedure
+
+//Procedure ChangeItemListStore(ItemList, Store) Export
+//	For Each Row In ItemList Do
+//		If Row.Store <> Store Then
+//			Row.Store = Store;
+//		EndIf;
+//	EndDo;
+//EndProcedure
+
+Procedure StoreOnChange(Object, Form, Item) Export
+	ViewClient_V2.StoreOnChange(Object, Form);
+	
+//	If Not ValueIsFilled(Form.Store) Then
+//
+//		ObjectData = DocumentsClientServer.GetStructureFillStores();
+//		FillPropertyValues(ObjectData, Object);
+//		Form.Store = DocumentsServer.GetCurrentStore(ObjectData);
+//
+//	EndIf;
+//
+//	If Form.Store <> Form.StoreBeforeChange And Object.ItemList.Count() Then
+//		ShowQueryBox(New NotifyDescription("StoreOnChangeContinue", ThisObject, New Structure("Form, Object", Form,
+//			Object)), R().QuestionToUser_005, QuestionDialogMode.YesNoCancel);
+//		Return;
+//	EndIf;
+//	DocumentsClient.SetCurrentStore(Object, Form, Form.Store);
+//	DocShipmentConfirmationClient.ChangeItemListStore(Object.ItemList, Form.Store);
+EndProcedure
+
+//Procedure StoreOnChangeContinue(Answer, AdditionalParameters) Export
+//	If Answer = DialogReturnCode.Yes And AdditionalParameters.Property("Form") Then
+//		Form = AdditionalParameters.Form;
+//		For Each Row In Form.Object.ItemList Do
+//			Row.Store = Form.Store;
+//		EndDo;
+//		Form.Items.Store.InputHint = "";
+//		Form.StoreBeforeChange = Form.Store;
+//		DocumentsClient.SetCurrentStore(AdditionalParameters.Object, Form, Form.Store);
+//	ElsIf AdditionalParameters.Property("Form") Then
+//		Form = AdditionalParameters.Form;
+//
+//		ObjectData = DocumentsClientServer.GetStructureFillStores();
+//		FillPropertyValues(ObjectData, AdditionalParameters.Object);
+//		DocumentsClientServer.FillStores(ObjectData, Form);
+//	Else
+//		Return;
+//	EndIf;
+//EndProcedure
+
+#EndRegion
+
+#Region ItemList
+
+Procedure ItemListBeforeAddRow(Object, Form, Item, Cancel, Clone, Parent, IsFolder, Parameter) Export
+	ViewClient_V2.ItemListBeforeAddRow(Object, Form, Cancel, Clone);
+EndProcedure
+
 Procedure ItemListItemOnChange(Object, Form, Item = Undefined, CurrentRowData = Undefined) Export
 	ViewClient_V2.ItemListItemOnChange(Object, Form);
 //	CurrentData = DocumentsClient.GetCurrentRowDataList(Form.Items.ItemList, CurrentRowData);
@@ -136,21 +202,52 @@ Procedure ItemListItemOnChange(Object, Form, Item = Undefined, CurrentRowData = 
 //	CalculationStringsClientServer.CalculateItemsRow(Object, CurrentData, CalculationSettings);
 EndProcedure
 
+Procedure ItemListItemKeyOnChange(Object, Form, Item = Undefined, CurrentRowData = Undefined) Export
+	ViewClient_V2.ItemListItemKeyOnChange(Object, Form);
+EndProcedure
+
+Procedure ItemListStoreOnChange(Object, Form, Item) Export
+	ViewClient_V2.ItemListStoreOnChange(Object, Form);
+EndProcedure
+
+Procedure ItemListUnitOnChange(Object, Form, Item = Undefined, CurrentRowData = Undefined, AddInfo = Undefined) Export
+	ViewClient_V2.ItemListUnitOnChange(Object, Form);
+//	CurrentData = DocumentsClient.GetCurrentRowDataList(Form.Items.ItemList, CurrentRowData);
+//	If CurrentData = Undefined Then
+//		Return;
+//	EndIf;
+//	Actions = New Structure("CalculateQuantityInBaseUnit");
+//	CalculationStringsClientServer.CalculateItemsRow(Object, CurrentData, Actions);
+EndProcedure
+
+Procedure ItemListQuantityOnChange(Object, Form, Item = Undefined, CurrentRowData = Undefined, AddInfo = Undefined) Export
+	ViewClient_V2.ItemListQuantityOnChange(Object, Form);
+//	CurrentData = DocumentsClient.GetCurrentRowDataList(Form.Items.ItemList, CurrentRowData);
+//	If CurrentData = Undefined Then
+//		Return;
+//	EndIf;
+//	Actions = New Structure("CalculateQuantityInBaseUnit");
+//	CalculationStringsClientServer.CalculateItemsRow(Object, CurrentData, Actions);
+EndProcedure
+
+#EndRegion
+
 Procedure ItemListOnChange(Object, Form, Item = Undefined, CurrentRowData = Undefined) Export
-	DocumentsClient.FillRowIDInItemList(Object);
-	CurrentData = DocumentsClient.GetCurrentRowDataList(Form.Items.ItemList, CurrentRowData);
+	//DocumentsClient.FillRowIDInItemList(Object);
+	//CurrentData = DocumentsClient.GetCurrentRowDataList(Form.Items.ItemList, CurrentRowData);
 	
-	If Form.Items.ItemList.CurrentItem <> Undefined And Form.Items.ItemList.CurrentItem.Name = "ItemListStore" Then
-		DocumentsClient.SetCurrentStore(Object, Form, Form.Items.ItemList.CurrentData.Store);
-	EndIf;
+	//If Form.Items.ItemList.CurrentItem <> Undefined And Form.Items.ItemList.CurrentItem.Name = "ItemListStore" Then
+	//	DocumentsClient.SetCurrentStore(Object, Form, Form.Items.ItemList.CurrentData.Store);
+	//EndIf;
 
-	If Not CurrentData = Undefined Then
-		DocumentsClient.FillUnfilledStoreInRow(Object, CurrentData, Form.CurrentStore);
-	EndIf;
+	//If Not CurrentData = Undefined Then
+	//	DocumentsClient.FillUnfilledStoreInRow(Object, CurrentData, Form.CurrentStore);
+	//EndIf;
 
-	ObjectData = DocumentsClientServer.GetStructureFillStores();
-	FillPropertyValues(ObjectData, Object);
-	DocumentsClientServer.FillStores(ObjectData, Form);
+	//ObjectData = DocumentsClientServer.GetStructureFillStores();
+	//FillPropertyValues(ObjectData, Object);
+	//DocumentsClientServer.FillStores(ObjectData, Form);
+	
 	RowIDInfoClient.UpdateQuantity(Object, Form);
 EndProcedure
 
@@ -159,18 +256,19 @@ Procedure ItemListSelection(Object, Form, Item, RowSelected, Field, StandardProc
 EndProcedure
 
 Procedure ItemListOnStartEdit(Object, Form, Item, NewRow, Clone, AddInfo = Undefined) Export
-	CurrentData = Item.CurrentData;
-	If CurrentData = Undefined Then
-		Return;
-	EndIf;
-	If Clone Then
-		CurrentData.Key = New UUID();
-	EndIf;
+	//CurrentData = Item.CurrentData;
+	//If CurrentData = Undefined Then
+	//	Return;
+	//EndIf;
+	//If Clone Then
+	//	CurrentData.Key = New UUID();
+	//EndIf;
 	RowIDInfoClient.ItemListOnStartEdit(Object, Form, Item, NewRow, Clone, AddInfo);
 EndProcedure
 
 Procedure ItemListAfterDeleteRow(Object, Form, Item) Export
-	DocumentsClient.ItemListAfterDeleteRow(Object, Form, Item);
+	ViewClient_V2.ItemListAfterDeleteRow(Object, Form);
+	//DocumentsClient.ItemListAfterDeleteRow(Object, Form, Item);
 EndProcedure
 
 Procedure ItemListBeforeDeleteRow(Object, Form, Item, Cancel, AddInfo = Undefined) Export
@@ -178,75 +276,21 @@ Procedure ItemListBeforeDeleteRow(Object, Form, Item, Cancel, AddInfo = Undefine
 EndProcedure
 
 Procedure ItemListOnActivateRow(Object, Form, Item = Undefined, CurrentRowData = Undefined, AddInfo = Undefined) Export
-	CurrentData = DocumentsClient.GetCurrentRowDataList(Form.Items.ItemList, CurrentRowData);
-	If CurrentData = Undefined Then
-		Return;
-	EndIf;
-
-	If ValueIsFilled(CurrentData.Store) And CurrentData.Store <> Form.CurrentStore Then
-		DocumentsClient.SetCurrentStore(Object, Form, CurrentData.Store);
-	EndIf;
+	Return;
+//	CurrentData = DocumentsClient.GetCurrentRowDataList(Form.Items.ItemList, CurrentRowData);
+//	If CurrentData = Undefined Then
+//		Return;
+//	EndIf;
+//
+//	If ValueIsFilled(CurrentData.Store) And CurrentData.Store <> Form.CurrentStore Then
+//		DocumentsClient.SetCurrentStore(Object, Form, CurrentData.Store);
+//	EndIf;
 EndProcedure
 
 Procedure DescriptionClick(Object, Form, Item, StandardProcessing) Export
 	StandardProcessing = False;
 	CommonFormActions.EditMultilineText(Item.Name, Form);
 EndProcedure
-
-#Region Store
-
-Procedure SetCurrentStore(Form, Store) Export
-	Form.CurrentStore = Store;
-EndProcedure
-
-Procedure ChangeItemListStore(ItemList, Store) Export
-	For Each Row In ItemList Do
-		If Row.Store <> Store Then
-			Row.Store = Store;
-		EndIf;
-	EndDo;
-EndProcedure
-
-Procedure StoreOnChange(Object, Form, Item) Export
-
-	If Not ValueIsFilled(Form.Store) Then
-
-		ObjectData = DocumentsClientServer.GetStructureFillStores();
-		FillPropertyValues(ObjectData, Object);
-		Form.Store = DocumentsServer.GetCurrentStore(ObjectData);
-
-	EndIf;
-
-	If Form.Store <> Form.StoreBeforeChange And Object.ItemList.Count() Then
-		ShowQueryBox(New NotifyDescription("StoreOnChangeContinue", ThisObject, New Structure("Form, Object", Form,
-			Object)), R().QuestionToUser_005, QuestionDialogMode.YesNoCancel);
-		Return;
-	EndIf;
-	DocumentsClient.SetCurrentStore(Object, Form, Form.Store);
-	DocShipmentConfirmationClient.ChangeItemListStore(Object.ItemList, Form.Store);
-EndProcedure
-
-Procedure StoreOnChangeContinue(Answer, AdditionalParameters) Export
-	If Answer = DialogReturnCode.Yes And AdditionalParameters.Property("Form") Then
-		Form = AdditionalParameters.Form;
-		For Each Row In Form.Object.ItemList Do
-			Row.Store = Form.Store;
-		EndDo;
-		Form.Items.Store.InputHint = "";
-		Form.StoreBeforeChange = Form.Store;
-		DocumentsClient.SetCurrentStore(AdditionalParameters.Object, Form, Form.Store);
-	ElsIf AdditionalParameters.Property("Form") Then
-		Form = AdditionalParameters.Form;
-
-		ObjectData = DocumentsClientServer.GetStructureFillStores();
-		FillPropertyValues(ObjectData, AdditionalParameters.Object);
-		DocumentsClientServer.FillStores(ObjectData, Form);
-	Else
-		Return;
-	EndIf;
-EndProcedure
-
-#EndRegion
 
 #Region GroupTitle
 
@@ -288,35 +332,3 @@ EndProcedure
 Procedure SearchByBarcode(Barcode, Object, Form) Export
 	DocumentsClient.SearchByBarcode(Barcode, Object, Form);
 EndProcedure
-
-#Region ItemListItemsEvents
-
-#Region Unit
-
-Procedure ItemListUnitOnChange(Object, Form, Item = Undefined, CurrentRowData = Undefined, AddInfo = Undefined) Export
-	ViewClient_V2.ItemListUnitOnChange(Object, Form);
-//	CurrentData = DocumentsClient.GetCurrentRowDataList(Form.Items.ItemList, CurrentRowData);
-//	If CurrentData = Undefined Then
-//		Return;
-//	EndIf;
-//	Actions = New Structure("CalculateQuantityInBaseUnit");
-//	CalculationStringsClientServer.CalculateItemsRow(Object, CurrentData, Actions);
-EndProcedure
-
-#EndRegion
-
-#Region Quantity
-
-Procedure ItemListQuantityOnChange(Object, Form, Item = Undefined, CurrentRowData = Undefined, AddInfo = Undefined) Export
-	ViewClient_V2.ItemListQuantityWithoutAmountOnChange(Object, Form);
-//	CurrentData = DocumentsClient.GetCurrentRowDataList(Form.Items.ItemList, CurrentRowData);
-//	If CurrentData = Undefined Then
-//		Return;
-//	EndIf;
-//	Actions = New Structure("CalculateQuantityInBaseUnit");
-//	CalculationStringsClientServer.CalculateItemsRow(Object, CurrentData, Actions);
-EndProcedure
-
-#EndRegion
-
-#EndRegion

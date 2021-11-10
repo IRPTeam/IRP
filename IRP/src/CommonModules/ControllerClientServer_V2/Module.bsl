@@ -5,31 +5,71 @@
 // никаких запросов к БД и расчетов тут делать нельзя, модифицировать форму задавать вопросы пользователю и т.д нельзя 
 // только чтение из объекта и запись в объект
 
-Function BindSteps(DefaulStepsEnabler, DataPath, Binding, Parameters)
-	MetadataBinding = New Map();
-	If Binding <> Undefined Then
-		For Each KeyValue In Binding Do
-			MetadataName = KeyValue.Key;
-			MetadataBinding.Insert(StrTemplate("%1.%2", MetadataName, DataPath), Binding[MetadataName]);
-		EndDo;
+#IF Client THEN
+
+Procedure FillPropertyFormByDefault(Form, DataPath, Parameters) Export
+	Bindings = GetAllBindings(Parameters);
+	Defaults = GetAllFillByDefault(Parameters);
+	
+	Default = Defaults.Get(DataPath);
+	If Default<> Undefined Then
+		ForceCommintChanges = False;
+		ModelClientServer_V2.EntryPoint(Default.StepsEnabler, Parameters);
+	ElsIf ValueIsFilled(Form[DataPath]) Then
+			SetPropertyForm(Parameters, DataPath, , Form[DataPath]);
+			Binding = Bindings.Get(DataPath);
+			If Binding <> Undefined Then
+				ForceCommintChanges = False;
+				ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+			EndIf;
 	EndIf;
-	FullDataPath = StrTemplate("%1.%2", Parameters.ObjectMetadataInfo.MetadataName, DataPath);
-	StepsEnabler = MetadataBinding.Get(FullDataPath);
-	Result = New Structure();
-	Result.Insert("FullDataPath" , FullDataPath);
-	Result.Insert("StepsEnabler" , ?(StepsEnabler = Undefined, DefaulStepsEnabler, StepsEnabler));
-	Result.Insert("DataPath", DataPath);
-	Return Result;
+	If ForceCommintChanges Then
+		CommitChainChanges(Parameters);
+	EndIf;
+EndProcedure
+
+#ENDIF
+
+Function GetAllBindings(Parameters)
+	Binding = New Map();
+	Binding.Insert("Company"   , CompanyStepsBinding(Parameters));
+	Binding.Insert("Partner"   , PartnerStepsBinding(Parameters));
+	Binding.Insert("LegalName" , LegalNameStepsBinding(Parameters));
+	
+	Binding.Insert("ItemList.Item"     , ItemListItemStepsBinding(Parameters));
+	Binding.Insert("ItemList.ItemKey"  , ItemListItemKeyStepsBinding(Parameters));
+	Binding.Insert("ItemList.Unit"     , ItemListUnitStepsBinding(Parameters));
+	Binding.Insert("ItemList.Quantity" , ItemListQuantityStepsBinding(Parameters));
+	Return Binding;
 EndFunction
+
+Function GetAllFillByDefault(Parameters)
+	Binding = New Map();
+	Binding.Insert("Store", StoreDefaultBinding(Parameters));
+	
+	Binding.Insert("ItemList.Store"    , ItemListStoreDefaultBinding(Parameters));
+	Binding.Insert("ItemList.Quantity" , ItemListQuantityDefaultBinding(Parameters));
+	Return Binding;
+EndFunction
+
+#Region ITEM_LIST
 
 Procedure AddNewRow(TableName, Parameters) Export
 	NewRow = Parameters.Rows[0];
 	UserSettingsClientServer.FillingRowFromSettings(Parameters.Object, StrTemplate("Object.%1", TableName), NewRow, True);
+	Parameters.Insert("RowFilledByUserSettings", NewRow);
+	
 	Bindings = GetAllBindings(Parameters);
+	Defaults = GetAllFillByDefault(Parameters);
+	
 	ForceCommintChanges = True;
 	For Each ColumnName In StrSplit(Parameters.ObjectMetadataInfo.Tables[TableName].Columns, ",") Do
-		If ValueIsFilled(NewRow[ColumnName]) Then
-			DataPath = StrTemplate("%1.%2", TableName, ColumnName);
+		DataPath = StrTemplate("%1.%2", TableName, ColumnName);
+		Default = Defaults.Get(DataPath);
+		If Default<> Undefined Then
+			ForceCommintChanges = False;
+			ModelClientServer_V2.EntryPoint(Default.StepsEnabler, Parameters);
+		ElsIf ValueIsFilled(NewRow[ColumnName]) Then
 			SetPropertyObject(Parameters, DataPath, NewRow.Key, NewRow[ColumnName]);
 			Binding = Bindings.Get(DataPath);
 			If Binding <> Undefined Then
@@ -43,28 +83,36 @@ Procedure AddNewRow(TableName, Parameters) Export
 	EndIf;
 EndProcedure
 
-Function GetAllBindings(Parameters)
-	Binding = New Map();
-	Binding.Insert("ItemList.Item", ItemListItemSptepsBinding(Parameters));
-	Return Binding;
-EndFunction
+Procedure DeleteRows(TableName, Parameters) Export
+	For Each DepTableName In Parameters.ObjectMetadataInfo.DependencyTables Do
+		ArrayForDelete = New Array();
+		For Each Row In Parameters.Object[DepTableName] Do
+			If Not Parameters.Object[TableName].FindRows(New Structure("Key", Row.Key)).Count() THen
+				ArrayForDelete.Add(Row);
+			EndIf;
+		EndDo;
+		For Each ItemForDelete In ArrayForDelete Do
+			Parameters.Object[DepTableName].Delete(ItemForDelete);
+		EndDo;
+	EndDo;
+EndProcedure
 
-#Region ITEM_ITEMKEY_UNIT_QUANTITYINBASEUNIT
+#Region ITEM_LIST_ITEM
 
-// Вызывается при изменении Item в табличной части ItemList
+// ItemList.Item.OnChange
 Procedure ItemListItemOnChange(Parameters) Export
-	// Запускаем процесс изменения документа
-	// Первым параметром указываем имя процедуры в которой включаем нужные шаги вычислений
-	Binding = ItemListItemSptepsBinding(Parameters);
+	Binding = ItemListItemStepsBinding(Parameters);
 	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
 EndProcedure
 
+// ItemList.Item.Set
 Procedure SetItemListItem(Parameters, Results) Export
-	Binding = ItemListItemSptepsBinding(Parameters);
+	Binding = ItemListItemStepsBinding(Parameters);
 	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
 EndProcedure
 
-Function ItemListItemSptepsBinding(Parameters)
+// ItemList.Item.Bind
+Function ItemListItemStepsBinding(Parameters)
 	DataPath = "ItemList.Item";
 	Binding = New Structure();
 	Binding.Insert("ShipmentConfirmation", "ItemListItemStepsEnabler");
@@ -72,158 +120,159 @@ Function ItemListItemSptepsBinding(Parameters)
 	Return BindSteps("ItemListItemStepsEnabler", DataPath, Binding, Parameters);
 EndFunction
 
-// Включает необходимые шаги при изменении Item
 Procedure ItemListItemStepsEnabler(Parameters, Chain) Export
-	// При изменении Item нужно изменить ItemKey
 	Chain.ChangeItemKeyByItem.Enable = True;
-	
-	// В процедуру SetItemListItemKey будет передано вычисленное значение ItemKey
 	Chain.ChangeItemKeyByItem.Setter = "SetItemListItemKey";
-	
-	// так как реквизит Item находится в табличной части ItemList то нужно обработать строки табличной части
 	For Each Row In GetRows(Parameters, "ItemList") Do
 		Options = ModelClientServer_V2.ChangeItemKeyByItemOptions();
-		// если реквизит находится в табличной части, в данном случае в ItemList то в 3-ем параметре нужно передать 
-		// Key - это ключ строки, он нужен для ее идентификации
 		Options.Item = GetPropertyObject(Parameters, "ItemList.Item", Row.Key);
-		
-		// Когда параметры заполняем из табличной части то обязательно нужно заполнятб поле Key
-		// без этого параметра не получится идентифицировать строку и вернуть в нее значение
 		Options.Key = Row.Key;
-		
 		Chain.ChangeItemKeyByItem.Options.Add(Options);
 	EndDo;
 EndProcedure
 
-// Вызывается при изменении ItemKey в табличной части ItemList
+#EndRegion
+
+#Region ITEM_LIST_ITEMKEY
+
+// ItemList.ItemKey.OnChange
 Procedure ItemListItemKeyOnChange(Parameters) Export
-	// Запускаем процесс изменения документа
-	// Первым параметром указываем имя процедуры в которой включаем нужные шаги вычислений
-	ModelClientServer_V2.EntryPoint("ItemListItemKeyStepsEnabler", Parameters);
+	Binding = ItemListItemKeyStepsBinding(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
 EndProcedure
 
-// Включает необходимые шаги при изменении ItemKey
+// ItemList.ItemKey.Set
+Procedure SetItemListItemKey(Parameters, Results) Export
+	Binding = ItemListItemKeyStepsBinding(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// ItemList.ItemKey.Bind
+Function ItemListItemKeyStepsBinding(Parameters)
+	DataPath = "ItemList.ItemKey";
+	Binding = New Structure();
+	Return BindSteps("ItemListItemKeyStepsEnabler", DataPath, Binding, Parameters);
+EndFunction
+
 Procedure ItemListItemKeyStepsEnabler(Parameters, Chain) Export
-	// При изменении ItemKey нужно изменить Unit
 	Chain.ChangeUnitByItemKey.Enable = True;
-	
-	// В процедуру SetItemListUnit будет передано вычисленное значение Unit
 	Chain.ChangeUnitByItemKey.Setter = "SetItemListUnit";
-	
-	// так как реквизит ItemKey находится в табличной части ItemList то нужно обработать строки табличной части
 	For Each Row In GetRows(Parameters, "ItemList") Do
 		Options = ModelClientServer_V2.ChangeUnitByItemKeyOptions();
-		// если реквизит находится в табличной части, в данном случае в ItemList то в 3-ем параметре нужно передать 
-		// Key - это ключ строки, он нужен для ее идентификации
 		Options.ItemKey = GetPropertyObject(Parameters, "ItemList.ItemKey", Row.Key);
-		
-		// Когда параметры заполняем из табличной части то обязательно нужно заполнятб поле Key
-		// без этого параметра не получится идентифицировать строку и вернуть в нее значение
 		Options.Key = Row.Key;
-		
 		Chain.ChangeUnitByItemKey.Options.Add(Options);
 	EndDo;
 EndProcedure
 
-// Вызывается когда в реквизит ItemKey программно пишется значение
-Procedure SetItemListItemKey(Parameters, Results) Export
-	// При изменении ItemKey нужно выполнить действия, изменить Unit
-	// поэтому первым параметром передаем имя процедуры которая включит шаги которые нужно сделать после изменения ItemKey
-	
-	// Вторым параметром передаем путь к данным, куда надо установить значение, для реквизитов табличных частей
-	// имеет вид ИмяТабличнойчасти.ИмяРеквизита
-	SetterObject("ItemListItemKeyStepsEnabler", "ItemList.ItemKey", Parameters, Results);
-EndProcedure
+#EndRegion
 
-// Вызывается при изменении Unit в табличной части ItemList
+#Region ITEM_KEY_UNIT
+
+// ItemList.Unit.OnChange
 Procedure ItemListUnitOnChange(Parameters) Export
-	// Запускаем процесс изменения документа
-	// Первым параметром указываем имя процедуры в которой включаем нужные шаги вычислений
-	ModelClientServer_V2.EntryPoint("ItemListUnitStepsEnabler", Parameters);
+	Binding = ItemListUnitStepsBinding(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
 EndProcedure
 
-// Включает необходимые шаги при изменении Unit
-Procedure ItemListUnitStepsEnabler(Parameters, Chain) Export
-	// При изменении Unit нужно изменить QuantityInBaseUnit
-	// воспользуемся логикой Calculations
-	Chain.Calculations.Enable = True;
-	// в эту процедуру будет возвращен результат выполнения Calculations
-	Chain.Calculations.Setter = "SetItemListQuantityInBaseUnit";
-	
-	// так как реквизит Unit находится в табличной части ItemList то нужно обработать строки табличной части
-	For Each Row In GetRows(Parameters, "ItemList") Do
-		
-		CalculationsOptions     = ModelClientServer_V2.CalculationsOptions();
-		CalculationsOptions.Ref = Parameters.Object.Ref;
-		
-		// нужно посчитать только QuantityInBaseUnit, остальные расчеты (NetAmount, TotalAmount) не нужны
-		// поэтому включаем только один расчет
-		CalculationsOptions.CalculateQuantityInBaseUnit.Enable   = True;
-		
-		// эти параметры логики Calculations нужны для расчета QuantityInBaseUnit
-		CalculationsOptions.QuantityOptions.ItemKey = GetPropertyObject(Parameters, "ItemList.ItemKey", Row.Key);
-		CalculationsOptions.QuantityOptions.Unit    = GetPropertyObject(Parameters, "ItemList.Unit", Row.Key);
-		CalculationsOptions.QuantityOptions.Quantity           = GetPropertyObject(Parameters, "ItemList.Quantity"           , Row.Key);
-		CalculationsOptions.QuantityOptions.QuantityInBaseUnit = GetPropertyObject(Parameters, "ItemList.QuantityInBaseUnit" , Row.Key);
-		
-		// указываем ключ строки для идентификации при возвращении результата расчета
-		CalculationsOptions.Key = Row.Key;
-		
-		Chain.Calculations.Options.Add(CalculationsOptions);
-	EndDo;
-EndProcedure
-
-// Вызывается когда в реквизит Unit программно пишется значение
+// ItemList.Unit.Set
 Procedure SetItemListUnit(Parameters, Results) Export
-	// При изменении Unit нужно выполнить действия, изменить QuantityInBaseUnit
-	// поэтому первым параметром передаем имя процедуры которая включит шаги которые нужно сделать после изменения Unit
-	
-	// Вторым параметром передаем путь к данным, куда надо установить значение, для реквизитов табличных частей
-	// имеет вид ИмяТабличнойчасти.ИмяРеквизита
-	SetterObject("ItemListUnitStepsEnabler", "ItemList.Unit", Parameters, Results);
+	Binding = ItemListUnitStepsBinding(Parameters);
+	SetterObject(Binding.StepsEnabler, "ItemList.Unit", Parameters, Results);
 EndProcedure
 
-// Вызывается при изменениие Quantity, для тех докуметов в которых нет сумм (NetAmount, TotalAmount)
-Procedure ItemListQuantityWitoutAmountOnChange(Parameters) Export
-	// Запускаем процесс изменения документа
-	// Первым параметром указываем имя процедуры в которой включаем нужные шаги вычислений
-	ModelClientServer_V2.EntryPoint("ItemListQuantityWithoutAmountStepsEnabler", Parameters);
-EndProcedure
+// ItemList.Unit.Bind
+Function ItemListUnitStepsBinding(Parameters) Export
+	DataPath = "ItemList.Unit";
+	Binding = New Structure();
+	Return BindSteps("ItemListUnitStepsEnabler", DataPath, Binding, Parameters);
+EndFunction
 
-Procedure ItemListQuantityWithoutAmountStepsEnabler(Parameters, Chain) Export
-	// При изменении Quantity нужно изменить QuantityInBaseUnit
-	// воспользуемся логикой Calculations
+Procedure ItemListUnitStepsEnabler(Parameters, Chain) Export
 	Chain.Calculations.Enable = True;
-	// в эту процедуру будет возвращен результат выполнения Calculations
 	Chain.Calculations.Setter = "SetItemListQuantityInBaseUnit";
-	
-	// так как реквизит Quantity находится в табличной части ItemList то нужно обработать строки табличной части
 	For Each Row In GetRows(Parameters, "ItemList") Do
+		Options     = ModelClientServer_V2.CalculationsOptions();
+		Options.Ref = Parameters.Object.Ref;
 		
-		CalculationsOptions     = ModelClientServer_V2.CalculationsOptions();
-		CalculationsOptions.Ref = Parameters.Object.Ref;
+		Options.CalculateQuantityInBaseUnit.Enable   = True;
 		
-		// нужно посчитать только QuantityInBaseUnit, остальные расчеты (NetAmount, TotalAmount) не нужны
-		// поэтому включаем только один расчет
-		CalculationsOptions.CalculateQuantityInBaseUnit.Enable   = True;
+		Options.QuantityOptions.ItemKey = GetPropertyObject(Parameters, "ItemList.ItemKey", Row.Key);
+		Options.QuantityOptions.Unit    = GetPropertyObject(Parameters, "ItemList.Unit", Row.Key);
+		Options.QuantityOptions.Quantity           = GetPropertyObject(Parameters, "ItemList.Quantity"           , Row.Key);
+		Options.QuantityOptions.QuantityInBaseUnit = GetPropertyObject(Parameters, "ItemList.QuantityInBaseUnit" , Row.Key);
 		
-		// эти параметры логики Calculations нужны для расчета QuantityInBaseUnit
-		CalculationsOptions.QuantityOptions.ItemKey = GetPropertyObject(Parameters, "ItemList.ItemKey", Row.Key);
-		CalculationsOptions.QuantityOptions.Unit    = GetPropertyObject(Parameters, "ItemList.Unit", Row.Key);
-		CalculationsOptions.QuantityOptions.Quantity           = GetPropertyObject(Parameters, "ItemList.Quantity"           , Row.Key);
-		CalculationsOptions.QuantityOptions.QuantityInBaseUnit = GetPropertyObject(Parameters, "ItemList.QuantityInBaseUnit" , Row.Key);
-		
-		// указываем ключ строки для идентификации при возвращении результата расчета
-		CalculationsOptions.Key = Row.Key;
-		
-		Chain.Calculations.Options.Add(CalculationsOptions);
+		Options.Key = Row.Key;
+		Chain.Calculations.Options.Add(Options);
 	EndDo;
 EndProcedure
 
-// Вызывается когда произведен расчет QuantityInBaseUnit для того чтобы поместить расчет в реквизит
+#EndRegion
+
+#Region ITEM_LIST_QUANTITY
+
+// ItemList.Quantity.OnChange
+Procedure ItemListQuantityOnChange(Parameters) Export
+	AddViewNotify("OnSetItemListQuantityNotify", Parameters);
+	Binding = ItemListQuantityStepsBinding(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// ItemList.Quantity.Set
+Procedure SetItemListQuantity(Parameters, Results) Export
+	Binding = ItemListQuantityStepsBinding(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results, "OnSetItemListQuantityNotify");
+EndProcedure
+
+// ItemList.Quantity.Default.Bind
+Function ItemListQuantityDefaultBinding(Parameters)
+	DataPath = "ItemList.Quantity";
+	Binding = New Structure();
+	Return BindSteps("ItemListQuantityDefault", DataPath, Binding, Parameters);
+EndFunction
+
+// ItemList.Quantity.Bind
+Function ItemListQuantityStepsBinding(Parameters) Export
+	DataPath = "ItemList.Quantity";
+	Binding = New Structure();
+	Binding.Insert("ShipmentConfirmation" ,"ItemListQuantityStepsEnabler_WithoutAmounts");
+	Return BindSteps("ItemListQuantityStepsEnabler", DataPath, Binding, Parameters);
+EndFunction
+
+Procedure ItemListQuantityDefault(Parameters, Chain) Export
+	Chain.DefaultQuantityInList.Enable = True;
+	Chain.DefaultQuantityInList.Setter = "SetItemListQuantity";
+	Options = ModelClientServer_V2.DefaultQuantityInListOptions();
+	NewRow = Parameters.RowFilledByUserSettings;
+	Options.CurrentQuantity = GetPropertyObject(Parameters, "ItemList.Quantity", NewRow.Key);
+	Options.Key = NewRow.Key;
+	Chain.DefaultQuantityInList.Options.Add(Options);
+EndProcedure
+
+Procedure ItemListQuantityStepsEnabler_WithoutAmounts(Parameters, Chain) Export
+	Chain.Calculations.Enable = True;
+	Chain.Calculations.Setter = "SetItemListQuantityInBaseUnit";
+	For Each Row In GetRows(Parameters, "ItemList") Do
+		Options     = ModelClientServer_V2.CalculationsOptions();
+		Options.Ref = Parameters.Object.Ref;
+		Options.CalculateQuantityInBaseUnit.Enable   = True;
+		Options.QuantityOptions.ItemKey = GetPropertyObject(Parameters, "ItemList.ItemKey", Row.Key);
+		Options.QuantityOptions.Unit    = GetPropertyObject(Parameters, "ItemList.Unit", Row.Key);
+		Options.QuantityOptions.Quantity           = GetPropertyObject(Parameters, "ItemList.Quantity"           , Row.Key);
+		Options.QuantityOptions.QuantityInBaseUnit = GetPropertyObject(Parameters, "ItemList.QuantityInBaseUnit" , Row.Key);
+		Options.Key = Row.Key;
+		Chain.Calculations.Options.Add(Options);
+	EndDo;
+EndProcedure
+
+Procedure ItemListQuantityStepsEnabler(Parameters, Chain) Export
+	ItemListEnableCalculations(Parameters, Chain, "IsQuantityChanged");
+EndProcedure
+
+#EndRegion
+
+// ItemList.QuantityInBaseUnit.Set
 Procedure SetItemListQuantityInBaseUnit(Parameters, Results) Export
-	// логика Calculation возвращает не просто значение а структуру, поэтому в 5-ом параметре указываем ключ структуры
-	// по которому можно извлечь результат вычислений, в данном случае ключ будет QuantityInBaseUnit
 	SetterObject(Undefined, "ItemList.QuantityInBaseUnit" , Parameters, Results, , "QuantityInBaseUnit");
 EndProcedure
 
@@ -324,23 +373,67 @@ EndProcedure
 
 #EndRegion
 
+#Region COMPANY
+
+// Company.OnChange
+Procedure CompanyOnChange(Parameters) Export
+	AddViewNotify("OnSetCompanyNotify", Parameters);
+	Binding = CompanyStepsBinding(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// Company.Set
+Procedure CompanyName(Parameters, Results) Export
+	Binding = CompanyStepsBinding(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results, "OnSetCompanyNotify");
+EndProcedure
+
+// Company.Bind
+Function CompanyStepsBinding(Parameters)
+	DataPath = "Company";
+	Binding = New Structure();
+	Return BindSteps("CompanyStepsEnabler", DataPath, Binding, Parameters);
+EndFunction
+
+Procedure CompanyStepsEnabler(Parameters, Chain) Export
+	Return;
+EndProcedure
+
+#EndRegion
+
 #Region PARTNER
 
-// Client Event handler, вызывается из модуля ViewClient_V2
+// Partner.OnChange
 Procedure PartnerOnChange(Parameters) Export
 	ProceedObjectPropertyBeforeChange(Parameters);
-	ModelClientServer_V2.EntryPoint("PartnerStepsEnabler", Parameters);
+	AddViewNotify("OnSetPartnerNotify", Parameters);
+	Binding = PartnerStepsBinding(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
 EndProcedure
+
+// Partner.Set
+Procedure SetPartner(Parameters, Results) Export
+	Binding = PartnerStepsBinding(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results, "OnSetPartnerNotify");
+EndProcedure
+
+// Partner.Bind
+Function PartnerStepsBinding(Parameters)
+	DataPath = "Partner";
+	Binding = New Structure();
+	Binding.Insert("ShipmentConfirmation", "PartnerStepsEnabler_ChangeOnlyLegalName");
+	Return BindSteps("PartnerStepsEnabler", DataPath, Binding, Parameters);
+EndFunction
 
 Procedure PartnerStepsEnabler(Parameters, Chain) Export
 	// При изменении партнера нужно изменить LegalName
-	Chain.LegalName.Enable = True;
-	Chain.LegalName.Setter = "SetLegalName";
+	Chain.ChangeLegalNameByPartner.Enable = True;
+	Chain.ChangeLegalNameByPartner.Setter = "SetLegalName";
 	// эти данные (параметры) нужны для получения LegalName
-	LegalNameOptions = ModelClientServer_V2.LegalNameOptions();
-	LegalNameOptions.Partner   = GetPropertyObject(Parameters, "Partner");
-	LegalNameOptions.LegalName = GetPropertyObject(Parameters, "LegalName");;
-	Chain.LegalName.Options.Add(LegalNameOptions);
+	Options = ModelClientServer_V2.ChangeLegalNameByPartnerOptions();
+	Options.Partner   = GetPropertyObject(Parameters, "Partner");
+	Options.LegalName = GetPropertyObject(Parameters, "LegalName");;
+	Chain.LegalName.Options.Add(Options);
 	
 	// При изменении партнера нужно изменить Agreement
 	Chain.Agreement.Enable = True;
@@ -360,42 +453,115 @@ Procedure PartnerStepsEnabler(Parameters, Chain) Export
 	Chain.ChangeManagerSegmentByPartner.Options.Add(Options);
 EndProcedure
 
+Procedure PartnerStepsEnabler_ChangeOnlyLegalName(Parameters, Chain) Export
+	Chain.ChangeLegalNameByPartner.Enable = True;
+	Chain.ChangeLegalNameByPartner.Setter = "SetLegalName";
+	Options = ModelClientServer_V2.ChangeLegalNameByPartnerOptions();
+	Options.Partner   = GetPropertyObject(Parameters, "Partner");
+	Options.LegalName = GetPropertyObject(Parameters, "LegalName");;
+	Chain.ChangeLegalNameByPartner.Options.Add(Options);
+EndProcedure
+
 Procedure SetPartner_API(Parameters, Results) Export
 	ModelClientServer_V2.Init_API("PartnerStepsEnabler", Parameters);
 	SetPartner(Parameters, Results);
-EndProcedure
-
-Procedure SetPartner(Parameters, Results) Export
-	SetterObject("PartnerStepsEnabler", "Partner", Parameters, Results);
 EndProcedure
 
 #EndRegion
 
 #Region LEGAL_NAME
 
-// Client Event handler вызывается из модуля ViewClient_V2
+// LegalName.OnChange
 Procedure LegalNameOnChange(Parameters) Export
 	AddViewNotify("OnSetLegalNameNotify", Parameters);
-	ModelClientServer_V2.EntryPoint("LegalNameStepsEnabler", Parameters);
+	Binding = LegalNameStepsBinding(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
 EndProcedure
+
+// LegalName.Set
+Procedure SetLegalName(Parameters, Results) Export
+	Binding = LegalNameStepsBinding(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results, "OnSetLegalNameNotify");
+EndProcedure
+
+// LegalName.Bind
+Function LegalNameStepsBinding(Parameters)
+	DataPath = "LegalName";
+	Binding = New Structure();
+	Return BindSteps("LegalNameStepsEnabler", DataPath, Binding, Parameters);
+EndFunction
 
 Procedure LegalNameStepsEnabler(Parameters, Chain) Export
 	Return;
-EndProcedure
-
-Procedure SetLegalName(Parameters, Results) Export
-	SetterObject("LegalNameStepsEnabler", "LegalName", Parameters, Results, "OnSetLegalNameNotify");
 EndProcedure
 
 #EndRegion
 
 #Region STORE
 
-// это реквизит формы в шапке
+// Store.OnChange
 Procedure StoreOnChange(Parameters) Export
 	ProceedFormPropertyBeforeChange(Parameters);
 	AddViewNotify("OnSetStoreNotify", Parameters);
-	ModelClientServer_V2.EntryPoint("StoreStepsEnabler", Parameters);
+	Binding = StoreStepsBinding(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// Store.Set
+Procedure SetStore(Parameters, Results) Export
+	Binding = StoreStepsBinding(Parameters);
+	SetterForm(Binding.StepsEnabler, Binding.DataPath, Parameters, Results, "OnSetStoreNotify", ,True);
+EndProcedure
+
+// Store.Default.Bind
+Function StoreDefaultBinding(Parameters)
+	DataPath = "Store";
+	Binding = New Structure();
+	Binding.Insert("ShipmentConfirmation", "StoreDefault");
+	Binding.Insert("GoodsReceipt"        , "StoreDefault");
+
+	Binding.Insert("SalesInvoice"   , "StoreDefault_HaveAgreementInHeader");
+	Binding.Insert("PurchaseInvoice", "StoreDefault_HaveAgreementInHeader");
+	
+	Return BindSteps(Undefined, DataPath, Binding, Parameters);
+EndFunction
+
+// Store.Bind
+Function StoreStepsBinding(Parameters)
+	DataPath = "Store";
+	Binding = New Structure();
+	Return BindSteps("StoreStepsEnabler", DataPath, Binding, Parameters);
+EndFunction
+
+Procedure StoreDefault(Parameters, Chain) Export
+	Chain.DefaultStoreInHeader.Enable = True;
+	Chain.DefaultStoreInHeader.Setter = "SetStore";
+	Options = ModelClientServer_V2.DefaultStoreInHeaderOptions();
+	Options.DocumentRef = Parameters.Object.Ref;
+	
+	ArrayOfStoresInList = New Array();
+	For Each Row In Parameters.Object.ItemList Do
+		ArrayOfStoresInList.Add(GetPropertyObject(Parameters, "ItemList.Store", Row.Key));
+	EndDo;
+	Options.ArrayOfStoresInList = ArrayOfStoresInList; 
+	
+	Chain.DefaultStoreInHeader.Options.Add(Options);
+EndProcedure
+
+Procedure StoreDefault_HaveAgreementInHeader(Parameters, Chain) Export
+	Chain.DefaultStoreInHeader.Enable = True;
+	Chain.DefaultStoreInHeader.Setter = "SetStore";
+	Options = ModelClientServer_V2.DefaultStoreInHeaderOptions();
+	Options.DocumentRef = Parameters.Object.Ref;
+	Options.Agreement   = GetPropertyObject(Parameters, "Agreement");
+	
+	ArrayOfStoresInList = New Array();
+	For Each Row In Parameters.Object.ItemList Do
+		ArrayOfStoresInList.Add(GetPropertyObject(Parameters, "ItemList.Store", Row.Key));
+	EndDo;
+	Options.ArrayOfStoresInList = ArrayOfStoresInList; 
+	
+	Chain.DefaultStoreInHeader.Options.Add(Options);
 EndProcedure
 
 Procedure StoreStepsEnabler(Parameters, Chain) Export
@@ -411,9 +577,126 @@ Procedure StoreStepsEnabler(Parameters, Chain) Export
 	EndDo;
 EndProcedure
 
-Procedure SetStore(Parameters, Results) Export
-	SetterForm("StoreStepsEnabler", "Store", Parameters, Results, "OnSetStoreNotify");
+// ItemList.Store.OnChange
+Procedure ItemListStoreOnChange(Parameters) Export
+	Binding = ItemListStoreSptepsBinding(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
 EndProcedure
+
+// ItemList.Store.Set
+Procedure SetItemListStore(Parameters, Results) Export
+	Binding = ItemListStoreSptepsBinding(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// ItemList.Store.Default.Bind
+Function ItemListStoreDefaultBinding(Parameters)
+	DataPath = "ItemList.Store";
+	Binding = New Structure();
+	Binding.Insert("ShipmentConfirmation", "ItemListStoreDefault");
+	Binding.Insert("GoodsReceipt"        , "ItemListStoreDefault");
+
+	Binding.Insert("SalesInvoice"   , "ItemListStoreDefault_HaveAgreementInHeader");
+	Binding.Insert("PurchaseInvoice", "ItemListStoreDefault_HaveAgreementInHeader");
+	
+	Return BindSteps(Undefined, DataPath, Binding, Parameters);
+EndFunction
+
+// ItemList.Store.Bind
+Function ItemListStoreSptepsBinding(Parameters)
+	DataPath = "ItemList.Store";
+	Binding = New Structure();
+	Binding.Insert("ShipmentConfirmation", "ItemListStoreStepsEnabler_HaveStoreInHeader");
+	Binding.Insert("GoodsReceitp"        , "ItemListStoreStepsEnabler_HaveStoreInHeader");
+
+	Binding.Insert("SalesInvoice"   , "ItemListStoreStepsEnabler_HaveUseShipmentConfirmationInList");
+	Binding.Insert("PurchaseInvoice", "ItemListStoreStepsEnabler_HaveUseGoodsReceiptInList");
+	
+	Return BindSteps(Undefined, DataPath, Binding, Parameters);
+EndFunction
+
+Procedure ItemListStoreDefault(Parameters, Chain) Export
+	Chain.DefaultStoreInList.Enable = True;
+	Chain.DefaultStoreInList.Setter = "SetItemListStore";
+	Options = ModelClientServer_V2.DefaultStoreInListOptions();
+	NewRow = Parameters.RowFilledByUserSettings;
+	Options.StoreFromUserSettings = NewRow.Store;
+	Options.StoreInList           = GetPropertyObject(Parameters, "ItemList.Store", NewRow.Key);
+	Options.StoreInHeader         = GetPropertyForm(Parameters  , "Store");
+	Options.Key = NewRow.Key;
+	Chain.DefaultStoreInList.Options.Add(Options);
+EndProcedure
+
+Procedure ItemListStoreDefault_HaveAgreementInHeader(Parameters, Chain) Export
+	Chain.DefaultStoreInList.Enable = True;
+	Chain.DefaultStoreInList.Setter = "SetItemListStore";
+	Options = ModelClientServer_V2.DefaultStoreInListOptions();
+	NewRow = Parameters.RowFilledByUserSettings;
+	Options.StoreFromUserSettings = NewRow.Store;
+	Options.StoreInList           = GetPropertyObject(Parameters, "ItemList.Store", NewRow.Key);
+	Options.StoreInHeader         = GetPropertyForm(Parameters  , "Store");
+	Options.Agreement             = GetPropertyObject(Parameters, "Agreement");
+	Options.Key = NewRow.Key;
+	Chain.DefaultStoreInList.Options.Add(Options);
+EndProcedure
+
+Procedure ItemListStoreStepsEnabler_HaveStoreInHeader(Parameters, Chain) Export
+	// В шапке документа есть реквизит Store
+	Chain.ChangeStoreInHeaderByStoresInList.Enable = True;
+	Chain.ChangeStoreInHeaderByStoresInList.Setter = "SetStore";
+	
+	// нужно взять все строки в табличной части ItemList из строк получить Store
+	Options = ModelClientServer_V2.ChangeStoreInHeaderByStoresInListOptions();
+	ArrayOfStoresInList = New Array();
+	For Each Row In Parameters.Object.ItemList Do
+		ArrayOfStoresInList.Add(GetPropertyObject(Parameters, "ItemList.Store", Row.Key));
+	EndDo;
+	Options.ArrayOfStoresInList = ArrayOfStoresInList; 
+	Chain.ChangeStoreInHeaderByStoresInList.Options.Add(Options);
+EndProcedure
+
+Procedure ItemListStoreStepsEnabler_HaveUseShipmentConfirmationInList(Parameters, Chain) Export
+	ItemListStoreStepsEnabler_HaveStoreInHeader(Parameters, Chain);
+	
+	// В табличной части ItemList есть реквизит UseShipmentConfirmation
+	Chain.ChangeUseShipmentConfirmationByStore.Enable = True;
+	Chain.ChangeUseShipmentConfirmationByStore.Setter = "SetItemListUseShipmentConfirmation";
+	
+	For Each Row In GetRows(Parameters, "ItemList") Do
+		Options = ModelClientServer_V2.ChangeUseShipmentConfirmationByStoreOptions();
+		Options.Store   = GetPropertyObject(Parameters, "ItemList.Store", Row.Key);
+		Options.ItemKey = GetPropertyObject(Parameters, "ItemList.ItemKey", Row.Key);
+		Options.Key = Row.Key;
+		Chain.ChangeUseShipmentConfirmationByStore.Options.Add(Options);
+	EndDo;
+EndProcedure
+
+Procedure ItemListStoreStepsEnabler_HaveUseGoodsReceiptInList(Parameters, Chain) Export
+	ItemListStoreStepsEnabler_HaveStoreInHeader(Parameters, Chain);
+	
+	// В табличной части ItemList есть реквизит UseGoodsReceipt
+	Chain.ChangeUseGoodsReceiptByStore.Enable = True;
+	Chain.ChangeUseGoodsReceiptByStore.Setter = "SetItemListUseGoodsReceipt";
+	
+	For Each Row In GetRows(Parameters, "ItemList") Do
+		Options = ModelClientServer_V2.ChangeUseGoodsReceiptByStoreOptions();
+		Options.Store   = GetPropertyObject(Parameters, "ItemList.Store", Row.Key);
+		Options.ItemKey = GetPropertyObject(Parameters, "ItemList.ItemKey", Row.Key);
+		Options.Key = Row.Key;
+		Chain.ChangeUseGoodsReceiptByStore.Options.Add(Options);
+	EndDo;	
+EndProcedure
+
+// ItemList.UseShipmentConfirmation.Set
+Procedure SetItemListUseShipmentConfirmation(Parameters, Results) Export
+	SetterObject(Undefined, "ItemList.UseShipmentConfirmation", Parameters, Results);
+EndProcedure
+
+// ItemList.UseGoodsReceipt.Set
+Procedure SetItemListUseGoodsReceipt(Parameters, Results) Export
+	SetterObject(Undefined, "ItemList.UseGoodsReceipt", Parameters, Results);
+EndProcedure
+
 
 #EndRegion
 
@@ -466,18 +749,6 @@ EndProcedure
 	
 #EndRegion
 
-#Region COMPANY
-
-Procedure CompanyStepsEnabler(Parameters, Chain) Export
-	Return;
-EndProcedure
-
-Procedure SetCompany(Parameters, Results) Export
-	SetterObject("CompanyStepsEnabler", "Company", Parameters, Results);
-EndProcedure
-
-#EndRegion
-
 #Region PRICE_INCLUDE_TAX
 
 Procedure PriceIncludeTaxOnChange(Parameters) Export
@@ -491,60 +762,6 @@ EndProcedure
 #EndRegion
 
 #Region ITEM_LIST
-
-#Region ITEM_LIST_STORE
-
-// Store в табличной части ItemList
-Procedure ItemListStoreOnChange(Parameters) Export
-	ModelClientServer_V2.EntryPoint("ItemListStoreStepsEnabler", Parameters);
-EndProcedure
-
-Procedure ItemListStoreStepsEnabler(Parameters, Chain) Export
-	Chain.ChangeUseShipmentConfirmationByStore.Enable = True;
-	Chain.ChangeUseShipmentConfirmationByStore.Setter = "SetItemListUseShipmentConfirmation";
-	
-	For Each Row In GetRows(Parameters, "ItemList") Do
-		Options = ModelClientServer_V2.ChangeUseShipmentConfirmationByStoreOptions();
-		Options.Store   = GetPropertyObject(Parameters, "ItemList.Store", Row.Key);
-		Options.ItemKey = GetPropertyObject(Parameters, "ItemList.ItemKey", Row.Key);
-		Options.Key = Row.Key;
-		Chain.ChangeUseShipmentConfirmationByStore.Options.Add(Options);
-	EndDo;
-	
-	Chain.ChangeStoreInHeaderByStoresInList.Enable = True;
-	Chain.ChangeStoreInHeaderByStoresInList.Setter = "SetStore";
-	
-	// нужно взять все строки в табличной части ItemList
-	Options = ModelClientServer_V2.ChangeStoreInHeaderByStoresInListOptions();
-	ArrayOfStoresInList = New Array();
-	For Each Row In Parameters.Object.ItemList Do
-		ArrayOfStoresInList.Add(GetPropertyObject(Parameters, "ItemList.Store", Row.Key));
-	EndDo;
-	Options.ArrayOfStoresInList = ArrayOfStoresInList; 
-	Chain.ChangeStoreInHeaderByStoresInList.Options.Add(Options);
-EndProcedure
-
-Procedure SetItemListStore(Parameters, Results) Export
-	SetterObject("ItemListStoreStepsEnabler", "ItemList.Store", Parameters, Results);
-EndProcedure
-
-#EndRegion
-
-#Region ITEM_LIST_USE_SHIPMENT_CONFIRMATION
-
-Procedure SetItemListUseShipmentConfirmation(Parameters, Results) Export
-	SetterObject(Undefined, "ItemList.UseShipmentConfirmation", Parameters, Results);
-EndProcedure
-
-#EndRegion
-
-#Region ITEM_LIST_USE_GOODS_RECEIPT
-
-Procedure SetItemListUseGoodsReceipt(Parameters, Results) Export
-	SetterObject(Undefined, "ItemList.UseGoodsReceipt", Parameters, Results);
-EndProcedure
-
-#EndRegion
 
 #Region ITEM_LIST_PRICE_TYPE
 
@@ -614,52 +831,52 @@ Procedure ItemListEnableCalculations(Parameters, Chain, WhoIsChanged)
 	
 	For Each Row In GetRows(Parameters, "ItemList") Do
 		
-		CalculationsOptions     = ModelClientServer_V2.CalculationsOptions();
-		CalculationsOptions.Ref = Parameters.Object.Ref;
+		Options     = ModelClientServer_V2.CalculationsOptions();
+		Options.Ref = Parameters.Object.Ref;
 		
 		// при изменении цены нужно пересчитать NetAmount, TotalAmount, TaxAmount, OffersAmount
 		If WhoIsChanged = "IsPriceChanged" Or WhoIsChanged = "IsPriceIncludeTaxChanged" Then
-			CalculationsOptions.CalculateNetAmount.Enable   = True;
-			CalculationsOptions.CalculateTotalAmount.Enable = True;
-			CalculationsOptions.CalculateTaxAmount.Enable   = True;
+			Options.CalculateNetAmount.Enable   = True;
+			Options.CalculateTotalAmount.Enable = True;
+			Options.CalculateTaxAmount.Enable   = True;
 		ElsIf WhoIsChanged = "IsTotalAmountChanged" Then
 		// при изменении total amount налоги расчитываются в обратную сторону, меняется Net Amount и цена
-			CalculationsOptions.CalculateTaxAmountReverse.Enable   = True;
-			CalculationsOptions.CalculateNetAmountAsTotalAmountMinusTaxAmount.Enable   = True;
-			CalculationsOptions.CalculatePriceByTotalAmount.Enable   = True;
+			Options.CalculateTaxAmountReverse.Enable   = True;
+			Options.CalculateNetAmountAsTotalAmountMinusTaxAmount.Enable   = True;
+			Options.CalculatePriceByTotalAmount.Enable   = True;
 		ElsIf WhoIsChanged = "IsQuantityChanged" Then
-			CalculationsOptions.CalculateQuantityInBaseUnit.Enable   = True;
-			CalculationsOptions.CalculateNetAmount.Enable   = True;
-			CalculationsOptions.CalculateTotalAmount.Enable = True;
-			CalculationsOptions.CalculateTaxAmount.Enable   = True;
+			Options.CalculateQuantityInBaseUnit.Enable   = True;
+			Options.CalculateNetAmount.Enable   = True;
+			Options.CalculateTotalAmount.Enable = True;
+			Options.CalculateTaxAmount.Enable   = True;
 		EndIf;
 		
-		CalculationsOptions.AmountOptions.DontCalculateRow = GetPropertyObject(Parameters, "ItemList.DontCalculateRow", Row.Key);
+		Options.AmountOptions.DontCalculateRow = GetPropertyObject(Parameters, "ItemList.DontCalculateRow", Row.Key);
 		
-		CalculationsOptions.AmountOptions.NetAmount        = GetPropertyObject(Parameters, "ItemList.NetAmount"    , Row.Key);
-		CalculationsOptions.AmountOptions.OffersAmount     = GetPropertyObject(Parameters, "ItemList.OffersAmount" , Row.Key);
-		CalculationsOptions.AmountOptions.TaxAmount        = GetPropertyObject(Parameters, "ItemList.TaxAmount"    , Row.Key);
-		CalculationsOptions.AmountOptions.TotalAmount      = GetPropertyObject(Parameters, "ItemList.TotalAmount"  , Row.Key);
+		Options.AmountOptions.NetAmount        = GetPropertyObject(Parameters, "ItemList.NetAmount"    , Row.Key);
+		Options.AmountOptions.OffersAmount     = GetPropertyObject(Parameters, "ItemList.OffersAmount" , Row.Key);
+		Options.AmountOptions.TaxAmount        = GetPropertyObject(Parameters, "ItemList.TaxAmount"    , Row.Key);
+		Options.AmountOptions.TotalAmount      = GetPropertyObject(Parameters, "ItemList.TotalAmount"  , Row.Key);
 		
-		CalculationsOptions.PriceOptions.Price              = GetPropertyObject(Parameters, "ItemList.Price"              , Row.Key);
-		CalculationsOptions.PriceOptions.PriceType          = GetPropertyObject(Parameters, "ItemList.PriceType"          , Row.Key);
-		CalculationsOptions.PriceOptions.Quantity           = GetPropertyObject(Parameters, "ItemList.Quantity"           , Row.Key);
-		CalculationsOptions.PriceOptions.QuantityInBaseUnit = GetPropertyObject(Parameters, "ItemList.QuantityInBaseUnit" , Row.Key);
+		Options.PriceOptions.Price              = GetPropertyObject(Parameters, "ItemList.Price"              , Row.Key);
+		Options.PriceOptions.PriceType          = GetPropertyObject(Parameters, "ItemList.PriceType"          , Row.Key);
+		Options.PriceOptions.Quantity           = GetPropertyObject(Parameters, "ItemList.Quantity"           , Row.Key);
+		Options.PriceOptions.QuantityInBaseUnit = GetPropertyObject(Parameters, "ItemList.QuantityInBaseUnit" , Row.Key);
 		
-		CalculationsOptions.TaxOptions.PriceIncludeTax  = GetPropertyObject(Parameters, "PriceIncludeTax");
-		CalculationsOptions.TaxOptions.ItemKey          = GetPropertyObject(Parameters, "ItemList.ItemKey", Row.Key);
-		CalculationsOptions.TaxOptions.ArrayOfTaxInfo   = Parameters.ArrayOfTaxInfo;
-		CalculationsOptions.TaxOptions.TaxRates         = Row.TaxRates;
-		CalculationsOptions.TaxOptions.TaxList          = Row.TaxList;
+		Options.TaxOptions.PriceIncludeTax  = GetPropertyObject(Parameters, "PriceIncludeTax");
+		Options.TaxOptions.ItemKey          = GetPropertyObject(Parameters, "ItemList.ItemKey", Row.Key);
+		Options.TaxOptions.ArrayOfTaxInfo   = Parameters.ArrayOfTaxInfo;
+		Options.TaxOptions.TaxRates         = Row.TaxRates;
+		Options.TaxOptions.TaxList          = Row.TaxList;
 		
-		CalculationsOptions.QuantityOptions.ItemKey = GetPropertyObject(Parameters, "ItemList.ItemKey", Row.Key);
-		CalculationsOptions.QuantityOptions.Unit    = GetPropertyObject(Parameters, "ItemList.Unit", Row.Key);
-		CalculationsOptions.QuantityOptions.Quantity           = GetPropertyObject(Parameters, "ItemList.Quantity"           , Row.Key);
-		CalculationsOptions.QuantityOptions.QuantityInBaseUnit = GetPropertyObject(Parameters, "ItemList.QuantityInBaseUnit" , Row.Key);
+		Options.QuantityOptions.ItemKey = GetPropertyObject(Parameters, "ItemList.ItemKey", Row.Key);
+		Options.QuantityOptions.Unit    = GetPropertyObject(Parameters, "ItemList.Unit", Row.Key);
+		Options.QuantityOptions.Quantity           = GetPropertyObject(Parameters, "ItemList.Quantity"           , Row.Key);
+		Options.QuantityOptions.QuantityInBaseUnit = GetPropertyObject(Parameters, "ItemList.QuantityInBaseUnit" , Row.Key);
 		
-		CalculationsOptions.Key = Row.Key;
+		Options.Key = Row.Key;
 		
-		Chain.Calculations.Options.Add(CalculationsOptions);
+		Chain.Calculations.Options.Add(Options);
 	EndDo;
 EndProcedure
 
@@ -740,23 +957,6 @@ Procedure ItemListTotalAmountStepsEnabler(Parameters, Chain) Export
 	EndDo;
 EndProcedure
 
-#Region ITEM_LIST_QUANTITY
-
-Procedure ItemListQuantityOnChange(Parameters) Export
-	AddViewNotify("OnSetItemListQuantityNotify", Parameters);
-	ModelClientServer_V2.EntryPoint("ItemListQuantityStepsEnabler", Parameters);
-EndProcedure
-
-Procedure ItemListQuantityStepsEnabler(Parameters, Chain) Export
-	ItemListEnableCalculations(Parameters, Chain, "IsQuantityChanged");
-EndProcedure
-
-Procedure SetQuantity(Parameters, Results) Export
-	SetterObject("ItemListQuantityStepsEnabler", "ItemList.Quantity", Parameters, Results, "OnSetItemListQuantityNotify");
-EndProcedure
-
-#EndRegion
-
 #EndRegion
 
 #EndRegion
@@ -765,8 +965,8 @@ EndProcedure
 Procedure OnChainComplete(Parameters) Export
 	#IF Client THEN
 		// на клиенте возможно нужно задать вопрос пользователю, поэтому сразу из кэша в объект не переносим
-		If Parameters.ViewModule <> Undefined Then
-			Parameters.ViewModule.OnChainComplete(Parameters);
+		If ValueIsFilled(Parameters.ViewModuleName) Then
+			Execute StrTemplate("%1.OnChainComplete(Parameters);", Parameters.ViewModuleName);
 		EndIf;
 	#ENDIF
 	
@@ -777,14 +977,15 @@ Procedure OnChainComplete(Parameters) Export
 EndProcedure
 
 Procedure CommitChainChanges(Parameters) Export
+		
 	_CommitChainChanges(Parameters.Cache, Parameters.Object);
 	
 	#IF Client THEN
 		_CommitChainChanges(Parameters.CacheForm, Parameters.Form);
 		
 		// уведомление клиента о том что данные были изменены
-		If Parameters.ViewNotify.Count() And Parameters.ViewModule = Undefined Then
-			Raise "View module undefined";
+		If Parameters.ViewNotify.Count() And Not ValueIsFilled(Parameters.ViewModuleName) Then
+			Raise "View module name is not filled";
 		EndIf;
 		ArrayOfViewNotify = New Array();
 		For Each ViewNotify In Parameters.ViewNotify Do
@@ -857,15 +1058,17 @@ Function GetRows(Parameters, TableName)
 	Return Parameters.Object[TableName];;
 EndFunction
 
-Procedure SetterForm(StepsEnablerName, DataPath, Parameters, Results, ViewNotify = Undefined, ValueDataPath = Undefined)
-	Setter("Form", StepsEnablerName, DataPath, Parameters, Results, ViewNotify, ValueDataPath);
+Procedure SetterForm(StepsEnablerName, DataPath, Parameters, Results, 
+	ViewNotify = Undefined, ValueDataPath = Undefined, NotifyAnyWay = False)
+	Setter("Form", StepsEnablerName, DataPath, Parameters, Results, ViewNotify, ValueDataPath, NotifyAnyWay);
 EndProcedure
 
-Procedure SetterObject(StepsEnablerName, DataPath, Parameters, Results, ViewNotify = Undefined, ValueDataPath = Undefined)
-	Setter("Object", StepsEnablerName, DataPath, Parameters, Results, ViewNotify, ValueDataPath);
+Procedure SetterObject(StepsEnablerName, DataPath, Parameters, Results, 
+	ViewNotify = Undefined, ValueDataPath = Undefined, NotifyAnyWay = False)
+	Setter("Object", StepsEnablerName, DataPath, Parameters, Results, ViewNotify, ValueDataPath, NotifyAnyWay);
 EndProcedure
 
-Procedure Setter(Source, StepsEnablerName, DataPath, Parameters, Results, ViewNotify, ValueDataPath)
+Procedure Setter(Source, StepsEnablerName, DataPath, Parameters, Results, ViewNotify, ValueDataPath, NotifyAnyWay)
 	IsChanged = False;
 	For Each Result In Results Do
 		_Key   = Result.Options.Key;
@@ -881,11 +1084,11 @@ Procedure Setter(Source, StepsEnablerName, DataPath, Parameters, Results, ViewNo
 			IsChanged = True;
 		EndIf;
 	EndDo;
-	If IsChanged Then
+	If IsChanged Or NotifyAnyWay Then
 		AddViewNotify(ViewNotify, Parameters);
-		If ValueIsFilled(StepsEnablerName) Then
-			ModelClientServer_V2.EntryPoint(StepsEnablerName, Parameters);
-		EndIf;
+	EndIf;
+	If IsChanged And ValueIsFilled(StepsEnablerName) Then
+		ModelClientServer_V2.EntryPoint(StepsEnablerName, Parameters);
 	EndIf;
 EndProcedure
 
@@ -934,7 +1137,11 @@ Function GetProperty(Cache, Source, DataPath, Key)
 			EndDo;
 		EndIf;
 		If RowByKey = Undefined Then
-			RowByKey = Source[TableName].FindRows(New Structure("Key", Key))[0];
+			ArrayRowsByKey = Source[TableName].FindRows(New Structure("Key", Key));
+			If ArrayRowsByKey.Count() <> 1 Then
+				Raise StrTemplate("Found not 1 row by key [%1]", Key);
+			EndIf;
+			RowByKey = ArrayRowsByKey[0];
 		EndIf;
 		Return RowByKey[ColumnName];
 	Else
@@ -991,6 +1198,27 @@ Function SetProperty(Cache, DataPath, _Key, _Value)
 		Raise StrTemplate("Wrong data path [%1]", DataPath);
 	EndIf;	
 	Return True;
+EndFunction
+
+Function BindSteps(DefaulStepsEnabler, DataPath, Binding, Parameters)
+	MetadataBinding = New Map();
+	If Binding <> Undefined Then
+		For Each KeyValue In Binding Do
+			MetadataName = KeyValue.Key;
+			MetadataBinding.Insert(StrTemplate("%1.%2", MetadataName, DataPath), Binding[MetadataName]);
+		EndDo;
+	EndIf;
+	FullDataPath = StrTemplate("%1.%2", Parameters.ObjectMetadataInfo.MetadataName, DataPath);
+	StepsEnabler = MetadataBinding.Get(FullDataPath);
+	StepsEnabler = ?(StepsEnabler = Undefined, DefaulStepsEnabler, StepsEnabler);
+	If Not ValueIsFilled(StepsEnabler) Then
+		Raise StrTemplate("Steps enabler is not defined [%1]", DataPath);
+	Endif;
+	Result = New Structure();
+	Result.Insert("FullDataPath" , FullDataPath);
+	Result.Insert("StepsEnabler" , StepsEnabler);
+	Result.Insert("DataPath", DataPath);
+	Return Result;
 EndFunction
 
 Function IsUserChange(Parameters)

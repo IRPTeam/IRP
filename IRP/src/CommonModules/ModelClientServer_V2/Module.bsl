@@ -8,45 +8,50 @@
 
 Procedure EntryPoint(StepsEnablerName, Parameters) Export
 	InitEntryPoint(StepsEnablerName, Parameters);
-	Parameters.StepsEnablerNameCounter.Add(StepsEnablerName);
+	Parameters.ModelInveronment.StepsEnablerNameCounter.Add(StepsEnablerName);
 	
 #IF Client THEN
-	TmpParameters = New Structure("Form, Object", Parameters.Form, Parameters.Object);
+	Transfer = New Structure("Form, Object", Parameters.Form, Parameters.Object);
 	If ValueIsFilled(Parameters.FormPropertyNamesBeforeChange) Then
 		// превращаем форму в структуру, что бы на сервере были доступны реквизиты формы, из них нужно читать данные
-		TmpForm = New Structure(Parameters.FormPropertyNamesBeforeChange);
-		FillPropertyValues(TmpForm, TmpParameters.Form);
-		Parameters.Form = TmpForm;
+		TransferForm = New Structure(Parameters.FormPropertyNamesBeforeChange);
+		FillPropertyValues(TransferForm, Transfer.Form);
+		Parameters.Form = TransferForm;
 	Else
 		Parameters.Form = Undefined;
 	EndIf;
+	
+//	UnloadControllerModule(Parameters);
+//	UnloadViewModule(Parameters);
 #ENDIF
-	// переносим выполнение на сервер
+
 	ModelServer_V2.ServerEntryPoint(StepsEnablerName, Parameters);
 	
 #IF Client THEN
-	Parameters.Form   = TmpParameters.Form;
-	Parameters.Object = TmpParameters.Object;
-	LoadControllerModule(Parameters);
-	LoadViewModule(Parameters);
+	Parameters.Form   = Transfer.Form;
+	Parameters.Object = Transfer.Object;
+//	LoadControllerModule(Parameters);
+//	LoadViewModule(Parameters);
 #ENDIF
 	
 	// проверяем что кэш был инициализирован из этой EntryPoint
 	// и если это так и мы дошли до конца процедуры то значит что ChainComplete 
-	If Parameters.StepsEnablerName = StepsEnablerName Then
-		Parameters.ControllerModule.OnChainComplete(Parameters);
+	If Parameters.ModelInveronment.FirstStepsEnablerName = StepsEnablerName Then
+		Execute StrTemplate("%1.OnChainComplete(Parameters);", Parameters.ControllerModuleName);
+		DestroyEntryPoint(Parameters);
 	EndIf;
 EndProcedure
 
 Procedure ServerEntryPoint(StepsEnablerName, Parameters) Export
-	LoadControllerModule(Parameters);	
+	//LoadControllerModule(Parameters);	
 	Chain = GetChain();
 	Execute StrTemplate("%1.%2(Parameters, Chain);", Parameters.ControllerModuleName, StepsEnablerName);
 	ExecuteChain(Parameters, Chain);
 	
-	If Parameters.StepsEnablerName = StepsEnablerName Then
-		UnloadControllerModule(Parameters);
-	EndIf;	
+	//If Parameters.ModelInveronment.FirstStepsEnablerName = StepsEnablerName Then
+		//DestroyEntryPoint(Parameters);
+		//UnloadControllerModule(Parameters);
+	//EndIf;	
 EndProcedure
 
 #EndRegion
@@ -98,8 +103,16 @@ EndProcedure
 
 Function GetChain()
 	Chain = New Structure();
+	// Default.List
+	Chain.Insert("DefaultStoreInList"    , GetChainLink("DefaultStoreInListExecute"));
+	Chain.Insert("DefaultQuantityInList" , GetChainLink("DefaultQuantityInListExecute"));
+	
+	// Default.Header
+	Chain.Insert("DefaultStoreInHeader", GetChainLink("DefaultStoreInHeaderExecute"));
+		
+	// Changes
 	Chain.Insert("ChangeManagerSegmentByPartner", GetChainLink("ChangeManagerSegmentByPartnerExecute"));
-	Chain.Insert("LegalName"        , GetChainLink("LegalNameExecute"));
+	Chain.Insert("ChangeLegalNameByPartner"     , GetChainLink("ChangeLegalNameByPartnerExecute"));
 	Chain.Insert("Agreement"        , GetChainLink("AgreementExecute"));
 	Chain.Insert("Company"          , GetChainLink("CompanyExecute"));
 	Chain.Insert("ChangeItemKeyByItem"    , GetChainLink("ChangeItemKeyByItemExecute"));
@@ -123,6 +136,14 @@ EndFunction
 // При изменении Item изменяется ItemKey при изменении ItemKey изменяется Unit который может изменить QuantityInBaseUnit
 // этот код может применятся во всех документах где есть Item, ItemKey, Unit, QuantityInBaseUnit, Quantity
 
+Function DefaultQuantityInListOptions() Export
+	Return GetChainLinkOptions("CurrentQuantity");
+EndFunction
+
+Function DefaultQuantityInListExecute(Options) Export
+	Return ?(ValueIsFilled(Options.CurrentQuantity), Options.CurrentQuantity, 1);
+EndFunction
+
 // Параметры которые нужны для вычисления ItemKey
 Function ChangeItemKeyByItemOptions() Export
 	Return GetChainLinkOptions("Item");
@@ -145,6 +166,9 @@ EndFunction
 // Возвращает Unit по ItemKey который передан в параметре Options.ItemKey
 Function ChangeUnitByItemKeyExecute(Options) Export
 	// вычисление Unit возлагаем на функцию ItemUnitInfo() вся логика получения Unit в ней
+	If Not ValueIsFilled(Options.ItemKey) Then
+		Return Undefined;
+	EndIf;
 	UnitInfo = GetItemInfo.ItemUnitInfo(Options.ItemKey);
 	Return UnitInfo.Unit;
 EndFunction
@@ -185,11 +209,11 @@ EndFunction
 
 #Region LEGAL_NAME
 
-Function LegalNameOptions() Export
+Function ChangeLegalNameByPartnerOptions() Export
 	Return GetChainLinkOptions("Partner, LegalName");
 EndFunction
 
-Function LegalNameExecute(Options) Export
+Function ChangeLegalNameByPartnerExecute(Options) Export
 	Return DocumentsServer.GetLegalNameByPartner(Options.Partner, Options.LegalName);
 EndFunction
 
@@ -271,6 +295,67 @@ EndFunction
 #EndRegion
 
 #Region STORE
+
+Function DefaultStoreInHeaderOptions() Export
+	Return GetChainLinkOptions("DocumentRef, ArrayOfStoresInList, Agreement");
+EndFunction
+
+// Заполняет склад в шапке по умолчанию
+Function DefaultStoreInHeaderExecute(Options) Export
+	ArrayOfStoresUnique = New Array();
+	For Each Store In Options.ArrayOfStoresInList Do
+		If ValueIsFilled(Store) And ArrayOfStoresUnique.Find(Store) = Undefined Then
+			ArrayOfStoresUnique.Add(Store);
+		EndIf;
+	EndDo;
+	If ArrayOfStoresUnique.Count() = 1 Then
+		Return ArrayOfStoresUnique[0]; // В табличной части указан один склад
+	ElsIf ArrayOfStoresUnique.Count() > 1 Then
+		Return Undefined; // В табличной части указаны несколько складов
+	EndIf;
+	
+	// когда табличная часть пустая склад заполняется из Agreement или из UserSettings
+	
+	If ValueIsFilled(Options.Agreement) Then
+		StoreInAgreement = Options.Agreement.Store;
+		If ValueIsFilled(StoreInAgreement) Then
+			Return StoreInAgreement; // Склад указанный в Agreement
+		EndIf;
+	EndIf;
+	
+	UserSettings = UserSettingsServer.GetUserSettingsForClientModule(Options.DocumentRef);
+	For Each Setting In UserSettings Do
+		If Setting.AttributeName = "ItemList.Store" Then
+			Return Setting.Value; // Склад указанный в настройках пользователя
+		EndIf;
+	EndDo;
+	
+	Return Undefined;
+EndFunction
+
+Function DefaultStoreInListOptions() Export
+	Return GetChainLinkOptions("StoreFromUserSettings, StoreInList, StoreInHeader, Agreement");
+EndFunction
+
+// Заполняет склад в табличной части по умолчанию
+Function DefaultStoreInListExecute(Options) Export
+	If ValueIsFilled(Options.StoreInList) Then
+		Return Options.StoreInList; // Склад уже заполнен
+	EndIf;
+	
+	If ValueIsFilled(Options.StoreInHeader) Then
+		Return Options.StoreInHeader; // Склад указанный в шапке документа
+	EndIf;
+	
+	If ValueIsFilled(Options.Agreement) Then
+		StoreInAgreement = Options.Agreement.Store;
+		If ValueIsFilled(StoreInAgreement) Then
+			Return StoreInAgreement; // Склад указанный в Agreement
+		EndIf;
+	EndIf;
+	
+	Return Options.StoreFromUserSettings; // Склад указанный в настройках пользователя
+EndFunction
 
 Function ChangeUseShipmentConfirmationByStoreOptions() Export
 	Return GetChainLinkOptions("Store, ItemKey");
@@ -681,32 +766,53 @@ EndFunction
 
 #EndRegion
 
-// все измененные данные хранятся в кэше, для возможности откатить изменения, если пользователь откажется от изменений
-// кэш инициализируется только один раз внезависимости от того какой именно EntryPoint использован
 Procedure InitEntryPoint(StepsEnablerName, Parameters)
-	If Not Parameters.Property("StepsEnablerName") Then
-		Parameters.Insert("StepsEnablerName"      , StepsEnablerName);
-		Parameters.Insert("ControllerModule"      , Undefined);
-		Parameters.Insert("ViewModule"            , Undefined);
-		Parameters.Insert("StepsEnablerNameCounter" , New Array());
+	If Not Parameters.Property("ModelInveronment") Then
+		Inveronment = New Structure();
+		Inveronment.Insert("FirstStepsEnablerName", StepsEnablerName);
+//		Inveronment.Insert("ControllerModule", Undefined);
+//		Inveronment.Insert("ViewModule", Undefined);
+		Inveronment.Insert("StepsEnablerNameCounter", New Array());
+		Parameters.Insert("ModelInveronment", Inveronment)
 	EndIf;
+//	If Not Parameters.Property("StepsEnablerName") Then
+//		Parameters.Insert("StepsEnablerName"      , StepsEnablerName);
+//		Parameters.Insert("ControllerModule"      , Undefined);
+//		Parameters.Insert("StepsEnablerNameCounter" , New Array());
+//	EndIf;
 EndProcedure
 
-Procedure LoadControllerModule(Parameters)
-	If Parameters.ControllerModule = Undefined Then
-		Parameters.ControllerModule = Eval(Parameters.ControllerModuleName);
+Procedure DestroyEntryPoint(Parameters)
+	If Parameters.Property("ModelInveronment") Then
+		Parameters.Delete("ModelInveronment");
 	EndIf;
+//	If Parameters.Property("StepsEnablerName") Then
+//		Parameters.Delete("StepsEnablerName");
+//		Parameters.Delete("ControllerModule");
+//		Parameters.Delete("ViewModule");
+//		Parameters.Delete("StepsEnablerNameCounter");
+//	EndIf;
 EndProcedure
 
-Procedure LoadViewModule(Parameters)
-	If Parameters.ViewModule = Undefined Then
-		Parameters.ViewModule = Eval(Parameters.ViewModuleName);
-	EndIf;
-EndProcedure
+//Procedure LoadControllerModule(Parameters)
+//	If Parameters.ModelInveronment.ControllerModule = Undefined Then
+//		Parameters.ModelInveronment.ControllerModule = Eval(Parameters.ControllerModuleName);
+//	EndIf;
+//EndProcedure
 
-Procedure UnloadControllerModule(Parameters)
-	Parameters.ControllerModule = Undefined;
-EndProcedure
+//Procedure LoadViewModule(Parameters)
+//	If Parameters.ModelInveronment.ViewModule = Undefined Then
+//		Parameters.ModelInveronment.ViewModule = Eval(Parameters.ControllerModuleName);
+//	EndIf;
+//EndProcedure
+
+//Procedure UnloadControllerModule(Parameters)
+//	Parameters.ModelInveronment.ControllerModule = Undefined;
+//EndProcedure
+
+//Procedure UnloadViewModule(Parameters)
+//	Parameters.ModelInveronment.ViewModule = Undefined;
+//EndProcedure
 
 Procedure Init_API(StepsEnablerName, Parameters) Export
 	InitEntryPoint(StepsEnablerName, Parameters);

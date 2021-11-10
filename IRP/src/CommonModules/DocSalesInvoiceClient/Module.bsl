@@ -80,7 +80,7 @@ Procedure OnOpen(Object, Form, Cancel, AddInfo = Undefined) Export
 		"QuantityInShipmentConfirmation");
 		
 //
-ViewClient_V2.OnOpen(Object, Form);
+//ViewClient_V2.OnOpen(Object, Form);
 //
 EndProcedure
 
@@ -269,25 +269,25 @@ EndFunction
 //==================================================================================================
 
 Procedure ItemListPriceTypeOnChange(Object, Form, Item, AddInfo = Undefined) Export
-	ViewClient_V2.ItemListPriceTypeOnChange(Object, Form);
-	//DocumentsClient.ItemListPriceTypeOnChange(Object, Form, ThisObject, Item, Undefined, AddInfo);
+	//ViewClient_V2.ItemListPriceTypeOnChange(Object, Form);
+	DocumentsClient.ItemListPriceTypeOnChange(Object, Form, ThisObject, Item, Undefined, AddInfo);
 EndProcedure
 
-//Procedure ItemListPriceTypeOnChangePutServerDataToAddInfo(Object, Form, AddInfo = Undefined) Export
-//	DocumentsClient.ItemListPriceTypeOnChangePutServerDataToAddInfo(Object, Form, AddInfo);
-//EndProcedure
+Procedure ItemListPriceTypeOnChangePutServerDataToAddInfo(Object, Form, AddInfo = Undefined) Export
+	DocumentsClient.ItemListPriceTypeOnChangePutServerDataToAddInfo(Object, Form, AddInfo);
+EndProcedure
 
-//Function ItemListPriceTypeSettings(Object, Form, AddInfo = Undefined) Export
-//	If AddInfo = Undefined Then
-//		Return New Structure("PutServerDataToAddInfo", True);
-//	EndIf;
-//
-//	Settings = New Structure("Actions, ObjectAttributes, FormAttributes");
-//	Settings.Actions = New Structure();
-//	Settings.ObjectAttributes = "";
-//	Settings.FormAttributes = "";
-//	Return Settings;
-//EndFunction
+Function ItemListPriceTypeSettings(Object, Form, AddInfo = Undefined) Export
+	If AddInfo = Undefined Then
+		Return New Structure("PutServerDataToAddInfo", True);
+	EndIf;
+
+	Settings = New Structure("Actions, ObjectAttributes, FormAttributes");
+	Settings.Actions = New Structure();
+	Settings.ObjectAttributes = "";
+	Settings.FormAttributes = "";
+	Return Settings;
+EndFunction
 
 #EndRegion
 
@@ -321,58 +321,58 @@ EndFunction
 #Region Quantity
 
 Procedure ItemListQuantityOnChange(Object, Form, Item = Undefined, CurrentRowData = Undefined, AddInfo = Undefined) Export
-	ViewClient_V2.ItemListQuantityOnChange(Object, Form);
+	//ViewClient_V2.ItemListQuantityOnChange(Object, Form);
 	
-//	CurrentData = DocumentsClient.GetCurrentRowDataList(Form.Items.ItemList, CurrentRowData);
-//	If CurrentData = Undefined Then
-//		Return;
-//	EndIf;
-//	DocumentsClient.ItemListCalculateRowAmounts_QuantityChange(Object, Form, CurrentData, Item, ThisObject, AddInfo);
-//	SerialLotNumberClient.UpdateSerialLotNumbersTree(Object, Form);
-//	DocumentsClient.UpdateTradeDocumentsTree(Object, Form, "ShipmentConfirmations", "ShipmentConfirmationsTree", "QuantityInShipmentConfirmation");
+	CurrentData = DocumentsClient.GetCurrentRowDataList(Form.Items.ItemList, CurrentRowData);
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	DocumentsClient.ItemListCalculateRowAmounts_QuantityChange(Object, Form, CurrentData, Item, ThisObject, AddInfo);
+	SerialLotNumberClient.UpdateSerialLotNumbersTree(Object, Form);
+	DocumentsClient.UpdateTradeDocumentsTree(Object, Form, "ShipmentConfirmations", "ShipmentConfirmationsTree", "QuantityInShipmentConfirmation");
 EndProcedure
 
-//Procedure ItemListQuantityPutServerDataToAddInfo(Object, Form, CurrentData, AddInfo = Undefined) Export
-//	DocumentsClient.ItemListQuantityPutServerDataToAddInfo(Object, Form, CurrentData, AddInfo);
-//EndProcedure
+Procedure ItemListQuantityPutServerDataToAddInfo(Object, Form, CurrentData, AddInfo = Undefined) Export
+	DocumentsClient.ItemListQuantityPutServerDataToAddInfo(Object, Form, CurrentData, AddInfo);
+EndProcedure
 
 #EndRegion
 
 #Region Price
 
 Procedure ItemListPriceOnChange(Object, Form, Item = Undefined, CurrentRowData = Undefined, AddInfo = Undefined) Export
-	ViewClient_V2.ItemListPriceOnChange(Object, Form);
-//	CurrentData = DocumentsClient.GetCurrentRowDataList(Form.Items.ItemList, CurrentRowData);
-//	If CurrentData = Undefined Then
-//		Return;
-//	EndIf;
-//	DocumentsClient.ItemListCalculateRowAmounts_PriceChange(Object, Form, CurrentData, Item, ThisObject, AddInfo);
+	//ViewClient_V2.ItemListPriceOnChange(Object, Form);
+	CurrentData = DocumentsClient.GetCurrentRowDataList(Form.Items.ItemList, CurrentRowData);
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	DocumentsClient.ItemListCalculateRowAmounts_PriceChange(Object, Form, CurrentData, Item, ThisObject, AddInfo);
 EndProcedure
 
-//Procedure ItemListPricePutServerDataToAddInfo(Object, Form, CurrentData, AddInfo = Undefined) Export
-//	DocumentsClient.ItemListPricePutServerDataToAddInfo(Object, Form, CurrentData, AddInfo);
-//EndProcedure
+Procedure ItemListPricePutServerDataToAddInfo(Object, Form, CurrentData, AddInfo = Undefined) Export
+	DocumentsClient.ItemListPricePutServerDataToAddInfo(Object, Form, CurrentData, AddInfo);
+EndProcedure
 
 #EndRegion
 
 #Region TotalAmount
 
 Procedure ItemListTotalAmountOnChange(Object, Form, Item = Undefined, CurrentRowData = Undefined, AddInfo = Undefined) Export
-	ViewClient_V2.ItemListTotalAmountOnChange(Object, Form);
+	//ViewClient_V2.ItemListTotalAmountOnChange(Object, Form);
 	
-//	CurrentData = DocumentsClient.GetCurrentRowDataList(Form.Items.ItemList, CurrentRowData);
-//	If CurrentData = Undefined Then
-//		Return;
-//	EndIf;
-//	If Not CurrentData.DontCalculateRow Then
-//		DocumentsClient.ItemListCalculateRowAmounts_TotalAmountChange(Object, Form, CurrentData, Item, ThisObject,
-//			AddInfo);
-//	EndIf;
+	CurrentData = DocumentsClient.GetCurrentRowDataList(Form.Items.ItemList, CurrentRowData);
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	If Not CurrentData.DontCalculateRow Then
+		DocumentsClient.ItemListCalculateRowAmounts_TotalAmountChange(Object, Form, CurrentData, Item, ThisObject,
+			AddInfo);
+	EndIf;
 EndProcedure
 
-//Procedure ItemListTotalAmountPutServerDataToAddInfo(Object, Form, CurrentData, AddInfo = Undefined) Export
-//	DocumentsClient.ItemListTotalAmountPutServerDataToAddInfo(Object, Form, CurrentData, AddInfo);
-//EndProcedure
+Procedure ItemListTotalAmountPutServerDataToAddInfo(Object, Form, CurrentData, AddInfo = Undefined) Export
+	DocumentsClient.ItemListTotalAmountPutServerDataToAddInfo(Object, Form, CurrentData, AddInfo);
+EndProcedure
 
 #EndRegion
 
@@ -430,8 +430,8 @@ EndProcedure
 #Region Store
 
 Procedure ItemListStoreOnChange(Object, Form, Item, AddInfo = Undefined) Export
-	ViewClient_V2.ItemListStoreOnChange(Object, Form);
-	//DocumentsClient.ItemListStoreOnChange(Object, Form, ThisObject, Item);
+	//ViewClient_V2.ItemListStoreOnChange(Object, Form);
+	DocumentsClient.ItemListStoreOnChange(Object, Form, ThisObject, Item);
 EndProcedure
 
 #EndRegion
@@ -479,33 +479,33 @@ EndProcedure
 #Region ItemPartner
 
 Procedure PartnerOnChange(Object, Form, Item, AddInfo = Undefined) Export
-	ViewClient_V2.PartnerOnChange(Object, Form);
-//	DocumentsClient.PartnerOnChange(Object, Form, ThisObject, Item, Undefined, AddInfo);
+	//ViewClient_V2.PartnerOnChange(Object, Form);
+	DocumentsClient.PartnerOnChange(Object, Form, ThisObject, Item, Undefined, AddInfo);
 EndProcedure
 
-//Procedure PartnerOnChangePutServerDataToAddInfo(Object, Form, AddInfo = Undefined) Export
-//	DocumentsClient.PartnerOnChangePutServerDataToAddInfo(Object, Form, AddInfo);
-//EndProcedure
+Procedure PartnerOnChangePutServerDataToAddInfo(Object, Form, AddInfo = Undefined) Export
+	DocumentsClient.PartnerOnChangePutServerDataToAddInfo(Object, Form, AddInfo);
+EndProcedure
 
-//Function PartnerSettings(Object, Form, AddInfo = Undefined) Export
-//	If AddInfo = Undefined Then
-//		Return New Structure("PutServerDataToAddInfo", True);
-//	EndIf;
-//	ServerData = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "ServerData");
-//
-//	Settings = New Structure("Actions, ObjectAttributes, FormAttributes, AgreementType");
-//
-//	Actions = New Structure();
-//	Actions.Insert("ChangeManagerSegment", "ChangeManagerSegment");
-//	Actions.Insert("ChangeLegalName", "ChangeLegalName");
-//	Actions.Insert("ChangeAgreement", "ChangeAgreement");
-//	Settings.Actions = Actions;
-//
-//	Settings.ObjectAttributes 	= "Company, Currency, PriceIncludeTax, Agreement, LegalName, ManagerSegment";
-//	Settings.FormAttributes		= "CurrentPriceType";
-//	Settings.AgreementType      = ServerData.AgreementTypes_Customer;
-//	Return Settings;
-//EndFunction
+Function PartnerSettings(Object, Form, AddInfo = Undefined) Export
+	If AddInfo = Undefined Then
+		Return New Structure("PutServerDataToAddInfo", True);
+	EndIf;
+	ServerData = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "ServerData");
+
+	Settings = New Structure("Actions, ObjectAttributes, FormAttributes, AgreementType");
+
+	Actions = New Structure();
+	Actions.Insert("ChangeManagerSegment", "ChangeManagerSegment");
+	Actions.Insert("ChangeLegalName", "ChangeLegalName");
+	Actions.Insert("ChangeAgreement", "ChangeAgreement");
+	Settings.Actions = Actions;
+
+	Settings.ObjectAttributes 	= "Company, Currency, PriceIncludeTax, Agreement, LegalName, ManagerSegment";
+	Settings.FormAttributes		= "CurrentPriceType";
+	Settings.AgreementType      = ServerData.AgreementTypes_Customer;
+	Return Settings;
+EndFunction
 
 Procedure PartnerStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
 	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
@@ -720,49 +720,49 @@ EndProcedure
 #Region StoreEvents
 
 Procedure StoreOnChange(Object, Form, Item, AddInfo = Undefined) Export
-	ViewClient_V2.StoreOnChange(Object, Form);
-	//DocumentsClient.StoreOnChange(Object, Form, ThisObject, Item, Undefined, AddInfo);
+	//ViewClient_V2.StoreOnChange(Object, Form);
+	DocumentsClient.StoreOnChange(Object, Form, ThisObject, Item, Undefined, AddInfo);
 EndProcedure
 
-//Procedure StoreOnChangePutServerDataToAddInfo(Object, Form, AddInfo = Undefined) Export
-//	DocumentsClient.StoreOnChangePutServerDataToAddInfo(Object, Form, AddInfo);
-//EndProcedure
-//
-//Function StoreSettings(Object, Form, AddInfo = Undefined) Export
-//	If AddInfo = Undefined Then
-//		Return New Structure("PutServerDataToAddInfo", True);
-//	EndIf;
-//
-//	Settings = New Structure("Actions, ObjectAttributes, FormAttributes");
-//
-//	Actions = New Structure();
-//	Actions.Insert("UpdateStore", "UpdateStore");
-//	Settings.Actions = Actions;
-//	Settings.ObjectAttributes = "Company";
-//	Settings.FormAttributes = "Store, CurrentPriceType";
-//	Return Settings;
-//EndFunction
+Procedure StoreOnChangePutServerDataToAddInfo(Object, Form, AddInfo = Undefined) Export
+	DocumentsClient.StoreOnChangePutServerDataToAddInfo(Object, Form, AddInfo);
+EndProcedure
+
+Function StoreSettings(Object, Form, AddInfo = Undefined) Export
+	If AddInfo = Undefined Then
+		Return New Structure("PutServerDataToAddInfo", True);
+	EndIf;
+
+	Settings = New Structure("Actions, ObjectAttributes, FormAttributes");
+
+	Actions = New Structure();
+	Actions.Insert("UpdateStore", "UpdateStore");
+	Settings.Actions = Actions;
+	Settings.ObjectAttributes = "Company";
+	Settings.FormAttributes = "Store, CurrentPriceType";
+	Return Settings;
+EndFunction
 
 #EndRegion
 
 #Region PriceIncludeTaxEvents
 
 Procedure PriceIncludeTaxOnChange(Object, Form, Item, AddInfo = Undefined) Export
-	ViewClient_V2.PriceIncludeTaxOnChange(Object, Form);
-	//DocumentsClient.PriceIncludeTaxOnChange(Object, Form, ThisObject, Item, Undefined, AddInfo);
+	//ViewClient_V2.PriceIncludeTaxOnChange(Object, Form);
+	DocumentsClient.PriceIncludeTaxOnChange(Object, Form, ThisObject, Item, Undefined, AddInfo);
 EndProcedure
 
-//Procedure PriceIncludeTaxOnChangePutServerDataToAddInfo(Object, Form, AddInfo = Undefined) Export
-//	DocumentsClient.PriceIncludeTaxOnChangePutServerDataToAddInfo(Object, Form, AddInfo);
-//EndProcedure
-//
-//Function PriceIncludeTaxSettings(Object, Form, AddInfo = Undefined) Export
-//	If AddInfo = Undefined Then
-//		Return New Structure("PutServerDataToAddInfo", True);
-//	EndIf;
-//
-//	Return New Structure();
-//EndFunction
+Procedure PriceIncludeTaxOnChangePutServerDataToAddInfo(Object, Form, AddInfo = Undefined) Export
+	DocumentsClient.PriceIncludeTaxOnChangePutServerDataToAddInfo(Object, Form, AddInfo);
+EndProcedure
+
+Function PriceIncludeTaxSettings(Object, Form, AddInfo = Undefined) Export
+	If AddInfo = Undefined Then
+		Return New Structure("PutServerDataToAddInfo", True);
+	EndIf;
+
+	Return New Structure();
+EndFunction
 
 #EndRegion
 

@@ -5,7 +5,7 @@ Procedure OnOpen(Object, Form, Cancel, AddInfo = Undefined) Export
 	If Not ValueIsFilled(Object.Ref) Then
 		CheckFillData(Object, Form);
 	EndIf;
-	ViewClient_V2.OnOpen(Object, Form);
+	//ViewClient_V2.OnOpen(Object, Form);
 EndProcedure
 
 #EndRegion
@@ -158,9 +158,9 @@ Procedure SenderEditTextChange(Object, Form, Item, Text, StandardProcessing) Exp
 EndProcedure
 
 Procedure SenderOnChange(Object, Form, Item) Export
-	//CommonFunctionsClientServer.SetFormItemModifiedByUser(Form, Item.Name);
-	//SetSenderCurrency(Object, Form);
-	ViewClient_V2.AccountSenerOnChange(Object, Form);
+	CommonFunctionsClientServer.SetFormItemModifiedByUser(Form, Item.Name);
+	SetSenderCurrency(Object, Form);
+	//ViewClient_V2.AccountSenerOnChange(Object, Form);
 EndProcedure
 
 Procedure SenderStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
@@ -210,10 +210,10 @@ Procedure ReceiverEditTextChange(Object, Form, Item, Text, StandardProcessing) E
 EndProcedure
 
 Procedure ReceiverOnChange(Object, Form, Item) Export
-//	CommonFunctionsClientServer.SetFormItemModifiedByUser(Form, Item.Name);
-//	SetReceiverCurrency(Object, Form);
-//	FillReceiveAmountBySendAmount(Object, Form);
-	ViewClient_V2.AccountReceiverOnChange(Object, Form);
+	CommonFunctionsClientServer.SetFormItemModifiedByUser(Form, Item.Name);
+	SetReceiverCurrency(Object, Form);
+	FillReceiveAmountBySendAmount(Object, Form);
+	//ViewClient_V2.AccountReceiverOnChange(Object, Form);
 EndProcedure
 
 Procedure ReceiverStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export

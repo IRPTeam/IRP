@@ -15,8 +15,8 @@ Procedure FillingWithDefaultDataFilling(Source, FillingData, FillingText, Standa
 	Data = New Structure();
 	Data.Insert("ManagerSegment", SessionParameters.CurrentUserPartner);
 	For Each Row In UserSettings Do
-		If Row.KindOfAttribute = Enums.KindsOfAttributes.Regular Or Row.KindOfAttribute
-			= Enums.KindsOfAttributes.Common Then
+		If Row.KindOfAttribute = Enums.KindsOfAttributes.Regular 
+			Or Row.KindOfAttribute = Enums.KindsOfAttributes.Common Then
 			Data.Insert(Row.AttributeName, Row.Value);
 		EndIf;
 	EndDo;
@@ -46,18 +46,19 @@ Procedure FillingWithDefaultDataFilling(Source, FillingData, FillingText, Standa
 	AgreementAttribute = Attributes.Find("Agreement");
 	If AgreementAttribute <> Undefined And AgreementAttribute.Type = New TypeDescription("CatalogRef.Agreements") Then
 
-		If Attributes.Find("Partner") <> Undefined And ValueIsFilled(Source.Partner) And ValueIsFilled(
-			Source.Agreement) Then
-			AgreementParameters = New Structure();
-			AgreementParameters.Insert("Partner", Source.Partner);
-			AgreementParameters.Insert("Agreement", Source.Agreement);
-			AgreementParameters.Insert("CurrentDate", CurrentDate());
-			AgreementParameters.Insert("ArrayOfFilters", New Array());
-			AgreementParameters.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", True,
-				ComparisonType.NotEqual));
-			AgreementParameters.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Kind", PredefinedValue(
-				"Enum.AgreementKinds.Standard"), ComparisonType.NotEqual));
-			Source.Agreement = DocumentsServer.GetAgreementByPartner(AgreementParameters);
+		If Attributes.Find("Partner") <> Undefined 
+			And ValueIsFilled(Source.Partner) 
+			And ValueIsFilled(Source.Agreement) Then
+				AgreementParameters = New Structure();
+				AgreementParameters.Insert("Partner"        , Source.Partner);
+				AgreementParameters.Insert("Agreement"      , Source.Agreement);
+				AgreementParameters.Insert("CurrentDate"    , CurrentDate());
+				AgreementParameters.Insert("ArrayOfFilters" , New Array());
+				AgreementParameters.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark",
+					True, ComparisonType.NotEqual));
+				AgreementParameters.ArrayOfFilters.Add(DocumentsClientServer.CreateFilterItem("Kind",
+					PredefinedValue("Enum.AgreementKinds.Standard"), ComparisonType.NotEqual));
+				Source.Agreement = DocumentsServer.GetAgreementByPartner(AgreementParameters);
 		EndIf;
 
 	EndIf;

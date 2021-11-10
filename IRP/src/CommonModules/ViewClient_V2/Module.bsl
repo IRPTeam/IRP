@@ -4,9 +4,38 @@
 // В ЭТОМ МОДУЛЕ ТОЛЬКО МОДИФИКАЦИЯ ФОРМЫ, ВПРОСЫ ПОЛЬЗОВАТЕЛЮ и прочие клиентские вещи
 // ДЕЛАТЬ ИЗМЕНЕНИЯ объекта нельзя только чтение
 
-Function GetParameters(Object, Form, TableName = "", Rows = Undefined, 
+Function GetServerParameters()
+	Result = New Structure();
+	Result.Insert("TableName", "");
+	Result.Insert("Rows", Undefined);
+	
+	Return Result;
+EndFunction
+
+Function GetFormParameters()
+	Result = New Structure();
+	Result.Insert("ObjectPropertyDataPathBeforeChange", "");
+	Result.Insert("FormPropertyDataPathBeforeChange", "");
+	Result.Insert("EventCaller", "");
+	Return Result;
+EndFunction
+
+Function _GetParameters(Object, Form, ServerParameters, FormParameters = Undefined)
+	If FormParameters <> Undefined Then
+		Return GetParameters(Object, Form, ServerParameters.TableName, ServerParameters.Rows,
+			FormParameters.ObjectPropertyDataPathBeforeChange,
+			FormParameters.FormPropertyDataPathBeforeChange,
+			FormParameters.EventCaller); 
+	EndIf;
+	Return GetParameters(Object, Form, ServerParameters.TableName, ServerParameters.Rows);
+EndFunction
+
+Function GetParameters(Object, Form, 
+						TableName = "", 
+						Rows = Undefined, 
 						ObjectPropertyDataPathBeforeChange = "", 
-						FormPropertyDataPathBeforeChange = "")
+						FormPropertyDataPathBeforeChange = "",
+						EventCaller = "")
 	Parameters = New Structure();
 	// параметры для Client 
 	Parameters.Insert("Form"           , Form);
@@ -25,6 +54,7 @@ Function GetParameters(Object, Form, TableName = "", Rows = Undefined,
 	Parameters.Insert("Object" , Object);
 	Parameters.Insert("Cache"  , New Structure());
 	Parameters.Insert("ControllerModuleName" , "ControllerClientServer_V2");
+	Parameters.Insert("EventCaller", EventCaller);
 	
 	// параметры для Client
 	// PropertyDataPath - имя реквизита для которого надо получить значение до изменения
@@ -50,7 +80,11 @@ Function GetParameters(Object, Form, TableName = "", Rows = Undefined,
 	If CommonFunctionsClientServer.ObjectHasProperty(Object, "TaxList") Then
 		ArrayOfTableNames.Add("TaxList");
 	EndIf;
+	// MetadataName
+	// Tables.TableName.Columns
+	// DependencyTables
 	ObjectMetadataInfo = ViewServer_V2.GetObjectMetadataInfo(Object, StrConcat(ArrayOfTableNames, ","));
+	
 	// Server
 	Parameters.Insert("ObjectMetadataInfo", ObjectMetadataInfo);
 	
@@ -138,19 +172,25 @@ Procedure UpdateCacheBeforeChange(Object, Form)
 EndProcedure
 
 Procedure OnChainComplete(Parameters) Export
-	// вся цепочка действий закончена, можно задавать вопросы пользователю, 
-	// выводить сообщения и т.п но не моифицировать object
-	
-	// тестовый вопрос
-	ShowQueryBox(New NotifyDescription("TestQuestionContinue", ThisObject, Parameters),
-		"Commit changes ?", QuestionDialogMode.YesNo);
-EndProcedure
-
-Procedure TestQuestionContinue(Result, Parameters) Export
-	If Result = DialogReturnCode.Yes Then
-		// если ответят положительно или спрашивать не надо, то переносим данные из кэш в объект
+	If Parameters.EventCaller = "StoreOnUserChange" Then
+		If Parameters.ObjectMetadataInfo.MetadataName = "ShipmentConfirmation" Then
+			// Вопрос про изменение склада в табличной части
+			NotifyParameters = New Structure("Parameters", Parameters);
+			ShowQueryBox(New NotifyDescription("StoreOnUserChangeContinue", ThisObject, NotifyParameters), 
+				R().QuestionToUser_005, QuestionDialogMode.YesNoCancel);
+			
+		EndIf;
+	Else
 		ControllerClientServer_V2.CommitChainChanges(Parameters);
 		UpdateCacheBeforeChange(Parameters.Object, Parameters.Form);
+	EndIf;
+EndProcedure
+
+Procedure StoreOnUserChangeContinue(Answer, NotifyPrameters) Export
+	If Answer = DialogReturnCode.Yes Then
+		ControllerClientServer_V2.CommitChainChanges(NotifyPrameters.Parameters);
+		UpdateCacheBeforeChange(NotifyPrameters.Parameters.Object,
+								NotifyPrameters.Parameters.Form);
 	EndIf;
 EndProcedure
 
@@ -173,10 +213,18 @@ Function AddOrCopyRow(Object, Form, TableName, Cancel, Clone, OriginRow)
 	Return NewRow;
 EndFunction
 
+Procedure DeleteRows(Object, Form, TableName)
+	ServerParameters = GetServerParameters();
+	ServerParameters.TableName = TableName;
+	ControllerClientServer_V2.DeleteRows(TableName, _GetParameters(Object, Form, ServerParameters));
+EndProcedure
+
 #Region FORM
 
 Procedure OnOpen(Object, Form) Export
 	UpdateCacheBeforeChange(Object, Form);
+	// перенести в серверный модуль
+	ControllerClientServer_V2.FillPropertyFormByDefault(Form,  "Store", GetParameters(Object, Form, "ItemList"));
 EndProcedure
 
 #EndRegion
@@ -189,8 +237,7 @@ Procedure ItemListBeforeAddRow(Object, Form, Cancel, Clone, CurrentData = Undefi
 EndProcedure
 
 Procedure ItemListAfterDeleteRow(Object, Form) Export
-	// Удалить строки из подчиненных таблиц
-	Return;
+	DeleteRows(Object, Form, "ItemList");
 EndProcedure
 
 #EndRegion
@@ -325,8 +372,16 @@ EndProcedure
 
 #Region STORE
 
+// реквизит формы
 Procedure StoreOnChange(Object, Form) Export
-	ControllerClientServer_V2.StoreOnChange(GetParameters(Object, Form, "ItemList", , , "Store"));
+	ServerParameters = GetServerParameters();
+	ServerParameters.TableName = "ItemList";
+	
+	FormParameters = GetFormParameters();
+	FormParameters.FormPropertyDataPathBeforeChange = "Store";
+	FormParameters.EventCaller = "StoreOnUserChange";
+	
+	ControllerClientServer_V2.StoreOnChange(_GetParameters(Object, Form, ServerParameters, FormParameters));
 EndProcedure
 
 Procedure OnSetStoreNotify(Parameters) Export
@@ -343,10 +398,26 @@ EndProcedure
 
 #EndRegion
 
+#Region COMPANY
+
+Procedure CompanyOnChange(Object, Form) Export
+	ControllerClientServer_V2.CompanyOnChange(GetParameters(Object, Form, "ItemList"));
+EndProcedure
+
+Procedure OnSetCompanyNotify(Parameters) Export
+	DocumentsClientServer.ChangeTitleGroupTitle(Parameters.Object, Parameters.Form);
+EndProcedure
+
+#EndRegion
+
 #Region PARTNER
 
 Procedure PartnerOnChange(Object, Form) Export
 	ControllerClientServer_V2.PartnerOnChange(GetParameters(Object, Form, "ItemList", , "Partner"));
+EndProcedure
+
+Procedure OnSetPartnerNotify(Parameters) Export
+	DocumentsClientServer.ChangeTitleGroupTitle(Parameters.Object, Parameters.Form);
 EndProcedure
 
 #EndRegion
@@ -402,12 +473,13 @@ Procedure ItemListQuantityOnChange(Object, Form, CurrentData = Undefined) Export
 EndProcedure
 
 Procedure OnSetItemListQuantityNotify(Parameters) Export
-	Object = Parameters.Object;
-	Form   = Parameters.Form;
-	// для Sales Invoice
-	SerialLotNumberClient.UpdateSerialLotNumbersTree(Object, Form);
-	DocumentsClient.UpdateTradeDocumentsTree(Object, Form, 
-	"ShipmentConfirmations", "ShipmentConfirmationsTree", "QuantityInShipmentConfirmation");
+	Return;
+//	Object = Parameters.Object;
+//	Form   = Parameters.Form;
+//	// для Sales Invoice
+//	SerialLotNumberClient.UpdateSerialLotNumbersTree(Object, Form);
+//	DocumentsClient.UpdateTradeDocumentsTree(Object, Form, 
+//	"ShipmentConfirmations", "ShipmentConfirmationsTree", "QuantityInShipmentConfirmation");
 EndProcedure
 
 #EndRegion

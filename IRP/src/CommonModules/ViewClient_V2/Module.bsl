@@ -234,6 +234,7 @@ EndProcedure
 Procedure ItemListBeforeAddRow(Object, Form, Cancel, Clone, CurrentData = Undefined) Export
 	NewRow = AddOrCopyRow(Object, Form, "ItemList", Cancel, Clone, CurrentData);
 	Form.Items.ItemList.CurrentRow = NewRow.GetID();
+	Form.Items.ItemList.ChangeRow();
 EndProcedure
 
 Procedure ItemListAfterDeleteRow(Object, Form) Export
@@ -267,10 +268,10 @@ EndProcedure
 
 // Вызывается при изменении реквизита Quantity в табличной части ItemList
 // в тех случаях когда в табличной части ItemList нет сумм (NetAmount, TotalAmount)
-Procedure ItemListQuantityWithoutAmountOnChange(Object, Form, CurrentData = Undefined) Export
-	Rows = GetRowsByCurrentData(Form, "ItemList", CurrentData);
-	ControllerClientServer_V2.ItemListQuantityWitoutAmountOnChange(GetParameters(Object, Form, "ItemList", Rows));
-EndProcedure
+//Procedure ItemListQuantityWithoutAmountOnChange(Object, Form, CurrentData = Undefined) Export
+//	Rows = GetRowsByCurrentData(Form, "ItemList", CurrentData);
+//	ControllerClientServer_V2.ItemListQuantityWitoutAmountOnChange(GetParameters(Object, Form, "ItemList", Rows));
+//EndProcedure
 
 #EndRegion
 

@@ -40,7 +40,7 @@ Procedure ItemListBeforeAddRow(Object, Form, Item, Cancel, Clone, Parent, IsFold
 	Cancel = True;
 	NewRow = Object.ItemList.Add();
 	Form.Items.ItemList.CurrentRow = NewRow.GetID();
-	UserSettingsClient.FillingRowFromSettings(Object, "Object.ItemList", NewRow, True);
+	UserSettingsClientServer.FillingRowFromSettings(Object, "Object.ItemList", NewRow, True);
 	Form.Items.ItemList.ChangeRow();
 	ItemListOnChange(Object, Form, Item);
 EndProcedure

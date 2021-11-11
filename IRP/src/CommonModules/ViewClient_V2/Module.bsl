@@ -292,7 +292,7 @@ EndProcedure
 
 #EndRegion
 
-#Region ITEM_LIST
+#Region _ITEM_LIST_
 
 Procedure ItemListBeforeAddRow(Object, Form, Cancel, Clone, CurrentData = Undefined) Export
 	NewRow = AddOrCopyRow(Object, Form, "ItemList", Cancel, Clone, CurrentData);

@@ -20,7 +20,12 @@ Function GetObjectMetadataInfo(Val Object, ArrayOfTableNames) Export
 			Continue;
 		EndIf;
 		ArrayOfColumns = New Array();
-		Columns = Object[TrimAll(TableName)].Unload().Columns;
+		Table = Object[TrimAll(TableName)];
+		If TypeOf(Table) = Type("ValueTable") Then
+			Columns = Table.Columns;
+		Else
+			Columns = Table.Unload().Columns;
+		EndIf;
 		For Each Column In Columns Do
 			ArrayOfColumns.Add(Column.Name);
 		EndDo;

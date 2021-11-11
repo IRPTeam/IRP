@@ -145,14 +145,32 @@ EndProcedure
 #ENDIF
 
 #Region API
+
+Function GetSetterNameByDataPath(DataPath)
+	SettersMap = New Map();
+	SettersMap.Insert("Partner", "SetPartner");
 	
+	SettersMap.Insert("ItemList.ItemKey"  , "SetItemListItemKey");
+	SettersMap.Insert("ItemList.Unit"     , "SetItemListUnit");
+	SettersMap.Insert("ItemList.Store"    , "SetItemListStore");
+	SettersMap.Insert("ItemList.Quantity" , "SetItemListQuantity");
+	Return SettersMap.Get(DataPath);
+EndFunction
+
 Procedure API_SetProperty(Parameters, Property, Value) Export
-	DataPath = Property.FullName();
-	SetPropertyObject(Parameters, DataPath, , Value);
-	Bindings = GetAllBindings(Parameters);
-	Binding = Bindings.Get(DataPath);
-	If Binding <> Undefined Then
-		ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+	SetterName = GetSetterNameByDataPath(Property.DataPath);
+	_Key = Undefined;
+	If StrSplit(Property.DataPath, ".").Count() = 2 Then
+		_Key = Parameters.Rows[0].Key;
+	EndIf;
+	If SetterName <> Undefined Then
+		Results = New Array();
+		Results.Add(New Structure("Options, Value", 
+			New Structure("Key", _Key), Value));
+		Execute StrTemplate("%1(Parameters, Results);", SetterName);
+	Else
+		SetPropertyObject(Parameters, Property.DataPath, _Key, Value);
+		CommitChainChanges(Parameters);
 	EndIf;
 EndProcedure
 	
@@ -180,7 +198,7 @@ Function GetAllFillByDefault(Parameters)
 	Return Binding;
 EndFunction
 
-#Region ITEM_LIST
+#Region _ITEM_LIST_
 
 Procedure AddNewRow(TableName, Parameters) Export
 	NewRow = Parameters.Rows[0];
@@ -511,7 +529,7 @@ Procedure CompanyOnChange(Parameters) Export
 EndProcedure
 
 // Company.Set
-Procedure CompanyName(Parameters, Results) Export
+Procedure SetCompany(Parameters, Results) Export
 	Binding = CompanyStepsBinding(Parameters);
 	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results, "OnSetCompanyNotify");
 EndProcedure
@@ -1243,15 +1261,19 @@ Procedure Setter(Source, StepsEnablerName, DataPath, Parameters, Results, ViewNo
 EndProcedure
 
 Procedure AddViewNotify(ViewNotify, Parameters)
-	If Parameters.Property("ViewNotify") And ViewNotify <> Undefined Then
-		// переадресация в клиентский модуль, вызов был с клиента, на форме что то надо обновить
-		// вызывать будем потом когда завершится вся цепочка действий, и изменения будут перенесены с кэша в объект
+	// переадресация в клиентский модуль, вызов был с клиента, на форме что то надо обновить
+	// вызывать будем потом когда завершится вся цепочка действий, и изменения будут перенесены с кэша в объект
+	If ValueIsFilled(ViewNotify) Then
 		Parameters.ViewNotify.Add(ViewNotify);
-	EndIf;	
+	EndIf;
 EndProcedure
 
 Function GetPropertyForm(Parameters, DataPath, Key = Undefined)
+#IF Client THEN
 	Return GetProperty(Parameters.CacheForm, Parameters.Form, DataPath, Key);
+#ELSE
+	Return Undefined;
+#ENDIF
 EndFunction
 
 Function GetPropertyObject(Parameters, DataPath, Key = Undefined)

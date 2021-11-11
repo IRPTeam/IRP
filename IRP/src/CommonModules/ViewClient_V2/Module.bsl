@@ -288,7 +288,7 @@ EndProcedure
 Function NeedQueryStoreOnUserChange(Parameters)
 	If Parameters.Cache.Property("ItemList") Then
 		For Each Row In Parameters.Cache.ItemList Do
-			If Row.Property("Store") And ValueIsFilled(Row.Store) Then
+			If Row.Property("Store") Then //And ValueIsFilled(Row.Store) Then
 				Return True;
 			EndIf;
 		EndDo;

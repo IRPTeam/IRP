@@ -387,17 +387,19 @@ Function ChangeOrderSchemeByStore(Options, ReceiptShipment)
 EndFunction
 
 Function FillStoresInListOptions() Export
-	Return GetChainLinkOptions("Store, StoreInList");
+	Return GetChainLinkOptions("Store, StoreInList, IsUserChange");
 EndFunction
 
 // заполняет Store в табличной части, тем Store что передан в параметре если переданный склад заполнен
 // если не заполнен то оставляет тот склад что указан в табличной части
 Function FillStoresInListExecute(Options) Export
-	If Not ValueIsFilled(Options.Store) Then
-		Return Options.StoreInList;
-	Else
+	If ValueIsFilled(Options.IsUserChange) Then
 		Return Options.Store;
 	EndIf;
+	If ValueIsFilled(Options.Store) Then
+		Return Options.Store;
+	EndIf;
+	Return Options.StoreInList;
 EndFunction
 
 Function ChangeStoreInHeaderByStoresInListOptions() Export

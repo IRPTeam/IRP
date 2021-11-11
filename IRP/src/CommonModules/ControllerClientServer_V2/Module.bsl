@@ -570,8 +570,9 @@ Procedure StoreStepsEnabler(Parameters, Chain) Export
 	
 	For Each Row In GetRows(Parameters, "ItemList") Do
 		Options = ModelClientServer_V2.FillStoresInListOptions();
-		Options.Store       = GetPropertyForm(Parameters, "Store");
-		Options.StoreInList = GetPropertyObject(Parameters, "ItemList.Store", Row.Key);
+		Options.Store        = GetPropertyForm(Parameters, "Store");
+		Options.StoreInList  = GetPropertyObject(Parameters, "ItemList.Store", Row.Key);
+		Options.IsUserChange = IsUserChange(Parameters);
 		Options.Key = Row.Key;
 		Chain.FillStoresInList.Options.Add(Options);
 	EndDo;
@@ -1243,8 +1244,9 @@ Function BindSteps(DefaulStepsEnabler, DataPath, Binding, Parameters)
 EndFunction
 
 Function IsUserChange(Parameters)
-	If Parameters.Property("StepsEnablerNameCounter") Then
-		Return Parameters.StepsEnablerNameCounter.Count() = 1;
+	If Parameters.Property("ModelInveronment")
+		And Parameters.ModelInveronment.Property("StepsEnablerNameCounter") Then
+		Return Parameters.ModelInveronment.StepsEnablerNameCounter.Count() = 1;
 	EndIf;
 	Return False;
 EndFunction

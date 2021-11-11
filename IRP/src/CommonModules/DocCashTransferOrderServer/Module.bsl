@@ -8,7 +8,7 @@ Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 	Else
 		CommonFunctionsClientServer.SetObjectPreviousValue(Object, Form, "Company");
 	EndIf;
-	ViewServer_V2.OnCreateAtServer(Object, Form);
+	//ViewServer_V2.OnCreateAtServer(Object, Form);
 EndProcedure
 
 Procedure AfterWriteAtServer(Object, Form, CurrentObject, WriteParameters) Export

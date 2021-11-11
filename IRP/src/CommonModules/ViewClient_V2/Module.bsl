@@ -43,10 +43,10 @@ Function GetParameters(Object, Form,
 	Parameters.Insert("ViewNotify"     , New Array());
 	Parameters.Insert("ViewModuleName" , "ViewClient_V2");
 	
-	Parameters.Insert("ObjectPropertyNamesBeforeChange" , GetObjectPropertyNamesBegoreChange());
+	Parameters.Insert("ObjectPropertyNamesBeforeChange" , GetObjectPropertyNamesBeforeChange());
 	Parameters.Insert("ObjectPropertyBeforeChange"      , Undefined);
 	
-	Parameters.Insert("FormPropertyNamesBeforeChange"   , GetFormPropertyNamesBegoreChange());
+	Parameters.Insert("FormPropertyNamesBeforeChange"   , GetFormPropertyNamesBeforeChange());
 	Parameters.Insert("FormPropertyBeforeChange"        , Undefined);
 	
 	// параметры для Server + Client
@@ -148,42 +148,80 @@ Function GetCacheBeforeChange(Cache, DataPath)
 EndFunction
 
 // возвращает список реквизитов объекта для которых нужно получить значение до изменения
-Function GetObjectPropertyNamesBegoreChange()
+Function GetObjectPropertyNamesBeforeChange()
 	Return "Partner, Sender, Receiver";
 EndFunction
 
+Function GetListPropertyNamesBeforeChange()
+	Return "ItemList.Store";
+EndFunction
+
 // возвращает список реквизитов формы для которых нужно получить значение до изменения
-Function GetFormPropertyNamesBegoreChange()
+Function GetFormPropertyNamesBeforeChange()
 	Return "Store";
 EndFunction
 
 // хранит значения реквизитов до изменения
 Procedure UpdateCacheBeforeChange(Object, Form)
 	// реквизиты Object которые нужно кэшировать, для табличных частей не реализовано
-	CacheObject = New Structure(GetObjectPropertyNamesBegoreChange());
+	CacheObject = New Structure(GetObjectPropertyNamesBeforeChange());
 	FillPropertyValues(CacheObject, Object);
 	
 	// реквизиты Form которые нужно кэшировать
-	CacheForm = New Structure(GetFormPropertyNamesBegoreChange());
+	CacheForm = New Structure(GetFormPropertyNamesBeforeChange());
 	FillPropertyValues(CacheForm, Form);
+	
+	//CacheList = New Structure();
+	
+	Tables = New Structure();
+	ListProperties = StrSplit(GetListPropertyNamesBeforeChange(), ",");
+	For Each ListProperty In ListProperties Do
+		Segments = StrSplit(ListProperty, ".");
+		If Segments.Count() <> 2 Then
+			Raise StrTemplate("Wrong list property [%1]", ListProperty);
+		EndIf;
+		TableName  = Segments[0];
+		ColumnName = Segments[1];
+		
+		If Not Tables.Property(TableName) Then
+			Tables.Insert(TableName, New Structure());
+		EndIf;
+		Tables[TableName].Insert(ColumnName);
+	EndDo;
 	
 	CacheBeforeChange = New Structure("CacheObject, CacheForm", CacheObject, CacheForm);
 	Form.CacheBeforeChange = CommonFunctionsServer.SerializeXMLUseXDTO(CacheBeforeChange);
 EndProcedure
 
+#Region ON_CHAIN_COMPLETE
+
 Procedure OnChainComplete(Parameters) Export
-	If Parameters.EventCaller = "StoreOnUserChange" And NeedQueryStoreOnUserChange(Parameters) Then
+	CommitChanges = False;
+	If Parameters.EventCaller = "StoreOnUserChange" Then
 		If Parameters.ObjectMetadataInfo.MetadataName = "ShipmentConfirmation" Then
-			// Вопрос про изменение склада в табличной части
-			NotifyParameters = New Structure("Parameters", Parameters);
-			ShowQueryBox(New NotifyDescription("StoreOnUserChangeContinue", ThisObject, NotifyParameters), 
-				R().QuestionToUser_005, QuestionDialogMode.YesNoCancel);
-			
+			If  NeedQueryStoreOnUserChange(Parameters) Then
+				// Вопрос про изменение склада в табличной части
+				NotifyParameters = New Structure("Parameters", Parameters);
+				ShowQueryBox(New NotifyDescription("StoreOnUserChangeContinue", ThisObject, NotifyParameters), 
+					R().QuestionToUser_005, QuestionDialogMode.YesNoCancel);
+			Else
+				CommitChanges = True;
+			EndIf;
+		EndIf;
+	ElsIf Parameters.EventCaller = "ItemListStoreOnUserChange" Then
+		If Parameters.ObjectMetadataInfo.MetadataName = "ShipmentConfirmation" Then
+			If NeedCommitChainChangesItemListStoreOnUserChange(Parameters) Then
+				CommitChanges = True;
+			EndIf;
 		EndIf;
 	Else
+		CommitChanges = True;
+	EndIf;
+	
+	If CommitChanges Then
 		ControllerClientServer_V2.CommitChainChanges(Parameters);
 		UpdateCacheBeforeChange(Parameters.Object, Parameters.Form);
-	EndIf;
+	EndIf;		
 EndProcedure
 
 Function NeedQueryStoreOnUserChange(Parameters)
@@ -204,6 +242,12 @@ Procedure StoreOnUserChangeContinue(Answer, NotifyPrameters) Export
 								NotifyPrameters.Parameters.Form);
 	EndIf;
 EndProcedure
+
+Function NeedCommitChainChangesItemListStoreOnUserChange(Parameters)
+	Return True;
+EndFunction
+
+#EndRegion
 
 Function AddOrCopyRow(Object, Form, TableName, Cancel, Clone, OriginRow)
 	Cancel = True;
@@ -488,8 +532,14 @@ Procedure ItemListTotalAmountOnChange(Object, Form, CurrentData = Undefined) Exp
 EndProcedure
 
 Procedure ItemListStoreOnChange(Object, Form, CurrentData = Undefined) Export
-	Rows = GetRowsByCurrentData(Form, "ItemList", CurrentData);
-	ControllerClientServer_V2.ItemListStoreOnChange(GetParameters(Object, Form, "ItemList", Rows));
+	ServerParameters = GetServerParameters();
+	ServerParameters.Rows      = GetRowsByCurrentData(Form, "ItemList", CurrentData);
+	ServerParameters.TableName = "ItemList";
+	
+	FormParameters = GetFormParameters();
+	FormParameters.EventCaller = "ItemListStoreOnUserChange";
+
+	ControllerClientServer_V2.ItemListStoreOnChange(_GetParameters(Object, Form, ServerParameters, FormParameters));
 EndProcedure
 
 #Region ITEM_LIST_QUANTITY

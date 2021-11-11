@@ -393,7 +393,7 @@ EndFunction
 // заполняет Store в табличной части, тем Store что передан в параметре если переданный склад заполнен
 // если не заполнен то оставляет тот склад что указан в табличной части
 Function FillStoresInListExecute(Options) Export
-	If ValueIsFilled(Options.IsUserChange) Then
+	If Options.IsUserChange = True Then
 		Return Options.Store;
 	EndIf;
 	If ValueIsFilled(Options.Store) Then

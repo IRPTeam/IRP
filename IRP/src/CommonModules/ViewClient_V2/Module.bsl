@@ -15,7 +15,8 @@ EndFunction
 Function GetFormParameters()
 	Result = New Structure();
 	Result.Insert("ObjectPropertyDataPathBeforeChange", "");
-	Result.Insert("FormPropertyDataPathBeforeChange", "");
+	Result.Insert("FormPropertyDataPathBeforeChange"  , "");
+	Result.Insert("ListPropertyDataPathBeforeChange"  , "");
 	Result.Insert("EventCaller", "");
 	Return Result;
 EndFunction
@@ -25,6 +26,7 @@ Function _GetParameters(Object, Form, ServerParameters, FormParameters = Undefin
 		Return GetParameters(Object, Form, ServerParameters.TableName, ServerParameters.Rows,
 			FormParameters.ObjectPropertyDataPathBeforeChange,
 			FormParameters.FormPropertyDataPathBeforeChange,
+			FormParameters.ListPropertyDataPathBeforeChange,
 			FormParameters.EventCaller); 
 	EndIf;
 	Return GetParameters(Object, Form, ServerParameters.TableName, ServerParameters.Rows);
@@ -35,6 +37,7 @@ Function GetParameters(Object, Form,
 						Rows = Undefined, 
 						ObjectPropertyDataPathBeforeChange = "", 
 						FormPropertyDataPathBeforeChange = "",
+						ListPropertyDataPathBeforeChange = "",
 						EventCaller = "")
 	Parameters = New Structure();
 	// параметры для Client 
@@ -49,6 +52,9 @@ Function GetParameters(Object, Form,
 	Parameters.Insert("FormPropertyNamesBeforeChange"   , GetFormPropertyNamesBeforeChange());
 	Parameters.Insert("FormPropertyBeforeChange"        , Undefined);
 	
+	Parameters.Insert("ListPropertyNamesBeforeChange"   , GetListPropertyNamesBeforeChange());
+	Parameters.Insert("ListPropertyBeforeChange"        , Undefined);
+	
 	// параметры для Server + Client
 	// кэш для реквизитов объекта
 	Parameters.Insert("Object" , Object);
@@ -58,13 +64,22 @@ Function GetParameters(Object, Form,
 	
 	// параметры для Client
 	// PropertyDataPath - имя реквизита для которого надо получить значение до изменения
-	If ValueIsFilled(ObjectPropertyDataPathBeforeChange) Or ValueIsFilled(FormPropertyDataPathBeforeChange) Then
+	If ValueIsFilled(ObjectPropertyDataPathBeforeChange) 
+		Or ValueIsFilled(FormPropertyDataPathBeforeChange)
+		Or ValueIsFilled(ListPropertyDataPathBeforeChange) Then
+		
 		CacheBeforeChange = CommonFunctionsServer.DeserializeXMLUseXDTO(Form.CacheBeforeChange);
 		If ValueIsFilled(ObjectPropertyDataPathBeforeChange) Then
-			Parameters.ObjectPropertyBeforeChange = GetCacheBeforeChange(CacheBeforeChange.CacheObject, ObjectPropertyDataPathBeforeChange);
+			Parameters.ObjectPropertyBeforeChange = 
+				GetCacheBeforeChange(CacheBeforeChange.CacheObject, ObjectPropertyDataPathBeforeChange);
 		EndIf;
 		If ValueIsFilled(FormPropertyDataPathBeforeChange) Then
-			Parameters.FormPropertyBeforeChange = GetCacheBeforeChange(CacheBeforeChange.CacheForm, FormPropertyDataPathBeforeChange);
+			Parameters.FormPropertyBeforeChange = 
+				GetCacheBeforeChange(CacheBeforeChange.CacheForm, FormPropertyDataPathBeforeChange);
+		EndIf;
+		If ValueIsFilled(ListPropertyDataPathBeforeChange) Then
+			Parameters.ListPropertyBeforeChange = 
+				GetCacheBeforeChange(CacheBeforeChange.CacheList, ListPropertyDataPathBeforeChange, Rows);
 		EndIf;
 	EndIf;
 	
@@ -138,13 +153,41 @@ Function GetRowsByCurrentData(Form, TableName, CurrentData)
 	Return Rows;
 EndFunction
 
-Function GetCacheBeforeChange(Cache, DataPath)
-	If Not Cache.Property(DataPath) Then
-		Raise StrTemplate("Property by DataPath [%1] not found in CacheBeforeChange", DataPath);
+Function GetCacheBeforeChange(Cache, DataPath, Rows = Undefined)
+	Segments = StrSplit(DataPath, ".");
+	If Segments.Count() = 2 Then
+		If Rows = Undefined Then
+			Raise StrTemplate("Error read data from cache by data path [%1] rows is Udefined", DataPath);
+		EndIf;
+		TableName  = Segments[0];
+		ColumnName = Segments[1];
+		ArrayOfValuesBeforeChange = New Array();
+		For Each Row In Rows Do
+			For Each CacheRow In Cache[TableName] Do
+				If Row.Key = CacheRow.Key Then
+					NewRow = New Structure("Key", Row.Key);
+					NewRow.Insert(ColumnName, CacheRow[ColumnName]);
+					ArrayOfValuesBeforeChange.Add(NewRow);
+					Break;
+				EndIf;
+			EndDo;
+		EndDo;
+		Result = New Structure();
+		Result.Insert("DataPath"   , DataPath);
+		Result.Insert("TableName"  , TableName);
+		Result.Insert("ColumnName" , ColumnName);
+		Result.Insert("ArrayOfValuesBeforeChange", ArrayOfValuesBeforeChange);
+		Return Result;
+	ElsIf Segments.Count() = 1 Then
+		If Not Cache.Property(DataPath) Then
+			Raise StrTemplate("Property by DataPath [%1] not found in CacheBeforeChange", DataPath);
+		EndIf;
+		// значение которое было в реквизите до того как он был изменен
+		ValueBeforeChange = Cache[DataPath];
+		Return New Structure("DataPath, ValueBeforeChange", DataPath, ValueBeforeChange);
+	Else
+		Raise StrTemplate("Wrong property data path [%1]", DataPath);
 	EndIf;
-	// значение которое было в реквизите до того как он был изменен
-	ValueBeforeChange = Cache[DataPath];
-	Return New Structure("DataPath, ValueBeforeChange", DataPath, ValueBeforeChange);
 EndFunction
 
 // возвращает список реквизитов объекта для которых нужно получить значение до изменения
@@ -171,9 +214,9 @@ Procedure UpdateCacheBeforeChange(Object, Form)
 	CacheForm = New Structure(GetFormPropertyNamesBeforeChange());
 	FillPropertyValues(CacheForm, Form);
 	
-	//CacheList = New Structure();
-	
-	Tables = New Structure();
+	// реквизиты таблиц которые нужно кэшировать
+	CacheList = New Structure();
+	Tables    = New Structure();
 	ListProperties = StrSplit(GetListPropertyNamesBeforeChange(), ",");
 	For Each ListProperty In ListProperties Do
 		Segments = StrSplit(ListProperty, ".");
@@ -184,12 +227,30 @@ Procedure UpdateCacheBeforeChange(Object, Form)
 		ColumnName = Segments[1];
 		
 		If Not Tables.Property(TableName) Then
-			Tables.Insert(TableName, New Structure());
+			Tables.Insert(TableName, New Array());
 		EndIf;
-		Tables[TableName].Insert(ColumnName);
+		If Tables[TableName].Find(ColumnName) = Undefined Then
+			Tables[TableName].Add(ColumnName);
+		EndIf;
 	EndDo;
 	
-	CacheBeforeChange = New Structure("CacheObject, CacheForm", CacheObject, CacheForm);
+	For Each KeyValue In Tables Do
+		TableName   = KeyValue.Key;
+		ColumnNames = KeyValue.Value;
+		
+		CacheList.Insert(TableName, New Array());
+		For Each Row In Object[TableName] Do
+			NewRow = New Structure(StrConcat(ColumnNames, ","));
+			NewRow.Insert("Key");
+			FillPropertyValues(NewRow, Row);
+			CacheList[TableName].Add(NewRow);
+		EndDo;
+	EndDo;
+	
+	CacheBeforeChange = New Structure();
+	CacheBeforeChange.Insert("CacheObject", CacheObject);
+	CacheBeforeChange.Insert("CacheForm"  , CacheForm);
+	CacheBeforeChange.Insert("CacheList"  , CacheLIst);
 	Form.CacheBeforeChange = CommonFunctionsServer.SerializeXMLUseXDTO(CacheBeforeChange);
 EndProcedure
 
@@ -244,6 +305,13 @@ Procedure StoreOnUserChangeContinue(Answer, NotifyPrameters) Export
 EndProcedure
 
 Function NeedCommitChainChangesItemListStoreOnUserChange(Parameters)
+	If Parameters.Cache.Property("ItemList") Then
+		For Each Row In Parameters.Cache.ItemList Do
+			If Row.Property("Store") And Not ValueIsFilled(Row.Store) Then
+				Return False;
+			EndIf;
+		EndDo;
+	EndIf;
 	Return True;
 EndFunction
 
@@ -537,6 +605,7 @@ Procedure ItemListStoreOnChange(Object, Form, CurrentData = Undefined) Export
 	ServerParameters.TableName = "ItemList";
 	
 	FormParameters = GetFormParameters();
+	FormParameters.ListPropertyDataPathBeforeChange = "ItemList.Store";
 	FormParameters.EventCaller = "ItemListStoreOnUserChange";
 
 	ControllerClientServer_V2.ItemListStoreOnChange(_GetParameters(Object, Form, ServerParameters, FormParameters));

@@ -579,6 +579,7 @@ EndProcedure
 
 // ItemList.Store.OnChange
 Procedure ItemListStoreOnChange(Parameters) Export
+	ProceedListPropertyBeforeChange(Parameters);
 	Binding = ItemListStoreSptepsBinding(Parameters);
 	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
 EndProcedure
@@ -1048,6 +1049,26 @@ Procedure ProceedFormPropertyBeforeChange(Parameters)
 		Parameters.Form[DataPath] = ValueBeforeChange;
 		SetPropertyForm(Parameters, DataPath, , CurrentValue);
 	EndIf;
+EndProcedure
+
+Procedure ProceedListPropertyBeforeChange(Parameters)
+	If Parameters.ListPropertyBeforeChange = Undefined Then
+		Return;
+	EndIf;
+	DataPath   = Parameters.ListPropertyBeforeChange.DataPath;
+	TableName  = Parameters.ListPropertyBeforeChange.TableName;
+	ColumnName = Parameters.ListPropertyBeforeChange.ColumnName;
+	ArrayOfValuesBeforeChange = Parameters.ListPropertyBeforeChange.ArrayOfValuesBeforeChange;
+	For Each Row In ArrayOfValuesBeforeChange Do
+		CurrentValue = GetPropertyObject(Parameters, DataPath, Row.Key);
+		For Each OriginRow In Parameters.Object[TableName] Do
+			If Row.Key = OriginRow.Key Then
+			 	OriginRow[ColumnName] = Row[ColumnName];
+				SetPropertyObject(Parameters, DataPath, Row.Key, CurrentValue);
+				Break;
+			EndIf;
+		EndDo;
+	EndDo;
 EndProcedure
 
 Function GetRows(Parameters, TableName)

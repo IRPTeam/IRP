@@ -408,7 +408,8 @@ Function ChangeStoreInHeaderByStoresInListExecute(Options) Export
 	// сделаем массив с кладов только с уникальными значениями
 	ArrayOfStoresUnique = New Array();
 	For Each Store In Options.ArrayOfStoresInList Do
-		If ValueIsFilled(Store) And ArrayOfStoresUnique.Find(Store) = Undefined Then
+		//If ValueIsFilled(Store) And ArrayOfStoresUnique.Find(Store) = Undefined Then
+		If ArrayOfStoresUnique.Find(Store) = Undefined Then
 			ArrayOfStoresUnique.Add(Store);
 		EndIf;
 	EndDo;

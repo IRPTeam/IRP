@@ -12,9 +12,9 @@ Procedure EntryPoint(StepsEnablerName, Parameters) Export
 	
 #IF Client THEN
 	Transfer = New Structure("Form, Object", Parameters.Form, Parameters.Object);
-	If ValueIsFilled(Parameters.FormPropertyNamesBeforeChange) Then
+	If ValueIsFilled(Parameters.PropertyBeforeChange.Form.Names) Then
 		// превращаем форму в структуру, что бы на сервере были доступны реквизиты формы, из них нужно читать данные
-		TransferForm = New Structure(Parameters.FormPropertyNamesBeforeChange);
+		TransferForm = New Structure(Parameters.PropertyBeforeChange.Form.Names);
 		FillPropertyValues(TransferForm, Transfer.Form);
 		Parameters.Form = TransferForm;
 	Else

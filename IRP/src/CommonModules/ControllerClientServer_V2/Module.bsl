@@ -1,9 +1,123 @@
 
-// CONTROLLER
-// 
-// ОБЩИЙ МОДУЛЬ ДЛЯ SalesInvoice и всех кто с него скопирован - уровень Данные (линковка бизнес логики со структурой документа)
-// никаких запросов к БД и расчетов тут делать нельзя, модифицировать форму задавать вопросы пользователю и т.д нельзя 
-// только чтение из объекта и запись в объект
+#Region PARAMETERS
+
+
+Function GetServerParameters(Object) Export
+	Result = New Structure();
+	Result.Insert("Object", Object);
+	Result.Insert("ControllerModuleName", "ControllerClientServer_V2");
+	Result.Insert("TableName", "");
+	Result.Insert("Rows", Undefined);
+	Return Result;
+EndFunction
+
+Function GetFormParameters(Form) Export
+	Result = New Structure();
+	Result.Insert("Form", Form);
+	Result.Insert("ViewModuleName", "ViewClient_V2");
+	Result.Insert("EventCaller", "");
+	
+	Result.Insert("PropertyBeforeChange", New Structure("Object, Form, List", 
+		New Structure(), New Structure(), New Structure()));
+	Result.PropertyBeforeChange.Object.Insert("Names"   , "");
+	Result.PropertyBeforeChange.Object.Insert("DataPath", "");
+	Result.PropertyBeforeChange.Object.Insert("Value"   , Undefined);
+
+	Result.PropertyBeforeChange.Form.Insert("Names"   , "");
+	Result.PropertyBeforeChange.Form.Insert("DataPath", "");
+	Result.PropertyBeforeChange.Form.Insert("Value"   , Undefined);
+
+	Result.PropertyBeforeChange.List.Insert("Names"   , "");
+	Result.PropertyBeforeChange.List.Insert("DataPath", "");
+	Result.PropertyBeforeChange.List.Insert("Value"   , Undefined);
+	Return Result;
+EndFunction
+
+Function GetParameters(ServerParameters, FormParameters = Undefined) Export
+	If FormParameters = Undefined Then
+		Return CreateParameters(ServerParameters, GetFormParameters(Undefined));
+	EndIf;
+	Return CreateParameters(ServerParameters, FormParameters);
+EndFunction
+
+Function CreateParameters(ServerParameters, FormParameters)
+
+	Parameters = New Structure();
+	// параметры для Client 
+	Parameters.Insert("Form"           , FormParameters.Form);
+	Parameters.Insert("CacheForm"      , New Structure()); // кэш для реквизитов формы
+	Parameters.Insert("ViewNotify"     , New Array());
+	Parameters.Insert("ViewModuleName" , FormParameters.ViewModuleName);
+	Parameters.Insert("EventCaller"    , FormParameters.EventCaller);
+	
+	Parameters.Insert("PropertyBeforeChange", FormParameters.PropertyBeforeChange);
+	
+	// параметры для Server + Client
+	// кэш для реквизитов объекта
+	Parameters.Insert("Object" , ServerParameters.Object);
+	Parameters.Insert("Cache"  , New Structure());
+	Parameters.Insert("ControllerModuleName", ServerParameters.ControllerModuleName);
+	
+	// налоги, отключено
+	ArrayOfTaxInfo = New Array();//TaxesClient.GetArrayOfTaxInfo(Form);
+	Parameters.Insert("ArrayOfTaxInfo", ArrayOfTaxInfo);
+	
+	// получаем колонки из табличных частей
+	ArrayOfTableNames = New Array();
+	If ServerParameters.TableName <> Undefined Then
+		ArrayOfTableNames.Add(ServerParameters.TableName);
+	EndIf;	
+	If CommonFunctionsClientServer.ObjectHasProperty(ServerParameters.Object, "TaxList") Then
+		ArrayOfTableNames.Add("TaxList");
+	EndIf;
+	// MetadataName
+	// Tables.TableName.Columns
+	// DependencyTables
+	ObjectMetadataInfo = ViewServer_V2.GetObjectMetadataInfo(ServerParameters.Object, StrConcat(ArrayOfTableNames, ","));
+	
+	// Server
+	Parameters.Insert("ObjectMetadataInfo", ObjectMetadataInfo);
+	
+	// если не переданы конкретные строки то используем все что есть в таблице c именем TableName
+	If ServerParameters.Rows = Undefined And ValueIsFilled(ServerParameters.TableName) Then
+		ServerParameters.Rows = ServerParameters.Object[ServerParameters.TableName];
+	EndIf;
+	If ServerParameters.Rows = Undefined Then
+		ServerParameters.Rows = New Array();
+	EndIf;
+	
+	// строку таблицы нельзя передать на сервер, поэтому помещаем данные в массив структур
+	ArrayOfRows = New Array();
+	For Each Row In ServerParameters.Rows Do
+		NewRow = New Structure(ObjectMetadataInfo.Tables[ServerParameters.TableName].Columns);
+		FillPropertyValues(NewRow, Row);
+		ArrayOfRows.Add(NewRow);
+		
+		// налоги
+		ArrayOfRowsTaxList = New Array();
+		If ObjectMetadataInfo.Property("TaxListColumns") Then
+			For Each TaxRow In ServerParameters.Object.TaxList.FindRows(New Structure("Key", Row.Key)) Do
+				NewRowTaxList = New Structure(ObjectMetadataInfo.Tables.TaxList.Columns);
+				FillPropertyValues(NewRowTaxList, TaxRow);
+				ArrayOfRowsTaxList.Add(NewRowTaxList);
+			EndDo;
+		EndIf;
+		
+		TaxRates = New Structure();
+		For Each ItemOfTaxInfo In ArrayOfTaxInfo Do
+			TaxRates.Insert(ItemOfTaxInfo.Name, Row[ItemOfTaxInfo.Name]);
+		EndDo;
+		NewRow.Insert("TaxRates", TaxRates);
+		NewRow.Insert("TaxList" , ArrayOfRowsTaxList);
+	EndDo;
+	
+	If ArrayOfRows.Count() Then
+		Parameters.Insert("Rows", ArrayOfRows);
+	EndIf;
+	Return Parameters;
+EndFunction
+
+#EndRegion
 
 #IF Client THEN
 
@@ -29,6 +143,20 @@ Procedure FillPropertyFormByDefault(Form, DataPath, Parameters) Export
 EndProcedure
 
 #ENDIF
+
+#Region API
+	
+Procedure API_SetProperty(Parameters, Property, Value) Export
+	DataPath = Property.FullName();
+	SetPropertyObject(Parameters, DataPath, , Value);
+	Bindings = GetAllBindings(Parameters);
+	Binding = Bindings.Get(DataPath);
+	If Binding <> Undefined Then
+		ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+	EndIf;
+EndProcedure
+	
+#EndRegion
 
 Function GetAllBindings(Parameters)
 	Binding = New Map();
@@ -283,7 +411,7 @@ EndProcedure
 // Вызывается при изменении реквизита Sender в документе CashTransferOrder
 Procedure AccountSenderOnChange(Parameters) Export
 	// процедура для запоминания значения реквизита перед изменением
-	ProceedObjectPropertyBeforeChange(Parameters);
+	ProceedPropertyBeforeChange_Object(Parameters);
 	
 	// Процедура OnSetAccountReceiverNotify_IsUserChange будет вызывана только если пользователь изменит реквизит
 	// при программом изменении вызывана не будет
@@ -331,7 +459,7 @@ EndProcedure
 // Вызывается при изменении реквизита Receiver в документе CashTransferOrder
 Procedure AccountReceiverOnChange(Parameters) Export
 	// процедура для запоминания значения реквизита перед изменением
-	ProceedObjectPropertyBeforeChange(Parameters);
+	ProceedPropertyBeforeChange_Object(Parameters);
 	
 	// Процедура OnSetAccountReceiverNotify_IsUserChange будет вызывана только если пользователь изменит реквизит
 	// при программом изменении вызывана не будет
@@ -405,7 +533,7 @@ EndProcedure
 
 // Partner.OnChange
 Procedure PartnerOnChange(Parameters) Export
-	ProceedObjectPropertyBeforeChange(Parameters);
+	ProceedPropertyBeforeChange_Object(Parameters);
 	AddViewNotify("OnSetPartnerNotify", Parameters);
 	Binding = PartnerStepsBinding(Parameters);
 	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
@@ -462,10 +590,10 @@ Procedure PartnerStepsEnabler_ChangeOnlyLegalName(Parameters, Chain) Export
 	Chain.ChangeLegalNameByPartner.Options.Add(Options);
 EndProcedure
 
-Procedure SetPartner_API(Parameters, Results) Export
-	ModelClientServer_V2.Init_API("PartnerStepsEnabler", Parameters);
-	SetPartner(Parameters, Results);
-EndProcedure
+//Procedure SetPartner_API(Parameters, Results) Export
+//	ModelClientServer_V2.Init_API("PartnerStepsEnabler", Parameters);
+//	SetPartner(Parameters, Results);
+//EndProcedure
 
 #EndRegion
 
@@ -501,7 +629,7 @@ EndProcedure
 
 // Store.OnChange
 Procedure StoreOnChange(Parameters) Export
-	ProceedFormPropertyBeforeChange(Parameters);
+	ProceedPropertyBeforeChange_Form(Parameters);
 	AddViewNotify("OnSetStoreNotify", Parameters);
 	Binding = StoreStepsBinding(Parameters);
 	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
@@ -580,7 +708,7 @@ EndProcedure
 
 // ItemList.Store.OnChange
 Procedure ItemListStoreOnChange(Parameters) Export
-	ProceedListPropertyBeforeChange(Parameters);
+	ProceedPropertyBeforeChange_List(Parameters);
 	Binding = ItemListStoreSptepsBinding(Parameters);
 	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
 EndProcedure
@@ -1032,34 +1160,34 @@ Procedure _CommitChainChanges(Cache, Source)
 	EndDo;
 EndProcedure
 
-Procedure ProceedObjectPropertyBeforeChange(Parameters)
-	If Parameters.ObjectPropertyBeforeChange <> Undefined Then
-		DataPath          = Parameters.ObjectPropertyBeforeChange.DataPath;
-		ValueBeforeChange = Parameters.ObjectPropertyBeforeChange.ValueBeforeChange;
+Procedure ProceedPropertyBeforeChange_Object(Parameters)
+	If Parameters.PropertyBeforeChange.Object.Value <> Undefined Then
+		DataPath          = Parameters.PropertyBeforeChange.Object.Value.DataPath;
+		ValueBeforeChange = Parameters.PropertyBeforeChange.Object.Value.ValueBeforeChange;
 		CurrentValue      = GetPropertyObject(Parameters, DataPath);
 		Parameters.Object[DataPath] = ValueBeforeChange;
 		SetPropertyObject(Parameters, DataPath, , CurrentValue);
 	EndIf;
 EndProcedure
 
-Procedure ProceedFormPropertyBeforeChange(Parameters)
-	If Parameters.FormPropertyBeforeChange <> Undefined Then
-		DataPath          = Parameters.FormPropertyBeforeChange.DataPath;
-		ValueBeforeChange = Parameters.FormPropertyBeforeChange.ValueBeforeChange;
+Procedure ProceedPropertyBeforeChange_Form(Parameters)
+	If Parameters.PropertyBeforeChange.Form.Value <> Undefined Then
+		DataPath          = Parameters.PropertyBeforeChange.Form.Value.DataPath;
+		ValueBeforeChange = Parameters.PropertyBeforeChange.Form.Value.ValueBeforeChange;
 		CurrentValue      = GetPropertyForm(Parameters, DataPath);
 		Parameters.Form[DataPath] = ValueBeforeChange;
 		SetPropertyForm(Parameters, DataPath, , CurrentValue);
 	EndIf;
 EndProcedure
 
-Procedure ProceedListPropertyBeforeChange(Parameters)
-	If Parameters.ListPropertyBeforeChange = Undefined Then
+Procedure ProceedPropertyBeforeChange_List(Parameters)
+	If Parameters.PropertyBeforeChange.List.Value = Undefined Then
 		Return;
 	EndIf;
-	DataPath   = Parameters.ListPropertyBeforeChange.DataPath;
-	TableName  = Parameters.ListPropertyBeforeChange.TableName;
-	ColumnName = Parameters.ListPropertyBeforeChange.ColumnName;
-	ArrayOfValuesBeforeChange = Parameters.ListPropertyBeforeChange.ArrayOfValuesBeforeChange;
+	DataPath   = Parameters.PropertyBeforeChange.List.Value.DataPath;
+	TableName  = Parameters.PropertyBeforeChange.List.Value.TableName;
+	ColumnName = Parameters.PropertyBeforeChange.List.Value.ColumnName;
+	ArrayOfValuesBeforeChange = Parameters.PropertyBeforeChange.List.Value.ArrayOfValuesBeforeChange;
 	For Each Row In ArrayOfValuesBeforeChange Do
 		CurrentValue = GetPropertyObject(Parameters, DataPath, Row.Key);
 		For Each OriginRow In Parameters.Object[TableName] Do

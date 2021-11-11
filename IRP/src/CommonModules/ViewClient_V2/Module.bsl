@@ -1,157 +1,70 @@
 
-// VIEW
-// 
-// В ЭТОМ МОДУЛЕ ТОЛЬКО МОДИФИКАЦИЯ ФОРМЫ, ВПРОСЫ ПОЛЬЗОВАТЕЛЮ и прочие клиентские вещи
-// ДЕЛАТЬ ИЗМЕНЕНИЯ объекта нельзя только чтение
+#Region CACHE_BEFORE_CHANGE
 
-Function GetServerParameters()
-	Result = New Structure();
-	Result.Insert("TableName", "");
-	Result.Insert("Rows", Undefined);
-	
-	Return Result;
+Function GetSimpleParameters(Object, Form, TableName, Rows = Undefined)
+	FormParameters   = GetFormParameters(Form);
+	ServerParameters = GetServerParameters(Object);
+	ServerParameters.TableName = TableName;
+	ServerParameters.Rows      = Rows;
+	Return GetParameters(ServerParameters, FormParameters);
 EndFunction
 
-Function GetFormParameters()
-	Result = New Structure();
-	Result.Insert("ObjectPropertyDataPathBeforeChange", "");
-	Result.Insert("FormPropertyDataPathBeforeChange"  , "");
-	Result.Insert("ListPropertyDataPathBeforeChange"  , "");
-	Result.Insert("EventCaller", "");
-	Return Result;
+Function GetFormParameters(Form)
+	FormParameters   = ControllerClientServer_V2.GetFormParameters(Form);
+	FormParameters.PropertyBeforeChange.Object.Names = GetObjectPropertyNamesBeforeChange();
+	FormParameters.PropertyBeforeChange.Form.Names   = GetFormPropertyNamesBeforeChange();
+	FormParameters.PropertyBeforeChange.List.Names   = GetListPropertyNamesBeforeChange();
+	Return FormParameters;
 EndFunction
 
-Function _GetParameters(Object, Form, ServerParameters, FormParameters = Undefined)
-	If FormParameters <> Undefined Then
-		Return GetParameters(Object, Form, ServerParameters.TableName, ServerParameters.Rows,
-			FormParameters.ObjectPropertyDataPathBeforeChange,
-			FormParameters.FormPropertyDataPathBeforeChange,
-			FormParameters.ListPropertyDataPathBeforeChange,
-			FormParameters.EventCaller); 
-	EndIf;
-	Return GetParameters(Object, Form, ServerParameters.TableName, ServerParameters.Rows);
+Function GetServerParameters(Object)
+	Return ControllerClientServer_V2.GetServerParameters(Object);
 EndFunction
 
-Function GetParameters(Object, Form, 
-						TableName = "", 
-						Rows = Undefined, 
-						ObjectPropertyDataPathBeforeChange = "", 
-						FormPropertyDataPathBeforeChange = "",
-						ListPropertyDataPathBeforeChange = "",
-						EventCaller = "")
-	Parameters = New Structure();
-	// параметры для Client 
-	Parameters.Insert("Form"           , Form);
-	Parameters.Insert("CacheForm"      , New Structure()); // кэш для реквизитов формы
-	Parameters.Insert("ViewNotify"     , New Array());
-	Parameters.Insert("ViewModuleName" , "ViewClient_V2");
-	
-	Parameters.Insert("ObjectPropertyNamesBeforeChange" , GetObjectPropertyNamesBeforeChange());
-	Parameters.Insert("ObjectPropertyBeforeChange"      , Undefined);
-	
-	Parameters.Insert("FormPropertyNamesBeforeChange"   , GetFormPropertyNamesBeforeChange());
-	Parameters.Insert("FormPropertyBeforeChange"        , Undefined);
-	
-	Parameters.Insert("ListPropertyNamesBeforeChange"   , GetListPropertyNamesBeforeChange());
-	Parameters.Insert("ListPropertyBeforeChange"        , Undefined);
-	
-	// параметры для Server + Client
-	// кэш для реквизитов объекта
-	Parameters.Insert("Object" , Object);
-	Parameters.Insert("Cache"  , New Structure());
-	Parameters.Insert("ControllerModuleName" , "ControllerClientServer_V2");
-	Parameters.Insert("EventCaller", EventCaller);
-	
-	// параметры для Client
-	// PropertyDataPath - имя реквизита для которого надо получить значение до изменения
-	If ValueIsFilled(ObjectPropertyDataPathBeforeChange) 
-		Or ValueIsFilled(FormPropertyDataPathBeforeChange)
-		Or ValueIsFilled(ListPropertyDataPathBeforeChange) Then
+Function GetParameters(ServerParameters, FormParameters = Undefined)
+	Return ControllerClientServer_V2.GetParameters(ServerParameters, FormParameters);
+EndFunction
+
+Procedure ExtractValueBeforeChange_Object(DataPath, FormParameters)
+	FormParameters.PropertyBeforeChange.Object.DataPath = DataPath;
+	ExtractValueBeforeChange(FormParameters, Undefined);
+EndProcedure
+
+Procedure ExtractValueBeforeChange_Form(DataPath, FormParameters)
+	FormParameters.PropertyBeforeChange.Form.DataPath = DataPath;
+	ExtractValueBeforeChange(FormParameters, Undefined);
+EndProcedure
+
+Procedure ExtractValueBeforeChange_List(DataPath, FormParameters, Rows)
+	FormParameters.PropertyBeforeChange.List.DataPath = DataPath;
+	ExtractValueBeforeChange(FormParameters, Rows);
+EndProcedure
+
+Procedure ExtractValueBeforeChange(FormParameters, Rows)
+
+	If ValueIsFilled(FormParameters.PropertyBeforeChange.Object.DataPath) 
+		Or ValueIsFilled(FormParameters.PropertyBeforeChange.Form.DataPath)
+		Or ValueIsFilled(FormParameters.PropertyBeforeChange.List.DataPath) Then
 		
-		CacheBeforeChange = CommonFunctionsServer.DeserializeXMLUseXDTO(Form.CacheBeforeChange);
-		If ValueIsFilled(ObjectPropertyDataPathBeforeChange) Then
-			Parameters.ObjectPropertyBeforeChange = 
-				GetCacheBeforeChange(CacheBeforeChange.CacheObject, ObjectPropertyDataPathBeforeChange);
-		EndIf;
-		If ValueIsFilled(FormPropertyDataPathBeforeChange) Then
-			Parameters.FormPropertyBeforeChange = 
-				GetCacheBeforeChange(CacheBeforeChange.CacheForm, FormPropertyDataPathBeforeChange);
-		EndIf;
-		If ValueIsFilled(ListPropertyDataPathBeforeChange) Then
-			Parameters.ListPropertyBeforeChange = 
-				GetCacheBeforeChange(CacheBeforeChange.CacheList, ListPropertyDataPathBeforeChange, Rows);
-		EndIf;
-	EndIf;
-	
-	// налоги
-	ArrayOfTaxInfo = TaxesClient.GetArrayOfTaxInfo(Form);
-	Parameters.Insert("ArrayOfTaxInfo", ArrayOfTaxInfo);
-	
-	// получаем колонки из табличных частей
-	ArrayOfTableNames = New Array();
-	If TableName <> Undefined Then
-		ArrayOfTableNames.Add(TableName);
-	EndIf;	
-	If CommonFunctionsClientServer.ObjectHasProperty(Object, "TaxList") Then
-		ArrayOfTableNames.Add("TaxList");
-	EndIf;
-	// MetadataName
-	// Tables.TableName.Columns
-	// DependencyTables
-	ObjectMetadataInfo = ViewServer_V2.GetObjectMetadataInfo(Object, StrConcat(ArrayOfTableNames, ","));
-	
-	// Server
-	Parameters.Insert("ObjectMetadataInfo", ObjectMetadataInfo);
-	
-	// если не переданы конкретные строки то используем все что есть в таблице c именем TableName
-	If Rows = Undefined And ValueIsFilled(TableName) Then
-		Rows = Object[TableName];
-	EndIf;
-	If Rows = Undefined Then
-		Rows = New Array();
-	EndIf;
-	
-	// строку таблицы нельзя передать на сервер, поэтому помещаем данные в массив структур
-	ArrayOfRows = New Array();
-	For Each Row In Rows Do
-		NewRow = New Structure(ObjectMetadataInfo.Tables[TableName].Columns);
-		FillPropertyValues(NewRow, Row);
-		ArrayOfRows.Add(NewRow);
+		CacheBeforeChange = CommonFunctionsServer.DeserializeXMLUseXDTO(FormParameters.Form.CacheBeforeChange);
 		
-		// налоги
-		ArrayOfRowsTaxList = New Array();
-		If ObjectMetadataInfo.Property("TaxListColumns") Then
-			For Each TaxRow In Object.TaxList.FindRows(New Structure("Key", Row.Key)) Do
-				NewRowTaxList = New Structure(ObjectMetadataInfo.Tables.TaxList.Columns);
-				FillPropertyValues(NewRowTaxList, TaxRow);
-				ArrayOfRowsTaxList.Add(NewRowTaxList);
-			EndDo;
+		If ValueIsFilled(FormParameters.PropertyBeforeChange.Object.DataPath) Then
+			FormParameters.PropertyBeforeChange.Object.Value = 
+				GetCacheBeforeChange(CacheBeforeChange.CacheObject, FormParameters.PropertyBeforeChange.Object.DataPath);
 		EndIf;
-		
-		TaxRates = New Structure();
-		For Each ItemOfTaxInfo In ArrayOfTaxInfo Do
-			TaxRates.Insert(ItemOfTaxInfo.Name, Row[ItemOfTaxInfo.Name]);
-		EndDo;
-		NewRow.Insert("TaxRates", TaxRates);
-		NewRow.Insert("TaxList" , ArrayOfRowsTaxList);
-	EndDo;
-	
-	If ArrayOfRows.Count() Then
-		Parameters.Insert("Rows", ArrayOfRows);
+		If ValueIsFilled(FormParameters.PropertyBeforeChange.Form.DataPath) Then
+			FormParameters.PropertyBeforeChange.Form.Value = 
+				GetCacheBeforeChange(CacheBeforeChange.CacheForm, FormParameters.PropertyBeforeChange.Form.DataPath);
+		EndIf;
+		If ValueIsFilled(FormParameters.PropertyBeforeChange.List.DataPath) Then
+			If Rows = Undefined Then
+				Raise "PropertyBeforeChange.List.DataPath is set but rows is Undefined";
+			EndIf;
+			FormParameters.PropertyBeforeChange.List.Value = 
+				GetCacheBeforeChange(CacheBeforeChange.CacheList, FormParameters.PropertyBeforeChange.List.DataPath, Rows);
+		EndIf;
 	EndIf;
-	Return Parameters;
-EndFunction
-
-Function GetRowsByCurrentData(Form, TableName, CurrentData)
-	Rows = New Array();
-	If CurrentData = Undefined Then
-		CurrentData = Form.Items[TableName].CurrentData;
-	EndIf;
-	If CurrentData <> Undefined Then
-		Rows.Add(CurrentData);
-	EndIf;
-	Return Rows;
-EndFunction
+EndProcedure
 
 Function GetCacheBeforeChange(Cache, DataPath, Rows = Undefined)
 	Segments = StrSplit(DataPath, ".");
@@ -188,20 +101,6 @@ Function GetCacheBeforeChange(Cache, DataPath, Rows = Undefined)
 	Else
 		Raise StrTemplate("Wrong property data path [%1]", DataPath);
 	EndIf;
-EndFunction
-
-// возвращает список реквизитов объекта для которых нужно получить значение до изменения
-Function GetObjectPropertyNamesBeforeChange()
-	Return "Partner, Sender, Receiver";
-EndFunction
-
-Function GetListPropertyNamesBeforeChange()
-	Return "ItemList.Store";
-EndFunction
-
-// возвращает список реквизитов формы для которых нужно получить значение до изменения
-Function GetFormPropertyNamesBeforeChange()
-	Return "Store";
 EndFunction
 
 // хранит значения реквизитов до изменения
@@ -253,6 +152,33 @@ Procedure UpdateCacheBeforeChange(Object, Form)
 	CacheBeforeChange.Insert("CacheList"  , CacheLIst);
 	Form.CacheBeforeChange = CommonFunctionsServer.SerializeXMLUseXDTO(CacheBeforeChange);
 EndProcedure
+
+// возвращает список реквизитов объекта для которых нужно получить значение до изменения
+Function GetObjectPropertyNamesBeforeChange()
+	Return "Partner, Sender, Receiver";
+EndFunction
+
+Function GetListPropertyNamesBeforeChange()
+	Return "ItemList.Store";
+EndFunction
+
+// возвращает список реквизитов формы для которых нужно получить значение до изменения
+Function GetFormPropertyNamesBeforeChange()
+	Return "Store";
+EndFunction
+
+#EndRegion
+
+Function GetRowsByCurrentData(Form, TableName, CurrentData)
+	Rows = New Array();
+	If CurrentData = Undefined Then
+		CurrentData = Form.Items[TableName].CurrentData;
+	EndIf;
+	If CurrentData <> Undefined Then
+		Rows.Add(CurrentData);
+	EndIf;
+	Return Rows;
+EndFunction
 
 #Region ON_CHAIN_COMPLETE
 
@@ -326,8 +252,8 @@ Function AddOrCopyRow(Object, Form, TableName, Cancel, Clone, OriginRow)
 			Raise "Not found origin row for clone";
 		EndIf;
 		NewRow.Key = String(New UUID());
-		Rows       = GetRowsByCurrentData(Form, TableName, NewRow);
-		Parameters = GetParameters(Object, Form, TableName, Rows);
+		Rows = GetRowsByCurrentData(Form, TableName, NewRow);
+		Parameters = GetSimpleParameters(Object, Form, TableName, Rows);
 		
 		// колонки которые не нужно копировать
 		ArrayOfExcludeProperties = New Array();
@@ -344,25 +270,24 @@ Function AddOrCopyRow(Object, Form, TableName, Cancel, Clone, OriginRow)
 		
 	Else // Add()
 		NewRow.Key = String(New UUID());
-		Rows       = GetRowsByCurrentData(Form, TableName, NewRow);
-		Parameters = GetParameters(Object, Form, TableName, Rows);
+		Rows = GetRowsByCurrentData(Form, TableName, NewRow);
+		Parameters = GetSimpleParameters(Object, Form, TableName, Rows);
 		ControllerClientServer_V2.AddNewRow(TableName, Parameters);
 	EndIf;
 	Return NewRow;
 EndFunction
 
 Procedure DeleteRows(Object, Form, TableName)
-	ServerParameters = GetServerParameters();
-	ServerParameters.TableName = TableName;
-	ControllerClientServer_V2.DeleteRows(TableName, _GetParameters(Object, Form, ServerParameters));
+	Parameters = GetSimpleParameters(Object, Form, TableName);
+	ControllerClientServer_V2.DeleteRows(TableName, Parameters);
 EndProcedure
 
 #Region FORM
 
 Procedure OnOpen(Object, Form) Export
 	UpdateCacheBeforeChange(Object, Form);
-	// перенести в серверный модуль
-	ControllerClientServer_V2.FillPropertyFormByDefault(Form,  "Store", GetParameters(Object, Form, "ItemList"));
+	Parameters = GetSimpleParameters(Object, Form, "ItemList");
+	ControllerClientServer_V2.FillPropertyFormByDefault(Form,  "Store", Parameters);
 EndProcedure
 
 #EndRegion
@@ -383,61 +308,45 @@ EndProcedure
 
 #Region ITEM_ITEMKEY_UNIT_QUANTITYINBASEUNIT
 
-// При изменении реквизитов Item, ItemKey, Unit, Quantity нет никаких изменений формы, 
-// видимость и доступность не изменяется, поэтому обработчиков событий OnSet() нет
-
-// Вызывается при изменении реквизита Item в табличной части ItemList
 Procedure ItemListItemOnChange(Object, Form, CurrentData = Undefined) Export
 	Rows = GetRowsByCurrentData(Form, "ItemList", CurrentData);
-	ControllerClientServer_V2.ItemListItemOnChange(GetParameters(Object, Form, "ItemList", Rows));
+	Parameters = GetSimpleParameters(Object, Form, "ItemList", Rows);
+	ControllerClientServer_V2.ItemListItemOnChange(Parameters);
 EndProcedure
 
-// Вызывается при изменении реквизита ItemKey в табличной части ItemList
 Procedure ItemListItemKeyOnChange(Object, Form, CurrentData = Undefined) Export
 	Rows = GetRowsByCurrentData(Form, "ItemList", CurrentData);
-	ControllerClientServer_V2.ItemListItemKeyOnChange(GetParameters(Object, Form, "ItemList", Rows));
+	Parameters = GetSimpleParameters(Object, Form, "ItemList", Rows);
+	ControllerClientServer_V2.ItemListItemKeyOnChange(Parameters);
 EndProcedure
 
-// Вызывается при изменении реквизита Unit в табличной части ItemList
 Procedure ItemListUnitOnChange(Object, Form, CurrentData = Undefined) Export
 	Rows = GetRowsByCurrentData(Form, "ItemList", CurrentData);
-	ControllerClientServer_V2.ItemListUnitOnChange(GetParameters(Object, Form, "ItemList", Rows));
+	Parameters = GetSimpleParameters(Object, Form, "ItemList", Rows);
+	ControllerClientServer_V2.ItemListUnitOnChange(Parameters);
 EndProcedure
-
-// Вызывается при изменении реквизита Quantity в табличной части ItemList
-// в тех случаях когда в табличной части ItemList нет сумм (NetAmount, TotalAmount)
-//Procedure ItemListQuantityWithoutAmountOnChange(Object, Form, CurrentData = Undefined) Export
-//	Rows = GetRowsByCurrentData(Form, "ItemList", CurrentData);
-//	ControllerClientServer_V2.ItemListQuantityWitoutAmountOnChange(GetParameters(Object, Form, "ItemList", Rows));
-//EndProcedure
 
 #EndRegion
 
 #Region ACCOUNT_SENDER
 
-// Вызывается при изменении реквизита Sender
 Procedure AccountSenerOnChange(Object, Form) Export
-	ControllerClientServer_V2.AccountSenderOnChange(GetParameters(Object, Form, , ,"Sender"));
+	FormParameters = GetFormParameters(Form);
+	ExtractValueBeforeChange_Object("Sender", FormParameters);
+	ServerParameters = GetServerParameters(Object);
+	Parameters = GetParameters(ServerParameters, FormParameters);
+	ControllerClientServer_V2.AccountSenderOnChange(Parameters);
 EndProcedure
 
-// В старом коде при изменении ПОЛЬЗОВАТЕЛЕМ реквизита Sender вызывалась процедура
-// CommonFunctionsClientServer.SetFormItemModifiedByUser(Form, Item.Name);
-// эта процедура нужна для работы с формой,
-// эта процедура вызывается только если ПОЛЬЗОВАТЕЛЬ изменил этот реквизит, при программном изменении она не вызывается
 Procedure OnSetAccountSenderNotify_IsUserChange(Parameters) Export
 	CommonFunctionsClientServer.SetFormItemModifiedByUser(Parameters.Form, "Sender");
-	
 	SetSendCurrencyReadOnly(Parameters);
 EndProcedure
 
-// Эта процедура вызывается только при программом изменении реквизита Receiver
 Procedure OnSetAccountSenderNotify_IsProgrammChange(Parameters) Export
 	SetSendCurrencyReadOnly(Parameters);
 EndProcedure
 
-// код для установки значения ReadOnly в поле Receive currency
-// весь код для управления видимстью доступностью формы нуно собрать в одну процедуру
-// размазывать вот так по модулям не правильно
 Procedure SetSendCurrencyReadOnly(Parameters)
 	AccountSenderCurrency = ServiceSystemServer.GetObjectAttribute(Parameters.Object.Sender, "Currency");
 	Parameters.Form.Items.SendCurrency.ReadOnly = ValueIsFilled(AccountSenderCurrency);
@@ -447,15 +356,7 @@ EndProcedure
 
 #Region CURRENCY_SENDER
 
-//В старом коде при ПРОГРАММНОМ изменении реквизита SendCurrency вызывался код 
-//Form.Items.SendCurrency.ReadOnly = ValueIsFilled(ObjectSendCurrency);
-// эта процедура нужна для работы с формой,
-// эта процедура вызывается только если ПРОГРАММНО изменен реквизит, при пользовтаельском изменении она не вызывается
 Procedure OnSetSendCurrencyNotify_IsProgrammChange(Parameters) Export
-	// смысл кода в том что если у Account заполнено Currency то поле ReadOnly
-	// этот код
-	// Form.Items.SendCurrency.ReadOnly = ValueIsFilled(ObjectSendCurrency);
-	// будем выполнять при изменении Account, потому что ReadOnly зависит не от значения Currency а от значения Account
 	Return;
 EndProcedure
 
@@ -463,29 +364,23 @@ EndProcedure
 
 #Region ACCOUNT_RECEIVER
 
-// Вызывается при изменении реквизита Receiver
 Procedure AccountReceiverOnChange(Object, Form) Export
-	ControllerClientServer_V2.AccountReceiverOnChange(GetParameters(Object, Form, , ,"Receiver"));
+	FormParameters = GetFormParameters(Form);
+	ExtractValueBeforeChange_Object("Sender", FormParameters);
+	ServerParameters = GetServerParameters(Object);
+	Parameters = GetParameters(ServerParameters, FormParameters);
+	ControllerClientServer_V2.AccountReceiverOnChange(Parameters);
 EndProcedure
 
-// В старом коде при изменении ПОЛЬЗОВАТЕЛЕМ реквизита Receiver вызывалась процедура
-// CommonFunctionsClientServer.SetFormItemModifiedByUser(Form, Item.Name);
-// эта процедура нужна для работы с формой,
-// эта процедура вызывается только если ПОЛЬЗОВАТЕЛЬ изменил этот реквизит, при программном изменении она не вызывается
 Procedure OnSetAccountReceiverNotify_IsUserChange(Parameters) Export
 	CommonFunctionsClientServer.SetFormItemModifiedByUser(Parameters.Form, "Receiver");
-	
 	SetReceiveCurrencyReadOnly(Parameters);
 EndProcedure
 
-// Эта процедура вызывается только при программом изменении реквизита Receiver
 Procedure OnSetAccountReceiverNotify_IsProgrammChange(Parameters) Export
 	SetReceiveCurrencyReadOnly(Parameters);
 EndProcedure
 
-// код для установки значения ReadOnly в поле Receive currency
-// весь код для управления видимстью доступностью формы нуно собрать в одну процедуру
-// размазывать вот так по модулям не правильно
 Procedure SetReceiveCurrencyReadOnly(Parameters)
 	AccountReceiverCurrency = ServiceSystemServer.GetObjectAttribute(Parameters.Object.Receiver, "Currency");
 	Parameters.Form.Items.ReceiveCurrency.ReadOnly = ValueIsFilled(AccountReceiverCurrency);
@@ -495,15 +390,7 @@ EndProcedure
 
 #Region CURRENCY_RECEIVER
 
-//В старом коде при ПРОГРАММНОМ изменении реквизита ReceiveCurrency вызывался код 
-//Form.Items.ReceiveCurrency.ReadOnly = ValueIsFilled(ObjectReceiverCurrency);
-// эта процедура нужна для работы с формой,
-// эта процедура вызывается только если ПРОГРАММНО изменен реквизит, при пользовтаельском изменении она не вызывается
 Procedure OnSetReceiveCurrencyNotify_IsProgrammChange(Parameters) Export
-	// смысл кода в том что если у Account заполнено Currency то поле ReadOnly
-	// этот код
-	// Form.Items.ReceiveCurrency.ReadOnly = ValueIsFilled(ObjectReceiverCurrency);
-	// будем выполнять при изменении Account, потому что ReadOnly зависит не от значения Currency а от значения Account
 	Return;
 EndProcedure
 
@@ -511,16 +398,17 @@ EndProcedure
 
 #Region STORE
 
-// реквизит формы
 Procedure StoreOnChange(Object, Form) Export
-	ServerParameters = GetServerParameters();
+	FormParameters = GetFormParameters(Form);
+	FormParameters.EventCaller = "StoreOnUserChange";
+	ExtractValueBeforeChange_Form("Store", FormParameters);
+	
+	ServerParameters = GetServerParameters(Object);
 	ServerParameters.TableName = "ItemList";
 	
-	FormParameters = GetFormParameters();
-	FormParameters.FormPropertyDataPathBeforeChange = "Store";
-	FormParameters.EventCaller = "StoreOnUserChange";
+	Parameters = GetParameters(ServerParameters, FormParameters);
 	
-	ControllerClientServer_V2.StoreOnChange(_GetParameters(Object, Form, ServerParameters, FormParameters));
+	ControllerClientServer_V2.StoreOnChange(Parameters);
 EndProcedure
 
 Procedure OnSetStoreNotify(Parameters) Export
@@ -540,7 +428,8 @@ EndProcedure
 #Region COMPANY
 
 Procedure CompanyOnChange(Object, Form) Export
-	ControllerClientServer_V2.CompanyOnChange(GetParameters(Object, Form, "ItemList"));
+	Parameters = GetSimpleParameters(Object, Form, "ItemList");
+	ControllerClientServer_V2.CompanyOnChange(Parameters);
 EndProcedure
 
 Procedure OnSetCompanyNotify(Parameters) Export
@@ -552,7 +441,15 @@ EndProcedure
 #Region PARTNER
 
 Procedure PartnerOnChange(Object, Form) Export
-	ControllerClientServer_V2.PartnerOnChange(GetParameters(Object, Form, "ItemList", , "Partner"));
+	FormParameters = GetFormParameters(Form);
+	ExtractValueBeforeChange_Object("Partner", FormParameters);
+	
+	ServerParameters = GetServerParameters(Object);
+	ServerParameters.TableName = "ItemList";
+	
+	Parameters = GetParameters(ServerParameters, FormParameters);
+	
+	ControllerClientServer_V2.PartnerOnChange(Parameters);
 EndProcedure
 
 Procedure OnSetPartnerNotify(Parameters) Export
@@ -564,11 +461,11 @@ EndProcedure
 #Region LEGAL_NAME
 
 Procedure LegalNameOnChange(Object, Form) Export
-	ControllerClientServer_V2.LegalNameOnChange(GetParameters(Object, Form, "ItemList"));
+	Parameters = GetSimpleParameters(Object, Form, "ItemList");
+	ControllerClientServer_V2.LegalNameOnChange(Parameters);
 EndProcedure
 
 Procedure OnSetLegalNameNotify(Parameters) Export
-	// действия с формой при изменении LegalName
 	DocumentsClientServer.ChangeTitleGroupTitle(Parameters.Object, Parameters.Form);
 EndProcedure
 
@@ -577,7 +474,8 @@ EndProcedure
 #Region PRICE_INCLUDE_TAX
 
 Procedure PriceIncludeTaxOnChange(Object, Form) Export
-	ControllerClientServer_V2.PriceIncludeTaxOnChange(GetParameters(Object, Form, "ItemList"));
+	Parameters = GetSimpleParameters(Object, Form, "ItemList");
+	ControllerClientServer_V2.PriceIncludeTaxOnChange(Parameters);
 EndProcedure
 
 #EndRegion
@@ -586,36 +484,43 @@ EndProcedure
 
 Procedure ItemListPriceTypeOnChange(Object, Form, CurrentData = Undefined) Export
 	Rows = GetRowsByCurrentData(Form, "ItemList", CurrentData);
-	ControllerClientServer_V2.ItemListPriceTypeOnChange(GetParameters(Object, Form, "ItemList", Rows));
+	Parameters = GetSimpleParameters(Object, Form, "ItemList", Rows);
+	ControllerClientServer_V2.ItemListPriceTypeOnChange(Parameters);
 EndProcedure
 
 Procedure ItemListPriceOnChange(Object, Form, CurrentData = Undefined) Export
 	Rows = GetRowsByCurrentData(Form, "ItemList", CurrentData);
-	ControllerClientServer_V2.ItemListPriceOnChange(GetParameters(Object, Form, "ItemList", Rows));
+	Parameters = GetSimpleParameters(Object, Form, "ItemList", Rows);
+	ControllerClientServer_V2.ItemListPriceOnChange(Parameters);
 EndProcedure
 
 Procedure ItemListTotalAmountOnChange(Object, Form, CurrentData = Undefined) Export
 	Rows = GetRowsByCurrentData(Form, "ItemList", CurrentData);
-	ControllerClientServer_V2.ItemListTotalAmountOnChange(GetParameters(Object, "ItemList", Form, Rows));
+	Parameters = GetSimpleParameters(Object, Form, "ItemList", Rows);
+	ControllerClientServer_V2.ItemListTotalAmountOnChange(Parameters);
 EndProcedure
 
 Procedure ItemListStoreOnChange(Object, Form, CurrentData = Undefined) Export
-	ServerParameters = GetServerParameters();
-	ServerParameters.Rows      = GetRowsByCurrentData(Form, "ItemList", CurrentData);
-	ServerParameters.TableName = "ItemList";
+	Rows = GetRowsByCurrentData(Form, "ItemList", CurrentData);
 	
-	FormParameters = GetFormParameters();
-	FormParameters.ListPropertyDataPathBeforeChange = "ItemList.Store";
+	FormParameters = GetFormParameters(Form);
+	ExtractValueBeforeChange_List("ItemList.Store", FormParameters, Rows);
 	FormParameters.EventCaller = "ItemListStoreOnUserChange";
 
-	ControllerClientServer_V2.ItemListStoreOnChange(_GetParameters(Object, Form, ServerParameters, FormParameters));
+	ServerParameters = GetServerParameters(Object);
+	ServerParameters.Rows      = Rows;
+	ServerParameters.TableName = "ItemList";
+	
+	Parameters = GetParameters(ServerParameters, FormParameters);
+	ControllerClientServer_V2.ItemListStoreOnChange(Parameters);
 EndProcedure
 
 #Region ITEM_LIST_QUANTITY
 
 Procedure ItemListQuantityOnChange(Object, Form, CurrentData = Undefined) Export
 	Rows = GetRowsByCurrentData(Form, "ItemList", CurrentData);
-	ControllerClientServer_V2.ItemListQuantityOnChange(GetParameters(Object, Form, "ItemList", Rows));
+	Parameters = GetSimpleParameters(Object, Form, "ItemList", Rows);
+	ControllerClientServer_V2.ItemListQuantityOnChange(Parameters);
 EndProcedure
 
 Procedure OnSetItemListQuantityNotify(Parameters) Export

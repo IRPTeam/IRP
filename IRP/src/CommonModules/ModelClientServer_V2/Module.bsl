@@ -113,8 +113,12 @@ Function GetChain()
 	// Changes
 	Chain.Insert("ChangeManagerSegmentByPartner", GetChainLink("ChangeManagerSegmentByPartnerExecute"));
 	Chain.Insert("ChangeLegalNameByPartner"     , GetChainLink("ChangeLegalNameByPartnerExecute"));
+	Chain.Insert("ChangePartnerByLegalName"     , GetChainLink("ChangePartnerByLegalNameExecute"));
+	
 	Chain.Insert("Agreement"        , GetChainLink("AgreementExecute"));
 	Chain.Insert("Company"          , GetChainLink("CompanyExecute"));
+	Chain.Insert("ChangeCashAccountByCompany", GetChainLink("ChangeCashAccountByCompanyExecute"));
+	
 	Chain.Insert("ChangeItemKeyByItem"    , GetChainLink("ChangeItemKeyByItemExecute"));
 	Chain.Insert("ChangeUnitByItemKey"    , GetChainLink("ChangeUnitByItemKeyExecute"));
 	Chain.Insert("ChangeCurrencyByAccount", GetChainLink("ChangeCurrencyByAccountExecute"));
@@ -175,6 +179,32 @@ EndFunction
 
 #EndRegion
 
+#Region CHANGE_CASH_ACCOUNT_BY_COMPANY
+
+Function ChangeCashAccountByCompanyOptions() Export
+	Return GetChainLinkOptions("Company, Account");
+EndFunction
+
+Function ChangeCashAccountByCompanyExecute(Options) Export
+	Filters = New Array();
+	Filters.Add(DocumentsClientServer.CreateFilterItem("DeletionMark", False, ComparisonType.Equal,
+		DataCompositionComparisonType.Equal));
+
+	ComplexFilters = New Array();
+	ComplexFilters.Add(DocumentsClientServer.CreateFilterItem("ByCompanyWithEmpty", Options.Company));
+
+	ChoiceParameters = New Structure();
+	ChoiceParameters.Insert("Filters"        , Filters);
+	ChoiceParameters.Insert("ComplexFilters" , ComplexFilters);
+	ChoiceParameters.Insert("Fields"         , New Structure("Ref", "Ref"));
+	ChoiceParameters.Insert("OptionsString"  , "");
+	ChoiceParameters.Insert("CashAccount"    , Options.Account);
+	CashAccount = CatCashAccountsServer.GetCashAccountByCompany(Options.Company, ChoiceParameters);
+	Return CashAccount;
+EndFunction
+
+#EndRegion
+
 #Region CHANGE_CURRENCY_BY_ACCOUNT
 
 // Параметры которые нужны для вычисления Currency, в этом случае достаточно только Account
@@ -207,7 +237,7 @@ EndFunction
 
 #EndRegion
 
-#Region LEGAL_NAME
+#Region CHANGE_LEGAL_NAME_BY_PARTNER
 
 Function ChangeLegalNameByPartnerOptions() Export
 	Return GetChainLinkOptions("Partner, LegalName");
@@ -215,6 +245,21 @@ EndFunction
 
 Function ChangeLegalNameByPartnerExecute(Options) Export
 	Return DocumentsServer.GetLegalNameByPartner(Options.Partner, Options.LegalName);
+EndFunction
+
+#EndRegion
+
+#Region CHANGE_PARTNER_BY_LEGAL_NAME
+
+Function ChangePartnerByLegalNameOptions() Export
+	Return GetChainLinkOptions("Partner, LegalName");
+EndFunction
+
+Function ChangePartnerByLegalNameExecute(Options) Export
+	If ValueIsFilled(Options.LegalName) Then
+		Return DocumentsServer.GetPartnerByLegalName(Options.LegalName, Options.Partner);
+	EndIf;
+	Return Options.Partner;
 EndFunction
 
 #EndRegion

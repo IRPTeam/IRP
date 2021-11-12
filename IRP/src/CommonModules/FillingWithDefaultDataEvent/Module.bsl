@@ -3,6 +3,11 @@ Procedure FillingWithDefaultDataFilling(Source, FillingData, FillingText, Standa
 		Force = False;
 	EndIf;
 
+//===
+IsUsedNewFunctionality = TypeOf(Source) = Type("DocumentObject.IncomingPaymentOrder")
+	Or TypeOf(Source) = Type("DocumentObject.ShipmentConfirmation");
+//===
+
 	Data = New Structure();
 
 	Data.Insert("Author", SessionParameters.CurrentUser);
@@ -20,19 +25,63 @@ Procedure FillingWithDefaultDataFilling(Source, FillingData, FillingText, Standa
 			Data.Insert(Row.AttributeName, Row.Value);
 		EndIf;
 	EndDo;
-
+	
+	//==
+	If IsUsedNewFunctionality Then
+		ArrayOfAllMainTables = New Array();
+		ArrayOfAllMainTables.Add("ItemList");
+		ArrayOfAllMainTables.Add("PaymentList");
+		ArrayOfAllMainTables.Add("Transactions");
+		ArrayOfMainTables = New Array();
+		For Each TableName In ArrayOfAllMainTables Do
+			If CommonFunctionsClientServer.ObjectHasProperty(Source, TableName) Then
+				ArrayOfMainTables.Add(TableName);
+			EndIf;
+		EndDo;
+	EndIf;
+	//==
+	
 	For Each KeyValue In Data Do
 		If CommonFunctionsClientServer.ObjectHasProperty(Source, KeyValue.Key) Then
-			If TypeOf(Source[KeyValue.Key]) = Type("Boolean") And Not Source[KeyValue.Key] Then
-				Source[KeyValue.Key] = KeyValue.Value;
-			ElsIf Not ValueIsFilled(Source[KeyValue.Key]) Or Force Then
-				Source[KeyValue.Key] = KeyValue.Value;
+			//==
+			If IsUsedNewFunctionality Then
+				// временно, потом перенести в модуль Controller
+				
+				Property = New Structure("DataPath", KeyValue.Key);
+				Value    = KeyValue.Value;
+				
+				For Each TableName In ArrayOfMainTables Do
+					ServerParameters = ControllerClientServer_V2.GetServerParameters(Source);
+					ServerParameters.TableName = TableName;
+					Parameters = ControllerClientServer_V2.GetParameters(ServerParameters);
+					ControllerClientServer_V2.API_SetProperty(Parameters, Property, Value);
+				EndDo;
+			Else
+			//==
+				If TypeOf(Source[KeyValue.Key]) = Type("Boolean") And Not Source[KeyValue.Key] Then
+					Source[KeyValue.Key] = KeyValue.Value;
+				ElsIf Not ValueIsFilled(Source[KeyValue.Key]) Or Force Then
+					Source[KeyValue.Key] = KeyValue.Value;
+				EndIf;
 			EndIf;
+			//==
 		EndIf;
 	EndDo;
 
 	Attributes = Source.Metadata().Attributes;
-
+	
+	StatusAttribute = Attributes.Find("Status");
+	If StatusAttribute <> Undefined And StatusAttribute.Type = New TypeDescription("CatalogRef.ObjectStatuses")
+		And Not ValueIsFilled(Source.Status) Then
+		Source.Status = ObjectStatusesServer.GetStatusByDefault(Source.Ref);
+	EndIf;
+	
+	//===
+	If IsUsedNewFunctionality Then
+		Return;
+	EndIf;
+	//===
+	
 	UseShipmentConfirmation = False;
 	If Attributes.Find("StoreSender") <> Undefined And Attributes.Find("UseShipmentConfirmation") <> Undefined Then
 		UseShipmentConfirmation = Source.StoreSender.UseShipmentConfirmation;
@@ -63,11 +112,6 @@ Procedure FillingWithDefaultDataFilling(Source, FillingData, FillingText, Standa
 
 	EndIf;
 
-	StatusAttribute = Attributes.Find("Status");
-	If StatusAttribute <> Undefined And StatusAttribute.Type = New TypeDescription("CatalogRef.ObjectStatuses")
-		And Not ValueIsFilled(Source.Status) Then
-		Source.Status = ObjectStatusesServer.GetStatusByDefault(Source.Ref);
-	EndIf;
 EndProcedure
 
 Procedure ClearDocumentBasisesOnCopy(Source, CopiedObject) Export

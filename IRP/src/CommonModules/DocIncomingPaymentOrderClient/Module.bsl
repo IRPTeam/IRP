@@ -11,18 +11,29 @@ EndProcedure
 
 Procedure OnOpen(Object, Form, Cancel, AddInfo = Undefined) Export
 	DocumentsClient.SetTextOfDescriptionAtForm(Object, Form);
+	
+	ViewClient_V2.OnOpen(Object, Form, "PaymentList");
 EndProcedure
 
 #EndRegion
 
+Procedure PaymentListBeforeAddRow(Object, Form, Item, Cancel, Clone, Parent, IsFolder, Parameter) Export
+	ViewClient_V2.PaymentListBeforeAddRow(Object, Form,  Cancel, Clone);
+EndProcedure
+
+Procedure PaymentListAfterDeleteRow(Object, Form, Item) Export
+	ViewClient_V2.PaymentListAfterDeleteRow(Object, Form);
+EndProcedure
+
 #Region ItemCompany
 
 Procedure CompanyOnChange(Object, Form, Item) Export
-	DefaultCustomParameters = New Structure("Company", Object.Company);
-	CustomParameters = CatCashAccountsClient.DefaultCustomParameters(DefaultCustomParameters);
-	CustomParameters.Insert("CashAccount", Object.Account);
-	Object.Account = CatCashAccountsServer.GetCashAccountByCompany(Object.Company, CustomParameters);
-	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
+	ViewClient_V2.CompanyOnChange(Object, Form, "PaymentList");
+//	DefaultCustomParameters = New Structure("Company", Object.Company);
+//	CustomParameters = CatCashAccountsClient.DefaultCustomParameters(DefaultCustomParameters);
+//	CustomParameters.Insert("CashAccount", Object.Account);
+//	Object.Account = CatCashAccountsServer.GetCashAccountByCompany(Object.Company, CustomParameters);
+//	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 EndProcedure
 
 Procedure CompanyStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
@@ -70,13 +81,15 @@ EndProcedure
 #Region ItemAccount
 
 Procedure AccountOnChange(Object, Form, Item) Export
-	If ValueIsFilled(Object.Account) Then
-		AccountCurrency = ServiceSystemServer.GetObjectAttribute(Object.Account, "Currency");
-		If ValueIsFilled(AccountCurrency) Then
-			Object.Currency = AccountCurrency;
-		EndIf;
-	EndIf;
-	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
+	ViewClient_V2.AccountOnChange(Object, Form, "PaymentList");
+	
+//	If ValueIsFilled(Object.Account) Then
+//		AccountCurrency = ServiceSystemServer.GetObjectAttribute(Object.Account, "Currency");
+//		If ValueIsFilled(AccountCurrency) Then
+//			Object.Currency = AccountCurrency;
+//		EndIf;
+//	EndIf;
+//	DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 EndProcedure
 
 Procedure AccountStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
@@ -113,15 +126,17 @@ EndProcedure
 #Region Partner
 
 Procedure PaymentListPartnerOnChange(Object, Form, Item) Export
-	CurrentData = Form.Items.PaymentList.CurrentData;
-
-	If CurrentData = Undefined Then
-		Return;
-	EndIf;
-
-	If ValueIsFilled(CurrentData.Partner) Then
-		CurrentData.Payer = DocumentsServer.GetLegalNameByPartner(CurrentData.Partner, CurrentData.Payer);
-	EndIf;
+	ViewClient_V2.PaymentListPartnerOnChange(Object, Form);
+	
+//	CurrentData = Form.Items.PaymentList.CurrentData;
+//
+//	If CurrentData = Undefined Then
+//		Return;
+//	EndIf;
+//
+//	If ValueIsFilled(CurrentData.Partner) Then
+//		CurrentData.Payer = DocumentsServer.GetLegalNameByPartner(CurrentData.Partner, CurrentData.Payer);
+//	EndIf;
 EndProcedure
 
 Procedure PaymentListPartnerStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
@@ -156,10 +171,12 @@ EndProcedure
 #Region Payer
 
 Procedure PaymentListPayerOnChange(Object, Form, Item) Export
-	CurrentData = Form.Items.PaymentList.CurrentData;
-	If ValueIsFilled(CurrentData.Payer) Then
-		CurrentData.Partner = DocumentsServer.GetPartnerByLegalName(CurrentData.Payer, CurrentData.Partner);
-	EndIf;
+	ViewClient_V2.PaymentListLegalNameOnChange(Object, Form);
+	
+//	CurrentData = Form.Items.PaymentList.CurrentData;
+//	If ValueIsFilled(CurrentData.Payer) Then
+//		CurrentData.Partner = DocumentsServer.GetPartnerByLegalName(CurrentData.Payer, CurrentData.Partner);
+//	EndIf;
 EndProcedure
 
 Procedure PaymentListPayerStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export

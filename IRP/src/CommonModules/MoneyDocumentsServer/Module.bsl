@@ -48,7 +48,8 @@ Procedure FillFormAttributes(Object, Form, Is)
 			Form.Currency = ServiceSystemServer.GetObjectAttribute(Object.Account, "Currency");
 		EndIf;
 	EndIf;
-	If Is.IncomingPaymentOrder Or Is.OutgoingPaymentOrder Then
+	//If Is.IncomingPaymentOrder Or Is.OutgoingPaymentOrder Then
+	If Is.OutgoingPaymentOrder Then
 		If ValueIsFilled(Object.Account) And ValueIsFilled(Object.Account.Currency) 
 			And Not ValueIsFilled(Object.Currency) Then
 			Object.Currency = Object.Account.Currency;

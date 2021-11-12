@@ -125,6 +125,10 @@ Procedure UpdateCacheBeforeChange(Object, Form)
 		TableName  = Segments[0];
 		ColumnName = Segments[1];
 		
+		If Not CommonFunctionsClientServer.ObjectHasProperty(Object, TableName) Then
+			Continue;
+		EndIf;
+		
 		If Not Tables.Property(TableName) Then
 			Tables.Insert(TableName, New Array());
 		EndIf;
@@ -245,7 +249,7 @@ EndFunction
 
 Function AddOrCopyRow(Object, Form, TableName, Cancel, Clone, OriginRow)
 	Cancel = True;
-	NewRow = Object.ItemList.Add();
+	NewRow = Object[TableName].Add();
 	If Clone Then // Copy()
 		OriginRows = GetRowsByCurrentData(Form, TableName, OriginRow);
 		If Not OriginRows.Count() Then
@@ -284,10 +288,12 @@ EndProcedure
 
 #Region FORM
 
-Procedure OnOpen(Object, Form) Export
+Procedure OnOpen(Object, Form, TableNames) Export
 	UpdateCacheBeforeChange(Object, Form);
-	Parameters = GetSimpleParameters(Object, Form, "ItemList");
-	ControllerClientServer_V2.FillPropertyFormByDefault(Form,  "Store", Parameters);
+	For Each TableName In StrSplit(TableNames, ",") Do
+		Parameters = GetSimpleParameters(Object, Form, TrimAll(TableName));
+		ControllerClientServer_V2.FillPropertyFormByDefault(Form,  "Store", Parameters);
+	EndDo;
 EndProcedure
 
 #EndRegion
@@ -304,9 +310,7 @@ Procedure ItemListAfterDeleteRow(Object, Form) Export
 	DeleteRows(Object, Form, "ItemList");
 EndProcedure
 
-#EndRegion
-
-#Region ITEM_ITEMKEY_UNIT_QUANTITYINBASEUNIT
+#Region ITEM_ITEMKEY_UNIT
 
 Procedure ItemListItemOnChange(Object, Form, CurrentData = Undefined) Export
 	Rows = GetRowsByCurrentData(Form, "ItemList", CurrentData);
@@ -325,6 +329,38 @@ Procedure ItemListUnitOnChange(Object, Form, CurrentData = Undefined) Export
 	Parameters = GetSimpleParameters(Object, Form, "ItemList", Rows);
 	ControllerClientServer_V2.ItemListUnitOnChange(Parameters);
 EndProcedure
+
+#EndRegion
+
+#EndRegion
+
+#Region _PAYMENT_LIST_
+
+Procedure PaymentListBeforeAddRow(Object, Form, Cancel, Clone, CurrentData = Undefined) Export
+	NewRow = AddOrCopyRow(Object, Form, "PaymentList", Cancel, Clone, CurrentData);
+	Form.Items.PaymentList.CurrentRow = NewRow.GetID();
+	Form.Items.PaymentList.ChangeRow();
+EndProcedure
+
+Procedure PaymentListAfterDeleteRow(Object, Form) Export
+	DeleteRows(Object, Form, "PaymentList");
+EndProcedure
+
+#Region _PAYMENT_LIST_COLUMNS
+
+Procedure PaymentListPartnerOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "PaymentList", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "PaymentList", Rows);
+	ControllerClientServer_V2.PaymentListPartnerOnChange(Parameters);
+EndProcedure
+
+Procedure PaymentListLegalNameOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "PaymentList", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "PaymentList", Rows);
+	ControllerClientServer_V2.PaymentListLegalNameOnChange(Parameters);
+EndProcedure
+
+#EndRegion
 
 #EndRegion
 
@@ -427,12 +463,37 @@ EndProcedure
 
 #Region COMPANY
 
-Procedure CompanyOnChange(Object, Form) Export
-	Parameters = GetSimpleParameters(Object, Form, "ItemList");
-	ControllerClientServer_V2.CompanyOnChange(Parameters);
+Procedure CompanyOnChange(Object, Form, TableNames) Export
+	For Each TableName In StrSplit(TableNames, ",") Do
+		Parameters = GetSimpleParameters(Object, Form, TrimAll(TableName));
+		ControllerClientServer_V2.CompanyOnChange(Parameters);
+	EndDo;
 EndProcedure
 
 Procedure OnSetCompanyNotify(Parameters) Export
+	DocumentsClientServer.ChangeTitleGroupTitle(Parameters.Object, Parameters.Form);
+EndProcedure
+
+#EndRegion
+
+#Region ACCOUNT
+
+Procedure AccountOnChange(Object, Form, TableNames) Export
+	For Each TableName In StrSplit(TableNames, ",") Do
+		Parameters = GetSimpleParameters(Object, Form, TrimAll(TableName));
+		ControllerClientServer_V2.AccountOnChange(Parameters);
+	EndDo;
+EndProcedure
+	
+Procedure OnSetAccountNotify(Parameters) Export
+	DocumentsClientServer.ChangeTitleGroupTitle(Parameters.Object, Parameters.Form);
+EndProcedure
+
+#EndRegion
+
+#Region CURRENCY
+
+Procedure OnSetCurrencyNotify(Parameters) Export
 	DocumentsClientServer.ChangeTitleGroupTitle(Parameters.Object, Parameters.Form);
 EndProcedure
 

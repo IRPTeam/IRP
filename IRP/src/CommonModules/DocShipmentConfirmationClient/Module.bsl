@@ -2,7 +2,7 @@
 Procedure OnOpen(Object, Form, Cancel, AddInfo = Undefined) Export
 	DocumentsClient.SetTextOfDescriptionAtForm(Object, Form);
 	
-	ViewClient_V2.OnOpen(Object, Form);
+	ViewClient_V2.OnOpen(Object, Form, "ItemList");
 EndProcedure
 
 Procedure AfterWriteAtClient(Object, Form, WriteParameters, AddInfo = Undefined) Export
@@ -12,7 +12,7 @@ EndProcedure
 #Region ItemCompany
 
 Procedure CompanyOnChange(Object, Form, Item) Export
-	ViewClient_V2.CompanyOnChange(Object, Form);
+	ViewClient_V2.CompanyOnChange(Object, Form, "ItemList");
 	//DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 EndProcedure
 

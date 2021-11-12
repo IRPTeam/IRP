@@ -210,11 +210,15 @@ Procedure AddNewRow(TableName, Parameters) Export
 	
 	ForceCommintChanges = True;
 	For Each ColumnName In StrSplit(Parameters.ObjectMetadataInfo.Tables[TableName].Columns, ",") Do
+		
+		// у колонки есть собственный обработчик .Default вызываем его
 		DataPath = StrTemplate("%1.%2", TableName, ColumnName);
 		Default = Defaults.Get(DataPath);
 		If Default<> Undefined Then
 			ForceCommintChanges = False;
 			ModelClientServer_V2.EntryPoint(Default.StepsEnabler, Parameters);
+
+		// если колонка заполнена, и у нее есть обработчик .OnChage, вызываем его
 		ElsIf ValueIsFilled(NewRow[ColumnName]) Then
 			SetPropertyObject(Parameters, DataPath, NewRow.Key, NewRow[ColumnName]);
 			Binding = Bindings.Get(DataPath);
@@ -241,6 +245,30 @@ Procedure DeleteRows(TableName, Parameters) Export
 			Parameters.Object[DepTableName].Delete(ItemForDelete);
 		EndDo;
 	EndDo;
+	// выполняем обработчики после удаления строки
+	Binding = ItemListOnDeleteStepsBinding(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// <TableName>.OnDelete.Bind
+Function ItemListOnDeleteStepsBinding(Parameters)
+	DataPath = "";
+	Binding = New Structure();
+	Binding.Insert("ShipmentConfirmation", "ItemListOnDeleteStepsEnabler_HaveStoreInHeader");
+	Return BindSteps(Undefined, DataPath, Binding, Parameters);
+EndFunction
+
+Procedure ItemListOnDeleteStepsEnabler_HaveStoreInHeader(Parameters, Chain) Export
+	Chain.ChangeStoreInHeaderByStoresInList.Enable = True;
+	Chain.ChangeStoreInHeaderByStoresInList.Setter = "SetStore";
+	
+	Options = ModelClientServer_V2.ChangeStoreInHeaderByStoresInListOptions();
+	ArrayOfStoresInList = New Array();
+	For Each Row In Parameters.Object.ItemList Do
+		ArrayOfStoresInList.Add(GetPropertyObject(Parameters, "ItemList.Store", Row.Key));
+	EndDo;
+	Options.ArrayOfStoresInList = ArrayOfStoresInList; 
+	Chain.ChangeStoreInHeaderByStoresInList.Options.Add(Options);
 EndProcedure
 
 #Region ITEM_LIST_ITEM
@@ -1269,11 +1297,11 @@ Procedure AddViewNotify(ViewNotify, Parameters)
 EndProcedure
 
 Function GetPropertyForm(Parameters, DataPath, Key = Undefined)
-#IF Client THEN
+If Parameters.Form <> Undefined Then
 	Return GetProperty(Parameters.CacheForm, Parameters.Form, DataPath, Key);
-#ELSE
+Else
 	Return Undefined;
-#ENDIF
+EndIf;
 EndFunction
 
 Function GetPropertyObject(Parameters, DataPath, Key = Undefined)

@@ -398,8 +398,12 @@ Function AccountStepsBinding(Parameters)
 	DataPath = "Account";
 	Binding = New Structure();
 	Binding.Insert("IncomingPaymentOrder", "AccountStepsEnabler");
-	Return BindSteps(Undefined, DataPath, Binding, Parameters);
+	Return BindSteps("AccountStepsEnablerEmpty", DataPath, Binding, Parameters);
 EndFunction
+
+Procedure AccountStepsEnablerEmpty(Parameters, Chain) Export
+	Return;
+EndProcedure
 
 Procedure AccountStepsEnabler(Parameters, Chain) Export
 	Chain.ChangeCurrencyByAccount.Enable = True;
@@ -431,11 +435,10 @@ EndProcedure
 Function CurrencyStepsBinding(Parameters)
 	DataPath = "Currency";
 	Binding = New Structure();
-	Binding.Insert("IncomingPaymentOrder", "CurrencyStepsEnabler");
-	Return BindSteps(Undefined, DataPath, Binding, Parameters);
+	Return BindSteps("CurrencyStepsEnablerEmpty", DataPath, Binding, Parameters);
 EndFunction
 
-Procedure CurrencyStepsEnabler(Parameters, Chain) Export
+Procedure CurrencyStepsEnablerEmpty(Parameters, Chain) Export
 	Return;
 EndProcedure
 

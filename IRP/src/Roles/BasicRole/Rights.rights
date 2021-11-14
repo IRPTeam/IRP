@@ -518,13 +518,6 @@
 		</right>
 	</object>
 	<object>
-		<name>Constant.NotFirstStart</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
 		<name>CommonForm.RelatedDocuments</name>
 		<right>
 			<name>View</name>
@@ -580,13 +573,6 @@
 	</object>
 	<object>
 		<name>Constant.SaasMode</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Constant.ConnectionStatus</name>
 		<right>
 			<name>Read</name>
 			<value>true</value>

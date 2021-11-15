@@ -41,7 +41,8 @@ EndProcedure
 #Region ItemPartner
 
 Procedure PartnerOnChange(Object, Form, Item) Export
-	ViewClient_V2.PartnerOnChange(Object, Form);
+	ViewClient_V2.PartnerOnChange(Object, Form, "ItemList");
+
 	//Object.LegalName = DocumentsServer.GetLegalNameByPartner(Object.Partner, Object.LegalName);
 	//DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 EndProcedure
@@ -90,7 +91,7 @@ EndProcedure
 #Region ItemLegalName
 
 Procedure LegalNameOnChange(Object, Form, Item) Export
-	ViewClient_V2.LegalNameOnChange(Object, Form);
+	ViewClient_V2.LegalNameOnChange(Object, Form, "ItemList");
 	//DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 EndProcedure
 
@@ -138,7 +139,7 @@ EndProcedure
 //EndProcedure
 
 Procedure StoreOnChange(Object, Form, Item) Export
-	ViewClient_V2.StoreOnChange(Object, Form);
+	ViewClient_V2.StoreOnChange(Object, Form, "ItemList");
 	
 //	If Not ValueIsFilled(Form.Store) Then
 //
@@ -233,6 +234,7 @@ EndProcedure
 #EndRegion
 
 Procedure ItemListOnChange(Object, Form, Item = Undefined, CurrentRowData = Undefined) Export
+	Return;
 	//DocumentsClient.FillRowIDInItemList(Object);
 	//CurrentData = DocumentsClient.GetCurrentRowDataList(Form.Items.ItemList, CurrentRowData);
 	
@@ -248,7 +250,7 @@ Procedure ItemListOnChange(Object, Form, Item = Undefined, CurrentRowData = Unde
 	//FillPropertyValues(ObjectData, Object);
 	//DocumentsClientServer.FillStores(ObjectData, Form);
 	
-	RowIDInfoClient.UpdateQuantity(Object, Form);
+	//RowIDInfoClient.UpdateQuantity(Object, Form);
 EndProcedure
 
 Procedure ItemListSelection(Object, Form, Item, RowSelected, Field, StandardProcessing, AddInfo = Undefined) Export

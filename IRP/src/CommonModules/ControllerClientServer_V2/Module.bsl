@@ -14,8 +14,14 @@ EndFunction
 Function GetFormParameters(Form) Export
 	Result = New Structure();
 	Result.Insert("Form", Form);
-	Result.Insert("ViewModuleName", "ViewClient_V2");
+	Result.Insert("ViewClientModuleName", "ViewClient_V2");
+	Result.Insert("ViewServerModuleName", "ViewServer_V2");
 	Result.Insert("EventCaller", "");
+	Result.Insert("TaxesCache", "");
+	
+	If CommonFunctionsClientServer.ObjectHasProperty(Form, "TaxesCache") Then
+		Result.TaxesCache = Form.TaxesCache;
+	EndIf;
 	
 	Result.Insert("PropertyBeforeChange", New Structure("Object, Form, List", 
 		New Structure(), New Structure(), New Structure()));
@@ -44,11 +50,15 @@ Function CreateParameters(ServerParameters, FormParameters)
 
 	Parameters = New Structure();
 	// параметры для Client 
-	Parameters.Insert("Form"           , FormParameters.Form);
-	Parameters.Insert("CacheForm"      , New Structure()); // кэш для реквизитов формы
-	Parameters.Insert("ViewNotify"     , New Array());
-	Parameters.Insert("ViewModuleName" , FormParameters.ViewModuleName);
-	Parameters.Insert("EventCaller"    , FormParameters.EventCaller);
+	Parameters.Insert("Form"             , FormParameters.Form);
+	Parameters.Insert("FormIsExists"     , FormParameters.Form <> Undefined);
+	Parameters.Insert("FormModificators" , New Array());
+	Parameters.Insert("CacheForm"        , New Structure()); // кэш для реквизитов формы
+	Parameters.Insert("ViewNotify"       , New Array());
+	Parameters.Insert("ViewClientModuleName"   , FormParameters.ViewClientModuleName);
+	Parameters.Insert("ViewServerModuleName"   , FormParameters.ViewServerModuleName);
+	Parameters.Insert("EventCaller"      , FormParameters.EventCaller);
+	Parameters.Insert("TaxesCache"       , FormParameters.TaxesCache);
 	
 	Parameters.Insert("PropertyBeforeChange", FormParameters.PropertyBeforeChange);
 	
@@ -58,9 +68,11 @@ Function CreateParameters(ServerParameters, FormParameters)
 	Parameters.Insert("Cache"  , New Structure());
 	Parameters.Insert("ControllerModuleName", ServerParameters.ControllerModuleName);
 	
-	// налоги, отключено
-	ArrayOfTaxInfo = New Array();//TaxesClient.GetArrayOfTaxInfo(Form);
-	Parameters.Insert("ArrayOfTaxInfo", ArrayOfTaxInfo);
+	Parameters.Insert("ArrayOfTaxInfo", New Array());
+	If ValueIsFilled(FormParameters.TaxesCache) Then
+		DeserializedCache = CommonFunctionsServer.DeserializeXMLUseXDTO(Parameters.TaxesCache);
+		Parameters.ArrayOfTaxInfo = DeserializedCache.ArrayOfTaxInfo;
+	EndIf;
 	
 	// получаем колонки из табличных частей
 	ArrayOfTableNames = New Array();
@@ -104,9 +116,10 @@ Function CreateParameters(ServerParameters, FormParameters)
 		EndIf;
 		
 		TaxRates = New Structure();
-		For Each ItemOfTaxInfo In ArrayOfTaxInfo Do
+		For Each ItemOfTaxInfo In Parameters.ArrayOfTaxInfo Do
 			TaxRates.Insert(ItemOfTaxInfo.Name, Row[ItemOfTaxInfo.Name]);
 		EndDo;
+		
 		NewRow.Insert("TaxRates", TaxRates);
 		NewRow.Insert("TaxList" , ArrayOfRowsTaxList);
 	EndDo;
@@ -143,12 +156,6 @@ Procedure FillPropertyFormByDefault(Form, DataPath, Parameters) Export
 EndProcedure
 
 #ENDIF
-
-//Procedure sss(Parameters) Export
-//	Bindings = GetAllBindings(Parameters);
-//	For Each KeyValue In Bindings Do
-//	EndDo;
-//EndProcedure
 
 #Region API
 
@@ -201,16 +208,68 @@ EndFunction
 
 Function GetAllFillByDefault(Parameters)
 	Binding = New Map();
-	Binding.Insert("Store", StoreDefaultBinding(Parameters));
+	Binding.Insert("Store"        , StoreDefaultBinding(Parameters));
+	Binding.Insert("DeliveryDate" , DeliveryDateDefaultBinding(Parameters));
 	
-	Binding.Insert("ItemList.Store"    , ItemListStoreDefaultBinding(Parameters));
-	Binding.Insert("ItemList.Quantity" , ItemListQuantityDefaultBinding(Parameters));
+	Binding.Insert("ItemList.Store"        , ItemListStoreDefaultBinding(Parameters));
+	Binding.Insert("ItemList.DeliveryDate" , ItemListDeliveryDateDefaultBinding(Parameters));
+	Binding.Insert("ItemList.Quantity"     , ItemListQuantityDefaultBinding(Parameters));
 	Return Binding;
 EndFunction
 
 Procedure StepsEnamblerEmpty(Parameters, Chain) Export
 	Return;
 EndProcedure
+
+#Region _FORM_
+
+// Form.OnCreateAtServer
+Procedure FormOnCreateAtServer(Parameters) Export
+	Binding = FormOnCreateAtServerStepsBinding(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// Form.OnCreateAtServer.Bind
+Function FormOnCreateAtServerStepsBinding(Parameters)
+	DataPath = "";
+	Binding = New Structure();
+	Binding.Insert("SalesInvoice", "OnCreateAtServerStepsEnabler_WithTaxes");
+	Return BindSteps("StepsEnamblerEmpty", DataPath, Binding, Parameters);
+EndFunction
+
+// Form.Modificator
+Procedure FormModificator_CreateTaxesFormControls(Parameters, Results) Export
+	If Results[0].Value Then
+		Parameters.FormModificators.Add("FormModificator_CreateTaxesFormControls");
+	EndIf;
+EndProcedure
+
+Procedure OnCreateAtServerStepsEnabler_WithTaxes(Parameters, Chain) Export
+	Chain.RequireCallCreateTaxesFormControls.Enable = True;
+	Chain.RequireCallCreateTaxesFormControls.Setter = "FormModificator_CreateTaxesFormControls";
+	Options = ModelClientServer_V2.RequireCallCreateTaxesFormControlsOptions();
+	Options.Ref            = Parameters.Object.Ref;
+	Options.Date           = GetPropertyObject(Parameters, "Date");
+	Options.Company        = GetPropertyObject(Parameters, "Company");
+	Options.ArrayOfTaxInfo = Parameters.ArrayOfTaxInfo;
+	Chain.RequireCallCreateTaxesFormControls.Options.Add(Options);
+EndProcedure
+
+// Form.OnOpen
+Procedure FormOnOpen(Parameters) Export
+	AddViewNotify("OnOpenFormNotify", Parameters);
+	Binding = FormOnOpenStepsBinding(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// Form.OnOpen.Bind
+Function FormOnOpenStepsBinding(Parameters)
+	DataPath = "";
+	Binding = New Structure();
+	Return BindSteps("StepsEnamblerEmpty", DataPath, Binding, Parameters);
+EndFunction
+
+#EndRegion
 
 #Region _LIST_
 
@@ -269,6 +328,7 @@ Function ListOnDeleteStepsBinding(Parameters)
 	DataPath = "";
 	Binding = New Structure();
 	Binding.Insert("ShipmentConfirmation", "ItemListOnDeleteStepsEnabler_HaveStoreInHeader");
+	Binding.Insert("SalesInvoice"        , "ItemListOnDeleteStepsEnabler_HaveStoreInHeader");
 	Return BindSteps("StepsEnamblerEmpty", DataPath, Binding, Parameters);
 EndFunction
 
@@ -418,7 +478,7 @@ EndProcedure
 
 #Region CURRENCY
 
-// Account.OnChange
+// Currency.OnChange
 Procedure CurrencyOnChange(Parameters) Export
 	AddViewNotify("OnSetCurrencyNotify", Parameters);
 	Binding = CurrencyStepsBinding(Parameters);
@@ -437,6 +497,68 @@ Function CurrencyStepsBinding(Parameters)
 	Binding = New Structure();
 	Return BindSteps("StepsEnamblerEmpty", DataPath, Binding, Parameters);
 EndFunction
+
+#EndRegion
+
+#Region _DATE
+
+// Date.OnChange
+Procedure DateOnChange(Parameters) Export
+	Binding = DateStepsBinding(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// Date.Set
+Procedure SetDate(Parameters, Results) Export
+	Binding = DateStepsBinding(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// Date.Bind
+Function DateStepsBinding(Parameters)
+	DataPath = "Date";
+	Binding = New Structure();
+	Binding.Insert("SalesInvoice"        , "DateStepsEnabler_Trade_PartnerIsCustomer");
+	Return BindSteps("StepsEnamblerEmpty", DataPath, Binding, Parameters);
+EndFunction
+
+Procedure DateStepsEnabler_Trade_PartnerIsCustomer(Parameters, Chain) Export
+	// ChangeAgreementByPartner
+	Chain.ChangeAgreementByPartner.Enable = True;
+	Chain.ChangeAgreementByPartner.Setter = "SetAgreement";
+	Options = ModelClientServer_V2.ChangeAgreementByPartnerOptions();
+	Options.Partner       = GetPropertyObject(Parameters, "Partner");
+	Options.Agreement     = GetPropertyObject(Parameters, "Agreement");
+	Options.CurrentDate   = GetPropertyObject(Parameters, "Date");
+	Options.AgreementType = PredefinedValue("Enum.AgreementTypes.Customer");
+	Chain.ChangeAgreementByPartner.Options.Add(Options);
+
+	// ChangeDeliveryDate
+	Chain.ChangeDeliveryDateByAgreement.Enable = True;
+	Chain.ChangeStoreByAgreement.Setter = "SetDeliveryDate";
+	Options = ModelClientServer_V2.ChangeDeliveryDateByAgreementOptions();
+	Options.Agreement = GetPropertyObject(Parameters, "Agreement");
+	Options.CurrentDeliveryDate = GetPropertyForm(Parameters, "DeliveryDate");
+	Chain.ChangeDeliveryDateByAgreement.Options.Add(Options);
+	
+	//UpdatePaymentTerm
+	
+	// ChangePriceByPriceType
+	Chain.ChangePriceByPriceType.Enable = True;
+	Chain.ChangePriceByPriceType.Setter = "SetItemListPrice";
+	
+	For Each Row In GetRows(Parameters, "ItemList") Do
+		Options = ModelClientServer_V2.ChangePriceByPriceTypeOptions();
+		Options.Ref          = Parameters.Object.Ref;
+		Options.Date         = GetPropertyObject(Parameters, "Date");
+		Options.CurrentPrice = GetPropertyObject(Parameters, "ItemList.Price", Row.Key);
+		Options.PriceType    = GetPropertyObject(Parameters, "ItemList.PriceType", Row.Key);
+		Options.ItemKey      = GetPropertyObject(Parameters, "ItemList.ItemKey"  , Row.Key);
+		Options.Unit         = GetPropertyObject(Parameters, "ItemList.Unit"     , Row.Key);
+		Options.Key          = Row.Key;
+		Chain.ChangePriceByPriceType.Options.Add(Options);
+	EndDo;
+EndProcedure
 
 #EndRegion
 
@@ -459,11 +581,12 @@ EndProcedure
 Function CompanyStepsBinding(Parameters)
 	DataPath = "Company";
 	Binding = New Structure();
-	Binding.Insert("IncomingPaymentOrder", "CompanyStepsEnabler_HaveCachAccountInHeader");
-	Return BindSteps("CompanyStepsEnabler", DataPath, Binding, Parameters);
+	Binding.Insert("IncomingPaymentOrder", "CompanyStepsEnabler_Money");
+	Binding.Insert("SalesInvoice"        , "CompanyStepsEnabler_WithTaxes");
+	Return BindSteps("StepsEnamblerEmpty", DataPath, Binding, Parameters);
 EndFunction
 
-Procedure CompanyStepsEnabler_HaveCachAccountInHeader(Parameters, Chain) Export
+Procedure CompanyStepsEnabler_Money(Parameters, Chain) Export
 	Chain.ChangeCashAccountByCompany.Enable = True;
 	Chain.ChangeCashAccountByCompany.Setter = "SetAccount";
 	Options = ModelClientServer_V2.ChangeCashAccountByCompanyOptions();
@@ -472,8 +595,15 @@ Procedure CompanyStepsEnabler_HaveCachAccountInHeader(Parameters, Chain) Export
 	Chain.ChangeCashAccountByCompany.Options.Add(Options);
 EndProcedure
 
-Procedure CompanyStepsEnabler(Parameters, Chain) Export
-	Return;
+Procedure CompanyStepsEnabler_WithTaxes(Parameters, Chain) Export
+	Chain.RequireCallCreateTaxesFormControls.Enable = True;
+	Chain.RequireCallCreateTaxesFormControls.Setter = "FormModificator_CreateTaxesFormControls";
+	Options = ModelClientServer_V2.RequireCallCreateTaxesFormControlsOptions();
+	Options.Ref            = Parameters.Object.Ref;
+	Options.Date           = GetPropertyObject(Parameters, "Date");
+	Options.Company        = GetPropertyObject(Parameters, "Company");
+	Options.ArrayOfTaxInfo = Parameters.ArrayOfTaxInfo;
+	Chain.RequireCallCreateTaxesFormControls.Options.Add(Options);
 EndProcedure
 
 #EndRegion
@@ -498,30 +628,27 @@ EndProcedure
 Function PartnerStepsBinding(Parameters)
 	DataPath = "Partner";
 	Binding = New Structure();
-	Binding.Insert("ShipmentConfirmation", "PartnerStepsEnabler_ChangeOnlyLegalName");
-	Return BindSteps("PartnerStepsEnabler", DataPath, Binding, Parameters);
+	Binding.Insert("ShipmentConfirmation", "PartnerStepsEnabler_Warehouse");
+	Binding.Insert("SalesInvoice"        , "PartnerStepsEnabler_Trade_PartnerIsCustomer");
+	Return BindSteps("StepsEnamblerEmpty", DataPath, Binding, Parameters);
 EndFunction
 
-Procedure PartnerStepsEnabler(Parameters, Chain) Export
-	// При изменении партнера нужно изменить LegalName
+Procedure PartnerStepsEnabler_Trade_PartnerIsCustomer(Parameters, Chain) Export
 	Chain.ChangeLegalNameByPartner.Enable = True;
 	Chain.ChangeLegalNameByPartner.Setter = "SetLegalName";
-	// эти данные (параметры) нужны для получения LegalName
 	Options = ModelClientServer_V2.ChangeLegalNameByPartnerOptions();
 	Options.Partner   = GetPropertyObject(Parameters, "Partner");
 	Options.LegalName = GetPropertyObject(Parameters, "LegalName");;
-	Chain.LegalName.Options.Add(Options);
+	Chain.ChangeLegalNameByPartner.Options.Add(Options);
 	
-	// При изменении партнера нужно изменить Agreement
-	Chain.Agreement.Enable = True;
-	Chain.Agreement.Setter = "SetAgreement";
-	// эти данные (параметры) нужны для получения Agreement
-	AgreementOptions = ModelClientServer_V2.AgreementOptions();
-	AgreementOptions.Partner       = GetPropertyObject(Parameters, "Partner");
-	AgreementOptions.Agreement     = GetPropertyObject(Parameters, "Agreement");
-	AgreementOptions.CurrentDate   = GetPropertyObject(Parameters, "Date");
-	AgreementOptions.AgreementType = PredefinedValue("Enum.AgreementTypes.Customer");
-	Chain.Agreement.Options.Add(AgreementOptions);
+	Chain.ChangeAgreementByPartner.Enable = True;
+	Chain.ChangeAgreementByPartner.Setter = "SetAgreement";
+	Options = ModelClientServer_V2.ChangeAgreementByPartnerOptions();
+	Options.Partner       = GetPropertyObject(Parameters, "Partner");
+	Options.Agreement     = GetPropertyObject(Parameters, "Agreement");
+	Options.CurrentDate   = GetPropertyObject(Parameters, "Date");
+	Options.AgreementType = PredefinedValue("Enum.AgreementTypes.Customer");
+	Chain.ChangeAgreementByPartner.Options.Add(Options);
 	
 	Chain.ChangeManagerSegmentByPartner.Enable = True;
 	Chain.ChangeManagerSegmentByPartner.Setter = "SetManagerSegment";
@@ -530,7 +657,7 @@ Procedure PartnerStepsEnabler(Parameters, Chain) Export
 	Chain.ChangeManagerSegmentByPartner.Options.Add(Options);
 EndProcedure
 
-Procedure PartnerStepsEnabler_ChangeOnlyLegalName(Parameters, Chain) Export
+Procedure PartnerStepsEnabler_Warehouse(Parameters, Chain) Export
 	Chain.ChangeLegalNameByPartner.Enable = True;
 	Chain.ChangeLegalNameByPartner.Setter = "SetLegalName";
 	Options = ModelClientServer_V2.ChangeLegalNameByPartnerOptions();
@@ -538,11 +665,6 @@ Procedure PartnerStepsEnabler_ChangeOnlyLegalName(Parameters, Chain) Export
 	Options.LegalName = GetPropertyObject(Parameters, "LegalName");;
 	Chain.ChangeLegalNameByPartner.Options.Add(Options);
 EndProcedure
-
-//Procedure SetPartner_API(Parameters, Results) Export
-//	ModelClientServer_V2.Init_API("PartnerStepsEnabler", Parameters);
-//	SetPartner(Parameters, Results);
-//EndProcedure
 
 #EndRegion
 
@@ -565,11 +687,127 @@ EndProcedure
 Function LegalNameStepsBinding(Parameters)
 	DataPath = "LegalName";
 	Binding = New Structure();
-	Return BindSteps("LegalNameStepsEnabler", DataPath, Binding, Parameters);
+	Return BindSteps("StepsEnamblerEmpty", DataPath, Binding, Parameters);
 EndFunction
 
-Procedure LegalNameStepsEnabler(Parameters, Chain) Export
-	Return;
+#EndRegion
+
+#Region DELIVERY_DATE
+
+// DeliveryDate.OnChange
+Procedure DeliveryDateOnChange(Parameters) Export
+	ProceedPropertyBeforeChange_Form(Parameters);
+	AddViewNotify("OnSetDeliveryDateNotify", Parameters);
+	Binding = DeliveryDateStepsBinding(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// DeliveryDate.Set
+Procedure SetDeliveryDate(Parameters, Results) Export
+	Binding = DeliveryDateStepsBinding(Parameters);
+	SetterForm(Binding.StepsEnabler, Binding.DataPath, Parameters, Results, "OnSetDeliveryDateNotify", ,True);
+EndProcedure
+
+// DeliveryDate.Default.Bind
+Function DeliveryDateDefaultBinding(Parameters)
+	DataPath = "DeliveryDate";
+	Binding = New Structure();
+	Binding.Insert("SalesInvoice"   , "DeliveryDateDefault");	
+	Return BindSteps("StepsEnamblerEmpty", DataPath, Binding, Parameters);
+EndFunction
+
+// DeliveryDate.Bind
+Function DeliveryDateStepsBinding(Parameters)
+	DataPath = "DeliveryDate";
+	Binding = New Structure();
+	Return BindSteps("DeliveryDateStepsEnabler", DataPath, Binding, Parameters);
+EndFunction
+
+Procedure DeliveryDateDefault(Parameters, Chain) Export
+	// DefaultDeliveryDateInHeader
+	Chain.DefaultDeliveryDateInHeader.Enable = True;
+	Chain.DefaultDeliveryDateInHeader.Setter = "SetDeliveryDate";
+	Options = ModelClientServer_V2.DefaultDeliveryDateInHeaderOptions();
+	Options.Date      = GetPropertyObject(Parameters  , "Date");
+	Options.Agreement = GetPropertyObject(Parameters  , "Agreement");
+	
+	ArrayOfDeliveryDateInList = New Array();
+	For Each Row In Parameters.Object.ItemList Do
+		ArrayOfDeliveryDateInList.Add(GetPropertyObject(Parameters, "ItemList.DeliveryDate", Row.Key));
+	EndDo;
+	Options.ArrayOfDeliveryDateInList = ArrayOfDeliveryDateInList; 
+	
+	Chain.DefaultDeliveryDateInHeader.Options.Add(Options);
+EndProcedure
+
+Procedure DeliveryDateStepsEnabler(Parameters, Chain) Export
+	// FillDeliveryDateInList
+	Chain.FillDeliveryDateInList.Enable = True;
+	Chain.FillDeliveryDateInList.Setter = "SetItemListDeliveryDate";
+	For Each Row In GetRows(Parameters, "ItemList") Do
+		// FillDeliveryDateInList
+		Options = ModelClientServer_V2.FillDeliveryDateInListOptions();
+		Options.DeliveryDate       = GetPropertyForm(Parameters, "DeliveryDate");
+		Options.DeliveryDateInList = GetPropertyObject(Parameters, "ItemList.DeliveryDate", Row.Key);
+		Options.Key = Row.Key;
+		Chain.FillDeliveryDateInList.Options.Add(Options);
+	EndDo;
+EndProcedure
+
+// ItemList.DeliveryDate.OnChange
+Procedure ItemListDeliveryDateOnChange(Parameters) Export
+	ProceedPropertyBeforeChange_List(Parameters);
+	Binding = ItemListDeliveryDateSptepsBinding(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// ItemList.DeliveryDate.Set
+Procedure SetItemListDeliveryDate(Parameters, Results) Export
+	Binding = ItemListDeliveryDateSptepsBinding(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// ItemList.DeliveryDate.Default.Bind
+Function ItemListDeliveryDateDefaultBinding(Parameters)
+	DataPath = "ItemList.DeliveryDate";
+	Binding = New Structure();
+	Binding.Insert("SalesInvoice", "ItemListDeliveryDateDefault");
+	Return BindSteps("StepsEnamblerEmpty", DataPath, Binding, Parameters);
+EndFunction
+
+// ItemList.DeliveryDate.Bind
+Function ItemListDeliveryDateSptepsBinding(Parameters)
+	DataPath = "ItemList.DeliveryDate";
+	Binding = New Structure();
+	Binding.Insert("SalesInvoice"   , "ItemListDeliveryDateStepsEnabler");
+	Return BindSteps("StepsEnamblerEmpty", DataPath, Binding, Parameters);
+EndFunction
+
+Procedure ItemListDeliveryDateDefault(Parameters, Chain) Export
+	// DefaultDeliveryDateInList
+	Chain.DefaultDeliveryDateInList.Enable = True;
+	Chain.DefaultDeliveryDateInList.Setter = "SetItemListDeliveryDate";
+	Options = ModelClientServer_V2.DefaultDeliveryDateInListOptions();
+	NewRow = Parameters.RowFilledByUserSettings;
+	Options.DeliveryDateInList   = GetPropertyObject(Parameters, "ItemList.DeliveryDate", NewRow.Key);
+	Options.DeliveryDateInHeader = GetPropertyForm(Parameters  , "DeliveryDate");
+	Options.Date                 = GetPropertyObject(Parameters, "Date");
+	Options.Agreement            = GetPropertyObject(Parameters, "Agreement");
+	Options.Key = NewRow.Key;
+	Chain.DefaultDeliveryDateInList.Options.Add(Options);
+EndProcedure
+
+Procedure ItemListDeliveryDateStepsEnabler(Parameters, Chain) Export
+	// ChangeDeliveryDateInHeaderByDeliveryDateInList
+	Chain.ChangeDeliveryDateInHeaderByDeliveryDateInList.Enable = True;
+	Chain.ChangeDeliveryDateInHeaderByDeliveryDateInList.Setter = "SetDeliveryDate";
+	Options = ModelClientServer_V2.ChangeDeliveryDateInHeaderByDeliveryDateInListOptions();
+	ArrayOfDeliveryDateInList = New Array();
+	For Each Row In Parameters.Object.ItemList Do
+		ArrayOfDeliveryDateInList.Add(GetPropertyObject(Parameters, "ItemList.DeliveryDate", Row.Key));
+	EndDo;
+	Options.ArrayOfDeliveryDateInList = ArrayOfDeliveryDateInList; 
+	Chain.ChangeDeliveryDateInHeaderByDeliveryDateInList.Options.Add(Options);
 EndProcedure
 
 #EndRegion
@@ -781,41 +1019,96 @@ EndProcedure
 
 #Region AGREEMENT
 
-// Client Event handler вызывается из модуля ViewClient_V2
+// Agreement.OnChange
 Procedure AgreementOnChange(Parameters) Export
-	ModelClientServer_V2.EntryPoint("AgreementStepsEnabler", Parameters);
+	ProceedPropertyBeforeChange_Object(Parameters);
+	AddViewNotify("OnSetPartnerNotify", Parameters);
+	Binding = AgreementStepsBinding(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
 EndProcedure
 
-Procedure AgreementStepsEnabler(Parameters, Chain) Export
-	// При изменении Agreement нужно изменить Company
-	Chain.Company.Enable = True;
-	Chain.Company.Setter =  "SetCompany";
-	
-	// Эти данные (параметры) нужны для получения Company
-	CompanyOptions = ModelClientServer_V2.CompanyOptions();
-	CompanyOptions.Agreement = GetPropertyObject(Parameters, "Agreement");
-	CompanyOptions.Company   = GetPropertyObject(Parameters, "Company");
-	
-	Chain.Company.Options.Add(CompanyOptions);
-	
-	// При изменении Agreement нужно изменить PriceType
-	Chain.PriceType.Enable = True;
-	Chain.PriceType.Setter = "SetItemListPriceType";
-	
-	// Эти данные (параметры) нужны для получения PriceType
-	// PriceType находится в табличной части ItemList, така как это уровень данных то беремиз этой табличной части
-	For Each Row In GetRows(Parameters, "ItemList") Do
-		PriceTypeOptions = ModelClientServer_V2.PriceTypeOptions();
-		PriceTypeOptions.Agreement = GetPropertyObject(Parameters, "Agreement");
-		// ключ нужен что бы потом, когда вернутся результаты из модуля Model идентифицировать строку,
-		// для реквизитов в шапке ключ можно не заполнять, шапка только одна
-		PriceTypeOptions.Key = Row.Key;
-		Chain.PriceType.Options.Add(PriceTypeOptions);
-	EndDo;
-EndProcedure
-
+// Agreement.Set
 Procedure SetAgreement(Parameters, Results) Export
-	SetterObject("AgreementStepsEnabler", "Agreement", Parameters, Results);
+	Binding = AgreementStepsBinding(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// Agreement.Bind
+Function AgreementStepsBinding(Parameters)
+	DataPath = "Agreement";
+	Binding = New Structure();
+	Binding.Insert("SalesInvoice"        , "AgreementStepsEnabler_Trade");
+	Return BindSteps("StepsEnamblerEmpty", DataPath, Binding, Parameters);
+EndFunction
+
+Procedure AgreementStepsEnabler_Trade(Parameters, Chain) Export
+	// ChangeCompanyByAgreement
+	Chain.ChangeCompanyByAgreement.Enable = True;
+	Chain.ChangeCompanyByAgreement.Setter = "SetCompany";
+	Options = ModelClientServer_V2.ChangeCompanyByAgreementOptions();
+	Options.Agreement      = GetPropertyObject(Parameters, "Agreement");
+	Options.CurrentCompany = GetPropertyObject(Parameters, "Company");	
+	Chain.ChangeCompanyByAgreement.Options.Add(Options);
+	
+	// ChangePriceTypeByAgreement
+	Chain.ChangePriceTypeByAgreement.Enable = True;
+	Chain.ChangePriceTypeByAgreement.Setter = "SetItemListPriceType";
+	
+	// ChangeTaxRate
+	Chain.ChangeTaxRate.Enable = True;
+	Chain.ChangeTaxRate.Setter = "SetItemListTaxRate";
+	
+	For Each Row In GetRows(Parameters, "ItemList") Do
+		// ChangePriceTypeByAgreement
+		Options = ModelClientServer_V2.ChangePriceTypeByAgreementOptions();
+		Options.Agreement = GetPropertyObject(Parameters, "Agreement");
+		Options.Key = Row.Key;
+		Chain.ChangePriceTypeByAgreement.Options.Add(Options);
+		
+		// ChangeTaxRate
+		Options = ModelClientServer_V2.ChangeTaxRateOptions();
+		Options.Date      = GetPropertyObject(Parameters, "Date");
+		Options.Company   = GetPropertyObject(Parameters, "Company");
+		Options.Agreement = GetPropertyObject(Parameters, "Agreement");
+		Options.ArrayOfTaxInfo = Parameters.ArrayOfTaxInfo;
+		Options.TaxRates       = GetItemListTaxRate(Parameters, Row);
+		Options.Key = Row.Key;
+		Chain.ChangeTaxRate.Options.Add(Options);
+	EndDo;
+	
+	// ChangeCurrencyByAgreement
+	Chain.ChangeCurrencyByAgreement.Enable = True;
+	Chain.ChangeCurrencyByAgreement.Setter = "SetCurrency";
+	Options = ModelClientServer_V2.ChangeCurrencyByAgreementOptions();
+	Options.Agreement       = GetPropertyObject(Parameters, "Agreement");
+	Options.CurrentCurrency = GetPropertyObject(Parameters, "Currency");
+	Chain.ChangeCurrencyByAgreement.Options.Add(Options);
+	
+	// ChangePriceIncludeTaxByAgreement
+	Chain.ChangePriceIncludeTaxByAgreement.Enable = True;
+	Chain.ChangePriceIncludeTaxByAgreement.Setter = "SetPriceIncludeTax";
+	Options = ModelClientServer_V2.ChangePriceIncludeTaxByAgreementOptions();
+	Options.Agreement = GetPropertyObject(Parameters, "Agreement");
+	Chain.ChangePriceIncludeTaxByAgreement.Options.Add(Options);
+	
+	// ChangeStoreByAgreement
+	Chain.ChangeStoreByAgreement.Enable = True;
+	Chain.ChangeStoreByAgreement.Setter = "SetStore";
+	Options = ModelClientServer_V2.ChangeStoreByAgreementOptions();
+	Options.Agreement = GetPropertyObject(Parameters, "Agreement");
+	Options.CurrentStore = GetPropertyForm(Parameters, "Store");
+	Chain.ChangeStoreByAgreement.Options.Add(Options);
+	
+	// ChangeDeliveryDate
+	Chain.ChangeDeliveryDateByAgreement.Enable = True;
+	Chain.ChangeDeliveryDateByAgreement.Setter = "SetDeliveryDate";
+	Options = ModelClientServer_V2.ChangeDeliveryDateByAgreementOptions();
+	Options.Agreement = GetPropertyObject(Parameters, "Agreement");
+	Options.CurrentDeliveryDate = GetPropertyForm(Parameters, "DeliveryDate");
+	Chain.ChangeDeliveryDateByAgreement.Options.Add(Options);
+	
+	//ChangePaymentTerm
+
 EndProcedure
 
 #EndRegion
@@ -830,9 +1123,24 @@ EndProcedure
 
 #Region PRICE_INCLUDE_TAX
 
+// PriceIncludeTax.OnChange
 Procedure PriceIncludeTaxOnChange(Parameters) Export
-	ModelClientServer_V2.EntryPoint("PriceIncludeTaxStepsEnabler", Parameters);
+	Binding = PriceIncludeTaxStepsBinding(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
 EndProcedure
+
+// PriceIncludeTax.Set
+Procedure SetPriceIncludeTax(Parameters, Results) Export
+	Binding = PriceIncludeTaxStepsBinding(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// PriceIncludeTax.Bind
+Function PriceIncludeTaxStepsBinding(Parameters)
+	DataPath = "PriceIncludeTax";
+	Binding = New Structure();
+	Return BindSteps("PriceIncludeTaxStepsEnabler", DataPath, Binding, Parameters);
+EndFunction
 
 Procedure PriceIncludeTaxStepsEnabler(Parameters, Chain) Export
 	ItemListEnableCalculations(Parameters, Chain, "IsPriceIncludeTaxChanged");
@@ -916,11 +1224,9 @@ EndProcedure
 
 #EndRegion
 
-
 #EndRegion
 
 #Region ITEM_LIST
-
 
 #Region ITEM_LIST_ITEM
 
@@ -942,7 +1248,7 @@ Function ItemListItemStepsBinding(Parameters)
 	Binding = New Structure();
 	Binding.Insert("ShipmentConfirmation", "ItemListItemStepsEnabler");
 	Binding.Insert("SalesInvoice"        , "ItemListItemStepsEnabler");
-	Return BindSteps("ItemListItemStepsEnabler", DataPath, Binding, Parameters);
+	Return BindSteps("StepsEnamblerEmpty", DataPath, Binding, Parameters);
 EndFunction
 
 Procedure ItemListItemStepsEnabler(Parameters, Chain) Export
@@ -950,7 +1256,8 @@ Procedure ItemListItemStepsEnabler(Parameters, Chain) Export
 	Chain.ChangeItemKeyByItem.Setter = "SetItemListItemKey";
 	For Each Row In GetRows(Parameters, "ItemList") Do
 		Options = ModelClientServer_V2.ChangeItemKeyByItemOptions();
-		Options.Item = GetPropertyObject(Parameters, "ItemList.Item", Row.Key);
+		Options.Item    = GetPropertyObject(Parameters, "ItemList.Item"   , Row.Key);
+		Options.ItemKey = GetPropertyObject(Parameters, "ItemList.ItemKey", Row.Key);
 		Options.Key = Row.Key;
 		Chain.ChangeItemKeyByItem.Options.Add(Options);
 	EndDo;
@@ -962,6 +1269,7 @@ EndProcedure
 
 // ItemList.ItemKey.OnChange
 Procedure ItemListItemKeyOnChange(Parameters) Export
+	AddViewNotify("OnSetItemListItemKey", Parameters);
 	Binding = ItemListItemKeyStepsBinding(Parameters);
 	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
 EndProcedure
@@ -969,17 +1277,18 @@ EndProcedure
 // ItemList.ItemKey.Set
 Procedure SetItemListItemKey(Parameters, Results) Export
 	Binding = ItemListItemKeyStepsBinding(Parameters);
-	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results, "OnSetItemListItemKey");
 EndProcedure
 
 // ItemList.ItemKey.Bind
 Function ItemListItemKeyStepsBinding(Parameters)
 	DataPath = "ItemList.ItemKey";
-	Binding = New Structure();
-	Return BindSteps("ItemListItemKeyStepsEnabler", DataPath, Binding, Parameters);
+	Binding = New Structure("ShipmentConfirmation", "ItemListItemKeyStepsEnabler_Warehouse_Shipment");
+	Binding = New Structure("SalesInvoice"        , "ItemListItemKeyStepsEnabler_Trade_Shipment");
+	Return BindSteps("StepsEnamblerEmpty", DataPath, Binding, Parameters);
 EndFunction
 
-Procedure ItemListItemKeyStepsEnabler(Parameters, Chain) Export
+Procedure ItemListItemKeyStepsEnabler_Warehouse_Shipment(Parameters, Chain) Export
 	Chain.ChangeUnitByItemKey.Enable = True;
 	Chain.ChangeUnitByItemKey.Setter = "SetItemListUnit";
 	For Each Row In GetRows(Parameters, "ItemList") Do
@@ -987,6 +1296,56 @@ Procedure ItemListItemKeyStepsEnabler(Parameters, Chain) Export
 		Options.ItemKey = GetPropertyObject(Parameters, "ItemList.ItemKey", Row.Key);
 		Options.Key = Row.Key;
 		Chain.ChangeUnitByItemKey.Options.Add(Options);
+	EndDo;
+EndProcedure
+
+Procedure ItemListItemKeyStepsEnabler_Trade_Shipment(Parameters, Chain) Export
+	// ChangeUnitByItemKey
+	Chain.ChangeUnitByItemKey.Enable = True;
+	Chain.ChangeUnitByItemKey.Setter = "SetItemListUnit";
+	
+	// ChangeUseShipmentConfirmationByStore
+	Chain.ChangeUseShipmentConfirmationByStore.Enable = True;
+	Chain.ChangeUseShipmentConfirmationByStore.Setter = "SetItemListUseShipmentConfirmation";
+	
+	// ChangePriceTypeByAgreement
+	Chain.ChangePriceTypeByAgreement.Enable = True;
+	Chain.ChangePriceTypeByAgreement.Setter = "SetItemListPriceType";
+	
+	// ChangeTaxRate
+	Chain.ChangeTaxRate.Enable = True;
+	Chain.ChangeTaxRate.Setter = "SetItemListTaxRate";
+	
+	For Each Row In GetRows(Parameters, "ItemList") Do
+		// ChangeUnitByItemKey
+		Options = ModelClientServer_V2.ChangeUnitByItemKeyOptions();
+		Options.ItemKey = GetPropertyObject(Parameters, "ItemList.ItemKey", Row.Key);
+		Options.Key = Row.Key;
+		Chain.ChangeUnitByItemKey.Options.Add(Options);
+		
+		// ChangeUseShipmentConfirmationByStore
+		Options = ModelClientServer_V2.ChangeUseShipmentConfirmationByStoreOptions();
+		Options.ItemKey = GetPropertyObject(Parameters, "ItemList.ItemKey", Row.Key);
+		Options.Store   = GetPropertyObject(Parameters, "ItemList.Store"  , Row.Key);
+		Options.Key = Row.Key;
+		Chain.ChangeUseShipmentConfirmationByStore.Options.Add(Options);
+		
+		// ChangePriceTypeByAgreement
+		Options = ModelClientServer_V2.ChangePriceTypeByAgreementOptions();
+		Options.Agreement = GetPropertyObject(Parameters, "Agreement");
+		Options.Key = Row.Key;
+		Chain.ChangePriceTypeByAgreement.Options.Add(Options);
+		
+		// ChangeTaxRate
+		Options = ModelClientServer_V2.ChangeTaxRateOptions();
+		Options.Date      = GetPropertyObject(Parameters, "Date");
+		Options.Company   = GetPropertyObject(Parameters, "Company");
+		Options.Agreement = GetPropertyObject(Parameters, "Agreement");
+		Options.ItemKey   = GetPropertyObject(Parameters, "ItemList.ItemKey", Row.Key);
+		Options.ArrayOfTaxInfo = Parameters.ArrayOfTaxInfo;
+		Options.TaxRates       = GetItemListTaxRate(Parameters, Row);
+		Options.Key = Row.Key;
+		Chain.ChangeTaxRate.Options.Add(Options);
 	EndDo;
 EndProcedure
 
@@ -1003,11 +1362,11 @@ EndProcedure
 // ItemList.Unit.Set
 Procedure SetItemListUnit(Parameters, Results) Export
 	Binding = ItemListUnitStepsBinding(Parameters);
-	SetterObject(Binding.StepsEnabler, "ItemList.Unit", Parameters, Results);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
 EndProcedure
 
 // ItemList.Unit.Bind
-Function ItemListUnitStepsBinding(Parameters) Export
+Function ItemListUnitStepsBinding(Parameters)
 	DataPath = "ItemList.Unit";
 	Binding = New Structure();
 	Return BindSteps("ItemListUnitStepsEnabler", DataPath, Binding, Parameters);
@@ -1036,60 +1395,104 @@ EndProcedure
 
 #Region ITEM_LIST_PRICE_TYPE
 
+// ItemList.PriceType.OnChange
 Procedure ItemListPriceTypeOnChange(Parameters) Export
-	ModelClientServer_V2.EntryPoint("ItemListPriceTypeStepsEnabler", Parameters);
+	Binding = ItemListPriceTypeStepsBinding(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
 EndProcedure
+
+// ItemList.PriceType.Set
+Procedure SetItemListPriceType(Parameters, Results) Export
+	Binding = ItemListPriceTypeStepsBinding(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// ItemList.PriceType.Bind
+Function ItemListPriceTypeStepsBinding(Parameters)
+	DataPath = "ItemList.PriceType";
+	Binding = New Structure();
+	Return BindSteps("ItemListPriceTypeStepsEnabler", DataPath, Binding, Parameters);
+EndFunction
 
 Procedure ItemListPriceTypeStepsEnabler(Parameters, Chain) Export
-	Chain.Price.Enable = True;
-	Chain.Price.Setter = "SetItemListPrice";
+	Chain.ChangePriceByPriceType.Enable = True;
+	Chain.ChangePriceByPriceType.Setter = "SetItemListPrice";
 	
 	For Each Row In GetRows(Parameters, "ItemList") Do
-		PriceOptions = ModelClientServer_V2.PriceOptions();
-		PriceOptions.Ref          = Parameters.Object.Ref;
-		PriceOptions.Date         = GetPropertyObject(Parameters, "Date");
-		PriceOptions.CurrentPrice = GetPropertyObject(Parameters, "ItemList.Price", Row.Key);
-		PriceOptions.PriceType    = GetPropertyObject(Parameters, "ItemList.PriceType", Row.Key);
-		PriceOptions.ItemKey      = GetPropertyObject(Parameters, "ItemList.ItemKey"  , Row.Key);
-		PriceOptions.Unit         = GetPropertyObject(Parameters, "ItemList.Unit"     , Row.Key);
-		PriceOptions.Key          = Row.Key;
-		Chain.Price.Options.Add(PriceOptions);
+		Options = ModelClientServer_V2.ChangePriceByPriceTypeOptions();
+		Options.Ref          = Parameters.Object.Ref;
+		Options.Date         = GetPropertyObject(Parameters, "Date");
+		Options.CurrentPrice = GetPropertyObject(Parameters, "ItemList.Price", Row.Key);
+		Options.PriceType    = GetPropertyObject(Parameters, "ItemList.PriceType", Row.Key);
+		Options.ItemKey      = GetPropertyObject(Parameters, "ItemList.ItemKey"  , Row.Key);
+		Options.Unit         = GetPropertyObject(Parameters, "ItemList.Unit"     , Row.Key);
+		Options.Key          = Row.Key;
+		Chain.ChangePriceByPriceType.Options.Add(Options);
 	EndDo;
-EndProcedure
-
-// Устанавливает PriceType в табличную часть ItemList
-Procedure SetItemListPriceType(Parameters, Results) Export
-	SetterObject("ItemListPriceTypeStepsEnabler", "ItemList.PriceType", Parameters, Results);
 EndProcedure
 
 #EndRegion
 
 #Region ITEM_LIST_PRICE
 
+// ItemList.Price.OnChange
 Procedure ItemListPriceOnChange(Parameters) Export
-	ModelClientServer_V2.EntryPoint("ItemListPriceStepsEnabler", Parameters);
+	Binding = ItemListPriceStepsBinding(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
 EndProcedure
 
+// ItemList.Price.Set
+Procedure SetItemListPrice(Parameters, Results) Export
+	Binding = ItemListPriceStepsBinding(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// ItemList.PriceType.Bind
+Function ItemListPriceStepsBinding(Parameters)
+	DataPath = "ItemList.Price";
+	Binding = New Structure();
+	Return BindSteps("ItemListPriceStepsEnabler", DataPath, Binding, Parameters);
+EndFunction
+
 Procedure ItemListPriceStepsEnabler(Parameters, Chain) Export
-	
 	ItemListEnableCalculations(Parameters, Chain, "IsPriceChanged");
 	
-	Chain.PriceTypeAsManual.Enable = True;
-	Chain.PriceTypeAsManual.Setter = "SetItemListPriceType";
-	
+	Chain.ChangePriceTypeAsManual.Enable = True;
+	Chain.ChangePriceTypeAsManual.Setter = "SetItemListPriceType";
 	For Each Row In GetRows(Parameters, "ItemList") Do
-		// при ручном изменении цены надо установить тип цен как ручной
-		PriceTypeAsManualOptions = ModelClientServer_V2.PriceTypeAsManualOptions();
-		// изменил пользователь напрямую
-		PriceTypeAsManualOptions.IsUserChange     = IsUserChange(Parameters);
-		PriceTypeAsManualOptions.CurrentPriceType = GetPropertyObject(Parameters, "ItemList.PriceType", Row.Key);
-		PriceTypeAsManualOptions.Key = Row.Key;
-		Chain.PriceTypeAsManual.Options.Add(PriceTypeAsManualOptions);
+		Options = ModelClientServer_V2.ChangePriceTypeAsManualOptions();
+		Options.IsUserChange     = IsUserChange(Parameters);
+		Options.CurrentPriceType = GetPropertyObject(Parameters, "ItemList.PriceType", Row.Key);
+		Options.Key = Row.Key;
+		Chain.ChangePriceTypeAsManual.Options.Add(Options);
 	EndDo;
 EndProcedure
 
-Procedure SetItemListPrice(Parameters, Results) Export
-	SetterObject("ItemListPriceStepsEnabler", "ItemList.Price", Parameters, Results);
+#EndRegion
+
+#Region ITEM_LIST_DONTCALCULATEROW
+
+// ItemList.DontCalculateRow.OnChange
+Procedure ItemListDontCalculateRowOnChange(Parameters) Export
+	Binding = ItemListDontCalculateRowStepsBinding(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// ItemList.DontCalculateRow.Set
+Procedure SetItemListDontCalculateRow(Parameters, Results) Export
+	Binding = ItemListDontCalculateRowStepsBinding(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// ItemList.DontCalculateRow.Bind
+Function ItemListDontCalculateRowStepsBinding(Parameters)
+	DataPath = "ItemList.DontCalculateRow";
+	Binding = New Structure();
+	Return BindSteps("ItemListDontCalculateRowStepsEnabler", DataPath, Binding, Parameters);
+EndFunction
+
+Procedure ItemListDontCalculateRowStepsEnabler(Parameters, Chain) Export
+	ItemListEnableCalculations(Parameters, Chain, "IsDontCalculateRowChanged");
 EndProcedure
 
 #EndRegion
@@ -1113,16 +1516,14 @@ EndProcedure
 Function ItemListQuantityDefaultBinding(Parameters)
 	DataPath = "ItemList.Quantity";
 	Binding = New Structure();
-	Binding.Insert("ShipmentConfirmation" , "ItemListQuantityDefault");
 	Return BindSteps("ItemListQuantityDefault", DataPath, Binding, Parameters);
 EndFunction
 
 // ItemList.Quantity.Bind
-Function ItemListQuantityStepsBinding(Parameters) Export
+Function ItemListQuantityStepsBinding(Parameters)
 	DataPath = "ItemList.Quantity";
 	Binding = New Structure();
-	Binding.Insert("ShipmentConfirmation" ,"ItemListQuantityStepsEnabler_WithoutAmounts");
-	Return BindSteps("StepsEnamblerEmpty", DataPath, Binding, Parameters);
+	Return BindSteps("ItemListQuantityStepsEnabler", DataPath, Binding, Parameters);
 EndFunction
 
 Procedure ItemListQuantityDefault(Parameters, Chain) Export
@@ -1135,7 +1536,7 @@ Procedure ItemListQuantityDefault(Parameters, Chain) Export
 	Chain.DefaultQuantityInList.Options.Add(Options);
 EndProcedure
 
-Procedure ItemListQuantityStepsEnabler_WithoutAmounts(Parameters, Chain) Export
+Procedure ItemListQuantityStepsEnabler(Parameters, Chain) Export
 	Chain.Calculations.Enable = True;
 	Chain.Calculations.Setter = "SetItemListQuantityInBaseUnit";
 	For Each Row In GetRows(Parameters, "ItemList") Do
@@ -1148,11 +1549,7 @@ Procedure ItemListQuantityStepsEnabler_WithoutAmounts(Parameters, Chain) Export
 		Options.QuantityOptions.QuantityInBaseUnit = GetPropertyObject(Parameters, "ItemList.QuantityInBaseUnit" , Row.Key);
 		Options.Key = Row.Key;
 		Chain.Calculations.Options.Add(Options);
-	EndDo;
-EndProcedure
-
-Procedure ItemListQuantityStepsEnabler(Parameters, Chain) Export
-	ItemListEnableCalculations(Parameters, Chain, "IsQuantityChanged");
+	EndDo;	
 EndProcedure
 
 #EndRegion
@@ -1161,12 +1558,136 @@ EndProcedure
 
 // ItemList.QuantityInBaseUnit.Set
 Procedure SetItemListQuantityInBaseUnit(Parameters, Results) Export
-	SetterObject(Undefined, "ItemList.QuantityInBaseUnit" , Parameters, Results, , "QuantityInBaseUnit");
+	Binding = ItemListQuantityInBaseUnitStepsBinding(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath , Parameters, Results,
+		"OnSetItemListQuantityInBaseUnit", "QuantityInBaseUnit");
+EndProcedure
+
+// ItemList.QuantityInBaseUnit.Bind
+Function ItemListQuantityInBaseUnitStepsBinding(Parameters)
+	DataPath = "ItemList.QuantityInBaseUnit";
+	Binding = New Structure();
+	Binding.Insert("SalesInvoice", "ItemListQuantityInBaseUnitStepsEnabler_Trade");
+	Return BindSteps("StepsEnamblerEmpty", DataPath, Binding, Parameters);
+EndFunction
+
+Procedure ItemListQuantityInBaseUnitStepsEnabler_Trade(Parameters, Chain) Export
+	ItemListEnableCalculations(Parameters, Chain, "IsQuantityInBaseUnitChanged");
 EndProcedure
 
 #EndRegion
 
-#Region NET_OFFERS_TAX_TOTAL_QUANTITY
+#Region ITEM_LIST_TAX_RATE
+
+// ItemList.TaxRate.OnChange
+Procedure ItemListTaxRateOnChange(Parameters) Export
+	Binding = ItemListTaxRateStepsBinding(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// TaxRate.Set
+Procedure SetItemListTaxRate(Parameters, Results) Export
+	Binding = ItemListTaxRateStepsBinding(Parameters);
+	For Each Result In Results Do
+		For Each TaxRate In Result.Value Do
+			TaxRateResult = New Array();
+			TaxRateResult.Add(New Structure("Value, Options", TaxRate.Value, Result.Options));
+			SetterObject(Binding.StepsEnabler, Binding.DataPath + TaxRate.Key, Parameters, TaxRateResult);
+			
+		EndDo;
+	EndDo;
+EndProcedure
+
+// TaxRate.Get
+Function GetItemListTaxRate(Parameters, Row)
+	TaxRates = New Structure();
+	For Each TaxRate In Row.TaxRates Do
+		TaxRates.Insert(TaxRate.Key, GetPropertyObject(Parameters, "ItemList."+TaxRate.Key, Row.Key));
+	EndDo;
+	Return TaxRates;
+EndFunction
+
+// ItemList.TaxRate.Bind
+Function ItemListTaxRateStepsBinding(Parameters)
+	DataPath = "ItemList.";
+	Binding = New Structure();
+	Return BindSteps("ItemListTaxRateStepsEnabler", DataPath, Binding, Parameters);
+EndFunction
+
+Procedure ItemListTaxRateStepsEnabler(Parameters, Chain) Export
+	ItemListEnableCalculations(Parameters, Chain, "IsTaxRateChanged");
+EndProcedure
+
+#EndRegion
+
+#Region ITEM_LIST_TAX_AMOUNT
+
+// ItemList.TaxAmount.OnChange
+Procedure ItemListTaxAmountOnChange(Parameters) Export
+	Binding = ItemListTaxAmountStepsBinding(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// ItemList.TaxAmount.Bind
+Function ItemListTaxAmountStepsBinding(Parameters)
+	DataPath = "ItemList.TaxAmount";
+	Binding = New Structure();
+	Return BindSteps("StepsEnamblerEmpty", DataPath, Binding, Parameters);
+EndFunction
+
+#EndRegion
+
+#Region ITEM_LIST_OFFERS_AMOUNT
+
+// ItemList.OffersAmount.OnChange
+Procedure ItemListOffersAmountOnChange(Parameters) Export
+	Binding = ItemListOffersAmountStepsBinding(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// ItemList.OffersAmount.Bind
+Function ItemListOffersAmountStepsBinding(Parameters)
+	DataPath = "ItemList.OffersAmount";
+	Binding = New Structure();
+	Return BindSteps("StepsEnamblerEmpty", DataPath, Binding, Parameters);
+EndFunction
+
+#EndRegion
+
+#Region ITEM_LIST_TOTAL_AMOUNT
+
+// ItemList.TotalAmount.OnChange
+Procedure ItemListTotalAmountOnChange(Parameters) Export
+	Binding = ItemListTotalAmountStepsBinding(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// ItemList.TotalAmount.Bind
+Function ItemListTotalAmountStepsBinding(Parameters)
+	DataPath = "ItemList.TotalAmount";
+	Binding = New Structure();
+	Binding.Insert("SalesInvoice", "ItemListTotalAmountStepsEnabler");
+	Return BindSteps("StepsEnamblerEmpty", DataPath, Binding, Parameters);
+EndFunction
+
+Procedure ItemListTotalAmountStepsEnabler(Parameters, Chain) Export
+	ItemListEnableCalculations(Parameters, Chain, "IsTotalAmountChanged");
+	
+	// ChangePriceTypeAsManual
+	Chain.ChangePriceTypeAsManual.Enable = True;
+	Chain.ChangePriceTypeAsManual.Setter = "SetItemListPriceType";
+	For Each Row In GetRows(Parameters, "ItemList") Do
+		Options = ModelClientServer_V2.ChangePriceTypeAsManualOptions();
+		Options.IsTotalAmountChange = True;
+		Options.CurrentPriceType = GetPropertyObject(Parameters, "ItemList.PriceType", Row.Key);
+		Options.Key = Row.Key;
+		Chain.ChangePriceTypeAsManual.Options.Add(Options);
+	EndDo;
+EndProcedure
+
+#EndRegion
+
+#Region ITEM_LIST_CALCULATIONS_NET_OFFERS_TAX_TOTAL
 
 Procedure ItemListEnableCalculations(Parameters, Chain, WhoIsChanged)
 	Chain.Calculations.Enable = True;
@@ -1177,21 +1698,18 @@ Procedure ItemListEnableCalculations(Parameters, Chain, WhoIsChanged)
 		Options     = ModelClientServer_V2.CalculationsOptions();
 		Options.Ref = Parameters.Object.Ref;
 		
-		// при изменении цены нужно пересчитать NetAmount, TotalAmount, TaxAmount, OffersAmount
-		If WhoIsChanged = "IsPriceChanged" Or WhoIsChanged = "IsPriceIncludeTaxChanged" Then
+		// нужно пересчитать NetAmount, TotalAmount, TaxAmount, OffersAmount
+		If     WhoIsChanged = "IsPriceChanged"            Or WhoIsChanged = "IsPriceIncludeTaxChanged"
+			Or WhoIsChanged = "IsDontCalculateRowChanged" Or WhoIsChanged = "IsQuantityInBaseUnitChanged" 
+			Or WhoIsChanged = "IsTaxRateChanged" Then
 			Options.CalculateNetAmount.Enable   = True;
 			Options.CalculateTotalAmount.Enable = True;
 			Options.CalculateTaxAmount.Enable   = True;
 		ElsIf WhoIsChanged = "IsTotalAmountChanged" Then
-		// при изменении total amount налоги расчитываются в обратную сторону, меняется Net Amount и цена
+		// при изменении TotalAmount налоги расчитываются в обратную сторону, меняется NetAmount и Price
 			Options.CalculateTaxAmountReverse.Enable   = True;
 			Options.CalculateNetAmountAsTotalAmountMinusTaxAmount.Enable   = True;
 			Options.CalculatePriceByTotalAmount.Enable   = True;
-		ElsIf WhoIsChanged = "IsQuantityChanged" Then
-			Options.CalculateQuantityInBaseUnit.Enable   = True;
-			Options.CalculateNetAmount.Enable   = True;
-			Options.CalculateTotalAmount.Enable = True;
-			Options.CalculateTaxAmount.Enable   = True;
 		EndIf;
 		
 		Options.AmountOptions.DontCalculateRow = GetPropertyObject(Parameters, "ItemList.DontCalculateRow", Row.Key);
@@ -1207,15 +1725,9 @@ Procedure ItemListEnableCalculations(Parameters, Chain, WhoIsChanged)
 		Options.PriceOptions.QuantityInBaseUnit = GetPropertyObject(Parameters, "ItemList.QuantityInBaseUnit" , Row.Key);
 		
 		Options.TaxOptions.PriceIncludeTax  = GetPropertyObject(Parameters, "PriceIncludeTax");
-		Options.TaxOptions.ItemKey          = GetPropertyObject(Parameters, "ItemList.ItemKey", Row.Key);
 		Options.TaxOptions.ArrayOfTaxInfo   = Parameters.ArrayOfTaxInfo;
-		Options.TaxOptions.TaxRates         = Row.TaxRates;
+		Options.TaxOptions.TaxRates         = GetItemListTaxRate(Parameters, Row);
 		Options.TaxOptions.TaxList          = Row.TaxList;
-		
-		Options.QuantityOptions.ItemKey = GetPropertyObject(Parameters, "ItemList.ItemKey", Row.Key);
-		Options.QuantityOptions.Unit    = GetPropertyObject(Parameters, "ItemList.Unit", Row.Key);
-		Options.QuantityOptions.Quantity           = GetPropertyObject(Parameters, "ItemList.Quantity"           , Row.Key);
-		Options.QuantityOptions.QuantityInBaseUnit = GetPropertyObject(Parameters, "ItemList.QuantityInBaseUnit" , Row.Key);
 		
 		Options.Key = Row.Key;
 		
@@ -1229,7 +1741,6 @@ Procedure SetItemListCalculations(Parameters, Results) Export
 	SetterObject(Undefined, "ItemList.OffersAmount", Parameters, Results, , "OffersAmount");
 	SetterObject(Undefined, "ItemList.TotalAmount" , Parameters, Results, , "TotalAmount");
 	SetterObject(Undefined, "ItemList.Price"       , Parameters, Results, , "Price");
-	SetterObject(Undefined, "ItemList.QuantityInBaseUnit" , Parameters, Results, , "QuantityInBaseUnit");
 	
 	// табличная часть TaxList кэщируется целиком, потом так же целиком переносится в документ
 	For Each Result In Results Do
@@ -1253,53 +1764,6 @@ Procedure SetItemListCalculations(Parameters, Results) Export
 	EndDo;
 EndProcedure
 
-// в ItemList Net Amount - не меняется ReadOnly
-//Procedure ItemListNetAmountOnChange(Parameters) Export
-//	ModelClientServer_V2.EntryPoint("NetAmountEntryPoint", Parameters);
-//EndProcedure
-
-//Procedure NetAmountEnableChainLinks(Parameters, Chain) Export
-//	Return;
-//EndProcedure
-
-Procedure ItemListTaxAmountOnChange(Parameters) Export
-	ModelClientServer_V2.EntryPoint("ItemListTaxAmountStepsEnabler", Parameters);
-EndProcedure
-
-Procedure ItemListTaxAmountStepsEnabler(Parameters, Chain) Export
-	Return;
-EndProcedure
-
-Procedure ItemListOffersAmountOnChange(Parameters) Export
-	ModelClientServer_V2.EntryPoint("ItemListOffersAmountStepsEnabler", Parameters);
-EndProcedure
-
-Procedure ItemListOffersAmountStepsEnabler(Parameters, Chain) Export
-	Return;
-EndProcedure
-
-Procedure ItemListTotalAmountOnChange(Parameters) Export
-	ModelClientServer_V2.EntryPoint("ItemListTotalAmountStepsEnabler", Parameters);
-EndProcedure
-
-Procedure ItemListTotalAmountStepsEnabler(Parameters, Chain) Export
-	ItemListEnableCalculations(Parameters, Chain, "IsTotalAmountChanged");
-	
-	// при ручном изменении Total amount меняется цена, установим ее как Manual Price
-	Chain.PriceTypeAsManual.Enable = True;
-	Chain.PriceTypeAsManual.Setter = "SetItemListPriceType";
-	
-	For Each Row In GetRows(Parameters, "ItemList") Do
-		// при ручном изменении цены надо установить тип цен как ручной
-		PriceTypeAsManualOptions = ModelClientServer_V2.PriceTypeAsManualOptions();
-		// изменил пользователь напрямую
-		PriceTypeAsManualOptions.IsTotalAmountChange = True;
-		PriceTypeAsManualOptions.CurrentPriceType = GetPropertyObject(Parameters, "ItemList.PriceType", Row.Key);
-		PriceTypeAsManualOptions.Key = Row.Key;
-		Chain.PriceTypeAsManual.Options.Add(PriceTypeAsManualOptions);
-	EndDo;
-EndProcedure
-
 #EndRegion
 
 #EndRegion
@@ -1308,9 +1772,7 @@ EndProcedure
 Procedure OnChainComplete(Parameters) Export
 	#IF Client THEN
 		// на клиенте возможно нужно задать вопрос пользователю, поэтому сразу из кэша в объект не переносим
-		If ValueIsFilled(Parameters.ViewModuleName) Then
-			Execute StrTemplate("%1.OnChainComplete(Parameters);", Parameters.ViewModuleName);
-		EndIf;
+		Execute StrTemplate("%1.OnChainComplete(Parameters);", Parameters.ViewClientModuleName);
 	#ENDIF
 	
 	#IF Server THEN
@@ -1323,19 +1785,37 @@ Procedure CommitChainChanges(Parameters) Export
 		
 	_CommitChainChanges(Parameters.Cache, Parameters.Object);
 	
+	If Parameters.FormIsExists Then
+		UniqueFormModificators = New Array();
+		For Each FormModificator In Parameters.FormModificators Do
+			If UniqueFormModificators.Find(FormModificator) = Undefined Then
+				UniqueFormModificators.Add(FormModificator);
+			EndIf;
+		EndDo;
+		For Each FormModificator In UniqueFormModificators Do
+			ViewModuleName = "";
+			#IF Client THEN
+				ViewModuleName = Parameters.ViewClientModuleName;
+			#ELSIF Server THEN
+				ViewModuleName = Parameters.ViewServerModuleName;
+			#ENDIF
+			Execute StrTemplate("%1.%2(Parameters);", ViewModuleName, FormModificator);
+		EndDo;
+		
+	EndIf;
+	
+	
 	#IF Client THEN
 		_CommitChainChanges(Parameters.CacheForm, Parameters.Form);
 		
-		// уведомление клиента о том что данные были изменены
-		If Parameters.ViewNotify.Count() And Not ValueIsFilled(Parameters.ViewModuleName) Then
-			Raise "View module name is not filled";
-		EndIf;
-		ArrayOfViewNotify = New Array();
+		UniqueViewNotify = New Array();
 		For Each ViewNotify In Parameters.ViewNotify Do
-			If ArrayOfViewNotify.Find(ViewNotify) = Undefined Then
-				ArrayOfViewNotify.Add(ViewNotify);
-				Execute StrTemplate("%1.%2(Parameters);", Parameters.ViewModuleName, ViewNotify);
+			If UniqueViewNotify.Find(ViewNotify) = Undefined Then
+				UniqueViewNotify.Add(ViewNotify);
 			EndIf;
+		EndDo;
+		For Each ViewNotify In UniqueViewNotify Do
+			Execute StrTemplate("%1.%2(Parameters);", Parameters.ViewClientModuleName, ViewNotify);
 		EndDo;
 	#ENDIF
 EndProcedure
@@ -1415,10 +1895,9 @@ EndProcedure
 
 Function GetRows(Parameters, TableName)
 	If Parameters.Property("Rows") Then
-		// расчет только для конкретных строк, переданных в параметре
 		Return Parameters.Rows;
 	EndIf;
-	Return Parameters.Object[TableName];;
+	Return Parameters.Object[TableName];
 EndFunction
 
 Procedure SetterForm(StepsEnablerName, DataPath, Parameters, Results, 

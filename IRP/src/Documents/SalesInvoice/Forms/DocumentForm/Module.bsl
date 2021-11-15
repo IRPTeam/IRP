@@ -6,7 +6,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	If Parameters.Key.IsEmpty() Then
 		SetVisibilityAvailability(Object, ThisObject);
 	EndIf;
-	DocSalesInvoiceServer.CalculateTableAtServer(ThisObject, Object);
+//	DocSalesInvoiceServer.CalculateTableAtServer(ThisObject, Object);
 EndProcedure
 
 &AtClient
@@ -97,7 +97,13 @@ EndProcedure
 
 &AtClient
 Procedure DeliveryDateOnChange(Item)
-	DocumentsClient.DeliveryDateOnChange(Object, ThisObject, Item);
+	DocSalesInvoiceClient.DeliveryDateOnChange(Object, ThisObject, Item);
+	//DocumentsClient.DeliveryDateOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure ItemListDeliveryDateOnChange(Item)
+	DocSalesInvoiceClient.ItemListDeliveryDateOnChange(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient
@@ -199,6 +205,12 @@ EndProcedure
 Procedure ItemListItemKeyOnChange(Item)
 	DocSalesInvoiceClient.ItemListItemKeyOnChange(Object, ThisObject, Item);
 EndProcedure
+
+&AtClient
+Procedure ItemListBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
+	DocSalesInvoiceClient.ItemListBeforeAddRow(Object, ThisObject, Item, Cancel, Clone, Parent, IsFolder, Parameter)
+EndProcedure
+
 
 &AtClient
 Procedure ItemListPriceTypeOnChange(Item)

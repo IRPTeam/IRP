@@ -53,7 +53,7 @@ Procedure PresentationClearing(Object, Form, Item, AddInfo = Undefined) Export
 		Return;
 	EndIf;
 	CurrentData.SerialLotNumberIsFilling = False;
-	DeleteUnusedSerialLotNumbers(Object, CurrentData.Key);
+//	DeleteUnusedSerialLotNumbers(Object, CurrentData.Key);
 	UpdateSerialLotNumbersTree(Object, Form);
 EndProcedure
 
@@ -79,10 +79,9 @@ Procedure UpdateSerialLotNumbersPresentation(Object, AddInfo = Undefined) Export
 		If ServerData = Undefined Then
 			RowItemList.UseSerialLotNumber = SerialLotNumbersServer.IsItemKeyWithSerialLotNumbers(RowItemList.ItemKey);
 		Else
-			RowItemList.UseSerialLotNumber = ServerData.ItemKeysWithSerialLotNumbers.Find(RowItemList.ItemKey)
-				<> Undefined;
+			RowItemList.UseSerialLotNumber = 
+				ServerData.ItemKeysWithSerialLotNumbers.Find(RowItemList.ItemKey) <> Undefined;
 		EndIf;
-
 	EndDo;
 EndProcedure
 
@@ -123,27 +122,27 @@ Procedure UpdateUseSerialLotNumber(Object, Form, AddInfo = Undefined) Export
 	CurrentData.UseSerialLotNumber = SerialLotNumbersServer.IsItemKeyWithSerialLotNumbers(CurrentData.ItemKey);
 
 	If Not CurrentData.UseSerialLotNumber Then
-		DeleteUnusedSerialLotNumbers(Object, CurrentData.Key);
+//		DeleteUnusedSerialLotNumbers(Object, CurrentData.Key);
 		UpdateSerialLotNumbersPresentation(Object, AddInfo);
 		UpdateSerialLotNumbersTree(Object, Form);
 	EndIf;
 EndProcedure
 
-Procedure DeleteUnusedSerialLotNumbers(Object, KeyForDelete = Undefined) Export
-	If KeyForDelete = Undefined Then
-		ArrayOfUnusedRows = New Array();
-		For Each Row In Object.SerialLotNumbers Do
-			If Not Object.ItemList.FindRows(New Structure("Key", Row.Key)).Count() Then
-				ArrayOfUnusedRows.Add(Row);
-			EndIf;
-		EndDo;
-		For Each Row In ArrayOfUnusedRows Do
-			Object.SerialLotNumbers.Delete(Row);
-		EndDo;
-	Else
-		ArrayRowsForDelete = Object.SerialLotNumbers.FindRows(New Structure("Key", KeyForDelete));
-		For Each Row In ArrayRowsForDelete Do
-			Object.SerialLotNumbers.Delete(Row);
-		EndDo;
-	EndIf;
-EndProcedure
+//Procedure DeleteUnusedSerialLotNumbers(Object, KeyForDelete = Undefined) Export
+//	If KeyForDelete = Undefined Then
+//		ArrayOfUnusedRows = New Array();
+//		For Each Row In Object.SerialLotNumbers Do
+//			If Not Object.ItemList.FindRows(New Structure("Key", Row.Key)).Count() Then
+//				ArrayOfUnusedRows.Add(Row);
+//			EndIf;
+//		EndDo;
+//		For Each Row In ArrayOfUnusedRows Do
+//			Object.SerialLotNumbers.Delete(Row);
+//		EndDo;
+//	Else
+//		ArrayRowsForDelete = Object.SerialLotNumbers.FindRows(New Structure("Key", KeyForDelete));
+//		For Each Row In ArrayRowsForDelete Do
+//			Object.SerialLotNumbers.Delete(Row);
+//		EndDo;
+//	EndIf;
+//EndProcedure

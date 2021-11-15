@@ -1,14 +1,27 @@
 
-Procedure OnCreateAtServer(Object, Form) Export
+Procedure OnCreateAtServer(Object, Form, TableNames) Export
 	If Not CommonFunctionsServer.FormHaveAttribute(Form, "CacheBeforeChange") Then
 		ArrayOfNewAttribute = New Array();
 		ArrayOfNewAttribute.Add(New FormAttribute("CacheBeforeChange", New TypeDescription("String")));
 		Form.ChangeAttributes(ArrayOfNewAttribute);
 	EndIf;
 	
-	// Fill by default form attributes
-	
+	For Each TableName In StrSplit(TableNames, ",") Do
+		FormParameters = ControllerClientServer_V2.GetFormParameters(Form);
+		ServerParameters = ControllerClientServer_V2.GetServerParameters(Object);
+		ServerParameters.TableName = TrimAll(TableName);
+		Parameters = ControllerClientServer_V2.GetParameters(ServerParameters, FormParameters);
+		ControllerClientServer_V2.FormOnCreateAtServer(Parameters);
+	EndDo;
 EndProcedure
+
+#Region FORM_MODIFICATOR
+
+Procedure FormModificator_CreateTaxesFormControls(Parameters) Export
+	Parameters.Form.Taxes_CreateFormControls();
+EndProcedure
+
+#EndRegion
 
 Function GetObjectMetadataInfo(Val Object, ArrayOfTableNames) Export
 	Result = New Structure();

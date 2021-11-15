@@ -105,7 +105,7 @@ EndFunction
 
 // хранит значения реквизитов до изменения
 Procedure UpdateCacheBeforeChange(Object, Form)
-	// реквизиты Object которые нужно кэшировать, для табличных частей не реализовано
+	// реквизиты Object которые нужно кэшировать
 	CacheObject = New Structure(GetObjectPropertyNamesBeforeChange());
 	FillPropertyValues(CacheObject, Object);
 	
@@ -122,8 +122,8 @@ Procedure UpdateCacheBeforeChange(Object, Form)
 		If Segments.Count() <> 2 Then
 			Raise StrTemplate("Wrong list property [%1]", ListProperty);
 		EndIf;
-		TableName  = Segments[0];
-		ColumnName = Segments[1];
+		TableName  = TrimAll(Segments[0]);
+		ColumnName = TrimAll(Segments[1]);
 		
 		If Not CommonFunctionsClientServer.ObjectHasProperty(Object, TableName) Then
 			Continue;
@@ -159,16 +159,16 @@ EndProcedure
 
 // возвращает список реквизитов объекта для которых нужно получить значение до изменения
 Function GetObjectPropertyNamesBeforeChange()
-	Return "Partner, Sender, Receiver";
+	Return "Partner, Agreement, Sender, Receiver";
 EndFunction
 
 Function GetListPropertyNamesBeforeChange()
-	Return "ItemList.Store";
+	Return "ItemList.Store, ItemList.DeliveryDate";
 EndFunction
 
 // возвращает список реквизитов формы для которых нужно получить значение до изменения
 Function GetFormPropertyNamesBeforeChange()
-	Return "Store";
+	Return "Store, DeliveryDate";
 EndFunction
 
 #EndRegion
@@ -188,6 +188,7 @@ EndFunction
 
 Procedure OnChainComplete(Parameters) Export
 	CommitChanges = False;
+	// изменение склада (реквизит шапки) в шапке документа
 	If Parameters.EventCaller = "StoreOnUserChange" Then
 		If Parameters.ObjectMetadataInfo.MetadataName = "ShipmentConfirmation" Then
 			If  NeedQueryStoreOnUserChange(Parameters) Then
@@ -198,12 +199,17 @@ Procedure OnChainComplete(Parameters) Export
 			Else
 				CommitChanges = True;
 			EndIf;
+		ElsIf Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice" Then
+			CommitChanges = True;
 		EndIf;
+	// изменение склада в табличной части ItemList
 	ElsIf Parameters.EventCaller = "ItemListStoreOnUserChange" Then
 		If Parameters.ObjectMetadataInfo.MetadataName = "ShipmentConfirmation" Then
 			If NeedCommitChainChangesItemListStoreOnUserChange(Parameters) Then
 				CommitChanges = True;
 			EndIf;
+		ElsIf Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice" Then
+			CommitChanges = True;
 		EndIf;
 	Else
 		CommitChanges = True;
@@ -293,7 +299,20 @@ Procedure OnOpen(Object, Form, TableNames) Export
 	For Each TableName In StrSplit(TableNames, ",") Do
 		Parameters = GetSimpleParameters(Object, Form, TrimAll(TableName));
 		ControllerClientServer_V2.FillPropertyFormByDefault(Form,  "Store", Parameters);
+		ControllerClientServer_V2.FormOnOpen(Parameters);
 	EndDo;
+EndProcedure
+
+Procedure OnOpenFormNotify(Parameters) Export
+	Return;
+EndProcedure
+
+#EndRegion
+
+#Region FORM_MODIFICATOR
+
+Procedure FormModificator_CreateTaxesFormControls(Parameters) Export
+	Parameters.Form.Taxes_CreateFormControls();
 EndProcedure
 
 #EndRegion
@@ -310,27 +329,141 @@ Procedure ItemListAfterDeleteRow(Object, Form) Export
 	DeleteRows(Object, Form, "ItemList");
 EndProcedure
 
-#Region ITEM_ITEMKEY_UNIT
+#EndRegion
 
+#Region _ITEM_LIST_COLUMNS
+
+// ItemList.Item
 Procedure ItemListItemOnChange(Object, Form, CurrentData = Undefined) Export
 	Rows = GetRowsByCurrentData(Form, "ItemList", CurrentData);
 	Parameters = GetSimpleParameters(Object, Form, "ItemList", Rows);
 	ControllerClientServer_V2.ItemListItemOnChange(Parameters);
 EndProcedure
 
+// ItemList.ItemKey
 Procedure ItemListItemKeyOnChange(Object, Form, CurrentData = Undefined) Export
 	Rows = GetRowsByCurrentData(Form, "ItemList", CurrentData);
 	Parameters = GetSimpleParameters(Object, Form, "ItemList", Rows);
 	ControllerClientServer_V2.ItemListItemKeyOnChange(Parameters);
 EndProcedure
 
+Procedure OnSetItemListItemKey(Parameters) Export
+	If Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice" Then
+		SerialLotNumberClient.UpdateUseSerialLotNumber(Parameters.Object, Parameters.Form);
+	EndIf;
+EndProcedure
+
+// ItemList.Unit
 Procedure ItemListUnitOnChange(Object, Form, CurrentData = Undefined) Export
 	Rows = GetRowsByCurrentData(Form, "ItemList", CurrentData);
 	Parameters = GetSimpleParameters(Object, Form, "ItemList", Rows);
 	ControllerClientServer_V2.ItemListUnitOnChange(Parameters);
 EndProcedure
 
-#EndRegion
+// ItemList.TaxRate
+Procedure ItemListTaxRateOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "ItemList", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "ItemList", Rows);
+	ControllerClientServer_V2.ItemListTaxRateOnChange(Parameters);
+EndProcedure
+
+// ItemList.PriceType
+Procedure ItemListPriceTypeOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "ItemList", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "ItemList", Rows);
+	ControllerClientServer_V2.ItemListPriceTypeOnChange(Parameters);
+EndProcedure
+
+// ItemList.Price
+Procedure ItemListPriceOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "ItemList", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "ItemList", Rows);
+	ControllerClientServer_V2.ItemListPriceOnChange(Parameters);
+EndProcedure
+
+// ItemList.TaxAmount
+Procedure ItemListTaxAmountOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "ItemList", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "ItemList", Rows);
+	ControllerClientServer_V2.ItemListTaxAmountOnChange(Parameters);
+EndProcedure
+
+// ItemList.OffersAmount
+Procedure ItemListOffersAmountOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "ItemList", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "ItemList", Rows);
+	ControllerClientServer_V2.ItemListOffersAmountOnChange(Parameters);
+EndProcedure
+
+// ItemList.TotalAmount
+Procedure ItemListTotalAmountOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "ItemList", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "ItemList", Rows);
+	ControllerClientServer_V2.ItemListTotalAmountOnChange(Parameters);
+EndProcedure
+
+// ItemList.Store
+Procedure ItemListStoreOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "ItemList", CurrentData);
+	
+	FormParameters = GetFormParameters(Form);
+	ExtractValueBeforeChange_List("ItemList.Store", FormParameters, Rows);
+	FormParameters.EventCaller = "ItemListStoreOnUserChange";
+
+	ServerParameters = GetServerParameters(Object);
+	ServerParameters.Rows      = Rows;
+	ServerParameters.TableName = "ItemList";
+	
+	Parameters = GetParameters(ServerParameters, FormParameters);
+	ControllerClientServer_V2.ItemListStoreOnChange(Parameters);
+EndProcedure
+
+// ItemList.DeliveryDate
+Procedure ItemListDeliveryDateOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "ItemList", CurrentData);
+	
+	FormParameters = GetFormParameters(Form);
+	ExtractValueBeforeChange_List("ItemList.DeliveryDate", FormParameters, Rows);
+	FormParameters.EventCaller = "ItemListDeliveryDateOnUserChange";
+
+	ServerParameters = GetServerParameters(Object);
+	ServerParameters.Rows      = Rows;
+	ServerParameters.TableName = "ItemList";
+	
+	Parameters = GetParameters(ServerParameters, FormParameters);
+	ControllerClientServer_V2.ItemListDeliveryDateOnChange(Parameters);
+EndProcedure
+
+// ItemList.DontCalculateRow
+Procedure ItemListDontCalculateRowOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "ItemList", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "ItemList", Rows);
+	ControllerClientServer_V2.ItemListDontCalculateRowOnChange(Parameters);
+EndProcedure	
+
+// ItemList.Quantity
+Procedure ItemListQuantityOnChange(Object, Form, CurrentData = Undefined) Export
+	Rows = GetRowsByCurrentData(Form, "ItemList", CurrentData);
+	Parameters = GetSimpleParameters(Object, Form, "ItemList", Rows);
+	ControllerClientServer_V2.ItemListQuantityOnChange(Parameters);
+EndProcedure
+
+Procedure OnSetItemListQuantityNotify(Parameters) Export
+	Return;
+EndProcedure
+
+Procedure OnSetItemListQuantityInBaseUnit(Parameters) Export
+	If Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice" 
+		Or Parameters.ObjectMetadataInfo.MetadataName = "ShipmentConfirmation" Then
+		RowIDInfoClient.UpdateQuantity(Parameters.Object, Parameters.Form);
+	EndIf;
+	
+	If Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice" Then
+		SerialLotNumberClient.UpdateSerialLotNumbersTree(Parameters.Object, Parameters.Form);
+		DocumentsClient.UpdateTradeDocumentsTree(Parameters.Object, Parameters.Form, 
+			"ShipmentConfirmations", "ShipmentConfirmationsTree", "QuantityInShipmentConfirmation");
+	EndIf;
+EndProcedure
 
 #EndRegion
 
@@ -346,6 +479,8 @@ Procedure PaymentListAfterDeleteRow(Object, Form) Export
 	DeleteRows(Object, Form, "PaymentList");
 EndProcedure
 
+#EndRegion
+
 #Region _PAYMENT_LIST_COLUMNS
 
 Procedure PaymentListPartnerOnChange(Object, Form, CurrentData = Undefined) Export
@@ -359,8 +494,6 @@ Procedure PaymentListLegalNameOnChange(Object, Form, CurrentData = Undefined) Ex
 	Parameters = GetSimpleParameters(Object, Form, "PaymentList", Rows);
 	ControllerClientServer_V2.PaymentListLegalNameOnChange(Parameters);
 EndProcedure
-
-#EndRegion
 
 #EndRegion
 
@@ -434,17 +567,19 @@ EndProcedure
 
 #Region STORE
 
-Procedure StoreOnChange(Object, Form) Export
-	FormParameters = GetFormParameters(Form);
-	FormParameters.EventCaller = "StoreOnUserChange";
-	ExtractValueBeforeChange_Form("Store", FormParameters);
+Procedure StoreOnChange(Object, Form, TableNames) Export
+	For Each TableName In StrSplit(TableNames, ",") Do
+		FormParameters = GetFormParameters(Form);
+		FormParameters.EventCaller = "StoreOnUserChange";
+		ExtractValueBeforeChange_Form("Store", FormParameters);
 	
-	ServerParameters = GetServerParameters(Object);
-	ServerParameters.TableName = "ItemList";
+		ServerParameters = GetServerParameters(Object);
+		ServerParameters.TableName = TableName;
 	
-	Parameters = GetParameters(ServerParameters, FormParameters);
+		Parameters = GetParameters(ServerParameters, FormParameters);
 	
-	ControllerClientServer_V2.StoreOnChange(Parameters);
+		ControllerClientServer_V2.StoreOnChange(Parameters);
+	EndDo;
 EndProcedure
 
 Procedure OnSetStoreNotify(Parameters) Export
@@ -457,6 +592,52 @@ Procedure OnSetStoreNotify(Parameters) Export
 	If StoreArray.Count() > 1 Then
 		Parameters.Form.Items.Store.InputHint = StrConcat(StoreArray, "; ");
 	EndIf;
+EndProcedure
+
+#EndRegion
+
+#Region DELIVERY_DATE
+
+Procedure DeliveryDateOnChange(Object, Form, TableNames) Export
+	For Each TableName In StrSplit(TableNames, ",") Do
+		FormParameters = GetFormParameters(Form);
+		FormParameters.EventCaller = "DeliveryDateOnUserChange";
+		ExtractValueBeforeChange_Form("DeliveryDate", FormParameters);
+	
+		ServerParameters = GetServerParameters(Object);
+		ServerParameters.TableName = TableName;
+	
+		Parameters = GetParameters(ServerParameters, FormParameters);
+	
+		ControllerClientServer_V2.DeliveryDateOnChange(Parameters);
+	EndDo;
+EndProcedure
+
+Procedure OnSetDeliveryDateNotify(Parameters) Export
+	DeliveryDateArray = New Array();
+	For Each Row In Parameters.Object.ItemList Do
+		If ValueIsFilled(Row.DeliveryDate) And DeliveryDateArray.Find(Row.DeliveryDate) = Undefined Then
+			DeliveryDateArray.Add(Row.DeliveryDate);
+		EndIf;
+	EndDo;
+	If DeliveryDateArray.Count() > 1 Then
+		DeliveryDateFormattedArray = New Array();
+		For Each Row In DeliveryDateArray Do
+			DeliveryDateFormattedArray.Add(Format(Row, "DF=dd.MM.yy;"));
+		EndDo;
+		Parameters.Form.Items.DeliveryDate.Tooltip = StrConcat(DeliveryDateFormattedArray, "; ");
+	EndIf;
+EndProcedure
+
+#EndRegion
+
+#Region _DATE
+
+Procedure DateOnChange(Object, Form, TableNames) Export
+	For Each TableName In StrSplit(TableNames, ",") Do
+		Parameters = GetSimpleParameters(Object, Form, TrimAll(TableName));
+		ControllerClientServer_V2.DateOnChange(Parameters);
+	EndDo;
 EndProcedure
 
 #EndRegion
@@ -493,6 +674,13 @@ EndProcedure
 
 #Region CURRENCY
 
+Procedure CurrencyOnChange(Object, Form, TableNames) Export
+	For Each TableName In StrSplit(TableNames, ",") Do
+		Parameters = GetSimpleParameters(Object, Form, TrimAll(TableName));
+		ControllerClientServer_V2.CurrencyOnChange(Parameters);
+	EndDo;
+EndProcedure
+
 Procedure OnSetCurrencyNotify(Parameters) Export
 	DocumentsClientServer.ChangeTitleGroupTitle(Parameters.Object, Parameters.Form);
 EndProcedure
@@ -501,16 +689,16 @@ EndProcedure
 
 #Region PARTNER
 
-Procedure PartnerOnChange(Object, Form) Export
+Procedure PartnerOnChange(Object, Form, TableNames) Export
 	FormParameters = GetFormParameters(Form);
 	ExtractValueBeforeChange_Object("Partner", FormParameters);
 	
-	ServerParameters = GetServerParameters(Object);
-	ServerParameters.TableName = "ItemList";
-	
-	Parameters = GetParameters(ServerParameters, FormParameters);
-	
-	ControllerClientServer_V2.PartnerOnChange(Parameters);
+	For Each TableName In StrSplit(TableNames, ",") Do
+		ServerParameters = GetServerParameters(Object);
+		ServerParameters.TableName = TableName;
+		Parameters = GetParameters(ServerParameters, FormParameters);
+		ControllerClientServer_V2.PartnerOnChange(Parameters);
+	EndDo;
 EndProcedure
 
 Procedure OnSetPartnerNotify(Parameters) Export
@@ -521,12 +709,34 @@ EndProcedure
 
 #Region LEGAL_NAME
 
-Procedure LegalNameOnChange(Object, Form) Export
-	Parameters = GetSimpleParameters(Object, Form, "ItemList");
-	ControllerClientServer_V2.LegalNameOnChange(Parameters);
+Procedure LegalNameOnChange(Object, Form, TableNames) Export
+	For Each TableName In StrSplit(TableNames, ",") Do
+		Parameters = GetSimpleParameters(Object, Form, TableName);
+		ControllerClientServer_V2.LegalNameOnChange(Parameters);
+	EndDo;
 EndProcedure
 
 Procedure OnSetLegalNameNotify(Parameters) Export
+	DocumentsClientServer.ChangeTitleGroupTitle(Parameters.Object, Parameters.Form);
+EndProcedure
+
+#EndRegion
+
+#Region AGREEMENT
+
+Procedure AgreementOnChange(Object, Form, TableNames) Export
+	FormParameters = GetFormParameters(Form);
+	ExtractValueBeforeChange_Object("Agreement", FormParameters);
+	
+	For Each TableName In StrSplit(TableNames, ",") Do
+		ServerParameters = GetServerParameters(Object);
+		ServerParameters.TableName = TableName;
+		Parameters = GetParameters(ServerParameters, FormParameters);
+		ControllerClientServer_V2.AgreementOnChange(Parameters);
+	EndDo;
+EndProcedure
+
+Procedure OnSetAgreementNotify(Parameters) Export
 	DocumentsClientServer.ChangeTitleGroupTitle(Parameters.Object, Parameters.Form);
 EndProcedure
 
@@ -541,59 +751,3 @@ EndProcedure
 
 #EndRegion
 
-#Region ITEM_LIST
-
-Procedure ItemListPriceTypeOnChange(Object, Form, CurrentData = Undefined) Export
-	Rows = GetRowsByCurrentData(Form, "ItemList", CurrentData);
-	Parameters = GetSimpleParameters(Object, Form, "ItemList", Rows);
-	ControllerClientServer_V2.ItemListPriceTypeOnChange(Parameters);
-EndProcedure
-
-Procedure ItemListPriceOnChange(Object, Form, CurrentData = Undefined) Export
-	Rows = GetRowsByCurrentData(Form, "ItemList", CurrentData);
-	Parameters = GetSimpleParameters(Object, Form, "ItemList", Rows);
-	ControllerClientServer_V2.ItemListPriceOnChange(Parameters);
-EndProcedure
-
-Procedure ItemListTotalAmountOnChange(Object, Form, CurrentData = Undefined) Export
-	Rows = GetRowsByCurrentData(Form, "ItemList", CurrentData);
-	Parameters = GetSimpleParameters(Object, Form, "ItemList", Rows);
-	ControllerClientServer_V2.ItemListTotalAmountOnChange(Parameters);
-EndProcedure
-
-Procedure ItemListStoreOnChange(Object, Form, CurrentData = Undefined) Export
-	Rows = GetRowsByCurrentData(Form, "ItemList", CurrentData);
-	
-	FormParameters = GetFormParameters(Form);
-	ExtractValueBeforeChange_List("ItemList.Store", FormParameters, Rows);
-	FormParameters.EventCaller = "ItemListStoreOnUserChange";
-
-	ServerParameters = GetServerParameters(Object);
-	ServerParameters.Rows      = Rows;
-	ServerParameters.TableName = "ItemList";
-	
-	Parameters = GetParameters(ServerParameters, FormParameters);
-	ControllerClientServer_V2.ItemListStoreOnChange(Parameters);
-EndProcedure
-
-#Region ITEM_LIST_QUANTITY
-
-Procedure ItemListQuantityOnChange(Object, Form, CurrentData = Undefined) Export
-	Rows = GetRowsByCurrentData(Form, "ItemList", CurrentData);
-	Parameters = GetSimpleParameters(Object, Form, "ItemList", Rows);
-	ControllerClientServer_V2.ItemListQuantityOnChange(Parameters);
-EndProcedure
-
-Procedure OnSetItemListQuantityNotify(Parameters) Export
-	Return;
-//	Object = Parameters.Object;
-//	Form   = Parameters.Form;
-//	// для Sales Invoice
-//	SerialLotNumberClient.UpdateSerialLotNumbersTree(Object, Form);
-//	DocumentsClient.UpdateTradeDocumentsTree(Object, Form, 
-//	"ShipmentConfirmations", "ShipmentConfirmationsTree", "QuantityInShipmentConfirmation");
-EndProcedure
-
-#EndRegion
-
-#EndRegion

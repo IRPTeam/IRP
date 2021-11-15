@@ -446,6 +446,47 @@ Procedure OnWrite_RowID(Source, Cancel) Export
 	If Source.Metadata().TabularSections.Find("RowIDInfo") = Undefined Then
 		Return;
 	EndIf;
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	RowIDInfo.RowRef AS RowRef
+	|INTO RowIDInfo
+	|FROM
+	|	&RowIDInfo AS RowIDInfo
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	TM1010B_RowIDMovements.Recorder,
+	|	RowIDInfo.RowRef
+	|INTO tmpRecorders
+	|FROM
+	|	AccumulationRegister.TM1010B_RowIDMovements AS TM1010B_RowIDMovements
+	|		INNER JOIN RowIDInfo
+	|		ON TM1010B_RowIDMovements.RowRef = RowIDInfo.RowRef
+	|		AND TM1010B_RowIDMovements.RecordType = VALUE(AccumulationRecordType.Expense)
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	TM1010T_RowIDMovements.Recorder,
+	|	RowIDInfo.RowRef
+	|FROM
+	|	AccumulationRegister.TM1010T_RowIDMovements AS TM1010T_RowIDMovements
+	|		INNER JOIN RowIDInfo
+	|		ON TM1010T_RowIDMovements.RowRef = RowIDInfo.RowRef
+	|		AND TM1010T_RowIDMovements.Quantity < 0
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	tmpRecorders.Recorder,
+	|	tmpRecorders.RowRef
+	|FROM
+	|	tmpRecorders AS tmpRecorders";
+	Query.SetParameter("RowIDInfo", Source.RowIDInfo.Unload());
+	QueryResult = Query.Execute();
+	RecordersByRowRef = QueryResult.Unload();
 	
 	TableOfDifferenceFields = New ValueTable();
 	TableOfDifferenceFields.Columns.Add("FieldName");
@@ -460,7 +501,7 @@ Procedure OnWrite_RowID(Source, Cancel) Export
 		If Not ValueIsFilled(Row.RowRef.Basis) Then
 			RowRefObject.Basis = Source.Ref;
 		EndIf;
-		ArrayOfDifferenceFields = UpdateRowIDCatalog(Source, Row, RowItemList, RowRefObject, Cancel);
+		ArrayOfDifferenceFields = UpdateRowIDCatalog(Source, Row, RowItemList, RowRefObject, Cancel, RecordersByRowRef);
 		For Each ItemOfDifferenceFields In ArrayOfDifferenceFields Do
 			NewRow = TableOfDifferenceFields.Add();
 			FillPropertyValues(NewRow, ItemOfDifferenceFields);
@@ -1228,12 +1269,12 @@ Function FindOrCreateRowIDRef(RowID)
 	Return RowRefObject.Ref;
 EndFunction
 
-Function UpdateRowIDCatalog(Source, Row, RowItemList, RowRefObject, Cancel)
+Function UpdateRowIDCatalog(Source, Row, RowItemList, RowRefObject, Cancel, RecordersByRowRef)
 	FieldsForCheckRowRef = Undefined;
 	CachedObjectBefore   = Undefined;
 	CachedObjectAfter    = Undefined;
 	If ValueIsFilled(Source.Ref) Then
-		FieldsForCheckRowRef = GetFieldsForCheckRowRef(Source, RowRefObject);
+		FieldsForCheckRowRef = GetFieldsForCheckRowRef(Source, RowRefObject, RecordersByRowRef);
 		CachedObjectBefore   = GetRowRefCache(RowRefObject, FieldsForCheckRowRef);
 	EndIf;
 	
@@ -1328,46 +1369,18 @@ Function UpdateRowIDCatalog(Source, Row, RowItemList, RowRefObject, Cancel)
 	Return ArrayOfDifferenceFields;
 EndFunction
 
-Function GetFieldsForCheckRowRef(Source, RowRefObject)
-	Query = New Query();
-	Query.Text = 
-	"SELECT
-	|	TM1010B_RowIDMovements.Recorder
-	|INTO tmpRecorders
-	|FROM
-	|	AccumulationRegister.TM1010B_RowIDMovements AS TM1010B_RowIDMovements
-	|WHERE
-	|	TM1010B_RowIDMovements.RowRef = &RowRef
-	|	AND TM1010B_RowIDMovements.RecordType = VALUE(AccumulationRecordType.Expense)
-	|
-	|UNION ALL
-	|
-	|SELECT
-	|	TM1010T_RowIDMovements.Recorder
-	|FROM
-	|	AccumulationRegister.TM1010T_RowIDMovements AS TM1010T_RowIDMovements
-	|WHERE
-	|	TM1010T_RowIDMovements.RowRef = &RowRef
-	|	AND TM1010T_RowIDMovements.Quantity < 0
-	|;
-	|
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	tmpRecorders.Recorder
-	|FROM
-	|	tmpRecorders AS tmpRecorders
-	|GROUP BY
-	|	tmpRecorders.Recorder";
-	Query.SetParameter("RowRef", RowRefObject.Ref);
-	QueryResult = Query.Execute();
-	QueryTable = QueryResult.Unload();
+Function GetFieldsForCheckRowRef(Source, RowRefObject, RecordersByRowRef)
 	
+	RecordersTable = RecordersByRowRef.Copy(New Structure("RowRef", RowRefObject.Ref));
+	RecordersTable.GroupBy("Recorder");
+
+		
 	ExternalLinkedDocsTable = New ValueTable();
 	ExternalLinkedDocsTable.Columns.Add("Doc");
 	
 	DocAliases = DocAliases();
 	
-	For Each Row In QueryTable Do
+	For Each Row In RecordersTable Do
 		For Each KeyValue In Is(Row.Recorder) Do
 			If KeyValue.Value Then
 				ExternalLinkedDocsTable.Add().Doc = DocAliases[KeyValue.Key];

@@ -794,6 +794,8 @@ Procedure OnSetStoreNotify(Parameters) Export
 	EndDo;
 	If StoreArray.Count() > 1 Then
 		Parameters.Form.Items.Store.InputHint = StrConcat(StoreArray, "; ");
+	Else
+		Parameters.Form.Items.Store.InputHint = "";
 	EndIf;
 EndProcedure
 
@@ -829,6 +831,8 @@ Procedure OnSetDeliveryDateNotify(Parameters) Export
 			DeliveryDateFormattedArray.Add(Format(Row, "DF=dd.MM.yy;"));
 		EndDo;
 		Parameters.Form.Items.DeliveryDate.Tooltip = StrConcat(DeliveryDateFormattedArray, "; ");
+	Else
+		Parameters.Form.Items.DeliveryDate.Tooltip = "";
 	EndIf;
 EndProcedure
 

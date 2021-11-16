@@ -895,7 +895,11 @@ EndProcedure
 Procedure StoreOnChange(Parameters) Export
 	ProceedPropertyBeforeChange_Form(Parameters);
 	AddViewNotify("OnSetStoreNotify", Parameters);
-	Binding = StoreStepsBinding(Parameters);
+	If ValueIsFilled(GetPropertyForm(Parameters, "Store")) Then
+		Binding = StoreStepsBinding(Parameters);
+	Else
+		Binding = StoreEmptyBinding(Parameters);
+	EndIf;
 	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
 EndProcedure
 
@@ -909,11 +913,24 @@ EndProcedure
 Function StoreDefaultBinding(Parameters)
 	DataPath = "Store";
 	Binding = New Structure();
-	Binding.Insert("ShipmentConfirmation", "StoreDefault");
-	Binding.Insert("GoodsReceipt"        , "StoreDefault");
+	Binding.Insert("ShipmentConfirmation", "StoreDefault_Shipment");
+	Binding.Insert("GoodsReceipt"        , "StoreDefault_Shipment");
 
-	Binding.Insert("SalesInvoice"   , "StoreDefault_HaveAgreementInHeader");
-	Binding.Insert("PurchaseInvoice", "StoreDefault_HaveAgreementInHeader");
+	Binding.Insert("SalesInvoice"   , "StoreDefault_Trade");
+	Binding.Insert("PurchaseInvoice", "StoreDefault_Trade");
+	
+	Return BindSteps("StepsEnamblerEmpty", DataPath, Binding, Parameters);
+EndFunction
+
+// Store.Empty.Bind
+Function StoreEmptyBinding(Parameters)
+	DataPath = "Store";
+	Binding = New Structure();
+	Binding.Insert("ShipmentConfirmation", "StoreEmpty_Shipment");
+	Binding.Insert("GoodsReceipt"        , "StoreEmpty_Shipment");
+
+	Binding.Insert("SalesInvoice"   , "StoreEmpty_Trade");
+	Binding.Insert("PurchaseInvoice", "StoreEmpty_Trade");
 	
 	Return BindSteps("StepsEnamblerEmpty", DataPath, Binding, Parameters);
 EndFunction
@@ -925,41 +942,68 @@ Function StoreStepsBinding(Parameters)
 	Return BindSteps("StoreStepsEnabler", DataPath, Binding, Parameters);
 EndFunction
 
-Procedure StoreDefault(Parameters, Chain) Export
+Procedure StoreDefault_Shipment(Parameters, Chain) Export
+	// DefaultStoreInHeader
 	Chain.DefaultStoreInHeader.Enable = True;
 	Chain.DefaultStoreInHeader.Setter = "SetStore";
 	Options = ModelClientServer_V2.DefaultStoreInHeaderOptions();
 	Options.DocumentRef = Parameters.Object.Ref;
-	
 	ArrayOfStoresInList = New Array();
 	For Each Row In Parameters.Object.ItemList Do
 		ArrayOfStoresInList.Add(GetPropertyObject(Parameters, "ItemList.Store", Row.Key));
 	EndDo;
-	Options.ArrayOfStoresInList = ArrayOfStoresInList; 
-	
+	Options.ArrayOfStoresInList = ArrayOfStoresInList;
 	Chain.DefaultStoreInHeader.Options.Add(Options);
 EndProcedure
 
-Procedure StoreDefault_HaveAgreementInHeader(Parameters, Chain) Export
+Procedure StoreEmpty_Shipment(Parameters, Chain) Export
+	// EmptyStoreInHeader
+	Chain.EmptyStoreInHeader.Enable = True;
+	Chain.EmptyStoreInHeader.Setter = "SetStore";
+	Options = ModelClientServer_V2.EmptyStoreInHeaderOptions();
+	Options.DocumentRef = Parameters.Object.Ref;
+	ArrayOfStoresInList = New Array();
+	For Each Row In Parameters.Object.ItemList Do
+		ArrayOfStoresInList.Add(GetPropertyObject(Parameters, "ItemList.Store", Row.Key));
+	EndDo;
+	Options.ArrayOfStoresInList = ArrayOfStoresInList;
+	Chain.EmptyStoreInHeader.Options.Add(Options);
+EndProcedure
+
+Procedure StoreDefault_Trade(Parameters, Chain) Export
+	// DefaultStoreInHeader
 	Chain.DefaultStoreInHeader.Enable = True;
 	Chain.DefaultStoreInHeader.Setter = "SetStore";
 	Options = ModelClientServer_V2.DefaultStoreInHeaderOptions();
 	Options.DocumentRef = Parameters.Object.Ref;
 	Options.Agreement   = GetPropertyObject(Parameters, "Agreement");
-	
 	ArrayOfStoresInList = New Array();
 	For Each Row In Parameters.Object.ItemList Do
 		ArrayOfStoresInList.Add(GetPropertyObject(Parameters, "ItemList.Store", Row.Key));
 	EndDo;
 	Options.ArrayOfStoresInList = ArrayOfStoresInList; 
-	
 	Chain.DefaultStoreInHeader.Options.Add(Options);
 EndProcedure
 
+Procedure StoreEmpty_Trade(Parameters, Chain) Export
+	// EmptyStoreInHeader
+	Chain.EmptyStoreInHeader.Enable = True;
+	Chain.EmptyStoreInHeader.Setter = "SetStore";
+	Options = ModelClientServer_V2.EmptyStoreInHeaderOptions();
+	Options.DocumentRef = Parameters.Object.Ref;
+	Options.Agreement   = GetPropertyObject(Parameters, "Agreement");
+	ArrayOfStoresInList = New Array();
+	For Each Row In Parameters.Object.ItemList Do
+		ArrayOfStoresInList.Add(GetPropertyObject(Parameters, "ItemList.Store", Row.Key));
+	EndDo;
+	Options.ArrayOfStoresInList = ArrayOfStoresInList; 
+	Chain.EmptyStoreInHeader.Options.Add(Options);
+EndProcedure
+
 Procedure StoreStepsEnabler(Parameters, Chain) Export
+	// FillStoresInList
 	Chain.FillStoresInList.Enable = True;
 	Chain.FillStoresInList.Setter = "SetItemListStore";
-	
 	For Each Row In GetRows(Parameters, "ItemList") Do
 		Options = ModelClientServer_V2.FillStoresInListOptions();
 		Options.Store        = GetPropertyForm(Parameters, "Store");

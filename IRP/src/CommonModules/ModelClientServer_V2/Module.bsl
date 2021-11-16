@@ -92,6 +92,9 @@ Function GetChain()
 	Chain.Insert("DefaultDeliveryDateInList" , GetChainLink("DefaultDeliveryDateInListExecute"));
 	Chain.Insert("DefaultQuantityInList"     , GetChainLink("DefaultQuantityInListExecute"));
 	
+	// Empty.Header
+	Chain.Insert("EmptyStoreInHeader"     , GetChainLink("EmptyStoreInHeaderExecute"));
+	
 	// Default.Header
 	Chain.Insert("DefaultStoreInHeader"        , GetChainLink("DefaultStoreInHeaderExecute"));
 	Chain.Insert("DefaultDeliveryDateInHeader" , GetChainLink("DefaultDeliveryDateInHeaderExecute"));
@@ -549,6 +552,30 @@ EndFunction
 #EndRegion
 
 #Region STORE
+
+Function EmptyStoreInHeaderOptions() Export
+	Return GetChainLinkOptions("DocumentRef, ArrayOfStoresInList, Agreement");
+EndFunction
+
+// Заполняет Store в шапке когда его очищают
+Function EmptyStoreInHeaderExecute(Options) Export
+	// заполняется из Agreement или из UserSettings
+	If ValueIsFilled(Options.Agreement) Then
+		StoreInAgreement = Options.Agreement.Store;
+		If ValueIsFilled(StoreInAgreement) Then
+			Return StoreInAgreement; // Склад указанный в Agreement
+		EndIf;
+	EndIf;
+	
+	UserSettings = UserSettingsServer.GetUserSettingsForClientModule(Options.DocumentRef);
+	For Each Setting In UserSettings Do
+		If Setting.AttributeName = "ItemList.Store" Then
+			Return Setting.Value; // Склад указанный в настройках пользователя
+		EndIf;
+	EndDo;
+	
+	Return Undefined;
+EndFunction
 
 Function DefaultStoreInHeaderOptions() Export
 	Return GetChainLinkOptions("DocumentRef, ArrayOfStoresInList, Agreement");

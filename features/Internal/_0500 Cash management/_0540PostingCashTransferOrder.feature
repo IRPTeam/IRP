@@ -422,7 +422,7 @@ Scenario: _054006 create Cash transfer order (from Cash/Bank accounts to bank ac
 			| Number | Sender       | Receiver          | Company      |
 			| $$NumberCashTransferOrder054006$$      | Cash desk №1 | Bank account, USD | Main Company |
 		And I click the button named "FormDocumentCashPaymentGenerateCashPayment"
-		* Check the filling of the tabular part
+	* Check the filling of the tabular part
 		And "PaymentList" table contains lines
 			| 'Planning transaction basis'  | 'Total amount' |
 			| '$$CashTransferOrder054006$$' | '500,00' |
@@ -440,11 +440,20 @@ Scenario: _054006 create Cash transfer order (from Cash/Bank accounts to bank ac
 			| $$NumberCashTransferOrder054006$$      | Cash desk №1 | Bank account, USD | Main Company |
 		And I click the button named "FormDocumentBankReceiptGenarateBankReceipt"
 		And Delay 5
-		* Check the filling of the tabular part
+	* Check the filling of the tabular part
 		And I move to "Payments" tab
+		If "PaymentList" table does not contain line Then
+			| 'Total amount' |
+			| '500,00'       |
+			And I close current window
+			Given I open hyperlink "e1cib/list/Document.CashTransferOrder"
+			And I go to line in "List" table
+				| Number | Sender       | Receiver          | Company      |
+				| $$NumberCashTransferOrder054006$$      | Cash desk №1 | Bank account, USD | Main Company |
+			And I click the button named "FormDocumentBankReceiptGenarateBankReceipt"
 		And "PaymentList" table contains lines
 			| 'Total amount' | 'Planning transaction basis'  |
-			| '500,00' | '$$CashTransferOrder054006$$' |
+			| '500,00'       | '$$CashTransferOrder054006$$' |
 		And I click the button named "FormPost"
 		And I delete "$$NumberBankReceipt054006$$" variable
 		And I delete "$$BankReceipt054006$$" variable

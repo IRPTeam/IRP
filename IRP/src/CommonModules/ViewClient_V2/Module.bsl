@@ -159,7 +159,7 @@ EndProcedure
 
 // возвращает список реквизитов объекта для которых нужно получить значение до изменения
 Function GetObjectPropertyNamesBeforeChange()
-	Return "Company, Partner, Agreement, Sender, Receiver";
+	Return "Date, Company, Partner, Agreement, Sender, Receiver";
 EndFunction
 
 Function GetListPropertyNamesBeforeChange()
@@ -263,6 +263,7 @@ EndFunction
 // временная для SalesInvoice
 Procedure __tmp_OnChainComplite(Parameters)
 	ArrayOfEventCallers = New Array();
+	ArrayOfEventCallers.Add("DateOnUserChange");
 	ArrayOfEventCallers.Add("CompanyOnUserChange");
 	ArrayOfEventCallers.Add("PartnerOnUserChange");
 	ArrayOfEventCallers.Add("AgreementOnUserChange");
@@ -836,8 +837,13 @@ EndProcedure
 #Region _DATE
 
 Procedure DateOnChange(Object, Form, TableNames) Export
+	FormParameters = GetFormParameters(Form);
+	ExtractValueBeforeChange_Object("Date", FormParameters);
+	FormParameters.EventCaller = "DateOnUserChange";
 	For Each TableName In StrSplit(TableNames, ",") Do
-		Parameters = GetSimpleParameters(Object, Form, TrimAll(TableName));
+		ServerParameters = GetServerParameters(Object);
+		ServerParameters.TableName = TrimAll(TableName);
+		Parameters = GetParameters(ServerParameters, FormParameters);
 		ControllerClientServer_V2.DateOnChange(Parameters);
 	EndDo;
 EndProcedure

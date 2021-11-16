@@ -1840,7 +1840,6 @@ Procedure ItemListEnableCalculations(Parameters, Chain, WhoIsChanged)
 			Options.CalculateTaxAmountReverse.Enable   = True;
 			Options.CalculateNetAmountAsTotalAmountMinusTaxAmount.Enable   = True;
 			Options.CalculatePriceByTotalAmount.Enable = True;
-			Options.CalculatePaymentTerms.Enable       = True;
 		EndIf;
 		
 		Options.AmountOptions.DontCalculateRow = GetPropertyObject(Parameters, "ItemList.DontCalculateRow", Row.Key);

@@ -566,31 +566,31 @@ Procedure AgreementOnChange(Object, Form, Item, AddInfo = Undefined) Export
 	//DocumentsClient.AgreementOnChange(Object, Form, ThisObject, Item, Undefined, AddInfo);
 EndProcedure
 
-Procedure AgreementOnChangePutServerDataToAddInfo(Object, Form, AddInfo = Undefined) Export
-	DocumentsClient.AgreementOnChangePutServerDataToAddInfo(Object, Form, AddInfo);
-EndProcedure
-
-Function AgreementSettings(Object, Form, AddInfo = Undefined) Export
-	If AddInfo = Undefined Then
-		Return New Structure("PutServerDataToAddInfo", True);
-	EndIf;
-
-	Settings = New Structure("Actions, ObjectAttributes, FormAttributes");
-	Actions = New Structure();
-	Actions.Insert("ChangeCompany", "ChangeCompany");
-	Actions.Insert("ChangePriceType", "ChangePriceType");
-	Actions.Insert("ChangeCurrency", "ChangeCurrency");
-	Actions.Insert("ChangePriceIncludeTax", "ChangePriceIncludeTax");
-	Actions.Insert("ChangeStore", "ChangeStore");
-	Actions.Insert("ChangeDeliveryDate", "ChangeDeliveryDate");
-	Actions.Insert("ChangePaymentTerm", "ChangePaymentTerm");
-	Actions.Insert("ChangeTaxRates", "ChangeTaxRates");
-
-	Settings.Actions = Actions;
-	Settings.ObjectAttributes = "Company, Currency, PriceIncludeTax, ManagerSegment";
-	Settings.FormAttributes = "Store, DeliveryDate, CurrentPriceType";
-	Return Settings;
-EndFunction
+//Procedure AgreementOnChangePutServerDataToAddInfo(Object, Form, AddInfo = Undefined) Export
+//	DocumentsClient.AgreementOnChangePutServerDataToAddInfo(Object, Form, AddInfo);
+//EndProcedure
+//
+//Function AgreementSettings(Object, Form, AddInfo = Undefined) Export
+//	If AddInfo = Undefined Then
+//		Return New Structure("PutServerDataToAddInfo", True);
+//	EndIf;
+//
+//	Settings = New Structure("Actions, ObjectAttributes, FormAttributes");
+//	Actions = New Structure();
+//	Actions.Insert("ChangeCompany", "ChangeCompany");
+//	Actions.Insert("ChangePriceType", "ChangePriceType");
+//	Actions.Insert("ChangeCurrency", "ChangeCurrency");
+//	Actions.Insert("ChangePriceIncludeTax", "ChangePriceIncludeTax");
+//	Actions.Insert("ChangeStore", "ChangeStore");
+//	Actions.Insert("ChangeDeliveryDate", "ChangeDeliveryDate");
+//	Actions.Insert("ChangePaymentTerm", "ChangePaymentTerm");
+//	Actions.Insert("ChangeTaxRates", "ChangeTaxRates");
+//
+//	Settings.Actions = Actions;
+//	Settings.ObjectAttributes = "Company, Currency, PriceIncludeTax, ManagerSegment";
+//	Settings.FormAttributes = "Store, DeliveryDate, CurrentPriceType";
+//	Return Settings;
+//EndFunction
 
 Procedure AgreementStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
 	OpenSettings = DocumentsClient.GetOpenSettingsStructure();
@@ -802,42 +802,43 @@ EndProcedure
 #Region ItemDate
 
 Procedure DateOnChange(Object, Form, Item, AddInfo = Undefined) Export
-	DocumentsClient.DateOnChange(Object, Form, Thisobject, Item, Undefined, AddInfo);
-EndProcedure
-
-Procedure DateOnChangePutServerDataToAddInfo(Object, Form, AddInfo = Undefined) Export
 	ViewClient_V2.DateOnChange(Object, Form, "ItemList");
-	//DocumentsClient.DateOnChangePutServerDataToAddInfo(Object, Form, AddInfo);
+	
+	//DocumentsClient.DateOnChange(Object, Form, Thisobject, Item, Undefined, AddInfo);
 EndProcedure
 
-Function DateSettings(Object, Form, AddInfo = Undefined) Export
-	If AddInfo = Undefined Then
-		Return New Structure("PutServerDataToAddInfo", True);
-	EndIf;
-	ServerData = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "ServerData");
+//Procedure DateOnChangePutServerDataToAddInfo(Object, Form, AddInfo = Undefined) Export
+//	//DocumentsClient.DateOnChangePutServerDataToAddInfo(Object, Form, AddInfo);
+//EndProcedure
 
-	Settings = New Structure("Actions, ObjectAttributes, FormAttributes, AgreementType, AfterActionsCalculateSettings");
-
-	Actions = New Structure();
-	Actions.Insert("ChangeAgreement", "ChangeAgreement");
-	Actions.Insert("ChangeDeliveryDate", "ChangeDeliveryDate");
-	Actions.Insert("UpdatePaymentTerm", "UpdatePaymentTerm");
-
-	AfterActionsCalculateSettings = New Structure();
-	PriceDate = CalculationStringsClientServer.GetSliceLastDateByRefAndDate(Object.Ref, Object.Date);
-	AfterActionsCalculateSettings.Insert("UpdatePrice", New Structure("Period, PriceType", PriceDate,
-		Form.CurrentPriceType));
-
-	Settings.Insert("EmptyBasisDocument", New Structure("SalesOrder", ServerData.SalesOrder_EmptyRef));
-	Settings.Insert("TableName", "ItemList");
-	Settings.Actions = Actions;
-	Settings.ObjectAttributes = "Company, Currency, PriceIncludeTax, Agreement, LegalName, ManagerSegment";
-	Settings.FormAttributes   = "CurrentPriceType";
-	Settings.AgreementType    = ServerData.AgreementTypes_Customer;
-	Settings.AfterActionsCalculateSettings = AfterActionsCalculateSettings;
-
-	Return Settings;
-EndFunction
+//Function DateSettings(Object, Form, AddInfo = Undefined) Export
+//	If AddInfo = Undefined Then
+//		Return New Structure("PutServerDataToAddInfo", True);
+//	EndIf;
+//	ServerData = CommonFunctionsClientServer.GetFromAddInfo(AddInfo, "ServerData");
+//
+//	Settings = New Structure("Actions, ObjectAttributes, FormAttributes, AgreementType, AfterActionsCalculateSettings");
+//
+//	Actions = New Structure();
+//	Actions.Insert("ChangeAgreement", "ChangeAgreement");
+//	Actions.Insert("ChangeDeliveryDate", "ChangeDeliveryDate");
+//	Actions.Insert("UpdatePaymentTerm", "UpdatePaymentTerm");
+//
+//	AfterActionsCalculateSettings = New Structure();
+//	PriceDate = CalculationStringsClientServer.GetSliceLastDateByRefAndDate(Object.Ref, Object.Date);
+//	AfterActionsCalculateSettings.Insert("UpdatePrice", New Structure("Period, PriceType", PriceDate,
+//		Form.CurrentPriceType));
+//
+//	Settings.Insert("EmptyBasisDocument", New Structure("SalesOrder", ServerData.SalesOrder_EmptyRef));
+//	Settings.Insert("TableName", "ItemList");
+//	Settings.Actions = Actions;
+//	Settings.ObjectAttributes = "Company, Currency, PriceIncludeTax, Agreement, LegalName, ManagerSegment";
+//	Settings.FormAttributes   = "CurrentPriceType";
+//	Settings.AgreementType    = ServerData.AgreementTypes_Customer;
+//	Settings.AfterActionsCalculateSettings = AfterActionsCalculateSettings;
+//
+//	Return Settings;
+//EndFunction
 
 #EndRegion
 

@@ -188,6 +188,13 @@ EndFunction
 
 Procedure OnChainComplete(Parameters) Export
 	CommitChanges = False;
+	
+	// временно для SalesInvoice отдельно
+	If Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice" Then
+		__tmp_OnChainComplite(Parameters);
+		Return;
+	EndIf;
+	
 	// изменение склада (реквизит шапки) в шапке документа
 	If Parameters.EventCaller = "StoreOnUserChange" Then
 		If Parameters.ObjectMetadataInfo.MetadataName = "ShipmentConfirmation" Then
@@ -199,8 +206,6 @@ Procedure OnChainComplete(Parameters) Export
 			Else
 				CommitChanges = True;
 			EndIf;
-		ElsIf Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice" Then
-			CommitChanges = True;
 		EndIf;
 	// изменение склада в табличной части ItemList
 	ElsIf Parameters.EventCaller = "ItemListStoreOnUserChange" Then
@@ -208,8 +213,6 @@ Procedure OnChainComplete(Parameters) Export
 			If NeedCommitChainChangesItemListStoreOnUserChange(Parameters) Then
 				CommitChanges = True;
 			EndIf;
-		ElsIf Parameters.ObjectMetadataInfo.MetadataName = "SalesInvoice" Then
-			CommitChanges = True;
 		EndIf;
 	Else
 		CommitChanges = True;
@@ -224,7 +227,7 @@ EndProcedure
 Function NeedQueryStoreOnUserChange(Parameters)
 	If Parameters.Cache.Property("ItemList") Then
 		For Each Row In Parameters.Cache.ItemList Do
-			If Row.Property("Store") Then //And ValueIsFilled(Row.Store) Then
+			If Row.Property("Store") Then
 				Return True;
 			EndIf;
 		EndDo;
@@ -250,6 +253,16 @@ Function NeedCommitChainChangesItemListStoreOnUserChange(Parameters)
 	EndIf;
 	Return True;
 EndFunction
+
+// временная для SalesInvoice
+Procedure __tmp_OnChainComplite(Parameters)
+	If Parameters.ChangedData.Get("ItemList.Store") <> Undefined Then
+		// вопрос при перезаполнении склада в табличной части ItemList
+		//StrTemplate(R().QuestionToUser_009, String(NewStore))
+	EndIf;
+	ControllerClientServer_V2.CommitChainChanges(Parameters);
+	UpdateCacheBeforeChange(Parameters.Object, Parameters.Form);
+EndProcedure
 
 #EndRegion
 

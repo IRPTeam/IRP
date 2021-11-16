@@ -1,9 +1,4 @@
 
-// MODEL
-// 
-// ОБЩИЙ МОДУЛЬ ДЛЯ ВСЕХ ДОКУМЕНТОВ - уровень бизнес логики
-// никаких модификаций объектов тут делать нельзя, только запросы к БД и расчеты
-
 #Region ENTRY_POINTS
 
 Procedure EntryPoint(StepsEnablerName, Parameters) Export
@@ -20,9 +15,6 @@ Procedure EntryPoint(StepsEnablerName, Parameters) Export
 	Else
 		Parameters.Form = Undefined;
 	EndIf;
-	
-//	UnloadControllerModule(Parameters);
-//	UnloadViewModule(Parameters);
 #ENDIF
 
 	ModelServer_V2.ServerEntryPoint(StepsEnablerName, Parameters);
@@ -30,8 +22,6 @@ Procedure EntryPoint(StepsEnablerName, Parameters) Export
 #IF Client THEN
 	Parameters.Form   = Transfer.Form;
 	Parameters.Object = Transfer.Object;
-//	LoadControllerModule(Parameters);
-//	LoadViewModule(Parameters);
 #ENDIF
 	
 	// проверяем что кэш был инициализирован из этой EntryPoint
@@ -43,15 +33,9 @@ Procedure EntryPoint(StepsEnablerName, Parameters) Export
 EndProcedure
 
 Procedure ServerEntryPoint(StepsEnablerName, Parameters) Export
-	//LoadControllerModule(Parameters);	
 	Chain = GetChain();
 	Execute StrTemplate("%1.%2(Parameters, Chain);", Parameters.ControllerModuleName, StepsEnablerName);
 	ExecuteChain(Parameters, Chain);
-	
-	//If Parameters.ModelInveronment.FirstStepsEnablerName = StepsEnablerName Then
-		//DestroyEntryPoint(Parameters);
-		//UnloadControllerModule(Parameters);
-	//EndIf;	
 EndProcedure
 
 #EndRegion
@@ -134,12 +118,14 @@ Function GetChain()
 	Chain.Insert("ChangeDeliveryDateInHeaderByDeliveryDateInList" , GetChainLink("ChangeDeliveryDateInHeaderByDeliveryDateInListExecute"));
 	Chain.Insert("ChangeUseShipmentConfirmationByStore" , GetChainLink("ChangeUseShipmentConfirmationByStoreExecute"));
 	Chain.Insert("ChangeUseGoodsReceiptByStore"         , GetChainLink("ChangeUseGoodsReceiptByStoreExecute"));
-	Chain.Insert("ChangePriceTypeByAgreement" , GetChainLink("ChangePriceTypeByAgreementExecute"));
-	Chain.Insert("ChangePriceTypeAsManual"    , GetChainLink("ChangePriceTypeAsManualExecute"));
-	Chain.Insert("ChangePriceByPriceType"     , GetChainLink("ChangePriceByPriceTypeExecute"));
+	Chain.Insert("ChangePriceTypeByAgreement"   , GetChainLink("ChangePriceTypeByAgreementExecute"));
+	Chain.Insert("ChangePriceTypeAsManual"      , GetChainLink("ChangePriceTypeAsManualExecute"));
+	Chain.Insert("ChangePriceByPriceType"       , GetChainLink("ChangePriceByPriceTypeExecute"));
+	Chain.Insert("ChangePaymentTermsByAgreement" , GetChainLink("ChangePaymentTermsByAgreementExecute"));	
 	Chain.Insert("RequireCallCreateTaxesFormControls", GetChainLink("RequireCallCreateTaxesFormControlsExecute"));
 	Chain.Insert("ChangeTaxRate", GetChainLink("ChangeTaxRateExecute"));
 	Chain.Insert("Calculations" , GetChainLink("CalculationsExecute"));
+	Chain.Insert("UpdatePaymentTerms" , GetChainLink("UpdatePaymentTermsExecute"));
 	Return Chain;
 EndFunction
 
@@ -290,61 +276,55 @@ EndFunction
 
 #Region CHANGE_PAYMENT_TERM_BY_AGREEMENT
 
-//		If ProcedureName = "FillPaymentTerms" Then
-//			Object.PaymentTerms.Clear();
-//			For Each Row In ServerData.PaymentTerms Do
-//				NewRow = Object.PaymentTerms.Add();
-//				FillPropertyValues(NewRow, Row);
-//			EndDo;
-//			CalculatePaymentTermDateAndAmount(Object, Form, AdditionalParameters.AddInfo);
-//		EndIf;
-//		If ProcedureName = "UpdatePaymentTerms" Then
-//			CalculatePaymentTermDateAndAmount(Object, Form, AdditionalParameters.AddInfo);
-//		EndIf;
-//
-//If Parameters.Property("GetPaymentTerms") Then
-//		Agreement = Parameters.GetPaymentTerms.Agreement;
-//		ArrayOfPaymentTerms = New Array();
-//		If ValueIsFilled(Agreement) And ValueIsFilled(Agreement.PaymentTerm) Then
-//			For Each Stage In Agreement.PaymentTerm.StagesOfPayment Do
-//				NewRow = New Structure();
-//				NewRow.Insert("CalculationType", Stage.CalculationType);
-//				NewRow.Insert("ProportionOfPayment", Stage.ProportionOfPayment);
-//				NewRow.Insert("DuePeriod", Stage.DuePeriod);
-//				ArrayOfPaymentTerms.Add(NewRow);
-//			EndDo;
-//		EndIf;
-//		Result.Insert("PaymentTerms", ArrayOfPaymentTerms);
-//	EndIf;
-//
-//Procedure CalculatePaymentTermDateAndAmount(Object, Form, AddInfo = Undefined) Export
-//	If Not Object.PaymentTerms.Count() Then
-//		Return;
-//	EndIf;
-//	TotalAmount = Object.ItemList.Total("TotalAmount");
-//	TotalPercent = Object.PaymentTerms.Total("ProportionOfPayment");
-//	RowWithMaxAmount = Undefined;
-//	SecondsInOneDay = 86400;
-//	For Each Row In Object.PaymentTerms Do
-//		Row.Date = Object.Date + (SecondsInOneDay * Row.DuePeriod);
-//		If TotalPercent = 0 Then
-//			Row.Amount = 0;
-//		Else
-//			Row.Amount = (TotalAmount / TotalPercent) * Row.ProportionOfPayment;
-//		EndIf;
-//		If RowWithMaxAmount = Undefined Then
-//			RowWithMaxAmount = Row;
-//		Else
-//			If Row.Amount > RowWithMaxAmount.Amount Then
-//				RowWithMaxAmount = Row;
-//			EndIf;
-//		EndIf;
-//	EndDo;
-//	If RowWithMaxAmount <> Undefined Then
-//		Difference = TotalAmount - Object.PaymentTerms.Total("Amount");
-//		RowWithMaxAmount.Amount = RowWithMaxAmount.Amount + Difference;
-//	EndIf;
-//EndProcedure
+Function ChangePaymentTermsByAgreementOptions() Export
+	Return GetChainLinkOptions("Agreement, Date, TotalAmount, ArrayOfPaymentTerms");
+EndFunction
+
+Function ChangePaymentTermsByAgreementExecute(Options) Export
+	ArrayOfPaymentTerms = CatAgreementsServer.GetAgreementPaymentTerms(Options.Agreement);
+	Return _CalculatePaymentTerms(Options.Date, Options.TotalAmount, ArrayOfPaymentTerms);
+EndFunction
+
+Function UpdatePaymentTermsOptions() Export
+	Return GetChainLinkOptions("Date, TotalAmount, ArrayOfPaymentTerms");
+EndFunction
+
+Function UpdatePaymentTermsExecute(Options) Export
+	Return _CalculatePaymentTerms(Options.Date, Options.TotalAmount, Options.ArrayOfPaymentTerms);
+EndFunction
+
+Function _CalculatePaymentTerms(Date, TotalAmount, ArrayOfPaymentTerms)
+	If Not ArrayOfPaymentTerms.Count() Then
+		Return New Structure("ArrayOfPaymentTerms", ArrayOfPaymentTerms);
+	EndIf;
+	TotalAmount = TotalAmount;
+	TotalPercent = 0;
+	For Each Row In ArrayOfPaymentTerms Do
+		TotalPercent = TotalPercent + Row.ProportionOfPayment;
+	EndDo;
+	
+	PaymentTermsTotalAmount = 0;
+	RowWithMaxAmount = Undefined;
+	SecondsInOneDay = 86400;
+	For Each Row In ArrayOfPaymentTerms Do
+		Row.Date = Date + (SecondsInOneDay * Row.DuePeriod);
+		Row.Amount = ?(TotalPercent = 0, 0, (TotalAmount / TotalPercent) * Row.ProportionOfPayment);
+		PaymentTermsTotalAmount = PaymentTermsTotalAmount + Row.Amount;
+		If RowWithMaxAmount = Undefined Then
+			RowWithMaxAmount = Row;
+		Else
+			If Row.Amount > RowWithMaxAmount.Amount Then
+				RowWithMaxAmount = Row;
+			EndIf;
+		EndIf;
+	EndDo;
+	
+	If RowWithMaxAmount <> Undefined Then
+		Difference = TotalAmount - PaymentTermsTotalAmount;
+		RowWithMaxAmount.Amount = RowWithMaxAmount.Amount + Difference;
+	EndIf;
+	Return New Structure("ArrayOfPaymentTerms", ArrayOfPaymentTerms)
+EndFunction
 
 #EndRegion
 
@@ -750,7 +730,6 @@ Function ChangeTaxRateExecute(Options) Export
 	EndDo;
 	For Each ItemOfTaxInfo In Options.ArrayOfTaxInfo Do
 		If ItemOfTaxInfo.Type = PredefinedValue("Enum.TaxType.Rate") Then
-			//And Not ValueIsFilled(Options.TaxRates[ItemOfTaxInfo.Name]) Then
 	
 			ArrayOfTaxRates = New Array();
 			If ValueIsFilled(Options.Agreement) Then
@@ -824,6 +803,7 @@ Function CalculationsOptions() Export
 	Options.Insert("CalculatePriceByTotalAmount" , New Structure("Enable", False));
 
 	Options.Insert("CalculateQuantityInBaseUnit" , New Structure("Enable", False));
+	
 	Return Options;
 EndFunction
 
@@ -833,23 +813,6 @@ EndFunction
 
 Function CalculationsExecute(Options) Export
 	IsCalculatedRow = Not Options.AmountOptions.DontCalculateRow;
-	
-//	If Actions.Property("UpdateUnit") Then
-//		UpdateUnit(Object, ItemRow, AddInfo);
-//	EndIf;
-
-//	If Actions.Property("UpdateRowUnit") Then
-//		UpdateRowUnit(Object, ItemRow, AddInfo);
-//	EndIf;
-
-
-//	If Actions.Property("ChangePriceType") Then
-//		ChangePriceType(Object, ItemRow, Actions.ChangePriceType, AddInfo);
-//	EndIf;
-
-//	If Actions.Property("UpdatePrice") Then //
-//		UpdatePrice(Object, ItemRow, Actions.UpdatePrice, AddInfo);
-//	EndIf;
 
 //	If Actions.Property("RecalculateAppliedOffers") Then
 //		RecalculateAppliedOffers(Object, ItemRow, AddInfo);
@@ -878,7 +841,7 @@ Function CalculationsExecute(Options) Export
 		If Options.TaxOptions.PriceIncludeTax Then
 			
 			If Options.CalculateTaxAmountReverse.Enable And IsCalculatedRow Then
-				CalculateTax(Options, Options.TaxOptions, Result, True, False);
+				CalculateTaxAmount(Options, Options.TaxOptions, Result, True, False);
 			EndIf;
 			
 			If Options.CalculatePriceByTotalAmount.Enable And IsCalculatedRow Then
@@ -891,7 +854,7 @@ Function CalculationsExecute(Options) Export
 			EndIf;
 
 			If Options.CalculateTaxAmount.Enable And IsCalculatedRow Then
-				CalculateTax(Options, Options.TaxOptions, Result, False, False);
+				CalculateTaxAmount(Options, Options.TaxOptions, Result, False, False);
 			EndIf;
 
 			If Options.CalculateNetAmountAsTotalAmountMinusTaxAmount.Enable And IsCalculatedRow Then
@@ -903,7 +866,7 @@ Function CalculationsExecute(Options) Export
 			EndIf;
 		Else
 			If Options.CalculateTaxAmountReverse.Enable And IsCalculatedRow Then
-				CalculateTax(Options, Options.TaxOptions, Result, True, False);
+				CalculateTaxAmount(Options, Options.TaxOptions, Result, True, False);
 			EndIf;
 			
 			If Options.CalculatePriceByTotalAmount.Enable And IsCalculatedRow Then
@@ -920,7 +883,7 @@ Function CalculationsExecute(Options) Export
 			EndIf;
 
 			If Options.CalculateTaxAmount.Enable And IsCalculatedRow Then
-				CalculateTax(Options, Options.TaxOptions, Result, False, False);
+				CalculateTaxAmount(Options, Options.TaxOptions, Result, False, False);
 			EndIf;
 
 			If Options.CalculateTotalAmount.Enable And IsCalculatedRow Then
@@ -929,7 +892,7 @@ Function CalculationsExecute(Options) Export
 		EndIf;
 	Else // PriceIncludeTax = Undefined
 		If Options.CalculateTaxAmountReverse.Enable And IsCalculatedRow Then
-			CalculateTax(Options, Options.TaxOptions, Result, True, False);
+			CalculateTaxAmount(Options, Options.TaxOptions, Result, True, False);
 		EndIf;
 		
 		If Options.CalculatePriceByTotalAmount.Enable And IsCalculatedRow Then
@@ -938,7 +901,7 @@ Function CalculationsExecute(Options) Export
 		EndIf;
 		
 		If Options.CalculateTaxAmount.Enable And IsCalculatedRow Then
-			CalculateTax(Options, Options.TaxOptions, Result, False, True);
+			CalculateTaxAmount(Options, Options.TaxOptions, Result, False, True);
 		EndIf;
 
 		If Options.CalculateTotalAmount.Enable And IsCalculatedRow Then
@@ -946,11 +909,11 @@ Function CalculationsExecute(Options) Export
 		EndIf;
 
 		If Options.CalculateTaxAmountByNetAmount.Enable And IsCalculatedRow Then
-			CalculateTax(Options, Options.TaxOptions, Result, False, True);
+			CalculateTaxAmount(Options, Options.TaxOptions, Result, False, True);
 		EndIf;
 
 		If Options.CalculateTaxAmountByTotalAmount.Enable And IsCalculatedRow Then
-			CalculateTax(Options, Options.TaxOptions, Result, False, True);
+			CalculateTaxAmount(Options, Options.TaxOptions, Result, False, True);
 		EndIf;
 
 		If Options.CalculateNetAmountAsTotalAmountMinusTaxAmount.Enable And IsCalculatedRow Then
@@ -965,6 +928,7 @@ Function CalculationsExecute(Options) Export
 			Result.TotalAmount = CalculateTotalAmount_PriceNotIncludeTax(Options.PriceOptions, Result);
 		EndIf;
 	EndIf;
+	
 //	If Actions.Property("UpdateInfoString") Then
 //		UpdateInfoString(ItemRow);
 //	EndIf;
@@ -1022,29 +986,18 @@ Function _CalculateAmount(PriceOptions, Result)
 	Return Result.TotalAmount;
 EndFunction
 
-Procedure CalculateTax(Options, TaxOptions, Result, IsReverse, IsManualPriority)
+Procedure CalculateTaxAmount(Options, TaxOptions, Result, IsReverse, IsManualPriority)
 	ArrayOfTaxInfo = TaxOptions.ArrayOfTaxInfo;
 	If TaxOptions.ArrayOfTaxInfo = Undefined Then
 		Return;
 	EndIf;
 	
-	//If TaxOptions.ItemKey <> Undefined And Not ValueIsFilled(TaxOptions.ItemKey) Then
-	//	Return;
-	//EndIf;
-	
 	TaxAmount = 0;
 	For Each ItemOfTaxInfo In ArrayOfTaxInfo Do
 		If ItemOfTaxInfo.Type = PredefinedValue("Enum.TaxType.Rate") 
 			And Not ValueIsFilled(Result.TaxRates[ItemOfTaxInfo.Name]) Then
-			
 			// ставка налога в строке не заполнена
 			Continue;
-			
-			//DefaultTaxRate = GetDefaultTaxRate(Options, TaxOptions, ItemOfTaxInfo);
-			//If DefaultTaxRate = Undefined Then
-			//	Continue;
-			//EndIf;
-			//Result.TaxRates[ItemOfTaxInfo.Name] = DefaultTaxRate;
 		EndIf;
 		
 		TaxParameters = New Structure();
@@ -1104,85 +1057,19 @@ Procedure CalculateTax(Options, TaxOptions, Result, IsReverse, IsManualPriority)
 	Result.TaxAmount = TaxAmount;
 EndProcedure
 
-//Function GetDefaultTaxRate(Options, TaxOptions, ItemOfTaxInfo)
-//	ArrayOfTaxRates = New Array();
-//	If ValueIsFilled(TaxOptions.Agreement) Then
-//		Parameters = New Structure();
-//		Parameters.Insert("Date"      , TaxOptions.Date);
-//		Parameters.Insert("Company"   , TaxOptions.Company);
-//		Parameters.Insert("Tax"       , ItemOfTaxInfo.Tax);
-//		Parameters.Insert("Agreement" , TaxOptions.Agreement);
-//		ArrayOfTaxRates = TaxesServer.GetTaxRatesForAgreement(Parameters);
-//	EndIf;
-//
-//	If Not ArrayOfTaxRates.Count() Then
-//		Parameters = New Structure();
-//		Parameters.Insert("Date"    , TaxOptions.Date);
-//		Parameters.Insert("Company" , TaxOptions.Company);
-//		Parameters.Insert("Tax"     , ItemOfTaxInfo.Tax);
-//		If ValueIsFilled(TaxOptions.ItemKey) Then
-//			Parameters.Insert("ItemKey", TaxOptions.ItemKey);
-//		Else
-//			Parameters.Insert("ItemKey", PredefinedValue("Catalog.ItemKeys.EmptyRef"));
-//		EndIf;
-//		ArrayOfTaxRates = TaxesServer.GetTaxRatesForItemKey(Parameters);
-//	EndIf;
-//	If ArrayOfTaxRates.Count() Then
-//		Return ArrayOfTaxRates[0].TaxRate;
-//	EndIf;
-//	Return Undefined;
-//EndFunction
-
 #EndRegion
 
 Procedure InitEntryPoint(StepsEnablerName, Parameters)
 	If Not Parameters.Property("ModelInveronment") Then
 		Inveronment = New Structure();
 		Inveronment.Insert("FirstStepsEnablerName", StepsEnablerName);
-//		Inveronment.Insert("ControllerModule", Undefined);
-//		Inveronment.Insert("ViewModule", Undefined);
 		Inveronment.Insert("StepsEnablerNameCounter", New Array());
 		Parameters.Insert("ModelInveronment", Inveronment)
 	EndIf;
-//	If Not Parameters.Property("StepsEnablerName") Then
-//		Parameters.Insert("StepsEnablerName"      , StepsEnablerName);
-//		Parameters.Insert("ControllerModule"      , Undefined);
-//		Parameters.Insert("StepsEnablerNameCounter" , New Array());
-//	EndIf;
 EndProcedure
 
 Procedure DestroyEntryPoint(Parameters)
 	If Parameters.Property("ModelInveronment") Then
 		Parameters.Delete("ModelInveronment");
 	EndIf;
-//	If Parameters.Property("StepsEnablerName") Then
-//		Parameters.Delete("StepsEnablerName");
-//		Parameters.Delete("ControllerModule");
-//		Parameters.Delete("ViewModule");
-//		Parameters.Delete("StepsEnablerNameCounter");
-//	EndIf;
-EndProcedure
-
-//Procedure LoadControllerModule(Parameters)
-//	If Parameters.ModelInveronment.ControllerModule = Undefined Then
-//		Parameters.ModelInveronment.ControllerModule = Eval(Parameters.ControllerModuleName);
-//	EndIf;
-//EndProcedure
-
-//Procedure LoadViewModule(Parameters)
-//	If Parameters.ModelInveronment.ViewModule = Undefined Then
-//		Parameters.ModelInveronment.ViewModule = Eval(Parameters.ControllerModuleName);
-//	EndIf;
-//EndProcedure
-
-//Procedure UnloadControllerModule(Parameters)
-//	Parameters.ModelInveronment.ControllerModule = Undefined;
-//EndProcedure
-
-//Procedure UnloadViewModule(Parameters)
-//	Parameters.ModelInveronment.ViewModule = Undefined;
-//EndProcedure
-
-Procedure Init_API(StepsEnablerName, Parameters) Export
-	InitEntryPoint(StepsEnablerName, Parameters);
 EndProcedure

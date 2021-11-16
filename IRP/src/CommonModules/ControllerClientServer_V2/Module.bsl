@@ -1,7 +1,6 @@
 
 #Region PARAMETERS
 
-
 Function GetServerParameters(Object) Export
 	Result = New Structure();
 	Result.Insert("Object", Object);
@@ -59,6 +58,7 @@ Function CreateParameters(ServerParameters, FormParameters)
 	Parameters.Insert("ViewServerModuleName"   , FormParameters.ViewServerModuleName);
 	Parameters.Insert("EventCaller"      , FormParameters.EventCaller);
 	Parameters.Insert("TaxesCache"       , FormParameters.TaxesCache);
+	Parameters.Insert("ChangedData"      , New Map());
 	
 	Parameters.Insert("PropertyBeforeChange", FormParameters.PropertyBeforeChange);
 	
@@ -327,12 +327,13 @@ EndProcedure
 Function ListOnDeleteStepsBinding(Parameters)
 	DataPath = "";
 	Binding = New Structure();
-	Binding.Insert("ShipmentConfirmation", "ItemListOnDeleteStepsEnabler_HaveStoreInHeader");
-	Binding.Insert("SalesInvoice"        , "ItemListOnDeleteStepsEnabler_HaveStoreInHeader");
+	Binding.Insert("ShipmentConfirmation", "ItemListOnDeleteStepsEnabler_Shipment");
+	Binding.Insert("SalesInvoice"        , "ItemListOnDeleteStepsEnabler_Trade_Shipment");
 	Return BindSteps("StepsEnamblerEmpty", DataPath, Binding, Parameters);
 EndFunction
 
-Procedure ItemListOnDeleteStepsEnabler_HaveStoreInHeader(Parameters, Chain) Export
+Procedure ItemListOnDeleteStepsEnabler_Shipment(Parameters, Chain) Export
+	// ChangeStoreInHeaderByStoresInList
 	Chain.ChangeStoreInHeaderByStoresInList.Enable = True;
 	Chain.ChangeStoreInHeaderByStoresInList.Setter = "SetStore";
 	
@@ -343,6 +344,34 @@ Procedure ItemListOnDeleteStepsEnabler_HaveStoreInHeader(Parameters, Chain) Expo
 	EndDo;
 	Options.ArrayOfStoresInList = ArrayOfStoresInList; 
 	Chain.ChangeStoreInHeaderByStoresInList.Options.Add(Options);
+EndProcedure
+
+Procedure ItemListOnDeleteStepsEnabler_Trade_Shipment(Parameters, Chain) Export
+	// ChangeStoreInHeaderByStoresInList
+	Chain.ChangeStoreInHeaderByStoresInList.Enable = True;
+	Chain.ChangeStoreInHeaderByStoresInList.Setter = "SetStore";
+	
+	Options = ModelClientServer_V2.ChangeStoreInHeaderByStoresInListOptions();
+	ArrayOfStoresInList = New Array();
+	For Each Row In Parameters.Object.ItemList Do
+		ArrayOfStoresInList.Add(GetPropertyObject(Parameters, "ItemList.Store", Row.Key));
+	EndDo;
+	Options.ArrayOfStoresInList = ArrayOfStoresInList; 
+	Chain.ChangeStoreInHeaderByStoresInList.Options.Add(Options);
+	
+	// UpdatePaymentTerms
+	Chain.UpdatePaymentTerms.Enable = True;
+	Chain.UpdatePaymentTerms.Setter = "SetPaymentTerms";
+	Options = ModelClientServer_V2.UpdatePaymentTermsOptions();
+	Options.Date = GetPropertyObject(Parameters, "Date");
+	Options.ArrayOfPaymentTerms = GetPaymentTerms(Parameters);
+	// нужны все строки таблицы
+	TotalAmount = 0;
+	For Each Row In Parameters.Object.ItemList Do
+		TotalAmount = TotalAmount + GetPropertyObject(Parameters, "ItemList.TotalAmount", Row.Key);
+	EndDo;
+	Options.TotalAmount = TotalAmount;
+	Chain.UpdatePaymentTerms.Options.Add(Options);
 EndProcedure
 
 #EndRegion
@@ -535,13 +564,11 @@ Procedure DateStepsEnabler_Trade_PartnerIsCustomer(Parameters, Chain) Export
 
 	// ChangeDeliveryDate
 	Chain.ChangeDeliveryDateByAgreement.Enable = True;
-	Chain.ChangeStoreByAgreement.Setter = "SetDeliveryDate";
+	Chain.ChangeDeliveryDateByAgreement.Setter = "SetDeliveryDate";
 	Options = ModelClientServer_V2.ChangeDeliveryDateByAgreementOptions();
 	Options.Agreement = GetPropertyObject(Parameters, "Agreement");
 	Options.CurrentDeliveryDate = GetPropertyForm(Parameters, "DeliveryDate");
 	Chain.ChangeDeliveryDateByAgreement.Options.Add(Options);
-	
-	//UpdatePaymentTerm
 	
 	// ChangePriceByPriceType
 	Chain.ChangePriceByPriceType.Enable = True;
@@ -558,6 +585,20 @@ Procedure DateStepsEnabler_Trade_PartnerIsCustomer(Parameters, Chain) Export
 		Options.Key          = Row.Key;
 		Chain.ChangePriceByPriceType.Options.Add(Options);
 	EndDo;
+	
+	// UpdatePaymentTerms
+	Chain.UpdatePaymentTerms.Enable = True;
+	Chain.UpdatePaymentTerms.Setter = "SetPaymentTerms";
+	Options = ModelClientServer_V2.UpdatePaymentTermsOptions();
+	Options.Date = GetPropertyObject(Parameters, "Date");
+	Options.ArrayOfPaymentTerms = GetPaymentTerms(Parameters);
+	// нужны все строки таблицы
+	TotalAmount = 0;
+	For Each Row In Parameters.Object.ItemList Do
+		TotalAmount = TotalAmount + GetPropertyObject(Parameters, "ItemList.TotalAmount", Row.Key);
+	EndDo;
+	Options.TotalAmount = TotalAmount;
+	Chain.UpdatePaymentTerms.Options.Add(Options);
 EndProcedure
 
 #EndRegion
@@ -581,12 +622,12 @@ EndProcedure
 Function CompanyStepsBinding(Parameters)
 	DataPath = "Company";
 	Binding = New Structure();
-	Binding.Insert("IncomingPaymentOrder", "CompanyStepsEnabler_Money");
+	Binding.Insert("IncomingPaymentOrder", "CompanyStepsEnabler_Cash");
 	Binding.Insert("SalesInvoice"        , "CompanyStepsEnabler_WithTaxes");
 	Return BindSteps("StepsEnamblerEmpty", DataPath, Binding, Parameters);
 EndFunction
 
-Procedure CompanyStepsEnabler_Money(Parameters, Chain) Export
+Procedure CompanyStepsEnabler_Cash(Parameters, Chain) Export
 	Chain.ChangeCashAccountByCompany.Enable = True;
 	Chain.ChangeCashAccountByCompany.Setter = "SetAccount";
 	Options = ModelClientServer_V2.ChangeCashAccountByCompanyOptions();
@@ -1107,9 +1148,58 @@ Procedure AgreementStepsEnabler_Trade(Parameters, Chain) Export
 	Options.CurrentDeliveryDate = GetPropertyForm(Parameters, "DeliveryDate");
 	Chain.ChangeDeliveryDateByAgreement.Options.Add(Options);
 	
-	//ChangePaymentTerm
-
+	// ChangePaymentTerms
+	Chain.ChangePaymentTermsByAgreement.Enable = True;
+	Chain.ChangePaymentTermsByAgreement.Setter = "SetPaymentTerms";
+	Options = ModelClientServer_V2.ChangePaymentTermsByAgreementOptions();
+	Options.Agreement = GetPropertyObject(Parameters, "Agreement");
+	Options.Date = GetPropertyObject(Parameters, "Date");
+	Options.ArrayOfPaymentTerms = GetPaymentTerms(Parameters);
+	// нужны все строки таблицы
+	TotalAmount = 0;
+	For Each Row In Parameters.Object.ItemList Do
+		TotalAmount = TotalAmount + GetPropertyObject(Parameters, "ItemList.TotalAmount", Row.Key);
+	EndDo;
+	Options.TotalAmount = TotalAmount;
+	Chain.ChangePaymentTermsByAgreement.Options.Add(Options);
 EndProcedure
+
+#EndRegion
+
+#Region PAYMENT_TERMS
+
+// PaymentTerms.Set
+Procedure SetPaymentTerms(Parameters, Results) Export
+	Binding = PaymentTermsStepsBinding(Parameters);
+	For Each Result In Results Do
+		Parameters.Cache.Insert(Binding.DataPath, Result.Value.ArrayOfPaymentTerms);
+	EndDo;
+EndProcedure
+
+// PaymentTerms.Get
+Function GetPaymentTerms(Parameters) Export
+	Binding = PaymentTermsStepsBinding(Parameters);
+	// если есть в кэше берем из него
+	If Parameters.Cache.Property(Binding.DataPath) Then
+		Return Parameters.Cache[Binding.DataPath];
+	EndIf;
+	// если нету, считываем из объекта
+	ArrayOfPaymentTerms = New Array();
+	For Each Row In Parameters.Object.PaymentTerms Do
+		NewRow = New Structure("Date, ProportionOfPayment, DuePeriod,
+			|Amount, CalculationType");
+		FillPropertyValues(NewRow, Row);
+		ArrayOfPaymentTerms.Add(NewRow);
+	EndDo;
+	Return ArrayOfPaymentTerms;
+EndFunction
+
+// PaymentTerms.Bind
+Function PaymentTermsStepsBinding(Parameters)
+	DataPath = "PaymentTerms";
+	Binding = New Structure();
+	Return BindSteps("StepsEnamblerEmpty", DataPath, Binding, Parameters);
+EndFunction
 
 #EndRegion
 
@@ -1701,15 +1791,17 @@ Procedure ItemListEnableCalculations(Parameters, Chain, WhoIsChanged)
 		// нужно пересчитать NetAmount, TotalAmount, TaxAmount, OffersAmount
 		If     WhoIsChanged = "IsPriceChanged"            Or WhoIsChanged = "IsPriceIncludeTaxChanged"
 			Or WhoIsChanged = "IsDontCalculateRowChanged" Or WhoIsChanged = "IsQuantityInBaseUnitChanged" 
-			Or WhoIsChanged = "IsTaxRateChanged" Then
+			Or WhoIsChanged = "IsTaxRateChanged" Then //         Or WhoIsChanged = "IsPaymentTermsChanged" Then
 			Options.CalculateNetAmount.Enable   = True;
 			Options.CalculateTotalAmount.Enable = True;
 			Options.CalculateTaxAmount.Enable   = True;
+			//Options.CalculatePaymentTerms.Enable = True;
 		ElsIf WhoIsChanged = "IsTotalAmountChanged" Then
 		// при изменении TotalAmount налоги расчитываются в обратную сторону, меняется NetAmount и Price
 			Options.CalculateTaxAmountReverse.Enable   = True;
 			Options.CalculateNetAmountAsTotalAmountMinusTaxAmount.Enable   = True;
-			Options.CalculatePriceByTotalAmount.Enable   = True;
+			Options.CalculatePriceByTotalAmount.Enable = True;
+			Options.CalculatePaymentTerms.Enable       = True;
 		EndIf;
 		
 		Options.AmountOptions.DontCalculateRow = GetPropertyObject(Parameters, "ItemList.DontCalculateRow", Row.Key);
@@ -1735,12 +1827,17 @@ Procedure ItemListEnableCalculations(Parameters, Chain, WhoIsChanged)
 	EndDo;
 EndProcedure
 
+// ItemList.Calculations.Set
 Procedure SetItemListCalculations(Parameters, Results) Export
+	Binding = ItemListCalculationsStepsBinding(Parameters);
 	SetterObject(Undefined, "ItemList.NetAmount"   , Parameters, Results, , "NetAmount");
 	SetterObject(Undefined, "ItemList.TaxAmount"   , Parameters, Results, , "TaxAmount");
 	SetterObject(Undefined, "ItemList.OffersAmount", Parameters, Results, , "OffersAmount");
-	SetterObject(Undefined, "ItemList.TotalAmount" , Parameters, Results, , "TotalAmount");
 	SetterObject(Undefined, "ItemList.Price"       , Parameters, Results, , "Price");
+	SetterObject(Binding.StepsEnabler, "ItemList.TotalAmount" , Parameters, Results, , "TotalAmount");
+	
+	
+	//SetPaymentTerms(Parameters, Results);
 	
 	// табличная часть TaxList кэщируется целиком, потом так же целиком переносится в документ
 	For Each Result In Results Do
@@ -1756,12 +1853,36 @@ Procedure SetItemListCalculations(Parameters, Results) Export
 					Parameters.Cache.TaxList.Delete(ArrayItem);
 				EndIf;
 			EndDo;
-			
+			// добавляем новые строки
 			For Each Row In Result.Value.TaxList Do
 				Parameters.Cache.TaxList.Add(Row);
 			EndDo;
 		EndIf;
 	EndDo;
+EndProcedure
+
+// ItemList.Calculations.Bind
+Function ItemListCalculationsStepsBinding(Parameters)
+	DataPath = "";
+	Binding = New Structure();
+	Binding.Insert("SalesInvoice", "ItemListCalculationsStepsEnabler");
+	Return BindSteps("StepsEnamblerEmpty", DataPath, Binding, Parameters);
+EndFunction
+
+Procedure ItemListCalculationsStepsEnabler(Parameters, Chain) Export
+	// UpdatePaymentTerms
+	Chain.UpdatePaymentTerms.Enable = True;
+	Chain.UpdatePaymentTerms.Setter = "SetPaymentTerms";
+	Options = ModelClientServer_V2.UpdatePaymentTermsOptions();
+	Options.Date = GetPropertyObject(Parameters, "Date");
+	Options.ArrayOfPaymentTerms = GetPaymentTerms(Parameters);
+	// нужны все строки таблицы
+	TotalAmount = 0;
+	For Each Row In Parameters.Object.ItemList Do
+		TotalAmount = TotalAmount + GetPropertyObject(Parameters, "ItemList.TotalAmount", Row.Key);
+	EndDo;
+	Options.TotalAmount = TotalAmount;
+	Chain.UpdatePaymentTerms.Options.Add(Options);
 EndProcedure
 
 #EndRegion
@@ -1823,10 +1944,12 @@ EndProcedure
 // Переносит изменения из Cache в Object из CacheForm в Fomr
 Procedure _CommitChainChanges(Cache, Source)
 	For Each Property In Cache Do
-		If Upper(Property.Key) = Upper("TaxList") Then
+		PropertyName  = Property.Key;
+		PropertyValue = Property.Value;
+		If Upper(PropertyName) = Upper("TaxList") Then
 			// табличная часть налогов переносится целиком
 			ArrayOfKeys = New Array();
-			For Each Row In Property.Value Do
+			For Each Row In PropertyValue Do
 				If ArrayOfKeys.Find(Row.Key) = Undefined Then
 					ArrayOfKeys.Add(Row.Key);
 				EndIf;
@@ -1838,17 +1961,27 @@ Procedure _CommitChainChanges(Cache, Source)
 				EndDo;
 			EndDo;
 			
-			For Each Row In Property.Value Do
+			For Each Row In PropertyValue Do
 				FillPropertyValues(Source.TaxList.Add(), Row);
 			EndDo;
 		
-		// Табличные части ItemList и PaymentList переносятся построчно так как Key в строках уникален
-		ElsIf TypeOf(Property.Value) = Type("Array") Then // это табличная часть
-			For Each Row In Property.Value Do
-				FillPropertyValues(Source[Property.Key].FindRows(New Structure("Key", Row.Key))[0], Row);
-			EndDo;
+		
+		ElsIf TypeOf(PropertyValue) = Type("Array") Then // это табличная часть
+			IsRowWithKey = PropertyValue.Count() And PropertyValue[0].Property("Key");
+			// Табличные части ItemList и PaymentList переносятся построчно так как Key в строках уникален
+			If IsRowWithKey Then
+				For Each Row In PropertyValue Do
+					FillPropertyValues(Source[PropertyName].FindRows(New Structure("Key", Row.Key))[0], Row);
+				EndDo;
+			Else
+				// если в строке нет ключа то переносится целиком, например PaymentTerms
+				Source[PropertyName].Clear();
+				For Each Row In PropertyValue Do
+					FillPropertyValues(Source[PropertyName].Add(), Row);
+				EndDo;
+			EndIf;
 		Else
-			Source[Property.Key] = Property.Value; // это реквизит шапки
+			Source[PropertyName] = PropertyValue; // это реквизит шапки
 		EndIf;
 	EndDo;
 EndProcedure
@@ -1997,20 +2130,42 @@ Function GetProperty(Cache, Source, DataPath, Key)
 EndFunction
 
 Function SetPropertyObject(Parameters, DataPath, _Key, _Value)
-	PropertyValue = GetPropertyObject(Parameters, DataPath, _Key);
-	If ?(ValueIsFilled(PropertyValue), PropertyValue, Undefined) = ?(ValueIsFilled(_Value), _Value, Undefined) Then
+	CurrentValue = GetPropertyObject(Parameters, DataPath, _Key);
+	If ?(ValueIsFilled(CurrentValue), CurrentValue, Undefined) = ?(ValueIsFilled(_Value), _Value, Undefined) Then
 		Return False; // Свойство не изменилось
 	EndIf;
-	Return SetProperty(Parameters.Cache, DataPath, _Key, _Value);
+	// Свойство изменилось
+	IsChanged = SetProperty(Parameters.Cache, DataPath, _Key, _Value);
+	If IsChanged Then
+		PutToChangedData(Parameters, DataPath, CurrentValue, _Value, _Key);
+	EndIf;
+	Return IsChanged;
 EndFunction
 
 Function SetPropertyForm(Parameters, DataPath, _Key, _Value)
-	PropertyValue = GetPropertyForm(Parameters, DataPath, _Key);
-	If ?(ValueIsFilled(PropertyValue), PropertyValue, Undefined) = ?(ValueIsFilled(_Value), _Value, Undefined) Then
+	CurrentValue = GetPropertyForm(Parameters, DataPath, _Key);
+	If ?(ValueIsFilled(CurrentValue), CurrentValue, Undefined) = ?(ValueIsFilled(_Value), _Value, Undefined) Then
 		Return False; // Свойство не изменилось
 	EndIf;
-	Return SetProperty(Parameters.CacheForm, DataPath, _Key, _Value);
+	// Свойство изменилось
+	IsChanged = SetProperty(Parameters.CacheForm, DataPath, _Key, _Value);
+	If IsChanged Then
+		PutToChangedData(Parameters, DataPath, CurrentValue, _Value, _Key);
+	EndIf;
+	Return IsChanged;
 EndFunction
+
+// логирует измененные данные, для того чтобы можно было задавать вопросы пользователю
+Procedure PutToChangedData(Parameters, DataPath, OldValue, NewValue, _Key)
+	If Parameters.ChangedData.Get(DataPath) = Undefined Then
+		Parameters.ChangedData.Insert(DataPath, New Array());
+	EndIf;
+	ChangedData = New Structure();
+	ChangedData.Insert("OldValue", OldValue);
+	ChangedData.Insert("NewValue", NewValue);
+	ChangedData.Insert("Key"     , _Key);
+	Parameters.ChangedData.Get(DataPath).Add(ChangedData);
+EndProcedure
 
 // Устанавливает свойства по переданному DataPath, например ItemList.PriceType или Company
 // возвращает True если хотябы одно свойство было изменено

@@ -21,3 +21,7 @@ EndProcedure
 Function GetAgreementInfo(Agreement) Export
 	Return Catalogs.Agreements.GetAgreementInfo(Agreement);
 EndFunction
+
+Function GetAgreementPaymentTerms(Agreement) Export
+	Return Catalogs.Agreements.GetAgreementPaymentTerms(Agreement);
+EndFunction

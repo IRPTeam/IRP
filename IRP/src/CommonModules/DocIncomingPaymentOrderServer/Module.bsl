@@ -3,7 +3,7 @@
 Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 	MoneyDocumentsServer.OnCreateAtServer(Object, Form, Cancel, StandardProcessing);
 	
-	ViewServer_V2.OnCreateAtServer(Object, Form, "ItemList");
+	ViewServer_V2.OnCreateAtServer(Object, Form, "PaymentList");
 EndProcedure
 
 Procedure OnReadAtServer(Object, Form, CurrentObject) Export

@@ -159,7 +159,7 @@ EndProcedure
 
 // возвращает список реквизитов объекта для которых нужно получить значение до изменения
 Function GetObjectPropertyNamesBeforeChange()
-	Return "Partner, Agreement, Sender, Receiver";
+	Return "Company, Partner, Agreement, Sender, Receiver";
 EndFunction
 
 Function GetListPropertyNamesBeforeChange()
@@ -219,10 +219,16 @@ Procedure OnChainComplete(Parameters) Export
 	EndIf;
 	
 	If CommitChanges Then
-		ControllerClientServer_V2.CommitChainChanges(Parameters);
-		UpdateCacheBeforeChange(Parameters.Object, Parameters.Form);
+		CommitChanges(Parameters);
 	EndIf;		
 EndProcedure
+
+Procedure CommitChanges(Parameters)
+	ControllerClientServer_V2.CommitChainChanges(Parameters);
+	UpdateCacheBeforeChange(Parameters.Object, Parameters.Form);
+EndProcedure
+
+#Region QUESTIONS_TO_USER
 
 Function NeedQueryStoreOnUserChange(Parameters)
 	If Parameters.Cache.Property("ItemList") Then
@@ -256,13 +262,196 @@ EndFunction
 
 // временная для SalesInvoice
 Procedure __tmp_OnChainComplite(Parameters)
-	If Parameters.ChangedData.Get("ItemList.Store") <> Undefined Then
-		// вопрос при перезаполнении склада в табличной части ItemList
-		//StrTemplate(R().QuestionToUser_009, String(NewStore))
+	ArrayOfEventCallers = New Array();
+	ArrayOfEventCallers.Add("CompanyOnUserChange");
+	ArrayOfEventCallers.Add("PartnerOnUserChange");
+	ArrayOfEventCallers.Add("AgreementOnUserChange");
+	ArrayOfEventCallers.Add("StoreOnUserChange");
+	
+	If ArrayOfEventCallers.Find(Parameters.EventCaller) = Undefined Then
+		CommitChanges(Parameters);
+		Return;
 	EndIf;
-	ControllerClientServer_V2.CommitChainChanges(Parameters);
-	UpdateCacheBeforeChange(Parameters.Object, Parameters.Form);
+	
+	QuestionsParameters = New Array();
+	ChangedPoints = New Structure();
+	Changes = IsChangedItemListStore(Parameters);
+	If Changes.IsChanged Then
+		// вопрос при перезаполнении ItemList.Store
+		ChangedPoints.Insert("IsChangedItemListStore");
+		QuestionsParameters.Add(New Structure("Action, QuestionText",
+			"Stores", StrTemplate(R().QuestionToUser_009, String(Changes.NewValue))));
+	EndIf;
+	
+	Changes = IsChangedItemListPriceType(Parameters);
+	If Changes.IsChanged Then
+		// вопрос при перезаполнении ItemList.PriceType
+		ChangedPoints.Insert("IsChangedItemListPriceType");
+		QuestionsParameters.Add(New Structure("Action, QuestionText",
+			"PriceTypes", StrTemplate(R().QuestionToUser_011, String(Changes.NewValue))));
+	EndIf;
+	
+	Changes = IsChangedItemListPrice(Parameters);
+	If Changes.IsChanged Then
+		// вопрос при перезаполнении ItemList.Price
+		ChangedPoints.Insert("IsChangedItemListPrice");
+		QuestionsParameters.Add(New Structure("Action, QuestionText",
+			"Prices", R().QuestionToUser_013));
+	EndIf;
+	
+	Changes = IsChangedPymentTerms(Parameters);
+	If Changes.IsChanged Then
+		// вопрос при перезаполнении PaymentTerms
+		ChangedPoints.Insert("IsChangedPymentTerms");
+		QuestionsParameters.Add(New Structure("Action, QuestionText",
+			"PaymentTerm", R().QuestionToUser_019));
+	EndIf;
+	
+	Changes = IsChangedTaxRates(Parameters);
+	If Changes.IsChanged Then
+		// вопрос при перезаполнении TaxRates
+		ChangedPoints.Insert("IsChangedTaxRates");
+		QuestionsParameters.Add(New Structure("Action, QuestionText",
+			"TaxRates", R().QuestionToUser_004));
+	EndIf;
+	
+	If QuestionsParameters.Count() Then
+		NotifyParameters = New Structure("Parameters, ChangedPoints", Parameters, ChangedPoints);
+		Notify = New NotifyDescription("QuestionsOnUserChangeContinue", ThisObject, NotifyParameters);
+		OpenForm("CommonForm.UpdateItemListInfo",
+			New Structure("QuestionsParameters", QuestionsParameters), 
+			Parameters.Form, , , ,Notify ,FormWindowOpeningMode.LockOwnerWindow);
+	Else
+		CommitChanges(Parameters);
+	EndIf;
 EndProcedure
+
+Procedure QuestionsOnUserChangeContinue(Answer, NotifyParameters) Export
+	If Answer = Undefined Then
+		Return; // нажали кнопку Cancel, переносить изменения из Cache в Object не нужно
+	EndIf;
+	Parameters    = NotifyParameters.Parameters;
+	ChangedPoints = NotifyParameters.ChangedPoints;
+	
+	NeedRecalculate = False;
+	If Not Answer.Property("UpdateStores") And ChangedPoints.Property("IsChangedItemListStore") Then
+		RemoveFromCacheItemListStore(Parameters);
+	EndIf;
+	If Not Answer.Property("UpdatePriceTypes") And ChangedPoints.Property("IsChangedItemListPriceTypes") Then
+		RemoveFromCacheItemListPriceType(Parameters);
+		NeedRecalculate = True;
+	EndIf;
+	If Not Answer.Property("UpdatePrices") And ChangedPoints.Property("IsChangedItemListPrice") Then
+		RemoveFromCacheItemListPrice(Parameters);
+		NeedRecalculate = True;
+	EndIf;
+	If Not Answer.Property("UpdatePaymentTerm") And ChangedPoints.Property("IsChangedPymentTerms") Then
+		RemoveFromCachePaymentTerms(Parameters);
+	EndIf;
+	If Not Answer.Property("UpdateTaxRates") And ChangedPoints.Property("IsChangedTaxRates") Then
+		RemoveFromCacheTaxRates(Parameters);
+		NeedRecalculate = True;
+	EndIf;
+	
+	If NeedRecalculate Then
+		FormParameters = GetFormParameters(Parameters.Form);
+		FormParameters.EventCaller = "RecalculationsAfterQuestionToUser";
+		ServerParameters = GetServerParameters(Parameters.Object);
+		ServerParameters.TableName = "ItemList";
+		Parameters = GetParameters(ServerParameters, FormParameters);
+		ControllerClientServer_V2.RecalculationsAfterQuestionToUser(Parameters);
+	Else
+		CommitChanges(Parameters);
+	EndIf;
+EndProcedure
+
+Function IsChangedItemListStore(Parameters)
+	Return IsChangedProperty(Parameters, "ItemList.Store");
+EndFunction
+
+Procedure RemoveFromCacheItemListStore(Parameters)
+	DataPaths = "Store, ItemList.Store, ItemList.UseShipmentConfirmation, ItemList.UseGoodsReceipt";
+	RemoveFromCache(DataPaths, Parameters);
+EndProcedure
+
+Function IsChangedItemListPriceType(Parameters)
+	Return IsChangedProperty(Parameters, "ItemList.PriceType");
+EndFunction
+
+Procedure RemoveFromCacheItemListPriceType(Parameters)
+	DataPaths = "ItemList.PriceType";
+	RemoveFromCache(DataPaths, Parameters);
+EndProcedure
+
+Function IsChangedItemListPrice(Parameters)
+	Return IsChangedProperty(Parameters, "ItemList.Price");
+EndFunction
+
+Procedure RemoveFromCacheItemListPrice(Parameters)
+	DataPaths = "ItemList.Price";
+	RemoveFromCache(DataPaths, Parameters);
+EndProcedure
+
+Function IsChangedPymentTerms(Parameters)
+	Return IsChangedProperty(Parameters, "PaymentTerms");
+EndFunction
+
+Procedure RemoveFromCachePaymentTerms(Parameters)
+	DataPaths = "PaymentTerms";
+	RemoveFromCache(DataPaths, Parameters);
+EndProcedure
+
+Function IsChangedTaxRates(Parameters)
+	For Each TaxInfo In Parameters.ArrayOfTaxInfo Do
+		Result = IsChangedProperty(Parameters, "ItemList." + TaxInfo.Name);
+		If Result.IsChanged Then
+			Return Result;
+		EndIf;
+	EndDo;
+	Return New Structure("IsChanged", False);
+EndFunction
+
+Procedure RemoveFromCacheTaxRates(Parameters)
+	ArrayOfDataPaths = New Array();
+	For Each TaxInfo In Parameters.ArrayOfTaxInfo Do
+		ArrayOfDataPaths.Add("ItemList." + TaxInfo.Name);
+	EndDo;
+	RemoveFromCache(StrConcat(ArrayOfDataPaths, ","), Parameters);
+EndProcedure
+
+Function IsChangedProperty(Parameters, DataPath)
+	Result = New Structure("IsChanged, OldValue, NewValue", False, Undefined, Undefined);
+	Changes = Parameters.ChangedData.Get(DataPath);
+	If  Changes <> Undefined Then
+		Result.IsChanged = True;
+		Result.NewValue  = Changes[0].NewValue;
+	EndIf;
+	Return Result;
+EndFunction
+
+Procedure RemoveFromCache(DataPaths, Parameters)
+	For Each DataPath In StrSplit(DataPaths, ",") Do
+		Segments = StrSplit(DataPath, ".");
+		If Segments.Count() = 1 Then
+			PropertyName = TrimAll(Segments[0]);
+			Parameters.CacheForm.Delete(PropertyName);
+			Parameters.Cache.Delete(PropertyName);
+		ElsIf Segments.Count() = 2 Then
+			TableName  = TrimAll(Segments[0]);
+			ColumnName = TrimAll(Segments[1]);
+			If Not Parameters.Cache.Property(TableName) Then
+				Raise StrTemplate("Not foud property in cache for delete [%1]", DataPath);
+			EndIf;
+			For Each Row In Parameters.Cache[TableName] Do
+				Row.Delete(ColumnName);
+			EndDo;
+		Else
+			Raise StrTemplate("Wrong datapath remove from cache [%1]", DataPath);
+		EndIf;
+	EndDo;
+EndProcedure
+
+#EndRegion
 
 #EndRegion
 
@@ -658,8 +847,14 @@ EndProcedure
 #Region COMPANY
 
 Procedure CompanyOnChange(Object, Form, TableNames) Export
+	FormParameters = GetFormParameters(Form);
+	ExtractValueBeforeChange_Object("Company", FormParameters);
+	FormParameters.EventCaller = "CompanyOnUserChange";
+
 	For Each TableName In StrSplit(TableNames, ",") Do
-		Parameters = GetSimpleParameters(Object, Form, TrimAll(TableName));
+		ServerParameters = GetServerParameters(Object);
+		ServerParameters.TableName = TrimAll(TableName);
+		Parameters = GetParameters(ServerParameters, FormParameters);
 		ControllerClientServer_V2.CompanyOnChange(Parameters);
 	EndDo;
 EndProcedure
@@ -705,7 +900,7 @@ EndProcedure
 Procedure PartnerOnChange(Object, Form, TableNames) Export
 	FormParameters = GetFormParameters(Form);
 	ExtractValueBeforeChange_Object("Partner", FormParameters);
-	
+	FormParameters.EventCaller = "PartnerOnUserChange";
 	For Each TableName In StrSplit(TableNames, ",") Do
 		ServerParameters = GetServerParameters(Object);
 		ServerParameters.TableName = TableName;
@@ -740,7 +935,7 @@ EndProcedure
 Procedure AgreementOnChange(Object, Form, TableNames) Export
 	FormParameters = GetFormParameters(Form);
 	ExtractValueBeforeChange_Object("Agreement", FormParameters);
-	
+	FormParameters.EventCaller = "AgreementOnUserChange";
 	For Each TableName In StrSplit(TableNames, ",") Do
 		ServerParameters = GetServerParameters(Object);
 		ServerParameters.TableName = TableName;

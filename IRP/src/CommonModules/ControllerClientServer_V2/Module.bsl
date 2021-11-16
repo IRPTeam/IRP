@@ -18,7 +18,7 @@ Function GetFormParameters(Form) Export
 	Result.Insert("EventCaller", "");
 	Result.Insert("TaxesCache", "");
 	
-	If CommonFunctionsClientServer.ObjectHasProperty(Form, "TaxesCache") Then
+	If Form <> Undefined And CommonFunctionsClientServer.ObjectHasProperty(Form, "TaxesCache") Then
 		Result.TaxesCache = Form.TaxesCache;
 	EndIf;
 	
@@ -46,7 +46,6 @@ Function GetParameters(ServerParameters, FormParameters = Undefined) Export
 EndFunction
 
 Function CreateParameters(ServerParameters, FormParameters)
-
 	Parameters = New Structure();
 	// параметры для Client 
 	Parameters.Insert("Form"             , FormParameters.Form);
@@ -376,6 +375,42 @@ EndProcedure
 
 #EndRegion
 
+#Region RECALCULATION_AFTER_QUESTIONS_TO_USER
+
+// RecalculationsAfterQuestionToUser.Call
+Procedure RecalculationsAfterQuestionToUser(Parameters) Export
+	Binding = RecalculationsAfterQuestionToUserStepsBinding(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
+EndProcedure
+
+// RecalculationsAfterQuestionToUser.Bind
+Function RecalculationsAfterQuestionToUserStepsBinding(Parameters)
+	DataPath = "";
+	Binding = New Structure();
+	Binding.Insert("SalesInvoice", "RecalculationsAfterQuestionToUserStepsEnabler");
+	Return BindSteps("StepsEnamblerEmpty", DataPath, Binding, Parameters);
+EndFunction
+
+Procedure RecalculationsAfterQuestionToUserStepsEnabler(Parameters, Chain) Export
+	ItemListEnableCalculations(Parameters, Chain, "RecalculationsAfterQuestionToUser");
+	
+	// UpdatePaymentTerms
+	Chain.UpdatePaymentTerms.Enable = True;
+	Chain.UpdatePaymentTerms.Setter = "SetPaymentTerms";
+	Options = ModelClientServer_V2.UpdatePaymentTermsOptions();
+	Options.Date = GetPropertyObject(Parameters, "Date");
+	Options.ArrayOfPaymentTerms = GetPaymentTerms(Parameters);
+	// нужны все строки таблицы
+	TotalAmount = 0;
+	For Each Row In Parameters.Object.ItemList Do
+		TotalAmount = TotalAmount + GetPropertyObject(Parameters, "ItemList.TotalAmount", Row.Key);
+	EndDo;
+	Options.TotalAmount = TotalAmount;
+	Chain.UpdatePaymentTerms.Options.Add(Options);
+EndProcedure
+
+#EndRegion
+
 #Region ACCOUNT_SENDER
 
 // Вызывается при изменении реквизита Sender в документе CashTransferOrder
@@ -607,6 +642,7 @@ EndProcedure
 
 // Company.OnChange
 Procedure CompanyOnChange(Parameters) Export
+	ProceedPropertyBeforeChange_Object(Parameters);
 	AddViewNotify("OnSetCompanyNotify", Parameters);
 	Binding = CompanyStepsBinding(Parameters);
 	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
@@ -1173,6 +1209,10 @@ Procedure SetPaymentTerms(Parameters, Results) Export
 	Binding = PaymentTermsStepsBinding(Parameters);
 	For Each Result In Results Do
 		Parameters.Cache.Insert(Binding.DataPath, Result.Value.ArrayOfPaymentTerms);
+		// данные изменены только если в Object.PaymentTerms уже есть строки
+		If Parameters.Object.PaymentTerms.Count() Then
+			PutToChangedData(Parameters, Binding.DataPath, Undefined, Undefined, Undefined);
+		EndIf;
 	EndDo;
 EndProcedure
 
@@ -1791,11 +1831,10 @@ Procedure ItemListEnableCalculations(Parameters, Chain, WhoIsChanged)
 		// нужно пересчитать NetAmount, TotalAmount, TaxAmount, OffersAmount
 		If     WhoIsChanged = "IsPriceChanged"            Or WhoIsChanged = "IsPriceIncludeTaxChanged"
 			Or WhoIsChanged = "IsDontCalculateRowChanged" Or WhoIsChanged = "IsQuantityInBaseUnitChanged" 
-			Or WhoIsChanged = "IsTaxRateChanged" Then //         Or WhoIsChanged = "IsPaymentTermsChanged" Then
+			Or WhoIsChanged = "IsTaxRateChanged"          Or WhoIsChanged = "RecalculationsAfterQuestionToUser" Then
 			Options.CalculateNetAmount.Enable   = True;
 			Options.CalculateTotalAmount.Enable = True;
 			Options.CalculateTaxAmount.Enable   = True;
-			//Options.CalculatePaymentTerms.Enable = True;
 		ElsIf WhoIsChanged = "IsTotalAmountChanged" Then
 		// при изменении TotalAmount налоги расчитываются в обратную сторону, меняется NetAmount и Price
 			Options.CalculateTaxAmountReverse.Enable   = True;
@@ -1845,14 +1884,17 @@ Procedure SetItemListCalculations(Parameters, Results) Export
 			If Not Parameters.Cache.Property("TaxList") Then
 				Parameters.Cache.Insert("TaxList", New Array());
 			EndIf;
+			
 			// удаляем из кэша старые строки
 			Count = Parameters.Cache.TaxList.Count();
 			For i = 1 To Count Do
-				ArrayItem = Parameters.Cache.TaxList[Count - i];
+				Index = Count - i;
+				ArrayItem = Parameters.Cache.TaxList[Index];
 				If ArrayItem.Key = Result.Options.Key Then
-					Parameters.Cache.TaxList.Delete(ArrayItem);
+					Parameters.Cache.TaxList.Delete(Index);
 				EndIf;
 			EndDo;
+			
 			// добавляем новые строки
 			For Each Row In Result.Value.TaxList Do
 				Parameters.Cache.TaxList.Add(Row);

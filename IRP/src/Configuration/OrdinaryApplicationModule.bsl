@@ -8,14 +8,6 @@ Procedure OnStart()
 	ServiceSystemClient.SetSessionParameter("ClientType", ClientType);
 	ServiceSystemClient.SetSessionParameter("Workstation", WorkstationClient.GetCurrentWorkstation());
 
-	If Not Saas.isAreaActive() And (Saas.isAreaActive() And Not Saas.CurrentAreaID() = 0) Then
-
-		If Not ServiceSystemServer.GetConstantValue("NotFirstStart") Then
-			ServiceSystemServer.SetConstantValue("NotFirstStart", True);
-		EndIf;
-
-	EndIf;
-
 	ClientApplication.SetCaption(ServiceSystemClient.GetProgramTitle());
 EndProcedure
 

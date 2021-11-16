@@ -11,9 +11,6 @@ Background:
 
 Scenario: _970001 filling in test data base
 
-When Refill constant ConnectionStatus by value (test data base)
-And I close TestClient session
-Given I open new TestClient session or connect the existing one
 When Create catalog ExternalDataProc objects (test data base)
 * Add ExternalDataProc
 		* VAT

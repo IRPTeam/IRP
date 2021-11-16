@@ -12,8 +12,6 @@ Background:
 	Given I launch TestClient opening script or connect the existing one
 	And I set "True" value to the constant "UseItemKey"
 	And I set "True" value to the constant "UseCompanies"
-	And I set "True" value to the constant "NotFirstStart"
-
 
 Scenario: Open information register form "AddProperties" 
 
@@ -21,9 +19,6 @@ Scenario: Open information register form "AddProperties"
 	If the warning is displayed then
 		Then I raise "Failed to open information register form  AddProperties" exception
 	And I close current window
-
-
-
 	
 Scenario: Open information register form "AttachedFiles" 
 

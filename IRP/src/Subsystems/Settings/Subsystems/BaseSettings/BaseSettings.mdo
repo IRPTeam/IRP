@@ -8,6 +8,5 @@
   <includeHelpInContents>true</includeHelpInContents>
   <includeInCommandInterface>true</includeInCommandInterface>
   <content>Catalog.ConfigurationMetadata</content>
-  <content>Constant.NotFirstStart</content>
   <parentSubsystem>Subsystem.Settings</parentSubsystem>
 </mdclass:Subsystem>

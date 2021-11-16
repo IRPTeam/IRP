@@ -467,9 +467,9 @@ $VanessaRun = {
 	Start-Sleep 20
     Compress-Archive -Path "$workingDir/$FolderForAllArtefact/allureTag/$elementTag/*" -DestinationPath "$workingDir/$FolderForAllArtefact/allure-zip/allure_$elementTag.zip" | Out-Null
 	Start-Sleep 20
-	Write-Host "##teamcity[publishArtifacts '$workingDir/$elementTag.zip => DataBase' flowId='$elementTag']"
+	Write-Host "##teamcity[publishArtifacts '$workingDir/$elementTag.zip => DataBase']"
 	Start-Sleep 5
-    Write-Host "##teamcity[publishArtifacts '$workingDir/$FolderForAllArtefact/allure-zip/allure_$elementTag.zip => allure' flowId='$elementTag']"
+    Write-Host "##teamcity[publishArtifacts '$workingDir/$FolderForAllArtefact/allure-zip/allure_$elementTag.zip => allure']"
 
 #	Write-Host "importData importData type='junit' path='$FolderForAllArtefact/AllSteps/$elementTag/junit'"
 #	Write-Host "##teamcity[importData type='junit' path='$FolderForAllArtefact/AllSteps/$elementTag/junit']"

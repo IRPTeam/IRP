@@ -154,15 +154,15 @@ If ($UseDebug){
 $FolderForAllArtefact = "VAResult"
 ######################################################################################################
 
-New-Item -ItemType "directory" -Path "$workingDir/$FolderForAllArtefact"
-New-Item -ItemType "directory" -Path "$workingDir/$FolderForAllArtefact/Params"
-New-Item -ItemType "directory" -Path "$workingDir/$FolderForAllArtefact/allure/base"
-New-Item -ItemType "directory" -Path "$workingDir/$FolderForAllArtefact/logpath"
-New-Item -ItemType "directory" -Path "$workingDir/$FolderForAllArtefact/allure-zip"
-New-Item -ItemType "directory" -Path "$workingDir/$FolderForAllArtefact/allureTag"
-New-Item -ItemType "directory" -Path "$workingDir/$FolderForAllArtefact/logdata"
-New-Item -ItemType "directory" -Path "$workingDir/$FolderForAllArtefact/AllSteps"
-New-Item -ItemType "directory" -Path "$workingDir/$FolderForAllArtefact/AllSteps/Template"
+New-Item -ItemType "directory" -Path "$workingDir/$FolderForAllArtefact" | Out-Null
+New-Item -ItemType "directory" -Path "$workingDir/$FolderForAllArtefact/Params" | Out-Null
+New-Item -ItemType "directory" -Path "$workingDir/$FolderForAllArtefact/allure/base" | Out-Null
+New-Item -ItemType "directory" -Path "$workingDir/$FolderForAllArtefact/logpath" | Out-Null
+New-Item -ItemType "directory" -Path "$workingDir/$FolderForAllArtefact/allure-zip" | Out-Null
+New-Item -ItemType "directory" -Path "$workingDir/$FolderForAllArtefact/allureTag" | Out-Null
+New-Item -ItemType "directory" -Path "$workingDir/$FolderForAllArtefact/logdata" | Out-Null
+New-Item -ItemType "directory" -Path "$workingDir/$FolderForAllArtefact/AllSteps" | Out-Null
+New-Item -ItemType "directory" -Path "$workingDir/$FolderForAllArtefact/AllSteps/Template" | Out-Null
 
 #here has to be template DB
 Copy-Item -Path "$workingDir/TempDB/1Cv8.1CD" -Destination "$workingDir/$FolderForAllArtefact/AllSteps/Template/1Cv8.1CD"
@@ -344,7 +344,7 @@ $VanessaRun = {
     Write-Host "##teamcity[testSuiteStarted name='$elementTag' flowId='$elementTag']"
 
 
-    Write-Output "Wait for log file: $ScriptLogFilePath"
+    # Write-Output "Wait for log file: $ScriptLogFilePath"
     Write-Host "##teamcity[testStarted  name='Wait for log file: $elementTag' flowId='$elementTag']"
     $Skip = $false
     do {
@@ -359,7 +359,7 @@ $VanessaRun = {
     Write-Host "##teamcity[testFinished name='Wait for log file: $elementTag' duration='$TotalMilliseconds' flowId='$elementTag']"
     $hasFailedTest = $false
     if (!$Skip) {
-      Write-Output "Start tail: $elementTag"
+      #Write-Output "Start tail: $elementTag"
 
       $CurrentFeatureFile = ""
       $CurrentTest = ""
@@ -460,13 +460,14 @@ $VanessaRun = {
     Write-Host "##teamcity[flowFinished flowId='$elementTag']"
     Remove-Desktop -Desktop $NewD -Verbose
     
-    Write-Host "publishArtifacts '$workingDir/$elementTag.zip => DataBase'"
-	Compress-Archive -Path "$workingDir/$FolderForAllArtefact/AllSteps/$elementTag/1Cv8.1CD" -DestinationPath "$workingDir/$elementTag.zip"
+    # Write-Host "publishArtifacts '$workingDir/$elementTag.zip => DataBase'"
+	Compress-Archive -Path "$workingDir/$FolderForAllArtefact/AllSteps/$elementTag/1Cv8.1CD" -DestinationPath "$workingDir/$elementTag.zip"  | Out-Null
     Write-Host "##teamcity[publishArtifacts '$workingDir/$elementTag.zip => DataBase']"
     
-    Write-Host "publishArtifacts '$workingDir/$FolderForAllArtefact/allure-zip/allure_$elementTag.zip => allure'"
+    # Write-Host "publishArtifacts '$workingDir/$FolderForAllArtefact/allure-zip/allure_$elementTag.zip => allure'"
     &$AllureBatFilePath generate "$allurePath/$elementTag" --clean -o "$workingDir/$FolderForAllArtefact/allureTag/$elementTag"
-    Compress-Archive -Path "$workingDir/$FolderForAllArtefact/allureTag/$elementTag/*" -DestinationPath "$workingDir/$FolderForAllArtefact/allure-zip/allure_$elementTag.zip"
+	Start-Sleep 20
+    Compress-Archive -Path "$workingDir/$FolderForAllArtefact/allureTag/$elementTag/*" -DestinationPath "$workingDir/$FolderForAllArtefact/allure-zip/allure_$elementTag.zip" | Out-Null
     Write-Host "##teamcity[publishArtifacts '$workingDir/$FolderForAllArtefact/allure-zip/allure_$elementTag.zip => allure']"
 
 #	Write-Host "importData importData type='junit' path='$FolderForAllArtefact/AllSteps/$elementTag/junit'"
@@ -517,7 +518,7 @@ foreach ($elementTag in $TagArray) {
     $JobArray.Add($elementTag,$JobTailProc)
     $JobTimes = $JobTimes + @{$elementTag=@($CurrentDate, "")}
     $NumberJob = $JobTimes.count
-    Write-Host "Start $elementTag at $CurrentDate #$NumberJob/$TotalTags"
+    #Write-Host "Start $elementTag at $CurrentDate #$NumberJob/$TotalTags"
 
     do {
         Start-Sleep 1

@@ -183,7 +183,7 @@ $VanessaRun = {
     $portmax = $startPort + 9
     $ScriptLogFilePath = "$workingDir/$FolderForAllArtefact/logdata/$elementTag.log"
     #Write-Output "##teamcity[compilationStarted compiler='VA settings $elementTag']"
-    Write-Output "$startPort - $portmax"
+    #Write-Output "$startPort - $portmax"
     $allurePath = "$workingDir/$FolderForAllArtefact/allure" | ForEach-Object { $_ -replace '\\', '/' }
     if ($RunSaasMode -and $elementTag -eq $TagForCreateSaas) {
         $TempDb = "/F$workingDir/$FolderForAllArtefact/AllSteps/Template" | ForEach-Object { $_ -replace '\\', '/' } 
@@ -192,13 +192,13 @@ $VanessaRun = {
         if($RunSaasMode){
             $TempDb = "/F$workingDir/$FolderForAllArtefact/AllSteps/Template" | ForEach-Object { $_ -replace '\\', '/' } 
             $AreaID = "/Z $CurrentID"
-            Write-Output "Run DB in $TempDb /Z $CurrentID in SaaS mode"
+            #Write-Output "Run DB in $TempDb /Z $CurrentID in SaaS mode"
 
         } else {
             $TempDb = "/F$workingDir/$FolderForAllArtefact/AllSteps/$elementTag" | ForEach-Object { $_ -replace '\\', '/' } 
-            New-Item -ItemType "directory" -Path "$workingDir/$FolderForAllArtefact/AllSteps/$elementTag"
-            Copy-Item -Path "$workingDir/TempDB/1Cv8.1CD" -Destination "$workingDir/$FolderForAllArtefact/AllSteps/$elementTag/1Cv8.1CD"
-            Write-Output "Run DB in $TempDb common mode"
+            New-Item -ItemType "directory" -Path "$workingDir/$FolderForAllArtefact/AllSteps/$elementTag" | Out-Null
+            Copy-Item -Path "$workingDir/TempDB/1Cv8.1CD" -Destination "$workingDir/$FolderForAllArtefact/AllSteps/$elementTag/1Cv8.1CD" | Out-Null
+            #Write-Output "Run DB in $TempDb common mode"
         }
     }
          

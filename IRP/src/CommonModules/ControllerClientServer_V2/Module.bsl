@@ -216,7 +216,7 @@ Function GetAllFillByDefault(Parameters)
 	Return Binding;
 EndFunction
 
-Procedure StepsEnamblerEmpty(Parameters, Chain) Export
+Procedure StepsEnablerEmpty(Parameters, Chain) Export
 	Return;
 EndProcedure
 
@@ -233,7 +233,7 @@ Function FormOnCreateAtServerStepsBinding(Parameters)
 	DataPath = "";
 	Binding = New Structure();
 	Binding.Insert("SalesInvoice", "OnCreateAtServerStepsEnabler_WithTaxes");
-	Return BindSteps("StepsEnamblerEmpty", DataPath, Binding, Parameters);
+	Return BindSteps("StepsEnablerEmpty", DataPath, Binding, Parameters);
 EndFunction
 
 // Form.Modificator
@@ -265,7 +265,7 @@ EndProcedure
 Function FormOnOpenStepsBinding(Parameters)
 	DataPath = "";
 	Binding = New Structure();
-	Return BindSteps("StepsEnamblerEmpty", DataPath, Binding, Parameters);
+	Return BindSteps("StepsEnablerEmpty", DataPath, Binding, Parameters);
 EndFunction
 
 #EndRegion
@@ -328,7 +328,7 @@ Function ListOnDeleteStepsBinding(Parameters)
 	Binding = New Structure();
 	Binding.Insert("ShipmentConfirmation", "ItemListOnDeleteStepsEnabler_Shipment");
 	Binding.Insert("SalesInvoice"        , "ItemListOnDeleteStepsEnabler_Trade_Shipment");
-	Return BindSteps("StepsEnamblerEmpty", DataPath, Binding, Parameters);
+	Return BindSteps("StepsEnablerEmpty", DataPath, Binding, Parameters);
 EndFunction
 
 Procedure ItemListOnDeleteStepsEnabler_Shipment(Parameters, Chain) Export
@@ -388,7 +388,7 @@ Function RecalculationsAfterQuestionToUserStepsBinding(Parameters)
 	DataPath = "";
 	Binding = New Structure();
 	Binding.Insert("SalesInvoice", "RecalculationsAfterQuestionToUserStepsEnabler");
-	Return BindSteps("StepsEnamblerEmpty", DataPath, Binding, Parameters);
+	Return BindSteps("StepsEnablerEmpty", DataPath, Binding, Parameters);
 EndFunction
 
 Procedure RecalculationsAfterQuestionToUserStepsEnabler(Parameters, Chain) Export
@@ -526,7 +526,7 @@ Function AccountStepsBinding(Parameters)
 	DataPath = "Account";
 	Binding = New Structure();
 	Binding.Insert("IncomingPaymentOrder", "AccountStepsEnabler");
-	Return BindSteps("StepsEnamblerEmpty", DataPath, Binding, Parameters);
+	Return BindSteps("StepsEnablerEmpty", DataPath, Binding, Parameters);
 EndFunction
 
 Procedure AccountStepsEnabler(Parameters, Chain) Export
@@ -559,7 +559,7 @@ EndProcedure
 Function CurrencyStepsBinding(Parameters)
 	DataPath = "Currency";
 	Binding = New Structure();
-	Return BindSteps("StepsEnamblerEmpty", DataPath, Binding, Parameters);
+	Return BindSteps("StepsEnablerEmpty", DataPath, Binding, Parameters);
 EndFunction
 
 #EndRegion
@@ -583,7 +583,7 @@ Function DateStepsBinding(Parameters)
 	DataPath = "Date";
 	Binding = New Structure();
 	Binding.Insert("SalesInvoice"        , "DateStepsEnabler_Trade_PartnerIsCustomer");
-	Return BindSteps("StepsEnamblerEmpty", DataPath, Binding, Parameters);
+	Return BindSteps("StepsEnablerEmpty", DataPath, Binding, Parameters);
 EndFunction
 
 Procedure DateStepsEnabler_Trade_PartnerIsCustomer(Parameters, Chain) Export
@@ -660,7 +660,7 @@ Function CompanyStepsBinding(Parameters)
 	Binding = New Structure();
 	Binding.Insert("IncomingPaymentOrder", "CompanyStepsEnabler_Cash");
 	Binding.Insert("SalesInvoice"        , "CompanyStepsEnabler_WithTaxes");
-	Return BindSteps("StepsEnamblerEmpty", DataPath, Binding, Parameters);
+	Return BindSteps("StepsEnablerEmpty", DataPath, Binding, Parameters);
 EndFunction
 
 Procedure CompanyStepsEnabler_Cash(Parameters, Chain) Export
@@ -707,7 +707,7 @@ Function PartnerStepsBinding(Parameters)
 	Binding = New Structure();
 	Binding.Insert("ShipmentConfirmation", "PartnerStepsEnabler_Warehouse");
 	Binding.Insert("SalesInvoice"        , "PartnerStepsEnabler_Trade_PartnerIsCustomer");
-	Return BindSteps("StepsEnamblerEmpty", DataPath, Binding, Parameters);
+	Return BindSteps("StepsEnablerEmpty", DataPath, Binding, Parameters);
 EndFunction
 
 Procedure PartnerStepsEnabler_Trade_PartnerIsCustomer(Parameters, Chain) Export
@@ -764,7 +764,7 @@ EndProcedure
 Function LegalNameStepsBinding(Parameters)
 	DataPath = "LegalName";
 	Binding = New Structure();
-	Return BindSteps("StepsEnamblerEmpty", DataPath, Binding, Parameters);
+	Return BindSteps("StepsEnablerEmpty", DataPath, Binding, Parameters);
 EndFunction
 
 #EndRegion
@@ -790,7 +790,7 @@ Function DeliveryDateDefaultBinding(Parameters)
 	DataPath = "DeliveryDate";
 	Binding = New Structure();
 	Binding.Insert("SalesInvoice"   , "DeliveryDateDefault");	
-	Return BindSteps("StepsEnamblerEmpty", DataPath, Binding, Parameters);
+	Return BindSteps("StepsEnablerEmpty", DataPath, Binding, Parameters);
 EndFunction
 
 // DeliveryDate.Bind
@@ -849,7 +849,7 @@ Function ItemListDeliveryDateDefaultBinding(Parameters)
 	DataPath = "ItemList.DeliveryDate";
 	Binding = New Structure();
 	Binding.Insert("SalesInvoice", "ItemListDeliveryDateDefault");
-	Return BindSteps("StepsEnamblerEmpty", DataPath, Binding, Parameters);
+	Return BindSteps("StepsEnablerEmpty", DataPath, Binding, Parameters);
 EndFunction
 
 // ItemList.DeliveryDate.Bind
@@ -857,7 +857,7 @@ Function ItemListDeliveryDateSptepsBinding(Parameters)
 	DataPath = "ItemList.DeliveryDate";
 	Binding = New Structure();
 	Binding.Insert("SalesInvoice"   , "ItemListDeliveryDateStepsEnabler");
-	Return BindSteps("StepsEnamblerEmpty", DataPath, Binding, Parameters);
+	Return BindSteps("StepsEnablerEmpty", DataPath, Binding, Parameters);
 EndFunction
 
 Procedure ItemListDeliveryDateDefault(Parameters, Chain) Export
@@ -919,7 +919,7 @@ Function StoreDefaultBinding(Parameters)
 	Binding.Insert("SalesInvoice"   , "StoreDefault_Trade");
 	Binding.Insert("PurchaseInvoice", "StoreDefault_Trade");
 	
-	Return BindSteps("StepsEnamblerEmpty", DataPath, Binding, Parameters);
+	Return BindSteps("StepsEnablerEmpty", DataPath, Binding, Parameters);
 EndFunction
 
 // Store.Empty.Bind
@@ -932,7 +932,7 @@ Function StoreEmptyBinding(Parameters)
 	Binding.Insert("SalesInvoice"   , "StoreEmpty_Trade");
 	Binding.Insert("PurchaseInvoice", "StoreEmpty_Trade");
 	
-	Return BindSteps("StepsEnamblerEmpty", DataPath, Binding, Parameters);
+	Return BindSteps("StepsEnablerEmpty", DataPath, Binding, Parameters);
 EndFunction
 
 // Store.Bind
@@ -1037,7 +1037,7 @@ Function ItemListStoreDefaultBinding(Parameters)
 	Binding.Insert("SalesInvoice"   , "ItemListStoreDefault_HaveAgreementInHeader");
 	Binding.Insert("PurchaseInvoice", "ItemListStoreDefault_HaveAgreementInHeader");
 	
-	Return BindSteps("StepsEnamblerEmpty", DataPath, Binding, Parameters);
+	Return BindSteps("StepsEnablerEmpty", DataPath, Binding, Parameters);
 EndFunction
 
 // ItemList.Store.Bind
@@ -1159,7 +1159,7 @@ Function AgreementStepsBinding(Parameters)
 	DataPath = "Agreement";
 	Binding = New Structure();
 	Binding.Insert("SalesInvoice"        , "AgreementStepsEnabler_Trade");
-	Return BindSteps("StepsEnamblerEmpty", DataPath, Binding, Parameters);
+	Return BindSteps("StepsEnablerEmpty", DataPath, Binding, Parameters);
 EndFunction
 
 Procedure AgreementStepsEnabler_Trade(Parameters, Chain) Export
@@ -1282,7 +1282,7 @@ EndFunction
 Function PaymentTermsStepsBinding(Parameters)
 	DataPath = "PaymentTerms";
 	Binding = New Structure();
-	Return BindSteps("StepsEnamblerEmpty", DataPath, Binding, Parameters);
+	Return BindSteps("StepsEnablerEmpty", DataPath, Binding, Parameters);
 EndFunction
 
 #EndRegion
@@ -1422,7 +1422,7 @@ Function ItemListItemStepsBinding(Parameters)
 	Binding = New Structure();
 	Binding.Insert("ShipmentConfirmation", "ItemListItemStepsEnabler");
 	Binding.Insert("SalesInvoice"        , "ItemListItemStepsEnabler");
-	Return BindSteps("StepsEnamblerEmpty", DataPath, Binding, Parameters);
+	Return BindSteps("StepsEnablerEmpty", DataPath, Binding, Parameters);
 EndFunction
 
 Procedure ItemListItemStepsEnabler(Parameters, Chain) Export
@@ -1457,9 +1457,10 @@ EndProcedure
 // ItemList.ItemKey.Bind
 Function ItemListItemKeyStepsBinding(Parameters)
 	DataPath = "ItemList.ItemKey";
-	Binding = New Structure("ShipmentConfirmation", "ItemListItemKeyStepsEnabler_Warehouse_Shipment");
-	Binding = New Structure("SalesInvoice"        , "ItemListItemKeyStepsEnabler_Trade_Shipment");
-	Return BindSteps("StepsEnamblerEmpty", DataPath, Binding, Parameters);
+	Binding = New Structure();
+	Binding.Insert("ShipmentConfirmation", "ItemListItemKeyStepsEnabler_Warehouse_Shipment");
+	Binding.Insert("SalesInvoice"        , "ItemListItemKeyStepsEnabler_Trade_Shipment");
+	Return BindSteps("StepsEnablerEmpty", DataPath, Binding, Parameters);
 EndFunction
 
 Procedure ItemListItemKeyStepsEnabler_Warehouse_Shipment(Parameters, Chain) Export
@@ -1742,7 +1743,7 @@ Function ItemListQuantityInBaseUnitStepsBinding(Parameters)
 	DataPath = "ItemList.QuantityInBaseUnit";
 	Binding = New Structure();
 	Binding.Insert("SalesInvoice", "ItemListQuantityInBaseUnitStepsEnabler_Trade");
-	Return BindSteps("StepsEnamblerEmpty", DataPath, Binding, Parameters);
+	Return BindSteps("StepsEnablerEmpty", DataPath, Binding, Parameters);
 EndFunction
 
 Procedure ItemListQuantityInBaseUnitStepsEnabler_Trade(Parameters, Chain) Export
@@ -1806,7 +1807,7 @@ EndProcedure
 Function ItemListTaxAmountStepsBinding(Parameters)
 	DataPath = "ItemList.TaxAmount";
 	Binding = New Structure();
-	Return BindSteps("StepsEnamblerEmpty", DataPath, Binding, Parameters);
+	Return BindSteps("StepsEnablerEmpty", DataPath, Binding, Parameters);
 EndFunction
 
 #EndRegion
@@ -1823,7 +1824,7 @@ EndProcedure
 Function ItemListOffersAmountStepsBinding(Parameters)
 	DataPath = "ItemList.OffersAmount";
 	Binding = New Structure();
-	Return BindSteps("StepsEnamblerEmpty", DataPath, Binding, Parameters);
+	Return BindSteps("StepsEnablerEmpty", DataPath, Binding, Parameters);
 EndFunction
 
 #EndRegion
@@ -1841,7 +1842,7 @@ Function ItemListTotalAmountStepsBinding(Parameters)
 	DataPath = "ItemList.TotalAmount";
 	Binding = New Structure();
 	Binding.Insert("SalesInvoice", "ItemListTotalAmountStepsEnabler");
-	Return BindSteps("StepsEnamblerEmpty", DataPath, Binding, Parameters);
+	Return BindSteps("StepsEnablerEmpty", DataPath, Binding, Parameters);
 EndFunction
 
 Procedure ItemListTotalAmountStepsEnabler(Parameters, Chain) Export
@@ -1951,7 +1952,7 @@ Function ItemListCalculationsStepsBinding(Parameters)
 	DataPath = "";
 	Binding = New Structure();
 	Binding.Insert("SalesInvoice", "ItemListCalculationsStepsEnabler");
-	Return BindSteps("StepsEnamblerEmpty", DataPath, Binding, Parameters);
+	Return BindSteps("StepsEnablerEmpty", DataPath, Binding, Parameters);
 EndFunction
 
 Procedure ItemListCalculationsStepsEnabler(Parameters, Chain) Export

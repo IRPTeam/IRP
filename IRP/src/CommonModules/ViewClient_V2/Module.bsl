@@ -210,7 +210,7 @@ Procedure OnChainComplete(Parameters) Export
 	// изменение склада в табличной части ItemList
 	ElsIf Parameters.EventCaller = "ItemListStoreOnUserChange" Then
 		If Parameters.ObjectMetadataInfo.MetadataName = "ShipmentConfirmation" Then
-			If NeedCommitChainChangesItemListStoreOnUserChange(Parameters) Then
+			If NeedCommitChangesItemListStoreOnUserChange(Parameters) Then
 				CommitChanges = True;
 			EndIf;
 		EndIf;
@@ -249,7 +249,7 @@ Procedure StoreOnUserChangeContinue(Answer, NotifyPrameters) Export
 	EndIf;
 EndProcedure
 
-Function NeedCommitChainChangesItemListStoreOnUserChange(Parameters)
+Function NeedCommitChangesItemListStoreOnUserChange(Parameters)
 	If Parameters.Cache.Property("ItemList") Then
 		For Each Row In Parameters.Cache.ItemList Do
 			If Row.Property("Store") And Not ValueIsFilled(Row.Store) Then
@@ -262,6 +262,15 @@ EndFunction
 
 // временная для SalesInvoice
 Procedure __tmp_OnChainComplite(Parameters)
+	
+	// изменение склада в табличной части ItemList
+	If Parameters.EventCaller = "ItemListStoreOnUserChange" Then
+		If NeedCommitChangesItemListStoreOnUserChange(Parameters) Then
+			CommitChanges(Parameters);
+		EndIf;
+		Return;
+	EndIf;
+	
 	ArrayOfEventCallers = New Array();
 	ArrayOfEventCallers.Add("DateOnUserChange");
 	ArrayOfEventCallers.Add("CompanyOnUserChange");

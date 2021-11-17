@@ -7059,10 +7059,10 @@ EndProcedure
 
 #Region AddLinkUnlinkDocumentRow
 
-Procedure AddLinkedDocumentRows(Object, FillingValues) Export
+Function AddLinkedDocumentRows(Object, FillingValues) Export
 	FillingValue = GetFillingValue(FillingValues);
 	If FillingValue = Undefined Then
-		Return;
+		Return "";
 	EndIf;
 
 	TableNames_Refreshable = GetTableNames_Refreshable();
@@ -7084,14 +7084,34 @@ Procedure AddLinkedDocumentRows(Object, FillingValues) Export
 	EndDo;
 
 	TableNames_Refreshable.Add("ItemList");
-
+	
+	UpdatedProperties = New Array();
+	
 	For Each TableName In TableNames_Refreshable Do
 		If FillingValue.Property(TableName) And CommonFunctionsClientServer.ObjectHasProperty(Object, TableName) Then
 			For Each Row In FillingValue[TableName] Do
-				FillPropertyValues(Object[TableName].Add(), Row);
+				NewRow = Object[TableName].Add();
+				FillPropertyValues(NewRow, Row);
+				
+				For Each KeyValue In Row Do
+					PropertyName = TrimAll(KeyValue.Key);
+					PutToUpdatedProperties(PropertyName, TableName, NewRow, UpdatedProperties);
+				EndDo;
+				
 			EndDo;
 		EndIf;
 	EndDo;
+	Return StrConcat(UpdatedProperties, ",");
+EndFunction
+
+Procedure PutToUpdatedProperties(PropertyName, TableName, Source, UpdatedProperties)
+	If CommonFunctionsClientServer.ObjectHasProperty(Source, PropertyName)
+		And ValueIsFilled(Source[PropertyName]) Then
+		DataPath = TrimAll(TableName) + "." + PropertyName;
+		If UpdatedProperties.Find(DataPath) = Undefined Then
+			UpdatedProperties.Add(DataPath);
+		EndIf;
+	EndIf;
 EndProcedure
 
 Procedure LinkUnlinkDocumentRows(Object, FillingValues) Export

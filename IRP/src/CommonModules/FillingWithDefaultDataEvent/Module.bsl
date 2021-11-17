@@ -5,7 +5,8 @@ Procedure FillingWithDefaultDataFilling(Source, FillingData, FillingText, Standa
 
 //===
 IsUsedNewFunctionality = TypeOf(Source) = Type("DocumentObject.IncomingPaymentOrder")
-	Or TypeOf(Source) = Type("DocumentObject.ShipmentConfirmation");
+	Or TypeOf(Source) = Type("DocumentObject.ShipmentConfirmation")
+	Or TypeOf(Source) = Type("DocumentObject.SalesInvoice");
 //===
 
 	Data = New Structure();
@@ -38,7 +39,34 @@ IsUsedNewFunctionality = TypeOf(Source) = Type("DocumentObject.IncomingPaymentOr
 				ArrayOfMainTables.Add(TableName);
 			EndIf;
 		EndDo;
-	EndIf;
+	
+	ReadOnlyProperties = "";
+	Source.AdditionalProperties.Property("ReadOnlyProperties", ReadOnlyProperties);
+	
+	// если документ был введен на основании то у него уже есть заполненные реквизиты
+	// список этих реквизитов в ReadOnlyProperties
+	// нужно для каждого уже заполненного реквизита вызвать его обработчик
+	
+	ArrayOfProperties = StrSplit(ReadOnlyProperties, ",");
+	
+	For Each TableName In ArrayOfMainTables Do
+		
+		For Each PropertyName In ArrayOfProperties Do
+			DataPath = StrSplit(PropertyName, ".");
+			If DataPath.Count() = 1 Then // для табличных частей пока не реализовано
+				Property = New Structure("DataPath", TrimAll(DataPath[0]));
+				
+				ServerParameters = ControllerClientServer_V2.GetServerParameters(Source);
+				ServerParameters.TableName          = TableName;
+				ServerParameters.ReadOnlyProperties = ReadOnlyProperties;
+				Parameters = ControllerClientServer_V2.GetParameters(ServerParameters);
+				
+				ControllerClientServer_V2.API_SetProperty(Parameters, Property, Source[Property.DataPath]);
+			EndIf;
+		EndDo;
+		
+	EndDo;
+	EndIf; // IsUsedNewFunctionality 
 	//==
 	
 	For Each KeyValue In Data Do
@@ -47,13 +75,17 @@ IsUsedNewFunctionality = TypeOf(Source) = Type("DocumentObject.IncomingPaymentOr
 			If IsUsedNewFunctionality Then
 				// временно, потом перенести в модуль Controller
 				
+				// заполняем реквизиты из настроек пользователя,
+				// но только не те что в ReadOnlyProperties
 				Property = New Structure("DataPath", KeyValue.Key);
 				Value    = KeyValue.Value;
 				
 				For Each TableName In ArrayOfMainTables Do
 					ServerParameters = ControllerClientServer_V2.GetServerParameters(Source);
-					ServerParameters.TableName = TableName;
+					ServerParameters.TableName          = TableName;
+					ServerParameters.ReadOnlyProperties = ReadOnlyProperties;
 					Parameters = ControllerClientServer_V2.GetParameters(ServerParameters);
+					
 					ControllerClientServer_V2.API_SetProperty(Parameters, Property, Value);
 				EndDo;
 			Else

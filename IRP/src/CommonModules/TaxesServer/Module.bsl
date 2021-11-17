@@ -413,6 +413,42 @@ Function GetFromTaxTable(Form, Key, Tax)
 	Return Undefined;
 EndFunction
 
+// временная для теста
+Function _GetArrayOfTaxInfo(Object, Date, Company) Export
+	
+	ArrayOfTaxes = New Array();
+	DocumentName = Object.Ref.Metadata().Name;
+	ArrayOfAllTaxes = GetTaxesByCompany(Date, Company);
+	For Each ItemOfAllTaxes In ArrayOfAllTaxes Do
+		If ItemOfAllTaxes.UseDocuments.FindRows(New Structure("DocumentName", DocumentName)).Count() Then
+			ArrayOfTaxes.Add(ItemOfAllTaxes);
+		EndIf;
+	EndDo;
+	
+	ArrayOfTaxInfo = New Array();
+	ArrayOfActualTax = New Array();
+	For Each ItemOfTaxes In ArrayOfTaxes Do
+		ColumnInfo = New Structure();
+		ColumnInfo.Insert("Name", "_" + StrReplace(String(New UUID()), "-", ""));
+		ColumnInfo.Insert("Tax", ItemOfTaxes.Tax);
+		ColumnInfo.Insert("Type", ItemOfTaxes.Type);
+		ArrayOfTaxInfo.Add(ColumnInfo);
+		ArrayOfActualTax.Add(ItemOfTaxes.Tax);
+	EndDo;
+
+	ArrayOfDeleteRowsFromTaxList = New Array();
+	For Each RowTaxList In Object.TaxList Do
+		If ArrayOfActualTax.Find(RowTaxList.Tax) = Undefined Then
+			ArrayOfDeleteRowsFromTaxList.Add(RowTaxList);
+		EndIf;
+	EndDo;
+	For Each ItemOfDeleteRowsFromTaxList In ArrayOfDeleteRowsFromTaxList Do
+		Object.TaxList.Delete(ItemOfDeleteRowsFromTaxList);
+	EndDo;
+
+	Return ArrayOfTaxInfo;
+EndFunction
+
 Procedure CreateFormControls(Object, Form, Parameters) Export
 	If Not CommonFunctionsServer.FormHaveAttribute(Form, "TaxesCache") Then
 		ArrayOfNewAttribute = New Array();

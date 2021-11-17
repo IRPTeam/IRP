@@ -32,8 +32,22 @@ EndProcedure
 
 Procedure Filling(FillingData, FillingText, StandardProcessing)
 	If TypeOf(FillingData) = Type("Structure") And FillingData.Property("BasedOn") Then
-		FillPropertyValues(ThisObject, FillingData, RowIDInfoServer.GetSeperatorColumns(ThisObject.Metadata()));
-		RowIDInfoServer.AddLinkedDocumentRows(ThisObject, FillingData);
+		FillingPropertiesHeader = RowIDInfoServer.GetSeperatorColumns(ThisObject.Metadata());
+		FillPropertyValues(ThisObject, FillingData, FillingPropertiesHeader);
+		FillingPropertiesTables = RowIDInfoServer.AddLinkedDocumentRows(ThisObject, FillingData);
+		//====================================
+		ArrayOfPropertiesHeader = New Array();
+		For Each PropertyName In StrSplit(FillingPropertiesHeader, ",") Do
+			PropertyName = TrimAll(PropertyName);
+			If CommonFunctionsClientServer.ObjectHasProperty(ThisObject, PropertyName)
+				And ValueIsFilled(ThisObject[PropertyName])
+				And ArrayOfPropertiesHeader.Find(PropertyName) = Undefined Then
+				ArrayOfPropertiesHeader.Add(PropertyName);
+			EndIf;
+		EndDo;
+		//====================================
+		ThisObject.AdditionalProperties.Insert("ReadOnlyProperties", 
+			StrConcat(ArrayOfPropertiesHeader, ",") + ", " + FillingPropertiesTables);
 	EndIf;
 EndProcedure
 

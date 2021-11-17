@@ -7,6 +7,7 @@ Function GetServerParameters(Object) Export
 	Result.Insert("ControllerModuleName", "ControllerClientServer_V2");
 	Result.Insert("TableName", "");
 	Result.Insert("Rows", Undefined);
+	Result.Insert("ReadOnlyProperties", "");
 	Return Result;
 EndFunction
 
@@ -67,10 +68,24 @@ Function CreateParameters(ServerParameters, FormParameters)
 	Parameters.Insert("Cache"  , New Structure());
 	Parameters.Insert("ControllerModuleName", ServerParameters.ControllerModuleName);
 	
+	Parameters.Insert("ReadOnlyProperties"    , ServerParameters.ReadOnlyProperties);
+	Parameters.Insert("ReadOnlyPropertiesMap" , New Map());
+	ArrayOfProperties = StrSplit(ServerParameters.ReadOnlyProperties, ",");
+	For Each Property In ArrayOfProperties Do
+		Parameters.ReadOnlyPropertiesMap.Insert(TrimAll(Property), True);
+	EndDo;
+	
 	Parameters.Insert("ArrayOfTaxInfo", New Array());
-	If ValueIsFilled(FormParameters.TaxesCache) Then
-		DeserializedCache = CommonFunctionsServer.DeserializeXMLUseXDTO(Parameters.TaxesCache);
-		Parameters.ArrayOfTaxInfo = DeserializedCache.ArrayOfTaxInfo;
+	
+	If Parameters.FormIsExists Then
+		If ValueIsFilled(FormParameters.TaxesCache) Then
+			DeserializedCache = CommonFunctionsServer.DeserializeXMLUseXDTO(Parameters.TaxesCache);
+			Parameters.ArrayOfTaxInfo = DeserializedCache.ArrayOfTaxInfo;
+		EndIf;
+	Else
+		// временно для теста
+		Parameters.ArrayOfTaxInfo = TaxesServer._GetArrayOfTaxInfo(ServerParameters.Object,
+			ServerParameters.Object.Date, ServerParameters.Object.Company);
 	EndIf;
 	
 	// получаем колонки из табличных частей
@@ -116,7 +131,15 @@ Function CreateParameters(ServerParameters, FormParameters)
 		
 		TaxRates = New Structure();
 		For Each ItemOfTaxInfo In Parameters.ArrayOfTaxInfo Do
-			TaxRates.Insert(ItemOfTaxInfo.Name, Row[ItemOfTaxInfo.Name]);
+			// когда нет формы то нет и колонки созданной программно
+			If Parameters.FormIsExists Then
+				TaxRates.Insert(ItemOfTaxInfo.Name, Row[ItemOfTaxInfo.Name]);
+			Else
+			// создадим псевдо колонки для ставок налога
+			// заполнены будут значениями по умолчанию
+				NewRow.Insert(ItemOfTaxInfo.Name);
+				TaxRates.Insert(ItemOfTaxInfo.Name);
+			EndIf;
 		EndDo;
 		
 		NewRow.Insert("TaxRates", TaxRates);
@@ -158,16 +181,37 @@ EndProcedure
 
 #Region API
 
+// реквизиты которые доступны через API
 Function GetSetterNameByDataPath(DataPath)
 	SettersMap = New Map();
-	SettersMap.Insert("Company", "SetCompany");
-	SettersMap.Insert("Account", "SetAccount");
-	SettersMap.Insert("Partner", "SetPartner");
+	SettersMap.Insert("Sender"          , "SetAccountSender");
+	SettersMap.Insert("SendCurrency"    , "SetSendCurrency");
+	SettersMap.Insert("Receiver"        , "SetAccountReceiver");
+	SettersMap.Insert("ReceiveCurrency" , "SetReceiveCurrency");
+	SettersMap.Insert("Account"         , "SetAccount");
+	SettersMap.Insert("Currency"        , "SetCurrency");
+	SettersMap.Insert("Date"            , "SetDate");
+	SettersMap.Insert("Company"         , "SetCompany");
+	SettersMap.Insert("Partner"         , "SetPartner");
+	SettersMap.Insert("LegalName"       , "SetLegalName");
+	SettersMap.Insert("Agreement"       , "SetAgreement");
+	SettersMap.Insert("ManagerSegment"  , "SetManagerSegment");
+	SettersMap.Insert("PriceIncludeTax" , "SetPriceIncludeTax");
 	
-	SettersMap.Insert("ItemList.ItemKey"  , "SetItemListItemKey");
-	SettersMap.Insert("ItemList.Unit"     , "SetItemListUnit");
-	SettersMap.Insert("ItemList.Store"    , "SetItemListStore");
-	SettersMap.Insert("ItemList.Quantity" , "SetItemListQuantity");
+	// PaymentList
+	SettersMap.Insert("PaymentList.Partner" , "SetPaymentListPartner");
+	SettersMap.Insert("PaymentList.Payer"   , "SetPaymentListLegalName");
+	
+	// ItemList
+	SettersMap.Insert("ItemList.ItemKey"            , "SetItemListItemKey");
+	SettersMap.Insert("ItemList.Unit"               , "SetItemListUnit");
+	SettersMap.Insert("ItemList.PriceType"          , "SetItemListPriceType");
+	SettersMap.Insert("ItemList.Price"              , "SetItemListPrice");
+	SettersMap.Insert("ItemList.DontCalculateRow"   , "SetItemListDontCalculateRow");
+	SettersMap.Insert("ItemList.Quantity"           , "SetItemListQuantity");
+	SettersMap.Insert("ItemList.Store"              , "SetItemListStore");
+	SettersMap.Insert("ItemList.DeliveryDate"       , "SetItemListDeliveryDate");
+	SettersMap.Insert("ItemList.QuantityInBaseUnit" , "SetItemListQuantityInBaseUnit");
 	Return SettersMap.Get(DataPath);
 EndFunction
 
@@ -191,18 +235,18 @@ EndProcedure
 #EndRegion
 
 Function GetAllBindings(Parameters)
-	Binding = New Map();
-	Binding.Insert("Company"   , CompanyStepsBinding(Parameters));
-	Binding.Insert("Account"   , AccountStepsBinding(Parameters));
-	Binding.Insert("Partner"   , PartnerStepsBinding(Parameters));
-	Binding.Insert("LegalName" , LegalNameStepsBinding(Parameters));
-	Binding.Insert("Currency"  , CurrencyStepsBinding(Parameters));
+	BindingMap = New Map();
+	BindingMap.Insert("Company"   , CompanyStepsBinding(Parameters));
+	BindingMap.Insert("Account"   , AccountStepsBinding(Parameters));
+	BindingMap.Insert("Partner"   , PartnerStepsBinding(Parameters));
+	BindingMap.Insert("LegalName" , LegalNameStepsBinding(Parameters));
+	BindingMap.Insert("Currency"  , CurrencyStepsBinding(Parameters));
 	
-	Binding.Insert("ItemList.Item"     , ItemListItemStepsBinding(Parameters));
-	Binding.Insert("ItemList.ItemKey"  , ItemListItemKeyStepsBinding(Parameters));
-	Binding.Insert("ItemList.Unit"     , ItemListUnitStepsBinding(Parameters));
-	Binding.Insert("ItemList.Quantity" , ItemListQuantityStepsBinding(Parameters));
-	Return Binding;
+	BindingMap.Insert("ItemList.Item"     , ItemListItemStepsBinding(Parameters));
+	BindingMap.Insert("ItemList.ItemKey"  , ItemListItemKeyStepsBinding(Parameters));
+	BindingMap.Insert("ItemList.Unit"     , ItemListUnitStepsBinding(Parameters));
+	BindingMap.Insert("ItemList.Quantity" , ItemListQuantityStepsBinding(Parameters));
+	Return BindingMap;
 EndFunction
 
 Function GetAllFillByDefault(Parameters)
@@ -413,96 +457,117 @@ EndProcedure
 
 #Region ACCOUNT_SENDER
 
-// Вызывается при изменении реквизита Sender в документе CashTransferOrder
+// AccountSender.OnChange
 Procedure AccountSenderOnChange(Parameters) Export
-	// процедура для запоминания значения реквизита перед изменением
 	ProceedPropertyBeforeChange_Object(Parameters);
-	
-	// Процедура OnSetAccountReceiverNotify_IsUserChange будет вызывана только если пользователь изменит реквизит
-	// при программом изменении вызывана не будет
 	AddViewNotify("OnSetAccountSenderNotify_IsUserChange", Parameters);
-	
-	// Запускаем процесс изменения документа
-	// Первым параметром указываем имя процедуры в которой включаем нужные шаги вычислений
-	ModelClientServer_V2.EntryPoint("AccountSenderStepsEnabler", Parameters);
+	Binding = AccountSenderStepsBinding(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
 EndProcedure
 
+// AccountSender.Set
+Procedure SetAccountSender(Parameters, Results) Export
+	Binding = AccountSenderStepsBinding(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// AccountSender.Bind
+Function AccountSenderStepsBinding(Parameters)
+	DataPath = "Sender";
+	Binding = New Structure();
+	Return BindSteps("AccountSenderStepsEnabler", DataPath, Binding, Parameters);
+EndFunction
+
 Procedure AccountSenderStepsEnabler(Parameters, Chain) Export
-	// При изменении реквизита Sender нужно изменить Currency
+	// ChangeCurrencyByAccount
 	Chain.ChangeCurrencyByAccount.Enable = True;
-	// Указывает процедуру SetSendCurrency, в нее будет передано расчитаное значение Currency 
 	Chain.ChangeCurrencyByAccount.Setter = "SetSendCurrency";
-	
-	// Для вычисления Currency нужно заполнить параметр Account
-	// значение лежит в реквизите Sender, читать из реквизитов нужно функцией GetPropertyObject()
 	Options = ModelClientServer_V2.ChangeCurrencyByAccountOptions();
 	Options.Account = GetPropertyObject(Parameters, "Sender");
-	// Currency которая уже указана в документе, нужна если в Account будет пустая Currency
 	Options.CurrentCurrency = GetPropertyObject(Parameters, "SendCurrency");
 	Chain.ChangeCurrencyByAccount.Options.Add(Options);
 EndProcedure
 
 #EndRegion
 
-#Region CURRENCY_SENDER
+#Region SEND_CURRENCY
 
-// При изменении реквизита SendCurrency изменений других реквизитов объекта не происходит
-// проэтому нет процедуры OnChange только SetSendCurrency, что бы можно было программно устанавливать значения
-
-// Устанавливает значение в реквизит SendCurrency
-Procedure SetSendCurrency(Parameters, Results) Export
-	// Процедура OnSetSendCurrencyNotify_IsProgrammChange 
-	// будет вызывана при программном изменении реквизита SendCurrency
-	
-	SetterObject(Undefined, "SendCurrency", Parameters, Results, "OnSetSendCurrencyNotify_IsProgrammChange");
+// SendCurrency.OnChange
+Procedure SendCurrencyOnChange(Parameters) Export
+	Binding = SendCurrencyStepsBinding(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
 EndProcedure
+
+// SendCurrency.Set
+Procedure SetSendCurrency(Parameters, Results) Export
+	Binding = SendCurrencyStepsBinding(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results, "OnSetSendCurrencyNotify_IsProgrammChange");
+EndProcedure
+
+// SendCurrency.Bind
+Function SendCurrencyStepsBinding(Parameters)
+	DataPath = "SendCurrency";
+	Binding = New Structure();
+	Return BindSteps("StepsEnablerEmpty", DataPath, Binding, Parameters);
+EndFunction
 
 #EndRegion
 
 #Region ACCOUNT_RECEIVER
 
-// Вызывается при изменении реквизита Receiver в документе CashTransferOrder
+// AccountReceiver.OnChange
 Procedure AccountReceiverOnChange(Parameters) Export
-	// процедура для запоминания значения реквизита перед изменением
 	ProceedPropertyBeforeChange_Object(Parameters);
-	
-	// Процедура OnSetAccountReceiverNotify_IsUserChange будет вызывана только если пользователь изменит реквизит
-	// при программом изменении вызывана не будет
 	AddViewNotify("OnSetAccountReceiverNotify_IsUserChange", Parameters);
-	
-	// Запускаем процесс изменения документа
-	// Первым параметром указываем имя процедуры в которой включаем нужные шаги вычислений
-	ModelClientServer_V2.EntryPoint("AccountReceiverStepsEnabler", Parameters);
+	Binding = AccountReceiverStepsBinding(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
 EndProcedure
 
+// AccountReceiver.Set
+Procedure SetAccountReceiver(Parameters, Results) Export
+	Binding = AccountReceiverStepsBinding(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// AccountReceiver.Bind
+Function AccountReceiverStepsBinding(Parameters)
+	DataPath = "Receiver";
+	Binding = New Structure();
+	Return BindSteps("AccountReceiverStepsEnabler", DataPath, Binding, Parameters);
+EndFunction
+
 Procedure AccountReceiverStepsEnabler(Parameters, Chain) Export
-	// При изменении реквизита Receiver нужно изменить Currency
+	// ChangeCurrencyByAccount
 	Chain.ChangeCurrencyByAccount.Enable = True;
-	// Указывает процедуру SetReceiveCurrency, в нее будет передано расчитаное значение Currency 
 	Chain.ChangeCurrencyByAccount.Setter = "SetReceiveCurrency";
-	
-	// Для вычисления Currency нужно заполнить параметр Account
-	// значение лежит в реквизите Receiver, читать из реквизитов нужно функцией GetPropertyObject()
 	Options = ModelClientServer_V2.ChangeCurrencyByAccountOptions();
 	Options.Account = GetPropertyObject(Parameters, "Receiver");
-	// Currency которая уже указана в документе, нужна если в Account будет пустая Currency
 	Options.CurrentCurrency = GetPropertyObject(Parameters, "ReceiveCurrency");
 	Chain.ChangeCurrencyByAccount.Options.Add(Options);
 EndProcedure
 
 #EndRegion
 
-#Region CURRENCY_RECEIVER
+#Region RECEIVE_CURRENCY
 
-// При изменении реквизита ReceiveCurrency изменений других реквизитов объекта не происходит
-// проэтому нет процедуры OnChange только SetReceiveCurrency, что бы можно было программно устанавливать значения
-
-// Устанавливает значение в реквизит ReceiveCurrency
-Procedure SetReceiveCurrency(Parameters, Results) Export
-	// Процедура OnSetReceiveCurrencyNotify_IsProgrammChange 
-	// будет вызывана при программном изменении реквизита ReceiveCurrency
-	SetterObject(Undefined, "ReceiveCurrency", Parameters, Results, "OnSetReceiveCurrencyNotify_IsProgrammChange");
+// ReceiveCurrency.OnChange
+Procedure ReceiveCurrencyOnChange(Parameters) Export
+	Binding = ReceiveCurrencyStepsBinding(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
 EndProcedure
+
+// ReceiveCurrency.Set
+Procedure SetReceiveCurrency(Parameters, Results) Export
+	Binding = ReceiveCurrencyStepsBinding(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results, "OnSetReceiveCurrencyNotify_IsProgrammChange");
+EndProcedure
+
+// ReceiveCurrency.Bind
+Function ReceiveCurrencyStepsBinding(Parameters)
+	DataPath = "ReceiveCurrency";
+	Binding = New Structure();
+	Return BindSteps("StepsEnablerEmpty", DataPath, Binding, Parameters);
+EndFunction
 
 #EndRegion
 
@@ -568,6 +633,7 @@ EndFunction
 
 // Date.OnChange
 Procedure DateOnChange(Parameters) Export
+	ProceedPropertyBeforeChange_Object(Parameters);
 	Binding = DateStepsBinding(Parameters);
 	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
 EndProcedure
@@ -769,7 +835,7 @@ EndFunction
 
 #EndRegion
 
-#Region DELIVERY_DATE
+#Region FORM_DELIVERY_DATE
 
 // DeliveryDate.OnChange
 Procedure DeliveryDateOnChange(Parameters) Export
@@ -889,7 +955,7 @@ EndProcedure
 
 #EndRegion
 
-#Region STORE
+#Region FORM_STORE
 
 // Store.OnChange
 Procedure StoreOnChange(Parameters) Export
@@ -1246,7 +1312,7 @@ EndProcedure
 
 #EndRegion
 
-#Region PAYMENT_TERMS
+#Region TABLE_PAYMENT_TERMS
 
 // PaymentTerms.Set
 Procedure SetPaymentTerms(Parameters, Results) Export
@@ -1289,10 +1355,25 @@ EndFunction
 
 #Region MANAGER_SEGMENT
 
-Procedure SetManagerSegment(Parameters, Results) Export
-	SetterObject(Undefined, "ManagerSegment", Parameters, Results);
+// ManagerSegment.OnChange
+Procedure ManagerSegmentOnChange(Parameters) Export
+	Binding = ManagerSegmentStepsBinding(Parameters);
+	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
 EndProcedure
-	
+
+// ManagerSegment.Set
+Procedure SetManagerSegment(Parameters, Results) Export
+	Binding = ManagerSegmentStepsBinding(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
+// ManagerSegment.Bind
+Function ManagerSegmentStepsBinding(Parameters)
+	DataPath = "ManagerSegment";
+	Binding = New Structure();
+	Return BindSteps("StepsEnablerEmpty", DataPath, Binding, Parameters);
+EndFunction
+
 #EndRegion
 
 #Region PRICE_INCLUDE_TAX
@@ -1622,7 +1703,7 @@ Procedure SetItemListPrice(Parameters, Results) Export
 	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
 EndProcedure
 
-// ItemList.PriceType.Bind
+// ItemList.Price.Bind
 Function ItemListPriceStepsBinding(Parameters)
 	DataPath = "ItemList.Price";
 	Binding = New Structure();
@@ -1763,12 +1844,13 @@ EndProcedure
 // TaxRate.Set
 Procedure SetItemListTaxRate(Parameters, Results) Export
 	Binding = ItemListTaxRateStepsBinding(Parameters);
+	ReadOnlyFromCache = Not Parameters.FormIsExists;
 	For Each Result In Results Do
 		For Each TaxRate In Result.Value Do
 			TaxRateResult = New Array();
 			TaxRateResult.Add(New Structure("Value, Options", TaxRate.Value, Result.Options));
-			SetterObject(Binding.StepsEnabler, Binding.DataPath + TaxRate.Key, Parameters, TaxRateResult);
-			
+			SetterObject(Binding.StepsEnabler, Binding.DataPath + TaxRate.Key,
+				Parameters, TaxRateResult, , , ,ReadOnlyFromCache);
 		EndDo;
 	EndDo;
 EndProcedure
@@ -1776,8 +1858,12 @@ EndProcedure
 // TaxRate.Get
 Function GetItemListTaxRate(Parameters, Row)
 	TaxRates = New Structure();
+	// когда нет формы то колонки со ставками налогов только в кэше
+	// потому что колонки со ставками налога это реквизиты формы
+	ReadOnlyFromCache = Not Parameters.FormIsExists;
 	For Each TaxRate In Row.TaxRates Do
-		TaxRates.Insert(TaxRate.Key, GetPropertyObject(Parameters, "ItemList."+TaxRate.Key, Row.Key));
+		TaxRates.Insert(TaxRate.Key, 
+			GetPropertyObject(Parameters, "ItemList."+TaxRate.Key, Row.Key, ReadOnlyFromCache));
 	EndDo;
 	Return TaxRates;
 EndFunction
@@ -2120,16 +2206,16 @@ Function GetRows(Parameters, TableName)
 EndFunction
 
 Procedure SetterForm(StepsEnablerName, DataPath, Parameters, Results, 
-	ViewNotify = Undefined, ValueDataPath = Undefined, NotifyAnyWay = False)
-	Setter("Form", StepsEnablerName, DataPath, Parameters, Results, ViewNotify, ValueDataPath, NotifyAnyWay);
+	ViewNotify = Undefined, ValueDataPath = Undefined, NotifyAnyWay = False, ReadOnlyFromCache = False)
+	Setter("Form", StepsEnablerName, DataPath, Parameters, Results, ViewNotify, ValueDataPath, NotifyAnyWay, ReadOnlyFromCache);
 EndProcedure
 
 Procedure SetterObject(StepsEnablerName, DataPath, Parameters, Results, 
-	ViewNotify = Undefined, ValueDataPath = Undefined, NotifyAnyWay = False)
-	Setter("Object", StepsEnablerName, DataPath, Parameters, Results, ViewNotify, ValueDataPath, NotifyAnyWay);
+	ViewNotify = Undefined, ValueDataPath = Undefined, NotifyAnyWay = False, ReadOnlyFromCache = False)
+	Setter("Object", StepsEnablerName, DataPath, Parameters, Results, ViewNotify, ValueDataPath, NotifyAnyWay, ReadOnlyFromCache);
 EndProcedure
 
-Procedure Setter(Source, StepsEnablerName, DataPath, Parameters, Results, ViewNotify, ValueDataPath, NotifyAnyWay)
+Procedure Setter(Source, StepsEnablerName, DataPath, Parameters, Results, ViewNotify, ValueDataPath, NotifyAnyWay, ReadOnlyFromCache)
 	IsChanged = False;
 	For Each Result In Results Do
 		_Key   = Result.Options.Key;
@@ -2138,18 +2224,22 @@ Procedure Setter(Source, StepsEnablerName, DataPath, Parameters, Results, ViewNo
 		Else
 			_Value = Result.Value;
 		EndIf;
-		If Source = "Object" And SetPropertyObject(Parameters, DataPath, _Key, _Value) Then
+		If Source = "Object" And SetPropertyObject(Parameters, DataPath, _Key, _Value, ReadOnlyFromCache) Then
 			IsChanged = True;
 		EndIf;
-		If Source = "Form" And SetPropertyForm(Parameters, DataPath, _Key, _Value) Then
+		If Source = "Form" And SetPropertyForm(Parameters, DataPath, _Key, _Value, ReadOnlyFromCache) Then
 			IsChanged = True;
 		EndIf;
 	EndDo;
 	If IsChanged Or NotifyAnyWay Then
 		AddViewNotify(ViewNotify, Parameters);
 	EndIf;
-	If IsChanged And ValueIsFilled(StepsEnablerName) Then
-		ModelClientServer_V2.EntryPoint(StepsEnablerName, Parameters);
+	If ValueIsFilled(StepsEnablerName) Then
+		// свойство изменено и есть следующие шаги
+		// или свойство не изменено но если оно ReadOnly, то вызовем его следующие шаги
+		If IsChanged Or Parameters.ReadOnlyPropertiesMap.Get(DataPath) <> Undefined Then
+			ModelClientServer_V2.EntryPoint(StepsEnablerName, Parameters);
+		EndIf;
 	EndIf;
 EndProcedure
 
@@ -2161,20 +2251,20 @@ Procedure AddViewNotify(ViewNotify, Parameters)
 	EndIf;
 EndProcedure
 
-Function GetPropertyForm(Parameters, DataPath, Key = Undefined)
+Function GetPropertyForm(Parameters, DataPath, Key = Undefined, ReadOnlyFromCache = False)
 If Parameters.Form <> Undefined Then
-	Return GetProperty(Parameters.CacheForm, Parameters.Form, DataPath, Key);
+	Return GetProperty(Parameters.CacheForm, Parameters.Form, DataPath, Key, ReadOnlyFromCache);
 Else
 	Return Undefined;
 EndIf;
 EndFunction
 
-Function GetPropertyObject(Parameters, DataPath, Key = Undefined)
-	Return GetProperty(Parameters.Cache, Parameters.Object, DataPath, Key);
+Function GetPropertyObject(Parameters, DataPath, Key = Undefined, ReadOnlyFromCache = False)
+	Return GetProperty(Parameters.Cache, Parameters.Object, DataPath, Key, ReadOnlyFromCache);
 EndFunction
 
 // параметр Key используется когда DataPath указывает на реквизит табличной части, например ItemList.PriceType
-Function GetProperty(Cache, Source, DataPath, Key)
+Function GetProperty(Cache, Source, DataPath, Key, ReadOnlyFromCache)
 	Segments = StrSplit(DataPath, ".");
 	If Segments.Count() = 1 Then // это реквизит шапки, он указывается без точки, например Company
 		If ValueIsFilled(Key) Then
@@ -2183,6 +2273,9 @@ Function GetProperty(Cache, Source, DataPath, Key)
 		If Cache.Property(DataPath) Then
 			Return Cache[DataPath];
 		Else
+			If ReadOnlyFromCache Then
+				Return Undefined;
+			EndIf;
 			Return Source[DataPath];
 		EndIf;
 	ElsIf Segments.Count() = 2 Then // это реквизит табличной части, состоит из двух частей разделенных точкой ItemList.PriceType
@@ -2201,7 +2294,11 @@ Function GetProperty(Cache, Source, DataPath, Key)
 				EndIf;
 			EndDo;
 		EndIf;
+		// не нашли в кэше
 		If RowByKey = Undefined Then
+			If ReadOnlyFromCache Then
+				Return Undefined;
+			EndIf;
 			ArrayRowsByKey = Source[TableName].FindRows(New Structure("Key", Key));
 			If ArrayRowsByKey.Count() <> 1 Then
 				Raise StrTemplate("Found not 1 row by key [%1]", Key);
@@ -2215,8 +2312,13 @@ Function GetProperty(Cache, Source, DataPath, Key)
 	EndIf;
 EndFunction
 
-Function SetPropertyObject(Parameters, DataPath, _Key, _Value)
-	CurrentValue = GetPropertyObject(Parameters, DataPath, _Key);
+Function SetPropertyObject(Parameters, DataPath, _Key, _Value, ReadOnlyFromCache = False)
+	// если свойство ReadOnly, то ничего не меняем в нем
+	If Parameters.ReadOnlyPropertiesMap.Get(DataPath) <> Undefined Then
+		Return False; // Свойство ReadOnly
+	EndIf;
+	
+	CurrentValue = GetPropertyObject(Parameters, DataPath, _Key, ReadOnlyFromCache);
 	If ?(ValueIsFilled(CurrentValue), CurrentValue, Undefined) = ?(ValueIsFilled(_Value), _Value, Undefined) Then
 		Return False; // Свойство не изменилось
 	EndIf;
@@ -2228,8 +2330,8 @@ Function SetPropertyObject(Parameters, DataPath, _Key, _Value)
 	Return IsChanged;
 EndFunction
 
-Function SetPropertyForm(Parameters, DataPath, _Key, _Value)
-	CurrentValue = GetPropertyForm(Parameters, DataPath, _Key);
+Function SetPropertyForm(Parameters, DataPath, _Key, _Value, ReadOnlyFromCache = False)
+	CurrentValue = GetPropertyForm(Parameters, DataPath, _Key, ReadOnlyFromCache);
 	If ?(ValueIsFilled(CurrentValue), CurrentValue, Undefined) = ?(ValueIsFilled(_Value), _Value, Undefined) Then
 		Return False; // Свойство не изменилось
 	EndIf;

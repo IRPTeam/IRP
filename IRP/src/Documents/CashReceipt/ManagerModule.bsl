@@ -341,7 +341,7 @@ Function R3010B_CashOnHand()
 		   |FROM
 		   |	PaymentList AS PaymentList
 		   |WHERE
-		   |	TRUE1 ";
+		   |	TRUE";
 EndFunction
 
 Function R3015B_CashAdvance()

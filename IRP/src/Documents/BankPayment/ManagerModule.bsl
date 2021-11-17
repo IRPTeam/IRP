@@ -554,10 +554,7 @@ Function R3010B_CashOnHand()
 		   |FROM
 		   |	PaymentList AS PaymentList
 		   |WHERE
-		   |	PaymentList.IsPaymentToVendor
-		   |	OR PaymentList.IsCurrencyExchange
-		   |	OR PaymentList.IsCashTransferOrder
-		   |	OR PaymentList.IsReturnToCustomer";
+		   |	TRUE";
 EndFunction
 
 Function R3035T_CashPlanning()

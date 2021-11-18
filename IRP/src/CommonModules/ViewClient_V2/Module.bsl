@@ -252,8 +252,19 @@ EndProcedure
 Function NeedCommitChangesItemListStoreOnUserChange(Parameters)
 	If Parameters.Cache.Property("ItemList") Then
 		For Each Row In Parameters.Cache.ItemList Do
-			If Row.Property("Store") And Not ValueIsFilled(Row.Store) Then
-				Return False;
+			
+			IsService = False;
+			If Parameters.ExtractedData.Property("DataItemKeyIsService") Then
+				For Each RowData In Parameters.ExtractedData.DataItemKeyIsService Do
+					If RowData.Key = Row.Key Then
+						IsService = RowData.IsService;
+						Break;
+					EndIf;
+				EndDo;
+			EndIf;
+			
+			If Row.Property("Store") And Not ValueIsFilled(Row.Store) And Not IsService Then
+				Return False; // очистка ItemList.Store невозможна
 			EndIf;
 		EndDo;
 	EndIf;

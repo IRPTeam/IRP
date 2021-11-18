@@ -61,6 +61,7 @@ Function CreateParameters(ServerParameters, FormParameters)
 	Parameters.Insert("EventCaller"      , FormParameters.EventCaller);
 	Parameters.Insert("TaxesCache"       , FormParameters.TaxesCache);
 	Parameters.Insert("ChangedData"      , New Map());
+	Parameters.Insert("ExtractedData"    , New Structure());
 	
 	Parameters.Insert("PropertyBeforeChange", FormParameters.PropertyBeforeChange);
 	
@@ -309,6 +310,7 @@ Procedure OnCreateAtServerStepsEnabler_WithTaxes(Parameters, Chain) Export
 	Options.Date           = GetPropertyObject(Parameters, "Date");
 	Options.Company        = GetPropertyObject(Parameters, "Company");
 	Options.ArrayOfTaxInfo = Parameters.ArrayOfTaxInfo;
+	Options.FormTaxColumnsExists = Parameters.FormTaxColumnsExists;
 	Chain.RequireCallCreateTaxesFormControls.Options.Add(Options);
 	
 	// при копировании документа нужно перерасчитать TaxAmount
@@ -765,6 +767,7 @@ Procedure CompanyStepsEnabler_WithTaxes(Parameters, Chain) Export
 	Options.Date           = GetPropertyObject(Parameters, "Date");
 	Options.Company        = GetPropertyObject(Parameters, "Company");
 	Options.ArrayOfTaxInfo = Parameters.ArrayOfTaxInfo;
+	Options.FormTaxColumnsExists = Parameters.FormTaxColumnsExists;
 	Chain.RequireCallCreateTaxesFormControls.Options.Add(Options);
 EndProcedure
 
@@ -1164,15 +1167,17 @@ Procedure ItemListStoreDefault_HaveAgreementInHeader(Parameters, Chain) Export
 EndProcedure
 
 Procedure ItemListStoreStepsEnabler_HaveStoreInHeader(Parameters, Chain) Export
-	// В шапке документа есть реквизит Store
+	// ChangeStoreInHeaderByStoresInList
 	Chain.ChangeStoreInHeaderByStoresInList.Enable = True;
 	Chain.ChangeStoreInHeaderByStoresInList.Setter = "SetStore";
 	
-	// нужно взять все строки в табличной части ItemList из строк получить Store
 	Options = ModelClientServer_V2.ChangeStoreInHeaderByStoresInListOptions();
 	ArrayOfStoresInList = New Array();
 	For Each Row In Parameters.Object.ItemList Do
-		ArrayOfStoresInList.Add(GetPropertyObject(Parameters, "ItemList.Store", Row.Key));
+		NewRow = New Structure();
+		NewRow.Insert("Store"   , GetPropertyObject(Parameters, "ItemList.Store", Row.Key));
+		NewRow.Insert("ItemKey" , GetPropertyObject(Parameters, "ItemList.ItemKey", Row.Key));
+		ArrayOfStoresInList.Add(NewRow);
 	EndDo;
 	Options.ArrayOfStoresInList = ArrayOfStoresInList; 
 	Chain.ChangeStoreInHeaderByStoresInList.Options.Add(Options);
@@ -1185,15 +1190,34 @@ Procedure ItemListStoreStepsEnabler_HaveUseShipmentConfirmationInList(Parameters
 	Chain.ChangeUseShipmentConfirmationByStore.Enable = True;
 	Chain.ChangeUseShipmentConfirmationByStore.Setter = "SetItemListUseShipmentConfirmation";
 	
-//	Chain.ExtractDataItemKeyIsService.Enable = True;
-//	Chain.ExtractDataItemKeyIsService.Enable = True;
+	// ExtractDataItemKeyIsService
+	Chain.ExtractDataItemKeyIsService.Enable = True;
+	Chain.ExtractDataItemKeyIsService.Setter = "SetExtractDataItemKeyIsService";
 	
 	For Each Row In GetRows(Parameters, "ItemList") Do
+		// ChangeUseShipmentConfirmationByStore
 		Options = ModelClientServer_V2.ChangeUseShipmentConfirmationByStoreOptions();
 		Options.Store   = GetPropertyObject(Parameters, "ItemList.Store", Row.Key);
 		Options.ItemKey = GetPropertyObject(Parameters, "ItemList.ItemKey", Row.Key);
 		Options.Key = Row.Key;
 		Chain.ChangeUseShipmentConfirmationByStore.Options.Add(Options);
+		
+		// ExtractDataItemKeyIsService
+		Options = ModelClientServer_V2.ExtractDataItemKeyIsServiceOptions();
+		Options.ItemKey = GetPropertyObject(Parameters, "ItemList.ItemKey", Row.Key);
+		Options.IsUserChange = IsUserChange(Parameters);
+		Options.Key = Row.Key;
+		Chain.ExtractDataItemKeyIsService.Options.Add(Options);
+	EndDo;
+EndProcedure
+
+Procedure SetExtractDataItemKeyIsService(Parameters, Results) Export
+	Parameters.ExtractedData.Insert("DataItemKeyIsService", New Array());
+	For Each Result In Results Do
+		NewRow = New Structure();
+		NewRow.Insert("Key"       , Result.Options.Key);
+		NewRow.Insert("IsService" , Result.Value);
+		Parameters.ExtractedData.DataItemKeyIsService.Add(NewRow);
 	EndDo;
 EndProcedure
 

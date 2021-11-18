@@ -130,6 +130,10 @@ Function GetChain()
 	Chain.Insert("ChangeTaxAmountAsManualAmount", GetChainLink("ChangeTaxAmountAsManualAmountExecute"));
 	Chain.Insert("Calculations" , GetChainLink("CalculationsExecute"));
 	Chain.Insert("UpdatePaymentTerms" , GetChainLink("UpdatePaymentTermsExecute"));
+	
+	// Extractors
+	Chain.Insert("ExtractDataItemKeyIsService" , GetChainLink("ExtractDataItemKeyIsServiceExecute"));
+	
 	Return Chain;
 EndFunction
 
@@ -694,9 +698,13 @@ EndFunction
 Function ChangeStoreInHeaderByStoresInListExecute(Options) Export
 	// сделаем массив с кладов только с уникальными значениями
 	ArrayOfStoresUnique = New Array();
-	For Each Store In Options.ArrayOfStoresInList Do
-		If ArrayOfStoresUnique.Find(Store) = Undefined Then
-			ArrayOfStoresUnique.Add(Store);
+	For Each Row In Options.ArrayOfStoresInList Do
+		IsService = ModelServer_V2.ExtractDataItemKeyIsServiceServerImp(Row.ItemKey);
+		If IsService Then
+			Continue;
+		EndIf;
+		If ArrayOfStoresUnique.Find(Row.Store) = Undefined Then
+			ArrayOfStoresUnique.Add(Row.Store);
 		EndIf;
 	EndDo;
 	If ArrayOfStoresUnique.Count() = 1 Then
@@ -706,6 +714,17 @@ Function ChangeStoreInHeaderByStoresInListExecute(Options) Export
 	EndIf;
 EndFunction
 
+Function ExtractDataItemKeyIsServiceOptions() Export
+	Return GetChainLinkOptions("ItemKey, IsUserChange");
+EndFunction
+
+Function ExtractDataItemKeyIsServiceExecute(Options) Export
+	If Not Options.IsUserChange = True Then
+		Return Undefined;
+	EndIf;
+	Return ModelServer_V2.ExtractDataItemKeyIsServiceServerImp(Options.Itemkey);
+EndFunction
+	
 #EndRegion
 
 #Region TAXES
@@ -723,11 +742,14 @@ EndFunction
 
 // TaxesCache - строка XML из реквизита формы
 Function RequireCallCreateTaxesFormControlsOptions() Export
-	Return GetChainLinkOptions("Ref, Date, Company, ArrayOfTaxInfo");
+	Return GetChainLinkOptions("Ref, Date, Company, ArrayOfTaxInfo, FormTaxColumnsExists");
 EndFunction
 
 // возвращает true если нужно создать элементы формы для отображения налогов
 Function RequireCallCreateTaxesFormControlsExecute(Options) Export
+	If Not Options.FormTaxColumnsExists = True Then
+		Return True; // на форме нет колонок надо создавать
+	EndIf;
 	If Not Options.ArrayOfTaxInfo.Count() Then
 		Return True; // кэш пустой надо создавать колонки
 	EndIf;

@@ -166,22 +166,27 @@ EndFunction
 
 #IF Client THEN
 
-Procedure FillPropertyFormByDefault(Form, DataPath, Parameters) Export
+Procedure FillPropertyFormByDefault(Form, DataPaths, Parameters) Export
+	ArrayOfDataPath = StrSplit(DataPaths, ",");
+	
 	Bindings = GetAllBindings(Parameters);
 	Defaults = GetAllFillByDefault(Parameters);
 	
-	Default = Defaults.Get(DataPath);
-	If Default<> Undefined Then
-		ForceCommintChanges = False;
-		ModelClientServer_V2.EntryPoint(Default.StepsEnabler, Parameters);
-	ElsIf ValueIsFilled(Form[DataPath]) Then
+	For Each DataPath In ArrayOfDataPath Do
+		DataPath = TrimAll(DataPath);
+		Default = Defaults.Get(DataPath);
+		If Default<> Undefined Then
+			ForceCommintChanges = False;
+			ModelClientServer_V2.EntryPoint(Default.StepsEnabler, Parameters);
+		ElsIf ValueIsFilled(Form[DataPath]) Then
 			SetPropertyForm(Parameters, DataPath, , Form[DataPath]);
 			Binding = Bindings.Get(DataPath);
 			If Binding <> Undefined Then
 				ForceCommintChanges = False;
 				ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
 			EndIf;
-	EndIf;
+		EndIf;
+	EndDo;
 	If ForceCommintChanges Then
 		CommitChainChanges(Parameters);
 	EndIf;

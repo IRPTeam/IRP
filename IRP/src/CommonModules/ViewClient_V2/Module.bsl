@@ -510,7 +510,7 @@ Procedure OnOpen(Object, Form, TableNames) Export
 	UpdateCacheBeforeChange(Object, Form);
 	For Each TableName In StrSplit(TableNames, ",") Do
 		Parameters = GetSimpleParameters(Object, Form, TrimAll(TableName));
-		ControllerClientServer_V2.FillPropertyFormByDefault(Form,  "Store", Parameters);
+		ControllerClientServer_V2.FillPropertyFormByDefault(Form, "Store, DeliveryDate", Parameters);
 		ControllerClientServer_V2.FormOnOpen(Parameters);
 	EndDo;
 EndProcedure

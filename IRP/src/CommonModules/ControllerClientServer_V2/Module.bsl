@@ -121,7 +121,7 @@ Function CreateParameters(ServerParameters, FormParameters)
 		
 		// налоги
 		ArrayOfRowsTaxList = New Array();
-		If ObjectMetadataInfo.Property("TaxListColumns") Then
+		If ObjectMetadataInfo.Tables.Property("TaxList") Then
 			For Each TaxRow In ServerParameters.Object.TaxList.FindRows(New Structure("Key", Row.Key)) Do
 				NewRowTaxList = New Structure(ObjectMetadataInfo.Tables.TaxList.Columns);
 				FillPropertyValues(NewRowTaxList, TaxRow);
@@ -136,9 +136,17 @@ Function CreateParameters(ServerParameters, FormParameters)
 				TaxRates.Insert(ItemOfTaxInfo.Name, Row[ItemOfTaxInfo.Name]);
 			Else
 			// создадим псевдо колонки для ставок налога
-			// заполнены будут значениями по умолчанию
 				NewRow.Insert(ItemOfTaxInfo.Name);
-				TaxRates.Insert(ItemOfTaxInfo.Name);
+				
+				// ставки налогов берем из таблицы TaxList
+				TaxRate = Undefined;
+				For Each TaxRow In ArrayOfRowsTaxList Do
+					If TaxRow.Tax = ItemOfTaxInfo.Tax Then
+						TaxRate = TaxRow.TaxRate;
+						Break;
+					EndIf;
+				EndDo;
+				TaxRates.Insert(ItemOfTaxInfo.Name, TaxRate);
 			EndIf;
 		EndDo;
 		
@@ -1862,8 +1870,12 @@ Function GetItemListTaxRate(Parameters, Row)
 	// потому что колонки со ставками налога это реквизиты формы
 	ReadOnlyFromCache = Not Parameters.FormIsExists;
 	For Each TaxRate In Row.TaxRates Do
-		TaxRates.Insert(TaxRate.Key, 
-			GetPropertyObject(Parameters, "ItemList."+TaxRate.Key, Row.Key, ReadOnlyFromCache));
+		If ReadOnlyFromCache And ValueIsFilled(TaxRate.Value) Then
+			TaxRates.Insert(TaxRate.Key, TaxRate.Value);
+		Else
+			TaxRates.Insert(TaxRate.Key, 
+				GetPropertyObject(Parameters, "ItemList."+TaxRate.Key, Row.Key, ReadOnlyFromCache));
+		EndIf;
 	EndDo;
 	Return TaxRates;
 EndFunction
@@ -1889,12 +1901,31 @@ Procedure ItemListTaxAmountOnChange(Parameters) Export
 	ModelClientServer_V2.EntryPoint(Binding.StepsEnabler, Parameters);
 EndProcedure
 
+// ItemList.TaxAmount.Set
+Procedure SetItemListTaxAmount(Parameters, Results) Export
+	Binding = ItemListTaxAmountStepsBinding(Parameters);
+	SetterObject(Binding.StepsEnabler, Binding.DataPath, Parameters, Results);
+EndProcedure
+
 // ItemList.TaxAmount.Bind
 Function ItemListTaxAmountStepsBinding(Parameters)
 	DataPath = "ItemList.TaxAmount";
 	Binding = New Structure();
-	Return BindSteps("StepsEnablerEmpty", DataPath, Binding, Parameters);
+	Return BindSteps("ItemListTaxAmountStepsEnabler", DataPath, Binding, Parameters);
 EndFunction
+
+Procedure ItemListTaxAmountStepsEnabler(Parameters, Chain) Export
+	ItemListEnableCalculations(Parameters, Chain, "IsTaxAmountChanged");
+	Chain.ChangeTaxAmountAsManualAmount.Enable = True;
+	Chain.ChangeTaxAmountAsManualAmount.Setter = "SetItemListTaxAmount";
+	For Each Row In GetRows(Parameters, "ItemList") Do
+		Options = ModelClientServer_V2.ChangeTaxAmountAsManualAmountOptions();
+		Options.TaxAmount = GetPropertyObject(Parameters, "ItemList.TaxAmount", Row.Key);
+		Options.TaxList   = Row.TaxList;
+		Options.Key       = Row.Key;
+		Chain.ChangeTaxAmountAsManualAmount.Options.Add(Options);
+	EndDo;
+EndProcedure
 
 #EndRegion
 
@@ -1971,6 +2002,10 @@ Procedure ItemListEnableCalculations(Parameters, Chain, WhoIsChanged)
 			Options.CalculateTaxAmountReverse.Enable   = True;
 			Options.CalculateNetAmountAsTotalAmountMinusTaxAmount.Enable   = True;
 			Options.CalculatePriceByTotalAmount.Enable = True;
+		ElsIf WhoIsChanged = "IsTaxAmountChanged" Then
+			Options.CalculateNetAmount.Enable   = True;
+			Options.CalculateTotalAmount.Enable = True;
+			Options.CalculateTaxAmount.Enable   = True;
 		EndIf;
 		
 		Options.AmountOptions.DontCalculateRow = GetPropertyObject(Parameters, "ItemList.DontCalculateRow", Row.Key);
@@ -2237,8 +2272,12 @@ Procedure Setter(Source, StepsEnablerName, DataPath, Parameters, Results, ViewNo
 	If ValueIsFilled(StepsEnablerName) Then
 		// свойство изменено и есть следующие шаги
 		// или свойство не изменено но если оно ReadOnly, то вызовем его следующие шаги
-		If IsChanged Or Parameters.ReadOnlyPropertiesMap.Get(DataPath) <> Undefined Then
+		If IsChanged Then
 			ModelClientServer_V2.EntryPoint(StepsEnablerName, Parameters);
+		ElsIf Parameters.ReadOnlyPropertiesMap.Get(DataPath) = True Then
+			Parameters.ReadOnlyPropertiesMap.Insert(DataPath, False);
+			ModelClientServer_V2.EntryPoint(StepsEnablerName, Parameters);
+			
 		EndIf;
 	EndIf;
 EndProcedure

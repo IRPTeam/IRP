@@ -3,6 +3,9 @@
 
 Procedure EntryPoint(StepsEnablerName, Parameters) Export
 	InitEntryPoint(StepsEnablerName, Parameters);
+	If Parameters.ModelInveronment.StepsEnablerNameCounter.Find(StepsEnablerName) <> Undefined Then
+		a=1;//Return;
+	EndIf;
 	Parameters.ModelInveronment.StepsEnablerNameCounter.Add(StepsEnablerName);
 	
 #IF Client THEN
@@ -127,6 +130,7 @@ Function GetChain()
 	Chain.Insert("ChangePaymentTermsByAgreement" , GetChainLink("ChangePaymentTermsByAgreementExecute"));	
 	Chain.Insert("RequireCallCreateTaxesFormControls", GetChainLink("RequireCallCreateTaxesFormControlsExecute"));
 	Chain.Insert("ChangeTaxRate", GetChainLink("ChangeTaxRateExecute"));
+	Chain.Insert("ChangeTaxAmountAsManualAmount", GetChainLink("ChangeTaxAmountAsManualAmountExecute"));
 	Chain.Insert("Calculations" , GetChainLink("CalculationsExecute"));
 	Chain.Insert("UpdatePaymentTerms" , GetChainLink("UpdatePaymentTermsExecute"));
 	Return Chain;
@@ -709,6 +713,17 @@ EndFunction
 
 #Region TAXES
 
+Function ChangeTaxAmountAsManualAmountOptions() Export
+	Return GetChainLinkOptions("TaxAmount, TaxList");
+EndFunction
+
+Function ChangeTaxAmountAsManualAmountExecute(Options) Export
+	For Each Row In Options.TaxList Do
+		Row.ManualAmount = Options.TaxAmount;
+	EndDo;
+	Return Options.TaxAmount;
+EndFunction
+
 // TaxesCache - строка XML из реквизита формы
 Function RequireCallCreateTaxesFormControlsOptions() Export
 	Return GetChainLinkOptions("Ref, Date, Company, ArrayOfTaxInfo");
@@ -1061,16 +1076,20 @@ Procedure CalculateTaxAmount(Options, TaxOptions, Result, IsReverse, IsManualPri
 					And RowTaxList.Analytics = NewTax.Analytics
 					And RowTaxList.TaxRate = NewTax.TaxRate Then
 					
+					RowTaxList_ManualAmount = Round(RowTaxList.ManualAmount, 2);
+					RowTaxList_Amount       = Round(RowTaxList.Amount, 2);
+					NewTax_Amount           = Round(NewTax.Amount, 2);
+					
 					IsRowExists = True;
 					If IsManualPriority Then
-						ManualAmount = ?(RowTaxList.ManualAmount = RowTaxList.Amount, NewTax.Amount, RowTaxList.ManualAmount);
+						ManualAmount = ?(RowTaxList_ManualAmount = RowTaxList_Amount, NewTax_Amount, RowTaxList_ManualAmount);
 					Else
-						ManualAmount = ?(RowTaxList.Amount = NewTax.Amount, RowTaxList.ManualAmount, NewTax.Amount);
+						ManualAmount = ?(RowTaxList_Amount = NewTax_Amount, RowTaxList_ManualAmount, NewTax_Amount);
 					EndIf;
 				EndIf;
 			EndDo;
 			If Not IsRowExists Then
-				ManualAmount = NewTax.Amount;
+				ManualAmount = Round(NewTax.Amount, 2);
 			EndIf;
 			
 			NewTax.Insert("ManualAmount", ManualAmount);

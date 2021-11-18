@@ -52,6 +52,9 @@ IsUsedNewFunctionality = TypeOf(Source) = Type("DocumentObject.IncomingPaymentOr
 	For Each TableName In ArrayOfMainTables Do
 		
 		For Each PropertyName In ArrayOfProperties Do
+			If Not ValueIsFilled(PropertyName) Then
+				Continue;
+			EndIf;
 			DataPath = StrSplit(PropertyName, ".");
 			If DataPath.Count() = 1 Then // для табличных частей пока не реализовано
 				Property = New Structure("DataPath", TrimAll(DataPath[0]));

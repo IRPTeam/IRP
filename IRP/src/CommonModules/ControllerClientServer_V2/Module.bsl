@@ -51,6 +51,8 @@ Function CreateParameters(ServerParameters, FormParameters)
 	// параметры для Client 
 	Parameters.Insert("Form"             , FormParameters.Form);
 	Parameters.Insert("FormIsExists"     , FormParameters.Form <> Undefined);
+	Parameters.Insert("FormTaxColumnsExists", FormParameters.Form <> Undefined 
+		And ValueIsFilled(FormParameters.TaxesCache));
 	Parameters.Insert("FormModificators" , New Array());
 	Parameters.Insert("CacheForm"        , New Structure()); // кэш для реквизитов формы
 	Parameters.Insert("ViewNotify"       , New Array());
@@ -78,9 +80,7 @@ Function CreateParameters(ServerParameters, FormParameters)
 	
 	// таблицы для которых нужно получить колонки
 	ArrayOfTableNames = New Array();
-	//If ServerParameters.TableName <> Undefined Then
-		ArrayOfTableNames.Add(ServerParameters.TableName);
-	//EndIf;	
+	ArrayOfTableNames.Add(ServerParameters.TableName);
 	ArrayOfTableNames.Add("TaxList");
 	
 	// MetadataName
@@ -90,19 +90,17 @@ Function CreateParameters(ServerParameters, FormParameters)
 	Parameters.Insert("ObjectMetadataInfo", ObjectMetadataInfo);
 	Parameters.Insert("TaxListIsExists", ObjectMetadataInfo.Tables.Property("TaxList"));
 	
+	
 	Parameters.Insert("ArrayOfTaxInfo", New Array());
-	If Parameters.FormIsExists Then
-		If ValueIsFilled(FormParameters.TaxesCache) Then
+	If Parameters.TaxListIsExists Then
+		If Parameters.FormTaxColumnsExists Then
 			DeserializedCache = CommonFunctionsServer.DeserializeXMLUseXDTO(Parameters.TaxesCache);
 			Parameters.ArrayOfTaxInfo = DeserializedCache.ArrayOfTaxInfo;
-		EndIf;
-	Else
-		If Parameters.TaxListIsExists Then
+		Else
 			Parameters.ArrayOfTaxInfo = TaxesServer._GetArrayOfTaxInfo(ServerParameters.Object,
 				ServerParameters.Object.Date, ServerParameters.Object.Company);
 		EndIf;
 	EndIf;
-	
 	
 	// если не переданы конкретные строки то используем все что есть в таблице c именем TableName
 	If ServerParameters.Rows = Undefined And ValueIsFilled(ServerParameters.TableName) Then
@@ -134,7 +132,7 @@ Function CreateParameters(ServerParameters, FormParameters)
 		TaxRates = New Structure();
 		For Each ItemOfTaxInfo In Parameters.ArrayOfTaxInfo Do
 			// когда нет формы то нет и колонки созданной программно
-			If Parameters.FormIsExists Then
+			If Parameters.FormTaxColumnsExists Then
 				TaxRates.Insert(ItemOfTaxInfo.Name, Row[ItemOfTaxInfo.Name]);
 			Else
 			// создадим псевдо колонки для ставок налога
@@ -303,6 +301,7 @@ Procedure FormModificator_CreateTaxesFormControls(Parameters, Results) Export
 EndProcedure
 
 Procedure OnCreateAtServerStepsEnabler_WithTaxes(Parameters, Chain) Export
+	// RequireCallCreateTaxesFormControls
 	Chain.RequireCallCreateTaxesFormControls.Enable = True;
 	Chain.RequireCallCreateTaxesFormControls.Setter = "FormModificator_CreateTaxesFormControls";
 	Options = ModelClientServer_V2.RequireCallCreateTaxesFormControlsOptions();
@@ -311,6 +310,11 @@ Procedure OnCreateAtServerStepsEnabler_WithTaxes(Parameters, Chain) Export
 	Options.Company        = GetPropertyObject(Parameters, "Company");
 	Options.ArrayOfTaxInfo = Parameters.ArrayOfTaxInfo;
 	Chain.RequireCallCreateTaxesFormControls.Options.Add(Options);
+	
+	// при копировании документа нужно перерасчитать TaxAmount
+	If Parameters.FormIsExists And ValueIsFilled(Parameters.Form.Parameters.CopyingValue) Then
+		ItemListEnableCalculations(Parameters, Chain, "RecalculationsOnCopy");
+	EndIf;
 EndProcedure
 
 // Form.OnOpen
@@ -1859,7 +1863,7 @@ EndProcedure
 // TaxRate.Set
 Procedure SetItemListTaxRate(Parameters, Results) Export
 	Binding = ItemListTaxRateStepsBinding(Parameters);
-	ReadOnlyFromCache = Not Parameters.FormIsExists;
+	ReadOnlyFromCache = Not Parameters.FormTaxColumnsExists;
 	For Each Result In Results Do
 		For Each TaxRate In Result.Value Do
 			TaxRateResult = New Array();
@@ -1875,7 +1879,7 @@ Function GetItemListTaxRate(Parameters, Row)
 	TaxRates = New Structure();
 	// когда нет формы то колонки со ставками налогов только в кэше
 	// потому что колонки со ставками налога это реквизиты формы
-	ReadOnlyFromCache = Not Parameters.FormIsExists;
+	ReadOnlyFromCache = Not Parameters.FormTaxColumnsExists;
 	For Each TaxRate In Row.TaxRates Do
 		If ReadOnlyFromCache And ValueIsFilled(TaxRate.Value) Then
 			TaxRates.Insert(TaxRate.Key, TaxRate.Value);
@@ -2000,7 +2004,8 @@ Procedure ItemListEnableCalculations(Parameters, Chain, WhoIsChanged)
 		// нужно пересчитать NetAmount, TotalAmount, TaxAmount, OffersAmount
 		If     WhoIsChanged = "IsPriceChanged"            Or WhoIsChanged = "IsPriceIncludeTaxChanged"
 			Or WhoIsChanged = "IsDontCalculateRowChanged" Or WhoIsChanged = "IsQuantityInBaseUnitChanged" 
-			Or WhoIsChanged = "IsTaxRateChanged"          Or WhoIsChanged = "RecalculationsAfterQuestionToUser" Then
+			Or WhoIsChanged = "IsTaxRateChanged"          Or WhoIsChanged = "RecalculationsAfterQuestionToUser"
+			Or WhoIsChanged = "RecalculationsOnCopy" Then
 			Options.CalculateNetAmount.Enable   = True;
 			Options.CalculateTotalAmount.Enable = True;
 			Options.CalculateTaxAmount.Enable   = True;
@@ -2010,6 +2015,9 @@ Procedure ItemListEnableCalculations(Parameters, Chain, WhoIsChanged)
 			Options.CalculateNetAmountAsTotalAmountMinusTaxAmount.Enable   = True;
 			Options.CalculatePriceByTotalAmount.Enable = True;
 		ElsIf WhoIsChanged = "IsTaxAmountChanged" Then
+			// указываем на то что нужно использовать ManualAmount (сумма введеная вручную) при расчете TaxAmount
+			Options.TaxOptions.UseManualAmount = True;
+			
 			Options.CalculateNetAmount.Enable   = True;
 			Options.CalculateTotalAmount.Enable = True;
 			Options.CalculateTaxAmount.Enable   = True;
@@ -2046,9 +2054,6 @@ Procedure SetItemListCalculations(Parameters, Results) Export
 	SetterObject(Undefined, "ItemList.OffersAmount", Parameters, Results, , "OffersAmount");
 	SetterObject(Undefined, "ItemList.Price"       , Parameters, Results, , "Price");
 	SetterObject(Binding.StepsEnabler, "ItemList.TotalAmount" , Parameters, Results, , "TotalAmount");
-	
-	
-	//SetPaymentTerms(Parameters, Results);
 	
 	// табличная часть TaxList кэщируется целиком, потом так же целиком переносится в документ
 	For Each Result In Results Do

@@ -823,7 +823,7 @@ Function CalculationsOptions() Export
 	Options.Insert("PriceOptions", PriceOptions);
 	
 	// TaxList columns: Key, Tax, Analytics, TaxRate, Amount, IncludeToTotalAmount, ManualAmount
-	TaxOptions = New Structure("PriceIncludeTax, ArrayOfTaxInfo, TaxRates");
+	TaxOptions = New Structure("PriceIncludeTax, ArrayOfTaxInfo, TaxRates, UseManualAmount");
 	TaxOptions.Insert("TaxList", New Array());
 	Options.Insert("TaxOptions", TaxOptions);
 	
@@ -1084,7 +1084,8 @@ Procedure CalculateTaxAmount(Options, TaxOptions, Result, IsReverse, IsManualPri
 					If IsManualPriority Then
 						ManualAmount = ?(RowTaxList_ManualAmount = RowTaxList_Amount, NewTax_Amount, RowTaxList_ManualAmount);
 					Else
-						ManualAmount = ?(RowTaxList_Amount = NewTax_Amount, RowTaxList_ManualAmount, NewTax_Amount);
+						ManualAmount = ?(RowTaxList_Amount = NewTax_Amount And TaxOptions.UseManualAmount = True
+							, RowTaxList_ManualAmount, NewTax_Amount);
 					EndIf;
 				EndIf;
 			EndDo;

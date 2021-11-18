@@ -75,34 +75,34 @@ Function CreateParameters(ServerParameters, FormParameters)
 		Parameters.ReadOnlyPropertiesMap.Insert(TrimAll(Property), True);
 	EndDo;
 	
-	Parameters.Insert("ArrayOfTaxInfo", New Array());
 	
+	// таблицы для которых нужно получить колонки
+	ArrayOfTableNames = New Array();
+	//If ServerParameters.TableName <> Undefined Then
+		ArrayOfTableNames.Add(ServerParameters.TableName);
+	//EndIf;	
+	ArrayOfTableNames.Add("TaxList");
+	
+	// MetadataName
+	// Tables.TableName.Columns
+	// DependencyTables
+	ObjectMetadataInfo = ViewServer_V2.GetObjectMetadataInfo(ServerParameters.Object, StrConcat(ArrayOfTableNames, ","));
+	Parameters.Insert("ObjectMetadataInfo", ObjectMetadataInfo);
+	Parameters.Insert("TaxListIsExists", ObjectMetadataInfo.Tables.Property("TaxList"));
+	
+	Parameters.Insert("ArrayOfTaxInfo", New Array());
 	If Parameters.FormIsExists Then
 		If ValueIsFilled(FormParameters.TaxesCache) Then
 			DeserializedCache = CommonFunctionsServer.DeserializeXMLUseXDTO(Parameters.TaxesCache);
 			Parameters.ArrayOfTaxInfo = DeserializedCache.ArrayOfTaxInfo;
 		EndIf;
 	Else
-		// временно для теста
-		Parameters.ArrayOfTaxInfo = TaxesServer._GetArrayOfTaxInfo(ServerParameters.Object,
-			ServerParameters.Object.Date, ServerParameters.Object.Company);
+		If Parameters.TaxListIsExists Then
+			Parameters.ArrayOfTaxInfo = TaxesServer._GetArrayOfTaxInfo(ServerParameters.Object,
+				ServerParameters.Object.Date, ServerParameters.Object.Company);
+		EndIf;
 	EndIf;
 	
-	// получаем колонки из табличных частей
-	ArrayOfTableNames = New Array();
-	If ServerParameters.TableName <> Undefined Then
-		ArrayOfTableNames.Add(ServerParameters.TableName);
-	EndIf;	
-	If CommonFunctionsClientServer.ObjectHasProperty(ServerParameters.Object, "TaxList") Then
-		ArrayOfTableNames.Add("TaxList");
-	EndIf;
-	// MetadataName
-	// Tables.TableName.Columns
-	// DependencyTables
-	ObjectMetadataInfo = ViewServer_V2.GetObjectMetadataInfo(ServerParameters.Object, StrConcat(ArrayOfTableNames, ","));
-	
-	// Server
-	Parameters.Insert("ObjectMetadataInfo", ObjectMetadataInfo);
 	
 	// если не переданы конкретные строки то используем все что есть в таблице c именем TableName
 	If ServerParameters.Rows = Undefined And ValueIsFilled(ServerParameters.TableName) Then
@@ -113,15 +113,16 @@ Function CreateParameters(ServerParameters, FormParameters)
 	EndIf;
 	
 	// строку таблицы нельзя передать на сервер, поэтому помещаем данные в массив структур
+	// Rows
 	ArrayOfRows = New Array();
 	For Each Row In ServerParameters.Rows Do
 		NewRow = New Structure(ObjectMetadataInfo.Tables[ServerParameters.TableName].Columns);
 		FillPropertyValues(NewRow, Row);
 		ArrayOfRows.Add(NewRow);
 		
-		// налоги
+		// TaxList
 		ArrayOfRowsTaxList = New Array();
-		If ObjectMetadataInfo.Tables.Property("TaxList") Then
+		If Parameters.TaxListIsExists Then
 			For Each TaxRow In ServerParameters.Object.TaxList.FindRows(New Structure("Key", Row.Key)) Do
 				NewRowTaxList = New Structure(ObjectMetadataInfo.Tables.TaxList.Columns);
 				FillPropertyValues(NewRowTaxList, TaxRow);
@@ -129,6 +130,7 @@ Function CreateParameters(ServerParameters, FormParameters)
 			EndDo;
 		EndIf;
 		
+		// TaxRates
 		TaxRates = New Structure();
 		For Each ItemOfTaxInfo In Parameters.ArrayOfTaxInfo Do
 			// когда нет формы то нет и колонки созданной программно

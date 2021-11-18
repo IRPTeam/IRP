@@ -29,11 +29,15 @@ Function GetObjectMetadataInfo(Val Object, ArrayOfTableNames) Export
 	
 	Tables = New Structure();
 	For Each TableName In StrSplit(ArrayOfTableNames, ",") Do
+		TableName = TrimAll(TableName);
 		If Not ValueIsFilled(TableName) Then
 			Continue;
 		EndIf;
+		If Not CommonFunctionsClientServer.ObjectHasProperty(Object, TableName) Then
+			Continue;
+		EndIf;
 		ArrayOfColumns = New Array();
-		Table = Object[TrimAll(TableName)];
+		Table = Object[TableName];
 		If TypeOf(Table) = Type("ValueTable") Then
 			Columns = Table.Columns;
 		Else

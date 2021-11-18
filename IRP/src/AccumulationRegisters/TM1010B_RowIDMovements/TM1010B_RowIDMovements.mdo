@@ -70,6 +70,21 @@
     <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
   </resources>
+  <dimensions uuid="cefc45a7-b4f7-44a5-bb26-b0b40185d01a">
+    <name>RowRef</name>
+    <synonym>
+      <key>en</key>
+      <value>Row ref</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.RowIDs</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <indexing>Index</indexing>
+    <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
+  </dimensions>
   <dimensions uuid="e900edae-101b-41db-9c86-5f44983b503a">
     <name>RowID</name>
     <synonym>
@@ -106,20 +121,6 @@
     </synonym>
     <type>
       <types>DocumentRef</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="cefc45a7-b4f7-44a5-bb26-b0b40185d01a">
-    <name>RowRef</name>
-    <synonym>
-      <key>en</key>
-      <value>Row ref</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.RowIDs</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

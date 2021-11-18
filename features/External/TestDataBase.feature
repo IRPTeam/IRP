@@ -8,9 +8,7 @@ Feature: export scenarios
 Background:
 	Given I launch TestClient opening script or connect the existing one
 
-Scenario: Refill constant ConnectionStatus by value (test data base)
-	And I refill constant "ConnectionStatus" by value "0"
-	And I refill constant "NotFirstStart" by value "False"
+Scenario: Refill constants by value (test data base)
 	And I refill constant "SaasMode" by value "False"
 	And I refill constant "UseCompanies" by value "True"
 	And I refill constant "UseItemKey" by value "True"

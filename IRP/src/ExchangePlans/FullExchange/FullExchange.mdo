@@ -481,9 +481,6 @@
     <mdObject>Document.IncomingPaymentOrder</mdObject>
   </content>
   <content>
-    <mdObject>Constant.NotFirstStart</mdObject>
-  </content>
-  <content>
     <mdObject>AccumulationRegister.R4016B_InternalSupplyRequestOrdering</mdObject>
   </content>
   <content>
@@ -548,9 +545,6 @@
   </content>
   <content>
     <mdObject>Catalog.PaymentTypes</mdObject>
-  </content>
-  <content>
-    <mdObject>Constant.ConnectionStatus</mdObject>
   </content>
   <content>
     <mdObject>Catalog.SerialLotNumbers</mdObject>

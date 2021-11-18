@@ -488,10 +488,8 @@
   <commonCommands>CommonCommand.AttachedFiles</commonCommands>
   <commandGroups>CommandGroup.Service</commandGroups>
   <commandGroups>CommandGroup.Print</commandGroups>
-  <constants>Constant.ConnectionStatus</constants>
   <constants>Constant.DefaultFilesStorageVolume</constants>
   <constants>Constant.DefaultPictureStorageVolume</constants>
-  <constants>Constant.NotFirstStart</constants>
   <constants>Constant.SaasMode</constants>
   <constants>Constant.UseCompanies</constants>
   <constants>Constant.UseItemKey</constants>

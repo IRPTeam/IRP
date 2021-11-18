@@ -11,7 +11,6 @@
     <picture>CommonPicture.Settings</picture>
   </picture>
   <content>CommonModule.IntegrationClientServer</content>
-  <content>Constant.NotFirstStart</content>
   <content>Constant.DefaultPictureStorageVolume</content>
   <content>CommonForm.MainSettings</content>
   <content>DataProcessor.DataHistory</content>

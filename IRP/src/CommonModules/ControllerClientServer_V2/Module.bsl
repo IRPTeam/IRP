@@ -404,7 +404,10 @@ Procedure ItemListOnDeleteStepsEnabler_Shipment(Parameters, Chain) Export
 	Options = ModelClientServer_V2.ChangeStoreInHeaderByStoresInListOptions();
 	ArrayOfStoresInList = New Array();
 	For Each Row In Parameters.Object.ItemList Do
-		ArrayOfStoresInList.Add(GetPropertyObject(Parameters, "ItemList.Store", Row.Key));
+		NewRow = New Structure();
+		NewRow.Insert("Store"   , GetPropertyObject(Parameters, "ItemList.Store", Row.Key));
+		NewRow.Insert("ItemKey" , GetPropertyObject(Parameters, "ItemList.ItemKey", Row.Key));
+		ArrayOfStoresInList.Add(NewRow);
 	EndDo;
 	Options.ArrayOfStoresInList = ArrayOfStoresInList; 
 	Chain.ChangeStoreInHeaderByStoresInList.Options.Add(Options);
@@ -418,7 +421,10 @@ Procedure ItemListOnDeleteStepsEnabler_Trade_Shipment(Parameters, Chain) Export
 	Options = ModelClientServer_V2.ChangeStoreInHeaderByStoresInListOptions();
 	ArrayOfStoresInList = New Array();
 	For Each Row In Parameters.Object.ItemList Do
-		ArrayOfStoresInList.Add(GetPropertyObject(Parameters, "ItemList.Store", Row.Key));
+		NewRow = New Structure();
+		NewRow.Insert("Store"   , GetPropertyObject(Parameters, "ItemList.Store", Row.Key));
+		NewRow.Insert("ItemKey" , GetPropertyObject(Parameters, "ItemList.ItemKey", Row.Key));
+		ArrayOfStoresInList.Add(NewRow);
 	EndDo;
 	Options.ArrayOfStoresInList = ArrayOfStoresInList; 
 	Chain.ChangeStoreInHeaderByStoresInList.Options.Add(Options);

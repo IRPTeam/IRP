@@ -3,9 +3,6 @@
 
 Procedure EntryPoint(StepsEnablerName, Parameters) Export
 	InitEntryPoint(StepsEnablerName, Parameters);
-	If Parameters.ModelInveronment.StepsEnablerNameCounter.Find(StepsEnablerName) <> Undefined Then
-		a=1;//Return;
-	EndIf;
 	Parameters.ModelInveronment.StepsEnablerNameCounter.Add(StepsEnablerName);
 	
 #IF Client THEN

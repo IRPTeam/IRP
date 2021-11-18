@@ -1181,9 +1181,12 @@ EndProcedure
 Procedure ItemListStoreStepsEnabler_HaveUseShipmentConfirmationInList(Parameters, Chain) Export
 	ItemListStoreStepsEnabler_HaveStoreInHeader(Parameters, Chain);
 	
-	// В табличной части ItemList есть реквизит UseShipmentConfirmation
+	// ChangeUseShipmentConfirmationByStore
 	Chain.ChangeUseShipmentConfirmationByStore.Enable = True;
 	Chain.ChangeUseShipmentConfirmationByStore.Setter = "SetItemListUseShipmentConfirmation";
+	
+//	Chain.ExtractDataItemKeyIsService.Enable = True;
+//	Chain.ExtractDataItemKeyIsService.Enable = True;
 	
 	For Each Row In GetRows(Parameters, "ItemList") Do
 		Options = ModelClientServer_V2.ChangeUseShipmentConfirmationByStoreOptions();

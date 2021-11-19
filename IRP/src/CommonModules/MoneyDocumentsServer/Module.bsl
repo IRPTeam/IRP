@@ -96,7 +96,8 @@ Procedure FillAttributesByType(Ref, TransactionType, ArrayAll, ArrayByType) Expo
 	|PaymentList.Payee,
 	|PaymentList.Payer,
 	|PaymentList.AmountExchange,
-	|PaymentList.POSAccount";
+	|PaymentList.POSAccount,
+	|PaymentList.Order";
 	
 	ArrayAll = New Array();
 	For Each ArrayItem In StrSplit(StrAll, ",") Do
@@ -135,6 +136,10 @@ Procedure FillAttributesByType(Ref, TransactionType, ArrayAll, ArrayByType) Expo
 		|PaymentList.PlaningTransactionBasis,
 		|PaymentList.TotalAmount,
 		|PaymentList.LegalNameContract";
+		If TransactionType = Enums.OutgoingPaymentTransactionTypes.PaymentToVendor
+			Or TransactionType = Enums.IncomingPaymentTransactionType.PaymentFromCustomer Then
+			StrByType = StrByType + ", PaymentList.Order";
+		EndIf;
 	ElsIf TransactionType = Enums.IncomingPaymentTransactionType.TransferFromPOS Then
 		StrByType = "Account, Company, Currency, TransactionType, Description,
 		|PaymentList.PlaningTransactionBasis,

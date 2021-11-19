@@ -111,6 +111,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R1014T_CanceledPurchaseOrders());
 	QueryArray.Add(R4033B_GoodsReceiptSchedule());
 	QueryArray.Add(R4035B_IncomingStocks());
+	QueryArray.Add(R3025B_PurchaseOrdersToBePaid());
 	Return QueryArray;
 EndFunction
 
@@ -238,4 +239,17 @@ Function R4035B_IncomingStocks()
 		   |		IncomingStocks";
 
 EndFunction
+
+Function R3025B_PurchaseOrdersToBePaid()
+	Return 
+	"SELECT
+	|	&Period AS Period,
+	|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+	|	Balance.AmountBalance AS Amount,
+	|	*
+	|INTO R3025B_PurchaseOrdersToBePaid
+	|FROM
+	|	AccumulationRegister.R3025B_PurchaseOrdersToBePaid.Balance(&BalancePeriod, Order = &PurchaseOrder) AS Balance";
+EndFunction
+
 #EndRegion

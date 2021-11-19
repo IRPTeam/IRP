@@ -80,6 +80,10 @@
   <content>Document.GoodsReceipt.TabularSection.ItemList.Attribute.SalesReturnOrder</content>
   <content>Document.GoodsReceipt.TabularSection.ItemList.Attribute.InventoryTransfer</content>
   <content>Document.GoodsReceipt.TabularSection.ItemList.Attribute.SalesInvoice</content>
+  <content>Document.BankPayment.TabularSection.PaymentList.Attribute.Order</content>
+  <content>Document.CashPayment.TabularSection.PaymentList.Attribute.Order</content>
+  <content>Document.BankReceipt.TabularSection.PaymentList.Attribute.Order</content>
+  <content>Document.CashReceipt.TabularSection.PaymentList.Attribute.Order</content>
   <commands uuid="ae9005af-5826-4505-998a-846b2783e3de">
     <name>RelatedDocuments</name>
     <synonym>

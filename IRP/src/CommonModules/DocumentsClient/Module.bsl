@@ -2198,6 +2198,7 @@ Procedure CalculatePaymentTermDateAndAmount(Object, Form, AddInfo = Undefined) E
 		Difference = TotalAmount - Object.PaymentTerms.Total("Amount");
 		RowWithMaxAmount.Amount = RowWithMaxAmount.Amount + Difference;
 	EndIf;
+	DocumentsClientServer.SetReadOnlyPaymentTermsCanBePaid(Object, Form);
 EndProcedure
 
 Procedure DoTitleActions(Object, Form, Settings, Actions, AddInfo = Undefined) Export

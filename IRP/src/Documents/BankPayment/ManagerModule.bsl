@@ -256,6 +256,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R5012B_VendorsAging());
 	QueryArray.Add(R3035T_CashPlanning());
 	QueryArray.Add(R5022T_Expenses());
+	QueryArray.Add(R3025B_PurchaseOrdersToBePaid());
 	Return QueryArray;
 EndFunction
 
@@ -328,7 +329,8 @@ Function PaymentList()
 		   |		IsCashTransferOrder,
 		   |	PaymentList.Ref.TransactionType = VALUE(Enum.OutgoingPaymentTransactionTypes.ReturnToCustomer) AS IsReturnToCustomer,
 		   |	PaymentList.Ref.Branch AS Branch,
-		   |	PaymentList.LegalNameContract AS LegalNameContract
+		   |	PaymentList.LegalNameContract AS LegalNameContract,
+		   |	PaymentList.Order AS Order
 		   |INTO PaymentList
 		   |FROM
 		   |	Document.BankPayment.PaymentList AS PaymentList
@@ -411,6 +413,7 @@ Function R1020B_AdvancesToVendors()
 		   |	PaymentList.Basis,
 		   |	PaymentList.Amount,
 		   |	PaymentList.Key,
+		   |	PaymentList.Order,
 		   |	UNDEFINED AS VendorsAdvancesClosing
 		   |INTO R1020B_AdvancesToVendors
 		   |FROM
@@ -432,6 +435,7 @@ Function R1020B_AdvancesToVendors()
 		   |	OffsetOfAdvances.AdvancesDocument,
 		   |	OffsetOfAdvances.Amount,
 		   |	OffsetOfAdvances.Key,
+		   |	OffsetOfAdvances.Order,
 		   |	OffsetOfAdvances.Recorder
 		   |FROM
 		   |	InformationRegister.T2010S_OffsetOfAdvances AS OffsetOfAdvances
@@ -490,6 +494,7 @@ Function T2012S_PartnerAdvances()
 		   |	PaymentList.Basis AS AdvancesDocument,
 		   |	PaymentList.Amount,
 		   |	PaymentList.Key,
+		   |	PaymentList.Order,
 		   |	TRUE AS IsVendorAdvance
 		   |INTO T2012S_PartnerAdvances
 		   |FROM
@@ -597,6 +602,25 @@ Function R5022T_Expenses()
 		   |	PaymentList AS PaymentList
 		   |WHERE
 		   |	PaymentList.Commission <> 0";
+EndFunction
+
+Function R3025B_PurchaseOrdersToBePaid()
+	Return 
+	"SELECT
+	|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+	|	PaymentList.Period,
+	|	PaymentList.Company,
+	|	PaymentList.Branch,
+	|	PaymentList.Currency,
+	|	PaymentList.Partner,
+	|	PaymentList.Payee AS LegalName,
+	|	PaymentList.Order,
+	|	PaymentList.Amount
+	|INTO R3025B_PurchaseOrdersToBePaid
+	|FROM
+	|	PaymentList AS PaymentList
+	|WHERE
+	|	NOT PaymentList.Order.Ref IS NULL";
 EndFunction
 
 #EndRegion

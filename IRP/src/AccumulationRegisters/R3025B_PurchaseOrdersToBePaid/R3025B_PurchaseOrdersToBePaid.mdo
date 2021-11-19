@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:AccumulationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="e46b8231-05b1-4215-993e-46848ed48f0c">
+  <producedTypes>
+    <selectionType typeId="c4636ab1-0760-451a-99ac-15384063c9e8" valueTypeId="bfbfca4e-d9b5-4ad2-9243-d74a2718a518"/>
+    <listType typeId="4c46ea1a-19a3-449a-bf07-419e120fb710" valueTypeId="af92398f-c0d6-419f-b647-79d118ed5eea"/>
+    <managerType typeId="b4bacc50-fa1f-4dd6-b49d-2a4ab18f7d48" valueTypeId="844daa66-7fe2-4f36-b69d-f6c0c7f81242"/>
+    <recordSetType typeId="7fe0a4e5-601a-4b43-a0c4-3aef4ded45b3" valueTypeId="ba24135c-0b46-48d3-be78-acd84cf8ac1d"/>
+    <recordKeyType typeId="5c1aaf9b-574d-4acd-8829-1aaa11a3233c" valueTypeId="5a294160-7327-4962-a931-b0547c00fd03"/>
+    <recordType typeId="ac916d56-d5bc-4739-a3dd-a8773f6348d8" valueTypeId="65b2876c-298f-4e72-8228-08e15ca762d5"/>
+  </producedTypes>
+  <name>R3025B_PurchaseOrdersToBePaid</name>
+  <synonym>
+    <key>en</key>
+    <value>R3025 Purchase orders to be paid</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <dataLockControlMode>Managed</dataLockControlMode>
+  <enableTotalsSplitting>true</enableTotalsSplitting>
+  <resources uuid="03317c19-4ad1-463b-8b8d-985b557e87b9">
+    <name>Amount</name>
+    <synonym>
+      <key>en</key>
+      <value>Amount</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeAmount</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+  </resources>
+  <dimensions uuid="5c53b38e-ba28-490b-a265-f1c0072ac6e0">
+    <name>Company</name>
+    <synonym>
+      <key>en</key>
+      <value>Company</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Companies</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
+  </dimensions>
+  <dimensions uuid="94645d62-b1d5-44c4-a020-6418cb448d5b">
+    <name>Branch</name>
+    <synonym>
+      <key>en</key>
+      <value>Branch</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.BusinessUnits</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
+  </dimensions>
+  <dimensions uuid="4f0afbe2-eae6-49c5-ad44-da1f5763ad86">
+    <name>Currency</name>
+    <synonym>
+      <key>en</key>
+      <value>Currency</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Currencies</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
+  </dimensions>
+  <dimensions uuid="4535cae6-02d9-4b89-90dd-e459fcee5fed">
+    <name>Partner</name>
+    <synonym>
+      <key>en</key>
+      <value>Partner</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Partners</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
+  </dimensions>
+  <dimensions uuid="8934c3e8-e2e3-4976-a472-99e16110630d">
+    <name>LegalName</name>
+    <synonym>
+      <key>en</key>
+      <value>Legal name</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Companies</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
+  </dimensions>
+  <dimensions uuid="230ea7c7-bb85-40d6-9960-ab4f1c430437">
+    <name>Order</name>
+    <synonym>
+      <key>en</key>
+      <value>Order</value>
+    </synonym>
+    <type>
+      <types>DocumentRef.PurchaseOrder</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
+  </dimensions>
+</mdclass:AccumulationRegister>

@@ -56,6 +56,7 @@ Function GetDocumentsStructure(ArrayOfBasisDocuments)
 	ArrayOf_CashTransferOrder = New Array();
 	ArrayOf_IncomingPaymentOrder = New Array();
 	ArrayOf_SalesInvoice = New Array();
+	ArrayOf_SalesOrder = New Array();
 
 	For Each Row In ArrayOfBasisDocuments Do
 
@@ -65,6 +66,8 @@ Function GetDocumentsStructure(ArrayOfBasisDocuments)
 			ArrayOf_IncomingPaymentOrder.Add(Row);
 		ElsIf TypeOf(Row) = Type("DocumentRef.SalesInvoice") Then
 			ArrayOf_SalesInvoice.Add(Row);
+		ElsIf TypeOf(Row) = Type("DocumentRef.SalesOrder") Then
+			ArrayOf_SalesOrder.Add(Row);
 		Else
 			Raise R().Error_043;
 		EndIf;
@@ -75,6 +78,7 @@ Function GetDocumentsStructure(ArrayOfBasisDocuments)
 	ArrayOfTables.Add(GetDocumentTable_CashTransferOrder(ArrayOf_CashTransferOrder));
 	ArrayOfTables.Add(GetDocumentTable_IncomingPaymentOrder(ArrayOf_IncomingPaymentOrder));
 	ArrayOfTables.Add(GetDocumentTable_SalesInvoice(ArrayOf_SalesInvoice));
+	ArrayOfTables.Add(GetDocumentTable_SalesOrder(ArrayOf_SalesOrder));
 
 	Return JoinDocumentsStructure(ArrayOfTables);
 EndFunction
@@ -100,6 +104,7 @@ Function JoinDocumentsStructure(ArrayOfTables)
 	ValueTable.Columns.Add("TransitAccount", New TypeDescription("CatalogRef.CashAccounts"));
 	ValueTable.Columns.Add("AmountExchange", New TypeDescription(Metadata.DefinedTypes.typeAmount.Type));
 	ValueTable.Columns.Add("FinancialMovementType", New TypeDescription("CatalogRef.ExpenseAndRevenueTypes"));
+	ValueTable.Columns.Add("Order", New TypeDescription("DocumentRef.SalesOrder"));
 
 	For Each Table In ArrayOfTables Do
 		For Each Row In Table Do
@@ -143,6 +148,7 @@ Function JoinDocumentsStructure(ArrayOfTables)
 			NewRow.Insert("AmountExchange", RowPaymentList.AmountExchange);
 			NewRow.Insert("PlaningTransactionBasis", RowPaymentList.PlaningTransactionBasis);
 			NewRow.Insert("FinancialMovementType", RowPaymentList.FinancialMovementType);
+			NewRow.Insert("Order", RowPaymentList.Order);
 
 			Result.PaymentList.Add(NewRow);
 		EndDo;
@@ -199,7 +205,10 @@ EndFunction
 
 &AtServer
 Function GetDocumentTable_SalesInvoice(ArrayOfBasisDocuments)
-
 	Return DocumentsGenerationServer.GetDocumentTable_SalesInvoice_ForReceipt(ArrayOfBasisDocuments);
+EndFunction
 
+&AtServer
+Function GetDocumentTable_SalesOrder(ArrayOfBasisDocuments)
+	Return DocumentsGenerationServer.GetDocumentTable_SalesOrder_ForReceipt(ArrayOfBasisDocuments);
 EndFunction

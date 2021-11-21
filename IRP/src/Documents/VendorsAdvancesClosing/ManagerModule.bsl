@@ -285,6 +285,7 @@ Function OffsetOfAdvances(Parameters)
 	|	OffsetOfAdvanceFull.AdvancesDocument,
 	|	OffsetOfAdvanceFull.Agreement,
 	|	OffsetOfAdvanceFull.Key,
+	|	OffsetOfAdvanceFull.Order,
 	|	OffsetOfAdvanceFull.Amount,
 	|	OffsetOfAdvanceFull.DueAsAdvance
 	|INTO tmpOffsetOfAdvances
@@ -322,6 +323,7 @@ Function OffsetOfAdvances(Parameters)
 	|	tmpOffsetOfAdvances.AdvancesDocument,
 	|	tmpOffsetOfAdvances.Agreement,
 	|	tmpOffsetOfAdvances.Key,
+	|	tmpOffsetOfAdvances.Order,
 	|	tmpOffsetOfAdvances.DueAsAdvance,
 	|	SUM(tmpOffsetOfAdvances.Amount) AS Amount
 	|INTO OffsetOfAdvances
@@ -339,6 +341,7 @@ Function OffsetOfAdvances(Parameters)
 	|	tmpOffsetOfAdvances.AdvancesDocument,
 	|	tmpOffsetOfAdvances.Agreement,
 	|	tmpOffsetOfAdvances.Key,
+	|	tmpOffsetOfAdvances.Order,
 	|	tmpOffsetOfAdvances.DueAsAdvance
 	|;
 	|
@@ -480,6 +483,7 @@ EndProcedure
 //	*TransactionDocument
 //	*Agreement
 //	*DocumentAmount
+//	*Order
 //	*Key
 Procedure Create_VendorsTransactions(Recorder, Parameters)
 	Query = New Query();
@@ -499,7 +503,12 @@ Procedure Create_VendorsTransactions(Recorder, Parameters)
 	|		WHEN &IsDebitCreditNote
 	|			THEN PartnerTransactions.Key
 	|		ELSE """"
-	|	END AS Key
+	|	END AS Key,
+	|	CASE
+	|		WHEN PartnerTransactions.Order.Ref IS NULL
+	|			THEN VALUE(Document.PurchaseOrder.EmptyRef)
+	|		ELSE PartnerTransactions.Order
+	|	END AS Order
 	|INTO tmpVendorsTransactions
 	|FROM
 	|	InformationRegister.T2011S_PartnerTransactions AS PartnerTransactions
@@ -519,6 +528,11 @@ Procedure Create_VendorsTransactions(Recorder, Parameters)
 	|		WHEN &IsDebitCreditNote
 	|			THEN PartnerTransactions.Key
 	|		ELSE """"
+	|	END,
+	|	CASE
+	|		WHEN PartnerTransactions.Order.Ref IS NULL
+	|			THEN VALUE(Document.PurchaseOrder.EmptyRef)
+	|		ELSE PartnerTransactions.Order
 	|	END
 	|;
 	|
@@ -533,12 +547,13 @@ Procedure Create_VendorsTransactions(Recorder, Parameters)
 	|	tmpVendorsTransactions.Agreement,
 	|	tmpVendorsTransactions.TransactionDocument,
 	|	tmpVendorsTransactions.Key,
+	|	tmpVendorsTransactions.Order,
 	|	R1021B_VendorsTransactionsBalance.AmountBalance AS DocumentAmount,
 	|	FALSE AS IgnoreAdvances
-	|	INTO VendorsTransactions
+	|INTO VendorsTransactions
 	|FROM
-	|	AccumulationRegister.R1021B_VendorsTransactions.Balance(&Period, (Company, Branch, Currency, LegalName, Partner, Agreement,
-	|		Basis) IN
+	|	AccumulationRegister.R1021B_VendorsTransactions.Balance(&Period, (Company, Branch, Currency, LegalName, Partner,
+	|		Agreement, Basis, Order) IN
 	|		(SELECT
 	|			tmp.Company,
 	|			tmp.Branch,
@@ -546,7 +561,8 @@ Procedure Create_VendorsTransactions(Recorder, Parameters)
 	|			tmp.LegalName,
 	|			tmp.Partner,
 	|			tmp.Agreement,
-	|			tmp.TransactionDocument
+	|			tmp.TransactionDocument,
+	|			tmp.Order
 	|		FROM
 	|			tmpVendorsTransactions AS tmp)
 	|	AND CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)) AS
@@ -559,7 +575,10 @@ Procedure Create_VendorsTransactions(Recorder, Parameters)
 	|		AND R1021B_VendorsTransactionsBalance.LegalName = tmpVendorsTransactions.LegalName
 	|		AND R1021B_VendorsTransactionsBalance.Agreement = tmpVendorsTransactions.Agreement
 	|		AND R1021B_VendorsTransactionsBalance.Basis = tmpVendorsTransactions.TransactionDocument
+	|		AND R1021B_VendorsTransactionsBalance.Order = tmpVendorsTransactions.Order
 	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
 	|DROP tmpVendorsTransactions";
 	Query.SetParameter("Period", New Boundary(Parameters.RecorderPointInTime, BoundaryType.Including));
 	Query.SetParameter("Recorder", Recorder);
@@ -613,6 +632,11 @@ Procedure Create_PaymentToVendors(Recorder, Parameters)
 	|	PartnerTransactions.LegalName,
 	|	PartnerTransactions.TransactionDocument,
 	|	PartnerTransactions.Agreement,
+	|	CASE
+	|		WHEN PartnerTransactions.Order.Ref IS NULL
+	|			THEN VALUE(Document.PurchaseOrder.EmptyRef)
+	|		ELSE PartnerTransactions.Order
+	|	END AS Order,
 	|	SUM(PartnerTransactions.Amount) AS Amount,
 	|	FALSE AS IgnoreAdvances,
 	|	PartnerTransactions.Key
@@ -621,7 +645,7 @@ Procedure Create_PaymentToVendors(Recorder, Parameters)
 	|	InformationRegister.T2011S_PartnerTransactions AS PartnerTransactions
 	|WHERE
 	|	PartnerTransactions.Recorder = &Recorder
-	|	and PartnerTransactions.IsPaymentToVendor
+	|	AND PartnerTransactions.IsPaymentToVendor
 	|GROUP BY
 	|	PartnerTransactions.Agreement,
 	|	PartnerTransactions.Company,
@@ -631,6 +655,11 @@ Procedure Create_PaymentToVendors(Recorder, Parameters)
 	|	PartnerTransactions.Partner,
 	|	PartnerTransactions.Period,
 	|	PartnerTransactions.TransactionDocument,
+	|	CASE
+	|		WHEN PartnerTransactions.Order.Ref IS NULL
+	|			THEN VALUE(Document.PurchaseOrder.EmptyRef)
+	|		ELSE PartnerTransactions.Order
+	|	END,
 	|	PartnerTransactions.Key";
 	Query.SetParameter("Recorder", Recorder);
 	Query.Execute();
@@ -644,6 +673,7 @@ EndProcedure
 //  *Currency
 //  *DocumentAmount
 //  *AdvancesDocument
+//  *Order
 //  *Key
 Procedure Create_AdvancesToVendors(Recorder, Parameters)
 	Query = New Query();
@@ -657,6 +687,11 @@ Procedure Create_AdvancesToVendors(Recorder, Parameters)
 	|	PartnerAdvances.Partner,
 	|	PartnerAdvances.LegalName,
 	|	PartnerAdvances.AdvancesDocument,
+	|	CASE
+	|		WHEN PartnerAdvances.Order.Ref IS NULL
+	|			THEN VALUE(Document.PurchaseOrder.EmptyRef)
+	|		ELSE PartnerAdvances.Order
+	|	END AS Order,
 	|	PartnerAdvances.Amount AS DocumentAmount,
 	|	PartnerAdvances.Key
 	|INTO AdvancesToVendors
@@ -786,6 +821,7 @@ EndProcedure
 //  *TransactionDocument
 //  *AdvancesDocument
 //  *Agreement
+//  *Order
 //  *Amount
 Procedure Write_AdvancesAndTransactions(Recorder, Parameters, OffsetOfAdvanceFull, UseKeyForAdvance = False)
 	Query = New Query();
@@ -801,6 +837,7 @@ Procedure Write_AdvancesAndTransactions(Recorder, Parameters, OffsetOfAdvanceFul
 	|	OffsetOfAdvance.TransactionDocument,
 	|	OffsetOfAdvance.AdvancesDocument,
 	|	OffsetOfAdvance.Agreement,
+	|	OffsetOfAdvance.Order,
 	|	OffsetOfAdvance.Amount,
 	|	OffsetOfAdvance.Key,
 	|	&VendorsAdvancesClosing AS VendorsAdvancesClosing,

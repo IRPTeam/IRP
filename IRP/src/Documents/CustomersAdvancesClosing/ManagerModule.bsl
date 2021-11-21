@@ -283,6 +283,7 @@ Function OffsetOfAdvances(Parameters)
 	|	OffsetOfAdvanceFull.AdvancesDocument,
 	|	OffsetOfAdvanceFull.Agreement,
 	|	OffsetOfAdvanceFull.Key,
+	|	OffsetOfAdvanceFull.Order,
 	|	OffsetOfAdvanceFull.Amount,
 	|	OffsetOfAdvanceFull.DueAsAdvance
 	|INTO tmpOffsetOfAdvances
@@ -320,6 +321,7 @@ Function OffsetOfAdvances(Parameters)
 	|	tmpOffsetOfAdvances.AdvancesDocument,
 	|	tmpOffsetOfAdvances.Agreement,
 	|	tmpOffsetOfAdvances.Key,
+	|	tmpOffsetOfAdvances.Order,
 	|	tmpOffsetOfAdvances.DueAsAdvance,
 	|	SUM(tmpOffsetOfAdvances.Amount) AS Amount
 	|INTO OffsetOfAdvances
@@ -337,6 +339,7 @@ Function OffsetOfAdvances(Parameters)
 	|	tmpOffsetOfAdvances.AdvancesDocument,
 	|	tmpOffsetOfAdvances.Agreement,
 	|	tmpOffsetOfAdvances.Key,
+	|	tmpOffsetOfAdvances.Order,
 	|	tmpOffsetOfAdvances.DueAsAdvance
 	|;
 	|
@@ -478,6 +481,7 @@ EndProcedure
 //	*TransactionDocument
 //	*Agreement
 //	*DocumentAmount
+//	*Order
 //	*Key
 Procedure Create_CustomersTransactions(Recorder, Parameters)
 	Query = New Query();
@@ -497,7 +501,12 @@ Procedure Create_CustomersTransactions(Recorder, Parameters)
 	|		WHEN &IsDebitCreditNote
 	|			THEN PartnerTransactions.Key
 	|		ELSE """"
-	|	END AS Key
+	|	END AS Key,
+	|	CASE
+	|		WHEN PartnerTransactions.Order.Ref IS NULL
+	|			THEN VALUE(Document.SalesOrder.EmptyRef)
+	|		ELSE PartnerTransactions.Order
+	|	END AS Order
 	|INTO tmpCustomersTransactions
 	|FROM
 	|	InformationRegister.T2011S_PartnerTransactions AS PartnerTransactions
@@ -517,6 +526,11 @@ Procedure Create_CustomersTransactions(Recorder, Parameters)
 	|		WHEN &IsDebitCreditNote
 	|			THEN PartnerTransactions.Key
 	|		ELSE """"
+	|	END,
+	|	CASE
+	|		WHEN PartnerTransactions.Order.Ref IS NULL
+	|			THEN VALUE(Document.SalesOrder.EmptyRef)
+	|		ELSE PartnerTransactions.Order
 	|	END
 	|;
 	|
@@ -531,12 +545,13 @@ Procedure Create_CustomersTransactions(Recorder, Parameters)
 	|	tmpCustomersTransactions.Agreement,
 	|	tmpCustomersTransactions.TransactionDocument,
 	|	tmpCustomersTransactions.Key,
+	|	tmpCustomersTransactions.Order,
 	|	R2021B_CustomersTransactionsBalance.AmountBalance AS DocumentAmount,
 	|	FALSE AS IgnoreAdvances
 	|INTO CustomersTransactions
 	|FROM
-	|	AccumulationRegister.R2021B_CustomersTransactions.Balance(&Period, (Company, Branch, Currency, LegalName, Partner, Agreement,
-	|		Basis) IN
+	|	AccumulationRegister.R2021B_CustomersTransactions.Balance(&Period, (Company, Branch, Currency, LegalName, Partner,
+	|		Agreement, Basis, Order) IN
 	|		(SELECT
 	|			tmp.Company,
 	|			tmp.Branch,
@@ -544,7 +559,8 @@ Procedure Create_CustomersTransactions(Recorder, Parameters)
 	|			tmp.LegalName,
 	|			tmp.Partner,
 	|			tmp.Agreement,
-	|			tmp.TransactionDocument
+	|			tmp.TransactionDocument,
+	|			tmp.Order
 	|		FROM
 	|			tmpCustomersTransactions AS tmp)
 	|	AND CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)) AS
@@ -557,6 +573,7 @@ Procedure Create_CustomersTransactions(Recorder, Parameters)
 	|		AND R2021B_CustomersTransactionsBalance.LegalName = tmpCustomersTransactions.LegalName
 	|		AND R2021B_CustomersTransactionsBalance.Agreement = tmpCustomersTransactions.Agreement
 	|		AND R2021B_CustomersTransactionsBalance.Basis = tmpCustomersTransactions.TransactionDocument
+	|		AND R2021B_CustomersTransactionsBalance.Order = tmpCustomersTransactions.Order
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
@@ -613,6 +630,11 @@ Procedure Create_PaymentFromCustomers(Recorder, Parameters)
 	|	PartnerTransactions.LegalName,
 	|	PartnerTransactions.TransactionDocument,
 	|	PartnerTransactions.Agreement,
+	|	CASE
+	|		WHEN PartnerTransactions.Order.Ref IS NULL
+	|			THEN VALUE(Document.SalesOrder.EmptyRef)
+	|		ELSE PartnerTransactions.Order
+	|	END AS Order,
 	|	SUM(PartnerTransactions.Amount) AS Amount,
 	|	FALSE AS IgnoreAdvances,
 	|	PartnerTransactions.Key
@@ -621,7 +643,7 @@ Procedure Create_PaymentFromCustomers(Recorder, Parameters)
 	|	InformationRegister.T2011S_PartnerTransactions AS PartnerTransactions
 	|WHERE
 	|	PartnerTransactions.Recorder = &Recorder
-	|	and PartnerTransactions.IsPaymentFromCustomer
+	|	AND PartnerTransactions.IsPaymentFromCustomer
 	|GROUP BY
 	|	PartnerTransactions.Agreement,
 	|	PartnerTransactions.Company,
@@ -631,6 +653,11 @@ Procedure Create_PaymentFromCustomers(Recorder, Parameters)
 	|	PartnerTransactions.Partner,
 	|	PartnerTransactions.Period,
 	|	PartnerTransactions.TransactionDocument,
+	|	CASE
+	|		WHEN PartnerTransactions.Order.Ref IS NULL
+	|			THEN VALUE(Document.SalesOrder.EmptyRef)
+	|		ELSE PartnerTransactions.Order
+	|	END,
 	|	PartnerTransactions.Key";
 	Query.SetParameter("Recorder", Recorder);
 	Query.Execute();
@@ -644,6 +671,7 @@ EndProcedure
 //  *Currency
 //  *DocumentAmount
 //  *AdvancesDocument
+//  *Order
 //  *Key
 Procedure Create_AdvancesFromCustomers(Recorder, Parameters)
 	Query = New Query();
@@ -657,6 +685,11 @@ Procedure Create_AdvancesFromCustomers(Recorder, Parameters)
 	|	PartnerAdvances.Partner,
 	|	PartnerAdvances.LegalName,
 	|	PartnerAdvances.AdvancesDocument,
+	|	CASE
+	|		WHEN PartnerAdvances.Order.Ref IS NULL
+	|			THEN VALUE(Document.SalesOrder.EmptyRef)
+	|		ELSE PartnerAdvances.Order
+	|	END AS Order,
 	|	PartnerAdvances.Amount AS DocumentAmount,
 	|	PartnerAdvances.Key
 	|INTO AdvancesFromCustomers
@@ -786,6 +819,7 @@ EndProcedure
 //  *TransactionDocument
 //  *AdvancesDocument
 //  *Agreement
+//  *Order
 //  *Amount
 Procedure Write_AdvancesAndTransactions(Recorder, Parameters, OffsetOfAdvanceFull, UseKeyForAdvance = False)
 	Query = New Query();
@@ -801,6 +835,7 @@ Procedure Write_AdvancesAndTransactions(Recorder, Parameters, OffsetOfAdvanceFul
 	|	OffsetOfAdvance.TransactionDocument,
 	|	OffsetOfAdvance.AdvancesDocument,
 	|	OffsetOfAdvance.Agreement,
+	|	OffsetOfAdvance.Order,
 	|	OffsetOfAdvance.Amount,
 	|	OffsetOfAdvance.Key,
 	|	&CustomersAdvancesClosing AS CustomersAdvancesClosing,

@@ -323,6 +323,7 @@ Function R1021B_VendorsTransactions()
 		   |	PaymentList.Currency,
 		   |	PaymentList.Agreement,
 		   |	PaymentList.TransactionDocument AS Basis,
+		   |	PaymentList.Order,
 		   |	PaymentList.Key,
 		   |	PaymentList.Amount,
 		   |	UNDEFINED AS VendorsAdvancesClosing
@@ -345,6 +346,7 @@ Function R1021B_VendorsTransactions()
 		   |	OffsetOfAdvances.Currency,
 		   |	OffsetOfAdvances.Agreement,
 		   |	OffsetOfAdvances.TransactionDocument,
+		   |	OffsetOfAdvances.Order,
 		   |	OffsetOfAdvances.Key,
 		   |	OffsetOfAdvances.Amount,
 		   |	OffsetOfAdvances.Recorder

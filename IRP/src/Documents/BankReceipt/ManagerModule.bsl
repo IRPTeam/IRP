@@ -407,6 +407,7 @@ Function R2021B_CustomersTransactions()
 		   |	PaymentList.Currency,
 		   |	PaymentList.Agreement,
 		   |	PaymentList.TransactionDocument AS Basis,
+		   |	PaymentList.Order,
 		   |	PaymentList.Key,
 		   |	PaymentList.Amount AS Amount,
 		   |	UNDEFINED AS CustomersAdvancesClosing
@@ -428,6 +429,7 @@ Function R2021B_CustomersTransactions()
 		   |	OffsetOfAdvances.Currency,
 		   |	OffsetOfAdvances.Agreement,
 		   |	OffsetOfAdvances.TransactionDocument,
+		   |	OffsetOfAdvances.Order,
 		   |	OffsetOfAdvances.Key,
 		   |	OffsetOfAdvances.Amount,
 		   |	OffsetOfAdvances.Recorder

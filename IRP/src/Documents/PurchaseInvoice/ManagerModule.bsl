@@ -435,6 +435,7 @@ Function R1021B_VendorsTransactions()
 		   |	ItemList.Partner,
 		   |	ItemList.Agreement,
 		   |	ItemList.BasisDocument AS Basis,
+		   |	ItemList.PurchaseOrder AS Order,
 		   |	SUM(ItemList.Amount) AS Amount,
 		   |	UNDEFINED AS VendorsAdvancesClosing
 		   |INTO R1021B_VendorsTransactions
@@ -443,6 +444,7 @@ Function R1021B_VendorsTransactions()
 		   |GROUP BY
 		   |	ItemList.Agreement,
 		   |	ItemList.BasisDocument,
+		   |	ItemList.PurchaseOrder,
 		   |	ItemList.Company,
 		   |	ItemList.Branch,
 		   |	ItemList.Currency,
@@ -463,6 +465,7 @@ Function R1021B_VendorsTransactions()
 		   |	OffsetOfAdvances.Partner,
 		   |	OffsetOfAdvances.Agreement,
 		   |	OffsetOfAdvances.TransactionDocument,
+		   |	OffsetOfAdvances.Order,
 		   |	OffsetOfAdvances.Amount,
 		   |	OffsetOfAdvances.Recorder
 		   |FROM
@@ -530,6 +533,7 @@ Function T2011S_PartnerTransactions()
 		   |	ItemList.Partner,
 		   |	ItemList.Agreement,
 		   |	ItemList.BasisDocument AS TransactionDocument,
+		   |	ItemList.PurchaseOrder AS Order,
 		   |	TRUE AS IsVendorTransaction,
 		   |	SUM(ItemList.Amount) AS Amount,
 		   |	ItemList.Key
@@ -541,6 +545,7 @@ Function T2011S_PartnerTransactions()
 		   |GROUP BY
 		   |	ItemList.Agreement,
 		   |	ItemList.BasisDocument,
+		   |	ItemList.PurchaseOrder,
 		   |	ItemList.Company,
 		   |	ItemList.Branch,
 		   |	ItemList.Currency,

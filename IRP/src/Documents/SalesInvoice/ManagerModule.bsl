@@ -687,6 +687,7 @@ Function R2021B_CustomersTransactions()
 		   |	ItemList.Partner,
 		   |	ItemList.Agreement,
 		   |	ItemList.Basis,
+		   |	ItemList.SalesOrder AS Order,
 		   |	SUM(ItemList.Amount) AS Amount,
 		   |	UNDEFINED AS CustomersAdvancesClosing
 		   |INTO R2021B_CustomersTransactions
@@ -695,6 +696,7 @@ Function R2021B_CustomersTransactions()
 		   |GROUP BY
 		   |	ItemList.Agreement,
 		   |	ItemList.Basis,
+		   |	ItemList.SalesOrder,
 		   |	ItemList.Company,
 		   |	ItemList.Branch,
 		   |	ItemList.Currency,
@@ -715,6 +717,7 @@ Function R2021B_CustomersTransactions()
 		   |	OffsetOfAdvances.Partner,
 		   |	OffsetOfAdvances.Agreement,
 		   |	OffsetOfAdvances.TransactionDocument,
+		   |	OffsetOfAdvances.Order,
 		   |	OffsetOfAdvances.Amount,
 		   |	OffsetOfAdvances.Recorder
 		   |FROM
@@ -733,6 +736,7 @@ Function T2011S_PartnerTransactions()
 		   |	ItemList.Partner,
 		   |	ItemList.Agreement,
 		   |	ItemList.Basis AS TransactionDocument,
+		   |	ItemList.SalesOrder AS Order,
 		   |	TRUE AS IsCustomerTransaction,
 		   |	SUM(ItemList.Amount) AS Amount,
 		   |	ItemList.Key
@@ -744,6 +748,7 @@ Function T2011S_PartnerTransactions()
 		   |GROUP BY
 		   |	ItemList.Agreement,
 		   |	ItemList.Basis,
+		   |	ItemList.SalesOrder,
 		   |	ItemList.Company,
 		   |	ItemList.Branch,
 		   |	ItemList.Currency,

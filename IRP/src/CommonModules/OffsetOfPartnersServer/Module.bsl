@@ -575,6 +575,7 @@ Function GetQueryTextAdvancesOnTransaction()
 		   |	Transactions.Currency,
 		   |	Transactions.TransactionDocument,
 		   |	Transactions.Agreement,
+		   |	Advances.Order,
 		   |	SUM(Transactions.DocumentAmount) AS DocumentAmount,
 		   |	Advances.Basis AS AdvancesDocument,
 		   |	SUM(Advances.AmountBalance) AS BalanceAmount,
@@ -599,6 +600,8 @@ Function GetQueryTextAdvancesOnTransaction()
 		   |		AND Advances.LegalName = Transactions.LegalName
 		   |		AND Advances.Currency = Transactions.Currency
 		   |		AND Advances.CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
+		   |		AND case when Advances.Order.Ref is null then true 
+		   |			else Advances.Order = Transactions.Order end
 		   |WHERE
 		   |	NOT Transactions.IgnoreAdvances
 		   |GROUP BY
@@ -610,6 +613,7 @@ Function GetQueryTextAdvancesOnTransaction()
 		   |	Transactions.Currency,
 		   |	Transactions.TransactionDocument,
 		   |	Transactions.Agreement,
+		   |	Advances.Order,
 		   |	Transactions.Key,
 		   |	Advances.Basis,
 		   |	VALUE(AccumulationRecordType.Expense)
@@ -653,6 +657,7 @@ Function DistributeAdvancesTableOnTransaction(AdvancesTable)
 			FillPropertyValues(NewRow, Row);
 			NewRow.Amount = CanWriteOff;
 			NewRow.AdvancesDocument = ItemOfArray.AdvancesDocument;
+			NewRow.Order = ItemOfArray.Order;
 
 			If NeedWriteOff = 0 Then
 				Break;
@@ -1137,6 +1142,7 @@ Procedure AdvancesOnMoneyMovements(Parameters, RegisterName, AdvancesTableName, 
 	|Agreement,
 	|LegalName,
 	|Currency,
+	|Order,
 	|TransactionDocument";
 	TransactionsTable = PostingServer.GetQueryTableByName(TransactionsTableName, Parameters);
 	For Each Row In TransactionsTable Do
@@ -1175,6 +1181,7 @@ Procedure AdvancesOnMoneyMovements(Parameters, RegisterName, AdvancesTableName, 
 	|	TransactionsBalanceTable.Currency,
 	|	TransactionsBalanceTable.AdvancesDocument,
 	|	TransactionsBalanceTable.Key,
+	|	TransactionsBalanceTable.Order,
 	|	TransactionsBalanceTable.DocumentAmount,
 	|	TransactionsBalanceTable.TransactionDocument,
 	|	TransactionsBalanceTable.Agreement,
@@ -1196,6 +1203,7 @@ Procedure AdvancesOnMoneyMovements(Parameters, RegisterName, AdvancesTableName, 
 	|	TransactionsBalanceTable.Currency,
 	|	TransactionsBalanceTable.AdvancesDocument,
 	|	TransactionsBalanceTable.Key,
+	|	TransactionsBalanceTable.Order,
 	|	TransactionsBalanceTable.DocumentAmount,
 	|	TransactionsBalanceTable.TransactionDocument,
 	|	TransactionsBalanceTable.Agreement,
@@ -1293,6 +1301,7 @@ Function GetQueryTextAdvancesOnMoneyMovements()
 		   |	Advances.Currency,
 		   |	Advances.AdvancesDocument,
 		   |	Advances.Key,
+		   |	Transactions.Order,
 		   |	SUM(Advances.DocumentAmount) AS DocumentAmount,
 		   |	Transactions.Basis AS TransactionDocument,
 		   |	Transactions.Basis AS Invoice,
@@ -1317,6 +1326,8 @@ Function GetQueryTextAdvancesOnMoneyMovements()
 		   |		AND Advances.Partner = Transactions.Partner
 		   |		AND Advances.LegalName = Transactions.LegalName
 		   |		AND Advances.Currency = Transactions.Currency
+		   |		AND case when Advances.Order.Ref is null then true
+		   |			else Advances.Order = Transactions.Order end
 		   |GROUP BY
 		   |	Advances.Period,
 		   |	Advances.Company,
@@ -1326,6 +1337,7 @@ Function GetQueryTextAdvancesOnMoneyMovements()
 		   |	Advances.Currency,
 		   |	Advances.AdvancesDocument,
 		   |	Advances.Key,
+		   |	Transactions.Order,
 		   |	Transactions.Basis,
 		   |	Transactions.Agreement
 		   |ORDER BY
@@ -1379,6 +1391,7 @@ Function DistributeAgingTableOnMoneyMovement(AgingBalanceTable)
 			NewRow.Agreement           = ItemOfArray.Agreement;
 			NewRow.AdvancesDocument    = ItemOfArray.AdvancesDocument;
 			NewRow.TransactionDocument = ItemOfArray.TransactionDocument;
+			NewRow.Order               = ItemOfArray.Order;
 			If NeedWriteOff = 0 Then
 				Break;
 			EndIf;
@@ -1399,6 +1412,7 @@ Procedure PutAdvancesTableToTempTables(Query, OffsetOfAdvance, OffsetOfAdvanceTa
 	|	OffsetOfAdvance.TransactionDocument,
 	|	OffsetOfAdvance.AdvancesDocument,
 	|	OffsetOfAdvance.Agreement,
+	|	OffsetOfAdvance.Order,
 	|	OffsetOfAdvance.Amount AS Amount,
 	|	OffsetOfAdvance.Key
 	|INTO %1

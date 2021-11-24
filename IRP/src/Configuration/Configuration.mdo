@@ -681,6 +681,7 @@
   <reports>Report.D4010_ActualStocks</reports>
   <reports>Report.D4011_FreeStocks</reports>
   <reports>Report.D4012_StockReservation</reports>
+  <reports>Report.OffsetOfAdvances</reports>
   <dataProcessors>DataProcessor.AnaliseDocumentMovements</dataProcessors>
   <dataProcessors>DataProcessor.DataHistory</dataProcessors>
   <dataProcessors>DataProcessor.MobileDesktop</dataProcessors>

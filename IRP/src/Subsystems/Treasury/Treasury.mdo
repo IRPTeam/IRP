@@ -13,6 +13,7 @@
   <content>Catalog.CashAccounts</content>
   <content>Document.VendorsAdvancesClosing</content>
   <content>Document.CustomersAdvancesClosing</content>
+  <content>Report.OffsetOfAdvances</content>
   <subsystems>Bank</subsystems>
   <subsystems>Cash</subsystems>
   <subsystems>CashTransactions</subsystems>

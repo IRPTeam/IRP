@@ -40,6 +40,7 @@
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
+    <indexing>Index</indexing>
     <fullTextSearch>Use</fullTextSearch>
   </attributes>
   <dimensions uuid="ae8cc6ca-997b-495f-a4c1-2103b2d679fa">

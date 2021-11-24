@@ -580,6 +580,8 @@
   <catalogs>Catalog.UserGroups</catalogs>
   <catalogs>Catalog.Users</catalogs>
   <catalogs>Catalog.Workstations</catalogs>
+  <catalogs>Catalog.AdvancesKeys</catalogs>
+  <catalogs>Catalog.TransactionsKeys</catalogs>
   <documents>Document.BankPayment</documents>
   <documents>Document.BankReceipt</documents>
   <documents>Document.Bundling</documents>
@@ -719,6 +721,9 @@
   <informationRegisters>InformationRegister.TaxSettings</informationRegisters>
   <informationRegisters>InformationRegister.UserSettings</informationRegisters>
   <informationRegisters>InformationRegister.T3010S_RowIDInfo</informationRegisters>
+  <informationRegisters>InformationRegister.T2014S_AdvancesInfo</informationRegisters>
+  <informationRegisters>InformationRegister.T2015S_TransactionsInfo</informationRegisters>
+  <informationRegisters>InformationRegister.T2016S_OffsetInfo</informationRegisters>
   <accumulationRegisters>AccumulationRegister.CashInTransit</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1001T_Purchases</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1002T_PurchaseReturns</accumulationRegisters>
@@ -782,6 +787,9 @@
   <accumulationRegisters>AccumulationRegister.TM1010B_RowIDMovements</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.TM1010T_RowIDMovements</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R4037B_PlannedReceiptReservationRequests</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.TM1020B_AdvancesKey</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.TM1030B_TransactionsKey</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.TM1040T_AgingsKey</accumulationRegisters>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.AddAttributeAndProperty</chartsOfCharacteristicTypes>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.CustomUserSettings</chartsOfCharacteristicTypes>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.IDInfoTypes</chartsOfCharacteristicTypes>

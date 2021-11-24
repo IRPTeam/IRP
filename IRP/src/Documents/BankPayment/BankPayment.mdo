@@ -83,6 +83,8 @@
   <registerRecords>AccumulationRegister.R2020B_AdvancesFromCustomers</registerRecords>
   <registerRecords>AccumulationRegister.CashInTransit</registerRecords>
   <registerRecords>AccumulationRegister.R5012B_VendorsAging</registerRecords>
+  <registerRecords>InformationRegister.T2014S_AdvancesInfo</registerRecords>
+  <registerRecords>InformationRegister.T2015S_TransactionsInfo</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -448,6 +450,20 @@
         <name>Filter.Company</name>
         <field>Document.BankPayment.TabularSection.PaymentList.Attribute.Payee</field>
       </choiceParameterLinks>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="e477f740-ebaf-4080-9cce-c3ff70cd17a9">
+      <name>Order</name>
+      <synonym>
+        <key>en</key>
+        <value>Order</value>
+      </synonym>
+      <type>
+        <types>DocumentRef.PurchaseOrder</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>

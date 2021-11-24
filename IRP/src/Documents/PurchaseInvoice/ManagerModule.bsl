@@ -179,6 +179,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(T2011S_PartnerTransactions());
 	QueryArray.Add(R5022T_Expenses());
 	QueryArray.Add(T3010S_RowIDInfo());
+	QueryArray.Add(T2015S_TransactionsInfo());
 	Return QueryArray;
 EndFunction
 
@@ -874,6 +875,36 @@ Function T3010S_RowIDInfo()
 		|		AND ItemList.Ref = &Ref
 		|		AND RowIDInfo.Key = ItemList.Key
 		|		AND RowIDInfo.Ref = ItemList.Ref";
+EndFunction
+
+Function T2015S_TransactionsInfo()
+	Return 
+	"SELECT
+	|	ItemList.Period AS Date,
+	|	ItemList.Company,
+	|	ItemList.Branch,
+	|	ItemList.Currency,
+	|	ItemList.Partner,
+	|	ItemList.LegalName,
+	|	ItemList.Agreement,
+	|	ItemList.PurchaseOrder AS Order,
+	|	TRUE AS IsVendorTransaction,
+	|	ItemList.BasisDocument AS TransactionBasis,
+	|	SUM(ItemList.Amount) AS Amount,
+	|	TRUE AS IsDue
+	|INTO T2015S_TransactionsInfo
+	|FROM
+	|	ItemList AS ItemList
+	|GROUP BY
+	|	ItemList.Period,
+	|	ItemList.Company,
+	|	ItemList.Branch,
+	|	ItemList.Currency,
+	|	ItemList.Partner,
+	|	ItemList.LegalName,
+	|	ItemList.Agreement,
+	|	ItemList.PurchaseOrder,
+	|	ItemList.BasisDocument";
 EndFunction
 
 #EndRegion

@@ -251,11 +251,13 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R1020B_AdvancesToVendors());
 	QueryArray.Add(R2021B_CustomersTransactions());
 	QueryArray.Add(R2020B_AdvancesFromCustomers());
-	QueryArray.Add(T2012S_PartnerAdvances());
-	QueryArray.Add(T2011S_PartnerTransactions());
+//	QueryArray.Add(T2012S_PartnerAdvances());
+//	QueryArray.Add(T2011S_PartnerTransactions());
 	QueryArray.Add(R5012B_VendorsAging());
 	QueryArray.Add(R3035T_CashPlanning());
 	QueryArray.Add(R5022T_Expenses());
+	QueryArray.Add(T2014S_AdvancesInfo());
+	QueryArray.Add(T2015S_TransactionsInfo());
 	Return QueryArray;
 EndFunction
 
@@ -328,7 +330,8 @@ Function PaymentList()
 		   |		IsCashTransferOrder,
 		   |	PaymentList.Ref.TransactionType = VALUE(Enum.OutgoingPaymentTransactionTypes.ReturnToCustomer) AS IsReturnToCustomer,
 		   |	PaymentList.Ref.Branch AS Branch,
-		   |	PaymentList.LegalNameContract AS LegalNameContract
+		   |	PaymentList.LegalNameContract AS LegalNameContract,
+		   |	PaymentList.Order
 		   |INTO PaymentList
 		   |FROM
 		   |	Document.BankPayment.PaymentList AS PaymentList
@@ -597,6 +600,51 @@ Function R5022T_Expenses()
 		   |	PaymentList AS PaymentList
 		   |WHERE
 		   |	PaymentList.Commission <> 0";
+EndFunction
+
+Function T2014S_AdvancesInfo()
+	Return 
+	"SELECT
+	|	PaymentList.Period AS Date,
+	|	PaymentList.Key,
+	|	PaymentList.Company,
+	|	PaymentList.Branch,
+	|	PaymentList.Currency,
+	|	PaymentList.Partner,
+	|	PaymentList.Payee AS LegalName,
+	|	PaymentList.Order,
+	|	TRUE AS IsVendorAdvance,
+	|	PaymentList.Amount
+	|INTO T2014S_AdvancesInfo
+	|FROM
+	|	PaymentList AS PaymentList
+	|WHERE
+	|	PaymentList.IsPaymentToVendor
+	|	AND PaymentList.IsAdvance";
+EndFunction
+
+Function T2015S_TransactionsInfo()
+	Return 
+	"SELECT
+	|	PaymentList.Period AS Date,
+	|	PaymentList.Key,
+	|	PaymentList.Company,
+	|	PaymentList.Branch,
+	|	PaymentList.Currency,
+	|	PaymentList.Partner,
+	|	PaymentList.Payee AS LegalName,
+	|	PaymentList.Agreement,
+	|	PaymentList.Order,
+	|	TRUE AS IsVendorTransaction,
+	|	PaymentList.TransactionDocument AS TransactionBasis,
+	|	PaymentList.Amount,
+	|	TRUE AS IsPaid
+	|INTO T2015S_TransactionsInfo
+	|FROM
+	|	PaymentList AS PaymentList
+	|WHERE
+	|	PaymentList.IsPaymentToVendor
+	|	AND NOT PaymentList.IsAdvance";
 EndFunction
 
 #EndRegion

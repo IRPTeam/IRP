@@ -22,56 +22,13 @@
   <levelCount>2</levelCount>
   <foldersOnTop>true</foldersOnTop>
   <codeLength>12</codeLength>
-  <descriptionLength>150</descriptionLength>
+  <descriptionLength>10</descriptionLength>
   <codeAllowedLength>Variable</codeAllowedLength>
   <checkUnique>true</checkUnique>
   <autonumbering>true</autonumbering>
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>
   <defaultObjectForm>Catalog.AdvancesKeys.Form.ItemForm</defaultObjectForm>
-  <attributes uuid="d3f415d9-6124-41d8-9cab-6bc78a65ce4d">
-    <name>Date</name>
-    <synonym>
-      <key>en</key>
-      <value>Date</value>
-    </synonym>
-    <type>
-      <types>Date</types>
-      <dateQualifiers/>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <indexing>Index</indexing>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="fac3694b-3b90-4f6c-a48f-640ed4b2aa51">
-    <name>Document</name>
-    <synonym>
-      <key>en</key>
-      <value>Document</value>
-    </synonym>
-    <type>
-      <types>DocumentRef.DebitNote</types>
-      <types>DocumentRef.CreditNote</types>
-      <types>DocumentRef.PurchaseReturn</types>
-      <types>DocumentRef.CashReceipt</types>
-      <types>DocumentRef.CashPayment</types>
-      <types>DocumentRef.PurchaseInvoice</types>
-      <types>DocumentRef.OpeningEntry</types>
-      <types>DocumentRef.BankPayment</types>
-      <types>DocumentRef.BankReceipt</types>
-      <types>DocumentRef.SalesInvoice</types>
-      <types>DocumentRef.SalesReturn</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <indexing>Index</indexing>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
   <attributes uuid="4c9e05b1-0ac3-4e6e-99b0-454721701ae2">
     <name>Company</name>
     <synonym>

@@ -350,6 +350,7 @@ Function R1021B_VendorsTransactions()
 		   |	PaymentList.Currency,
 		   |	PaymentList.Agreement,
 		   |	PaymentList.TransactionDocument AS Basis,
+		   |	PaymentList.Order,
 		   |	PaymentList.Key,
 		   |	PaymentList.Amount,
 		   |	UNDEFINED AS VendorsAdvancesClosing
@@ -372,6 +373,7 @@ Function R1021B_VendorsTransactions()
 		   |	OffsetOfAdvances.Currency,
 		   |	OffsetOfAdvances.Agreement,
 		   |	OffsetOfAdvances.TransactionDocument,
+		   |	OffsetOfAdvances.TransactionOrder,
 		   |	OffsetOfAdvances.Key,
 		   |	OffsetOfAdvances.Amount,
 		   |	OffsetOfAdvances.Recorder
@@ -411,7 +413,8 @@ Function R1020B_AdvancesToVendors()
 		   |	PaymentList.Partner,
 		   |	PaymentList.Payee AS LegalName,
 		   |	PaymentList.Currency,
-		   |	PaymentList.Basis,
+		  // |	PaymentList.Basis,
+		   |	PaymentList.Order,
 		   |	PaymentList.Amount,
 		   |	PaymentList.Key,
 		   |	UNDEFINED AS VendorsAdvancesClosing
@@ -432,7 +435,8 @@ Function R1020B_AdvancesToVendors()
 		   |	OffsetOfAdvances.Partner,
 		   |	OffsetOfAdvances.LegalName,
 		   |	OffsetOfAdvances.Currency,
-		   |	OffsetOfAdvances.AdvancesDocument,
+		  // |	OffsetOfAdvances.AdvancesDocument,
+		   |	OffsetOfAdvances.AdvancesOrder,
 		   |	OffsetOfAdvances.Amount,
 		   |	OffsetOfAdvances.Key,
 		   |	OffsetOfAdvances.Recorder
@@ -482,46 +486,46 @@ Function R5012B_VendorsAging()
 		   |	OffsetOfAging.Document = &Ref";
 EndFunction
 
-Function T2012S_PartnerAdvances()
-	Return "SELECT
-		   |	PaymentList.Period,
-		   |	PaymentList.Company,
-		   |	PaymentList.Branch,
-		   |	PaymentList.Partner,
-		   |	PaymentList.Payee AS LegalName,
-		   |	PaymentList.Currency,
-		   |	PaymentList.Basis AS AdvancesDocument,
-		   |	PaymentList.Amount,
-		   |	PaymentList.Key,
-		   |	TRUE AS IsVendorAdvance
-		   |INTO T2012S_PartnerAdvances
-		   |FROM
-		   |	PaymentList AS PaymentList
-		   |WHERE
-		   |	PaymentList.IsPaymentToVendor
-		   |	AND PaymentList.IsAdvance";
-EndFunction
+//Function T2012S_PartnerAdvances()
+//	Return "SELECT
+//		   |	PaymentList.Period,
+//		   |	PaymentList.Company,
+//		   |	PaymentList.Branch,
+//		   |	PaymentList.Partner,
+//		   |	PaymentList.Payee AS LegalName,
+//		   |	PaymentList.Currency,
+//		   |	PaymentList.Basis AS AdvancesDocument,
+//		   |	PaymentList.Amount,
+//		   |	PaymentList.Key,
+//		   |	TRUE AS IsVendorAdvance
+//		   |INTO T2012S_PartnerAdvances
+//		   |FROM
+//		   |	PaymentList AS PaymentList
+//		   |WHERE
+//		   |	PaymentList.IsPaymentToVendor
+//		   |	AND PaymentList.IsAdvance";
+//EndFunction
 
-Function T2011S_PartnerTransactions()
-	Return "SELECT
-		   |	PaymentList.Period,
-		   |	PaymentList.Company,
-		   |	PaymentList.Branch,
-		   |	PaymentList.Partner,
-		   |	PaymentList.Payee AS LegalName,
-		   |	PaymentList.Currency,
-		   |	PaymentList.Agreement,
-		   |	PaymentList.TransactionDocument,
-		   |	PaymentList.Key,
-		   |	PaymentList.Amount,
-		   |	TRUE AS IsPaymentToVendor
-		   |INTO T2011S_PartnerTransactions
-		   |FROM
-		   |	PaymentList AS PaymentList
-		   |WHERE
-		   |	PaymentList.IsPaymentToVendor
-		   |	AND NOT PaymentList.IsAdvance";
-EndFunction
+//Function T2011S_PartnerTransactions()
+//	Return "SELECT
+//		   |	PaymentList.Period,
+//		   |	PaymentList.Company,
+//		   |	PaymentList.Branch,
+//		   |	PaymentList.Partner,
+//		   |	PaymentList.Payee AS LegalName,
+//		   |	PaymentList.Currency,
+//		   |	PaymentList.Agreement,
+//		   |	PaymentList.TransactionDocument,
+//		   |	PaymentList.Key,
+//		   |	PaymentList.Amount,
+//		   |	TRUE AS IsPaymentToVendor
+//		   |INTO T2011S_PartnerTransactions
+//		   |FROM
+//		   |	PaymentList AS PaymentList
+//		   |WHERE
+//		   |	PaymentList.IsPaymentToVendor
+//		   |	AND NOT PaymentList.IsAdvance";
+//EndFunction
 
 Function R5010B_ReconciliationStatement()
 	Return "SELECT

@@ -22,58 +22,13 @@
   <levelCount>2</levelCount>
   <foldersOnTop>true</foldersOnTop>
   <codeLength>12</codeLength>
-  <descriptionLength>150</descriptionLength>
+  <descriptionLength>10</descriptionLength>
   <codeAllowedLength>Variable</codeAllowedLength>
   <checkUnique>true</checkUnique>
   <autonumbering>true</autonumbering>
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>
   <defaultObjectForm>Catalog.TransactionsKeys.Form.ItemForm</defaultObjectForm>
-  <attributes uuid="56b5778d-1366-449c-8ec5-31b5c0c40bfa">
-    <name>Date</name>
-    <synonym>
-      <key>en</key>
-      <value>Date</value>
-    </synonym>
-    <type>
-      <types>Date</types>
-      <dateQualifiers/>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <indexing>Index</indexing>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="c720c85d-c46c-48d3-989f-869a53ea3a74">
-    <name>Document</name>
-    <synonym>
-      <key>en</key>
-      <value>Document</value>
-    </synonym>
-    <type>
-      <types>DocumentRef.PurchaseInvoice</types>
-      <types>DocumentRef.PurchaseReturn</types>
-      <types>DocumentRef.CashReceipt</types>
-      <types>DocumentRef.DebitNote</types>
-      <types>DocumentRef.CreditNote</types>
-      <types>DocumentRef.CashPayment</types>
-      <types>DocumentRef.OpeningEntry</types>
-      <types>DocumentRef.BankPayment</types>
-      <types>DocumentRef.BankReceipt</types>
-      <types>DocumentRef.SalesInvoice</types>
-      <types>DocumentRef.RetailReturnReceipt</types>
-      <types>DocumentRef.RetailSalesReceipt</types>
-      <types>DocumentRef.SalesReturn</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <indexing>Index</indexing>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
   <attributes uuid="bb87504b-4ffe-434b-bf30-e6eadf893b2f">
     <name>Company</name>
     <synonym>

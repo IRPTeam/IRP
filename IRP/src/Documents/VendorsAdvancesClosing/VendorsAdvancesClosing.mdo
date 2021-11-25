@@ -38,7 +38,6 @@
   <registerRecords>InformationRegister.T2010S_OffsetOfAdvances</registerRecords>
   <registerRecords>AccumulationRegister.TM1020B_AdvancesKey</registerRecords>
   <registerRecords>AccumulationRegister.TM1030B_TransactionsKey</registerRecords>
-  <registerRecords>InformationRegister.T2016S_OffsetInfo</registerRecords>
   <registerRecords>AccumulationRegister.TM1040T_AgingsKey</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>

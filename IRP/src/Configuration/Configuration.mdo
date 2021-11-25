@@ -724,7 +724,6 @@
   <informationRegisters>InformationRegister.T3010S_RowIDInfo</informationRegisters>
   <informationRegisters>InformationRegister.T2014S_AdvancesInfo</informationRegisters>
   <informationRegisters>InformationRegister.T2015S_TransactionsInfo</informationRegisters>
-  <informationRegisters>InformationRegister.T2016S_OffsetInfo</informationRegisters>
   <accumulationRegisters>AccumulationRegister.CashInTransit</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1001T_Purchases</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1002T_PurchaseReturns</accumulationRegisters>

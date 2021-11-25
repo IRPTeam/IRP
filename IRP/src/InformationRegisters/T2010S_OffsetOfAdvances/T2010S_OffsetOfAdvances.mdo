@@ -239,4 +239,103 @@
     <fillValue xsi:type="core:UndefinedValue"/>
     <mainFilter>true</mainFilter>
   </dimensions>
+  <dimensions uuid="a2bfbce7-ecf9-4b04-b09b-e785b4bbb9b9">
+    <name>AdvancesOrder</name>
+    <synonym>
+      <key>en</key>
+      <value>Advances order</value>
+    </synonym>
+    <type>
+      <types>DocumentRef.PurchaseOrder</types>
+      <types>DocumentRef.SalesOrder</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+  <dimensions uuid="cbf0cebd-4ccf-4120-9102-f4a3f3a6a224">
+    <name>TransactionOrder</name>
+    <synonym>
+      <key>en</key>
+      <value>Transaction order</value>
+    </synonym>
+    <type>
+      <types>DocumentRef.PurchaseOrder</types>
+      <types>DocumentRef.SalesOrder</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+  <dimensions uuid="b06f054e-bcde-4dd4-b381-17d097f81fcf">
+    <name>FromAdvanceKey</name>
+    <synonym>
+      <key>en</key>
+      <value>From advance key</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.AdvancesKeys</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <indexing>Index</indexing>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+  <dimensions uuid="7fb1c431-084c-4edc-997a-a07ce584ca1a">
+    <name>ToTransactionKey</name>
+    <synonym>
+      <key>en</key>
+      <value>To transaction key</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.TransactionsKeys</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+  <dimensions uuid="5e04fa1e-d021-467f-87a2-15ad74adb5cf">
+    <name>FromTransactionKey</name>
+    <synonym>
+      <key>en</key>
+      <value>From transaction key</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.TransactionsKeys</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+  <dimensions uuid="ba5e9085-eed4-4658-b4e4-4244f1835fff">
+    <name>ToAdvanceKey</name>
+    <synonym>
+      <key>en</key>
+      <value>To advance key</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.AdvancesKeys</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
 </mdclass:InformationRegister>

@@ -425,7 +425,7 @@
 			</c>
 			<c>
 				<c>
-					<f>11</f>
+					<f>12</f>
 					<parameter>Agreement</parameter>
 				</c>
 			</c>
@@ -460,7 +460,7 @@
 			</c>
 			<c>
 				<c>
-					<f>12</f>
+					<f>13</f>
 					<parameter>TransactionClose</parameter>
 				</c>
 			</c>
@@ -471,87 +471,76 @@
 		<row>
 			<c>
 				<c>
-					<f>13</f>
+					<f>14</f>
 					<parameter>TRN_KEY</parameter>
 					<detailParameter>TRN_KEY</detailParameter>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>13</f>
+					<f>14</f>
 					<parameter>ADV_KEY</parameter>
 					<detailParameter>ADV_KEY</detailParameter>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>14</f>
+					<f>15</f>
 					<parameter>Document</parameter>
 					<detailParameter>Document</detailParameter>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>15</f>
-				</c>
-			</c>
-			<c>
-				<c>
-					<f>15</f>
+					<f>16</f>
 				</c>
 			</c>
 			<c>
 				<c>
 					<f>16</f>
-					<parameter>Order</parameter>
-					<detailParameter>Order</detailParameter>
-				</c>
-			</c>
-			<c>
-				<c>
-					<f>0</f>
-					<detailParameter>Order</detailParameter>
-				</c>
-			</c>
-			<c>
-				<c>
-					<f>0</f>
-					<detailParameter>Order</detailParameter>
 				</c>
 			</c>
 			<c>
 				<c>
 					<f>17</f>
+					<parameter>Order</parameter>
+					<detailParameter>Order</detailParameter>
+				</c>
+			</c>
+			<c>
+				<i>8</i>
+				<c>
+					<f>18</f>
 					<parameter>LineNumber</parameter>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>18</f>
+					<f>19</f>
 					<parameter>AdvanceReceipt</parameter>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>18</f>
+					<f>19</f>
 					<parameter>AdvanceExpense</parameter>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>18</f>
+					<f>19</f>
 					<parameter>TransactionReceipt</parameter>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>18</f>
+					<f>19</f>
 					<parameter>TransactionExpense</parameter>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>19</f>
+					<f>20</f>
 					<parameter>TransactionClose</parameter>
 				</c>
 			</c>
@@ -562,17 +551,17 @@
 		<row>
 			<c>
 				<c>
-					<f>20</f>
+					<f>21</f>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>20</f>
+					<f>21</f>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>20</f>
+					<f>21</f>
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
@@ -583,7 +572,7 @@
 			</c>
 			<c>
 				<c>
-					<f>20</f>
+					<f>21</f>
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
@@ -594,7 +583,7 @@
 			</c>
 			<c>
 				<c>
-					<f>20</f>
+					<f>21</f>
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
@@ -610,29 +599,29 @@
 		<row>
 			<c>
 				<c>
-					<f>21</f>
-				</c>
-			</c>
-			<c>
-				<c>
-					<f>21</f>
+					<f>22</f>
 				</c>
 			</c>
 			<c>
 				<c>
 					<f>22</f>
+				</c>
+			</c>
+			<c>
+				<c>
+					<f>23</f>
 					<parameter>PaymentDate</parameter>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>22</f>
+					<f>23</f>
 					<parameter>Receipt</parameter>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>22</f>
+					<f>23</f>
 					<parameter>Expense</parameter>
 				</c>
 			</c>
@@ -644,7 +633,7 @@
 			<columnsID>1e2d2c4b-ab33-473b-a592-9bbc32e4b9ca</columnsID>
 			<c>
 				<c>
-					<f>23</f>
+					<f>24</f>
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
@@ -661,7 +650,7 @@
 			<columnsID>1e2d2c4b-ab33-473b-a592-9bbc32e4b9ca</columnsID>
 			<c>
 				<c>
-					<f>20</f>
+					<f>21</f>
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
@@ -672,7 +661,7 @@
 			</c>
 			<c>
 				<c>
-					<f>20</f>
+					<f>21</f>
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
@@ -683,7 +672,7 @@
 			</c>
 			<c>
 				<c>
-					<f>24</f>
+					<f>25</f>
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
@@ -694,7 +683,7 @@
 			</c>
 			<c>
 				<c>
-					<f>24</f>
+					<f>25</f>
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
@@ -705,7 +694,7 @@
 			</c>
 			<c>
 				<c>
-					<f>24</f>
+					<f>25</f>
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
@@ -716,7 +705,7 @@
 			</c>
 			<c>
 				<c>
-					<f>24</f>
+					<f>25</f>
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
@@ -727,7 +716,7 @@
 			</c>
 			<c>
 				<c>
-					<f>20</f>
+					<f>21</f>
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
@@ -738,7 +727,7 @@
 			</c>
 			<c>
 				<c>
-					<f>20</f>
+					<f>21</f>
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
@@ -749,7 +738,7 @@
 			</c>
 			<c>
 				<c>
-					<f>24</f>
+					<f>25</f>
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
@@ -760,7 +749,7 @@
 			</c>
 			<c>
 				<c>
-					<f>24</f>
+					<f>25</f>
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
@@ -771,7 +760,7 @@
 			</c>
 			<c>
 				<c>
-					<f>24</f>
+					<f>25</f>
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
@@ -782,7 +771,7 @@
 			</c>
 			<c>
 				<c>
-					<f>24</f>
+					<f>25</f>
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
@@ -793,7 +782,7 @@
 			</c>
 			<c>
 				<c>
-					<f>25</f>
+					<f>26</f>
 				</c>
 			</c>
 		</row>
@@ -804,75 +793,75 @@
 			<columnsID>1e2d2c4b-ab33-473b-a592-9bbc32e4b9ca</columnsID>
 			<c>
 				<c>
-					<f>26</f>
+					<f>27</f>
 					<parameter>ADV_Period</parameter>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>27</f>
+					<f>28</f>
 					<parameter>FromAdvanceKey</parameter>
 					<detailParameter>FromAdvanceKey</detailParameter>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>28</f>
+					<f>29</f>
 					<parameter>ADV_Open</parameter>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>27</f>
+					<f>28</f>
 					<parameter>ADV_Receipt</parameter>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>27</f>
+					<f>28</f>
 					<parameter>ADV_Expense</parameter>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>28</f>
+					<f>29</f>
 					<parameter>ADV_Close</parameter>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>26</f>
+					<f>27</f>
 					<parameter>TRN_Period</parameter>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>27</f>
+					<f>28</f>
 					<parameter>ToTransactionKey</parameter>
 					<detailParameter>ToTransactionKey</detailParameter>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>29</f>
+					<f>30</f>
 					<parameter>TRN_Open</parameter>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>30</f>
+					<f>31</f>
 					<parameter>TRN_Receipt</parameter>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>30</f>
+					<f>31</f>
 					<parameter>TRN_Expense</parameter>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>29</f>
+					<f>30</f>
 					<parameter>TRN_Close</parameter>
 				</c>
 			</c>
@@ -891,7 +880,7 @@
 			<columnsID>1e2d2c4b-ab33-473b-a592-9bbc32e4b9ca</columnsID>
 			<c>
 				<c>
-					<f>23</f>
+					<f>24</f>
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
@@ -908,7 +897,7 @@
 			<columnsID>1e2d2c4b-ab33-473b-a592-9bbc32e4b9ca</columnsID>
 			<c>
 				<c>
-					<f>20</f>
+					<f>21</f>
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
@@ -919,7 +908,7 @@
 			</c>
 			<c>
 				<c>
-					<f>20</f>
+					<f>21</f>
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
@@ -930,7 +919,7 @@
 			</c>
 			<c>
 				<c>
-					<f>24</f>
+					<f>25</f>
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
@@ -941,7 +930,7 @@
 			</c>
 			<c>
 				<c>
-					<f>24</f>
+					<f>25</f>
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
@@ -952,7 +941,7 @@
 			</c>
 			<c>
 				<c>
-					<f>24</f>
+					<f>25</f>
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
@@ -963,7 +952,7 @@
 			</c>
 			<c>
 				<c>
-					<f>24</f>
+					<f>25</f>
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
@@ -974,7 +963,7 @@
 			</c>
 			<c>
 				<c>
-					<f>20</f>
+					<f>21</f>
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
@@ -985,7 +974,7 @@
 			</c>
 			<c>
 				<c>
-					<f>20</f>
+					<f>21</f>
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
@@ -996,7 +985,7 @@
 			</c>
 			<c>
 				<c>
-					<f>24</f>
+					<f>25</f>
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
@@ -1007,7 +996,7 @@
 			</c>
 			<c>
 				<c>
-					<f>24</f>
+					<f>25</f>
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
@@ -1018,7 +1007,7 @@
 			</c>
 			<c>
 				<c>
-					<f>24</f>
+					<f>25</f>
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
@@ -1029,7 +1018,7 @@
 			</c>
 			<c>
 				<c>
-					<f>24</f>
+					<f>25</f>
 					<tl>
 						<v8:item>
 							<v8:lang>en</v8:lang>
@@ -1046,75 +1035,75 @@
 			<columnsID>1e2d2c4b-ab33-473b-a592-9bbc32e4b9ca</columnsID>
 			<c>
 				<c>
-					<f>26</f>
+					<f>27</f>
 					<parameter>TRN_Period</parameter>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>31</f>
+					<f>32</f>
 					<parameter>FromTransactionKey</parameter>
 					<detailParameter>FromTransactionKey</detailParameter>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>32</f>
+					<f>33</f>
 					<parameter>TRN_Open</parameter>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>33</f>
+					<f>34</f>
 					<parameter>TRN_Receipt</parameter>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>33</f>
+					<f>34</f>
 					<parameter>TRN_Expense</parameter>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>32</f>
+					<f>33</f>
 					<parameter>TRN_Close</parameter>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>26</f>
+					<f>27</f>
 					<parameter>ADV_Period</parameter>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>31</f>
+					<f>32</f>
 					<parameter>ToAdvanceKey</parameter>
 					<detailParameter>ToAdvanceKey</detailParameter>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>32</f>
+					<f>33</f>
 					<parameter>ADV_Open</parameter>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>33</f>
+					<f>34</f>
 					<parameter>ADV_Receipt</parameter>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>33</f>
+					<f>34</f>
 					<parameter>ADV_Expense</parameter>
 				</c>
 			</c>
 			<c>
 				<c>
-					<f>32</f>
+					<f>33</f>
 					<parameter>ADV_Close</parameter>
 				</c>
 			</c>
@@ -1169,11 +1158,6 @@
 		<w>2</w>
 	</merge>
 	<merge>
-		<r>5</r>
-		<c>5</c>
-		<w>2</w>
-	</merge>
-	<merge>
 		<r>2</r>
 		<c>1</c>
 		<h>1</h>
@@ -1197,6 +1181,11 @@
 		<r>13</r>
 		<c>0</c>
 		<w>11</w>
+	</merge>
+	<merge>
+		<r>5</r>
+		<c>5</c>
+		<w>2</w>
 	</merge>
 	<namedItem xsi:type="NamedItemCells">
 		<name>Header</name>
@@ -1367,6 +1356,22 @@
 		<topBorder>0</topBorder>
 		<rightBorder>2</rightBorder>
 		<bottomBorder>2</bottomBorder>
+		<backColor>#CCFFCC</backColor>
+		<textPlacement>Wrap</textPlacement>
+		<fillType>Parameter</fillType>
+		<format>
+			<v8:item>
+				<v8:lang>en</v8:lang>
+				<v8:content>NFD=2; NGS=' '</v8:content>
+			</v8:item>
+		</format>
+	</format>
+	<format>
+		<leftBorder>2</leftBorder>
+		<topBorder>0</topBorder>
+		<rightBorder>2</rightBorder>
+		<bottomBorder>2</bottomBorder>
+		<width>160</width>
 		<backColor>#CCFFCC</backColor>
 		<textPlacement>Wrap</textPlacement>
 		<fillType>Parameter</fillType>

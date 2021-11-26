@@ -29,7 +29,7 @@ Procedure RunAtServer()
 		For Each DocumentRow In DocumentTable Do
 			Area_Row = Template.GetArea("Row");
 			Area_Row.Parameters.Fill(DocumentRow);
-			Area_Row.Parameters.Fill(GetCorrespondent(MainRow, DocumentRow));
+			//Area_Row.Parameters.Fill(GetCorrespondent(MainRow, DocumentRow));
 			
 			ADV_KEY = GetADV_KEY(MainRow.Company, MainRow.Branch, MainRow.Currency, 
 				MainRow.Partner, MainRow.LegalName, DocumentRow.Order);
@@ -125,7 +125,7 @@ Function GetFromTRN_ToADV(ArrayOf_FromTRN)
 |	tmp2.TRN_Period AS TRN_Period,
 |	CASE
 |		WHEN tmp2.TRN_Period IS NULL
-|			THEN DATETIME(3000, 1, 1)
+|			THEN ADV.Period //DATETIME(3000, 1, 1)
 |		ELSE tmp2.TRN_Period
 |	END AS pOrder,
 |	tmp2.TRN_Open AS TRN_Open,
@@ -164,7 +164,7 @@ Function GetFromTRN_ToADV(ArrayOf_FromTRN)
 |	ADV.AmountClosingBalance,
 |	CASE
 |		WHEN tmp2.TRN_Period IS NULL
-|			THEN DATETIME(3000, 1, 1)
+|			THEN ADV.Period //DATETIME(3000, 1, 1)
 |		ELSE tmp2.TRN_Period
 |	END
 |ORDER BY
@@ -219,7 +219,7 @@ Function GetFromADV_ToTRN(ArrayOf_FromADV)
 	|	tmp2.ADV_Period AS ADV_Period,
 	|	CASE
 	|		WHEN tmp2.ADV_Period IS NULL
-	|			THEN DATETIME(3000, 1, 1)
+	|			THEN TRN.Period //DATETIME(3000, 1, 1)
 	|		ELSE tmp2.ADV_Period
 	|	END AS pOrder,
 	|	tmp2.ADV_Open AS ADV_Open,
@@ -258,7 +258,7 @@ Function GetFromADV_ToTRN(ArrayOf_FromADV)
 	|	TRN.AmountClosingBalance,
 	|	CASE
 	|		WHEN tmp2.ADV_Period IS NULL
-	|			THEN DATETIME(3000, 1, 1)
+	|			THEN TRN.Period //DATETIME(3000, 1, 1)
 	|		ELSE tmp2.ADV_Period
 	|	END
 	|ORDER BY
@@ -353,47 +353,48 @@ Function GetAgingTable(Invoice)
 	Return QueryTable;
 EndFunction
 
-Function GetCorrespondent(MainRow, DocumentRow)
-	Query = New Query();
-	Query.Text = 
-	"SELECT
-	|	CASE
-	|		WHEN T2010S_OffsetOfAdvances.Document = T2010S_OffsetOfAdvances.TransactionDocument
-	|			THEN T2010S_OffsetOfAdvances.AdvancesDocument
-	|		WHEN T2010S_OffsetOfAdvances.Document = T2010S_OffsetOfAdvances.AdvancesDocument
-	|			THEN T2010S_OffsetOfAdvances.TransactionDocument
-	|	END AS Correspondent,
-	|	T2010S_OffsetOfAdvances.LineNumber
-	|FROM
-	|	InformationRegister.T2010S_OffsetOfAdvances AS T2010S_OffsetOfAdvances
-	|WHERE
-	|	T2010S_OffsetOfAdvances.Company = &Company
-	|	AND T2010S_OffsetOfAdvances.Branch = &Branch
-	|	AND T2010S_OffsetOfAdvances.Currency = &Currency
-	|	AND T2010S_OffsetOfAdvances.Partner = &Partner
-	|	AND T2010S_OffsetOfAdvances.LegalName = &LegalName
-	|	AND T2010S_OffsetOfAdvances.Agreement = &Agreement
-	|	AND T2010S_OffsetOfAdvances.Document = &Document";
-	Query.SetParameter("Company", MainRow.Company);
-	Query.SetParameter("Branch", MainRow.Branch);
-	Query.SetParameter("Currency", MainRow.Currency);
-	Query.SetParameter("LegalName", MainRow.LegalName);
-	Query.SetParameter("Partner", MainRow.Partner);
-	Query.SetParameter("Agreement", MainRow.Agreement);
-	Query.SetParameter("Document", DocumentRow.Document);
-	QueryResult = Query.Execute();
-	QuerySelection = QueryResult.Select();
-	If QuerySelection.Next() Then
-		Return QuerySelection;
-	EndIf;
-	Return New Structure("Correspondent, LineNumber", "---", "");
-EndFunction
+//Function GetCorrespondent(MainRow, DocumentRow)
+//	Query = New Query();
+//	Query.Text = 
+//	"SELECT
+//	|	CASE
+//	|		WHEN T2010S_OffsetOfAdvances.Document = T2010S_OffsetOfAdvances.TransactionDocument
+//	|			THEN T2010S_OffsetOfAdvances.AdvancesDocument
+//	|		WHEN T2010S_OffsetOfAdvances.Document = T2010S_OffsetOfAdvances.AdvancesDocument
+//	|			THEN T2010S_OffsetOfAdvances.TransactionDocument
+//	|	END AS Correspondent,
+//	|	T2010S_OffsetOfAdvances.LineNumber
+//	|FROM
+//	|	InformationRegister.T2010S_OffsetOfAdvances AS T2010S_OffsetOfAdvances
+//	|WHERE
+//	|	T2010S_OffsetOfAdvances.Company = &Company
+//	|	AND T2010S_OffsetOfAdvances.Branch = &Branch
+//	|	AND T2010S_OffsetOfAdvances.Currency = &Currency
+//	|	AND T2010S_OffsetOfAdvances.Partner = &Partner
+//	|	AND T2010S_OffsetOfAdvances.LegalName = &LegalName
+//	|	AND T2010S_OffsetOfAdvances.Agreement = &Agreement
+//	|	AND T2010S_OffsetOfAdvances.Document = &Document";
+//	Query.SetParameter("Company", MainRow.Company);
+//	Query.SetParameter("Branch", MainRow.Branch);
+//	Query.SetParameter("Currency", MainRow.Currency);
+//	Query.SetParameter("LegalName", MainRow.LegalName);
+//	Query.SetParameter("Partner", MainRow.Partner);
+//	Query.SetParameter("Agreement", MainRow.Agreement);
+//	Query.SetParameter("Document", DocumentRow.Document);
+//	QueryResult = Query.Execute();
+//	QuerySelection = QueryResult.Select();
+//	If QuerySelection.Next() Then
+//		Return QuerySelection;
+//	EndIf;
+//	Return New Structure("Correspondent, LineNumber", "---", "");
+//EndFunction
 
 Function GetDocumentTable(MainRow)
 	Query = New Query();
 	Query.Text = 
 	"SELECT
 	|	R1020B_AdvancesToVendorsBalanceAndTurnovers.Recorder AS Recorder,
+//	|	value(Catalog.Agreements.EmptyRef) AS Agreement,
 	|	R1020B_AdvancesToVendorsBalanceAndTurnovers.Order,
 	|	R1020B_AdvancesToVendorsBalanceAndTurnovers.Recorder.PointInTime AS PointInTime,
 	|	R1020B_AdvancesToVendorsBalanceAndTurnovers.AmountOpeningBalance AS AdvanceOpen,
@@ -419,6 +420,7 @@ Function GetDocumentTable(MainRow)
 	|
 	|SELECT
 	|	R1021B_VendorsTransactionsBalanceAndTurnovers.Recorder,
+//	|	R1021B_VendorsTransactionsBalanceAndTurnovers.Agreement,
 	|	R1021B_VendorsTransactionsBalanceAndTurnovers.Order,
 	|	R1021B_VendorsTransactionsBalanceAndTurnovers.Recorder.PointInTime,
 	|	0,
@@ -444,6 +446,7 @@ Function GetDocumentTable(MainRow)
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
 	|	tmp.Recorder AS Document,
+//	|	tmp.Agreement,
 	|	tmp.Order,
 	|	SUM(tmp.AdvanceOpen) AS AdvanceOpen,
 	|	SUM(tmp.AdvanceReceipt) AS AdvanceReceipt,
@@ -457,6 +460,7 @@ Function GetDocumentTable(MainRow)
 	|	tmp AS tmp
 	|GROUP BY
 	|	tmp.Recorder,
+//	|	tmp.Agreement,
 	|	tmp.Order,
 	|	tmp.PointInTime
 	|ORDER BY

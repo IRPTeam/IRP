@@ -111,7 +111,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R1014T_CanceledPurchaseOrders());
 	QueryArray.Add(R4033B_GoodsReceiptSchedule());
 	QueryArray.Add(R4035B_IncomingStocks());
-	QueryArray.Add(R3025B_PurchaseOrdersToBePaid();
+	QueryArray.Add(R3025B_PurchaseOrdersToBePaid());
 	QueryArray.Add(T2014S_AdvancesInfo());
 	QueryArray.Add(R1021B_VendorsTransactions());
 	QueryArray.Add(R1020B_AdvancesToVendors());
@@ -261,43 +261,35 @@ EndFunction
 Function T2014S_AdvancesInfo()
 	Return 
 	"SELECT
-	|	ItemList.Period AS Date,
-	|	ItemList.Company,
-	|	ItemList.Branch,
-	|	ItemList.Currency,
-	|	ItemList.Partner,
-	|	ItemList.LegalName,
-	|	ItemList.Order,
+	|	Doc.Date,
+	|	Doc.Company,
+	|	Doc.Branch,
+	|	Doc.Currency,
+	|	Doc.Partner,
+	|	Doc.LegalName,
+	|	Doc.PurchaseOrder AS Order,
 	|	TRUE AS IsVendorAdvance,
 	|	TRUE AS IsPurchaseOrderClose
 	|INTO T2014S_AdvancesInfo
 	|FROM
-	|	ItemList AS ItemList
+	|	Document.PurchaseOrderClosing AS Doc
 	|WHERE
-	|	TRUE
-	|GROUP BY
-	|	ItemList.Branch,
-	|	ItemList.Company,
-	|	ItemList.Currency,
-	|	ItemList.LegalName,
-	|	ItemList.Order,
-	|	ItemList.Partner,
-	|	ItemList.Period";
+	|	Doc.Ref = &Ref";
 EndFunction
 
 Function R1020B_AdvancesToVendors()
 	Return
 	"SELECT
-	|	VALUE(AccumulationRecordType.Receipt),
+	|	VALUE(AccumulationRecordType.Expense) AS RecordType,
 	|	OffsetOfAdvances.Period,
 	|	OffsetOfAdvances.Company,
 	|	OffsetOfAdvances.Branch,
 	|	OffsetOfAdvances.Partner,
 	|	OffsetOfAdvances.LegalName,
 	|	OffsetOfAdvances.Currency,
-	|	OffsetOfAdvances.AdvancesOrder,
+	|	OffsetOfAdvances.AdvancesOrder AS Order,
 	|	OffsetOfAdvances.Amount,
-	|	OffsetOfAdvances.Recorder
+	|	OffsetOfAdvances.Recorder AS VendorsAdvancesClosing
 	|INTO R1020B_AdvancesToVendors
 	|FROM
 	|	InformationRegister.T2010S_OffsetOfAdvances AS OffsetOfAdvances
@@ -316,10 +308,10 @@ Function R1021B_VendorsTransactions()
 	|	OffsetOfAdvances.LegalName,
 	|	OffsetOfAdvances.Currency,
 	|	OffsetOfAdvances.Agreement,
-	|	OffsetOfAdvances.TransactionDocument,
-	|	OffsetOfAdvances.TransactionOrder,
+	|	OffsetOfAdvances.TransactionDocument AS Basis,
+	|	OffsetOfAdvances.TransactionOrder AS Order,
 	|	OffsetOfAdvances.Amount,
-	|	OffsetOfAdvances.Recorder
+	|	OffsetOfAdvances.Recorder AS VendorsAdvancesClosing
 	|INTO R1021B_VendorsTransactions
 	|FROM
 	|	InformationRegister.T2010S_OffsetOfAdvances AS OffsetOfAdvances

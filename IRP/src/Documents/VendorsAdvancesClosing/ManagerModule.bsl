@@ -119,6 +119,7 @@ Function OffsetOfAdvancesAndAging(Parameters)
 	Records_OffsetOfAdvances.Columns.Delete(Records_OffsetOfAdvances.Columns.PointInTime);
 	Records_OffsetOfAdvances.Columns.Add("AdvancesRowKey"     , Metadata.DefinedTypes.typeRowID.Type);
 	Records_OffsetOfAdvances.Columns.Add("TransactionsRowKey" , Metadata.DefinedTypes.typeRowID.Type);
+	Records_OffsetOfAdvances.Columns.Add("OnlyAdvances" , New TypeDescription("Boolean"));
 	
 	// detail info by all aging
 	Records_OffsetAging = InformationRegisters.T2013S_OffsetOfAging.CreateRecordSet().UnloadColumns();
@@ -215,15 +216,22 @@ Function OffsetOfAdvancesAndAging(Parameters)
 	While QuerySelection.Next() Do
 		// Offset advances to transactions
 		If ValueIsFilled(QuerySelection.AdvanceKey) Then
-			OffsetAdvancesToTransactions(Parameters, Records_AdvancesKey, Records_TransactionsKey, Records_OffsetOfAdvances,
-				Records_OffsetAging, //Records_AgingsKey, 
-				QuerySelection.AdvanceKey, QuerySelection.PointInTime, QuerySelection.Document);
+			
+			If TypeOf(QuerySelection.Document) = Type("DocumentRef.PurchaseOrderClosing") 
+				And ValueIsFilled(QuerySelection.AdvanceKey.Order) Then
+				AdvanceKeyWithoutOrder = ReleaseAdvanceByOrder(Parameters, Records_AdvancesKey, Records_OffsetOfAdvances, 
+					QuerySelection.Document, QuerySelection.PointInTime.Date, QuerySelection.AdvanceKey);
+				OffsetAdvancesToTransactions(Parameters, Records_AdvancesKey, Records_TransactionsKey, Records_OffsetOfAdvances,
+				Records_OffsetAging, AdvanceKeyWithoutOrder, QuerySelection.PointInTime, QuerySelection.Document);
+			Else
+				OffsetAdvancesToTransactions(Parameters, Records_AdvancesKey, Records_TransactionsKey, Records_OffsetOfAdvances,
+					Records_OffsetAging, QuerySelection.AdvanceKey, QuerySelection.PointInTime, QuerySelection.Document);
+			EndIf;
 		EndIf;
 		// Offset transactions to advances
 		If ValueIsFilled(QuerySelection.TransactionKey) Then
 			OffsetTransactionsToAdvances(Parameters, Records_TransactionsKey, Records_AdvancesKey, Records_OffsetOfAdvances, 
-				Records_OffsetAging, //Records_AgingsKey, 
-				QuerySelection.TransactionKey, QuerySelection.PointInTime, QuerySelection.Document);
+				Records_OffsetAging, QuerySelection.TransactionKey, QuerySelection.PointInTime, QuerySelection.Document);
 		EndIf;
 	EndDo;
 	
@@ -649,7 +657,7 @@ Function GetAdvanceKeyByAdvanceKeyWithOrder(AdvanceKey)
 	|	(&AdvanceKey).Branch,
 	|	(&AdvanceKey).Currency,
 	|	(&AdvanceKey).Partner,
-	|	(&AdvanceKey).LegalName
+	|	(&AdvanceKey).LegalName,
 	|	TRUE AS IsVendorAdvance
 	|FROM
 	|	Catalog.AdvancesKeys AS AdvKeys
@@ -1111,10 +1119,7 @@ Procedure CreateAdvancesKeys(Parameters, Records_AdvancesKey, Records_OffsetOfAd
 	QuerySelection = QueryResult.Select();
 	
 	While QuerySelection.Next() Do
-		If QuerySelection.IsPurchaseOrderClose Then
-			ReleaseAdvanceByOrder(Parameters, Records_AdvancesKey, Records_OffsetOfAdvances,
-				QuerySelection.Document, QuerySelection.Date, QuerySelection.AdvanceKey);
-		Else
+		If Not QuerySelection.IsPurchaseOrderClose Then
 			New_AdvKeys = Records_AdvancesKey.Add();
 			New_AdvKeys.RecordType = AccumulationRecordType.Receipt;
 			New_AdvKeys.Period     = QuerySelection.Date;
@@ -1128,7 +1133,7 @@ Procedure CreateAdvancesKeys(Parameters, Records_AdvancesKey, Records_OffsetOfAd
 	EndDo;
 EndProcedure
 
-Procedure ReleaseAdvanceByOrder(Parameters, Records_AdvancesKey, Records_OffsetOfAdvances, 
+Function ReleaseAdvanceByOrder(Parameters, Records_AdvancesKey, Records_OffsetOfAdvances, 
 	Document, Date, AdvanceKey)
 	Write_TM1020B_AdvancesKey(Parameters, Records_AdvancesKey);
 	Query = New Query();
@@ -1147,50 +1152,58 @@ Procedure ReleaseAdvanceByOrder(Parameters, Records_AdvancesKey, Records_OffsetO
 	
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
-
+	AdvanceKeyWithoutOrder = GetAdvanceKeyByAdvanceKeyWithOrder(AdvanceKey);
+	NeedWriteAdvances = False;
 	While QuerySelection.Next() Do
 		If QuerySelection.AdvanceAmount < 0 Then
 			Raise StrTemplate("Advance < 0 ADV_KEY[%1]", QuerySelection.AdvanceKey);
 		EndIf;
+		NeedWriteAdvances = True;
 		// Minus by advance with order
 		New_AdvKeys_Minus = Records_AdvancesKey.Add();
 		New_AdvKeys_Minus.RecordType = AccumulationRecordType.Receipt;
 		New_AdvKeys_Minus.Period     = Date;
 		New_AdvKeys_Minus.AdvanceKey = AdvanceKey;//key with order
-		New_AdvKeys_Minus.Amount     = - QuerySelection.Amount;
+		New_AdvKeys_Minus.Amount     = - QuerySelection.AdvanceAmount;
 		
 		// Plus by advance without order
 		New_AdvKeys_Minus = Records_AdvancesKey.Add();
 		New_AdvKeys_Minus.RecordType = AccumulationRecordType.Receipt;
 		New_AdvKeys_Minus.Period     = Date;
-		AdvanceKey_WithoutOrder = GetAdvanceKeyByAdvanceKeyWithOrder(AdvanceKey);
+		AdvanceKey_WithoutOrder      = AdvanceKeyWithoutOrder;
 		New_AdvKeys_Minus.AdvanceKey = AdvanceKey_WithoutOrder;//key without order
-		New_AdvKeys_Minus.Amount     = QuerySelection.Amount;
+		New_AdvKeys_Minus.Amount     = QuerySelection.AdvanceAmount;
 		
-		// OffsetOfAdvances - minus with order
+		// OffsetOfAdvances - minus with order (record type expense)
 		NewOffsetInfo = Records_OffsetOfAdvances.Add();
-		NewOffsetInfo.Period              = Date;
-		NewOffsetInfo.Amount              = - QuerySelection.Amount;
-		NewOffsetInfo.Document            = Document;
-		NewOffsetInfo.Company             = AdvanceKey.Company;
-		NewOffsetInfo.Branch              = AdvanceKey.Branch;
-		NewOffsetInfo.Currency            = AdvanceKey.Currency;
-		NewOffsetInfo.Partner             = AdvanceKey.Partner;
-		NewOffsetInfo.LegalName           = AdvanceKey.LegalName;
-		NewOffsetInfo.AdvancesOrder       = AdvanceKey.Order;
+		NewOffsetInfo.OnlyAdvances  = True;
+		NewOffsetInfo.Period        = Date;
+		NewOffsetInfo.Amount        = QuerySelection.AdvanceAmount;
+		NewOffsetInfo.Document      = Document;
+		NewOffsetInfo.Company       = AdvanceKey.Company;
+		NewOffsetInfo.Branch        = AdvanceKey.Branch;
+		NewOffsetInfo.Currency      = AdvanceKey.Currency;
+		NewOffsetInfo.Partner       = AdvanceKey.Partner;
+		NewOffsetInfo.LegalName     = AdvanceKey.LegalName;
+		NewOffsetInfo.AdvancesOrder = AdvanceKey.Order;
 		
-		// OffsetOfAdvances - plus without order
+		// OffsetOfAdvances - plus without order (record type expense)
 		NewOffsetInfo = Records_OffsetOfAdvances.Add();
-		NewOffsetInfo.Period              = Date;
-		NewOffsetInfo.Amount              = QuerySelection.Amount;
-		NewOffsetInfo.Document            = Document;
-		NewOffsetInfo.Company             = AdvanceKey.Company;
-		NewOffsetInfo.Branch              = AdvanceKey.Branch;
-		NewOffsetInfo.Currency            = AdvanceKey.Currency;
-		NewOffsetInfo.Partner             = AdvanceKey.Partner;
-		NewOffsetInfo.LegalName           = AdvanceKey.LegalName;
+		NewOffsetInfo.OnlyAdvances = True;
+		NewOffsetInfo.Period       = Date;
+		NewOffsetInfo.Amount       = - QuerySelection.AdvanceAmount;
+		NewOffsetInfo.Document     = Document;
+		NewOffsetInfo.Company      = AdvanceKey.Company;
+		NewOffsetInfo.Branch       = AdvanceKey.Branch;
+		NewOffsetInfo.Currency     = AdvanceKey.Currency;
+		NewOffsetInfo.Partner      = AdvanceKey.Partner;
+		NewOffsetInfo.LegalName    = AdvanceKey.LegalName;
 	EndDo;
-EndProcedure
+	If NeedWriteAdvances Then
+		Write_TM1020B_AdvancesKey(Parameters, Records_AdvancesKey);
+	EndIf;
+	Return AdvanceKeyWithoutOrder;
+EndFunction
 
 Procedure Write_TM1020B_AdvancesKey(Parameters, Records_AdvancesKey)
 	RecordSet = AccumulationRegisters.TM1020B_AdvancesKey.CreateRecordSet();
@@ -1483,6 +1496,10 @@ Procedure Write_SelfRecords(Parameters, Records_OffsetOfAdvances)
 			NewRow_Advances.Order = RowOffset.AdvancesOrder;
 			If AdvancesColumnKeyExists Then
 				NewRow_Advances.Key = RowOffset.AdvancesRowKey;
+			EndIf;
+			
+			If RowOffset.OnlyAdvances = True Then
+				Continue;
 			EndIf;
 			
 			// Transactions

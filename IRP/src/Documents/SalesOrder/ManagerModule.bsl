@@ -382,14 +382,14 @@ Function R3024B_SalesOrdersToBePaid()
 	Return 
 	"SELECT
 	|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-	|	PaymentTerms.Date AS Period,
+	|	PaymentTerms.Ref.Date AS Period,
 	|	PaymentTerms.Ref.Company,
 	|	PaymentTerms.Ref.Branch,
 	|	PaymentTerms.Ref.Currency,
 	|	PaymentTerms.Ref.Partner,
 	|	PaymentTerms.Ref.LegalName,
 	|	PaymentTerms.Ref AS Order,
-	|	PaymentTerms.Amount
+	|	SUM(PaymentTerms.Amount) AS Amount
 	|INTO R3024B_SalesOrdersToBePaid
 	|FROM
 	|	Document.SalesOrder.PaymentTerms AS PaymentTerms
@@ -397,7 +397,16 @@ Function R3024B_SalesOrdersToBePaid()
 	|	PaymentTerms.Ref = &Ref
 	|	AND (PaymentTerms.CalculationType = VALUE(Enum.CalculationTypes.Prepaid)
 	|	AND PaymentTerms.CanBePaid)
-	|	AND &StatusInfoPosting";
+	|	AND &StatusInfoPosting
+	|GROUP BY
+	|	PaymentTerms.Ref,
+	|	PaymentTerms.Ref.Branch,
+	|	PaymentTerms.Ref.Company,
+	|	PaymentTerms.Ref.Currency,
+	|	PaymentTerms.Ref.Date,
+	|	PaymentTerms.Ref.LegalName,
+	|	PaymentTerms.Ref.Partner,
+	|	VALUE(AccumulationRecordType.Receipt)";
 EndFunction
 
 #EndRegion

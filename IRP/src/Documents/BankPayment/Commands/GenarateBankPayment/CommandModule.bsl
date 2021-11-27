@@ -56,7 +56,8 @@ Function GetDocumentsStructure(ArrayOfBasisDocuments)
 	ArrayOf_CashTransferOrder = New Array();
 	ArrayOf_OutgoingPaymentOrder = New Array();
 	ArrayOf_PurchaseInvoice = New Array();
-
+	ArrayOf_PurchaseOrder = New Array();
+	
 	For Each Row In ArrayOfBasisDocuments Do
 
 		If TypeOf(Row) = Type("DocumentRef.CashTransferOrder") Then
@@ -65,6 +66,8 @@ Function GetDocumentsStructure(ArrayOfBasisDocuments)
 			ArrayOf_OutgoingPaymentOrder.Add(Row);
 		ElsIf TypeOf(Row) = Type("DocumentRef.PurchaseInvoice") Then
 			ArrayOf_PurchaseInvoice.Add(Row);
+		ElsIf TypeOf(Row) = Type("DocumentRef.PurchaseOrder") Then
+			ArrayOf_PurchaseOrder.Add(Row);
 		Else
 			Raise R().Error_043;
 		EndIf;
@@ -75,7 +78,8 @@ Function GetDocumentsStructure(ArrayOfBasisDocuments)
 	ArrayOfTables.Add(GetDocumentTable_CashTransferOrder(ArrayOf_CashTransferOrder));
 	ArrayOfTables.Add(GetDocumentTable_OutgoingPaymentOrder(ArrayOf_OutgoingPaymentOrder));
 	ArrayOfTables.Add(GetDocumentTable_PurchaseInvoice(ArrayOf_PurchaseInvoice));
-
+	ArrayOfTables.Add(GetDocumentTable_PurchaseOrder(ArrayOf_PurchaseOrder));
+	
 	Return JoinDocumentsStructure(ArrayOfTables);
 EndFunction
 
@@ -97,7 +101,8 @@ Function JoinDocumentsStructure(ArrayOfTables)
 	ValueTable.Columns.Add("PlaningTransactionBasis",
 		New TypeDescription(Metadata.DefinedTypes.typePlaningTransactionBasises.Type));
 	ValueTable.Columns.Add("FinancialMovementType", New TypeDescription("CatalogRef.ExpenseAndRevenueTypes"));
-
+	ValueTable.Columns.Add("Order", New TypeDescription("DocumentRef.PurchaseOrder"));
+	
 	For Each Table In ArrayOfTables Do
 		For Each Row In Table Do
 			FillPropertyValues(ValueTable.Add(), Row);
@@ -136,7 +141,8 @@ Function JoinDocumentsStructure(ArrayOfTables)
 			NewRow.Insert("TotalAmount", RowPaymentList.Amount);
 			NewRow.Insert("PlaningTransactionBasis", RowPaymentList.PlaningTransactionBasis);
 			NewRow.Insert("FinancialMovementType", RowPaymentList.FinancialMovementType);
-
+			NewRow.Insert("Order", RowPaymentList.Order);
+			
 			Result.PaymentList.Add(NewRow);
 		EndDo;
 		ArrayOfResults.Add(Result);
@@ -194,7 +200,10 @@ EndFunction
 
 &AtServer
 Function GetDocumentTable_PurchaseInvoice(ArrayOfBasisDocuments)
-
 	Return DocumentsGenerationServer.GetDocumentTable_PurchaseInvoice_ForPayment(ArrayOfBasisDocuments);
+EndFunction
 
+&AtServer
+Function GetDocumentTable_PurchaseOrder(ArrayOfBasisDocuments)
+	Return DocumentsGenerationServer.GetDocumentTable_PurchaseOrder_ForPayment(ArrayOfBasisDocuments);
 EndFunction

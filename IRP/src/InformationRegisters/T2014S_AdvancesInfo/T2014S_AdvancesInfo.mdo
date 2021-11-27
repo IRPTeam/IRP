@@ -33,6 +33,36 @@
     <dataHistory>Use</dataHistory>
     <fillValue xsi:type="core:UndefinedValue"/>
   </resources>
+  <resources uuid="7f2cde33-6ac0-4ba1-b9ad-4515d1555c1b">
+    <name>IsPurchaseOrderClose</name>
+    <synonym>
+      <key>en</key>
+      <value>Is purchase order close</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </resources>
+  <resources uuid="afb3e3e5-fa83-42f2-b300-acee60cdb9ee">
+    <name>IsSalesOrderClose</name>
+    <synonym>
+      <key>en</key>
+      <value>Is sales order close</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </resources>
   <dimensions uuid="cc2e3a5f-bf42-4f4b-9768-ea96063c8b0f">
     <name>Date</name>
     <synonym>

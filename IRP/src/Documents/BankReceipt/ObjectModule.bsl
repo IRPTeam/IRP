@@ -53,6 +53,9 @@ Procedure Filling(FillingData, FillingText, StandardProcessing)
 		If FillingData.Property("BasedOn") And FillingData.BasedOn = "SalesInvoice" Then
 			Filling_BasedOn(FillingData);
 		EndIf;
+		If FillingData.Property("BasedOn") And FillingData.BasedOn = "SalesOrder" Then
+			Filling_BasedOn(FillingData);
+		EndIf;
 	EndIf;
 	For Each Row In ThisObject.PaymentList Do
 		If Not ValueIsFilled(Row.Key) Then

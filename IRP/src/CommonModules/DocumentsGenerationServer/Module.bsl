@@ -366,4 +366,51 @@ Function GetDocumentTable_SalesInvoice_ForReceipt(ArrayOfBasisDocuments, AddInfo
 	Return QueryResult.Unload();
 EndFunction
 
+Function GetDocumentTable_PurchaseOrder_ForPayment(ArrayOfBasisDocuments, AddInfo = Undefined) Export
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	""PurchaseOrder"" AS BasedOn,
+	|	VALUE(Enum.OutgoingPaymentTransactionTypes.PaymentToVendor) AS TransactionType,
+	|	R3025B_PurchaseOrdersToBePaid.Company,
+	|	R3025B_PurchaseOrdersToBePaid.Branch,
+	|	R3025B_PurchaseOrdersToBePaid.Currency,
+	|	R3025B_PurchaseOrdersToBePaid.Partner,
+	|	VALUE(Catalog.Agreements.EmptyRef) AS Agreement,
+	|	R3025B_PurchaseOrdersToBePaid.LegalName AS Payee,
+	|	R3025B_PurchaseOrdersToBePaid.Order,
+	|	R3025B_PurchaseOrdersToBePaid.AmountBalance AS Amount
+	|FROM
+	|	AccumulationRegister.R3025B_PurchaseOrdersToBePaid.Balance(, Order IN (&ArrayOfBasisDocuments)) AS R3025B_PurchaseOrdersToBePaid
+	|WHERE
+	|	R3025B_PurchaseOrdersToBePaid.AmountBalance > 0";
+	Query.SetParameter("ArrayOfBasisDocuments", ArrayOfBasisDocuments);
+	QueryResult = Query.Execute();
+	Return QueryResult.Unload();
+EndFunction
+
+Function GetDocumentTable_SalesOrder_ForReceipt(ArrayOfBasisDocuments, AddInfo = Undefined) Export
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	""SalesOrder"" AS BasedOn,
+	|	VALUE(Enum.IncomingPaymentTransactionType.PaymentFromCustomer) AS TransactionType,
+	|	R3024B_SalesOrdersToBePaid.Company,
+	|	R3024B_SalesOrdersToBePaid.Branch,
+	|	R3024B_SalesOrdersToBePaid.Currency,
+	|	R3024B_SalesOrdersToBePaid.Partner,
+	|	VALUE(Catalog.Agreements.EmptyRef) AS Agreement,
+	|	R3024B_SalesOrdersToBePaid.LegalName AS Payer,
+	|	R3024B_SalesOrdersToBePaid.Order,
+	|	R3024B_SalesOrdersToBePaid.AmountBalance AS Amount
+	|FROM
+	|	AccumulationRegister.R3024B_SalesOrdersToBePaid.Balance(, Order IN (&ArrayOfBasisDocuments)) AS
+	|		R3024B_SalesOrdersToBePaid
+	|WHERE
+	|	R3024B_SalesOrdersToBePaid.AmountBalance > 0";
+	Query.SetParameter("ArrayOfBasisDocuments", ArrayOfBasisDocuments);
+	QueryResult = Query.Execute();
+	Return QueryResult.Unload();
+EndFunction
+
 #EndRegion

@@ -176,7 +176,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R4036B_IncomingStocksRequested());
 	QueryArray.Add(R5010B_ReconciliationStatement());
 	QueryArray.Add(R1022B_VendorsPaymentPlanning());
-	QueryArray.Add(T2011S_PartnerTransactions());
+//	QueryArray.Add(T2011S_PartnerTransactions());
 	QueryArray.Add(R5022T_Expenses());
 	QueryArray.Add(T3010S_RowIDInfo());
 	QueryArray.Add(T2015S_TransactionsInfo());
@@ -525,35 +525,35 @@ Function R5012B_VendorsAging()
 		   |	OffsetOfAging.Document = &Ref";
 EndFunction
 
-Function T2011S_PartnerTransactions()
-	Return "SELECT
-		   |	ItemList.Period,
-		   |	ItemList.Company,
-		   |	ItemList.Branch,
-		   |	ItemList.Currency,
-		   |	ItemList.LegalName,
-		   |	ItemList.Partner,
-		   |	ItemList.Agreement,
-		   |	ItemList.BasisDocument AS TransactionDocument,
-		   |	TRUE AS IsVendorTransaction,
-		   |	SUM(ItemList.Amount) AS Amount,
-		   |	ItemList.Key
-		   |INTO T2011S_PartnerTransactions
-		   |FROM
-		   |	ItemList AS ItemList
-		   |WHERE
-		   |	NOT ItemList.IgnoreAdvances
-		   |GROUP BY
-		   |	ItemList.Agreement,
-		   |	ItemList.BasisDocument,
-		   |	ItemList.Company,
-		   |	ItemList.Branch,
-		   |	ItemList.Currency,
-		   |	ItemList.Key,
-		   |	ItemList.LegalName,
-		   |	ItemList.Partner,
-		   |	ItemList.Period";
-EndFunction
+//Function T2011S_PartnerTransactions()
+//	Return "SELECT
+//		   |	ItemList.Period,
+//		   |	ItemList.Company,
+//		   |	ItemList.Branch,
+//		   |	ItemList.Currency,
+//		   |	ItemList.LegalName,
+//		   |	ItemList.Partner,
+//		   |	ItemList.Agreement,
+//		   |	ItemList.BasisDocument AS TransactionDocument,
+//		   |	TRUE AS IsVendorTransaction,
+//		   |	SUM(ItemList.Amount) AS Amount,
+//		   |	ItemList.Key
+//		   |INTO T2011S_PartnerTransactions
+//		   |FROM
+//		   |	ItemList AS ItemList
+//		   |WHERE
+//		   |	NOT ItemList.IgnoreAdvances
+//		   |GROUP BY
+//		   |	ItemList.Agreement,
+//		   |	ItemList.BasisDocument,
+//		   |	ItemList.Company,
+//		   |	ItemList.Branch,
+//		   |	ItemList.Currency,
+//		   |	ItemList.Key,
+//		   |	ItemList.LegalName,
+//		   |	ItemList.Partner,
+//		   |	ItemList.Period";
+//EndFunction
 
 Function R1031B_ReceiptInvoicing()
 	Return "SELECT

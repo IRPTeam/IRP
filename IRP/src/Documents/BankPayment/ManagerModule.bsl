@@ -256,6 +256,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R5012B_VendorsAging());
 	QueryArray.Add(R3035T_CashPlanning());
 	QueryArray.Add(R5022T_Expenses());
+	QueryArray.Add(R3025B_PurchaseOrdersToBePaid());
 	QueryArray.Add(T2014S_AdvancesInfo());
 	QueryArray.Add(T2015S_TransactionsInfo());
 	Return QueryArray;
@@ -604,6 +605,25 @@ Function R5022T_Expenses()
 		   |	PaymentList AS PaymentList
 		   |WHERE
 		   |	PaymentList.Commission <> 0";
+EndFunction
+
+Function R3025B_PurchaseOrdersToBePaid()
+	Return 
+	"SELECT
+	|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+	|	PaymentList.Period,
+	|	PaymentList.Company,
+	|	PaymentList.Branch,
+	|	PaymentList.Currency,
+	|	PaymentList.Partner,
+	|	PaymentList.Payee AS LegalName,
+	|	PaymentList.Order,
+	|	PaymentList.Amount
+	|INTO R3025B_PurchaseOrdersToBePaid
+	|FROM
+	|	PaymentList AS PaymentList
+	|WHERE
+	|	NOT PaymentList.Order.Ref IS NULL";
 EndFunction
 
 Function T2014S_AdvancesInfo()

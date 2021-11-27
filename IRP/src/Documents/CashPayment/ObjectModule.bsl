@@ -41,7 +41,7 @@ EndProcedure
 Procedure Filling(FillingData, FillingText, StandardProcessing)
 	If TypeOf(FillingData) = Type("Structure") And FillingData.Property("BasedOn") Then
 		If FillingData.BasedOn = "CashTransferOrder" Or FillingData.BasedOn = "OutgoingPaymentOrder"
-			Or FillingData.BasedOn = "PurchaseInvoice" Then
+			Or FillingData.BasedOn = "PurchaseInvoice" Or FillingData.BasedOn = "PurchaseOrder" Then
 			Filling_BasedOn(FillingData);
 		EndIf;
 	EndIf;

@@ -91,6 +91,7 @@ Procedure SetVisibilityAvailability(Object, Form)
 	EndIf;
 	Form.Items.GroupHead.Visible = Not Form.ClosingOrder.IsEmpty();
 	Form.Items.EditCurrencies.Enabled = Not Form.ReadOnly;
+	DocumentsClientServer.SetReadOnlyPaymentTermsCanBePaid(Object, Form);
 EndProcedure
 
 &AtServer

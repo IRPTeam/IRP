@@ -255,6 +255,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(T2011S_PartnerTransactions());
 	QueryArray.Add(R5012B_VendorsAging());
 	QueryArray.Add(R3035T_CashPlanning());
+	QueryArray.Add(R3025B_PurchaseOrdersToBePaid());
 	Return QueryArray;
 EndFunction
 
@@ -302,7 +303,8 @@ Function PaymentList()
 		   |	PaymentList.Ref.TransactionType = VALUE(Enum.OutgoingPaymentTransactionTypes.ReturnToCustomer) AS IsReturnToCustomer,
 		   |	PaymentList.Partner,
 		   |	PaymentList.Ref.Branch AS Branch,
-		   |	PaymentList.LegalNameContract AS LegalNameContract
+		   |	PaymentList.LegalNameContract AS LegalNameContract,
+		   |	PaymentList.Order
 		   |INTO PaymentList
 		   |FROM
 		   |	Document.CashPayment.PaymentList AS PaymentList
@@ -559,6 +561,25 @@ Function R3035T_CashPlanning()
 		   |	PaymentList AS PaymentList
 		   |WHERE
 		   |	NOT PaymentList.PlaningTransactionBasis.Ref IS NULL";
+EndFunction
+
+Function R3025B_PurchaseOrdersToBePaid()
+	Return 
+	"SELECT
+	|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+	|	PaymentList.Period,
+	|	PaymentList.Company,
+	|	PaymentList.Branch,
+	|	PaymentList.Currency,
+	|	PaymentList.Partner,
+	|	PaymentList.Payee AS LegalName,
+	|	PaymentList.Order,
+	|	PaymentList.Amount
+	|INTO R3025B_PurchaseOrdersToBePaid
+	|FROM
+	|	PaymentList AS PaymentList
+	|WHERE
+	|	NOT PaymentList.Order.Ref IS NULL";
 EndFunction
 
 #EndRegion

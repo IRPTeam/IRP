@@ -85,6 +85,7 @@
   <registerRecords>AccumulationRegister.R5012B_VendorsAging</registerRecords>
   <registerRecords>InformationRegister.T2014S_AdvancesInfo</registerRecords>
   <registerRecords>InformationRegister.T2015S_TransactionsInfo</registerRecords>
+  <registerRecords>AccumulationRegister.R3025B_PurchaseOrdersToBePaid</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -766,6 +767,7 @@
       <types>DocumentRef.CashTransferOrder</types>
       <types>DocumentRef.PurchaseInvoice</types>
       <types>DocumentRef.OutgoingPaymentOrder</types>
+      <types>DocumentRef.PurchaseOrder</types>
     </commandParameterType>
     <parameterUseMode>Multiple</parameterUseMode>
     <representation>Auto</representation>

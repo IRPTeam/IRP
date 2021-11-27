@@ -1,8 +1,8 @@
 
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
-	Period.StartDate = Date(2021,11,22);
-	Period.EndDate   = Date(2021,11,22);
+	Period.StartDate = Date(2021,11,24);
+	Period.EndDate   = Date(2021,11,25);
 EndProcedure
 
 &AtClient

@@ -79,6 +79,7 @@
   <registerRecords>AccumulationRegister.CashInTransit</registerRecords>
   <registerRecords>AccumulationRegister.R5012B_VendorsAging</registerRecords>
   <registerRecords>AccumulationRegister.R3015B_CashAdvance</registerRecords>
+  <registerRecords>AccumulationRegister.R3025B_PurchaseOrdersToBePaid</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -376,6 +377,20 @@
         <name>Filter.Company</name>
         <field>Document.CashPayment.TabularSection.PaymentList.Attribute.Payee</field>
       </choiceParameterLinks>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="5260b532-e1d5-4fc1-b1c3-a0bf90c35d52">
+      <name>Order</name>
+      <synonym>
+        <key>en</key>
+        <value>Order</value>
+      </synonym>
+      <type>
+        <types>DocumentRef.PurchaseOrder</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
@@ -678,6 +693,7 @@
       <types>DocumentRef.CashTransferOrder</types>
       <types>DocumentRef.PurchaseInvoice</types>
       <types>DocumentRef.OutgoingPaymentOrder</types>
+      <types>DocumentRef.PurchaseOrder</types>
     </commandParameterType>
     <parameterUseMode>Multiple</parameterUseMode>
     <representation>Auto</representation>

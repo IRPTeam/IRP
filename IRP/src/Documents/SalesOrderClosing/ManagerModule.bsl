@@ -116,6 +116,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R4011B_FreeStocks());
 	QueryArray.Add(R4012B_StockReservation());
 	QueryArray.Add(R4034B_GoodsShipmentSchedule());
+	QueryArray.Add(R3024B_SalesOrdersToBePaid());
 	Return QueryArray;
 EndFunction
 
@@ -276,6 +277,18 @@ Function R4034B_GoodsShipmentSchedule()
 		   |	AccumulationRegister.R4034B_GoodsShipmentSchedule.Balance(&BalancePeriod, Basis = &SalesOrder) AS
 		   |		R4034B_GoodsShipmentScheduleBalance";
 
+EndFunction
+
+Function R3024B_SalesOrdersToBePaid()
+	Return 
+	"SELECT
+	|	&Period AS Period,
+	|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+	|	Balance.AmountBalance AS Amount,
+	|	*
+	|INTO R3024B_SalesOrdersToBePaid
+	|FROM
+	|	AccumulationRegister.R3024B_SalesOrdersToBePaid.Balance(&BalancePeriod, Order = &SalesOrder) AS Balance";
 EndFunction
 
 #EndRegion

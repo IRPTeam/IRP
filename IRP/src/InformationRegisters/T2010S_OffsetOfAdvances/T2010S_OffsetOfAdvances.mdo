@@ -67,6 +67,23 @@
     <fillValue xsi:type="core:UndefinedValue"/>
     <mainFilter>true</mainFilter>
   </dimensions>
+  <dimensions uuid="8c64cfa4-a87d-4cb0-8913-555b5938bf0a">
+    <name>IsAdvanceRelease</name>
+    <synonym>
+      <key>en</key>
+      <value>Is advance release</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <indexing>Index</indexing>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
   <dimensions uuid="722b8b9c-3389-450d-a2f0-374def583199">
     <name>Company</name>
     <synonym>

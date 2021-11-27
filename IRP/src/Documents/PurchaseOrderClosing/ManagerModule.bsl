@@ -316,7 +316,8 @@ Function R1021B_VendorsTransactions()
 	|FROM
 	|	InformationRegister.T2010S_OffsetOfAdvances AS OffsetOfAdvances
 	|WHERE
-	|	OffsetOfAdvances.Document = &Ref";
+	|	OffsetOfAdvances.Document = &Ref
+	|	AND NOT OffsetOfAdvances.IsAdvanceRelease";
 EndFunction
 
 Function R5012B_VendorsAging()

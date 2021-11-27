@@ -119,7 +119,6 @@ Function OffsetOfAdvancesAndAging(Parameters)
 	Records_OffsetOfAdvances.Columns.Delete(Records_OffsetOfAdvances.Columns.PointInTime);
 	Records_OffsetOfAdvances.Columns.Add("AdvancesRowKey"     , Metadata.DefinedTypes.typeRowID.Type);
 	Records_OffsetOfAdvances.Columns.Add("TransactionsRowKey" , Metadata.DefinedTypes.typeRowID.Type);
-	Records_OffsetOfAdvances.Columns.Add("OnlyAdvances" , New TypeDescription("Boolean"));
 	
 	// detail info by all aging
 	Records_OffsetAging = InformationRegisters.T2013S_OffsetOfAging.CreateRecordSet().UnloadColumns();
@@ -253,6 +252,7 @@ Procedure WriteTablesToTempTables(Parameters, Records_OffsetOfAdvances, Records_
 	"SELECT
 	|	Records_OffsetOfAdvances.Period,
 	|	Records_OffsetOfAdvances.Document,
+	|	Records_OffsetOfAdvances.IsAdvanceRelease,
 	|	Records_OffsetOfAdvances.Company,
 	|	Records_OffsetOfAdvances.Branch,
 	|	Records_OffsetOfAdvances.Currency,
@@ -296,6 +296,7 @@ Procedure WriteTablesToTempTables(Parameters, Records_OffsetOfAdvances, Records_
 	|SELECT
 	|	tmpRecords_OffsetOfAdvances.Period,
 	|	tmpRecords_OffsetOfAdvances.Document,
+	|	tmpRecords_OffsetOfAdvances.IsAdvanceRelease,
 	|	tmpRecords_OffsetOfAdvances.Company,
 	|	tmpRecords_OffsetOfAdvances.Branch,
 	|	tmpRecords_OffsetOfAdvances.Currency,
@@ -319,6 +320,7 @@ Procedure WriteTablesToTempTables(Parameters, Records_OffsetOfAdvances, Records_
 	|GROUP BY
 	|	tmpRecords_OffsetOfAdvances.Period,
 	|	tmpRecords_OffsetOfAdvances.Document,
+	|	tmpRecords_OffsetOfAdvances.IsAdvanceRelease,
 	|	tmpRecords_OffsetOfAdvances.Company,
 	|	tmpRecords_OffsetOfAdvances.Branch,
 	|	tmpRecords_OffsetOfAdvances.Currency,
@@ -1176,7 +1178,7 @@ Function ReleaseAdvanceByOrder(Parameters, Records_AdvancesKey, Records_OffsetOf
 		
 		// OffsetOfAdvances - minus with order (record type expense)
 		NewOffsetInfo = Records_OffsetOfAdvances.Add();
-		NewOffsetInfo.OnlyAdvances  = True;
+		NewOffsetInfo.IsAdvanceRelease  = True;
 		NewOffsetInfo.Period        = Date;
 		NewOffsetInfo.Amount        = QuerySelection.AdvanceAmount;
 		NewOffsetInfo.Document      = Document;
@@ -1189,7 +1191,7 @@ Function ReleaseAdvanceByOrder(Parameters, Records_AdvancesKey, Records_OffsetOf
 		
 		// OffsetOfAdvances - plus without order (record type expense)
 		NewOffsetInfo = Records_OffsetOfAdvances.Add();
-		NewOffsetInfo.OnlyAdvances = True;
+		NewOffsetInfo.IsAdvanceRelease = True;
 		NewOffsetInfo.Period       = Date;
 		NewOffsetInfo.Amount       = - QuerySelection.AdvanceAmount;
 		NewOffsetInfo.Document     = Document;
@@ -1498,7 +1500,7 @@ Procedure Write_SelfRecords(Parameters, Records_OffsetOfAdvances)
 				NewRow_Advances.Key = RowOffset.AdvancesRowKey;
 			EndIf;
 			
-			If RowOffset.OnlyAdvances = True Then
+			If RowOffset.IsAdvanceRelease = True Then
 				Continue;
 			EndIf;
 			

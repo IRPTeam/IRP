@@ -73,7 +73,6 @@
   <registerRecords>AccumulationRegister.R4010B_ActualStocks</registerRecords>
   <registerRecords>AccumulationRegister.R2011B_SalesOrdersShipment</registerRecords>
   <registerRecords>AccumulationRegister.R4050B_StockInventory</registerRecords>
-  <registerRecords>InformationRegister.T2011S_PartnerTransactions</registerRecords>
   <registerRecords>AccumulationRegister.R2001T_Sales</registerRecords>
   <registerRecords>AccumulationRegister.R2021B_CustomersTransactions</registerRecords>
   <registerRecords>AccumulationRegister.R4011B_FreeStocks</registerRecords>
@@ -90,6 +89,7 @@
   <registerRecords>AccumulationRegister.R2031B_ShipmentInvoicing</registerRecords>
   <registerRecords>AccumulationRegister.R2012B_SalesOrdersInvoiceClosing</registerRecords>
   <registerRecords>InformationRegister.T3010S_RowIDInfo</registerRecords>
+  <registerRecords>InformationRegister.T2015S_TransactionsInfo</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>

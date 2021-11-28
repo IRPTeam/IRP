@@ -133,7 +133,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R1005T_PurchaseSpecialOffers());
 	QueryArray.Add(R1012B_PurchaseOrdersInvoiceClosing());
 	QueryArray.Add(R1021B_VendorsTransactions());
-//	QueryArray.Add(R1020B_AdvancesToVendors());
+	QueryArray.Add(R1020B_AdvancesToVendors());
 	QueryArray.Add(R1031B_ReceiptInvoicing());
 	QueryArray.Add(R1040B_TaxesOutgoing());
 	QueryArray.Add(R4010B_ActualStocks());
@@ -143,7 +143,6 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R4050B_StockInventory());
 	QueryArray.Add(R5010B_ReconciliationStatement());
 	QueryArray.Add(R5022T_Expenses());
-//	QueryArray.Add(T2012S_PartnerAdvances());
 	QueryArray.Add(R5012B_VendorsAging());
 	QueryArray.Add(T3010S_RowIDInfo());
 	QueryArray.Add(T2015S_TransactionsInfo());
@@ -165,7 +164,7 @@ Function ItemList()
 		   |	RowIDInfo.Key
 		   |;
 		   |
-		   ////////////////////////////////////////////////////////////////////////////////
+		   |////////////////////////////////////////////////////////////////////////////////
 		   |SELECT
 		   |	ShipmentConfirmations.Key,
 		   |	ShipmentConfirmations.ShipmentConfirmation
@@ -179,7 +178,7 @@ Function ItemList()
 		   |	ShipmentConfirmations.ShipmentConfirmation
 		   |;
 		   |
-		   ////////////////////////////////////////////////////////////////////////////////
+		   |////////////////////////////////////////////////////////////////////////////////
 		   |SELECT
 		   |	PurchaseReturnItemList.Ref.Company AS Company,
 		   |	PurchaseReturnItemList.Store AS Store,
@@ -200,7 +199,6 @@ Function ItemList()
 		   |		ELSE UNDEFINED
 		   |	END AS BasisDocument,
 		   |	PurchaseReturnItemList.Ref AS AdvanceBasis,
-//		   |	PurchaseReturnItemList.Ref.DueAsAdvance AS DueAsAdvance,
 		   |	PurchaseReturnItemList.QuantityInBaseUnit AS Quantity,
 		   |	PurchaseReturnItemList.TotalAmount AS TotalAmount,
 		   |	PurchaseReturnItemList.TotalAmount AS Amount,
@@ -386,7 +384,6 @@ Function R1021B_VendorsTransactions()
 		   |	ItemList AS ItemList
 		   |WHERE
 		   |	TRUE
-//		   |	NOT ItemList.DueAsAdvance
 		   |GROUP BY
 		   |	ItemList.Agreement,
 		   |	ItemList.Company,
@@ -420,54 +417,25 @@ Function R1021B_VendorsTransactions()
 		   |	OffsetOfAdvances.Document = &Ref";
 EndFunction
 
-//Function R1020B_AdvancesToVendors()
-//	Return "SELECT
-//		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-//		   |	ItemList.Period AS Period,
-//		   |	ItemList.Company AS Company,
-//		   |	ItemList.Branch AS Branch,
-//		   |	ItemList.Partner AS Partner,
-//		   |	ItemList.LegalName AS LegalName,
-//		   |	ItemList.Currency AS Currency,
-//		   |	ItemList.AdvanceBasis AS Basis,
-//		   |	SUM(ItemList.Amount) AS Amount,
-//		   |	UNDEFINED AS Key,
-//		   |	UNDEFINED AS VendorsAdvancesClosing
-//		   |INTO R1020B_AdvancesToVendors
-//		   |FROM
-//		   |	ItemList AS ItemList
-//		   |WHERE
-//		   |	ItemList.DueAsAdvance
-//		   |
-//		   |GROUP BY
-//		   |	ItemList.Partner,
-//		   |	ItemList.Branch,
-//		   |	ItemList.Currency,
-//		   |	ItemList.Period,
-//		   |	ItemList.AdvanceBasis,
-//		   |	ItemList.Company,
-//		   |	ItemList.LegalName
-//		   |
-//		   |UNION ALL
-//		   |
-//		   |SELECT
-//		   |	VALUE(AccumulationRecordType.Expense),
-//		   |	OffsetOfAdvances.Period,
-//		   |	OffsetOfAdvances.Company,
-//		   |	OffsetOfAdvances.Branch,
-//		   |	OffsetOfAdvances.Partner,
-//		   |	OffsetOfAdvances.LegalName,
-//		   |	OffsetOfAdvances.Currency,
-//		   |	OffsetOfAdvances.AdvancesDocument,
-//		   |	OffsetOfAdvances.Amount,
-//		   |	UNDEFINED,
-//		   |	OffsetOfAdvances.Recorder
-//		   |FROM
-//		   |	InformationRegister.T2010S_OffsetOfAdvances AS OffsetOfAdvances
-//		   |WHERE
-//		   |	OffsetOfAdvances.Document = &Ref";
-//
-//EndFunction
+Function R1020B_AdvancesToVendors()
+	Return
+	"SELECT
+	|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+	|	OffsetOfAdvances.Period,
+	|	OffsetOfAdvances.Company,
+	|	OffsetOfAdvances.Branch,
+	|	OffsetOfAdvances.Partner,
+	|	OffsetOfAdvances.LegalName,
+	|	OffsetOfAdvances.Currency,
+	|	OffsetOfAdvances.Amount,
+	|	UNDEFINED AS Key,
+	|	OffsetOfAdvances.Recorder AS VendorsAdvancesClosing
+	|INTO R1020B_AdvancesToVendors
+	|FROM
+	|	InformationRegister.T2010S_OffsetOfAdvances AS OffsetOfAdvances
+	|WHERE
+	|	OffsetOfAdvances.Document = &Ref";
+EndFunction
 
 Function R5012B_VendorsAging()
 	Return "SELECT
@@ -488,34 +456,6 @@ Function R5012B_VendorsAging()
 		   |WHERE
 		   |	OffsetOfAging.Document = &Ref";
 EndFunction
-
-//Function T2012S_PartnerAdvances()
-//	Return "SELECT
-//		   |	ItemList.Period AS Period,
-//		   |	ItemList.Company AS Company,
-//		   |	ItemList.Branch AS Branch,
-//		   |	ItemList.Partner AS Partner,
-//		   |	ItemList.LegalName AS LegalName,
-//		   |	ItemList.Currency AS Currency,
-//		   |	ItemList.AdvanceBasis AS AdvancesDocument,
-//		   |	SUM(ItemList.Amount) AS Amount,
-//		   |	UNDEFINED AS Key,
-//		   |	TRUE AS IsVendorAdvance
-//		   |INTO T2012S_PartnerAdvances
-//		   |FROM
-//		   |	ItemList AS ItemList
-//		   |WHERE
-//		   |	ItemList.DueAsAdvance
-//		   |
-//		   |GROUP BY
-//		   |	ItemList.Branch,
-//		   |	ItemList.LegalName,
-//		   |	ItemList.Company,
-//		   |	ItemList.Partner,
-//		   |	ItemList.Period,
-//		   |	ItemList.AdvanceBasis,
-//		   |	ItemList.Currency";
-//EndFunction
 
 Function R1031B_ReceiptInvoicing()
 	Return "SELECT

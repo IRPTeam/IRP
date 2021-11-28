@@ -259,7 +259,6 @@ Procedure WriteTablesToTempTables(Parameters, Records_OffsetOfAdvances, Records_
 	|	Records_OffsetOfAdvances.Partner,
 	|	Records_OffsetOfAdvances.LegalName,
 	|	Records_OffsetOfAdvances.TransactionDocument,
-	|	Records_OffsetOfAdvances.AdvancesDocument,
 	|	Records_OffsetOfAdvances.Agreement,
 	|	Records_OffsetOfAdvances.AdvancesOrder,
 	|	Records_OffsetOfAdvances.TransactionOrder,
@@ -268,8 +267,7 @@ Procedure WriteTablesToTempTables(Parameters, Records_OffsetOfAdvances, Records_
 	|	Records_OffsetOfAdvances.FromTransactionKey,
 	|	Records_OffsetOfAdvances.ToAdvanceKey,
 	|	Records_OffsetOfAdvances.Key,
-	|	Records_OffsetOfAdvances.Amount,
-	|	Records_OffsetOfAdvances.DueAsAdvance
+	|	Records_OffsetOfAdvances.Amount
 	|INTO tmpRecords_OffsetOfAdvances
 	|FROM
 	|	&Records_OffsetOfAdvances AS Records_OffsetOfAdvances
@@ -303,7 +301,6 @@ Procedure WriteTablesToTempTables(Parameters, Records_OffsetOfAdvances, Records_
 	|	tmpRecords_OffsetOfAdvances.Partner,
 	|	tmpRecords_OffsetOfAdvances.LegalName,
 	|	tmpRecords_OffsetOfAdvances.TransactionDocument,
-	|	tmpRecords_OffsetOfAdvances.AdvancesDocument,
 	|	tmpRecords_OffsetOfAdvances.Agreement,
 	|	tmpRecords_OffsetOfAdvances.AdvancesOrder,
 	|	tmpRecords_OffsetOfAdvances.TransactionOrder,
@@ -312,7 +309,6 @@ Procedure WriteTablesToTempTables(Parameters, Records_OffsetOfAdvances, Records_
 	|	tmpRecords_OffsetOfAdvances.FromTransactionKey,
 	|	tmpRecords_OffsetOfAdvances.ToAdvanceKey,
 	|	tmpRecords_OffsetOfAdvances.Key,
-	|	tmpRecords_OffsetOfAdvances.DueAsAdvance,
 	|	SUM(tmpRecords_OffsetOfAdvances.Amount) AS Amount
 	|INTO Records_OffsetOfAdvances
 	|FROM
@@ -327,7 +323,6 @@ Procedure WriteTablesToTempTables(Parameters, Records_OffsetOfAdvances, Records_
 	|	tmpRecords_OffsetOfAdvances.Partner,
 	|	tmpRecords_OffsetOfAdvances.LegalName,
 	|	tmpRecords_OffsetOfAdvances.TransactionDocument,
-	|	tmpRecords_OffsetOfAdvances.AdvancesDocument,
 	|	tmpRecords_OffsetOfAdvances.Agreement,
 	|	tmpRecords_OffsetOfAdvances.AdvancesOrder,
 	|	tmpRecords_OffsetOfAdvances.TransactionOrder,
@@ -335,8 +330,7 @@ Procedure WriteTablesToTempTables(Parameters, Records_OffsetOfAdvances, Records_
 	|	tmpRecords_OffsetOfAdvances.ToTransactionKey,
 	|	tmpRecords_OffsetOfAdvances.FromTransactionKey,
 	|	tmpRecords_OffsetOfAdvances.ToAdvanceKey,
-	|	tmpRecords_OffsetOfAdvances.Key,
-	|	tmpRecords_OffsetOfAdvances.DueAsAdvance
+	|	tmpRecords_OffsetOfAdvances.Key
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
@@ -1452,7 +1446,11 @@ Procedure Write_SelfRecords(Parameters, Records_OffsetOfAdvances)
 		
 		UseKeyForCurrency = 
 		TypeOf(Row.Document) = Type("DocumentRef.BankPayment")
-		Or TypeOf(Row.Document) = Type("DocumentRef.BankReceipt");
+		Or TypeOf(Row.Document) = Type("DocumentRef.BankReceipt")
+		Or TypeOf(Row.Document) = Type("DocumentRef.CashPayment")
+		Or TypeOf(Row.Document) = Type("DocumentRef.CashReceipt")
+		Or TypeOf(Row.Document) = Type("DocumentRef.CreditNote")
+		Or TypeOf(Row.Document) = Type("DocumentRef.DebitNote");
 		
 		RecordSet_AdvancesToVendors = AccumulationRegisters.R1020B_AdvancesToVendors.CreateRecordSet();
 		RecordSet_AdvancesToVendors.Filter.Recorder.Set(Row.Document);

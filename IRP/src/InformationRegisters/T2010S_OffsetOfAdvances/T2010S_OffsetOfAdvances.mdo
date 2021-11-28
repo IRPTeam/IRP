@@ -187,30 +187,6 @@
     <fillValue xsi:type="core:UndefinedValue"/>
     <mainFilter>true</mainFilter>
   </dimensions>
-  <dimensions uuid="a5fd0f9a-b667-4b0c-a964-4ebe6e98fe62">
-    <name>AdvancesDocument</name>
-    <synonym>
-      <key>en</key>
-      <value>Advances document</value>
-    </synonym>
-    <type>
-      <types>DocumentRef.CashPayment</types>
-      <types>DocumentRef.DebitNote</types>
-      <types>DocumentRef.CreditNote</types>
-      <types>DocumentRef.BankReceipt</types>
-      <types>DocumentRef.PurchaseReturn</types>
-      <types>DocumentRef.BankPayment</types>
-      <types>DocumentRef.CashReceipt</types>
-      <types>DocumentRef.OpeningEntry</types>
-      <types>DocumentRef.SalesReturn</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <mainFilter>true</mainFilter>
-  </dimensions>
   <dimensions uuid="04a290af-cfb5-45e1-8fd9-08be47d9cfe7">
     <name>Agreement</name>
     <synonym>
@@ -235,22 +211,6 @@
     </synonym>
     <type>
       <types>DefinedType.typeRowID</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <mainFilter>true</mainFilter>
-  </dimensions>
-  <dimensions uuid="23ef4df9-951d-41d8-83c2-583c8b7c205b">
-    <name>DueAsAdvance</name>
-    <synonym>
-      <key>en</key>
-      <value>Due as advance</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

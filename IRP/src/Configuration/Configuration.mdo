@@ -715,8 +715,6 @@
   <informationRegisters>InformationRegister.SharedReportOptions</informationRegisters>
   <informationRegisters>InformationRegister.T1010S_ScannedBarcode</informationRegisters>
   <informationRegisters>InformationRegister.T2010S_OffsetOfAdvances</informationRegisters>
-  <informationRegisters>InformationRegister.T2011S_PartnerTransactions</informationRegisters>
-  <informationRegisters>InformationRegister.T2012S_PartnerAdvances</informationRegisters>
   <informationRegisters>InformationRegister.T2013S_OffsetOfAging</informationRegisters>
   <informationRegisters>InformationRegister.Taxes</informationRegisters>
   <informationRegisters>InformationRegister.TaxSettings</informationRegisters>

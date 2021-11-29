@@ -27,4 +27,17 @@
       <value>Template</value>
     </synonym>
   </templates>
+  <commands uuid="1709ab27-8e39-40f9-b769-ef262b69b6fe">
+    <name>OffsetOfAdvances</name>
+    <synonym>
+      <key>en</key>
+      <value>Offset of advances</value>
+    </synonym>
+    <group>CommandGroup.Service</group>
+    <commandParameterType>
+      <types>DocumentRef.VendorsAdvancesClosing</types>
+      <types>DocumentRef.CustomersAdvancesClosing</types>
+    </commandParameterType>
+    <representation>Auto</representation>
+  </commands>
 </mdclass:Report>

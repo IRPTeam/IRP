@@ -484,7 +484,7 @@
 			<c>
 				<c>
 					<f>13</f>
-					<parameter>AdvanceClose</parameter>
+					<parameter>AdvanceClosing</parameter>
 				</c>
 			</c>
 			<c>
@@ -582,7 +582,7 @@
 			<c>
 				<c>
 					<f>20</f>
-					<parameter>AdvanceClose</parameter>
+					<parameter>AdvanceClosing</parameter>
 				</c>
 			</c>
 			<c>

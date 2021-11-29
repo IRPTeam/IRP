@@ -67,6 +67,8 @@
   <registerRecords>AccumulationRegister.R5012B_VendorsAging</registerRecords>
   <registerRecords>AccumulationRegister.R3015B_CashAdvance</registerRecords>
   <registerRecords>AccumulationRegister.R4014B_SerialLotNumber</registerRecords>
+  <registerRecords>InformationRegister.T2014S_AdvancesInfo</registerRecords>
+  <registerRecords>InformationRegister.T2015S_TransactionsInfo</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>

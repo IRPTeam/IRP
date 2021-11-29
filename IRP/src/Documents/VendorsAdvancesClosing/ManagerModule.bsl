@@ -410,9 +410,9 @@ Procedure OffsetAdvancesToTransactions(Parameters, Records_AdvancesKey, Records_
 	NeedWriteAdvances = False;
 	RepeatThisAdvance = False;
 	While QuerySelection.Next() Do
-		If QuerySelection.AdvanceAmount < 0 Then
-			Raise StrTemplate("Advance < 0 ADV_KEY[%1]", QuerySelection.AdvanceKey);
-		EndIf;
+//		If QuerySelection.AdvanceAmount < 0 Then
+//			Raise StrTemplate("Advance < 0 ADV_KEY[%1]", QuerySelection.AdvanceKey);
+//		EndIf;
 		
 		DistributeAdvanceToTransaction(Parameters, PointInTime, Document, QuerySelection.AdvanceKey, QuerySelection.AdvanceAmount,
 			Records_TransactionsKey, Records_AdvancesKey, Records_OffsetOfAdvances, 
@@ -1450,7 +1450,8 @@ Procedure Write_SelfRecords(Parameters, Records_OffsetOfAdvances)
 		Or TypeOf(Row.Document) = Type("DocumentRef.CashPayment")
 		Or TypeOf(Row.Document) = Type("DocumentRef.CashReceipt")
 		Or TypeOf(Row.Document) = Type("DocumentRef.CreditNote")
-		Or TypeOf(Row.Document) = Type("DocumentRef.DebitNote");
+		Or TypeOf(Row.Document) = Type("DocumentRef.DebitNote")
+		Or TypeOf(Row.Document) = Type("DocumentRef.OpeningEntry");
 		
 		RecordSet_AdvancesToVendors = AccumulationRegisters.R1020B_AdvancesToVendors.CreateRecordSet();
 		RecordSet_AdvancesToVendors.Filter.Recorder.Set(Row.Document);

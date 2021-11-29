@@ -53,6 +53,7 @@
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
+    <indexing>Index</indexing>
     <fullTextSearch>Use</fullTextSearch>
   </attributes>
   <dimensions uuid="6d1fceaa-4d14-4ac0-a260-1215f41f41e3">
@@ -133,26 +134,6 @@
     </synonym>
     <type>
       <types>CatalogRef.Partners</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <useInTotals>true</useInTotals>
-  </dimensions>
-  <dimensions uuid="1c8d3bc4-0e68-48f5-ae64-5e75eb51fb87">
-    <name>Basis</name>
-    <synonym>
-      <key>en</key>
-      <value>Basis</value>
-    </synonym>
-    <type>
-      <types>DocumentRef.DebitNote</types>
-      <types>DocumentRef.CreditNote</types>
-      <types>DocumentRef.BankReceipt</types>
-      <types>DocumentRef.PurchaseReturn</types>
-      <types>DocumentRef.CashReceipt</types>
-      <types>DocumentRef.OpeningEntry</types>
-      <types>DocumentRef.SalesReturn</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

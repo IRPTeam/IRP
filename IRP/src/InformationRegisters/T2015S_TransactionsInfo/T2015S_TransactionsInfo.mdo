@@ -251,6 +251,13 @@
     </synonym>
     <type>
       <types>DocumentRef.PurchaseInvoice</types>
+      <types>DocumentRef.CashTransferOrder</types>
+      <types>DocumentRef.CreditNote</types>
+      <types>DocumentRef.DebitNote</types>
+      <types>DocumentRef.OpeningEntry</types>
+      <types>DocumentRef.PurchaseReturn</types>
+      <types>DocumentRef.SalesInvoice</types>
+      <types>DocumentRef.SalesReturn</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

@@ -191,11 +191,12 @@ Function ItemList()
 		   |	PurchaseReturnItemList.Ref AS PurchaseReturn,
 		   |	CASE
 		   |		WHEN PurchaseReturnItemList.Ref.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
-		   |			THEN CASE
-		   |				WHEN NOT PurchaseReturnItemList.PurchaseInvoice.Ref IS NULL
-		   |					THEN PurchaseReturnItemList.PurchaseInvoice
-		   |				ELSE PurchaseReturnItemList.Ref
-		   |			END
+		   |			THEN PurchaseReturnItemList.Ref
+//		   |			CASE
+//		   |				WHEN NOT PurchaseReturnItemList.PurchaseInvoice.Ref IS NULL
+//		   |					THEN PurchaseReturnItemList.PurchaseInvoice
+//		   |				ELSE PurchaseReturnItemList.Ref
+//		   |			END
 		   |		ELSE UNDEFINED
 		   |	END AS BasisDocument,
 		   |	PurchaseReturnItemList.Ref AS AdvanceBasis,

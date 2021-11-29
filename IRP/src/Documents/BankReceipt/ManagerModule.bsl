@@ -451,12 +451,33 @@ Function R1021B_VendorsTransactions()
 		   |	PaymentList.Agreement,
 		   |	PaymentList.TransactionDocument AS Basis,
 		   |	PaymentList.Key,
-		   |	PaymentList.Amount AS Amount
+		   |	-PaymentList.Amount AS Amount,
+		   |	UNDEFINED AS VendorsAdvancesClosing
 		   |INTO R1021B_VendorsTransactions
 		   |	FROM PaymentList AS PaymentList
 		   |WHERE
 		   |	PaymentList.IsReturnFromVendor
-		   |	AND NOT PaymentList.IsAdvance";
+		   |	AND NOT PaymentList.IsAdvance
+		   |
+		   |UNION ALL
+		   |
+		   |SELECT
+		   |	VALUE(AccumulationRecordType.Expense),
+		   |	OffsetOfAdvances.Period,
+		   |	OffsetOfAdvances.Company,
+		   |	OffsetOfAdvances.Branch,
+		   |	OffsetOfAdvances.Partner,
+		   |	OffsetOfAdvances.LegalName,
+		   |	OffsetOfAdvances.Currency,
+		   |	OffsetOfAdvances.Agreement,
+		   |	OffsetOfAdvances.TransactionDocument,
+		   |	OffsetOfAdvances.Key,
+		   |	OffsetOfAdvances.Amount,
+		   |	OffsetOfAdvances.Recorder
+		   |FROM
+		   |	InformationRegister.T2010S_OffsetOfAdvances AS OffsetOfAdvances
+		   |WHERE
+		   |	OffsetOfAdvances.Document = &Ref";
 EndFunction
 
 Function R2020B_AdvancesFromCustomers()
@@ -501,14 +522,14 @@ EndFunction
 
 Function R1020B_AdvancesToVendors()
 	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
 		   |	PaymentList.Period,
 		   |	PaymentList.Company,
 		   |	PaymentList.Branch,
 		   |	PaymentList.Partner,
 		   |	PaymentList.Payer AS LegalName,
 		   |	PaymentList.Currency,
-		   |	PaymentList.Amount,
+		   |	-PaymentList.Amount AS Amount,
 		   |	PaymentList.Key
 		   |INTO R1020B_AdvancesToVendors
 		   |FROM
@@ -625,7 +646,7 @@ Function R3024B_SalesOrdersToBePaid()
 	|	PaymentList.Branch,
 	|	PaymentList.Currency,
 	|	PaymentList.Partner,
-	|	PaymentList.LegalName,
+	|	PaymentList.Payer AS LegalName,
 	|	PaymentList.Order,
 	|	PaymentList.Amount
 	|INTO R3024B_SalesOrdersToBePaid

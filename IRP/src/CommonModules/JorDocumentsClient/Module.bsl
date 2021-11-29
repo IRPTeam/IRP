@@ -240,102 +240,123 @@ Function CreateFilterByParameters(Ref, Parameters, TableName, OpeningEntryTableN
 	EndIf;
 
 	QueryText = QueryText_TableName + QueryText_OpeningEntryTableName1 + QueryText_OpeningEntryTableName2 + QueryText_DebitNote
-		+ QueryText_CreditNote + " ;
-								 |SELECT ALLOWED
-								 |	CustomersTransactions.Basis AS Ref,
-								 |	CustomersTransactions.Company AS Company,
-								 |	CustomersTransactions.Partner AS Partner,
-								 |	CustomersTransactions.LegalName AS LegalName,
-								 |	CustomersTransactions.Agreement AS Agreement,
-								 |	CustomersTransactions.Currency AS Currency,
-								 |	CustomersTransactions.AmountBalance AS DocumentAmount
-								 |INTO DocWithBalance
-								 |FROM
-								 |	AccumulationRegister.R2021B_CustomersTransactions.Balance(&Period,
-								 |		CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
-								 |	AND (Basis, Company, Partner, LegalName, Agreement, Currency) IN
-								 |		(SELECT
-								 |			Doc.Ref,
-								 |			Doc.Company,
-								 |			Doc.Partner,
-								 |			Doc.LegalName,
-								 |			Doc.Agreement,
-								 |			Doc.Currency
-								 |		FROM
-								 |			Doc AS Doc)) AS CustomersTransactions
-								 |WHERE
-								 |	CustomersTransactions.AmountBalance > 0
-								 |
-								 |
-								 |
-								 |UNION ALL
-								 |
-								 |SELECT
-								 |	VendorsTransactions.Basis,
-								 |	VendorsTransactions.Company,
-								 |	VendorsTransactions.Partner,
-								 |	VendorsTransactions.LegalName,
-								 |	VendorsTransactions.Agreement,
-								 |	VendorsTransactions.Currency,
-								 |	VendorsTransactions.AmountBalance
-								 |FROM
-								 |	AccumulationRegister.R1021B_VendorsTransactions.Balance(&Period,
-								 |		CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
-								 |	AND (Basis, Company, Partner, LegalName, Agreement, Currency) IN
-								 |		(SELECT
-								 |			Doc.Ref,
-								 |			Doc.Company,
-								 |			Doc.Partner,
-								 |			Doc.LegalName,
-								 |			Doc.Agreement,
-								 |			Doc.Currency
-								 |		FROM
-								 |			Doc AS Doc)) AS VendorsTransactions
-								 |WHERE
-								 |	VendorsTransactions.AmountBalance > 0
-								 |;
-								 |//////////////////////////////////////////////////////////////
-								 |SELECT 
-								 |	DocWithBalance.Ref,
-								 |	DocWithBalance.Company,
-								 |	DocWithBalance.Partner,
-								 |	DocWithBalance.LegalName,
-								 |	DocWithBalance.Agreement,
-								 |	DocWithBalance.Currency,
-								 |	DocWithBalance.DocumentAmount
-								 |INTO AllDoc
-								 |FROM DocWithBalance AS DocWithBalance
-								 |
-								 |UNION ALL
-								 |
-								 |SELECT
-								 |	Doc.Ref,
-								 |	Doc.Company,
-								 |	Doc.Partner,
-								 |	Doc.LegalName,
-								 |	Doc.Agreement,
-								 |	Doc.Currency,
-								 |	0
-								 |FROM Doc AS Doc
-								 |	WHERE &ShowAll
-								 |;
-								 |/////////////////////////////////////////////////////
-								 |SELECT
-								 |	AllDoc.Ref,
-								 |	AllDoc.Company,
-								 |	AllDoc.Partner,
-								 |	AllDoc.LegalName,
-								 |	AllDoc.Agreement,
-								 |	AllDoc.Currency,
-								 |	SUM(AllDoc.DocumentAmount) AS DocumentAmount
-								 |FROM AllDoc AS AllDoc
-								 |GROUP BY
-								 |	AllDoc.Ref,
-								 |	AllDoc.Company,
-								 |	AllDoc.Partner,
-								 |	AllDoc.LegalName,
-								 |	AllDoc.Agreement,
-								 |	AllDoc.Currency";
+	+ QueryText_CreditNote +
+	"; 
+	|SELECT ALLOWED
+	|	CustomersTransactions.Basis AS Ref,
+	|	CustomersTransactions.Company AS Company,
+	|	CustomersTransactions.Partner AS Partner,
+	|	CustomersTransactions.LegalName AS LegalName,
+	|	CustomersTransactions.Agreement AS Agreement,
+	|	CustomersTransactions.Currency AS Currency,
+	|	CASE
+	|		WHEN CustomersTransactions.Basis REFS Document.SalesReturn
+	|			THEN -CustomersTransactions.AmountBalance
+	|		ELSE CustomersTransactions.AmountBalance
+	|	END AS DocumentAmount
+	|INTO DocWithBalance
+	|FROM
+	|	AccumulationRegister.R2021B_CustomersTransactions.Balance(&Period,
+	|		CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
+	|	AND (Basis, Company, Partner, LegalName, Agreement, Currency) IN
+	|		(SELECT
+	|			Doc.Ref,
+	|			Doc.Company,
+	|			Doc.Partner,
+	|			Doc.LegalName,
+	|			Doc.Agreement,
+	|			Doc.Currency
+	|		FROM
+	|			Doc AS Doc)) AS CustomersTransactions
+	|WHERE
+	|	CASE
+	|		WHEN CustomersTransactions.Basis REFS Document.SalesReturn
+	|			THEN -CustomersTransactions.AmountBalance
+	|		ELSE CustomersTransactions.AmountBalance
+	|	END > 0
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	VendorsTransactions.Basis,
+	|	VendorsTransactions.Company,
+	|	VendorsTransactions.Partner,
+	|	VendorsTransactions.LegalName,
+	|	VendorsTransactions.Agreement,
+	|	VendorsTransactions.Currency,
+	|	CASE
+	|		WHEN VendorsTransactions.Basis REFS Document.PurchaseReturn
+	|			THEN -VendorsTransactions.AmountBalance
+	|		ELSE VendorsTransactions.AmountBalance
+	|	END
+	|FROM
+	|	AccumulationRegister.R1021B_VendorsTransactions.Balance(&Period,
+	|		CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
+	|	AND (Basis, Company, Partner, LegalName, Agreement, Currency) IN
+	|		(SELECT
+	|			Doc.Ref,
+	|			Doc.Company,
+	|			Doc.Partner,
+	|			Doc.LegalName,
+	|			Doc.Agreement,
+	|			Doc.Currency
+	|		FROM
+	|			Doc AS Doc)) AS VendorsTransactions
+	|WHERE
+	|	CASE
+	|		WHEN VendorsTransactions.Basis REFS Document.PurchaseReturn
+	|			THEN -VendorsTransactions.AmountBalance
+	|		ELSE VendorsTransactions.AmountBalance
+	|	END > 0
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	DocWithBalance.Ref,
+	|	DocWithBalance.Company,
+	|	DocWithBalance.Partner,
+	|	DocWithBalance.LegalName,
+	|	DocWithBalance.Agreement,
+	|	DocWithBalance.Currency,
+	|	DocWithBalance.DocumentAmount
+	|INTO AllDoc
+	|FROM
+	|	DocWithBalance AS DocWithBalance
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	Doc.Ref,
+	|	Doc.Company,
+	|	Doc.Partner,
+	|	Doc.LegalName,
+	|	Doc.Agreement,
+	|	Doc.Currency,
+	|	0
+	|FROM
+	|	Doc AS Doc
+	|WHERE
+	|	&ShowAll
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	AllDoc.Ref,
+	|	AllDoc.Company,
+	|	AllDoc.Partner,
+	|	AllDoc.LegalName,
+	|	AllDoc.Agreement,
+	|	AllDoc.Currency,
+	|	SUM(AllDoc.DocumentAmount) AS DocumentAmount
+	|FROM
+	|	AllDoc AS AllDoc
+	|GROUP BY
+	|	AllDoc.Ref,
+	|	AllDoc.Company,
+	|	AllDoc.Partner,
+	|	AllDoc.LegalName,
+	|	AllDoc.Agreement,
+	|	AllDoc.Currency";
 
 	FilterStructure = New Structure();
 	FilterStructure.Insert("QueryText", QueryText);

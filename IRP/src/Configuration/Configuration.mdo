@@ -361,7 +361,7 @@
   <commonModules>CommonModule.ObjectStatusesServer</commonModules>
   <commonModules>CommonModule.OffersClient</commonModules>
   <commonModules>CommonModule.OffersServer</commonModules>
-  <commonModules>CommonModule.OffsetOfPartnersServer</commonModules>
+  <commonModules>CommonModule.CreditLimitsServer</commonModules>
   <commonModules>CommonModule.PickupItemsClient</commonModules>
   <commonModules>CommonModule.PictureViewerClient</commonModules>
   <commonModules>CommonModule.PictureViewerClientServer</commonModules>

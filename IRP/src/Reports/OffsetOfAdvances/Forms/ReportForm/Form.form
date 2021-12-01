@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<form:Form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:form="http://g5.1c.ru/v8/dt/form">
+<form:Form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:form="http://g5.1c.ru/v8/dt/form">
   <items xsi:type="form:FormGroup">
-    <name>Group1</name>
+    <name>GroupMain</name>
     <id>9</id>
     <items xsi:type="form:Button">
       <name>FormRun</name>
@@ -85,13 +85,80 @@
         <textEdit>true</textEdit>
       </extInfo>
     </items>
+    <items xsi:type="form:FormField">
+      <name>ReportType</name>
+      <id>11</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <dataPath xsi:type="form:DataPath">
+        <segments>ReportType</segments>
+      </dataPath>
+      <extendedTooltip>
+        <name>ReportTypeExtendedTooltip</name>
+        <id>13</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <type>Label</type>
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <extInfo xsi:type="form:LabelDecorationExtInfo">
+          <horizontalAlign>Left</horizontalAlign>
+        </extInfo>
+      </extendedTooltip>
+      <contextMenu>
+        <name>ReportTypeContextMenu</name>
+        <id>12</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <autoFill>true</autoFill>
+      </contextMenu>
+      <type>RadioButtonField</type>
+      <editMode>Enter</editMode>
+      <showInHeader>true</showInHeader>
+      <headerHorizontalAlign>Left</headerHorizontalAlign>
+      <showInFooter>true</showInFooter>
+      <extInfo xsi:type="form:RadioButtonsFieldExtInfo">
+        <radioButtonsType>Tumbler</radioButtonsType>
+        <choiceList>
+          <presentation>
+            <key>en</key>
+            <value>Vendors</value>
+          </presentation>
+          <value xsi:type="core:StringValue">
+            <value>Vendors</value>
+          </value>
+        </choiceList>
+        <choiceList>
+          <presentation>
+            <key>en</key>
+            <value>Customers</value>
+          </presentation>
+          <value xsi:type="core:StringValue">
+            <value>Customers</value>
+          </value>
+        </choiceList>
+      </extInfo>
+    </items>
     <visible>true</visible>
     <enabled>true</enabled>
     <userVisible>
       <common>true</common>
     </userVisible>
+    <title>
+      <key>en</key>
+      <value>Group main</value>
+    </title>
     <extendedTooltip>
-      <name>Group1ExtendedTooltip</name>
+      <name>GroupMainExtendedTooltip</name>
       <id>10</id>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -245,6 +312,24 @@
       <common>true</common>
     </edit>
   </attributes>
+  <attributes>
+    <name>ReportType</name>
+    <title>
+      <key>en</key>
+      <value>Report type</value>
+    </title>
+    <id>4</id>
+    <valueType>
+      <types>String</types>
+      <stringQualifiers/>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
+  </attributes>
   <formCommands>
     <name>Run</name>
     <title>
@@ -278,6 +363,13 @@
       <dateQualifiers>
         <dateFractions>Date</dateFractions>
       </dateQualifiers>
+    </valueType>
+  </parameters>
+  <parameters>
+    <name>ReportType</name>
+    <valueType>
+      <types>String</types>
+      <stringQualifiers/>
     </valueType>
   </parameters>
   <commandInterface>

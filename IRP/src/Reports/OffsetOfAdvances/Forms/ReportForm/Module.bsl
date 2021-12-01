@@ -3,6 +3,7 @@
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	Period.StartDate = Parameters.StartDate;
 	Period.EndDate   = Parameters.EndDate;
+	ReportType       = Parameters.ReportType;
 	RunAtServer();
 EndProcedure
 
@@ -15,8 +16,7 @@ EndProcedure
 Procedure RunAtServer()
 	ThisObject.Doc.Clear();
 	Template = Reports.OffsetOfAdvances.GetTemplate("Template");
-	Area_Header = Template.GetArea("Header");
-	Doc.Put(Area_Header);
+	Doc.Put(Template.GetArea("Header"));
 	MainTable = GetMainTable();
 	For Each MainRow In MainTable Do
 		Area_Caption = Template.GetArea("Caption");
@@ -30,7 +30,6 @@ Procedure RunAtServer()
 		For Each DocumentRow In DocumentTable Do
 			Area_Row = Template.GetArea("Row");
 			Area_Row.Parameters.Fill(DocumentRow);
-			//Area_Row.Parameters.Fill(GetCorrespondent(MainRow, DocumentRow));
 			
 			ADV_KEY = GetADV_KEY(MainRow.Company, MainRow.Branch, MainRow.Currency, 
 				MainRow.Partner, MainRow.LegalName, DocumentRow.Order);
@@ -44,7 +43,8 @@ Procedure RunAtServer()
 			ArrayOf_FromTRN.Add(TRN_KEY);
 			
 			Doc.Put(Area_Row);
-			If TypeOf(DocumentRow.Document) = Type("DocumentRef.PurchaseInvoice") Then
+			If TypeOf(DocumentRow.Document) = Type("DocumentRef.PurchaseInvoice") 
+				Or TypeOf(DocumentRow.Document) = Type("DocumentRef.SalesInvoice") Then
 				AgingTable = GetAgingTable(DocumentRow.Document);
 				If AgingTable.Count() Then
 					Area_AgingHeader = Template.GetArea("AgingHeader");
@@ -56,22 +56,23 @@ Procedure RunAtServer()
 					EndDo;
 				EndIf;
 			EndIf;
+			
+			
 		EndDo; // DocumentRow
+		
 		ADV_TRN_Table = GetFromADV_ToTRN(ArrayOf_FromADV);
 		If ADV_TRN_Table.Count() Then
-			Area_ADV_TRN_Header = Template.GetArea("ADV_TRN_Header");
-			Doc.Put(Area_ADV_TRN_Header);
+			Doc.Put(Template.GetArea("ADV_TRN_Header"));
 			For Each Row_ADV_TRN in ADV_TRN_Table Do
 				Area_ADV_TRN_Row = Template.GetArea("ADV_TRN_Row");
 				Area_ADV_TRN_Row.Parameters.Fill(Row_ADV_TRN);
 				Doc.Put(Area_ADV_TRN_Row);
 			EndDo;
 		EndIf;
-		TRN_ADV_Table = GetFromTRN_ToADV(ArrayOf_FromTRN);
 		
+		TRN_ADV_Table = GetFromTRN_ToADV(ArrayOf_FromTRN);
 		If TRN_ADV_Table.Count() Then
-			Area_TRN_ADV_Header = Template.GetArea("TRN_ADV_Header");
-			Doc.Put(Area_TRN_ADV_Header);
+			Doc.Put(Template.GetArea("TRN_ADV_Header"));
 			For Each Row_TRN_ADV in TRN_ADV_Table Do
 				Area_TRN_ADV_Row = Template.GetArea("TRN_ADV_Row");
 				Area_TRN_ADV_Row.Parameters.Fill(Row_TRN_ADV);
@@ -86,90 +87,89 @@ EndProcedure
 Function GetFromTRN_ToADV(ArrayOf_FromTRN)
 	Query = New Query();
 	Query.Text = 
-
-"SELECT
-|	T2010S_OffsetOfAdvances.FromTransactionKey AS FromTransactionKey,
-|	T2010S_OffsetOfAdvances.ToAdvanceKey AS ToAdvanceKey
-|INTO tmp
-|FROM
-|	InformationRegister.T2010S_OffsetOfAdvances AS T2010S_OffsetOfAdvances
-|WHERE
-|	NOT T2010S_OffsetOfAdvances.FromTransactionKey.Ref IS NULL
-|	AND NOT T2010S_OffsetOfAdvances.ToAdvanceKey.Ref IS NULL
-|	AND T2010S_OffsetOfAdvances.FromTransactionKey IN (&ArrayOf_FromTRN)
-|;
-|
-|////////////////////////////////////////////////////////////////////////////////
-|SELECT
-|	tmp.FromTransactionKey AS FromTransactionKey,
-|	TRN.Period AS TRN_Period,
-|	TRN.AmountOpeningBalance AS TRN_Open,
-|	TRN.AmountReceipt AS TRN_Receipt,
-|	TRN.AmountExpense AS TRN_Expense,
-|	TRN.AmountClosingBalance AS TRN_Close,
-|	tmp.ToAdvanceKey AS ToAdvanceKey
-|INTO tmp2
-|FROM
-|	tmp AS tmp
-|		LEFT JOIN AccumulationRegister.TM1030B_TransactionsKey.BalanceAndTurnovers(BEGINOFPERIOD(&BeginOfPeriod, DAY),
-|			ENDOFPERIOD(&EndOfPeriod, DAY), Record, RegisterRecords, TransactionKey IN
-|			(SELECT
-|				tmp.FromTransactionKey
-|			FROM
-|				tmp AS tmp)) AS TRN
-|		ON TRN.TransactionKey = tmp.FromTransactionKey
-|;
-|
-|////////////////////////////////////////////////////////////////////////////////
-|SELECT
-|	tmp2.FromTransactionKey AS FromTransactionKey,
-|	tmp2.TRN_Period AS TRN_Period,
-|	CASE
-|		WHEN tmp2.TRN_Period IS NULL
-|			THEN ADV.Period //DATETIME(3000, 1, 1)
-|		ELSE tmp2.TRN_Period
-|	END AS pOrder,
-|	tmp2.TRN_Open AS TRN_Open,
-|	tmp2.TRN_Receipt AS TRN_Receipt,
-|	tmp2.TRN_Expense AS TRN_Expense,
-|	tmp2.TRN_Close AS TRN_Close,
-|	tmp2.ToAdvanceKey AS ToAdvanceKey,
-|	ADV.Period AS ADV_Period,
-|	ADV.AmountOpeningBalance AS ADV_Open,
-|	ADV.AmountReceipt AS ADV_Receipt,
-|	ADV.AmountExpense AS ADV_Expense,
-|	ADV.AmountClosingBalance AS ADV_Close
-|FROM
-|	tmp2 AS tmp2
-|		FULL JOIN AccumulationRegister.TM1020B_AdvancesKey.BalanceAndTurnovers(BEGINOFPERIOD(&BeginOfPeriod, DAY),
-|			ENDOFPERIOD(&EndOfPeriod, DAY), Record, RegisterRecords, AdvanceKey IN
-|			(SELECT
-|				tmp2.ToAdvanceKey
-|			FROM
-|				tmp2 AS tmp2)) AS ADV
-|		ON ADV.AdvanceKey = tmp2.ToAdvanceKey
-|		AND tmp2.TRN_Period = ADV.Period
-|		AND tmp2.TRN_Expense = ADV.AmountExpense
-|GROUP BY
-|	tmp2.FromTransactionKey,
-|	tmp2.TRN_Period,
-|	tmp2.TRN_Open,
-|	tmp2.TRN_Receipt,
-|	tmp2.TRN_Expense,
-|	tmp2.TRN_Close,
-|	tmp2.ToAdvanceKey,
-|	ADV.Period,
-|	ADV.AmountOpeningBalance,
-|	ADV.AmountReceipt,
-|	ADV.AmountExpense,
-|	ADV.AmountClosingBalance,
-|	CASE
-|		WHEN tmp2.TRN_Period IS NULL
-|			THEN ADV.Period //DATETIME(3000, 1, 1)
-|		ELSE tmp2.TRN_Period
-|	END
-|ORDER BY
-|	pOrder";
+	"SELECT
+	|	T2010S_OffsetOfAdvances.FromTransactionKey AS FromTransactionKey,
+	|	T2010S_OffsetOfAdvances.ToAdvanceKey AS ToAdvanceKey
+	|INTO tmp
+	|FROM
+	|	InformationRegister.T2010S_OffsetOfAdvances AS T2010S_OffsetOfAdvances
+	|WHERE
+	|	NOT T2010S_OffsetOfAdvances.FromTransactionKey.Ref IS NULL
+	|	AND NOT T2010S_OffsetOfAdvances.ToAdvanceKey.Ref IS NULL
+	|	AND T2010S_OffsetOfAdvances.FromTransactionKey IN (&ArrayOf_FromTRN)
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	tmp.FromTransactionKey AS FromTransactionKey,
+	|	TRN.Period AS TRN_Period,
+	|	TRN.AmountOpeningBalance AS TRN_Open,
+	|	TRN.AmountReceipt AS TRN_Receipt,
+	|	TRN.AmountExpense AS TRN_Expense,
+	|	TRN.AmountClosingBalance AS TRN_Close,
+	|	tmp.ToAdvanceKey AS ToAdvanceKey
+	|INTO tmp2
+	|FROM
+	|	tmp AS tmp
+	|		LEFT JOIN AccumulationRegister.TM1030B_TransactionsKey.BalanceAndTurnovers(BEGINOFPERIOD(&BeginOfPeriod, DAY),
+	|			ENDOFPERIOD(&EndOfPeriod, DAY), Record, RegisterRecords, TransactionKey IN
+	|			(SELECT
+	|				tmp.FromTransactionKey
+	|			FROM
+	|				tmp AS tmp)) AS TRN
+	|		ON TRN.TransactionKey = tmp.FromTransactionKey
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	tmp2.FromTransactionKey AS FromTransactionKey,
+	|	tmp2.TRN_Period AS TRN_Period,
+	|	CASE
+	|		WHEN tmp2.TRN_Period IS NULL
+	|			THEN ADV.Period
+	|		ELSE tmp2.TRN_Period
+	|	END AS pOrder,
+	|	tmp2.TRN_Open AS TRN_Open,
+	|	tmp2.TRN_Receipt AS TRN_Receipt,
+	|	tmp2.TRN_Expense AS TRN_Expense,
+	|	tmp2.TRN_Close AS TRN_Close,
+	|	tmp2.ToAdvanceKey AS ToAdvanceKey,
+	|	ADV.Period AS ADV_Period,
+	|	ADV.AmountOpeningBalance AS ADV_Open,
+	|	ADV.AmountReceipt AS ADV_Receipt,
+	|	ADV.AmountExpense AS ADV_Expense,
+	|	ADV.AmountClosingBalance AS ADV_Close
+	|FROM
+	|	tmp2 AS tmp2
+	|		FULL JOIN AccumulationRegister.TM1020B_AdvancesKey.BalanceAndTurnovers(BEGINOFPERIOD(&BeginOfPeriod, DAY),
+	|			ENDOFPERIOD(&EndOfPeriod, DAY), Record, RegisterRecords, AdvanceKey IN
+	|			(SELECT
+	|				tmp2.ToAdvanceKey
+	|			FROM
+	|				tmp2 AS tmp2)) AS ADV
+	|		ON ADV.AdvanceKey = tmp2.ToAdvanceKey
+	|		AND tmp2.TRN_Period = ADV.Period
+	|		AND tmp2.TRN_Expense = ADV.AmountExpense
+	|GROUP BY
+	|	tmp2.FromTransactionKey,
+	|	tmp2.TRN_Period,
+	|	tmp2.TRN_Open,
+	|	tmp2.TRN_Receipt,
+	|	tmp2.TRN_Expense,
+	|	tmp2.TRN_Close,
+	|	tmp2.ToAdvanceKey,
+	|	ADV.Period,
+	|	ADV.AmountOpeningBalance,
+	|	ADV.AmountReceipt,
+	|	ADV.AmountExpense,
+	|	ADV.AmountClosingBalance,
+	|	CASE
+	|		WHEN tmp2.TRN_Period IS NULL
+	|			THEN ADV.Period
+	|		ELSE tmp2.TRN_Period
+	|	END
+	|ORDER BY
+	|	pOrder";
 	Query.SetParameter("BeginOfPeriod", Period.StartDate);
 	Query.SetParameter("EndOfPeriod", Period.EndDate);
 	Query.SetParameter("ArrayOf_FromTRN", ArrayOf_FromTRN);
@@ -220,7 +220,7 @@ Function GetFromADV_ToTRN(ArrayOf_FromADV)
 	|	tmp2.ADV_Period AS ADV_Period,
 	|	CASE
 	|		WHEN tmp2.ADV_Period IS NULL
-	|			THEN TRN.Period //DATETIME(3000, 1, 1)
+	|			THEN TRN.Period
 	|		ELSE tmp2.ADV_Period
 	|	END AS pOrder,
 	|	tmp2.ADV_Open AS ADV_Open,
@@ -259,7 +259,7 @@ Function GetFromADV_ToTRN(ArrayOf_FromADV)
 	|	TRN.AmountClosingBalance,
 	|	CASE
 	|		WHEN tmp2.ADV_Period IS NULL
-	|			THEN TRN.Period //DATETIME(3000, 1, 1)
+	|			THEN TRN.Period
 	|		ELSE tmp2.ADV_Period
 	|	END
 	|ORDER BY
@@ -290,6 +290,11 @@ Function GetTRN_KEY(Company, Branch, Currency, Partner, LegalName, Agreement, Or
 	|	AND TransactionsKeys.TransactionBasis = &TransactionBasis
 	|	AND TransactionsKeys.Agreement = &Agreement
 	|	AND TransactionsKeys.IsVendorTransaction";
+	
+	If ReportType = "Customers" Then
+		Query.Text = StrReplace(Query.Text, "IsVendorTransaction", "IsCustomerTransaction");
+	EndIf;
+	
 	Query.SetParameter("Company", Company);
 	Query.SetParameter("Branch", Branch);
 	Query.SetParameter("Currency", Currency);
@@ -322,6 +327,11 @@ Function GetADV_KEY(Company, Branch, Currency, Partner, LegalName, Order)
 	|	AND AdvancesKeys.Order = &Order
 	|	AND AdvancesKeys.IsVendorAdvance
 	|	AND NOT AdvancesKeys.DeletionMark";
+	
+	If ReportType = "Customers" Then
+		Query.Text = StrReplace(Query.Text, "IsVendorAdvance", "IsCustomerAdvance");
+	EndIf;
+	
 	Query.SetParameter("Company", Company);
 	Query.SetParameter("Branch", Branch);
 	Query.SetParameter("Currency", Currency);
@@ -340,68 +350,33 @@ Function GetAgingTable(Invoice)
 	Query = New Query();
 	Query.Text = 
 	"SELECT
-	|	R5012B_VendorsAgingBalanceAndTurnovers.PaymentDate,
-	|	SUM(R5012B_VendorsAgingBalanceAndTurnovers.AmountReceipt) AS Receipt,
-	|	SUM(R5012B_VendorsAgingBalanceAndTurnovers.AmountExpense) AS Expense
+	|	Aging.PaymentDate,
+	|	SUM(Aging.AmountReceipt) AS Receipt,
+	|	SUM(Aging.AmountExpense) AS Expense
 	|FROM
-	|	AccumulationRegister.R5012B_VendorsAging.BalanceAndTurnovers(,,,, Invoice = &Invoice) AS
-	|		R5012B_VendorsAgingBalanceAndTurnovers
+	|	AccumulationRegister.R5012B_VendorsAging.BalanceAndTurnovers(,,,, Invoice = &Invoice) AS Aging
 	|GROUP BY
-	|	R5012B_VendorsAgingBalanceAndTurnovers.PaymentDate";
+	|	Aging.PaymentDate";
+	If ReportType = "Customers" Then
+		Query.Text = StrReplace(Query.Text, "R5012B_VendorsAging", "R5011B_CustomersAging");
+	EndIf;
 	Query.SetParameter("Invoice", Invoice);
 	QueryResult = Query.Execute();
 	QueryTable = QueryResult.Unload();
 	Return QueryTable;
 EndFunction
 
-//Function GetCorrespondent(MainRow, DocumentRow)
-//	Query = New Query();
-//	Query.Text = 
-//	"SELECT
-//	|	CASE
-//	|		WHEN T2010S_OffsetOfAdvances.Document = T2010S_OffsetOfAdvances.TransactionDocument
-//	|			THEN T2010S_OffsetOfAdvances.AdvancesDocument
-//	|		WHEN T2010S_OffsetOfAdvances.Document = T2010S_OffsetOfAdvances.AdvancesDocument
-//	|			THEN T2010S_OffsetOfAdvances.TransactionDocument
-//	|	END AS Correspondent,
-//	|	T2010S_OffsetOfAdvances.LineNumber
-//	|FROM
-//	|	InformationRegister.T2010S_OffsetOfAdvances AS T2010S_OffsetOfAdvances
-//	|WHERE
-//	|	T2010S_OffsetOfAdvances.Company = &Company
-//	|	AND T2010S_OffsetOfAdvances.Branch = &Branch
-//	|	AND T2010S_OffsetOfAdvances.Currency = &Currency
-//	|	AND T2010S_OffsetOfAdvances.Partner = &Partner
-//	|	AND T2010S_OffsetOfAdvances.LegalName = &LegalName
-//	|	AND T2010S_OffsetOfAdvances.Agreement = &Agreement
-//	|	AND T2010S_OffsetOfAdvances.Document = &Document";
-//	Query.SetParameter("Company", MainRow.Company);
-//	Query.SetParameter("Branch", MainRow.Branch);
-//	Query.SetParameter("Currency", MainRow.Currency);
-//	Query.SetParameter("LegalName", MainRow.LegalName);
-//	Query.SetParameter("Partner", MainRow.Partner);
-//	Query.SetParameter("Agreement", MainRow.Agreement);
-//	Query.SetParameter("Document", DocumentRow.Document);
-//	QueryResult = Query.Execute();
-//	QuerySelection = QueryResult.Select();
-//	If QuerySelection.Next() Then
-//		Return QuerySelection;
-//	EndIf;
-//	Return New Structure("Correspondent, LineNumber", "---", "");
-//EndFunction
-
 Function GetDocumentTable(MainRow)
 	Query = New Query();
 	Query.Text = 
 	"SELECT
-	|	R1020B_AdvancesToVendorsBalanceAndTurnovers.Recorder AS Recorder,
-//	|	value(Catalog.Agreements.EmptyRef) AS Agreement,
-	|	R1020B_AdvancesToVendorsBalanceAndTurnovers.Order,
-	|	R1020B_AdvancesToVendorsBalanceAndTurnovers.Recorder.PointInTime AS PointInTime,
-	|	R1020B_AdvancesToVendorsBalanceAndTurnovers.AmountOpeningBalance AS AdvanceOpen,
-	|	R1020B_AdvancesToVendorsBalanceAndTurnovers.AmountReceipt AS AdvanceReceipt,
-	|	R1020B_AdvancesToVendorsBalanceAndTurnovers.AmountExpense AS AdvanceExpense,
-	|	R1020B_AdvancesToVendorsBalanceAndTurnovers.AmountClosingBalance AS AdvanceClosing,
+	|	Advances.Recorder AS Recorder,
+	|	Advances.Order,
+	|	Advances.Recorder.PointInTime AS PointInTime,
+	|	Advances.AmountOpeningBalance AS AdvanceOpen,
+	|	Advances.AmountReceipt AS AdvanceReceipt,
+	|	Advances.AmountExpense AS AdvanceExpense,
+	|	Advances.AmountClosingBalance AS AdvanceClosing,
 	|	0 AS TransactionOpen,
 	|	0 AS TransactionReceipt,
 	|	0 AS TransactionExpense,
@@ -414,24 +389,22 @@ Function GetDocumentTable(MainRow)
 	|	AND Currency = &Currency
 	|	AND LegalName = &LegalName
 	|	AND Partner = &Partner
-	|	AND CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)) AS
-	|		R1020B_AdvancesToVendorsBalanceAndTurnovers
+	|	AND CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)) AS Advances
 	|
 	|UNION ALL
 	|
 	|SELECT
-	|	R1021B_VendorsTransactionsBalanceAndTurnovers.Recorder,
-//	|	R1021B_VendorsTransactionsBalanceAndTurnovers.Agreement,
-	|	R1021B_VendorsTransactionsBalanceAndTurnovers.Order,
-	|	R1021B_VendorsTransactionsBalanceAndTurnovers.Recorder.PointInTime,
+	|	Transactions.Recorder,
+	|	Transactions.Order,
+	|	Transactions.Recorder.PointInTime,
 	|	0,
 	|	0,
 	|	0,
 	|	0,
-	|	R1021B_VendorsTransactionsBalanceAndTurnovers.AmountOpeningBalance,
-	|	R1021B_VendorsTransactionsBalanceAndTurnovers.AmountReceipt,
-	|	R1021B_VendorsTransactionsBalanceAndTurnovers.AmountExpense,
-	|	R1021B_VendorsTransactionsBalanceAndTurnovers.AmountClosingBalance
+	|	Transactions.AmountOpeningBalance,
+	|	Transactions.AmountReceipt,
+	|	Transactions.AmountExpense,
+	|	Transactions.AmountClosingBalance
 	|FROM
 	|	AccumulationRegister.R1021B_VendorsTransactions.BalanceAndTurnovers(BEGINOFPERIOD(&BeginOfPeriod, DAY),
 	|		ENDOFPERIOD(&EndOfPeriod, DAY), Recorder, RegisterRecords, Company = &Company
@@ -440,14 +413,13 @@ Function GetDocumentTable(MainRow)
 	|	AND LegalName = &LegalName
 	|	AND Partner = &Partner
 	|	AND Agreement = &Agreement
-	|	AND CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)) AS
-	|		R1021B_VendorsTransactionsBalanceAndTurnovers
+	|	AND CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)) AS Transactions
 	|;
+	|
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
 	|	tmp.Recorder AS Document,
-//	|	tmp.Agreement,
 	|	tmp.Order,
 	|	SUM(tmp.AdvanceOpen) AS AdvanceOpen,
 	|	SUM(tmp.AdvanceReceipt) AS AdvanceReceipt,
@@ -461,11 +433,16 @@ Function GetDocumentTable(MainRow)
 	|	tmp AS tmp
 	|GROUP BY
 	|	tmp.Recorder,
-//	|	tmp.Agreement,
 	|	tmp.Order,
 	|	tmp.PointInTime
 	|ORDER BY
 	|	tmp.PointInTime";
+	
+	If ReportType = "Customers" Then
+		Query.Text = StrReplace(Query.Text, "R1020B_AdvancesToVendors"  , "R2020B_AdvancesFromCustomers");
+		Query.Text = StrReplace(Query.Text, "R1021B_VendorsTransactions", "R2021B_CustomersTransactions");
+	EndIf;
+	
 	Query.SetParameter("BeginOfPeriod", Period.StartDate);
 	Query.SetParameter("EndOfPeriod", Period.EndDate);
 	Query.SetParameter("Company", MainRow.Company);
@@ -477,45 +454,41 @@ Function GetDocumentTable(MainRow)
 	QueryResult = Query.Execute();
 	QueryTable = QueryResult.Unload();
 	Return QueryTable;
-	
 EndFunction
 
 Function GetMainTable()
 	Query = New Query();
 	Query.Text = 
 	"SELECT
-	|	R1020B_AdvancesToVendors.Company,
-	|	R1020B_AdvancesToVendors.Branch,
-	|	R1020B_AdvancesToVendors.Partner,
-	|	R1020B_AdvancesToVendors.LegalName,
-	|	R1020B_AdvancesToVendors.Currency,
-	|	VALUE(Catalog.Agreements.EmptyRef) AS Agreement 
-	//|	R1020B_AdvancesToVendors.Basis
+	|	Advances.Company,
+	|	Advances.Branch,
+	|	Advances.Partner,
+	|	Advances.LegalName,
+	|	Advances.Currency,
+	|	VALUE(Catalog.Agreements.EmptyRef) AS Agreement
 	|INTO tmp
 	|FROM
-	|	AccumulationRegister.R1020B_AdvancesToVendors AS R1020B_AdvancesToVendors
+	|	AccumulationRegister.R1020B_AdvancesToVendors AS Advances
 	|WHERE
-	|	R1020B_AdvancesToVendors.Period BETWEEN BEGINOFPERIOD(&BeginOfPeriod, day) AND ENDOFPERIOD(&EndOfPeriod, day)
-	|	AND
-	|		R1020B_AdvancesToVendors.CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
+	|	Advances.Period BETWEEN BEGINOFPERIOD(&BeginOfPeriod, day) AND ENDOFPERIOD(&EndOfPeriod, day)
+	|	AND Advances.CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
 	|
 	|UNION ALL
 	|
 	|SELECT
-	|	R1021B_VendorsTransactions.Company,
-	|	R1021B_VendorsTransactions.Branch,
-	|	R1021B_VendorsTransactions.Partner,
-	|	R1021B_VendorsTransactions.LegalName,
-	|	R1021B_VendorsTransactions.Currency,
-	|	R1021B_VendorsTransactions.Agreement 
-	//|	R1021B_VendorsTransactions.Basis
+	|	Transactions.Company,
+	|	Transactions.Branch,
+	|	Transactions.Partner,
+	|	Transactions.LegalName,
+	|	Transactions.Currency,
+	|	Transactions.Agreement
 	|FROM
-	|	AccumulationRegister.R1021B_VendorsTransactions AS R1021B_VendorsTransactions
+	|	AccumulationRegister.R1021B_VendorsTransactions AS Transactions
 	|WHERE
-	|	R1021B_VendorsTransactions.Period BETWEEN BEGINOFPERIOD(&BeginOfPeriod, day) AND ENDOFPERIOD(&EndOfPeriod, day)
-	|	AND
-	|		R1021B_VendorsTransactions.CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
+	|	Transactions.Period BETWEEN BEGINOFPERIOD(&BeginOfPeriod, day) AND ENDOFPERIOD(&EndOfPeriod, day)
+	|	AND Transactions.CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
 	|;
+	|
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
@@ -540,6 +513,12 @@ Function GetMainTable()
 	|	Partner,
 	|	LegalName,
 	|	Currency";
+	
+	If ReportType = "Customers" Then
+		Query.Text = StrReplace(Query.Text, "R1020B_AdvancesToVendors"  , "R2020B_AdvancesFromCustomers");
+		Query.Text = StrReplace(Query.Text, "R1021B_VendorsTransactions", "R2021B_CustomersTransactions");
+	EndIf;
+	
 	Query.SetParameter("BeginOfPeriod", Period.StartDate);
 	Query.SetParameter("EndOfPeriod", Period.EndDate);
 	QueryResult = Query.Execute();
@@ -565,21 +544,4 @@ Function GetMainTable()
 		QueryTable.Delete(ItemForDelete);
 	EndDo;
 	Return QueryTable;
-EndFunction	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+EndFunction

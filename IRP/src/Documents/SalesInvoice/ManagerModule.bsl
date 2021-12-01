@@ -84,7 +84,7 @@ Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
 	LineNumberAndItemKeyFromItemList = PostingServer.GetLineNumberAndItemKeyFromItemList(Ref, "Document.SalesInvoice.ItemList");
 	
 	If Not Unposting And Ref.Agreement.UseCreditLimit Then
-		OffsetOfPartnersServer.CheckCreditLimit(Ref, Cancel);
+		CreditLimitsServer.CheckCreditLimit(Ref, Cancel);
 	EndIf;
 
 	If Cancel Then

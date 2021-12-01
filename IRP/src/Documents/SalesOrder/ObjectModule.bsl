@@ -45,12 +45,16 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 			Cancel = True;
 		EndIf;
 
-		If Row.Cancel And Row.CancelReason.IsEmpty() Then
-			CommonFunctionsClientServer.ShowUsersMessage(R().Error_093, "Object.ItemList[" + RowIndex
-				+ "].CancelReason", "Object.ItemList");
-			Cancel = True;
-		EndIf;
+
 	EndDo;
+	
+			If Not ValueIsFilled(Row.ProcurementMethod) And Row.ItemKey.Item.ItemType.Type = Enums.ItemTypes.Product Then
+			MessageText = StrTemplate(R().Error_010, R().S_023);
+			CommonFunctionsClientServer.ShowUsersMessage(MessageText, "Object.ItemList[" + RowIndex
+				+ "].ProcurementMethod", "Object.ItemList");
+			Cancel = True;
+			EndIf;
+			
 EndProcedure
 
 Procedure Posting(Cancel, PostingMode)

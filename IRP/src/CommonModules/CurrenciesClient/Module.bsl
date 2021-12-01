@@ -6,7 +6,8 @@ Procedure EditCurrenciesContinue(Result, AdditionalParameters) Export
 	Form = AdditionalParameters.Form;
 	Object = AdditionalParameters.Object;
 	Form.Modified = True;
-	For Each Row In Object.Currencies.FindRows(New Structure("Key", Result.RowKey)) Do
+	Rows = Object.Currencies.FindRows(New Structure("Key", Result.RowKey));
+	For Each Row In Rows Do
 		Object.Currencies.Delete(Row);
 	EndDo;
 	For Each Row In Result.Currencies Do

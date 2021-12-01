@@ -398,6 +398,8 @@ Procedure PaymentListBasisDocumentStartChoice(Object, Form, Item, ChoiceData, St
 	Parameters.Insert("OpeningEntryTableName2", "AccountReceivableByDocuments");
 	Parameters.Insert("DebitNoteTableName", "Transactions");
 	Parameters.Insert("Ref", Object.Ref);
+	Parameters.Insert("IsReturnTransactionType", 
+		Object.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.ReturnFromVendor"));
 	JorDocumentsClient.BasisDocumentStartChoice(Object, Form, Item, CurrentData, Parameters);
 EndProcedure
 

@@ -2,6 +2,8 @@ Procedure BasisDocumentStartChoice(Object, Form, Item, CurrentData, Parameters) 
 	TransferParameters = New Structure();
 	TransferParameters.Insert("Unmarked", True);
 	TransferParameters.Insert("Posted", True);
+	TransferParameters.Insert("IsReturnTransactionType", Parameters.IsReturnTransactionType);
+	
 	If Parameters.Property("Filter") Then
 		For Each KeyValue In Parameters.Filter Do
 			TransferParameters.Insert(KeyValue.Key, KeyValue.Value);
@@ -144,6 +146,7 @@ Function CreateFilterByParameters(Ref, Parameters, TableName, OpeningEntryTableN
 
 	QueryParameters = New Structure();
 	QueryParameters.Insert("Ref", Ref);
+	QueryParameters.Insert("IsReturnTransactionType", Parameters.IsReturnTransactionType);
 
 	ArrayOfConditions = New Array();
 	ArrayOfConditionsOpeningEntry = New Array();
@@ -249,11 +252,15 @@ Function CreateFilterByParameters(Ref, Parameters, TableName, OpeningEntryTableN
 	|	CustomersTransactions.LegalName AS LegalName,
 	|	CustomersTransactions.Agreement AS Agreement,
 	|	CustomersTransactions.Currency AS Currency,
-	|	CASE
-	|		WHEN CustomersTransactions.Basis REFS Document.SalesReturn
-	|			THEN -CustomersTransactions.AmountBalance
-	|		ELSE CustomersTransactions.AmountBalance
-	|	END AS DocumentAmount
+	|CASE
+	|	WHEN &IsReturnTransactionType
+	|		THEN CASE
+	|				WHEN CustomersTransactions.Basis REFS Document.SalesReturn
+	|					THEN -CustomersTransactions.AmountBalance
+	|				ELSE 0
+	|			END
+	|	ELSE CustomersTransactions.AmountBalance
+	|END AS DocumentAmount
 	|INTO DocWithBalance
 	|FROM
 	|	AccumulationRegister.R2021B_CustomersTransactions.Balance(&Period,
@@ -269,11 +276,15 @@ Function CreateFilterByParameters(Ref, Parameters, TableName, OpeningEntryTableN
 	|		FROM
 	|			Doc AS Doc)) AS CustomersTransactions
 	|WHERE
-	|	CASE
-	|		WHEN CustomersTransactions.Basis REFS Document.SalesReturn
-	|			THEN -CustomersTransactions.AmountBalance
-	|		ELSE CustomersTransactions.AmountBalance
-	|	END > 0
+	|CASE
+	|	WHEN &IsReturnTransactionType
+	|		THEN CASE
+	|				WHEN CustomersTransactions.Basis REFS Document.SalesReturn
+	|					THEN -CustomersTransactions.AmountBalance
+	|				ELSE 0
+	|			END
+	|	ELSE CustomersTransactions.AmountBalance
+	|END > 0
 	|
 	|UNION ALL
 	|
@@ -284,11 +295,15 @@ Function CreateFilterByParameters(Ref, Parameters, TableName, OpeningEntryTableN
 	|	VendorsTransactions.LegalName,
 	|	VendorsTransactions.Agreement,
 	|	VendorsTransactions.Currency,
-	|	CASE
-	|		WHEN VendorsTransactions.Basis REFS Document.PurchaseReturn
-	|			THEN -VendorsTransactions.AmountBalance
-	|		ELSE VendorsTransactions.AmountBalance
-	|	END
+	|CASE
+	|	WHEN &IsReturnTransactionType
+	|		THEN CASE
+	|				WHEN VendorsTransactions.Basis REFS Document.PurchaseReturn
+	|					THEN -VendorsTransactions.AmountBalance
+	|				ELSE 0
+	|			END
+	|	ELSE VendorsTransactions.AmountBalance
+	|END
 	|FROM
 	|	AccumulationRegister.R1021B_VendorsTransactions.Balance(&Period,
 	|		CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
@@ -303,11 +318,15 @@ Function CreateFilterByParameters(Ref, Parameters, TableName, OpeningEntryTableN
 	|		FROM
 	|			Doc AS Doc)) AS VendorsTransactions
 	|WHERE
-	|	CASE
-	|		WHEN VendorsTransactions.Basis REFS Document.PurchaseReturn
-	|			THEN -VendorsTransactions.AmountBalance
-	|		ELSE VendorsTransactions.AmountBalance
-	|	END > 0
+	|CASE
+	|	WHEN &IsReturnTransactionType
+	|		THEN CASE
+	|				WHEN VendorsTransactions.Basis REFS Document.PurchaseReturn
+	|					THEN -VendorsTransactions.AmountBalance
+	|				ELSE 0
+	|			END
+	|	ELSE VendorsTransactions.AmountBalance
+	|END > 0
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////

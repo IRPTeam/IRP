@@ -188,11 +188,7 @@ Function ItemList()
 	|	ItemList.Ref AS SalesReturn,
 	|	CASE
 	|		WHEN ItemList.Ref.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
-	|			THEN CASE
-	|				WHEN ItemList.SalesInvoice.Ref IS NULL
-	|					THEN ItemList.Ref
-	|				ELSE ItemList.SalesInvoice
-	|			END
+	|			THEN ItemList.Ref
 	|		ELSE UNDEFINED
 	|	END AS BasisDocument,
 	|	ItemList.Ref AS AdvanceBasis,

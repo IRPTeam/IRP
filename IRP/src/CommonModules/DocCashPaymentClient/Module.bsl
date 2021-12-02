@@ -289,6 +289,7 @@ Procedure CleanDataByTransactionTypeContinue(Result, AdditionalParameters) Expor
 		For Each Row In Object.PaymentList Do
 			Row.PlaningTransactionBasis = Undefined;
 			Row.BasisDocument = Undefined;
+			Row.Order = Undefined;
 		EndDo;
 	Else
 		Object.TransactionType = Form.CurrentTransactionType;
@@ -332,6 +333,70 @@ Procedure AccountEditTextChange(Object, Form, Item, Text, StandardProcessing) Ex
 	EditTextParameters.Filters.Add(DocumentsClientServer.CreateFilterItem("Type", PredefinedValue(
 		"Enum.CashAccountTypes.Cash"), ComparisonType.Equal));
 	Item.ChoiceParameters = CatCashAccountsClient.FixedArrayOfChoiceParameters(EditTextParameters);
+EndProcedure
+
+#EndRegion
+
+#Region ItemOrder
+
+Procedure PaymentListOrderStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
+	StandardProcessing = False;
+
+	CurrentData = Form.Items.PaymentList.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+
+	Parameters = New Structure();
+	Parameters.Insert("Filter", New Structure());
+	If ValueIsFilled(CurrentData.Payee) Then
+		Parameters.Filter.Insert("LegalName", CurrentData.Payee);
+	EndIf;
+	Parameters.Filter.Insert("Company", Object.Company);
+	Parameters.Filter.Insert("Type", Type("DocumentRef.PurchaseOrder"));
+	
+	If ValueIsFilled(CurrentData.BasisDocument) 
+		And TypeOf(CurrentData.BasisDocument) = Type("DocumentRef.PurchaseInvoice") Then
+		Parameters.Filter.Insert("RefInList",
+		DocumentsServer.GetArrayOfPurchaseOrdersByPurchaseInvoice(CurrentData.BasisDocument));
+	EndIf;
+	
+	Parameters.Insert("FilterFromCurrentData", "Partner, Agreement");
+	
+	NotifyParameters = New Structure("Object, Form", Object, Form);
+	Notify = New NotifyDescription("PaymentListOrderStartChoiceEnd", ThisObject, NotifyParameters);
+	Parameters.Insert("Notify"    , Notify);
+	Parameters.Insert("TableName" , "DocumentsForOutgoingPayment");	
+	Parameters.Insert("Ref"       , Object.Ref);
+	Parameters.Insert("IsReturnTransactionType", False);
+	JorDocumentsClient.BasisDocumentStartChoice(Object, Form, Item, CurrentData, Parameters);
+EndProcedure
+
+Procedure PaymentListOrderStartChoiceEnd(Result, AdditionalParameters) Export
+	If Result = Undefined Then
+		Return;
+	EndIf;
+	
+	Form = AdditionalParameters.Form;
+	Object = AdditionalParameters.Object;
+	CurrentData = Form.Items.PaymentList.CurrentData;
+	If CurrentData <> Undefined Then
+		CurrentData.Order       = Result.BasisDocument;
+		If Not ValueIsFilled(CurrentData.BasisDocument) Then
+			CurrentData.TotalAmount = Result.Amount;
+		
+			Settings = New Structure();
+			Settings.Insert("Rows", New Array());
+			Settings.Rows.Add(CurrentData);
+		
+			CalculationSettings = New Structure();
+			CalculationSettings.Insert("CalculateTaxByTotalAmount");
+			CalculationSettings.Insert("CalculateNetAmountByTotalAmount");
+	
+			Settings.Insert("CalculateSettings", CalculationSettings);
+			CalculateItemsRows(Object, Form, Settings);
+		EndIf;
+	EndIf;
 EndProcedure
 
 #EndRegion

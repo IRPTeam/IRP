@@ -792,3 +792,38 @@ Function GetStoreInfo(Store, ItemKey) Export
 	Result.Insert("UseShipmentConfirmation", Store.UseShipmentConfirmation);
 	Return Result;
 EndFunction
+
+Function GetArrayOfPurchaseOrdersByPurchaseInvoice(PurchaseInvoice) Export
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	PurchaseInvoiceItemList.PurchaseOrder
+	|FROM
+	|	Document.PurchaseInvoice.ItemList AS PurchaseInvoiceItemList
+	|WHERE
+	|	PurchaseInvoiceItemList.Ref = &Ref
+	|	AND NOT PurchaseInvoiceItemList.PurchaseOrder.Ref IS NULL";
+	Query.SetParameter("Ref", PurchaseInvoice);
+	QueryResult = Query.Execute();
+	QueryTable = QueryResult.Unload();
+	ArrayOfOrders = QueryTable.UnloadColumn("PurchaseOrder");
+	Return ArrayOfOrders;
+EndFunction
+
+Function GetArrayOfSalesOrdersBySalesInvoice(SalesInvoice) Export
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	SalesInvoiceItemList.SalesOrder
+	|FROM
+	|	Document.SalesInvoice.ItemList AS SalesInvoiceItemList
+	|WHERE
+	|	SalesInvoiceItemList.Ref = &Ref
+	|	AND NOT SalesInvoiceItemList.SalesOrder.Ref IS NULL";
+	Query.SetParameter("Ref", SalesInvoice);
+	QueryResult = Query.Execute();
+	QueryTable = QueryResult.Unload();
+	ArrayOfOrders = QueryTable.UnloadColumn("SalesOrder");
+	Return ArrayOfOrders;
+EndFunction
+

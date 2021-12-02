@@ -26,7 +26,6 @@ Procedure BeforeDelete(Cancel)
 EndProcedure
 
 Procedure FillCheckProcessing(Cancel, CheckedAttributes)
-	DocumentsServer.CheckPaymentList(ThisObject, Cancel, CheckedAttributes);
 	DocumentsServer.FillCheckBankCashDocuments(ThisObject, CheckedAttributes);
 EndProcedure
 

@@ -246,32 +246,7 @@ Procedure PaymentListBeforeAddRow(Object, Form, Item, Cancel, Clone, Parent, IsF
 EndProcedure
 
 Procedure OnActiveCell(Object, Form, Item, Cancel = Undefined) Export
-	If Item.CurrentItem = Undefined Then
-		Return;
-	EndIf;
-
-	CurrentData = Item.CurrentData;
-	If CurrentData = Undefined Then
-		Return;
-	EndIf;
-
-	CanModify = True;
-
-	If Item.CurrentItem.Name = "PaymentListBasisDocument" Then
-
-		AgreementInfo = CatAgreementsServer.GetAgreementInfo(CurrentData.Agreement);
-		If Not AgreementInfo.ApArPostingDetail = PredefinedValue("Enum.ApArPostingDetail.ByDocuments") Then
-			CanModify = False;
-		EndIf;
-
-		If Cancel <> Undefined Then
-			If Not CanModify Then
-				Cancel = True;
-			EndIf;
-		Else
-			Item.CurrentItem.ReadOnly = Not CanModify;
-		EndIf;
-	EndIf;
+	Return;
 EndProcedure
 
 #EndRegion
@@ -315,6 +290,7 @@ Procedure CleanDataByTransactionTypeContinue(Result, AdditionalParameters) Expor
 		DocumentsClientServer.CleanDataByArray(Object, ArrayAll, ArrayByType);
 		For Each Row In Object.PaymentList Do
 			Row.PlaningTransactionBasis = Undefined;
+			Row.BasisDocument = Undefined;
 		EndDo;
 	Else
 		Object.TransactionType = Form.CurrentTransactionType;

@@ -154,12 +154,6 @@ Procedure WriteSavedItems(Object, CurrentObject)
 
 EndProcedure
 
-Procedure FillPaymentList(Object) Export
-	For Each Row In Object.PaymentList Do
-		Row.ApArPostingDetail = Row.Agreement.ApArPostingDetail;
-	EndDo;
-EndProcedure
-
 Function CheckItemListStores(Object) Export
 
 	Query = New Query();
@@ -203,46 +197,6 @@ EndFunction
 #EndRegion
 
 #Region PaymentList
-
-Procedure CheckPaymentList(Object, Cancel, CheckedAttributes) Export
-	Query = New Query();
-	Query.Text =
-	"SELECT
-	|	Table.LineNumber,
-	|	Table.Agreement,
-	|	Table.BasisDocument
-	|INTO PaymentList
-	|FROM
-	|	&PaymentList AS Table
-	|;
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	PaymentList.LineNumber,
-	|	PaymentList.Agreement.ApArPostingDetail,
-	|	PaymentList.BasisDocument.Ref,
-	|	PaymentList.BasisDocument
-	|FROM
-	|	PaymentList AS PaymentList
-	|WHERE
-	|	PaymentList.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
-	|	AND  PaymentList.BasisDocument.Ref is Null
-	|";
-
-	Query.SetParameter("PaymentList", Object.PaymentList.Unload());
-	QueryResult = Query.Execute();
-
-	If QueryResult.IsEmpty() Then
-		Return;
-	EndIf;
-
-	SelectionDetailRecords = QueryResult.Select();
-
-	Cancel = True;
-	While SelectionDetailRecords.Next() Do
-		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_020, SelectionDetailRecords.LineNumber),
-			"PaymentList[" + Format((SelectionDetailRecords.LineNumber - 1), "NZ=0; NG=0;") + "].BasisDocument", Object);
-	EndDo;
-EndProcedure
 
 Procedure FillCheckBankCashDocuments(Object, CheckedAttributes) Export
 	If Object.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.CurrencyExchange")

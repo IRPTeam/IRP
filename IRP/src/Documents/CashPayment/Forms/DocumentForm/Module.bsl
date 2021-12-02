@@ -173,8 +173,8 @@ EndProcedure
 
 &AtClient
 Procedure TransactionTypeOnChange(Item, AddInfo = Undefined) Export
-	SetVisibilityAvailability(Object, ThisObject);
 	DocCashPaymentClient.TransactionTypeOnChange(Object, ThisObject, Item);
+	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
 #EndRegion

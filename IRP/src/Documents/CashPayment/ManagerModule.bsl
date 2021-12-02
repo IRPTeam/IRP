@@ -260,56 +260,55 @@ Function GetQueryTextsMasterTables()
 EndFunction
 
 Function PaymentList()
-	Return "SELECT
-		   |	PaymentList.Ref.Date AS Period,
-		   |	PaymentList.Ref.Company AS Company,
-		   |	PaymentList.Payee AS LegalName,
-		   |	PaymentList.Ref.Currency AS Currency,
-		   |	PaymentList.Agreement AS Agreement,
-		   |	PaymentList.Ref.CashAccount AS CashAccount,
-		   |	PaymentList.Key AS Key,
-		   |	PaymentList.Ref AS Basis,
-		   |	CASE
-		   |		WHEN PaymentList.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
-		   |			THEN CASE
-		   |				WHEN VALUETYPE(PaymentList.PlaningTransactionBasis) = TYPE(Document.CashTransferOrder)
-		   |				AND NOT PaymentList.PlaningTransactionBasis.Date IS NULL
-		   |				AND PaymentList.PlaningTransactionBasis.SendCurrency <> PaymentList.PlaningTransactionBasis.ReceiveCurrency
-		   |					THEN PaymentList.PlaningTransactionBasis
-		   |				ELSE PaymentList.BasisDocument
-		   |			END
-		   |		ELSE UNDEFINED
-		   |	END AS TransactionDocument,
-		   |	CASE
-		   |		WHEN PaymentList.Agreement = VALUE(Catalog.Agreements.EmptyRef)
-		   |			THEN TRUE
-		   |		ELSE FALSE
-		   |	END
-		   |	AND NOT CASE
-		   |		WHEN VALUETYPE(PaymentList.PlaningTransactionBasis) = TYPE(Document.CashTransferOrder)
-		   |		AND NOT PaymentList.PlaningTransactionBasis.Date IS NULL
-		   |		AND PaymentList.PlaningTransactionBasis.SendCurrency <> PaymentList.PlaningTransactionBasis.ReceiveCurrency
-		   |			THEN TRUE
-		   |		ELSE FALSE
-		   |	END AS IsAdvance,
-		   |	PaymentList.PlaningTransactionBasis AS PlaningTransactionBasis,
-		   |	PaymentList.Partner.Employee AS IsEmployee,
-		   |	PaymentList.TotalAmount AS Amount,
-		   |	PaymentList.FinancialMovementType AS FinancialMovementType,
-		   |	PaymentList.Ref.TransactionType = VALUE(Enum.OutgoingPaymentTransactionTypes.PaymentToVendor) AS IsPaymentToVendor,
-		   |	PaymentList.Ref.TransactionType = VALUE(Enum.OutgoingPaymentTransactionTypes.CurrencyExchange) AS IsCurrencyExchange,
-		   |	PaymentList.Ref.TransactionType = VALUE(Enum.OutgoingPaymentTransactionTypes.CashTransferOrder) AS
-		   |		IsCashTransferOrder,
-		   |	PaymentList.Ref.TransactionType = VALUE(Enum.OutgoingPaymentTransactionTypes.ReturnToCustomer) AS IsReturnToCustomer,
-		   |	PaymentList.Partner,
-		   |	PaymentList.Ref.Branch AS Branch,
-		   |	PaymentList.LegalNameContract AS LegalNameContract,
-		   |	PaymentList.Order
-		   |INTO PaymentList
-		   |FROM
-		   |	Document.CashPayment.PaymentList AS PaymentList
-		   |WHERE
-		   |	PaymentList.Ref = &Ref";
+	Return 
+	"SELECT
+	|	PaymentList.Ref.Date AS Period,
+	|	PaymentList.Ref.Company AS Company,
+	|	PaymentList.Payee AS LegalName,
+	|	PaymentList.Ref.Currency AS Currency,
+	|	PaymentList.Agreement AS Agreement,
+	|	PaymentList.Ref.CashAccount AS CashAccount,
+	|	PaymentList.Key AS Key,
+	|	PaymentList.Ref AS Basis,
+	|	CASE
+	|		WHEN PaymentList.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
+	|			THEN CASE
+	|				WHEN VALUETYPE(PaymentList.PlaningTransactionBasis) = TYPE(Document.CashTransferOrder)
+	|				AND NOT PaymentList.PlaningTransactionBasis.Date IS NULL
+	|				AND PaymentList.PlaningTransactionBasis.SendCurrency <> PaymentList.PlaningTransactionBasis.ReceiveCurrency
+	|					THEN PaymentList.PlaningTransactionBasis
+	|				ELSE PaymentList.BasisDocument
+	|			END
+	|		ELSE UNDEFINED
+	|	END AS TransactionDocument,
+	|	CASE
+	|		WHEN PaymentList.Agreement.Ref IS NULL
+	|			THEN TRUE
+	|		ELSE CASE
+	|			WHEN PaymentList.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
+	|			AND PaymentList.BasisDocument.Ref IS NULL
+	|				THEN TRUE
+	|			ELSE FALSE
+	|		END
+	|	END AS IsAdvance,
+	|	PaymentList.PlaningTransactionBasis AS PlaningTransactionBasis,
+	|	PaymentList.Partner.Employee AS IsEmployee,
+	|	PaymentList.TotalAmount AS Amount,
+	|	PaymentList.FinancialMovementType AS FinancialMovementType,
+	|	PaymentList.Ref.TransactionType = VALUE(Enum.OutgoingPaymentTransactionTypes.PaymentToVendor) AS IsPaymentToVendor,
+	|	PaymentList.Ref.TransactionType = VALUE(Enum.OutgoingPaymentTransactionTypes.CurrencyExchange) AS IsCurrencyExchange,
+	|	PaymentList.Ref.TransactionType = VALUE(Enum.OutgoingPaymentTransactionTypes.CashTransferOrder) AS
+	|		IsCashTransferOrder,
+	|	PaymentList.Ref.TransactionType = VALUE(Enum.OutgoingPaymentTransactionTypes.ReturnToCustomer) AS IsReturnToCustomer,
+	|	PaymentList.Partner,
+	|	PaymentList.Ref.Branch AS Branch,
+	|	PaymentList.LegalNameContract AS LegalNameContract,
+	|	PaymentList.Order
+	|INTO PaymentList
+	|FROM
+	|	Document.CashPayment.PaymentList AS PaymentList
+	|WHERE
+	|	PaymentList.Ref = &Ref";
 EndFunction
 
 Function R1021B_VendorsTransactions()

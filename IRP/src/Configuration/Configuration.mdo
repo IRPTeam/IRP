@@ -390,6 +390,7 @@
   <commonModules>CommonModule.WorkstationClient</commonModules>
   <commonModules>CommonModule.WorkstationServer</commonModules>
   <commonModules>CommonModule.MoneyDocumentsServer</commonModules>
+  <commonModules>CommonModule.AdvancesRelevanceServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>
@@ -722,6 +723,8 @@
   <informationRegisters>InformationRegister.T3010S_RowIDInfo</informationRegisters>
   <informationRegisters>InformationRegister.T2014S_AdvancesInfo</informationRegisters>
   <informationRegisters>InformationRegister.T2015S_TransactionsInfo</informationRegisters>
+  <informationRegisters>InformationRegister.T2016S_VendorsAdvancesRelevance</informationRegisters>
+  <informationRegisters>InformationRegister.T2017S_CustomersAdvancesRelevance</informationRegisters>
   <accumulationRegisters>AccumulationRegister.CashInTransit</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1001T_Purchases</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1002T_PurchaseReturns</accumulationRegisters>

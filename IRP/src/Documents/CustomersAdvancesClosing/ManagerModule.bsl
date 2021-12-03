@@ -43,6 +43,7 @@ EndProcedure
 
 Function UndopostingGetDocumentDataTables(Ref, Cancel, Parameters, AddInfo = Undefined) Export
 	Parameters.Insert("Unposting", True);
+	AdvancesRelevanceServer.Reset(Ref, Ref.Company, Ref.BeginOfPeriod);
 	Return PostingGetDocumentDataTables(Ref, Cancel, Undefined, Parameters, AddInfo);
 EndFunction
 
@@ -241,6 +242,9 @@ Function OffsetOfAdvancesAndAging(Parameters)
 	WriteTablesToTempTables(Parameters, Records_OffsetOfAdvances, Records_OffsetAging);
 	Parameters.Object.RegisterRecords.TM1030B_TransactionsKey.Read();
 	Parameters.Object.RegisterRecords.TM1020B_AdvancesKey.Read();
+	
+	AdvancesRelevanceServer.Clear(Parameters.Ref, Parameters.Ref.Company, Parameters.Ref.EndOfPeriod);
+	AdvancesRelevanceServer.Restore(Parameters.Ref, Parameters.Ref.Company, Parameters.Ref.EndOfPeriod);
 	
 	Return CustomersAdvancesClosingQueryText();
 EndFunction

@@ -2,7 +2,25 @@ Procedure Undopost(DocObject, Cancel, AddInfo = Undefined) Export
 	If Cancel Then
 		Return;
 	EndIf;
-
+	
+	For Each RecordSet In DocObject.RegisterRecords Do
+		TableForLoad = New ValueTable();
+		AccReg = Metadata.AccumulationRegisters;
+		If TypeOf(RecordSet) = Type("AccumulationRegisterRecord.R1020B_AdvancesToVendors") Then
+			AdvancesRelevanceServer.SetBound_Advances(DocObject, TableForLoad, AccReg.R1020B_AdvancesToVendors);
+		ElsIf TypeOf(RecordSet) = Type("AccumulationRegisterRecord.R2020B_AdvancesFromCustomers") Then
+			AdvancesRelevanceServer.SetBound_Advances(DocObject, TableForLoad, AccReg.R2020B_AdvancesFromCustomers);
+		ElsIf TypeOf(RecordSet) = Type("AccumulationRegisterRecord.R1021B_VendorsTransactions") Then
+			AdvancesRelevanceServer.SetBound_Transactions(DocObject, TableForLoad, AccReg.R1021B_VendorsTransactions);
+		ElsIf TypeOf(RecordSet) = Type("AccumulationRegisterRecord.R2021B_CustomersTransactions") Then
+			AdvancesRelevanceServer.SetBound_Transactions(DocObject, TableForLoad, AccReg.R2021B_CustomersTransactions);
+		ElsIf TypeOf(RecordSet) = Type("AccumulationRegisterRecord.R5012B_VendorsAging") Then
+			AdvancesRelevanceServer.SetBound_Aging(DocObject, TableForLoad, AccReg.R5012B_VendorsAging);
+		ElsIf TypeOf(RecordSet) = Type("AccumulationRegisterRecord.R5011B_CustomersAging") Then
+			AdvancesRelevanceServer.SetBound_Aging(DocObject, TableForLoad, AccReg.R5011B_CustomersAging);
+		EndIf;
+	EndDo;
+	
 	Parameters = New Structure();
 	Parameters.Insert("Object", DocObject);
 	Parameters.Insert("IsReposting", False);

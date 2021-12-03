@@ -153,17 +153,17 @@ Function RecordSetIsEqual(DocObject, RecordSet, TableForLoad)
 	Result = TablesIsEqual(RecordSet.Unload(), TableOldRecords);
 	
 	AccReg = Metadata.AccumulationRegisters;
-	If TypeOf(RecordSet) = Type("AccumulationRegisterRecord.R1020B_AdvancesToVendors") Then
+	If TypeOf(RecordSet) = Type("AccumulationRegisterRecordSet.R1020B_AdvancesToVendors") Then
 		AdvancesRelevanceServer.SetBound_Advances(DocObject, TableForLoad, AccReg.R1020B_AdvancesToVendors);
-	ElsIf TypeOf(RecordSet) = Type("AccumulationRegisterRecord.R2020B_AdvancesFromCustomers") Then
+	ElsIf TypeOf(RecordSet) = Type("AccumulationRegisterRecordSet.R2020B_AdvancesFromCustomers") Then
 		AdvancesRelevanceServer.SetBound_Advances(DocObject, TableForLoad, AccReg.R2020B_AdvancesFromCustomers);
-	ElsIf TypeOf(RecordSet) = Type("AccumulationRegisterRecord.R1021B_VendorsTransactions") Then
+	ElsIf TypeOf(RecordSet) = Type("AccumulationRegisterRecordSet.R1021B_VendorsTransactions") Then
 		AdvancesRelevanceServer.SetBound_Transactions(DocObject, TableForLoad, AccReg.R1021B_VendorsTransactions);
-	ElsIf TypeOf(RecordSet) = Type("AccumulationRegisterRecord.R2021B_CustomersTransactions") Then
+	ElsIf TypeOf(RecordSet) = Type("AccumulationRegisterRecordSet.R2021B_CustomersTransactions") Then
 		AdvancesRelevanceServer.SetBound_Transactions(DocObject, TableForLoad, AccReg.R2021B_CustomersTransactions);
-	ElsIf TypeOf(RecordSet) = Type("AccumulationRegisterRecord.R5012B_VendorsAging") Then
+	ElsIf TypeOf(RecordSet) = Type("AccumulationRegisterRecordSet.R5012B_VendorsAging") Then
 		AdvancesRelevanceServer.SetBound_Aging(DocObject, TableForLoad, AccReg.R5012B_VendorsAging);
-	ElsIf TypeOf(RecordSet) = Type("AccumulationRegisterRecord.R5011B_CustomersAging") Then
+	ElsIf TypeOf(RecordSet) = Type("AccumulationRegisterRecordSet.R5011B_CustomersAging") Then
 		AdvancesRelevanceServer.SetBound_Aging(DocObject, TableForLoad, AccReg.R5011B_CustomersAging);
 	EndIf;
 	

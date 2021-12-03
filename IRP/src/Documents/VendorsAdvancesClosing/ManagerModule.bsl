@@ -243,8 +243,8 @@ Function OffsetOfAdvancesAndAging(Parameters)
 	Parameters.Object.RegisterRecords.TM1030B_TransactionsKey.Read();
 	Parameters.Object.RegisterRecords.TM1020B_AdvancesKey.Read();
 	
-	AdvancesRelevanceServer.Clear(Parameters.Ref, Parameters.Ref.Company, Parameters.Ref.EndOfPeriod);
-	AdvancesRelevanceServer.Restore(Parameters.Ref, Parameters.Ref.Company, Parameters.Ref.EndOfPeriod);
+	AdvancesRelevanceServer.Clear(Parameters.Object.Ref, Parameters.Object.Company, Parameters.Object.EndOfPeriod);
+	AdvancesRelevanceServer.Restore(Parameters.Object.Ref, Parameters.Object.Company, Parameters.Object.EndOfPeriod);
 	
 	Return VendorsAdvancesClosingQueryText();
 EndFunction

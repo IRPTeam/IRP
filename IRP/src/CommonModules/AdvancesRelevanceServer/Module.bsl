@@ -12,7 +12,7 @@ Procedure Clear(DocRef, Company, EndOfPeriod) Export
 	Query = New Query();
 	Query.Text = QueryText;
 	Query.SetParameter("Company", Company);
-	Query.SetParameter("EndPeriod", EndOfPeriod);
+	Query.SetParameter("EndOfPeriod", EndOfPeriod);
 	QueryResults = Query.Execute();
 	QuerySelection = QueryResults.Select();
 	While QuerySelection.Next() Do
@@ -21,16 +21,17 @@ Procedure Clear(DocRef, Company, EndOfPeriod) Export
 EndProcedure
 
 Procedure Restore(DocRef, Company, EndOfPeriod) Export
-	
 	If TypeOf(DocRef) = Type("DocumentRef.VendorsAdvancesClosing") Then
 		RelevanceRegisterName = "T2016S_VendorsAdvancesRelevance";
+		DocumentName = "VendorsAdvancesClosing";
 	ElsIf TypeOf(DocRef) = Type("DocumentRef.CustomersAdvancesClosing") Then
 		RelevanceRegisterName = "T2017S_CustomersAdvancesRelevance";
+		DocumentName = "CustomersAdvancesClosing";
 	Else
 		Raise StrTemplate("Unsupported document type [%1]", TypeOf(DocRef));
 	EndIf;
 	QueryText = GetQueryText_Restore();
-	QueryText = StrTemplate(QueryText, RelevanceRegisterName);
+	QueryText = StrTemplate(QueryText, DocumentName);
 	Query = New Query();
 	Query.Text = QueryText;
 	Query.SetParameter("EndOfPeriod" , EndOfPeriod);
@@ -45,13 +46,15 @@ EndProcedure
 Procedure Reset(DocRef, Company, BeginOfPeriod) Export
 	If TypeOf(DocRef) = Type("DocumentRef.VendorsAdvancesClosing") Then
 		RelevanceRegisterName = "T2016S_VendorsAdvancesRelevance";
+		DocumentName = "VendorsAdvancesClosing";
 	ElsIf TypeOf(DocRef) = Type("DocumentRef.CustomersAdvancesClosing") Then
 		RelevanceRegisterName = "T2017S_CustomersAdvancesRelevance";
+		DocumentName = "CustomersAdvancesClosing";
 	Else
 		Raise StrTemplate("Unsupported document type [%1]", TypeOf(DocRef));
 	EndIf;
 	QueryText = GetQueryText_Reset();
-	QueryText = StrTemplate(QueryText, RelevanceRegisterName);
+	QueryText = StrTemplate(QueryText, DocumentName);
 	Query = New Query();
 	Query.Text = QueryText;
 	Query.SetParameter("Company"       , Company);
@@ -144,11 +147,11 @@ EndProcedure
 Function GetQueryText_Clear()
 	Return
 	"SELECT
-	|	RegisterRelevance.Date,
-	|	RegisterRelevance.Company,
-	|	RegisterRelevance.Branch,
-	|	RegisterRelevance.Currency,
-	|	RegisterRelevance.Partner
+	|	RegisterRelevance.Date AS DateOld,
+	|	RegisterRelevance.Company AS CompanyOld,
+	|	RegisterRelevance.Branch AS BranchOld,
+	|	RegisterRelevance.Currency AS CurrencyOld,
+	|	RegisterRelevance.Partner AS PartnerOld
 	|FROM
 	|	InformationRegister.%1 AS RegisterRelevance
 	|WHERE

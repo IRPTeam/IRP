@@ -80,6 +80,7 @@
   <content>Document.GoodsReceipt.TabularSection.ItemList.Attribute.SalesReturnOrder</content>
   <content>Document.GoodsReceipt.TabularSection.ItemList.Attribute.InventoryTransfer</content>
   <content>Document.GoodsReceipt.TabularSection.ItemList.Attribute.SalesInvoice</content>
+  <content>Document.JournalEntry.Attribute.Basis</content>
   <commands uuid="ae9005af-5826-4505-998a-846b2783e3de">
     <name>RelatedDocuments</name>
     <synonym>
@@ -128,6 +129,7 @@
       <types>DocumentRef.PhysicalInventory</types>
       <types>DocumentRef.SalesInvoice</types>
       <types>DocumentRef.CashExpense</types>
+      <types>DocumentRef.JournalEntry</types>
     </commandParameterType>
     <representation>Auto</representation>
   </commands>

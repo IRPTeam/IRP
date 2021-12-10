@@ -5,6 +5,7 @@ Procedure OnOpen(Object, Form, Cancel, AddInfo = Undefined) Export
 EndProcedure
 
 #EndRegion
+
 #Region ItemCompany
 
 Procedure CompanyOnChange(Object, Form, Item) Export

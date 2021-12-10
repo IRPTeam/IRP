@@ -136,6 +136,8 @@ Procedure GetCatalogPresentation(Source, Data, Presentation, StandardProcessing)
 	SourceType = TypeOf(Source);
 	If SourceType = Type("CatalogManager.Currencies") Then
 		Presentation = String(Data.Code);
+	ElsIf SourceType = Type("ChartOfAccountsManager.R6010C_Master") Then
+		Presentation = String(Data.Code);
 	ElsIf SourceType = Type("CatalogManager.PriceKeys") Then
 		Presentation = LocalizationReuse.CatalogDescriptionWithAddAttributes(Data.Ref);
 		If IsBlankString(Presentation) Then

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Subsystem xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="f29f0eae-04ea-4c35-993f-b6c0eed26abd">
+  <name>TrialBallanceAccounts</name>
+  <synonym>
+    <key>en</key>
+    <value>Trial ballance accounts</value>
+  </synonym>
+  <includeHelpInContents>true</includeHelpInContents>
+  <includeInCommandInterface>true</includeInCommandInterface>
+  <content>InformationRegister.ItemKeyTBAccounts</content>
+  <content>InformationRegister.PartnerTBAccounts</content>
+  <content>InformationRegister.CashAccountTBAccounts</content>
+  <parentSubsystem>Subsystem.Accounting</parentSubsystem>
+</mdclass:Subsystem>

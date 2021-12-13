@@ -394,6 +394,9 @@
   <commonModules>CommonModule.AdvancesRelevanceServer</commonModules>
   <commonModules>CommonModule.DocJournalEntryServer</commonModules>
   <commonModules>CommonModule.DocJournalEntryClient</commonModules>
+  <commonModules>CommonModule.AccountingClient</commonModules>
+  <commonModules>CommonModule.AccountingClientServer</commonModules>
+  <commonModules>CommonModule.AccountingServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>
@@ -517,6 +520,7 @@
   <commonForms>CommonForm.InfoLinkedDocumentRows</commonForms>
   <commonForms>CommonForm.EditCurrencies</commonForms>
   <commonForms>CommonForm.EditHiddenTables</commonForms>
+  <commonForms>CommonForm.EditTrialBallanceAccounts</commonForms>
   <catalogs>Catalog.AccessGroups</catalogs>
   <catalogs>Catalog.AccessProfiles</catalogs>
   <catalogs>Catalog.AddAttributeAndPropertySets</catalogs>
@@ -731,6 +735,9 @@
   <informationRegisters>InformationRegister.T2015S_TransactionsInfo</informationRegisters>
   <informationRegisters>InformationRegister.T2016S_VendorsAdvancesRelevance</informationRegisters>
   <informationRegisters>InformationRegister.T2017S_CustomersAdvancesRelevance</informationRegisters>
+  <informationRegisters>InformationRegister.ItemKeyTBAccounts</informationRegisters>
+  <informationRegisters>InformationRegister.PartnerTBAccounts</informationRegisters>
+  <informationRegisters>InformationRegister.CashAccountTBAccounts</informationRegisters>
   <accumulationRegisters>AccumulationRegister.CashInTransit</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1001T_Purchases</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1002T_PurchaseReturns</accumulationRegisters>

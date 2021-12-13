@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:InformationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="c3870d67-9fdd-410d-9996-0b205ecc1ed6">
+  <producedTypes>
+    <selectionType typeId="ae198c29-3900-4c69-9bd2-cd1e5d98684c" valueTypeId="f132dcd1-6a6a-45fb-b8d7-a8eb5eaa5727"/>
+    <listType typeId="25a15d34-3cf3-4e89-ba4b-879435763a3a" valueTypeId="29a87db1-4232-4162-9d74-df8382d78bc4"/>
+    <managerType typeId="e46e9153-f77d-4dc9-ad9f-cf8cbb3fb9a2" valueTypeId="5bb3957a-e3fd-4be7-82e6-d1e39b9fc073"/>
+    <recordSetType typeId="2095a6e0-3157-44ca-9e98-fcb35f2d141c" valueTypeId="936fe5ca-0936-49b6-acf9-bc87cba23cce"/>
+    <recordKeyType typeId="13c1fa48-df52-4e72-8101-0d9c7ef536f1" valueTypeId="5b4bc6dd-bef6-48bf-b664-e37e2186d573"/>
+    <recordType typeId="7303eee9-9c29-46c6-9e65-7bbe72b85248" valueTypeId="2f69b8e5-e539-43f5-9732-647315fcdb03"/>
+    <recordManagerType typeId="8b159153-000e-456f-a4c1-6b638cdeb830" valueTypeId="d4f9019f-d227-4581-a34b-96821c072275"/>
+  </producedTypes>
+  <name>PartnerTBAccounts</name>
+  <synonym>
+    <key>en</key>
+    <value>Partner TB accounts</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <editType>InDialog</editType>
+  <defaultRecordForm>InformationRegister.PartnerTBAccounts.Form.RecordForm</defaultRecordForm>
+  <informationRegisterPeriodicity>Day</informationRegisterPeriodicity>
+  <dataLockControlMode>Managed</dataLockControlMode>
+  <resources uuid="b58f6c66-64fe-41d2-9489-7fe9174b2795">
+    <name>AccountAdvances</name>
+    <synonym>
+      <key>en</key>
+      <value>Account (advances)</value>
+    </synonym>
+    <type>
+      <types>ChartOfAccountsRef.R6010C_Master</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </resources>
+  <resources uuid="b8166b89-b113-4e0b-acf0-16ca3d5e746e">
+    <name>AccountTransactions</name>
+    <synonym>
+      <key>en</key>
+      <value>Account (transactions)</value>
+    </synonym>
+    <type>
+      <types>ChartOfAccountsRef.R6010C_Master</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </resources>
+  <dimensions uuid="63f9c712-8432-4ec8-afb1-5ab2166541b0">
+    <name>Company</name>
+    <synonym>
+      <key>en</key>
+      <value>Company</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Companies</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <indexing>Index</indexing>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+  <dimensions uuid="14d18982-1bd5-40ce-be9c-d7608d17540c">
+    <name>Partner</name>
+    <synonym>
+      <key>en</key>
+      <value>Partner</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Partners</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillFromFillingValue>true</fillFromFillingValue>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <master>true</master>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+  <dimensions uuid="b67f39e4-62be-4753-84e9-207e67a7a831">
+    <name>Agreement</name>
+    <synonym>
+      <key>en</key>
+      <value>Agreement</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Agreements</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillFromFillingValue>true</fillFromFillingValue>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <master>true</master>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+  <forms uuid="f4d9c850-72e5-46e2-86fc-207034084f82">
+    <name>RecordForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Record form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+</mdclass:InformationRegister>

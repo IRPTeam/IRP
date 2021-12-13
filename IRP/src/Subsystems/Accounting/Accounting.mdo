@@ -11,5 +11,7 @@
   <content>ChartOfCharacteristicTypes.R6010D_MasterExtraDimensionTypes</content>
   <content>Document.JournalEntry</content>
   <content>ChartOfAccounts.R6010C_Master</content>
+  <content>Catalog.AccountingAnalytics</content>
+  <content>InformationRegister.CompanyLadgerTypes</content>
   <subsystems>TrialBallanceAccounts</subsystems>
 </mdclass:Subsystem>

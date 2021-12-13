@@ -739,6 +739,59 @@
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
   </tabularSections>
+  <tabularSections uuid="a13df733-780d-40ba-a489-bac99ad2abca">
+    <producedTypes>
+      <objectType typeId="e8d989f2-4b34-4e14-b501-b0b1e461c207" valueTypeId="42832be4-22bb-4bc7-b087-8f1e554dcf65"/>
+      <rowType typeId="3db74c2e-b2eb-4507-b6f0-81de42279704" valueTypeId="af8f7c79-0f32-4350-91d5-402d6b671953"/>
+    </producedTypes>
+    <name>AccountingRowAnalitics</name>
+    <synonym>
+      <key>en</key>
+      <value>Accounting row analitics</value>
+    </synonym>
+    <attributes uuid="4bcdcb83-ecfc-406d-a876-45f0982424b9">
+      <name>Key</name>
+      <synonym>
+        <key>en</key>
+        <value>Key</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeRowID</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="2da7e756-e3a8-4ab7-8201-0d80759fb866">
+      <name>LadgerType</name>
+      <synonym>
+        <key>en</key>
+        <value>Ladger type</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.LadgerTypes</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="ddd78011-1cf8-4e8b-9f69-2a8de6267b20">
+      <name>Analytics_CashOnHand</name>
+      <synonym>
+        <key>en</key>
+        <value>Analytics cash on hand</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.AccountingAnalytics</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
   <commands uuid="652eb8c0-9773-4733-818c-e405dc646823">
     <name>GenarateBankPayment</name>
     <synonym>

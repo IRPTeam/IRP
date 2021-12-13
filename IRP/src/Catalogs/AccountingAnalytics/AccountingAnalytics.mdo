@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="a0b3914e-a0e5-4c5b-a6e3-1e6e79f046ee">
+  <producedTypes>
+    <objectType typeId="872cdc00-c74e-42bd-82b2-e54e2b2ce04b" valueTypeId="32d6ead4-3e0c-4911-a2a3-cd2ee41f0d7d"/>
+    <refType typeId="769c2f9c-776d-4418-aa12-698f712493b5" valueTypeId="f8bb89f9-4284-400b-833d-887e530a8569"/>
+    <selectionType typeId="1e5b6874-b146-44be-b1f6-c192263d53c4" valueTypeId="e5cd5b0a-3c7f-4171-be5c-7c02665db901"/>
+    <listType typeId="6d06e093-2370-49ef-8ba7-67e62f332dd6" valueTypeId="b19a7266-03ac-4323-ba16-d689b9fc966a"/>
+    <managerType typeId="6ede3457-b350-462e-9032-a2e389d83994" valueTypeId="e15833cd-45f8-4271-8c8a-f8191fb2dd29"/>
+  </producedTypes>
+  <name>AccountingAnalytics</name>
+  <synonym>
+    <key>en</key>
+    <value>Accounting analytics</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+  <createOnInput>Use</createOnInput>
+  <dataLockControlMode>Managed</dataLockControlMode>
+  <fullTextSearch>Use</fullTextSearch>
+  <levelCount>2</levelCount>
+  <foldersOnTop>true</foldersOnTop>
+  <codeLength>12</codeLength>
+  <codeAllowedLength>Variable</codeAllowedLength>
+  <checkUnique>true</checkUnique>
+  <autonumbering>true</autonumbering>
+  <defaultPresentation>AsDescription</defaultPresentation>
+  <editType>InDialog</editType>
+  <choiceMode>BothWays</choiceMode>
+  <defaultObjectForm>Catalog.AccountingAnalytics.Form.ItemForm</defaultObjectForm>
+  <attributes uuid="93915bf0-f682-46c5-b375-e2e2130cc11b">
+    <name>AccountDebit</name>
+    <synonym>
+      <key>en</key>
+      <value>Debit</value>
+    </synonym>
+    <type>
+      <types>ChartOfAccountsRef.R6010C_Master</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <indexing>Index</indexing>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="dcdcce1a-0c2f-493f-b06a-ad9e65213272">
+    <name>ExtDimensionTypeDr1</name>
+    <synonym>
+      <key>en</key>
+      <value>Ext. dim. type Dr1</value>
+    </synonym>
+    <type>
+      <types>ChartOfCharacteristicTypesRef.R6010D_MasterExtraDimensionTypes</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <indexing>Index</indexing>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="422e4e9d-0435-4a25-934b-c9e1d9e5b0b7">
+    <name>ExtDimensionTypeDr2</name>
+    <synonym>
+      <key>en</key>
+      <value>Ext. dim. type Dr2</value>
+    </synonym>
+    <type>
+      <types>ChartOfCharacteristicTypesRef.R6010D_MasterExtraDimensionTypes</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <indexing>Index</indexing>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="b0d65d39-cca6-4697-94b2-2092ef7b00a7">
+    <name>ExtDimensionTypeDr3</name>
+    <synonym>
+      <key>en</key>
+      <value>Ext. dim. type Dr3</value>
+    </synonym>
+    <type>
+      <types>ChartOfCharacteristicTypesRef.R6010D_MasterExtraDimensionTypes</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <indexing>Index</indexing>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="51187f3b-5311-470c-8426-5bf1297dea45">
+    <name>ExtDimensionDr1</name>
+    <synonym>
+      <key>en</key>
+      <value>Ext dimension Dr1</value>
+    </synonym>
+    <type>
+      <types>Characteristic.R6010D_MasterExtraDimensionTypes</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <indexing>Index</indexing>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="56bd1461-4d03-4589-8c30-848824576f65">
+    <name>ExtDimensionDr2</name>
+    <synonym>
+      <key>en</key>
+      <value>Ext dimension Dr2</value>
+    </synonym>
+    <type>
+      <types>Characteristic.R6010D_MasterExtraDimensionTypes</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <indexing>Index</indexing>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="d7fe75b2-1c84-4c51-be7b-50aeea58d871">
+    <name>ExtDimensionDr3</name>
+    <synonym>
+      <key>en</key>
+      <value>Ext dimension Dr3</value>
+    </synonym>
+    <type>
+      <types>Characteristic.R6010D_MasterExtraDimensionTypes</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <indexing>Index</indexing>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="d95d5d59-50b7-4337-a52a-ecd389c82278">
+    <name>AccountCredit</name>
+    <synonym>
+      <key>en</key>
+      <value>Account credit</value>
+    </synonym>
+    <type>
+      <types>ChartOfAccountsRef.R6010C_Master</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <indexing>Index</indexing>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="685be3a8-60e4-4a65-8abe-6f0bf05b75be">
+    <name>ExtDimensionTypeCr1</name>
+    <synonym>
+      <key>en</key>
+      <value>Ext. dim. type Cr1</value>
+    </synonym>
+    <type>
+      <types>ChartOfCharacteristicTypesRef.R6010D_MasterExtraDimensionTypes</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <indexing>Index</indexing>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="049b82ec-c7b4-4082-9a22-aa88c649eefe">
+    <name>ExtDimensionTypeCr2</name>
+    <synonym>
+      <key>en</key>
+      <value>Ext. dim. type Cr2</value>
+    </synonym>
+    <type>
+      <types>ChartOfCharacteristicTypesRef.R6010D_MasterExtraDimensionTypes</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <indexing>Index</indexing>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="88b7919e-254c-46b4-8e20-b38e1d626558">
+    <name>ExtDimensionTypeCr3</name>
+    <synonym>
+      <key>en</key>
+      <value>Ext. dim. type Cr3</value>
+    </synonym>
+    <type>
+      <types>ChartOfCharacteristicTypesRef.R6010D_MasterExtraDimensionTypes</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <indexing>Index</indexing>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="e251b958-5adc-4fc4-87b5-f8b3719e9d63">
+    <name>ExtDimensionCr1</name>
+    <synonym>
+      <key>en</key>
+      <value>Ext dimension Cr1</value>
+    </synonym>
+    <type>
+      <types>Characteristic.R6010D_MasterExtraDimensionTypes</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <indexing>Index</indexing>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="2198d49a-f022-4c7a-839a-995db6d0f2cf">
+    <name>ExtDimensionCr2</name>
+    <synonym>
+      <key>en</key>
+      <value>Ext dimension Cr2</value>
+    </synonym>
+    <type>
+      <types>Characteristic.R6010D_MasterExtraDimensionTypes</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <indexing>Index</indexing>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="2880e4e2-bbeb-46ff-978d-9a6b065af4f6">
+    <name>ExtDimensionCr3</name>
+    <synonym>
+      <key>en</key>
+      <value>Ext dimension Cr3</value>
+    </synonym>
+    <type>
+      <types>Characteristic.R6010D_MasterExtraDimensionTypes</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <indexing>Index</indexing>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <forms uuid="767e535e-d2e3-40b7-87cb-46f5b0a1bf0d">
+    <name>ItemForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Item form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+</mdclass:Catalog>

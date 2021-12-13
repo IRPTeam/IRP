@@ -591,6 +591,7 @@
   <catalogs>Catalog.AdvancesKeys</catalogs>
   <catalogs>Catalog.TransactionsKeys</catalogs>
   <catalogs>Catalog.LadgerTypes</catalogs>
+  <catalogs>Catalog.AccountingAnalytics</catalogs>
   <documents>Document.BankPayment</documents>
   <documents>Document.BankReceipt</documents>
   <documents>Document.Bundling</documents>
@@ -738,6 +739,7 @@
   <informationRegisters>InformationRegister.ItemKeyTBAccounts</informationRegisters>
   <informationRegisters>InformationRegister.PartnerTBAccounts</informationRegisters>
   <informationRegisters>InformationRegister.CashAccountTBAccounts</informationRegisters>
+  <informationRegisters>InformationRegister.CompanyLadgerTypes</informationRegisters>
   <accumulationRegisters>AccumulationRegister.CashInTransit</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1001T_Purchases</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1002T_PurchaseReturns</accumulationRegisters>

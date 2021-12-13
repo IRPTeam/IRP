@@ -260,21 +260,6 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
-  <attributes uuid="447370da-43f3-4567-8777-6a79e22893f0">
-    <name>IgnoreAdvances</name>
-    <synonym>
-      <key>en</key>
-      <value>Ignore advances</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
   <attributes uuid="d0279397-c448-48da-92ef-81430de9b1f1">
     <name>LegalNameContract</name>
     <synonym>

@@ -232,7 +232,6 @@ Function ItemList()
 	|	SalesInvoiceItemList.NetAmount AS NetAmount,
 	|	SalesInvoiceItemList.OffersAmount AS OffersAmount,
 	|	SalesInvoiceItemList.UseShipmentConfirmation AS UseShipmentConfirmation,
-	|	SalesInvoiceItemList.Ref.IgnoreAdvances AS IgnoreAdvances,
 	|	SalesInvoiceItemList.Key,
 	|	SalesInvoiceItemList.Ref.Branch AS Branch,
 	|	SalesInvoiceItemList.Ref.LegalNameContract AS LegalNameContract,

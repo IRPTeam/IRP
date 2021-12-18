@@ -19,6 +19,7 @@ EndProcedure
 &AtServer
 Procedure OnReadAtServer(CurrentObject)
 	ReadTaxes();
+	ReadLadgerTypes();
 	SetVisible();
 EndProcedure
 
@@ -37,16 +38,21 @@ EndProcedure
 Procedure AfterWrite(WriteParameters)
 	Notify("Writing_CatCompany", , Parameters.Key);
 	ReadTaxes();
+	ReadLadgerTypes();
 EndProcedure
 
 &AtServer
 Procedure OnWriteAtServer(Cancel, CurrentObject, WriteParameters)
 	If Object.OurCompany Then
-		If RewriteTaxes Then
+		If ThisObject.RewriteTaxes Then
 			CatCompaniesServer.WriteTaxesIntoFormTable(ThisObject, CurrentObject.Ref);
+		EndIf;
+		If ThisObject.RewriteLadgerTypes Then
+			CatCompaniesServer.WriteLadgerTypesFormTable(ThisObject, CurrentObject.Ref);
 		EndIf;
 	Else
 		CatCompaniesServer.ClearTaxesIntoFormTable(CurrentObject.Ref);
+		CatCompaniesServer.ClearLadgerTypesFormTable(CurrentObject.Ref);
 	EndIf;
 EndProcedure
 
@@ -67,12 +73,21 @@ EndProcedure
 &AtServer
 Procedure FillCheckProcessingAtServer(Cancel, CheckedAttributes)
 	If Object.OurCompany Then
-		For Index = 0 To CompanyTaxes.Count() - 1 Do
-			Row = CompanyTaxes[Index];
+		For Index = 0 To ThisObject.CompanyTaxes.Count() - 1 Do
+			Row = ThisObject.CompanyTaxes[Index];
 			If Not ValueIsFilled(Row.Period) Then
 				Cancel = True;
 				MessageText = StrTemplate(R().Error_010, R().Form_032);
 				CommonFunctionsClientServer.ShowUsersMessage(MessageText, "CompanyTaxes[" + Format(Index, "NG=0;")
+					+ "].Period");
+			EndIf;
+		EndDo;
+		For Index = 0 To ThisObject.CompanyLadgerTypes.Count() - 1 Do
+			Row = ThisObject.CompanyLadgerTypes[Index];
+			If Not ValueIsFilled(Row.Period) Then
+				Cancel = True;
+				MessageText = StrTemplate(R().Error_010, R().Form_032);
+				CommonFunctionsClientServer.ShowUsersMessage(MessageText, "CompanyLadgerTypes[" + Format(Index, "NG=0;")
 					+ "].Period");
 			EndIf;
 		EndDo;
@@ -120,6 +135,7 @@ EndProcedure
 Procedure SetVisible()
 	Items.GroupCurrencies.Visible = Object.OurCompany;
 	Items.GroupTaxes.Visible = Object.OurCompany;
+	Items.GroupLadgerTypes.Visible = Object.OurCompany;
 EndProcedure
 
 &AtClient
@@ -146,7 +162,7 @@ EndProcedure
 
 &AtClient
 Procedure CompanyTaxesOnChange(Item)
-	RewriteTaxes = True;
+	ThisObject.RewriteTaxes = True;
 EndProcedure
 
 &AtClient
@@ -159,6 +175,27 @@ EndProcedure
 &AtServer
 Procedure ReadTaxes()
 	CatCompaniesServer.ReadTaxesIntoFormTable(ThisObject);
+EndProcedure
+
+#EndRegion
+
+#Region LadgerTypes
+
+&AtClient
+Procedure CompanyLadgerTypesOnChange(Item)
+	ThisObject.RewriteLadgerTypes = True;
+EndProcedure
+
+&AtClient
+Procedure CompanyLadgerTypesOnStartEdit(Item, NewRow, Clone)
+	If NewRow Then
+		Item.CurrentData.Use = True;
+	EndIf;
+EndProcedure
+
+&AtServer
+Procedure ReadLadgerTypes()
+	CatCompaniesServer.ReadLadgerTypesFormTable(ThisObject);
 EndProcedure
 
 #EndRegion

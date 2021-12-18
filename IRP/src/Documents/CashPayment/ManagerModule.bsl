@@ -552,7 +552,7 @@ Function R3025B_PurchaseOrdersToBePaid()
 	|	PaymentList.Branch,
 	|	PaymentList.Currency,
 	|	PaymentList.Partner,
-	|	PaymentList.Payee AS LegalName,
+	|	PaymentList.LegalName,
 	|	PaymentList.Order,
 	|	PaymentList.Amount
 	|INTO R3025B_PurchaseOrdersToBePaid
@@ -571,7 +571,7 @@ Function T2014S_AdvancesInfo()
 	|	PaymentList.Branch,
 	|	PaymentList.Currency,
 	|	PaymentList.Partner,
-	|	PaymentList.Payee AS LegalName,
+	|	PaymentList.LegalName,
 	|	PaymentList.Order,
 	|	TRUE AS IsVendorAdvance,
 	|	FALSE AS IsCustomerAdvance,
@@ -613,7 +613,7 @@ Function T2015S_TransactionsInfo()
 	|	PaymentList.Branch,
 	|	PaymentList.Currency,
 	|	PaymentList.Partner,
-	|	PaymentList.Payee AS LegalName,
+	|	PaymentList.LegalName,
 	|	PaymentList.Agreement,
 	|	PaymentList.Order,
 	|	TRUE AS IsVendorTransaction,

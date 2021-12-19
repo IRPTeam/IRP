@@ -71,7 +71,7 @@ EndProcedure
 
 &AtClient
 Procedure NotificationProcessing(EventName, Parameter, Source)
-	If EventName = "WritingNew" 
+	If EventName = "NewPartnerCreated" 
 		And ValueIsFilled(Parameter) Then
 			
 		Items.List.CurrentRow = Parameter;

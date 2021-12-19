@@ -4,7 +4,7 @@
 &AtClient
 Procedure AfterWrite(WriteParameters)
 	If ThisIsNew Then
-		Notify("WritingNew", Object.ref);
+		Notify("NewPartnerCreated", Object.Ref);
 	EndIf;
 EndProcedure
 

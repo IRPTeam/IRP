@@ -1310,7 +1310,7 @@ WHERE
   <attributes>
     <name>ThisIsNew</name>
     <title>
-      <key>ru</key>
+      <key>en</key>
       <value>This is new</value>
     </title>
     <id>3</id>

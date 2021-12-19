@@ -1307,6 +1307,23 @@ WHERE
       <getInvisibleFieldPresentations>true</getInvisibleFieldPresentations>
     </extInfo>
   </attributes>
+  <attributes>
+    <name>ThisIsNew</name>
+    <title>
+      <key>ru</key>
+      <value>This is new</value>
+    </title>
+    <id>3</id>
+    <valueType>
+      <types>Boolean</types>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
+  </attributes>
   <commandInterface>
     <navigationPanel>
       <cmiFragmentRecord>

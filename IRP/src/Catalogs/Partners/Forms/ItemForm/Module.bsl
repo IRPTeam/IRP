@@ -1,9 +1,3 @@
-#Region Variables
-
-&AtClient
-var ThisIsNew;
-
-#EndRegion
 
 #Region FormEvents
 

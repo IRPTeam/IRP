@@ -68,3 +68,12 @@ Procedure SetBooleanListFilter(FilterItems, FieldName, RightValue)
 	CommonFunctionsClientServer.SetFilterItem(FilterItems, FieldName, RightValue, DataCompositionComparisonType.Equal,
 		RightValue = True);
 EndProcedure
+
+&AtClient
+Procedure NotificationProcessing(EventName, Parameter, Source)
+	If EventName = "WritingNew" 
+		And ValueIsFilled(Parameter) Then
+			
+		Items.List.CurrentRow = Parameter;
+	EndIf;
+EndProcedure

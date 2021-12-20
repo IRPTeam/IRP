@@ -10,6 +10,65 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 		CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
 	EndDo;
 	
+	AccountingClientServer.DeleteUnusedRowsFromAnalyticsTable(ThisObject.AccountingRowAnalytics, ThisObject.PaymentList);
+	UserDefinedAnalytics = Undefined;
+	ThisObject.AdditionalProperties.Property("AccountingRowAnalytics", UserDefinedAnalytics);
+	CompanyLadgerTypes = AccountingServer.GetLadgerTypesByCompany(ThisObject);
+	
+	For Each LadgerType In CompanyLadgerTypes Do
+	For Each Row In ThisObject.PaymentList Do
+		// Identifier - Analytics_CashOnHand
+		AnalyticRow = Undefined;
+		If UserDefinedAnalytics <> Undefined Then
+			AnalyticRows = UserDefinedAnalytics.FindRows(
+			New Structure("Key, LadgerType, Identifier", Row.Key, LadgerType, "Analytics_CashOnHand"));
+			If AnalyticRows.Count() Then
+				AnalyticRow = AnalyticRows[0];
+			EndIf;
+		EndIf;
+		
+		If AnalyticRow = Undefined Then
+			Parameters = AccountingClientServer.GetParameters(ThisObject, Row, "AccountingRowAnalytics");
+			For Each AccountingAnalytic In Parameters.AccountingAnalytics Do
+				If AccountingAnalytic.LadgerType = LadgerType 
+					And AccountingAnalytic.Identifier = "Analytics_CashOnHand" Then
+					AnalyticRow = AccountingAnalytic;
+				EndIf;
+			EndDo;
+		EndIf;
+		
+		If AnalyticRow = Undefined Then
+			Continue;
+		EndIf;
+		
+		UpdateCatalogAccountingAnalytics = False;
+		ObjectCatalogAccountingAnalytics = Undefined;
+		
+		ExistsAnalyticRow = Undefined;
+		ExistsAnalyticRows = ThisObject["AccountingRowAnalytics"].FindRows(
+			New Structure("Key, LadgerType", Row.Key, LadgerType));
+		If ExistsAnalyticRows.Count() Then
+			ExistsAnalyticRow = ExistsAnalyticRows[0];
+			
+			
+		Else
+			ExistsAnalyticRow = ThisObject["AccountingRowAnalytics"].Add();
+			ExistsAnalyticRow.Key = Row.Key;
+			ExistsAnalyticRow.LadgerType = LadgerType;
+			
+			ObjectCatalogAccountingAnalytics = Catalogs.AccountingAnalytics.CreateItem();
+			UpdateCatalogAccountingAnalytics = True;
+		EndIf;
+		
+		If UpdateCatalogAccountingAnalytics Then
+			FillPropertyValues(ObjectCatalogAccountingAnalytics, AnalyticRow);
+			ObjectCatalogAccountingAnalytics.Write();
+		EndIf;
+		ExistsAnalyticRow["Analytics_CashOnHand"] = ObjectCatalogAccountingAnalytics.Ref;
+		
+	EndDo;
+	EndDo;
+	
 	ThisObject.DocumentAmount = ThisObject.PaymentList.Total("TotalAmount");
 EndProcedure
 

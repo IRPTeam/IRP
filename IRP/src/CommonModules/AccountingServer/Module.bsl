@@ -22,9 +22,10 @@ EndFunction
 
 #Region BankPayment
 
-Function GetAccountingAnalytics_BankPayment(ObjectData, RowData) Export
+Function GetAccountingAnalytics_BankPayment(ObjectData, RowData, LadgerType) Export
 	Result = New Array();
-	AccountingAnalytics = New Structure();
+	AccountingAnalytics = New Structure("Identifier, LadgerType", "Analytics_CashOnHand", LadgerType);
+	
 	Result.Add(AccountingAnalytics);
 	Period = CalculationStringsClientServer.GetSliceLastDateByRefAndDate(ObjectData.Ref, ObjectData.Date);
 

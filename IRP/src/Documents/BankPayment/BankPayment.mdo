@@ -744,10 +744,10 @@
       <objectType typeId="e8d989f2-4b34-4e14-b501-b0b1e461c207" valueTypeId="42832be4-22bb-4bc7-b087-8f1e554dcf65"/>
       <rowType typeId="3db74c2e-b2eb-4507-b6f0-81de42279704" valueTypeId="af8f7c79-0f32-4350-91d5-402d6b671953"/>
     </producedTypes>
-    <name>AccountingRowAnalitics</name>
+    <name>AccountingRowAnalytics</name>
     <synonym>
       <key>en</key>
-      <value>Accounting row analitics</value>
+      <value>Accounting row analytics</value>
     </synonym>
     <attributes uuid="4bcdcb83-ecfc-406d-a876-45f0982424b9">
       <name>Key</name>

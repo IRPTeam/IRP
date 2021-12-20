@@ -3,6 +3,7 @@
 &AtServer
 Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
 	AddAttributesAndPropertiesServer.BeforeWriteAtServer(ThisObject, Cancel, CurrentObject, WriteParameters);
+	CurrentObject.AdditionalProperties.Insert("AccountingRowAnalytics", ThisObject.CacheAccountingRowAnalytics.Unload());
 EndProcedure
 
 &AtClient
@@ -523,7 +524,7 @@ Procedure EditTrialBallanceAccounts(Command)
 	If CurrentData = Undefined Then
 		Return;
 	EndIf;
-	FormParameters = AccountingClientServer.GetParameters(Object, CurrentData);
+	FormParameters = AccountingClientServer.GetParameters(Object, CurrentData, "AccountingRowAnalytics");
 	NotifyParameters = New Structure();
 	NotifyParameters.Insert("Object", Object);
 	NotifyParameters.Insert("Form"  , ThisObject);

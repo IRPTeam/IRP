@@ -187,8 +187,8 @@ Scenario: _051001 create Cash payment (independently)
 			And I activate "Basis document" field in "PaymentList" table
 			And I select current line in "PaymentList" table
 			And I go to line in "List" table
-			| 'Amount' | 'Company'      | 'Legal name'        | 'Partner'   |
-			| '137 000,00'       | 'Main Company' | 'Company Ferron BP' | 'Ferron BP' |
+			| 'Amount'     | 'Company'      | 'Legal name'        | 'Partner'   |
+			| '137 000,00' | 'Main Company' | 'Company Ferron BP' | 'Ferron BP' |
 			And I click "Select" button
 		* Filling in amount in a tabular part
 			And I activate "Total amount" field in "PaymentList" table

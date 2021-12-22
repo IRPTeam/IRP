@@ -256,15 +256,15 @@ Scenario: _041306 check Sales return movements by the Register  "R2021 Customer 
 		And I select "R2021 Customer transactions" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales return 101 dated 12.03.2021 08:44:18' | ''            | ''                    | ''          | ''             | ''                        | ''                             | ''         | ''                  | ''          | ''                         | ''                                          | ''                           | ''                     | ''                           |
-			| 'Document registrations records'             | ''            | ''                    | ''          | ''             | ''                        | ''                             | ''         | ''                  | ''          | ''                         | ''                                          | ''                           | ''                     | ''                           |
-			| 'Register  "R2021 Customer transactions"'    | ''            | ''                    | ''          | ''             | ''                        | ''                             | ''         | ''                  | ''          | ''                         | ''                                          | ''                           | ''                     | ''                           |
-			| ''                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                        | ''                             | ''         | ''                  | ''          | ''                         | ''                                          | ''                           | 'Attributes'           | ''                           |
-			| ''                                           | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'                  | 'Multi currency movement type' | 'Currency' | 'Legal name'        | 'Partner'   | 'Agreement'                | 'Basis'                                     | 'Order'                      | 'Deferred calculation' | 'Customers advances closing' |
-			| ''                                           | 'Receipt'     | '12.03.2021 08:44:18' | '-1 254'    | 'Main Company' | 'Distribution department' | 'Local currency'               | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Sales invoice 1 dated 28.01.2021 18:48:53' | ''                           | 'No'                   | ''                           |
-			| ''                                           | 'Receipt'     | '12.03.2021 08:44:18' | '-1 254'    | 'Main Company' | 'Distribution department' | 'TRY'                          | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Sales invoice 1 dated 28.01.2021 18:48:53' | ''                           | 'No'                   | ''                           |
-			| ''                                           | 'Receipt'     | '12.03.2021 08:44:18' | '-1 254'    | 'Main Company' | 'Distribution department' | 'en description is empty'      | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Sales invoice 1 dated 28.01.2021 18:48:53' | ''                           | 'No'                   | ''                           |
-			| ''                                           | 'Receipt'     | '12.03.2021 08:44:18' | '-214,68'   | 'Main Company' | 'Distribution department' | 'Reporting currency'           | 'USD'      | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Sales invoice 1 dated 28.01.2021 18:48:53' | ''                           | 'No'                   | ''                           |
+			| 'Sales return 101 dated 12.03.2021 08:44:18' | ''            | ''                    | ''          | ''             | ''                        | ''                             | ''         | ''                  | ''          | ''                         | ''                                           | ''      | ''                     | ''                           |
+			| 'Document registrations records'             | ''            | ''                    | ''          | ''             | ''                        | ''                             | ''         | ''                  | ''          | ''                         | ''                                           | ''      | ''                     | ''                           |
+			| 'Register  "R2021 Customer transactions"'    | ''            | ''                    | ''          | ''             | ''                        | ''                             | ''         | ''                  | ''          | ''                         | ''                                           | ''      | ''                     | ''                           |
+			| ''                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                        | ''                             | ''         | ''                  | ''          | ''                         | ''                                           | ''      | 'Attributes'           | ''                           |
+			| ''                                           | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'                  | 'Multi currency movement type' | 'Currency' | 'Legal name'        | 'Partner'   | 'Agreement'                | 'Basis'                                      | 'Order' | 'Deferred calculation' | 'Customers advances closing' |
+			| ''                                           | 'Receipt'     | '12.03.2021 08:44:18' | '-1 254'    | 'Main Company' | 'Distribution department' | 'Local currency'               | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Sales return 101 dated 12.03.2021 08:44:18' | ''      | 'No'                   | ''                           |
+			| ''                                           | 'Receipt'     | '12.03.2021 08:44:18' | '-1 254'    | 'Main Company' | 'Distribution department' | 'TRY'                          | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Sales return 101 dated 12.03.2021 08:44:18' | ''      | 'No'                   | ''                           |
+			| ''                                           | 'Receipt'     | '12.03.2021 08:44:18' | '-1 254'    | 'Main Company' | 'Distribution department' | 'en description is empty'      | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Sales return 101 dated 12.03.2021 08:44:18' | ''      | 'No'                   | ''                           |
+			| ''                                           | 'Receipt'     | '12.03.2021 08:44:18' | '-214,68'   | 'Main Company' | 'Distribution department' | 'Reporting currency'           | 'USD'      | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Sales return 101 dated 12.03.2021 08:44:18' | ''      | 'No'                   | ''                           |
 	And I close all client application windows
 
 Scenario: _041307 check Sales return movements by the Register  "R2040 Taxes incoming"
@@ -550,100 +550,29 @@ Scenario: _041319 check Sales return movements by the Register  "R2012 Invoice c
 			| ''                                                  | 'Expense'     | '12.03.2021 09:20:35' | '24'        | '15 960' | '13 525,42'  | 'Main Company' | 'Distribution department' | 'Sales return order 102 dated 12.03.2021 09:19:54' | 'TRY'      | '37/18SD'  | 'f06154aa-5906-4824-9983-19e2bc9ccb96' |
 	And I close all client application windows
 
-Scenario: _041321 check Sales return movements by the Register  "R2021 Customer transactions" (Due as advance - True)
+
+
+Scenario: _041326 check Sales return movements by the Register  "T2015 Transactions info"
 	And I close all client application windows
 	* Select Sales return
 		Given I open hyperlink "e1cib/list/Document.SalesReturn"
 		And I go to line in "List" table
 			| 'Number'  |
 			| '106' |
-	* Check movements by the Register  "R2021 Customer transactions"
+	* Check movements by the Register  "T2015 Transactions info"
 		And I click "Registrations report" button
-		And I select "R2021 Customer transactions" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document does not contain values
-			| Register  "R2021 Customer transactions" |	
-	And I close all client application windows
-
-Scenario: _041322 check Sales return movements by the Register  "R2020 Advances from customer" (Due as advance - True)
-	And I close all client application windows
-	* Select Sales return
-		Given I open hyperlink "e1cib/list/Document.SalesReturn"
-		And I go to line in "List" table
-			| 'Number'  |
-			| '106' |
-	* Check movements by the Register  "R2020 Advances from customer"
-		And I click "Registrations report" button
-		And I select "R2020 Advances from customer" exact value from "Register" drop-down list
+		And I select "T2015 Transactions info" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales return 106 dated 21.04.2021 14:19:47' | ''            | ''                    | ''          | ''             | ''                        | ''                             | ''         | ''              | ''        | ''                                           | ''                     | ''                           |
-			| 'Document registrations records'             | ''            | ''                    | ''          | ''             | ''                        | ''                             | ''         | ''              | ''        | ''                                           | ''                     | ''                           |
-			| 'Register  "R2020 Advances from customer"'   | ''            | ''                    | ''          | ''             | ''                        | ''                             | ''         | ''              | ''        | ''                                           | ''                     | ''                           |
-			| ''                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                        | ''                             | ''         | ''              | ''        | ''                                           | 'Attributes'           | ''                           |
-			| ''                                           | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'                  | 'Multi currency movement type' | 'Currency' | 'Legal name'    | 'Partner' | 'Order'                                      | 'Deferred calculation' | 'Customers advances closing' |
-			| ''                                           | 'Receipt'     | '21.04.2021 14:19:47' | '1 602,43'  | 'Main Company' | 'Distribution department' | 'Reporting currency'           | 'USD'      | 'Company Lunch' | 'Lunch'   | ''                                           | 'No'                   | ''                           |
-			| ''                                           | 'Receipt'     | '21.04.2021 14:19:47' | '9 360'     | 'Main Company' | 'Distribution department' | 'Local currency'               | 'TRY'      | 'Company Lunch' | 'Lunch'   | ''                                           | 'No'                   | ''                           |
-			| ''                                           | 'Receipt'     | '21.04.2021 14:19:47' | '9 360'     | 'Main Company' | 'Distribution department' | 'en description is empty'      | 'TRY'      | 'Company Lunch' | 'Lunch'   | ''                                           | 'No'                   | ''                           |						
+			| 'Sales return 106 dated 21.04.2021 14:19:47' | ''          | ''       | ''        | ''                    | ''    | ''             | ''                        | ''         | ''        | ''              | ''                         | ''      | ''                      | ''                        | ''                                           |
+			| 'Document registrations records'             | ''          | ''       | ''        | ''                    | ''    | ''             | ''                        | ''         | ''        | ''              | ''                         | ''      | ''                      | ''                        | ''                                           |
+			| 'Register  "T2015 Transactions info"'        | ''          | ''       | ''        | ''                    | ''    | ''             | ''                        | ''         | ''        | ''              | ''                         | ''      | ''                      | ''                        | ''                                           |
+			| ''                                           | 'Resources' | ''       | ''        | 'Dimensions'          | ''    | ''             | ''                        | ''         | ''        | ''              | ''                         | ''      | ''                      | ''                        | ''                                           |
+			| ''                                           | 'Amount'    | 'Is due' | 'Is paid' | 'Date'                | 'Key' | 'Company'      | 'Branch'                  | 'Currency' | 'Partner' | 'Legal name'    | 'Agreement'                | 'Order' | 'Is vendor transaction' | 'Is customer transaction' | 'Transaction basis'                          |
+			| ''                                           | '-9 360'    | 'Yes'    | 'No'      | '21.04.2021 14:19:47' | ''    | 'Main Company' | 'Distribution department' | 'TRY'      | 'Lunch'   | 'Company Lunch' | 'Basic Partner terms, TRY' | ''      | 'No'                    | 'Yes'                     | 'Sales return 106 dated 21.04.2021 14:19:47' |		
 	And I close all client application windows
 
-Scenario: _041326 check Sales return movements by the Register  "T2012S Partner advances"
-	And I close all client application windows
-	* Select Sales return
-		Given I open hyperlink "e1cib/list/Document.SalesReturn"
-		And I go to line in "List" table
-			| 'Number'  |
-			| '106' |
-	* Check movements by the Register  "T2012S Partner advances"
-		And I click "Registrations report" button
-		And I select "T2012S Partner advances" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		Then "ResultTable" spreadsheet document is equal
-			| 'Sales return 106 dated 21.04.2021 14:19:47' | ''                    | ''          | ''             | ''                        | ''         | ''              | ''        | ''                  | ''                    | ''                                           | ''    |
-			| 'Document registrations records'             | ''                    | ''          | ''             | ''                        | ''         | ''              | ''        | ''                  | ''                    | ''                                           | ''    |
-			| 'Register  "T2012S Partner advances"'        | ''                    | ''          | ''             | ''                        | ''         | ''              | ''        | ''                  | ''                    | ''                                           | ''    |
-			| ''                                           | 'Period'              | 'Resources' | 'Dimensions'   | ''                        | ''         | ''              | ''        | ''                  | ''                    | ''                                           | ''    |
-			| ''                                           | ''                    | 'Amount'    | 'Company'      | 'Branch'                  | 'Currency' | 'Legal name'    | 'Partner' | 'Is vendor advance' | 'Is customer advance' | 'Advances document'                          | 'Key' |
-			| ''                                           | '21.04.2021 14:19:47' | '9 360'     | 'Main Company' | 'Distribution department' | 'TRY'      | 'Company Lunch' | 'Lunch'   | 'No'                | 'Yes'                 | 'Sales return 106 dated 21.04.2021 14:19:47' | ''    |										
-	And I close all client application windows
 
-Scenario: _041323 check Sales return movements by the Register  "R2021 Customer transactions" (Due as advance - False)
-	And I close all client application windows
-	* Select Sales return
-		Given I open hyperlink "e1cib/list/Document.SalesReturn"
-		And I go to line in "List" table
-			| 'Number'  |
-			| '107' |
-	* Check movements by the Register  "R2021 Customer transactions"
-		And I click "Registrations report" button
-		And I select "R2021 Customer transactions" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		Then "ResultTable" spreadsheet document is equal
-			| 'Sales return 107 dated 21.04.2021 14:24:43' | ''            | ''                    | ''          | ''             | ''                        | ''                             | ''         | ''              | ''        | ''                         | ''                                            | ''                           | ''                     | ''                           |
-			| 'Document registrations records'             | ''            | ''                    | ''          | ''             | ''                        | ''                             | ''         | ''              | ''        | ''                         | ''                                            | ''                           | ''                     | ''                           |
-			| 'Register  "R2021 Customer transactions"'    | ''            | ''                    | ''          | ''             | ''                        | ''                             | ''         | ''              | ''        | ''                         | ''                                            | ''                           | ''                     | ''                           |
-			| ''                                           | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                        | ''                             | ''         | ''              | ''        | ''                         | ''                                            | ''                           | 'Attributes'           | ''                           |
-			| ''                                           | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'                  | 'Multi currency movement type' | 'Currency' | 'Legal name'    | 'Partner' | 'Agreement'                | 'Basis'                                       | 'Order'                      | 'Deferred calculation' | 'Customers advances closing' |
-			| ''                                           | 'Receipt'     | '21.04.2021 14:24:43' | '-520'      | 'Main Company' | 'Distribution department' | 'Local currency'               | 'TRY'      | 'Company Lunch' | 'Lunch'   | 'Basic Partner terms, TRY' | 'Sales invoice 101 dated 21.04.2021 14:10:58' | ''                           | 'No'                   | ''                           |
-			| ''                                           | 'Receipt'     | '21.04.2021 14:24:43' | '-520'      | 'Main Company' | 'Distribution department' | 'TRY'                          | 'TRY'      | 'Company Lunch' | 'Lunch'   | 'Basic Partner terms, TRY' | 'Sales invoice 101 dated 21.04.2021 14:10:58' | ''                           | 'No'                   | ''                           |
-			| ''                                           | 'Receipt'     | '21.04.2021 14:24:43' | '-520'      | 'Main Company' | 'Distribution department' | 'en description is empty'      | 'TRY'      | 'Company Lunch' | 'Lunch'   | 'Basic Partner terms, TRY' | 'Sales invoice 101 dated 21.04.2021 14:10:58' | ''                           | 'No'                   | ''                           |
-			| ''                                           | 'Receipt'     | '21.04.2021 14:24:43' | '-89,02'    | 'Main Company' | 'Distribution department' | 'Reporting currency'           | 'USD'      | 'Company Lunch' | 'Lunch'   | 'Basic Partner terms, TRY' | 'Sales invoice 101 dated 21.04.2021 14:10:58' | ''                           | 'No'                   | ''                           |
-	And I close all client application windows
-
-Scenario: _041324 check Sales return movements by the Register  "R2020 Advances from customer" (Due as advance - False)
-	And I close all client application windows
-	* Select Sales return
-		Given I open hyperlink "e1cib/list/Document.SalesReturn"
-		And I go to line in "List" table
-			| 'Number'  |
-			| '107' |
-	* Check movements by the Register  "R2020 Advances from customer"
-		And I click "Registrations report" button
-		And I select "R2020 Advances from customer" exact value from "Register" drop-down list
-		And I click "Generate report" button
-		And "ResultTable" spreadsheet document does not contain values
-			| Register  "R2020 Advances from customer" |	
-	And I close all client application windows
 
 
 Scenario: _041325 check Sales return movements by the Register  "R2001 Sales"

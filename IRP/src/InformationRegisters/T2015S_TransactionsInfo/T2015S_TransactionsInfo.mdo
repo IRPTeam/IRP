@@ -203,6 +203,7 @@
     </synonym>
     <type>
       <types>DocumentRef.PurchaseOrder</types>
+      <types>DocumentRef.SalesOrder</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

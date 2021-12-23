@@ -136,19 +136,7 @@ Scenario: Open information register form "T2010S_OffsetOfAdvances"
 		Then I raise "Failed to open information register form T2010S_OffsetOfAdvances" exception
 	And I close current window
 
-Scenario: Open information register form "T2011S_PartnerTransactions" 
 
-	Given I open "T2011S_PartnerTransactions" information register default form 
-	If the warning is displayed then
-		Then I raise "Failed to open information register form T2011S_PartnerTransactions" exception
-	And I close current window
-
-Scenario: Open information register form "T2012S_PartnerAdvances" 
-
-	Given I open "T2012S_PartnerAdvances" information register default form 
-	If the warning is displayed then
-		Then I raise "Failed to open information register form T2012S_PartnerAdvances" exception
-	And I close current window
 
 Scenario: Open information register form "PricesByProperties" 
 

@@ -347,6 +347,7 @@ EndProcedure
 &AtClient
 Procedure ItemListCancelOnChange(Item)
 	UpdateTotalAmounts();
+	DocumentsClient.CalculatePaymentTermDateAndAmount(Object, ThisObject);
 EndProcedure
 
 #EndRegion

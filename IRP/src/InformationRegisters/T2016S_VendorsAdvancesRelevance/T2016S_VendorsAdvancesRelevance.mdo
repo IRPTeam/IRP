@@ -33,6 +33,7 @@
       <types>DocumentRef.PurchaseOrderClosing</types>
       <types>DocumentRef.BankPayment</types>
       <types>DocumentRef.BankReceipt</types>
+      <types>DocumentRef.CashPayment</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

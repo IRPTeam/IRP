@@ -277,7 +277,7 @@ Scenario: _1002009 create Cash payment and check Aging register movements
 			| 'Period'                        | 'Recorder'                  | 'Currency' | 'Company'      | 'Branch' | 'Partner'   | 'Amount'   | 'Agreement'          | 'Invoice'                   | 'Payment date'                             | 'Aging closing'                                        |
 			| '$$DatePurchaseInvoiceAging1$$' | '$$PurchaseInvoiceAging1$$' | 'TRY'      | 'Main Company' | ''       | 'Ferron BP' | '4 000,00' | 'Vendor Ferron, TRY' | '$$PurchaseInvoiceAging1$$' | '*'                                        | ''                                                     |
 			| '*'                             | '$$PurchaseInvoiceAging$$'  | 'TRY'      | 'Main Company' | ''       | 'Ferron BP' | '4 000,00' | 'Vendor Ferron, TRY' | '$$PurchaseInvoiceAging$$'  | '$$DatePaymentTermsPurchaseInvoiceAging$$' | ''                                                     |
-			| '$$DateCashPayment1002009$$'    | '$$CashPayment1002009$$'    | 'TRY'      | 'Main Company' | ''       | 'Ferron BP' | '4 000,00' | 'Vendor Ferron, TRY' | '$$PurchaseInvoiceAging1$$' | '*'                                        | 'Vendors advances closing 4 dated 28.04.2021 22:00:00' |
+			| '$$DateCashPayment1002009$$'    | '$$CashPayment1002009$$'    | 'TRY'      | 'Main Company' | ''       | 'Ferron BP' | '4 000,00' | 'Vendor Ferron, TRY' | '$$PurchaseInvoiceAging1$$' | '*'                                        | 'Vendors advances closing 4*' |
 		Then the number of "List" table lines is "равно" "3"
 		And I close all client application windows
 		
@@ -361,8 +361,8 @@ Scenario: _1002009 create Cash payment and check Aging register movements
 				| 'Period'                        | 'Recorder'                  | 'Currency' | 'Company'      | 'Branch' | 'Partner'   | 'Amount'   | 'Agreement'          | 'Invoice'                   | 'Payment date'                             | 'Aging closing'                                        |
 				| '$$DatePurchaseInvoiceAging1$$' | '$$PurchaseInvoiceAging1$$' | 'TRY'      | 'Main Company' | ''       | 'Ferron BP' | '4 000,00' | 'Vendor Ferron, TRY' | '$$PurchaseInvoiceAging1$$' | '*'                                        | ''                                                     |
 				| '*'                             | '$$PurchaseInvoiceAging$$'  | 'TRY'      | 'Main Company' | ''       | 'Ferron BP' | '4 000,00' | 'Vendor Ferron, TRY' | '$$PurchaseInvoiceAging$$'  | '$$DatePaymentTermsPurchaseInvoiceAging$$' | ''                                                     |
-				| '$$DateCashPayment1002009$$'    | '$$CashPayment1002009$$'    | 'TRY'      | 'Main Company' | ''       | 'Ferron BP' | '4 000,00' | 'Vendor Ferron, TRY' | '$$PurchaseInvoiceAging1$$' | '*'                                        | 'Vendors advances closing 4 dated 28.04.2021 22:00:00' |
-				| '$$DateBankPayment1002015$$'    | '$$BankPayment1002015$$'    | 'TRY'      | 'Main Company' | ''       | 'Ferron BP' | '200,00'   | 'Vendor Ferron, TRY' | '$$PurchaseInvoiceAging$$'  | '$$DatePaymentTermsPurchaseInvoiceAging$$' | 'Vendors advances closing 4 dated 28.04.2021 22:00:00' |
+				| '$$DateCashPayment1002009$$'    | '$$CashPayment1002009$$'    | 'TRY'      | 'Main Company' | ''       | 'Ferron BP' | '4 000,00' | 'Vendor Ferron, TRY' | '$$PurchaseInvoiceAging1$$' | '*'                                        | 'Vendors advances closing 4*' |
+				| '$$DateBankPayment1002015$$'    | '$$BankPayment1002015$$'    | 'TRY'      | 'Main Company' | ''       | 'Ferron BP' | '200,00'   | 'Vendor Ferron, TRY' | '$$PurchaseInvoiceAging$$'  | '$$DatePaymentTermsPurchaseInvoiceAging$$' | 'Vendors advances closing 4*' |
 			Then the number of "List" table lines is "равно" "4"
 			And I close all client application windows
 
@@ -430,8 +430,8 @@ Scenario: _1002020 create Credit note and check Aging register movements
 				| 'Period'                        | 'Recorder'                  | 'Currency' | 'Company'      | 'Branch' | 'Partner'   | 'Amount'   | 'Agreement'          | 'Invoice'                   | 'Payment date'                             | 'Aging closing'                                        |
 				| '$$DatePurchaseInvoiceAging1$$' | '$$PurchaseInvoiceAging1$$' | 'TRY'      | 'Main Company' | ''       | 'Ferron BP' | '4 000,00' | 'Vendor Ferron, TRY' | '$$PurchaseInvoiceAging1$$' | '*'                                        | ''                                                     |
 				| '*'                             | '$$PurchaseInvoiceAging$$'  | 'TRY'      | 'Main Company' | ''       | 'Ferron BP' | '4 000,00' | 'Vendor Ferron, TRY' | '$$PurchaseInvoiceAging$$'  | '$$DatePaymentTermsPurchaseInvoiceAging$$' | ''                                                     |
-				| '$$DateCashPayment1002009$$'    | '$$CashPayment1002009$$'    | 'TRY'      | 'Main Company' | ''       | 'Ferron BP' | '4 000,00' | 'Vendor Ferron, TRY' | '$$PurchaseInvoiceAging1$$' | '*'                                        | 'Vendors advances closing 4 dated 28.04.2021 22:00:00' |
-				| '$$DateBankPayment1002015$$'    | '$$BankPayment1002015$$'    | 'TRY'      | 'Main Company' | ''       | 'Ferron BP' | '200,00'   | 'Vendor Ferron, TRY' | '$$PurchaseInvoiceAging$$'  | '$$DatePaymentTermsPurchaseInvoiceAging$$' | 'Vendors advances closing 4 dated 28.04.2021 22:00:00' |
+				| '$$DateCashPayment1002009$$'    | '$$CashPayment1002009$$'    | 'TRY'      | 'Main Company' | ''       | 'Ferron BP' | '4 000,00' | 'Vendor Ferron, TRY' | '$$PurchaseInvoiceAging1$$' | '*'                                        | 'Vendors advances closing 4*' |
+				| '$$DateBankPayment1002015$$'    | '$$BankPayment1002015$$'    | 'TRY'      | 'Main Company' | ''       | 'Ferron BP' | '200,00'   | 'Vendor Ferron, TRY' | '$$PurchaseInvoiceAging$$'  | '$$DatePaymentTermsPurchaseInvoiceAging$$' | 'Vendors advances closing 4*' |
 				| '$$CreditNoteDate1002020$$'     | '$$CreditNote1002020$$'     | 'TRY'      | 'Main Company' | ''       | 'Ferron BP' | '100,00'   | 'Vendor Ferron, TRY' | '$$CreditNote1002020$$'  | '*'                                        | ''                                                     |
 			Then the number of "List" table lines is "равно" "5"
 	And I close all client application windows
@@ -496,10 +496,10 @@ Scenario: _1020030 create Debit note and check Aging register movements
 			| 'Period'                        | 'Recorder'                  | 'Currency' | 'Company'      | 'Branch' | 'Partner'   | 'Amount'   | 'Agreement'          | 'Invoice'                   | 'Payment date'                             | 'Aging closing'                                        |
 			| '$$DatePurchaseInvoiceAging1$$' | '$$PurchaseInvoiceAging1$$' | 'TRY'      | 'Main Company' | ''       | 'Ferron BP' | '4 000,00' | 'Vendor Ferron, TRY' | '$$PurchaseInvoiceAging1$$' | '*'                                        | ''                                                     |
 			| '*'                             | '$$PurchaseInvoiceAging$$'  | 'TRY'      | 'Main Company' | ''       | 'Ferron BP' | '4 000,00' | 'Vendor Ferron, TRY' | '$$PurchaseInvoiceAging$$'  | '$$DatePaymentTermsPurchaseInvoiceAging$$' | ''                                                     |
-			| '$$DateCashPayment1002009$$'    | '$$CashPayment1002009$$'    | 'TRY'      | 'Main Company' | ''       | 'Ferron BP' | '4 000,00' | 'Vendor Ferron, TRY' | '$$PurchaseInvoiceAging1$$' | '*'                                        | 'Vendors advances closing 4 dated 28.04.2021 22:00:00' |
-			| '$$DateBankPayment1002015$$'    | '$$BankPayment1002015$$'    | 'TRY'      | 'Main Company' | ''       | 'Ferron BP' | '200,00'   | 'Vendor Ferron, TRY' | '$$PurchaseInvoiceAging$$'  | '$$DatePaymentTermsPurchaseInvoiceAging$$' | 'Vendors advances closing 4 dated 28.04.2021 22:00:00' |
+			| '$$DateCashPayment1002009$$'    | '$$CashPayment1002009$$'    | 'TRY'      | 'Main Company' | ''       | 'Ferron BP' | '4 000,00' | 'Vendor Ferron, TRY' | '$$PurchaseInvoiceAging1$$' | '*'                                        | 'Vendors advances closing 4*' |
+			| '$$DateBankPayment1002015$$'    | '$$BankPayment1002015$$'    | 'TRY'      | 'Main Company' | ''       | 'Ferron BP' | '200,00'   | 'Vendor Ferron, TRY' | '$$PurchaseInvoiceAging$$'  | '$$DatePaymentTermsPurchaseInvoiceAging$$' | 'Vendors advances closing 4*' |
 			| '$$CreditNoteDate1002020$$'     | '$$CreditNote1002020$$'     | 'TRY'      | 'Main Company' | ''       | 'Ferron BP' | '100,00'   | 'Vendor Ferron, TRY' | '$$CreditNote1002020$$'  | '*'                                        | ''                                                     |
-			| '$$DebitNoteDate1000030$$'      | '$$DebitNote1020030$$'      | 'TRY'      | 'Main Company' | ''       | 'Ferron BP' | '50,00'    | 'Vendor Ferron, TRY' | '$$PurchaseInvoiceAging$$'  | '*'                                        | 'Vendors advances closing 4 dated 28.04.2021 22:00:00' |
+			| '$$DebitNoteDate1000030$$'      | '$$DebitNote1020030$$'      | 'TRY'      | 'Main Company' | ''       | 'Ferron BP' | '50,00'    | 'Vendor Ferron, TRY' | '$$PurchaseInvoiceAging$$'  | '*'                                        | 'Vendors advances closing 4*' |
 		Then the number of "List" table lines is "равно" "6"
 	And I close all client application windows
 				
@@ -680,7 +680,7 @@ Scenario: _1020050 check the offset of Purchase invoice advance (type of settlem
 			And "List" table contains lines:
 				| 'Period'                         | 'Recorder'                   | 'Currency' | 'Company'      | 'Branch' | 'Partner'   | 'Amount'   | 'Agreement'          | 'Invoice'                    | 'Payment date'                             | 'Aging closing'                                        |
 				| '$$DatePurchaseInvoice0240164$$' | '$$PurchaseInvoice0240164$$' | 'TRY'      | 'Main Company' | ''       | 'Ferron BP' | '4 000,00' | 'Vendor Ferron, TRY' | '$$PurchaseInvoice0240164$$' | '$$DatePaymentTermsPurchaseInvoiceAging$$' | ''                                                     |
-				| '$$DateCashPayment10000505$$'    | '$$CashPayment10000505$$'    | 'TRY'      | 'Main Company' | ''       | 'Ferron BP' | '4 000,00' | 'Vendor Ferron, TRY' | '$$PurchaseInvoice0240164$$' | '$$DatePaymentTermsPurchaseInvoiceAging$$' | 'Vendors advances closing 4 dated 28.04.2021 22:00:00' |
+				| '$$DateCashPayment10000505$$'    | '$$CashPayment10000505$$'    | 'TRY'      | 'Main Company' | ''       | 'Ferron BP' | '4 000,00' | 'Vendor Ferron, TRY' | '$$PurchaseInvoice0240164$$' | '$$DatePaymentTermsPurchaseInvoiceAging$$' | 'Vendors advances closing 4*' |
 			And I close all client application windows	
 
 

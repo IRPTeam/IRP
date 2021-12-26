@@ -851,8 +851,7 @@ Procedure DistributeTransactionToAging(Parameters, PointInTime, Document, Transa
 	|	AND Partner = &Partner
 	|	AND Invoice = &TransactionBasis) AS VendorsAging";
 	
-	Point = New PointInTime(PointInTime.Date, Parameters.Object.Ref);
-	Boundary = New Boundary(Point, BoundaryType.Including);
+	Boundary = New Boundary(PointInTime, BoundaryType.Including);
 	Query.SetParameter("TransactionBoundary", Boundary);
 	
 	Query.SetParameter("Company"          , TransactionKey.Company);

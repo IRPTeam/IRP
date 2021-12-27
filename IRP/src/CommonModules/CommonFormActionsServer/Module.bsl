@@ -111,10 +111,10 @@ Function QuerySearchInputByString(Settings) Export
 	NumberSearch = "False";
 	If Settings.MetadataObject = Metadata.Catalogs.Items Then
 		IDSearch = "Table.Ref.ItemID LIKE &SearchString + ""%%""";
-	EndIf;
-	
-	If Settings.MetadataObject.CodeLength And Settings.MetadataObject.CodeType = Metadata.ObjectProperties.CatalogCodeType.Number Then
-		NumberSearch = "Table.Ref.Code = &SearchStringNumber";
+
+		If Settings.MetadataObject.CodeLength And Settings.MetadataObject.CodeType = Metadata.ObjectProperties.CatalogCodeType.Number Then
+			NumberSearch = "Table.Ref.Code = &SearchStringNumber";
+		EndIf;
 	EndIf;
 
 	If Not Settings.MetadataObject.DescriptionLength Then

@@ -653,30 +653,34 @@ Function GetAdvanceKeyByAdvanceKeyWithOrder(AdvanceKey)
 	Query.Text = 
 	"SELECT
 	|	MAX(AdvKeys.Ref) AS AdvanceKey,
-	|	(&AdvanceKey).Company,
-	|	(&AdvanceKey).Branch,
-	|	(&AdvanceKey).Currency,
-	|	(&AdvanceKey).Partner,
-	|	(&AdvanceKey).LegalName,
+	|	&Company AS Company,
+	|	&Branch AS Branch,
+	|	&Currency AS Currency,
+	|	&Partner AS Partner,
+	|	&LegalName AS LegalName,
 	|	TRUE AS IsVendorAdvance
 	|FROM
 	|	Catalog.AdvancesKeys AS AdvKeys
 	|WHERE
 	|	NOT AdvKeys.DeletionMark
-	|	AND (&AdvanceKey).Company = AdvKeys.Company
-	|	AND (&AdvanceKey).Branch = AdvKeys.Branch
-	|	AND (&AdvanceKey).Currency = AdvKeys.Currency
-	|	AND (&AdvanceKey).Partner = AdvKeys.Partner
-	|	AND (&AdvanceKey).LegalName = AdvKeys.LegalName
+	|	AND &Company = AdvKeys.Company
+	|	AND &Branch = AdvKeys.Branch
+	|	AND &Currency = AdvKeys.Currency
+	|	AND &Partner = AdvKeys.Partner
+	|	AND &LegalName = AdvKeys.LegalName
 	|	AND AdvKeys.IsVendorAdvance
 	|GROUP BY
-	|	(&AdvanceKey).Company,
-	|	(&AdvanceKey).Branch,
-	|	(&AdvanceKey).Currency,
-	|	(&AdvanceKey).Partner,
-	|	(&AdvanceKey).LegalName";
+	|	&Company,
+	|	&Branch,
+	|	&Currency,
+	|	&Partner,
+	|	&LegalName";
 	
-	Query.SetParameter("AdvanceKey", AdvanceKey);
+	Query.SetParameter("Company"   , AdvanceKey.Company);
+	Query.SetParameter("Branch"    , AdvanceKey.Branch);
+	Query.SetParameter("Currency"  , AdvanceKey.Currency);
+	Query.SetParameter("Partner"   , AdvanceKey.Partner);
+	Query.SetParameter("LegalName" , AdvanceKey.LegalName);
 	
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
@@ -685,7 +689,12 @@ Function GetAdvanceKeyByAdvanceKeyWithOrder(AdvanceKey)
 		KeyRef = QuerySelection.AdvanceKey;
 	Else // Create
 		KeyObject = Catalogs.AdvancesKeys.CreateItem();
-		FillPropertyValues(KeyObject, QuerySelection);
+		KeyObject.Company    = AdvanceKey.Company;
+		KeyObject.Branch     = AdvanceKey.Branch;
+		KeyObject.Currency   = AdvanceKey.Currency;
+		KeyObject.Partner    = AdvanceKey.Partner;
+		KeyObject.LegalName  = AdvanceKey.LegalName;
+		KeyObject.IsVendorAdvance = True;
 		KeyObject.Description = Left(String(New UUID()), 8);
 		KeyObject.Write();
 		KeyRef = KeyObject.Ref;
@@ -698,33 +707,42 @@ Function GetAdvanceKeyByTransactionKey(TransactionKey)
 	Query.Text = 
 	"SELECT
 	|	MAX(AdvKeys.Ref) AS AdvanceKey,
-	|	(&TransactionKey).Company,
-	|	(&TransactionKey).Branch,
-	|	(&TransactionKey).Currency,
-	|	(&TransactionKey).Partner,
-	|	(&TransactionKey).LegalName,
-	|	(&TransactionKey).Order,
+	|	&Company AS Company,
+	|	&Branch AS Branch,
+	|	&Currency AS Currency,
+	|	&Partner AS Partner,
+	|	&LegalName AS LegalName,
+	|	&Order AS Order,
 	|	TRUE AS IsVendorAdvance
 	|FROM
 	|	Catalog.AdvancesKeys AS AdvKeys
 	|WHERE
 	|	NOT AdvKeys.DeletionMark
-	|	AND (&TransactionKey).Company = AdvKeys.Company
-	|	AND (&TransactionKey).Branch = AdvKeys.Branch
-	|	AND (&TransactionKey).Currency = AdvKeys.Currency
-	|	AND (&TransactionKey).Partner = AdvKeys.Partner
-	|	AND (&TransactionKey).LegalName = AdvKeys.LegalName
-	|	AND (&TransactionKey).Order = AdvKeys.Order
+	|	AND &Company = AdvKeys.Company
+	|	AND &Branch = AdvKeys.Branch
+	|	AND &Currency = AdvKeys.Currency
+	|	AND &Partner = AdvKeys.Partner
+	|	AND &LegalName = AdvKeys.LegalName
+	|	AND &Order = CASE
+	|		WHEN AdvKeys.Order.Ref IS NULL
+	|			THEN UNDEFINED
+	|		ELSE AdvKeys.Order
+	|	END
 	|	AND AdvKeys.IsVendorAdvance
 	|GROUP BY
-	|	(&TransactionKey).Company,
-	|	(&TransactionKey).Branch,
-	|	(&TransactionKey).Currency,
-	|	(&TransactionKey).Partner,
-	|	(&TransactionKey).LegalName,
-	|	(&TransactionKey).Order";
+	|	&Company,
+	|	&Branch,
+	|	&Currency,
+	|	&Partner,
+	|	&LegalName,
+	|	&Order";
 	
-	Query.SetParameter("TransactionKey", TransactionKey);
+	Query.SetParameter("Company"   , TransactionKey.Company);
+	Query.SetParameter("Branch"    , TransactionKey.Branch);
+	Query.SetParameter("Currency"  , TransactionKey.Currency);
+	Query.SetParameter("Partner"   , TransactionKey.Partner);
+	Query.SetParameter("LegalName" , TransactionKey.LegalName);
+	Query.SetParameter("Order", ?(ValueIsFilled(TransactionKey.Order), TransactionKey.Order, Undefined));
 	
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
@@ -733,7 +751,13 @@ Function GetAdvanceKeyByTransactionKey(TransactionKey)
 		KeyRef = QuerySelection.AdvanceKey;
 	Else // Create
 		KeyObject = Catalogs.AdvancesKeys.CreateItem();
-		FillPropertyValues(KeyObject, QuerySelection);
+		KeyObject.Company   = TransactionKey.Company;
+		KeyObject.Branch    = TransactionKey.Branch;
+		KeyObject.Currency  = TransactionKey.Currency;
+		KeyObject.Partner   = TransactionKey.Partner;
+		KeyObject.LegalName = TransactionKey.LegalName;
+		KeyObject.Order     = TransactionKey.Order;
+		KeyObject.IsVendorAdvance = True;
 		KeyObject.Description = Left(String(New UUID()), 8);
 		KeyObject.Write();
 		KeyRef = KeyObject.Ref;
@@ -911,7 +935,7 @@ Function FindRowKeyByAdvanceKey(AdvanceKey, Document)
 	|	AND T2014S_AdvancesInfo.Partner = &Partner
 	|	AND T2014S_AdvancesInfo.Recorder = &Document
 	|	AND CASE
-	|		WHEN T2014S_AdvancesInfo.Order.ref IS NULL
+	|		WHEN T2014S_AdvancesInfo.Order.Ref IS NULL
 	|			THEN VALUE(Document.PurchaseOrder.EmptyRef)
 	|		ELSE T2014S_AdvancesInfo.Order
 	|	END = &Order";
@@ -951,7 +975,7 @@ Function FindRowKeyByTransactionKey(TransactionKey, Document)
 	|	AND T2015S_TransactionsInfo.TransactionBasis = &TransactionBasis
 	|	AND T2015S_TransactionsInfo.Recorder = &Document
 	|	AND CASE
-	|		WHEN T2015S_TransactionsInfo.Order.ref IS NULL
+	|		WHEN T2015S_TransactionsInfo.Order.Ref IS NULL
 	|			THEN VALUE(Document.PurchaseOrder.EmptyRef)
 	|		ELSE T2015S_TransactionsInfo.Order
 	|	END = &Order";
@@ -983,7 +1007,11 @@ Procedure CreateAdvancesKeys(Parameters, Records_AdvancesKey, Records_OffsetOfAd
 	|	AdvInfo.Currency,
 	|	AdvInfo.Partner,
 	|	AdvInfo.LegalName,
-	|	AdvInfo.Order
+	|	CASE
+	|		WHEN AdvInfo.Order.Ref IS NULL
+	|			THEN UNDEFINED
+	|		ELSE AdvInfo.Order
+	|	END AS Order
 	|INTO tmp_AdvInfo
 	|FROM
 	|	InformationRegister.T2014S_AdvancesInfo AS AdvInfo
@@ -998,7 +1026,11 @@ Procedure CreateAdvancesKeys(Parameters, Records_AdvancesKey, Records_OffsetOfAd
 	|	AdvInfo.Currency,
 	|	AdvInfo.Partner,
 	|	AdvInfo.LegalName,
-	|	AdvInfo.Order
+	|	CASE
+	|		WHEN AdvInfo.Order.Ref IS NULL
+	|			THEN UNDEFINED
+	|		ELSE AdvInfo.Order
+	|	END
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
@@ -1020,7 +1052,15 @@ Procedure CreateAdvancesKeys(Parameters, Records_AdvancesKey, Records_OffsetOfAd
 	|		AND tmp_AdvInfo.Currency = AdvKeys.Currency
 	|		AND tmp_AdvInfo.Partner = AdvKeys.Partner
 	|		AND tmp_AdvInfo.LegalName = AdvKeys.LegalName
-	|		AND tmp_AdvInfo.Order = AdvKeys.Order
+	|		AND CASE
+	|			WHEN tmp_AdvInfo.Order.Ref IS NULL
+	|				THEN UNDEFINED
+	|			ELSE tmp_AdvInfo.Order
+	|		END = CASE
+	|			WHEN AdvKeys.Order.Ref IS NULL
+	|				THEN UNDEFINED
+	|			ELSE AdvKeys.Order
+	|		END
 	|		AND AdvKeys.IsVendorAdvance
 	|GROUP BY
 	|	tmp_AdvInfo.Branch,
@@ -1059,7 +1099,11 @@ Procedure CreateAdvancesKeys(Parameters, Records_AdvancesKey, Records_OffsetOfAd
 	|	AdvInfo.Currency,
 	|	AdvInfo.Partner,
 	|	AdvInfo.LegalName,
-	|	AdvInfo.Order,
+	|	CASE
+	|		WHEN AdvInfo.Order.Ref IS NULL
+	|			THEN UNDEFINED
+	|		ELSE AdvInfo.Order
+	|	END AS Order,
 	|	AdvInfo.IsPurchaseOrderClose
 	|INTO tmp_AdvInfo
 	|FROM
@@ -1078,7 +1122,11 @@ Procedure CreateAdvancesKeys(Parameters, Records_AdvancesKey, Records_OffsetOfAd
 	|	AdvInfo.Currency,
 	|	AdvInfo.Partner,
 	|	AdvInfo.LegalName,
-	|	AdvInfo.Order,
+	|	CASE
+	|		WHEN AdvInfo.Order.Ref IS NULL
+	|			THEN UNDEFINED
+	|		ELSE AdvInfo.Order
+	|	END,
 	|	AdvInfo.Recorder,
 	|	AdvInfo.IsPurchaseOrderClose
 	|;
@@ -1100,7 +1148,15 @@ Procedure CreateAdvancesKeys(Parameters, Records_AdvancesKey, Records_OffsetOfAd
 	|		AND tmp_AdvInfo.Currency = AdvKeys.Currency
 	|		AND tmp_AdvInfo.Partner = AdvKeys.Partner
 	|		AND tmp_AdvInfo.LegalName = AdvKeys.LegalName
-	|		AND tmp_AdvInfo.Order = AdvKeys.Order
+	|		AND CASE
+	|			WHEN tmp_AdvInfo.Order.Ref IS NULL
+	|				THEN UNDEFINED
+	|			ELSE tmp_AdvInfo.Order
+	|		END = CASE
+	|			WHEN AdvKeys.Order.Ref IS NULL
+	|				THEN UNDEFINED
+	|			ELSE AdvKeys.Order
+	|		END
 	|		AND AdvKeys.IsVendorAdvance
 	|GROUP BY
 	|	tmp_AdvInfo.Document,
@@ -1224,8 +1280,16 @@ Procedure CreateTransactionsKeys(Parameters, Records_TransactionsKey, Records_Of
 	|	TrnInfo.Partner,
 	|	TrnInfo.LegalName,
 	|	TrnInfo.Agreement,
-	|	TrnInfo.Order,
-	|	TrnInfo.TransactionBasis
+	|	CASE
+	|		WHEN TrnInfo.Order.Ref IS NULL
+	|			THEN UNDEFINED
+	|		ELSE TrnInfo.Order
+	|	END AS Order,
+	|	CASE
+	|		WHEN TrnInfo.TransactionBasis.Ref IS NULL
+	|			THEN UNDEFINED
+	|		ELSE TrnInfo.TransactionBasis
+	|	END AS TransactionBasis
 	|INTO tmp_TrnInfo
 	|FROM
 	|	InformationRegister.T2015S_TransactionsInfo AS TrnInfo
@@ -1241,8 +1305,16 @@ Procedure CreateTransactionsKeys(Parameters, Records_TransactionsKey, Records_Of
 	|	TrnInfo.Partner,
 	|	TrnInfo.LegalName,
 	|	TrnInfo.Agreement,
-	|	TrnInfo.Order,
-	|	TrnInfo.TransactionBasis
+	|	CASE
+	|		WHEN TrnInfo.TransactionBasis.Ref IS NULL
+	|			THEN UNDEFINED
+	|		ELSE TrnInfo.TransactionBasis
+	|	END,
+	|	CASE
+	|		WHEN TrnInfo.Order.Ref IS NULL
+	|			THEN UNDEFINED
+	|		ELSE TrnInfo.Order
+	|	END
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
@@ -1267,8 +1339,24 @@ Procedure CreateTransactionsKeys(Parameters, Records_TransactionsKey, Records_Of
 	|		AND tmp_TrnInfo.Partner = TrnKeys.Partner
 	|		AND tmp_TrnInfo.LegalName = TrnKeys.LegalName
 	|		AND tmp_TrnInfo.Agreement = TrnKeys.Agreement
-	|		AND tmp_TrnInfo.Order = TrnKeys.Order
-	|		AND tmp_TrnInfo.TransactionBasis = TrnKeys.TransactionBasis
+	|		AND CASE
+	|			WHEN tmp_TrnInfo.Order.Ref IS NULL
+	|				THEN UNDEFINED
+	|			ELSE tmp_TrnInfo.Order
+	|		END = CASE
+	|			WHEN TrnKeys.Order.Ref IS NULL
+	|				THEN UNDEFINED
+	|			ELSE TrnKeys.Order
+	|		END
+	|		AND CASE
+	|			WHEN tmp_TrnInfo.TransactionBasis.Ref IS NULL
+	|				THEN UNDEFINED
+	|			ELSE tmp_TrnInfo.TransactionBasis
+	|		END = CASE
+	|			WHEN TrnKeys.TransactionBasis.Ref IS NULL
+	|				THEN UNDEFINED
+	|			ELSE TrnKeys.TransactionBasis
+	|		END
 	|		AND TrnKeys.IsVendorTransaction
 	|GROUP BY
 	|	tmp_TrnInfo.Company,
@@ -1310,8 +1398,16 @@ Procedure CreateTransactionsKeys(Parameters, Records_TransactionsKey, Records_Of
 	|	TrnInfo.Partner,
 	|	TrnInfo.LegalName,
 	|	TrnInfo.Agreement,
-	|	TrnInfo.Order,
-	|	TrnInfo.TransactionBasis
+	|	CASE
+	|		WHEN TrnInfo.Order.Ref IS NULL
+	|			THEN UNDEFINED
+	|		ELSE TrnInfo.Order
+	|	END AS Order,
+	|	CASE
+	|		WHEN TrnInfo.TransactionBasis.Ref IS NULL
+	|			THEN UNDEFINED
+	|		ELSE TrnInfo.TransactionBasis
+	|	END AS TransactionBasis
 	|INTO tmp_TrnInfo
 	|FROM
 	|	InformationRegister.T2015S_TransactionsInfo AS TrnInfo
@@ -1332,8 +1428,16 @@ Procedure CreateTransactionsKeys(Parameters, Records_TransactionsKey, Records_Of
 	|	TrnInfo.Partner,
 	|	TrnInfo.LegalName,
 	|	TrnInfo.Agreement,
-	|	TrnInfo.Order,
-	|	TrnInfo.TransactionBasis
+	|	CASE
+	|		WHEN TrnInfo.Order.Ref IS NULL
+	|			THEN UNDEFINED
+	|		ELSE TrnInfo.Order
+	|	END,
+	|	CASE
+	|		WHEN TrnInfo.TransactionBasis.Ref IS NULL
+	|			THEN UNDEFINED
+	|		ELSE TrnInfo.TransactionBasis
+	|	END
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
@@ -1355,8 +1459,24 @@ Procedure CreateTransactionsKeys(Parameters, Records_TransactionsKey, Records_Of
 	|		AND tmp_TrnInfo.Partner = TrnKeys.Partner
 	|		AND tmp_TrnInfo.LegalName = TrnKeys.LegalName
 	|		AND tmp_TrnInfo.Agreement = TrnKeys.Agreement
-	|		AND tmp_TrnInfo.Order = TrnKeys.Order
-	|		AND tmp_TrnInfo.TransactionBasis = TrnKeys.TransactionBasis
+	|		AND CASE
+	|			WHEN tmp_TrnInfo.Order.Ref IS NULL
+	|				THEN UNDEFINED
+	|			ELSE tmp_TrnInfo.Order
+	|		END = CASE
+	|			WHEN TrnKeys.Order.Ref IS NULL
+	|				THEN UNDEFINED
+	|			ELSE TrnKeys.Order
+	|		END
+	|		AND CASE
+	|			WHEN tmp_TrnInfo.TransactionBasis.Ref IS NULL
+	|				THEN UNDEFINED
+	|			ELSE tmp_TrnInfo.TransactionBasis
+	|		END = CASE
+	|			WHEN TrnKeys.TransactionBasis.Ref IS NULL
+	|				THEN UNDEFINED
+	|			ELSE TrnKeys.TransactionBasis
+	|		END
 	|		AND TrnKeys.IsVendorTransaction
 	|GROUP BY
 	|	tmp_TrnInfo.Date,

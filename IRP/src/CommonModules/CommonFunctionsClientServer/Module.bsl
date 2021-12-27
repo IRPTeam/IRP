@@ -142,6 +142,34 @@ Procedure CalculateVolume(Object) Export
 	Object.Volume = Object.Length * Object.Width * Object.Height;
 EndProcedure
 
+Function GetNumberPartFromString(String, ReturnIfOnlyThisSymbolsPresent = "") Export
+
+	RejectSymbols = New Array;
+	For Index = 1 To StrLen(ReturnIfOnlyThisSymbolsPresent) Do
+		RejectSymbols.Add(Mid(ReturnIfOnlyThisSymbolsPresent, Index, 1));
+	EndDo;
+	
+	NumberPart = New Array;
+	For Index = 1 To StrLen(String) Do
+		Symbol = Mid(String, Index, 1);
+		
+		CharCode = CharCode(String, Index);
+		If CharCode >= 48 And CharCode <= 57 Then
+			NumberPart.Add(Symbol);
+		ElsIf RejectSymbols.Find(Symbol) = Undefined Then
+			NumberPart.Clear();
+			Break;
+		EndIf;
+	EndDo;
+
+	If Not NumberPart.Count() Then
+		Return Undefined;
+	EndIf;
+
+	Return Number(StrConcat(NumberPart));
+
+EndFunction
+
 #Region FormItemsModifiedByUser
 
 Procedure SetFormItemModifiedByUser(Form, ItemName) Export

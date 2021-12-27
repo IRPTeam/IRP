@@ -5,13 +5,22 @@ Function RestoreFillingData(Val FillingData) Export
 	Return CommonFunctionsServer.DeserializeXMLUseXDTO(FillingData);
 EndFunction
 
+// Query search input by string.
+//
+// Parameters:
+//  Settings - Structure:
+//  	* MetadataObject - MetadataObjectCatalog -
+//  	* Filter - String -
+//
+// Returns:
+//  String - Query search input by string
 Function QuerySearchInputByString(Settings) Export
 
 	QueryText =
 	"SELECT ALLOWED TOP 10
 	|	Table.Ref AS Ref,
 	|	Table.Presentation AS Presentation,
-	|	0 AS Sort
+	|	1 AS Sort
 	|INTO TempVTViaID
 	|FROM
 	|	%1 AS Table
@@ -22,20 +31,31 @@ Function QuerySearchInputByString(Settings) Export
 	|SELECT ALLOWED TOP 10
 	|	Table.Ref AS Ref,
 	|	Table.Presentation AS Presentation,
-	|	1 AS Sort
+	|	0 AS Sort
+	|INTO TempVTViaNumber
+	|FROM
+	|	%1 AS Table
+	|WHERE
+	|	%5
+	|;
+	|
+	|SELECT ALLOWED TOP 10
+	|	Table.Ref AS Ref,
+	|	Table.Presentation AS Presentation,
+	|	2 AS Sort
 	|INTO TempVT
 	|FROM
 	|	%1 AS Table
 	|WHERE
 	|	Table.Description%3 LIKE &SearchString + ""%%""
-	| %2
+	|%2
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT ALLOWED TOP 10
 	|	Table.Ref AS Ref,
 	|	Table.Presentation AS Presentation,
-	|	2 AS Sort
+	|	3 AS Sort
 	|INTO TempVTSecond
 	|FROM
 	|	%1 AS Table
@@ -46,7 +66,7 @@ Function QuerySearchInputByString(Settings) Export
 	|					T.Ref
 	|				FROM
 	|					TempVT AS T)
-	| %2
+	|%2
 	|
 	|;
 	|
@@ -56,6 +76,15 @@ Function QuerySearchInputByString(Settings) Export
 	|	TempVT.Sort AS Sort
 	|FROM
 	|	TempVTViaID AS TempVT
+	|
+	|UNION
+	|
+	|SELECT TOP 10 DISTINCT
+	|	TempVTViaNumber.Ref AS Ref,
+	|	TempVTViaNumber.Presentation AS Presentation,
+	|	TempVTViaNumber.Sort AS Sort
+	|FROM
+	|	TempVTViaNumber AS TempVTViaNumber
 	|
 	|UNION
 	|
@@ -79,17 +108,23 @@ Function QuerySearchInputByString(Settings) Export
 	|	Presentation";
 
 	IDSearch = "False";
+	NumberSearch = "False";
 	If Settings.MetadataObject = Metadata.Catalogs.Items Then
 		IDSearch = "Table.Ref.ItemID LIKE &SearchString + ""%%""";
 	EndIf;
+	
+	If Settings.MetadataObject.CodeLength And Settings.MetadataObject.CodeType = Metadata.ObjectProperties.CatalogCodeType.Number Then
+		NumberSearch = "Table.Ref.Code = &SearchStringNumber";
+	EndIf;
 
 	If Not Settings.MetadataObject.DescriptionLength Then
-		QueryText = StrTemplate(QueryText, Settings.MetadataObject.FullName(), Settings.Filter, "_" + "en", IDSearch);
+		QueryText = StrTemplate(QueryText, Settings.MetadataObject.FullName(), Settings.Filter, "_" + "en", IDSearch, NumberSearch);
 		QueryField = "CASE WHEN %1.Description%2 = """" THEN %1.Description_en ELSE %1.Description%2 END ";
 		QueryField = StrTemplate(QueryField, "Table", "_" + LocalizationReuse.GetLocalizationCode());
 		QueryText = StrReplace(QueryText, StrTemplate("%1.Description_en", "Table"), QueryField);
 	Else
-		QueryText = StrTemplate(QueryText, Settings.MetadataObject.FullName(), Settings.Filter, "", IDSearch);
+		QueryText = StrTemplate(QueryText, Settings.MetadataObject.FullName(), Settings.Filter, "", IDSearch, NumberSearch);
 	EndIf;
+
 	Return QueryText;
 EndFunction

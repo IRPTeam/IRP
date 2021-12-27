@@ -60,20 +60,11 @@ Scenario: _1002000 preparation (vendors aging)
 	* Load vendors advance closing document
 		When Create document VendorsAdvancesClosing objects (without branch)
 		Given I open hyperlink 'e1cib/list/Document.VendorsAdvancesClosing'
-		And I go to line in "List" table
-			| 'Number' |
-			| '4'  |
-		And I select current line in "List" table
-		And I input current date in the field named "BeginOfPeriod"
-		And I input current date in the field named "EndOfPeriod"
-		And I click the button named "FormPostAndClose"
-		And I go to line in "List" table
-			| 'Number' |
-			| '1'  |
-		And I select current line in "List" table
-		And I input "20.05.2021" text in "Begin of period" field
-		And I input "20.05.2021" text in "End of period" field
-		And I click the button named "FormPostAndClose"
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuUndoPosting"	
+		And in the table "List" I click the button named "ListContextMenuPost"		
+		And Delay 5
+		Then user message window does not contain messages
 		And I close all client application windows
 
 Scenario: _1002002 filling in payment terms in the Partner term
@@ -482,14 +473,11 @@ Scenario: _1020030 create Debit note and check Aging register movements
 		And I close all client application windows
 	* Post Vendors advance closing document
 		Given I open hyperlink 'e1cib/list/Document.VendorsAdvancesClosing'
-		And I go to line in "List" table
-			| 'Number' |
-			| '1'  |
-		And in the table "List" I click the button named "ListContextMenuPost"
-		And I go to line in "List" table
-			| 'Number' |
-			| '4'  |
-		And in the table "List" I click the button named "ListContextMenuPost"	
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuUndoPosting"	
+		And in the table "List" I click the button named "ListContextMenuPost"		
+		And Delay 5
+		Then user message window does not contain messages
 	* Check movements
 		Given I open hyperlink 'e1cib/list/AccumulationRegister.R5012B_VendorsAging'
 		And "List" table contains lines

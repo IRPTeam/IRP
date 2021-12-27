@@ -473,14 +473,11 @@ Scenario: _1020030 create Debit note and check Aging register movements
 		And I close all client application windows
 	* Post Vendors advance closing document
 		Given I open hyperlink 'e1cib/list/Document.VendorsAdvancesClosing'
-		And I go to line in "List" table
-			| 'Number' |
-			| '1'  |
-		And in the table "List" I click the button named "ListContextMenuPost"
-		And I go to line in "List" table
-			| 'Number' |
-			| '4'  |
-		And in the table "List" I click the button named "ListContextMenuPost"	
+		Then I select all lines of "List" table
+		And in the table "List" I click the button named "ListContextMenuUndoPosting"	
+		And in the table "List" I click the button named "ListContextMenuPost"		
+		And Delay 5
+		Then user message window does not contain messages
 	* Check movements
 		Given I open hyperlink 'e1cib/list/AccumulationRegister.R5012B_VendorsAging'
 		And "List" table contains lines

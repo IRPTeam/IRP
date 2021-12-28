@@ -651,14 +651,8 @@ EndProcedure
 Function GetAdvanceKeyByAdvanceKeyWithOrder(AdvanceKey)
 	Query = New Query();
 	Query.Text = 
-	"SELECT
-	|	MAX(AdvKeys.Ref) AS AdvanceKey,
-	|	&Company AS Company,
-	|	&Branch AS Branch,
-	|	&Currency AS Currency,
-	|	&Partner AS Partner,
-	|	&LegalName AS LegalName,
-	|	TRUE AS IsCustomerAdvance
+	"SELECT TOP 1
+	|	AdvKeys.Ref AS AdvanceKey
 	|FROM
 	|	Catalog.AdvancesKeys AS AdvKeys
 	|WHERE
@@ -668,13 +662,7 @@ Function GetAdvanceKeyByAdvanceKeyWithOrder(AdvanceKey)
 	|	AND &Currency = AdvKeys.Currency
 	|	AND &Partner = AdvKeys.Partner
 	|	AND &LegalName = AdvKeys.LegalName
-	|	AND AdvKeys.IsCustomerAdvance
-	|GROUP BY
-	|	&Company,
-	|	&Branch,
-	|	&Currency,
-	|	&Partner,
-	|	&LegalName";
+	|	AND AdvKeys.IsCustomerAdvance";
 	
 	Query.SetParameter("Company"   , AdvanceKey.Company);
 	Query.SetParameter("Branch"    , AdvanceKey.Branch);
@@ -705,15 +693,8 @@ EndFunction
 Function GetAdvanceKeyByTransactionKey(TransactionKey)
 	Query = New Query();
 	Query.Text = 
-	"SELECT
-	|	MAX(AdvKeys.Ref) AS AdvanceKey,
-	|	&Company AS Company,
-	|	&Branch AS Branch,
-	|	&Currency AS Currency,
-	|	&Partner AS Partner,
-	|	&LegalName AS LegalName,
-	|	&Order AS Order,
-	|	TRUE AS IsCustomerAdvance
+	"SELECT TOP 1
+	|	AdvKeys.Ref AS AdvanceKey
 	|FROM
 	|	Catalog.AdvancesKeys AS AdvKeys
 	|WHERE
@@ -728,14 +709,7 @@ Function GetAdvanceKeyByTransactionKey(TransactionKey)
 	|			THEN UNDEFINED
 	|		ELSE AdvKeys.Order
 	|	END
-	|	AND AdvKeys.IsCustomerAdvance
-	|GROUP BY
-	|	&Company,
-	|	&Branch,
-	|	&Currency,
-	|	&Partner,
-	|	&LegalName,
-	|	&Order";
+	|	AND AdvKeys.IsCustomerAdvance";
 	
 	Query.SetParameter("Company"   , TransactionKey.Company);
 	Query.SetParameter("Branch"    , TransactionKey.Branch);

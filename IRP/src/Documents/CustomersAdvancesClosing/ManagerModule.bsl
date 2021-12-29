@@ -521,7 +521,7 @@ Procedure DistributeAdvanceToTransaction(Parameters, PointInTime, Document, Adva
 				Continue;
 			EndIf;
 		EndIf;
-		CanWriteoff = Min(QuerySelection.TransactionAmount, AdvanceAmount);
+		CanWriteoff = Min(QuerySelection.TransactionAmount, NeedWriteoff);
 		NeedWriteoff = NeedWriteoff - CanWriteoff;
 		
 		// Transactions

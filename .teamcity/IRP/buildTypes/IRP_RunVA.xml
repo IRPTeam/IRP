@@ -300,7 +300,7 @@ $VanessaRun = {
     'attachadditionaldatawhencomparingvaluewithreferenceallure': true,
     'savemxlashtmlinallure': true,
     'useaddin': true,
-    'usethegherkinparserfromthevanessaextaddin': true
+    'usethegherkinparserfromthevanessaextaddin': false
 }"
     #Write-Output "$text"
     $a = $text | ConvertFrom-Json

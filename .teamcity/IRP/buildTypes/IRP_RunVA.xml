@@ -299,7 +299,7 @@ $VanessaRun = {
     'createlogs': true,
     'attachadditionaldatawhencomparingvaluewithreferenceallure': true,
     'savemxlashtmlinallure': true,
-    'useaddin': true,
+    'useaddin': false,
     'usethegherkinparserfromthevanessaextaddin': false
 }"
     #Write-Output "$text"

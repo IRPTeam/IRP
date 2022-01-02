@@ -129,6 +129,7 @@
       </value>
     </choiceParameters>
     <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
   </dimensions>
   <dimensions uuid="955df867-20b9-4eb7-a510-be4e2533a072">
     <name>RetailSalesReceipt</name>

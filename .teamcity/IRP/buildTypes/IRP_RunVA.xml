@@ -298,7 +298,9 @@ $VanessaRun = {
     'setvariablevaluesinstepsallurereport': true,
     'createlogs': true,
     'attachadditionaldatawhencomparingvaluewithreferenceallure': true,
-    'savemxlashtmlinallure': true
+    'savemxlashtmlinallure': true,
+    'useaddin': false,
+    'usethegherkinparserfromthevanessaextaddin': false
 }"
     #Write-Output "$text"
     $a = $text | ConvertFrom-Json
@@ -332,7 +334,7 @@ $VanessaRun = {
     $ProcessInfo = New-Object System.Diagnostics.ProcessStartInfo 
     $ProcessInfo.FileName = "$PathTo1CPlatform"
     $ProcessInfo.UseShellExecute = $false 
-    $ProcessInfo.Arguments = " $AreaID /N $LoginTo1C /P $PassTo1C ""$TempDb"" /Execute ""$OScriptLib/lib/vanessa-automation/vanessa-automation.epf"" /TestManager /C""StartFeaturePlayer; VBParams=$VBParams""" 
+    $ProcessInfo.Arguments = " $AreaID /N $LoginTo1C /P $PassTo1C ""$TempDb"" /Execute ""$OScriptLib/lib/vanessa-automation/vanessa-automation.epf"" /TestManager /C""StartFeaturePlayer;QuietInstallVanessaExt;VBParams=$VBParams""" 
     $Process = New-Object System.Diagnostics.Process 
     $Process.StartInfo = $ProcessInfo 
     $Process.Start() | Out-Null  

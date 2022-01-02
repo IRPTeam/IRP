@@ -111,6 +111,25 @@
     <fullTextSearch>Use</fullTextSearch>
     <useInTotals>true</useInTotals>
   </dimensions>
+  <dimensions uuid="388bd086-38c2-4122-98b5-4386e7eddc4d">
+    <name>SalesPerson</name>
+    <synonym>
+      <key>en</key>
+      <value>Sales person</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Partners</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <choiceParameters>
+      <name>Filter.Employee</name>
+      <value xsi:type="core:BooleanValue">
+        <value>true</value>
+      </value>
+    </choiceParameters>
+    <fullTextSearch>Use</fullTextSearch>
+  </dimensions>
   <dimensions uuid="955df867-20b9-4eb7-a510-be4e2533a072">
     <name>RetailSalesReceipt</name>
     <synonym>

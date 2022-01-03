@@ -1629,6 +1629,22 @@ Scenario: _01540112 check item and item key input by search in line in a documen
 		| 'Jacket J22001'    |
 		And I close all client application windows
 
+Scenario: _01540113 check item input by search in line by code in a document Sales order
+	And I close all client application windows
+	* Open a creation form Sales order
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I click the button named "FormCreate"
+	* Check entered values
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I input "1 111 111., " text in "Item" field of "ItemList" table		
+		And drop-down list "Item" is equal to:
+		| [1 111 111] Jacket J22001 |
+		And I select "[1 111 111] Jacket J22001" exact value from "Item" drop-down list in "ItemList" table
+		And "ItemList" table contains lines
+		| 'Item'     |
+		| 'Jacket J22001'    |
+		And I close all client application windows
+
 
 Scenario: _999999 close TestClient session
 	And I close TestClient session

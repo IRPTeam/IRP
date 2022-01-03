@@ -646,7 +646,7 @@ Compress-Archive -Path "allure-report/*" -DestinationPath "allure-report.zip"]]>
           <param name="jetbrains_powershell_noprofile" value="true" />
           <param name="jetbrains_powershell_script_code" value="Compress-Archive -Path Cover.xml -DestinationPath Cover.zip" />
           <param name="jetbrains_powershell_script_mode" value="CODE" />
-          <param name="teamcity.step.mode" value="execute_always" />
+          <param name="teamcity.step.mode" value="execute_if_failed" />
         </parameters>
       </runner>
     </build-runners>

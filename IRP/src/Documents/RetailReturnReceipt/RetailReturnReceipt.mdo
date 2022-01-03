@@ -622,6 +622,26 @@
       <maxValue xsi:type="core:UndefinedValue"/>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
+    <attributes uuid="eb3fdcb2-82bb-4e46-aee9-31e98585ac55">
+      <name>SalesPerson</name>
+      <synonym>
+        <key>en</key>
+        <value>Sales person</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.Partners</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <choiceParameters>
+        <name>Filter.Employee</name>
+        <value xsi:type="core:BooleanValue">
+          <value>true</value>
+        </value>
+      </choiceParameters>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
   </tabularSections>
   <tabularSections uuid="9060cdbb-b372-4def-9d82-0080fe8c5522">
     <producedTypes>

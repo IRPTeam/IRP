@@ -46,6 +46,7 @@ Procedure ItemListOnChange(Item, AddInfo = Undefined) Export
 	DocRetailSalesReceiptClient.ItemListOnChange(Object, ThisObject, Item);
 	EnabledPaymentButton();
 	ItemListOnActivateRow(Item);
+	FillSalesPersonInItemList();
 EndProcedure
 
 &AtClient
@@ -405,6 +406,70 @@ EndFunction
 
 #EndRegion
 
+#Region SalesPerson
+
+&AtClient
+Procedure SetSalesPerson(Command)
+	SetDefaultSalesPerson();
+EndProcedure
+
+&AtClient
+Async Procedure SetDefaultSalesPerson()
+	SalesPersons = GetSalesPersonsAtServer();
+	If SalesPersons.Count() = 1 Then
+		SalesPersonByDefault = SalesPersons[0];
+	ElsIf SalesPersons.Count() > 1 Then
+		SelectDefPerson = New ValueList();
+		SelectDefPerson.LoadValues(SalesPersons);
+		SelectDefPersonValue = Await SelectDefPerson.ChooseItemAsync();
+		SalesPersonByDefault = SelectDefPersonValue.Value;
+	Else
+		SalesPersonByDefault = Undefined;
+	EndIf;
+	
+	If Not SalesPersonByDefault.IsEmpty() Then
+		FillSalesPersonInItemList();
+	EndIf;
+ 
+EndProcedure
+
+&AtClient
+Async Procedure FillSalesPersonInItemList()
+	If SalesPersonByDefault.IsEmpty() Then
+		SetDefaultSalesPerson();
+	EndIf;
+	
+	For Each Row In Object.ItemList Do
+		If Row.SalesPerson.IsEmpty() Then
+			Row.SalesPerson = SalesPersonByDefault;
+		EndIf;
+	EndDo;
+EndProcedure
+
+
+&AtServer
+Function GetSalesPersonsAtServer()
+	Query = New Query;
+	Query.Text =
+		"SELECT ALLOWED
+		|	RetailWorkers.Worker
+		|FROM
+		|	InformationRegister.RetailWorkers AS RetailWorkers
+		|WHERE
+		|	RetailWorkers.Store = &Store
+		|GROUP BY
+		|	RetailWorkers.Worker
+		|AUTOORDER";
+	
+	Query.SetParameter("Store", Store);
+	
+	QueryResult = Query.Execute().Unload().UnloadColumn("Worker");
+	
+	Return QueryResult;
+EndFunction
+
+#EndRegion
+
 #Region RegionArea
 
 &AtClient
@@ -437,6 +502,7 @@ Procedure NewTransactionAtServer()
 	ValueToFormAttribute(ObjectValue, "Object");
 	Cancel = False;
 	DocRetailSalesReceiptServer.OnCreateAtServer(Object, ThisObject, Cancel, True);
+	SalesPersonByDefault = Undefined;
 EndProcedure
 
 &AtServer

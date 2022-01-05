@@ -463,9 +463,6 @@
     <mdObject>AccumulationRegister.R4034B_GoodsShipmentSchedule</mdObject>
   </content>
   <content>
-    <mdObject>Document.InvoiceMatch</mdObject>
-  </content>
-  <content>
     <mdObject>Document.PriceList</mdObject>
   </content>
   <content>

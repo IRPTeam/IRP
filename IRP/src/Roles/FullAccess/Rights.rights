@@ -947,13 +947,6 @@
 		</right>
 	</object>
 	<object>
-		<name>Document.InvoiceMatch</name>
-		<right>
-			<name>InteractiveDelete</name>
-			<value>false</value>
-		</right>
-	</object>
-	<object>
 		<name>ExchangePlan.ED_ExchangePlan</name>
 		<right>
 			<name>InteractiveDelete</name>

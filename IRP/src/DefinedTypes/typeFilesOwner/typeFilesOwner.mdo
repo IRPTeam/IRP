@@ -46,7 +46,6 @@
     <types>DocumentRef.InternalSupplyRequest</types>
     <types>DocumentRef.InventoryTransfer</types>
     <types>DocumentRef.InventoryTransferOrder</types>
-    <types>DocumentRef.InvoiceMatch</types>
     <types>DocumentRef.ItemStockAdjustment</types>
     <types>DocumentRef.Labeling</types>
     <types>DocumentRef.ManualRegisterEntry</types>

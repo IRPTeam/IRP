@@ -3,7 +3,7 @@
   <name>DocReconciliationStatementServer</name>
   <synonym>
     <key>en</key>
-    <value>Doc Invoice Match server</value>
+    <value>Doc reconciliation statement server</value>
   </synonym>
   <server>true</server>
   <serverCall>true</serverCall>

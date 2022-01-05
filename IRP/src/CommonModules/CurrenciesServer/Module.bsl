@@ -167,11 +167,6 @@ Function IsUseCurrencyJoin(Parameters, ItemOfPostingInfo)
 		FilterByDocument = True;
 	EndIf;
 
-	If TypeOf(Parameters.Object) = Type("DocumentObject.InvoiceMatch") Or TypeOf(Parameters.Object) = Type(
-		"DocumentRef.InvoiceMatch") Then
-		FilterByDocument = True;
-	EndIf;
-
 	If FilterByDocument And TypeOfRecordSetsArray.Find(TypeOf(ItemOfPostingInfo.Key)) <> Undefined Then
 		UseCurrencyJoin = True;
 	EndIf;

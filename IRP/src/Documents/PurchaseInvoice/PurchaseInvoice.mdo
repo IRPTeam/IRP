@@ -288,15 +288,6 @@
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>
   </forms>
-  <forms uuid="6da9235d-bbab-478c-9e81-fda0dc882d9a">
-    <name>ChoiceFormWithDept</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form with dept</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
   <tabularSections uuid="3a0cc528-c4b6-4d49-b4a6-4e8df2494f56">
     <producedTypes>
       <objectType typeId="a40bf94c-8879-4c5e-a280-8965ef05d33d" valueTypeId="92686d9b-8713-4082-b3ca-28a799650861"/>

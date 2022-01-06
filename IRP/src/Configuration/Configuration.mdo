@@ -740,6 +740,7 @@
   <informationRegisters>InformationRegister.PartnerTBAccounts</informationRegisters>
   <informationRegisters>InformationRegister.CashAccountTBAccounts</informationRegisters>
   <informationRegisters>InformationRegister.CompanyLadgerTypes</informationRegisters>
+  <informationRegisters>InformationRegister.RetailWorkers</informationRegisters>
   <accumulationRegisters>AccumulationRegister.CashInTransit</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1001T_Purchases</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1002T_PurchaseReturns</accumulationRegisters>

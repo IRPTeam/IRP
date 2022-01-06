@@ -3,7 +3,7 @@
 #Region Public
 
 // Find data for input string choice data get processing.
-// 
+//
 // Parameters:
 //  Source - CatalogManagerCatalogName, ChartOfCharacteristicTypesManagerChartOfCharacteristicTypesName - Source
 //  ChoiceData - ValueList - Choice data
@@ -15,15 +15,20 @@
 //  	** Value - String - Value
 //  StandardProcessing - Boolean - Standard processing
 Procedure FindDataForInputStringChoiceDataGetProcessing(Source, ChoiceData, Parameters, StandardProcessing) Export
-	
+
 	If Not StandardProcessing Or Not ValueIsFilled(Parameters.SearchString) Then
 		Return;
 	EndIf;
+	
+	// Cut last symblos if it came from Excel
+	If StrEndsWith(Parameters.SearchString, "¶") Then 
+		Parameters.SearchString = Left(Parameters.SearchString, StrLen(Parameters.SearchString) - 1);
+	EndIf;
 
 	StandardProcessing = False;
-	
+
 	MetadataObject = Source.EmptyRef().Metadata();
-	Settings = New Structure(); 
+	Settings = New Structure();
 	Settings.Insert("MetadataObject", MetadataObject);
 	Settings.Insert("Filter", "");
 	QueryBuilderText = CommonFormActionsServer.QuerySearchInputByString(Settings);
@@ -67,18 +72,24 @@ Procedure FindDataForInputStringChoiceDataGetProcessing(Source, ChoiceData, Para
 			NewFilter.Value = Filter.Value;
 		EndIf;
 	EndDo;
-	Query = QueryBuilder.GetQuery();
+	AccessSymbols = ".,- ¶" + Chars.LF + Chars.NBSp + Chars.CR;
+	SearchStringNumber = CommonFunctionsClientServer.GetNumberPartFromString(Parameters.SearchString, AccessSymbols);
 
+	Query = QueryBuilder.GetQuery();
+	Query.SetParameter("SearchStringNumber", SearchStringNumber);
 	Query.SetParameter("SearchString", Parameters.SearchString);
 	QueryTable = GetItemsBySearchString(Query);
-	
+
 	ChoiceData = New ValueList();
-	
+
 	For Each Row In QueryTable Do
 		If Not ChoiceData.FindByValue(Row.Ref) = Undefined Then
 			Continue;
 		EndIf;
+		
 		If Row.Sort = 0 Then
+			ChoiceData.Add(Row.Ref, "[" + Row.Ref.Code + "] " + Row.Presentation, False, PictureLib.AddToFavorites);
+		ElsIf Row.Sort = 1 Then
 			If IsBlankString(Row.Ref.ItemID) Then
 				ChoiceData.Add(Row.Ref, Row.Presentation, False, PictureLib.Price);
 			Else
@@ -91,10 +102,10 @@ Procedure FindDataForInputStringChoiceDataGetProcessing(Source, ChoiceData, Para
 EndProcedure
 
 // Get items by search string.
-// 
+//
 // Parameters:
 //  Query - Query - Query
-// 
+//
 // Returns:
 //  ValueTable - Get items by search string:
 //		* Ref - CatalogRef.Items
@@ -104,11 +115,11 @@ Function GetItemsBySearchString(Query)
 EndFunction
 
 // Replace description localization prefix.
-// 
+//
 // Parameters:
 //  QueryText - String - Query text
 //  TableName - String - Table name
-// 
+//
 // Returns:
 //  String - Replace description localization prefix
 Function ReplaceDescriptionLocalizationPrefix(QueryText, TableName = "Table") Export
@@ -118,7 +129,7 @@ Function ReplaceDescriptionLocalizationPrefix(QueryText, TableName = "Table") Ex
 EndFunction
 
 // Get catalog presentation.
-// 
+//
 // Parameters:
 //  Source - CatalogManager, ChartOfCharacteristicTypesManager - Source
 //  Data - Structure - Data:
@@ -166,7 +177,7 @@ Procedure GetCatalogPresentation(Source, Data, Presentation, StandardProcessing)
 EndProcedure
 
 // Refresh reusable values before write.
-// 
+//
 // Parameters:
 //  Source - CatalogObjectCatalogName, ChartOfCharacteristicTypesObjectChartOfCharacteristicTypesName - Source
 //  Cancel - Boolean - Cancel
@@ -175,7 +186,7 @@ Procedure RefreshReusableValuesBeforeWrite(Source, Cancel) Export
 EndProcedure
 
 // Create main form item description.
-// 
+//
 // Parameters:
 //  Form - ClientApplicationForm - Form
 //  GroupName - String - Group name
@@ -214,7 +225,7 @@ Procedure CreateMainFormItemDescription(Form, GroupName, AddInfo = Undefined) Ex
 EndProcedure
 
 // Create sub form item description.
-// 
+//
 // Parameters:
 //  Form - ClientApplicationForm - Form
 //  Values - Structure - All lang description
@@ -254,7 +265,7 @@ Procedure CreateSubFormItemDescription(Form, Values, GroupName, AddInfo = Undefi
 EndProcedure
 
 // Get catalog presentation fields presentation fields get processing.
-// 
+//
 // Parameters:
 //  Source - CatalogManagerCatalogName, ChartOfCharacteristicTypesManagerChartOfCharacteristicTypesName - Source
 //  Fields - Array - Fields
@@ -268,7 +279,7 @@ Procedure GetCatalogPresentationFieldsPresentationFieldsGetProcessing(Source, Fi
 EndProcedure
 
 // Before write descriptions check filling.
-// 
+//
 // Parameters:
 //  Source - CatalogObjectCatalogName, ChartOfCharacteristicTypesObjectChartOfCharacteristicTypesName, ExchangePlanObjectExchangePlanName - Source
 //  Cancel - Boolean - Cancel
@@ -281,7 +292,7 @@ Procedure BeforeWrite_DescriptionsCheckFilling(Source, Cancel) Export
 EndProcedure
 
 // Fill check processing description check filling.
-// 
+//
 // Parameters:
 //  Source - CatalogObjectCatalogName, ChartOfCharacteristicTypesObjectChartOfCharacteristicTypesName, ExchangePlanObjectExchangePlanName - Source
 //  Cancel - Boolean - Cancel
@@ -296,7 +307,7 @@ EndProcedure
 #Region Private
 
 // Check description filling.
-// 
+//
 // Parameters:
 //  Source - CatalogObjectCatalogName, ChartOfCharacteristicTypesObjectChartOfCharacteristicTypesName, ExchangePlanObjectExchangePlanName - Source
 //  Cancel - Boolean - Cancel
@@ -304,7 +315,7 @@ Procedure CheckDescriptionFilling(Source, Cancel)
 	If Cancel Then
 		Return;
 	EndIf;
-	
+
 	If Not CatConfigurationMetadataServer.CheckDescriptionFillingEnabled(Source)
 		Or Not LocalizationReuse.UseMultiLanguage(Source.Metadata().FullName()) Then
 		Return;
@@ -324,7 +335,7 @@ Procedure CheckDescriptionFilling(Source, Cancel)
 EndProcedure
 
 // Check description duplicate.
-// 
+//
 // Parameters:
 //  Source - CatalogObjectCatalogName, ChartOfCharacteristicTypesObjectChartOfCharacteristicTypesName, ExchangePlanObjectExchangePlanName - Source
 //  Cancel - Boolean - Cancel
@@ -401,7 +412,7 @@ EndProcedure
 #Region Declaration
 
 // Custom search filter.
-// 
+//
 // Returns:
 //  Structure - Custom search filter:
 // * FieldName - String

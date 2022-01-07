@@ -421,7 +421,7 @@ Async Procedure SetDefaultSalesPerson()
 	ElsIf SalesPersons.Count() > 1 Then
 		SelectDefPerson = New ValueList();
 		SelectDefPerson.LoadValues(SalesPersons);
-		SelectDefPersonValue = Await SelectDefPerson.ChooseItemAsync();
+		SelectDefPersonValue = Await SelectDefPerson.ChooseItemAsync(R().POS_s5);
 		If Not SelectDefPersonValue = Undefined Then
 			SalesPersonByDefault = SelectDefPersonValue.Value;
 		EndIf;

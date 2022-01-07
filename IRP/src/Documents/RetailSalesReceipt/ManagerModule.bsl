@@ -298,7 +298,8 @@ Function RetailSales()
 	|			END
 	|		ELSE tmpRetailSales.OffersAmount
 	|	END AS OffersAmount,
-	|	tmpRetailSales.Store
+	|	tmpRetailSales.Store,
+	|	tmpRetailSales.SalesPerson
 	|INTO RetailSales
 	|FROM
 	|	tmpRetailSales AS tmpRetailSales";

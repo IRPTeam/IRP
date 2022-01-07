@@ -422,13 +422,19 @@ Async Procedure SetDefaultSalesPerson()
 		SelectDefPerson = New ValueList();
 		SelectDefPerson.LoadValues(SalesPersons);
 		SelectDefPersonValue = Await SelectDefPerson.ChooseItemAsync();
-		SalesPersonByDefault = SelectDefPersonValue.Value;
+		If Not SelectDefPersonValue = Undefined Then
+			SalesPersonByDefault = SelectDefPersonValue.Value;
+		EndIf;
 	Else
 		SalesPersonByDefault = Undefined;
 	EndIf;
 	
 	If Not SalesPersonByDefault.IsEmpty() Then
 		FillSalesPersonInItemList();
+		For Each Row In Items.ItemList.SelectedRows Do
+			ObjRow = Object.ItemList.FindByID(Row);
+			ObjRow.SalesPerson = SalesPersonByDefault;
+		EndDo;
 	EndIf;
  
 EndProcedure

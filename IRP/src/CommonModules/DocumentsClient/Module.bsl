@@ -2175,7 +2175,13 @@ Procedure CalculatePaymentTermDateAndAmount(Object, Form, AddInfo = Undefined) E
 	If Not Object.PaymentTerms.Count() Then
 		Return;
 	EndIf;
-	TotalAmount = Object.ItemList.Total("TotalAmount");
+	TotalAmount = 0;
+	For Each Row In Object.ItemList Do
+		If CommonFunctionsClientServer.ObjectHasProperty(Row, "Cancel") And Row.Cancel Then
+			Continue;
+		EndIf;
+		TotalAmount = TotalAmount + Row.TotalAmount;
+	EndDo;
 	TotalPercent = Object.PaymentTerms.Total("ProportionOfPayment");
 	RowWithMaxAmount = Undefined;
 	SecondsInOneDay = 86400;

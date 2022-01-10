@@ -278,19 +278,19 @@ Scenario: _1003004 check SI movements when unpost document and post it back (clo
 		And I select "R2021 Customer transactions" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales invoice 1 dated 28.01.2021 18:48:53' | ''            | ''                    | ''          | ''             | ''                        | ''                             | ''         | ''                  | ''          | ''                         | ''                                          | ''                     | ''                                                       |
-			| 'Document registrations records'            | ''            | ''                    | ''          | ''             | ''                        | ''                             | ''         | ''                  | ''          | ''                         | ''                                          | ''                     | ''                                                       |
-			| 'Register  "R2021 Customer transactions"'   | ''            | ''                    | ''          | ''             | ''                        | ''                             | ''         | ''                  | ''          | ''                         | ''                                          | ''                     | ''                                                       |
-			| ''                                          | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                        | ''                             | ''         | ''                  | ''          | ''                         | ''                                          | 'Attributes'           | ''                                                       |
-			| ''                                          | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'                  | 'Multi currency movement type' | 'Currency' | 'Legal name'        | 'Partner'   | 'Agreement'                | 'Basis'                                     | 'Deferred calculation' | 'Customers advances closing'                             |
-			| ''                                          | 'Receipt'     | '28.01.2021 18:48:53' | '670,08'    | 'Main Company' | 'Distribution department' | 'Reporting currency'           | 'USD'      | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'No'                   | ''                                                       |
-			| ''                                          | 'Receipt'     | '28.01.2021 18:48:53' | '3 914'     | 'Main Company' | 'Distribution department' | 'Local currency'               | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'No'                   | ''                                                       |
-			| ''                                          | 'Receipt'     | '28.01.2021 18:48:53' | '3 914'     | 'Main Company' | 'Distribution department' | 'TRY'                          | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'No'                   | ''                                                       |
-			| ''                                          | 'Receipt'     | '28.01.2021 18:48:53' | '3 914'     | 'Main Company' | 'Distribution department' | 'en description is empty'      | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'No'                   | ''                                                       |
-			| ''                                          | 'Expense'     | '28.01.2021 18:48:53' | '667,68'    | 'Main Company' | 'Distribution department' | 'Reporting currency'           | 'USD'      | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'No'                   | 'Customers advance closing 9 dated 28.01.2021 12:00:00' |
-			| ''                                          | 'Expense'     | '28.01.2021 18:48:53' | '3 900'     | 'Main Company' | 'Distribution department' | 'Local currency'               | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'No'                   | 'Customers advance closing 9 dated 28.01.2021 12:00:00' |
-			| ''                                          | 'Expense'     | '28.01.2021 18:48:53' | '3 900'     | 'Main Company' | 'Distribution department' | 'TRY'                          | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'No'                   | 'Customers advance closing 9 dated 28.01.2021 12:00:00' |
-			| ''                                          | 'Expense'     | '28.01.2021 18:48:53' | '3 900'     | 'Main Company' | 'Distribution department' | 'en description is empty'      | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'No'                   | 'Customers advance closing 9 dated 28.01.2021 12:00:00' |
+			| 'Sales invoice 1 dated 28.01.2021 18:48:53' | ''            | ''                    | ''          | ''             | ''                        | ''                             | ''         | ''                  | ''          | ''                         | ''                                          | ''                                                       | ''                     | ''                                                       |
+			| 'Document registrations records'            | ''            | ''                    | ''          | ''             | ''                        | ''                             | ''         | ''                  | ''          | ''                         | ''                                          | ''                                                       | ''                     | ''                                                       |
+			| 'Register  "R2021 Customer transactions"'   | ''            | ''                    | ''          | ''             | ''                        | ''                             | ''         | ''                  | ''          | ''                         | ''                                          | ''                                                       | ''                     | ''                                                       |
+			| ''                                          | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                        | ''                             | ''         | ''                  | ''          | ''                         | ''                                          | ''                                                       | 'Attributes'           | ''                                                       |
+			| ''                                          | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'                  | 'Multi currency movement type' | 'Currency' | 'Legal name'        | 'Partner'   | 'Agreement'                | 'Basis'                                     | 'Order'                                                  | 'Deferred calculation' | 'Customers advances closing'                             |
+			| ''                                          | 'Receipt'     | '28.01.2021 18:48:53' | '670,08'    | 'Main Company' | 'Distribution department' | 'Reporting currency'           | 'USD'      | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Sales invoice 1 dated 28.01.2021 18:48:53' | ''                                                       | 'No'                   | ''                                                       |
+			| ''                                          | 'Receipt'     | '28.01.2021 18:48:53' | '3 914'     | 'Main Company' | 'Distribution department' | 'Local currency'               | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Sales invoice 1 dated 28.01.2021 18:48:53' | ''                                                       | 'No'                   | ''                                                       |
+			| ''                                          | 'Receipt'     | '28.01.2021 18:48:53' | '3 914'     | 'Main Company' | 'Distribution department' | 'TRY'                          | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Sales invoice 1 dated 28.01.2021 18:48:53' | ''                                                       | 'No'                   | ''                                                       |
+			| ''                                          | 'Receipt'     | '28.01.2021 18:48:53' | '3 914'     | 'Main Company' | 'Distribution department' | 'en description is empty'      | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Sales invoice 1 dated 28.01.2021 18:48:53' | ''                                                       | 'No'                   | ''                                                       |
+			| ''                                          | 'Expense'     | '28.01.2021 18:48:53' | '667,68'    | 'Main Company' | 'Distribution department' | 'Reporting currency'           | 'USD'      | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Sales invoice 1 dated 28.01.2021 18:48:53' | ''                                                       | 'No'                   | 'Customers advance closing 9 dated 28.01.2021 12:00:00' |
+			| ''                                          | 'Expense'     | '28.01.2021 18:48:53' | '3 900'     | 'Main Company' | 'Distribution department' | 'Local currency'               | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Sales invoice 1 dated 28.01.2021 18:48:53' | ''                                                       | 'No'                   | 'Customers advance closing 9 dated 28.01.2021 12:00:00' |
+			| ''                                          | 'Expense'     | '28.01.2021 18:48:53' | '3 900'     | 'Main Company' | 'Distribution department' | 'TRY'                          | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Sales invoice 1 dated 28.01.2021 18:48:53' | ''                                                       | 'No'                   | 'Customers advance closing 9 dated 28.01.2021 12:00:00' |
+			| ''                                          | 'Expense'     | '28.01.2021 18:48:53' | '3 900'     | 'Main Company' | 'Distribution department' | 'en description is empty'      | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Sales invoice 1 dated 28.01.2021 18:48:53' | ''                                                       | 'No'                   | 'Customers advance closing 9 dated 28.01.2021 12:00:00' |
 		And I close all client application windows
 	* Unpost SI
 		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
@@ -313,19 +313,19 @@ Scenario: _1003004 check SI movements when unpost document and post it back (clo
 		And I select "R2021 Customer transactions" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Sales invoice 1 dated 28.01.2021 18:48:53' | ''            | ''                    | ''          | ''             | ''                        | ''                             | ''         | ''                  | ''          | ''                         | ''                                          | ''                     | ''                                                       |
-			| 'Document registrations records'            | ''            | ''                    | ''          | ''             | ''                        | ''                             | ''         | ''                  | ''          | ''                         | ''                                          | ''                     | ''                                                       |
-			| 'Register  "R2021 Customer transactions"'   | ''            | ''                    | ''          | ''             | ''                        | ''                             | ''         | ''                  | ''          | ''                         | ''                                          | ''                     | ''                                                       |
-			| ''                                          | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                        | ''                             | ''         | ''                  | ''          | ''                         | ''                                          | 'Attributes'           | ''                                                       |
-			| ''                                          | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'                  | 'Multi currency movement type' | 'Currency' | 'Legal name'        | 'Partner'   | 'Agreement'                | 'Basis'                                     | 'Deferred calculation' | 'Customers advances closing'                             |
-			| ''                                          | 'Receipt'     | '28.01.2021 18:48:53' | '670,08'    | 'Main Company' | 'Distribution department' | 'Reporting currency'           | 'USD'      | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'No'                   | ''                                                       |
-			| ''                                          | 'Receipt'     | '28.01.2021 18:48:53' | '3 914'     | 'Main Company' | 'Distribution department' | 'Local currency'               | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'No'                   | ''                                                       |
-			| ''                                          | 'Receipt'     | '28.01.2021 18:48:53' | '3 914'     | 'Main Company' | 'Distribution department' | 'TRY'                          | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'No'                   | ''                                                       |
-			| ''                                          | 'Receipt'     | '28.01.2021 18:48:53' | '3 914'     | 'Main Company' | 'Distribution department' | 'en description is empty'      | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'No'                   | ''                                                       |
-			| ''                                          | 'Expense'     | '28.01.2021 18:48:53' | '667,68'    | 'Main Company' | 'Distribution department' | 'Reporting currency'           | 'USD'      | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'No'                   | 'Customers advance closing 9 dated 28.01.2021 12:00:00' |
-			| ''                                          | 'Expense'     | '28.01.2021 18:48:53' | '3 900'     | 'Main Company' | 'Distribution department' | 'Local currency'               | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'No'                   | 'Customers advance closing 9 dated 28.01.2021 12:00:00' |
-			| ''                                          | 'Expense'     | '28.01.2021 18:48:53' | '3 900'     | 'Main Company' | 'Distribution department' | 'TRY'                          | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'No'                   | 'Customers advance closing 9 dated 28.01.2021 12:00:00' |
-			| ''                                          | 'Expense'     | '28.01.2021 18:48:53' | '3 900'     | 'Main Company' | 'Distribution department' | 'en description is empty'      | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'No'                   | 'Customers advance closing 9 dated 28.01.2021 12:00:00' |
+			| 'Sales invoice 1 dated 28.01.2021 18:48:53' | ''            | ''                    | ''          | ''             | ''                        | ''                             | ''         | ''                  | ''          | ''                         | ''                                          | ''                   | ''                     | ''                                                       |
+			| 'Document registrations records'            | ''            | ''                    | ''          | ''             | ''                        | ''                             | ''         | ''                  | ''          | ''                         | ''                                          | ''                   | ''                     | ''                                                       |
+			| 'Register  "R2021 Customer transactions"'   | ''            | ''                    | ''          | ''             | ''                        | ''                             | ''         | ''                  | ''          | ''                         | ''                                          | ''                   | ''                     | ''                                                       |
+			| ''                                          | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''                        | ''                             | ''         | ''                  | ''          | ''                         | ''                                          | ''                   | 'Attributes'           | ''                                                       |
+			| ''                                          | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'                  | 'Multi currency movement type' | 'Currency' | 'Legal name'        | 'Partner'   | 'Agreement'                | 'Basis'                                     | 'Order'              | 'Deferred calculation' | 'Customers advances closing'                             |
+			| ''                                          | 'Receipt'     | '28.01.2021 18:48:53' | '670,08'    | 'Main Company' | 'Distribution department' | 'Reporting currency'           | 'USD'      | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Sales invoice 1 dated 28.01.2021 18:48:53' | ''                   | 'No'                   | ''                                                       |
+			| ''                                          | 'Receipt'     | '28.01.2021 18:48:53' | '3 914'     | 'Main Company' | 'Distribution department' | 'Local currency'               | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Sales invoice 1 dated 28.01.2021 18:48:53' | ''                   | 'No'                   | ''                                                       |
+			| ''                                          | 'Receipt'     | '28.01.2021 18:48:53' | '3 914'     | 'Main Company' | 'Distribution department' | 'TRY'                          | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Sales invoice 1 dated 28.01.2021 18:48:53' | ''                   | 'No'                   | ''                                                       |
+			| ''                                          | 'Receipt'     | '28.01.2021 18:48:53' | '3 914'     | 'Main Company' | 'Distribution department' | 'en description is empty'      | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Sales invoice 1 dated 28.01.2021 18:48:53' | ''                   | 'No'                   | ''                                                       |
+			| ''                                          | 'Expense'     | '28.01.2021 18:48:53' | '667,68'    | 'Main Company' | 'Distribution department' | 'Reporting currency'           | 'USD'      | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Sales invoice 1 dated 28.01.2021 18:48:53' | ''                   | 'No'                   | 'Customers advance closing 9 dated 28.01.2021 12:00:00' |
+			| ''                                          | 'Expense'     | '28.01.2021 18:48:53' | '3 900'     | 'Main Company' | 'Distribution department' | 'Local currency'               | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Sales invoice 1 dated 28.01.2021 18:48:53' | ''                   | 'No'                   | 'Customers advance closing 9 dated 28.01.2021 12:00:00' |
+			| ''                                          | 'Expense'     | '28.01.2021 18:48:53' | '3 900'     | 'Main Company' | 'Distribution department' | 'TRY'                          | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Sales invoice 1 dated 28.01.2021 18:48:53' | ''                   | 'No'                   | 'Customers advance closing 9 dated 28.01.2021 12:00:00' |
+			| ''                                          | 'Expense'     | '28.01.2021 18:48:53' | '3 900'     | 'Main Company' | 'Distribution department' | 'en description is empty'      | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Sales invoice 1 dated 28.01.2021 18:48:53' | ''                   | 'No'                   | 'Customers advance closing 9 dated 28.01.2021 12:00:00' |
 		And I close all client application windows
 
 
@@ -435,126 +435,8 @@ Scenario: _1003014 check SI, Debit note closing by advance (Ap-Ar by partner ter
 	And I close all client application windows
 
 
-Scenario: _1003050 check ignore advance in the SI when post CustomersAdvancesClosing (invoice first)
-	And I close all client application windows
-	Given I open hyperlink "e1cib/list/AccumulationRegister.R2021B_CustomersTransactions"
-	And "List" table contains lines
-		| 'Period'              | 'Recorder'                                 | 'Currency' | 'Customers advances closing'                             | 'Company'      | 'Branch'                  | 'Partner'  | 'Amount'    | 'Multi currency movement type' | 'Legal name'       | 'Agreement'                | 'Basis'                                      | 'Deferred calculation' |
-		| '15.04.2021 10:21:22' | 'Bank receipt 5 dated 15.04.2021 10:21:22' | 'TRY'      | 'Customers advance closing 3 dated 15.04.2021 12:00:00' | 'Main Company' | 'Distribution department' | 'Lomaniti' | '12 400,00' | 'Local currency'               | 'Company Lomaniti' | 'Basic Partner terms, TRY' | 'Sales invoice 14 dated 16.02.2021 12:14:54' | 'No'                   |
-		| '15.04.2021 10:21:22' | 'Bank receipt 5 dated 15.04.2021 10:21:22' | 'USD'      | 'Customers advance closing 3 dated 15.04.2021 12:00:00' | 'Main Company' | 'Distribution department' | 'Lomaniti' | '2 122,88'  | 'Reporting currency'           | 'Company Lomaniti' | 'Basic Partner terms, TRY' | 'Sales invoice 14 dated 16.02.2021 12:14:54' | 'No'                   |
-		| '15.04.2021 10:21:22' | 'Bank receipt 5 dated 15.04.2021 10:21:22' | 'TRY'      | 'Customers advance closing 3 dated 15.04.2021 12:00:00' | 'Main Company' | 'Distribution department' | 'Lomaniti' | '12 400,00' | 'TRY'                          | 'Company Lomaniti' | 'Basic Partner terms, TRY' | 'Sales invoice 14 dated 16.02.2021 12:14:54' | 'No'                   |
-		| '15.04.2021 10:21:22' | 'Bank receipt 5 dated 15.04.2021 10:21:22' | 'TRY'      | 'Customers advance closing 3 dated 15.04.2021 12:00:00' | 'Main Company' | 'Distribution department' | 'Lomaniti' | '12 400,00' | 'en description is empty'      | 'Company Lomaniti' | 'Basic Partner terms, TRY' | 'Sales invoice 14 dated 16.02.2021 12:14:54' | 'No'                   |
-	And I close current window
-	* Set checkbox "Ignore advances"
-		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
-		And I go to line in "List" table
-			| 'Number' |
-			| '14'    |
-		And I select current line in "List" table
-		And I move to "Other" tab
-		And I move to "More" tab
-		And I set checkbox "Ignore advances"
-		And I click "Post and close" button
-		Given I open hyperlink "e1cib/list/Document.CustomersAdvancesClosing"
-		And I go to line in "List" table
-			| 'Number' |
-			| '3'      |
-		And in the table "List" I click the button named "ListContextMenuPost"
-	* Check Customers advances closing
-		Given I open hyperlink "e1cib/list/AccumulationRegister.R2021B_CustomersTransactions"
-		And "List" table does not contain lines
-			| 'Period'              | 'Recorder'                                 | 'Currency' | 'Customers advances closing'                             | 'Company'      | 'Branch'                  | 'Partner'  | 'Amount'    | 'Multi currency movement type' | 'Legal name'       | 'Agreement'                | 'Basis'                                      | 'Deferred calculation' |
-			| '15.04.2021 10:21:22' | 'Bank receipt 5 dated 15.04.2021 10:21:22' | 'TRY'      | 'Customers advance closing 3 dated 15.04.2021 12:00:00' | 'Main Company' | 'Distribution department' | 'Lomaniti' | '12 400,00' | 'Local currency'               | 'Company Lomaniti' | 'Basic Partner terms, TRY' | 'Sales invoice 14 dated 16.02.2021 12:14:54' | 'No'                   |
-			| '15.04.2021 10:21:22' | 'Bank receipt 5 dated 15.04.2021 10:21:22' | 'USD'      | 'Customers advance closing 3 dated 15.04.2021 12:00:00' | 'Main Company' | 'Distribution department' | 'Lomaniti' | '2 122,88'  | 'Reporting currency'           | 'Company Lomaniti' | 'Basic Partner terms, TRY' | 'Sales invoice 14 dated 16.02.2021 12:14:54' | 'No'                   |
-			| '15.04.2021 10:21:22' | 'Bank receipt 5 dated 15.04.2021 10:21:22' | 'TRY'      | 'Customers advance closing 3 dated 15.04.2021 12:00:00' | 'Main Company' | 'Distribution department' | 'Lomaniti' | '12 400,00' | 'TRY'                          | 'Company Lomaniti' | 'Basic Partner terms, TRY' | 'Sales invoice 14 dated 16.02.2021 12:14:54' | 'No'                   |
-			| '15.04.2021 10:21:22' | 'Bank receipt 5 dated 15.04.2021 10:21:22' | 'TRY'      | 'Customers advance closing 3 dated 15.04.2021 12:00:00' | 'Main Company' | 'Distribution department' | 'Lomaniti' | '12 400,00' | 'en description is empty'      | 'Company Lomaniti' | 'Basic Partner terms, TRY' | 'Sales invoice 14 dated 16.02.2021 12:14:54' | 'No'                   |
-		And I close current window
-	* Remove checkbox "Ignore advances"	
-		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
-		And I go to line in "List" table
-			| 'Number' |
-			| '14'    |
-		And I select current line in "List" table
-		And I move to "Other" tab
-		And I move to "More" tab
-		And I remove checkbox "Ignore advances"
-		And I click "Post and close" button
-		Given I open hyperlink "e1cib/list/Document.CustomersAdvancesClosing"
-		And I go to line in "List" table
-			| 'Number' |
-			| '3'      |
-		And in the table "List" I click the button named "ListContextMenuPost"
-	* Check Customers advances closing
-		Given I open hyperlink "e1cib/list/AccumulationRegister.R2021B_CustomersTransactions"	
-		And "List" table contains lines
-			| 'Period'              | 'Recorder'                                 | 'Currency' | 'Customers advances closing'                             | 'Company'      | 'Branch'                  | 'Partner'  | 'Amount'    | 'Multi currency movement type' | 'Legal name'       | 'Agreement'                | 'Basis'                                      | 'Deferred calculation' |
-			| '15.04.2021 10:21:22' | 'Bank receipt 5 dated 15.04.2021 10:21:22' | 'TRY'      | 'Customers advance closing 3 dated 15.04.2021 12:00:00' | 'Main Company' | 'Distribution department' | 'Lomaniti' | '12 400,00' | 'Local currency'               | 'Company Lomaniti' | 'Basic Partner terms, TRY' | 'Sales invoice 14 dated 16.02.2021 12:14:54' | 'No'                   |
-			| '15.04.2021 10:21:22' | 'Bank receipt 5 dated 15.04.2021 10:21:22' | 'USD'      | 'Customers advance closing 3 dated 15.04.2021 12:00:00' | 'Main Company' | 'Distribution department' | 'Lomaniti' | '2 122,88'  | 'Reporting currency'           | 'Company Lomaniti' | 'Basic Partner terms, TRY' | 'Sales invoice 14 dated 16.02.2021 12:14:54' | 'No'                   |
-			| '15.04.2021 10:21:22' | 'Bank receipt 5 dated 15.04.2021 10:21:22' | 'TRY'      | 'Customers advance closing 3 dated 15.04.2021 12:00:00' | 'Main Company' | 'Distribution department' | 'Lomaniti' | '12 400,00' | 'TRY'                          | 'Company Lomaniti' | 'Basic Partner terms, TRY' | 'Sales invoice 14 dated 16.02.2021 12:14:54' | 'No'                   |
-			| '15.04.2021 10:21:22' | 'Bank receipt 5 dated 15.04.2021 10:21:22' | 'TRY'      | 'Customers advance closing 3 dated 15.04.2021 12:00:00' | 'Main Company' | 'Distribution department' | 'Lomaniti' | '12 400,00' | 'en description is empty'      | 'Company Lomaniti' | 'Basic Partner terms, TRY' | 'Sales invoice 14 dated 16.02.2021 12:14:54' | 'No'                   |
-		And I close all client application windows
 
-
-
-Scenario: _1003051 check ignore advance in the SI when post CustomersAdvancesClosing (payment first)
-	And I close all client application windows
-	Given I open hyperlink "e1cib/list/AccumulationRegister.R2021B_CustomersTransactions"
-	And "List" table contains lines
-		| 'Period'              | 'Recorder'                                  | 'Currency' | 'Customers advances closing'                             | 'Company'      | 'Branch'                  | 'Partner'   | 'Amount'   | 'Multi currency movement type' | 'Legal name'        | 'Agreement'                | 'Basis'                                     | 'Deferred calculation' |
-		| '28.01.2021 18:48:53' | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'TRY'      | 'Customers advance closing 9 dated 28.01.2021 12:00:00' | 'Main Company' | 'Distribution department' | 'Ferron BP' | '3 900,00' | 'TRY'                          | 'Company Ferron BP' | 'Basic Partner terms, TRY' | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'No'                   |
-		| '28.01.2021 18:48:53' | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'TRY'      | 'Customers advance closing 9 dated 28.01.2021 12:00:00' | 'Main Company' | 'Distribution department' | 'Ferron BP' | '3 900,00' | 'Local currency'               | 'Company Ferron BP' | 'Basic Partner terms, TRY' | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'No'                   |
-		| '28.01.2021 18:48:53' | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'USD'      | 'Customers advance closing 9 dated 28.01.2021 12:00:00' | 'Main Company' | 'Distribution department' | 'Ferron BP' | '667,68'   | 'Reporting currency'           | 'Company Ferron BP' | 'Basic Partner terms, TRY' | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'No'                   |
-		| '28.01.2021 18:48:53' | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'TRY'      | 'Customers advance closing 9 dated 28.01.2021 12:00:00' | 'Main Company' | 'Distribution department' | 'Ferron BP' | '3 900,00' | 'en description is empty'      | 'Company Ferron BP' | 'Basic Partner terms, TRY' | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'No'                   |
-	And I close current window
-	* Set checkbox "Ignore advances"
-		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
-		And I go to line in "List" table
-			| 'Number' |
-			| '1'    |
-		And I select current line in "List" table
-		And I move to "Other" tab
-		And I move to "More" tab
-		And I set checkbox "Ignore advances"
-		And I click "Post and close" button
-		Given I open hyperlink "e1cib/list/Document.CustomersAdvancesClosing"
-		And I go to line in "List" table
-			| 'Number' |
-			| '9'      |
-		And in the table "List" I click the button named "ListContextMenuPost"
-	* Check Customers advances closing
-		Given I open hyperlink "e1cib/list/AccumulationRegister.R2021B_CustomersTransactions"
-		And "List" table does not contain lines
-			| 'Period'              | 'Recorder'                                  | 'Currency' | 'Customers advances closing'                             | 'Company'      | 'Branch'                  | 'Partner'   | 'Amount'   | 'Multi currency movement type' | 'Legal name'        | 'Agreement'                | 'Basis'                                     | 'Deferred calculation' |
-			| '28.01.2021 18:48:53' | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'TRY'      | 'Customers advance closing 9 dated 28.01.2021 12:00:00' | 'Main Company' | 'Distribution department' | 'Ferron BP' | '3 900,00' | 'TRY'                          | 'Company Ferron BP' | 'Basic Partner terms, TRY' | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'No'                   |
-			| '28.01.2021 18:48:53' | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'TRY'      | 'Customers advance closing 9 dated 28.01.2021 12:00:00' | 'Main Company' | 'Distribution department' | 'Ferron BP' | '3 900,00' | 'Local currency'               | 'Company Ferron BP' | 'Basic Partner terms, TRY' | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'No'                   |
-			| '28.01.2021 18:48:53' | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'USD'      | 'Customers advance closing 9 dated 28.01.2021 12:00:00' | 'Main Company' | 'Distribution department' | 'Ferron BP' | '667,68'   | 'Reporting currency'           | 'Company Ferron BP' | 'Basic Partner terms, TRY' | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'No'                   |
-			| '28.01.2021 18:48:53' | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'TRY'      | 'Customers advance closing 9 dated 28.01.2021 12:00:00' | 'Main Company' | 'Distribution department' | 'Ferron BP' | '3 900,00' | 'en description is empty'      | 'Company Ferron BP' | 'Basic Partner terms, TRY' | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'No'                   |
-		And I close current window
-	* Remove checkbox "Ignore advances"	
-		Given I open hyperlink "e1cib/list/Document.SalesInvoice"
-		And I go to line in "List" table
-			| 'Number' |
-			| '1'    |
-		And I select current line in "List" table
-		And I move to "Other" tab
-		And I move to "More" tab
-		And I remove checkbox "Ignore advances"
-		And I click "Post and close" button
-		Given I open hyperlink "e1cib/list/Document.CustomersAdvancesClosing"
-		And I go to line in "List" table
-			| 'Number' |
-			| '9'      |
-		And in the table "List" I click the button named "ListContextMenuPost"
-	* Check Customers advances closing
-		Given I open hyperlink "e1cib/list/AccumulationRegister.R2021B_CustomersTransactions"	
-		And "List" table contains lines
-			| 'Period'              | 'Recorder'                                  | 'Currency' | 'Customers advances closing'                             | 'Company'      | 'Branch'                  | 'Partner'   | 'Amount'   | 'Multi currency movement type' | 'Legal name'        | 'Agreement'                | 'Basis'                                     | 'Deferred calculation' |
-			| '28.01.2021 18:48:53' | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'TRY'      | 'Customers advance closing 9 dated 28.01.2021 12:00:00' | 'Main Company' | 'Distribution department' | 'Ferron BP' | '3 900,00' | 'TRY'                          | 'Company Ferron BP' | 'Basic Partner terms, TRY' | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'No'                   |
-			| '28.01.2021 18:48:53' | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'TRY'      | 'Customers advance closing 9 dated 28.01.2021 12:00:00' | 'Main Company' | 'Distribution department' | 'Ferron BP' | '3 900,00' | 'Local currency'               | 'Company Ferron BP' | 'Basic Partner terms, TRY' | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'No'                   |
-			| '28.01.2021 18:48:53' | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'USD'      | 'Customers advance closing 9 dated 28.01.2021 12:00:00' | 'Main Company' | 'Distribution department' | 'Ferron BP' | '667,68'   | 'Reporting currency'           | 'Company Ferron BP' | 'Basic Partner terms, TRY' | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'No'                   |
-			| '28.01.2021 18:48:53' | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'TRY'      | 'Customers advance closing 9 dated 28.01.2021 12:00:00' | 'Main Company' | 'Distribution department' | 'Ferron BP' | '3 900,00' | 'en description is empty'      | 'Company Ferron BP' | 'Basic Partner terms, TRY' | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'No'                   |
-		And I close all client application windows
-		
+	
 
 Scenario: _1003052 check CustomersAdvancesClosing movements when unpost document and post it back
 	And I close all client application windows

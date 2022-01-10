@@ -203,6 +203,7 @@
     </synonym>
     <type>
       <types>DocumentRef.PurchaseOrder</types>
+      <types>DocumentRef.SalesOrder</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
@@ -262,6 +263,22 @@
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <indexing>Index</indexing>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+  <dimensions uuid="bb053418-93f3-4175-ad72-25d9b4cbbe39">
+    <name>UniqueID</name>
+    <synonym>
+      <key>en</key>
+      <value>Unique ID</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeRowID</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
     <fillValue xsi:type="core:UndefinedValue"/>

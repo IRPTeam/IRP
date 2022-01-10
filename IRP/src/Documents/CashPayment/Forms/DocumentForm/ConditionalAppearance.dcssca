@@ -9,12 +9,8 @@
 		<filter>
 			<item xsi:type="FilterItemComparison">
 				<left xsi:type="dcscor:Field">Object.PaymentList.ApArPostingDetail</left>
-				<comparisonType>Equal</comparisonType>
+				<comparisonType>NotEqual</comparisonType>
 				<right xsi:type="dcscor:DesignTimeValue">Enum.ApArPostingDetail.ByDocuments</right>
-			</item>
-			<item xsi:type="FilterItemComparison">
-				<left xsi:type="dcscor:Field">Object.PaymentList.BasisDocument</left>
-				<comparisonType>Equal</comparisonType>
 			</item>
 		</filter>
 		<appearance>

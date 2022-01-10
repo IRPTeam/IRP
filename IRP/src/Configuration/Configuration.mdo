@@ -684,6 +684,7 @@
   <enums>Enum.TypeEquipment</enums>
   <enums>Enum.TypeExternalObject</enums>
   <enums>Enum.LadgerTypeVariants</enums>
+  <enums>Enum.AccountingAnalyticTypes</enums>
   <reports>Report.AllRegistersMovement</reports>
   <reports>Report.DocumentRegistrationsReport</reports>
   <reports>Report.PriceInfo</reports>
@@ -808,6 +809,8 @@
   <accumulationRegisters>AccumulationRegister.TM1030B_TransactionsKey</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R3024B_SalesOrdersToBePaid</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R3025B_PurchaseOrdersToBePaid</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.T1040T_AccountingAmounts</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.T1050T_AccountingQuantities</accumulationRegisters>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.AddAttributeAndProperty</chartsOfCharacteristicTypes>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.CustomUserSettings</chartsOfCharacteristicTypes>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.IDInfoTypes</chartsOfCharacteristicTypes>

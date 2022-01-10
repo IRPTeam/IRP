@@ -10,64 +10,49 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 		CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
 	EndDo;
 	
-	AccountingClientServer.DeleteUnusedRowsFromAnalyticsTable(ThisObject.AccountingRowAnalytics, ThisObject.PaymentList);
-	UserDefinedAnalytics = Undefined;
-	ThisObject.AdditionalProperties.Property("AccountingRowAnalytics", UserDefinedAnalytics);
-	CompanyLadgerTypes = AccountingServer.GetLadgerTypesByCompany(ThisObject);
+//	AccountingClientServer.DeleteUnusedRowsFromAnalyticsTable(ThisObject, "PaymentList");
+//	CompanyLadgerTypes = AccountingServer.GetLadgerTypesByCompany(ThisObject);
 	
-	For Each LadgerType In CompanyLadgerTypes Do
-	For Each Row In ThisObject.PaymentList Do
-		// Identifier - Analytics_CashOnHand
-		AnalyticRow = Undefined;
-		If UserDefinedAnalytics <> Undefined Then
-			AnalyticRows = UserDefinedAnalytics.FindRows(
-			New Structure("Key, LadgerType, Identifier", Row.Key, LadgerType, "Analytics_CashOnHand"));
-			If AnalyticRows.Count() Then
-				AnalyticRow = AnalyticRows[0];
-			EndIf;
-		EndIf;
-		
-		If AnalyticRow = Undefined Then
-			Parameters = AccountingClientServer.GetParameters(ThisObject, Row, "AccountingRowAnalytics");
-			For Each AccountingAnalytic In Parameters.AccountingAnalytics Do
-				If AccountingAnalytic.LadgerType = LadgerType 
-					And AccountingAnalytic.Identifier = "Analytics_CashOnHand" Then
-					AnalyticRow = AccountingAnalytic;
-				EndIf;
-			EndDo;
-		EndIf;
-		
-		If AnalyticRow = Undefined Then
-			Continue;
-		EndIf;
-		
-		UpdateCatalogAccountingAnalytics = False;
-		ObjectCatalogAccountingAnalytics = Undefined;
-		
-		ExistsAnalyticRow = Undefined;
-		ExistsAnalyticRows = ThisObject["AccountingRowAnalytics"].FindRows(
-			New Structure("Key, LadgerType", Row.Key, LadgerType));
-		If ExistsAnalyticRows.Count() Then
-			ExistsAnalyticRow = ExistsAnalyticRows[0];
-			
-			
-		Else
-			ExistsAnalyticRow = ThisObject["AccountingRowAnalytics"].Add();
-			ExistsAnalyticRow.Key = Row.Key;
-			ExistsAnalyticRow.LadgerType = LadgerType;
-			
-			ObjectCatalogAccountingAnalytics = Catalogs.AccountingAnalytics.CreateItem();
-			UpdateCatalogAccountingAnalytics = True;
-		EndIf;
-		
-		If UpdateCatalogAccountingAnalytics Then
-			FillPropertyValues(ObjectCatalogAccountingAnalytics, AnalyticRow);
-			ObjectCatalogAccountingAnalytics.Write();
-		EndIf;
-		ExistsAnalyticRow["Analytics_CashOnHand"] = ObjectCatalogAccountingAnalytics.Ref;
-		
-	EndDo;
-	EndDo;
+	If WriteMode = DocumentWriteMode.Posting Then
+		ArrayOfIdentifiers = New Array();
+		ArrayOfIdentifiers.Add("Dr_PartnerTBAccounts_Cr_CashAccountTBAccounts");
+		AccountingClientServer.BeforeWriteAccountingDocument(ThisObject, "PaymentList", ArrayOfIdentifiers);
+	EndIf;
+	
+//	Identifier = "Dr_PartnerTBAccounts_Cr_CashAccountTBAccounts";
+//	For Each LadgerType In CompanyLadgerTypes Do
+//		
+//		For Each Row In ThisObject.PaymentList Do
+//			
+//			AnalyticRow = Undefined;
+//			Filter = New Structure();
+//			Filter.Insert("Key"       , Row.Key);
+//			Filter.Insert("Identifier", Identifier);
+//			Filter.Insert("LadgerType", LadgerType);
+//			AnalyticRows = ThisObject.AccountingRowAnalytics.FindRows(Filter);
+//			If AnalyticRows.Count() > 1 Then
+//				Raise StrTemplate("More than 1 analytic rows by filter: Key[%1] Identifier[%2] LadgerType[%3]",
+//					Filter.Key, Filter.Identifier, Filter.LadgerType);
+//			ElsIf AnalyticRows.Count() = 1 Then
+//				AnalyticRow = AnalyticRows[0];
+//				If AnalyticRow.IsFixed Then
+//					Continue;
+//				EndIf;
+//			EndIf;
+//			AnalyticData = AccountingClientServer.GetAccountingAnalytics(ThisObject, Row, Identifier, LadgerType);
+//			
+//			If AnalyticRow = Undefined Then
+//				AnalyticRow = ThisObject.AccountingRowAnalytics.Add();
+//				AnalyticRow.Key = Row.Key;
+//				AccountingClientServer.FillAccountingAnalytics(AnalyticRow, AnalyticData, ThisObject.AccountingExtDimensions);
+//			Else
+//				If AccountingClientServer.AccountingAnalyticsIsChanged(AnalyticRow, AnalyticData, ThisObject.AccountingExtDimensions) Then
+//					AccountingClientServer.FillAccountingAnalytics(AnalyticRow, AnalyticData, ThisObject.AccountingExtDimensions);
+//				EndIf;
+//			EndIf;
+//			
+//		EndDo;
+//	EndDo;
 	
 	ThisObject.DocumentAmount = ThisObject.PaymentList.Total("TotalAmount");
 EndProcedure

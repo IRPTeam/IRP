@@ -3,7 +3,6 @@
 &AtServer
 Procedure BeforeWriteAtServer(Cancel, CurrentObject, WriteParameters)
 	AddAttributesAndPropertiesServer.BeforeWriteAtServer(ThisObject, Cancel, CurrentObject, WriteParameters);
-	CurrentObject.AdditionalProperties.Insert("AccountingRowAnalytics", ThisObject.CacheAccountingRowAnalytics.Unload());
 EndProcedure
 
 &AtClient

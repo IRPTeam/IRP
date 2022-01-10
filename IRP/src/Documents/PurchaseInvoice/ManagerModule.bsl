@@ -179,6 +179,8 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R5022T_Expenses());
 	QueryArray.Add(T3010S_RowIDInfo());
 	QueryArray.Add(T2015S_TransactionsInfo());
+	QueryArray.Add(T1040T_AccountingAmounts());
+	QueryArray.Add(T1050T_AccountingQuantities());
 	Return QueryArray;
 EndFunction
 
@@ -877,5 +879,30 @@ Function T2015S_TransactionsInfo()
 	|	ItemList.PurchaseOrder,
 	|	ItemList.BasisDocument";
 EndFunction
+
+Function T1040T_AccountingAmounts()
+	Return
+	"SELECT
+	|	ItemList.Period,
+	|	ItemList.Key AS RowKey,
+	|	ItemList.Currency,
+	|	ItemList.Amount,
+	|	ItemList.NetAmount
+	|INTO T1040T_AccountingAmounts
+	|FROM
+	|	ItemList AS ItemList";
+EndFunction
+
+Function T1050T_AccountingQuantities()
+	Return
+	"SELECT
+	|	ItemList.Period,
+	|	ItemList.Key AS RowKey,
+	|	ItemList.Quantity
+	|INTO T1050T_AccountingQuantities
+	|FROM
+	|	ItemList AS ItemList";
+EndFunction
+
 
 #EndRegion

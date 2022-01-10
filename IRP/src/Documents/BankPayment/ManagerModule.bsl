@@ -177,6 +177,7 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	Tables.R3010B_CashOnHand.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R3035T_CashPlanning.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 	Tables.R5022T_Expenses.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+	Tables.T1040T_AccountingAmounts.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 
 	PostingServer.FillPostingTables(Tables, Ref, QueryArray, Parameters);
 #EndRegion
@@ -257,6 +258,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R3025B_PurchaseOrdersToBePaid());
 	QueryArray.Add(T2014S_AdvancesInfo());
 	QueryArray.Add(T2015S_TransactionsInfo());
+	QueryArray.Add(T1040T_AccountingAmounts());
 	Return QueryArray;
 EndFunction
 
@@ -688,6 +690,19 @@ Function T2015S_TransactionsInfo()
 	|WHERE
 	|	PaymentList.IsReturnToCustomer
 	|	AND NOT PaymentList.IsAdvance";
+EndFunction
+
+Function T1040T_AccountingAmounts()
+	Return
+	"SELECT
+	|	PaymentList.Period,
+	|	PaymentList.Key,
+	|	PaymentList.Key AS RowKey,
+	|	PaymentList.Currency,
+	|	PaymentList.Amount
+	|INTO T1040T_AccountingAmounts
+	|FROM
+	|	PaymentList AS PaymentList";
 EndFunction
 
 #EndRegion

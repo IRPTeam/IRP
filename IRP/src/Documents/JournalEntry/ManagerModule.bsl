@@ -1,4 +1,14 @@
 
+Procedure PresentationFieldsGetProcessing(Fields, StandardProcessing)
+	StandardProcessing = False;
+	Fields.Add("Basis");
+EndProcedure
+
+Procedure PresentationGetProcessing(Data, Presentation, StandardProcessing)
+	StandardProcessing = False;
+	Presentation = Data.Basis;
+EndProcedure
+
 Function GetInformationAboutMovements(Ref) Export
 	Str = New Structure();
 	Str.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
@@ -22,3 +32,4 @@ Function GetQueryTextsMasterTables()
 	QueryArray = New Array();
 	Return QueryArray;
 EndFunction
+

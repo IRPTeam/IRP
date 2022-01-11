@@ -56,6 +56,19 @@
     <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
   </attributes>
+  <attributes uuid="6cfbf7eb-73f1-452a-8325-015f3d55427e">
+    <name>AdvancesClosing</name>
+    <synonym>
+      <key>en</key>
+      <value>Advances closing</value>
+    </synonym>
+    <type>
+      <types>DocumentRef.VendorsAdvancesClosing</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+  </attributes>
   <dimensions uuid="9093ee6d-cb6a-461c-b215-2ab1e8364f21">
     <name>RowKey</name>
     <synonym>
@@ -92,6 +105,20 @@
     </synonym>
     <type>
       <types>CatalogRef.Currencies</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <useInTotals>true</useInTotals>
+  </dimensions>
+  <dimensions uuid="77ef6b63-e887-4010-b7eb-5aecdb5539b1">
+    <name>IsAdvanceClosing</name>
+    <synonym>
+      <key>en</key>
+      <value>Is advance closing</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

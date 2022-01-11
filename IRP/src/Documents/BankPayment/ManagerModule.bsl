@@ -699,10 +699,27 @@ Function T1040T_AccountingAmounts()
 	|	PaymentList.Key,
 	|	PaymentList.Key AS RowKey,
 	|	PaymentList.Currency,
-	|	PaymentList.Amount
+	|	PaymentList.Amount,
+	|	FALSE AS IsAdvanceClosing,
+	|	UNDEFINED AS AdvancesClosing
 	|INTO T1040T_AccountingAmounts
 	|FROM
-	|	PaymentList AS PaymentList";
+	|	PaymentList AS PaymentList
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	OffsetOfAdvances.Period,
+	|	OffsetOfAdvances.Key,
+	|	OffsetOfAdvances.Key AS RowKey,
+	|	OffsetOfAdvances.Currency,
+	|	OffsetOfAdvances.Amount,
+	|	TRUE,
+	|	OffsetOfAdvances.Recorder
+	|FROM
+	|	InformationRegister.T2010S_OffsetOfAdvances AS OffsetOfAdvances
+	|WHERE
+	|	OffsetOfAdvances.Document = &Ref";
 EndFunction
 
 #EndRegion

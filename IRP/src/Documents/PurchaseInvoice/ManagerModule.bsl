@@ -887,10 +887,27 @@ Function T1040T_AccountingAmounts()
 	|	ItemList.Key AS RowKey,
 	|	ItemList.Currency,
 	|	ItemList.Amount,
-	|	ItemList.NetAmount
+	|	ItemList.NetAmount,
+	|	FALSE AS IsAdvanceClosing,
+	|	UNDEFINED AS AdvancesClosing
 	|INTO T1040T_AccountingAmounts
 	|FROM
-	|	ItemList AS ItemList";
+	|	ItemList AS ItemList
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	OffsetOfAdvances.Period,
+	|	OffsetOfAdvances.Key AS RowKey,
+	|	OffsetOfAdvances.Currency,
+	|	OffsetOfAdvances.Amount,
+	|	0,
+	|	TRUE,
+	|	OffsetOfAdvances.Recorder
+	|FROM
+	|	InformationRegister.T2010S_OffsetOfAdvances AS OffsetOfAdvances
+	|WHERE
+	|	OffsetOfAdvances.Document = &Ref";
 EndFunction
 
 Function T1050T_AccountingQuantities()

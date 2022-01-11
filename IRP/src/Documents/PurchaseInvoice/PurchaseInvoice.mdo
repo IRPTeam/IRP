@@ -1434,6 +1434,37 @@
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
+    <attributes uuid="02e8bc64-0856-4607-82cd-59b6f829cf0e">
+      <name>Identifier</name>
+      <synonym>
+        <key>en</key>
+        <value>Identifier</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers>
+          <length>100</length>
+        </stringQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="3f24bc1d-3e9f-4aea-a877-8507997226e5">
+      <name>LadgerType</name>
+      <synonym>
+        <key>en</key>
+        <value>Ladger type</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.LadgerTypes</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
     <attributes uuid="7d44ea77-c5ef-46f4-8598-ac150facdbf1">
       <name>AnalyticType</name>
       <synonym>

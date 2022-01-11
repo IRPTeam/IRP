@@ -2,6 +2,8 @@
 
 #Region PurchaseInvoice
 
+#Region Analytics
+
 Function GetAccountingAnalytics_PurchaseInvoice(ObjectData, RowData, Identifier, LadgerType) Export
 	Parameters = New Structure();
 	Parameters.Insert("ObjectData" , ObjectData);
@@ -10,22 +12,14 @@ Function GetAccountingAnalytics_PurchaseInvoice(ObjectData, RowData, Identifier,
 	Parameters.Insert("LadgerType" , LadgerType);
 	If Upper(Identifier) = Upper("Dr_ItemKeyTBAccounts_Cr_PartnerTBAccounts") Then
 		Return GetAccountingAnalytics_PurchaseInvoice_Dr_ItemKeyTBAccounts_Cr_PartnerTBAccounts(Parameters);
+	ElsIf Upper(Identifier) = Upper("Dr_PartnerTBAccountsTrn_Cr_PartnerTBAccountsAdv") Then
+		Return GetAccountingAnalytics_PurchaseInvoice_Dr_PartnerTBAccountsTrn_Cr_PartnerTBAccountsAdv(Parameters);
 	EndIf;
 EndFunction
 
 Function GetAccountingAnalytics_PurchaseInvoice_Dr_ItemKeyTBAccounts_Cr_PartnerTBAccounts(Parameters)
-	AccountingAnalytics = New Structure();
-	AccountingAnalytics.Insert("Identifier", Parameters.Identifier);
-	AccountingAnalytics.Insert("LadgerType", Parameters.LadgerType);
+	AccountingAnalytics = GetAccountingAnalyticsResult(Parameters);
 	
-	// Debit - ItemKeyTBAccounts
-	AccountingAnalytics.Insert("Debit", Undefined);
-	AccountingAnalytics.Insert("DebitExtDimensions", New Array());
-	
-	// Credit - PartnerTBAccounts
-	AccountingAnalytics.Insert("Credit", Undefined);
-	AccountingAnalytics.Insert("CreditExtDimensions", New Array());
-
 	Period = 
 	CalculationStringsClientServer.GetSliceLastDateByRefAndDate(Parameters.ObjectData.Ref, Parameters.ObjectData.Date);
 
@@ -44,6 +38,8 @@ Function GetAccountingAnalytics_PurchaseInvoice_Dr_ItemKeyTBAccounts_Cr_PartnerT
 			
 			ExtDimension.Insert("Key"          , Parameters.RowData.Key);
 			ExtDimension.Insert("AnalyticType" , Enums.AccountingAnalyticTypes.Debit);
+			ExtDimension.Insert("Identifier"   , Parameters.Identifier);
+			ExtDimension.Insert("LadgerType"   , Parameters.LadgerType);
 			AccountingAnalytics.DebitExtDimensions.Add(ExtDimension);
 		EndDo;
 	EndIf;
@@ -62,6 +58,58 @@ Function GetAccountingAnalytics_PurchaseInvoice_Dr_ItemKeyTBAccounts_Cr_PartnerT
 			
 			ExtDimension.Insert("Key"          , Parameters.RowData.Key);
 			ExtDimension.Insert("AnalyticType" , Enums.AccountingAnalyticTypes.Credit);
+			ExtDimension.Insert("Identifier"   , Parameters.Identifier);
+			ExtDimension.Insert("LadgerType"   , Parameters.LadgerType);
+			AccountingAnalytics.CreditExtDimensions.Add(ExtDimension);
+		EndDo;
+	EndIf;
+	
+	Return AccountingAnalytics;
+EndFunction
+
+// by header
+Function GetAccountingAnalytics_PurchaseInvoice_Dr_PartnerTBAccountsTrn_Cr_PartnerTBAccountsAdv(Parameters)
+	AccountingAnalytics = GetAccountingAnalyticsResult(Parameters);
+	
+	Period = 
+	CalculationStringsClientServer.GetSliceLastDateByRefAndDate(Parameters.ObjectData.Ref, Parameters.ObjectData.Date);
+
+	Accounts = GetPartnerTBAccounts(Period, Parameters.ObjectData.Company, Parameters.ObjectData.Partner, Parameters.ObjectData.Agreement);
+	If ValueIsFilled(Accounts.AccountTransactions) Then
+		AccountingAnalytics.Debit = Accounts.AccountTransactions;
+	EndIf;
+	
+	// Debit - Analytics
+	If ValueIsFilled(AccountingAnalytics.Debit) Then
+		For Each ExtDim In AccountingAnalytics.Debit.ExtDimensionTypes Do
+			ExtDimension = New Structure("ExtDimensionType, ExtDimension");
+			ExtDimension.ExtDimensionType  = ExtDim.ExtDimensionType;
+			ExtDimension.ExtDimension = 
+			GetDebitExtDimension_PurchaseInvoice(Parameters.ObjectData, Undefined, ExtDim.ExtDimensionType);
+			
+			ExtDimension.Insert("Key"          , "");
+			ExtDimension.Insert("AnalyticType" , Enums.AccountingAnalyticTypes.Debit);
+			ExtDimension.Insert("Identifier"   , Parameters.Identifier);
+			ExtDimension.Insert("LadgerType"   , Parameters.LadgerType);
+			AccountingAnalytics.DebitExtDimensions.Add(ExtDimension);
+		EndDo;
+	EndIf;
+	
+	If ValueIsFilled(Accounts.AccountAdvances) Then
+		AccountingAnalytics.Credit = Accounts.AccountAdvances;
+	EndIf;
+	// Credit - Analytics
+	If ValueIsFilled(AccountingAnalytics.Credit) Then
+		For Each ExtDim In AccountingAnalytics.Credit.ExtDimensionTypes Do
+			ExtDimension = New Structure("ExtDimensionType, ExtDimension");
+			ExtDimension.ExtDimensionType  = ExtDim.ExtDimensionType;
+			ExtDimension.ExtDimension = 
+			GetCreditExtDimension_PurchaseInvoice(Parameters.ObjectData, Undefined, ExtDim.ExtDimensionType);
+			
+			ExtDimension.Insert("Key"          , "");
+			ExtDimension.Insert("AnalyticType" , Enums.AccountingAnalyticTypes.Credit);
+			ExtDimension.Insert("Identifier"   , Parameters.Identifier);
+			ExtDimension.Insert("LadgerType"   , Parameters.LadgerType);
 			AccountingAnalytics.CreditExtDimensions.Add(ExtDimension);
 		EndDo;
 	EndIf;
@@ -71,10 +119,14 @@ EndFunction
 
 Function GetDebitExtDimension_PurchaseInvoice(ObjectData, RowData, ExtDimensionType)
 	ArrayOfTypes = ExtDimensionType.ValueType.Types();
-	If ArrayOfTypes.Find(Type("CatalogRef.ItemKeys")) <> Undefined Then
+	If RowData <> Undefined And ArrayOfTypes.Find(Type("CatalogRef.ItemKeys")) <> Undefined Then
 		Return RowData.ItemKey;
-	ElsIf ArrayOfTypes.Find(Type("CatalogRef.Stores")) <> Undefined Then
+	ElsIf RowData <> Undefined And ArrayOfTypes.Find(Type("CatalogRef.Stores")) <> Undefined Then
 		Return RowData.Store;
+	ElsIf ArrayOfTypes.Find(Type("CatalogRef.Partners")) <> Undefined Then
+		Return ObjectData.Partner;
+	ElsIf ArrayOfTypes.Find(Type("CatalogRef.Agreements")) <> Undefined Then
+		Return ObjectData.Agreement;
 	EndIf;
 	Return Undefined;
 EndFunction
@@ -89,6 +141,10 @@ Function GetCreditExtDimension_PurchaseInvoice(ObjectData, RowData, ExtDimension
 	Return Undefined;
 EndFunction
 
+#EndRegion
+
+#Region Data
+
 Function GetDataByAccountingAnalytics_PurchaseInvoice(DocRef, RowData) Export
 	If Not ValueIsFilled(RowData.AccountDebit) Or Not ValueIsFilled(RowData.AccountCredit) Then
 		Return GetAccountingDataResult();
@@ -102,6 +158,12 @@ Function GetDataByAccountingAnalytics_PurchaseInvoice(DocRef, RowData) Export
 		Parameters.Insert("CurrencyMovementType", RowData.LadgerType.CurrencyMovementType);
 		
 		Data = GetDataByAccountingAnalytics_PurchaseInvoice_Dr_ItemKeyTBAccounts_Cr_PartnerTBAccounts(Parameters);
+	ElsIf Upper(RowData.Identifier) = Upper("Dr_PartnerTBAccountsTrn_Cr_PartnerTBAccountsAdv") Then
+		Parameters = New Structure();
+		Parameters.Insert("Recorder" , DocRef);
+		Parameters.Insert("CurrencyMovementType", RowData.LadgerType.CurrencyMovementType);
+		
+		Data = GetDataByAccountingAnalytics_PurchaseInvoice_Dr_PartnerTBAccountsTrn_Cr_PartnerTBAccountsAdv(Parameters);
 	EndIf;
 	
 	Return FillAccountingDataResult(Data);
@@ -174,9 +236,63 @@ Function GetDataByAccountingAnalytics_PurchaseInvoice_Dr_ItemKeyTBAccounts_Cr_Pa
 	Return Result;
 EndFunction
 
+Function GetDataByAccountingAnalytics_PurchaseInvoice_Dr_PartnerTBAccountsTrn_Cr_PartnerTBAccountsAdv(Parameters)
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	T1040T_AccountingAmounts.Currency,
+	|	SUM(T1040T_AccountingAmounts.Amount) AS Amount
+	|FROM
+	|	AccumulationRegister.T1040T_AccountingAmounts AS T1040T_AccountingAmounts
+	|WHERE
+	|	T1040T_AccountingAmounts.Recorder = &Recorder
+	|	AND T1040T_AccountingAmounts.IsAdvanceClosing
+	|	AND
+	|		T1040T_AccountingAmounts.CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
+	|GROUP BY
+	|	T1040T_AccountingAmounts.Currency
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	SUM(T1040T_AccountingAmounts.Amount) AS Amount
+	|FROM
+	|	AccumulationRegister.T1040T_AccountingAmounts AS T1040T_AccountingAmounts
+	|WHERE
+	|	T1040T_AccountingAmounts.Recorder = &Recorder
+	|	AND T1040T_AccountingAmounts.IsAdvanceClosing
+	|	AND T1040T_AccountingAmounts.CurrencyMovementType = &CurrencyMovementType";
+	
+	Query.SetParameter("Recorder"             , Parameters.Recorder);
+	Query.SetParameter("CurrencyMovementType" , Parameters.CurrencyMovementType);
+	
+	QueryResults = Query.ExecuteBatch();
+	
+	Result = GetAccountingDataResult();
+	
+	QuerySelection = QueryResults[0].Select();
+	If QuerySelection.Next() Then
+		Result.CurrencyDr       = QuerySelection.Currency;
+		Result.CurrencyAmountDr = QuerySelection.Amount;
+		Result.CurrencyCr       = QuerySelection.Currency;
+		Result.CurrencyAmountCr = QuerySelection.Amount;
+	Endif;
+	
+	QuerySelection = QueryResults[1].Select();
+	If QuerySelection.Next() Then
+		Result.Amount = QuerySelection.Amount;
+	Endif;
+	
+	Return Result;
+EndFunction
+
+#EndRegion
+
 #EndRegion
 
 #Region BankPayment
+
+#Region Analytics
 
 Function GetAccountingAnalytics_BankPayment(ObjectData, RowData, Identifier, LadgerType) Export
 	Parameters = New Structure();
@@ -190,18 +306,8 @@ Function GetAccountingAnalytics_BankPayment(ObjectData, RowData, Identifier, Lad
 EndFunction
 
 Function GetAccountingAnalytics_BankPayment_Dr_PartnerTBAccounts_Cr_CashAccountTBAccounts(Parameters)
-	AccountingAnalytics = New Structure();
-	AccountingAnalytics.Insert("Identifier", Parameters.Identifier);
-	AccountingAnalytics.Insert("LadgerType", Parameters.LadgerType);
+	AccountingAnalytics = GetAccountingAnalyticsResult(Parameters);
 	
-	// Debit - PartnerTBAccounts
-	AccountingAnalytics.Insert("Debit", Undefined);
-	AccountingAnalytics.Insert("DebitExtDimensions", New Array());
-	
-	// Credit - CashAccountTBAccounts
-	AccountingAnalytics.Insert("Credit", Undefined);
-	AccountingAnalytics.Insert("CreditExtDimensions", New Array());
-
 	Period = 
 	CalculationStringsClientServer.GetSliceLastDateByRefAndDate(Parameters.ObjectData.Ref, Parameters.ObjectData.Date);
 
@@ -226,6 +332,8 @@ Function GetAccountingAnalytics_BankPayment_Dr_PartnerTBAccounts_Cr_CashAccountT
 			
 			ExtDimension.Insert("Key"          , Parameters.RowData.Key);
 			ExtDimension.Insert("AnalyticType" , Enums.AccountingAnalyticTypes.Debit);
+			ExtDimension.Insert("Identifier"   , Parameters.Identifier);
+			ExtDimension.Insert("LadgerType"   , Parameters.LadgerType);
 			AccountingAnalytics.DebitExtDimensions.Add(ExtDimension);
 		EndDo;
 	EndIf;
@@ -245,6 +353,8 @@ Function GetAccountingAnalytics_BankPayment_Dr_PartnerTBAccounts_Cr_CashAccountT
 			
 			ExtDimension.Insert("Key"          , Parameters.RowData.Key);
 			ExtDimension.Insert("AnalyticType" , Enums.AccountingAnalyticTypes.Credit);
+			ExtDimension.Insert("Identifier"   , Parameters.Identifier);
+			ExtDimension.Insert("LadgerType"   , Parameters.LadgerType);
 			AccountingAnalytics.CreditExtDimensions.Add(ExtDimension);
 		EndDo;
 	EndIf;
@@ -269,6 +379,10 @@ Function GetCreditExtDimension_BankPayment(ObjectData, RowData, ExtDimensionType
 	EndIf;
 	Return Undefined;
 EndFunction
+
+#EndRegion
+
+#Region Data
 
 Function GetDataByAccountingAnalytics_BankPayment(DocRef, RowData) Export
 	If Not ValueIsFilled(RowData.AccountDebit) Or Not ValueIsFilled(RowData.AccountCredit) Then
@@ -340,7 +454,24 @@ EndFunction
 
 #EndRegion
 
+#EndRegion
+
 #Region Service
+
+Function GetAccountingAnalyticsResult(Parameters)
+	AccountingAnalytics = New Structure();
+	AccountingAnalytics.Insert("Identifier", Parameters.Identifier);
+	AccountingAnalytics.Insert("LadgerType", Parameters.LadgerType);
+	
+	// Debit - PartnerTBAccounts
+	AccountingAnalytics.Insert("Debit", Undefined);
+	AccountingAnalytics.Insert("DebitExtDimensions", New Array());
+	
+	// Credit - CashAccountTBAccounts
+	AccountingAnalytics.Insert("Credit", Undefined);
+	AccountingAnalytics.Insert("CreditExtDimensions", New Array());
+	Return AccountingAnalytics;
+EndFunction
 
 Function GetAccountingDataResult()
 	Result = New Structure();

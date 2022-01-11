@@ -22,6 +22,8 @@ Procedure OnWrite(Cancel)
 		
 		Filter = New Structure();
 		Filter.Insert("Key"          , Row.Key);
+		Filter.Insert("Identifier"   , Row.Identifier);
+		Filter.Insert("LadgerType"   , Row.LadgerType);
 		Filter.Insert("AnalyticType" , Enums.AccountingAnalyticTypes.EmptyRef());
 		
 		// Debit analytics

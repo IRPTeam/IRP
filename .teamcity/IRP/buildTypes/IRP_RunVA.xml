@@ -298,7 +298,8 @@ $VanessaRun = {
     'setvariablevaluesinstepsallurereport': true,
     'createlogs': true,
     'attachadditionaldatawhencomparingvaluewithreferenceallure': true,
-    'savemxlashtmlinallure': true
+    'savemxlashtmlinallure': true,
+    'usethegherkinparserfromthevanessaextaddin': false
 }"
     #Write-Output "$text"
     $a = $text | ConvertFrom-Json
@@ -332,7 +333,7 @@ $VanessaRun = {
     $ProcessInfo = New-Object System.Diagnostics.ProcessStartInfo 
     $ProcessInfo.FileName = "$PathTo1CPlatform"
     $ProcessInfo.UseShellExecute = $false 
-    $ProcessInfo.Arguments = " $AreaID /N $LoginTo1C /P $PassTo1C ""$TempDb"" /Execute ""$OScriptLib/lib/vanessa-automation/vanessa-automation.epf"" /TestManager /C""StartFeaturePlayer; VBParams=$VBParams""" 
+    $ProcessInfo.Arguments = " $AreaID /N $LoginTo1C /P $PassTo1C ""$TempDb"" /Execute ""$OScriptLib/lib/vanessa-automation/vanessa-automation.epf"" /TestManager /C""StartFeaturePlayer;QuietInstallVanessaExt;VBParams=$VBParams""" 
     $Process = New-Object System.Diagnostics.Process 
     $Process.StartInfo = $ProcessInfo 
     $Process.Start() | Out-Null  
@@ -635,7 +636,7 @@ Start-Sleep 10]]></param>
 %teamcity.tool.allure-commandline%\bin\allure.bat generate "VAResult/allure/*" --clean -o "allure-report"
 Compress-Archive -Path "allure-report/*" -DestinationPath "allure-report.zip"]]></param>
           <param name="jetbrains_powershell_script_mode" value="CODE" />
-          <param name="teamcity.step.mode" value="execute_always" />
+          <param name="teamcity.step.mode" value="execute_if_failed" />
         </parameters>
       </runner>
       <runner id="RUNNER_71" name="Zip cover file" type="jetbrains_powershell">
@@ -644,7 +645,7 @@ Compress-Archive -Path "allure-report/*" -DestinationPath "allure-report.zip"]]>
           <param name="jetbrains_powershell_noprofile" value="true" />
           <param name="jetbrains_powershell_script_code" value="Compress-Archive -Path Cover.xml -DestinationPath Cover.zip" />
           <param name="jetbrains_powershell_script_mode" value="CODE" />
-          <param name="teamcity.step.mode" value="execute_always" />
+          <param name="teamcity.step.mode" value="execute_if_failed" />
         </parameters>
       </runner>
     </build-runners>

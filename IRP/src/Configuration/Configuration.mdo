@@ -170,6 +170,7 @@
   <commonPictures>CommonPicture.Total</commonPictures>
   <commonPictures>CommonPicture.Unlock</commonPictures>
   <commonPictures>CommonPicture.EditCurrencies</commonPictures>
+  <commonPictures>CommonPicture.PersonCard</commonPictures>
   <sessionParameters>SessionParameter.ClientType</sessionParameters>
   <sessionParameters>SessionParameter.ConnectedAddDataProc</sessionParameters>
   <sessionParameters>SessionParameter.ConnectionSettings</sessionParameters>
@@ -725,6 +726,7 @@
   <informationRegisters>InformationRegister.T2015S_TransactionsInfo</informationRegisters>
   <informationRegisters>InformationRegister.T2016S_VendorsAdvancesRelevance</informationRegisters>
   <informationRegisters>InformationRegister.T2017S_CustomersAdvancesRelevance</informationRegisters>
+  <informationRegisters>InformationRegister.RetailWorkers</informationRegisters>
   <accumulationRegisters>AccumulationRegister.CashInTransit</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1001T_Purchases</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1002T_PurchaseReturns</accumulationRegisters>

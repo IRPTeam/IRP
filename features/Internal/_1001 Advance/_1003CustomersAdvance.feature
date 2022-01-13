@@ -84,6 +84,9 @@ Scenario: _1003000 preparation (customers advances closing)
 			| "Documents.ShipmentConfirmation.FindByNumber(2).GetObject().Write(DocumentWriteMode.Posting);" |
 			| "Documents.ShipmentConfirmation.FindByNumber(3).GetObject().Write(DocumentWriteMode.Posting);" |
 			| "Documents.ShipmentConfirmation.FindByNumber(8).GetObject().Write(DocumentWriteMode.Posting);" |
+		When Create document SalesOrder objects (SI more than SO)
+		And I execute 1C:Enterprise script at server
+ 			| "Documents.SalesOrder.FindByNumber(5).GetObject().Write(DocumentWriteMode.Posting);" |
 		* Load SI
 		When Create document SalesInvoice objects (check movements)
 		And I execute 1C:Enterprise script at server

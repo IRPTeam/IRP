@@ -39,6 +39,7 @@ Function GetDocumentTable_CashTransferOrder(ArrayOfBasisDocuments, EndOfDate = U
 	|	tmp.BasedOn AS BasedOn,
 	|	tmp.TransactionType AS TransactionType,
 	|	tmp.Company AS Company,
+	|	tmp.Branch AS Branch,
 	|	tmp.Account AS Account,
 	|	tmp.Currency AS Currency,
 	|	tmp.FinancialMovementType AS FinancialMovementType,
@@ -63,6 +64,7 @@ Function GetDocumentTable_CashTransferOrder_QueryText() Export
 		   |		ELSE VALUE(Enum.IncomingPaymentTransactionType.CurrencyExchange)
 		   |	END AS TransactionType,
 		   |	R3035T_CashPlanningTurnovers.Company AS Company,
+		   |	R3035T_CashPlanningTurnovers.Branch AS Branch,
 		   |	R3035T_CashPlanningTurnovers.Account AS Account,
 		   |	R3035T_CashPlanningTurnovers.Currency AS Currency,
 		   |	R3035T_CashPlanningTurnovers.FinancialMovementType AS FinancialMovementType,
@@ -97,6 +99,7 @@ Function GetDocumentTable_CashTransferOrder_QueryText() Export
 		   |////////////////////////////////////////////////////////////////////////////////
 		   |SELECT
 		   |	R3035T_CashPlanning.Company AS Company,
+		   |	R3035T_CashPlanning.Branch AS Branch,
 		   |	Doc.SendCurrency AS SendCurrency,
 		   |	R3035T_CashPlanning.BasisDocument AS BasisDocument,
 		   |	CAST(R3035T_CashPlanning.Recorder AS Document.BankPayment).TransitAccount AS TransitAccount,
@@ -118,6 +121,7 @@ Function GetDocumentTable_CashTransferOrder_QueryText() Export
 		   |		AND R3035T_CashPlanning.Amount < 0
 		   |GROUP BY
 		   |	R3035T_CashPlanning.Company,
+		   |	R3035T_CashPlanning.Branch,
 		   |	Doc.SendCurrency,
 		   |	R3035T_CashPlanning.BasisDocument,
 		   |	CAST(R3035T_CashPlanning.Recorder AS Document.BankPayment).TransitAccount
@@ -128,6 +132,7 @@ Function GetDocumentTable_CashTransferOrder_QueryText() Export
 		   |	tmp_IncomingMoney.BasedOn AS BasedOn,
 		   |	tmp_IncomingMoney.TransactionType AS TransactionType,
 		   |	tmp_IncomingMoney.Company AS Company,
+		   |	tmp_IncomingMoney.Branch AS Branch,
 		   |	tmp_IncomingMoney.Account AS Account,
 		   |	tmp_IncomingMoney.Currency AS Currency,
 		   |	tmp_IncomingMoney.FinancialMovementType AS FinancialMovementType,
@@ -141,6 +146,7 @@ Function GetDocumentTable_CashTransferOrder_QueryText() Export
 		   |	tmp_IncomingMoney AS tmp_IncomingMoney
 		   |		LEFT JOIN tmp_OutgoingMoney AS tmp_OutgoingMoney
 		   |		ON tmp_IncomingMoney.Company = tmp_OutgoingMoney.Company
+		   |		AND tmp_IncomingMoney.Branch = tmp_OutgoingMoney.Branch
 		   |		AND tmp_IncomingMoney.CurrencyExchange = tmp_OutgoingMoney.SendCurrency
 		   |		AND tmp_IncomingMoney.PlaningTransactionBasis = tmp_OutgoingMoney.BasisDocument";
 EndFunction
@@ -154,16 +160,17 @@ Function GetDocumentTable_CashTransferOrder_ForClient(ArrayOfBasisDocuments, Obj
 	ValueTable = GetDocumentTable_CashTransferOrder(ArrayOfBasisDocuments, EndOfDate);
 	For Each Row In ValueTable Do
 		NewRow = New Structure();
-		NewRow.Insert("BasedOn", Row.BasedOn);
-		NewRow.Insert("TransactionType", Row.TransactionType);
-		NewRow.Insert("Company", Row.Company);
-		NewRow.Insert("Account", Row.Account);
-		NewRow.Insert("Currency", Row.Currency);
-		NewRow.Insert("CurrencyExchange", Row.CurrencyExchange);
-		NewRow.Insert("Amount", Row.Amount);
-		NewRow.Insert("PlaningTransactionBasis", Row.PlaningTransactionBasis);
-		NewRow.Insert("TransitAccount", Row.TransitAccount);
-		NewRow.Insert("AmountExchange", Row.AmountExchange);
+		NewRow.Insert("BasedOn"                 , Row.BasedOn);
+		NewRow.Insert("TransactionType"         , Row.TransactionType);
+		NewRow.Insert("Company"                 , Row.Company);
+		NewRow.Insert("Branch"                  , Row.Branch);
+		NewRow.Insert("Account"                 , Row.Account);
+		NewRow.Insert("Currency"                , Row.Currency);
+		NewRow.Insert("CurrencyExchange"        , Row.CurrencyExchange);
+		NewRow.Insert("Amount"                  , Row.Amount);
+		NewRow.Insert("PlaningTransactionBasis" , Row.PlaningTransactionBasis);
+		NewRow.Insert("TransitAccount"          , Row.TransitAccount);
+		NewRow.Insert("AmountExchange"          , Row.AmountExchange);
 		ArrayOfResults.Add(NewRow);
 	EndDo;
 	Return ArrayOfResults;

@@ -83,17 +83,17 @@ EndFunction
 Function JoinDocumentsStructure(ArrayOfTables)
 
 	ValueTable = New ValueTable();
-	ValueTable.Columns.Add("BasedOn", New TypeDescription("String"));
-	ValueTable.Columns.Add("Company", New TypeDescription("CatalogRef.Companies"));
-	ValueTable.Columns.Add("CashAccount", New TypeDescription("CatalogRef.CashAccounts"));
-	ValueTable.Columns.Add("Currency", New TypeDescription("CatalogRef.Currencies"));
-	ValueTable.Columns.Add("TransactionType", New TypeDescription("EnumRef.OutgoingPaymentTransactionTypes"));
-
-	ValueTable.Columns.Add("BasisDocument", New TypeDescription(Metadata.DefinedTypes.typeApTransactionBasises.Type));
-	ValueTable.Columns.Add("Agreement", New TypeDescription("CatalogRef.Agreements"));
-	ValueTable.Columns.Add("Partner", New TypeDescription("CatalogRef.Partners"));
-	ValueTable.Columns.Add("Amount", New TypeDescription(Metadata.DefinedTypes.typeAmount.Type));
-	ValueTable.Columns.Add("Payee", New TypeDescription("CatalogRef.Companies"));
+	ValueTable.Columns.Add("BasedOn"         , New TypeDescription("String"));
+	ValueTable.Columns.Add("Company"         , New TypeDescription("CatalogRef.Companies"));
+	ValueTable.Columns.Add("Branch"          , New TypeDescription("CatalogRef.BusinessUnits"));
+	ValueTable.Columns.Add("CashAccount"     , New TypeDescription("CatalogRef.CashAccounts"));
+	ValueTable.Columns.Add("Currency"        , New TypeDescription("CatalogRef.Currencies"));
+	ValueTable.Columns.Add("TransactionType" , New TypeDescription("EnumRef.OutgoingPaymentTransactionTypes"));
+	ValueTable.Columns.Add("BasisDocument"   , New TypeDescription(Metadata.DefinedTypes.typeApTransactionBasises.Type));
+	ValueTable.Columns.Add("Agreement"       , New TypeDescription("CatalogRef.Agreements"));
+	ValueTable.Columns.Add("Partner"         , New TypeDescription("CatalogRef.Partners"));
+	ValueTable.Columns.Add("Amount"          , New TypeDescription(Metadata.DefinedTypes.typeAmount.Type));
+	ValueTable.Columns.Add("Payee"           , New TypeDescription("CatalogRef.Companies"));
 	ValueTable.Columns.Add("PlaningTransactionBasis",
 		New TypeDescription(Metadata.DefinedTypes.typePlaningTransactionBasises.Type));
 	ValueTable.Columns.Add("FinancialMovementType", New TypeDescription("CatalogRef.ExpenseAndRevenueTypes"));
@@ -105,36 +105,38 @@ Function JoinDocumentsStructure(ArrayOfTables)
 	EndDo;
 
 	ValueTableCopy = ValueTable.Copy();
-	ValueTableCopy.GroupBy("BasedOn, TransactionType, Company, CashAccount, Currency");
+	ValueTableCopy.GroupBy("BasedOn, TransactionType, Company, Branch, CashAccount, Currency");
 
 	ArrayOfResults = New Array();
 
 	For Each Row In ValueTableCopy Do
 		Result = New Structure();
-		Result.Insert("BasedOn", Row.BasedOn);
-		Result.Insert("TransactionType", Row.TransactionType);
-		Result.Insert("Company", Row.Company);
-		Result.Insert("CashAccount", Row.CashAccount);
-		Result.Insert("Currency", Row.Currency);
-		Result.Insert("PaymentList", New Array());
+		Result.Insert("BasedOn"         , Row.BasedOn);
+		Result.Insert("TransactionType" , Row.TransactionType);
+		Result.Insert("Company"         , Row.Company);
+		Result.Insert("Branch"          , Row.Branch);
+		Result.Insert("CashAccount"     , Row.CashAccount);
+		Result.Insert("Currency"        , Row.Currency);
+		Result.Insert("PaymentList"     , New Array());
 
 		Filter = New Structure();
-		Filter.Insert("BasedOn", Row.BasedOn);
-		Filter.Insert("TransactionType", Row.TransactionType);
-		Filter.Insert("Company", Row.Company);
-		Filter.Insert("CashAccount", Row.CashAccount);
-		Filter.Insert("Currency", Row.Currency);
+		Filter.Insert("BasedOn"         , Row.BasedOn);
+		Filter.Insert("TransactionType" , Row.TransactionType);
+		Filter.Insert("Company"         , Row.Company);
+		Filter.Insert("Branch"          , Row.Branch);
+		Filter.Insert("CashAccount"     , Row.CashAccount);
+		Filter.Insert("Currency"        , Row.Currency);
 
 		PaymentList = ValueTable.Copy(Filter);
 		For Each RowPaymentList In PaymentList Do
 			NewRow = New Structure();
-			NewRow.Insert("BasisDocument", RowPaymentList.BasisDocument);
-			NewRow.Insert("Agreement", RowPaymentList.Agreement);
-			NewRow.Insert("Partner", RowPaymentList.Partner);
-			NewRow.Insert("Payee", RowPaymentList.Payee);
-			NewRow.Insert("TotalAmount", RowPaymentList.Amount);
-			NewRow.Insert("PlaningTransactionBasis", RowPaymentList.PlaningTransactionBasis);
-			NewRow.Insert("FinancialMovementType", RowPaymentList.FinancialMovementType);
+			NewRow.Insert("BasisDocument"           , RowPaymentList.BasisDocument);
+			NewRow.Insert("Agreement"               , RowPaymentList.Agreement);
+			NewRow.Insert("Partner"                 , RowPaymentList.Partner);
+			NewRow.Insert("Payee"                   , RowPaymentList.Payee);
+			NewRow.Insert("TotalAmount"             , RowPaymentList.Amount);
+			NewRow.Insert("PlaningTransactionBasis" , RowPaymentList.PlaningTransactionBasis);
+			NewRow.Insert("FinancialMovementType"   , RowPaymentList.FinancialMovementType);
 
 			Result.PaymentList.Add(NewRow);
 		EndDo;
@@ -171,6 +173,7 @@ Function GetDocumentTable_OutgoingPaymentOrder(ArrayOfBasisDocuments)
 	|	VALUE(Enum.OutgoingPaymentTransactionTypes.PaymentToVendor) AS TransactionType,
 	|	R3035T_CashPlanningTurnovers.FinancialMovementType AS FinancialMovementType,
 	|	R3035T_CashPlanningTurnovers.Company AS Company,
+	|	R3035T_CashPlanningTurnovers.Branch AS Branch,
 	|	R3035T_CashPlanningTurnovers.Account AS CashAccount,
 	|	R3035T_CashPlanningTurnovers.Currency AS Currency,
 	|	R3035T_CashPlanningTurnovers.Partner AS Partner,
@@ -191,7 +194,5 @@ EndFunction
 
 &AtServer
 Function GetDocumentTable_PurchaseInvoice(ArrayOfBasisDocuments)
-
 	Return DocumentsGenerationServer.GetDocumentTable_PurchaseInvoice_ForPayment(ArrayOfBasisDocuments);
-
 EndFunction

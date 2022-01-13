@@ -969,12 +969,7 @@ Scenario:  _200011 check filling in field from custom user settings in Cash tran
 		Then the form attribute named "Receiver" became equal to "Bank account, USD"
 	And I close all client application windows
 
-Scenario:  _200012 check filling in field from custom user settings in Invoice match
-	Given I open hyperlink "e1cib/list/Document.InvoiceMatch"
-	And I click the button named "FormCreate"
-	* Check that fields are filled in from user settings
-		Then the form attribute named "Company" became equal to "Main Company"
-	And I close all client application windows
+
 
 Scenario:  _200013 check filling in field from custom user settings in Goods receipt
 	Given I open hyperlink "e1cib/list/Document.GoodsReceipt"

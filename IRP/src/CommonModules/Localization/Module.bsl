@@ -257,6 +257,7 @@ Function Strings(Lang) Export
 	Strings.Insert("POS_s2", NStr("en = 'Card fees are more than the amount of the document'", Lang));
 	Strings.Insert("POS_s3", NStr("en = 'There is no need to use cash, as card payments are sufficient to pay'", Lang));
 	Strings.Insert("POS_s4", NStr("en = 'Amounts of payments are incorrect'", Lang));
+	Strings.Insert("POS_s5", NStr("en = 'Select sales person'", Lang));
 #EndRegion
 
 #Region Service

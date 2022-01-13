@@ -271,7 +271,8 @@ Function RetailReturn()
 	|	SUM(RetailReturnReceiptItemList.OffersAmount) AS OffersAmount,
 	|	RetailReturnReceiptItemList.Key AS RowKey,
 	|	RetailReturnReceiptSerialLotNumbers.SerialLotNumber AS SerialLotNumber,
-	|	RetailReturnReceiptItemList.Store
+	|	RetailReturnReceiptItemList.Store,
+	|	RetailReturnReceiptItemList.SalesPerson
 	|INTO tmpRetailReturn
 	|FROM
 	|	Document.RetailReturnReceipt.ItemList AS RetailReturnReceiptItemList
@@ -294,7 +295,8 @@ Function RetailReturn()
 	|	END,
 	|	RetailReturnReceiptItemList.Key,
 	|	RetailReturnReceiptSerialLotNumbers.SerialLotNumber,
-	|	RetailReturnReceiptItemList.Store
+	|	RetailReturnReceiptItemList.Store,
+	|	RetailReturnReceiptItemList.SalesPerson
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
@@ -338,7 +340,8 @@ Function RetailReturn()
 	|			END
 	|		ELSE tmpRetailReturn.OffersAmount
 	|	END AS OffersAmount,
-	|	tmpRetailReturn.Store
+	|	tmpRetailReturn.Store,
+	|	tmpRetailReturn.SalesPerson
 	|INTO RetailReturn
 	|FROM
 	|	tmpRetailReturn AS tmpRetailReturn";

@@ -299,7 +299,8 @@ $VanessaRun = {
     'createlogs': true,
     'attachadditionaldatawhencomparingvaluewithreferenceallure': true,
     'savemxlashtmlinallure': true,
-    'usethegherkinparserfromthevanessaextaddin': false
+    'usethegherkinparserfromthevanessaextaddin': false,
+    'EvaluateExpressionsInCurlyBraces': true
 }"
     #Write-Output "$text"
     $a = $text | ConvertFrom-Json

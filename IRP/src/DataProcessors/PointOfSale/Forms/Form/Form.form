@@ -110,6 +110,62 @@
             <name>GroupItemListButtons</name>
             <id>838</id>
             <items xsi:type="form:FormField">
+              <name>SalesPersonByDefault</name>
+              <id>1018</id>
+              <title>
+                <key>en</key>
+                <value>Sales person</value>
+              </title>
+              <titleFont xsi:type="core:FontRef">
+                <font>Style.LargeTextFont</font>
+              </titleFont>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <dataPath xsi:type="form:DataPath">
+                <segments>SalesPersonByDefault</segments>
+              </dataPath>
+              <extendedTooltip>
+                <name>SalesPersonByDefaultExtendedTooltip</name>
+                <id>1020</id>
+                <visible>true</visible>
+                <enabled>true</enabled>
+                <userVisible>
+                  <common>true</common>
+                </userVisible>
+                <type>Label</type>
+                <autoMaxWidth>true</autoMaxWidth>
+                <autoMaxHeight>true</autoMaxHeight>
+                <extInfo xsi:type="form:LabelDecorationExtInfo">
+                  <horizontalAlign>Left</horizontalAlign>
+                </extInfo>
+              </extendedTooltip>
+              <contextMenu>
+                <name>SalesPersonByDefaultContextMenu</name>
+                <id>1019</id>
+                <visible>true</visible>
+                <enabled>true</enabled>
+                <userVisible>
+                  <common>true</common>
+                </userVisible>
+                <autoFill>true</autoFill>
+              </contextMenu>
+              <type>LabelField</type>
+              <editMode>Enter</editMode>
+              <showInHeader>true</showInHeader>
+              <headerHorizontalAlign>Left</headerHorizontalAlign>
+              <showInFooter>true</showInFooter>
+              <extInfo xsi:type="form:LabelFieldExtInfo">
+                <autoMaxWidth>true</autoMaxWidth>
+                <autoMaxHeight>true</autoMaxHeight>
+                <font xsi:type="core:FontRef">
+                  <font>Style.ExtraLargeTextFont</font>
+                </font>
+              </extInfo>
+            </items>
+            <items xsi:type="form:FormField">
               <name>RetailCustomer</name>
               <id>923</id>
               <visible>true</visible>
@@ -870,6 +926,9 @@
                     <type>InputField</type>
                     <editMode>Enter</editMode>
                     <showInHeader>true</showInHeader>
+                    <headerPicture xsi:type="core:PictureRef">
+                      <picture>CommonPicture.PersonCard</picture>
+                    </headerPicture>
                     <headerHorizontalAlign>Left</headerHorizontalAlign>
                     <showInFooter>true</showInFooter>
                     <extInfo xsi:type="form:InputFieldExtInfo">
@@ -879,6 +938,9 @@
                       <chooseType>true</chooseType>
                       <typeDomainEnabled>true</typeDomainEnabled>
                       <textEdit>true</textEdit>
+                      <font xsi:type="core:FontRef">
+                        <font>Style.LargeTextFont</font>
+                      </font>
                     </extInfo>
                   </items>
                   <items xsi:type="form:FormField">
@@ -5171,7 +5233,8 @@ document</value>
     <name>SetSalesPerson</name>
     <title>
       <key>en</key>
-      <value>Set sales person</value>
+      <value>Set sales
+person</value>
     </title>
     <id>22</id>
     <use>

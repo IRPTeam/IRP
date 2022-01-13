@@ -628,7 +628,9 @@ Procedure OffsetTransactionsToAdvances(Parameters, Records_TransactionsKey, Reco
 			NewOffsetInfo.TransactionOrder    = TransactionKey.Order;
 			NewOffsetInfo.FromTransactionKey  = TransactionKey;
 			NewOffsetInfo.ToAdvanceKey        = AdvanceKey;
-			NewOffsetInfo.Key = NewOffsetInfo.AdvancesRowKey; 
+			NewOffsetInfo.AdvancesRowKey      = FindRowKeyByAdvanceKey(AdvanceKey, Document);
+			NewOffsetInfo.TransactionsRowKey  = FindRowKeyByTransactionKey(TransactionKey, Document);
+			NewOffsetInfo.Key = NewOffsetInfo.TransactionsRowKey; 
 			
 			Write_TM1030B_TransactionsKey(Parameters, Records_TransactionsKey);
 			Write_TM1020B_AdvancesKey(Parameters, Records_AdvancesKey);
@@ -1562,27 +1564,11 @@ Procedure Write_SelfRecords(Parameters, Records_OffsetOfAdvances)
 		
 		OffsetInfoByDocument = Records_OffsetOfAdvances.Copy(New Structure("Document", Row.Document));
 		
-		AdvancesColumnKeyExists = False;
 		If UseKeyForCurrency Then
-			For Each RowOffset In OffsetInfoByDocument Do
-				If ValueIsFilled(RowOffset.AdvancesRowKey) Then
-					TableAdvances.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
-					AdvancesColumnKeyExists = True;
-					Break;
-				EndIf;
-			EndDo;
+			TableAdvances.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
+			TableTransactions.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
 		EndIf;
 		
-		TransactionsColumnKeyExists = False;
-		If UseKeyForCurrency Then
-			For Each RowOffset In OffsetInfoByDocument Do
-				If ValueIsFilled(RowOffset.TransactionsRowKey) Then
-					TableTransactions.Columns.Add("Key", Metadata.DefinedTypes.typeRowID.Type);
-					TransactionsColumnKeyExists = True;
-					Break;
-				EndIf;
-			EndDo;
-		EndIf;
 		OffsetInfoByDocument = Records_OffsetOfAdvances.Copy(New Structure("Document", Row.Document));
 	
 		For Each RowOffset In OffsetInfoByDocument Do
@@ -1592,8 +1578,8 @@ Procedure Write_SelfRecords(Parameters, Records_OffsetOfAdvances)
 			NewRow_Advances.RecordType = AccumulationRecordType.Expense;
 			NewRow_Advances.CustomersAdvancesClosing = Parameters.Object.Ref;
 			NewRow_Advances.Order = RowOffset.AdvancesOrder;
-			If AdvancesColumnKeyExists Then
-				NewRow_Advances.Key = RowOffset.AdvancesRowKey;
+			If UseKeyForCurrency Then
+				NewRow_Advances.Key = RowOffset.Key;
 			EndIf;
 			
 			If RowOffset.IsAdvanceRelease = True Then
@@ -1607,8 +1593,8 @@ Procedure Write_SelfRecords(Parameters, Records_OffsetOfAdvances)
 			NewRow_Transactions.Basis = RowOffset.TransactionDocument;
 			NewRow_Transactions.CustomersAdvancesClosing = Parameters.Object.Ref;
 			NewRow_Transactions.Order = RowOffset.TransactionOrder;
-			If TransactionsColumnKeyExists Then
-				NewRow_Transactions.Key = RowOffset.TransactionsRowKey;
+			If UseKeyForCurrency Then
+				NewRow_Transactions.Key = RowOffset.Key;
 			EndIf;
 		EndDo;
 	

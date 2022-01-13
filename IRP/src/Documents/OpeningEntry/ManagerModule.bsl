@@ -485,6 +485,7 @@ Function R3010B_CashOnHand()
 		   |WHERE 
 		   |	TRUE";
 EndFunction
+
 Function R5010B_ReconciliationStatement()
 	Return "SELECT
 		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
@@ -595,7 +596,7 @@ Function T2015S_TransactionsInfo()
 	|	FALSE AS IsCustomerTransaction,
 	|	VendorsTransactions.Basis AS TransactionBasis,
 	|	VendorsTransactions.Amount AS Amount,
-	|	TRUE AS IsPaid
+	|	TRUE AS IsDue
 	|INTO T2015S_TransactionsInfo
 	|FROM
 	|	VendorsTransactions AS VendorsTransactions
@@ -617,7 +618,7 @@ Function T2015S_TransactionsInfo()
 	|	TRUE,
 	|	CustomersTransactions.Basis,
 	|	CustomersTransactions.Amount AS Amount,
-	|	TRUE AS IsPaid
+	|	TRUE AS IsDue
 	|FROM
 	|	CustomersTransactions AS CustomersTransactions
 	|WHERE

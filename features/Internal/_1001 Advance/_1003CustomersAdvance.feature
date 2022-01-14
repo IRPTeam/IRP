@@ -207,7 +207,6 @@ Scenario: _1003002 create CustomersAdvancesClosing
 Scenario: _1003003 check SI closing by advance (Ap-Ar by documents, payment first)
 	Given I open hyperlink "e1cib/list/AccumulationRegister.R2021B_CustomersTransactions"
 	And "List" table contains lines
-	And "List" table contains lines
 		| 'Period'              | 'Branch'                  | 'Recorder'                                  | 'Currency' | 'Customers advances closing'                            | 'Company'      | 'Partner'   | 'Amount'    | 'Multi currency movement type' | 'Legal name'        | 'Agreement'                | 'Basis'                                     | 'Order'                                   | 'Deferred calculation' |
 		| '28.01.2021 18:48:53' | 'Distribution department' | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'TRY'      | ''                                                      | 'Main Company' | 'Ferron BP' | '3 914,00'  | 'TRY'                          | 'Company Ferron BP' | 'Basic Partner terms, TRY' | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'Sales order 1 dated 27.01.2021 19:50:45' | 'No'                   |
 		| '28.01.2021 18:48:53' | 'Distribution department' | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'TRY'      | ''                                                      | 'Main Company' | 'Ferron BP' | '3 914,00'  | 'Local currency'               | 'Company Ferron BP' | 'Basic Partner terms, TRY' | 'Sales invoice 1 dated 28.01.2021 18:48:53' | 'Sales order 1 dated 27.01.2021 19:50:45' | 'No'                   |

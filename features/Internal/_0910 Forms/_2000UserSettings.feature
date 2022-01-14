@@ -354,25 +354,6 @@ Scenario: _200001 customize the CI user settings
 			| 'Currency' | 'Description'       |
 			| 'USD'      | 'Bank account, USD' |
 		And I select current line in "List" table
-	* Fill in custom settings for Invoice match
-		And I go to line in "MetadataTree" table
-			| 'Group name'    |
-			| 'Invoice match' |
-		And I activate "Group name" field in "MetadataTree" table
-		And I go to line in "MetadataTree" table
-			| 'Group name' | 'Use' |
-			| 'Company'    | 'No'  |
-		And I activate "Value" field in "MetadataTree" table
-		And I select current line in "MetadataTree" table
-		And I click choice button of "Value" attribute in "MetadataTree" table
-		Then "Companies" window is opened
-		And I go to line in "List" table
-			| 'Description'       |
-			| 'Company Ferron BP' |
-		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' |
-		And I select current line in "List" table
 	* Fill in custom settings for GoodsReceipt
 		And I go to line in "MetadataTree" table
 		| 'Group name'    |

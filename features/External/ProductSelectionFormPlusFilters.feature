@@ -1374,25 +1374,6 @@ Scenario: check the display of the header of the collapsible group in cash payme
 
 
 
-Scenario: check the display of the header of the collapsible group in invoice match
-	And I click the button named "FormCreate"
-	* Filling in the details of the document
-		If "Company" attribute is present on the form Then
-		And I click Select button of "Company" field
-		And I go to line in "List" table
-			| Description  |
-			| Main Company |
-		And I select current line in "List" table
-		And I select "With customer" exact value from "Operation type" drop-down list
-		And I activate "Partner ar transactions basis document" field
-		And I go to line in "" table
-			| 'Column1'            |
-			| Sales invoice |
-		And I select current line in "" table
-		And I go to line in "List" table
-			| 'Number' |
-			| '$$NumberSalesInvoice024016$$'    |
-		And I select current line in "List" table
 
 Scenario: check the display of the header of the collapsible group in planned incoming/outgoing documents
 	And I click the button named "FormCreate"

@@ -10,7 +10,6 @@
   <content>Document.Bundling.Attribute.Company</content>
   <content>Document.InventoryTransfer.Attribute.Company</content>
   <content>Document.PurchaseReturn.Attribute.Company</content>
-  <content>Document.InvoiceMatch.Attribute.Company</content>
   <content>Document.PurchaseOrder.Attribute.Company</content>
   <content>Document.ReconciliationStatement.Attribute.Company</content>
   <content>Document.OutgoingPaymentOrder.Attribute.Company</content>
@@ -25,7 +24,6 @@
   <content>Document.StockAdjustmentAsWriteOff.Attribute.Company</content>
   <content>Document.SalesOrder.Attribute.LegalName</content>
   <content>Document.SalesReturnOrder.Attribute.LegalName</content>
-  <content>Document.InvoiceMatch.Attribute.LegalName</content>
   <content>Document.CashExpense.Attribute.Company</content>
   <content>Document.SalesOrder.Attribute.Company</content>
   <content>Document.InternalSupplyRequest.Attribute.Company</content>

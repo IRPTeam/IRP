@@ -354,25 +354,6 @@ Scenario: _200001 customize the CI user settings
 			| 'Currency' | 'Description'       |
 			| 'USD'      | 'Bank account, USD' |
 		And I select current line in "List" table
-	* Fill in custom settings for Invoice match
-		And I go to line in "MetadataTree" table
-			| 'Group name'    |
-			| 'Invoice match' |
-		And I activate "Group name" field in "MetadataTree" table
-		And I go to line in "MetadataTree" table
-			| 'Group name' | 'Use' |
-			| 'Company'    | 'No'  |
-		And I activate "Value" field in "MetadataTree" table
-		And I select current line in "MetadataTree" table
-		And I click choice button of "Value" attribute in "MetadataTree" table
-		Then "Companies" window is opened
-		And I go to line in "List" table
-			| 'Description'       |
-			| 'Company Ferron BP' |
-		And I go to line in "List" table
-			| 'Description'  |
-			| 'Main Company' |
-		And I select current line in "List" table
 	* Fill in custom settings for GoodsReceipt
 		And I go to line in "MetadataTree" table
 		| 'Group name'    |
@@ -969,12 +950,7 @@ Scenario:  _200011 check filling in field from custom user settings in Cash tran
 		Then the form attribute named "Receiver" became equal to "Bank account, USD"
 	And I close all client application windows
 
-Scenario:  _200012 check filling in field from custom user settings in Invoice match
-	Given I open hyperlink "e1cib/list/Document.InvoiceMatch"
-	And I click the button named "FormCreate"
-	* Check that fields are filled in from user settings
-		Then the form attribute named "Company" became equal to "Main Company"
-	And I close all client application windows
+
 
 Scenario:  _200013 check filling in field from custom user settings in Goods receipt
 	Given I open hyperlink "e1cib/list/Document.GoodsReceipt"

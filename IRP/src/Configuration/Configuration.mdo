@@ -268,8 +268,6 @@
   <commonModules>CommonModule.DocInventoryTransferOrderClient</commonModules>
   <commonModules>CommonModule.DocInventoryTransferOrderServer</commonModules>
   <commonModules>CommonModule.DocInventoryTransferServer</commonModules>
-  <commonModules>CommonModule.DocInvoiceMatchClient</commonModules>
-  <commonModules>CommonModule.DocInvoiceMatchServer</commonModules>
   <commonModules>CommonModule.DocItemStockAdjustmentClient</commonModules>
   <commonModules>CommonModule.DocItemStockAdjustmentServer</commonModules>
   <commonModules>CommonModule.DocLabelingClient</commonModules>
@@ -598,7 +596,6 @@
   <documents>Document.InternalSupplyRequest</documents>
   <documents>Document.InventoryTransfer</documents>
   <documents>Document.InventoryTransferOrder</documents>
-  <documents>Document.InvoiceMatch</documents>
   <documents>Document.ItemStockAdjustment</documents>
   <documents>Document.Labeling</documents>
   <documents>Document.ManualRegisterEntry</documents>
@@ -648,7 +645,6 @@
   <enums>Enum.IntegrationType</enums>
   <enums>Enum.InterfaceGroupBehaviors</enums>
   <enums>Enum.InterfaceGroupChildFormItemsGroups</enums>
-  <enums>Enum.InvoiceMatchOperationsTypes</enums>
   <enums>Enum.InvoicingStatuses</enums>
   <enums>Enum.ItemTypes</enums>
   <enums>Enum.KindsOfAttributes</enums>

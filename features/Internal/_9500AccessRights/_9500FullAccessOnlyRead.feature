@@ -106,7 +106,6 @@ Scenario: 950000 preparation (role Full access only read)
 	When Create document InternalSupplyRequest objects
 	When Create document InventoryTransfer objects
 	When Create document InventoryTransferOrder objects
-	# When Create document InvoiceMatch objects
 	When Create document OpeningEntry objects
 	When Create document OutgoingPaymentOrder objects
 	When Create document Bundling objects
@@ -919,13 +918,7 @@ Scenario: 950065 check role Full access only read (Vendors advances closing)
 			Then I raise "Failed to open" exception
 		And I close all client application windows
 
-# Scenario: 950064 check role Full access only read (Invoice matches)
-# 		And I close all client application windows
-# 		And In the command interface I select "Treasury" "Invoice matches"	
-# 		And I select current line in "List" table
-# 		If the warning is displayed then 
-# 			Then I raise "Failed to open" exception
-# 		And I close all client application windows
+
 
 
 Scenario: 950066 check role Full access only read (Inventory transfers)

@@ -201,7 +201,10 @@ Function CreateFormGroups(Form, FormGroupsInfo, AddInfo = Undefined) Export
 		Else
 			GroupParent = FoundedParent;
 		EndIf;
-		NewFormGroup = Form.Items.Add(GroupInfo.Name, Type("FormGroup"), GroupParent);
+		NewFormGroup = Form.Items.Find(GroupInfo.Name);
+		If NewFormGroup = Undefined Then
+			NewFormGroup = Form.Items.Add(GroupInfo.Name, Type("FormGroup"), GroupParent);
+		EndIf;
 		NewFormGroup.Type = FormGroupType.UsualGroup;
 		NewFormGroup.Group = GroupInfo.ChildFormItemsGroup;
 		NewFormGroup.Behavior = GroupInfo.Behavior;

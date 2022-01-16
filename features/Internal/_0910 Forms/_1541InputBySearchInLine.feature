@@ -1425,21 +1425,7 @@ Scenario: _0154098 check company and account (in english) input by search in lin
 		Then the form attribute named "Account" became equal to "Bank account, TRY"
 	And I close all client application windows
 
-Scenario: _0154099 check partner and legal name (in english) input by search in line in Invoice Match
-	And I close all client application windows
-	* Open document form
-		Given I open hyperlink "e1cib/list/Document.InvoiceMatch"
-		And I click the button named "FormCreate"
-	* Check the filter when typing by Partner/Legal name
-		And in the table "Transactions" I click the button named "TransactionsAdd"
-		And I select "MIO" by string from the drop-down list named "TransactionsPartner" in "Transactions" table
-		And I select "Company Kalipso" by string from the drop-down list named "TransactionsLegalName" in "Transactions" table
-	* Check that there is only one legal name available for selection
-		And I click choice button of the attribute named "TransactionsLegalName" in "Transactions" table
-		And "List" table became equal
-		| 'Description' |
-		| 'Company Kalipso'         |
-		And I close all client application windows
+
 
 Scenario: _01540105 check item and item key input by search in line in a document Retail return receipt (in english)
 	And I close all client application windows

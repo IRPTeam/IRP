@@ -37,6 +37,7 @@ Function GetDocumentTable_CashTransferOrder(ArrayOfBasisDocuments, EndOfDate = U
 	|	tmp.BasedOn AS BasedOn,
 	|	tmp.TransactionType AS TransactionType,
 	|	tmp.Company AS Company,
+	|	tmp.Branch AS Branch,
 	|	tmp.CashAccount AS CashAccount,
 	|	tmp.Currency AS Currency,
 	|	tmp.FinancialMovementType AS FinancialMovementType,
@@ -58,6 +59,7 @@ Function GetDocumentTable_CashTransferOrder_QueryText() Export
 		   |		ELSE VALUE(Enum.OutgoingPaymentTransactionTypes.CurrencyExchange)
 		   |	END AS TransactionType,
 		   |	R3035T_CashPlanningTurnovers.Company AS Company,
+		   |	R3035T_CashPlanningTurnovers.Branch AS Branch,
 		   |	R3035T_CashPlanningTurnovers.Account AS CashAccount,
 		   |	R3035T_CashPlanningTurnovers.Currency AS Currency,
 		   |	R3035T_CashPlanningTurnovers.FinancialMovementType AS FinancialMovementType,
@@ -90,14 +92,15 @@ Function GetDocumentTable_CashTransferOrder_ForClient(ArrayOfBasisDocuments, Obj
 	ValueTable = GetDocumentTable_CashTransferOrder(ArrayOfBasisDocuments, EndOfDate);
 	For Each Row In ValueTable Do
 		NewRow = New Structure();
-		NewRow.Insert("BasedOn", Row.BasedOn);
-		NewRow.Insert("TransactionType", Row.TransactionType);
-		NewRow.Insert("Company", Row.Company);
-		NewRow.Insert("CashAccount", Row.CashAccount);
-		NewRow.Insert("Currency", Row.Currency);
-		NewRow.Insert("Amount", Row.Amount);
-		NewRow.Insert("PlaningTransactionBasis", Row.PlaningTransactionBasis);
-		NewRow.Insert("Partner", Row.Partner);
+		NewRow.Insert("BasedOn"                 , Row.BasedOn);
+		NewRow.Insert("TransactionType"         , Row.TransactionType);
+		NewRow.Insert("Company"                 , Row.Company);
+		NewRow.Insert("Branch"                  , Row.Branch);
+		NewRow.Insert("CashAccount"             , Row.CashAccount);
+		NewRow.Insert("Currency"                , Row.Currency);
+		NewRow.Insert("Amount"                  , Row.Amount);
+		NewRow.Insert("PlaningTransactionBasis" , Row.PlaningTransactionBasis);
+		NewRow.Insert("Partner"                 , Row.Partner);
 		ArrayOfResults.Add(NewRow);
 	EndDo;
 	Return ArrayOfResults;

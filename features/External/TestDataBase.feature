@@ -72,7 +72,6 @@ Scenario: Create catalog AddAttributeAndPropertySets objects (test data base)
 		| 'e1cib/data/Catalog.AddAttributeAndPropertySets?refName=Document_InternalSupplyRequest'      | 'False'        | '52'   | 'Internal supply request'        | ''                 | ''               | ''               |
 		| 'e1cib/data/Catalog.AddAttributeAndPropertySets?refName=Document_InventoryTransfer'          | 'False'        | '53'   | 'Inventory transfer'             | ''                 | ''               | ''               |
 		| 'e1cib/data/Catalog.AddAttributeAndPropertySets?refName=Document_InventoryTransferOrder'     | 'False'        | '54'   | 'Inventory transfer order'       | ''                 | ''               | ''               |
-		| 'e1cib/data/Catalog.AddAttributeAndPropertySets?refName=Document_InvoiceMatch'               | 'False'        | '55'   | 'Invoice match'                  | ''                 | ''               | ''               |
 		| 'e1cib/data/Catalog.AddAttributeAndPropertySets?refName=Document_Labeling'                   | 'False'        | '56'   | 'Labeling'                       | ''                 | ''               | ''               |
 		| 'e1cib/data/Catalog.AddAttributeAndPropertySets?refName=Document_OpeningEntry'               | 'False'        | '57'   | 'Opening entry'                  | ''                 | ''               | ''               |
 		| 'e1cib/data/Catalog.AddAttributeAndPropertySets?refName=Document_OutgoingPaymentOrder'       | 'False'        | '58'   | 'Outgoing payment order'         | ''                 | ''               | ''               |
@@ -406,7 +405,6 @@ Scenario: Create catalog CurrencyMovementSets objects (test data base)
 		| 'e1cib/data/Catalog.CurrencyMovementSets?refName=Document_SalesReturn'          | 'False'        | '0'    | ''               | ''                 | ''               | ''               |
 		| 'e1cib/data/Catalog.CurrencyMovementSets?refName=Document_PurchaseReturnOrder'  | 'False'        | '0'    | ''               | ''                 | ''               | ''               |
 		| 'e1cib/data/Catalog.CurrencyMovementSets?refName=Document_PurchaseReturn'       | 'False'        | '0'    | ''               | ''                 | ''               | ''               |
-		| 'e1cib/data/Catalog.CurrencyMovementSets?refName=Document_InvoiceMatch'         | 'False'        | '0'    | ''               | ''                 | ''               | ''               |
 		| 'e1cib/data/Catalog.CurrencyMovementSets?refName=Document_CreditNote'           | 'False'        | '0'    | ''               | ''                 | ''               | ''               |
 		| 'e1cib/data/Catalog.CurrencyMovementSets?refName=Document_DebitNote'            | 'False'        | '0'    | ''               | ''                 | ''               | ''               |
 

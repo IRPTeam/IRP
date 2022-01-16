@@ -1430,7 +1430,6 @@ Scenario: auto filling Configuration metadata catalog
 		| 'Internal supply request'        |
 		| 'Inventory transfer'             |
 		| 'Inventory transfer order'       |
-		| 'Invoice match'                  |
 		| 'Item keys'                      |
 		| 'Item segments'                  |
 		| 'Item serial/lot numbers'        |
@@ -1489,6 +1488,7 @@ Scenario: auto filling Configuration metadata catalog
 		| 'User groups'                    |
 		| 'Users'                          |
 		| 'Workstations'                   |
+
 	And I close all client application windows
 
 Scenario: create payment terminal

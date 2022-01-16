@@ -131,12 +131,6 @@
         <value>0</value>
       </code>
     </items>
-    <items id="36df8729-ddf2-4c2a-81ed-892c0f000422">
-      <name>Document_InvoiceMatch</name>
-      <code xsi:type="core:NumberValue">
-        <value>0</value>
-      </code>
-    </items>
     <items id="3053745a-4309-44cc-b606-09e7dd62f74b">
       <name>Document_CreditNote</name>
       <code xsi:type="core:NumberValue">

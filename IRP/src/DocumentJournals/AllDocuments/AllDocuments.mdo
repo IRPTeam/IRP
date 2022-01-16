@@ -25,7 +25,6 @@
   <registeredDocuments>Document.InternalSupplyRequest</registeredDocuments>
   <registeredDocuments>Document.InventoryTransfer</registeredDocuments>
   <registeredDocuments>Document.InventoryTransferOrder</registeredDocuments>
-  <registeredDocuments>Document.InvoiceMatch</registeredDocuments>
   <registeredDocuments>Document.Labeling</registeredDocuments>
   <registeredDocuments>Document.OpeningEntry</registeredDocuments>
   <registeredDocuments>Document.OutgoingPaymentOrder</registeredDocuments>
@@ -79,7 +78,6 @@
     <references>Document.InternalSupplyRequest.Attribute.Company</references>
     <references>Document.InventoryTransfer.Attribute.Company</references>
     <references>Document.InventoryTransferOrder.Attribute.Company</references>
-    <references>Document.InvoiceMatch.Attribute.Company</references>
     <references>Document.ItemStockAdjustment.Attribute.Company</references>
     <references>Document.ManualRegisterEntry.Attribute.Company</references>
     <references>Document.OutgoingPaymentOrder.Attribute.Company</references>

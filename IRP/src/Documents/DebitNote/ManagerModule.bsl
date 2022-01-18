@@ -99,6 +99,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R2021B_CustomersTransactions());
 	QueryArray.Add(R2020B_AdvancesFromCustomers());
 	QueryArray.Add(R5011B_CustomersAging());
+	QueryArray.Add(R5022T_Expenses());
 	QueryArray.Add(R1021B_VendorsTransactions());
 	QueryArray.Add(R1020B_AdvancesToVendors());
 	QueryArray.Add(R5012B_VendorsAging());
@@ -137,6 +138,15 @@ Function Transactions()
 EndFunction
 
 Function R5010B_ReconciliationStatement()
+	Return "SELECT
+		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		   |	*
+		   |INTO R5010B_ReconciliationStatement
+		   |FROM
+		   |	Transactions";
+EndFunction
+
+Function R5022T_Expenses()
 	Return "SELECT
 		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
 		   |	*

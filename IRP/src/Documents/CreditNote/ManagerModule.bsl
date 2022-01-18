@@ -110,31 +110,34 @@ EndFunction
 
 Function Transactions()
 	Return "SELECT
-		   |	Transactions.Ref.Date AS Period,
-		   |	Transactions.Ref.Company AS Company,
-		   |	Transactions.Partner,
-		   |	Transactions.LegalName,
-		   |	Transactions.Agreement,
-		   |	CASE
-		   |		WHEN Transactions.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
-		   |			THEN Transactions.Ref
-		   |		ELSE UNDEFINED
-		   |	END AS BasisDocument,
-		   |	Transactions.Ref AS AdvancesOrTransactionDocument,
-		   |	Transactions.Ref AS Ref,
-		   |	Transactions.Agreement.Type = VALUE(Enum.AgreementTypes.Vendor) AS IsVendor,
-		   |	Transactions.Agreement.Type = VALUE(Enum.AgreementTypes.Customer) AS IsCustomer,
-		   |	Transactions.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments) AS IsPostingDetail_ByDocuments,
-		   |	Transactions.Currency,
-		   |	Transactions.Key,
-		   |	Transactions.Amount,
-		   |	Transactions.Ref.Branch AS Branch,
-		   |	Transactions.LegalNameContract AS LegalNameContract
-		   |INTO Transactions
-		   |FROM
-		   |	Document.CreditNote.Transactions AS Transactions
-		   |WHERE
-		   |	Transactions.Ref = &Ref";
+	|	Transactions.Ref.Date AS Period,
+	|	Transactions.Ref.Company AS Company,
+	|	Transactions.Partner,
+	|	Transactions.LegalName,
+	|	Transactions.Agreement,
+	|	CASE
+	|		WHEN Transactions.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
+	|			THEN Transactions.Ref
+	|		ELSE UNDEFINED
+	|	END AS BasisDocument,
+	|	Transactions.Ref AS AdvancesOrTransactionDocument,
+	|	Transactions.Ref AS Ref,
+	|	Transactions.Agreement.Type = VALUE(Enum.AgreementTypes.Vendor) AS IsVendor,
+	|	Transactions.Agreement.Type = VALUE(Enum.AgreementTypes.Customer) AS IsCustomer,
+	|	Transactions.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments) AS IsPostingDetail_ByDocuments,
+	|	Transactions.Currency,
+	|	Transactions.Key,
+	|	Transactions.Amount,
+	|	Transactions.Ref.Branch AS Branch,
+	|	Transactions.LegalNameContract AS LegalNameContract,
+	|	Transactions.ProfitLossCenter,
+	|	Transactions.AdditionalAnalytic,
+	|	Transactions.ExpenseType
+	|INTO Transactions
+	|FROM
+	|	Document.CreditNote.Transactions AS Transactions
+	|WHERE
+	|	Transactions.Ref = &Ref";
 EndFunction
 
 Function R5010B_ReconciliationStatement()

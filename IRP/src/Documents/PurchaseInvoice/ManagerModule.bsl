@@ -176,9 +176,9 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R4036B_IncomingStocksRequested());
 	QueryArray.Add(R5010B_ReconciliationStatement());
 	QueryArray.Add(R1022B_VendorsPaymentPlanning());
-	QueryArray.Add(T2011S_PartnerTransactions());
 	QueryArray.Add(R5022T_Expenses());
 	QueryArray.Add(T3010S_RowIDInfo());
+	QueryArray.Add(T2015S_TransactionsInfo());
 	Return QueryArray;
 EndFunction
 
@@ -274,7 +274,6 @@ Function ItemList()
 		   |	PurchaseInvoiceItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS IsService,
 		   |	PurchaseInvoiceItemList.DeliveryDate AS DeliveryDate,
 		   |	PurchaseInvoiceItemList.NetAmount AS NetAmount,
-		   |	PurchaseInvoiceItemList.Ref.IgnoreAdvances AS IgnoreAdvances,
 		   |	PurchaseInvoiceItemList.Key,
 		   |	PurchaseInvoiceItemList.Ref.Branch AS Branch,
 		   |	PurchaseInvoiceItemList.Ref.LegalNameContract AS LegalNameContract
@@ -414,8 +413,8 @@ EndFunction
 Function R1020B_AdvancesToVendors()
 	Return "SELECT
 		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		   |	OffsetOfAdvances.AdvancesDocument AS Basis,
 		   |	OffsetOfAdvances.Recorder AS VendorsAdvancesClosing,
+		   |	OffsetOfAdvances.AdvancesOrder AS Order,
 		   |	*
 		   |INTO R1020B_AdvancesToVendors
 		   |FROM
@@ -435,6 +434,7 @@ Function R1021B_VendorsTransactions()
 		   |	ItemList.Partner,
 		   |	ItemList.Agreement,
 		   |	ItemList.BasisDocument AS Basis,
+		   |	ItemList.PurchaseOrder AS Order,
 		   |	SUM(ItemList.Amount) AS Amount,
 		   |	UNDEFINED AS VendorsAdvancesClosing
 		   |INTO R1021B_VendorsTransactions
@@ -443,6 +443,7 @@ Function R1021B_VendorsTransactions()
 		   |GROUP BY
 		   |	ItemList.Agreement,
 		   |	ItemList.BasisDocument,
+		   |	ItemList.PurchaseOrder,
 		   |	ItemList.Company,
 		   |	ItemList.Branch,
 		   |	ItemList.Currency,
@@ -463,6 +464,7 @@ Function R1021B_VendorsTransactions()
 		   |	OffsetOfAdvances.Partner,
 		   |	OffsetOfAdvances.Agreement,
 		   |	OffsetOfAdvances.TransactionDocument,
+		   |	OffsetOfAdvances.TransactionOrder,
 		   |	OffsetOfAdvances.Amount,
 		   |	OffsetOfAdvances.Recorder
 		   |FROM
@@ -518,36 +520,6 @@ Function R5012B_VendorsAging()
 		   |	InformationRegister.T2013S_OffsetOfAging AS OffsetOfAging
 		   |WHERE
 		   |	OffsetOfAging.Document = &Ref";
-EndFunction
-
-Function T2011S_PartnerTransactions()
-	Return "SELECT
-		   |	ItemList.Period,
-		   |	ItemList.Company,
-		   |	ItemList.Branch,
-		   |	ItemList.Currency,
-		   |	ItemList.LegalName,
-		   |	ItemList.Partner,
-		   |	ItemList.Agreement,
-		   |	ItemList.BasisDocument AS TransactionDocument,
-		   |	TRUE AS IsVendorTransaction,
-		   |	SUM(ItemList.Amount) AS Amount,
-		   |	ItemList.Key
-		   |INTO T2011S_PartnerTransactions
-		   |FROM
-		   |	ItemList AS ItemList
-		   |WHERE
-		   |	NOT ItemList.IgnoreAdvances
-		   |GROUP BY
-		   |	ItemList.Agreement,
-		   |	ItemList.BasisDocument,
-		   |	ItemList.Company,
-		   |	ItemList.Branch,
-		   |	ItemList.Currency,
-		   |	ItemList.Key,
-		   |	ItemList.LegalName,
-		   |	ItemList.Partner,
-		   |	ItemList.Period";
 EndFunction
 
 Function R1031B_ReceiptInvoicing()
@@ -874,6 +846,36 @@ Function T3010S_RowIDInfo()
 		|		AND ItemList.Ref = &Ref
 		|		AND RowIDInfo.Key = ItemList.Key
 		|		AND RowIDInfo.Ref = ItemList.Ref";
+EndFunction
+
+Function T2015S_TransactionsInfo()
+	Return 
+	"SELECT
+	|	ItemList.Period AS Date,
+	|	ItemList.Company,
+	|	ItemList.Branch,
+	|	ItemList.Currency,
+	|	ItemList.Partner,
+	|	ItemList.LegalName,
+	|	ItemList.Agreement,
+	|	ItemList.PurchaseOrder AS Order,
+	|	TRUE AS IsVendorTransaction,
+	|	ItemList.BasisDocument AS TransactionBasis,
+	|	SUM(ItemList.Amount) AS Amount,
+	|	TRUE AS IsDue
+	|INTO T2015S_TransactionsInfo
+	|FROM
+	|	ItemList AS ItemList
+	|GROUP BY
+	|	ItemList.Period,
+	|	ItemList.Company,
+	|	ItemList.Branch,
+	|	ItemList.Currency,
+	|	ItemList.Partner,
+	|	ItemList.LegalName,
+	|	ItemList.Agreement,
+	|	ItemList.PurchaseOrder,
+	|	ItemList.BasisDocument";
 EndFunction
 
 #EndRegion

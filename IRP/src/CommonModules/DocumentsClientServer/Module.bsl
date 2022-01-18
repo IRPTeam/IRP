@@ -275,3 +275,15 @@ Procedure FillDefinedData(Object, Form) Export
 	EndIf;
 EndProcedure
 #EndRegion
+
+Procedure SetReadOnlyPaymentTermsCanBePaid(Object, Form) Export
+	CalculationTypes_Prepaid = PredefinedValue("Enum.CalculationTypes.Prepaid");
+	For Each Row In Form.Object.PaymentTerms Do
+		If CommonFunctionsClientServer.ObjectHasProperty(Row, "IsReadOnlyCanBePaid") Then
+			Row.IsReadOnlyCanBePaid = (Row.CalculationType <> CalculationTypes_Prepaid);
+			If Row.IsReadOnlyCanBePaid Then
+				Row.CanBePaid = False;
+			EndIf; 
+		EndIf;
+	EndDo;
+EndProcedure

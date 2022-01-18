@@ -9,17 +9,18 @@
 		<filter>
 			<item xsi:type="FilterItemComparison">
 				<left xsi:type="dcscor:Field">Object.PaymentList.ApArPostingDetail</left>
-				<comparisonType>Equal</comparisonType>
+				<comparisonType>NotEqual</comparisonType>
 				<right xsi:type="dcscor:DesignTimeValue">Enum.ApArPostingDetail.ByDocuments</right>
 			</item>
-			<item xsi:type="FilterItemComparison">
-				<left xsi:type="dcscor:Field">Object.PaymentList.BasisDocument</left>
-				<comparisonType>Equal</comparisonType>
-			</item>
 		</filter>
 		<appearance>
 			<dcscor:item xsi:type="SettingsParameterValue">
+				<dcscor:use>false</dcscor:use>
 				<dcscor:parameter>MarkIncomplete</dcscor:parameter>
+				<dcscor:value xsi:type="xs:boolean">true</dcscor:value>
+			</dcscor:item>
+			<dcscor:item xsi:type="SettingsParameterValue">
+				<dcscor:parameter>ReadOnly</dcscor:parameter>
 				<dcscor:value xsi:type="xs:boolean">true</dcscor:value>
 			</dcscor:item>
 		</appearance>
@@ -31,37 +32,33 @@
 			</item>
 		</selection>
 		<filter>
-			<item xsi:type="FilterItemComparison">
-				<left xsi:type="dcscor:Field">Object.TransactionType</left>
-				<comparisonType>Equal</comparisonType>
-				<right xsi:type="dcscor:DesignTimeValue">Enum.OutgoingPaymentTransactionTypes.CurrencyExchange</right>
-			</item>
-			<item xsi:type="FilterItemComparison">
-				<left xsi:type="dcscor:Field">Object.PaymentList.PlaningTransactionBasis</left>
-				<comparisonType>Equal</comparisonType>
-			</item>
-		</filter>
-		<appearance>
-			<dcscor:item xsi:type="SettingsParameterValue">
-				<dcscor:parameter>MarkIncomplete</dcscor:parameter>
-				<dcscor:value xsi:type="xs:boolean">true</dcscor:value>
-			</dcscor:item>
-		</appearance>
-	</item>
-	<item>
-		<selection>
-			<item>
-				<field>PaymentListPlaningTransactionBasis</field>
-			</item>
-		</selection>
-		<filter>
-			<item xsi:type="FilterItemComparison">
-				<left xsi:type="dcscor:Field">Object.PaymentList.PlaningTransactionBasis</left>
-				<comparisonType>Equal</comparisonType>
-			</item>
-			<item xsi:type="FilterItemComparison">
-				<left xsi:type="dcscor:Field">Object.TransactionType</left>
-				<comparisonType>Equal</comparisonType>
+			<item xsi:type="FilterItemGroup">
+				<groupType>OrGroup</groupType>
+				<item xsi:type="FilterItemGroup">
+					<groupType>AndGroup</groupType>
+					<item xsi:type="FilterItemComparison">
+						<left xsi:type="dcscor:Field">Object.PaymentList.PlaningTransactionBasis</left>
+						<comparisonType>NotFilled</comparisonType>
+					</item>
+					<item xsi:type="FilterItemComparison">
+						<left xsi:type="dcscor:Field">Object.TransactionType</left>
+						<comparisonType>Equal</comparisonType>
+						<right xsi:type="dcscor:DesignTimeValue">Enum.OutgoingPaymentTransactionTypes.CurrencyExchange</right>
+					</item>
+				</item>
+				<item xsi:type="FilterItemGroup">
+					<groupType>AndGroup</groupType>
+					<item xsi:type="FilterItemComparison">
+						<left xsi:type="dcscor:Field">Object.PaymentList.PlaningTransactionBasis</left>
+						<comparisonType>NotFilled</comparisonType>
+						<right xsi:nil="true"/>
+					</item>
+					<item xsi:type="FilterItemComparison">
+						<left xsi:type="dcscor:Field">Object.TransactionType</left>
+						<comparisonType>Equal</comparisonType>
+						<right xsi:type="dcscor:DesignTimeValue">Enum.OutgoingPaymentTransactionTypes.CashTransferOrder</right>
+					</item>
+				</item>
 			</item>
 		</filter>
 		<appearance>

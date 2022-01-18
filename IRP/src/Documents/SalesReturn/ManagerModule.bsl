@@ -142,9 +142,9 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R4050B_StockInventory());
 	QueryArray.Add(R5010B_ReconciliationStatement());
 	QueryArray.Add(R5021T_Revenues());
-	QueryArray.Add(T2012S_PartnerAdvances());
 	QueryArray.Add(R5011B_CustomersAging());
 	QueryArray.Add(T3010S_RowIDInfo());
+	QueryArray.Add(T2015S_TransactionsInfo());	
 	Return QueryArray;
 EndFunction
 
@@ -188,15 +188,10 @@ Function ItemList()
 	|	ItemList.Ref AS SalesReturn,
 	|	CASE
 	|		WHEN ItemList.Ref.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
-	|			THEN CASE
-	|				WHEN ItemList.SalesInvoice.Ref IS NULL
-	|					THEN ItemList.Ref
-	|				ELSE ItemList.SalesInvoice
-	|			END
+	|			THEN ItemList.Ref
 	|		ELSE UNDEFINED
 	|	END AS BasisDocument,
 	|	ItemList.Ref AS AdvanceBasis,
-	|	ItemList.Ref.DueAsAdvance AS DueAsAdvance,
 	|	ItemList.QuantityInBaseUnit AS Quantity,
 	|	ItemList.TotalAmount AS Amount,
 	|	ItemList.Ref.Partner AS Partner,
@@ -382,7 +377,7 @@ Function R2021B_CustomersTransactions()
 		   |FROM
 		   |	ItemList AS ItemList
 		   |WHERE
-		   |	NOT ItemList.DueAsAdvance
+		   |	TRUE
 		   |GROUP BY
 		   |	ItemList.Agreement,
 		   |	ItemList.Company,
@@ -417,51 +412,22 @@ Function R2021B_CustomersTransactions()
 EndFunction
 
 Function R2020B_AdvancesFromCustomers()
-	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
-		   |	ItemList.Period AS Period,
-		   |	ItemList.Company AS Company,
-		   |	ItemList.Branch AS Branch,
-		   |	ItemList.Partner AS Partner,
-		   |	ItemList.LegalName AS LegalName,
-		   |	ItemList.Currency AS Currency,
-		   |	ItemList.AdvanceBasis AS Basis,
-		   |	SUM(ItemList.Amount) AS Amount,
-		   |	UNDEFINED AS Key,
-		   |	UNDEFINED AS CustomersAdvancesClosing
-		   |INTO R2020B_AdvancesFromCustomers
-		   |FROM
-		   |	ItemList AS ItemList
-		   |WHERE
-		   |	ItemList.DueAsAdvance
-		   |
-		   |GROUP BY
-		   |	ItemList.Partner,
-		   |	ItemList.Branch,
-		   |	ItemList.Currency,
-		   |	ItemList.Period,
-		   |	ItemList.AdvanceBasis,
-		   |	ItemList.Company,
-		   |	ItemList.LegalName
-		   |
-		   |UNION ALL
-		   |
-		   |SELECT
-		   |	VALUE(AccumulationRecordType.Expense),
-		   |	OffsetOfAdvances.Period,
-		   |	OffsetOfAdvances.Company,
-		   |	OffsetOfAdvances.Branch,
-		   |	OffsetOfAdvances.Partner,
-		   |	OffsetOfAdvances.LegalName,
-		   |	OffsetOfAdvances.Currency,
-		   |	OffsetOfAdvances.AdvancesDocument,
-		   |	OffsetOfAdvances.Amount,
-		   |	UNDEFINED,
-		   |	OffsetOfAdvances.Recorder
-		   |FROM
-		   |	InformationRegister.T2010S_OffsetOfAdvances AS OffsetOfAdvances
-		   |WHERE
-		   |	OffsetOfAdvances.Document = &Ref";
+	Return 
+	"SELECT
+	|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+	|	OffsetOfAdvances.Period,
+	|	OffsetOfAdvances.Company,
+	|	OffsetOfAdvances.Branch,
+	|	OffsetOfAdvances.Partner,
+	|	OffsetOfAdvances.LegalName,
+	|	OffsetOfAdvances.Currency,
+	|	OffsetOfAdvances.Amount,
+	|	UNDEFINED AS Key,
+	|	OffsetOfAdvances.Recorder AS CustomersAdvancesClosing
+	|FROM
+	|	InformationRegister.T2010S_OffsetOfAdvances AS OffsetOfAdvances
+	|WHERE
+	|	OffsetOfAdvances.Document = &Ref";
 EndFunction
 
 Function R5011B_CustomersAging()
@@ -482,34 +448,6 @@ Function R5011B_CustomersAging()
 		   |	InformationRegister.T2013S_OffsetOfAging AS OffsetOfAging
 		   |WHERE
 		   |	OffsetOfAging.Document = &Ref";
-EndFunction
-
-Function T2012S_PartnerAdvances()
-	Return "SELECT
-		   |	ItemList.Period AS Period,
-		   |	ItemList.Company AS Company,
-		   |	ItemList.Branch AS Branch,
-		   |	ItemList.Partner AS Partner,
-		   |	ItemList.LegalName AS LegalName,
-		   |	ItemList.Currency AS Currency,
-		   |	ItemList.AdvanceBasis AS AdvancesDocument,
-		   |	SUM(ItemList.Amount) AS Amount,
-		   |	UNDEFINED AS Key,
-		   |	TRUE AS IsCustomerAdvance
-		   |INTO T2012S_PartnerAdvances
-		   |FROM
-		   |	ItemList AS ItemList
-		   |WHERE
-		   |	ItemList.DueAsAdvance
-		   |
-		   |GROUP BY
-		   |	ItemList.Branch,
-		   |	ItemList.LegalName,
-		   |	ItemList.Company,
-		   |	ItemList.Partner,
-		   |	ItemList.Period,
-		   |	ItemList.AdvanceBasis,
-		   |	ItemList.Currency";
 EndFunction
 
 Function R2031B_ShipmentInvoicing()
@@ -694,4 +632,34 @@ Function T3010S_RowIDInfo()
 		|		AND ItemList.Ref = &Ref
 		|		AND RowIDInfo.Key = ItemList.Key
 		|		AND RowIDInfo.Ref = ItemList.Ref";
+EndFunction
+
+Function T2015S_TransactionsInfo()
+	// IsDue  = Receipt 
+	// IsPaid = Expense
+	Return 
+	"SELECT
+	|	ItemList.Period AS Date,
+	|	ItemList.Company,
+	|	ItemList.Branch,
+	|	ItemList.Currency,
+	|	ItemList.Partner,
+	|	ItemList.LegalName,
+	|	ItemList.Agreement,
+	|	TRUE AS IsCustomerTransaction,
+	|	ItemList.BasisDocument AS TransactionBasis,
+	|	-SUM(ItemList.Amount) AS Amount,
+	|	TRUE AS IsDue
+	|INTO T2015S_TransactionsInfo
+	|FROM
+	|	ItemList AS ItemList
+	|GROUP BY
+	|	ItemList.Period,
+	|	ItemList.Company,
+	|	ItemList.Branch,
+	|	ItemList.Currency,
+	|	ItemList.Partner,
+	|	ItemList.LegalName,
+	|	ItemList.Agreement,
+	|	ItemList.BasisDocument";
 EndFunction

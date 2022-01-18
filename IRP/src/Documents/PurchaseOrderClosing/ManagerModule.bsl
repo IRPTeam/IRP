@@ -111,6 +111,11 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R1014T_CanceledPurchaseOrders());
 	QueryArray.Add(R4033B_GoodsReceiptSchedule());
 	QueryArray.Add(R4035B_IncomingStocks());
+	QueryArray.Add(R3025B_PurchaseOrdersToBePaid());
+	QueryArray.Add(T2014S_AdvancesInfo());
+	QueryArray.Add(R1021B_VendorsTransactions());
+	QueryArray.Add(R1020B_AdvancesToVendors());
+	QueryArray.Add(R5012B_VendorsAging());
 	Return QueryArray;
 EndFunction
 
@@ -143,7 +148,9 @@ Function ItemList()
 		   |	AND NOT PurchaseOrderItems.PurchaseBasis.REF IS NULL AS UseSalesOrder,
 		   |	PurchaseOrderItems.OffersAmount,
 		   |	PurchaseOrderItems.Ref.Currency AS Currency,
-		   |	PurchaseOrderItems.Ref.Branch AS Branch
+		   |	PurchaseOrderItems.Ref.Branch AS Branch,
+		   |	PurchaseOrderItems.Ref.Partner AS Partner,
+		   |	PurchaseOrderItems.Ref.LegalName AS LegalName
 		   |INTO ItemList
 		   |FROM
 		   |	Document.PurchaseOrderClosing.ItemList AS PurchaseOrderItems
@@ -238,4 +245,100 @@ Function R4035B_IncomingStocks()
 		   |		IncomingStocks";
 
 EndFunction
+
+Function R3025B_PurchaseOrdersToBePaid()
+	Return 
+	"SELECT
+	|	&Period AS Period,
+	|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+	|	Balance.AmountBalance AS Amount,
+	|	*
+	|INTO R3025B_PurchaseOrdersToBePaid
+	|FROM
+	|	AccumulationRegister.R3025B_PurchaseOrdersToBePaid.Balance(&BalancePeriod, Order = &PurchaseOrder) AS Balance";
+EndFunction
+
+Function T2014S_AdvancesInfo()
+	Return 
+	"SELECT
+	|	Doc.Date,
+	|	Doc.Company,
+	|	Doc.Branch,
+	|	Doc.Currency,
+	|	Doc.Partner,
+	|	Doc.LegalName,
+	|	Doc.PurchaseOrder AS Order,
+	|	TRUE AS IsVendorAdvance,
+	|	TRUE AS IsPurchaseOrderClose
+	|INTO T2014S_AdvancesInfo
+	|FROM
+	|	Document.PurchaseOrderClosing AS Doc
+	|WHERE
+	|	Doc.Ref = &Ref";
+EndFunction
+
+Function R1020B_AdvancesToVendors()
+	Return
+	"SELECT
+	|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+	|	OffsetOfAdvances.Period,
+	|	OffsetOfAdvances.Company,
+	|	OffsetOfAdvances.Branch,
+	|	OffsetOfAdvances.Partner,
+	|	OffsetOfAdvances.LegalName,
+	|	OffsetOfAdvances.Currency,
+	|	OffsetOfAdvances.AdvancesOrder AS Order,
+	|	OffsetOfAdvances.Amount,
+	|	OffsetOfAdvances.Recorder AS VendorsAdvancesClosing
+	|INTO R1020B_AdvancesToVendors
+	|FROM
+	|	InformationRegister.T2010S_OffsetOfAdvances AS OffsetOfAdvances
+	|WHERE
+	|	OffsetOfAdvances.Document = &Ref";
+EndFunction
+
+Function R1021B_VendorsTransactions()
+	Return 
+	"SELECT
+	|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+	|	OffsetOfAdvances.Period,
+	|	OffsetOfAdvances.Company,
+	|	OffsetOfAdvances.Branch,
+	|	OffsetOfAdvances.Partner,
+	|	OffsetOfAdvances.LegalName,
+	|	OffsetOfAdvances.Currency,
+	|	OffsetOfAdvances.Agreement,
+	|	OffsetOfAdvances.TransactionDocument AS Basis,
+	|	OffsetOfAdvances.TransactionOrder AS Order,
+	|	OffsetOfAdvances.Amount,
+	|	OffsetOfAdvances.Recorder AS VendorsAdvancesClosing
+	|INTO R1021B_VendorsTransactions
+	|FROM
+	|	InformationRegister.T2010S_OffsetOfAdvances AS OffsetOfAdvances
+	|WHERE
+	|	OffsetOfAdvances.Document = &Ref
+	|	AND NOT OffsetOfAdvances.IsAdvanceRelease";
+EndFunction
+
+Function R5012B_VendorsAging()
+	Return 
+	"SELECT
+	|	VALUE(AccumulationRecordType.Expense) AS RecordType,
+	|	OffsetOfAging.Period,
+	|	OffsetOfAging.Company,
+	|	OffsetOfAging.Branch,
+	|	OffsetOfAging.Partner,
+	|	OffsetOfAging.Agreement,
+	|	OffsetOfAging.Currency,
+	|	OffsetOfAging.Invoice,
+	|	OffsetOfAging.PaymentDate,
+	|	OffsetOfAging.Amount,
+	|	OffsetOfAging.Recorder AS AgingClosing
+	|INTO R5012B_VendorsAging
+	|FROM
+	|	InformationRegister.T2013S_OffsetOfAging AS OffsetOfAging
+	|WHERE
+	|	OffsetOfAging.Document = &Ref";
+EndFunction
+
 #EndRegion

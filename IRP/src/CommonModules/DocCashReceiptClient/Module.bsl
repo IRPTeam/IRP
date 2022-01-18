@@ -246,32 +246,7 @@ Procedure PaymentListBeforeAddRow(Object, Form, Item, Cancel, Clone, Parent, IsF
 EndProcedure
 
 Procedure OnActiveCell(Object, Form, Item, Cancel = Undefined) Export
-	If Item.CurrentItem = Undefined Then
-		Return;
-	EndIf;
-
-	CurrentData = Item.CurrentData;
-	If CurrentData = Undefined Then
-		Return;
-	EndIf;
-
-	CanModify = True;
-
-	If Item.CurrentItem.Name = "PaymentListBasisDocument" Then
-
-		AgreementInfo = CatAgreementsServer.GetAgreementInfo(CurrentData.Agreement);
-		If Not AgreementInfo.ApArPostingDetail = PredefinedValue("Enum.ApArPostingDetail.ByDocuments") Then
-			CanModify = False;
-		EndIf;
-
-		If Cancel <> Undefined Then
-			If Not CanModify Then
-				Cancel = True;
-			EndIf;
-		Else
-			Item.CurrentItem.ReadOnly = Not CanModify;
-		EndIf;
-	EndIf;
+	Return;
 EndProcedure
 
 #EndRegion
@@ -313,6 +288,8 @@ Procedure CleanDataByTransactionTypeContinue(Result, AdditionalParameters) Expor
 		DocumentsClientServer.CleanDataByArray(Object, ArrayAll, ArrayByType);
 		For Each Row In Object.PaymentList Do
 			Row.PlaningTransactionBasis = Undefined;
+			Row.BasisDocument = Undefined;
+			Row.Order = Undefined;
 		EndDo;
 	Else
 		Object.TransactionType = Form.CurrentTransactionType;
@@ -359,6 +336,70 @@ EndProcedure
 
 #EndRegion
 
+#Region ItemOrder
+
+Procedure PaymentListOrderStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
+	StandardProcessing = False;
+
+	CurrentData = Form.Items.PaymentList.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+
+	Parameters = New Structure();
+	Parameters.Insert("Filter", New Structure());
+	If ValueIsFilled(CurrentData.Payee) Then
+		Parameters.Filter.Insert("LegalName", CurrentData.Payer);
+	EndIf;
+	Parameters.Filter.Insert("Company", Object.Company);
+	Parameters.Filter.Insert("Type", Type("DocumentRef.SalesOrder"));
+	
+	If ValueIsFilled(CurrentData.BasisDocument) 
+		And TypeOf(CurrentData.BasisDocument) = Type("DocumentRef.SalesInvoice") Then
+		Parameters.Filter.Insert("RefInList",
+		DocumentsServer.GetArrayOfSalesOrdersBySalesInvoice(CurrentData.BasisDocument));
+	EndIf;
+	
+	Parameters.Insert("FilterFromCurrentData", "Partner, Agreement");
+	
+	NotifyParameters = New Structure("Object, Form", Object, Form);
+	Notify = New NotifyDescription("PaymentListOrderStartChoiceEnd", ThisObject, NotifyParameters);
+	Parameters.Insert("Notify"    , Notify);
+	Parameters.Insert("TableName" , "DocumentsForIncomingPayment");	
+	Parameters.Insert("Ref"       , Object.Ref);
+	Parameters.Insert("IsReturnTransactionType", False);
+	JorDocumentsClient.BasisDocumentStartChoice(Object, Form, Item, CurrentData, Parameters);
+EndProcedure
+
+Procedure PaymentListOrderStartChoiceEnd(Result, AdditionalParameters) Export
+	If Result = Undefined Then
+		Return;
+	EndIf;
+	
+	Form = AdditionalParameters.Form;
+	Object = AdditionalParameters.Object;
+	CurrentData = Form.Items.PaymentList.CurrentData;
+	If CurrentData <> Undefined Then
+		CurrentData.Order       = Result.BasisDocument;
+		If Not ValueIsFilled(CurrentData.BasisDocument) Then
+			CurrentData.TotalAmount = Result.Amount;
+		
+			Settings = New Structure();
+			Settings.Insert("Rows", New Array());
+			Settings.Rows.Add(CurrentData);
+		
+			CalculationSettings = New Structure();
+			CalculationSettings.Insert("CalculateTaxByTotalAmount");
+			CalculationSettings.Insert("CalculateNetAmountByTotalAmount");
+	
+			Settings.Insert("CalculateSettings", CalculationSettings);
+			CalculateItemsRows(Object, Form, Settings);
+		EndIf;
+	EndIf;
+EndProcedure
+
+#EndRegion
+
 #Region ItemBasisDocument
 
 Procedure PaymentListBasisDocumentOnChange(Object, Form, Item) Export
@@ -398,6 +439,8 @@ Procedure PaymentListBasisDocumentStartChoice(Object, Form, Item, ChoiceData, St
 	Parameters.Insert("OpeningEntryTableName2", "AccountReceivableByDocuments");
 	Parameters.Insert("DebitNoteTableName", "Transactions");
 	Parameters.Insert("Ref", Object.Ref);
+	Parameters.Insert("IsReturnTransactionType", 
+		Object.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.ReturnFromVendor"));
 	JorDocumentsClient.BasisDocumentStartChoice(Object, Form, Item, CurrentData, Parameters);
 EndProcedure
 

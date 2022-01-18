@@ -147,6 +147,8 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R5011B_CustomersAging());
 	QueryArray.Add(R5012B_VendorsAging());
 	QueryArray.Add(R5010B_ReconciliationStatement());
+	QueryArray.Add(T2014S_AdvancesInfo());
+	QueryArray.Add(T2015S_TransactionsInfo());
 	Return QueryArray;
 EndFunction
 
@@ -194,7 +196,6 @@ Function AdvancesToVendors()
 		   |	OpeningEntryAdvanceToSuppliers.LegalName,
 		   |	OpeningEntryAdvanceToSuppliers.LegalNameContract,
 		   |	OpeningEntryAdvanceToSuppliers.Amount AS Amount,
-		   |	OpeningEntryAdvanceToSuppliers.Ref AS Basis,
 		   |	OpeningEntryAdvanceToSuppliers.Ref.Date AS Period,
 		   |	OpeningEntryAdvanceToSuppliers.Key
 		   |INTO AdvancesToVendors
@@ -264,7 +265,6 @@ Function AdvancesFromCustomers()
 		   |	OpeningEntryAdvanceFromCustomers.LegalName,
 		   |	OpeningEntryAdvanceFromCustomers.LegalNameContract,
 		   |	OpeningEntryAdvanceFromCustomers.Amount AS Amount,
-		   |	OpeningEntryAdvanceFromCustomers.Ref AS Basis,
 		   |	OpeningEntryAdvanceFromCustomers.Ref.Date AS Period,
 		   |	OpeningEntryAdvanceFromCustomers.Key
 		   |INTO AdvancesFromCustomers
@@ -485,6 +485,7 @@ Function R3010B_CashOnHand()
 		   |WHERE 
 		   |	TRUE";
 EndFunction
+
 Function R5010B_ReconciliationStatement()
 	Return "SELECT
 		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
@@ -540,6 +541,88 @@ Function R5010B_ReconciliationStatement()
 		   |	AdvancesFromCustomers.Amount
 		   |FROM
 		   |	AdvancesFromCustomers AS AdvancesFromCustomers";
+EndFunction
+
+Function T2014S_AdvancesInfo()
+	Return 
+	"SELECT
+	|	AdvancesToVendors.Period AS Date,
+	|	AdvancesToVendors.Key,
+	|	AdvancesToVendors.Company,
+	|	AdvancesToVendors.Branch,
+	|	AdvancesToVendors.Currency,
+	|	AdvancesToVendors.Partner,
+	|	AdvancesToVendors.LegalName,
+	|	TRUE AS IsVendorAdvance,
+	|	FALSE AS IsCustomerAdvance,
+	|	AdvancesToVendors.Amount
+	|INTO T2014S_AdvancesInfo
+	|FROM
+	|	AdvancesToVendors AS AdvancesToVendors
+	|WHERE
+	|	TRUE
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	AdvancesFromCustomers.Period,
+	|	AdvancesFromCustomers.Key,
+	|	AdvancesFromCustomers.Company,
+	|	AdvancesFromCustomers.Branch,
+	|	AdvancesFromCustomers.Currency,
+	|	AdvancesFromCustomers.Partner,
+	|	AdvancesFromCustomers.LegalName,
+	|	FALSE,
+	|	TRUE,
+	|	AdvancesFromCustomers.Amount
+	|FROM
+	|	AdvancesFromCustomers AS AdvancesFromCustomers
+	|WHERE
+	|	TRUE";
+EndFunction
+
+Function T2015S_TransactionsInfo()
+	Return 
+	"SELECT
+	|	VendorsTransactions.Period AS Date,
+	|	VendorsTransactions.Key,
+	|	VendorsTransactions.Company,
+	|	VendorsTransactions.Branch,
+	|	VendorsTransactions.Currency,
+	|	VendorsTransactions.Partner,
+	|	VendorsTransactions.LegalName,
+	|	VendorsTransactions.Agreement,
+	|	TRUE AS IsVendorTransaction,
+	|	FALSE AS IsCustomerTransaction,
+	|	VendorsTransactions.Basis AS TransactionBasis,
+	|	VendorsTransactions.Amount AS Amount,
+	|	TRUE AS IsDue
+	|INTO T2015S_TransactionsInfo
+	|FROM
+	|	VendorsTransactions AS VendorsTransactions
+	|WHERE
+	|	TRUE
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	CustomersTransactions.Period,
+	|	CustomersTransactions.Key,
+	|	CustomersTransactions.Company,
+	|	CustomersTransactions.Branch,
+	|	CustomersTransactions.Currency,
+	|	CustomersTransactions.Partner,
+	|	CustomersTransactions.LegalName,
+	|	CustomersTransactions.Agreement,
+	|	FALSE,
+	|	TRUE,
+	|	CustomersTransactions.Basis,
+	|	CustomersTransactions.Amount AS Amount,
+	|	TRUE AS IsDue
+	|FROM
+	|	CustomersTransactions AS CustomersTransactions
+	|WHERE
+	|	TRUE";
 EndFunction
 
 #EndRegion

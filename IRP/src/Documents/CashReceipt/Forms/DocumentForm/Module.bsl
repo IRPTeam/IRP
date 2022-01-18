@@ -175,8 +175,8 @@ EndProcedure
 
 &AtClient
 Procedure TransactionTypeOnChange(Item, AddInfo = Undefined) Export
-	SetVisibilityAvailability(Object, ThisObject);
 	DocCashReceiptClient.TransactionTypeOnChange(Object, ThisObject, Item);
+	SetVisibilityAvailability(Object, ThisObject);
 EndProcedure
 
 #EndRegion
@@ -223,6 +223,14 @@ EndProcedure
 Procedure PaymentListBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
 	DocCashReceiptClient.PaymentListBeforeAddRow(Object, ThisObject, Item, Cancel, Clone, Parent, IsFolder, Parameter);
 EndProcedure
+
+#Region Order
+&AtClient
+Procedure PaymentListOrderStartChoice(Item, ChoiceData, StandardProcessing)
+	DocCashReceiptClient.PaymentListOrderStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+#EndRegion
 
 #Region BasisDocument
 
@@ -472,3 +480,4 @@ EndProcedure
 Procedure ShowHiddenTables(Command)
 	DocumentsClient.ShowHiddenTables(Object, ThisObject);
 EndProcedure
+

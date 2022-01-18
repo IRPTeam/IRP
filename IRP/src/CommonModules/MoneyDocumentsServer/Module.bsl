@@ -5,9 +5,9 @@ Procedure OnCreateAtServer(Object, Form, Cancel, StandardProcessing) Export
 	If Form.Parameters.Key.IsEmpty() Then
 		FillFormAttributes(Object, Form, Is);
 		SetGroupItemsList(Object, Form);
+		FillPaymentList(Object, Is);
 		DocumentsClientServer.ChangeTitleGroupTitle(Object, Form);
 	EndIf;
-	FillPaymentList(Object, Is);
 	Taxes_CreateFormControls(Form, Is);
 	CalculateTableAtServer(Form, Object, Is);
 EndProcedure
@@ -58,7 +58,9 @@ EndProcedure
 
 Procedure FillPaymentList(Object, Is)
 	If Is.BankPayment Or Is.CashPayment Or Is.BankReceipt Or Is.CashReceipt Then
-		DocumentsServer.FillPaymentList(Object);
+		For Each Row In Object.PaymentList Do
+			Row.ApArPostingDetail = Row.Agreement.ApArPostingDetail;
+		EndDo;
 	EndIf;
 EndProcedure
 
@@ -96,7 +98,8 @@ Procedure FillAttributesByType(Ref, TransactionType, ArrayAll, ArrayByType) Expo
 	|PaymentList.Payee,
 	|PaymentList.Payer,
 	|PaymentList.AmountExchange,
-	|PaymentList.POSAccount";
+	|PaymentList.POSAccount,
+	|PaymentList.Order";
 	
 	ArrayAll = New Array();
 	For Each ArrayItem In StrSplit(StrAll, ",") Do
@@ -135,6 +138,10 @@ Procedure FillAttributesByType(Ref, TransactionType, ArrayAll, ArrayByType) Expo
 		|PaymentList.PlaningTransactionBasis,
 		|PaymentList.TotalAmount,
 		|PaymentList.LegalNameContract";
+		If TransactionType = Enums.OutgoingPaymentTransactionTypes.PaymentToVendor
+			Or TransactionType = Enums.IncomingPaymentTransactionType.PaymentFromCustomer Then
+			StrByType = StrByType + ", PaymentList.Order";
+		EndIf;
 	ElsIf TransactionType = Enums.IncomingPaymentTransactionType.TransferFromPOS Then
 		StrByType = "Account, Company, Currency, TransactionType, Description,
 		|PaymentList.PlaningTransactionBasis,

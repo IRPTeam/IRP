@@ -26,7 +26,6 @@ Procedure BeforeDelete(Cancel)
 EndProcedure
 
 Procedure FillCheckProcessing(Cancel, CheckedAttributes)
-	DocumentsServer.CheckPaymentList(ThisObject, Cancel, CheckedAttributes);
 	DocumentsServer.FillCheckBankCashDocuments(ThisObject, CheckedAttributes);
 EndProcedure
 
@@ -43,6 +42,9 @@ Procedure Filling(FillingData, FillingText, StandardProcessing)
 		If FillingData.BasedOn = "CashTransferOrder"
 			Or FillingData.BasedOn = "IncomingPaymentOrder"
 			Or FillingData.BasedOn = "SalesInvoice" Then
+			Filling_BasedOn(FillingData);
+		EndIf;
+		If FillingData.Property("BasedOn") And FillingData.BasedOn = "SalesOrder" Then
 			Filling_BasedOn(FillingData);
 		EndIf;
 	EndIf;

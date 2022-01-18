@@ -154,12 +154,6 @@ Procedure WriteSavedItems(Object, CurrentObject)
 
 EndProcedure
 
-Procedure FillPaymentList(Object) Export
-	For Each Row In Object.PaymentList Do
-		Row.ApArPostingDetail = Row.Agreement.ApArPostingDetail;
-	EndDo;
-EndProcedure
-
 Function CheckItemListStores(Object) Export
 
 	Query = New Query();
@@ -203,46 +197,6 @@ EndFunction
 #EndRegion
 
 #Region PaymentList
-
-Procedure CheckPaymentList(Object, Cancel, CheckedAttributes) Export
-	Query = New Query();
-	Query.Text =
-	"SELECT
-	|	Table.LineNumber,
-	|	Table.Agreement,
-	|	Table.BasisDocument
-	|INTO PaymentList
-	|FROM
-	|	&PaymentList AS Table
-	|;
-	|////////////////////////////////////////////////////////////////////////////////
-	|SELECT
-	|	PaymentList.LineNumber,
-	|	PaymentList.Agreement.ApArPostingDetail,
-	|	PaymentList.BasisDocument.Ref,
-	|	PaymentList.BasisDocument
-	|FROM
-	|	PaymentList AS PaymentList
-	|WHERE
-	|	PaymentList.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
-	|	AND  PaymentList.BasisDocument.Ref is Null
-	|";
-
-	Query.SetParameter("PaymentList", Object.PaymentList.Unload());
-	QueryResult = Query.Execute();
-
-	If QueryResult.IsEmpty() Then
-		Return;
-	EndIf;
-
-	SelectionDetailRecords = QueryResult.Select();
-
-	Cancel = True;
-	While SelectionDetailRecords.Next() Do
-		CommonFunctionsClientServer.ShowUsersMessage(StrTemplate(R().Error_020, SelectionDetailRecords.LineNumber),
-			"PaymentList[" + Format((SelectionDetailRecords.LineNumber - 1), "NZ=0; NG=0;") + "].BasisDocument", Object);
-	EndDo;
-EndProcedure
 
 Procedure FillCheckBankCashDocuments(Object, CheckedAttributes) Export
 	If Object.TransactionType = PredefinedValue("Enum.IncomingPaymentTransactionType.CurrencyExchange")
@@ -838,3 +792,38 @@ Function GetStoreInfo(Store, ItemKey) Export
 	Result.Insert("UseShipmentConfirmation", Store.UseShipmentConfirmation);
 	Return Result;
 EndFunction
+
+Function GetArrayOfPurchaseOrdersByPurchaseInvoice(PurchaseInvoice) Export
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	PurchaseInvoiceItemList.PurchaseOrder
+	|FROM
+	|	Document.PurchaseInvoice.ItemList AS PurchaseInvoiceItemList
+	|WHERE
+	|	PurchaseInvoiceItemList.Ref = &Ref
+	|	AND NOT PurchaseInvoiceItemList.PurchaseOrder.Ref IS NULL";
+	Query.SetParameter("Ref", PurchaseInvoice);
+	QueryResult = Query.Execute();
+	QueryTable = QueryResult.Unload();
+	ArrayOfOrders = QueryTable.UnloadColumn("PurchaseOrder");
+	Return ArrayOfOrders;
+EndFunction
+
+Function GetArrayOfSalesOrdersBySalesInvoice(SalesInvoice) Export
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	SalesInvoiceItemList.SalesOrder
+	|FROM
+	|	Document.SalesInvoice.ItemList AS SalesInvoiceItemList
+	|WHERE
+	|	SalesInvoiceItemList.Ref = &Ref
+	|	AND NOT SalesInvoiceItemList.SalesOrder.Ref IS NULL";
+	Query.SetParameter("Ref", SalesInvoice);
+	QueryResult = Query.Execute();
+	QueryTable = QueryResult.Unload();
+	ArrayOfOrders = QueryTable.UnloadColumn("SalesOrder");
+	Return ArrayOfOrders;
+EndFunction
+

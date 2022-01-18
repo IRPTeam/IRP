@@ -15,6 +15,7 @@
   <registeredDocuments>Document.SalesInvoice</registeredDocuments>
   <registeredDocuments>Document.OpeningEntry</registeredDocuments>
   <registeredDocuments>Document.DebitNote</registeredDocuments>
+  <registeredDocuments>Document.SalesOrder</registeredDocuments>
   <forms uuid="bb5bbbb8-cba8-495f-a296-a359e7159285">
     <name>ChoiceForm</name>
     <synonym>

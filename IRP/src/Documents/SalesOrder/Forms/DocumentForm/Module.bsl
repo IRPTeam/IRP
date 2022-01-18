@@ -91,6 +91,7 @@ Procedure SetVisibilityAvailability(Object, Form)
 	EndIf;
 	Form.Items.GroupHead.Visible = Not Form.ClosingOrder.IsEmpty();
 	Form.Items.EditCurrencies.Enabled = Not Form.ReadOnly;
+	DocumentsClientServer.SetReadOnlyPaymentTermsCanBePaid(Object, Form);
 EndProcedure
 
 &AtServer
@@ -346,6 +347,7 @@ EndProcedure
 &AtClient
 Procedure ItemListCancelOnChange(Item)
 	UpdateTotalAmounts();
+	DocumentsClient.CalculatePaymentTermDateAndAmount(Object, ThisObject);
 EndProcedure
 
 #EndRegion

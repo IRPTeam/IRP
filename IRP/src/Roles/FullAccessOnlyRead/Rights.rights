@@ -2375,17 +2375,6 @@
 		</right>
 	</object>
 	<object>
-		<name>InformationRegister.T2011S_PartnerTransactions</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
 		<name>Catalog.Files</name>
 		<right>
 			<name>Read</name>
@@ -3000,17 +2989,6 @@
 	</object>
 	<object>
 		<name>CommonForm.UpdateItemListInfo</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>InformationRegister.T2012S_PartnerAdvances</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
 		<right>
 			<name>View</name>
 			<value>true</value>

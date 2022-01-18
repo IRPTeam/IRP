@@ -56,9 +56,29 @@
       <types>DocumentRef.OpeningEntry</types>
       <types>DocumentRef.SalesReturn</types>
       <types>DocumentRef.SalesInvoice</types>
+      <types>DocumentRef.PurchaseOrderClosing</types>
+      <types>DocumentRef.SalesOrderClosing</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
+    <indexing>Index</indexing>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+  <dimensions uuid="8c64cfa4-a87d-4cb0-8913-555b5938bf0a">
+    <name>IsAdvanceRelease</name>
+    <synonym>
+      <key>en</key>
+      <value>Is advance release</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <indexing>Index</indexing>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
     <fillValue xsi:type="core:UndefinedValue"/>
@@ -167,30 +187,6 @@
     <fillValue xsi:type="core:UndefinedValue"/>
     <mainFilter>true</mainFilter>
   </dimensions>
-  <dimensions uuid="a5fd0f9a-b667-4b0c-a964-4ebe6e98fe62">
-    <name>AdvancesDocument</name>
-    <synonym>
-      <key>en</key>
-      <value>Advances document</value>
-    </synonym>
-    <type>
-      <types>DocumentRef.CashPayment</types>
-      <types>DocumentRef.DebitNote</types>
-      <types>DocumentRef.CreditNote</types>
-      <types>DocumentRef.BankReceipt</types>
-      <types>DocumentRef.PurchaseReturn</types>
-      <types>DocumentRef.BankPayment</types>
-      <types>DocumentRef.CashReceipt</types>
-      <types>DocumentRef.OpeningEntry</types>
-      <types>DocumentRef.SalesReturn</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <mainFilter>true</mainFilter>
-  </dimensions>
   <dimensions uuid="04a290af-cfb5-45e1-8fd9-08be47d9cfe7">
     <name>Agreement</name>
     <synonym>
@@ -223,14 +219,97 @@
     <fillValue xsi:type="core:UndefinedValue"/>
     <mainFilter>true</mainFilter>
   </dimensions>
-  <dimensions uuid="23ef4df9-951d-41d8-83c2-583c8b7c205b">
-    <name>DueAsAdvance</name>
+  <dimensions uuid="a2bfbce7-ecf9-4b04-b09b-e785b4bbb9b9">
+    <name>AdvancesOrder</name>
     <synonym>
       <key>en</key>
-      <value>Due as advance</value>
+      <value>Advances order</value>
     </synonym>
     <type>
-      <types>Boolean</types>
+      <types>DocumentRef.PurchaseOrder</types>
+      <types>DocumentRef.SalesOrder</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+  <dimensions uuid="cbf0cebd-4ccf-4120-9102-f4a3f3a6a224">
+    <name>TransactionOrder</name>
+    <synonym>
+      <key>en</key>
+      <value>Transaction order</value>
+    </synonym>
+    <type>
+      <types>DocumentRef.PurchaseOrder</types>
+      <types>DocumentRef.SalesOrder</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+  <dimensions uuid="b06f054e-bcde-4dd4-b381-17d097f81fcf">
+    <name>FromAdvanceKey</name>
+    <synonym>
+      <key>en</key>
+      <value>From advance key</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.AdvancesKeys</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <indexing>Index</indexing>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+  <dimensions uuid="7fb1c431-084c-4edc-997a-a07ce584ca1a">
+    <name>ToTransactionKey</name>
+    <synonym>
+      <key>en</key>
+      <value>To transaction key</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.TransactionsKeys</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+  <dimensions uuid="5e04fa1e-d021-467f-87a2-15ad74adb5cf">
+    <name>FromTransactionKey</name>
+    <synonym>
+      <key>en</key>
+      <value>From transaction key</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.TransactionsKeys</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <mainFilter>true</mainFilter>
+  </dimensions>
+  <dimensions uuid="ba5e9085-eed4-4658-b4e4-4244f1835fff">
+    <name>ToAdvanceKey</name>
+    <synonym>
+      <key>en</key>
+      <value>To advance key</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.AdvancesKeys</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

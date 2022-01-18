@@ -869,7 +869,7 @@ Scenario: _154530 message when trying to re-create Purchase order/Inventory tran
 			| 'Description'        |
 			| 'Vendor Ferron, TRY' |
 		And I click the button named "FormChoose"
-		Then If dialog box is visible I click "OK"
+		Then If dialog box is visible I click "OK" button
 		And I click "OK" button
 		And I select current line in "ItemList" table
 		And I activate "Price" field in "ItemList" table

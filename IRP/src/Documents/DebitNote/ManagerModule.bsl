@@ -150,7 +150,7 @@ Function R5022T_Expenses()
 	Return "SELECT
 		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
 		   |	*
-		   |INTO R5010B_ReconciliationStatement
+		   |INTO R5022T_Expenses
 		   |FROM
 		   |	Transactions";
 EndFunction

@@ -152,6 +152,7 @@ EndFunction
 Function R5021T_Revenues()
 	Return "SELECT
 		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		   |	Transactions.Amount AS AmountWithTaxes,
 		   |	*
 		   |INTO R5021T_Revenues
 		   |FROM

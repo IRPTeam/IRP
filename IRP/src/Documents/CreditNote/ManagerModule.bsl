@@ -152,6 +152,7 @@ EndFunction
 Function R5022T_Expenses()
 	Return "SELECT
 		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		   |	Transactions.Amount AS AmountWithTaxes,
 		   |	*
 		   |INTO R5022T_Expenses
 		   |FROM

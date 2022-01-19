@@ -197,6 +197,51 @@ Scenario: _043105 check absence Credit note movements by the Register "R2021 Cus
 	And I close all client application windows
 
 
+Scenario: _043106 check Credit note movements by the Register "R5022 Expenses" (with vendor)
+	* Select Credit note
+		Given I open hyperlink "e1cib/list/Document.CreditNote"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '1' |
+	* Check movements by the Register  "R5022 Expenses" 
+		And I click "Registrations report" button
+		And I select "R5022 Expenses" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Credit note 1 dated 05.04.2021 09:30:47' | ''                    | ''          | ''                  | ''             | ''             | ''                        | ''             | ''         | ''         | ''                    | ''                             |
+			| 'Document registrations records'          | ''                    | ''          | ''                  | ''             | ''             | ''                        | ''             | ''         | ''         | ''                    | ''                             |
+			| 'Register  "R5022 Expenses"'              | ''                    | ''          | ''                  | ''             | ''             | ''                        | ''             | ''         | ''         | ''                    | ''                             |
+			| ''                                        | 'Period'              | 'Resources' | ''                  | 'Dimensions'   | ''             | ''                        | ''             | ''         | ''         | ''                    | ''                             |
+			| ''                                        | ''                    | 'Amount'    | 'Amount with taxes' | 'Company'      | 'Branch'       | 'Profit loss center'      | 'Expense type' | 'Item key' | 'Currency' | 'Additional analytic' | 'Multi currency movement type' |
+			| ''                                        | '05.04.2021 09:30:47' | '85,6'      | '85,6'              | 'Main Company' | 'Front office' | 'Distribution department' | 'Software'     | ''         | 'USD'      | ''                    | 'Reporting currency'           |
+			| ''                                        | '05.04.2021 09:30:47' | '500'       | '500'               | 'Main Company' | 'Front office' | 'Distribution department' | 'Software'     | ''         | 'TRY'      | ''                    | 'Local currency'               |
+			| ''                                        | '05.04.2021 09:30:47' | '500'       | '500'               | 'Main Company' | 'Front office' | 'Distribution department' | 'Software'     | ''         | 'TRY'      | ''                    | 'TRY'                          |
+			| ''                                        | '05.04.2021 09:30:47' | '500'       | '500'               | 'Main Company' | 'Front office' | 'Distribution department' | 'Software'     | ''         | 'TRY'      | ''                    | 'en description is empty'      |
+		And I close all client application windows
+
+Scenario: _043107 check Credit note movements by the Register "R5022 Expenses" (with customer)
+	And I close all client application windows
+	* Select Credit note
+		Given I open hyperlink "e1cib/list/Document.CreditNote"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '2' |
+	* Check movements by the Register  "R5022 Expenses" 
+		And I click "Registrations report" button
+		And I select "R5022 Expenses" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Credit note 2 dated 05.04.2021 09:30:58' | ''                    | ''          | ''                  | ''             | ''             | ''                        | ''             | ''         | ''         | ''                    | ''                             |
+			| 'Document registrations records'          | ''                    | ''          | ''                  | ''             | ''             | ''                        | ''             | ''         | ''         | ''                    | ''                             |
+			| 'Register  "R5022 Expenses"'              | ''                    | ''          | ''                  | ''             | ''             | ''                        | ''             | ''         | ''         | ''                    | ''                             |
+			| ''                                        | 'Period'              | 'Resources' | ''                  | 'Dimensions'   | ''             | ''                        | ''             | ''         | ''         | ''                    | ''                             |
+			| ''                                        | ''                    | 'Amount'    | 'Amount with taxes' | 'Company'      | 'Branch'       | 'Profit loss center'      | 'Expense type' | 'Item key' | 'Currency' | 'Additional analytic' | 'Multi currency movement type' |
+			| ''                                        | '05.04.2021 09:30:58' | '119,84'    | '119,84'            | 'Main Company' | 'Front office' | 'Distribution department' | 'Software'     | ''         | 'USD'      | ''                    | 'Reporting currency'           |
+			| ''                                        | '05.04.2021 09:30:58' | '700'       | '700'               | 'Main Company' | 'Front office' | 'Distribution department' | 'Software'     | ''         | 'TRY'      | ''                    | 'Local currency'               |
+			| ''                                        | '05.04.2021 09:30:58' | '700'       | '700'               | 'Main Company' | 'Front office' | 'Distribution department' | 'Software'     | ''         | 'TRY'      | ''                    | 'TRY'                          |
+			| ''                                        | '05.04.2021 09:30:58' | '700'       | '700'               | 'Main Company' | 'Front office' | 'Distribution department' | 'Software'     | ''         | 'TRY'      | ''                    | 'en description is empty'      |			
+	And I close all client application windows
+
 Scenario: _043130 Credit note clear posting/mark for deletion
 	And I close all client application windows
 	* Select Credit note

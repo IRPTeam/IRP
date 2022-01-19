@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="9ced7ea9-724a-4361-8dc8-3dac77dce4a2">
+  <producedTypes>
+    <objectType typeId="e4486bbc-b07c-4a73-94b0-95e0973bd693" valueTypeId="265761b4-6753-4398-a657-d2a49e2ca676"/>
+    <refType typeId="2191b905-344d-4d15-8862-ac3b9d4641e4" valueTypeId="bcf1b703-64d7-4fce-91fc-2024aae54a4b"/>
+    <selectionType typeId="d3f53430-3ec7-4ef4-b3f3-7d454038a07c" valueTypeId="f0a54ec2-5a00-4102-b388-cfc9e97178d7"/>
+    <listType typeId="5f6aff7c-59d9-4ca7-a239-db2fb4b2f467" valueTypeId="2641b3e6-0622-4707-bb61-b49d4a16dc8e"/>
+    <managerType typeId="30bfe911-532e-462d-9b61-317dcecfd6a9" valueTypeId="f2847bfd-49b7-4fdb-81ea-1a27db30979a"/>
+  </producedTypes>
+  <name>AccountingOperations</name>
+  <synonym>
+    <key>en</key>
+    <value>Accounting operations</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <inputByString>Catalog.AccountingOperations.StandardAttribute.Code</inputByString>
+  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+  <standardAttributes>
+    <dataHistory>Use</dataHistory>
+    <name>Parent</name>
+    <synonym>
+      <key>en</key>
+      <value>Document</value>
+    </synonym>
+    <fillFromFillingValue>true</fillFromFillingValue>
+    <fullTextSearch>Use</fullTextSearch>
+  </standardAttributes>
+  <createOnInput>Use</createOnInput>
+  <dataLockControlMode>Managed</dataLockControlMode>
+  <fullTextSearch>Use</fullTextSearch>
+  <hierarchical>true</hierarchical>
+  <limitLevelCount>true</limitLevelCount>
+  <levelCount>2</levelCount>
+  <foldersOnTop>true</foldersOnTop>
+  <codeLength>12</codeLength>
+  <codeAllowedLength>Variable</codeAllowedLength>
+  <checkUnique>true</checkUnique>
+  <autonumbering>true</autonumbering>
+  <defaultPresentation>AsDescription</defaultPresentation>
+  <predefined>
+    <items id="bb863899-549b-4f65-a7fd-4c1f4e53062b">
+      <name>Document_BankPayment</name>
+      <description>Bank payment</description>
+      <code xsi:type="core:NumberValue">
+        <value>1</value>
+      </code>
+      <isFolder>true</isFolder>
+      <content id="0a5ed6e5-a6f6-4167-b3d9-198842f906e6">
+        <name>Dr_PartnerAccount_Cr_CashAccount</name>
+        <description>Dr Partner account - Cr Cash account</description>
+        <code xsi:type="core:NumberValue">
+          <value>3</value>
+        </code>
+      </content>
+    </items>
+    <items id="e1dd6187-4d04-4b2a-8c5b-f6ca00ed7cc6">
+      <name>Document_BankReceipt</name>
+      <description>Bank receipt</description>
+      <code xsi:type="core:NumberValue">
+        <value>2</value>
+      </code>
+      <isFolder>true</isFolder>
+      <content id="84005d98-3b5e-4d01-9885-c136d7fa2202">
+        <name>Dr_CashAccount_Cr_PartnerAccount</name>
+        <description>Dr Cash account - Cr partner account</description>
+        <code xsi:type="core:NumberValue">
+          <value>4</value>
+        </code>
+      </content>
+    </items>
+    <items id="5780092e-ac78-48e0-8f40-6a3fb575aeb2">
+      <name>Document_PurchaseInvoice</name>
+      <description>Purchase invoice</description>
+      <code xsi:type="core:NumberValue">
+        <value>5</value>
+      </code>
+      <isFolder>true</isFolder>
+      <content id="436a2614-e716-45b0-b595-9b5dc7abd846">
+        <name>Dr_ItemKeyAccount_Cr_PartnerAccount</name>
+        <description>Dr Item key account - Cr Partner account</description>
+        <code xsi:type="core:NumberValue">
+          <value>6</value>
+        </code>
+      </content>
+      <content id="d758c87d-587a-4d4a-a0dd-fdb979084274">
+        <name>Dr_PartnerAccountTrn_Cr_PartnerAccountAdv</name>
+        <description>Dr Partner account trn - Cr Partner account adv</description>
+        <code xsi:type="core:NumberValue">
+          <value>7</value>
+        </code>
+      </content>
+    </items>
+  </predefined>
+  <editType>InDialog</editType>
+  <choiceMode>BothWays</choiceMode>
+  <defaultObjectForm>Catalog.AccountingOperations.Form.ItemForm</defaultObjectForm>
+  <defaultFolderForm>Catalog.AccountingOperations.Form.GroupForm</defaultFolderForm>
+  <defaultListForm>Catalog.AccountingOperations.Form.ListForm</defaultListForm>
+  <defaultChoiceForm>Catalog.AccountingOperations.Form.ChoiceForm</defaultChoiceForm>
+  <defaultFolderChoiceForm>Catalog.AccountingOperations.Form.GroupChoiceForm</defaultFolderChoiceForm>
+  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+  <forms uuid="246f6fca-52db-4e34-8f5c-f33d4b2fec75">
+    <name>ItemForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Item form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="8c969c2b-d43e-427f-b435-5597b3a4c92d">
+    <name>GroupForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Group form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="350e9d14-ae04-4329-b8ca-107fe4614d22">
+    <name>ListForm</name>
+    <synonym>
+      <key>en</key>
+      <value>List form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="aa13437d-1884-404b-a68e-b12d5e00c862">
+    <name>ChoiceForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Choice form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="4b45f1d9-ea85-4349-8e60-aff66d983189">
+    <name>GroupChoiceForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Group choice form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+</mdclass:Catalog>

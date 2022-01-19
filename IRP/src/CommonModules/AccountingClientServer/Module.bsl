@@ -2,22 +2,19 @@
 Procedure BeforeWriteAccountingDocument(Object, MainTableName, ArrayOfIdentifiers) Export
 	DeleteUnusedRowsFromAnalyticsTable(Object, MainTableName);
 	CompanyLadgerTypes = AccountingServer.GetLadgerTypesByCompany(Object);
-	
-	For Each Operation In ArrayOfIdentifiers Do
-		
-		If Not Operation.ByRow Then
-			For Each LadgerType In CompanyLadgerTypes Do
+	Period = CalculationStringsClientServer.GetSliceLastDateByRefAndDate(Object.Ref, Object.Date);
+	For Each LadgerType In CompanyLadgerTypes Do
+		LadgerTypeAccountingOperations = AccountingServer.GetAccountingOperationsByLadgerType(Period, LadgerType);
+		For Each Operation In LadgerTypeAccountingOperations Do
+			If Not Operation.ByRow Then
 				UpdateAccountingAnalytics(Object, Undefined, "", Operation.Identifier, LadgerType);
-			EndDo; // CompanyLadgerTypes
-		Else
-			For Each LadgerType In CompanyLadgerTypes Do
+			Else
 				For Each Row In Object[MainTableName] Do
 					UpdateAccountingAnalytics(Object, Row, Row.Key, Operation.Identifier, LadgerType);
-				EndDo; // Object[MainTableName]
-			EndDo; // CompanyLadgerTypes
-		EndIf;
-		
-	EndDo; // ArrayOfIdentifiers
+				EndDo;
+			EndIf;
+		EndDo;
+	EndDo;
 EndProcedure
 
 Procedure UpdateAccountingAnalytics(Object, Row, RowKey, Identifier, LadgerType)

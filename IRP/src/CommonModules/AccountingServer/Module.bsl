@@ -764,3 +764,16 @@ EndFunction
 
 #EndRegion
 
+#Region LadgerTypeOperations
+
+Function GetAccountingOperationsByLadgerType(Period, LadgerType) Export
+	Query = New Query();
+	Query.Text = "";
+	
+EndFunction
+
+#EndRegion
+
+
+
+

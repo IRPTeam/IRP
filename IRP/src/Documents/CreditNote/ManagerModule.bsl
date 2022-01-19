@@ -70,7 +70,7 @@ Procedure UndopostingCheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefine
 EndProcedure
 
 #EndRegion
-// Test
+
 #Region NewRegistersPosting
 Function GetInformationAboutMovements(Ref) Export
 	Str = New Structure();
@@ -209,7 +209,7 @@ Function R2021B_CustomersTransactions()
 		   |	AND OffsetOfAdvances.Recorder REFS Document.CustomersAdvancesClosing";
 EndFunction
 
-Function R5022T1_Expenses()
+Function R5022T_Expenses()
 	Return "SELECT
 		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
 		   |	Transactions.Amount AS AmountWithTaxes,
@@ -272,9 +272,6 @@ EndFunction
 
 Function R5012B_VendorsAging()
 	Return "SELECT
-	|
-	|
-	|
 		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
 		   |	Transactions.Period AS PaymentDate,
 		   |	Transactions.Period AS Period,

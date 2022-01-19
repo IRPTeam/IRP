@@ -145,6 +145,16 @@ Function R5010B_ReconciliationStatement()
 		   |	Transactions";
 EndFunction
 
+Function R5022T1_Expenses()
+	Return "SELECT
+		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		   |	Transactions.Amount AS AmountWithTaxes,
+		   |	*
+		   |INTO R5022T_Expenses
+		   |FROM
+		   |	Transactions";
+EndFunction
+
 Function R1021B_VendorsTransactions()
 	Return "SELECT
 		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,

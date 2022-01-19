@@ -39,24 +39,25 @@ EndProcedure
 
 Procedure Filling(FillingData, FillingText, StandardProcessing)
 	If TypeOf(FillingData) = Type("Structure") And FillingData.Property("BasedOn") Then
-		If FillingData.BasedOn = "CashTransferOrder" Or FillingData.BasedOn = "IncomingPaymentOrder"
-			Or FillingData.BasedOn = "SalesInvoice" Or FillingData.BasedOn = "SalesOrder" Then
+
+		If FillingData.BasedOn = "CashTransferOrder" 
+			Or FillingData.BasedOn = "IncomingPaymentOrder"
+			Or FillingData.BasedOn = "SalesInvoice" 
+			Or FillingData.BasedOn = "SalesOrder" Then
 
 			Filling_BasedOn(FillingData);
 		EndIf;
 	EndIf;
-	For Each Row In ThisObject.PaymentList Do
-		If Not ValueIsFilled(Row.Key) Then
-			Row.Key = New UUID();
-		EndIf;
-	EndDo;
 EndProcedure
 
 Procedure Filling_BasedOn(FillingData)
-	FillPropertyValues(ThisObject, FillingData, "Company, CashAccount, Currency, TransactionType, CurrencyExchange");
+	FillPropertyValues(ThisObject, FillingData);
 	For Each Row In FillingData.PaymentList Do
 		NewRow = ThisObject.PaymentList.Add();
 		FillPropertyValues(NewRow, Row);
+			If Not ValueIsFilled(NewRow.Key) Then
+			NewRow.Key = New UUID();
+		EndIf;
 	EndDo;
 	ThisObject.DocumentAmount = ThisObject.PaymentList.Total("TotalAmount");
 EndProcedure

@@ -4,13 +4,6 @@
 	<setForAttributesByDefault>false</setForAttributesByDefault>
 	<independentRightsOfChildObjects>true</independentRightsOfChildObjects>
 	<object>
-		<name>Document.InvoiceMatch.Attribute.Company</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
 		<name>Document.BankReceipt.Attribute.Company</name>
 		<right>
 			<name>View</name>
@@ -927,17 +920,6 @@
 	</object>
 	<object>
 		<name>Document.CashReceipt.TabularSection.PaymentList.Attribute.FinancialMovementType</name>
-		<right>
-			<name>View</name>
-			<value>true</value>
-		</right>
-	</object>
-	<object>
-		<name>Document.InvoiceMatch</name>
-		<right>
-			<name>Read</name>
-			<value>true</value>
-		</right>
 		<right>
 			<name>View</name>
 			<value>true</value>

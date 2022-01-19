@@ -25,7 +25,6 @@
     <types>CatalogRef.ExpenseAndRevenueTypes</types>
     <types>DocumentRef.DebitNote</types>
     <types>DocumentRef.CreditNote</types>
-    <types>DocumentRef.InvoiceMatch</types>
     <types>DocumentRef.BankReceipt</types>
     <types>CatalogRef.UserGroups</types>
     <types>DocumentRef.PurchaseReturn</types>

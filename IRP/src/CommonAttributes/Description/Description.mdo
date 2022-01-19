@@ -126,10 +126,6 @@
     <use>Use</use>
   </content>
   <content>
-    <metadata>Document.InvoiceMatch</metadata>
-    <use>Use</use>
-  </content>
-  <content>
     <metadata>Document.PriceList</metadata>
     <use>Use</use>
   </content>

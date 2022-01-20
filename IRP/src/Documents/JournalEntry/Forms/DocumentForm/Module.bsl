@@ -74,6 +74,25 @@ EndProcedure
 
 #EndRegion
 
+#Region SwitchRecordsActivity
+
+&AtClient
+Procedure SwitchRecordsActivity(Command)
+	SwitchRecordsActivityAtServer();
+EndProcedure
+
+&AtServer
+Procedure SwitchRecordsActivityAtServer()
+	Records = Object.RegisterRecords.R6010A_Master;
+	Records.Read();
+	For Each Record In Records Do
+		Record.Active = Not Record.Active;
+	EndDo;
+	Records.Write();
+EndProcedure
+
+#EndRegion
+
 #Region ItemBasis
 
 &AtClient

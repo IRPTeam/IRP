@@ -523,12 +523,12 @@ Procedure EditTrialBallanceAccounts(Command)
 	If CurrentData = Undefined Then
 		Return;
 	EndIf;
-	FormParameters = AccountingClientServer.GetParameters(Object, CurrentData, "AccountingRowAnalytics");
+	FormParameters = AccountingClientServer.GetParametersEditTrialBallanceAccounts(Object, CurrentData, "PaymentList");
 	NotifyParameters = New Structure();
 	NotifyParameters.Insert("Object", Object);
 	NotifyParameters.Insert("Form"  , ThisObject);
 	Notify = New NotifyDescription("EditTrialBallanceAccounts", AccountingClient, NotifyParameters);
-	OpenForm("CommonForm.EditTrialBallanceAccounts", FormParameters, , , , , Notify, FormWindowOpeningMode.LockOwnerWindow);
+	OpenForm("CommonForm.EditTrialBallanceAccounts", FormParameters, ThisObject, , , , Notify, FormWindowOpeningMode.LockOwnerWindow);
 EndProcedure
 
 

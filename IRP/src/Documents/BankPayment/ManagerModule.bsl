@@ -723,3 +723,119 @@ Function T1040T_AccountingAmounts()
 EndFunction
 
 #EndRegion
+
+#Region Accounting
+
+Function GetAccountingAnalytics(Parameters) Export
+	If Parameters.Identifier = Catalogs.AccountingOperations.BankPayment_Dr_PartnerAccount_Cr_CashAccount Then
+		Return GetAnalytics_Dr_PartnerAccount_Cr_CashAccount(Parameters);
+	EndIf;
+	Return Undefined;
+EndFunction
+
+Function GetAccountingData(Parameters) Export
+	If Parameters.Identifier = Catalogs.AccountingOperations.BankPayment_Dr_PartnerAccount_Cr_CashAccount Then
+		Return GetData_Dr_PartnerAccount_Cr_CashAccount(Parameters);
+	EndIf;
+	Return Undefined;
+EndFunction
+
+#Region Accounting_Analytics
+
+Function GetAnalytics_Dr_PartnerAccount_Cr_CashAccount(Parameters)
+	AccountingAnalytics = AccountingServer.GetAccountingAnalyticsResult(Parameters);
+	
+	Period = 
+	CalculationStringsClientServer.GetSliceLastDateByRefAndDate(Parameters.ObjectData.Ref, Parameters.ObjectData.Date);
+
+	Debit = AccountingServer.GetPartnerTBAccounts(Period, Parameters.ObjectData.Company, Parameters.RowData.Partner, Parameters.RowData.Agreement);
+	IsAdvance = AccountingServer.IsAdvance(Parameters.RowData);
+	If IsAdvance Then
+		If ValueIsFilled(Debit.AccountAdvances) Then
+			AccountingAnalytics.Debit = Debit.AccountAdvances;
+		EndIf;
+	Else
+		If ValueIsFilled(Debit.AccountTransactions) Then
+			AccountingAnalytics.Debit = Debit.AccountTransactions;
+		EndIf;
+	EndIf;
+	// Debit - Analytics
+	AccountingServer.SetDebitExtDimensions(Parameters, AccountingAnalytics);
+		
+	Credit = AccountingServer.GetCashAccountTBAccounts(Period, Parameters.ObjectData.Company, Parameters.ObjectData.Account);
+	If ValueIsFilled(Credit.Account) Then
+		AccountingAnalytics.Credit = Credit.Account;
+	EndIf;
+	// Credit - Analytics
+	AccountingServer.SetCreditExtDimensions(Parameters, AccountingAnalytics);
+	Return AccountingAnalytics;
+EndFunction
+
+Function GetDebitExtDimension(Parameters, ExtDimensionType, Value) Export
+	Return Value;
+EndFunction
+
+Function GetCreditExtDimension(Parameters, ExtDimensionType, Value) Export
+	Return Value;
+EndFunction
+
+#EndRegion
+
+#Region Accounting_Data
+
+Function GetData_Dr_PartnerAccount_Cr_CashAccount(Parameters)
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	T1040T_AccountingAmounts.Currency,
+	|	SUM(T1040T_AccountingAmounts.Amount) AS Amount
+	|FROM
+	|	AccumulationRegister.T1040T_AccountingAmounts AS T1040T_AccountingAmounts
+	|WHERE
+	|	T1040T_AccountingAmounts.Recorder = &Recorder
+	|	AND T1040T_AccountingAmounts.RowKey = &RowKey
+	|	AND
+	|		T1040T_AccountingAmounts.CurrencyMovementType = VALUE(ChartOfCharacteristicTypes.CurrencyMovementType.SettlementCurrency)
+	|GROUP BY
+	|	T1040T_AccountingAmounts.Currency
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	SUM(T1040T_AccountingAmounts.Amount) AS Amount
+	|FROM
+	|	AccumulationRegister.T1040T_AccountingAmounts AS T1040T_AccountingAmounts
+	|WHERE
+	|	T1040T_AccountingAmounts.Recorder = &Recorder
+	|	AND T1040T_AccountingAmounts.RowKey = &RowKey
+	|	AND T1040T_AccountingAmounts.CurrencyMovementType = &CurrencyMovementType";
+	
+	Query.SetParameter("Recorder"             , Parameters.Recorder);
+	Query.SetParameter("RowKey"               , Parameters.RowKey);
+	Query.SetParameter("CurrencyMovementType" , Parameters.CurrencyMovementType);
+	
+	QueryResults = Query.ExecuteBatch();
+	
+	Result = AccountingServer.GetAccountingDataResult();
+	
+	QuerySelection = QueryResults[0].Select();
+	If QuerySelection.Next() Then
+		Result.CurrencyDr       = QuerySelection.Currency;
+		Result.CurrencyAmountDr = QuerySelection.Amount;
+		Result.CurrencyCr       = QuerySelection.Currency;
+		Result.CurrencyAmountCr = QuerySelection.Amount;
+	Endif;
+	
+	QuerySelection = QueryResults[1].Select();
+	If QuerySelection.Next() Then
+		Result.Amount = QuerySelection.Amount;
+	Endif;
+	
+	Return Result;
+EndFunction
+
+#EndRegion
+
+#EndRegion
+
+

@@ -11,9 +11,7 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	EndDo;
 	
 	If WriteMode = DocumentWriteMode.Posting Then
-		ArrayOfIdentifiers = New Array();
-		ArrayOfIdentifiers.Add(New Structure("ByRow, Identifier", True, "Dr_PartnerTBAccounts_Cr_CashAccountTBAccounts"));
-		AccountingClientServer.BeforeWriteAccountingDocument(ThisObject, "PaymentList", ArrayOfIdentifiers);
+		AccountingClientServer.BeforeWriteAccountingDocument(ThisObject, "PaymentList");
 	EndIf;
 	
 	ThisObject.DocumentAmount = ThisObject.PaymentList.Total("TotalAmount");

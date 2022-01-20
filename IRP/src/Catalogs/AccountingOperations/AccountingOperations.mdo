@@ -46,7 +46,7 @@
       </code>
       <isFolder>true</isFolder>
       <content id="0a5ed6e5-a6f6-4167-b3d9-198842f906e6">
-        <name>Dr_PartnerAccount_Cr_CashAccount</name>
+        <name>BankPayment_Dr_PartnerAccount_Cr_CashAccount</name>
         <description>Dr Partner account - Cr Cash account</description>
         <code xsi:type="core:NumberValue">
           <value>3</value>
@@ -61,7 +61,7 @@
       </code>
       <isFolder>true</isFolder>
       <content id="84005d98-3b5e-4d01-9885-c136d7fa2202">
-        <name>Dr_CashAccount_Cr_PartnerAccount</name>
+        <name>BankReceipt_Dr_CashAccount_Cr_PartnerAccount</name>
         <description>Dr Cash account - Cr partner account</description>
         <code xsi:type="core:NumberValue">
           <value>4</value>
@@ -76,14 +76,14 @@
       </code>
       <isFolder>true</isFolder>
       <content id="436a2614-e716-45b0-b595-9b5dc7abd846">
-        <name>Dr_ItemKeyAccount_Cr_PartnerAccount</name>
+        <name>PurchaseInvoice_Dr_ItemKeyAccount_Cr_PartnerAccount</name>
         <description>Dr Item key account - Cr Partner account</description>
         <code xsi:type="core:NumberValue">
           <value>6</value>
         </code>
       </content>
       <content id="d758c87d-587a-4d4a-a0dd-fdb979084274">
-        <name>Dr_PartnerAccountTrn_Cr_PartnerAccountAdv</name>
+        <name>PurchaseInvoice_Dr_PartnerAccountTrn_Cr_PartnerAccountAdv</name>
         <description>Dr Partner account trn - Cr Partner account adv</description>
         <code xsi:type="core:NumberValue">
           <value>7</value>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<form:Form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:form="http://g5.1c.ru/v8/dt/form">
+<form:Form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:form="http://g5.1c.ru/v8/dt/form">
   <items xsi:type="form:FormField">
     <name>LadgerType</name>
     <id>62</id>
@@ -11,6 +11,10 @@
     <dataPath xsi:type="form:DataPath">
       <segments>LadgerType</segments>
     </dataPath>
+    <handlers>
+      <event>OnChange</event>
+      <name>LadgerTypeOnChange</name>
+    </handlers>
     <extendedTooltip>
       <name>LadgerTypeExtendedTooltip</name>
       <id>64</id>
@@ -57,6 +61,59 @@
       <segments>AccountingAnalytics</segments>
     </dataPath>
     <titleLocation>None</titleLocation>
+    <items xsi:type="form:FormField">
+      <name>AccountingAnalyticsIsFixed</name>
+      <id>85</id>
+      <visible>true</visible>
+      <enabled>true</enabled>
+      <userVisible>
+        <common>true</common>
+      </userVisible>
+      <dataPath xsi:type="form:DataPath">
+        <segments>AccountingAnalytics.IsFixed</segments>
+      </dataPath>
+      <titleLocation>None</titleLocation>
+      <extendedTooltip>
+        <name>AccountingAnalyticsIsFixedExtendedTooltip</name>
+        <id>87</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <type>Label</type>
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <extInfo xsi:type="form:LabelDecorationExtInfo">
+          <horizontalAlign>Left</horizontalAlign>
+        </extInfo>
+      </extendedTooltip>
+      <contextMenu>
+        <name>AccountingAnalyticsIsFixedContextMenu</name>
+        <id>86</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <autoFill>true</autoFill>
+      </contextMenu>
+      <type>PictureField</type>
+      <editMode>Enter</editMode>
+      <showInHeader>true</showInHeader>
+      <headerHorizontalAlign>Left</headerHorizontalAlign>
+      <showInFooter>true</showInFooter>
+      <extInfo xsi:type="form:ImageFieldExtInfo">
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <horizontalStretch>true</horizontalStretch>
+        <verticalStretch>true</verticalStretch>
+        <valuesPicture xsi:type="core:PictureRef">
+          <picture>StdPicture.Change</picture>
+        </valuesPicture>
+        <fileDragMode>AsFileRef</fileDragMode>
+      </extInfo>
+    </items>
     <items xsi:type="form:FormField">
       <name>AccountingAnalyticsAccountDebit</name>
       <id>14</id>
@@ -118,6 +175,10 @@
       <items xsi:type="form:FormField">
         <name>AccountingAnalyticsExtDimensionDr1</name>
         <id>26</id>
+        <title>
+          <key>en</key>
+          <value> </value>
+        </title>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
@@ -168,6 +229,11 @@
           <chooseType>true</chooseType>
           <typeDomainEnabled>true</typeDomainEnabled>
           <textEdit>true</textEdit>
+          <typeLink>
+            <datapath xsi:type="form:DataPath">
+              <segments>Items.AccountingAnalytics.CurrentData.ExtDimensionTypeDr1</segments>
+            </datapath>
+          </typeLink>
         </extInfo>
       </items>
       <items xsi:type="form:FormField">
@@ -223,6 +289,11 @@
           <chooseType>true</chooseType>
           <typeDomainEnabled>true</typeDomainEnabled>
           <textEdit>true</textEdit>
+          <typeLink>
+            <datapath xsi:type="form:DataPath">
+              <segments>Items.AccountingAnalytics.CurrentData.ExtDimensionTypeDr2</segments>
+            </datapath>
+          </typeLink>
         </extInfo>
       </items>
       <items xsi:type="form:FormField">
@@ -278,6 +349,11 @@
           <chooseType>true</chooseType>
           <typeDomainEnabled>true</typeDomainEnabled>
           <textEdit>true</textEdit>
+          <typeLink>
+            <datapath xsi:type="form:DataPath">
+              <segments>Items.AccountingAnalytics.CurrentData.ExtDimensionTypeDr3</segments>
+            </datapath>
+          </typeLink>
         </extInfo>
       </items>
       <visible>true</visible>
@@ -292,204 +368,6 @@
       <extendedTooltip>
         <name>GroupDebitExtDimensionsExtendedTooltip</name>
         <id>66</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-          <common>true</common>
-        </userVisible>
-        <type>Label</type>
-        <autoMaxWidth>true</autoMaxWidth>
-        <autoMaxHeight>true</autoMaxHeight>
-        <extInfo xsi:type="form:LabelDecorationExtInfo">
-          <horizontalAlign>Left</horizontalAlign>
-        </extInfo>
-      </extendedTooltip>
-      <type>ColumnGroup</type>
-      <extInfo xsi:type="form:ColumnGroupExtInfo">
-        <group>Vertical</group>
-        <showTitle>true</showTitle>
-      </extInfo>
-    </items>
-    <items xsi:type="form:FormGroup">
-      <name>GroupDebitExtDimensionsTypes</name>
-      <id>67</id>
-      <items xsi:type="form:FormField">
-        <name>AccountingAnalyticsExtDimensionTypeDr1</name>
-        <id>17</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-          <common>true</common>
-        </userVisible>
-        <dataPath xsi:type="form:MultiLanguageDataPath">
-          <paths xsi:type="form:DataPath">
-            <segments>AccountingAnalytics.ExtDimensionTypeDr1</segments>
-          </paths>
-          <paths xsi:type="form:DataPath">
-            <segments>AccountingAnalytics.ExtDimensionTypeDr1</segments>
-          </paths>
-        </dataPath>
-        <extendedTooltip>
-          <name>AccountingAnalyticsExtDimensionTypeDr1ExtendedTooltip</name>
-          <id>19</id>
-          <visible>true</visible>
-          <enabled>true</enabled>
-          <userVisible>
-            <common>true</common>
-          </userVisible>
-          <type>Label</type>
-          <autoMaxWidth>true</autoMaxWidth>
-          <autoMaxHeight>true</autoMaxHeight>
-          <extInfo xsi:type="form:LabelDecorationExtInfo">
-            <horizontalAlign>Left</horizontalAlign>
-          </extInfo>
-        </extendedTooltip>
-        <contextMenu>
-          <name>AccountingAnalyticsExtDimensionTypeDr1ContextMenu</name>
-          <id>18</id>
-          <visible>true</visible>
-          <enabled>true</enabled>
-          <userVisible>
-            <common>true</common>
-          </userVisible>
-          <autoFill>true</autoFill>
-        </contextMenu>
-        <type>InputField</type>
-        <editMode>Enter</editMode>
-        <showInHeader>true</showInHeader>
-        <headerHorizontalAlign>Left</headerHorizontalAlign>
-        <showInFooter>true</showInFooter>
-        <extInfo xsi:type="form:InputFieldExtInfo">
-          <autoMaxWidth>true</autoMaxWidth>
-          <autoMaxHeight>true</autoMaxHeight>
-          <wrap>true</wrap>
-          <chooseType>true</chooseType>
-          <typeDomainEnabled>true</typeDomainEnabled>
-          <textEdit>true</textEdit>
-        </extInfo>
-      </items>
-      <items xsi:type="form:FormField">
-        <name>AccountingAnalyticsExtDimensionTypeDr2</name>
-        <id>20</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-          <common>true</common>
-        </userVisible>
-        <dataPath xsi:type="form:MultiLanguageDataPath">
-          <paths xsi:type="form:DataPath">
-            <segments>AccountingAnalytics.ExtDimensionTypeDr2</segments>
-          </paths>
-          <paths xsi:type="form:DataPath">
-            <segments>AccountingAnalytics.ExtDimensionTypeDr2</segments>
-          </paths>
-        </dataPath>
-        <extendedTooltip>
-          <name>AccountingAnalyticsExtDimensionTypeDr2ExtendedTooltip</name>
-          <id>22</id>
-          <visible>true</visible>
-          <enabled>true</enabled>
-          <userVisible>
-            <common>true</common>
-          </userVisible>
-          <type>Label</type>
-          <autoMaxWidth>true</autoMaxWidth>
-          <autoMaxHeight>true</autoMaxHeight>
-          <extInfo xsi:type="form:LabelDecorationExtInfo">
-            <horizontalAlign>Left</horizontalAlign>
-          </extInfo>
-        </extendedTooltip>
-        <contextMenu>
-          <name>AccountingAnalyticsExtDimensionTypeDr2ContextMenu</name>
-          <id>21</id>
-          <visible>true</visible>
-          <enabled>true</enabled>
-          <userVisible>
-            <common>true</common>
-          </userVisible>
-          <autoFill>true</autoFill>
-        </contextMenu>
-        <type>InputField</type>
-        <editMode>Enter</editMode>
-        <showInHeader>true</showInHeader>
-        <headerHorizontalAlign>Left</headerHorizontalAlign>
-        <showInFooter>true</showInFooter>
-        <extInfo xsi:type="form:InputFieldExtInfo">
-          <autoMaxWidth>true</autoMaxWidth>
-          <autoMaxHeight>true</autoMaxHeight>
-          <wrap>true</wrap>
-          <chooseType>true</chooseType>
-          <typeDomainEnabled>true</typeDomainEnabled>
-          <textEdit>true</textEdit>
-        </extInfo>
-      </items>
-      <items xsi:type="form:FormField">
-        <name>AccountingAnalyticsExtDimensionTypeDr3</name>
-        <id>23</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-          <common>true</common>
-        </userVisible>
-        <dataPath xsi:type="form:MultiLanguageDataPath">
-          <paths xsi:type="form:DataPath">
-            <segments>AccountingAnalytics.ExtDimensionTypeDr3</segments>
-          </paths>
-          <paths xsi:type="form:DataPath">
-            <segments>AccountingAnalytics.ExtDimensionTypeDr3</segments>
-          </paths>
-        </dataPath>
-        <extendedTooltip>
-          <name>AccountingAnalyticsExtDimensionTypeDr3ExtendedTooltip</name>
-          <id>25</id>
-          <visible>true</visible>
-          <enabled>true</enabled>
-          <userVisible>
-            <common>true</common>
-          </userVisible>
-          <type>Label</type>
-          <autoMaxWidth>true</autoMaxWidth>
-          <autoMaxHeight>true</autoMaxHeight>
-          <extInfo xsi:type="form:LabelDecorationExtInfo">
-            <horizontalAlign>Left</horizontalAlign>
-          </extInfo>
-        </extendedTooltip>
-        <contextMenu>
-          <name>AccountingAnalyticsExtDimensionTypeDr3ContextMenu</name>
-          <id>24</id>
-          <visible>true</visible>
-          <enabled>true</enabled>
-          <userVisible>
-            <common>true</common>
-          </userVisible>
-          <autoFill>true</autoFill>
-        </contextMenu>
-        <type>InputField</type>
-        <editMode>Enter</editMode>
-        <showInHeader>true</showInHeader>
-        <headerHorizontalAlign>Left</headerHorizontalAlign>
-        <showInFooter>true</showInFooter>
-        <extInfo xsi:type="form:InputFieldExtInfo">
-          <autoMaxWidth>true</autoMaxWidth>
-          <autoMaxHeight>true</autoMaxHeight>
-          <wrap>true</wrap>
-          <chooseType>true</chooseType>
-          <typeDomainEnabled>true</typeDomainEnabled>
-          <textEdit>true</textEdit>
-        </extInfo>
-      </items>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-        <common>true</common>
-      </userVisible>
-      <title>
-        <key>en</key>
-        <value>Debit ext dimensions types</value>
-      </title>
-      <extendedTooltip>
-        <name>GroupDebitExtDimensionsTypesExtendedTooltip</name>
-        <id>68</id>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
@@ -619,6 +497,11 @@
           <chooseType>true</chooseType>
           <typeDomainEnabled>true</typeDomainEnabled>
           <textEdit>true</textEdit>
+          <typeLink>
+            <datapath xsi:type="form:DataPath">
+              <segments>Items.AccountingAnalytics.CurrentData.ExtDimensionTypeCr1</segments>
+            </datapath>
+          </typeLink>
         </extInfo>
       </items>
       <items xsi:type="form:FormField">
@@ -674,6 +557,11 @@
           <chooseType>true</chooseType>
           <typeDomainEnabled>true</typeDomainEnabled>
           <textEdit>true</textEdit>
+          <typeLink>
+            <datapath xsi:type="form:DataPath">
+              <segments>Items.AccountingAnalytics.CurrentData.ExtDimensionTypeCr2</segments>
+            </datapath>
+          </typeLink>
         </extInfo>
       </items>
       <items xsi:type="form:FormField">
@@ -729,6 +617,11 @@
           <chooseType>true</chooseType>
           <typeDomainEnabled>true</typeDomainEnabled>
           <textEdit>true</textEdit>
+          <typeLink>
+            <datapath xsi:type="form:DataPath">
+              <segments>Items.AccountingAnalytics.CurrentData.ExtDimensionTypeCr3</segments>
+            </datapath>
+          </typeLink>
         </extInfo>
       </items>
       <visible>true</visible>
@@ -743,204 +636,6 @@
       <extendedTooltip>
         <name>GroupCreditExtDimensionsExtendedTooltip</name>
         <id>70</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-          <common>true</common>
-        </userVisible>
-        <type>Label</type>
-        <autoMaxWidth>true</autoMaxWidth>
-        <autoMaxHeight>true</autoMaxHeight>
-        <extInfo xsi:type="form:LabelDecorationExtInfo">
-          <horizontalAlign>Left</horizontalAlign>
-        </extInfo>
-      </extendedTooltip>
-      <type>ColumnGroup</type>
-      <extInfo xsi:type="form:ColumnGroupExtInfo">
-        <group>Vertical</group>
-        <showTitle>true</showTitle>
-      </extInfo>
-    </items>
-    <items xsi:type="form:FormGroup">
-      <name>GroupCreditExtDimesionsTypes</name>
-      <id>71</id>
-      <items xsi:type="form:FormField">
-        <name>AccountingAnalyticsExtDimensionTypeCr1</name>
-        <id>38</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-          <common>true</common>
-        </userVisible>
-        <dataPath xsi:type="form:MultiLanguageDataPath">
-          <paths xsi:type="form:DataPath">
-            <segments>AccountingAnalytics.ExtDimensionTypeCr1</segments>
-          </paths>
-          <paths xsi:type="form:DataPath">
-            <segments>AccountingAnalytics.ExtDimensionTypeCr1</segments>
-          </paths>
-        </dataPath>
-        <extendedTooltip>
-          <name>AccountingAnalyticsExtDimensionTypeCr1ExtendedTooltip</name>
-          <id>40</id>
-          <visible>true</visible>
-          <enabled>true</enabled>
-          <userVisible>
-            <common>true</common>
-          </userVisible>
-          <type>Label</type>
-          <autoMaxWidth>true</autoMaxWidth>
-          <autoMaxHeight>true</autoMaxHeight>
-          <extInfo xsi:type="form:LabelDecorationExtInfo">
-            <horizontalAlign>Left</horizontalAlign>
-          </extInfo>
-        </extendedTooltip>
-        <contextMenu>
-          <name>AccountingAnalyticsExtDimensionTypeCr1ContextMenu</name>
-          <id>39</id>
-          <visible>true</visible>
-          <enabled>true</enabled>
-          <userVisible>
-            <common>true</common>
-          </userVisible>
-          <autoFill>true</autoFill>
-        </contextMenu>
-        <type>InputField</type>
-        <editMode>Enter</editMode>
-        <showInHeader>true</showInHeader>
-        <headerHorizontalAlign>Left</headerHorizontalAlign>
-        <showInFooter>true</showInFooter>
-        <extInfo xsi:type="form:InputFieldExtInfo">
-          <autoMaxWidth>true</autoMaxWidth>
-          <autoMaxHeight>true</autoMaxHeight>
-          <wrap>true</wrap>
-          <chooseType>true</chooseType>
-          <typeDomainEnabled>true</typeDomainEnabled>
-          <textEdit>true</textEdit>
-        </extInfo>
-      </items>
-      <items xsi:type="form:FormField">
-        <name>AccountingAnalyticsExtDimensionTypeCr2</name>
-        <id>41</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-          <common>true</common>
-        </userVisible>
-        <dataPath xsi:type="form:MultiLanguageDataPath">
-          <paths xsi:type="form:DataPath">
-            <segments>AccountingAnalytics.ExtDimensionTypeCr2</segments>
-          </paths>
-          <paths xsi:type="form:DataPath">
-            <segments>AccountingAnalytics.ExtDimensionTypeCr2</segments>
-          </paths>
-        </dataPath>
-        <extendedTooltip>
-          <name>AccountingAnalyticsExtDimensionTypeCr2ExtendedTooltip</name>
-          <id>43</id>
-          <visible>true</visible>
-          <enabled>true</enabled>
-          <userVisible>
-            <common>true</common>
-          </userVisible>
-          <type>Label</type>
-          <autoMaxWidth>true</autoMaxWidth>
-          <autoMaxHeight>true</autoMaxHeight>
-          <extInfo xsi:type="form:LabelDecorationExtInfo">
-            <horizontalAlign>Left</horizontalAlign>
-          </extInfo>
-        </extendedTooltip>
-        <contextMenu>
-          <name>AccountingAnalyticsExtDimensionTypeCr2ContextMenu</name>
-          <id>42</id>
-          <visible>true</visible>
-          <enabled>true</enabled>
-          <userVisible>
-            <common>true</common>
-          </userVisible>
-          <autoFill>true</autoFill>
-        </contextMenu>
-        <type>InputField</type>
-        <editMode>Enter</editMode>
-        <showInHeader>true</showInHeader>
-        <headerHorizontalAlign>Left</headerHorizontalAlign>
-        <showInFooter>true</showInFooter>
-        <extInfo xsi:type="form:InputFieldExtInfo">
-          <autoMaxWidth>true</autoMaxWidth>
-          <autoMaxHeight>true</autoMaxHeight>
-          <wrap>true</wrap>
-          <chooseType>true</chooseType>
-          <typeDomainEnabled>true</typeDomainEnabled>
-          <textEdit>true</textEdit>
-        </extInfo>
-      </items>
-      <items xsi:type="form:FormField">
-        <name>AccountingAnalyticsExtDimensionTypeCr3</name>
-        <id>44</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-          <common>true</common>
-        </userVisible>
-        <dataPath xsi:type="form:MultiLanguageDataPath">
-          <paths xsi:type="form:DataPath">
-            <segments>AccountingAnalytics.ExtDimensionTypeCr3</segments>
-          </paths>
-          <paths xsi:type="form:DataPath">
-            <segments>AccountingAnalytics.ExtDimensionTypeCr3</segments>
-          </paths>
-        </dataPath>
-        <extendedTooltip>
-          <name>AccountingAnalyticsExtDimensionTypeCr3ExtendedTooltip</name>
-          <id>46</id>
-          <visible>true</visible>
-          <enabled>true</enabled>
-          <userVisible>
-            <common>true</common>
-          </userVisible>
-          <type>Label</type>
-          <autoMaxWidth>true</autoMaxWidth>
-          <autoMaxHeight>true</autoMaxHeight>
-          <extInfo xsi:type="form:LabelDecorationExtInfo">
-            <horizontalAlign>Left</horizontalAlign>
-          </extInfo>
-        </extendedTooltip>
-        <contextMenu>
-          <name>AccountingAnalyticsExtDimensionTypeCr3ContextMenu</name>
-          <id>45</id>
-          <visible>true</visible>
-          <enabled>true</enabled>
-          <userVisible>
-            <common>true</common>
-          </userVisible>
-          <autoFill>true</autoFill>
-        </contextMenu>
-        <type>InputField</type>
-        <editMode>Enter</editMode>
-        <showInHeader>true</showInHeader>
-        <headerHorizontalAlign>Left</headerHorizontalAlign>
-        <showInFooter>true</showInFooter>
-        <extInfo xsi:type="form:InputFieldExtInfo">
-          <autoMaxWidth>true</autoMaxWidth>
-          <autoMaxHeight>true</autoMaxHeight>
-          <wrap>true</wrap>
-          <chooseType>true</chooseType>
-          <typeDomainEnabled>true</typeDomainEnabled>
-          <textEdit>true</textEdit>
-        </extInfo>
-      </items>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-        <common>true</common>
-      </userVisible>
-      <title>
-        <key>en</key>
-        <value>Credit ext dimesions types</value>
-      </title>
-      <extendedTooltip>
-        <name>GroupCreditExtDimesionsTypesExtendedTooltip</name>
-        <id>72</id>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
@@ -1117,14 +812,59 @@
     <autoCommandBar>
       <name>AccountingAnalyticsCommandBar</name>
       <id>2</id>
+      <items xsi:type="form:Button">
+        <name>AccountingAnalyticsSetByDefault</name>
+        <id>83</id>
+        <visible>true</visible>
+        <enabled>true</enabled>
+        <userVisible>
+          <common>true</common>
+        </userVisible>
+        <extendedTooltip>
+          <name>AccountingAnalyticsSetByDefaultExtendedTooltip</name>
+          <id>84</id>
+          <visible>true</visible>
+          <enabled>true</enabled>
+          <userVisible>
+            <common>true</common>
+          </userVisible>
+          <type>Label</type>
+          <autoMaxWidth>true</autoMaxWidth>
+          <autoMaxHeight>true</autoMaxHeight>
+          <extInfo xsi:type="form:LabelDecorationExtInfo">
+            <horizontalAlign>Left</horizontalAlign>
+          </extInfo>
+        </extendedTooltip>
+        <commandName>Form.Command.SetByDefault</commandName>
+        <representation>Auto</representation>
+        <autoMaxWidth>true</autoMaxWidth>
+        <autoMaxHeight>true</autoMaxHeight>
+        <placementArea>UserCmds</placementArea>
+        <representationInContextMenu>Auto</representationInContextMenu>
+      </items>
       <visible>true</visible>
       <enabled>true</enabled>
       <userVisible>
         <common>true</common>
       </userVisible>
       <horizontalAlign>Left</horizontalAlign>
-      <autoFill>true</autoFill>
     </autoCommandBar>
+    <handlers>
+      <event>BeforeAddRow</event>
+      <name>AccountingAnalyticsBeforeAddRow</name>
+    </handlers>
+    <handlers>
+      <event>BeforeDeleteRow</event>
+      <name>AccountingAnalyticsBeforeDeleteRow</name>
+    </handlers>
+    <handlers>
+      <event>OnChange</event>
+      <name>AccountingAnalyticsOnChange</name>
+    </handlers>
+    <handlers>
+      <event>OnActivateRow</event>
+      <name>AccountingAnalyticsOnActivateRow</name>
+    </handlers>
     <searchStringAddition>
       <visible>true</visible>
       <enabled>true</enabled>
@@ -1356,6 +1096,10 @@
   <handlers>
     <event>OnCreateAtServer</event>
     <name>OnCreateAtServer</name>
+  </handlers>
+  <handlers>
+    <event>OnOpen</event>
+    <name>OnOpen</name>
   </handlers>
   <autoTitle>true</autoTitle>
   <autoUrl>true</autoUrl>
@@ -1661,8 +1405,41 @@
       </title>
       <id>22</id>
       <valueType>
-        <types>String</types>
-        <stringQualifiers/>
+        <types>CatalogRef.AccountingOperations</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>IsVisible</name>
+      <title>
+        <key>en</key>
+        <value>Is visible</value>
+      </title>
+      <id>23</id>
+      <valueType>
+        <types>Boolean</types>
+      </valueType>
+      <view>
+        <common>true</common>
+      </view>
+      <edit>
+        <common>true</common>
+      </edit>
+    </columns>
+    <columns>
+      <name>IsFixed</name>
+      <title>
+        <key>en</key>
+        <value>Is fixed</value>
+      </title>
+      <id>27</id>
+      <valueType>
+        <types>Boolean</types>
       </valueType>
       <view>
         <common>true</common>
@@ -1707,12 +1484,30 @@
     </edit>
   </attributes>
   <attributes>
-    <name>AccountingAnalyticsType</name>
+    <name>MainTableName</name>
     <title>
       <key>en</key>
-      <value>Accounting analytics type</value>
+      <value>Main table name</value>
     </title>
-    <id>21</id>
+    <id>24</id>
+    <valueType>
+      <types>String</types>
+      <stringQualifiers/>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
+  </attributes>
+  <attributes>
+    <name>RowKey</name>
+    <title>
+      <key>en</key>
+      <value>Row key</value>
+    </title>
+    <id>26</id>
     <valueType>
       <types>String</types>
       <stringQualifiers/>
@@ -1754,6 +1549,23 @@
     <action xsi:type="form:FormCommandHandlerContainer">
       <handler>
         <name>Cancel</name>
+      </handler>
+    </action>
+    <currentRowUse>Auto</currentRowUse>
+  </formCommands>
+  <formCommands>
+    <name>SetByDefault</name>
+    <title>
+      <key>en</key>
+      <value>Set by default</value>
+    </title>
+    <id>3</id>
+    <use>
+      <common>true</common>
+    </use>
+    <action xsi:type="form:FormCommandHandlerContainer">
+      <handler>
+        <name>SetByDefault</name>
       </handler>
     </action>
     <currentRowUse>Auto</currentRowUse>

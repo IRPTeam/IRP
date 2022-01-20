@@ -8,10 +8,7 @@ Procedure BeforeWrite(Cancel, WriteMode, PostingMode)
 	CurrenciesServer.UpdateCurrencyTable(Parameters, ThisObject.Currencies);
 
 	If WriteMode = DocumentWriteMode.Posting Then
-		ArrayOfIdentifiers = New Array();
-		ArrayOfIdentifiers.Add(New Structure("ByRow, Identifier", True, "Dr_ItemKeyTBAccounts_Cr_PartnerTBAccounts"));
-		ArrayOfIdentifiers.Add(New Structure("ByRow, Identifier", False, "Dr_PartnerTBAccountsTrn_Cr_PartnerTBAccountsAdv"));
-		AccountingClientServer.BeforeWriteAccountingDocument(ThisObject, "ItemList", ArrayOfIdentifiers);
+		AccountingClientServer.BeforeWriteAccountingDocument(ThisObject, "ItemList");
 	EndIf;
 
 	ThisObject.DocumentAmount = ThisObject.ItemList.Total("TotalAmount");

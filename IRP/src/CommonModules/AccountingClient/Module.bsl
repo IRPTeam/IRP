@@ -10,8 +10,14 @@ Procedure EditTrialBallanceAccounts(Result, AdditionalParameters) Export
 	DebitType = PredefinedValue("Enum.AccountingAnalyticTypes.Debit");
 	CreditType = PredefinedValue("Enum.AccountingAnalyticTypes.Credit");
 	
+	ArrayOfDeletedRows = New Array();
 	For Each Row In Result.AccountingAnalytics Do
-		DeleteAccountingRows(Object, Row.Key);
+		If ArrayOfDeletedRows.Find(Row.Key) = Undefined Then
+			DeleteAccountingRows(Object, Row.Key);
+		EndIf;
+	EndDo;
+	
+	For Each Row In Result.AccountingAnalytics Do
 		NewRow = Object.AccountingRowAnalytics.Add();
 		NewRow.Key = Row.Key;
 		NewRow.IsFixed = Row.IsFixed;
@@ -27,7 +33,6 @@ Procedure EditTrialBallanceAccounts(Result, AdditionalParameters) Export
 		AddExtDimensionRow(Object, Row, CreditType, Row.ExtDimensionTypeCr1, Row.ExtDimensionCr1);
 		AddExtDimensionRow(Object, Row, CreditType, Row.ExtDimensionTypeCr2, Row.ExtDimensionCr2);
 		AddExtDimensionRow(Object, Row, CreditType, Row.ExtDimensionTypeCr3, Row.ExtDimensionCr3);
-		
 	EndDo;
 EndProcedure
 
@@ -56,6 +61,9 @@ Procedure DeleteAccountingRows(Object, KeyForDelete)
 EndProcedure
 
 Procedure AddExtDimensionRow(Object, AnalyticRow, AnalyticType, ExtDimType, ExtDim)
+	If Not ValueIsFilled(ExtDim) Then
+		Return;
+	EndIf;
 	NewRow = Object.AccountingExtDimensions.Add();
 	NewRow.Key = AnalyticRow.Key;
 	NewRow.Identifier   = AnalyticRow.Identifier;

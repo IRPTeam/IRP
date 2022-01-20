@@ -184,6 +184,7 @@ Function GetParametersEditTrialBallanceAccounts(Object, CurrentData, MainTableNa
 		EndIf;
 		
 		NewAnalyticRow = New Structure();
+		NewAnalyticRow.Insert("Key"           , RowAnalytics.Key);
 		NewAnalyticRow.Insert("LadgerType"    , RowAnalytics.LadgerType);
 		NewAnalyticRow.Insert("Identifier"    , RowAnalytics.Identifier);
 		NewAnalyticRow.Insert("AccountDebit"  , RowAnalytics.AccountDebit);

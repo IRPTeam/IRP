@@ -81,6 +81,8 @@ Function GetDocumentData(Object, TableRow, MainTableName) Export
 		For Each Column In Object.Ref.Metadata().TabularSections[MainTableName].Attributes Do
 			Result.RowData.Insert(Column.Name, TableRow[Column.Name]);
 		EndDo;
+	Else
+		Result.RowData.Insert("Key", "");
 	EndIf;
 	For Each Attr In Object.Ref.Metadata().Attributes Do
 		Result.ObjectData.Insert(Attr.Name, Object[Attr.Name]);

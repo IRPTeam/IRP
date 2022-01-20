@@ -22,6 +22,7 @@ Procedure OnOpen(Cancel)
 		FillAccountingAnalytics(DefaultAnalytics.AccountingAnalytics);
 	EndIf;
 	SetVisibleByLadgerType();
+	ClearColumnTitle();
 EndProcedure
 
 &AtClient
@@ -46,7 +47,10 @@ EndProcedure
 
 &AtClient
 Procedure Ok(Command)
-	Result = New Structure("AccountingAnalytics, DocumentRef", New Array(), ThisObject.DocumentRef);
+	Result = New Structure();
+	Result.Insert("AccountingAnalytics" , New Array());
+	Result.Insert("DocumentRef"         , ThisObject.DocumentRef);
+	Result.Insert("RowKey"              , ThisObject.RowKey);
 	For Each Row In ThisObject.AccountingAnalytics Do
 		NewRow = New Structure("AccountDebit,
 								|ExtDimensionTypeDr1,
@@ -93,17 +97,10 @@ Procedure SetVisibleByLadgerType()
 EndProcedure
 
 &AtServer
-Procedure FillAccountingAnalytics(ArrayOfAnalytics)
-	ThisObject.Items.AccountingAnalyticsExtDimensionDr1.Title = "";
-	ThisObject.Items.AccountingAnalyticsExtDimensionDr2.Title = "";
-	ThisObject.Items.AccountingAnalyticsExtDimensionDr3.Title = "";
-	ThisObject.Items.AccountingAnalyticsExtDimensionCr1.Title = "";
-	ThisObject.Items.AccountingAnalyticsExtDimensionCr2.Title = "";
-	ThisObject.Items.AccountingAnalyticsExtDimensionCr3.Title = "";
-	
+Procedure FillAccountingAnalytics(ArrayOfAnalytics)	
 	For Each AccountingAnalytic In ArrayOfAnalytics Do
 		NewRow = ThisObject.AccountingAnalytics.Add();
-		NewRow.Key = ThisObject.RowKey;
+		NewRow.Key = AccountingAnalytic.Key;
 		
 		NewRow.LadgerType = AccountingAnalytic.LadgerType;
 		NewRow.Identifier = AccountingAnalytic.Identifier;
@@ -114,7 +111,6 @@ Procedure FillAccountingAnalytics(ArrayOfAnalytics)
 		For Each Row In AccountingAnalytic.DebitExtDimensions Do
 			NewRow["ExtDimensionTypeDr" + Counter] = Row.ExtDimensionType;
 			NewRow["ExtDimensionDr" + Counter] = Row.ExtDimension;
-			//ThisObject.Items["AccountingAnalyticsExtDimensionDr" + Counter].Title = String(Row.ExtDimensionType);
 			Counter = Counter + 1;
 		EndDo;
 		
@@ -124,7 +120,6 @@ Procedure FillAccountingAnalytics(ArrayOfAnalytics)
 		For Each Row In AccountingAnalytic.CreditExtDimensions Do
 			NewRow["ExtDimensionTypeCr" + Counter] = Row.ExtDimensionType;
 			NewRow["ExtDimensionCr" + Counter] = Row.ExtDimension;
-			//ThisObject.Items["AccountingAnalyticsExtDimensionCr" + Counter].Title = String(Row.ExtDimensionType);
 			Counter = Counter + 1;
 		EndDo;
 	EndDo;
@@ -136,14 +131,97 @@ Procedure AccountingAnalyticsOnActivateRow(Item)
 	If CurrentData = Undefined Then
 		Return;
 	EndIf;
-	ThisObject.Items.AccountingAnalyticsExtDimensionDr1.Title = String(CurrentData.ExtDimensionTypeDr1);
-	ThisObject.Items.AccountingAnalyticsExtDimensionDr2.Title = String(CurrentData.ExtDimensionTypeDr2);
-	ThisObject.Items.AccountingAnalyticsExtDimensionDr3.Title = String(CurrentData.ExtDimensionTypeDr3);
-	ThisObject.Items.AccountingAnalyticsExtDimensionCr1.Title = String(CurrentData.ExtDimensionTypeCr1);
-	ThisObject.Items.AccountingAnalyticsExtDimensionCr2.Title = String(CurrentData.ExtDimensionTypeCr2);
-	ThisObject.Items.AccountingAnalyticsExtDimensionCr3.Title = String(CurrentData.ExtDimensionTypeCr3);
+	SetColumnTitle(CurrentData);
 EndProcedure
 
+&AtClient
+Procedure AccountingAnalyticsAccountDebitOnChange(Item)
+	CurrentData = Items.AccountingAnalytics.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+		
+	CurrentData.ExtDimensionTypeDr1 = Undefined;
+	CurrentData.ExtDimensionTypeDr2 = Undefined;
+	CurrentData.ExtDimensionTypeDr3 = Undefined;
+	
+	If ValueIsFilled(CurrentData.AccountDebit) Then
+		Counter = 1;
+		ArrayOfExtDimensions = GetExtDimensionTypes(CurrentData.AccountDebit);
+		For Each ExtDim In ArrayOfExtDimensions Do
+			CurrentData["ExtDimensionTypeDr" + Counter] = ExtDim.ExtDimensionType;
+			If ExtDim.ArrayOfTypes.Find(TypeOf(CurrentData["ExtDimensionDr" + Counter])) = Undefined Then
+				CurrentData["ExtDimensionDr" + Counter] = Undefined;
+			EndIf;
+			Counter = Counter + 1;
+		EndDo;
+	EndIf;
+	SetColumnTitle(CurrentData);
+EndProcedure
+
+&AtClient
+Procedure AccountingAnalyticsAccountCreditOnChange(Item)
+	CurrentData = Items.AccountingAnalytics.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	
+	CurrentData.ExtDimensionTypeCr1 = Undefined;
+	CurrentData.ExtDimensionTypeCr2 = Undefined;
+	CurrentData.ExtDimensionTypeCr3 = Undefined;
+	
+	If ValueIsFilled(CurrentData.AccountCredit) Then
+		Counter = 1;
+		ArrayOfExtDimensions = GetExtDimensionTypes(CurrentData.AccountCredit);
+		For Each ExtDim In ArrayOfExtDimensions Do
+			CurrentData["ExtDimensionTypeCr" + Counter] = ExtDim.ExtDimensionType;
+			If ExtDim.ArrayOfTypes.Find(TypeOf(CurrentData["ExtDimensionCr" + Counter])) = Undefined Then
+				CurrentData["ExtDimensionCr" + Counter] = Undefined;
+			EndIf;
+			Counter = Counter + 1;
+		EndDo;
+	EndIf;
+	SetColumnTitle(CurrentData);
+EndProcedure
+
+&AtServerNoContext
+Function GetExtDimensionTypes(Account)
+	Result = New Array();
+	For Each ExtDim In Account.ExtDimensionTypes Do
+		Result.Add(New Structure("ExtDimensionType, ArrayOfTypes", 
+			ExtDim.ExtDimensionType, ExtDim.ExtDimensionType.ValueType.Types()));
+	EndDo;
+	Return Result;
+EndFunction
+
+&AtClient
+Procedure SetColumnTitle(CurrentData)
+	For i = 1 To 3 Do
+		ColumnTitle = " ";
+		If ValueIsFilled(CurrentData["ExtDimensionTypeDr" + i]) Then
+			ColumnTitle = String(CurrentData["ExtDimensionTypeDr" + i]);
+		ENdIf;
+		ThisObject.Items["AccountingAnalyticsExtDimensionDr" + i].Title = ColumnTitle;
+	EndDo;
+	
+	For i = 1 To 3 Do
+		ColumnTitle = " ";
+		If ValueIsFilled(CurrentData["ExtDimensionTypeCr" + i]) Then
+			ColumnTitle = String(CurrentData["ExtDimensionTypeCr" + i]);
+		ENdIf;
+		ThisObject.Items["AccountingAnalyticsExtDimensionCr" + i].Title = ColumnTitle;
+	EndDo;
+EndProcedure
+
+&AtClient
+Procedure ClearColumnTitle()
+	ThisObject.Items.AccountingAnalyticsExtDimensionDr1.Title = " ";
+	ThisObject.Items.AccountingAnalyticsExtDimensionDr2.Title = " ";
+	ThisObject.Items.AccountingAnalyticsExtDimensionDr3.Title = " ";
+	ThisObject.Items.AccountingAnalyticsExtDimensionCr1.Title = " ";
+	ThisObject.Items.AccountingAnalyticsExtDimensionCr2.Title = " ";
+	ThisObject.Items.AccountingAnalyticsExtDimensionCr3.Title = " ";
+EndProcedure
 
 &AtServer
 Function GetDefaultAccountingAnalytics(Val Object, MainTableName, RowKey, Filter_LadgerType = Undefined)

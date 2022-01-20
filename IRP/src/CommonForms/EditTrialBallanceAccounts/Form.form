@@ -130,6 +130,10 @@
           <segments>AccountingAnalytics.AccountDebit</segments>
         </paths>
       </dataPath>
+      <handlers>
+        <event>OnChange</event>
+        <name>AccountingAnalyticsAccountDebitOnChange</name>
+      </handlers>
       <extendedTooltip>
         <name>AccountingAnalyticsAccountDebitExtendedTooltip</name>
         <id>16</id>
@@ -175,10 +179,6 @@
       <items xsi:type="form:FormField">
         <name>AccountingAnalyticsExtDimensionDr1</name>
         <id>26</id>
-        <title>
-          <key>en</key>
-          <value> </value>
-        </title>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
@@ -402,6 +402,10 @@
           <segments>AccountingAnalytics.AccountCredit</segments>
         </paths>
       </dataPath>
+      <handlers>
+        <event>OnChange</event>
+        <name>AccountingAnalyticsAccountCreditOnChange</name>
+      </handlers>
       <extendedTooltip>
         <name>AccountingAnalyticsAccountCreditExtendedTooltip</name>
         <id>37</id>
@@ -652,111 +656,6 @@
       <extInfo xsi:type="form:ColumnGroupExtInfo">
         <group>Vertical</group>
         <showTitle>true</showTitle>
-      </extInfo>
-    </items>
-    <items xsi:type="form:FormField">
-      <name>AccountingAnalyticsKey</name>
-      <id>56</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-        <common>true</common>
-      </userVisible>
-      <dataPath xsi:type="form:MultiLanguageDataPath">
-        <paths xsi:type="form:DataPath">
-          <segments>AccountingAnalytics.Key</segments>
-        </paths>
-        <paths xsi:type="form:DataPath">
-          <segments>AccountingAnalytics.Key</segments>
-        </paths>
-      </dataPath>
-      <extendedTooltip>
-        <name>AccountingAnalyticsKeyExtendedTooltip</name>
-        <id>58</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-          <common>true</common>
-        </userVisible>
-        <type>Label</type>
-        <autoMaxWidth>true</autoMaxWidth>
-        <autoMaxHeight>true</autoMaxHeight>
-        <extInfo xsi:type="form:LabelDecorationExtInfo">
-          <horizontalAlign>Left</horizontalAlign>
-        </extInfo>
-      </extendedTooltip>
-      <contextMenu>
-        <name>AccountingAnalyticsKeyContextMenu</name>
-        <id>57</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-          <common>true</common>
-        </userVisible>
-        <autoFill>true</autoFill>
-      </contextMenu>
-      <type>InputField</type>
-      <editMode>Enter</editMode>
-      <showInHeader>true</showInHeader>
-      <headerHorizontalAlign>Left</headerHorizontalAlign>
-      <showInFooter>true</showInFooter>
-      <extInfo xsi:type="form:InputFieldExtInfo">
-        <autoMaxWidth>true</autoMaxWidth>
-        <autoMaxHeight>true</autoMaxHeight>
-        <wrap>true</wrap>
-        <chooseType>true</chooseType>
-        <typeDomainEnabled>true</typeDomainEnabled>
-        <textEdit>true</textEdit>
-      </extInfo>
-    </items>
-    <items xsi:type="form:FormField">
-      <name>AccountingAnalyticsLadgerType</name>
-      <id>73</id>
-      <visible>true</visible>
-      <enabled>true</enabled>
-      <userVisible>
-        <common>true</common>
-      </userVisible>
-      <dataPath xsi:type="form:DataPath">
-        <segments>AccountingAnalytics.LadgerType</segments>
-      </dataPath>
-      <extendedTooltip>
-        <name>AccountingAnalyticsLadgerTypeExtendedTooltip</name>
-        <id>75</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-          <common>true</common>
-        </userVisible>
-        <type>Label</type>
-        <autoMaxWidth>true</autoMaxWidth>
-        <autoMaxHeight>true</autoMaxHeight>
-        <extInfo xsi:type="form:LabelDecorationExtInfo">
-          <horizontalAlign>Left</horizontalAlign>
-        </extInfo>
-      </extendedTooltip>
-      <contextMenu>
-        <name>AccountingAnalyticsLadgerTypeContextMenu</name>
-        <id>74</id>
-        <visible>true</visible>
-        <enabled>true</enabled>
-        <userVisible>
-          <common>true</common>
-        </userVisible>
-        <autoFill>true</autoFill>
-      </contextMenu>
-      <type>InputField</type>
-      <editMode>Enter</editMode>
-      <showInHeader>true</showInHeader>
-      <headerHorizontalAlign>Left</headerHorizontalAlign>
-      <showInFooter>true</showInFooter>
-      <extInfo xsi:type="form:InputFieldExtInfo">
-        <autoMaxWidth>true</autoMaxWidth>
-        <autoMaxHeight>true</autoMaxHeight>
-        <wrap>true</wrap>
-        <chooseType>true</chooseType>
-        <typeDomainEnabled>true</typeDomainEnabled>
-        <textEdit>true</textEdit>
       </extInfo>
     </items>
     <items xsi:type="form:FormField">
@@ -1195,10 +1094,6 @@
     </columns>
     <columns>
       <name>ExtDimensionDr1</name>
-      <title>
-        <key>en</key>
-        <value>Ext dimension Dr1</value>
-      </title>
       <id>6</id>
       <valueType>
         <types>Characteristic.R6010D_MasterExtraDimensionTypes</types>
@@ -1212,10 +1107,6 @@
     </columns>
     <columns>
       <name>ExtDimensionDr2</name>
-      <title>
-        <key>en</key>
-        <value>Ext dimension Dr2</value>
-      </title>
       <id>7</id>
       <valueType>
         <types>Characteristic.R6010D_MasterExtraDimensionTypes</types>
@@ -1229,10 +1120,6 @@
     </columns>
     <columns>
       <name>ExtDimensionDr3</name>
-      <title>
-        <key>en</key>
-        <value>Ext dimension Dr3</value>
-      </title>
       <id>8</id>
       <valueType>
         <types>Characteristic.R6010D_MasterExtraDimensionTypes</types>
@@ -1314,10 +1201,6 @@
     </columns>
     <columns>
       <name>ExtDimensionCr1</name>
-      <title>
-        <key>en</key>
-        <value>Ext dimension Cr1</value>
-      </title>
       <id>13</id>
       <valueType>
         <types>Characteristic.R6010D_MasterExtraDimensionTypes</types>
@@ -1331,10 +1214,6 @@
     </columns>
     <columns>
       <name>ExtDimensionCr2</name>
-      <title>
-        <key>en</key>
-        <value>Ext dimension Cr2</value>
-      </title>
       <id>14</id>
       <valueType>
         <types>Characteristic.R6010D_MasterExtraDimensionTypes</types>
@@ -1348,10 +1227,6 @@
     </columns>
     <columns>
       <name>ExtDimensionCr3</name>
-      <title>
-        <key>en</key>
-        <value>Ext dimension Cr3</value>
-      </title>
       <id>15</id>
       <valueType>
         <types>Characteristic.R6010D_MasterExtraDimensionTypes</types>

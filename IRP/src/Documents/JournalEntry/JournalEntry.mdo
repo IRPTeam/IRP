@@ -102,6 +102,21 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="a6b8398a-18fb-4b0b-a9a4-4b5c007c767a">
+    <name>UserDefined</name>
+    <synonym>
+      <key>en</key>
+      <value>User defined</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <forms uuid="a7ceddf1-8c4e-44f9-a830-42106fc0bc53">
     <name>DocumentForm</name>
     <synonym>

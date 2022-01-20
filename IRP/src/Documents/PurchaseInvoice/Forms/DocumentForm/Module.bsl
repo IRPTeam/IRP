@@ -581,7 +581,7 @@ EndProcedure
 
 &AtClient
 Procedure EditTrialBallanceAccounts(Command)
-	CurrentData = ThisObject.Items.PaymentList.CurrentData;
+	CurrentData = ThisObject.Items.ItemList.CurrentData;
 	If CurrentData = Undefined Then
 		Return;
 	EndIf;

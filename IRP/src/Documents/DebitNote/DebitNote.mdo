@@ -64,6 +64,7 @@
   <registerRecords>AccumulationRegister.R5012B_VendorsAging</registerRecords>
   <registerRecords>InformationRegister.T2014S_AdvancesInfo</registerRecords>
   <registerRecords>InformationRegister.T2015S_TransactionsInfo</registerRecords>
+  <registerRecords>AccumulationRegister.R5021T_Revenues</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>

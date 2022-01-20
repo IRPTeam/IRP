@@ -21,7 +21,9 @@
           <param name="jetbrains_powershell_execution" value="PS1" />
           <param name="jetbrains_powershell_noprofile" value="true" />
           <param name="jetbrains_powershell_script_code"><![CDATA[$week = Get-Date -UFormat %V
-((Get-Content  -Encoding UTF8 -path "%teamcity.build.workingDir%\%teamcity.project.id%\src\Configuration\Configuration.mdo" -Raw) -replace "#weekNumber#","$week") | Set-Content -Encoding UTF8 -Path "%teamcity.build.workingDir%\%teamcity.project.id%\src\Configuration\Configuration.mdo"]]></param>
+((Get-Content  -Encoding UTF8 -path "%teamcity.build.workingDir%\%teamcity.project.id%\src\Configuration\Configuration.mdo" -Raw) -replace "#weekNumber#","$week") | Set-Content -Encoding UTF8 -Path "%teamcity.build.workingDir%\%teamcity.project.id%\src\Configuration\Configuration.mdo"
+$year = Get-Date -UFormat %Y
+((Get-Content  -Encoding UTF8 -path "%teamcity.build.workingDir%\%teamcity.project.id%\src\Configuration\Configuration.mdo" -Raw) -replace "#yearNumber#","$year") | Set-Content -Encoding UTF8 -Path "%teamcity.build.workingDir%\%teamcity.project.id%\src\Configuration\Configuration.mdo"]]></param>
           <param name="jetbrains_powershell_script_mode" value="CODE" />
           <param name="teamcity.step.mode" value="default" />
         </parameters>

@@ -99,6 +99,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R2021B_CustomersTransactions());
 	QueryArray.Add(R2020B_AdvancesFromCustomers());
 	QueryArray.Add(R5011B_CustomersAging());
+	QueryArray.Add(R5021T_Revenues());
 	QueryArray.Add(R1021B_VendorsTransactions());
 	QueryArray.Add(R1020B_AdvancesToVendors());
 	QueryArray.Add(R5012B_VendorsAging());
@@ -109,31 +110,34 @@ EndFunction
 
 Function Transactions()
 	Return "SELECT
-		   |	Transactions.Ref.Date AS Period,
-		   |	Transactions.Ref.Company AS Company,
-		   |	Transactions.Partner,
-		   |	Transactions.LegalName,
-		   |	Transactions.Agreement,
-		   |	CASE
-		   |		WHEN Transactions.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
-		   |			THEN Transactions.Ref
-		   |		ELSE UNDEFINED
-		   |	END AS BasisDocument,
-		   |	Transactions.Ref AS AdvancesOrTransactionDocument,
-		   |	Transactions.Ref AS Ref,
-		   |	Transactions.Agreement.Type = VALUE(Enum.AgreementTypes.Vendor) AS IsVendor,
-		   |	Transactions.Agreement.Type = VALUE(Enum.AgreementTypes.Customer) AS IsCustomer,
-		   |	Transactions.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments) AS IsPostingDetail_ByDocuments,
-		   |	Transactions.Currency,
-		   |	Transactions.Key,
-		   |	Transactions.Amount,
-		   |	Transactions.Ref.Branch AS Branch,
-		   |	Transactions.LegalNameContract AS LegalNameContract
-		   |INTO Transactions
-		   |FROM
-		   |	Document.DebitNote.Transactions AS Transactions
-		   |WHERE
-		   |	Transactions.Ref = &Ref";
+	|	Transactions.Ref.Date AS Period,
+	|	Transactions.Ref.Company AS Company,
+	|	Transactions.Partner,
+	|	Transactions.LegalName,
+	|	Transactions.Agreement,
+	|	CASE
+	|		WHEN Transactions.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments)
+	|			THEN Transactions.Ref
+	|		ELSE UNDEFINED
+	|	END AS BasisDocument,
+	|	Transactions.Ref AS AdvancesOrTransactionDocument,
+	|	Transactions.Ref AS Ref,
+	|	Transactions.Agreement.Type = VALUE(Enum.AgreementTypes.Vendor) AS IsVendor,
+	|	Transactions.Agreement.Type = VALUE(Enum.AgreementTypes.Customer) AS IsCustomer,
+	|	Transactions.Agreement.ApArPostingDetail = VALUE(Enum.ApArPostingDetail.ByDocuments) AS IsPostingDetail_ByDocuments,
+	|	Transactions.Currency,
+	|	Transactions.Key,
+	|	Transactions.Amount,
+	|	Transactions.Ref.Branch AS Branch,
+	|	Transactions.LegalNameContract AS LegalNameContract,
+	|	Transactions.ProfitLossCenter,
+	|	Transactions.RevenueType,
+	|	Transactions.AdditionalAnalytic
+	|INTO Transactions
+	|FROM
+	|	Document.DebitNote.Transactions AS Transactions
+	|WHERE
+	|	Transactions.Ref = &Ref";
 EndFunction
 
 Function R5010B_ReconciliationStatement()
@@ -141,6 +145,16 @@ Function R5010B_ReconciliationStatement()
 		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
 		   |	*
 		   |INTO R5010B_ReconciliationStatement
+		   |FROM
+		   |	Transactions";
+EndFunction
+
+Function R5021T_Revenues()
+	Return "SELECT
+		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+		   |	Transactions.Amount AS AmountWithTaxes,
+		   |	*
+		   |INTO R5021T_Revenues
 		   |FROM
 		   |	Transactions";
 EndFunction

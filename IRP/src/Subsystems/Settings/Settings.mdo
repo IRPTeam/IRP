@@ -16,12 +16,12 @@
   <content>DataProcessor.DataHistory</content>
   <content>Catalog.DataBaseStatus</content>
   <subsystems>AttributeAndProperty</subsystems>
+  <subsystems>BaseSettings</subsystems>
   <subsystems>Contacts</subsystems>
   <subsystems>Equipment</subsystems>
   <subsystems>Integrations</subsystems>
   <subsystems>ItemsSettings</subsystems>
+  <subsystems>LockDataModification</subsystems>
   <subsystems>OrdersSettings</subsystems>
   <subsystems>Users</subsystems>
-  <subsystems>LockDataModification</subsystems>
-  <subsystems>BaseSettings</subsystems>
 </mdclass:Subsystem>

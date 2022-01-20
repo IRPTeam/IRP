@@ -40,26 +40,6 @@
   <defaultObjectForm>Catalog.IDInfoAddresses.Form.ItemForm</defaultObjectForm>
   <defaultListForm>Catalog.IDInfoAddresses.Form.ListForm</defaultListForm>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
-  <attributes uuid="40eba57e-a472-49ad-9fe9-740da1de86bc">
-    <name>Level</name>
-    <synonym>
-      <key>en</key>
-      <value>Level</value>
-    </synonym>
-    <type>
-      <types>String</types>
-      <stringQualifiers>
-        <length>50</length>
-      </stringQualifiers>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:StringValue">
-      <value></value>
-    </fillValue>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
   <attributes uuid="ee83bd43-d0bc-44bb-a7db-3e97f09176ce">
     <name>Country</name>
     <synonym>
@@ -85,6 +65,26 @@
       <types>String</types>
       <stringQualifiers>
         <length>500</length>
+      </stringQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:StringValue">
+      <value></value>
+    </fillValue>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="40eba57e-a472-49ad-9fe9-740da1de86bc">
+    <name>Level</name>
+    <synonym>
+      <key>en</key>
+      <value>Level</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers>
+        <length>50</length>
       </stringQualifiers>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>

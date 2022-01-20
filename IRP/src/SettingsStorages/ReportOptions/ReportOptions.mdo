@@ -10,18 +10,18 @@
   </synonym>
   <defaultSaveForm>SettingsStorage.ReportOptions.Form.SaveForm</defaultSaveForm>
   <defaultLoadForm>SettingsStorage.ReportOptions.Form.LoadForm</defaultLoadForm>
-  <forms uuid="f23f5e01-5a16-4494-ab71-37a3e2cfbf44">
-    <name>SaveForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Save form</value>
-    </synonym>
-  </forms>
   <forms uuid="93fb0566-9a73-45da-835b-0c2811c50bc0">
     <name>LoadForm</name>
     <synonym>
       <key>en</key>
       <value>Load form</value>
+    </synonym>
+  </forms>
+  <forms uuid="f23f5e01-5a16-4494-ab71-37a3e2cfbf44">
+    <name>SaveForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Save form</value>
     </synonym>
   </forms>
 </mdclass:SettingsStorage>

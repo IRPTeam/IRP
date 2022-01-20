@@ -16,7 +16,7 @@
   <subsystems>Bank</subsystems>
   <subsystems>Cash</subsystems>
   <subsystems>CashTransactions</subsystems>
+  <subsystems>ChequeBond</subsystems>
   <subsystems>SchedulingOfPaymentDeadlines</subsystems>
   <subsystems>Taxes</subsystems>
-  <subsystems>ChequeBond</subsystems>
 </mdclass:Subsystem>

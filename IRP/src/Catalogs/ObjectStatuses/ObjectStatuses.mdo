@@ -208,11 +208,11 @@
   <defaultListForm>Catalog.ObjectStatuses.Form.ListForm</defaultListForm>
   <defaultChoiceForm>Catalog.ObjectStatuses.Form.ChoiceForm</defaultChoiceForm>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
-  <attributes uuid="2fcc43d5-489e-4b83-a634-2af9a1f4c676">
-    <name>SetByDefault</name>
+  <attributes uuid="31a6a12e-7f2d-4b1b-98f4-bca102f78a63">
+    <name>Posting</name>
     <synonym>
       <key>en</key>
-      <value>Set by default</value>
+      <value>Posting</value>
     </synonym>
     <type>
       <types>Boolean</types>
@@ -223,11 +223,11 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
-  <attributes uuid="31a6a12e-7f2d-4b1b-98f4-bca102f78a63">
-    <name>Posting</name>
+  <attributes uuid="2fcc43d5-489e-4b83-a634-2af9a1f4c676">
+    <name>SetByDefault</name>
     <synonym>
       <key>en</key>
-      <value>Posting</value>
+      <value>Set by default</value>
     </synonym>
     <type>
       <types>Boolean</types>
@@ -263,6 +263,24 @@
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
   </tabularSections>
+  <forms uuid="000993b6-5857-4338-93a8-33327b5c475d">
+    <name>ChoiceForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Choice form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="11d323fb-ea58-4d49-bb16-b4eb36d457c0">
+    <name>GroupForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Group form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
   <forms uuid="65420be6-a4f9-47e1-b911-63d0c2e2c8f9">
     <name>ItemForm</name>
     <synonym>
@@ -277,24 +295,6 @@
     <synonym>
       <key>en</key>
       <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="11d323fb-ea58-4d49-bb16-b4eb36d457c0">
-    <name>GroupForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Group form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="000993b6-5857-4338-93a8-33327b5c475d">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
     </synonym>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>

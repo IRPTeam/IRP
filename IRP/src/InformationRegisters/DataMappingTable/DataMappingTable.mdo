@@ -24,21 +24,6 @@
     <key>en</key>
     <value>Data mapping tables</value>
   </listPresentation>
-  <resources uuid="6167ec7a-3b1f-4320-a1d4-19e7c0c3b158">
-    <name>Target</name>
-    <synonym>
-      <key>en</key>
-      <value>Target</value>
-    </synonym>
-    <type>
-      <types>AnyRef</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </resources>
   <resources uuid="25c2994f-585c-46ea-a0f7-b8c4b4ca4401">
     <name>AddInfo</name>
     <synonym>
@@ -68,6 +53,21 @@
     <fillValue xsi:type="core:StringValue">
       <value></value>
     </fillValue>
+  </resources>
+  <resources uuid="6167ec7a-3b1f-4320-a1d4-19e7c0c3b158">
+    <name>Target</name>
+    <synonym>
+      <key>en</key>
+      <value>Target</value>
+    </synonym>
+    <type>
+      <types>AnyRef</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
   </resources>
   <attributes uuid="0a634db2-c62e-4b3e-ba9c-f7f7667c97a5">
     <name>DataInStorage</name>

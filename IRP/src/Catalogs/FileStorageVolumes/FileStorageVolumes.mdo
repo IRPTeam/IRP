@@ -50,21 +50,6 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
-  <attributes uuid="d6bbbff6-ae7f-48d4-997b-044c872b5194">
-    <name>POSTIntegrationSettings</name>
-    <synonym>
-      <key>en</key>
-      <value>POST Integration settings</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.IntegrationSettings</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
   <attributes uuid="abbdb7b7-f388-4850-b213-664ac7513f2d">
     <name>GETIntegrationSettings</name>
     <synonym>
@@ -80,6 +65,30 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="d6bbbff6-ae7f-48d4-997b-044c872b5194">
+    <name>POSTIntegrationSettings</name>
+    <synonym>
+      <key>en</key>
+      <value>POST Integration settings</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.IntegrationSettings</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <forms uuid="5327ede5-2ef4-41f1-be5b-103fd137f381">
+    <name>ChoiceForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Choice form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
   <forms uuid="e833b5c6-7cf5-4de7-9b9a-b93f40e93134">
     <name>ItemForm</name>
     <synonym>
@@ -94,15 +103,6 @@
     <synonym>
       <key>en</key>
       <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="5327ede5-2ef4-41f1-be5b-103fd137f381">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
     </synonym>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>

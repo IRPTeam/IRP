@@ -91,6 +91,15 @@
       <dataHistory>Use</dataHistory>
     </attributes>
   </tabularSections>
+  <forms uuid="f58d7da4-ecc8-456e-8566-8023f9f57873">
+    <name>ChoiceForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Choice form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
   <forms uuid="357c1110-0424-4d05-958e-4be76ea00d9d">
     <name>ItemForm</name>
     <synonym>
@@ -105,15 +114,6 @@
     <synonym>
       <key>en</key>
       <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="f58d7da4-ecc8-456e-8566-8023f9f57873">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
     </synonym>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>

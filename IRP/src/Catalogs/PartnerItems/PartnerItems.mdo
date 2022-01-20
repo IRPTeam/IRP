@@ -58,14 +58,14 @@
   <defaultObjectForm>Catalog.PartnerItems.Form.ItemForm</defaultObjectForm>
   <defaultListForm>Catalog.PartnerItems.Form.ListForm</defaultListForm>
   <defaultChoiceForm>Catalog.PartnerItems.Form.ChoiceForm</defaultChoiceForm>
-  <attributes uuid="25daef82-bf2a-4716-b100-f055981013f0">
-    <name>Partner</name>
+  <attributes uuid="b06e3399-969a-4077-97bf-f9b3f7639e60">
+    <name>Item</name>
     <synonym>
       <key>en</key>
-      <value>Partner</value>
+      <value>Item</value>
     </synonym>
     <type>
-      <types>CatalogRef.Partners</types>
+      <types>CatalogRef.Items</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
@@ -92,22 +92,6 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
-  <attributes uuid="b06e3399-969a-4077-97bf-f9b3f7639e60">
-    <name>Item</name>
-    <synonym>
-      <key>en</key>
-      <value>Item</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Items</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
   <attributes uuid="32fb2265-e730-4a50-9482-46bc47785fc5">
     <name>ItemKey</name>
     <synonym>
@@ -124,6 +108,22 @@
       <name>Filter.Item</name>
       <field>Catalog.PartnerItems.Attribute.Item</field>
     </choiceParameterLinks>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="25daef82-bf2a-4716-b100-f055981013f0">
+    <name>Partner</name>
+    <synonym>
+      <key>en</key>
+      <value>Partner</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Partners</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillChecking>ShowError</fillChecking>
     <fillValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
@@ -169,6 +169,15 @@
       <dataHistory>Use</dataHistory>
     </attributes>
   </tabularSections>
+  <forms uuid="e58d9a48-31f6-431b-9834-79d849f09a92">
+    <name>ChoiceForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Choice form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
   <forms uuid="97f31b14-f6af-424b-b6a4-9c2a470ce877">
     <name>ItemForm</name>
     <synonym>
@@ -183,15 +192,6 @@
     <synonym>
       <key>en</key>
       <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="e58d9a48-31f6-431b-9834-79d849f09a92">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
     </synonym>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>

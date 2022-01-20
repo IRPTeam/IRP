@@ -97,6 +97,15 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <forms uuid="a6059311-0c45-45e3-aaeb-73ab9da497d6">
+    <name>ChoiceForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Choice form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
   <forms uuid="8974dd62-9b1e-4c9d-a789-e75605ebc57d">
     <name>DocumentForm</name>
     <synonym>
@@ -115,15 +124,47 @@
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>
   </forms>
-  <forms uuid="a6059311-0c45-45e3-aaeb-73ab9da497d6">
-    <name>ChoiceForm</name>
+  <tabularSections uuid="af0ba146-a727-4f1f-837e-d274287042ed">
+    <producedTypes>
+      <objectType typeId="de2272b5-b461-4403-88e0-e628eaf6f145" valueTypeId="dfb5d04a-03c0-4c94-84f8-b192d5b02429"/>
+      <rowType typeId="92e8c01a-5dec-4c49-9e37-3ffdcfa6a14a" valueTypeId="0ecb86d2-565b-4302-8469-02c106af445c"/>
+    </producedTypes>
+    <name>AddAttributes</name>
     <synonym>
       <key>en</key>
-      <value>Choice form</value>
+      <value>Additional attributes</value>
     </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
+    <attributes uuid="7f6fc4ea-0070-42c1-9a94-dce1432f4004">
+      <name>Property</name>
+      <synonym>
+        <key>en</key>
+        <value>Property</value>
+      </synonym>
+      <type>
+        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="90130e10-066d-4682-b489-1326c5fca74a">
+      <name>Value</name>
+      <synonym>
+        <key>en</key>
+        <value>Value</value>
+      </synonym>
+      <type>
+        <types>Characteristic.AddAttributeAndProperty</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <choiceParameterLinks>
+        <name>Filter.Owner</name>
+        <field>Document.ItemStockAdjustment.TabularSection.AddAttributes.Attribute.Property</field>
+      </choiceParameterLinks>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+  </tabularSections>
   <tabularSections uuid="36676c33-1133-44f9-9b3e-f22c30043caa">
     <producedTypes>
       <objectType typeId="1b3bb5ed-c0a4-4e41-92c2-25d89c3ab774" valueTypeId="bab16d0d-174d-45a5-a4ba-9ce097b2ee4d"/>
@@ -248,47 +289,6 @@
       <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-  </tabularSections>
-  <tabularSections uuid="af0ba146-a727-4f1f-837e-d274287042ed">
-    <producedTypes>
-      <objectType typeId="de2272b5-b461-4403-88e0-e628eaf6f145" valueTypeId="dfb5d04a-03c0-4c94-84f8-b192d5b02429"/>
-      <rowType typeId="92e8c01a-5dec-4c49-9e37-3ffdcfa6a14a" valueTypeId="0ecb86d2-565b-4302-8469-02c106af445c"/>
-    </producedTypes>
-    <name>AddAttributes</name>
-    <synonym>
-      <key>en</key>
-      <value>Additional attributes</value>
-    </synonym>
-    <attributes uuid="7f6fc4ea-0070-42c1-9a94-dce1432f4004">
-      <name>Property</name>
-      <synonym>
-        <key>en</key>
-        <value>Property</value>
-      </synonym>
-      <type>
-        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-    </attributes>
-    <attributes uuid="90130e10-066d-4682-b489-1326c5fca74a">
-      <name>Value</name>
-      <synonym>
-        <key>en</key>
-        <value>Value</value>
-      </synonym>
-      <type>
-        <types>Characteristic.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <choiceParameterLinks>
-        <name>Filter.Owner</name>
-        <field>Document.ItemStockAdjustment.TabularSection.AddAttributes.Attribute.Property</field>
-      </choiceParameterLinks>
-      <dataHistory>Use</dataHistory>
     </attributes>
   </tabularSections>
 </mdclass:Document>

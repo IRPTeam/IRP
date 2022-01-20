@@ -74,21 +74,6 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
-  <attributes uuid="20b7c216-3503-4fe4-875c-9e92301733d3">
-    <name>Store</name>
-    <synonym>
-      <key>en</key>
-      <value>Store</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Stores</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
   <attributes uuid="219604e2-92a5-4de8-a968-3f2e08132f4e">
     <name>ProcurementDate</name>
     <synonym>
@@ -107,6 +92,30 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="20b7c216-3503-4fe4-875c-9e92301733d3">
+    <name>Store</name>
+    <synonym>
+      <key>en</key>
+      <value>Store</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Stores</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <forms uuid="a0a0a485-5abd-495b-b14e-835579226110">
+    <name>ChoiceForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Choice form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
   <forms uuid="c327bbec-e519-4860-9b93-b8b8cc31f668">
     <name>DocumentForm</name>
     <synonym>
@@ -125,15 +134,49 @@
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>
   </forms>
-  <forms uuid="a0a0a485-5abd-495b-b14e-835579226110">
-    <name>ChoiceForm</name>
+  <tabularSections uuid="d3bdb973-bcef-4e33-b168-9e55eefca40f">
+    <producedTypes>
+      <objectType typeId="66d5ec54-e249-45aa-884e-735fa865685f" valueTypeId="9c3c6520-b319-420f-9438-6632aa59230d"/>
+      <rowType typeId="7ca7eb20-f2b1-4ef1-b796-9ef93d20c57f" valueTypeId="0911e19e-1022-493e-8875-94e81f2149d4"/>
+    </producedTypes>
+    <name>AddAttributes</name>
     <synonym>
       <key>en</key>
-      <value>Choice form</value>
+      <value>Additional attributes</value>
     </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
+    <attributes uuid="c9da3d79-fcc2-405d-9ea5-4fc1b7c3b8f9">
+      <name>Property</name>
+      <synonym>
+        <key>en</key>
+        <value>Property</value>
+      </synonym>
+      <type>
+        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="19e0622f-85cf-44ce-8b20-76b6a43cfc51">
+      <name>Value</name>
+      <synonym>
+        <key>en</key>
+        <value>Value</value>
+      </synonym>
+      <type>
+        <types>Characteristic.AddAttributeAndProperty</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <choiceParameterLinks>
+        <name>Filter.Owner</name>
+        <field>Document.InternalSupplyRequest.TabularSection.AddAttributes.Attribute.Property</field>
+      </choiceParameterLinks>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
   <tabularSections uuid="7bb29739-384d-4251-bb0a-c64774ecb09e">
     <producedTypes>
       <objectType typeId="19402370-57ef-48e9-a038-6777a1a986b7" valueTypeId="3a3010b3-a30f-4512-a3ed-d42db2857ba6"/>
@@ -213,49 +256,6 @@
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
-    </attributes>
-  </tabularSections>
-  <tabularSections uuid="d3bdb973-bcef-4e33-b168-9e55eefca40f">
-    <producedTypes>
-      <objectType typeId="66d5ec54-e249-45aa-884e-735fa865685f" valueTypeId="9c3c6520-b319-420f-9438-6632aa59230d"/>
-      <rowType typeId="7ca7eb20-f2b1-4ef1-b796-9ef93d20c57f" valueTypeId="0911e19e-1022-493e-8875-94e81f2149d4"/>
-    </producedTypes>
-    <name>AddAttributes</name>
-    <synonym>
-      <key>en</key>
-      <value>Additional attributes</value>
-    </synonym>
-    <attributes uuid="c9da3d79-fcc2-405d-9ea5-4fc1b7c3b8f9">
-      <name>Property</name>
-      <synonym>
-        <key>en</key>
-        <value>Property</value>
-      </synonym>
-      <type>
-        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="19e0622f-85cf-44ce-8b20-76b6a43cfc51">
-      <name>Value</name>
-      <synonym>
-        <key>en</key>
-        <value>Value</value>
-      </synonym>
-      <type>
-        <types>Characteristic.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <choiceParameterLinks>
-        <name>Filter.Owner</name>
-        <field>Document.InternalSupplyRequest.TabularSection.AddAttributes.Attribute.Property</field>
-      </choiceParameterLinks>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
     </attributes>
   </tabularSections>
   <tabularSections uuid="1dcfc3c5-72a0-48a4-9fe5-163929373705">

@@ -133,71 +133,14 @@
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>
   <defaultObjectForm>Catalog.RetailCustomers.Form.ItemForm</defaultObjectForm>
-  <attributes uuid="0efea20d-efa3-40ab-ab5e-7300844232ca">
-    <name>Name</name>
+  <attributes uuid="1810727b-2a5f-4117-aea4-6bc290c252be">
+    <name>Agreement</name>
     <synonym>
       <key>en</key>
-      <value>Name</value>
+      <value>Partner term</value>
     </synonym>
     <type>
-      <types>String</types>
-      <stringQualifiers>
-        <length>150</length>
-      </stringQualifiers>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fillValue xsi:type="core:StringValue">
-      <value></value>
-    </fillValue>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="9a32a16c-c3af-4605-b9c5-4a823c8f617f">
-    <name>Surname</name>
-    <synonym>
-      <key>en</key>
-      <value>Surname</value>
-    </synonym>
-    <type>
-      <types>String</types>
-      <stringQualifiers>
-        <length>200</length>
-      </stringQualifiers>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fillValue xsi:type="core:StringValue">
-      <value></value>
-    </fillValue>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="6f3a1d6b-9dce-4491-82a4-6d817f2f7b10">
-    <name>UsePartnerTransactions</name>
-    <synonym>
-      <key>en</key>
-      <value>Use partner transactions</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="b1b3d183-bc2c-4535-8eef-9bdb1703a61d">
-    <name>Partner</name>
-    <synonym>
-      <key>en</key>
-      <value>Partner</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Partners</types>
+      <types>CatalogRef.Agreements</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
@@ -222,14 +165,35 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
-  <attributes uuid="1810727b-2a5f-4117-aea4-6bc290c252be">
-    <name>Agreement</name>
+  <attributes uuid="0efea20d-efa3-40ab-ab5e-7300844232ca">
+    <name>Name</name>
     <synonym>
       <key>en</key>
-      <value>Partner term</value>
+      <value>Name</value>
     </synonym>
     <type>
-      <types>CatalogRef.Agreements</types>
+      <types>String</types>
+      <stringQualifiers>
+        <length>150</length>
+      </stringQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillChecking>ShowError</fillChecking>
+    <fillValue xsi:type="core:StringValue">
+      <value></value>
+    </fillValue>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="b1b3d183-bc2c-4535-8eef-9bdb1703a61d">
+    <name>Partner</name>
+    <synonym>
+      <key>en</key>
+      <value>Partner</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Partners</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
@@ -238,11 +202,47 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="9a32a16c-c3af-4605-b9c5-4a823c8f617f">
+    <name>Surname</name>
+    <synonym>
+      <key>en</key>
+      <value>Surname</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers>
+        <length>200</length>
+      </stringQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillChecking>ShowError</fillChecking>
+    <fillValue xsi:type="core:StringValue">
+      <value></value>
+    </fillValue>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <attributes uuid="4111d1ae-82d2-4e43-89d1-e699eab23853">
     <name>UsePartnerInfo</name>
     <synonym>
       <key>en</key>
       <value>Use partner info</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="6f3a1d6b-9dce-4491-82a4-6d817f2f7b10">
+    <name>UsePartnerTransactions</name>
+    <synonym>
+      <key>en</key>
+      <value>Use partner transactions</value>
     </synonym>
     <type>
       <types>Boolean</types>

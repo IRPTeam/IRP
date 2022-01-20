@@ -57,6 +57,15 @@
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+  <forms uuid="60ffe9d9-2df9-4387-8582-c72a14759c32">
+    <name>ChoiceForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Choice form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
   <forms uuid="11702bf6-a43f-4d69-8fb3-039bfee037bf">
     <name>DocumentForm</name>
     <synonym>
@@ -75,15 +84,47 @@
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>
   </forms>
-  <forms uuid="60ffe9d9-2df9-4387-8582-c72a14759c32">
-    <name>ChoiceForm</name>
+  <tabularSections uuid="8c81be8f-5203-4012-8c4d-75b695a38c0d">
+    <producedTypes>
+      <objectType typeId="8455bc44-c06c-43fe-9027-eb7c1441a89f" valueTypeId="c7938bd9-1b84-47eb-a895-f86f7bd7e446"/>
+      <rowType typeId="5b892769-c13c-481e-bc9d-75c260e3250c" valueTypeId="b186c86b-ee47-4709-a1c1-a8af70e43a70"/>
+    </producedTypes>
+    <name>AddAttributes</name>
     <synonym>
       <key>en</key>
-      <value>Choice form</value>
+      <value>Additional attributes</value>
     </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
+    <attributes uuid="506af94a-702b-44e8-8676-b48b10bee70c">
+      <name>Property</name>
+      <synonym>
+        <key>en</key>
+        <value>Property</value>
+      </synonym>
+      <type>
+        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="1abd48b8-9db2-4523-bc7e-d4efa9728bb9">
+      <name>Value</name>
+      <synonym>
+        <key>en</key>
+        <value>Value</value>
+      </synonym>
+      <type>
+        <types>Characteristic.AddAttributeAndProperty</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <choiceParameterLinks>
+        <name>Filter.Owner</name>
+        <field>Document.Labeling.TabularSection.AddAttributes.Attribute.Property</field>
+      </choiceParameterLinks>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+  </tabularSections>
   <tabularSections uuid="be3bb248-605e-4626-a4dc-a1061fa15aa8">
     <producedTypes>
       <objectType typeId="bbdb2c40-4b94-47f4-82cd-ee5be36ac0f6" valueTypeId="460b8447-9e1e-4997-910a-e98d3c065534"/>
@@ -166,47 +207,6 @@
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-    </attributes>
-  </tabularSections>
-  <tabularSections uuid="8c81be8f-5203-4012-8c4d-75b695a38c0d">
-    <producedTypes>
-      <objectType typeId="8455bc44-c06c-43fe-9027-eb7c1441a89f" valueTypeId="c7938bd9-1b84-47eb-a895-f86f7bd7e446"/>
-      <rowType typeId="5b892769-c13c-481e-bc9d-75c260e3250c" valueTypeId="b186c86b-ee47-4709-a1c1-a8af70e43a70"/>
-    </producedTypes>
-    <name>AddAttributes</name>
-    <synonym>
-      <key>en</key>
-      <value>Additional attributes</value>
-    </synonym>
-    <attributes uuid="506af94a-702b-44e8-8676-b48b10bee70c">
-      <name>Property</name>
-      <synonym>
-        <key>en</key>
-        <value>Property</value>
-      </synonym>
-      <type>
-        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-    </attributes>
-    <attributes uuid="1abd48b8-9db2-4523-bc7e-d4efa9728bb9">
-      <name>Value</name>
-      <synonym>
-        <key>en</key>
-        <value>Value</value>
-      </synonym>
-      <type>
-        <types>Characteristic.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <choiceParameterLinks>
-        <name>Filter.Owner</name>
-        <field>Document.Labeling.TabularSection.AddAttributes.Attribute.Property</field>
-      </choiceParameterLinks>
       <dataHistory>Use</dataHistory>
     </attributes>
   </tabularSections>

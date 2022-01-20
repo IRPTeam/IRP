@@ -75,11 +75,11 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
-  <attributes uuid="b6b22093-33ea-4a8b-8004-474ebddcaa73">
-    <name>IsRevenue</name>
+  <attributes uuid="6f12f709-2908-4334-98f8-6b2d0257c0dc">
+    <name>IsFinancialMovementType</name>
     <synonym>
       <key>en</key>
-      <value>Is revenue</value>
+      <value>Is financial movement type</value>
     </synonym>
     <type>
       <types>Boolean</types>
@@ -90,11 +90,11 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
-  <attributes uuid="6f12f709-2908-4334-98f8-6b2d0257c0dc">
-    <name>IsFinancialMovementType</name>
+  <attributes uuid="b6b22093-33ea-4a8b-8004-474ebddcaa73">
+    <name>IsRevenue</name>
     <synonym>
       <key>en</key>
-      <value>Is financial movement type</value>
+      <value>Is revenue</value>
     </synonym>
     <type>
       <types>Boolean</types>
@@ -148,6 +148,15 @@
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
   </tabularSections>
+  <forms uuid="2fa4d0d1-dcb5-4887-87dd-96f14ec6e2b7">
+    <name>ChoiceForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Choice form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
   <forms uuid="40b038de-71f9-4410-8247-b962e131b497">
     <name>ItemForm</name>
     <synonym>
@@ -162,15 +171,6 @@
     <synonym>
       <key>en</key>
       <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="2fa4d0d1-dcb5-4887-87dd-96f14ec6e2b7">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
     </synonym>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>

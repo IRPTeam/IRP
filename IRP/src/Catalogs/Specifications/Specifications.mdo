@@ -57,21 +57,6 @@
   <defaultListForm>Catalog.Specifications.Form.ListForm</defaultListForm>
   <defaultChoiceForm>Catalog.Specifications.Form.ChoiceForm</defaultChoiceForm>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
-  <attributes uuid="3ab2e28d-23cc-4663-9278-95a988030745">
-    <name>Type</name>
-    <synonym>
-      <key>en</key>
-      <value>Type</value>
-    </synonym>
-    <type>
-      <types>EnumRef.SpecificationType</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
   <attributes uuid="758c3868-18e1-4102-b684-62676c7d7c57">
     <name>ItemBundle</name>
     <synonym>
@@ -80,6 +65,21 @@
     </synonym>
     <type>
       <types>CatalogRef.Items</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="3ab2e28d-23cc-4663-9278-95a988030745">
+    <name>Type</name>
+    <synonym>
+      <key>en</key>
+      <value>Type</value>
+    </synonym>
+    <type>
+      <types>EnumRef.SpecificationType</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
@@ -107,6 +107,106 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <tabularSections uuid="5423a013-f335-4379-84e1-540d83e4a00e">
+    <producedTypes>
+      <objectType typeId="bb0b0349-5e67-4d79-b33b-39d910a89635" valueTypeId="a0869b6e-0897-46e5-9686-7e537550c1a4"/>
+      <rowType typeId="234d08bf-f6eb-45b6-af8f-78d43425e11f" valueTypeId="aa698e41-6696-4fa7-88a5-3b0fd3b51664"/>
+    </producedTypes>
+    <name>AddAttributes</name>
+    <synonym>
+      <key>en</key>
+      <value>Additional attributes</value>
+    </synonym>
+    <attributes uuid="efb3de71-7745-4c2f-83f1-805bb336a9a6">
+      <name>Property</name>
+      <synonym>
+        <key>en</key>
+        <value>Property</value>
+      </synonym>
+      <type>
+        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <choiceParameterLinks>
+        <name>Filter.Owner</name>
+        <field>Catalog.Specifications.TabularSection.AddAttributes.Attribute.Property</field>
+      </choiceParameterLinks>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="d85592ed-2834-4413-8c5f-e35b30948cc0">
+      <name>Value</name>
+      <synonym>
+        <key>en</key>
+        <value>Value</value>
+      </synonym>
+      <type>
+        <types>Characteristic.AddAttributeAndProperty</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="a6e7b415-471b-483f-b4fc-03c765346851">
+      <name>SearchLiteral</name>
+      <synonym>
+        <key>en</key>
+        <value>Search literal</value>
+      </synonym>
+      <type>
+        <types>String</types>
+        <stringQualifiers>
+          <length>500</length>
+        </stringQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
+  <tabularSections uuid="e0ced2c3-8138-4b34-ad99-1efa0f12109f">
+    <producedTypes>
+      <objectType typeId="cb175017-90c3-4882-8d2f-bb46d7fe4e23" valueTypeId="39f6bd66-a5e0-4ffc-8094-ae8c68b5a320"/>
+      <rowType typeId="b0c1f1f5-d598-4543-bd9f-19a465ea1808" valueTypeId="5121b946-bf23-48d7-9f09-4d6be31e0f7f"/>
+    </producedTypes>
+    <name>DataQuantity</name>
+    <synonym>
+      <key>en</key>
+      <value>Data quantity</value>
+    </synonym>
+    <attributes uuid="693f22f2-b706-4976-82f5-931e8be96e07">
+      <name>Key</name>
+      <synonym>
+        <key>en</key>
+        <value>Key</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeRowID</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <indexing>IndexWithAdditionalOrder</indexing>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="4fd4218b-614f-4c70-94e0-590d4bd8a855">
+      <name>Quantity</name>
+      <synonym>
+        <key>en</key>
+        <value>Quantity</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeQuantityInSpecifications</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
   <tabularSections uuid="a5d987ad-3b5e-454b-b53e-0398676c1a67">
     <producedTypes>
       <objectType typeId="72146f7d-6acd-4b5f-a7f3-dc6e355189e3" valueTypeId="72588d1b-631d-461d-8171-80964da92a9b"/>
@@ -176,106 +276,15 @@
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
   </tabularSections>
-  <tabularSections uuid="e0ced2c3-8138-4b34-ad99-1efa0f12109f">
-    <producedTypes>
-      <objectType typeId="cb175017-90c3-4882-8d2f-bb46d7fe4e23" valueTypeId="39f6bd66-a5e0-4ffc-8094-ae8c68b5a320"/>
-      <rowType typeId="b0c1f1f5-d598-4543-bd9f-19a465ea1808" valueTypeId="5121b946-bf23-48d7-9f09-4d6be31e0f7f"/>
-    </producedTypes>
-    <name>DataQuantity</name>
+  <forms uuid="30dfd148-e5bf-4808-a453-e1e922d08cc4">
+    <name>ChoiceForm</name>
     <synonym>
       <key>en</key>
-      <value>Data quantity</value>
+      <value>Choice form</value>
     </synonym>
-    <attributes uuid="693f22f2-b706-4976-82f5-931e8be96e07">
-      <name>Key</name>
-      <synonym>
-        <key>en</key>
-        <value>Key</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeRowID</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <indexing>IndexWithAdditionalOrder</indexing>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="4fd4218b-614f-4c70-94e0-590d4bd8a855">
-      <name>Quantity</name>
-      <synonym>
-        <key>en</key>
-        <value>Quantity</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeQuantityInSpecifications</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-  </tabularSections>
-  <tabularSections uuid="5423a013-f335-4379-84e1-540d83e4a00e">
-    <producedTypes>
-      <objectType typeId="bb0b0349-5e67-4d79-b33b-39d910a89635" valueTypeId="a0869b6e-0897-46e5-9686-7e537550c1a4"/>
-      <rowType typeId="234d08bf-f6eb-45b6-af8f-78d43425e11f" valueTypeId="aa698e41-6696-4fa7-88a5-3b0fd3b51664"/>
-    </producedTypes>
-    <name>AddAttributes</name>
-    <synonym>
-      <key>en</key>
-      <value>Additional attributes</value>
-    </synonym>
-    <attributes uuid="efb3de71-7745-4c2f-83f1-805bb336a9a6">
-      <name>Property</name>
-      <synonym>
-        <key>en</key>
-        <value>Property</value>
-      </synonym>
-      <type>
-        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <choiceParameterLinks>
-        <name>Filter.Owner</name>
-        <field>Catalog.Specifications.TabularSection.AddAttributes.Attribute.Property</field>
-      </choiceParameterLinks>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="d85592ed-2834-4413-8c5f-e35b30948cc0">
-      <name>Value</name>
-      <synonym>
-        <key>en</key>
-        <value>Value</value>
-      </synonym>
-      <type>
-        <types>Characteristic.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="a6e7b415-471b-483f-b4fc-03c765346851">
-      <name>SearchLiteral</name>
-      <synonym>
-        <key>en</key>
-        <value>Search literal</value>
-      </synonym>
-      <type>
-        <types>String</types>
-        <stringQualifiers>
-          <length>500</length>
-        </stringQualifiers>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-  </tabularSections>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
   <forms uuid="d2bf8307-d4f9-4ae0-869c-24a56ff68c4a">
     <name>ItemForm</name>
     <synonym>
@@ -290,15 +299,6 @@
     <synonym>
       <key>en</key>
       <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="30dfd148-e5bf-4808-a453-e1e922d08cc4">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
     </synonym>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>

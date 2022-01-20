@@ -57,6 +57,49 @@
   <defaultObjectForm>Catalog.BankTerms.Form.ItemForm</defaultObjectForm>
   <defaultListForm>Catalog.BankTerms.Form.ListForm</defaultListForm>
   <defaultChoiceForm>Catalog.BankTerms.Form.ChoiceForm</defaultChoiceForm>
+  <tabularSections uuid="4644057f-a7c5-403e-b1e5-504db7e5af89">
+    <producedTypes>
+      <objectType typeId="7029448c-0854-4631-a69a-41822efe82de" valueTypeId="4f5359f6-fd77-4f45-a24a-7ae46678057c"/>
+      <rowType typeId="69248718-21b5-4d71-b99f-854ee16dcb40" valueTypeId="56299c51-a8b7-448e-affb-f969d4804c48"/>
+    </producedTypes>
+    <name>AddAttributes</name>
+    <synonym>
+      <key>en</key>
+      <value>Additional attributes</value>
+    </synonym>
+    <attributes uuid="037899f4-e070-4abb-9c0c-d6569b1a39c3">
+      <name>Property</name>
+      <synonym>
+        <key>en</key>
+        <value>Property</value>
+      </synonym>
+      <type>
+        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="ea4615e7-b86a-48d5-8d2d-d30396d5df34">
+      <name>Value</name>
+      <synonym>
+        <key>en</key>
+        <value>Value</value>
+      </synonym>
+      <type>
+        <types>Characteristic.AddAttributeAndProperty</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <choiceParameterLinks>
+        <name>Filter.Owner</name>
+        <field>Catalog.BankTerms.TabularSection.AddAttributes.Attribute.Property</field>
+      </choiceParameterLinks>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
   <tabularSections uuid="a02a7569-9bd2-4203-8a91-cbfb6e902c90">
     <producedTypes>
       <objectType typeId="5b2d60d1-cb4c-4c56-bb66-cc9291835207" valueTypeId="27cf030d-46b7-4b62-b17e-ecc4607aec8f"/>
@@ -110,49 +153,15 @@
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
   </tabularSections>
-  <tabularSections uuid="4644057f-a7c5-403e-b1e5-504db7e5af89">
-    <producedTypes>
-      <objectType typeId="7029448c-0854-4631-a69a-41822efe82de" valueTypeId="4f5359f6-fd77-4f45-a24a-7ae46678057c"/>
-      <rowType typeId="69248718-21b5-4d71-b99f-854ee16dcb40" valueTypeId="56299c51-a8b7-448e-affb-f969d4804c48"/>
-    </producedTypes>
-    <name>AddAttributes</name>
+  <forms uuid="79a3f6cd-26c6-429f-856f-493f55a4f7b9">
+    <name>ChoiceForm</name>
     <synonym>
       <key>en</key>
-      <value>Additional attributes</value>
+      <value>Choice form</value>
     </synonym>
-    <attributes uuid="037899f4-e070-4abb-9c0c-d6569b1a39c3">
-      <name>Property</name>
-      <synonym>
-        <key>en</key>
-        <value>Property</value>
-      </synonym>
-      <type>
-        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="ea4615e7-b86a-48d5-8d2d-d30396d5df34">
-      <name>Value</name>
-      <synonym>
-        <key>en</key>
-        <value>Value</value>
-      </synonym>
-      <type>
-        <types>Characteristic.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <choiceParameterLinks>
-        <name>Filter.Owner</name>
-        <field>Catalog.BankTerms.TabularSection.AddAttributes.Attribute.Property</field>
-      </choiceParameterLinks>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-  </tabularSections>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
   <forms uuid="97a56386-ca18-47bd-b5d2-5c54ea6834ff">
     <name>ItemForm</name>
     <synonym>
@@ -167,15 +176,6 @@
     <synonym>
       <key>en</key>
       <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="79a3f6cd-26c6-429f-856f-493f55a4f7b9">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
     </synonym>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>

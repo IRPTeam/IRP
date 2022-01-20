@@ -134,11 +134,11 @@
   <defaultListForm>Catalog.Currencies.Form.ListForm</defaultListForm>
   <defaultChoiceForm>Catalog.Currencies.Form.ChoiceForm</defaultChoiceForm>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
-  <attributes uuid="e3dbb019-b9eb-4392-8faf-8ebae3fc898e">
-    <name>Symbol</name>
+  <attributes uuid="1477549c-e8a4-4fab-a6a4-3dd8dca6b8d0">
+    <name>NumericCode</name>
     <synonym>
       <key>en</key>
-      <value>Symbol</value>
+      <value>Numeric code</value>
     </synonym>
     <type>
       <types>String</types>
@@ -154,11 +154,11 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
-  <attributes uuid="1477549c-e8a4-4fab-a6a4-3dd8dca6b8d0">
-    <name>NumericCode</name>
+  <attributes uuid="e3dbb019-b9eb-4392-8faf-8ebae3fc898e">
+    <name>Symbol</name>
     <synonym>
       <key>en</key>
-      <value>Numeric code</value>
+      <value>Symbol</value>
     </synonym>
     <type>
       <types>String</types>
@@ -217,6 +217,15 @@
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
   </tabularSections>
+  <forms uuid="f8aa0177-f31c-4524-878a-bba836bab82d">
+    <name>ChoiceForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Choice form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
   <forms uuid="81b4c231-1b4b-4178-99c2-a6e580eca048">
     <name>ItemForm</name>
     <synonym>
@@ -231,15 +240,6 @@
     <synonym>
       <key>en</key>
       <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="f8aa0177-f31c-4524-878a-bba836bab82d">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
     </synonym>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>

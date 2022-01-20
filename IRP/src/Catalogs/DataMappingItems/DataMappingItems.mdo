@@ -110,6 +110,28 @@
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>
   <defaultObjectForm>Catalog.DataMappingItems.Form.ItemForm</defaultObjectForm>
+  <attributes uuid="13066a6e-dd9f-4970-8f2d-7cfeb21762dd">
+    <name>IndexValue</name>
+    <synonym>
+      <key>en</key>
+      <value>Index value</value>
+    </synonym>
+    <type>
+      <types>Number</types>
+      <numberQualifiers>
+        <precision>38</precision>
+      </numberQualifiers>
+    </type>
+    <toolTip>
+      <key>en</key>
+      <value>Dont index</value>
+    </toolTip>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <attributes uuid="8949d29b-c57b-4157-b6bd-5f0a518b4799">
     <name>RefValue</name>
     <synonym>
@@ -159,28 +181,6 @@
     <type>
       <types>ValueStorage</types>
     </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="13066a6e-dd9f-4970-8f2d-7cfeb21762dd">
-    <name>IndexValue</name>
-    <synonym>
-      <key>en</key>
-      <value>Index value</value>
-    </synonym>
-    <type>
-      <types>Number</types>
-      <numberQualifiers>
-        <precision>38</precision>
-      </numberQualifiers>
-    </type>
-    <toolTip>
-      <key>en</key>
-      <value>Dont index</value>
-    </toolTip>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <fillValue xsi:type="core:UndefinedValue"/>

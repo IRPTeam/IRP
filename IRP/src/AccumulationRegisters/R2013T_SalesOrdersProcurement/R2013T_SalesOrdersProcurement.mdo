@@ -30,19 +30,6 @@
     <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
   </resources>
-  <resources uuid="f275df05-567c-47e8-af9e-2f28def46b6d">
-    <name>ReOrderedQuantity</name>
-    <synonym>
-      <key>en</key>
-      <value>Re ordered quantity</value>
-    </synonym>
-    <type>
-      <types>DefinedType.typeQuantity</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-  </resources>
   <resources uuid="316fc39a-90d4-4189-8a3a-deaf68a681f4">
     <name>PurchaseQuantity</name>
     <synonym>
@@ -69,11 +56,11 @@
     <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
   </resources>
-  <resources uuid="d62c41fc-0f37-41af-b585-7c952a10e308">
-    <name>ShippedQuantity</name>
+  <resources uuid="f275df05-567c-47e8-af9e-2f28def46b6d">
+    <name>ReOrderedQuantity</name>
     <synonym>
       <key>en</key>
-      <value>Shipped quantity</value>
+      <value>Re ordered quantity</value>
     </synonym>
     <type>
       <types>DefinedType.typeQuantity</types>
@@ -87,6 +74,19 @@
     <synonym>
       <key>en</key>
       <value>Sales quantity</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeQuantity</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+  </resources>
+  <resources uuid="d62c41fc-0f37-41af-b585-7c952a10e308">
+    <name>ShippedQuantity</name>
+    <synonym>
+      <key>en</key>
+      <value>Shipped quantity</value>
     </synonym>
     <type>
       <types>DefinedType.typeQuantity</types>

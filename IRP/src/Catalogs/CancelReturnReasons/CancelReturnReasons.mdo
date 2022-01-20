@@ -35,6 +35,15 @@
   <defaultObjectForm>Catalog.CancelReturnReasons.Form.ItemForm</defaultObjectForm>
   <defaultListForm>Catalog.CancelReturnReasons.Form.ListForm</defaultListForm>
   <defaultChoiceForm>Catalog.CancelReturnReasons.Form.ChoiceForm</defaultChoiceForm>
+  <forms uuid="98ade9a8-0683-4a43-9d95-d05a19963128">
+    <name>ChoiceForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Choice form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
   <forms uuid="e810c5d2-ad92-4231-a4e8-e57ede69f39d">
     <name>ItemForm</name>
     <synonym>
@@ -49,15 +58,6 @@
     <synonym>
       <key>en</key>
       <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="98ade9a8-0683-4a43-9d95-d05a19963128">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
     </synonym>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>

@@ -57,26 +57,11 @@
   <defaultListForm>Catalog.Stores.Form.ListForm</defaultListForm>
   <defaultChoiceForm>Catalog.Stores.Form.ChoiceForm</defaultChoiceForm>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
-  <attributes uuid="3415780f-5e2a-4973-9684-31e6cbd80b77">
-    <name>UseGoodsReceipt</name>
+  <attributes uuid="7ab9d0bf-d328-4e13-8c7d-3dd2fa27829e">
+    <name>NegativeStockControl</name>
     <synonym>
       <key>en</key>
-      <value>Use goods receipt</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="8c9cda5d-e069-44a9-ab76-300935c3b2b3">
-    <name>UseShipmentConfirmation</name>
-    <synonym>
-      <key>en</key>
-      <value>Use shipment confirmation</value>
+      <value>Negative stock control</value>
     </synonym>
     <type>
       <types>Boolean</types>
@@ -102,11 +87,26 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
-  <attributes uuid="7ab9d0bf-d328-4e13-8c7d-3dd2fa27829e">
-    <name>NegativeStockControl</name>
+  <attributes uuid="3415780f-5e2a-4973-9684-31e6cbd80b77">
+    <name>UseGoodsReceipt</name>
     <synonym>
       <key>en</key>
-      <value>Negative stock control</value>
+      <value>Use goods receipt</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="8c9cda5d-e069-44a9-ab76-300935c3b2b3">
+    <name>UseShipmentConfirmation</name>
+    <synonym>
+      <key>en</key>
+      <value>Use shipment confirmation</value>
     </synonym>
     <type>
       <types>Boolean</types>
@@ -177,6 +177,15 @@
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
   </tabularSections>
+  <forms uuid="8970963a-fc6d-493c-b9b0-1f48fd751cd8">
+    <name>ChoiceForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Choice form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
   <forms uuid="1d10b69f-8c8e-457a-92e9-47e0d6eacfda">
     <name>ItemForm</name>
     <synonym>
@@ -191,15 +200,6 @@
     <synonym>
       <key>en</key>
       <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="8970963a-fc6d-493c-b9b0-1f48fd751cd8">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
     </synonym>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>

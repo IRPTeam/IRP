@@ -26,21 +26,6 @@
     <key>en</key>
     <value>Company taxes</value>
   </listPresentation>
-  <resources uuid="f51ef633-7048-483b-a625-da52e21085f4">
-    <name>Use</name>
-    <synonym>
-      <key>en</key>
-      <value>Use</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </resources>
   <resources uuid="a25d893c-31bd-463f-95c2-1b23da47ba5e">
     <name>Priority</name>
     <synonym>
@@ -52,6 +37,21 @@
       <numberQualifiers>
         <precision>3</precision>
       </numberQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </resources>
+  <resources uuid="f51ef633-7048-483b-a625-da52e21085f4">
+    <name>Use</name>
+    <synonym>
+      <key>en</key>
+      <value>Use</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

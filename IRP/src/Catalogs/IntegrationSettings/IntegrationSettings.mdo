@@ -50,21 +50,6 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
-  <attributes uuid="1ec86a86-9804-414c-96f9-68ce428fc58c">
-    <name>IntegrationType</name>
-    <synonym>
-      <key>en</key>
-      <value>Integration type</value>
-    </synonym>
-    <type>
-      <types>EnumRef.IntegrationType</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
   <attributes uuid="5185b3d9-aed5-4032-9d1d-e6b72e9584b6">
     <name>ExternalDataProcSettings</name>
     <synonym>
@@ -73,6 +58,21 @@
     </synonym>
     <type>
       <types>ValueStorage</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="1ec86a86-9804-414c-96f9-68ce428fc58c">
+    <name>IntegrationType</name>
+    <synonym>
+      <key>en</key>
+      <value>Integration type</value>
+    </synonym>
+    <type>
+      <types>EnumRef.IntegrationType</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
@@ -176,6 +176,15 @@
       <dataHistory>Use</dataHistory>
     </attributes>
   </tabularSections>
+  <forms uuid="68a5298f-8922-45e6-b773-65267493f547">
+    <name>ChoiceForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Choice form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
   <forms uuid="e749d2bf-5157-4d93-a33e-4f0203e35727">
     <name>ItemForm</name>
     <synonym>
@@ -190,15 +199,6 @@
     <synonym>
       <key>en</key>
       <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="68a5298f-8922-45e6-b773-65267493f547">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
     </synonym>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>

@@ -58,51 +58,6 @@
   <defaultObjectForm>Catalog.LockDataModificationReasons.Form.ItemForm</defaultObjectForm>
   <defaultListForm>Catalog.LockDataModificationReasons.Form.ListForm</defaultListForm>
   <defaultChoiceForm>Catalog.LockDataModificationReasons.Form.ChoiceForm</defaultChoiceForm>
-  <attributes uuid="d5b1ceec-853d-4b08-9bae-c5a99ae9c00f">
-    <name>ForAllUsers</name>
-    <synonym>
-      <key>en</key>
-      <value>For all users</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="26f6f0bf-296c-44d9-a6b6-f3d81fce8192">
-    <name>DisableRule</name>
-    <synonym>
-      <key>en</key>
-      <value>Disable rule</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="36266722-a6ee-416e-9651-a8239f36c0dd">
-    <name>SetOneRuleForAllObjects</name>
-    <synonym>
-      <key>en</key>
-      <value>Set one rule for all objects</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
   <attributes uuid="065a5729-8aa5-4ee7-b716-aa00aa7e82f5">
     <name>Attribute</name>
     <synonym>
@@ -143,6 +98,66 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="26f6f0bf-296c-44d9-a6b6-f3d81fce8192">
+    <name>DisableRule</name>
+    <synonym>
+      <key>en</key>
+      <value>Disable rule</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="d5b1ceec-853d-4b08-9bae-c5a99ae9c00f">
+    <name>ForAllUsers</name>
+    <synonym>
+      <key>en</key>
+      <value>For all users</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="36266722-a6ee-416e-9651-a8239f36c0dd">
+    <name>SetOneRuleForAllObjects</name>
+    <synonym>
+      <key>en</key>
+      <value>Set one rule for all objects</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="04aa2f2f-d9dd-4ed5-be2a-06f64f6b3edb">
+    <name>SetValueAsCode</name>
+    <synonym>
+      <key>en</key>
+      <value>Set value as code</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <attributes uuid="305b12f7-e4c8-49c5-a377-6677a41578f1">
     <name>Value</name>
     <synonym>
@@ -172,21 +187,32 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
-  <attributes uuid="04aa2f2f-d9dd-4ed5-be2a-06f64f6b3edb">
-    <name>SetValueAsCode</name>
+  <tabularSections uuid="f0c360e8-c562-47d7-84a8-7031908582a2">
+    <producedTypes>
+      <objectType typeId="8d8e56c2-3fe7-4d36-bf36-9b5016231902" valueTypeId="5e089d2f-124b-4b5b-be4a-86b8d7cc320d"/>
+      <rowType typeId="ecabcbb7-2627-4414-b530-4318ec3f51bd" valueTypeId="309c563e-74fb-4df3-8d74-a4f83ef72211"/>
+    </producedTypes>
+    <name>AccessGroupList</name>
     <synonym>
       <key>en</key>
-      <value>Set value as code</value>
+      <value>Access group list</value>
     </synonym>
-    <type>
-      <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
+    <attributes uuid="7b2ed0d3-6f41-4cb1-9055-b1171cc1f027">
+      <name>AccessGroup</name>
+      <synonym>
+        <key>en</key>
+        <value>Access group</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.AccessGroups</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <fillChecking>ShowError</fillChecking>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
   <tabularSections uuid="bdfb54d6-07fc-48d4-ac55-cb4f3cfaa8ae">
     <producedTypes>
       <objectType typeId="85b44ead-7878-4913-86f5-02ccbd3c51c2" valueTypeId="257e0d4e-1a4e-419a-b6db-fa8f614db850"/>
@@ -391,32 +417,15 @@
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
   </tabularSections>
-  <tabularSections uuid="f0c360e8-c562-47d7-84a8-7031908582a2">
-    <producedTypes>
-      <objectType typeId="8d8e56c2-3fe7-4d36-bf36-9b5016231902" valueTypeId="5e089d2f-124b-4b5b-be4a-86b8d7cc320d"/>
-      <rowType typeId="ecabcbb7-2627-4414-b530-4318ec3f51bd" valueTypeId="309c563e-74fb-4df3-8d74-a4f83ef72211"/>
-    </producedTypes>
-    <name>AccessGroupList</name>
+  <forms uuid="f96e7e6a-693e-42fc-9878-9e6a806e7071">
+    <name>ChoiceForm</name>
     <synonym>
       <key>en</key>
-      <value>Access group list</value>
+      <value>Choice form</value>
     </synonym>
-    <attributes uuid="7b2ed0d3-6f41-4cb1-9055-b1171cc1f027">
-      <name>AccessGroup</name>
-      <synonym>
-        <key>en</key>
-        <value>Access group</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.AccessGroups</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <fillChecking>ShowError</fillChecking>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-  </tabularSections>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
   <forms uuid="13f935b3-bff3-4144-a391-f5baf8875768">
     <name>ItemForm</name>
     <synonym>
@@ -431,15 +440,6 @@
     <synonym>
       <key>en</key>
       <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="f96e7e6a-693e-42fc-9878-9e6a806e7071">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
     </synonym>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>

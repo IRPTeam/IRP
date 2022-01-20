@@ -91,6 +91,49 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <tabularSections uuid="453b1c75-5b97-4f50-a38a-5c858f89dde9">
+    <producedTypes>
+      <objectType typeId="3b51ac21-496b-47d2-99e5-6f40a32d8c16" valueTypeId="0cdf9251-7971-4d00-8730-896b82a2f897"/>
+      <rowType typeId="f412ceec-0ed5-428c-9d03-265afcaa4b7f" valueTypeId="97ff0e6f-06b4-416b-8bf5-3d0b80a47050"/>
+    </producedTypes>
+    <name>AddAttributes</name>
+    <synonym>
+      <key>en</key>
+      <value>Additional attributes</value>
+    </synonym>
+    <attributes uuid="76d3ec82-e828-4411-a6e8-7bb29b38f28f">
+      <name>Property</name>
+      <synonym>
+        <key>en</key>
+        <value>Property</value>
+      </synonym>
+      <type>
+        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="738876a1-d3ae-46f4-bed9-80198460eee7">
+      <name>Value</name>
+      <synonym>
+        <key>en</key>
+        <value>Value</value>
+      </synonym>
+      <type>
+        <types>Characteristic.AddAttributeAndProperty</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <choiceParameterLinks>
+        <name>Filter.Owner</name>
+        <field>Catalog.ItemTypes.TabularSection.AddAttributes.Attribute.Property</field>
+      </choiceParameterLinks>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
   <tabularSections uuid="a261a912-5869-49b5-8ab6-76ad86abeaba">
     <producedTypes>
       <objectType typeId="192f1da3-6058-4b27-b623-41f7c6cafedb" valueTypeId="dff3d6ac-2e62-4190-bda0-9908ffbe49bc"/>
@@ -157,49 +200,33 @@
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
   </tabularSections>
-  <tabularSections uuid="453b1c75-5b97-4f50-a38a-5c858f89dde9">
-    <producedTypes>
-      <objectType typeId="3b51ac21-496b-47d2-99e5-6f40a32d8c16" valueTypeId="0cdf9251-7971-4d00-8730-896b82a2f897"/>
-      <rowType typeId="f412ceec-0ed5-428c-9d03-265afcaa4b7f" valueTypeId="97ff0e6f-06b4-416b-8bf5-3d0b80a47050"/>
-    </producedTypes>
-    <name>AddAttributes</name>
+  <forms uuid="c9aa6d16-b64e-4f6f-a1d5-391765adc9f6">
+    <name>ChoiceForm</name>
     <synonym>
       <key>en</key>
-      <value>Additional attributes</value>
+      <value>Choice form</value>
     </synonym>
-    <attributes uuid="76d3ec82-e828-4411-a6e8-7bb29b38f28f">
-      <name>Property</name>
-      <synonym>
-        <key>en</key>
-        <value>Property</value>
-      </synonym>
-      <type>
-        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="738876a1-d3ae-46f4-bed9-80198460eee7">
-      <name>Value</name>
-      <synonym>
-        <key>en</key>
-        <value>Value</value>
-      </synonym>
-      <type>
-        <types>Characteristic.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <choiceParameterLinks>
-        <name>Filter.Owner</name>
-        <field>Catalog.ItemTypes.TabularSection.AddAttributes.Attribute.Property</field>
-      </choiceParameterLinks>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-  </tabularSections>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="2794538e-dff8-4e70-8001-40c8bf87cbfc">
+    <name>GroupChoiceForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Group choice form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="2e894e48-d26a-4dc9-9423-c448cf3e129a">
+    <name>GroupForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Group form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
   <forms uuid="4ce5a272-3836-468e-859a-4d8f5de19184">
     <name>ItemForm</name>
     <synonym>
@@ -214,33 +241,6 @@
     <synonym>
       <key>en</key>
       <value>List form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="c9aa6d16-b64e-4f6f-a1d5-391765adc9f6">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="2e894e48-d26a-4dc9-9423-c448cf3e129a">
-    <name>GroupForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Group form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="2794538e-dff8-4e70-8001-40c8bf87cbfc">
-    <name>GroupChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Group choice form</value>
     </synonym>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>

@@ -432,5 +432,52 @@ Function GetItemKeyTBAccounts(Period, Company, ItemKey) Export
 	Return Result;
 EndFunction
 
+Function GetTaxTBAccounts(Period, Company, Tax) Export
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	ByTax.Company,
+	|	ByTax.Tax,
+	|	ByTax.Account,
+	|	1 AS Priority
+	|INTO Accounts
+	|FROM
+	|	InformationRegister.TaxTBAccounts.SliceLast(&Period, Company = &Company
+	|	AND Tax = &Tax) AS ByTax
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	ByCompany.Company,
+	|	ByCompany.Tax,
+	|	ByCompany.Account,
+	|	2
+	|FROM
+	|	InformationRegister.TaxTBAccounts.SliceLast(&Period, Company = &Company
+	|	AND Tax.Ref IS NULL) AS ByCompany
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	Accounts.Company,
+	|	Accounts.Tax,
+	|	Accounts.Account,
+	|	Accounts.Priority AS Priority
+	|FROM
+	|	Accounts AS Accounts
+	|ORDER BY
+	|	Priority";
+	Query.SetParameter("Period"      , Period);
+	Query.SetParameter("Company"     , Company);
+	Query.SetParameter("CashAccount" , Tax);
+	QueryResult = Query.Execute();
+	QuerySelection = QueryResult.Select();
+	Result = New Structure("Account", Undefined);
+	If QuerySelection.Next() Then
+		Result.Account = QuerySelection.Account;
+	EndIf;
+	Return Result;
+EndFunction
+
 #EndRegion
 

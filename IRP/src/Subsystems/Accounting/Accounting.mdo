@@ -13,5 +13,6 @@
   <content>ChartOfAccounts.R6010C_Master</content>
   <content>InformationRegister.CompanyLadgerTypes</content>
   <content>AccumulationRegister.T1040T_AccountingAmounts</content>
+  <content>FunctionalOption.UseAccounting</content>
   <subsystems>TrialBallanceAccounts</subsystems>
 </mdclass:Subsystem>

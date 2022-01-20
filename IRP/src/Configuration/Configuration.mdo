@@ -443,6 +443,7 @@
   <functionalOptions>FunctionalOption.UseCompanies</functionalOptions>
   <functionalOptions>FunctionalOption.UseItemKey</functionalOptions>
   <functionalOptions>FunctionalOption.UseLockDataModification</functionalOptions>
+  <functionalOptions>FunctionalOption.UseAccounting</functionalOptions>
   <definedTypes>DefinedType.typeAccountStatementBasises</definedTypes>
   <definedTypes>DefinedType.typeAddPropertyOwners</definedTypes>
   <definedTypes>DefinedType.typeAmount</definedTypes>
@@ -494,6 +495,7 @@
   <constants>Constant.UseItemKey</constants>
   <constants>Constant.UseLockDataModification</constants>
   <constants>Constant.EnableLinkedRowsIntegrity</constants>
+  <constants>Constant.UseAccounting</constants>
   <commonForms>CommonForm.DataMappingForm</commonForms>
   <commonForms>CommonForm.EditAddProperties</commonForms>
   <commonForms>CommonForm.EditDescriptions</commonForms>
@@ -737,6 +739,7 @@
   <informationRegisters>InformationRegister.ItemKeyTBAccounts</informationRegisters>
   <informationRegisters>InformationRegister.PartnerTBAccounts</informationRegisters>
   <informationRegisters>InformationRegister.CashAccountTBAccounts</informationRegisters>
+  <informationRegisters>InformationRegister.TaxTBAccounts</informationRegisters>
   <informationRegisters>InformationRegister.CompanyLadgerTypes</informationRegisters>
   <informationRegisters>InformationRegister.RetailWorkers</informationRegisters>
   <informationRegisters>InformationRegister.LadgerTypeOperations</informationRegisters>

@@ -89,6 +89,13 @@
           <value>7</value>
         </code>
       </content>
+      <content id="d75b04c3-eee9-4726-821b-2984b3e3d799">
+        <name>PurchaseInvoice_Dr_TaxAccount_Cr_PartnerAccount</name>
+        <description>Dr Tax account - Cr Partner account</description>
+        <code xsi:type="core:NumberValue">
+          <value>8</value>
+        </code>
+      </content>
     </items>
   </predefined>
   <editType>InDialog</editType>

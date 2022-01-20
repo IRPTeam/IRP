@@ -43,6 +43,19 @@
     <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
   </resources>
+  <resources uuid="f7c02917-f051-4956-b754-13117670740e">
+    <name>TaxAmount</name>
+    <synonym>
+      <key>en</key>
+      <value>Tax amount</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeAmount</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+  </resources>
   <attributes uuid="993d0d55-3bed-4827-9b07-70608ec7a544">
     <name>DeferredCalculation</name>
     <synonym>

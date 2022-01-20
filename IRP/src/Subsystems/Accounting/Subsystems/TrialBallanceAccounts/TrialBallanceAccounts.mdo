@@ -10,5 +10,6 @@
   <content>InformationRegister.ItemKeyTBAccounts</content>
   <content>InformationRegister.PartnerTBAccounts</content>
   <content>InformationRegister.CashAccountTBAccounts</content>
+  <content>InformationRegister.TaxTBAccounts</content>
   <parentSubsystem>Subsystem.Accounting</parentSubsystem>
 </mdclass:Subsystem>

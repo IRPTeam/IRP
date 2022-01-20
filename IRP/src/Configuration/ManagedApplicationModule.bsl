@@ -29,6 +29,10 @@ Procedure OnStart()
 	ClientApplication.SetCaption(ServiceSystemClient.GetProgramTitle());
 EndProcedure
 
+// Before start.
+// 
+// Parameters:
+//  Cancel - Boolean - Cancel
 Procedure BeforeStart(Cancel)
 	
 	AreaStatus = SaasClient.CurrentAreaStatus();

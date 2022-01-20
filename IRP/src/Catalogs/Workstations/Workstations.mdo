@@ -135,6 +135,43 @@
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
   </tabularSections>
+  <tabularSections uuid="e0bffc68-3ffe-4e5a-8c78-b315c5f50bb8">
+    <producedTypes>
+      <objectType typeId="2f371810-18ed-4f71-8a3c-feb41095e89f" valueTypeId="876d2017-18d6-4c04-917a-fcef858f9467"/>
+      <rowType typeId="719f8885-ac16-4bbe-ae0b-8ca130f38be6" valueTypeId="0bb938ef-6d95-4541-8056-f32a1b571ee4"/>
+    </producedTypes>
+    <name>HardwareList</name>
+    <synonym>
+      <key>en</key>
+      <value>Hardware list</value>
+    </synonym>
+    <attributes uuid="c0d471b2-b430-4a4c-9129-4ac443c1fe75">
+      <name>Enable</name>
+      <synonym>
+        <key>en</key>
+        <value>Enable</value>
+      </synonym>
+      <type>
+        <types>Boolean</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="e9a80a0d-c063-4f98-8b5f-a0f395724d7a">
+      <name>Hardware</name>
+      <synonym>
+        <key>en</key>
+        <value>Hardware</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.Hardware</types>
+      </type>
+      <createOnInput>Use</createOnInput>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
   <forms uuid="3789fe9d-01a1-476a-9ec5-fefcf41da73b">
     <name>ChoiceForm</name>
     <synonym>

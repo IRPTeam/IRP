@@ -104,21 +104,6 @@
     <fillChecking>ShowError</fillChecking>
     <fillValue xsi:type="core:UndefinedValue"/>
   </attributes>
-  <attributes uuid="2215cdc3-fcfc-40e0-83a2-153654cd1ac6">
-    <name>Workstation</name>
-    <synonym>
-      <key>en</key>
-      <value>Workstation</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Workstations</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
   <tabularSections uuid="a61c23c7-1d5e-487d-a975-4c9f0c2d0859">
     <producedTypes>
       <objectType typeId="deac1086-01d0-417d-918f-30fda2b3814a" valueTypeId="6a71605f-f849-4b9e-b828-42624919f841"/>

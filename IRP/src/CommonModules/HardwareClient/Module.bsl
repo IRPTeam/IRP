@@ -1,3 +1,4 @@
+
 #Region Internal
 
 Function GetDefaultSettings(EquipmentType) Export
@@ -135,13 +136,10 @@ Procedure BeginStartAdditionalCommand_End(DriverObject, CommandParameters) Expor
 	EndIf;
 EndProcedure
 
-Procedure BeginConnectEquipment(HardwareParameters) Export
+Procedure BeginConnectEquipment(Workstation) Export
 
-	ConnectionNotify = Undefined;
-	HardwareParameters.Property("ConnectionNotify", ConnectionNotify);
-	Workstation = HardwareParameters.Workstation;
-	EquipmentType = HardwareParameters.EquipmentType;
-	HardwareList = HardwareServer.GetWorkstationHardwareByEquipmentType(Workstation, EquipmentType);
+	ConnectionNotify = New NotifyDescription("ConnectHardware_End", ThisObject);
+	HardwareList = HardwareServer.GetAllWorkstationHardwareList(Workstation);
 
 	For Each Hardware In HardwareList Do
 		DriverObject = Undefined;
@@ -220,5 +218,13 @@ EndFunction
 Function GetProcessingModule(EquipmentType)
 	Return Undefined;
 EndFunction
+
+Procedure ConnectHardware_End(Result, Param) Export
+	If Result.Result Then
+		Status(R().Eq_004);
+	Else
+		Status(R().Eq_005);
+	EndIf;
+EndProcedure
 
 #EndRegion

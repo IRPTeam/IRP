@@ -1,6 +1,7 @@
 // @strict-types
 
 Var globalEquipments Export; // see NewEquipments
+Var globalWorkstation Export; // CatalogRef.Workstations
 
 Procedure OnStart()
 	isMobile = False;
@@ -24,9 +25,12 @@ Procedure OnStart()
 
 	ServiceSystemClient.SetSessionParameter("isMobile", isMobile);
 	ServiceSystemClient.SetSessionParameter("ClientType", ClientType);
-	ServiceSystemClient.SetSessionParameter("Workstation", WorkstationClient.GetCurrentWorkstation());
+	globalWorkstation = WorkstationClient.GetCurrentWorkstation();
+	ServiceSystemClient.SetSessionParameter("Workstation", globalWorkstation);
 
 	ClientApplication.SetCaption(ServiceSystemClient.GetProgramTitle());
+	
+	AttachIdleHandler("ConnectAllEquipments", 0.1, True);
 EndProcedure
 
 // Before start.
@@ -45,6 +49,14 @@ Procedure BeforeStart(Cancel)
 
 EndProcedure
 
+
+
+#Region Hardware
+
+Procedure ConnectAllEquipments() Export
+	HardwareClient.BeginConnectEquipment(globalWorkstation);
+EndProcedure
+
 // New equipments.
 // 
 // Returns:
@@ -57,3 +69,5 @@ Function NewEquipments()
 	globalEquipments.Insert("ConnectionSettings", New Array());
 	Return globalEquipments;
 EndFunction
+
+#EndRegion

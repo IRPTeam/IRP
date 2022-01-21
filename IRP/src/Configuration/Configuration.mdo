@@ -390,6 +390,10 @@
   <commonModules>CommonModule.WorkstationServer</commonModules>
   <commonModules>CommonModule.MoneyDocumentsServer</commonModules>
   <commonModules>CommonModule.AdvancesRelevanceServer</commonModules>
+  <commonModules>CommonModule.LandedCostServer</commonModules>
+  <commonModules>CommonModule.DocAdditionalCostAllocationClient</commonModules>
+  <commonModules>CommonModule.DocAdditionalCostAllocationServer</commonModules>
+  <commonModules>CommonModule.DocAdditionalCostAllocationClientServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>
@@ -629,6 +633,8 @@
   <documents>Document.StockAdjustmentAsWriteOff</documents>
   <documents>Document.Unbundling</documents>
   <documents>Document.VendorsAdvancesClosing</documents>
+  <documents>Document.CalculationMovementCosts</documents>
+  <documents>Document.AdditionalCostAllocation</documents>
   <documentJournals>DocumentJournal.DocumentsForIncomingPayment</documentJournals>
   <documentJournals>DocumentJournal.DocumentsForOutgoingPayment</documentJournals>
   <documentJournals>DocumentJournal.AllDocuments</documentJournals>

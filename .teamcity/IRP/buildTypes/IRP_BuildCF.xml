@@ -87,6 +87,15 @@ find /c "completed successfully" %env.LogFile1C% && ( echo Success ) || ( echo "
           <param name="withBuildAnchor" value="false" />
         </parameters>
       </extension>
+      <extension id="BUILD_EXT_39" type="BuildFailureOnMessage">
+        <parameters>
+          <param name="buildFailureOnMessage.conditionType" value="contains" />
+          <param name="buildFailureOnMessage.messagePattern" value="com._1c.g5.wiring.ServiceUnavailableException" />
+          <param name="buildFailureOnMessage.outputText" value="com._1c.g5.wiring.ServiceUnavailableException" />
+          <param name="buildFailureOnMessage.reverse" value="false" />
+          <param name="buildFailureOnMessage.stopBuildOnFailure" value="true" />
+        </parameters>
+      </extension>
     </build-extensions>
     <cleanup />
   </settings>

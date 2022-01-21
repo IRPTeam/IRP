@@ -182,6 +182,8 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R4011B_FreeStocks());
 	QueryArray.Add(R4010B_ActualStocks());
 	QueryArray.Add(BundleContents());
+	QueryArray.Add(T6010S_BatchesInfo());
+	QueryArray.Add(T6020S_BatchKeysInfo());
 	Return QueryArray;
 EndFunction
 
@@ -286,3 +288,58 @@ Function R4010B_ActualStocks()
 		   |WHERE
 		   |	TRUE";
 EndFunction
+
+Function T6010S_BatchesInfo()
+	Return
+	"SELECT
+	|	Header.Period,
+	|	Header.Ref AS Document,
+	|	Header.Company
+	|INTO T6010S_BatchesInfo
+	|FROM
+	|	Header AS Header
+	|WHERE 
+	|	TRUE";
+EndFunction
+
+Function T6020S_BatchKeysInfo()
+	Return
+	"SELECT
+	|	VALUE(Enum.BatchDirection.Receipt) AS Direction,
+	|	Header.Period,
+	|	Header.Company,
+	|	Header.Store,
+	|	Header.ItemKey,
+	|	SUM(Header.Quantity) AS Quantity
+	|INTO T6020S_BatchKeysInfo
+	|FROM
+	|	Header AS Header
+	|WHERE
+	|	TRUE
+	|GROUP BY
+	|	VALUE(Enum.BatchDirection.Receipt),
+	|	Header.Period,
+	|	Header.Company,
+	|	Header.Store,
+	|	Header.ItemKey
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	VALUE(Enum.BatchDirection.Expense),
+	|	ItemList.Period,
+	|	ItemList.Company,
+	|	ItemList.Store,
+	|	ItemList.ItemKey,
+	|	SUM(ItemList.Quantity) AS Quantity
+	|FROM
+	|	ItemList AS ItemList
+	|WHERE
+	|	TRUE
+	|GROUP BY
+	|	VALUE(Enum.BatchDirection.Expense),
+	|	ItemList.Period,
+	|	ItemList.Company,
+	|	ItemList.Store,
+	|	ItemList.ItemKey";
+EndFunction	

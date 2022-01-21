@@ -159,6 +159,8 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R4050B_StockInventory());
 	QueryArray.Add(R4051T_StockAdjustmentAsWriteOff());
 	QueryArray.Add(R4052T_StockAdjustmentAsSurplus());
+	QueryArray.Add(T6010S_BatchesInfo());
+	QueryArray.Add(T6020S_BatchKeysInfo());
 	Return QueryArray;
 EndFunction
 
@@ -289,6 +291,49 @@ Function R4052T_StockAdjustmentAsSurplus()
 		   |	ItemList AS QueryTable
 		   |WHERE True";
 
+EndFunction
+
+Function T6010S_BatchesInfo()
+	Return
+		"SELECT
+		|	ItemList.Period,
+		|	ItemList.Company,
+		|	ItemList.Ref AS Document
+		|INTO T6010S_BatchesInfo
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	TRUE";
+EndFunction
+
+Function T6020S_BatchKeysInfo()
+	Return
+		"SELECT
+		|	ItemList.Period,
+		|	VALUE(Enum.BatchDirection.Receipt) AS Direction,
+		|	ItemList.Company,
+		|	ItemList.Store,
+		|	ItemList.ItemKey,
+		|	ItemList.Quantity
+		|INTO T6020S_BatchKeysInfo
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	TRUE
+		|
+		|UNION ALL
+		|
+		|SELECT
+		|	ItemList.Period,
+		|	VALUE(Enum.BatchDirection.Expense),
+		|	ItemList.Company,
+		|	ItemList.Store,
+		|	ItemList.ItemKeyWriteOff,
+		|	ItemList.Quantity
+		|FROM
+		|	ItemList AS ItemList
+		|WHERE
+		|	TRUE";
 EndFunction
 
 #EndRegion

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="3dfe86f7-6d6b-4c26-9d54-498d7349ca7c">
+  <producedTypes>
+    <objectType typeId="27069a75-74eb-46e6-a1a5-320390475f19" valueTypeId="c7410545-5e7c-4f54-807d-93f75aec352e"/>
+    <refType typeId="9bc87e6a-412b-4cfe-b38d-d61b049aa51b" valueTypeId="a6ba6d1b-8c6b-4109-8c6c-e89e52cd0d81"/>
+    <selectionType typeId="1cabf350-a54f-47c8-90b0-684659a5e150" valueTypeId="67b44882-1b19-4de2-b2f7-dad3aec70538"/>
+    <listType typeId="6e9398ae-ff91-4423-b842-88fd3619105a" valueTypeId="d63826fa-0724-4c78-af1d-810725bc804d"/>
+    <managerType typeId="7e87d51b-77ff-4add-b281-5486f54abbe9" valueTypeId="b76caba2-754d-49bf-a051-9cc25585d764"/>
+  </producedTypes>
+  <name>Batches</name>
+  <synonym>
+    <key>en</key>
+    <value>Batches</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <inputByString>Catalog.Batches.StandardAttribute.Code</inputByString>
+  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+  <createOnInput>Use</createOnInput>
+  <dataLockControlMode>Managed</dataLockControlMode>
+  <fullTextSearch>Use</fullTextSearch>
+  <levelCount>2</levelCount>
+  <foldersOnTop>true</foldersOnTop>
+  <codeLength>12</codeLength>
+  <codeAllowedLength>Variable</codeAllowedLength>
+  <checkUnique>true</checkUnique>
+  <autonumbering>true</autonumbering>
+  <defaultPresentation>AsDescription</defaultPresentation>
+  <editType>InDialog</editType>
+  <choiceMode>BothWays</choiceMode>
+  <attributes uuid="e69b1270-255d-4a7b-a709-49bc3fbc5a5f">
+    <name>Document</name>
+    <synonym>
+      <key>en</key>
+      <value>Document</value>
+    </synonym>
+    <type>
+      <types>DefinedType.typeBatchDocuments</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="fc0f6502-e295-4a42-b751-5a727659e20a">
+    <name>Company</name>
+    <synonym>
+      <key>en</key>
+      <value>Company</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Companies</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="8a3c41ac-a289-48b0-b21d-958db893d795">
+    <name>Date</name>
+    <synonym>
+      <key>en</key>
+      <value>Date</value>
+    </synonym>
+    <type>
+      <types>Date</types>
+      <dateQualifiers/>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+</mdclass:Catalog>

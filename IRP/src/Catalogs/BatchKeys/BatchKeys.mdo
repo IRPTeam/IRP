@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:Catalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="888fa6a9-8bbf-46f7-b64e-d58e42853797">
+  <producedTypes>
+    <objectType typeId="9e640bc7-2f0e-4ef6-b1ce-7716185b35f5" valueTypeId="96f0300b-6816-4ec0-95b7-c0c13b6cc66f"/>
+    <refType typeId="d5bdc015-19de-4655-948c-a83c4d6a592b" valueTypeId="c90428e5-a140-419b-878b-4e47c3a0ccff"/>
+    <selectionType typeId="5a4ee654-73a3-4ec7-b451-11301dacd780" valueTypeId="853f8ca6-66a8-484b-b1fb-4fc6a263e9ba"/>
+    <listType typeId="7aa062f1-dc43-40c9-b434-2da86b26cedd" valueTypeId="15aff895-b96c-4e59-b308-b9427a1917e0"/>
+    <managerType typeId="afeb6332-61dd-46c3-a42d-8d1d08e7256a" valueTypeId="520da957-db1a-4bc7-b269-e8098bd7f8bc"/>
+  </producedTypes>
+  <name>BatchKeys</name>
+  <synonym>
+    <key>en</key>
+    <value>Batch keys</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <inputByString>Catalog.BatchKeys.StandardAttribute.Code</inputByString>
+  <inputByString>Catalog.BatchKeys.StandardAttribute.Description</inputByString>
+  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+  <createOnInput>Use</createOnInput>
+  <dataLockControlMode>Managed</dataLockControlMode>
+  <fullTextSearch>Use</fullTextSearch>
+  <levelCount>2</levelCount>
+  <foldersOnTop>true</foldersOnTop>
+  <codeLength>12</codeLength>
+  <codeAllowedLength>Variable</codeAllowedLength>
+  <checkUnique>true</checkUnique>
+  <autonumbering>true</autonumbering>
+  <defaultPresentation>AsDescription</defaultPresentation>
+  <editType>InDialog</editType>
+  <choiceMode>BothWays</choiceMode>
+  <attributes uuid="1d5f76c6-28cc-40bd-812e-adacad495e2d">
+    <name>ItemKey</name>
+    <synonym>
+      <key>en</key>
+      <value>Item key</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.ItemKeys</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="c1c39689-93e3-492e-ac7a-5894269395c5">
+    <name>Store</name>
+    <synonym>
+      <key>en</key>
+      <value>Store</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Stores</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+</mdclass:Catalog>

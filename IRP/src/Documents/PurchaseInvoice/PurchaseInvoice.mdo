@@ -589,6 +589,20 @@
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
+    <attributes uuid="167c9d0c-ffee-4d75-9033-398dc34c49de">
+      <name>IsAdditionalItemCost</name>
+      <synonym>
+        <key>en</key>
+        <value>Is additional item cost</value>
+      </synonym>
+      <type>
+        <types>Boolean</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
   </tabularSections>
   <tabularSections uuid="ac00141f-4b12-42db-89ae-027748ad95d2">
     <producedTypes>

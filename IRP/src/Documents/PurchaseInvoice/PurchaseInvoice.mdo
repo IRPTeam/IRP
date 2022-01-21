@@ -92,6 +92,11 @@
   <registerRecords>AccumulationRegister.R1011B_PurchaseOrdersReceipt</registerRecords>
   <registerRecords>InformationRegister.T3010S_RowIDInfo</registerRecords>
   <registerRecords>InformationRegister.T2015S_TransactionsInfo</registerRecords>
+  <registerRecords>InformationRegister.T6010S_BatchesInfo</registerRecords>
+  <registerRecords>InformationRegister.T6020S_BatchKeysInfo</registerRecords>
+  <registerRecords>AccumulationRegister.R6020B_BatchBalance</registerRecords>
+  <registerRecords>AccumulationRegister.R6060T_CostOfGoodsSold</registerRecords>
+  <registerRecords>AccumulationRegister.R6070T_OtherPeriodsExpenses</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>

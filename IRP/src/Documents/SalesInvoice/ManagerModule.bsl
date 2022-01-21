@@ -18,6 +18,15 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Tables.Insert("CustomersTransactions", PostingServer.GetQueryTableByName("CustomersTransactions", Parameters));
 #EndRegion
 
+	BatchKeysInfoMetadata = Parameters.Object.RegisterRecords.T6020S_BatchKeysInfo.Metadata();
+	If Parameters.Property("MultiCurrencyExcludePostingDataTables") Then
+		Parameters.MultiCurrencyExcludePostingDataTables.Add(BatchKeysInfoMetadata);
+	Else
+		ArrayOfMultiCurrencyExcludePostingDataTables = New Array();
+		ArrayOfMultiCurrencyExcludePostingDataTables.Add(BatchKeysInfoMetadata);
+		Parameters.Insert("MultiCurrencyExcludePostingDataTables", ArrayOfMultiCurrencyExcludePostingDataTables);
+	EndIf;
+
 	Return Tables;
 EndFunction
 
@@ -165,6 +174,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R5021T_Revenues());
 	QueryArray.Add(T3010S_RowIDInfo());
 	QueryArray.Add(T2015S_TransactionsInfo());
+	QueryArray.Add(T6020S_BatchKeysInfo());
 	Return QueryArray;
 EndFunction
 
@@ -885,6 +895,28 @@ Function T2015S_TransactionsInfo()
 	|	ItemList.Agreement,
 	|	ItemList.SalesOrder,
 	|	ItemList.Basis";
+EndFunction
+
+Function T6020S_BatchKeysInfo()
+	Return
+	"SELECT
+	|	ItemList.ItemKey,
+	|	ItemList.Store,
+	|	ItemList.Ref.Company AS Company,
+	|	SUM(ItemList.QuantityInBaseUnit) AS Quantity,
+	|	ItemList.Ref.Date AS Period,
+	|	VALUE(Enum.BatchDirection.Expense) AS Direction
+	|INTO T6020S_BatchKeysInfo
+	|FROM
+	|	ItemList AS ItemList
+	|WHERE
+	|	ItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Product)
+	|GROUP BY
+	|	ItemList.ItemKey,
+	|	ItemList.Store,
+	|	ItemList.Ref.Company,
+	|	ItemList.Ref.Date,
+	|	VALUE(Enum.BatchDirection.Expense)";
 EndFunction
 
 #EndRegion

@@ -136,7 +136,7 @@ Procedure BeginStartAdditionalCommand_End(DriverObject, CommandParameters) Expor
 	EndIf;
 EndProcedure
 
-Procedure BeginConnectEquipment(Workstation) Export
+Async Procedure BeginConnectEquipment(Workstation) Export
 
 	ConnectionNotify = New NotifyDescription("ConnectHardware_End", ThisObject);
 	HardwareList = HardwareServer.GetAllWorkstationHardwareList(Workstation);
@@ -149,7 +149,16 @@ Procedure BeginConnectEquipment(Workstation) Export
 		If ConnectedDevice = Undefined Then
 			ProcessingModule = GetProcessingModule(Device.EquipmentType);
 
-			DriverObject = GetDriverObject(Device);
+			DriverObject = Await GetDriverObject(Device);
+			
+			If DriverObject = Undefined Then
+				ErrorDescription = StrTemplate(R().Eq_007, Hardware);
+				ResultData = New Structure("Result, ErrorDescription, ConnectParameters", False, ErrorDescription,
+					Device.ConnectParameters);
+				ExecuteNotifyProcessing(ConnectionNotify, ResultData);
+				Continue;
+			EndIf;
+			
 			OutParameters = Undefined;
 			Result = ProcessingModule.ConnectDevice(DriverObject, Device.ConnectParameters, OutParameters);
 
@@ -164,14 +173,14 @@ Procedure BeginConnectEquipment(Workstation) Export
 			ConnectParameters = globalEquipments.ConnectionSettings;
 			ConnectParameters.Add(Device);
 
-			If ConnectionNotify <> Undefined Then
+			If DriverObject <> Undefined Then
 				ErrorDescription = R().Eq_003;
 				ResultData = New Structure("Result, ErrorDescription, ConnectParameters", Result, ErrorDescription,
 					Device.ConnectParameters);
 				ExecuteNotifyProcessing(ConnectionNotify, ResultData);
 			EndIf;
 		Else
-			If ConnectionNotify <> Undefined Then
+			If DriverObject <> Undefined Then
 				ErrorDescription = R().Eq_003;
 				ResultData = New Structure("Result, ErrorDescription, ConnectParameters", True, ErrorDescription,
 					ConnectedDevice.ConnectParameters);
@@ -185,7 +194,7 @@ EndProcedure
 
 #Region Private
 
-Function GetDriverObject(DriverInfo, ErrorText = Undefined)
+Async Function GetDriverObject(DriverInfo, ErrorText = Undefined)
 	DriverObject = Undefined;
 
 	For Each DriverData Из globalEquipments.Drivers Do
@@ -200,7 +209,7 @@ Function GetDriverObject(DriverInfo, ErrorText = Undefined)
 		ObjectName.Add(ObjectName[1]);
 
 		LinkOnDriver = GetURL(DriverInfo.Driver, "Driver");
-		Result = AttachAddIn(LinkOnDriver, ObjectName[1]);
+		Result = Await AttachAddInAsync(LinkOnDriver, ObjectName[1]);
 
 		If Result Then
 			DriverObject = New (StrConcat(ObjectName, "."));

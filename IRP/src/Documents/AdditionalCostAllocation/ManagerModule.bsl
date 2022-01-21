@@ -46,7 +46,7 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 		EndIf;
 		
 		PostingDataTables = New Map();
-		PostingDataTables.Insert(Parameters.Object.RegisterRecords.LC_OtherPeriodsExpenses,
+		PostingDataTables.Insert(Parameters.Object.RegisterRecords.R6070T_OtherPeriodsExpenses,
 			New Structure("RecordSet, WriteInTransaction", OtherPeriodsExpensesByBasis, Parameters.IsReposting));
 		Parameters.Insert("PostingDataTables", PostingDataTables);
 		
@@ -96,7 +96,7 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 	BatchCostAllocationInfoRecalculated = BatchCostAllocationInfoRecalculated.Copy(New Structure("CurrencyMovementType", CurrencyMovementType));
 	BatchCostAllocationInfoRecalculated.GroupBy("Period, Company, Document, Store, ItemKey, Currency, CurrencyMovementType", 
 	"Amount");	
-	Tables.LC_BatchCostAllocationInfo = BatchCostAllocationInfoRecalculated;
+	Tables.T6060S_BatchCostAllocationInfo = BatchCostAllocationInfoRecalculated;
 	
 	OtherPeriodsExpensesMetadata    = Parameters.Object.RegisterRecords.R6070T_OtherPeriodsExpenses.Metadata();
 	BatchCostAllocationInfoMetadata = Parameters.Object.RegisterRecords.T6060S_BatchCostAllocationInfo.Metadata();

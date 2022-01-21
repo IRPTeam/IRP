@@ -707,7 +707,7 @@ WHERE
 						<dcsset:item xsi:type="dcsset:FilterItemComparison">
 							<dcsset:left xsi:type="dcscor:Field">Batch</dcsset:left>
 							<dcsset:comparisonType>Equal</dcsset:comparisonType>
-							<dcsset:right xsi:type="dcscor:DesignTimeValue">Enum.LC_BatchType.OverBalance</dcsset:right>
+							<dcsset:right xsi:type="dcscor:DesignTimeValue">Enum.BatchType.OverBalance</dcsset:right>
 						</dcsset:item>
 					</dcsset:filter>
 					<dcsset:appearance>

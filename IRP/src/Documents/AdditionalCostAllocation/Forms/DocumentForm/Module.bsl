@@ -258,7 +258,7 @@ Procedure CostRowsBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Parameter)
 	EndDo;
 	FormParameters.Insert("SelectedRows", ArrayOfSelectedRows);
 	
-	OpenForm("Document.LC_AdditionalCostAllocation.Form.FormSelectCostRows",
+	OpenForm("Document.AdditionalCostAllocation.Form.FormSelectCostRows",
 		FormParameters,
 		Item,
 		ThisObject.UUID,
@@ -390,11 +390,11 @@ Function AllocateCostAmmountAtServer()
 		BatchKeyInfoTable = GetBatchKeyInfo(AllocationListTable.Copy(New Structure("BasisRowID", Row_CostList.RowID)));
 		Total = 0;
 		ColumnName = "";
-		If Object.AllocationMethod = Enums.LC_AllocationMethod.ByAmount Then
+		If Object.AllocationMethod = Enums.AllocationMethod.ByAmount Then
 			ColumnName = "Amount";
-		ElsIf Object.AllocationMethod = Enums.LC_AllocationMethod.ByQuantity Then
+		ElsIf Object.AllocationMethod = Enums.AllocationMethod.ByQuantity Then
 			ColumnName = "Quantity";
-		ElsIf Object.AllocationMethod = Enums.LC_AllocationMethod.ByWeight Then
+		ElsIf Object.AllocationMethod = Enums.AllocationMethod.ByWeight Then
 			ColumnName = "Weight";
 		EndIf;
 	
@@ -466,19 +466,19 @@ Function GetBatchKeyInfo(FilterTable)
 	|	FilterTable.Document,
 	|	FilterTable.ItemKey,
 	|	FilterTable.Store,
-	|	SUM(LC_BatchKeysInfo.Amount) AS Amount,
-	|	SUM(LC_BatchKeysInfo.Quantity) AS Quantity,
+	|	SUM(T6020S_BatchKeysInfo.Amount) AS Amount,
+	|	SUM(T6020S_BatchKeysInfo.Quantity) AS Quantity,
 	|	SUM(CASE
-	|		WHEN LC_BatchKeysInfo.ItemKey.Weight <> 0
-	|			THEN LC_BatchKeysInfo.ItemKey.Weight
-	|		ELSE LC_BatchKeysInfo.ItemKey.Item.Weight
+	|		WHEN T6020S_BatchKeysInfo.ItemKey.Weight <> 0
+	|			THEN T6020S_BatchKeysInfo.ItemKey.Weight
+	|		ELSE T6020S_BatchKeysInfo.ItemKey.Item.Weight
 	|	END) AS Weight
 	|FROM
 	|	FilterTable AS FilterTable
-	|		INNER JOIN InformationRegister.LC_BatchKeysInfo AS LC_BatchKeysInfo
-	|		ON FilterTable.Document = LC_BatchKeysInfo.Recorder
-	|		AND FilterTable.Store = LC_BatchKeysInfo.Store
-	|		AND FilterTable.ItemKey = LC_BatchKeysInfo.ItemKey
+	|		INNER JOIN InformationRegister.T6020S_BatchKeysInfo AS T6020S_BatchKeysInfo
+	|		ON FilterTable.Document = T6020S_BatchKeysInfo.Recorder
+	|		AND FilterTable.Store = T6020S_BatchKeysInfo.Store
+	|		AND FilterTable.ItemKey = T6020S_BatchKeysInfo.ItemKey
 	|GROUP BY
 	|	FilterTable.Document,
 	|	FilterTable.ItemKey,
@@ -542,7 +542,7 @@ Procedure AllocationDocumentsDocumentStartChoice(Item, ChoiceData, StandardProce
 	FormParameters = New Structure();
 	FormParameters.Insert("Company" , Object.Company);
 
-	OpenForm("Document.LC_AdditionalCostAllocation.Form.FormSelectAllocationDocument",
+	OpenForm("Document.AdditionalCostAllocation.Form.FormSelectAllocationDocument",
 		FormParameters,
 		Item,
 		ThisObject.UUID,

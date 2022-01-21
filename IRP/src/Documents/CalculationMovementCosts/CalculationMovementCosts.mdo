@@ -26,11 +26,6 @@
   <defaultListForm>Document.CalculationMovementCosts.Form.ListForm</defaultListForm>
   <realTimePosting>Deny</realTimePosting>
   <registerRecordsDeletion>AutoDelete</registerRecordsDeletion>
-  <registerRecords>AccumulationRegister.LC_BatchWiseBalance</registerRecords>
-  <registerRecords>AccumulationRegister.LC_BatchShortageOutgoing</registerRecords>
-  <registerRecords>AccumulationRegister.LC_BatchShortageIncoming</registerRecords>
-  <registerRecords>AccumulationRegister.LC_SalesBatches</registerRecords>
-  <registerRecords>InformationRegister.LC_BundleAmountValues</registerRecords>
   <registerRecords>InformationRegister.T6040S_BundleAmountValues</registerRecords>
   <registerRecords>AccumulationRegister.R6010B_BatchWiseBalance</registerRecords>
   <registerRecords>AccumulationRegister.R6030T_BatchShortageOutgoing</registerRecords>

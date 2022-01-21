@@ -1,22 +1,4 @@
 
-//Function GetTypeDescriptionDocument()
-//	ArrayOfTypesDocument = New Array();
-//	ArrayOfTypesDocument.Add(Type("DocumentRef.PurchaseInvoice"));
-//	ArrayOfTypesDocument.Add(Type("DocumentRef.SalesInvoice"));
-//	ArrayOfTypesDocument.Add(Type("DocumentRef.InventoryTransfer"));
-//	ArrayOfTypesDocument.Add(Type("DocumentRef.Bundling"));
-//	ArrayOfTypesDocument.Add(Type("DocumentRef.OpeningEntry"));
-//	ArrayOfTypesDocument.Add(Type("DocumentRef.StockAdjustmentAsSurplus"));
-//	ArrayOfTypesDocument.Add(Type("DocumentRef.StockAdjustmentAsWriteOff"));
-//	ArrayOfTypesDocument.Add(Type("DocumentRef.PurchaseReturn"));
-//	ArrayOfTypesDocument.Add(Type("DocumentRef.SalesReturn"));
-//	ArrayOfTypesDocument.Add(Type("DocumentRef.Unbundling"));
-//	ArrayOfTypesDocument.Add(Type("DocumentRef.RetailSalesReceipt"));
-//	ArrayOfTypesDocument.Add(Type("DocumentRef.RetailReturnReceipt"));
-//	ArrayOfTypesDocument.Add(Type("DocumentRef.ItemStockAdjustment"));
-//	Return New TypeDescription(ArrayOfTypesDocument);		
-//EndFunction
-
 Function CreateTable_BatchWiseBalance()	
 	Table = New ValueTable();
 	Table.Columns.Add("Batch"    , New TypeDescription("CatalogRef.Batches"));
@@ -30,14 +12,14 @@ Function CreateTable_BatchWiseBalance()
 EndFunction
 
 Procedure LockTables(LocksStorage)
-	// Set lock for table Catalog.LC_Batches
+	// Set lock for table Catalog.Batches
 	DataLock_Batches = New DataLock();
 	ItemLock_Batches = DataLock_Batches.Add("Catalog.Batches");
 	ItemLock_Batches.Mode = DataLockMode.Exclusive;
 	DataLock_Batches.Lock();
 	LocksStorage.Add(DataLock_Batches);
 	
-	// Set lock for table Catalog.LC_BatchKeys
+	// Set lock for table Catalog.BatchKeys
 	DataLock_BatchKeys = New DataLock();
 	ItemLock_BatchKeys = DataLock_Batches.Add("Catalog.BatchKeys");
 	ItemLock_BatchKeys.Mode = DataLockMode.Exclusive;

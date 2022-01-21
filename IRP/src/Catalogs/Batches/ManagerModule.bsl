@@ -13,33 +13,34 @@ Procedure Create_Batches(Company, BeginPeriod, EndPeriod) Export
 	Query = New Query;
 	Query.Text =
 	"SELECT
-	|	LC_BatchesInfo.Company,
-	|	LC_BatchesInfo.Document,
-	|	LC_BatchesInfo.Period AS Date
+	|	T6010S_BatchesInfo.Company,
+	|	T6010S_BatchesInfo.Document,
+	|	T6010S_BatchesInfo.Period AS Date
 	|INTO tmp
 	|FROM
-	|	InformationRegister.LC_BatchesInfo AS LC_BatchesInfo
+	|	InformationRegister.T6010S_BatchesInfo AS T6010S_BatchesInfo
 	|WHERE
-	|	LC_BatchesInfo.Company = &Company
-	|	AND LC_BatchesInfo.Period BETWEEN BEGINOFPERIOD(&BeginPeriod, DAY) AND ENDOFPERIOD(&EndPeriod, DAY)
+	|	T6010S_BatchesInfo.Company = &Company
+	|	AND T6010S_BatchesInfo.Period BETWEEN BEGINOFPERIOD(&BeginPeriod, DAY) AND ENDOFPERIOD(&EndPeriod, DAY)
 	|;
+	|
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
 	|	tmp.Company,
 	|	tmp.Document,
 	|	tmp.Date,
-	|	LC_Batches.Ref AS Ref,
-	|	LC_Batches.Date AS OldDate
+	|	Batches.Ref AS Ref,
+	|	Batches.Date AS OldDate
 	|FROM
 	|	tmp AS tmp
-	|		LEFT JOIN Catalog.LC_Batches AS LC_Batches
-	|		ON tmp.Company = LC_Batches.Company
-	|		AND tmp.Document = LC_Batches.Document
-	|		AND NOT LC_Batches.DeletionMark
+	|		LEFT JOIN Catalog.Batches AS Batches
+	|		ON tmp.Company = Batches.Company
+	|		AND tmp.Document = Batches.Document
+	|		AND NOT Batches.DeletionMark
 	|WHERE
-	|	LC_Batches.Ref IS NULL
-	|	OR LC_Batches.Date <> tmp.Date";
+	|	Batches.Ref IS NULL
+	|	OR Batches.Date <> tmp.Date";
 	Query.SetParameter("Company", Company);
 	Query.SetParameter("BeginPeriod", BeginPeriod);
 	Query.SetParameter("EndPeriod", EndPeriod);
@@ -53,7 +54,7 @@ Procedure Create_Batches(Company, BeginPeriod, EndPeriod) Export
 				ObjBatch.Write();
 			EndIf;
 		Else
-			NewBatch = Catalogs.LC_Batches.CreateItem();
+			NewBatch = Catalogs.Batches.CreateItem();
 			NewBatch.Document = QuerySelection.Document;
 			NewBatch.Company = QuerySelection.Company;
 			NewBatch.Date = QuerySelection.Date;

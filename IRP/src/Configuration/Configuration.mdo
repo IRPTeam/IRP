@@ -694,6 +694,8 @@
   <reports>Report.D4011_FreeStocks</reports>
   <reports>Report.D4012_StockReservation</reports>
   <reports>Report.OffsetOfAdvances</reports>
+  <reports>Report.BatchBalance</reports>
+  <reports>Report.BatchBalanceSimple</reports>
   <dataProcessors>DataProcessor.AnaliseDocumentMovements</dataProcessors>
   <dataProcessors>DataProcessor.DataHistory</dataProcessors>
   <dataProcessors>DataProcessor.MobileDesktop</dataProcessors>

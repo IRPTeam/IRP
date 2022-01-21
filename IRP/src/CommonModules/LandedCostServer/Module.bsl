@@ -1,48 +1,48 @@
 
-Function GetTypeDescriptionDocument()
-	ArrayOfTypesDocument = New Array();
-	ArrayOfTypesDocument.Add(Type("DocumentRef.PurchaseInvoice"));
-	ArrayOfTypesDocument.Add(Type("DocumentRef.SalesInvoice"));
-	ArrayOfTypesDocument.Add(Type("DocumentRef.InventoryTransfer"));
-	ArrayOfTypesDocument.Add(Type("DocumentRef.Bundling"));
-	ArrayOfTypesDocument.Add(Type("DocumentRef.OpeningEntry"));
-	ArrayOfTypesDocument.Add(Type("DocumentRef.StockAdjustmentAsSurplus"));
-	ArrayOfTypesDocument.Add(Type("DocumentRef.StockAdjustmentAsWriteOff"));
-	ArrayOfTypesDocument.Add(Type("DocumentRef.PurchaseReturn"));
-	ArrayOfTypesDocument.Add(Type("DocumentRef.SalesReturn"));
-	ArrayOfTypesDocument.Add(Type("DocumentRef.Unbundling"));
-	ArrayOfTypesDocument.Add(Type("DocumentRef.RetailSalesReceipt"));
-	ArrayOfTypesDocument.Add(Type("DocumentRef.RetailReturnReceipt"));
-	ArrayOfTypesDocument.Add(Type("DocumentRef.ItemStockAdjustment"));
-	Return New TypeDescription(ArrayOfTypesDocument);		
-EndFunction
+//Function GetTypeDescriptionDocument()
+//	ArrayOfTypesDocument = New Array();
+//	ArrayOfTypesDocument.Add(Type("DocumentRef.PurchaseInvoice"));
+//	ArrayOfTypesDocument.Add(Type("DocumentRef.SalesInvoice"));
+//	ArrayOfTypesDocument.Add(Type("DocumentRef.InventoryTransfer"));
+//	ArrayOfTypesDocument.Add(Type("DocumentRef.Bundling"));
+//	ArrayOfTypesDocument.Add(Type("DocumentRef.OpeningEntry"));
+//	ArrayOfTypesDocument.Add(Type("DocumentRef.StockAdjustmentAsSurplus"));
+//	ArrayOfTypesDocument.Add(Type("DocumentRef.StockAdjustmentAsWriteOff"));
+//	ArrayOfTypesDocument.Add(Type("DocumentRef.PurchaseReturn"));
+//	ArrayOfTypesDocument.Add(Type("DocumentRef.SalesReturn"));
+//	ArrayOfTypesDocument.Add(Type("DocumentRef.Unbundling"));
+//	ArrayOfTypesDocument.Add(Type("DocumentRef.RetailSalesReceipt"));
+//	ArrayOfTypesDocument.Add(Type("DocumentRef.RetailReturnReceipt"));
+//	ArrayOfTypesDocument.Add(Type("DocumentRef.ItemStockAdjustment"));
+//	Return New TypeDescription(ArrayOfTypesDocument);		
+//EndFunction
 
 Function CreateTable_BatchWiseBalance()	
 	Table = New ValueTable();
-	Table.Columns.Add("Batch"    , New TypeDescription("CatalogRef.LC_Batches"));
-	Table.Columns.Add("BatchKey" , New TypeDescription("CatalogRef.LC_BatchKeys"));
-	Table.Columns.Add("Document" , GetTypeDescriptionDocument());
+	Table.Columns.Add("Batch"    , New TypeDescription("CatalogRef.Batches"));
+	Table.Columns.Add("BatchKey" , New TypeDescription("CatalogRef.BatchKeys"));
+	Table.Columns.Add("Document" , Metadata.DefinedTypes.typeBatchDocuments.Type);
 	Table.Columns.Add("Company"  , New TypeDescription("CatalogRef.Companies"));
-	Table.Columns.Add("Period"   , Metadata.AccumulationRegisters.LC_BatchWiseBalance.StandardAttributes.Period.Type);
-	Table.Columns.Add("Quantity" , Metadata.AccumulationRegisters.LC_BatchWiseBalance.Resources.Quantity.Type);
-	Table.Columns.Add("Amount"   , Metadata.AccumulationRegisters.LC_BatchWiseBalance.Resources.Quantity.Type);
+	Table.Columns.Add("Period"   , Metadata.AccumulationRegisters.R6010B_BatchWiseBalance.StandardAttributes.Period.Type);
+	Table.Columns.Add("Quantity" , Metadata.AccumulationRegisters.R6010B_BatchWiseBalance.Resources.Quantity.Type);
+	Table.Columns.Add("Amount"   , Metadata.AccumulationRegisters.R6010B_BatchWiseBalance.Resources.Quantity.Type);
 	Return Table;
 EndFunction
 
 Procedure LockTables(LocksStorage)
 	// Set lock for table Catalog.LC_Batches
-	DataLock_LC_Batches = New DataLock();
-	ItemLock_LC_Batches = DataLock_LC_Batches.Add("Catalog.LC_Batches");
-	ItemLock_LC_Batches.Mode = DataLockMode.Exclusive;
-	DataLock_LC_Batches.Lock();
-	LocksStorage.Add(DataLock_LC_Batches);
+	DataLock_Batches = New DataLock();
+	ItemLock_Batches = DataLock_Batches.Add("Catalog.Batches");
+	ItemLock_Batches.Mode = DataLockMode.Exclusive;
+	DataLock_Batches.Lock();
+	LocksStorage.Add(DataLock_Batches);
 	
 	// Set lock for table Catalog.LC_BatchKeys
-	DataLock_LC_BatchKeys = New DataLock();
-	ItemLock_LC_BatchKeys = DataLock_LC_Batches.Add("Catalog.LC_BatchKeys");
-	ItemLock_LC_BatchKeys.Mode = DataLockMode.Exclusive;
-	DataLock_LC_BatchKeys.Lock();
-	LocksStorage.Add(DataLock_LC_BatchKeys);
+	DataLock_BatchKeys = New DataLock();
+	ItemLock_BatchKeys = DataLock_Batches.Add("Catalog.BatchKeys");
+	ItemLock_BatchKeys.Mode = DataLockMode.Exclusive;
+	DataLock_BatchKeys.Lock();
+	LocksStorage.Add(DataLock_BatchKeys);
 EndProcedure	
 
 //Entry point
@@ -67,9 +67,9 @@ Procedure Posting_BatchWiceBalance(CalculationMovementCostRef, Company, Calculat
 EndProcedure
 
 Procedure BatchWiseBalance_DoRegistration(LocksStorage, CalculationMovementCostRef, Company, CalculationMode, BeginPeriod, EndPeriod)
-	If CalculationMode = Enums.LC_CalculationMode.LandedCost Then
+	If CalculationMode = Enums.CalculationMode.LandedCost Then
 		DoRegistration_CalculationMode_LandedCost(LocksStorage, CalculationMovementCostRef, Company, BeginPeriod, EndPeriod);
-	ElsIf CalculationMode = Enums.LC_CalculationMode.AdditionalItemCost Then
+	ElsIf CalculationMode = Enums.CalculationMode.AdditionalItemCost Then
 		DoRegistration_CalculationMode_AdditionalItemCost(LocksStorage, CalculationMovementCostRef, Company, BeginPeriod, EndPeriod);
 	EndIf;
 EndProcedure
@@ -77,12 +77,12 @@ EndProcedure
 Procedure DoRegistration_CalculationMode_LandedCost(LocksStorage, CalculationMovementCostRef, Company, BeginPeriod, EndPeriod)
 	LockTables(LocksStorage);
 	
-	Catalogs.LC_Batches.Create_Batches(Company, BeginPeriod, EndPeriod);
-	Catalogs.LC_BatchKeys.Create_BatchKeys(Company, BeginPeriod, EndPeriod);
+	Catalogs.Batches.Create_Batches(Company, BeginPeriod, EndPeriod);
+	Catalogs.BatchKeys.Create_BatchKeys(Company, BeginPeriod, EndPeriod);
 	
 	BatchWiseBalanceTables = GetBatchWiseBalance(Company, BeginPeriod, EndPeriod); 
 	
-	RecordSet = AccumulationRegisters.LC_BatchWiseBalance.CreateRecordSet();
+	RecordSet = AccumulationRegisters.R6010B_BatchWiseBalance.CreateRecordSet();
 	RecordSet.Filter.Recorder.Set(CalculationMovementCostRef);
 
 	//Batch wise balance
@@ -104,7 +104,7 @@ Procedure DoRegistration_CalculationMode_LandedCost(LocksStorage, CalculationMov
 	RecordSet.Write();
 	
 	//Batch shortage outgoing
-	RecordSet = AccumulationRegisters.LC_BatchShortageOutgoing.CreateRecordSet();
+	RecordSet = AccumulationRegisters.R6030T_BatchShortageOutgoing.CreateRecordSet();
 	RecordSet.Filter.Recorder.Set(CalculationMovementCostRef);
 
 	For Each Row In BatchWiseBalanceTables.DataForBatchShortageOutgoing Do	
@@ -117,7 +117,7 @@ Procedure DoRegistration_CalculationMode_LandedCost(LocksStorage, CalculationMov
 	RecordSet.Write();
 	
 	//Batch shortage incoming
-	RecordSet = AccumulationRegisters.LC_BatchShortageIncoming.CreateRecordSet();
+	RecordSet = AccumulationRegisters.R6040T_BatchShortageIncoming.CreateRecordSet();
 	RecordSet.Filter.Recorder.Set(CalculationMovementCostRef);
 
 	For Each Row In BatchWiseBalanceTables.DataForBatchShortageIncoming Do	
@@ -130,7 +130,7 @@ Procedure DoRegistration_CalculationMode_LandedCost(LocksStorage, CalculationMov
 	RecordSet.Write();
 	
 	//Sales batches
-	RecordSet = AccumulationRegisters.LC_SalesBatches.CreateRecordSet();
+	RecordSet = AccumulationRegisters.R6050T_SalesBatches.CreateRecordSet();
 	RecordSet.Filter.Recorder.Set(CalculationMovementCostRef);
 
 	For Each Row In BatchWiseBalanceTables.DataForSalesBatches Do	
@@ -143,7 +143,7 @@ Procedure DoRegistration_CalculationMode_LandedCost(LocksStorage, CalculationMov
 	RecordSet.Write();
 	
 	//Bundle amount values
-	RecordSet = InformationRegisters.LC_BundleAmountValues.CreateRecordSet();
+	RecordSet = InformationRegisters.T6040S_BundleAmountValues.CreateRecordSet();
 	RecordSet.Filter.Recorder.Set(CalculationMovementCostRef);
 
 	For Each Row In BatchWiseBalanceTables.DataForBundleAmountValues Do	
@@ -156,58 +156,58 @@ Procedure DoRegistration_CalculationMode_LandedCost(LocksStorage, CalculationMov
 	RecordSet.Write();
 	
 	//Batch balance
-	AccumulationRegisters.LC_BatchBalance.BatchBalance_LoadRecords(CalculationMovementCostRef);
+	AccumulationRegisters.R6020B_BatchBalance.BatchBalance_LoadRecords(CalculationMovementCostRef);
 	
 	//Cost of goods sold
-	AccumulationRegisters.LC_CostOfGoodsSold.CostOfGoodsSold_LoadRecords(CalculationMovementCostRef);
+	AccumulationRegisters.R6060T_CostOfGoodsSold.CostOfGoodsSold_LoadRecords(CalculationMovementCostRef);
 	
 	//Relevance
-	InformationRegisters.LC_BatchRelevance.BatchRelevance_Clear(Company, EndPeriod);
-	InformationRegisters.LC_BatchRelevance.BatchRelevance_Restore(Company, EndPeriod);
+	InformationRegisters.T6030S_BatchRelevance.BatchRelevance_Clear(Company, EndPeriod);
+	InformationRegisters.T6030S_BatchRelevance.BatchRelevance_Restore(Company, EndPeriod);
 EndProcedure
 
 Procedure DoRegistration_CalculationMode_AdditionalItemCost(LocksStorage, CalculationMovementCostRef, Company, BeginPeriod, EndPeriod)
 	Query = New Query();
 	Query.Text = 
 	"SELECT
-	|	LC_BatchCostAllocationInfo.Company AS Company,
-	|	LC_BatchCostAllocationInfo.Document AS Document,
-	|	LC_BatchCostAllocationInfo.Store AS Store,
-	|	LC_BatchCostAllocationInfo.ItemKey AS ItemKey,
-	|	LC_BatchCostAllocationInfo.CurrencyMovementType AS CurrencyMovementType,
-	|	LC_BatchCostAllocationInfo.Currency AS Currency,
-	|	LC_BatchCostAllocationInfo.Amount AS Amount
+	|	T6060S_BatchCostAllocationInfo.Company AS Company,
+	|	T6060S_BatchCostAllocationInfo.Document AS Document,
+	|	T6060S_BatchCostAllocationInfo.Store AS Store,
+	|	T6060S_BatchCostAllocationInfo.ItemKey AS ItemKey,
+	|	T6060S_BatchCostAllocationInfo.CurrencyMovementType AS CurrencyMovementType,
+	|	T6060S_BatchCostAllocationInfo.Currency AS Currency,
+	|	T6060S_BatchCostAllocationInfo.Amount AS Amount
 	|INTO CostAllocationInfo
 	|FROM
-	|	InformationRegister.LC_BatchCostAllocationInfo AS LC_BatchCostAllocationInfo
+	|	InformationRegister.T6060S_BatchCostAllocationInfo AS T6060S_BatchCostAllocationInfo
 	|WHERE
-	|	LC_BatchCostAllocationInfo.Period BETWEEN BEGINOFPERIOD(&BeginPeriod, DAY) AND ENDOFPERIOD(&EndPeriod, DAY)
-	|	AND LC_BatchCostAllocationInfo.Company = &Company
+	|	T6060S_BatchCostAllocationInfo.Period BETWEEN BEGINOFPERIOD(&BeginPeriod, DAY) AND ENDOFPERIOD(&EndPeriod, DAY)
+	|	AND T6060S_BatchCostAllocationInfo.Company = &Company
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
-	|	LC_BatchKeysInfo.Company AS Company,
-	|	LC_BatchKeysInfo.Recorder AS Document,
-	|	LC_BatchKeysInfo.Store AS Store,
-	|	LC_BatchKeysInfo.ItemKey AS ItemKey,
-	|	SUM(LC_BatchKeysInfo.Quantity) AS Quantity,
+	|	T6020S_BatchKeysInfo.Company AS Company,
+	|	T6020S_BatchKeysInfo.Recorder AS Document,
+	|	T6020S_BatchKeysInfo.Store AS Store,
+	|	T6020S_BatchKeysInfo.ItemKey AS ItemKey,
+	|	SUM(T6020S_BatchKeysInfo.Quantity) AS Quantity,
 	|	MAX(CostAllocationInfo.Amount) AS Amount
 	|INTO CostAmmounts_tmp
 	|FROM
-	|	InformationRegister.LC_BatchKeysInfo AS LC_BatchKeysInfo
+	|	InformationRegister.T6020S_BatchKeysInfo AS T6020S_BatchKeysInfo
 	|		INNER JOIN CostAllocationInfo AS CostAllocationInfo
-	|		ON LC_BatchKeysInfo.Company = CostAllocationInfo.Company
-	|		AND LC_BatchKeysInfo.Recorder = CostAllocationInfo.Document
-	|		AND LC_BatchKeysInfo.ItemKey = CostAllocationInfo.ItemKey
-	|		AND LC_BatchKeysInfo.Currency = CostAllocationInfo.Currency
-	|		AND LC_BatchKeysInfo.CurrencyMovementType = CostAllocationInfo.CurrencyMovementType
-	|		AND LC_BatchKeysInfo.Direction = VALUE(Enum.LC_BatchDirection.Receipt)
+	|		ON T6020S_BatchKeysInfo.Company = CostAllocationInfo.Company
+	|		AND T6020S_BatchKeysInfo.Recorder = CostAllocationInfo.Document
+	|		AND T6020S_BatchKeysInfo.ItemKey = CostAllocationInfo.ItemKey
+	|		AND T6020S_BatchKeysInfo.Currency = CostAllocationInfo.Currency
+	|		AND T6020S_BatchKeysInfo.CurrencyMovementType = CostAllocationInfo.CurrencyMovementType
+	|		AND T6020S_BatchKeysInfo.Direction = VALUE(Enum.BatchDirection.Receipt)
 	|GROUP BY
-	|	LC_BatchKeysInfo.Company,
-	|	LC_BatchKeysInfo.Recorder,
-	|	LC_BatchKeysInfo.Store,
-	|	LC_BatchKeysInfo.ItemKey
+	|	T6020S_BatchKeysInfo.Company,
+	|	T6020S_BatchKeysInfo.Recorder,
+	|	T6020S_BatchKeysInfo.Store,
+	|	T6020S_BatchKeysInfo.ItemKey
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
@@ -230,56 +230,56 @@ Procedure DoRegistration_CalculationMode_AdditionalItemCost(LocksStorage, Calcul
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
-	|	LC_BatchWiseBalance.Period AS Period,
-	|	LC_BatchWiseBalance.Recorder AS Recorder,
-	|	LC_BatchWiseBalance.LineNumber AS LineNumber,
-	|	LC_BatchWiseBalance.Active AS Active,
-	|	LC_BatchWiseBalance.RecordType AS RecordType,
-	|	LC_BatchWiseBalance.Batch AS Batch,
-	|	LC_BatchWiseBalance.BatchKey AS BatchKey,
-	|	LC_BatchWiseBalance.Quantity AS Quantity1,
-	|	LC_BatchWiseBalance.Amount AS Amount1,
-	|	LC_BatchWiseBalance.AmountCost AS AmountCost1,
-	|	LC_BatchWiseBalance.Document AS Document,
+	|	R6010B_BatchWiseBalance.Period AS Period,
+	|	R6010B_BatchWiseBalance.Recorder AS Recorder,
+	|	R6010B_BatchWiseBalance.LineNumber AS LineNumber,
+	|	R6010B_BatchWiseBalance.Active AS Active,
+	|	R6010B_BatchWiseBalance.RecordType AS RecordType,
+	|	R6010B_BatchWiseBalance.Batch AS Batch,
+	|	R6010B_BatchWiseBalance.BatchKey AS BatchKey,
+	|	R6010B_BatchWiseBalance.Quantity AS Quantity1,
+	|	R6010B_BatchWiseBalance.Amount AS Amount1,
+	|	R6010B_BatchWiseBalance.AmountCost AS AmountCost1,
+	|	R6010B_BatchWiseBalance.Document AS Document,
 	|	0 AS Quantity,
 	|	0 AS Amount,
-	|	CostAmmounts.AmountPerOneUnit * LC_BatchWiseBalance.Quantity AS AmountCost
+	|	CostAmmounts.AmountPerOneUnit * R6010B_BatchWiseBalance.Quantity AS AmountCost
 	|FROM
-	|	AccumulationRegister.LC_BatchWiseBalance AS LC_BatchWiseBalance
+	|	AccumulationRegister.R6010B_BatchWiseBalance AS R6010B_BatchWiseBalance
 	|		INNER JOIN CostAmmounts AS CostAmmounts
-	|		ON LC_BatchWiseBalance.Batch.Document = CostAmmounts.Document
-	|		AND LC_BatchWiseBalance.Batch.Company = CostAmmounts.Company
-	|		AND LC_BatchWiseBalance.BatchKey.ItemKey = CostAmmounts.ItemKey
+	|		ON R6010B_BatchWiseBalance.Batch.Document = CostAmmounts.Document
+	|		AND R6010B_BatchWiseBalance.Batch.Company = CostAmmounts.Company
+	|		AND R6010B_BatchWiseBalance.BatchKey.ItemKey = CostAmmounts.ItemKey
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
-	|	LC_SalesBatches.Period AS Period,
-	|	LC_SalesBatches.Recorder AS Recorder,
-	|	LC_SalesBatches.LineNumber AS LineNumber,
-	|	LC_SalesBatches.Active AS Active,
-	|	LC_SalesBatches.Batch AS Batch,
-	|	LC_SalesBatches.BatchKey AS BatchKey,
-	|	LC_SalesBatches.SalesInvoice AS SalesInvoice,
-	|	LC_SalesBatches.Quantity AS Quantity1,
-	|	LC_SalesBatches.Amount AS Amount1,
-	|	LC_SalesBatches.AmountCost AS AmountCost1,
+	|	R6050T_SalesBatches.Period AS Period,
+	|	R6050T_SalesBatches.Recorder AS Recorder,
+	|	R6050T_SalesBatches.LineNumber AS LineNumber,
+	|	R6050T_SalesBatches.Active AS Active,
+	|	R6050T_SalesBatches.Batch AS Batch,
+	|	R6050T_SalesBatches.BatchKey AS BatchKey,
+	|	R6050T_SalesBatches.SalesInvoice AS SalesInvoice,
+	|	R6050T_SalesBatches.Quantity AS Quantity1,
+	|	R6050T_SalesBatches.Amount AS Amount1,
+	|	R6050T_SalesBatches.AmountCost AS AmountCost1,
 	|	0 AS Quantity,
 	|	0 AS Amount,
-	|	CostAmmounts.AmountPerOneUnit * LC_SalesBatches.Quantity AS AmountCost
+	|	CostAmmounts.AmountPerOneUnit * R6050T_SalesBatches.Quantity AS AmountCost
 	|FROM
-	|	AccumulationRegister.LC_SalesBatches AS LC_SalesBatches
+	|	AccumulationRegister.R6050T_SalesBatches AS R6050T_SalesBatches
 	|		INNER JOIN CostAmmounts AS CostAmmounts
-	|		ON LC_SalesBatches.Batch.Document = CostAmmounts.Document
-	|		AND LC_SalesBatches.Batch.Company = CostAmmounts.Company
-	|		AND LC_SalesBatches.BatchKey.ItemKey = CostAmmounts.ItemKey";
-//	|		AND LC_SalesBatches.BatchKey.Store = CostAmmounts.Store";
+	|		ON R6050T_SalesBatches.Batch.Document = CostAmmounts.Document
+	|		AND R6050T_SalesBatches.Batch.Company = CostAmmounts.Company
+	|		AND R6050T_SalesBatches.BatchKey.ItemKey = CostAmmounts.ItemKey";
+	
 	Query.SetParameter("Company"     , Company);
 	Query.SetParameter("BeginPeriod" , BeginPeriod);
 	Query.SetParameter("EndPeriod"   , EndPeriod);
 	QueryResults = Query.ExecuteBatch();
 	
-	RecordSet = AccumulationRegisters.LC_BatchWiseBalance.CreateRecordSet();
+	RecordSet = AccumulationRegisters.R6010B_BatchWiseBalance.CreateRecordSet();
 	RecordSet.Filter.Recorder.Set(CalculationMovementCostRef);
 
 	//Batch wise balance
@@ -291,7 +291,7 @@ Procedure DoRegistration_CalculationMode_AdditionalItemCost(LocksStorage, Calcul
 	RecordSet.Write();
 	
 	//Sales batches
-	RecordSet = AccumulationRegisters.LC_SalesBatches.CreateRecordSet();
+	RecordSet = AccumulationRegisters.R6050T_SalesBatches.CreateRecordSet();
 	RecordSet.Filter.Recorder.Set(CalculationMovementCostRef);
 
 	For Each Row In QueryResults[4].Unload() Do	
@@ -302,10 +302,10 @@ Procedure DoRegistration_CalculationMode_AdditionalItemCost(LocksStorage, Calcul
 	RecordSet.Write();
 	
 	//Batch balance
-	AccumulationRegisters.LC_BatchBalance.BatchBalance_LoadRecords(CalculationMovementCostRef);
+	AccumulationRegisters.R6020B_BatchBalance.BatchBalance_LoadRecords(CalculationMovementCostRef);
 	
 	//Cost of goods sold
-	AccumulationRegisters.LC_CostOfGoodsSold.CostOfGoodsSold_LoadRecords(CalculationMovementCostRef);
+	AccumulationRegisters.R6060T_CostOfGoodsSold.CostOfGoodsSold_LoadRecords(CalculationMovementCostRef);
 EndProcedure
 
 #Region Basic_FIFO_Implementation
@@ -327,7 +327,7 @@ Function GetBatchWiseBalance(Company, BeginPeriod,  EndPeriod)
 	Tables.DataForSalesBatches.Columns.Add("SalesInvoice", New TypeDescription(ArrayOfTypes_SalesInvoice));
 	
 	Tables.Insert("DataForBundleAmountValues", New ValueTable());
-	RegMetadata = Metadata.InformationRegisters.LC_BundleAmountValues;
+	RegMetadata = Metadata.InformationRegisters.T6040S_BundleAmountValues;
 	Tables.DataForBundleAmountValues.Columns.Add("Batch"          , RegMetadata.Dimensions.Batch.Type);
 	Tables.DataForBundleAmountValues.Columns.Add("BatchKey"       , RegMetadata.Dimensions.BatchKey.Type);
 	Tables.DataForBundleAmountValues.Columns.Add("Company"        , RegMetadata.Dimensions.Company.Type);
@@ -335,19 +335,19 @@ Function GetBatchWiseBalance(Company, BeginPeriod,  EndPeriod)
 	Tables.DataForBundleAmountValues.Columns.Add("Period"         , RegMetadata.StandardAttributes.Period.Type);
 	Tables.DataForBundleAmountValues.Columns.Add("BatchKeyBundle" , RegMetadata.Dimensions.BatchKeyBundle.Type);
 	
-	RegMetadata = Metadata.InformationRegisters.LC_BatchKeysInfo;
+	RegMetadata = Metadata.InformationRegisters.T6020S_BatchKeysInfo;
 	TableOfReturnedBatches = New ValueTable();
 	TableOfReturnedBatches.Columns.Add("IsOpeningBalance" , New TypeDescription("Boolean"));
 	TableOfReturnedBatches.Columns.Add("Skip"             , New TypeDescription("Boolean"));
 	TableOfReturnedBatches.Columns.Add("Priority"         , New TypeDescription("Number"));
-	TableOfReturnedBatches.Columns.Add("BatchKey"         , New TypeDescription("CatalogRef.LC_BatchKeys"));
+	TableOfReturnedBatches.Columns.Add("BatchKey"         , New TypeDescription("CatalogRef.BatchKeys"));
 	TableOfReturnedBatches.Columns.Add("Quantity"         , RegMetadata.Resources.Quantity.Type);
 	TableOfReturnedBatches.Columns.Add("Amount"           , RegMetadata.Resources.Amount.Type);
-	TableOfReturnedBatches.Columns.Add("Document"         , GetTypeDescriptionDocument());
+	TableOfReturnedBatches.Columns.Add("Document"         , Metadata.DefinedTypes.typeBatchDocuments.Type);
 	TableOfReturnedBatches.Columns.Add("Date"             , RegMetadata.StandardAttributes.Period.Type);
 	TableOfReturnedBatches.Columns.Add("Company"          , RegMetadata.Dimensions.Company.Type);
 	TableOfReturnedBatches.Columns.Add("Direction"        , RegMetadata.Dimensions.Direction.Type);
-	TableOfReturnedBatches.Columns.Add("Batch"            , New TypeDescription("CatalogRef.LC_Batches"));
+	TableOfReturnedBatches.Columns.Add("Batch"            , New TypeDescription("CatalogRef.Batches"));
 	TableOfReturnedBatches.Columns.Add("QuantityBalance"  , RegMetadata.Resources.Quantity.Type);
 	TableOfReturnedBatches.Columns.Add("AmountBalance"    , RegMetadata.Resources.Amount.Type);
 	TableOfReturnedBatches.Columns.Add("BatchDocument"    , RegMetadata.Dimensions.BatchDocument.Type);
@@ -376,40 +376,35 @@ Function GetBatchTree(TempTablesManager, Company, BeginPeriod, EndPeriod)
 	Query.TempTablesManager = TempTablesManager;
 	Query.Text =	
 	"SELECT
-	|	LC_BatchKeys.Ref AS BatchKey,
-	|	SUM(LC_BatchKeysInfo.Quantity) AS Quantity,
-	|	SUM(LC_BatchKeysInfo.Amount) AS Amount,
-	|	LC_BatchKeysInfo.Recorder AS Document,
-	|	LC_BatchKeysInfo.Period AS Date,
-	|	LC_BatchKeysInfo.Company AS Company,
-	|	LC_BatchKeysInfo.Direction AS Direction,
-	|	LC_BatchKeysInfo.BatchDocument AS BatchDocument,
-	|	LC_BatchKeysInfo.SalesInvoice AS SalesInvoice
+	|	BatchKeys.Ref AS BatchKey,
+	|	SUM(T6020S_BatchKeysInfo.Quantity) AS Quantity,
+	|	SUM(T6020S_BatchKeysInfo.Amount) AS Amount,
+	|	T6020S_BatchKeysInfo.Recorder AS Document,
+	|	T6020S_BatchKeysInfo.Period AS Date,
+	|	T6020S_BatchKeysInfo.Company AS Company,
+	|	T6020S_BatchKeysInfo.Direction AS Direction,
+	|	T6020S_BatchKeysInfo.BatchDocument AS BatchDocument,
+	|	T6020S_BatchKeysInfo.SalesInvoice AS SalesInvoice
 	|INTO BatchKeys
 	|FROM
-	|	InformationRegister.LC_BatchKeysInfo AS LC_BatchKeysInfo
-	|		INNER JOIN Catalog.LC_BatchKeys AS LC_BatchKeys
-	|		ON (LC_BatchKeysInfo.Period BETWEEN BEGINOFPERIOD(&BeginPeriod, DAY) AND ENDOFPERIOD(&EndPeriod, DAY))
-	|			AND (LC_BatchKeys.ItemKey = LC_BatchKeysInfo.ItemKey)
-	|			AND (LC_BatchKeys.Store = LC_BatchKeysInfo.Store)
-	|			AND (NOT LC_BatchKeys.DeletionMark)
-	|			AND (LC_BatchKeysInfo.Company = &Company)
-	//
-//	|			AND (LC_BatchKeysInfo.Direction = VALUE(Enum.LC_BatchDirection.Receipt) 
-//	|					OR LC_BatchKeysInfo.Direction = VALUE(Enum.LC_BatchDirection.Expense))
-	//
-	|
+	|	InformationRegister.T6020S_BatchKeysInfo AS T6020S_BatchKeysInfo
+	|		INNER JOIN Catalog.BatchKeys AS BatchKeys
+	|		ON T6020S_BatchKeysInfo.Period BETWEEN BEGINOFPERIOD(&BeginPeriod, DAY) AND ENDOFPERIOD(&EndPeriod, DAY)
+	|		AND BatchKeys.ItemKey = T6020S_BatchKeysInfo.ItemKey
+	|		AND BatchKeys.Store = T6020S_BatchKeysInfo.Store
+	|		AND NOT BatchKeys.DeletionMark
+	|		AND T6020S_BatchKeysInfo.Company = &Company
 	|GROUP BY
-	|	LC_BatchKeys.Ref,
-	|	LC_BatchKeysInfo.Recorder,
-	|	LC_BatchKeysInfo.Period,
-	|	LC_BatchKeysInfo.Company,
-	|	LC_BatchKeysInfo.Direction,
-	|	LC_BatchKeysInfo.BatchDocument,
-	|	LC_BatchKeysInfo.SalesInvoice
+	|	BatchKeys.Ref,
+	|	T6020S_BatchKeysInfo.Recorder,
+	|	T6020S_BatchKeysInfo.Period,
+	|	T6020S_BatchKeysInfo.Company,
+	|	T6020S_BatchKeysInfo.Direction,
+	|	T6020S_BatchKeysInfo.BatchDocument,
+	|	T6020S_BatchKeysInfo.SalesInvoice
 	|;
 	|
-	|////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////
 	|SELECT
 	|	FALSE AS IsOpeningBalance,
 	|	BatchKeys.BatchKey AS BatchKey,
@@ -419,14 +414,16 @@ Function GetBatchTree(TempTablesManager, Company, BeginPeriod, EndPeriod)
 	|	BatchKeys.Date AS Date,
 	|	BatchKeys.Company AS Company,
 	|	BatchKeys.Direction AS Direction,
-	|	ISNULL(LC_Batches.Ref, VALUE(Catalog.LC_Batches.EmptyRef)) AS Batch,
+	|	ISNULL(Batches.Ref, VALUE(Catalog.Batches.EmptyRef)) AS Batch,
 	|	CASE
-	|		WHEN LC_Batches.Ref IS NULL OR NOT BatchKeys.SalesInvoice.Date IS NULL
+	|		WHEN Batches.Ref IS NULL
+	|		OR NOT BatchKeys.SalesInvoice.Date IS NULL
 	|			THEN 0
 	|		ELSE BatchKeys.Quantity
 	|	END AS QuantityBalance,
 	|	CASE
-	|		WHEN LC_Batches.Ref IS NULL OR NOT BatchKeys.SalesInvoice.Date IS NULL
+	|		WHEN Batches.Ref IS NULL
+	|		OR NOT BatchKeys.SalesInvoice.Date IS NULL
 	|			THEN 0
 	|		ELSE BatchKeys.Amount
 	|	END AS AmountBalance,
@@ -435,40 +432,38 @@ Function GetBatchTree(TempTablesManager, Company, BeginPeriod, EndPeriod)
 	|INTO AllData
 	|FROM
 	|	BatchKeys AS BatchKeys
-	|		LEFT JOIN Catalog.LC_Batches AS LC_Batches
-	|		ON (LC_Batches.Document = BatchKeys.Document)
-	|			AND (LC_Batches.Company = BatchKeys.Company)
-	|			AND (LC_Batches.Date = BatchKeys.Date)
-	|			AND (NOT LC_Batches.DeletionMark)
+	|		LEFT JOIN Catalog.Batches AS Batches
+	|		ON Batches.Document = BatchKeys.Document
+	|		AND Batches.Company = BatchKeys.Company
+	|		AND Batches.Date = BatchKeys.Date
+	|		AND NOT Batches.DeletionMark
 	|
 	|UNION ALL
 	|
 	|SELECT
 	|	TRUE,
-	|	LC_BatchWiseBalance.BatchKey,
+	|	R6010B_BatchWiseBalance.BatchKey,
 	|	0,
 	|	0,
-	|	LC_BatchWiseBalance.Batch.Document,
-	|	LC_BatchWiseBalance.Batch.Date,
-	|	LC_BatchWiseBalance.Batch.Company,
-	|	VALUE(enum.LC_BatchDirection.Receipt),
-	|	LC_BatchWiseBalance.Batch,
-	|	LC_BatchWiseBalance.QuantityBalance,
-	|	LC_BatchWiseBalance.AmountBalance,
+	|	R6010B_BatchWiseBalance.Batch.Document,
+	|	R6010B_BatchWiseBalance.Batch.Date,
+	|	R6010B_BatchWiseBalance.Batch.Company,
+	|	VALUE(Enum.BatchDirection.Receipt),
+	|	R6010B_BatchWiseBalance.Batch,
+	|	R6010B_BatchWiseBalance.QuantityBalance,
+	|	R6010B_BatchWiseBalance.AmountBalance,
 	|	UNDEFINED,
 	|	UNDEFINED
 	|FROM
-	|	AccumulationRegister.LC_BatchWiseBalance.Balance(
-	|			ENDOFPERIOD(&EndPeriod, DAY),
-	|			(BatchKey, Batch.Company) IN
-	|				(SELECT
-	|					BatchKeys.BatchKey,
-	|					BatchKeys.Company
-	|				FROM
-	|					BatchKeys AS BatchKeys)) AS LC_BatchWiseBalance
+	|	AccumulationRegister.R6010B_BatchWiseBalance.Balance(ENDOFPERIOD(&EndPeriod, DAY), (BatchKey, Batch.Company) IN
+	|		(SELECT
+	|			BatchKeys.BatchKey,
+	|			BatchKeys.Company
+	|		FROM
+	|			BatchKeys AS BatchKeys)) AS R6010B_BatchWiseBalance
 	|;
 	|
-	|////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////
 	|SELECT
 	|	AllData.IsOpeningBalance AS IsOpeningBalance,
 	|	AllData.BatchKey AS BatchKey,
@@ -486,7 +481,6 @@ Function GetBatchTree(TempTablesManager, Company, BeginPeriod, EndPeriod)
 	|INTO AllDataGrouped
 	|FROM
 	|	AllData AS AllData
-	|
 	|GROUP BY
 	|	AllData.IsOpeningBalance,
 	|	AllData.BatchKey,
@@ -499,7 +493,7 @@ Function GetBatchTree(TempTablesManager, Company, BeginPeriod, EndPeriod)
 	|	AllData.SalesInvoice
 	|;
 	|
-	|////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////
 	|SELECT
 	|	AllDataGrouped.IsOpeningBalance AS IsOpeningBalance,
 	|	AllDataGrouped.BatchKey AS BatchKey,
@@ -518,10 +512,10 @@ Function GetBatchTree(TempTablesManager, Company, BeginPeriod, EndPeriod)
 	|	0 AS Priority
 	|FROM
 	|	AllDataGrouped AS AllDataGrouped
-	|
 	|ORDER BY
 	|	Date
-	|TOTALS BY
+	|TOTALS
+	|BY
 	|	Document";
 	
 	Query.SetParameter("Company", Company);
@@ -541,12 +535,12 @@ Function GetBatchTree(TempTablesManager, Company, BeginPeriod, EndPeriod)
 	Query = New Query();
 	Query.Text = 
 	"SELECT
-	|	LC_SalesBatchesTurnovers.Batch.Document AS BatchDocument
+	|	R6050T_SalesBatchesTurnovers.Batch.Document AS BatchDocument
 	|FROM
-	|	AccumulationRegister.LC_SalesBatches.Turnovers(, , , SalesInvoice IN (&ArrayOfReturnedSalesInvoices)) AS LC_SalesBatchesTurnovers
-	|
+	|	AccumulationRegister.R6050T_SalesBatches.Turnovers(,,, SalesInvoice IN (&ArrayOfReturnedSalesInvoices)) AS
+	|		R6050T_SalesBatchesTurnovers
 	|GROUP BY
-	|	LC_SalesBatchesTurnovers.Batch.Document";
+	|	R6050T_SalesBatchesTurnovers.Batch.Document";
 	Query.SetParameter("ArrayOfReturnedSalesInvoices", ArrayOfReturnedSalesInvoices);
 	TableOfBatchDocuments = Query.Execute().Unload();
 	For Each RowBatchDocument In TableOfBatchDocuments Do
@@ -568,7 +562,7 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches)
 		If Row.Skip Then
 			Continue;
 		EndIf;
-		If Row.Direction = Enums.LC_BatchDirection.Receipt 
+		If Row.Direction = Enums.BatchDirection.Receipt 
 			And Not Row.IsOpeningBalance Then
 				
 				NewRow = DataForReceipt.Add();
@@ -618,7 +612,7 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches)
 					NewRow_ReturnedBatches.Document         = Row_SalesBatches.Document;
 					NewRow_ReturnedBatches.Date             = Row.Date;
 					NewRow_ReturnedBatches.Company          = Row_SalesBatches.Company;
-					NewRow_ReturnedBatches.Direction        = Enums.LC_BatchDirection.Receipt;
+					NewRow_ReturnedBatches.Direction        = Enums.BatchDirection.Receipt;
 					NewRow_ReturnedBatches.Batch            = Row_SalesBatches.Batch;
 					NewRow_ReturnedBatches.QuantityBalance  = ReceiptQuantity;
 					NewRow_ReturnedBatches.AmountBalance    = ReceiptAmount;
@@ -673,7 +667,7 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches)
 						Break;
 					EndIf;
 					If Not ValueIsFilled(Row_Batch.Batch) 
-						Or Row_Batch.Direction <> Enums.LC_BatchDirection.Receipt
+						Or Row_Batch.Direction <> Enums.BatchDirection.Receipt
 						Or NeedExpense = 0 
 						Or Row_Batch.QuantityBalance = 0
 						Or Row.BatchKey <> Row_Batch.BatchKey Then 
@@ -750,7 +744,7 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches)
 	If TypeOf(Document) = Type("DocumentRef.InventoryTransfer") Then
 						
 		For Each Row In Rows Do
-			If Row.Direction = Enums.LC_BatchDirection.Receipt And Not Row.IsOpeningBalance Then
+			If Row.Direction = Enums.BatchDirection.Receipt And Not Row.IsOpeningBalance Then
 				NeedReceipt = Row.Quantity;
 				For Each Row_Expense In DataForExpense Do
 					If Row.BatchKey.ItemKey = Row_Expense.BatchKey.ItemKey Then
@@ -777,7 +771,7 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches)
 						NewRowReceivedBatch.QuantityBalance = Row_Expense.Quantity;
 						NewRowReceivedBatch.AmountBalance = Row_Expense.Amount;
 						NewRowReceivedBatch.IsOpeningBalance = False;
-						NewRowReceivedBatch.Direction = Enums.LC_BatchDirection.Receipt;
+						NewRowReceivedBatch.Direction = Enums.BatchDirection.Receipt;
 							
 					EndIf;
 				EndDo;
@@ -837,7 +831,7 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches)
 			NewRowReceivedBatch.QuantityBalance = NewRow.Quantity;
 			NewRowReceivedBatch.AmountBalance = NewRow.Amount;
 			NewRowReceivedBatch.IsOpeningBalance = False;
-			NewRowReceivedBatch.Direction = Enums.LC_BatchDirection.Receipt;
+			NewRowReceivedBatch.Direction = Enums.BatchDirection.Receipt;
 						
 		EndDo;
 		
@@ -891,37 +885,38 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches)
 				|UNION
 				|
 				|SELECT
-				|	LC_BundleAmountValues.BatchKey,
-				|	LC_BundleAmountValues.Company,
-				|	LC_BundleAmountValues.BatchKeyBundle,
-				|	LC_BundleAmountValues.AmountValue
+				|	T6040S_BundleAmountValues.BatchKey,
+				|	T6040S_BundleAmountValues.Company,
+				|	T6040S_BundleAmountValues.BatchKeyBundle,
+				|	T6040S_BundleAmountValues.AmountValue
 				|FROM
-				|	InformationRegister.LC_BundleAmountValues AS LC_BundleAmountValues
+				|	InformationRegister.T6040S_BundleAmountValues AS T6040S_BundleAmountValues
 				|WHERE
-				|	LC_BundleAmountValues.BatchKey = &BatchKey
-				|	AND LC_BundleAmountValues.Company = &Company
-				|	AND LC_BundleAmountValues.BatchKeyBundle = &BatchKeyBundle
+				|	T6040S_BundleAmountValues.BatchKey = &BatchKey
+				|	AND T6040S_BundleAmountValues.Company = &Company
+				|	AND T6040S_BundleAmountValues.BatchKeyBundle = &BatchKeyBundle
 				|
 				|UNION
 				|
 				|SELECT
-				|	LC_BatchKeys.Ref,
-				|	LC_ManualBundleAmountValues.Company,
-				|	LC_BatchKeys_Bundle.Ref,
-				|	LC_ManualBundleAmountValues.AmountValue
+				|	BatchKeys.Ref,
+				|	T6050S_ManualBundleAmountValues.Company,
+				|	BatchKeys_Bundle.Ref,
+				|	T6050S_ManualBundleAmountValues.AmountValue
 				|FROM
-				|	InformationRegister.LC_ManualBundleAmountValues AS LC_ManualBundleAmountValues
-				|		INNER JOIN Catalog.LC_BatchKeys AS LC_BatchKeys
-				|		ON LC_ManualBundleAmountValues.ItemKey = LC_BatchKeys.ItemKey
-				|			AND LC_ManualBundleAmountValues.Store = LC_BatchKeys.Store
-				|		INNER JOIN Catalog.LC_BatchKeys AS LC_BatchKeys_Bundle
-				|		ON LC_ManualBundleAmountValues.Bundle = LC_BatchKeys_Bundle.ItemKey
-				|			AND LC_ManualBundleAmountValues.Store = LC_BatchKeys_Bundle.Store
+				|	InformationRegister.T6050S_ManualBundleAmountValues AS T6050S_ManualBundleAmountValues
+				|		INNER JOIN Catalog.BatchKeys AS BatchKeys
+				|		ON T6050S_ManualBundleAmountValues.ItemKey = BatchKeys.ItemKey
+				|		AND T6050S_ManualBundleAmountValues.Store = BatchKeys.Store
+				|		INNER JOIN Catalog.BatchKeys AS BatchKeys_Bundle
+				|		ON T6050S_ManualBundleAmountValues.Bundle = BatchKeys_Bundle.ItemKey
+				|		AND T6050S_ManualBundleAmountValues.Store = BatchKeys_Bundle.Store
 				|WHERE
-				|	LC_ManualBundleAmountValues.Company = &Company
-				|	AND LC_ManualBundleAmountValues.ItemKey = &ItemKey
-				|	AND LC_ManualBundleAmountValues.Bundle = &Bundle
-				|	AND LC_ManualBundleAmountValues.Store = &Store";
+				|	T6050S_ManualBundleAmountValues.Company = &Company
+				|	AND T6050S_ManualBundleAmountValues.ItemKey = &ItemKey
+				|	AND T6050S_ManualBundleAmountValues.Bundle = &Bundle
+				|	AND T6050S_ManualBundleAmountValues.Store = &Store";
+				
 				Query.SetParameter("DataForBundleAmountValues", Tables.DataForBundleAmountValues);
 				Query.SetParameter("BatchKeyBundle", Row_Expense.BatchKey);
 				Query.SetParameter("BatchKey", Row_Receipt.BatchKey); 
@@ -947,7 +942,7 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches)
 			NewRowReceivedBatch.QuantityBalance = NewRow.Quantity;
 			NewRowReceivedBatch.AmountBalance = NewRow.Amount;
 			NewRowReceivedBatch.IsOpeningBalance = False;
-			NewRowReceivedBatch.Direction = Enums.LC_BatchDirection.Receipt;
+			NewRowReceivedBatch.Direction = Enums.BatchDirection.Receipt;
 						
 		EndDo;
 		
@@ -983,20 +978,16 @@ Function GetSalesBatches(SalesInvoice, DataForSalesBatches, ItemKey)
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
-	|	LC_SalesBatchesTurnovers.Batch AS Batch,
-	|	LC_SalesBatchesTurnovers.Period AS Date,
-	|	LC_SalesBatchesTurnovers.BatchKey AS BatchKey,
-	|	LC_SalesBatchesTurnovers.SalesInvoice AS SalesInvoice,
-	|	LC_SalesBatchesTurnovers.QuantityTurnover AS Quantity,
-	|	LC_SalesBatchesTurnovers.AmountTurnover AS Amount
+	|	R6050T_SalesBatchesTurnovers.Batch AS Batch,
+	|	R6050T_SalesBatchesTurnovers.Period AS Date,
+	|	R6050T_SalesBatchesTurnovers.BatchKey AS BatchKey,
+	|	R6050T_SalesBatchesTurnovers.SalesInvoice AS SalesInvoice,
+	|	R6050T_SalesBatchesTurnovers.QuantityTurnover AS Quantity,
+	|	R6050T_SalesBatchesTurnovers.AmountTurnover AS Amount
 	|INTO SalesBatches
 	|FROM
-	|	AccumulationRegister.LC_SalesBatches.Turnovers(
-	|			,
-	|			,
-	|			Record,
-	|			SalesInvoice = &SalesInvoice
-	|				AND BatchKey.ItemKey = &BatchKey_ItemKey) AS LC_SalesBatchesTurnovers
+	|	AccumulationRegister.R6050T_SalesBatches.Turnovers(,, Record, SalesInvoice = &SalesInvoice
+	|	AND BatchKey.ItemKey = &BatchKey_ItemKey) AS R6050T_SalesBatchesTurnovers
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
@@ -1039,14 +1030,13 @@ Function GetSalesBatches(SalesInvoice, DataForSalesBatches, ItemKey)
 	|	AllData.Batch.Company AS Company
 	|FROM
 	|	AllData AS AllData
-	|
 	|GROUP BY
 	|	AllData.Batch,
 	|	AllData.BatchKey,
 	|	AllData.SalesInvoice,
 	|	AllData.Batch.Document,
-	|	AllData.Date
-	|
+	|	AllData.Date,
+	|	AllData.Batch.Company
 	|ORDER BY
 	|	Date";
 	Query.SetParameter("SalesInvoice"        , SalesInvoice);

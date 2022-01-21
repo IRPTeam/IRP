@@ -3,20 +3,20 @@ Procedure CostOfGoodsSold_Clear(DocObjectRef, Cancel) Export
 	Query = New Query;
 	Query.Text =
 	"SELECT
-	|	LC_CostOfGoodsSold.Recorder
+	|	R6060T_CostOfGoodsSold.Recorder
 	|FROM
-	|	AccumulationRegister.LC_CostOfGoodsSold AS LC_CostOfGoodsSold
+	|	AccumulationRegister.R6060T_CostOfGoodsSold AS R6060T_CostOfGoodsSold
 	|WHERE
-	|	LC_CostOfGoodsSold.CalculationMovementCost = &CalculationMovementCost
+	|	R6060T_CostOfGoodsSold.CalculationMovementCost = &CalculationMovementCost
 	|GROUP BY
-	|	LC_CostOfGoodsSold.Recorder";
+	|	R6060T_CostOfGoodsSold.Recorder";
 	Query.SetParameter("CalculationMovementCost", DocObjectRef);
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
 	While QuerySelection.Next() Do
-		RecordSet = AccumulationRegisters.LC_CostOfGoodsSold.CreateRecordSet();
+		RecordSet = AccumulationRegisters.R6060T_CostOfGoodsSold.CreateRecordSet();
 		RecordSet.Filter.Recorder.Set(QuerySelection.Recorder);
-		//
+		
 		RecordSet.Read();
 		ArrayForDelete = New Array();
 		For Each Row In RecordSet Do
@@ -27,8 +27,7 @@ Procedure CostOfGoodsSold_Clear(DocObjectRef, Cancel) Export
 		For Each ItemForDelete In ArrayForDelete Do
 			RecordSet.Delete(ItemForDelete);
 		EndDo;
-		//
-		//RecordSet.Clear();
+		
 		RecordSet.Write();
 	EndDo;
 EndProcedure
@@ -37,43 +36,44 @@ Procedure CostOfGoodsSold_CollectRecords(DocObject) Export
 	Query = New Query;
 	Query.Text =
 	"SELECT
-	|	LC_BatchWiseBalance.Period AS Period,
+	|	R6010B_BatchWiseBalance.Period AS Period,
 	|	CASE
-	|		WHEN LC_BatchWiseBalance.Document REFS Document.SalesInvoice
-	|		OR LC_BatchWiseBalance.Document REFS Document.RetailSalesReceipt
-	|			THEN LC_BatchWiseBalance.Quantity
-	|		WHEN LC_BatchWiseBalance.Document REFS Document.SalesReturn
-	|		OR LC_BatchWiseBalance.Document REFS Document.RetailReturnReceipt
-	|			THEN -LC_BatchWiseBalance.Quantity
+	|		WHEN R6010B_BatchWiseBalance.Document REFS Document.SalesInvoice
+	|		OR R6010B_BatchWiseBalance.Document REFS Document.RetailSalesReceipt
+	|			THEN R6010B_BatchWiseBalance.Quantity
+	|		WHEN R6010B_BatchWiseBalance.Document REFS Document.SalesReturn
+	|		OR R6010B_BatchWiseBalance.Document REFS Document.RetailReturnReceipt
+	|			THEN -R6010B_BatchWiseBalance.Quantity
 	|		ELSE 0
 	|	END AS Quantity,
 	|	CASE
-	|		WHEN LC_BatchWiseBalance.Document REFS Document.SalesInvoice
-	|		OR LC_BatchWiseBalance.Document REFS Document.RetailSalesReceipt
-	|			THEN LC_BatchWiseBalance.Amount
-	|		WHEN LC_BatchWiseBalance.Document REFS Document.SalesReturn
-	|		OR LC_BatchWiseBalance.Document REFS Document.RetailReturnReceipt
-	|			THEN -LC_BatchWiseBalance.Amount
+	|		WHEN R6010B_BatchWiseBalance.Document REFS Document.SalesInvoice
+	|		OR R6010B_BatchWiseBalance.Document REFS Document.RetailSalesReceipt
+	|			THEN R6010B_BatchWiseBalance.Amount
+	|		WHEN R6010B_BatchWiseBalance.Document REFS Document.SalesReturn
+	|		OR R6010B_BatchWiseBalance.Document REFS Document.RetailReturnReceipt
+	|			THEN -R6010B_BatchWiseBalance.Amount
 	|		ELSE 0
 	|	END AS Amount,
 	|	CASE
-	|		WHEN LC_BatchWiseBalance.Document REFS Document.SalesInvoice
-	|		OR LC_BatchWiseBalance.Document REFS Document.RetailSalesReceipt
-	|			THEN LC_BatchWiseBalance.AmountCost
-	|		WHEN LC_BatchWiseBalance.Document REFS Document.SalesReturn
-	|		OR LC_BatchWiseBalance.Document REFS Document.RetailReturnReceipt
-	|			THEN -LC_BatchWiseBalance.AmountCost
+	|		WHEN R6010B_BatchWiseBalance.Document REFS Document.SalesInvoice
+	|		OR R6010B_BatchWiseBalance.Document REFS Document.RetailSalesReceipt
+	|			THEN R6010B_BatchWiseBalance.AmountCost
+	|		WHEN R6010B_BatchWiseBalance.Document REFS Document.SalesReturn
+	|		OR R6010B_BatchWiseBalance.Document REFS Document.RetailReturnReceipt
+	|			THEN -R6010B_BatchWiseBalance.AmountCost
 	|		ELSE 0
 	|	END AS AmountCost,
-	|	LC_BatchWiseBalance.BatchKey.ItemKey AS ItemKey,
-	|	LC_BatchWiseBalance.Batch.Company AS Company,
-	|	LC_BatchWiseBalance.Recorder AS CalculationMovementCost
+	|	R6010B_BatchWiseBalance.BatchKey.ItemKey AS ItemKey,
+	|	R6010B_BatchWiseBalance.Batch.Company AS Company,
+	|	R6010B_BatchWiseBalance.Recorder AS CalculationMovementCost
 	|INTO BatchWiseBalance
 	|FROM
-	|	AccumulationRegister.LC_BatchWiseBalance AS LC_BatchWiseBalance
+	|	AccumulationRegister.R6010B_BatchWiseBalance AS R6010B_BatchWiseBalance
 	|WHERE
-	|	LC_BatchWiseBalance.Document = &Document
+	|	R6010B_BatchWiseBalance.Document = &Document
 	|;
+	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
 	|	BatchWiseBalance.Period AS Period,
@@ -83,93 +83,92 @@ Procedure CostOfGoodsSold_CollectRecords(DocObject) Export
 	|	BatchWiseBalance.ItemKey AS ItemKey,
 	|	BatchWiseBalance.Company AS Company,
 	|	CASE
-	|		WHEN LC_BatchKeysInfo.SalesInvoice.Ref IS NULL
+	|		WHEN T6020S_BatchKeysInfo.SalesInvoice.Ref IS NULL
 	|			THEN &Document
-	|		ELSE LC_BatchKeysInfo.SalesInvoice
+	|		ELSE T6020S_BatchKeysInfo.SalesInvoice
 	|	END AS SalesInvoice,
 	|	BatchWiseBalance.CalculationMovementCost,
-	|	BatchWiseBalance.Company.LC_LandedCostCurrencyMovementType AS CurrencyMovementType,
-	|	BatchWiseBalance.Company.LC_LandedCostCurrencyMovementType.Currency AS Currency
+	|	BatchWiseBalance.Company.LandedCostCurrencyMovementType AS CurrencyMovementType,
+	|	BatchWiseBalance.Company.LandedCostCurrencyMovementType.Currency AS Currency
 	|FROM
 	|	BatchWiseBalance AS BatchWiseBalance
-	|		LEFT JOIN InformationRegister.LC_BatchKeysInfo AS LC_BatchKeysInfo
-	|		ON LC_BatchKeysInfo.Recorder = &Document
-	|		AND BatchWiseBalance.Company = LC_BatchKeysInfo.Company
-	|		AND BatchWiseBalance.ItemKey = LC_BatchKeysInfo.ItemKey
+	|		LEFT JOIN InformationRegister.T6020S_BatchKeysInfo AS T6020S_BatchKeysInfo
+	|		ON T6020S_BatchKeysInfo.Recorder = &Document
+	|		AND BatchWiseBalance.Company = T6020S_BatchKeysInfo.Company
+	|		AND BatchWiseBalance.ItemKey = T6020S_BatchKeysInfo.ItemKey
 	|WHERE
-	|	(BatchWiseBalance.Quantity <> 0
-	|	AND BatchWiseBalance.Amount <> 0) OR (BatchWiseBalance.AmountCost <> 0)";
+	|	BatchWiseBalance.Quantity <> 0
+	|	AND BatchWiseBalance.Amount <> 0
+	|	OR BatchWiseBalance.AmountCost <> 0";
 	
 	Query.SetParameter("Document", DocObject.Ref);
 	QueryResult = Query.Execute();
-	DocObject.RegisterRecords.LC_CostOfGoodsSold.Load(QueryResult.Unload());
+	DocObject.RegisterRecords.R6060T_CostOfGoodsSold.Load(QueryResult.Unload());
 EndProcedure
 
 Procedure CostOfGoodsSold_LoadRecords(CalculationMovementCostRef) Export
 	Query = New Query;
 	Query.Text =
 	"SELECT
-	|	LC_BatchWiseBalance.Document AS Document
+	|	R6010B_BatchWiseBalance.Document AS Document
 	|INTO AllDocumetsGrouped
 	|FROM
-	|	AccumulationRegister.LC_BatchWiseBalance AS LC_BatchWiseBalance
+	|	AccumulationRegister.R6010B_BatchWiseBalance AS R6010B_BatchWiseBalance
 	|WHERE
-	|	LC_BatchWiseBalance.Recorder = &Recorder
-	|	AND (LC_BatchWiseBalance.Document REFS Document.SalesInvoice
-	|	OR LC_BatchWiseBalance.Document REFS Document.SalesReturn
-	|	OR LC_BatchWiseBalance.Document REFS Document.RetailSalesReceipt
-	|	OR LC_BatchWiseBalance.Document REFS Document.RetailReturnReceipt)
+	|	R6010B_BatchWiseBalance.Recorder = &Recorder
+	|	AND (R6010B_BatchWiseBalance.Document REFS Document.SalesInvoice
+	|	OR R6010B_BatchWiseBalance.Document REFS Document.SalesReturn
+	|	OR R6010B_BatchWiseBalance.Document REFS Document.RetailSalesReceipt
+	|	OR R6010B_BatchWiseBalance.Document REFS Document.RetailReturnReceipt)
 	|GROUP BY
-	|	LC_BatchWiseBalance.Document
+	|	R6010B_BatchWiseBalance.Document
 	|;
-	|////////////////////////////////////////////////////////////////////////////////
+	|
+	////////////////////////////////////////////////////////////////////////////////
 	|SELECT
-	|	LC_BatchWiseBalance.Period AS Period,
-	//
-	| 	LC_BatchWiseBalance.Recorder AS CalculationMovementCosts,
-	//
-	|	LC_BatchWiseBalance.Document AS Document,
+	|	R6010B_BatchWiseBalance.Period AS Period,
+	|	R6010B_BatchWiseBalance.Recorder AS CalculationMovementCosts,
+	|	R6010B_BatchWiseBalance.Document AS Document,
 	|	CASE
-	|		WHEN LC_BatchWiseBalance.Document REFS Document.SalesInvoice
-	|		OR LC_BatchWiseBalance.Document REFS Document.RetailSalesReceipt
-	|			THEN LC_BatchWiseBalance.Quantity
-	|		WHEN LC_BatchWiseBalance.Document REFS Document.SalesReturn
-	|		OR LC_BatchWiseBalance.Document REFS Document.RetailReturnReceipt
-	|			THEN -LC_BatchWiseBalance.Quantity
+	|		WHEN R6010B_BatchWiseBalance.Document REFS Document.SalesInvoice
+	|		OR R6010B_BatchWiseBalance.Document REFS Document.RetailSalesReceipt
+	|			THEN R6010B_BatchWiseBalance.Quantity
+	|		WHEN R6010B_BatchWiseBalance.Document REFS Document.SalesReturn
+	|		OR R6010B_BatchWiseBalance.Document REFS Document.RetailReturnReceipt
+	|			THEN -R6010B_BatchWiseBalance.Quantity
 	|		ELSE 0
 	|	END AS Quantity,
 	|	CASE
-	|		WHEN LC_BatchWiseBalance.Document REFS Document.SalesInvoice
-	|		OR LC_BatchWiseBalance.Document REFS Document.RetailSalesReceipt
-	|			THEN LC_BatchWiseBalance.Amount
-	|		WHEN LC_BatchWiseBalance.Document REFS Document.SalesReturn
-	|		OR LC_BatchWiseBalance.Document REFS Document.RetailReturnReceipt
-	|			THEN -LC_BatchWiseBalance.Amount
+	|		WHEN R6010B_BatchWiseBalance.Document REFS Document.SalesInvoice
+	|		OR R6010B_BatchWiseBalance.Document REFS Document.RetailSalesReceipt
+	|			THEN R6010B_BatchWiseBalance.Amount
+	|		WHEN R6010B_BatchWiseBalance.Document REFS Document.SalesReturn
+	|		OR R6010B_BatchWiseBalance.Document REFS Document.RetailReturnReceipt
+	|			THEN -R6010B_BatchWiseBalance.Amount
 	|		ELSE 0
 	|	END AS Amount,
 	|	CASE
-	|		WHEN LC_BatchWiseBalance.Document REFS Document.SalesInvoice
-	|		OR LC_BatchWiseBalance.Document REFS Document.RetailSalesReceipt
-	|			THEN LC_BatchWiseBalance.AmountCost
-	|		WHEN LC_BatchWiseBalance.Document REFS Document.SalesReturn
-	|		OR LC_BatchWiseBalance.Document REFS Document.RetailReturnReceipt
-	|			THEN -LC_BatchWiseBalance.AmountCost
+	|		WHEN R6010B_BatchWiseBalance.Document REFS Document.SalesInvoice
+	|		OR R6010B_BatchWiseBalance.Document REFS Document.RetailSalesReceipt
+	|			THEN R6010B_BatchWiseBalance.AmountCost
+	|		WHEN R6010B_BatchWiseBalance.Document REFS Document.SalesReturn
+	|		OR R6010B_BatchWiseBalance.Document REFS Document.RetailReturnReceipt
+	|			THEN -R6010B_BatchWiseBalance.AmountCost
 	|		ELSE 0
 	|	END AS AmountCost,
-	|	LC_BatchWiseBalance.BatchKey.ItemKey AS ItemKey,
-	|	LC_BatchWiseBalance.Batch.Company AS Company
+	|	R6010B_BatchWiseBalance.BatchKey.ItemKey AS ItemKey,
+	|	R6010B_BatchWiseBalance.Batch.Company AS Company
 	|INTO BatchWiseBalance
 	|FROM
-	|	AccumulationRegister.LC_BatchWiseBalance AS LC_BatchWiseBalance
+	|	AccumulationRegister.R6010B_BatchWiseBalance AS R6010B_BatchWiseBalance
 	|		INNER JOIN AllDocumetsGrouped AS AllDocumetsGrouped
-	|		ON LC_BatchWiseBalance.Document = AllDocumetsGrouped.Document
+	|		ON R6010B_BatchWiseBalance.Document = AllDocumetsGrouped.Document
 	|;
-	|////////////////////////////////////////////////////////////////////////////////
+	|
+	////////////////////////////////////////////////////////////////////////////////
 	|SELECT
 	|	BatchWiseBalance.Period AS Period,
-	//
-	| 	BatchWiseBalance.CalculationMovementCosts AS CalculationMovementCosts,
-	//
+	|	BatchWiseBalance.CalculationMovementCosts AS CalculationMovementCosts,
 	|	BatchWiseBalance.Document AS Document,
 	|	BatchWiseBalance.Quantity AS Quantity,
 	|	BatchWiseBalance.Amount AS Amount,
@@ -177,26 +176,25 @@ Procedure CostOfGoodsSold_LoadRecords(CalculationMovementCostRef) Export
 	|	BatchWiseBalance.ItemKey AS ItemKey,
 	|	BatchWiseBalance.Company AS Company,
 	|	CASE
-	|		WHEN LC_BatchKeysInfo.SalesInvoice.Ref IS NULL
+	|		WHEN T6020S_BatchKeysInfo.SalesInvoice.Ref IS NULL
 	|			THEN BatchWiseBalance.Document
-	|		ELSE LC_BatchKeysInfo.SalesInvoice
+	|		ELSE T6020S_BatchKeysInfo.SalesInvoice
 	|	END AS SalesInvoice,
-	|	BatchWiseBalance.Company.LC_LandedCostCurrencyMovementType AS CurrencyMovementType,
-	|	BatchWiseBalance.Company.LC_LandedCostCurrencyMovementType.Currency AS Currency
+	|	BatchWiseBalance.Company.LandedCostCurrencyMovementType AS CurrencyMovementType,
+	|	BatchWiseBalance.Company.LandedCostCurrencyMovementType.Currency AS Currency
 	|INTO BatchWiseBalance_BatchKeysInfo
 	|FROM
 	|	BatchWiseBalance AS BatchWiseBalance
-	|		LEFT JOIN InformationRegister.LC_BatchKeysInfo AS LC_BatchKeysInfo
-	|		ON BatchWiseBalance.Document = LC_BatchKeysInfo.Recorder
-	|		AND BatchWiseBalance.Company = LC_BatchKeysInfo.Company
-	|		AND BatchWiseBalance.ItemKey = LC_BatchKeysInfo.ItemKey
+	|		LEFT JOIN InformationRegister.T6020S_BatchKeysInfo AS T6020S_BatchKeysInfo
+	|		ON BatchWiseBalance.Document = T6020S_BatchKeysInfo.Recorder
+	|		AND BatchWiseBalance.Company = T6020S_BatchKeysInfo.Company
+	|		AND BatchWiseBalance.ItemKey = T6020S_BatchKeysInfo.ItemKey
 	|;
-	|////////////////////////////////////////////////////////////////////////////////
+	|
+	////////////////////////////////////////////////////////////////////////////////
 	|SELECT
 	|	BatchWiseBalance_BatchKeysInfo.Period,
-	//
-	| 	BatchWiseBalance_BatchKeysInfo.CalculationMovementCosts AS CalculationMovementCosts,
-	//
+	|	BatchWiseBalance_BatchKeysInfo.CalculationMovementCosts AS CalculationMovementCosts,
 	|	BatchWiseBalance_BatchKeysInfo.Document AS Document,
 	|	BatchWiseBalance_BatchKeysInfo.Quantity,
 	|	BatchWiseBalance_BatchKeysInfo.Amount,
@@ -218,7 +216,7 @@ Procedure CostOfGoodsSold_LoadRecords(CalculationMovementCostRef) Export
 		If Not ValueIsFilled(QuerySelection.Document) Then
 			Continue;
 		EndIf;
-		RecordSet = AccumulationRegisters.LC_CostOfGoodsSold.CreateRecordSet();
+		RecordSet = AccumulationRegisters.R6060T_CostOfGoodsSold.CreateRecordSet();
 		RecordSet.Filter.Recorder.Set(QuerySelection.Document);
 		QuerySelectionDetails = QuerySelection.Select();
 		While QuerySelectionDetails.Next() Do
@@ -226,7 +224,7 @@ Procedure CostOfGoodsSold_LoadRecords(CalculationMovementCostRef) Export
 			FillPropertyValues(NewRecord, QuerySelectionDetails);
 			NewRecord.Recorder = QuerySelection.Document;
 			NewRecord.Period = QuerySelectionDetails.Period;
-			NewRecord.CalculationMovementCost = QuerySelectionDetails.CalculationMovementCosts;//CalculationMovementCostRef;
+			NewRecord.CalculationMovementCost = QuerySelectionDetails.CalculationMovementCosts;
 		EndDo;
 		RecordSet.Write();
 	EndDo;

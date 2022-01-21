@@ -14,6 +14,7 @@ Procedure BatchRelevance_SetBound(DocObject, TableForLoad) Export
 	|FROM
 	|	&TableForLoad AS tmp
 	|;
+	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
 	|	TableForLoad.Company,
@@ -33,27 +34,29 @@ Procedure BatchRelevance_SetBound(DocObject, TableForLoad) Export
 	|	TableForLoad.Date,
 	|	TableForLoad.BatchDocument
 	|;
+	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
-	|	LC_BatchKeysInfo.Company,
-	|	LC_BatchKeysInfo.Store,
-	|	LC_BatchKeysInfo.ItemKey,
-	|	SUM(LC_BatchKeysInfo.Quantity) AS Quantity,
-	|	LC_BatchKeysInfo.Period AS Date,
-	|	SUM(LC_BatchKeysInfo.Amount) AS Amount,
-	|	LC_BatchKeysInfo.BatchDocument AS BatchDocument
+	|	T6020S_BatchKeysInfo.Company,
+	|	T6020S_BatchKeysInfo.Store,
+	|	T6020S_BatchKeysInfo.ItemKey,
+	|	SUM(T6020S_BatchKeysInfo.Quantity) AS Quantity,
+	|	T6020S_BatchKeysInfo.Period AS Date,
+	|	SUM(T6020S_BatchKeysInfo.Amount) AS Amount,
+	|	T6020S_BatchKeysInfo.BatchDocument AS BatchDocument
 	|INTO TableFromRecordSetGrouped
 	|FROM
-	|	InformationRegister.LC_BatchKeysInfo AS LC_BatchKeysInfo
+	|	InformationRegister.T6020S_BatchKeysInfo AS T6020S_BatchKeysInfo
 	|WHERE
-	|	LC_BatchKeysInfo.Recorder = &Recorder
+	|	T6020S_BatchKeysInfo.Recorder = &Recorder
 	|GROUP BY
-	|	LC_BatchKeysInfo.Company,
-	|	LC_BatchKeysInfo.Store,
-	|	LC_BatchKeysInfo.ItemKey,
-	|	LC_BatchKeysInfo.Period,
-	|	LC_BatchKeysInfo.BatchDocument
+	|	T6020S_BatchKeysInfo.Company,
+	|	T6020S_BatchKeysInfo.Store,
+	|	T6020S_BatchKeysInfo.ItemKey,
+	|	T6020S_BatchKeysInfo.Period,
+	|	T6020S_BatchKeysInfo.BatchDocument
 	|;
+	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
 	|	TableForLoadGrouped.Company AS CompanyNew,
@@ -73,9 +76,10 @@ Procedure BatchRelevance_SetBound(DocObject, TableForLoad) Export
 	|		AND TableForLoadGrouped.ItemKey = TableFromRecordSetGrouped.ItemKey
 	|		AND TableForLoadGrouped.Quantity = TableFromRecordSetGrouped.Quantity
 	|		AND TableForLoadGrouped.Date = TableFromRecordSetGrouped.Date
-	|		AND	TableForLoadGrouped.Amount = TableFromRecordSetGrouped.Amount
+	|		AND TableForLoadGrouped.Amount = TableFromRecordSetGrouped.Amount
 	|		AND TableForLoadGrouped.BatchDocument = TableFromRecordSetGrouped.BatchDocument
 	|;
+	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
 	|	JoinedData.CompanyNew AS Company,
@@ -100,27 +104,28 @@ Procedure BatchRelevance_SetBound(DocObject, TableForLoad) Export
 	|WHERE
 	|	JoinedData.ItemKeyNew IS NULL
 	|;
+	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
-	|	LC_BatchRelevance.Date AS DateOld,
-	|	LC_BatchRelevance.Company AS CompanyOld,
-	|	LC_BatchRelevance.Store AS StoreOld,
-	|	LC_BatchRelevance.ItemKey AS ItemKeyOld,
+	|	T6030S_BatchRelevance.Date AS DateOld,
+	|	T6030S_BatchRelevance.Company AS CompanyOld,
+	|	T6030S_BatchRelevance.Store AS StoreOld,
+	|	T6030S_BatchRelevance.ItemKey AS ItemKeyOld,
 	|	MIN(ModifiedData.Date) AS DateNew,
 	|	ModifiedData.Company AS CompanyNew,
 	|	ModifiedData.Store AS StoreNew,
 	|	ModifiedData.ItemKey AS ItemKeyNew
 	|FROM
 	|	ModifiedData AS ModifiedData
-	|		LEFT JOIN InformationRegister.LC_BatchRelevance AS LC_BatchRelevance
-	|		ON ModifiedData.Company = LC_BatchRelevance.Company
-	|		AND ModifiedData.Store = LC_BatchRelevance.Store
-	|		AND ModifiedData.ItemKey = LC_BatchRelevance.ItemKey
+	|		LEFT JOIN InformationRegister.T6030S_BatchRelevance AS T6030S_BatchRelevance
+	|		ON ModifiedData.Company = T6030S_BatchRelevance.Company
+	|		AND ModifiedData.Store = T6030S_BatchRelevance.Store
+	|		AND ModifiedData.ItemKey = T6030S_BatchRelevance.ItemKey
 	|GROUP BY
-	|	LC_BatchRelevance.Date,
-	|	LC_BatchRelevance.Company,
-	|	LC_BatchRelevance.Store,
-	|	LC_BatchRelevance.ItemKey,
+	|	T6030S_BatchRelevance.Date,
+	|	T6030S_BatchRelevance.Company,
+	|	T6030S_BatchRelevance.Store,
+	|	T6030S_BatchRelevance.ItemKey,
 	|	ModifiedData.Company,
 	|	ModifiedData.Store,
 	|	ModifiedData.ItemKey";
@@ -153,45 +158,45 @@ Procedure BatchRelevance_Restore(Company, EndPeriod) Export
 	Query = New Query;
 	Query.Text =
 	"SELECT
-	|	LC_BatchWiseBalance.Period AS Period,
-	|	LC_BatchWiseBalance.Batch.Company AS Company,
-	|	LC_BatchWiseBalance.BatchKey.ItemKey AS ItemKey,
-	|	LC_BatchWiseBalance.BatchKey.Store AS Store,
-	|	LC_BatchWiseBalance.Document AS Document
+	|	R6010B_BatchWiseBalance.Period AS Period,
+	|	R6010B_BatchWiseBalance.Batch.Company AS Company,
+	|	R6010B_BatchWiseBalance.BatchKey.ItemKey AS ItemKey,
+	|	R6010B_BatchWiseBalance.BatchKey.Store AS Store,
+	|	R6010B_BatchWiseBalance.Document AS Document
 	|INTO tmp
 	|FROM
-	|	AccumulationRegister.LC_BatchWiseBalance AS LC_BatchWiseBalance
+	|	AccumulationRegister.R6010B_BatchWiseBalance AS R6010B_BatchWiseBalance
 	|WHERE
-	|	LC_BatchWiseBalance.Period <= ENDOFPERIOD(&EndPeriod, DAY)
-	|	AND LC_BatchWiseBalance.Batch.Company = &Company
+	|	R6010B_BatchWiseBalance.Period <= ENDOFPERIOD(&EndPeriod, DAY)
+	|	AND R6010B_BatchWiseBalance.Batch.Company = &Company
 	|
 	|UNION ALL
 	|
 	|SELECT
-	|	LC_BatchShortageOutgoing.Period,
-	|	LC_BatchShortageOutgoing.Company,
-	|	LC_BatchShortageOutgoing.BatchKey.ItemKey,
-	|	LC_BatchShortageOutgoing.BatchKey.Store,
-	|	LC_BatchShortageOutgoing.Document
+	|	R6030T_BatchShortageOutgoing.Period,
+	|	R6030T_BatchShortageOutgoing.Company,
+	|	R6030T_BatchShortageOutgoing.BatchKey.ItemKey,
+	|	R6030T_BatchShortageOutgoing.BatchKey.Store,
+	|	R6030T_BatchShortageOutgoing.Document
 	|FROM
-	|	AccumulationRegister.LC_BatchShortageOutgoing AS LC_BatchShortageOutgoing
+	|	AccumulationRegister.R6030T_BatchShortageOutgoing AS R6030T_BatchShortageOutgoing
 	|WHERE
-	|	LC_BatchShortageOutgoing.Period <= ENDOFPERIOD(&EndPeriod, DAY)
-	|	AND LC_BatchShortageOutgoing.Company = &Company
+	|	R6030T_BatchShortageOutgoing.Period <= ENDOFPERIOD(&EndPeriod, DAY)
+	|	AND R6030T_BatchShortageOutgoing.Company = &Company
 	|
 	|UNION ALL
 	|
 	|SELECT
-	|	LC_BatchShortageIncoming.Period,
-	|	LC_BatchShortageIncoming.Company,
-	|	LC_BatchShortageIncoming.BatchKey.ItemKey,
-	|	LC_BatchShortageIncoming.BatchKey.Store,
-	|	LC_BatchShortageIncoming.Document
+	|	R6040T_BatchShortageIncoming.Period,
+	|	R6040T_BatchShortageIncoming.Company,
+	|	R6040T_BatchShortageIncoming.BatchKey.ItemKey,
+	|	R6040T_BatchShortageIncoming.BatchKey.Store,
+	|	R6040T_BatchShortageIncoming.Document
 	|FROM
-	|	AccumulationRegister.LC_BatchShortageIncoming AS LC_BatchShortageIncoming
+	|	AccumulationRegister.R6040T_BatchShortageIncoming AS R6040T_BatchShortageIncoming
 	|WHERE
-	|	LC_BatchShortageIncoming.Period <= ENDOFPERIOD(&EndPeriod, DAY)
-	|	AND LC_BatchShortageIncoming.Company = &Company
+	|	R6040T_BatchShortageIncoming.Period <= ENDOFPERIOD(&EndPeriod, DAY)
+	|	AND R6040T_BatchShortageIncoming.Company = &Company
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
@@ -203,7 +208,6 @@ Procedure BatchRelevance_Restore(Company, EndPeriod) Export
 	|INTO tmp_Grouped
 	|FROM
 	|	tmp AS tmp
-	|
 	|GROUP BY
 	|	tmp.Company,
 	|	tmp.ItemKey,
@@ -221,10 +225,9 @@ Procedure BatchRelevance_Restore(Company, EndPeriod) Export
 	|	tmp_Grouped AS tmp_Grouped
 	|		LEFT JOIN tmp AS tmp
 	|		ON tmp_Grouped.Period = tmp.Period
-	|			AND tmp_Grouped.Company = tmp.Company
-	|			AND tmp_Grouped.ItemKey = tmp.ItemKey
-	|			AND tmp_Grouped.Store = tmp.Store
-	|
+	|		AND tmp_Grouped.Company = tmp.Company
+	|		AND tmp_Grouped.ItemKey = tmp.ItemKey
+	|		AND tmp_Grouped.Store = tmp.Store
 	|GROUP BY
 	|	tmp_Grouped.Period,
 	|	tmp_Grouped.Company,
@@ -245,45 +248,45 @@ Procedure BatchRelevance_Reset(Company, BeginPeriod) Export
 	Query = New Query;
 	Query.Text =
 	"SELECT
-	|	LC_BatchWiseBalance.Period AS Period,
-	|	LC_BatchWiseBalance.Batch.Company AS Company,
-	|	LC_BatchWiseBalance.BatchKey.ItemKey AS ItemKey,
-	|	LC_BatchWiseBalance.BatchKey.Store AS Store,
-	|	LC_BatchWiseBalance.Document AS Document
+	|	R6010B_BatchWiseBalance.Period AS Period,
+	|	R6010B_BatchWiseBalance.Batch.Company AS Company,
+	|	R6010B_BatchWiseBalance.BatchKey.ItemKey AS ItemKey,
+	|	R6010B_BatchWiseBalance.BatchKey.Store AS Store,
+	|	R6010B_BatchWiseBalance.Document AS Document
 	|INTO tmp
 	|FROM
-	|	AccumulationRegister.LC_BatchWiseBalance AS LC_BatchWiseBalance
+	|	AccumulationRegister.R6010B_BatchWiseBalance AS R6010B_BatchWiseBalance
 	|WHERE
-	|	LC_BatchWiseBalance.Period <= BEGINOFPERIOD(&BeginPeriod, DAY)
-	|	AND LC_BatchWiseBalance.Batch.Company = &Company
+	|	R6010B_BatchWiseBalance.Period <= BEGINOFPERIOD(&BeginPeriod, DAY)
+	|	AND R6010B_BatchWiseBalance.Batch.Company = &Company
 	|
 	|UNION ALL
 	|
 	|SELECT
-	|	LC_BatchShortageOutgoing.Period,
-	|	LC_BatchShortageOutgoing.Company,
-	|	LC_BatchShortageOutgoing.BatchKey.ItemKey,
-	|	LC_BatchShortageOutgoing.BatchKey.Store,
-	|	LC_BatchShortageOutgoing.Document
+	|	R6030T_BatchShortageOutgoing.Period,
+	|	R6030T_BatchShortageOutgoing.Company,
+	|	R6030T_BatchShortageOutgoing.BatchKey.ItemKey,
+	|	R6030T_BatchShortageOutgoing.BatchKey.Store,
+	|	R6030T_BatchShortageOutgoing.Document
 	|FROM
-	|	AccumulationRegister.LC_BatchShortageOutgoing AS LC_BatchShortageOutgoing
+	|	AccumulationRegister.R6030T_BatchShortageOutgoing AS R6030T_BatchShortageOutgoing
 	|WHERE
-	|	LC_BatchShortageOutgoing.Period <= BEGINOFPERIOD(&BeginPeriod, DAY)
-	|	AND LC_BatchShortageOutgoing.Company = &Company
+	|	R6030T_BatchShortageOutgoing.Period <= BEGINOFPERIOD(&BeginPeriod, DAY)
+	|	AND R6030T_BatchShortageOutgoing.Company = &Company
 	|
 	|UNION ALL
 	|
 	|SELECT
-	|	LC_BatchShortageIncoming.Period,
-	|	LC_BatchShortageIncoming.Company,
-	|	LC_BatchShortageIncoming.BatchKey.ItemKey,
-	|	LC_BatchShortageIncoming.BatchKey.Store,
-	|	LC_BatchShortageIncoming.Document
+	|	R6040T_BatchShortageIncoming.Period,
+	|	R6040T_BatchShortageIncoming.Company,
+	|	R6040T_BatchShortageIncoming.BatchKey.ItemKey,
+	|	R6040T_BatchShortageIncoming.BatchKey.Store,
+	|	R6040T_BatchShortageIncoming.Document
 	|FROM
-	|	AccumulationRegister.LC_BatchShortageIncoming AS LC_BatchShortageIncoming
+	|	AccumulationRegister.R6040T_BatchShortageIncoming AS R6040T_BatchShortageIncoming
 	|WHERE
-	|	LC_BatchShortageIncoming.Period <= BEGINOFPERIOD(&BeginPeriod, DAY)
-	|	AND LC_BatchShortageIncoming.Company = &Company
+	|	R6040T_BatchShortageIncoming.Period <= BEGINOFPERIOD(&BeginPeriod, DAY)
+	|	AND R6040T_BatchShortageIncoming.Company = &Company
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
@@ -295,7 +298,6 @@ Procedure BatchRelevance_Reset(Company, BeginPeriod) Export
 	|INTO tmp_Grouped
 	|FROM
 	|	tmp AS tmp
-	|
 	|GROUP BY
 	|	tmp.Company,
 	|	tmp.ItemKey,
@@ -313,10 +315,9 @@ Procedure BatchRelevance_Reset(Company, BeginPeriod) Export
 	|	tmp_Grouped AS tmp_Grouped
 	|		LEFT JOIN tmp AS tmp
 	|		ON tmp_Grouped.Period = tmp.Period
-	|			AND tmp_Grouped.Company = tmp.Company
-	|			AND tmp_Grouped.ItemKey = tmp.ItemKey
-	|			AND tmp_Grouped.Store = tmp.Store
-	|
+	|		AND tmp_Grouped.Company = tmp.Company
+	|		AND tmp_Grouped.ItemKey = tmp.ItemKey
+	|		AND tmp_Grouped.Store = tmp.Store
 	|GROUP BY
 	|	tmp_Grouped.Period,
 	|	tmp_Grouped.Company,
@@ -336,15 +337,15 @@ Procedure BatchRelevance_Clear(Company, EndPeriod) Export
 	Query = New Query;
 	Query.Text =
 	"SELECT
-	|	LC_BatchRelevance.Date,
-	|	LC_BatchRelevance.Company,
-	|	LC_BatchRelevance.Store,
-	|	LC_BatchRelevance.ItemKey
+	|	T6030S_BatchRelevance.Date,
+	|	T6030S_BatchRelevance.Company,
+	|	T6030S_BatchRelevance.Store,
+	|	T6030S_BatchRelevance.ItemKey
 	|FROM
-	|	InformationRegister.LC_BatchRelevance AS LC_BatchRelevance
+	|	InformationRegister.T6030S_BatchRelevance AS T6030S_BatchRelevance
 	|WHERE
-	|	LC_BatchRelevance.Company = &Company
-	|	AND LC_BatchRelevance.Date <= ENDOFPERIOD(&EndPeriod, DAY)";
+	|	T6030S_BatchRelevance.Company = &Company
+	|	AND T6030S_BatchRelevance.Date <= ENDOFPERIOD(&EndPeriod, DAY)";
 	Query.SetParameter("Company", Company);
 	Query.SetParameter("EndPeriod", EndPeriod);
 	QueryResults = Query.Execute();
@@ -358,15 +359,14 @@ Function GetPointInTime(Date, Company, Store, ItemKey)
 	Query = New Query;
 	Query.Text =
 	"SELECT
-	|	LC_BatchRelevance.Document.PointInTime AS PointInTime
+	|	T6030S_BatchRelevance.Document.PointInTime AS PointInTime
 	|FROM
-	|	InformationRegister.LC_BatchRelevance AS LC_BatchRelevance
+	|	InformationRegister.T6030S_BatchRelevance AS T6030S_BatchRelevance
 	|WHERE
-	|	LC_BatchRelevance.Date = &Date
-	|	AND 
-	|	LC_BatchRelevance.Company = &Company
-	|	AND LC_BatchRelevance.Store = &Store
-	|	AND LC_BatchRelevance.ItemKey = &ItemKey";
+	|	T6030S_BatchRelevance.Date = &Date
+	|	AND T6030S_BatchRelevance.Company = &Company
+	|	AND T6030S_BatchRelevance.Store = &Store
+	|	AND T6030S_BatchRelevance.ItemKey = &ItemKey";
 	Query.SetParameter("Date", Date);
 	Query.SetParameter("Company", Company);
 	Query.SetParameter("Store", Store);
@@ -381,7 +381,7 @@ Function GetPointInTime(Date, Company, Store, ItemKey)
 EndFunction
 
 Procedure SetIsRelevance(Date, Company, Store, ItemKey, DocRef)
-	RecordSet = InformationRegisters.LC_BatchRelevance.CreateRecordSet();
+	RecordSet = InformationRegisters.T6030S_BatchRelevance.CreateRecordSet();
 	RecordSet.Filter.Date.Set(Date);
 	RecordSet.Filter.Company.Set(Company);
 	RecordSet.Filter.Store.Set(Store);
@@ -396,7 +396,7 @@ Procedure SetIsRelevance(Date, Company, Store, ItemKey, DocRef)
 EndProcedure
 
 Procedure ClearRecordSet(Date, Company, Store, ItemKey)
-	RecordSet = InformationRegisters.LC_BatchRelevance.CreateRecordSet();
+	RecordSet = InformationRegisters.T6030S_BatchRelevance.CreateRecordSet();
 	RecordSet.Filter.Date.Set(Date);
 	RecordSet.Filter.Company.Set(Company);
 	RecordSet.Filter.Store.Set(Store);
@@ -406,7 +406,7 @@ Procedure ClearRecordSet(Date, Company, Store, ItemKey)
 EndProcedure
 
 Procedure WriteRecordSet(DocumentRef, Date, Company, Store, ItemKey, IsRelevance = False, FilterByDate = True)
-	RecordSet = InformationRegisters.LC_BatchRelevance.CreateRecordSet();
+	RecordSet = InformationRegisters.T6030S_BatchRelevance.CreateRecordSet();
 	If FilterByDate Then
 		RecordSet.Filter.Date.Set(Date);
 	EndIf;

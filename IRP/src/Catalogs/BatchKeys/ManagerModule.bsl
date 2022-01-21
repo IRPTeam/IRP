@@ -15,17 +15,17 @@ Procedure Create_BatchKeys(Company, BeginPeriod, EndPeriod) Export
 	Query = New Query;
 	Query.Text =
 	"SELECT
-	|	LC_BatchKeysInfo.Store,
-	|	LC_BatchKeysInfo.ItemKey
+	|	T6020S_BatchKeysInfo.Store,
+	|	T6020S_BatchKeysInfo.ItemKey
 	|INTO tmp
 	|FROM
-	|	InformationRegister.LC_BatchKeysInfo AS LC_BatchKeysInfo
+	|	InformationRegister.T6020S_BatchKeysInfo AS T6020S_BatchKeysInfo
 	|WHERE
-	|	LC_BatchKeysInfo.Company = &Company
-	|	AND LC_BatchKeysInfo.Period BETWEEN BEGINOFPERIOD(&BeginPeriod, DAY) AND ENDOFPERIOD(&EndPeriod, DAY)
+	|	T6020S_BatchKeysInfo.Company = &Company
+	|	AND T6020S_BatchKeysInfo.Period BETWEEN BEGINOFPERIOD(&BeginPeriod, DAY) AND ENDOFPERIOD(&EndPeriod, DAY)
 	|GROUP BY
-	|	LC_BatchKeysInfo.Store,
-	|	LC_BatchKeysInfo.ItemKey
+	|	T6020S_BatchKeysInfo.Store,
+	|	T6020S_BatchKeysInfo.ItemKey
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
@@ -34,20 +34,19 @@ Procedure Create_BatchKeys(Company, BeginPeriod, EndPeriod) Export
 	|	tmp.ItemKey
 	|FROM
 	|	tmp AS tmp
-	|		LEFT JOIN Catalog.LC_BatchKeys AS LC_BatchKeys
-	|		ON tmp.Store = LC_BatchKeys.Store
-	|		AND tmp.ItemKey = LC_BatchKeys.ItemKey
-	|		AND
-	|		NOT LC_BatchKeys.DeletionMark
+	|		LEFT JOIN Catalog.BatchKeys AS BatchKeys
+	|		ON tmp.Store = BatchKeys.Store
+	|		AND tmp.ItemKey = BatchKeys.ItemKey
+	|		AND NOT BatchKeys.DeletionMark
 	|WHERE
-	|	LC_BatchKeys.Ref IS NULL";
+	|	BatchKeys.Ref IS NULL";
 	Query.SetParameter("Company", Company);
 	Query.SetParameter("BeginPeriod", BeginPeriod);
 	Query.SetParameter("EndPeriod", EndPeriod);
 	QueryResult = Query.Execute();
 	QuerySelection = QueryResult.Select();
 	While QuerySelection.Next() Do
-		NewBatchKey = Catalogs.LC_BatchKeys.CreateItem();
+		NewBatchKey = Catalogs.BatchKeys.CreateItem();
 		NewBatchKey.ItemKey = QuerySelection.ItemKey;
 		NewBatchKey.Store = QuerySelection.Store;
 		NewBatchKey.Write();

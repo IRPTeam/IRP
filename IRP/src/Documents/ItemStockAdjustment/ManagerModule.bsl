@@ -303,7 +303,11 @@ Function T6010S_BatchesInfo()
 		|FROM
 		|	ItemList AS ItemList
 		|WHERE
-		|	TRUE";
+		|	TRUE
+		|GROUP BY
+		|	ItemList.Company,
+		|	ItemList.Period,
+		|	ItemList.Ref";
 EndFunction
 
 Function T6020S_BatchKeysInfo()
@@ -314,12 +318,18 @@ Function T6020S_BatchKeysInfo()
 		|	ItemList.Company,
 		|	ItemList.Store,
 		|	ItemList.ItemKey,
-		|	ItemList.Quantity
+		|	SUM(ItemList.Quantity) AS Quantity
 		|INTO T6020S_BatchKeysInfo
 		|FROM
 		|	ItemList AS ItemList
 		|WHERE
 		|	TRUE
+		|GROUP BY
+		|	ItemList.Company,
+		|	ItemList.ItemKey,
+		|	ItemList.Period,
+		|	ItemList.Store,
+		|	VALUE(Enum.BatchDirection.Receipt)
 		|
 		|UNION ALL
 		|
@@ -329,11 +339,17 @@ Function T6020S_BatchKeysInfo()
 		|	ItemList.Company,
 		|	ItemList.Store,
 		|	ItemList.ItemKeyWriteOff,
-		|	ItemList.Quantity
+		|	SUM(ItemList.Quantity) AS Quantity
 		|FROM
 		|	ItemList AS ItemList
 		|WHERE
-		|	TRUE";
+		|	TRUE
+		|GROUP BY
+		|	ItemList.Company,
+		|	ItemList.ItemKeyWriteOff,
+		|	ItemList.Period,
+		|	ItemList.Store,
+		|	VALUE(Enum.BatchDirection.Expense)";
 EndFunction
 
 #EndRegion

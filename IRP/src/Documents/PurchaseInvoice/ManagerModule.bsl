@@ -61,6 +61,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	|	Document.PurchaseInvoice.ItemList AS ItemList
 	|		INNER JOIN tmpRowIDInfo AS RowIDInfo
 	|		ON ItemList.Key = RowIDInfo.Key
+	|		AND RowIDInfo.Ref = &Ref
 	|WHERE
 	|	ItemList.Ref = &Ref
 	|	AND ItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Product)
@@ -399,7 +400,8 @@ Function ItemList()
 		   |	PurchaseInvoiceItemList.NetAmount AS NetAmount,
 		   |	PurchaseInvoiceItemList.Key,
 		   |	PurchaseInvoiceItemList.Ref.Branch AS Branch,
-		   |	PurchaseInvoiceItemList.Ref.LegalNameContract AS LegalNameContract
+		   |	PurchaseInvoiceItemList.Ref.LegalNameContract AS LegalNameContract,
+		   |	PurchaseInvoiceItemList.IsAdditionalItemCost
 		   |INTO ItemList
 		   |FROM
 		   |	Document.PurchaseInvoice.ItemList AS PurchaseInvoiceItemList

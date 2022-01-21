@@ -146,23 +146,23 @@ EndFunction
 
 Function ItemList()
 	Return "SELECT
-		   |	ItemList.Ref.Date AS Period,
-		   |	ItemList.Ref.Company AS Company,
-		   |	ItemList.Ref.Branch AS Branch,
-		   |	ItemList.Ref.Store AS Store,
-		   |	ItemList.ItemKey AS ItemKey,
-		   |	ItemList.ProfitLossCenter AS ProfitLossCenter,
-		   |	ItemList.RevenueType AS RevenueType,
-		   |	NOT ItemList.PhysicalInventory.Ref IS NULL AS PhysicalInventoryExists,
-		   |	ItemList.PhysicalInventory AS PhysicalInventory,
-		   |	ItemList.Ref AS Basis,
-		   |	ItemList.QuantityInBaseUnit AS Quantity,
-		   |	ItemList.LandedCost AS LandedCost
-		   |INTO ItemList
-		   |FROM
-		   |	Document.StockAdjustmentAsSurplus.ItemList AS ItemList
-		   |WHERE
-		   |	ItemList.Ref = &Ref";
+	|	ItemList.Ref.Date AS Period,
+	|	ItemList.Ref.Company AS Company,
+	|	ItemList.Ref.Branch AS Branch,
+	|	ItemList.Ref.Store AS Store,
+	|	ItemList.ItemKey AS ItemKey,
+	|	ItemList.ProfitLossCenter AS ProfitLossCenter,
+	|	ItemList.RevenueType AS RevenueType,
+	|	NOT ItemList.PhysicalInventory.Ref IS NULL AS PhysicalInventoryExists,
+	|	ItemList.PhysicalInventory AS PhysicalInventory,
+	|	ItemList.Ref AS Basis,
+	|	ItemList.QuantityInBaseUnit AS Quantity,
+	|	ItemList.Amount AS LandedCost
+	|INTO ItemList
+	|FROM
+	|	Document.StockAdjustmentAsSurplus.ItemList AS ItemList
+	|WHERE
+	|	ItemList.Ref = &Ref";
 EndFunction
 
 Function SerialLotNumbers()

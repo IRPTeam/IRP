@@ -902,9 +902,9 @@ Function T6020S_BatchKeysInfo()
 	"SELECT
 	|	ItemList.ItemKey,
 	|	ItemList.Store,
-	|	ItemList.Ref.Company AS Company,
-	|	SUM(ItemList.QuantityInBaseUnit) AS Quantity,
-	|	ItemList.Ref.Date AS Period,
+	|	ItemList.Company,
+	|	SUM(ItemList.Quantity) AS Quantity,
+	|	ItemList.Period,
 	|	VALUE(Enum.BatchDirection.Expense) AS Direction
 	|INTO T6020S_BatchKeysInfo
 	|FROM
@@ -914,8 +914,8 @@ Function T6020S_BatchKeysInfo()
 	|GROUP BY
 	|	ItemList.ItemKey,
 	|	ItemList.Store,
-	|	ItemList.Ref.Company,
-	|	ItemList.Ref.Date,
+	|	ItemList.Company,
+	|	ItemList.Period,
 	|	VALUE(Enum.BatchDirection.Expense)";
 EndFunction
 

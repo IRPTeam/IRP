@@ -74,7 +74,7 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	QueryResults = Query.ExecuteBatch();
 	
 	BatchesInfo   = QueryResults[0].Unload();
-	BatchKeysInfo = QueryResults[0].Unload();
+	BatchKeysInfo = QueryResults[1].Unload();
 	If Not BatchKeysInfo.FindRows(New Structure("SalesInvoiceIsFilled", False)).Count() Then
 		BatchesInfo.Clear();
 	EndIf;

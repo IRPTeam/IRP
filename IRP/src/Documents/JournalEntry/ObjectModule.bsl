@@ -31,7 +31,7 @@ Procedure OnWrite(Cancel)
 		Filter.AnalyticType = Enums.AccountingAnalyticTypes.Debit;
 		AccountingExtDimensionRows = ThisObject.Basis.AccountingExtDimensions.FindRows(Filter);
 		For Each ExtDim In AccountingExtDimensionRows Do
-			Record.ExtDimensionsDr.Insert(ExtDim.ExtDimensionType, ExtDim.ExtDimension);
+			Record.ExtDimensionsDr[ExtDim.ExtDimensionType] = ExtDim.ExtDimension;
 		EndDo;
 		
 		// Credit analytics
@@ -39,7 +39,7 @@ Procedure OnWrite(Cancel)
 		Filter.AnalyticType = Enums.AccountingAnalyticTypes.Credit;
 		AccountingExtDimensionRows = ThisObject.Basis.AccountingExtDimensions.FindRows(Filter);
 		For Each ExtDim In AccountingExtDimensionRows Do
-			Record.ExtDimensionsCr.Insert(ExtDim.ExtDimensionType, ExtDim.ExtDimension);
+			Record.ExtDimensionsCr[ExtDim.ExtDimensionType] = ExtDim.ExtDimension;
 		EndDo;
 		
 		DataByAnalytics = AccountingClientServer.GetDataByAccountingAnalytics(ThisObject.Basis, Row);

@@ -639,8 +639,7 @@ Start-Sleep 10]]></param>
           <equals name="env.StartDebug" value="true" />
         </conditions>
         <parameters>
-          <param name="script.content"><![CDATA[coverage-cli convert --input %system.teamcity.build.workingDir%/Cover.csv --output  %system.teamcity.build.workingDir%/Cover.xml --sources IRP\src --format EDT & powershell -command "(Get-Content %system.teamcity.build.workingDir%/Cover.xml) | ForEach-Object { $_ -replace '\\', '/' } | Set-Content %system.teamcity.build.workingDir%/Cover.xml"
-coverage-cli lines --sources %teamcity.project.id% --format EDT --output linesToCover.xml]]></param>
+          <param name="script.content" value="coverage-cli convert --input %system.teamcity.build.workingDir%/Cover.csv --output  %system.teamcity.build.workingDir%/Cover.xml --sources IRP\src --format EDT &amp; powershell -command &quot;(Get-Content %system.teamcity.build.workingDir%/Cover.xml) | ForEach-Object { $_ -replace '\\', '/' } | Set-Content %system.teamcity.build.workingDir%/Cover.xml&quot;" />
           <param name="teamcity.step.mode" value="execute_always" />
           <param name="use.custom.script" value="true" />
         </parameters>

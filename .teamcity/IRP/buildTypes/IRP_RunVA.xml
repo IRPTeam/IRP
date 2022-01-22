@@ -230,7 +230,6 @@ $VanessaRun = {
     },
     'DebugLog': false,
     'DownloadFeaturesOpen': 1,
-    'Lang': 'en',
     'ModelingCreateReport': false,
     'RunningScripts': {
         'SpacingStepSpecifiedUser': 0.1,
@@ -310,6 +309,16 @@ $VanessaRun = {
     $a | Add-Member -Type NoteProperty -Name 'texterrorslogname' -Value "$workingDir/$FolderForAllArtefact/errors/$elementTag"
     $a | Add-Member -Type NoteProperty -Name 'textlogname' -Value $ScriptLogFilePath
     $a | Add-Member -Type NoteProperty -Name 'testclientports' -Value "$startPort - $portmax"
+    
+    if (%teamcity.build.branch% -eq "BranchForTest"){
+    	$Lang = "ru"
+    } else {
+    	$Lang = "en"
+    }
+    
+    $a | Add-Member -Type NoteProperty -Name 'Lang' -Value $Lang
+
+    
     $a.AllureReport | Add-Member -Type NoteProperty -Name 'directorytobuildhierarchy' -Value "$FeaturePath"
     $a.AllureReport | Add-Member -Type NoteProperty -Name 'allurepath' -Value "$allurePath/$elementTag"
     New-Item -ItemType "directory" -Path "$workingDir/$FolderForAllArtefact/AllSteps/$elementTag/junit" | Out-Null

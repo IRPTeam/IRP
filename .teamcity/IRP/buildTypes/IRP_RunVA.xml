@@ -33,6 +33,7 @@
       <param name="env.VA.FeaturePath" value="%teamcity.build.workingDir%/features/" />
       <param name="env.VA_PID" value="" />
       <param name="env.dbgs_PID" value="" />
+      <param name="teamcity.runner.commandline.stdstreams.encoding" value="UTF8" />
     </parameters>
     <build-runners>
       <runner id="RUNNER_31" name="Copy add data  proc from tools" type="jetbrains_powershell">

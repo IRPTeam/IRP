@@ -38,6 +38,13 @@
           <param name="teamcity.step.mode" value="default" />
         </parameters>
       </runner>
+      <runner id="RUNNER_69" name="" type="simpleRunner">
+        <parameters>
+          <param name="script.content" value="coverage-cli lines --sources %teamcity.project.id% --output %system.teamcity.build.workingDir%/linesToCover.xml -w %system.teamcity.build.workingDir%" />
+          <param name="teamcity.step.mode" value="default" />
+          <param name="use.custom.script" value="true" />
+        </parameters>
+      </runner>
     </build-runners>
     <vcs-settings>
       <vcs-entry-ref root-id="IRP_GitTC" />

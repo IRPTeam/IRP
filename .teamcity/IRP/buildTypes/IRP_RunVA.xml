@@ -128,7 +128,13 @@ $RunSaasMode = $%env.RunSaasMode% # can be $true or $false
 #Firt tag, start at template DB. If Use Saas - has to be set
 $TagForCreateSaas = "%env.SaasTag%"
 #Array of all tags for test = @("Tag1", "Tag2", "TagN")
+
+if (%teamcity.build.branch% -eq "BranchForTest"){
+$TagArray = @("BranchForTest")
+} else {
 $TagArray = @(%env.TagsFullList%)
+}
+    
 #Jobs count (how much VA can be running at the same time)
 $StreamCountMax = "%env.StreamCount%"
 #Start test client port

@@ -18,6 +18,13 @@
           <param name="teamcity.step.mode" value="default" />
         </parameters>
       </runner>
+      <runner id="RUNNER_69" name="" type="simpleRunner">
+        <parameters>
+          <param name="script.content" value="coverage-cli lines --sources %teamcity.project.id% --output %system.teamcity.build.workingDir%/linesToCover.xml -w %system.teamcity.build.workingDir%" />
+          <param name="teamcity.step.mode" value="default" />
+          <param name="use.custom.script" value="true" />
+        </parameters>
+      </runner>
       <runner id="RUNNER_2" name="Sonar Start scan" type="sonar-plugin">
         <parameters>
           <param name="additionalParameters" value="-Dsonar.coverageReportPaths=%system.teamcity.build.workingDir%/Cover.xml" />
@@ -36,13 +43,6 @@
         </conditions>
         <parameters>
           <param name="teamcity.step.mode" value="default" />
-        </parameters>
-      </runner>
-      <runner id="RUNNER_69" name="" type="simpleRunner">
-        <parameters>
-          <param name="script.content" value="coverage-cli lines --sources %teamcity.project.id% --output %system.teamcity.build.workingDir%/linesToCover.xml -w %system.teamcity.build.workingDir%" />
-          <param name="teamcity.step.mode" value="default" />
-          <param name="use.custom.script" value="true" />
         </parameters>
       </runner>
     </build-runners>

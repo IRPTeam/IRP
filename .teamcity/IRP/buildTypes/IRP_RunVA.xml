@@ -15,6 +15,7 @@
       <param name="env.BranchToStartVA" value="develop" />
       <param name="env.CloseVA" value="true" spec="checkbox uncheckedValue='false' display='normal' checkedValue='true'" />
       <param name="env.ConfigurationFileName" value="%env.Database1CName%" />
+      <param name="env.Coverage41C" value="C:\OneScript\lib\coverage-cli\vendor\Coverage41C-2.6.1\bin\Coverage41C.bat" />
       <param name="env.Database1CName" value="" />
       <param name="env.DebugPort" value="" />
       <param name="env.DebugVA" value="false" spec="checkbox uncheckedValue='false' display='normal' checkedValue='true'" />

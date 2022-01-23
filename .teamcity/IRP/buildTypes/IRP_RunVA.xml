@@ -633,14 +633,13 @@ Start-Sleep 10]]></param>
           <param name="teamcity.step.mode" value="execute_always" />
         </parameters>
       </runner>
-      <runner id="RUNNER_16" name="Cover convert" type="simpleRunner">
-        <conditions>
-          <equals name="env.StartDebug" value="true" />
-        </conditions>
+      <runner id="RUNNER_16" name="Cover convert" type="jetbrains_powershell">
         <parameters>
-          <param name="script.content" value="coverage-cli convert --input %system.teamcity.build.workingDir%/Cover.csv --output  %system.teamcity.build.workingDir%/Cover.xml --sources IRP\src --format EDT &amp; powershell -command &quot;(Get-Content %system.teamcity.build.workingDir%/Cover.xml) | ForEach-Object { $_ -replace '\\', '/' } | Set-Content %system.teamcity.build.workingDir%/Cover.xml&quot;" />
-          <param name="teamcity.step.mode" value="execute_always" />
-          <param name="use.custom.script" value="true" />
+          <param name="jetbrains_powershell_execution" value="PS1" />
+          <param name="jetbrains_powershell_noprofile" value="true" />
+          <param name="jetbrains_powershell_script_code" value="(Get-Content %system.teamcity.build.workingDir%/Cover.xml) | ForEach-Object { $_ -replace '&quot;src/', '&quot;%teamcity.project.id%/src/' } | Set-Content %system.teamcity.build.workingDir%/Cover.xml" />
+          <param name="jetbrains_powershell_script_mode" value="CODE" />
+          <param name="teamcity.step.mode" value="default" />
         </parameters>
       </runner>
       <runner id="RUNNER_13" name="Allure Report" type="jetbrains_powershell">

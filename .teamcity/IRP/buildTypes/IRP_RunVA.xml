@@ -606,7 +606,7 @@ Start-Sleep -s 5]]></param>
           <equals name="env.StartDebug" value="true" />
         </conditions>
         <parameters>
-          <param name="script.content" value="coverage-cli stop -p %env.PID_ID%" />
+          <param name="script.content" value="&quot;%env.Coverage41C%&quot; stop --infobase DefAlias  --debugger http://localhost:%env.DebugPort%" />
           <param name="teamcity.step.mode" value="execute_always" />
           <param name="use.custom.script" value="true" />
         </parameters>

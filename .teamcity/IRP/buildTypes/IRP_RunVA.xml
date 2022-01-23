@@ -94,9 +94,7 @@ echo "##teamcity[setParameter name='env.dbgs_PID' value='$dbgs_PID']"]]></param>
           <equals name="env.StartDebug" value="true" />
         </conditions>
         <parameters>
-          <param name="script.content"><![CDATA[set EDT_LOCATION=C:\EDT\components\1c-edt-2021.3.0+582-x86_64\plugins
-coverage-cli start --infobase DefAlias  --debugger http://localhost:%env.DebugPort% --output %system.teamcity.build.workingDir%/Cover.csv > "%system.teamcity.build.tempDir%\Cover.Log"
-rem coverage-cli start --infobase %env.Database1CName%  --debugger http://localhost:%env.DebugPort% --output %system.teamcity.build.workingDir%/Cover.csv > "%system.teamcity.build.tempDir%\Cover.Log"]]></param>
+          <param name="script.content" value="start &quot;&quot; &quot;%env.Coverage41C%&quot; start --infobase DefAlias  --debugger http://localhost:%env.DebugPort% --out %system.teamcity.build.workingDir%\Cover.xml --projectDir %system.teamcity.build.workingDir%\%teamcity.project.id%" />
           <param name="teamcity.step.mode" value="default" />
           <param name="use.custom.script" value="true" />
         </parameters>

@@ -130,7 +130,7 @@ $RunSaasMode = $%env.RunSaasMode% # can be $true or $false
 $TagForCreateSaas = "%env.SaasTag%"
 #Array of all tags for test = @("Tag1", "Tag2", "TagN")
 
-if ("%teamcity.build.branch%" -eq "BranchForTest"){
+if (("%teamcity.build.branch%" -eq "BranchForTest") -or ("%teamcity.pullRequest.target.branch%" -eq "BranchForTest")){
 $TagArray = @("BranchForTest")
 } else {
 $TagArray = @(%env.TagsFullList%)
@@ -317,7 +317,7 @@ $VanessaRun = {
     $a | Add-Member -Type NoteProperty -Name 'textlogname' -Value $ScriptLogFilePath
     $a | Add-Member -Type NoteProperty -Name 'testclientports' -Value "$startPort - $portmax"
     
-    if ("%teamcity.build.branch%" -eq "BranchForTest"){
+	if (("%teamcity.build.branch%" -eq "BranchForTest") -or ("%teamcity.pullRequest.target.branch%" -eq "BranchForTest")){
     	$Lang = "ru"
     } else {
     	$Lang = "en"

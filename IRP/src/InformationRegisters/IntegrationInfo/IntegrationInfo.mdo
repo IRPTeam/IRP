@@ -24,6 +24,24 @@
     <key>en</key>
     <value>Integration additional informations</value>
   </listPresentation>
+  <resources uuid="d2a5b90d-55df-4a3e-82cb-c3e52fa5f31f">
+    <name>Value</name>
+    <synonym>
+      <key>en</key>
+      <value>Value</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers/>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:StringValue">
+      <value></value>
+    </fillValue>
+  </resources>
   <resources uuid="937b8196-d8f5-44c0-8828-6e42e7c64f7a">
     <name>SecondValue</name>
     <synonym>
@@ -44,24 +62,6 @@
         <length>1024</length>
       </stringQualifiers>
       <dateQualifiers/>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:StringValue">
-      <value></value>
-    </fillValue>
-  </resources>
-  <resources uuid="d2a5b90d-55df-4a3e-82cb-c3e52fa5f31f">
-    <name>Value</name>
-    <synonym>
-      <key>en</key>
-      <value>Value</value>
-    </synonym>
-    <type>
-      <types>String</types>
-      <stringQualifiers/>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

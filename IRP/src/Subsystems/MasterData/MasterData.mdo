@@ -17,8 +17,8 @@
   <content>Catalog.PaymentTypes</content>
   <content>Catalog.BankTerms</content>
   <content>Document.PriceList</content>
-  <subsystems>Finance</subsystems>
-  <subsystems>Items</subsystems>
-  <subsystems>OpeningEntry</subsystems>
   <subsystems>PurchaseAndSales</subsystems>
+  <subsystems>Finance</subsystems>
+  <subsystems>OpeningEntry</subsystems>
+  <subsystems>Items</subsystems>
 </mdclass:Subsystem>

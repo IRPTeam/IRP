@@ -29,6 +29,19 @@
     <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
   </resources>
+  <attributes uuid="74156356-3cb5-40af-9788-17bd414d6c0d">
+    <name>DeferredCalculation</name>
+    <synonym>
+      <key>en</key>
+      <value>Deferred calculation</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+  </attributes>
   <attributes uuid="dfa14517-2083-488c-ab4c-1bd670bb3bdd">
     <name>CustomersAdvancesClosing</name>
     <synonym>
@@ -41,19 +54,6 @@
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <indexing>Index</indexing>
-    <fullTextSearch>Use</fullTextSearch>
-  </attributes>
-  <attributes uuid="74156356-3cb5-40af-9788-17bd414d6c0d">
-    <name>DeferredCalculation</name>
-    <synonym>
-      <key>en</key>
-      <value>Deferred calculation</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
   </attributes>
   <dimensions uuid="6d1fceaa-4d14-4ac0-a260-1215f41f41e3">

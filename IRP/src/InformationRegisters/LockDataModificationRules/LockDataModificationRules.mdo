@@ -61,14 +61,26 @@
     <dataHistory>Use</dataHistory>
     <fillValue xsi:type="core:UndefinedValue"/>
   </resources>
-  <resources uuid="10dab2c5-444d-45c0-8653-604e7ce5b9eb">
-    <name>DisableRule</name>
+  <resources uuid="083d58ec-b168-4091-bf9c-595306587c8c">
+    <name>Value</name>
     <synonym>
       <key>en</key>
-      <value>Disable rule</value>
+      <value>Value</value>
     </synonym>
     <type>
       <types>Boolean</types>
+      <types>String</types>
+      <types>Date</types>
+      <types>Number</types>
+      <types>AnyRef</types>
+      <numberQualifiers>
+        <precision>10</precision>
+        <scale>5</scale>
+      </numberQualifiers>
+      <stringQualifiers>
+        <length>100</length>
+      </stringQualifiers>
+      <dateQualifiers/>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
@@ -76,11 +88,11 @@
     <dataHistory>Use</dataHistory>
     <fillValue xsi:type="core:UndefinedValue"/>
   </resources>
-  <resources uuid="5995d0eb-d8fa-42d3-8901-36cd8197eb08">
-    <name>SetValueAsCode</name>
+  <resources uuid="10dab2c5-444d-45c0-8653-604e7ce5b9eb">
+    <name>DisableRule</name>
     <synonym>
       <key>en</key>
-      <value>Set value as code</value>
+      <value>Disable rule</value>
     </synonym>
     <type>
       <types>Boolean</types>
@@ -109,26 +121,14 @@
     <dataHistory>Use</dataHistory>
     <fillValue xsi:type="core:UndefinedValue"/>
   </resources>
-  <resources uuid="083d58ec-b168-4091-bf9c-595306587c8c">
-    <name>Value</name>
+  <resources uuid="5995d0eb-d8fa-42d3-8901-36cd8197eb08">
+    <name>SetValueAsCode</name>
     <synonym>
       <key>en</key>
-      <value>Value</value>
+      <value>Set value as code</value>
     </synonym>
     <type>
       <types>Boolean</types>
-      <types>String</types>
-      <types>Date</types>
-      <types>Number</types>
-      <types>AnyRef</types>
-      <numberQualifiers>
-        <precision>10</precision>
-        <scale>5</scale>
-      </numberQualifiers>
-      <stringQualifiers>
-        <length>100</length>
-      </stringQualifiers>
-      <dateQualifiers/>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

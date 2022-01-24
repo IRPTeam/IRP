@@ -157,19 +157,19 @@
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>
   </forms>
-  <templates uuid="d9839a5b-b754-4255-a7df-3a7c593d505c">
-    <name>FeatureRowTemplate</name>
-    <synonym>
-      <key>en</key>
-      <value>Feature row template</value>
-    </synonym>
-    <templateType>TextDocument</templateType>
-  </templates>
   <templates uuid="89108f7c-2840-440e-85d3-3bcc959db5b6">
     <name>FeatureTemplate</name>
     <synonym>
       <key>en</key>
       <value>Feature template</value>
+    </synonym>
+    <templateType>TextDocument</templateType>
+  </templates>
+  <templates uuid="d9839a5b-b754-4255-a7df-3a7c593d505c">
+    <name>FeatureRowTemplate</name>
+    <synonym>
+      <key>en</key>
+      <value>Feature row template</value>
     </synonym>
     <templateType>TextDocument</templateType>
   </templates>

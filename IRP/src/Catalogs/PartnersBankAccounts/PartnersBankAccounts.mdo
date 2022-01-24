@@ -79,6 +79,27 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="1c940c9d-10e3-40aa-8c0e-703ec98acc80">
+    <name>Number</name>
+    <synonym>
+      <key>en</key>
+      <value>Number</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers>
+        <length>64</length>
+      </stringQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillChecking>ShowError</fillChecking>
+    <fillValue xsi:type="core:StringValue">
+      <value></value>
+    </fillValue>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <attributes uuid="6bca6201-5a50-4726-8980-a506ca0c65f0">
     <name>Branch</name>
     <synonym>
@@ -112,14 +133,14 @@
     <fillFromFillingValue>true</fillFromFillingValue>
     <fillValue xsi:type="core:UndefinedValue"/>
   </attributes>
-  <attributes uuid="9bc9769f-75e2-42dd-bd7f-3a6faa25c3e8">
-    <name>LegalEntity</name>
+  <attributes uuid="dbefcee4-b2da-4c5a-8101-deb85a7be5ca">
+    <name>Partner</name>
     <synonym>
       <key>en</key>
-      <value>Legal entity</value>
+      <value>Partner</value>
     </synonym>
     <type>
-      <types>CatalogRef.Companies</types>
+      <types>CatalogRef.Partners</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
@@ -129,35 +150,14 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
-  <attributes uuid="1c940c9d-10e3-40aa-8c0e-703ec98acc80">
-    <name>Number</name>
+  <attributes uuid="9bc9769f-75e2-42dd-bd7f-3a6faa25c3e8">
+    <name>LegalEntity</name>
     <synonym>
       <key>en</key>
-      <value>Number</value>
+      <value>Legal entity</value>
     </synonym>
     <type>
-      <types>String</types>
-      <stringQualifiers>
-        <length>64</length>
-      </stringQualifiers>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fillValue xsi:type="core:StringValue">
-      <value></value>
-    </fillValue>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="dbefcee4-b2da-4c5a-8101-deb85a7be5ca">
-    <name>Partner</name>
-    <synonym>
-      <key>en</key>
-      <value>Partner</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Partners</types>
+      <types>CatalogRef.Companies</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
@@ -210,15 +210,6 @@
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
   </tabularSections>
-  <forms uuid="861ac944-c783-4d95-ad8e-053f25acedc2">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
   <forms uuid="3fba3b1e-bdda-4a2a-817a-b4e3bf1139c1">
     <name>ItemForm</name>
     <synonym>
@@ -233,6 +224,15 @@
     <synonym>
       <key>en</key>
       <value>List form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="861ac944-c783-4d95-ad8e-053f25acedc2">
+    <name>ChoiceForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Choice form</value>
     </synonym>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>

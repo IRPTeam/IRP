@@ -17,11 +17,11 @@
   <registerType>Turnovers</registerType>
   <dataLockControlMode>Managed</dataLockControlMode>
   <enableTotalsSplitting>true</enableTotalsSplitting>
-  <resources uuid="665014b9-fd02-42b0-8c7a-87a2704976a5">
-    <name>NetAmount</name>
+  <resources uuid="d657341f-caab-488f-bc74-4f7a85fd61d2">
+    <name>SalesAmount</name>
     <synonym>
       <key>en</key>
-      <value>Net amount</value>
+      <value>Sales amount</value>
     </synonym>
     <type>
       <types>DefinedType.typeAmount</types>
@@ -30,11 +30,11 @@
     <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
   </resources>
-  <resources uuid="f0fae0a6-caa2-4c4a-a0f0-7ce01001585a">
-    <name>NetOfferAmount</name>
+  <resources uuid="665014b9-fd02-42b0-8c7a-87a2704976a5">
+    <name>NetAmount</name>
     <synonym>
       <key>en</key>
-      <value>Net offer amount</value>
+      <value>Net amount</value>
     </synonym>
     <type>
       <types>DefinedType.typeAmount</types>
@@ -56,11 +56,11 @@
     <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
   </resources>
-  <resources uuid="d657341f-caab-488f-bc74-4f7a85fd61d2">
-    <name>SalesAmount</name>
+  <resources uuid="f0fae0a6-caa2-4c4a-a0f0-7ce01001585a">
+    <name>NetOfferAmount</name>
     <synonym>
       <key>en</key>
-      <value>Sales amount</value>
+      <value>Net offer amount</value>
     </synonym>
     <type>
       <types>DefinedType.typeAmount</types>

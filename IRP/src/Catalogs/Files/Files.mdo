@@ -138,16 +138,31 @@
   <choiceMode>BothWays</choiceMode>
   <defaultObjectForm>Catalog.Files.Form.ItemForm</defaultObjectForm>
   <defaultListForm>Catalog.Files.Form.ListForm</defaultListForm>
-  <attributes uuid="d781f0b4-e76f-423f-96fb-92822515db13">
-    <name>Extension</name>
+  <attributes uuid="f84fa69a-be6e-49dc-afd6-34a2bb4a575c">
+    <name>Volume</name>
     <synonym>
       <key>en</key>
-      <value>Extension</value>
+      <value>Volume</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.FileStorageVolumes</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="19fb2c1f-49ea-4c03-8845-fe6dfbfb38fa">
+    <name>URI</name>
+    <synonym>
+      <key>en</key>
+      <value>URI</value>
     </synonym>
     <type>
       <types>String</types>
       <stringQualifiers>
-        <length>5</length>
+        <length>512</length>
       </stringQualifiers>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
@@ -155,6 +170,7 @@
     <fillValue xsi:type="core:StringValue">
       <value></value>
     </fillValue>
+    <indexing>Index</indexing>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
@@ -197,18 +213,59 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
-  <attributes uuid="42380b59-961e-49cd-9b4f-5be9dc30c4c7">
-    <name>isPreviewSet</name>
+  <attributes uuid="490e46f4-700f-4da5-a969-eeeb484d2743">
+    <name>Width</name>
     <synonym>
       <key>en</key>
-      <value>Is preview set</value>
+      <value>Width</value>
     </synonym>
     <type>
-      <types>Boolean</types>
+      <types>Number</types>
+      <numberQualifiers>
+        <precision>5</precision>
+      </numberQualifiers>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="3888808e-e394-46f4-918a-67302339e6ab">
+    <name>SizeBytes</name>
+    <synonym>
+      <key>en</key>
+      <value>Size</value>
+    </synonym>
+    <type>
+      <types>Number</types>
+      <numberQualifiers>
+        <precision>10</precision>
+      </numberQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="d781f0b4-e76f-423f-96fb-92822515db13">
+    <name>Extension</name>
+    <synonym>
+      <key>en</key>
+      <value>Extension</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers>
+        <length>5</length>
+      </stringQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:StringValue">
+      <value></value>
+    </fillValue>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
@@ -248,71 +305,14 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
-  <attributes uuid="3888808e-e394-46f4-918a-67302339e6ab">
-    <name>SizeBytes</name>
+  <attributes uuid="42380b59-961e-49cd-9b4f-5be9dc30c4c7">
+    <name>isPreviewSet</name>
     <synonym>
       <key>en</key>
-      <value>Size</value>
+      <value>Is preview set</value>
     </synonym>
     <type>
-      <types>Number</types>
-      <numberQualifiers>
-        <precision>10</precision>
-      </numberQualifiers>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="19fb2c1f-49ea-4c03-8845-fe6dfbfb38fa">
-    <name>URI</name>
-    <synonym>
-      <key>en</key>
-      <value>URI</value>
-    </synonym>
-    <type>
-      <types>String</types>
-      <stringQualifiers>
-        <length>512</length>
-      </stringQualifiers>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:StringValue">
-      <value></value>
-    </fillValue>
-    <indexing>Index</indexing>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="f84fa69a-be6e-49dc-afd6-34a2bb4a575c">
-    <name>Volume</name>
-    <synonym>
-      <key>en</key>
-      <value>Volume</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.FileStorageVolumes</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="490e46f4-700f-4da5-a969-eeeb484d2743">
-    <name>Width</name>
-    <synonym>
-      <key>en</key>
-      <value>Width</value>
-    </synonym>
-    <type>
-      <types>Number</types>
-      <numberQualifiers>
-        <precision>5</precision>
-      </numberQualifiers>
+      <types>Boolean</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
@@ -363,15 +363,6 @@
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
   </tabularSections>
-  <forms uuid="696d92ce-a427-44bc-8336-39c11a0e1906">
-    <name>DeleteFiles</name>
-    <synonym>
-      <key>en</key>
-      <value>Delete files</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
   <forms uuid="b27620a5-4be9-4e90-a4bb-21f2ff08b08a">
     <name>ItemForm</name>
     <synonym>
@@ -386,6 +377,15 @@
     <synonym>
       <key>en</key>
       <value>List form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="696d92ce-a427-44bc-8336-39c11a0e1906">
+    <name>DeleteFiles</name>
+    <synonym>
+      <key>en</key>
+      <value>Delete files</value>
     </synonym>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>

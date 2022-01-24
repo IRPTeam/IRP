@@ -23,21 +23,6 @@
     <key>en</key>
     <value>Contacts info</value>
   </listPresentation>
-  <resources uuid="1fa68620-62a7-403a-91ff-e350ea174d58">
-    <name>Info</name>
-    <synonym>
-      <key>en</key>
-      <value>Info</value>
-    </synonym>
-    <type>
-      <types>ValueStorage</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </resources>
   <resources uuid="f704a578-563f-49d8-85f9-8232e7b2f17e">
     <name>Value</name>
     <synonym>
@@ -46,6 +31,21 @@
     </synonym>
     <type>
       <types>Characteristic.IDInfoTypes</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </resources>
+  <resources uuid="1fa68620-62a7-403a-91ff-e350ea174d58">
+    <name>Info</name>
+    <synonym>
+      <key>en</key>
+      <value>Info</value>
+    </synonym>
+    <type>
+      <types>ValueStorage</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

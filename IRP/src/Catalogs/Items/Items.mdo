@@ -57,6 +57,75 @@
   <defaultListForm>Catalog.Items.Form.ListForm</defaultListForm>
   <defaultChoiceForm>Catalog.Items.Form.ChoiceForm</defaultChoiceForm>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+  <attributes uuid="b07b2729-1f36-468a-bbac-ece3a3ebb4d4">
+    <name>ItemType</name>
+    <synonym>
+      <key>en</key>
+      <value>Item type</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.ItemTypes</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillChecking>ShowError</fillChecking>
+    <fillFromFillingValue>true</fillFromFillingValue>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="0a2bf5ad-5f8a-4c70-99e3-7b47df1d3fdb">
+    <name>Unit</name>
+    <synonym>
+      <key>en</key>
+      <value>Unit</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Units</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillChecking>ShowError</fillChecking>
+    <createOnInput>DontUse</createOnInput>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </attributes>
+  <attributes uuid="16945c33-3689-4d1f-b7b9-7cb0576f6485">
+    <name>MainPricture</name>
+    <synonym>
+      <key>en</key>
+      <value>Main picture</value>
+    </synonym>
+    <comment>Temporary</comment>
+    <type>
+      <types>ValueStorage</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="9ca05baa-27d1-4732-985d-058b166161e3">
+    <name>Vendor</name>
+    <synonym>
+      <key>en</key>
+      <value>Vendor</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Partners</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <choiceParameters>
+      <name>Filter.Vendor</name>
+      <value xsi:type="core:BooleanValue">
+        <value>true</value>
+      </value>
+    </choiceParameters>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <attributes uuid="79e7b71f-5d08-4ccc-b361-2622cb79b228">
     <name>ItemID</name>
     <synonym>
@@ -77,39 +146,6 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
-  <attributes uuid="b07b2729-1f36-468a-bbac-ece3a3ebb4d4">
-    <name>ItemType</name>
-    <synonym>
-      <key>en</key>
-      <value>Item type</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.ItemTypes</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fillFromFillingValue>true</fillFromFillingValue>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="16945c33-3689-4d1f-b7b9-7cb0576f6485">
-    <name>MainPricture</name>
-    <synonym>
-      <key>en</key>
-      <value>Main picture</value>
-    </synonym>
-    <comment>Temporary</comment>
-    <type>
-      <types>ValueStorage</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
   <attributes uuid="dcf6bef2-6c2e-4e4f-bde7-daabb6b78827">
     <name>PackageUnit</name>
     <synonym>
@@ -121,42 +157,6 @@
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="0a2bf5ad-5f8a-4c70-99e3-7b47df1d3fdb">
-    <name>Unit</name>
-    <synonym>
-      <key>en</key>
-      <value>Unit</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Units</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <createOnInput>DontUse</createOnInput>
-    <fillValue xsi:type="core:UndefinedValue"/>
-  </attributes>
-  <attributes uuid="9ca05baa-27d1-4732-985d-058b166161e3">
-    <name>Vendor</name>
-    <synonym>
-      <key>en</key>
-      <value>Vendor</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Partners</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <choiceParameters>
-      <name>Filter.Vendor</name>
-      <value xsi:type="core:BooleanValue">
-        <value>true</value>
-      </value>
-    </choiceParameters>
     <fillValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
@@ -202,15 +202,6 @@
       <dataHistory>Use</dataHistory>
     </attributes>
   </tabularSections>
-  <forms uuid="14ad64d8-d9a2-42c3-b38e-29a2670e3643">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
   <forms uuid="c66d8de2-25be-4f7e-9861-2b2bc8ca43d8">
     <name>ItemForm</name>
     <synonym>
@@ -225,6 +216,15 @@
     <synonym>
       <key>en</key>
       <value>List form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="14ad64d8-d9a2-42c3-b38e-29a2670e3643">
+    <name>ChoiceForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Choice form</value>
     </synonym>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>

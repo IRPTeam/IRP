@@ -58,11 +58,11 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
-  <attributes uuid="05de6f05-29a5-49b9-9770-3699186b7080">
-    <name>ReadOnly</name>
+  <attributes uuid="c9507572-811f-4bce-9ddb-bae460f63187">
+    <name>ShowOnForm</name>
     <synonym>
       <key>en</key>
-      <value>Read only</value>
+      <value>Show on form</value>
     </synonym>
     <type>
       <types>Boolean</types>
@@ -73,11 +73,11 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
-  <attributes uuid="c9507572-811f-4bce-9ddb-bae460f63187">
-    <name>ShowOnForm</name>
+  <attributes uuid="05de6f05-29a5-49b9-9770-3699186b7080">
+    <name>ReadOnly</name>
     <synonym>
       <key>en</key>
-      <value>Show on form</value>
+      <value>Read only</value>
     </synonym>
     <type>
       <types>Boolean</types>
@@ -160,15 +160,6 @@
       <maxValue xsi:type="core:UndefinedValue"/>
     </attributes>
   </tabularSections>
-  <forms uuid="24e8ad33-3d87-47e0-826e-32575174c328">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
   <forms uuid="8e2a0489-4c4a-4b6a-92d9-b3c681455193">
     <name>ItemForm</name>
     <synonym>
@@ -183,6 +174,15 @@
     <synonym>
       <key>en</key>
       <value>List form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="24e8ad33-3d87-47e0-826e-32575174c328">
+    <name>ChoiceForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Choice form</value>
     </synonym>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>

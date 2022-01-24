@@ -29,22 +29,6 @@
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>
   <defaultObjectForm>Catalog.AdvancesKeys.Form.ItemForm</defaultObjectForm>
-  <attributes uuid="b2fb7c3b-5464-42b7-b401-3a70cb9983cd">
-    <name>Branch</name>
-    <synonym>
-      <key>en</key>
-      <value>Branch</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.BusinessUnits</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <indexing>Index</indexing>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
   <attributes uuid="4c9e05b1-0ac3-4e6e-99b0-454721701ae2">
     <name>Company</name>
     <synonym>
@@ -53,6 +37,22 @@
     </synonym>
     <type>
       <types>CatalogRef.Companies</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <indexing>Index</indexing>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="b2fb7c3b-5464-42b7-b401-3a70cb9983cd">
+    <name>Branch</name>
+    <synonym>
+      <key>en</key>
+      <value>Branch</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.BusinessUnits</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
@@ -77,30 +77,14 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
-  <attributes uuid="53cf98d1-c59d-4d51-bb1c-7dc4e4c4415f">
-    <name>IsCustomerAdvance</name>
+  <attributes uuid="49bf3e20-c81e-4350-9693-375416da0bfd">
+    <name>Partner</name>
     <synonym>
       <key>en</key>
-      <value>Is customer advance</value>
+      <value>Partner</value>
     </synonym>
     <type>
-      <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <indexing>Index</indexing>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="b4c57577-6aca-464b-9de7-407367ac8643">
-    <name>IsVendorAdvance</name>
-    <synonym>
-      <key>en</key>
-      <value>Is vendor advance</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
+      <types>CatalogRef.Partners</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
@@ -142,14 +126,30 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
-  <attributes uuid="49bf3e20-c81e-4350-9693-375416da0bfd">
-    <name>Partner</name>
+  <attributes uuid="b4c57577-6aca-464b-9de7-407367ac8643">
+    <name>IsVendorAdvance</name>
     <synonym>
       <key>en</key>
-      <value>Partner</value>
+      <value>Is vendor advance</value>
     </synonym>
     <type>
-      <types>CatalogRef.Partners</types>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <indexing>Index</indexing>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="53cf98d1-c59d-4d51-bb1c-7dc4e4c4415f">
+    <name>IsCustomerAdvance</name>
+    <synonym>
+      <key>en</key>
+      <value>Is customer advance</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

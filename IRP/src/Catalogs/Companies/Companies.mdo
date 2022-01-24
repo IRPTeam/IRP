@@ -99,21 +99,6 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
-  <attributes uuid="ab77ee1c-edf0-43e5-aa67-4b3687a0bb57">
-    <name>OurCompany</name>
-    <synonym>
-      <key>en</key>
-      <value>Our Company</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
   <attributes uuid="0662bc12-ad78-4117-9bbf-e46a12b7ada0">
     <name>Partner</name>
     <synonym>
@@ -146,6 +131,46 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <attributes uuid="ab77ee1c-edf0-43e5-aa67-4b3687a0bb57">
+    <name>OurCompany</name>
+    <synonym>
+      <key>en</key>
+      <value>Our Company</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <tabularSections uuid="1cef8184-c8f4-4ae0-b558-76db940b1ce5">
+    <producedTypes>
+      <objectType typeId="e9c801b9-6993-4bc6-9c66-a808cd465688" valueTypeId="ef76d03a-c4a6-4068-9bd0-e3f4f8ae223d"/>
+      <rowType typeId="1f053fd4-e077-4488-a2f7-1222618b8d8c" valueTypeId="893cb734-0b06-45df-ba1c-27a56c049242"/>
+    </producedTypes>
+    <name>Currencies</name>
+    <synonym>
+      <key>en</key>
+      <value>Currencies</value>
+    </synonym>
+    <attributes uuid="ff24a91c-8062-4b0f-b42d-e4c08c616ba8">
+      <name>MovementType</name>
+      <synonym>
+        <key>en</key>
+        <value>Movement type</value>
+      </synonym>
+      <type>
+        <types>ChartOfCharacteristicTypesRef.CurrencyMovementType</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
   <tabularSections uuid="8f75a048-ed0e-4e74-a988-88cf133cd59c">
     <producedTypes>
       <objectType typeId="f09954b8-0a0e-4ea1-8758-18f4364862df" valueTypeId="03b97038-8ce3-49ff-a655-1a4e12d8761e"/>
@@ -189,40 +214,6 @@
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
   </tabularSections>
-  <tabularSections uuid="1cef8184-c8f4-4ae0-b558-76db940b1ce5">
-    <producedTypes>
-      <objectType typeId="e9c801b9-6993-4bc6-9c66-a808cd465688" valueTypeId="ef76d03a-c4a6-4068-9bd0-e3f4f8ae223d"/>
-      <rowType typeId="1f053fd4-e077-4488-a2f7-1222618b8d8c" valueTypeId="893cb734-0b06-45df-ba1c-27a56c049242"/>
-    </producedTypes>
-    <name>Currencies</name>
-    <synonym>
-      <key>en</key>
-      <value>Currencies</value>
-    </synonym>
-    <attributes uuid="ff24a91c-8062-4b0f-b42d-e4c08c616ba8">
-      <name>MovementType</name>
-      <synonym>
-        <key>en</key>
-        <value>Movement type</value>
-      </synonym>
-      <type>
-        <types>ChartOfCharacteristicTypesRef.CurrencyMovementType</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-  </tabularSections>
-  <forms uuid="09668165-d5e2-45a8-a307-841bacab31b1">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
   <forms uuid="d095d91d-fac2-4a22-9e3f-aadb52dd2d88">
     <name>ItemForm</name>
     <synonym>
@@ -237,6 +228,15 @@
     <synonym>
       <key>en</key>
       <value>List form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="09668165-d5e2-45a8-a307-841bacab31b1">
+    <name>ChoiceForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Choice form</value>
     </synonym>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>

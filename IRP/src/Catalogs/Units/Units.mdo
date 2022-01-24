@@ -57,21 +57,6 @@
   <defaultListForm>Catalog.Units.Form.ListForm</defaultListForm>
   <defaultChoiceForm>Catalog.Units.Form.ChoiceForm</defaultChoiceForm>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
-  <attributes uuid="5eef9619-e141-4c45-9e22-dacc1f54d169">
-    <name>BasisUnit</name>
-    <synonym>
-      <key>en</key>
-      <value>Basis unit</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Units</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
   <attributes uuid="82b9dc61-781d-4617-a240-2e712aafa7b8">
     <name>Item</name>
     <synonym>
@@ -106,6 +91,21 @@
     <maxValue xsi:type="core:UndefinedValue"/>
     <fillChecking>ShowError</fillChecking>
     <fillFromFillingValue>true</fillFromFillingValue>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="5eef9619-e141-4c45-9e22-dacc1f54d169">
+    <name>BasisUnit</name>
+    <synonym>
+      <key>en</key>
+      <value>Basis unit</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Units</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
     <fillValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
@@ -185,20 +185,6 @@
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
   </tabularSections>
-  <forms uuid="d2932cf8-4322-468c-86b3-09f75af80703">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
-    </synonym>
-    <help>
-      <pages>
-        <lang>en</lang>
-      </pages>
-    </help>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
   <forms uuid="59b5c950-0af8-47d0-af1b-4bcb5f8f5592">
     <name>ItemForm</name>
     <synonym>
@@ -214,6 +200,20 @@
       <key>en</key>
       <value>List form</value>
     </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="d2932cf8-4322-468c-86b3-09f75af80703">
+    <name>ChoiceForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Choice form</value>
+    </synonym>
+    <help>
+      <pages>
+        <lang>en</lang>
+      </pages>
+    </help>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>
   </forms>

@@ -96,15 +96,6 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
-  <forms uuid="889fa7f0-d60b-478a-bdac-11ee180d95c6">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
   <forms uuid="3d46ecbd-c6e0-4c42-9981-ff9c876e9c5b">
     <name>DocumentForm</name>
     <synonym>
@@ -123,47 +114,15 @@
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>
   </forms>
-  <tabularSections uuid="8e8dcfe0-7a85-49e9-8ee6-94aaf2d046c7">
-    <producedTypes>
-      <objectType typeId="913d6d6e-f1c8-4f37-9f6a-77dadaa4f9b9" valueTypeId="2bf8dfe1-240d-48ae-9dea-70e643d64a7a"/>
-      <rowType typeId="b6569263-dfef-4408-913b-333a34dc52d7" valueTypeId="991b9362-7c3f-46ad-a0df-959ab21c0672"/>
-    </producedTypes>
-    <name>AddAttributes</name>
+  <forms uuid="889fa7f0-d60b-478a-bdac-11ee180d95c6">
+    <name>ChoiceForm</name>
     <synonym>
       <key>en</key>
-      <value>Additional attributes</value>
+      <value>Choice form</value>
     </synonym>
-    <attributes uuid="4779cd99-61ff-45e6-ae87-a54ff8af35eb">
-      <name>Property</name>
-      <synonym>
-        <key>en</key>
-        <value>Property</value>
-      </synonym>
-      <type>
-        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-    </attributes>
-    <attributes uuid="e7e2777b-2bdf-4e50-9f84-51656a8d2066">
-      <name>Value</name>
-      <synonym>
-        <key>en</key>
-        <value>Value</value>
-      </synonym>
-      <type>
-        <types>Characteristic.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <choiceParameterLinks>
-        <name>Filter.Owner</name>
-        <field>Document.StockAdjustmentAsSurplus.TabularSection.AddAttributes.Attribute.Property</field>
-      </choiceParameterLinks>
-      <dataHistory>Use</dataHistory>
-    </attributes>
-  </tabularSections>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
   <tabularSections uuid="5501341b-0832-4c9b-bf38-9af1afe37b29">
     <producedTypes>
       <objectType typeId="19af985c-f741-4c68-bf22-4a3e26c01e2a" valueTypeId="d90256a7-23b8-482a-82a5-f438f67aa2bf"/>
@@ -301,6 +260,100 @@
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
   </tabularSections>
+  <tabularSections uuid="8e8dcfe0-7a85-49e9-8ee6-94aaf2d046c7">
+    <producedTypes>
+      <objectType typeId="913d6d6e-f1c8-4f37-9f6a-77dadaa4f9b9" valueTypeId="2bf8dfe1-240d-48ae-9dea-70e643d64a7a"/>
+      <rowType typeId="b6569263-dfef-4408-913b-333a34dc52d7" valueTypeId="991b9362-7c3f-46ad-a0df-959ab21c0672"/>
+    </producedTypes>
+    <name>AddAttributes</name>
+    <synonym>
+      <key>en</key>
+      <value>Additional attributes</value>
+    </synonym>
+    <attributes uuid="4779cd99-61ff-45e6-ae87-a54ff8af35eb">
+      <name>Property</name>
+      <synonym>
+        <key>en</key>
+        <value>Property</value>
+      </synonym>
+      <type>
+        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="e7e2777b-2bdf-4e50-9f84-51656a8d2066">
+      <name>Value</name>
+      <synonym>
+        <key>en</key>
+        <value>Value</value>
+      </synonym>
+      <type>
+        <types>Characteristic.AddAttributeAndProperty</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <choiceParameterLinks>
+        <name>Filter.Owner</name>
+        <field>Document.StockAdjustmentAsSurplus.TabularSection.AddAttributes.Attribute.Property</field>
+      </choiceParameterLinks>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+  </tabularSections>
+  <tabularSections uuid="e3056564-1c26-4247-b08b-427eb3769423">
+    <producedTypes>
+      <objectType typeId="061f6d28-dc65-4d7d-aad2-8c6cc1c02c8c" valueTypeId="ba73ce6c-0f2b-405e-89d1-a1a48edb0c56"/>
+      <rowType typeId="fd9c68af-54ad-4593-9452-149d463e6e5a" valueTypeId="f5fa6249-8dbd-48e7-b46f-b5e5e0f41926"/>
+    </producedTypes>
+    <name>SerialLotNumbers</name>
+    <synonym>
+      <key>en</key>
+      <value>Serial lot numbers</value>
+    </synonym>
+    <attributes uuid="1815cf9a-b348-44bb-bace-d445d65728ce">
+      <name>Key</name>
+      <synonym>
+        <key>en</key>
+        <value>Key</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeRowID</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="234813fb-d700-439b-8bb4-bb520ea58f37">
+      <name>SerialLotNumber</name>
+      <synonym>
+        <key>en</key>
+        <value>Serial lot number</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.SerialLotNumbers</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="3fcae634-9e27-482b-b8ac-a553469fdb84">
+      <name>Quantity</name>
+      <synonym>
+        <key>en</key>
+        <value>Quantity</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeQuantity</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
   <tabularSections uuid="af169f64-3c15-4f8f-bd5c-14894bcaaf5d">
     <producedTypes>
       <objectType typeId="0c260fc5-921e-41eb-bd42-6623d4386435" valueTypeId="82d57d84-c33a-41e4-afd8-77e21d68299b"/>
@@ -427,59 +480,6 @@
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
-    </attributes>
-  </tabularSections>
-  <tabularSections uuid="e3056564-1c26-4247-b08b-427eb3769423">
-    <producedTypes>
-      <objectType typeId="061f6d28-dc65-4d7d-aad2-8c6cc1c02c8c" valueTypeId="ba73ce6c-0f2b-405e-89d1-a1a48edb0c56"/>
-      <rowType typeId="fd9c68af-54ad-4593-9452-149d463e6e5a" valueTypeId="f5fa6249-8dbd-48e7-b46f-b5e5e0f41926"/>
-    </producedTypes>
-    <name>SerialLotNumbers</name>
-    <synonym>
-      <key>en</key>
-      <value>Serial lot numbers</value>
-    </synonym>
-    <attributes uuid="1815cf9a-b348-44bb-bace-d445d65728ce">
-      <name>Key</name>
-      <synonym>
-        <key>en</key>
-        <value>Key</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeRowID</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="234813fb-d700-439b-8bb4-bb520ea58f37">
-      <name>SerialLotNumber</name>
-      <synonym>
-        <key>en</key>
-        <value>Serial lot number</value>
-      </synonym>
-      <type>
-        <types>CatalogRef.SerialLotNumbers</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="3fcae634-9e27-482b-b8ac-a553469fdb84">
-      <name>Quantity</name>
-      <synonym>
-        <key>en</key>
-        <value>Quantity</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeQuantity</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
     </attributes>
   </tabularSections>
   <commands uuid="dcd5dc59-8ace-4a92-b575-3245c8435c5d">

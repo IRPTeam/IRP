@@ -110,24 +110,6 @@
       <dataHistory>Use</dataHistory>
     </attributes>
   </tabularSections>
-  <forms uuid="e52d1a10-929d-4ab3-a346-2dc67ad4ad5f">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="ec0f09b0-b42e-4a37-a589-2703f508597a">
-    <name>EditCondition</name>
-    <synonym>
-      <key>en</key>
-      <value>Edit condition</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
   <forms uuid="f08efaf3-5938-432a-8dff-098c00f34d57">
     <name>ItemForm</name>
     <synonym>
@@ -142,6 +124,24 @@
     <synonym>
       <key>en</key>
       <value>List form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="e52d1a10-929d-4ab3-a346-2dc67ad4ad5f">
+    <name>ChoiceForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Choice form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="ec0f09b0-b42e-4a37-a589-2703f508597a">
+    <name>EditCondition</name>
+    <synonym>
+      <key>en</key>
+      <value>Edit condition</value>
     </synonym>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>

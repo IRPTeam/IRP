@@ -34,11 +34,11 @@
   <defaultListForm>Catalog.ExternalDataProc.Form.ListForm</defaultListForm>
   <defaultChoiceForm>Catalog.ExternalDataProc.Form.ChoiceForm</defaultChoiceForm>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
-  <attributes uuid="3d225365-ac57-4b99-a580-307b1f2b03a8">
-    <name>DataProcStorage</name>
+  <attributes uuid="a5eaa40d-ca09-44c8-a4ac-aaee25b075f2">
+    <name>Settings</name>
     <synonym>
       <key>en</key>
-      <value>Data proc storage</value>
+      <value>Settings</value>
     </synonym>
     <type>
       <types>ValueStorage</types>
@@ -46,6 +46,24 @@
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="96d97d03-e7c8-4c39-87ed-f9d0684b4df4">
+    <name>PathToExtDataProcForTest</name>
+    <synonym>
+      <key>en</key>
+      <value>Path to plugin for test</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers/>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:StringValue">
+      <value></value>
+    </fillValue>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
@@ -70,29 +88,11 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
-  <attributes uuid="96d97d03-e7c8-4c39-87ed-f9d0684b4df4">
-    <name>PathToExtDataProcForTest</name>
+  <attributes uuid="3d225365-ac57-4b99-a580-307b1f2b03a8">
+    <name>DataProcStorage</name>
     <synonym>
       <key>en</key>
-      <value>Path to plugin for test</value>
-    </synonym>
-    <type>
-      <types>String</types>
-      <stringQualifiers/>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:StringValue">
-      <value></value>
-    </fillValue>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="a5eaa40d-ca09-44c8-a4ac-aaee25b075f2">
-    <name>Settings</name>
-    <synonym>
-      <key>en</key>
-      <value>Settings</value>
+      <value>Data proc storage</value>
     </synonym>
     <type>
       <types>ValueStorage</types>
@@ -118,15 +118,6 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
-  <forms uuid="54b9a1de-f949-4742-875f-694285720512">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
   <forms uuid="4d4718e1-8dd1-412b-a706-5881b0ae4357">
     <name>ItemForm</name>
     <synonym>
@@ -141,6 +132,15 @@
     <synonym>
       <key>en</key>
       <value>List form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="54b9a1de-f949-4742-875f-694285720512">
+    <name>ChoiceForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Choice form</value>
     </synonym>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>

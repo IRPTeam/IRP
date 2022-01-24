@@ -58,26 +58,6 @@
   <defaultListForm>Catalog.Users.Form.ListForm</defaultListForm>
   <defaultChoiceForm>Catalog.Users.Form.ChoiceForm</defaultChoiceForm>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
-  <attributes uuid="f8412bc3-551f-4e4c-a6f9-2948fb895094">
-    <name>FormScaleVariant</name>
-    <synonym>
-      <key>en</key>
-      <value>Form scale variant</value>
-    </synonym>
-    <type>
-      <types>String</types>
-      <stringQualifiers>
-        <length>20</length>
-      </stringQualifiers>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:StringValue">
-      <value></value>
-    </fillValue>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
   <attributes uuid="50918958-78a5-44c1-b7ca-ec497c80e13a">
     <name>InfobaseUserID</name>
     <synonym>
@@ -93,47 +73,6 @@
     <indexing>Index</indexing>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="528e23a4-6ab5-461d-8215-2e7d22ad21c2">
-    <name>InterfaceLocalizationCode</name>
-    <synonym>
-      <key>en</key>
-      <value>Interface localization code</value>
-    </synonym>
-    <type>
-      <types>String</types>
-      <stringQualifiers>
-        <length>5</length>
-      </stringQualifiers>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fillValue xsi:type="core:StringValue">
-      <value></value>
-    </fillValue>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="0df89fa5-fe7a-4f73-b1f2-1d62178ce55d">
-    <name>LocalizationCode</name>
-    <synonym>
-      <key>en</key>
-      <value>Localization code</value>
-    </synonym>
-    <type>
-      <types>String</types>
-      <stringQualifiers>
-        <length>5</length>
-      </stringQualifiers>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fillFromFillingValue>true</fillFromFillingValue>
-    <fillValue xsi:type="core:StringValue">
-      <value></value>
-    </fillValue>
   </attributes>
   <attributes uuid="5836f711-fac3-4ab0-a7b9-07e85fd0b1f7">
     <name>Partner</name>
@@ -154,6 +93,26 @@
     </choiceParameters>
     <createOnInput>DontUse</createOnInput>
     <fillValue xsi:type="core:UndefinedValue"/>
+  </attributes>
+  <attributes uuid="0df89fa5-fe7a-4f73-b1f2-1d62178ce55d">
+    <name>LocalizationCode</name>
+    <synonym>
+      <key>en</key>
+      <value>Localization code</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers>
+        <length>5</length>
+      </stringQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillChecking>ShowError</fillChecking>
+    <fillFromFillingValue>true</fillFromFillingValue>
+    <fillValue xsi:type="core:StringValue">
+      <value></value>
+    </fillValue>
   </attributes>
   <attributes uuid="1abd382e-53a5-4c43-998c-4b92ac067214">
     <name>ShowInList</name>
@@ -182,6 +141,47 @@
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="528e23a4-6ab5-461d-8215-2e7d22ad21c2">
+    <name>InterfaceLocalizationCode</name>
+    <synonym>
+      <key>en</key>
+      <value>Interface localization code</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers>
+        <length>5</length>
+      </stringQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillChecking>ShowError</fillChecking>
+    <fillValue xsi:type="core:StringValue">
+      <value></value>
+    </fillValue>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="f8412bc3-551f-4e4c-a6f9-2948fb895094">
+    <name>FormScaleVariant</name>
+    <synonym>
+      <key>en</key>
+      <value>Form scale variant</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers>
+        <length>20</length>
+      </stringQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:StringValue">
+      <value></value>
+    </fillValue>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
@@ -245,24 +245,6 @@
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
   </tabularSections>
-  <forms uuid="41970557-391e-456b-86e2-5bf959f43b5c">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
-  <forms uuid="76381369-4ca9-48dd-8778-c6c5a0224e4d">
-    <name>InputPassword</name>
-    <synonym>
-      <key>en</key>
-      <value>Input password</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
   <forms uuid="7a12a6af-0633-4c8c-93f8-26d3784e8f39">
     <name>ItemForm</name>
     <synonym>
@@ -277,6 +259,24 @@
     <synonym>
       <key>en</key>
       <value>List form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="41970557-391e-456b-86e2-5bf959f43b5c">
+    <name>ChoiceForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Choice form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="76381369-4ca9-48dd-8778-c6c5a0224e4d">
+    <name>InputPassword</name>
+    <synonym>
+      <key>en</key>
+      <value>Input password</value>
     </synonym>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>

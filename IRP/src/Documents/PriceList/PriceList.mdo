@@ -108,15 +108,6 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
-  <forms uuid="120dcb07-9e47-4eb4-931e-359fb19b4bfc">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
   <forms uuid="ac5457f0-698c-4698-a1cf-879795f00024">
     <name>DocumentForm</name>
     <synonym>
@@ -135,86 +126,26 @@
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>
   </forms>
-  <tabularSections uuid="5b369985-7c3b-4181-acba-3f11456c3344">
-    <producedTypes>
-      <objectType typeId="0378f97f-62e6-43ef-9356-848570121ec1" valueTypeId="903a1aad-3bc3-4932-928c-418c8b6af8bb"/>
-      <rowType typeId="0e3b9826-a51c-461e-aa5e-694030425905" valueTypeId="7b42b956-7257-4d9d-9235-bb30d6ba2445"/>
-    </producedTypes>
-    <name>AddAttributes</name>
+  <forms uuid="120dcb07-9e47-4eb4-931e-359fb19b4bfc">
+    <name>ChoiceForm</name>
     <synonym>
       <key>en</key>
-      <value>Additional attributes</value>
+      <value>Choice form</value>
     </synonym>
-    <attributes uuid="258261f8-6375-4e37-9a6a-cbafe311a7a8">
-      <name>Property</name>
-      <synonym>
-        <key>en</key>
-        <value>Property</value>
-      </synonym>
-      <type>
-        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-    </attributes>
-    <attributes uuid="486c2c6b-4d23-4e06-a75d-b6bcd225f34a">
-      <name>Value</name>
-      <synonym>
-        <key>en</key>
-        <value>Value</value>
-      </synonym>
-      <type>
-        <types>Characteristic.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <choiceParameterLinks>
-        <name>Filter.Owner</name>
-        <field>Document.PriceList.TabularSection.AddAttributes.Attribute.Property</field>
-      </choiceParameterLinks>
-      <dataHistory>Use</dataHistory>
-    </attributes>
-  </tabularSections>
-  <tabularSections uuid="39cd3fd6-9075-40a1-b5e6-985e1cba136b">
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <tabularSections uuid="bb6f9228-11f3-4034-8eb9-027274c5d7d1">
     <producedTypes>
-      <objectType typeId="47b5a649-947b-4c87-b0e8-e06834e29ffe" valueTypeId="c3d9e362-a6c2-4535-bf76-c5ab1498e16e"/>
-      <rowType typeId="fb3bd90e-2296-4abf-b536-a48b2858d9a6" valueTypeId="81000d80-1f41-42ac-a78c-9fcbf99e766c"/>
+      <objectType typeId="70793fed-1a86-45dc-bdc9-dcdfa49ce964" valueTypeId="872ec136-cb6d-44e5-91e4-eadb88773bd6"/>
+      <rowType typeId="d0d734f2-7d64-4f6c-9848-1236869fc44e" valueTypeId="7af14679-5507-4b21-aa83-c83ad2ed5568"/>
     </producedTypes>
-    <name>DataPrice</name>
+    <name>ItemList</name>
     <synonym>
       <key>en</key>
-      <value>Data price</value>
+      <value>Item list</value>
     </synonym>
-    <attributes uuid="44358848-1870-4261-b729-5544f71d491f">
-      <name>Key</name>
-      <synonym>
-        <key>en</key>
-        <value>Key</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeRowID</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="b701867b-0560-4b00-b55f-d03b65b29eac">
-      <name>Price</name>
-      <synonym>
-        <key>en</key>
-        <value>Price</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeQuantity</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="f1f5745d-dce9-437f-9b8e-e399a31bad0c">
+    <attributes uuid="8266b503-7319-448d-acee-e3f0c2f26f76">
       <name>Item</name>
       <synonym>
         <key>en</key>
@@ -225,10 +156,25 @@
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
+      <fillChecking>ShowError</fillChecking>
+      <dataHistory>Use</dataHistory>
+      <indexing>Index</indexing>
+    </attributes>
+    <attributes uuid="514c4ddb-0df3-446a-80fb-0956a76d4ca2">
+      <name>Price</name>
+      <synonym>
+        <key>en</key>
+        <value>Price</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typePrice</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
-    <attributes uuid="5dc05a1d-ed46-4b54-a307-ef8ead317253">
+    <attributes uuid="2060bd7f-988f-49a2-8241-28cea61bf98e">
       <name>InputUnit</name>
       <synonym>
         <key>en</key>
@@ -242,7 +188,7 @@
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
-    <attributes uuid="abd6138b-55f3-45b0-9bd0-a12fefba134c">
+    <attributes uuid="20ee52eb-cbb7-4aaa-9c1c-8ab634130022">
       <name>InputPrice</name>
       <synonym>
         <key>en</key>
@@ -250,59 +196,6 @@
       </synonym>
       <type>
         <types>DefinedType.typeQuantity</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-  </tabularSections>
-  <tabularSections uuid="d4d5ffde-a7fd-4d3f-83fe-a7bc50e34d28">
-    <producedTypes>
-      <objectType typeId="37857193-f6bf-4e6a-8c36-bd11e98a7b46" valueTypeId="c60e6c97-faba-47dd-ae1e-568eac8130fb"/>
-      <rowType typeId="b6c2b2db-96d9-4c79-a1db-644865597d7c" valueTypeId="67b89ac4-eacf-4ef0-8ca2-d625501693fb"/>
-    </producedTypes>
-    <name>DataSet</name>
-    <synonym>
-      <key>en</key>
-      <value>Data set</value>
-    </synonym>
-    <attributes uuid="28287de3-34c2-4ccc-bbf3-fa029ae5e6fc">
-      <name>Key</name>
-      <synonym>
-        <key>en</key>
-        <value>Key</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typeRowID</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="485029a4-c81a-434b-88b3-d72ee1d15b06">
-      <name>Attribute</name>
-      <synonym>
-        <key>en</key>
-        <value>Attribute</value>
-      </synonym>
-      <type>
-        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-    <attributes uuid="6f0021bb-42c8-41e8-a926-0876a31add34">
-      <name>Value</name>
-      <synonym>
-        <key>en</key>
-        <value>Value</value>
-      </synonym>
-      <type>
-        <types>Characteristic.AddAttributeAndProperty</types>
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
@@ -392,17 +285,98 @@
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
   </tabularSections>
-  <tabularSections uuid="bb6f9228-11f3-4034-8eb9-027274c5d7d1">
+  <tabularSections uuid="d4d5ffde-a7fd-4d3f-83fe-a7bc50e34d28">
     <producedTypes>
-      <objectType typeId="70793fed-1a86-45dc-bdc9-dcdfa49ce964" valueTypeId="872ec136-cb6d-44e5-91e4-eadb88773bd6"/>
-      <rowType typeId="d0d734f2-7d64-4f6c-9848-1236869fc44e" valueTypeId="7af14679-5507-4b21-aa83-c83ad2ed5568"/>
+      <objectType typeId="37857193-f6bf-4e6a-8c36-bd11e98a7b46" valueTypeId="c60e6c97-faba-47dd-ae1e-568eac8130fb"/>
+      <rowType typeId="b6c2b2db-96d9-4c79-a1db-644865597d7c" valueTypeId="67b89ac4-eacf-4ef0-8ca2-d625501693fb"/>
     </producedTypes>
-    <name>ItemList</name>
+    <name>DataSet</name>
     <synonym>
       <key>en</key>
-      <value>Item list</value>
+      <value>Data set</value>
     </synonym>
-    <attributes uuid="8266b503-7319-448d-acee-e3f0c2f26f76">
+    <attributes uuid="28287de3-34c2-4ccc-bbf3-fa029ae5e6fc">
+      <name>Key</name>
+      <synonym>
+        <key>en</key>
+        <value>Key</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeRowID</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="485029a4-c81a-434b-88b3-d72ee1d15b06">
+      <name>Attribute</name>
+      <synonym>
+        <key>en</key>
+        <value>Attribute</value>
+      </synonym>
+      <type>
+        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="6f0021bb-42c8-41e8-a926-0876a31add34">
+      <name>Value</name>
+      <synonym>
+        <key>en</key>
+        <value>Value</value>
+      </synonym>
+      <type>
+        <types>Characteristic.AddAttributeAndProperty</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
+  <tabularSections uuid="39cd3fd6-9075-40a1-b5e6-985e1cba136b">
+    <producedTypes>
+      <objectType typeId="47b5a649-947b-4c87-b0e8-e06834e29ffe" valueTypeId="c3d9e362-a6c2-4535-bf76-c5ab1498e16e"/>
+      <rowType typeId="fb3bd90e-2296-4abf-b536-a48b2858d9a6" valueTypeId="81000d80-1f41-42ac-a78c-9fcbf99e766c"/>
+    </producedTypes>
+    <name>DataPrice</name>
+    <synonym>
+      <key>en</key>
+      <value>Data price</value>
+    </synonym>
+    <attributes uuid="44358848-1870-4261-b729-5544f71d491f">
+      <name>Key</name>
+      <synonym>
+        <key>en</key>
+        <value>Key</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeRowID</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="b701867b-0560-4b00-b55f-d03b65b29eac">
+      <name>Price</name>
+      <synonym>
+        <key>en</key>
+        <value>Price</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeQuantity</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="f1f5745d-dce9-437f-9b8e-e399a31bad0c">
       <name>Item</name>
       <synonym>
         <key>en</key>
@@ -413,25 +387,10 @@
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
-      <fillChecking>ShowError</fillChecking>
-      <dataHistory>Use</dataHistory>
-      <indexing>Index</indexing>
-    </attributes>
-    <attributes uuid="514c4ddb-0df3-446a-80fb-0956a76d4ca2">
-      <name>Price</name>
-      <synonym>
-        <key>en</key>
-        <value>Price</value>
-      </synonym>
-      <type>
-        <types>DefinedType.typePrice</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
-    <attributes uuid="2060bd7f-988f-49a2-8241-28cea61bf98e">
+    <attributes uuid="5dc05a1d-ed46-4b54-a307-ef8ead317253">
       <name>InputUnit</name>
       <synonym>
         <key>en</key>
@@ -445,7 +404,7 @@
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
-    <attributes uuid="20ee52eb-cbb7-4aaa-9c1c-8ab634130022">
+    <attributes uuid="abd6138b-55f3-45b0-9bd0-a12fefba134c">
       <name>InputPrice</name>
       <synonym>
         <key>en</key>
@@ -458,6 +417,47 @@
       <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
+  <tabularSections uuid="5b369985-7c3b-4181-acba-3f11456c3344">
+    <producedTypes>
+      <objectType typeId="0378f97f-62e6-43ef-9356-848570121ec1" valueTypeId="903a1aad-3bc3-4932-928c-418c8b6af8bb"/>
+      <rowType typeId="0e3b9826-a51c-461e-aa5e-694030425905" valueTypeId="7b42b956-7257-4d9d-9235-bb30d6ba2445"/>
+    </producedTypes>
+    <name>AddAttributes</name>
+    <synonym>
+      <key>en</key>
+      <value>Additional attributes</value>
+    </synonym>
+    <attributes uuid="258261f8-6375-4e37-9a6a-cbafe311a7a8">
+      <name>Property</name>
+      <synonym>
+        <key>en</key>
+        <value>Property</value>
+      </synonym>
+      <type>
+        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="486c2c6b-4d23-4e06-a75d-b6bcd225f34a">
+      <name>Value</name>
+      <synonym>
+        <key>en</key>
+        <value>Value</value>
+      </synonym>
+      <type>
+        <types>Characteristic.AddAttributeAndProperty</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <choiceParameterLinks>
+        <name>Filter.Owner</name>
+        <field>Document.PriceList.TabularSection.AddAttributes.Attribute.Property</field>
+      </choiceParameterLinks>
+      <dataHistory>Use</dataHistory>
     </attributes>
   </tabularSections>
 </mdclass:Document>

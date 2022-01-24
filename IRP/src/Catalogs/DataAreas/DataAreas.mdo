@@ -111,24 +111,21 @@
   <choiceMode>BothWays</choiceMode>
   <defaultObjectForm>Catalog.DataAreas.Form.ItemForm</defaultObjectForm>
   <defaultListForm>Catalog.DataAreas.Form.ListForm</defaultListForm>
-  <attributes uuid="a48b3f93-474c-48b9-be43-88b3fab9a38d">
-    <name>AdminLocalization</name>
+  <attributes uuid="2a3e108e-14e7-42e8-b359-5689cdb2ba3e">
+    <name>DataAreaStatus</name>
     <synonym>
       <key>en</key>
-      <value>Localization</value>
+      <value>Data area status</value>
     </synonym>
     <type>
-      <types>String</types>
-      <stringQualifiers>
-        <length>2</length>
-        <fixed>true</fixed>
-      </stringQualifiers>
+      <types>EnumRef.DataAreaStatus</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <fillChecking>ShowError</fillChecking>
-    <fillValue xsi:type="core:StringValue">
-      <value></value>
+    <fillFromFillingValue>true</fillFromFillingValue>
+    <fillValue xsi:type="core:ReferenceValue">
+      <value>Enum.DataAreaStatus.EnumValue.AreaPreparation</value>
     </fillValue>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
@@ -176,41 +173,24 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
-  <attributes uuid="473b65fe-b265-4e2f-b480-25411d176356">
-    <name>CompanyName</name>
+  <attributes uuid="a48b3f93-474c-48b9-be43-88b3fab9a38d">
+    <name>AdminLocalization</name>
     <synonym>
       <key>en</key>
-      <value>Company name</value>
+      <value>Localization</value>
     </synonym>
     <type>
       <types>String</types>
       <stringQualifiers>
-        <length>100</length>
+        <length>2</length>
+        <fixed>true</fixed>
       </stringQualifiers>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
+    <fillChecking>ShowError</fillChecking>
     <fillValue xsi:type="core:StringValue">
       <value></value>
-    </fillValue>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="2a3e108e-14e7-42e8-b359-5689cdb2ba3e">
-    <name>DataAreaStatus</name>
-    <synonym>
-      <key>en</key>
-      <value>Data area status</value>
-    </synonym>
-    <type>
-      <types>EnumRef.DataAreaStatus</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fillFromFillingValue>true</fillFromFillingValue>
-    <fillValue xsi:type="core:ReferenceValue">
-      <value>Enum.DataAreaStatus.EnumValue.AreaPreparation</value>
     </fillValue>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
@@ -230,6 +210,26 @@
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <fillChecking>ShowError</fillChecking>
+    <fillValue xsi:type="core:StringValue">
+      <value></value>
+    </fillValue>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="473b65fe-b265-4e2f-b480-25411d176356">
+    <name>CompanyName</name>
+    <synonym>
+      <key>en</key>
+      <value>Company name</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers>
+        <length>100</length>
+      </stringQualifiers>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
     <fillValue xsi:type="core:StringValue">
       <value></value>
     </fillValue>

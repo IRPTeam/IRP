@@ -18,14 +18,14 @@
   <editType>InDialog</editType>
   <writeMode>RecorderSubordinate</writeMode>
   <dataLockControlMode>Managed</dataLockControlMode>
-  <resources uuid="20614dc0-5e94-410b-a49b-a9b8d7bda03d">
-    <name>Currency</name>
+  <resources uuid="25480f7b-cebe-47e1-881d-6b7d66be7a1b">
+    <name>RowRef</name>
     <synonym>
       <key>en</key>
-      <value>Currency</value>
+      <value>Row ref</value>
     </synonym>
     <type>
-      <types>CatalogRef.Currencies</types>
+      <types>CatalogRef.RowIDs</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
@@ -48,14 +48,14 @@
     <dataHistory>Use</dataHistory>
     <fillValue xsi:type="core:UndefinedValue"/>
   </resources>
-  <resources uuid="25480f7b-cebe-47e1-881d-6b7d66be7a1b">
-    <name>RowRef</name>
+  <resources uuid="20614dc0-5e94-410b-a49b-a9b8d7bda03d">
+    <name>Currency</name>
     <synonym>
       <key>en</key>
-      <value>Row ref</value>
+      <value>Currency</value>
     </synonym>
     <type>
-      <types>CatalogRef.RowIDs</types>
+      <types>CatalogRef.Currencies</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

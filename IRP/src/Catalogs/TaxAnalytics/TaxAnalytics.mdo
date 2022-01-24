@@ -34,15 +34,6 @@
   <defaultListForm>Catalog.TaxAnalytics.Form.ListForm</defaultListForm>
   <defaultChoiceForm>Catalog.TaxAnalytics.Form.ChoiceForm</defaultChoiceForm>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
-  <forms uuid="a0fe1e73-b818-434b-b62a-56cbc42f881b">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
   <forms uuid="8523e502-3076-4ecb-9abf-d7cf54b6f49e">
     <name>ItemForm</name>
     <synonym>
@@ -57,6 +48,15 @@
     <synonym>
       <key>en</key>
       <value>List form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="a0fe1e73-b818-434b-b62a-56cbc42f881b">
+    <name>ChoiceForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Choice form</value>
     </synonym>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>

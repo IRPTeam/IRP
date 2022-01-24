@@ -57,6 +57,38 @@
   <defaultListForm>Catalog.CashAccounts.Form.ListForm</defaultListForm>
   <defaultChoiceForm>Catalog.CashAccounts.Form.ChoiceForm</defaultChoiceForm>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+  <attributes uuid="f853a165-64c1-427c-8e98-e23be321eafb">
+    <name>Currency</name>
+    <synonym>
+      <key>en</key>
+      <value>Currency</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Currencies</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <createOnInput>Use</createOnInput>
+    <fillFromFillingValue>true</fillFromFillingValue>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </attributes>
+  <attributes uuid="d5664562-6a75-43b9-82ad-2305ffad293e">
+    <name>Type</name>
+    <synonym>
+      <key>en</key>
+      <value>Type</value>
+    </synonym>
+    <type>
+      <types>EnumRef.CashAccountTypes</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillChecking>ShowError</fillChecking>
+    <fillFromFillingValue>true</fillFromFillingValue>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <attributes uuid="843f979c-ea45-4077-95b7-a6c960ed09aa">
     <name>BankName</name>
     <synonym>
@@ -77,22 +109,6 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
-  <attributes uuid="699c3c57-cd78-46ad-a184-d47b349a0788">
-    <name>Branch</name>
-    <synonym>
-      <key>en</key>
-      <value>Branch</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.BusinessUnits</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <createOnInput>DontUse</createOnInput>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
-  </attributes>
   <attributes uuid="6b88dd66-b157-40bb-ac58-a8eca373459d">
     <name>Company</name>
     <synonym>
@@ -108,21 +124,6 @@
     <fillValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="f853a165-64c1-427c-8e98-e23be321eafb">
-    <name>Currency</name>
-    <synonym>
-      <key>en</key>
-      <value>Currency</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Currencies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <createOnInput>Use</createOnInput>
-    <fillFromFillingValue>true</fillFromFillingValue>
-    <fillValue xsi:type="core:UndefinedValue"/>
   </attributes>
   <attributes uuid="db098aef-8f7d-404e-bc50-0dd90e68c5ca">
     <name>Number</name>
@@ -159,22 +160,21 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
-  <attributes uuid="d5664562-6a75-43b9-82ad-2305ffad293e">
-    <name>Type</name>
+  <attributes uuid="699c3c57-cd78-46ad-a184-d47b349a0788">
+    <name>Branch</name>
     <synonym>
       <key>en</key>
-      <value>Type</value>
+      <value>Branch</value>
     </synonym>
     <type>
-      <types>EnumRef.CashAccountTypes</types>
+      <types>CatalogRef.BusinessUnits</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
-    <fillChecking>ShowError</fillChecking>
-    <fillFromFillingValue>true</fillFromFillingValue>
+    <createOnInput>DontUse</createOnInput>
     <fillValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
+    <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
   </attributes>
   <tabularSections uuid="e4e2c63b-a0fc-494f-8196-b38a6ddb475c">
     <producedTypes>
@@ -219,15 +219,6 @@
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
   </tabularSections>
-  <forms uuid="b4f06351-e0a0-4198-a3d1-4330995771f7">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
   <forms uuid="96c824bc-0aa4-496b-978f-cd079767bc52">
     <name>ItemForm</name>
     <synonym>
@@ -242,6 +233,15 @@
     <synonym>
       <key>en</key>
       <value>List form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="b4f06351-e0a0-4198-a3d1-4330995771f7">
+    <name>ChoiceForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Choice form</value>
     </synonym>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>

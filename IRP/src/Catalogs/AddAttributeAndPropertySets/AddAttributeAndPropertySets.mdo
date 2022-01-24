@@ -697,6 +697,73 @@
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
   </tabularSections>
+  <tabularSections uuid="63d25f08-66d6-4386-bb3e-221989d0bc8e">
+    <producedTypes>
+      <objectType typeId="8d59c13f-477c-44a6-ada6-965fd34b33b6" valueTypeId="398cd1d2-b53c-4680-b793-cb1c50c5b526"/>
+      <rowType typeId="4af89b6f-39bd-4099-b384-ffae14d674d3" valueTypeId="896b12ec-c96d-400b-81ad-c1c7fcc611db"/>
+    </producedTypes>
+    <name>Properties</name>
+    <synonym>
+      <key>en</key>
+      <value>Properties</value>
+    </synonym>
+    <attributes uuid="b9140641-608f-4582-8a42-2dfd3e257d41">
+      <name>Property</name>
+      <synonym>
+        <key>en</key>
+        <value>Property</value>
+      </synonym>
+      <type>
+        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="c4664993-2b71-4723-a9db-9ef5a5a2a5c6">
+      <name>Condition</name>
+      <synonym>
+        <key>en</key>
+        <value>Condition</value>
+      </synonym>
+      <type>
+        <types>ValueStorage</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="678ece06-d283-4b04-b6b1-40a1668fa140">
+      <name>IsConditionSet</name>
+      <synonym>
+        <key>en</key>
+        <value>Is condition set</value>
+      </synonym>
+      <type>
+        <types>Number</types>
+        <numberQualifiers>
+          <precision>10</precision>
+        </numberQualifiers>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+    </attributes>
+    <attributes uuid="d57788a9-75b9-4593-836f-d865423c2412">
+      <name>ShowInHTML</name>
+      <synonym>
+        <key>en</key>
+        <value>Show in HTML</value>
+      </synonym>
+      <type>
+        <types>Boolean</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
   <tabularSections uuid="50db93fe-b52b-439b-a1f0-ee85def25385">
     <producedTypes>
       <objectType typeId="f04c6803-6dac-4170-a47e-9fb610342fcb" valueTypeId="3ff21d87-36cf-4340-befc-c1a7fb71e1e3"/>
@@ -810,78 +877,11 @@
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
   </tabularSections>
-  <tabularSections uuid="63d25f08-66d6-4386-bb3e-221989d0bc8e">
-    <producedTypes>
-      <objectType typeId="8d59c13f-477c-44a6-ada6-965fd34b33b6" valueTypeId="398cd1d2-b53c-4680-b793-cb1c50c5b526"/>
-      <rowType typeId="4af89b6f-39bd-4099-b384-ffae14d674d3" valueTypeId="896b12ec-c96d-400b-81ad-c1c7fcc611db"/>
-    </producedTypes>
-    <name>Properties</name>
+  <forms uuid="333dfaea-30f0-4b62-a4f2-ec34b2892f28">
+    <name>ItemForm</name>
     <synonym>
       <key>en</key>
-      <value>Properties</value>
-    </synonym>
-    <attributes uuid="b9140641-608f-4582-8a42-2dfd3e257d41">
-      <name>Property</name>
-      <synonym>
-        <key>en</key>
-        <value>Property</value>
-      </synonym>
-      <type>
-        <types>ChartOfCharacteristicTypesRef.AddAttributeAndProperty</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-    </attributes>
-    <attributes uuid="c4664993-2b71-4723-a9db-9ef5a5a2a5c6">
-      <name>Condition</name>
-      <synonym>
-        <key>en</key>
-        <value>Condition</value>
-      </synonym>
-      <type>
-        <types>ValueStorage</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-    </attributes>
-    <attributes uuid="678ece06-d283-4b04-b6b1-40a1668fa140">
-      <name>IsConditionSet</name>
-      <synonym>
-        <key>en</key>
-        <value>Is condition set</value>
-      </synonym>
-      <type>
-        <types>Number</types>
-        <numberQualifiers>
-          <precision>10</precision>
-        </numberQualifiers>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-    </attributes>
-    <attributes uuid="d57788a9-75b9-4593-836f-d865423c2412">
-      <name>ShowInHTML</name>
-      <synonym>
-        <key>en</key>
-        <value>Show in HTML</value>
-      </synonym>
-      <type>
-        <types>Boolean</types>
-      </type>
-      <minValue xsi:type="core:UndefinedValue"/>
-      <maxValue xsi:type="core:UndefinedValue"/>
-      <dataHistory>Use</dataHistory>
-      <fullTextSearch>Use</fullTextSearch>
-    </attributes>
-  </tabularSections>
-  <forms uuid="8d999616-7ec1-4449-84d3-2d2d11fabae0">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
+      <value>Item form</value>
     </synonym>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>
@@ -895,20 +895,20 @@
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>
   </forms>
-  <forms uuid="333dfaea-30f0-4b62-a4f2-ec34b2892f28">
-    <name>ItemForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Item form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
   <forms uuid="f18418ea-d0b2-487c-9397-d88335f33e2e">
     <name>ListForm</name>
     <synonym>
       <key>en</key>
       <value>List form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="8d999616-7ec1-4449-84d3-2d2d11fabae0">
+    <name>ChoiceForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Choice form</value>
     </synonym>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>

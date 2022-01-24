@@ -29,14 +29,14 @@
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>
   <defaultObjectForm>Catalog.TransactionsKeys.Form.ItemForm</defaultObjectForm>
-  <attributes uuid="b7f47bd9-ebbb-473f-95be-8b106c7c79f1">
-    <name>Agreement</name>
+  <attributes uuid="bb87504b-4ffe-434b-bf30-e6eadf893b2f">
+    <name>Company</name>
     <synonym>
       <key>en</key>
-      <value>Agreement</value>
+      <value>Company</value>
     </synonym>
     <type>
-      <types>CatalogRef.Agreements</types>
+      <types>CatalogRef.Companies</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
@@ -61,22 +61,6 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
-  <attributes uuid="bb87504b-4ffe-434b-bf30-e6eadf893b2f">
-    <name>Company</name>
-    <synonym>
-      <key>en</key>
-      <value>Company</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Companies</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <indexing>Index</indexing>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
   <attributes uuid="efc0346f-1e02-4b7f-896f-efe735be4075">
     <name>Currency</name>
     <synonym>
@@ -93,30 +77,14 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
-  <attributes uuid="5ac60904-320a-4fb7-bcd8-0915999efba6">
-    <name>IsCustomerTransaction</name>
+  <attributes uuid="5cae115f-2b99-40ba-8a75-c90a5a1a5efe">
+    <name>Partner</name>
     <synonym>
       <key>en</key>
-      <value>Is customer transaction</value>
+      <value>Partner</value>
     </synonym>
     <type>
-      <types>Boolean</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <indexing>Index</indexing>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <attributes uuid="7b015668-e463-479b-bb59-d28f5fca3a88">
-    <name>IsVendorTransaction</name>
-    <synonym>
-      <key>en</key>
-      <value>Is vendor transaction</value>
-    </synonym>
-    <type>
-      <types>Boolean</types>
+      <types>CatalogRef.Partners</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
@@ -133,6 +101,22 @@
     </synonym>
     <type>
       <types>CatalogRef.Companies</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <indexing>Index</indexing>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="b7f47bd9-ebbb-473f-95be-8b106c7c79f1">
+    <name>Agreement</name>
+    <synonym>
+      <key>en</key>
+      <value>Agreement</value>
+    </synonym>
+    <type>
+      <types>CatalogRef.Agreements</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
@@ -158,14 +142,30 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
-  <attributes uuid="5cae115f-2b99-40ba-8a75-c90a5a1a5efe">
-    <name>Partner</name>
+  <attributes uuid="7b015668-e463-479b-bb59-d28f5fca3a88">
+    <name>IsVendorTransaction</name>
     <synonym>
       <key>en</key>
-      <value>Partner</value>
+      <value>Is vendor transaction</value>
     </synonym>
     <type>
-      <types>CatalogRef.Partners</types>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <indexing>Index</indexing>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <attributes uuid="5ac60904-320a-4fb7-bcd8-0915999efba6">
+    <name>IsCustomerTransaction</name>
+    <synonym>
+      <key>en</key>
+      <value>Is customer transaction</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>

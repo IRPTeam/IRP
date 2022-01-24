@@ -113,6 +113,34 @@
   <defaultListForm>Catalog.InterfaceGroups.Form.ListForm</defaultListForm>
   <defaultChoiceForm>Catalog.InterfaceGroups.Form.ChoiceForm</defaultChoiceForm>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+  <attributes uuid="d236ed08-b323-45ba-94b9-61f3f3caa99f">
+    <name>FormPosition</name>
+    <synonym>
+      <key>en</key>
+      <value>Form position</value>
+    </synonym>
+    <type>
+      <types>String</types>
+      <stringQualifiers>
+        <length>10</length>
+      </stringQualifiers>
+    </type>
+    <format>
+      <key>en</key>
+      <value>BF=Left; BT=Right</value>
+    </format>
+    <editFormat>
+      <key>en</key>
+      <value>BF=Left; BT=Right</value>
+    </editFormat>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillValue xsi:type="core:StringValue">
+      <value></value>
+    </fillValue>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
   <attributes uuid="727b5db2-a516-4e70-8526-04e73e915091">
     <name>Behavior</name>
     <synonym>
@@ -166,43 +194,6 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
-  <attributes uuid="d236ed08-b323-45ba-94b9-61f3f3caa99f">
-    <name>FormPosition</name>
-    <synonym>
-      <key>en</key>
-      <value>Form position</value>
-    </synonym>
-    <type>
-      <types>String</types>
-      <stringQualifiers>
-        <length>10</length>
-      </stringQualifiers>
-    </type>
-    <format>
-      <key>en</key>
-      <value>BF=Left; BT=Right</value>
-    </format>
-    <editFormat>
-      <key>en</key>
-      <value>BF=Left; BT=Right</value>
-    </editFormat>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:StringValue">
-      <value></value>
-    </fillValue>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
-  <forms uuid="dd8be842-e3d0-46db-8549-c8b61981026e">
-    <name>ChoiceForm</name>
-    <synonym>
-      <key>en</key>
-      <value>Choice form</value>
-    </synonym>
-    <usePurposes>PersonalComputer</usePurposes>
-    <usePurposes>MobileDevice</usePurposes>
-  </forms>
   <forms uuid="980e9405-07a9-44bb-ab5d-270556d15a31">
     <name>ItemForm</name>
     <synonym>
@@ -217,6 +208,15 @@
     <synonym>
       <key>en</key>
       <value>List form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="dd8be842-e3d0-46db-8549-c8b61981026e">
+    <name>ChoiceForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Choice form</value>
     </synonym>
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>

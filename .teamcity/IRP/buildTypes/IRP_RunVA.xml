@@ -15,6 +15,7 @@
       <param name="env.BranchToStartVA" value="develop" />
       <param name="env.CloseVA" value="true" spec="checkbox uncheckedValue='false' display='normal' checkedValue='true'" />
       <param name="env.ConfigurationFileName" value="%env.Database1CName%" />
+      <param name="env.Coverage41C" value="C:\OneScript\lib\coverage-cli\vendor\Coverage41C-2.6.1\bin\Coverage41C.bat" />
       <param name="env.Database1CName" value="" />
       <param name="env.DebugPort" value="" />
       <param name="env.DebugVA" value="false" spec="checkbox uncheckedValue='false' display='normal' checkedValue='true'" />
@@ -33,6 +34,7 @@
       <param name="env.VA.FeaturePath" value="%teamcity.build.workingDir%/features/" />
       <param name="env.VA_PID" value="" />
       <param name="env.dbgs_PID" value="" />
+      <param name="teamcity.runner.commandline.stdstreams.encoding" value="UTF8" />
     </parameters>
     <build-runners>
       <runner id="RUNNER_31" name="Copy add data  proc from tools" type="jetbrains_powershell">
@@ -93,8 +95,7 @@ echo "##teamcity[setParameter name='env.dbgs_PID' value='$dbgs_PID']"]]></param>
           <equals name="env.StartDebug" value="true" />
         </conditions>
         <parameters>
-          <param name="script.content"><![CDATA[coverage-cli start --infobase DefAlias  --debugger http://localhost:%env.DebugPort% --output %system.teamcity.build.workingDir%/Cover.csv > "%system.teamcity.build.tempDir%\Cover.Log"
-rem coverage-cli start --infobase %env.Database1CName%  --debugger http://localhost:%env.DebugPort% --output %system.teamcity.build.workingDir%/Cover.csv > "%system.teamcity.build.tempDir%\Cover.Log"]]></param>
+          <param name="script.content" value="start &quot;&quot; &quot;%env.Coverage41C%&quot; start --infobase DefAlias  --debugger http://localhost:%env.DebugPort% --out %system.teamcity.build.workingDir%\Cover.xml --projectDir %system.teamcity.build.workingDir%\%teamcity.project.id%" />
           <param name="teamcity.step.mode" value="default" />
           <param name="use.custom.script" value="true" />
         </parameters>
@@ -128,7 +129,13 @@ $RunSaasMode = $%env.RunSaasMode% # can be $true or $false
 #Firt tag, start at template DB. If Use Saas - has to be set
 $TagForCreateSaas = "%env.SaasTag%"
 #Array of all tags for test = @("Tag1", "Tag2", "TagN")
+
+if (("%teamcity.build.branch%" -eq "BranchForTest") -or ("%teamcity.pullRequest.target.branch%" -eq "BranchForTest")){
+$TagArray = @("BranchForTest")
+} else {
 $TagArray = @(%env.TagsFullList%)
+}
+    
 #Jobs count (how much VA can be running at the same time)
 $StreamCountMax = "%env.StreamCount%"
 #Start test client port
@@ -230,7 +237,6 @@ $VanessaRun = {
     },
     'DebugLog': false,
     'DownloadFeaturesOpen': 1,
-    'Lang': 'en',
     'ModelingCreateReport': false,
     'RunningScripts': {
         'SpacingStepSpecifiedUser': 0.1,
@@ -310,6 +316,16 @@ $VanessaRun = {
     $a | Add-Member -Type NoteProperty -Name 'texterrorslogname' -Value "$workingDir/$FolderForAllArtefact/errors/$elementTag"
     $a | Add-Member -Type NoteProperty -Name 'textlogname' -Value $ScriptLogFilePath
     $a | Add-Member -Type NoteProperty -Name 'testclientports' -Value "$startPort - $portmax"
+    
+	if (("%teamcity.build.branch%" -eq "BranchForTest") -or ("%teamcity.pullRequest.target.branch%" -eq "BranchForTest")){
+    	$Lang = "ru"
+    } else {
+    	$Lang = "en"
+    }
+    
+    $a | Add-Member -Type NoteProperty -Name 'Lang' -Value $Lang
+
+    
     $a.AllureReport | Add-Member -Type NoteProperty -Name 'directorytobuildhierarchy' -Value "$FeaturePath"
     $a.AllureReport | Add-Member -Type NoteProperty -Name 'allurepath' -Value "$allurePath/$elementTag"
     New-Item -ItemType "directory" -Path "$workingDir/$FolderForAllArtefact/AllSteps/$elementTag/junit" | Out-Null
@@ -591,7 +607,7 @@ Start-Sleep -s 5]]></param>
           <equals name="env.StartDebug" value="true" />
         </conditions>
         <parameters>
-          <param name="script.content" value="coverage-cli stop -p %env.PID_ID%" />
+          <param name="script.content" value="&quot;%env.Coverage41C%&quot; stop --infobase DefAlias  --debugger http://localhost:%env.DebugPort%" />
           <param name="teamcity.step.mode" value="execute_always" />
           <param name="use.custom.script" value="true" />
         </parameters>
@@ -618,15 +634,13 @@ Start-Sleep 10]]></param>
           <param name="teamcity.step.mode" value="execute_always" />
         </parameters>
       </runner>
-      <runner id="RUNNER_16" name="Cover convert" type="simpleRunner">
-        <conditions>
-          <equals name="env.StartDebug" value="true" />
-        </conditions>
+      <runner id="RUNNER_16" name="Cover convert" type="jetbrains_powershell">
         <parameters>
-          <param name="script.content"><![CDATA[coverage-cli convert --input %system.teamcity.build.workingDir%/Cover.csv --output  %system.teamcity.build.workingDir%/Cover.xml --sources IRP\src --format EDT & powershell -command "(Get-Content %system.teamcity.build.workingDir%/Cover.xml) | ForEach-Object { $_ -replace '\\', '/' } | Set-Content %system.teamcity.build.workingDir%/Cover.xml"
-coverage-cli lines --sources %teamcity.project.id% --format EDT --output linesToCover.xml]]></param>
-          <param name="teamcity.step.mode" value="execute_always" />
-          <param name="use.custom.script" value="true" />
+          <param name="jetbrains_powershell_execution" value="PS1" />
+          <param name="jetbrains_powershell_noprofile" value="true" />
+          <param name="jetbrains_powershell_script_code" value="(Get-Content %system.teamcity.build.workingDir%/Cover.xml) | ForEach-Object { $_ -replace '&quot;src/', '&quot;%teamcity.project.id%/src/' } | Set-Content %system.teamcity.build.workingDir%/Cover.xml" />
+          <param name="jetbrains_powershell_script_mode" value="CODE" />
+          <param name="teamcity.step.mode" value="default" />
         </parameters>
       </runner>
       <runner id="RUNNER_13" name="Allure Report" type="jetbrains_powershell">

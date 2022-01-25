@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mdclass:AccumulationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="aa441e75-4012-47cb-9524-4e7eca2edb30">
+<mdclass:AccumulationRegister xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="dbb6f4a6-4e33-474a-862f-b960afcd5c38">
   <producedTypes>
-    <selectionType typeId="53efad1b-74e9-4ed4-8ae0-673cf3811d5c" valueTypeId="1001343a-39dc-47cf-8850-ffec6da409ef"/>
-    <listType typeId="b9e14220-7ce9-4e19-8f62-74306ef95d5f" valueTypeId="f3fa88cd-f185-4726-bef3-bbe3239cdb77"/>
-    <managerType typeId="57c54903-013c-49c6-a0a1-03cac0a09cf8" valueTypeId="1a877dd5-491f-4b4f-8693-e39aed686127"/>
-    <recordSetType typeId="edc7b497-7ef1-47f8-b924-5d5782cf02b9" valueTypeId="9b0dc480-541b-4d60-a543-3c4f4964c0e2"/>
-    <recordKeyType typeId="10b86a5f-d1ca-4ff9-9444-7d622815a3d6" valueTypeId="26fb1774-74ad-4006-b963-04f4907f5759"/>
-    <recordType typeId="e9eb81b8-aa34-4de5-a0d4-f96f90f2e5cf" valueTypeId="85f2a066-e896-4272-ab44-d73c6cca3623"/>
+    <selectionType typeId="c78667ee-ca3a-47e4-a606-7949becfe6cf" valueTypeId="cdec4a48-6037-4e45-b29b-5cd99eac7cbd"/>
+    <listType typeId="26850004-0a5d-4cdf-8afa-70bba7b7830d" valueTypeId="226b76ae-fe44-4bcd-9eb2-b96157bfa89f"/>
+    <managerType typeId="8e98bcf2-0d4f-439c-949c-59ea9cdb8718" valueTypeId="a9daf2f7-461d-46b4-a53f-acf02aa6ce8b"/>
+    <recordSetType typeId="2aa30fdf-f904-4b14-879e-2d93aa7ccc87" valueTypeId="08c006ec-2df2-48f1-8f05-e627c67f71dc"/>
+    <recordKeyType typeId="739777da-75af-49e5-ac0f-900f69007349" valueTypeId="9b42ea9c-8c9f-44a4-afcd-d5c22c9a80ee"/>
+    <recordType typeId="915759c4-6b80-4192-951c-8282ca30cf01" valueTypeId="2cd6b77a-4570-4d35-be27-ffb84ae270ac"/>
   </producedTypes>
-  <name>R6070T_OtherPeriodsExpenses</name>
+  <name>R6080T_OtherPeriodsRevenues</name>
   <synonym>
     <key>en</key>
-    <value>R6070 Other periods expenses</value>
+    <value>R6080 Other periods revenues</value>
   </synonym>
   <useStandardCommands>true</useStandardCommands>
   <dataLockControlMode>Managed</dataLockControlMode>
   <enableTotalsSplitting>true</enableTotalsSplitting>
-  <resources uuid="4e125ffd-380b-4295-a926-f52a3d5919d8">
+  <resources uuid="15bff5e2-e8d9-4b32-94cf-c3b86b2aac54">
     <name>Amount</name>
     <synonym>
       <key>en</key>
@@ -29,7 +29,7 @@
     <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
   </resources>
-  <dimensions uuid="7a40696a-eca2-49b0-8aa9-083533e56b75">
+  <dimensions uuid="fb42321e-d943-4006-adc1-84d3c1fba0a4">
     <name>Company</name>
     <synonym>
       <key>en</key>
@@ -43,7 +43,7 @@
     <fullTextSearch>Use</fullTextSearch>
     <useInTotals>true</useInTotals>
   </dimensions>
-  <dimensions uuid="8bc2532e-48c6-4a57-993c-28947a65d4cb">
+  <dimensions uuid="c0b50054-1dbe-4c4e-addd-1f322d0435c3">
     <name>Branch</name>
     <synonym>
       <key>en</key>
@@ -57,7 +57,7 @@
     <fullTextSearch>Use</fullTextSearch>
     <useInTotals>true</useInTotals>
   </dimensions>
-  <dimensions uuid="b4b8e982-a9e0-4064-8928-fac48b1821b3">
+  <dimensions uuid="9e49b391-7bda-499d-96cb-44c0c6bac6bd">
     <name>RowID</name>
     <synonym>
       <key>en</key>
@@ -71,21 +71,21 @@
     <fullTextSearch>Use</fullTextSearch>
     <useInTotals>true</useInTotals>
   </dimensions>
-  <dimensions uuid="c01e1adf-2688-4f9a-b452-5e175b7bf46a">
+  <dimensions uuid="69fe20bb-eefc-4650-9a6d-a52890662339">
     <name>Basis</name>
     <synonym>
       <key>en</key>
       <value>Basis</value>
     </synonym>
     <type>
-      <types>DocumentRef.PurchaseInvoice</types>
+      <types>DocumentRef.SalesInvoice</types>
     </type>
     <minValue xsi:type="core:UndefinedValue"/>
     <maxValue xsi:type="core:UndefinedValue"/>
     <fullTextSearch>Use</fullTextSearch>
     <useInTotals>true</useInTotals>
   </dimensions>
-  <dimensions uuid="bd4f3823-149c-452a-ad71-e84a2ade2ba6">
+  <dimensions uuid="ead940a4-0272-4b1a-97f0-9d32e230bb11">
     <name>ItemKey</name>
     <synonym>
       <key>en</key>
@@ -99,7 +99,7 @@
     <fullTextSearch>Use</fullTextSearch>
     <useInTotals>true</useInTotals>
   </dimensions>
-  <dimensions uuid="d548326c-1cfd-48b2-a535-c16a757f2dd0">
+  <dimensions uuid="f799ade6-5168-4868-a5f6-8211fdfb967a">
     <name>Currency</name>
     <synonym>
       <key>en</key>
@@ -113,7 +113,7 @@
     <fullTextSearch>Use</fullTextSearch>
     <useInTotals>true</useInTotals>
   </dimensions>
-  <dimensions uuid="828ce1b7-853c-430a-af53-3b24499960c0">
+  <dimensions uuid="6cb82947-2551-41e5-accd-b03de5e87237">
     <name>CurrencyMovementType</name>
     <synonym>
       <key>en</key>

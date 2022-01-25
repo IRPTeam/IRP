@@ -286,7 +286,7 @@ Procedure CostRowsBeforeAddRowEnd(Result, AdditionalParameters) Export
 	// Remove unused rows from Cost list
 	ArrayForDelete = New Array();
 	For Each Row In Object.CostList Do
-		If DocAdditionalCostAllocationClientServer.FindRowInArrayOfStructures(Result.SelectedRows, "RowID, Basis", 
+		If DocumentsClientServer.FindRowInArrayOfStructures(Result.SelectedRows, "RowID, Basis", 
 			Row.RowID, Row.Basis) = Undefined Then
 				ArrayForDelete.Add(Row);
 		EndIf;
@@ -298,7 +298,7 @@ Procedure CostRowsBeforeAddRowEnd(Result, AdditionalParameters) Export
 	// Remove unused rows from Allocation list
 	ArrayForDelete = New Array();
 	For Each Row In Object.AllocationList Do
-		If DocAdditionalCostAllocationClientServer.FindRowInArrayOfStructures(Result.SelectedRows, "RowID", 
+		If DocumentsClientServer.FindRowInArrayOfStructures(Result.SelectedRows, "RowID", 
 			Row.BasisRowID) = Undefined Then
 				ArrayForDelete.Add(Row);
 		EndIf;		
@@ -334,7 +334,7 @@ Procedure AllocationRowsBeforeAddRowEnd(Result, AdditionalParameters) Export
 		If Result.BasisRowID <> Row.BasisRowID Then
 			Continue;
 		EndIf;
-		If DocAdditionalCostAllocationClientServer.FindRowInArrayOfStructures(Result.SelectedRows, "BasisRowID, RowID, Document", 
+		If DocumentsClientServer.FindRowInArrayOfStructures(Result.SelectedRows, "BasisRowID, RowID, Document", 
 			Row.BasisRowID, Row.RowID, Row.Document) = Undefined Then
 			ArrayForDelete.Add(Row);
 		EndIf;

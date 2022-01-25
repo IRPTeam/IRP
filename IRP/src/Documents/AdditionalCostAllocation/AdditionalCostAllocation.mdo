@@ -86,7 +86,7 @@
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>
   </forms>
-  <forms uuid="44467a38-f28b-48f4-b7bd-65fb99f7f9a8">
+  <forms uuid="8e00b041-17b3-4e30-853d-c33dd079b5a1">
     <name>ListForm</name>
     <synonym>
       <key>en</key>
@@ -95,7 +95,7 @@
     <usePurposes>PersonalComputer</usePurposes>
     <usePurposes>MobileDevice</usePurposes>
   </forms>
-  <forms uuid="e69023fb-dcf4-46f5-af12-a7332a225215">
+  <forms uuid="336bee30-5955-40c5-97ac-c3f9fd499d8c">
     <name>ChoiceForm</name>
     <synonym>
       <key>en</key>

@@ -565,6 +565,8 @@ Scenario: _029521 check the output of the document movement report for Bundling
 		| '$$NumberBundling0029501$$'      |
 		And I select current line in "List" table
 		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
+		And I select "Bundles content" exact value from "Register" drop-down list
+		And I click "Generate report" button			
 	* Check the report generation
 		And "ResultTable" spreadsheet document contains lines:
 		| '$$Bundling0029501$$'            | ''       | ''          | ''                          | ''         | '' |
@@ -600,6 +602,7 @@ Scenario: _02951901 clear movements Bundling and check that there is no movement
 			| '$$NumberBundling0029501$$'      |
 		And in the table "List" I click the button named "ListContextMenuPost"
 		And I click the button named "FormReportDocumentRegistrationsReportRegistrationsReport"
+		And I select "Bundles content" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		And "ResultTable" spreadsheet document contains lines:
 		| '$$Bundling0029501$$'            | ''       | ''          | ''                          | ''         | '' |

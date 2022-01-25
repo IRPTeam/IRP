@@ -393,7 +393,6 @@
   <commonModules>CommonModule.LandedCostServer</commonModules>
   <commonModules>CommonModule.DocAdditionalCostAllocationClient</commonModules>
   <commonModules>CommonModule.DocAdditionalCostAllocationServer</commonModules>
-  <commonModules>CommonModule.DocAdditionalCostAllocationClientServer</commonModules>
   <commonModules>CommonModule.DocAdditionalRevenueAllocationClient</commonModules>
   <commonModules>CommonModule.DocAdditionalRevenueAllocationServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>

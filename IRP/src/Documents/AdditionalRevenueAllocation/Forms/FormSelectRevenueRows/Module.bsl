@@ -37,7 +37,7 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 			NewRow_SecondLevel = NewRow_TopLevel.GetItems().Add();
 			NewRow_SecondLevel.Level = 2;
 			FillPropertyValues(NewRow_SecondLevel, QuerySelection_Details);
-			If DocAdditionalRevenueAllocationClientServer.FindRowInArrayOfStructures(Parameters.SelectedRows, "RowID, Basis", 
+			If DocumentsClientServer.FindRowInArrayOfStructures(Parameters.SelectedRows, "RowID, Basis", 
 				QuerySelection_Details.RowID, QuerySelection_Details.Document) <> Undefined Then
 				NewRow_SecondLevel.Use = True;
 			EndIf;

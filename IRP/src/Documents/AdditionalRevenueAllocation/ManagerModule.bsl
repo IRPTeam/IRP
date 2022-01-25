@@ -39,7 +39,7 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 		CurrencyTable = Basis.Currencies.Unload();
 		
 		OtherPeriodsRevenuesByBasis = Tables.R6080T_OtherPeriodsRevenues.Copy(New Structure("Basis", Basis));
-		If TypeOf(Basis) = Type("DocumentRef.PurchaseInvoice") Then
+		If TypeOf(Basis) = Type("DocumentRef.SalesInvoice") Then
 			If CurrencyTable.Count() Then
 				OtherPeriodsRevenuesByBasis.FillValues(CurrencyTable[0].Key, "Key");
 			EndIf;	
@@ -69,7 +69,7 @@ Procedure PostingCheckBeforeWrite(Ref, Cancel, PostingMode, Parameters, AddInfo 
 		
 		BatchRevenueAllocationInfoByBasis = 
 		Tables.T6070S_BatchRevenueAllocationInfo.Copy(New Structure("RowID, BasisRowID", Row.RowID, Row.BasisRowID));
-		If TypeOf(Row.Basis) = Type("DocumentRef.PurchaseInvoice") Then
+		If TypeOf(Row.Basis) = Type("DocumentRef.SalesInvoice") Then
 			If CurrencyTable.Count() Then
 				BatchRevenueAllocationInfoByBasis.FillValues(CurrencyTable[0].Key, "Key");
 			EndIf;	

@@ -686,6 +686,7 @@ Function T6020S_BatchKeysInfo()
 	|	PurchaseReturnItemList.Ref.Date AS Period,
 	|	VALUE(Enum.BatchDirection.Expense) AS Direction,
 	|	PurchaseReturnItemList.PurchaseInvoice AS BatchDocument
+	|INTO T6020S_BatchKeysInfo
 	|FROM
 	|	Document.PurchaseReturn.ItemList AS PurchaseReturnItemList
 	|WHERE

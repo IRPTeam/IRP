@@ -10,7 +10,7 @@
       <setting-ref ref="RUNNER_22" />
     </disabled-settings>
     <parameters />
-    <build-runners order="RUNNER_22, RUNNER_67, RUNNER_5, RUNNER_32, RUNNER_8, RUNNER_9, RUNNER_11, RUNNER_43">
+    <build-runners order="RUNNER_22, RUNNER_67, RUNNER_5, RUNNER_74, RUNNER_32, RUNNER_8, RUNNER_9, RUNNER_11, RUNNER_43">
       <runner id="RUNNER_22" name="Drop DB MetaRunner" type="DropDB">
         <parameters>
           <param name="teamcity.step.mode" value="default" />
@@ -41,13 +41,6 @@ find /c "completed successfully" %env.LogFile1C% && ( echo Success ) || ( echo "
           <param name="use.custom.script" value="true" />
         </parameters>
       </runner>
-      <runner id="RUNNER_11" name="Create and attach cf" type="simpleRunner">
-        <parameters>
-          <param name="script.content" value="start /wait &quot;1cv8.exe&quot; %env.PathTo1CPlatform%  Designer %env.ConnectionTo1C% /Out %env.LogFile1C% /DumpCfg %system.teamcity.build.workingDir%\%teamcity.project.id%.cf" />
-          <param name="teamcity.step.mode" value="default" />
-          <param name="use.custom.script" value="true" />
-        </parameters>
-      </runner>
       <runner id="RUNNER_74" name="automerge" type="jetbrains_powershell">
         <parameters>
           <param name="jetbrains_powershell_execution" value="PS1" />
@@ -59,6 +52,13 @@ find /c "completed successfully" %env.LogFile1C% && ( echo Success ) || ( echo "
 }]]></param>
           <param name="jetbrains_powershell_script_mode" value="CODE" />
           <param name="teamcity.step.mode" value="default" />
+        </parameters>
+      </runner>
+      <runner id="RUNNER_11" name="Create and attach cf" type="simpleRunner">
+        <parameters>
+          <param name="script.content" value="start /wait &quot;1cv8.exe&quot; %env.PathTo1CPlatform%  Designer %env.ConnectionTo1C% /Out %env.LogFile1C% /DumpCfg %system.teamcity.build.workingDir%\%teamcity.project.id%.cf" />
+          <param name="teamcity.step.mode" value="default" />
+          <param name="use.custom.script" value="true" />
         </parameters>
       </runner>
     </build-runners>

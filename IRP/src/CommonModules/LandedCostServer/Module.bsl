@@ -1,9 +1,33 @@
 
+Function GetArrayOfBatchDocumentTypes()
+	ArrayOfTypes = New Array();
+	ArrayOfTypes.Add(Type("DocumentRef.Bundling"));
+	ArrayOfTypes.Add(Type("DocumentRef.InventoryTransfer"));
+	ArrayOfTypes.Add(Type("DocumentRef.ItemStockAdjustment"));
+	ArrayOfTypes.Add(Type("DocumentRef.OpeningEntry"));
+	ArrayOfTypes.Add(Type("DocumentRef.PurchaseInvoice"));
+	ArrayOfTypes.Add(Type("DocumentRef.PurchaseReturn"));
+	ArrayOfTypes.Add(Type("DocumentRef.RetailSalesReceipt"));
+	ArrayOfTypes.Add(Type("DocumentRef.RetailReturnReceipt"));
+	ArrayOfTypes.Add(Type("DocumentRef.SalesInvoice"));
+	ArrayOfTypes.Add(Type("DocumentRef.SalesReturn"));
+	ArrayOfTypes.Add(Type("DocumentRef.StockAdjustmentAsSurplus"));
+	ArrayOfTypes.Add(Type("DocumentRef.StockAdjustmentAsWriteOff"));
+	ArrayOfTypes.Add(Type("DocumentRef.Unbundling"));
+	Return ArrayOfTypes;
+EndFunction
+
+Function GetBatchDocumentsTypes()
+	ArrayOfTypes = GetArrayOfBatchDocumentTypes();
+	Types = New TypeDescription(, ArrayOfTypes);
+	Return Types;
+EndFunction
+
 Function CreateTable_BatchWiseBalance()	
 	Table = New ValueTable();
 	Table.Columns.Add("Batch"    , New TypeDescription("CatalogRef.Batches"));
 	Table.Columns.Add("BatchKey" , New TypeDescription("CatalogRef.BatchKeys"));
-	Table.Columns.Add("Document" , Metadata.DefinedTypes.typeBatchDocuments.Type);
+	Table.Columns.Add("Document" , GetBatchDocumentsTypes());
 	Table.Columns.Add("Company"  , New TypeDescription("CatalogRef.Companies"));
 	Table.Columns.Add("Period"   , Metadata.AccumulationRegisters.R6010B_BatchWiseBalance.StandardAttributes.Period.Type);
 	Table.Columns.Add("Quantity" , Metadata.AccumulationRegisters.R6010B_BatchWiseBalance.Resources.Quantity.Type);
@@ -477,7 +501,7 @@ Function GetBatchWiseBalance(Company, BeginPeriod,  EndPeriod)
 	TableOfReturnedBatches.Columns.Add("BatchKey"         , New TypeDescription("CatalogRef.BatchKeys"));
 	TableOfReturnedBatches.Columns.Add("Quantity"         , RegMetadata.Resources.Quantity.Type);
 	TableOfReturnedBatches.Columns.Add("Amount"           , RegMetadata.Resources.Amount.Type);
-	TableOfReturnedBatches.Columns.Add("Document"         , Metadata.DefinedTypes.typeBatchDocuments.Type);
+	TableOfReturnedBatches.Columns.Add("Document"         , GetBatchDocumentsTypes());
 	TableOfReturnedBatches.Columns.Add("Date"             , RegMetadata.StandardAttributes.Period.Type);
 	TableOfReturnedBatches.Columns.Add("Company"          , RegMetadata.Dimensions.Company.Type);
 	TableOfReturnedBatches.Columns.Add("Direction"        , RegMetadata.Dimensions.Direction.Type);

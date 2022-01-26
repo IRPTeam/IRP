@@ -48,6 +48,19 @@ find /c "completed successfully" %env.LogFile1C% && ( echo Success ) || ( echo "
           <param name="use.custom.script" value="true" />
         </parameters>
       </runner>
+      <runner id="RUNNER_74" name="automerge" type="jetbrains_powershell">
+        <parameters>
+          <param name="jetbrains_powershell_execution" value="PS1" />
+          <param name="jetbrains_powershell_noprofile" value="true" />
+          <param name="jetbrains_powershell_script_code"><![CDATA[If ("%teamcity.pullRequest.target.branch%" -eq "") {
+
+} else {
+	git merge --no-commit %teamcity.pullRequest.target.branch%
+}]]></param>
+          <param name="jetbrains_powershell_script_mode" value="CODE" />
+          <param name="teamcity.step.mode" value="default" />
+        </parameters>
+      </runner>
     </build-runners>
     <vcs-settings />
     <requirements />

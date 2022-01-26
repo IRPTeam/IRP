@@ -45,23 +45,48 @@
 		<field xsi:type="DataSetFieldField">
 			<dataPath>Receipt.AmountCostReceipt</dataPath>
 			<field>AmountCostReceipt</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Cost</v8:content>
+				</v8:item>
+			</title>
 		</field>
 		<field xsi:type="DataSetFieldField">
 			<dataPath>OpeningBalance.QuantityOpeningBalance</dataPath>
 			<field>QuantityOpeningBalance</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Quantity</v8:content>
+				</v8:item>
+			</title>
 			<role>
 				<dcscom:balance>true</dcscom:balance>
 				<dcscom:balanceGroupName>Quantity</dcscom:balanceGroupName>
 				<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
 			</role>
+			<valueType/>
 		</field>
 		<field xsi:type="DataSetFieldField">
 			<dataPath>Receipt.QuantityReceipt</dataPath>
 			<field>QuantityReceipt</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Quantity</v8:content>
+				</v8:item>
+			</title>
 		</field>
 		<field xsi:type="DataSetFieldField">
 			<dataPath>ClosingBalance.QuantityClosingBalance</dataPath>
 			<field>QuantityClosingBalance</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Quantity</v8:content>
+				</v8:item>
+			</title>
 			<role>
 				<dcscom:balance>true</dcscom:balance>
 				<dcscom:balanceGroupName>Quantity</dcscom:balanceGroupName>
@@ -71,19 +96,38 @@
 		<field xsi:type="DataSetFieldField">
 			<dataPath>OpeningBalance.AmountCostOpeningBalance</dataPath>
 			<field>AmountCostOpeningBalance</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Cost</v8:content>
+				</v8:item>
+			</title>
 			<role>
 				<dcscom:balance>true</dcscom:balance>
 				<dcscom:balanceGroupName>AmountCost</dcscom:balanceGroupName>
 				<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
 			</role>
+			<valueType/>
 		</field>
 		<field xsi:type="DataSetFieldField">
 			<dataPath>Expense.AmountCostExpense</dataPath>
 			<field>AmountCostExpense</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Cost</v8:content>
+				</v8:item>
+			</title>
 		</field>
 		<field xsi:type="DataSetFieldField">
 			<dataPath>ClosingBalance.AmountClosingBalance</dataPath>
 			<field>AmountClosingBalance</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Amount</v8:content>
+				</v8:item>
+			</title>
 			<role>
 				<dcscom:balance>true</dcscom:balance>
 				<dcscom:balanceGroupName>Amount</dcscom:balanceGroupName>
@@ -93,11 +137,18 @@
 		<field xsi:type="DataSetFieldField">
 			<dataPath>OpeningBalance.AmountOpeningBalance</dataPath>
 			<field>AmountOpeningBalance</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Amount</v8:content>
+				</v8:item>
+			</title>
 			<role>
 				<dcscom:balance>true</dcscom:balance>
 				<dcscom:balanceGroupName>Amount</dcscom:balanceGroupName>
 				<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
 			</role>
+			<valueType/>
 		</field>
 		<field xsi:type="DataSetFieldField">
 			<dataPath>SecondPeriod</dataPath>
@@ -110,10 +161,22 @@
 		<field xsi:type="DataSetFieldField">
 			<dataPath>Receipt.AmountReceipt</dataPath>
 			<field>AmountReceipt</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Amount</v8:content>
+				</v8:item>
+			</title>
 		</field>
 		<field xsi:type="DataSetFieldField">
 			<dataPath>ClosingBalance.AmountCostClosingBalance</dataPath>
 			<field>AmountCostClosingBalance</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Cost</v8:content>
+				</v8:item>
+			</title>
 			<role>
 				<dcscom:balance>true</dcscom:balance>
 				<dcscom:balanceGroupName>AmountCost</dcscom:balanceGroupName>
@@ -158,6 +221,12 @@
 		<field xsi:type="DataSetFieldField">
 			<dataPath>Expense.AmountExpense</dataPath>
 			<field>AmountExpense</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Amount</v8:content>
+				</v8:item>
+			</title>
 		</field>
 		<field xsi:type="DataSetFieldField">
 			<dataPath>Batch</dataPath>
@@ -169,6 +238,12 @@
 		<field xsi:type="DataSetFieldField">
 			<dataPath>Expense.QuantityExpense</dataPath>
 			<field>QuantityExpense</field>
+			<title xsi:type="v8:LocalStringType">
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Quantity</v8:content>
+				</v8:item>
+			</title>
 		</field>
 		<field xsi:type="DataSetFieldField">
 			<dataPath>Store</dataPath>
@@ -223,14 +298,6 @@ FROM
 		<expression>Sum(Expense.QuantityExpense)</expression>
 	</totalField>
 	<totalField>
-		<dataPath>OpeningBalance.AmountOpeningBalance</dataPath>
-		<expression>Sum(OpeningBalance.AmountOpeningBalance)</expression>
-	</totalField>
-	<totalField>
-		<dataPath>OpeningBalance.QuantityOpeningBalance</dataPath>
-		<expression>Sum(OpeningBalance.QuantityOpeningBalance)</expression>
-	</totalField>
-	<totalField>
 		<dataPath>Receipt.AmountReceipt</dataPath>
 		<expression>Sum(Receipt.AmountReceipt)</expression>
 	</totalField>
@@ -247,12 +314,20 @@ FROM
 		<expression>Sum(Expense.AmountCostExpense)</expression>
 	</totalField>
 	<totalField>
+		<dataPath>Receipt.AmountCostReceipt</dataPath>
+		<expression>Sum(Receipt.AmountCostReceipt)</expression>
+	</totalField>
+	<totalField>
 		<dataPath>OpeningBalance.AmountCostOpeningBalance</dataPath>
 		<expression>Sum(OpeningBalance.AmountCostOpeningBalance)</expression>
 	</totalField>
 	<totalField>
-		<dataPath>Receipt.AmountCostReceipt</dataPath>
-		<expression>Sum(Receipt.AmountCostReceipt)</expression>
+		<dataPath>OpeningBalance.AmountOpeningBalance</dataPath>
+		<expression>Sum(OpeningBalance.AmountOpeningBalance)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>OpeningBalance.QuantityOpeningBalance</dataPath>
+		<expression>Sum(OpeningBalance.QuantityOpeningBalance)</expression>
 	</totalField>
 	<parameter>
 		<name>ReportPeriod</name>

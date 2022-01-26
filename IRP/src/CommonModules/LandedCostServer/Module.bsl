@@ -886,26 +886,26 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches)
 						NeedReceipt = NeedReceipt - Row_Expense.Quantity;
 						
 						NewRow = Tables.DataForReceipt.Add();
-						NewRow.Batch = Row_Expense.Batch;
+						NewRow.Batch    = Row_Expense.Batch;
 						NewRow.BatchKey = Row.BatchKey;
 						NewRow.Document = Row.Document;
-						NewRow.Company = Row.Company;
-						NewRow.Period = Row.Date;
+						NewRow.Company  = Row.Company;
+						NewRow.Period   = Row.Date;
 						NewRow.Quantity = Row_Expense.Quantity;
-						NewRow.Amount = Row_Expense.Amount;
+						NewRow.Amount   = Row_Expense.Amount;
 						
 						NewRowReceivedBatch = TableOfNewReceivedBatches.Add();
-						NewRowReceivedBatch.Batch = Row_Expense.Batch;
-						NewRowReceivedBatch.BatchKey = Row.BatchKey;
-						NewRowReceivedBatch.Document = Row.Document;
-						NewRowReceivedBatch.Company = Row.Company;
-						NewRowReceivedBatch.Date = Row.Date;
-						NewRowReceivedBatch.Quantity = Row_Expense.Quantity;
-						NewRowReceivedBatch.Amount = Row_Expense.Amount;
-						NewRowReceivedBatch.QuantityBalance = Row_Expense.Quantity;
-						NewRowReceivedBatch.AmountBalance = Row_Expense.Amount;
+						NewRowReceivedBatch.Batch            = Row_Expense.Batch;
+						NewRowReceivedBatch.BatchKey         = Row.BatchKey;
+						NewRowReceivedBatch.Document         = Row.Document;
+						NewRowReceivedBatch.Company          = Row.Company;
+						NewRowReceivedBatch.Date             = Row.Date;
+						NewRowReceivedBatch.Quantity         = Row_Expense.Quantity;
+						NewRowReceivedBatch.Amount           = Row_Expense.Amount;
+						NewRowReceivedBatch.QuantityBalance  = Row_Expense.Quantity;
+						NewRowReceivedBatch.AmountBalance    = Row_Expense.Amount;
 						NewRowReceivedBatch.IsOpeningBalance = False;
-						NewRowReceivedBatch.Direction = Enums.BatchDirection.Receipt;
+						NewRowReceivedBatch.Direction        = Enums.BatchDirection.Receipt;
 							
 					EndIf;
 				EndDo;
@@ -915,8 +915,8 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches)
 					NewRow = Tables.DataForBatchShortageIncoming.Add();
 					NewRow.BatchKey = Row.BatchKey;
 					NewRow.Document = Row.Document;
-					NewRow.Company = Row.Company;
-					NewRow.Period = Row.Date;
+					NewRow.Company  = Row.Company;
+					NewRow.Period   = Row.Date;
 					NewRow.Quantity = NeedReceipt;
 				EndIf;
 			EndIf;
@@ -944,10 +944,10 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches)
 			For Each Row_Expense In DataForExpense Do
 				NewRow.Amount = NewRow.Amount + Row_Expense.Amount;
 				NewRowBundleAmountValues = Tables.DataForBundleAmountValues.Add();
-				NewRowBundleAmountValues.Batch = Row_Expense.Batch;
-				NewRowBundleAmountValues.BatchKey = Row_Expense.BatchKey;
-				NewRowBundleAmountValues.Company = Row_Expense.Company;
-				NewRowBundleAmountValues.Period = Row_Expense.Period;
+				NewRowBundleAmountValues.Batch          = Row_Expense.Batch;
+				NewRowBundleAmountValues.BatchKey       = Row_Expense.BatchKey;
+				NewRowBundleAmountValues.Company        = Row_Expense.Company;
+				NewRowBundleAmountValues.Period         = Row_Expense.Period;
 				NewRowBundleAmountValues.BatchKeyBundle = Row_Receipt.BatchKey;
 				If TotalExpense <> 0 And Row_Expense.Amount <> 0 Then
 					NewRowBundleAmountValues.AmountValue = Row_Expense.Amount / (TotalExpense / 100);
@@ -955,17 +955,17 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches)
 			EndDo;
 			
 			NewRowReceivedBatch = TableOfNewReceivedBatches.Add();
-			NewRowReceivedBatch.Batch = NewRow.Batch;
-			NewRowReceivedBatch.BatchKey = NewRow.BatchKey;
-			NewRowReceivedBatch.Document = NewRow.Document;
-			NewRowReceivedBatch.Company = NewRow.Company;
-			NewRowReceivedBatch.Date = NewRow.Period;
-			NewRowReceivedBatch.Quantity = NewRow.Quantity;
-			NewRowReceivedBatch.Amount = NewRow.Amount;
-			NewRowReceivedBatch.QuantityBalance = NewRow.Quantity;
-			NewRowReceivedBatch.AmountBalance = NewRow.Amount;
+			NewRowReceivedBatch.Batch            = NewRow.Batch;
+			NewRowReceivedBatch.BatchKey         = NewRow.BatchKey;
+			NewRowReceivedBatch.Document         = NewRow.Document;
+			NewRowReceivedBatch.Company          = NewRow.Company;
+			NewRowReceivedBatch.Date             = NewRow.Period;
+			NewRowReceivedBatch.Quantity         = NewRow.Quantity;
+			NewRowReceivedBatch.Amount           = NewRow.Amount;
+			NewRowReceivedBatch.QuantityBalance  = NewRow.Quantity;
+			NewRowReceivedBatch.AmountBalance    = NewRow.Amount;
 			NewRowReceivedBatch.IsOpeningBalance = False;
-			NewRowReceivedBatch.Direction = Enums.BatchDirection.Receipt;
+			NewRowReceivedBatch.Direction        = Enums.BatchDirection.Receipt;
 						
 		EndDo;
 		
@@ -1066,17 +1066,17 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches)
 			EndDo;
 			
 			NewRowReceivedBatch = TableOfNewReceivedBatches.Add();
-			NewRowReceivedBatch.Batch = NewRow.Batch;
-			NewRowReceivedBatch.BatchKey = NewRow.BatchKey;
-			NewRowReceivedBatch.Document = NewRow.Document;
-			NewRowReceivedBatch.Company = NewRow.Company;
-			NewRowReceivedBatch.Date = NewRow.Period;
-			NewRowReceivedBatch.Quantity = NewRow.Quantity;
-			NewRowReceivedBatch.Amount = NewRow.Amount;
-			NewRowReceivedBatch.QuantityBalance = NewRow.Quantity;
-			NewRowReceivedBatch.AmountBalance = NewRow.Amount;
+			NewRowReceivedBatch.Batch            = NewRow.Batch;
+			NewRowReceivedBatch.BatchKey         = NewRow.BatchKey;
+			NewRowReceivedBatch.Document         = NewRow.Document;
+			NewRowReceivedBatch.Company          = NewRow.Company;
+			NewRowReceivedBatch.Date             = NewRow.Period;
+			NewRowReceivedBatch.Quantity         = NewRow.Quantity;
+			NewRowReceivedBatch.Amount           = NewRow.Amount;
+			NewRowReceivedBatch.QuantityBalance  = NewRow.Quantity;
+			NewRowReceivedBatch.AmountBalance    = NewRow.Amount;
 			NewRowReceivedBatch.IsOpeningBalance = False;
-			NewRowReceivedBatch.Direction = Enums.BatchDirection.Receipt;
+			NewRowReceivedBatch.Direction        = Enums.BatchDirection.Receipt;
 						
 		EndDo;
 		

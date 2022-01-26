@@ -59,21 +59,6 @@
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>
   <defaultObjectForm>Catalog.Hardware.Form.ItemForm</defaultObjectForm>
-  <attributes uuid="2215cdc3-fcfc-40e0-83a2-153654cd1ac6">
-    <name>Workstation</name>
-    <synonym>
-      <key>en</key>
-      <value>Workstation</value>
-    </synonym>
-    <type>
-      <types>CatalogRef.Workstations</types>
-    </type>
-    <minValue xsi:type="core:UndefinedValue"/>
-    <maxValue xsi:type="core:UndefinedValue"/>
-    <fillValue xsi:type="core:UndefinedValue"/>
-    <fullTextSearch>Use</fullTextSearch>
-    <dataHistory>Use</dataHistory>
-  </attributes>
   <attributes uuid="9753667e-e27e-4c25-afad-8cd1ef0e0961">
     <name>EquipmentType</name>
     <synonym>
@@ -104,7 +89,7 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
-  <tabularSections uuid="a61c23c7-1d5e-487d-a975-4c9f0c2d0859">
+  <tabularSections uuid="fd9a6894-9c06-4625-91a4-5db398bbb9ac">
     <producedTypes>
       <objectType typeId="b8fed1f0-7596-48b4-9c7e-bbe156d72e69" valueTypeId="1acf60ec-ede0-41cf-8e2a-c53aee5f71c5"/>
       <rowType typeId="7628feff-a346-4554-b6af-9803dec73f37" valueTypeId="444355a6-c98a-4545-bd0a-62409091103e"/>

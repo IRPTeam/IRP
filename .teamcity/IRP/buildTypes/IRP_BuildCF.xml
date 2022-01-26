@@ -11,9 +11,26 @@
       <setting-ref ref="RUNNER_22" />
     </disabled-settings>
     <parameters />
-    <build-runners order="RUNNER_22, RUNNER_67, RUNNER_5, RUNNER_74, RUNNER_32, RUNNER_8, RUNNER_9, RUNNER_11, RUNNER_43">
+    <build-runners order="RUNNER_22, RUNNER_74, RUNNER_67, RUNNER_5, RUNNER_32, RUNNER_8, RUNNER_9, RUNNER_11, RUNNER_43">
       <runner id="RUNNER_22" name="Drop DB MetaRunner" type="DropDB">
         <parameters>
+          <param name="teamcity.step.mode" value="default" />
+        </parameters>
+      </runner>
+      <runner id="RUNNER_74" name="automerge" type="jetbrains_powershell">
+        <parameters>
+          <param name="jetbrains_powershell_execution" value="PS1" />
+          <param name="jetbrains_powershell_noprofile" value="true" />
+          <param name="jetbrains_powershell_script_code"><![CDATA[If ("%teamcity.pullRequest.target.branch%" -eq "") {
+
+} else {
+	git config user.email "user@tc.1c"
+    git config user.name "automerge"
+    git add .
+    git commit -m "CI"
+	git merge --no-commit %teamcity.pullRequest.target.branch%
+}]]></param>
+          <param name="jetbrains_powershell_script_mode" value="CODE" />
           <param name="teamcity.step.mode" value="default" />
         </parameters>
       </runner>
@@ -40,23 +57,6 @@ echo ##teamcity[compilationFinished compiler='Log from 1C: %env.LogFile1C%']
 find /c "completed successfully" %env.LogFile1C% && ( echo Success ) || ( echo "##teamcity[message text='Error while Create template DB' status='FAILURE']" && exit 1)]]></param>
           <param name="teamcity.step.mode" value="default" />
           <param name="use.custom.script" value="true" />
-        </parameters>
-      </runner>
-      <runner id="RUNNER_74" name="automerge" type="jetbrains_powershell">
-        <parameters>
-          <param name="jetbrains_powershell_execution" value="PS1" />
-          <param name="jetbrains_powershell_noprofile" value="true" />
-          <param name="jetbrains_powershell_script_code"><![CDATA[If ("%teamcity.pullRequest.target.branch%" -eq "") {
-
-} else {
-	git config user.email "user@tc.1c"
-    git config user.name "automerge"
-    git add .
-    git commit -m "CI"
-	git merge --no-commit %teamcity.pullRequest.target.branch%
-}]]></param>
-          <param name="jetbrains_powershell_script_mode" value="CODE" />
-          <param name="teamcity.step.mode" value="default" />
         </parameters>
       </runner>
       <runner id="RUNNER_11" name="Create and attach cf" type="simpleRunner">

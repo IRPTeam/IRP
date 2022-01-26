@@ -27,6 +27,9 @@
   <defaultPresentation>AsDescription</defaultPresentation>
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>
+  <defaultObjectForm>Catalog.Batches.Form.ItemForm</defaultObjectForm>
+  <defaultListForm>Catalog.Batches.Form.ListForm</defaultListForm>
+  <defaultChoiceForm>Catalog.Batches.Form.ChoiceForm</defaultChoiceForm>
   <attributes uuid="e69b1270-255d-4a7b-a709-49bc3fbc5a5f">
     <name>Document</name>
     <synonym>
@@ -73,4 +76,31 @@
     <fullTextSearch>Use</fullTextSearch>
     <dataHistory>Use</dataHistory>
   </attributes>
+  <forms uuid="db277a23-04f9-4777-b31f-695b9946fde9">
+    <name>ItemForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Item form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="6b425d54-d506-4bc8-96b8-dd542aa26650">
+    <name>ListForm</name>
+    <synonym>
+      <key>en</key>
+      <value>List form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="338ee97f-11e7-4f38-8812-8ab1182438bc">
+    <name>ChoiceForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Choice form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
 </mdclass:Catalog>

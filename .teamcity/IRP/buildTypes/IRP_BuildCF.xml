@@ -51,6 +51,8 @@ find /c "completed successfully" %env.LogFile1C% && ( echo Success ) || ( echo "
 } else {
 	git config user.email "user@tc.1c"
     git config user.name "automerge"
+    git add .
+    git commit -m "CI"
 	git merge --no-commit %teamcity.pullRequest.target.branch%
 }]]></param>
           <param name="jetbrains_powershell_script_mode" value="CODE" />

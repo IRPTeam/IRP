@@ -24,15 +24,16 @@ Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefin
 		EndIf;
 	EndIf;
 
+	If EventName = "NewBarcode" And IsInputAvailable() Then
+		SearchByBarcode(Undefined, Parameter);
+	EndIf;
+
 	If Not Source = ThisObject Then
 		Return;
 	EndIf;
 
 	DocPurchaseReturnClient.NotificationProcessing(Object, ThisObject, EventName, Parameter, Source);
 
-	If EventName = "NewBarcode" And IsInputAvailable() Then
-		SearchByBarcode(Undefined, Parameter);
-	EndIf;
 EndProcedure
 
 &AtClient

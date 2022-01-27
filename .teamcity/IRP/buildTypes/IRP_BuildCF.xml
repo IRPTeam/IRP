@@ -7,6 +7,7 @@
       <option name="artifactRules" value="%teamcity.project.id%.cf&#xA;IRP.zip" />
     </options>
     <disabled-settings>
+      <setting-ref ref="BUILD_EXT_10" />
       <setting-ref ref="BUILD_EXT_12" />
       <setting-ref ref="RUNNER_22" />
     </disabled-settings>

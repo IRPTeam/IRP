@@ -28,7 +28,7 @@
     git config user.name "automerge"
     git add .
     git commit -m "CI"
-	git merge --no-commit %teamcity.pullRequest.target.branch%
+	git merge origin/%teamcity.pullRequest.target.branch%
 }]]></param>
           <param name="jetbrains_powershell_script_mode" value="CODE" />
           <param name="teamcity.step.mode" value="default" />

@@ -28,6 +28,9 @@
     "right-data-administration": {
       "enabled": false
     },
+    "notify-description-to-server-procedure": {
+      "enabled": false
+    },
     "right-interactive-clear-deletion-mark-predefined-data": {
       "enabled": false
     },
@@ -46,7 +49,16 @@
     "right-start-thin-client": {
       "enabled": false
     },
+    "method-too-many-params": {
+      "enabled": false
+    },
+    "query-in-loop": {
+      "enabled": false
+    },
     "right-active-users": {
+      "enabled": false
+    },
+    "module-structure-top-region": {
       "enabled": false
     },
     "structure-consructor-too-many-keys": {
@@ -73,10 +85,10 @@
     "right-start-web-client": {
       "enabled": false
     },
-    "right-interactive-open-external-reports": {
+    "right-save-user-data": {
       "enabled": false
     },
-    "right-save-user-data": {
+    "right-interactive-open-external-reports": {
       "enabled": false
     }
   }

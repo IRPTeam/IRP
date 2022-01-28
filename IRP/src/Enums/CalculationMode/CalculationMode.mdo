@@ -26,4 +26,11 @@
       <value>Additional item cost</value>
     </synonym>
   </enumValues>
+  <enumValues uuid="854f820a-12e7-4d31-a9e4-3759774e2b2b">
+    <name>AdditionalItemRevenue</name>
+    <synonym>
+      <key>en</key>
+      <value>Additional item revenue</value>
+    </synonym>
+  </enumValues>
 </mdclass:Enum>

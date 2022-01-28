@@ -80,6 +80,7 @@
       <types>DocumentRef.CashExpense</types>
       <types>DocumentRef.CalculationMovementCosts</types>
       <types>DocumentRef.AdditionalCostAllocation</types>
+      <types>DocumentRef.AdditionalRevenueAllocation</types>
     </commandParameterType>
     <representation>Auto</representation>
   </commands>

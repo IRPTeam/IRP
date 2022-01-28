@@ -141,6 +141,7 @@ EndFunction
 Function GetQueryTextsSecondaryTables()
 	QueryArray = New Array();
 	QueryArray.Add(ItemList());
+	QueryArray.Add(ItemListLandedCost());
 	QueryArray.Add(OffersInfo());
 	QueryArray.Add(Taxes());
 	QueryArray.Add(SerialLotNumbers());
@@ -175,6 +176,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(T3010S_RowIDInfo());
 	QueryArray.Add(T2015S_TransactionsInfo());
 	QueryArray.Add(T6020S_BatchKeysInfo());
+	QueryArray.Add(R6080T_OtherPeriodsRevenues());
 	Return QueryArray;
 EndFunction
 
@@ -267,6 +269,31 @@ Function ItemList()
 	|	Document.SalesInvoice.ShipmentConfirmations AS SalesInvoiceShipmentConfirmations
 	|WHERE
 	|	SalesInvoiceShipmentConfirmations.Ref = &Ref";
+EndFunction
+
+Function ItemListLandedCost()
+	Return
+	"SELECT
+	|	ItemList.Ref.Date AS Period,
+	|	ItemList.Ref AS Basis,
+	|	ItemList.Ref.Company AS Company,
+	|	ItemList.Ref.Branch AS Branch,
+	|	ItemList.Ref.Currency AS Currency,
+	|	ItemList.ProfitLossCenter,
+	|	ItemList.RevenueType,
+	|	ItemList.ItemKey,
+	|	ItemList.AdditionalAnalytic,
+	|	ItemList.NetAmount,
+	|	ItemList.IsAdditionalItemRevenue,
+	|	ItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS IsService,
+	|	TableRowIDInfo.RowID AS RowID
+	|INTO ItemListLandedCost
+	|FROM
+	|	Document.SalesInvoice.ItemList AS ItemList
+	|		LEFT JOIN TableRowIDInfo AS TableRowIDInfo
+	|		ON ItemList.Key = TableRowIDInfo.Key
+	|WHERE
+	|	ItemList.Ref = &Ref";
 EndFunction
 
 Function OffersInfo()
@@ -895,6 +922,19 @@ Function T2015S_TransactionsInfo()
 	|	ItemList.Agreement,
 	|	ItemList.SalesOrder,
 	|	ItemList.Basis";
+EndFunction
+
+Function R6080T_OtherPeriodsRevenues()
+	Return
+	"SELECT
+	|	*,
+	|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+	|	ItemList.NetAmount AS Amount
+	|INTO R6080T_OtherPeriodsRevenues
+	|FROM
+	|	ItemListLandedCost AS ItemList
+	|WHERE
+	|	ItemList.IsAdditionalItemRevenue";
 EndFunction
 
 Function T6020S_BatchKeysInfo()

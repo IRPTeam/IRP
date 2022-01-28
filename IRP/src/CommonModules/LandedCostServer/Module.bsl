@@ -1,9 +1,33 @@
 
+Function GetArrayOfBatchDocumentTypes()
+	ArrayOfTypes = New Array();
+	ArrayOfTypes.Add(Type("DocumentRef.Bundling"));
+	ArrayOfTypes.Add(Type("DocumentRef.InventoryTransfer"));
+	ArrayOfTypes.Add(Type("DocumentRef.ItemStockAdjustment"));
+	ArrayOfTypes.Add(Type("DocumentRef.OpeningEntry"));
+	ArrayOfTypes.Add(Type("DocumentRef.PurchaseInvoice"));
+	ArrayOfTypes.Add(Type("DocumentRef.PurchaseReturn"));
+	ArrayOfTypes.Add(Type("DocumentRef.RetailSalesReceipt"));
+	ArrayOfTypes.Add(Type("DocumentRef.RetailReturnReceipt"));
+	ArrayOfTypes.Add(Type("DocumentRef.SalesInvoice"));
+	ArrayOfTypes.Add(Type("DocumentRef.SalesReturn"));
+	ArrayOfTypes.Add(Type("DocumentRef.StockAdjustmentAsSurplus"));
+	ArrayOfTypes.Add(Type("DocumentRef.StockAdjustmentAsWriteOff"));
+	ArrayOfTypes.Add(Type("DocumentRef.Unbundling"));
+	Return ArrayOfTypes;
+EndFunction
+
+Function GetBatchDocumentsTypes()
+	ArrayOfTypes = GetArrayOfBatchDocumentTypes();
+	Types = New TypeDescription(ArrayOfTypes);
+	Return Types;
+EndFunction
+
 Function CreateTable_BatchWiseBalance()	
 	Table = New ValueTable();
 	Table.Columns.Add("Batch"    , New TypeDescription("CatalogRef.Batches"));
 	Table.Columns.Add("BatchKey" , New TypeDescription("CatalogRef.BatchKeys"));
-	Table.Columns.Add("Document" , Metadata.DefinedTypes.typeBatchDocuments.Type);
+	Table.Columns.Add("Document" , GetBatchDocumentsTypes());
 	Table.Columns.Add("Company"  , New TypeDescription("CatalogRef.Companies"));
 	Table.Columns.Add("Period"   , Metadata.AccumulationRegisters.R6010B_BatchWiseBalance.StandardAttributes.Period.Type);
 	Table.Columns.Add("Quantity" , Metadata.AccumulationRegisters.R6010B_BatchWiseBalance.Resources.Quantity.Type);
@@ -53,6 +77,8 @@ Procedure BatchWiseBalance_DoRegistration(LocksStorage, CalculationMovementCostR
 		DoRegistration_CalculationMode_LandedCost(LocksStorage, CalculationMovementCostRef, Company, BeginPeriod, EndPeriod);
 	ElsIf CalculationMode = Enums.CalculationMode.AdditionalItemCost Then
 		DoRegistration_CalculationMode_AdditionalItemCost(LocksStorage, CalculationMovementCostRef, Company, BeginPeriod, EndPeriod);
+	ElsIf CalculationMode = Enums.CalculationMode.AdditionalItemRevenue Then
+		DoRegistration_CalculationMode_AdditionalItemRevenue(LocksStorage, CalculationMovementCostRef, Company, BeginPeriod, EndPeriod);
 	EndIf;
 EndProcedure
 
@@ -232,6 +258,8 @@ Procedure DoRegistration_CalculationMode_AdditionalItemCost(LocksStorage, Calcul
 	|		ON R6010B_BatchWiseBalance.Batch.Document = CostAmmounts.Document
 	|		AND R6010B_BatchWiseBalance.Batch.Company = CostAmmounts.Company
 	|		AND R6010B_BatchWiseBalance.BatchKey.ItemKey = CostAmmounts.ItemKey
+	|WHERE
+	|	CostAmmounts.AmountPerOneUnit * R6010B_BatchWiseBalance.Quantity <> 0
 	|;
 	|
 	|////////////////////////////////////////////////////////////////////////////////
@@ -254,7 +282,155 @@ Procedure DoRegistration_CalculationMode_AdditionalItemCost(LocksStorage, Calcul
 	|		INNER JOIN CostAmmounts AS CostAmmounts
 	|		ON R6050T_SalesBatches.Batch.Document = CostAmmounts.Document
 	|		AND R6050T_SalesBatches.Batch.Company = CostAmmounts.Company
-	|		AND R6050T_SalesBatches.BatchKey.ItemKey = CostAmmounts.ItemKey";
+	|		AND R6050T_SalesBatches.BatchKey.ItemKey = CostAmmounts.ItemKey
+	|WHERE
+	|	CostAmmounts.AmountPerOneUnit * R6050T_SalesBatches.Quantity <> 0";
+	
+	Query.SetParameter("Company"     , Company);
+	Query.SetParameter("BeginPeriod" , BeginPeriod);
+	Query.SetParameter("EndPeriod"   , EndPeriod);
+	QueryResults = Query.ExecuteBatch();
+	
+	RecordSet = AccumulationRegisters.R6010B_BatchWiseBalance.CreateRecordSet();
+	RecordSet.Filter.Recorder.Set(CalculationMovementCostRef);
+
+	//Batch wise balance
+	For Each Row In QueryResults[3].Unload() Do
+		NewRecord = RecordSet.Add();
+		FillPropertyValues(NewRecord, Row);
+		NewRecord.Recorder = CalculationMovementCostRef;
+	EndDo;	
+	RecordSet.Write();
+	
+	//Sales batches
+	RecordSet = AccumulationRegisters.R6050T_SalesBatches.CreateRecordSet();
+	RecordSet.Filter.Recorder.Set(CalculationMovementCostRef);
+
+	For Each Row In QueryResults[4].Unload() Do	
+		NewRecord = RecordSet.Add();
+		FillPropertyValues(NewRecord, Row);
+		NewRecord.Recorder = CalculationMovementCostRef;
+	EndDo;
+	RecordSet.Write();
+	
+	//Batch balance
+	AccumulationRegisters.R6020B_BatchBalance.BatchBalance_LoadRecords(CalculationMovementCostRef);
+	
+	//Cost of goods sold
+	AccumulationRegisters.R6060T_CostOfGoodsSold.CostOfGoodsSold_LoadRecords(CalculationMovementCostRef);
+EndProcedure
+
+Procedure DoRegistration_CalculationMode_AdditionalItemRevenue(LocksStorage, CalculationMovementCostRef, Company, BeginPeriod, EndPeriod)
+	Query = New Query();
+	Query.Text = 
+	"SELECT
+	|	T6070S_BatchRevenueAllocationInfo.Company AS Company,
+	|	T6070S_BatchRevenueAllocationInfo.Document AS Document,
+	|	T6070S_BatchRevenueAllocationInfo.Store AS Store,
+	|	T6070S_BatchRevenueAllocationInfo.ItemKey AS ItemKey,
+	|	T6070S_BatchRevenueAllocationInfo.CurrencyMovementType AS CurrencyMovementType,
+	|	T6070S_BatchRevenueAllocationInfo.Currency AS Currency,
+	|	T6070S_BatchRevenueAllocationInfo.Amount AS Amount
+	|INTO RevenueAllocationInfo
+	|FROM
+	|	InformationRegister.T6070S_BatchRevenueAllocationInfo AS T6070S_BatchRevenueAllocationInfo
+	|WHERE
+	|	T6070S_BatchRevenueAllocationInfo.Period BETWEEN BEGINOFPERIOD(&BeginPeriod, DAY) AND ENDOFPERIOD(&EndPeriod, DAY)
+	|	AND T6070S_BatchRevenueAllocationInfo.Company = &Company
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	T6020S_BatchKeysInfo.Company AS Company,
+	|	T6020S_BatchKeysInfo.Recorder AS Document,
+	|	T6020S_BatchKeysInfo.Store AS Store,
+	|	T6020S_BatchKeysInfo.ItemKey AS ItemKey,
+	|	SUM(T6020S_BatchKeysInfo.Quantity) AS Quantity,
+	|	MAX(RevenueAllocationInfo.Amount) AS Amount
+	|INTO RevenueAmmounts_tmp
+	|FROM
+	|	InformationRegister.T6020S_BatchKeysInfo AS T6020S_BatchKeysInfo
+	|		INNER JOIN RevenueAllocationInfo AS RevenueAllocationInfo
+	|		ON T6020S_BatchKeysInfo.Company = RevenueAllocationInfo.Company
+	|		AND T6020S_BatchKeysInfo.Recorder = RevenueAllocationInfo.Document
+	|		AND T6020S_BatchKeysInfo.ItemKey = RevenueAllocationInfo.ItemKey
+	|		AND T6020S_BatchKeysInfo.Currency = RevenueAllocationInfo.Currency
+	|		AND T6020S_BatchKeysInfo.CurrencyMovementType = RevenueAllocationInfo.CurrencyMovementType
+	|		AND T6020S_BatchKeysInfo.Direction = VALUE(Enum.BatchDirection.Receipt)
+	|GROUP BY
+	|	T6020S_BatchKeysInfo.Company,
+	|	T6020S_BatchKeysInfo.Recorder,
+	|	T6020S_BatchKeysInfo.Store,
+	|	T6020S_BatchKeysInfo.ItemKey
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	RevenueAmmounts_tmp.Company AS Company,
+	|	RevenueAmmounts_tmp.Document AS Document,
+	|	RevenueAmmounts_tmp.Store AS Store,
+	|	RevenueAmmounts_tmp.ItemKey AS ItemKey,
+	|	RevenueAmmounts_tmp.Quantity AS Quantity,
+	|	RevenueAmmounts_tmp.Amount AS Amount,
+	|	CASE
+	|		WHEN RevenueAmmounts_tmp.Quantity = 0
+	|			THEN 0
+	|		ELSE RevenueAmmounts_tmp.Amount / RevenueAmmounts_tmp.Quantity
+	|	END AS AmountPerOneUnit
+	|INTO RevenueAmmounts
+	|FROM
+	|	RevenueAmmounts_tmp AS RevenueAmmounts_tmp
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	R6010B_BatchWiseBalance.Period AS Period,
+	|	R6010B_BatchWiseBalance.Recorder AS Recorder,
+	|	R6010B_BatchWiseBalance.LineNumber AS LineNumber,
+	|	R6010B_BatchWiseBalance.Active AS Active,
+	|	R6010B_BatchWiseBalance.RecordType AS RecordType,
+	|	R6010B_BatchWiseBalance.Batch AS Batch,
+	|	R6010B_BatchWiseBalance.BatchKey AS BatchKey,
+	|	R6010B_BatchWiseBalance.Quantity AS Quantity1,
+	|	R6010B_BatchWiseBalance.Amount AS Amount1,
+	|	R6010B_BatchWiseBalance.AmountCost AS AmountCost1,
+	|	R6010B_BatchWiseBalance.Document AS Document,
+	|	0 AS Quantity,
+	|	0 AS Amount,
+	|	-(RevenueAmmounts.AmountPerOneUnit * R6010B_BatchWiseBalance.Quantity) AS AmountCost
+	|FROM
+	|	AccumulationRegister.R6010B_BatchWiseBalance AS R6010B_BatchWiseBalance
+	|		INNER JOIN RevenueAmmounts AS RevenueAmmounts
+	|		ON R6010B_BatchWiseBalance.Batch.Document = RevenueAmmounts.Document
+	|		AND R6010B_BatchWiseBalance.Batch.Company = RevenueAmmounts.Company
+	|		AND R6010B_BatchWiseBalance.BatchKey.ItemKey = RevenueAmmounts.ItemKey
+	|WHERE
+	|	RevenueAmmounts.AmountPerOneUnit * R6010B_BatchWiseBalance.Quantity <> 0
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	R6050T_SalesBatches.Period AS Period,
+	|	R6050T_SalesBatches.Recorder AS Recorder,
+	|	R6050T_SalesBatches.LineNumber AS LineNumber,
+	|	R6050T_SalesBatches.Active AS Active,
+	|	R6050T_SalesBatches.Batch AS Batch,
+	|	R6050T_SalesBatches.BatchKey AS BatchKey,
+	|	R6050T_SalesBatches.SalesInvoice AS SalesInvoice,
+	|	R6050T_SalesBatches.Quantity AS Quantity1,
+	|	R6050T_SalesBatches.Amount AS Amount1,
+	|	R6050T_SalesBatches.AmountCost AS AmountCost1,
+	|	0 AS Quantity,
+	|	0 AS Amount,
+	|	-(RevenueAmmounts.AmountPerOneUnit * R6050T_SalesBatches.Quantity) AS AmountCost
+	|FROM
+	|	AccumulationRegister.R6050T_SalesBatches AS R6050T_SalesBatches
+	|		INNER JOIN RevenueAmmounts AS RevenueAmmounts
+	|		ON R6050T_SalesBatches.Batch.Document = RevenueAmmounts.Document
+	|		AND R6050T_SalesBatches.Batch.Company = RevenueAmmounts.Company
+	|		AND R6050T_SalesBatches.BatchKey.ItemKey = RevenueAmmounts.ItemKey
+	|WHERE
+	|	RevenueAmmounts.AmountPerOneUnit * R6050T_SalesBatches.Quantity <> 0";
 	
 	Query.SetParameter("Company"     , Company);
 	Query.SetParameter("BeginPeriod" , BeginPeriod);
@@ -325,7 +501,7 @@ Function GetBatchWiseBalance(Company, BeginPeriod,  EndPeriod)
 	TableOfReturnedBatches.Columns.Add("BatchKey"         , New TypeDescription("CatalogRef.BatchKeys"));
 	TableOfReturnedBatches.Columns.Add("Quantity"         , RegMetadata.Resources.Quantity.Type);
 	TableOfReturnedBatches.Columns.Add("Amount"           , RegMetadata.Resources.Amount.Type);
-	TableOfReturnedBatches.Columns.Add("Document"         , Metadata.DefinedTypes.typeBatchDocuments.Type);
+	TableOfReturnedBatches.Columns.Add("Document"         , GetBatchDocumentsTypes());
 	TableOfReturnedBatches.Columns.Add("Date"             , RegMetadata.StandardAttributes.Period.Type);
 	TableOfReturnedBatches.Columns.Add("Company"          , RegMetadata.Dimensions.Company.Type);
 	TableOfReturnedBatches.Columns.Add("Direction"        , RegMetadata.Dimensions.Direction.Type);
@@ -544,8 +720,7 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches)
 		If Row.Skip Then
 			Continue;
 		EndIf;
-		If Row.Direction = Enums.BatchDirection.Receipt 
-			And Not Row.IsOpeningBalance Then
+		If Row.Direction = Enums.BatchDirection.Receipt And Not Row.IsOpeningBalance Then
 				
 				NewRow = DataForReceipt.Add();
 				NewRow.Batch     = Row.Batch;
@@ -555,12 +730,8 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches)
 				NewRow.Period    = Row.Date;
 				NewRow.Quantity  = Row.Quantity;
 				NewRow.Amount    = Row.Amount;
-			
-			If TypeOf(Document) <> Type("DocumentRef.InventoryTransfer")
-				And TypeOf(Document) <> Type("DocumentRef.Bundling")
-				And TypeOf(Document) <> Type("DocumentRef.Unbundling")
-				And TypeOf(Document) <> Type("DocumentRef.ItemStockAdjustment")
-				And Not ValueIsFilled(Row.SalesInvoice)	Then
+				
+			If IsNotMultiDirectionDocument(Document) And Not ValueIsFilled(Row.SalesInvoice) Then
 				FillPropertyValues(Tables.DataForReceipt.Add(), NewRow);
 			EndIf;
 			
@@ -710,6 +881,7 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches)
 		EndIf;
 	EndDo;
 	
+	// Bundling, Unbundling, Transfer, Produce
 	TableOfNewReceivedBatches = New ValueTable();
 	TableOfNewReceivedBatches.Columns.Add("Batch");
 	TableOfNewReceivedBatches.Columns.Add("BatchKey");
@@ -722,225 +894,270 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches)
 	TableOfNewReceivedBatches.Columns.Add("AmountBalance");
 	TableOfNewReceivedBatches.Columns.Add("IsOpeningBalance");
 	TableOfNewReceivedBatches.Columns.Add("Direction");
-		
-	If TypeOf(Document) = Type("DocumentRef.InventoryTransfer") Then
-						
-		For Each Row In Rows Do
-			If Row.Direction = Enums.BatchDirection.Receipt And Not Row.IsOpeningBalance Then
-				NeedReceipt = Row.Quantity;
-				For Each Row_Expense In DataForExpense Do
-					If Row.BatchKey.ItemKey = Row_Expense.BatchKey.ItemKey Then
-						
-						NeedReceipt = NeedReceipt - Row_Expense.Quantity;
-						
-						NewRow = Tables.DataForReceipt.Add();
-						NewRow.Batch = Row_Expense.Batch;
-						NewRow.BatchKey = Row.BatchKey;
-						NewRow.Document = Row.Document;
-						NewRow.Company = Row.Company;
-						NewRow.Period = Row.Date;
-						NewRow.Quantity = Row_Expense.Quantity;
-						NewRow.Amount = Row_Expense.Amount;
-						
-						NewRowReceivedBatch = TableOfNewReceivedBatches.Add();
-						NewRowReceivedBatch.Batch = Row_Expense.Batch;
-						NewRowReceivedBatch.BatchKey = Row.BatchKey;
-						NewRowReceivedBatch.Document = Row.Document;
-						NewRowReceivedBatch.Company = Row.Company;
-						NewRowReceivedBatch.Date = Row.Date;
-						NewRowReceivedBatch.Quantity = Row_Expense.Quantity;
-						NewRowReceivedBatch.Amount = Row_Expense.Amount;
-						NewRowReceivedBatch.QuantityBalance = Row_Expense.Quantity;
-						NewRowReceivedBatch.AmountBalance = Row_Expense.Amount;
-						NewRowReceivedBatch.IsOpeningBalance = False;
-						NewRowReceivedBatch.Direction = Enums.BatchDirection.Receipt;
-							
-					EndIf;
-				EndDo;
-				If NeedReceipt <> 0 Then
-					Message(StrTemplate("Can not receipt Batch key: %1 , Quantity: %2 , Doc: %3", Row.BatchKey,
-						NeedReceipt, Row.Document));
-					NewRow = Tables.DataForBatchShortageIncoming.Add();
+	
+	If IsTransferDocument(Document) Then
+		CalculateTransferDocument(Rows, Tables, DataForExpense, TableOfNewReceivedBatches);
+	ElsIf IsCompositeDocument(Document) Then
+		CalculateCompositeDocument(Rows, Tables, DataForReceipt, DataForExpense, TableOfNewReceivedBatches);
+	ElsIf IsDecompositeDocument(Document) Then
+		CalculateDecompositeDocument(Rows, Tables, DataForReceipt, DataForExpense, TableOfNewReceivedBatches);
+	EndIf;
+EndProcedure
+
+Function GetArrayOfTransferDocument()
+	ArrayOfTypes = New Array();
+	ArrayOfTypes.Add(Type("DocumentRef.InventoryTransfer"));
+	Return ArrayOfTypes;
+EndFunction
+
+Function IsTransferDocument(Document)
+	ArrayOfTypes = GetArrayOfTransferDocument();
+	If ArrayOfTypes.Find(TypeOf(Document)) <> Undefined Then
+		Return True;
+	EndIf;
+	Return False;
+EndFunction
+
+Procedure CalculateTransferDocument(Rows, Tables, DataForExpense, TableOfNewReceivedBatches)
+	For Each Row In Rows Do
+		If Row.Direction = Enums.BatchDirection.Receipt And Not Row.IsOpeningBalance Then
+			NeedReceipt = Row.Quantity;
+			For Each Row_Expense In DataForExpense Do
+				If Row.BatchKey.ItemKey = Row_Expense.BatchKey.ItemKey Then
+					NeedReceipt = NeedReceipt - Row_Expense.Quantity;
+					NewRow = Tables.DataForReceipt.Add();
+					NewRow.Batch    = Row_Expense.Batch;
 					NewRow.BatchKey = Row.BatchKey;
 					NewRow.Document = Row.Document;
-					NewRow.Company = Row.Company;
-					NewRow.Period = Row.Date;
-					NewRow.Quantity = NeedReceipt;
-				EndIf;
-			EndIf;
-		EndDo;
-		
-		For Each Row In TableOfNewReceivedBatches Do
-			FillPropertyValues(Rows.Add(), Row);	
-		EndDo;
-		ArrayForDelete = New Array();
-		For Each Row In Rows Do
-			If Not ValueIsFilled(Row.AmountBalance) Then
-				ArrayForDelete.Add(Row);
-			EndIf;
-		EndDo;
-		For Each Row In ArrayForDelete Do
-			Rows.Delete(Row);
-		EndDo;
-	ElsIf TypeOf(Document) = Type("DocumentRef.Bundling") 
-			Or TypeOf(Document) = Type("DocumentRef.ItemStockAdjustment") Then
-		
-		For Each Row_Receipt In DataForReceipt Do
-			NewRow = Tables.DataForReceipt.Add();
-			FillPropertyValues(NewRow, Row_Receipt);
-			TotalExpense = DataForExpense.Total("Amount"); 
-			For Each Row_Expense In DataForExpense Do
-				NewRow.Amount = NewRow.Amount + Row_Expense.Amount;
-				NewRowBundleAmountValues = Tables.DataForBundleAmountValues.Add();
-				NewRowBundleAmountValues.Batch = Row_Expense.Batch;
-				NewRowBundleAmountValues.BatchKey = Row_Expense.BatchKey;
-				NewRowBundleAmountValues.Company = Row_Expense.Company;
-				NewRowBundleAmountValues.Period = Row_Expense.Period;
-				NewRowBundleAmountValues.BatchKeyBundle = Row_Receipt.BatchKey;
-				If TotalExpense <> 0 And Row_Expense.Amount <> 0 Then
-					NewRowBundleAmountValues.AmountValue = Row_Expense.Amount / (TotalExpense / 100);
+					NewRow.Company  = Row.Company;
+					NewRow.Period   = Row.Date;
+					NewRow.Quantity = Row_Expense.Quantity;
+					NewRow.Amount   = Row_Expense.Amount;
+						
+					NewRowReceivedBatch = TableOfNewReceivedBatches.Add();
+					NewRowReceivedBatch.Batch            = Row_Expense.Batch;
+					NewRowReceivedBatch.BatchKey         = Row.BatchKey;
+					NewRowReceivedBatch.Document         = Row.Document;
+					NewRowReceivedBatch.Company          = Row.Company;
+					NewRowReceivedBatch.Date             = Row.Date;
+					NewRowReceivedBatch.Quantity         = Row_Expense.Quantity;
+					NewRowReceivedBatch.Amount           = Row_Expense.Amount;
+					NewRowReceivedBatch.QuantityBalance  = Row_Expense.Quantity;
+					NewRowReceivedBatch.AmountBalance    = Row_Expense.Amount;
+					NewRowReceivedBatch.IsOpeningBalance = False;
+					NewRowReceivedBatch.Direction        = Enums.BatchDirection.Receipt;
 				EndIf;
 			EndDo;
-			
-			NewRowReceivedBatch = TableOfNewReceivedBatches.Add();
-			NewRowReceivedBatch.Batch = NewRow.Batch;
-			NewRowReceivedBatch.BatchKey = NewRow.BatchKey;
-			NewRowReceivedBatch.Document = NewRow.Document;
-			NewRowReceivedBatch.Company = NewRow.Company;
-			NewRowReceivedBatch.Date = NewRow.Period;
-			NewRowReceivedBatch.Quantity = NewRow.Quantity;
-			NewRowReceivedBatch.Amount = NewRow.Amount;
-			NewRowReceivedBatch.QuantityBalance = NewRow.Quantity;
-			NewRowReceivedBatch.AmountBalance = NewRow.Amount;
-			NewRowReceivedBatch.IsOpeningBalance = False;
-			NewRowReceivedBatch.Direction = Enums.BatchDirection.Receipt;
-						
-		EndDo;
-		
-		For Each Row In TableOfNewReceivedBatches Do
-			FillPropertyValues(Rows.Add(), Row);	
-		EndDo;
-		ArrayForDelete = New Array();
-		For Each Row In Rows Do
-			If Not ValueIsFilled(Row.AmountBalance) Then
-				ArrayForDelete.Add(Row);
+			If NeedReceipt <> 0 Then
+				Message(StrTemplate("Can not receipt Batch key: %1 , Quantity: %2 , Doc: %3", Row.BatchKey, NeedReceipt, Row.Document));
+				NewRow = Tables.DataForBatchShortageIncoming.Add();
+				NewRow.BatchKey = Row.BatchKey;
+				NewRow.Document = Row.Document;
+				NewRow.Company  = Row.Company;
+				NewRow.Period   = Row.Date;
+				NewRow.Quantity = NeedReceipt;
 			EndIf;
-		EndDo;
-		For Each Row In ArrayForDelete Do
-			Rows.Delete(Row);
-		EndDo;
+		EndIf;
+	EndDo;
 		
-	ElsIf TypeOf(Document) = Type("DocumentRef.Unbundling") Then
-		
-		For Each Row_Receipt In DataForReceipt Do
-			NewRow = Tables.DataForReceipt.Add();
-			FillPropertyValues(NewRow, Row_Receipt);
-			For Each Row_Expense In DataForExpense Do
-				If Not ValueIsFilled(Row_Expense.Amount) Then
-					Continue;
-				EndIf;
-				Query = New Query();
-				Query.Text = 
-				"SELECT
-				|	DataForBundleAmountValues.BatchKey AS BatchKey,
-				|	DataForBundleAmountValues.Company AS Company,
-				|	DataForBundleAmountValues.BatchKeyBundle AS BatchKeyBundle,
-				|	DataForBundleAmountValues.AmountValue AS AmountValue
-				|INTO DataForBundleAmountValues
-				|FROM
-				|	&DataForBundleAmountValues AS DataForBundleAmountValues
-				|;
-				|
-				|////////////////////////////////////////////////////////////////////////////////
-				|SELECT
-				|	DataForBundleAmountValues.BatchKey AS BatchKey,
-				|	DataForBundleAmountValues.Company AS Company,
-				|	DataForBundleAmountValues.BatchKeyBundle AS BatchKeyBundle,
-				|	DataForBundleAmountValues.AmountValue AS AmountValue
-				|FROM
-				|	DataForBundleAmountValues AS DataForBundleAmountValues
-				|WHERE
-				|	DataForBundleAmountValues.BatchKey = &BatchKey
-				|	AND DataForBundleAmountValues.Company = &Company
-				|	AND DataForBundleAmountValues.BatchKeyBundle = &BatchKeyBundle
-				|
-				|UNION
-				|
-				|SELECT
-				|	T6040S_BundleAmountValues.BatchKey,
-				|	T6040S_BundleAmountValues.Company,
-				|	T6040S_BundleAmountValues.BatchKeyBundle,
-				|	T6040S_BundleAmountValues.AmountValue
-				|FROM
-				|	InformationRegister.T6040S_BundleAmountValues AS T6040S_BundleAmountValues
-				|WHERE
-				|	T6040S_BundleAmountValues.BatchKey = &BatchKey
-				|	AND T6040S_BundleAmountValues.Company = &Company
-				|	AND T6040S_BundleAmountValues.BatchKeyBundle = &BatchKeyBundle
-				|
-				|UNION
-				|
-				|SELECT
-				|	BatchKeys.Ref,
-				|	T6050S_ManualBundleAmountValues.Company,
-				|	BatchKeys_Bundle.Ref,
-				|	T6050S_ManualBundleAmountValues.AmountValue
-				|FROM
-				|	InformationRegister.T6050S_ManualBundleAmountValues AS T6050S_ManualBundleAmountValues
-				|		INNER JOIN Catalog.BatchKeys AS BatchKeys
-				|		ON T6050S_ManualBundleAmountValues.ItemKey = BatchKeys.ItemKey
-				|		AND T6050S_ManualBundleAmountValues.Store = BatchKeys.Store
-				|		INNER JOIN Catalog.BatchKeys AS BatchKeys_Bundle
-				|		ON T6050S_ManualBundleAmountValues.Bundle = BatchKeys_Bundle.ItemKey
-				|		AND T6050S_ManualBundleAmountValues.Store = BatchKeys_Bundle.Store
-				|WHERE
-				|	T6050S_ManualBundleAmountValues.Company = &Company
-				|	AND T6050S_ManualBundleAmountValues.ItemKey = &ItemKey
-				|	AND T6050S_ManualBundleAmountValues.Bundle = &Bundle
-				|	AND T6050S_ManualBundleAmountValues.Store = &Store";
-				
-				Query.SetParameter("DataForBundleAmountValues", Tables.DataForBundleAmountValues);
-				Query.SetParameter("BatchKeyBundle", Row_Expense.BatchKey);
-				Query.SetParameter("BatchKey", Row_Receipt.BatchKey); 
-				Query.SetParameter("Company", Row_Expense.Company);
-				Query.SetParameter("ItemKey", Row_Receipt.BatchKey.ItemKey);
-				Query.SetParameter("Bundle", Row_Expense.BatchKey.ItemKey);
-				Query.SetParameter("Store", Row_Receipt.BatchKey.Store);
-				
-				QuerySelection = Query.Execute().Select();
-				While QuerySelection.Next() Do
-					NewRow.Amount = NewRow.Amount + (Row_Expense.Amount /100 * QuerySelection.AmountValue);
-				EndDo;
-			EndDo;
-			
-			NewRowReceivedBatch = TableOfNewReceivedBatches.Add();
-			NewRowReceivedBatch.Batch = NewRow.Batch;
-			NewRowReceivedBatch.BatchKey = NewRow.BatchKey;
-			NewRowReceivedBatch.Document = NewRow.Document;
-			NewRowReceivedBatch.Company = NewRow.Company;
-			NewRowReceivedBatch.Date = NewRow.Period;
-			NewRowReceivedBatch.Quantity = NewRow.Quantity;
-			NewRowReceivedBatch.Amount = NewRow.Amount;
-			NewRowReceivedBatch.QuantityBalance = NewRow.Quantity;
-			NewRowReceivedBatch.AmountBalance = NewRow.Amount;
-			NewRowReceivedBatch.IsOpeningBalance = False;
-			NewRowReceivedBatch.Direction = Enums.BatchDirection.Receipt;
-						
-		EndDo;
-		
-		For Each Row In TableOfNewReceivedBatches Do
-			FillPropertyValues(Rows.Add(), Row);	
-		EndDo;
-		ArrayForDelete = New Array();
-		For Each Row In Rows Do
-			If Not ValueIsFilled(Row.AmountBalance) Then
-				ArrayForDelete.Add(Row);
-			EndIf;
-		EndDo;
-		For Each Row In ArrayForDelete Do
-			Rows.Delete(Row);
-		EndDo;
+	For Each Row In TableOfNewReceivedBatches Do
+		FillPropertyValues(Rows.Add(), Row);	
+	EndDo;
+	ArrayForDelete = New Array();
+	For Each Row In Rows Do
+		If Not ValueIsFilled(Row.AmountBalance) Then
+			ArrayForDelete.Add(Row);
+		EndIf;
+	EndDo;
+	For Each Row In ArrayForDelete Do
+		Rows.Delete(Row);
+	EndDo;
+EndProcedure
+
+Function GetArrayOfCompositeDocument()
+	ArrayOfTypes = New Array();
+	ArrayOfTypes.Add(Type("DocumentRef.Bundling"));
+	ArrayOfTypes.Add(Type("DocumentRef.ItemStockAdjustment"));
+	Return ArrayOfTypes;
+EndFunction
+
+Function IsCompositeDocument(Document)
+	ArrayOfTypes = GetArrayOfCompositeDocument();
+	If ArrayOfTypes.Find(TypeOf(Document)) <> Undefined Then
+		Return True;
 	EndIf;
+	Return False;
+EndFunction
+
+Procedure CalculateCompositeDocument(Rows, Tables, DataForReceipt, DataForExpense, TableOfNewReceivedBatches)
+	For Each Row_Receipt In DataForReceipt Do
+		NewRow = Tables.DataForReceipt.Add();
+		FillPropertyValues(NewRow, Row_Receipt);
+		TotalExpense = DataForExpense.Total("Amount"); 
+		For Each Row_Expense In DataForExpense Do
+			NewRow.Amount = NewRow.Amount + Row_Expense.Amount;
+			NewRowBundleAmountValues = Tables.DataForBundleAmountValues.Add();
+			NewRowBundleAmountValues.Batch          = Row_Expense.Batch;
+			NewRowBundleAmountValues.BatchKey       = Row_Expense.BatchKey;
+			NewRowBundleAmountValues.Company        = Row_Expense.Company;
+			NewRowBundleAmountValues.Period         = Row_Expense.Period;
+			NewRowBundleAmountValues.BatchKeyBundle = Row_Receipt.BatchKey;
+			If TotalExpense <> 0 And Row_Expense.Amount <> 0 Then
+				NewRowBundleAmountValues.AmountValue = Row_Expense.Amount / (TotalExpense / 100);
+			EndIf;
+		EndDo;
+			
+		NewRowReceivedBatch = TableOfNewReceivedBatches.Add();
+		NewRowReceivedBatch.Batch            = NewRow.Batch;
+		NewRowReceivedBatch.BatchKey         = NewRow.BatchKey;
+		NewRowReceivedBatch.Document         = NewRow.Document;
+		NewRowReceivedBatch.Company          = NewRow.Company;
+		NewRowReceivedBatch.Date             = NewRow.Period;
+		NewRowReceivedBatch.Quantity         = NewRow.Quantity;
+		NewRowReceivedBatch.Amount           = NewRow.Amount;
+		NewRowReceivedBatch.QuantityBalance  = NewRow.Quantity;
+		NewRowReceivedBatch.AmountBalance    = NewRow.Amount;
+		NewRowReceivedBatch.IsOpeningBalance = False;
+		NewRowReceivedBatch.Direction        = Enums.BatchDirection.Receipt;
+		
+	EndDo;
+		
+	For Each Row In TableOfNewReceivedBatches Do
+		FillPropertyValues(Rows.Add(), Row);	
+	EndDo;
+	ArrayForDelete = New Array();
+	For Each Row In Rows Do
+		If Not ValueIsFilled(Row.AmountBalance) Then
+			ArrayForDelete.Add(Row);
+		EndIf;
+	EndDo;
+	For Each Row In ArrayForDelete Do
+		Rows.Delete(Row);
+	EndDo;
+EndProcedure
+
+Function GetArrayOfDecompositeDocument()
+	ArrayOfTypes = New Array();
+	ArrayOfTypes.Add(Type("DocumentRef.Unbundling"));
+	Return ArrayOfTypes;
+EndFunction
+
+Function IsDecompositeDocument(Document)
+	ArrayOfTypes = GetArrayOfDecompositeDocument();
+	If ArrayOfTypes.Find(TypeOf(Document)) <> Undefined Then
+		Return True;
+	EndIf;
+	Return False;
+EndFunction
+
+Procedure CalculateDecompositeDocument(Rows, Tables, DataForReceipt, DataForExpense, TableOfNewReceivedBatches)
+	For Each Row_Receipt In DataForReceipt Do
+		NewRow = Tables.DataForReceipt.Add();
+		FillPropertyValues(NewRow, Row_Receipt);
+		For Each Row_Expense In DataForExpense Do
+			If Not ValueIsFilled(Row_Expense.Amount) Then
+				Continue;
+			EndIf;
+			Query = New Query();
+			Query.Text = 
+			"SELECT
+			|	DataForBundleAmountValues.BatchKey AS BatchKey,
+			|	DataForBundleAmountValues.Company AS Company,
+			|	DataForBundleAmountValues.BatchKeyBundle AS BatchKeyBundle,
+			|	DataForBundleAmountValues.AmountValue AS AmountValue
+			|INTO DataForBundleAmountValues
+			|FROM
+			|	&DataForBundleAmountValues AS DataForBundleAmountValues
+			|;
+			|
+			|////////////////////////////////////////////////////////////////////////////////
+			|SELECT
+			|	DataForBundleAmountValues.BatchKey AS BatchKey,
+			|	DataForBundleAmountValues.Company AS Company,
+			|	DataForBundleAmountValues.BatchKeyBundle AS BatchKeyBundle,
+			|	DataForBundleAmountValues.AmountValue AS AmountValue
+			|FROM
+			|	DataForBundleAmountValues AS DataForBundleAmountValues
+			|WHERE
+			|	DataForBundleAmountValues.BatchKey = &BatchKey
+			|	AND DataForBundleAmountValues.Company = &Company
+			|	AND DataForBundleAmountValues.BatchKeyBundle = &BatchKeyBundle
+			|
+			|UNION
+			|
+			|SELECT
+			|	T6040S_BundleAmountValues.BatchKey,
+			|	T6040S_BundleAmountValues.Company,
+			|	T6040S_BundleAmountValues.BatchKeyBundle,
+			|	T6040S_BundleAmountValues.AmountValue
+			|FROM
+			|	InformationRegister.T6040S_BundleAmountValues AS T6040S_BundleAmountValues
+			|WHERE
+			|	T6040S_BundleAmountValues.BatchKey = &BatchKey
+			|	AND T6040S_BundleAmountValues.Company = &Company
+			|	AND T6040S_BundleAmountValues.BatchKeyBundle = &BatchKeyBundle
+			|
+			|UNION
+			|
+			|SELECT
+			|	BatchKeys.Ref,
+			|	T6050S_ManualBundleAmountValues.Company,
+			|	BatchKeys_Bundle.Ref,
+			|	T6050S_ManualBundleAmountValues.AmountValue
+			|FROM
+			|	InformationRegister.T6050S_ManualBundleAmountValues AS T6050S_ManualBundleAmountValues
+			|		INNER JOIN Catalog.BatchKeys AS BatchKeys
+			|		ON T6050S_ManualBundleAmountValues.ItemKey = BatchKeys.ItemKey
+			|		AND T6050S_ManualBundleAmountValues.Store = BatchKeys.Store
+			|		INNER JOIN Catalog.BatchKeys AS BatchKeys_Bundle
+			|		ON T6050S_ManualBundleAmountValues.Bundle = BatchKeys_Bundle.ItemKey
+			|		AND T6050S_ManualBundleAmountValues.Store = BatchKeys_Bundle.Store
+			|WHERE
+			|	T6050S_ManualBundleAmountValues.Company = &Company
+			|	AND T6050S_ManualBundleAmountValues.ItemKey = &ItemKey
+			|	AND T6050S_ManualBundleAmountValues.Bundle = &Bundle
+			|	AND T6050S_ManualBundleAmountValues.Store = &Store";
+			
+			Query.SetParameter("DataForBundleAmountValues", Tables.DataForBundleAmountValues);
+			Query.SetParameter("BatchKeyBundle", Row_Expense.BatchKey);
+			Query.SetParameter("BatchKey", Row_Receipt.BatchKey); 
+			Query.SetParameter("Company", Row_Expense.Company);
+			Query.SetParameter("ItemKey", Row_Receipt.BatchKey.ItemKey);
+			Query.SetParameter("Bundle", Row_Expense.BatchKey.ItemKey);
+			Query.SetParameter("Store", Row_Receipt.BatchKey.Store);
+				
+			QuerySelection = Query.Execute().Select();
+			While QuerySelection.Next() Do
+				NewRow.Amount = NewRow.Amount + (Row_Expense.Amount /100 * QuerySelection.AmountValue);
+			EndDo;
+		EndDo;
+			
+		NewRowReceivedBatch = TableOfNewReceivedBatches.Add();
+		NewRowReceivedBatch.Batch            = NewRow.Batch;
+		NewRowReceivedBatch.BatchKey         = NewRow.BatchKey;
+		NewRowReceivedBatch.Document         = NewRow.Document;
+		NewRowReceivedBatch.Company          = NewRow.Company;
+		NewRowReceivedBatch.Date             = NewRow.Period;
+		NewRowReceivedBatch.Quantity         = NewRow.Quantity;
+		NewRowReceivedBatch.Amount           = NewRow.Amount;
+		NewRowReceivedBatch.QuantityBalance  = NewRow.Quantity;
+		NewRowReceivedBatch.AmountBalance    = NewRow.Amount;
+		NewRowReceivedBatch.IsOpeningBalance = False;
+		NewRowReceivedBatch.Direction        = Enums.BatchDirection.Receipt;
+	EndDo;
+		
+	For Each Row In TableOfNewReceivedBatches Do
+		FillPropertyValues(Rows.Add(), Row);	
+	EndDo;
+	ArrayForDelete = New Array();
+	For Each Row In Rows Do
+		If Not ValueIsFilled(Row.AmountBalance) Then
+			ArrayForDelete.Add(Row);
+		EndIf;
+	EndDo;
+	For Each Row In ArrayForDelete Do
+		Rows.Delete(Row);
+	EndDo;
 EndProcedure
 
 Function GetSalesBatches(SalesInvoice, DataForSalesBatches, ItemKey)
@@ -1026,6 +1243,23 @@ Function GetSalesBatches(SalesInvoice, DataForSalesBatches, ItemKey)
 	Query.SetParameter("BatchKey_ItemKey"    , ItemKey);
 	Table_SalesBatches = Query.Execute().Unload();
 	Return Table_SalesBatches;
+EndFunction
+
+Function IsNotMultiDirectionDocument(Document)
+	ArrayOfTypes = GetArrayOfMultiDirectionDocument();
+	If ArrayOfTypes.Find(TypeOf(Document)) = Undefined Then
+		Return True;
+	EndIf;
+	Return False;
+EndFunction
+
+Function GetArrayOfMultiDirectionDocument()
+	ArrayOfTypes = New Array();
+	ArrayOfTypes.Add(Type("DocumentRef.InventoryTransfer"));
+	ArrayOfTypes.Add(Type("DocumentRef.Bundling"));
+	ArrayOfTypes.Add(Type("DocumentRef.Unbundling"));
+	ArrayOfTypes.Add(Type("DocumentRef.ItemStockAdjustment"));
+	Return ArrayOfTypes;
 EndFunction
 
 #EndRegion

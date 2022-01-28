@@ -399,6 +399,8 @@
   <commonModules>CommonModule.LandedCostServer</commonModules>
   <commonModules>CommonModule.DocAdditionalCostAllocationClient</commonModules>
   <commonModules>CommonModule.DocAdditionalCostAllocationServer</commonModules>
+  <commonModules>CommonModule.DocAdditionalRevenueAllocationClient</commonModules>
+  <commonModules>CommonModule.DocAdditionalRevenueAllocationServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>
@@ -646,6 +648,7 @@
   <documents>Document.JournalEntry</documents>
   <documents>Document.CalculationMovementCosts</documents>
   <documents>Document.AdditionalCostAllocation</documents>
+  <documents>Document.AdditionalRevenueAllocation</documents>
   <documentJournals>DocumentJournal.DocumentsForIncomingPayment</documentJournals>
   <documentJournals>DocumentJournal.DocumentsForOutgoingPayment</documentJournals>
   <documentJournals>DocumentJournal.AllDocuments</documentJournals>
@@ -764,6 +767,7 @@
   <informationRegisters>InformationRegister.T6040S_BundleAmountValues</informationRegisters>
   <informationRegisters>InformationRegister.T6050S_ManualBundleAmountValues</informationRegisters>
   <informationRegisters>InformationRegister.T6060S_BatchCostAllocationInfo</informationRegisters>
+  <informationRegisters>InformationRegister.T6070S_BatchRevenueAllocationInfo</informationRegisters>
   <accumulationRegisters>AccumulationRegister.CashInTransit</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1001T_Purchases</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1002T_PurchaseReturns</accumulationRegisters>
@@ -840,6 +844,7 @@
   <accumulationRegisters>AccumulationRegister.R6050T_SalesBatches</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R6060T_CostOfGoodsSold</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R6070T_OtherPeriodsExpenses</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R6080T_OtherPeriodsRevenues</accumulationRegisters>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.AddAttributeAndProperty</chartsOfCharacteristicTypes>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.CustomUserSettings</chartsOfCharacteristicTypes>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.IDInfoTypes</chartsOfCharacteristicTypes>

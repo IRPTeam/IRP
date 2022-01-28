@@ -8,6 +8,9 @@ Procedure Posting(Cancel, PostingMode)
 	                                       ThisObject.CalculationMode, 
 	                                       ThisObject.BeginDate, 
 	                                       ThisObject.EndDate);
+	For Each Records In ThisObject.RegisterRecords Do
+		Records.Read();
+	EndDo;
 EndProcedure
 
 Procedure UndoPosting(Cancel)

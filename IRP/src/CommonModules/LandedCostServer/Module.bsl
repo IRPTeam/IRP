@@ -882,7 +882,6 @@ Procedure CalculateBatch(Document, Rows, Tables, Tree, TableOfReturnedBatches)
 	EndDo;
 	
 	// Bundling, Unbundling, Transfer, Produce
-	
 	TableOfNewReceivedBatches = New ValueTable();
 	TableOfNewReceivedBatches.Columns.Add("Batch");
 	TableOfNewReceivedBatches.Columns.Add("BatchKey");

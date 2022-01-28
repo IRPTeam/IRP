@@ -475,6 +475,7 @@
   <definedTypes>DefinedType.typeStockAdjustmentAsSurplusBasises</definedTypes>
   <definedTypes>DefinedType.typeStockAdjustmentAsWriteOffBasises</definedTypes>
   <definedTypes>DefinedType.UseUniqueID</definedTypes>
+  <definedTypes>DefinedType.typeBatchDocuments</definedTypes>
   <commonCommands>CommonCommand.AddProperties</commonCommands>
   <commonCommands>CommonCommand.IDInfo</commonCommands>
   <commonCommands>CommonCommand.OpenCompanies</commonCommands>

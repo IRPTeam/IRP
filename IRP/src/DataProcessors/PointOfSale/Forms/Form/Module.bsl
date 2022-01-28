@@ -15,7 +15,6 @@ EndProcedure
 
 &AtClient
 Procedure OnOpen(Cancel, AddInfo = Undefined) Export
-	ConnectBarcodeScanners();
 	NewTransaction();
 	SetShowItems();
 EndProcedure
@@ -346,28 +345,6 @@ EndProcedure
 #EndRegion
 
 #Region Private
-
-#Region Hardware
-
-&AtClient
-Procedure ConnectBarcodeScanners()
-	HardwareParameters = New Structure();
-	HardwareParameters.Insert("Workstation", Workstation);
-	HardwareParameters.Insert("EquipmentType", PredefinedValue("Enum.EquipmentTypes.BarcodeScanner"));
-	HardwareParameters.Insert("ConnectionNotify", New NotifyDescription("ConnectHardware_End", ThisObject));
-	HardwareClient.BeginConnectEquipment(HardwareParameters);
-EndProcedure
-
-&AtClient
-Procedure ConnectHardware_End(Result, Param) Export
-	If Result.Result Then
-		Status(R().Eq_004);
-	Else
-		Status(R().Eq_005);
-	EndIf;
-EndProcedure
-
-#EndRegion
 
 #Region PictureViewer
 

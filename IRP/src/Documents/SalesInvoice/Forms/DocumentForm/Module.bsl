@@ -26,15 +26,16 @@ Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefin
 		EndIf;
 	EndIf;
 	
+	If EventName = "NewBarcode" And IsInputAvailable() Then
+		SearchByBarcode(Undefined, Parameter);
+	EndIf;
+
 	If Not Source = ThisObject Then
 		Return;
 	EndIf;
 
 	DocSalesInvoiceClient.NotificationProcessing(Object, ThisObject, EventName, Parameter, Source, AddInfo);
 
-	If EventName = "NewBarcode" And IsInputAvailable() Then
-		SearchByBarcode(Undefined, Parameter);
-	EndIf;
 EndProcedure
 
 &AtClient
@@ -241,7 +242,7 @@ Procedure ItemListStoreOnChange(Item)
 EndProcedure
 
 &AtClient
-Procedure ItemListSerialLotNumbersPresentationStartChoice(Item, ChoiceData, StandardProcessing)
+Procedure ItemListSerialLotNumbersPresentationStartChoice(Item, ChoiceData, StandardProcessing) Export
 	DocSalesInvoiceClient.ItemListSerialLotNumbersPresentationStartChoice(Object, ThisObject, Item, ChoiceData,
 		StandardProcessing);
 EndProcedure

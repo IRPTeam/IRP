@@ -35,7 +35,6 @@ Function GetConnectionSettings(HardwareRef) Export
 	Query.Text =
 	"SELECT
 	|	Hardware.Ref,
-	|	Hardware.Workstation,
 	|	Hardware.EquipmentType,
 	|	Hardware.Driver,
 	|	Hardware.Driver.AddInID AS AddInID
@@ -50,7 +49,6 @@ Function GetConnectionSettings(HardwareRef) Export
 	Settings = New Structure();
 	If SelectionDetailRecords.Next() Then
 		Settings.Insert("Hardware", SelectionDetailRecords.Ref);
-		Settings.Insert("Workstation", SelectionDetailRecords.Workstation);
 		Settings.Insert("EquipmentType", SelectionDetailRecords.EquipmentType);
 		Settings.Insert("AddInID", SelectionDetailRecords.AddInID);
 		Settings.Insert("Driver", SelectionDetailRecords.Driver);
@@ -70,21 +68,42 @@ Function GetWorkstationHardwareByEquipmentType(Workstation, EquipmentType) Expor
 	Query = New Query();
 	Query.Text =
 	"SELECT
-	|	Hardware.Ref
+	|	HardwareList.Hardware
 	|FROM
-	|	Catalog.Hardware AS Hardware
+	|	Catalog.Workstations.HardwareList AS HardwareList
 	|WHERE
-	|	Hardware.Workstation = &Workstation
-	|	And Hardware.EquipmentType = &EquipmentType
-	|	And Hardware.Enabled
-	|	And Not Hardware.DeletionMark";
+	|	HardwareList.Ref = &Workstation
+	|	And HardwareList.Hardware.EquipmentType = &EquipmentType
+	|	And HardwareList.Enable
+	|	And Not HardwareList.Hardware.DeletionMark";
 	Query.SetParameter("Workstation", Workstation);
 	Query.SetParameter("EquipmentType", EquipmentType);
 	QueryResult = Query.Execute();
 	SelectionDetailRecords = QueryResult.Select();
 	HardwareList = New Array();
 	If SelectionDetailRecords.Next() Then
-		HardwareList.Add(SelectionDetailRecords.Ref);
+		HardwareList.Add(SelectionDetailRecords.Hardware);
+	EndIf;
+	Return HardwareList;
+EndFunction
+
+Function GetAllWorkstationHardwareList(Workstation) Export
+	Query = New Query();
+	Query.Text =
+	"SELECT
+	|	HardwareList.Hardware
+	|FROM
+	|	Catalog.Workstations.HardwareList AS HardwareList
+	|WHERE
+	|	HardwareList.Ref = &Workstation
+	|	And HardwareList.Enable
+	|	And Not HardwareList.Hardware.DeletionMark";
+	Query.SetParameter("Workstation", Workstation);
+	QueryResult = Query.Execute();
+	SelectionDetailRecords = QueryResult.Select();
+	HardwareList = New Array();
+	If SelectionDetailRecords.Next() Then
+		HardwareList.Add(SelectionDetailRecords.Hardware);
 	EndIf;
 	Return HardwareList;
 EndFunction

@@ -18,6 +18,10 @@
   <content>Document.StockAdjustmentAsSurplus</content>
   <content>Document.PhysicalInventory</content>
   <content>DataProcessor.MobileInvent</content>
+  <content>Document.CalculationMovementCosts</content>
+  <content>Document.AdditionalCostAllocation</content>
+  <content>Report.BatchBalance</content>
+  <content>Report.BatchBalanceSimple</content>
   <subsystems>ComposedItems</subsystems>
   <subsystems>Items</subsystems>
   <subsystems>Transfers</subsystems>

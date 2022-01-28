@@ -3,6 +3,7 @@ Procedure Undopost(DocObject, Cancel, AddInfo = Undefined) Export
 		Return;
 	EndIf;
 	
+	
 	For Each RecordSet In DocObject.RegisterRecords Do
 		TableForLoad = New ValueTable();
 		AccReg = Metadata.AccumulationRegisters;
@@ -18,6 +19,9 @@ Procedure Undopost(DocObject, Cancel, AddInfo = Undefined) Export
 			AdvancesRelevanceServer.SetBound_Aging(DocObject, TableForLoad, AccReg.R5012B_VendorsAging);
 		ElsIf TypeOf(RecordSet) = Type("AccumulationRegisterRecordSet.R5011B_CustomersAging") Then
 			AdvancesRelevanceServer.SetBound_Aging(DocObject, TableForLoad, AccReg.R5011B_CustomersAging);
+		ElsIf TypeOf(RecordSet) = Type("InformationRegisterRecordSet.T6020S_BatchKeysInfo") Then
+			InformationRegisters.T6030S_BatchRelevance.BatchRelevance_SetBound(DocObject,
+				PostingServer.CreateTable(Metadata.InformationRegisters.T6020S_BatchKeysInfo));
 		EndIf;
 	EndDo;
 	

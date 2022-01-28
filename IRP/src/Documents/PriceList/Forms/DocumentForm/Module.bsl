@@ -30,9 +30,11 @@ Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefin
 	If EventName = "UpdateAffectPricing" And Object.PriceListType = PredefinedValue("Enum.PriceListTypes.PriceByProperties") Then
 		DrawFormTablePriceKeyList();
 	EndIf;
+	
 	If EventName = "UpdateAddAttributeAndPropertySets" Then
 		AddAttributesCreateFormControl();
 	EndIf;
+	
 	If EventName = "NewBarcode" And IsInputAvailable() Then
 		SearchByBarcode(Undefined, Parameter);
 	EndIf;

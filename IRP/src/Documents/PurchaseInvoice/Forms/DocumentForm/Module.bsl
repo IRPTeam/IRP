@@ -24,16 +24,16 @@ Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefin
 			LockLinkedRows();
 		EndIf;
 	EndIf;
+	
+	If EventName = "NewBarcode" And IsInputAvailable() Then
+		SearchByBarcode(Undefined, Parameter);
+	EndIf;
 
 	If Not Source = ThisObject Then
 		Return;
 	EndIf;
 
 	DocPurchaseInvoiceClient.NotificationProcessing(Object, ThisObject, EventName, Parameter, Source, AddInfo);
-
-	If EventName = "NewBarcode" And IsInputAvailable() Then
-		SearchByBarcode(Undefined, Parameter);
-	EndIf;
 EndProcedure
 
 &AtClient

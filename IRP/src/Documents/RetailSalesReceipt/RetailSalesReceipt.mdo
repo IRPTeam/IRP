@@ -80,6 +80,9 @@
   <registerRecords>AccumulationRegister.TM1010T_RowIDMovements</registerRecords>
   <registerRecords>AccumulationRegister.R4014B_SerialLotNumber</registerRecords>
   <registerRecords>InformationRegister.T3010S_RowIDInfo</registerRecords>
+  <registerRecords>InformationRegister.T6020S_BatchKeysInfo</registerRecords>
+  <registerRecords>AccumulationRegister.R6020B_BatchBalance</registerRecords>
+  <registerRecords>AccumulationRegister.R6060T_CostOfGoodsSold</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>

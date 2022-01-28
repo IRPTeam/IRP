@@ -16,6 +16,118 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Parameters.Insert("QueryParameters", GetAdditionalQueryParameters(Ref));
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
 #EndRegion
+
+	Query = New Query();
+	Query.Text =
+	"SELECT
+	|	SalesReturn.Ref AS Document,
+	|	SalesReturn.Company AS Company,
+	|	SalesReturn.Ref.Date AS Period
+	|FROM
+	|	Document.SalesReturn AS SalesReturn
+	|WHERE
+	|	SalesReturn.Ref = &Ref
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	SalesReturnItemList.ItemKey AS ItemKey,
+	|	SalesReturnItemList.Store AS Store,
+	|	SalesReturnItemList.Ref.Company AS Company,
+	|	SUM(SalesReturnItemList.QuantityInBaseUnit) AS Quantity,
+	|	SalesReturnItemList.Ref.Date AS Period,
+	|	VALUE(Enum.BatchDirection.Receipt) AS Direction,
+	|	SalesReturnItemList.Key AS Key,
+	|	SalesReturnItemList.Ref.Currency AS Currency,
+	|	SUM(CASE
+	|		WHEN SalesReturnItemList.SalesInvoice.Date IS NULL
+	|			THEN SalesReturnItemList.LandedCost
+	|		ELSE SalesReturnItemList.TotalAmount
+	|	END) AS Amount,
+	|	CASE
+	|		WHEN SalesReturnItemList.SalesInvoice.Date IS NULL
+	|			THEN FALSE
+	|		ELSE TRUE
+	|	END AS SalesInvoiceIsFilled,
+	|	SalesReturnItemList.SalesInvoice AS SalesInvoice
+	|FROM
+	|	Document.SalesReturn.ItemList AS SalesReturnItemList
+	|WHERE
+	|	SalesReturnItemList.Ref = &Ref
+	|	AND SalesReturnItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Product)
+	|GROUP BY
+	|	SalesReturnItemList.ItemKey,
+	|	SalesReturnItemList.Store,
+	|	SalesReturnItemList.Ref.Company,
+	|	SalesReturnItemList.Ref.Date,
+	|	SalesReturnItemList.Key,
+	|	SalesReturnItemList.Ref.Currency,
+	|	CASE
+	|		WHEN SalesReturnItemList.SalesInvoice.Date IS NULL
+	|			THEN FALSE
+	|		ELSE TRUE
+	|	END,
+	|	SalesReturnItemList.SalesInvoice,
+	|	VALUE(Enum.BatchDirection.Receipt)";
+	
+	Query.SetParameter("Ref", Ref);
+	QueryResults = Query.ExecuteBatch();
+	
+	BatchesInfo   = QueryResults[0].Unload();
+	BatchKeysInfo = QueryResults[1].Unload();
+	If Not BatchKeysInfo.FindRows(New Structure("SalesInvoiceIsFilled", False)).Count() Then
+		BatchesInfo.Clear();
+	EndIf;
+	
+	CurrencyTable = Ref.Currencies.UnloadColumns();
+	CurrencyMovementType = Ref.Company.LandedCostCurrencyMovementType;
+	For Each Row In BatchKeysInfo Do
+		CurrenciesServer.AddRowToCurrencyTable(Ref.Date, CurrencyTable, Row.Key, Row.Currency, CurrencyMovementType);
+	EndDo;
+	
+	PostingDataTables = New Map();
+	PostingDataTables.Insert(Parameters.Object.RegisterRecords.T6020S_BatchKeysInfo,
+		New Structure("RecordSet, WriteInTransaction", BatchKeysInfo, Parameters.IsReposting));
+	Parameters.Insert("PostingDataTables", PostingDataTables);
+	CurrenciesServer.PreparePostingDataTables(Parameters, CurrencyTable, AddInfo);
+	
+	BatchKeysInfoMetadata = Parameters.Object.RegisterRecords.T6020S_BatchKeysInfo.Metadata();
+	If Parameters.Property("MultiCurrencyExcludePostingDataTables") Then
+		Parameters.MultiCurrencyExcludePostingDataTables.Add(BatchKeysInfoMetadata);
+	Else
+		ArrayOfMultiCurrencyExcludePostingDataTables = New Array();
+		ArrayOfMultiCurrencyExcludePostingDataTables.Add(BatchKeysInfoMetadata);
+		Parameters.Insert("MultiCurrencyExcludePostingDataTables", ArrayOfMultiCurrencyExcludePostingDataTables);
+	EndIf;
+	
+	BatchKeysInfo_DataTable = Parameters.PostingDataTables.Get(Parameters.Object.RegisterRecords.T6020S_BatchKeysInfo).RecordSet;
+	BatchKeysInfo_DataTableGrouped = BatchKeysInfo_DataTable.CopyColumns();
+	If BatchKeysInfo_DataTable.Count()Then
+		BatchKeysInfo_DataTableGrouped = BatchKeysInfo_DataTable.Copy(New Structure("CurrencyMovementType", CurrencyMovementType));
+		BatchKeysInfo_DataTableGrouped.GroupBy("Period, Direction, Company, Store, ItemKey, Currency, CurrencyMovementType, SalesInvoice", 
+		"Quantity, Amount");	
+	EndIf;
+	
+	Query = New Query();
+	Query.TempTablesManager = Parameters.TempTablesManager;
+	Query.Text = 
+	"SELECT
+	|	*
+	|INTO BatchesInfo
+	|FROM
+	|	&T1 AS T1
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	*
+	|INTO BatchKeysInfo
+	|FROM
+	|	&T2 AS T2";
+	Query.SetParameter("T1", BatchesInfo);
+	Query.SetParameter("T2", BatchKeysInfo_DataTableGrouped);
+	Query.Execute();
+
 	Return Tables;
 EndFunction
 
@@ -144,7 +256,9 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R5021T_Revenues());
 	QueryArray.Add(R5011B_CustomersAging());
 	QueryArray.Add(T3010S_RowIDInfo());
-	QueryArray.Add(T2015S_TransactionsInfo());	
+	QueryArray.Add(T2015S_TransactionsInfo());
+	QueryArray.Add(T6010S_BatchesInfo());
+	QueryArray.Add(T6020S_BatchKeysInfo());
 	Return QueryArray;
 EndFunction
 
@@ -662,4 +776,26 @@ Function T2015S_TransactionsInfo()
 	|	ItemList.LegalName,
 	|	ItemList.Agreement,
 	|	ItemList.BasisDocument";
+EndFunction
+
+Function T6010S_BatchesInfo()
+	Return 
+	"SELECT
+	|	*
+	|INTO T6010S_BatchesInfo
+	|FROM
+	|	BatchesInfo
+	|WHERE
+	|	TRUE";
+EndFunction
+
+Function T6020S_BatchKeysInfo()
+	Return
+	"SELECT
+	|	*
+	|INTO T6020S_BatchKeysInfo
+	|FROM
+	|	BatchKeysInfo
+	|WHERE
+	|	TRUE";
 EndFunction

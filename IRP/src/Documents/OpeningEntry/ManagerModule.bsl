@@ -15,6 +15,15 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
 #EndRegion
 
+	BatchKeysInfoMetadata = Parameters.Object.RegisterRecords.T6020S_BatchKeysInfo.Metadata();
+	If Parameters.Property("MultiCurrencyExcludePostingDataTables") Then
+		Parameters.MultiCurrencyExcludePostingDataTables.Add(BatchKeysInfoMetadata);
+	Else
+		ArrayOfMultiCurrencyExcludePostingDataTables = New Array();
+		ArrayOfMultiCurrencyExcludePostingDataTables.Add(BatchKeysInfoMetadata);
+		Parameters.Insert("MultiCurrencyExcludePostingDataTables", ArrayOfMultiCurrencyExcludePostingDataTables);
+	EndIf;
+	
 	Return New Structure();
 EndFunction
 
@@ -149,26 +158,32 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R5010B_ReconciliationStatement());
 	QueryArray.Add(T2014S_AdvancesInfo());
 	QueryArray.Add(T2015S_TransactionsInfo());
+	QueryArray.Add(T6010S_BatchesInfo());
+	QueryArray.Add(T6020S_BatchKeysInfo());
 	Return QueryArray;
 EndFunction
 
 Function ItemList()
-	Return "SELECT
-		   |	OpeningEntryInventory.Ref,
-		   |	OpeningEntryInventory.Key,
-		   |	OpeningEntryInventory.ItemKey,
-		   |	OpeningEntryInventory.Store,
-		   |	OpeningEntryInventory.Quantity,
-		   |	NOT OpeningEntryInventory.SerialLotNumber = VALUE(Catalog.SerialLotNumbers.EmptyRef) AS isSerialLotNumberSet,
-		   |	OpeningEntryInventory.SerialLotNumber,
-		   |	OpeningEntryInventory.Ref.Date AS Period,
-		   |	OpeningEntryInventory.Ref.Company AS Company,
-		   |	OpeningEntryInventory.Ref.Branch AS Branch
-		   |INTO ItemList
-		   |FROM
-		   |	Document.OpeningEntry.Inventory AS OpeningEntryInventory
-		   |WHERE
-		   |	OpeningEntryInventory.Ref = &Ref";
+	Return 
+	"SELECT
+	|	OpeningEntryInventory.Ref,
+	|	OpeningEntryInventory.Key,
+	|	OpeningEntryInventory.ItemKey,
+	|	OpeningEntryInventory.Store,
+	|	OpeningEntryInventory.Quantity,
+	|	NOT OpeningEntryInventory.SerialLotNumber = VALUE(Catalog.SerialLotNumbers.EmptyRef) AS isSerialLotNumberSet,
+	|	OpeningEntryInventory.SerialLotNumber,
+	|	OpeningEntryInventory.Ref.Date AS Period,
+	|	OpeningEntryInventory.Ref.Company AS Company,
+	|	OpeningEntryInventory.Ref.Branch AS Branch,
+	|	OpeningEntryInventory.Amount AS Amount,
+	|	OpeningEntryInventory.Ref.Company.LandedCostCurrencyMovementType AS CurrencyMovementType,
+	|	OpeningEntryInventory.Ref.Company.LandedCostCurrencyMovementType.Currency AS Currency
+	|INTO ItemList
+	|FROM
+	|	Document.OpeningEntry.Inventory AS OpeningEntryInventory
+	|WHERE
+	|	OpeningEntryInventory.Ref = &Ref";
 EndFunction
 
 Function AccauntBalance()
@@ -623,6 +638,46 @@ Function T2015S_TransactionsInfo()
 	|	CustomersTransactions AS CustomersTransactions
 	|WHERE
 	|	TRUE";
+EndFunction
+
+Function T6010S_BatchesInfo()
+	Return
+		"SELECT
+		|	OpeningEntry.Ref AS Document,
+		|	OpeningEntry.Company AS Company,
+		|	OpeningEntry.Ref.Date AS Period
+		|INTO T6010S_BatchesInfo
+		|FROM
+		|	Document.OpeningEntry AS OpeningEntry
+		|WHERE
+		|	OpeningEntry.Ref = &Ref";
+EndFunction
+
+Function T6020S_BatchKeysInfo()
+	Return
+	"SELECT
+	|	ItemList.Period,
+	|	ItemList.Company,
+	|	ItemList.Store,
+	|	ItemList.ItemKey,
+	|	VALUE(Enum.BatchDirection.Receipt) AS Direction,
+	|	ItemList.CurrencyMovementType,
+	|	ItemList.Currency,
+	|	SUM(ItemList.Quantity) AS Quantity,
+	|	SUM(ItemList.Amount) AS Amount
+	|INTO T6020S_BatchKeysInfo
+	|FROM
+	|	ItemList AS ItemList
+	|WHERE
+	|	TRUE
+	|GROUP BY
+	|	ItemList.Company,
+	|	ItemList.Currency,
+	|	ItemList.CurrencyMovementType,
+	|	ItemList.ItemKey,
+	|	ItemList.Period,
+	|	ItemList.Store,
+	|	VALUE(Enum.BatchDirection.Receipt)";
 EndFunction
 
 #EndRegion

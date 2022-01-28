@@ -296,6 +296,7 @@ Scenario: _0154058 check item and item key input by search in line in a document
 		| 'Item'     |
 		| 'Jacket J22001'    |
 		And I close all client application windows
+		And Delay 10
 
 Scenario: _0154059 check item and item key input by search in line in a document InventoryTransferOrder (in english)
 	And I close all client application windows

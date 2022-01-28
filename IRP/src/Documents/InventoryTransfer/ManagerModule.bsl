@@ -140,6 +140,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R4032B_GoodsInTransitOutgoing());
 	QueryArray.Add(R4050B_StockInventory());
 	QueryArray.Add(T3010S_RowIDInfo());
+	QueryArray.Add(T6020S_BatchKeysInfo());
 	Return QueryArray;
 EndFunction
 
@@ -391,4 +392,46 @@ Function T3010S_RowIDInfo()
 		|		AND ItemList.Ref = &Ref
 		|		AND RowIDInfo.Key = ItemList.Key
 		|		AND RowIDInfo.Ref = ItemList.Ref";
+EndFunction
+
+Function T6020S_BatchKeysInfo()
+	Return
+	"SELECT
+	|	ItemList.Period,
+	|	VALUE(Enum.BatchDirection.Receipt) AS Direction,
+	|	ItemList.Company,
+	|	ItemList.StoreReceiver AS Store,
+	|	ItemList.ItemKey,
+	|	SUM(ItemList.Quantity) AS Quantity
+	|INTO T6020S_BatchKeysInfo
+	|FROM
+	|	ItemList AS ItemList
+	|WHERE
+	|	TRUE
+	|GROUP BY
+	|	ItemList.Period,
+	|	VALUE(Enum.BatchDirection.Receipt),
+	|	ItemList.Company,
+	|	ItemList.StoreReceiver,
+	|	ItemList.ItemKey
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	ItemList.Period,
+	|	VALUE(Enum.BatchDirection.Expense),
+	|	ItemList.Company,
+	|	ItemList.StoreSender,
+	|	ItemList.ItemKey,
+	|	SUM(ItemList.Quantity) AS Quantity
+	|FROM
+	|	ItemList AS ItemList
+	|WHERE
+	|	TRUE
+	|GROUP BY
+	|	ItemList.Period,
+	|	VALUE(Enum.BatchDirection.Expense),
+	|	ItemList.Company,
+	|	ItemList.StoreSender,
+	|	ItemList.ItemKey";
 EndFunction

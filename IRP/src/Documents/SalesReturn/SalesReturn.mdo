@@ -128,6 +128,10 @@
   <registerRecords>InformationRegister.T3010S_RowIDInfo</registerRecords>
   <registerRecords>InformationRegister.T2015S_TransactionsInfo</registerRecords>
   <registerRecords>AccumulationRegister.T1040T_AccountingAmounts</registerRecords>
+  <registerRecords>InformationRegister.T6010S_BatchesInfo</registerRecords>
+  <registerRecords>InformationRegister.T6020S_BatchKeysInfo</registerRecords>
+  <registerRecords>AccumulationRegister.R6020B_BatchBalance</registerRecords>
+  <registerRecords>AccumulationRegister.R6060T_CostOfGoodsSold</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -633,6 +637,20 @@
       </type>
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="45627dcd-8f6d-400b-ad5d-230ac4cc0db6">
+      <name>LandedCost</name>
+      <synonym>
+        <key>en</key>
+        <value>Landed cost</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeAmount</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>
   </tabularSections>

@@ -14,7 +14,16 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	QueryArray = GetQueryTextsSecondaryTables();
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
 #EndRegion
-
+	
+	BatchKeysInfoMetadata = Parameters.Object.RegisterRecords.T6020S_BatchKeysInfo.Metadata();
+	If Parameters.Property("MultiCurrencyExcludePostingDataTables") Then
+		Parameters.MultiCurrencyExcludePostingDataTables.Add(BatchKeysInfoMetadata);
+	Else
+		ArrayOfMultiCurrencyExcludePostingDataTables = New Array();
+		ArrayOfMultiCurrencyExcludePostingDataTables.Add(BatchKeysInfoMetadata);
+		Parameters.Insert("MultiCurrencyExcludePostingDataTables", ArrayOfMultiCurrencyExcludePostingDataTables);
+	EndIf;
+	
 	Return Tables;
 EndFunction
 
@@ -146,6 +155,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R5012B_VendorsAging());
 	QueryArray.Add(T3010S_RowIDInfo());
 	QueryArray.Add(T2015S_TransactionsInfo());
+	QueryArray.Add(T6020S_BatchKeysInfo());
 	Return QueryArray;
 EndFunction
 
@@ -665,3 +675,29 @@ Function T2015S_TransactionsInfo()
 	|	ItemList.Agreement,
 	|	ItemList.BasisDocument";
 EndFunction
+
+Function T6020S_BatchKeysInfo()
+	Return
+	"SELECT
+	|	PurchaseReturnItemList.ItemKey,
+	|	PurchaseReturnItemList.Store,
+	|	PurchaseReturnItemList.Ref.Company AS Company,
+	|	SUM(PurchaseReturnItemList.QuantityInBaseUnit) AS Quantity,
+	|	PurchaseReturnItemList.Ref.Date AS Period,
+	|	VALUE(Enum.BatchDirection.Expense) AS Direction,
+	|	PurchaseReturnItemList.PurchaseInvoice AS BatchDocument
+	|INTO T6020S_BatchKeysInfo
+	|FROM
+	|	Document.PurchaseReturn.ItemList AS PurchaseReturnItemList
+	|WHERE
+	|	PurchaseReturnItemList.Ref = &Ref
+	|	AND PurchaseReturnItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Product)
+	|GROUP BY
+	|	PurchaseReturnItemList.ItemKey,
+	|	PurchaseReturnItemList.Store,
+	|	PurchaseReturnItemList.Ref.Company,
+	|	PurchaseReturnItemList.Ref.Date,
+	|	VALUE(Enum.BatchDirection.Expense),
+	|	PurchaseReturnItemList.PurchaseInvoice";
+EndFunction
+	

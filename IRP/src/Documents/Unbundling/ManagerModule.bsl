@@ -129,22 +129,28 @@ Function GetQueryTextsMasterTables()
 	QueryArray = New Array();
 	QueryArray.Add(R4011B_FreeStocks());
 	QueryArray.Add(R4010B_ActualStocks());
+	QueryArray.Add(T6010S_BatchesInfo());
+	QueryArray.Add(T6020S_BatchKeysInfo());
+	QueryArray.Add(T6050S_ManualBundleAmountValues());
 	Return QueryArray;
 EndFunction
 
 Function ItemList()
-	Return "SELECT
-		   |	UnbundlingItemList.Ref.Date AS Period,
-		   |	UnbundlingItemList.Ref.Company AS Company,
-		   |	UnbundlingItemList.Ref.Store AS Store,
-		   |	UnbundlingItemList.ItemKey AS ItemKey,
-		   |	UnbundlingItemList.QuantityInBaseUnit * UnbundlingItemList.Ref.QuantityInBaseUnit AS Quantity,
-		   |	UnbundlingItemList.Ref
-		   |INTO ItemLIst
-		   |FROM
-		   |	Document.Unbundling.ItemList AS UnbundlingItemList
-		   |WHERE
-		   |	UnbundlingItemList.Ref = &Ref";
+	Return 
+	"SELECT
+	|	UnbundlingItemList.Ref.Date AS Period,
+	|	UnbundlingItemList.Ref.Company AS Company,
+	|	UnbundlingItemList.Ref.Store AS Store,
+	|	UnbundlingItemList.ItemKey AS ItemKey,
+	|	UnbundlingItemList.Ref.ItemKeyBundle AS Bundle,
+	|	UnbundlingItemList.QuantityInBaseUnit * UnbundlingItemList.Ref.QuantityInBaseUnit AS Quantity,
+	|	UnbundlingItemList.Ref,
+	|	UnbundlingItemList.AmountValue
+	|INTO ItemLIst
+	|FROM
+	|	Document.Unbundling.ItemList AS UnbundlingItemList
+	|WHERE
+	|	UnbundlingItemList.Ref = &Ref";
 EndFunction
 
 Function Header()
@@ -214,4 +220,63 @@ Function R4010B_ActualStocks()
 		   |	Header AS Header
 		   |WHERE
 		   |	TRUE";
+EndFunction
+
+Function T6010S_BatchesInfo()
+	Return	
+	"SELECT
+	|	Header.Period,
+	|	Header.Ref AS Document,
+	|	Header.Company
+	|INTO T6010S_BatchesInfo
+	|FROM
+	|	Header AS Header
+	|WHERE
+	|	TRUE";
+EndFunction
+
+Function T6020S_BatchKeysInfo()
+	Return
+	"SELECT
+	|	VALUE(Enum.BatchDirection.Expense) AS Direction,
+	|	Header.Period,
+	|	Header.Company,
+	|	Header.Store,
+	|	Header.ItemKey,
+	|	Header.Quantity
+	|INTO T6020S_BatchKeysInfo
+	|FROM
+	|	Header AS Header
+	|WHERE
+	|	TRUE
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	VALUE(Enum.BatchDirection.Receipt),
+	|	ItemList.Period,
+	|	ItemList.Company,
+	|	ItemList.Store,
+	|	ItemList.ItemKey,
+	|	ItemList.Quantity
+	|FROM
+	|	ItemList AS ItemList
+	|WHERE
+	|	TRUE";
+EndFunction	
+
+Function T6050S_ManualBundleAmountValues()
+	Return
+	"SELECT
+	|	ItemList.Period,
+	|	ItemList.ItemKey,
+	|	ItemList.Bundle,
+	|	ItemList.Store,
+	|	ItemList.Company,
+	|	ItemList.AmountValue
+	|INTO T6050S_ManualBundleAmountValues
+	|FROM
+	|	ItemList AS ItemList
+	|WHERE
+	|	TRUE";
 EndFunction

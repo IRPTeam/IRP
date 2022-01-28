@@ -123,6 +123,10 @@
   <registerRecords>AccumulationRegister.R4014B_SerialLotNumber</registerRecords>
   <registerRecords>InformationRegister.T3010S_RowIDInfo</registerRecords>
   <registerRecords>AccumulationRegister.T1040T_AccountingAmounts</registerRecords>
+  <registerRecords>InformationRegister.T6010S_BatchesInfo</registerRecords>
+  <registerRecords>InformationRegister.T6020S_BatchKeysInfo</registerRecords>
+  <registerRecords>AccumulationRegister.R6020B_BatchBalance</registerRecords>
+  <registerRecords>AccumulationRegister.R6060T_CostOfGoodsSold</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -640,6 +644,20 @@
           <value>true</value>
         </value>
       </choiceParameters>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="b7c2bc50-19ec-4c88-88f0-cd908926a988">
+      <name>LandedCost</name>
+      <synonym>
+        <key>en</key>
+        <value>Landed cost</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeAmount</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
       <fullTextSearch>Use</fullTextSearch>
     </attributes>

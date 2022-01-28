@@ -14,6 +14,16 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	QueryArray = GetQueryTextsSecondaryTables();
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
 #EndRegion
+
+	BatchKeysInfoMetadata = Parameters.Object.RegisterRecords.T6020S_BatchKeysInfo.Metadata();
+	If Parameters.Property("MultiCurrencyExcludePostingDataTables") Then
+		Parameters.MultiCurrencyExcludePostingDataTables.Add(BatchKeysInfoMetadata);
+	Else
+		ArrayOfMultiCurrencyExcludePostingDataTables = New Array();
+		ArrayOfMultiCurrencyExcludePostingDataTables.Add(BatchKeysInfoMetadata);
+		Parameters.Insert("MultiCurrencyExcludePostingDataTables", ArrayOfMultiCurrencyExcludePostingDataTables);
+	EndIf;
+
 	Parameters.IsReposting = False;
 	Return Tables;
 EndFunction
@@ -129,27 +139,30 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R4052T_StockAdjustmentAsSurplus());
 	QueryArray.Add(R4050B_StockInventory());
 	QueryArray.Add(T3010S_RowIDInfo());
+	QueryArray.Add(T6010S_BatchesInfo());
+	QueryArray.Add(T6020S_BatchKeysInfo());
 	Return QueryArray;
 EndFunction
 
 Function ItemList()
 	Return "SELECT
-		   |	ItemList.Ref.Date AS Period,
-		   |	ItemList.Ref.Company AS Company,
-		   |	ItemList.Ref.Branch AS Branch,
-		   |	ItemList.Ref.Store AS Store,
-		   |	ItemList.ItemKey AS ItemKey,
-		   |	ItemList.ProfitLossCenter AS ProfitLossCenter,
-		   |	ItemList.RevenueType AS RevenueType,
-		   |	NOT ItemList.PhysicalInventory.Ref IS NULL AS PhysicalInventoryExists,
-		   |	ItemList.PhysicalInventory AS PhysicalInventory,
-		   |	ItemList.Ref AS Basis,
-		   |	ItemList.QuantityInBaseUnit AS Quantity
-		   |INTO ItemList
-		   |FROM
-		   |	Document.StockAdjustmentAsSurplus.ItemList AS ItemList
-		   |WHERE
-		   |	ItemList.Ref = &Ref";
+	|	ItemList.Ref.Date AS Period,
+	|	ItemList.Ref.Company AS Company,
+	|	ItemList.Ref.Branch AS Branch,
+	|	ItemList.Ref.Store AS Store,
+	|	ItemList.ItemKey AS ItemKey,
+	|	ItemList.ProfitLossCenter AS ProfitLossCenter,
+	|	ItemList.RevenueType AS RevenueType,
+	|	NOT ItemList.PhysicalInventory.Ref IS NULL AS PhysicalInventoryExists,
+	|	ItemList.PhysicalInventory AS PhysicalInventory,
+	|	ItemList.Ref AS Basis,
+	|	ItemList.QuantityInBaseUnit AS Quantity,
+	|	ItemList.Amount AS LandedCost
+	|INTO ItemList
+	|FROM
+	|	Document.StockAdjustmentAsSurplus.ItemList AS ItemList
+	|WHERE
+	|	ItemList.Ref = &Ref";
 EndFunction
 
 Function SerialLotNumbers()
@@ -244,6 +257,50 @@ Function T3010S_RowIDInfo()
 		|		AND ItemList.Ref = &Ref
 		|		AND RowIDInfo.Key = ItemList.Key
 		|		AND RowIDInfo.Ref = ItemList.Ref";
+EndFunction
+
+Function T6010S_BatchesInfo()
+	Return
+	"SELECT
+	|	ItemList.Basis AS Document,
+	|	ItemList.Company,
+	|	ItemList.Period
+	|INTO T6010S_BatchesInfo
+	|FROM
+	|	ItemList AS ItemList
+	|WHERE
+	|	TRUE
+	|GROUP BY
+	|	ItemList.Basis,
+	|	ItemList.Company,
+	|	ItemList.Period";
+EndFunction
+
+Function T6020S_BatchKeysInfo()
+	Return
+	"SELECT
+	|	ItemList.ItemKey,
+	|	ItemList.Store,
+	|	ItemList.Company,
+	|	ItemList.Company.LandedCostCurrencyMovementType AS CurrencyMovementType,
+	|	ItemList.Company.LandedCostCurrencyMovementType.Currency AS Currency,
+	|	SUM(ItemList.Quantity) AS Quantity,
+	|	SUM(ItemList.LandedCost) AS Amount,
+	|	ItemList.Period,
+	|	VALUE(Enum.BatchDirection.Receipt) AS Direction
+	|INTO T6020S_BatchKeysInfo
+	|FROM
+	|	ItemList AS ItemList
+	|WHERE
+	|	TRUE
+	|GROUP BY
+	|	ItemList.ItemKey,
+	|	ItemList.Store,
+	|	ItemList.Company,
+	|	ItemList.Company.LandedCostCurrencyMovementType,
+	|	ItemList.Company.LandedCostCurrencyMovementType.Currency,
+	|	ItemList.Period,
+	|	VALUE(Enum.BatchDirection.Receipt)";
 EndFunction
 
 #EndRegion

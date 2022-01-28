@@ -146,6 +146,11 @@ Function RegisterRecords(DocObject, PostingDataTables, AllRegisterRecords)
 EndFunction
 
 Function RecordSetIsEqual(DocObject, RecordSet, TableForLoad)
+	If TypeOf(RecordSet) = Type("AccumulationRegisterRecordSet.R6020B_BatchBalance") 
+		Or TypeOf(RecordSet) = Type("AccumulationRegisterRecordSet.R6060T_CostOfGoodsSold") Then
+		Return True; //Never rewrite
+	EndIf;
+	
 	RecordSet.Read();
 	TableOldRecords = RecordSet.Unload();
 
@@ -165,6 +170,16 @@ Function RecordSetIsEqual(DocObject, RecordSet, TableForLoad)
 		AdvancesRelevanceServer.SetBound_Aging(DocObject, TableForLoad, AccReg.R5012B_VendorsAging);
 	ElsIf TypeOf(RecordSet) = Type("AccumulationRegisterRecordSet.R5011B_CustomersAging") Then
 		AdvancesRelevanceServer.SetBound_Aging(DocObject, TableForLoad, AccReg.R5011B_CustomersAging);
+	EndIf;
+	
+	If TypeOf(RecordSet) = Type("InformationRegisterRecordSet.T6020S_BatchKeysInfo") Then
+		AccumulationRegisters.R6020B_BatchBalance.BatchBalance_CollectRecords(DocObject);
+		AccumulationRegisters.R6060T_CostOfGoodsSold.CostOfGoodsSold_CollectRecords(DocObject);
+		TableForLoadEmpty = CreateTable(Metadata.InformationRegisters.T6020S_BatchKeysInfo);
+		For Each Row In TableForLoad Do
+			FillPropertyValues(TableForLoadEmpty.Add(), Row);
+		EndDo;
+		InformationRegisters.T6030S_BatchRelevance.BatchRelevance_SetBound(DocObject, TableForLoadEmpty);
 	EndIf;
 	
 	Return Result;

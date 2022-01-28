@@ -183,6 +183,7 @@
   </content>
   <content>
     <metadata>Document.JournalEntry</metadata>
+    <metadata>Document.AdditionalCostAllocation</metadata>
     <use>Use</use>
   </content>
   <autoUse>DontUse</autoUse>

@@ -132,6 +132,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R4051T_StockAdjustmentAsWriteOff());
 	QueryArray.Add(R4050B_StockInventory());
 	QueryArray.Add(T3010S_RowIDInfo());
+	QueryArray.Add(T6020S_BatchKeysInfo());
 	Return QueryArray;
 EndFunction
 
@@ -246,6 +247,28 @@ Function T3010S_RowIDInfo()
 		|		AND ItemList.Ref = &Ref
 		|		AND RowIDInfo.Key = ItemList.Key
 		|		AND RowIDInfo.Ref = ItemList.Ref";
+EndFunction
+
+Function T6020S_BatchKeysInfo()
+	Return
+	"SELECT
+	|	ItemList.Period,
+	|	VALUE(Enum.BatchDirection.Expense) AS Direction,
+	|	ItemList.Company,
+	|	ItemList.Store,
+	|	ItemList.ItemKey,
+	|	SUM(ItemList.Quantity) AS Quantity
+	|INTO T6020S_BatchKeysInfo
+	|FROM
+	|	ItemList AS ItemList
+	|WHERE
+	|	TRUE
+	|GROUP BY
+	|	ItemList.Period,
+	|	VALUE(Enum.BatchDirection.Expense),
+	|	ItemList.Company,
+	|	ItemList.Store,
+	|	ItemList.ItemKey";
 EndFunction
 
 #EndRegion

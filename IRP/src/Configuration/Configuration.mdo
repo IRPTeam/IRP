@@ -396,6 +396,9 @@
   <commonModules>CommonModule.AccountingClient</commonModules>
   <commonModules>CommonModule.AccountingClientServer</commonModules>
   <commonModules>CommonModule.AccountingServer</commonModules>
+  <commonModules>CommonModule.LandedCostServer</commonModules>
+  <commonModules>CommonModule.DocAdditionalCostAllocationClient</commonModules>
+  <commonModules>CommonModule.DocAdditionalCostAllocationServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>
@@ -477,6 +480,7 @@
   <definedTypes>DefinedType.typeStockAdjustmentAsSurplusBasises</definedTypes>
   <definedTypes>DefinedType.typeStockAdjustmentAsWriteOffBasises</definedTypes>
   <definedTypes>DefinedType.UseUniqueID</definedTypes>
+  <definedTypes>DefinedType.typeBatchDocuments</definedTypes>
   <commonCommands>CommonCommand.AddProperties</commonCommands>
   <commonCommands>CommonCommand.IDInfo</commonCommands>
   <commonCommands>CommonCommand.OpenCompanies</commonCommands>
@@ -593,6 +597,8 @@
   <catalogs>Catalog.TransactionsKeys</catalogs>
   <catalogs>Catalog.LadgerTypes</catalogs>
   <catalogs>Catalog.AccountingOperations</catalogs>
+  <catalogs>Catalog.Batches</catalogs>
+  <catalogs>Catalog.BatchKeys</catalogs>
   <documents>Document.BankPayment</documents>
   <documents>Document.BankReceipt</documents>
   <documents>Document.Bundling</documents>
@@ -638,6 +644,8 @@
   <documents>Document.Unbundling</documents>
   <documents>Document.VendorsAdvancesClosing</documents>
   <documents>Document.JournalEntry</documents>
+  <documents>Document.CalculationMovementCosts</documents>
+  <documents>Document.AdditionalCostAllocation</documents>
   <documentJournals>DocumentJournal.DocumentsForIncomingPayment</documentJournals>
   <documentJournals>DocumentJournal.DocumentsForOutgoingPayment</documentJournals>
   <documentJournals>DocumentJournal.AllDocuments</documentJournals>
@@ -684,6 +692,11 @@
   <enums>Enum.TypeExternalObject</enums>
   <enums>Enum.LadgerTypeVariants</enums>
   <enums>Enum.AccountingAnalyticTypes</enums>
+  <enums>Enum.BatchDirection</enums>
+  <enums>Enum.BatchType</enums>
+  <enums>Enum.CalculationMode</enums>
+  <enums>Enum.AllocationMode</enums>
+  <enums>Enum.AllocationMethod</enums>
   <reports>Report.AllRegistersMovement</reports>
   <reports>Report.DocumentRegistrationsReport</reports>
   <reports>Report.PriceInfo</reports>
@@ -694,6 +707,8 @@
   <reports>Report.D4011_FreeStocks</reports>
   <reports>Report.D4012_StockReservation</reports>
   <reports>Report.OffsetOfAdvances</reports>
+  <reports>Report.BatchBalance</reports>
+  <reports>Report.BatchBalanceSimple</reports>
   <dataProcessors>DataProcessor.AnaliseDocumentMovements</dataProcessors>
   <dataProcessors>DataProcessor.DataHistory</dataProcessors>
   <dataProcessors>DataProcessor.MobileDesktop</dataProcessors>
@@ -743,6 +758,12 @@
   <informationRegisters>InformationRegister.CompanyLadgerTypes</informationRegisters>
   <informationRegisters>InformationRegister.RetailWorkers</informationRegisters>
   <informationRegisters>InformationRegister.LadgerTypeOperations</informationRegisters>
+  <informationRegisters>InformationRegister.T6010S_BatchesInfo</informationRegisters>
+  <informationRegisters>InformationRegister.T6020S_BatchKeysInfo</informationRegisters>
+  <informationRegisters>InformationRegister.T6030S_BatchRelevance</informationRegisters>
+  <informationRegisters>InformationRegister.T6040S_BundleAmountValues</informationRegisters>
+  <informationRegisters>InformationRegister.T6050S_ManualBundleAmountValues</informationRegisters>
+  <informationRegisters>InformationRegister.T6060S_BatchCostAllocationInfo</informationRegisters>
   <accumulationRegisters>AccumulationRegister.CashInTransit</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1001T_Purchases</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1002T_PurchaseReturns</accumulationRegisters>
@@ -812,6 +833,13 @@
   <accumulationRegisters>AccumulationRegister.R3025B_PurchaseOrdersToBePaid</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.T1040T_AccountingAmounts</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.T1050T_AccountingQuantities</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R6010B_BatchWiseBalance</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R6020B_BatchBalance</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R6030T_BatchShortageOutgoing</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R6040T_BatchShortageIncoming</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R6050T_SalesBatches</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R6060T_CostOfGoodsSold</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R6070T_OtherPeriodsExpenses</accumulationRegisters>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.AddAttributeAndProperty</chartsOfCharacteristicTypes>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.CustomUserSettings</chartsOfCharacteristicTypes>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.IDInfoTypes</chartsOfCharacteristicTypes>

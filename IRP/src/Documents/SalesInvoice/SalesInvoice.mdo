@@ -93,6 +93,7 @@
   <registerRecords>InformationRegister.T6020S_BatchKeysInfo</registerRecords>
   <registerRecords>AccumulationRegister.R6020B_BatchBalance</registerRecords>
   <registerRecords>AccumulationRegister.R6060T_CostOfGoodsSold</registerRecords>
+  <registerRecords>AccumulationRegister.R6080T_OtherPeriodsRevenues</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -583,6 +584,20 @@
       <synonym>
         <key>en</key>
         <value>Use shipment confirmation</value>
+      </synonym>
+      <type>
+        <types>Boolean</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="51529ae4-9023-4f25-ba83-1698d033fdf7">
+      <name>IsAdditionalItemRevenue</name>
+      <synonym>
+        <key>en</key>
+        <value>Is additional item revenue</value>
       </synonym>
       <type>
         <types>Boolean</types>

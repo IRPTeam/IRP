@@ -10,6 +10,7 @@
       <setting-ref ref="BUILD_EXT_10" />
       <setting-ref ref="BUILD_EXT_12" />
       <setting-ref ref="RUNNER_22" />
+      <setting-ref ref="RUNNER_74" />
     </disabled-settings>
     <parameters />
     <build-runners order="RUNNER_22, RUNNER_74, RUNNER_67, RUNNER_5, RUNNER_32, RUNNER_8, RUNNER_9, RUNNER_11, RUNNER_43">

@@ -27,6 +27,7 @@
 } else {
 	git config user.email "user@tc.1c"
     git config user.name "automerge"
+    git checkout %teamcity.pullRequest.source.branch%
     git add .
     git commit -m "CI"
     git fetch

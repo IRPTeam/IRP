@@ -31,7 +31,7 @@
     git add .
     git commit -m "CI"
     git fetch
-	git merge origin/%teamcity.pullRequest.target.branch%
+	git merge %teamcity.pullRequest.target.branch%
 }]]></param>
           <param name="jetbrains_powershell_script_mode" value="CODE" />
           <param name="teamcity.step.mode" value="default" />

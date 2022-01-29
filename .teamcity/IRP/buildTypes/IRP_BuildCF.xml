@@ -27,10 +27,10 @@
 } else {
 	git config user.email "user@tc.1c"
     git config user.name "automerge"
-    git checkout %teamcity.pullRequest.source.branch%
     git add .
     git commit -m "CI"
     git fetch
+    git checkout %teamcity.pullRequest.source.branch%
 	git merge %teamcity.pullRequest.target.branch%
 }]]></param>
           <param name="jetbrains_powershell_script_mode" value="CODE" />

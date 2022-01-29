@@ -10,6 +10,7 @@
     </options>
     <disabled-settings>
       <setting-ref ref="BUILD_EXT_19" />
+      <setting-ref ref="RUNNER_75" />
     </disabled-settings>
     <parameters>
       <param name="env.BranchToStartVA" value="develop" />

@@ -664,6 +664,25 @@ Compress-Archive -Path "allure-report/*" -DestinationPath "allure-report.zip"]]>
           <param name="teamcity.step.mode" value="execute_if_failed" />
         </parameters>
       </runner>
+      <runner id="RUNNER_75" name="automerge" type="jetbrains_powershell">
+        <parameters>
+          <param name="jetbrains_powershell_execution" value="PS1" />
+          <param name="jetbrains_powershell_noprofile" value="true" />
+          <param name="jetbrains_powershell_script_code"><![CDATA[If ("%teamcity.pullRequest.target.branch%" -eq "") {
+
+} else {
+	git config user.email "user@tc.1c"
+    git config user.name "automerge"
+    git add .
+    git commit -m "CI"
+    git fetch
+    git checkout %teamcity.pullRequest.source.branch%
+	git merge %teamcity.pullRequest.target.branch%
+}]]></param>
+          <param name="jetbrains_powershell_script_mode" value="CODE" />
+          <param name="teamcity.step.mode" value="default" />
+        </parameters>
+      </runner>
     </build-runners>
     <vcs-settings>
       <vcs-entry-ref root-id="IRP_GitTC" />

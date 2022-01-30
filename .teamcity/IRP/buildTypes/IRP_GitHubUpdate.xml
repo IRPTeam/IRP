@@ -17,7 +17,6 @@
         <parameters>
           <param name="branchFilter"><![CDATA[-:*
 +:develop
-+:pull/*
 +:*multilang]]></param>
           <param name="enableQueueOptimization" value="true" />
           <param name="quietPeriodMode" value="DO_NOT_USE" />

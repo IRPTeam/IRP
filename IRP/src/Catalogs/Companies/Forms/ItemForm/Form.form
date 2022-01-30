@@ -814,7 +814,7 @@
       </items>
       <items xsi:type="form:FormField">
         <name>LandedCostCurrencyMovementType</name>
-        <id>104</id>
+        <id>128</id>
         <visible>true</visible>
         <enabled>true</enabled>
         <userVisible>
@@ -825,7 +825,7 @@
         </dataPath>
         <extendedTooltip>
           <name>LandedCostCurrencyMovementTypeExtendedTooltip</name>
-          <id>106</id>
+          <id>130</id>
           <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>
@@ -840,7 +840,7 @@
         </extendedTooltip>
         <contextMenu>
           <name>LandedCostCurrencyMovementTypeContextMenu</name>
-          <id>105</id>
+          <id>129</id>
           <visible>true</visible>
           <enabled>true</enabled>
           <userVisible>

@@ -40,7 +40,8 @@
           <param name="authenticationType" value="token" />
           <param name="filterAuthorRole" value="MEMBER" />
           <param name="filterTargetBranch"><![CDATA[+:develop
-+:master]]></param>
++:master
+-:BranchForTest]]></param>
           <param name="providerType" value="github" />
           <param name="secure:accessToken" value="credentialsJSON:1fa3b09b-5cd9-4521-80c7-3c52664962a9" />
           <param name="vcsRootId" value="IRP_GitTC" />

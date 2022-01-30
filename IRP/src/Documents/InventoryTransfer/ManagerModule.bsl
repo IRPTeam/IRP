@@ -201,21 +201,23 @@ EndFunction
 
 Function SerialLotNumbers()
 	Return "SELECT
-		   |	SerialLotNumbers.Ref.Date AS Period,
-		   |	SerialLotNumbers.Ref.Company AS Company,
-		   |	SerialLotNumbers.Ref.Branch AS Branch,
-		   |	SerialLotNumbers.Key,
-		   |	SerialLotNumbers.SerialLotNumber,
-		   |	SerialLotNumbers.Quantity,
-		   |	ItemList.ItemKey AS ItemKey
-		   |INTO SerialLotNumbers
-		   |FROM
-		   |	Document.SalesInvoice.SerialLotNumbers AS SerialLotNumbers
-		   |		LEFT JOIN Document.SalesInvoice.ItemList AS ItemList
-		   |		ON SerialLotNumbers.Key = ItemList.Key
-		   |		AND ItemList.Ref = &Ref
-		   |WHERE
-		   |	SerialLotNumbers.Ref = &Ref";
+	|	SerialLotNumbers.Ref.Date AS Period,
+	|	SerialLotNumbers.Ref.Company AS Company,
+	|	SerialLotNumbers.Ref.Branch AS Branch,
+	|	SerialLotNumbers.Key,
+	|	SerialLotNumbers.SerialLotNumber,
+	|	SerialLotNumbers.Quantity,
+	|	ItemList.ItemKey AS ItemKey,
+	|	SerialLotNumbers.Ref.UseGoodsReceipt AS UseGoodsReceipt,
+	|	SerialLotNumbers.Ref.UseShipmentConfirmation AS UseShipmentConfirmation
+	|INTO SerialLotNumbers
+	|FROM
+	|	Document.InventoryTransfer.SerialLotNumbers AS SerialLotNumbers
+	|		LEFT JOIN Document.InventoryTransfer.ItemList AS ItemList
+	|		ON SerialLotNumbers.Key = ItemList.Key
+	|		AND ItemList.Ref = &Ref
+	|WHERE
+	|	SerialLotNumbers.Ref = &Ref";
 EndFunction
 
 Function R4010B_ActualStocks()
@@ -343,8 +345,17 @@ Function R4014B_SerialLotNumber()
 		   |FROM
 		   |	SerialLotNumbers AS SerialLotNumbers
 		   |WHERE
-		   |	TRUE";
-
+		   |	NOT SerialLotNumbers.UseShipmentConfirmation
+		   |
+		   |UNION ALL
+		   |
+		   |SELECT
+		   |	VALUE(AccumulationRecordType.Receipt),
+		   |	*
+		   |FROM
+		   |	SerialLotNumbers AS SerialLotNumbers
+		   |WHERE
+		   |	NOT SerialLotNumbers.UseGoodsReceipt";
 EndFunction
 
 Function R4021B_StockTransferOrdersReceipt()

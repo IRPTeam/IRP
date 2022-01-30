@@ -258,8 +258,8 @@ Function SerialLotNumbers()
 		   |	ItemList.ItemKey AS ItemKey
 		   |INTO SerialLotNumbers
 		   |FROM
-		   |	Document.SalesInvoice.SerialLotNumbers AS SerialLotNumbers
-		   |		LEFT JOIN Document.SalesInvoice.ItemList AS ItemList
+		   |	Document.GoodsReceipt.SerialLotNumbers AS SerialLotNumbers
+		   |		LEFT JOIN Document.GoodsReceipt.ItemList AS ItemList
 		   |		ON SerialLotNumbers.Key = ItemList.Key
 		   |		AND ItemList.Ref = &Ref
 		   |WHERE
@@ -400,7 +400,7 @@ EndFunction
 
 Function R4014B_SerialLotNumber()
 	Return "SELECT
-		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		   |	VALUE(AccumulationRecordType.Receipt) AS RecordType,
 		   |*
 		   |INTO R4014B_SerialLotNumber
 		   |FROM

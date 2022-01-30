@@ -214,8 +214,8 @@ Function SerialLotNumbers()
 		   |	ItemList.ItemKey AS ItemKey
 		   |INTO SerialLotNumbers
 		   |FROM
-		   |	Document.SalesInvoice.SerialLotNumbers AS SerialLotNumbers
-		   |		LEFT JOIN Document.SalesInvoice.ItemList AS ItemList
+		   |	Document.ShipmentConfirmation.SerialLotNumbers AS SerialLotNumbers
+		   |		LEFT JOIN Document.ShipmentConfirmation.ItemList AS ItemList
 		   |		ON SerialLotNumbers.Key = ItemList.Key
 		   |		AND ItemList.Ref = &Ref
 		   |WHERE

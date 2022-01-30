@@ -78,7 +78,7 @@ Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
 	
 	If Not Cancel And Not AccReg.R4014B_SerialLotNumber.CheckBalance(Ref, LineNumberAndItemKeyFromItemList, 
 		PostingServer.GetQueryTableByName("R4014B_SerialLotNumber", Parameters).Copy(Filter), 
-		PostingServer.GetQueryTableByName("R4014B_SerialLotNumber_Exists", Parameters).Copy(Filter),
+		PostingServer.GetQueryTableByName("Exists_R4014B_SerialLotNumber", Parameters).Copy(Filter),
 		Filter.RecordType, Unposting, AddInfo) Then
 		Cancel = True;
 	EndIf;
@@ -87,7 +87,7 @@ Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
 	
 	If Not Cancel And Not AccReg.R4014B_SerialLotNumber.CheckBalance(Ref, LineNumberAndItemKeyFromItemList, 
 		PostingServer.GetQueryTableByName("R4014B_SerialLotNumber", Parameters).Copy(Filter), 
-		PostingServer.GetQueryTableByName("R4014B_SerialLotNumber_Exists", Parameters).Copy(Filter),
+		PostingServer.GetQueryTableByName("Exists_R4014B_SerialLotNumber", Parameters).Copy(Filter),
 		Filter.RecordType, Unposting, AddInfo) Then
 		Cancel = True;
 	EndIf;

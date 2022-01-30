@@ -26,7 +26,7 @@ EndProcedure
 
 &AtClient
 Procedure AfterWrite(WriteParameters)
-	DocShipmentConfirmationClient.AfterWriteAtClient(Object, ThisObject, WriteParameters);	
+	DocShipmentConfirmationClient.AfterWriteAtClient(Object, ThisObject, WriteParameters);
 EndProcedure
 
 &AtClient
@@ -38,7 +38,7 @@ Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefin
 	If EventName = "NewBarcode" And IsInputAvailable() Then
 		SearchByBarcode(Undefined, Parameter);
 	EndIf;
-	
+
 	If EventName = "LockLinkedRows" Then
 		If Source <> ThisObject Then
 			LockLinkedRows();
@@ -147,6 +147,17 @@ EndProcedure
 &AtClient
 Procedure ItemListUnitOnChange(Item)
 	DocShipmentConfirmationClient.ItemListUnitOnChange(Object, ThisObject, Item);
+EndProcedure
+
+&AtClient
+Procedure ItemListSerialLotNumbersPresentationStartChoice(Item, ChoiceData, StandardProcessing) Export
+	DocShipmentConfirmationClient.ItemListSerialLotNumbersPresentationStartChoice(Object, ThisObject, Item, ChoiceData,
+		StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure ItemListSerialLotNumbersPresentationClearing(Item, StandardProcessing)
+	DocShipmentConfirmationClient.ItemListSerialLotNumbersPresentationClearing(Object, ThisObject, Item, StandardProcessing);
 EndProcedure
 
 #Region ItemCompany

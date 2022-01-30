@@ -157,6 +157,17 @@ Procedure ItemListItemKeyOnChange(Item)
 	CalculationStringsClientServer.CalculateItemsRow(Object, CurrentRow, CalculationSettings);
 EndProcedure
 
+&AtClient
+Procedure ItemListSerialLotNumbersPresentationStartChoice(Item, ChoiceData, StandardProcessing) Export
+	DocGoodsReceiptClient.ItemListSerialLotNumbersPresentationStartChoice(Object, ThisObject, Item, ChoiceData,
+		StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure ItemListSerialLotNumbersPresentationClearing(Item, StandardProcessing)
+	DocGoodsReceiptClient.ItemListSerialLotNumbersPresentationClearing(Object, ThisObject, Item, StandardProcessing);
+EndProcedure
+
 #Region ItemCompany
 
 &AtClient

@@ -7,7 +7,7 @@ Procedure AfterWriteAtClient(Object, Form, WriteParameters, AddInfo = Undefined)
 EndProcedure
 
 Procedure ItemListBeforeDeleteRow(Object, Form, Item, Cancel, AddInfo = Undefined) Export
-	RowIDInfoClient.ItemListBeforeDeleteRow(Object, Form, Item, Cancel, AddInfo);	
+	RowIDInfoClient.ItemListBeforeDeleteRow(Object, Form, Item, Cancel, AddInfo);
 EndProcedure
 
 #Region ItemCompany
@@ -76,7 +76,7 @@ Procedure OpenPickupItems(Object, Form, Command) Export
 EndProcedure
 
 Procedure PickupItemsEnd(Result, AdditionalParameters) Export
-	If Not ValueIsFilled(Result) Or Not AdditionalParameters.Property("Object") 
+	If Not ValueIsFilled(Result) Or Not AdditionalParameters.Property("Object")
 		Or Not AdditionalParameters.Property("Form") Then
 		Return;
 	EndIf;
@@ -129,7 +129,7 @@ Procedure ItemListItemOnChange(Object, Form, Item = Undefined, CurrentRowData = 
 		Return;
 	EndIf;
 	CurrentData.ItemKey = CatItemsServer.GetItemKeyByItem(CurrentData.Item);
-	If ValueIsFilled(CurrentData.ItemKey) 
+	If ValueIsFilled(CurrentData.ItemKey)
 		And ServiceSystemServer.GetObjectAttribute(CurrentData.ItemKey, "Item") <> CurrentData.Item Then
 		CurrentData.ItemKey = Undefined;
 	EndIf;
@@ -206,3 +206,17 @@ EndProcedure
 Procedure SearchByBarcode(Barcode, Object, Form, DocumentClientModule = Undefined, PriceType = Undefined, AddInfo = Undefined) Export
 	DocumentsClient.SearchByBarcode(Barcode, Object, Form, DocumentClientModule, PriceType, AddInfo);
 EndProcedure
+
+#Region SerialLotNumbers
+
+Procedure ItemListSerialLotNumbersPresentationStartChoice(Object, Form, Item, ChoiceData, StandardProcessing,
+	AddInfo = Undefined) Export
+	DocumentsClient.ItemListSerialLotNumbersPutServerDataToAddInfo(Object, Form, AddInfo);
+	SerialLotNumberClient.PresentationStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, AddInfo);
+EndProcedure
+
+Procedure ItemListSerialLotNumbersPresentationClearing(Object, Form, Item, StandardProcessing, AddInfo = Undefined) Export
+	SerialLotNumberClient.PresentationClearing(Object, Form, Item, AddInfo);
+EndProcedure
+
+#EndRegion

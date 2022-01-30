@@ -124,7 +124,7 @@ Procedure ItemListItemOnChange(Object, Form, Item = Undefined, CurrentRowData = 
 		Return;
 	EndIf;
 	CurrentData.ItemKey = CatItemsServer.GetItemKeyByItem(CurrentData.Item);
-	If ValueIsFilled(CurrentData.ItemKey) 
+	If ValueIsFilled(CurrentData.ItemKey)
 		And ServiceSystemServer.GetObjectAttribute(CurrentData.ItemKey, "Item")	<> CurrentData.Item Then
 		CurrentData.ItemKey = Undefined;
 	EndIf;
@@ -137,7 +137,7 @@ EndProcedure
 Procedure ItemListOnChange(Object, Form, Item = Undefined, CurrentRowData = Undefined) Export
 	DocumentsClient.FillRowIDInItemList(Object);
 	CurrentData = DocumentsClient.GetCurrentRowDataList(Form.Items.ItemList, CurrentRowData);
-	
+
 	If Form.Items.ItemList.CurrentItem <> Undefined And Form.Items.ItemList.CurrentItem.Name = "ItemListStore" Then
 		DocumentsClient.SetCurrentStore(Object, Form, Form.Items.ItemList.CurrentData.Store);
 	EndIf;
@@ -172,7 +172,7 @@ Procedure ItemListAfterDeleteRow(Object, Form, Item) Export
 EndProcedure
 
 Procedure ItemListBeforeDeleteRow(Object, Form, Item, Cancel, AddInfo = Undefined) Export
-	RowIDInfoClient.ItemListBeforeDeleteRow(Object, Form, Item, Cancel, AddInfo);	
+	RowIDInfoClient.ItemListBeforeDeleteRow(Object, Form, Item, Cancel, AddInfo);
 EndProcedure
 
 Procedure ItemListOnActivateRow(Object, Form, Item = Undefined, CurrentRowData = Undefined, AddInfo = Undefined) Export
@@ -314,5 +314,19 @@ Procedure ItemListQuantityOnChange(Object, Form, Item = Undefined, CurrentRowDat
 EndProcedure
 
 #EndRegion
+
+#EndRegion
+
+#Region SerialLotNumbers
+
+Procedure ItemListSerialLotNumbersPresentationStartChoice(Object, Form, Item, ChoiceData, StandardProcessing,
+	AddInfo = Undefined) Export
+	DocumentsClient.ItemListSerialLotNumbersPutServerDataToAddInfo(Object, Form, AddInfo);
+	SerialLotNumberClient.PresentationStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, AddInfo);
+EndProcedure
+
+Procedure ItemListSerialLotNumbersPresentationClearing(Object, Form, Item, StandardProcessing, AddInfo = Undefined) Export
+	SerialLotNumberClient.PresentationClearing(Object, Form, Item, AddInfo);
+EndProcedure
 
 #EndRegion

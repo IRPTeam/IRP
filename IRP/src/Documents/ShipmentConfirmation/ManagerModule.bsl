@@ -78,7 +78,21 @@ EndProcedure
 #Region CheckAfterWrite
 
 Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
+	Unposting = ?(Parameters.Property("Unposting"), Parameters.Unposting, False);
+	AccReg = AccumulationRegisters;
+
 	CheckAfterWrite_R4010B_R4011B(Ref, Cancel, Parameters, AddInfo);
+
+	LineNumberAndItemKeyFromItemList = PostingServer.GetLineNumberAndItemKeyFromItemList(Ref,
+		"Document.ShipmentConfirmation.ItemList");
+
+	If Not Cancel And Not AccReg.R4014B_SerialLotNumber.CheckBalance(Ref, LineNumberAndItemKeyFromItemList,
+		PostingServer.GetQueryTableByName("R4014B_SerialLotNumber", Parameters),
+		PostingServer.GetQueryTableByName("Exists_R4014B_SerialLotNumber", Parameters),
+		AccumulationRecordType.Expense, Unposting, AddInfo) Then
+		Cancel = True;
+	EndIf;
+
 EndProcedure
 
 Procedure CheckAfterWrite_R4010B_R4011B(Ref, Cancel, Parameters, AddInfo = Undefined) Export
@@ -112,8 +126,10 @@ EndFunction
 Function GetQueryTextsSecondaryTables()
 	QueryArray = New Array();
 	QueryArray.Add(ItemList());
+	QueryArray.Add(SerialLotNumbers());
 	QueryArray.Add(PostingServer.Exists_R4010B_ActualStocks());
 	QueryArray.Add(PostingServer.Exists_R4011B_FreeStocks());
+	QueryArray.Add(PostingServer.Exists_R4014B_SerialLotNumber());
 	Return QueryArray;
 EndFunction
 
@@ -126,6 +142,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R4010B_ActualStocks());
 	QueryArray.Add(R4011B_FreeStocks());
 	QueryArray.Add(R4012B_StockReservation());
+	QueryArray.Add(R4014B_SerialLotNumber());
 	QueryArray.Add(R4022B_StockTransferOrdersShipment());
 	QueryArray.Add(R4032B_GoodsInTransitOutgoing());
 	QueryArray.Add(R4034B_GoodsShipmentSchedule());
@@ -184,6 +201,25 @@ Function ItemList()
 		   |		ON ItemList.Key = TableRowIDInfo.Key
 		   |WHERE
 		   |	ItemList.Ref = &Ref";
+EndFunction
+
+Function SerialLotNumbers()
+	Return "SELECT
+		   |	SerialLotNumbers.Ref.Date AS Period,
+		   |	SerialLotNumbers.Ref.Company AS Company,
+		   |	SerialLotNumbers.Ref.Branch AS Branch,
+		   |	SerialLotNumbers.Key,
+		   |	SerialLotNumbers.SerialLotNumber,
+		   |	SerialLotNumbers.Quantity,
+		   |	ItemList.ItemKey AS ItemKey
+		   |INTO SerialLotNumbers
+		   |FROM
+		   |	Document.SalesInvoice.SerialLotNumbers AS SerialLotNumbers
+		   |		LEFT JOIN Document.SalesInvoice.ItemList AS ItemList
+		   |		ON SerialLotNumbers.Key = ItemList.Key
+		   |		AND ItemList.Ref = &Ref
+		   |WHERE
+		   |	SerialLotNumbers.Ref = &Ref";
 EndFunction
 
 Function R2011B_SalesOrdersShipment()
@@ -525,6 +561,18 @@ Function R4032B_GoodsInTransitOutgoing()
 EndFunction
 
 #EndRegion
+
+Function R4014B_SerialLotNumber()
+	Return "SELECT
+		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		   |*
+		   |INTO R4014B_SerialLotNumber
+		   |FROM
+		   |	SerialLotNumbers AS SerialLotNumbers
+		   |WHERE
+		   |	TRUE";
+
+EndFunction
 
 Function R4022B_StockTransferOrdersShipment()
 	Return "SELECT

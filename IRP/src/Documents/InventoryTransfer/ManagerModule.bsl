@@ -69,12 +69,24 @@ Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
 EndProcedure
 
 Procedure CheckAfterWrite_R4010B_R4011B(Ref, Cancel, Parameters, AddInfo = Undefined) Export
-	If Not (Parameters.Property("Unposting") And Parameters.Unposting) Then
+
+	Unposting = ?(Parameters.Property("Unposting"), Parameters.Unposting, False);
+	AccReg = AccumulationRegisters;
+
+	LineNumberAndItemKeyFromItemList = PostingServer.GetLineNumberAndItemKeyFromItemList(Ref,
+		"Document.InventoryTransfer.ItemList");
+
+	If Not Unposting Then
 		// is posting
 		FreeStocksTable   =  PostingServer.GetQueryTableByName("R4011B_FreeStocks", Parameters, True);
 		ActualStocksTable =  PostingServer.GetQueryTableByName("R4010B_ActualStocks", Parameters, True);
+		R4014B_SerialLotNumber =  PostingServer.GetQueryTableByName("R4014B_SerialLotNumber", Parameters, True);
+
 		Exists_FreeStocksTable   =  PostingServer.GetQueryTableByName("Exists_R4011B_FreeStocks", Parameters, True);
 		Exists_ActualStocksTable =  PostingServer.GetQueryTableByName("Exists_R4010B_ActualStocks", Parameters, True);
+		Exists_R4014B_SerialLotNumber =  PostingServer.GetQueryTableByName("Exists_R4014B_SerialLotNumber", Parameters, True);
+
+		// Expense
 
 		Filter = New Structure("RecordType", AccumulationRecordType.Expense);
 
@@ -85,6 +97,16 @@ Procedure CheckAfterWrite_R4010B_R4011B(Ref, Cancel, Parameters, AddInfo = Undef
 
 		Parameters.Insert("RecordType", Filter.RecordType);
 		PostingServer.CheckBalance_AfterWrite(Ref, Cancel, Parameters, "Document.InventoryTransfer.ItemList", AddInfo);
+
+		If Not Cancel And Not AccReg.R4014B_SerialLotNumber.CheckBalance(Ref, LineNumberAndItemKeyFromItemList,
+			R4014B_SerialLotNumber.Copy(Filter),
+			Exists_R4014B_SerialLotNumber.Copy(Filter),
+			AccumulationRecordType.Expense, Unposting, AddInfo) Then
+			Cancel = True;
+		EndIf;
+
+		// Receipt
+
 		Filter = New Structure("RecordType", AccumulationRecordType.Receipt);
 
 		CommonFunctionsClientServer.PutToAddInfo(AddInfo, "R4011B_FreeStocks", FreeStocksTable.Copy(Filter));
@@ -94,10 +116,17 @@ Procedure CheckAfterWrite_R4010B_R4011B(Ref, Cancel, Parameters, AddInfo = Undef
 
 		Parameters.Insert("RecordType", Filter.RecordType);
 		PostingServer.CheckBalance_AfterWrite(Ref, Cancel, Parameters, "Document.InventoryTransfer.ItemList", AddInfo);
+
+		If Not Cancel And Not AccReg.R4014B_SerialLotNumber.CheckBalance(Ref, LineNumberAndItemKeyFromItemList,
+			R4014B_SerialLotNumber.Copy(Filter),
+			Exists_R4014B_SerialLotNumber.Copy(Filter),
+			AccumulationRecordType.Receipt, Unposting, AddInfo) Then
+			Cancel = True;
+		EndIf;
 	Else
 		// is unposting
 		PostingServer.CheckBalance_AfterWrite(Ref, Cancel, Parameters, "Document.InventoryTransfer.ItemList", AddInfo);
-	EndIf;	
+	EndIf;
 EndProcedure
 
 #EndRegion
@@ -124,8 +153,10 @@ EndFunction
 Function GetQueryTextsSecondaryTables()
 	QueryArray = New Array();
 	QueryArray.Add(ItemList());
+	QueryArray.Add(SerialLotNumbers());
 	QueryArray.Add(PostingServer.Exists_R4010B_ActualStocks());
 	QueryArray.Add(PostingServer.Exists_R4011B_FreeStocks());
+	QueryArray.Add(PostingServer.Exists_R4014B_SerialLotNumber());
 	Return QueryArray;
 EndFunction
 
@@ -134,6 +165,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R4010B_ActualStocks());
 	QueryArray.Add(R4011B_FreeStocks());
 	QueryArray.Add(R4012B_StockReservation());
+	QueryArray.Add(R4014B_SerialLotNumber());
 	QueryArray.Add(R4021B_StockTransferOrdersReceipt());
 	QueryArray.Add(R4022B_StockTransferOrdersShipment());
 	QueryArray.Add(R4031B_GoodsInTransitIncoming());
@@ -165,6 +197,25 @@ Function ItemList()
 		   |	Document.InventoryTransfer.ItemList AS InventoryTransferItemList
 		   |WHERE
 		   |	InventoryTransferItemList.Ref = &Ref";
+EndFunction
+
+Function SerialLotNumbers()
+	Return "SELECT
+		   |	SerialLotNumbers.Ref.Date AS Period,
+		   |	SerialLotNumbers.Ref.Company AS Company,
+		   |	SerialLotNumbers.Ref.Branch AS Branch,
+		   |	SerialLotNumbers.Key,
+		   |	SerialLotNumbers.SerialLotNumber,
+		   |	SerialLotNumbers.Quantity,
+		   |	ItemList.ItemKey AS ItemKey
+		   |INTO SerialLotNumbers
+		   |FROM
+		   |	Document.SalesInvoice.SerialLotNumbers AS SerialLotNumbers
+		   |		LEFT JOIN Document.SalesInvoice.ItemList AS ItemList
+		   |		ON SerialLotNumbers.Key = ItemList.Key
+		   |		AND ItemList.Ref = &Ref
+		   |WHERE
+		   |	SerialLotNumbers.Ref = &Ref";
 EndFunction
 
 Function R4010B_ActualStocks()
@@ -284,6 +335,18 @@ Function R4012B_StockReservation()
 		   |		AND ItemListGroup.Store = StockReservation.Store";
 EndFunction
 
+Function R4014B_SerialLotNumber()
+	Return "SELECT
+		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
+		   |*
+		   |INTO R4014B_SerialLotNumber
+		   |FROM
+		   |	SerialLotNumbers AS SerialLotNumbers
+		   |WHERE
+		   |	TRUE";
+
+EndFunction
+
 Function R4021B_StockTransferOrdersReceipt()
 	Return "SELECT
 		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
@@ -291,7 +354,7 @@ Function R4021B_StockTransferOrdersReceipt()
 		   |	ItemList.InventoryTransferOrderExists AS Order,
 		   |	*
 		   |INTO R4021B_StockTransferOrdersReceipt
-		   |FROM 
+		   |FROM
 		   |	ItemList AS ItemList
 		   |WHERE
 		   |	ItemList.InventoryTransferOrderExists
@@ -305,7 +368,7 @@ Function R4022B_StockTransferOrdersShipment()
 		   |	ItemList.InventoryTransferOrderExists AS Order,
 		   |	*
 		   |INTO R4022B_StockTransferOrdersShipment
-		   |FROM 
+		   |FROM
 		   |	ItemList AS ItemList
 		   |WHERE
 		   |	ItemList.InventoryTransferOrderExists

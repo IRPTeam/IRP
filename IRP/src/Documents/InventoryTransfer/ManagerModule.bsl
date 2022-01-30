@@ -346,6 +346,7 @@ Function R4014B_SerialLotNumber()
 		   |	SerialLotNumbers AS SerialLotNumbers
 		   |WHERE
 		   |	NOT SerialLotNumbers.UseShipmentConfirmation
+		   |		AND FALSE
 		   |
 		   |UNION ALL
 		   |
@@ -355,7 +356,8 @@ Function R4014B_SerialLotNumber()
 		   |FROM
 		   |	SerialLotNumbers AS SerialLotNumbers
 		   |WHERE
-		   |	NOT SerialLotNumbers.UseGoodsReceipt";
+		   |	NOT SerialLotNumbers.UseGoodsReceipt
+		   |		AND FALSE";
 EndFunction
 
 Function R4021B_StockTransferOrdersReceipt()

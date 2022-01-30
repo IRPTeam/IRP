@@ -406,7 +406,7 @@ Function R4014B_SerialLotNumber()
 		   |FROM
 		   |	SerialLotNumbers AS SerialLotNumbers
 		   |WHERE
-		   |	TRUE";
+		   |	FASLE";
 
 EndFunction
 

@@ -7,12 +7,33 @@
       <option name="artifactRules" value="%teamcity.project.id%.cf&#xA;IRP.zip" />
     </options>
     <disabled-settings>
+      <setting-ref ref="BUILD_EXT_10" />
       <setting-ref ref="RUNNER_22" />
+      <setting-ref ref="RUNNER_74" />
     </disabled-settings>
     <parameters />
-    <build-runners order="RUNNER_22, RUNNER_67, RUNNER_5, RUNNER_32, RUNNER_8, RUNNER_9, RUNNER_11, RUNNER_43">
+    <build-runners order="RUNNER_22, RUNNER_74, RUNNER_67, RUNNER_5, RUNNER_32, RUNNER_8, RUNNER_9, RUNNER_11, RUNNER_43">
       <runner id="RUNNER_22" name="Drop DB MetaRunner" type="DropDB">
         <parameters>
+          <param name="teamcity.step.mode" value="default" />
+        </parameters>
+      </runner>
+      <runner id="RUNNER_74" name="automerge" type="jetbrains_powershell">
+        <parameters>
+          <param name="jetbrains_powershell_execution" value="PS1" />
+          <param name="jetbrains_powershell_noprofile" value="true" />
+          <param name="jetbrains_powershell_script_code"><![CDATA[If ("%teamcity.pullRequest.target.branch%" -eq "") {
+
+} else {
+	git config user.email "user@tc.1c"
+    git config user.name "automerge"
+    git add .
+    git commit -m "CI"
+    git fetch
+    git checkout %teamcity.pullRequest.source.branch%
+	git merge %teamcity.pullRequest.target.branch%
+}]]></param>
+          <param name="jetbrains_powershell_script_mode" value="CODE" />
           <param name="teamcity.step.mode" value="default" />
         </parameters>
       </runner>
@@ -21,7 +42,11 @@
           <param name="jetbrains_powershell_execution" value="PS1" />
           <param name="jetbrains_powershell_noprofile" value="true" />
           <param name="jetbrains_powershell_script_code"><![CDATA[$week = Get-Date -UFormat %V
-((Get-Content  -Encoding UTF8 -path "%teamcity.build.workingDir%\%teamcity.project.id%\src\Configuration\Configuration.mdo" -Raw) -replace "#weekNumber#","$week") | Set-Content -Encoding UTF8 -Path "%teamcity.build.workingDir%\%teamcity.project.id%\src\Configuration\Configuration.mdo"]]></param>
+((Get-Content  -Encoding UTF8 -path "%teamcity.build.workingDir%\%teamcity.project.id%\src\Configuration\Configuration.mdo" -Raw) -replace "#weekNumber#","$week") | Set-Content -Encoding UTF8 -Path "%teamcity.build.workingDir%\%teamcity.project.id%\src\Configuration\Configuration.mdo"
+$year = Get-Date -UFormat %Y
+((Get-Content  -Encoding UTF8 -path "%teamcity.build.workingDir%\%teamcity.project.id%\src\Configuration\Configuration.mdo" -Raw) -replace "#yearNumber#","$year") | Set-Content -Encoding UTF8 -Path "%teamcity.build.workingDir%\%teamcity.project.id%\src\Configuration\Configuration.mdo"
+$BuildNumber = "%build.number%"
+((Get-Content  -Encoding UTF8 -path "%teamcity.build.workingDir%\%teamcity.project.id%\src\Configuration\Configuration.mdo" -Raw) -replace "#BuildNumber#","$BuildNumber") | Set-Content -Encoding UTF8 -Path "%teamcity.build.workingDir%\%teamcity.project.id%\src\Configuration\Configuration.mdo"]]></param>
           <param name="jetbrains_powershell_script_mode" value="CODE" />
           <param name="teamcity.step.mode" value="default" />
         </parameters>
@@ -83,6 +108,15 @@ find /c "completed successfully" %env.LogFile1C% && ( echo Success ) || ( echo "
           <param name="moreOrLess" value="more" />
           <param name="stopBuildOnFailure" value="true" />
           <param name="withBuildAnchor" value="false" />
+        </parameters>
+      </extension>
+      <extension id="BUILD_EXT_39" type="BuildFailureOnMessage">
+        <parameters>
+          <param name="buildFailureOnMessage.conditionType" value="contains" />
+          <param name="buildFailureOnMessage.messagePattern" value="com._1c.g5.wiring.ServiceUnavailableException" />
+          <param name="buildFailureOnMessage.outputText" value="com._1c.g5.wiring.ServiceUnavailableException" />
+          <param name="buildFailureOnMessage.reverse" value="false" />
+          <param name="buildFailureOnMessage.stopBuildOnFailure" value="true" />
         </parameters>
       </extension>
     </build-extensions>

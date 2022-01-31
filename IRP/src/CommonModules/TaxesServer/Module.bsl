@@ -10,6 +10,7 @@ Function GetTaxRatesForItemKey(Parameters, AddInfo = Undefined) Export
 	|	&ItemKeys AS tmp
 	|;
 	|
+	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
 	|	ISNULL(Taxes_ItemKey.Company, ItemKeys.Company) AS Company,
@@ -33,6 +34,7 @@ Function GetTaxRatesForItemKey(Parameters, AddInfo = Undefined) Export
 	|		AND Taxes_ItemKey.ItemKey = ItemKeys.ItemKey
 	|;
 	|
+	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
 	|	Taxes_ItemKeys.Company AS Company,
@@ -45,6 +47,7 @@ Function GetTaxRatesForItemKey(Parameters, AddInfo = Undefined) Export
 	|WHERE
 	|	Taxes_ItemKeys.TaxRate IS NULL
 	|;
+	|
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
@@ -70,6 +73,7 @@ Function GetTaxRatesForItemKey(Parameters, AddInfo = Undefined) Export
 	|		AND Taxes_Items.Item = Items.Item
 	|;
 	|
+	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
 	|	Taxes_Items.Company AS Company,
@@ -83,6 +87,7 @@ Function GetTaxRatesForItemKey(Parameters, AddInfo = Undefined) Export
 	|WHERE
 	|	Taxes_Items.TaxRate IS NULL
 	|;
+	|
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
@@ -109,6 +114,7 @@ Function GetTaxRatesForItemKey(Parameters, AddInfo = Undefined) Export
 	|		AND Taxes_ItemTypes.ItemType = ItemTypes.ItemType
 	|;
 	|
+	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
 	|	Taxes_ItemTypes.Company AS Company,
@@ -122,6 +128,7 @@ Function GetTaxRatesForItemKey(Parameters, AddInfo = Undefined) Export
 	|WHERE
 	|	Taxes_ItemTypes.TaxRate IS NULL
 	|;
+	|
 	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
@@ -147,8 +154,10 @@ Function GetTaxRatesForItemKey(Parameters, AddInfo = Undefined) Export
 	|		AND Taxes_Companies.Tax = Companies.Tax
 	|;
 	|
+	|
 	|////////////////////////////////////////////////////////////////////////////////
 	|SELECT
+	|	1 AS Priority,
 	|	Taxes_ItemKeys.Company AS Company,
 	|	Taxes_ItemKeys.Tax AS Tax,
 	|	Taxes_ItemKeys.ItemKey AS ItemKey,
@@ -156,6 +165,7 @@ Function GetTaxRatesForItemKey(Parameters, AddInfo = Undefined) Export
 	|	VALUE(Catalog.ItemTypes.EmptyRef) AS ItemType,
 	|	Taxes_ItemKeys.TaxRate AS TaxRate,
 	|	Taxes_ItemKeys.TaxRate.Rate AS Rate
+	|INTO TaxRatesByPriority
 	|FROM
 	|	Taxes_ItemKeys AS Taxes_ItemKeys
 	|WHERE
@@ -164,6 +174,7 @@ Function GetTaxRatesForItemKey(Parameters, AddInfo = Undefined) Export
 	|UNION ALL
 	|
 	|SELECT
+	|	2,
 	|	Taxes_Items.Company,
 	|	Taxes_Items.Tax,
 	|	Taxes_Items.ItemKey,
@@ -179,6 +190,7 @@ Function GetTaxRatesForItemKey(Parameters, AddInfo = Undefined) Export
 	|UNION ALL
 	|
 	|SELECT
+	|	3,
 	|	Taxes_ItemTypes.Company,
 	|	Taxes_ItemTypes.Tax,
 	|	Taxes_ItemTypes.ItemKey,
@@ -194,6 +206,7 @@ Function GetTaxRatesForItemKey(Parameters, AddInfo = Undefined) Export
 	|UNION ALL
 	|
 	|SELECT
+	|	4,
 	|	Taxes_Companies.Company,
 	|	Taxes_Companies.Tax,
 	|	Taxes_Companies.ItemKey,
@@ -204,7 +217,23 @@ Function GetTaxRatesForItemKey(Parameters, AddInfo = Undefined) Export
 	|FROM
 	|	Taxes_Companies AS Taxes_Companies
 	|WHERE
-	|	NOT Taxes_Companies.TaxRate IS NULL";
+	|	NOT Taxes_Companies.TaxRate IS NULL
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	TaxRatesByPriority.Priority AS Priority,
+	|	TaxRatesByPriority.Company,
+	|	TaxRatesByPriority.Tax,
+	|	TaxRatesByPriority.ItemKey,
+	|	TaxRatesByPriority.Item,
+	|	TaxRatesByPriority.ItemType,
+	|	TaxRatesByPriority.TaxRate,
+	|	TaxRatesByPriority.Rate
+	|FROM
+	|	TaxRatesByPriority AS TaxRatesByPriority
+	|ORDER BY
+	|	Priority";
 
 	ItemKeys = New ValueTable();
 	ItemKeys.Columns.Add("Company" , New TypeDescription("CatalogRef.Companies"));

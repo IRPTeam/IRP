@@ -294,22 +294,6 @@ Scenario: Open object form "InventoryTransferOrder"
 
 
 
-	
-	
-Scenario: Open list form "InvoiceMatch" 
-	And I close all client application windows
-	Given I open "InvoiceMatch" document default form
-	If the warning is displayed then
-		Then I raise "Failed to open document form InvoiceMatch" exception
-	And I close current window
-
-Scenario: Open object form "InvoiceMatch"
-	And I close all client application windows
-	Given I open "InvoiceMatch" document main form
-	If the warning is displayed then
-		Then I raise "Failed to open document form InvoiceMatch" exception
-	And I close current window
-
 
 
 

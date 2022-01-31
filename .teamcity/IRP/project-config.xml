@@ -6,7 +6,6 @@
     <param name="env.GitToken" value="credentialsJSON:dea25710-6762-4b8c-ad3c-c8ea384b82c1" spec="password display='hidden' readOnly='true'" />
     <param name="env.LoginTo1C" value="CI" />
     <param name="env.PassTo1C" value="8HRUYXL2UC" />
-    <param name="env.PathTo1CBin" value="C:\Program Files\1cv8\8.3.19.1351\bin" />
     <param name="env.PathTo1CPlatform" value="&quot;%env.PathTo1CBin%\1cv8.exe&quot;" />
     <param name="env.SkipRunVA" value="False" spec="select data_2='False' data_1='True' display='normal'" />
   </parameters>

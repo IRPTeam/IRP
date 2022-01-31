@@ -56,8 +56,10 @@ Procedure PreparePostingDataTables(Parameters, CurrencyTable, AddInfo = Undefine
 				TableOfAgreementMovementTypes.Columns.Add("Key");
 				For Each ItemOfPostingInfo In ArrayOfPostingInfo Do
 					If TypeOf(ItemOfPostingInfo.Key) = RegisterType Then
-						ItemOfPostingInfo.Value.Recordset.Columns.Add("Key",
-							New TypeDescription(Metadata.DefinedTypes.typeRowID.Type));
+						If ItemOfPostingInfo.Value.Recordset.Columns.Find("Key") = Undefined Then
+							ItemOfPostingInfo.Value.Recordset.Columns.Add("Key",
+								New TypeDescription(Metadata.DefinedTypes.typeRowID.Type));
+						EndIf;
 						For Each RowRecordSet In ItemOfPostingInfo.Value.Recordset Do
 							NewRow = TableOfAgreementMovementTypes.Add();
 							NewRow.MovementType = RowRecordSet.Agreement.CurrencyMovementType;
@@ -164,11 +166,6 @@ Function IsUseCurrencyJoin(Parameters, ItemOfPostingInfo)
 	If (TypeOf(Parameters.Object) = Type("DocumentObject.CashReceipt") Or TypeOf(Parameters.Object) = Type(
 		"DocumentRef.CashReceipt")) And Parameters.Object.TransactionType
 		= Enums.IncomingPaymentTransactionType.CurrencyExchange Then
-		FilterByDocument = True;
-	EndIf;
-
-	If TypeOf(Parameters.Object) = Type("DocumentObject.InvoiceMatch") Or TypeOf(Parameters.Object) = Type(
-		"DocumentRef.InvoiceMatch") Then
 		FilterByDocument = True;
 	EndIf;
 

@@ -153,15 +153,15 @@ Scenario: _043002 check Debit note movements by the Register "R2021 Customer tra
 		And I select "R2021 Customer transactions" exact value from "Register" drop-down list
 		And I click "Generate report" button
 		Then "ResultTable" spreadsheet document is equal
-			| 'Debit note 2 dated 05.04.2021 09:31:09'  | ''            | ''                    | ''          | ''             | ''             | ''                             | ''         | ''                  | ''          | ''                         | ''                                       | ''                     | ''                           |
-			| 'Document registrations records'          | ''            | ''                    | ''          | ''             | ''             | ''                             | ''         | ''                  | ''          | ''                         | ''                                       | ''                     | ''                           |
-			| 'Register  "R2021 Customer transactions"' | ''            | ''                    | ''          | ''             | ''             | ''                             | ''         | ''                  | ''          | ''                         | ''                                       | ''                     | ''                           |
-			| ''                                        | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''                             | ''         | ''                  | ''          | ''                         | ''                                       | 'Attributes'           | ''                           |
-			| ''                                        | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'       | 'Multi currency movement type' | 'Currency' | 'Legal name'        | 'Partner'   | 'Agreement'                | 'Basis'                                  | 'Deferred calculation' | 'Customers advances closing' |
-			| ''                                        | 'Receipt'     | '05.04.2021 09:31:09' | '17,12'     | 'Main Company' | 'Front office' | 'Reporting currency'           | 'USD'      | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Debit note 2 dated 05.04.2021 09:31:09' | 'No'                   | ''                           |
-			| ''                                        | 'Receipt'     | '05.04.2021 09:31:09' | '100'       | 'Main Company' | 'Front office' | 'Local currency'               | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Debit note 2 dated 05.04.2021 09:31:09' | 'No'                   | ''                           |
-			| ''                                        | 'Receipt'     | '05.04.2021 09:31:09' | '100'       | 'Main Company' | 'Front office' | 'TRY'                          | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Debit note 2 dated 05.04.2021 09:31:09' | 'No'                   | ''                           |
-			| ''                                        | 'Receipt'     | '05.04.2021 09:31:09' | '100'       | 'Main Company' | 'Front office' | 'en description is empty'      | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Debit note 2 dated 05.04.2021 09:31:09' | 'No'                   | ''                           |
+			| 'Debit note 2 dated 05.04.2021 09:31:09'  | ''            | ''                    | ''          | ''             | ''             | ''                             | ''         | ''                  | ''          | ''                         | ''                                       | ''                           | ''                     | ''                           |
+			| 'Document registrations records'          | ''            | ''                    | ''          | ''             | ''             | ''                             | ''         | ''                  | ''          | ''                         | ''                                       | ''                           | ''                     | ''                           |
+			| 'Register  "R2021 Customer transactions"' | ''            | ''                    | ''          | ''             | ''             | ''                             | ''         | ''                  | ''          | ''                         | ''                                       | ''                           | ''                     | ''                           |
+			| ''                                        | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''                             | ''         | ''                  | ''          | ''                         | ''                                       | ''                           | 'Attributes'           | ''                           |
+			| ''                                        | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'       | 'Multi currency movement type' | 'Currency' | 'Legal name'        | 'Partner'   | 'Agreement'                | 'Basis'                                  | 'Order'                      | 'Deferred calculation' | 'Customers advances closing' |
+			| ''                                        | 'Receipt'     | '05.04.2021 09:31:09' | '17,12'     | 'Main Company' | 'Front office' | 'Reporting currency'           | 'USD'      | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Debit note 2 dated 05.04.2021 09:31:09' | ''                           | 'No'                   | ''                           |
+			| ''                                        | 'Receipt'     | '05.04.2021 09:31:09' | '100'       | 'Main Company' | 'Front office' | 'Local currency'               | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Debit note 2 dated 05.04.2021 09:31:09' | ''                           | 'No'                   | ''                           |
+			| ''                                        | 'Receipt'     | '05.04.2021 09:31:09' | '100'       | 'Main Company' | 'Front office' | 'TRY'                          | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Debit note 2 dated 05.04.2021 09:31:09' | ''                           | 'No'                   | ''                           |
+			| ''                                        | 'Receipt'     | '05.04.2021 09:31:09' | '100'       | 'Main Company' | 'Front office' | 'en description is empty'      | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Basic Partner terms, TRY' | 'Debit note 2 dated 05.04.2021 09:31:09' | ''                           | 'No'                   | ''                           |
 	And I close all client application windows
 	
 
@@ -195,10 +195,10 @@ Scenario: _043004 check Debit note movements by the Register "R1020 Advances to 
 			| 'Document registrations records'         | ''            | ''                    | ''          | ''             | ''             | ''                             | ''         | ''                  | ''          | ''                                       | ''                     | ''                         |
 			| 'Register  "R1020 Advances to vendors"'  | ''            | ''                    | ''          | ''             | ''             | ''                             | ''         | ''                  | ''          | ''                                       | ''                     | ''                         |
 			| ''                                       | 'Record type' | 'Period'              | 'Resources' | 'Dimensions'   | ''             | ''                             | ''         | ''                  | ''          | ''                                       | 'Attributes'           | ''                         |
-			| ''                                       | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'       | 'Multi currency movement type' | 'Currency' | 'Legal name'        | 'Partner'   | 'Basis'                                  | 'Deferred calculation' | 'Vendors advances closing' |
-			| ''                                       | 'Receipt'     | '05.04.2021 09:30:36' | '393,76'    | 'Main Company' | 'Front office' | 'Reporting currency'           | 'USD'      | 'Company Ferron BP' | 'Ferron BP' | 'Debit note 1 dated 05.04.2021 09:30:36' | 'No'                   | ''                         |
-			| ''                                       | 'Receipt'     | '05.04.2021 09:30:36' | '2 300'     | 'Main Company' | 'Front office' | 'Local currency'               | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Debit note 1 dated 05.04.2021 09:30:36' | 'No'                   | ''                         |
-			| ''                                       | 'Receipt'     | '05.04.2021 09:30:36' | '2 300'     | 'Main Company' | 'Front office' | 'en description is empty'      | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | 'Debit note 1 dated 05.04.2021 09:30:36' | 'No'                   | ''                         |		
+			| ''                                       | ''            | ''                    | 'Amount'    | 'Company'      | 'Branch'       | 'Multi currency movement type' | 'Currency' | 'Legal name'        | 'Partner'   | 'Order'                                  | 'Deferred calculation' | 'Vendors advances closing' |
+			| ''                                       | 'Receipt'     | '05.04.2021 09:30:36' | '393,76'    | 'Main Company' | 'Front office' | 'Reporting currency'           | 'USD'      | 'Company Ferron BP' | 'Ferron BP' | ''                                       | 'No'                   | ''                         |
+			| ''                                       | 'Receipt'     | '05.04.2021 09:30:36' | '2 300'     | 'Main Company' | 'Front office' | 'Local currency'               | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | ''                                       | 'No'                   | ''                         |
+			| ''                                       | 'Receipt'     | '05.04.2021 09:30:36' | '2 300'     | 'Main Company' | 'Front office' | 'en description is empty'      | 'TRY'      | 'Company Ferron BP' | 'Ferron BP' | ''                                       | 'No'                   | ''                         |		
 	And I close all client application windows
 
 Scenario: _043005 check absence Debit note movements by the Register "R2021 Customer transactions" (with vendor)
@@ -214,6 +214,53 @@ Scenario: _043005 check absence Debit note movements by the Register "R2021 Cust
 		Then "ResultTable" spreadsheet document does not contain values
 			| 'Register  "R2021 Customer transactions'   |           
 	And I close all client application windows
+
+Scenario: _043006 check Debit note movements by the Register "R5021 Revenues" (with vendor) 
+	* Select Debit note
+		Given I open hyperlink "e1cib/list/Document.DebitNote"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '1' |
+	* Check movements by the Register  "R5021 Revenues" 
+		And I click "Registrations report" button
+		And I select "R5021 Revenues" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit note 1 dated 05.04.2021 09:30:36' | ''                    | ''          | ''                  | ''             | ''             | ''                        | ''             | ''         | ''         | ''                    | ''                             |
+			| 'Document registrations records'         | ''                    | ''          | ''                  | ''             | ''             | ''                        | ''             | ''         | ''         | ''                    | ''                             |
+			| 'Register  "R5021 Revenues"'             | ''                    | ''          | ''                  | ''             | ''             | ''                        | ''             | ''         | ''         | ''                    | ''                             |
+			| ''                                       | 'Period'              | 'Resources' | ''                  | 'Dimensions'   | ''             | ''                        | ''             | ''         | ''         | ''                    | ''                             |
+			| ''                                       | ''                    | 'Amount'    | 'Amount with taxes' | 'Company'      | 'Branch'       | 'Profit loss center'      | 'Revenue type' | 'Item key' | 'Currency' | 'Additional analytic' | 'Multi currency movement type' |
+			| ''                                       | '05.04.2021 09:30:36' | '393,76'    | '393,76'            | 'Main Company' | 'Front office' | 'Distribution department' | 'Software'     | ''         | 'USD'      | ''                    | 'Reporting currency'           |
+			| ''                                       | '05.04.2021 09:30:36' | '2 300'     | '2 300'             | 'Main Company' | 'Front office' | 'Distribution department' | 'Software'     | ''         | 'TRY'      | ''                    | 'Local currency'               |
+			| ''                                       | '05.04.2021 09:30:36' | '2 300'     | '2 300'             | 'Main Company' | 'Front office' | 'Distribution department' | 'Software'     | ''         | 'TRY'      | ''                    | 'TRY'                          |
+			| ''                                       | '05.04.2021 09:30:36' | '2 300'     | '2 300'             | 'Main Company' | 'Front office' | 'Distribution department' | 'Software'     | ''         | 'TRY'      | ''                    | 'en description is empty'      |
+	And I close all client application windows
+
+Scenario: _043007 check Debit note movements by the Register "R5021 Revenues" (with customer)
+	And I close all client application windows
+	* Select Debit note
+		Given I open hyperlink "e1cib/list/Document.DebitNote"
+		And I go to line in "List" table
+			| 'Number'  |
+			| '2' |
+	* Check movements by the Register  "R5021 Revenues" 
+		And I click "Registrations report" button
+		And I select "R5021 Revenues" exact value from "Register" drop-down list
+		And I click "Generate report" button
+		Then "ResultTable" spreadsheet document is equal
+			| 'Debit note 2 dated 05.04.2021 09:31:09' | ''                    | ''          | ''                  | ''             | ''             | ''                        | ''             | ''         | ''         | ''                    | ''                             |
+			| 'Document registrations records'         | ''                    | ''          | ''                  | ''             | ''             | ''                        | ''             | ''         | ''         | ''                    | ''                             |
+			| 'Register  "R5021 Revenues"'             | ''                    | ''          | ''                  | ''             | ''             | ''                        | ''             | ''         | ''         | ''                    | ''                             |
+			| ''                                       | 'Period'              | 'Resources' | ''                  | 'Dimensions'   | ''             | ''                        | ''             | ''         | ''         | ''                    | ''                             |
+			| ''                                       | ''                    | 'Amount'    | 'Amount with taxes' | 'Company'      | 'Branch'       | 'Profit loss center'      | 'Revenue type' | 'Item key' | 'Currency' | 'Additional analytic' | 'Multi currency movement type' |
+			| ''                                       | '05.04.2021 09:31:09' | '17,12'     | '17,12'             | 'Main Company' | 'Front office' | 'Distribution department' | 'Software'     | ''         | 'USD'      | ''                    | 'Reporting currency'           |
+			| ''                                       | '05.04.2021 09:31:09' | '100'       | '100'               | 'Main Company' | 'Front office' | 'Distribution department' | 'Software'     | ''         | 'TRY'      | ''                    | 'Local currency'               |
+			| ''                                       | '05.04.2021 09:31:09' | '100'       | '100'               | 'Main Company' | 'Front office' | 'Distribution department' | 'Software'     | ''         | 'TRY'      | ''                    | 'TRY'                          |
+			| ''                                       | '05.04.2021 09:31:09' | '100'       | '100'               | 'Main Company' | 'Front office' | 'Distribution department' | 'Software'     | ''         | 'TRY'      | ''                    | 'en description is empty'      |
+	And I close all client application windows
+
+
 
 Scenario: _043030 Debit note clear posting/mark for deletion
 	And I close all client application windows

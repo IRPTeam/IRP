@@ -26,7 +26,6 @@ Procedure BeforeDelete(Cancel)
 EndProcedure
 
 Procedure FillCheckProcessing(Cancel, CheckedAttributes)
-	DocumentsServer.CheckPaymentList(ThisObject, Cancel, CheckedAttributes);
 	DocumentsServer.FillCheckBankCashDocuments(ThisObject, CheckedAttributes);
 EndProcedure
 
@@ -40,27 +39,23 @@ EndProcedure
 
 Procedure Filling(FillingData, FillingText, StandardProcessing)
 	If TypeOf(FillingData) = Type("Structure") And FillingData.Property("BasedOn") Then
-		If FillingData.BasedOn = "CashTransferOrder" Or FillingData.BasedOn = "OutgoingPaymentOrder"
-			Or FillingData.BasedOn = "PurchaseInvoice" Then
+		If FillingData.BasedOn = "CashTransferOrder" 
+			Or FillingData.BasedOn = "OutgoingPaymentOrder"
+			Or FillingData.BasedOn = "PurchaseInvoice" 
+			Or FillingData.BasedOn = "PurchaseOrder" Then
 			Filling_BasedOn(FillingData);
 		EndIf;
 	EndIf;
-	For Each Row In ThisObject.PaymentList Do
-		If Not ValueIsFilled(Row.Key) Then
-			Row.Key = New UUID();
-		EndIf;
-	EndDo;
 EndProcedure
 
 Procedure Filling_BasedOn(FillingData)
-	ThisObject.Company         = FillingData.Company;
-	ThisObject.Account         = FillingData.Account;
-	ThisObject.TransitAccount  = FillingData.TransitAccount;
-	ThisObject.Currency        = FillingData.Currency;
-	ThisObject.TransactionType = FillingData.TransactionType;
+	FillPropertyValues(ThisObject, FillingData);
 	For Each Row In FillingData.PaymentList Do
 		NewRow = ThisObject.PaymentList.Add();
 		FillPropertyValues(NewRow, Row);
+			If Not ValueIsFilled(NewRow.Key) Then
+			NewRow.Key = New UUID();
+		EndIf;
 	EndDo;
 	ThisObject.DocumentAmount = ThisObject.PaymentList.Total("TotalAmount");
 EndProcedure

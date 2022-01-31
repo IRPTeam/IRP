@@ -1,4 +1,12 @@
+
 #Region FormEvents
+
+&AtClient
+Procedure AfterWrite(WriteParameters)
+	If ThisIsNew Then
+		Notify("NewPartnerCreated", Object.Ref);
+	EndIf;
+EndProcedure
 
 &AtServer
 Procedure AfterWriteAtServer(CurrentObject, WriteParameters)
@@ -28,6 +36,11 @@ Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	SalesOrdersList.Parameters.SetParameterValue("Partner", Object.Ref);
 	IDInfoServer.OnCreateAtServer(ThisObject, "GroupContactInformation");
 	ExtensionServer.AddAttributesFromExtensions(ThisObject, Object.Ref, Items.GroupMainPages);
+EndProcedure
+
+&AtClient
+Procedure OnOpen(Cancel)
+	ThisIsNew = Parameters.Key.IsEmpty();
 EndProcedure
 
 #EndRegion

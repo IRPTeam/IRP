@@ -70,12 +70,6 @@ Scenario: _4000202 hardware
 	And I click the button named "FormCreate"
 	And I input "Test input device" text in "Description" field
 	And I select "Input device" exact value from "Types of Equipment" drop-down list
-	And I click Select button of "Workstation" field
-	And I go to line in "List" table
-		| 'Description'  |
-		| 'Workstation 01' |
-	And I select current line in "List" table
-	And I click the button named "FormWrite"
 	And in the table "ConnectParameters" I click "Load settings" button
 	And "ConnectParameters" table contains lines
 		| 'Name'                | 'Value' |
@@ -108,12 +102,42 @@ Scenario: _4000202 hardware
 		| 'Description' |
 		| '1Native'     |
 	And I select current line in "List" table
-	And I click "Save" button
-	And I set checkbox "Enabled"		
+	And I click "Save" button		
 	And I click the button named "FormWriteAndClose"
 
 	
+Scenario: _4000203 add hardware	to the workstation
+	Given I open hyperlink "e1cib/list/Catalog.Workstations"
+	* Select workstation
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Workstation 01'     |
+		And I select current line in "List" table	
+	* Check add hardware
+		And in the table "HardwareList" I click the button named "HardwareListAdd"
+		And I click choice button of "Hardware" attribute in "HardwareList" table
+		And I go to line in "List" table
+			| 'Description' |
+			| 'Test input device'     |
+		And I select current line in "List" table
+		And I activate "Enable" field in "HardwareList" table
+		And I finish line editing in "HardwareList" table
+		And I set "Enable" checkbox in "HardwareList" table
+		And I finish line editing in "HardwareList" table
+		And I click "Save" button
+		And "HardwareList" table became equal
+			| 'Enable' | 'Hardware'          |
+			| 'Yes'    | 'Test input device' |
+		And I close all client application windows
 		
+		
+		
+		
+				
+
+		
+				
+
 
 	
 		

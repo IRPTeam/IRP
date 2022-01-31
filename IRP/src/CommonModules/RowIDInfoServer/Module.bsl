@@ -1264,10 +1264,35 @@ Function FindOrCreateRowIDRef(RowID)
 	
 	RowRefObject.RowID       = RowID;
 	RowRefObject.Description = RowID;
-	RowRefObject.Write();
+	WriteRowIDCatalog(RowRefObject);
 	
 	Return RowRefObject.Ref;
 EndFunction
+
+Procedure WriteRowIDCatalog(Obj)
+	If Not ValueIsFilled(Obj.Ref) Then
+		// first write
+		Obj.Write();
+		Return;
+	EndIf;
+	
+	IsEqual = True;
+	For Each Attr In Metadata.Catalogs.RowIDs.Attributes Do
+		CurrentValue = Obj.Ref[Attr.Name];
+		NewValue = Obj[Attr.Name];
+		If Not ValueIsFilled(CurrentValue) And Not ValueIsFilled(NewValue) Then
+			Continue;
+		EndIf;
+		If CurrentValue <> NewValue Then
+			IsEqual = False;
+			Break;
+		EndIf;
+	EndDo;
+	
+	If Not IsEqual Then
+		Obj.Write();
+	EndIf;
+EndProcedure
 
 Function UpdateRowIDCatalog(Source, Row, RowItemList, RowRefObject, Cancel, RecordersByRowRef)
 	FieldsForCheckRowRef = Undefined;
@@ -1364,7 +1389,7 @@ Function UpdateRowIDCatalog(Source, Row, RowItemList, RowRefObject, Cancel, Reco
 	EndIf;
 	
 	If Not Cancel Then
-		RowRefObject.Write();
+		WriteRowIDCatalog(RowRefObject);
 	EndIf;
 	Return ArrayOfDifferenceFields;
 EndFunction

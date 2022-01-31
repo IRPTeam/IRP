@@ -15,6 +15,15 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
 #EndRegion
 
+	BatchKeysInfoMetadata = Parameters.Object.RegisterRecords.T6020S_BatchKeysInfo.Metadata();
+	If Parameters.Property("MultiCurrencyExcludePostingDataTables") Then
+		Parameters.MultiCurrencyExcludePostingDataTables.Add(BatchKeysInfoMetadata);
+	Else
+		ArrayOfMultiCurrencyExcludePostingDataTables = New Array();
+		ArrayOfMultiCurrencyExcludePostingDataTables.Add(BatchKeysInfoMetadata);
+		Parameters.Insert("MultiCurrencyExcludePostingDataTables", ArrayOfMultiCurrencyExcludePostingDataTables);
+	EndIf;
+	
 	Return New Structure();
 EndFunction
 
@@ -147,26 +156,34 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R5011B_CustomersAging());
 	QueryArray.Add(R5012B_VendorsAging());
 	QueryArray.Add(R5010B_ReconciliationStatement());
+	QueryArray.Add(T2014S_AdvancesInfo());
+	QueryArray.Add(T2015S_TransactionsInfo());
+	QueryArray.Add(T6010S_BatchesInfo());
+	QueryArray.Add(T6020S_BatchKeysInfo());
 	Return QueryArray;
 EndFunction
 
 Function ItemList()
-	Return "SELECT
-		   |	OpeningEntryInventory.Ref,
-		   |	OpeningEntryInventory.Key,
-		   |	OpeningEntryInventory.ItemKey,
-		   |	OpeningEntryInventory.Store,
-		   |	OpeningEntryInventory.Quantity,
-		   |	NOT OpeningEntryInventory.SerialLotNumber = VALUE(Catalog.SerialLotNumbers.EmptyRef) AS isSerialLotNumberSet,
-		   |	OpeningEntryInventory.SerialLotNumber,
-		   |	OpeningEntryInventory.Ref.Date AS Period,
-		   |	OpeningEntryInventory.Ref.Company AS Company,
-		   |	OpeningEntryInventory.Ref.Branch AS Branch
-		   |INTO ItemList
-		   |FROM
-		   |	Document.OpeningEntry.Inventory AS OpeningEntryInventory
-		   |WHERE
-		   |	OpeningEntryInventory.Ref = &Ref";
+	Return 
+	"SELECT
+	|	OpeningEntryInventory.Ref,
+	|	OpeningEntryInventory.Key,
+	|	OpeningEntryInventory.ItemKey,
+	|	OpeningEntryInventory.Store,
+	|	OpeningEntryInventory.Quantity,
+	|	NOT OpeningEntryInventory.SerialLotNumber = VALUE(Catalog.SerialLotNumbers.EmptyRef) AS isSerialLotNumberSet,
+	|	OpeningEntryInventory.SerialLotNumber,
+	|	OpeningEntryInventory.Ref.Date AS Period,
+	|	OpeningEntryInventory.Ref.Company AS Company,
+	|	OpeningEntryInventory.Ref.Branch AS Branch,
+	|	OpeningEntryInventory.Amount AS Amount,
+	|	OpeningEntryInventory.Ref.Company.LandedCostCurrencyMovementType AS CurrencyMovementType,
+	|	OpeningEntryInventory.Ref.Company.LandedCostCurrencyMovementType.Currency AS Currency
+	|INTO ItemList
+	|FROM
+	|	Document.OpeningEntry.Inventory AS OpeningEntryInventory
+	|WHERE
+	|	OpeningEntryInventory.Ref = &Ref";
 EndFunction
 
 Function AccauntBalance()
@@ -194,7 +211,6 @@ Function AdvancesToVendors()
 		   |	OpeningEntryAdvanceToSuppliers.LegalName,
 		   |	OpeningEntryAdvanceToSuppliers.LegalNameContract,
 		   |	OpeningEntryAdvanceToSuppliers.Amount AS Amount,
-		   |	OpeningEntryAdvanceToSuppliers.Ref AS Basis,
 		   |	OpeningEntryAdvanceToSuppliers.Ref.Date AS Period,
 		   |	OpeningEntryAdvanceToSuppliers.Key
 		   |INTO AdvancesToVendors
@@ -264,7 +280,6 @@ Function AdvancesFromCustomers()
 		   |	OpeningEntryAdvanceFromCustomers.LegalName,
 		   |	OpeningEntryAdvanceFromCustomers.LegalNameContract,
 		   |	OpeningEntryAdvanceFromCustomers.Amount AS Amount,
-		   |	OpeningEntryAdvanceFromCustomers.Ref AS Basis,
 		   |	OpeningEntryAdvanceFromCustomers.Ref.Date AS Period,
 		   |	OpeningEntryAdvanceFromCustomers.Key
 		   |INTO AdvancesFromCustomers
@@ -485,6 +500,7 @@ Function R3010B_CashOnHand()
 		   |WHERE 
 		   |	TRUE";
 EndFunction
+
 Function R5010B_ReconciliationStatement()
 	Return "SELECT
 		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
@@ -540,6 +556,128 @@ Function R5010B_ReconciliationStatement()
 		   |	AdvancesFromCustomers.Amount
 		   |FROM
 		   |	AdvancesFromCustomers AS AdvancesFromCustomers";
+EndFunction
+
+Function T2014S_AdvancesInfo()
+	Return 
+	"SELECT
+	|	AdvancesToVendors.Period AS Date,
+	|	AdvancesToVendors.Key,
+	|	AdvancesToVendors.Company,
+	|	AdvancesToVendors.Branch,
+	|	AdvancesToVendors.Currency,
+	|	AdvancesToVendors.Partner,
+	|	AdvancesToVendors.LegalName,
+	|	TRUE AS IsVendorAdvance,
+	|	FALSE AS IsCustomerAdvance,
+	|	AdvancesToVendors.Amount
+	|INTO T2014S_AdvancesInfo
+	|FROM
+	|	AdvancesToVendors AS AdvancesToVendors
+	|WHERE
+	|	TRUE
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	AdvancesFromCustomers.Period,
+	|	AdvancesFromCustomers.Key,
+	|	AdvancesFromCustomers.Company,
+	|	AdvancesFromCustomers.Branch,
+	|	AdvancesFromCustomers.Currency,
+	|	AdvancesFromCustomers.Partner,
+	|	AdvancesFromCustomers.LegalName,
+	|	FALSE,
+	|	TRUE,
+	|	AdvancesFromCustomers.Amount
+	|FROM
+	|	AdvancesFromCustomers AS AdvancesFromCustomers
+	|WHERE
+	|	TRUE";
+EndFunction
+
+Function T2015S_TransactionsInfo()
+	Return 
+	"SELECT
+	|	VendorsTransactions.Period AS Date,
+	|	VendorsTransactions.Key,
+	|	VendorsTransactions.Company,
+	|	VendorsTransactions.Branch,
+	|	VendorsTransactions.Currency,
+	|	VendorsTransactions.Partner,
+	|	VendorsTransactions.LegalName,
+	|	VendorsTransactions.Agreement,
+	|	TRUE AS IsVendorTransaction,
+	|	FALSE AS IsCustomerTransaction,
+	|	VendorsTransactions.Basis AS TransactionBasis,
+	|	VendorsTransactions.Amount AS Amount,
+	|	TRUE AS IsDue
+	|INTO T2015S_TransactionsInfo
+	|FROM
+	|	VendorsTransactions AS VendorsTransactions
+	|WHERE
+	|	TRUE
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	CustomersTransactions.Period,
+	|	CustomersTransactions.Key,
+	|	CustomersTransactions.Company,
+	|	CustomersTransactions.Branch,
+	|	CustomersTransactions.Currency,
+	|	CustomersTransactions.Partner,
+	|	CustomersTransactions.LegalName,
+	|	CustomersTransactions.Agreement,
+	|	FALSE,
+	|	TRUE,
+	|	CustomersTransactions.Basis,
+	|	CustomersTransactions.Amount AS Amount,
+	|	TRUE AS IsDue
+	|FROM
+	|	CustomersTransactions AS CustomersTransactions
+	|WHERE
+	|	TRUE";
+EndFunction
+
+Function T6010S_BatchesInfo()
+	Return
+		"SELECT
+		|	OpeningEntry.Ref AS Document,
+		|	OpeningEntry.Company AS Company,
+		|	OpeningEntry.Ref.Date AS Period
+		|INTO T6010S_BatchesInfo
+		|FROM
+		|	Document.OpeningEntry AS OpeningEntry
+		|WHERE
+		|	OpeningEntry.Ref = &Ref";
+EndFunction
+
+Function T6020S_BatchKeysInfo()
+	Return
+	"SELECT
+	|	ItemList.Period,
+	|	ItemList.Company,
+	|	ItemList.Store,
+	|	ItemList.ItemKey,
+	|	VALUE(Enum.BatchDirection.Receipt) AS Direction,
+	|	ItemList.CurrencyMovementType,
+	|	ItemList.Currency,
+	|	SUM(ItemList.Quantity) AS Quantity,
+	|	SUM(ItemList.Amount) AS Amount
+	|INTO T6020S_BatchKeysInfo
+	|FROM
+	|	ItemList AS ItemList
+	|WHERE
+	|	TRUE
+	|GROUP BY
+	|	ItemList.Company,
+	|	ItemList.Currency,
+	|	ItemList.CurrencyMovementType,
+	|	ItemList.ItemKey,
+	|	ItemList.Period,
+	|	ItemList.Store,
+	|	VALUE(Enum.BatchDirection.Receipt)";
 EndFunction
 
 #EndRegion

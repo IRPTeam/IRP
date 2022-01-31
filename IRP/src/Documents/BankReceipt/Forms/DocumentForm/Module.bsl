@@ -251,6 +251,15 @@ Procedure PaymentListBeforeAddRow(Item, Cancel, Clone, Parent, IsFolder, Paramet
 	DocBankReceiptClient.PaymentListBeforeAddRow(Object, ThisObject, Item, Cancel, Clone, Parent, IsFolder, Parameter);
 EndProcedure
 
+#Region Order
+
+&AtClient
+Procedure PaymentListOrderStartChoice(Item, ChoiceData, StandardProcessing)
+	DocBankReceiptClient.PaymentListOrderStartChoice(Object, ThisObject, Item, ChoiceData, StandardProcessing);
+EndProcedure
+
+#EndRegion
+
 #Region BasisDocument
 
 &AtClient
@@ -511,3 +520,4 @@ EndProcedure
 Procedure ShowHiddenTables(Command)
 	DocumentsClient.ShowHiddenTables(Object, ThisObject);
 EndProcedure
+

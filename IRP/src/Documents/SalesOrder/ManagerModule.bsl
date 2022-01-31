@@ -157,6 +157,7 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R2022B_CustomersPaymentPlanning());
 	QueryArray.Add(R4037B_PlannedReceiptReservationRequests());
 	QueryArray.Add(T3010S_RowIDInfo());
+	QueryArray.Add(R3024B_SalesOrdersToBePaid());
 	Return QueryArray;
 EndFunction
 
@@ -375,6 +376,37 @@ Function T3010S_RowIDInfo()
 		|		AND ItemList.Ref = &Ref
 		|		AND RowIDInfo.Key = ItemList.Key
 		|		AND RowIDInfo.Ref = ItemList.Ref";
+EndFunction
+
+Function R3024B_SalesOrdersToBePaid()
+	Return 
+	"SELECT
+	|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+	|	PaymentTerms.Ref.Date AS Period,
+	|	PaymentTerms.Ref.Company,
+	|	PaymentTerms.Ref.Branch,
+	|	PaymentTerms.Ref.Currency,
+	|	PaymentTerms.Ref.Partner,
+	|	PaymentTerms.Ref.LegalName,
+	|	PaymentTerms.Ref AS Order,
+	|	SUM(PaymentTerms.Amount) AS Amount
+	|INTO R3024B_SalesOrdersToBePaid
+	|FROM
+	|	Document.SalesOrder.PaymentTerms AS PaymentTerms
+	|WHERE
+	|	PaymentTerms.Ref = &Ref
+	|	AND (PaymentTerms.CalculationType = VALUE(Enum.CalculationTypes.Prepaid)
+	|	AND PaymentTerms.CanBePaid)
+	|	AND &StatusInfoPosting
+	|GROUP BY
+	|	PaymentTerms.Ref,
+	|	PaymentTerms.Ref.Branch,
+	|	PaymentTerms.Ref.Company,
+	|	PaymentTerms.Ref.Currency,
+	|	PaymentTerms.Ref.Date,
+	|	PaymentTerms.Ref.LegalName,
+	|	PaymentTerms.Ref.Partner,
+	|	VALUE(AccumulationRecordType.Receipt)";
 EndFunction
 
 #EndRegion

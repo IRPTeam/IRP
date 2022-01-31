@@ -28,16 +28,16 @@ Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefin
 			LockLinkedRows();
 		EndIf;
 	EndIf;
-	
+
+	If EventName = "NewBarcode" And IsInputAvailable() Then
+		SearchByBarcode(Undefined, Parameter);
+	EndIf;
+
 	If Not Source = ThisObject Then
 		Return;
 	EndIf;
 
 	DocSalesOrderClient.NotificationProcessing(Object, ThisObject, EventName, Parameter, Source);
-
-	If EventName = "NewBarcode" And IsInputAvailable() Then
-		SearchByBarcode(Undefined, Parameter);
-	EndIf;
 	
 	If Upper(EventName) = Upper("CalculationStringsComplete") Then
 		UpdateTotalAmounts();
@@ -91,6 +91,7 @@ Procedure SetVisibilityAvailability(Object, Form)
 	EndIf;
 	Form.Items.GroupHead.Visible = Not Form.ClosingOrder.IsEmpty();
 	Form.Items.EditCurrencies.Enabled = Not Form.ReadOnly;
+	DocumentsClientServer.SetReadOnlyPaymentTermsCanBePaid(Object, Form);
 EndProcedure
 
 &AtServer
@@ -346,6 +347,7 @@ EndProcedure
 &AtClient
 Procedure ItemListCancelOnChange(Item)
 	UpdateTotalAmounts();
+	DocumentsClient.CalculatePaymentTermDateAndAmount(Object, ThisObject);
 EndProcedure
 
 #EndRegion

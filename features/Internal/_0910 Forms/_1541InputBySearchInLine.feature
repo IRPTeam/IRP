@@ -296,6 +296,7 @@ Scenario: _0154058 check item and item key input by search in line in a document
 		| 'Item'     |
 		| 'Jacket J22001'    |
 		And I close all client application windows
+		And Delay 10
 
 Scenario: _0154059 check item and item key input by search in line in a document InventoryTransferOrder (in english)
 	And I close all client application windows
@@ -1425,21 +1426,7 @@ Scenario: _0154098 check company and account (in english) input by search in lin
 		Then the form attribute named "Account" became equal to "Bank account, TRY"
 	And I close all client application windows
 
-Scenario: _0154099 check partner and legal name (in english) input by search in line in Invoice Match
-	And I close all client application windows
-	* Open document form
-		Given I open hyperlink "e1cib/list/Document.InvoiceMatch"
-		And I click the button named "FormCreate"
-	* Check the filter when typing by Partner/Legal name
-		And in the table "Transactions" I click the button named "TransactionsAdd"
-		And I select "MIO" by string from the drop-down list named "TransactionsPartner" in "Transactions" table
-		And I select "Company Kalipso" by string from the drop-down list named "TransactionsLegalName" in "Transactions" table
-	* Check that there is only one legal name available for selection
-		And I click choice button of the attribute named "TransactionsLegalName" in "Transactions" table
-		And "List" table became equal
-		| 'Description' |
-		| 'Company Kalipso'         |
-		And I close all client application windows
+
 
 Scenario: _01540105 check item and item key input by search in line in a document Retail return receipt (in english)
 	And I close all client application windows
@@ -1624,6 +1611,22 @@ Scenario: _01540112 check item and item key input by search in line in a documen
 		And drop-down list "Item" is equal to:
 		| (J22001) Jacket J22001 |
 		And I select "(J22001) Jacket J22001" exact value from "Item" drop-down list in "ItemList" table
+		And "ItemList" table contains lines
+		| 'Item'     |
+		| 'Jacket J22001'    |
+		And I close all client application windows
+
+Scenario: _01540113 check item input by search in line by code in a document Sales order
+	And I close all client application windows
+	* Open a creation form Sales order
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I click the button named "FormCreate"
+	* Check entered values
+		And in the table "ItemList" I click the button named "ItemListAdd"
+		And I input "1 111 111., " text in "Item" field of "ItemList" table		
+		And drop-down list "Item" is equal to:
+		| [1 111 111] Jacket J22001 |
+		And I select "[1 111 111] Jacket J22001" exact value from "Item" drop-down list in "ItemList" table
 		And "ItemList" table contains lines
 		| 'Item'     |
 		| 'Jacket J22001'    |

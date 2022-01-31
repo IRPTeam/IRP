@@ -17,6 +17,117 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	PostingServer.ExecuteQuery(Ref, QueryArray, Parameters);
 #EndRegion
 
+	Query = New Query();
+	Query.Text =
+	"SELECT
+	|	RetailReturnReceipt.Ref AS Document,
+	|	RetailReturnReceipt.Company AS Company,
+	|	RetailReturnReceipt.Ref.Date AS Period
+	|FROM
+	|	Document.RetailReturnReceipt AS RetailReturnReceipt
+	|WHERE
+	|	RetailReturnReceipt.Ref = &Ref
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	RetailReturnReceiptItemList.ItemKey AS ItemKey,
+	|	RetailReturnReceiptItemList.Store AS Store,
+	|	RetailReturnReceiptItemList.Ref.Company AS Company,
+	|	SUM(RetailReturnReceiptItemList.QuantityInBaseUnit) AS Quantity,
+	|	RetailReturnReceiptItemList.Ref.Date AS Period,
+	|	VALUE(Enum.BatchDirection.Receipt) AS Direction,
+	|	RetailReturnReceiptItemList.Key AS Key,
+	|	RetailReturnReceiptItemList.Ref.Currency AS Currency,
+	|	SUM(CASE
+	|		WHEN RetailReturnReceiptItemList.RetailSalesReceipt = VALUE(Document.RetailSalesReceipt.EmptyRef)
+	|			THEN RetailReturnReceiptItemList.LandedCost
+	|		ELSE RetailReturnReceiptItemList.TotalAmount
+	|	END) AS Amount,
+	|	CASE
+	|		WHEN RetailReturnReceiptItemList.RetailSalesReceipt <> VALUE(Document.RetailSalesReceipt.EmptyRef)
+	|			THEN TRUE
+	|		ELSE FALSE
+	|	END AS SalesInvoiceIsFilled,
+	|	RetailReturnReceiptItemList.RetailSalesReceipt AS SalesInvoice
+	|FROM
+	|	Document.RetailReturnReceipt.ItemList AS RetailReturnReceiptItemList
+	|WHERE
+	|	RetailReturnReceiptItemList.Ref = &Ref
+	|	AND RetailReturnReceiptItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Product)
+	|GROUP BY
+	|	RetailReturnReceiptItemList.ItemKey,
+	|	RetailReturnReceiptItemList.Store,
+	|	RetailReturnReceiptItemList.Ref.Company,
+	|	RetailReturnReceiptItemList.Ref.Date,
+	|	RetailReturnReceiptItemList.Key,
+	|	RetailReturnReceiptItemList.Ref.Currency,
+	|	CASE
+	|		WHEN RetailReturnReceiptItemList.RetailSalesReceipt <> VALUE(Document.RetailSalesReceipt.EmptyRef)
+	|			THEN TRUE
+	|		ELSE FALSE
+	|	END,
+	|	RetailReturnReceiptItemList.RetailSalesReceipt,
+	|	VALUE(Enum.BatchDirection.Receipt)";
+	
+	Query.SetParameter("Ref", Ref);
+	QueryResults = Query.ExecuteBatch();
+	
+	BatchesInfo   = QueryResults[0].Unload();
+	BatchKeysInfo = QueryResults[1].Unload();
+	If Not BatchKeysInfo.FindRows(New Structure("SalesInvoiceIsFilled", False)).Count() Then
+		BatchesInfo.Clear();
+	EndIf;
+	
+	CurrencyTable = Ref.Currencies.UnloadColumns();
+	CurrencyMovementType = Ref.Company.LandedCostCurrencyMovementType;
+	For Each Row In BatchKeysInfo Do
+		CurrenciesServer.AddRowToCurrencyTable(Ref.Date, CurrencyTable, Row.Key, Row.Currency, CurrencyMovementType);
+	EndDo;
+	
+	PostingDataTables = New Map();
+	PostingDataTables.Insert(Parameters.Object.RegisterRecords.T6020S_BatchKeysInfo,
+		New Structure("RecordSet, WriteInTransaction", BatchKeysInfo, Parameters.IsReposting));
+	Parameters.Insert("PostingDataTables", PostingDataTables);
+	CurrenciesServer.PreparePostingDataTables(Parameters, CurrencyTable, AddInfo);
+	
+	BatchKeysInfoMetadata = Parameters.Object.RegisterRecords.T6020S_BatchKeysInfo.Metadata();
+	If Parameters.Property("MultiCurrencyExcludePostingDataTables") Then
+		Parameters.MultiCurrencyExcludePostingDataTables.Add(BatchKeysInfoMetadata);
+	Else
+		ArrayOfMultiCurrencyExcludePostingDataTables = New Array();
+		ArrayOfMultiCurrencyExcludePostingDataTables.Add(BatchKeysInfoMetadata);
+		Parameters.Insert("MultiCurrencyExcludePostingDataTables", ArrayOfMultiCurrencyExcludePostingDataTables);
+	EndIf;
+	
+	BatchKeysInfo_DataTable = Parameters.PostingDataTables.Get(Parameters.Object.RegisterRecords.T6020S_BatchKeysInfo).RecordSet;
+	BatchKeysInfo_DataTableGrouped = BatchKeysInfo_DataTable.CopyColumns();
+	If BatchKeysInfo_DataTable.Count()Then
+		BatchKeysInfo_DataTableGrouped = BatchKeysInfo_DataTable.Copy(New Structure("CurrencyMovementType", CurrencyMovementType));
+		BatchKeysInfo_DataTableGrouped.GroupBy("Period, Direction, Company, Store, ItemKey, Currency, CurrencyMovementType, SalesInvoice", 
+		"Quantity, Amount");	
+	EndIf;
+	
+	Query = New Query();
+	Query.TempTablesManager = Parameters.TempTablesManager;
+	Query.Text = 
+	"SELECT
+	|	*
+	|INTO BatchesInfo
+	|FROM
+	|	&T1 AS T1
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	*
+	|INTO BatchKeysInfo
+	|FROM
+	|	&T2 AS T2";
+	Query.SetParameter("T1", BatchesInfo);
+	Query.SetParameter("T2", BatchKeysInfo_DataTableGrouped);
+	Query.Execute();
+
 	Return Tables;
 EndFunction
 
@@ -117,7 +228,7 @@ Function GetQueryTextsSecondaryTables()
 	QueryArray = New Array();
 	QueryArray.Add(ItemList());
 	QueryArray.Add(Payments());
-	QueryArray.Add(RetailSales());
+	QueryArray.Add(RetailReturn());
 	QueryArray.Add(OffersInfo());
 	QueryArray.Add(SerialLotNumbers());
 	QueryArray.Add(PostingServer.Exists_R4011B_FreeStocks());
@@ -141,6 +252,8 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R5010B_ReconciliationStatement());
 	QueryArray.Add(R4014B_SerialLotNumber());
 	QueryArray.Add(T3010S_RowIDInfo());
+	QueryArray.Add(T6010S_BatchesInfo());
+	QueryArray.Add(T6020S_BatchKeysInfo());
 	Return QueryArray;
 EndFunction
 
@@ -253,96 +366,98 @@ Function OffersInfo()
 		   |		ON RetailReturnReceiptItemList.Key = TableRowIDInfo.Key";
 EndFunction
 
-Function RetailSales()
+Function RetailReturn()
 	Return "SELECT
-		   |	RetailReturnReceiptItemList.Ref.Branch AS Branch,
-		   |	RetailReturnReceiptItemList.Ref.Company AS Company,
-		   |	RetailReturnReceiptItemList.ItemKey AS ItemKey,
-		   |	SUM(RetailReturnReceiptItemList.QuantityInBaseUnit) AS Quantity,
-		   |	SUM(ISNULL(RetailReturnReceiptSerialLotNumbers.Quantity, 0)) AS QuantityBySerialLtNumbers,
-		   |	RetailReturnReceiptItemList.Ref.Date AS Period,
-		   |	CASE
-		   |		WHEN RetailReturnReceiptItemList.RetailSalesReceipt = VALUE(Document.RetailSalesReceipt.EmptyRef)
-		   |			THEN RetailReturnReceiptItemList.Ref
-		   |		ELSE RetailReturnReceiptItemList.RetailSalesReceipt
-		   |	END AS RetailSalesReceipt,
-		   |	SUM(RetailReturnReceiptItemList.TotalAmount) AS Amount,
-		   |	SUM(RetailReturnReceiptItemList.NetAmount) AS NetAmount,
-		   |	SUM(RetailReturnReceiptItemList.OffersAmount) AS OffersAmount,
-		   |	RetailReturnReceiptItemList.Key AS RowKey,
-		   |	RetailReturnReceiptSerialLotNumbers.SerialLotNumber AS SerialLotNumber,
-		   |	RetailReturnReceiptItemList.Store
-		   |INTO tmpRetailSales
-		   |FROM
-		   |	Document.RetailReturnReceipt.ItemList AS RetailReturnReceiptItemList
-		   |		LEFT JOIN Document.RetailReturnReceipt.SerialLotNumbers AS RetailReturnReceiptSerialLotNumbers
-		   |		ON RetailReturnReceiptItemList.Key = RetailReturnReceiptSerialLotNumbers.Key
-		   |		AND RetailReturnReceiptItemList.Ref = RetailReturnReceiptSerialLotNumbers.Ref
-		   |		AND RetailReturnReceiptItemList.Ref = &Ref
-		   |		AND RetailReturnReceiptSerialLotNumbers.Ref = &Ref
-		   |WHERE
-		   |	RetailReturnReceiptItemList.Ref = &Ref
-		   |GROUP BY
-		   |	RetailReturnReceiptItemList.Ref.Branch,
-		   |	RetailReturnReceiptItemList.Ref.Company,
-		   |	RetailReturnReceiptItemList.ItemKey,
-		   |	RetailReturnReceiptItemList.Ref.Date,
-		   |	CASE
-		   |		WHEN RetailReturnReceiptItemList.RetailSalesReceipt = VALUE(Document.RetailSalesReceipt.EmptyRef)
-		   |			THEN RetailReturnReceiptItemList.Ref
-		   |		ELSE RetailReturnReceiptItemList.RetailSalesReceipt
-		   |	END,
-		   |	RetailReturnReceiptItemList.Key,
-		   |	RetailReturnReceiptSerialLotNumbers.SerialLotNumber,
-		   |	RetailReturnReceiptItemList.Store
-		   |;
-		   |
-		   |
-		   |////////////////////////////////////////////////////////////////////////////////
-		   |SELECT
-		   |	tmpRetailSales.Company AS Company,
-		   |	tmpRetailSales.Branch AS Branch,
-		   |	tmpRetailSales.ItemKey AS ItemKey,
-		   |	CASE
-		   |		WHEN tmpRetailSales.QuantityBySerialLtNumbers = 0
-		   |			THEN -tmpRetailSales.Quantity
-		   |		ELSE -tmpRetailSales.QuantityBySerialLtNumbers
-		   |	END AS Quantity,
-		   |	tmpRetailSales.Period AS Period,
-		   |	tmpRetailSales.RetailSalesReceipt AS RetailSalesReceipt,
-		   |	tmpRetailSales.RowKey AS RowKey,
-		   |	tmpRetailSales.SerialLotNumber AS SerialLotNumber,
-		   |	CASE
-		   |		WHEN tmpRetailSales.QuantityBySerialLtNumbers <> 0
-		   |			THEN CASE
-		   |				WHEN tmpRetailSales.Quantity = 0
-		   |					THEN 0
-		   |				ELSE -tmpRetailSales.Amount / tmpRetailSales.Quantity * tmpRetailSales.QuantityBySerialLtNumbers
-		   |			END
-		   |		ELSE tmpRetailSales.Amount
-		   |	END AS Amount,
-		   |	CASE
-		   |		WHEN tmpRetailSales.QuantityBySerialLtNumbers <> 0
-		   |			THEN CASE
-		   |				WHEN tmpRetailSales.Quantity = 0
-		   |					THEN 0
-		   |				ELSE -tmpRetailSales.NetAmount / tmpRetailSales.Quantity * tmpRetailSales.QuantityBySerialLtNumbers
-		   |			END
-		   |		ELSE tmpRetailSales.NetAmount
-		   |	END AS NetAmount,
-		   |	CASE
-		   |		WHEN tmpRetailSales.QuantityBySerialLtNumbers <> 0
-		   |			THEN CASE
-		   |				WHEN tmpRetailSales.Quantity = 0
-		   |					THEN 0
-		   |				ELSE -tmpRetailSales.OffersAmount / tmpRetailSales.Quantity * tmpRetailSales.QuantityBySerialLtNumbers
-		   |			END
-		   |		ELSE tmpRetailSales.OffersAmount
-		   |	END AS OffersAmount,
-		   |	tmpRetailSales.Store
-		   |INTO RetailSales
-		   |FROM
-		   |	tmpRetailSales AS tmpRetailSales";
+	|	RetailReturnReceiptItemList.Ref.Branch AS Branch,
+	|	RetailReturnReceiptItemList.Ref.Company AS Company,
+	|	RetailReturnReceiptItemList.ItemKey AS ItemKey,
+	|	SUM(RetailReturnReceiptItemList.QuantityInBaseUnit) AS Quantity,
+	|	SUM(ISNULL(RetailReturnReceiptSerialLotNumbers.Quantity, 0)) AS QuantityBySerialLtNumbers,
+	|	RetailReturnReceiptItemList.Ref.Date AS Period,
+	|	CASE
+	|		WHEN RetailReturnReceiptItemList.RetailSalesReceipt = VALUE(Document.RetailSalesReceipt.EmptyRef)
+	|			THEN RetailReturnReceiptItemList.Ref
+	|		ELSE RetailReturnReceiptItemList.RetailSalesReceipt
+	|	END AS RetailSalesReceipt,
+	|	SUM(RetailReturnReceiptItemList.TotalAmount) AS Amount,
+	|	SUM(RetailReturnReceiptItemList.NetAmount) AS NetAmount,
+	|	SUM(RetailReturnReceiptItemList.OffersAmount) AS OffersAmount,
+	|	RetailReturnReceiptItemList.Key AS RowKey,
+	|	RetailReturnReceiptSerialLotNumbers.SerialLotNumber AS SerialLotNumber,
+	|	RetailReturnReceiptItemList.Store,
+	|	RetailReturnReceiptItemList.SalesPerson
+	|INTO tmpRetailReturn
+	|FROM
+	|	Document.RetailReturnReceipt.ItemList AS RetailReturnReceiptItemList
+	|		LEFT JOIN Document.RetailReturnReceipt.SerialLotNumbers AS RetailReturnReceiptSerialLotNumbers
+	|		ON RetailReturnReceiptItemList.Key = RetailReturnReceiptSerialLotNumbers.Key
+	|		AND RetailReturnReceiptItemList.Ref = RetailReturnReceiptSerialLotNumbers.Ref
+	|		AND RetailReturnReceiptItemList.Ref = &Ref
+	|		AND RetailReturnReceiptSerialLotNumbers.Ref = &Ref
+	|WHERE
+	|	RetailReturnReceiptItemList.Ref = &Ref
+	|GROUP BY
+	|	RetailReturnReceiptItemList.Ref.Branch,
+	|	RetailReturnReceiptItemList.Ref.Company,
+	|	RetailReturnReceiptItemList.ItemKey,
+	|	RetailReturnReceiptItemList.Ref.Date,
+	|	CASE
+	|		WHEN RetailReturnReceiptItemList.RetailSalesReceipt = VALUE(Document.RetailSalesReceipt.EmptyRef)
+	|			THEN RetailReturnReceiptItemList.Ref
+	|		ELSE RetailReturnReceiptItemList.RetailSalesReceipt
+	|	END,
+	|	RetailReturnReceiptItemList.Key,
+	|	RetailReturnReceiptSerialLotNumbers.SerialLotNumber,
+	|	RetailReturnReceiptItemList.Store,
+	|	RetailReturnReceiptItemList.SalesPerson
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	tmpRetailReturn.Company AS Company,
+	|	tmpRetailReturn.Branch AS Branch,
+	|	tmpRetailReturn.ItemKey AS ItemKey,
+	|	CASE
+	|		WHEN tmpRetailReturn.QuantityBySerialLtNumbers = 0
+	|			THEN -tmpRetailReturn.Quantity
+	|		ELSE -tmpRetailReturn.QuantityBySerialLtNumbers
+	|	END AS Quantity,
+	|	tmpRetailReturn.Period AS Period,
+	|	tmpRetailReturn.RetailSalesReceipt AS RetailSalesReceipt,
+	|	tmpRetailReturn.RowKey AS RowKey,
+	|	tmpRetailReturn.SerialLotNumber AS SerialLotNumber,
+	|	CASE
+	|		WHEN tmpRetailReturn.QuantityBySerialLtNumbers <> 0
+	|			THEN CASE
+	|				WHEN tmpRetailReturn.Quantity = 0
+	|					THEN 0
+	|				ELSE -tmpRetailReturn.Amount / tmpRetailReturn.Quantity * tmpRetailReturn.QuantityBySerialLtNumbers
+	|			END
+	|		ELSE tmpRetailReturn.Amount
+	|	END AS Amount,
+	|	CASE
+	|		WHEN tmpRetailReturn.QuantityBySerialLtNumbers <> 0
+	|			THEN CASE
+	|				WHEN tmpRetailReturn.Quantity = 0
+	|					THEN 0
+	|				ELSE -tmpRetailReturn.NetAmount / tmpRetailReturn.Quantity * tmpRetailReturn.QuantityBySerialLtNumbers
+	|			END
+	|		ELSE tmpRetailReturn.NetAmount
+	|	END AS NetAmount,
+	|	CASE
+	|		WHEN tmpRetailReturn.QuantityBySerialLtNumbers <> 0
+	|			THEN CASE
+	|				WHEN tmpRetailReturn.Quantity = 0
+	|					THEN 0
+	|				ELSE -tmpRetailReturn.OffersAmount / tmpRetailReturn.Quantity * tmpRetailReturn.QuantityBySerialLtNumbers
+	|			END
+	|		ELSE tmpRetailReturn.OffersAmount
+	|	END AS OffersAmount,
+	|	tmpRetailReturn.Store,
+	|	tmpRetailReturn.SalesPerson
+	|INTO RetailReturn
+	|FROM
+	|	tmpRetailReturn AS tmpRetailReturn";
 EndFunction
 
 Function SerialLotNumbers()
@@ -450,7 +565,7 @@ Function R2050T_RetailSales()
 		   |	*
 		   |INTO R2050T_RetailSales
 		   |FROM
-		   |	RetailSales AS RetailSales
+		   |	RetailReturn AS RetailReturn
 		   |WHERE
 		   |	TRUE";
 EndFunction
@@ -602,6 +717,28 @@ Function T3010S_RowIDInfo()
 		|		AND ItemList.Ref = &Ref
 		|		AND RowIDInfo.Key = ItemList.Key
 		|		AND RowIDInfo.Ref = ItemList.Ref";
+EndFunction
+
+Function T6010S_BatchesInfo()
+	Return 
+	"SELECT
+	|	*
+	|INTO T6010S_BatchesInfo
+	|FROM
+	|	BatchesInfo
+	|WHERE
+	|	TRUE";
+EndFunction
+
+Function T6020S_BatchKeysInfo()
+	Return
+	"SELECT
+	|	*
+	|INTO T6020S_BatchKeysInfo
+	|FROM
+	|	BatchKeysInfo
+	|WHERE
+	|	TRUE";
 EndFunction
 
 #EndRegion

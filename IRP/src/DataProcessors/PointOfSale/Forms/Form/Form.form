@@ -110,6 +110,62 @@
             <name>GroupItemListButtons</name>
             <id>838</id>
             <items xsi:type="form:FormField">
+              <name>SalesPersonByDefault</name>
+              <id>1018</id>
+              <title>
+                <key>en</key>
+                <value>Sales person</value>
+              </title>
+              <titleFont xsi:type="core:FontRef">
+                <font>Style.LargeTextFont</font>
+              </titleFont>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <dataPath xsi:type="form:DataPath">
+                <segments>SalesPersonByDefault</segments>
+              </dataPath>
+              <extendedTooltip>
+                <name>SalesPersonByDefaultExtendedTooltip</name>
+                <id>1020</id>
+                <visible>true</visible>
+                <enabled>true</enabled>
+                <userVisible>
+                  <common>true</common>
+                </userVisible>
+                <type>Label</type>
+                <autoMaxWidth>true</autoMaxWidth>
+                <autoMaxHeight>true</autoMaxHeight>
+                <extInfo xsi:type="form:LabelDecorationExtInfo">
+                  <horizontalAlign>Left</horizontalAlign>
+                </extInfo>
+              </extendedTooltip>
+              <contextMenu>
+                <name>SalesPersonByDefaultContextMenu</name>
+                <id>1019</id>
+                <visible>true</visible>
+                <enabled>true</enabled>
+                <userVisible>
+                  <common>true</common>
+                </userVisible>
+                <autoFill>true</autoFill>
+              </contextMenu>
+              <type>LabelField</type>
+              <editMode>Enter</editMode>
+              <showInHeader>true</showInHeader>
+              <headerHorizontalAlign>Left</headerHorizontalAlign>
+              <showInFooter>true</showInFooter>
+              <extInfo xsi:type="form:LabelFieldExtInfo">
+                <autoMaxWidth>true</autoMaxWidth>
+                <autoMaxHeight>true</autoMaxHeight>
+                <font xsi:type="core:FontRef">
+                  <font>Style.ExtraLargeTextFont</font>
+                </font>
+              </extInfo>
+            </items>
+            <items xsi:type="form:FormField">
               <name>RetailCustomer</name>
               <id>923</id>
               <visible>true</visible>
@@ -195,7 +251,6 @@
               <autoMaxHeight>true</autoMaxHeight>
               <groupVerticalAlign>Center</groupVerticalAlign>
               <placementArea>UserCmds</placementArea>
-              <toolTipRepresentation>Auto</toolTipRepresentation>
               <representationInContextMenu>Auto</representationInContextMenu>
               <shapeRepresentation>None</shapeRepresentation>
             </items>
@@ -833,6 +888,62 @@
                     </extInfo>
                   </items>
                   <items xsi:type="form:FormField">
+                    <name>ItemListSalesPerson</name>
+                    <id>1015</id>
+                    <visible>true</visible>
+                    <enabled>true</enabled>
+                    <userVisible>
+                      <common>true</common>
+                    </userVisible>
+                    <dataPath xsi:type="form:DataPath">
+                      <segments>Object.ItemList.SalesPerson</segments>
+                    </dataPath>
+                    <extendedTooltip>
+                      <name>ItemListSalesPersonExtendedTooltip</name>
+                      <id>1017</id>
+                      <visible>true</visible>
+                      <enabled>true</enabled>
+                      <userVisible>
+                        <common>true</common>
+                      </userVisible>
+                      <type>Label</type>
+                      <autoMaxWidth>true</autoMaxWidth>
+                      <autoMaxHeight>true</autoMaxHeight>
+                      <extInfo xsi:type="form:LabelDecorationExtInfo">
+                        <horizontalAlign>Left</horizontalAlign>
+                      </extInfo>
+                    </extendedTooltip>
+                    <contextMenu>
+                      <name>ItemListSalesPersonContextMenu</name>
+                      <id>1016</id>
+                      <visible>true</visible>
+                      <enabled>true</enabled>
+                      <userVisible>
+                        <common>true</common>
+                      </userVisible>
+                      <autoFill>true</autoFill>
+                    </contextMenu>
+                    <type>InputField</type>
+                    <editMode>Enter</editMode>
+                    <showInHeader>true</showInHeader>
+                    <headerPicture xsi:type="core:PictureRef">
+                      <picture>CommonPicture.PersonCard</picture>
+                    </headerPicture>
+                    <headerHorizontalAlign>Left</headerHorizontalAlign>
+                    <showInFooter>true</showInFooter>
+                    <extInfo xsi:type="form:InputFieldExtInfo">
+                      <autoMaxWidth>true</autoMaxWidth>
+                      <autoMaxHeight>true</autoMaxHeight>
+                      <wrap>true</wrap>
+                      <chooseType>true</chooseType>
+                      <typeDomainEnabled>true</typeDomainEnabled>
+                      <textEdit>true</textEdit>
+                      <font xsi:type="core:FontRef">
+                        <font>Style.LargeTextFont</font>
+                      </font>
+                    </extInfo>
+                  </items>
+                  <items xsi:type="form:FormField">
                     <name>ItemListKey</name>
                     <id>800</id>
                     <enabled>true</enabled>
@@ -1365,7 +1476,6 @@
                       <autoMaxWidth>true</autoMaxWidth>
                       <autoMaxHeight>true</autoMaxHeight>
                       <placementArea>UserCmds</placementArea>
-                      <toolTipRepresentation>Auto</toolTipRepresentation>
                       <representationInContextMenu>Auto</representationInContextMenu>
                     </items>
                     <visible>true</visible>
@@ -3115,7 +3225,6 @@
           <font xsi:type="core:FontDef">
             <height>20.0</height>
           </font>
-          <toolTipRepresentation>Auto</toolTipRepresentation>
           <representationInContextMenu>Auto</representationInContextMenu>
         </items>
         <visible>true</visible>
@@ -3293,7 +3402,6 @@
             <height>4</height>
             <autoMaxHeight>true</autoMaxHeight>
             <placementArea>UserCmds</placementArea>
-            <toolTipRepresentation>Auto</toolTipRepresentation>
             <representationInContextMenu>Auto</representationInContextMenu>
             <locationInCommandBar>InCommandBar</locationInCommandBar>
           </items>
@@ -3331,7 +3439,6 @@
             <picture xsi:type="core:PictureRef">
               <picture>CommonPicture.Share</picture>
             </picture>
-            <toolTipRepresentation>Auto</toolTipRepresentation>
             <representationInContextMenu>Auto</representationInContextMenu>
           </items>
           <items xsi:type="form:Button">
@@ -3367,7 +3474,6 @@
             <backColor xsi:type="core:ColorRef">
               <color>Web.Ivory</color>
             </backColor>
-            <toolTipRepresentation>Auto</toolTipRepresentation>
             <representationInContextMenu>Auto</representationInContextMenu>
           </items>
           <items xsi:type="form:Button">
@@ -3403,7 +3509,6 @@
             <backColor xsi:type="core:ColorRef">
               <color>Web.Azure</color>
             </backColor>
-            <toolTipRepresentation>Auto</toolTipRepresentation>
             <representationInContextMenu>Auto</representationInContextMenu>
           </items>
           <items xsi:type="form:Button">
@@ -3437,7 +3542,39 @@
             <height>4</height>
             <autoMaxHeight>true</autoMaxHeight>
             <placementArea>UserCmds</placementArea>
-            <toolTipRepresentation>Auto</toolTipRepresentation>
+            <representationInContextMenu>Auto</representationInContextMenu>
+          </items>
+          <items xsi:type="form:Button">
+            <name>SetSalesPerson</name>
+            <id>1013</id>
+            <visible>true</visible>
+            <enabled>true</enabled>
+            <userVisible>
+              <common>true</common>
+            </userVisible>
+            <extendedTooltip>
+              <name>SetSalesPersonExtendedTooltip</name>
+              <id>1014</id>
+              <visible>true</visible>
+              <enabled>true</enabled>
+              <userVisible>
+                <common>true</common>
+              </userVisible>
+              <type>Label</type>
+              <autoMaxWidth>true</autoMaxWidth>
+              <autoMaxHeight>true</autoMaxHeight>
+              <extInfo xsi:type="form:LabelDecorationExtInfo">
+                <horizontalAlign>Left</horizontalAlign>
+              </extInfo>
+            </extendedTooltip>
+            <type>UsualButton</type>
+            <commandName>Form.Command.SetSalesPerson</commandName>
+            <representation>Auto</representation>
+            <width>10</width>
+            <autoMaxWidth>true</autoMaxWidth>
+            <height>4</height>
+            <autoMaxHeight>true</autoMaxHeight>
+            <placementArea>UserCmds</placementArea>
             <representationInContextMenu>Auto</representationInContextMenu>
           </items>
           <visible>true</visible>
@@ -3503,7 +3640,6 @@
             <height>4</height>
             <autoMaxHeight>true</autoMaxHeight>
             <placementArea>UserCmds</placementArea>
-            <toolTipRepresentation>Auto</toolTipRepresentation>
             <representationInContextMenu>Auto</representationInContextMenu>
           </items>
           <items xsi:type="form:Button">
@@ -3537,7 +3673,6 @@
             <height>4</height>
             <autoMaxHeight>true</autoMaxHeight>
             <placementArea>UserCmds</placementArea>
-            <toolTipRepresentation>Auto</toolTipRepresentation>
             <representationInContextMenu>Auto</representationInContextMenu>
           </items>
           <items xsi:type="form:Button">
@@ -3573,7 +3708,6 @@
             <backColor xsi:type="core:ColorRef">
               <color>Web.Azure</color>
             </backColor>
-            <toolTipRepresentation>Auto</toolTipRepresentation>
             <representationInContextMenu>Auto</representationInContextMenu>
           </items>
           <items xsi:type="form:Button">
@@ -3610,7 +3744,6 @@
             <backColor xsi:type="core:ColorRef">
               <color>Web.Cream</color>
             </backColor>
-            <toolTipRepresentation>Auto</toolTipRepresentation>
             <representationInContextMenu>Auto</representationInContextMenu>
           </items>
           <items xsi:type="form:Button">
@@ -3646,7 +3779,6 @@
             <backColor xsi:type="core:ColorRef">
               <color>Web.Beige</color>
             </backColor>
-            <toolTipRepresentation>Auto</toolTipRepresentation>
             <representationInContextMenu>Auto</representationInContextMenu>
           </items>
           <visible>true</visible>
@@ -3787,7 +3919,6 @@
           <height>12.0</height>
           <bold>true</bold>
         </font>
-        <toolTipRepresentation>Auto</toolTipRepresentation>
         <representationInContextMenu>Auto</representationInContextMenu>
       </items>
       <visible>true</visible>
@@ -4780,6 +4911,23 @@ WHERE
       <itemValueType/>
     </extInfo>
   </attributes>
+  <attributes>
+    <name>SalesPersonByDefault</name>
+    <title>
+      <key>en</key>
+      <value>Sales person by default</value>
+    </title>
+    <id>176</id>
+    <valueType>
+      <types>CatalogRef.Partners</types>
+    </valueType>
+    <view>
+      <common>true</common>
+    </view>
+    <edit>
+      <common>true</common>
+    </edit>
+  </attributes>
   <formCommands>
     <name>qPayment</name>
     <title>
@@ -5079,6 +5227,24 @@ document</value>
       </handler>
     </action>
     <representation>Text</representation>
+    <currentRowUse>Auto</currentRowUse>
+  </formCommands>
+  <formCommands>
+    <name>SetSalesPerson</name>
+    <title>
+      <key>en</key>
+      <value>Set sales
+person</value>
+    </title>
+    <id>22</id>
+    <use>
+      <common>true</common>
+    </use>
+    <action xsi:type="form:FormCommandHandlerContainer">
+      <handler>
+        <name>SetSalesPerson</name>
+      </handler>
+    </action>
     <currentRowUse>Auto</currentRowUse>
   </formCommands>
   <commandInterface>

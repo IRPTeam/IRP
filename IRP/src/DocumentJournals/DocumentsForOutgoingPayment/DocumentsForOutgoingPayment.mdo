@@ -15,6 +15,7 @@
   <registeredDocuments>Document.SalesReturn</registeredDocuments>
   <registeredDocuments>Document.CreditNote</registeredDocuments>
   <registeredDocuments>Document.OpeningEntry</registeredDocuments>
+  <registeredDocuments>Document.PurchaseOrder</registeredDocuments>
   <forms uuid="ee7ba466-99fc-4d4c-a348-04e885d0deab">
     <name>ChoiceForm</name>
     <synonym>

@@ -17,6 +17,126 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Tables.Insert("VendorsTransactions", PostingServer.GetQueryTableByName("VendorsTransactions", Parameters));
 #EndRegion
 
+	Query = New Query();
+	Query.Text =
+	"SELECT
+	|	RowIDInfo.Ref AS Ref,
+	|	RowIDInfo.Key AS Key,
+	|	MAX(RowIDInfo.RowID) AS RowID
+	|INTO tmpRowIDInfo
+	|FROM
+	|	Document.PurchaseInvoice.RowIDInfo AS RowIDInfo
+	|WHERE
+	|	RowIDInfo.Ref = &Ref
+	|GROUP BY
+	|	RowIDInfo.Ref,
+	|	RowIDInfo.Key
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	PurchaseInvoice.Ref AS Document,
+	|	PurchaseInvoice.Company,
+	|	PurchaseInvoice.Ref.Date AS Period
+	|FROM
+	|	Document.PurchaseInvoice AS PurchaseInvoice
+	|WHERE
+	|	PurchaseInvoice.Ref = &Ref
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	ItemList.ItemKey,
+	|	ItemList.Store,
+	|	ItemList.Ref.Company AS Company,
+	|	SUM(ItemList.QuantityInBaseUnit) AS Quantity,
+	|	ItemList.Ref.Date AS Period,
+	|	VALUE(Enum.BatchDirection.Receipt) AS Direction,
+	|	ItemList.Key AS Key,
+	|	SUM(ItemList.NetAmount) AS Amount,
+	|	ItemList.Ref.Currency AS Currency,
+	|	ItemList.IsAdditionalItemCost AS IsAdditionalItemCost,
+	|	RowIDInfo.RowID
+	|FROM
+	|	Document.PurchaseInvoice.ItemList AS ItemList
+	|		INNER JOIN tmpRowIDInfo AS RowIDInfo
+	|		ON ItemList.Key = RowIDInfo.Key
+	|		AND RowIDInfo.Ref = &Ref
+	|WHERE
+	|	ItemList.Ref = &Ref
+	|	AND ItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Product)
+	|	AND NOT ItemList.IsAdditionalItemCost
+	|GROUP BY
+	|	ItemList.ItemKey,
+	|	ItemList.Store,
+	|	ItemList.Ref.Company,
+	|	ItemList.Ref.Date,
+	|	VALUE(Enum.BatchDirection.Receipt),
+	|	ItemList.Key,
+	|	ItemList.Ref.Currency,
+	|	ItemList.IsAdditionalItemCost,
+	|	RowIDInfo.RowID";
+	Query.SetParameter("Ref", Ref);
+	
+	QueryResults = Query.ExecuteBatch();
+		
+	BatchesInfo   = QueryResults[1].Unload();
+	BatchKeysInfo = QueryResults[2].Unload();
+	
+	If Not BatchKeysInfo.Count() Then
+		BatchesInfo.Clear();
+	EndIf;
+	
+	CurrencyTable = Ref.Currencies.UnloadColumns();
+	CurrencyMovementType = Ref.Company.LandedCostCurrencyMovementType;
+	For Each Row In BatchKeysInfo Do
+		CurrenciesServer.AddRowToCurrencyTable(Ref.Date, CurrencyTable, Row.Key, Row.Currency, CurrencyMovementType);
+	EndDo;
+	
+	PostingDataTables = New Map();
+	PostingDataTables.Insert(Parameters.Object.RegisterRecords.T6020S_BatchKeysInfo,
+		New Structure("RecordSet, WriteInTransaction", BatchKeysInfo, Parameters.IsReposting));
+	Parameters.Insert("PostingDataTables", PostingDataTables);
+	CurrenciesServer.PreparePostingDataTables(Parameters, CurrencyTable, AddInfo);
+	
+	BatchKeysInfoMetadata = Parameters.Object.RegisterRecords.T6020S_BatchKeysInfo.Metadata();
+	If Parameters.Property("MultiCurrencyExcludePostingDataTables") Then
+		Parameters.MultiCurrencyExcludePostingDataTables.Add(BatchKeysInfoMetadata);
+	Else
+		ArrayOfMultiCurrencyExcludePostingDataTables = New Array();
+		ArrayOfMultiCurrencyExcludePostingDataTables.Add(BatchKeysInfoMetadata);
+		Parameters.Insert("MultiCurrencyExcludePostingDataTables", ArrayOfMultiCurrencyExcludePostingDataTables);
+	EndIf;
+	
+	BatchKeysInfo_DataTable =
+		Parameters.PostingDataTables.Get(Parameters.Object.RegisterRecords.T6020S_BatchKeysInfo).RecordSet;
+	BatchKeysInfo_DataTableGrouped = BatchKeysInfo_DataTable.CopyColumns();
+	If BatchKeysInfo_DataTable.Count()Then
+		BatchKeysInfo_DataTableGrouped = BatchKeysInfo_DataTable.Copy(New Structure("CurrencyMovementType", CurrencyMovementType));
+		BatchKeysInfo_DataTableGrouped.GroupBy("Period, RowID, Direction, Company, Store, ItemKey, Currency, CurrencyMovementType", 
+		"Quantity, Amount");	
+	EndIf;
+	
+	Query = New Query();
+	Query.TempTablesManager = Parameters.TempTablesManager;
+	Query.Text = 
+	"SELECT
+	|	*
+	|INTO BatchesInfo
+	|FROM
+	|	&T1 AS T1
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	*
+	|INTO BatchKeysInfo
+	|FROM
+	|	&T2 AS T2";
+	Query.SetParameter("T1", BatchesInfo);
+	Query.SetParameter("T2", BatchKeysInfo_DataTableGrouped);
+	Query.Execute();
+	
 	Return Tables;
 EndFunction
 
@@ -142,6 +262,7 @@ EndFunction
 Function GetQueryTextsSecondaryTables()
 	QueryArray = New Array();
 	QueryArray.Add(ItemList());
+	QueryArray.Add(ItemListLandedCost());
 	QueryArray.Add(SerialLotNumbers());
 	QueryArray.Add(IncomingStocksReal());
 	QueryArray.Add(PostingServer.Exists_R4011B_FreeStocks());
@@ -176,9 +297,12 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R4036B_IncomingStocksRequested());
 	QueryArray.Add(R5010B_ReconciliationStatement());
 	QueryArray.Add(R1022B_VendorsPaymentPlanning());
-	QueryArray.Add(T2011S_PartnerTransactions());
 	QueryArray.Add(R5022T_Expenses());
 	QueryArray.Add(T3010S_RowIDInfo());
+	QueryArray.Add(T2015S_TransactionsInfo());
+	QueryArray.Add(T6010S_BatchesInfo());
+	QueryArray.Add(T6020S_BatchKeysInfo());
+	QueryArray.Add(R6070T_OtherPeriodsExpenses());
 	Return QueryArray;
 EndFunction
 
@@ -274,10 +398,10 @@ Function ItemList()
 		   |	PurchaseInvoiceItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS IsService,
 		   |	PurchaseInvoiceItemList.DeliveryDate AS DeliveryDate,
 		   |	PurchaseInvoiceItemList.NetAmount AS NetAmount,
-		   |	PurchaseInvoiceItemList.Ref.IgnoreAdvances AS IgnoreAdvances,
 		   |	PurchaseInvoiceItemList.Key,
 		   |	PurchaseInvoiceItemList.Ref.Branch AS Branch,
-		   |	PurchaseInvoiceItemList.Ref.LegalNameContract AS LegalNameContract
+		   |	PurchaseInvoiceItemList.Ref.LegalNameContract AS LegalNameContract,
+		   |	PurchaseInvoiceItemList.IsAdditionalItemCost
 		   |INTO ItemList
 		   |FROM
 		   |	Document.PurchaseInvoice.ItemList AS PurchaseInvoiceItemList
@@ -322,6 +446,31 @@ Function ItemList()
 		   |WHERE
 		   |	PurchaseInvoiceItemList.Ref = &Ref
 		   |	AND PurchaseInvoiceTaxList.Ref = &Ref";
+EndFunction
+
+Function ItemListLandedCost()
+	Return
+	"SELECT
+	|	ItemList.Ref.Date AS Period,
+	|	ItemList.Ref AS Basis,
+	|	ItemList.Ref.Company AS Company,
+	|	ItemList.Ref.Branch AS Branch,
+	|	ItemList.Ref.Currency AS Currency,
+	|	ItemList.ProfitLossCenter,
+	|	ItemList.ExpenseType,
+	|	ItemList.ItemKey,
+	|	ItemList.AdditionalAnalytic,
+	|	ItemList.NetAmount,
+	|	ItemList.IsAdditionalItemCost,
+	|	ItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS IsService,
+	|	TableRowIDInfo.RowID AS RowID
+	|INTO ItemListLandedCost
+	|FROM
+	|	Document.PurchaseInvoice.ItemList AS ItemList
+	|		LEFT JOIN TableRowIDInfo AS TableRowIDInfo
+	|		ON ItemList.Key = TableRowIDInfo.Key
+	|WHERE
+	|	ItemList.Ref = &Ref";
 EndFunction
 
 Function SerialLotNumbers()
@@ -414,8 +563,8 @@ EndFunction
 Function R1020B_AdvancesToVendors()
 	Return "SELECT
 		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		   |	OffsetOfAdvances.AdvancesDocument AS Basis,
 		   |	OffsetOfAdvances.Recorder AS VendorsAdvancesClosing,
+		   |	OffsetOfAdvances.AdvancesOrder AS Order,
 		   |	*
 		   |INTO R1020B_AdvancesToVendors
 		   |FROM
@@ -435,6 +584,7 @@ Function R1021B_VendorsTransactions()
 		   |	ItemList.Partner,
 		   |	ItemList.Agreement,
 		   |	ItemList.BasisDocument AS Basis,
+		   |	ItemList.PurchaseOrder AS Order,
 		   |	SUM(ItemList.Amount) AS Amount,
 		   |	UNDEFINED AS VendorsAdvancesClosing
 		   |INTO R1021B_VendorsTransactions
@@ -443,6 +593,7 @@ Function R1021B_VendorsTransactions()
 		   |GROUP BY
 		   |	ItemList.Agreement,
 		   |	ItemList.BasisDocument,
+		   |	ItemList.PurchaseOrder,
 		   |	ItemList.Company,
 		   |	ItemList.Branch,
 		   |	ItemList.Currency,
@@ -463,6 +614,7 @@ Function R1021B_VendorsTransactions()
 		   |	OffsetOfAdvances.Partner,
 		   |	OffsetOfAdvances.Agreement,
 		   |	OffsetOfAdvances.TransactionDocument,
+		   |	OffsetOfAdvances.TransactionOrder,
 		   |	OffsetOfAdvances.Amount,
 		   |	OffsetOfAdvances.Recorder
 		   |FROM
@@ -518,36 +670,6 @@ Function R5012B_VendorsAging()
 		   |	InformationRegister.T2013S_OffsetOfAging AS OffsetOfAging
 		   |WHERE
 		   |	OffsetOfAging.Document = &Ref";
-EndFunction
-
-Function T2011S_PartnerTransactions()
-	Return "SELECT
-		   |	ItemList.Period,
-		   |	ItemList.Company,
-		   |	ItemList.Branch,
-		   |	ItemList.Currency,
-		   |	ItemList.LegalName,
-		   |	ItemList.Partner,
-		   |	ItemList.Agreement,
-		   |	ItemList.BasisDocument AS TransactionDocument,
-		   |	TRUE AS IsVendorTransaction,
-		   |	SUM(ItemList.Amount) AS Amount,
-		   |	ItemList.Key
-		   |INTO T2011S_PartnerTransactions
-		   |FROM
-		   |	ItemList AS ItemList
-		   |WHERE
-		   |	NOT ItemList.IgnoreAdvances
-		   |GROUP BY
-		   |	ItemList.Agreement,
-		   |	ItemList.BasisDocument,
-		   |	ItemList.Company,
-		   |	ItemList.Branch,
-		   |	ItemList.Currency,
-		   |	ItemList.Key,
-		   |	ItemList.LegalName,
-		   |	ItemList.Partner,
-		   |	ItemList.Period";
 EndFunction
 
 Function R1031B_ReceiptInvoicing()
@@ -852,7 +974,8 @@ Function R5022T_Expenses()
 		   |FROM
 		   |	ItemList AS ItemList
 		   |WHERE
-		   |	ItemList.IsService";
+		   |	ItemList.IsService
+		   |	AND NOT ItemList.IsAdditionalItemCost";
 EndFunction
 
 Function T3010S_RowIDInfo()
@@ -874,6 +997,71 @@ Function T3010S_RowIDInfo()
 		|		AND ItemList.Ref = &Ref
 		|		AND RowIDInfo.Key = ItemList.Key
 		|		AND RowIDInfo.Ref = ItemList.Ref";
+EndFunction
+
+Function T2015S_TransactionsInfo()
+	Return 
+	"SELECT
+	|	ItemList.Period AS Date,
+	|	ItemList.Company,
+	|	ItemList.Branch,
+	|	ItemList.Currency,
+	|	ItemList.Partner,
+	|	ItemList.LegalName,
+	|	ItemList.Agreement,
+	|	ItemList.PurchaseOrder AS Order,
+	|	TRUE AS IsVendorTransaction,
+	|	ItemList.BasisDocument AS TransactionBasis,
+	|	SUM(ItemList.Amount) AS Amount,
+	|	TRUE AS IsDue
+	|INTO T2015S_TransactionsInfo
+	|FROM
+	|	ItemList AS ItemList
+	|GROUP BY
+	|	ItemList.Period,
+	|	ItemList.Company,
+	|	ItemList.Branch,
+	|	ItemList.Currency,
+	|	ItemList.Partner,
+	|	ItemList.LegalName,
+	|	ItemList.Agreement,
+	|	ItemList.PurchaseOrder,
+	|	ItemList.BasisDocument";
+EndFunction
+
+Function R6070T_OtherPeriodsExpenses()
+	Return
+	"SELECT
+	|	*,
+	|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+	|	ItemList.NetAmount AS Amount
+	|INTO R6070T_OtherPeriodsExpenses
+	|FROM
+	|	ItemListLandedCost AS ItemList
+	|WHERE
+	|	ItemList.IsAdditionalItemCost";
+EndFunction
+
+Function T6010S_BatchesInfo()
+	Return 
+	"SELECT
+	|	*
+	|INTO T6010S_BatchesInfo
+	|FROM
+	|	BatchesInfo
+	|WHERE
+	|	TRUE";
+EndFunction
+
+Function T6020S_BatchKeysInfo()
+	Return
+	"SELECT
+	|	*
+	|INTO T6020S_BatchKeysInfo
+	|FROM
+	|	BatchKeysInfo
+	|WHERE
+	|	TRUE";
 EndFunction
 
 #EndRegion

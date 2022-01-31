@@ -15,7 +15,6 @@ EndProcedure
 
 &AtClient
 Procedure OnOpen(Cancel, AddInfo = Undefined) Export
-	ConnectBarcodeScanners();
 	NewTransaction();
 	SetShowItems();
 EndProcedure
@@ -46,6 +45,7 @@ Procedure ItemListOnChange(Item, AddInfo = Undefined) Export
 	DocRetailSalesReceiptClient.ItemListOnChange(Object, ThisObject, Item);
 	EnabledPaymentButton();
 	ItemListOnActivateRow(Item);
+	FillSalesPersonInItemList();
 EndProcedure
 
 &AtClient
@@ -346,28 +346,6 @@ EndProcedure
 
 #Region Private
 
-#Region Hardware
-
-&AtClient
-Procedure ConnectBarcodeScanners()
-	HardwareParameters = New Structure();
-	HardwareParameters.Insert("Workstation", Workstation);
-	HardwareParameters.Insert("EquipmentType", PredefinedValue("Enum.EquipmentTypes.BarcodeScanner"));
-	HardwareParameters.Insert("ConnectionNotify", New NotifyDescription("ConnectHardware_End", ThisObject));
-	HardwareClient.BeginConnectEquipment(HardwareParameters);
-EndProcedure
-
-&AtClient
-Procedure ConnectHardware_End(Result, Param) Export
-	If Result.Result Then
-		Status(R().Eq_004);
-	Else
-		Status(R().Eq_005);
-	EndIf;
-EndProcedure
-
-#EndRegion
-
 #Region PictureViewer
 
 &AtClient
@@ -405,6 +383,76 @@ EndFunction
 
 #EndRegion
 
+#Region SalesPerson
+
+&AtClient
+Procedure SetSalesPerson(Command)
+	SetDefaultSalesPerson();
+EndProcedure
+
+&AtClient
+Async Procedure SetDefaultSalesPerson()
+	SalesPersons = GetSalesPersonsAtServer();
+	If SalesPersons.Count() = 1 Then
+		SalesPersonByDefault = SalesPersons[0];
+	ElsIf SalesPersons.Count() > 1 Then
+		SelectDefPerson = New ValueList();
+		SelectDefPerson.LoadValues(SalesPersons);
+		SelectDefPersonValue = Await SelectDefPerson.ChooseItemAsync(R().POS_s5);
+		If Not SelectDefPersonValue = Undefined Then
+			SalesPersonByDefault = SelectDefPersonValue.Value;
+		EndIf;
+	Else
+		SalesPersonByDefault = Undefined;
+	EndIf;
+	
+	If Not SalesPersonByDefault.IsEmpty() Then
+		FillSalesPersonInItemList();
+		For Each Row In Items.ItemList.SelectedRows Do
+			ObjRow = Object.ItemList.FindByID(Row);
+			ObjRow.SalesPerson = SalesPersonByDefault;
+		EndDo;
+	EndIf;
+ 
+EndProcedure
+
+&AtClient
+Async Procedure FillSalesPersonInItemList()
+	If SalesPersonByDefault.IsEmpty() Then
+		SetDefaultSalesPerson();
+	EndIf;
+	
+	For Each Row In Object.ItemList Do
+		If Row.SalesPerson.IsEmpty() Then
+			Row.SalesPerson = SalesPersonByDefault;
+		EndIf;
+	EndDo;
+EndProcedure
+
+
+&AtServer
+Function GetSalesPersonsAtServer()
+	Query = New Query;
+	Query.Text =
+		"SELECT ALLOWED
+		|	RetailWorkers.Worker
+		|FROM
+		|	InformationRegister.RetailWorkers AS RetailWorkers
+		|WHERE
+		|	RetailWorkers.Store = &Store
+		|GROUP BY
+		|	RetailWorkers.Worker
+		|AUTOORDER";
+	
+	Query.SetParameter("Store", Store);
+	
+	QueryResult = Query.Execute().Unload().UnloadColumn("Worker");
+	
+	Return QueryResult;
+EndFunction
+
+#EndRegion
+
 #Region RegionArea
 
 &AtClient
@@ -437,6 +485,7 @@ Procedure NewTransactionAtServer()
 	ValueToFormAttribute(ObjectValue, "Object");
 	Cancel = False;
 	DocRetailSalesReceiptServer.OnCreateAtServer(Object, ThisObject, Cancel, True);
+	SalesPersonByDefault = Undefined;
 EndProcedure
 
 &AtServer

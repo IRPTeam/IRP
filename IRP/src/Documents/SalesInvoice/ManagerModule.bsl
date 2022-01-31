@@ -18,6 +18,15 @@ Function PostingGetDocumentDataTables(Ref, Cancel, PostingMode, Parameters, AddI
 	Tables.Insert("CustomersTransactions", PostingServer.GetQueryTableByName("CustomersTransactions", Parameters));
 #EndRegion
 
+	BatchKeysInfoMetadata = Parameters.Object.RegisterRecords.T6020S_BatchKeysInfo.Metadata();
+	If Parameters.Property("MultiCurrencyExcludePostingDataTables") Then
+		Parameters.MultiCurrencyExcludePostingDataTables.Add(BatchKeysInfoMetadata);
+	Else
+		ArrayOfMultiCurrencyExcludePostingDataTables = New Array();
+		ArrayOfMultiCurrencyExcludePostingDataTables.Add(BatchKeysInfoMetadata);
+		Parameters.Insert("MultiCurrencyExcludePostingDataTables", ArrayOfMultiCurrencyExcludePostingDataTables);
+	EndIf;
+
 	Return Tables;
 EndFunction
 
@@ -84,7 +93,7 @@ Procedure CheckAfterWrite(Ref, Cancel, Parameters, AddInfo = Undefined)
 	LineNumberAndItemKeyFromItemList = PostingServer.GetLineNumberAndItemKeyFromItemList(Ref, "Document.SalesInvoice.ItemList");
 	
 	If Not Unposting And Ref.Agreement.UseCreditLimit Then
-		OffsetOfPartnersServer.CheckCreditLimit(Ref, Cancel);
+		CreditLimitsServer.CheckCreditLimit(Ref, Cancel);
 	EndIf;
 
 	If Cancel Then
@@ -132,6 +141,7 @@ EndFunction
 Function GetQueryTextsSecondaryTables()
 	QueryArray = New Array();
 	QueryArray.Add(ItemList());
+	QueryArray.Add(ItemListLandedCost());
 	QueryArray.Add(OffersInfo());
 	QueryArray.Add(Taxes());
 	QueryArray.Add(SerialLotNumbers());
@@ -161,10 +171,12 @@ Function GetQueryTextsMasterTables()
 	QueryArray.Add(R2020B_AdvancesFromCustomers());
 	QueryArray.Add(R5011B_CustomersAging());
 	QueryArray.Add(R5010B_ReconciliationStatement());
-	QueryArray.Add(T2011S_PartnerTransactions());
 	QueryArray.Add(R2022B_CustomersPaymentPlanning());
 	QueryArray.Add(R5021T_Revenues());
 	QueryArray.Add(T3010S_RowIDInfo());
+	QueryArray.Add(T2015S_TransactionsInfo());
+	QueryArray.Add(T6020S_BatchKeysInfo());
+	QueryArray.Add(R6080T_OtherPeriodsRevenues());
 	Return QueryArray;
 EndFunction
 
@@ -232,7 +244,6 @@ Function ItemList()
 	|	SalesInvoiceItemList.NetAmount AS NetAmount,
 	|	SalesInvoiceItemList.OffersAmount AS OffersAmount,
 	|	SalesInvoiceItemList.UseShipmentConfirmation AS UseShipmentConfirmation,
-	|	SalesInvoiceItemList.Ref.IgnoreAdvances AS IgnoreAdvances,
 	|	SalesInvoiceItemList.Key,
 	|	SalesInvoiceItemList.Ref.Branch AS Branch,
 	|	SalesInvoiceItemList.Ref.LegalNameContract AS LegalNameContract,
@@ -258,6 +269,31 @@ Function ItemList()
 	|	Document.SalesInvoice.ShipmentConfirmations AS SalesInvoiceShipmentConfirmations
 	|WHERE
 	|	SalesInvoiceShipmentConfirmations.Ref = &Ref";
+EndFunction
+
+Function ItemListLandedCost()
+	Return
+	"SELECT
+	|	ItemList.Ref.Date AS Period,
+	|	ItemList.Ref AS Basis,
+	|	ItemList.Ref.Company AS Company,
+	|	ItemList.Ref.Branch AS Branch,
+	|	ItemList.Ref.Currency AS Currency,
+	|	ItemList.ProfitLossCenter,
+	|	ItemList.RevenueType,
+	|	ItemList.ItemKey,
+	|	ItemList.AdditionalAnalytic,
+	|	ItemList.NetAmount,
+	|	ItemList.IsAdditionalItemRevenue,
+	|	ItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Service) AS IsService,
+	|	TableRowIDInfo.RowID AS RowID
+	|INTO ItemListLandedCost
+	|FROM
+	|	Document.SalesInvoice.ItemList AS ItemList
+	|		LEFT JOIN TableRowIDInfo AS TableRowIDInfo
+	|		ON ItemList.Key = TableRowIDInfo.Key
+	|WHERE
+	|	ItemList.Ref = &Ref";
 EndFunction
 
 Function OffersInfo()
@@ -666,8 +702,8 @@ EndFunction
 Function R2020B_AdvancesFromCustomers()
 	Return "SELECT
 		   |	VALUE(AccumulationRecordType.Expense) AS RecordType,
-		   |	OffsetOfAdvances.AdvancesDocument AS Basis,
 		   |	OffsetOfAdvances.Recorder AS CustomersAdvancesClosing,
+		   |	OffsetOfAdvances.AdvancesOrder AS Order,
 		   |	*
 		   |INTO R2020B_AdvancesFromCustomers
 		   |FROM
@@ -687,6 +723,7 @@ Function R2021B_CustomersTransactions()
 		   |	ItemList.Partner,
 		   |	ItemList.Agreement,
 		   |	ItemList.Basis,
+		   |	ItemList.SalesOrder AS Order,
 		   |	SUM(ItemList.Amount) AS Amount,
 		   |	UNDEFINED AS CustomersAdvancesClosing
 		   |INTO R2021B_CustomersTransactions
@@ -695,6 +732,7 @@ Function R2021B_CustomersTransactions()
 		   |GROUP BY
 		   |	ItemList.Agreement,
 		   |	ItemList.Basis,
+		   |	ItemList.SalesOrder,
 		   |	ItemList.Company,
 		   |	ItemList.Branch,
 		   |	ItemList.Currency,
@@ -715,42 +753,13 @@ Function R2021B_CustomersTransactions()
 		   |	OffsetOfAdvances.Partner,
 		   |	OffsetOfAdvances.Agreement,
 		   |	OffsetOfAdvances.TransactionDocument,
+		   |	OffsetOfAdvances.TransactionOrder,
 		   |	OffsetOfAdvances.Amount,
 		   |	OffsetOfAdvances.Recorder
 		   |FROM
 		   |	InformationRegister.T2010S_OffsetOfAdvances AS OffsetOfAdvances
 		   |WHERE
 		   |	OffsetOfAdvances.Document = &Ref";
-EndFunction
-
-Function T2011S_PartnerTransactions()
-	Return "SELECT
-		   |	ItemList.Period,
-		   |	ItemList.Company,
-		   |	ItemList.Branch,
-		   |	ItemList.Currency,
-		   |	ItemList.LegalName,
-		   |	ItemList.Partner,
-		   |	ItemList.Agreement,
-		   |	ItemList.Basis AS TransactionDocument,
-		   |	TRUE AS IsCustomerTransaction,
-		   |	SUM(ItemList.Amount) AS Amount,
-		   |	ItemList.Key
-		   |INTO T2011S_PartnerTransactions
-		   |FROM
-		   |	ItemList AS ItemList
-		   |WHERE
-		   |	NOT ItemList.IgnoreAdvances
-		   |GROUP BY
-		   |	ItemList.Agreement,
-		   |	ItemList.Basis,
-		   |	ItemList.Company,
-		   |	ItemList.Branch,
-		   |	ItemList.Currency,
-		   |	ItemList.Key,
-		   |	ItemList.LegalName,
-		   |	ItemList.Partner,
-		   |	ItemList.Period";
 EndFunction
 
 Function R5011B_CustomersAging()
@@ -883,6 +892,71 @@ Function T3010S_RowIDInfo()
 		|		AND ItemList.Ref = &Ref
 		|		AND RowIDInfo.Key = ItemList.Key
 		|		AND RowIDInfo.Ref = ItemList.Ref";
+EndFunction
+
+Function T2015S_TransactionsInfo()
+	Return 
+	"SELECT
+	|	ItemList.Period AS Date,
+	|	ItemList.Company,
+	|	ItemList.Branch,
+	|	ItemList.Currency,
+	|	ItemList.Partner,
+	|	ItemList.LegalName,
+	|	ItemList.Agreement,
+	|	ItemList.SalesOrder AS Order,
+	|	TRUE AS IsCustomerTransaction,
+	|	ItemList.Basis AS TransactionBasis,
+	|	SUM(ItemList.Amount) AS Amount,
+	|	TRUE AS IsDue
+	|INTO T2015S_TransactionsInfo
+	|FROM
+	|	ItemList AS ItemList
+	|GROUP BY
+	|	ItemList.Period,
+	|	ItemList.Company,
+	|	ItemList.Branch,
+	|	ItemList.Currency,
+	|	ItemList.Partner,
+	|	ItemList.LegalName,
+	|	ItemList.Agreement,
+	|	ItemList.SalesOrder,
+	|	ItemList.Basis";
+EndFunction
+
+Function R6080T_OtherPeriodsRevenues()
+	Return
+	"SELECT
+	|	*,
+	|	VALUE(AccumulationRecordType.Receipt) AS RecordType,
+	|	ItemList.NetAmount AS Amount
+	|INTO R6080T_OtherPeriodsRevenues
+	|FROM
+	|	ItemListLandedCost AS ItemList
+	|WHERE
+	|	ItemList.IsAdditionalItemRevenue";
+EndFunction
+
+Function T6020S_BatchKeysInfo()
+	Return
+	"SELECT
+	|	ItemList.ItemKey,
+	|	ItemList.Store,
+	|	ItemList.Company,
+	|	SUM(ItemList.Quantity) AS Quantity,
+	|	ItemList.Period,
+	|	VALUE(Enum.BatchDirection.Expense) AS Direction
+	|INTO T6020S_BatchKeysInfo
+	|FROM
+	|	ItemList AS ItemList
+	|WHERE
+	|	ItemList.ItemKey.Item.ItemType.Type = VALUE(Enum.ItemTypes.Product)
+	|GROUP BY
+	|	ItemList.ItemKey,
+	|	ItemList.Store,
+	|	ItemList.Company,
+	|	ItemList.Period,
+	|	VALUE(Enum.BatchDirection.Expense)";
 EndFunction
 
 #EndRegion

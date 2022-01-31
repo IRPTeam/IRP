@@ -515,11 +515,7 @@ Scenario: _028062 check Description in the document Inventory transfer
 	When check Description
 	And I close all client application windows
 
-Scenario: _028063 check Description in the document Invoice match
-	And I close all client application windows
-	Given I open hyperlink "e1cib/list/Document.InvoiceMatch"
-	When check Description
-	And I close all client application windows
+
 
 
 Scenario: _028064 check Description in the document ItemStockAdjustment

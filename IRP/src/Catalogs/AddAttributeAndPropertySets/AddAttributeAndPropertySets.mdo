@@ -287,13 +287,6 @@
         <value>54</value>
       </code>
     </items>
-    <items id="c092fb1e-3000-41ed-babb-7a9dff84d16c">
-      <name>Document_InvoiceMatch</name>
-      <description>Document Invoice match</description>
-      <code xsi:type="core:NumberValue">
-        <value>55</value>
-      </code>
-    </items>
     <items id="027d2fc5-5f0b-4955-9d72-599fca2c241d">
       <name>Document_Labeling</name>
       <description>Document Labeling</description>

@@ -126,10 +126,6 @@
     <use>Use</use>
   </content>
   <content>
-    <metadata>Document.InvoiceMatch</metadata>
-    <use>Use</use>
-  </content>
-  <content>
     <metadata>Document.PriceList</metadata>
     <use>Use</use>
   </content>
@@ -195,6 +191,14 @@
   </content>
   <content>
     <metadata>Document.CashStatement</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Document.AdditionalCostAllocation</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Document.AdditionalRevenueAllocation</metadata>
     <use>Use</use>
   </content>
   <autoUse>DontUse</autoUse>

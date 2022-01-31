@@ -1451,19 +1451,24 @@ Scenario: _012025 check box Show item in item key it the Registrations report
 	And I close all client application windows
 	
 		
+Scenario: _012026 check Partners selection form (SO)
+	* Open SO
+		Given I open hyperlink "e1cib/list/Document.SalesOrder"
+		And I click "Create" button		
+	* Open Partner selection form
+		And I click Choice button of the field named "Partner"			
+	* Create partner
+		And I click the button named "FormCreate"
+		And I input "Test Partner" text in "ENG" field
+		And I click "Save and close" button
+		And I wait "Partner (create) *" window closing in 20 seconds
+	* Check current position in list
+		And the current line of "List" table is equal to
+			| 'Description'  |
+			| 'Test Partner' |
+		And I close all client application windows
 		
 		
-				
-		
-					
-							
-		
-		
-
 	
-		
-
-
-
 Scenario: _999999 close TestClient session
 	And I close TestClient session

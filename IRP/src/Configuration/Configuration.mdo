@@ -18,7 +18,7 @@
   <usePurposes>PersonalComputer</usePurposes>
   <defaultRoles>Role.FullAccess</defaultRoles>
   <vendor>IRP Team</vendor>
-  <version>2021.#weekNumber#.#BuildNumber#</version>
+  <version>#yearNumber#.#weekNumber#.#BuildNumber#</version>
   <updateCatalogAddress>https://github.com/IRPTeam/IRP</updateCatalogAddress>
   <useManagedFormInOrdinaryApplication>true</useManagedFormInOrdinaryApplication>
   <useOrdinaryFormInManagedApplication>true</useOrdinaryFormInManagedApplication>
@@ -170,6 +170,7 @@
   <commonPictures>CommonPicture.Total</commonPictures>
   <commonPictures>CommonPicture.Unlock</commonPictures>
   <commonPictures>CommonPicture.EditCurrencies</commonPictures>
+  <commonPictures>CommonPicture.PersonCard</commonPictures>
   <sessionParameters>SessionParameter.ClientType</sessionParameters>
   <sessionParameters>SessionParameter.ConnectedAddDataProc</sessionParameters>
   <sessionParameters>SessionParameter.ConnectionSettings</sessionParameters>
@@ -267,8 +268,6 @@
   <commonModules>CommonModule.DocInventoryTransferOrderClient</commonModules>
   <commonModules>CommonModule.DocInventoryTransferOrderServer</commonModules>
   <commonModules>CommonModule.DocInventoryTransferServer</commonModules>
-  <commonModules>CommonModule.DocInvoiceMatchClient</commonModules>
-  <commonModules>CommonModule.DocInvoiceMatchServer</commonModules>
   <commonModules>CommonModule.DocItemStockAdjustmentClient</commonModules>
   <commonModules>CommonModule.DocItemStockAdjustmentServer</commonModules>
   <commonModules>CommonModule.DocLabelingClient</commonModules>
@@ -361,7 +360,7 @@
   <commonModules>CommonModule.ObjectStatusesServer</commonModules>
   <commonModules>CommonModule.OffersClient</commonModules>
   <commonModules>CommonModule.OffersServer</commonModules>
-  <commonModules>CommonModule.OffsetOfPartnersServer</commonModules>
+  <commonModules>CommonModule.CreditLimitsServer</commonModules>
   <commonModules>CommonModule.PickupItemsClient</commonModules>
   <commonModules>CommonModule.PictureViewerClient</commonModules>
   <commonModules>CommonModule.PictureViewerClientServer</commonModules>
@@ -397,6 +396,12 @@
   <commonModules>CommonModule.ModelServer_V2</commonModules>
   <commonModules>CommonModule.ViewServer_V2</commonModules>
   <commonModules>CommonModule.UserSettingsClientServer</commonModules>
+  <commonModules>CommonModule.AdvancesRelevanceServer</commonModules>
+  <commonModules>CommonModule.LandedCostServer</commonModules>
+  <commonModules>CommonModule.DocAdditionalCostAllocationClient</commonModules>
+  <commonModules>CommonModule.DocAdditionalCostAllocationServer</commonModules>
+  <commonModules>CommonModule.DocAdditionalRevenueAllocationClient</commonModules>
+  <commonModules>CommonModule.DocAdditionalRevenueAllocationServer</commonModules>
   <commonAttributes>CommonAttribute.Author</commonAttributes>
   <commonAttributes>CommonAttribute.Branch</commonAttributes>
   <commonAttributes>CommonAttribute.Description</commonAttributes>
@@ -477,6 +482,7 @@
   <definedTypes>DefinedType.typeStockAdjustmentAsSurplusBasises</definedTypes>
   <definedTypes>DefinedType.typeStockAdjustmentAsWriteOffBasises</definedTypes>
   <definedTypes>DefinedType.UseUniqueID</definedTypes>
+  <definedTypes>DefinedType.typeBatchDocuments</definedTypes>
   <commonCommands>CommonCommand.AddProperties</commonCommands>
   <commonCommands>CommonCommand.IDInfo</commonCommands>
   <commonCommands>CommonCommand.OpenCompanies</commonCommands>
@@ -587,6 +593,10 @@
   <catalogs>Catalog.UserGroups</catalogs>
   <catalogs>Catalog.Users</catalogs>
   <catalogs>Catalog.Workstations</catalogs>
+  <catalogs>Catalog.AdvancesKeys</catalogs>
+  <catalogs>Catalog.TransactionsKeys</catalogs>
+  <catalogs>Catalog.Batches</catalogs>
+  <catalogs>Catalog.BatchKeys</catalogs>
   <documents>Document.BankPayment</documents>
   <documents>Document.BankReceipt</documents>
   <documents>Document.Bundling</documents>
@@ -604,7 +614,6 @@
   <documents>Document.InternalSupplyRequest</documents>
   <documents>Document.InventoryTransfer</documents>
   <documents>Document.InventoryTransferOrder</documents>
-  <documents>Document.InvoiceMatch</documents>
   <documents>Document.ItemStockAdjustment</documents>
   <documents>Document.Labeling</documents>
   <documents>Document.ManualRegisterEntry</documents>
@@ -632,6 +641,9 @@
   <documents>Document.StockAdjustmentAsWriteOff</documents>
   <documents>Document.Unbundling</documents>
   <documents>Document.VendorsAdvancesClosing</documents>
+  <documents>Document.CalculationMovementCosts</documents>
+  <documents>Document.AdditionalCostAllocation</documents>
+  <documents>Document.AdditionalRevenueAllocation</documents>
   <documentJournals>DocumentJournal.DocumentsForIncomingPayment</documentJournals>
   <documentJournals>DocumentJournal.DocumentsForOutgoingPayment</documentJournals>
   <documentJournals>DocumentJournal.AllDocuments</documentJournals>
@@ -654,7 +666,6 @@
   <enums>Enum.IntegrationType</enums>
   <enums>Enum.InterfaceGroupBehaviors</enums>
   <enums>Enum.InterfaceGroupChildFormItemsGroups</enums>
-  <enums>Enum.InvoiceMatchOperationsTypes</enums>
   <enums>Enum.InvoicingStatuses</enums>
   <enums>Enum.ItemTypes</enums>
   <enums>Enum.KindsOfAttributes</enums>
@@ -677,6 +688,11 @@
   <enums>Enum.TaxType</enums>
   <enums>Enum.TypeEquipment</enums>
   <enums>Enum.TypeExternalObject</enums>
+  <enums>Enum.BatchDirection</enums>
+  <enums>Enum.BatchType</enums>
+  <enums>Enum.CalculationMode</enums>
+  <enums>Enum.AllocationMode</enums>
+  <enums>Enum.AllocationMethod</enums>
   <reports>Report.AllRegistersMovement</reports>
   <reports>Report.DocumentRegistrationsReport</reports>
   <reports>Report.PriceInfo</reports>
@@ -686,6 +702,9 @@
   <reports>Report.D4010_ActualStocks</reports>
   <reports>Report.D4011_FreeStocks</reports>
   <reports>Report.D4012_StockReservation</reports>
+  <reports>Report.OffsetOfAdvances</reports>
+  <reports>Report.BatchBalance</reports>
+  <reports>Report.BatchBalanceSimple</reports>
   <dataProcessors>DataProcessor.AnaliseDocumentMovements</dataProcessors>
   <dataProcessors>DataProcessor.DataHistory</dataProcessors>
   <dataProcessors>DataProcessor.MobileDesktop</dataProcessors>
@@ -720,13 +739,23 @@
   <informationRegisters>InformationRegister.SharedReportOptions</informationRegisters>
   <informationRegisters>InformationRegister.T1010S_ScannedBarcode</informationRegisters>
   <informationRegisters>InformationRegister.T2010S_OffsetOfAdvances</informationRegisters>
-  <informationRegisters>InformationRegister.T2011S_PartnerTransactions</informationRegisters>
-  <informationRegisters>InformationRegister.T2012S_PartnerAdvances</informationRegisters>
   <informationRegisters>InformationRegister.T2013S_OffsetOfAging</informationRegisters>
   <informationRegisters>InformationRegister.Taxes</informationRegisters>
   <informationRegisters>InformationRegister.TaxSettings</informationRegisters>
   <informationRegisters>InformationRegister.UserSettings</informationRegisters>
   <informationRegisters>InformationRegister.T3010S_RowIDInfo</informationRegisters>
+  <informationRegisters>InformationRegister.T2014S_AdvancesInfo</informationRegisters>
+  <informationRegisters>InformationRegister.T2015S_TransactionsInfo</informationRegisters>
+  <informationRegisters>InformationRegister.T2016S_VendorsAdvancesRelevance</informationRegisters>
+  <informationRegisters>InformationRegister.T2017S_CustomersAdvancesRelevance</informationRegisters>
+  <informationRegisters>InformationRegister.RetailWorkers</informationRegisters>
+  <informationRegisters>InformationRegister.T6010S_BatchesInfo</informationRegisters>
+  <informationRegisters>InformationRegister.T6020S_BatchKeysInfo</informationRegisters>
+  <informationRegisters>InformationRegister.T6030S_BatchRelevance</informationRegisters>
+  <informationRegisters>InformationRegister.T6040S_BundleAmountValues</informationRegisters>
+  <informationRegisters>InformationRegister.T6050S_ManualBundleAmountValues</informationRegisters>
+  <informationRegisters>InformationRegister.T6060S_BatchCostAllocationInfo</informationRegisters>
+  <informationRegisters>InformationRegister.T6070S_BatchRevenueAllocationInfo</informationRegisters>
   <accumulationRegisters>AccumulationRegister.CashInTransit</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1001T_Purchases</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R1002T_PurchaseReturns</accumulationRegisters>
@@ -790,6 +819,18 @@
   <accumulationRegisters>AccumulationRegister.TM1010B_RowIDMovements</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.TM1010T_RowIDMovements</accumulationRegisters>
   <accumulationRegisters>AccumulationRegister.R4037B_PlannedReceiptReservationRequests</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.TM1020B_AdvancesKey</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.TM1030B_TransactionsKey</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R3024B_SalesOrdersToBePaid</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R3025B_PurchaseOrdersToBePaid</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R6010B_BatchWiseBalance</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R6020B_BatchBalance</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R6030T_BatchShortageOutgoing</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R6040T_BatchShortageIncoming</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R6050T_SalesBatches</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R6060T_CostOfGoodsSold</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R6070T_OtherPeriodsExpenses</accumulationRegisters>
+  <accumulationRegisters>AccumulationRegister.R6080T_OtherPeriodsRevenues</accumulationRegisters>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.AddAttributeAndProperty</chartsOfCharacteristicTypes>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.CustomUserSettings</chartsOfCharacteristicTypes>
   <chartsOfCharacteristicTypes>ChartOfCharacteristicTypes.IDInfoTypes</chartsOfCharacteristicTypes>

@@ -216,6 +216,22 @@
     <metadata>ChartOfCharacteristicTypes.IDInfoTypes</metadata>
     <use>Use</use>
   </content>
+  <content>
+    <metadata>Catalog.LadgerTypes</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>ChartOfCharacteristicTypes.R6010D_MasterExtraDimensionTypes</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>ChartOfAccounts.R6010C_Master</metadata>
+    <use>Use</use>
+  </content>
+  <content>
+    <metadata>Catalog.AccountingOperations</metadata>
+    <use>Use</use>
+  </content>
   <autoUse>DontUse</autoUse>
   <dataSeparation>DontUse</dataSeparation>
   <usersSeparation>DontUse</usersSeparation>

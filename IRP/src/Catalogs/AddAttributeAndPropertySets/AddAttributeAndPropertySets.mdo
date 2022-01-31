@@ -594,6 +594,20 @@
         <value>83</value>
       </code>
     </items>
+    <items id="48f4affc-67fd-4cdc-90a4-9540ef4cf989">
+      <name>Document_JournalEntry</name>
+      <description>Document journal entry</description>
+      <code xsi:type="core:NumberValue">
+        <value>84</value>
+      </code>
+    </items>
+    <items id="d5c6b9c5-5c08-4b68-938c-e177ac303e2d">
+      <name>Catalog_LadgerTypes</name>
+      <description>Catalog ladger types</description>
+      <code xsi:type="core:NumberValue">
+        <value>85</value>
+      </code>
+    </items>
   </predefined>
   <editType>InDialog</editType>
   <choiceMode>BothWays</choiceMode>

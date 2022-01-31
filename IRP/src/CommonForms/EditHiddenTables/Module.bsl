@@ -93,14 +93,16 @@ EndProcedure
 
 DocumentTables = New Structure();
 
-DocumentTables.Insert("RowIDInfo"             , False);
-DocumentTables.Insert("Currencies"            , False);
-DocumentTables.Insert("TaxList"               , False);
-DocumentTables.Insert("SpecialOffers"         , False);
-DocumentTables.Insert("SerialLotNumbers"      , False);
-DocumentTables.Insert("ShipmentConfirmations" , False);
-DocumentTables.Insert("GoodsReceipts"         , False);
-DocumentTables.Insert("PaymentTerms"          , False);
-DocumentTables.Insert("AddAttributes"         , False);
-DocumentTables.Insert("DataSet"               , False);
-DocumentTables.Insert("DataPrice"             , False);
+DocumentTables.Insert("RowIDInfo"               , False);
+DocumentTables.Insert("Currencies"              , False);
+DocumentTables.Insert("TaxList"                 , False);
+DocumentTables.Insert("SpecialOffers"           , False);
+DocumentTables.Insert("SerialLotNumbers"        , False);
+DocumentTables.Insert("ShipmentConfirmations"   , False);
+DocumentTables.Insert("GoodsReceipts"           , False);
+DocumentTables.Insert("PaymentTerms"            , False);
+DocumentTables.Insert("AddAttributes"           , False);
+DocumentTables.Insert("DataSet"                 , False);
+DocumentTables.Insert("DataPrice"               , False);
+DocumentTables.Insert("AccountingRowAnalytics"  , False);
+DocumentTables.Insert("AccountingExtDimensions" , False);

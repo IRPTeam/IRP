@@ -1,4 +1,5 @@
 #Region FormEventHandlers
+
 &AtServer
 Procedure OnCreateAtServer(Cancel, StandardProcessing)
 	DocItemStockAdjustmentServer.OnCreateAtServer(Object, ThisObject, Cancel, StandardProcessing);

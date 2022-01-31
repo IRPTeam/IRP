@@ -92,6 +92,8 @@
   <registerRecords>AccumulationRegister.R1011B_PurchaseOrdersReceipt</registerRecords>
   <registerRecords>InformationRegister.T3010S_RowIDInfo</registerRecords>
   <registerRecords>InformationRegister.T2015S_TransactionsInfo</registerRecords>
+  <registerRecords>AccumulationRegister.T1050T_AccountingQuantities</registerRecords>
+  <registerRecords>AccumulationRegister.T1040T_AccountingAmounts</registerRecords>
   <registerRecords>InformationRegister.T6010S_BatchesInfo</registerRecords>
   <registerRecords>InformationRegister.T6020S_BatchKeysInfo</registerRecords>
   <registerRecords>AccumulationRegister.R6020B_BatchBalance</registerRecords>
@@ -1316,6 +1318,200 @@
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
+    </attributes>
+  </tabularSections>
+  <tabularSections uuid="9e32a0b1-3711-480f-8d77-6cbe0167b3ff">
+    <producedTypes>
+      <objectType typeId="c96b2c66-4252-43bb-9260-5641c34e0c17" valueTypeId="7db8c0c1-442a-4b4c-a621-647e8199dfad"/>
+      <rowType typeId="f848bea0-6fbb-4ec2-baf2-71cc24ad8fc7" valueTypeId="7333ba04-6ae7-4a5b-b839-19886b0c1a8d"/>
+    </producedTypes>
+    <name>AccountingRowAnalytics</name>
+    <synonym>
+      <key>en</key>
+      <value>Accounting row analytics</value>
+    </synonym>
+    <attributes uuid="6c09e4ff-190b-4599-8e09-f8fa32dec18b">
+      <name>Key</name>
+      <synonym>
+        <key>en</key>
+        <value>Key</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeRowID</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="80cf4e0c-53d0-4e57-9e69-e4e6c707720e">
+      <name>Identifier</name>
+      <synonym>
+        <key>en</key>
+        <value>Identifier</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.AccountingOperations</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="88a4c1ba-29f6-4db1-bb3d-6a022134bb45">
+      <name>LadgerType</name>
+      <synonym>
+        <key>en</key>
+        <value>Ladger type</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.LadgerTypes</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="43532354-9e4e-4c2e-8cf6-412d6fea22cd">
+      <name>AccountDebit</name>
+      <synonym>
+        <key>en</key>
+        <value>Debit</value>
+      </synonym>
+      <type>
+        <types>ChartOfAccountsRef.R6010C_Master</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <indexing>Index</indexing>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="843791af-79f8-4883-a022-68d99dfe4d8f">
+      <name>AccountCredit</name>
+      <synonym>
+        <key>en</key>
+        <value>Account credit</value>
+      </synonym>
+      <type>
+        <types>ChartOfAccountsRef.R6010C_Master</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <indexing>Index</indexing>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="1dc2605a-f0f8-4941-aec0-cba07461f98d">
+      <name>IsFixed</name>
+      <synonym>
+        <key>en</key>
+        <value>Is fixed</value>
+      </synonym>
+      <type>
+        <types>Boolean</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+  </tabularSections>
+  <tabularSections uuid="eff3ad5c-4da0-4e80-ac7b-25af7437cf1a">
+    <producedTypes>
+      <objectType typeId="9105fb3e-24a5-4e3f-8335-f8f544e1d390" valueTypeId="9de629d5-02f6-4f41-aa81-3ac670c60778"/>
+      <rowType typeId="bb6fb3d9-6127-40ad-8596-c590aad4e8da" valueTypeId="314be963-70f8-4405-832d-4e8fc5948219"/>
+    </producedTypes>
+    <name>AccountingExtDimensions</name>
+    <synonym>
+      <key>en</key>
+      <value>Accounting ext dimensions</value>
+    </synonym>
+    <attributes uuid="354f1eda-4d91-469a-aead-06fb23440c82">
+      <name>Key</name>
+      <synonym>
+        <key>en</key>
+        <value>Key</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeRowID</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="02e8bc64-0856-4607-82cd-59b6f829cf0e">
+      <name>Identifier</name>
+      <synonym>
+        <key>en</key>
+        <value>Identifier</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.AccountingOperations</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="3f24bc1d-3e9f-4aea-a877-8507997226e5">
+      <name>LadgerType</name>
+      <synonym>
+        <key>en</key>
+        <value>Ladger type</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.LadgerTypes</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="7d44ea77-c5ef-46f4-8598-ac150facdbf1">
+      <name>AnalyticType</name>
+      <synonym>
+        <key>en</key>
+        <value>Analytic type</value>
+      </synonym>
+      <type>
+        <types>EnumRef.AccountingAnalyticTypes</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="d722377c-023d-45c8-8269-05129f3a7b3c">
+      <name>ExtDimensionType</name>
+      <synonym>
+        <key>en</key>
+        <value>Ext. dim. type</value>
+      </synonym>
+      <type>
+        <types>ChartOfCharacteristicTypesRef.R6010D_MasterExtraDimensionTypes</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <indexing>Index</indexing>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="32d744df-97ad-4d95-b78a-cb53d231565e">
+      <name>ExtDimension</name>
+      <synonym>
+        <key>en</key>
+        <value>Ext dimension</value>
+      </synonym>
+      <type>
+        <types>Characteristic.R6010D_MasterExtraDimensionTypes</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <indexing>Index</indexing>
+      <fullTextSearch>Use</fullTextSearch>
     </attributes>
   </tabularSections>
   <commands uuid="3d6c750a-5c87-42b0-935c-d84c03253f22">

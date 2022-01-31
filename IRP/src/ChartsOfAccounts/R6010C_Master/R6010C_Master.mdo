@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:ChartOfAccounts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:core="http://g5.1c.ru/v8/dt/mcore" xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="e9a624f9-5715-402f-adb5-6c7dc8b02dc8">
+  <producedTypes>
+    <objectType typeId="8cdd5235-52c6-445c-9562-afd2fee222c5" valueTypeId="b6d67138-6274-4ae1-a4a8-eabb73ad2ce4"/>
+    <refType typeId="ec975702-6588-4a10-96fb-bbc53d65a26c" valueTypeId="dc4dbc5f-6b37-4cbf-b425-863e54d90227"/>
+    <selectionType typeId="74be38c4-c103-4b56-9d5d-0e57e87bc8e4" valueTypeId="51d1d25d-6a5f-4982-a494-f57792cc1012"/>
+    <listType typeId="8bd525ae-1559-4983-8887-6f6ace39c7b4" valueTypeId="7f852177-ad0d-4f74-913f-033356c45f51"/>
+    <managerType typeId="9783c06d-0812-45b3-aae0-5f062ef6e5c8" valueTypeId="7bb14617-d511-4a35-921a-5c80f6c2faa1"/>
+    <extDimensionTypes typeId="a54459cf-0617-4d56-aebc-488f7d98f646" valueTypeId="c3f13ac5-f48a-4db2-a449-86ca48b30d9c"/>
+    <extDimensionTypesRow typeId="00e99816-2001-414b-8a87-71356c6a9b91" valueTypeId="78316efe-64c1-42ab-8a67-db3e0855d9e8"/>
+  </producedTypes>
+  <name>R6010C_Master</name>
+  <synonym>
+    <key>en</key>
+    <value>R6010 Master (account charts)</value>
+  </synonym>
+  <useStandardCommands>true</useStandardCommands>
+  <inputByString>ChartOfAccounts.R6010C_Master.StandardAttribute.Code</inputByString>
+  <fullTextSearchOnInputByString>DontUse</fullTextSearchOnInputByString>
+  <createOnInput>DontUse</createOnInput>
+  <fullTextSearch>Use</fullTextSearch>
+  <extDimensionTypes>ChartOfCharacteristicTypes.R6010D_MasterExtraDimensionTypes</extDimensionTypes>
+  <maxExtDimensionCount>3</maxExtDimensionCount>
+  <codeMask>@@.@@</codeMask>
+  <codeLength>9</codeLength>
+  <checkUnique>true</checkUnique>
+  <editType>InDialog</editType>
+  <choiceMode>BothWays</choiceMode>
+  <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
+  <defaultObjectForm>ChartOfAccounts.R6010C_Master.Form.ItemForm</defaultObjectForm>
+  <defaultListForm>ChartOfAccounts.R6010C_Master.Form.ListForm</defaultListForm>
+  <defaultChoiceForm>ChartOfAccounts.R6010C_Master.Form.ChoiceForm</defaultChoiceForm>
+  <attributes uuid="b37dad27-9ea5-4c9d-8d6d-bb9d13f202d7">
+    <name>LadgerTypeVariant</name>
+    <synonym>
+      <key>en</key>
+      <value>Ladger type variant</value>
+    </synonym>
+    <type>
+      <types>EnumRef.LadgerTypeVariants</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <fillChecking>ShowError</fillChecking>
+    <fillValue xsi:type="core:UndefinedValue"/>
+    <fullTextSearch>Use</fullTextSearch>
+    <dataHistory>Use</dataHistory>
+  </attributes>
+  <accountingFlags uuid="5920e61e-e449-47c2-be3c-28c212cec148">
+    <name>Quantity</name>
+    <synonym>
+      <key>en</key>
+      <value>Quantity</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </accountingFlags>
+  <accountingFlags uuid="14c93e6d-5bd9-4d82-a64e-5bc911816e37">
+    <name>Currency</name>
+    <synonym>
+      <key>en</key>
+      <value>Currency</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </accountingFlags>
+  <extDimensionAccountingFlags uuid="40aefe23-4b20-4d5a-b3b8-1ebddaba5cd2">
+    <name>Quantity</name>
+    <synonym>
+      <key>en</key>
+      <value>Quantity</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </extDimensionAccountingFlags>
+  <extDimensionAccountingFlags uuid="d9534319-0d59-4c10-877b-222bf53d7a4f">
+    <name>Currency</name>
+    <synonym>
+      <key>en</key>
+      <value>Currency</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </extDimensionAccountingFlags>
+  <extDimensionAccountingFlags uuid="a618412c-8483-4c61-8a45-6972e784ae41">
+    <name>Amount</name>
+    <synonym>
+      <key>en</key>
+      <value>Amount</value>
+    </synonym>
+    <type>
+      <types>Boolean</types>
+    </type>
+    <minValue xsi:type="core:UndefinedValue"/>
+    <maxValue xsi:type="core:UndefinedValue"/>
+    <dataHistory>Use</dataHistory>
+    <fillValue xsi:type="core:UndefinedValue"/>
+  </extDimensionAccountingFlags>
+  <forms uuid="660e1999-76d1-42b2-9c78-4a9c131ce45a">
+    <name>ListForm</name>
+    <synonym>
+      <key>en</key>
+      <value>List form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="eca16ee5-76ad-4477-8113-51ffa224d6d3">
+    <name>ChoiceForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Choice form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+  <forms uuid="058b9e45-620b-4cd6-aab5-385ceba80b3e">
+    <name>ItemForm</name>
+    <synonym>
+      <key>en</key>
+      <value>Item form</value>
+    </synonym>
+    <usePurposes>PersonalComputer</usePurposes>
+    <usePurposes>MobileDevice</usePurposes>
+  </forms>
+</mdclass:ChartOfAccounts>

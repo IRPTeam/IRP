@@ -77,6 +77,7 @@ Procedure SetVisibilityAvailability(Object, Form)
 		Form.Items.PaymentListPlaningTransactionBasis.TypeRestriction = New TypeDescription(ArrayTypes);
 	EndIf;
 	Form.Items.EditCurrencies.Enabled = Not Form.ReadOnly;
+	Form.Items.EditTrialBallanceAccounts.Enabled = Not Form.ReadOnly;
 EndProcedure
 
 #Region ItemDate
@@ -515,4 +516,19 @@ EndProcedure
 Procedure ShowHiddenTables(Command)
 	DocumentsClient.ShowHiddenTables(Object, ThisObject);
 EndProcedure
+
+&AtClient
+Procedure EditTrialBallanceAccounts(Command)
+	CurrentData = ThisObject.Items.PaymentList.CurrentData;
+	If CurrentData = Undefined Then
+		Return;
+	EndIf;
+	FormParameters = AccountingClientServer.GetParametersEditTrialBallanceAccounts(Object, CurrentData, "PaymentList");
+	NotifyParameters = New Structure();
+	NotifyParameters.Insert("Object", Object);
+	NotifyParameters.Insert("Form"  , ThisObject);
+	Notify = New NotifyDescription("EditTrialBallanceAccounts", AccountingClient, NotifyParameters);
+	OpenForm("CommonForm.EditTrialBallanceAccounts", FormParameters, ThisObject, , , , Notify, FormWindowOpeningMode.LockOwnerWindow);
+EndProcedure
+
 

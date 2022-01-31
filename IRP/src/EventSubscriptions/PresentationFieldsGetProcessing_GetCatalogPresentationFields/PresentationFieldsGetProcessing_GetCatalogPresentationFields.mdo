@@ -8,6 +8,7 @@
   <source>
     <types>ChartOfCharacteristicTypesManager</types>
     <types>CatalogManager</types>
+    <types>ChartOfAccountsManager</types>
   </source>
   <event>PresentationFieldsGetProcessing</event>
   <handler>CommonModule.LocalizationEvents.GetCatalogPresentationFieldsPresentationFieldsGetProcessing</handler>

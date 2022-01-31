@@ -10,11 +10,11 @@ Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefin
 	If EventName = "UpdateAddAttributeAndPropertySets" Then
 		AddAttributesCreateFormControl();
 	EndIf;
-	
+
 	If EventName = "NewBarcode" And IsInputAvailable() Then
 		SearchByBarcode(Undefined, Parameter);
 	EndIf;
-	
+
 	If EventName = "LockLinkedRows" Then
 		If Source <> ThisObject Then
 			LockLinkedRows();
@@ -105,14 +105,7 @@ EndProcedure
 
 &AtClient
 Procedure ItemListItemKeyOnChange(Item)
-	CurrentRow = Items.ItemList.CurrentData;
-	If CurrentRow = Undefined Then
-		Return;
-	EndIf;
-
-	CalculationSettings = New Structure();
-	CalculationSettings.Insert("UpdateUnit");
-	CalculationStringsClientServer.CalculateItemsRow(Object, CurrentRow, CalculationSettings);
+	DocInventoryTransferClient.ItemListItemKeyOnChange(Object, ThisObject, Item);
 EndProcedure
 
 &AtClient
@@ -138,6 +131,17 @@ EndProcedure
 &AtClient
 Procedure ItemListItemEditTextChange(Item, Text, StandardProcessing)
 	DocInventoryTransferClient.ItemListItemEditTextChange(Object, ThisObject, Item, Text, StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure ItemListSerialLotNumbersPresentationStartChoice(Item, ChoiceData, StandardProcessing) Export
+	DocInventoryTransferClient.ItemListSerialLotNumbersPresentationStartChoice(Object, ThisObject, Item, ChoiceData,
+		StandardProcessing);
+EndProcedure
+
+&AtClient
+Procedure ItemListSerialLotNumbersPresentationClearing(Item, StandardProcessing)
+	DocInventoryTransferClient.ItemListSerialLotNumbersPresentationClearing(Object, ThisObject, Item, StandardProcessing);
 EndProcedure
 
 #Region ItemCompany
@@ -305,6 +309,8 @@ Procedure AddOrLinkUnlinkDocumentRowsContinue(Result, AdditionalParameters) Expo
 	EndIf;
 	ThisObject.Modified = True;
 	AddOrLinkUnlinkDocumentRowsContinueAtServer(Result);
+	SerialLotNumberClient.UpdateSerialLotNumbersPresentation(Object);
+	SerialLotNumberClient.UpdateSerialLotNumbersTree(Object, ThisObject);
 EndProcedure
 
 &AtServer

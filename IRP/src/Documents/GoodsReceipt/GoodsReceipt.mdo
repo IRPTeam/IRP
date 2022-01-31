@@ -69,6 +69,7 @@
   <registerRecords>AccumulationRegister.R2031B_ShipmentInvoicing</registerRecords>
   <registerRecords>AccumulationRegister.R1011B_PurchaseOrdersReceipt</registerRecords>
   <registerRecords>InformationRegister.T3010S_RowIDInfo</registerRecords>
+  <registerRecords>AccumulationRegister.R4014B_SerialLotNumber</registerRecords>
   <postInPrivilegedMode>true</postInPrivilegedMode>
   <unpostInPrivilegedMode>true</unpostInPrivilegedMode>
   <choiceHistoryOnInput>DontUse</choiceHistoryOnInput>
@@ -561,6 +562,59 @@
       <minValue xsi:type="core:UndefinedValue"/>
       <maxValue xsi:type="core:UndefinedValue"/>
       <dataHistory>Use</dataHistory>
+    </attributes>
+  </tabularSections>
+  <tabularSections uuid="eee3e14b-ff6a-4cba-9c13-6480150bb7db">
+    <producedTypes>
+      <objectType typeId="d6b650eb-81c3-4c38-9562-f7d23d8f39ea" valueTypeId="7ac672eb-066f-4558-9f08-c6fccc4a01ff"/>
+      <rowType typeId="abc900ff-ef45-4dd1-bb40-e41fd7b204e7" valueTypeId="dc81d3a5-5ca7-4b7c-af2b-fb83e881b980"/>
+    </producedTypes>
+    <name>SerialLotNumbers</name>
+    <synonym>
+      <key>en</key>
+      <value>Serial lot numbers</value>
+    </synonym>
+    <attributes uuid="fc8f390a-f960-40d6-9da4-bc192f9b5287">
+      <name>Key</name>
+      <synonym>
+        <key>en</key>
+        <value>Key</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeRowID</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="9ea055d3-8343-4c99-bde9-8b8e1be4fa9d">
+      <name>SerialLotNumber</name>
+      <synonym>
+        <key>en</key>
+        <value>Serial lot number</value>
+      </synonym>
+      <type>
+        <types>CatalogRef.SerialLotNumbers</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
+    </attributes>
+    <attributes uuid="01e539ed-2142-49cb-88da-a3090a81dea4">
+      <name>Quantity</name>
+      <synonym>
+        <key>en</key>
+        <value>Quantity</value>
+      </synonym>
+      <type>
+        <types>DefinedType.typeQuantity</types>
+      </type>
+      <minValue xsi:type="core:UndefinedValue"/>
+      <maxValue xsi:type="core:UndefinedValue"/>
+      <dataHistory>Use</dataHistory>
+      <fullTextSearch>Use</fullTextSearch>
     </attributes>
   </tabularSections>
   <commands uuid="1785d764-b574-4b4b-9d33-bb6b7dd137c1">

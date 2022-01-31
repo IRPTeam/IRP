@@ -45,6 +45,10 @@ Procedure FillCheckProcessing(Cancel, CheckedAttributes)
 		Cancel = True;
 	EndIf;
 
+	If Not SerialLotNumbersServer.CheckFilling(ThisObject) Then
+		Cancel = True;
+	EndIf;
+
 	Query = New Query();
 	Query.Text =
 	"SELECT

@@ -1128,7 +1128,7 @@ EndProcedure
 Function Exists_R4014B_SerialLotNumber() Export
 	Return 
 		"SELECT *
-		|	INTO R4014B_SerialLotNumber_Exists
+		|	INTO Exists_R4014B_SerialLotNumber
 		|FROM
 		|	AccumulationRegister.R4014B_SerialLotNumber AS R4014B_SerialLotNumber
 		|WHERE

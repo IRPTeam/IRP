@@ -19,13 +19,13 @@ Procedure NotificationProcessing(EventName, Parameter, Source, AddInfo = Undefin
 	If EventName = "UpdateAddAttributeAndPropertySets" Then
 		AddAttributesCreateFormControl();
 	EndIf;
-	
+
 	If EventName = "LockLinkedRows" Then
 		If Source <> ThisObject Then
 			LockLinkedRows();
 		EndIf;
 	EndIf;
-	
+
 	If EventName = "NewBarcode" And IsInputAvailable() Then
 		SearchByBarcode(Undefined, Parameter);
 	EndIf;
@@ -78,7 +78,7 @@ EndProcedure
 &AtClientAtServerNoContext
 Procedure SetVisibilityAvailability(Object, Form)
 	Form.Items.AddBasisDocuments.Enabled = Not Form.ReadOnly;
-	Form.Items.LinkUnlinkBasisDocuments.Enabled = Not Form.ReadOnly;	
+	Form.Items.LinkUnlinkBasisDocuments.Enabled = Not Form.ReadOnly;
 	Form.Items.LegalName.Enabled = ValueIsFilled(Object.Partner);
 	Form.Items.EditCurrencies.Enabled = Not Form.ReadOnly;
 EndProcedure

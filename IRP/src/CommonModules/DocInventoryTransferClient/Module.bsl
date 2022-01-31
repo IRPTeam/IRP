@@ -1,13 +1,16 @@
 Procedure OnOpen(Object, Form, Cancel, AddInfo = Undefined) Export
 	DocumentsClient.SetTextOfDescriptionAtForm(Object, Form);
+	SerialLotNumberClient.UpdateSerialLotNumbersPresentation(Object, AddInfo);
+	SerialLotNumberClient.UpdateSerialLotNumbersTree(Object, Form);
 EndProcedure
 
 Procedure AfterWriteAtClient(Object, Form, WriteParameters, AddInfo = Undefined) Export
+	SerialLotNumberClient.UpdateSerialLotNumbersPresentation(Object, AddInfo);
 	RowIDInfoClient.AfterWriteAtClient(Object, Form, WriteParameters, AddInfo);
 EndProcedure
 
 Procedure ItemListBeforeDeleteRow(Object, Form, Item, Cancel, AddInfo = Undefined) Export
-	RowIDInfoClient.ItemListBeforeDeleteRow(Object, Form, Item, Cancel, AddInfo);	
+	RowIDInfoClient.ItemListBeforeDeleteRow(Object, Form, Item, Cancel, AddInfo);
 EndProcedure
 
 #Region ItemCompany
@@ -76,7 +79,7 @@ Procedure OpenPickupItems(Object, Form, Command) Export
 EndProcedure
 
 Procedure PickupItemsEnd(Result, AdditionalParameters) Export
-	If Not ValueIsFilled(Result) Or Not AdditionalParameters.Property("Object") 
+	If Not ValueIsFilled(Result) Or Not AdditionalParameters.Property("Object")
 		Or Not AdditionalParameters.Property("Form") Then
 		Return;
 	EndIf;
@@ -101,6 +104,8 @@ EndProcedure
 
 Procedure ItemListAfterDeleteRow(Object, Form, Item) Export
 	DocumentsClient.ItemListAfterDeleteRow(Object, Form, Item);
+	SerialLotNumberClient.DeleteUnusedSerialLotNumbers(Object);
+	SerialLotNumberClient.UpdateSerialLotNumbersTree(Object, Form);
 EndProcedure
 
 Procedure ItemListOnChange(Object, Form, Item = Undefined, CurrentRowData = Undefined) Export
@@ -129,7 +134,7 @@ Procedure ItemListItemOnChange(Object, Form, Item = Undefined, CurrentRowData = 
 		Return;
 	EndIf;
 	CurrentData.ItemKey = CatItemsServer.GetItemKeyByItem(CurrentData.Item);
-	If ValueIsFilled(CurrentData.ItemKey) 
+	If ValueIsFilled(CurrentData.ItemKey)
 		And ServiceSystemServer.GetObjectAttribute(CurrentData.ItemKey, "Item") <> CurrentData.Item Then
 		CurrentData.ItemKey = Undefined;
 	EndIf;
@@ -137,6 +142,19 @@ Procedure ItemListItemOnChange(Object, Form, Item = Undefined, CurrentRowData = 
 	CalculationSettings = New Structure();
 	CalculationSettings.Insert("UpdateUnit");
 	CalculationStringsClientServer.CalculateItemsRow(Object, CurrentData, CalculationSettings);
+	SerialLotNumberClient.UpdateUseSerialLotNumber(Object, Form);
+EndProcedure
+
+Procedure ItemListItemKeyOnChange(Object, Form, Item, CurrentRowData = Undefined, AddInfo = Undefined) Export
+	CurrentRow = DocumentsClient.GetCurrentRowDataList(Form.Items.ItemList, CurrentRowData);
+	If CurrentRow = Undefined Then
+		Return;
+	EndIf;
+
+	CalculationSettings = New Structure();
+	CalculationSettings.Insert("UpdateUnit");
+	CalculationStringsClientServer.CalculateItemsRow(Object, CurrentRow, CalculationSettings);
+	SerialLotNumberClient.UpdateUseSerialLotNumber(Object, Form, AddInfo);
 EndProcedure
 
 Procedure ItemListItemStartChoice(Object, Form, Item, ChoiceData, StandardProcessing) Export
@@ -156,6 +174,7 @@ Procedure ItemListQuantityOnChange(Object, Form, Item = Undefined, CurrentRowDat
 	EndIf;
 	Actions = New Structure("CalculateQuantityInBaseUnit");
 	CalculationStringsClientServer.CalculateItemsRow(Object, CurrentData, Actions);
+	SerialLotNumberClient.UpdateSerialLotNumbersTree(Object, Form);
 EndProcedure
 
 Procedure ItemListUnitOnChange(Object, Form, Item, CurrentRowData = Undefined) Export
@@ -206,3 +225,17 @@ EndProcedure
 Procedure SearchByBarcode(Barcode, Object, Form, DocumentClientModule = Undefined, PriceType = Undefined, AddInfo = Undefined) Export
 	DocumentsClient.SearchByBarcode(Barcode, Object, Form, DocumentClientModule, PriceType, AddInfo);
 EndProcedure
+
+#Region SerialLotNumbers
+
+Procedure ItemListSerialLotNumbersPresentationStartChoice(Object, Form, Item, ChoiceData, StandardProcessing,
+	AddInfo = Undefined) Export
+	DocumentsClient.ItemListSerialLotNumbersPutServerDataToAddInfo(Object, Form, AddInfo);
+	SerialLotNumberClient.PresentationStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, AddInfo);
+EndProcedure
+
+Procedure ItemListSerialLotNumbersPresentationClearing(Object, Form, Item, StandardProcessing, AddInfo = Undefined) Export
+	SerialLotNumberClient.PresentationClearing(Object, Form, Item, AddInfo);
+EndProcedure
+
+#EndRegion

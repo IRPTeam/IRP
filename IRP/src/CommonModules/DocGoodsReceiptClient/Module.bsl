@@ -6,10 +6,12 @@ Procedure OnOpen(Object, Form, Cancel, AddInfo = Undefined) Export
 #If MobileClient Then
 	ItemListOnChange(Object, Form);
 #EndIf
-
+	SerialLotNumberClient.UpdateSerialLotNumbersPresentation(Object, AddInfo);
+	SerialLotNumberClient.UpdateSerialLotNumbersTree(Object, Form);
 EndProcedure
 
 Procedure AfterWriteAtClient(Object, Form, WriteParameters, AddInfo = Undefined) Export
+	SerialLotNumberClient.UpdateSerialLotNumbersPresentation(Object, AddInfo);
 	RowIDInfoClient.AfterWriteAtClient(Object, Form, WriteParameters, AddInfo);
 EndProcedure
 
@@ -151,6 +153,7 @@ Procedure ItemListQuantityOnChange(Object, Form, Item = Undefined, CurrentRowDat
 	EndIf;
 	Actions = New Structure("CalculateQuantityInBaseUnit");
 	CalculationStringsClientServer.CalculateItemsRow(Object, CurrentData, Actions);
+	SerialLotNumberClient.UpdateSerialLotNumbersTree(Object, Form);
 EndProcedure
 
 #EndRegion
@@ -163,7 +166,7 @@ Procedure ItemListItemOnChange(Object, Form, Item = Undefined, CurrentRowData = 
 		Return;
 	EndIf;
 	CurrentData.ItemKey = CatItemsServer.GetItemKeyByItem(CurrentData.Item);
-	If ValueIsFilled(CurrentData.ItemKey) 
+	If ValueIsFilled(CurrentData.ItemKey)
 		And ServiceSystemServer.GetObjectAttribute(CurrentData.ItemKey, "Item")	<> CurrentData.Item Then
 		CurrentData.ItemKey = Undefined;
 	EndIf;
@@ -171,12 +174,25 @@ Procedure ItemListItemOnChange(Object, Form, Item = Undefined, CurrentRowData = 
 	CalculationSettings = New Structure();
 	CalculationSettings.Insert("UpdateUnit");
 	CalculationStringsClientServer.CalculateItemsRow(Object, CurrentData, CalculationSettings);
+	SerialLotNumberClient.UpdateUseSerialLotNumber(Object, Form);
+EndProcedure
+
+Procedure ItemListItemKeyOnChange(Object, Form, Item, CurrentRowData = Undefined, AddInfo = Undefined) Export
+	CurrentRow = DocumentsClient.GetCurrentRowDataList(Form.Items.ItemList, CurrentRowData);
+	If CurrentRow = Undefined Then
+		Return;
+	EndIf;
+
+	CalculationSettings = New Structure();
+	CalculationSettings.Insert("UpdateUnit");
+	CalculationStringsClientServer.CalculateItemsRow(Object, CurrentRow, CalculationSettings);
+	SerialLotNumberClient.UpdateUseSerialLotNumber(Object, Form, AddInfo);
 EndProcedure
 
 Procedure ItemListOnChange(Object, Form, Item = Undefined, CurrentRowData = Undefined) Export
 	DocumentsClient.FillRowIDInItemList(Object);
 	CurrentData = DocumentsClient.GetCurrentRowDataList(Form.Items.ItemList, CurrentRowData);
-	
+
 	If Form.Items.ItemList.CurrentItem <> Undefined And Form.Items.ItemList.CurrentItem.Name = "ItemListStore" Then
 		DocumentsClient.SetCurrentStore(Object, Form, Form.Items.ItemList.CurrentData.Store);
 	EndIf;
@@ -208,11 +224,13 @@ EndProcedure
 
 Procedure ItemListAfterDeleteRow(Object, Form, Item) Export
 	DocumentsClient.ItemListAfterDeleteRow(Object, Form, Item);
+	SerialLotNumberClient.DeleteUnusedSerialLotNumbers(Object);
+	SerialLotNumberClient.UpdateSerialLotNumbersTree(Object, Form);
 EndProcedure
 
 Procedure ItemListOnActivateRow(Object, Form, Item, CurrentRowData = Undefined) Export
 	CurrentData = DocumentsClient.GetCurrentRowDataList(Form.Items.ItemList, CurrentRowData);
-	
+
 	If CurrentData = Undefined Then
 		Return;
 	EndIf;
@@ -327,6 +345,20 @@ EndProcedure
 
 Procedure OpenPickupItems(Object, Form, Command) Export
 	DocumentsClient.OpenPickupItems(Object, Form, Command);
+EndProcedure
+
+#EndRegion
+
+#Region SerialLotNumbers
+
+Procedure ItemListSerialLotNumbersPresentationStartChoice(Object, Form, Item, ChoiceData, StandardProcessing,
+	AddInfo = Undefined) Export
+	DocumentsClient.ItemListSerialLotNumbersPutServerDataToAddInfo(Object, Form, AddInfo);
+	SerialLotNumberClient.PresentationStartChoice(Object, Form, Item, ChoiceData, StandardProcessing, AddInfo);
+EndProcedure
+
+Procedure ItemListSerialLotNumbersPresentationClearing(Object, Form, Item, StandardProcessing, AddInfo = Undefined) Export
+	SerialLotNumberClient.PresentationClearing(Object, Form, Item, AddInfo);
 EndProcedure
 
 #EndRegion
